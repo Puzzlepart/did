@@ -30,14 +30,6 @@ router.get('/admin', isAuthenticated, (req, res) => {
   res.render('admin', { active: { admin: true }, props: JSON.stringify({ view: 'reports' }) });
 });
 
-router.get('/admin/:view', isAuthenticated, (req, res) => {
-  res.render('admin', { active: { admin: true }, props: JSON.stringify(req.params) });
-});
-
-router.get('/admin/:view/:subView', isAuthenticated, (req, res) => {
-  res.render('admin', { active: { admin: true }, props: JSON.stringify(req.params) });
-});
-
 router.get('/admin/users/:userId', isAuthenticated, (req, res) => {
   res.render('admin-user', { active: { admin: true }, props: JSON.stringify(req.params) });
 });
