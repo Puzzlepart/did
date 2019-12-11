@@ -10,20 +10,17 @@ import GET_DATA from './GET_DATA';
 import { Reports } from './Reports';
 import { USER_LIST_COLUMNS } from './USER_LIST_COLUMNS';
 import { WEEK_LIST_COLUMNS } from './WEEK_LIST_COLUMNS';
-import { IAdminViewProps } from './IAdminViewProps';
 
 /**
  * @component AdminView
  * @description
  */
-export const AdminView = ({ view, subView }: IAdminViewProps) => {
+export const AdminView = () => {
     const { data, loading } = useQuery(GET_DATA);
 
     return (
         <div>
-            <Pivot
-                styles={{ root: { display: 'flex', flexWrap: 'wrap' } }}
-                defaultSelectedKey={view}>
+            <Pivot styles={{ root: { display: 'flex', flexWrap: 'wrap' } }}>
                 <PivotItem itemKey='reports' headerText='Reports' itemIcon='ReportDocument' style={{ padding: 10 }}>
                     <Reports />
                 </PivotItem>
@@ -34,7 +31,7 @@ export const AdminView = ({ view, subView }: IAdminViewProps) => {
                     <List enableShimmer={loading} items={value(data, 'weeks', [])} columns={WEEK_LIST_COLUMNS} />
                 </PivotItem>
                 <PivotItem itemKey='customers' headerText='Customers' itemIcon='Work' style={{ padding: 10 }}>
-                    <Pivot defaultSelectedKey={subView || 'new'}>
+                    <Pivot>
                         <PivotItem itemKey='new' headerText='Create new' itemIcon='CalculatorAddition' style={{ padding: 10 }}>
                             <CreateCustomerForm />
                         </PivotItem>
@@ -42,7 +39,7 @@ export const AdminView = ({ view, subView }: IAdminViewProps) => {
                     </Pivot>
                 </PivotItem>
                 <PivotItem itemKey='projects' headerText='Projects' itemIcon='ProjectCollection' style={{ padding: 10 }}>
-                    <Pivot defaultSelectedKey={subView || 'new'}>
+                    <Pivot>
                         <PivotItem itemKey='new' headerText='Create new' itemIcon='CalculatorAddition' style={{ padding: 10 }}>
                             <CreateProjectForm />
                         </PivotItem>
