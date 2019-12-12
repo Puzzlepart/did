@@ -10,43 +10,6 @@
     }
   }
 
-  .c-eventview-weekpicker--callout {
-    .ms-DatePicker-day--today {
-      background-color: inherit !important;
-      color: inherit !important;
-      font-weight: inherit !important;
-      border: none !important;
-      outline: none !important;
-    }
-
-    .ms-DatePicker-day--highlighted {
-      background-color: inherit !important;
-      color: inherit !important;
-      font-weight: inherit !important;
-      border: none !important;
-      outline: none !important;
-
-      button {
-        background-color: inherit !important;
-        color: inherit !important;
-        font-weight: inherit !important;
-        border: none !important;
-        outline: none !important;
-      }
-    }
-
-    table tbody tr:hover {
-      td {
-        background: #f3f2f1 !important;
-        color: #201f1e !important;
-      }
-
-      * {
-        cursor: pointer !important;
-      }
-    }
-  }
-
   .ms-List-cell .ms-DetailsRow {
     min-height: 53px;
 
@@ -65,4 +28,41 @@
   width: 540px;
   min-width: 540px;
   max-width: 540px;
+}
+
+.c-eventview-weekpicker--callout {
+  .ms-DatePicker-day--today {
+    background-color: inherit !important;
+    color: inherit !important;
+    font-weight: inherit !important;
+    border: none !important;
+    outline: none !important;
+  }
+
+  .ms-DatePicker-day--highlighted {
+    background-color: inherit !important;
+    color: inherit !important;
+    font-weight: inherit !important;
+    border: none !important;
+    outline: none !important;
+
+    button {
+      background-color: inherit !important;
+      color: inherit !important;
+      font-weight: inherit !important;
+      border: none !important;
+      outline: none !important;
+    }
+  }
+
+  table tbody tr:hover {
+    td {
+      background: #f3f2f1 !important;
+      color: #201f1e !important;
+    }
+
+    * {
+      cursor: pointer !important;
+    }
+  }
 }
