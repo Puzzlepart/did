@@ -12,6 +12,7 @@ export interface IFilterItemProps {
  * @description 
  */
 export const FilterItem = ({ filter, filterUpdated }: IFilterItemProps) => {
+    let selectedKeys = filter.selected.map(f => f.key);
     return (
         <div key={filter.key} style={{ marginTop: 15 }}>
             <h4>{filter.name}</h4>
@@ -19,6 +20,7 @@ export const FilterItem = ({ filter, filterUpdated }: IFilterItemProps) => {
                 <Checkbox
                     key={item.key}
                     label={item.value}
+                    checked={selectedKeys.indexOf(item.key) !== -1}
                     onChange={(_, checked) => filterUpdated(filter, item, checked)} />
             ))}
         </div>
