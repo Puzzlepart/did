@@ -1,40 +1,67 @@
 import { useQuery } from '@apollo/react-hooks';
+import { FilterPanel } from 'components/FilterPanel';
+import { BaseFilter, IFilter, MonthFilter, ResourceFilter, YearFilter } from 'components/FilterPanel/Filters';
 import { IColumn, List } from 'components/List';
 import { UserMessage } from 'components/UserMessage';
 import { getValueTyped as value } from 'helpers';
 import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
 import * as React from 'react';
+import { useState } from 'react';
 import * as format from 'string-format';
 import { humanize } from 'underscore.string';
 import * as excelUtils from 'utils/exportExcel';
 import { generateColumn } from 'utils/generateColumn';
 import { GET_CONFIRMED_TIME_ENTRIES } from './GET_CONFIRMED_TIME_ENTRIES';
+import { IReportsProps } from './IReportsProps';
 
 /**
  * @component Reports
  * @description Consists of a DetailsList with all confirmed time entries and an export to excel button
  */
-export const Reports = ({ skip = ['id', '__typename'], fileName = 'ApprovedTimeEntries-{0}.xlsx' }) => {
-    const { loading, error, data } = useQuery(GET_CONFIRMED_TIME_ENTRIES);
+export const Reports = ({ skip = ['id', '__typename'], exportFileNameTemplate = 'ApprovedTimeEntries-{0}.xlsx' }: IReportsProps) => {
+    const [filterPanelOpen, setFilterPanelOpen] = useState<boolean>(undefined);
 
-    const entries = value<any[]>(data, 'result.entries', []).map(entry => {
-        entry.customer = value(entry, 'customer.name', '');
-        return entry;
-    });
+    const { loading, error, data } = useQuery(GET_CONFIRMED_TIME_ENTRIES, { fetchPolicy: 'cache-first' });
+
+    let entries = value<any[]>(data, 'result.entries', []).map(entry => ({ ...entry, customer: value(entry, 'customer.name', '') }));
+
+
+    const [filteredEntries, setFilteredEntries] = useState<any[]>(undefined);
 
     const columns: IColumn[] = Object.keys(entries[0] || {})
         .filter(f => skip.indexOf(f) === -1)
         .map(fieldName => generateColumn(fieldName, humanize(fieldName), { minWidth: 60, maxWidth: 100 }));
+
+    const filters: BaseFilter[] = [
+        new MonthFilter('monthNumber', 'Month'),
+        new YearFilter('yearNumber', 'Year'),
+        new ResourceFilter('resourceName', 'Employee'),
+    ]
 
     const onExport = () => {
         excelUtils.exportExcel(
             entries,
             {
                 skip,
-                fileName: format(fileName, new Date().getTime()),
+                fileName: format(exportFileNameTemplate, new Date().getTime()),
                 capitalize: true,
             },
         );
+    }
+
+    /**
+     * On filterr updated in FilterPanel
+     * 
+     * @param {IFilter[]} filters 
+     */
+    const onFilterUpdated = (filters: IFilter[]) => {
+        let _entries = entries.filter(entry => {
+            return filters.filter(f => {
+                let selectedKeys = f.selected.map(s => s.key);
+                return selectedKeys.indexOf(value(entry, f.key, '')) !== -1;
+            }).length === filters.length;
+        });
+        setFilteredEntries(_entries);
     }
 
     return (
@@ -48,13 +75,27 @@ export const Reports = ({ skip = ['id', '__typename'], fileName = 'ApprovedTimeE
                     onClick: onExport,
                     iconProps: { iconName: 'ExcelDocument' },
                     disabled: loading || !!error,
+                }]}
+                farItems={[{
+                    key: 'OPEN_FILTER_PANEL',
+                    iconProps: { iconName: 'Filter' },
+                    iconOnly: true,
+                    onClick: () => setFilterPanelOpen(true),
                 }]} />
             <List
                 hidden={entries.length === 0}
-                items={entries}
+                items={filteredEntries || entries}
                 columns={columns}
                 enableShimmer={loading} />
             <UserMessage hidden={entries.length > 0 || loading} text={`There's no confirmed time entries at this time.`} />
+            {!loading && (
+                <FilterPanel
+                    isOpen={filterPanelOpen}
+                    filters={filters}
+                    entries={entries}
+                    onDismiss={() => setFilterPanelOpen(false)}
+                    onFilterUpdated={onFilterUpdated} />
+            )}
         </div>
     );
 }

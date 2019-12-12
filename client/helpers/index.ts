@@ -133,3 +133,12 @@ export function getWeek(dateIso?: string): number {
 export function getTimespanString(start: moment.Moment, end: moment.Moment, options: object = { monthFormat: 'MMMM', yearFormat: 'YYYY', hideYear: false, implicitYear: false }) {
     return start['twix'](end, { allDay: true }).format(options).toLowerCase();
 }
+
+/**
+ * Get month name
+ * 
+ * @param {number} monthNumber Month number
+ */
+export function getMonthName(monthNumber: number): string {
+    return moment().month(monthNumber).format('MMMM');
+}
