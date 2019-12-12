@@ -109,7 +109,7 @@ az webapp create --name $SITENAME --plan $PLANNAME --resource-group $RESOURCEGRO
 ### `TODO`
 
 # Branching / Deploying #
-##### NB: Ensure you're pushing an updated version of the bundle from `/client` #####
+##### NB: Ensure you're pushing an updated version of the bundle from `/client` until we have a working kudu deployment script #####
 
 To make this easier use `npm run-script git:add:all` instead of `git add --all`.
 
