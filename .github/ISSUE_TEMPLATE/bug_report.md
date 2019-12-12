@@ -1,3 +1,8 @@
+---
+name: Bug report
+about: Create a report to help us improve
+---
+
 ### Page/Component ###
 _What page/component is the bug related to?_
 
