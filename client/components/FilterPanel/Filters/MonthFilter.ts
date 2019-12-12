@@ -17,7 +17,7 @@ export class MonthFilter extends BaseFilter {
      * @param {any[]} entries Entries
      */
     public initialize(entries: any[]) {
-        const months = _.unique(entries.map(e => value(e, this.fieldName, null))).sort();
+        const months = _.unique(entries.map(e => value(e, this.fieldName, null))).sort((a, b) => a - b);
         const items = months.map(month => ({
             key: month,
             value: getMonthName(month),

@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "watch": "concurrently \"npm run watch:client:package\" \"npm run watch:server\" \"npm run watch:scss\"",
+    "git:add:all": "git add --all",
     "start": "node ./bin/www",
     "watch:server": "nodemon --ignore client --ignore public --ignore lib ./bin/www",
     "build:client": "tsc --build",
@@ -13,7 +14,6 @@
     "package:client": "npm run build:client && webpack --config webpack.config.js",
     "package:client:prod": "set NODE_ENV=production&&npm run build:client && webpack --config webpack.config.js",
     "watch:client:package": "onchange -k -i -d 750 \"./client/**/*.ts\" \"./client/**/*.tsx\" -- npm run package:client",
-    "git:add:all": "git add --all",
     "pregit:add:all": "npm run package:client:prod && npm run build:scss",
     "clean": "rimraf ./lib && rimraf ./public/js"
   },

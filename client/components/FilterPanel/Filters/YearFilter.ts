@@ -12,9 +12,9 @@ export class YearFilter extends BaseFilter {
     }
 
     /**
-     * Intialize the MonthFilter
+     * Intialize the YearFilter
      * 
-     * @param {any[]} entries YearFilter
+     * @param {any[]} entries Entries
      */
     public initialize(entries: any[]) {
         const years = _.unique(entries.map(e => value(e, this.fieldName, null))).sort();

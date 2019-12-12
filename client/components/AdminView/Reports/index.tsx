@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks';
 import { FilterPanel } from 'components/FilterPanel';
-import { BaseFilter, IFilter, MonthFilter, ResourceFilter, YearFilter } from 'components/FilterPanel/Filters';
+import { BaseFilter, IFilter, MonthFilter, ResourceFilter, YearFilter, WeekFilter } from 'components/FilterPanel/Filters';
 import { IColumn, List } from 'components/List';
 import { UserMessage } from 'components/UserMessage';
 import { getValueTyped as value } from 'helpers';
@@ -33,6 +33,7 @@ export const Reports = ({ skip = ['id', '__typename'], exportFileNameTemplate = 
         .map(fieldName => generateColumn(fieldName, humanize(fieldName), { minWidth: 60, maxWidth: 100 }));
 
     const filters: BaseFilter[] = [
+        new WeekFilter('weekNumber', 'Week'),
         new MonthFilter('monthNumber', 'Month'),
         new YearFilter('yearNumber', 'Year'),
         new ResourceFilter('resourceName', 'Employee'),
