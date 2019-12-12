@@ -86,8 +86,7 @@ goto :EOF
 :: ----------
 
 :Deployment
-echo Handling node.js deployment.
-echo Test
+echo Starting deployment
 
 :: 1. KuduSync
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
@@ -99,7 +98,8 @@ IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
 call :SelectNodeVersion
 
 :: 3. Install npm packages
-IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
+IF EXIST "%DEPLOYMENT_TARGET%\package.json" (  
+  echo Installing dependencies from package.json
   pushd "%DEPLOYMENT_TARGET%"
   call :ExecuteCmd !NPM_CMD! install --production
   IF !ERRORLEVEL! NEQ 0 goto error
