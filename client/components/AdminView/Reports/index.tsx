@@ -101,7 +101,7 @@ export const Reports = ({ skip = ['id', '__typename'], exportFileNameTemplate = 
                         text: 'Export to Excel (Filtered)',
                         onClick: onExport,
                         iconProps: { iconName: 'ExcelDocument' },
-                        disabled: loading || !!error || filteredEntries === undefined || value(filteredEntries, 'length', -1) !== value(entries, 'length', -1),
+                        disabled: loading || !!error || filteredEntries === undefined || value(filteredEntries, 'length', 0) === value(entries, 'length', 0),
                     }
                 ]}
                 farItems={[{
