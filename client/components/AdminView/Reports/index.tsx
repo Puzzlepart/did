@@ -70,13 +70,22 @@ export const Reports = ({ skip = ['id', '__typename'], exportFileNameTemplate = 
             <CommandBar
                 hidden={entries.length === 0}
                 styles={{ root: { margin: '10px 0 10px 0', padding: 0 } }}
-                items={[{
-                    key: 'EXPORT_TO_EXCEL',
-                    text: 'Export to Excel',
-                    onClick: onExport,
-                    iconProps: { iconName: 'ExcelDocument' },
-                    disabled: loading || !!error,
-                }]}
+                items={[
+                    {
+                        key: 'EXPORT_TO_EXCEL',
+                        text: 'Export to Excel',
+                        onClick: onExport,
+                        iconProps: { iconName: 'ExcelDocument' },
+                        disabled: loading || !!error,
+                    },
+                    {
+                        key: 'EXPORT_TO_EXCEL_2',
+                        text: 'Export to Excel',
+                        onClick: onExport,
+                        iconProps: { iconName: 'ExcelDocument' },
+                        disabled: loading || !!error,
+                    }
+                ]}
                 farItems={[{
                     key: 'OPEN_FILTER_PANEL',
                     iconProps: { iconName: 'Filter' },
