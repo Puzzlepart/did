@@ -1,7 +1,7 @@
-import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 import { Panel } from 'office-ui-fabric-react/lib/Panel';
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { FilterItem } from './FilterItem';
 import { IFilter, IFilterItem } from './Filters';
 import { IFilterPanelProps } from './IFilterPanelProps';
 
@@ -37,17 +37,7 @@ export const FilterPanel = (props: IFilterPanelProps) => {
             isOpen={props.isOpen}
             isLightDismiss={true}
             onDismiss={props.onDismiss}>
-            {filters.map(filter => (
-                <div key={filter.key}>
-                    <h4>{filter.name}</h4>
-                    {filter.items.map((item) => (
-                        <Checkbox
-                            key={item.key}
-                            label={item.value}
-                            onChange={(_, checked) => filterUpdated(filter, item, checked)} />
-                    ))}
-                </div>
-            ))}
+            {filters.map(filter => <FilterItem key={filter.key} filter={filter} filterUpdated={filterUpdated} />)}
         </Panel>
     );
 }
