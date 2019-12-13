@@ -39,9 +39,25 @@ export const Reports = ({ skip = ['id', '__typename'], exportFileNameTemplate = 
         new ResourceFilter('resourceName', 'Employee'),
     ]
 
-    const onExport = () => {
+    /**
+     * On export
+     * 
+     * @param {React.MouseEvent} event Event
+     */
+    const onExport = (event: React.MouseEvent<any>) => {
+        let items: any[];
+        switch (event.currentTarget.id) {
+            case 'EXPORT_TO_EXCEL_ALL': {
+                items = entries;
+            };
+                break;
+            case 'EXPORT_TO_EXCEL_FILTERED': {
+                items = filteredEntries;
+            };
+                break;
+        }
         excelUtils.exportExcel(
-            entries,
+            items,
             {
                 skip,
                 fileName: format(exportFileNameTemplate, new Date().getTime()),
@@ -70,13 +86,24 @@ export const Reports = ({ skip = ['id', '__typename'], exportFileNameTemplate = 
             <CommandBar
                 hidden={entries.length === 0}
                 styles={{ root: { margin: '10px 0 10px 0', padding: 0 } }}
-                items={[{
-                    key: 'EXPORT_TO_EXCEL',
-                    text: 'Export to Excel',
-                    onClick: onExport,
-                    iconProps: { iconName: 'ExcelDocument' },
-                    disabled: loading || !!error,
-                }]}
+                items={[
+                    {
+                        id: 'EXPORT_TO_EXCEL_ALL',
+                        key: 'EXPORT_TO_EXCEL_ALL',
+                        text: 'Export all to Excel',
+                        onClick: onExport,
+                        iconProps: { iconName: 'ExcelDocument' },
+                        disabled: loading || !!error,
+                    },
+                    {
+                        id: 'EXPORT_TO_EXCEL_FILTERED',
+                        key: 'EXPORT_TO_EXCEL_FILTERED',
+                        text: 'Export to Excel (Filtered)',
+                        onClick: onExport,
+                        iconProps: { iconName: 'ExcelDocument' },
+                        disabled: loading || !!error || filteredEntries === undefined || value(filteredEntries, 'length', 0) === value(entries, 'length', 0),
+                    }
+                ]}
                 farItems={[{
                     key: 'OPEN_FILTER_PANEL',
                     iconProps: { iconName: 'Filter' },
