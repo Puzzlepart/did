@@ -7,9 +7,9 @@ import { GROUP_BY_CUSTOMER } from './GROUP_BY_CUSTOMER';
 import { GROUP_BY_DAY } from './GROUP_BY_DAY';
 import { GROUP_BY_PROJECT } from './GROUP_BY_PROJECT';
 import { IActionBarProps } from './IActionBarProps';
-import { getWeek, endOfWeek, startOfWeek, getTimespanString } from 'helpers';
+import { getWeek, endOfWeek, startOfWeek, getTimespanString, getYear } from 'helpers';
 
-export const ActionBar = ({ onClick, disabled, weekNumber, groupBy, onChangeWeek, onGroupByChanged }: IActionBarProps) => {
+export const ActionBar = ({ onClick, disabled, period, groupBy, onChangeWeek, onGroupByChanged }: IActionBarProps) => {
     return (
         <CommandBar
             styles={{ root: { margin: '10px 0 10px 0', padding: 0 } }}
@@ -17,22 +17,22 @@ export const ActionBar = ({ onClick, disabled, weekNumber, groupBy, onChangeWeek
                 {
                     key: 'THIS_WEEK',
                     name: 'This week',
-                    onClick: () => onChangeWeek(getWeek()),
-                    disabled: weekNumber === getWeek(),
+                    onClick: () => onChangeWeek(getYear(), getWeek()),
+                    disabled: period.weekNumber === getWeek(),
                 },
                 {
                     key: 'PREV_WEEK',
                     iconOnly: true,
                     iconProps: { iconName: 'Back', ...ACTIONBAR_ICON_PROPS },
-                    onClick: () => onChangeWeek(weekNumber - 1),
+                    onClick: () => onChangeWeek(getYear(), period.weekNumber - 1),
                     title: 'Go to previous week',
                 },
                 {
                     key: 'NEXT_WEEK',
                     iconOnly: true,
                     iconProps: { iconName: 'Forward', ...ACTIONBAR_ICON_PROPS },
-                    onClick: () => onChangeWeek(weekNumber + 1),
-                    disabled: weekNumber ===getWeek(),
+                    onClick: () => onChangeWeek(getYear(), period.weekNumber + 1),
+                    disabled: period.weekNumber === getWeek(),
                     title: 'Go to next week',
                 },
                 {
@@ -50,14 +50,14 @@ export const ActionBar = ({ onClick, disabled, weekNumber, groupBy, onChangeWeek
                                 showCloseButton={true}
                                 showWeekNumbers={true}
                                 showGoToToday={false}
-                                value={startOfWeek(weekNumber).toDate()}
+                                value={startOfWeek(period.weekNumber).toDate()}
                                 maxDate={endOfWeek().toDate()}
                                 formatDate={date => {
                                     let start = startOfWeek(undefined, date.toISOString());
                                     let end = endOfWeek(undefined, date.toISOString());
                                     return getTimespanString(start, end);
                                 }}
-                                onSelectDate={date => onChangeWeek(getWeek(date.toISOString()))}
+                                onSelectDate={date => onChangeWeek(getYear(date.toISOString()), getWeek(date.toISOString()))}
                                 firstDayOfWeek={DayOfWeek.Monday} />
                         );
                     }
@@ -69,7 +69,7 @@ export const ActionBar = ({ onClick, disabled, weekNumber, groupBy, onChangeWeek
                 {
                     key: 'WEEK_NUMBER_TEXT',
                     itemType: ContextualMenuItemType.Header,
-                    name: `Week ${weekNumber}`,
+                    name: `Week ${period.weekNumber}`,
                 },
                 {
                     key: 'DIVIDER_1',

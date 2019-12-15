@@ -1,7 +1,7 @@
 
 import { PnPClientStorage, PnPClientStore, TypedHash, dateAdd } from '@pnp/common';
 import { UserAllocation } from 'components/UserAllocation';
-import { getValueTyped as value, formatDate, getWeek } from 'helpers';
+import { getValueTyped as value, formatDate, getWeek, getYear } from 'helpers';
 import { ITimeEntry, IProject } from 'models';
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
@@ -17,6 +17,7 @@ import { EventOverview } from './EventOverview';
 import GET_EVENT_DATA, { IGetEventData } from './GET_EVENT_DATA';
 import { IEventViewProps } from './IEventViewProps';
 import { IEventViewState } from './IEventViewState';
+import { IEventViewPeriod } from "./IEventViewPeriod";
 import { StatusBar } from './StatusBar';
 import UNCONFIRM_WEEK from './UNCONFIRM_WEEK';
 import * as _ from 'underscore';
@@ -27,13 +28,13 @@ import * as _ from 'underscore';
  */
 export class EventView extends React.Component<IEventViewProps, IEventViewState> {
     private _store: PnPClientStore;
-    private _resolvedKey = 'resolved_projects_{0}';
-    private _ignoredKey = 'ignored_events_{0}';
+    private _resolvedKey = 'resolved_projects_{0}_{1}';
+    private _ignoredKey = 'ignored_events_{0}_{1}';
 
     constructor(props: IEventViewProps) {
         super(props);
         this.state = {
-            weekNumber: getHash({ parseInt: true }) || getWeek(),
+            period: { yearNumber: getYear(), weekNumber: getHash({ parseInt: true }) || getWeek() },
             selectedView: 'overview',
             groupBy: GROUP_BY_DAY,
         };
@@ -45,7 +46,7 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
     }
 
     public render() {
-        const { loading, weekNumber, groupBy, isConfirmed, data } = this.state;
+        const { loading, period, groupBy, isConfirmed, data } = this.state;
 
         return (
             <div className='c-eventview'>
@@ -54,7 +55,7 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
                         <Pivot defaultSelectedKey={this.state.selectedView} onLinkClick={item => this.setState({ selectedView: item.props.itemKey })}>
                             <PivotItem itemKey='overview' headerText='Overview' itemIcon='CalendarWeek'>
                                 <ActionBar
-                                    weekNumber={weekNumber}
+                                    period={period}
                                     groupBy={groupBy}
                                     onChangeWeek={this._onChangeWeek.bind(this)}
                                     onGroupByChanged={this._onGroupByChanged.bind(this)}
@@ -90,7 +91,7 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
                                 <EventOverview
                                     events={value(data, 'events', [])}
                                     enableShimmer={loading}
-                                    weekNumber={weekNumber} />
+                                    weekNumber={period.weekNumber} />
                             </PivotItem>
                             <PivotItem itemKey='allocation' headerText='Allocation' itemIcon='ReportDocument'>
                                 <UserAllocation entries={value(data, 'events', [])} charts={{ 'project.name': 'Allocation per project', 'customer.name': 'Allocation per customer' }} />
@@ -165,12 +166,12 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
     /**
     * On change week
     *
-    * @param {number} weekNumber Week number
+    * @param {IEventViewPeriod} period Period
     */
-    private _onChangeWeek(weekNumber: number) {
-        if (weekNumber === this.state.weekNumber) return;
-        document.location.hash = `w${weekNumber}`;
-        this.setState({ weekNumber }, () => this._getEventData(false));
+    private _onChangeWeek(period: IEventViewPeriod) {
+        if (JSON.stringify(period) === JSON.stringify(this.state.period)) return;
+        document.location.hash = `w${period.weekNumber}`;
+        this.setState({ period }, () => this._getEventData(false));
     };
 
     /**
@@ -190,7 +191,7 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
         const entries = this.state.data.events
             .filter(event => !!event.project)
             .map(event => ({ id: event.id, projectId: event.project.id }));
-        const variables = { weekNumber: this.state.weekNumber, entries };
+        const variables = { ...this.state.period, entries };
         await graphql.mutate({ mutation: CONFIRM_WEEK, variables });
         await this._getEventData();
     };
@@ -201,7 +202,7 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
     private async _onUnconfirmWeek() {
         this._clearResolve();
         this.setState({ loading: true });
-        await graphql.mutate({ mutation: UNCONFIRM_WEEK, variables: { weekNumber: this.state.weekNumber } });
+        await graphql.mutate({ mutation: UNCONFIRM_WEEK, variables: this.state.period });
         await this._getEventData();
 
     };
@@ -212,7 +213,7 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
     * @param {string} eventId Event id
     */
     private _getStoredResolves(eventId?: string): TypedHash<IProject> {
-        let storedResolves = this._store.get(format(this._resolvedKey, this.state.weekNumber));
+        let storedResolves = this._store.get(format(this._resolvedKey, this.state.period.yearNumber, this.state.period.weekNumber));
         if (!storedResolves) return {};
         if (eventId && storedResolves[eventId]) return storedResolves[eventId];
         return storedResolves;
@@ -227,7 +228,7 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
     private _storeResolve(eventId: string, project: IProject) {
         let resolves = this._getStoredResolves();
         resolves[eventId] = project;
-        this._store.put(format(this._resolvedKey, this.state.weekNumber), resolves, dateAdd(new Date(), 'month', 1));
+        this._store.put(format(this._resolvedKey, this.state.period.yearNumber, this.state.period.weekNumber), resolves, dateAdd(new Date(), 'month', 1));
     }
 
     /**
@@ -241,7 +242,7 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
             resolves = this._getStoredResolves();
             delete resolves[eventId];
         }
-        this._store.put(format(this._resolvedKey, this.state.weekNumber), resolves, dateAdd(new Date(), 'month', 1));
+        this._store.put(format(this._resolvedKey, this.state.period.yearNumber, this.state.period.weekNumber), resolves, dateAdd(new Date(), 'month', 1));
     }
 
     /**
@@ -252,14 +253,14 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
     private _storeIgnore(eventId: string) {
         let ignores = this._getStoredIgnores();
         ignores.push(eventId);
-        this._store.put(format(this._ignoredKey, this.state.weekNumber), ignores, dateAdd(new Date(), 'month', 1));
+        this._store.put(format(this._ignoredKey, this.state.period.yearNumber, this.state.period.weekNumber), ignores, dateAdd(new Date(), 'month', 1));
     }
 
     /**
      * Get stored ignores from local storage
     */
     private _getStoredIgnores(): string[] {
-        let storedIgnores = this._store.get(format(this._ignoredKey, this.state.weekNumber));
+        let storedIgnores = this._store.get(format(this._ignoredKey, this.state.period.yearNumber, this.state.period.weekNumber));
         if (!storedIgnores) return [];
         return storedIgnores;
     }
@@ -268,7 +269,7 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
      * Clear ignores
      */
     private _clearIgnores() {
-        this._store.put(format(this._ignoredKey, this.state.weekNumber), [], dateAdd(new Date(), 'month', 1));
+        this._store.put(format(this._ignoredKey, this.state.period.yearNumber, this.state.period.weekNumber), [], dateAdd(new Date(), 'month', 1));
         this._getEventData(false, 'cache-only');
     }
 
@@ -282,7 +283,7 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
         if (!skipLoading) this.setState({ loading: true });
         const { data: { eventData, weeks } } = await graphql.query({
             query: GET_EVENT_DATA,
-            variables: { weekNumber: this.state.weekNumber },
+            variables: this.state.period,
             fetchPolicy,
         });
         let data: IGetEventData = { ...eventData, weeks };

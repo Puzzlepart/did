@@ -124,6 +124,17 @@ export function getWeek(dateIso?: string): number {
 }
 
 /**
+ * Get year
+ * 
+ * @param {string} dateIso Date string
+ */
+export function getYear(dateIso?: string): number {
+    let date = moment();
+    if (dateIso) date = moment(dateIso);
+    return date.year();
+}
+
+/**
  * Get timespan string
  * 
  * @param {moment.Moment} start Start
