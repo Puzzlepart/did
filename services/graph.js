@@ -2,6 +2,7 @@ global.fetch = require("node-fetch");
 const moment = require('moment-timezone');
 const stripHtml = require("string-strip-html");
 const utils = require('../utils');
+const log = require('debug')('services/graph');
 require('moment/locale/en-gb');
 
 function GraphService(oauthToken) {
@@ -34,10 +35,11 @@ GraphService.prototype.getClient = function () {
  * @param {*} weekNumber 
  */
 GraphService.prototype.getEvents = async function (weekNumber) {
-  const startOfWeek =  moment().year(moment().year()).week(weekNumber).startOf('week');
-  const endOfWeek =  moment().year(moment().year()).week(weekNumber).endOf('week');
+  const startOfWeek = moment({ year: moment().year() }).week(weekNumber).startOf('week');
+  const endOfWeek = moment({ year: moment().year() }).week(weekNumber).endOf('week');
   const startDateTime = startOfWeek.toISOString();
   const endDateTime = endOfWeek.toISOString();
+  log('Querying Graph /me/calendar/calendarView: %s', JSON.stringify({ startDateTime, endDateTime, weekNumber }));
   const { value } = await this.getClient()
     .api('/me/calendar/calendarView')
     .query({ startDateTime, endDateTime })
@@ -46,6 +48,7 @@ GraphService.prototype.getEvents = async function (weekNumber) {
     .orderby('start/dateTime asc')
     .top(50)
     .get();
+    log('Retrieved %s events from /me/calendar/calendarView', value.length);
   let events = value.map(evt => ({
     id: evt.id,
     title: evt.subject,
