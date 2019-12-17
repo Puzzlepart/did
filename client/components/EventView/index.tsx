@@ -1,13 +1,12 @@
 
-import { PnPClientStorage, PnPClientStore, TypedHash, dateAdd } from '@pnp/common';
+import { dateAdd, PnPClientStorage, PnPClientStore, TypedHash } from '@pnp/common';
 import { UserAllocation } from 'components/UserAllocation';
-import { getValueTyped as value, formatDate, getWeek, getYear } from 'helpers';
-import { ITimeEntry, IProject } from 'models';
+import { formatDate, getValueTyped as value, getWeek, getYear } from 'helpers';
+import { IProject, ITimeEntry } from 'models';
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import * as React from 'react';
 import * as format from 'string-format';
-import { getHash } from 'utils/getHash';
 import { client as graphql } from '../../graphql';
 import { ActionBar } from './ActionBar';
 import { GROUP_BY_DAY } from './ActionBar/GROUP_BY_DAY';
@@ -15,12 +14,11 @@ import CONFIRM_WEEK from './CONFIRM_WEEK';
 import { EventList } from './EventList';
 import { EventOverview } from './EventOverview';
 import GET_EVENT_DATA, { IGetEventData } from './GET_EVENT_DATA';
+import { IEventViewPeriod } from "./IEventViewPeriod";
 import { IEventViewProps } from './IEventViewProps';
 import { IEventViewState } from './IEventViewState';
-import { IEventViewPeriod } from "./IEventViewPeriod";
 import { StatusBar } from './StatusBar';
 import UNCONFIRM_WEEK from './UNCONFIRM_WEEK';
-import * as _ from 'underscore';
 
 /**
  * @component EventView
@@ -34,7 +32,7 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
     constructor(props: IEventViewProps) {
         super(props);
         this.state = {
-            period: { yearNumber: getYear(), weekNumber: getHash({ parseInt: true }) || getWeek() },
+            period: { yearNumber: getYear(), weekNumber: getWeek() },
             selectedView: 'overview',
             groupBy: GROUP_BY_DAY,
         };
@@ -170,7 +168,6 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
     */
     private _onChangeWeek(period: IEventViewPeriod) {
         if (JSON.stringify(period) === JSON.stringify(this.state.period)) return;
-        document.location.hash = `w${period.weekNumber}`;
         this.setState({ period }, () => this._getEventData(false));
     };
 
@@ -191,8 +188,7 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
         const entries = this.state.data.events
             .filter(event => !!event.project)
             .map(event => ({ id: event.id, projectId: event.project.id }));
-        const variables = { ...this.state.period, entries };
-        await graphql.mutate({ mutation: CONFIRM_WEEK, variables });
+        await graphql.mutate({ mutation: CONFIRM_WEEK, variables: { ...this.state.period, entries } });
         await this._getEventData();
     };
 
