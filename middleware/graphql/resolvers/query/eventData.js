@@ -103,7 +103,7 @@ async function eventData(_obj, { yearNumber, weekNumber }, context) {
     let [projects, customers, confirmedTimeEntries] = await Promise.all([
         context.services.storage.getProjects(),
         context.services.storage.getCustomers(),
-        context.services.storage.getConfirmedTimeEntries({ resourceId: context.user.profile.oid, weekNumber }),
+        context.services.storage.getConfirmedTimeEntries({ resourceId: context.user.profile.oid, yearNumber, weekNumber }),
     ]);
     projects = projects.map(p => ({ ...p, customer: _.find(customers, c => c.id === p.id.split(' ')[0]) }));
     let events = [];
