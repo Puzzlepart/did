@@ -112,12 +112,12 @@ type Query {
 	projects(customerKey: String, sortBy: String): [Project!]!
 	eventData(yearNumber: Int!, weekNumber: Int!): EventData!
 	confirmedTimeEntries(
-		projectId: String, 
-		resourceId: String, 
-		weekNumber: Int, 
-		yearNumber: Int, 
-		currentUser: Boolean
-		dateFormat: String
+	projectId: String, 
+	resourceId: String, 
+	weekNumber: Int, 
+	yearNumber: Int, 
+	currentUser: Boolean
+	dateFormat: String
 	): ConfirmedTimeEntries
 	weeks: [Week!]!
 	users: [User!]!
@@ -132,7 +132,7 @@ type BaseResult {
 type Mutation {
 	createProject(customerKey: String!, projectKey: String!, name: String!, icon: String): BaseResult
 	createCustomer(key: String!, name: String!): BaseResult
-	confirmWeek(entries: [TimeEntryInput!], weekNumber: Int!): BaseResult!
-	unconfirmWeek(weekNumber: Int!): BaseResult!
+	confirmWeek(entries: [TimeEntryInput!], yearNumber: Int!,  weekNumber: Int!): BaseResult!
+	unconfirmWeek(yearNumber: Int!, weekNumber: Int!): BaseResult!
 	updateWeek(weekNumber: Int!, closed: Boolean!): Boolean!
 }

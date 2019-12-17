@@ -8,21 +8,21 @@ const log = require('debug')('middleware/graphql/resolvers/mutation/confirmWeek'
  * Confirm week
  * 
  * @param {*} _obj Unused object
- * @param {*} args Args (weekNumber, entries)
+ * @param {*} args Arguments
  * @param {*} context Context
  */
-async function confirmWeek(_obj, args, context) {
-    if (!args.entries || args.entries.length === 0) return { success: false, error: 'No entries to confirm' };
+async function confirmWeek(_obj, { yearNumber, weekNumber, entries }, context) {
+    if (!entries || entries.length === 0) return { success: false, error: 'No entries to confirm for the specifiec week/year.' };
     try {
-        log('Confirming week %s', args.weekNumber);
-        const calendarView = await context.services.graph.getEvents(args.weekNumber);
-        let batch = args.entries.reduce((b, entry) => {
+        log('Confirming week %s in %s', weekNumber);
+        const calendarView = await context.services.graph.getEvents(yearNumber, weekNumber);
+        let batch = entries.reduce((b, entry) => {
             const event = calendarView.filter(e => e.id === entry.id)[0];
             if (!event) return;
             log('Confirming entry with id %s', entry.id);
             b.insertEntity({
                 PartitionKey: entGen.String(context.tid),
-                RowKey: entGen.String( `${uuid()}-${args.weekNumber}`),
+                RowKey: entGen.String(`${uuid()}-${yearNumber}-${weekNumber}`),
                 EventId: entGen.String(entry.id),
                 Title: entGen.String(event.title),
                 Description: entGen.String(event.body),
@@ -32,9 +32,9 @@ async function confirmWeek(_obj, args, context) {
                 DurationMinutes: entGen.Int32(getDurationMinutes(event.startTime, event.endTime)),
                 ProjectId: entGen.String(entry.projectId),
                 WebLink: entGen.String(event.webLink),
-                WeekNumber: entGen.Int32(args.weekNumber),
+                WeekNumber: entGen.Int32(weekNumber),
                 MonthNumber: entGen.Int32(getMonth(event.startTime)),
-                YearNumber: entGen.Int32(getYear(event.startTime)),
+                YearNumber: entGen.Int32(yearNumber),
                 ResourceId: entGen.String(context.user.profile.oid),
                 ResourceEmail: entGen.String(context.user.profile.email),
                 ResourceName: entGen.String(context.user.profile.displayName),
