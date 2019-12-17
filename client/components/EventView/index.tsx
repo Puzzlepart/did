@@ -19,6 +19,7 @@ import { IEventViewProps } from './IEventViewProps';
 import { IEventViewState } from './IEventViewState';
 import { StatusBar } from './StatusBar';
 import UNCONFIRM_WEEK from './UNCONFIRM_WEEK';
+import { getHash } from 'utils/getHash';
 
 /**
  * @component EventView
@@ -32,7 +33,7 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
     constructor(props: IEventViewProps) {
         super(props);
         this.state = {
-            period: { yearNumber: getYear(), weekNumber: getWeek() },
+            period: this._getInitialPeriod(),
             selectedView: 'overview',
             groupBy: GROUP_BY_DAY,
         };
@@ -161,6 +162,14 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
         }));
     }
 
+    private _getInitialPeriod(): IEventViewPeriod {
+        let [weekNumber, yearNumber] = getHash({ fallback: '' }).split('-');
+        return {
+            yearNumber: yearNumber ? parseInt(yearNumber, 10) : getYear(),
+            weekNumber: weekNumber ? parseInt(weekNumber, 10) : getWeek(),
+        };
+    }
+
     /**
     * On change week
     *
@@ -168,6 +177,7 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
     */
     private _onChangeWeek(period: IEventViewPeriod) {
         if (JSON.stringify(period) === JSON.stringify(this.state.period)) return;
+        document.location.hash = `${period.weekNumber}-${period.yearNumber}`;
         this.setState({ period }, () => this._getEventData(false));
     };
 
