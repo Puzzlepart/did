@@ -7,6 +7,6 @@ export interface IActionBarProps {
     disabled: TypedHash<boolean>;
     period: IEventViewPeriod;
     groupBy?: IContextualMenuItem;
-    onChangeWeek: (yearNumber: number, weekNumber: number) => void;
+    onChangeWeek: (period: IEventViewPeriod) => void;
     onGroupByChanged: (groupBy: IContextualMenuItem) => void;
 }
