@@ -32,15 +32,15 @@ GraphService.prototype.getClient = function () {
 /**
  * Get events for the specified week
  * 
- * @param {*} yearNumber 
- * @param {*} weekNumber 
+ * @param {*} year 
+ * @param {*} week 
  */
-GraphService.prototype.getEvents = async function (yearNumber, weekNumber) {
-  const startOfWeek = moment({ year: yearNumber }).week(weekNumber).startOf('week');
-  const endOfWeek = moment({ year: yearNumber }).week(weekNumber).endOf('week');
+GraphService.prototype.getEvents = async function (year, week) {
+  const startOfWeek = moment({ year }).week(week).startOf('week');
+  const endOfWeek = moment({ year }).week(week).endOf('week');
   const startDateTime = startOfWeek.toISOString();
   const endDateTime = endOfWeek.toISOString();
-  log('Querying Graph /me/calendar/calendarView: %s', JSON.stringify({ startDateTime, endDateTime, weekNumber }));
+  log('Querying Graph /me/calendar/calendarView: %s', JSON.stringify({ startDateTime, endDateTime, week, year }));
   const { value } = await this.getClient()
     .api('/me/calendar/calendarView')
     .query({ startDateTime, endDateTime })
