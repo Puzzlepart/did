@@ -1,6 +1,6 @@
 const { TableBatch } = require('azure-storage');
 const { executeBatch, entGen } = require('../../../../utils/table');
-const { getDurationHours, getDurationMinutes, getMonth, getYear } = require('../../../../utils');
+const { getDurationHours, getDurationMinutes, getWeek, getMonth, getYear } = require('../../../../utils');
 const uuid = require('uuid/v1');
 const log = require('debug')('middleware/graphql/resolvers/mutation/confirmWeek');
 
@@ -14,7 +14,7 @@ const log = require('debug')('middleware/graphql/resolvers/mutation/confirmWeek'
 async function confirmWeek(_obj, { yearNumber, weekNumber, entries }, context) {
     if (!entries || entries.length === 0) return { success: false, error: 'No entries to confirm for the specifiec week/year.' };
     try {
-        log('Confirming week %s in %s', weekNumber);
+        log('Confirming week %s in %s', weekNumber, yearNumber);
         const calendarView = await context.services.graph.getEvents(yearNumber, weekNumber);
         let batch = entries.reduce((b, entry) => {
             const event = calendarView.filter(e => e.id === entry.id)[0];
@@ -32,9 +32,9 @@ async function confirmWeek(_obj, { yearNumber, weekNumber, entries }, context) {
                 DurationMinutes: entGen.Int32(getDurationMinutes(event.startTime, event.endTime)),
                 ProjectId: entGen.String(entry.projectId),
                 WebLink: entGen.String(event.webLink),
-                WeekNumber: entGen.Int32(weekNumber),
+                WeekNumber: entGen.Int32(getWeek(event.startTime)),
                 MonthNumber: entGen.Int32(getMonth(event.startTime)),
-                YearNumber: entGen.Int32(yearNumber),
+                YearNumber: entGen.Int32(getYear(event.startTime)),
                 ResourceId: entGen.String(context.user.profile.oid),
                 ResourceEmail: entGen.String(context.user.profile.email),
                 ResourceName: entGen.String(context.user.profile.displayName),
