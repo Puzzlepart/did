@@ -99,7 +99,7 @@ function matchEvent(evt, projects, customers) {
  * @param {*} context The context
  */
 async function eventData(_obj, { yearNumber, weekNumber }, context) {
-    log('Retrieving events for week %s', args.weekNumber);
+    log('Retrieving events for week %s in %s', weekNumber, yearNumber);
     let [projects, customers, confirmedTimeEntries] = await Promise.all([
         context.services.storage.getProjects(),
         context.services.storage.getCustomers(),
