@@ -17,21 +17,21 @@ export const ActionBar = ({ onClick, disabled, period, groupBy, onChangeWeek, on
                 {
                     key: 'THIS_WEEK',
                     name: 'This week',
-                    onClick: () => onChangeWeek(getYear(), getWeek()),
+                    onClick: () => onChangeWeek({ yearNumber: getYear(), weekNumber: getWeek() }),
                     disabled: period.weekNumber === getWeek(),
                 },
                 {
                     key: 'PREV_WEEK',
                     iconOnly: true,
                     iconProps: { iconName: 'Back', ...ACTIONBAR_ICON_PROPS },
-                    onClick: () => onChangeWeek(getYear(), period.weekNumber - 1),
+                    onClick: () => onChangeWeek({ yearNumber: getYear(), weekNumber: (period.weekNumber - 1) }),
                     title: 'Go to previous week',
                 },
                 {
                     key: 'NEXT_WEEK',
                     iconOnly: true,
                     iconProps: { iconName: 'Forward', ...ACTIONBAR_ICON_PROPS },
-                    onClick: () => onChangeWeek(getYear(), period.weekNumber + 1),
+                    onClick: () => onChangeWeek({ yearNumber: getYear(), weekNumber: (period.weekNumber + 1) }),
                     disabled: period.weekNumber === getWeek(),
                     title: 'Go to next week',
                 },
@@ -53,11 +53,11 @@ export const ActionBar = ({ onClick, disabled, period, groupBy, onChangeWeek, on
                                 value={startOfWeek(period.weekNumber).toDate()}
                                 maxDate={endOfWeek().toDate()}
                                 formatDate={date => {
-                                    let start = startOfWeek(undefined, date.toISOString());
-                                    let end = endOfWeek(undefined, date.toISOString());
+                                    let start = startOfWeek(undefined, undefined, date.toISOString());
+                                    let end = endOfWeek(undefined, undefined, date.toISOString());
                                     return getTimespanString(start, end);
                                 }}
-                                onSelectDate={date => onChangeWeek(getYear(date.toISOString()), getWeek(date.toISOString()))}
+                                onSelectDate={date => onChangeWeek({ yearNumber: getYear(date.toISOString()), weekNumber: getWeek(date.toISOString()) })}
                                 firstDayOfWeek={DayOfWeek.Monday} />
                         );
                     }
@@ -92,29 +92,30 @@ export const ActionBar = ({ onClick, disabled, period, groupBy, onChangeWeek, on
                     }
                 }
             ]}
-            farItems={[
-                {
-                    key: 'CONFIRM_WEEK',
-                    name: 'Confirm week',
-                    iconProps: { iconName: 'CheckMark', ...ACTIONBAR_ICON_PROPS },
-                    onClick: onClick.CONFIRM_WEEK,
-                    disabled: disabled.CONFIRM_WEEK,
-                },
-                {
-                    key: 'UNCONFIRM_WEEK',
-                    name: 'Unconfirm week',
-                    iconProps: { iconName: 'ErrorBadge', ...ACTIONBAR_ICON_PROPS },
-                    onClick: onClick.UNCONFIRM_WEEK,
-                    disabled: disabled.UNCONFIRM_WEEK,
-                },
-                {
-                    key: 'RELOAD',
-                    name: 'Reload',
-                    iconProps: { iconName: 'Refresh', ...ACTIONBAR_ICON_PROPS },
-                    onClick: onClick.RELOAD,
-                    disabled: disabled.RELOAD,
-                }
-            ]}
+            farItems={
+                [
+                    {
+                        key: 'CONFIRM_WEEK',
+                        name: 'Confirm week',
+                        iconProps: { iconName: 'CheckMark', ...ACTIONBAR_ICON_PROPS },
+                        onClick: onClick.CONFIRM_WEEK,
+                        disabled: disabled.CONFIRM_WEEK,
+                    },
+                    {
+                        key: 'UNCONFIRM_WEEK',
+                        name: 'Unconfirm week',
+                        iconProps: { iconName: 'ErrorBadge', ...ACTIONBAR_ICON_PROPS },
+                        onClick: onClick.UNCONFIRM_WEEK,
+                        disabled: disabled.UNCONFIRM_WEEK,
+                    },
+                    {
+                        key: 'RELOAD',
+                        name: 'Reload',
+                        iconProps: { iconName: 'Refresh', ...ACTIONBAR_ICON_PROPS },
+                        onClick: onClick.RELOAD,
+                        disabled: disabled.RELOAD,
+                    }
+                ]}
         />
     )
 }
