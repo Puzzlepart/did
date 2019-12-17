@@ -84,11 +84,12 @@ export function formatDate(dateIso: string, dateFormat: string, timeZone: string
 /**
  * Get start of week
  * 
- * @param {number} weekNumber Week number
+ * @param {number} week Week number
+ * @param {number} year Year number
  * @param {string} dateIso Date string
  */
-export function startOfWeek(weekNumber: number, dateIso?: string): moment.Moment {
-    let date = moment().week(weekNumber);
+export function startOfWeek(week: number, year: number = getYear(), dateIso?: string): moment.Moment {
+    let date = moment({ year }).week(week);
     if (dateIso) date = moment(dateIso);
     return date.startOf('isoWeek');
 }
@@ -96,11 +97,12 @@ export function startOfWeek(weekNumber: number, dateIso?: string): moment.Moment
 /**
  * Get end of week
  * 
- * @param {number} weekNumber Week number
+ * @param {number} week Week number
+ * @param {number} year Year number
  * @param {string} dateIso Date string
  */
-export function endOfWeek(weekNumber: number = getWeek(), dateIso?: string): moment.Moment {
-    let date = moment().week(weekNumber);
+export function endOfWeek(week: number = getWeek(), year: number = getYear(), dateIso?: string): moment.Moment {
+    let date = moment({ year }).week(week);
     if (dateIso) date = moment(dateIso);
     return date.endOf('isoWeek');
 }
