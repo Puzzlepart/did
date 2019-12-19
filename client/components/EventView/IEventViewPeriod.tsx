@@ -1,10 +1,8 @@
 export interface IEventViewPeriod {
-    /**
-     * The currently selected week number
-     */
-    weekNumber: number;
-    /**
-     * The currently selected week number
-     */
-    yearNumber: number;
+    week: number;
+    year: number;
+    startDateTime?: string;
+    endDateTime?: string;
+    ignoredKey?: string;
+    resolvedKey?: string;
 }
