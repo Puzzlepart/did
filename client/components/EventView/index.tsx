@@ -1,7 +1,7 @@
 
 import { dateAdd, PnPClientStorage, PnPClientStore, TypedHash } from '@pnp/common';
 import { UserAllocation } from 'components/UserAllocation';
-import { formatDate, getValueTyped as value, getWeek, getYear, startOfWeek, endOfWeek } from 'helpers';
+import { endOfWeek, formatDate, getValueTyped as value, getWeek, getYear, startOfWeek } from 'helpers';
 import { IProject, ITimeEntry } from 'models';
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
@@ -10,7 +10,7 @@ import * as format from 'string-format';
 import { client as graphql } from '../../graphql';
 import { ActionBar } from './ActionBar';
 import { GROUP_BY_DAY } from './ActionBar/GROUP_BY_DAY';
-import CONFIRM_WEEK from './CONFIRM_WEEK';
+import CONFIRM_PERIOD from './CONFIRM_PERIOD';
 import { EventList } from './EventList';
 import { EventOverview } from './EventOverview';
 import GET_EVENT_DATA, { IGetEventData } from './GET_EVENT_DATA';
@@ -18,8 +18,7 @@ import { IEventViewPeriod } from "./IEventViewPeriod";
 import { IEventViewProps } from './IEventViewProps';
 import { IEventViewState } from './IEventViewState';
 import { StatusBar } from './StatusBar';
-import UNCONFIRM_WEEK from './UNCONFIRM_WEEK';
-import { getHash } from 'utils/getHash';
+import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD';
 
 /**
  * @component EventView
@@ -207,7 +206,7 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
         const entries = this.state.data.events
             .filter(event => !!event.project)
             .map(event => ({ id: event.id, projectId: event.project.id }));
-        await graphql.mutate({ mutation: CONFIRM_WEEK, variables: { ...this.state.period, entries } });
+        await graphql.mutate({ mutation: CONFIRM_PERIOD, variables: { startDateTime: this.state.period.startDateTime, endDateTime: this.state.period.endDateTime, entries } });
         await this._getEventData();
     };
 
@@ -217,7 +216,7 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
     private async _onUnconfirmPeriod() {
         this._clearResolve();
         this.setState({ loading: true });
-        await graphql.mutate({ mutation: UNCONFIRM_WEEK, variables: this.state.period });
+        await graphql.mutate({ mutation: UNCONFIRM_PERIOD, variables: { startDateTime: this.state.period.startDateTime, endDateTime: this.state.period.endDateTime } });
         await this._getEventData();
 
     };

@@ -2,27 +2,27 @@ const { TableBatch } = require('azure-storage');
 const { executeBatch, entGen } = require('../../../../utils/table');
 const { getDurationHours, getDurationMinutes, getWeek, getMonth, getYear } = require('../../../../utils');
 const uuid = require('uuid/v1');
-const log = require('debug')('middleware/graphql/resolvers/mutation/confirmWeek');
+const log = require('debug')('middleware/graphql/resolvers/mutation/confirmPeriod');
 
 /**
- * Confirm week
+ * Confirm period
  * 
  * @param {*} _obj Unused object
  * @param {*} args Arguments
  * @param {*} context Context
  */
-async function confirmWeek(_obj, { yearNumber, weekNumber, entries }, context) {
-    if (!entries || entries.length === 0) return { success: false, error: 'No entries to confirm for the specifiec week/year.' };
+async function confirmPeriod(_obj, { startDateTime, endDateTime, entries }, context) {
+    if (!entries || entries.length === 0) return { success: false, error: 'No entries to confirm for the specified period.' };
     try {
-        log('Confirming week %s in %s', weekNumber, yearNumber);
-        const calendarView = await context.services.graph.getEvents(yearNumber, weekNumber);
+        log('Confirming period %s to %s', startDateTime, endDateTime);
+        const calendarView = await context.services.graph.getEvents(startDateTime, endDateTime);
         let batch = entries.reduce((b, entry) => {
             const event = calendarView.filter(e => e.id === entry.id)[0];
             if (!event) return;
             log('Confirming entry with id %s', entry.id);
             b.insertEntity({
                 PartitionKey: entGen.String(context.tid),
-                RowKey: entGen.String(`${uuid()}-${yearNumber}-${weekNumber}`),
+                RowKey: entGen.String(uuid()),
                 EventId: entGen.String(entry.id),
                 Title: entGen.String(event.title),
                 Description: entGen.String(event.body),
@@ -48,4 +48,4 @@ async function confirmWeek(_obj, { yearNumber, weekNumber, entries }, context) {
     }
 };
 
-module.exports = confirmWeek;
+module.exports = confirmPeriod;
