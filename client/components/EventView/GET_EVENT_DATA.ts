@@ -10,12 +10,12 @@ export interface IGetEventData {
 }
 
 export default gql`
-query ($yearNumber: Int!, $weekNumber: Int!) {
+query ($startDateTime: String!, $endDateTime: String!) {
   weeks {
     id
     closed
   }
-  eventData(yearNumber: $yearNumber, weekNumber: $weekNumber) {
+  eventData(startDateTime: $startDateTime, endDateTime: $endDateTime) {
     events {
       key
       id
