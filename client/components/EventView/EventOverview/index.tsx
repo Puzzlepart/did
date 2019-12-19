@@ -1,12 +1,13 @@
 
-import { List, IColumn } from 'components/List';
-import * as React from 'react';
-import { Icon } from 'office-ui-fabric-react/lib/Icon';
-import { IEventOverviewProps } from './IEventOverviewProps';
-import { generateColumn as col } from 'utils/generateColumn';
-import * as _ from 'underscore';
+import { IColumn, List } from 'components/List';
+import { formatDate, startOfWeek } from 'helpers';
 import { IProject, ITimeEntry } from 'models';
-import { startOfWeek, formatDate } from 'helpers';
+import { Icon } from 'office-ui-fabric-react/lib/Icon';
+import * as React from 'react';
+import * as _ from 'underscore';
+import { generateColumn as col } from 'utils/generateColumn';
+import { IEventViewPeriod } from '../IEventViewPeriod';
+import { IEventOverviewProps } from './IEventOverviewProps';
 
 /**
  * @component LabelColumn
@@ -37,13 +38,13 @@ const LabelColumn = ({ row }) => {
 /**
  * Create columns
  *
-* @param {number} weekNumber Week number
+* @param {IEventViewPeriod} period Period
 */
-const CreateColumns = (weekNumber: number) => {
+const CreateColumns = (period: IEventViewPeriod) => {
     return [
         col('label', '', { minWidth: 270, maxWidth: 270 }, (row: any) => <LabelColumn row={row} />),
         ...Array.from(Array(7).keys()).map(i => {
-            const day = startOfWeek(weekNumber).add(i, 'days');
+            const day = startOfWeek(undefined, undefined, period.startDateTime).add(i, 'days');
             return col(day.format('L'), day.format('ddd Do'), { maxWidth: 70, minWidth: 70 });
         }),
         col('sum', 'Sum')
@@ -96,7 +97,7 @@ const GenerateTotalRow = (events: ITimeEntry[], columns: IColumn[]) => {
  * @description
  */
 export const EventOverview = (props: IEventOverviewProps) => {
-    const columns = CreateColumns(props.weekNumber);
+    const columns = CreateColumns(props.period);
     const events = props.events.filter(e => !!e.project);
     const projects = _.unique(events.map(e => e.project), p => p.id);
     const projectRows = GenerateProjectRows(projects, events, columns);

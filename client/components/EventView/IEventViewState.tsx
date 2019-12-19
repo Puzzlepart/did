@@ -1,5 +1,6 @@
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { IGetEventData } from './GET_EVENT_DATA';
+import { IEventViewPeriod } from './IEventViewPeriod';
 
 export interface IEventViewState {
     /**
@@ -12,10 +13,8 @@ export interface IEventViewState {
      */
     selectedView?: string;
 
-    /**
-     * The currently selected week number
-     */
-    weekNumber?: number;
+
+    period: IEventViewPeriod;
 
     /**
      * Is the week confirmed

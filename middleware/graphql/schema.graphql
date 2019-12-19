@@ -94,7 +94,6 @@ input TimeEntryInput {
 }
 
 type EventData {
-	weekNumber: Int
 	events: [Event!]!
 	matchedEvents: [Event!]!
 	totalDuration: Float!
@@ -111,14 +110,14 @@ type ConfirmedTimeEntries {
 type Query {
 	customers: [Customer!]!
 	projects(customerKey: String, sortBy: String): [Project!]!
-	eventData(weekNumber: Int!): EventData!
+	eventData(startDateTime: String!, endDateTime: String!): EventData!
 	confirmedTimeEntries(
-		projectId: String, 
-		resourceId: String, 
-		weekNumber: Int, 
-		yearNumber: Int, 
-		currentUser: Boolean
-		dateFormat: String
+	projectId: String, 
+	resourceId: String, 
+	weekNumber: Int, 
+	yearNumber: Int, 
+	currentUser: Boolean
+	dateFormat: String
 	): ConfirmedTimeEntries
 	weeks: [Week!]!
 	users: [User!]!
@@ -133,7 +132,7 @@ type BaseResult {
 type Mutation {
 	createProject(customerKey: String!, projectKey: String!, name: String!, icon: String): BaseResult
 	createCustomer(key: String!, name: String!): BaseResult
-	confirmWeek(entries: [TimeEntryInput!], weekNumber: Int!): BaseResult!
-	unconfirmWeek(weekNumber: Int!): BaseResult!
+	confirmPeriod(entries: [TimeEntryInput!], startDateTime: String!,  endDateTime: String!): BaseResult!
+	unconfirmPeriod(startDateTime: String!, endDateTime: String!): BaseResult!
 	updateWeek(weekNumber: Int!, closed: Boolean!): Boolean!
 }
