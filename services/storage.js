@@ -135,8 +135,8 @@ StorageService.prototype.getConfirmedTimeEntries = async function (filters, opti
     if (filters.resourceId) filter = combine(filter, and, stringFilter('ResourceId', isEqual, filters.resourceId));
     if (filters.weekNumber) filter = combine(filter, and, intFilter('WeekNumber', isEqual, filters.weekNumber));
     if (filters.yearNumber) filter = combine(filter, and, intFilter('YearNumber', isEqual, filters.yearNumber));
-    if (filters.startDateTime) filter = combine(filter, and, dateFilter('StartTime', gt, filters.startDateTime));
-    if (filters.endDateTime) filter = combine(filter, and, dateFilter('StartTime', lt, filters.endDateTime));
+    if (filters.startDateTime) filter = combine(filter, and, dateFilter('StartTime', gt, entGen.DateTime(new Date(filters.startDateTime))._));
+    if (filters.endDateTime) filter = combine(filter, and, dateFilter('StartTime', lt, entGen.DateTime(new Date(filters.endDateTime))._));
     log('Querying table %s with filter %s', CONFIRMEDTIMEENTRIES, filter);
     let query = createQuery(1000, null, filter);
     let result = await queryTable(CONFIRMEDTIMEENTRIES, query);
