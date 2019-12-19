@@ -88,7 +88,7 @@ export function formatDate(dateIso: string, dateFormat: string, timeZone: string
  * @param {number} year Year number
  * @param {string} dateIso Date string
  */
-export function startOfWeek(week: number, year: number = getYear(), dateIso?: string): moment.Moment {
+export function startOfWeek(week: number = getWeek(), year: number = getYear(), dateIso?: string): moment.Moment {
     let date = moment({ year }).week(week);
     if (dateIso) date = moment(dateIso);
     return date.startOf('isoWeek');
