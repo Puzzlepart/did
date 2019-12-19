@@ -98,12 +98,12 @@ function matchEvent(evt, projects, customers) {
  * @param {*} args Arguments
  * @param {*} context The context
  */
-async function eventData(_obj, { yearNumber, weekNumber }, context) {
-    log('Retrieving events for week %s in %s', weekNumber, yearNumber);
+async function eventData(_obj, { startDateTime, endDateTime }, context) {
+    log('Retrieving events from %s to %s', startDateTime, endDateTime);
     let [projects, customers, confirmedTimeEntries] = await Promise.all([
         context.services.storage.getProjects(),
         context.services.storage.getCustomers(),
-        context.services.storage.getConfirmedTimeEntries({ resourceId: context.user.profile.oid, yearNumber, weekNumber }),
+        context.services.storage.getConfirmedTimeEntries({ resourceId: context.user.profile.oid, startDateTime, endDateTime }),
     ]);
     projects = projects.map(p => ({ ...p, customer: _.find(customers, c => c.id === p.id.split(' ')[0]) }));
     let events = [];
@@ -111,7 +111,7 @@ async function eventData(_obj, { yearNumber, weekNumber }, context) {
     let matchedDuration = 0;
     let confirmedDuration = 0;
     if (confirmedTimeEntries.length > 0) {
-        log('Found confirmed events for week %s in %s, retrieving entries from storage', weekNumber, yearNumber);
+        log('Found confirmed events from %s to %s, retrieving entries from storage', startDateTime, endDateTime);
         events = confirmedTimeEntries.map(entry => ({
             ...entry,
             project: _.find(projects, p => p.id === entry.projectId),
@@ -121,8 +121,8 @@ async function eventData(_obj, { yearNumber, weekNumber }, context) {
         confirmedDuration = events.reduce((sum, evt) => sum + evt.durationMinutes, 0);
         matchedDuration = confirmedDuration;
     } else {
-        log('Found no confirmed events for week %s in %s, retrieving entries from Microsoft Graph', weekNumber, yearNumber);
-        events = await context.services.graph.getEvents(yearNumber, weekNumber);
+        log('Found no confirmed events from %s to %s, retrieving entries from Microsoft Graph', startDateTime, endDateTime);
+        events = await context.services.graph.getEvents(startDateTime, endDateTime);
         events = events.map(evt => matchEvent(evt, projects, customers));
         matchedEvents = events.filter(evt => (evt.project && evt.project.id));
         matchedDuration = matchedEvents.reduce((sum, evt) => sum + evt.durationMinutes, 0);
