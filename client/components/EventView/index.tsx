@@ -89,7 +89,7 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
                                 <EventOverview
                                     events={value(data, 'events', [])}
                                     enableShimmer={loading}
-                                    weekNumber={50} />
+                                    period={period} />
                             </PivotItem>
                             <PivotItem itemKey='allocation' headerText='Allocation' itemIcon='ReportDocument'>
                                 <UserAllocation entries={value(data, 'events', [])} charts={{ 'project.name': 'Allocation per project', 'customer.name': 'Allocation per customer' }} />
