@@ -139,11 +139,13 @@ export function getYear(dateIso?: string): number {
 /**
  * Get timespan string
  * 
- * @param {moment.Moment} start Start
- * @param {moment.Moment} end End
+ * @param {moment.Moment | string} start Start
+ * @param {moment.Moment | string} end End
  * @param {object} options Options
  */
-export function getTimespanString(start: moment.Moment, end: moment.Moment, options: object = { monthFormat: 'MMMM', yearFormat: 'YYYY', hideYear: false, implicitYear: false }) {
+export function getTimespanString(start: moment.Moment | string, end: moment.Moment | string, options: object = { monthFormat: 'MMMM', yearFormat: 'YYYY', hideYear: false, implicitYear: false }) {
+    if(typeof start === 'string') start = moment(start);
+    if(typeof end === 'string') end = moment(end);
     return start['twix'](end, { allDay: true }).format(options).toLowerCase();
 }
 

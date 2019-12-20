@@ -87,13 +87,6 @@ h5 {
     border: none !important;
     outline: none !important; }
 
-.c-eventview-weekpicker--callout table tbody tr:hover td {
-  background: #f3f2f1 !important;
-  color: #201f1e !important; }
-
-.c-eventview-weekpicker--callout table tbody tr:hover * {
-  cursor: pointer !important; }
-
 .c-projectdetails {
   margin-top: 30px; }
 
