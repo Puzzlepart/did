@@ -19,19 +19,19 @@ const LabelColumn = ({ row }) => {
             <div>
                 {row.label}
             </div>
-        )
+        );
     } else {
         return (
             <>
-                <div style={{ display: 'inline-block', marginRight: 10 }}>
+                <div style={{ display: 'inline-block', verticalAlign: 'top', width: 30 }}>
                     <Icon iconName={row.project.icon || 'Page'} styles={{ root: { fontSize: 18 } }} />
                 </div>
-                <div style={{ display: 'inline-block' }}>
+                <div style={{ display: 'inline-block', verticalAlign: 'top', width: 'calc(100% - 30px)' }}>
                     <div>{row.project.name}</div>
                     <div style={{ fontSize: '7pt' }}>for {row.customer.name}</div>
                 </div>
             </>
-        )
+        );
     }
 }
 
@@ -42,7 +42,7 @@ const LabelColumn = ({ row }) => {
 */
 const CreateColumns = (period: IEventViewPeriod) => {
     return [
-        col('label', '', { minWidth: 270, maxWidth: 270 }, (row: any) => <LabelColumn row={row} />),
+        col('label', '', { minWidth: 50, maxWidth: 270, isMultiline: true }, (row: any) => <LabelColumn row={row} />),
         ...Array.from(Array(7).keys()).map(i => {
             const day = startOfWeek(undefined, undefined, period.startDateTime).add(i, 'days');
             return col(day.format('L'), day.format('ddd Do'), { maxWidth: 70, minWidth: 70 });
