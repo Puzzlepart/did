@@ -52,22 +52,7 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
                     <div className='c-eventview-section-content'>
                         <Pivot defaultSelectedKey={this.state.selectedView} onLinkClick={item => this.setState({ selectedView: item.props.itemKey })}>
                             <PivotItem itemKey='overview' headerText='Overview' itemIcon='CalendarWeek'>
-                                <ActionBar
-                                    period={period}
-                                    groupBy={groupBy}
-                                    onChangeWeek={this._onChangePeriod.bind(this)}
-                                    onGroupByChanged={this._onGroupByChanged.bind(this)}
-                                    onClick={{
-                                        CONFIRM_WEEK: this._onConfirmPeriod.bind(this),
-                                        UNCONFIRM_WEEK: this._onUnconfirmPeriod.bind(this),
-                                        RELOAD: () => this._getEventData(false),
-                                    }}
-                                    disabled={{
-                                        CONFIRM_WEEK: loading || closed || isConfirmed,
-                                        UNCONFIRM_WEEK: loading || closed || !isConfirmed,
-                                        RELOAD: loading || closed || isConfirmed,
-                                    }}
-                                />
+                                {this._renderActionBar()}
                                 <StatusBar
                                     isConfirmed={isConfirmed}
                                     events={value(data, 'events', [])}
@@ -86,18 +71,44 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
                                     groups={groupBy.data.groups} />
                             </PivotItem>
                             <PivotItem itemKey='summary' headerText='Summary' itemIcon='List'>
+                                {this._renderActionBar()}
                                 <EventOverview
                                     events={value(data, 'events', [])}
                                     enableShimmer={loading}
                                     period={period} />
                             </PivotItem>
                             <PivotItem itemKey='allocation' headerText='Allocation' itemIcon='ReportDocument'>
+                                {this._renderActionBar()}
                                 <UserAllocation entries={value(data, 'events', [])} charts={{ 'project.name': 'Allocation per project', 'customer.name': 'Allocation per customer' }} />
                             </PivotItem>
                         </Pivot>
                     </div>
                 </div>
             </div>
+        );
+    }
+
+    /**
+     * Render action bar
+     */
+    private _renderActionBar() {
+        const { loading, period, groupBy, isConfirmed } = this.state;
+        return (
+            <ActionBar
+                period={period}
+                groupBy={groupBy}
+                onChangeWeek={this._onChangePeriod.bind(this)}
+                onGroupByChanged={this._onGroupByChanged.bind(this)}
+                onClick={{
+                    CONFIRM_WEEK: this._onConfirmWeek.bind(this),
+                    UNCONFIRM_WEEK: this._onUnconfirmWeek.bind(this),
+                    RELOAD: () => this._getEventData(false),
+                }}
+                disabled={{
+                    CONFIRM_WEEK: loading || closed || isConfirmed,
+                    UNCONFIRM_WEEK: loading || closed || !isConfirmed,
+                    RELOAD: loading || closed || isConfirmed,
+                }} />
         );
     }
 
@@ -199,24 +210,37 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
     }
 
     /**
-     * On confirm period
+     * On confirm week
      */
-    private async _onConfirmPeriod() {
+    private async _onConfirmWeek() {
         this.setState({ loading: true });
         const entries = this.state.data.events
             .filter(event => !!event.project)
             .map(event => ({ id: event.id, projectId: event.project.id }));
-        await graphql.mutate({ mutation: CONFIRM_PERIOD, variables: { startDateTime: this.state.period.startDateTime, endDateTime: this.state.period.endDateTime, entries } });
+        await graphql.mutate({
+            mutation: CONFIRM_PERIOD,
+            variables: {
+                startDateTime: this.state.period.startDateTime,
+                endDateTime: this.state.period.endDateTime,
+                entries,
+            },
+        });
         await this._getEventData();
     };
 
     /**
-     * On unconfirm period
+     * On unconfirm week
      */
-    private async _onUnconfirmPeriod() {
+    private async _onUnconfirmWeek() {
         this._clearResolve();
         this.setState({ loading: true });
-        await graphql.mutate({ mutation: UNCONFIRM_PERIOD, variables: { startDateTime: this.state.period.startDateTime, endDateTime: this.state.period.endDateTime } });
+        await graphql.mutate({
+            mutation: UNCONFIRM_PERIOD,
+            variables: {
+                startDateTime: this.state.period.startDateTime,
+                endDateTime: this.state.period.endDateTime,
+            },
+        });
         await this._getEventData();
 
     };
