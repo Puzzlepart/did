@@ -1,13 +1,13 @@
+import { getWeek, getYear } from 'helpers';
 import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
-import { DatePicker, DayOfWeek } from 'office-ui-fabric-react/lib/DatePicker';
 import * as React from 'react';
 import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS';
 import { GROUP_BY_CUSTOMER } from './GROUP_BY_CUSTOMER';
 import { GROUP_BY_DAY } from './GROUP_BY_DAY';
 import { GROUP_BY_PROJECT } from './GROUP_BY_PROJECT';
 import { IActionBarProps } from './IActionBarProps';
-import { getWeek, endOfWeek, startOfWeek, getTimespanString, getYear } from 'helpers';
+import { WeekPicker } from './WeekPicker';
 
 export const ActionBar = ({ onClick, disabled, period, groupBy, onChangeWeek, onGroupByChanged }: IActionBarProps) => {
     return (
@@ -37,30 +37,7 @@ export const ActionBar = ({ onClick, disabled, period, groupBy, onChangeWeek, on
                 },
                 {
                     key: 'PICK_WEEK',
-                    onRender: () => {
-                        return (
-                            <DatePicker
-                                className='c-eventview-weekpicker'
-                                calloutProps={{ className: 'c-eventview-weekpicker--callout' }}
-                                borderless
-                                textField={{
-                                    styles: { field: { color: 'rgb(120, 120, 120)' }, root: { width: 250, marginTop: 6 } },
-                                    iconProps: { iconName: 'ChevronDown', ...ACTIONBAR_ICON_PROPS }
-                                }}
-                                showCloseButton={true}
-                                showWeekNumbers={true}
-                                showGoToToday={false}
-                                value={startOfWeek(period.week).toDate()}
-                                maxDate={endOfWeek().toDate()}
-                                formatDate={date => {
-                                    let start = startOfWeek(undefined, undefined, date.toISOString());
-                                    let end = endOfWeek(undefined, undefined, date.toISOString());
-                                    return getTimespanString(start, end);
-                                }}
-                                onSelectDate={date => onChangeWeek({ year: getYear(date.toISOString()), week: getWeek(date.toISOString()) })}
-                                firstDayOfWeek={DayOfWeek.Monday} />
-                        );
-                    }
+                    onRender: () => <WeekPicker period={period} onChangeWeek={onChangeWeek} />,
                 },
                 {
                     key: 'DIVIDER_0',
