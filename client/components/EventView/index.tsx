@@ -178,18 +178,16 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
      * @param {IEventViewPeriod} period Period
      */
     private _getPeriod(period?: IEventViewPeriod): IEventViewPeriod {
-        console.log('_getPeriod', period);
         let start = period ? startOfWeek(period.week, period.year) : startOfWeek();
         let end = period ? endOfWeek(period.week, period.year) : endOfWeek();
-        period = {
+        return {
             week: period ? period.week : getWeek(),
             year: period ? period.year : getYear(),
             startDateTime: start.toISOString(),
             endDateTime: end.toISOString(),
             ignoredKey: format(this._ignoredKey, start.unix(), end.unix()),
+            resolvedKey: format(this._resolvedKey, start.unix(), end.unix()),
         };
-        console.log('_getPeriod', period);
-        return period;
     }
 
     /**
