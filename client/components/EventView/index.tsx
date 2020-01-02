@@ -97,7 +97,7 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
             <ActionBar
                 period={period}
                 groupBy={groupBy}
-                onChangeWeek={this._onChangePeriod.bind(this)}
+                onChangeWeek={this._onChangeWeek.bind(this)}
                 onGroupByChanged={this._onGroupByChanged.bind(this)}
                 onClick={{
                     CONFIRM_WEEK: this._onConfirmWeek.bind(this),
@@ -178,23 +178,26 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
      * @param {IEventViewPeriod} period Period
      */
     private _getPeriod(period?: IEventViewPeriod): IEventViewPeriod {
+        console.log('_getPeriod', period);
         let start = period ? startOfWeek(period.week, period.year) : startOfWeek();
         let end = period ? endOfWeek(period.week, period.year) : endOfWeek();
-        return {
+        period = {
             week: period ? period.week : getWeek(),
             year: period ? period.year : getYear(),
             startDateTime: start.toISOString(),
             endDateTime: end.toISOString(),
             ignoredKey: format(this._ignoredKey, start.unix(), end.unix()),
         };
+        console.log('_getPeriod', period);
+        return period;
     }
 
     /**
-    * On change period
+    * On change week
     *
     * @param {IEventViewPeriod} period Period
     */
-    private _onChangePeriod(period: IEventViewPeriod) {
+    private _onChangeWeek(period: IEventViewPeriod) {
         if (JSON.stringify(period) === JSON.stringify(this.state.period)) return;
         period = this._getPeriod(period);
         this.setState({ period }, () => this._getEventData(false));
