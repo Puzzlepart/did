@@ -1,4 +1,4 @@
-import { getWeek, getYear } from 'helpers';
+import { getWeek, getYear, addWeek } from 'helpers';
 import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
 import * as React from 'react';
@@ -24,14 +24,14 @@ export const ActionBar = ({ onClick, disabled, period, groupBy, onChangeWeek, on
                     key: 'PREV_WEEK',
                     iconOnly: true,
                     iconProps: { iconName: 'Back', ...ACTIONBAR_ICON_PROPS },
-                    onClick: () => onChangeWeek({ year: getYear(), week: (period.week - 1) }),
+                    onClick: () => onChangeWeek(addWeek(period.endDateTime, -1)),
                     title: 'Go to previous week',
                 },
                 {
                     key: 'NEXT_WEEK',
                     iconOnly: true,
                     iconProps: { iconName: 'Forward', ...ACTIONBAR_ICON_PROPS },
-                    onClick: () => onChangeWeek({ year: getYear(), week: (period.week + 1) }),
+                    onClick: () => onChangeWeek(addWeek(period.endDateTime, +1)),
                     disabled: period.week === getWeek(),
                     title: 'Go to next week',
                 },

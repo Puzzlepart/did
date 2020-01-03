@@ -137,6 +137,18 @@ export function getYear(dateIso?: string): number {
 }
 
 /**
+ * Add a number of weeks
+ * 
+ * @param {string} dateIso Date ISO
+ * @param {number} unit Number of weeks to add
+ */
+export function addWeek(dateIso: string, unit: number) {
+    let date = moment(dateIso);
+    let newDate = date.add('weeks', unit);
+    return { year: newDate.year(), week: newDate.week() };
+}
+
+/**
  * Get timespan string
  * 
  * @param {moment.Moment | string} start Start
