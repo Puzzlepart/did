@@ -18,7 +18,7 @@ export const WeekPicker = ({ period, onChangeWeek }: IWeekPickerProps) => {
                 <TextField
                     onClick={event => setCalendar(event.currentTarget)}
                     value={getTimespanString(period.startDateTime, period.endDateTime)}
-                    styles={{ field: { color: 'rgb(120, 120, 120)', cursor: 'pointer' }, root: { width: 250, marginTop: 6 } }}
+                    styles={{ field: { color: 'rgb(120, 120, 120)', cursor: 'pointer' }, root: { width: 280, marginTop: 6 } }}
                     readOnly
                     borderless
                     iconProps={{ iconName: 'ChevronDown', ...ACTIONBAR_ICON_PROPS }} />
