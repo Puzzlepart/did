@@ -12,10 +12,7 @@ require('twix');
 export function getDurationDisplay(minutes: number, hours?: number): string {
     let hrs = hours ? Math.floor(hours) : Math.floor(minutes / 60);
     let mins = hours ? ((hours % 1) * 60) : minutes % 60;
-    return [
-        hrs && (`${hrs}h`),
-        mins && (`${mins}min`)
-    ].filter(c => c).join(' ');
+    return [(`${hrs}h`), (`${mins}min`)].join(' ');
 }
 
 /**
@@ -156,8 +153,8 @@ export function addWeek(dateIso: string, unit: number) {
  * @param {object} options Options
  */
 export function getTimespanString(start: moment.Moment | string, end: moment.Moment | string, options: object = { monthFormat: 'MMMM', yearFormat: 'YYYY', hideYear: false, implicitYear: false }) {
-    if(typeof start === 'string') start = moment(start);
-    if(typeof end === 'string') end = moment(end);
+    if (typeof start === 'string') start = moment(start);
+    if (typeof end === 'string') end = moment(end);
     return start['twix'](end, { allDay: true }).format(options).toLowerCase();
 }
 
