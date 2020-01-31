@@ -1,6 +1,6 @@
 body {
   padding-top: 4.5rem;
-  font-family: "Segoe UI Light", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Segoe UI Light", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
   font-size: 14px; }
 
 .alert-pre {
@@ -97,6 +97,9 @@ h5 {
 
 .ms-MessageBar .ms-MessageBar-text {
   font-size: 14px; }
+
+#app-eventview .c-eventview-section-content .row .highcharts-container {
+  margin-top: 30px; }
 
 .ms-DetailsRow-check,
 .ms-DetailsRow-cellCheck,

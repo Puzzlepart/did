@@ -38,7 +38,7 @@ export const UserAllocation = (props: IUserAllocationProps) => {
             {Object.keys(props.charts).map(exp => (
                 <div className="row" key={exp}>
                     <div className="col-sm">
-                        <HighchartsReact highcharts={Highcharts} options={AllocationColumnChart(props.charts[exp], GetAllocation(entries, exp))} />
+                        <HighchartsReact highcharts={Highcharts} options={AllocationColumnChart(props.charts[exp], GetAllocation(entries, exp), props.charts[exp])} />
                     </div>
                 </div>
             ))}

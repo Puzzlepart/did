@@ -1,12 +1,11 @@
 
 import { TypedHash } from '@pnp/common';
 
-export const AllocationColumnChart = (title: string, allocation: TypedHash<number>): any => ({
+export const AllocationColumnChart = (title: string, allocation: TypedHash<number>, chartName: string): any => ({
     chart: {
         type: 'column',
         backgroundColor: 'rgba(0,0,0,0)'
     },
-    title: { text: '' },
     xAxis: {
         categories: Object.keys(allocation),
     },
@@ -19,7 +18,7 @@ export const AllocationColumnChart = (title: string, allocation: TypedHash<numbe
     tooltip: {
         headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y} hours</b></td></tr>',
+            '<td style="padding:0"><b> {point.y}</b></td></tr>',
         footerFormat: '</table>',
         shared: true,
         useHTML: true
@@ -30,8 +29,12 @@ export const AllocationColumnChart = (title: string, allocation: TypedHash<numbe
             borderWidth: 0
         }
     },
+    title:{
+        text: chartName
+    },
     series: [{
-        name: 2019,
+        showInLegend: false,
+        name: "Hours",
         data: Object.keys(allocation).map(key => allocation[key]),
 
     }],
