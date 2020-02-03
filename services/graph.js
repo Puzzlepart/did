@@ -1,9 +1,7 @@
 global.fetch = require("node-fetch");
-const moment = require('moment-timezone');
 const stripHtml = require("string-strip-html");
 const utils = require('../utils');
 const log = require('debug')('services/graph');
-require('moment/locale/en-gb');
 
 function GraphService(oauthToken) {
   this.oauthToken = oauthToken;
@@ -46,19 +44,21 @@ GraphService.prototype.getEvents = async function (startDateTime, endDateTime) {
     .top(50)
     .get();
   log('Retrieved %s events from /me/calendar/calendarView', value.length);
-  let events = value.map(evt => ({
-    id: evt.id,
-    title: evt.subject,
-    body: stripHtml(evt.body.content),
-    isOrganizer: evt.isOrganizer,
-    categories: evt.categories,
-    webLink: evt.webLink,
-    lastModifiedDateTime: new Date(evt.lastModifiedDateTime).toISOString(),
-    startTime: new Date(evt.start.dateTime).toISOString(),
-    endTime: new Date(evt.end.dateTime).toISOString(),
-    durationHours: utils.getDurationHours(evt.start.dateTime, evt.end.dateTime),
-    durationMinutes: utils.getDurationMinutes(evt.start.dateTime, evt.end.dateTime),
-  }));
+  let events = value
+    .filter(evt => evt.subject)
+    .map(evt => ({
+      id: evt.id,
+      title: evt.subject,
+      body: stripHtml(evt.body.content),
+      isOrganizer: evt.isOrganizer,
+      categories: evt.categories,
+      webLink: evt.webLink,
+      lastModifiedDateTime: new Date(evt.lastModifiedDateTime).toISOString(),
+      startTime: new Date(evt.start.dateTime).toISOString(),
+      endTime: new Date(evt.end.dateTime).toISOString(),
+      durationHours: utils.getDurationHours(evt.start.dateTime, evt.end.dateTime),
+      durationMinutes: utils.getDurationMinutes(evt.start.dateTime, evt.end.dateTime),
+    }));
   events = this.removeIgnoredEvents(events);
   return events;
 };
