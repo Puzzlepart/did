@@ -97,7 +97,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
             <ActionBar
                 period={period}
                 groupBy={groupBy}
-                onChangePeriod={this._onChangeWeek.bind(this)}
+                onChangePeriod={this._onChangePeriod.bind(this)}
                 onGroupByChanged={this._onGroupByChanged.bind(this)}
                 onClick={{
                     CONFIRM_WEEK: this._onConfirmWeek.bind(this),
@@ -195,7 +195,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     *
     * @param {ITimesheetPeriod} period Period
     */
-    private _onChangeWeek(period: ITimesheetPeriod) {
+    private _onChangePeriod(period: ITimesheetPeriod) {
         if (JSON.stringify(period) === JSON.stringify(this.state.period)) return;
         period = this._getPeriod(period);
         this.setState({ period }, () => this._getEventData(false));
