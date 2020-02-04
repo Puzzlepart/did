@@ -10,10 +10,6 @@ router.get('/timesheet', isAuthenticated, (req, res) => {
   res.render('timesheet', { active: { timesheet: true }, props: JSON.stringify(req.params) });
 });
 
-router.get('/month_view', isAuthenticated, (req, res) => {
-  res.render('month_view', { active: { month_view: true }, props: JSON.stringify(req.params) });
-});
-
 router.get('/customers', isAuthenticated, (req, res) => {
   res.render('customers', { active: { customers: true }, props: JSON.stringify(req.params) });
 });
