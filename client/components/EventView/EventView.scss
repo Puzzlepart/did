@@ -10,10 +10,16 @@
     }
   }
 
+  .ms-MessageBar-icon{
+    display:flex;
+    align-self: center;
+  }
+
   .ms-List-cell .ms-DetailsRow {
     min-height: 53px;
 
     .ms-DetailsRow-cell > {
+      font-size: 1.2em;
       span,
       a {
         vertical-align: middle;

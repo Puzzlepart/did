@@ -33,7 +33,7 @@ export const ProjectColumn = ({ event, isConfirmed, onProjectSelected, onProject
                     type={MessageBarType.info}
                     iconName='SearchIssue'>
                     <p>
-                        Event not matched.<a href="#" onClick={_ => setModal(true)} id={toggleId}>Click to resolve</a> or<a href="#" style={{ color: 'rgb(220, 0, 78)' }} onClick={onProjectIgnore}>click to ignore</a>.
+                        Event not matched.<br/>Click to <a href="#" onClick={_ => setModal(true)} id={toggleId}>Resolve</a> or<a href="#" style={{ color: 'rgb(220, 0, 78)' }} onClick={onProjectIgnore}>ignore</a>.
                     </p>
                 </UserMessage>
                 <ResolveProjectModal

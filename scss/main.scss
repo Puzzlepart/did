@@ -14,15 +14,16 @@
 
 .ms-DetailsHeader-cellName,
 .ms-GroupHeader-title {
-  font-weight: 100;
-  font-size: 11pt;
+  font-weight: normal;
+  font-size: 1.2em;
   letter-spacing: 1px;
 }
 
 .ms-DetailsRow-cell {
+font-size: 1.2em;
   span,
   a {
-    font-size: 12px;
+    font-size: 1em;
   }
 }
 
@@ -31,9 +32,15 @@
 }
 
 div.ms-List-page .ms-GroupedList-group {
-  margin-top: 20px;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(237, 235, 233);
 }
 
 h3.panel-title a {
   color: #444;
+}
+
+button:focus {
+  outline: none;
 }

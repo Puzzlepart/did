@@ -1,7 +1,8 @@
 body {
-  padding-top: 4.5rem;
+  padding-top: 20px;
+  margin-top: 63px;
   font-family: "Segoe UI Light", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-  font-size: 14px; }
+  font-size: 100%; }
 
 .alert-pre {
   word-wrap: break-word;
@@ -9,26 +10,26 @@ body {
   white-space: pre-wrap; }
 
 .navbar-nav .nav-link {
-  font-size: 10pt;
+  font-size: 1em;
   letter-spacing: 1px; }
 
 h1 {
-  font-size: 36pt;
+  font-size: 3em;
   margin: 15px 0 15px 0; }
 
 h2 {
-  font-size: 24pt;
+  font-size: 2.2em;
   margin: 15px 0 15px 0; }
 
 h3 {
-  font-size: 18pt;
+  font-size: 1.8em;
   margin: 15px 0 15px 0; }
 
 h4 {
-  font-size: 14pt; }
+  font-size: 1.4em; }
 
 h5 {
-  font-size: 10pt; }
+  font-size: 1.2em; }
 
 .react-autosuggest__suggestion-match {
   color: #007bff; }
@@ -54,12 +55,18 @@ h5 {
   .c-eventview .c-eventview-statusbar .c-usermessage {
     margin: 5px 0; }
 
+.c-eventview .ms-MessageBar-icon {
+  display: flex;
+  align-self: center; }
+
 .c-eventview .ms-List-cell .ms-DetailsRow {
   min-height: 53px; }
-  .c-eventview .ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell > span,
-  .c-eventview .ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell > a {
-    vertical-align: middle;
-    vertical-align: -webkit-baseline-middle; }
+  .c-eventview .ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell > {
+    font-size: 1.2em; }
+    .c-eventview .ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell > span,
+    .c-eventview .ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell > a {
+      vertical-align: middle;
+      vertical-align: -webkit-baseline-middle; }
 
 .c-resolveproject-modal {
   padding: 20px;
@@ -108,19 +115,26 @@ h5 {
 
 .ms-DetailsHeader-cellName,
 .ms-GroupHeader-title {
-  font-weight: 100;
-  font-size: 11pt;
+  font-weight: normal;
+  font-size: 1.2em;
   letter-spacing: 1px; }
 
-.ms-DetailsRow-cell span,
-.ms-DetailsRow-cell a {
-  font-size: 12px; }
+.ms-DetailsRow-cell {
+  font-size: 1.2em; }
+  .ms-DetailsRow-cell span,
+  .ms-DetailsRow-cell a {
+    font-size: 1em; }
 
 .ms-FocusZone.ms-DetailsRow {
   border: none; }
 
 div.ms-List-page .ms-GroupedList-group {
-  margin-top: 20px; }
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #edebe9; }
 
 h3.panel-title a {
   color: #444; }
+
+button:focus {
+  outline: none; }
