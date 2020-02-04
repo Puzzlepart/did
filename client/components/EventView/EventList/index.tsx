@@ -1,6 +1,6 @@
 
 import { List } from 'components/List';
-import { getValueTyped as value, formatDate } from 'helpers';
+import { formatDate, getValueTyped as value } from 'helpers';
 import { ITimeEntry } from 'models';
 import * as React from 'react';
 import { generateColumn as col } from 'utils/generateColumn';
@@ -8,7 +8,6 @@ import { CustomerLink } from './CustomerLink';
 import { DurationDisplay } from './DurationDisplay';
 import { IEventListProps } from './IEventListProps';
 import { ProjectColumn } from './ProjectColumn';
-import { eventNames } from 'cluster';
 
 export const EventList = (props: IEventListProps) => {
     const columns = [

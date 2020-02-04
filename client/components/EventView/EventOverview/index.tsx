@@ -6,7 +6,7 @@ import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import * as React from 'react';
 import * as _ from 'underscore';
 import { generateColumn as col } from 'utils/generateColumn';
-import { IEventViewPeriod } from '../IEventViewPeriod';
+import { IEventViewPeriod } from '../ITimesheetPeriod';
 import { IEventOverviewProps } from './IEventOverviewProps';
 
 /**

@@ -1,6 +1,6 @@
 import { TypedHash } from '@pnp/common';
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
-import { IEventViewPeriod } from '../IEventViewPeriod';
+import { IEventViewPeriod } from '../ITimesheetPeriod';
 
 export interface IActionBarProps {
     onClick: TypedHash<any>;

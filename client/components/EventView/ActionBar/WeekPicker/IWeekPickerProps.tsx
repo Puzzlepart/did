@@ -1,4 +1,4 @@
-import { IEventViewPeriod } from '../../IEventViewPeriod';
+import { IEventViewPeriod } from '../../ITimesheetPeriod';
 
 export interface IWeekPickerProps {
     period: IEventViewPeriod;

@@ -1,5 +1,5 @@
 import { ITimeEntry } from 'models';
-import { IEventViewPeriod } from '../IEventViewPeriod';
+import { IEventViewPeriod } from '../ITimesheetPeriod';
 
 export interface IEventOverviewProps {
     events: ITimeEntry[];
