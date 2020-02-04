@@ -14,6 +14,9 @@ export interface ITimesheetState {
     selectedView?: string;
 
 
+    /**
+     * Period
+     */
     period: ITimesheetPeriod;
 
     /**

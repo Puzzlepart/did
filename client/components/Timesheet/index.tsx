@@ -178,15 +178,16 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
      * @param {ITimesheetPeriod} period Period
      */
     private _getPeriod(period?: ITimesheetPeriod): ITimesheetPeriod {
-        let start = period ? startOfWeek(period.week, period.year) : startOfWeek();
-        let end = period ? endOfWeek(period.week, period.year) : endOfWeek();
+        let [, start] = (document.location.hash || '#').substring(1).split('=');
+        let periodStart = period ? startOfWeek(period.week, period.year) : startOfWeek(undefined, undefined, start);
+        let periodEnd = period ? endOfWeek(period.week, period.year) : endOfWeek(undefined, undefined, start);
         return {
-            week: period ? period.week : getWeek(),
-            year: period ? period.year : getYear(),
-            startDateTime: start.toISOString(),
-            endDateTime: end.toISOString(),
-            ignoredKey: format(this._ignoredKey, start.unix(), end.unix()),
-            resolvedKey: format(this._resolvedKey, start.unix(), end.unix()),
+            week: period ? period.week : getWeek(start),
+            year: period ? period.year : getYear(start),
+            startDateTime: periodStart.toISOString(),
+            endDateTime: periodEnd.toISOString(),
+            ignoredKey: format(this._ignoredKey, periodStart.unix(), periodEnd.unix()),
+            resolvedKey: format(this._resolvedKey, periodStart.unix(), periodEnd.unix()),
         };
     }
 
@@ -198,6 +199,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     private _onChangePeriod(period: ITimesheetPeriod) {
         if (JSON.stringify(period) === JSON.stringify(this.state.period)) return;
         period = this._getPeriod(period);
+        document.location.hash = `week=${period.startDateTime}`;
         this.setState({ period }, () => this._getEventData(false));
     };
 
