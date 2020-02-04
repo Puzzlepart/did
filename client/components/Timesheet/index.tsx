@@ -97,7 +97,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
             <ActionBar
                 period={period}
                 groupBy={groupBy}
-                onChangeWeek={this._onChangeWeek.bind(this)}
+                onChangePeriod={this._onChangeWeek.bind(this)}
                 onGroupByChanged={this._onGroupByChanged.bind(this)}
                 onClick={{
                     CONFIRM_WEEK: this._onConfirmWeek.bind(this),
