@@ -39,7 +39,7 @@ export const StatusBar = ({ loading, isConfirmed, events, ignoredEvents, onClear
                                 type={MessageBarType.success}
                                 iconName='CheckMark' />
                         </div>
-                        <div className="col-sm" hidden={ignoredEvents.length === 0}>
+                        <div className="col-sm" hidden={ignoredEvents.length === 0 || isConfirmed}>
                             <UserMessage
                                 type={MessageBarType.info}
                                 iconName='StatusCircleErrorX'>
