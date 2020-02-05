@@ -45,8 +45,7 @@ export const WeekPicker = ({ period, onChangeWeek }: IWeekPickerProps) => {
                             showWeekNumbers={true}
                             dateRangeType={DateRangeType.Week}
                             autoNavigateOnSelection={true}
-                            value={startOfWeek(period.week).toDate()}
-                            maxDate={endOfWeek().toDate()} />
+                            value={startOfWeek(period.week).toDate()} />
                     </FocusTrapZone>
                 </Callout>
             )}
