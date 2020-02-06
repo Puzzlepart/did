@@ -1,6 +1,6 @@
 const StorageService = require('../../services/storage');
 
-async function onVerifySignin(_iss, _sub, profile, _accessToken, _refreshToken, params, done) {
+async function onVerifySubscription(_iss, _sub, profile, _accessToken, _refreshToken, params, done) {
     if (!profile.oid) {
         let error = new Error();
         error.name = 'NO_OID_FOUND';
@@ -16,10 +16,10 @@ async function onVerifySignin(_iss, _sub, profile, _accessToken, _refreshToken, 
         }
         profile['email'] = profile._json.preferred_username;
         profile['sub'] = sub.name;
-    } catch (err) {
-        done(err, null);
+    } catch (error) {
+        done(error, null);
     }
     return done(null, { profile, oauthToken: params });
 }
 
-module.exports = onVerifySignin;
+module.exports = onVerifySubscription;
