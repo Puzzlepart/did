@@ -178,7 +178,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
      * @param {ITimesheetPeriod} period Period
      */
     private _getPeriod(period?: ITimesheetPeriod): ITimesheetPeriod {
-        let [, start] = (document.location.hash || '#').substring(1).split('=');
+        let [, start] = document.location.hash.substring(1).split('=');
         let periodStart = period ? startOfWeek(period.week, period.year) : startOfWeek(undefined, undefined, start);
         let periodEnd = period ? endOfWeek(period.week, period.year) : endOfWeek(undefined, undefined, start);
         return {
