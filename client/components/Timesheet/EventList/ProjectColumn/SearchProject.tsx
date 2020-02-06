@@ -45,11 +45,11 @@ export const SearchProject = ({ onSelected, customer, placeholder }: ISearchProj
     };
 
     /**
-     * Get suggestion/project value
+     * Get display value
      * 
      * @param {IProject} project Project
      */
-    const getSuggestionValue = (project: IProject) => `${project.name} [${project.id}]`;
+    const getDisplayValue = (project: IProject) => `${project.name} [${project.id}]`;
 
     /**
      * Render suggestion
@@ -61,7 +61,7 @@ export const SearchProject = ({ onSelected, customer, placeholder }: ISearchProj
         return (
             <div style={{ marginLeft: 4, padding: 4, cursor: 'pointer' }}>
                 <div>
-                    {AutosuggestHighlightParse(getSuggestionValue(project), AutosuggestHighlightMatch(getSuggestionValue(project), query)).map((part, index) => {
+                    {AutosuggestHighlightParse(getDisplayValue(project), AutosuggestHighlightMatch(getDisplayValue(project), query)).map((part, index) => {
                         const className = part.highlight ? 'react-autosuggest__suggestion-match' : null;
                         return (
                             <span className={className} key={index}>
@@ -96,7 +96,7 @@ export const SearchProject = ({ onSelected, customer, placeholder }: ISearchProj
             suggestions={suggestions}
             onSuggestionsFetchRequested={({ value }) => setSuggestions(getSuggestions(value))}
             onSuggestionsClearRequested={() => setSuggestions([])}
-            getSuggestionValue={getSuggestionValue}
+            getSuggestionValue={getDisplayValue}
             renderSuggestion={renderSuggestion}
             onSuggestionSelected={(_event, { suggestion }) => onSelected(suggestion)}
             inputProps={{

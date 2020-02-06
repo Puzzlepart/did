@@ -38,11 +38,11 @@ export const SearchCustomer = ({ onSelected, placeholder = '' }: ISearchCustomer
     };
 
     /**
-     * Get suggestion value
+     * Get display value
      * 
      * @param {ICustomer} customer Customer
      */
-    const getSuggestionValue = (customer: ICustomer) => `${customer.name} [${customer.id}]`;
+    const getDisplayValue = (customer: ICustomer) => `${customer.name} [${customer.id}]`;
 
     /**
      * Render suggestion
@@ -54,7 +54,7 @@ export const SearchCustomer = ({ onSelected, placeholder = '' }: ISearchCustomer
         return (
             <div style={{ marginLeft: 4, padding: 4, cursor: 'pointer' }}>
                 <div>
-                    {AutosuggestHighlightParse(getSuggestionValue(customer), AutosuggestHighlightMatch(getSuggestionValue(customer), query)).map((part, index) => {
+                    {AutosuggestHighlightParse(getDisplayValue(customer), AutosuggestHighlightMatch(getDisplayValue(customer), query)).map((part, index) => {
                         const className = part.highlight ? 'react-autosuggest__suggestion-match' : null;
                         return (
                             <span className={className} key={index}>
@@ -74,7 +74,7 @@ export const SearchCustomer = ({ onSelected, placeholder = '' }: ISearchCustomer
             suggestions={suggestions}
             onSuggestionsFetchRequested={({ value }) => setSuggestions(getSuggestions(value))}
             onSuggestionsClearRequested={() => setSuggestions([])}
-            getSuggestionValue={getSuggestionValue}
+            getSuggestionValue={getDisplayValue}
             renderSuggestion={renderSuggestion}
             onSuggestionSelected={(_event, { suggestion }) => onSelected(suggestion)}
             inputProps={{
