@@ -26,8 +26,7 @@ export const GetAllocation = (entries: ITimeEntry[], exp: string) => entries.red
 
 /**
  * @component UserAllocation
- * @description 
- * @todo
+ * @description Shows allocation charts for a user
  */
 export const UserAllocation = (props: IUserAllocationProps) => {
     const { data, loading } = useQuery(GET_USER_DATA, { skip: !!props.entries, variables: props, fetchPolicy: 'cache-and-network' });
