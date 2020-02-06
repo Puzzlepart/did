@@ -8,15 +8,6 @@
 <body>
   {{> nav}}
   <main role="main" class="container">
-    {{#each error}}
-    <div class="alert alert-danger" role="alert">
-      <p class="mb-3">{{ this.message }}</p>
-      {{#if this.debug }}
-      <pre class="alert-pre border bg-light p-2"><code>{{ this.debug }}</code></pre>
-      {{/if}}
-    </div>
-    {{/each}}
-
     {{{body}}}
   </main>
   <script src="/js/did365.bundle.js"></script>

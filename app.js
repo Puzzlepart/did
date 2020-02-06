@@ -20,14 +20,6 @@ app.use(require('./middleware/session'));
 
 //#region Flash
 app.use(flash());
-app.use((req, res, next) => {
-  res.locals.error = req.flash('error_msg');
-  const errs = req.flash('error');
-  for (const i in errs) {
-    res.locals.error.push({ message: 'An error occurred', debug: errs[i] });
-  }
-  next();
-});
 //#endregion
 
 //#region HBS views setup
@@ -51,7 +43,7 @@ app.use(passport.session());
 
 //#region Storing user for hbs
 app.use((req, res, next) => {
-  if (req.user) {
+  if (req.user && req.user.data) {
     res.locals.user = {
       ...req.user.profile,
       role: req.user.data.role,
@@ -72,10 +64,11 @@ app.use('/graphql', isAuthenticated, require('./middleware/graphql'));
 app.use((_req, _res, next) => {
   next(createError(404));
 });
-app.use((err, req, res, _next) => {
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-  res.status(err.status || 500);
+
+app.use((error, req, res, _next) => {
+  res.locals.error_header = 'We\'re sorry';
+  res.locals.error_message = error.message;
+  res.status(error.status || 500);
   res.render('error');
 });
 //#endregion
