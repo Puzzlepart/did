@@ -2,30 +2,24 @@
 import { useQuery } from '@apollo/react-hooks';
 import AutosuggestHighlightMatch from 'autosuggest-highlight/match';
 import AutosuggestHighlightParse from 'autosuggest-highlight/parse';
-import { GET_PROJECTS } from 'components/Projects/GET_PROJECTS';
-import { IProject, ICustomer } from 'models';
-import { Shimmer } from 'office-ui-fabric-react/lib/Shimmer';
+import { GET_CUSTOMERS } from 'components/Customers/GET_CUSTOMERS';
+import { ICustomer } from 'models';
 import * as React from 'react';
 import { useState } from 'react';
 import AutoSuggest from 'react-autosuggest';
-
-interface ISearchProjectProps {
-    onSelected: any;
-    customer: ICustomer;
-    placeholder: string;
-}
+import { ISearchCustomerProps } from './ISearchCustomerProps';
 
 /**
- * @component SearchProject
+ * @component SearchCustomer
  * @description @todo
  */
-export const SearchProject = ({ onSelected, customer, placeholder }: ISearchProjectProps) => {
-    let [projects, setProjects] = useState<IProject[]>(null);
+export const SearchCustomer = ({ onSelected, placeholder = '' }: ISearchCustomerProps) => {
+    let [customers, setCustomers] = useState<ICustomer[]>(null);
     let [suggestions, setSuggestions] = useState([]);
     let [value, setValue] = useState('');
-    const { loading, data } = useQuery(GET_PROJECTS, { skip: !!projects, variables: { sortBy: 'name' }, fetchPolicy: 'cache-first', });
+    const { loading, data } = useQuery(GET_CUSTOMERS, { skip: !!customers, variables: { sortBy: 'name' }, fetchPolicy: 'cache-first', });
 
-    React.useEffect(() => { (!loading && !!data) && setProjects(data.projects); }, [data, loading]);
+    React.useEffect(() => { (!loading && !!data) && setCustomers(data.customers); }, [data, loading]);
 
     /**
      * Get suggestions for value
@@ -36,10 +30,9 @@ export const SearchProject = ({ onSelected, customer, placeholder }: ISearchProj
     const getSuggestions = (value: string, maxSuggestions: number = 5) => {
         const inputValue = value.trim().toLowerCase();
         if (inputValue.length === 0) return [];
-        return [...projects].filter(project => {
-            let searchString = [project.name, project.customer.name, project.id].join(' ').toLowerCase();
+        return [...customers].filter(customer => {
+            let searchString = [customer.name, customer.id].join(' ').toLowerCase();
             let isMatch = searchString.indexOf(inputValue) !== -1;
-            if (customer) isMatch = isMatch && project.customer.id === customer.id;
             return isMatch;
         }).splice(0, maxSuggestions);
     };
@@ -47,32 +40,21 @@ export const SearchProject = ({ onSelected, customer, placeholder }: ISearchProj
     /**
      * Get display value
      * 
-     * @param {IProject} project Project
+     * @param {ICustomer} customer Customer
      */
-    const getDisplayValue = (project: IProject) => `${project.name} [${project.id}]`;
+    const getDisplayValue = (customer: ICustomer) => `${customer.name} [${customer.id}]`;
 
     /**
      * Render suggestion
      * 
-     * @param {IProject} project Project
+     * @param {ICustomer} customer Customer
      * @param {any} param1 Params
      */
-    const renderSuggestion = (project: IProject, { query }: any) => {
+    const renderSuggestion = (customer: ICustomer, { query }: any) => {
         return (
             <div style={{ marginLeft: 4, padding: 4, cursor: 'pointer' }}>
                 <div>
-                    {AutosuggestHighlightParse(getDisplayValue(project), AutosuggestHighlightMatch(getDisplayValue(project), query)).map((part, index) => {
-                        const className = part.highlight ? 'react-autosuggest__suggestion-match' : null;
-                        return (
-                            <span className={className} key={index}>
-                                {part.text}
-                            </span>
-                        );
-                    })}
-                </div>
-                <div style={{ fontSize: '7pt' }}>
-                    <span>for </span>
-                    {AutosuggestHighlightParse(project.customer.name, AutosuggestHighlightMatch(project.customer.name, query)).map((part, index) => {
+                    {AutosuggestHighlightParse(getDisplayValue(customer), AutosuggestHighlightMatch(getDisplayValue(customer), query)).map((part, index) => {
                         const className = part.highlight ? 'react-autosuggest__suggestion-match' : null;
                         return (
                             <span className={className} key={index}>
@@ -84,12 +66,8 @@ export const SearchProject = ({ onSelected, customer, placeholder }: ISearchProj
             </div>
         );
     }
-    if (!projects) return (
-        <>
-            <Shimmer />
-            <Shimmer />
-        </>
-    );
+
+    if (!customers) return null;
 
     return (
         <AutoSuggest
@@ -100,10 +78,10 @@ export const SearchProject = ({ onSelected, customer, placeholder }: ISearchProj
             renderSuggestion={renderSuggestion}
             onSuggestionSelected={(_event, { suggestion }) => onSelected(suggestion)}
             inputProps={{
+                style: { width: 300, paddingLeft: 8, paddingRight: 8 },
                 placeholder,
                 value,
                 onChange: (_event: any, { newValue }) => setValue(newValue),
-                width: '100%',
             }} />
     );
 }

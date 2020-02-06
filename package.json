@@ -9,7 +9,7 @@
     "watch:server": "nodemon --ignore client --ignore public --ignore lib ./bin/www",
     "build:client": "tsc --build",
     "build:scss": "node-sass --include-path scss scss/main.scss public/css/main.css",
-    "watch:scss": "onchange -k -i -d 750 \"./scss/**/*.scss\" -- npm run build:scss",
+    "watch:scss": "onchange -k -i -d 750 \"./**/*.scss\" -- npm run build:scss",
     "watch:client": "tsc --watch",
     "package:client": "npm run build:client && webpack --config webpack.config.js",
     "package:client:prod": "set NODE_ENV=production&&npm run build:client && webpack --config webpack.config.js",

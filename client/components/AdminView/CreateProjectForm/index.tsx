@@ -1,12 +1,14 @@
 import { useMutation } from '@apollo/react-hooks';
 import { UserMessage } from 'components/UserMessage';
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button';
+import { Label } from 'office-ui-fabric-react/lib/Label';
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import * as React from 'react';
 import { useState } from 'react';
 import CREATE_PROJECT from './CREATE_PROJECT';
 import { ICreateProjectFormModel } from './ICreateProjectFormModel';
+import { SearchCustomer } from './SearchCustomer';
 
 /**
  * @component CreateProjectForm
@@ -41,32 +43,27 @@ export const CreateProjectForm = ({ emptyModel = { customerKey: '', projectKey: 
 
     return (
         <div>
+            <Label>Customer</Label>
+            <SearchCustomer onSelected={({ key }) => setModel({ ...model, customerKey: key as string })} />
             <TextField
                 styles={{ root: { marginTop: 12, width: 300 } }}
                 minLength={4}
-                placeholder='Customer Key'
-                description={`For now you'll have to enter the customer key. Later on this will be a dropdown with autocomplete functionality. Use one word (no spaces).`}
-                onChange={(_event, customerKey) => setModel({ ...model, customerKey })}
-                value={model.customerKey} />
-            <TextField
-                styles={{ root: { marginTop: 12, width: 300 } }}
-                minLength={4}
-                placeholder='Key'
+                label='Key'
                 description='Key for the project. Use one word (no spaces).'
                 onChange={(_event, projectKey) => setModel({ ...model, projectKey })}
                 value={model.projectKey} />
             <TextField
                 styles={{ root: { marginTop: 12, width: 300 } }}
                 minLength={4}
-                placeholder='Name'
+                label='Name'
                 description='Name of the project.'
                 onChange={(_event, name) => setModel({ ...model, name })}
                 value={model.name} />
             <TextField
                 styles={{ root: { marginTop: 12, width: 300 } }}
                 minLength={4}
-                placeholder='Icon'
-                description='Icon to illustrate the project (https://developer.microsoft.com/en-us/fabric#/styles/web/icons).'
+                label='Icon'
+                description='Icon to illustrate the project.'
                 onChange={(_event, icon) => setModel({ ...model, icon })}
                 iconProps={{ iconName: model.icon }}
                 value={model.icon} />
