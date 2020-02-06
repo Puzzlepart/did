@@ -32,7 +32,6 @@ export const ActionBar = ({ onClick, disabled, period, groupBy, onChangePeriod: 
                     iconOnly: true,
                     iconProps: { iconName: 'Forward', ...ACTIONBAR_ICON_PROPS },
                     onClick: () => onChangeWeek(addWeek(period.endDateTime, +1)),
-                    disabled: period.week === getWeek(),
                     title: 'Go to next week',
                 },
                 {
