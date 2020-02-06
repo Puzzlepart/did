@@ -9,13 +9,17 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (user, done) => {
     if (!user.data) {
         user.data = await new StorageService(user.profile._json.tid).getUser(user.profile.oid);
+    } if (user.data) {
+        done(null, user);
+    } else {
+        let error = new Error();
+        error.name = 'USER_NOT_ENROLLED';
+        error.message = 'You\'re not enrolled in Did 365. Please contact your system owner.';
+        done(null, error);
     }
-    if (user.data) done(null, user);
-    else done(new Error('No access'), null);
 });
 
-
-passport.use(new OIDCStrategy(
+const strategy = new OIDCStrategy(
     {
         identityMetadata: `${process.env.OAUTH_AUTHORITY}${process.env.OAUTH_ID_METADATA}`,
         clientID: process.env.OAUTH_APP_ID,
@@ -29,6 +33,8 @@ passport.use(new OIDCStrategy(
         scope: process.env.OAUTH_SCOPES.split(' ')
     },
     require('./onVerifySignin'),
-));
+);
+
+passport.use(strategy);
 
 module.exports = passport;
