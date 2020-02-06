@@ -15,7 +15,7 @@ passport.deserializeUser(async (user, done) => {
         let error = new Error();
         error.name = 'USER_NOT_ENROLLED';
         error.message = 'You\'re not enrolled in Did 365. Please contact your system owner.';
-        done(null, error);
+        done(error, null);
     }
 });
 
@@ -32,7 +32,7 @@ const strategy = new OIDCStrategy(
         passReqToCallback: false,
         scope: process.env.OAUTH_SCOPES.split(' ')
     },
-    require('./onVerifySignin'),
+    require('./onVerifySubscription'),
 );
 
 passport.use(strategy);
