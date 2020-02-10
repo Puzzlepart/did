@@ -12,21 +12,19 @@ const simpleoauth2 = require('simple-oauth2').create({
 });
 
 module.exports = {
-    ensureAccessToken: async function (req) {
+    refreshAccessToken: async function (req) {
         var storedToken = simpleoauth2.accessToken.create(req.user.oauthToken);
         if (storedToken) {
-            log('Checking if access token has expired: %s', storedToken.expired());
-            if (storedToken.expired()) {
-                log('Access token has expired. Attempting to refresh: %s', JSON.stringify(req.user.oauthToken));
-                try {
-                    var { token: oauthToken } = await storedToken.refresh();
-                    req.user.oauthToken = oauthToken;
-                    log('Successfully refreshed auth token');
-                } catch (error) {
-                    console.log(error);
-                    log('Failed to refresh access token');
-                }
+            try {
+                var { token: oauthToken } = await storedToken.refresh();
+                log('Successfully refreshed auth token');
+                req.user.oauthToken = oauthToken;
+                return oauthToken;
+            } catch (error) {
+                throw new Error('Failed to refresh access token');
             }
+        } else {
+            throw new Error('Invalid oauth token found in request');
         }
     }
 };
