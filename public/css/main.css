@@ -55,18 +55,26 @@ h5 {
   .c-eventview .c-eventview-statusbar .c-usermessage {
     margin: 5px 0; }
 
+.c-eventview .ms-MessageBar.ms-MessageBar-multiline {
+  background: #f1f1f1; }
+  .c-eventview .ms-MessageBar.ms-MessageBar-multiline.ms-MessageBar--warning {
+    background-color: rgba(255, 200, 10, 0.2); }
+
 .c-eventview .ms-MessageBar-icon {
   display: flex;
   align-self: center; }
 
-.c-eventview .ms-List-cell .ms-DetailsRow {
-  min-height: 53px; }
-  .c-eventview .ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell > {
-    font-size: 1.2em; }
-    .c-eventview .ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell > span,
-    .c-eventview .ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell > a {
-      vertical-align: middle;
-      vertical-align: -webkit-baseline-middle; }
+.c-eventview .ms-List-page div.ms-List-cell {
+  min-height: 0; }
+  .c-eventview .ms-List-page div.ms-List-cell .ms-DetailsRow {
+    min-height: 45px; }
+    .c-eventview .ms-List-page div.ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell {
+      font-size: 1.2em;
+      display: flex;
+      align-items: center; }
+      .c-eventview .ms-List-page div.ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell span,
+      .c-eventview .ms-List-page div.ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell a {
+        vertical-align: middle; }
 
 .c-resolveproject-modal {
   padding: 20px;
@@ -120,7 +128,10 @@ h5 {
   letter-spacing: 1px; }
 
 .ms-DetailsRow-cell {
-  font-size: 1.2em; }
+  background: transparent;
+  font-size: 1.2em;
+  align-self: center;
+  padding: 0px 12px; }
   .ms-DetailsRow-cell span,
   .ms-DetailsRow-cell a {
     font-size: 1em; }
@@ -128,10 +139,20 @@ h5 {
 .ms-FocusZone.ms-DetailsRow {
   border: none; }
 
-div.ms-List-page .ms-GroupedList-group {
-  margin-top: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #edebe9; }
+div.ms-List-page {
+  background: transparent; }
+  div.ms-List-page .ms-GroupedList-group {
+    margin-top: 1.5em;
+    padding-bottom: 1em;
+    background: #fafafc; }
+    div.ms-List-page .ms-GroupedList-group .ms-GroupHeader {
+      border-bottom: 0px; }
+      div.ms-List-page .ms-GroupedList-group .ms-GroupHeader:hover {
+        background: #fafafc; }
+    div.ms-List-page .ms-GroupedList-group .ms-List-cell .ms-DetailsRow {
+      background: transparent; }
+      div.ms-List-page .ms-GroupedList-group .ms-List-cell .ms-DetailsRow:hover {
+        background: #fafafc; }
 
 h3.panel-title a {
   color: #444; }

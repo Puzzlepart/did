@@ -15,13 +15,13 @@ export const EventList = (props: IEventListProps) => {
         col(
             'title',
             'Title',
-            { maxWidth: value(props, 'columnWidths.title', 270), minWidth: value(props, 'columnWidths.title', 270) },
+            { maxWidth: value(props, 'columnWidths.title', 400), minWidth: value(props, 'columnWidths.title', 320) },
             (event: ITimeEntry) => <a href={event.webLink} target='_blank'>{event.title}</a>,
         ),
         col(
             'time',
             'Time',
-            { maxWidth: value(props, 'columnWidths.time', 120), minWidth: value(props, 'columnWidths.time', 120) },
+            { maxWidth: value(props, 'columnWidths.time', 90), minWidth: value(props, 'columnWidths.time', 90) },
             (event: ITimeEntry) => {
                 return (
                     <span>
@@ -38,7 +38,7 @@ export const EventList = (props: IEventListProps) => {
         col(
             'project',
             'Project',
-            { maxWidth: value(props, 'columnWidths.project', 270), minWidth: value(props, 'columnWidths.project', 270) },
+            { maxWidth: value(props, 'columnWidths.project', 300), minWidth: value(props, 'columnWidths.project', 300) },
             (event: ITimeEntry) => (
                 <ProjectColumn
                     event={event}

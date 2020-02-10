@@ -2,6 +2,7 @@
   .c-eventview-actions {
     margin: 10px 0 10px 0;
   }
+
   .c-eventview-statusbar {
     min-height: 40px;
 
@@ -10,20 +11,35 @@
     }
   }
 
-  .ms-MessageBar-icon{
-    display:flex;
+  .ms-MessageBar.ms-MessageBar-multiline{
+    background:#f1f1f1;
+    &.ms-MessageBar--warning{
+      background-color: rgba(255, 200, 10, 0.2);  
+    }
+  }
+
+  .ms-MessageBar-icon {
+    display: flex;
     align-self: center;
   }
 
-  .ms-List-cell .ms-DetailsRow {
-    min-height: 53px;
+  .ms-List-page {
 
-    .ms-DetailsRow-cell > {
-      font-size: 1.2em;
-      span,
-      a {
-        vertical-align: middle;
-        vertical-align: -webkit-baseline-middle;
+    div.ms-List-cell {
+      min-height: 0;
+      .ms-DetailsRow {
+        min-height: 45px;
+
+        .ms-DetailsRow-cell {
+          font-size: 1.2em;
+          display: flex;
+          align-items: center;
+
+          span,
+          a {
+            vertical-align: middle;
+          }
+        }
       }
     }
   }

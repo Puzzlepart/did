@@ -1,4 +1,5 @@
 @import "./layout.scss";
+@import "./theme.scss";
 @import "./react-autosuggest.scss";
 @import "../client/components/EventView/EventView.scss";
 @import "../client/components/Projects/Projects.scss";
@@ -20,7 +21,11 @@
 }
 
 .ms-DetailsRow-cell {
-font-size: 1.2em;
+  background: transparent;
+  font-size: 1.2em;
+  align-self: center;
+  padding: 0px 12px;
+
   span,
   a {
     font-size: 1em;
@@ -31,10 +36,31 @@ font-size: 1.2em;
   border: none;
 }
 
-div.ms-List-page .ms-GroupedList-group {
-  margin-top: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgb(237, 235, 233);
+div.ms-List-page {
+  background: transparent;
+
+  .ms-GroupedList-group {
+    margin-top: 1.5em;
+    padding-bottom: 1em;
+    background: $lightgray_background;
+
+    .ms-GroupHeader {
+      border-bottom: 0px;
+      &:hover{
+        background: $lightgray_background;
+      }
+    }
+
+    .ms-List-cell {
+      .ms-DetailsRow {
+        background: transparent;
+
+        &:hover {
+          background: $lightgray_background;
+        }
+      }
+    }
+  }
 }
 
 h3.panel-title a {
