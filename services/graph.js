@@ -71,6 +71,9 @@ GraphService.prototype.getEvents = async function (startDateTime, endDateTime) {
         this.oauthToken = await refreshAccessToken(this.req);
         return this.getEvents(startDateTime, endDateTime);
       }
+      default: {
+        throw new Error();
+      }
     }
   }
 };
