@@ -20,7 +20,7 @@ module.exports = graphql((req) => ({
   pretty: req.app.get('env') === 'development',
   context: {
     services: {
-      graph: new GraphService(req.user.oauthToken),
+      graph: new GraphService(req),
       storage: new StorageService(req.user.profile._json.tid),
     },
     user: req.user,
