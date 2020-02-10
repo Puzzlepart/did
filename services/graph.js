@@ -25,7 +25,6 @@ GraphService.prototype.removeIgnoredEvents = function (events) {
  * Gets a Microsoft Graph Client using the auth token from the class
  */
 GraphService.prototype.getClient = function () {
-  console.log(this.oauthToken);
   const client = require('@microsoft/microsoft-graph-client').Client.init({ authProvider: (done) => { done(null, this.oauthToken.access_token); } });
   return client;
 }
