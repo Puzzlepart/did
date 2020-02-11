@@ -46,7 +46,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     }
 
     public render() {
-        const { loading, period, groupBy, isConfirmed, data } = this.state;
+        const { loading, period, groupBy, scope, isConfirmed, data } = this.state;
 
         return (
             <div className='c-Timesheet'>
@@ -57,6 +57,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                                 {this._renderActionBar()}
                                 <StatusBar
                                     isConfirmed={isConfirmed}
+                                    scope={scope}
                                     events={value(data, 'events', [])}
                                     loading={loading}
                                     ignoredEvents={this._getStoredIgnores()}

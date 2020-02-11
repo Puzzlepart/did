@@ -60,7 +60,7 @@ export const ActionBar = (props: IActionBarProps) => {
                         ].map(item => ({
                             ...item,
                             canCheck: true,
-                            checked: item.key === props.groupBy.key,
+                            checked: item.key === props.scope.key,
                             onClick: () => props.onClick.CHANGE_SCOPE(item),
                         }))
                     }
