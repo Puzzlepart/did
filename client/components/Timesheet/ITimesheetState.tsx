@@ -13,7 +13,6 @@ export interface ITimesheetState {
      */
     selectedView?: string;
 
-
     /**
      * Period
      */
@@ -33,4 +32,9 @@ export interface ITimesheetState {
      * Group by
      */
     groupBy: IContextualMenuItem;
+
+    /**
+     * Scope
+     */
+    scope: IContextualMenuItem;
 }

@@ -10,6 +10,7 @@ import * as format from 'string-format';
 import { client as graphql } from '../../graphql';
 import { ActionBar } from './ActionBar';
 import { GROUP_BY_DAY } from './ActionBar/GROUP_BY_DAY';
+import { SCOPE_WEEK } from './ActionBar/SCOPE_WEEK';
 import CONFIRM_PERIOD from './CONFIRM_PERIOD';
 import { EventList } from './EventList';
 import { EventOverview } from './EventOverview';
@@ -35,6 +36,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
             period: this._getPeriod(),
             selectedView: 'overview',
             groupBy: GROUP_BY_DAY,
+            scope: SCOPE_WEEK,
         };
         this._store = new PnPClientStorage().local;
     }
@@ -92,14 +94,16 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
      * Render action bar
      */
     private _renderActionBar() {
-        const { loading, period, groupBy, isConfirmed } = this.state;
+        const { loading, period, groupBy, scope, isConfirmed } = this.state;
         return (
             <ActionBar
                 period={period}
                 groupBy={groupBy}
-                onChangePeriod={this._onChangePeriod.bind(this)}
-                onGroupByChanged={this._onGroupByChanged.bind(this)}
+                scope={scope}
                 onClick={{
+                    CHANGE_PERIOD: this._onChangePeriod.bind(this),
+                    CHANGE_GROUPBY: (groupBy: IContextualMenuItem) => this.setState({ groupBy }),
+                    CHANGE_SCOPE: (scope: IContextualMenuItem) => this.setState({ scope }),
                     CONFIRM_WEEK: this._onConfirmWeek.bind(this),
                     UNCONFIRM_WEEK: this._onUnconfirmWeek.bind(this),
                     RELOAD: () => this._getEventData(false),
@@ -202,15 +206,6 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
         document.location.hash = `week=${period.startDateTime}`;
         this.setState({ period }, () => this._getEventData(false));
     };
-
-    /**
-     * On group by changed
-     * 
-     * @param {IContextualMenuItem} groupBy Group by
-     */
-    private _onGroupByChanged(groupBy: IContextualMenuItem) {
-        this.setState({ groupBy });
-    }
 
     /**
      * On confirm week
