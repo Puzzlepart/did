@@ -9,7 +9,6 @@ import * as React from 'react';
 import * as format from 'string-format';
 import { client as graphql } from '../../graphql';
 import { ActionBar } from './ActionBar';
-import { SCOPE_WEEK } from './SCOPE_WEEK';
 import CONFIRM_PERIOD from './CONFIRM_PERIOD';
 import { EventList } from './EventList';
 import { EventOverview } from './EventOverview';
@@ -18,6 +17,7 @@ import { GROUP_BY_DAY } from './GROUP_BY_DAY';
 import { ITimesheetPeriod } from "./ITimesheetPeriod";
 import { ITimesheetProps } from './ITimesheetProps';
 import { ITimesheetState } from './ITimesheetState';
+import { SCOPE_WEEK } from './SCOPE_WEEK';
 import { StatusBar } from './StatusBar';
 import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD';
 
