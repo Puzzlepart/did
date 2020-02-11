@@ -5,6 +5,7 @@ import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { Shimmer } from 'office-ui-fabric-react/lib/Shimmer';
 import * as React from 'react';
 import { IStatusBarProps } from './IStatusBarProps';
+import * as format from 'string-format';
 
 export const StatusBar = (props: IStatusBarProps) => {
     let totalDuration = props.events.reduce((sum, event) => sum += event.durationMinutes, 0);
@@ -19,7 +20,7 @@ export const StatusBar = (props: IStatusBarProps) => {
                     <div className="row">
                         <div className="col-sm"
                             hidden={props.isConfirmed}>
-                            <UserMessage text={`You have a total of ${getDurationDisplay(totalDuration)} this week`} iconName='ReminderTime' />
+                            <UserMessage text={format(props.scope.data.DURATION_DISPLAY_FORMAT, getDurationDisplay(totalDuration))} iconName='ReminderTime' />
                         </div>
                         <div className="col-sm" hidden={totalDuration - matchedDuration === 0 || props.isConfirmed}>
                             <UserMessage

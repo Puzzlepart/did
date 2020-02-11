@@ -4,8 +4,8 @@ import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMen
 import * as React from 'react';
 import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS';
 import { IActionBarProps } from './IActionBarProps';
-import { SCOPE_MONTH } from './SCOPE_MONTH';
-import { SCOPE_WEEK } from './SCOPE_WEEK';
+import { SCOPE_MONTH } from '../SCOPE_MONTH';
+import { SCOPE_WEEK } from '../SCOPE_WEEK';
 import { WeekPicker } from './WeekPicker';
 
 export const ActionBar = (props: IActionBarProps) => {
