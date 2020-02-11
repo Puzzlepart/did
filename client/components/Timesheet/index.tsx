@@ -98,11 +98,9 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
         return (
             <ActionBar
                 period={period}
-                groupBy={groupBy}
                 scope={scope}
                 onClick={{
                     CHANGE_PERIOD: this._onChangePeriod.bind(this),
-                    CHANGE_GROUPBY: (groupBy: IContextualMenuItem) => this.setState({ groupBy }),
                     CHANGE_SCOPE: (scope: IContextualMenuItem) => this.setState({ scope }),
                     CONFIRM_WEEK: this._onConfirmWeek.bind(this),
                     UNCONFIRM_WEEK: this._onUnconfirmWeek.bind(this),

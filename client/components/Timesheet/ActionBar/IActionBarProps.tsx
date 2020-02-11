@@ -6,6 +6,5 @@ export interface IActionBarProps {
     onClick: TypedHash<any>;
     disabled: TypedHash<boolean>;
     period: ITimesheetPeriod;
-    groupBy: IContextualMenuItem;
     scope: IContextualMenuItem;
 }
