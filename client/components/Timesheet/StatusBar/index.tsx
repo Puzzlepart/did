@@ -28,13 +28,13 @@ export const StatusBar = (props: IStatusBarProps) => {
                                 type={MessageBarType.warning}
                                 iconName='BufferTimeBoth' />
                         </div>
-                        <div className="col-sm" hidden={totalDuration - matchedDuration > 0 || props.isConfirmed}>
+                        <div className="col-sm" hidden={totalDuration - matchedDuration > 0 || props.isConfirmed || props.scope.key !== 'SCOPE_WEEK'}>
                             <UserMessage
                                 text='All your hours are matched. Are you ready to confirm the week?'
                                 type={MessageBarType.success}
                                 iconName='BufferTimeBoth' />
                         </div>
-                        <div className="col-sm" hidden={!props.isConfirmed}>
+                        <div className="col-sm" hidden={!props.isConfirmed || props.scope.key !== 'SCOPE_WEEK'}>
                             <UserMessage
                                 text={`The week is confirmed with ${getDurationDisplay(matchedDuration)}. Click **Unconfirm week** if you want to do some adjustments.`}
                                 type={MessageBarType.success}
