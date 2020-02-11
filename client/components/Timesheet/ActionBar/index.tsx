@@ -3,9 +3,6 @@ import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
 import * as React from 'react';
 import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS';
-import { GROUP_BY_CUSTOMER } from './GROUP_BY_CUSTOMER';
-import { GROUP_BY_DAY } from './GROUP_BY_DAY';
-import { GROUP_BY_PROJECT } from './GROUP_BY_PROJECT';
 import { IActionBarProps } from './IActionBarProps';
 import { SCOPE_MONTH } from './SCOPE_MONTH';
 import { SCOPE_WEEK } from './SCOPE_WEEK';
@@ -53,7 +50,6 @@ export const ActionBar = (props: IActionBarProps) => {
                     key: 'DIVIDER_1',
                     itemType: ContextualMenuItemType.Divider,
                 },
-
                 {
                     ...props.scope,
                     key: 'SCOPE',
@@ -66,22 +62,6 @@ export const ActionBar = (props: IActionBarProps) => {
                             canCheck: true,
                             checked: item.key === props.groupBy.key,
                             onClick: () => props.onClick.CHANGE_SCOPE(item),
-                        }))
-                    }
-                },
-                {
-                    ...props.groupBy,
-                    key: 'GROUP_BY',
-                    subMenuProps: {
-                        items: [
-                            GROUP_BY_DAY,
-                            GROUP_BY_PROJECT,
-                            GROUP_BY_CUSTOMER,
-                        ].map(item => ({
-                            ...item,
-                            canCheck: true,
-                            checked: item.key === props.groupBy.key,
-                            onClick: () => props.onClick.CHANGE_GROUPBY(item),
                         }))
                     }
                 }
