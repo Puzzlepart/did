@@ -1,7 +1,7 @@
-import { ACTIONBAR_ICON_PROPS } from "./ACTIONBAR_ICON_PROPS";
-import { ITimeEntry } from "models";
 import { getDurationDisplay, getWeekdays } from "helpers";
+import { ITimeEntry } from "models";
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
+import { ACTIONBAR_ICON_PROPS } from "./ActionBar/ACTIONBAR_ICON_PROPS";
 
 export const GROUP_BY_DAY: IContextualMenuItem = {
     key: 'GROUP_BY_DAY',
