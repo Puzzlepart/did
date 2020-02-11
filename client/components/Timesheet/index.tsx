@@ -109,8 +109,8 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                     RELOAD: () => this._getEventData(false),
                 }}
                 disabled={{
-                    CONFIRM_WEEK: loading || closed || isConfirmed,
-                    UNCONFIRM_WEEK: loading || closed || !isConfirmed,
+                    CONFIRM_WEEK: loading || closed || isConfirmed || scope.key === 'SCOPE_MONTH',
+                    UNCONFIRM_WEEK: loading || closed || !isConfirmed || scope.key === 'SCOPE_MONTH',
                     RELOAD: loading || closed || isConfirmed,
                 }} />
         );
