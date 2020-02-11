@@ -17,27 +17,27 @@ export const ActionBar = (props: IActionBarProps) => {
             styles={{ root: { margin: '10px 0 10px 0', padding: 0 } }}
             items={[
                 {
-                    key: 'THIS_WEEK',
-                    name: 'This week',
+                    key: 'CURRENT_PERIOD',
+                    name: props.scope.data.CURRENT_PERIOD_TEXT,
                     onClick: () => props.onClick.CHANGE_PERIOD({ year: getYear(), week: getWeek() }),
                     disabled: props.period.week === getWeek(),
                 },
                 {
-                    key: 'PREV_WEEK',
+                    key: 'PREV_PERIOD',
                     iconOnly: true,
                     iconProps: { iconName: 'Back', ...ACTIONBAR_ICON_PROPS },
                     onClick: () => props.onClick.CHANGE_PERIOD(addWeek(props.period.endDateTime, -1)),
-                    title: 'Go to previous week',
+                    title: props.scope.data.PREV_PERIOD_TEXT,
                 },
                 {
-                    key: 'NEXT_WEEK',
+                    key: 'NEXT_PERIOD',
                     iconOnly: true,
                     iconProps: { iconName: 'Forward', ...ACTIONBAR_ICON_PROPS },
                     onClick: () => props.onClick.CHANGE_PERIOD(addWeek(props.period.endDateTime, +1)),
-                    title: 'Go to next week',
+                    title: props.scope.data.NEXT_PERIOD_TEXT,
                 },
                 {
-                    key: 'PICK_WEEK',
+                    key: 'PICK_PERIOD',
                     onRender: () => <WeekPicker period={props.period} onChangeWeek={props.onClick.CHANGE_PERIOD} />,
                 },
                 {
@@ -45,7 +45,7 @@ export const ActionBar = (props: IActionBarProps) => {
                     itemType: ContextualMenuItemType.Divider,
                 },
                 {
-                    key: 'WEEK_NUMBER_TEXT',
+                    key: 'PERIOD_TEXT',
                     itemType: ContextualMenuItemType.Header,
                     name: `Week ${props.period.week}`,
                 },
