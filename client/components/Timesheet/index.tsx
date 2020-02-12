@@ -12,12 +12,12 @@ import { ActionBar } from './ActionBar';
 import { GROUP_BY_DAY } from './ActionBar/GROUP_BY_DAY';
 import CONFIRM_PERIOD from './CONFIRM_PERIOD';
 import { EventList } from './EventList';
-import { EventOverview } from './EventOverview';
 import GET_EVENT_DATA, { IGetEventData } from './GET_EVENT_DATA';
 import { ITimesheetPeriod } from "./ITimesheetPeriod";
 import { ITimesheetProps } from './ITimesheetProps';
 import { ITimesheetState, TimesheetView } from './ITimesheetState';
 import { StatusBar } from './StatusBar';
+import { SummaryView } from './SummaryView';
 import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD';
 
 /**
@@ -91,7 +91,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                                     groups={groupBy.data.groups} />
                             </PivotItem>
                             <PivotItem itemKey='summary' headerText='Summary' itemIcon='List'>
-                                <EventOverview
+                                <SummaryView
                                     events={value(data, 'events', [])}
                                     enableShimmer={loading}
                                     period={period} />
