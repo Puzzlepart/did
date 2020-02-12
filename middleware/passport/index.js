@@ -1,7 +1,6 @@
 const passport = require('passport');
 const OIDCStrategy = require('passport-azure-ad').OIDCStrategy;
-const StorageService = require('../../services/storage');
-const GraphService = require('../../services/graph');
+const { StorageService, GraphService } = require('../../services');
 
 passport.serializeUser((user, done) => {
     done(null, user);

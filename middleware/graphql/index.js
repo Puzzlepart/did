@@ -2,8 +2,7 @@ const path = require('path');
 const graphql = require('express-graphql');
 const { importSchema } = require('graphql-import');
 const { makeExecutableSchema } = require('graphql-tools');
-const StorageService = require('../../services/storage');
-const GraphService = require('../../services/graph');
+const { StorageService, GraphService } = require('../../services');
 
 const schema = makeExecutableSchema({
   typeDefs: importSchema(path.join(__dirname, './schema.graphql')),
