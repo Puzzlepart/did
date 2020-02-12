@@ -101,66 +101,6 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     }
 
     /**
-     * On project clear
-     *
-    * @param {ITimeEntry} event Event
-    */
-    private _onProjectClear(event: ITimeEntry) {
-        this._clearResolve(event.id);
-        this.setState(prevState => ({
-            data: {
-                ...prevState.data,
-                events: prevState.data.events.map(e => {
-                    if (e.id === event.id) {
-                        e.project = null;
-                        e.customer = null;
-                        e.isManualMatch = false;
-                    }
-                    return e;
-                })
-            }
-        }));
-    }
-
-    /**
-     * On project ignore
-     *
-    * @param {ITimeEntry} event Event
-    */
-    private _onProjectIgnore(event: ITimeEntry) {
-        this._storeIgnore(event.id);
-        this.setState(prevState => ({
-            data: {
-                ...prevState.data,
-                events: prevState.data.events.filter(e => e.id !== event.id)
-            }
-        }));
-    }
-
-    /**
-     * On project selected
-     *
-    * @param {ITimeEntry} event Event
-    * @param {IProject} project Project
-    */
-    private _onProjectSelected(event: ITimeEntry, project: IProject) {
-        this._storeResolve(event.id, project);
-        this.setState(prevState => ({
-            data: {
-                ...prevState.data,
-                events: prevState.data.events.map(e => {
-                    if (e.id === event.id) {
-                        e.project = project;
-                        e.customer = project.customer;
-                        e.isManualMatch = true;
-                    }
-                    return e;
-                })
-            }
-        }));
-    }
-
-    /**
      * Get period
      * 
      * @param {ITimesheetPeriod} period Period
@@ -237,6 +177,51 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     };
 
     /**
+     * On project clear
+     *
+    * @param {ITimeEntry} event Event
+    */
+    private _onProjectClear(event: ITimeEntry) {
+        this._clearResolve(event.id);
+        this.setState(prevState => ({
+            data: {
+                ...prevState.data,
+                events: prevState.data.events.map(e => {
+                    if (e.id === event.id) {
+                        e.project = null;
+                        e.customer = null;
+                        e.isManualMatch = false;
+                    }
+                    return e;
+                })
+            }
+        }));
+    }
+
+    /**
+     * On project selected
+     *
+    * @param {ITimeEntry} event Event
+    * @param {IProject} project Project
+    */
+    private _onProjectSelected(event: ITimeEntry, project: IProject) {
+        this._storeResolve(event.id, project);
+        this.setState(prevState => ({
+            data: {
+                ...prevState.data,
+                events: prevState.data.events.map(e => {
+                    if (e.id === event.id) {
+                        e.project = project;
+                        e.customer = project.customer;
+                        e.isManualMatch = true;
+                    }
+                    return e;
+                })
+            }
+        }));
+    }
+
+    /**
      * Get stored resolves from local storage
      *
     * @param {string} eventId Event id
@@ -292,6 +277,21 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
         let storedIgnores = this._store.get(this.state.period.ignoredKey);
         if (!storedIgnores) return [];
         return storedIgnores;
+    }
+
+    /**
+     * On project ignore
+     *
+    * @param {ITimeEntry} event Event
+    */
+    private _onProjectIgnore(event: ITimeEntry) {
+        this._storeIgnore(event.id);
+        this.setState(prevState => ({
+            data: {
+                ...prevState.data,
+                events: prevState.data.events.filter(e => e.id !== event.id)
+            }
+        }));
     }
 
     /**
