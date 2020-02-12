@@ -45,7 +45,7 @@ const CreateColumns = (period: ITimesheetPeriod) => {
     return [
         col('label', '', { minWidth: 50, maxWidth: 270, isMultiline: true }, (row: any) => <LabelColumn row={row} />),
         ...Array.from(Array(7).keys()).map(i => {
-            const day = startOfWeek(undefined, undefined, period.startDateTime).add(i as moment.DurationInputArg1, 'days' as moment.DurationInputArg2);
+            const day = startOfWeek(period.startDateTime).add(i as moment.DurationInputArg1, 'days' as moment.DurationInputArg2);
             return col(day.format('L'), day.format('ddd Do'), { maxWidth: 70, minWidth: 70 });
         }),
         col('sum', 'Sum')

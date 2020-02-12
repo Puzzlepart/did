@@ -2,6 +2,8 @@ import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { IGetEventData } from './GET_EVENT_DATA';
 import { ITimesheetPeriod } from './ITimesheetPeriod';
 
+export type TimesheetView = 'overview' | 'summary' | 'allocation';
+
 export interface ITimesheetState {
     /**
      * Data loading
@@ -11,8 +13,7 @@ export interface ITimesheetState {
     /**
      * The selected view
      */
-    selectedView?: string;
-
+    selectedView?: TimesheetView;
 
     /**
      * Period
