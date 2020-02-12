@@ -44,8 +44,7 @@ GraphService.prototype.getUserPhoto = async function () {
       .get();
     return await utils.blobToBase64(blob);
   } catch (error) {
-    console.log(error);
-    throw new Error();
+    return null;
   }
 };
 
