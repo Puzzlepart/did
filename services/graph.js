@@ -4,9 +4,9 @@ const stripHtml = require("string-strip-html");
 const utils = require('../utils');
 const log = require('debug')('services/graph');
 
-function GraphService(req) {
+function GraphService(req, oauthToken) {
   this.req = req;
-  this.oauthToken = this.req.user.oauthToken;
+  this.oauthToken = oauthToken || this.req.user.oauthToken;
 }
 
 /**
@@ -32,6 +32,23 @@ GraphService.prototype.getClient = function () {
   const client = require('@microsoft/microsoft-graph-client').Client.init({ authProvider: (done) => { done(null, this.oauthToken.access_token); } });
   return client;
 }
+
+/**
+ * Get user photo
+ */
+GraphService.prototype.getUserPhoto = async function () {
+  try {
+    log('Querying Graph /me/photo/$value');
+    const blob = await this.getClient()
+      .api('/me/photo/$value')
+      .get();
+    return await utils.blobToBase64(blob);
+  } catch (error) {
+    console.log(error);
+    throw new Error();
+  }
+};
+
 
 /**
  * Get events for the specified week
