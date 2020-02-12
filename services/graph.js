@@ -34,7 +34,7 @@ GraphService.prototype.getClient = function () {
 }
 
 /**
- * Get user photo
+ * Get user photo as base64 string
  */
 GraphService.prototype.getUserPhoto = async function () {
   try {
@@ -42,7 +42,8 @@ GraphService.prototype.getUserPhoto = async function () {
     const blob = await this.getClient()
       .api('/me/photo/$value')
       .get();
-    return await utils.blobToBase64(blob);
+    let base64 = await utils.blobToBase64(blob);
+    return `data:image/jpg;base64,${base64}`;
   } catch (error) {
     return null;
   }
