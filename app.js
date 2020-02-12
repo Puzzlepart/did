@@ -46,6 +46,7 @@ app.use((req, res, next) => {
   if (req.user && req.user.data) {
     res.locals.user = {
       ...req.user.profile,
+      photo: req.user.photo,
       role: req.user.data.role,
       isAdmin: ['Admin', 'Invoice Manager'].indexOf(req.user.data.role) !== -1,
     };

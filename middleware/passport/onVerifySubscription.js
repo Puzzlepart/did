@@ -1,5 +1,4 @@
 const StorageService = require('../../services/storage');
-const GraphService = require('../../services/graph');
 
 async function onVerifySubscription(_iss, _sub, profile, _accessToken, _refreshToken, params, done) {
     if (!profile.oid) {
@@ -20,8 +19,6 @@ async function onVerifySubscription(_iss, _sub, profile, _accessToken, _refreshT
     } catch (error) {
         done(error, null);
     }
-    let a = await new GraphService(undefined, params).getUserPhoto();
-    console.log(a);
     return done(null, { profile, oauthToken: params });
 }
 

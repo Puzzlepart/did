@@ -1,6 +1,7 @@
 const passport = require('passport');
 const OIDCStrategy = require('passport-azure-ad').OIDCStrategy;
 const StorageService = require('../../services/storage');
+const GraphService = require('../../services/graph');
 
 passport.serializeUser((user, done) => {
     done(null, user);
@@ -10,6 +11,7 @@ passport.deserializeUser(async (user, done) => {
     if (!user.data) {
         user.data = await new StorageService(user.profile._json.tid).getUser(user.profile.oid);
     } if (user.data) {
+        user.photo = await new GraphService(undefined, user.oauthToken).getUserPhoto();
         done(null, user);
     } else {
         let error = new Error();
