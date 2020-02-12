@@ -3,7 +3,7 @@ const findBestMatch = require('string-similarity').findBestMatch;
 const log = require('debug')('middleware/graphql/resolvers/query/eventData');
 
 /**
- * Get project best match
+ * Get project best match using string-similarity findBestMatch
  * 
  * @param {*} projects 
  * @param {*} customer 
@@ -13,7 +13,7 @@ function getProjectSuggestion(projects, customer, projectKey) {
     try {
         log('(getProjectSuggestion) Finding best match for [%s]', projectKey);
         let customerProjects = projects.filter(p => p.customerKey === customer.id);
-        log('(getProjectSuggestion) Found [%s] projects for customer [%s]', customer.id);
+        log('(getProjectSuggestion) Found [%s] projects for customer [%s]', customerProjects.length, customer.id);
         let projectKeys = customerProjects.map(p => p.id.split(' ')[1]);
         log('(getProjectSuggestion) Finding best matching among [%s] for [%s]', JSON.stringify(projectKeys), projectKey);
         let sm = findBestMatch(projectKey, projectKeys);
