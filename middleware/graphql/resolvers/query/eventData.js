@@ -30,9 +30,7 @@ function getProjectSuggestion(projects, customer, projectKey) {
 }
 
 /**
- * Find match
- * 
- * First looking in categories, then in
+ * Find project match in title/subject/categories
  * 
  * @param {*} content 
  * @param {*} categories 
