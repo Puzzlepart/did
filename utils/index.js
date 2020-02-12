@@ -38,6 +38,9 @@ module.exports = {
         return moment(date).month() + 1;
     },
 
+    /**
+     * Converts a blob to a base64 string
+     */
     blobToBase64: async (blob) => {
         var buffer = await blob.arrayBuffer();
         return Buffer.from(buffer).toString('base64');
