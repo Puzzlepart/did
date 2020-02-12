@@ -1,4 +1,4 @@
-export interface IEventViewPeriod {
+export interface ITimesheetPeriod {
     week: number;
     year: number;
     startDateTime?: string;

@@ -9,7 +9,7 @@ import { GROUP_BY_PROJECT } from './GROUP_BY_PROJECT';
 import { IActionBarProps } from './IActionBarProps';
 import { WeekPicker } from './WeekPicker';
 
-export const ActionBar = ({ onClick, disabled, period, groupBy, onChangeWeek, onGroupByChanged }: IActionBarProps) => {
+export const ActionBar = ({ onClick, disabled, period, groupBy, onChangePeriod: onChangeWeek, onGroupByChanged }: IActionBarProps) => {
     return (
         <CommandBar
             styles={{ root: { margin: '10px 0 10px 0', padding: 0 } }}
@@ -32,7 +32,6 @@ export const ActionBar = ({ onClick, disabled, period, groupBy, onChangeWeek, on
                     iconOnly: true,
                     iconProps: { iconName: 'Forward', ...ACTIONBAR_ICON_PROPS },
                     onClick: () => onChangeWeek(addWeek(period.endDateTime, +1)),
-                    disabled: period.week === getWeek(),
                     title: 'Go to next week',
                 },
                 {

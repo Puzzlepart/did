@@ -143,7 +143,7 @@ export function getYear(dateIso?: string): number {
  */
 export function addWeek(dateIso: string, unit: number) {
     let date = moment(dateIso);
-    let newDate = date.add('weeks', unit);
+    let newDate = date.add(unit as moment.DurationInputArg1, 'weeks' as moment.DurationInputArg2);
     return { year: newDate.year(), week: newDate.week() };
 }
 

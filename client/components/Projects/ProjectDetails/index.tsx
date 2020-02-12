@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks';
-import { EventList } from 'components/EventView/EventList';
+import { EventList } from 'components/Timesheet/EventList';
 import { currencyDisplay, getValueTyped as value } from 'helpers';
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';

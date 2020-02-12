@@ -11,7 +11,7 @@ import { UserAllocation } from 'components/UserAllocation';
 export const AdminUserView = ({ userId }: IAdminUserViewProps) => {
     return (
         <div>
-            <UserAllocation resourceId={userId} charts={{ 'project.name': 'Allocation per project 2019', 'customer.name': 'Allocation per customer 2019' }} />
+            <UserAllocation resourceId={userId} charts={{ 'project.name': 'Allocation per project', 'customer.name': 'Allocation per customer' }} />
         </div>
     );
 }

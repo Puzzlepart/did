@@ -1,7 +1,7 @@
 body {
   padding-top: 20px;
   margin-top: 63px;
-  font-family: "Segoe UI Light", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Segoe UI Light", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
   font-size: 100%; }
 
 .alert-pre {
@@ -46,6 +46,35 @@ h5 {
   list-style-type: none;
   margin: 0;
   padding: 0; }
+
+#app-admin .react-autosuggest__container {
+  position: relative; }
+
+#app-admin .react-autosuggest__input--focused {
+  outline: none; }
+
+#app-admin .react-autosuggest__suggestions-container {
+  display: none; }
+
+#app-admin .react-autosuggest__suggestions-container--open {
+  display: block;
+  position: absolute;
+  top: 35px;
+  width: 300px;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 2; }
+
+#app-admin .react-autosuggest__suggestions-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none; }
+
+#app-admin .react-autosuggest__suggestion {
+  cursor: pointer;
+  padding: 10px 20px; }
 
 .c-eventview .c-eventview-actions {
   margin: 10px 0 10px 0; }
@@ -113,7 +142,7 @@ h5 {
 .ms-MessageBar .ms-MessageBar-text {
   font-size: 14px; }
 
-#app-eventview .c-eventview-section-content .row .highcharts-container {
+#app-timesheet .c-eventview-section-content .row .highcharts-container {
   margin-top: 30px; }
 
 .ms-DetailsRow-check,

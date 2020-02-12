@@ -1,9 +1,9 @@
 import { ITimeEntry } from 'models';
-import { IEventViewPeriod } from '../IEventViewPeriod';
+import { ITimesheetPeriod } from '../ITimesheetPeriod';
 
 export interface IEventOverviewProps {
     events: ITimeEntry[];
-    period: IEventViewPeriod;
+    period: ITimesheetPeriod;
     isConfirmed?: boolean;
     enableShimmer?: boolean;
 }

@@ -14,22 +14,22 @@ import CONFIRM_PERIOD from './CONFIRM_PERIOD';
 import { EventList } from './EventList';
 import { EventOverview } from './EventOverview';
 import GET_EVENT_DATA, { IGetEventData } from './GET_EVENT_DATA';
-import { IEventViewPeriod } from "./IEventViewPeriod";
-import { IEventViewProps } from './IEventViewProps';
-import { IEventViewState } from './IEventViewState';
+import { ITimesheetPeriod } from "./ITimesheetPeriod";
+import { ITimesheetProps } from './ITimesheetProps';
+import { ITimesheetState } from './ITimesheetState';
 import { StatusBar } from './StatusBar';
 import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD';
 
 /**
- * @component EventView
+ * @component Timesheet
  * @description 
  */
-export class EventView extends React.Component<IEventViewProps, IEventViewState> {
+export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState> {
     private _store: PnPClientStore;
     private _resolvedKey = 'resolved_projects_{0}_{1}';
     private _ignoredKey = 'ignored_events_{0}_{1}';
 
-    constructor(props: IEventViewProps) {
+    constructor(props: ITimesheetProps) {
         super(props);
         this.state = {
             period: this._getPeriod(),
@@ -47,9 +47,9 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
         const { loading, period, groupBy, isConfirmed, data } = this.state;
 
         return (
-            <div className='c-eventview'>
-                <div className='c-eventview-section-container'>
-                    <div className='c-eventview-section-content'>
+            <div className='c-Timesheet'>
+                <div className='c-Timesheet-section-container'>
+                    <div className='c-Timesheet-section-content'>
                         <Pivot defaultSelectedKey={this.state.selectedView} onLinkClick={item => this.setState({ selectedView: item.props.itemKey })}>
                             <PivotItem itemKey='overview' headerText='Overview' itemIcon='CalendarWeek'>
                                 {this._renderActionBar()}
@@ -97,7 +97,7 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
             <ActionBar
                 period={period}
                 groupBy={groupBy}
-                onChangeWeek={this._onChangeWeek.bind(this)}
+                onChangePeriod={this._onChangePeriod.bind(this)}
                 onGroupByChanged={this._onGroupByChanged.bind(this)}
                 onClick={{
                     CONFIRM_WEEK: this._onConfirmWeek.bind(this),
@@ -175,29 +175,31 @@ export class EventView extends React.Component<IEventViewProps, IEventViewState>
     /**
      * Get period
      * 
-     * @param {IEventViewPeriod} period Period
+     * @param {ITimesheetPeriod} period Period
      */
-    private _getPeriod(period?: IEventViewPeriod): IEventViewPeriod {
-        let start = period ? startOfWeek(period.week, period.year) : startOfWeek();
-        let end = period ? endOfWeek(period.week, period.year) : endOfWeek();
+    private _getPeriod(period?: ITimesheetPeriod): ITimesheetPeriod {
+        let [, start] = document.location.hash.substring(1).split('=');
+        let periodStart = period ? startOfWeek(period.week, period.year) : startOfWeek(undefined, undefined, start);
+        let periodEnd = period ? endOfWeek(period.week, period.year) : endOfWeek(undefined, undefined, start);
         return {
-            week: period ? period.week : getWeek(),
-            year: period ? period.year : getYear(),
-            startDateTime: start.toISOString(),
-            endDateTime: end.toISOString(),
-            ignoredKey: format(this._ignoredKey, start.unix(), end.unix()),
-            resolvedKey: format(this._resolvedKey, start.unix(), end.unix()),
+            week: period ? period.week : getWeek(start),
+            year: period ? period.year : getYear(start),
+            startDateTime: periodStart.toISOString(),
+            endDateTime: periodEnd.toISOString(),
+            ignoredKey: format(this._ignoredKey, periodStart.unix(), periodEnd.unix()),
+            resolvedKey: format(this._resolvedKey, periodStart.unix(), periodEnd.unix()),
         };
     }
 
     /**
     * On change week
     *
-    * @param {IEventViewPeriod} period Period
+    * @param {ITimesheetPeriod} period Period
     */
-    private _onChangeWeek(period: IEventViewPeriod) {
+    private _onChangePeriod(period: ITimesheetPeriod) {
         if (JSON.stringify(period) === JSON.stringify(this.state.period)) return;
         period = this._getPeriod(period);
+        document.location.hash = `week=${period.startDateTime}`;
         this.setState({ period }, () => this._getEventData(false));
     };
 

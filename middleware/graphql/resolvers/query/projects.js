@@ -19,6 +19,7 @@ async function projects(_obj, args, context) {
         ...p,
         customer: _.find(customers, c => c.id === p.id.split(' ')[0]),
     }));
+    projects = projects.filter(p => p.customer);
     return projects;
 }
 
