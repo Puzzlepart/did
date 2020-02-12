@@ -50,9 +50,23 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
             <div className='c-Timesheet'>
                 <div className='c-Timesheet-section-container'>
                     <div className='c-Timesheet-section-content'>
+                        <ActionBar
+                            period={period}
+                            groupBy={groupBy}
+                            onClick={{
+                                ON_CHANGE_GROUP_BY: this.onChangeGroupBy.bind(this),
+                                ON_CHANGE_PERIOD: this._onChangePeriod.bind(this),
+                                CONFIRM_WEEK: this._onConfirmWeek.bind(this),
+                                UNCONFIRM_WEEK: this._onUnconfirmWeek.bind(this),
+                                RELOAD: () => this._getEventData(false),
+                            }}
+                            disabled={{
+                                CONFIRM_WEEK: loading || closed || isConfirmed,
+                                UNCONFIRM_WEEK: loading || closed || !isConfirmed,
+                                RELOAD: loading || closed || isConfirmed,
+                            }} />
                         <Pivot defaultSelectedKey={this.state.selectedView} onLinkClick={item => this.setState({ selectedView: item.props.itemKey })}>
                             <PivotItem itemKey='overview' headerText='Overview' itemIcon='CalendarWeek'>
-                                {this._renderActionBar()}
                                 <StatusBar
                                     isConfirmed={isConfirmed}
                                     events={value(data, 'events', [])}
@@ -71,14 +85,12 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                                     groups={groupBy.data.groups} />
                             </PivotItem>
                             <PivotItem itemKey='summary' headerText='Summary' itemIcon='List'>
-                                {this._renderActionBar()}
                                 <EventOverview
                                     events={value(data, 'events', [])}
                                     enableShimmer={loading}
                                     period={period} />
                             </PivotItem>
                             <PivotItem itemKey='allocation' headerText='Allocation' itemIcon='ReportDocument'>
-                                {this._renderActionBar()}
                                 <UserAllocation entries={value(data, 'events', [])} charts={{ 'project.name': 'Allocation per project', 'customer.name': 'Allocation per customer' }} />
                             </PivotItem>
                         </Pivot>
@@ -86,90 +98,6 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                 </div>
             </div>
         );
-    }
-
-    /**
-     * Render action bar
-     */
-    private _renderActionBar() {
-        const { loading, period, groupBy, isConfirmed } = this.state;
-        return (
-            <ActionBar
-                period={period}
-                groupBy={groupBy}
-                onChangePeriod={this._onChangePeriod.bind(this)}
-                onGroupByChanged={this._onGroupByChanged.bind(this)}
-                onClick={{
-                    CONFIRM_WEEK: this._onConfirmWeek.bind(this),
-                    UNCONFIRM_WEEK: this._onUnconfirmWeek.bind(this),
-                    RELOAD: () => this._getEventData(false),
-                }}
-                disabled={{
-                    CONFIRM_WEEK: loading || closed || isConfirmed,
-                    UNCONFIRM_WEEK: loading || closed || !isConfirmed,
-                    RELOAD: loading || closed || isConfirmed,
-                }} />
-        );
-    }
-
-    /**
-     * On project clear
-     *
-    * @param {ITimeEntry} event Event
-    */
-    private _onProjectClear(event: ITimeEntry) {
-        this._clearResolve(event.id);
-        this.setState(prevState => ({
-            data: {
-                ...prevState.data,
-                events: prevState.data.events.map(e => {
-                    if (e.id === event.id) {
-                        e.project = null;
-                        e.customer = null;
-                        e.isManualMatch = false;
-                    }
-                    return e;
-                })
-            }
-        }));
-    }
-
-    /**
-     * On project ignore
-     *
-    * @param {ITimeEntry} event Event
-    */
-    private _onProjectIgnore(event: ITimeEntry) {
-        this._storeIgnore(event.id);
-        this.setState(prevState => ({
-            data: {
-                ...prevState.data,
-                events: prevState.data.events.filter(e => e.id !== event.id)
-            }
-        }));
-    }
-
-    /**
-     * On project selected
-     *
-    * @param {ITimeEntry} event Event
-    * @param {IProject} project Project
-    */
-    private _onProjectSelected(event: ITimeEntry, project: IProject) {
-        this._storeResolve(event.id, project);
-        this.setState(prevState => ({
-            data: {
-                ...prevState.data,
-                events: prevState.data.events.map(e => {
-                    if (e.id === event.id) {
-                        e.project = project;
-                        e.customer = project.customer;
-                        e.isManualMatch = true;
-                    }
-                    return e;
-                })
-            }
-        }));
     }
 
     /**
@@ -208,7 +136,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
      * 
      * @param {IContextualMenuItem} groupBy Group by
      */
-    private _onGroupByChanged(groupBy: IContextualMenuItem) {
+    private onChangeGroupBy(groupBy: IContextualMenuItem) {
         this.setState({ groupBy });
     }
 
@@ -247,6 +175,51 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
         await this._getEventData();
 
     };
+
+    /**
+     * On project clear
+     *
+    * @param {ITimeEntry} event Event
+    */
+    private _onProjectClear(event: ITimeEntry) {
+        this._clearResolve(event.id);
+        this.setState(prevState => ({
+            data: {
+                ...prevState.data,
+                events: prevState.data.events.map(e => {
+                    if (e.id === event.id) {
+                        e.project = null;
+                        e.customer = null;
+                        e.isManualMatch = false;
+                    }
+                    return e;
+                })
+            }
+        }));
+    }
+
+    /**
+     * On project selected
+     *
+    * @param {ITimeEntry} event Event
+    * @param {IProject} project Project
+    */
+    private _onProjectSelected(event: ITimeEntry, project: IProject) {
+        this._storeResolve(event.id, project);
+        this.setState(prevState => ({
+            data: {
+                ...prevState.data,
+                events: prevState.data.events.map(e => {
+                    if (e.id === event.id) {
+                        e.project = project;
+                        e.customer = project.customer;
+                        e.isManualMatch = true;
+                    }
+                    return e;
+                })
+            }
+        }));
+    }
 
     /**
      * Get stored resolves from local storage
@@ -304,6 +277,21 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
         let storedIgnores = this._store.get(this.state.period.ignoredKey);
         if (!storedIgnores) return [];
         return storedIgnores;
+    }
+
+    /**
+     * On project ignore
+     *
+    * @param {ITimeEntry} event Event
+    */
+    private _onProjectIgnore(event: ITimeEntry) {
+        this._storeIgnore(event.id);
+        this.setState(prevState => ({
+            data: {
+                ...prevState.data,
+                events: prevState.data.events.filter(e => e.id !== event.id)
+            }
+        }));
     }
 
     /**

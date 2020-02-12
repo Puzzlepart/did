@@ -7,6 +7,4 @@ export interface IActionBarProps {
     disabled: TypedHash<boolean>;
     period: ITimesheetPeriod;
     groupBy?: IContextualMenuItem;
-    onChangePeriod: (period: ITimesheetPeriod) => void;
-    onGroupByChanged: (groupBy: IContextualMenuItem) => void;
 }
