@@ -1,7 +1,7 @@
 
 import { dateAdd, PnPClientStorage, PnPClientStore, TypedHash } from '@pnp/common';
 import { UserAllocation } from 'components/UserAllocation';
-import { endOfWeek, formatDate, getValueTyped as value, getWeek, getYear, startOfWeek } from 'helpers';
+import { endOfWeek, formatDate, getUrlHash, getValueTyped as value, startOfWeek } from 'helpers';
 import { IProject, ITimeEntry } from 'models';
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
@@ -12,12 +12,12 @@ import { ActionBar } from './ActionBar';
 import { GROUP_BY_DAY } from './ActionBar/GROUP_BY_DAY';
 import CONFIRM_PERIOD from './CONFIRM_PERIOD';
 import { EventList } from './EventList';
-import { EventOverview } from './EventOverview';
 import GET_EVENT_DATA, { IGetEventData } from './GET_EVENT_DATA';
 import { ITimesheetPeriod } from "./ITimesheetPeriod";
 import { ITimesheetProps } from './ITimesheetProps';
-import { ITimesheetState } from './ITimesheetState';
+import { ITimesheetState, TimesheetView } from './ITimesheetState';
 import { StatusBar } from './StatusBar';
+import { SummaryView } from './SummaryView';
 import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD';
 
 /**
@@ -44,7 +44,14 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     }
 
     public render() {
-        const { loading, period, groupBy, isConfirmed, data } = this.state;
+        const {
+            loading,
+            period,
+            groupBy,
+            selectedView,
+            isConfirmed,
+            data,
+        } = this.state;
 
         return (
             <div className='c-Timesheet'>
@@ -53,19 +60,18 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                         <ActionBar
                             period={period}
                             groupBy={groupBy}
-                            onClick={{
-                                ON_CHANGE_GROUP_BY: this.onChangeGroupBy.bind(this),
-                                ON_CHANGE_PERIOD: this._onChangePeriod.bind(this),
-                                CONFIRM_WEEK: this._onConfirmWeek.bind(this),
-                                UNCONFIRM_WEEK: this._onUnconfirmWeek.bind(this),
-                                RELOAD: () => this._getEventData(false),
-                            }}
+                            selectedView={selectedView}
+                            onChangeGroupBy={this.onChangeGroupBy.bind(this)}
+                            onChangePeriod={this._onChangePeriod.bind(this)}
+                            onConfirmWeek={this._onConfirmWeek.bind(this)}
+                            onUnconfirmWeek={this._onUnconfirmWeek.bind(this)}
+                            onReload={() => this._getEventData(false)}
                             disabled={{
                                 CONFIRM_WEEK: loading || closed || isConfirmed,
                                 UNCONFIRM_WEEK: loading || closed || !isConfirmed,
                                 RELOAD: loading || closed || isConfirmed,
                             }} />
-                        <Pivot defaultSelectedKey={this.state.selectedView} onLinkClick={item => this.setState({ selectedView: item.props.itemKey })}>
+                        <Pivot defaultSelectedKey={this.state.selectedView} onLinkClick={item => this.setState({ selectedView: item.props.itemKey as TimesheetView })}>
                             <PivotItem itemKey='overview' headerText='Overview' itemIcon='CalendarWeek'>
                                 <StatusBar
                                     isConfirmed={isConfirmed}
@@ -85,7 +91,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                                     groups={groupBy.data.groups} />
                             </PivotItem>
                             <PivotItem itemKey='summary' headerText='Summary' itemIcon='List'>
-                                <EventOverview
+                                <SummaryView
                                     events={value(data, 'events', [])}
                                     enableShimmer={loading}
                                     period={period} />
@@ -105,17 +111,13 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
      * 
      * @param {ITimesheetPeriod} period Period
      */
-    private _getPeriod(period?: ITimesheetPeriod): ITimesheetPeriod {
-        let [, start] = document.location.hash.substring(1).split('=');
-        let periodStart = period ? startOfWeek(period.week, period.year) : startOfWeek(undefined, undefined, start);
-        let periodEnd = period ? endOfWeek(period.week, period.year) : endOfWeek(undefined, undefined, start);
+    private _getPeriod(period: ITimesheetPeriod = {}): ITimesheetPeriod {
+        if (!period.startDateTime) period.startDateTime = startOfWeek(getUrlHash()['week']);
+        if (!period.endDateTime) period.endDateTime = endOfWeek(period.startDateTime || getUrlHash()['week']);
         return {
-            week: period ? period.week : getWeek(start),
-            year: period ? period.year : getYear(start),
-            startDateTime: periodStart.toISOString(),
-            endDateTime: periodEnd.toISOString(),
-            ignoredKey: format(this._ignoredKey, periodStart.unix(), periodEnd.unix()),
-            resolvedKey: format(this._resolvedKey, periodStart.unix(), periodEnd.unix()),
+            ...period,
+            ignoredKey: format(this._ignoredKey, period.startDateTime.unix(), period.endDateTime.unix()),
+            resolvedKey: format(this._resolvedKey, period.startDateTime.unix(), period.endDateTime.unix()),
         };
     }
 
@@ -127,7 +129,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     private _onChangePeriod(period: ITimesheetPeriod) {
         if (JSON.stringify(period) === JSON.stringify(this.state.period)) return;
         period = this._getPeriod(period);
-        document.location.hash = `week=${period.startDateTime}`;
+        document.location.hash = `week=${period.startDateTime.toISOString()}`;
         this.setState({ period }, () => this._getEventData(false));
     };
 
@@ -167,10 +169,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
         this.setState({ loading: true });
         await graphql.mutate({
             mutation: UNCONFIRM_PERIOD,
-            variables: {
-                startDateTime: this.state.period.startDateTime,
-                endDateTime: this.state.period.endDateTime,
-            },
+            variables: this.state.period,
         });
         await this._getEventData();
 
@@ -312,10 +311,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
         if (!skipLoading) this.setState({ loading: true });
         const { data: { eventData, weeks } } = await graphql.query({
             query: GET_EVENT_DATA,
-            variables: {
-                startDateTime: this.state.period.startDateTime,
-                endDateTime: this.state.period.endDateTime
-            },
+            variables: this.state.period,
             fetchPolicy,
         });
         let data: IGetEventData = { ...eventData, weeks };

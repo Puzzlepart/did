@@ -3,38 +3,12 @@ import { IColumn, List } from 'components/List';
 import { formatDate, startOfWeek } from 'helpers';
 import { IProject, ITimeEntry } from 'models';
 import * as moment from 'moment-timezone';
-import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import * as React from 'react';
 import * as _ from 'underscore';
 import { generateColumn as col } from 'utils/generateColumn';
 import { ITimesheetPeriod } from '../ITimesheetPeriod';
-import { IEventOverviewProps } from './IEventOverviewProps';
-
-/**
- * @component LabelColumn
- * @description 
- */
-const LabelColumn = ({ row }) => {
-    if (row.label) {
-        return (
-            <div>
-                {row.label}
-            </div>
-        );
-    } else {
-        return (
-            <>
-                <div style={{ display: 'inline-block', verticalAlign: 'top', width: 30 }}>
-                    <Icon iconName={row.project.icon || 'Page'} styles={{ root: { fontSize: 18 } }} />
-                </div>
-                <div style={{ display: 'inline-block', verticalAlign: 'top', width: 'calc(100% - 30px)' }}>
-                    <div>{row.project.name}</div>
-                    <div style={{ fontSize: '7pt' }}>for {row.customer.name}</div>
-                </div>
-            </>
-        );
-    }
-}
+import { ISummaryViewProps } from './ISummaryViewProps';
+import { LabelColumn } from './LabelColumn';
 
 /**
  * Create columns
@@ -45,7 +19,7 @@ const CreateColumns = (period: ITimesheetPeriod) => {
     return [
         col('label', '', { minWidth: 50, maxWidth: 270, isMultiline: true }, (row: any) => <LabelColumn row={row} />),
         ...Array.from(Array(7).keys()).map(i => {
-            const day = startOfWeek(undefined, undefined, period.startDateTime).add(i as moment.DurationInputArg1, 'days' as moment.DurationInputArg2);
+            const day = startOfWeek(period.startDateTime).add(i as moment.DurationInputArg1, 'days' as moment.DurationInputArg2);
             return col(day.format('L'), day.format('ddd Do'), { maxWidth: 70, minWidth: 70 });
         }),
         col('sum', 'Sum')
@@ -94,10 +68,10 @@ const GenerateTotalRow = (events: ITimeEntry[], columns: IColumn[]) => {
 }
 
 /**
- * @component EventOverview
+ * @component SummaryView
  * @description
  */
-export const EventOverview = (props: IEventOverviewProps) => {
+export const SummaryView = (props: ISummaryViewProps) => {
     const columns = CreateColumns(props.period);
     const events = props.events.filter(e => !!e.project);
     const projects = _.unique(events.map(e => e.project), p => p.id);

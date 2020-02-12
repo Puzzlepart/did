@@ -1,8 +1,8 @@
+import * as moment from 'moment-timezone';
+
 export interface ITimesheetPeriod {
-    week: number;
-    year: number;
-    startDateTime?: string;
-    endDateTime?: string;
+    startDateTime?: moment.Moment;
+    endDateTime?: moment.Moment;
     ignoredKey?: string;
     resolvedKey?: string;
 }
