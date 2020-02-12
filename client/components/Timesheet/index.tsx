@@ -50,9 +50,23 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
             <div className='c-Timesheet'>
                 <div className='c-Timesheet-section-container'>
                     <div className='c-Timesheet-section-content'>
+                        <ActionBar
+                            period={period}
+                            groupBy={groupBy}
+                            onClick={{
+                                ON_CHANGE_GROUP_BY: this.onChangeGroupBy.bind(this),
+                                ON_CHANGE_PERIOD: this._onChangePeriod.bind(this),
+                                CONFIRM_WEEK: this._onConfirmWeek.bind(this),
+                                UNCONFIRM_WEEK: this._onUnconfirmWeek.bind(this),
+                                RELOAD: () => this._getEventData(false),
+                            }}
+                            disabled={{
+                                CONFIRM_WEEK: loading || closed || isConfirmed,
+                                UNCONFIRM_WEEK: loading || closed || !isConfirmed,
+                                RELOAD: loading || closed || isConfirmed,
+                            }} />
                         <Pivot defaultSelectedKey={this.state.selectedView} onLinkClick={item => this.setState({ selectedView: item.props.itemKey })}>
                             <PivotItem itemKey='overview' headerText='Overview' itemIcon='CalendarWeek'>
-                                {this._renderActionBar()}
                                 <StatusBar
                                     isConfirmed={isConfirmed}
                                     events={value(data, 'events', [])}
@@ -71,44 +85,18 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                                     groups={groupBy.data.groups} />
                             </PivotItem>
                             <PivotItem itemKey='summary' headerText='Summary' itemIcon='List'>
-                                {this._renderActionBar()}
                                 <EventOverview
                                     events={value(data, 'events', [])}
                                     enableShimmer={loading}
                                     period={period} />
                             </PivotItem>
                             <PivotItem itemKey='allocation' headerText='Allocation' itemIcon='ReportDocument'>
-                                {this._renderActionBar()}
                                 <UserAllocation entries={value(data, 'events', [])} charts={{ 'project.name': 'Allocation per project', 'customer.name': 'Allocation per customer' }} />
                             </PivotItem>
                         </Pivot>
                     </div>
                 </div>
             </div>
-        );
-    }
-
-    /**
-     * Render action bar
-     */
-    private _renderActionBar() {
-        const { loading, period, groupBy, isConfirmed } = this.state;
-        return (
-            <ActionBar
-                period={period}
-                groupBy={groupBy}
-                onChangePeriod={this._onChangePeriod.bind(this)}
-                onGroupByChanged={this._onGroupByChanged.bind(this)}
-                onClick={{
-                    CONFIRM_WEEK: this._onConfirmWeek.bind(this),
-                    UNCONFIRM_WEEK: this._onUnconfirmWeek.bind(this),
-                    RELOAD: () => this._getEventData(false),
-                }}
-                disabled={{
-                    CONFIRM_WEEK: loading || closed || isConfirmed,
-                    UNCONFIRM_WEEK: loading || closed || !isConfirmed,
-                    RELOAD: loading || closed || isConfirmed,
-                }} />
         );
     }
 
@@ -208,7 +196,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
      * 
      * @param {IContextualMenuItem} groupBy Group by
      */
-    private _onGroupByChanged(groupBy: IContextualMenuItem) {
+    private onChangeGroupBy(groupBy: IContextualMenuItem) {
         this.setState({ groupBy });
     }
 
