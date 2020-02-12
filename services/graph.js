@@ -20,7 +20,7 @@ GraphService.prototype.removeIgnoredEvents = function (events) {
   let ignoreRegex = /[(\[\{]IGNORE[)\]\}]/gi;
   return events.filter(evt => {
     let categories = evt.categories.join(' ').toLowerCase();
-    let content = [evt.title, evt.body, evt.categories.join(' ')].join(' ').toLowerCase();
+    let content = [evt.title, evt.body, categories].join(' ').toLowerCase();
     return content.match(ignoreRegex) == null && categories.indexOf('ignore') === -1;
   });
 }
