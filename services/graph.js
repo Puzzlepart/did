@@ -12,12 +12,16 @@ function GraphService(req) {
 /**
  * Renoves ignored events from the collection
  * 
+ * Checks (case-insensitive) if title, body or categories contains (IGNORE), {IGNORE} or [IGNORE] or if there's a category ignore
+ * 
  * @param {*} events 
  */
 GraphService.prototype.removeIgnoredEvents = function (events) {
+  let ignoreRegex = /[(\[\{]IGNORE[)\]\}]/gi;
   return events.filter(evt => {
-    let content = [evt.title, evt.body, JSON.stringify(evt.categories)].join(' ').toUpperCase();
-    return content.indexOf('IGNORE') === -1;
+    let categories = evt.categories.join(' ').toLowerCase();
+    let content = [evt.title, evt.body, categories].join(' ').toLowerCase();
+    return content.match(ignoreRegex) == null && categories.indexOf('ignore') === -1;
   });
 }
 
