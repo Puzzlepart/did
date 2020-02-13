@@ -47,7 +47,7 @@ app.use((req, res, next) => {
     res.locals.user = {
       ...req.user.profile,
       role: req.user.data.role,
-      isAdmin: ['Admin', 'Invoice Manager'].indexOf(req.user.data.role) !== -1,
+      isAdmin: req.user.data.role === 'Admin',
     };
   }
   next();
