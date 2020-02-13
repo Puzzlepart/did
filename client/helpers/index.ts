@@ -12,7 +12,9 @@ require('twix');
 export function getDurationDisplay(minutes: number, hours?: number): string {
     let hrs = hours ? Math.floor(hours) : Math.floor(minutes / 60);
     let mins = hours ? ((hours % 1) * 60) : minutes % 60;
-    return [(`${hrs}h`), (`${mins}min`)].join(' ');
+    return mins === 0 ? `${hrs}h` : hrs === 0
+        ? `${mins}min`
+        : [(`${hrs}h`), (`${mins}min`)].join(' ');
 }
 
 /**

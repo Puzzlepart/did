@@ -1,7 +1,8 @@
 body {
-  padding-top: 4.5rem;
+  padding-top: 20px;
+  margin-top: 63px;
   font-family: "Segoe UI Light", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-  font-size: 14px; }
+  font-size: 100%; }
 
 .alert-pre {
   word-wrap: break-word;
@@ -9,26 +10,26 @@ body {
   white-space: pre-wrap; }
 
 .navbar-nav .nav-link {
-  font-size: 10pt;
+  font-size: 1em;
   letter-spacing: 1px; }
 
 h1 {
-  font-size: 36pt;
+  font-size: 3em;
   margin: 15px 0 15px 0; }
 
 h2 {
-  font-size: 24pt;
+  font-size: 2.2em;
   margin: 15px 0 15px 0; }
 
 h3 {
-  font-size: 18pt;
+  font-size: 1.8em;
   margin: 15px 0 15px 0; }
 
 h4 {
-  font-size: 14pt; }
+  font-size: 1.4em; }
 
 h5 {
-  font-size: 10pt; }
+  font-size: 1.2em; }
 
 .react-autosuggest__suggestion-match {
   color: #007bff; }
@@ -83,12 +84,26 @@ h5 {
   .c-eventview .c-eventview-statusbar .c-usermessage {
     margin: 5px 0; }
 
-.c-eventview .ms-List-cell .ms-DetailsRow {
-  min-height: 53px; }
-  .c-eventview .ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell > span,
-  .c-eventview .ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell > a {
-    vertical-align: middle;
-    vertical-align: -webkit-baseline-middle; }
+.c-eventview .ms-MessageBar.ms-MessageBar-multiline {
+  background: #f1f1f1; }
+  .c-eventview .ms-MessageBar.ms-MessageBar-multiline.ms-MessageBar--warning {
+    background-color: rgba(255, 200, 10, 0.2); }
+
+.c-eventview .ms-MessageBar-icon {
+  display: flex;
+  align-self: center; }
+
+.c-eventview .ms-List-page div.ms-List-cell {
+  min-height: 0; }
+  .c-eventview .ms-List-page div.ms-List-cell .ms-DetailsRow {
+    min-height: 45px; }
+    .c-eventview .ms-List-page div.ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell {
+      font-size: 1.2em;
+      display: flex;
+      align-items: center; }
+      .c-eventview .ms-List-page div.ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell span,
+      .c-eventview .ms-List-page div.ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell a {
+        vertical-align: middle; }
 
 .c-resolveproject-modal {
   padding: 20px;
@@ -137,19 +152,39 @@ h5 {
 
 .ms-DetailsHeader-cellName,
 .ms-GroupHeader-title {
-  font-weight: 100;
-  font-size: 11pt;
+  font-weight: normal;
+  font-size: 1.2em;
   letter-spacing: 1px; }
 
-.ms-DetailsRow-cell span,
-.ms-DetailsRow-cell a {
-  font-size: 12px; }
+.ms-DetailsRow-cell {
+  background: transparent;
+  font-size: 1.2em;
+  align-self: center;
+  padding: 0px 12px; }
+  .ms-DetailsRow-cell span,
+  .ms-DetailsRow-cell a {
+    font-size: 1em; }
 
 .ms-FocusZone.ms-DetailsRow {
   border: none; }
 
-div.ms-List-page .ms-GroupedList-group {
-  margin-top: 20px; }
+div.ms-List-page {
+  background: transparent; }
+  div.ms-List-page .ms-GroupedList-group {
+    margin-top: 1.5em;
+    padding-bottom: 1em;
+    background: #fafafc; }
+    div.ms-List-page .ms-GroupedList-group .ms-GroupHeader {
+      border-bottom: 0px; }
+      div.ms-List-page .ms-GroupedList-group .ms-GroupHeader:hover {
+        background: #fafafc; }
+    div.ms-List-page .ms-GroupedList-group .ms-List-cell .ms-DetailsRow {
+      background: transparent; }
+      div.ms-List-page .ms-GroupedList-group .ms-List-cell .ms-DetailsRow:hover {
+        background: #fafafc; }
 
 h3.panel-title a {
   color: #444; }
+
+button:focus {
+  outline: none; }

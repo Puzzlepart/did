@@ -19,11 +19,11 @@ export const StatusBar = ({ loading, isConfirmed, events, ignoredEvents, onClear
                     <div className="row">
                         <div className="col-sm"
                             hidden={isConfirmed}>
-                            <UserMessage text={`You have a total of ${getDurationDisplay(totalDuration)} this week`} iconName='ReminderTime' />
+                            <UserMessage text={`You have a total of **${getDurationDisplay(totalDuration)}** this week`} iconName='ReminderTime' />
                         </div>
                         <div className="col-sm" hidden={totalDuration - matchedDuration === 0 || isConfirmed}>
                             <UserMessage
-                                text={`You've **${getDurationDisplay(totalDuration - matchedDuration)}** that are not matched.`}
+                                text={`You have **${getDurationDisplay(totalDuration - matchedDuration)}** that are not matched.`}
                                 type={MessageBarType.warning}
                                 iconName='BufferTimeBoth' />
                         </div>
@@ -43,7 +43,7 @@ export const StatusBar = ({ loading, isConfirmed, events, ignoredEvents, onClear
                             <UserMessage
                                 type={MessageBarType.info}
                                 iconName='StatusCircleErrorX'>
-                                <p>You have {ignoredEvents.length} ignored event(s). <a href="#" onClick={onClearIgnores}>Click to undo</a>.</p>
+                                <p>You have {ignoredEvents.length} ignored event(s). <a href="#" onClick={onClearIgnores}>Click to undo</a></p>
                             </UserMessage>
                         </div>
                     </div>

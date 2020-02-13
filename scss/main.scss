@@ -1,4 +1,5 @@
 @import "./layout.scss";
+@import "./theme.scss";
 @import "./react-autosuggest.scss";
 @import "../client/components/AdminView/AdminView.scss";
 @import "../client/components/Timesheet/Timesheet.scss";
@@ -15,15 +16,20 @@
 
 .ms-DetailsHeader-cellName,
 .ms-GroupHeader-title {
-  font-weight: 100;
-  font-size: 11pt;
+  font-weight: normal;
+  font-size: 1.2em;
   letter-spacing: 1px;
 }
 
 .ms-DetailsRow-cell {
+  background: transparent;
+  font-size: 1.2em;
+  align-self: center;
+  padding: 0px 12px;
+
   span,
   a {
-    font-size: 12px;
+    font-size: 1em;
   }
 }
 
@@ -31,10 +37,37 @@
   border: none;
 }
 
-div.ms-List-page .ms-GroupedList-group {
-  margin-top: 20px;
+div.ms-List-page {
+  background: transparent;
+
+  .ms-GroupedList-group {
+    margin-top: 1.5em;
+    padding-bottom: 1em;
+    background: $lightgray_background;
+
+    .ms-GroupHeader {
+      border-bottom: 0px;
+      &:hover{
+        background: $lightgray_background;
+      }
+    }
+
+    .ms-List-cell {
+      .ms-DetailsRow {
+        background: transparent;
+
+        &:hover {
+          background: $lightgray_background;
+        }
+      }
+    }
+  }
 }
 
 h3.panel-title a {
   color: #444;
+}
+
+button:focus {
+  outline: none;
 }
