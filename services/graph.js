@@ -36,10 +36,11 @@ GraphService.prototype.getClient = function () {
 /**
  * Get events for the specified week
  * 
- * @param {*} startDateTime 
- * @param {*} endDateTime 
+ * @param {*} startDateTime  Start time (iso)
+ * @param {*} endDateTime End time (iso)
+ * @param {*} maxDurationHrs Max duration in hours
  */
-GraphService.prototype.getEvents = async function (startDateTime, endDateTime) {
+GraphService.prototype.getEvents = async function (startDateTime, endDateTime, maxDurationHrs) {
   try {
     log('Querying Graph /me/calendar/calendarView: %s', JSON.stringify({ startDateTime, endDateTime }));
     const { value } = await this.getClient()
@@ -67,12 +68,13 @@ GraphService.prototype.getEvents = async function (startDateTime, endDateTime) {
         durationMinutes: utils.getDurationMinutes(evt.start.dateTime, evt.end.dateTime),
       }));
     events = this.removeIgnoredEvents(events);
+    events = events.filter(evt => evt.durationHours <= maxDurationHrs);
     return events;
   } catch (error) {
     switch (error.statusCode) {
       case 401: {
         this.oauthToken = await refreshAccessToken(this.req);
-        return this.getEvents(startDateTime, endDateTime);
+        return this.getEvents(startDateTime, endDateTime, maxDurationHrs);
       }
       default: {
         throw new Error();

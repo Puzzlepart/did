@@ -15,7 +15,7 @@ async function confirmPeriod(_obj, { startDateTime, endDateTime, entries }, cont
     if (!entries || entries.length === 0) return { success: false, error: 'No entries to confirm for the specified period.' };
     try {
         log('Confirming period %s to %s', startDateTime, endDateTime);
-        const calendarView = await context.services.graph.getEvents(startDateTime, endDateTime);
+        const calendarView = await context.services.graph.getEvents(startDateTime, endDateTime, 24);
         let batch = entries.reduce((b, entry) => {
             const event = calendarView.filter(e => e.id === entry.id)[0];
             if (!event) return;

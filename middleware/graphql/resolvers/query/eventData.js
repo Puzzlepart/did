@@ -120,7 +120,7 @@ async function eventData(_obj, { startDateTime, endDateTime }, context) {
         matchedDuration = confirmedDuration;
     } else {
         log('Found no confirmed events from %s to %s, retrieving entries from Microsoft Graph', startDateTime, endDateTime);
-        events = await context.services.graph.getEvents(startDateTime, endDateTime);
+        events = await context.services.graph.getEvents(startDateTime, endDateTime, 24);
         events = events.map(evt => matchEvent(evt, projects, customers));
         matchedEvents = events.filter(evt => (evt.project && evt.project.id));
         matchedDuration = matchedEvents.reduce((sum, evt) => sum + evt.durationMinutes, 0);
