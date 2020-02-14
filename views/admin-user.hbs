@@ -1,2 +1,6 @@
-<div id="app-admin-user" data-props="{{ props }}">
-</div>
+{{#if user.isAdmin }}
+<div id="app-admin-user" data-props="{{ props }}"></div>
+{{else}}
+<h1>Access denied</h1>
+<p>You don't have access to this view</p>
+{{/if}}
