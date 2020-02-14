@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router()
 const isAuthenticated = require('../middleware/passport/isAuthenticated');
+const isAdmin = require('../middleware/passport/isAdmin');
 
 router.get('/', function (_req, res) {
   res.render('index', { active: { home: true } });
@@ -22,11 +23,11 @@ router.get('/faq', isAuthenticated, (req, res) => {
   res.render('faq', { active: { faq: true }, props: JSON.stringify(req.params) });
 });
 
-router.get('/admin', isAuthenticated, (req, res) => {
+router.get('/admin', [isAuthenticated, isAdmin], (req, res) => {
   res.render('admin', { active: { admin: true }, props: JSON.stringify({ view: 'reports' }) });
 });
 
-router.get('/admin/users/:userId', isAuthenticated, (req, res) => {
+router.get('/admin/users/:userId', [isAuthenticated, isAdmin], (req, res) => {
   res.render('admin-user', { active: { admin: true }, props: JSON.stringify(req.params) });
 });
 
