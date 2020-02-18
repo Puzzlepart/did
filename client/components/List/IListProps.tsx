@@ -1,4 +1,4 @@
-import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
+import { IColumn, IDetailsGroupRenderProps } from 'office-ui-fabric-react/lib/DetailsList';
 import { ISearchBoxProps } from 'office-ui-fabric-react/lib/SearchBox';
 import { IListGroups } from './IListGroups';
 import { IListSelection } from './IListSelection';
@@ -12,4 +12,5 @@ export interface IListProps {
     selection?: IListSelection;
     groups?: IListGroups;
     hidden?: boolean;
+    groupProps?: IDetailsGroupRenderProps;
 }

@@ -68,7 +68,8 @@ export const EventList = (props: IEventListProps) => {
                 enableShimmer={props.enableShimmer}
                 columns={columns}
                 items={props.events}
-                groups={props.groups} />
+                groups={props.groups}
+                groupProps={{ showEmptyGroups: true }} />
         </div>
     );
 }
