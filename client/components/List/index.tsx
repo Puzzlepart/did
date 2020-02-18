@@ -8,6 +8,10 @@ import { IListProps } from './IListProps';
 import { ListHeader } from './ListHeader';
 import { createGroups } from 'utils/createGroups';
 
+/**
+ * @component List
+ * @param {IListProps} props Props
+ */
 export const List = (props: IListProps) => {
     let searchTimeout: any;
     let selection: Selection;
@@ -59,7 +63,7 @@ export const List = (props: IListProps) => {
                     selectionMode={props.selection ? props.selection.mode : SelectionMode.none}
                     constrainMode={ConstrainMode.horizontalConstrained}
                     layoutMode={DetailsListLayoutMode.justified}
-                    groupProps={{ onRenderHeader: headerProps => <GroupHeader {...headerProps} styles={{ headerCount: { display: 'none' } }}></GroupHeader> }}
+                    groupProps={{ ...props.groupProps, onRenderHeader: headerProps => <GroupHeader {...headerProps} styles={{ headerCount: { display: 'none' } }}></GroupHeader> }}
                     onRenderDetailsHeader={(headerProps, defaultRender) => ListHeader(headerProps, defaultRender, props, onSearch)} />
             </ScrollablePaneWrapper>
         </div>
