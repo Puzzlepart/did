@@ -1,3 +1,5 @@
+import { TimesheetView } from './ITimesheetState';
+
 export interface ITimesheetProps {
-    headerDateFormat?: string;
+    defaultSelectedView?: TimesheetView;
 }

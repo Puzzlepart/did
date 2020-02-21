@@ -9,9 +9,7 @@ router.get('/', function (_req, res) {
 });
 
 router.get('/timesheet', isAuthenticated, (req, res) => {
-  console.log(req.user.data);
   let props = JSON.stringify({ ...req.params, ...JSON.parse(getValue(req, 'user.data.settings', { default: '{}' })).timesheet });
-  console.log(props);
   res.render('timesheet', { active: { timesheet: true }, props });
 });
 
