@@ -1,3 +1,3 @@
 export interface ITimesheetProps {
-    view: 'month' | 'week';
+    headerDateFormat?: string;
 }

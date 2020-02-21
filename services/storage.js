@@ -33,7 +33,7 @@ StorageService.prototype.getSubscription = function () {
  */
 StorageService.prototype.getUser = async function (userId) {
     let filter = combine(this.filter, and, stringFilter('RowKey', isEqual, userId));
-    const query = createQuery(1, ['Role', 'StartPage']).where(filter);
+    const query = createQuery(1, ['Role', 'Settings']).where(filter);
     const users = await queryTable(USERS, query);
     return parseArray(users)[0];
 }

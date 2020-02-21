@@ -25,6 +25,7 @@ import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD';
  * @description 
  */
 export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState> {
+    public static defaultProps: Partial<ITimesheetProps> = { headerDateFormat: 'dddd' };
     private _store: PnPClientStore;
     private _resolvedKey = 'resolved_projects_{0}_{1}';
     private _ignoredKey = 'ignored_events_{0}_{1}';
@@ -321,7 +322,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
         data.events = data.events
             .filter(event => !event.isIgnored && ignores.indexOf(event.id) === -1)
             .map(event => {
-                event.day = formatDate(event.startTime, 'dddd');
+                event.day = formatDate(event.startTime, this.props.headerDateFormat);
                 if (resolves[event.id]) {
                     event.project = resolves[event.id];
                     event.customer = resolves[event.id].customer;

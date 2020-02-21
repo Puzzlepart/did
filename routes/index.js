@@ -2,13 +2,17 @@ const express = require('express');
 const router = express.Router()
 const isAuthenticated = require('../middleware/passport/isAuthenticated');
 const isAdmin = require('../middleware/passport/isAdmin');
+const getValue = require('get-value');
 
 router.get('/', function (_req, res) {
   res.render('index', { active: { home: true } });
 });
 
 router.get('/timesheet', isAuthenticated, (req, res) => {
-  res.render('timesheet', { active: { timesheet: true }, props: JSON.stringify(req.params) });
+  console.log(req.user.data);
+  let props = JSON.stringify({ ...req.params, ...JSON.parse(getValue(req, 'user.data.settings', { default: '{}' })).timesheet });
+  console.log(props);
+  res.render('timesheet', { active: { timesheet: true }, props });
 });
 
 router.get('/customers', isAuthenticated, (req, res) => {
