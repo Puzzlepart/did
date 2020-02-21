@@ -1,5 +1,5 @@
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
-import { IGetEventData } from './GET_EVENT_DATA';
+import { ITimesheetData } from './GET_TIMESHEET';
 import { ITimesheetPeriod } from './ITimesheetPeriod';
 
 export type TimesheetView = 'overview' | 'summary' | 'allocation';
@@ -28,7 +28,7 @@ export interface ITimesheetState {
     /**
      * Data
      */
-    data?: IGetEventData;
+    data?: ITimesheetData;
 
     /**
      * Group by

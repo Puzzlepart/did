@@ -1,6 +1,6 @@
 const _ = require('underscore');
 const findBestMatch = require('string-similarity').findBestMatch;
-const log = require('debug')('middleware/graphql/resolvers/query/eventData');
+const log = require('debug')('middleware/graphql/resolvers/query/timesheet');
 
 /**
  * Get project best match using string-similarity findBestMatch
@@ -90,13 +90,13 @@ function matchEvent(evt, projects, customers) {
 
 
 /**
- * Event data
+ * Timesheet
  * 
  * @param {*} _obj Unused obj
  * @param {*} args Arguments
  * @param {*} context The context
  */
-async function eventData(_obj, { startDateTime, endDateTime }, context) {
+async function timesheet(_obj, { startDateTime, endDateTime }, context) {
     log('Retrieving events from %s to %s', startDateTime, endDateTime);
     let [projects, customers, confirmedTimeEntries] = await Promise.all([
         context.services.storage.getProjects(),
@@ -134,4 +134,4 @@ async function eventData(_obj, { startDateTime, endDateTime }, context) {
     };
 };
 
-module.exports = eventData;
+module.exports = timesheet;
