@@ -12,7 +12,7 @@ import { ActionBar } from './ActionBar';
 import { GROUP_BY_DAY } from './ActionBar/GROUP_BY_DAY';
 import CONFIRM_PERIOD from './CONFIRM_PERIOD';
 import { EventList } from './EventList';
-import GET_EVENT_DATA, { IGetEventData } from './GET_EVENT_DATA';
+import GET_TIMESHEET, { ITimesheetData } from './GET_TIMESHEET';
 import { ITimesheetPeriod } from "./ITimesheetPeriod";
 import { ITimesheetProps } from './ITimesheetProps';
 import { ITimesheetState, TimesheetView } from './ITimesheetState';
@@ -67,9 +67,9 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                             onUnconfirmWeek={this._onUnconfirmWeek.bind(this)}
                             onReload={() => this._getEventData(false)}
                             disabled={{
-                                CONFIRM_WEEK: loading || closed || isConfirmed,
-                                UNCONFIRM_WEEK: loading || closed || !isConfirmed,
-                                RELOAD: loading || closed || isConfirmed,
+                                CONFIRM_WEEK: loading || isConfirmed,
+                                UNCONFIRM_WEEK: loading || !isConfirmed,
+                                RELOAD: loading || isConfirmed,
                             }} />
                         <Pivot defaultSelectedKey={this.state.selectedView} onLinkClick={item => this.setState({ selectedView: item.props.itemKey as TimesheetView })}>
                             <PivotItem itemKey='overview' headerText='Overview' itemIcon='CalendarWeek'>
@@ -86,7 +86,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                                     enableShimmer={loading}
                                     events={value(data, 'events', [])}
                                     dateFormat={groupBy.data.dateFormat}
-                                    isLocked={isConfirmed || closed}
+                                    isLocked={isConfirmed}
                                     hideColumns={[...groupBy.data.hideColumns, 'customer']}
                                     groups={groupBy.data.groups} />
                             </PivotItem>
@@ -309,12 +309,12 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     */
     private async _getEventData(skipLoading: boolean = true, fetchPolicy: any = 'network-only') {
         if (!skipLoading) this.setState({ loading: true });
-        const { data: { eventData, weeks } } = await graphql.query({
-            query: GET_EVENT_DATA,
+        const { data: { timesheet, weeks } } = await graphql.query({
+            query: GET_TIMESHEET,
             variables: this.state.period,
             fetchPolicy,
         });
-        let data: IGetEventData = { ...eventData, weeks };
+        let data: ITimesheetData = { ...timesheet };
         let isConfirmed = data.confirmedDuration > 0
         let resolves = this._getStoredResolves();
         let ignores = this._getStoredIgnores();
