@@ -76,33 +76,33 @@ h5 {
   cursor: pointer;
   padding: 10px 20px; }
 
-.c-eventview .c-eventview-actions {
+.c-Timesheet .c-Timesheet-actions {
   margin: 10px 0 10px 0; }
 
-.c-eventview .c-eventview-statusbar {
+.c-Timesheet .c-Timesheet-statusbar {
   min-height: 40px; }
-  .c-eventview .c-eventview-statusbar .c-usermessage {
+  .c-Timesheet .c-Timesheet-statusbar .c-UserMessage {
     margin: 5px 0; }
 
-.c-eventview .ms-MessageBar.ms-MessageBar-multiline {
+.c-Timesheet .ms-MessageBar.ms-MessageBar-multiline {
   background: #f1f1f1; }
-  .c-eventview .ms-MessageBar.ms-MessageBar-multiline.ms-MessageBar--warning {
+  .c-Timesheet .ms-MessageBar.ms-MessageBar-multiline.ms-MessageBar--warning {
     background-color: rgba(255, 200, 10, 0.2); }
 
-.c-eventview .ms-MessageBar-icon {
+.c-Timesheet .ms-MessageBar-icon {
   display: flex;
   align-self: center; }
 
-.c-eventview .ms-List-page div.ms-List-cell {
+.c-Timesheet .ms-List-page div.ms-List-cell {
   min-height: 0; }
-  .c-eventview .ms-List-page div.ms-List-cell .ms-DetailsRow {
+  .c-Timesheet .ms-List-page div.ms-List-cell .ms-DetailsRow {
     min-height: 45px; }
-    .c-eventview .ms-List-page div.ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell {
+    .c-Timesheet .ms-List-page div.ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell {
       font-size: 1.2em;
       display: flex;
       align-items: center; }
-      .c-eventview .ms-List-page div.ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell span,
-      .c-eventview .ms-List-page div.ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell a {
+      .c-Timesheet .ms-List-page div.ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell span,
+      .c-Timesheet .ms-List-page div.ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell a {
         vertical-align: middle; }
 
 .c-resolveproject-modal {
@@ -111,20 +111,20 @@ h5 {
   min-width: 540px;
   max-width: 540px; }
 
-.c-eventview-weekpicker--callout .ms-DatePicker-day--today {
+.c-Timesheet-weekpicker--callout .ms-DatePicker-day--today {
   background-color: inherit !important;
   color: inherit !important;
   font-weight: inherit !important;
   border: none !important;
   outline: none !important; }
 
-.c-eventview-weekpicker--callout .ms-DatePicker-day--highlighted {
+.c-Timesheet-weekpicker--callout .ms-DatePicker-day--highlighted {
   background-color: inherit !important;
   color: inherit !important;
   font-weight: inherit !important;
   border: none !important;
   outline: none !important; }
-  .c-eventview-weekpicker--callout .ms-DatePicker-day--highlighted button {
+  .c-Timesheet-weekpicker--callout .ms-DatePicker-day--highlighted button {
     background-color: inherit !important;
     color: inherit !important;
     font-weight: inherit !important;
@@ -134,7 +134,7 @@ h5 {
 .c-projectdetails {
   margin-top: 30px; }
 
-.c-usermessage p {
+.c-UserMessage p {
   word-break: break-word;
   white-space: normal;
   margin: 0; }
@@ -142,7 +142,7 @@ h5 {
 .ms-MessageBar .ms-MessageBar-text {
   font-size: 14px; }
 
-#app-timesheet .c-eventview-section-content .row .highcharts-container {
+#app-timesheet .c-Timesheet-section-content .row .highcharts-container {
   margin-top: 30px; }
 
 .ms-DetailsRow-check,

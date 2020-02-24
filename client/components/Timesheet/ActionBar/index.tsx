@@ -1,5 +1,5 @@
 import * as moment from 'moment-timezone';
-import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
+import { CommandBar, ICommandBarItemProps } from 'office-ui-fabric-react/lib/CommandBar';
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
 import * as React from 'react';
 import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS';
@@ -13,7 +13,6 @@ require('moment/locale/en-gb');
 export const ActionBar = (props: IActionBarProps) => {
     return (
         <CommandBar
-            styles={{ root: { margin: '10px 0 10px 0', padding: 0 } }}
             items={[
                 {
                     key: 'THIS_WEEK',
@@ -53,7 +52,7 @@ export const ActionBar = (props: IActionBarProps) => {
                 {
                     key: 'WEEK_NUMBER_TEXT',
                     itemType: ContextualMenuItemType.Header,
-                    name: `Week ${props.period.startDateTime.week()}`,
+                    onRender: () => <span style={{ paddingTop: 12 }}>{`Week ${props.period.startDateTime.week()}`}</span>,
                 },
                 {
                     key: 'DIVIDER_1',
