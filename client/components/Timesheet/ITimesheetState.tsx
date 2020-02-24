@@ -1,4 +1,3 @@
-import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { ITimesheetData } from './GET_TIMESHEET';
 import { ITimesheetPeriod } from './ITimesheetPeriod';
 
@@ -29,9 +28,4 @@ export interface ITimesheetState {
      * Data
      */
     data?: ITimesheetData;
-
-    /**
-     * Group by
-     */
-    groupBy: IContextualMenuItem;
 }

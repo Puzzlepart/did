@@ -1,11 +1,8 @@
 import * as moment from 'moment-timezone';
-import { CommandBar, ICommandBarItemProps } from 'office-ui-fabric-react/lib/CommandBar';
+import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
 import * as React from 'react';
 import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS';
-import { GROUP_BY_CUSTOMER } from './GROUP_BY_CUSTOMER';
-import { GROUP_BY_DAY } from './GROUP_BY_DAY';
-import { GROUP_BY_PROJECT } from './GROUP_BY_PROJECT';
 import { IActionBarProps } from './IActionBarProps';
 import { WeekPicker } from './WeekPicker';
 require('moment/locale/en-gb');
@@ -54,27 +51,6 @@ export const ActionBar = (props: IActionBarProps) => {
                     itemType: ContextualMenuItemType.Header,
                     onRender: () => <span style={{ paddingTop: 12 }}>{`Week ${props.period.startDateTime.week()}`}</span>,
                 },
-                {
-                    key: 'DIVIDER_1',
-                    itemType: ContextualMenuItemType.Divider,
-                },
-                {
-                    ...props.groupBy,
-                    key: 'GROUP_BY',
-                    subMenuProps: {
-                        items: [
-                            GROUP_BY_DAY,
-                            GROUP_BY_PROJECT,
-                            GROUP_BY_CUSTOMER,
-                        ].map(opt => ({
-                            ...opt,
-                            canCheck: true,
-                            checked: opt.key === props.groupBy.key,
-                            onClick: () => props.onChangeGroupBy(opt),
-                        }))
-                    },
-                    disabled: props.selectedView !== 'overview',
-                }
             ]}
             farItems={
                 [

@@ -1,5 +1,4 @@
 import { TypedHash } from '@pnp/common';
-import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { ITimesheetPeriod } from '../ITimesheetPeriod';
 import { TimesheetView } from '../ITimesheetState';
 
@@ -10,19 +9,9 @@ export interface IActionBarProps {
     period: ITimesheetPeriod;
 
     /**
-     * Group by
-     */
-    groupBy?: IContextualMenuItem;
-
-    /**
      * The selected view
      */
     selectedView?: TimesheetView;
-
-    /**
-     * On change group by callback
-     */
-    onChangeGroupBy: (groupBy: IContextualMenuItem) => void;
 
     /**
      * On change period callback
