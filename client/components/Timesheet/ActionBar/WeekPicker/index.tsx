@@ -26,7 +26,7 @@ export const WeekPicker = ({ period, onChange }: IWeekPickerProps) => {
             {calendar && (
                 <Callout
                     isBeakVisible={false}
-                    className='c-eventview-weekpicker--callout'
+                    className='c-Timesheet-weekpicker--callout'
                     gapSpace={5}
                     doNotLayer={false}
                     target={calendar}

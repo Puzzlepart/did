@@ -140,10 +140,8 @@ StorageService.prototype.getConfirmedTimeEntries = async function (filters, opti
     log('Querying table %s with filter %s', CONFIRMEDTIMEENTRIES, filter);
     let query = createQuery(1000, null, filter);
     let result = await queryTable(CONFIRMEDTIMEENTRIES, query);
-    if (!options.noParse) {
-        result = parseArray(result, res => ({ ...res, customerId: res.projectId.split(' ')[0] }), options);
-    }
-    result = result.sort((a, b) => new Date(b.startTime) - new Date(a.startTime));
+    if (!options.noParse) result = parseArray(result, res => ({ ...res, customerId: res.projectId.split(' ')[0] }), options);
+    result = result.sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
     return result;
 }
 

@@ -12,7 +12,7 @@ export const UserMessage = ({ id, text, onClick = undefined, onDismiss = undefin
     return (
         <div
             id={id}
-            className='c-usermessage'
+            className='c-UserMessage'
             style={style}
             hidden={hidden}
             onClick={onClick}>
