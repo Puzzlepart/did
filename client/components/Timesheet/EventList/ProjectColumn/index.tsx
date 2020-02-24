@@ -4,6 +4,8 @@ import { UserMessage } from 'components/UserMessage';
 import { IProject, ITimeEntry } from 'models';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
+import { MessageBarButton } from 'office-ui-fabric-react/lib/Button';
+import { Link } from 'office-ui-fabric-react/lib/Link';
 import * as React from 'react';
 import { useState } from 'react';
 import { ResolveProjectModal } from './ResolveProjectModal';
@@ -29,13 +31,15 @@ export const ProjectColumn = ({ event, isConfirmed, onProjectSelected, onProject
         return (
             <>
                 <UserMessage
-                    style={{ width: 260 }}
+                    style={{ width: 260, marginTop: 10 }}
                     type={MessageBarType.warning}
-                    iconName='TagUnknown'>
-                    <p>
-                        Not matched - <a href="#" onClick={_ => setModal(true)} id={toggleId}>Resolve</a> or<a href="#" style={{ color: 'rgb(220, 0, 78)' }} onClick={onProjectIgnore}>ignore</a>
-                    </p>
-                </UserMessage>
+                    iconName='TagUnknown'
+                    actions={
+                        <div>
+                            <MessageBarButton onClick={_ => setModal(true)} id={toggleId}>Resolve</MessageBarButton>
+                            <MessageBarButton onClick={onProjectIgnore}>Ignore</MessageBarButton>
+                        </div>
+                    }>Not matched</UserMessage>
                 <ResolveProjectModal
                     event={event}
                     onDismiss={() => setModal(false)}

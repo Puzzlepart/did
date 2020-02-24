@@ -10,4 +10,5 @@ export interface IUserMessageProps {
     hidden?: boolean;
     style?: React.CSSProperties;
     children?: any;
+    actions?: JSX.Element;
 }
