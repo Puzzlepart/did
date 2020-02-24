@@ -46,10 +46,10 @@ export const ResolveProjectModal = ({ isOpen, onDismiss, onProjectSelected, even
             onDismiss={onDismiss}>
             <UserMessage
                 id={INFO_MSG_ID}
-                hidden={!event.suggestedProject || dismissed[INFO_MSG_ID]}
-                iconName='Message'
+                hidden={dismissed[INFO_MSG_ID]}
+                iconName='OutlookLogo'
                 onDismiss={() => dismissMessage(INFO_MSG_ID)}
-                text='You should try your best to match the events in Outlook, but in some cases it might be neccessary to manually match.' />
+                text={`**Please note:** You should try your best to match<a href='${event.webLink}' target='_blank'>the event in Outlook</a>, but in some cases it might be neccessary to manually match.`} />
 
             <UserMessage
                 id={SUGGESTED_PROJECT_MSG_ID}
