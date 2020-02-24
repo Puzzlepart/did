@@ -64,7 +64,7 @@ export const ResolveProjectModal = ({ isOpen, onDismiss, onProjectSelected, even
                 id={CUSTOMER_MATCH_MSG_ID}
                 hidden={!event.customer || dismissed[CUSTOMER_MATCH_MSG_ID] || !!event.suggestedProject}
                 style={{ marginTop: 5 }}
-                text={`Event not matched. We found a matching customer \`${value(event, 'customer.name', '')}\`, but not a project with key \`${event.projectKey}\`.`}
+                text={`Event not matched. We found a matching customer \`${value(event, 'customer.name', '')}\`, but not a project with the specified key.`}
                 onDismiss={() => dismissMessage(CUSTOMER_MATCH_MSG_ID)} />
 
             <Pivot defaultSelectedKey='search-project' styles={{ root: { marginTop: 10 } }}>
@@ -91,13 +91,6 @@ export const ResolveProjectModal = ({ isOpen, onDismiss, onProjectSelected, even
                         onSelected={onProjectSelected}
                         customer={scope && event.customer}
                         placeholder='Search in projects..' />
-                </PivotItem>
-                <PivotItem
-                    itemKey='suggestions'
-                    headerText='Suggestions'
-                    itemIcon='Lightbulb'
-                    style={{ paddingTop: 10 }}>
-                    <UserMessage text='Suggestions will come up here.' />
                 </PivotItem>
             </Pivot>
         </Modal >

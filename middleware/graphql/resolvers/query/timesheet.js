@@ -2,6 +2,9 @@ const _ = require('underscore');
 const findBestMatch = require('string-similarity').findBestMatch;
 const log = require('debug')('middleware/graphql/resolvers/query/timesheet');
 
+const CATEGORY_REGEX = /((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>[A-Za-z0-9]{2,}))/gmi;
+const CONTENT_REGEX = /[\(\{\[]((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>[A-Za-z0-9]{2,}?))[\)\]\}]/gmi;
+
 /**
  * Get project best match using string-similarity findBestMatch
  * 
@@ -13,7 +16,6 @@ function getProjectSuggestion(projects, customer, projectKey) {
     try {
         log('(getProjectSuggestion) Finding best match for [%s]', projectKey);
         let customerProjects = projects.filter(p => p.customerKey === customer.id);
-        log('(getProjectSuggestion) Found [%s] projects for customer [%s]', customerProjects.length, customer.id);
         let projectKeys = customerProjects.map(p => p.id.split(' ')[1]);
         log('(getProjectSuggestion) Finding best matching among [%s] for [%s]', JSON.stringify(projectKeys), projectKey);
         let sm = findBestMatch(projectKey, projectKeys);
@@ -24,9 +26,24 @@ function getProjectSuggestion(projects, customer, projectKey) {
         return suggestion;
     } catch (error) {
         log('(getProjectSuggestion) Failed to find best match for [%s]', projectKey);
-
         return null;
     }
+}
+
+/**
+ * Find project match in title/subject/categories
+ * 
+ * @param {*} regex 
+ * @param {*} input 
+ */
+function searchString(regex, input) {
+    let matches;
+    let match;
+    while ((match = regex.exec(input)) != null) {
+        matches = matches || [];
+        matches.push(`${match.groups.customerKey} ${match.groups.projectKey}`);
+    }
+    return matches;
 }
 
 /**
@@ -35,14 +52,10 @@ function getProjectSuggestion(projects, customer, projectKey) {
  * @param {*} content 
  * @param {*} categories 
  */
-function findMatch(content, categories) {
-    let regex = /((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>[A-Za-z0-9]{2,}))/gm;
-    let match = regex.exec(categories);
-    if (match && match.groups) return match.groups;
-    regex = /[\(\{\[]((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>[A-Za-z0-9]{2,}?))[\)\]\}]/gm;
-    match = regex.exec(content);
-    if (match && match.groups) return match.groups;
-    return null;
+function findMatches(content, categories) {
+    let matches = searchString(CATEGORY_REGEX, categories);
+    if (matches) return matches;
+    return searchString(CONTENT_REGEX, content);
 }
 
 /**
@@ -56,13 +69,17 @@ function matchEvent(evt, projects, customers) {
     log('(matchEvent) Finding match for [%s]', evt.title);
     let categories = evt.categories.join(' ').toUpperCase();
     let content = [evt.title, evt.body, categories].join(' ').toUpperCase();
-    let projectId;
-    let match = findMatch(content, categories);
-    if (match) {
-        projectId = `${match.customerKey} ${match.projectKey}`;
-        log('(matchEvent) Found match for [%s]: %s', evt.title, projectId);
-        evt.project = _.find(projects, p => p.id === projectId);
-        evt.customer = _.find(customers, c => c.id === match.customerKey);
+    let matches = findMatches(content, categories);
+    let projectKey;
+    if (matches) {
+        log(`(matchEvent) Found %s matches for [%s]: %s`, matches.length, evt.title, matches.join(', '));
+        for (let i = 0; i < matches.length; i++) {
+            let currentMatch = matches[i];
+            evt.project = _.find(projects, p => currentMatch === p.id);
+            evt.customer = _.find(customers, c => currentMatch.indexOf(c.id) === 0);
+            if (evt.customer) projectKey = currentMatch.split(' ')[1];
+            if (evt.project) break;
+        }
     } else {
         log('(matchEvent) Found no matching tokens for [%s], looking for non-tokenized matches', evt.title);
         let project = projects.filter(p => content.indexOf(p.id) !== -1)[0];
@@ -74,18 +91,13 @@ function matchEvent(evt, projects, customers) {
                 evt.customer = customers.filter(c => c.key === evt.project.key.split(' ')[0])[0];
             }
         }
-        match = {};
     }
     if (evt.customer && !evt.project) {
         log('(matchEvent) Found match for customer [%s] for [%s], but not for any project', evt.customer.name, evt.title);
-        let suggestedProject = getProjectSuggestion(projects, evt.customer, match.projectKey);
+        let suggestedProject = getProjectSuggestion(projects, evt.customer, projectKey);
         if (suggestedProject) evt.suggestedProject = suggestedProject;
     }
-    return {
-        ...evt,
-        ...match,
-        overtime: categories.indexOf('OVERTIME') !== -1,
-    };
+    return evt;
 }
 
 

@@ -21,8 +21,6 @@ query ($startDateTime: String!, $endDateTime: String!) {
       durationHours
       startTime
       endTime
-      projectKey
-      customerKey
       project {
         id
         key
