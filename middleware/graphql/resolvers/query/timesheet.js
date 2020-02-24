@@ -41,7 +41,11 @@ function searchString(regex, input) {
     let match;
     while ((match = regex.exec(input)) != null) {
         matches = matches || [];
-        matches.push(`${match.groups.customerKey} ${match.groups.projectKey}`);
+        matches.push({
+            key: `${match.groups.customerKey} ${match.groups.projectKey}`,
+            customerKey: match.groups.customerKey,
+            projectKey:match.groups.projectKey,
+        });
     }
     return matches;
 }
@@ -72,12 +76,12 @@ function matchEvent(evt, projects, customers) {
     let matches = findMatches(content, categories);
     let projectKey;
     if (matches) {
-        log(`(matchEvent) Found %s matches for [%s]: %s`, matches.length, evt.title, matches.join(', '));
+        log(`(matchEvent) Found %s matches for [%s]`, matches.length, evt.title);
         for (let i = 0; i < matches.length; i++) {
             let currentMatch = matches[i];
-            evt.project = _.find(projects, p => currentMatch === p.id);
-            evt.customer = _.find(customers, c => currentMatch.indexOf(c.id) === 0);
-            if (evt.customer) projectKey = currentMatch.split(' ')[1];
+            evt.project = _.find(projects, p => currentMatch.key === p.id);
+            evt.customer = _.find(customers, c => currentMatch.customerKey === c.id);
+            if (evt.customer) projectKey = currentMatch.projectKey;
             if (evt.project) break;
         }
     } else {
