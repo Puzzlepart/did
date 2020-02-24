@@ -1,7 +1,7 @@
 
 import { dateAdd, PnPClientStorage, PnPClientStore, TypedHash } from '@pnp/common';
 import { UserAllocation } from 'components/UserAllocation';
-import { endOfWeek, formatDate, getUrlHash, getValueTyped as value, startOfWeek } from 'helpers';
+import { endOfWeek, formatDate, getDurationDisplay, getUrlHash, getValueTyped as value, getWeekdays, startOfWeek } from 'helpers';
 import { IProject, ITimeEntry } from 'models';
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
@@ -9,7 +9,6 @@ import * as React from 'react';
 import * as format from 'string-format';
 import { client as graphql } from '../../graphql';
 import { ActionBar } from './ActionBar';
-import { GROUP_BY_DAY } from './ActionBar/GROUP_BY_DAY';
 import CONFIRM_PERIOD from './CONFIRM_PERIOD';
 import { EventList } from './EventList';
 import GET_TIMESHEET, { ITimesheetData } from './GET_TIMESHEET';
@@ -34,7 +33,6 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
         this.state = {
             period: this._getPeriod(),
             selectedView: 'overview',
-            groupBy: GROUP_BY_DAY,
         };
         this._store = new PnPClientStorage().local;
     }
@@ -47,7 +45,6 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
         const {
             loading,
             period,
-            groupBy,
             selectedView,
             isConfirmed,
             data,
@@ -59,9 +56,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                     <div className='c-Timesheet-section-content'>
                         <ActionBar
                             period={period}
-                            groupBy={groupBy}
                             selectedView={selectedView}
-                            onChangeGroupBy={this.onChangeGroupBy.bind(this)}
                             onChangePeriod={this._onChangePeriod.bind(this)}
                             onConfirmWeek={this._onConfirmWeek.bind(this)}
                             onUnconfirmWeek={this._onUnconfirmWeek.bind(this)}
@@ -85,10 +80,16 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                                     onProjectIgnore={this._onProjectIgnore.bind(this)}
                                     enableShimmer={loading}
                                     events={value(data, 'events', [])}
-                                    dateFormat={groupBy.data.dateFormat}
+                                    dateFormat={'HH:mm'}
                                     isLocked={isConfirmed}
-                                    hideColumns={[...groupBy.data.hideColumns, 'customer']}
-                                    groups={groupBy.data.groups} />
+                                    groups={{
+                                        fieldName: 'day',
+                                        groupNames: getWeekdays(),
+                                        totalFunc: (items: ITimeEntry[]) => {
+                                            let totalMins = items.reduce((sum, i) => sum += i.durationMinutes, 0);
+                                            return ` (${getDurationDisplay(totalMins)})`;
+                                        },
+                                    }} />
                             </PivotItem>
                             <PivotItem itemKey='summary' headerText='Summary' itemIcon='List'>
                                 <SummaryView
@@ -132,16 +133,6 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
         document.location.hash = `week=${period.startDateTime.toISOString()}`;
         this.setState({ period }, () => this._getEventData(false));
     };
-
-    /**
-     * On group by changed
-     * 
-     * @param {IContextualMenuItem} groupBy Group by
-     */
-    private onChangeGroupBy(groupBy: IContextualMenuItem) {
-        this.setState({ groupBy });
-    }
-
     /**
      * On confirm week
      */
