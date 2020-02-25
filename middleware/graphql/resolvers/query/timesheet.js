@@ -1,6 +1,7 @@
 const _ = require('underscore');
 const findBestMatch = require('string-similarity').findBestMatch;
 const log = require('debug')('middleware/graphql/resolvers/query/timesheet');
+const { formatDate } = require('../../../../utils');
 
 const CATEGORY_REGEX = /((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>[A-Za-z0-9]{2,}))/gmi;
 const CONTENT_REGEX = /[\(\{\[]((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>[A-Za-z0-9]{2,}?))[\)\]\}]/gmi;
@@ -44,7 +45,7 @@ function searchString(regex, input) {
         matches.push({
             key: `${match.groups.customerKey} ${match.groups.projectKey}`,
             customerKey: match.groups.customerKey,
-            projectKey:match.groups.projectKey,
+            projectKey: match.groups.projectKey,
         });
     }
     return matches;
@@ -112,7 +113,7 @@ function matchEvent(evt, projects, customers) {
  * @param {*} args Arguments
  * @param {*} context The context
  */
-async function timesheet(_obj, { startDateTime, endDateTime }, context) {
+async function timesheet(_obj, { startDateTime, endDateTime, dateFormat }, context) {
     log('Retrieving events from %s to %s', startDateTime, endDateTime);
     let [projects, customers, confirmedTimeEntries] = await Promise.all([
         context.services.storage.getProjects(),
@@ -141,6 +142,7 @@ async function timesheet(_obj, { startDateTime, endDateTime }, context) {
         matchedEvents = events.filter(evt => (evt.project && evt.project.id));
         matchedDuration = matchedEvents.reduce((sum, evt) => sum + evt.durationMinutes, 0);
     }
+    events = events.map(evt => ({ ...evt, date: formatDate(evt.startTime, dateFormat) }));
     return {
         events,
         totalDuration: events.reduce((sum, evt) => sum + evt.durationMinutes, 0),

@@ -32,6 +32,7 @@ type Event implements BaseEntity {
 	isOrganizer: Boolean
 	startTime: String
 	endTime: String
+	date: String
 	durationHours: Float
 	durationMinutes: Int
 	project: Project
@@ -110,7 +111,7 @@ type ConfirmedTimeEntries {
 type Query {
 	customers: [Customer!]!
 	projects(customerKey: String, sortBy: String): [Project!]!
-	timesheet(startDateTime: String!, endDateTime: String!): EventData!
+	timesheet(startDateTime: String!, endDateTime: String!, dateFormat: String!): EventData!
 	confirmedTimeEntries(
 	projectId: String, 
 	resourceId: String, 

@@ -100,9 +100,12 @@ export function endOfWeek(date?: string | Date): moment.Moment {
 
 /**
  * Get weekdays
+ * 
+ * @param {moment.Moment | string} start Start
+ * @param {string} dateFormat Date format
  */
-export function getWeekdays(): string[] {
-    return moment.weekdays(true);
+export function getWeekdays(start: moment.Moment, dateFormat: string): string[] {
+    return moment.weekdays(true).map((_, index) => moment(start).add(index, 'days').format(dateFormat));
 }
 
 /**
