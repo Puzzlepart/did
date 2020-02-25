@@ -1,0 +1,15 @@
+.c-Timesheet-summary {
+  position: relative;
+
+  .c-Timesheet-summary-customerDropdown {
+    width: 270px;
+    position: absolute;
+    z-index: 999;
+    top: 20px;
+    left: 10px;
+
+    [class*='ms-Dropdown-title'] {
+      border: none;
+    }
+  }
+}

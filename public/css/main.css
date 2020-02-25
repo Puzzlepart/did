@@ -134,6 +134,17 @@ h5 {
     border: none !important;
     outline: none !important; }
 
+.c-Timesheet-summary {
+  position: relative; }
+  .c-Timesheet-summary .c-Timesheet-summary-customerDropdown {
+    width: 270px;
+    position: absolute;
+    z-index: 999;
+    top: 20px;
+    left: 10px; }
+    .c-Timesheet-summary .c-Timesheet-summary-customerDropdown [class*='ms-Dropdown-title'] {
+      border: none; }
+
 .c-projectdetails {
   margin-top: 30px; }
 

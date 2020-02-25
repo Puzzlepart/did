@@ -6,23 +6,17 @@ import * as React from 'react';
  * @description 
  */
 export const LabelColumn = ({ row }) => {
-    if (row.label) {
-        return (
-            <div>
-                {row.label}
+    if (row.label) return <div>{row.label}</div>;
+
+    return (
+        <>
+            <div style={{ display: 'inline-block', verticalAlign: 'top', width: 30 }}>
+                <Icon iconName={row.project.icon || 'Page'} styles={{ root: { fontSize: 18 } }} />
             </div>
-        );
-    } else {
-        return (
-            <>
-                <div style={{ display: 'inline-block', verticalAlign: 'top', width: 30 }}>
-                    <Icon iconName={row.project.icon || 'Page'} styles={{ root: { fontSize: 18 } }} />
-                </div>
-                <div style={{ display: 'inline-block', verticalAlign: 'top', width: 'calc(100% - 30px)' }}>
-                    <div>{row.project.name}</div>
-                    <div style={{ fontSize: '7pt' }}>for {row.customer.name}</div>
-                </div>
-            </>
-        );
-    }
+            <div style={{ display: 'inline-block', verticalAlign: 'top', width: 'calc(100% - 30px)' }}>
+                <div>{row.project.name}</div>
+                <div style={{ fontSize: '7pt' }}>for {row.customer.name}</div>
+            </div>
+        </>
+    );
 }
