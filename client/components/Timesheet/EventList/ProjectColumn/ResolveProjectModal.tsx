@@ -41,9 +41,10 @@ export const ResolveProjectModal = ({ isOpen, onDismiss, onProjectSelected, even
 
     return (
         <Modal
-            containerClassName='c-resolveproject-modal'
+            containerClassName='c-ResolveProjectModal'
             isOpen={isOpen}
             onDismiss={onDismiss}>
+            <div className='c-ResolveProjectModal-title'>{event.title}</div>
             <UserMessage
                 id={INFO_MSG_ID}
                 hidden={dismissed[INFO_MSG_ID]}

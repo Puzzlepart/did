@@ -11,10 +11,10 @@
     }
   }
 
-  .ms-MessageBar.ms-MessageBar-multiline{
-    background:#f1f1f1;
-    &.ms-MessageBar--warning{
-      background-color: rgba(255, 200, 10, 0.2);  
+  .ms-MessageBar.ms-MessageBar-multiline {
+    background: #f1f1f1;
+    &.ms-MessageBar--warning {
+      background-color: rgba(255, 200, 10, 0.2);
     }
   }
 
@@ -24,7 +24,6 @@
   }
 
   .ms-List-page {
-
     div.ms-List-cell {
       min-height: 0;
       .ms-DetailsRow {
@@ -45,11 +44,16 @@
   }
 }
 
-.c-resolveproject-modal {
+.c-ResolveProjectModal {
   padding: 20px;
   width: 540px;
   min-width: 540px;
   max-width: 540px;
+
+  .c-ResolveProjectModal-title {
+    font-size: 1.6em;
+    margin: 0 0 12px 0;
+  }
 }
 
 .c-Timesheet-weekpicker--callout {
