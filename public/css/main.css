@@ -105,11 +105,14 @@ h5 {
       .c-Timesheet .ms-List-page div.ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell a {
         vertical-align: middle; }
 
-.c-resolveproject-modal {
+.c-ResolveProjectModal {
   padding: 20px;
   width: 540px;
   min-width: 540px;
   max-width: 540px; }
+  .c-ResolveProjectModal .c-ResolveProjectModal-title {
+    font-size: 1.6em;
+    margin: 0 0 12px 0; }
 
 .c-Timesheet-weekpicker--callout .ms-DatePicker-day--today {
   background-color: inherit !important;

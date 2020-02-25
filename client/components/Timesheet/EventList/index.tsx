@@ -4,7 +4,6 @@ import { formatDate, getValueTyped as value } from 'helpers';
 import { ITimeEntry } from 'models';
 import * as React from 'react';
 import { generateColumn as col } from 'utils/generateColumn';
-import { CustomerLink } from './CustomerLink';
 import { DurationDisplay } from './DurationDisplay';
 import { IEventListProps } from './IEventListProps';
 import { ProjectColumn } from './ProjectColumn';
@@ -54,12 +53,6 @@ export const EventList = (props: IEventListProps) => {
                         props.onProjectIgnore(event);
                     }} />
             )),
-        col(
-            'customer',
-            'Customer',
-            { maxWidth: value(props, 'columnWidths.customer', 150), minWidth: value(props, 'columnWidths.customer', 150) },
-            (event: ITimeEntry) => <CustomerLink customer={event.customer} />,
-        ),
     ].filter(col => (props.hideColumns || []).indexOf(col.key) === -1);
 
     return (
