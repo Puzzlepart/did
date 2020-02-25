@@ -26,9 +26,10 @@ export const ResolveProjectModal = ({ isOpen, onDismiss, onProjectSelected, even
     const [scope, setScope] = useState<boolean>(!!event.customer);
     return (
         <Modal
-            containerClassName='c-resolveproject-modal'
+            containerClassName='c-ResolveProjectModal'
             isOpen={isOpen}
             onDismiss={onDismiss}>
+            <div className='c-ResolveProjectModal-title'>{event.title}</div>
             <UserMessage
                 iconName='OutlookLogo'
                 text={`**Please note:** You should try your best to match<a href='${event.webLink}' target='_blank'>the event in Outlook</a>, but in some cases it might be neccessary to manually match.`} />
