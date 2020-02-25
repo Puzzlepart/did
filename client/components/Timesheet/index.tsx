@@ -24,16 +24,14 @@ import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD';
  * @description 
  */
 export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState> {
+    public static defaultProps: Partial<ITimesheetProps> = { groupHeaderDateFormat: 'dddd DD' };
     private _store: PnPClientStore;
     private _resolvedKey = 'resolved_projects_{0}_{1}';
     private _ignoredKey = 'ignored_events_{0}_{1}';
 
     constructor(props: ITimesheetProps) {
         super(props);
-        this.state = {
-            period: this._getPeriod(),
-            selectedView: 'overview',
-        };
+        this.state = { period: this._getPeriod(), selectedView: 'overview' };
         this._store = new PnPClientStorage().local;
     }
 
@@ -83,8 +81,8 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                                     dateFormat={'HH:mm'}
                                     isLocked={isConfirmed}
                                     groups={{
-                                        fieldName: 'day',
-                                        groupNames: getWeekdays(),
+                                        fieldName: 'date',
+                                        groupNames: getWeekdays(period.startDateTime, this.props.groupHeaderDateFormat),
                                         totalFunc: (items: ITimeEntry[]) => {
                                             let totalMins = items.reduce((sum, i) => sum += i.durationMinutes, 0);
                                             return ` (${getDurationDisplay(totalMins)})`;
@@ -300,9 +298,9 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     */
     private async _getEventData(skipLoading: boolean = true, fetchPolicy: any = 'network-only') {
         if (!skipLoading) this.setState({ loading: true });
-        const { data: { timesheet, weeks } } = await graphql.query({
+        const { data: { timesheet } } = await graphql.query({
             query: GET_TIMESHEET,
-            variables: this.state.period,
+            variables: { ...this.state.period, dateFormat: this.props.groupHeaderDateFormat },
             fetchPolicy,
         });
         let data: ITimesheetData = { ...timesheet };
@@ -312,7 +310,6 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
         data.events = data.events
             .filter(event => !event.isIgnored && ignores.indexOf(event.id) === -1)
             .map(event => {
-                event.day = formatDate(event.startTime, 'dddd');
                 if (resolves[event.id]) {
                     event.project = resolves[event.id];
                     event.customer = resolves[event.id].customer;

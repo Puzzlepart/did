@@ -9,8 +9,8 @@ export interface ITimesheetData {
 }
 
 export default gql`
-query ($startDateTime: String!, $endDateTime: String!) {
-  timesheet(startDateTime: $startDateTime, endDateTime: $endDateTime) {
+query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!) {
+  timesheet(startDateTime: $startDateTime, endDateTime: $endDateTime, dateFormat: $dateFormat) {
     events {
       key
       id
@@ -21,6 +21,7 @@ query ($startDateTime: String!, $endDateTime: String!) {
       durationHours
       startTime
       endTime
+      date
       project {
         id
         key

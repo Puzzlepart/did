@@ -36,5 +36,12 @@ module.exports = {
      */
     getMonth: (date) => {
         return moment(date).month() + 1;
+    },
+
+    /**
+     * Format date
+     */
+    formatDate: (date, dateFormat) => {
+        return require('moment-timezone')(date).tz('Europe/Oslo').format(dateFormat);
     }
 }
