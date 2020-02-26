@@ -3,7 +3,7 @@ import { FilterPanel } from 'components/FilterPanel';
 import { BaseFilter, IFilter, MonthFilter, ResourceFilter, YearFilter, WeekFilter } from 'components/FilterPanel/Filters';
 import { IColumn, List } from 'components/List';
 import { UserMessage } from 'components/UserMessage';
-import { getValueTyped as value } from 'helpers';
+import { getValueTyped as value, getMonthName } from 'helpers';
 import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
 import * as React from 'react';
 import { useState } from 'react';
@@ -14,30 +14,36 @@ import { generateColumn } from 'utils/generateColumn';
 import { GET_CONFIRMED_TIME_ENTRIES } from './GET_CONFIRMED_TIME_ENTRIES';
 import { IReportsProps } from './IReportsProps';
 
+const REPORTS_FILTERS: BaseFilter[] = [
+    new WeekFilter('weekNumber', 'Week'),
+    new MonthFilter('month', 'Month'),
+    new YearFilter('yearNumber', 'Year'),
+    new ResourceFilter('resourceName', 'Employee'),
+]
+
+function getColumns(entry: Object = {}, skip: string[]): IColumn[] {
+    return Object.keys(entry)
+        .filter(f => skip.indexOf(f) === -1)
+        .map(fieldName => generateColumn(fieldName, humanize(fieldName), { minWidth: 60, maxWidth: 100 }));;
+}
+
 /**
  * @component Reports
  * @description Consists of a DetailsList with all confirmed time entries and an export to excel button
  */
-export const Reports = ({ skip = ['id', '__typename'], exportFileNameTemplate = 'ApprovedTimeEntries-{0}.xlsx' }: IReportsProps) => {
+export const Reports = ({ skip = ['id', '__typename', 'monthNumber'], exportFileNameTemplate = 'ApprovedTimeEntries-{0}.xlsx' }: IReportsProps) => {
     const [filterPanelOpen, setFilterPanelOpen] = useState<boolean>(undefined);
+    const [subset, setSubset] = useState<any[]>(undefined);
 
     const { loading, error, data } = useQuery(GET_CONFIRMED_TIME_ENTRIES, { fetchPolicy: 'cache-first' });
 
-    let entries = value<any[]>(data, 'result.entries', []).map(entry => ({ ...entry, customer: value(entry, 'customer.name', '') }));
+    let entries = value<any[]>(data, 'result.entries', []).map(entry => ({
+        ...entry,
+        customer: value(entry, 'customer.name', ''),
+        month: getMonthName(entry.monthNumber - 1),
+    }));
 
-
-    const [filteredEntries, setFilteredEntries] = useState<any[]>(undefined);
-
-    const columns: IColumn[] = Object.keys(entries[0] || {})
-        .filter(f => skip.indexOf(f) === -1)
-        .map(fieldName => generateColumn(fieldName, humanize(fieldName), { minWidth: 60, maxWidth: 100 }));
-
-    const filters: BaseFilter[] = [
-        new WeekFilter('weekNumber', 'Week'),
-        new MonthFilter('monthNumber', 'Month'),
-        new YearFilter('yearNumber', 'Year'),
-        new ResourceFilter('resourceName', 'Employee'),
-    ]
+    const columns = getColumns(entries[0], skip);
 
     /**
      * On export
@@ -51,8 +57,8 @@ export const Reports = ({ skip = ['id', '__typename'], exportFileNameTemplate = 
                 items = entries;
             };
                 break;
-            case 'EXPORT_TO_EXCEL_FILTERED': {
-                items = filteredEntries;
+            case 'EXPORT_SUBSET_TO_EXCEL': {
+                items = subset;
             };
                 break;
         }
@@ -78,7 +84,7 @@ export const Reports = ({ skip = ['id', '__typename'], exportFileNameTemplate = 
                 return selectedKeys.indexOf(value(entry, f.key, '')) !== -1;
             }).length === filters.length;
         });
-        setFilteredEntries(_entries);
+        setSubset(_entries);
     }
 
     return (
@@ -96,12 +102,12 @@ export const Reports = ({ skip = ['id', '__typename'], exportFileNameTemplate = 
                         disabled: loading || !!error,
                     },
                     {
-                        id: 'EXPORT_TO_EXCEL_FILTERED',
-                        key: 'EXPORT_TO_EXCEL_FILTERED',
-                        text: 'Export to Excel (Filtered)',
+                        id: 'EXPORT_SUBSET_TO_EXCEL',
+                        key: 'EXPORT_SUBSET_TO_EXCEL',
+                        text: 'Export subset to Excel',
                         onClick: onExport,
                         iconProps: { iconName: 'ExcelDocument' },
-                        disabled: loading || !!error || filteredEntries === undefined || value(filteredEntries, 'length', 0) === value(entries, 'length', 0),
+                        disabled: loading || !!error || subset === undefined || value(subset, 'length', 0) === value(entries, 'length', 0),
                     }
                 ]}
                 farItems={[{
@@ -112,14 +118,14 @@ export const Reports = ({ skip = ['id', '__typename'], exportFileNameTemplate = 
                 }]} />
             <List
                 hidden={entries.length === 0}
-                items={filteredEntries || entries}
+                items={subset || entries}
                 columns={columns}
                 enableShimmer={loading} />
             <UserMessage hidden={entries.length > 0 || loading} text={`There's no confirmed time entries at this time.`} />
             {!loading && (
                 <FilterPanel
                     isOpen={filterPanelOpen}
-                    filters={filters}
+                    filters={REPORTS_FILTERS}
                     entries={entries}
                     onDismiss={() => setFilterPanelOpen(false)}
                     onFilterUpdated={onFilterUpdated} />

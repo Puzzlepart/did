@@ -13,13 +13,13 @@ export const FilterPanel = (props: IFilterPanelProps) => {
     const [filters, setFilters] = useState<IFilter[]>(props.filters.map(f => f.initialize(props.entries)));
 
     /**
-     * Filter updated
+     * On filter updated
      * 
      * @param {IFilter} filter 
      * @param {IFilterItem} item 
      * @param {boolean} checked 
      */
-    const filterUpdated = (filter: IFilter, item: IFilterItem, checked: boolean) => {
+    const onFilterUpdated = (filter: IFilter, item: IFilterItem, checked: boolean) => {
         if (checked) filter.selected.push(item);
         else filter.selected = filter.selected.filter(f => f.key !== item.key);
         let updatedFilters = filters.map(f => {
@@ -37,7 +37,14 @@ export const FilterPanel = (props: IFilterPanelProps) => {
             isOpen={props.isOpen}
             isLightDismiss={true}
             onDismiss={props.onDismiss}>
-            {filters.map(filter => <FilterItem key={filter.key} filter={filter} filterUpdated={filterUpdated} />)}
+            {filters
+                .filter(filter => filter.items.length > 1)
+                .map(filter => (
+                    <FilterItem
+                        key={filter.key}
+                        filter={filter}
+                        onFilterUpdated={onFilterUpdated} />
+                ))}
         </Panel>
     );
 }

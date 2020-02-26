@@ -1,6 +1,6 @@
 import { getValueTyped as value } from 'helpers';
-import * as _ from 'underscore';
-import { BaseFilter } from "./BaseFilter";
+import _ from 'underscore';
+import { BaseFilter, IFilter } from "./BaseFilter";
 
 /**
  * @class WeekFilter
@@ -16,7 +16,7 @@ export class WeekFilter extends BaseFilter {
      * 
      * @param {any[]} entries Entries
      */
-    public initialize(entries: any[]) {
+    public initialize(entries: any[]):IFilter {
         const weeks = _.unique(entries.map(e => value(e, this.fieldName, null))).sort((a, b) => a - b);
         const items = weeks.map(week => ({
             key: week,
