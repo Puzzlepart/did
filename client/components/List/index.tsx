@@ -6,7 +6,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { IListProps } from './IListProps';
 import { ListHeader } from './ListHeader';
-import { createGroups } from 'utils/createGroups';
+import { generateListGroups } from './generateListGroups';
 
 /**
  * @component List
@@ -39,7 +39,7 @@ export const List = (props: IListProps) => {
     }
 
     if (props.groups) {
-        let _ = createGroups(
+        let _ = generateListGroups(
             items,
             props.groups.fieldName,
             props.groups.groupNames,
@@ -63,7 +63,7 @@ export const List = (props: IListProps) => {
                     selectionMode={props.selection ? props.selection.mode : SelectionMode.none}
                     constrainMode={ConstrainMode.horizontalConstrained}
                     layoutMode={DetailsListLayoutMode.justified}
-                    groupProps={{ ...props.groupProps, onRenderHeader: headerProps => <GroupHeader {...headerProps} styles={{ headerCount: { display: 'none' } }}></GroupHeader> }}
+                    groupProps={{ ...props.groupProps, onRenderHeader: headerProps => <GroupHeader {...headerProps} styles={{ title: { cursor: 'initial' }, expand: { cursor: 'pointer' }, headerCount: { display: 'none' } }}></GroupHeader> }}
                     onRenderDetailsHeader={(headerProps, defaultRender) => ListHeader(headerProps, defaultRender, props, onSearch)} />
             </ScrollablePaneWrapper>
         </div>
