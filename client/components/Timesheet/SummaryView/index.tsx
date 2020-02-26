@@ -19,7 +19,7 @@ import { Dropdown, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
 */
 function createColumns(period: ITimesheetPeriod) {
     return [
-        col('label', '', { minWidth: 270, maxWidth: 270, isMultiline: true, isResizable: false }, (row: any) => <LabelColumn row={row} />),
+        col('label', '', { minWidth: 350, maxWidth: 350, isMultiline: true, isResizable: true }, (row: any) => <LabelColumn row={row} />),
         ...Array.from(Array(7).keys()).map(i => {
             const day = startOfWeek(period.startDateTime).add(i as moment.DurationInputArg1, 'days' as moment.DurationInputArg2);
             return col(day.format('L'), day.format('ddd DD'), { maxWidth: 70, minWidth: 70 }, (row: any, _index: number, col: IColumn) => <DurationColumn row={row} column={col} />);
