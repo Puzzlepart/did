@@ -13,7 +13,7 @@ import * as _ from 'underscore';
  * @param {string} emptyGroupName Empty group name
  * @param {Function} totalFunc Function to calculate sum
  */
-export function createGroups(items: any[], groupBy: string, uniqueGroupNames: string[], emptyGroupName: string = '', totalFunc?: Function): { items: any[], groups: IGroup[] } {
+export function generateListGroups(items: any[], groupBy: string, uniqueGroupNames: string[], emptyGroupName: string = '', totalFunc?: Function): { items: any[], groups: IGroup[] } {
     const itemsSort = { props: [groupBy], opts: { reverse: false } };
     items = arraySort([...items], itemsSort.props, itemsSort.opts);
     let groupNames = items.map(g => value<string>(g, groupBy, emptyGroupName));

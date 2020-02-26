@@ -9,6 +9,7 @@ import { generateColumn as col } from 'utils/generateColumn';
 import { ITimesheetPeriod } from '../ITimesheetPeriod';
 import { ISummaryViewProps } from './ISummaryViewProps';
 import { LabelColumn } from './LabelColumn';
+import { DurationColumn } from './DurationColumn';
 import { Dropdown, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
 
 /**
@@ -18,12 +19,12 @@ import { Dropdown, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
 */
 function createColumns(period: ITimesheetPeriod) {
     return [
-        col('label', '', { minWidth: 270, maxWidth: 270, isMultiline: true, isResizable: false }, (row: any) => <LabelColumn row={row} />),
+        col('label', '', { minWidth: 350, maxWidth: 350, isMultiline: true, isResizable: true }, (row: any) => <LabelColumn row={row} />),
         ...Array.from(Array(7).keys()).map(i => {
             const day = startOfWeek(period.startDateTime).add(i as moment.DurationInputArg1, 'days' as moment.DurationInputArg2);
-            return col(day.format('L'), day.format('ddd Do'), { maxWidth: 70, minWidth: 70 });
+            return col(day.format('L'), day.format('ddd DD'), { maxWidth: 70, minWidth: 70 }, (row: any, _index: number, col: IColumn) => <DurationColumn row={row} column={col} />);
         }),
-        col('sum', 'Sum')
+        col('sum', 'Sum', { minWidth: 50, maxWidth: 50, isResizable: false }, (row: any) => <div style={{ fontWeight: 500 }}>{row.sum}</div>),
     ];
 }
 

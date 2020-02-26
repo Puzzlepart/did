@@ -2,14 +2,28 @@
   position: relative;
 
   .c-Timesheet-summary-customerDropdown {
-    width: 270px;
+    width: 370px;
     position: absolute;
     z-index: 999;
-    top: 20px;
-    left: 10px;
+    top: 16px;
+    left: 0;
+    height: 42px;
 
-    [class*='ms-Dropdown-title'] {
+    &:hover {
+      [class*="ms-Dropdown-title"] {
+        background-color: rgb(243, 242, 241);
+        color: rgb(32, 31, 30);
+      }
+    }
+
+    [class*="ms-Dropdown-title"] {
       border: none;
+      height: 42px;
+      padding: 6px 0 0 8px;
+    }
+
+    [class*='ms-Dropdown-caretDownWrapper'] {
+      padding: 6px 0 0 0;
     }
   }
 }
