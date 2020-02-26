@@ -9,6 +9,7 @@ import { generateColumn as col } from 'utils/generateColumn';
 import { ITimesheetPeriod } from '../ITimesheetPeriod';
 import { ISummaryViewProps } from './ISummaryViewProps';
 import { LabelColumn } from './LabelColumn';
+import { DurationColumn } from './DurationColumn';
 import { Dropdown, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
 
 /**
@@ -21,9 +22,9 @@ function createColumns(period: ITimesheetPeriod) {
         col('label', '', { minWidth: 270, maxWidth: 270, isMultiline: true, isResizable: false }, (row: any) => <LabelColumn row={row} />),
         ...Array.from(Array(7).keys()).map(i => {
             const day = startOfWeek(period.startDateTime).add(i as moment.DurationInputArg1, 'days' as moment.DurationInputArg2);
-            return col(day.format('L'), day.format('ddd DD'), { maxWidth: 70, minWidth: 70 });
+            return col(day.format('L'), day.format('ddd DD'), { maxWidth: 70, minWidth: 70 }, (row: any, _index: number, col: IColumn) => <DurationColumn row={row} column={col} />);
         }),
-        col('sum', 'Sum', { minWidth: 50, maxWidth: 50, isResizable: false })
+        col('sum', 'Sum', { minWidth: 50, maxWidth: 50, isResizable: false }, (row: any) => <div style={{ fontWeight: 500 }}>{row.sum}</div>),
     ];
 }
 
@@ -77,7 +78,6 @@ export const SummaryView = (props: ISummaryViewProps) => {
     const [customerId, setCustomerId] = React.useState<string>('All');
 
     const columns = createColumns(props.period);
-    console.log(columns);
     let events = props.events.filter(e => !!e.project);
     let customers = _.unique(events.map(e => e.customer), (c: ICustomer) => c.id);
 

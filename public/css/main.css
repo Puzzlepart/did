@@ -137,13 +137,25 @@ h5 {
 .c-Timesheet-summary {
   position: relative; }
   .c-Timesheet-summary .c-Timesheet-summary-customerDropdown {
-    width: 270px;
+    width: 290px;
     position: absolute;
     z-index: 999;
-    top: 20px;
-    left: 10px; }
-    .c-Timesheet-summary .c-Timesheet-summary-customerDropdown [class*='ms-Dropdown-title'] {
-      border: none; }
+    top: 16px;
+    left: 0;
+    height: 42px; }
+    .c-Timesheet-summary .c-Timesheet-summary-customerDropdown:hover [class*="ms-Dropdown-title"] {
+      background-color: #f3f2f1;
+      color: #201f1e; }
+    .c-Timesheet-summary .c-Timesheet-summary-customerDropdown [class*="ms-Dropdown-title"] {
+      border: none;
+      height: 42px;
+      padding: 6px 0 0 8px; }
+    .c-Timesheet-summary .c-Timesheet-summary-customerDropdown [class*='ms-Dropdown-caretDownWrapper'] {
+      padding: 6px 0 0 0; }
+
+.c-Timesheet-weekPicker:hover input {
+  background-color: #f3f2f1;
+  color: #201f1e; }
 
 .c-projectdetails {
   margin-top: 30px; }
