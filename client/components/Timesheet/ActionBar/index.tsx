@@ -45,7 +45,7 @@ export const ActionBar = (props: IActionBarProps) => {
                 {
                     key: 'WEEK_NUMBER_TEXT',
                     itemType: ContextualMenuItemType.Header,
-                    onRender: () => <span style={{ padding: '12px 0 0 8px' }}>{`Week ${props.period.startDateTime.week()}`}</span>,
+                    onRender: () => <span style={{ padding: '12px 0 0 12px' }}>{`Week ${props.period.startDateTime.week()}`}</span>,
                 },
             ]}
             farItems={

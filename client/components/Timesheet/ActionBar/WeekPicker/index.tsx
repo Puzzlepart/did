@@ -16,6 +16,7 @@ export const WeekPicker = ({ period, onChange }: IWeekPickerProps) => {
         <>
             <div>
                 <TextField
+                    className='c-Timesheet-weekPicker'
                     onClick={event => setCalendar(event.currentTarget)}
                     value={getTimespanString(period.startDateTime, period.endDateTime)}
                     styles={{ field: { color: 'rgb(120, 120, 120)', cursor: 'pointer' }, root: { width: 280, marginTop: 6 } }}
