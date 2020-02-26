@@ -18,5 +18,5 @@ export function generateColumn(fieldName: string, name: string = '', props: Part
         onRender,
         isResizable: true,
         ...{ data: {}, ...props },
-    };
+    } as IColumn;
 }
