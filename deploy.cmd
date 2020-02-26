@@ -105,20 +105,6 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   popd
 )
 
-:: 5. 
-IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
-  pushd "%DEPLOYMENT_TARGET%"
-  call :ExecuteCmd !NPM_CMD! run package:client:prod
-  IF !ERRORLEVEL! NEQ 0 goto error
-  pop
-
-:: 6. 
-IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
-  pushd "%DEPLOYMENT_TARGET%"
-  call :ExecuteCmd !NPM_CMD! run build:scss
-  IF !ERRORLEVEL! NEQ 0 goto error
-  pop
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 goto end
 
