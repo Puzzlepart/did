@@ -1,7 +1,7 @@
 body {
   padding-top: 20px;
   margin-top: 63px;
-  font-family: "Segoe UI Light", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Segoe UI Light", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
   font-size: 100%; }
 
 .alert-pre {
@@ -153,9 +153,18 @@ h5 {
     .c-Timesheet-summary .c-Timesheet-summary-customerDropdown [class*='ms-Dropdown-caretDownWrapper'] {
       padding: 6px 0 0 0; }
 
-.c-Timesheet-weekPicker:hover input {
-  background-color: #f3f2f1;
-  color: #201f1e; }
+.c-Timesheet-weekPicker {
+  margin-top: 0; }
+  .c-Timesheet-weekPicker:hover input {
+    background-color: #f3f2f1;
+    color: #201f1e; }
+  .c-Timesheet-weekPicker .ms-TextField-fieldGroup {
+    height: 44px; }
+    .c-Timesheet-weekPicker .ms-TextField-fieldGroup i {
+      position: relative;
+      top: 0;
+      right: 20px;
+      align-self: center; }
 
 .c-projectdetails {
   margin-top: 30px; }
