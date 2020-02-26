@@ -10,7 +10,7 @@ export const GET_PROJECT_CONFIRMED_TIME_ENTRIES = gql`
                 startTime
                 endTime
                 weekNumber
-                yearNumber
+                year
                 resourceName
             }
             duration

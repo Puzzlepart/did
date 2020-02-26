@@ -116,7 +116,7 @@ type Query {
 	projectId: String, 
 	resourceId: String, 
 	weekNumber: Int, 
-	yearNumber: Int, 
+	year: Int, 
 	currentUser: Boolean
 	dateFormat: String
 	): ConfirmedTimeEntries
