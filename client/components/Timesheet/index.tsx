@@ -66,28 +66,30 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                             }} />
                         <Pivot defaultSelectedKey={this.state.selectedView} onLinkClick={item => this.setState({ selectedView: item.props.itemKey as TimesheetView })}>
                             <PivotItem itemKey='overview' headerText='Overview' itemIcon='CalendarWeek'>
-                                <StatusBar
-                                    isConfirmed={isConfirmed}
-                                    events={value(data, 'events', [])}
-                                    loading={loading}
-                                    ignoredEvents={this._getStoredIgnores()}
-                                    onClearIgnores={this._clearIgnores.bind(this)} />
-                                <EventList
-                                    onProjectSelected={this._onProjectSelected.bind(this)}
-                                    onProjectClear={this._onProjectClear.bind(this)}
-                                    onProjectIgnore={this._onProjectIgnore.bind(this)}
-                                    enableShimmer={loading}
-                                    events={value(data, 'events', [])}
-                                    dateFormat={'HH:mm'}
-                                    isLocked={isConfirmed}
-                                    groups={{
-                                        fieldName: 'date',
-                                        groupNames: getWeekdays(period.startDateTime, this.props.groupHeaderDateFormat),
-                                        totalFunc: (items: ITimeEntry[]) => {
-                                            let totalMins = items.reduce((sum, i) => sum += i.durationMinutes, 0);
-                                            return ` (${getDurationDisplay(totalMins)})`;
-                                        },
-                                    }} />
+                                <div className='c-Timesheet-overview'>
+                                    <StatusBar
+                                        isConfirmed={isConfirmed}
+                                        events={value(data, 'events', [])}
+                                        loading={loading}
+                                        ignoredEvents={this._getStoredIgnores()}
+                                        onClearIgnores={this._clearIgnores.bind(this)} />
+                                    <EventList
+                                        onProjectSelected={this._onProjectSelected.bind(this)}
+                                        onProjectClear={this._onProjectClear.bind(this)}
+                                        onProjectIgnore={this._onProjectIgnore.bind(this)}
+                                        enableShimmer={loading}
+                                        events={value(data, 'events', [])}
+                                        dateFormat={'HH:mm'}
+                                        isLocked={isConfirmed}
+                                        groups={{
+                                            fieldName: 'date',
+                                            groupNames: getWeekdays(period.startDateTime, this.props.groupHeaderDateFormat),
+                                            totalFunc: (items: ITimeEntry[]) => {
+                                                let totalMins = items.reduce((sum, i) => sum += i.durationMinutes, 0);
+                                                return ` (${getDurationDisplay(totalMins)})`;
+                                            },
+                                        }} />
+                                </div>
                             </PivotItem>
                             <PivotItem itemKey='summary' headerText='Summary' itemIcon='List'>
                                 <SummaryView
@@ -96,7 +98,9 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                                     period={period} />
                             </PivotItem>
                             <PivotItem itemKey='allocation' headerText='Allocation' itemIcon='ReportDocument'>
-                                <UserAllocation entries={value(data, 'events', [])} charts={{ 'project.name': 'Allocation per project', 'customer.name': 'Allocation per customer' }} />
+                                <div className='c-Timesheet-allocation'>
+                                    <UserAllocation entries={value(data, 'events', [])} charts={{ 'project.name': 'Allocation per project', 'customer.name': 'Allocation per customer' }} />
+                                </div>
                             </PivotItem>
                         </Pivot>
                     </div>
