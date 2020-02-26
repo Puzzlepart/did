@@ -43,13 +43,9 @@ export const ActionBar = (props: IActionBarProps) => {
                     onRender: () => <WeekPicker period={props.period} onChange={props.onChangePeriod} />,
                 },
                 {
-                    key: 'DIVIDER_0',
-                    itemType: ContextualMenuItemType.Divider,
-                },
-                {
                     key: 'WEEK_NUMBER_TEXT',
                     itemType: ContextualMenuItemType.Header,
-                    onRender: () => <span style={{ paddingTop: 12 }}>{`Week ${props.period.startDateTime.week()}`}</span>,
+                    onRender: () => <span style={{ padding: '12px 0 0 8px' }}>{`Week ${props.period.startDateTime.week()}`}</span>,
                 },
             ]}
             farItems={
