@@ -41,3 +41,5 @@ export const FilterPanel = (props: IFilterPanelProps) => {
         </Panel>
     );
 }
+
+export * from './Filters';

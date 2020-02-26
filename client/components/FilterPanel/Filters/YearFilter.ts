@@ -1,6 +1,6 @@
 import { getValueTyped as value } from 'helpers';
-import * as _ from 'underscore';
-import { BaseFilter } from "./BaseFilter";
+import _ from 'underscore';
+import { BaseFilter, IFilter } from "./BaseFilter";
 
 /**
  * @class YearFilter
@@ -16,8 +16,10 @@ export class YearFilter extends BaseFilter {
      * 
      * @param {any[]} entries Entries
      */
-    public initialize(entries: any[]) {
-        const years = _.unique(entries.map(e => value(e, this.fieldName, null))).sort();
+    public initialize(entries: any[]): IFilter {
+        const years = _.unique(entries.map(e => value(e, this.fieldName, null)))
+            .filter(y => y)
+            .sort();
         const items = years.map(year => ({
             key: year,
             value: year,

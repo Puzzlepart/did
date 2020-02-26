@@ -10,9 +10,9 @@ export const GET_CONFIRMED_TIME_ENTRIES = gql`
                 startTime
                 endTime
                 weekNumber
-                yearNumber
-                resourceName     
-                monthNumber           
+                month  
+                year       
+                resourceName       
                 customer {
                     id
                     name

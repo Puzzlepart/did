@@ -58,8 +58,8 @@ type TimeEntry implements BaseEntity {
 	durationMinutes: Int
 	projectId: String
 	weekNumber: Int
-	monthNumber: Int
-	yearNumber: Int
+	month: String
+	year: Int
 	resourceId: String
 	resourceEmail: String
 	resourceName: String

@@ -1,6 +1,6 @@
 const { TableBatch } = require('azure-storage');
 const { executeBatch, entGen } = require('../../../../utils/table');
-const { getDurationHours, getDurationMinutes, getWeek, getMonth, getYear } = require('../../../../utils');
+const { getDurationHours, getDurationMinutes, getWeek, getMonth, getYear, formatDate } = require('../../../../utils');
 const uuid = require('uuid/v1');
 const log = require('debug')('middleware/graphql/resolvers/mutation/confirmPeriod');
 
@@ -34,7 +34,8 @@ async function confirmPeriod(_obj, { startDateTime, endDateTime, entries }, cont
                 WebLink: entGen.String(event.webLink),
                 WeekNumber: entGen.Int32(getWeek(event.startTime)),
                 MonthNumber: entGen.Int32(getMonth(event.startTime)),
-                YearNumber: entGen.Int32(getYear(event.startTime)),
+                Month: entGen.String(formatDate(event.startTime, 'MMMM')),
+                Year: entGen.Int32(getYear(event.startTime)),
                 ResourceId: entGen.String(context.user.profile.oid),
                 ResourceEmail: entGen.String(context.user.profile.email),
                 ResourceName: entGen.String(context.user.profile.displayName),

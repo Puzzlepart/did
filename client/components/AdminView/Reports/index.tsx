@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/react-hooks';
-import { FilterPanel } from 'components/FilterPanel';
-import { BaseFilter, IFilter, MonthFilter, ResourceFilter, YearFilter, WeekFilter } from 'components/FilterPanel/Filters';
+import { FilterPanel, BaseFilter, IFilter, MonthFilter, ResourceFilter, YearFilter, WeekFilter } from 'components/FilterPanel';
 import { IColumn, List } from 'components/List';
 import { UserMessage } from 'components/UserMessage';
 import { getValueTyped as value } from 'helpers';
@@ -20,13 +19,12 @@ import { IReportsProps } from './IReportsProps';
  */
 export const Reports = ({ skip = ['id', '__typename'], exportFileNameTemplate = 'ApprovedTimeEntries-{0}.xlsx' }: IReportsProps) => {
     const [filterPanelOpen, setFilterPanelOpen] = useState<boolean>(undefined);
+    const [filteredEntries, setFilteredEntries] = useState<any[]>(undefined);
 
     const { loading, error, data } = useQuery(GET_CONFIRMED_TIME_ENTRIES, { fetchPolicy: 'cache-first' });
 
     let entries = value<any[]>(data, 'result.entries', []).map(entry => ({ ...entry, customer: value(entry, 'customer.name', '') }));
 
-
-    const [filteredEntries, setFilteredEntries] = useState<any[]>(undefined);
 
     const columns: IColumn[] = Object.keys(entries[0] || {})
         .filter(f => skip.indexOf(f) === -1)
@@ -34,8 +32,8 @@ export const Reports = ({ skip = ['id', '__typename'], exportFileNameTemplate = 
 
     const filters: BaseFilter[] = [
         new WeekFilter('weekNumber', 'Week'),
-        new MonthFilter('monthNumber', 'Month'),
-        new YearFilter('yearNumber', 'Year'),
+        new MonthFilter('month', 'Month'),
+        new YearFilter('year', 'Year'),
         new ResourceFilter('resourceName', 'Employee'),
     ]
 
