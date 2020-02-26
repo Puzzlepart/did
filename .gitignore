@@ -2,7 +2,10 @@ node_modules
 .env
 DS_Store
 Icon?
-package-lock.json
 lib
 server.js
 resources/
+public/js
+public/css
+.gitignore
+pnpm-debug.log

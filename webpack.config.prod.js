@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const WebpackBar = require('webpackbar');
 
 module.exports = {
   module: {
@@ -17,7 +16,7 @@ module.exports = {
       }
     ]
   },
-  mode: 'development',
+  mode: 'production',
   entry: [
     'core-js/stable',
     'regenerator-runtime/runtime',
@@ -31,10 +30,7 @@ module.exports = {
       components: path.resolve(__dirname, 'lib/client/components'),
     }
   },
-  plugins: [
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    new WebpackBar(),
-  ],
+  plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
   output: {
     path: path.resolve(__dirname, './public/js'),
     filename: 'did365.js'
