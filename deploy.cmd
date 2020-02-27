@@ -86,7 +86,7 @@ goto :EOF
 :: ----------
 
 :Deployment
-echo Handling node.js deployment.
+echo Synchronizing deployment source to deployment target
 
 :: 1. KuduSync
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
@@ -97,6 +97,8 @@ IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
 :: 2. Select node version
 call :SelectNodeVersion
 
+echo Installing npm packages
+
 :: 3. Install npm packages
 IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   pushd "%DEPLOYMENT_TARGET%"
@@ -105,10 +107,12 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   popd
 )
 
+echo Packaging assets
+
 :: 4. Build
 IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   pushd "%DEPLOYMENT_TARGET%"
-  call :ExecuteCmd !NPM_CMD! run package:client:prod
+  call :ExecuteCmd !NPM_CMD! run package
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
 )
