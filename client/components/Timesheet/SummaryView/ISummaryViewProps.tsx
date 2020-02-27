@@ -7,4 +7,5 @@ export interface ISummaryViewProps {
     isConfirmed?: boolean;
     enableShimmer?: boolean;
     type: SummaryViewType;
+    maxColumns?: number;
 }

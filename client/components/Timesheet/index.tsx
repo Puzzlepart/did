@@ -16,7 +16,7 @@ import { ITimesheetPeriod } from "./ITimesheetPeriod";
 import { ITimesheetProps } from './ITimesheetProps';
 import { ITimesheetState, TimesheetView } from './ITimesheetState';
 import { StatusBar } from './StatusBar';
-import { SummaryView } from './SummaryView';
+import { SummaryView, SummaryViewType } from './SummaryView';
 import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD';
 
 /**
@@ -95,7 +95,8 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                                 <SummaryView
                                     events={value(data, 'events', [])}
                                     enableShimmer={loading}
-                                    period={period} />
+                                    period={period}
+                                    type={SummaryViewType.UserWeek} />
                             </PivotItem>
                             <PivotItem itemKey='allocation' headerText='Allocation' itemIcon='ReportDocument'>
                                 <div className='c-Timesheet-allocation'>

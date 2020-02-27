@@ -117,7 +117,6 @@ export const Reports = ({ skip = ['id', '__typename', 'monthNumber'], exportFile
                     onClick: () => setFilterPanelOpen(true),
                 }]} />
             <List
-                hidden={entries.length === 0}
                 items={subset || entries}
                 columns={columns}
                 enableShimmer={loading} />
