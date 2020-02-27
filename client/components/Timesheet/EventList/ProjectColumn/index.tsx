@@ -1,22 +1,14 @@
 
 import { getId } from '@uifabric/utilities';
 import { UserMessage } from 'components/UserMessage';
-import { IProject, ITimeEntry } from 'models';
+import { MessageBarButton } from 'office-ui-fabric-react/lib/Button';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
-import { MessageBarButton } from 'office-ui-fabric-react/lib/Button';
-import { Link } from 'office-ui-fabric-react/lib/Link';
 import * as React from 'react';
 import { useState } from 'react';
 import { ResolveProjectModal } from './ResolveProjectModal';
-
-interface IProjectColumnProps {
-    event: ITimeEntry;
-    isConfirmed?: boolean;
-    onProjectSelected?: (project: IProject) => void;
-    onProjectClear?: (evt: React.MouseEvent<any>) => void;
-    onProjectIgnore?: (evt: React.MouseEvent<any>) => void;
-}
+import { TooltipHost } from 'office-ui-fabric-react/lib/Tooltip';
+import { IProjectColumnProps } from './IProjectColumnProps';
 
 /**
  * @component ProjectColumn
@@ -29,7 +21,7 @@ export const ProjectColumn = ({ event, isConfirmed, onProjectSelected, onProject
     if (!event.project) {
         if (isConfirmed) return null;
         return (
-            <>
+            <div className='c-Timesheet-projectColumn'>
                 <UserMessage
                     style={{ width: 260, marginTop: 10 }}
                     type={MessageBarType.warning}
@@ -48,18 +40,27 @@ export const ProjectColumn = ({ event, isConfirmed, onProjectSelected, onProject
                         setModal(false);
                         onProjectSelected(project);
                     }} />
-            </>
+            </div>
         );
     }
+
+
     return (
-        <>
-            <div style={{ display: 'inline-block', verticalAlign: 'top' }}>
+        <div className='c-Timesheet-projectColumn'>
+            <div className='c-Timesheet-projectColumn-warning'>
+                <TooltipHost
+                    content='The project or customer is no longer valid.'
+                    styles={{ root: { display: 'inline-block' } }}>
+                    <Icon iconName='Warning' styles={{ root: { fontSize: 14, color: 'red' } }} />
+                </TooltipHost>
+            </div>
+            <div className='c-Timesheet-projectColumn-content'>
                 <div><a href={`/projects#${event.project.id}`}>{event.project.name}</a></div>
                 <div style={{ fontSize: '7pt' }}>for <a style={{ fontSize: '7pt' }} href={`/customers#${event.customer.id}`}>{event.customer.name}</a></div>
             </div>
-            <div style={{ display: 'inline-block', verticalAlign: 'top', marginLeft: 4 }} title='Clear' hidden={!event.isManualMatch}>
+            <div className='c-Timesheet-projectColumn-clear' title='Clear' hidden={!event.isManualMatch}>
                 <span onClick={onProjectClear} style={{ cursor: 'pointer' }}><Icon iconName='Cancel' styles={{ root: { fontSize: 14 } }} /></span>
             </div>
-        </>
+        </div>
     );
 }

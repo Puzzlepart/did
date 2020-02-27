@@ -102,6 +102,9 @@ function matchEvent(evt, projects, customers) {
         let suggestedProject = getProjectSuggestion(projects, evt.customer, projectKey);
         if (suggestedProject) evt.suggestedProject = suggestedProject;
     }
+    console.log(evt.project);
+    evt.invalidMatch = (evt.project && (evt.project.invalid || evt.customer.invalid));
+    console.log(evt.invalidMatch);
     return evt;
 }
 
@@ -143,9 +146,10 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat }, conte
         matchedDuration = matchedEvents.reduce((sum, evt) => sum + evt.durationMinutes, 0);
     }
     events = events.map(evt => ({ ...evt, date: formatDate(evt.startTime, dateFormat) }));
+    let totalDuration = events.reduce((sum, evt) => sum + evt.durationMinutes, 0);
     return {
         events,
-        totalDuration: events.reduce((sum, evt) => sum + evt.durationMinutes, 0),
+        totalDuration,
         matchedDuration,
         matchedEvents,
         confirmedDuration,

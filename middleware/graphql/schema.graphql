@@ -14,6 +14,7 @@ type Project implements BaseEntity {
 	hourlyRate: Int
 	customerKey: String
 	customer: Customer
+	inactive: Boolean
 }
 
 type Customer implements BaseEntity {
@@ -22,6 +23,7 @@ type Customer implements BaseEntity {
 	name: String
 	description: String
 	webLink: String
+	inactive: Boolean
 }
 
 type Event implements BaseEntity {
