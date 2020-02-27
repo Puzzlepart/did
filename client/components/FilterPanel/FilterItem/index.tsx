@@ -1,22 +1,17 @@
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 import * as React from 'react';
-import { IFilter, IFilterItem } from '../Filters';
-
-export interface IFilterItemProps {
-    filter: IFilter;
-    filterUpdated: (filter: IFilter, item: IFilterItem, checked: boolean) => void;
-}
+import { IFilterItemProps } from './IFilterItemProps';
 
 /**
  * @component FilterItem
- * @description 
+ * @description Renders a filter item
  */
-export const FilterItem = ({ filter, filterUpdated }: IFilterItemProps) => {
+export const FilterItem = ({ filter, onFilterUpdated: filterUpdated }: IFilterItemProps) => {
     let selectedKeys = filter.selected.map(f => f.key);
     return (
         <div key={filter.key} style={{ marginTop: 15 }}>
             <h4>{filter.name}</h4>
-            {filter.items.map((item) => (
+            {filter.items.map(item => (
                 <Checkbox
                     key={item.key}
                     label={item.value}

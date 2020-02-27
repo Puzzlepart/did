@@ -1,0 +1,20 @@
+.c-Timesheet-weekPicker {
+
+    margin-top: 0;
+    &:hover {
+        input {
+            background-color: rgb(243, 242, 241);
+            color: rgb(32, 31, 30);
+        }
+    }    
+    .ms-TextField-fieldGroup {
+        height: 44px;
+
+        i {
+            position: relative;
+            top: 0;
+            right: 20px;
+            align-self: center;
+        }
+    }
+}
