@@ -6,7 +6,7 @@ import { Shimmer } from 'office-ui-fabric-react/lib/Shimmer';
 import * as React from 'react';
 import { IStatusBarProps } from './IStatusBarProps';
 
-export const StatusBar = ({ loading, isConfirmed, events, ignoredEvents, onClearIgnores }: IStatusBarProps) => {
+export const StatusBar = ({ loading, isConfirmed, events, ignoredEvents, onClearIgnores, errors }: IStatusBarProps) => {
     let totalDuration = events.reduce((sum, event) => sum += event.durationMinutes, 0);
     let matchedDuration = events.filter(event => !!event.project).reduce((sum, event) => sum += event.durationMinutes, 0);
 
@@ -44,6 +44,13 @@ export const StatusBar = ({ loading, isConfirmed, events, ignoredEvents, onClear
                                 type={MessageBarType.info}
                                 iconName='StatusCircleErrorX'>
                                 <p>You have {ignoredEvents.length} ignored event(s). <a href="#" onClick={onClearIgnores}>Click to undo</a></p>
+                            </UserMessage>
+                        </div>
+                        <div className="col-sm" hidden={errors.length === 0}>
+                            <UserMessage
+                                type={MessageBarType.severeWarning}
+                                iconName='StatusCircleErrorX'>
+                                <p>You have {errors.length} unresolved errors. You need to resolve them before confirming the week.</p>
                             </UserMessage>
                         </div>
                     </div>
