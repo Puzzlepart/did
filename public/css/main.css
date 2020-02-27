@@ -1,0 +1,225 @@
+body {
+  padding-top: 20px;
+  margin-top: 63px;
+  font-family: "Segoe UI Light", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+  font-size: 100%; }
+
+.alert-pre {
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: pre-wrap; }
+
+.navbar-nav .nav-link {
+  font-size: 1em;
+  letter-spacing: 1px; }
+
+h1 {
+  font-size: 3em;
+  margin: 15px 0 15px 0; }
+
+h2 {
+  font-size: 2.2em;
+  margin: 15px 0 15px 0; }
+
+h3 {
+  font-size: 1.8em;
+  margin: 15px 0 15px 0; }
+
+h4 {
+  font-size: 1.4em; }
+
+h5 {
+  font-size: 1.2em; }
+
+.react-autosuggest__suggestion-match {
+  color: #007bff; }
+
+.react-autosuggest__container {
+  width: 100%;
+  max-height: 400px; }
+
+.react-autosuggest__input {
+  width: 100%;
+  padding: 4px; }
+
+.react-autosuggest__suggestions-container ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+
+#app-admin .react-autosuggest__container {
+  position: relative; }
+
+#app-admin .react-autosuggest__input--focused {
+  outline: none; }
+
+#app-admin .react-autosuggest__suggestions-container {
+  display: none; }
+
+#app-admin .react-autosuggest__suggestions-container--open {
+  display: block;
+  position: absolute;
+  top: 35px;
+  width: 300px;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 2; }
+
+#app-admin .react-autosuggest__suggestions-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none; }
+
+#app-admin .react-autosuggest__suggestion {
+  cursor: pointer;
+  padding: 10px 20px; }
+
+.c-Timesheet .c-Timesheet-actions {
+  margin: 10px 0 10px 0; }
+
+.c-Timesheet .c-Timesheet-statusbar {
+  min-height: 40px; }
+  .c-Timesheet .c-Timesheet-statusbar .c-UserMessage {
+    margin: 5px 0; }
+
+.c-Timesheet .ms-MessageBar.ms-MessageBar-multiline {
+  background: #f1f1f1; }
+  .c-Timesheet .ms-MessageBar.ms-MessageBar-multiline.ms-MessageBar--warning {
+    background-color: rgba(255, 200, 10, 0.2); }
+
+.c-Timesheet .ms-MessageBar-icon {
+  display: flex;
+  align-self: center; }
+
+.c-Timesheet .ms-List-page div.ms-List-cell {
+  min-height: 0; }
+  .c-Timesheet .ms-List-page div.ms-List-cell .ms-DetailsRow {
+    min-height: 45px; }
+    .c-Timesheet .ms-List-page div.ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell {
+      font-size: 1.2em;
+      display: flex;
+      align-items: center; }
+      .c-Timesheet .ms-List-page div.ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell span,
+      .c-Timesheet .ms-List-page div.ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell a {
+        vertical-align: middle; }
+
+.c-ResolveProjectModal {
+  padding: 20px;
+  width: 540px;
+  min-width: 540px;
+  max-width: 540px; }
+  .c-ResolveProjectModal .c-ResolveProjectModal-title {
+    font-size: 1.6em;
+    margin: 0 0 12px 0; }
+
+.c-Timesheet-weekpicker--callout .ms-DatePicker-day--today {
+  background-color: inherit !important;
+  color: inherit !important;
+  font-weight: inherit !important;
+  border: none !important;
+  outline: none !important; }
+
+.c-Timesheet-weekpicker--callout .ms-DatePicker-day--highlighted {
+  background-color: inherit !important;
+  color: inherit !important;
+  font-weight: inherit !important;
+  border: none !important;
+  outline: none !important; }
+  .c-Timesheet-weekpicker--callout .ms-DatePicker-day--highlighted button {
+    background-color: inherit !important;
+    color: inherit !important;
+    font-weight: inherit !important;
+    border: none !important;
+    outline: none !important; }
+
+.c-Timesheet-summary {
+  position: relative; }
+  .c-Timesheet-summary .c-Timesheet-summary-customerDropdown {
+    width: 370px;
+    position: absolute;
+    z-index: 999;
+    top: 16px;
+    left: 0;
+    height: 42px; }
+    .c-Timesheet-summary .c-Timesheet-summary-customerDropdown:hover [class*="ms-Dropdown-title"] {
+      background-color: #f3f2f1;
+      color: #201f1e; }
+    .c-Timesheet-summary .c-Timesheet-summary-customerDropdown [class*="ms-Dropdown-title"] {
+      border: none;
+      height: 42px;
+      padding: 6px 0 0 8px; }
+    .c-Timesheet-summary .c-Timesheet-summary-customerDropdown [class*='ms-Dropdown-caretDownWrapper'] {
+      padding: 6px 0 0 0; }
+
+.c-Timesheet-weekPicker {
+  margin-top: 0; }
+  .c-Timesheet-weekPicker:hover input {
+    background-color: #f3f2f1;
+    color: #201f1e; }
+  .c-Timesheet-weekPicker .ms-TextField-fieldGroup {
+    height: 44px; }
+    .c-Timesheet-weekPicker .ms-TextField-fieldGroup i {
+      position: relative;
+      top: 0;
+      right: 20px;
+      align-self: center; }
+
+.c-projectdetails {
+  margin-top: 30px; }
+
+.c-UserMessage p {
+  word-break: break-word;
+  white-space: normal;
+  margin: 0; }
+
+.ms-MessageBar .ms-MessageBar-text {
+  font-size: 14px; }
+
+#app-timesheet .c-Timesheet-section-content .row .highcharts-container {
+  margin-top: 30px; }
+
+.ms-DetailsRow-check,
+.ms-DetailsRow-cellCheck,
+.ms-DetailsHeader-cellIsCheck {
+  display: none; }
+
+.ms-DetailsHeader-cellName,
+.ms-GroupHeader-title {
+  font-weight: normal;
+  font-size: 1.2em;
+  letter-spacing: 1px; }
+
+.ms-DetailsRow-cell {
+  background: transparent;
+  font-size: 1.2em;
+  align-self: center;
+  padding: 0px 12px; }
+  .ms-DetailsRow-cell span,
+  .ms-DetailsRow-cell a {
+    font-size: 1em; }
+
+.ms-FocusZone.ms-DetailsRow {
+  border: none; }
+
+div.ms-List-page {
+  background: transparent; }
+  div.ms-List-page .ms-GroupedList-group {
+    margin-top: 1.5em;
+    padding-bottom: 1em;
+    background: #fafafc; }
+    div.ms-List-page .ms-GroupedList-group .ms-GroupHeader {
+      border-bottom: 0px; }
+      div.ms-List-page .ms-GroupedList-group .ms-GroupHeader:hover {
+        background: #fafafc; }
+    div.ms-List-page .ms-GroupedList-group .ms-List-cell .ms-DetailsRow {
+      background: transparent; }
+      div.ms-List-page .ms-GroupedList-group .ms-List-cell .ms-DetailsRow:hover {
+        background: #fafafc; }
+
+h3.panel-title a {
+  color: #444; }
+
+button:focus {
+  outline: none; }

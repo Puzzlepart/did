@@ -11,11 +11,10 @@
     "build:scss": "node-sass --include-path scss scss/main.scss public/css/main.css",
     "watch:scss": "onchange -k -i -d 750 \"./**/*.scss\" -- npm run build:scss",
     "watch:client": "tsc --watch",
-    "package": "npm run package:client:prod && npm run build:scss",
     "package:client": "npm run build:client && webpack --config webpack.config.js",
     "package:client:prod": "set NODE_ENV=production&&npm run build:client && webpack --config webpack.config.js",
     "watch:client:package": "onchange -k -i -d 750 \"./client/**/*.ts\" \"./client/**/*.tsx\" -- npm run package:client",
-    "pregit:add:all": "npm run package",
+    "pregit:add:all": "npm run package:client:prod && npm run build:scss",
     "clean": "rimraf ./lib && rimraf ./public/js"
   },
   "dependencies": {
