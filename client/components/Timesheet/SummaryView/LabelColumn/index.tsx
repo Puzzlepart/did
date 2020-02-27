@@ -7,7 +7,7 @@ import * as React from 'react';
  */
 export const LabelColumn = ({ row }) => {
     if (row.label) return <div style={{ fontWeight: 500 }}>{row.label}</div>;
-    
+        
     return (
         <>
             <div style={{ display: 'inline-block', verticalAlign: 'top', width: 30 }}>
