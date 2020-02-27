@@ -11,8 +11,10 @@ export interface IDurationColumnProps {
  * @description 
  */
 export const DurationColumn = ({ row, column }: IDurationColumnProps) => {
+    let style: React.CSSProperties = column.data.style || {};
+    if (row.label === 'Total') style.fontWeight = 500;
     return (
-        <div style={{ fontWeight: row.label && 500 }}>
+        <div style={style}>
             {row[column.fieldName]}
         </div>
     );
