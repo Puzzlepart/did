@@ -1,4 +1,5 @@
 .c-Timesheet-projectColumn {
+  width: 100%;
   .c-Timesheet-projectColumn-content {
     vertical-align: top;
     display: inline-block;
@@ -7,10 +8,5 @@
     vertical-align: top;
     display: inline-block;
     margin: 0 0 0 4px;
-  }
-  .c-Timesheet-projectColumn-warning {
-    vertical-align: top;
-    display: inline-block;
-    margin: 0 8px 0 0;
   }
 }
