@@ -51,7 +51,6 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
         return (
             <div className='c-Timesheet'>
                 <div className='c-Timesheet-section-container'>
-                    HELLO BUNDLE DID YA LOAD
                     <div className='c-Timesheet-section-content'>
                         <ActionBar
                             period={period}
