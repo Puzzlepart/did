@@ -2,5 +2,4 @@
 
 
 ## Checklist ###
-- [ ] Updated production bundle
 - [ ] Tested locally
