@@ -6,6 +6,3 @@ package-lock.json
 lib
 server.js
 resources/
-public/js
-public/css
-.gitignore
