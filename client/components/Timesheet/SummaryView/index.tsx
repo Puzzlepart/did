@@ -72,8 +72,8 @@ function generateRows({ type }: ISummaryViewProps, events: any[], columns: IColu
         }
         case SummaryViewType.Admin: {
             let resources = _.unique(events.map(e => e.resourceName), r => r).sort((a, b) => {
-                if (a < b) return 1;
-                if (b < a) return -1;
+                if (a > b) return 1;
+                if (a < b) return -1;
                 return 0;
             });
             return resources.map(res => {
@@ -148,8 +148,7 @@ export const SummaryView = (props: ISummaryViewProps) => {
     const columns = createColumns(props);
     let events = props.events.filter(e => !!e.project);
     let customerOptions = getCustomerOptions(events);
-
-    console.log(customerId);
+    
     if (customerId !== 'All') events = events.filter(e => e.customer.id === customerId);
 
     let items = [

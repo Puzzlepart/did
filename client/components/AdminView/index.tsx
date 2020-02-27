@@ -36,7 +36,10 @@ export const AdminView = () => {
                     <Reports />
                 </PivotItem>
                 <PivotItem itemID='users' itemKey='users' headerText='Users' itemIcon='FabricUserFolder' style={linkStyle}>
-                    <List enableShimmer={loading} items={value(data, 'users', [])} columns={USER_LIST_COLUMNS} />
+                    <List
+                        enableShimmer={loading}
+                        items={value(data, 'users', [])}
+                        columns={USER_LIST_COLUMNS} />
                 </PivotItem>
                 <PivotItem itemID='summary' itemKey='summary' headerText='Summary' itemIcon='CalendarWeek' style={linkStyle}>
                     <AdminSummaryView
