@@ -84,11 +84,6 @@ h5 {
   .c-Timesheet .c-Timesheet-statusbar .c-UserMessage {
     margin: 5px 0; }
 
-.c-Timesheet .ms-MessageBar.ms-MessageBar-multiline {
-  background: #f1f1f1; }
-  .c-Timesheet .ms-MessageBar.ms-MessageBar-multiline.ms-MessageBar--warning {
-    background-color: rgba(255, 200, 10, 0.2); }
-
 .c-Timesheet .ms-MessageBar-icon {
   display: flex;
   align-self: center; }
@@ -114,26 +109,6 @@ h5 {
     font-size: 1.6em;
     margin: 0 0 12px 0; }
 
-.c-Timesheet-weekpicker--callout .ms-DatePicker-day--today {
-  background-color: inherit !important;
-  color: inherit !important;
-  font-weight: inherit !important;
-  border: none !important;
-  outline: none !important; }
-
-.c-Timesheet-weekpicker--callout .ms-DatePicker-day--highlighted {
-  background-color: inherit !important;
-  color: inherit !important;
-  font-weight: inherit !important;
-  border: none !important;
-  outline: none !important; }
-  .c-Timesheet-weekpicker--callout .ms-DatePicker-day--highlighted button {
-    background-color: inherit !important;
-    color: inherit !important;
-    font-weight: inherit !important;
-    border: none !important;
-    outline: none !important; }
-
 .c-Timesheet-summary {
   position: relative; }
   .c-Timesheet-summary .c-Timesheet-summary-customerDropdown {
@@ -153,6 +128,16 @@ h5 {
     .c-Timesheet-summary .c-Timesheet-summary-customerDropdown [class*='ms-Dropdown-caretDownWrapper'] {
       padding: 6px 0 0 0; }
 
+.c-Timesheet-projectColumn {
+  width: 100%; }
+  .c-Timesheet-projectColumn .c-Timesheet-projectColumn-content {
+    vertical-align: top;
+    display: inline-block; }
+  .c-Timesheet-projectColumn .c-Timesheet-projectColumn-clear {
+    vertical-align: top;
+    display: inline-block;
+    margin: 0 0 0 4px; }
+
 .c-Timesheet-weekPicker {
   margin-top: 0; }
   .c-Timesheet-weekPicker:hover input {
@@ -165,6 +150,26 @@ h5 {
       top: 0;
       right: 20px;
       align-self: center; }
+
+.c-Timesheet-weekpicker--callout .ms-DatePicker-day--today {
+  background-color: inherit !important;
+  color: inherit !important;
+  font-weight: inherit !important;
+  border: none !important;
+  outline: none !important; }
+
+.c-Timesheet-weekpicker--callout .ms-DatePicker-day--highlighted {
+  background-color: inherit !important;
+  color: inherit !important;
+  font-weight: inherit !important;
+  border: none !important;
+  outline: none !important; }
+  .c-Timesheet-weekpicker--callout .ms-DatePicker-day--highlighted button {
+    background-color: inherit !important;
+    color: inherit !important;
+    font-weight: inherit !important;
+    border: none !important;
+    outline: none !important; }
 
 .c-projectdetails {
   margin-top: 30px; }
