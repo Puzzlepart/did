@@ -39,7 +39,12 @@ export const AdminView = () => {
                     <List enableShimmer={loading} items={value(data, 'users', [])} columns={USER_LIST_COLUMNS} />
                 </PivotItem>
                 <PivotItem itemID='summary' itemKey='summary' headerText='Summary' itemIcon='CalendarWeek' style={linkStyle}>
-                    <AdminSummaryView />
+                    <AdminSummaryView
+                        onLinkClick={onLinkClick}
+                        defaultSelectedKey={path[1]}
+                        defaultRange={5}
+                        loadingText='Loading summary...'
+                        valueFormat='Show last {0} weeks' />
                 </PivotItem>
                 <PivotItem itemID='customers' itemKey='customers' headerText='Customers' itemIcon='Work' style={linkStyle}>
                     <Pivot defaultSelectedKey={path[1]} onLinkClick={onLinkClick}>

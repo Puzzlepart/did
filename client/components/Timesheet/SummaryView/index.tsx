@@ -18,7 +18,7 @@ import { Dropdown, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
  *
  * @param {ISummaryViewProps} props Props
 */
-function createColumns({ events, type, period, maxColumns }: ISummaryViewProps) {
+function createColumns({ events, type, period, range: maxColumns }: ISummaryViewProps) {
     let columns = [];
     switch (type) {
         case SummaryViewType.UserWeek: {
@@ -34,9 +34,7 @@ function createColumns({ events, type, period, maxColumns }: ISummaryViewProps) 
             });
         }
     }
-    console.log(columns);
     if (maxColumns) columns = [].concat(columns).splice(columns.length - maxColumns);
-    console.log(columns, maxColumns);
     return [
         col('label', '', { minWidth: 350, maxWidth: 350, isMultiline: true, isResizable: true }, (row: any) => <LabelColumn row={row} />),
         ...columns,
@@ -48,41 +46,46 @@ function createColumns({ events, type, period, maxColumns }: ISummaryViewProps) 
  * Generate project rows
  *
  * @param {ISummaryViewProps} props Props
+ * @param {any[]} events Events
  * @param {IColumn[]} columns Columns
 */
-function generateRows({ events, type }: ISummaryViewProps, columns: IColumn[]) {
+function generateRows({ type }: ISummaryViewProps, events: any[], columns: IColumn[]) {
     switch (type) {
         case SummaryViewType.UserWeek: {
             let projects = _.unique(events.map(e => e.project), (p: IProject) => p.id);
             return projects.map(project => {
                 let projectEvents = events.filter(event => event.project.id === project.id);
                 return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
-                    obj[col.fieldName] = [...projectEvents]
+                    const sum = [...projectEvents]
                         .filter(event => formatDate(event.startTime, 'L') === col.fieldName)
                         .reduce((sum, event) => sum += event.durationHours, 0);
+                    obj[col.fieldName] = sum;
+                    obj.sum += sum;
                     return obj;
                 },
                     {
-                        sum: projectEvents.reduce((sum, event) => sum += event.durationHours, 0),
+                        sum: 0,
                         project,
                         customer: project.customer,
                     })
             });
         }
         case SummaryViewType.Admin: {
-            let resources = _.unique(events.map(e => e.resourceName), r => r);
+            let resources = _.unique(events.map(e => e.resourceName), r => r).sort((a, b) => {
+                if (a < b) return 1;
+                if (b < a) return -1;
+                return 0;
+            });
             return resources.map(res => {
                 let resourceEvents = events.filter(event => event.resourceName === res);
                 return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
-                    obj[col.fieldName] = [...resourceEvents]
+                    const sum = [...resourceEvents]
                         .filter(event => event.weekNumber === col.fieldName)
                         .reduce((sum, event) => sum += event.durationHours, 0);
+                    obj[col.fieldName] = sum;
+                    obj.sum += sum;
                     return obj;
-                },
-                    {
-                        sum: resourceEvents.reduce((sum, event) => sum += event.durationHours, 0),
-                        label: res,
-                    })
+                }, { label: res, sum: 0 })
             });
         }
     }
@@ -92,31 +95,30 @@ function generateRows({ events, type }: ISummaryViewProps, columns: IColumn[]) {
 * Generate total row
 *
  * @param {ISummaryViewProps} props Props
+ * @param {any[]} events Events
  * @param {IColumn[]} columns Columns
 */
-function generateTotalRow({ events, type }: ISummaryViewProps, columns: IColumn[]) {
+function generateTotalRow({ type }: ISummaryViewProps, events: any[], columns: IColumn[]) {
     switch (type) {
         case SummaryViewType.UserWeek: {
             return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
-                obj[col.fieldName] = [...events]
+                const sum = [...events]
                     .filter(event => formatDate(event.startTime, 'L') === col.fieldName)
                     .reduce((sum, event) => sum += event.durationHours, 0);
+                obj[col.fieldName] = sum;
+                obj.sum += sum;
                 return obj;
-            }, {
-                label: 'Total',
-                sum: events.reduce((sum, event) => sum += event.durationHours, 0),
-            });
+            }, { label: 'Total', sum: 0 });
         }
         case SummaryViewType.Admin: {
             return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
-                obj[col.fieldName] = [...events]
+                const sum = [...events]
                     .filter(event => event.weekNumber === col.fieldName)
                     .reduce((sum, event) => sum += event.durationHours, 0);
+                obj[col.fieldName] = sum;
+                obj.sum += sum;
                 return obj;
-            }, {
-                label: 'Total',
-                sum: events.reduce((sum, event) => sum += event.durationHours, 0),
-            });
+            }, { label: 'Total', sum: 0 });
         }
     }
 }
@@ -147,11 +149,12 @@ export const SummaryView = (props: ISummaryViewProps) => {
     let events = props.events.filter(e => !!e.project);
     let customerOptions = getCustomerOptions(events);
 
+    console.log(customerId);
     if (customerId !== 'All') events = events.filter(e => e.customer.id === customerId);
 
     let items = [
-        ...generateRows(props, columns),
-        generateTotalRow(props, columns),
+        ...generateRows(props, events, columns),
+        generateTotalRow(props, events, columns),
     ];
 
     return (
