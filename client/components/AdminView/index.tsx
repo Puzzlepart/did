@@ -11,7 +11,7 @@ import GET_DATA from './GET_DATA';
 import { Reports } from './Reports';
 import { USER_LIST_COLUMNS } from './USER_LIST_COLUMNS';
 
-function getPath() {
+function getPath(): string[] {
     let [, path] = document.location.hash.substring(1).split('=');
     return (path || '').split('/');
 }
@@ -25,7 +25,7 @@ export const AdminView = () => {
 
     let path = getPath();
 
-    const onLinkClick = (item: PivotItem, ev: React.MouseEvent<any>) => document.location.hash = `#path=${item.props.itemID}`;
+    const onLinkClick = (item: PivotItem) => document.location.hash = `#path=${item.props.itemID}`;
 
     const linkStyle = { padding: 10 };
 
