@@ -19,4 +19,5 @@ export interface ITimeEntry extends IObjectWithKey {
     day: string;
     isManualMatch?: boolean;
     isIgnored?: boolean;
+    error?: Error;
 }

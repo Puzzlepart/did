@@ -49,8 +49,10 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!) {
         key
         name
         inactive
+      }      
+	    error {
+        message
       }
-      overtime
     } 
     confirmedDuration
   }

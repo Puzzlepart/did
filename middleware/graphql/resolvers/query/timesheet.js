@@ -1,6 +1,7 @@
 const _ = require('underscore');
 const findBestMatch = require('string-similarity').findBestMatch;
 const log = require('debug')('middleware/graphql/resolvers/query/timesheet');
+const format = require('string-format');
 const { formatDate } = require('../../../../utils');
 
 const CATEGORY_REGEX = /((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>[A-Za-z0-9]{2,}))/gmi;
@@ -99,12 +100,14 @@ function matchEvent(evt, projects, customers) {
     }
     if (evt.customer && !evt.project) {
         log('(matchEvent) Found match for customer [%s] for [%s], but not for any project', evt.customer.name, evt.title);
-        let suggestedProject = getProjectSuggestion(projects, evt.customer, projectKey);
-        if (suggestedProject) evt.suggestedProject = suggestedProject;
+        evt.suggestedProject = getProjectSuggestion(projects, evt.customer, projectKey);
     }
-    console.log(evt.project);
-    evt.invalidMatch = (evt.project && (evt.project.invalid || evt.customer.invalid));
-    console.log(evt.invalidMatch);
+    if (evt.project && (evt.project.inactive || evt.customer.inactive)) {
+        if (evt.project.inactive) evt.error = { message: format('Project {0} for {1} is no longer active. Please resolve the event in Outlook.', evt.project.name, evt.customer.name) };
+        if (evt.customer.inactive) evt.error = { message: format('Customer {0} is no longer active. Please resolve the event in Outlook.', evt.customer.name) };
+        evt.project = null;
+        evt.customer = null;
+    }
     return evt;
 }
 
