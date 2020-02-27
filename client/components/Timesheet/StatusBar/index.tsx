@@ -5,10 +5,29 @@ import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { Shimmer } from 'office-ui-fabric-react/lib/Shimmer';
 import * as React from 'react';
 import { IStatusBarProps } from './IStatusBarProps';
+import { ITimeEntry } from 'models';
+
+/**
+ * Get total duration
+ * 
+ * @param {ITimeEntry[]} events Events
+ */
+function getTotalDuration(events: ITimeEntry[]) {
+    return events.reduce((sum, event) => sum += event.durationMinutes, 0);
+}
+
+/**
+ * Get matched duration
+ * 
+ * @param {ITimeEntry[]} events Events
+ */
+function getMatchedDuration(events: ITimeEntry[]) {
+    return events.filter(event => !!event.project).reduce((sum, event) => sum += event.durationMinutes, 0);
+}
 
 export const StatusBar = ({ loading, isConfirmed, events, ignoredEvents, onClearIgnores, errors }: IStatusBarProps) => {
-    let totalDuration = events.reduce((sum, event) => sum += event.durationMinutes, 0);
-    let matchedDuration = events.filter(event => !!event.project).reduce((sum, event) => sum += event.durationMinutes, 0);
+    let totalDuration = getTotalDuration(events);
+    let matchedDuration = getMatchedDuration(events);
 
     return (
         <div className='c-Timesheet-statusbar' style={{ marginTop: 10, marginLeft: -10, marginRight: -10 }}>
@@ -42,14 +61,14 @@ export const StatusBar = ({ loading, isConfirmed, events, ignoredEvents, onClear
                         <div className="col-sm" hidden={ignoredEvents.length === 0 || isConfirmed}>
                             <UserMessage
                                 type={MessageBarType.info}
-                                iconName='StatusCircleErrorX'>
+                                iconName='DependencyRemove'>
                                 <p>You have {ignoredEvents.length} ignored event(s). <a href="#" onClick={onClearIgnores}>Click to undo</a></p>
                             </UserMessage>
                         </div>
                         <div className="col-sm" hidden={errors.length === 0}>
                             <UserMessage
                                 type={MessageBarType.severeWarning}
-                                iconName='StatusCircleErrorX'>
+                                iconName='ErrorBadge'>
                                 <p>You have {errors.length} unresolved errors. You need to resolve them before confirming the week.</p>
                             </UserMessage>
                         </div>
