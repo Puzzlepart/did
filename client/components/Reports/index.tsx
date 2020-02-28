@@ -1,9 +1,9 @@
 import { useQuery } from '@apollo/react-hooks';
 import { FilterPanel } from 'components/FilterPanel';
-import { BaseFilter, IFilter, MonthFilter, ResourceFilter, YearFilter, WeekFilter } from 'components/FilterPanel/Filters';
+import { IFilter } from 'components/FilterPanel/Filters';
 import { IColumn, List } from 'components/List';
 import { UserMessage } from 'components/UserMessage';
-import { getValueTyped as value, getMonthName } from 'helpers';
+import { getMonthName, getValueTyped as value } from 'helpers';
 import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
 import * as React from 'react';
 import { useState } from 'react';
@@ -13,14 +13,14 @@ import * as excelUtils from 'utils/exportExcel';
 import { generateColumn } from 'utils/generateColumn';
 import { GET_CONFIRMED_TIME_ENTRIES } from './GET_CONFIRMED_TIME_ENTRIES';
 import { IReportsProps } from './IReportsProps';
+import { REPORTS_FILTERS } from './REPORTS_FILTERS';
 
-const REPORTS_FILTERS: BaseFilter[] = [
-    new WeekFilter('weekNumber', 'Week'),
-    new MonthFilter('month', 'Month'),
-    new YearFilter('yearNumber', 'Year'),
-    new ResourceFilter('resourceName', 'Employee'),
-]
-
+/**
+ * Get columns
+ * 
+ * @param {Object} entry Entry
+ * @param {string[]} skip Skip
+ */
 function getColumns(entry: Object = {}, skip: string[]): IColumn[] {
     return Object.keys(entry)
         .filter(f => skip.indexOf(f) === -1)

@@ -17,12 +17,7 @@ async function confirmedTimeEntries(_obj, args, context) {
     let [projects, customers, confirmedTimeEntries] = await Promise.all([
         context.services.storage.getProjects(),
         context.services.storage.getCustomers(),
-        context.services.storage.getConfirmedTimeEntries({
-            resourceId,
-            weekNumber: args.weekNumber,
-            yearNumber: args.yearNumber,
-            projectId: args.projectId
-        }, { dateFormat: args.dateFormat }),
+        context.services.storage.getConfirmedTimeEntries({ resourceId, weekNumber: args.weekNumber, yearNumber: args.yearNumber, projectId: args.projectId }, { dateFormat: args.dateFormat }),
     ]);
     let entries = confirmedTimeEntries.map(entry => ({
         ...entry,

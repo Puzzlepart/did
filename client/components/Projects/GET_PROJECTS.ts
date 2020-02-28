@@ -15,8 +15,6 @@ export const GET_PROJECTS = gql`
             description
             webLink
             icon
-            budget
-            hourlyRate
             customerKey
             customer {
                 id

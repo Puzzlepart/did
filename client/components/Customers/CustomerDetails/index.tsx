@@ -12,11 +12,11 @@ export const CustomerDetails = ({ customer }) => {
 
     return (
         <div>
-            <>
+            <div>
                 <h3>{customer.name}</h3>
                 <p hidden={!customer.description}>{customer.description}</p>
                 <p hidden={!customer.webLink}><a href={customer.webLink}>{customer.webLink}</a></p>
-            </>
+            </div>
             {error && <MessageBar messageBarType={MessageBarType.error}>An error occured.</MessageBar>}
             {!error && (
                 <ProjectList

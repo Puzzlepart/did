@@ -10,8 +10,6 @@ type Project implements BaseEntity {
 	description: String
 	webLink: String
 	icon: String
-	budget: Int
-	hourlyRate: Int
 	customerKey: String
 	customer: Customer
 	inactive: Boolean
@@ -23,6 +21,7 @@ type Customer implements BaseEntity {
 	name: String
 	description: String
 	webLink: String
+	icon: String
 	inactive: Boolean
 }
 
@@ -136,8 +135,8 @@ type BaseResult {
 }
 
 type Mutation {
-	createProject(customerKey: String!, projectKey: String!, name: String!, icon: String): BaseResult
-	createCustomer(key: String!, name: String!, description: String!): BaseResult
+	createProject(customerKey: String!, projectKey: String!, name: String!, description: String!, icon: String!): BaseResult
+	createCustomer(key: String!, name: String!, description: String!, icon: String!): BaseResult
 	confirmPeriod(entries: [TimeEntryInput!], startDateTime: String!,  endDateTime: String!): BaseResult!
 	unconfirmPeriod(startDateTime: String!, endDateTime: String!): BaseResult!
 	updateWeek(weekNumber: Int!, closed: Boolean!): Boolean!

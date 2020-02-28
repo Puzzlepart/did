@@ -1,4 +1,4 @@
-const { queryTable, parseArray, isEqual, lt, gt, and, combine, stringFilter, intFilter, dateFilter, createQuery, addEntity, updateEntity, entGen } = require('../utils/table');
+const { queryTable, queryTableAll, parseArray, isEqual, lt, gt, and, combine, stringFilter, intFilter, dateFilter, createQuery, addEntity, updateEntity, entGen } = require('../utils/table');
 const log = require('debug')('services/storage');
 const arraySort = require('array-sort');
 
@@ -21,8 +21,8 @@ function StorageService(tid) {
 StorageService.prototype.getSubscription = function () {
     return new Promise(async (resolve) => {
         const query = createQuery(1, ['Name']).where('RowKey eq ?', this.tenantId);
-        var sub = await queryTable(SUBSCRIPTIONS, query);
-        resolve(parseArray(sub)[0]);
+        var { entries } = await queryTable(SUBSCRIPTIONS, query);
+        resolve(parseArray(entries)[0]);
     });
 };
 
@@ -34,8 +34,8 @@ StorageService.prototype.getSubscription = function () {
 StorageService.prototype.getUser = async function (userId) {
     let filter = combine(this.filter, and, stringFilter('RowKey', isEqual, userId));
     const query = createQuery(1, ['Role', 'StartPage']).where(filter);
-    const users = await queryTable(USERS, query);
-    return parseArray(users)[0];
+    const { entries } = await queryTable(USERS, query);
+    return parseArray(entries)[0];
 }
 
 /**
@@ -48,8 +48,8 @@ StorageService.prototype.getProjects = async function (customerKey, sortBy) {
     let filter = this.filter;
     if (customerKey) filter = combine(filter, and, stringFilter('CustomerKey', isEqual, customerKey));
     let query = createQuery(1000, undefined, filter);
-    const result = await queryTable(PROJECTS, query);
-    let projects = parseArray(result, undefined, { idUpper: true });
+    const { entries } = await queryTable(PROJECTS, query);
+    let projects = parseArray(entries, undefined, { idUpper: true });
     if (sortBy) projects = arraySort(projects, sortBy);
     return projects;
 }
@@ -59,8 +59,8 @@ StorageService.prototype.getProjects = async function (customerKey, sortBy) {
  */
 StorageService.prototype.getWeeks = async function () {
     let query = createQuery(1000, undefined, this.filter);
-    const result = await queryTable(WEEKS, query);
-    const weeks = parseArray(result);
+    const { entries } = await queryTable(WEEKS, query);
+    const weeks = parseArray(entries);
     return weeks;
 }
 
@@ -79,19 +79,17 @@ StorageService.prototype.updateWeek = async function (weekNumber, closed) {
 /**
  * Create project
  * 
- * @param {*} customerKey 
- * @param {*} projectKey 
- * @param {*} name 
- * @param {*} icon 
+ * @param {*} model
  */
-StorageService.prototype.createProject = async function (customerKey, projectKey, name, icon) {
-    let projectId = (`${customerKey} ${projectKey}`).toUpperCase();
+StorageService.prototype.createProject = async function (model) {
+    let projectId = (`${model.customerKey} ${model.projectKey}`).toUpperCase();
     let entity = await addEntity(PROJECTS, {
         PartitionKey: entGen.String(this.tenantId),
         RowKey: entGen.String(projectId),
-        Name: entGen.String(name),
-        CustomerKey: entGen.String(customerKey.toUpperCase()),
-        Icon: entGen.String(icon || 'Page'),
+        Name: entGen.String(model.name),
+        Description: entGen.String(model.description),
+        CustomerKey: entGen.String(model.customerKey.toUpperCase()),
+        Icon: entGen.String(model.icon || 'Page'),
     });
     return entity;
 }
@@ -99,17 +97,15 @@ StorageService.prototype.createProject = async function (customerKey, projectKey
 /**
  * Create customer
  * 
- * @param {*} key 
- * @param {*} name 
- * @param {*} description 
+ * @param {*} model
  */
-StorageService.prototype.createCustomer = async function (key, name, description) {
-    let customerId = key.toUpperCase();
+StorageService.prototype.createCustomer = async function (model) {
     let entity = await addEntity(CUSTOMERS, {
         PartitionKey: entGen.String(this.tenantId),
-        RowKey: entGen.String(customerId),
-        Name: entGen.String(name),
-        Description: entGen.String(description),
+        RowKey: entGen.String(model.key.toUpperCase()),
+        Name: entGen.String(model.name),
+        Description: entGen.String(model.description),
+        Icon: entGen.String(model.icon || 'Page'),
     });
     return entity;
 }
@@ -119,8 +115,8 @@ StorageService.prototype.createCustomer = async function (key, name, description
  */
 StorageService.prototype.getCustomers = async function () {
     const query = createQuery(1000, undefined, this.filter);
-    const result = await queryTable(CUSTOMERS, query);
-    return parseArray(result, undefined, { idUpper: true });
+    const { entries } = await queryTable(CUSTOMERS, query);
+    return parseArray(entries, undefined, { idUpper: true });
 }
 
 /**
@@ -140,13 +136,10 @@ StorageService.prototype.getConfirmedTimeEntries = async function (filters, opti
     if (filters.startDateTime) filter = combine(filter, and, dateFilter('StartTime', gt, entGen.DateTime(new Date(filters.startDateTime))._));
     if (filters.endDateTime) filter = combine(filter, and, dateFilter('StartTime', lt, entGen.DateTime(new Date(filters.endDateTime))._));
     log('Querying table %s with filter %s', CONFIRMEDTIMEENTRIES, filter);
-    let query = createQuery(1000, null, filter);
-    let result = await queryTable(CONFIRMEDTIMEENTRIES, query);
+    let query = createQuery(1000, undefined, filter);
+    let result = await queryTableAll(CONFIRMEDTIMEENTRIES, query);
     if (!options.noParse) {
-        result = parseArray(result, res => ({
-            ...res,
-            customerId: res.projectId.split(' ')[0],
-        }), options);
+        result = parseArray(result, res => ({ ...res, customerId: res.projectId.split(' ')[0], }), options);
     }
     result = result.sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
     return result;
@@ -157,16 +150,16 @@ StorageService.prototype.getConfirmedTimeEntries = async function (filters, opti
  */
 StorageService.prototype.getUsers = async function () {
     const query = createQuery(1000, undefined).where(this.filter);
-    const result = await queryTable(USERS, query);
-    return parseArray(result);
+    const { entries } = await queryTable(USERS, query);
+    return parseArray(entries);
 }
 /**
  * Get FAQ
  */
 StorageService.prototype.getFAQ = async function () {
     const query = createQuery(1000, undefined).where(this.filter);
-    const result = await queryTable(FAQ, query);
-    return parseArray(result);
+    const { entries } = await queryTable(FAQ, query);
+    return parseArray(entries);
 }
 
 module.exports = StorageService;

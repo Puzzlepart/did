@@ -9,5 +9,6 @@ export const GET_CUSTOMERS = gql`
         name
         description
         webLink
+        icon
     }
 }`;

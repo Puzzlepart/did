@@ -26,8 +26,6 @@ export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
     const { data, loading } = useQuery(GET_CONFIRMED_TIME_ENTRIES, { fetchPolicy: 'cache-first' });
     let entries = value<any[]>(data, 'result.entries', []);
 
-    if (loading) return <ShimmeredDetailsList items={[]} isPlaceholderData={true} shimmerLines={10} enableShimmer={true} />;
-
     let periods: IAdminSummaryViewPeriod[] = _.unique(entries.map(e => e.yearNumber), y => y)
         .sort((a, b) => a - b)
         .map(year => ({

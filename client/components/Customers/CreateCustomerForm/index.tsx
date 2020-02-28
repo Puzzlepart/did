@@ -1,20 +1,21 @@
-import * as React from 'react';
-import { useState } from 'react';
-import { TextField } from 'office-ui-fabric-react/lib/TextField';
+import { useMutation } from '@apollo/react-hooks';
+import { UserMessage } from 'components/UserMessage';
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button';
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
-import { useMutation } from '@apollo/react-hooks';
+import { TextField } from 'office-ui-fabric-react/lib/TextField';
+import * as React from 'react';
+import { useState } from 'react';
 import CREATE_CUSTOMER from './CREATE_CUSTOMER';
-import { UserMessage } from 'components/UserMessage';
-
+import { ICreateCustomerFormModel } from './ICreateCustomerFormModel';
+import { ICreateCustomerFormProps } from './ICreateCustomerFormProps';
 
 /**
  * @component CreateCustomerForm
  * @description Form for creating a new Custoner
  */
-export const CreateCustomerForm = ({ emptyModel = { key: '', name: '', description: '' } }) => {
+export const CreateCustomerForm = ({ initialModel = { key: '', name: '', description: '', icon: 'Page' } }: ICreateCustomerFormProps) => {
     let [message, setMessage] = useState<{ text: string, type: MessageBarType }>(null);
-    let [model, setModel] = useState(emptyModel);
+    let [model, setModel] = useState<ICreateCustomerFormModel>(initialModel);
     let [addCustomer, { loading }] = useMutation(CREATE_CUSTOMER);
 
     const onFormSubmit = async () => {
@@ -24,7 +25,7 @@ export const CreateCustomerForm = ({ emptyModel = { key: '', name: '', descripti
         } else {
             setMessage({ text: result.error, type: MessageBarType.error });
         }
-        setModel(emptyModel);
+        setModel(initialModel);
         window.setTimeout(() => setMessage(null), 5000);
     }
 
@@ -60,6 +61,13 @@ export const CreateCustomerForm = ({ emptyModel = { key: '', name: '', descripti
                 multiline={true}
                 onChange={(_event, description) => setModel({ ...model, description })}
                 value={model.description} />
+            <TextField
+                styles={{ root: { marginTop: 12, width: 300 } }}
+                minLength={4}
+                label='Icon'
+                onChange={(_event, icon) => setModel({ ...model, icon })}
+                iconProps={{ iconName: model.icon }}
+                value={model.icon} />
             <PrimaryButton
                 styles={{ root: { marginTop: 16 } }}
                 text='Add'

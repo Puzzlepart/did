@@ -49,7 +49,7 @@ function createColumns({ events, type, period, range }: ISummaryViewProps) {
     return [
         col('label', '', { minWidth: 350, maxWidth: 350, isMultiline: true, isResizable: true }, (row: any) => <LabelColumn row={row} />),
         ...columns,
-        col('sum', 'Sum', { minWidth: 50, maxWidth: 50, isResizable: false, data: { style: { fontWeight: 500 } } }, (row: any) => <div style={{ fontWeight: 500 }}>{row.sum}</div>),
+        col('sum', 'Sum', { minWidth: 50, maxWidth: 50, isResizable: false, data: { style: { fontWeight: 500 } } }, (row: any, _index: number, col: IColumn) => <DurationColumn row={row} column={col} />),
     ];
 }
 

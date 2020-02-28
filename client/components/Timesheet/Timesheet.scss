@@ -16,7 +16,60 @@
     align-self: center;
   }
 
+  .ms-DetailsRow-check,
+  .ms-DetailsRow-cellCheck,
+  .ms-DetailsHeader-cellIsCheck {
+    display: none;
+  }
+
+  .ms-DetailsHeader-cellName,
+  .ms-GroupHeader-title {
+    font-weight: normal;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+  }
+
+  .ms-DetailsRow-cell {
+    background: transparent;
+    font-size: 1.2em;
+    align-self: center;
+    padding: 0px 12px;
+
+    span,
+    a {
+      font-size: 1em;
+    }
+  }
+
+  .ms-FocusZone.ms-DetailsRow {
+    border: none;
+  }
+
   .ms-List-page {
+    background: transparent;
+
+    .ms-GroupedList-group {
+      margin-top: 1.5em;
+      padding-bottom: 1em;
+      background: $lightgray_background;
+
+      .ms-GroupHeader {
+        border-bottom: 0px;
+        &:hover {
+          background: $lightgray_background;
+        }
+      }
+
+      .ms-List-cell {
+        .ms-DetailsRow {
+          background: transparent;
+
+          &:hover {
+            background: $lightgray_background;
+          }
+        }
+      }
+    }
     div.ms-List-cell {
       min-height: 0;
       .ms-DetailsRow {
