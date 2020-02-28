@@ -1,16 +1,16 @@
 import { useQuery } from '@apollo/react-hooks';
+import { CreateCustomerForm } from 'components/Customers/CreateCustomerForm';
 import { IColumn, List, SelectionMode } from 'components/List';
 import { getValueTyped as value } from 'helpers';
 import { ICustomer } from 'models';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
+import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import * as React from 'react';
 import { useState } from 'react';
 import { generateColumn as col } from 'utils/generateColumn';
 import { getHash } from 'utils/getHash';
 import { CustomerDetails } from './CustomerDetails';
 import { GET_CUSTOMERS } from './GET_CUSTOMERS';
-import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
-import { CreateCustomerForm } from 'components/AdminView/CreateCustomerForm';
 
 export const Customers = () => {
     const [selected, setSelected] = useState<ICustomer>(null);
@@ -42,7 +42,6 @@ export const Customers = () => {
                 )}
                 {selected && <CustomerDetails customer={selected} />}
             </PivotItem>
-
             <PivotItem itemID='new' itemKey='new' headerText='Create new' itemIcon='AddTo'>
                 <CreateCustomerForm />
             </PivotItem>
