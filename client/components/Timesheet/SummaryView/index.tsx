@@ -1,17 +1,16 @@
 
 import { IColumn, List } from 'components/List';
 import { formatDate, startOfWeek } from 'helpers';
-import { IProject, ICustomer } from 'models';
+import { ICustomer, IProject } from 'models';
 import * as moment from 'moment-timezone';
+import { Dropdown, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
 import * as React from 'react';
 import * as _ from 'underscore';
 import { generateColumn as col } from 'utils/generateColumn';
-import { ITimesheetPeriod } from '../ITimesheetPeriod';
-import { ISummaryViewProps } from './ISummaryViewProps';
-import { SummaryViewType } from "./SummaryViewType";
-import { LabelColumn } from './LabelColumn';
 import { DurationColumn } from './DurationColumn';
-import { Dropdown, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
+import { ISummaryViewProps } from './ISummaryViewProps';
+import { LabelColumn } from './LabelColumn';
+import { SummaryViewType } from "./SummaryViewType";
 
 /**
  * Create columns
