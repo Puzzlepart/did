@@ -6,6 +6,7 @@ import * as moment from 'moment-timezone';
 import { IPivotItemProps, Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import { Slider } from 'office-ui-fabric-react/lib/Slider';
 import { Spinner } from 'office-ui-fabric-react/lib/Spinner';
+import { ShimmeredDetailsList } from 'office-ui-fabric-react/lib/ShimmeredDetailsList';
 import * as React from 'react';
 import * as format from 'string-format';
 import * as _ from 'underscore';
@@ -24,7 +25,8 @@ export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
     const [range, setRange] = React.useState<number>(props.defaultRange);
     const { data, loading } = useQuery(GET_CONFIRMED_TIME_ENTRIES, { fetchPolicy: 'cache-first' });
     let entries = value<any[]>(data, 'result.entries', []);
-    if (loading) return <Spinner label={props.loadingText} />;
+
+    if (loading) return <ShimmeredDetailsList items={[]} isPlaceholderData={true} shimmerLines={10} enableShimmer={true} />;
 
     let periods: IAdminSummaryViewPeriod[] = _.unique(entries.map(e => e.yearNumber), y => y)
         .sort((a, b) => a - b)
@@ -48,7 +50,7 @@ export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
                         <Slider
                             valueFormat={value => format(props.valueFormat, value)}
                             min={1}
-                            max={10}
+                            max={_.unique(_entries, e => e.weekNumber).length}
                             defaultValue={5}
                             onChange={value => setRange(value)} />
                         <SummaryView
