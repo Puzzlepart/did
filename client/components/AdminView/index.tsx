@@ -7,8 +7,7 @@ import * as React from 'react';
 import { AdminSummaryView } from './AdminSummaryView';
 import { CreateCustomerForm } from './CreateCustomerForm';
 import { CreateProjectForm } from './CreateProjectForm';
-import GET_DATA from './GET_DATA';
-import { Reports } from './Reports';
+import GET_USERS from './GET_USERS';
 import { USER_LIST_COLUMNS } from './USER_LIST_COLUMNS';
 
 function getPath(): string[] {
@@ -21,7 +20,7 @@ function getPath(): string[] {
  * @description
  */
 export const AdminView = () => {
-    const { data, loading } = useQuery(GET_DATA);
+    const { data, loading } = useQuery(GET_USERS);
 
     let path = getPath();
 
@@ -32,9 +31,6 @@ export const AdminView = () => {
     return (
         <div className='c-AdminView'>
             <Pivot styles={{ root: { display: 'flex', flexWrap: 'wrap' } }} onLinkClick={onLinkClick} defaultSelectedKey={path[0]}>
-                <PivotItem itemID='reports' itemKey='reports' headerText='Reports' itemIcon='ReportDocument' style={linkStyle}>
-                    <Reports />
-                </PivotItem>
                 <PivotItem itemID='users' itemKey='users' headerText='Users' itemIcon='FabricUserFolder' style={linkStyle}>
                     <List
                         enableShimmer={loading}

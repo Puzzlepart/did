@@ -7,7 +7,7 @@ import { Customers } from './components/Customers';
 import { Timesheet } from './components/Timesheet';
 import { Projects } from './components/Projects';
 import { AdminView } from './components/AdminView';
-import { FAQ } from './components/FAQ';
+import { Reports } from './components/Reports';
 import { client } from './graphql';
 
 initializeIcons();
@@ -20,8 +20,7 @@ const COMPONENTS = {
     PROJECTS: document.getElementById('app-projects'),
     CUSTOMERS: document.getElementById('app-customers'),
     ADMIN: document.getElementById('app-admin'),
-    ADMIN_USER: document.getElementById('app-admin-user'),
-    FAQ: document.getElementById('app-faq'),
+    REPORTS: document.getElementById('app-reports'),
 }
 
 const getProps = (element: HTMLElement) => {
@@ -36,5 +35,5 @@ const getProps = (element: HTMLElement) => {
 if (COMPONENTS.TIMESHEET !== null) ReactDom.render(<ApolloProvider client={client}><Timesheet {...getProps(COMPONENTS.TIMESHEET)} /></ApolloProvider>, COMPONENTS.TIMESHEET);
 if (COMPONENTS.PROJECTS !== null) ReactDom.render(<ApolloProvider client={client}><Projects /></ApolloProvider>, COMPONENTS.PROJECTS);
 if (COMPONENTS.CUSTOMERS !== null) ReactDom.render(<ApolloProvider client={client}><Customers /></ApolloProvider>, COMPONENTS.CUSTOMERS);
+if (COMPONENTS.REPORTS !== null) ReactDom.render(<ApolloProvider client={client}><Reports {...getProps(COMPONENTS.REPORTS)} /></ApolloProvider>, COMPONENTS.REPORTS);
 if (COMPONENTS.ADMIN !== null) ReactDom.render(<ApolloProvider client={client}><AdminView {...getProps(COMPONENTS.ADMIN)} /></ApolloProvider>, COMPONENTS.ADMIN);
-if (COMPONENTS.FAQ !== null) ReactDom.render(<ApolloProvider client={client}><FAQ {...getProps(COMPONENTS.FAQ)} /></ApolloProvider>, COMPONENTS.FAQ);
