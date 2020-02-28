@@ -53,12 +53,9 @@ function parseArray(arr, mapFunc, options) {
  */
 function createQuery(top, select, filter) {
     let query = new TableQuery().top(top);
-    if (select) {
-        query = query.select(select);
-    }
-    if (filter) {
-        query = query.where(filter);
-    }
+    if (top) query = query.top(top);
+    if (select) query = query.select(select);
+    if (filter) query = query.where(filter);
     return query;
 }
 
@@ -67,17 +64,33 @@ function createQuery(top, select, filter) {
  * 
  * @param {*} table 
  * @param {*} query 
+ * @param {*} continuationToken 
  */
-function queryTable(table, query) {
+function queryTable(table, query, continuationToken) {
     return new Promise((resolve, reject) => {
-        azureTableService.queryEntities(table, query, null, (error, result) => {
-            if (!error) {
-                return resolve(result.entries);
-            } else {
-                reject(error);
-            }
+        azureTableService.queryEntities(table, query, continuationToken, (error, result) => {
+            if (!error) return resolve(result);
+            else reject(error);
         });
     });
+};
+
+/**
+ * Queries a table using the specified query
+ * 
+ * @param {*} table 
+ * @param {*} query 
+ */
+async function queryTableAll(table, query) {
+    let token = null;
+    let { entries, continuationToken } = await queryTable(table, query, null);
+    token = continuationToken;
+    while (token != null) {
+        let result = await queryTable(table, query, token);
+        entries.push(...result.entries);
+        token = result.continuationToken;
+    }
+    return entries;
 };
 
 /**
@@ -137,6 +150,7 @@ function executeBatch(table, batch) {
 
 module.exports = {
     queryTable: queryTable,
+    queryTableAll: queryTableAll,
     addEntity: addEntity,
     updateEntity: updateEntity,
     executeBatch: executeBatch,
