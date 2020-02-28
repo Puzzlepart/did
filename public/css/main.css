@@ -153,9 +153,6 @@ h5 {
     .c-Timesheet-summary .c-Timesheet-summary-customerDropdown [class*='ms-Dropdown-caretDownWrapper'] {
       padding: 6px 0 0 0; }
 
-.c-Timesheet-actionBar {
-  position: initial; }
-
 .c-Timesheet-weekPicker {
   margin-top: 0; }
   .c-Timesheet-weekPicker:hover input {
