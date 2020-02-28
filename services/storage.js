@@ -79,19 +79,17 @@ StorageService.prototype.updateWeek = async function (weekNumber, closed) {
 /**
  * Create project
  * 
- * @param {*} customerKey 
- * @param {*} projectKey 
- * @param {*} name 
- * @param {*} icon 
+ * @param {*} model
  */
-StorageService.prototype.createProject = async function (customerKey, projectKey, name, icon) {
-    let projectId = (`${customerKey} ${projectKey}`).toUpperCase();
+StorageService.prototype.createProject = async function (model) {
+    let projectId = (`${model.customerKey} ${model.projectKey}`).toUpperCase();
     let entity = await addEntity(PROJECTS, {
         PartitionKey: entGen.String(this.tenantId),
         RowKey: entGen.String(projectId),
-        Name: entGen.String(name),
-        CustomerKey: entGen.String(customerKey.toUpperCase()),
-        Icon: entGen.String(icon || 'Page'),
+        Name: entGen.String(model.name),
+        Description: entGen.String(model.description),
+        CustomerKey: entGen.String(model.customerKey.toUpperCase()),
+        Icon: entGen.String(model.icon || 'Page'),
     });
     return entity;
 }
@@ -99,17 +97,15 @@ StorageService.prototype.createProject = async function (customerKey, projectKey
 /**
  * Create customer
  * 
- * @param {*} key 
- * @param {*} name 
- * @param {*} description 
+ * @param {*} model
  */
-StorageService.prototype.createCustomer = async function (key, name, description) {
-    let customerId = key.toUpperCase();
+StorageService.prototype.createCustomer = async function (model) {
     let entity = await addEntity(CUSTOMERS, {
         PartitionKey: entGen.String(this.tenantId),
-        RowKey: entGen.String(customerId),
-        Name: entGen.String(name),
-        Description: entGen.String(description),
+        RowKey: entGen.String(model.key.toUpperCase()),
+        Name: entGen.String(model.name),
+        Description: entGen.String(model.description),
+        Icon: entGen.String(model.icon || 'Page'),
     });
     return entity;
 }

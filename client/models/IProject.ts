@@ -8,7 +8,5 @@ export interface IProject extends IObjectWithKey {
     description: string;
     webLink: string;
     icon: string;
-    budget: number;
-    hourlyRate: number;
     customer: ICustomer;
 }

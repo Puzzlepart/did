@@ -88,17 +88,54 @@ h5 {
   display: flex;
   align-self: center; }
 
-.c-Timesheet .ms-List-page div.ms-List-cell {
-  min-height: 0; }
-  .c-Timesheet .ms-List-page div.ms-List-cell .ms-DetailsRow {
-    min-height: 45px; }
-    .c-Timesheet .ms-List-page div.ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell {
-      font-size: 1.2em;
-      display: flex;
-      align-items: center; }
-      .c-Timesheet .ms-List-page div.ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell span,
-      .c-Timesheet .ms-List-page div.ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell a {
-        vertical-align: middle; }
+.c-Timesheet .ms-DetailsRow-check,
+.c-Timesheet .ms-DetailsRow-cellCheck,
+.c-Timesheet .ms-DetailsHeader-cellIsCheck {
+  display: none; }
+
+.c-Timesheet .ms-DetailsHeader-cellName,
+.c-Timesheet .ms-GroupHeader-title {
+  font-weight: normal;
+  font-size: 1.2em;
+  letter-spacing: 1px; }
+
+.c-Timesheet .ms-DetailsRow-cell {
+  background: transparent;
+  font-size: 1.2em;
+  align-self: center;
+  padding: 0px 12px; }
+  .c-Timesheet .ms-DetailsRow-cell span,
+  .c-Timesheet .ms-DetailsRow-cell a {
+    font-size: 1em; }
+
+.c-Timesheet .ms-FocusZone.ms-DetailsRow {
+  border: none; }
+
+.c-Timesheet .ms-List-page {
+  background: transparent; }
+  .c-Timesheet .ms-List-page .ms-GroupedList-group {
+    margin-top: 1.5em;
+    padding-bottom: 1em;
+    background: #fafafc; }
+    .c-Timesheet .ms-List-page .ms-GroupedList-group .ms-GroupHeader {
+      border-bottom: 0px; }
+      .c-Timesheet .ms-List-page .ms-GroupedList-group .ms-GroupHeader:hover {
+        background: #fafafc; }
+    .c-Timesheet .ms-List-page .ms-GroupedList-group .ms-List-cell .ms-DetailsRow {
+      background: transparent; }
+      .c-Timesheet .ms-List-page .ms-GroupedList-group .ms-List-cell .ms-DetailsRow:hover {
+        background: #fafafc; }
+  .c-Timesheet .ms-List-page div.ms-List-cell {
+    min-height: 0; }
+    .c-Timesheet .ms-List-page div.ms-List-cell .ms-DetailsRow {
+      min-height: 45px; }
+      .c-Timesheet .ms-List-page div.ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell {
+        font-size: 1.2em;
+        display: flex;
+        align-items: center; }
+        .c-Timesheet .ms-List-page div.ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell span,
+        .c-Timesheet .ms-List-page div.ms-List-cell .ms-DetailsRow .ms-DetailsRow-cell a {
+          vertical-align: middle; }
 
 .c-ResolveProjectModal {
   padding: 20px;
@@ -168,44 +205,6 @@ h5 {
 
 #app-timesheet .c-Timesheet-section-content .row .highcharts-container {
   margin-top: 30px; }
-
-.ms-DetailsRow-check,
-.ms-DetailsRow-cellCheck,
-.ms-DetailsHeader-cellIsCheck {
-  display: none; }
-
-.ms-DetailsHeader-cellName,
-.ms-GroupHeader-title {
-  font-weight: normal;
-  font-size: 1.2em;
-  letter-spacing: 1px; }
-
-.ms-DetailsRow-cell {
-  background: transparent;
-  font-size: 1.2em;
-  align-self: center;
-  padding: 0px 12px; }
-  .ms-DetailsRow-cell span,
-  .ms-DetailsRow-cell a {
-    font-size: 1em; }
-
-.ms-FocusZone.ms-DetailsRow {
-  border: none; }
-
-div.ms-List-page {
-  background: transparent; }
-  div.ms-List-page .ms-GroupedList-group {
-    margin-top: 1.5em;
-    padding-bottom: 1em;
-    background: #fafafc; }
-    div.ms-List-page .ms-GroupedList-group .ms-GroupHeader {
-      border-bottom: 0px; }
-      div.ms-List-page .ms-GroupedList-group .ms-GroupHeader:hover {
-        background: #fafafc; }
-    div.ms-List-page .ms-GroupedList-group .ms-List-cell .ms-DetailsRow {
-      background: transparent; }
-      div.ms-List-page .ms-GroupedList-group .ms-List-cell .ms-DetailsRow:hover {
-        background: #fafafc; }
 
 h3.panel-title a {
   color: #444; }

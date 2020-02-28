@@ -9,14 +9,15 @@ import { useState } from 'react';
 import CREATE_PROJECT from './CREATE_PROJECT';
 import { ICreateProjectFormModel } from './ICreateProjectFormModel';
 import { SearchCustomer } from './SearchCustomer';
+import { ICreateProjectFormProps } from './ICreateProjectFormProps';
 
 /**
  * @component CreateProjectForm
  * @description Form for creating a new Project
  */
-export const CreateProjectForm = ({ emptyModel = { customerKey: '', projectKey: '', name: '', icon: 'Page' } }) => {
+export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey: '', name: '', description: '', icon: 'Page' } }: ICreateProjectFormProps) => {
     let [message, setMessage] = useState<{ text: string, type: MessageBarType }>(null);
-    let [model, setModel] = useState<ICreateProjectFormModel>(emptyModel);
+    let [model, setModel] = useState<ICreateProjectFormModel>(initialModel);
     let [addProject, { loading }] = useMutation(CREATE_PROJECT);
 
     const onFormSubmit = async () => {
@@ -26,7 +27,7 @@ export const CreateProjectForm = ({ emptyModel = { customerKey: '', projectKey: 
         } else {
             setMessage({ text: result.error, type: MessageBarType.error });
         }
-        setModel(emptyModel);
+        setModel(initialModel);
         window.setTimeout(() => {
             setMessage(null);
         }, 5000);
@@ -61,9 +62,14 @@ export const CreateProjectForm = ({ emptyModel = { customerKey: '', projectKey: 
                 value={model.name} />
             <TextField
                 styles={{ root: { marginTop: 12, width: 300 } }}
+                label='Description'
+                multiline={true}
+                onChange={(_event, description) => setModel({ ...model, description })}
+                value={model.description} />
+            <TextField
+                styles={{ root: { marginTop: 12, width: 300 } }}
                 minLength={4}
                 label='Icon'
-                description='Icon to illustrate the project.'
                 onChange={(_event, icon) => setModel({ ...model, icon })}
                 iconProps={{ iconName: model.icon }}
                 value={model.icon} />

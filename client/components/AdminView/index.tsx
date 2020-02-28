@@ -5,8 +5,6 @@ import { getValueTyped as value } from 'helpers';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import * as React from 'react';
 import { AdminSummaryView } from './AdminSummaryView';
-import { CreateCustomerForm } from '../Customers/CreateCustomerForm';
-import { CreateProjectForm } from '../Projects/CreateProjectForm';
 import GET_USERS from './GET_USERS';
 import { USER_LIST_COLUMNS } from './USER_LIST_COLUMNS';
 

@@ -13,7 +13,6 @@ export const GET_PROJECT_CONFIRMED_TIME_ENTRIES = gql`
                 yearNumber
                 resourceName
             }
-            duration
         }
     }
 `;

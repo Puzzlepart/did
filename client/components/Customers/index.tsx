@@ -11,12 +11,22 @@ import { generateColumn as col } from 'utils/generateColumn';
 import { getHash } from 'utils/getHash';
 import { CustomerDetails } from './CustomerDetails';
 import { GET_CUSTOMERS } from './GET_CUSTOMERS';
+import { Icon } from 'office-ui-fabric-react/lib/Icon';
 
 export const Customers = () => {
     const [selected, setSelected] = useState<ICustomer>(null);
     const { loading, error, data } = useQuery(GET_CUSTOMERS, { fetchPolicy: 'cache-first' });
 
-    const columns: IColumn[] = [col('key', 'Key', { maxWidth: 100 }), col('name', 'Name')];
+    const columns: IColumn[] = [
+        col(
+            'icon',
+            '',
+            { maxWidth: 35, minWidth: 35 },
+            (customer: ICustomer) => <Icon iconName={customer.icon || 'Page'} styles={{ root: { fontSize: 16 } }} />,
+        ),
+        col('key', 'Key', { maxWidth: 120 }),
+        col('name', 'Name'),
+    ];
 
     let customers = value<ICustomer[]>(data, 'customers', []);
 

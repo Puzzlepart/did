@@ -8,20 +8,20 @@ import { IProjectListProps } from './IProjectListProps';
 export const ProjectList = (props: IProjectListProps) => {
     const columns: IColumn[] = [
         col(
-            'ICON_COLUMN',
+            'icon',
             '',
             { maxWidth: 35, minWidth: 35 },
             (project: IProject) => <Icon iconName={project.icon || 'Page'} styles={{ root: { fontSize: 16 } }} />,
         ),
         col('key', 'Key', { maxWidth: 120 }),
         col(
-            'NAME_COLUMN',
+            'name',
             'Name',
             { maxWidth: 180 },
             (project: IProject) => props.renderLink ? <a href={`/projects#${project.id}`}>{project.name}</a> : project.name
         ),
         col(
-            'CUSTOMER_NAME_COLUMN',
+            'customer',
             'Customer',
             {},
             (project: IProject) => {
