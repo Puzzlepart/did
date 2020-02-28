@@ -9,6 +9,8 @@ import { generateColumn as col } from 'utils/generateColumn';
 import { getHash } from 'utils/getHash';
 import { CustomerDetails } from './CustomerDetails';
 import { GET_CUSTOMERS } from './GET_CUSTOMERS';
+import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
+import { CreateCustomerForm } from 'components/AdminView/CreateCustomerForm';
 
 export const Customers = () => {
     const [selected, setSelected] = useState<ICustomer>(null);
@@ -26,18 +28,24 @@ export const Customers = () => {
     }
 
     return (
-        <div>
-            {error && <MessageBar messageBarType={MessageBarType.error}>An error occured.</MessageBar>}
-            {!error && (
-                <List
-                    enableShimmer={loading}
-                    items={customers}
-                    columns={columns}
-                    searchBox={{ placeholder: 'Search...' }}
-                    selection={{ mode: SelectionMode.single, onChanged: selected => setSelected(selected) }}
-                    height={350} />
-            )}
-            {selected && <CustomerDetails customer={selected} />}
-        </div>
+        <Pivot styles={{ itemContainer: { paddingTop: 10 } }}>
+            <PivotItem itemID='search' itemKey='search' headerText='Search' itemIcon='FabricFolderSearch'>
+                {error && <MessageBar messageBarType={MessageBarType.error}>An error occured.</MessageBar>}
+                {!error && (
+                    <List
+                        enableShimmer={loading}
+                        items={customers}
+                        columns={columns}
+                        searchBox={{ placeholder: 'Search...' }}
+                        selection={{ mode: SelectionMode.single, onChanged: selected => setSelected(selected) }}
+                        height={350} />
+                )}
+                {selected && <CustomerDetails customer={selected} />}
+            </PivotItem>
+
+            <PivotItem itemID='new' itemKey='new' headerText='Create new' itemIcon='AddTo'>
+                <CreateCustomerForm />
+            </PivotItem>
+        </Pivot >
     );
 }

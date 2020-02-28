@@ -30,7 +30,7 @@ export const AdminView = () => {
 
     return (
         <div className='c-AdminView'>
-            <Pivot styles={{ root: { display: 'flex', flexWrap: 'wrap' } }} onLinkClick={onLinkClick} defaultSelectedKey={path[0]}>
+            <Pivot onLinkClick={onLinkClick} defaultSelectedKey={path[0]}>
                 <PivotItem itemID='users' itemKey='users' headerText='Users' itemIcon='FabricUserFolder' style={linkStyle}>
                     <List
                         enableShimmer={loading}
