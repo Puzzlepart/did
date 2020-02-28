@@ -26,7 +26,7 @@ export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
     const { data, loading } = useQuery(GET_CONFIRMED_TIME_ENTRIES, { fetchPolicy: 'cache-first' });
     let entries = value<any[]>(data, 'result.entries', []);
 
-    let periods: IAdminSummaryViewPeriod[] = _.unique(entries.map(e => e.yearNumber), y => y)
+    let periods: IAdminSummaryViewPeriod[] = _.unique([moment().year(), ...entries.map(e => e.yearNumber)], y => y)
         .sort((a, b) => a - b)
         .map(year => ({
             itemProps: {
@@ -37,8 +37,6 @@ export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
             },
             entries: value<any[]>(data, 'result.entries', []).filter(e => e.yearNumber === year),
         }));
-
-
 
     return (
         <Pivot
@@ -73,8 +71,8 @@ export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
                                 enableShimmer={loading}
                                 events={p.entries}
                                 type={SummaryViewType.AdminWeek}
-                                range={range} 
-                                exportFileNameTemplate='Summary-Week-{0}.xlsx'/>
+                                range={range}
+                                exportFileNameTemplate='Summary-Week-{0}.xlsx' />
                         </PivotItem>
                     </Pivot>
                 </PivotItem>
