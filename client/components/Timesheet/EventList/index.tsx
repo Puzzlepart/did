@@ -36,7 +36,7 @@ export const EventList = (props: IEventListProps) => {
         col(
             'project',
             'Project',
-            { maxWidth: value(props, 'columnWidths.project', 300), minWidth: value(props, 'columnWidths.project', 300) },
+            { maxWidth: value(props, 'columnWidths.project', 350), minWidth: value(props, 'columnWidths.project', 350) },
             (event: ITimeEntry) => (
                 <ProjectColumn
                     event={event}

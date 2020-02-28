@@ -11,13 +11,6 @@
     }
   }
 
-  .ms-MessageBar.ms-MessageBar-multiline {
-    background: #f1f1f1;
-    &.ms-MessageBar--warning {
-      background-color: rgba(255, 200, 10, 0.2);
-    }
-  }
-
   .ms-MessageBar-icon {
     display: flex;
     align-self: center;
@@ -53,31 +46,5 @@
   .c-ResolveProjectModal-title {
     font-size: 1.6em;
     margin: 0 0 12px 0;
-  }
-}
-
-.c-Timesheet-weekpicker--callout {
-  .ms-DatePicker-day--today {
-    background-color: inherit !important;
-    color: inherit !important;
-    font-weight: inherit !important;
-    border: none !important;
-    outline: none !important;
-  }
-
-  .ms-DatePicker-day--highlighted {
-    background-color: inherit !important;
-    color: inherit !important;
-    font-weight: inherit !important;
-    border: none !important;
-    outline: none !important;
-
-    button {
-      background-color: inherit !important;
-      color: inherit !important;
-      font-weight: inherit !important;
-      border: none !important;
-      outline: none !important;
-    }
   }
 }
