@@ -12,10 +12,11 @@ export interface IDurationColumnProps {
  */
 export const DurationColumn = ({ row, column }: IDurationColumnProps) => {
     let style: React.CSSProperties = column.data.style || {};
-    if (row.label === 'Total') style.fontWeight = 500;
+    if (row.label === 'Total' || column.fieldName === 'Sum') style.fontWeight = 500;
+    let value = row[column.fieldName] ? Number.parseFloat(row[column.fieldName]).toFixed(2) : null;
     return (
         <div style={style}>
-            {row[column.fieldName]}
+            {value}
         </div>
     );
 }
