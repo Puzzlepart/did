@@ -1,17 +1,19 @@
 
 import { IColumn, List } from 'components/List';
-import { formatDate, startOfWeek } from 'helpers';
-import { IProject, ICustomer } from 'models';
+import { formatDate, sortAlphabetically, startOfWeek } from 'helpers';
+import { ICustomer, IProject } from 'models';
 import * as moment from 'moment-timezone';
+import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
+import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
 import * as React from 'react';
 import * as _ from 'underscore';
+import * as excelUtils from 'utils/exportExcel';
 import { generateColumn as col } from 'utils/generateColumn';
-import { ITimesheetPeriod } from '../ITimesheetPeriod';
-import { ISummaryViewProps } from './ISummaryViewProps';
-import { SummaryViewType } from "./SummaryViewType";
-import { LabelColumn } from './LabelColumn';
 import { DurationColumn } from './DurationColumn';
-import { Dropdown, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
+import { ISummaryViewProps } from './ISummaryViewProps';
+import { LabelColumn } from './LabelColumn';
+import { SummaryViewType } from "./SummaryViewType";
+import * as format from 'string-format';
 
 /**
  * Create columns
@@ -28,10 +30,17 @@ function createColumns({ events, type, period, range }: ISummaryViewProps) {
             });
         }
             break;
-        case SummaryViewType.Admin: {
+        case SummaryViewType.AdminWeek: {
             const weekNumbers = _.unique(events.map(e => e.weekNumber), w => w).sort((a, b) => a - b);
             columns = weekNumbers.map(wn => {
                 return col(wn, `Week ${wn}`, { maxWidth: 70, minWidth: 70 }, (row: any, _index: number, col: IColumn) => <DurationColumn row={row} column={col} />);
+            });
+        }
+            break;
+        case SummaryViewType.AdminMonth: {
+            const monthNumbers = _.unique(events.map(e => e.monthNumber), m => m).sort((a, b) => a - b);
+            columns = monthNumbers.map(mn => {
+                return col(mn, moment().month(mn - 1).format('MMM'), { maxWidth: 70, minWidth: 70 }, (row: any, _index: number, col: IColumn) => <DurationColumn row={row} column={col} />);
             });
         }
             break;
@@ -64,25 +73,30 @@ function generateRows({ type }: ISummaryViewProps, events: any[], columns: IColu
                     obj[col.fieldName] = sum;
                     obj.sum += sum;
                     return obj;
-                },
-                    {
-                        sum: 0,
-                        project,
-                        customer: project.customer,
-                    })
+                }, { sum: 0, project, customer: project.customer })
             });
         }
-        case SummaryViewType.Admin: {
-            let resources = _.unique(events.map(e => e.resourceName), r => r).sort((a, b) => {
-                if (a > b) return 1;
-                if (a < b) return -1;
-                return 0;
-            });
+        case SummaryViewType.AdminWeek: {
+            let resources = sortAlphabetically(_.unique(events.map(e => e.resourceName), r => r));
             return resources.map(res => {
                 let resourceEvents = events.filter(event => event.resourceName === res);
                 return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
                     const sum = [...resourceEvents]
                         .filter(event => event.weekNumber === col.fieldName)
+                        .reduce((sum, event) => sum += event.durationHours, 0);
+                    obj[col.fieldName] = sum;
+                    obj.sum += sum;
+                    return obj;
+                }, { label: res, sum: 0 })
+            });
+        }
+        case SummaryViewType.AdminMonth: {
+            let resources = sortAlphabetically(_.unique(events.map(e => e.resourceName), r => r));
+            return resources.map(res => {
+                let resourceEvents = events.filter(event => event.resourceName === res);
+                return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
+                    const sum = [...resourceEvents]
+                        .filter(event => event.monthNumber === col.fieldName)
                         .reduce((sum, event) => sum += event.durationHours, 0);
                     obj[col.fieldName] = sum;
                     obj.sum += sum;
@@ -112,10 +126,20 @@ function generateTotalRow({ type }: ISummaryViewProps, events: any[], columns: I
                 return obj;
             }, { label: 'Total', sum: 0 });
         }
-        case SummaryViewType.Admin: {
+        case SummaryViewType.AdminWeek: {
             return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
                 const sum = [...events]
                     .filter(event => event.weekNumber === col.fieldName)
+                    .reduce((sum, event) => sum += event.durationHours, 0);
+                obj[col.fieldName] = sum;
+                obj.sum += sum;
+                return obj;
+            }, { label: 'Total', sum: 0 });
+        }
+        case SummaryViewType.AdminMonth: {
+            return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
+                const sum = [...events]
+                    .filter(event => event.monthNumber === col.fieldName)
                     .reduce((sum, event) => sum += event.durationHours, 0);
                 obj[col.fieldName] = sum;
                 obj.sum += sum;
@@ -129,14 +153,15 @@ function generateTotalRow({ type }: ISummaryViewProps, events: any[], columns: I
 * Get customer options
 *
 * @param {any[]} events Events
+* @param {React.Dispatch<React.SetStateAction<IContextualMenuItem>>} setCustomer Set customer
 */
-function getCustomerOptions(events: any[]): IDropdownOption[] {
+function getCustomerOptions(events: any[], setCustomer: React.Dispatch<React.SetStateAction<IContextualMenuItem>>): IContextualMenuItem[] {
     let customers = _.unique(events.map(e => e.customer), (c: ICustomer) => c.id);
 
     return [
         { key: 'All', text: 'All customers' },
         ...customers.map(c => ({ key: c.id, text: c.name })),
-    ];
+    ].map(opt => ({ ...opt, onClick: () => setCustomer(opt) }));
 }
 
 /**
@@ -146,25 +171,41 @@ function getCustomerOptions(events: any[]): IDropdownOption[] {
  * @param {ISummaryViewProps} props Props
  */
 export const SummaryView = (props: ISummaryViewProps) => {
-    const [customerId, setCustomerId] = React.useState<string>('All');
+    const [customer, setCustomer] = React.useState<IContextualMenuItem>({ key: 'All', text: 'All customers' });
     const columns = createColumns(props);
     let events = props.events.filter(e => !!e.project);
-    let customerOptions = getCustomerOptions(events);
+    let customerOptions = getCustomerOptions(events, setCustomer);
 
-    if (customerId !== 'All') events = events.filter(e => e.customer.id === customerId);
+    if (customer.key !== 'All') events = events.filter(e => e.customer.id === customer.key);
 
     let items = [
         ...generateRows(props, events, columns),
         generateTotalRow(props, events, columns),
     ];
 
+    let commands: IContextualMenuItem[] = [
+        {
+            key: 'CUSTOMER_OPTIONS',
+            name: customer.text,
+            subMenuProps: { items: customerOptions }
+        },
+    ]
+    if (props.exportFileNameTemplate) {
+        commands.push({
+            key: 'EXPORT_TO_EXCEL',
+            text: 'Export to Excel',
+            iconProps: { iconName: 'ExcelDocument' },
+            onClick: () => {
+                excelUtils.exportExcel(items, { columns, fileName: format(props.exportFileNameTemplate, new Date().getTime()) });
+            },
+        });
+    }
+
     return (
         <div className='c-Timesheet-summary'>
-            <Dropdown
-                className='c-Timesheet-summary-customerDropdown'
-                options={customerOptions}
-                onChange={(_event, opt) => setCustomerId(opt.key as string)}
-                selectedKey={customerId} />
+            <CommandBar
+                styles={{ root: { padding: 0 } }}
+                items={commands} />
             <List
                 enableShimmer={props.enableShimmer}
                 columns={columns}
@@ -174,3 +215,4 @@ export const SummaryView = (props: ISummaryViewProps) => {
 }
 
 export { SummaryViewType };
+

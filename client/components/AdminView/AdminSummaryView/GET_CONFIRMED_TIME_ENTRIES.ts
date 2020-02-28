@@ -11,6 +11,7 @@ export const GET_CONFIRMED_TIME_ENTRIES = gql`
                 durationHours
                 weekNumber
                 yearNumber
+                monthNumber
                 resourceName   
                 customer {
                     id

@@ -23,7 +23,6 @@ export const ProjectDetails = ({ project }: IProjectDetailsProps) => {
             {
                 fileName: `ApprovedTimeEntries-${key}-${new Date().getTime()}.xlsx`,
                 skip: ['id', '__typename'],
-                capitalize: true,
             });
     }
 

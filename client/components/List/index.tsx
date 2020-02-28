@@ -1,12 +1,12 @@
 import { ScrollablePaneWrapper } from 'components/ScrollablePaneWrapper';
-import { ConstrainMode, DetailsListLayoutMode, Selection, SelectionMode, IColumn } from 'office-ui-fabric-react/lib/DetailsList';
-import { GroupHeader } from 'office-ui-fabric-react/lib/GroupedList'
+import { ConstrainMode, DetailsListLayoutMode, IColumn, Selection, SelectionMode, IDetailsHeaderProps } from 'office-ui-fabric-react/lib/DetailsList';
+import { GroupHeader } from 'office-ui-fabric-react/lib/GroupedList';
 import { ShimmeredDetailsList } from 'office-ui-fabric-react/lib/ShimmeredDetailsList';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+import { generateListGroups } from './generateListGroups';
 import { IListProps } from './IListProps';
 import { ListHeader } from './ListHeader';
-import { generateListGroups } from './generateListGroups';
 
 /**
  * @component List
@@ -38,6 +38,11 @@ export const List = (props: IListProps) => {
         }, 500);
     }
 
+    const onRenderDetailsHeader = (headerProps: IDetailsHeaderProps, defaultRender: (props: IDetailsHeaderProps) => JSX.Element) => {
+        if (props.onRenderDetailsHeader) return onRenderDetailsHeader(headerProps, defaultRender);
+        return ListHeader(headerProps, defaultRender, props, onSearch);
+    }
+
     if (props.groups) {
         let _ = generateListGroups(
             items,
@@ -64,10 +69,10 @@ export const List = (props: IListProps) => {
                     constrainMode={ConstrainMode.horizontalConstrained}
                     layoutMode={DetailsListLayoutMode.justified}
                     groupProps={{ ...props.groupProps, onRenderHeader: headerProps => <GroupHeader {...headerProps} styles={{ title: { cursor: 'initial' }, expand: { cursor: 'pointer' }, headerCount: { display: 'none' } }}></GroupHeader> }}
-                    onRenderDetailsHeader={(headerProps, defaultRender) => ListHeader(headerProps, defaultRender, props, onSearch)} />
+                    onRenderDetailsHeader={onRenderDetailsHeader} />
             </ScrollablePaneWrapper>
         </div>
     );
 };
 
-export { SelectionMode, IColumn }
+export { SelectionMode, IColumn };

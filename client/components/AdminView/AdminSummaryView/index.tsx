@@ -6,6 +6,7 @@ import * as moment from 'moment-timezone';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import { ShimmeredDetailsList } from 'office-ui-fabric-react/lib/ShimmeredDetailsList';
 import { Slider } from 'office-ui-fabric-react/lib/Slider';
+import { Dropdown, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
 import * as React from 'react';
 import * as format from 'string-format';
 import * as _ from 'underscore';
@@ -42,22 +43,42 @@ export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
 
 
     return (
-        <Pivot defaultSelectedKey={props.defaultSelectedKey || moment().year().toString()} onLinkClick={props.onLinkClick}>
-            {periods.map(({ itemProps, entries: _entries }) => (
-                <PivotItem {...itemProps}>
-                    <div style={{ marginTop: 15 }}>
-                        <Slider
-                            valueFormat={value => format(props.valueFormat, value)}
-                            min={1}
-                            max={_.unique(_entries, e => e.weekNumber).length}
-                            defaultValue={5}
-                            onChange={value => setRange(value)} />
-                        <SummaryView
-                            enableShimmer={loading}
-                            events={_entries}
-                            type={SummaryViewType.Admin}
-                            range={range} />
-                    </div>
+        <Pivot
+            defaultSelectedKey={props.defaultSelectedKey || moment().year().toString()}
+            onLinkClick={props.onLinkClick}
+            styles={{ itemContainer: { paddingTop: 10 } }}>
+            {periods.map(p => (
+                <PivotItem {...p.itemProps}>
+                    <Pivot defaultSelectedKey='month' styles={{ itemContainer: { paddingTop: 10 } }}>
+                        <PivotItem key='month' itemKey='month' headerText='Month' itemIcon='Calendar'>
+                            <Slider
+                                valueFormat={value => `Show last ${value} months`}
+                                min={1}
+                                max={_.unique(p.entries, e => e.monthNumber).length}
+                                defaultValue={props.defaultRange}
+                                onChange={value => setRange(value)} />
+                            <SummaryView
+                                enableShimmer={loading}
+                                events={p.entries}
+                                type={SummaryViewType.AdminMonth}
+                                range={range}
+                                exportFileNameTemplate='Summary-Month-{0}.xlsx' />
+                        </PivotItem>
+                        <PivotItem key='week' itemKey='week' headerText='Week' itemIcon='CalendarWeek'>
+                            <Slider
+                                valueFormat={value => `Show last ${value} weeks`}
+                                min={1}
+                                max={_.unique(p.entries, e => e.weekNumber).length}
+                                defaultValue={props.defaultRange}
+                                onChange={value => setRange(value)} />
+                            <SummaryView
+                                enableShimmer={loading}
+                                events={p.entries}
+                                type={SummaryViewType.AdminWeek}
+                                range={range} 
+                                exportFileNameTemplate='Summary-Week-{0}.xlsx'/>
+                        </PivotItem>
+                    </Pivot>
                 </PivotItem>
             ))}
         </Pivot>

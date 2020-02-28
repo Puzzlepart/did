@@ -53,22 +53,14 @@ export const Reports = ({ skip = ['id', '__typename', 'monthNumber'], exportFile
     const onExport = (event: React.MouseEvent<any>) => {
         let items: any[];
         switch (event.currentTarget.id) {
-            case 'EXPORT_TO_EXCEL_ALL': {
-                items = entries;
-            };
+            case 'EXPORT_TO_EXCEL_ALL': items = entries;
                 break;
-            case 'EXPORT_SUBSET_TO_EXCEL': {
-                items = subset;
-            };
+            case 'EXPORT_SUBSET_TO_EXCEL': items = subset;
                 break;
         }
         excelUtils.exportExcel(
             items,
-            {
-                skip,
-                fileName: format(exportFileNameTemplate, new Date().getTime()),
-                capitalize: true,
-            },
+            { columns, skip, fileName: format(exportFileNameTemplate, new Date().getTime()) },
         );
     }
 

@@ -47,16 +47,16 @@ h5 {
   margin: 0;
   padding: 0; }
 
-#app-admin .react-autosuggest__container {
+.c-AdminView .react-autosuggest__container {
   position: relative; }
 
-#app-admin .react-autosuggest__input--focused {
+.c-AdminView .react-autosuggest__input--focused {
   outline: none; }
 
-#app-admin .react-autosuggest__suggestions-container {
+.c-AdminView .react-autosuggest__suggestions-container {
   display: none; }
 
-#app-admin .react-autosuggest__suggestions-container--open {
+.c-AdminView .react-autosuggest__suggestions-container--open {
   display: block;
   position: absolute;
   top: 35px;
@@ -67,12 +67,12 @@ h5 {
   overflow-y: auto;
   z-index: 2; }
 
-#app-admin .react-autosuggest__suggestions-list {
+.c-AdminView .react-autosuggest__suggestions-list {
   margin: 0;
   padding: 0;
   list-style-type: none; }
 
-#app-admin .react-autosuggest__suggestion {
+.c-AdminView .react-autosuggest__suggestion {
   cursor: pointer;
   padding: 10px 20px; }
 
@@ -111,22 +111,6 @@ h5 {
 
 .c-Timesheet-summary {
   position: relative; }
-  .c-Timesheet-summary .c-Timesheet-summary-customerDropdown {
-    width: 370px;
-    position: absolute;
-    z-index: 999;
-    top: 16px;
-    left: 0;
-    height: 42px; }
-    .c-Timesheet-summary .c-Timesheet-summary-customerDropdown:hover [class*="ms-Dropdown-title"] {
-      background-color: #f3f2f1;
-      color: #201f1e; }
-    .c-Timesheet-summary .c-Timesheet-summary-customerDropdown [class*="ms-Dropdown-title"] {
-      border: none;
-      height: 42px;
-      padding: 6px 0 0 8px; }
-    .c-Timesheet-summary .c-Timesheet-summary-customerDropdown [class*='ms-Dropdown-caretDownWrapper'] {
-      padding: 6px 0 0 0; }
 
 .c-Timesheet-projectColumn {
   width: 100%; }

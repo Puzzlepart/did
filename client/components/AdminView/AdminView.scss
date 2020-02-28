@@ -1,11 +1,10 @@
-#app-admin {
+.c-AdminView {
   .react-autosuggest__container {
     position: relative;
   }
   .react-autosuggest__input--focused {
     outline: none;
   }
-
 
   .react-autosuggest__suggestions-container {
     display: none;

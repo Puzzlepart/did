@@ -1,18 +1,17 @@
 import { stringToArrayBuffer } from 'helpers';
 import { loadScripts } from './loadScripts';
 import { humanize } from 'underscore.string';
+import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 
 export interface IExcelExportOptions {
     fileName: string;
-    columns?: string[];
+    columns?: IColumn[];
     skip?: string[];
-    capitalize?: boolean;
 }
 
 /**
  * Export to Excel
  * 
- * @param {string[]} columns An array of columns
  * @param {any[]} items An array of items
  * @param {IExcelExportOptions} options Options
  * 
@@ -24,23 +23,25 @@ export async function exportExcel(items: any[], options: IExcelExportOptions) {
         'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.5/xlsx.full.min.js',
     ]);
 
+    let xlsx = ((window as any)).XLSX;
+
     if (!options.columns) {
-        options.columns = Object.keys(items[0]).filter(f => (options.skip || []).indexOf(f) === -1);
+        options.columns = Object.keys(items[0]).filter(f => (options.skip || []).indexOf(f) === -1).map(fieldName => ({ key: fieldName, fieldName, name: humanize(fieldName), minWidth: 0 }));
     }
 
     const sheets = [{
         name: 'Sheet 1',
         data: [
-            options.columns.map(c => options.capitalize ? humanize(c) : c),
-            ...items.map(item => options.columns.map(fn => item[fn])),
+            options.columns.map(c => c.name),
+            ...items.map(item => options.columns.map(col => item[col.fieldName])),
         ],
     }];
-    const workBook = ((window as any)).XLSX.utils.book_new();
+    const workBook = xlsx.utils.book_new();
     sheets.forEach(s => {
-        const sheet = ((window as any)).XLSX.utils.aoa_to_sheet(s.data);
-        ((window as any)).XLSX.utils.book_append_sheet(workBook, sheet, s.name);
+        const sheet = xlsx.utils.aoa_to_sheet(s.data);
+        xlsx.utils.book_append_sheet(workBook, sheet, s.name);
     });
-    const wbout = ((window as any)).XLSX.write(workBook, { type: 'binary', bookType: 'xlsx' });
+    const wbout = xlsx.write(workBook, { type: 'binary', bookType: 'xlsx' });
     const blob = new Blob([stringToArrayBuffer(wbout)], { type: 'application/octet-stream' });
     (window as any).saveAs(blob, options.fileName);
 }

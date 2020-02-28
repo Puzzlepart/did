@@ -30,7 +30,7 @@ export const AdminView = () => {
     const linkStyle = { padding: 10 };
 
     return (
-        <div>
+        <div className='c-AdminView'>
             <Pivot styles={{ root: { display: 'flex', flexWrap: 'wrap' } }} onLinkClick={onLinkClick} defaultSelectedKey={path[0]}>
                 <PivotItem itemID='reports' itemKey='reports' headerText='Reports' itemIcon='ReportDocument' style={linkStyle}>
                     <Reports />
@@ -46,8 +46,7 @@ export const AdminView = () => {
                         onLinkClick={onLinkClick}
                         defaultSelectedKey={path[1]}
                         defaultRange={5}
-                        loadingText='Loading summary...'
-                        valueFormat='Show last {0} weeks' />
+                        loadingText='Loading summary...' />
                 </PivotItem>
                 <PivotItem itemID='customers' itemKey='customers' headerText='Customers' itemIcon='Work' style={linkStyle}>
                     <Pivot defaultSelectedKey={path[1]} onLinkClick={onLinkClick}>
