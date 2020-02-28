@@ -54,6 +54,7 @@ export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
                             defaultValue={5}
                             onChange={value => setRange(value)} />
                         <SummaryView
+                            enableShimmer={loading}
                             events={_entries}
                             type={SummaryViewType.Admin}
                             range={range} />
