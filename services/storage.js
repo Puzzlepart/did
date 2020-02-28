@@ -101,13 +101,15 @@ StorageService.prototype.createProject = async function (customerKey, projectKey
  * 
  * @param {*} key 
  * @param {*} name 
+ * @param {*} description 
  */
-StorageService.prototype.createCustomer = async function (key, name) {
+StorageService.prototype.createCustomer = async function (key, name, description) {
     let customerId = key.toUpperCase();
     let entity = await addEntity(CUSTOMERS, {
         PartitionKey: entGen.String(this.tenantId),
         RowKey: entGen.String(customerId),
         Name: entGen.String(name),
+        Description: entGen.String(description),
     });
     return entity;
 }

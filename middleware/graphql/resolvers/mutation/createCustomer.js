@@ -4,13 +4,13 @@ const log = require('debug')('middleware/graphql/resolvers/mutation/createCustom
  * Create customer
  * 
  * @param {*} _obj Unused object
- * @param {*} args Args (key, name)
+ * @param {*} args Args (key, name, description)
  * @param {*} context Context
  */
 async function createCustomer(_obj, args, context) {
     try {
         log('Attempting to create customer in storage: ', JSON.stringify(args));
-        await context.services.storage.createCustomer(args.key, args.name);
+        await context.services.storage.createCustomer(args.key, args.name, args.description);
         log('Created customer with key %s in storage', args.key);
         return { success: true, error: null };
     } catch (error) {

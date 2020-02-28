@@ -12,7 +12,7 @@ import { UserMessage } from 'components/UserMessage';
  * @component CreateCustomerForm
  * @description Form for creating a new Custoner
  */
-export const CreateCustomerForm = ({ emptyModel = { key: '', name: '' } }) => {
+export const CreateCustomerForm = ({ emptyModel = { key: '', name: '', description: '' } }) => {
     let [message, setMessage] = useState<{ text: string, type: MessageBarType }>(null);
     let [model, setModel] = useState(emptyModel);
     let [addCustomer, { loading }] = useMutation(CREATE_CUSTOMER);
@@ -43,17 +43,23 @@ export const CreateCustomerForm = ({ emptyModel = { key: '', name: '' } }) => {
             <TextField
                 styles={{ root: { marginTop: 12, width: 300 } }}
                 minLength={4}
-                placeholder='Key'
+                label='Key'
                 description='Key for the customer. Use one word (no spaces).'
                 onChange={(_event, key) => setModel({ ...model, key })}
                 value={model.key} />
             <TextField
                 styles={{ root: { marginTop: 12, width: 300 } }}
                 minLength={4}
-                placeholder='Name'
+                label='Name'
                 description='Name of the customer.'
                 onChange={(_event, name) => setModel({ ...model, name })}
                 value={model.name} />
+            <TextField
+                styles={{ root: { marginTop: 12, width: 300 } }}
+                label='Description'
+                multiline={true}
+                onChange={(_event, description) => setModel({ ...model, description })}
+                value={model.description} />
             <PrimaryButton
                 styles={{ root: { marginTop: 16 } }}
                 text='Add'
