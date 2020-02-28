@@ -35,6 +35,14 @@ function createColumns({ events, type, period, range }: ISummaryViewProps) {
             });
         }
             break;
+        case SummaryViewType.AdminMonth: {
+            const monthNumbers = _.unique(events.map(e => e.monthNumber), m => m).sort((a, b) => a - b);
+            console.log(monthNumbers);
+            columns = monthNumbers.map(mn => {
+                return col(mn, moment().month(mn).format('MMM'), { maxWidth: 70, minWidth: 70 }, (row: any, _index: number, col: IColumn) => <DurationColumn row={row} column={col} />);
+            });
+        }
+            break;
     }
     if (range) columns = [].concat(columns).splice(columns.length - range);
     return [
@@ -64,12 +72,7 @@ function generateRows({ type }: ISummaryViewProps, events: any[], columns: IColu
                     obj[col.fieldName] = sum;
                     obj.sum += sum;
                     return obj;
-                },
-                    {
-                        sum: 0,
-                        project,
-                        customer: project.customer,
-                    })
+                }, { sum: 0, project, customer: project.customer })
             });
         }
         case SummaryViewType.Admin: {
@@ -83,6 +86,24 @@ function generateRows({ type }: ISummaryViewProps, events: any[], columns: IColu
                 return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
                     const sum = [...resourceEvents]
                         .filter(event => event.weekNumber === col.fieldName)
+                        .reduce((sum, event) => sum += event.durationHours, 0);
+                    obj[col.fieldName] = sum;
+                    obj.sum += sum;
+                    return obj;
+                }, { label: res, sum: 0 })
+            });
+        }
+        case SummaryViewType.AdminMonth: {
+            let resources = _.unique(events.map(e => e.resourceName), r => r).sort((a, b) => {
+                if (a > b) return 1;
+                if (a < b) return -1;
+                return 0;
+            });
+            return resources.map(res => {
+                let resourceEvents = events.filter(event => event.resourceName === res);
+                return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
+                    const sum = [...resourceEvents]
+                        .filter(event => event.monthNumber === col.fieldName)
                         .reduce((sum, event) => sum += event.durationHours, 0);
                     obj[col.fieldName] = sum;
                     obj.sum += sum;
@@ -116,6 +137,16 @@ function generateTotalRow({ type }: ISummaryViewProps, events: any[], columns: I
             return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
                 const sum = [...events]
                     .filter(event => event.weekNumber === col.fieldName)
+                    .reduce((sum, event) => sum += event.durationHours, 0);
+                obj[col.fieldName] = sum;
+                obj.sum += sum;
+                return obj;
+            }, { label: 'Total', sum: 0 });
+        }
+        case SummaryViewType.AdminMonth: {
+            return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
+                const sum = [...events]
+                    .filter(event => event.monthNumber === col.fieldName)
                     .reduce((sum, event) => sum += event.durationHours, 0);
                 obj[col.fieldName] = sum;
                 obj.sum += sum;

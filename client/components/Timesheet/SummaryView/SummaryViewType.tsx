@@ -1,4 +1,5 @@
 export enum SummaryViewType {
     UserWeek,
-    Admin
+    Admin,
+    AdminMonth,
 }

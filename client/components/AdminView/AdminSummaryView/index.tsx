@@ -46,17 +46,31 @@ export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
             {periods.map(({ itemProps, entries: _entries }) => (
                 <PivotItem {...itemProps}>
                     <div style={{ marginTop: 15 }}>
-                        <Slider
-                            valueFormat={value => format(props.valueFormat, value)}
-                            min={1}
-                            max={_.unique(_entries, e => e.weekNumber).length}
-                            defaultValue={5}
-                            onChange={value => setRange(value)} />
-                        <SummaryView
-                            enableShimmer={loading}
-                            events={_entries}
-                            type={SummaryViewType.Admin}
-                            range={range} />
+                        <Pivot>
+                            <PivotItem itemKey='week' headerText='Week' itemIcon='CalendarWeek'>
+                                <div style={{ marginTop: 15 }}>
+                                    <Slider
+                                        valueFormat={value => format(props.valueFormat, value)}
+                                        min={1}
+                                        max={_.unique(_entries, e => e.weekNumber).length}
+                                        defaultValue={5}
+                                        onChange={value => setRange(value)} />
+                                    <SummaryView
+                                        enableShimmer={loading}
+                                        events={_entries}
+                                        type={SummaryViewType.Admin}
+                                        range={range} />
+                                </div>
+                            </PivotItem>
+                            <PivotItem itemKey='month' headerText='Month' itemIcon='Calendar'>
+                                <div style={{ marginTop: 15 }}>
+                                    <SummaryView
+                                        enableShimmer={loading}
+                                        events={_entries}
+                                        type={SummaryViewType.AdminMonth} />
+                                </div>
+                            </PivotItem>
+                        </Pivot>
                     </div>
                 </PivotItem>
             ))}
