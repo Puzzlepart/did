@@ -16,7 +16,7 @@ import { IAdminSummaryViewProps } from './IAdminSummaryViewProps';
 require('moment/locale/en-gb');
 
 export const ADMIN_SUMMARY_VIEW_WEEK: IDropdownOption = { key: 'week', text: 'Week', data: { type: SummaryViewType.Admin, valueFormat: 'Show last {0} weeks' } };
-export const ADMIN_SUMMARY_VIEW_MONTH: IDropdownOption = { key: 'month', text: 'month', data: { type: SummaryViewType.AdminMonth, valueFormat: 'Show last {0} months' } };
+export const ADMIN_SUMMARY_VIEW_MONTH: IDropdownOption = { key: 'month', text: 'Month', data: { type: SummaryViewType.AdminMonth, valueFormat: 'Show last {0} months' } };
 
 /**
  * @component AdminSummaryView
@@ -54,7 +54,7 @@ export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
                         <div>
                             <span style={{ display: 'inline-block', width: '30%', verticalAlign: 'top' }}>
                                 <Dropdown
-                                    style={{ width: 200 }}
+                                    style={{ width: 150 }}
                                     defaultSelectedKey={view.key}
                                     onChange={(_, opt) => setView(opt)}
                                     options={[ADMIN_SUMMARY_VIEW_WEEK, ADMIN_SUMMARY_VIEW_MONTH]} />
