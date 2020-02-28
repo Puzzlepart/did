@@ -10,6 +10,7 @@ require('moment/locale/en-gb');
 export const ActionBar = (props: IActionBarProps) => {
     return (
         <CommandBar
+            styles={{ root: { padding: 0 } }}
             items={[
                 {
                     key: 'THIS_WEEK',

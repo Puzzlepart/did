@@ -18,7 +18,7 @@ import { Dropdown, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
  *
  * @param {ISummaryViewProps} props Props
 */
-function createColumns({ events, type, period, range: maxColumns }: ISummaryViewProps) {
+function createColumns({ events, type, period, range }: ISummaryViewProps) {
     let columns = [];
     switch (type) {
         case SummaryViewType.UserWeek: {
@@ -27,14 +27,16 @@ function createColumns({ events, type, period, range: maxColumns }: ISummaryView
                 return col(day.format('L'), day.format('ddd DD'), { maxWidth: 70, minWidth: 70 }, (row: any, _index: number, col: IColumn) => <DurationColumn row={row} column={col} />);
             });
         }
+            break;
         case SummaryViewType.Admin: {
             const weekNumbers = _.unique(events.map(e => e.weekNumber), w => w).sort((a, b) => a - b);
             columns = weekNumbers.map(wn => {
                 return col(wn, `Week ${wn}`, { maxWidth: 70, minWidth: 70 }, (row: any, _index: number, col: IColumn) => <DurationColumn row={row} column={col} />);
             });
         }
+            break;
     }
-    if (maxColumns) columns = [].concat(columns).splice(columns.length - maxColumns);
+    if (range) columns = [].concat(columns).splice(columns.length - range);
     return [
         col('label', '', { minWidth: 350, maxWidth: 350, isMultiline: true, isResizable: true }, (row: any) => <LabelColumn row={row} />),
         ...columns,
@@ -148,7 +150,7 @@ export const SummaryView = (props: ISummaryViewProps) => {
     const columns = createColumns(props);
     let events = props.events.filter(e => !!e.project);
     let customerOptions = getCustomerOptions(events);
-    
+
     if (customerId !== 'All') events = events.filter(e => e.customer.id === customerId);
 
     let items = [

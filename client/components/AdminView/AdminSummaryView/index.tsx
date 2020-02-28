@@ -3,16 +3,15 @@ import { useQuery } from '@apollo/react-hooks';
 import { SummaryView, SummaryViewType } from 'components/Timesheet/SummaryView';
 import { getValueTyped as value } from 'helpers';
 import * as moment from 'moment-timezone';
-import { IPivotItemProps, Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
-import { Slider } from 'office-ui-fabric-react/lib/Slider';
-import { Spinner } from 'office-ui-fabric-react/lib/Spinner';
+import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import { ShimmeredDetailsList } from 'office-ui-fabric-react/lib/ShimmeredDetailsList';
+import { Slider } from 'office-ui-fabric-react/lib/Slider';
 import * as React from 'react';
 import * as format from 'string-format';
 import * as _ from 'underscore';
 import { GET_CONFIRMED_TIME_ENTRIES } from './GET_CONFIRMED_TIME_ENTRIES';
-import { IAdminSummaryViewProps } from './IAdminSummaryViewProps';
 import { IAdminSummaryViewPeriod } from './IAdminSummaryViewPeriod';
+import { IAdminSummaryViewProps } from './IAdminSummaryViewProps';
 require('moment/locale/en-gb');
 
 /**
