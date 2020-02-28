@@ -8,4 +8,5 @@ export interface ISummaryViewProps {
     enableShimmer?: boolean;
     type: SummaryViewType;
     range?: number;
+    exportFileNameTemplate?: string;
 }

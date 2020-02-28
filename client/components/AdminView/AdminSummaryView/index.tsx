@@ -15,9 +15,6 @@ import { IAdminSummaryViewPeriod } from './IAdminSummaryViewPeriod';
 import { IAdminSummaryViewProps } from './IAdminSummaryViewProps';
 require('moment/locale/en-gb');
 
-export const ADMIN_SUMMARY_VIEW_WEEK: IDropdownOption = { key: 'week', text: 'Week', data: { type: SummaryViewType.Admin, valueFormat: 'Show last {0} weeks' } };
-export const ADMIN_SUMMARY_VIEW_MONTH: IDropdownOption = { key: 'month', text: 'Month', data: { type: SummaryViewType.AdminMonth, valueFormat: 'Show last {0} months' } };
-
 /**
  * @component AdminSummaryView
  * @description Shows SummaryView type Admin
@@ -26,7 +23,6 @@ export const ADMIN_SUMMARY_VIEW_MONTH: IDropdownOption = { key: 'month', text: '
  */
 export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
     const [range, setRange] = React.useState<number>(props.defaultRange);
-    const [view, setView] = React.useState<IDropdownOption>(ADMIN_SUMMARY_VIEW_WEEK);
     const { data, loading } = useQuery(GET_CONFIRMED_TIME_ENTRIES, { fetchPolicy: 'cache-first' });
     let entries = value<any[]>(data, 'result.entries', []);
 
@@ -47,33 +43,42 @@ export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
 
 
     return (
-        <Pivot defaultSelectedKey={props.defaultSelectedKey || moment().year().toString()} onLinkClick={props.onLinkClick}>
-            {periods.map(({ itemProps, entries: _entries }) => (
-                <PivotItem {...itemProps}>
-                    <section style={{ marginTop: 15 }}>
-                        <div>
-                            <span style={{ display: 'inline-block', width: '30%', verticalAlign: 'top' }}>
-                                <Dropdown
-                                    style={{ width: 150 }}
-                                    defaultSelectedKey={view.key}
-                                    onChange={(_, opt) => setView(opt)}
-                                    options={[ADMIN_SUMMARY_VIEW_WEEK, ADMIN_SUMMARY_VIEW_MONTH]} />
-                            </span>
-                            <span style={{ display: 'inline-block', verticalAlign: 'top', width: '70%', boxSizing: 'border-box', paddingLeft: 15 }}>
-                                <Slider
-                                    valueFormat={value => format(view.data.valueFormat, value)}
-                                    min={1}
-                                    max={_.unique(_entries, e => e.weekNumber).length}
-                                    defaultValue={5}
-                                    onChange={value => setRange(value)} />
-                            </span>
-                        </div>
-                        <SummaryView
-                            enableShimmer={loading}
-                            events={_entries}
-                            type={view.data.type}
-                            range={range} />
-                    </section>
+        <Pivot
+            defaultSelectedKey={props.defaultSelectedKey || moment().year().toString()}
+            onLinkClick={props.onLinkClick}
+            styles={{ itemContainer: { paddingTop: 10 } }}>
+            {periods.map(p => (
+                <PivotItem {...p.itemProps}>
+                    <Pivot defaultSelectedKey='month' styles={{ itemContainer: { paddingTop: 10 } }}>
+                        <PivotItem key='month' itemKey='month' headerText='Month' itemIcon='Calendar'>
+                            <Slider
+                                valueFormat={value => `Show last ${value} months`}
+                                min={1}
+                                max={_.unique(p.entries, e => e.monthNumber).length}
+                                defaultValue={props.defaultRange}
+                                onChange={value => setRange(value)} />
+                            <SummaryView
+                                enableShimmer={loading}
+                                events={p.entries}
+                                type={SummaryViewType.AdminMonth}
+                                range={range}
+                                exportFileNameTemplate='Summary-Month-{0}.xlsx' />
+                        </PivotItem>
+                        <PivotItem key='week' itemKey='week' headerText='Week' itemIcon='CalendarWeek'>
+                            <Slider
+                                valueFormat={value => `Show last ${value} weeks`}
+                                min={1}
+                                max={_.unique(p.entries, e => e.weekNumber).length}
+                                defaultValue={props.defaultRange}
+                                onChange={value => setRange(value)} />
+                            <SummaryView
+                                enableShimmer={loading}
+                                events={p.entries}
+                                type={SummaryViewType.AdminWeek}
+                                range={range} 
+                                exportFileNameTemplate='Summary-Week-{0}.xlsx'/>
+                        </PivotItem>
+                    </Pivot>
                 </PivotItem>
             ))}
         </Pivot>

@@ -141,3 +141,16 @@ export function getUrlHash(): Object {
         return result;
     }, {});
 }
+
+/**
+ * Sort alphabetically
+ * 
+ * @param {string[]} strArray String array
+ */
+export function sortAlphabetically(strArray: string[]) {
+    return strArray.sort((a, b) => {
+        if (a > b) return 1;
+        if (a < b) return -1;
+        return 0;
+    });
+}
