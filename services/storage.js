@@ -59,7 +59,7 @@ StorageService.prototype.getProjects = async function (customerKey, sortBy) {
  */
 StorageService.prototype.getWeeks = async function () {
     let query = createQuery(1000, undefined, this.filter);
-    const  { entries } = await queryTable(WEEKS, query);
+    const { entries } = await queryTable(WEEKS, query);
     const weeks = parseArray(entries);
     return weeks;
 }
@@ -138,12 +138,8 @@ StorageService.prototype.getConfirmedTimeEntries = async function (filters, opti
     log('Querying table %s with filter %s', CONFIRMEDTIMEENTRIES, filter);
     let query = createQuery(1000, undefined, filter);
     let result = await queryTableAll(CONFIRMEDTIMEENTRIES, query);
-    console.log(result.length);
     if (!options.noParse) {
-        result = parseArray(result, res => ({
-            ...res,
-            customerId: res.projectId.split(' ')[0],
-        }), options);
+        result = parseArray(result, res => ({ ...res, customerId: res.projectId.split(' ')[0], }), options);
     }
     result = result.sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
     return result;

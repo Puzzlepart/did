@@ -76,14 +76,14 @@ function queryTable(table, query, continuationToken) {
 };
 
 /**
- * Queries a table using the specified query
+ * Queries all entries in a table using the specified query
  * 
  * @param {*} table 
  * @param {*} query 
  */
 async function queryTableAll(table, query) {
     let token = null;
-    let { entries, continuationToken } = await queryTable(table, query, null);
+    let { entries, continuationToken } = await queryTable(table, query, token);
     token = continuationToken;
     while (token != null) {
         let result = await queryTable(table, query, token);
