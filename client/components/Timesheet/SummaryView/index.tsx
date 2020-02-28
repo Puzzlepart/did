@@ -36,9 +36,8 @@ function createColumns({ events, type, period, range }: ISummaryViewProps) {
             break;
         case SummaryViewType.AdminMonth: {
             const monthNumbers = _.unique(events.map(e => e.monthNumber), m => m).sort((a, b) => a - b);
-            console.log(monthNumbers);
             columns = monthNumbers.map(mn => {
-                return col(mn, moment().month(mn).format('MMM'), { maxWidth: 70, minWidth: 70 }, (row: any, _index: number, col: IColumn) => <DurationColumn row={row} column={col} />);
+                return col(mn, moment().month(mn - 1).format('MMM'), { maxWidth: 70, minWidth: 70 }, (row: any, _index: number, col: IColumn) => <DurationColumn row={row} column={col} />);
             });
         }
             break;

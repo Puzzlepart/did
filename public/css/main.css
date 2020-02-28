@@ -47,16 +47,16 @@ h5 {
   margin: 0;
   padding: 0; }
 
-#app-admin .react-autosuggest__container {
+.c-AdminView .react-autosuggest__container {
   position: relative; }
 
-#app-admin .react-autosuggest__input--focused {
+.c-AdminView .react-autosuggest__input--focused {
   outline: none; }
 
-#app-admin .react-autosuggest__suggestions-container {
+.c-AdminView .react-autosuggest__suggestions-container {
   display: none; }
 
-#app-admin .react-autosuggest__suggestions-container--open {
+.c-AdminView .react-autosuggest__suggestions-container--open {
   display: block;
   position: absolute;
   top: 35px;
@@ -67,12 +67,12 @@ h5 {
   overflow-y: auto;
   z-index: 2; }
 
-#app-admin .react-autosuggest__suggestions-list {
+.c-AdminView .react-autosuggest__suggestions-list {
   margin: 0;
   padding: 0;
   list-style-type: none; }
 
-#app-admin .react-autosuggest__suggestion {
+.c-AdminView .react-autosuggest__suggestion {
   cursor: pointer;
   padding: 10px 20px; }
 
