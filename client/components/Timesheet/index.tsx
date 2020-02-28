@@ -31,7 +31,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
 
     constructor(props: ITimesheetProps) {
         super(props);
-        this.state = { period: this._getPeriod(), selectedView: 'overview' };
+        this.state = { period: this._getPeriod(), selectedView: 'overview', errors: [] };
         this._store = new PnPClientStorage().local;
     }
 
@@ -46,6 +46,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
             selectedView,
             isConfirmed,
             data,
+            errors,
         } = this.state;
 
         return (
@@ -60,7 +61,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                             onUnconfirmWeek={this._onUnconfirmWeek.bind(this)}
                             onReload={() => this._getEventData(false)}
                             disabled={{
-                                CONFIRM_WEEK: loading || isConfirmed,
+                                CONFIRM_WEEK: loading || isConfirmed || errors.length > 0,
                                 UNCONFIRM_WEEK: loading || !isConfirmed,
                                 RELOAD: loading || isConfirmed,
                             }} />
@@ -71,6 +72,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                                         isConfirmed={isConfirmed}
                                         events={value(data, 'events', [])}
                                         loading={loading}
+                                        errors={errors}
                                         ignoredEvents={this._getStoredIgnores()}
                                         onClearIgnores={this._clearIgnores.bind(this)} />
                                     <EventList
@@ -321,6 +323,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                 }
                 return event;
             });
-        this.setState({ data, loading: false, isConfirmed });
+        const errors = data.events.filter(evt => evt.error).map(evt => evt.error);
+        this.setState({ data, loading: false, isConfirmed, errors });
     }
 }

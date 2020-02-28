@@ -31,6 +31,7 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!) {
           id       
           key
           name
+          inactive
         }
       }
       suggestedProject {
@@ -47,8 +48,11 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!) {
         id
         key
         name
+        inactive
+      }      
+	    error {
+        message
       }
-      overtime
     } 
     confirmedDuration
   }

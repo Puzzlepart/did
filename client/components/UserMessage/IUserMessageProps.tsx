@@ -1,7 +1,6 @@
-import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
+import { MessageBarType, IMessageBarProps } from 'office-ui-fabric-react/lib/MessageBar';
 
-export interface IUserMessageProps {
-    id?: string;
+export interface IUserMessageProps extends IMessageBarProps {
     text?: string;
     onClick?: (event: React.MouseEvent<any>) => void;
     onDismiss?: () => void;
@@ -9,6 +8,4 @@ export interface IUserMessageProps {
     iconName?: string;
     hidden?: boolean;
     style?: React.CSSProperties;
-    children?: any;
-    actions?: JSX.Element;
 }

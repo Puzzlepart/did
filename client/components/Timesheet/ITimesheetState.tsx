@@ -28,4 +28,9 @@ export interface ITimesheetState {
      * Data
      */
     data?: ITimesheetData;
+
+    /**
+     * Errors
+     */
+    errors?: Error[];
 }
