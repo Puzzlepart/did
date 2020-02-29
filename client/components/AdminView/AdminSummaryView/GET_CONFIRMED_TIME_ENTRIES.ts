@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const GET_CONFIRMED_TIME_ENTRIES = gql`
-    query {
-        result: confirmedTimeEntries(dateFormat: "LL")  {
+    query($yearNumber: Int!) {
+        result: confirmedTimeEntries(yearNumber: $yearNumber, dateFormat: "LL")  {
             entries {
                 title
                 project {

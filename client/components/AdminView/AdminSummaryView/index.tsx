@@ -3,15 +3,11 @@ import { useQuery } from '@apollo/react-hooks';
 import { SummaryView, SummaryViewType } from 'components/Timesheet/SummaryView';
 import { getValueTyped as value } from 'helpers';
 import * as moment from 'moment-timezone';
-import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
-import { ShimmeredDetailsList } from 'office-ui-fabric-react/lib/ShimmeredDetailsList';
+import { IPivotItemProps, Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import { Slider } from 'office-ui-fabric-react/lib/Slider';
-import { Dropdown, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
 import * as React from 'react';
-import * as format from 'string-format';
 import * as _ from 'underscore';
 import { GET_CONFIRMED_TIME_ENTRIES } from './GET_CONFIRMED_TIME_ENTRIES';
-import { IAdminSummaryViewPeriod } from './IAdminSummaryViewPeriod';
 import { IAdminSummaryViewProps } from './IAdminSummaryViewProps';
 require('moment/locale/en-gb');
 
@@ -22,40 +18,38 @@ require('moment/locale/en-gb');
  * @param {IAdminSummaryViewProps} props Props
  */
 export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
+    const [year, setYear] = React.useState<number>(moment().year());
     const [range, setRange] = React.useState<number>(props.defaultRange);
-    const { data, loading } = useQuery(GET_CONFIRMED_TIME_ENTRIES, { fetchPolicy: 'cache-first' });
+    const { data, loading } = useQuery(GET_CONFIRMED_TIME_ENTRIES, {
+        fetchPolicy: 'cache-first',
+        variables: { yearNumber: year },
+    });
     let entries = value<any[]>(data, 'result.entries', []);
 
-    let periods: IAdminSummaryViewPeriod[] = _.unique([moment().year(), ...entries.map(e => e.yearNumber)], y => y)
-        .sort((a, b) => a - b)
-        .map(year => ({
-            itemProps: {
-                key: `${year}`,
-                itemID: `summary/${year}`,
-                itemKey: `${year}`,
-                headerText: `${year}`,
-            },
-            entries: value<any[]>(data, 'result.entries', []).filter(e => e.yearNumber === year),
-        }));
+    let periods: IPivotItemProps[] = [moment().year() - 2, moment().year() - 1, moment().year()].map(year => ({
+        key: `${year}`,
+        itemKey: `${year}`,
+        headerText: `${year}`,
+    }));
 
     return (
         <Pivot
-            defaultSelectedKey={props.defaultSelectedKey || moment().year().toString()}
-            onLinkClick={props.onLinkClick}
+            defaultSelectedKey={moment().year().toString()}
+            onLinkClick={(item, ev) => setYear(parseInt(item.props.itemKey))}
             styles={{ itemContainer: { paddingTop: 10 } }}>
-            {periods.map(p => (
-                <PivotItem {...p.itemProps}>
+            {periods.map(itemProps => (
+                <PivotItem {...itemProps}>
                     <Pivot defaultSelectedKey='month' styles={{ itemContainer: { paddingTop: 10 } }}>
                         <PivotItem key='month' itemKey='month' headerText='Month' itemIcon='Calendar'>
                             <Slider
                                 valueFormat={value => `Show last ${value} months`}
                                 min={1}
-                                max={_.unique(p.entries, e => e.monthNumber).length}
+                                max={_.unique(entries, e => e.monthNumber).length}
                                 defaultValue={props.defaultRange}
                                 onChange={value => setRange(value)} />
                             <SummaryView
                                 enableShimmer={loading}
-                                events={p.entries}
+                                events={entries}
                                 type={SummaryViewType.AdminMonth}
                                 range={range}
                                 exportFileNameTemplate='Summary-Month-{0}.xlsx' />
@@ -64,12 +58,12 @@ export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
                             <Slider
                                 valueFormat={value => `Show last ${value} weeks`}
                                 min={1}
-                                max={_.unique(p.entries, e => e.weekNumber).length}
+                                max={_.unique(entries, e => e.weekNumber).length}
                                 defaultValue={props.defaultRange}
                                 onChange={value => setRange(value)} />
                             <SummaryView
                                 enableShimmer={loading}
-                                events={p.entries}
+                                events={entries}
                                 type={SummaryViewType.AdminWeek}
                                 range={range}
                                 exportFileNameTemplate='Summary-Week-{0}.xlsx' />
