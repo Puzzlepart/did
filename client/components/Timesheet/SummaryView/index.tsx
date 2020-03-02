@@ -22,26 +22,23 @@ import * as format from 'string-format';
 */
 function createColumns({ events, type, period, range }: ISummaryViewProps) {
     let columns = [];
+    let onRender = (row: any, _index: number, col: IColumn) => <DurationColumn row={row} column={col} />;
     switch (type) {
         case SummaryViewType.UserWeek: {
             columns = Array.from(Array(7).keys()).map(i => {
                 const day = startOfWeek(period.startDateTime).add(i as moment.DurationInputArg1, 'days' as moment.DurationInputArg2);
-                return col(day.format('L'), day.format('ddd DD'), { maxWidth: 70, minWidth: 70 }, (row: any, _index: number, col: IColumn) => <DurationColumn row={row} column={col} />);
+                return col(day.format('L'), day.format('ddd DD'), { maxWidth: 70, minWidth: 70 }, onRender);
             });
         }
             break;
         case SummaryViewType.AdminWeek: {
             const weekNumbers = _.unique(events.map(e => e.weekNumber), w => w).sort((a, b) => a - b);
-            columns = weekNumbers.map(wn => {
-                return col(wn, `Week ${wn}`, { maxWidth: 70, minWidth: 70 }, (row: any, _index: number, col: IColumn) => <DurationColumn row={row} column={col} />);
-            });
+            columns = weekNumbers.map(wn => col(wn, `Week ${wn}`, { maxWidth: 70, minWidth: 70 }, onRender));
         }
             break;
         case SummaryViewType.AdminMonth: {
             const monthNumbers = _.unique(events.map(e => e.monthNumber), m => m).sort((a, b) => a - b);
-            columns = monthNumbers.map(mn => {
-                return col(mn, moment().month(mn - 1).format('MMM'), { maxWidth: 70, minWidth: 70 }, (row: any, _index: number, col: IColumn) => <DurationColumn row={row} column={col} />);
-            });
+            columns = monthNumbers.map(mn => col(mn, moment().month(mn - 1).format('MMM'), { maxWidth: 70, minWidth: 70 }, onRender));
         }
             break;
     }
@@ -49,7 +46,7 @@ function createColumns({ events, type, period, range }: ISummaryViewProps) {
     return [
         col('label', '', { minWidth: 350, maxWidth: 350, isMultiline: true, isResizable: true }, (row: any) => <LabelColumn row={row} />),
         ...columns,
-        col('sum', 'Sum', { minWidth: 50, maxWidth: 50, isResizable: false, data: { style: { fontWeight: 500 } } }, (row: any, _index: number, col: IColumn) => <DurationColumn row={row} column={col} />),
+        col('sum', 'Sum', { minWidth: 50, maxWidth: 50, isResizable: false, data: { style: { fontWeight: 500 } } }, onRender),
     ];
 }
 
