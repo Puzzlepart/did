@@ -7,7 +7,7 @@ import { Modal } from 'office-ui-fabric-react/lib/Modal';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import * as React from 'react';
 import validator from 'validator';
-import ADD_LABEL from './ADD_LABEL';
+import ADD_OR_UPDATE_LABEL from './ADD_OR_UPDATE_LABEL';
 import { ILabelFormModalProps } from './ILabelFormModalProps';
 import { SketchPicker } from 'react-color'
 
@@ -17,15 +17,15 @@ import { SketchPicker } from 'react-color'
  * @description
  */
 export const LabelFormModal = (props: ILabelFormModalProps) => {
-    const [label, setLabel] = React.useState<ILabel>({ name: '', description: '', color: '#F8E71C' });
+    const [label, setLabel] = React.useState<ILabel>(props.label || { name: '', description: '', color: '#F8E71C' });
     const [colorPickerVisible, setColorPickerVisible] = React.useState<boolean>(false);
-    let [addLabel] = useMutation(ADD_LABEL);
+    let [addOrUpdateLabel] = useMutation(ADD_OR_UPDATE_LABEL);
 
     /**
      * On save
      */
     const onSave = async () => {
-        await addLabel({ variables: { label } });
+        await addOrUpdateLabel({ variables: { label } });
         props.modal.onDismiss();
     }
 
@@ -42,7 +42,7 @@ export const LabelFormModal = (props: ILabelFormModalProps) => {
             {...props.modal}
             containerClassName='c-AdminView-labelFormModal'
             isOpen={true}>
-            <div className='c-AdminView-labelFormModal-title' hidden={!props.title}>{props.title}</div>
+            <div className='c-AdminView-labelFormModal-title'>{props.label ? label.name : props.title}</div>
             <TextField
                 label='Name'
                 placeholder='Label 1'

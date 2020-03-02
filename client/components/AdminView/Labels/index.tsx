@@ -27,10 +27,8 @@ export const Labels = () => {
         col('description', 'Description', { maxWidth: 220 }),
         col('actions', '', {}, (label: ILabel) => (
             <>
-                <Link onClick={async () => {
-                    await deleteLabel({ variables: { id: label.id } });
-                    refetch();
-                }}>Delete</Link>
+                <Link onClick={_ => deleteLabel({ variables: { id: label.id } }).then(refetch)}>Delete</Link>
+                <Link style={{ marginLeft: 4 }} onClick={_ => setForm({ label })}>Edit</Link>
             </>
         ))
     ];
