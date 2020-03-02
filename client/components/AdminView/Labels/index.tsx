@@ -1,5 +1,6 @@
 
 import { useQuery } from '@apollo/react-hooks';
+import { Label } from 'components/Label';
 import { List } from 'components/List';
 import { getValueTyped as value } from 'helpers';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
@@ -14,14 +15,14 @@ import GET_LABELS from './GET_LABELS';
 export const Labels = () => {
     const { data, loading } = useQuery(GET_LABELS, { fetchPolicy: 'cache-and-network' });
     const columns = [
-        col('name', 'Name', { maxWidth: 180 }, (label: any) => <div className='label' style={{ backgroundColor: label.color }}>{label.name}</div>),
+        col('name', 'Name', { maxWidth: 180 }, (label: any) => <Label {...label} />),
         col('description', 'Description'),
     ];
 
     if (loading) return <ProgressIndicator />;
 
     return (
-        <div className='c-AdminView-labels'>
+        <div>
             <List items={value(data, 'labels', [])} columns={columns} />
         </div>
     );
