@@ -47,7 +47,7 @@ h5 {
   margin: 0;
   padding: 0; }
 
-.c-Label {
+.c-EntityLabel {
   display: inline-block;
   padding: 4px 8px;
   margin: 0 4px 0 0;
@@ -104,6 +104,8 @@ h5 {
   .c-AdminView-labelFormModal .c-AdminView-labelFormModal-saveBtn {
     width: 100%;
     margin: 8px 0 0 0; }
+  .c-AdminView-labelFormModal .c-AdminView-labelFormModal-colorPicker {
+    position: relative; }
 
 .c-Timesheet .c-Timesheet-actions {
   margin: 10px 0 10px 0; }

@@ -24,6 +24,7 @@ export const GET_PROJECTS = gql`
                 name
                 description
                 color
+                icon
             }
         }
     }

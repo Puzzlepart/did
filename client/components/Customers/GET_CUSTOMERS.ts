@@ -14,6 +14,7 @@ export const GET_CUSTOMERS = gql`
             name
             description
             color
+            icon
         }
     }
 }`;

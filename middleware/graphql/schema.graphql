@@ -94,6 +94,7 @@ type Label implements BaseEntity {
 	name: String!
 	description: String
 	color: String!
+	icon: String
 }
 
 type FAQ implements BaseEntity {
@@ -112,6 +113,13 @@ input UserInput  {
 	id: String!
 	fullName: String!
 	role: String!
+}
+
+input LabelInput  {
+	name: String!
+	description: String!
+	color: String!
+	icon: String
 }
 
 type EventData {
@@ -146,6 +154,7 @@ type BaseResult {
 
 type Mutation {
 	addUser(user: UserInput!): BaseResult!
+	addLabel(label: LabelInput!): BaseResult!
 	createProject(customerKey: String!, projectKey: String!, name: String!, description: String!, icon: String!): BaseResult
 	createCustomer(key: String!, name: String!, description: String!, icon: String!): BaseResult
 	confirmPeriod(entries: [TimeEntryInput!], startDateTime: String!,  endDateTime: String!): BaseResult!

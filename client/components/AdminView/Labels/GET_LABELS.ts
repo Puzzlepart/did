@@ -8,6 +8,7 @@ query {
     name
     description
     color
+    icon
   }
 }
 `;

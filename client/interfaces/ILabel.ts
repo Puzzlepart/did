@@ -5,4 +5,5 @@ export interface ILabel extends IObjectWithKey {
     name: string;
     description: string;
     color: string;
+    icon?: string;
 }
