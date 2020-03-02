@@ -10,11 +10,7 @@ import CREATE_PROJECT from './CREATE_PROJECT';
 import { ICreateProjectFormModel } from './ICreateProjectFormModel';
 import { SearchCustomer } from './SearchCustomer';
 import { ICreateProjectFormProps } from './ICreateProjectFormProps';
-
-export interface ICreateProjectFormValidation {
-    errors: { [key: string]: string };
-    invalid: boolean;
-}
+import { ICreateProjectFormValidation } from './ICreateProjectFormValidation';
 
 /**
  * @component CreateProjectForm
@@ -26,8 +22,11 @@ export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey
     let [model, setModel] = useState<ICreateProjectFormModel>(initialModel);
     let [addProject, { loading }] = useMutation(CREATE_PROJECT);
 
+    /**
+     * On form submit
+     */
     const onFormSubmit = async () => {
-        let _validation = validateModel();
+        let _validation = validateForm();
         if (_validation.invalid) {
             setValidation(_validation);
             return;
@@ -40,17 +39,13 @@ export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey
             setMessage({ text: result.error, type: MessageBarType.error });
         }
         setModel(initialModel);
-        window.setTimeout(() => {
-            setMessage(null);
-        }, 5000);
+        window.setTimeout(() => setMessage(null), 5000);
     }
 
     /**
-     * Validate model
-     * 
-     * @description Temp validation of model
+     * Validate form
      */
-    const validateModel = (): ICreateProjectFormValidation => {
+    const validateForm = (): ICreateProjectFormValidation => {
         let errors: { [key: string]: string } = {};
         if (!model.customerKey) errors.customerKey = '';
         if (model.name.length < 2) errors.name = 'Name should be at least 2 characters long.';
@@ -65,6 +60,7 @@ export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey
             <TextField
                 styles={{ root: { marginTop: 12, width: 300 } }}
                 label='Key'
+                description='Project key. Between 3 and 8 characters long, and all uppercase.'
                 errorMessage={validation.errors.projectKey}
                 onChange={(_event, projectKey) => setModel({ ...model, projectKey })}
                 value={model.projectKey} />
@@ -94,7 +90,7 @@ export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey
                 text='Add'
                 iconProps={{ iconName: 'CirclePlus' }}
                 onClick={onFormSubmit}
-                disabled={loading} />
+                disabled={loading || !!message} />
             {message && <UserMessage style={{ marginTop: 10 }} text={message.text} type={message.type} />}
         </div>
     );
