@@ -2,21 +2,54 @@
 import { useQuery } from '@apollo/react-hooks';
 import { List } from 'components/List';
 import { getValueTyped as value } from 'helpers';
+import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
+import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
+import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
 import * as React from 'react';
+import { generateColumn as col } from 'utils/generateColumn';
 import GET_USERS from './GET_USERS';
-import { USER_LIST_COLUMNS } from './USER_LIST_COLUMNS';
+import { UserFormModal, IUserFormModalProps } from './UserFormModal';
 
 /**
  * @component Users
  * @description
  */
 export const Users = () => {
-    const { data, loading } = useQuery(GET_USERS);
+    const [userForm, setUserForm] = React.useState<IUserFormModalProps>(null);
+    const { data, loading, refetch } = useQuery(GET_USERS, { fetchPolicy: 'cache-and-network' });
+    const columns = [
+        col('fullName', 'Name', { maxWidth: 180 }),
+        col('role', 'Role'),
+        col('edit', '', {}, (user: any) => <DefaultButton text='Edit' onClick={() => setUserForm({ title: user.fullName, user })} />)
+    ];
+
+    let commands: IContextualMenuItem[] = [
+        {
+            key: 'ENROLL_USER',
+            name: 'Enroll user',
+            iconProps: { iconName: 'AddFriend' },
+            onClick: () => setUserForm({ title: 'Enroll new user' }),
+        },
+    ];
 
     return (
-        <List
-            enableShimmer={loading}
-            items={value(data, 'users', [])}
-            columns={USER_LIST_COLUMNS} />
+        <>
+            <CommandBar
+                styles={{ root: { padding: 0 } }}
+                items={commands} />
+            <List
+                enableShimmer={loading}
+                items={value(data, 'users', [])}
+                columns={columns} />
+            {userForm && (
+                <UserFormModal
+                    {...userForm}
+                    modal={{
+                        onDismiss: _ => {
+                            setUserForm(null);
+                            refetch();
+                        }
+                    }} />)}
+        </>
     );
 }
