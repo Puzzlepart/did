@@ -9,4 +9,5 @@ export interface IProject extends IObjectWithKey {
     webLink: string;
     icon: string;
     customer: ICustomer;
+    labels: any[];
 }
