@@ -5,6 +5,7 @@ import { IColumn, List } from 'components/List';
 import { UserMessage } from 'components/UserMessage';
 import { getMonthName, getValueTyped as value } from 'helpers';
 import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
+import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import * as React from 'react';
 import { useState } from 'react';
 import * as format from 'string-format';
@@ -79,6 +80,9 @@ export const Reports = ({ skip = ['id', '__typename', 'monthNumber'], exportFile
         setSubset(_entries);
     }
 
+
+    if (loading) return <ProgressIndicator />;
+
     return (
         <div>
             <CommandBar
@@ -113,14 +117,12 @@ export const Reports = ({ skip = ['id', '__typename', 'monthNumber'], exportFile
                 columns={columns}
                 enableShimmer={loading} />
             <UserMessage hidden={entries.length > 0 || loading} text={`There's no confirmed time entries at this time.`} />
-            {!loading && (
-                <FilterPanel
-                    isOpen={filterPanelOpen}
-                    filters={REPORTS_FILTERS}
-                    entries={entries}
-                    onDismiss={() => setFilterPanelOpen(false)}
-                    onFilterUpdated={onFilterUpdated} />
-            )}
+            <FilterPanel
+                isOpen={filterPanelOpen}
+                filters={REPORTS_FILTERS}
+                entries={entries}
+                onDismiss={() => setFilterPanelOpen(false)}
+                onFilterUpdated={onFilterUpdated} />
         </div>
     );
 }

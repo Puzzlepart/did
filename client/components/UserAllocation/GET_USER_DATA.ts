@@ -1,6 +1,6 @@
 
 import gql from 'graphql-tag';
-import { IProject, ICustomer } from 'models';
+import { IProject, ICustomer } from 'interfaces';
 
 export interface ITimeEntry {
   durationHours: number;

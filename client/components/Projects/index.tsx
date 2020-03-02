@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks';
 import { SelectionMode } from 'components/List';
 import { getValueTyped as value } from 'helpers';
-import { IProject } from 'models';
+import { IProject } from 'interfaces';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import * as React from 'react';

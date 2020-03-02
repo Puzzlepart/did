@@ -22,7 +22,7 @@ module.exports = {
   entry: ['@babel/polyfill', './lib/client/App.js'],
   resolve: {
     alias: {
-      models: path.resolve(__dirname, 'lib/client/models'),
+      interfaces: path.resolve(__dirname, 'lib/client/interfaces'),
       utils: path.resolve(__dirname, 'lib/client/utils'),
       helpers: path.resolve(__dirname, 'lib/client/helpers'),
       components: path.resolve(__dirname, 'lib/client/components'),

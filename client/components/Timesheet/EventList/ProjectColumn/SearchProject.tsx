@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/react-hooks';
 import AutosuggestHighlightMatch from 'autosuggest-highlight/match';
 import AutosuggestHighlightParse from 'autosuggest-highlight/parse';
 import { GET_PROJECTS } from 'components/Projects/GET_PROJECTS';
-import { IProject, ICustomer } from 'models';
+import { IProject, ICustomer } from 'interfaces';
 import { Shimmer } from 'office-ui-fabric-react/lib/Shimmer';
 import * as React from 'react';
 import { useState } from 'react';

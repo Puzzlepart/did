@@ -5,7 +5,7 @@ import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { Shimmer } from 'office-ui-fabric-react/lib/Shimmer';
 import * as React from 'react';
 import { IStatusBarProps } from './IStatusBarProps';
-import { ITimeEntry } from 'models';
+import { ITimeEntry } from 'interfaces';
 
 /**
  * Get total duration

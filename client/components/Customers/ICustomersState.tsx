@@ -1,4 +1,4 @@
-import { IProject } from 'models';
+import { IProject } from 'interfaces';
 
 export interface ICustomersState {
     isLoading: boolean;

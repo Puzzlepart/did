@@ -98,6 +98,12 @@ input TimeEntryInput {
 	projectId: String
 }
 
+input UserInput  {
+	id: String!
+	fullName: String!
+	role: String!
+}
+
 type EventData {
 	events: [Event!]!
 	matchedEvents: [Event!]!
@@ -135,9 +141,11 @@ type BaseResult {
 }
 
 type Mutation {
+	addUser(user: UserInput!): BaseResult!
 	createProject(customerKey: String!, projectKey: String!, name: String!, description: String!, icon: String!): BaseResult
 	createCustomer(key: String!, name: String!, description: String!, icon: String!): BaseResult
 	confirmPeriod(entries: [TimeEntryInput!], startDateTime: String!,  endDateTime: String!): BaseResult!
 	unconfirmPeriod(startDateTime: String!, endDateTime: String!): BaseResult!
 	updateWeek(weekNumber: Int!, closed: Boolean!): Boolean!
+	updateUser(user: UserInput!): BaseResult!
 }

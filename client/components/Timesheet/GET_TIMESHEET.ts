@@ -1,6 +1,6 @@
 
 import gql from 'graphql-tag';
-import { ITimeEntry } from 'models';
+import { ITimeEntry } from 'interfaces';
 
 export interface ITimesheetData {
   events?: ITimeEntry[];

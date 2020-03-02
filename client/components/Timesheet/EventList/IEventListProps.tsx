@@ -1,4 +1,4 @@
-import { ITimeEntry, IProject } from 'models';
+import { ITimeEntry, IProject } from 'interfaces';
 import { IListGroups } from 'components/List/IListGroups';
 import { TypedHash } from '@pnp/common';
 

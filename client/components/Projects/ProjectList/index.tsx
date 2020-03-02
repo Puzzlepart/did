@@ -1,5 +1,5 @@
 import { IColumn, List } from 'components/List';
-import { IProject } from 'models';
+import { IProject } from 'interfaces';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import * as React from 'react';
 import { generateColumn as col } from 'utils/generateColumn';

@@ -4,6 +4,7 @@ import { SummaryView, SummaryViewType } from 'components/Timesheet/SummaryView';
 import { getValueTyped as value } from 'helpers';
 import * as moment from 'moment-timezone';
 import { IPivotItemProps, Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
+import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import { Slider } from 'office-ui-fabric-react/lib/Slider';
 import * as React from 'react';
 import * as _ from 'underscore';
@@ -35,18 +36,21 @@ export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
     return (
         <Pivot
             defaultSelectedKey={moment().year().toString()}
-            onLinkClick={(item, ev) => setYear(parseInt(item.props.itemKey))}
+            onLinkClick={item => setYear(parseInt(item.props.itemKey))}
             styles={{ itemContainer: { paddingTop: 10 } }}>
             {periods.map(itemProps => (
                 <PivotItem {...itemProps}>
                     <Pivot defaultSelectedKey='month' styles={{ itemContainer: { paddingTop: 10 } }}>
                         <PivotItem key='month' itemKey='month' headerText='Month' itemIcon='Calendar'>
-                            <Slider
-                                valueFormat={value => `Show last ${value} months`}
-                                min={1}
-                                max={_.unique(entries, e => e.monthNumber).length}
-                                defaultValue={props.defaultRange}
-                                onChange={value => setRange(value)} />
+                            {!loading && (
+                                <Slider
+                                    valueFormat={value => `Show last ${value} months`}
+                                    min={1}
+                                    max={_.unique(entries, e => e.monthNumber).length}
+                                    defaultValue={range}
+                                    onChange={value => setRange(value)} />
+                            )}
+                            {loading && <ProgressIndicator />}
                             <SummaryView
                                 enableShimmer={loading}
                                 events={entries}
@@ -55,12 +59,15 @@ export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
                                 exportFileNameTemplate='Summary-Month-{0}.xlsx' />
                         </PivotItem>
                         <PivotItem key='week' itemKey='week' headerText='Week' itemIcon='CalendarWeek'>
-                            <Slider
-                                valueFormat={value => `Show last ${value} weeks`}
-                                min={1}
-                                max={_.unique(entries, e => e.weekNumber).length}
-                                defaultValue={props.defaultRange}
-                                onChange={value => setRange(value)} />
+                            {!loading && (
+                                <Slider
+                                    valueFormat={value => `Show last ${value} weeks`}
+                                    min={1}
+                                    max={_.unique(entries, e => e.weekNumber).length}
+                                    defaultValue={range}
+                                    onChange={value => setRange(value)} />
+                            )}
+                            {loading && <ProgressIndicator />}
                             <SummaryView
                                 enableShimmer={loading}
                                 events={entries}

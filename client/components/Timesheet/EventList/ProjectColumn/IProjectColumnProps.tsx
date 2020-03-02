@@ -1,4 +1,4 @@
-import { IProject, ITimeEntry } from 'models';
+import { IProject, ITimeEntry } from 'interfaces';
 export interface IProjectColumnProps {
     event: ITimeEntry;
     isConfirmed?: boolean;

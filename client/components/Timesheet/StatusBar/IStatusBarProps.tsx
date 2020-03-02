@@ -1,4 +1,4 @@
-import { ITimeEntry } from 'models';
+import { ITimeEntry } from 'interfaces';
 
 export interface IStatusBarProps {
     /**

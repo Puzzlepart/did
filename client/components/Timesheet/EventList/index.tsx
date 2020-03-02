@@ -1,7 +1,7 @@
 
 import { List } from 'components/List';
 import { formatDate, getValueTyped as value } from 'helpers';
-import { ITimeEntry } from 'models';
+import { ITimeEntry } from 'interfaces';
 import * as React from 'react';
 import { generateColumn as col } from 'utils/generateColumn';
 import { DurationDisplay } from './DurationDisplay';
