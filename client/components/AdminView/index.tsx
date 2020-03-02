@@ -1,10 +1,8 @@
 
-import { useQuery } from '@apollo/react-hooks';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import * as React from 'react';
 import { AdminSummaryView } from './AdminSummaryView';
 import { Users } from './Users';
-import GET_USERS from './Users/GET_USERS';
 
 function getPath(): string[] {
     let [, path] = document.location.hash.substring(1).split('=');
