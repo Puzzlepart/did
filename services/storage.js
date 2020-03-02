@@ -181,6 +181,16 @@ StorageService.prototype.getUsers = async function () {
     const { entries } = await queryTable(USERS_TABLE, query);
     return parseArray(entries);
 }
+
+/**
+ * Get labels
+ */
+StorageService.prototype.getLabels = async function () {
+    const query = createQuery(1000, undefined).where(this.filter);
+    const { entries } = await queryTable('Labels', query);
+    return parseArray(entries);
+}
+
 /**
  * Get FAQ
  */
