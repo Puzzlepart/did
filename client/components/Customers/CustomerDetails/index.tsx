@@ -4,18 +4,47 @@ import { ProjectList } from 'components/Projects/ProjectList';
 import { getValueTyped as value } from 'helpers';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import * as React from 'react';
+import { Label } from 'components/Label';
+import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
+import { CustomerDetailsProps } from './CustomerDetailsProps';
 
-export const CustomerDetails = ({ customer }) => {
+/**
+ * @component CustomerDetails
+ * @description 
+ */
+export const CustomerDetails = ({ customer }: CustomerDetailsProps) => {
     const { loading, error, data } = useQuery(GET_PROJECTS, { variables: { customerKey: value<string>(customer, 'key', '') } });
 
     const projects = value<any[]>(data, 'projects', []);
 
     return (
-        <div>
-            <div>
-                <h3>{customer.name}</h3>
-                <p hidden={!customer.description}>{customer.description}</p>
-                <p hidden={!customer.webLink}><a href={customer.webLink}>{customer.webLink}</a></p>
+        <div className='c-CustomerDetails'>
+            <div className='container'>
+                <div className="row">
+                    <div className="col-sm">
+                        <h3>{customer.name}</h3>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-sm">
+                        <p>{customer.description}</p>
+                    </div>
+                </div>
+                <div className="row c-CustomerDetails-labels">
+                    <div className="col-sm">
+                        {customer.labels.map(label => <Label {...label} />)}
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-sm">
+                        <DefaultButton
+                            hidden={!customer.webLink}
+                            text='Customer workspace'
+                            onClick={() => window.location.replace(customer.webLink)}
+                            iconProps={{ iconName: 'WorkforceManagement' }}
+                            disabled={loading || !!error || !customer.webLink} />
+                    </div>
+                </div>
             </div>
             {error && <MessageBar messageBarType={MessageBarType.error}>An error occured.</MessageBar>}
             {!error && (

@@ -1,15 +1,18 @@
 import { useQuery } from '@apollo/react-hooks';
+import { Label } from 'components/Label';
 import { EventList } from 'components/Timesheet/EventList';
-import { currencyDisplay, getValueTyped as value } from 'helpers';
+import { getValueTyped as value } from 'helpers';
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import * as React from 'react';
 import * as excel from 'utils/exportExcel';
 import { GET_PROJECT_CONFIRMED_TIME_ENTRIES } from './GET_PROJECT_CONFIRMED_TIME_ENTRIES';
 import { IProjectDetailsProps } from './IProjectDetailsProps';
-import { Label } from 'components/Label';
 
-
+/**
+ * @component ProjectDetails
+ * @description 
+ */
 export const ProjectDetails = ({ project }: IProjectDetailsProps) => {
     const { loading, error, data } = useQuery(GET_PROJECT_CONFIRMED_TIME_ENTRIES, { variables: { projectId: project.id } });
 

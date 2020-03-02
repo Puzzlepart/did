@@ -216,6 +216,11 @@ h5 {
   .c-ProjectDetails .c-ProjectDetails-labels {
     text-align: end; }
 
+.c-CustomerDetails {
+  margin-top: 30px; }
+  .c-CustomerDetails .c-CustomerDetails-labels {
+    text-align: end; }
+
 .c-UserMessage p {
   word-break: break-word;
   white-space: normal;

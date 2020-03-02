@@ -6,6 +6,10 @@ import { generateColumn as col } from 'utils/generateColumn';
 import { IProjectListProps } from './IProjectListProps';
 import { Label } from 'components/Label';
 
+/**
+ * @component ProjectList
+ * @description 
+ */
 export const ProjectList = (props: IProjectListProps) => {
     const columns: IColumn[] = [
         col(
