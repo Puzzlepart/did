@@ -90,7 +90,7 @@ type Label implements BaseEntity {
 	id: String
 	key: String
 	name: String!
-	description: String!
+	description: String
 	color: String!
 }
 
