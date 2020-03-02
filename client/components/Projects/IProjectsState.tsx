@@ -1,4 +1,4 @@
-import { IProject, ITimeEntry } from 'models';
+import { IProject, ITimeEntry } from 'interfaces';
 
 export interface IProjectsState {
     isLoading: boolean;

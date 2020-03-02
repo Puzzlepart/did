@@ -2,13 +2,13 @@ const { queryTable, queryTableAll, parseArray, isEqual, lt, gt, and, combine, st
 const log = require('debug')('services/storage');
 const arraySort = require('array-sort');
 
-const SUBSCRIPTIONS = process.env.AZURE_STORAGE_SUBSCRIPTIONS_TABLE_NAME;
-const USERS = process.env.AZURE_STORAGE_USERS_TABLE_NAME;
-const PROJECTS = process.env.AZURE_STORAGE_PROJECTS_TABLE_NAME;
-const CUSTOMERS = process.env.AZURE_STORAGE_CUSTOMERS_TABLE_NAME;
-const CONFIRMEDTIMEENTRIES = process.env.AZURE_STORAGE_CONFIRMEDTIMEENTRIES_TABLE_NAME;
-const WEEKS = 'Weeks';
-const FAQ = 'FAQ';
+const SUBSCRIPTIONS_TABLE = process.env.AZURE_STORAGE_SUBSCRIPTIONS_TABLE_NAME;
+const USERS_TABLE = process.env.AZURE_STORAGE_USERS_TABLE_NAME;
+const PROJECTS_TABLE = process.env.AZURE_STORAGE_PROJECTS_TABLE_NAME;
+const CUSTOMERS_TABLE = process.env.AZURE_STORAGE_CUSTOMERS_TABLE_NAME;
+const CONFIRMEDTIMEENTRIES_TABLE = process.env.AZURE_STORAGE_CONFIRMEDTIMEENTRIES_TABLE_NAME;
+const WEEKS_TABLE = 'Weeks';
+const FAQ_TABLE = 'FAQ';
 
 function StorageService(tid) {
     this.tenantId = tid;
@@ -21,7 +21,7 @@ function StorageService(tid) {
 StorageService.prototype.getSubscription = function () {
     return new Promise(async (resolve) => {
         const query = createQuery(1, ['Name']).where('RowKey eq ?', this.tenantId);
-        var { entries } = await queryTable(SUBSCRIPTIONS, query);
+        var { entries } = await queryTable(SUBSCRIPTIONS_TABLE, query);
         resolve(parseArray(entries)[0]);
     });
 };
@@ -34,7 +34,7 @@ StorageService.prototype.getSubscription = function () {
 StorageService.prototype.getUser = async function (userId) {
     let filter = combine(this.filter, and, stringFilter('RowKey', isEqual, userId));
     const query = createQuery(1, ['Role', 'StartPage']).where(filter);
-    const { entries } = await queryTable(USERS, query);
+    const { entries } = await queryTable(USERS_TABLE, query);
     return parseArray(entries)[0];
 }
 
@@ -48,7 +48,7 @@ StorageService.prototype.getProjects = async function (customerKey, sortBy) {
     let filter = this.filter;
     if (customerKey) filter = combine(filter, and, stringFilter('CustomerKey', isEqual, customerKey));
     let query = createQuery(1000, undefined, filter);
-    const { entries } = await queryTable(PROJECTS, query);
+    const { entries } = await queryTable(PROJECTS_TABLE, query);
     let projects = parseArray(entries, undefined, { idUpper: true });
     if (sortBy) projects = arraySort(projects, sortBy);
     return projects;
@@ -59,7 +59,7 @@ StorageService.prototype.getProjects = async function (customerKey, sortBy) {
  */
 StorageService.prototype.getWeeks = async function () {
     let query = createQuery(1000, undefined, this.filter);
-    const { entries } = await queryTable(WEEKS, query);
+    const { entries } = await queryTable(WEEKS_TABLE, query);
     const weeks = parseArray(entries);
     return weeks;
 }
@@ -68,10 +68,23 @@ StorageService.prototype.getWeeks = async function () {
  * Update week
  */
 StorageService.prototype.updateWeek = async function (weekNumber, closed) {
-    const result = await updateEntity(WEEKS, {
+    const result = await updateEntity(WEEKS_TABLE, {
         PartitionKey: entGen.String(this.tenantId),
         RowKey: entGen.String(weekNumber.toString()),
         Closed: entGen.Boolean(closed),
+    });
+    return result;
+}
+
+/**
+ * Update user
+ */
+StorageService.prototype.updateUser = async function (user) {
+    const result = await updateEntity(USERS_TABLE, {
+        PartitionKey: entGen.String(this.tenantId),
+        RowKey: entGen.String(user.id),
+        FullName: entGen.String(user.fullName),
+        Role: entGen.String(user.role),
     });
     return result;
 }
@@ -83,7 +96,7 @@ StorageService.prototype.updateWeek = async function (weekNumber, closed) {
  */
 StorageService.prototype.createProject = async function (model) {
     let projectId = (`${model.customerKey} ${model.projectKey}`).toUpperCase();
-    let entity = await addEntity(PROJECTS, {
+    let entity = await addEntity(PROJECTS_TABLE, {
         PartitionKey: entGen.String(this.tenantId),
         RowKey: entGen.String(projectId),
         Name: entGen.String(model.name),
@@ -100,7 +113,7 @@ StorageService.prototype.createProject = async function (model) {
  * @param {*} model
  */
 StorageService.prototype.createCustomer = async function (model) {
-    let entity = await addEntity(CUSTOMERS, {
+    let entity = await addEntity(CUSTOMERS_TABLE, {
         PartitionKey: entGen.String(this.tenantId),
         RowKey: entGen.String(model.key.toUpperCase()),
         Name: entGen.String(model.name),
@@ -111,11 +124,26 @@ StorageService.prototype.createCustomer = async function (model) {
 }
 
 /**
+ * Add user
+ * 
+ * @param {*} user
+ */
+StorageService.prototype.addUser = async function (user) {
+    let entity = await addEntity(USERS_TABLE, {
+        PartitionKey: entGen.String(this.tenantId),
+        RowKey: entGen.String(user.id),
+        FullName: entGen.String(user.fullName),
+        Role: entGen.String(user.role),
+    });
+    return entity;
+}
+
+/**
  * Get customers
  */
 StorageService.prototype.getCustomers = async function () {
     const query = createQuery(1000, undefined, this.filter);
-    const { entries } = await queryTable(CUSTOMERS, query);
+    const { entries } = await queryTable(CUSTOMERS_TABLE, query);
     return parseArray(entries, undefined, { idUpper: true });
 }
 
@@ -135,9 +163,9 @@ StorageService.prototype.getConfirmedTimeEntries = async function (filters, opti
     if (filters.yearNumber) filter = combine(filter, and, intFilter('YearNumber', isEqual, filters.yearNumber));
     if (filters.startDateTime) filter = combine(filter, and, dateFilter('StartTime', gt, entGen.DateTime(new Date(filters.startDateTime))._));
     if (filters.endDateTime) filter = combine(filter, and, dateFilter('StartTime', lt, entGen.DateTime(new Date(filters.endDateTime))._));
-    log('Querying table %s with filter %s', CONFIRMEDTIMEENTRIES, filter);
+    log('Querying table %s with filter %s', CONFIRMEDTIMEENTRIES_TABLE, filter);
     let query = createQuery(1000, undefined, filter);
-    let result = await queryTableAll(CONFIRMEDTIMEENTRIES, query);
+    let result = await queryTableAll(CONFIRMEDTIMEENTRIES_TABLE, query);
     if (!options.noParse) {
         result = parseArray(result, res => ({ ...res, customerId: res.projectId.split(' ')[0], }), options);
     }
@@ -150,7 +178,7 @@ StorageService.prototype.getConfirmedTimeEntries = async function (filters, opti
  */
 StorageService.prototype.getUsers = async function () {
     const query = createQuery(1000, undefined).where(this.filter);
-    const { entries } = await queryTable(USERS, query);
+    const { entries } = await queryTable(USERS_TABLE, query);
     return parseArray(entries);
 }
 /**
@@ -158,7 +186,7 @@ StorageService.prototype.getUsers = async function () {
  */
 StorageService.prototype.getFAQ = async function () {
     const query = createQuery(1000, undefined).where(this.filter);
-    const { entries } = await queryTable(FAQ, query);
+    const { entries } = await queryTable(FAQ_TABLE, query);
     return parseArray(entries);
 }
 

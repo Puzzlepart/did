@@ -35,7 +35,7 @@ export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
     return (
         <Pivot
             defaultSelectedKey={moment().year().toString()}
-            onLinkClick={(item, ev) => setYear(parseInt(item.props.itemKey))}
+            onLinkClick={item => setYear(parseInt(item.props.itemKey))}
             styles={{ itemContainer: { paddingTop: 10 } }}>
             {periods.map(itemProps => (
                 <PivotItem {...itemProps}>
@@ -45,7 +45,7 @@ export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
                                 valueFormat={value => `Show last ${value} months`}
                                 min={1}
                                 max={_.unique(entries, e => e.monthNumber).length}
-                                defaultValue={props.defaultRange}
+                                defaultValue={range}
                                 onChange={value => setRange(value)} />
                             <SummaryView
                                 enableShimmer={loading}
@@ -59,7 +59,7 @@ export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
                                 valueFormat={value => `Show last ${value} weeks`}
                                 min={1}
                                 max={_.unique(entries, e => e.weekNumber).length}
-                                defaultValue={props.defaultRange}
+                                defaultValue={range}
                                 onChange={value => setRange(value)} />
                             <SummaryView
                                 enableShimmer={loading}
