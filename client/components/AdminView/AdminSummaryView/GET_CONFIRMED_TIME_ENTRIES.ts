@@ -4,7 +4,6 @@ export const GET_CONFIRMED_TIME_ENTRIES = gql`
     query($yearNumber: Int!) {
         result: confirmedTimeEntries(yearNumber: $yearNumber, dateFormat: "LL")  {
             entries {
-                title
                 project {
                     id
                 }
