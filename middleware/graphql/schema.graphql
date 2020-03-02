@@ -116,6 +116,7 @@ input UserInput  {
 }
 
 input LabelInput  {
+	id: String
 	name: String!
 	description: String!
 	color: String!
@@ -154,7 +155,7 @@ type BaseResult {
 
 type Mutation {
 	addUser(user: UserInput!): BaseResult!
-	addLabel(label: LabelInput!): BaseResult!
+	addOrUpdateLabel(label: LabelInput!): BaseResult!
 	deleteLabel(id: String!): BaseResult!
 	createProject(customerKey: String!, projectKey: String!, name: String!, description: String!, icon: String!): BaseResult
 	createCustomer(key: String!, name: String!, description: String!, icon: String!): BaseResult

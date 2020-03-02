@@ -157,14 +157,14 @@ StorageService.prototype.addUser = async function (user) {
 }
 
 /**
- * Add label
+ * Add or update label
  * 
  * @param {*} label
  */
-StorageService.prototype.addLabel = async function (label) {
+StorageService.prototype.addOrUpdateLabel = async function (label) {
     let entity = await addEntity('Labels', {
         PartitionKey: entGen.String(this.tenantId),
-        RowKey: entGen.String(uuid()),
+        RowKey: entGen.String(label.id || uuid()),
         Name: entGen.String(label.name),
         Description: entGen.String(label.description),
         Color: entGen.String(label.color),

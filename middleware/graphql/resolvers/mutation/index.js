@@ -5,7 +5,7 @@ const createCustomer = require('./createCustomer');
 const updateWeek = require('./updateWeek');
 const updateUser = require('./updateUser');
 const addUser = require('./addUser');
-const addLabel = require('./addLabel');
+const addOrUpdateLabel = require('./addOrUpdateLabel');
 const deleteLabel = require('./deleteLabel');
 
 module.exports = {
@@ -16,6 +16,6 @@ module.exports = {
     updateWeek,
     updateUser,
     addUser,
-    addLabel,
+    addOrUpdateLabel,
     deleteLabel,
 };

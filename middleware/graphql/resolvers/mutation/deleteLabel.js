@@ -1,4 +1,4 @@
-const log = require('debug')('middleware/graphql/resolvers/mutation/addLabel');
+const log = require('debug')('middleware/graphql/resolvers/mutation/deleteLabel');
 
 /**
  * Delete label
