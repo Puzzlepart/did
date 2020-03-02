@@ -1,3 +1,4 @@
+const _ = require('underscore');
 const log = require('debug')('middleware/graphql/resolvers/query/customers');
 
 /**

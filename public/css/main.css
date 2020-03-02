@@ -47,6 +47,15 @@ h5 {
   margin: 0;
   padding: 0; }
 
+.c-Label {
+  display: inline-block;
+  padding: 4px 8px;
+  margin: 0 4px 0 0;
+  font-size: 1em;
+  font-weight: 600;
+  border-radius: 3px;
+  transition: opacity 0.2s linear; }
+
 .c-AdminView .react-autosuggest__container {
   position: relative; }
 
@@ -202,7 +211,7 @@ h5 {
     border: none !important;
     outline: none !important; }
 
-.c-projectdetails {
+.c-ProjectDetails {
   margin-top: 30px; }
 
 .c-UserMessage p {

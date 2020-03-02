@@ -7,6 +7,7 @@ import * as React from 'react';
 import * as excel from 'utils/exportExcel';
 import { GET_PROJECT_CONFIRMED_TIME_ENTRIES } from './GET_PROJECT_CONFIRMED_TIME_ENTRIES';
 import { IProjectDetailsProps } from './IProjectDetailsProps';
+import { Label } from 'components/Label';
 
 
 export const ProjectDetails = ({ project }: IProjectDetailsProps) => {
@@ -26,7 +27,7 @@ export const ProjectDetails = ({ project }: IProjectDetailsProps) => {
     }
 
     return (
-        <div className='c-projectdetails'>
+        <div className='c-ProjectDetails'>
             <div className="container">
                 <div className="row">
                     <div className="col-sm">
@@ -36,6 +37,11 @@ export const ProjectDetails = ({ project }: IProjectDetailsProps) => {
                 <div className="row">
                     <div className="col-sm">
                         <p>{project.description}</p>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-sm">
+                        {project.labels.map(label => <Label {...label} />)}
                     </div>
                 </div>
                 <div className="row">
