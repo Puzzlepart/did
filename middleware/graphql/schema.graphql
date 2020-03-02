@@ -98,6 +98,13 @@ input TimeEntryInput {
 	projectId: String
 }
 
+input UserInput  {
+	__typename: String!
+	id: String!
+	fullName: String!
+	role: String!
+}
+
 type EventData {
 	events: [Event!]!
 	matchedEvents: [Event!]!
@@ -140,4 +147,5 @@ type Mutation {
 	confirmPeriod(entries: [TimeEntryInput!], startDateTime: String!,  endDateTime: String!): BaseResult!
 	unconfirmPeriod(startDateTime: String!, endDateTime: String!): BaseResult!
 	updateWeek(weekNumber: Int!, closed: Boolean!): Boolean!
+	updateUser(user: UserInput!): BaseResult!
 }
