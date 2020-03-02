@@ -1,15 +1,16 @@
 import { useMutation } from '@apollo/react-hooks';
 import { EntityLabel } from 'components/EntityLabel';
 import { ILabel } from 'interfaces';
-import { PrimaryButton, DefaultButton } from 'office-ui-fabric-react/lib/Button';
+import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react/lib/Button';
 import { Label } from 'office-ui-fabric-react/lib/Label';
 import { Modal } from 'office-ui-fabric-react/lib/Modal';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import * as React from 'react';
+import { SketchPicker } from 'react-color';
+import * as _ from 'underscore';
 import validator from 'validator';
 import ADD_OR_UPDATE_LABEL from './ADD_OR_UPDATE_LABEL';
 import { ILabelFormModalProps } from './ILabelFormModalProps';
-import { SketchPicker } from 'react-color'
 
 
 /**
@@ -25,7 +26,7 @@ export const LabelFormModal = (props: ILabelFormModalProps) => {
      * On save
      */
     const onSave = async () => {
-        await addOrUpdateLabel({ variables: { label } });
+        await addOrUpdateLabel({ variables: { label: _.omit(label, '__typename') } });
         props.modal.onDismiss();
     }
 
@@ -42,7 +43,7 @@ export const LabelFormModal = (props: ILabelFormModalProps) => {
             {...props.modal}
             containerClassName='c-AdminView-labelFormModal'
             isOpen={true}>
-            <div className='c-AdminView-labelFormModal-title'>{props.label ? label.name : props.title}</div>
+            <div className='c-AdminView-labelFormModal-title'>{props.label ? `Edit ${props.label.name}` : props.title}</div>
             <TextField
                 label='Name'
                 placeholder='Label 1'

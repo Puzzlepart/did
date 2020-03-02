@@ -101,7 +101,7 @@ async function queryTableAll(table, query) {
  */
 function addEntity(table, item) {
     return new Promise((resolve, reject) => {
-        azureTableService.insertEntity(table, item, (error, result) => {
+        azureTableService.insertOrMergeEntity(table, item, (error, result) => {
             if (!error) {
                 return resolve(result['.metadata']);
             } else {
