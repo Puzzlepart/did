@@ -12,7 +12,7 @@ import { getHash } from 'utils/getHash';
 import { CustomerDetails } from './CustomerDetails';
 import { GET_CUSTOMERS } from './GET_CUSTOMERS';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
-import { Label } from 'components/Label';
+import { EntityLabel } from 'components/EntityLabel';
 
 export const Customers = () => {
     const [selected, setSelected] = useState<ICustomer>(null);
@@ -31,7 +31,7 @@ export const Customers = () => {
             'labels',
             '',
             {},
-            (customer: ICustomer) => customer.labels.map(label => <Label {...label} />),
+            (customer: ICustomer) => customer.labels.map(label => <EntityLabel {...label} />),
         ),
     ];
 

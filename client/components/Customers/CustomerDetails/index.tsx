@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks';
-import { Label } from 'components/Label';
+import { EntityLabel } from 'components/EntityLabel';
 import { GET_PROJECTS } from 'components/Projects/GET_PROJECTS';
 import { ProjectList } from 'components/Projects/ProjectList';
 import { getValueTyped as value } from 'helpers';
@@ -32,7 +32,7 @@ export const CustomerDetails = ({ customer }: CustomerDetailsProps) => {
                 </div>
                 <div className="row c-CustomerDetails-labels">
                     <div className="col-sm">
-                        {customer.labels.map(label => <Label {...label} />)}
+                        {customer.labels.map(label => <EntityLabel {...label} />)}
                     </div>
                 </div>
                 <div className="row">

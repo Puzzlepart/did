@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks';
-import { Label } from 'components/Label';
+import { EntityLabel } from 'components/EntityLabel';
 import { EventList } from 'components/Timesheet/EventList';
 import { getValueTyped as value } from 'helpers';
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
@@ -44,7 +44,7 @@ export const ProjectDetails = ({ project }: IProjectDetailsProps) => {
                 </div>
                 <div className="row c-ProjectDetails-labels">
                     <div className="col-sm">
-                        {project.labels.map(label => <Label {...label} />)}
+                        {project.labels.map(label => <EntityLabel {...label} />)}
                     </div>
                 </div>
                 <div className="row">

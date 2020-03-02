@@ -4,7 +4,7 @@ import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import * as React from 'react';
 import { generateColumn as col } from 'utils/generateColumn';
 import { IProjectListProps } from './IProjectListProps';
-import { Label } from 'components/Label';
+import { EntityLabel } from 'components/EntityLabel';
 
 /**
  * @component ProjectList
@@ -40,7 +40,7 @@ export const ProjectList = (props: IProjectListProps) => {
             {},
             (project: IProject) => {
                 if (!project.labels) return null;
-                return project.labels.map(label => <Label {...label} />)
+                return project.labels.map(label => <EntityLabel {...label} />)
             }
         )
     ];
