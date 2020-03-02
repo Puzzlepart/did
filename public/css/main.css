@@ -213,6 +213,8 @@ h5 {
 
 .c-ProjectDetails {
   margin-top: 30px; }
+  .c-ProjectDetails .c-ProjectDetails-labels {
+    text-align: end; }
 
 .c-UserMessage p {
   word-break: break-word;
