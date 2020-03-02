@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks';
+import { EntityLabel } from 'components/EntityLabel';
 import { EventList } from 'components/Timesheet/EventList';
-import { currencyDisplay, getValueTyped as value } from 'helpers';
+import { getValueTyped as value } from 'helpers';
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import * as React from 'react';
@@ -8,7 +9,10 @@ import * as excel from 'utils/exportExcel';
 import { GET_PROJECT_CONFIRMED_TIME_ENTRIES } from './GET_PROJECT_CONFIRMED_TIME_ENTRIES';
 import { IProjectDetailsProps } from './IProjectDetailsProps';
 
-
+/**
+ * @component ProjectDetails
+ * @description 
+ */
 export const ProjectDetails = ({ project }: IProjectDetailsProps) => {
     const { loading, error, data } = useQuery(GET_PROJECT_CONFIRMED_TIME_ENTRIES, { variables: { projectId: project.id } });
 
@@ -26,7 +30,7 @@ export const ProjectDetails = ({ project }: IProjectDetailsProps) => {
     }
 
     return (
-        <div className='c-projectdetails'>
+        <div className='c-ProjectDetails'>
             <div className="container">
                 <div className="row">
                     <div className="col-sm">
@@ -36,6 +40,11 @@ export const ProjectDetails = ({ project }: IProjectDetailsProps) => {
                 <div className="row">
                     <div className="col-sm">
                         <p>{project.description}</p>
+                    </div>
+                </div>
+                <div className="row c-ProjectDetails-labels">
+                    <div className="col-sm">
+                        {project.labels.map(label => <EntityLabel {...label} />)}
                     </div>
                 </div>
                 <div className="row">

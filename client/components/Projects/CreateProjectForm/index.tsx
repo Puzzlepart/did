@@ -49,7 +49,7 @@ export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey
         let errors: { [key: string]: string } = {};
         if (!model.customerKey) errors.customerKey = '';
         if (model.name.length < 2) errors.name = 'Name should be at least 2 characters long.';
-        if (!(/(^[A-ZÆØÅ]{3,8}$)/gm).test(model.projectKey)) errors.projectKey = 'Project key should be between 3 and 8 characters long, and all uppercase.';
+        if (!(/(^[A-ZÆØÅ0-9]{3,8}$)/gm).test(model.projectKey)) errors.projectKey = 'Project key should be between 3 and 8 characters long, and all uppercase.';
         return { errors, invalid: Object.keys(errors).length > 0 };
     }
 

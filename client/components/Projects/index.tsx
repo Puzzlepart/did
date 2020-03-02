@@ -12,6 +12,10 @@ import { ProjectDetails } from './ProjectDetails';
 import { ProjectList } from './ProjectList';
 import { CreateProjectForm } from 'components/Projects/CreateProjectForm';
 
+/**
+ * @component Projects
+ * @description 
+ */
 export const Projects = () => {
     const [selected, setSelected] = useState<IProject>(null);
     const { loading, error, data } = useQuery<IGetProjectsEntries>(GET_PROJECTS, { variables: { sortBy: 'name' }, fetchPolicy: 'cache-first' });
