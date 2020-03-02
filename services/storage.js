@@ -1,6 +1,7 @@
 const { queryTable, queryTableAll, parseArray, isEqual, lt, gt, and, combine, stringFilter, intFilter, dateFilter, createQuery, addEntity, updateEntity, entGen } = require('../utils/table');
 const log = require('debug')('services/storage');
 const arraySort = require('array-sort');
+const uuid = require('uuid/v1');
 
 const SUBSCRIPTIONS_TABLE = process.env.AZURE_STORAGE_SUBSCRIPTIONS_TABLE_NAME;
 const USERS_TABLE = process.env.AZURE_STORAGE_USERS_TABLE_NAME;
@@ -134,6 +135,23 @@ StorageService.prototype.addUser = async function (user) {
         RowKey: entGen.String(user.id),
         FullName: entGen.String(user.fullName),
         Role: entGen.String(user.role),
+    });
+    return entity;
+}
+
+/**
+ * Add label
+ * 
+ * @param {*} label
+ */
+StorageService.prototype.addLabel = async function (label) {
+    let entity = await addEntity('Labels', {
+        PartitionKey: entGen.String(this.tenantId),
+        RowKey: entGen.String(uuid()),
+        Name: entGen.String(label.name),
+        Description: entGen.String(label.description),
+        Color: entGen.String(label.color),
+        Icon: entGen.String(label.icon),
     });
     return entity;
 }

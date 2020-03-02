@@ -60,7 +60,7 @@ export const LabelFormModal = (props: ILabelFormModalProps) => {
                 onChange={(_, icon) => setLabel({ ...label, icon })} />
             <Label>Color</Label>
             <DefaultButton
-                text={colorPickerVisible ? 'Hide color picker' : 'Click to pick color'}
+                text={colorPickerVisible ? 'Close color picker' : 'Click to pick color'}
                 iconProps={{ iconName: colorPickerVisible ? 'ChromeClose' : 'Color' }}
                 onClick={_ => setColorPickerVisible(!colorPickerVisible)} />
             {colorPickerVisible && <SketchPicker color={label.color} onChange={({ hex }) => setLabel({ ...label, color: hex })} />}
