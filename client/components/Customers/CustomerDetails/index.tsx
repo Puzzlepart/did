@@ -1,11 +1,11 @@
 import { useQuery } from '@apollo/react-hooks';
+import { Label } from 'components/Label';
 import { GET_PROJECTS } from 'components/Projects/GET_PROJECTS';
 import { ProjectList } from 'components/Projects/ProjectList';
 import { getValueTyped as value } from 'helpers';
+import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import * as React from 'react';
-import { Label } from 'components/Label';
-import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { CustomerDetailsProps } from './CustomerDetailsProps';
 
 /**
