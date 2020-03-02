@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { CreateCustomerForm } from 'components/Customers/CreateCustomerForm';
 import { IColumn, List, SelectionMode } from 'components/List';
 import { getValueTyped as value } from 'helpers';
-import { ICustomer } from 'models';
+import { ICustomer } from 'interfaces';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import * as React from 'react';

@@ -5,6 +5,7 @@ import { getValueTyped as value } from 'helpers';
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
+import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import * as React from 'react';
 import { generateColumn as col } from 'utils/generateColumn';
 import GET_USERS from './GET_USERS';
@@ -32,22 +33,19 @@ export const Users = () => {
         },
     ];
 
+    if (loading) return <ProgressIndicator />;
+
     return (
         <>
-            <CommandBar
-                styles={{ root: { padding: 0 } }}
-                items={commands} />
-            <List
-                enableShimmer={loading}
-                items={value(data, 'users', [])}
-                columns={columns} />
+            <CommandBar styles={{ root: { padding: 0 } }} items={commands} />
+            <List items={value(data, 'users', [])} columns={columns} />
             {userForm && (
                 <UserFormModal
                     {...userForm}
                     modal={{
-                        onDismiss: _ => {
+                        onDismiss: event => {
                             setUserForm(null);
-                            refetch();
+                            !event && refetch();
                         }
                     }} />)}
         </>

@@ -4,6 +4,7 @@ const createProject = require('./createProject');
 const createCustomer = require('./createCustomer');
 const updateWeek = require('./updateWeek');
 const updateUser = require('./updateUser');
+const addUser = require('./addUser');
 
 module.exports = {
     confirmPeriod,
@@ -12,4 +13,5 @@ module.exports = {
     createCustomer,
     updateWeek,
     updateUser,
+    addUser,
 };

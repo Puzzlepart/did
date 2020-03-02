@@ -1,7 +1,7 @@
 
 import { IColumn, List } from 'components/List';
 import { formatDate, sortAlphabetically, startOfWeek } from 'helpers';
-import { ICustomer, IProject } from 'models';
+import { ICustomer, IProject } from 'interfaces';
 import * as moment from 'moment-timezone';
 import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';

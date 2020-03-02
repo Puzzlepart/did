@@ -99,7 +99,6 @@ input TimeEntryInput {
 }
 
 input UserInput  {
-	__typename: String!
 	id: String!
 	fullName: String!
 	role: String!
@@ -142,6 +141,7 @@ type BaseResult {
 }
 
 type Mutation {
+	addUser(user: UserInput!): BaseResult!
 	createProject(customerKey: String!, projectKey: String!, name: String!, description: String!, icon: String!): BaseResult
 	createCustomer(key: String!, name: String!, description: String!, icon: String!): BaseResult
 	confirmPeriod(entries: [TimeEntryInput!], startDateTime: String!,  endDateTime: String!): BaseResult!
