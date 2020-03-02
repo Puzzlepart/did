@@ -1,4 +1,21 @@
-const { queryTable, queryTableAll, parseArray, isEqual, lt, gt, and, combine, stringFilter, intFilter, dateFilter, createQuery, addEntity, updateEntity, entGen } = require('../utils/table');
+const {
+    queryTable,
+    queryTableAll,
+    parseArray,
+    isEqual,
+    lt,
+    gt,
+    and,
+    combine,
+    stringFilter,
+    intFilter,
+    dateFilter,
+    createQuery,
+    addEntity,
+    updateEntity,
+    deleteEntity,
+    entGen,
+} = require('../utils/table');
 const log = require('debug')('services/storage');
 const arraySort = require('array-sort');
 const uuid = require('uuid/v1');
@@ -154,6 +171,19 @@ StorageService.prototype.addLabel = async function (label) {
         Icon: entGen.String(label.icon),
     });
     return entity;
+}
+
+/**
+ * Delete label
+ * 
+ * @param {*} id
+ */
+StorageService.prototype.deleteLabel = async function (id) {
+    let result = await deleteEntity('Labels', {
+        PartitionKey: entGen.String(this.tenantId),
+        RowKey: entGen.String(id),
+    });
+    return result;
 }
 
 /**

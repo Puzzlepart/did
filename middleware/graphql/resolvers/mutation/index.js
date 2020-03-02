@@ -6,6 +6,7 @@ const updateWeek = require('./updateWeek');
 const updateUser = require('./updateUser');
 const addUser = require('./addUser');
 const addLabel = require('./addLabel');
+const deleteLabel = require('./deleteLabel');
 
 module.exports = {
     confirmPeriod,
@@ -16,4 +17,5 @@ module.exports = {
     updateUser,
     addUser,
     addLabel,
+    deleteLabel,
 };
