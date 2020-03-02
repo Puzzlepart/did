@@ -39,7 +39,7 @@ export const ProjectDetails = ({ project }: IProjectDetailsProps) => {
                         <p>{project.description}</p>
                     </div>
                 </div>
-                <div className="row">
+                <div className="row c-ProjectDetails-labels">
                     <div className="col-sm">
                         {project.labels.map(label => <Label {...label} />)}
                     </div>
