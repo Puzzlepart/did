@@ -32,6 +32,12 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!) {
           key
           name
           inactive
+        }        
+        labels {
+          name
+          description
+          color
+          icon
         }
       }
       suggestedProject {
@@ -49,6 +55,12 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!) {
         key
         name
         inactive
+        labels {
+          name
+          description
+          color
+          icon
+        }
       }      
 	    error {
         message

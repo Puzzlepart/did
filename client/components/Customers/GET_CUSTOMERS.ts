@@ -10,7 +10,7 @@ export const GET_CUSTOMERS = gql`
         description
         webLink
         icon
-        labels{
+        labels {
             name
             description
             color
