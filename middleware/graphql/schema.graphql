@@ -86,6 +86,14 @@ type User implements BaseEntity {
 	fullName: String!
 }
 
+type Label implements BaseEntity {
+	id: String
+	key: String
+	name: String!
+	description: String!
+	color: String!
+}
+
 type FAQ implements BaseEntity {
 	id: String
 	key: String
@@ -122,16 +130,10 @@ type Query {
 	customers: [Customer!]!
 	projects(customerKey: String, sortBy: String): [Project!]!
 	timesheet(startDateTime: String!, endDateTime: String!, dateFormat: String!): EventData!
-	confirmedTimeEntries(
-	projectId: String, 
-	resourceId: String, 
-	weekNumber: Int, 
-	yearNumber: Int, 
-	currentUser: Boolean
-	dateFormat: String
-	): ConfirmedTimeEntries
+	confirmedTimeEntries(projectId: String, resourceId: String, weekNumber: Int, yearNumber: Int, currentUser: Boolean, dateFormat: String): ConfirmedTimeEntries
 	weeks: [Week!]!
 	users: [User!]!
+	labels: [Label!]!
 	faq: [FAQ!]!
 }
 
