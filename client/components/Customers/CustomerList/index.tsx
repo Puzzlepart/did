@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { IColumn, List, SelectionMode } from 'components/List';
+import { UserMessage } from 'components/UserMessage';
 import { getValueTyped as value } from 'helpers';
 import { ICustomer } from 'interfaces';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
@@ -16,15 +17,21 @@ import { GET_CUSTOMERS } from './GET_CUSTOMERS';
  * @component CustomerList
  */
 export const CustomerList = () => {
+    let [message, setMessage] = useState<{ text: string, type: MessageBarType }>(null);
     const [selected, setSelected] = useState<ICustomer>(null);
-    const { loading, error, data, refetch } = useQuery(GET_CUSTOMERS, { fetchPolicy: 'network-only' });
+    const { loading, error, data, refetch } = useQuery(GET_CUSTOMERS, { fetchPolicy: 'cache-first' });
     const [deleteCustomer] = useMutation(DELETE_CUSTOMER);
 
+    /**
+     * On delete customer
+     */
     const onDelete = async (): Promise<void> => {
         await deleteCustomer({ variables: { key: selected.key } });
         window.location.hash = '';
+        setMessage({ text: `The customer ${selected.name} was succesfully deleted.`, type: MessageBarType.info });
         setSelected(null);
         refetch();
+        window.setTimeout(() => setMessage(null), 5000);
     }
 
     const columns: IColumn[] = [
@@ -47,6 +54,7 @@ export const CustomerList = () => {
 
     return (
         <>
+            {message && <UserMessage style={{ marginTop: 10, marginBottom: 10 }} text={message.text} type={message.type} />}
             {error && <MessageBar messageBarType={MessageBarType.error}>An error occured.</MessageBar>}
             {!error && (
                 <List
