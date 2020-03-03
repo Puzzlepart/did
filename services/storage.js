@@ -8,7 +8,6 @@ const PROJECTS_TABLE = process.env.AZURE_STORAGE_PROJECTS_TABLE_NAME;
 const CUSTOMERS_TABLE = process.env.AZURE_STORAGE_CUSTOMERS_TABLE_NAME;
 const CONFIRMEDTIMEENTRIES_TABLE = process.env.AZURE_STORAGE_CONFIRMEDTIMEENTRIES_TABLE_NAME;
 const WEEKS_TABLE = 'Weeks';
-const FAQ_TABLE = 'FAQ';
 
 function StorageService(tid) {
     this.tenantId = tid;
@@ -181,13 +180,12 @@ StorageService.prototype.getUsers = async function () {
     const { entries } = await queryTable(USERS_TABLE, query);
     return parseArray(entries);
 }
+
 /**
- * Get FAQ
+ * Delete customer
  */
-StorageService.prototype.getFAQ = async function () {
-    const query = createQuery(1000, undefined).where(this.filter);
-    const { entries } = await queryTable(FAQ_TABLE, query);
-    return parseArray(entries);
+StorageService.prototype.deleteCustomer = async function () {
+   
 }
 
 module.exports = StorageService;
