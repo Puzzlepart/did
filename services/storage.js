@@ -38,22 +38,6 @@ StorageService.prototype.getUser = async function (userId) {
 }
 
 /**
- * Get projects
- * 
- * @param {*} customerKey 
- * @param {*} sortBy 
- */
-StorageService.prototype.getProjects = async function (customerKey, sortBy) {
-    let filter = this.filter;
-    if (customerKey) filter = combine(filter, and, stringFilter('CustomerKey', isEqual, customerKey));
-    let query = createQuery(1000, undefined, filter);
-    const { entries } = await queryTable(PROJECTS_TABLE, query);
-    let projects = parseArray(entries, undefined, { idUpper: true });
-    if (sortBy) projects = arraySort(projects, sortBy);
-    return projects;
-}
-
-/**
  * Get weeks
  */
 StorageService.prototype.getWeeks = async function () {
@@ -151,6 +135,23 @@ StorageService.prototype.getCustomers = async function () {
 }
 
 /**
+ * Get projects
+ * 
+ * @param {*} customerKey 
+ * @param {*} options 
+ */
+StorageService.prototype.getProjects = async function (customerKey, options) {
+    options = options || {};
+    let filter = this.filter;
+    if (customerKey) filter = combine(filter, and, stringFilter('CustomerKey', isEqual, customerKey));
+    let query = createQuery(1000, undefined, filter);
+    let { entries } = await queryTable(PROJECTS_TABLE, query);
+    if (!options.noParse) entries = parseArray(entries, undefined, { idUpper: true });
+    if (options.sortBy) entries = arraySort(entries, sortBy);
+    return entries;
+}
+
+/**
  * Get confirmed time entries
  * 
  * @param {*} filters 
@@ -193,6 +194,23 @@ StorageService.prototype.getUsers = async function () {
 StorageService.prototype.deleteCustomer = async function (key) {
     try {
         const result = await deleteEntity(CUSTOMERS_TABLE, {
+            PartitionKey: entGen.String(this.tenantId),
+            RowKey: entGen.String(key),
+        });
+        return result;
+    } catch (error) {
+        throw error;
+    }
+}
+
+/**
+ * Delete project
+ * 
+ * @param {*} key
+ */
+StorageService.prototype.deleteProject = async function (key) {
+    try {
+        const result = await deleteEntity(PROJECTS_TABLE, {
             PartitionKey: entGen.String(this.tenantId),
             RowKey: entGen.String(key),
         });
