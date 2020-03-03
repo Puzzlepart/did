@@ -1,4 +1,4 @@
-const { queryTable, queryTableAll, parseArray, isEqual, lt, gt, and, combine, stringFilter, intFilter, dateFilter, createQuery, addEntity, updateEntity, entGen } = require('../utils/table');
+const { queryTable, queryTableAll, parseArray, isEqual, lt, gt, and, combine, stringFilter, intFilter, dateFilter, createQuery, addEntity, updateEntity, deleteEntity, entGen } = require('../utils/table');
 const log = require('debug')('services/storage');
 const arraySort = require('array-sort');
 
@@ -183,9 +183,15 @@ StorageService.prototype.getUsers = async function () {
 
 /**
  * Delete customer
+ * 
+ * @param {*} key
  */
-StorageService.prototype.deleteCustomer = async function () {
-   
+StorageService.prototype.deleteCustomer = async function (key) {
+    const result = await deleteEntity(CUSTOMERS_TABLE, {
+        PartitionKey: entGen.String(this.tenantId),
+        RowKey: entGen.String(key),
+    });
+    return result;
 }
 
 module.exports = StorageService;

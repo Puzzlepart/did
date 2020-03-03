@@ -135,7 +135,7 @@ type Mutation {
 	addUser(user: UserInput!): BaseResult!
 	createProject(customerKey: String!, projectKey: String!, name: String!, description: String!, icon: String!): BaseResult
 	createCustomer(key: String!, name: String!, description: String!, icon: String!): BaseResult
-	deleteCustomer(id: String!): BaseResult
+	deleteCustomer(key: String!): BaseResult
 	confirmPeriod(entries: [TimeEntryInput!], startDateTime: String!,  endDateTime: String!): BaseResult!
 	unconfirmPeriod(startDateTime: String!, endDateTime: String!): BaseResult!
 	updateWeek(weekNumber: Int!, closed: Boolean!): Boolean!

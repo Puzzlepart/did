@@ -8,8 +8,8 @@ const log = require('debug')('middleware/graphql/resolvers/mutation/deleteCustom
  * @param {*} context Context
  */
 async function deleteCustomer(_obj, args, context) {
-    log('Deleting customer: %s', args.id);
-    await context.services.storage.deleteCustomer(args.id);
+    log('Deleting customer: %s', args.key);
+    await context.services.storage.deleteCustomer(args.key);
     return { success: true, error: null };
 }
 
