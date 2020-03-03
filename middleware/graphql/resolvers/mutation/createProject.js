@@ -11,7 +11,7 @@ const _ = require('underscore');
 async function createProject(_obj, args, context) {
     try {
         log('Attempting to create project in storage: ', JSON.stringify(args));
-        await context.services.storage.createProject(args);
+        await context.services.storage.createProject(args, context.user.profile.oid);
         log('Created project with key %s in storage', args.projectKey);
         return { success: true, error: null };
     } catch (error) {

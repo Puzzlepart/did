@@ -11,7 +11,7 @@ const _ = require('underscore');
 async function createCustomer(_obj, args, context) {
     try {
         log('Attempting to create customer in storage: ', JSON.stringify(args));
-        await context.services.storage.createCustomer(args);
+        await context.services.storage.createCustomer(args, context.user.profile.oid);
         log('Created customer with key %s in storage', args.key);
         return { success: true, error: null };
     } catch (error) {

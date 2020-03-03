@@ -92,8 +92,9 @@ StorageService.prototype.updateUser = async function (user) {
  * Create project
  * 
  * @param {*} model
+ * @param {*} createdBy
  */
-StorageService.prototype.createProject = async function (model) {
+StorageService.prototype.createProject = async function (model, createdBy) {
     let projectId = (`${model.customerKey} ${model.projectKey}`).toUpperCase();
     let entity = await addEntity(PROJECTS_TABLE, {
         PartitionKey: entGen.String(this.tenantId),
@@ -102,6 +103,7 @@ StorageService.prototype.createProject = async function (model) {
         Description: entGen.String(model.description),
         CustomerKey: entGen.String(model.customerKey.toUpperCase()),
         Icon: entGen.String(model.icon || 'Page'),
+        CreatedBy: entGen.String(createdBy),
     });
     return entity;
 }
@@ -110,14 +112,16 @@ StorageService.prototype.createProject = async function (model) {
  * Create customer
  * 
  * @param {*} model
+ * @param {*} createdBy
  */
-StorageService.prototype.createCustomer = async function (model) {
+StorageService.prototype.createCustomer = async function (model, createdBy) {
     let entity = await addEntity(CUSTOMERS_TABLE, {
         PartitionKey: entGen.String(this.tenantId),
         RowKey: entGen.String(model.key.toUpperCase()),
         Name: entGen.String(model.name),
         Description: entGen.String(model.description),
         Icon: entGen.String(model.icon || 'Page'),
+        CreatedBy: entGen.String(createdBy),
     });
     return entity;
 }
