@@ -147,7 +147,7 @@ StorageService.prototype.getProjects = async function (customerKey, options) {
     let query = createQuery(1000, undefined, filter);
     let { entries } = await queryTable(PROJECTS_TABLE, query);
     if (!options.noParse) entries = parseArray(entries, undefined, { idUpper: true });
-    if (options.sortBy) entries = arraySort(entries, sortBy);
+    if (options.sortBy) entries = arraySort(entries, options.sortBy);
     return entries;
 }
 
