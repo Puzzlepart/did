@@ -25,7 +25,7 @@ export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey
         if (result.success) {
             setMessage({ text: `The project ${model.name} was succesfully created.`, type: MessageBarType.success })
         } else {
-            setMessage({ text: result.error, type: MessageBarType.error });
+            setMessage({ text: result.error.message, type: MessageBarType.error });
         }
         setModel(initialModel);
         window.setTimeout(() => {

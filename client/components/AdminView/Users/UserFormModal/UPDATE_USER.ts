@@ -5,7 +5,9 @@ export default gql`
     mutation($user: UserInput!) { 
         updateUser(user: $user) {
             success
-            error
+            error {
+                message
+            }
         }
     }
 `;

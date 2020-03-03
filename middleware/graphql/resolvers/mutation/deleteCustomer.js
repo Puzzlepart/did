@@ -1,4 +1,5 @@
 const log = require('debug')('middleware/graphql/resolvers/mutation/deleteCustomer');
+const _ = require('underscore');
 
 /**
  * Delete customer
@@ -9,8 +10,13 @@ const log = require('debug')('middleware/graphql/resolvers/mutation/deleteCustom
  */
 async function deleteCustomer(_obj, args, context) {
     log('Deleting customer: %s', args.key);
-    await context.services.storage.deleteCustomer(args.key);
-    return { success: true, error: null };
+    try {
+        await context.services.storage.deleteCustomer(args.key);
+        return { success: true, error: null };
+    } catch (error) {
+        console.log(Object.keys(error));
+        return { success: false, error: _.omit(error, 'requestId') };
+    }
 }
 
 module.exports = deleteCustomer;

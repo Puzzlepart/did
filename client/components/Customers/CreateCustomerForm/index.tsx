@@ -23,7 +23,7 @@ export const CreateCustomerForm = ({ initialModel = { key: '', name: '', descrip
         if (result.success) {
             setMessage({ text: `The customer ${model.name} was succesfully created.`, type: MessageBarType.success });
         } else {
-            setMessage({ text: result.error, type: MessageBarType.error });
+            setMessage({ text: result.error.message, type: MessageBarType.error });
         }
         setModel(initialModel);
         window.setTimeout(() => setMessage(null), 5000);

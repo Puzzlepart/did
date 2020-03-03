@@ -187,11 +187,15 @@ StorageService.prototype.getUsers = async function () {
  * @param {*} key
  */
 StorageService.prototype.deleteCustomer = async function (key) {
-    const result = await deleteEntity(CUSTOMERS_TABLE, {
-        PartitionKey: entGen.String(this.tenantId),
-        RowKey: entGen.String(key),
-    });
-    return result;
+    try {
+        const result = await deleteEntity(CUSTOMERS_TABLE, {
+            PartitionKey: entGen.String(this.tenantId),
+            RowKey: entGen.String(key),
+        });
+        return result;
+    } catch (error) {
+        throw error;
+    }
 }
 
 module.exports = StorageService;
