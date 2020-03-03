@@ -46,7 +46,7 @@ export const CreateCustomerForm = ({ initialModel = { key: '', name: '', descrip
     const validateForm = (): ICreateCustomerFormValidation => {
         let errors: { [key: string]: string } = {};
         if (model.name.length < 2) errors.name = 'Name should be at least 2 characters long.';
-        if (!(/(^[A-ZÆØÅ0-9]{3,8}$)/gm).test(model.key)) errors.key = 'Customer key should be between 3 and 8 characters long, and all uppercase.';
+        if (!(/(^[A-ZÆØÅ]{3,8}$)/gm).test(model.key)) errors.key = 'Customer key should be between 3 and 8 characters long, and all uppercase.';
         return { errors, invalid: Object.keys(errors).length > 0 };
     }
 

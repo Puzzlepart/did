@@ -12,7 +12,6 @@ import { getHash } from 'utils/getHash';
 import { CustomerDetails } from './CustomerDetails';
 import { GET_CUSTOMERS } from './GET_CUSTOMERS';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
-import { EntityLabel } from 'components/EntityLabel';
 
 export const Customers = () => {
     const [selected, setSelected] = useState<ICustomer>(null);
@@ -26,13 +25,7 @@ export const Customers = () => {
             (customer: ICustomer) => <Icon iconName={customer.icon || 'Page'} styles={{ root: { fontSize: 16 } }} />,
         ),
         col('key', 'Key', { maxWidth: 120 }),
-        col('name', 'Name', { maxWidth: 300 }),
-        col(
-            'labels',
-            '',
-            {},
-            (customer: ICustomer) => customer.labels.map(label => <EntityLabel {...label} />),
-        ),
+        col('name', 'Name'),
     ];
 
     let customers = value<ICustomer[]>(data, 'customers', []);

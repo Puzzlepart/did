@@ -121,21 +121,12 @@ function matchEvent(evt, projects, customers) {
  */
 async function timesheet(_obj, { startDateTime, endDateTime, dateFormat }, context) {
     log('Retrieving events from %s to %s', startDateTime, endDateTime);
-    let [projects, customers, confirmedTimeEntries, labels] = await Promise.all([
+    let [projects, customers, confirmedTimeEntries] = await Promise.all([
         context.services.storage.getProjects(),
         context.services.storage.getCustomers(),
         context.services.storage.getConfirmedTimeEntries({ resourceId: context.user.profile.oid, startDateTime, endDateTime }),
-        context.services.storage.getLabels(),
     ]);
-    customers = customers.map(customer => ({
-        ...customer,
-        labels: _.filter(labels, l => (customer.labels || '').indexOf(l.id) !== -1),
-    }));
-    projects = projects.map(project => ({
-        ...project,
-        customer: _.find(customers, c => c.id === project.id.split(' ')[0]),
-        labels: _.filter(labels, l => (project.labels || '').indexOf(l.id) !== -1),
-    }));
+    projects = projects.map(p => ({ ...p, customer: _.find(customers, c => c.id === p.id.split(' ')[0]) }));
     let events = [];
     let matchedEvents = [];
     let matchedDuration = 0;

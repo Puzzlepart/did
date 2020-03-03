@@ -101,7 +101,7 @@ async function queryTableAll(table, query) {
  */
 function addEntity(table, item) {
     return new Promise((resolve, reject) => {
-        azureTableService.insertOrMergeEntity(table, item, (error, result) => {
+        azureTableService.insertEntity(table, item, (error, result) => {
             if (!error) {
                 return resolve(result['.metadata']);
             } else {
@@ -120,24 +120,6 @@ function addEntity(table, item) {
 function updateEntity(table, item) {
     return new Promise((resolve, reject) => {
         azureTableService.insertOrReplaceEntity(table, item, undefined, (error, result) => {
-            if (!error) {
-                resolve(result);
-            } else {
-                reject(error);
-            }
-        })
-    });
-};
-
-/**
- * Deleted the entity
- * 
- * @param {*} table 
- * @param {*} item 
- */
-function deleteEntity(table, item) {
-    return new Promise((resolve, reject) => {
-        azureTableService.deleteEntity(table, item, undefined, (error, result) => {
             if (!error) {
                 resolve(result);
             } else {
@@ -167,13 +149,12 @@ function executeBatch(table, batch) {
 };
 
 module.exports = {
-    queryTable,
-    queryTableAll,
-    addEntity,
-    updateEntity,
-    deleteEntity,
-    executeBatch,
-    parseArray,
+    queryTable: queryTable,
+    queryTableAll: queryTableAll,
+    addEntity: addEntity,
+    updateEntity: updateEntity,
+    executeBatch: executeBatch,
+    parseArray: parseArray,
     gt: TableUtilities.QueryComparisons.GREATER_THAN,
     lt: TableUtilities.QueryComparisons.LESS_THAN,
     isEqual: TableUtilities.QueryComparisons.EQUAL,
