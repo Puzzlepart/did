@@ -23,6 +23,7 @@ export const CustomerDetails = (props: ICustomerDetailsProps) => {
                     </div>
                     <div className="col-sm" style={{ textAlign: 'right' }}>
                         <DefaultButton
+                            disabled={props.user.role !== 'Admin'}
                             text='Delete customer'
                             iconProps={{ iconName: 'Delete' }}
                             onClick={_ => setConfirmDelete(true)} />

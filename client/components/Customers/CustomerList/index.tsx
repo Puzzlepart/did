@@ -11,12 +11,13 @@ import { generateColumn as col } from 'utils/generateColumn';
 import { getHash } from 'utils/getHash';
 import { CustomerDetails } from './CustomerDetails';
 import DELETE_CUSTOMER from './DELETE_CUSTOMER';
-import { GET_CUSTOMERS } from './GET_CUSTOMERS';
+import GET_CUSTOMERS from './GET_CUSTOMERS';
+import { ICustomerListProps } from './ICustomerListProps';
 
 /**
  * @component CustomerList
  */
-export const CustomerList = () => {
+export const CustomerList = (props: ICustomerListProps) => {
     let [message, setMessage] = useState<{ text: string, type: MessageBarType }>(null);
     const [selected, setSelected] = useState<ICustomer>(null);
     const { loading, error, data, refetch } = useQuery(GET_CUSTOMERS, { fetchPolicy: 'cache-first' });
@@ -28,7 +29,7 @@ export const CustomerList = () => {
     const onDelete = async (): Promise<void> => {
         await deleteCustomer({ variables: { key: selected.key } });
         window.location.hash = '';
-        setMessage({ text: `The customer ${selected.name} was succesfully deleted.`, type: MessageBarType.info });
+        setMessage({ text: `The customer ${selected.name} was succesfully deleted.`, type: MessageBarType.remove });
         setSelected(null);
         refetch();
         window.setTimeout(() => setMessage(null), 5000);
@@ -65,7 +66,7 @@ export const CustomerList = () => {
                     selection={{ mode: SelectionMode.single, onChanged: selected => setSelected(selected) }}
                     height={350} />
             )}
-            {selected && <CustomerDetails customer={selected} onDelete={onDelete} />}
+            {selected && <CustomerDetails {...props} customer={selected} onDelete={onDelete} />}
         </>
     );
 };

@@ -1,7 +1,7 @@
 
 import gql from 'graphql-tag';
 
-export const GET_CUSTOMERS = gql`
+export default gql`
 {
     customers {
         id
