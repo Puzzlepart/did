@@ -3,7 +3,6 @@ import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import * as React from 'react';
 import { AdminSummaryView } from './AdminSummaryView';
 import { Users } from './Users';
-import { Labels } from './Labels';
 
 function getPath(): string[] {
     let [, path] = document.location.hash.substring(1).split('=');
@@ -29,9 +28,6 @@ export const AdminView = () => {
                 </PivotItem>
                 <PivotItem itemID='summary' itemKey='summary' headerText='Summary' itemIcon='CalendarWeek' style={linkStyle}>
                     <AdminSummaryView defaultRange={3} />
-                </PivotItem>
-                <PivotItem itemID='labels' itemKey='labels' headerText='Labels' itemIcon='Label' style={linkStyle}>
-                    <Labels />
                 </PivotItem>
             </Pivot>
         </div>

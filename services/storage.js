@@ -1,24 +1,6 @@
-const {
-    queryTable,
-    queryTableAll,
-    parseArray,
-    isEqual,
-    lt,
-    gt,
-    and,
-    combine,
-    stringFilter,
-    intFilter,
-    dateFilter,
-    createQuery,
-    addEntity,
-    updateEntity,
-    deleteEntity,
-    entGen,
-} = require('../utils/table');
+const { queryTable, queryTableAll, parseArray, isEqual, lt, gt, and, combine, stringFilter, intFilter, dateFilter, createQuery, addEntity, updateEntity, entGen } = require('../utils/table');
 const log = require('debug')('services/storage');
 const arraySort = require('array-sort');
-const uuid = require('uuid/v1');
 
 const SUBSCRIPTIONS_TABLE = process.env.AZURE_STORAGE_SUBSCRIPTIONS_TABLE_NAME;
 const USERS_TABLE = process.env.AZURE_STORAGE_USERS_TABLE_NAME;
@@ -157,36 +139,6 @@ StorageService.prototype.addUser = async function (user) {
 }
 
 /**
- * Add or update label
- * 
- * @param {*} label
- */
-StorageService.prototype.addOrUpdateLabel = async function (label) {
-    let entity = await addEntity('Labels', {
-        PartitionKey: entGen.String(this.tenantId),
-        RowKey: entGen.String(label.id || uuid()),
-        Name: entGen.String(label.name),
-        Description: entGen.String(label.description),
-        Color: entGen.String(label.color),
-        Icon: entGen.String(label.icon),
-    });
-    return entity;
-}
-
-/**
- * Delete label
- * 
- * @param {*} id
- */
-StorageService.prototype.deleteLabel = async function (id) {
-    let result = await deleteEntity('Labels', {
-        PartitionKey: entGen.String(this.tenantId),
-        RowKey: entGen.String(id),
-    });
-    return result;
-}
-
-/**
  * Get customers
  */
 StorageService.prototype.getCustomers = async function () {
@@ -229,16 +181,6 @@ StorageService.prototype.getUsers = async function () {
     const { entries } = await queryTable(USERS_TABLE, query);
     return parseArray(entries);
 }
-
-/**
- * Get labels
- */
-StorageService.prototype.getLabels = async function () {
-    const query = createQuery(1000, undefined).where(this.filter);
-    const { entries } = await queryTable('Labels', query);
-    return parseArray(entries);
-}
-
 /**
  * Get FAQ
  */
