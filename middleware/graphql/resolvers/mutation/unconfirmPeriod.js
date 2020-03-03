@@ -1,6 +1,7 @@
 const { TableBatch } = require('azure-storage');
 const { executeBatch } = require('../../../../utils/table');
 const log = require('debug')('middleware/graphql/resolvers/mutation/unconfirmPeriod');
+const _ = require('underscore');
 
 /**
  * Unconfirm period
@@ -18,7 +19,7 @@ async function unconfirmPeriod(_obj, { startDateTime, endDateTime }, context) {
         await executeBatch(process.env.AZURE_STORAGE_CONFIRMEDTIMEENTRIES_TABLE_NAME, batch)
         return { success: true, error: null };
     } catch (error) {
-        return { success: false, error: error.message };
+        return { success: false, error: _.omit(error, 'requestId') };
     }
 };
 

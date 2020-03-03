@@ -3,6 +3,7 @@ const { executeBatch, entGen } = require('../../../../utils/table');
 const { getDurationHours, getDurationMinutes, getWeek, getMonth, getYear } = require('../../../../utils');
 const uuid = require('uuid/v1');
 const log = require('debug')('middleware/graphql/resolvers/mutation/confirmPeriod');
+const _ = require('underscore');
 
 /**
  * Confirm period
@@ -44,7 +45,7 @@ async function confirmPeriod(_obj, { startDateTime, endDateTime, entries }, cont
         await executeBatch(process.env.AZURE_STORAGE_CONFIRMEDTIMEENTRIES_TABLE_NAME, batch)
         return { success: true, error: null };
     } catch (error) {
-        return { success: false, error: error.message };
+        return { success: false, error: _.omit(error, 'requestId') };
     }
 };
 

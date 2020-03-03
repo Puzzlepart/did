@@ -14,7 +14,6 @@ async function deleteCustomer(_obj, args, context) {
         await context.services.storage.deleteCustomer(args.key);
         return { success: true, error: null };
     } catch (error) {
-        console.log(Object.keys(error));
         return { success: false, error: _.omit(error, 'requestId') };
     }
 }
