@@ -32,7 +32,7 @@ export const CreateCustomerForm = ({ initialModel = { key: '', name: '', descrip
         setValidation({ errors: {}, invalid: false });
         let { data: { result } } = await addCustomer({ variables: model });
         if (result.success) {
-            setMessage({ text: `The customer ${model.name} was succesfully created.`, type: MessageBarType.success });
+            setMessage({ text: `The customer **${model.name}** was succesfully created.`, type: MessageBarType.success });
         } else {
             setMessage({ text: result.error, type: MessageBarType.error });
         }
@@ -51,31 +51,38 @@ export const CreateCustomerForm = ({ initialModel = { key: '', name: '', descrip
     }
 
     return (
-        <div>
+        <>
+            {message && <UserMessage style={{ marginTop: 12, marginBottom: 12, width: 450 }} text={message.text} type={message.type} />}
             <TextField
-                styles={{ root: { marginTop: 12, width: 300 } }}
+                styles={{ root: { marginTop: 12, width: 450 } }}
                 label='Key'
                 description='Customer key. Between 3 and 8 characters long, and all uppercase.'
+                title='Customer key. Between 3 and 8 characters long, and all uppercase.'
+                required={true}
                 errorMessage={validation.errors.key}
                 onChange={(_event, key) => setModel({ ...model, key })}
                 value={model.key} />
             <TextField
-                styles={{ root: { marginTop: 12, width: 300 } }}
+                styles={{ root: { marginTop: 12, width: 450 } }}
                 label='Name'
                 description='Name of the customer.'
+                title='Name of the customer.'
+                required={true}
                 errorMessage={validation.errors.name}
                 onChange={(_event, name) => setModel({ ...model, name })}
                 value={model.name} />
             <TextField
-                styles={{ root: { marginTop: 12, width: 300 } }}
+                styles={{ root: { marginTop: 12, width: 450 }, field: { height: 180 } }}
                 label='Description'
+                title='Description'
                 multiline={true}
                 errorMessage={validation.errors.description}
                 onChange={(_event, description) => setModel({ ...model, description })}
                 value={model.description} />
             <TextField
-                styles={{ root: { marginTop: 12, width: 300 } }}
+                styles={{ root: { marginTop: 12, width: 180 } }}
                 label='Icon'
+                title='Icon'
                 errorMessage={validation.errors.icon}
                 onChange={(_event, icon) => setModel({ ...model, icon })}
                 iconProps={{ iconName: model.icon }}
@@ -86,7 +93,6 @@ export const CreateCustomerForm = ({ initialModel = { key: '', name: '', descrip
                 iconProps={{ iconName: 'CirclePlus' }}
                 onClick={onFormSubmit}
                 disabled={loading || !!message} />
-            {message && <UserMessage style={{ marginTop: 10 }} text={message.text} type={message.type} />}
-        </div>
+        </>
     );
 }

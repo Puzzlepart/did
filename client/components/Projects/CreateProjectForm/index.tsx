@@ -1,16 +1,15 @@
 import { useMutation } from '@apollo/react-hooks';
 import { UserMessage } from 'components/UserMessage';
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button';
-import { Label } from 'office-ui-fabric-react/lib/Label';
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import * as React from 'react';
 import { useState } from 'react';
 import CREATE_PROJECT from './CREATE_PROJECT';
 import { ICreateProjectFormModel } from './ICreateProjectFormModel';
-import { SearchCustomer } from './SearchCustomer';
 import { ICreateProjectFormProps } from './ICreateProjectFormProps';
 import { ICreateProjectFormValidation } from './ICreateProjectFormValidation';
+import { SearchCustomer } from './SearchCustomer';
 
 /**
  * @component CreateProjectForm
@@ -34,7 +33,7 @@ export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey
         setValidation({ errors: {}, invalid: false });
         let { data: { result } } = await addProject({ variables: model });
         if (result.success) {
-            setMessage({ text: `The project ${model.name} was succesfully created.`, type: MessageBarType.success })
+            setMessage({ text: `The project **${model.name}** was succesfully created.`, type: MessageBarType.success })
         } else {
             setMessage({ text: result.error, type: MessageBarType.error });
         }
@@ -54,33 +53,46 @@ export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey
     }
 
     return (
-        <div>
-            <Label>Customer</Label>
-            <SearchCustomer onSelected={({ key }) => setModel({ ...model, customerKey: key as string })} />
+        <>
+            {message && <UserMessage style={{ marginTop: 12, marginBottom: 12, width: 450 }} text={message.text} type={message.type} />}
+            <SearchCustomer
+                label='Customer'
+                placeholder='Search customer...'
+                title='Customer'
+                required={true}
+                styles={{ root: { marginTop: 12, width: 450 } }}
+                style={{ width: 450 }}
+                onSelected={({ key }) => setModel({ ...model, customerKey: key as string })} />
             <TextField
-                styles={{ root: { marginTop: 12, width: 300 } }}
+                styles={{ root: { marginTop: 12, width: 450 } }}
                 label='Key'
                 description='Project key. Between 3 and 8 characters long, and all uppercase.'
+                title='Project key. Between 3 and 8 characters long, and all uppercase.'
+                required={true}
                 errorMessage={validation.errors.projectKey}
                 onChange={(_event, projectKey) => setModel({ ...model, projectKey })}
                 value={model.projectKey} />
             <TextField
-                styles={{ root: { marginTop: 12, width: 300 } }}
+                styles={{ root: { marginTop: 12, width: 450 } }}
                 label='Name'
                 description='Name of the project.'
+                title='Name of the project.'
+                required={true}
                 errorMessage={validation.errors.name}
                 onChange={(_event, name) => setModel({ ...model, name })}
                 value={model.name} />
             <TextField
-                styles={{ root: { marginTop: 12, width: 300 } }}
+                styles={{ root: { marginTop: 12, width: 450 }, field: { height: 180 } }}
                 label='Description'
+                title='Description'
                 multiline={true}
                 errorMessage={validation.errors.description}
                 onChange={(_event, description) => setModel({ ...model, description })}
                 value={model.description} />
             <TextField
-                styles={{ root: { marginTop: 12, width: 300 } }}
+                styles={{ root: { marginTop: 12, width: 180 } }}
                 label='Icon'
+                title='Icon'
                 errorMessage={validation.errors.icon}
                 onChange={(_event, icon) => setModel({ ...model, icon })}
                 iconProps={{ iconName: model.icon }}
@@ -91,7 +103,6 @@ export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey
                 iconProps={{ iconName: 'CirclePlus' }}
                 onClick={onFormSubmit}
                 disabled={loading || !!message} />
-            {message && <UserMessage style={{ marginTop: 10 }} text={message.text} type={message.type} />}
-        </div>
+        </>
     );
 }
