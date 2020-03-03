@@ -8,28 +8,17 @@ import { useState } from 'react';
 import CREATE_CUSTOMER from './CREATE_CUSTOMER';
 import { ICreateCustomerFormModel } from './ICreateCustomerFormModel';
 import { ICreateCustomerFormProps } from './ICreateCustomerFormProps';
-import { ICreateCustomerFormValidation } from './ICreateCustomerFormValidation';
 
 /**
  * @component CreateCustomerForm
  * @description Form for creating a new Custoner
  */
 export const CreateCustomerForm = ({ initialModel = { key: '', name: '', description: '', icon: 'Page' } }: ICreateCustomerFormProps) => {
-    let [validation, setValidation] = useState<ICreateCustomerFormValidation>({ errors: {}, invalid: true });
     let [message, setMessage] = useState<{ text: string, type: MessageBarType }>(null);
     let [model, setModel] = useState<ICreateCustomerFormModel>(initialModel);
     let [addCustomer, { loading }] = useMutation(CREATE_CUSTOMER);
 
-    /**
-     * On form submit
-     */
     const onFormSubmit = async () => {
-        let _validation = validateForm();
-        if (_validation.invalid) {
-            setValidation(_validation);
-            return;
-        }
-        setValidation({ errors: {}, invalid: false });
         let { data: { result } } = await addCustomer({ variables: model });
         if (result.success) {
             setMessage({ text: `The customer ${model.name} was succesfully created.`, type: MessageBarType.success });
@@ -41,42 +30,41 @@ export const CreateCustomerForm = ({ initialModel = { key: '', name: '', descrip
     }
 
     /**
-     * Validate form
+     * Validate model
+     * 
+     * @description Temp validation of model
      */
-    const validateForm = (): ICreateCustomerFormValidation => {
-        let errors: { [key: string]: string } = {};
-        if (model.name.length < 2) errors.name = 'Name should be at least 2 characters long.';
-        if (!(/(^[A-ZÆØÅ]{3,8}$)/gm).test(model.key)) errors.key = 'Customer key should be between 3 and 8 characters long, and all uppercase.';
-        return { errors, invalid: Object.keys(errors).length > 0 };
+    const validateModel = (): boolean => {
+        return model.name.length > 2 && model.key.length > 2;
     }
+
 
     return (
         <div>
             <TextField
                 styles={{ root: { marginTop: 12, width: 300 } }}
+                minLength={4}
                 label='Key'
-                description='Customer key. Between 3 and 8 characters long, and all uppercase.'
-                errorMessage={validation.errors.key}
+                description='Key for the customer. Use one word (no spaces).'
                 onChange={(_event, key) => setModel({ ...model, key })}
                 value={model.key} />
             <TextField
                 styles={{ root: { marginTop: 12, width: 300 } }}
+                minLength={4}
                 label='Name'
                 description='Name of the customer.'
-                errorMessage={validation.errors.name}
                 onChange={(_event, name) => setModel({ ...model, name })}
                 value={model.name} />
             <TextField
                 styles={{ root: { marginTop: 12, width: 300 } }}
                 label='Description'
                 multiline={true}
-                errorMessage={validation.errors.description}
                 onChange={(_event, description) => setModel({ ...model, description })}
                 value={model.description} />
             <TextField
                 styles={{ root: { marginTop: 12, width: 300 } }}
+                minLength={4}
                 label='Icon'
-                errorMessage={validation.errors.icon}
                 onChange={(_event, icon) => setModel({ ...model, icon })}
                 iconProps={{ iconName: model.icon }}
                 value={model.icon} />
@@ -85,7 +73,7 @@ export const CreateCustomerForm = ({ initialModel = { key: '', name: '', descrip
                 text='Add'
                 iconProps={{ iconName: 'CirclePlus' }}
                 onClick={onFormSubmit}
-                disabled={loading || !!message} />
+                disabled={!validateModel() || loading || !!message} />
             {message && <UserMessage style={{ marginTop: 10 }} text={message.text} type={message.type} />}
         </div>
     );
