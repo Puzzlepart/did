@@ -94,6 +94,25 @@ async function queryTableAll(table, query) {
 };
 
 /**
+ * Retrieves an entity
+ * 
+ * @param {*} table 
+ * @param {*} partitionKey 
+ * @param {*} rowKey 
+ */
+function retrieveEntity(table, partitionKey, rowKey) {
+    return new Promise((resolve, reject) => {
+        azureTableService.retrieveEntity(table, partitionKey, rowKey, (error, result) => {
+            if (!error) {
+                return resolve(result);
+            } else {
+                reject(error);
+            }
+        })
+    });
+};
+
+/**
  * Adds an entity
  * 
  * @param {*} table 
@@ -169,6 +188,7 @@ module.exports = {
     queryTable,
     queryTableAll,
     addEntity,
+    retrieveEntity,
     updateEntity,
     deleteEntity,
     executeBatch,

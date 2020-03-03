@@ -1,4 +1,22 @@
-const { queryTable, queryTableAll, parseArray, isEqual, lt, gt, and, combine, stringFilter, intFilter, dateFilter, createQuery, addEntity, updateEntity, deleteEntity, entGen } = require('../utils/table');
+const {
+    queryTable,
+    queryTableAll,
+    parseArray,
+    isEqual,
+    lt,
+    gt,
+    and,
+    combine,
+    stringFilter,
+    intFilter,
+    dateFilter,
+    createQuery,
+    addEntity,
+    retrieveEntity,
+    updateEntity,
+    deleteEntity,
+    entGen,
+} = require('../utils/table');
 const log = require('debug')('services/storage');
 const arraySort = require('array-sort');
 
@@ -154,18 +172,12 @@ class StorageService {
         filters = filters || {};
         options = options || {};
         let filter = this.filter;
-        if (filters.projectId)
-            filter = combine(filter, and, stringFilter('ProjectId', isEqual, filters.projectId));
-        if (filters.resourceId)
-            filter = combine(filter, and, stringFilter('ResourceId', isEqual, filters.resourceId));
-        if (filters.weekNumber)
-            filter = combine(filter, and, intFilter('WeekNumber', isEqual, filters.weekNumber));
-        if (filters.yearNumber)
-            filter = combine(filter, and, intFilter('YearNumber', isEqual, filters.yearNumber));
-        if (filters.startDateTime)
-            filter = combine(filter, and, dateFilter('StartTime', gt, entGen.DateTime(new Date(filters.startDateTime))._));
-        if (filters.endDateTime)
-            filter = combine(filter, and, dateFilter('StartTime', lt, entGen.DateTime(new Date(filters.endDateTime))._));
+        if (filters.projectId) filter = combine(filter, and, stringFilter('ProjectId', isEqual, filters.projectId));
+        if (filters.resourceId) filter = combine(filter, and, stringFilter('ResourceId', isEqual, filters.resourceId));
+        if (filters.weekNumber) filter = combine(filter, and, intFilter('WeekNumber', isEqual, filters.weekNumber));
+        if (filters.yearNumber) filter = combine(filter, and, intFilter('YearNumber', isEqual, filters.yearNumber));
+        if (filters.startDateTime) filter = combine(filter, and, dateFilter('StartTime', gt, entGen.DateTime(new Date(filters.startDateTime))._));
+        if (filters.endDateTime) filter = combine(filter, and, dateFilter('StartTime', lt, entGen.DateTime(new Date(filters.endDateTime))._));
         log('Querying table %s with filter %s', CONFIRMEDTIMEENTRIES_TABLE, filter);
         let query = createQuery(1000, undefined, filter);
         let result = await queryTableAll(CONFIRMEDTIMEENTRIES_TABLE, query);
@@ -182,6 +194,15 @@ class StorageService {
         const query = createQuery(1000, undefined).where(this.filter);
         const { entries } = await queryTable(USERS_TABLE, query);
         return parseArray(entries);
+    }
+    /**
+     * Get current user
+     *
+     * @param {*} userId
+     */
+    async getUser(userId) {
+        const entry = await retrieveEntity(USERS_TABLE, this.tenantId, userId);
+        return parseArray([entry])[0];
     }
     /**
      * Delete customer

@@ -126,9 +126,10 @@ type Query {
 	customers: [Customer!]!
 	projects(customerKey: String, sortBy: String): [Project!]!
 	timesheet(startDateTime: String!, endDateTime: String!, dateFormat: String!): EventData!
-	confirmedTimeEntries(projectId: String, resourceId: String, weekNumber: Int, yearNumber: Int, currentUser: Boolean,	dateFormat: String): ConfirmedTimeEntries
+	confirmedTimeEntries(projectId: String, resourceId: String, weekNumber: Int, yearNumber: Int, currentUser: Boolean, 	dateFormat: String): ConfirmedTimeEntries
 	weeks: [Week!]!
 	users: [User!]!
+	currentUser: User!
 }
 
 type Mutation {
