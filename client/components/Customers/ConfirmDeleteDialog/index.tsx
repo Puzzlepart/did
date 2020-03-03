@@ -9,6 +9,9 @@ import { IConfirmDeleteDialogProps } from './IConfirmDeleteDialogProps';
  * @description
  */
 export const ConfirmDeleteDialog = (props: IConfirmDeleteDialogProps) => {
+    let subText = props.projects.length > 0
+        ? `All the ${props.projects.length} projects for the customer will also be deleted.`
+        : 'There\'s no projects connected to the customer.';
     return (
         <Dialog
             hidden={false}
@@ -16,7 +19,7 @@ export const ConfirmDeleteDialog = (props: IConfirmDeleteDialogProps) => {
             dialogContentProps={{
                 type: DialogType.largeHeader,
                 title: `Are you sure you want to delete customer ${props.customer.name}?`,
-                subText: `All the ${props.projects.length} projects for the customer will also be deleted.`
+                subText,
             }}
             modalProps={{
                 isBlocking: false,

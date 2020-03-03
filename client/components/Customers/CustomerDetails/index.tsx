@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import { GET_PROJECTS } from 'components/Projects/GET_PROJECTS';
 import { ProjectList } from 'components/Projects/ProjectList';
 import { getValueTyped as value } from 'helpers';
@@ -8,20 +8,18 @@ import { Link } from 'office-ui-fabric-react/lib/Link';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import * as React from 'react';
 import { ConfirmDeleteDialog } from '../ConfirmDeleteDialog';
-import DELETE_CUSTOMER from './DELETE_CUSTOMER';
 import { ICustomerDetailsProps } from './ICustomerDetailsProps';
 
-export const CustomerDetails = ({ customer }: ICustomerDetailsProps) => {
+export const CustomerDetails = (props: ICustomerDetailsProps) => {
     const [confirmDelete, setConfirmDelete] = React.useState(false);
-    const { loading, error, data } = useQuery(GET_PROJECTS, { variables: { customerKey: value<string>(customer, 'key', '') } });
-    const [deleteCustomer] = useMutation(DELETE_CUSTOMER);
+    const { loading, error, data } = useQuery(GET_PROJECTS, { variables: { customerKey: value<string>(props, 'customer.key', '') } });
 
     return (
         <div className='c-CustomerDetails'>
             <div className="container">
                 <div className="row">
                     <div className="col-sm">
-                        <h3>{customer.name}</h3>
+                        <h3>{props.customer.name}</h3>
                     </div>
                     <div className="col-sm" style={{ textAlign: 'right' }}>
                         <DefaultButton
@@ -32,12 +30,12 @@ export const CustomerDetails = ({ customer }: ICustomerDetailsProps) => {
                 </div>
                 <div className="row">
                     <div className="col-sm">
-                        <p>{customer.description}</p>
+                        <p>{props.customer.description}</p>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-sm">
-                        <Link href={customer.webLink}>{customer.webLink}</Link>
+                        <Link href={props.customer.webLink}>{props.customer.webLink}</Link>
                     </div>
                 </div>
                 <div className="row" style={{ marginTop: 20 }}>
@@ -56,10 +54,10 @@ export const CustomerDetails = ({ customer }: ICustomerDetailsProps) => {
             </div>
             {confirmDelete && (
                 <ConfirmDeleteDialog
-                    customer={customer}
+                    customer={props.customer}
                     projects={value<IProject[]>(data, 'projects', [])}
                     onDismiss={_ => setConfirmDelete(false)}
-                    onConfirm={_ => deleteCustomer({ variables: { key: customer.key } }).then(_ => setConfirmDelete(false))} />
+                    onConfirm={props.onDelete} />
             )}
         </div>
     );

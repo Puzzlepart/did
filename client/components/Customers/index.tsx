@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import { CreateCustomerForm } from 'components/Customers/CreateCustomerForm';
 import { IColumn, List, SelectionMode } from 'components/List';
 import { getValueTyped as value } from 'helpers';
@@ -12,10 +12,19 @@ import { generateColumn as col } from 'utils/generateColumn';
 import { getHash } from 'utils/getHash';
 import { CustomerDetails } from './CustomerDetails';
 import { GET_CUSTOMERS } from './GET_CUSTOMERS';
+import DELETE_CUSTOMER from './DELETE_CUSTOMER';
 
 export const Customers = () => {
     const [selected, setSelected] = useState<ICustomer>(null);
-    const { loading, error, data } = useQuery(GET_CUSTOMERS, { fetchPolicy: 'cache-first' });
+    const { loading, error, data, refetch } = useQuery(GET_CUSTOMERS, { fetchPolicy: 'network-only' });
+    const [deleteCustomer] = useMutation(DELETE_CUSTOMER);
+
+    const onDelete = async (): Promise<void> => {
+        await deleteCustomer({ variables: { key: selected.key } });
+        window.location.hash = '';
+        setSelected(null);
+        refetch();
+    }
 
     const columns: IColumn[] = [
         col(
@@ -32,9 +41,7 @@ export const Customers = () => {
 
     if (getHash()) {
         let [_selected] = customers.filter(c => c.id === getHash());
-        if (_selected && !selected) {
-            setSelected(_selected);
-        }
+        if (_selected && !selected) setSelected(_selected);
     }
 
     return (
@@ -50,7 +57,7 @@ export const Customers = () => {
                         selection={{ mode: SelectionMode.single, onChanged: selected => setSelected(selected) }}
                         height={350} />
                 )}
-                {selected && <CustomerDetails customer={selected} />}
+                {selected && <CustomerDetails customer={selected} onDelete={onDelete} />}
             </PivotItem>
             <PivotItem itemID='new' itemKey='new' headerText='Create new' itemIcon='AddTo'>
                 <CreateCustomerForm />

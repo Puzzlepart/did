@@ -14,11 +14,13 @@ async function deleteCustomer(_obj, args, context) {
     log('Deleting customer: %s', args.key);
     try {
         let projects = await context.services.storage.getProjects(args.key, { noParse: true });
-        const batch = projects.reduce((b, entity) => {
-            b.deleteEntity(entity);
-            return b;
-        }, new TableBatch());
-        await executeBatch('Projects', batch);
+        if (projects.length > 0) {
+            const batch = projects.reduce((b, entity) => {
+                b.deleteEntity(entity);
+                return b;
+            }, new TableBatch());
+            await executeBatch('Projects', batch);
+        }
         await context.services.storage.deleteCustomer(args.key);
         return { success: true, error: null };
     } catch (error) {
