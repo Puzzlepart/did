@@ -129,6 +129,23 @@ function updateEntity(table, item) {
     });
 };
 
+/**
+ * Delete entity
+ * 
+ * @param {*} item 
+ */
+function deleteEntity(table, item) {
+    return new Promise((resolve, reject) => {
+        azureTableService.deleteEntity(table, item, undefined, (error, result) => {
+            if (!error) {
+                resolve(result);
+            } else {
+                reject(error);
+            }
+        })
+    });
+};
+
 
 /**
  * Executes a batch operation
@@ -149,12 +166,13 @@ function executeBatch(table, batch) {
 };
 
 module.exports = {
-    queryTable: queryTable,
-    queryTableAll: queryTableAll,
-    addEntity: addEntity,
-    updateEntity: updateEntity,
-    executeBatch: executeBatch,
-    parseArray: parseArray,
+    queryTable,
+    queryTableAll,
+    addEntity,
+    updateEntity,
+    deleteEntity,
+    executeBatch,
+    parseArray,
     gt: TableUtilities.QueryComparisons.GREATER_THAN,
     lt: TableUtilities.QueryComparisons.LESS_THAN,
     isEqual: TableUtilities.QueryComparisons.EQUAL,
