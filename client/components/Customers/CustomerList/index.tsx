@@ -27,12 +27,14 @@ export const CustomerList = (props: ICustomerListProps) => {
      * On delete customer
      */
     const onDelete = async (): Promise<void> => {
-        await deleteCustomer({ variables: { key: selected.key } });
+        const { data } = await deleteCustomer({ variables: { key: selected.key } });
         window.location.hash = '';
-        setMessage({ text: `The customer ${selected.name} was succesfully deleted.`, type: MessageBarType.remove });
+        if (data.result.success) {
+            setMessage({ text: `The customer ${selected.name} and connected projects was deleted.`, type: MessageBarType.remove });
+            window.setTimeout(() => setMessage(null), 5000);
+        }
         setSelected(null);
         refetch();
-        window.setTimeout(() => setMessage(null), 5000);
     }
 
     const columns: IColumn[] = [
