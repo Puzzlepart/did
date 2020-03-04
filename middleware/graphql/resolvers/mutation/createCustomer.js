@@ -1,4 +1,5 @@
 const log = require('debug')('middleware/graphql/resolvers/mutation/createCustomer');
+const _ = require('underscore');
 
 /**
  * Create customer
@@ -10,12 +11,11 @@ const log = require('debug')('middleware/graphql/resolvers/mutation/createCustom
 async function createCustomer(_obj, args, context) {
     try {
         log('Attempting to create customer in storage: ', JSON.stringify(args));
-        await context.services.storage.createCustomer(args);
+        await context.services.storage.createCustomer(args, context.user.profile.oid);
         log('Created customer with key %s in storage', args.key);
         return { success: true, error: null };
     } catch (error) {
-        log('Failed to create customer with key %s in storage: %s', args.key, error.message);
-        return { success: false, error: error.message };
+        return { success: false, error: _.omit(error, 'requestId') };
     }
 }
 

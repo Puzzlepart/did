@@ -94,6 +94,25 @@ async function queryTableAll(table, query) {
 };
 
 /**
+ * Retrieves an entity
+ * 
+ * @param {*} table 
+ * @param {*} partitionKey 
+ * @param {*} rowKey 
+ */
+function retrieveEntity(table, partitionKey, rowKey) {
+    return new Promise((resolve, reject) => {
+        azureTableService.retrieveEntity(table, partitionKey, rowKey, (error, result) => {
+            if (!error) {
+                return resolve(result);
+            } else {
+                reject(error);
+            }
+        })
+    });
+};
+
+/**
  * Adds an entity
  * 
  * @param {*} table 
@@ -129,6 +148,23 @@ function updateEntity(table, item) {
     });
 };
 
+/**
+ * Delete entity
+ * 
+ * @param {*} item 
+ */
+function deleteEntity(table, item) {
+    return new Promise((resolve, reject) => {
+        azureTableService.deleteEntity(table, item, undefined, (error, result) => {
+            if (!error) {
+                resolve(result);
+            } else {
+                reject(error);
+            }
+        })
+    });
+};
+
 
 /**
  * Executes a batch operation
@@ -149,12 +185,14 @@ function executeBatch(table, batch) {
 };
 
 module.exports = {
-    queryTable: queryTable,
-    queryTableAll: queryTableAll,
-    addEntity: addEntity,
-    updateEntity: updateEntity,
-    executeBatch: executeBatch,
-    parseArray: parseArray,
+    queryTable,
+    queryTableAll,
+    addEntity,
+    retrieveEntity,
+    updateEntity,
+    deleteEntity,
+    executeBatch,
+    parseArray,
     gt: TableUtilities.QueryComparisons.GREATER_THAN,
     lt: TableUtilities.QueryComparisons.LESS_THAN,
     isEqual: TableUtilities.QueryComparisons.EQUAL,

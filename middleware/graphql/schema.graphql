@@ -86,13 +86,6 @@ type User implements BaseEntity {
 	fullName: String!
 }
 
-type FAQ implements BaseEntity {
-	id: String
-	key: String
-	question: String!
-	answer: String!
-}
-
 input TimeEntryInput {
 	id: String
 	projectId: String
@@ -117,33 +110,33 @@ type ConfirmedTimeEntries {
 	duration: Float
 }
 
+type Error {
+	name: String
+	message: String
+	code: String
+	statusCode: String
+}
+
+type BaseResult {
+	success: Boolean
+	error: Error
+}
 
 type Query {
 	customers: [Customer!]!
 	projects(customerKey: String, sortBy: String): [Project!]!
 	timesheet(startDateTime: String!, endDateTime: String!, dateFormat: String!): EventData!
-	confirmedTimeEntries(
-	projectId: String, 
-	resourceId: String, 
-	weekNumber: Int, 
-	yearNumber: Int, 
-	currentUser: Boolean
-	dateFormat: String
-	): ConfirmedTimeEntries
+	confirmedTimeEntries(projectId: String, resourceId: String, weekNumber: Int, yearNumber: Int, currentUser: Boolean, 	dateFormat: String): ConfirmedTimeEntries
 	weeks: [Week!]!
 	users: [User!]!
-	faq: [FAQ!]!
-}
-
-type BaseResult {
-	success: Boolean
-	error: String
+	currentUser: User!
 }
 
 type Mutation {
 	addUser(user: UserInput!): BaseResult!
 	createProject(customerKey: String!, projectKey: String!, name: String!, description: String!, icon: String!): BaseResult
 	createCustomer(key: String!, name: String!, description: String!, icon: String!): BaseResult
+	deleteCustomer(key: String!): BaseResult
 	confirmPeriod(entries: [TimeEntryInput!], startDateTime: String!,  endDateTime: String!): BaseResult!
 	unconfirmPeriod(startDateTime: String!, endDateTime: String!): BaseResult!
 	updateWeek(weekNumber: Int!, closed: Boolean!): Boolean!

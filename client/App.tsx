@@ -9,6 +9,7 @@ import { Projects } from './components/Projects';
 import { AdminView } from './components/AdminView';
 import { Reports } from './components/Reports';
 import { client } from './graphql';
+import GET_CURRENT_USER from './GET_CURRENT_USER';
 
 initializeIcons();
 
@@ -32,8 +33,24 @@ const getProps = (element: HTMLElement) => {
     }
 }
 
-if (COMPONENTS.TIMESHEET !== null) ReactDom.render(<ApolloProvider client={client}><Timesheet {...getProps(COMPONENTS.TIMESHEET)} /></ApolloProvider>, COMPONENTS.TIMESHEET);
-if (COMPONENTS.PROJECTS !== null) ReactDom.render(<ApolloProvider client={client}><Projects /></ApolloProvider>, COMPONENTS.PROJECTS);
-if (COMPONENTS.CUSTOMERS !== null) ReactDom.render(<ApolloProvider client={client}><Customers /></ApolloProvider>, COMPONENTS.CUSTOMERS);
-if (COMPONENTS.REPORTS !== null) ReactDom.render(<ApolloProvider client={client}><Reports {...getProps(COMPONENTS.REPORTS)} /></ApolloProvider>, COMPONENTS.REPORTS);
-if (COMPONENTS.ADMIN !== null) ReactDom.render(<ApolloProvider client={client}><AdminView {...getProps(COMPONENTS.ADMIN)} /></ApolloProvider>, COMPONENTS.ADMIN);
+client.query({ query: GET_CURRENT_USER, fetchPolicy: 'cache-first' }).then(({ data }) => {
+    if (COMPONENTS.TIMESHEET !== null) ReactDom.render((
+        <ApolloProvider client={client}><Timesheet {...getProps(COMPONENTS.TIMESHEET)} /></ApolloProvider>
+    ), COMPONENTS.TIMESHEET);
+
+    if (COMPONENTS.PROJECTS !== null) ReactDom.render((
+        <ApolloProvider client={client}><Projects /></ApolloProvider>)
+        , COMPONENTS.PROJECTS);
+
+    if (COMPONENTS.CUSTOMERS !== null) ReactDom.render((
+        <ApolloProvider client={client}><Customers user={data.user} /></ApolloProvider>)
+        , COMPONENTS.CUSTOMERS);
+
+    if (COMPONENTS.REPORTS !== null) ReactDom.render((
+        <ApolloProvider client={client}><Reports {...getProps(COMPONENTS.REPORTS)} /></ApolloProvider>)
+        , COMPONENTS.REPORTS);
+
+    if (COMPONENTS.ADMIN !== null) ReactDom.render((
+        <ApolloProvider client={client}><AdminView {...getProps(COMPONENTS.ADMIN)} /></ApolloProvider>
+    ), COMPONENTS.ADMIN);
+});

@@ -2,11 +2,10 @@
 import { useQuery } from '@apollo/react-hooks';
 import AutosuggestHighlightMatch from 'autosuggest-highlight/match';
 import AutosuggestHighlightParse from 'autosuggest-highlight/parse';
-import { GET_CUSTOMERS } from 'components/Customers/GET_CUSTOMERS';
-import { Label } from 'office-ui-fabric-react/lib/Label';
-import { Link } from 'office-ui-fabric-react/lib/Link';
-import { TextField } from 'office-ui-fabric-react/lib/TextField';
+import GET_CUSTOMERS from 'components/Customers/CustomerList/GET_CUSTOMERS';
 import { ICustomer } from 'interfaces';
+import { Label } from 'office-ui-fabric-react/lib/Label';
+import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import * as React from 'react';
 import { useState } from 'react';
 import AutoSuggest from 'react-autosuggest';

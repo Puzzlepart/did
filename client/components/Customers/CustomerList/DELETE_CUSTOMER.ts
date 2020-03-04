@@ -2,8 +2,8 @@
 import gql from 'graphql-tag';
 
 export default gql`
-    mutation($user: UserInput!) { 
-        updateUser(user: $user) {
+    mutation($key: String!) { 
+        result: deleteCustomer(key: $key) {
             success
             error {
                 message
