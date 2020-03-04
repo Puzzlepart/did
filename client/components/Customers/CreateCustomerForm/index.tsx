@@ -56,8 +56,8 @@ export const CreateCustomerForm = ({ initialModel = { key: '', name: '', descrip
             <TextField
                 styles={{ root: { marginTop: 12, width: 450 } }}
                 label='Key'
-                description='Customer key. Between 3 and 8 characters long, and all uppercase.'
-                title='Customer key. Between 3 and 8 characters long, and all uppercase.'
+                description='Customer key. 3-8 characters, all uppercase.'
+                title='Customer key. 3-8 characters, all uppercase.'
                 required={true}
                 errorMessage={validation.errors.key}
                 onChange={(_event, key) => setModel({ ...model, key })}

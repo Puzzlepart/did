@@ -66,8 +66,8 @@ export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey
             <TextField
                 styles={{ root: { marginTop: 12, width: 450 } }}
                 label='Key'
-                description='Project key. Between 3 and 8 characters long, and all uppercase.'
-                title='Project key. Between 3 and 8 characters long, and all uppercase.'
+                description='Project key. 3-8 characters, all uppercase.'
+                title='Project key. 3-8 characters, all uppercase.'
                 required={true}
                 errorMessage={validation.errors.projectKey}
                 onChange={(_event, projectKey) => setModel({ ...model, projectKey })}
