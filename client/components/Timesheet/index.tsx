@@ -18,6 +18,7 @@ import { ITimesheetState, TimesheetView } from './ITimesheetState';
 import { StatusBar } from './StatusBar';
 import { SummaryView, SummaryViewType } from './SummaryView';
 import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD';
+import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 
 /**
  * @component Timesheet
@@ -75,6 +76,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                                         errors={errors}
                                         ignoredEvents={this._getStoredIgnores()}
                                         onClearIgnores={this._clearIgnores.bind(this)} />
+                                    {loading && <ProgressIndicator />}
                                     <EventList
                                         onProjectSelected={this._onProjectSelected.bind(this)}
                                         onProjectClear={this._onProjectClear.bind(this)}
