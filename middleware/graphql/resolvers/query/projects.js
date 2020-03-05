@@ -11,7 +11,7 @@ const log = require('debug')('middleware/graphql/resolvers/query/getProjects');
 async function projects(_obj, args, context) {
     log('Retrieving projects from storage. customerKey: %s, sortBy: %s', args.customerKey, args.sortBy);
     let [projects, customers, labels] = await Promise.all([
-        context.services.storage.getProjects(args.customerKey, args.sortBy),
+        context.services.storage.getProjects(args.customerKey, { sortBy: args.sortBy }),
         context.services.storage.getCustomers(),
         context.services.storage.getLabels(),
     ]);

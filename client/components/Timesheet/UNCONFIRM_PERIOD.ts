@@ -5,7 +5,9 @@ export default gql`
     mutation ($startDateTime: String!, $endDateTime: String!) {
         result: unconfirmPeriod (startDateTime: $startDateTime, endDateTime: $endDateTime) {
             success
-	        error
+	        error {
+                message
+            }
         }
     }
 `;

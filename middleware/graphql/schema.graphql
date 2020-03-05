@@ -97,13 +97,6 @@ type Label implements BaseEntity {
 	icon: String
 }
 
-type FAQ implements BaseEntity {
-	id: String
-	key: String
-	question: String!
-	answer: String!
-}
-
 input TimeEntryInput {
 	id: String
 	projectId: String
@@ -136,6 +129,17 @@ type ConfirmedTimeEntries {
 	duration: Float
 }
 
+type Error {
+	name: String
+	message: String
+	code: String
+	statusCode: String
+}
+
+type BaseResult {
+	success: Boolean
+	error: Error
+}
 
 type Query {
 	customers: [Customer!]!
@@ -145,12 +149,6 @@ type Query {
 	weeks: [Week!]!
 	users: [User!]!
 	labels: [Label!]!
-	faq: [FAQ!]!
-}
-
-type BaseResult {
-	success: Boolean
-	error: String
 }
 
 type Mutation {
@@ -159,6 +157,7 @@ type Mutation {
 	deleteLabel(id: String!): BaseResult!
 	createProject(customerKey: String!, projectKey: String!, name: String!, description: String!, icon: String!): BaseResult
 	createCustomer(key: String!, name: String!, description: String!, icon: String!): BaseResult
+	deleteCustomer(key: String!): BaseResult
 	confirmPeriod(entries: [TimeEntryInput!], startDateTime: String!,  endDateTime: String!): BaseResult!
 	unconfirmPeriod(startDateTime: String!, endDateTime: String!): BaseResult!
 	updateWeek(weekNumber: Int!, closed: Boolean!): Boolean!

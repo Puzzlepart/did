@@ -7,6 +7,7 @@ const updateUser = require('./updateUser');
 const addUser = require('./addUser');
 const addOrUpdateLabel = require('./addOrUpdateLabel');
 const deleteLabel = require('./deleteLabel');
+const deleteCustomer = require('./deleteCustomer');
 
 module.exports = {
     confirmPeriod,
@@ -18,4 +19,5 @@ module.exports = {
     addUser,
     addOrUpdateLabel,
     deleteLabel,
+    deleteCustomer,
 };

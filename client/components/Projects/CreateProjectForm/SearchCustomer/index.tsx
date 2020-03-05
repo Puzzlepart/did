@@ -2,8 +2,10 @@
 import { useQuery } from '@apollo/react-hooks';
 import AutosuggestHighlightMatch from 'autosuggest-highlight/match';
 import AutosuggestHighlightParse from 'autosuggest-highlight/parse';
-import { GET_CUSTOMERS } from 'components/Customers/GET_CUSTOMERS';
+import GET_CUSTOMERS from 'components/Customers/CustomerList/GET_CUSTOMERS';
 import { ICustomer } from 'interfaces';
+import { Label } from 'office-ui-fabric-react/lib/Label';
+import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import * as React from 'react';
 import { useState } from 'react';
 import AutoSuggest from 'react-autosuggest';
@@ -13,7 +15,7 @@ import { ISearchCustomerProps } from './ISearchCustomerProps';
  * @component SearchCustomer
  * @description @todo
  */
-export const SearchCustomer = ({ onSelected, placeholder = '' }: ISearchCustomerProps) => {
+export const SearchCustomer = (props: ISearchCustomerProps) => {
     let [customers, setCustomers] = useState<ICustomer[]>(null);
     let [suggestions, setSuggestions] = useState([]);
     let [value, setValue] = useState('');
@@ -67,21 +69,31 @@ export const SearchCustomer = ({ onSelected, placeholder = '' }: ISearchCustomer
         );
     }
 
-    if (!customers) return null;
+    if (!customers) return <TextField {...props} disabled={true} />;
 
     return (
-        <AutoSuggest
-            suggestions={suggestions}
-            onSuggestionsFetchRequested={({ value }) => setSuggestions(getSuggestions(value))}
-            onSuggestionsClearRequested={() => setSuggestions([])}
-            getSuggestionValue={getDisplayValue}
-            renderSuggestion={renderSuggestion}
-            onSuggestionSelected={(_event, { suggestion }) => onSelected(suggestion)}
-            inputProps={{
-                style: { width: 300, paddingLeft: 8, paddingRight: 8 },
-                placeholder,
-                value,
-                onChange: (_event: any, { newValue }) => setValue(newValue),
-            }} />
+        <div className='c-SearchCustomer'>
+            <div className='c-SearchCustomer-wrapper'>
+                <Label hidden={!props.label} required={props.required}>{props.label}</Label>
+                <div className='c-SearchCustomer-fieldGroup'>
+                    <AutoSuggest
+                        suggestions={suggestions}
+                        onSuggestionsFetchRequested={({ value }) => setSuggestions(getSuggestions(value))}
+                        onSuggestionsClearRequested={() => setSuggestions([])}
+                        getSuggestionValue={getDisplayValue}
+                        renderSuggestion={renderSuggestion}
+                        onSuggestionSelected={(_event, { suggestion }) => props.onSelected(suggestion)}
+                        inputProps={{
+                            className: 'c-SearchCustomer-field',
+                            style: props.style,
+                            placeholder: props.placeholder,
+                            title: props.title,
+                            value,
+                            onChange: (_event: any, { newValue }) => setValue(newValue),
+                            required: props.required,
+                        }} />
+                </div>
+            </div>
+        </div>
     );
 }
