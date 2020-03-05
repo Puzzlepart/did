@@ -17,15 +17,7 @@ const {
     deleteEntity,
     entGen,
 } = require('../utils/table');
-const log = require('debug')('services/storage');
 const arraySort = require('array-sort');
-
-const SUBSCRIPTIONS_TABLE = process.env.AZURE_STORAGE_SUBSCRIPTIONS_TABLE_NAME;
-const USERS_TABLE = process.env.AZURE_STORAGE_USERS_TABLE_NAME;
-const PROJECTS_TABLE = process.env.AZURE_STORAGE_PROJECTS_TABLE_NAME;
-const CUSTOMERS_TABLE = process.env.AZURE_STORAGE_CUSTOMERS_TABLE_NAME;
-const CONFIRMEDTIMEENTRIES_TABLE = process.env.AZURE_STORAGE_CONFIRMEDTIMEENTRIES_TABLE_NAME;
-const WEEKS_TABLE = 'Weeks';
 
 class StorageService {
     constructor(tid) {
@@ -38,7 +30,7 @@ class StorageService {
     getSubscription() {
         return new Promise(async (resolve) => {
             const query = createQuery(1, ['Name']).where('RowKey eq ?', this.tenantId);
-            var { entries } = await queryTable(SUBSCRIPTIONS_TABLE, query);
+            var { entries } = await queryTable('Subscriptions', query);
             resolve(parseArray(entries)[0]);
         });
     }
@@ -50,7 +42,7 @@ class StorageService {
     async getUser(userId) {
         let filter = combine(this.filter, and, stringFilter('RowKey', isEqual, userId));
         const query = createQuery(1, ['Role', 'StartPage']).where(filter);
-        const { entries } = await queryTable(USERS_TABLE, query);
+        const { entries } = await queryTable('Users', query);
         return parseArray(entries)[0];
     }
     /**
@@ -58,7 +50,7 @@ class StorageService {
      */
     async getWeeks() {
         let query = createQuery(1000, undefined, this.filter);
-        const { entries } = await queryTable(WEEKS_TABLE, query);
+        const { entries } = await queryTable('Weeks', query);
         const weeks = parseArray(entries);
         return weeks;
     }
@@ -66,7 +58,7 @@ class StorageService {
      * Update week
      */
     async updateWeek(weekNumber, closed) {
-        const result = await updateEntity(WEEKS_TABLE, {
+        const result = await updateEntity('Weeks', {
             PartitionKey: entGen.String(this.tenantId),
             RowKey: entGen.String(weekNumber.toString()),
             Closed: entGen.Boolean(closed),
@@ -77,7 +69,7 @@ class StorageService {
      * Update user
      */
     async updateUser(user) {
-        const result = await updateEntity(USERS_TABLE, {
+        const result = await updateEntity('Users', {
             PartitionKey: entGen.String(this.tenantId),
             RowKey: entGen.String(user.id),
             FullName: entGen.String(user.fullName),
@@ -93,7 +85,7 @@ class StorageService {
      */
     async createProject(model, createdBy) {
         let projectId = (`${model.customerKey} ${model.projectKey}`).toUpperCase();
-        let entity = await addEntity(PROJECTS_TABLE, {
+        let entity = await addEntity('Projects', {
             PartitionKey: entGen.String(this.tenantId),
             RowKey: entGen.String(projectId),
             Name: entGen.String(model.name),
@@ -111,7 +103,7 @@ class StorageService {
      * @param {*} createdBy
      */
     async createCustomer(model, createdBy) {
-        let entity = await addEntity(CUSTOMERS_TABLE, {
+        let entity = await addEntity('Customers', {
             PartitionKey: entGen.String(this.tenantId),
             RowKey: entGen.String(model.key.toUpperCase()),
             Name: entGen.String(model.name),
@@ -127,7 +119,7 @@ class StorageService {
      * @param {*} user
      */
     async addUser(user) {
-        let entity = await addEntity(USERS_TABLE, {
+        let entity = await addEntity('Users', {
             PartitionKey: entGen.String(this.tenantId),
             RowKey: entGen.String(user.id),
             FullName: entGen.String(user.fullName),
@@ -140,7 +132,7 @@ class StorageService {
      */
     async getCustomers() {
         const query = createQuery(1000, undefined, this.filter);
-        const { entries } = await queryTable(CUSTOMERS_TABLE, query);
+        const { entries } = await queryTable('Customers', query);
         return parseArray(entries, undefined, { idUpper: true });
     }
     /**
@@ -155,7 +147,7 @@ class StorageService {
         if (customerKey)
             filter = combine(filter, and, stringFilter('CustomerKey', isEqual, customerKey));
         let query = createQuery(1000, undefined, filter);
-        let { entries } = await queryTable(PROJECTS_TABLE, query);
+        let { entries } = await queryTable('Projects', query);
         if (!options.noParse)
             entries = parseArray(entries, undefined, { idUpper: true });
         if (options.sortBy)
@@ -178,9 +170,8 @@ class StorageService {
         if (filters.yearNumber) filter = combine(filter, and, intFilter('YearNumber', isEqual, filters.yearNumber));
         if (filters.startDateTime) filter = combine(filter, and, dateFilter('StartTime', gt, entGen.DateTime(new Date(filters.startDateTime))._));
         if (filters.endDateTime) filter = combine(filter, and, dateFilter('StartTime', lt, entGen.DateTime(new Date(filters.endDateTime))._));
-        log('Querying table %s with filter %s', CONFIRMEDTIMEENTRIES_TABLE, filter);
         let query = createQuery(1000, undefined, filter);
-        let result = await queryTableAll(CONFIRMEDTIMEENTRIES_TABLE, query);
+        let result = await queryTableAll('ConfirmedTimeEntries', query);
         if (!options.noParse) {
             result = parseArray(result, res => ({ ...res, customerId: res.projectId.split(' ')[0], }), options);
         }
@@ -192,7 +183,7 @@ class StorageService {
      */
     async getUsers() {
         const query = createQuery(1000, undefined).where(this.filter);
-        const { entries } = await queryTable(USERS_TABLE, query);
+        const { entries } = await queryTable('Users', query);
         return parseArray(entries);
     }
     /**
@@ -201,7 +192,7 @@ class StorageService {
      * @param {*} userId
      */
     async getUser(userId) {
-        const entry = await retrieveEntity(USERS_TABLE, this.tenantId, userId);
+        const entry = await retrieveEntity('Users', this.tenantId, userId);
         return parseArray([entry])[0];
     }
     /**
@@ -211,7 +202,7 @@ class StorageService {
      */
     async deleteCustomer(key) {
         try {
-            const result = await deleteEntity(CUSTOMERS_TABLE, {
+            const result = await deleteEntity('Customers', {
                 PartitionKey: entGen.String(this.tenantId),
                 RowKey: entGen.String(key),
             });
@@ -228,7 +219,7 @@ class StorageService {
      */
     async deleteProject(key) {
         try {
-            const result = await deleteEntity(PROJECTS_TABLE, {
+            const result = await deleteEntity('Projects', {
                 PartitionKey: entGen.String(this.tenantId),
                 RowKey: entGen.String(key),
             });

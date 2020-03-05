@@ -19,7 +19,7 @@ async function unconfirmPeriod(_obj, { startDateTime, endDateTime }, context) {
             b.deleteEntity(entity);
             return b;
         }, new TableBatch());
-        await executeBatch(process.env.AZURE_STORAGE_CONFIRMEDTIMEENTRIES_TABLE_NAME, batch)
+        await executeBatch('ConfirmedTimeEntries', batch)
         return { success: true, error: null };
     } catch (error) {
         return { success: false, error: _.omit(error, 'requestId') };
