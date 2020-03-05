@@ -42,7 +42,7 @@ async function confirmPeriod(_obj, { startDateTime, endDateTime, entries }, cont
             });
             return b;
         }, new TableBatch());
-        await executeBatch(process.env.AZURE_STORAGE_CONFIRMEDTIMEENTRIES_TABLE_NAME, batch)
+        await executeBatch('ConfirmedTimeEntries', batch)
         return { success: true, error: null };
     } catch (error) {
         return { success: false, error: _.omit(error, 'requestId') };
