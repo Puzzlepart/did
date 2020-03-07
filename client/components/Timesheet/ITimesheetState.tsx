@@ -1,4 +1,4 @@
-import { ITimesheetData } from './GET_TIMESHEET';
+import { ITimesheetData } from "./ITimesheetData";
 import { ITimesheetPeriod } from './ITimesheetPeriod';
 
 export type TimesheetView = 'overview' | 'summary' | 'allocation';

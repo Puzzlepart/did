@@ -11,7 +11,8 @@ import { client as graphql } from '../../graphql';
 import { ActionBar } from './ActionBar';
 import CONFIRM_PERIOD from './CONFIRM_PERIOD';
 import { EventList } from './EventList';
-import GET_TIMESHEET, { ITimesheetData } from './GET_TIMESHEET';
+import GET_TIMESHEET from './GET_TIMESHEET';
+import { ITimesheetData } from "./ITimesheetData";
 import { ITimesheetPeriod } from "./ITimesheetPeriod";
 import { ITimesheetProps } from './ITimesheetProps';
 import { ITimesheetState, TimesheetView } from './ITimesheetState';
@@ -307,9 +308,15 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     */
     private async _getEventData(skipLoading: boolean = true, fetchPolicy: any = 'network-only') {
         if (!skipLoading) this.setState({ loading: true });
+        const variables = {
+            startDateTime: this.state.period.startDateTime.toISOString(),
+            endDateTime: this.state.period.endDateTime.toISOString(),
+            dateFormat: this.props.groupHeaderDateFormat,
+        };
+        console.log(variables);
         const { data: { timesheet } } = await graphql.query({
             query: GET_TIMESHEET,
-            variables: { ...this.state.period, dateFormat: this.props.groupHeaderDateFormat },
+            variables,
             fetchPolicy,
         });
         let data: ITimesheetData = { ...timesheet };
