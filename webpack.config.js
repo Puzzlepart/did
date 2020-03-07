@@ -1,6 +1,8 @@
+require('dotenv').config();
 const path = require('path');
 const webpack = require('webpack');
 const WebpackBar = require('webpackbar');
+const clientLib = path.resolve(__dirname, 'lib/client/');
 
 module.exports = {
   module: {
@@ -25,15 +27,20 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      interfaces: path.resolve(__dirname, 'lib/client/interfaces'),
-      utils: path.resolve(__dirname, 'lib/client/utils'),
-      helpers: path.resolve(__dirname, 'lib/client/helpers'),
-      components: path.resolve(__dirname, 'lib/client/components'),
+      interfaces: path.resolve(clientLib, 'interfaces'),
+      utils: path.resolve(clientLib, 'utils'),
+      helpers: path.resolve(clientLib, 'helpers'),
+      components: path.resolve(clientLib, 'components'),
     }
   },
   plugins: [
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new WebpackBar(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'AZURE_APPLICATION_INSIGHTS_INSTRUMENTATION_KEY': JSON.stringify(process.env.AZURE_APPLICATION_INSIGHTS_INSTRUMENTATION_KEY),
+      },
+    })
   ],
   output: {
     path: path.resolve(__dirname, './public/js'),

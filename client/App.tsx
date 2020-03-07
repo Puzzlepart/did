@@ -10,6 +10,15 @@ import { AdminView } from './components/AdminView';
 import { Reports } from './components/Reports';
 import { client } from './graphql';
 import GET_CURRENT_USER from './GET_CURRENT_USER';
+import { ApplicationInsights } from '@microsoft/applicationinsights-web';
+
+if (process.env.AZURE_APPLICATION_INSIGHTS_INSTRUMENTATION_KEY) {
+    const appInsights = new ApplicationInsights({
+        config: { instrumentationKey: process.env.AZURE_APPLICATION_INSIGHTS_INSTRUMENTATION_KEY }
+    });
+    appInsights.loadAppInsights();
+    appInsights.trackPageView();
+}
 
 initializeIcons();
 
