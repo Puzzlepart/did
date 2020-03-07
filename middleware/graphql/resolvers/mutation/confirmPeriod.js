@@ -9,7 +9,7 @@ const _ = require('underscore');
  * Confirm period
  * 
  * @param {*} _obj Unused object
- * @param {*} args Arguments
+ * @param {*} args Arguments (startDateTime, endDateTime, entries)
  * @param {*} context Context
  */
 async function confirmPeriod(_obj, { startDateTime, endDateTime, entries }, context) {
