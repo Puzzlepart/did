@@ -1,13 +1,13 @@
 
 import { dateAdd, PnPClientStorage, PnPClientStore, TypedHash } from '@pnp/common';
 import { UserAllocation } from 'components/UserAllocation';
-import { endOfWeek, formatDate, getDurationDisplay, getUrlHash, getValueTyped as value, getWeekdays, startOfWeek } from 'helpers';
+import { endOfWeek, getDurationDisplay, getUrlHash, getValueTyped as value, getWeekdays, startOfWeek } from 'helpers';
 import { IProject, ITimeEntry } from 'interfaces';
-import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
+import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import * as React from 'react';
 import * as format from 'string-format';
-import { client as graphql } from '../../graphql';
+import { client as graphql,FetchPolicy } from '../../graphql';
 import { ActionBar } from './ActionBar';
 import CONFIRM_PERIOD from './CONFIRM_PERIOD';
 import { EventList } from './EventList';
@@ -19,7 +19,6 @@ import { ITimesheetState, TimesheetView } from './ITimesheetState';
 import { StatusBar } from './StatusBar';
 import { SummaryView, SummaryViewType } from './SummaryView';
 import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD';
-import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 
 /**
  * @component Timesheet
@@ -59,8 +58,8 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                             period={period}
                             selectedView={selectedView}
                             onChangePeriod={this._onChangePeriod.bind(this)}
-                            onConfirmWeek={this._onConfirmWeek.bind(this)}
-                            onUnconfirmWeek={this._onUnconfirmWeek.bind(this)}
+                            onConfirmWeek={this._confirmPeriod.bind(this)}
+                            onUnconfirmWeek={this._unconfirmPeriod.bind(this)}
                             onReload={() => this._getEventData(false)}
                             disabled={{
                                 CONFIRM_WEEK: loading || isConfirmed || errors.length > 0,
@@ -142,13 +141,13 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
         this.setState({ period }, () => this._getEventData(false));
     };
     /**
-     * On confirm week
+     * Confirm period
      */
-    private async _onConfirmWeek() {
+    private async _confirmPeriod() {
         this.setState({ loading: true });
         const entries = this.state.data.events
             .filter(event => !!event.project)
-            .map(event => ({ id: event.id, projectId: event.project.id }));
+            .map(event => ({ id: event.id, projectId: event.project.id, isManualMatch: event.isManualMatch }));
         await graphql.mutate({
             mutation: CONFIRM_PERIOD,
             variables: {
@@ -161,9 +160,9 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     };
 
     /**
-     * On unconfirm week
+     * Confirm period
      */
-    private async _onUnconfirmWeek() {
+    private async _unconfirmPeriod() {
         this._clearResolve();
         this.setState({ loading: true });
         await graphql.mutate({
@@ -306,14 +305,13 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     * @param {boolean} skipLoading Skips setting loading in state
     * @param {any} fetchPolicy Fetch policy
     */
-    private async _getEventData(skipLoading: boolean = true, fetchPolicy: any = 'network-only') {
+    private async _getEventData(skipLoading: boolean = true, fetchPolicy: FetchPolicy = 'network-only') {
         if (!skipLoading) this.setState({ loading: true });
         const variables = {
             startDateTime: this.state.period.startDateTime.toISOString(),
             endDateTime: this.state.period.endDateTime.toISOString(),
             dateFormat: this.props.groupHeaderDateFormat,
         };
-        console.log(variables);
         const { data: { timesheet } } = await graphql.query({
             query: GET_TIMESHEET,
             variables,

@@ -39,6 +39,7 @@ async function confirmPeriod(_obj, { startDateTime, endDateTime, entries }, cont
                 ResourceId: entGen.String(context.user.profile.oid),
                 ResourceEmail: entGen.String(context.user.profile.email),
                 ResourceName: entGen.String(context.user.profile.displayName),
+                ManualMatch: entGen.Boolean(entry.isManualMatch),
             });
             return b;
         }, new TableBatch());
