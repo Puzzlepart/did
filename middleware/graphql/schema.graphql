@@ -87,8 +87,9 @@ type User implements BaseEntity {
 }
 
 input TimeEntryInput {
-	id: String
-	projectId: String
+	id: String!
+	projectId: String!
+	isManualMatch: Boolean
 }
 
 input UserInput  {

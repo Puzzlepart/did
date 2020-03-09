@@ -1,5 +1,7 @@
 global.fetch = require("node-fetch");
-const { refreshAccessToken } = require('./tokens');
+const {
+  refreshAccessToken
+} = require('./tokens');
 const stripHtml = require("string-strip-html");
 const utils = require('../utils');
 const log = require('debug')('services/graph');
@@ -28,7 +30,11 @@ class GraphService {
    * Gets a Microsoft Graph Client using the auth token from the class
    */
   getClient() {
-    const client = require('@microsoft/microsoft-graph-client').Client.init({ authProvider: (done) => { done(null, this.oauthToken.access_token); } });
+    const client = require('@microsoft/microsoft-graph-client').Client.init({
+      authProvider: (done) => {
+        done(null, this.oauthToken.access_token);
+      }
+    });
     return client;
   }
   /**
@@ -40,10 +46,18 @@ class GraphService {
    */
   async getEvents(startDateTime, endDateTime, maxDurationHrs) {
     try {
-      log('Querying Graph /me/calendar/calendarView: %s', JSON.stringify({ startDateTime, endDateTime }));
-      const { value } = await this.getClient()
+      log('Querying Graph /me/calendar/calendarView: %s', JSON.stringify({
+        startDateTime,
+        endDateTime
+      }));
+      const {
+        value
+      } = await this.getClient()
         .api('/me/calendar/calendarView')
-        .query({ startDateTime, endDateTime })
+        .query({
+          startDateTime,
+          endDateTime
+        })
         .select('id,subject,body,start,end,lastModifiedDateTime,categories,webLink,isOrganizer')
         .filter(`sensitivity ne 'private' and isallday eq false and iscancelled eq false`)
         .orderby('start/dateTime asc')
@@ -52,24 +66,25 @@ class GraphService {
       log('Retrieved %s events from /me/calendar/calendarView', value.length);
       let events = value
         .filter(evt => evt.subject)
-        .map(evt => ({
-          id: evt.id,
-          title: evt.subject,
-          body: stripHtml(evt.body.content),
-          isOrganizer: evt.isOrganizer,
-          categories: evt.categories,
-          webLink: evt.webLink,
-          lastModifiedDateTime: new Date(evt.lastModifiedDateTime).toISOString(),
-          startTime: new Date(evt.start.dateTime).toISOString(),
-          endTime: new Date(evt.end.dateTime).toISOString(),
-          durationHours: utils.getDurationHours(evt.start.dateTime, evt.end.dateTime),
-          durationMinutes: utils.getDurationMinutes(evt.start.dateTime, evt.end.dateTime),
-        }));
+        .map(evt => {
+          return ({
+            id: evt.id,
+            title: evt.subject,
+            body: stripHtml(evt.body.content),
+            isOrganizer: evt.isOrganizer,
+            categories: evt.categories,
+            webLink: evt.webLink,
+            lastModifiedDateTime: evt.lastModifiedDateTime,
+            startTime: evt.start.dateTime,
+            endTime: evt.end.dateTime,
+            durationHours: utils.getDurationHours(evt.start.dateTime, evt.end.dateTime),
+            durationMinutes: utils.getDurationMinutes(evt.start.dateTime, evt.end.dateTime),
+          })
+        });
       events = this.removeIgnoredEvents(events);
       events = events.filter(evt => evt.durationHours <= maxDurationHrs);
       return events;
-    }
-    catch (error) {
+    } catch (error) {
       switch (error.statusCode) {
         case 401: {
           this.oauthToken = await refreshAccessToken(this.req);

@@ -66,7 +66,7 @@ export const CustomerList = (props: ICustomerListProps) => {
                     columns={columns}
                     searchBox={{ placeholder: 'Search...' }}
                     selection={{ mode: SelectionMode.single, onChanged: selected => setSelected(selected) }}
-                    height={350} />
+                    height={selected && 400} />
             )}
             {selected && <CustomerDetails {...props} customer={selected} onDelete={onDelete} />}
         </>

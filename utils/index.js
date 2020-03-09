@@ -42,6 +42,6 @@ module.exports = {
      * Format date
      */
     formatDate: (date, dateFormat) => {
-        return require('moment-timezone')(date).tz('Europe/Oslo').format(dateFormat);
+        return require('moment')(date).tz('Europe/Oslo').format(dateFormat);
     }
 }

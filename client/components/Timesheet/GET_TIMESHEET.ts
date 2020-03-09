@@ -1,12 +1,5 @@
 
 import gql from 'graphql-tag';
-import { ITimeEntry } from 'interfaces';
-
-export interface ITimesheetData {
-  events?: ITimeEntry[];
-  totalDuration?: number;
-  confirmedDuration?: number;
-}
 
 export default gql`
 query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!) {

@@ -1,4 +1,4 @@
-import * as moment from 'moment-timezone';
+import * as moment from 'moment';
 
 export interface ITimesheetPeriod {
     startDateTime?: moment.Moment;
