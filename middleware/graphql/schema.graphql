@@ -3,6 +3,23 @@ interface BaseEntity {
 	key: String
 }
 
+type Error {
+	name: String
+	message: String
+	code: String
+	statusCode: String
+}
+
+type BaseResult {
+	success: Boolean
+	error: Error
+	data: String
+}
+
+type EventError {
+	message: String!
+}
+
 type Project implements BaseEntity {
 	id: String
 	key: String
@@ -23,10 +40,6 @@ type Customer implements BaseEntity {
 	webLink: String
 	icon: String
 	inactive: Boolean
-}
-
-type EventError {
-	message: String!
 }
 
 type Event implements BaseEntity {
@@ -86,6 +99,18 @@ type User implements BaseEntity {
 	fullName: String!
 }
 
+type OutlookCategory implements BaseEntity {
+	id: String
+	key: String
+	displayName: String
+	color: String
+}
+
+input OutlookCategoryInput {	
+	displayName: String
+	color: String
+}
+
 input TimeEntryInput {
 	id: String!
 	projectId: String!
@@ -111,18 +136,6 @@ type ConfirmedTimeEntries {
 	duration: Float
 }
 
-type Error {
-	name: String
-	message: String
-	code: String
-	statusCode: String
-}
-
-type BaseResult {
-	success: Boolean
-	error: Error
-}
-
 type Query {
 	customers: [Customer!]!
 	projects(customerKey: String, sortBy: String): [Project!]!
@@ -131,6 +144,7 @@ type Query {
 	weeks: [Week!]!
 	users: [User!]!
 	currentUser: User!
+	outlookCategories: [OutlookCategory!]!
 }
 
 type Mutation {
@@ -142,4 +156,5 @@ type Mutation {
 	unconfirmPeriod(startDateTime: String!, endDateTime: String!): BaseResult!
 	updateWeek(weekNumber: Int!, closed: Boolean!): Boolean!
 	updateUser(user: UserInput!): BaseResult!
+	createOutlookCategory(category: OutlookCategoryInput!): BaseResult!
 }

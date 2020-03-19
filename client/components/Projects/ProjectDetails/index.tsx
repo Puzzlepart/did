@@ -1,21 +1,31 @@
-import { useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import { EventList } from 'components/Timesheet/EventList';
+import { IBaseResult } from 'graphql';
 import { getValueTyped as value } from 'helpers';
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import * as React from 'react';
 import * as excel from 'utils/exportExcel';
+import { CREATE_OUTLOOK_CATEGORY } from './CREATE_OUTLOOK_CATEGORY';
 import { GET_PROJECT_CONFIRMED_TIME_ENTRIES } from './GET_PROJECT_CONFIRMED_TIME_ENTRIES';
 import { IProjectDetailsProps } from './IProjectDetailsProps';
+import { IOutlookCategory } from 'interfaces';
 
 
-export const ProjectDetails = ({ project }: IProjectDetailsProps) => {
-    const { loading, error, data } = useQuery(GET_PROJECT_CONFIRMED_TIME_ENTRIES, { variables: { projectId: project.id } });
+export const ProjectDetails = (props: IProjectDetailsProps) => {
+    const [project, setProject] = React.useState({ ...props.project });
+    const { loading, error, data } = useQuery(GET_PROJECT_CONFIRMED_TIME_ENTRIES, { variables: { projectId: props.project.id } });
+    const [createOutlookCategory] = useMutation<{ result: IBaseResult }, { category: IOutlookCategory }>(CREATE_OUTLOOK_CATEGORY);
+
+    React.useEffect(() => setProject({ ...props.project }), [props.project]);
 
     const entries = value<any[]>(data, 'result.entries', []);
 
-    const onExport = async () => {
+    /**
+     * On export to Excel
+     */
+    async function onExportExcel() {
         let key = project.id.replace(/\s+/g, '-').toUpperCase();
         await excel.exportExcel(
             entries,
@@ -23,6 +33,17 @@ export const ProjectDetails = ({ project }: IProjectDetailsProps) => {
                 fileName: `ApprovedTimeEntries-${key}-${new Date().getTime()}.xlsx`,
                 skip: ['id', '__typename'],
             });
+    }
+
+    /**
+     * On create category in Outlook
+     */
+    async function onCreateCategory() {
+        let color = 'preset' + Math.floor(Math.random() * Math.floor(25));
+        const { data: { result } } = await createOutlookCategory({ variables: { category: { displayName: project.key.toString(), color } } });
+        if (result.success) {
+            setProject({ ...project, outlookCategory: JSON.parse(result.data) });
+        }
     }
 
     return (
@@ -38,6 +59,11 @@ export const ProjectDetails = ({ project }: IProjectDetailsProps) => {
                         <p>{project.description}</p>
                     </div>
                 </div>
+                <div className='row' hidden={!project.outlookCategory}>
+                    <div className='col-sm'>
+                        <MessageBar messageBarIconProps={{ iconName: 'OutlookLogoInverse' }}>This project has a category in your Outlook.</MessageBar>
+                    </div>
+                </div>
                 <div className='row'>
                     <div className='col-sm'>
                         <DefaultButton
@@ -47,10 +73,18 @@ export const ProjectDetails = ({ project }: IProjectDetailsProps) => {
                             iconProps={{ iconName: 'WorkforceManagement' }}
                             disabled={loading || !!error || !project.webLink} />
                         <DefaultButton
+                            hidden={entries.length === 0}
                             text='Export to Excel'
                             iconProps={{ iconName: 'ExcelDocument' }}
-                            onClick={onExport}
-                            disabled={loading || !!error || entries.length === 0}
+                            onClick={onExportExcel}
+                            disabled={loading || !!error}
+                            style={{ marginLeft: 5 }} />
+                        <DefaultButton
+                            hidden={!!project.outlookCategory}
+                            text='Create category in Outlook'
+                            iconProps={{ iconName: 'OutlookLogoInverse' }}
+                            onClick={onCreateCategory}
+                            disabled={loading}
                             style={{ marginLeft: 5 }} />
                     </div>
                 </div>
