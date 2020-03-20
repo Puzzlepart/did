@@ -88,18 +88,10 @@ type User implements BaseEntity {
 	fullName: String!
 }
 
-type Label implements BaseEntity {
-	id: String
-	key: String
-	name: String!
-	description: String
-	color: String!
-	icon: String
-}
-
 input TimeEntryInput {
-	id: String
-	projectId: String
+	id: String!
+	projectId: String!
+	isManualMatch: Boolean
 }
 
 input UserInput  {
@@ -145,10 +137,10 @@ type Query {
 	customers: [Customer!]!
 	projects(customerKey: String, sortBy: String): [Project!]!
 	timesheet(startDateTime: String!, endDateTime: String!, dateFormat: String!): EventData!
-	confirmedTimeEntries(projectId: String, resourceId: String, weekNumber: Int, yearNumber: Int, currentUser: Boolean, dateFormat: String): ConfirmedTimeEntries
+	confirmedTimeEntries(projectId: String, resourceId: String, weekNumber: Int, yearNumber: Int, currentUser: Boolean, 	dateFormat: String): ConfirmedTimeEntries
 	weeks: [Week!]!
 	users: [User!]!
-	labels: [Label!]!
+	currentUser: User!
 }
 
 type Mutation {

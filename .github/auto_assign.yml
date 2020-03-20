@@ -1,0 +1,7 @@
+addReviewers: true
+addAssignees: false
+reviewers: 
+  - damsleth
+  - okms
+  - olemp
+numberOfReviewers: 0

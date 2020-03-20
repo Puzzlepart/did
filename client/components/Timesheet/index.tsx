@@ -1,17 +1,18 @@
 
 import { dateAdd, PnPClientStorage, PnPClientStore, TypedHash } from '@pnp/common';
 import { UserAllocation } from 'components/UserAllocation';
-import { endOfWeek, formatDate, getDurationDisplay, getUrlHash, getValueTyped as value, getWeekdays, startOfWeek } from 'helpers';
+import { endOfWeek, getDurationDisplay, getUrlHash, getValueTyped as value, getWeekdays, startOfWeek } from 'helpers';
 import { IProject, ITimeEntry } from 'interfaces';
-import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
+import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import * as React from 'react';
 import * as format from 'string-format';
-import { client as graphql } from '../../graphql';
+import { client as graphql,FetchPolicy } from '../../graphql';
 import { ActionBar } from './ActionBar';
 import CONFIRM_PERIOD from './CONFIRM_PERIOD';
 import { EventList } from './EventList';
-import GET_TIMESHEET, { ITimesheetData } from './GET_TIMESHEET';
+import GET_TIMESHEET from './GET_TIMESHEET';
+import { ITimesheetData } from "./ITimesheetData";
 import { ITimesheetPeriod } from "./ITimesheetPeriod";
 import { ITimesheetProps } from './ITimesheetProps';
 import { ITimesheetState, TimesheetView } from './ITimesheetState';
@@ -57,8 +58,8 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                             period={period}
                             selectedView={selectedView}
                             onChangePeriod={this._onChangePeriod.bind(this)}
-                            onConfirmWeek={this._onConfirmWeek.bind(this)}
-                            onUnconfirmWeek={this._onUnconfirmWeek.bind(this)}
+                            onConfirmWeek={this._confirmPeriod.bind(this)}
+                            onUnconfirmWeek={this._unconfirmPeriod.bind(this)}
                             onReload={() => this._getEventData(false)}
                             disabled={{
                                 CONFIRM_WEEK: loading || isConfirmed || errors.length > 0,
@@ -75,6 +76,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                                         errors={errors}
                                         ignoredEvents={this._getStoredIgnores()}
                                         onClearIgnores={this._clearIgnores.bind(this)} />
+                                    {loading && <ProgressIndicator />}
                                     <EventList
                                         onProjectSelected={this._onProjectSelected.bind(this)}
                                         onProjectClear={this._onProjectClear.bind(this)}
@@ -139,13 +141,13 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
         this.setState({ period }, () => this._getEventData(false));
     };
     /**
-     * On confirm week
+     * Confirm period
      */
-    private async _onConfirmWeek() {
+    private async _confirmPeriod() {
         this.setState({ loading: true });
         const entries = this.state.data.events
             .filter(event => !!event.project)
-            .map(event => ({ id: event.id, projectId: event.project.id }));
+            .map(event => ({ id: event.id, projectId: event.project.id, isManualMatch: event.isManualMatch }));
         await graphql.mutate({
             mutation: CONFIRM_PERIOD,
             variables: {
@@ -158,9 +160,9 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     };
 
     /**
-     * On unconfirm week
+     * Confirm period
      */
-    private async _onUnconfirmWeek() {
+    private async _unconfirmPeriod() {
         this._clearResolve();
         this.setState({ loading: true });
         await graphql.mutate({
@@ -303,11 +305,16 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     * @param {boolean} skipLoading Skips setting loading in state
     * @param {any} fetchPolicy Fetch policy
     */
-    private async _getEventData(skipLoading: boolean = true, fetchPolicy: any = 'network-only') {
+    private async _getEventData(skipLoading: boolean = true, fetchPolicy: FetchPolicy = 'network-only') {
         if (!skipLoading) this.setState({ loading: true });
+        const variables = {
+            startDateTime: this.state.period.startDateTime.toISOString(),
+            endDateTime: this.state.period.endDateTime.toISOString(),
+            dateFormat: this.props.groupHeaderDateFormat,
+        };
         const { data: { timesheet } } = await graphql.query({
             query: GET_TIMESHEET,
-            variables: { ...this.state.period, dateFormat: this.props.groupHeaderDateFormat },
+            variables,
             fetchPolicy,
         });
         let data: ITimesheetData = { ...timesheet };

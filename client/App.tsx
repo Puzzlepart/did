@@ -10,6 +10,15 @@ import { AdminView } from './components/AdminView';
 import { Reports } from './components/Reports';
 import { client } from './graphql';
 import GET_CURRENT_USER from './GET_CURRENT_USER';
+import { ApplicationInsights } from '@microsoft/applicationinsights-web';
+
+if (process.env.AZURE_APPLICATION_INSIGHTS_INSTRUMENTATION_KEY) {
+    const appInsights = new ApplicationInsights({
+        config: { instrumentationKey: process.env.AZURE_APPLICATION_INSIGHTS_INSTRUMENTATION_KEY }
+    });
+    appInsights.loadAppInsights();
+    appInsights.trackPageView();
+}
 
 initializeIcons();
 
@@ -34,23 +43,28 @@ const getProps = (element: HTMLElement) => {
 }
 
 client.query({ query: GET_CURRENT_USER, fetchPolicy: 'cache-first' }).then(({ data }) => {
-    if (COMPONENTS.TIMESHEET !== null) ReactDom.render((
-        <ApolloProvider client={client}><Timesheet {...getProps(COMPONENTS.TIMESHEET)} /></ApolloProvider>
-    ), COMPONENTS.TIMESHEET);
+    if (COMPONENTS.TIMESHEET !== null)
+        ReactDom.render((
+            <ApolloProvider client={client}><Timesheet {...getProps(COMPONENTS.TIMESHEET)} /></ApolloProvider>
+        ), COMPONENTS.TIMESHEET);
 
-    if (COMPONENTS.PROJECTS !== null) ReactDom.render((
-        <ApolloProvider client={client}><Projects /></ApolloProvider>)
-        , COMPONENTS.PROJECTS);
+    if (COMPONENTS.PROJECTS !== null)
+        ReactDom.render((
+            <ApolloProvider client={client}><Projects /></ApolloProvider>
+        ), COMPONENTS.PROJECTS);
 
-    if (COMPONENTS.CUSTOMERS !== null) ReactDom.render((
-        <ApolloProvider client={client}><Customers user={data.user} /></ApolloProvider>)
-        , COMPONENTS.CUSTOMERS);
+    if (COMPONENTS.CUSTOMERS !== null)
+        ReactDom.render((
+            <ApolloProvider client={client}><Customers user={data.user} /></ApolloProvider>
+        ), COMPONENTS.CUSTOMERS);
 
-    if (COMPONENTS.REPORTS !== null) ReactDom.render((
-        <ApolloProvider client={client}><Reports {...getProps(COMPONENTS.REPORTS)} /></ApolloProvider>)
-        , COMPONENTS.REPORTS);
+    if (COMPONENTS.REPORTS !== null)
+        ReactDom.render((
+            <ApolloProvider client={client}><Reports {...getProps(COMPONENTS.REPORTS)} /></ApolloProvider>
+        ), COMPONENTS.REPORTS);
 
-    if (COMPONENTS.ADMIN !== null) ReactDom.render((
-        <ApolloProvider client={client}><AdminView {...getProps(COMPONENTS.ADMIN)} /></ApolloProvider>
-    ), COMPONENTS.ADMIN);
+    if (COMPONENTS.ADMIN !== null)
+        ReactDom.render((
+            <ApolloProvider client={client}><AdminView {...getProps(COMPONENTS.ADMIN)} /></ApolloProvider>
+        ), COMPONENTS.ADMIN);
 });

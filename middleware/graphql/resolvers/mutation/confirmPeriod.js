@@ -9,7 +9,7 @@ const _ = require('underscore');
  * Confirm period
  * 
  * @param {*} _obj Unused object
- * @param {*} args Arguments
+ * @param {*} args Arguments (startDateTime, endDateTime, entries)
  * @param {*} context Context
  */
 async function confirmPeriod(_obj, { startDateTime, endDateTime, entries }, context) {
@@ -27,8 +27,8 @@ async function confirmPeriod(_obj, { startDateTime, endDateTime, entries }, cont
                 EventId: entGen.String(entry.id),
                 Title: entGen.String(event.title),
                 Description: entGen.String(event.body),
-                StartTime: entGen.DateTime(new Date(event.startTime)),
-                EndTime: entGen.DateTime(new Date(event.endTime)),
+                StartTime: entGen.DateTime(event.startTime),
+                EndTime: entGen.DateTime(event.endTime),
                 DurationHours: entGen.Double(getDurationHours(event.startTime, event.endTime)),
                 DurationMinutes: entGen.Int32(getDurationMinutes(event.startTime, event.endTime)),
                 ProjectId: entGen.String(entry.projectId),
@@ -39,10 +39,11 @@ async function confirmPeriod(_obj, { startDateTime, endDateTime, entries }, cont
                 ResourceId: entGen.String(context.user.profile.oid),
                 ResourceEmail: entGen.String(context.user.profile.email),
                 ResourceName: entGen.String(context.user.profile.displayName),
+                ManualMatch: entGen.Boolean(entry.isManualMatch),
             });
             return b;
         }, new TableBatch());
-        await executeBatch(process.env.AZURE_STORAGE_CONFIRMEDTIMEENTRIES_TABLE_NAME, batch)
+        await executeBatch('ConfirmedTimeEntries', batch)
         return { success: true, error: null };
     } catch (error) {
         return { success: false, error: _.omit(error, 'requestId') };

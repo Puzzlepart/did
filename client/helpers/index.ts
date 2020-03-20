@@ -1,5 +1,5 @@
 import * as getValue from 'get-value';
-import * as moment from 'moment-timezone';
+import * as moment from 'moment';
 require('moment/locale/en-gb');
 require('twix');
 
@@ -74,10 +74,10 @@ export function getValueTyped<T>(obj: any, exp: string, defaultValue: T): T {
  * 
  * @param {string} date Date string
  * @param {string} dateFormat Date format
- * @param {string} timeZone Time zone
  */
-export function formatDate(date: string, dateFormat: string, timeZone: string = 'Europe/Oslo'): string {
-    return moment(date).tz(timeZone).format(dateFormat);
+export function formatDate(date: string, dateFormat: string): string {
+    const m = moment.utc(date);
+    return m.add(-m.toDate().getTimezoneOffset(), 'minutes').format(dateFormat);
 }
 
 /**

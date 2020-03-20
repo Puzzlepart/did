@@ -4,6 +4,7 @@ import { EventList } from 'components/Timesheet/EventList';
 import { getValueTyped as value } from 'helpers';
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
+import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import * as React from 'react';
 import * as excel from 'utils/exportExcel';
 import { GET_PROJECT_CONFIRMED_TIME_ENTRIES } from './GET_PROJECT_CONFIRMED_TIME_ENTRIES';
@@ -30,24 +31,19 @@ export const ProjectDetails = ({ project }: IProjectDetailsProps) => {
 
     return (
         <div className='c-ProjectDetails'>
-            <div className="container">
-                <div className="row">
-                    <div className="col-sm">
+            <div className='container'>
+                <div className='row'>
+                    <div className='col-sm'>
                         <h3>{project.name}</h3>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-sm">
+                <div className='row'>
+                    <div className='col-sm'>
                         <p>{project.description}</p>
                     </div>
                 </div>
-                <div className="row c-ProjectDetails-labels">
-                    <div className="col-sm">
-                        {project.labels.map(label => <EntityLabel {...label} />)}
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-sm">
+                <div className='row'>
+                    <div className='col-sm'>
                         <DefaultButton
                             hidden={!project.webLink}
                             text='Project workspace'
@@ -62,16 +58,25 @@ export const ProjectDetails = ({ project }: IProjectDetailsProps) => {
                             style={{ marginLeft: 5 }} />
                     </div>
                 </div>
+                <div className='row' style={{ marginTop: 20 }}>
+                    <div className='col-sm'>
+                        {error && <MessageBar messageBarType={MessageBarType.error}>An error occured loading time entries for the project.</MessageBar>}
+                        {(entries.length === 0 && !loading) && <MessageBar messageBarType={MessageBarType.info}>No time entries registered for the project.</MessageBar>}
+                        {loading && <ProgressIndicator />}
+                    </div>
+                </div>
+                <div className='col-sm'>
+                    <div className='row'>
+                        {entries.length > 0 && (
+                            <EventList
+                                events={entries}
+                                hideColumns={['project', 'customer']}
+                                dateFormat='MMM Do YYYY HH:mm'
+                                columnWidths={{ time: 250 }} />
+                        )}
+                    </div>
+                </div>
             </div>
-            {error && <MessageBar messageBarType={MessageBarType.error}>An error occured.</MessageBar>}
-            {!error && (
-                <EventList
-                    enableShimmer={loading}
-                    events={entries}
-                    hideColumns={['project', 'customer']}
-                    dateFormat='MMM Do YYYY HH:mm'
-                    columnWidths={{ time: 250 }} />
-            )}
         </div>
     );
 };

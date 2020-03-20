@@ -44,11 +44,11 @@ export const Projects = () => {
                 {error && <MessageBar messageBarType={MessageBarType.error}>An error occured.</MessageBar>}
                 {!error && (
                     <ProjectList
-                        height={300}
                         enableShimmer={loading}
                         items={projects}
                         searchBox={{ placeholder: 'Search...' }}
-                        selection={{ mode: SelectionMode.single, onChanged: selected => setSelected(selected) }} />
+                        selection={{ mode: SelectionMode.single, onChanged: selected => setSelected(selected) }}   
+                        height={selected && 400}/>
                 )}
                 {selected && <ProjectDetails project={selected} />}
             </PivotItem>

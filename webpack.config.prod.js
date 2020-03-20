@@ -1,7 +1,5 @@
-require('dotenv').config();
 const path = require('path');
 const webpack = require('webpack');
-const WebpackBar = require('webpackbar');
 const clientLib = path.resolve(__dirname, 'lib/client/');
 
 module.exports = {
@@ -19,7 +17,7 @@ module.exports = {
       }
     ]
   },
-  mode: 'development',
+  mode: 'production',
   entry: [
     'core-js/stable',
     'regenerator-runtime/runtime',
@@ -35,7 +33,6 @@ module.exports = {
   },
   plugins: [
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    new WebpackBar(),
     new webpack.DefinePlugin({
       'process.env': {
         'AZURE_APPLICATION_INSIGHTS_INSTRUMENTATION_KEY': JSON.stringify(process.env.AZURE_APPLICATION_INSIGHTS_INSTRUMENTATION_KEY),
