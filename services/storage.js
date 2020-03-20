@@ -18,6 +18,7 @@ const {
     entGen,
 } = require('../utils/table');
 const arraySort = require('array-sort');
+const uuid = require('uuid/v1');
 
 class StorageService {
     constructor(tid) {

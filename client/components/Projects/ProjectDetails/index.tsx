@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks';
+import { EntityLabel } from 'components/EntityLabel';
 import { EventList } from 'components/Timesheet/EventList';
 import { getValueTyped as value } from 'helpers';
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
@@ -9,7 +10,10 @@ import * as excel from 'utils/exportExcel';
 import { GET_PROJECT_CONFIRMED_TIME_ENTRIES } from './GET_PROJECT_CONFIRMED_TIME_ENTRIES';
 import { IProjectDetailsProps } from './IProjectDetailsProps';
 
-
+/**
+ * @component ProjectDetails
+ * @description 
+ */
 export const ProjectDetails = ({ project }: IProjectDetailsProps) => {
     const { loading, error, data } = useQuery(GET_PROJECT_CONFIRMED_TIME_ENTRIES, { variables: { projectId: project.id } });
 

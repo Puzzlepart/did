@@ -13,11 +13,13 @@ async function projects(_obj, args, context) {
     let [projects, customers] = await Promise.all([
         context.services.storage.getProjects(args.customerKey, { sortBy: args.sortBy }),
         context.services.storage.getCustomers(),
+        context.services.storage.getLabels(),
     ]);
     log('Retrieved %s projects from storage', projects.length);
-    projects = projects.map(p => ({
-        ...p,
-        customer: _.find(customers, c => c.id === p.id.split(' ')[0]),
+    projects = projects.map(project => ({
+        ...project,
+        customer: _.find(customers, c => c.id === project.id.split(' ')[0]),
+        labels: _.filter(labels, l => (project.labels || '').indexOf(l.id) !== -1),
     }));
     projects = projects.filter(p => p.customer);
     return projects;

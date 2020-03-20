@@ -13,6 +13,7 @@ type Project implements BaseEntity {
 	customerKey: String
 	customer: Customer
 	inactive: Boolean
+	labels: [Label]
 }
 
 type Customer implements BaseEntity {
@@ -23,6 +24,7 @@ type Customer implements BaseEntity {
 	webLink: String
 	icon: String
 	inactive: Boolean
+	labels: [Label]
 }
 
 type EventError {
@@ -98,6 +100,14 @@ input UserInput  {
 	role: String!
 }
 
+input LabelInput  {
+	id: String
+	name: String!
+	description: String!
+	color: String!
+	icon: String
+}
+
 type EventData {
 	events: [Event!]!
 	matchedEvents: [Event!]!
@@ -135,6 +145,8 @@ type Query {
 
 type Mutation {
 	addUser(user: UserInput!): BaseResult!
+	addOrUpdateLabel(label: LabelInput!): BaseResult!
+	deleteLabel(id: String!): BaseResult!
 	createProject(customerKey: String!, projectKey: String!, name: String!, description: String!, icon: String!): BaseResult
 	createCustomer(key: String!, name: String!, description: String!, icon: String!): BaseResult
 	deleteCustomer(key: String!): BaseResult

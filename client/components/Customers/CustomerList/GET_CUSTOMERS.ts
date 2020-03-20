@@ -10,5 +10,11 @@ export default gql`
         description
         webLink
         icon
+        labels {
+            name
+            description
+            color
+            icon
+        }
     }
 }`;

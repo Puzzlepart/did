@@ -17,6 +17,10 @@ function getPath(): string[] {
     return (path || '').split('/');
 }
 
+/**
+ * @component Projects
+ * @description 
+ */
 export const Projects = () => {
     const [selected, setSelected] = useState<IProject>(null);
     const { loading, error, data } = useQuery<IGetProjectsEntries>(GET_PROJECTS, { variables: { sortBy: 'name' }, fetchPolicy: 'cache-first' });

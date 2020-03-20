@@ -20,6 +20,12 @@ export const GET_PROJECTS = gql`
                 id
                 name
             }
+            labels{
+                name
+                description
+                color
+                icon
+            }
         }
     }
 `;

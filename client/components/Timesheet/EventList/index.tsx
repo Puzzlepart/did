@@ -1,12 +1,13 @@
 
 import { List } from 'components/List';
 import { formatDate, getValueTyped as value } from 'helpers';
-import { ITimeEntry } from 'interfaces';
+import { ITimeEntry, ILabel } from 'interfaces';
 import * as React from 'react';
 import { generateColumn as col } from 'utils/generateColumn';
 import { DurationDisplay } from './DurationDisplay';
 import { IEventListProps } from './IEventListProps';
 import { ProjectColumn } from './ProjectColumn';
+import { EntityLabel } from 'components/EntityLabel';
 
 export const EventList = (props: IEventListProps) => {
     const columns = [
@@ -38,20 +39,23 @@ export const EventList = (props: IEventListProps) => {
             'Project',
             { maxWidth: value(props, 'columnWidths.project', 350), minWidth: value(props, 'columnWidths.project', 350) },
             (event: ITimeEntry) => (
-                <ProjectColumn
-                    event={event}
-                    isConfirmed={props.isLocked}
-                    onProjectSelected={project => props.onProjectSelected(event, project)}
-                    onProjectClear={evt => {
-                        evt.stopPropagation();
-                        evt.preventDefault();
-                        props.onProjectClear(event);
-                    }}
-                    onProjectIgnore={evt => {
-                        evt.stopPropagation();
-                        evt.preventDefault();
-                        props.onProjectIgnore(event);
-                    }} />
+                <>
+                    <ProjectColumn
+                        event={event}
+                        isConfirmed={props.isLocked}
+                        onProjectSelected={project => props.onProjectSelected(event, project)}
+                        onProjectClear={evt => {
+                            evt.stopPropagation();
+                            evt.preventDefault();
+                            props.onProjectClear(event);
+                        }}
+                        onProjectIgnore={evt => {
+                            evt.stopPropagation();
+                            evt.preventDefault();
+                            props.onProjectIgnore(event);
+                        }} />
+                    {[...value(event, 'customer.labels', []), ...value(event, 'project.labels', [])].map((label: ILabel, key: number) => <EntityLabel key={key} {...label} />)}
+                </>
             )),
     ].filter(col => (props.hideColumns || []).indexOf(col.key) === -1);
 

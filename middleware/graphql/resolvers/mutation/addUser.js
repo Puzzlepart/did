@@ -2,7 +2,7 @@ const log = require('debug')('middleware/graphql/resolvers/mutation/addUser');
 const _ = require('underscore');
 
 /**
- * Update week
+ * Add user
  * 
  * @param {*} _obj Unused object
  * @param {*} args Args
