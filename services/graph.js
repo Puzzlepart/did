@@ -61,7 +61,7 @@ class GraphService {
         .select('id,subject,body,start,end,lastModifiedDateTime,categories,webLink,isOrganizer')
         .filter(`sensitivity ne 'private' and isallday eq false and iscancelled eq false`)
         .orderby('start/dateTime asc')
-        .top(50)
+        .top(500)
         .get();
       log('Retrieved %s events from /me/calendar/calendarView', value.length);
       let events = value
