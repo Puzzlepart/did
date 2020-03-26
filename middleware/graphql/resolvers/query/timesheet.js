@@ -3,6 +3,7 @@ const findBestMatch = require('string-similarity').findBestMatch;
 const log = require('debug')('middleware/graphql/resolvers/query/timesheet');
 const format = require('string-format');
 const { formatDate } = require('../../../../utils');
+const get = require('get-value');
 
 const CATEGORY_REGEX = /((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>[A-Za-z0-9]{2,}))/gmi;
 const CONTENT_REGEX = /[\(\{\[]((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>[A-Za-z0-9]{2,}?))[\)\]\}]/gmi;
@@ -81,20 +82,22 @@ function matchEvent(evt, projects, customers) {
         log(`(matchEvent) Found %s matches for [%s]`, matches.length, evt.title);
         for (let i = 0; i < matches.length; i++) {
             let currentMatch = matches[i];
-            evt.project = _.find(projects, p => currentMatch.key === p.id);
             evt.customer = _.find(customers, c => currentMatch.customerKey === c.id);
-            if (evt.customer) projectKey = currentMatch.projectKey;
+            if (evt.customer) {
+                evt.project = _.find(projects, p => currentMatch.key === p.id && evt.customer.key === p.customerKey);
+                projectKey = currentMatch.projectKey;
+            }
             if (evt.project) break;
         }
     } else {
         log('(matchEvent) Found no matching tokens for [%s], looking for non-tokenized matches', evt.title);
-        let project = projects.filter(p => content.indexOf(p.id) !== -1)[0];
+        let project = _.find(projects, p => content.indexOf(p.id) !== -1);
         if (project) {
             log('(matchEvent) Found non-tokenized match in event [%s]: [%s]', evt.title, project.id);
             evt.project = project;
             if (evt.project) {
                 log('(matchEvent) Setting customer for event [%s] based on non-tokenized match', evt.title, project.id);
-                evt.customer = customers.filter(c => c.key === evt.project.key.split(' ')[0])[0];
+                evt.customer = _.find(customers, c => c.key === evt.project.key.split(' ')[0]);
             }
         }
     }
@@ -102,9 +105,9 @@ function matchEvent(evt, projects, customers) {
         log('(matchEvent) Found match for customer [%s] for [%s], but not for any project', evt.customer.name, evt.title);
         evt.suggestedProject = getProjectSuggestion(projects, evt.customer, projectKey);
     }
-    if (evt.project && (evt.project.inactive || evt.customer.inactive)) {
-        if (evt.project.inactive) evt.error = { message: format('Project {0} for {1} is no longer active. Please resolve the event in Outlook.', evt.project.name, evt.customer.name) };
-        if (evt.customer.inactive) evt.error = { message: format('Customer {0} is no longer active. Please resolve the event in Outlook.', evt.customer.name) };
+    if (evt.project && (get(evt, 'project.inactive') || get(evt, 'customer.inactive'))) {
+        if (get(evt, 'project.inactive')) evt.error = { message: format('Project {0} for {1} is no longer active. Please resolve the event in Outlook.', evt.project.name, evt.customer.name) };
+        if (get(evt, 'customer.inactive')) evt.error = { message: format('Customer {0} is no longer active. Please resolve the event in Outlook.', evt.customer.name) };
         evt.project = null;
         evt.customer = null;
     }
