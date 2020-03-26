@@ -1,4 +1,4 @@
-import * as getValue from 'get-value';
+import * as get from 'get-value';
 import * as moment from 'moment';
 require('moment/locale/en-gb');
 require('twix');
@@ -66,7 +66,7 @@ export function currencyDisplay(num: number, currency: string = 'NOK', minimumFr
  * @param {T} defaultValue Default value
  * */
 export function getValueTyped<T>(obj: any, exp: string, defaultValue: T): T {
-    return getValue(obj, exp, { default: defaultValue });
+    return get(obj, exp, { default: defaultValue });
 }
 
 /**
