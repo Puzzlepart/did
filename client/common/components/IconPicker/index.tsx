@@ -30,12 +30,14 @@ export const IconPicker = (props: IIconPickerProps) => {
         );
     };
 
+    const options = ICONS.map(key => ({ key, text: humanize(key) }));
+
     return (
         <Dropdown
             styles={props.styles}
             label='Icon'
             title='Icon'
-            options={ICONS.map(key => ({ key, text: humanize(key) }))}
+            options={options}
             defaultValue={props.defaultValue}
             onChange={props.onChange}
             onRenderTitle={onRenderTitle}

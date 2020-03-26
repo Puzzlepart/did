@@ -3,6 +3,7 @@ import { UserMessage } from 'components/UserMessage';
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button';
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
+import { Dropdown } from 'office-ui-fabric-react/lib/Dropdown';
 import * as React from 'react';
 import { useState } from 'react';
 import CREATE_PROJECT from './CREATE_PROJECT';
@@ -10,6 +11,9 @@ import { ICreateProjectFormModel } from './ICreateProjectFormModel';
 import { ICreateProjectFormProps } from './ICreateProjectFormProps';
 import { ICreateProjectFormValidation } from './ICreateProjectFormValidation';
 import { SearchCustomer } from './SearchCustomer';
+import ICONS from 'common/icons';
+import { humanize } from 'underscore.string';
+import { IconPicker } from 'common/components/IconPicker';
 
 /**
  * @component CreateProjectForm
@@ -89,14 +93,10 @@ export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey
                 errorMessage={validation.errors.description}
                 onChange={(_event, description) => setModel({ ...model, description })}
                 value={model.description} />
-            <TextField
-                styles={{ root: { marginTop: 12, width: 180 } }}
-                label='Icon'
-                title='Icon'
-                errorMessage={validation.errors.icon}
-                onChange={(_event, icon) => setModel({ ...model, icon })}
-                iconProps={{ iconName: model.icon }}
-                value={model.icon} />
+            <IconPicker
+                styles={{ root: { marginTop: 12, width: 300 } }}
+                options={undefined}
+                onChange={(_event, opt) => setModel({ ...model, icon: opt.key as string })} />
             <PrimaryButton
                 styles={{ root: { marginTop: 16 } }}
                 text='Add'
