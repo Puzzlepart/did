@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/react-hooks';
+import { IconPicker } from 'common/components/IconPicker';
 import { UserMessage } from 'components/UserMessage';
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button';
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
@@ -79,14 +80,10 @@ export const CreateCustomerForm = ({ initialModel = { key: '', name: '', descrip
                 errorMessage={validation.errors.description}
                 onChange={(_event, description) => setModel({ ...model, description })}
                 value={model.description} />
-            <TextField
-                styles={{ root: { marginTop: 12, width: 180 } }}
-                label='Icon'
-                title='Icon'
-                errorMessage={validation.errors.icon}
-                onChange={(_event, icon) => setModel({ ...model, icon })}
-                iconProps={{ iconName: model.icon }}
-                value={model.icon} />
+            <IconPicker
+                styles={{ root: { marginTop: 12, width: 300 } }}
+                options={undefined}
+                onChange={(_event, opt) => setModel({ ...model, icon: opt.key as string })} />
             <PrimaryButton
                 styles={{ root: { marginTop: 16 } }}
                 text='Add'
