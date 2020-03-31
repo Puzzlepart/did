@@ -23,7 +23,7 @@ export function generateListGroups(items: any[], groupBy: string, uniqueGroupNam
         let total = totalFunc ? totalFunc(itemsInGroup) : '';
         const group: IGroup = {
             key: idx.toString(),
-            name: `${name.replace(/[^\w\s]/gi, '')} ${total}`,
+            name: `${name} ${total}`,
             startIndex: groupNames.indexOf(name, 0),
             count: itemsInGroup.length,
             isShowingAll: itemsInGroup.length === items.length,

@@ -21,5 +21,11 @@ export const GET_PROJECTS = gql`
                 name
             }
         }
+        outlookCategories { 
+            id
+            key
+            displayName
+            color
+        }
     }
 `;

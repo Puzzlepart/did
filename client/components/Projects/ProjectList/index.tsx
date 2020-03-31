@@ -29,8 +29,8 @@ export const ProjectList = (props: IProjectListProps) => {
                 return props.renderLink ? <a href={`/customers#${project.customer.id}`}>{project.customer.name}</a> : project.customer.name;
             }
         )
-    ];
+    ].filter(col => (props.hideColumns || []).indexOf(col.key) === -1);;
 
-    return <List {...props} columns={columns} />;
+    return <List {...props} columns={columns} groups={props.groups} />;
 
 }
