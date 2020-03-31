@@ -11,6 +11,7 @@ class GraphService {
     this.req = req;
     this.oauthToken = this.req.user.oauthToken;
   }
+
   /**
    * Renoves ignored events from the collection
    *
@@ -26,6 +27,7 @@ class GraphService {
       return content.match(ignoreRegex) == null && categories.indexOf('ignore') === -1;
     });
   }
+
   /**
    * Gets a Microsoft Graph Client using the auth token from the class
    */
@@ -37,6 +39,28 @@ class GraphService {
     });
     return client;
   }
+
+  async createOutlookCategory(category) {
+    log('Querying Graph /me/outlook/masterCategories');
+    const res = await this.getClient()
+      .api('/me/outlook/masterCategories')
+      .post(JSON.stringify(category));
+    return res;
+  }
+
+  /**
+   * Get  categories
+   */
+  async getOutlookCategories() {
+    log('Querying Graph /me/outlook/masterCategories');
+    const {
+      value
+    } = await this.getClient()
+      .api('/me/outlook/masterCategories')
+      .get();
+    return value;
+  }
+
   /**
    * Get events for the specified week
    *
