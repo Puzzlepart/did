@@ -19,7 +19,7 @@ module.exports = {
      * Get week for the specified date
      */
     getWeek: (date) => {
-        return moment(date).week();
+        return moment(date).isoWeek();
     },
 
     /**
