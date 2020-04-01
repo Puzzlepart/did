@@ -23,10 +23,27 @@ Folder/File | Description
 * Check out the dev branch
 * Run `pnpm install`
 * Make a copy of `.env.sample` and rename it `.env`
+* Set neccessary parameters in your new `.env` file (see `Set up .env` below)
 * Install the [Azure App Service extension for vscode](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice)
 * Create an Azure app registration, or ask one of the [maintainers](#maintainers) for access to an existing one
 * Run `npm run-script watch` to watch both `server` and `client` changes concurrently  
 
+## Set up .env ##
+You've copied `.env.sample` into `.env`.
+
+Now you need to set the following properties/parameters:
+
+**OAUTH_APP_ID**
+ID of the AD application registration.
+
+**OAUTH_APP_PASSWORD**
+Password/key of the AD application registration.
+
+**AZURE_STORAGE_CONNECTION_STRING**
+Connection string for the Azure Table Storage
+
+**SESSION_SIGNING_KEY**
+Just a random string to secure the sessions.
 
 # Branching / Deploying #
 
