@@ -6,8 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 0.3.1 - [TBD]
 
+### Added
+- Support for adding a project as a category in the users mailbox #202
+- Icon picker in project and customer forms #213
+
 ### Fixed
-- Using `get-value` module to get `project.inactive` and `customer.inactive` from event #212.
+- Using `get-value` module to get `project.inactive` and `customer.inactive` from event #212
+- Using `.isoWeek()` instead of `.week()` to calculate week from startTime in `timesheet` resolver #225
 
 ## 0.3.0 - 20.03.2020
 
