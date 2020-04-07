@@ -2,9 +2,8 @@ const _ = require('underscore');
 const findBestMatch = require('string-similarity').findBestMatch;
 const log = require('debug')('middleware/graphql/resolvers/query/timesheet');
 const format = require('string-format');
-const { formatDate, getMonth, getWeek } = require('../../../../utils');
+const { formatDate, getMonth, getWeek, startOfMonth, endOfMonth } = require('../../../../utils');
 const get = require('get-value');
-const { c } = require('underscore.string');
 
 const CATEGORY_REGEX = /((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>[A-Za-z0-9]{2,}))/gmi;
 const CONTENT_REGEX = /[\(\{\[]((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>[A-Za-z0-9]{2,}?))[\)\]\}]/gmi;
@@ -120,44 +119,57 @@ function matchEvent(evt, projects, customers) {
  * Timesheet
  * 
  * @param {*} _obj Unused obj
- * @param {*} args Arguments
+ * @param {*} args Arguments 
  * @param {*} context The context
  */
-async function timesheet(_obj, { startDateTime, endDateTime, dateFormat }, context) {
-    log('Retrieving events from %s to %s', startDateTime, endDateTime);
-    // TODO: First get all projects, customers and confirmedTimeEntries
-    // TODO: Get all week_month periods
-    // TODO: For each week_month period    
-    // TODO: If there's no confirmed entries for period, do graph call with startDateTime and endDateTime
+async function timesheet(_obj, args, context) {
+    log('Retrieving events from %s to %s', args.startDateTime, args.endDateTime);
     let periods = [];
 
-    const week = getWeek(startDateTime);
-    const startMonth = getMonth(startDateTime);
-    const endMonth = getMonth(endDateTime);
+    const week = getWeek(args.startDateTime);
+    const startMonth = getMonth(args.startDateTime);
+    const endMonth = getMonth(args.endDateTime);
+    const isSplit = endMonth !== startMonth;
 
-    periods.push({ id: `${week}_${startMonth}`, name: `${week}/1` });
+    periods.push({
+        id: `${week}_${startMonth}`,
+        name: `${week}/1`,
+        startDateTime: args.startDateTime,
+        endDateTime: isSplit ? endOfMonth(args.startDateTime).toISOString() : args.endDateTime,
+    });
 
-    if (endMonth !== startMonth) {
-        periods.push({ id: `${week}_${endMonth}`, name: `${week}/2` });
+    if (isSplit) {
+        periods.push({
+            id: `${week}_${endMonth}`,
+            name: `${week}/2`,
+            startDateTime: startOfMonth(args.endDateTime).toISOString(),
+            endDateTime: args.endDateTime,
+        });
     }
 
     let [projects, customers, confirmedTimeEntries] = await Promise.all([
         context.services.storage.getProjects(),
         context.services.storage.getCustomers(),
-        context.services.storage.getConfirmedTimeEntries({ resourceId: context.user.profile.oid, startDateTime, endDateTime }),
+        context.services.storage.getConfirmedTimeEntries({
+            resourceId: context.user.profile.oid,
+            startDateTime: args.startDateTime,
+            endDateTime: args.endDateTime,
+        }),
     ]);
+
     projects = projects
         .map(p => ({
             ...p,
             customer: _.find(customers, c => c.id.toUpperCase() === p.customerKey.toUpperCase())
         }))
         .filter(p => p.customer);
+
     for (let i = 0; i < periods.length; i++) {
         let period = periods[i];
         period.confirmedDuration = 0;
         confirmedTimeEntries = confirmedTimeEntries.filter(entry => `${entry.weekNumber}_${entry.monthNumber}` === period.id);
         if (confirmedTimeEntries.length > 0) {
-            log('Found confirmed events from %s to %s, retrieving entries from storage', startDateTime, endDateTime);
+            log('Found confirmed events from %s to %s, retrieving entries from storage', period.startDateTime, period.endDateTime);
             period.events = confirmedTimeEntries.map(entry => ({
                 ...entry,
                 project: _.find(projects, p => p.id === entry.projectId),
@@ -166,12 +178,12 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat }, conte
             period.matchedEvents = period.events;
             period.confirmedDuration = events.reduce((sum, evt) => sum + evt.durationMinutes, 0);
         } else {
-            log('Found no confirmed events from %s to %s, retrieving entries from Microsoft Graph', startDateTime, endDateTime);
-            period.events = await context.services.graph.getEvents(startDateTime, endDateTime, 24);
+            log('Found no confirmed events from %s to %s, retrieving entries from Microsoft Graph', period.startDateTime, period.endDateTime);
+            period.events = await context.services.graph.getEvents(period.startDateTime, period.endDateTime, 24);
             period.events = period.events.map(evt => matchEvent(evt, projects, customers));
             period.matchedEvents = period.events.filter(evt => (evt.project && evt.project.id));
         }
-        period.events.map(evt => ({ ...evt, date: formatDate(evt.startTime, dateFormat) }));
+        period.events = period.events.map(evt => ({ ...evt, date: formatDate(evt.startTime, args.dateFormat) }));
     }
     return periods;
 };

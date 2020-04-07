@@ -39,6 +39,20 @@ module.exports = {
     },
 
     /**
+     * Get end of month
+     */
+    startOfMonth: (date) => {
+        return moment(date).startOf('month');
+    },
+
+    /**
+     * Get end of month
+     */
+    endOfMonth: (date) => {
+        return moment(date).endOf('month');
+    },
+
+    /**
      * Format date
      */
     formatDate: (date, dateFormat) => {
