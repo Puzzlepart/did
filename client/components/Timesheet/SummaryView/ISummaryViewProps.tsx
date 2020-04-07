@@ -1,9 +1,9 @@
-import { ITimesheetView } from '../ITimesheetView';
+import { ITimesheetScope } from '../ITimesheetScope';
 import { SummaryViewType } from './SummaryViewType';
 
 export interface ISummaryViewProps {
     events: any[];
-    view?: ITimesheetView;
+    scope?: ITimesheetScope;
     isConfirmed?: boolean;
     enableShimmer?: boolean;
     type: SummaryViewType;

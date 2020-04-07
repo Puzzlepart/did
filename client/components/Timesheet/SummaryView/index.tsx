@@ -20,13 +20,13 @@ import * as format from 'string-format';
  *
  * @param {ISummaryViewProps} props Props
 */
-function createColumns({ events, type, view: period, range }: ISummaryViewProps) {
+function createColumns({ events, type, scope, range }: ISummaryViewProps) {
     let columns = [];
     let onRender = (row: any, _index: number, col: IColumn) => <DurationColumn row={row} column={col} />;
     switch (type) {
         case SummaryViewType.UserWeek: {
             columns = Array.from(Array(7).keys()).map(i => {
-                const day = startOfWeek(period.startDateTime).add(i as moment.DurationInputArg1, 'days' as moment.DurationInputArg2);
+                const day = startOfWeek(scope.startDateTime).add(i as moment.DurationInputArg1, 'days' as moment.DurationInputArg2);
                 return col(day.format('L'), day.format('ddd DD'), { maxWidth: 70, minWidth: 70 }, onRender);
             });
         }

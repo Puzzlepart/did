@@ -1,6 +1,6 @@
 import * as moment from 'moment';
 
-export interface ITimesheetView {
+export interface ITimesheetScope {
     startDateTime?: moment.Moment;
     endDateTime?: moment.Moment;
     ignoredKey?: string;

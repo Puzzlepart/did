@@ -1,5 +1,5 @@
-import { ITimesheetData } from "./ITimesheetData";
-import { ITimesheetView } from './ITimesheetView';
+import { ITimesheetPeriod } from "./ITimesheetPeriod";
+import { ITimesheetScope } from './ITimesheetScope';
 
 export type TimesheetView = 'overview' | 'summary' | 'allocation';
 
@@ -17,17 +17,17 @@ export interface ITimesheetState {
     /**
      * View
      */
-    view: ITimesheetView;
+    scope: ITimesheetScope;
 
     /**
-     * Is the week confirmed
+     * Periods
      */
-    isConfirmed?: boolean;
+    periods?: ITimesheetPeriod[];
 
     /**
-     * Data
+     * Selected period
      */
-    data?: ITimesheetData;
+    selectedPeriod?: ITimesheetPeriod;
 
     /**
      * Errors

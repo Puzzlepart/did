@@ -1,6 +1,6 @@
-import { ITimesheetView } from '../../ITimesheetView';
+import { ITimesheetScope } from '../../ITimesheetScope';
 
 export interface IWeekPickerProps {
-    view: ITimesheetView;
-    onChange: (view: ITimesheetView) => void;
+    scope: ITimesheetScope;
+    onChange: (scope: ITimesheetScope) => void;
 }
