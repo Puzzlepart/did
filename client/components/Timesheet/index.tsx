@@ -48,7 +48,6 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     }
 
     public render() {
-        console.log(this.state.selectedPeriod);
         const {
             loading,
             scope,

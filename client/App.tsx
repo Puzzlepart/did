@@ -26,7 +26,7 @@ import { client } from './graphql';
 
     await i18n.init({
         lng: 'en',
-        debug: true,
+        debug: false,
         resources: {
             en: {
                 translation: {
@@ -35,7 +35,12 @@ import { client } from './graphql';
                         summaryHeaderText: 'Summary',
                         allocationHeaderText: 'Allocation',
                         allocationProject: 'Allocation per project',
-                        allocationCustomer: 'Allocation per customer',                        
+                        allocationCustomer: 'Allocation per customer',
+                        confirmHoursText: 'Confirm hours',
+                        unconfirmHoursText: 'Unconfirm hours',
+                        navThisWeekText: 'This week',
+                        navPrevWeekText: 'Go to previous week',
+                        navNextWeekText: 'Go to next week',
                     }
                 }
             }

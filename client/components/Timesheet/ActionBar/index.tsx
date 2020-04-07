@@ -5,6 +5,7 @@ import * as React from 'react';
 import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS';
 import { IActionBarProps } from './IActionBarProps';
 import { WeekPicker } from './WeekPicker';
+import i18n from 'i18next';
 require('moment/locale/en-gb');
 
 export const ActionBar = (props: IActionBarProps) => {
@@ -14,7 +15,7 @@ export const ActionBar = (props: IActionBarProps) => {
             items={[
                 {
                     key: 'THIS_WEEK',
-                    name: 'This week',
+                    name: i18n.t('timesheet.navThisWeekText'),
                     onClick: () => {
                         document.location.hash = '';
                         props.onChangeScope({});
@@ -28,7 +29,7 @@ export const ActionBar = (props: IActionBarProps) => {
                     onClick: () => {
                         props.onChangeScope({ startDateTime: props.scope.startDateTime.subtract(1, 'week') });
                     },
-                    title: 'Go to previous week',
+                    title: i18n.t('timesheet.navPrevWeekText')
                 },
                 {
                     key: 'NEXT_WEEK',
@@ -37,7 +38,7 @@ export const ActionBar = (props: IActionBarProps) => {
                     onClick: () => {
                         props.onChangeScope({ startDateTime: props.scope.startDateTime.add(1, 'week') });
                     },
-                    title: 'Go to next week',
+                    title: i18n.t('timesheet.navNextWeekText'),
                 },
                 {
                     key: 'PICK_WEEK',
@@ -52,25 +53,18 @@ export const ActionBar = (props: IActionBarProps) => {
             farItems={
                 [
                     {
-                        key: 'CONFIRM_WEEK',
-                        name: 'Confirm week',
+                        key: 'CONFIRM_HOURS',
+                        name: i18n.t('timesheet.confirmHoursText'),
                         iconProps: { iconName: 'CheckMark', ...ACTIONBAR_ICON_PROPS },
                         onClick: props.onConfirmWeek,
                         disabled: props.disabled.CONFIRM_WEEK,
                     },
                     {
-                        key: 'UNCONFIRM_WEEK',
-                        name: 'Unconfirm week',
+                        key: 'UNCONFIRM_HOURS',
+                        name: i18n.t('timesheet.unconfirmHoursText'),
                         iconProps: { iconName: 'ErrorBadge', ...ACTIONBAR_ICON_PROPS },
                         onClick: props.onUnconfirmWeek,
                         disabled: props.disabled.UNCONFIRM_WEEK,
-                    },
-                    {
-                        key: 'RELOAD',
-                        name: 'Reload',
-                        iconProps: { iconName: 'Refresh', ...ACTIONBAR_ICON_PROPS },
-                        onClick: props.onReload,
-                        disabled: props.disabled.RELOAD,
                     }
                 ]}
         />
