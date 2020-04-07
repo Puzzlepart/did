@@ -126,6 +126,8 @@ input UserInput  {
 type TimesheetPeriod {
 	id: String!
 	name: String!
+	startDateTime: String!
+	endDateTime: String!
 	events: [Event!]!
 	matchedEvents: [Event!]!
 	confirmedDuration: Float!
