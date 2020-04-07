@@ -3,7 +3,7 @@ const log = require('debug')('middleware/graphql/resolvers/query/users');
 /**
  * Users
  * 
- * @param {*} _obj Unused object
+ * @param {*} _obj The previous object, which for a field on the root Query type is often not used.
  * @param {*} _args Unused args
  * @param {*} context Context
  */

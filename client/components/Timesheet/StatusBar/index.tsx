@@ -1,11 +1,13 @@
 
 import { UserMessage } from 'components/UserMessage';
 import { getDurationDisplay } from 'helpers';
+import resource from 'i18n';
+import { ITimeEntry } from 'interfaces';
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { Shimmer } from 'office-ui-fabric-react/lib/Shimmer';
 import * as React from 'react';
+import * as format from 'string-format';
 import { IStatusBarProps } from './IStatusBarProps';
-import { ITimeEntry } from 'interfaces';
 
 /**
  * Get total duration
@@ -25,51 +27,58 @@ function getMatchedDuration(events: ITimeEntry[]) {
     return events.filter(event => !!event.project).reduce((sum, event) => sum += event.durationMinutes, 0);
 }
 
-export const StatusBar = ({ loading, isConfirmed, events, ignoredEvents, onClearIgnores, errors }: IStatusBarProps) => {
-    let totalDuration = getTotalDuration(events);
-    let matchedDuration = getMatchedDuration(events);
+export const StatusBar = (props: IStatusBarProps) => {
+    let totalDuration = getTotalDuration(props.selectedPeriod.events);
+    let matchedDuration = getMatchedDuration(props.selectedPeriod.events);
 
     return (
         <div className='c-Timesheet-statusbar' style={{ marginTop: 10, marginLeft: -10, marginRight: -10 }}>
-            <Shimmer isDataLoaded={!loading} />
-            <Shimmer isDataLoaded={!loading} />
-            {!loading && (
-                <div className="container">
-                    <div className="row">
-                        <div className="col-sm"
-                            hidden={isConfirmed}>
-                            <UserMessage text={`You have a total of **${getDurationDisplay(totalDuration)}** this week`} iconName='ReminderTime' />
+            <Shimmer isDataLoaded={!props.timesheet.loading} />
+            <Shimmer isDataLoaded={!props.timesheet.loading} />
+            {!props.timesheet.loading && (
+                <div className='container'>
+                    <div className='row'>
+                        <div className='col-sm'
+                            hidden={props.selectedPeriod.isConfirmed}>
+                            <UserMessage text={format(resource('TIMESHEET.PERIOD_HOURS_SUMMARY_TEXT'), getDurationDisplay(totalDuration))} iconName='ReminderTime' />
                         </div>
-                        <div className="col-sm" hidden={totalDuration - matchedDuration === 0 || isConfirmed}>
+                        <div className='col-sm' hidden={totalDuration - matchedDuration === 0 || props.selectedPeriod.isConfirmed}>
                             <UserMessage
-                                text={`You have **${getDurationDisplay(totalDuration - matchedDuration)}** that are not matched.`}
+                                text={format(resource('TIMESHEET.HOURS_NOT_MATCHED_TEXT'), getDurationDisplay(totalDuration - matchedDuration))}
                                 type={MessageBarType.warning}
                                 iconName='BufferTimeBoth' />
                         </div>
-                        <div className="col-sm" hidden={totalDuration - matchedDuration > 0 || isConfirmed}>
+                        <div className='col-sm' hidden={totalDuration - matchedDuration > 0 || props.selectedPeriod.isConfirmed}>
                             <UserMessage
-                                text='All your hours are matched. Are you ready to confirm the week?'
+                                text={resource('TIMESHEET.ALL_HOURS_MATCHED_TEXT')}
                                 type={MessageBarType.success}
                                 iconName='BufferTimeBoth' />
                         </div>
-                        <div className="col-sm" hidden={!isConfirmed}>
+                        <div className='col-sm' hidden={!props.selectedPeriod.isConfirmed}>
                             <UserMessage
-                                text={`The week is confirmed with ${getDurationDisplay(matchedDuration)}. Click **Unconfirm week** if you want to do some adjustments.`}
+                                text={format(resource('TIMESHEET.PERIOD_CONFIRMED_TEXT'), getDurationDisplay(matchedDuration))}
                                 type={MessageBarType.success}
                                 iconName='CheckMark' />
                         </div>
-                        <div className="col-sm" hidden={ignoredEvents.length === 0 || isConfirmed}>
+                        <div className='col-sm' hidden={props.ignoredEvents.length === 0 || props.selectedPeriod.isConfirmed}>
                             <UserMessage
                                 type={MessageBarType.info}
                                 iconName='DependencyRemove'>
-                                <p>You have {ignoredEvents.length} ignored event(s). <a href="#" onClick={onClearIgnores}>Click to undo</a></p>
+                                <p>{format(resource('TIMESHEET.IGNORED_EVENTS_TEXT'), props.ignoredEvents.length)} <a href='#' onClick={props.onClearIgnores}>{resource('TIMESHEET.UNDO_IGNORE_LINK_TEXT')}</a></p>
                             </UserMessage>
                         </div>
-                        <div className="col-sm" hidden={errors.length === 0}>
+                        <div className='col-sm' hidden={props.selectedPeriod.errors.length === 0}>
                             <UserMessage
                                 type={MessageBarType.severeWarning}
                                 iconName='ErrorBadge'>
-                                <p>You have {errors.length} unresolved errors. You need to resolve them before confirming the week.</p>
+                                <p>{format(resource('TIMESHEET.UNRESOLVER_ERRORS_TEXT'), props.selectedPeriod.errors.length)}</p>
+                            </UserMessage>
+                        </div>
+                        <div className='col-sm' hidden={props.timesheet.periods.length < 2}>
+                            <UserMessage
+                                type={MessageBarType.info}
+                                iconName='SplitObject'>
+                                <p>{resource('TIMESHEET.SPLIT_WEEK_TEXT')}</p>
                             </UserMessage>
                         </div>
                     </div>

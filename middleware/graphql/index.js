@@ -13,7 +13,7 @@ const schema = makeExecutableSchema({
   },
 });
 
-module.exports = graphql((req) => ({
+module.exports = graphql(req => ({
   schema: schema,
   rootValue: global,
   graphiql: process.env.GRAPHIQL_ENABLED == '1',
@@ -24,6 +24,6 @@ module.exports = graphql((req) => ({
       storage: new StorageService(req.user.profile._json.tid),
     },
     user: req.user,
-    tid: req.user.profile._json.tid,
+    tenantId: req.user.profile._json.tid,
   }
 }));

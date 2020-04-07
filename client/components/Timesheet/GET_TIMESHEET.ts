@@ -4,6 +4,10 @@ import gql from 'graphql-tag';
 export default gql`
 query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!) {
   timesheet(startDateTime: $startDateTime, endDateTime: $endDateTime, dateFormat: $dateFormat) {
+    id
+    name
+    startDateTime
+    endDateTime
     events {
       key
       id
@@ -35,6 +39,7 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!) {
           id       
           key
           name
+          inactive
         }
       }
       customer {

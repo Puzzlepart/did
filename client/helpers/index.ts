@@ -86,7 +86,8 @@ export function formatDate(date: string, dateFormat: string): string {
  * @param {string | Date | moment.Moment} date Date string
  */
 export function startOfWeek(date?: string | Date | moment.Moment): moment.Moment {
-    return moment(date).startOf('isoWeek');
+    const m = moment.utc(date);
+    return m.add(-m.toDate().getTimezoneOffset(), 'minutes').startOf('isoWeek');
 }
 
 /**
@@ -95,7 +96,8 @@ export function startOfWeek(date?: string | Date | moment.Moment): moment.Moment
  * @param {string | Date} date Date string
  */
 export function endOfWeek(date?: string | Date): moment.Moment {
-    return moment(date).endOf('isoWeek');
+    const m = moment.utc(date);
+    return m.add(-m.toDate().getTimezoneOffset(), 'minutes').endOf('isoWeek');
 }
 
 /**
@@ -131,21 +133,21 @@ export function getMonthName(monthNumber: number): string {
 }
 
 /**
- * Get url hash
+ * Parse URL hash
  */
-export function getUrlHash(): Object {
+export function parseUrlHash<T>(): T {
     var hash = window.location.hash.substr(1);
     return hash.split('&').reduce(function (result, item) {
         var parts = item.split('=');
         result[parts[0]] = parts[1];
         return result;
-    }, {});
+    }, {}) as T;
 }
 
 /**
  * Sort alphabetically
  * 
- * @param {string[]} strArray String array
+ * @param {string[]} strArray Array of strings to sort
  */
 export function sortAlphabetically(strArray: string[]) {
     return strArray.sort((a, b) => {
