@@ -1,20 +1,15 @@
-import { ITimeEntry } from 'interfaces';
+import { ITimesheetState, ITimesheetPeriod } from '../types';
 
 export interface IStatusBarProps {
     /**
-     * Is the parent currently loading
+     * State of the Timesheet component
      */
-    loading: boolean;
+    timesheet: ITimesheetState;
 
     /**
-     * Is the period confirmed
+     * Selected period 
      */
-    isConfirmed: boolean;
-
-    /**
-     * Events
-     */
-    events: ITimeEntry[];
+    selectedPeriod?: ITimesheetPeriod;
 
     /**
      * Ignored events
@@ -25,9 +20,4 @@ export interface IStatusBarProps {
      * On clear ignores handler
      */
     onClearIgnores: () => void;
-
-    /**
-     * Errors
-     */
-    errors?: Error[];
 }

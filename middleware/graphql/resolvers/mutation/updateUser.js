@@ -4,14 +4,14 @@ const _ = require('underscore');
 /**
  * Update week
  * 
- * @param {*} _obj Unused object
- * @param {*} args Args
+ * @param {*} _obj The previous object, which for a field on the root Query type is often not used.
+ * @param {*} variables Variables sent by the client
  * @param {*} context Context
  */
-async function updateUser(_obj, args, context) {
-    log('Updating user: %s', JSON.stringify(args.user));
+async function updateUser(_obj, variables, context) {
+    log('Updating user: %s', JSON.stringify(variables.user));
     try {
-        await context.services.storage.updateUser(args.user);
+        await context.services.storage.updateUser(variables.user);
         return { success: true, error: null };
     } catch (error) {
         return { success: false, error: _.omit(error, 'requestId') };

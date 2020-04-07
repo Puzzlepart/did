@@ -14,19 +14,19 @@ export interface IEventListProps {
     isLocked?: boolean;
 
     /**
-     * Callback for when a project is selected for an event
+     * Callback for when a project is manually matched for an event
      */
-    onProjectSelected?: (event: ITimeEntry, project: IProject) => void;
+    onManualMatch?: (event: ITimeEntry, project: IProject) => void;
 
     /**
-     * Callback for when the project for an event is cleared
+     * Callback for when the project for an event is unmatched
      */
-    onProjectClear?: (event: ITimeEntry) => void;
+    onClearManualMatch?: (event: ITimeEntry) => void;
 
     /**
      * Callback for when the project for an event is ignored
      */
-    onProjectIgnore?: (event: ITimeEntry) => void;
+    onIgnoreEvent?: (event: ITimeEntry) => void;
 
     /**
      * Enable shimmer
@@ -47,6 +47,11 @@ export interface IEventListProps {
      * Groups to render
      */
     groups?: IListGroups;
+
+    /**
+     * Show empty days
+     */
+    showEmptyDays?: boolean;
 
     /**
      * Column widths

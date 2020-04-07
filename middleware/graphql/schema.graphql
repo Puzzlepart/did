@@ -123,11 +123,13 @@ input UserInput  {
 	role: String!
 }
 
-type EventData {
+type TimesheetPeriod {
+	id: String!
+	name: String!
+	startDateTime: String!
+	endDateTime: String!
 	events: [Event!]!
 	matchedEvents: [Event!]!
-	totalDuration: Float!
-	matchedDuration: Float!
 	confirmedDuration: Float!
 }
 
@@ -139,7 +141,7 @@ type ConfirmedTimeEntries {
 type Query {
 	customers: [Customer!]!
 	projects(customerKey: String, sortBy: String): [Project!]!
-	timesheet(startDateTime: String!, endDateTime: String!, dateFormat: String!): EventData!
+	timesheet(startDateTime: String!, endDateTime: String!, dateFormat: String!): [TimesheetPeriod]!
 	confirmedTimeEntries(projectId: String, resourceId: String, weekNumber: Int, yearNumber: Int, currentUser: Boolean, 	dateFormat: String): ConfirmedTimeEntries
 	weeks: [Week!]!
 	users: [User!]!
@@ -152,7 +154,7 @@ type Mutation {
 	createProject(customerKey: String!, projectKey: String!, name: String!, description: String!, icon: String!): BaseResult
 	createCustomer(key: String!, name: String!, description: String!, icon: String!): BaseResult
 	deleteCustomer(key: String!): BaseResult
-	confirmPeriod(entries: [TimeEntryInput!], startDateTime: String!,  endDateTime: String!): BaseResult!
+	confirmPeriod(entries: [TimeEntryInput!], startDateTime: String!, endDateTime: String!): BaseResult!
 	unconfirmPeriod(startDateTime: String!, endDateTime: String!): BaseResult!
 	updateWeek(weekNumber: Int!, closed: Boolean!): Boolean!
 	updateUser(user: UserInput!): BaseResult!

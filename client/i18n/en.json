@@ -1,0 +1,22 @@
+{
+  "TIMESHEET": {
+    "OVERVIEW_HEADER_TEXT": "Overview",
+    "SUMMARY_HEADER_TEXT": "Summary",
+    "ALLOCATION_HEADER_TEXT": "Allocation",
+    "ALLOCATION_PROJECT_CHART_TITLE": "Allocation per project",
+    "ALLOCATION_CUSTOMER_CHART_TITLE": "Allocation per customer",
+    "CONFIRM_HOURS_TEXT": "Confirm hours",
+    "UNCONFIRM_HOURS_TEXT": "Unconfirm hours",
+    "COMMANDBAR_CURRENT_WEEK_TEXT": "Go to current week",
+    "COMMANDBAR_PREV_WEEK_TEXT": "Go to previous week",
+    "COMMANDBAR_NEXT_WEEK_TEXT": "Go to next week",
+    "PERIOD_HOURS_SUMMARY_TEXT": "You have a total of **{0}** this period",
+    "HOURS_NOT_MATCHED_TEXT": "You have **{0}** that are not matched.",
+    "ALL_HOURS_MATCHED_TEXT": "All your hours are matched. Are you ready to confirm the period?",
+    "PERIOD_CONFIRMED_TEXT": "The period is confirmed with {0}. Click **Unconfirm hours** if you want to do some adjustments.",
+    "IGNORED_EVENTS_TEXT": "You have {0} ignored event(s).",
+    "UNDO_IGNORE_LINK_TEXT": "Click to undo",
+    "UNRESOLVER_ERRORS_TEXT": "You have {0} unresolved errors. You need to resolve them before confirming the hours.",
+    "SPLIT_WEEK_TEXT": "Selected week spans two months. Navigate between the first and second period using the command bar above."
+  }
+}

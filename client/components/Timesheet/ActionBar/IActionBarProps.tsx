@@ -1,40 +1,34 @@
-import { ITypedHash } from '@pnp/common';
-import { ITimesheetPeriod } from '../ITimesheetPeriod';
-import { TimesheetView } from '../ITimesheetState';
+import { ITimesheetScope, ITimesheetState, ITimesheetPeriod } from "../types";
 
 export interface IActionBarProps {
-    /**
-     * Period
-     */
-    period: ITimesheetPeriod;
 
     /**
-     * The selected view
+     * State of the Timesheet component
      */
-    selectedView?: TimesheetView;
+    timesheet: ITimesheetState;
+
+    /**
+     * Selected period 
+     */
+    selectedPeriod?: ITimesheetPeriod;
+
+    /**
+     * On change scope callback (passing empty object defaults to current week)
+     */
+    onChangeScope: (scope: ITimesheetScope) => void;
 
     /**
      * On change period callback
      */
-    onChangePeriod: (period: ITimesheetPeriod) => void;
+    onChangePeriod: (period:ITimesheetPeriod) => void;
 
     /**
-     * On confirm week callback
+     * On confirm period callback
      */
-    onConfirmWeek: () => void;
+    onConfirmPeriod: () => void;
 
     /**
-     * On unconfirm week callback
+     * On unconfirm period callback
      */
-    onUnconfirmWeek: () => void;
-
-    /**
-     * On reload callback
-     */
-    onReload: () => void;
-
-    /**
-     * Disabled actions
-     */
-    disabled: ITypedHash<boolean>;
+    onUnconfirmPeriod: () => void;
 }

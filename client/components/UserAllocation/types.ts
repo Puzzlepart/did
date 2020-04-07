@@ -1,5 +1,5 @@
 import { ITypedHash } from '@pnp/common';
-import { ITimeEntry } from './GET_USER_DATA';
+import { IProject, ICustomer } from 'interfaces';
 
 export interface IUserAllocationChart {
     column: string;
@@ -13,4 +13,11 @@ export interface IUserAllocationProps {
     weekNumber?: number;
     yearNumber?: number;
     charts: ITypedHash<string>;
+}
+
+
+export interface ITimeEntry {
+  durationHours: number;
+  project: IProject;
+  customer: ICustomer;
 }

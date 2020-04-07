@@ -41,17 +41,9 @@ export const EventList = (props: IEventListProps) => {
                 <ProjectColumn
                     event={event}
                     isConfirmed={props.isLocked}
-                    onProjectSelected={project => props.onProjectSelected(event, project)}
-                    onProjectClear={evt => {
-                        evt.stopPropagation();
-                        evt.preventDefault();
-                        props.onProjectClear(event);
-                    }}
-                    onProjectIgnore={evt => {
-                        evt.stopPropagation();
-                        evt.preventDefault();
-                        props.onProjectIgnore(event);
-                    }} />
+                    onManualMatch={project => props.onManualMatch(event, project)}
+                    onClearManualMatch={_evt => props.onClearManualMatch(event)}
+                    onIgnoreEvent={_evt => props.onIgnoreEvent(event)} />
             )),
     ].filter(col => (props.hideColumns || []).indexOf(col.key) === -1);
 
@@ -62,7 +54,7 @@ export const EventList = (props: IEventListProps) => {
                 columns={columns}
                 items={props.events}
                 groups={props.groups}
-                groupProps={{ showEmptyGroups: true }} />
+                groupProps={{ showEmptyGroups: props.showEmptyDays }} />
         </div>
     );
 }

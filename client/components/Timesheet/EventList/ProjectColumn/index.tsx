@@ -11,15 +11,14 @@ import { ResolveProjectModal } from './ResolveProjectModal';
 
 /**
  * @component ProjectColumn
- * @description 
  */
-export const ProjectColumn = ({ event, isConfirmed, onProjectSelected, onProjectClear, onProjectIgnore }: IProjectColumnProps) => {
+export const ProjectColumn = (props: IProjectColumnProps) => {
     let toggleId = getId('toggle-callout');
     const [modal, setModal] = useState<boolean>(false);
 
-    if (!event.project) {
-        if (isConfirmed) return null;
-        if (event.error) {
+    if (!props.event.project) {
+        if (props.isConfirmed) return null;
+        if (props.event.error) {
             return (
                 <div className='c-Timesheet-projectColumn'>
                     <UserMessage
@@ -27,7 +26,7 @@ export const ProjectColumn = ({ event, isConfirmed, onProjectSelected, onProject
                         isMultiline={false}
                         type={MessageBarType.severeWarning}
                         iconName='Warning'
-                        text={`**NOTE:** ${event.error.message}`} />
+                        text={`**NOTE:** ${props.event.error.message}`} />
                 </div>
             );
         }
@@ -42,16 +41,16 @@ export const ProjectColumn = ({ event, isConfirmed, onProjectSelected, onProject
                     actions={
                         <div>
                             <MessageBarButton onClick={_ => setModal(true)} id={toggleId}>Resolve</MessageBarButton>
-                            <MessageBarButton onClick={onProjectIgnore}>Ignore</MessageBarButton>
+                            <MessageBarButton onClick={props.onIgnoreEvent}>Ignore</MessageBarButton>
                         </div>
                     } />
                 <ResolveProjectModal
-                    event={event}
+                    event={props.event}
                     onDismiss={() => setModal(false)}
                     isOpen={modal}
                     onProjectSelected={project => {
                         setModal(false);
-                        onProjectSelected(project);
+                        props.onManualMatch(project);
                     }} />
             </div>
         );
@@ -60,13 +59,13 @@ export const ProjectColumn = ({ event, isConfirmed, onProjectSelected, onProject
     return (
         <div className='c-Timesheet-projectColumn'>
             <div className='c-Timesheet-projectColumn-content'>
-                <div><a href={`/projects#${event.project.id}`}>{event.project.name}</a></div>
+                <div><a href={`/projects#${props.event.project.id}`}>{props.event.project.name}</a></div>
                 <div style={{ fontSize: '7pt' }}>
-                    for <a style={{ fontSize: '7pt' }} href={`/customers#${event.customer.id}`}>{event.customer.name}</a>
+                    for <a style={{ fontSize: '7pt' }} href={`/customers#${props.event.customer.id}`}>{props.event.customer.name}</a>
                 </div>
             </div>
-            <div className='c-Timesheet-projectColumn-clear' title='Clear' hidden={!event.isManualMatch}>
-                <span onClick={onProjectClear} style={{ cursor: 'pointer' }}><Icon iconName='Cancel' styles={{ root: { fontSize: 14 } }} /></span>
+            <div className='c-Timesheet-projectColumn-clear' title='Clear' hidden={!props.event.isManualMatch}>
+                <span onClick={props.onClearManualMatch} style={{ cursor: 'pointer' }}><Icon iconName='Cancel' styles={{ root: { fontSize: 14 } }} /></span>
             </div>
         </div>
     );

@@ -6,15 +6,19 @@ const _ = require('underscore');
 /**
  * Unconfirm period
  * 
- * @param {*} _obj Unused object
- * @param {*} args Arguments
+ * @param {*} _obj The previous object, which for a field on the root Query type is often not used.
+ * @param {*} variables Variables sent by the client
  * @param {*} context Context
  */
-async function unconfirmPeriod(_obj, { startDateTime, endDateTime }, context) {
+async function unconfirmPeriod(_obj, variables, context) {
     try {
-        const entries = await context.services.storage.getConfirmedTimeEntries({ resourceId: context.user.profile.oid, startDateTime, endDateTime }, { noParse: true });
+        const entries = await context.services.storage.getConfirmedTimeEntries({
+            resourceId: context.user.profile.oid,
+            startDateTime: variables.startDateTime,
+            endDateTime: variables.endDateTime,
+        }, { noParse: true });
         if (entries.length == 0) return { success: false, error: 'No confirmed time entries to unconfirm for the specified period' };
-        log('Unconfirming period %s to %s with %s confirmed time entries', startDateTime, endDateTime, entries.length);
+        log('Unconfirming period %s to %s with %s confirmed time entries', variables.startDateTime, variables.endDateTime, entries.length);
         const batch = entries.reduce((b, entity) => {
             b.deleteEntity(entity);
             return b;

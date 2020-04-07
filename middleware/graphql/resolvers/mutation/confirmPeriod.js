@@ -1,6 +1,6 @@
 const { TableBatch } = require('azure-storage');
 const { executeBatch, entGen } = require('../../../../utils/table');
-const { getDurationHours, getDurationMinutes, getWeek, getMonth, getYear } = require('../../../../utils');
+const { getDurationHours, getDurationMinutes, getWeek, getMonthIndex, getYear } = require('../../../../utils');
 const uuid = require('uuid/v1');
 const log = require('debug')('middleware/graphql/resolvers/mutation/confirmPeriod');
 const _ = require('underscore');
@@ -8,21 +8,26 @@ const _ = require('underscore');
 /**
  * Confirm period
  * 
- * @param {*} _obj Unused object
- * @param {*} args Arguments (startDateTime, endDateTime, entries)
+ * @param {*} _obj The previous object, which for a field on the root Query type is often not used.
+ * @param {*} variables Variables sent by the client
  * @param {*} context Context
  */
-async function confirmPeriod(_obj, { startDateTime, endDateTime, entries }, context) {
-    if (!entries || entries.length === 0) return { success: false, error: 'No entries to confirm for the specified period.' };
+async function confirmPeriod(_obj, variables, context) {
+    if (!variables.entries || variables.entries.length === 0) {
+        return {
+            success: false,
+            error: 'No entries to confirm for the specified period.',
+        };
+    }
     try {
-        log('Confirming period %s to %s', startDateTime, endDateTime);
-        const calendarView = await context.services.graph.getEvents(startDateTime, endDateTime, 24);
-        let batch = entries.reduce((b, entry) => {
+        log('Confirming period %s to %s', variables.startDateTime, variables.endDateTime);
+        const calendarView = await context.services.graph.getEvents(variables.startDateTime, variables.endDateTime);
+        let batch = variables.entries.reduce((b, entry) => {
             const event = calendarView.filter(e => e.id === entry.id)[0];
             if (!event) return;
             log('Confirming entry with id %s', entry.id);
             b.insertEntity({
-                PartitionKey: entGen.String(context.tid),
+                PartitionKey: entGen.String(context.tenantId),
                 RowKey: entGen.String(uuid()),
                 EventId: entGen.String(entry.id),
                 Title: entGen.String(event.title),
@@ -34,7 +39,7 @@ async function confirmPeriod(_obj, { startDateTime, endDateTime, entries }, cont
                 ProjectId: entGen.String(entry.projectId),
                 WebLink: entGen.String(event.webLink),
                 WeekNumber: entGen.Int32(getWeek(event.startTime)),
-                MonthNumber: entGen.Int32(getMonth(event.startTime)),
+                MonthNumber: entGen.Int32(getMonthIndex(event.startTime)),
                 YearNumber: entGen.Int32(getYear(event.startTime)),
                 ResourceId: entGen.String(context.user.profile.oid),
                 ResourceEmail: entGen.String(context.user.profile.email),
@@ -46,6 +51,7 @@ async function confirmPeriod(_obj, { startDateTime, endDateTime, entries }, cont
         await executeBatch('ConfirmedTimeEntries', batch)
         return { success: true, error: null };
     } catch (error) {
+        console.log(error);
         return { success: false, error: _.omit(error, 'requestId') };
     }
 };
