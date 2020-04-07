@@ -128,8 +128,6 @@ type TimesheetPeriod {
 	name: String!
 	events: [Event!]!
 	matchedEvents: [Event!]!
-	totalDuration: Float!
-	matchedDuration: Float!
 	confirmedDuration: Float!
 }
 

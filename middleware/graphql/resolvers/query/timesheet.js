@@ -165,16 +165,13 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat }, conte
             }));
             period.matchedEvents = period.events;
             period.confirmedDuration = events.reduce((sum, evt) => sum + evt.durationMinutes, 0);
-            period.matchedDuration = confirmedDuration;
         } else {
             log('Found no confirmed events from %s to %s, retrieving entries from Microsoft Graph', startDateTime, endDateTime);
             period.events = await context.services.graph.getEvents(startDateTime, endDateTime, 24);
             period.events = period.events.map(evt => matchEvent(evt, projects, customers));
             period.matchedEvents = period.events.filter(evt => (evt.project && evt.project.id));
-            period.matchedDuration = period.matchedEvents.reduce((sum, evt) => sum + evt.durationMinutes, 0);
         }
         period.events.map(evt => ({ ...evt, date: formatDate(evt.startTime, dateFormat) }));
-        period.totalDuration = period.events.reduce((sum, evt) => sum + evt.durationMinutes, 0);
     }
     return periods;
 };
