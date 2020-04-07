@@ -7,18 +7,19 @@ import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import * as React from 'react';
 import * as format from 'string-format';
-import { client as graphql,FetchPolicy } from '../../graphql';
+import { client as graphql, FetchPolicy } from '../../graphql';
 import { ActionBar } from './ActionBar';
 import CONFIRM_PERIOD from './CONFIRM_PERIOD';
 import { EventList } from './EventList';
 import GET_TIMESHEET from './GET_TIMESHEET';
-import { ITimesheetData } from "./ITimesheetData";
-import { ITimesheetPeriod } from "./ITimesheetPeriod";
+import { ITimesheetData } from './ITimesheetData';
+import { ITimesheetPeriod } from './ITimesheetPeriod';
 import { ITimesheetProps } from './ITimesheetProps';
 import { ITimesheetState, TimesheetView } from './ITimesheetState';
 import { StatusBar } from './StatusBar';
 import { SummaryView, SummaryViewType } from './SummaryView';
 import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD';
+import i18n from 'i18next';
 
 /**
  * @component Timesheet
@@ -67,7 +68,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                                 RELOAD: loading || isConfirmed,
                             }} />
                         <Pivot defaultSelectedKey={this.state.selectedView} onLinkClick={item => this.setState({ selectedView: item.props.itemKey as TimesheetView })}>
-                            <PivotItem itemKey='overview' headerText='Overview' itemIcon='CalendarWeek'>
+                            <PivotItem itemKey='overview' headerText={i18n.t('timesheet.overviewHeaderText')} itemIcon='CalendarWeek'>
                                 <div className='c-Timesheet-overview'>
                                     <StatusBar
                                         isConfirmed={isConfirmed}
@@ -95,16 +96,16 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                                         }} />
                                 </div>
                             </PivotItem>
-                            <PivotItem itemKey='summary' headerText='Summary' itemIcon='List'>
+                            <PivotItem itemKey='summary' headerText={i18n.t('timesheet.summaryHeaderText')} itemIcon='List'>
                                 <SummaryView
                                     events={value(data, 'events', [])}
                                     enableShimmer={loading}
                                     period={period}
                                     type={SummaryViewType.UserWeek} />
                             </PivotItem>
-                            <PivotItem itemKey='allocation' headerText='Allocation' itemIcon='ReportDocument'>
+                            <PivotItem itemKey='allocation' headerText={i18n.t('timesheet.allocationHeaderText')} itemIcon='ReportDocument'>
                                 <div className='c-Timesheet-allocation'>
-                                    <UserAllocation entries={value(data, 'events', [])} charts={{ 'project.name': 'Allocation per project', 'customer.name': 'Allocation per customer' }} />
+                                    <UserAllocation entries={value(data, 'events', [])} charts={{ 'project.name': i18n.t('timesheet.allocationProject'), 'customer.name': i18n.t('timesheet.allocationCustomer') }} />
                                 </div>
                             </PivotItem>
                         </Pivot>
