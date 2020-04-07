@@ -1,6 +1,6 @@
-import { ITimesheetPeriod } from '../../ITimesheetPeriod';
+import { ITimesheetView } from '../../ITimesheetView';
 
 export interface IWeekPickerProps {
-    period: ITimesheetPeriod;
-    onChange: (period: ITimesheetPeriod) => void;
+    view: ITimesheetView;
+    onChange: (view: ITimesheetView) => void;
 }

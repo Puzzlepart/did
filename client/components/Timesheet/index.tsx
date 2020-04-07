@@ -13,7 +13,7 @@ import CONFIRM_PERIOD from './CONFIRM_PERIOD';
 import { EventList } from './EventList';
 import GET_TIMESHEET from './GET_TIMESHEET';
 import { ITimesheetData } from './ITimesheetData';
-import { ITimesheetPeriod } from './ITimesheetPeriod';
+import { ITimesheetView } from './ITimesheetView';
 import { ITimesheetProps } from './ITimesheetProps';
 import { ITimesheetState, TimesheetView } from './ITimesheetState';
 import { StatusBar } from './StatusBar';
@@ -33,7 +33,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
 
     constructor(props: ITimesheetProps) {
         super(props);
-        this.state = { period: this._getPeriod(), selectedView: 'overview', errors: [] };
+        this.state = { view: this._getPeriod(), selectedView: 'overview', errors: [] };
         this._store = new PnPClientStorage().local;
     }
 
@@ -44,7 +44,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     public render() {
         const {
             loading,
-            period,
+            view,
             selectedView,
             isConfirmed,
             data,
@@ -56,7 +56,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                 <div className='c-Timesheet-section-container'>
                     <div className='c-Timesheet-section-content'>
                         <ActionBar
-                            period={period}
+                            view={view}
                             selectedView={selectedView}
                             onChangePeriod={this._onChangePeriod.bind(this)}
                             onConfirmWeek={this._confirmPeriod.bind(this)}
@@ -88,7 +88,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                                         isLocked={isConfirmed}
                                         groups={{
                                             fieldName: 'date',
-                                            groupNames: getWeekdays(period.startDateTime, this.props.groupHeaderDateFormat),
+                                            groupNames: getWeekdays(view.startDateTime, this.props.groupHeaderDateFormat),
                                             totalFunc: (items: ITimeEntry[]) => {
                                                 let totalMins = items.reduce((sum, i) => sum += i.durationMinutes, 0);
                                                 return ` (${getDurationDisplay(totalMins)})`;
@@ -100,7 +100,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                                 <SummaryView
                                     events={value(data, 'events', [])}
                                     enableShimmer={loading}
-                                    period={period}
+                                    view={view}
                                     type={SummaryViewType.UserWeek} />
                             </PivotItem>
                             <PivotItem itemKey='allocation' headerText={i18n.t('timesheet.allocationHeaderText')} itemIcon='ReportDocument'>
@@ -116,30 +116,30 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     }
 
     /**
-     * Get period
+     * Get view
      * 
-     * @param {ITimesheetPeriod} period Period
+     * @param {ITimesheetView} view View
      */
-    private _getPeriod(period: ITimesheetPeriod = {}): ITimesheetPeriod {
-        if (!period.startDateTime) period.startDateTime = startOfWeek(getUrlHash()['week']);
-        if (!period.endDateTime) period.endDateTime = endOfWeek(period.startDateTime || getUrlHash()['week']);
+    private _getPeriod(view: ITimesheetView = {}): ITimesheetView {
+        if (!view.startDateTime) view.startDateTime = startOfWeek(getUrlHash()['week']);
+        if (!view.endDateTime) view.endDateTime = endOfWeek(view.startDateTime || getUrlHash()['week']);
         return {
-            ...period,
-            ignoredKey: format(this._ignoredKey, period.startDateTime.unix(), period.endDateTime.unix()),
-            resolvedKey: format(this._resolvedKey, period.startDateTime.unix(), period.endDateTime.unix()),
+            ...view,
+            ignoredKey: format(this._ignoredKey, view.startDateTime.unix(), view.endDateTime.unix()),
+            resolvedKey: format(this._resolvedKey, view.startDateTime.unix(), view.endDateTime.unix()),
         };
     }
 
     /**
-    * On change week
+    * On change view
     *
-    * @param {ITimesheetPeriod} period Period
+    * @param {ITimesheetPeriod} view Period
     */
-    private _onChangePeriod(period: ITimesheetPeriod) {
-        if (JSON.stringify(period) === JSON.stringify(this.state.period)) return;
-        period = this._getPeriod(period);
-        document.location.hash = `week=${period.startDateTime.toISOString()}`;
-        this.setState({ period }, () => this._getEventData(false));
+    private _onChangePeriod(view: ITimesheetView) {
+        if (JSON.stringify(view) === JSON.stringify(this.state.view)) return;
+        view = this._getPeriod(view);
+        document.location.hash = `week=${view.startDateTime.toISOString()}`;
+        this.setState({ view: view }, () => this._getEventData(false));
     };
     /**
      * Confirm period
@@ -152,8 +152,8 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
         await graphql.mutate({
             mutation: CONFIRM_PERIOD,
             variables: {
-                startDateTime: this.state.period.startDateTime,
-                endDateTime: this.state.period.endDateTime,
+                startDateTime: this.state.view.startDateTime,
+                endDateTime: this.state.view.endDateTime,
                 entries,
             },
         });
@@ -168,7 +168,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
         this.setState({ loading: true });
         await graphql.mutate({
             mutation: UNCONFIRM_PERIOD,
-            variables: this.state.period,
+            variables: this.state.view,
         });
         await this._getEventData();
 
@@ -225,7 +225,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     * @param {string} eventId Event id
     */
     private _getStoredResolves(eventId?: string): TypedHash<IProject> {
-        let storedResolves = this._store.get(this.state.period.resolvedKey);
+        let storedResolves = this._store.get(this.state.view.resolvedKey);
         if (!storedResolves) return {};
         if (eventId && storedResolves[eventId]) return storedResolves[eventId];
         return storedResolves;
@@ -240,7 +240,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     private _storeResolve(eventId: string, project: IProject) {
         let resolves = this._getStoredResolves();
         resolves[eventId] = project;
-        this._store.put(this.state.period.resolvedKey, resolves, dateAdd(new Date(), 'month', 1));
+        this._store.put(this.state.view.resolvedKey, resolves, dateAdd(new Date(), 'month', 1));
     }
 
     /**
@@ -254,7 +254,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
             resolves = this._getStoredResolves();
             delete resolves[eventId];
         }
-        this._store.put(this.state.period.resolvedKey, resolves, dateAdd(new Date(), 'month', 1));
+        this._store.put(this.state.view.resolvedKey, resolves, dateAdd(new Date(), 'month', 1));
     }
 
     /**
@@ -265,14 +265,14 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     private _storeIgnore(eventId: string) {
         let ignores = this._getStoredIgnores();
         ignores.push(eventId);
-        this._store.put(this.state.period.ignoredKey, ignores, dateAdd(new Date(), 'month', 1));
+        this._store.put(this.state.view.ignoredKey, ignores, dateAdd(new Date(), 'month', 1));
     }
 
     /**
      * Get stored ignores from local storage
     */
     private _getStoredIgnores(): string[] {
-        let storedIgnores = this._store.get(this.state.period.ignoredKey);
+        let storedIgnores = this._store.get(this.state.view.ignoredKey);
         if (!storedIgnores) return [];
         return storedIgnores;
     }
@@ -296,7 +296,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
      * Clear ignores
      */
     private _clearIgnores() {
-        this._store.put(this.state.period.ignoredKey, [], dateAdd(new Date(), 'month', 1));
+        this._store.put(this.state.view.ignoredKey, [], dateAdd(new Date(), 'month', 1));
         this._getEventData(false, 'cache-only');
     }
 
@@ -309,8 +309,8 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     private async _getEventData(skipLoading: boolean = true, fetchPolicy: FetchPolicy = 'network-only') {
         if (!skipLoading) this.setState({ loading: true });
         const variables = {
-            startDateTime: this.state.period.startDateTime.toISOString(),
-            endDateTime: this.state.period.endDateTime.toISOString(),
+            startDateTime: this.state.view.startDateTime.toISOString(),
+            endDateTime: this.state.view.endDateTime.toISOString(),
             dateFormat: this.props.groupHeaderDateFormat,
         };
         const { data: { timesheet } } = await graphql.query({

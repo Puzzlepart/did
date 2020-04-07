@@ -9,7 +9,7 @@ import { ACTIONBAR_ICON_PROPS } from '../ACTIONBAR_ICON_PROPS';
 import { CALENDAR_STRINGS } from './CALENDAR_STRINGS';
 import { IWeekPickerProps } from './IWeekPickerProps';
 
-export const WeekPicker = ({ period, onChange }: IWeekPickerProps) => {
+export const WeekPicker = ({ view: period, onChange }: IWeekPickerProps) => {
     let [calendar, setCalendar] = useState(null);
 
     return (

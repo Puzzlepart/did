@@ -1,12 +1,12 @@
 import { TypedHash } from '@pnp/common';
-import { ITimesheetPeriod } from '../ITimesheetPeriod';
+import { ITimesheetView } from '../ITimesheetView';
 import { TimesheetView } from '../ITimesheetState';
 
 export interface IActionBarProps {
     /**
-     * Period
+     * View
      */
-    period: ITimesheetPeriod;
+    view: ITimesheetView;
 
     /**
      * The selected view
@@ -14,9 +14,9 @@ export interface IActionBarProps {
     selectedView?: TimesheetView;
 
     /**
-     * On change period callback
+     * On change view callback
      */
-    onChangePeriod: (period: ITimesheetPeriod) => void;
+    onChangePeriod: (view: ITimesheetView) => void;
 
     /**
      * On confirm week callback

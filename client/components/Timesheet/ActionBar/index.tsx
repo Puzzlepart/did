@@ -19,14 +19,14 @@ export const ActionBar = (props: IActionBarProps) => {
                         document.location.hash = '';
                         props.onChangePeriod({});
                     },
-                    disabled: props.period.startDateTime.week() === moment().week(),
+                    disabled: props.view.startDateTime.week() === moment().week(),
                 },
                 {
                     key: 'PREV_WEEK',
                     iconOnly: true,
                     iconProps: { iconName: 'Back', ...ACTIONBAR_ICON_PROPS },
                     onClick: () => {
-                        props.onChangePeriod({ startDateTime: props.period.startDateTime.subtract(1, 'week') });
+                        props.onChangePeriod({ startDateTime: props.view.startDateTime.subtract(1, 'week') });
                     },
                     title: 'Go to previous week',
                 },
@@ -35,18 +35,18 @@ export const ActionBar = (props: IActionBarProps) => {
                     iconOnly: true,
                     iconProps: { iconName: 'Forward', ...ACTIONBAR_ICON_PROPS },
                     onClick: () => {
-                        props.onChangePeriod({ startDateTime: props.period.startDateTime.add(1, 'week') });
+                        props.onChangePeriod({ startDateTime: props.view.startDateTime.add(1, 'week') });
                     },
                     title: 'Go to next week',
                 },
                 {
                     key: 'PICK_WEEK',
-                    onRender: () => <WeekPicker period={props.period} onChange={props.onChangePeriod} />,
+                    onRender: () => <WeekPicker view={props.view} onChange={props.onChangePeriod} />,
                 },
                 {
                     key: 'WEEK_NUMBER_TEXT',
                     itemType: ContextualMenuItemType.Header,
-                    onRender: () => <span style={{ padding: '12px 0 0 12px' }}>{`Week ${props.period.startDateTime.week()}`}</span>,
+                    onRender: () => <span style={{ padding: '12px 0 0 12px' }}>{`Week ${props.view.startDateTime.week()}`}</span>,
                 },
             ]}
             farItems={

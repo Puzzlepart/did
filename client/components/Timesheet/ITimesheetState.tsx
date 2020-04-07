@@ -1,5 +1,5 @@
 import { ITimesheetData } from "./ITimesheetData";
-import { ITimesheetPeriod } from './ITimesheetPeriod';
+import { ITimesheetView } from './ITimesheetView';
 
 export type TimesheetView = 'overview' | 'summary' | 'allocation';
 
@@ -15,9 +15,9 @@ export interface ITimesheetState {
     selectedView?: TimesheetView;
 
     /**
-     * Period
+     * View
      */
-    period: ITimesheetPeriod;
+    view: ITimesheetView;
 
     /**
      * Is the week confirmed

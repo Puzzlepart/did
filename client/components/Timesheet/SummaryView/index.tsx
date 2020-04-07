@@ -20,7 +20,7 @@ import * as format from 'string-format';
  *
  * @param {ISummaryViewProps} props Props
 */
-function createColumns({ events, type, period, range }: ISummaryViewProps) {
+function createColumns({ events, type, view: period, range }: ISummaryViewProps) {
     let columns = [];
     let onRender = (row: any, _index: number, col: IColumn) => <DurationColumn row={row} column={col} />;
     switch (type) {
