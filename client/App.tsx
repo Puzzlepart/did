@@ -28,22 +28,7 @@ import { client } from './graphql';
         lng: 'en',
         debug: false,
         resources: {
-            en: {
-                translation: {
-                    timesheet: {
-                        overviewHeaderText: 'Overview',
-                        summaryHeaderText: 'Summary',
-                        allocationHeaderText: 'Allocation',
-                        allocationProject: 'Allocation per project',
-                        allocationCustomer: 'Allocation per customer',
-                        confirmHoursText: 'Confirm hours',
-                        unconfirmHoursText: 'Unconfirm hours',
-                        navThisWeekText: 'This week',
-                        navPrevWeekText: 'Go to previous week',
-                        navNextWeekText: 'Go to next week',
-                    }
-                }
-            }
+            en: { translation: require('./i18n/en.json') }
         }
     });
 
