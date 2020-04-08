@@ -27,51 +27,58 @@ function getMatchedDuration(events: ITimeEntry[]) {
     return events.filter(event => !!event.project).reduce((sum, event) => sum += event.durationMinutes, 0);
 }
 
-export const StatusBar = ({ loading, isConfirmed, events, ignoredEvents, onClearIgnores, errors }: IStatusBarProps) => {
-    let totalDuration = getTotalDuration(events);
-    let matchedDuration = getMatchedDuration(events);
+export const StatusBar = ({ timesheet, ignoredEvents, onClearIgnores }: IStatusBarProps) => {
+    let totalDuration = getTotalDuration(timesheet.selectedPeriod.events);
+    let matchedDuration = getMatchedDuration(timesheet.selectedPeriod.events);
 
     return (
         <div className='c-Timesheet-statusbar' style={{ marginTop: 10, marginLeft: -10, marginRight: -10 }}>
-            <Shimmer isDataLoaded={!loading} />
-            <Shimmer isDataLoaded={!loading} />
-            {!loading && (
+            <Shimmer isDataLoaded={!timesheet.loading} />
+            <Shimmer isDataLoaded={!timesheet.loading} />
+            {!timesheet.loading && (
                 <div className='container'>
                     <div className='row'>
                         <div className='col-sm'
-                            hidden={isConfirmed}>
-                            <UserMessage text={format(resource('timesheet.periodHoursSummaryText'), getDurationDisplay(totalDuration))} iconName='ReminderTime' />
+                            hidden={timesheet.selectedPeriod.isConfirmed}>
+                            <UserMessage text={format(resource('TIMESHEET.PERIOD_HOURS_SUMMARY_TEXT'), getDurationDisplay(totalDuration))} iconName='ReminderTime' />
                         </div>
-                        <div className='col-sm' hidden={totalDuration - matchedDuration === 0 || isConfirmed}>
+                        <div className='col-sm' hidden={totalDuration - matchedDuration === 0 || timesheet.selectedPeriod.isConfirmed}>
                             <UserMessage
-                                text={format(resource('timesheet.hoursNotMatchedText'), getDurationDisplay(totalDuration - matchedDuration))}
+                                text={format(resource('TIMESHEET.HOURS_NOT_MATCHED_TEXT'), getDurationDisplay(totalDuration - matchedDuration))}
                                 type={MessageBarType.warning}
                                 iconName='BufferTimeBoth' />
                         </div>
-                        <div className='col-sm' hidden={totalDuration - matchedDuration > 0 || isConfirmed}>
+                        <div className='col-sm' hidden={totalDuration - matchedDuration > 0 || timesheet.selectedPeriod.isConfirmed}>
                             <UserMessage
-                                text={resource('allHoursMatchedText')}
+                                text={resource('ALL_HOURS_MATCHED_TEXT')}
                                 type={MessageBarType.success}
                                 iconName='BufferTimeBoth' />
                         </div>
-                        <div className='col-sm' hidden={!isConfirmed}>
+                        <div className='col-sm' hidden={!timesheet.selectedPeriod.isConfirmed}>
                             <UserMessage
                                 text={format(resource('TIMESHEET.PERIOD_CONFIRMED_TEXT'), getDurationDisplay(matchedDuration))}
                                 type={MessageBarType.success}
                                 iconName='CheckMark' />
                         </div>
-                        <div className='col-sm' hidden={ignoredEvents.length === 0 || isConfirmed}>
+                        <div className='col-sm' hidden={ignoredEvents.length === 0 || timesheet.selectedPeriod.isConfirmed}>
                             <UserMessage
                                 type={MessageBarType.info}
                                 iconName='DependencyRemove'>
-                                <p>{format(resource('timesheet.ignoredEventsText'), ignoredEvents.length)} <a href='#' onClick={onClearIgnores}>{resource('timesheet.undoIgnoreLinkText')}</a></p>
+                                <p>{format(resource('TIMESHEET.IGNORED_EVENTS_TEXT'), ignoredEvents.length)} <a href='#' onClick={onClearIgnores}>{resource('TIMESHEET.UNDO_IGNORE_LINK_TEXT')}</a></p>
                             </UserMessage>
                         </div>
-                        <div className='col-sm' hidden={errors.length === 0}>
+                        <div className='col-sm' hidden={timesheet.selectedPeriod.errors.length === 0}>
                             <UserMessage
                                 type={MessageBarType.severeWarning}
                                 iconName='ErrorBadge'>
-                                <p>{format(resource('timesheet.unresolvedErrorsText'), errors.length)}</p>
+                                <p>{format(resource('TIMESHEET.UNRESOLVER_ERRORS_TEXT'), timesheet.selectedPeriod.errors.length)}</p>
+                            </UserMessage>
+                        </div>
+                        <div className='col-sm' hidden={timesheet.periods.length > 1}>
+                            <UserMessage
+                                type={MessageBarType.info}
+                                iconName='SplitObject'>
+                                <p>{resource('TIMESHEET.SPLIT_WEEK_TEXT')}</p>
                             </UserMessage>
                         </div>
                     </div>

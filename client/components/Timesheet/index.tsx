@@ -2,7 +2,7 @@
 import { dateAdd, PnPClientStorage, PnPClientStore, TypedHash } from '@pnp/common';
 import { UserAllocation } from 'components/UserAllocation';
 import { endOfWeek, getDurationDisplay, getUrlHash, getWeekdays, startOfWeek } from 'helpers';
-import i18n from 'i18next';
+import resource from 'i18n';
 import { IProject, ITimeEntry } from 'interfaces';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
@@ -70,77 +70,49 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                                 CONFIRM_WEEK: loading || selectedPeriod.isConfirmed || selectedPeriod.errors.length > 0,
                                 UNCONFIRM_WEEK: loading || !selectedPeriod.isConfirmed,
                             }} />
-                        <Pivot>
-                            {periods.map(p => (
-                                <PivotItem
-                                    key={p.id}
-                                    itemKey={p.id}
-                                    itemID={p.id}
-                                    headerText={p.name}>
-                                    {this._renderPeriod()}
-                                </PivotItem>
-                            ))}
+                        <Pivot defaultSelectedKey={this.state.selectedView} onLinkClick={item => this.setState({ selectedView: item.props.itemKey as TimesheetView })}>
+                            <PivotItem itemKey='overview' headerText={resource('TIMESHEET.OVERVIEW_HEADER_TEXT')} itemIcon='CalendarWeek'>
+                                <div className='c-Timesheet-overview'>
+                                    <StatusBar
+                                        timesheet={this.state}
+                                        ignoredEvents={this._getStoredIgnoredEvents()}
+                                        onClearIgnores={this._clearIgnoredEvents.bind(this)} />
+                                    {loading && <ProgressIndicator />}
+                                    <EventList
+                                        onProjectSelected={this._onProjectSelected.bind(this)}
+                                        onProjectClear={this._onProjectClear.bind(this)}
+                                        onIgnoreEvent={this._onIgnoreEvent.bind(this)}
+                                        enableShimmer={loading}
+                                        events={selectedPeriod.events}
+                                        showEmptyDays={periods.length === 1}
+                                        dateFormat={'HH:mm'}
+                                        isLocked={selectedPeriod.isConfirmed}
+                                        groups={{
+                                            fieldName: 'date',
+                                            groupNames: getWeekdays(scope.startDateTime, this.props.groupHeaderDateFormat),
+                                            totalFunc: (items: ITimeEntry[]) => {
+                                                let totalMins = items.reduce((sum, i) => sum += i.durationMinutes, 0);
+                                                return ` (${getDurationDisplay(totalMins)})`;
+                                            },
+                                        }} />
+                                </div>
+                            </PivotItem>
+                            <PivotItem itemKey='summary' headerText={resource('TIMESHEET.SUMMARY_HEADER_TEXT')} itemIcon='List'>
+                                <SummaryView
+                                    events={selectedPeriod.events}
+                                    enableShimmer={loading}
+                                    scope={scope}
+                                    type={SummaryViewType.UserWeek} />
+                            </PivotItem>
+                            <PivotItem itemKey='allocation' headerText={resource('TIMESHEET.ALLOCATION_HEADER_TEXT')} itemIcon='ReportDocument'>
+                                <div className='c-Timesheet-allocation'>
+                                    <UserAllocation entries={selectedPeriod.events} charts={{ 'project.name': resource('TIMESHEET.ALLOCATION_PROJECT_CHART_TITLE'), 'customer.name': resource('TIMESHEET.ALLOCATION_CUSTOMER_CHART_TITLE') }} />
+                                </div>
+                            </PivotItem>
                         </Pivot>
                     </div>
                 </div>
             </div>
-        );
-    }
-
-    /**
-     * Renders a timesheet period
-     */
-    private _renderPeriod() {
-        const {
-            loading,
-            scope,
-            periods,
-            selectedPeriod,
-        } = this.state;
-        return (
-            <Pivot defaultSelectedKey={this.state.selectedView} onLinkClick={item => this.setState({ selectedView: item.props.itemKey as TimesheetView })}>
-                <PivotItem itemKey='overview' headerText={i18n.t('timesheet.overviewHeaderText')} itemIcon='CalendarWeek'>
-                    <div className='c-Timesheet-overview'>
-                        <StatusBar
-                            isConfirmed={selectedPeriod.isConfirmed}
-                            events={selectedPeriod.events}
-                            loading={loading}
-                            errors={selectedPeriod.errors}
-                            ignoredEvents={this._getStoredIgnoredEvents()}
-                            onClearIgnores={this._clearIgnoredEvents.bind(this)} />
-                        {loading && <ProgressIndicator />}
-                        <EventList
-                            onProjectSelected={this._onProjectSelected.bind(this)}
-                            onProjectClear={this._onProjectClear.bind(this)}
-                            onIgnoreEvent={this._onIgnoreEvent.bind(this)}
-                            enableShimmer={loading}
-                            events={selectedPeriod.events}
-                            showEmptyDays={periods.length === 1}
-                            dateFormat={'HH:mm'}
-                            isLocked={selectedPeriod.isConfirmed}
-                            groups={{
-                                fieldName: 'date',
-                                groupNames: getWeekdays(scope.startDateTime, this.props.groupHeaderDateFormat),
-                                totalFunc: (items: ITimeEntry[]) => {
-                                    let totalMins = items.reduce((sum, i) => sum += i.durationMinutes, 0);
-                                    return ` (${getDurationDisplay(totalMins)})`;
-                                },
-                            }} />
-                    </div>
-                </PivotItem>
-                <PivotItem itemKey='summary' headerText={i18n.t('timesheet.summaryHeaderText')} itemIcon='List'>
-                    <SummaryView
-                        events={selectedPeriod.events}
-                        enableShimmer={loading}
-                        scope={scope}
-                        type={SummaryViewType.UserWeek} />
-                </PivotItem>
-                <PivotItem itemKey='allocation' headerText={i18n.t('timesheet.allocationHeaderText')} itemIcon='ReportDocument'>
-                    <div className='c-Timesheet-allocation'>
-                        <UserAllocation entries={selectedPeriod.events} charts={{ 'project.name': i18n.t('timesheet.allocationProject'), 'customer.name': i18n.t('timesheet.allocationCustomer') }} />
-                    </div>
-                </PivotItem>
-            </Pivot>
         );
     }
 
@@ -216,7 +188,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
      *
     * @param {ITimeEntry} event Event
     */
-   // TODO: Naming sucks
+    // TODO: Naming sucks
     private _onProjectClear(event: ITimeEntry) {
         this._clearManualMatch(event.id);
         this.setState(({ periods, selectedPeriod }) => {
@@ -241,7 +213,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     * @param {ITimeEntry} event Event
     * @param {IProject} project Project
     */
-   // TODO: Naming sucks
+    // TODO: Naming sucks
     private _onProjectSelected(event: ITimeEntry, project: IProject) {
         this._saveManualMatch(event.id, project);
         this.setState(({ periods, selectedPeriod }) => {
