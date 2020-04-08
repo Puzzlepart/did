@@ -8,10 +8,13 @@ import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import * as React from 'react';
 import * as format from 'string-format';
+import _ from 'underscore';
 import { client as graphql, FetchPolicy } from '../../graphql';
 import { ActionBar } from './ActionBar';
+import CONFIRM_PERIOD from './CONFIRM_PERIOD';
 import { EventList } from './EventList';
 import GET_TIMESHEET from './GET_TIMESHEET';
+import { ITimesheetPeriod } from './ITimesheetPeriod';
 import { ITimesheetProps } from './ITimesheetProps';
 import { ITimesheetScope } from './ITimesheetScope';
 import { ITimesheetState, TimesheetView } from './ITimesheetState';
@@ -19,11 +22,10 @@ import { StatusBar } from './StatusBar';
 import { SummaryView, SummaryViewType } from './SummaryView';
 import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD';
 
-const PERIOD_ALL = { id: 'all', name: 'All week', events: [] };
+const PERIOD_ALL = { id: 'all', name: 'All week', events: [], errors: [] };
 
 /**
  * @component Timesheet
- * @description 
  */
 export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState> {
     public static defaultProps: Partial<ITimesheetProps> = { groupHeaderDateFormat: 'dddd DD' };
@@ -38,7 +40,6 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
             periods: [PERIOD_ALL],
             selectedPeriod: PERIOD_ALL,
             selectedView: 'overview',
-            errors: []
         };
         this._store = new PnPClientStorage().local;
     }
@@ -53,7 +54,6 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
             scope,
             selectedView,
             selectedPeriod,
-            errors,
             periods,
         } = this.state;
         return (
@@ -64,13 +64,11 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                             scope={scope}
                             selectedView={selectedView}
                             onChangeScope={this._onChangeScope.bind(this)}
-                            onConfirmWeek={this._confirmPeriod.bind(this)}
-                            onUnconfirmWeek={this._unconfirmPeriod.bind(this)}
-                            onReload={() => this._getData(false)}
+                            onConfirmPeriod={this._onConfirmPeriod.bind(this)}
+                            onUnconfirmPeriod={this._onUnconfirmPeriod.bind(this)}
                             disabled={{
-                                CONFIRM_WEEK: loading || selectedPeriod.isConfirmed || errors.length > 0,
+                                CONFIRM_WEEK: loading || selectedPeriod.isConfirmed || selectedPeriod.errors.length > 0,
                                 UNCONFIRM_WEEK: loading || !selectedPeriod.isConfirmed,
-                                RELOAD: loading || selectedPeriod.isConfirmed,
                             }} />
                         <Pivot>
                             {periods.map(p => (
@@ -79,7 +77,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                                     itemKey={p.id}
                                     itemID={p.id}
                                     headerText={p.name}>
-                                    {this._renderContent(p.events)}
+                                    {this._renderPeriod()}
                                 </PivotItem>
                             ))}
                         </Pivot>
@@ -89,12 +87,15 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
         );
     }
 
-    private _renderContent(events: any[]) {
+    /**
+     * Renders a timesheet period
+     */
+    private _renderPeriod() {
         const {
             loading,
             scope,
+            periods,
             selectedPeriod,
-            errors,
         } = this.state;
         return (
             <Pivot defaultSelectedKey={this.state.selectedView} onLinkClick={item => this.setState({ selectedView: item.props.itemKey as TimesheetView })}>
@@ -102,18 +103,19 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                     <div className='c-Timesheet-overview'>
                         <StatusBar
                             isConfirmed={selectedPeriod.isConfirmed}
-                            events={events}
+                            events={selectedPeriod.events}
                             loading={loading}
-                            errors={errors}
-                            ignoredEvents={this._getStoredIgnores()}
-                            onClearIgnores={this._clearIgnores.bind(this)} />
+                            errors={selectedPeriod.errors}
+                            ignoredEvents={this._getStoredIgnoredEvents()}
+                            onClearIgnores={this._clearIgnoredEvents.bind(this)} />
                         {loading && <ProgressIndicator />}
                         <EventList
                             onProjectSelected={this._onProjectSelected.bind(this)}
                             onProjectClear={this._onProjectClear.bind(this)}
-                            onProjectIgnore={this._onProjectIgnore.bind(this)}
+                            onIgnoreEvent={this._onIgnoreEvent.bind(this)}
                             enableShimmer={loading}
-                            events={events}
+                            events={selectedPeriod.events}
+                            showEmptyDays={periods.length === 1}
                             dateFormat={'HH:mm'}
                             isLocked={selectedPeriod.isConfirmed}
                             groups={{
@@ -128,14 +130,14 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                 </PivotItem>
                 <PivotItem itemKey='summary' headerText={i18n.t('timesheet.summaryHeaderText')} itemIcon='List'>
                     <SummaryView
-                        events={events}
+                        events={selectedPeriod.events}
                         enableShimmer={loading}
                         scope={scope}
                         type={SummaryViewType.UserWeek} />
                 </PivotItem>
                 <PivotItem itemKey='allocation' headerText={i18n.t('timesheet.allocationHeaderText')} itemIcon='ReportDocument'>
                     <div className='c-Timesheet-allocation'>
-                        <UserAllocation entries={events} charts={{ 'project.name': i18n.t('timesheet.allocationProject'), 'customer.name': i18n.t('timesheet.allocationCustomer') }} />
+                        <UserAllocation entries={selectedPeriod.events} charts={{ 'project.name': i18n.t('timesheet.allocationProject'), 'customer.name': i18n.t('timesheet.allocationCustomer') }} />
                     </div>
                 </PivotItem>
             </Pivot>
@@ -143,11 +145,12 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     }
 
     /**
-     * Get view
+     * Get scope
      * 
      * @param {ITimesheetScope} scope Scope
      */
     private _getScope(scope: ITimesheetScope = {}): ITimesheetScope {
+        // TODO: Make more readable
         if (!scope.startDateTime) scope.startDateTime = startOfWeek(getUrlHash()['week']);
         if (!scope.endDateTime) scope.endDateTime = endOfWeek(scope.startDateTime || getUrlHash()['week']);
         return {
@@ -158,7 +161,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     }
 
     /**
-    * On change scope
+    * On change scope (passing empty object defaults to current week)
     *
     * @param {ITimesheetPeriod} scope Scope
     */
@@ -171,34 +174,41 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     /**
      * Confirm period
      */
-    private async _confirmPeriod() {
+    private async _onConfirmPeriod() {
         this.setState({ loading: true });
-        // const entries = this.state.data.events
-        //     .filter(event => !!event.project)
-        //     .map(event => ({ id: event.id, projectId: event.project.id, isManualMatch: event.isManualMatch }));
-        // await graphql.mutate({
-        //     mutation: CONFIRM_PERIOD,
-        //     variables: {
-        //         startDateTime: this.state.view.startDateTime,
-        //         endDateTime: this.state.view.endDateTime,
-        //         entries,
-        //     },
-        // });
-        // await this._getEventData();
+        const entries = this.state.selectedPeriod.events
+            .filter(event => !!event.project)
+            .map(event => ({
+                id: event.id,
+                projectId: event.project.id,
+                isManualMatch: event.isManualMatch,
+            }));
+        await graphql.mutate({
+            mutation: CONFIRM_PERIOD,
+            variables: {
+                startDateTime: this.state.selectedPeriod.startDateTime,
+                endDateTime: this.state.selectedPeriod.endDateTime,
+                entries,
+            },
+        });
+        await this._getData();
     };
 
     /**
-     * Confirm period
+     * Unconfirm period
      */
-    private async _unconfirmPeriod() {
-        this._clearResolve();
+    private async _onUnconfirmPeriod() {
         this.setState({ loading: true });
+        // TODO: Error handling
+        // To get data: const data = await graphql.mutate; data.unconfirmPeriod, data.result
         await graphql.mutate({
             mutation: UNCONFIRM_PERIOD,
-            variables: this.state.scope,
+            variables: {
+                startDateTime: this.state.selectedPeriod.startDateTime,
+                endDateTime: this.state.selectedPeriod.endDateTime,
+            },
         });
         await this._getData();
-
     };
 
     /**
@@ -206,21 +216,23 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
      *
     * @param {ITimeEntry} event Event
     */
+   // TODO: Naming sucks
     private _onProjectClear(event: ITimeEntry) {
-        this._clearResolve(event.id);
-        // this.setState(prevState => ({
-        //     data: {
-        //         ...prevState.data,
-        //         events: prevState.data.events.map(e => {
-        //             if (e.id === event.id) {
-        //                 e.project = null;
-        //                 e.customer = null;
-        //                 e.isManualMatch = false;
-        //             }
-        //             return e;
-        //         })
-        //     }
-        // }));
+        this._clearManualMatch(event.id);
+        this.setState(({ periods, selectedPeriod }) => {
+            selectedPeriod.events = selectedPeriod.events.map(e => {
+                if (e.id === event.id) {
+                    e.project = null;
+                    e.customer = null;
+                    e.isManualMatch = false;
+                }
+                return e;
+            })
+            return {
+                selectedPeriod,
+                periods: periods.map(p => p.id === selectedPeriod.id ? selectedPeriod : p),
+            }
+        });
     }
 
     /**
@@ -229,29 +241,31 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     * @param {ITimeEntry} event Event
     * @param {IProject} project Project
     */
+   // TODO: Naming sucks
     private _onProjectSelected(event: ITimeEntry, project: IProject) {
-        this._storeResolve(event.id, project);
-        // this.setState(prevState => ({
-        //     data: {
-        //         ...prevState.data,
-        //         events: prevState.data.events.map(e => {
-        //             if (e.id === event.id) {
-        //                 e.project = project;
-        //                 e.customer = project.customer;
-        //                 e.isManualMatch = true;
-        //             }
-        //             return e;
-        //         })
-        //     }
-        // }));
+        this._saveManualMatch(event.id, project);
+        this.setState(({ periods, selectedPeriod }) => {
+            selectedPeriod.events = selectedPeriod.events.map(e => {
+                if (e.id === event.id) {
+                    e.project = project;
+                    e.customer = project.customer;
+                    e.isManualMatch = true;
+                }
+                return e;
+            })
+            return {
+                selectedPeriod,
+                periods: periods.map(p => p.id === selectedPeriod.id ? selectedPeriod : p),
+            }
+        });
     }
 
     /**
-     * Get stored resolves from local storage
+     * Get stored resolves from browser storage
      *
     * @param {string} eventId Event id
     */
-    private _getStoredResolves(eventId?: string): TypedHash<IProject> {
+    private _getManualMatches(eventId?: string): TypedHash<IProject> {
         let storedResolves = this._store.get(this.state.scope.resolvedKey);
         if (!storedResolves) return {};
         if (eventId && storedResolves[eventId]) return storedResolves[eventId];
@@ -259,70 +273,68 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
     }
 
     /**
-     * Store resolve in local storage
+     * Save manual match in browser storage
      *
     * @param {string} eventId Event id
     * @param {IProject} project Project
     */
-    private _storeResolve(eventId: string, project: IProject) {
-        let resolves = this._getStoredResolves();
-        resolves[eventId] = project;
-        this._store.put(this.state.scope.resolvedKey, resolves, dateAdd(new Date(), 'month', 1));
+    private _saveManualMatch(eventId: string, project: IProject) {
+        let matches = this._getManualMatches();
+        matches[eventId] = project;
+        this._store.put(this.state.scope.resolvedKey, matches, dateAdd(new Date(), 'month', 1));
     }
 
     /**
-     * Clear resolve
+     * Clear manual match from local storage
      *
-    * @param {string} eventId Event id
+     * @param {string} eventId Event id
      */
-    private _clearResolve(eventId?: string) {
-        let resolves = {};
-        if (eventId) {
-            resolves = this._getStoredResolves();
-            delete resolves[eventId];
-        }
-        this._store.put(this.state.scope.resolvedKey, resolves, dateAdd(new Date(), 'month', 1));
+    private _clearManualMatch(eventId: string) {
+        let matches = this._getManualMatches();
+        delete matches[eventId];
+        this._store.put(this.state.scope.resolvedKey, matches, dateAdd(new Date(), 'month', 1));
     }
 
     /**
-     * Store ignore in local storage
+     * Store ignored event in browser storage
      *
     * @param {string} eventId Event id
     */
-    private _storeIgnore(eventId: string) {
-        let ignores = this._getStoredIgnores();
+    private _storeIgnoredEvent(eventId: string) {
+        let ignores = this._getStoredIgnoredEvents();
         ignores.push(eventId);
         this._store.put(this.state.scope.ignoredKey, ignores, dateAdd(new Date(), 'month', 1));
     }
 
     /**
-     * Get stored ignores from local storage
+     * Get stored ignored events from browser storage
     */
-    private _getStoredIgnores(): string[] {
+    private _getStoredIgnoredEvents(): string[] {
         let storedIgnores = this._store.get(this.state.scope.ignoredKey);
         if (!storedIgnores) return [];
         return storedIgnores;
     }
 
     /**
-     * On project ignore
+     * On ignore event
      *
     * @param {ITimeEntry} event Event
     */
-    private _onProjectIgnore(event: ITimeEntry) {
-        this._storeIgnore(event.id);
-        // this.setState(prevState => ({
-        //     data: {
-        //         ...prevState.data,
-        //         events: prevState.data.events.filter(e => e.id !== event.id)
-        //     }
-        // }));
+    private _onIgnoreEvent(event: ITimeEntry) {
+        this._storeIgnoredEvent(event.id);
+        this.setState(({ periods, selectedPeriod }) => {
+            selectedPeriod.events = selectedPeriod.events.filter(e => e.id !== event.id);
+            return {
+                selectedPeriod,
+                periods: periods.map(p => p.id === selectedPeriod.id ? selectedPeriod : p),
+            }
+        });
     }
 
     /**
-     * Clear ignores
+     * Clear ignored events from browser storage
      */
-    private _clearIgnores() {
+    private _clearIgnoredEvents() {
         this._store.put(this.state.scope.ignoredKey, [], dateAdd(new Date(), 'month', 1));
         this._getData(false, 'cache-only');
     }
@@ -340,28 +352,30 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
             endDateTime: this.state.scope.endDateTime.toISOString(),
             dateFormat: this.props.groupHeaderDateFormat,
         };
-        const { data: { timesheet: periods } } = await graphql.query({
+        const { data: { timesheet: periods } } = await graphql.query<{ timesheet: ITimesheetPeriod[] }>({
             query: GET_TIMESHEET,
             variables,
             fetchPolicy,
         });
-        const resolves = this._getStoredResolves();
-        const ignores = this._getStoredIgnores();
-        // let data: ITimesheetData = { ...timesheet };
-        // let isConfirmed = data.confirmedDuration > 0
-        // data.events = data.events
-        //     .filter(event => !event.isIgnored && ignores.indexOf(event.id) === -1)
-        //     .map(event => {
-        //         if (resolves[event.id]) {
-        //             event.project = resolves[event.id];
-        //             event.customer = resolves[event.id].customer;
-        //             event.isManualMatch = true;
-        //         }
-        //         return event;
-        //     });
-        // const errors = data.events.filter(evt => evt.error).map(evt => evt.error);
-        const errors = [];
-        console.log(periods);
-        this.setState({ periods, selectedPeriod: periods[0], loading: false, errors });
+        const resolves = this._getManualMatches();
+        const ignores = this._getStoredIgnoredEvents();
+
+        for (let i = 0; i < periods.length; i++) {
+            let period = periods[i];
+            period.isConfirmed = period.confirmedDuration > 0;
+            period.events = period.events
+                .filter(event => !event.isIgnored && ignores.indexOf(event.id) === -1)
+                .map(event => {
+                    if (resolves[event.id]) {
+                        event.project = resolves[event.id];
+                        event.customer = resolves[event.id].customer;
+                        event.isManualMatch = true;
+                    }
+                    return event;
+                });
+            period.errors = period.events.filter(event => event.error).map(event => event.error);
+        }
+
+        this.setState({ periods, selectedPeriod: periods[0], loading: false });
     }
 }

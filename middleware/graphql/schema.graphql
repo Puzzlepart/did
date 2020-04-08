@@ -112,6 +112,7 @@ input OutlookCategoryInput {
 }
 
 input TimeEntryInput {
+	## TODO: Should it be named eventId?
 	id: String!
 	projectId: String!
 	isManualMatch: Boolean

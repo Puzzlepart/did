@@ -8,16 +8,21 @@ const _ = require('underscore');
 /**
  * Confirm period
  * 
- * @param {*} _obj Unused object
- * @param {*} args Arguments (startDateTime, endDateTime, entries)
+ * @param {*} _obj The previous object, which for a field on the root Query type is often not used.
+ * @param {*} variables Variables sent by the client
  * @param {*} context Context
  */
-async function confirmPeriod(_obj, { startDateTime, endDateTime, entries }, context) {
-    if (!entries || entries.length === 0) return { success: false, error: 'No entries to confirm for the specified period.' };
+async function confirmPeriod(_obj, variables, context) {
+    if (!variables.entries || variables.entries.length === 0) {
+        return {
+            success: false,
+            error: 'No entries to confirm for the specified period.',
+        };
+    }
     try {
-        log('Confirming period %s to %s', startDateTime, endDateTime);
-        const calendarView = await context.services.graph.getEvents(startDateTime, endDateTime, 24);
-        let batch = entries.reduce((b, entry) => {
+        log('Confirming period %s to %s', variables.startDateTime, variables.endDateTime);
+        const calendarView = await context.services.graph.getEvents(variables.startDateTime, variables.endDateTime);
+        let batch = variables.entries.reduce((b, entry) => {
             const event = calendarView.filter(e => e.id === entry.id)[0];
             if (!event) return;
             log('Confirming entry with id %s', entry.id);

@@ -4,20 +4,20 @@ const log = require('debug')('middleware/graphql/resolvers/query/confirmedTimeEn
 /**
  * Confirmed time entries
  * 
- * @param {*} _obj Unused object
- * @param {*} args Args (resourceId, weekNumber, yearNumber, projectId, currentUser, dateFormat)
+ * @param {*} _obj The previous object, which for a field on the root Query type is often not used.
+ * @param {*} variables Variables sent by the client
  * @param {*} context Context
  * 
  * @returns The entries and their total duration in minutes
  */
-async function confirmedTimeEntries(_obj, args, context) {
-    let resourceId = args.resourceId;
-    if (args.currentUser) resourceId = context.user.profile.oid;
-    log('Retrieving confirmed time entries, projects and customers from storage: %s', JSON.stringify(args));
+async function confirmedTimeEntries(_obj, variables, context) {
+    let resourceId = variables.resourceId;
+    if (variables.currentUser) resourceId = context.user.profile.oid;
+    log('Retrieving confirmed time entries, projects and customers from storage: %s', JSON.stringify(variables));
     let [projects, customers, confirmedTimeEntries] = await Promise.all([
         context.services.storage.getProjects(),
         context.services.storage.getCustomers(),
-        context.services.storage.getConfirmedTimeEntries({ resourceId, weekNumber: args.weekNumber, yearNumber: args.yearNumber, projectId: args.projectId }, { dateFormat: args.dateFormat }),
+        context.services.storage.getConfirmedTimeEntries({ resourceId, weekNumber: variables.weekNumber, yearNumber: variables.yearNumber, projectId: variables.projectId }, { dateFormat: variables.dateFormat }),
     ]);
     let entries = confirmedTimeEntries.map(entry => ({
         ...entry,

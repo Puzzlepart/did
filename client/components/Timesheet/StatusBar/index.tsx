@@ -1,11 +1,13 @@
 
 import { UserMessage } from 'components/UserMessage';
 import { getDurationDisplay } from 'helpers';
+import resource from 'i18n';
+import { ITimeEntry } from 'interfaces';
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { Shimmer } from 'office-ui-fabric-react/lib/Shimmer';
 import * as React from 'react';
+import * as format from 'string-format';
 import { IStatusBarProps } from './IStatusBarProps';
-import { ITimeEntry } from 'interfaces';
 
 /**
  * Get total duration
@@ -34,42 +36,42 @@ export const StatusBar = ({ loading, isConfirmed, events, ignoredEvents, onClear
             <Shimmer isDataLoaded={!loading} />
             <Shimmer isDataLoaded={!loading} />
             {!loading && (
-                <div className="container">
-                    <div className="row">
-                        <div className="col-sm"
+                <div className='container'>
+                    <div className='row'>
+                        <div className='col-sm'
                             hidden={isConfirmed}>
-                            <UserMessage text={`You have a total of **${getDurationDisplay(totalDuration)}** this week`} iconName='ReminderTime' />
+                            <UserMessage text={format(resource('timesheet.periodHoursSummaryText'), getDurationDisplay(totalDuration))} iconName='ReminderTime' />
                         </div>
-                        <div className="col-sm" hidden={totalDuration - matchedDuration === 0 || isConfirmed}>
+                        <div className='col-sm' hidden={totalDuration - matchedDuration === 0 || isConfirmed}>
                             <UserMessage
-                                text={`You have **${getDurationDisplay(totalDuration - matchedDuration)}** that are not matched.`}
+                                text={format(resource('timesheet.hoursNotMatchedText'), getDurationDisplay(totalDuration - matchedDuration))}
                                 type={MessageBarType.warning}
                                 iconName='BufferTimeBoth' />
                         </div>
-                        <div className="col-sm" hidden={totalDuration - matchedDuration > 0 || isConfirmed}>
+                        <div className='col-sm' hidden={totalDuration - matchedDuration > 0 || isConfirmed}>
                             <UserMessage
-                                text='All your hours are matched. Are you ready to confirm the week?'
+                                text={resource('allHoursMatchedText')}
                                 type={MessageBarType.success}
                                 iconName='BufferTimeBoth' />
                         </div>
-                        <div className="col-sm" hidden={!isConfirmed}>
+                        <div className='col-sm' hidden={!isConfirmed}>
                             <UserMessage
-                                text={`The week is confirmed with ${getDurationDisplay(matchedDuration)}. Click **Unconfirm week** if you want to do some adjustments.`}
+                                text={format(resource('TIMESHEET.PERIOD_CONFIRMED_TEXT'), getDurationDisplay(matchedDuration))}
                                 type={MessageBarType.success}
                                 iconName='CheckMark' />
                         </div>
-                        <div className="col-sm" hidden={ignoredEvents.length === 0 || isConfirmed}>
+                        <div className='col-sm' hidden={ignoredEvents.length === 0 || isConfirmed}>
                             <UserMessage
                                 type={MessageBarType.info}
                                 iconName='DependencyRemove'>
-                                <p>You have {ignoredEvents.length} ignored event(s). <a href="#" onClick={onClearIgnores}>Click to undo</a></p>
+                                <p>{format(resource('timesheet.ignoredEventsText'), ignoredEvents.length)} <a href='#' onClick={onClearIgnores}>{resource('timesheet.undoIgnoreLinkText')}</a></p>
                             </UserMessage>
                         </div>
-                        <div className="col-sm" hidden={errors.length === 0}>
+                        <div className='col-sm' hidden={errors.length === 0}>
                             <UserMessage
                                 type={MessageBarType.severeWarning}
                                 iconName='ErrorBadge'>
-                                <p>You have {errors.length} unresolved errors. You need to resolve them before confirming the week.</p>
+                                <p>{format(resource('timesheet.unresolvedErrorsText'), errors.length)}</p>
                             </UserMessage>
                         </div>
                     </div>

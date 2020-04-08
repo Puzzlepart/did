@@ -4,14 +4,14 @@ const log = require('debug')('middleware/graphql/resolvers/query/getProjects');
 /**
  * Projects
  * 
- * @param {*} _obj Unused object
- * @param {*} args Args (customerKey, sortBy)
+ * @param {*} _obj The previous object, which for a field on the root Query type is often not used.
+ * @param {*} variables Variables sent by the client
  * @param {*} context Context
  */
-async function projects(_obj, args, context) {
-    log('Retrieving projects from storage. customerKey: %s, sortBy: %s', args.customerKey, args.sortBy);
+async function projects(_obj, variables, context) {
+    log('Retrieving projects from storage. customerKey: %s, sortBy: %s', variables.customerKey, variables.sortBy);
     let [projects, customers] = await Promise.all([
-        context.services.storage.getProjects(args.customerKey, { sortBy: args.sortBy }),
+        context.services.storage.getProjects(variables.customerKey, { sortBy: variables.sortBy }),
         context.services.storage.getCustomers(),
     ]);
     log('Retrieved %s projects from storage', projects.length);

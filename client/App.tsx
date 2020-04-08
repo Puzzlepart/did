@@ -24,11 +24,13 @@ import { client } from './graphql';
 
     initializeIcons();
 
+    // Initializing i18n with default namespace translation
     await i18n.init({
         lng: 'en',
         debug: false,
         resources: {
-            en: { translation: require('./i18n/en.json') }
+            en: { translation: require('./i18n/en.json') },
+            no: { translation: require('./i18n/en.json') },
         }
     });
 

@@ -56,14 +56,14 @@ export const ActionBar = (props: IActionBarProps) => {
                         key: 'CONFIRM_HOURS',
                         name: i18n.t('timesheet.confirmHoursText'),
                         iconProps: { iconName: 'CheckMark', ...ACTIONBAR_ICON_PROPS },
-                        onClick: props.onConfirmWeek,
+                        onClick: props.onConfirmPeriod,
                         disabled: props.disabled.CONFIRM_WEEK,
                     },
                     {
                         key: 'UNCONFIRM_HOURS',
                         name: i18n.t('timesheet.unconfirmHoursText'),
                         iconProps: { iconName: 'ErrorBadge', ...ACTIONBAR_ICON_PROPS },
-                        onClick: props.onUnconfirmWeek,
+                        onClick: props.onUnconfirmPeriod,
                         disabled: props.disabled.UNCONFIRM_WEEK,
                     }
                 ]}

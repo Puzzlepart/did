@@ -14,24 +14,19 @@ export interface IActionBarProps {
     selectedView?: TimesheetView;
 
     /**
-     * On change scope callback
+     * On change scope callback (passing empty object defaults to current week)
      */
     onChangeScope: (scope: ITimesheetScope) => void;
 
     /**
-     * On confirm week callback
+     * On confirm period callback
      */
-    onConfirmWeek: () => void;
+    onConfirmPeriod: () => void;
 
     /**
-     * On unconfirm week callback
+     * On unconfirm period callback
      */
-    onUnconfirmWeek: () => void;
-
-    /**
-     * On reload callback
-     */
-    onReload: () => void;
+    onUnconfirmPeriod: () => void;
 
     /**
      * Disabled actions

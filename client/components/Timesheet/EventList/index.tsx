@@ -50,7 +50,7 @@ export const EventList = (props: IEventListProps) => {
                     onProjectIgnore={evt => {
                         evt.stopPropagation();
                         evt.preventDefault();
-                        props.onProjectIgnore(event);
+                        props.onIgnoreEvent(event);
                     }} />
             )),
     ].filter(col => (props.hideColumns || []).indexOf(col.key) === -1);
@@ -62,7 +62,7 @@ export const EventList = (props: IEventListProps) => {
                 columns={columns}
                 items={props.events}
                 groups={props.groups}
-                groupProps={{ showEmptyGroups: true }} />
+                groupProps={{ showEmptyGroups: props.showEmptyDays }} />
         </div>
     );
 }

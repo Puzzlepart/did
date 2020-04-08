@@ -29,6 +29,8 @@ module.exports = {
       utils: path.resolve(clientLib, 'utils'),
       helpers: path.resolve(clientLib, 'helpers'),
       components: path.resolve(clientLib, 'components'),
+      common: path.resolve(clientLib, 'common'),
+      i18n: path.resolve(clientLib, 'i18n'),
     }
   },
   plugins: [

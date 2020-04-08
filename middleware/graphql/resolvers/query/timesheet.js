@@ -4,6 +4,7 @@ const log = require('debug')('middleware/graphql/resolvers/query/timesheet');
 const format = require('string-format');
 const { formatDate, getMonth, getWeek, startOfMonth, endOfMonth } = require('../../../../utils');
 const get = require('get-value');
+// TODO: import matchEvents from 'timesheet.matching' and move matching to timesheet.matching.js
 
 const CATEGORY_REGEX = /((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>[A-Za-z0-9]{2,}))/gmi;
 const CONTENT_REGEX = /[\(\{\[]((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>[A-Za-z0-9]{2,}?))[\)\]\}]/gmi;
@@ -119,31 +120,31 @@ function matchEvent(evt, projects, customers) {
  * Timesheet
  * 
  * @param {*} _obj Unused obj
- * @param {*} args Arguments 
+ * @param {*} variables Variables sent by the client
  * @param {*} context The context
  */
-async function timesheet(_obj, args, context) {
-    log('Retrieving events from %s to %s', args.startDateTime, args.endDateTime);
-    const week = getWeek(args.startDateTime);
-    const startMonthIdx = getMonth(args.startDateTime);
-    const endMonthIdx = getMonth(args.endDateTime);
+async function timesheet(_obj, variables, context) {
+    log('Retrieving events from %s to %s', variables.startDateTime, variables.endDateTime);
+    const week = getWeek(variables.startDateTime);
+    const startMonthIdx = getMonth(variables.startDateTime);
+    const endMonthIdx = getMonth(variables.endDateTime);
     const isSplit = endMonthIdx !== startMonthIdx;
 
     let periods = [{
         id: `${week}_${startMonthIdx}`,
         name: `${week}/1`,
-        startDateTime: args.startDateTime,
+        startDateTime: variables.startDateTime,
         endDateTime: isSplit
-            ? endOfMonth(args.startDateTime).toISOString()
-            : args.endDateTime,
+            ? endOfMonth(variables.startDateTime).toISOString()
+            : variables.endDateTime,
     }];
 
     if (isSplit) {
         periods.push({
             id: `${week}_${endMonthIdx}`,
             name: `${week}/2`,
-            startDateTime: startOfMonth(args.endDateTime).toISOString(),
-            endDateTime: args.endDateTime,
+            startDateTime: startOfMonth(variables.endDateTime).toISOString(),
+            endDateTime: variables.endDateTime,
         });
     }
 
@@ -152,8 +153,8 @@ async function timesheet(_obj, args, context) {
         context.services.storage.getCustomers(),
         context.services.storage.getConfirmedTimeEntries({
             resourceId: context.user.profile.oid,
-            startDateTime: args.startDateTime,
-            endDateTime: args.endDateTime,
+            startDateTime: variables.startDateTime,
+            endDateTime: variables.endDateTime,
         }),
     ]);
 
@@ -165,13 +166,14 @@ async function timesheet(_obj, args, context) {
         }))
         .filter(p => p.customer);
 
-    // Using for-loop since it's the only way I know that support async-await
+    // TODO: Using for-loop since it's the only way I know that support async-await. Maybe use a foreach-async package?
     for (let i = 0; i < periods.length; i++) {
         let period = periods[i];
         period.confirmedDuration = 0;
         // TODO: Confirm this is the right approach (@damsleth, @okms)
         confirmedTimeEntries = confirmedTimeEntries.filter(entry => `${entry.weekNumber}_${entry.monthNumber}` === period.id);
-        if (confirmedTimeEntries.length > 0) {
+        const isConfirmed = confirmedTimeEntries.length > 0;
+        if (isConfirmed) {
             log('Found %s confirmed events from %s to %s, retrieving entries from storage', confirmedTimeEntries.length, period.startDateTime, period.endDateTime);
             period.events = confirmedTimeEntries.map(entry => ({
                 ...entry,
@@ -181,12 +183,15 @@ async function timesheet(_obj, args, context) {
             period.matchedEvents = period.events;
             period.confirmedDuration = events.reduce((sum, evt) => sum + evt.durationMinutes, 0);
         } else {
-            log('Found no confirmed events from %s to %s, retrieving entries from Microsoft Graph', period.startDateTime, period.endDateTime);
-            period.events = await context.services.graph.getEvents(period.startDateTime, period.endDateTime, 24);
+            log('Found no confirmed events from %s to %s, retrieving entries from Microsoft Graph (me/calendar/calendarView)', period.startDateTime, period.endDateTime);
+            period.events = await context.services.graph.getEvents(period.startDateTime, period.endDateTime);
+            log('Found %s events from %s to %s', period.events, period.startDateTime, period.endDateTime);
+            // TODO: period.events = matchEvents(period.events)
             period.events = period.events.map(evt => matchEvent(evt, projects, customers));
+            // TODO: Remove evt.project.id check, do we really have projects without ID? Don't think so...
             period.matchedEvents = period.events.filter(evt => (evt.project && evt.project.id));
         }
-        period.events = period.events.map(evt => ({ ...evt, date: formatDate(evt.startTime, args.dateFormat) }));
+        period.events = period.events.map(evt => ({ ...evt, date: formatDate(evt.startTime, variables.dateFormat) }));
     }
     return periods;
 };

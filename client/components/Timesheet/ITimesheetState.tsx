@@ -10,12 +10,12 @@ export interface ITimesheetState {
     loading?: boolean;
 
     /**
-     * The selected view
+     * The selected view/tab
      */
     selectedView?: TimesheetView;
 
     /**
-     * View
+     * Scope
      */
     scope: ITimesheetScope;
 
@@ -28,9 +28,4 @@ export interface ITimesheetState {
      * Selected period
      */
     selectedPeriod?: ITimesheetPeriod;
-
-    /**
-     * Errors
-     */
-    errors?: Error[];
 }

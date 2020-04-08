@@ -41,42 +41,63 @@ class GraphService {
   }
 
   async createOutlookCategory(category) {
-    log('Querying Graph /me/outlook/masterCategories');
-    const res = await this.getClient()
-      .api('/me/outlook/masterCategories')
-      .post(JSON.stringify(category));
-    return res;
+    try {
+      log('Querying Graph /me/outlook/masterCategories');
+      const res = await this.getClient()
+        .api('/me/outlook/masterCategories')
+        .post(JSON.stringify(category));
+      return res;
+    } catch (error) {
+      switch (error.statusCode) {
+        case 401: {
+          // TODO: Avoid repeated refresh access token calls
+          this.oauthToken = await refreshAccessToken(this.req);
+          return this.getEvents(startDateTime, endDateTime);
+        }
+        default: {
+          throw new Error();
+        }
+      }
+    }
   }
 
   /**
    * Get  categories
    */
   async getOutlookCategories() {
-    log('Querying Graph /me/outlook/masterCategories');
-    const {
-      value
-    } = await this.getClient()
-      .api('/me/outlook/masterCategories')
-      .get();
-    return value;
+    try {
+      log('Querying Graph /me/outlook/masterCategories');
+      const { value } = await this.getClient()
+        .api('/me/outlook/masterCategories')
+        .get();
+      return value;
+    } catch (error) {
+      switch (error.statusCode) {
+        case 401: {
+          // TODO: Avoid repeated refresh access token calls
+          this.oauthToken = await refreshAccessToken(this.req);
+          return this.getEvents(startDateTime, endDateTime);
+        }
+        default: {
+          throw new Error();
+        }
+      }
+    }
   }
 
   /**
-   * Get events for the specified week
+   * Get events for the specified period using Microsoft Graph endpoint /me/calendar/calendarView
    *
    * @param {*} startDateTime  Start time (iso)
    * @param {*} endDateTime End time (iso)
-   * @param {*} maxDurationHrs Max duration in hours
    */
-  async getEvents(startDateTime, endDateTime, maxDurationHrs) {
+  async getEvents(startDateTime, endDateTime) {
     try {
       log('Querying Graph /me/calendar/calendarView: %s', JSON.stringify({
         startDateTime,
         endDateTime
       }));
-      const {
-        value
-      } = await this.getClient()
+      const { value } = await this.getClient()
         .api('/me/calendar/calendarView')
         .query({
           startDateTime,
@@ -106,13 +127,14 @@ class GraphService {
           })
         });
       events = this.removeIgnoredEvents(events);
-      events = events.filter(evt => evt.durationHours <= maxDurationHrs);
+      events = events.filter(evt => evt.durationHours <= 24);
       return events;
     } catch (error) {
       switch (error.statusCode) {
         case 401: {
+          // TODO: Avoid repeated refresh access token calls
           this.oauthToken = await refreshAccessToken(this.req);
-          return this.getEvents(startDateTime, endDateTime, maxDurationHrs);
+          return this.getEvents(startDateTime, endDateTime);
         }
         default: {
           throw new Error();

@@ -26,7 +26,7 @@ export interface IEventListProps {
     /**
      * Callback for when the project for an event is ignored
      */
-    onProjectIgnore?: (event: ITimeEntry) => void;
+    onIgnoreEvent?: (event: ITimeEntry) => void;
 
     /**
      * Enable shimmer
@@ -47,6 +47,11 @@ export interface IEventListProps {
      * Groups to render
      */
     groups?: IListGroups;
+
+    /**
+     * Show empty days
+     */
+    showEmptyDays?: boolean;
 
     /**
      * Column widths
