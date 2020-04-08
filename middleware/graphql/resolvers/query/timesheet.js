@@ -1,5 +1,5 @@
 const _ = require('underscore');
-const findBestMatch = require('string-similarity').findBestMatch;
+const { findBestMatch } = require('string-similarity');
 const log = require('debug')('middleware/graphql/resolvers/query/timesheet');
 const format = require('string-format');
 const { formatDate, getMonth, getWeek, startOfMonth, endOfMonth } = require('../../../../utils');
@@ -124,23 +124,23 @@ function matchEvent(evt, projects, customers) {
  */
 async function timesheet(_obj, args, context) {
     log('Retrieving events from %s to %s', args.startDateTime, args.endDateTime);
-    let periods = [];
-
     const week = getWeek(args.startDateTime);
-    const startMonth = getMonth(args.startDateTime);
-    const endMonth = getMonth(args.endDateTime);
-    const isSplit = endMonth !== startMonth;
+    const startMonthIdx = getMonth(args.startDateTime);
+    const endMonthIdx = getMonth(args.endDateTime);
+    const isSplit = endMonthIdx !== startMonthIdx;
 
-    periods.push({
-        id: `${week}_${startMonth}`,
+    let periods = [{
+        id: `${week}_${startMonthIdx}`,
         name: `${week}/1`,
         startDateTime: args.startDateTime,
-        endDateTime: isSplit ? endOfMonth(args.startDateTime).toISOString() : args.endDateTime,
-    });
+        endDateTime: isSplit
+            ? endOfMonth(args.startDateTime).toISOString()
+            : args.endDateTime,
+    }];
 
     if (isSplit) {
         periods.push({
-            id: `${week}_${endMonth}`,
+            id: `${week}_${endMonthIdx}`,
             name: `${week}/2`,
             startDateTime: startOfMonth(args.endDateTime).toISOString(),
             endDateTime: args.endDateTime,
@@ -157,6 +157,7 @@ async function timesheet(_obj, args, context) {
         }),
     ]);
 
+    // TODO: Clean up azure table storage Projects/Customers and remove toUpperCase()
     projects = projects
         .map(p => ({
             ...p,
@@ -164,12 +165,14 @@ async function timesheet(_obj, args, context) {
         }))
         .filter(p => p.customer);
 
+    // Using for-loop since it's the only way I know that support async-await
     for (let i = 0; i < periods.length; i++) {
         let period = periods[i];
         period.confirmedDuration = 0;
+        // TODO: Confirm this is the right approach (@damsleth, @okms)
         confirmedTimeEntries = confirmedTimeEntries.filter(entry => `${entry.weekNumber}_${entry.monthNumber}` === period.id);
         if (confirmedTimeEntries.length > 0) {
-            log('Found confirmed events from %s to %s, retrieving entries from storage', period.startDateTime, period.endDateTime);
+            log('Found %s confirmed events from %s to %s, retrieving entries from storage', confirmedTimeEntries.length, period.startDateTime, period.endDateTime);
             period.events = confirmedTimeEntries.map(entry => ({
                 ...entry,
                 project: _.find(projects, p => p.id === entry.projectId),
