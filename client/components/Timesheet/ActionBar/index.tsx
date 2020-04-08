@@ -15,6 +15,7 @@ export const ActionBar = (props: IActionBarProps) => {
             items={[
                 {
                     key: 'THIS_WEEK',
+                    itemType: ContextualMenuItemType.Normal,
                     iconOnly: true,
                     iconProps: { iconName: 'RenewalCurrent', ...ACTIONBAR_ICON_PROPS },
                     onClick: () => {
@@ -25,6 +26,7 @@ export const ActionBar = (props: IActionBarProps) => {
                 },
                 {
                     key: 'PREV_WEEK',
+                    itemType: ContextualMenuItemType.Normal,
                     iconOnly: true,
                     iconProps: { iconName: 'Back', ...ACTIONBAR_ICON_PROPS },
                     onClick: () => {
@@ -34,6 +36,7 @@ export const ActionBar = (props: IActionBarProps) => {
                 },
                 {
                     key: 'NEXT_WEEK',
+                    itemType: ContextualMenuItemType.Normal,
                     iconOnly: true,
                     iconProps: { iconName: 'Forward', ...ACTIONBAR_ICON_PROPS },
                     onClick: () => {
@@ -43,18 +46,34 @@ export const ActionBar = (props: IActionBarProps) => {
                 },
                 {
                     key: 'PICK_WEEK',
+                    itemType: ContextualMenuItemType.Normal,
                     onRender: () => <WeekPicker scope={props.scope} onChange={props.onChangeScope} />,
-                },
+                },                
                 {
                     key: 'WEEK_NUMBER_TEXT',
                     itemType: ContextualMenuItemType.Header,
                     onRender: () => <span style={{ padding: '12px 0 0 12px' }}>{`Week ${props.scope.startDateTime.week()}`}</span>,
+                },
+                // TODO: ..props.periods
+                {
+                    key: 'PERIOD_01',
+                    itemType: ContextualMenuItemType.Normal,
+                    iconProps: { iconName: 'Section', ...ACTIONBAR_ICON_PROPS },
+                    name: '14/1'
+                },
+                {
+
+                    key: 'PERIOD_02',
+                    itemType: ContextualMenuItemType.Normal,
+                    iconProps: { iconName: 'Section', ...ACTIONBAR_ICON_PROPS },
+                    name: '14/2',
                 },
             ]}
             farItems={
                 [
                     {
                         key: 'CONFIRM_HOURS',
+                        itemType: ContextualMenuItemType.Normal,
                         name: i18n.t('timesheet.confirmHoursText'),
                         iconProps: { iconName: 'CheckMark', ...ACTIONBAR_ICON_PROPS },
                         onClick: props.onConfirmPeriod,
@@ -62,6 +81,7 @@ export const ActionBar = (props: IActionBarProps) => {
                     },
                     {
                         key: 'UNCONFIRM_HOURS',
+                        itemType: ContextualMenuItemType.Normal,
                         name: i18n.t('timesheet.unconfirmHoursText'),
                         iconProps: { iconName: 'ErrorBadge', ...ACTIONBAR_ICON_PROPS },
                         onClick: props.onUnconfirmPeriod,
