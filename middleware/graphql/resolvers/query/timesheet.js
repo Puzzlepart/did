@@ -181,7 +181,7 @@ async function timesheet(_obj, variables, context) {
                 customer: _.find(customers, c => c.id === entry.customerId),
             }));
             period.matchedEvents = period.events;
-            period.confirmedDuration = events.reduce((sum, evt) => sum + evt.durationMinutes, 0);
+            period.confirmedDuration = period.events.reduce((sum, evt) => sum + evt.durationMinutes, 0);
         } else {
             log('Found no confirmed events from %s to %s, retrieving entries from Microsoft Graph (me/calendar/calendarView)', period.startDateTime, period.endDateTime);
             period.events = await context.services.graph.getEvents(period.startDateTime, period.endDateTime);

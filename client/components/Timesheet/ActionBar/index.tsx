@@ -15,7 +15,8 @@ export const ActionBar = (props: IActionBarProps) => {
             items={[
                 {
                     key: 'THIS_WEEK',
-                    name: i18n.t('timesheet.navThisWeekText'),
+                    iconOnly: true,
+                    iconProps: { iconName: 'RenewalCurrent', ...ACTIONBAR_ICON_PROPS },
                     onClick: () => {
                         document.location.hash = '';
                         props.onChangeScope({});
