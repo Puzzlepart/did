@@ -1,7 +1,10 @@
 const helmet = require('helmet');
 
 module.exports = helmet({
-    frameguard: true,
+    frameguard: {
+        action: 'allow-from',
+        domain: 'https://teams.microsoft.com'
+    },
     hidePoweredBy: true,
     hsts: helmet.hsts({ maxAge: 5184000 }),
     ieNoOpen: true,
