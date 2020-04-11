@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Support for adding a project as a category in the users mailbox #202
 - Icon picker in project and customer forms #213
+- Support for using Did 365 in Teams tabs. No SSO support for now #170
 
 ### Fixed
 - Using `get-value` module to get `project.inactive` and `customer.inactive` from event #212
