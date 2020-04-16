@@ -74,7 +74,7 @@ export const StatusBar = ({ timesheet, ignoredEvents, onClearIgnores }: IStatusB
                                 <p>{format(resource('TIMESHEET.UNRESOLVER_ERRORS_TEXT'), timesheet.selectedPeriod.errors.length)}</p>
                             </UserMessage>
                         </div>
-                        <div className='col-sm' hidden={timesheet.periods.length > 1}>
+                        <div className='col-sm' hidden={timesheet.periods.length < 2}>
                             <UserMessage
                                 type={MessageBarType.info}
                                 iconName='SplitObject'>
