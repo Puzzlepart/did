@@ -52,7 +52,6 @@
         "highcharts": "8.0.2",
         "highcharts-react-official": "3.0.0",
         "http-errors": "1.7.3",
-        "i18next": "^19.3.4",
         "loglevel": "1.6.7",
         "loglevel-plugin-prefix": "0.8.4",
         "moment": "2.24.0",
