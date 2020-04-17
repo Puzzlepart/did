@@ -1,4 +1,4 @@
-import { TypedHash } from '@pnp/common';
+import { ITypedHash } from '@pnp/common';
 import { ITimesheetPeriod } from '../ITimesheetPeriod';
 import { TimesheetView } from '../ITimesheetState';
 
@@ -36,5 +36,5 @@ export interface IActionBarProps {
     /**
      * Disabled actions
      */
-    disabled: TypedHash<boolean>;
+    disabled: ITypedHash<boolean>;
 }

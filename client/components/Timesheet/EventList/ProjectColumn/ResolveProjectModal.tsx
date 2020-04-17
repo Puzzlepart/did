@@ -1,5 +1,5 @@
 
-import { TypedHash } from '@pnp/common';
+import { ITypedHash } from '@pnp/common';
 import { getId } from '@uifabric/utilities';
 import { UserMessage } from 'components/UserMessage';
 import { getValueTyped as value } from 'helpers';
