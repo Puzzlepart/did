@@ -1,6 +1,6 @@
 import { ITimeEntry, IProject } from 'interfaces';
 import { IListGroups } from 'components/List/IListGroups';
-import { TypedHash } from '@pnp/common';
+import { ITypedHash } from '@pnp/common';
 
 export interface IEventListProps {
     /**
@@ -51,5 +51,5 @@ export interface IEventListProps {
     /**
      * Column widths
      */
-    columnWidths?: TypedHash<number>;
+    columnWidths?: ITypedHash<number>;
 }
