@@ -1,5 +1,5 @@
 
-import { dateAdd, PnPClientStorage, PnPClientStore, TypedHash } from '@pnp/common';
+import { dateAdd, PnPClientStorage, IPnPClientStore, ITypedHash } from '@pnp/common';
 import { UserAllocation } from 'components/UserAllocation';
 import { endOfWeek, getDurationDisplay, getUrlHash, getValueTyped as value, getWeekdays, startOfWeek } from 'helpers';
 import { IProject, ITimeEntry } from 'interfaces';
@@ -26,7 +26,7 @@ import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD';
  */
 export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState> {
     public static defaultProps: Partial<ITimesheetProps> = { groupHeaderDateFormat: 'dddd DD' };
-    private _store: PnPClientStore;
+    private _store: IPnPClientStore;
     private _resolvedKey = 'resolved_projects_{0}_{1}';
     private _ignoredKey = 'ignored_events_{0}_{1}';
 
@@ -223,7 +223,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
      *
     * @param {string} eventId Event id
     */
-    private _getStoredResolves(eventId?: string): TypedHash<IProject> {
+    private _getStoredResolves(eventId?: string): ITypedHash<IProject> {
         let storedResolves = this._store.get(this.state.period.resolvedKey);
         if (!storedResolves) return {};
         if (eventId && storedResolves[eventId]) return storedResolves[eventId];

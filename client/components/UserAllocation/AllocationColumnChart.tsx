@@ -1,7 +1,7 @@
 
-import { TypedHash } from '@pnp/common';
+import { ITypedHash } from '@pnp/common';
 
-export const AllocationColumnChart = (title: string, allocation: TypedHash<number>, chartName: string): any => ({
+export const AllocationColumnChart = (title: string, allocation: ITypedHash<number>, chartName: string): any => ({
     chart: {
         type: 'column',
         backgroundColor: 'rgba(0,0,0,0)'

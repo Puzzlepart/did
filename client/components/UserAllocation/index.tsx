@@ -1,6 +1,6 @@
 
 import { useQuery } from '@apollo/react-hooks';
-import { TypedHash } from '@pnp/common';
+import { ITypedHash } from '@pnp/common';
 import { getValueTyped as value } from 'helpers';
 import * as Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
@@ -15,7 +15,7 @@ import { IUserAllocationProps } from './IUserAllocationProps';
  * @param {ITimeEntry[]} entries Entries
  * @param {string} exp Expression
  */
-export const GetAllocation = (entries: ITimeEntry[], exp: string) => entries.reduce((obj: TypedHash<number>, entry) => {
+export const GetAllocation = (entries: ITimeEntry[], exp: string) => entries.reduce((obj: ITypedHash<number>, entry) => {
     let key = value(entry, exp, null);
     if (key) {
         obj[key] = obj[key] || 0;
