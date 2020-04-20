@@ -38,7 +38,7 @@ export const IconPicker = (props: IIconPickerProps) => {
             label='Icon'
             title='Icon'
             options={options}
-            defaultValue={props.defaultValue}
+            defaultSelectedKey={props.defaultSelectedKey}
             onChange={props.onChange}
             onRenderTitle={onRenderTitle}
             onRenderOption={onRenderOption} />

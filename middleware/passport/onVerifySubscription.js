@@ -1,4 +1,5 @@
 const StorageService = require('../../services/storage');
+const log = require('debug')('middleware/passport/onVerifySubscription');
 
 async function onVerifySubscription(_iss, _sub, profile, _accessToken, _refreshToken, params, done) {
     if (!profile.oid) {

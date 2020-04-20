@@ -28,8 +28,7 @@ export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey
     const onFormSubmit = async () => {
         let _validation = validateForm();
         if (_validation.invalid) {
-            setValidation(_validation);
-            return;
+            return setValidation(_validation);
         }
         setValidation({ errors: {}, invalid: false });
         let { data: { result } } = await addProject({ variables: model });
@@ -38,7 +37,7 @@ export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey
         } else {
             setMessage({ text: result.error.message, type: MessageBarType.error });
         }
-        setModel(initialModel);
+        setModel({ ...initialModel, customerKey: model.customerKey });
         window.setTimeout(() => setMessage(null), 5000);
     }
 
@@ -67,7 +66,6 @@ export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey
             <TextField
                 styles={{ root: { marginTop: 12, width: 450 } }}
                 label='Key'
-                description='Project key. 3-8 characters, all uppercase.'
                 title='Project key. 3-8 characters, all uppercase.'
                 required={true}
                 errorMessage={validation.errors.projectKey}
@@ -93,6 +91,7 @@ export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey
             <IconPicker
                 styles={{ root: { marginTop: 12, width: 300 } }}
                 options={undefined}
+                defaultSelectedKey={model.icon}
                 onChange={(_event, opt) => setModel({ ...model, icon: opt.key as string })} />
             <PrimaryButton
                 styles={{ root: { marginTop: 16 } }}
