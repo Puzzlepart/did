@@ -39,3 +39,9 @@ h4 {
 h5 {
   font-size: 1.2em;
 }
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
