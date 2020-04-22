@@ -1,5 +1,18 @@
 const StorageService = require('../../services/storage');
 
+/**
+ * On verifiy subscription
+ * 
+ * Checks Azure Table Storage table 'Subscription' for entry for the tenant id of the user attempting to log in
+ * 
+ * @param {*} _iss 
+ * @param {*} _sub 
+ * @param {*} profile 
+ * @param {*} _accessToken 
+ * @param {*} _refreshToken 
+ * @param {*} params 
+ * @param {*} done 
+ */
 async function onVerifySubscription(_iss, _sub, profile, _accessToken, _refreshToken, params, done) {
     if (!profile.oid) {
         let error = new Error();
