@@ -1,5 +1,5 @@
 
-import { List } from 'components/List';
+import { List } from 'common/components/List';
 import { formatDate, getValueTyped as value } from 'helpers';
 import { ITimeEntry } from 'interfaces';
 import * as React from 'react';
@@ -51,7 +51,7 @@ export const EventList = (props: IEventListProps) => {
         <div style={{ marginBottom: 250 }}>
             <List
                 enableShimmer={props.enableShimmer}
-                columns={columns}
+                columns={[...columns, ...props.additionalColumns || []]}
                 items={props.events}
                 groups={props.groups}
                 groupProps={{ showEmptyGroups: props.showEmptyDays }} />

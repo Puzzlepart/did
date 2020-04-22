@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks';
-import { SelectionMode } from 'components/List';
+import { SelectionMode } from 'common/components/List';
 import { CreateProjectForm } from 'components/Projects/CreateProjectForm';
 import { getValueTyped as value } from 'helpers';
 import { IProject, IOutlookCategory } from 'interfaces';
