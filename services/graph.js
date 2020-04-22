@@ -86,8 +86,8 @@ class GraphService {
   /**
    * Get events for the specified period using Microsoft Graph endpoint /me/calendar/calendarView
    *
-   * @param {*} startDateTime  Start time (iso)
-   * @param {*} endDateTime End time (iso)
+   * @param {*} startDateTime Start time (ISO format)
+   * @param {*} endDateTime End time (ISO format)
    */
   async getEvents(startDateTime, endDateTime) {
     try {
@@ -132,6 +132,57 @@ class GraphService {
         case 401: {
           this.oauthToken = await refreshAccessToken(this.req);
           return this.getEvents(startDateTime, endDateTime);
+        }
+        default: {
+          throw new Error();
+        }
+      }
+    }
+  }
+
+  /**
+   * Search events in the specified period of time
+   * 
+   * It does a search in categories and start of the subject of the events
+   *
+   * @param {*} searchString Search string
+   * @param {*} startDateTime Start time (ISO format)
+   * @param {*} endDateTime End time (ISO format)
+   */
+  async searchEvents(searchString, startDateTime, endDateTime) {
+    try {
+      log('Querying Graph /me/events: %s', JSON.stringify({
+        searchString,
+        startDateTime,
+        endDateTime
+      }));
+      const { value } = await this.getClient()
+        .api('/me/events')
+        .select('id,subject,start,end')
+        .filter(`(categories/any(a:a+eq+'${searchString}') or startsWith(subject, '${searchString}')) and start/datetime gt '${startDateTime}' and end/datetime lt '${endDateTime}'`)
+        .orderby('start/dateTime asc')
+        .top(500)
+        .count(true)
+        .get();
+      log('Retrieved %s events from /me/events', value.length);
+      let events = value
+        .filter(evt => evt.subject)
+        .map(evt => {
+          return ({
+            id: evt.id,
+            title: evt.subject,
+            startTime: evt.start.dateTime,
+            endTime: evt.end.dateTime,
+            durationHours: utils.getDurationHours(evt.start.dateTime, evt.end.dateTime),
+            durationMinutes: utils.getDurationMinutes(evt.start.dateTime, evt.end.dateTime),
+          })
+        });
+        return events;
+    } catch (error) {
+      switch (error.statusCode) {
+        case 401: {
+          this.oauthToken = await refreshAccessToken(this.req);
+          return this.searchEvents(searchString, startDateTime, endDateTime);
         }
         default: {
           throw new Error();
