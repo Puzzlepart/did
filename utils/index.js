@@ -51,7 +51,7 @@ module.exports = {
     },
 
     /**
-     * Get end of month
+     * Get start of month
      * 
      * @param {*} date Date
      */
@@ -66,6 +66,24 @@ module.exports = {
      */
     endOfMonth: (date) => {
         return moment(date).endOf('month');
+    },
+
+    /**
+     * Get start of year
+     * 
+     * @param {*} date Date
+     */
+    startOfYear: (date) => {
+        return moment(date).startOf('year');
+    },
+
+    /**
+     * Get end of year
+     * 
+     * @param {*} date Date
+     */
+    endOfYear: (date) => {
+        return moment(date).endOf('year');
     },
 
     /**
