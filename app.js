@@ -46,6 +46,7 @@ app.use((req, res, next) => {
   if (req.user && req.user.data) {
     res.locals.user = {
       ...req.user.profile,
+      sub: JSON.parse(req.user.profile.sub),
       role: req.user.data.role,
       isAdmin: req.user.data.role === 'Admin',
     };
@@ -65,7 +66,7 @@ app.use((_req, _res, next) => {
   next(createError(404));
 });
 
-app.use((error, req, res, _next) => {
+app.use((error, _req, res, _next) => {
   res.locals.error_header = 'We\'re sorry';
   res.locals.error_message = error.message;
   res.status(error.status || 500);
