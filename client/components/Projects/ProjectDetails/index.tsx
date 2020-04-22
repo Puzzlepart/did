@@ -2,15 +2,16 @@ import { useMutation, useQuery } from '@apollo/react-hooks';
 import { EventList } from 'components/Timesheet/EventList';
 import { IBaseResult } from 'graphql';
 import { getValueTyped as value } from 'helpers';
+import { IOutlookCategory } from 'interfaces';
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import * as React from 'react';
 import * as excel from 'utils/exportExcel';
+import { generateColumn as col } from 'utils/generateColumn';
 import { CREATE_OUTLOOK_CATEGORY } from './CREATE_OUTLOOK_CATEGORY';
 import { GET_PROJECT_CONFIRMED_TIME_ENTRIES } from './GET_PROJECT_CONFIRMED_TIME_ENTRIES';
 import { IProjectDetailsProps } from './IProjectDetailsProps';
-import { IOutlookCategory } from 'interfaces';
 
 
 export const ProjectDetails = (props: IProjectDetailsProps) => {
@@ -100,6 +101,7 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                         {entries.length > 0 && (
                             <EventList
                                 events={entries}
+                                additionalColumns={[col('resourceName', 'User')]}
                                 hideColumns={['project', 'customer']}
                                 dateFormat='MMM Do YYYY HH:mm'
                                 columnWidths={{ time: 250 }} />

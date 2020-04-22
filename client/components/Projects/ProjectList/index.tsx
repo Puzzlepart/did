@@ -1,4 +1,4 @@
-import { IColumn, List } from 'components/List';
+import { IColumn, List } from 'common/components/List';
 import { IProject } from 'interfaces';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import * as React from 'react';

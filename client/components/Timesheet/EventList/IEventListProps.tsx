@@ -1,6 +1,7 @@
-import { ITimeEntry, IProject } from 'interfaces';
-import { IListGroups } from 'components/List/IListGroups';
 import { ITypedHash } from '@pnp/common';
+import { IListGroups } from 'common/components/List/IListGroups';
+import { IProject, ITimeEntry } from 'interfaces';
+import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 
 export interface IEventListProps {
     /**
@@ -32,6 +33,11 @@ export interface IEventListProps {
      * Enable shimmer
      */
     enableShimmer?: boolean;
+
+    /**
+     * An array of additional columns to add
+     */
+    additionalColumns?: IColumn[];
 
     /**
      * An array of columns to hide from the view

@@ -1,6 +1,6 @@
 
 import { getId } from '@uifabric/utilities';
-import { UserMessage } from 'components/UserMessage';
+import { UserMessage } from 'common/components/UserMessage';
 import { MessageBarButton } from 'office-ui-fabric-react/lib/Button';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
