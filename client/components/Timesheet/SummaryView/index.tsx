@@ -152,13 +152,17 @@ function generateTotalRow({ type }: ISummaryViewProps, events: any[], columns: I
 * @param {any[]} events Events
 * @param {React.Dispatch<React.SetStateAction<IContextualMenuItem>>} setCustomer Set customer
 */
-function getCustomerOptions(events: any[], setCustomer: React.Dispatch<React.SetStateAction<IContextualMenuItem>>): IContextualMenuItem[] {
+function createCustomerOptions(events: any[], setCustomer: React.Dispatch<React.SetStateAction<IContextualMenuItem>>): IContextualMenuItem[] {
     let customers = _.unique(events.map(e => e.customer), (c: ICustomer) => c.id);
+    customers = _.sortBy(customers, 'name');
 
     return [
         { key: 'All', text: 'All customers' },
         ...customers.map(c => ({ key: c.id, text: c.name })),
-    ].map(opt => ({ ...opt, onClick: () => setCustomer(opt) }));
+    ].map(opt => ({
+        ...opt,
+        onClick: () => setCustomer(opt),
+    }));
 }
 
 /**
@@ -171,7 +175,7 @@ export const SummaryView = (props: ISummaryViewProps) => {
     const [customer, setCustomer] = React.useState<IContextualMenuItem>({ key: 'All', text: 'All customers' });
     const columns = createColumns(props);
     let events = props.events.filter(e => !!e.project);
-    let customerOptions = getCustomerOptions(events, setCustomer);
+    let customerOptions = createCustomerOptions(events, setCustomer);
 
     if (customer.key !== 'All') events = events.filter(e => e.customer.id === customer.key);
 

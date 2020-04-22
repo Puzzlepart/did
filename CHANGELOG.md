@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added user column to project overview #224
 
 ### Fixed
+- Sorted customer options alphabetically by name in summary view(s) #260
+
+### Fixed
 
 ## 0.3.1 - 16.04.2020
 
