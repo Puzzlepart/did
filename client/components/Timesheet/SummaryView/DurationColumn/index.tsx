@@ -1,4 +1,4 @@
-import { IColumn } from 'components/List';
+import { IColumn } from 'common/components/List';
 import * as React from 'react';
 
 export interface IDurationColumnProps {

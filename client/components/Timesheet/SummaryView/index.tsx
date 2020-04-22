@@ -1,5 +1,5 @@
 
-import { IColumn, List } from 'components/List';
+import { IColumn, List } from 'common/components/List';
 import { formatDate, sortAlphabetically, startOfWeek } from 'helpers';
 import { ICustomer, IProject } from 'interfaces';
 import * as moment from 'moment';

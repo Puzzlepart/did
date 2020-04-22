@@ -1,8 +1,5 @@
 import { useQuery } from '@apollo/react-hooks';
-import { FilterPanel } from 'components/FilterPanel';
-import { IFilter } from 'components/FilterPanel/Filters';
-import { IColumn, List } from 'components/List';
-import { UserMessage } from 'components/UserMessage';
+import { FilterPanel, IColumn, IFilter, List, UserMessage } from 'common/components';
 import { getMonthName, getValueTyped as value } from 'helpers';
 import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
