@@ -1,5 +1,5 @@
 
-import { UserMessage } from 'components/UserMessage';
+import { UserMessage } from 'common/components/UserMessage';
 import { getDurationDisplay } from 'helpers';
 import resource from 'i18n';
 import { ITimeEntry } from 'interfaces';

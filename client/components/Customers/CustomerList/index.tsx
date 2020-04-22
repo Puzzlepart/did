@@ -1,6 +1,5 @@
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { IColumn, List, SelectionMode } from 'components/List';
-import { UserMessage } from 'components/UserMessage';
+import { IColumn, List, SelectionMode, UserMessage } from 'common/components';
 import { getValueTyped as value } from 'helpers';
 import { ICustomer } from 'interfaces';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';

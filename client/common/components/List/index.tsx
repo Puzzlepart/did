@@ -1,5 +1,5 @@
-import { ScrollablePaneWrapper } from 'components/ScrollablePaneWrapper';
-import { ConstrainMode, DetailsListLayoutMode, IColumn, Selection, SelectionMode, IDetailsHeaderProps } from 'office-ui-fabric-react/lib/DetailsList';
+import { ScrollablePaneWrapper } from 'common/components/ScrollablePaneWrapper';
+import { ConstrainMode, DetailsListLayoutMode, IColumn, IDetailsHeaderProps, Selection, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList';
 import { GroupHeader } from 'office-ui-fabric-react/lib/GroupedList';
 import { ShimmeredDetailsList } from 'office-ui-fabric-react/lib/ShimmeredDetailsList';
 import * as React from 'react';
@@ -76,3 +76,4 @@ export const List = (props: IListProps) => {
 };
 
 export { SelectionMode, IColumn };
+
