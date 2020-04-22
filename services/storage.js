@@ -25,17 +25,19 @@ class StorageService {
         this.filter = stringFilter('PartitionKey', isEqual, this.tenantId);
     }
     /**
-     * Checks if the tenant id has a active subscription
+     * Checks if there's a active subscription for the tenant id and returns it
      */
     getSubscription() {
         return new Promise(async (resolve) => {
-            const query = createQuery(1, ['Name']).where('RowKey eq ?', this.tenantId);
-            var { entries } = await queryTable('Subscriptions', query);
-            resolve(parseArray(entries)[0]);
+            const query = createQuery(1, ['Name', 'Settings']).where('RowKey eq ?', this.tenantId);
+            const { entries } = await queryTable('Subscriptions', query);
+            let [subscription] = parseArray(entries);
+            subscription.settings = subscription.settings ? JSON.parse(subscription.settings) : {};
+            resolve(subscription);
         });
     }
     /**
-     * Get user
+     * Get user by id
      *
      * @param {*} userId
      */
