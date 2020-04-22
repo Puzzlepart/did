@@ -14,7 +14,7 @@ export const EventList = (props: IEventListProps) => {
             'title',
             'Title',
             { maxWidth: value(props, 'columnWidths.title', 400), minWidth: value(props, 'columnWidths.title', 320) },
-            (event: ITimeEntry) => <a href={event.webLink} target='_blank'>{event.title}</a>,
+            (event: ITimeEntry) => <a href={event.webLink} target='_blank' className='truncate' title={event.title}>{event.title}</a>,
         ),
         col(
             'time',
