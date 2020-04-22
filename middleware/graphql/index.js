@@ -25,5 +25,6 @@ module.exports = graphql(req => ({
     },
     user: req.user,
     tenantId: req.user.profile._json.tid,
+    subscription: JSON.parse(req.user.profile.sub)
   }
 }));
