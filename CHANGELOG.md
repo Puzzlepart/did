@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Support for split weeks #232
+- Added user column to project overview #224
 
 ### Fixed
 
