@@ -138,6 +138,12 @@ type ConfirmedTimeEntries {
 	duration: Float
 }
 
+type VacationStatus {
+	registeredHours: Float!
+	remainingHours: Float!
+	allowedHours: Float!
+}
+
 type Query {
 	customers: [Customer!]!
 	projects(customerKey: String, sortBy: String): [Project!]!
@@ -147,6 +153,7 @@ type Query {
 	users: [User!]!
 	currentUser: User!
 	outlookCategories: [OutlookCategory!]!
+	vacationStatus: VacationStatus!
 }
 
 type Mutation {
