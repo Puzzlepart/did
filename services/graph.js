@@ -174,7 +174,6 @@ class GraphService {
             startTime: evt.start.dateTime,
             endTime: evt.end.dateTime,
             durationHours: utils.getDurationHours(evt.start.dateTime, evt.end.dateTime),
-            durationMinutes: utils.getDurationMinutes(evt.start.dateTime, evt.end.dateTime),
           })
         });
         return events;
