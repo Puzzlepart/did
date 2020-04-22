@@ -15,7 +15,7 @@ async function onVerifySubscription(_iss, _sub, profile, _accessToken, _refreshT
             return done(error, null);
         }
         profile['email'] = profile._json.preferred_username;
-        profile['sub'] = sub.name;
+        profile['sub'] = JSON.stringify(sub);
     } catch (error) {
         done(error, null);
     }
