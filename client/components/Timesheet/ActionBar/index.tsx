@@ -51,7 +51,7 @@ export const ActionBar = (props: IActionBarProps) => {
                 <DefaultButton
                     hidden={props.timesheet.loading}
                     iconProps={{ iconName: 'DateTime' }}
-                    onClick={_ => props.onChangePeriod(period)}
+                    onClick={_ => props.onChangePeriod(period.id)}
                     text={period.name}
                     styles={{ root: { height: 44, marginLeft: 4 } }}
                     checked={period.id === props.selectedPeriod.id}
@@ -65,13 +65,13 @@ export const ActionBar = (props: IActionBarProps) => {
             itemType: ContextualMenuItemType.Normal,
             onRender: () => props.selectedPeriod.isConfirmed
                 ? <DefaultButton
-                    hidden={props.timesheet.loading}
+                    disabled={props.timesheet.loading}
                     iconProps={{ iconName: 'Cancel' }}
                     onClick={props.onUnconfirmPeriod}
                     text={resource('TIMESHEET.UNCONFIRM_HOURS_TEXT')}
                     styles={{ root: { height: 44, marginLeft: 4 } }} />
                 : <PrimaryButton
-                    hidden={props.timesheet.loading}
+                    disabled={props.timesheet.loading || props.selectedPeriod.unmatchedDuration > 0}
                     iconProps={{ iconName: 'CheckMark' }}
                     onClick={props.onConfirmPeriod}
                     text={resource('TIMESHEET.CONFIRM_HOURS_TEXT')}

@@ -1,4 +1,5 @@
-import { ITimesheetState, ITimesheetPeriod } from '../types';
+import { ITimesheetState } from '../types';
+import { TimesheetPeriod } from '../TimesheetPeriod';
 
 export interface IStatusBarProps {
     /**
@@ -9,12 +10,7 @@ export interface IStatusBarProps {
     /**
      * Selected period 
      */
-    selectedPeriod?: ITimesheetPeriod;
-
-    /**
-     * Ignored events
-     */
-    ignoredEvents: string[];
+    selectedPeriod?: TimesheetPeriod;
 
     /**
      * On clear ignores handler
