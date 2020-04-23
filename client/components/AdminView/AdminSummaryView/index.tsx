@@ -27,7 +27,7 @@ export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
     });
     let entries = value<any[]>(data, 'result.entries', []).filter(e => e.monthNumber > 0);
 
-    let periods: IPivotItemProps[] = [moment().year() - 2, moment().year() - 1, moment().year()].map(year => ({
+    let periods: IPivotItemProps[] = [2, 1, 0].map(i => moment().year() - i).map(year => ({
         key: `${year}`,
         itemKey: `${year}`,
         headerText: `${year}`,
