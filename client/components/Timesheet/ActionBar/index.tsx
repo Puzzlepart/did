@@ -2,7 +2,7 @@ import resource from 'i18n';
 import * as moment from 'moment';
 import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
-import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
+import { PrimaryButton, DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import * as React from 'react';
 import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS';
 import { IActionBarProps } from './IActionBarProps';
@@ -50,6 +50,7 @@ export const ActionBar = (props: IActionBarProps) => {
             onRender: () => (
                 <DefaultButton
                     hidden={props.timesheet.loading}
+                    iconProps={{ iconName: 'DateTime' }}
                     onClick={_ => props.onChangePeriod(period)}
                     text={period.name}
                     styles={{ root: { height: 44, marginLeft: 4 } }}
@@ -62,18 +63,19 @@ export const ActionBar = (props: IActionBarProps) => {
         {
             key: 'CONFIRM_HOURS',
             itemType: ContextualMenuItemType.Normal,
-            name: resource('TIMESHEET.CONFIRM_HOURS_TEXT'),
-            iconProps: { iconName: 'CheckMark', ...ACTIONBAR_ICON_PROPS },
-            onClick: props.onConfirmPeriod,
-            disabled: props.timesheet.loading || props.selectedPeriod.isConfirmed || props.selectedPeriod.errors.length > 0,
-        },
-        {
-            key: 'UNCONFIRM_HOURS',
-            itemType: ContextualMenuItemType.Normal,
-            name: resource('TIMESHEET.UNCONFIRM_HOURS_TEXT'),
-            iconProps: { iconName: 'ErrorBadge', ...ACTIONBAR_ICON_PROPS },
-            onClick: props.onUnconfirmPeriod,
-            disabled: props.timesheet.loading || !props.selectedPeriod.isConfirmed,
+            onRender: () => props.selectedPeriod.isConfirmed
+                ? <DefaultButton
+                    hidden={props.timesheet.loading}
+                    iconProps={{ iconName: 'Cancel' }}
+                    onClick={props.onUnconfirmPeriod}
+                    text={resource('TIMESHEET.UNCONFIRM_HOURS_TEXT')}
+                    styles={{ root: { height: 44, marginLeft: 4 } }} />
+                : <PrimaryButton
+                    hidden={props.timesheet.loading}
+                    iconProps={{ iconName: 'CheckMark' }}
+                    onClick={props.onConfirmPeriod}
+                    text={resource('TIMESHEET.CONFIRM_HOURS_TEXT')}
+                    styles={{ root: { height: 44, marginLeft: 4 } }} />
         }
     ];
 
