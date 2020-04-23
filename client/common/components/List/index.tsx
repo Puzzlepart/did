@@ -1,5 +1,5 @@
 import { ScrollablePaneWrapper } from 'common/components/ScrollablePaneWrapper';
-import { ConstrainMode, DetailsListLayoutMode, IColumn, IDetailsHeaderProps, Selection, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList';
+import { ConstrainMode, DetailsListLayoutMode, IColumn, IDetailsHeaderProps, Selection, SelectionMode, IDetailsGroupDividerProps } from 'office-ui-fabric-react/lib/DetailsList';
 import { GroupHeader } from 'office-ui-fabric-react/lib/GroupedList';
 import { ShimmeredDetailsList } from 'office-ui-fabric-react/lib/ShimmeredDetailsList';
 import * as React from 'react';
@@ -10,6 +10,7 @@ import { ListHeader } from './ListHeader';
 
 /**
  * @component List
+ * 
  * @param {IListProps} props Props
  */
 export const List = (props: IListProps) => {
@@ -17,6 +18,9 @@ export const List = (props: IListProps) => {
     let selection: Selection;
     let groups = null;
 
+    /**
+     * On selection chaned
+     */
     const onSelectionChanged = () => {
         const [selected] = selection.getSelection();
         props.selection.onChanged(selected);
@@ -30,17 +34,36 @@ export const List = (props: IListProps) => {
 
     selection = props.selection && new Selection({ onSelectionChanged });
 
-    const onSearch = (_event: any, term: string) => {
+    /**
+     * On search
+     * 
+     * @param {string} searchTerm Search term
+     */
+    const onSearch = (searchTerm: string) => {
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(() => {
-            let _items = props.items.filter(i => JSON.stringify(i).toLowerCase().indexOf(term.toLowerCase()) !== -1);
+            let _items = props.items.filter(i => JSON.stringify(i).toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
             setItems(_items);
         }, 500);
     }
 
-    const onRenderDetailsHeader = (headerProps: IDetailsHeaderProps, defaultRender: (props: IDetailsHeaderProps) => JSX.Element) => {
-        if (props.onRenderDetailsHeader) return onRenderDetailsHeader(headerProps, defaultRender);
+    /**
+     * On render details header
+     * 
+     * @param {IDetailsHeaderProps} headerProps Header props
+     * @param {Function} defaultRender Default render function
+     */
+    const onRenderListHeader = (headerProps: IDetailsHeaderProps, defaultRender: (props: IDetailsHeaderProps) => JSX.Element) => {
+        if (props.onRenderDetailsHeader) return onRenderListHeader(headerProps, defaultRender);
         return ListHeader(headerProps, defaultRender, props, onSearch);
+    }
+    /**
+     * On render group header
+     * 
+     * @param {IDetailsGroupDividerProps} headerProps Header props
+     */
+    const onRenderGroupHeader = (headerProps: IDetailsGroupDividerProps) => {
+        return <GroupHeader {...headerProps} styles={{ title: { cursor: 'initial' }, expand: { cursor: 'pointer' }, headerCount: { display: 'none' } }}></GroupHeader>;
     }
 
     if (props.groups) {
@@ -68,8 +91,11 @@ export const List = (props: IListProps) => {
                     selectionMode={props.selection ? props.selection.mode : SelectionMode.none}
                     constrainMode={ConstrainMode.horizontalConstrained}
                     layoutMode={DetailsListLayoutMode.justified}
-                    groupProps={{ ...props.groupProps, onRenderHeader: headerProps => <GroupHeader {...headerProps} styles={{ title: { cursor: 'initial' }, expand: { cursor: 'pointer' }, headerCount: { display: 'none' } }}></GroupHeader> }}
-                    onRenderDetailsHeader={onRenderDetailsHeader} />
+                    groupProps={{
+                        ...props.groupProps,
+                        onRenderHeader: onRenderGroupHeader,
+                    }}
+                    onRenderDetailsHeader={onRenderListHeader} />
             </ScrollablePaneWrapper>
         </div>
     );
