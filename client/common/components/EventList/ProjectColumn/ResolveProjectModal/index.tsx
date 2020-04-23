@@ -1,20 +1,12 @@
 
-import { UserMessage } from 'common/components/UserMessage';
+import { UserMessage, SearchProject } from 'common/components';
 import { getValueTyped as value } from 'helpers';
-import { IProject, ITimeEntry } from 'interfaces';
 import { Modal } from 'office-ui-fabric-react/lib/Modal';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
 import * as React from 'react';
 import { useState } from 'react';
-import { SearchProject } from './SearchProject';
-
-interface IResolveProjectModalProps {
-    event: ITimeEntry;
-    isOpen?: boolean;
-    onDismiss?: () => void;
-    onProjectSelected?: (project: IProject) => void;
-}
+import { IResolveProjectModalProps } from './types';
 
 /**
  * @component ResolveProjectModal

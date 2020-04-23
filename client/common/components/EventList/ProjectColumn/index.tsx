@@ -5,7 +5,6 @@ import { MessageBarButton } from 'office-ui-fabric-react/lib/Button';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import * as React from 'react';
-import { useState } from 'react';
 import { IProjectColumnProps } from './IProjectColumnProps';
 import { ResolveProjectModal } from './ResolveProjectModal';
 
@@ -14,10 +13,10 @@ import { ResolveProjectModal } from './ResolveProjectModal';
  */
 export const ProjectColumn = (props: IProjectColumnProps) => {
     let toggleId = getId('toggle-callout');
-    const [modal, setModal] = useState<boolean>(false);
+    const [modal, setModal] = React.useState<boolean>(false);
 
     if (!props.event.project) {
-        if (props.isConfirmed) return null;
+        if (props.isLocked) return null;
         if (props.event.error) {
             return (
                 <div className='c-Timesheet-projectColumn'>
@@ -40,8 +39,15 @@ export const ProjectColumn = (props: IProjectColumnProps) => {
                     text='No match found'
                     actions={
                         <div>
-                            <MessageBarButton onClick={_ => setModal(true)} id={toggleId}>Resolve</MessageBarButton>
-                            <MessageBarButton onClick={props.onIgnoreEvent}>Ignore</MessageBarButton>
+                            <MessageBarButton
+                                text='Resolve'
+                                iconProps={{ iconName: 'ReviewResponseSolid' }}
+                                onClick={_ => setModal(true)}
+                                id={toggleId} />
+                            <MessageBarButton
+                                text='Ignore'
+                                iconProps={{ iconName: 'Blocked2' }}
+                                onClick={_ => props.onIgnoreEvent(props.event)} />
                         </div>
                     } />
                 <ResolveProjectModal
@@ -50,7 +56,7 @@ export const ProjectColumn = (props: IProjectColumnProps) => {
                     isOpen={modal}
                     onProjectSelected={project => {
                         setModal(false);
-                        props.onManualMatch(project);
+                        props.onManualMatch(props.event, project);
                     }} />
             </div>
         );
@@ -65,7 +71,7 @@ export const ProjectColumn = (props: IProjectColumnProps) => {
                 </div>
             </div>
             <div className='c-Timesheet-projectColumn-clear' title='Clear' hidden={!props.event.isManualMatch}>
-                <span onClick={props.onClearManualMatch} style={{ cursor: 'pointer' }}><Icon iconName='Cancel' styles={{ root: { fontSize: 14 } }} /></span>
+                <span onClick={_ => props.onClearManualMatch(props.event)} style={{ cursor: 'pointer' }}><Icon iconName='Cancel' styles={{ root: { fontSize: 14 } }} /></span>
             </div>
         </div>
     );
