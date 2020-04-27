@@ -20,6 +20,7 @@ export const GET_PROJECTS = gql`
                 id
                 name
             }
+            inactive
         }
         outlookCategories { 
             id

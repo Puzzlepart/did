@@ -2,22 +2,25 @@ import { useQuery } from '@apollo/react-hooks';
 import { SelectionMode } from 'common/components/List';
 import { CreateProjectForm } from 'components/Projects/CreateProjectForm';
 import { getValueTyped as value } from 'helpers';
-import { IProject, IOutlookCategory } from 'interfaces';
+import { IOutlookCategory, IProject } from 'interfaces';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import * as React from 'react';
 import { useState } from 'react';
+import _ from 'underscore';
+import { getHash } from 'utils/getHash';
 import { GET_PROJECTS, IGetProjectsEntries } from './GET_PROJECTS';
 import { ProjectDetails } from './ProjectDetails';
-import { ProjectList } from './ProjectList';
-import { getHash } from 'utils/getHash';
-import _ from 'underscore';
+import ProjectList from './ProjectList';
 
 function getPath(): string[] {
     let [, path] = document.location.hash.substring(1).split('=');
     return (path || '').split('/');
 }
 
+/**
+ * @component Projects
+ */
 export const Projects = () => {
     const [selected, setSelected] = useState<IProject>(null);
     const { loading, error, data } = useQuery<IGetProjectsEntries>(GET_PROJECTS, { variables: { sortBy: 'name' }, fetchPolicy: 'cache-first' });
@@ -71,3 +74,5 @@ export const Projects = () => {
         </Pivot >
     );
 }
+
+export { ProjectList, GET_PROJECTS };
