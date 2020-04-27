@@ -21,7 +21,13 @@
   },
   "PROJECTS": {
     "PROJECT_INACTIVE_TEXT": "This project has been marked as inactive.",
-    "SEARCH_PLACEHOLDER": "Search in projects..."
+    "SEARCH_PLACEHOLDER": "Search in projects...",
+    "CATEGORY_OUTLOOK_TEXT": "This project has a category in your Outlook.",
+    "PROJECT_WORKSPACE_LABEL": "Project workspace",
+    "CREATE_OUTLOOK_CATEGORY_LABEL": "Create category in Outlook",
+    "NO_TIME_ENTRIES_TEXT": "No time entries registered for the project.",
+    "TIME_ENTRIES_ERROR_TEXT": "An error occured loading time entries for the project.",
+    "TIME_ENTRIES_LOADING_LABEL": "Loading time entries"
   },
   "CUSTOMERS": {
     "CUSTOMER_INACTIVE_TEXT": "This customer has been marked as inactive.",
@@ -30,6 +36,7 @@
   },
   "COMMON": {
     "SEARCH_PLACEHOLDER": "Search...",
-    "GENERIC_ERROR_TEXT": "An error occured."
+    "GENERIC_ERROR_TEXT": "An error occured.",
+    "EXPORT_TO_EXCEL_LABEL": "Export to Excel"
   }
 }

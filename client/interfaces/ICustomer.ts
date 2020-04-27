@@ -6,4 +6,5 @@ export interface ICustomer extends IObjectWithKey {
     description: string;
     webLink: string;
     icon: string;
+    inactive?: boolean;
 }
