@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { EventList } from 'components/Timesheet/EventList';
+import EventList from 'common/components/EventList';
 import { IBaseResult } from 'graphql';
 import { getValueTyped as value } from 'helpers';
 import { IOutlookCategory } from 'interfaces';

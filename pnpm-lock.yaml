@@ -58,6 +58,7 @@ dependencies:
   underscore: 1.9.1
   uuid: 7.0.2
   validator: 13.0.0
+  with-default-props: 0.2.1
 devDependencies:
   '@apollo/react-hooks': 3.1.3_f2a65c11c395df2a2dd4e2bcc9f29788
   '@babel/compat-data': 7.8.0
@@ -252,7 +253,7 @@ packages:
       gensync: 1.0.0-beta.1
       json5: 2.1.3
       lodash: 4.17.15
-      resolve: 1.16.1
+      resolve: 1.17.0
       semver: 5.7.1
       source-map: 0.5.7
     dev: true
@@ -1028,13 +1029,13 @@ packages:
     dev: true
     resolution:
       integrity: sha512-6xnwtvp9DY1EINIKdTfvfeAtCYw4OqBZJhtiqkT3ivjnEfa25VQ3TsKvaFfKm8MyGIEfE95qLe+bNEt3nB0Ylg==
-  /@fluentui/react-focus/7.4.3_f96e181a00d2456474c5ac996e3d83be:
+  /@fluentui/react-focus/7.5.0_f96e181a00d2456474c5ac996e3d83be:
     dependencies:
       '@types/react': 16.9.34
       '@types/react-dom': 16.9.6
       '@uifabric/merge-styles': 7.11.1
       '@uifabric/set-version': 7.0.11
-      '@uifabric/styling': 7.11.7_f96e181a00d2456474c5ac996e3d83be
+      '@uifabric/styling': 7.11.8_f96e181a00d2456474c5ac996e3d83be
       '@uifabric/utilities': 7.15.11_f96e181a00d2456474c5ac996e3d83be
       react: 16.13.1
       react-dom: 16.13.1_react@16.13.1
@@ -1046,12 +1047,12 @@ packages:
       react: '>=16.8.0 <17.0.0'
       react-dom: '>=16.8.0 <17.0.0'
     resolution:
-      integrity: sha512-868lctk3cGRn24l1jRftcCXkX1N8nY+qDccPQ3ZcKb04hEhtIlsz51JiQdevYQAvQg7f2Lb5RywtGH4DhBlbew==
-  /@fluentui/react-icons/0.1.5_f96e181a00d2456474c5ac996e3d83be:
+      integrity: sha512-Esqol7uHcQObX5kNJ8ZQnqxfW5fSN3eGFzBxd/yGQVLMU53DE0EHRXxJICT19EZs9xupZfu3Pu9k+SG5+YXXhA==
+  /@fluentui/react-icons/0.1.6_f96e181a00d2456474c5ac996e3d83be:
     dependencies:
       '@types/react-dom': 16.9.6
       '@uifabric/set-version': 7.0.11
-      '@uifabric/styling': 7.11.7_f96e181a00d2456474c5ac996e3d83be
+      '@uifabric/styling': 7.11.8_f96e181a00d2456474c5ac996e3d83be
       '@uifabric/utilities': 7.15.11_f96e181a00d2456474c5ac996e3d83be
       react: 16.13.1
       react-dom: 16.13.1_react@16.13.1
@@ -1063,7 +1064,7 @@ packages:
       react: '>=16.8.0 <17.0.0'
       react-dom: '>=16.8.0 <17.0.0'
     resolution:
-      integrity: sha512-F2I/UoTnTrPAB+XoB05SVoP2Za3xBHn0ANKt46MXfqGYvGiAQo7UWYGiw0ciOqI9jGl+nc3eaa5M4AjC6q2UQg==
+      integrity: sha512-mNalpAHjUAjun7cQAc+NhT8kp/DP6InDdwrdPoMbsjQPFgTfIGFzRr+2Ew6RNvNKbiz5mVTHCPh2FTiBh45UvA==
   /@graphql-toolkit/code-file-loader/0.10.3_graphql@14.3.1:
     dependencies:
       '@graphql-toolkit/common': 0.10.3_graphql@14.3.1
@@ -1382,13 +1383,13 @@ packages:
   /@types/zen-observable/0.8.0:
     resolution:
       integrity: sha512-te5lMAWii1uEJ4FwLjzdlbw3+n0FZNOvFXHxQDKeT0dilh7HOzdMzV2TrJVUzq8ep7J4Na8OUYPRLSQkJHAlrg==
-  /@uifabric/foundation/7.7.4_f96e181a00d2456474c5ac996e3d83be:
+  /@uifabric/foundation/7.7.5_f96e181a00d2456474c5ac996e3d83be:
     dependencies:
       '@types/react': 16.9.34
       '@types/react-dom': 16.9.6
       '@uifabric/merge-styles': 7.11.1
       '@uifabric/set-version': 7.0.11
-      '@uifabric/styling': 7.11.7_f96e181a00d2456474c5ac996e3d83be
+      '@uifabric/styling': 7.11.8_f96e181a00d2456474c5ac996e3d83be
       '@uifabric/utilities': 7.15.11_f96e181a00d2456474c5ac996e3d83be
       react: 16.13.1
       react-dom: 16.13.1_react@16.13.1
@@ -1400,11 +1401,11 @@ packages:
       react: '>=16.8.0 <17.0.0'
       react-dom: '>=16.8.0 <17.0.0'
     resolution:
-      integrity: sha512-dnNbptWhTP7aQtueemNjwOqG5WytjIO3Asts8YD5YQkfxrCyicRBcSOXlFb66akN56c01gby+3jjSZtPtUjLEA==
+      integrity: sha512-WTGMXxmuRbYXFPw3NbTVOt9l8Fb7Z+R8vJ+zTThR8oYw6Mx7+ZVa/bGoIAiNbS2MHw5j4YXb7D0TdxLnZXhn2g==
   /@uifabric/icons/7.3.27_f96e181a00d2456474c5ac996e3d83be:
     dependencies:
       '@uifabric/set-version': 7.0.11
-      '@uifabric/styling': 7.11.7_f96e181a00d2456474c5ac996e3d83be
+      '@uifabric/styling': 7.11.8_f96e181a00d2456474c5ac996e3d83be
       tslib: 1.11.1
     peerDependencies:
       '@types/react': '*'
@@ -1419,7 +1420,7 @@ packages:
       tslib: 1.11.1
     resolution:
       integrity: sha512-r3T+xOo36qr0lrA+RRN1Ie6eI6Uzo7Gf8AplFkIGeaNczC2m3k5xY+oUa1WmOc6yRCJdMnn18fTYljOXAV4Tpw==
-  /@uifabric/react-hooks/7.1.7_f96e181a00d2456474c5ac996e3d83be:
+  /@uifabric/react-hooks/7.2.0_f96e181a00d2456474c5ac996e3d83be:
     dependencies:
       '@types/react': 16.9.34
       '@types/react-dom': 16.9.6
@@ -1435,13 +1436,13 @@ packages:
       react: '>=16.8.0 <17.0.0'
       react-dom: '>=16.8.0 <17.0.0'
     resolution:
-      integrity: sha512-kUIhLP0kvNHLiHmZUO2rmrgHAd/Hzf2J+gboQ21EtDFi3WPndbquxiFrd508TMP15B8u/r+rIWFM3UczwgLuCQ==
+      integrity: sha512-jARkz8+5oSIpkxM1eiQaNKnourxkHdWEy7qm/ayvKub/9qvsK2BFX35IBLsJ/gt6Np2Qzo72oaVRfRqqJ9FWBg==
   /@uifabric/set-version/7.0.11:
     dependencies:
       tslib: 1.11.1
     resolution:
       integrity: sha512-QAwgQa/Pik/q4Io8SGAjiAjiSHT5JIdhHxFw9Ytct/daagZl40Kt/Et+3U01geMLSD5TOAUATvRN7xAFFgkD9A==
-  /@uifabric/styling/7.11.7_f96e181a00d2456474c5ac996e3d83be:
+  /@uifabric/styling/7.11.8_f96e181a00d2456474c5ac996e3d83be:
     dependencies:
       '@microsoft/load-themed-styles': 1.10.43
       '@uifabric/merge-styles': 7.11.1
@@ -1454,7 +1455,7 @@ packages:
       react: '*'
       react-dom: '*'
     resolution:
-      integrity: sha512-amxz4KxDdF7JHMizKYSPkPDnH6HV2RqjrMCxjNuYjSXebUthiLT8ck+bKiyHQuUnLkds0qLyHZdRRNomhmhqKw==
+      integrity: sha512-H0uSL6zSef3jICQUKpucwdax++FpqzOYQDgeXYkb0111pEBbvtd56VSkODoEvSTf24s0oE0cIXTA/6XoNRCI3g==
   /@uifabric/utilities/7.15.11_f96e181a00d2456474c5ac996e3d83be:
     dependencies:
       '@types/react': 16.9.34
@@ -2271,8 +2272,8 @@ packages:
       integrity: sha512-Z942RysHXmJrhqk88FmKBVq/v5tqmSkDz7p54G/MGyjMnCFFnC79XWNbg+Vta8W6Wb2qtSZTSxIGkJrRpCFEiA==
   /browserslist/4.12.0:
     dependencies:
-      caniuse-lite: 1.0.30001045
-      electron-to-chromium: 1.3.414
+      caniuse-lite: 1.0.30001046
+      electron-to-chromium: 1.3.415
       node-releases: 1.1.53
       pkg-up: 2.0.0
     dev: true
@@ -2417,10 +2418,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-FkpUg+Yw+kMh5a8HAg5TGDGyYJs=
-  /caniuse-lite/1.0.30001045:
+  /caniuse-lite/1.0.30001046:
     dev: true
     resolution:
-      integrity: sha512-Y8o2Iz1KPcD6FjySbk1sPpvJqchgxk/iow0DABpGyzA1UeQAuxh63Xh0Enj5/BrsYbXtCN32JmR4ZxQTCQ6E6A==
+      integrity: sha512-CsGjBRYWG6FvgbyGy+hBbaezpwiqIOLkxQPY4A4Ea49g1eNsnQuESB+n4QM0BKii1j80MyJ26Ir5ywTQkbRE4g==
   /caseless/0.12.0:
     resolution:
       integrity: sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
@@ -2672,7 +2673,7 @@ packages:
     dependencies:
       dot-prop: 5.2.0
       graceful-fs: 4.2.3
-      make-dir: 3.0.2
+      make-dir: 3.1.0
       unique-string: 2.0.0
       write-file-atomic: 3.0.3
       xdg-basedir: 4.0.0
@@ -3162,10 +3163,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
-  /electron-to-chromium/1.3.414:
+  /electron-to-chromium/1.3.415:
     dev: true
     resolution:
-      integrity: sha512-UfxhIvED++qLwWrAq9uYVcqF8FdeV9sU2S7qhiHYFODxzXRrd1GZRl/PjITHsTEejgibcWDraD8TQqoHb1aCBQ==
+      integrity: sha512-GbtYqKffx3sU8G0HxwXuJFfs58Q7+iwLa5rBwaULwET6jWW8IAQSrVnu7vEfiUIcMVfbYyFg7cw3zdm+EbBJmw==
   /elliptic/6.5.2:
     dependencies:
       bn.js: 4.11.8
@@ -3720,7 +3721,7 @@ packages:
     dependencies:
       bindings: 1.5.0
       nan: 2.14.1
-    deprecated: fsevents 1 will break on node v14+. Upgrade to fsevents 2 with massive improvements.
+    deprecated: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
     dev: true
     engines:
       node: '>= 4.0'
@@ -5056,14 +5057,14 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-LS9X+dc8KLxXCb8dni79fLIIUA5VyZoyjSMCwTluaXA0o27cCK0bhXkpgw+sTXVpPy/lSO57ilRixqk0vDmtRA==
-  /make-dir/3.0.2:
+  /make-dir/3.1.0:
     dependencies:
       semver: 6.3.0
     dev: true
     engines:
       node: '>=8'
     resolution:
-      integrity: sha512-rYKABKutXa6vXTXhoV18cBE7PaewPXHe/Bdq4v+ZLMhxbWApkFFplT0LcbMW+6BbjnQXzZ/sAvSE/JdguApG5w==
+      integrity: sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==
   /map-age-cleaner/0.1.3:
     dependencies:
       p-defer: 1.0.0
@@ -5523,7 +5524,7 @@ packages:
   /normalize-package-data/2.5.0:
     dependencies:
       hosted-git-info: 2.8.8
-      resolve: 1.16.1
+      resolve: 1.17.0
       semver: 5.7.1
       validate-npm-package-license: 3.0.4
     dev: true
@@ -5634,17 +5635,17 @@ packages:
       integrity: sha1-h6EKxMFpS9Lhy/U1kaZhQftd10c=
   /office-ui-fabric-react/7.106.3_f96e181a00d2456474c5ac996e3d83be:
     dependencies:
-      '@fluentui/react-focus': 7.4.3_f96e181a00d2456474c5ac996e3d83be
-      '@fluentui/react-icons': 0.1.5_f96e181a00d2456474c5ac996e3d83be
+      '@fluentui/react-focus': 7.5.0_f96e181a00d2456474c5ac996e3d83be
+      '@fluentui/react-icons': 0.1.6_f96e181a00d2456474c5ac996e3d83be
       '@microsoft/load-themed-styles': 1.10.43
       '@types/react': 16.9.34
       '@types/react-dom': 16.9.6
-      '@uifabric/foundation': 7.7.4_f96e181a00d2456474c5ac996e3d83be
+      '@uifabric/foundation': 7.7.5_f96e181a00d2456474c5ac996e3d83be
       '@uifabric/icons': 7.3.27_f96e181a00d2456474c5ac996e3d83be
       '@uifabric/merge-styles': 7.11.1
-      '@uifabric/react-hooks': 7.1.7_f96e181a00d2456474c5ac996e3d83be
+      '@uifabric/react-hooks': 7.2.0_f96e181a00d2456474c5ac996e3d83be
       '@uifabric/set-version': 7.0.11
-      '@uifabric/styling': 7.11.7_f96e181a00d2456474c5ac996e3d83be
+      '@uifabric/styling': 7.11.8_f96e181a00d2456474c5ac996e3d83be
       '@uifabric/utilities': 7.15.11_f96e181a00d2456474c5ac996e3d83be
       prop-types: 15.7.2
       react: 16.13.1
@@ -6710,12 +6711,12 @@ packages:
     dev: true
     resolution:
       integrity: sha1-LGN/53yJOv0qZj/iGqkIAGjiBSo=
-  /resolve/1.16.1:
+  /resolve/1.17.0:
     dependencies:
       path-parse: 1.0.6
     dev: true
     resolution:
-      integrity: sha512-rmAglCSqWWMrrBv/XM6sW0NuRFiKViw/W4d9EbC4pt+49H8JwHy+mcGmALTEg504AUDcLTvb1T2q3E9AnmY+ig==
+      integrity: sha512-ic+7JYiV8Vi2yzQGFWOkiZD5Z9z7O2Zhm9XMaTxdJExKasieFCr+yXZ/WmXsckHiKl12ar0y6XiXDx3m4RHn1w==
   /responselike/1.0.2:
     dependencies:
       lowercase-keys: 1.0.1
@@ -8063,6 +8064,10 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-NsmoXalsWVDMGupxZ5R08ka9flZjjiLvHVAWYOKtiKM8ujtZWr9cRffak+uSE48+Ob8ObalXpwyeUiyDD6QFgg==
+  /with-default-props/0.2.1:
+    dev: false
+    resolution:
+      integrity: sha512-yTrBg7EGzFwpZLCN5M4ropSbZ/V+scx5DXBE6HZhKCevsRaYCRBBf/69UvfaWxu/zRaWX5j9Y/F4YFs1Q1yg4w==
   /wordwrap/1.0.0:
     dev: false
     resolution:
@@ -8330,3 +8335,4 @@ specifiers:
   webpack: 4.42.1
   webpack-cli: 3.3.11
   webpackbar: 4.0.0
+  with-default-props: ^0.2.1

@@ -51,7 +51,7 @@ class GraphService {
       switch (error.statusCode) {
         case 401: {
           this.oauthToken = await refreshAccessToken(this.req);
-          return this.getEvents(startDateTime, endDateTime);
+          return this.createOutlookCategory(category);
         }
         default: {
           throw new Error();
@@ -74,7 +74,7 @@ class GraphService {
       switch (error.statusCode) {
         case 401: {
           this.oauthToken = await refreshAccessToken(this.req);
-          return this.getEvents(startDateTime, endDateTime);
+          return this.getOutlookCategories();
         }
         default: {
           throw new Error();

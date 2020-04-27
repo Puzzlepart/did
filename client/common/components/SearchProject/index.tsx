@@ -3,23 +3,17 @@ import { useQuery } from '@apollo/react-hooks';
 import AutosuggestHighlightMatch from 'autosuggest-highlight/match';
 import AutosuggestHighlightParse from 'autosuggest-highlight/parse';
 import { GET_PROJECTS } from 'components/Projects/GET_PROJECTS';
-import { IProject, ICustomer } from 'interfaces';
+import { IProject } from 'interfaces/IProject';
 import { Shimmer } from 'office-ui-fabric-react/lib/Shimmer';
 import * as React from 'react';
 import { useState } from 'react';
 import AutoSuggest from 'react-autosuggest';
-
-interface ISearchProjectProps {
-    onSelected: any;
-    customer: ICustomer;
-    placeholder: string;
-}
+import { ISearchProjectProps } from './types';
 
 /**
  * @component SearchProject
- * @description @todo
  */
-export const SearchProject = ({ onSelected, customer, placeholder }: ISearchProjectProps) => {
+export const SearchProject = (props: ISearchProjectProps) => {
     let [projects, setProjects] = useState<IProject[]>(null);
     let [suggestions, setSuggestions] = useState([]);
     let [value, setValue] = useState('');
@@ -39,7 +33,7 @@ export const SearchProject = ({ onSelected, customer, placeholder }: ISearchProj
         return [...projects].filter(project => {
             let searchString = [project.name, project.customer.name, project.id].join(' ').toLowerCase();
             let isMatch = searchString.indexOf(inputValue) !== -1;
-            if (customer) isMatch = isMatch && project.customer.id === customer.id;
+            if (props.customer) isMatch = isMatch && project.customer.id === props.customer.id;
             return isMatch;
         }).splice(0, maxSuggestions);
     };
@@ -98,9 +92,9 @@ export const SearchProject = ({ onSelected, customer, placeholder }: ISearchProj
             onSuggestionsClearRequested={() => setSuggestions([])}
             getSuggestionValue={getDisplayValue}
             renderSuggestion={renderSuggestion}
-            onSuggestionSelected={(_event, { suggestion }) => onSelected(suggestion)}
+            onSuggestionSelected={(_event, { suggestion }) => props.onSelected(suggestion)}
             inputProps={{
-                placeholder,
+                placeholder: props.placeholder,
                 value,
                 onChange: (_event: any, { newValue }) => setValue(newValue),
                 width: '100%',
