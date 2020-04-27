@@ -7,7 +7,7 @@ import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { Link } from 'office-ui-fabric-react/lib/Link';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import * as React from 'react';
-import { ConfirmDeleteDialog } from '../ConfirmDeleteDialog';
+import { ConfirmDeleteDialog } from '../CustomerList/ConfirmDeleteDialog';
 import { ICustomerDetailsProps } from './ICustomerDetailsProps';
 import resource from 'i18n';
 
