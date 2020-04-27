@@ -16,9 +16,9 @@ import { IClearManualMatchButtonProps, IProjectColumnProps, IProjectColumnToolti
 /**
  * @component ClearManualMatchButton
  */
-export const ClearManualMatchButton = ({ onClick, hidden }: IClearManualMatchButtonProps) => {
+export const ClearManualMatchButton = ({ onClick, hidden, className }: IClearManualMatchButtonProps) => {
     return (
-        <div className='c-Timesheet-projectColumn-clear' title={resource('TIMESHEET.CLEAR_PROJECT_MATCH_TOOLTIP_TEXT')} hidden={hidden}>
+        <div className={className} title={resource('TIMESHEET.CLEAR_PROJECT_MATCH_TOOLTIP_TEXT')} hidden={hidden}>
             <span onClick={onClick} style={{ cursor: 'pointer' }}><Icon iconName='Cancel' styles={{ root: { fontSize: 14 } }} /></span>
         </div>
     );
@@ -111,7 +111,7 @@ const ProjectColumn = (props: IProjectColumnProps) => {
                         <span>for </span><a href={`/customers#${props.event.customer.id}`}><span>{props.event.customer.name}</span></a>
                     </div>
                 </div>
-                <ClearManualMatchButton onClick={() => props.onClearManualMatch(props.event)} hidden={props.event.isManualMatch} />
+                <ClearManualMatchButton onClick={() => props.onClearManualMatch(props.event)} className={props.className.clearButton} hidden={props.event.isManualMatch} />
             </div>
         </TooltipHost>
     );
@@ -125,7 +125,7 @@ export default withDefaultProps(ProjectColumn, {
             text: 'c-Timesheet-projectColumn-content-text',
             subText: 'c-Timesheet-projectColumn-content-subText',
         },
-        clear: 'c-Timesheet-projectColumn-clear',
+        clearButton: 'c-Timesheet-projectColumn-clearButton',
         tooltip: {
             root: 'c-Timesheet-projectColumn-tooltip',
             title: 'c-Timesheet-projectColumn-tooltip-title',

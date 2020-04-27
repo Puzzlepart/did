@@ -15,7 +15,7 @@ export interface IProjectColumnClassName {
         text: string;
         subText: string;
     },
-    clear: string;
+    clearButton: string;
     tooltip: IProjectColumnTooltipClassName;
 }
 
@@ -33,6 +33,9 @@ export interface IProjectColumnProps {
 
     isLocked?: boolean;
 
+    /**
+     * Class names
+     */
     className?: IProjectColumnClassName;
 
     /**
