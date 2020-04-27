@@ -18,5 +18,18 @@
     "UNDO_IGNORE_LINK_TEXT": "Click to undo",
     "UNRESOLVER_ERRORS_TEXT": "You have {0} unresolved errors. You need to resolve them before confirming the hours.",
     "SPLIT_WEEK_TEXT": "Selected week spans two months. Navigate between the first and second period using the command bar above."
+  },
+  "PROJECTS": {
+    "PROJECT_INACTIVE_TEXT": "This project has been marked as inactive.",
+    "SEARCH_PLACEHOLDER": "Search in projects..."
+  },
+  "CUSTOMERS": {
+    "CUSTOMER_INACTIVE_TEXT": "This customer has been marked as inactive.",
+    "CUSTOMER_DELETE_BUTTON_LABEL": "Delete customer",
+    "CUSTOMER_DELETE_CONFIRMATION_TEXT": "The customer {0} and connected projects was deleted."
+  },
+  "COMMON": {
+    "SEARCH_PLACEHOLDER": "Search...",
+    "GENERIC_ERROR_TEXT": "An error occured."
   }
 }
