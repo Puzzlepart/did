@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added user column to project overview #224
 - Consolidating confirm buttons #270
 - Confirm hours disabled when there's unmatched events #268
+- Presenting active/inactive status for customers and projects in views #168
 
 ### Fixed
 - Sorted customer options alphabetically by name in summary view(s) #260
