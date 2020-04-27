@@ -22,6 +22,7 @@
         "@microsoft/microsoft-graph-client": "2.0.0",
         "@pnp/common": "2.0.4",
         "@types/react-autosuggest": "9.3.13",
+        "@uifabric/react-hooks": "^7.2.0",
         "apollo-cache": "1.3.4",
         "apollo-cache-inmemory": "1.6.5",
         "apollo-client": "2.6.8",

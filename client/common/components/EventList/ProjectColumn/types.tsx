@@ -1,9 +1,39 @@
 import { IProject, ITimeEntry } from 'interfaces';
 
+export interface IProjectColumnTooltipClassName {
+    root: string;
+    title: string;
+    subTitle: string;
+    description: string;
+    tag: string;
+}
+
+export interface IProjectColumnClassName {
+    root: string;
+    content: {
+        root: string;
+        text: string;
+        subText: string;
+    },
+    clear: string;
+    tooltip: IProjectColumnTooltipClassName;
+}
+
+export interface IClearManualMatchButtonProps extends React.HTMLProps<HTMLDivElement> {
+    onClick: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
+}
+
+export interface IProjectColumnTooltipProps {
+    project: IProject;
+    className: IProjectColumnTooltipClassName;
+}
+
 export interface IProjectColumnProps {
     event: ITimeEntry;
 
     isLocked?: boolean;
+
+    className?: IProjectColumnClassName;
 
     /**
      * Callback for when a project is manually matched for an event
