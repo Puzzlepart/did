@@ -1,11 +1,12 @@
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { IColumn, List, SelectionMode, UserMessage } from 'common/components';
-import { getValueTyped as value } from 'helpers';
+import * as hlp from 'helpers';
+import resource from 'i18n';
 import { ICustomer } from 'interfaces';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import * as React from 'react';
-import { useState } from 'react';
+import * as format from 'string-format';
 import { generateColumn as col } from 'utils/generateColumn';
 import { getHash } from 'utils/getHash';
 import { CustomerDetails } from './CustomerDetails';
@@ -17,8 +18,8 @@ import { ICustomerListProps } from './ICustomerListProps';
  * @component CustomerList
  */
 export const CustomerList = (props: ICustomerListProps) => {
-    let [message, setMessage] = useState<{ text: string, type: MessageBarType }>(null);
-    const [selected, setSelected] = useState<ICustomer>(null);
+    let [message, setMessage] = React.useState<{ text: string, type: MessageBarType }>(null);
+    const [selected, setSelected] = React.useState<ICustomer>(null);
     const { loading, error, data, refetch } = useQuery(GET_CUSTOMERS, { fetchPolicy: 'cache-first' });
     const [deleteCustomer] = useMutation(DELETE_CUSTOMER);
 
@@ -29,7 +30,7 @@ export const CustomerList = (props: ICustomerListProps) => {
         const { data } = await deleteCustomer({ variables: { key: selected.key } });
         window.location.hash = '';
         if (data.result.success) {
-            setMessage({ text: `The customer ${selected.name} and connected projects was deleted.`, type: MessageBarType.remove });
+            setMessage({ text: format(resource('CUSTOMERS.CUSTOMER_INACTIVE_TEXT'), selected.name), type: MessageBarType.remove });
             window.setTimeout(() => setMessage(null), 5000);
         }
         setSelected(null);
@@ -41,13 +42,18 @@ export const CustomerList = (props: ICustomerListProps) => {
             'icon',
             '',
             { maxWidth: 35, minWidth: 35 },
-            (customer: ICustomer) => <Icon iconName={customer.icon || 'Page'} styles={{ root: { fontSize: 16 } }} />,
+            (customer: ICustomer) => {
+                if (customer.inactive) {
+                    return <Icon title={resource('CUSTOMERS.CUSTOMER_INACTIVE_TEXT')} iconName='Warning' styles={{ root: { fontSize: 16, color: '#ffbf00' } }} />;
+                }
+                return <Icon iconName={customer.icon || 'Page'} styles={{ root: { fontSize: 16 } }} />;
+            },
         ),
         col('key', 'Key', { maxWidth: 120 }),
         col('name', 'Name', { maxWidth: 300 }),
     ];
 
-    let customers = value<ICustomer[]>(data, 'customers', []);
+    let customers = hlp.getValueTyped<ICustomer[]>(data, 'customers', []);
 
     if (getHash()) {
         let [_selected] = customers.filter(c => c.id === getHash());
@@ -63,7 +69,7 @@ export const CustomerList = (props: ICustomerListProps) => {
                     enableShimmer={loading}
                     items={customers}
                     columns={columns}
-                    searchBox={{ placeholder: 'Search...' }}
+                    searchBox={{ placeholder: resource('COMMON.SEARCH_PLACEHOLDER') }}
                     selection={{ mode: SelectionMode.single, onChanged: selected => setSelected(selected) }}
                     height={selected && 400} />
             )}
