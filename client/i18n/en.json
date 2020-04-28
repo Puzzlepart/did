@@ -16,7 +16,7 @@
     "PERIOD_CONFIRMED_TEXT": "The period is confirmed with {0}. Click **Unconfirm hours** if you want to do some adjustments.",
     "IGNORED_EVENTS_TEXT": "You have {0} ignored event(s).",
     "UNDO_IGNORE_LINK_TEXT": "Click to undo",
-    "UNRESOLVER_ERRORS_TEXT": "You have {0} unresolved errors. You need to resolve them before confirming the hours
+    "UNRESOLVER_ERRORS_TEXT": "You have {0} unresolved errors. You need to resolve them before confirming the hours",
     "SPLIT_WEEK_TEXT": "Selected week spans two months. Navigate between the first and second period using the command bar above.",
     "EVENT_ERROR_PREFIX": "**NOTE:**",
     "NO_PROJECT_MATCH_FOUND_TEXT": "No match found",
@@ -26,7 +26,6 @@
     "MATCH_OUTLOOK_NOTE": "**Please note:** You should try your best to match<a href='{0}' target='_blank'>the event in Outlook</a>, but in some cases it might be neccessary to manually match.",
     "DID_YOU_MEAN_TEXT": "Did you mean",
     "EVENT_NOT_FULLY_MATCHED_TEXT": "Event not matched. We found a matching customer `{0}`, but not a project with the specified key."
-    "SPLIT_WEEK_TEXT": "Selected week spans two months. Navigate between the first and second period using the command bar above."
   },
   "PROJECTS": {
     "PROJECT_INACTIVE_TEXT": "This project has been marked as inactive.",
