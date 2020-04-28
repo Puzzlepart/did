@@ -1,41 +1,27 @@
 {
-    "compilerOptions": {
-      "target": "es5",
-      "allowSyntheticDefaultImports": true,
-      "forceConsistentCasingInFileNames": true,
-      "module": "esnext",
-      "moduleResolution": "node",
-      "jsx": "react",
-      "declaration": true,
-      "sourceMap": true,
-      "experimentalDecorators": true,
-      "noImplicitAny": false,
-      "skipLibCheck": true,
-      "outDir": "lib/client",
-      "inlineSources": false,
-      "strictNullChecks": false,
-      "noUnusedLocals": false,
-      "resolveJsonModule": true,
-      "typeRoots": [
-        "./node_modules/@types"
-      ],
-      "types": [
-        "webpack-env"
-      ],
-      "lib": [
-        "es2015",
-        "dom",
-        "es2015.collection"
-      ],
-      "baseUrl": "client"
-    },
-    "include": [
-      "client/**/*.ts",     
-      "client/**/*.tsx",
-      "client/i18n/*.json"
-    ],
-    "exclude": [
-      "node_modules",
-      "lib"
-    ],
-  }
+  "compilerOptions": {
+    "target": "es5",
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "downlevelIteration": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "declaration": true,
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "outDir": "lib/client",
+    "inlineSources": false,
+    "strictNullChecks": false,
+    "noUnusedLocals": false,
+    "resolveJsonModule": true,
+    "typeRoots": ["./node_modules/@types"],
+    "types": ["webpack-env"],
+    "lib": ["es2015", "dom", "es2015.collection"],
+    "baseUrl": "client"
+  },
+  "include": ["client/**/*.ts", "client/**/*.tsx", "client/i18n/*.json"],
+  "exclude": ["node_modules", "lib"]
+}
