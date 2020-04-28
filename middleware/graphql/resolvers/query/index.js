@@ -6,6 +6,7 @@ const timesheet = require('./timesheet');
 const weeks = require('./weeks');
 const users = require('./users');
 const currentUser = require('./currentUser');
+const notifications = require('./notifications');
 
 module.exports = {
     confirmedTimeEntries,
@@ -16,4 +17,5 @@ module.exports = {
     weeks,
     users,
     currentUser,
+    notifications,
 };

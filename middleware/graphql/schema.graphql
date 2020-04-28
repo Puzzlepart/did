@@ -138,6 +138,14 @@ type ConfirmedTimeEntries {
 	duration: Float
 }
 
+type Notification {
+	id: String
+	type: Int!
+	severity: Int!
+	text: String!
+	moreLink: String
+}
+
 type Query {
 	customers: [Customer!]!
 	projects(customerKey: String, sortBy: String): [Project!]!
@@ -147,6 +155,7 @@ type Query {
 	users: [User!]!
 	currentUser: User!
 	outlookCategories: [OutlookCategory!]!
+	notifications: [Notification]
 }
 
 type Mutation {

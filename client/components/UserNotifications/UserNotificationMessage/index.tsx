@@ -5,8 +5,11 @@ import { IUserNotificationMessageProps } from '../types';
 /**
  * @component UserNotificationMessage
  */
-export const UserNotificationMessage = (props: IUserNotificationMessageProps) => {
+export const UserNotificationMessage = ({ model, className }: IUserNotificationMessageProps) => {
     return (
-        <MessageBar itemID={props.itemID} {...props}>{props.content}</MessageBar>
+        <MessageBar  {...model.messageBarProps} className={className}>
+            <span>{model.text} </span>
+            {model.moreLink && <a href={model.moreLink}>Read more here</a>}
+        </MessageBar>
     );
 }

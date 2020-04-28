@@ -1,55 +1,51 @@
+import { useQuery } from '@apollo/react-hooks';
+import { getValueTyped } from 'helpers';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
-import { Panel, PanelType } from 'office-ui-fabric-react/lib/Panel';
 import * as React from 'react';
 import { withDefaultProps } from 'with-default-props';
-import { PLACEHOLDER_PANEL_MESSAGES } from './PLACEHOLDER_PANEL_MESSAGES';
-import { IUserNotificationMessageProps, IUserNotificationsProps } from './types';
-import { UserNotificationMessage } from './UserNotificationMessage';
+import GET_NOTIFICATIONS from './GET_NOTIFICATIONS';
+import { IUserNotificationMessage, IUserNotificationMessageProps, IUserNotificationsProps, UserNotificationMessageModel } from './types';
+import { UserNotificationsPanel } from './UserNotificationsPanel';
 
 /**
  * @component UserNotifications
  */
 const UserNotifications = (props: IUserNotificationsProps) => {
     const [showPanel, setShowPanel] = React.useState(false);
-    const [notifications, setNotifications] = React.useState<any[]>(PLACEHOLDER_PANEL_MESSAGES.map((n, idx) => ({ ...n, itemID: idx })));
-
-    //TODO: Real data fetching from graphql and confirmed time entries
+    const [notifications, setNotifications] = React.useState<UserNotificationMessageModel[]>([]);
+    const { loading, data } = useQuery<{ notifications: IUserNotificationMessage[] }>(GET_NOTIFICATIONS, { fetchPolicy: 'cache-first' });
 
     /**
      * On dismiss notification
      * 
-     * @param {IUserNotificationMessageProps} notification Notification
+     * @param {string} notificationId Notification ID
      */
-    const onDismissNotification = (notification: IUserNotificationMessageProps) => {
-        // TODO: Persist in browser storage
-        setNotifications(notifications.filter(n => n.itemID !== notification.itemID));
+    const onDismissNotification = (notificationId: string) => {
+        setNotifications(notifications.filter(n => n.id !== notificationId));
     }
 
+
+    React.useEffect(() => {
+        let _notifications = getValueTyped<any[]>(data, 'notifications', []).map(n => new UserNotificationMessageModel(n, onDismissNotification));
+        if (_notifications.length > 0) {
+            setNotifications(_notifications);
+        }
+    }, [loading]);
+
     return (
-        <div className={props.className.root}>
+        <div className={props.className.root} hidden={loading}>
             <div className={props.className.toggle.root} onClick={_ => setShowPanel(!showPanel)}>
                 <div className={props.className.toggle.icon}>
                     <Icon iconName={props.toggleIcon} styles={props.toggleStyles} />
                 </div>
                 <div className={props.className.toggle.count}>{notifications.length}</div>
             </div>
-            <Panel
-                type={PanelType.smallFixedFar}
+            <UserNotificationsPanel
                 isOpen={showPanel}
-                className={props.className.panel.root}
                 headerText={props.panelHeaderText}
-                onDismiss={_ => setShowPanel(false)}
-                isLightDismiss={true}>
-                <div className={props.className.panel.body}>
-                    {notifications.map(n => (
-                        <UserNotificationMessage
-                            {...n}
-                            //TODO: Not dismissable if id is not specified
-                            onDismiss={_ => onDismissNotification(n)}
-                            className={props.className.panel.notification} />
-                    ))}
-                </div>
-            </Panel>
+                notifications={notifications}
+                className={props.className.panel}
+                onDismiss={_ => setShowPanel(false)} />
         </div >
     );
 }
