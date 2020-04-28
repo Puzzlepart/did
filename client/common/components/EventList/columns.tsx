@@ -4,7 +4,7 @@ import { ITimeEntry } from 'interfaces';
 import * as React from 'react';
 import { generateColumn as col } from 'utils/generateColumn';
 import { DurationDisplay } from './DurationDisplay';
-import { ProjectColumn } from './ProjectColumn';
+import ProjectColumn from './ProjectColumn';
 import { IEventListProps } from './types';
 
 /**

@@ -10,5 +10,6 @@ export default gql`
         description
         webLink
         icon
+        inactive
     }
 }`;
