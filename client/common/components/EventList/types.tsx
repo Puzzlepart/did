@@ -2,7 +2,7 @@ import { ITypedHash } from '@pnp/common';
 import { IListGroups } from 'common/components/List/IListGroups';
 import { ITimeEntry } from 'interfaces/ITimeEntry';
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
-import { IProjectColumnProps } from './ProjectColumn/IProjectColumnProps';
+import { IProjectColumnProps } from './ProjectColumn/types';
 
 export interface IEventListProps {
     /**

@@ -23,6 +23,7 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!) {
         id
         key
         name
+        description
         icon
         customer {          
           id       
@@ -35,6 +36,7 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!) {
         id
         key
         name
+        description
         customer {   
           id       
           key
