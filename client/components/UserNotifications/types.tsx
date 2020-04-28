@@ -1,6 +1,7 @@
 import { IIconStyleProps, IIconStyles } from 'office-ui-fabric-react/lib/Icon';
 import { IMessageBarProps, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { IStyleFunctionOrObject } from 'office-ui-fabric-react/lib/Utilities';
+import { IUserNotificationsPanelClassName } from './UserNotificationsPanel/types';
 
 export interface IUserNotificationsClassName {
     root: string;
@@ -10,11 +11,6 @@ export interface IUserNotificationsClassName {
         count: string;
     }
     panel: IUserNotificationsPanelClassName;
-}
-
-export interface IUserNotificationMessageProps {
-    model: UserNotificationMessageModel;
-    className: string;
 }
 
 export interface IUserNotificationMessage {
@@ -48,9 +44,8 @@ export class UserNotificationMessageModel {
      * Constructs a new instance of UserNotificationMessageModel
      * 
      * @param {IUserNotificationMessage} msg The message
-     * @param {void} _onDismissCallback On dismiss callback
      */
-    constructor(msg: IUserNotificationMessage, private _onDismissCallback: (notificationId: string) => void) {
+    constructor(msg: IUserNotificationMessage) {
         this.id = msg.id;
         this.type = msg.type;
         this.severity = msg.severity;
@@ -104,30 +99,14 @@ export class UserNotificationMessageModel {
             messageBarType: this._messageBarType,
             messageBarIconProps: this._messageBarIconProps,
         }
-        if (this.id) {
-            messageBarProps.onDismiss = () => this._onDismissCallback(this.id);
-        }
         return messageBarProps;
     }
 }
 
 export interface IUserNotificationsProps {
+    storageKey?: string;
     toggleIcon?: string;
     toggleStyles?: IStyleFunctionOrObject<IIconStyleProps, IIconStyles>;
     panelHeaderText?: string;
     className?: IUserNotificationsClassName;
-}
-
-export interface IUserNotificationsPanelClassName {
-    root: string;
-    body: string;
-    notification: string;
-}
-
-export interface IUserNotificationsPanelProps {
-    isOpen: boolean;
-    headerText: string;
-    notifications: UserNotificationMessageModel[];
-    className: IUserNotificationsPanelClassName;
-    onDismiss: (ev?: React.SyntheticEvent<HTMLElement, Event>) => void;
 }

@@ -1,34 +1,44 @@
-import { useQuery } from '@apollo/react-hooks';
-import { getValueTyped } from 'helpers';
+import { QueryHookOptions, useQuery } from '@apollo/react-hooks';
+import { getValueTyped as value } from 'helpers';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import * as React from 'react';
 import { withDefaultProps } from 'with-default-props';
-import GET_NOTIFICATIONS from './GET_NOTIFICATIONS';
-import { IUserNotificationMessage, IUserNotificationMessageProps, IUserNotificationsProps, UserNotificationMessageModel } from './types';
+import GET_NOTIFICATIONS, { IGetNotifications } from './GET_NOTIFICATIONS';
+import { IUserNotificationsProps, UserNotificationMessageModel } from './types';
 import { UserNotificationsPanel } from './UserNotificationsPanel';
+import { ITypedHash, IPnPClientStore, dateAdd, PnPClientStorage } from '@pnp/common';
+
+const LOCAL_STORAGE: IPnPClientStore = new PnPClientStorage().local;
 
 /**
  * @component UserNotifications
  */
 const UserNotifications = (props: IUserNotificationsProps) => {
     const [showPanel, setShowPanel] = React.useState(false);
-    const [notifications, setNotifications] = React.useState<UserNotificationMessageModel[]>([]);
-    const { loading, data } = useQuery<{ notifications: IUserNotificationMessage[] }>(GET_NOTIFICATIONS, { fetchPolicy: 'cache-first' });
+    const [notifications, setNotifications] = React.useState<Set<UserNotificationMessageModel>>(new Set());
+    const { loading, data } = useQuery<IGetNotifications>(GET_NOTIFICATIONS, { skip: notifications.size > 0, fetchPolicy: 'cache-first' });
 
     /**
-     * On dismiss notification
+     * On dismiss notification. Updates state and persists in browser storage.
      * 
-     * @param {string} notificationId Notification ID
+     * @param {UserNotificationMessageModel} UserNotificationMessageModel Notification
      */
-    const onDismissNotification = (notificationId: string) => {
-        setNotifications(notifications.filter(n => n.id !== notificationId));
+    const onDismissNotification = (notification: UserNotificationMessageModel) => {
+        const _notifications = new Set(notifications);
+        _notifications.delete(notification);        
+        let _dismissedIds = new Set<string>(LOCAL_STORAGE.get(props.storageKey) || []);
+        _dismissedIds.add(notification.id);
+        LOCAL_STORAGE.put(props.storageKey, [..._dismissedIds], dateAdd(new Date(), 'year', 1));
+        setNotifications(_notifications);
     }
 
 
     React.useEffect(() => {
-        let _notifications = getValueTyped<any[]>(data, 'notifications', []).map(n => new UserNotificationMessageModel(n, onDismissNotification));
+        let _dismissedIds = new Set<string>(LOCAL_STORAGE.get(props.storageKey) || []);
+        let _notifications = value(data, 'notifications', []).map(n => new UserNotificationMessageModel(n));
+        _notifications = _notifications.filter(n => !_dismissedIds.has(n.id));
         if (_notifications.length > 0) {
-            setNotifications(_notifications);
+            setNotifications(new Set(_notifications));
         }
     }, [loading]);
 
@@ -38,19 +48,23 @@ const UserNotifications = (props: IUserNotificationsProps) => {
                 <div className={props.className.toggle.icon}>
                     <Icon iconName={props.toggleIcon} styles={props.toggleStyles} />
                 </div>
-                <div className={props.className.toggle.count}>{notifications.length}</div>
+                <div className={props.className.toggle.count}>{notifications.size}</div>
             </div>
             <UserNotificationsPanel
                 isOpen={showPanel}
                 headerText={props.panelHeaderText}
                 notifications={notifications}
-                className={props.className.panel}
-                onDismiss={_ => setShowPanel(false)} />
-        </div >
+                className={props.className.panel.root}
+                bodyClassName={props.className.panel.body}
+                notificationClassName={props.className.panel.notification}
+                onDismiss={_ => setShowPanel(false)}
+                onDismissNotification={onDismissNotification} />
+        </div>
     );
 }
 
 export default withDefaultProps(UserNotifications, {
+    storageKey: 'did365_notifications_dismissed',
     toggleIcon: 'Ringer',
     toggleStyles: { root: { color: '#fff', fontSize: '14pt' } },
     panelHeaderText: 'Notifications',
