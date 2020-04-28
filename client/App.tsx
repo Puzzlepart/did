@@ -1,27 +1,14 @@
-
-import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 import { initializeIcons } from '@uifabric/icons';
+import { AdminView, Customers, Projects, Reports, Timesheet, UserNotifications } from 'components';
 import i18n from 'i18next';
 import * as React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import * as ReactDom from 'react-dom';
-import { AdminView } from './components/AdminView';
-import { Customers } from './components/Customers';
-import { Projects } from './components/Projects';
-import { Reports } from './components/Reports';
-import { Timesheet } from './components/Timesheet';
+import { tryParseJson } from 'utils/tryParseJson';
 import GET_CURRENT_USER from './GET_CURRENT_USER';
-import { client } from './graphql';
+import * as graphql from './graphql';
 
 (async () => {
-    if (process.env.AZURE_APPLICATION_INSIGHTS_INSTRUMENTATION_KEY) {
-        const appInsights = new ApplicationInsights({
-            config: { instrumentationKey: process.env.AZURE_APPLICATION_INSIGHTS_INSTRUMENTATION_KEY }
-        });
-        appInsights.loadAppInsights();
-        appInsights.trackPageView();
-    }
-
     initializeIcons();
 
     // Initializing i18n with default namespace translation
@@ -43,41 +30,48 @@ import { client } from './graphql';
         CUSTOMERS: document.getElementById('app-customers'),
         ADMIN: document.getElementById('app-admin'),
         REPORTS: document.getElementById('app-reports'),
+        USERNOTIFICATIONS: document.getElementById('app-user-notifications'),
     }
 
+    /**
+     * Get React element props from specified HTMLElement
+     * 
+     * @param {HTMLElement} element Element
+     */
     const getProps = (element: HTMLElement) => {
         let props = element.attributes.getNamedItem('data-props').value;
-        try {
-            return JSON.parse(props);
-        } catch {
-            return {};
-        }
+        return tryParseJson(props);
     }
+
+    const client = graphql.getClient()
+
+    /**
+     * Renders the component in the specified HTMLElement wrapped in ApolloProvider
+     * 
+     * @param {any} component Component
+     * @param {HTMLElement} container Container element
+     */
+    const renderComponent = (component: any, container: HTMLElement) => {
+        let element = React.createElement(ApolloProvider, {
+            client,
+            children: React.createElement(component, getProps(container)),
+        })
+        ReactDom.render(element, container);
+    }
+
 
     client.query({ query: GET_CURRENT_USER, fetchPolicy: 'cache-first' }).then(({ data }) => {
         if (COMPONENTS.TIMESHEET !== null)
-            ReactDom.render((
-                <ApolloProvider client={client}><Timesheet {...getProps(COMPONENTS.TIMESHEET)} /></ApolloProvider>
-            ), COMPONENTS.TIMESHEET);
-
+            renderComponent(Timesheet, COMPONENTS.TIMESHEET);
         if (COMPONENTS.PROJECTS !== null)
-            ReactDom.render((
-                <ApolloProvider client={client}><Projects /></ApolloProvider>
-            ), COMPONENTS.PROJECTS);
-
+            renderComponent(Projects, COMPONENTS.PROJECTS);
         if (COMPONENTS.CUSTOMERS !== null)
-            ReactDom.render((
-                <ApolloProvider client={client}><Customers user={data.user} /></ApolloProvider>
-            ), COMPONENTS.CUSTOMERS);
-
+            renderComponent(Customers, COMPONENTS.CUSTOMERS);
         if (COMPONENTS.REPORTS !== null)
-            ReactDom.render((
-                <ApolloProvider client={client}><Reports {...getProps(COMPONENTS.REPORTS)} /></ApolloProvider>
-            ), COMPONENTS.REPORTS);
-
+            renderComponent(Reports, COMPONENTS.REPORTS);
         if (COMPONENTS.ADMIN !== null)
-            ReactDom.render((
-                <ApolloProvider client={client}><AdminView {...getProps(COMPONENTS.ADMIN)} /></ApolloProvider>
-            ), COMPONENTS.ADMIN);
+            renderComponent(AdminView, COMPONENTS.ADMIN);
+        if (COMPONENTS.USERNOTIFICATIONS !== null)
+            renderComponent(UserNotifications, COMPONENTS.USERNOTIFICATIONS);
     });
 })();

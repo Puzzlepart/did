@@ -8,7 +8,7 @@ import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import * as React from 'react';
 import _ from 'underscore';
-import { client as graphql, FetchPolicy } from '../../graphql';
+import { getClient, FetchPolicy } from '../../graphql';
 import { ActionBar } from './ActionBar';
 import CONFIRM_PERIOD from './CONFIRM_PERIOD';
 import GET_TIMESHEET from './GET_TIMESHEET';
@@ -166,7 +166,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
                 projectId: event.project.id,
                 isManualMatch: event.isManualMatch,
             }));
-        await graphql.mutate({
+        await getClient().mutate({
             mutation: CONFIRM_PERIOD,
             variables: {
                 startDateTime: this._selectedPeriod.startDateTime,
@@ -182,7 +182,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
      */
     private async _onUnconfirmPeriod() {
         this.setState({ loading: true });
-        await graphql.mutate({
+        await getClient().mutate({
             mutation: UNCONFIRM_PERIOD,
             variables: {
                 startDateTime: this._selectedPeriod.startDateTime,
@@ -290,7 +290,7 @@ export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState>
             endDateTime: this.state.scope.endDateTime.toISOString(),
             dateFormat: this.props.groupHeaderDateFormat,
         };
-        let { data: { timesheet } } = await graphql.query<{ timesheet: Partial<TimesheetPeriod>[] }>({
+        let { data: { timesheet } } = await getClient().query<{ timesheet: Partial<TimesheetPeriod>[] }>({
             query: GET_TIMESHEET,
             variables,
             fetchPolicy,
