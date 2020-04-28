@@ -1,7 +1,10 @@
-#app-timesheet {
-    .c-Timesheet-section-content {
-        .row .highcharts-container {
-            margin-top: 30px;
+.c-UserAllocation {
+    .c-UserAllocation-chart {
+        margin-top: 30px;
+
+        .c-UserAllocation-chart-title {
+            font-size: 18pt;
+            margin: 0 0 18px 0;
         }
     }
 }
