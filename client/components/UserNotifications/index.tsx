@@ -1,5 +1,5 @@
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
-import { Panel } from 'office-ui-fabric-react/lib/Panel';
+import { Panel, PanelType } from 'office-ui-fabric-react/lib/Panel';
 import * as React from 'react';
 import { withDefaultProps } from 'with-default-props';
 import { PLACEHOLDER_PANEL_MESSAGES } from './PLACEHOLDER_PANEL_MESSAGES';
@@ -13,12 +13,15 @@ const UserNotifications = (props: IUserNotificationsProps) => {
     const [showPanel, setShowPanel] = React.useState(false);
     const [notifications, setNotifications] = React.useState<any[]>(PLACEHOLDER_PANEL_MESSAGES.map((n, idx) => ({ ...n, itemID: idx })));
 
+    //TODO: Real data fetching from graphql and confirmed time entries
+
     /**
      * On dismiss notification
      * 
      * @param {IUserNotificationMessageProps} notification Notification
      */
     const onDismissNotification = (notification: IUserNotificationMessageProps) => {
+        // TODO: Persist in browser storage
         setNotifications(notifications.filter(n => n.itemID !== notification.itemID));
     }
 
@@ -31,6 +34,7 @@ const UserNotifications = (props: IUserNotificationsProps) => {
                 <div className={props.className.toggle.count}>{notifications.length}</div>
             </div>
             <Panel
+                type={PanelType.smallFixedFar}
                 isOpen={showPanel}
                 className={props.className.panel.root}
                 headerText={props.panelHeaderText}
@@ -40,6 +44,7 @@ const UserNotifications = (props: IUserNotificationsProps) => {
                     {notifications.map(n => (
                         <UserNotificationMessage
                             {...n}
+                            //TODO: Not dismissable if id is not specified
                             onDismiss={_ => onDismissNotification(n)}
                             className={props.className.panel.notification} />
                     ))}
