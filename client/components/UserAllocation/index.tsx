@@ -1,39 +1,65 @@
 
 import { ITypedHash } from '@pnp/common';
 import { getValueTyped as value } from 'helpers';
-import * as Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import * as React from 'react';
-import { AllocationColumnChart } from './AllocationColumnChart';
 import { ITimeEntry, IUserAllocationProps } from './types';
+import _ from 'underscore';
 
 /**
- * Get allocation
+ * Calculates durations based on exp
  * 
  * @param {ITimeEntry[]} entries Entries
- * @param {string} exp Expression
+ * @param {string} exp Expression (what to calculate durations based on, e.g. customer.name)
  */
-export const GetAllocation = (entries: ITimeEntry[], exp: string) => entries.reduce((obj: ITypedHash<number>, entry) => {
+export const GetAllocation = (entries: ITimeEntry[], exp: string): Array<{ name: string, hours: number }> => entries.reduce((arr, entry) => {
     let key = value(entry, exp, null);
     if (key) {
-        obj[key] = obj[key] || 0;
-        obj[key] += entry.durationHours;
+        let item = _.find(arr, i => i.name === key);
+        if (item) {
+            item.hours += entry.durationHours;
+        } else {
+            arr.push({ name: key, hours: entry.durationHours });
+        }
     }
-    return obj;
-}, {});
+    return arr;
+}, []);
 
 /**
  * @component UserAllocation
  * @description Shows allocation charts for a user
  */
-export const UserAllocation = (props: IUserAllocationProps) => (
-    <div className="container">
-        {Object.keys(props.charts).map(exp => (
-            <div className="row" key={exp}>
-                <div className="col-sm">
-                    <HighchartsReact highcharts={Highcharts} options={AllocationColumnChart(props.charts[exp], GetAllocation(props.entries, exp), props.charts[exp])} />
-                </div>
-            </div>
-        ))}
-    </div>
-)
+export const UserAllocation = (props: IUserAllocationProps) => {
+    const [dimensions, setDimensions] = React.useState({ width: 0, height: 0 });
+    const ref = React.useRef<HTMLDivElement>();
+
+    React.useLayoutEffect(() => setDimensions({ width: ref.current.clientWidth, height: 400 }), []);
+
+    return (
+        <div className="c-UserAllocation" ref={ref}>
+            {Object.keys(props.charts).map(exp => {
+                const title = props.charts[exp];
+                const data = GetAllocation(props.entries, exp);
+                return (
+                    <div className="c-UserAllocation-row row" key={exp}>
+                        <div className="c-UserAllocation-chart col-sm">
+                            <div className="c-UserAllocation-chart-title">{title}</div>
+                            <BarChart
+                                width={dimensions.width}
+                                height={dimensions.height}
+                                data={data}
+                                margin={{ left: -25 }}>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="name" />
+                                <YAxis />
+                                <Tooltip />
+                                <Legend />
+                                <Bar dataKey="hours" name='Hours' fill="#8884d8" />
+                            </BarChart>
+                        </div>
+                    </div>
+                )
+            })}
+        </div>
+    );
+}

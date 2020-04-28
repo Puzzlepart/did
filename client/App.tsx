@@ -5,10 +5,10 @@ import i18n from 'i18next';
 import * as React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import * as ReactDom from 'react-dom';
-import { AdminView } from './components/AdminView';
-import { Customers } from './components/Customers';
-import { Projects } from './components/Projects';
-import { Reports } from './components/Reports';
+// import { AdminView } from './components/AdminView';
+// import { Customers } from './components/Customers';
+// import { Projects } from './components/Projects';
+// import { Reports } from './components/Reports';
 import { Timesheet } from './components/Timesheet';
 import GET_CURRENT_USER from './GET_CURRENT_USER';
 import { client } from './graphql';
@@ -60,24 +60,24 @@ import { client } from './graphql';
                 <ApolloProvider client={client}><Timesheet {...getProps(COMPONENTS.TIMESHEET)} /></ApolloProvider>
             ), COMPONENTS.TIMESHEET);
 
-        if (COMPONENTS.PROJECTS !== null)
-            ReactDom.render((
-                <ApolloProvider client={client}><Projects /></ApolloProvider>
-            ), COMPONENTS.PROJECTS);
+        // if (COMPONENTS.PROJECTS !== null)
+        //     ReactDom.render((
+        //         <ApolloProvider client={client}><Projects /></ApolloProvider>
+        //     ), COMPONENTS.PROJECTS);
 
-        if (COMPONENTS.CUSTOMERS !== null)
-            ReactDom.render((
-                <ApolloProvider client={client}><Customers user={data.user} /></ApolloProvider>
-            ), COMPONENTS.CUSTOMERS);
+        // if (COMPONENTS.CUSTOMERS !== null)
+        //     ReactDom.render((
+        //         <ApolloProvider client={client}><Customers user={data.user} /></ApolloProvider>
+        //     ), COMPONENTS.CUSTOMERS);
 
-        if (COMPONENTS.REPORTS !== null)
-            ReactDom.render((
-                <ApolloProvider client={client}><Reports {...getProps(COMPONENTS.REPORTS)} /></ApolloProvider>
-            ), COMPONENTS.REPORTS);
+        // if (COMPONENTS.REPORTS !== null)
+        //     ReactDom.render((
+        //         <ApolloProvider client={client}><Reports {...getProps(COMPONENTS.REPORTS)} /></ApolloProvider>
+        //     ), COMPONENTS.REPORTS);
 
-        if (COMPONENTS.ADMIN !== null)
-            ReactDom.render((
-                <ApolloProvider client={client}><AdminView {...getProps(COMPONENTS.ADMIN)} /></ApolloProvider>
-            ), COMPONENTS.ADMIN);
+        // if (COMPONENTS.ADMIN !== null)
+        //     ReactDom.render((
+        //         <ApolloProvider client={client}><AdminView {...getProps(COMPONENTS.ADMIN)} /></ApolloProvider>
+        //     ), COMPONENTS.ADMIN);
     });
 })();
