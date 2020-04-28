@@ -4,14 +4,24 @@ import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import * as React from 'react';
 import { generateColumn as col } from 'utils/generateColumn';
 import { IProjectListProps } from './IProjectListProps';
+import resource from 'i18n';
+import { withDefaultProps } from 'with-default-props';
 
-export const ProjectList = (props: IProjectListProps) => {
+/**
+ * @component ProjectList
+ */
+const ProjectList = (props: IProjectListProps) => {
     const columns: IColumn[] = [
         col(
             'icon',
             '',
             { maxWidth: 35, minWidth: 35 },
-            (project: IProject) => <Icon iconName={project.icon || 'Page'} styles={{ root: { fontSize: 16 } }} />,
+            (project: IProject) => {
+                if (project.inactive) {
+                    return <Icon title={resource('PROJECTS.PROJECT_INACTIVE_TEXT')} iconName='Warning' styles={{ root: { fontSize: 16, color: '#ffbf00' } }} />;
+                }
+                return <Icon iconName={project.icon || 'Page'} styles={{ root: { fontSize: 16 } }} />;
+            },
         ),
         col('key', 'Key', { maxWidth: 120 }),
         col(
@@ -29,8 +39,9 @@ export const ProjectList = (props: IProjectListProps) => {
                 return props.renderLink ? <a href={`/customers#${project.customer.id}`}>{project.customer.name}</a> : project.customer.name;
             }
         )
-    ].filter(col => (props.hideColumns || []).indexOf(col.key) === -1);;
+    ].filter(col => props.hideColumns.indexOf(col.key) === -1);;
 
     return <List {...props} columns={columns} groups={props.groups} />;
-
 }
+
+export default withDefaultProps(ProjectList, { hideColumns: [] })
