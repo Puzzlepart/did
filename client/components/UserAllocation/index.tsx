@@ -12,18 +12,21 @@ import _ from 'underscore';
  * @param {ITimeEntry[]} entries Entries
  * @param {string} exp Expression (what to calculate durations based on, e.g. customer.name)
  */
-export const GetAllocation = (entries: ITimeEntry[], exp: string): Array<{ name: string, hours: number }> => entries.reduce((arr, entry) => {
-    let key = value(entry, exp, null);
-    if (key) {
-        let item = _.find(arr, i => i.name === key);
-        if (item) {
-            item.hours += entry.durationHours;
-        } else {
-            arr.push({ name: key, hours: entry.durationHours });
+export const GetAllocation = (entries: ITimeEntry[], exp: string): Array<{ name: string, hours: number }> => {
+    let items = entries.reduce((_items, entry) => {
+        let key = value(entry, exp, null);
+        if (key) {
+            let item = _.find(_items, i => i.name === key);
+            if (item) {
+                item.hours += entry.durationHours;
+            } else {
+                _items.push({ name: key, hours: entry.durationHours });
+            }
         }
-    }
-    return arr;
-}, []);
+        return _items;
+    }, []);
+    return items.map(i => ({ ...i, hours: parseFloat(i.hours.toFixed(1)) }));
+}
 
 /**
  * @component UserAllocation
