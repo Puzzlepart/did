@@ -76,5 +76,9 @@ module.exports = {
      */
     formatDate: (date, dateFormat) => {
         return require('moment')(date).tz('Europe/Oslo').format(dateFormat);
-    }
+    },
+
+    getWeeksInMonth: (firstDay, lastDay) => {
+        
+    },
 }

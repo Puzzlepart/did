@@ -24,6 +24,7 @@ class StorageService {
         this.tenantId = tid;
         this.filter = stringFilter('PartitionKey', isEqual, this.tenantId);
     }
+
     /**
      * Checks if the tenant id has a active subscription
      */
@@ -34,6 +35,7 @@ class StorageService {
             resolve(parseArray(entries)[0]);
         });
     }
+
     /**
      * Get user
      *
@@ -45,6 +47,7 @@ class StorageService {
         const { entries } = await queryTable('Users', query);
         return parseArray(entries)[0];
     }
+
     /**
      * Get weeks
      */
@@ -54,6 +57,7 @@ class StorageService {
         const weeks = parseArray(entries);
         return weeks;
     }
+
     /**
      * Update week
      */
@@ -65,6 +69,7 @@ class StorageService {
         });
         return result;
     }
+
     /**
      * Update user
      */
@@ -77,6 +82,7 @@ class StorageService {
         });
         return result;
     }
+    
     /**
      * Create project
      *
@@ -96,6 +102,7 @@ class StorageService {
         });
         return entity;
     }
+
     /**
      * Create customer
      *
@@ -113,6 +120,7 @@ class StorageService {
         });
         return entity;
     }
+
     /**
      * Add user
      *
@@ -127,6 +135,7 @@ class StorageService {
         });
         return entity;
     }
+
     /**
      * Get customers
      */
@@ -135,6 +144,7 @@ class StorageService {
         const { entries } = await queryTable('Customers', query);
         return parseArray(entries, undefined, { idUpper: true });
     }
+
     /**
      * Get projects
      *
@@ -154,6 +164,7 @@ class StorageService {
             entries = arraySort(entries, options.sortBy);
         return entries;
     }
+
     /**
      * Get confirmed time entries
      *
@@ -178,6 +189,16 @@ class StorageService {
         result = result.sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
         return result;
     }
+
+    /**
+     * Get notifications
+     */
+    async getNotifications() {
+        const query = createQuery(1000, undefined).where(this.filter);
+        const { entries } = await queryTable('Notifications', query);
+        return parseArray(entries);
+    }
+
     /**
      * Get users
      */
@@ -186,6 +207,7 @@ class StorageService {
         const { entries } = await queryTable('Users', query);
         return parseArray(entries);
     }
+
     /**
      * Get current user
      *
@@ -195,6 +217,7 @@ class StorageService {
         const entry = await retrieveEntity('Users', this.tenantId, userId);
         return parseArray([entry])[0];
     }
+
     /**
      * Delete customer
      *
@@ -212,6 +235,7 @@ class StorageService {
             throw error;
         }
     }
+
     /**
      * Delete project
      *

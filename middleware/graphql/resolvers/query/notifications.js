@@ -1,5 +1,7 @@
 const log = require('debug')('middleware/graphql/resolvers/query/notifications');
 const uuid = require('uuid/v1');
+const { startOfMonth, endOfMonth, getWeeksInMonth } = require('../../../../utils');
+const _ = require('underscore');
 
 const NOTIFICATION_TYPE = {
     WEEK_NOT_CONFIRMED: 0,
@@ -14,34 +16,6 @@ const NOTIFICATION_SEVERITY = {
     HIGH: 2,
 }
 
-const PLACEHOLDER_NOTIFICATIONS = [
-    {
-        id: uuid(),
-        type: NOTIFICATION_TYPE.WEEK_NOT_CONFIRMED,
-        text: 'You have not confirmed week 13.',
-        severity: NOTIFICATION_SEVERITY.HIGH,
-    },
-    {
-        id: uuid(),
-        type: NOTIFICATION_TYPE.WEEK_NOT_CONFIRMED,
-        text: 'You have not confirmed week 12.',
-        severity: NOTIFICATION_SEVERITY.HIGH,
-    },
-    {
-        id: '2bae37fe-a558-445a-b202-36e5723aea2c',
-        type: NOTIFICATION_TYPE.SERVICE_ANNOUNCEMENT,
-        text: 'Did 365 will be down for maintenance today from 16:00 to 19:00.',
-        severity: NOTIFICATION_SEVERITY.HIGH,
-    },
-    {
-        id: '2bae37fe-a558-445a-b202-36e5723aea2d',
-        type: NOTIFICATION_TYPE.FEATURE_ANNOUNCEMENT,
-        text: 'We\'ve just relased a bunch of new features!',
-        severity: NOTIFICATION_SEVERITY.HIGH,
-        moreLink: '#',
-    }
-];
-
 /**
  * Get notifications
  * 
@@ -50,8 +24,34 @@ const PLACEHOLDER_NOTIFICATIONS = [
  * @param {*} context Context
  */
 async function notifications(_obj, _args, context) {
-    log('Returning placeholder notifications');
-    return PLACEHOLDER_NOTIFICATIONS;
+    const startDateTime = startOfMonth(startOfMonth().subtract(1, 'month'));
+    const endDateTime = endOfMonth(endOfMonth().subtract(1, 'month'));
+    let [confirmedTimeEntries, notifications] = await Promise.all([
+        context.services.storage.getConfirmedTimeEntries({
+            resourceId: context.user.profile.oid,
+            startDateTime: startDateTime.toISOString(),
+            endDateTime: endDateTime.toISOString(),
+        }),
+        context.services.storage.getNotifications(),
+    ])
+
+    //TODO: Need to get weeks in month dynamically
+    const weeksInMonth = [9, 10, 11, 12, 13, 14];
+
+    const confirmedWeeks = _.unique(confirmedTimeEntries, entry => entry.weekNumber).map(entry => entry.weekNumber);
+    const unconfirmedWeeks = _.difference(weeksInMonth, confirmedWeeks);
+
+    //TODO: Adding unconfirmed weeks notifications
+    notifications.push(...unconfirmedWeeks.map(week => ({
+        id: uuid(),
+        type: NOTIFICATION_TYPE.WEEK_NOT_CONFIRMED,
+        text: `You have not confirmed week ${week}.`,
+        severity: NOTIFICATION_SEVERITY.HIGH,
+    })));
+
+
+    log('Returning %s notifications', notifications.length);
+    return notifications;
 }
 
 module.exports = notifications;
