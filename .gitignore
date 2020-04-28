@@ -9,3 +9,5 @@ public/js
 public/css
 .gitignore
 pnpm-debug.log
+pnpm-lock.yaml
+package-lock.json
