@@ -1,8 +1,10 @@
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { IColumn, List, SelectionMode, UserMessage } from 'common/components';
+import List from 'common/components/List';
+import { UserMessage } from 'common/components/UserMessage';
 import * as hlp from 'helpers';
 import resource from 'i18n';
 import { ICustomer } from 'interfaces/ICustomer';
+import { IColumn, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import * as React from 'react';
