@@ -62,7 +62,19 @@ switch (mode) {
   }
     break;
   case 'production': {
-    config.stats = 'minimal';
+    config.stats = {
+      chunks: false,
+      assets: false,
+      colors: false,
+      timings: true,
+      errors: true,
+      warnings: false,
+      errorDetails: true,
+      logging: 'error',
+      loggingTrace: false,
+      modules: false,
+      performance: false
+    }
   }
     break;
 }
