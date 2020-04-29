@@ -83,6 +83,15 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   popd
 )
 
+echo UPDATING NPM PACKAGES
+
+IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
+  pushd "%DEPLOYMENT_TARGET%"
+  call :ExecuteCmd !NPM_CMD! update --no-progress --silent
+  IF !ERRORLEVEL! NEQ 0 goto error
+  popd
+)
+
 echo PACKAGING JS
 
 IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
