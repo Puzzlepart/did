@@ -2,10 +2,13 @@ require('dotenv').config();
 const path = require('path');
 const webpack = require('webpack');
 const clientLib = path.resolve(__dirname, 'lib/client/');
+const { config, version } = require('./package.json');
 
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
 
-console.log("NODE_ENV: %s", mode)
+console.log("NODE_ENV: %s", mode);
+console.log("VERSION: %s", config.version);
+console.log("ENTRY: %s", config.client);
 
 let config = {
   output: {
@@ -27,11 +30,7 @@ let config = {
     ]
   },
   mode,
-  entry: [
-    'core-js/stable',
-    'regenerator-runtime/runtime',
-    './lib/client/App.js',
-  ],
+  entry: config.client,
   resolve: {
     alias: {
       interfaces: path.resolve(clientLib, 'interfaces'),
