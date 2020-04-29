@@ -3,6 +3,8 @@ const path = require('path');
 const webpack = require('webpack');
 const WebpackBar = require('webpackbar');
 const clientLib = path.resolve(__dirname, 'lib/client/');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 
 module.exports = {
   module: {
@@ -44,6 +46,7 @@ module.exports = {
     },
   },
   plugins: [
+    new BundleAnalyzerPlugin({ analyzerMode: 'static', openAnalyzer: false }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new WebpackBar(),
     new webpack.DefinePlugin({
@@ -51,14 +54,12 @@ module.exports = {
         'AZURE_APPLICATION_INSIGHTS_INSTRUMENTATION_KEY': JSON.stringify(process.env.AZURE_APPLICATION_INSIGHTS_INSTRUMENTATION_KEY),
       },
     }),
-    // OccurrenceOrderPlugin is needed for webpack 1.x only
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    // Use NoErrorsPlugin for webpack 1.x
     new webpack.NoEmitOnErrorsPlugin()
   ],
   output: {
     path: path.resolve(__dirname, './public/js'),
     filename: '[name].js',
-  }
+  },
 };
