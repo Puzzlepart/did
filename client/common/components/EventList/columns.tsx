@@ -15,7 +15,7 @@ import { IEventListProps } from './types';
  * @param {number} defMinWidth Default min width
  * @param {number} defMaxWidth Default max width
  * 
- * @category EventList
+ * @ignore
  */
 function getSizing(props: IEventListProps, fieldName: string, defMinWidth: number, defMaxWidth: number) {
     return {
@@ -30,7 +30,7 @@ function getSizing(props: IEventListProps, fieldName: string, defMinWidth: numbe
  * @param {IEventListProps} props Props
  * @param {string} fieldName Field name
  * 
- * @category EventList
+ * @ignore
  */
 export const Title = (props: IEventListProps, fieldName: string = 'title') => col(
     fieldName,
@@ -46,7 +46,7 @@ export const Title = (props: IEventListProps, fieldName: string = 'title') => co
  * @param {IEventListProps} props Props
  * @param {string} fieldName Field name
  * 
- * @category EventList
+ * @ignore
  */
 export const Time = (props: IEventListProps, fieldName: string = 'time') => col(
     fieldName,
@@ -67,7 +67,7 @@ export const Time = (props: IEventListProps, fieldName: string = 'time') => col(
  * @param {IEventListProps} props Props
  * @param {string} fieldName Field name
  * 
- * @category EventList
+ * @ignore
  */
 export const Duration = (props: IEventListProps, fieldName: string = 'durationMinutes') => col(
     fieldName,
@@ -82,7 +82,7 @@ export const Duration = (props: IEventListProps, fieldName: string = 'durationMi
  * @param {IEventListProps} props Props
  * @param {string} fieldName Field name
  * 
- * @category EventList
+ * @ignore
  */
 export const Project = (props: IEventListProps, fieldName: string = 'project') => col(
     fieldName,
@@ -96,6 +96,6 @@ export const Project = (props: IEventListProps, fieldName: string = 'project') =
  * 
  * @param {IEventListProps} props Props
  * 
- * @category EventList
+ * @ignore
  */
 export const GetAll = (props: IEventListProps) => [Title(props), Time(props), Duration(props), Project(props)];

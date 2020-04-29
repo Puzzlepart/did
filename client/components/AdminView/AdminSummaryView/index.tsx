@@ -13,10 +13,7 @@ import { IAdminSummaryViewProps } from './IAdminSummaryViewProps';
 require('moment/locale/en-gb');
 
 /**
- * @component AdminSummaryView
- * @description Shows SummaryView type Admin
- * 
- * @param {IAdminSummaryViewProps} props Props
+ * @category AdminView
  */
 export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
     const [year, setYear] = React.useState<number>(moment().year());

@@ -8,10 +8,14 @@
     "excludeExternals": true,
     "includeVersion": true,
     "hideGenerator": true,
-    "theme": "default",
+    "theme": "./typedoc-theme",
     "categoryOrder": [
-        "Common",
         "Timesheet",
+        "Customers",
+        "Projects",
+        "Reports",
+        "AdminView",
+        "Common",
         "*"
     ]
 }
