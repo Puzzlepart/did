@@ -86,14 +86,14 @@ pushd "%DEPLOYMENT_TARGET%"
 echo.
 echo [2/5] INSTALLING NPM PACKAGES
 echo.
-call :ExecuteCmd !NPM_CMD! install --no-progress --loglevel silent --no-shrinkwrap --no-fund          
+call :ExecuteCmd !NPM_CMD! install --production --no-progress --loglevel silent --no-shrinkwrap --no-fund          
 IF !ERRORLEVEL! NEQ 0 goto error
 
 echo.
 echo [3/5] UPDATING NPM PACKAGES
 echo.
 
-call :ExecuteCmd !NPM_CMD! update --no-progress --loglevel silent --no-fund 
+call :ExecuteCmd !NPM_CMD! update --production --no-progress --loglevel silent --no-fund 
 IF !ERRORLEVEL! NEQ 0 goto error
 
 echo.
