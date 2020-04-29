@@ -12,7 +12,7 @@
         "watch:server": "nodemon --ignore client --ignore public --ignore lib ./bin/www",
         "build:scss": "node-sass --include-path scss scss/main.scss public/css/main.css",
         "watch:scss": "onchange -k -i -d 750 \"./**/*.scss\" -- npm run build:scss",
-        "package:client": "tsc --build && webpack --config webpack.config.js",
+        "package:client": "tsc --build",
         "package:client:prod": "tsc --build && webpack --config webpack.config.prod.js",
         "watch:client:package": "onchange -k -i -d 750 \"./client/**/*.ts\" \"./client/**/*.tsx\" -- npm run package:client",
         "clean": "rimraf ./lib && rimraf ./public/js"
@@ -108,6 +108,8 @@
         "underscore.string": "3.3.5",
         "webpack": "4.42.1",
         "webpack-cli": "3.3.11",
+        "webpack-dev-middleware": "^3.7.2",
+        "webpack-hot-middleware": "^2.25.0",
         "webpackbar": "4.0.0"
     },
     "resolutions": {
