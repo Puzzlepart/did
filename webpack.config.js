@@ -63,7 +63,10 @@ switch (mode) {
   }
     break;
   case 'production': {
-    config.stats = 'errors-only';
+    config.stats = {
+      preset: 'minimal',
+      errorDetails: true
+    };
   }
     break;
 }
