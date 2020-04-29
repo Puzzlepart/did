@@ -46,7 +46,6 @@
         "express": "4.17.1",
         "express-favicon": "2.0.1",
         "express-graphql": "0.8.0",
-        "express-pino-logger": "4.0.0",
         "express-session": "1.17.1",
         "get-value": "3.0.1",
         "graphql": "14.3.1",
