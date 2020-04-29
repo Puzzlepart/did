@@ -54,12 +54,12 @@ let config = {
       },
     })
   ],
+  stats: 'detailed',
 };
 
-switch (process.env.NODE_ENV) {
+switch (mode) {
   case 'development': {
     config.plugins.push(new (require('webpackbar'))());
-    config.stats = 'detailed';
   }
     break;
   case 'production': {
