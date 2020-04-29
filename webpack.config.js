@@ -57,7 +57,13 @@ let config = {
 switch (process.env.NODE_ENV) {
   case 'development': {
     config.plugins.push(new (require('webpackbar'))());
+    config.stats = 'detailed';
   }
+    break;
+  case 'production': {
+    config.stats = 'errors-only';
+  }
+    break;
 }
 
 module.exports = config;
