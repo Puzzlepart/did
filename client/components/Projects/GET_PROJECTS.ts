@@ -2,7 +2,10 @@
 import gql from 'graphql-tag';
 import { IProject } from 'interfaces';
 
-export interface IGetProjectsEntries {
+/**
+ * {@docCategory Projects}
+ */
+export interface IGetProjects {
     projects: IProject[];
 }
 

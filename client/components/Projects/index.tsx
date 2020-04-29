@@ -9,7 +9,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import _ from 'underscore';
 import { getHash } from 'utils/getHash';
-import { GET_PROJECTS, IGetProjectsEntries } from './GET_PROJECTS';
+import { GET_PROJECTS, IGetProjects } from './GET_PROJECTS';
 import { ProjectDetails } from './ProjectDetails';
 import ProjectList from './ProjectList';
 import resource from 'i18n';
@@ -24,7 +24,7 @@ function getPath(): string[] {
  */
 export const Projects = () => {
     const [selected, setSelected] = useState<IProject>(null);
-    const { loading, error, data } = useQuery<IGetProjectsEntries>(GET_PROJECTS, { variables: { sortBy: 'name' }, fetchPolicy: 'cache-first' });
+    const { loading, error, data } = useQuery<IGetProjects>(GET_PROJECTS, { variables: { sortBy: 'name' }, fetchPolicy: 'cache-first' });
 
     const outlookCategories = value<IOutlookCategory[]>(data, 'outlookCategories', []);
     const projects = value<IProject[]>(data, 'projects', []).map(p => ({ ...p, outlookCategory: _.find(outlookCategories, c => c.displayName === p.key) }))
