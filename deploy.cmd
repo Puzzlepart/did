@@ -70,7 +70,7 @@ echo [1/5] SYNCHRONIZING DEPLOYMENT SOURCE TO DEPLOYMENT TARGET
 echo.
 
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (  
-  call :ExecuteCmd "%KUDU_SYNC_CMD%" --quiet --perf --fromDir "%DEPLOYMENT_SOURCE%" --toDir "%DEPLOYMENT_TARGET%" --nextManifest "%NEXT_MANIFEST_PATH%" --previousManifest "%PREVIOUS_MANIFEST_PATH%" --ignore ".git;.hg;.deployment;deploy.cmd;.env.sample;CHANGELOG.md;CONTRIBUTING.md;README.md;.gitignore;.vscode;.github"
+  call :ExecuteCmd "%KUDU_SYNC_CMD%" --quiet --perf --from "%DEPLOYMENT_SOURCE%" --to "%DEPLOYMENT_TARGET%" --nextManifest "%NEXT_MANIFEST_PATH%" --previousManifest "%PREVIOUS_MANIFEST_PATH%" --ignore ".git;.hg;.deployment;deploy.cmd;.env.sample;CHANGELOG.md;CONTRIBUTING.md;README.md;.gitignore;.vscode;.github"
   IF !ERRORLEVEL! NEQ 0 goto error
 )
 
