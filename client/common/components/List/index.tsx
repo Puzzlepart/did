@@ -10,6 +10,7 @@ import { IListProps } from './IListProps';
 import { ListHeader } from './ListHeader';
 import { withDefaultProps } from 'with-default-props';
 import _ from 'underscore';
+import { updateUrlHash } from 'helpers';
 
 /**
  * @component List
@@ -18,24 +19,20 @@ import _ from 'underscore';
  */
 const List = (props: IListProps) => {
     let searchTimeout: any;
-    let selection: Selection;
+    let selection = null;
     let groups = null;
-
-    /**
-     * On selection chaned
-     */
-    const onSelectionChanged = () => {
-        const [selected] = selection.getSelection();
-        props.selection.onChanged(selected);
-        selected && (document.location.hash = selected.key.toString());
-    }
 
     let [items, setItems] = useState(props.items);
 
-    /** Need to update items state when new props come by using useEffect */
     useEffect(() => setItems(props.items), [props.items]);
 
-    selection = props.selection && new Selection({ onSelectionChanged });
+    selection = props.selection && new Selection({
+        onSelectionChanged: () => {
+            const [selected] = selection.getSelection();
+            props.selection.onChanged(selected);
+            selected && updateUrlHash({ key: selected.key.toString() });
+        }
+    });
 
     /**
      * On search

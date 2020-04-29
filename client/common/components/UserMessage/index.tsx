@@ -1,5 +1,5 @@
 
-import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
+import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
 import * as React from 'react';
 import ReactMarkdown from 'react-markdown/with-html';
 import { IUserMessageProps } from './IUserMessageProps';
@@ -28,3 +28,5 @@ export const UserMessage = (props: IUserMessageProps) => {
         </div>
     );
 }
+
+export * from './useMessage';
