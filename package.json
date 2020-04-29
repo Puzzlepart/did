@@ -4,7 +4,7 @@
     "private": true,
     "engines": {
         "node": ">=10.14.1",
-        "npm": ">=6.4.1"
+        "npm": ">=6.5.0"
     },
     "scripts": {
         "watch": "concurrently \"npm run watchPackageClient\" \"npm run watchServer\" \"npm run watchStyles\"",
