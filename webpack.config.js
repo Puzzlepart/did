@@ -4,6 +4,8 @@ const webpack = require('webpack');
 const WebpackBar = require('webpackbar');
 const clientLib = path.resolve(__dirname, 'lib/client/');
 
+console.log(process.env.NODE_ENV);
+
 module.exports = {
   module: {
     rules: [
@@ -20,11 +22,13 @@ module.exports = {
     ]
   },
   mode: 'development',
-  entry: [
-    'core-js/stable',
-    'regenerator-runtime/runtime',
-    './lib/client/App.js',
-  ],
+  entry: {
+    did365: [
+      'core-js/stable',
+      'regenerator-runtime/runtime',
+      './lib/client/App.js',
+    ],
+  },
   resolve: {
     alias: {
       interfaces: path.resolve(clientLib, 'interfaces'),
@@ -34,6 +38,11 @@ module.exports = {
       common: path.resolve(clientLib, 'common'),
       i18n: path.resolve(clientLib, 'i18n'),
     }
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   plugins: [
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
@@ -46,6 +55,6 @@ module.exports = {
   ],
   output: {
     path: path.resolve(__dirname, './public/js'),
-    filename: 'did365.js'
+    filename: '[name].js',
   }
 };
