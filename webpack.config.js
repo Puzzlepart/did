@@ -3,9 +3,9 @@ const path = require('path');
 const webpack = require('webpack');
 const clientLib = path.resolve(__dirname, 'lib/client/');
 
-console.log(process.env.NODE_ENV);
+const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
 
-let __config = {
+let config = {
   output: {
     path: path.resolve(__dirname, './public/js'),
     filename: 'did365.js'
@@ -24,7 +24,7 @@ let __config = {
       }
     ]
   },
-  mode: process.env.NODE_ENV,
+  mode,
   entry: [
     'core-js/stable',
     'regenerator-runtime/runtime',
@@ -56,8 +56,8 @@ let __config = {
 
 switch (process.env.NODE_ENV) {
   case 'development': {
-    __config.plugins.push(new (require('webpackbar'))());
+    config.plugins.push(new (require('webpackbar'))());
   }
 }
 
-module.exports = __config;
+module.exports = config;
