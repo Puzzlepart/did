@@ -24,7 +24,6 @@ module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
     did365: [
-      'webpack-hot-middleware/client',
       'core-js/stable',
       'regenerator-runtime/runtime',
       './lib/client/App.js',
