@@ -1,5 +1,6 @@
 import * as get from 'get-value';
 import * as moment from 'moment';
+import { ITypedHash, stringIsNullOrEmpty } from '@pnp/common';
 require('moment/locale/en-gb');
 require('twix');
 
@@ -134,14 +135,32 @@ export function getMonthName(monthNumber: number): string {
 
 /**
  * Parse URL hash
+ * 
+ * @param {T} defaultValue Default value if hash is empty or null
  */
-export function parseUrlHash<T>(): T {
+export function parseUrlHash<T>(defaultValue: T = {} as T): T {
     var hash = window.location.hash.substr(1);
-    return hash.split('&').reduce(function (result, item) {
-        var parts = item.split('=');
-        result[parts[0]] = parts[1];
+    if (stringIsNullOrEmpty(hash)) return defaultValue;
+    let hashObject = hash.split('&').reduce(function (result, item) {
+        var [key, value] = item.split('=');
+        result[key] = decodeURIComponent(value);
         return result;
     }, {}) as T;
+    return hashObject;
+}
+
+/**
+ * Update URL hash
+ * 
+ * @param {ITypedHash} hashObject Hash object
+ * @param {boolean} persistPrevious Persist previous hash
+ * @param {boolean} redirect Redirect (defaults to true)
+ */
+export function updateUrlHash(hashObject: ITypedHash<string>, persistPrevious: boolean = true, redirect: boolean = true): string {
+    if (persistPrevious) hashObject = { ...parseUrlHash(), ...hashObject };
+    let urlHash = Object.keys(hashObject).map(key => `${key}=${hashObject[key]}`).join('&');
+    if (redirect) document.location.hash = urlHash;
+    return urlHash;
 }
 
 /**
