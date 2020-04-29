@@ -65,7 +65,9 @@ goto :EOF
 
 :Deployment
 
-echo SYNCHRONIZING DEPLOYMENT SOURCE TO DEPLOYMENT TARGET 
+echo.
+echo [1/5] SYNCHRONIZING DEPLOYMENT SOURCE TO DEPLOYMENT TARGET 
+echo.
 
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
   call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd;.env.sample;CHANGELOG.md;CONTRIBUTING.md;README.md;.gitignore;.vscode;.github"
@@ -74,7 +76,9 @@ IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
 
 call :SelectNodeVersion
 
-echo INSTALLING NPM PACKAGES
+echo.
+echo [2/5] INSTALLING NPM PACKAGES
+echo.
 
 IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   pushd "%DEPLOYMENT_TARGET%"
@@ -83,7 +87,9 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   popd
 )
 
-echo UPDATING NPM PACKAGES
+echo.
+echo [3/5] UPDATING NPM PACKAGES
+echo.
 
 IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   pushd "%DEPLOYMENT_TARGET%"
@@ -92,7 +98,9 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   popd
 )
 
-echo PACKAGING JS
+echo.
+echo [4/5] PACKAGING JS
+echo.
 
 IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   pushd "%DEPLOYMENT_TARGET%"
@@ -101,7 +109,9 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   popd
 )
 
-echo PACKAGING CSS
+echo.
+echo [5/5] PACKAGING CSS
+echo.
 
 IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   pushd "%DEPLOYMENT_TARGET%"
