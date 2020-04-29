@@ -2,13 +2,13 @@ require('dotenv').config();
 const path = require('path');
 const webpack = require('webpack');
 const clientLib = path.resolve(__dirname, 'lib/client/');
-const { config, version } = require('./package.json');
+const package = require('./package.json');
 
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
 
 console.log("NODE_ENV: %s", mode);
-console.log("VERSION: %s", config.version);
-console.log("ENTRY: %s", config.client);
+console.log("VERSION: %s", package.version);
+console.log("ENTRY: %s", package.config.client);
 
 let config = {
   output: {
