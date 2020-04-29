@@ -7,7 +7,7 @@ const package = require('./package.json');
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
 
 console.log("NODE_ENV: %s", mode);
-console.log("VERSION: %s", package.version);
+console.log("PACKAGE_VERSION: %s", package.version);
 console.log("ENTRY: %s", package.config.client);
 
 let config = {
