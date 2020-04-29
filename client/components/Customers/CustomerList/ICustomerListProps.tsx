@@ -1,3 +1,4 @@
-import { ICustomerProps } from '../ICustomerProps';
-export interface ICustomerListProps extends ICustomerProps {
-}
+import { IListProps } from 'common/components/List/IListProps';
+import { ICustomer } from 'interfaces';
+
+export interface ICustomerListProps extends IListProps<ICustomer> {}
