@@ -10,8 +10,8 @@
         "watch": "concurrently \"npm run watchPackageClient\" \"npm run watchServer\" \"npm run watchStyles\"",
         "start": "node ./bin/www",
         "watchServer": "nodemon --ignore client --ignore public --ignore lib ./bin/www",
-        "buildStyles": "node-sass --include-path scss scss/main.scss public/css/main.css",
-        "watchStyles": "onchange -k -i -d 250 \"./**/*.scss\" -- npm run buildStyles",
+        "packageStyles": "node-sass --include-path scss scss/main.scss public/css/main.css",
+        "watchStyles": "onchange -k -i -d 250 \"./**/*.scss\" -- npm run packageStyles",
         "packageClient": "tsc --build && webpack --config webpack.config.js",
         "watchPackageClient": "onchange -k -i -d 250 \"./client/**/*.ts\" \"./client/**/*.tsx\" -- npm run packageClient",
         "clean": "rimraf ./lib && rimraf ./public/js"
