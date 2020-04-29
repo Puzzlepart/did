@@ -78,7 +78,7 @@ echo INSTALLING NPM PACKAGES
 
 IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   pushd "%DEPLOYMENT_TARGET%"
-  call :ExecuteCmd !NPM_CMD! install --no-progress --silent
+  call :ExecuteCmd !NPM_CMD! install --no-progress --loglevel silent --no-shrinkwrap            
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
 )
@@ -87,7 +87,7 @@ echo UPDATING NPM PACKAGES
 
 IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   pushd "%DEPLOYMENT_TARGET%"
-  call :ExecuteCmd !NPM_CMD! update --no-progress --silent
+  call :ExecuteCmd !NPM_CMD! update --no-progress --loglevel silent
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
 )
@@ -96,7 +96,7 @@ echo PACKAGING JS
 
 IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   pushd "%DEPLOYMENT_TARGET%"
-  call :ExecuteCmd !NPM_CMD! run --silent packageClient
+  call :ExecuteCmd !NPM_CMD! run packageClient --loglevel silent
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
 )
@@ -105,7 +105,7 @@ echo PACKAGING CSS
 
 IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   pushd "%DEPLOYMENT_TARGET%"
-  call :ExecuteCmd !NPM_CMD! run --silent packageStyles
+  call :ExecuteCmd !NPM_CMD! run packageStyles --loglevel silent
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
 )
