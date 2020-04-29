@@ -1,5 +1,4 @@
 node_modules
-.env
 DS_Store
 Icon?
 lib
@@ -11,3 +10,5 @@ public/css
 pnpm-debug.log
 pnpm-lock.yaml
 package-lock.json
+*.env
+!.env.sample
