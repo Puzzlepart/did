@@ -2,18 +2,21 @@ import { ScrollablePaneWrapper } from 'common/components/ScrollablePaneWrapper';
 import { ConstrainMode, DetailsListLayoutMode, IColumn, IDetailsHeaderProps, Selection, SelectionMode, IDetailsGroupDividerProps } from 'office-ui-fabric-react/lib/DetailsList';
 import { GroupHeader } from 'office-ui-fabric-react/lib/GroupedList';
 import { ShimmeredDetailsList } from 'office-ui-fabric-react/lib/ShimmeredDetailsList';
+import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { generateListGroups } from './generateListGroups';
 import { IListProps } from './IListProps';
 import { ListHeader } from './ListHeader';
+import { withDefaultProps } from 'with-default-props';
+import _ from 'underscore';
 
 /**
  * @component List
  * 
  * @param {IListProps} props Props
  */
-export const List = (props: IListProps) => {
+const List = (props: IListProps) => {
     let searchTimeout: any;
     let selection: Selection;
     let groups = null;
@@ -55,7 +58,23 @@ export const List = (props: IListProps) => {
      */
     const onRenderListHeader = (headerProps: IDetailsHeaderProps, defaultRender: (props: IDetailsHeaderProps) => JSX.Element) => {
         if (props.onRenderDetailsHeader) return onRenderListHeader(headerProps, defaultRender);
-        return ListHeader(headerProps, defaultRender, props, onSearch);
+        let searchBox = props.searchBox && ({
+            key: 'SEARCH_BOX',
+            onRender: () => (
+                <SearchBox
+                    {...props.searchBox}
+                    styles={{ field: { fontSize: '10pt', letterSpacing: '1px' }, root: { maxWidth: 320 } }}
+                    onChange={(_, newValue) => onSearch(newValue)} />
+            ),
+        });
+        const commandBarItems = [searchBox, ...props.commandBar.items].filter(c => c);
+        return (
+            <ListHeader
+                headerProps={headerProps}
+                defaultRender={defaultRender}
+                list={props}
+                commandBar={{ ...props.commandBar, items: commandBarItems }} />
+        );
     }
     /**
      * On render group header
@@ -101,6 +120,10 @@ export const List = (props: IListProps) => {
         </div>
     );
 };
+
+export default withDefaultProps(List, {
+    commandBar: { items: [], farItems: [] }
+})
 
 export { SelectionMode, IColumn };
 

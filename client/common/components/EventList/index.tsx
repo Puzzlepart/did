@@ -1,5 +1,5 @@
 
-import { List } from 'common/components/List';
+import List from 'common/components/List';
 import * as React from 'react';
 import * as col from './columns';
 import { IEventListProps } from './types';
