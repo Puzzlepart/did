@@ -30,7 +30,7 @@ let config = {
     ]
   },
   mode,
-  entry: config.client,
+  entry: package.config.client,
   resolve: {
     alias: {
       interfaces: path.resolve(clientLib, 'interfaces'),
