@@ -15,7 +15,7 @@ import GET_CUSTOMERS from './GET_CUSTOMERS';
 import { ICustomerListProps } from './ICustomerListProps';
 
 /**
- * @component CustomerList
+ * @category Customers
  */
 export const CustomerList = (props: ICustomerListProps) => {
     let [message, setMessage] = React.useState<{ text: string, type: MessageBarType }>(null);

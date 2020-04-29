@@ -1,3 +1,6 @@
+/**
+ * @category Projects
+ */
 export interface ICreateProjectFormModel {
     customerKey?: string;
     projectKey?: string;

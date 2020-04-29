@@ -2,6 +2,9 @@ import { IProject } from './IProject';
 import { IObjectWithKey } from 'office-ui-fabric-react/lib/DetailsList';
 import { ICustomer } from './ICustomer';
 
+/**
+ * @category Common
+ */
 export interface ITimeEntry extends IObjectWithKey {
     id: string;
     title: string;

@@ -6,6 +6,9 @@ export interface IGetProjectsEntries {
     projects: IProject[];
 }
 
+/**
+ * @ignore
+ */
 export const GET_PROJECTS = gql`
     query($customerKey: String, $sortBy: String) {
         projects(customerKey: $customerKey, sortBy: $sortBy) {

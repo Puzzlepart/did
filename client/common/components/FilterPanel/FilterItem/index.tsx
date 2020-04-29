@@ -3,8 +3,7 @@ import * as React from 'react';
 import { IFilterItemProps } from './IFilterItemProps';
 
 /**
- * @component FilterItem
- * @description Renders a filter item
+ * @category FilterPanel
  */
 export const FilterItem = ({ filter, onFilterUpdated: filterUpdated }: IFilterItemProps) => {
     let selectedKeys = filter.selected.map(f => f.key);

@@ -10,9 +10,10 @@ import * as format from 'string-format';
 import { IResolveProjectModalProps } from './types';
 import resource from 'i18n';
 
-/**
- * @component ResolveProjectModal
- * @description Modal for resolving a project that hasn't been matched to a project
+ /**
+  * Modal for resolving a project that hasn't been matched to a project
+  * 
+  * @category EventList
  */
 export const ResolveProjectModal = ({ isOpen, onDismiss, onProjectSelected, event }: IResolveProjectModalProps) => {
     const [scope, setScope] = useState<boolean>(!!event.customer);

@@ -9,7 +9,9 @@ import * as React from 'react';
 import * as format from 'string-format';
 import { IStatusBarProps } from './IStatusBarProps';
 
-
+/**
+ * @category Timesheet
+ */
 export const StatusBar = (props: IStatusBarProps) => {
     return (
         <div className='c-Timesheet-statusbar' style={{ marginTop: 10, marginLeft: -10, marginRight: -10 }}>

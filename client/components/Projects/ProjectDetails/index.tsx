@@ -16,7 +16,7 @@ import { GET_PROJECT_CONFIRMED_TIME_ENTRIES } from './GET_PROJECT_CONFIRMED_TIME
 import { IProjectDetailsProps } from './IProjectDetailsProps';
 
 /**
- * @component ProjectDetails
+ * @category Projects
  */
 export const ProjectDetails = (props: IProjectDetailsProps) => {
     const [project, setProject] = React.useState({ ...props.project });

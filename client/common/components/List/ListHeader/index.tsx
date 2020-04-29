@@ -5,6 +5,9 @@ import { IRenderFunction } from 'office-ui-fabric-react/lib/Utilities';
 import * as React from 'react';
 import { IListProps } from '../IListProps';
 
+/**
+ * @category List
+ */
 export const ListHeader = (headerProps: IDetailsHeaderProps, defaultRender: IRenderFunction<IDetailsHeaderProps>, props: IListProps, onSearch: (searchTerm: string) => void) => {
     return (
         <Sticky stickyPosition={StickyPositionType.Header} isScrollSynced={true}>

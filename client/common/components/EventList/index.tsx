@@ -6,7 +6,7 @@ import { IEventListProps } from './types';
 import { withDefaultProps } from 'with-default-props';
 
 /**
- * @component EventList
+ * @category EventList
  */
 let EventList = (props: IEventListProps) => {
     const columns = [

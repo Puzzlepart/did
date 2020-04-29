@@ -1,8 +1,14 @@
+/**
+ * @category FilterPanel
+ */
 export interface IFilterItem {
     key: string;
     value: string;
 }
 
+/**
+ * @category FilterPanel
+ */
 export interface IFilter {
     key: string;
     name: string;
@@ -11,8 +17,7 @@ export interface IFilter {
 }
 
 /**
- * @class BaseFilter
- * @abstract
+ * @category FilterPanel
  */
 export abstract class BaseFilter {
     constructor(public fieldName: string, public name: string) { }

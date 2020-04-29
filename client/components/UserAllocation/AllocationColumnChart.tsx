@@ -1,6 +1,9 @@
 
 import { ITypedHash } from '@pnp/common';
 
+/**
+ * @ignore
+ */
 export const AllocationColumnChart = (title: string, allocation: ITypedHash<number>, chartName: string): any => ({
     chart: {
         type: 'column',

@@ -12,8 +12,7 @@ import { ICreateProjectFormValidation } from './ICreateProjectFormValidation';
 import { SearchCustomer } from './SearchCustomer';
 
 /**
- * @component CreateProjectForm
- * @description Form for creating a new Project
+ * @category Projects
  */
 export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey: '', name: '', description: '', icon: 'Page' } }: ICreateProjectFormProps) => {
     let [validation, setValidation] = useState<ICreateProjectFormValidation>({ errors: {}, invalid: true });

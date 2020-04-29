@@ -4,6 +4,9 @@ import { ISearchBoxProps } from 'office-ui-fabric-react/lib/SearchBox';
 import { IListGroups } from './IListGroups';
 import { IListSelection } from './IListSelection';
 
+/**
+ * @category List
+ */
 export interface IListProps {
     items: any[];
     columns?: IColumn[];

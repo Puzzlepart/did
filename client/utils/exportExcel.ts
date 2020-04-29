@@ -3,6 +3,9 @@ import { loadScripts } from './loadScripts';
 import { humanize } from 'underscore.string';
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 
+/**
+ * @ignore
+ */
 export interface IExcelExportOptions {
     fileName: string;
     columns?: IColumn[];
@@ -16,6 +19,8 @@ export interface IExcelExportOptions {
  * @param {IExcelExportOptions} options Options
  * 
  * @return Returns the generate blob
+ * 
+ * @category Utility
  */
 export async function exportExcel(items: any[], options: IExcelExportOptions) {
     await loadScripts([

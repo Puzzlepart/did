@@ -4,12 +4,13 @@ import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import * as React from 'react';
 import { humanize } from 'underscore.string';
 
-export interface IIconPickerProps extends IDropdownProps {
-
-}
+/**
+ * @category IconPicker
+ */
+export interface IIconPickerProps extends IDropdownProps {}
 
 /**
- * @component IconPicker
+ * @category IconPicker
  */
 export const IconPicker = (props: IIconPickerProps) => {
     function onRenderOption(option: IDropdownOption): JSX.Element {

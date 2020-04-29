@@ -12,6 +12,8 @@ import * as _ from 'underscore';
  * @param {string[]} uniqueGroupNames Group names
  * @param {string} emptyGroupName Empty group name
  * @param {Function} totalFunc Function to calculate sum
+ * 
+ * @category List
  */
 export function generateListGroups(items: any[], groupBy: string, uniqueGroupNames: string[], emptyGroupName: string = '', totalFunc?: Function): { items: any[], groups: IGroup[] } {
     const itemsSort = { props: [groupBy], opts: { reverse: false } };

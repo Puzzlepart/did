@@ -3,8 +3,7 @@ import _ from 'underscore';
 import { BaseFilter, IFilter } from "./BaseFilter";
 
 /**
- * @class ResourceFilter
- * @inherits BaseFilter
+ * @category FilterPanel
  */
 export class ResourceFilter extends BaseFilter {
     constructor(fieldName: string, name: string) {

@@ -2,11 +2,13 @@ import { getValueTyped as value } from 'helpers';
 import _ from 'underscore';
 import { BaseFilter, IFilter } from "./BaseFilter";
 
+/**
+ * @ignore
+ */
 const MONTH_NAMES: string[] = Array.apply(0, Array(12)).map((_: any, i: number) => require('moment')().month(i).format('MMMM'));
 
 /**
- * @class MonthFilter
- * @inherits BaseFilter
+ * @category FilterPanel
  */
 export class MonthFilter extends BaseFilter {
     constructor(fieldName: string, name: string) {

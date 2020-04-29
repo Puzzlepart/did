@@ -12,8 +12,7 @@ import AutoSuggest from 'react-autosuggest';
 import { ISearchCustomerProps } from './ISearchCustomerProps';
 
 /**
- * @component SearchCustomer
- * @description @todo
+ * @category Projects
  */
 export const SearchCustomer = (props: ISearchCustomerProps) => {
     let [customers, setCustomers] = useState<ICustomer[]>(null);

@@ -8,7 +8,7 @@ import resource from 'i18n';
 import { withDefaultProps } from 'with-default-props';
 
 /**
- * @component ProjectList
+ * @category ProjectList
  */
 const ProjectList = (props: IProjectListProps) => {
     const columns: IColumn[] = [

@@ -11,8 +11,7 @@ import { ICreateCustomerFormProps } from './ICreateCustomerFormProps';
 import { ICreateCustomerFormValidation } from './ICreateCustomerFormValidation';
 
 /**
- * @component CreateCustomerForm
- * @description Form for creating a new Custoner
+ * @category Customers
  */
 export const CreateCustomerForm = ({ initialModel = { key: '', name: '', description: '', icon: 'Page' } }: ICreateCustomerFormProps) => {
     let [validation, setValidation] = useState<ICreateCustomerFormValidation>({ errors: {}, invalid: true });

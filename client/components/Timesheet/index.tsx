@@ -19,7 +19,7 @@ import { ITimesheetProps, ITimesheetScope, ITimesheetState, TimesheetView } from
 import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD';
 
 /**
- * @component Timesheet
+ * @category Timesheet
  */
 export class Timesheet extends React.Component<ITimesheetProps, ITimesheetState> {
     public static defaultProps: Partial<ITimesheetProps> = { groupHeaderDateFormat: 'dddd DD' };

@@ -8,7 +8,7 @@ export interface IDurationColumnProps {
 
 /**
  * @component DurationColumn
- * @description 
+ * @category Timesheet
  */
 export const DurationColumn = ({ row, column }: IDurationColumnProps) => {
     let style: React.CSSProperties = { ...column.data.style };

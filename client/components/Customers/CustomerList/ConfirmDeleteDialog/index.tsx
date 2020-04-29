@@ -5,8 +5,7 @@ import { IConfirmDeleteDialogProps } from './IConfirmDeleteDialogProps';
 
 
 /**
- * @component ConfirmDeleteDialog
- * @description
+ * @category Customers
  */
 export const ConfirmDeleteDialog = (props: IConfirmDeleteDialogProps) => {
     let subText = props.projects.length > 0

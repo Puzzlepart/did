@@ -1,5 +1,8 @@
 import gql from 'graphql-tag';
 
+/**
+ * @ignore
+ */
 export const GET_PROJECT_CONFIRMED_TIME_ENTRIES = gql`
     query($projectId: String) {
         result: confirmedTimeEntries(projectId: $projectId)  {

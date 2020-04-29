@@ -1,6 +1,9 @@
 import { ITimesheetState } from '../types';
 import { TimesheetPeriod } from '../TimesheetPeriod';
 
+/**
+ * @category Timesheet
+ */
 export interface IStatusBarProps {
     /**
      * State of the Timesheet component

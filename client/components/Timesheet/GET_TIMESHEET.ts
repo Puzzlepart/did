@@ -1,6 +1,9 @@
 
 import gql from 'graphql-tag';
 
+/**
+ * @ignore
+ */
 export default gql`
 query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!) {
   timesheet(startDateTime: $startDateTime, endDateTime: $endDateTime, dateFormat: $dateFormat) {
