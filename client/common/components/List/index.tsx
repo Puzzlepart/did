@@ -63,7 +63,7 @@ const List = (props: IListProps) => {
             onRender: () => (
                 <SearchBox
                     {...props.searchBox}
-                    styles={{ field: { fontSize: '10pt', letterSpacing: '1px' }, root: { maxWidth: 400 } }}
+                    styles={{ field: { fontSize: '10pt', letterSpacing: '1px' }, root: { width: 400, maxWidth: 400 } }}
                     onChange={(_, newValue) => onSearch(newValue)} />
             ),
         });
