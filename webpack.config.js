@@ -1,10 +1,15 @@
 require('dotenv').config();
 const path = require('path');
 const webpack = require('webpack');
-const WebpackBar = require('webpackbar');
 const clientLib = path.resolve(__dirname, 'lib/client/');
 
-module.exports = {
+console.log(process.env.NODE_ENV);
+
+let __config = {
+  output: {
+    path: path.resolve(__dirname, './public/js'),
+    filename: 'did365.js'
+  },
   module: {
     rules: [
       {
@@ -19,7 +24,7 @@ module.exports = {
       }
     ]
   },
-  mode: 'development',
+  mode: process.env.NODE_ENV,
   entry: [
     'core-js/stable',
     'regenerator-runtime/runtime',
@@ -35,17 +40,24 @@ module.exports = {
       i18n: path.resolve(clientLib, 'i18n'),
     }
   },
+  output: {
+    path: path.resolve(__dirname, './public/js'),
+    filename: 'did365.js'
+  },
   plugins: [
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    new WebpackBar(),
     new webpack.DefinePlugin({
       'process.env': {
         'AZURE_APPLICATION_INSIGHTS_INSTRUMENTATION_KEY': JSON.stringify(process.env.AZURE_APPLICATION_INSIGHTS_INSTRUMENTATION_KEY),
       },
     })
   ],
-  output: {
-    path: path.resolve(__dirname, './public/js'),
-    filename: 'did365.js'
-  }
 };
+
+switch (process.env.NODE_ENV) {
+  case 'development': {
+    __config.plugins.push(new (require('webpackbar'))());
+  }
+}
+
+module.exports = __config;

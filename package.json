@@ -7,14 +7,13 @@
         "npm": ">=6.4.1"
     },
     "scripts": {
-        "watch": "concurrently \"npm run watch:client:package\" \"npm run watch:server\" \"npm run watch:scss\"",
+        "watch": "concurrently \"npm run watchPackageClient\" \"npm run watchServer\" \"npm run watchStyles\"",
         "start": "node ./bin/www",
-        "watch:server": "nodemon --ignore client --ignore public --ignore lib ./bin/www",
-        "build:scss": "node-sass --include-path scss scss/main.scss public/css/main.css",
-        "watch:scss": "onchange -k -i -d 750 \"./**/*.scss\" -- npm run build:scss",
-        "package:client": "tsc --build && webpack --config webpack.config.js",
-        "package:client:prod": "tsc --build && webpack --config webpack.config.prod.js",
-        "watch:client:package": "onchange -k -i -d 750 \"./client/**/*.ts\" \"./client/**/*.tsx\" -- npm run package:client",
+        "watchServer": "nodemon --ignore client --ignore public --ignore lib ./bin/www",
+        "buildStyles": "node-sass --include-path scss scss/main.scss public/css/main.css",
+        "watchStyles": "onchange -k -i -d 250 \"./**/*.scss\" -- npm run buildStyles",
+        "packageClient": "tsc --build && webpack --config webpack.config.js",
+        "watchPackageClient": "onchange -k -i -d 250 \"./client/**/*.ts\" \"./client/**/*.tsx\" -- npm run packageClient",
         "clean": "rimraf ./lib && rimraf ./public/js"
     },
     "dependencies": {
