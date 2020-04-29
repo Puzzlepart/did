@@ -88,6 +88,7 @@
         "uuid": "7.0.2",
         "validator": "13.0.0",
         "webpack": "4.42.1",
+        "webpack-cli": "3.3.11",
         "with-default-props": "^0.2.1"
     },
     "devDependencies": {
