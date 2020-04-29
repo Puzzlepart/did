@@ -33,7 +33,7 @@ export const ProjectListColumns = (renderLink: boolean, hideColumns: string[]): 
         'name',
         'Name',
         { maxWidth: 180 },
-        (project: IProject) => renderLink ? <a href={`/projects#${project.id}`}>{project.name}</a> : project.name
+        (project: IProject) => renderLink ? <a href={`/projects#key=${project.id}`}>{project.name}</a> : project.name
     ),
     col(
         'customer',
@@ -41,7 +41,7 @@ export const ProjectListColumns = (renderLink: boolean, hideColumns: string[]): 
         {},
         (project: IProject) => {
             if (!project.customer) return null;
-            return renderLink ? <a href={`/customers#${project.customer.id}`}>{project.customer.name}</a> : project.customer.name;
+            return renderLink ? <a href={`/customers#key=${project.customer.id}`}>{project.customer.name}</a> : project.customer.name;
         }
     )
 ].filter(col => hideColumns.indexOf(col.key) === -1))
@@ -53,7 +53,7 @@ const ProjectList = (props: IProjectListProps) => {
     const [items, setItems] = React.useState([...props.items]);
 
     const onToggleInactive = (_event: React.MouseEvent<HTMLElement, MouseEvent>, checked?: boolean) => {
-        setItems([...props.items].filter(p => checked ? true : !p.inactive));
+        setItems([...props.items].filter(project => checked ? true : !project.inactive));
     }
 
     React.useEffect(() => setItems([...props.items].filter(p => !p.inactive)), [props.items]);
