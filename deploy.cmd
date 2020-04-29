@@ -76,49 +76,41 @@ IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
 
 call :SelectNodeVersion
 
-echo.
-echo [2/5] INSTALLING NPM PACKAGES
-echo.
 
-IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
+
+IF EXIST "%DEPLOYMENT_TARGET%\package.json" (  
   pushd "%DEPLOYMENT_TARGET%"
+
+  echo.
+  echo [2/5] INSTALLING NPM PACKAGES
+  echo.
   call :ExecuteCmd !NPM_CMD! install --no-progress --loglevel silent --no-shrinkwrap --no-fund          
   IF !ERRORLEVEL! NEQ 0 goto error
-  popd
-)
 
-echo.
-echo [3/5] UPDATING NPM PACKAGES
-echo.
+  echo.
+  echo [3/5] UPDATING NPM PACKAGES
+  echo.
 
-IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
-  pushd "%DEPLOYMENT_TARGET%"
   call :ExecuteCmd !NPM_CMD! update --no-progress --loglevel silent --no-fund 
   IF !ERRORLEVEL! NEQ 0 goto error
-  popd
-)
 
-echo.
-echo [4/5] PACKAGING JS
-echo.
+  echo.
+  echo [4/5] PACKAGING JS
+  echo.
 
-IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
-  pushd "%DEPLOYMENT_TARGET%"
   call :ExecuteCmd !NPM_CMD! run packageClient --loglevel silent
   IF !ERRORLEVEL! NEQ 0 goto error
-  popd
-)
 
-echo.
-echo [5/5] PACKAGING CSS
-echo.
+  echo.
+  echo [5/5] PACKAGING CSS
+  echo.
 
-IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
-  pushd "%DEPLOYMENT_TARGET%"
   call :ExecuteCmd !NPM_CMD! run packageStyles --loglevel silent
   IF !ERRORLEVEL! NEQ 0 goto error
+
   popd
 )
+
 
 goto end
 :ExecuteCmd
