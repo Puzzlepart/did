@@ -5,7 +5,7 @@ import { IProject } from 'interfaces';
 /**
  * {@docCategory Projects}
  */
-export interface IGetProjects {
+export interface IGetProjectsData {
     projects: IProject[];
 }
 
