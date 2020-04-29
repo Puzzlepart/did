@@ -5,6 +5,9 @@ import { IRenderFunction } from 'office-ui-fabric-react/lib/Utilities';
 import * as React from 'react';
 import { IListProps } from '../IListProps';
 
+/**
+ * {@docCategory ListHeader}
+ */
 export interface IListHeaderProps {
     headerProps: IDetailsHeaderProps;
     defaultRender: IRenderFunction<IDetailsHeaderProps>;
@@ -12,6 +15,9 @@ export interface IListHeaderProps {
     commandBar?: ICommandBarProps
 }
 
+/**
+ * @component ListHeader
+ */
 export const ListHeader = ({ headerProps, defaultRender, list, commandBar }: IListHeaderProps) => {
     return (
         <Sticky stickyPosition={StickyPositionType.Header} isScrollSynced={true}>
