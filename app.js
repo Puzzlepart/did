@@ -50,6 +50,7 @@ app.use((req, res, next) => {
       isAdmin: req.user.data.role === 'Admin',
     };
   }
+  res.locals.package = require('./package.json');
   next();
 });
 //#endregion
