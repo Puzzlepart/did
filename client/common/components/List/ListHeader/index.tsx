@@ -11,19 +11,16 @@ import { IListProps } from '../IListProps';
 export interface IListHeaderProps {
     headerProps: IDetailsHeaderProps;
     defaultRender: IRenderFunction<IDetailsHeaderProps>;
-    list: IListProps;
     commandBar?: ICommandBarProps
 }
 
 /**
  * @component ListHeader
  */
-export const ListHeader = ({ headerProps, defaultRender, list, commandBar }: IListHeaderProps) => {
+export const ListHeader = ({ headerProps, defaultRender, commandBar }: IListHeaderProps) => {
     return (
         <Sticky stickyPosition={StickyPositionType.Header} isScrollSynced={true}>
-            <CommandBar
-                {...commandBar}
-                styles={{ root: { margin: 0, padding: 0 } }} />
+            <CommandBar                {...commandBar} styles={{ root: { margin: 0, padding: 0 } }} />
             {defaultRender(headerProps)}
         </Sticky>
     );

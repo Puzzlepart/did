@@ -72,7 +72,6 @@ const List = (props: IListProps) => {
             <ListHeader
                 headerProps={headerProps}
                 defaultRender={defaultRender}
-                list={props}
                 commandBar={{ ...props.commandBar, items: commandBarItems }} />
         );
     }
