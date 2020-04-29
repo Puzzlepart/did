@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import { ITimeEntry } from 'interfaces';
+import { TimesheetPeriod } from './TimesheetPeriod';
 
 export type TimesheetView = 'overview' | 'summary' | 'allocation';
 
@@ -26,7 +26,7 @@ export interface ITimesheetState {
     /**
      * Periods
      */
-    periods?: ITimesheetPeriod[];
+    periods?: TimesheetPeriod[];
 
     /**
      * Selected period id
@@ -37,18 +37,4 @@ export interface ITimesheetState {
 export interface ITimesheetScope {
     startDateTime?: moment.Moment;
     endDateTime?: moment.Moment;
-    uiMatchedEventsStorageKey?: string;
-    uiIgnoredEventsStorageKey?: string;
 }
-
-export interface ITimesheetPeriod {
-    id?: string;
-    name?: string;  
-    startDateTime?: string;
-    endDateTime?: string;
-    events: ITimeEntry[];
-    totalDuration?: number;
-    confirmedDuration?: number;
-    isConfirmed?: boolean;
-    errors?: Error[];
-  }  

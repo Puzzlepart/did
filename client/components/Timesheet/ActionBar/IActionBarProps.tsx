@@ -1,4 +1,5 @@
-import { ITimesheetScope, ITimesheetState, ITimesheetPeriod } from "../types";
+import { ITimesheetScope, ITimesheetState } from '../types';
+import { TimesheetPeriod } from '../TimesheetPeriod';
 
 export interface IActionBarProps {
 
@@ -10,7 +11,7 @@ export interface IActionBarProps {
     /**
      * Selected period 
      */
-    selectedPeriod?: ITimesheetPeriod;
+    selectedPeriod?: TimesheetPeriod;
 
     /**
      * On change scope callback (passing empty object defaults to current week)
@@ -20,7 +21,7 @@ export interface IActionBarProps {
     /**
      * On change period callback
      */
-    onChangePeriod: (period:ITimesheetPeriod) => void;
+    onChangePeriod: (periodId: string) => void;
 
     /**
      * On confirm period callback

@@ -9,28 +9,8 @@ import * as React from 'react';
 import * as format from 'string-format';
 import { IStatusBarProps } from './IStatusBarProps';
 
-/**
- * Get total duration
- * 
- * @param {ITimeEntry[]} events Events
- */
-function getTotalDuration(events: ITimeEntry[]) {
-    return events.reduce((sum, event) => sum += event.durationMinutes, 0);
-}
-
-/**
- * Get matched duration
- * 
- * @param {ITimeEntry[]} events Events
- */
-function getMatchedDuration(events: ITimeEntry[]) {
-    return events.filter(event => !!event.project).reduce((sum, event) => sum += event.durationMinutes, 0);
-}
 
 export const StatusBar = (props: IStatusBarProps) => {
-    let totalDuration = getTotalDuration(props.selectedPeriod.events);
-    let matchedDuration = getMatchedDuration(props.selectedPeriod.events);
-
     return (
         <div className='c-Timesheet-statusbar' style={{ marginTop: 10, marginLeft: -10, marginRight: -10 }}>
             <Shimmer isDataLoaded={!props.timesheet.loading} />
@@ -40,15 +20,15 @@ export const StatusBar = (props: IStatusBarProps) => {
                     <div className='row'>
                         <div className='col-sm'
                             hidden={props.selectedPeriod.isConfirmed}>
-                            <UserMessage text={format(resource('TIMESHEET.PERIOD_HOURS_SUMMARY_TEXT'), getDurationDisplay(totalDuration))} iconName='ReminderTime' />
+                            <UserMessage text={format(resource('TIMESHEET.PERIOD_HOURS_SUMMARY_TEXT'), getDurationDisplay(props.selectedPeriod.totalDuration))} iconName='ReminderTime' />
                         </div>
-                        <div className='col-sm' hidden={totalDuration - matchedDuration === 0 || props.selectedPeriod.isConfirmed}>
+                        <div className='col-sm' hidden={props.selectedPeriod.unmatchedDuration === 0 || props.selectedPeriod.isConfirmed}>
                             <UserMessage
-                                text={format(resource('TIMESHEET.HOURS_NOT_MATCHED_TEXT'), getDurationDisplay(totalDuration - matchedDuration))}
+                                text={format(resource('TIMESHEET.HOURS_NOT_MATCHED_TEXT'), getDurationDisplay(props.selectedPeriod.unmatchedDuration))}
                                 type={MessageBarType.warning}
                                 iconName='BufferTimeBoth' />
                         </div>
-                        <div className='col-sm' hidden={totalDuration - matchedDuration > 0 || props.selectedPeriod.isConfirmed}>
+                        <div className='col-sm' hidden={props.selectedPeriod.unmatchedDuration > 0 || props.selectedPeriod.isConfirmed}>
                             <UserMessage
                                 text={resource('TIMESHEET.ALL_HOURS_MATCHED_TEXT')}
                                 type={MessageBarType.success}
@@ -56,15 +36,15 @@ export const StatusBar = (props: IStatusBarProps) => {
                         </div>
                         <div className='col-sm' hidden={!props.selectedPeriod.isConfirmed}>
                             <UserMessage
-                                text={format(resource('TIMESHEET.PERIOD_CONFIRMED_TEXT'), getDurationDisplay(matchedDuration))}
+                                text={format(resource('TIMESHEET.PERIOD_CONFIRMED_TEXT'), getDurationDisplay(props.selectedPeriod.matchedDuration))}
                                 type={MessageBarType.success}
                                 iconName='CheckMark' />
                         </div>
-                        <div className='col-sm' hidden={props.ignoredEvents.length === 0 || props.selectedPeriod.isConfirmed}>
+                        <div className='col-sm' hidden={props.selectedPeriod.ignoredEvents.length === 0 || props.selectedPeriod.isConfirmed}>
                             <UserMessage
                                 type={MessageBarType.info}
                                 iconName='DependencyRemove'>
-                                <p>{format(resource('TIMESHEET.IGNORED_EVENTS_TEXT'), props.ignoredEvents.length)} <a href='#' onClick={props.onClearIgnores}>{resource('TIMESHEET.UNDO_IGNORE_LINK_TEXT')}</a></p>
+                                <p>{format(resource('TIMESHEET.IGNORED_EVENTS_TEXT'), props.selectedPeriod.ignoredEvents.length)} <a href='#' onClick={props.onClearIgnores}>{resource('TIMESHEET.UNDO_IGNORE_LINK_TEXT')}</a></p>
                             </UserMessage>
                         </div>
                         <div className='col-sm' hidden={props.selectedPeriod.errors.length === 0}>

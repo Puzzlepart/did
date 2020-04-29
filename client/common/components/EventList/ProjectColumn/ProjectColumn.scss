@@ -1,0 +1,43 @@
+.c-Timesheet-projectColumn {
+  width: 100%;
+
+  .c-Timesheet-projectColumn-content {
+    vertical-align: top;
+    display: inline-block;
+  }
+
+  .c-Timesheet-projectColumn-content-subText {
+    font-size: 7pt;
+  }
+
+  .c-Timesheet-projectColumn-clearButton {
+    vertical-align: top;
+    display: inline-block;
+    margin: 0 0 0 4px;
+  }
+}
+
+.c-Timesheet-projectColumn-tooltip {
+  margin: 0;
+  min-width: 200px;
+  
+  .c-Timesheet-projectColumn-tooltip-title {
+    font-size: 13pt;
+    margin: 0;
+  }
+  
+  .c-Timesheet-projectColumn-tooltip-subTitle {
+    font-size: 8pt;
+    margin: 0 0 10px 0;
+  }
+  
+  .c-Timesheet-projectColumn-tooltip-description {    
+    font-size: 8pt;
+    margin: 4px 0 10px 0;
+  }
+  
+  .c-Timesheet-projectColumn-tooltip-tag {    
+    font-size: 9pt;
+    font-weight: 600;
+  }
+}

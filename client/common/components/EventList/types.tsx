@@ -1,7 +1,8 @@
 import { ITypedHash } from '@pnp/common';
 import { IListGroups } from 'common/components/List/IListGroups';
-import { IProject, ITimeEntry } from 'interfaces';
+import { ITimeEntry } from 'interfaces/ITimeEntry';
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
+import { IProjectColumnProps } from './ProjectColumn/types';
 
 export interface IEventListProps {
     /**
@@ -10,24 +11,9 @@ export interface IEventListProps {
     events: ITimeEntry[];
 
     /**
-     * Wether the event list is locked (adjustments can be done to project matching)
+     * Props for ProjectColumn
      */
-    isLocked?: boolean;
-
-    /**
-     * Callback for when a project is manually matched for an event
-     */
-    onManualMatch?: (event: ITimeEntry, project: IProject) => void;
-
-    /**
-     * Callback for when the project for an event is unmatched
-     */
-    onClearManualMatch?: (event: ITimeEntry) => void;
-
-    /**
-     * Callback for when the project for an event is ignored
-     */
-    onIgnoreEvent?: (event: ITimeEntry) => void;
+    projectColumn?: Partial<IProjectColumnProps>;
 
     /**
      * Enable shimmer

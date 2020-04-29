@@ -10,4 +10,5 @@ export interface IProject extends IObjectWithKey {
     icon: string;
     customer: ICustomer;
     outlookCategory?: IOutlookCategory;
+    inactive?: boolean;
 }

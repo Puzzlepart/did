@@ -1,20 +1,14 @@
 
-import { UserMessage } from 'common/components/UserMessage';
+import { UserMessage, SearchProject } from 'common/components';
 import { getValueTyped as value } from 'helpers';
-import { IProject, ITimeEntry } from 'interfaces';
 import { Modal } from 'office-ui-fabric-react/lib/Modal';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
 import * as React from 'react';
 import { useState } from 'react';
-import { SearchProject } from './SearchProject';
-
-interface IResolveProjectModalProps {
-    event: ITimeEntry;
-    isOpen?: boolean;
-    onDismiss?: () => void;
-    onProjectSelected?: (project: IProject) => void;
-}
+import * as format from 'string-format';
+import { IResolveProjectModalProps } from './types';
+import resource from 'i18n';
 
 /**
  * @component ResolveProjectModal
@@ -30,19 +24,19 @@ export const ResolveProjectModal = ({ isOpen, onDismiss, onProjectSelected, even
             <div className='c-ResolveProjectModal-title'>{event.title}</div>
             <UserMessage
                 iconName='OutlookLogo'
-                text={`**Please note:** You should try your best to match<a href='${event.webLink}' target='_blank'>the event in Outlook</a>, but in some cases it might be neccessary to manually match.`} />
+                text={format(resource('TIMESHEET.MATCH_OUTLOOK_NOTE'), event.webLink)} />
 
             <UserMessage
                 hidden={!event.suggestedProject}
                 style={{ marginTop: 5 }}
                 iconName='Lightbulb' >
-                <p>Did you mean<a href="#" onClick={_ => onProjectSelected(event.suggestedProject)}>{value(event, 'suggestedProject.id', '')}</a>?</p>
+                <p>{resource('TIMESHEET.DID_YOU_MEAN_TEXT')}<a href="#" onClick={_ => onProjectSelected(event.suggestedProject)}>{value(event, 'suggestedProject.id', '')}</a>?</p>
             </UserMessage>
 
             <UserMessage
                 hidden={!event.customer || !!event.suggestedProject}
                 style={{ marginTop: 5 }}
-                text={`Event not matched. We found a matching customer \`${value(event, 'customer.name', '')}\`, but not a project with the specified key.`} />
+                text={format(resource('TIMESHEET.EVENT_NOT_FULLY_MATCHED_TEXT'), value(event, 'customer.name', ''))} />
 
             <Pivot defaultSelectedKey='search-project' styles={{ root: { marginTop: 10 } }}>
                 <PivotItem
