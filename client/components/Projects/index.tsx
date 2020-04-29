@@ -14,13 +14,16 @@ import { ProjectDetails } from './ProjectDetails';
 import ProjectList from './ProjectList';
 import resource from 'i18n';
 
+/**
+ * @category Projects
+ */
 function getPath(): string[] {
     let [, path] = document.location.hash.substring(1).split('=');
     return (path || '').split('/');
 }
 
 /**
- * @component Projects
+ * @category Projects
  */
 export const Projects = () => {
     const [selected, setSelected] = useState<IProject>(null);

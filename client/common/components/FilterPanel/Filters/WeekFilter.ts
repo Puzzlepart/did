@@ -3,8 +3,7 @@ import _ from 'underscore';
 import { BaseFilter, IFilter } from "./BaseFilter";
 
 /**
- * @class WeekFilter
- * @inherits BaseFilter
+ * @category FilterPanel
  */
 export class WeekFilter extends BaseFilter {
     constructor(fieldName: string, name: string) {

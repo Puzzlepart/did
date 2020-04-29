@@ -1,0 +1,17 @@
+{
+    "inputFiles": [
+        "./client"
+    ],
+    "mode": "file",
+    "out": "doc",
+    "includeDeclarations": true,
+    "excludeExternals": true,
+    "includeVersion": true,
+    "hideGenerator": true,
+    "theme": "default",
+    "categoryOrder": [
+        "Common",
+        "Timesheet",
+        "*"
+    ]
+}

@@ -8,7 +8,7 @@ import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
 import { Slider } from 'office-ui-fabric-react/lib/Slider';
 import * as React from 'react';
 import * as _ from 'underscore';
-import { GET_CONFIRMED_TIME_ENTRIES } from './GET_CONFIRMED_TIME_ENTRIES';
+import GET_CONFIRMED_TIME_ENTRIES  from './GET_CONFIRMED_TIME_ENTRIES';
 import { IAdminSummaryViewProps } from './IAdminSummaryViewProps';
 require('moment/locale/en-gb');
 

@@ -4,6 +4,9 @@ import { ITimeEntry } from 'interfaces/ITimeEntry';
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import { IProjectColumnProps } from './ProjectColumn/types';
 
+/**
+ * @category EventList
+ */
 export interface IEventListProps {
     /**
      * List of events
