@@ -5,6 +5,8 @@ const clientLib = path.resolve(__dirname, 'lib/client/');
 
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
 
+console.log("NODE_ENV: %s", mode)
+
 let config = {
   output: {
     path: path.resolve(__dirname, './public/js'),
