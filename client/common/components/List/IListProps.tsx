@@ -6,10 +6,10 @@ import { IListGroups } from './IListGroups';
 import { IListSelection } from './IListSelection';
 
 /**
- * {@docCategory List}
+ * @category List
  */
-export interface IListProps<T = any> {
-    items: T[];
+export interface IListProps {
+    items: any[];
     columns?: IColumn[];
     enableShimmer?: boolean;
     height?: number;

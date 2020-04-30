@@ -47,7 +47,7 @@ export const ProjectListColumns = (renderLink: boolean, hideColumns: string[]): 
 ].filter(col => hideColumns.indexOf(col.key) === -1))
 
 /**
- * @component ProjectList
+ * @category ProjectList
  */
 const ProjectList = (props: IProjectListProps) => {
     const [items, setItems] = React.useState([...props.items]);

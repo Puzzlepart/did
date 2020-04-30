@@ -15,7 +15,15 @@ import GET_CUSTOMERS, { IGetCustomersData } from './GET_CUSTOMERS';
 import { ICustomerProps } from './ICustomerProps';
 
 /**
- * @component Customers
+ * @category Customers
+ */
+function getPath(): string[] {
+    let [, path] = document.location.hash.substring(1).split('=');
+    return (path || '').split('/');
+}
+
+/**
+ * @category Customers
  */
 export const Customers = (props: ICustomerProps) => {
     const [selected, setSelected] = React.useState<ICustomer>(null);

@@ -11,7 +11,7 @@ import * as format from 'string-format';
 import { humanize } from 'underscore.string';
 import * as excelUtils from 'utils/exportExcel';
 import { generateColumn } from 'utils/generateColumn';
-import { GET_CONFIRMED_TIME_ENTRIES } from './GET_CONFIRMED_TIME_ENTRIES';
+import GET_CONFIRMED_TIME_ENTRIES from './GET_CONFIRMED_TIME_ENTRIES';
 import { IReportsProps } from './IReportsProps';
 import { REPORTS_FILTERS } from './REPORTS_FILTERS';
 
@@ -20,6 +20,8 @@ import { REPORTS_FILTERS } from './REPORTS_FILTERS';
  * 
  * @param {Object} entry Entry
  * @param {string[]} skip Skip
+ * 
+ * @category Reports
  */
 function getColumns(entry: Object = {}, skip: string[]): IColumn[] {
     return Object.keys(entry)
@@ -28,8 +30,9 @@ function getColumns(entry: Object = {}, skip: string[]): IColumn[] {
 }
 
 /**
- * @component Reports
- * @description Consists of a DetailsList with all confirmed time entries and an export to excel button
+ * Consists of a DetailsList with all confirmed time entries and an export to excel button
+ * 
+ * @category Reports
  */
 export const Reports = ({ skip = ['id', '__typename', 'monthNumber'], exportFileNameTemplate = 'ApprovedTimeEntries-{0}.xlsx' }: IReportsProps) => {
     const [filterPanelOpen, setFilterPanelOpen] = useState<boolean>(undefined);

@@ -9,6 +9,9 @@ import { ACTIONBAR_ICON_PROPS } from '../ACTIONBAR_ICON_PROPS';
 import { CALENDAR_STRINGS } from './CALENDAR_STRINGS';
 import { IWeekPickerProps } from './IWeekPickerProps';
 
+/**
+ * @category Timesheet
+ */
 export const WeekPicker = ({ scope, onChange }: IWeekPickerProps) => {
     let [calendar, setCalendar] = useState(null);
 

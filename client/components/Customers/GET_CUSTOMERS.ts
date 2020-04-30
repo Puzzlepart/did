@@ -9,6 +9,9 @@ export interface IGetCustomersData {
     customers: ICustomer[];
 }
 
+/**
+ * @ignore
+ */
 export default gql`
 {
     customers {

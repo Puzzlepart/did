@@ -6,18 +6,9 @@ import * as React from 'react';
 import { IListProps } from '../IListProps';
 
 /**
- * {@docCategory ListHeader}
+ * @category List
  */
-export interface IListHeaderProps {
-    headerProps: IDetailsHeaderProps;
-    defaultRender: IRenderFunction<IDetailsHeaderProps>;
-    commandBar?: ICommandBarProps
-}
-
-/**
- * @component ListHeader
- */
-export const ListHeader = ({ headerProps, defaultRender, commandBar }: IListHeaderProps) => {
+export const ListHeader = (headerProps: IDetailsHeaderProps, defaultRender: IRenderFunction<IDetailsHeaderProps>, props: IListProps, onSearch: (searchTerm: string) => void) => {
     return (
         <Sticky stickyPosition={StickyPositionType.Header} isScrollSynced={true}>
             <CommandBar                {...commandBar} styles={{ root: { margin: 0, padding: 0 } }} />

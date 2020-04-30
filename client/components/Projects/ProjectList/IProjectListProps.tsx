@@ -1,7 +1,9 @@
 import { IListProps } from 'common/components/List/IListProps';
-import { IProject } from 'interfaces/IProject';
 
-export interface IProjectListProps extends IListProps<IProject> {
+/**
+ * @category ProjectList
+ */
+export interface IProjectListProps extends IListProps {
     renderLink?: boolean;
     hideColumns?: string[];
 }

@@ -20,6 +20,7 @@ import { SummaryViewType } from "./SummaryViewType";
  * Create columns
  *
  * @param {ISummaryViewProps} props Props
+ * @category Timesheet
 */
 function createColumns({ events, type, scope, range }: ISummaryViewProps) {
     let columns = [];

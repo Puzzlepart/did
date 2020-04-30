@@ -13,9 +13,7 @@ import _ from 'underscore';
 import { updateUrlHash } from 'helpers';
 
 /**
- * @component List
- * 
- * @param {IListProps} props Props
+ * @category List
  */
 const List = (props: IListProps) => {
     let searchTimeout: any;

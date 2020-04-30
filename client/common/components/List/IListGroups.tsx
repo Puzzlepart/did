@@ -1,5 +1,5 @@
 /**
- * {@docCategory List}
+ * @category List
  */
 export interface IListGroups {
     fieldName: string;

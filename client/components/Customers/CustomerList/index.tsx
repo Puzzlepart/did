@@ -10,6 +10,8 @@ import { ICustomerListProps } from './ICustomerListProps';
 
 /**
  * Generate column definitions
+ * 
+ * @category Customers
  */
 export const CustomerListColumns = (): IColumn[] => ([
     col(
@@ -29,6 +31,7 @@ export const CustomerListColumns = (): IColumn[] => ([
 
 /**
  * @component CustomerList
+ * @category Customers
  */
 export const CustomerList = (props: ICustomerListProps) => {
     const [items, setItems] = React.useState([...props.items]);

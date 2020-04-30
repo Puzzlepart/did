@@ -9,6 +9,9 @@ import { IActionBarProps } from './IActionBarProps';
 import { WeekPicker } from './WeekPicker';
 require('moment/locale/en-gb');
 
+/**
+ * @category Timesheet
+ */
 export const ActionBar = (props: IActionBarProps) => {
     const items = [
         {

@@ -27,7 +27,7 @@ IF NOT DEFINED NEXT_MANIFEST_PATH (
 )
 
 IF NOT DEFINED KUDU_SYNC_CMD (
-  echo Installing Kudu Sync
+  echo Installing kudusync globally
   call npm install kudusync -g --silent
   IF !ERRORLEVEL! NEQ 0 goto error
   SET KUDU_SYNC_CMD=%appdata%\npm\kuduSync.cmd
@@ -65,41 +65,54 @@ goto :EOF
 
 :Deployment
 
-echo SYNCHRONIZING DEPLOYMENT SOURCE TO DEPLOYMENT TARGET 
+echo.
+echo [1/5] SYNCHRONIZING DEPLOYMENT SOURCE TO DEPLOYMENT TARGET 
+echo.
 
-IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
-  call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_SOURCE%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd;.env.sample;CHANGELOG.md;CONTRIBUTING.md;README.md;.gitignore;.vscode;.github"
+IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (  
+  call :ExecuteCmd "%KUDU_SYNC_CMD%" --quiet --perf --from "%DEPLOYMENT_SOURCE%" --to "%DEPLOYMENT_TARGET%" --nextManifest "%NEXT_MANIFEST_PATH%" --previousManifest "%PREVIOUS_MANIFEST_PATH%" --ignore ".git;.hg;.deployment;deploy.cmd;.env.sample;CHANGELOG.md;CONTRIBUTING.md;README.md;.gitignore;.vscode;.github;typedoc-theme"
   IF !ERRORLEVEL! NEQ 0 goto error
 )
 
 call :SelectNodeVersion
 
-echo INSTALLING NPM PACKAGES
-
-IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
-  pushd "%DEPLOYMENT_TARGET%"
-  call :ExecuteCmd !NPM_CMD! install --no-progress
-  IF !ERRORLEVEL! NEQ 0 goto error
-  popd
+IF NOT EXIST "%DEPLOYMENT_TARGET%\package.json" (  
+echo Missing package.json
+ goto error
 )
 
-echo PACKAGING JS
 
-IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
-  pushd "%DEPLOYMENT_TARGET%"
-  call :ExecuteCmd !NPM_CMD! run --silent package:client:prod
-  IF !ERRORLEVEL! NEQ 0 goto error
-  popd
-)
+pushd "%DEPLOYMENT_TARGET%"
 
-echo PACKAGING CSS
+echo.
+echo [2/5] INSTALLING NPM PACKAGES
+echo.
+call :ExecuteCmd !NPM_CMD! install --production --no-progress --loglevel silent --no-shrinkwrap --no-fund          
+IF !ERRORLEVEL! NEQ 0 goto error
 
-IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
-  pushd "%DEPLOYMENT_TARGET%"
-  call :ExecuteCmd !NPM_CMD! run --silent build:scss
-  IF !ERRORLEVEL! NEQ 0 goto error
-  popd
-)
+echo.
+echo [3/5] UPDATING NPM PACKAGES
+echo.
+
+call :ExecuteCmd !NPM_CMD! update --production --no-progress --loglevel silent --no-fund 
+IF !ERRORLEVEL! NEQ 0 goto error
+
+echo.
+echo [4/5] PACKAGING JS
+echo.
+
+call :ExecuteCmd !NPM_CMD! run packageClient --loglevel silent
+IF !ERRORLEVEL! NEQ 0 goto error
+
+echo.
+echo [5/5] PACKAGING CSS
+echo.
+
+call :ExecuteCmd !NPM_CMD! run packageStyles --loglevel silent
+IF !ERRORLEVEL! NEQ 0 goto error
+
+popd
+
 
 goto end
 :ExecuteCmd

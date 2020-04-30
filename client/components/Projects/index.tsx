@@ -15,7 +15,15 @@ import { ProjectDetails } from './ProjectDetails';
 import ProjectList from './ProjectList';
 
 /**
- * @component Projects
+ * @category Projects
+ */
+function getPath(): string[] {
+    let [, path] = document.location.hash.substring(1).split('=');
+    return (path || '').split('/');
+}
+
+/**
+ * @category Projects
  */
 export const Projects = () => {
     const [selected, setSelected] = useState<IProject>(null);

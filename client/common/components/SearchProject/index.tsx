@@ -11,7 +11,7 @@ import AutoSuggest from 'react-autosuggest';
 import { ISearchProjectProps } from './types';
 
 /**
- * @component SearchProject
+ * @category SearchProject
  */
 export const SearchProject = (props: ISearchProjectProps) => {
     let [projects, setProjects] = useState<IProject[]>(null);
