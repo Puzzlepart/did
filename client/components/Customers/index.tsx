@@ -5,13 +5,16 @@ import * as React from 'react';
 import { CustomerList } from './CustomerList';
 import { ICustomerProps } from './ICustomerProps';
 
+/**
+ * @category Customers
+ */
 function getPath(): string[] {
     let [, path] = document.location.hash.substring(1).split('=');
     return (path || '').split('/');
 }
 
 /**
- * @component Customers
+ * @category Customers
  */
 export const Customers = (props: ICustomerProps) => {
     const path = getPath();

@@ -4,14 +4,16 @@ import * as React from 'react';
 import { AdminSummaryView } from './AdminSummaryView';
 import { Users } from './Users';
 
+/**
+ * @category AdminView
+ */
 function getPath(): string[] {
     let [, path] = document.location.hash.substring(1).split('=');
     return (path || '').split('/');
 }
 
 /**
- * @component AdminView
- * @description
+ * @category AdminView
  */
 export const AdminView = () => {
     let path = getPath();

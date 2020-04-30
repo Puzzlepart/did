@@ -1,12 +1,20 @@
 require('dotenv').config();
 const path = require('path');
 const webpack = require('webpack');
-const WebpackBar = require('webpackbar');
 const clientLib = path.resolve(__dirname, 'lib/client/');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const package = require('./package.json');
 
+const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
 
-module.exports = {
+console.log("NODE_ENV: %s", mode);
+console.log("PACKAGE_VERSION: %s", package.version);
+console.log("ENTRY: %s", package.config.client);
+
+let config = {
+  output: {
+    path: path.resolve(__dirname, './public/js'),
+    filename: 'did365.js'
+  },
   module: {
     rules: [
       {
@@ -21,14 +29,8 @@ module.exports = {
       }
     ]
   },
-  mode: process.env.NODE_ENV,
-  entry: {
-    did365: [
-      'core-js/stable',
-      'regenerator-runtime/runtime',
-      './lib/client/App.js',
-    ],
-  },
+  mode,
+  entry: package.config.client,
   resolve: {
     alias: {
       interfaces: path.resolve(clientLib, 'interfaces'),
@@ -39,15 +41,13 @@ module.exports = {
       i18n: path.resolve(clientLib, 'i18n'),
     }
   },
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-    },
+  output: {
+    path: path.resolve(__dirname, './public/js'),
+    filename: 'did365.js'
   },
   plugins: [
     new BundleAnalyzerPlugin({ analyzerMode: 'static', openAnalyzer: false }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    new WebpackBar(),
     new webpack.DefinePlugin({
       'process.env': {
         'AZURE_APPLICATION_INSIGHTS_INSTRUMENTATION_KEY': JSON.stringify(process.env.AZURE_APPLICATION_INSIGHTS_INSTRUMENTATION_KEY),
@@ -57,8 +57,30 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ],
-  output: {
-    path: path.resolve(__dirname, './public/js'),
-    filename: '[name].js',
-  },
+  stats: 'detailed',
 };
+
+switch (mode) {
+  case 'development': {
+    config.plugins.push(new (require('webpackbar'))());
+  }
+    break;
+  case 'production': {
+    config.stats = {
+      chunks: false,
+      assets: false,
+      colors: false,
+      timings: true,
+      errors: true,
+      warnings: false,
+      errorDetails: true,
+      logging: 'error',
+      loggingTrace: false,
+      modules: false,
+      performance: false
+    }
+  }
+    break;
+}
+
+module.exports = config;

@@ -11,6 +11,8 @@ import _ from 'underscore';
  * 
  * @param {ITimeEntry[]} entries Entries
  * @param {string} exp Expression (what to calculate durations based on, e.g. customer.name)
+ * 
+ * @category UserAllocation
  */
 export const GetAllocation = (entries: ITimeEntry[], exp: string): Array<{ name: string, hours: number }> => {
     let items = entries.reduce((_items, entry) => {
@@ -29,8 +31,9 @@ export const GetAllocation = (entries: ITimeEntry[], exp: string): Array<{ name:
 }
 
 /**
- * @component UserAllocation
- * @description Shows allocation charts for a user
+ * Shows allocation charts for a user
+ * 
+ * @category UserAllocation
  */
 export const UserAllocation = (props: IUserAllocationProps) => {
     const [dimensions, setDimensions] = React.useState({ width: 0, height: 0 });

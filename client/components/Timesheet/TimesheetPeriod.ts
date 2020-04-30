@@ -2,6 +2,9 @@ import { ITimeEntry } from 'interfaces/ITimeEntry';
 import { ITypedHash, IPnPClientStore, dateAdd, PnPClientStorage } from '@pnp/common';
 import { IProject } from 'interfaces/IProject';
 
+/**
+ * @category Timesheet
+ */
 export class TimesheetPeriod {
     public id?: string;
     public name?: string;

@@ -12,7 +12,7 @@ import { ICustomerDetailsProps } from './ICustomerDetailsProps';
 import resource from 'i18n';
 
 /**
- * @component CustomerDetails
+ * @category Customers
  */
 export const CustomerDetails = (props: ICustomerDetailsProps) => {
     const [confirmDelete, setConfirmDelete] = React.useState(false);

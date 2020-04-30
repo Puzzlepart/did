@@ -1,8 +1,10 @@
 import { ITimesheetScope, ITimesheetState } from '../types';
 import { TimesheetPeriod } from '../TimesheetPeriod';
 
+/**
+ * @category Timesheet
+ */
 export interface IActionBarProps {
-
     /**
      * State of the Timesheet component
      */

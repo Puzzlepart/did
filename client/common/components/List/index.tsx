@@ -9,9 +9,7 @@ import { IListProps } from './IListProps';
 import { ListHeader } from './ListHeader';
 
 /**
- * @component List
- * 
- * @param {IListProps} props Props
+ * @category List
  */
 export const List = (props: IListProps) => {
     let searchTimeout: any;
