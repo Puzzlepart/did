@@ -50,6 +50,7 @@ app.use((req, res, next) => {
       isAdmin: req.user.data.role === 'Admin',
     };
   }
+  res.locals.package = require('./package.json');
   next();
 });
 //#endregion
@@ -72,5 +73,7 @@ app.use((error, req, res, _next) => {
   res.render('error');
 });
 //#endregion
+
+if (process.env.NODE_ENV === 'development') require('./middleware/webpack-dev')(app);
 
 module.exports = app;

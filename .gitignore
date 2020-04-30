@@ -4,6 +4,7 @@ node_modules
 DS_Store
 Icon?
 lib
+doc
 server.js
 resources/
 public/js
@@ -12,3 +13,5 @@ public/css
 pnpm-debug.log
 pnpm-lock.yaml
 package-lock.json
+*.env
+!.env.sample

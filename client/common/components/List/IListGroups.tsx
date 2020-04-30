@@ -1,3 +1,6 @@
+/**
+ * @category List
+ */
 export interface IListGroups {
     fieldName: string;
     groupNames?: string[];

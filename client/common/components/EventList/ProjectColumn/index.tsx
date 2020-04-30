@@ -14,7 +14,7 @@ import { IClearManualMatchButtonProps, IProjectColumnProps, IProjectColumnToolti
 
 
 /**
- * @component ClearManualMatchButton
+ * @category EventList
  */
 export const ClearManualMatchButton = ({ onClick, hidden, className }: IClearManualMatchButtonProps) => {
     return (
@@ -25,7 +25,7 @@ export const ClearManualMatchButton = ({ onClick, hidden, className }: IClearMan
 }
 
 /**
- * @component ProjectColumnTooltip
+ * @category EventList
  */
 export const ProjectColumnTooltip = ({ project, className }: IProjectColumnTooltipProps) => {
     return (
@@ -39,7 +39,7 @@ export const ProjectColumnTooltip = ({ project, className }: IProjectColumnToolt
 }
 
 /**
- * @component ProjectColumn
+ * @category EventList
  */
 const ProjectColumn = (props: IProjectColumnProps) => {
     const tooltipId = useId('tooltip');
