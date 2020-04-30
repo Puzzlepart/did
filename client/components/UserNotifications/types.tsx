@@ -3,6 +3,9 @@ import { IMessageBarProps, MessageBarType } from 'office-ui-fabric-react/lib/Mes
 import { IStyleFunctionOrObject } from 'office-ui-fabric-react/lib/Utilities';
 import { IUserNotificationsPanelClassName } from './UserNotificationsPanel/types';
 
+/**
+ * @category UserNotifications
+ */
 export interface IUserNotificationsClassName {
     root: string;
     toggle: {
@@ -13,6 +16,9 @@ export interface IUserNotificationsClassName {
     panel: IUserNotificationsPanelClassName;
 }
 
+/**
+ * @category UserNotifications
+ */
 export interface IUserNotificationMessage {
     id: string;
     type: number;
@@ -21,18 +27,27 @@ export interface IUserNotificationMessage {
     moreLink: string;
 }
 
+/**
+ * @category UserNotifications
+ */
 export enum UserNotificationMessageType {
     WEEK_NOT_CONFIRMED,
     SERVICE_ANNOUNCEMENT,
     FEATURE_ANNOUNCEMENT,
 }
 
+/**
+ * @category UserNotifications
+ */
 export enum UserNotificationMessageSeverity {
     LOW,
     MEDIUM,
     HIGH,
 }
 
+/**
+ * @category UserNotifications
+ */
 export class UserNotificationMessageModel {
     public id: string;
     public type: UserNotificationMessageType;
@@ -103,6 +118,9 @@ export class UserNotificationMessageModel {
     }
 }
 
+/**
+ * @category UserNotifications
+ */
 export interface IUserNotificationsProps {
     storageKey?: string;
     toggleIcon?: string;

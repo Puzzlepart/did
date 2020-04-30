@@ -4,7 +4,7 @@ import { UserNotificationMessage } from '../UserNotificationMessage';
 import { IUserNotificationsPanelProps } from './types';
 
 /**
- * @component UserNotificationsPanel
+ * @category UserNotifications
  */
 export const UserNotificationsPanel = (props: IUserNotificationsPanelProps) => {
     return (

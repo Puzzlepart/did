@@ -3,7 +3,7 @@ import * as React from 'react';
 import { IUserNotificationMessageProps } from './types';
 
 /**
- * @component UserNotificationMessage
+ * @category UserNotifications
  */
 export const UserNotificationMessage = ({ model, onDismiss, className }: IUserNotificationMessageProps) => {
     return (
