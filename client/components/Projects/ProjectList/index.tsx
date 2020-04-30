@@ -74,8 +74,8 @@ const ProjectList = (props: IProjectListProps) => {
                         onRender: () => (
                             <Toggle
                                 styles={{ root: { margin: '6px 0 0 8px' } }}
-                                offText={'Hide inactive'}
-                                onText={'Show inactive'}
+                                offText={resource('COMMON.TOGGLE_INACTIVE_OFF_TEXT')}
+                                onText={resource('COMMON.TOGGLE_INACTIVE_ON_TEXT')}
                                 onChange={onToggleInactive} />
                         ),
                     }
