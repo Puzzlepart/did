@@ -2,7 +2,6 @@
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 import { initializeIcons } from '@uifabric/icons';
 import 'core-js/stable';
-import i18n from 'i18next';
 import * as React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import * as ReactDom from 'react-dom';
@@ -14,6 +13,7 @@ import { Reports } from './components/Reports';
 import { Timesheet } from './components/Timesheet';
 import GET_CURRENT_USER from './GET_CURRENT_USER';
 import { client } from './graphql';
+import * as i18n from './i18n';
 
 (async () => {
     if (process.env.AZURE_APPLICATION_INSIGHTS_INSTRUMENTATION_KEY) {
@@ -25,15 +25,8 @@ import { client } from './graphql';
     }
 
     initializeIcons();
-
-    // Initializing i18n with default namespace translation
-    await i18n.init({
-        lng: 'en',
-        debug: false,
-        resources: {
-            en: { translation: require('./i18n/en.json') },
-            no: { translation: require('./i18n/en.json') },
-        }
+    await i18n.setup({
+        en: require('../../resources/en.json'),
     });
 
     /**
