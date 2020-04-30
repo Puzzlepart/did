@@ -1,7 +1,6 @@
 import { initializeIcons } from '@uifabric/icons';
 import { AdminView, Customers, Projects, Reports, Timesheet, UserNotifications } from 'components';
 import 'core-js/stable';
-import i18n from 'i18next';
 import * as React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import * as ReactDom from 'react-dom';
@@ -9,18 +8,13 @@ import 'regenerator-runtime/runtime.js';
 import { tryParseJson } from 'utils/tryParseJson';
 import GET_CURRENT_USER from './GET_CURRENT_USER';
 import * as graphql from './graphql';
+import * as i18n from './i18n';
 
 (async () => {
     initializeIcons();
-
-    // Initializing i18n with default namespace translation
-    await i18n.init({
-        lng: 'en',
-        debug: false,
-        resources: {
-            en: { translation: require('./i18n/en.json') },
-            no: { translation: require('./i18n/en.json') },
-        }
+    
+    await i18n.setup({
+        en: require('../../resources/en.json'),
     });
 
     /**
