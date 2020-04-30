@@ -1,4 +1,4 @@
-name: Install npm packages and package JS
+name: Status check/1
 on:
   pull_request:
     types: [assigned, opened, synchronize, reopened]
@@ -22,7 +22,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install and build
         run: |
-          npm install --production --silent
+          npm install --production --no-progress --loglevel silent --no-shrinkwrap --no-fund     
           npm run packageClient
         env:
           NODE_ENV: production
