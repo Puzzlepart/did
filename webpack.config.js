@@ -1,18 +1,14 @@
 require('dotenv').config();
 const path = require('path');
 const webpack = require('webpack');
-const clientLib = path.resolve(__dirname, 'lib/client/');
-const package = require('./package.json');
 
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
 
 console.log("NODE_ENV: %s", mode);
-console.log("PACKAGE_VERSION: %s", package.version);
-console.log("ENTRY: %s", package.config.client);
 
 let config = {
   output: {
-    path: path.resolve(__dirname, './public/js'),
+    path: path.resolve(__dirname, './dist/public/js'),
     filename: 'did365.js'
   },
   module: {
@@ -30,15 +26,15 @@ let config = {
     ]
   },
   mode,
-  entry: package.config.client,
+  entry: path.resolve('./lib/client'),
   resolve: {
     alias: {
-      interfaces: path.resolve(clientLib, 'interfaces'),
-      utils: path.resolve(clientLib, 'utils'),
-      helpers: path.resolve(clientLib, 'helpers'),
-      components: path.resolve(clientLib, 'components'),
-      common: path.resolve(clientLib, 'common'),
-      i18n: path.resolve(clientLib, 'i18n'),
+      interfaces: path.resolve('./lib/client/interfaces'),
+      utils: path.resolve('./lib/client/utils'),
+      helpers: path.resolve('./lib/client/helpers'),
+      components: path.resolve('./lib/client/components'),
+      common: path.resolve('./lib/client/common'),
+      i18n: path.resolve('./lib/client/i18n'),
     }
   },
   output: {
