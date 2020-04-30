@@ -2,6 +2,7 @@ node_modules
 DS_Store
 Icon?
 lib
+dist
 doc
 server.js
 public/js
