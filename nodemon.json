@@ -1,0 +1,18 @@
+{
+    "verbose": false,
+    "ignore": [
+        "client/*",
+        "server/*",
+        "dist/public/*",
+        "lib/*",
+        "docs/*",
+        "typedoc-theme/*",
+        "tasks/*",
+        ".github/*",
+        ".vscode/*"
+    ],
+    "execMap": {
+        "rb": "ruby",
+        "pde": "processing --sketch={{pwd}} --run"
+    }
+}
