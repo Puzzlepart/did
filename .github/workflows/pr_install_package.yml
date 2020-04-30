@@ -1,0 +1,28 @@
+name: Install npm packages and package JS
+on:
+  pull_request:
+    types: [assigned, opened, synchronize, reopened]
+    branches:
+      - master
+      - dev
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.x]
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          # Checkout the head ref instead of the PR branch that github creates.
+          ref: ${{ github.head_ref }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install and build
+        run: |
+          npm install --production --silent
+          npm run packageClient
+        env:
+          NODE_ENV: production
