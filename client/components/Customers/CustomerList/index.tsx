@@ -30,7 +30,6 @@ export const CustomerListColumns = (): IColumn[] => ([
 ])
 
 /**
- * @component CustomerList
  * @category Customers
  */
 export const CustomerList = (props: ICustomerListProps) => {

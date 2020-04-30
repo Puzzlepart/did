@@ -8,8 +8,8 @@ import { IListSelection } from './IListSelection';
 /**
  * @category List
  */
-export interface IListProps {
-    items: any[];
+export interface IListProps<T = any> {
+    items: T[];
     columns?: IColumn[];
     enableShimmer?: boolean;
     height?: number;

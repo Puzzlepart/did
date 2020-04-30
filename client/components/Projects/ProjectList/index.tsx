@@ -15,6 +15,8 @@ import { IProjectListProps } from './IProjectListProps';
  * 
  * @param {boolean} renderLink Render link
  * @param {string[]} hideColumns Columns to hide
+ * 
+ * @category ProjectList
  */
 export const ProjectListColumns = (renderLink: boolean, hideColumns: string[]): IColumn[] => ([
     col(
@@ -58,6 +60,7 @@ const ProjectList = (props: IProjectListProps) => {
 
     React.useEffect(() => setItems([...props.items].filter(p => !p.inactive)), [props.items]);
 
+    
     return (
         <List
             {...props}
