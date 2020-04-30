@@ -1,12 +1,13 @@
-global.fetch = require("node-fetch");
-const {
-  refreshAccessToken
-} = require('./tokens');
-const stripHtml = require("string-strip-html");
-const utils = require('../utils');
-const log = require('debug')('services/graph');
+global['fetch'] = require("node-fetch");
+import * as tokens from './tokens';
+import stripHtml from "string-strip-html";
+import { utils } from '../utils';
+const debug = require('debug')('services/graph');
 
-class GraphService {
+export class GraphService {
+  req: any;
+  oauthToken: any;
+
   constructor(req) {
     this.req = req;
     this.oauthToken = this.req.user.oauthToken;
@@ -42,7 +43,7 @@ class GraphService {
 
   async createOutlookCategory(category) {
     try {
-      log('Querying Graph /me/outlook/masterCategories');
+      debug('Querying Graph /me/outlook/masterCategories');
       const res = await this.getClient()
         .api('/me/outlook/masterCategories')
         .post(JSON.stringify(category));
@@ -50,7 +51,7 @@ class GraphService {
     } catch (error) {
       switch (error.statusCode) {
         case 401: {
-          this.oauthToken = await refreshAccessToken(this.req);
+          this.oauthToken = await tokens.refreshAccessToken(this.req);
           return this.createOutlookCategory(category);
         }
         default: {
@@ -65,7 +66,7 @@ class GraphService {
    */
   async getOutlookCategories() {
     try {
-      log('Querying Graph /me/outlook/masterCategories');
+      debug('Querying Graph /me/outlook/masterCategories');
       const { value } = await this.getClient()
         .api('/me/outlook/masterCategories')
         .get();
@@ -73,7 +74,7 @@ class GraphService {
     } catch (error) {
       switch (error.statusCode) {
         case 401: {
-          this.oauthToken = await refreshAccessToken(this.req);
+          this.oauthToken = await tokens.refreshAccessToken(this.req);
           return this.getOutlookCategories();
         }
         default: {
@@ -91,7 +92,7 @@ class GraphService {
    */
   async getEvents(startDateTime, endDateTime) {
     try {
-      log('Querying Graph /me/calendar/calendarView: %s', JSON.stringify({
+      debug('Querying Graph /me/calendar/calendarView: %s', JSON.stringify({
         startDateTime,
         endDateTime
       }));
@@ -106,7 +107,7 @@ class GraphService {
         .orderby('start/dateTime asc')
         .top(500)
         .get();
-      log('Retrieved %s events from /me/calendar/calendarView', value.length);
+      debug('Retrieved %s events from /me/calendar/calendarView', value.length);
       let events = value
         .filter(evt => evt.subject)
         .map(evt => {
@@ -130,7 +131,7 @@ class GraphService {
     } catch (error) {
       switch (error.statusCode) {
         case 401: {
-          this.oauthToken = await refreshAccessToken(this.req);
+          this.oauthToken = await tokens.refreshAccessToken(this.req);
           return this.getEvents(startDateTime, endDateTime);
         }
         default: {
@@ -140,9 +141,3 @@ class GraphService {
     }
   }
 }
-
-
-
-
-
-module.exports = GraphService;
