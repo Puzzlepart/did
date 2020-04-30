@@ -5,8 +5,7 @@ lib
 dist
 doc
 server.js
-public/js
-public/css
+server/public/js
 .gitignore
 pnpm-debug.log
 pnpm-lock.yaml
