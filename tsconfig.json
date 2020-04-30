@@ -9,6 +9,7 @@
       "declaration": true,
       "sourceMap": true,
       "experimentalDecorators": true,
+      "downlevelIteration": true,
       "noImplicitAny": false,
       "skipLibCheck": true,
       "outDir": "lib/client",

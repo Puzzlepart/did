@@ -1,10 +1,9 @@
 import { useMutation } from '@apollo/react-hooks';
-import { UserMessage, IconPicker } from 'common/components';
+import { IconPicker, UserMessage, useMessage } from 'common/components';
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button';
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import * as React from 'react';
-import { useState } from 'react';
 import CREATE_PROJECT from './CREATE_PROJECT';
 import { ICreateProjectFormModel } from './ICreateProjectFormModel';
 import { ICreateProjectFormProps } from './ICreateProjectFormProps';
@@ -15,10 +14,10 @@ import { SearchCustomer } from './SearchCustomer';
  * @category Projects
  */
 export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey: '', name: '', description: '', icon: 'Page' } }: ICreateProjectFormProps) => {
-    let [validation, setValidation] = useState<ICreateProjectFormValidation>({ errors: {}, invalid: true });
-    let [message, setMessage] = useState<{ text: string, type: MessageBarType }>(null);
-    let [model, setModel] = useState<ICreateProjectFormModel>(initialModel);
-    let [addProject, { loading }] = useMutation(CREATE_PROJECT);
+    let [validation, setValidation] = React.useState<ICreateProjectFormValidation>({ errors: {}, invalid: true });
+    let [message, setMessage] = useMessage();
+    let [model, setModel] = React.useState<ICreateProjectFormModel>(initialModel);
+    let [addProject, { loading }] = useMutation<any, ICreateProjectFormModel>(CREATE_PROJECT);
 
     /**
      * On form submit
@@ -37,7 +36,6 @@ export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey
             setMessage({ text: result.error.message, type: MessageBarType.error });
         }
         setModel(initialModel);
-        window.setTimeout(() => setMessage(null), 5000);
     }
 
     /**
@@ -53,7 +51,7 @@ export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey
 
     return (
         <>
-            {message && <UserMessage style={{ marginTop: 12, marginBottom: 12, width: 450 }} text={message.text} type={message.type} />}
+            {message && <UserMessage {...message} style={{ marginTop: 12, marginBottom: 12, width: 450 }} />}
             <SearchCustomer
                 label='Customer'
                 placeholder='Search customer...'
@@ -91,6 +89,7 @@ export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey
             <IconPicker
                 styles={{ root: { marginTop: 12, width: 300 } }}
                 options={undefined}
+                defaultSelectedKey={initialModel.icon}
                 onChange={(_event, opt) => setModel({ ...model, icon: opt.key as string })} />
             <PrimaryButton
                 styles={{ root: { marginTop: 16 } }}

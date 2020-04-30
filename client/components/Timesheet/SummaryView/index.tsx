@@ -1,11 +1,13 @@
 
-import { IColumn, List } from 'common/components/List';
+import List from 'common/components/List';
 import { formatDate, sortAlphabetically, startOfWeek } from 'helpers';
 import { ICustomer, IProject } from 'interfaces';
 import * as moment from 'moment';
 import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
+import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import * as React from 'react';
+import * as format from 'string-format';
 import * as _ from 'underscore';
 import * as excelUtils from 'utils/exportExcel';
 import { generateColumn as col } from 'utils/generateColumn';
@@ -13,7 +15,6 @@ import { DurationColumn } from './DurationColumn';
 import { ISummaryViewProps } from './ISummaryViewProps';
 import { LabelColumn } from './LabelColumn';
 import { SummaryViewType } from "./SummaryViewType";
-import * as format from 'string-format';
 
 /**
  * Create columns

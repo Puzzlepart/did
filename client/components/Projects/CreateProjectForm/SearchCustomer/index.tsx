@@ -2,7 +2,7 @@
 import { useQuery } from '@apollo/react-hooks';
 import AutosuggestHighlightMatch from 'autosuggest-highlight/match';
 import AutosuggestHighlightParse from 'autosuggest-highlight/parse';
-import GET_CUSTOMERS from 'components/Customers/CustomerList/GET_CUSTOMERS';
+import GET_CUSTOMERS from 'components/Customers/GET_CUSTOMERS';
 import { ICustomer } from 'interfaces';
 import { Label } from 'office-ui-fabric-react/lib/Label';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
