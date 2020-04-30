@@ -1,4 +1,4 @@
-const log = require('debug')('middleware/graphql/resolvers/query/customers');
+const debug = require('debug')('middleware/graphql/resolvers/query/customers');
 
 /**
  * Customers
@@ -7,11 +7,9 @@ const log = require('debug')('middleware/graphql/resolvers/query/customers');
  * @param {*} _args Unused args
  * @param {*} context Context
  */
-async function customers(_obj, _args, context) {
-    log('Retrieving customers from storage');
+export default async function customers(_obj, _args, context) {
+    debug('Retrieving customers from storage');
     let customers = await context.services.storage.getCustomers();
-    log('Retrieved %s customers from storage', customers.length);
+    debug('Retrieved %s customers from storage', customers.length);
     return customers;
 };
-
-module.exports = customers;

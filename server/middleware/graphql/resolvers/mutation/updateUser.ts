@@ -1,5 +1,5 @@
-const log = require('debug')('middleware/graphql/resolvers/mutation/addUser');
-const _ = require('underscore');
+const debug = require('debug')('middleware/graphql/resolvers/mutation/updateUser');
+import _ from 'underscore';
 
 /**
  * Update week
@@ -8,14 +8,12 @@ const _ = require('underscore');
  * @param {*} variables Variables sent by the client
  * @param {*} context Context
  */
-async function addUser(_obj, variables, context) {
-    log('Adding user: %s', JSON.stringify(variables.user));
+export default async function updateUser(_obj, variables, context) {
+    debug('Updating user: %s', JSON.stringify(variables.user));
     try {
-        await context.services.storage.addUser(variables.user);
+        await context.services.storage.updateUser(variables.user);
         return { success: true, error: null };
     } catch (error) {
         return { success: false, error: _.omit(error, 'requestId') };
     }
 }
-
-module.exports = addUser;

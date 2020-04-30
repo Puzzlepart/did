@@ -1,5 +1,5 @@
-const log = require('debug')('middleware/graphql/resolvers/mutation/createOutlookCategory');
-const _ = require('underscore');
+const debug = require('debug')('middleware/graphql/resolvers/mutation/createOutlookCategory');
+import _ from 'underscore';
 
 /**
  * Create Outlook category
@@ -8,8 +8,8 @@ const _ = require('underscore');
  * @param {*} variables Variables sent by the client
  * @param {*} context Context
  */
-async function createOutlookCategory(_obj, variables, context) {
-    log('Creating oulook category: %s', JSON.stringify(variables.category));
+export default async function createOutlookCategory(_obj, variables, context) {
+    debug('Creating oulook category: %s', JSON.stringify(variables.category));
     try {
         const category = await context.services.graph.createOutlookCategory(variables.category);
         return { data: JSON.stringify(category), success: true, error: null };
@@ -17,5 +17,3 @@ async function createOutlookCategory(_obj, variables, context) {
         return { success: false, error: _.omit(error, 'requestId') };
     }
 }
-
-module.exports = createOutlookCategory;

@@ -1,4 +1,4 @@
-const log = require('debug')('middleware/graphql/resolvers/query/currentUser');
+const debug = require('debug')('middleware/graphql/resolvers/query/currentUser');
 
 /**
  * Get current user
@@ -7,10 +7,8 @@ const log = require('debug')('middleware/graphql/resolvers/query/currentUser');
  * @param {*} _args Unused args
  * @param {*} context Context
  */
-async function currentUser(_obj, _args, context) {
+export default async function currentUser(_obj, _args, context) {
     let user = await context.services.storage.getUser(context.user.profile.oid);
-    log('Retrieved current user from storage');
+    debug('Retrieved current user from storage');
     return user;
 }
-
-module.exports = currentUser;

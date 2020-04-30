@@ -1,9 +1,18 @@
-const path = require('path');
-const graphql = require('express-graphql');
-const { importSchema } = require('graphql-import');
-const { makeExecutableSchema } = require('graphql-tools');
-const StorageService = require('../../services/storage');
-const GraphService = require('../../services/graph');
+import path from 'path';
+import graphql from 'express-graphql';
+import { importSchema } from 'graphql-import';
+import { makeExecutableSchema } from 'graphql-tools';
+import { StorageService } from '../../services/storage';
+import { GraphService } from '../../services/graph';
+
+export interface IGraphQLContext {
+  services: {
+    graph: GraphService;
+    storage: StorageService;
+  };
+  user: any;
+  tenantId: string;
+}
 
 const schema = makeExecutableSchema({
   typeDefs: importSchema(path.join(__dirname, './schema.graphql')),
@@ -13,7 +22,7 @@ const schema = makeExecutableSchema({
   },
 });
 
-module.exports = graphql(req => ({
+export default graphql(req => ({
   schema: schema,
   rootValue: global,
   graphiql: process.env.GRAPHIQL_ENABLED == '1',

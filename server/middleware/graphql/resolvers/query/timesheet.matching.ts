@@ -1,6 +1,6 @@
-const _ = require('underscore');
+import _ from 'underscore';
 const { findBestMatch } = require('string-similarity');
-const log = require('debug')('middleware/graphql/resolvers/query/timesheet.matching');
+const debug = require('debug')('middleware/graphql/resolvers/query/timesheet.matching');
 const format = require('string-format');
 const get = require('get-value');
 
@@ -16,18 +16,18 @@ const CONTENT_REGEX = /[\(\{\[]((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>
  */
 function getProjectSuggestion(projects, customer, projectKey) {
     try {
-        log('(getProjectSuggestion) Finding best match for [%s]', projectKey);
+        debug('(getProjectSuggestion) Finding best match for [%s]', projectKey);
         let customerProjects = projects.filter(p => p.customerKey === customer.id);
         let projectKeys = customerProjects.map(p => p.id.split(' ')[1]);
-        log('(getProjectSuggestion) Finding best matching among [%s] for [%s]', JSON.stringify(projectKeys), projectKey);
+        debug('(getProjectSuggestion) Finding best matching among [%s] for [%s]', JSON.stringify(projectKeys), projectKey);
         let sm = findBestMatch(projectKey, projectKeys);
         let target = (sm.bestMatch && sm.bestMatch.rating > 0) ? sm.bestMatch.target : null;
         if (!target) return null;
         let suggestion = customerProjects.filter(p => p.id.split(' ')[1] === target.toUpperCase())[0];
-        log('(getProjectSuggestion) Project [%s] is best match for [%s]', suggestion.id, projectKey);
+        debug('(getProjectSuggestion) Project [%s] is best match for [%s]', suggestion.id, projectKey);
         return suggestion;
     } catch (error) {
-        log('(getProjectSuggestion) Failed to find best match for [%s]', projectKey);
+        debug('(getProjectSuggestion) Failed to find best match for [%s]', projectKey);
         return null;
     }
 }
@@ -55,11 +55,11 @@ function searchString(regex, input) {
 /**
  * Find project match in title/subject/categories
  * 
- * @param {*} content 
- * @param {*} categories 
+ * @param {string} content 
+ * @param {string} categoriesStr 
  */
-function findMatches(content, categories) {
-    let matches = searchString(CATEGORY_REGEX, categories);
+function findMatches(content: string, categoriesStr: string) {
+    let matches = searchString(CATEGORY_REGEX, categoriesStr);
     if (matches) return matches;
     return searchString(CONTENT_REGEX, content);
 }
@@ -67,18 +67,18 @@ function findMatches(content, categories) {
 /**
  * Checks for project match in event
  * 
- * @param {*} evt 
- * @param {*} projects 
- * @param {*} customers 
+ * @param {any} evt 
+ * @param {any[]} projects 
+ * @param {any[]} customers 
  */
-function matchEvent(evt, projects, customers) {
-    log('(matchEvent) Finding match for [%s]', evt.title);
+function matchEvent(evt: any, projects: any[], customers: any[]) {
+    debug('(matchEvent) Finding match for [%s]', evt.title);
     let categories = evt.categories.join(' ').toUpperCase();
     let content = [evt.title, evt.body, categories].join(' ').toUpperCase();
     let matches = findMatches(content, categories);
-    let projectKey;
+    let projectKey: string;
     if (matches) {
-        log(`(matchEvent) Found %s matches for [%s]`, matches.length, evt.title);
+        debug(`(matchEvent) Found %s matches for [%s]`, matches.length, evt.title);
         for (let i = 0; i < matches.length; i++) {
             let currentMatch = matches[i];
             evt.customer = _.find(customers, c => currentMatch.customerKey === c.id);
@@ -89,19 +89,19 @@ function matchEvent(evt, projects, customers) {
             if (evt.project) break;
         }
     } else {
-        log('(matchEvent) Found no matching tokens for [%s], looking for non-tokenized matches', evt.title);
+        debug('(matchEvent) Found no matching tokens for [%s], looking for non-tokenized matches', evt.title);
         let project = _.find(projects, p => content.indexOf(p.id) !== -1);
         if (project) {
-            log('(matchEvent) Found non-tokenized match in event [%s]: [%s]', evt.title, project.id);
+            debug('(matchEvent) Found non-tokenized match in event [%s]: [%s]', evt.title, project.id);
             evt.project = project;
             if (evt.project) {
-                log('(matchEvent) Setting customer for event [%s] based on non-tokenized match', evt.title, project.id);
+                debug('(matchEvent) Setting customer for event [%s] based on non-tokenized match', evt.title, project.id);
                 evt.customer = _.find(customers, c => c.key === evt.project.key.split(' ')[0]);
             }
         }
     }
     if (evt.customer && !evt.project) {
-        log('(matchEvent) Found match for customer [%s] for [%s], but not for any project', evt.customer.name, evt.title);
+        debug('(matchEvent) Found match for customer [%s] for [%s], but not for any project', evt.customer.name, evt.title);
         evt.suggestedProject = getProjectSuggestion(projects, evt.customer, projectKey);
     }
     if (evt.project && (get(evt, 'project.inactive') || get(evt, 'customer.inactive'))) {
@@ -120,8 +120,6 @@ function matchEvent(evt, projects, customers) {
  * @param {*} projects 
  * @param {*} customers 
  */
-function matchEvents(events, projects, customers) {
+export default function matchEvents(events, projects, customers) {
     return events.map(evt => matchEvent(evt, projects, customers));
 }
-
-module.exports = matchEvents;

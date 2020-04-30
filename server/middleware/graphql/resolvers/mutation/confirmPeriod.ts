@@ -2,8 +2,8 @@ const { TableBatch } = require('azure-storage');
 const { executeBatch, entGen } = require('../../../../utils/table');
 const { getDurationHours, getDurationMinutes, getWeek, getMonthIndex, getYear } = require('../../../../utils');
 const uuid = require('uuid/v1');
-const log = require('debug')('middleware/graphql/resolvers/mutation/confirmPeriod');
-const _ = require('underscore');
+const debug = require('debug')('middleware/graphql/resolvers/mutation/confirmPeriod');
+import _ from 'underscore';
 
 /**
  * Confirm period
@@ -12,7 +12,7 @@ const _ = require('underscore');
  * @param {*} variables Variables sent by the client
  * @param {*} context Context
  */
-async function confirmPeriod(_obj, variables, context) {
+export default async  function confirmPeriod(_obj, variables, context) {
     if (!variables.entries || variables.entries.length === 0) {
         return {
             success: false,
@@ -20,12 +20,12 @@ async function confirmPeriod(_obj, variables, context) {
         };
     }
     try {
-        log('Confirming period %s to %s', variables.startDateTime, variables.endDateTime);
+        debug('Confirming period %s to %s', variables.startDateTime, variables.endDateTime);
         const calendarView = await context.services.graph.getEvents(variables.startDateTime, variables.endDateTime);
         let batch = variables.entries.reduce((b, entry) => {
             const event = calendarView.filter(e => e.id === entry.id)[0];
             if (!event) return;
-            log('Confirming entry with id %s', entry.id);
+            debug('Confirming entry with id %s', entry.id);
             b.insertEntity({
                 PartitionKey: entGen.String(context.tenantId),
                 RowKey: entGen.String(uuid()),
@@ -55,5 +55,3 @@ async function confirmPeriod(_obj, variables, context) {
         return { success: false, error: _.omit(error, 'requestId') };
     }
 };
-
-module.exports = confirmPeriod;
