@@ -1,6 +1,11 @@
-const { createTableService, TableQuery, TableUtilities } = require('azure-storage');
+import { createTableService, TableQuery, TableService } from 'azure-storage';
 const azureTableService = createTableService(process.env.AZURE_STORAGE_CONNECTION_STRING);
 const moment = require('moment');
+
+export interface IParseEntitiesOptions {
+    idUpper?: boolean;
+    dateFormat?: string;
+}
 
 /**
  * Parse an array of azure table storage entities
@@ -9,16 +14,15 @@ const moment = require('moment');
  * 
  * Also skips PartitionKey
  * 
- * @param {*} arr The array of entities to parse
+ * @param {any} arr The array of entities to parse
  * @param {*} mapFunc Mapping function (optional)
  * @param {*} options Options (optional)
  */
-function parseArray(arr, mapFunc, options) {
-    options = options || {};
-    let result = arr.map(item => Object.keys(item)
+export function parseEntities(arr: any[], mapFunc?: any, options: IParseEntitiesOptions = {}) {
+    let result: any[] = arr.map(item => Object.keys(item)
         .filter(key => key !== 'PartitionKey')
         .reduce((obj, key) => {
-            const camelCaseKey = key.charAt(0).toLowerCase() + key.slice(1);
+            const transformedKey = key.charAt(0).toLowerCase() + key.slice(1);
             const value = item[key]._;
             if (key === 'RowKey') {
                 obj.id = options.idUpper ? value.toUpperCase() : value;
@@ -31,15 +35,15 @@ function parseArray(arr, mapFunc, options) {
                     if (options.dateFormat) {
                         dateValue = moment(dateValue).format(options.dateFormat);
                     }
-                    obj[camelCaseKey] = dateValue;
+                    obj[transformedKey] = dateValue;
                 }
                     break;
                 default: {
-                    obj[camelCaseKey] = value;
+                    obj[transformedKey] = value;
                 }
             }
             return obj;
-        }, {}));
+        }, {} as any));
     if (mapFunc) result = result.map(mapFunc);
     return result;
 }
@@ -47,11 +51,11 @@ function parseArray(arr, mapFunc, options) {
 /**
  * Function that simplifes creating a new TableQuery from azure-storage
  * 
- * @param {*} top 
- * @param {*} select 
- * @param {*} filter 
+ * @param {number} top 
+ * @param {string[]} select 
+ * @param {string} filter 
  */
-function createQuery(top, select, filter) {
+export function createQuery(top?: number, select?: string[], filter?: string) {
     let query = new TableQuery().top(top);
     if (top) query = query.top(top);
     if (select) query = query.select(select);
@@ -62,13 +66,13 @@ function createQuery(top, select, filter) {
 /**
  * Queries a table using the specified query
  * 
- * @param {*} table 
- * @param {*} query 
- * @param {*} continuationToken 
+ * @param {string} tableName 
+ * @param {TableQuery} query 
+ * @param {TableService.TableContinuationToken} continuationToken 
  */
-function queryTable(table, query, continuationToken) {
+export function queryTable(tableName: string, query: TableQuery, continuationToken?: TableService.TableContinuationToken): Promise<TableService.QueryEntitiesResult<any>> {
     return new Promise((resolve, reject) => {
-        azureTableService.queryEntities(table, query, continuationToken, (error, result) => {
+        azureTableService.queryEntities(tableName, query, continuationToken, (error, result) => {
             if (!error) return resolve(result);
             else reject(error);
         });
@@ -81,7 +85,7 @@ function queryTable(table, query, continuationToken) {
  * @param {*} table 
  * @param {*} query 
  */
-async function queryTableAll(table, query) {
+export async function queryTableAll(table: any, query: any) {
     let token = null;
     let { entries, continuationToken } = await queryTable(table, query, token);
     token = continuationToken;
@@ -100,7 +104,7 @@ async function queryTableAll(table, query) {
  * @param {*} partitionKey 
  * @param {*} rowKey 
  */
-function retrieveEntity(table, partitionKey, rowKey) {
+export function retrieveEntity(table: any, partitionKey: any, rowKey: any) {
     return new Promise((resolve, reject) => {
         azureTableService.retrieveEntity(table, partitionKey, rowKey, (error, result) => {
             if (!error) {
@@ -118,7 +122,7 @@ function retrieveEntity(table, partitionKey, rowKey) {
  * @param {*} table 
  * @param {*} item 
  */
-function addEntity(table, item) {
+export function addEntity(table: any, item: any) {
     return new Promise((resolve, reject) => {
         azureTableService.insertEntity(table, item, (error, result) => {
             if (!error) {
@@ -136,7 +140,7 @@ function addEntity(table, item) {
  * @param {*} table 
  * @param {*} item 
  */
-function updateEntity(table, item) {
+export function updateEntity(table: any, item: any) {
     return new Promise((resolve, reject) => {
         azureTableService.insertOrReplaceEntity(table, item, undefined, (error, result) => {
             if (!error) {
@@ -153,7 +157,7 @@ function updateEntity(table, item) {
  * 
  * @param {*} item 
  */
-function deleteEntity(table, item) {
+export function deleteEntity(table, item: any) {
     return new Promise((resolve, reject) => {
         azureTableService.deleteEntity(table, item, undefined, (error, result) => {
             if (!error) {
@@ -172,7 +176,7 @@ function deleteEntity(table, item) {
  * @param {*} table 
  * @param {*} batch 
  */
-function executeBatch(table, batch) {
+export function executeBatch(table: any, batch: any) {
     return new Promise((resolve, reject) => {
         azureTableService.executeBatch(table, batch, (error, result) => {
             if (!error) {
@@ -183,24 +187,3 @@ function executeBatch(table, batch) {
         })
     });
 };
-
-module.exports = {
-    queryTable,
-    queryTableAll,
-    addEntity,
-    retrieveEntity,
-    updateEntity,
-    deleteEntity,
-    executeBatch,
-    parseArray,
-    gt: TableUtilities.QueryComparisons.GREATER_THAN,
-    lt: TableUtilities.QueryComparisons.LESS_THAN,
-    isEqual: TableUtilities.QueryComparisons.EQUAL,
-    and: TableUtilities.TableOperators.AND,
-    combine: TableQuery.combineFilters,
-    stringFilter: TableQuery.stringFilter,
-    intFilter: TableQuery.int32Filter,
-    dateFilter: TableQuery.dateFilter,
-    createQuery: createQuery,
-    entGen: TableUtilities.entityGenerator,
-}

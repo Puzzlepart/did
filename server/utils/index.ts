@@ -1,6 +1,10 @@
-const moment = require('moment');
 
-module.exports = {
+import moment from 'moment';
+import * as table from './table';
+
+const utils = {
+    table: table,
+
     /**
      * Get duration between two times in minutes
      * 
@@ -78,3 +82,5 @@ module.exports = {
         return require('moment')(date).tz('Europe/Oslo').format(dateFormat);
     }
 }
+
+export { utils };
