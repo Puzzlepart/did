@@ -18,7 +18,7 @@ export interface IParseEntitiesOptions {
  * @param {*} mapFunc Mapping function (optional)
  * @param {*} options Options (optional)
  */
-export function parseEntities(arr: any[], mapFunc?: any, options: IParseEntitiesOptions = {}) {
+export function parseEntities(arr: any[], mapFunc?: (res: any) => any, options: IParseEntitiesOptions = {}) {
     let result: any[] = arr.map(item => Object.keys(item)
         .filter(key => key !== 'PartitionKey')
         .reduce((obj, key) => {

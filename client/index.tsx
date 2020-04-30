@@ -48,6 +48,7 @@ import * as i18n from './i18n';
             return {};
         }
     }
+    
 
     client.query({ query: GET_CURRENT_USER, fetchPolicy: 'cache-first' }).then(({ data }) => {
         if (COMPONENTS.TIMESHEET !== null)

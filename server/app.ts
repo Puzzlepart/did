@@ -71,6 +71,6 @@ app.use((error: any, req: any, res: any, _next: any) => {
 });
 //#endregion
 
-if (process.env.NODE_ENV === 'development') require('./middleware/webpack-dev')(app);
+if (process.env.NODE_ENV === 'development') middleware.webpackDev(app);
 
 export default app;

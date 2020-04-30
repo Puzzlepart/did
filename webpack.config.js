@@ -8,7 +8,7 @@ console.log("NODE_ENV: %s", mode);
 
 let config = {
   output: {
-    path: path.resolve(__dirname, './dist/public/js'),
+    path: path.resolve('./dist/public/js'),
     filename: 'did365.js'
   },
   module: {
@@ -36,10 +36,6 @@ let config = {
       common: path.resolve('./lib/client/common'),
       i18n: path.resolve('./lib/client/i18n'),
     }
-  },
-  output: {
-    path: path.resolve(__dirname, './public/js'),
-    filename: 'did365.js'
   },
   plugins: [
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),

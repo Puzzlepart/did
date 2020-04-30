@@ -1,23 +1,18 @@
 import { TableUtilities, TableQuery } from 'azure-storage';
 import { utils } from '../utils';
 import _ from 'underscore';
-
-// gt: TableUtilities.QueryComparisons.GREATER_THAN,
-// lt: TableUtilities.QueryComparisons.LESS_THAN,
-// TableUtilities.QueryComparisons.EQUAL: TableUtilities.QueryComparisons.EQUAL,
-// and: TableUtilities.TableOperators.AND,
-// TableQuery.combineFilters: TableQuery.TableQuery.combineFiltersFilters,
-// TableQuery.stringFilter: TableQuery.TableQuery.stringFilter,
-// TableQuery.int32Filter: TableQuery.int32Filter,
-// TableQuery.dateFilter: TableQuery.TableQuery.dateFilter,
-// utils.table.createQuery: utils.table.createQuery,
-// TableUtilities.entityGenerator: TableUtilities.entityGenerator,
+import { IGetConfirmedTimeEntriesFilters, IEntityOptions } from './storage.types';
 
 class StorageService {
     tenantId: any;
     filter: any;
 
-    constructor(tid) {
+    /**
+     * Constructs a new StorageService
+     * 
+     * @param {string} tid 
+     */
+    constructor(tid: string) {
         this.tenantId = tid;
         this.filter = TableQuery.stringFilter('PartitionKey', TableUtilities.QueryComparisons.EQUAL, this.tenantId);
     }
@@ -44,8 +39,11 @@ class StorageService {
     }
     /**
      * Update week
+     * 
+     * @param {number} weekNumber
+     * @param {boolean} closed
      */
-    async updateWeek(weekNumber, closed) {
+    async updateWeek(weekNumber: number, closed: boolean) {
         const result = await utils.table.updateEntity('Weeks', {
             PartitionKey: TableUtilities.entityGenerator.String(this.tenantId),
             RowKey: TableUtilities.entityGenerator.String(weekNumber.toString()),
@@ -55,23 +53,25 @@ class StorageService {
     }
     /**
      * Update user
+     * 
+     * @param {any} model
      */
-    async updateUser(user) {
+    async updateUser(model: any) {
         const result = await utils.table.updateEntity('Users', {
             PartitionKey: TableUtilities.entityGenerator.String(this.tenantId),
-            RowKey: TableUtilities.entityGenerator.String(user.id),
-            FullName: TableUtilities.entityGenerator.String(user.fullName),
-            Role: TableUtilities.entityGenerator.String(user.role),
+            RowKey: TableUtilities.entityGenerator.String(model.id),
+            FullName: TableUtilities.entityGenerator.String(model.fullName),
+            Role: TableUtilities.entityGenerator.String(model.role),
         });
         return result;
     }
     /**
      * Create project
      *
-     * @param {*} model
-     * @param {*} createdBy
+     * @param {any} model
+     * @param {string} createdBy
      */
-    async createProject(model, createdBy) {
+    async createProject(model: any, createdBy: string) {
         let projectId = (`${model.customerKey} ${model.projectKey}`).toUpperCase();
         let entity = await utils.table.addEntity('Projects', {
             PartitionKey: TableUtilities.entityGenerator.String(this.tenantId),
@@ -87,10 +87,11 @@ class StorageService {
     /**
      * Create customer
      *
-     * @param {*} model
-     * @param {*} createdBy
+     * @param {any} model
+     * @param {string} createdBy
      */
-    async createCustomer(model, createdBy) {
+    // TODO: Share ICustomer interface with client
+    async createCustomer(model: any, createdBy: string) {
         let entity = await utils.table.addEntity('Customers', {
             PartitionKey: TableUtilities.entityGenerator.String(this.tenantId),
             RowKey: TableUtilities.entityGenerator.String(model.key.toUpperCase()),
@@ -104,14 +105,14 @@ class StorageService {
     /**
      * Add user
      *
-     * @param {*} user
+     * @param {any} model
      */
-    async addUser(user) {
+    async addUser(model: any) {
         let entity = await utils.table.addEntity('Users', {
             PartitionKey: TableUtilities.entityGenerator.String(this.tenantId),
-            RowKey: TableUtilities.entityGenerator.String(user.id),
-            FullName: TableUtilities.entityGenerator.String(user.fullName),
-            Role: TableUtilities.entityGenerator.String(user.role),
+            RowKey: TableUtilities.entityGenerator.String(model.id),
+            FullName: TableUtilities.entityGenerator.String(model.fullName),
+            Role: TableUtilities.entityGenerator.String(model.role),
         });
         return entity;
     }
@@ -126,11 +127,10 @@ class StorageService {
     /**
      * Get projects
      *
-     * @param {*} customerKey
-     * @param {*} options
+     * @param {string} customerKey
+     * @param {IEntityOptions} options
      */
-    async getProjects(customerKey, options) {
-        options = options || {};
+    async getProjects(customerKey?: string, options: IEntityOptions = {}) {
         let filter = this.filter;
         if (customerKey)
             filter = TableQuery.combineFilters(filter, TableUtilities.TableOperators.AND, TableQuery.stringFilter('CustomerKey', TableUtilities.QueryComparisons.EQUAL, customerKey));
@@ -146,12 +146,10 @@ class StorageService {
     /**
      * Get confirmed time entries
      *
-     * @param {*} filters
-     * @param {*} options
+     * @param {IGetConfirmedTimeEntriesFilters} filters
+     * @param {IEntityOptions} options
      */
-    async getConfirmedTimeEntries(filters, options) {
-        filters = filters || {};
-        options = options || {};
+    async getConfirmedTimeEntries(filters: IGetConfirmedTimeEntriesFilters = {}, options: IEntityOptions = {}) {
         let filter = this.filter;
         if (filters.projectId) filter = TableQuery.combineFilters(filter, TableUtilities.TableOperators.AND, TableQuery.stringFilter('ProjectId', TableUtilities.QueryComparisons.EQUAL, filters.projectId));
         if (filters.resourceId) filter = TableQuery.combineFilters(filter, TableUtilities.TableOperators.AND, TableQuery.stringFilter('ResourceId', TableUtilities.QueryComparisons.EQUAL, filters.resourceId));
@@ -178,9 +176,9 @@ class StorageService {
     /**
      * Get current user
      *
-     * @param {*} userId
+     * @param {string} userId
      */
-    async getUser(userId) {
+    async getUser(userId: string) {
         const entry = await utils.table.retrieveEntity('Users', this.tenantId, userId);
         return utils.table.parseEntities([entry])[0];
     }
