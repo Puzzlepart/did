@@ -7,9 +7,9 @@ _-The Calendar is The Timesheet in The Cloud!_
 
 | Milestone                                                     | Release date  |  Branch      | PR
 |---------------------------------------------------------------|------------------------------------------------------------------------------------|---------|----------|
-| [Lithium](https://github.com/Puzzlepart/did365/milestone/5)   | 08.05.2020    | [release/lithium](https://github.com/Puzzlepart/did365/tree/release/lithium) | [#274](https://github.com/Puzzlepart/did365/pull/274)
-| [Beryllium](https://github.com/Puzzlepart/did365/milestone/5) | N/A | N/A | N/A
-| [Boron](https://github.com/Puzzlepart/did365/milestone/5) | N/A | N/A | N/A
+| [Lithium](https://github.com/Puzzlepart/did365/milestone/5)   | 11.05.2020    | [release/lithium](https://github.com/Puzzlepart/did365/tree/release/lithium) | [#274](https://github.com/Puzzlepart/did365/pull/274)
+| [Beryllium](https://github.com/Puzzlepart/did365/milestone/5) | 08.06.2020 | N/A | N/A
+| [Boron](https://github.com/Puzzlepart/did365/milestone/5) | 10.08.2020 | N/A | N/A
 
 ## Environments
 
