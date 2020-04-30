@@ -1,3 +1,6 @@
+/**
+ * @category Customers
+ */
 export interface ICreateCustomerFormValidation {
     errors: {
         [key: string]: string;

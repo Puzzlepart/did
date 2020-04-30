@@ -2,6 +2,8 @@
  * Get hash
  * 
  * @param {Object} options Options
+ * 
+ * @category Utility
  */
 export function getHash(options: { parseInt?: boolean, fallback?: string } = {}): any {
     if (!document.location.hash) return options.fallback;

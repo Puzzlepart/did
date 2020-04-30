@@ -5,8 +5,9 @@ import ReactMarkdown from 'react-markdown/with-html';
 import { IUserMessageProps } from './IUserMessageProps';
 
 /**
- * @component UserMessage
- * @description A component that supports a MessageBar with markdown using react-markdown
+ * A component that supports a MessageBar with markdown using react-markdown
+ * 
+ * @category UserMessage
  */
 export const UserMessage = (props: IUserMessageProps) => {
     return (

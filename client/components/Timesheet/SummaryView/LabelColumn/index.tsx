@@ -3,7 +3,7 @@ import * as React from 'react';
 
 /**
  * @component LabelColumn
- * @description 
+ * @category Timesheet
  */
 export const LabelColumn = ({ row }) => {
     if (row.label) return <div style={{ fontWeight: 500 }}>{row.label}</div>;

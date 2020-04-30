@@ -1,10 +1,12 @@
 
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 import { initializeIcons } from '@uifabric/icons';
+import 'core-js/stable';
 import i18n from 'i18next';
 import * as React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import * as ReactDom from 'react-dom';
+import 'regenerator-runtime/runtime.js';
 import { AdminView } from './components/AdminView';
 import { Customers } from './components/Customers';
 import { Projects } from './components/Projects';

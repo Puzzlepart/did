@@ -19,6 +19,7 @@ import * as format from 'string-format';
  * Create columns
  *
  * @param {ISummaryViewProps} props Props
+ * @category Timesheet
 */
 function createColumns({ events, type, scope, range }: ISummaryViewProps) {
     let columns = [];
