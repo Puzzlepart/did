@@ -46,7 +46,6 @@ let config = {
     filename: 'did365.js'
   },
   plugins: [
-    new BundleAnalyzerPlugin({ analyzerMode: 'static', openAnalyzer: false }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new webpack.DefinePlugin({
       'process.env': {
