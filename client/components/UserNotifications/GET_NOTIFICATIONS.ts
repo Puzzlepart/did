@@ -12,6 +12,7 @@ export default gql`
     id
     type
     severity
+    dismissType
     text
     moreLink
   }
