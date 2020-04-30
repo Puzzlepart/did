@@ -8,7 +8,11 @@ const NOTIFICATION_TYPE = {
     SERVICE_ANNOUNCEMENT: 1,
     FEATURE_ANNOUNCEMENT: 2,
 }
-
+const DISMISSIBILITY_TYPE = {
+    NEVER: 0,
+    TEMPORARILY: 1,
+    PERMANENTLY: 2,
+}
 
 const NOTIFICATION_SEVERITY = {
     LOW: 0,
@@ -41,6 +45,7 @@ async function notifications(_obj, _args, context) {
             startDateTime: startDateTime.toISOString(),
             endDateTime: endDateTime.toISOString(),
         }),
+        // TODO :Remove for now
         context.services.storage.getNotifications(),
     ])
 
@@ -54,6 +59,7 @@ async function notifications(_obj, _args, context) {
         type: NOTIFICATION_TYPE.WEEK_NOT_CONFIRMED,
         text: `You have not confirmed week ${week}.`,
         severity: NOTIFICATION_SEVERITY.HIGH,
+        dismissType: DISMISSIBILITY_TYPE.NEVER,
     })));
 
 
