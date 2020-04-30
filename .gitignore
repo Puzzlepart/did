@@ -4,7 +4,6 @@ Icon?
 lib
 doc
 server.js
-resources/
 public/js
 public/css
 .gitignore

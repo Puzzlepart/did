@@ -2,7 +2,6 @@
 import { UserMessage } from 'common/components/UserMessage';
 import { getDurationDisplay } from 'helpers';
 import resource from 'i18n';
-import { ITimeEntry } from 'interfaces';
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { Shimmer } from 'office-ui-fabric-react/lib/Shimmer';
 import * as React from 'react';
