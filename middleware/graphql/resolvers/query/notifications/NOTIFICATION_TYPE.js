@@ -1,0 +1,5 @@
+module.exports = {
+    UNCONFIRMED_WEEK: 0,
+    SERVICE_ANNOUNCEMENT: 1,
+    FEATURE_ANNOUNCEMENT: 2,
+}

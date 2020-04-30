@@ -1,7 +1,11 @@
-async function def() {
+const { startOfMonth, endOfMonth } = require('../../../../../utils');
+const uuid = require('uuid/v1');
+const _ = require('underscore');
+const { UNCONFIRMED_WEEK } = require('./NOTIFICATION_TYPE');
+const { HIGH } = require('./NOTIFICATION_SEVERITY');
+const { NEVER } = require('./NOTIFICATION_DISMISSABLE');
 
-
-
+module.exports = async function (context) {
     // TODO: Need to get weeks in month dynamically. Start from (Current week number -1), traverse (n) 5? weeks
     // TODO: Change name to weeksToCheck etc
     const weeksInMonth = [9, 10, 11, 12, 13, 14];
@@ -9,28 +13,21 @@ async function def() {
     // TODO startDateTime = start of week oldest week, end endDateTime = endOfWeek last week
     const startDateTime = startOfMonth(startOfMonth().subtract(1, 'month'));
     const endDateTime = endOfMonth(endOfMonth().subtract(1, 'month'));
-    let [confirmedTimeEntries, notifications] = await Promise.all([
-        context.services.storage.getConfirmedTimeEntries({
-            resourceId: context.user.profile.oid,
-            startDateTime: startDateTime.toISOString(),
-            endDateTime: endDateTime.toISOString(),
-        }),
-        // TODO :Remove for now
-        context.services.storage.getNotifications(),
-    ])
+    let confirmedTimeEntries = await context.services.storage.getConfirmedTimeEntries({
+        resourceId: context.user.profile.oid,
+        startDateTime: startDateTime.toISOString(),
+        endDateTime: endDateTime.toISOString(),
+    });
 
     const confirmedWeeks = _.unique(confirmedTimeEntries, entry => entry.weekNumber).map(entry => entry.weekNumber);
     const unconfirmedWeeks = _.difference(weeksInMonth, confirmedWeeks);
 
-    // TODO: Adding unconfirmed weeks notifications
-    // TODO: i18n for text, need to move i18n to root
+    // TODO: i18n for text
     return unconfirmedWeeks.map(week => ({
         id: uuid(),
-        type: NOTIFICATION_TYPE.WEEK_NOT_CONFIRMED,
+        type: UNCONFIRMED_WEEK,
         text: `You have not confirmed week ${week}.`,
-        severity: NOTIFICATION_SEVERITY.HIGH,
-        dismissType: DISMISSIBILITY_TYPE.NEVER,
+        severity: HIGH,
+        dismissable: NEVER,
     }));
 }
-
-module.exports = def;

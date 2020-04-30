@@ -56,7 +56,19 @@ let config = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ],
-  stats: 'detailed',
+  stats: {
+    chunks: false,
+    assets: false,
+    colors: false,
+    timings: true,
+    errors: true,
+    warnings: false,
+    errorDetails: true,
+    logging: 'error',
+    loggingTrace: false,
+    modules: false,
+    performance: false
+  }
 };
 
 switch (mode) {
@@ -64,21 +76,7 @@ switch (mode) {
     config.plugins.push(new (require('webpackbar'))());
   }
     break;
-  case 'production': {
-    config.stats = {
-      chunks: false,
-      assets: false,
-      colors: false,
-      timings: true,
-      errors: true,
-      warnings: false,
-      errorDetails: true,
-      logging: 'error',
-      loggingTrace: false,
-      modules: false,
-      performance: false
-    }
-  }
+  case 'production': { }
     break;
 }
 
