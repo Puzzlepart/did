@@ -191,15 +191,6 @@ class StorageService {
     }
 
     /**
-     * Get notifications
-     */
-    async getNotifications() {
-        const query = createQuery(1000, undefined).where(this.filter);
-        const { entries } = await queryTable('Notifications', query);
-        return parseArray(entries);
-    }
-
-    /**
      * Get users
      */
     async getUsers() {
