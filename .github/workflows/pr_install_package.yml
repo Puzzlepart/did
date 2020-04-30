@@ -1,4 +1,4 @@
-name: Status check/1
+name: Package install and front-end build
 on:
   pull_request:
     types: [assigned, opened, synchronize, reopened]
