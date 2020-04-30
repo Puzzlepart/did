@@ -16,18 +16,18 @@ export default function resource(key: string): string {
  * Setup i18n with default namespace translation
  * 
  * @param {ITypedHash} languages Languages
+ * @param {string} defaultNS Default namespace
  * 
  * @ignore
  */
-export async function setup(languages: ITypedHash<any>): Promise<boolean> {
+export async function setup(languages: ITypedHash<any>, defaultNS: string = 'translation'): Promise<boolean> {
     await i18n.init({
         debug: false,
         fallbackLng: 'en',
+        defaultNS,
         resources: Object.keys(languages).reduce((obj, key) => ({
             ...obj,
-            [key]: {
-                translation: languages[key],
-            }
+            [key]: { [defaultNS]: languages[key] }
         }), {})
     });
     return true;
