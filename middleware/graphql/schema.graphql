@@ -142,6 +142,7 @@ type Notification {
 	id: String
 	type: Int!
 	severity: Int!
+	dismissType: Int!
 	text: String!
 	moreLink: String
 }
