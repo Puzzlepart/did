@@ -1,4 +1,4 @@
-import { app } from './app';
+import app from './app';
 import http from 'http';
 var port = process.env.PORT || '8080';
 app.set('port', port);
