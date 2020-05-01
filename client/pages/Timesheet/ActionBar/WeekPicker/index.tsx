@@ -1,9 +1,11 @@
-import { TimesheetContext } from 'pages/Timesheet';
-import { TimesheetScope } from 'pages/Timesheet/TimesheetScope';
+import { HotkeyButton } from 'common/components';
+import { HOT_KEYS_REGISTRY } from 'components/Timesheet';
 import { Calendar, DateRangeType, DayOfWeek } from 'office-ui-fabric-react/lib/Calendar';
 import { Callout, DirectionalHint } from 'office-ui-fabric-react/lib/Callout';
 import { FocusTrapZone } from 'office-ui-fabric-react/lib/FocusTrapZone';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
+import { TimesheetContext } from 'pages/Timesheet';
+import { TimesheetScope } from 'pages/Timesheet/TimesheetScope';
 import * as React from 'react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -21,6 +23,7 @@ export const WeekPicker = () => {
     return (
         <>
             <div>
+                <HotkeyButton hotkey='alt+1' hidden={true} text='Open week picker' registry={HOT_KEYS_REGISTRY} />
                 <TextField
                     className='c-Timesheet-weekPicker'
                     onClick={event => setCalendar(event.currentTarget)}

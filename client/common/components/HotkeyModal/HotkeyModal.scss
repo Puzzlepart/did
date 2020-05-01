@@ -1,0 +1,16 @@
+.c-HotkeyModal {
+  padding: 20px;
+
+  .c-HotkeyModal-title {
+    margin: 0 0 15px 0;
+    font-size: 14pt;
+    font-weight: 500;
+  }
+
+  .c-HotkeyModal-key {
+    display: inline-block;
+    width: 60px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+}
