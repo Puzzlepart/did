@@ -5,11 +5,12 @@ const webpack = require('webpack');
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
 
 console.log("NODE_ENV: %s", mode);
-console.log("ENTRY: %s", path.resolve('./lib/client'));
+console.log("ENTRY: %s", path.resolve(__dirname, './lib/client'));
+console.log("OUTPUT: %s", path.resolve(__dirname, './bin/public/js'));
 
 let config = {
   output: {
-    path: path.resolve('./bin/public/js'),
+    path: path.resolve(__dirname, './bin/public/js'),
     filename: 'did365.js'
   },
   module: {
@@ -27,15 +28,15 @@ let config = {
     ]
   },
   mode,
-  entry: path.resolve('./lib/client'),
+  entry: path.resolve(__dirname, './lib/client'),
   resolve: {
     alias: {
-      interfaces: path.resolve('./lib/client/interfaces'),
-      utils: path.resolve('./lib/client/utils'),
-      helpers: path.resolve('./lib/client/helpers'),
-      components: path.resolve('./lib/client/components'),
-      common: path.resolve('./lib/client/common'),
-      i18n: path.resolve('./lib/client/i18n'),
+      interfaces: path.resolve(__dirname, './lib/client/interfaces'),
+      utils: path.resolve(__dirname, './lib/client/utils'),
+      helpers: path.resolve(__dirname, './lib/client/helpers'),
+      components: path.resolve(__dirname, './lib/client/components'),
+      common: path.resolve(__dirname, './lib/client/common'),
+      i18n: path.resolve(__dirname, './lib/client/i18n'),
     }
   },
   plugins: [
