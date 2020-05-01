@@ -1,76 +1,146 @@
 require('dotenv').config();
-import express from 'express';
+import express from "express";
 import favicon from 'express-favicon';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-import { isAuthenticated } from './middleware/passport';
+import { isAuthenticated, isAdmin } from './middleware/passport';;
 import * as middleware from './middleware';
+const hbs = require('hbs');
+const flash = require('connect-flash');
+const createError = require('http-errors');
 
-const app: express.Application = express();
+class App {
+    private _instance: express.Application;
 
-app.use(middleware.helmet);
-app.use(favicon(__dirname + '/public/images/favicon.ico'));
-
-//#region Setting up session using connect-azuretables
-app.use(middleware.session);
-//#endregion
-
-//#region HBS views setup
-import hbs from 'hbs';
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
-hbs.registerPartials(path.join(__dirname, 'views/partials'))
-//#endregion
-
-//#region API setup
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-//#endregion
-
-//#region Passport
-app.use(middleware.passport.initialize());
-app.use(middleware.passport.session());
-//#endregion
-
-//#region Storing user for hbs
-app.use((req: any, res, next) => {
-    if (req.user && req.user.data) {
-        res.locals.user = {
-            ...req.user.profile,
-            role: req.user.data.role,
-            isAdmin: req.user.data.role === 'Admin',
-        };
+    constructor() {
+        this._instance = express();
     }
-    res.locals.package = require('../package.json');
-});
-//#endregion
 
-//#region Routes/middleware
-import * as routes from './routes';
-app.use('/', routes.root);
-app.use('/auth', routes.auth);
-app.use('/graphql', isAuthenticated, middleware.graphql);
-//#endregion
+    public setFavIcon(iconPath: string): App {
+        this._instance.use(favicon(path.resolve(__dirname, iconPath)));
+        return this;
+    }
 
-//#region Error handling
-import createError from 'http-errors';
+    public addErrorHandling(): App {
+        this._instance.use(flash());
+        this._instance.use((_req, _res, next) => {
+            next(createError(404));
+        });
+        this._instance.use((error, req, res, _next) => {
+            res.locals.error_header = 'We\'re sorry';
+            res.locals.error_message = error.message;
+            res.status(error.status || 500);
+            res.render('error');
+        });
+        return this;
+    }
 
-app.use((_req, _res, next) => {
-    next(createError(404));
-});
+    public addMiddleware(): App {
+        this._instance.use(middleware.passport.initialize());
+        this._instance.use(middleware.passport.session());
+        this._instance.use(middleware.helmet);
+        this._instance.use(middleware.session);
+        return this;
+    }
 
-app.use((error: any, req: any, res: any, _next: any) => {
-    res.locals.error_header = 'We\'re sorry';
-    res.locals.error_message = error.message;
-    res.status(error.status || 500);
-    res.render('error');
-});
-//#endregion
+    public prepareStatic(): App {
+        this._instance.use(logger('dev'));
+        this._instance.use(express.json());
+        this._instance.use(express.urlencoded({ extended: false }));
+        this._instance.use(cookieParser());
+        this._instance.use(express.static(path.resolve(__dirname, 'public')));
+        return this;
+    }
 
-if (process.env.NODE_ENV === 'development') middleware.webpackDev(app);
+    public setViewEngine(engine: string, viewsPath: string): App {
+        this._instance.set("view engine", engine);
+        this._instance.set('views', viewsPath);
+        hbs.registerPartials(path.resolve(viewsPath, 'partials'))
+        return this;
+    }
 
-export default app;
+    // Prepare the / route to show a hello world page
+    public mountHomeRoute(routePath: string): App {
+        const router = express.Router();
+        router.get('/', function (_req, res) {
+            console.log('hello /');
+            res.render('index', { active: { home: true } });
+        });
+
+        router.get('/timesheet', isAuthenticated, (req, res) => {
+            res.render('timesheet', { active: { timesheet: true }, props: JSON.stringify(req.params) });
+        });
+
+        router.get('/customers', isAuthenticated, (req, res) => {
+            res.render('customers', { active: { customers: true }, props: JSON.stringify(req.params) });
+        });
+
+        router.get('/projects', isAuthenticated, (req, res) => {
+            res.render('projects', { active: { projects: true }, props: JSON.stringify(req.params) });
+        });
+
+        router.get('/reports', [isAuthenticated, isAdmin], (req, res) => {
+            res.render('reports', { active: { reports: true }, props: JSON.stringify(req.params) });
+        });
+
+        router.get('/admin', [isAuthenticated, isAdmin], (req, res) => {
+            res.render('admin', { active: { admin: true }, props: JSON.stringify(req.params) });
+        });
+        this._instance.use(routePath, router)
+        return this;
+    }
+
+    // Prepare the /auth route
+    public mountAuthRoute(routePath: string): App {
+        const router = express.Router();
+        router.get('/signin',
+            (req, res, next) => {
+                middleware.passport.authenticate('azuread-openidconnect',
+                    {
+                        prompt: process.env.OAUTH_SIGNIN_PROMPT,
+                        failureRedirect: '/',
+                    }
+                )(req, res, next);
+            },
+        );
+
+        router.post('/callback', (req: any, res: any, next: any) => {
+            middleware.passport.authenticate('azuread-openidconnect',
+                {
+                    successRedirect: '/',
+                    failureRedirect: '/',
+                }
+            )(req, res, next);
+        });
+
+        router.get('/signout', (req: any, res: any) => {
+            req.session.destroy((_err: any) => {
+                req.logout();
+                res.redirect('/');
+            });
+        });
+        this._instance.use(routePath, router)
+        return this;
+    }
+
+    public setupApi(apiPath: string): App {
+        this._instance.use(apiPath, isAuthenticated, middleware.graphql);
+        return this;
+    }
+
+    public create() {
+        return this._instance;
+    }
+}
+
+export default new App()
+    .addMiddleware()
+    .mountHomeRoute('/')
+    .mountAuthRoute('/auth')
+    .setupApi('/graphql')
+    .prepareStatic()
+    .setViewEngine('hbs', path.resolve(__dirname, 'views'))
+    .addErrorHandling()
+    .setFavIcon('/public/images/favicon.ico')
+    .create();

@@ -20,7 +20,7 @@ class StorageService {
     /**
      * Checks if the tenant id has a active subscription
      */
-    getSubscription() {
+    getSubscription(): Promise<any> {
         return new Promise(async (resolve) => {
             const query = utils.table.createQuery(1, ['Name']).where('RowKey eq ?', this.tenantId);
             var { entries } = await utils.table.queryTable('Subscriptions', query);

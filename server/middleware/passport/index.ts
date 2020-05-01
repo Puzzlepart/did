@@ -1,6 +1,7 @@
 import passport from 'passport';
 import { OIDCStrategy } from 'passport-azure-ad';
 import { StorageService } from '../../services/storage';
+import { onVerifySubscription } from './onVerifySubscription';
 
 passport.serializeUser((user, done) => { done(null, user) });
 
@@ -30,7 +31,7 @@ const strategy = new OIDCStrategy(
         passReqToCallback: false,
         scope: process.env.OAUTH_SCOPES.split(' ')
     },
-    require('./onVerifySubscription'),
+    onVerifySubscription,
 );
 
 passport.use(strategy);
@@ -39,4 +40,4 @@ passport.use(strategy);
 export { isAdmin } from './isAdmin';
 export { isAuthenticated } from './isAuthenticated';
 export { onVerifySubscription } from './onVerifySubscription';
-export default passport;
+export { passport }
