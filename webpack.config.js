@@ -11,9 +11,16 @@ console.log("PACKAGE_VERSION: %s", package.version);
 console.log("ENTRY: %s", package.config.client);
 
 let config = {
+  mode,
+  entry: { did365: package.config.client },
   output: {
     path: path.resolve(__dirname, './bin/public/js'),
-    filename: 'did365.js'
+    filename: '[name].js',
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   module: {
     rules: [
@@ -29,8 +36,6 @@ let config = {
       }
     ]
   },
-  mode,
-  entry: package.config.client,
   resolve: {
     alias: {
       interfaces: path.resolve(clientLib, 'interfaces'),

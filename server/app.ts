@@ -64,7 +64,7 @@ class App {
     }
 
     public _config() {
-        debug('Configuring logger, express.json, bodyParser and cookingParser...');
+        debug('Configuring logger, express.json, bodyParser and cookieParser...');
         this._instance.use(logger('dev'));
         this._instance.use(express.json());
         this._instance.use(bodyParser.urlencoded({ extended: true }));
