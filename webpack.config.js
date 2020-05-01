@@ -26,7 +26,7 @@ let config = {
     ]
   },
   mode,
-  entry: path.resolve(__dirname, 'lib/client'),
+  entry: './lib/client',
   resolve: {
     alias: {
       interfaces: path.resolve(__dirname, 'lib/client/interfaces'),
