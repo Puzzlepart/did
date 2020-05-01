@@ -6,8 +6,8 @@ import logger from 'morgan';
 import path from 'path';
 import graphql from './controllers/graphql';
 import * as middleware from './middleware';
-import passport from './middleware/passport';
-import { isAdmin, isAuthenticated } from './middleware/passport';
+import * as config from './config';
+import passport from 'passport';
 const hbs = require('hbs');
 const flash = require('connect-flash');
 const createError = require('http-errors');
@@ -31,31 +31,35 @@ class App {
             res.status(error.status || 500);
             res.render('error');
         });
-        return new App(this._instance);
+        return this;
     }
 
     public addMiddleware(): App {
         this._instance.use(middleware.helmet);
         this._instance.use(middleware.session);
-        this._instance.use(passport.initialize());
-        this._instance.use(passport.session());
-        return new App(this._instance);
+        this._instance.use(config.passport.initialize());
+        this._instance.use(config.passport.session());
+        return this;
     }
 
-    public prepareStatic(): App {
+    public config() {
         this._instance.use(logger('dev'));
         this._instance.use(express.json());
         this._instance.use(express.urlencoded({ extended: false }));
         this._instance.use(cookieParser());
+        return this;
+    }
+
+    public prepareStatic(): App {
         this._instance.use(express.static(path.resolve(__dirname, 'public')));
-        return new App(this._instance);
+        return this;
     }
 
     public setViewEngine(engine: string, viewsPath: string): App {
         this._instance.set("view engine", engine);
         this._instance.set('views', viewsPath);
         hbs.registerPartials(path.resolve(viewsPath, 'partials'))
-        return new App(this._instance);
+        return this;
     }
 
     // Prepare the / route to show a hello world page
@@ -63,50 +67,50 @@ class App {
         const router = express.Router();
         router.get('/', function (_req, res) { res.render('index', { active: { home: true } }); });
 
-        router.get('/timesheet', isAuthenticated, (req, res) => {
+        router.get('/timesheet', config.isAuthenticated, (req, res) => {
             res.render('timesheet', { active: { timesheet: true }, props: JSON.stringify(req.params) });
         });
 
-        router.get('/customers', isAuthenticated, (req, res) => {
+        router.get('/customers', config.isAuthenticated, (req, res) => {
             res.render('customers', { active: { customers: true }, props: JSON.stringify(req.params) });
         });
 
-        router.get('/projects', isAuthenticated, (req, res) => {
+        router.get('/projects', config.isAuthenticated, (req, res) => {
             res.render('projects', { active: { projects: true }, props: JSON.stringify(req.params) });
         });
 
-        router.get('/reports', [isAuthenticated, isAdmin], (req, res) => {
+        router.get('/reports', [config.isAuthenticated, config.isAdmin], (req, res) => {
             res.render('reports', { active: { reports: true }, props: JSON.stringify(req.params) });
         });
 
-        router.get('/admin', [isAuthenticated, isAdmin], (req, res) => {
+        router.get('/admin', [config.isAuthenticated, config.isAdmin], (req, res) => {
             res.render('admin', { active: { admin: true }, props: JSON.stringify(req.params) });
         });
-        this._instance.use(routePath, router)
-        return new App(this._instance);
+        this._instance.use(routePath, router);
+        return this;
     }
 
-    public mountAuthRoute(routePath: string, { authenticate }): App {
+    public mountAuthRoute(routePath: string): App {
         const router = express.Router();
         router.get('/signin',
             (req, res, next) => {
-                authenticate('azuread-openidconnect',
+                passport.authenticate('azuread-openidconnect',
                     {
                         response: res,
                         prompt: process.env.OAUTH_SIGNIN_PROMPT,
                         failureRedirect: '/',
-                    }
+                    } as any
                 )(req, res, next);
             },
         );
 
         router.post('/callback', (req: any, res: any, next: any) => {
-            authenticate('azuread-openidconnect',
+            passport.authenticate('azuread-openidconnect',
                 {
                     response: res,
                     successRedirect: '/',
                     failureRedirect: '/',
-                }
+                } as any
             )(req, res, next);
         });
 
@@ -117,17 +121,17 @@ class App {
             });
         });
         this._instance.use(routePath, router)
-        return new App(this._instance);
+        return this;
     }
 
     public setupControllers(apiPath: string): App {
-        this._instance.use(apiPath, isAuthenticated, graphql);
-        return new App(this._instance);
+        this._instance.use(apiPath, config.isAuthenticated, graphql);
+        return this;
     }
 
     public setUpWebpackDevMiddleware(isDev: boolean): App {
         if (isDev) middleware.webpackDev(this._instance);
-        return new App(this._instance);
+        return this;
     }
 
     public create() {
@@ -136,13 +140,14 @@ class App {
 }
 
 export default new App(express())
+    .config()
     .addMiddleware()
     .mountHomeRoute('/')
-    .mountAuthRoute('/auth', require('passport'))
+    .mountAuthRoute('/auth')
     .setupControllers('/graphql')
     .prepareStatic()
     .setViewEngine('hbs', path.resolve(__dirname, 'views'))
     .addErrorHandling()
     .setFavIcon('/public/images/favicon.ico')
-    .setUpWebpackDevMiddleware(process.env.NODE_ENV === 'development')
+    .setUpWebpackDevMiddleware(false)
     .create();

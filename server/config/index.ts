@@ -1,0 +1,1 @@
+export { default as passport, isAdmin, isAuthenticated } from './passport';
