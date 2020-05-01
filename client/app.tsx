@@ -33,7 +33,7 @@ const App = (context: IAppContext) => {
                     <Route exact path='/admin'>
                         <AdminView />
                     </Route>
-                    <Route exact path='/'>
+                    <Route path='/'>
                         <Home />
                     </Route>
                 </Switch>

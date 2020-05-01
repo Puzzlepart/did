@@ -14,7 +14,7 @@ export const Navigation = (context: IAppContext) => {
                 <div className='collapse navbar-collapse' id='navbarCollapse'>
                     <ul className='navbar-nav mr-auto'>
                         <li className='nav-item'>
-                            <NavLink to='/' className='nav-link' activeClassName='active'>Home</NavLink>
+                            <NavLink exact to='/' className='nav-link' activeClassName='active'>Home</NavLink>
                         </li>
                         <li className='nav-item' hidden={!context.user}>
                             <NavLink to='/timesheet' className='nav-link' activeClassName='active'>Timesheet</NavLink>
