@@ -8,6 +8,7 @@ import graphql from './controllers/graphql';
 import * as middleware from './middleware';
 import { isAdmin, isAuthenticated } from './middleware/passport';
 const hbs = require('hbs');
+const passport = require('passport');
 const flash = require('connect-flash');
 const createError = require('http-errors');
 
@@ -93,8 +94,9 @@ class App {
         const router = express.Router();
         router.get('/signin',
             (req, res, next) => {
-                middleware.passport.authenticate('azuread-openidconnect',
+                passport.authenticate('azuread-openidconnect',
                     {
+                        response: res,
                         prompt: process.env.OAUTH_SIGNIN_PROMPT,
                         failureRedirect: '/',
                     }
@@ -103,8 +105,9 @@ class App {
         );
 
         router.post('/callback', (req: any, res: any, next: any) => {
-            middleware.passport.authenticate('azuread-openidconnect',
+            passport.authenticate('azuread-openidconnect',
                 {
+                    response: res,
                     successRedirect: '/',
                     failureRedirect: '/',
                 }
