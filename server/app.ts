@@ -1,11 +1,12 @@
 require('dotenv').config();
+import cookieParser from 'cookie-parser';
 import express from "express";
 import favicon from 'express-favicon';
-import path from 'path';
-import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-import { isAuthenticated, isAdmin } from './middleware/passport';;
+import path from 'path';
+import graphql from './controllers/graphql';
 import * as middleware from './middleware';
+import { isAdmin, isAuthenticated } from './middleware/passport';
 const hbs = require('hbs');
 const flash = require('connect-flash');
 const createError = require('http-errors');
@@ -63,10 +64,7 @@ class App {
     // Prepare the / route to show a hello world page
     public mountHomeRoute(routePath: string): App {
         const router = express.Router();
-        router.get('/', function (_req, res) {
-            console.log('hello /');
-            res.render('index', { active: { home: true } });
-        });
+        router.get('/', function (_req, res) { res.render('index', { active: { home: true } }); });
 
         router.get('/timesheet', isAuthenticated, (req, res) => {
             res.render('timesheet', { active: { timesheet: true }, props: JSON.stringify(req.params) });
@@ -91,7 +89,6 @@ class App {
         return this;
     }
 
-    // Prepare the /auth route
     public mountAuthRoute(routePath: string): App {
         const router = express.Router();
         router.get('/signin',
@@ -124,8 +121,8 @@ class App {
         return this;
     }
 
-    public setupApi(apiPath: string): App {
-        this._instance.use(apiPath, isAuthenticated, middleware.graphql);
+    public setupControllers(apiPath: string): App {
+        this._instance.use(apiPath, isAuthenticated, graphql);
         return this;
     }
 
@@ -138,7 +135,7 @@ export default new App()
     .addMiddleware()
     .mountHomeRoute('/')
     .mountAuthRoute('/auth')
-    .setupApi('/graphql')
+    .setupControllers('/graphql')
     .prepareStatic()
     .setViewEngine('hbs', path.resolve(__dirname, 'views'))
     .addErrorHandling()
