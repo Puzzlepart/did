@@ -6,6 +6,9 @@
         "node": ">=10.14.1",
         "npm": ">=6.5.0"
     },
+    "config": {
+        "client": "./lib/client"
+    },
     "scripts": {
         "start": "node ./bin",
         "watch": "concurrently \"npm run watchServer\" \"npm run watchClient\" \"npm run watchStyles\"",
