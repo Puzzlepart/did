@@ -1,5 +1,3 @@
-// const confirmedTimeEntries = require('./confirmedTimeEntries');
-// const projects = require('./projects');
 const { resolvers: customerResolvers } = require('./customer');
 const { resolvers: projectResolvers } = require('./project');
 const { resolvers: timesheetResolvers } = require('./timesheet');

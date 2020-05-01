@@ -14,7 +14,7 @@ const typeDef = `
   }
   
   extend type Query {
-    project(customerKey: String, sortBy: String): [Project!]!
+    projects(customerKey: String, sortBy: String): [Project!]!
   }  
 
   extend type Mutation {
@@ -33,7 +33,7 @@ async function createProject(_obj, variables, context) {
     }
 }
 
-async function project(_obj, variables, context) {
+async function projects(_obj, variables, context) {
     let [projects, customers] = await Promise.all([
         context.services.storage.getProjects(variables.customerKey, { sortBy: variables.sortBy }),
         context.services.storage.getCustomers(),
@@ -48,7 +48,7 @@ async function project(_obj, variables, context) {
 
 module.exports = {
     resolvers: {
-        Query: { project },
+        Query: { projects },
         Mutation: { createProject }
     },
     typeDef

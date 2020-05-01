@@ -2,7 +2,6 @@ import { useMutation, useQuery } from '@apollo/react-hooks';
 import EventList from 'common/components/EventList';
 import { UserMessage } from 'common/components/UserMessage';
 import { IBaseResult } from 'graphql';
-import { getValueTyped as value } from 'helpers';
 import resource from 'i18n';
 import { IOutlookCategory } from 'interfaces';
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
@@ -12,20 +11,20 @@ import * as React from 'react';
 import * as excel from 'utils/exportExcel';
 import { generateColumn as col } from 'utils/generateColumn';
 import { CREATE_OUTLOOK_CATEGORY } from './CREATE_OUTLOOK_CATEGORY';
-import { GET_PROJECT_CONFIRMED_TIME_ENTRIES } from './GET_PROJECT_CONFIRMED_TIME_ENTRIES';
 import { IProjectDetailsProps } from './IProjectDetailsProps';
+import PROJECT_TIME_ENTRIES from './PROJECT_TIME_ENTRIES';
 
 /**
  * @category Projects
  */
 export const ProjectDetails = (props: IProjectDetailsProps) => {
     const [project, setProject] = React.useState({ ...props.project });
-    const { loading, error, data } = useQuery(GET_PROJECT_CONFIRMED_TIME_ENTRIES, { variables: { projectId: props.project.id } });
+    const { loading, error, data } = useQuery<{ timeentries: any[] }>(PROJECT_TIME_ENTRIES, { variables: { projectId: props.project.id } });
     const [createOutlookCategory] = useMutation<{ result: IBaseResult }, { category: IOutlookCategory }>(CREATE_OUTLOOK_CATEGORY);
 
     React.useEffect(() => setProject({ ...props.project }), [props.project]);
 
-    const entries = value<any[]>(data, 'result.entries', []);
+    const timeentries = data ? data.timeentries : [];
 
     /**
      * On export to Excel
@@ -33,7 +32,7 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
     async function onExportExcel() {
         let key = project.id.replace(/\s+/g, '-').toUpperCase();
         await excel.exportExcel(
-            entries,
+            timeentries,
             {
                 fileName: `ApprovedTimeEntries-${key}-${new Date().getTime()}.xlsx`,
                 skip: ['id', '__typename'],
@@ -86,7 +85,7 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                             iconProps={{ iconName: 'WorkforceManagement' }}
                             disabled={loading || !!error || !project.webLink} />
                         <DefaultButton
-                            hidden={entries.length === 0}
+                            hidden={timeentries.length === 0}
                             text={resource('COMMON.EXPORT_TO_EXCEL_LABEL')}
                             iconProps={{ iconName: 'ExcelDocument' }}
                             onClick={onExportExcel}
@@ -104,15 +103,15 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                 <div className='row' style={{ marginTop: 20 }}>
                     <div className='col-sm'>
                         {error && <UserMessage type={MessageBarType.error} text={resource('PROJECTS.TIME_ENTRIES_ERROR_TEXT')} />}
-                        {(entries.length === 0 && !loading) && <UserMessage text={resource('PROJECTS.NO_TIME_ENTRIES_TEXT')} />}
+                        {(timeentries.length === 0 && !loading) && <UserMessage text={resource('PROJECTS.NO_TIME_ENTRIES_TEXT')} />}
                         {loading && <ProgressIndicator label={resource('PROJECTS.TIME_ENTRIES_LOADING_LABEL')} />}
                     </div>
                 </div>
                 <div className='col-sm'>
                     <div className='row'>
-                        {entries.length > 0 && (
+                        {timeentries.length > 0 && (
                             <EventList
-                                events={entries}
+                                events={timeentries}
                                 additionalColumns={[col('resourceName', 'User')]}
                                 hideColumns={['project', 'customer']}
                                 dateFormat='MMM Do YYYY HH:mm'
