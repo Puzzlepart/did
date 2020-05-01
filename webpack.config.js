@@ -8,7 +8,7 @@ console.log("NODE_ENV: %s", mode);
 
 let config = {
   output: {
-    path: path.resolve('./dist/public/js'),
+    path: path.resolve('./bin/public/js'),
     filename: 'did365.js'
   },
   module: {

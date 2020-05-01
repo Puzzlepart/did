@@ -1,20 +1,18 @@
 {
-    "verbose": false,
     "ignore": [
         ".github",
         ".vscode",
-        "bin",
-        "client",
-        "dist/public",
-        "doc",
-        "lib",
-        "node_modules",
-        "public",
-        "resources",
-        "scss",
-        "server",
-        "tasks",
-        "typedoc-theme",
+        "./bin",
+        "./client",
+        "./dist/public",
+        "./doc",
+        "./lib",
+        "./public",
+        "./resources",
+        "./scss",
+        "./server",
+        "./tasks",
+        "./typedoc-theme",
         ".deployment",
         ".gitignore",
         "app.js",
@@ -28,9 +26,5 @@
         "typedoc.json",
         "webpack.config.js"
     ],
-    "delay": 2000,
-    "execMap": {
-        "rb": "ruby",
-        "pde": "processing --sketch={{pwd}} --run"
-    }
+    "delay": 250
 }

@@ -2,17 +2,9 @@
     "files.exclude": {
         "pnpm-lock.yaml": true,
         "node_modules": true,
-        "bin": true,
-        "client": false,
-        "config": false,
-        "public": false,
-        "middleware": false,
-        "utils": false,
-        "routes": false,
-        "views": false,
-        "services": false,
         ".env": false,
-        "server.js": true
+        "lib": true,
+        "doc": true
     },
     "appService.defaultWebAppToDeploy": "/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/did365",
     "appService.deploySubpath": "",
