@@ -112,7 +112,7 @@ export function startOfWeek(date?: string | Date | moment.Moment): moment.Moment
  * 
  * @category Helper
  */
-export function endOfWeek(date?: string | Date): moment.Moment {
+export function endOfWeek(date?: string | Date | moment.Moment): moment.Moment {
     const m = moment.utc(date);
     return m.add(-m.toDate().getTimezoneOffset(), 'minutes').endOf('isoWeek');
 }

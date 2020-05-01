@@ -1,30 +1,14 @@
 const express = require('express');
-const router = express.Router()
-const isAuthenticated = require('../middleware/passport/isAuthenticated');
-const isAdmin = require('../middleware/passport/isAdmin');
+const router = express.Router();
+const _ = require('underscore');
 
-router.get('/', function (_req, res) {
-  res.render('index', { active: { home: true } });
-});
-
-router.get('/timesheet', isAuthenticated, (req, res) => {
-  res.render('timesheet', { active: { timesheet: true }, props: JSON.stringify(req.params) });
-});
-
-router.get('/customers', isAuthenticated, (req, res) => {
-  res.render('customers', { active: { customers: true }, props: JSON.stringify(req.params) });
-});
-
-router.get('/projects', isAuthenticated, (req, res) => {
-  res.render('projects', { active: { projects: true }, props: JSON.stringify(req.params) });
-});
-
-router.get('/reports', [isAuthenticated, isAdmin], (req, res) => {
-  res.render('reports', { active: { reports: true }, props: JSON.stringify(req.params) });
-});
-
-router.get('/admin', [isAuthenticated, isAdmin], (req, res) => {
-  res.render('admin', { active: { admin: true }, props: JSON.stringify({ view: 'reports' }) });
+router.get('/', (req, res) => {
+  let context = {};
+  if (req.user) {
+    let user = _.omit(req.user, 'oauthToken');
+    context.user = { ...user.data, ...user.profile };
+  }
+  res.render('index', { context: JSON.stringify(context) });
 });
 
 module.exports = router;

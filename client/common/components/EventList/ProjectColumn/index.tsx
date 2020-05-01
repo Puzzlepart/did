@@ -111,7 +111,7 @@ const ProjectColumn = (props: IProjectColumnProps) => {
                         <span>for </span><a href={`/customers#${props.event.customer.id}`}><span>{props.event.customer.name}</span></a>
                     </div>
                 </div>
-                <ClearManualMatchButton onClick={() => props.onClearManualMatch(props.event)} className={props.className.clearButton} hidden={props.event.isManualMatch} />
+                <ClearManualMatchButton onClick={() => props.onClearManualMatch(props.event)} className={props.className.clearButton} hidden={!props.event.isManualMatch} />
             </div>
         </TooltipHost>
     );

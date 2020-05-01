@@ -28,7 +28,6 @@ const List = (props: IListProps) => {
         onSelectionChanged: () => {
             const [selected] = selection.getSelection();
             props.selection.onChanged(selected);
-            selected && updateUrlHash({ key: selected.key.toString() });
         }
     });
 

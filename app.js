@@ -56,9 +56,9 @@ app.use((req, res, next) => {
 //#endregion
 
 //#region Routes/middleware
-app.use('/', require('./routes/index'));
 app.use('/auth', require('./routes/auth'));
 app.use('/graphql', isAuthenticated, require('./middleware/graphql'));
+app.use('*', require('./routes/index'));
 //#endregion
 
 //#region Error handling

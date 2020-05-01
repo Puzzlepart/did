@@ -1,21 +1,18 @@
 import { useQuery } from '@apollo/react-hooks';
-import { ProjectList, GET_PROJECTS } from 'components/Projects';
 import { UserMessage } from 'common/components/UserMessage';
+import { GET_PROJECTS, ProjectList } from 'components/Projects';
 import { getValueTyped as value } from 'helpers';
+import resource from 'i18n';
 import { IProject } from 'interfaces/IProject';
-import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { Link } from 'office-ui-fabric-react/lib/Link';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import * as React from 'react';
-import { ConfirmDeleteDialog } from '../CustomerList/ConfirmDeleteDialog';
 import { ICustomerDetailsProps } from './ICustomerDetailsProps';
-import resource from 'i18n';
 
 /**
  * @category Customers
  */
 export const CustomerDetails = (props: ICustomerDetailsProps) => {
-    const [confirmDelete, setConfirmDelete] = React.useState(false);
     const { loading, error, data } = useQuery(GET_PROJECTS, { variables: { customerKey: value<string>(props, 'customer.key', '') } });
 
     return (
@@ -24,13 +21,6 @@ export const CustomerDetails = (props: ICustomerDetailsProps) => {
                 <div className="row">
                     <div className="col-sm">
                         <h3>{props.customer.name}</h3>
-                    </div>
-                    <div className="col-sm" style={{ textAlign: 'right' }}>
-                        <DefaultButton
-                            disabled={props.user.role !== 'Admin'}
-                            text={resource('CUSTOMERS.CUSTOMER_DELETE_BUTTON_LABEL')}
-                            iconProps={{ iconName: 'Delete' }}
-                            onClick={_ => setConfirmDelete(true)} />
                     </div>
                 </div>
                 {props.customer.inactive && (
@@ -64,13 +54,6 @@ export const CustomerDetails = (props: ICustomerDetailsProps) => {
                     </div>
                 </div>
             </div>
-            {confirmDelete && (
-                <ConfirmDeleteDialog
-                    customer={props.customer}
-                    projects={value<IProject[]>(data, 'projects', [])}
-                    onDismiss={_ => setConfirmDelete(false)}
-                    onConfirm={props.onDelete} />
-            )}
         </div>
     );
 };

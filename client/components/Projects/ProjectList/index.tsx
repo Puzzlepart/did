@@ -8,7 +8,7 @@ import * as React from 'react';
 import { generateColumn as col } from 'utils/generateColumn';
 import { withDefaultProps } from 'with-default-props';
 import { IProjectListProps } from './IProjectListProps';
-
+import { Link } from 'react-router-dom';
 
 /**
  * Generate column definitions based on parameters specified
@@ -35,7 +35,7 @@ export const ProjectListColumns = (renderLink: boolean, hideColumns: string[]): 
         'name',
         'Name',
         { maxWidth: 180 },
-        (project: IProject) => renderLink ? <a href={`/projects#key=${project.id}`}>{project.name}</a> : project.name
+        (project: IProject) => <Link to={`/projects/${project.id}`}>{project.name}</Link>
     ),
     col(
         'customer',
@@ -43,7 +43,7 @@ export const ProjectListColumns = (renderLink: boolean, hideColumns: string[]): 
         {},
         (project: IProject) => {
             if (!project.customer) return null;
-            return renderLink ? <a href={`/customers#key=${project.customer.id}`}>{project.customer.name}</a> : project.customer.name;
+            return <Link to={`/customers/${project.customer.id}`}>{project.customer.name}</Link>;
         }
     )
 ].filter(col => hideColumns.indexOf(col.key) === -1))
@@ -60,7 +60,7 @@ const ProjectList = (props: IProjectListProps) => {
 
     React.useEffect(() => setItems([...props.items].filter(p => !p.inactive)), [props.items]);
 
-    
+
     return (
         <List
             {...props}
