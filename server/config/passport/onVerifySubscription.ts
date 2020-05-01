@@ -1,7 +1,6 @@
 import { StorageService } from '../../services/storage';
 
 export async function onVerifySubscription(_iss, _sub, profile, _accessToken, _refreshToken, params, done) {
-    console.log(_iss, _sub, profile, _accessToken, _refreshToken, params);
     if (!profile.oid) {
         let error = new Error();
         error.name = 'NO_OID_FOUND';

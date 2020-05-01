@@ -12,7 +12,7 @@ console.log("ENTRY: %s", package.config.client);
 
 let config = {
   output: {
-    path: path.resolve(__dirname, './public/js'),
+    path: path.resolve(__dirname, './bin/public/js'),
     filename: 'did365.js'
   },
   module: {
@@ -40,10 +40,6 @@ let config = {
       common: path.resolve(clientLib, 'common'),
       i18n: path.resolve(clientLib, 'i18n'),
     }
-  },
-  output: {
-    path: path.resolve(__dirname, './public/js'),
-    filename: 'did365.js'
   },
   plugins: [
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),

@@ -3,7 +3,8 @@ import cookieParser from 'cookie-parser';
 import express from "express";
 import favicon from 'express-favicon';
 import logger from 'morgan';
-import path from 'path';
+import bodyParser from 'body-parser';
+import { resolve as resolvePath } from 'path';
 import graphql from './controllers/graphql';
 import * as middleware from './middleware';
 import * as config from './config';
@@ -11,16 +12,31 @@ import passport from 'passport';
 const hbs = require('hbs');
 const flash = require('connect-flash');
 const createError = require('http-errors');
+const debug = require('debug')('app');
 
 class App {
-    constructor(private _instance: express.Application) { }
-
-    public setFavIcon(iconPath: string): App {
-        this._instance.use(favicon(path.resolve(__dirname, iconPath)));
-        return new App(this._instance);
+    constructor(private _instance: express.Application) {
+        this._instance.use(flash());
+        this._config();
+        this._addMiddleware();
+        this._mountHomeRoute('/');
+        this._mountAuthRoute('/auth');
+        this._setupControllers('/graphql');
+        this._prepareStatic();
+        this._setViewEngine('hbs', resolvePath(__dirname, 'views'));
+        this._addErrorHandling();
+        this._addLocals();
+        this._setFavIcon('/public/images/favicon.ico');
+        this._setUpWebpackDevMiddleware(process.env.NODE_ENV === 'development');
     }
 
-    public addErrorHandling(): App {
+    public _setFavIcon(iconPath: string) {
+        debug('Setting favicon to %s...', iconPath);
+        this._instance.use(favicon(resolvePath(__dirname, iconPath)));
+    }
+
+    public _addErrorHandling() {
+        debug('Adding error handling...');
         this._instance.use(flash());
         this._instance.use((_req, _res, next) => {
             next(createError(404));
@@ -31,44 +47,44 @@ class App {
             res.status(error.status || 500);
             res.render('error');
         });
-        return this;
     }
 
-    public addMiddleware(): App {
+    public _addMiddleware() {
+        debug('Adding middleware...');
         this._instance.use(middleware.helmet);
         this._instance.use(middleware.session);
         this._instance.use(config.passport.initialize());
         this._instance.use(config.passport.session());
-        return this;
     }
 
-    public config() {
+    public _config() {
+        debug('Configuring logger, express.json, bodyParser and cookingParser...');
         this._instance.use(logger('dev'));
         this._instance.use(express.json());
-        this._instance.use(express.urlencoded({ extended: false }));
+        this._instance.use(bodyParser.urlencoded({ extended: true }));
         this._instance.use(cookieParser());
-        return this;
     }
 
-    public prepareStatic(): App {
-        this._instance.use(express.static(path.resolve(__dirname, 'public')));
-        return this;
+    public _prepareStatic() {
+        debug('Preparing static...');
+        this._instance.use(express.static(resolvePath(__dirname, 'public')));
     }
 
-    public setViewEngine(engine: string, viewsPath: string): App {
+    public _setViewEngine(engine: string, viewsPath: string) {
+        debug('Preparing view engine to %s with view path %s...', engine, viewsPath);
         this._instance.set("view engine", engine);
         this._instance.set('views', viewsPath);
-        hbs.registerPartials(path.resolve(viewsPath, 'partials'))
-        return this;
+        hbs.registerPartials(resolvePath(viewsPath, 'partials'))
     }
 
     // Prepare the / route to show a hello world page
-    public mountHomeRoute(routePath: string): App {
+    public _mountHomeRoute(routePath: string) {
+        debug('Mounting home route...');
         const router = express.Router();
         router.get('/', function (_req, res) { res.render('index', { active: { home: true } }); });
 
         router.get('/timesheet', config.isAuthenticated, (req, res) => {
-            res.render('timesheet', { active: { timesheet: true }, props: JSON.stringify(req.params) });
+            res.render('timesheet', { active: { timesheet: true }, props: JSON.stringify(req.params), user: { hello: true } });
         });
 
         router.get('/customers', config.isAuthenticated, (req, res) => {
@@ -87,10 +103,10 @@ class App {
             res.render('admin', { active: { admin: true }, props: JSON.stringify(req.params) });
         });
         this._instance.use(routePath, router);
-        return this;
     }
 
-    public mountAuthRoute(routePath: string): App {
+    public _mountAuthRoute(routePath: string) {
+        debug('Mounting auth route...');
         const router = express.Router();
         router.get('/signin',
             (req, res, next) => {
@@ -121,33 +137,39 @@ class App {
             });
         });
         this._instance.use(routePath, router)
-        return this;
     }
 
-    public setupControllers(apiPath: string): App {
+    public _setupControllers(apiPath: string) {
+        debug('Setting up controllers...');
         this._instance.use(apiPath, config.isAuthenticated, graphql);
-        return this;
     }
 
-    public setUpWebpackDevMiddleware(isDev: boolean): App {
-        if (isDev) middleware.webpackDev(this._instance);
-        return this;
+    public _setUpWebpackDevMiddleware(isDev: boolean) {
+        if (isDev) {
+            debug('Setting up webpack dev middleware...');
+            middleware.webpackDev(this._instance);
+        }
     }
 
-    public create() {
+    public _addLocals() {
+        debug('Adding locals...');
+        this._instance.use((req, res, next) => {
+            if (req.user && req.user['data']) {
+                res.locals.user = {
+                    ...req.user['profile'],
+                    role: req.user['data']['role'],
+                    isAdmin: req.user['data']['role'] === 'Admin',
+                };
+            } else {
+                res.locals.user = { no: true };
+            }
+            next();
+        });
+    }
+
+    public create(): express.Application {
         return this._instance;
     }
 }
 
-export default new App(express())
-    .config()
-    .addMiddleware()
-    .mountHomeRoute('/')
-    .mountAuthRoute('/auth')
-    .setupControllers('/graphql')
-    .prepareStatic()
-    .setViewEngine('hbs', path.resolve(__dirname, 'views'))
-    .addErrorHandling()
-    .setFavIcon('/public/images/favicon.ico')
-    .setUpWebpackDevMiddleware(false)
-    .create();
+export default new App(express()).create();

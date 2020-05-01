@@ -9,7 +9,7 @@ var server = http.createServer(app);
 server
   .listen(port)
   .on('error', (error: Error) => {
-    debug('An error occured');
+    debug('An error occured: %s', error.message);
   })
   .on('listening', () => {
     debug('Server listening on port %s', port);
