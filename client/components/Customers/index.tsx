@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import { CreateCustomerForm } from 'components/Customers/CreateCustomerForm';
 import { getValueTyped as value, parseUrlHash, updateUrlHash } from 'helpers';
 import resource from 'i18n';
@@ -10,17 +10,8 @@ import * as React from 'react';
 import _ from 'underscore';
 import { CustomerDetails } from './CustomerDetails';
 import { CustomerList } from './CustomerList';
-import DELETE_CUSTOMER, { IDeleteCustomerVariables } from './DELETE_CUSTOMER';
 import GET_CUSTOMERS, { IGetCustomersData } from './GET_CUSTOMERS';
 import { ICustomerProps } from './ICustomerProps';
-
-/**
- * @category Customers
- */
-function getPath(): string[] {
-    let [, path] = document.location.hash.substring(1).split('=');
-    return (path || '').split('/');
-}
 
 /**
  * @category Customers
@@ -28,19 +19,6 @@ function getPath(): string[] {
 export const Customers = (props: ICustomerProps) => {
     const [selected, setSelected] = React.useState<ICustomer>(null);
     const { loading, error, data, refetch } = useQuery<IGetCustomersData>(GET_CUSTOMERS, { fetchPolicy: 'cache-first' });
-    const [deleteCustomer] = useMutation<any, IDeleteCustomerVariables>(DELETE_CUSTOMER);
-
-    /**
-     * On delete customer
-     */
-    const onDeleteCustomer = async (): Promise<void> => {
-        const { data } = await deleteCustomer({ variables: { key: selected.key.toString() } });
-        window.location.hash = '';
-        if (data.result.success) {
-            setSelected(null);
-            refetch();
-        }
-    }
 
     const customers = value<ICustomer[]>(data, 'customers', []);
 
@@ -68,7 +46,7 @@ export const Customers = (props: ICustomerProps) => {
                             selection={{ mode: SelectionMode.single, onChanged: selected => setSelected(selected) }}
                             height={selected && 400} />
                     )}
-                {selected && <CustomerDetails customer={selected} user={props.user} onDelete={onDeleteCustomer} />}
+                {selected && <CustomerDetails customer={selected} />}
             </PivotItem>
             <PivotItem itemID='new' itemKey='new' headerText={resource('COMMON.CREATE_NEW_TEXT')} itemIcon='AddTo'>
                 <CreateCustomerForm />
