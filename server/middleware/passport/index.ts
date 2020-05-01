@@ -40,4 +40,4 @@ passport.use(strategy);
 export { isAdmin } from './isAdmin';
 export { isAuthenticated } from './isAuthenticated';
 export { onVerifySubscription } from './onVerifySubscription';
-export { passport }
+export default passport;

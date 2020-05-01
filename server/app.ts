@@ -6,9 +6,9 @@ import logger from 'morgan';
 import path from 'path';
 import graphql from './controllers/graphql';
 import * as middleware from './middleware';
+import passport from './middleware/passport';
 import { isAdmin, isAuthenticated } from './middleware/passport';
 const hbs = require('hbs');
-const passport = require('passport');
 const flash = require('connect-flash');
 const createError = require('http-errors');
 
@@ -35,10 +35,10 @@ class App {
     }
 
     public addMiddleware(): App {
-        this._instance.use(middleware.session);
-        this._instance.use(middleware.passport.initialize());
-        this._instance.use(middleware.passport.session());
         this._instance.use(middleware.helmet);
+        this._instance.use(middleware.session);
+        this._instance.use(passport.initialize());
+        this._instance.use(passport.session());
         return new App(this._instance);
     }
 
@@ -86,11 +86,11 @@ class App {
         return new App(this._instance);
     }
 
-    public mountAuthRoute(routePath: string): App {
+    public mountAuthRoute(routePath: string, { authenticate }): App {
         const router = express.Router();
         router.get('/signin',
             (req, res, next) => {
-                passport.authenticate('azuread-openidconnect',
+                authenticate('azuread-openidconnect',
                     {
                         response: res,
                         prompt: process.env.OAUTH_SIGNIN_PROMPT,
@@ -101,7 +101,7 @@ class App {
         );
 
         router.post('/callback', (req: any, res: any, next: any) => {
-            passport.authenticate('azuread-openidconnect',
+            authenticate('azuread-openidconnect',
                 {
                     response: res,
                     successRedirect: '/',
@@ -138,7 +138,7 @@ class App {
 export default new App(express())
     .addMiddleware()
     .mountHomeRoute('/')
-    .mountAuthRoute('/auth')
+    .mountAuthRoute('/auth', require('passport'))
     .setupControllers('/graphql')
     .prepareStatic()
     .setViewEngine('hbs', path.resolve(__dirname, 'views'))

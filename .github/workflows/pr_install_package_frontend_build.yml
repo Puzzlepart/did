@@ -1,4 +1,4 @@
-name: Package install and front-end build
+name: Package install and frontend build
 on:
   pull_request:
     types: [assigned, opened, synchronize, reopened]
