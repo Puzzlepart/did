@@ -10,9 +10,9 @@ const CONTENT_REGEX = /[\(\{\[]((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>
 /**
  * Get project best match using string-similarity findBestMatch
  * 
- * @param {*} projects 
- * @param {*} customer 
- * @param {*} projectKey 
+ * @param {any[]} projects 
+ * @param {any[]} customer 
+ * @param {any} projectKey 
  */
 function getProjectSuggestion(projects, customer, projectKey) {
     try {
@@ -35,12 +35,12 @@ function getProjectSuggestion(projects, customer, projectKey) {
 /**
  * Find project match in title/subject/categories
  * 
- * @param {*} regex 
- * @param {*} input 
+ * @param {RegExp} regex 
+ * @param {string} input 
  */
-function searchString(regex, input) {
-    let matches;
-    let match;
+function searchString(regex: RegExp, input: string) {
+    let matches: any[];
+    let match: any;
     while ((match = regex.exec(input)) != null) {
         matches = matches || [];
         matches.push({
@@ -116,10 +116,10 @@ function matchEvent(evt: any, projects: any[], customers: any[]) {
 /**
  * Matches events against projects/customers
  * 
- * @param {*} events 
- * @param {*} projects 
- * @param {*} customers 
+ * @param {any[]} events 
+ * @param {any[]} projects 
+ * @param {any[]} customers 
  */
-export default function matchEvents(events, projects, customers) {
+export function matchEvents(events: any[], projects: any[], customers: any[]) {
     return events.map(evt => matchEvent(evt, projects, customers));
 }

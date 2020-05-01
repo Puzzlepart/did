@@ -9,10 +9,17 @@ import graphql from './controllers/graphql';
 import * as middleware from './middleware';
 import * as config from './config';
 import passport from 'passport';
+import _ from 'underscore';
 const hbs = require('hbs');
 const flash = require('connect-flash');
 const createError = require('http-errors');
 const debug = require('debug')('app');
+
+enum ROUTE_PROTECTION {
+    NONE,
+    AUTHENTICATED,
+    ADMIN
+}
 
 class App {
     constructor(private _instance: express.Application) {
@@ -25,7 +32,6 @@ class App {
         this._prepareStatic();
         this._setViewEngine('hbs', resolvePath(__dirname, 'views'));
         this._addErrorHandling();
-        this._addLocals();
         this._setFavIcon('/public/images/favicon.ico');
         this._setUpWebpackDevMiddleware(process.env.NODE_ENV === 'development');
     }
@@ -77,34 +83,77 @@ class App {
         hbs.registerPartials(resolvePath(viewsPath, 'partials'))
     }
 
-    // Prepare the / route to show a hello world page
+    /**
+     * Get user from request
+     * 
+     * @param {any} req Request 
+     */
+    private _getUser(req: any) {
+        if (req.user && req.user.data) {
+            return _.omit({
+                ...req.user['profile'],
+                ...req.user['data'],
+                isAdmin: req.user.data.role === 'Admin',
+            }, '_raw', '_json', 'name');
+        }
+        return null;
+    }
+
+    /**
+     * Authenticates the route
+     * 
+     * @param {any} req Request
+     * @param {any} res Response
+     * @param {express.NextFunction} next Next function
+     */
+    private _authRoute(req: any, res: any, next: express.NextFunction) {
+        const route = req.originalUrl.substring(1) || 'home';
+        if (route !== 'home' && !req.isAuthenticated()) res.redirect('/');
+        if (route != 'graphql') {
+            const user = this._getUser(req);
+            res['locals']['user'] = user;
+            res['locals']['props'] = JSON.stringify(req.params);
+            res['locals']['active'] = { [route]: true };
+        }
+        next();
+    }
+
+    /**
+     * Mount home routes on {routePath}
+     * 
+     * @param routePath 
+     */
     public _mountHomeRoute(routePath: string) {
         debug('Mounting home route...');
         const router = express.Router();
-        router.get('/', function (_req, res) { res.render('index', { active: { home: true } }); });
+        const authRoutes = ['timesheet', 'customers', 'projects', 'reports', 'admin'];
 
-        router.get('/timesheet', config.isAuthenticated, (req, res) => {
-            res.render('timesheet', { active: { timesheet: true }, props: JSON.stringify(req.params), user: { hello: true } });
-        });
+        /**
+         * Home route
+         */
+        router.get(
+            '/',
+            this._authRoute.bind(this),
+            (_req: any, res: any) => {
+                res.render('index');
+            });
 
-        router.get('/customers', config.isAuthenticated, (req, res) => {
-            res.render('customers', { active: { customers: true }, props: JSON.stringify(req.params) });
-        });
+        /**
+         * Routes requiring authentication
+         */
+        for (let i = 0; i < authRoutes.length; i++) {
+            const route = authRoutes[i];
+            router.get(`/${route}`, this._authRoute.bind(this), (_req: any, res: any) => res.render(route));
+        }
 
-        router.get('/projects', config.isAuthenticated, (req, res) => {
-            res.render('projects', { active: { projects: true }, props: JSON.stringify(req.params) });
-        });
-
-        router.get('/reports', [config.isAuthenticated, config.isAdmin], (req, res) => {
-            res.render('reports', { active: { reports: true }, props: JSON.stringify(req.params) });
-        });
-
-        router.get('/admin', [config.isAuthenticated, config.isAdmin], (req, res) => {
-            res.render('admin', { active: { admin: true }, props: JSON.stringify(req.params) });
-        });
         this._instance.use(routePath, router);
     }
 
+    /**
+     * Mount auth routes on {routePath}
+     * 
+     * @param routePath 
+     */
     public _mountAuthRoute(routePath: string) {
         debug('Mounting auth route...');
         const router = express.Router();
@@ -141,7 +190,7 @@ class App {
 
     public _setupControllers(apiPath: string) {
         debug('Setting up controllers...');
-        this._instance.use(apiPath, config.isAuthenticated, graphql);
+        this._instance.use(apiPath, this._authRoute.bind(this), graphql);
     }
 
     public _setUpWebpackDevMiddleware(isDev: boolean) {
@@ -149,22 +198,6 @@ class App {
             debug('Setting up webpack dev middleware...');
             middleware.webpackDev(this._instance);
         }
-    }
-
-    public _addLocals() {
-        debug('Adding locals...');
-        this._instance.use((req, res, next) => {
-            if (req.user && req.user['data']) {
-                res.locals.user = {
-                    ...req.user['profile'],
-                    role: req.user['data']['role'],
-                    isAdmin: req.user['data']['role'] === 'Admin',
-                };
-            } else {
-                res.locals.user = { no: true };
-            }
-            next();
-        });
     }
 
     public create(): express.Application {

@@ -1,1 +1,1 @@
-export { default as passport, isAdmin, isAuthenticated } from './passport';
+export { default as passport } from './passport';

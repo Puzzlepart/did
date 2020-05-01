@@ -36,8 +36,4 @@ const strategy = new OIDCStrategy(
 
 passport.use(strategy);
 
-
-export { isAdmin } from './isAdmin';
-export { isAuthenticated } from './isAuthenticated';
-export { onVerifySubscription } from './onVerifySubscription';
 export default passport;

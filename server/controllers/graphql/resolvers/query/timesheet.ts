@@ -1,8 +1,8 @@
 import _ from 'underscore';
 import { IGraphQLContext } from '../..';
+import { utils } from '../../../../utils';
+import {matchEvents} from './timesheet.matching';
 const debug = require('debug')('middleware/graphql/resolvers/query/timesheet');
-const { formatDate, getMonthIndex, getWeek, startOfMonth, endOfMonth } = require('../../../../utils');
-const matchEvents = require('./timesheet.matching');
 
 /**
  * Timesheet
@@ -13,9 +13,9 @@ const matchEvents = require('./timesheet.matching');
  */
 export default async function timesheet(_obj: any, variables: any, context: IGraphQLContext) {
     debug('Retrieving events from %s to %s', variables.startDateTime, variables.endDateTime);
-    const week = getWeek(variables.startDateTime);
-    const startMonthIdx = getMonthIndex(variables.startDateTime);
-    const endMonthIdx = getMonthIndex(variables.endDateTime);
+    const week = utils.getWeek(variables.startDateTime);
+    const startMonthIdx = utils.getMonthIndex(variables.startDateTime);
+    const endMonthIdx = utils.getMonthIndex(variables.endDateTime);
     const isSplit = endMonthIdx !== startMonthIdx;
 
     let periods: any[] = [{
@@ -23,17 +23,17 @@ export default async function timesheet(_obj: any, variables: any, context: IGra
         name: `Week ${week}`,
         startDateTime: variables.startDateTime,
         endDateTime: isSplit
-            ? endOfMonth(variables.startDateTime).toISOString()
+            ? utils.endOfMonth(variables.startDateTime).toISOString()
             : variables.endDateTime,
     }];
 
     if (isSplit) {
         periods.push({
             id: `${week}_${endMonthIdx}`,
-            startDateTime: startOfMonth(variables.endDateTime).toISOString(),
+            startDateTime: utils.startOfMonth(variables.endDateTime).toISOString(),
             endDateTime: variables.endDateTime,
         });
-        periods = periods.map(period => ({ ...period, name: `Week ${week} (${formatDate(period.startDateTime, 'MMMM')})` }))
+        periods = periods.map(period => ({ ...period, name: `Week ${week} (${utils.formatDate(period.startDateTime, 'MMMM')})` }))
     }
 
     let [projects, customers, confirmedTimeEntries] = await Promise.all([
@@ -75,7 +75,7 @@ export default async function timesheet(_obj: any, variables: any, context: IGra
             period.events = matchEvents(period.events, projects, customers);
             period.matchedEvents = period.events.filter(evt => evt.project);
         }
-        period.events = period.events.map(evt => ({ ...evt, date: formatDate(evt.startTime, variables.dateFormat) }));
+        period.events = period.events.map(evt => ({ ...evt, date:utils.formatDate(evt.startTime, variables.dateFormat) }));
     }
     return periods;
 };
