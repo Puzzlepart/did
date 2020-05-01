@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container">
         <a href="/" class="navbar-brand" style="font-size: 13px;text-transform: uppercase;letter-spacing: 3px;">
-        <img src="/images/did365navlogobeta.png" height="37">
+            <img src="/images/did365navlogobeta.png" height="37">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,9 +26,9 @@
                     <a href="/reports" class="nav-link{{#if active.reports}} active{{/if}}">Reports</a>
                 </li>
                 {{#if user.isAdmin }}
-                    <li class="nav-item">
-                        <a href="/admin" class="nav-link{{#if active.admin}} active{{/if}}">Admin</a>
-                    </li>
+                <li class="nav-item">
+                    <a href="/admin" class="nav-link{{#if active.admin}} active{{/if}}">Admin</a>
+                </li>
                 {{/if}}
                 {{/if}}
             </ul>
@@ -38,7 +38,9 @@
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false">
                         {{#if user.email}}
-                        <img src="https://outlook.office.com/owa/service.svc/s/GetPersonaPhoto?email={{ user.email }}&UA=0&size=HR64x64&sc=1468233338850" class="rounded-circle align-self-center mr-2" style="width: 32px;">
+                        <img src="https://outlook.office.com/owa/service.svc/s/GetPersonaPhoto?email={{ user.email }}&UA=0&size=HR64x64&sc=1468233338850"
+                            class="rounded-circle align-self-center mr-2" style="width: 32px;"
+                            onerror="this.onerror=null;this.src='https://www.dovercourt.org/wp-content/uploads/2019/11/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.jpg';">
                         {{else}}
                         <i class="far fa-user-circle fa-lg rounded-circle align-self-center mr-2"
                             style="width: 32px;"></i>
@@ -56,7 +58,8 @@
                 </li>
                 {{else}}
                 <li class="nav-item">
-                    <a href="/auth/signin" class="nav-link"><img src="/images/ms-symbollockup_signin_dark_short.svg" /></a>
+                    <a href="/auth/signin" class="nav-link"><img
+                            src="/images/ms-symbollockup_signin_dark_short.svg" /></a>
                 </li>
                 {{/if}}
             </ul>
