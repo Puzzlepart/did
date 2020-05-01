@@ -14,7 +14,7 @@ const typeDef = `
   }
   
   extend type Query {
-    customer: [Customer!]!
+    customers: [Customer!]!
   }  
 
   extend type Mutation {	
@@ -24,7 +24,7 @@ const typeDef = `
 `;
 
 
-async function customer(_obj, _args, context) {
+async function customers(_obj, _args, context) {
   return await context.services.storage.getCustomers();
 };
 
@@ -57,7 +57,7 @@ async function deleteCustomer(_obj, variables, context) {
 
 module.exports = {
   resolvers: {
-    Query: { customer },
+    Query: { customers },
     Mutation: { createCustomer, deleteCustomer }
   },
   typeDef
