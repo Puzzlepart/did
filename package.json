@@ -83,6 +83,7 @@
         "react-autosuggest": "10.0.0",
         "react-dom": "16.13.1",
         "react-markdown": "4.3.1",
+        "react-router-dom": "5.1.2",
         "recharts": "^1.8.5",
         "regenerator-runtime": "0.13.5",
         "scriptjs": "2.5.9",
