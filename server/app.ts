@@ -13,15 +13,11 @@ const flash = require('connect-flash');
 const createError = require('http-errors');
 
 class App {
-    private _instance: express.Application;
-
-    constructor() {
-        this._instance = express();
-    }
+    constructor(private _instance: express.Application) { }
 
     public setFavIcon(iconPath: string): App {
         this._instance.use(favicon(path.resolve(__dirname, iconPath)));
-        return this;
+        return new App(this._instance);
     }
 
     public addErrorHandling(): App {
@@ -35,15 +31,15 @@ class App {
             res.status(error.status || 500);
             res.render('error');
         });
-        return this;
+        return new App(this._instance);
     }
 
     public addMiddleware(): App {
+        this._instance.use(middleware.session);
         this._instance.use(middleware.passport.initialize());
         this._instance.use(middleware.passport.session());
         this._instance.use(middleware.helmet);
-        this._instance.use(middleware.session);
-        return this;
+        return new App(this._instance);
     }
 
     public prepareStatic(): App {
@@ -52,14 +48,14 @@ class App {
         this._instance.use(express.urlencoded({ extended: false }));
         this._instance.use(cookieParser());
         this._instance.use(express.static(path.resolve(__dirname, 'public')));
-        return this;
+        return new App(this._instance);
     }
 
     public setViewEngine(engine: string, viewsPath: string): App {
         this._instance.set("view engine", engine);
         this._instance.set('views', viewsPath);
         hbs.registerPartials(path.resolve(viewsPath, 'partials'))
-        return this;
+        return new App(this._instance);
     }
 
     // Prepare the / route to show a hello world page
@@ -87,7 +83,7 @@ class App {
             res.render('admin', { active: { admin: true }, props: JSON.stringify(req.params) });
         });
         this._instance.use(routePath, router)
-        return this;
+        return new App(this._instance);
     }
 
     public mountAuthRoute(routePath: string): App {
@@ -121,17 +117,17 @@ class App {
             });
         });
         this._instance.use(routePath, router)
-        return this;
+        return new App(this._instance);
     }
 
     public setupControllers(apiPath: string): App {
         this._instance.use(apiPath, isAuthenticated, graphql);
-        return this;
+        return new App(this._instance);
     }
 
     public setUpWebpackDevMiddleware(isDev: boolean): App {
         if (isDev) middleware.webpackDev(this._instance);
-        return this;
+        return new App(this._instance);
     }
 
     public create() {
@@ -139,7 +135,7 @@ class App {
     }
 }
 
-export default new App()
+export default new App(express())
     .addMiddleware()
     .mountHomeRoute('/')
     .mountAuthRoute('/auth')

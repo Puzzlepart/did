@@ -18,7 +18,7 @@
         "buildClient": "tsc -p tsconfig.client.json",
         "buildServer": "tsc -p tsconfig.json",
         "packageStyles": "node-sass --include-path scss scss/main.scss bin/public/css/main.css",
-        "packageClient": "tsc && webpack --config webpack.config.js",
+        "packageClient": "tsc -p tsconfig.client.json && webpack --config webpack.config.js",
         "makeDoc": "typedoc --options typedoc.json"
     },
     "dependencies": {
