@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
 
 console.log("NODE_ENV: %s", mode);
+console.log("ENTRY: %s", path.resolve('./lib/client'));
 
 let config = {
   output: {

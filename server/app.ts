@@ -126,6 +126,11 @@ class App {
         return this;
     }
 
+    public setUpWebpackDevMiddleware(isDev: boolean): App {
+        if (isDev) middleware.webpackDev(this._instance);
+        return this;
+    }
+
     public create() {
         return this._instance;
     }
@@ -140,4 +145,5 @@ export default new App()
     .setViewEngine('hbs', path.resolve(__dirname, 'views'))
     .addErrorHandling()
     .setFavIcon('/public/images/favicon.ico')
+    .setUpWebpackDevMiddleware(process.env.NODE_ENV === 'development')
     .create();

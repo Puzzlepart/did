@@ -7,12 +7,13 @@
         "npm": ">=6.5.0"
     },
     "scripts": {
-        "start": "node ./dist",
+        "start": "node ./bin",
         "watch": "concurrently \"npm run watchServer\" \"npm run watchClient\" \"npm run watchStyles\"",
         "watchServer": "tsc-watch --onSuccess \"node ./bin\"",
         "watchClient": "tsc --watch true -p tsconfig.client.json",
         "watchStyles": "onchange -k -i -d 250 \"./**/*.scss\" -- npm run packageStyles",
         "buildClient": "tsc -p tsconfig.client.json",
+        "buildServer": "tsc -p tsconfig.json",
         "packageStyles": "node-sass --include-path scss scss/main.scss bin/public/css/main.css",
         "packageClient": "tsc && webpack --config webpack.config.js",
         "makeDoc": "typedoc --options typedoc.json"
