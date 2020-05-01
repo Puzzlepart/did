@@ -7,6 +7,7 @@ import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
 import * as React from 'react';
 import { generateColumn as col } from 'utils/generateColumn';
 import { ICustomerListProps } from './ICustomerListProps';
+import { Link } from 'react-router-dom';
 
 /**
  * Generate column definitions
@@ -26,7 +27,12 @@ export const CustomerListColumns = (): IColumn[] => ([
         },
     ),
     col('key', 'Key', { maxWidth: 120 }),
-    col('name', 'Name', { maxWidth: 300 }),
+    col(
+        'name',
+        'Name',
+        { maxWidth: 300 },
+        (customer: ICustomer) => <Link to={`/customers/${customer.id}`}>{customer.name}</Link>
+    ),
 ])
 
 /**
@@ -42,7 +48,7 @@ export const CustomerList = (props: ICustomerListProps) => {
      * @param {boolean} checked Is checked
      */
     const onToggleInactive = (_event: React.MouseEvent<HTMLElement, MouseEvent>, checked?: boolean) => {
-         setItems([...props.items].filter(customer => checked ? true : !customer.inactive));
+        setItems([...props.items].filter(customer => checked ? true : !customer.inactive));
     }
 
     React.useEffect(() => setItems([...props.items].filter(customer => !customer.inactive)), [props.items]);
