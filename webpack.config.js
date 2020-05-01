@@ -8,12 +8,18 @@ const mode = process.env.NODE_ENV === 'development' ? 'development' : 'productio
 
 console.log("NODE_ENV: %s", mode);
 console.log("PACKAGE_VERSION: %s", package.version);
-console.log("ENTRY: %s", package.config.client);
 
 let config = {
+  mode,
+  entry: { [package.name]: './lib/client' },
   output: {
     path: path.resolve(__dirname, './public/js'),
-    filename: 'did365.js'
+    filename: '[name].js'
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   module: {
     rules: [
@@ -29,8 +35,6 @@ let config = {
       }
     ]
   },
-  mode,
-  entry: package.config.client,
   resolve: {
     alias: {
       interfaces: path.resolve(clientLib, 'interfaces'),
@@ -40,10 +44,6 @@ let config = {
       common: path.resolve(clientLib, 'common'),
       i18n: path.resolve(clientLib, 'i18n'),
     }
-  },
-  output: {
-    path: path.resolve(__dirname, './public/js'),
-    filename: 'did365.js'
   },
   plugins: [
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
