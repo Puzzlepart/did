@@ -24,11 +24,11 @@ import { TimesheetContext } from './TimesheetContext';
 export const Timesheet = () => {
     const history = useHistory();
     const params = useParams<{ startDateTime: string, view: TimesheetView }>();
-
+    const [loading, setLoading] = React.useState<boolean>(true);
     const [scope, setScope] = React.useState<TimesheetScope>(new TimesheetScope());
     const [periods, setPeriods] = React.useState<TimesheetPeriod[]>([]);
     const [selectedPeriodId, setSelectedPeriodId] = React.useState<string>();
-    const { loading, data } = useQuery<{ timesheet: TimesheetPeriod[] }>(GET_TIMESHEET, {
+    const timesheetQuery = useQuery<{ timesheet: TimesheetPeriod[] }>(GET_TIMESHEET, {
         variables: {
             ...scope.iso,
             dateFormat: 'dddd DD',
@@ -36,12 +36,13 @@ export const Timesheet = () => {
         fetchPolicy: 'network-only',
         skip: false
     });
-    const [confirmPeriod] = useMutation(CONFIRM_PERIOD);
-    const [] = useMutation(UNCONFIRM_PERIOD);
+    const [confirmPeriod] = useMutation<{ entries: any[], startDateTime: string, endDateTime: string }>(CONFIRM_PERIOD);
+    const [unconfirmPeriod] = useMutation<{ startDateTime: string, endDateTime: string }>(UNCONFIRM_PERIOD);
 
     React.useEffect(() => {
-        if (data) setPeriods(data.timesheet.map(period => new TimesheetPeriod(period)));
-    }, [data]);
+        setLoading(timesheetQuery.loading)
+        if (timesheetQuery.data) setPeriods(timesheetQuery.data.timesheet.map(period => new TimesheetPeriod(period)));
+    }, [timesheetQuery]);
 
 
     let selectedPeriod = _.find(periods, p => p.id === selectedPeriodId) || _.first(periods) || new TimesheetPeriod();
@@ -49,11 +50,19 @@ export const Timesheet = () => {
     React.useEffect(() => setScope(new TimesheetScope(params.startDateTime)), [params.startDateTime]);
 
     const onConfirmPeriod = async () => {
-        await confirmPeriod({ variables: selectedPeriod.matchedEvents });
+        setLoading(true);
+        //TODO: Error handling
+        //const { data } = await confirmPeriod({ variables: { ...selectedPeriod.scope, entries: selectedPeriod.matchedEvents } });
+        await confirmPeriod({ variables: { ...selectedPeriod.scope, entries: selectedPeriod.matchedEvents } });
+        timesheetQuery.refetch();
     }
 
-    const onUnconfirmPeriod = () => {
-        //TODO: Mutation
+    const onUnconfirmPeriod = async () => {
+        setLoading(true);
+        //TODO: Error handling
+        //const { data } = await unconfirmPeriod({ variables: selectedPeriod.scope });
+        await unconfirmPeriod({ variables: selectedPeriod.scope });
+        timesheetQuery.refetch();
     }
 
     const onManualMatch = (event: ITimeEntry, project: IProject) => {

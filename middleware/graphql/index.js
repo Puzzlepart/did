@@ -1,12 +1,52 @@
-const path = require('path');
 const graphql = require('express-graphql');
-const { importSchema } = require('graphql-import');
 const { makeExecutableSchema } = require('graphql-tools');
+const { typeDef: Customer } = require('./resolvers/customer');
+const { typeDef: Project } = require('./resolvers/project');
+const { typeDef: Timesheet } = require('./resolvers/timesheet');
+const { typeDef: TimeEntry } = require('./resolvers/timeentry');
+const { typeDef: OutlookCategory } = require('./resolvers/outlookCategory');
+const { typeDef: User } = require('./resolvers/user');
 const StorageService = require('../../services/storage');
 const GraphService = require('../../services/graph');
 
+const Query = `
+  type Error {
+    name: String
+    message: String
+    code: String
+    statusCode: String
+  }
+
+  type EventError {
+    message: String!
+  }
+
+  type BaseResult {
+    success: Boolean
+    error: Error
+    data: String
+  }
+
+  type Query {
+    _empty: String
+  }
+
+  type Mutation {
+    _empty: String
+  }
+`;
+
+
 const schema = makeExecutableSchema({
-  typeDefs: importSchema(path.join(__dirname, './schema.graphql')),
+  typeDefs: [
+    Query,
+    Customer,
+    Project,
+    Timesheet,
+    TimeEntry,
+    User,
+    OutlookCategory,
+  ],
   resolvers: require('./resolvers'),
   resolverValidationOptions: {
     requireResolversForResolveType: false
