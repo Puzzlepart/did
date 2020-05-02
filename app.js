@@ -1,5 +1,5 @@
 require('dotenv').config();
-const os = require("os");
+const log = require('debug')('app');
 const createError = require('http-errors');
 const express = require('express');
 const favicon = require('express-favicon');
@@ -13,6 +13,7 @@ const hbs = require('hbs');
 const app = express();
 
 app.use((req, res, next) => {
+  log(req.get('host').split('-'))
   if (req.get('host').indexOf('localhost') !== -1 && process.env.AZURE_STORAGE_CONNECTION_STRING.indexOf('dev') === -1) {
     res.render('error', {
       error_header: 'Development error',
