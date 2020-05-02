@@ -18,7 +18,8 @@ const List = (props: IListProps) => {
     let selection = null;
     let groups = null;
 
-    const [items, setItems] = useState(props.items);
+    // eslint-disable-next-line prefer-const
+    let [items, setItems] = useState(props.items);
 
     useEffect(() => setItems(props.items), [props.items]);
 
