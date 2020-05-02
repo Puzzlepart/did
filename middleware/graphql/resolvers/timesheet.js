@@ -2,7 +2,7 @@ const _ = require('underscore');
 const { TableBatch } = require('azure-storage');
 const { executeBatch, addEntity, entGen } = require('../../../utils/table');
 const { getDurationHours, getDurationMinutes, formatDate, getMonthIndex, getWeek, startOfMonth, endOfMonth, getYear } = require('../../../utils');
-const uuid = require('uuid/v1');
+const uuidv4 = require('uuid').v4;
 const matchEvents = require('./timesheet.matching');
 
 const typeDef = `  
@@ -115,7 +115,7 @@ async function confirmPeriod(_obj, { entries, startDateTime, endDateTime }, { us
     try {
         let entities = [];
         if (!entries || entries.length === 0) {
-            const key = uuid();
+            const key = uuidv4();
             entities.push({
                 PartitionKey: entGen.String(tenantId),
                 RowKey: entGen.String(key),
@@ -136,7 +136,7 @@ async function confirmPeriod(_obj, { entries, startDateTime, endDateTime }, { us
                 if (!event) return;
                 return {
                     PartitionKey: entGen.String(tenantId),
-                    RowKey: entGen.String(uuid()),
+                    RowKey: entGen.String(uuidv4()),
                     EventId: entGen.String(entry.id),
                     Title: entGen.String(event.title),
                     Description: entGen.String(event.body),
