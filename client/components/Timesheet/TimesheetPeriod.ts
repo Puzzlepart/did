@@ -49,7 +49,7 @@ export class TimesheetPeriod {
     }
 
     public get isConfirmed(): boolean {
-        return this.confirmedDuration > 0;
+        return this.events.length > 0;
     }
 
     public get errors(): Error[] {
