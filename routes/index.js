@@ -22,11 +22,12 @@ function getContext(req) {
 
 router.get('/', (req, res) => {
   if (req.originalUrl != '/' && !req.isAuthenticated()) {
-    res.redirect(403, '/');
+    res.redirect('/auth/signin');
+  } else {
+    const context = getContext(req);
+    res.locals.version = context.info.version;
+    res.render('index', { context: JSON.stringify(context) });
   }
-  const context = getContext(req);
-  res.locals.version = context.info.version;
-  res.render('index', { context: JSON.stringify(context) });
 });
 
 module.exports = router;
