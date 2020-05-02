@@ -15,7 +15,7 @@ import { DurationColumn } from './DurationColumn';
 import { ISummaryViewProps } from './ISummaryViewProps';
 import { LabelColumn } from './LabelColumn';
 import { SummaryViewType } from "./SummaryViewType";
-import { TimesheetContext } from '../Timesheet';
+import { TimesheetContext } from '../';
 import { TimesheetScope } from '../TimesheetScope';
 
 /**

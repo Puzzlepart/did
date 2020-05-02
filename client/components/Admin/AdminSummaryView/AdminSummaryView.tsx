@@ -1,7 +1,7 @@
 
 import { useQuery } from '@apollo/react-hooks';
 import { SummaryView, SummaryViewType } from 'components/Timesheet/SummaryView';
-import { TimesheetContext } from 'components/Timesheet/Timesheet';
+import { TimesheetContext } from 'components/Timesheet';
 import { getValueTyped as value } from 'helpers';
 import * as moment from 'moment';
 import { IPivotItemProps, Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';

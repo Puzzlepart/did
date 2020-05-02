@@ -7,12 +7,7 @@ import { Reports } from 'components/Reports';
 import Timesheet from 'components/Timesheet';
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
-export interface IAppContext {
-    user?: any;
-}
-
-export const AppContext = React.createContext<IAppContext>({});
+import { AppContext, IAppContext } from './AppContext';
 
 const App = (context: IAppContext) => {
     return (

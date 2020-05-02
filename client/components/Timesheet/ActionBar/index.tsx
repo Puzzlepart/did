@@ -8,7 +8,7 @@ import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS';
 import { IActionBarProps } from './IActionBarProps';
 import { WeekPicker } from './WeekPicker';
 import { useHistory } from "react-router-dom";
-import { TimesheetContext } from '../Timesheet';
+import { TimesheetContext } from '../';
 require('moment/locale/en-gb');
 
 /**

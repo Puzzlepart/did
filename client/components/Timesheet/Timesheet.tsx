@@ -19,8 +19,7 @@ import { TimesheetPeriod } from './TimesheetPeriod';
 import { TimesheetScope } from './TimesheetScope';
 import { TimesheetView } from './types';
 import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD';
-
-export const TimesheetContext = React.createContext<{ selectedPeriod?: TimesheetPeriod, loading?: boolean, scope?: TimesheetScope, periods?: TimesheetPeriod[] }>({});
+import { TimesheetContext } from './TimesheetContext';
 
 export const Timesheet = () => {
     const history = useHistory();
@@ -37,7 +36,7 @@ export const Timesheet = () => {
         fetchPolicy: 'network-only',
         skip: false
     });
-    const [] = useMutation(CONFIRM_PERIOD);
+    const [confirmPeriod] = useMutation(CONFIRM_PERIOD);
     const [] = useMutation(UNCONFIRM_PERIOD);
 
     React.useEffect(() => {
@@ -49,8 +48,8 @@ export const Timesheet = () => {
 
     React.useEffect(() => setScope(new TimesheetScope(params.startDateTime)), [params.startDateTime]);
 
-    const onConfirmPeriod = () => {
-        //TODO: Mutation
+    const onConfirmPeriod = async () => {
+        await confirmPeriod({ variables: selectedPeriod.matchedEvents });
     }
 
     const onUnconfirmPeriod = () => {
