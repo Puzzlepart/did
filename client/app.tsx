@@ -1,4 +1,4 @@
-import { AdminView } from 'components/AdminView';
+import Admin from 'components/Admin';
 import Customers from 'components/Customers';
 import { Home } from 'components/Home';
 import { Navigation } from 'components/Navigation';
@@ -30,8 +30,8 @@ const App = (context: IAppContext) => {
                     <Route exact path='/reports'>
                         <Reports />
                     </Route>
-                    <Route exact path='/admin'>
-                        <AdminView />
+                    <Route path='/admin'>
+                        <Admin />
                     </Route>
                     <Route path='/'>
                         <Home />
