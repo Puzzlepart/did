@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import { IAppContext } from '../../app';
+import { Link, NavLink } from 'react-router-dom';
+import { AppContext } from '../../app';
 
-export const Navigation = (context: IAppContext) => {
+export const Navigation = () => {
+    const context = React.useContext(AppContext);
     return (
         <nav className='navbar navbar-expand-md navbar-dark fixed-top bg-dark'>
             <div className='container'>
