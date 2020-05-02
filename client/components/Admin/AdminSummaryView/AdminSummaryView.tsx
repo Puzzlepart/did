@@ -10,7 +10,7 @@ import { Slider } from 'office-ui-fabric-react/lib/Slider';
 import * as React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import * as _ from 'underscore';
-import GET_CONFIRMED_TIME_ENTRIES from './GET_CONFIRMED_TIME_ENTRIES';
+import TIME_ENTRIES from './TIME_ENTRIES';
 import { IAdminSummaryViewProps } from './IAdminSummaryViewProps';
 require('moment/locale/en-gb');
 
@@ -40,11 +40,11 @@ export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
     const params = useParams<IAdminSummaryViewParams>();
     const year = params.year || moment().year().toString();
     const [range, setRange] = React.useState<number>(3);
-    const { data, loading } = useQuery(GET_CONFIRMED_TIME_ENTRIES, {
+    const { data, loading } = useQuery<{ timeentries: any[] }>(TIME_ENTRIES, {
         fetchPolicy: 'cache-first',
         variables: { yearNumber: parseInt(year) },
     });
-    let entries = value<any[]>(data, 'result.entries', []).filter(e => e.monthNumber > 0);
+    const timeentries = (data ? data.timeentries : [])
 
     let periods = createPeriods(2);
 
@@ -64,13 +64,13 @@ export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
                                     <Slider
                                         valueFormat={value => `Show last ${value} months`}
                                         min={1}
-                                        max={_.unique(entries, e => e.monthNumber).length}
+                                        max={_.unique(timeentries, e => e.monthNumber).length}
                                         defaultValue={range}
                                         onChange={value => setRange(value)} />
                                 )}
                                 {loading && <ProgressIndicator />}
                                 <SummaryView
-                                    entries={entries}
+                                    entries={timeentries}
                                     type={SummaryViewType.AdminMonth}
                                     range={range}
                                     exportFileNameTemplate='Summary-Month-{0}.xlsx' />
@@ -80,13 +80,13 @@ export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
                                     <Slider
                                         valueFormat={value => `Show last ${value} weeks`}
                                         min={1}
-                                        max={_.unique(entries, e => e.weekNumber).length}
+                                        max={_.unique(timeentries, e => e.weekNumber).length}
                                         defaultValue={range}
                                         onChange={value => setRange(value)} />
                                 )}
                                 {loading && <ProgressIndicator />}
                                 <SummaryView
-                                    entries={entries}
+                                    entries={timeentries}
                                     type={SummaryViewType.AdminWeek}
                                     range={range}
                                     exportFileNameTemplate='Summary-Week-{0}.xlsx' />
