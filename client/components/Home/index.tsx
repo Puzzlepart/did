@@ -1,6 +1,9 @@
 import * as React from 'react';
 
-export const Home = () => {
+/**
+ * @ignore
+ */
+const _ = () => {
     return (
         <div className="jumbotron">
             <div className="container">
@@ -16,3 +19,7 @@ export const Home = () => {
         </div>
     );
 }
+
+_['displayName'] = 'Home';
+
+export default _;

@@ -3,9 +3,9 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { Customers } from './Customers';
 
 /**
- * @category Customers
+ * @ignore
  */
-export default () => {
+const _ = () => {
     let match = useRouteMatch();
     return (
         <Switch>
@@ -18,3 +18,7 @@ export default () => {
         </Switch>
     );
 }
+
+_['displayName'] = 'Customers';
+
+export default _;

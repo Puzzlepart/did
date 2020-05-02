@@ -1,13 +1,7 @@
-import Admin from 'components/Admin';
-import Customers from 'components/Customers';
-import { Home } from 'components/Home';
-import { Navigation } from 'components/Navigation';
-import Projects from 'components/Projects';
-import { Reports } from 'components/Reports';
-import Timesheet from 'components/Timesheet';
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { AppContext, IAppContext } from './AppContext';
+import { Navigation, Timesheet, Customers, Projects, Reports, Admin, Home } from 'components';
 
 const App = (context: IAppContext) => {
     return (

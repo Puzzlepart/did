@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { Timesheet } from './Timesheet';
 
-export default () => {
+const _ = () => {
     let match = useRouteMatch();
     return (
         <Switch>
@@ -18,5 +18,9 @@ export default () => {
         </Switch>
     );
 }
+
+_['displayName'] = 'Timesheet';
+
+export default _;
 
 export * from './TimesheetContext';

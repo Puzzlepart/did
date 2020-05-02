@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AppContext } from '../../AppContext';
+import { Home, Timesheet, Customers, Projects, Reports, Admin } from 'components';
 
 export const Navigation = () => {
     const { user, info } = React.useContext(AppContext);
@@ -15,22 +16,22 @@ export const Navigation = () => {
                 <div className='collapse navbar-collapse' id='navbarCollapse'>
                     <ul className='navbar-nav mr-auto'>
                         <li className='nav-item'>
-                            <NavLink exact to='/' className='nav-link' activeClassName='active'>Home</NavLink>
+                            <NavLink exact to='/' className='nav-link' activeClassName='active'>{Home['displayName']}</NavLink>
                         </li>
                         <li className='nav-item' hidden={!user}>
-                            <NavLink to='/timesheet' className='nav-link' activeClassName='active'>Timesheet</NavLink>
+                            <NavLink to='/timesheet' className='nav-link' activeClassName='active'>{Timesheet['displayName']}</NavLink>
                         </li>
                         <li className='nav-item' hidden={!user}>
-                            <NavLink to='/customers' className='nav-link' activeClassName='active'>Customers</NavLink>
+                            <NavLink to='/customers' className='nav-link' activeClassName='active'>{Customers['displayName']}</NavLink>
                         </li>
                         <li className='nav-item' hidden={!user}>
-                            <NavLink to='/projects' className='nav-link' activeClassName='active'>Projects</NavLink>
+                            <NavLink to='/projects' className='nav-link' activeClassName='active'>{Projects['displayName']}</NavLink>
                         </li>
                         <li className='nav-item' hidden={!user}>
-                            <NavLink to='/reports' className='nav-link' activeClassName='active'>Reports</NavLink>
+                            <NavLink to='/reports' className='nav-link' activeClassName='active'>{Reports['displayName']}</NavLink>
                         </li>
                         <li className='nav-item' hidden={!user}>
-                            <NavLink to='/admin' className='nav-link' activeClassName='active'>Admin</NavLink>
+                            <NavLink to='/admin' className='nav-link' activeClassName='active'>{Admin['displayName']}</NavLink>
                         </li>
                     </ul>
                     <ul className="navbar-nav justify-content-end">
