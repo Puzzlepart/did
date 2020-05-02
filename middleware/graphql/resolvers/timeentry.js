@@ -55,7 +55,6 @@ async function timeentries(_obj, variables, context) {
         project: entry.projectId && _.find(projects, p => p.id === entry.projectId),
         customer: entry.customerId && _.find(customers, c => c.id === entry.customerId),
     }));
-    console.log('timeentries', timeentries.length);
     return entries;
 };
 

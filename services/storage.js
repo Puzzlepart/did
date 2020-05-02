@@ -169,10 +169,8 @@ class StorageService {
         if (filters.yearNumber) filter = combine(filter, and, intFilter('YearNumber', TableUtilities.QueryComparisons.EQUAL, filters.yearNumber));
         if (filters.startDateTime) filter = combine(filter, and, dateFilter('StartTime', TableUtilities.QueryComparisons.GREATER_THAN, entGen.DateTime(new Date(filters.startDateTime))._));
         if (filters.endDateTime) filter = combine(filter, and, dateFilter('StartTime', TableUtilities.QueryComparisons.LESS_THAN, entGen.DateTime(new Date(filters.endDateTime))._));
-        console.log(filters);
         let query = createQuery(1000, undefined, filter);
         let result = await queryTableAll('ConfirmedTimeEntries', query);
-        console.log(result.length);
         if (!options.noParse) {
             result = parseArray(result, res => {
                 if (res.projectId) res.customerId = _.first(res.projectId.split(' '));
