@@ -7,12 +7,14 @@ import * as React from 'react';
 import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS';
 import { IActionBarProps } from './IActionBarProps';
 import { WeekPicker } from './WeekPicker';
+import { useHistory } from "react-router-dom";
 require('moment/locale/en-gb');
 
 /**
  * @category Timesheet
  */
 export const ActionBar = (props: IActionBarProps) => {
+    const history = useHistory();
     const items = [
         {
             key: 'THIS_WEEK',
@@ -20,8 +22,7 @@ export const ActionBar = (props: IActionBarProps) => {
             iconOnly: true,
             iconProps: { iconName: 'RenewalCurrent', ...ACTIONBAR_ICON_PROPS },
             onClick: () => {
-                document.location.hash = '';
-                props.onChangeScope({});
+                history.push(`/timesheet`);
             },
             disabled: props.timesheet.scope.startDateTime.week() === moment().week(),
             title: resource('TIMESHEET.COMMANDBAR_CURRENT_WEEK_TEXT'),
@@ -31,7 +32,10 @@ export const ActionBar = (props: IActionBarProps) => {
             itemType: ContextualMenuItemType.Normal,
             iconOnly: true,
             iconProps: { iconName: 'Back', ...ACTIONBAR_ICON_PROPS },
-            onClick: () => props.onChangeScope({ startDateTime: props.timesheet.scope.startDateTime.subtract(1, 'week') }),
+            onClick: () => {
+                const startDateTime = props.timesheet.scope.startDateTime.subtract(1, 'week').toISOString();
+                history.push(`/timesheet/${startDateTime}`);
+            },
             title: resource('TIMESHEET.COMMANDBAR_PREV_WEEK_TEXT')
         },
         {
@@ -39,7 +43,10 @@ export const ActionBar = (props: IActionBarProps) => {
             itemType: ContextualMenuItemType.Normal,
             iconOnly: true,
             iconProps: { iconName: 'Forward', ...ACTIONBAR_ICON_PROPS },
-            onClick: () => props.onChangeScope({ startDateTime: props.timesheet.scope.startDateTime.add(1, 'week') }),
+            onClick: () => {
+                const startDateTime = props.timesheet.scope.startDateTime.add(1, 'week').toISOString();
+                history.push(`/timesheet/${startDateTime}`);
+            },
             title: resource('TIMESHEET.COMMANDBAR_NEXT_WEEK_TEXT'),
         },
         {

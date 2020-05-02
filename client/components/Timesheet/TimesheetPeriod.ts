@@ -11,9 +11,14 @@ export class TimesheetPeriod {
     public startDateTime?: string;
     public endDateTime?: string;
     public confirmedDuration?: number;
+    public manualMatches: ITypedHash<any>;
+    public ignoredEvents: string[] = [];
     private _localStorage: IPnPClientStore = new PnPClientStorage().local;
     private _uiMatchedEventsStorageKey: string;
     private _uiIgnoredEventsStorageKey: string;
+
+
+
 
     constructor(private _period?: Partial<TimesheetPeriod>) {
         if (_period) {
@@ -24,6 +29,9 @@ export class TimesheetPeriod {
             this.confirmedDuration = _period.confirmedDuration;
             this._uiMatchedEventsStorageKey = `did365_ui_matched_events_${this.id}`;
             this._uiIgnoredEventsStorageKey = `did365_ui_ignored_events_${this.id}`;
+            this.ignoredEvents = this._localStorage.get(this._uiIgnoredEventsStorageKey) || [];
+            this.manualMatches = this._localStorage.get(this._uiMatchedEventsStorageKey) || {};
+            console.log(this.manualMatches);
         }
     }
 
@@ -69,9 +77,9 @@ export class TimesheetPeriod {
     * @param {string} eventId Event id
     * @param {IProject} project Project
     */
-    public saveManualMatch(eventId: string, project: IProject) {
+    public setManualMatch(eventId: string, project: IProject) {
         let matches = this.manualMatches;
-        this[eventId] = project;
+        matches[eventId] = project;
         this._localStorage.put(this._uiMatchedEventsStorageKey, matches, dateAdd(new Date(), 'month', 1));
     }
 
@@ -81,16 +89,8 @@ export class TimesheetPeriod {
      * @param {string} eventId Event id
      */
     public clearManualMatch(eventId: string) {
-        let matches = this.manualMatches;
-        delete matches[eventId];
-        this._localStorage.put(this._uiMatchedEventsStorageKey, matches, dateAdd(new Date(), 'month', 1));
-    }
-
-    /**
-     * Get manual matches
-     */
-    public get manualMatches(): ITypedHash<any> {
-        return this._localStorage.get(this._uiMatchedEventsStorageKey) || {};
+        delete this.manualMatches[eventId];
+        this._localStorage.put(this._uiMatchedEventsStorageKey, this.manualMatches, dateAdd(new Date(), 'month', 1));
     }
 
     /**
@@ -98,24 +98,16 @@ export class TimesheetPeriod {
      *
     * @param {string} eventId Event id
     */
-    public storeIgnoredEvent(eventId: string) {
-        let ignoredEvents = this.ignoredEvents;
-        ignoredEvents.push(eventId);
-        this._localStorage.put(this._uiIgnoredEventsStorageKey, ignoredEvents, dateAdd(new Date(), 'month', 1));
+    public ignoreEvent(eventId: string) {
+        this.ignoredEvents = [...this.ignoredEvents, eventId];
+        this._localStorage.put(this._uiIgnoredEventsStorageKey, this.ignoredEvents, dateAdd(new Date(), 'month', 1));
     }
 
     /**
      * Clear ignored events from browser storage
      */
     public clearIgnoredEvents() {
-        this._localStorage.put(this._uiIgnoredEventsStorageKey, [], dateAdd(new Date(), 'month', 1));
+        this.ignoredEvents = [];
+        this._localStorage.put(this._uiIgnoredEventsStorageKey, this.ignoredEvents, dateAdd(new Date(), 'month', 1));
     }
-
-    /**
-     * Get ignored events
-     */
-    public get ignoredEvents(): string[] {
-        return this._localStorage.get(this._uiIgnoredEventsStorageKey) || [];
-    }
-
 }  

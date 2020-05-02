@@ -1,10 +1,11 @@
-import { endOfWeek, getTimespanString, startOfWeek } from 'helpers';
+import * as helpers from 'helpers';
 import { Calendar, DateRangeType, DayOfWeek } from 'office-ui-fabric-react/lib/Calendar';
 import { Callout, DirectionalHint } from 'office-ui-fabric-react/lib/Callout';
 import { FocusTrapZone } from 'office-ui-fabric-react/lib/FocusTrapZone';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import * as React from 'react';
 import { useState } from 'react';
+import { useHistory } from "react-router-dom";
 import { ACTIONBAR_ICON_PROPS } from '../ACTIONBAR_ICON_PROPS';
 import { CALENDAR_STRINGS } from './CALENDAR_STRINGS';
 import { IWeekPickerProps } from './IWeekPickerProps';
@@ -13,6 +14,7 @@ import { IWeekPickerProps } from './IWeekPickerProps';
  * @category Timesheet
  */
 export const WeekPicker = ({ scope, onChange }: IWeekPickerProps) => {
+    const history = useHistory();
     let [calendar, setCalendar] = useState(null);
 
     return (
@@ -21,7 +23,7 @@ export const WeekPicker = ({ scope, onChange }: IWeekPickerProps) => {
                 <TextField
                     className='c-Timesheet-weekPicker'
                     onClick={event => setCalendar(event.currentTarget)}
-                    value={getTimespanString(scope.startDateTime, scope.endDateTime)}
+                    value={helpers.getTimespanString(scope.startDateTime, scope.endDateTime)}
                     styles={{ field: { color: 'rgb(120, 120, 120)', cursor: 'pointer' }, root: { width: 280, marginTop: 6 } }}
                     readOnly
                     borderless
@@ -40,7 +42,8 @@ export const WeekPicker = ({ scope, onChange }: IWeekPickerProps) => {
                     <FocusTrapZone isClickableOutsideFocusTrap={true}>
                         <Calendar
                             onSelectDate={date => {
-                                onChange({ startDateTime: startOfWeek(date), endDateTime: endOfWeek(date) });
+                                const startDateTime = helpers.startOfWeek(date).toISOString();
+                                history.push(`/timesheet/${startDateTime}`);
                                 setCalendar(null);
                             }}
                             firstDayOfWeek={DayOfWeek.Monday}

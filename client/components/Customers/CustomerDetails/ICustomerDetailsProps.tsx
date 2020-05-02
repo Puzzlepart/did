@@ -1,9 +1,8 @@
 import { ICustomer } from 'interfaces';
-import { ICustomerProps } from '../ICustomerProps';
 
 /**
  * @category Customers
  */
-export interface ICustomerDetailsProps extends ICustomerProps {
+export interface ICustomerDetailsProps  {
     customer: ICustomer;
 }

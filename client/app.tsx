@@ -4,7 +4,7 @@ import { Home } from 'components/Home';
 import { Navigation } from 'components/Navigation';
 import Projects from 'components/Projects';
 import { Reports } from 'components/Reports';
-import { Timesheet } from 'components/Timesheet';
+import Timesheet from 'components/Timesheet';
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -18,7 +18,7 @@ const App = (context: IAppContext) => {
             <div>
                 <Navigation {...context} />
                 <Switch>
-                    <Route exact path='/timesheet'>
+                    <Route path='/timesheet'>
                         <Timesheet />
                     </Route>
                     <Route path='/customers'>
