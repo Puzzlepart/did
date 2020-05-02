@@ -83,7 +83,7 @@ export const Reports = () => {
                         {
                             id: 'EXPORT_TO_EXCEL',
                             key: 'EXPORT_TO_EXCEL',
-                            text: 'Export to Excel',
+                            text: 'Export current view',
                             onClick: onExportExcel,
                             iconProps: { iconName: 'ExcelDocument' },
                             disabled: loading || !!error,
