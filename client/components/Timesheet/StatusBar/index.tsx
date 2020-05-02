@@ -7,7 +7,7 @@ import { Shimmer } from 'office-ui-fabric-react/lib/Shimmer';
 import * as React from 'react';
 import * as format from 'string-format';
 import { IStatusBarProps } from './IStatusBarProps';
-import { TimesheetContext } from '../Timesheet';
+import { TimesheetContext } from '../';
 
 /**
  * @category Timesheet

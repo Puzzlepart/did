@@ -19,8 +19,7 @@ import { TimesheetPeriod } from './TimesheetPeriod';
 import { TimesheetScope } from './TimesheetScope';
 import { TimesheetView } from './types';
 import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD';
-
-export const TimesheetContext = React.createContext<{ selectedPeriod?: TimesheetPeriod, loading?: boolean, scope?: TimesheetScope, periods?: TimesheetPeriod[] }>({});
+import { TimesheetContext } from './TimesheetContext';
 
 export const Timesheet = () => {
     const history = useHistory();

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { AppContext } from '../../app';
+import { AppContext } from '../../AppContext';
 
 export const Navigation = () => {
-    const context = React.useContext(AppContext);
+    const { user } = React.useContext(AppContext);
     return (
         <nav className='navbar navbar-expand-md navbar-dark fixed-top bg-dark'>
             <div className='container'>
@@ -17,24 +17,24 @@ export const Navigation = () => {
                         <li className='nav-item'>
                             <NavLink exact to='/' className='nav-link' activeClassName='active'>Home</NavLink>
                         </li>
-                        <li className='nav-item' hidden={!context.user}>
+                        <li className='nav-item' hidden={!user}>
                             <NavLink to='/timesheet' className='nav-link' activeClassName='active'>Timesheet</NavLink>
                         </li>
-                        <li className='nav-item' hidden={!context.user}>
+                        <li className='nav-item' hidden={!user}>
                             <NavLink to='/customers' className='nav-link' activeClassName='active'>Customers</NavLink>
                         </li>
-                        <li className='nav-item' hidden={!context.user}>
+                        <li className='nav-item' hidden={!user}>
                             <NavLink to='/projects' className='nav-link' activeClassName='active'>Projects</NavLink>
                         </li>
-                        <li className='nav-item' hidden={!context.user}>
+                        <li className='nav-item' hidden={!user}>
                             <NavLink to='/reports' className='nav-link' activeClassName='active'>Reports</NavLink>
                         </li>
-                        <li className='nav-item' hidden={!context.user}>
+                        <li className='nav-item' hidden={!user}>
                             <NavLink to='/admin' className='nav-link' activeClassName='active'>Admin</NavLink>
                         </li>
                     </ul>
                     <ul className="navbar-nav justify-content-end">
-                        {context.user
+                        {user
                             ? (
                                 <li className="nav-item dropdown">
                                     <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
@@ -43,14 +43,14 @@ export const Navigation = () => {
                                     </a>
                                     <div className="dropdown-menu dropdown-menu-right">
                                         <h5 className="dropdown-item-text mb-0">
-                                            {context.user.fullName}
+                                            {user.fullName}
                                         </h5>
                                         <p className="dropdown-item-text text-muted mb-0" style={{ fontSize: 12 }}>
-                                            {context.user.email}
+                                            {user.email}
                                         </p>
                                         <div className="dropdown-divider"></div>
                                         <p className="dropdown-item-text text-muted mb-0" style={{ fontSize: 12 }}>
-                                            {context.user.role} ({context.user.sub})
+                                            {user.role} ({user.sub})
                                 </p>
                                         <div className="dropdown-divider"></div>
                                         <a href="/auth/signout" className="dropdown-item" style={{ fontSize: 12 }}>Sign out of Office 365</a>

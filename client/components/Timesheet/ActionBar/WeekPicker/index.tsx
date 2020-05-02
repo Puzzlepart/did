@@ -1,4 +1,4 @@
-import { TimesheetContext } from 'components/Timesheet/Timesheet';
+import { TimesheetContext } from 'components/Timesheet';
 import * as helpers from 'helpers';
 import { Calendar, DateRangeType, DayOfWeek } from 'office-ui-fabric-react/lib/Calendar';
 import { Callout, DirectionalHint } from 'office-ui-fabric-react/lib/Callout';
