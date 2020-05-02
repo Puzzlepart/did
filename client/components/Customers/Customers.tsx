@@ -19,7 +19,7 @@ import GET_CUSTOMERS, { IGetCustomersData } from './GET_CUSTOMERS';
 export const Customers = () => {
     const params = useParams<{ key: string }>();
     const [selected, setSelected] = React.useState<ICustomer>(null);
-    const { loading, error, data, refetch } = useQuery<IGetCustomersData>(GET_CUSTOMERS, { fetchPolicy: 'cache-first' });
+    const { loading, error, data } = useQuery<IGetCustomersData>(GET_CUSTOMERS, { fetchPolicy: 'cache-first' });
 
     const customers = value<ICustomer[]>(data, 'customers', []);
 
@@ -36,14 +36,16 @@ export const Customers = () => {
                 {error
                     ? <MessageBar messageBarType={MessageBarType.error}>{resource('COMMON.GENERIC_ERROR_TEXT')}</MessageBar>
                     : (
-                        <CustomerList
-                            enableShimmer={loading}
-                            items={customers}
-                            searchBox={{ placeholder: resource('COMMON.SEARCH_PLACEHOLDER') }}
-                            selection={{ mode: SelectionMode.single, onChanged: selected => setSelected(selected) }}
-                            height={selected && 400} />
+                        <>
+                            <CustomerList
+                                enableShimmer={loading}
+                                items={customers}
+                                searchBox={{ placeholder: resource('COMMON.SEARCH_PLACEHOLDER') }}
+                                selection={{ mode: SelectionMode.single, onChanged: selected => setSelected(selected) }}
+                                height={selected && 400} />
+                            {selected && <CustomerDetails customer={selected} />}
+                        </>
                     )}
-                {selected && <CustomerDetails customer={selected} />}
             </PivotItem>
             <PivotItem itemID='new' itemKey='new' headerText={resource('COMMON.CREATE_NEW_TEXT')} itemIcon='AddTo'>
                 <CreateCustomerForm />

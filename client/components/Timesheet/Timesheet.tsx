@@ -6,7 +6,7 @@ import * as helpers from 'helpers';
 import resource from 'i18n';
 import { IProject, ITimeEntry } from 'interfaces';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
-import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
+import { ProgressIndicator, IProgressIndicatorProps } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import * as React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import _ from 'underscore';
@@ -24,7 +24,7 @@ import { TimesheetContext } from './TimesheetContext';
 export const Timesheet = () => {
     const history = useHistory();
     const params = useParams<{ startDateTime: string, view: TimesheetView }>();
-    const [loading, setLoading] = React.useState<boolean>(true);
+    const [loading, setLoading] = React.useState<IProgressIndicatorProps>({});
     const [scope, setScope] = React.useState<TimesheetScope>(new TimesheetScope());
     const [periods, setPeriods] = React.useState<TimesheetPeriod[]>([]);
     const [selectedPeriodId, setSelectedPeriodId] = React.useState<string>();
@@ -40,7 +40,7 @@ export const Timesheet = () => {
     const [unconfirmPeriod] = useMutation<{ startDateTime: string, endDateTime: string }>(UNCONFIRM_PERIOD);
 
     React.useEffect(() => {
-        setLoading(timesheetQuery.loading);
+        setLoading(timesheetQuery.loading ? { label: 'Loading events', description: 'Please wait...' } : null);
         if (timesheetQuery.data) setPeriods(timesheetQuery.data.timesheet.map(period => new TimesheetPeriod(period)));
     }, [timesheetQuery]);
 
@@ -50,17 +50,15 @@ export const Timesheet = () => {
     React.useEffect(() => setScope(new TimesheetScope(params.startDateTime)), [params.startDateTime]);
 
     const onConfirmPeriod = async () => {
-        setLoading(true);
-        //TODO: Error handling
-        //const { data } = await confirmPeriod({ variables: { ...selectedPeriod.scope, entries: selectedPeriod.matchedEvents } });
+        setLoading({ label: 'Confirming period', description: 'Hang on a minute...' });
+        //TODO: Add error handling
         await confirmPeriod({ variables: { ...selectedPeriod.scope, entries: selectedPeriod.matchedEvents } });
         timesheetQuery.refetch();
     }
 
     const onUnconfirmPeriod = async () => {
-        setLoading(true);
-        //TODO: Error handling
-        //const { data } = await unconfirmPeriod({ variables: selectedPeriod.scope });
+        setLoading({ label: 'Unconfirming period', description: 'Hang on a minute...' });
+        //TODO: Add error handling
         await unconfirmPeriod({ variables: selectedPeriod.scope });
         timesheetQuery.refetch();
     }
@@ -86,7 +84,7 @@ export const Timesheet = () => {
     }
 
     return (
-        <TimesheetContext.Provider value={{ periods, selectedPeriod, scope, loading }}>
+        <TimesheetContext.Provider value={{ periods, selectedPeriod, scope, loading: !!loading }}>
             <div className='c-Timesheet'>
                 <ActionBar
                     onChangePeriod={periodId => setSelectedPeriodId(periodId)}
@@ -96,9 +94,9 @@ export const Timesheet = () => {
                     <PivotItem itemKey='overview' headerText={resource('TIMESHEET.OVERVIEW_HEADER_TEXT')} itemIcon='CalendarWeek'>
                         <div className='c-Timesheet-overview'>
                             <StatusBar onClearIgnores={onClearIgnores} />
-                            {loading && <ProgressIndicator />}
+                            {loading && <ProgressIndicator {...loading} />}
                             <EventList
-                                enableShimmer={loading}
+                                enableShimmer={!!loading}
                                 events={selectedPeriod.events.filter(e => e.durationMinutes > 0)}
                                 showEmptyDays={periods.length === 1}
                                 dateFormat={'HH:mm'}
