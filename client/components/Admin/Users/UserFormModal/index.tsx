@@ -36,9 +36,9 @@ export const UserFormModal = (props: IUserFormModalProps) => {
     return (
         <Modal
             {...props.modal}
-            containerClassName='c-AdminView-userFormModal'
+            containerClassName='c-Admin-userFormModal'
             isOpen={true}>
-            <div className='c-AdminView-userFormModal-title' hidden={!props.title}>{props.title}</div>
+            <div className='c-Admin-userFormModal-title' hidden={!props.title}>{props.title}</div>
             <TextField
                 label='ID'
                 description='ID of the user in Azure Active Directory.'
@@ -62,7 +62,7 @@ export const UserFormModal = (props: IUserFormModalProps) => {
                 defaultSelectedKey={user.role}
                 onChange={(_, opt) => setUser({ ...user, role: opt.key.toString() })} />
             <PrimaryButton
-                className='c-AdminView-userFormModal-saveBtn'
+                className='c-Admin-userFormModal-saveBtn'
                 text='Save'
                 disabled={!isFormValid()}
                 onClick={onSave} />
