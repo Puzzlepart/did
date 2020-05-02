@@ -17,9 +17,6 @@ export class TimesheetPeriod {
     private _uiMatchedEventsStorageKey: string;
     private _uiIgnoredEventsStorageKey: string;
 
-
-
-
     constructor(private _period?: Partial<TimesheetPeriod>) {
         if (_period) {
             this.id = _period.id;
@@ -108,5 +105,19 @@ export class TimesheetPeriod {
     public clearIgnoredEvents() {
         this.ignoredEvents = [];
         this._localStorage.put(this._uiIgnoredEventsStorageKey, this.ignoredEvents, dateAdd(new Date(), 'month', 1));
+    }
+
+    /**
+     * Get matched events with properties {id}, {projectId} and {isManualMatch}
+     */
+    public get matchedEvents() {
+        const events = [...this.events]
+            .filter(event => !!event.project)
+            .map(event => ({
+                id: event.id,
+                projectId: event.project.id,
+                isManualMatch: event.isManualMatch,
+            }));
+        return events;
     }
 }  

@@ -36,7 +36,7 @@ export const Timesheet = () => {
         fetchPolicy: 'network-only',
         skip: false
     });
-    const [] = useMutation(CONFIRM_PERIOD);
+    const [confirmPeriod] = useMutation(CONFIRM_PERIOD);
     const [] = useMutation(UNCONFIRM_PERIOD);
 
     React.useEffect(() => {
@@ -48,8 +48,8 @@ export const Timesheet = () => {
 
     React.useEffect(() => setScope(new TimesheetScope(params.startDateTime)), [params.startDateTime]);
 
-    const onConfirmPeriod = () => {
-        //TODO: Mutation
+    const onConfirmPeriod = async () => {
+        await confirmPeriod({ variables: selectedPeriod.matchedEvents });
     }
 
     const onUnconfirmPeriod = () => {
