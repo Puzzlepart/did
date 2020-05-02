@@ -8,6 +8,6 @@ module.exports = session({
     store: store,
     secret: process.env.SESSION_SIGNING_KEY,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: !!process.env.SESSION_SAVE_UNINITIALIZED,
     rolling: true,
 });
