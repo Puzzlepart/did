@@ -33,29 +33,34 @@ export const Navigation = (context: IAppContext) => {
                         </li>
                     </ul>
                     <ul className="navbar-nav justify-content-end">
-                        <li className="nav-item dropdown" hidden={!context.user}>
-                            <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="true" aria-expanded="false">
-                                <i className="far fa-user-circle fa-lg rounded-circle align-self-center mr-2" style={{ width: 32 }}></i>
-                            </a>
-                            <div className="dropdown-menu dropdown-menu-right">
-                                <h5 className="dropdown-item-text mb-0">
-                                    {context.user.fullName}
-                                </h5>
-                                <p className="dropdown-item-text text-muted mb-0" style={{ fontSize: 12 }}>
-                                    {context.user.email}
+                        {context.user
+                            ? (
+                                <li className="nav-item dropdown">
+                                    <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <i className="far fa-user-circle fa-lg rounded-circle align-self-center mr-2" style={{ width: 32 }}></i>
+                                    </a>
+                                    <div className="dropdown-menu dropdown-menu-right">
+                                        <h5 className="dropdown-item-text mb-0">
+                                            {context.user.fullName}
+                                        </h5>
+                                        <p className="dropdown-item-text text-muted mb-0" style={{ fontSize: 12 }}>
+                                            {context.user.email}
+                                        </p>
+                                        <div className="dropdown-divider"></div>
+                                        <p className="dropdown-item-text text-muted mb-0" style={{ fontSize: 12 }}>
+                                            {context.user.role} ({context.user.sub})
                                 </p>
-                                <div className="dropdown-divider"></div>
-                                <p className="dropdown-item-text text-muted mb-0" style={{ fontSize: 12 }}>
-                                    {context.user.role} ({context.user.sub})
-                                </p>
-                                <div className="dropdown-divider"></div>
-                                <a href="/auth/signout" className="dropdown-item" style={{ fontSize: 12 }}>Sign out of Office 365</a>
-                            </div>
-                        </li>
-                        <li className="nav-item" hidden={!!context.user}>
-                            <a href="/auth/signin" className="nav-link"><img src="/images/ms-symbollockup_signin_dark_short.svg" /></a>
-                        </li>
+                                        <div className="dropdown-divider"></div>
+                                        <a href="/auth/signout" className="dropdown-item" style={{ fontSize: 12 }}>Sign out of Office 365</a>
+                                    </div>
+                                </li>
+                            )
+                            : (
+                                <li className="nav-item">
+                                    <a href="/auth/signin" className="nav-link"><img src="/images/ms-symbollockup_signin_dark_short.svg" /></a>
+                                </li>
+                            )}
                     </ul>
                 </div>
             </div>
