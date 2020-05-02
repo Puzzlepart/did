@@ -3,7 +3,10 @@ export { ProjectList, GET_PROJECTS } from './Projects';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import * as React from 'react';
 
-export default () => {
+/**
+ * @ignore
+ */
+const _ = () => {
     let match = useRouteMatch();
     return (
         <Switch>
@@ -16,3 +19,7 @@ export default () => {
         </Switch>
     );
 }
+
+_['displayName'] = 'Projects';
+
+export default _;
