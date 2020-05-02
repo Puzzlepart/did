@@ -15,7 +15,8 @@
         "buildClient": "tsc --build",
         "packageStyles": "node-sass --include-path scss scss/main.scss public/css/main.css",
         "packageClient": "tsc --build && webpack --config webpack.config.js",
-        "makeDoc": "typedoc --options typedoc.json"
+        "makeDoc": "typedoc --options typedoc.json",
+        "test": "mocha tests --server --exit"
     },
     "dependencies": {
         "@apollo/react-hooks": "3.1.3",
@@ -49,6 +50,7 @@
         "autosuggest-highlight": "3.1.1",
         "azure-storage": "2.10.3",
         "babel-loader": "8.1.0",
+        "chai": "4.2.0",
         "chalk": "4.0.0",
         "concurrently": "5.1.0",
         "connect-azuretables": "1.0.20",
@@ -73,6 +75,7 @@
         "lodash": "4.17.15",
         "loglevel": "1.6.7",
         "loglevel-plugin-prefix": "0.8.4",
+        "mocha": "7.1.2",
         "moment": "2.24.0",
         "morgan": "1.10.0",
         "node-fetch": "2.6.0",
@@ -93,6 +96,7 @@
         "string-format": "2.0.0",
         "string-similarity": "4.0.1",
         "string-strip-html": "4.3.20",
+        "supertest": "4.0.2",
         "twix": "1.3.0",
         "typescript": "3.8.3",
         "underscore": "1.9.1",

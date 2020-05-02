@@ -33,3 +33,5 @@ function onError(error) {
 function onListening() {
   console.log('\x1b[32m', `[Server listening on port ${port}]`);
 }
+
+module.exports = server;
