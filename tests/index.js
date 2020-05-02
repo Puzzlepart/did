@@ -12,14 +12,13 @@ if (server) {
             server.close();
         });
         it('responds to /', (done) => {
-            request(server)
-                .get('/')
-                .expect(200, done);
+            request(server).get('/').expect(200, done);
         });
         it('/graphql gives 302 Not Found', (done) => {
-            request(server)
-                .get('/graphql')
-                .expect(302, done);
+            request(server).get('/graphql').expect(302, done);
+        });
+        it('/timesheet gives 403 Forbidden', (done) => {
+            request(server).get('/timesheet').expect(403, done);
         });
     });
 }
