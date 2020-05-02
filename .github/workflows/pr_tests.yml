@@ -31,3 +31,14 @@ jobs:
           NODE_ENV: production
           CI: true
           AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_DEV_CONNECTION_STRING }}
+          OAUTH_APP_ID: 00000000-0000-0000-0000-000000000000
+          OAUTH_APP_PASSWORD: 00000000-0000-0000-0000-000000000000
+          OAUTH_REDIRECT_URI: http://server.js
+          OAUTH_AUTHORITY: https://login.microsoftonline.com/common
+          OAUTH_ID_METADATA: /v2.0/.well-known/openid-configuration
+          OAUTH_AUTHORIZE_ENDPOINT: /oauth2/v2.0/authorize
+          OAUTH_TOKEN_ENDPOINT: /oauth2/v2.0/token
+          SESSION_SIGNING_KEY: 00000000-0000-0000-0000-000000000000
+          OAUTH_RESPONSE_TYPE: code id_token
+          OAUTH_RESPONSE_MODE: form_post
+          OAUTH_SIGNIN_PROMPT: login
