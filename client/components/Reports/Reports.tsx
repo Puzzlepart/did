@@ -9,11 +9,9 @@ import { useState } from 'react';
 import * as format from 'string-format';
 import { humanize } from 'underscore.string';
 import * as excelUtils from 'utils/exportExcel';
-import { generateColumn } from 'utils/generateColumn';
-import { IReportsProps } from './IReportsProps';
+import { generateColumn as col } from 'utils/generateColumn';
 import { REPORTS_FILTERS } from './REPORTS_FILTERS';
 import TIME_ENTRIES from './TIME_ENTRIES';
-
 /**
  * Get columns
  * 
@@ -25,13 +23,13 @@ import TIME_ENTRIES from './TIME_ENTRIES';
 function getColumns(entry: Object = {}, skip: string[]): IColumn[] {
     return Object.keys(entry)
         .filter(f => skip.indexOf(f) === -1)
-        .map(fieldName => generateColumn(fieldName, humanize(fieldName), { minWidth: 60, maxWidth: 100 }));;
+        .map(fieldName => col(fieldName, humanize(fieldName), { minWidth: 60, maxWidth: 100 }));;
 }
 
 /**
  * @category Reports
  */
-export const Reports = ({ skip = ['id', '__typename', 'monthNumber'], exportFileNameTemplate = 'ApprovedTimeEntries-{0}.xlsx' }: IReportsProps) => {
+export const Reports = () => {
     const [filterPanelOpen, setFilterPanelOpen] = useState<boolean>(undefined);
     const [subset, setSubset] = useState<any[]>(undefined);
 
@@ -43,24 +41,16 @@ export const Reports = ({ skip = ['id', '__typename', 'monthNumber'], exportFile
         month: getMonthName(entry.monthNumber - 1),
     }));
 
-    const columns = getColumns(timeentries[0], skip);
+    const columns = getColumns(timeentries[0], ['id', '__typename', 'monthNumber']);
 
-    /**
-     * On export
-     * 
-     * @param {React.MouseEvent} event Event
-     */
-    const onExport = (event: React.MouseEvent<any>) => {
-        let items: any[];
-        switch (event.currentTarget.id) {
-            case 'EXPORT_TO_EXCEL_ALL': items = timeentries;
-                break;
-            case 'EXPORT_SUBSET_TO_EXCEL': items = subset;
-                break;
-        }
+    const onExportExcel = () => {
         excelUtils.exportExcel(
-            items,
-            { columns, skip, fileName: format(exportFileNameTemplate, new Date().getTime()) },
+            subset || timeentries,
+            {
+                columns,
+                skip: ['id', '__typename', 'monthNumber'],
+                fileName: format('TimeEntries-{0}.xlsx', new Date().toDateString().split(" ").join("-")),
+            }
         );
     }
 
@@ -80,7 +70,7 @@ export const Reports = ({ skip = ['id', '__typename', 'monthNumber'], exportFile
     }
 
 
-    if (loading) return <ProgressIndicator />;
+    if (loading) return <ProgressIndicator label='Loading time entries' description='Please wait...' />;
 
     return (
         <div>
@@ -91,21 +81,13 @@ export const Reports = ({ skip = ['id', '__typename', 'monthNumber'], exportFile
                 commandBar={{
                     items: [
                         {
-                            id: 'EXPORT_TO_EXCEL_ALL',
-                            key: 'EXPORT_TO_EXCEL_ALL',
-                            text: 'Export all to Excel',
-                            onClick: onExport,
+                            id: 'EXPORT_TO_EXCEL',
+                            key: 'EXPORT_TO_EXCEL',
+                            text: 'Export to Excel',
+                            onClick: onExportExcel,
                             iconProps: { iconName: 'ExcelDocument' },
                             disabled: loading || !!error,
                         },
-                        {
-                            id: 'EXPORT_SUBSET_TO_EXCEL',
-                            key: 'EXPORT_SUBSET_TO_EXCEL',
-                            text: 'Export subset to Excel',
-                            onClick: onExport,
-                            iconProps: { iconName: 'ExcelDocument' },
-                            disabled: loading || !!error || subset === undefined || value(subset, 'length', 0) === value(timeentries, 'length', 0),
-                        }
                     ],
                     farItems: [
                         {
