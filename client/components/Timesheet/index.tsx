@@ -6,7 +6,10 @@ export default () => {
     let match = useRouteMatch();
     return (
         <Switch>
-            <Route path={`${match.path}/:key`}>
+            <Route path={`${match.path}/:view/:startDateTime`}>
+                <Timesheet />
+            </Route>
+            <Route path={`${match.path}/:startDateTime`}>
                 <Timesheet />
             </Route>
             <Route path={match.path}>

@@ -1,5 +1,5 @@
-import * as moment from 'moment';
 import { TimesheetPeriod } from './TimesheetPeriod';
+import { TimesheetScope } from './TimesheetScope';
 
 /**
  * @category Timesheet
@@ -30,7 +30,7 @@ export interface ITimesheetState {
     /**
      * Scope
      */
-    scope: ITimesheetScope;
+    scope: TimesheetScope;
 
     /**
      * Periods
@@ -41,12 +41,4 @@ export interface ITimesheetState {
      * Selected period id
      */
     selectedPeriodId?: string;
-}
-
-/**
- * @category Timesheet
- */
-export interface ITimesheetScope {
-    startDateTime?: moment.Moment;
-    endDateTime?: moment.Moment;
 }
