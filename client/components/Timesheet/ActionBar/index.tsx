@@ -1,7 +1,7 @@
 import resource from 'i18n';
-import * as moment from 'moment';
+import _ from 'underscore';
 import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
-import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
+import { ContextualMenuItemType, IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { PrimaryButton, DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import * as React from 'react';
 import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS';
@@ -34,10 +34,7 @@ export const ActionBar = (props: IActionBarProps) => {
             itemType: ContextualMenuItemType.Normal,
             iconOnly: true,
             iconProps: { iconName: 'Back', ...ACTIONBAR_ICON_PROPS },
-            onClick: () => {
-                let { iso } = scope.add(1, 'week');
-                history.push(`/timesheet/${iso.startDateTime}`);
-            },
+            onClick: () => history.push(`/timesheet/${scope.add(-1, 'week').iso.startDateTime}`),
             title: resource('TIMESHEET.COMMANDBAR_PREV_WEEK_TEXT')
         },
         {
@@ -45,10 +42,7 @@ export const ActionBar = (props: IActionBarProps) => {
             itemType: ContextualMenuItemType.Normal,
             iconOnly: true,
             iconProps: { iconName: 'Forward', ...ACTIONBAR_ICON_PROPS },
-            onClick: () => {
-                let { iso } = scope.add(-1, 'week');
-                history.push(`/timesheet/${iso.startDateTime}`);
-            },
+            onClick: () => history.push(`/timesheet/${scope.add(1, 'week').iso.startDateTime}`),
             title: resource('TIMESHEET.COMMANDBAR_NEXT_WEEK_TEXT'),
         },
         {
@@ -56,20 +50,32 @@ export const ActionBar = (props: IActionBarProps) => {
             itemType: ContextualMenuItemType.Normal,
             onRender: () => <WeekPicker />,
         },
-        ...periods.map((period, idx) => ({
-            key: `PERIOD_${idx}`,
-            itemType: ContextualMenuItemType.Normal,
-            onRender: () => (
-                <DefaultButton
-                    hidden={loading}
-                    iconProps={{ iconName: 'DateTime' }}
-                    onClick={_ => props.onChangePeriod(period.id)}
-                    text={period.name}
-                    styles={{ root: { height: 44, marginLeft: 4 } }}
-                    checked={period.id === selectedPeriod.id}
-                    disabled={periods.length === 1} />
-            ),
-        })),
+        ...(periods.length === 1
+            ? [
+                {
+                    key: `PERIOD_0`,
+                    itemType: ContextualMenuItemType.Header,
+                    onRender: () => (
+                        <span style={{ paddingTop: 12 }}>
+                            {_.first(periods).name}
+                        </span>
+                    ),
+                } as IContextualMenuItem,
+            ]
+            :
+            periods.map((period, idx) => ({
+                key: `PERIOD_${idx}`,
+                itemType: ContextualMenuItemType.Normal,
+                onRender: () => (
+                    <DefaultButton
+                        hidden={loading}
+                        iconProps={{ iconName: 'DateTime' }}
+                        onClick={_ => props.onChangePeriod(period.id)}
+                        text={period.name}
+                        styles={{ root: { height: 44, marginLeft: 4 } }}
+                        checked={period.id === selectedPeriod.id} />
+                ),
+            })))
     ];
     const farItems = [
         {

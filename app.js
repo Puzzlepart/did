@@ -1,5 +1,6 @@
 require('dotenv').config();
-const os = require("os");
+const _ = require('underscore');
+const log = require('debug')('app');
 const createError = require('http-errors');
 const express = require('express');
 const favicon = require('express-favicon');
@@ -13,10 +14,11 @@ const hbs = require('hbs');
 const app = express();
 
 app.use((req, res, next) => {
-  if (req.get('host').indexOf('localhost') !== -1 && process.env.AZURE_STORAGE_CONNECTION_STRING.indexOf('dev') === -1) {
+  const host = req.get('host');
+  if (host.indexOf('localhost') !== -1 && process.env.AZURE_STORAGE_CONNECTION_STRING.indexOf('dev') === -1) {
     res.render('error', {
       error_header: 'Development error',
-      error_message: `Running the server on ${req.get('host')} requires usage of dev storage.`,
+      error_message: `Running the server on ${host} requires usage of dev storage.`,
     });
   }
   next();
@@ -53,14 +55,7 @@ app.use(passport.session());
 //#endregion
 
 //#region Storing user for hbs
-app.use((req, res, next) => {
-  if (req.user && req.user.data) {
-    res.locals.user = {
-      ...req.user.profile,
-      role: req.user.data.role,
-      isAdmin: req.user.data.role === 'Admin',
-    };
-  }
+app.use((_req, res, next) => {
   res.locals.package = require('./package.json');
   next();
 });
