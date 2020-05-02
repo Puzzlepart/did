@@ -1,4 +1,5 @@
 require('dotenv').config();
+const _ = require('underscore');
 const log = require('debug')('app');
 const createError = require('http-errors');
 const express = require('express');
@@ -13,7 +14,11 @@ const hbs = require('hbs');
 const app = express();
 
 app.use((req, res, next) => {
-  log(req.get('host').split('-'))
+  try {
+    log(req.get('host').split('.')[0].split('-'))
+  } catch (error) {
+
+  }
   if (req.get('host').indexOf('localhost') !== -1 && process.env.AZURE_STORAGE_CONNECTION_STRING.indexOf('dev') === -1) {
     res.render('error', {
       error_header: 'Development error',
