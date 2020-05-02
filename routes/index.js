@@ -3,8 +3,7 @@ const express = require('express');
 const router = express.Router();
 const _ = require('underscore');
 
-
-router.get('/', (req, res) => {
+function getContext(req) {
   const host = req.get('host');
   let context = { info: { version } };
   if (req.user) {
@@ -17,7 +16,13 @@ router.get('/', (req, res) => {
   } else {
     context.info.branch = sub[1] || null;
   }
-  res.locals.version = version;
+  return context;
+}
+
+
+router.get('/', (req, res) => {
+  const context = getContext(req);
+  res.locals.version = context.info.version;
   res.render('index', { context: JSON.stringify(context) });
 });
 
