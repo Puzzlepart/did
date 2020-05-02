@@ -53,10 +53,13 @@ export const Navigation = () => {
                                         <div className="dropdown-divider"></div>
                                         <a href="/auth/signout" className="dropdown-item" style={{ fontSize: 12 }}>Sign out of Office 365</a>
                                         {info && (
-                                            <>
+                                            <div>
                                                 <div className="dropdown-divider"></div>
-                                                <a href={`https://github.com/Puzzlepart/did365/pull/${info.branch}`} className="dropdown-item" style={{ fontSize: 12 }}>#{info.branch}</a>
-                                            </>
+                                                {info.branch
+                                                    ? <a href={`https://github.com/Puzzlepart/did365/pull/${info.branch}`} className="dropdown-item" style={{ fontSize: 12 }}>#{info.branch}</a>
+                                                    : <span className="dropdown-item" style={{ fontSize: 9 }}>v{info.version}</span>
+                                                }
+                                            </div>
                                         )}
                                     </div>
                                 </li>
