@@ -11,7 +11,7 @@ import * as format from 'string-format';
 import { humanize } from 'underscore.string';
 import * as excelUtils from 'utils/exportExcel';
 import { generateColumn } from 'utils/generateColumn';
-import GET_CONFIRMED_TIME_ENTRIES from './GET_CONFIRMED_TIME_ENTRIES';
+import TIME_ENTRIES from './TIME_ENTRIES';
 import { IReportsProps } from './IReportsProps';
 import { REPORTS_FILTERS } from './REPORTS_FILTERS';
 
@@ -30,23 +30,21 @@ function getColumns(entry: Object = {}, skip: string[]): IColumn[] {
 }
 
 /**
- * Consists of a DetailsList with all confirmed time entries and an export to excel button
- * 
  * @category Reports
  */
 export const Reports = ({ skip = ['id', '__typename', 'monthNumber'], exportFileNameTemplate = 'ApprovedTimeEntries-{0}.xlsx' }: IReportsProps) => {
     const [filterPanelOpen, setFilterPanelOpen] = useState<boolean>(undefined);
     const [subset, setSubset] = useState<any[]>(undefined);
 
-    const { loading, error, data } = useQuery(GET_CONFIRMED_TIME_ENTRIES, { fetchPolicy: 'cache-first' });
+    const { loading, error, data } = useQuery<{ timeentries: any[] }>(TIME_ENTRIES, { fetchPolicy: 'cache-first' });
 
-    let entries = value<any[]>(data, 'result.entries', []).map(entry => ({
+    const timeentries = (data ? data.timeentries : []).map(entry => ({
         ...entry,
         customer: value(entry, 'customer.name', ''),
         month: getMonthName(entry.monthNumber - 1),
     }));
 
-    const columns = getColumns(entries[0], skip);
+    const columns = getColumns(timeentries[0], skip);
 
     /**
      * On export
@@ -56,7 +54,7 @@ export const Reports = ({ skip = ['id', '__typename', 'monthNumber'], exportFile
     const onExport = (event: React.MouseEvent<any>) => {
         let items: any[];
         switch (event.currentTarget.id) {
-            case 'EXPORT_TO_EXCEL_ALL': items = entries;
+            case 'EXPORT_TO_EXCEL_ALL': items = timeentries;
                 break;
             case 'EXPORT_SUBSET_TO_EXCEL': items = subset;
                 break;
@@ -73,7 +71,7 @@ export const Reports = ({ skip = ['id', '__typename', 'monthNumber'], exportFile
      * @param {IFilter[]} filters 
      */
     const onFilterUpdated = (filters: IFilter[]) => {
-        let _entries = entries.filter(entry => {
+        let _entries = timeentries.filter(entry => {
             return filters.filter(f => {
                 let selectedKeys = f.selected.map(s => s.key);
                 return selectedKeys.indexOf(value(entry, f.key, '')) !== -1;
@@ -88,7 +86,7 @@ export const Reports = ({ skip = ['id', '__typename', 'monthNumber'], exportFile
     return (
         <div>
             <CommandBar
-                hidden={entries.length === 0}
+                hidden={timeentries.length === 0}
                 styles={{ root: { margin: '10px 0 10px 0', padding: 0 } }}
                 items={[
                     {
@@ -105,7 +103,7 @@ export const Reports = ({ skip = ['id', '__typename', 'monthNumber'], exportFile
                         text: 'Export subset to Excel',
                         onClick: onExport,
                         iconProps: { iconName: 'ExcelDocument' },
-                        disabled: loading || !!error || subset === undefined || value(subset, 'length', 0) === value(entries, 'length', 0),
+                        disabled: loading || !!error || subset === undefined || value(subset, 'length', 0) === value(timeentries, 'length', 0),
                     }
                 ]}
                 farItems={[{
@@ -115,14 +113,14 @@ export const Reports = ({ skip = ['id', '__typename', 'monthNumber'], exportFile
                     onClick: () => setFilterPanelOpen(true),
                 }]} />
             <List
-                items={subset || entries}
+                items={subset || timeentries}
                 columns={columns}
                 enableShimmer={loading} />
-            <UserMessage hidden={entries.length > 0 || loading} text={`There's no confirmed time entries at this time.`} />
+            <UserMessage hidden={timeentries.length > 0 || loading} text={`There's no confirmed time entries at this time.`} />
             <FilterPanel
                 isOpen={filterPanelOpen}
                 filters={REPORTS_FILTERS}
-                entries={entries}
+                entries={timeentries}
                 onDismiss={() => setFilterPanelOpen(false)}
                 onFilterUpdated={onFilterUpdated} />
         </div>
