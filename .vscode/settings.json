@@ -3,7 +3,6 @@
         "pnpm-lock.yaml": true,
         "node_modules": true,
         "lib": true,
-        "bin": true,
         "client": false,
         "config": false,
         "public": false,

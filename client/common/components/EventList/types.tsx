@@ -7,7 +7,7 @@ import { IProjectColumnProps } from './ProjectColumn/types';
 /**
  * @category EventList
  */
-export interface IEventListProps {
+export interface IEventListProps extends React.HTMLProps<HTMLDivElement> {
     /**
      * List of events
      */

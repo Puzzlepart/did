@@ -15,7 +15,7 @@ let EventList = (props: IEventListProps) => {
     ];
 
     return (
-        <div style={{ marginBottom: 250 }}>
+        <div style={{ marginBottom: 250 }} hidden={props.hidden}>
             <List
                 enableShimmer={props.enableShimmer}
                 columns={columns}

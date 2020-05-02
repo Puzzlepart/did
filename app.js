@@ -1,4 +1,5 @@
 require('dotenv').config();
+const os = require("os");
 const createError = require('http-errors');
 const express = require('express');
 const favicon = require('express-favicon');
@@ -10,6 +11,16 @@ const passport = require('./middleware/passport');
 const isAuthenticated = require('./middleware/passport/isAuthenticated');
 const hbs = require('hbs');
 const app = express();
+
+app.use((req, res, next) => {
+  if (req.get('host').indexOf('localhost') !== -1 && process.env.AZURE_STORAGE_CONNECTION_STRING.indexOf('dev') === -1) {
+    res.render('error', {
+      error_header: 'Development error',
+      error_message: `Running the server on ${req.get('host')} requires usage of dev storage.`,
+    });
+  }
+  next();
+});
 
 app.use(require('./middleware/helmet'));
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
