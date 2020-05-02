@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { AppContext } from '../../AppContext';
 
 export const Navigation = () => {
-    const { user } = React.useContext(AppContext);
+    const { user, info } = React.useContext(AppContext);
     return (
         <nav className='navbar navbar-expand-md navbar-dark fixed-top bg-dark'>
             <div className='container'>
@@ -49,11 +49,15 @@ export const Navigation = () => {
                                             {user.email}
                                         </p>
                                         <div className="dropdown-divider"></div>
-                                        <p className="dropdown-item-text text-muted mb-0" style={{ fontSize: 12 }}>
-                                            {user.role} ({user.sub})
-                                </p>
+                                        <p className="dropdown-item-text text-muted mb-0" style={{ fontSize: 12 }}>{user.role} ({user.sub})</p>
                                         <div className="dropdown-divider"></div>
                                         <a href="/auth/signout" className="dropdown-item" style={{ fontSize: 12 }}>Sign out of Office 365</a>
+                                        {info && (
+                                            <>
+                                                <div className="dropdown-divider"></div>
+                                                <a href={`https://github.com/Puzzlepart/did365/pull/${info.branch}`} className="dropdown-item" style={{ fontSize: 12 }}>#{info.branch}</a>
+                                            </>
+                                        )}
                                     </div>
                                 </li>
                             )
