@@ -70,7 +70,7 @@ export const Reports = () => {
     }
 
 
-    if (loading) return <ProgressIndicator label='Loading time entries' description='Please wait...' />;
+    if (loading) return <ProgressIndicator label={'Generating report'} description={`To give you the freshest results, we're generating a report from the latest data...`} />;
 
     return (
         <div>
