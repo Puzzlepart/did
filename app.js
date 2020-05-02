@@ -54,13 +54,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 //#endregion
 
-//#region Storing user for hbs
-app.use((_req, res, next) => {
-  res.locals.package = require('./package.json');
-  next();
-});
-//#endregion
-
 //#region Routes/middleware
 app.use('/auth', require('./routes/auth'));
 app.use('/graphql', isAuthenticated, require('./middleware/graphql'));
