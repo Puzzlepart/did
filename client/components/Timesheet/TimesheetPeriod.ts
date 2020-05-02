@@ -1,6 +1,7 @@
 import { ITimeEntry } from 'interfaces/ITimeEntry';
 import { ITypedHash, IPnPClientStore, dateAdd, PnPClientStorage } from '@pnp/common';
 import { IProject } from 'interfaces/IProject';
+import { TimesheetScope } from './TimesheetScope';
 
 /**
  * @category Timesheet
@@ -119,5 +120,12 @@ export class TimesheetPeriod {
                 isManualMatch: event.isManualMatch,
             }));
         return events;
+    }
+
+    public get scope() {
+        return {
+            startDateTime: this.startDateTime,
+            endDateTime: this.endDateTime,
+        }
     }
 }  

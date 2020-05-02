@@ -111,20 +111,19 @@ async function timesheet(_obj, variables, context) {
     return periods;
 };
 
-async function confirmPeriod(_obj, variables, context) {
-    if (!variables.entries || variables.entries.length === 0) {
-        return {
-            success: false,
-            error: 'No entries to confirm for the specified period.',
-        };
+async function confirmPeriod(_obj, { entries, startDateTime, endDateTime }, { user, tenantId, services }) {
+    console.log(entries);
+    if (!entries || entries.length === 0) {
+        console.log('hello');
+        return { success: false, error: { message: 'No entries to confirm for the specified period.' } };
     }
     try {
-        const calendarView = await context.services.graph.getEvents(variables.startDateTime, variables.endDateTime);
-        let batch = variables.entries.reduce((b, entry) => {
+        const calendarView = await services.graph.getEvents(startDateTime, endDateTime);
+        let batch = entries.reduce((b, entry) => {
             const event = calendarView.filter(e => e.id === entry.id)[0];
             if (!event) return;
             b.insertEntity({
-                PartitionKey: entGen.String(context.tenantId),
+                PartitionKey: entGen.String(tenantId),
                 RowKey: entGen.String(uuid()),
                 EventId: entGen.String(entry.id),
                 Title: entGen.String(event.title),
@@ -138,9 +137,9 @@ async function confirmPeriod(_obj, variables, context) {
                 WeekNumber: entGen.Int32(getWeek(event.startTime)),
                 MonthNumber: entGen.Int32(getMonthIndex(event.startTime)),
                 YearNumber: entGen.Int32(getYear(event.startTime)),
-                ResourceId: entGen.String(context.user.profile.oid),
-                ResourceEmail: entGen.String(context.user.profile.email),
-                ResourceName: entGen.String(context.user.profile.displayName),
+                ResourceId: entGen.String(user.profile.oid),
+                ResourceEmail: entGen.String(user.profile.email),
+                ResourceName: entGen.String(user.profile.displayName),
                 ManualMatch: entGen.Boolean(entry.isManualMatch),
             });
             return b;
@@ -148,17 +147,16 @@ async function confirmPeriod(_obj, variables, context) {
         await executeBatch('ConfirmedTimeEntries', batch)
         return { success: true, error: null };
     } catch (error) {
-        console.log(error);
         return { success: false, error: _.omit(error, 'requestId') };
     }
 };
 
-async function unconfirmPeriod(_obj, variables, context) {
+async function unconfirmPeriod(_obj, { startDateTime, endDateTime }, { user, services }) {
     try {
-        const entries = await context.services.storage.getConfirmedTimeEntries({
-            resourceId: context.user.profile.oid,
-            startDateTime: variables.startDateTime,
-            endDateTime: variables.endDateTime,
+        const entries = await services.storage.getConfirmedTimeEntries({
+            resourceId: user.profile.oid,
+            startDateTime,
+            endDateTime,
         }, { noParse: true });
         const batch = entries.reduce((b, entity) => {
             b.deleteEntity(entity);
