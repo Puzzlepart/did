@@ -31,7 +31,6 @@ export class TimesheetPeriod {
             this._uiIgnoredEventsStorageKey = `did365_ui_ignored_events_${this.id}`;
             this.ignoredEvents = this._localStorage.get(this._uiIgnoredEventsStorageKey) || [];
             this.manualMatches = this._localStorage.get(this._uiMatchedEventsStorageKey) || {};
-            console.log(this.manualMatches);
         }
     }
 

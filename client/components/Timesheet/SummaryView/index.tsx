@@ -1,7 +1,7 @@
 
 import List from 'common/components/List';
 import { formatDate, sortAlphabetically, startOfWeek } from 'helpers';
-import { ICustomer, IProject } from 'interfaces';
+import { ICustomer, IProject, ITimeEntry } from 'interfaces';
 import * as moment from 'moment';
 import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
@@ -15,31 +15,37 @@ import { DurationColumn } from './DurationColumn';
 import { ISummaryViewProps } from './ISummaryViewProps';
 import { LabelColumn } from './LabelColumn';
 import { SummaryViewType } from "./SummaryViewType";
+import { TimesheetContext } from '../Timesheet';
+import { TimesheetScope } from '../TimesheetScope';
 
 /**
  * Create columns
- *
- * @param {ISummaryViewProps} props Props
+ * 
+ * @param type 
+ * @param scope 
+ * @param entries 
+ * @param range 
+ * 
  * @category Timesheet
-*/
-function createColumns({ events, type, scope, range }: ISummaryViewProps) {
+ */
+function createColumns(type: SummaryViewType, scope: TimesheetScope, entries: any[], range?: number) {
     let columns = [];
     let onRender = (row: any, _index: number, col: IColumn) => <DurationColumn row={row} column={col} />;
     switch (type) {
         case SummaryViewType.UserWeek: {
             columns = Array.from(Array(7).keys()).map(i => {
-                const day = startOfWeek(scope.startDateTime).add(i as moment.DurationInputArg1, 'days' as moment.DurationInputArg2);
+                const day = scope.getDay(i);
                 return col(day.format('L'), day.format('ddd DD'), { maxWidth: 70, minWidth: 70 }, onRender);
             });
         }
             break;
         case SummaryViewType.AdminWeek: {
-            const weekNumbers = _.unique(events.map(e => e.weekNumber), w => w).sort((a, b) => a - b);
+            const weekNumbers = _.unique(entries.map(e => e.weekNumber), w => w).sort((a, b) => a - b);
             columns = weekNumbers.map(wn => col(wn, `Week ${wn}`, { maxWidth: 70, minWidth: 70 }, onRender));
         }
             break;
         case SummaryViewType.AdminMonth: {
-            const monthNumbers = _.unique(events.map(e => e.monthNumber), m => m).sort((a, b) => a - b);
+            const monthNumbers = _.unique(entries.map(e => e.monthNumber), m => m).sort((a, b) => a - b);
             columns = monthNumbers.map(mn => col(mn, moment().month(mn - 1).format('MMM'), { maxWidth: 70, minWidth: 70 }, onRender));
         }
             break;
@@ -174,16 +180,18 @@ function createCustomerOptions(events: any[], setCustomer: React.Dispatch<React.
  * @param {ISummaryViewProps} props Props
  */
 export const SummaryView = (props: ISummaryViewProps) => {
+    const context = React.useContext(TimesheetContext);
+    let entries = props.entries || context.selectedPeriod.events;
     const [customer, setCustomer] = React.useState<IContextualMenuItem>({ key: 'All', text: 'All customers' });
-    const columns = createColumns(props);
-    let events = props.events.filter(e => !!e.project);
-    let customerOptions = createCustomerOptions(events, setCustomer);
+    const columns = createColumns(props.type, context.scope, entries, props.range);
+    entries = entries.filter(e => !!e.project);
+    let customerOptions = createCustomerOptions(entries, setCustomer);
 
-    if (customer.key !== 'All') events = events.filter(e => e.customer.id === customer.key);
+    if (customer.key !== 'All') entries = entries.filter(e => e.customer.id === customer.key);
 
     let items = [
-        ...generateRows(props, events, columns),
-        generateTotalRow(props, events, columns),
+        ...generateRows(props, entries, columns),
+        generateTotalRow(props, entries, columns),
     ];
 
     let commands: IContextualMenuItem[] = [
@@ -206,11 +214,9 @@ export const SummaryView = (props: ISummaryViewProps) => {
 
     return (
         <div className='c-Timesheet-summary'>
-            <CommandBar
-                styles={{ root: { padding: 0 } }}
-                items={commands} />
+            <CommandBar styles={{ root: { padding: 0 } }} items={commands} />
             <List
-                enableShimmer={props.enableShimmer}
+                enableShimmer={context.loading}
                 columns={columns}
                 items={items} />
         </div>

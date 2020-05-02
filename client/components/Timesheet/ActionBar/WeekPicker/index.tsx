@@ -1,3 +1,4 @@
+import { TimesheetContext } from 'components/Timesheet/Timesheet';
 import * as helpers from 'helpers';
 import { Calendar, DateRangeType, DayOfWeek } from 'office-ui-fabric-react/lib/Calendar';
 import { Callout, DirectionalHint } from 'office-ui-fabric-react/lib/Callout';
@@ -8,12 +9,13 @@ import { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { ACTIONBAR_ICON_PROPS } from '../ACTIONBAR_ICON_PROPS';
 import { CALENDAR_STRINGS } from './CALENDAR_STRINGS';
-import { IWeekPickerProps } from './IWeekPickerProps';
+import { TimesheetScope } from 'components/Timesheet/TimesheetScope';
 
 /**
  * @category Timesheet
  */
-export const WeekPicker = ({ scope, onChange }: IWeekPickerProps) => {
+export const WeekPicker = () => {
+    const { scope } = React.useContext(TimesheetContext);
     const history = useHistory();
     let [calendar, setCalendar] = useState(null);
 
@@ -23,7 +25,7 @@ export const WeekPicker = ({ scope, onChange }: IWeekPickerProps) => {
                 <TextField
                     className='c-Timesheet-weekPicker'
                     onClick={event => setCalendar(event.currentTarget)}
-                    value={helpers.getTimespanString(scope.startDateTime, scope.endDateTime)}
+                    value={scope.timespan}
                     styles={{ field: { color: 'rgb(120, 120, 120)', cursor: 'pointer' }, root: { width: 280, marginTop: 6 } }}
                     readOnly
                     borderless
@@ -42,8 +44,8 @@ export const WeekPicker = ({ scope, onChange }: IWeekPickerProps) => {
                     <FocusTrapZone isClickableOutsideFocusTrap={true}>
                         <Calendar
                             onSelectDate={date => {
-                                const startDateTime = helpers.startOfWeek(date).toISOString();
-                                history.push(`/timesheet/${startDateTime}`);
+                                const { iso } = new TimesheetScope(date)
+                                history.push(`/timesheet/${iso.startDateTime}`);
                                 setCalendar(null);
                             }}
                             firstDayOfWeek={DayOfWeek.Monday}
@@ -52,7 +54,7 @@ export const WeekPicker = ({ scope, onChange }: IWeekPickerProps) => {
                             showWeekNumbers={true}
                             dateRangeType={DateRangeType.Week}
                             autoNavigateOnSelection={true}
-                            value={scope.startDateTime.toDate()} />
+                            value={scope.date.startDateTime} />
                     </FocusTrapZone>
                 </Callout>
             )}
