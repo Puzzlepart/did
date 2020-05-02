@@ -40,7 +40,7 @@ export const Timesheet = () => {
     const [unconfirmPeriod] = useMutation<{ startDateTime: string, endDateTime: string }>(UNCONFIRM_PERIOD);
 
     React.useEffect(() => {
-        setLoading(timesheetQuery.loading)
+        setLoading(timesheetQuery.loading);
         if (timesheetQuery.data) setPeriods(timesheetQuery.data.timesheet.map(period => new TimesheetPeriod(period)));
     }, [timesheetQuery]);
 
@@ -99,7 +99,7 @@ export const Timesheet = () => {
                             {loading && <ProgressIndicator />}
                             <EventList
                                 enableShimmer={loading}
-                                events={selectedPeriod.events}
+                                events={selectedPeriod.events.filter(e => e.durationMinutes > 0)}
                                 showEmptyDays={periods.length === 1}
                                 dateFormat={'HH:mm'}
                                 groups={{

@@ -1,10 +1,8 @@
+const _ = require('underscore');
 const {
     queryTable,
     queryTableAll,
     parseArray,
-    isEqual,
-    lt,
-    gt,
     and,
     combine,
     stringFilter,
@@ -18,11 +16,12 @@ const {
     entGen,
 } = require('../utils/table');
 const arraySort = require('array-sort');
+const { TableUtilities } = require('azure-storage');
 
 class StorageService {
     constructor(tid) {
         this.tenantId = tid;
-        this.filter = stringFilter('PartitionKey', isEqual, this.tenantId);
+        this.filter = stringFilter('PartitionKey', TableUtilities.QueryComparisons.EQUAL, this.tenantId);
     }
     /**
      * Checks if the tenant id has a active subscription
@@ -40,7 +39,7 @@ class StorageService {
      * @param {*} userId
      */
     async getUser(userId) {
-        let filter = combine(this.filter, and, stringFilter('RowKey', isEqual, userId));
+        let filter = combine(this.filter, and, stringFilter('RowKey', TableUtilities.QueryComparisons.EQUAL, userId));
         const query = createQuery(1, ['Role', 'StartPage']).where(filter);
         const { entries } = await queryTable('Users', query);
         return parseArray(entries)[0];
@@ -145,7 +144,7 @@ class StorageService {
         options = options || {};
         let filter = this.filter;
         if (customerKey)
-            filter = combine(filter, and, stringFilter('CustomerKey', isEqual, customerKey));
+            filter = combine(filter, and, stringFilter('CustomerKey', TableUtilities.QueryComparisons.EQUAL, customerKey));
         let query = createQuery(1000, undefined, filter);
         let { entries } = await queryTable('Projects', query);
         if (!options.noParse)
@@ -155,25 +154,30 @@ class StorageService {
         return entries;
     }
     /**
-     * Get confirmed time entries
+     * Get time entries
      *
      * @param {*} filters
      * @param {*} options
      */
-    async getConfirmedTimeEntries(filters, options) {
+    async getTimeEntries(filters, options) {
         filters = filters || {};
         options = options || {};
         let filter = this.filter;
-        if (filters.projectId) filter = combine(filter, and, stringFilter('ProjectId', isEqual, filters.projectId));
-        if (filters.resourceId) filter = combine(filter, and, stringFilter('ResourceId', isEqual, filters.resourceId));
-        if (filters.weekNumber) filter = combine(filter, and, intFilter('WeekNumber', isEqual, filters.weekNumber));
-        if (filters.yearNumber) filter = combine(filter, and, intFilter('YearNumber', isEqual, filters.yearNumber));
-        if (filters.startDateTime) filter = combine(filter, and, dateFilter('StartTime', gt, entGen.DateTime(new Date(filters.startDateTime))._));
-        if (filters.endDateTime) filter = combine(filter, and, dateFilter('StartTime', lt, entGen.DateTime(new Date(filters.endDateTime))._));
+        if (filters.projectId) filter = combine(filter, and, stringFilter('ProjectId', TableUtilities.QueryComparisons.EQUAL, filters.projectId));
+        if (filters.resourceId) filter = combine(filter, and, stringFilter('ResourceId', TableUtilities.QueryComparisons.EQUAL, filters.resourceId));
+        if (filters.weekNumber) filter = combine(filter, and, intFilter('WeekNumber', TableUtilities.QueryComparisons.EQUAL, filters.weekNumber));
+        if (filters.yearNumber) filter = combine(filter, and, intFilter('YearNumber', TableUtilities.QueryComparisons.EQUAL, filters.yearNumber));
+        if (filters.startDateTime) filter = combine(filter, and, dateFilter('StartTime', TableUtilities.QueryComparisons.GREATER_THAN, entGen.DateTime(new Date(filters.startDateTime))._));
+        if (filters.endDateTime) filter = combine(filter, and, dateFilter('StartTime', TableUtilities.QueryComparisons.LESS_THAN, entGen.DateTime(new Date(filters.endDateTime))._));
+        console.log(filters);
         let query = createQuery(1000, undefined, filter);
         let result = await queryTableAll('ConfirmedTimeEntries', query);
+        console.log(result.length);
         if (!options.noParse) {
-            result = parseArray(result, res => ({ ...res, customerId: res.projectId.split(' ')[0], }), options);
+            result = parseArray(result, res => {
+                if (res.projectId) res.customerId = _.first(res.projectId.split(' '));
+                return res;
+            }, options);
         }
         result = result.sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
         return result;

@@ -83,7 +83,7 @@ export const ActionBar = (props: IActionBarProps) => {
                     text={resource('TIMESHEET.UNCONFIRM_HOURS_TEXT')}
                     styles={{ root: { height: 44, marginLeft: 4 } }} />
                 : <PrimaryButton
-                    disabled={loading || selectedPeriod.unmatchedDuration > 0}
+                    disabled={loading || selectedPeriod.unmatchedDuration > 0 || selectedPeriod.events.length === 0}
                     iconProps={{ iconName: 'CheckMark' }}
                     onClick={props.onConfirmPeriod}
                     text={resource('TIMESHEET.CONFIRM_HOURS_TEXT')}

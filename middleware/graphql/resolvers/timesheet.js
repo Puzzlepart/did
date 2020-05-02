@@ -1,6 +1,6 @@
 const _ = require('underscore');
 const { TableBatch } = require('azure-storage');
-const { executeBatch, entGen } = require('../../../utils/table');
+const { executeBatch, addEntity, entGen } = require('../../../utils/table');
 const { getDurationHours, getDurationMinutes, formatDate, getMonthIndex, getWeek, startOfMonth, endOfMonth, getYear } = require('../../../utils');
 const uuid = require('uuid/v1');
 const matchEvents = require('./timesheet.matching');
@@ -9,7 +9,7 @@ const typeDef = `
  type Event {
 	id: String
 	key: String
-	title: String!
+	title: String
 	body: String
 	isOrganizer: Boolean
 	startTime: String
@@ -71,10 +71,10 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat }, { use
         periods = periods.map(period => ({ ...period, name: `Week ${week} (${formatDate(period.startDateTime, 'MMMM')})` }))
     }
 
-    let [projects, customers, confirmedTimeEntries] = await Promise.all([
+    let [projects, customers, timeentries] = await Promise.all([
         StorageService.getProjects(),
         StorageService.getCustomers(),
-        StorageService.getConfirmedTimeEntries({
+        StorageService.getTimeEntries({
             resourceId: user.profile.oid,
             startDateTime,
             endDateTime,
@@ -91,7 +91,7 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat }, { use
     for (let i = 0; i < periods.length; i++) {
         let period = periods[i];
         period.confirmedDuration = 0;
-        const entries = [...confirmedTimeEntries].filter(entry => `${entry.weekNumber}_${entry.monthNumber}` === period.id);
+        const entries = [...timeentries].filter(entry => `${entry.weekNumber}_${entry.monthNumber}` === period.id);
         const isConfirmed = entries.length > 0;
         if (isConfirmed) {
             period.events = entries.map(entry => ({
@@ -115,14 +115,20 @@ async function confirmPeriod(_obj, { entries, startDateTime, endDateTime }, { us
     try {
         let entities = [];
         if (!entries || entries.length === 0) {
+            const key = uuid();
             entities.push({
                 PartitionKey: entGen.String(tenantId),
-                RowKey: entGen.String(uuid()),
-                EventId: entGen.String(),
+                RowKey: entGen.String(key),
+                EventId: entGen.String(key),
                 DurationHours: entGen.Double(0),
                 DurationMinutes: entGen.Int32(0),
+                StartTime: entGen.DateTime(startDateTime),
+                EndTime: entGen.DateTime(endDateTime),
                 ResourceId: entGen.String(user.profile.oid),
-            })
+                WeekNumber: entGen.Int32(getWeek(startDateTime)),
+                MonthNumber: entGen.Int32(getMonthIndex(startDateTime)),
+                YearNumber: entGen.Int32(getYear(startDateTime))
+            });
         } else {
             const calendarView = await GraphService.getEvents(startDateTime, endDateTime);
             entities = entries.map(entry => {
@@ -150,27 +156,30 @@ async function confirmPeriod(_obj, { entries, startDateTime, endDateTime }, { us
                 };
             }).filter(entry => entry);
         }
-        let batch = new TableBatch();
-        entities.forEach(entity => batch.insertEntity(entity));
-        await executeBatch('ConfirmedTimeEntries', batch);
+        if (entities.length === 1) {
+            await addEntity('ConfirmedTimeEntries', _.first(entities));
+        } else {
+            const batch = new TableBatch();
+            entities.forEach(entity => batch.insertEntity(entity));
+            await executeBatch('ConfirmedTimeEntries', batch);
+        }
         return { success: true, error: null };
     } catch (error) {
+        console.log(error);
         return { success: false, error: _.omit(error, 'requestId') };
     }
 };
 
 async function unconfirmPeriod(_obj, { startDateTime, endDateTime }, { user, services: { storage: StorageService } }) {
     try {
-        const entries = await StorageService.getConfirmedTimeEntries({
+        const entities = await StorageService.getTimeEntries({
             resourceId: user.profile.oid,
             startDateTime,
             endDateTime,
         }, { noParse: true });
-        const batch = entries.reduce((b, entity) => {
-            b.deleteEntity(entity);
-            return b;
-        }, new TableBatch());
-        await executeBatch('ConfirmedTimeEntries', batch)
+        const batch = new TableBatch();
+        entities.forEach(entity => batch.deleteEntity(entity));
+        await executeBatch('ConfirmedTimeEntries', batch);
         return { success: true, error: null };
     } catch (error) {
         return { success: false, error: _.omit(error, 'requestId') };

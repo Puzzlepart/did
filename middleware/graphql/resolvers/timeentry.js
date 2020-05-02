@@ -45,16 +45,17 @@ const typeDef = `
 async function timeentries(_obj, variables, context) {
     let resourceId = variables.resourceId;
     if (variables.currentUser) resourceId = context.user.profile.oid;
-    let [projects, customers, confirmedTimeEntries] = await Promise.all([
+    let [projects, customers, timeentries] = await Promise.all([
         context.services.storage.getProjects(),
         context.services.storage.getCustomers(),
-        context.services.storage.getConfirmedTimeEntries({ resourceId, weekNumber: variables.weekNumber, yearNumber: variables.yearNumber, projectId: variables.projectId }, { dateFormat: variables.dateFormat }),
+        context.services.storage.getTimeEntries({ resourceId, weekNumber: variables.weekNumber, yearNumber: variables.yearNumber, projectId: variables.projectId }, { dateFormat: variables.dateFormat }),
     ]);
-    let entries = confirmedTimeEntries.map(entry => ({
+    let entries = timeentries.map(entry => ({
         ...entry,
-        project: _.find(projects, p => p.id === entry.projectId),
-        customer: _.find(customers, c => c.id === entry.customerId),
+        project: entry.projectId && _.find(projects, p => p.id === entry.projectId),
+        customer: entry.customerId && _.find(customers, c => c.id === entry.customerId),
     }));
+    console.log('timeentries', timeentries.length);
     return entries;
 };
 
