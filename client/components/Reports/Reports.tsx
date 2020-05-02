@@ -2,7 +2,6 @@ import { useQuery } from '@apollo/react-hooks';
 import { FilterPanel, IFilter, UserMessage } from 'common/components';
 import List from 'common/components/List';
 import { getMonthName, getValueTyped as value } from 'helpers';
-import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import * as React from 'react';
@@ -11,9 +10,9 @@ import * as format from 'string-format';
 import { humanize } from 'underscore.string';
 import * as excelUtils from 'utils/exportExcel';
 import { generateColumn } from 'utils/generateColumn';
-import TIME_ENTRIES from './TIME_ENTRIES';
 import { IReportsProps } from './IReportsProps';
 import { REPORTS_FILTERS } from './REPORTS_FILTERS';
+import TIME_ENTRIES from './TIME_ENTRIES';
 
 /**
  * Get columns
@@ -85,37 +84,38 @@ export const Reports = ({ skip = ['id', '__typename', 'monthNumber'], exportFile
 
     return (
         <div>
-            <CommandBar
-                hidden={timeentries.length === 0}
-                styles={{ root: { margin: '10px 0 10px 0', padding: 0 } }}
-                items={[
-                    {
-                        id: 'EXPORT_TO_EXCEL_ALL',
-                        key: 'EXPORT_TO_EXCEL_ALL',
-                        text: 'Export all to Excel',
-                        onClick: onExport,
-                        iconProps: { iconName: 'ExcelDocument' },
-                        disabled: loading || !!error,
-                    },
-                    {
-                        id: 'EXPORT_SUBSET_TO_EXCEL',
-                        key: 'EXPORT_SUBSET_TO_EXCEL',
-                        text: 'Export subset to Excel',
-                        onClick: onExport,
-                        iconProps: { iconName: 'ExcelDocument' },
-                        disabled: loading || !!error || subset === undefined || value(subset, 'length', 0) === value(timeentries, 'length', 0),
-                    }
-                ]}
-                farItems={[{
-                    key: 'OPEN_FILTER_PANEL',
-                    iconProps: { iconName: 'Filter' },
-                    iconOnly: true,
-                    onClick: () => setFilterPanelOpen(true),
-                }]} />
             <List
                 items={subset || timeentries}
                 columns={columns}
-                enableShimmer={loading} />
+                enableShimmer={loading}
+                commandBar={{
+                    items: [
+                        {
+                            id: 'EXPORT_TO_EXCEL_ALL',
+                            key: 'EXPORT_TO_EXCEL_ALL',
+                            text: 'Export all to Excel',
+                            onClick: onExport,
+                            iconProps: { iconName: 'ExcelDocument' },
+                            disabled: loading || !!error,
+                        },
+                        {
+                            id: 'EXPORT_SUBSET_TO_EXCEL',
+                            key: 'EXPORT_SUBSET_TO_EXCEL',
+                            text: 'Export subset to Excel',
+                            onClick: onExport,
+                            iconProps: { iconName: 'ExcelDocument' },
+                            disabled: loading || !!error || subset === undefined || value(subset, 'length', 0) === value(timeentries, 'length', 0),
+                        }
+                    ],
+                    farItems: [
+                        {
+                            key: 'OPEN_FILTER_PANEL',
+                            iconProps: { iconName: 'Filter' },
+                            iconOnly: true,
+                            onClick: () => setFilterPanelOpen(true),
+                        }
+                    ]
+                }} />
             <UserMessage hidden={timeentries.length > 0 || loading} text={`There's no confirmed time entries at this time.`} />
             <FilterPanel
                 isOpen={filterPanelOpen}
