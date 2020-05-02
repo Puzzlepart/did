@@ -19,6 +19,8 @@ import { tryParseJson } from 'utils/tryParseJson';
     const context = tryParseJson(container.attributes.getNamedItem('data-props').value, { user: {} });
     container.attributes.removeNamedItem('data-props');
 
+    console.log(context);
+
     ReactDom.render((
         <ApolloProvider client={client}>
             <App {...context} />
