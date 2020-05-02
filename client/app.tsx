@@ -9,36 +9,40 @@ import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 export interface IAppContext {
-    user: any;
+    user?: any;
 }
+
+export const AppContext = React.createContext<IAppContext>({});
 
 const App = (context: IAppContext) => {
     return (
-        <Router>
-            <div>
-                <Navigation {...context} />
-                <Switch>
-                    <Route path='/timesheet'>
-                        <Timesheet />
-                    </Route>
-                    <Route path='/customers'>
-                        <Customers />
-                    </Route>
-                    <Route path='/projects'>
-                        <Projects />
-                    </Route>
-                    <Route exact path='/reports'>
-                        <Reports />
-                    </Route>
-                    <Route path='/admin'>
-                        <Admin />
-                    </Route>
-                    <Route path='/'>
-                        <Home />
-                    </Route>
-                </Switch>
-            </div>
-        </Router>
+        <AppContext.Provider value={context}>
+            <Router>
+                <div>
+                    <Navigation />
+                    <Switch>
+                        <Route path='/timesheet'>
+                            <Timesheet />
+                        </Route>
+                        <Route path='/customers'>
+                            <Customers />
+                        </Route>
+                        <Route path='/projects'>
+                            <Projects />
+                        </Route>
+                        <Route exact path='/reports'>
+                            <Reports />
+                        </Route>
+                        <Route path='/admin'>
+                            <Admin />
+                        </Route>
+                        <Route path='/'>
+                            <Home />
+                        </Route>
+                    </Switch>
+                </div>
+            </Router>
+        </AppContext.Provider>
     )
 }
 
