@@ -19,6 +19,7 @@ export interface IProjectColumnClassName {
     root: string;
     content: {
         root: string;
+        icon: string;
         text: string;
         subText: string;
     };

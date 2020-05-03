@@ -39,7 +39,7 @@ export const ProjectColumnTooltip = ({ project, className }: IProjectColumnToolt
             <div hidden={stringIsNullOrEmpty(project.description)} className={className.description}>
                 <p>{project.description}</p>
             </div>
-            <div hidden={_.isEmpty(project.labels)} className={className.labels}>
+            <div hidden={!!project.labels && _.isEmpty(project.labels)} className={className.labels}>
                 {project.labels.map((label, idx) => <EntityLabel key={idx} {...label} />)}
             </div>
             <div className={className.tag}><span>{project.key}</span></div>
@@ -115,6 +115,7 @@ const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
                 <div className={props.className.content.root}>
                     <div className={props.className.content.text}>
                         <Link to={`/projects/${props.event.project.id}`}>{props.event.project.name}</Link>
+                        {!!props.event.project.labels && !_.isEmpty(props.event.project.labels) && <Icon iconName='Tag' className={props.className.content.icon} />}
                     </div>
                     <div className={props.className.content.subText}>
                         <span>for </span><Link to={`/customers/${props.event.customer.id}`}>{props.event.customer.name}</Link>
@@ -131,6 +132,7 @@ export default withDefaultProps(ProjectColumn, {
         root: 'c-Timesheet-projectColumn',
         content: {
             root: 'c-Timesheet-projectColumn-content',
+            icon:  'c-Timesheet-projectColumn-content-icon',
             text: 'c-Timesheet-projectColumn-content-text',
             subText: 'c-Timesheet-projectColumn-content-subText',
         },
