@@ -9,6 +9,7 @@ import { generateColumn as col } from 'utils/generateColumn';
 import { withDefaultProps } from 'with-default-props';
 import { IProjectListProps } from './IProjectListProps';
 import { Link } from 'react-router-dom';
+import { EntityLabel } from 'common/components/EntityLabel';
 
 /**
  * Generate column definitions based on parameters specified
@@ -40,11 +41,14 @@ export const ProjectListColumns = (renderLink: boolean, hideColumns: string[]): 
     col(
         'customer',
         'Customer',
+        { maxWidth: 240 },
+        (project: IProject) => <Link to={`/customers/${project.customer.id}`}>{project.customer.name}</Link>,
+    ),
+    col(
+        'labels',
+        '',
         {},
-        (project: IProject) => {
-            if (!project.customer) return null;
-            return <Link to={`/customers/${project.customer.id}`}>{project.customer.name}</Link>;
-        }
+        (project: IProject) => project.labels.map((label, idx) => <EntityLabel key={idx} {...label} />),
     )
 ].filter(col => hideColumns.indexOf(col.key) === -1))
 

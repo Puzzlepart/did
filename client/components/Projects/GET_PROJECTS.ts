@@ -25,6 +25,13 @@ export const GET_PROJECTS = gql`
             customer {
                 id
                 name
+            }            
+            labels { 
+                id
+                name
+                description
+                color
+                icon
             }
             inactive
         }
