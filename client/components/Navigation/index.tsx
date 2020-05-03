@@ -15,9 +15,6 @@ export const Navigation = () => {
                 </button>
                 <div className='collapse navbar-collapse' id='navbarCollapse'>
                     <ul className='navbar-nav mr-auto'>
-                        <li className='nav-item'>
-                            <NavLink exact to='/' className='nav-link' activeClassName='active'>{Home['displayName']}</NavLink>
-                        </li>
                         <li className='nav-item' hidden={!user}>
                             <NavLink to='/timesheet' className='nav-link' activeClassName='active'>{Timesheet['displayName']}</NavLink>
                         </li>
