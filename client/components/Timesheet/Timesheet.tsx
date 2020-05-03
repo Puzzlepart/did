@@ -44,21 +44,18 @@ export const Timesheet = () => {
         if (timesheetQuery.data) setPeriods(timesheetQuery.data.timesheet.map(period => new TimesheetPeriod(period)));
     }, [timesheetQuery]);
 
-
-    const selectedPeriod = _.find(periods, p => p.id === selectedPeriodId) || _.first(periods) || new TimesheetPeriod();
+    const selectedPeriod = React.useMemo(() => _.find(periods, p => p.id === selectedPeriodId) || _.first(periods) || new TimesheetPeriod(), [periods, selectedPeriodId]);
 
     React.useEffect(() => setScope(new TimesheetScope(params.startDateTime)), [params.startDateTime]);
 
     const onConfirmPeriod = async () => {
         setLoading({ label: 'Confirming period', description: 'Hang on a minute...' });
-        //TODO: Add error handling
         await confirmPeriod({ variables: { ...selectedPeriod.scope, entries: selectedPeriod.matchedEvents } });
         timesheetQuery.refetch();
     }
 
     const onUnconfirmPeriod = async () => {
         setLoading({ label: 'Unconfirming period', description: 'Hang on a minute...' });
-        //TODO: Add error handling
         await unconfirmPeriod({ variables: selectedPeriod.scope });
         timesheetQuery.refetch();
     }

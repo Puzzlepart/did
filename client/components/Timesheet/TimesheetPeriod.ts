@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+import _ from 'underscore';
 import { dateAdd, IPnPClientStore, ITypedHash, PnPClientStorage } from '@pnp/common';
 import { IProject } from 'interfaces/IProject';
 import { ITimeEntry } from 'interfaces/ITimeEntry';
@@ -11,7 +13,7 @@ export class TimesheetPeriod {
     public startDateTime?: string;
     public endDateTime?: string;
     public confirmedDuration?: number;
-    public manualMatches: ITypedHash<any>;
+    public manualMatches: ITypedHash<any> = {};
     public ignoredEvents: string[] = [];
     private _localStorage: IPnPClientStore = new PnPClientStorage().local;
     private _uiMatchedEventsStorageKey: string;
@@ -31,18 +33,25 @@ export class TimesheetPeriod {
         }
     }
 
+    private _handleManualMatches(event: ITimeEntry) {
+        let manualMatch = this.manualMatches[event.id];
+        if (event.isManualMatch && !manualMatch) {
+            event.isManualMatch = false;
+            event.project = event.customer = null;
+        }
+        if (!!manualMatch) {
+            event.isManualMatch = true;
+            event.project = manualMatch;
+            event.customer = manualMatch.customer;
+        }
+        return event;
+    }
+
     public get events(): ITimeEntry[] {
         if (this._period) {
-            return this._period.events
+            return [...this._period.events]
                 .filter(event => !event.isIgnored && this.ignoredEvents.indexOf(event.id) === -1)
-                .map(event => {
-                    if (this.manualMatches[event.id]) {
-                        event.project = this.manualMatches[event.id];
-                        event.customer = this.manualMatches[event.id].customer;
-                        event.isManualMatch = true;
-                    }
-                    return event;
-                });
+                .map(event => this._handleManualMatches(event));
         }
         return [];
     }
@@ -74,7 +83,7 @@ export class TimesheetPeriod {
     * @param {IProject} project Project
     */
     public setManualMatch(eventId: string, project: IProject) {
-        const matches = this.manualMatches;
+        let matches = this.manualMatches;
         matches[eventId] = project;
         this._localStorage.put(this._uiMatchedEventsStorageKey, matches, dateAdd(new Date(), 'month', 1));
     }
@@ -85,7 +94,7 @@ export class TimesheetPeriod {
      * @param {string} eventId Event id
      */
     public clearManualMatch(eventId: string) {
-        delete this.manualMatches[eventId];
+        this.manualMatches = _.omit(this.manualMatches, eventId);
         this._localStorage.put(this._uiMatchedEventsStorageKey, this.manualMatches, dateAdd(new Date(), 'month', 1));
     }
 
