@@ -1,3 +1,4 @@
+import { EntityLabel } from 'common/components/EntityLabel';
 import List from 'common/components/List';
 import resource from 'i18n';
 import { ICustomer } from 'interfaces/ICustomer';
@@ -5,9 +6,9 @@ import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { generateColumn as col } from 'utils/generateColumn';
 import { ICustomerListProps } from './ICustomerListProps';
-import { Link } from 'react-router-dom';
 
 /**
  * Generate column definitions
@@ -32,6 +33,12 @@ export const CustomerListColumns = (): IColumn[] => ([
         'Name',
         { maxWidth: 300 },
         (customer: ICustomer) => <Link to={`/customers/${customer.id}`}>{customer.name}</Link>
+    ),
+    col(
+        'labels',
+        '',
+        {},
+        (customer: ICustomer) => customer.labels.map((label, idx) => <EntityLabel key={idx} {...label} />),
     ),
 ])
 

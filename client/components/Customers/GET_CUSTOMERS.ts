@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import { ICustomer } from 'interfaces/ICustomer';
 
 /**
- * {@docCategory Customers}
+ * @category Customers
  */
 export interface IGetCustomersData {
     customers: ICustomer[];
@@ -22,5 +22,12 @@ export default gql`
         webLink
         icon
         inactive
+        labels { 
+            id
+            name
+            description
+            color
+            icon
+        }
     }
 }`;
