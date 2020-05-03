@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
 import { stringIsNullOrEmpty } from '@pnp/common';
-import { useId } from '@uifabric/react-hooks';
 import { UserMessage } from 'common/components/UserMessage';
 import resource from 'i18n';
 import { MessageBarButton } from 'office-ui-fabric-react/lib/Button';
@@ -13,10 +12,11 @@ import * as React from 'react';
 import { withDefaultProps } from 'with-default-props';
 import { ResolveProjectModal } from './ResolveProjectModal';
 import { IClearManualMatchButtonProps, IProjectColumnProps, IProjectColumnTooltipProps } from './types';
+import { TimesheetContext } from '../TimesheetContext';
 
 
 /**
- * @category EventList
+ * @category Timesheet
  */
 export const ClearManualMatchButton = ({ onClick, hidden, className }: IClearManualMatchButtonProps): JSX.Element => {
     return (
@@ -27,7 +27,7 @@ export const ClearManualMatchButton = ({ onClick, hidden, className }: IClearMan
 }
 
 /**
- * @category EventList
+ * @category Timesheet
  */
 export const ProjectColumnTooltip = ({ project, className }: IProjectColumnTooltipProps): JSX.Element => {
     return (
@@ -41,15 +41,13 @@ export const ProjectColumnTooltip = ({ project, className }: IProjectColumnToolt
 }
 
 /**
- * @category EventList
+ * @category Timesheet
  */
 const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
-    const tooltipId = useId('tooltip');
-    const toggleId = useId('toggle-callout');
+    const { dispatch } = React.useContext(TimesheetContext);
     const [showResolveModal, setShowResolveModal] = React.useState<boolean>(false);
 
     if (!props.event.project) {
-        if (props.isLocked) return null;
         if (props.event.error) {
             return (
                 <div className={props.className.root}>
@@ -75,12 +73,11 @@ const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
                             <MessageBarButton
                                 text={resource('TIMESHEET.RESOLVE_PROJECT_BUTTON_LABEL')}
                                 iconProps={{ iconName: 'ReviewResponseSolid' }}
-                                onClick={() => setShowResolveModal(true)}
-                                id={toggleId} />
+                                onClick={() => setShowResolveModal(true)} />
                             <MessageBarButton
                                 text={resource('TIMESHEET.IGNORE_EVENT_BUTTON_LABEL')}
                                 iconProps={{ iconName: 'Blocked2' }}
-                                onClick={() => props.dispatch({ type: 'IGNORE_EVENT', payload: { event: props.event } })} />
+                                onClick={() => dispatch({ type: 'IGNORE_EVENT', payload: props.event.id })} />
                         </div>
                     } />
                 <ResolveProjectModal
@@ -89,7 +86,7 @@ const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
                     isOpen={showResolveModal}
                     onProjectSelected={project => {
                         setShowResolveModal(false);
-                        props.dispatch({ type: 'MANUAL_MATCH', payload: { event: props.event, project } })
+                        dispatch({ type: 'MANUAL_MATCH', payload: { event: props.event, project } })
                     }} />
             </div>
         );
@@ -97,14 +94,13 @@ const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
 
     return (
         <TooltipHost
-            id={tooltipId}
             tooltipProps={{
                 onRenderContent: () => <ProjectColumnTooltip project={props.event.project} className={props.className.tooltip} />,
             }}
             delay={TooltipDelay.long}
             closeDelay={TooltipDelay.long}
             calloutProps={{ gapSpace: 0 }}>
-            <div className={props.className.root} aria-describedby={tooltipId}>
+            <div className={props.className.root}>
                 <div className={props.className.content.root}>
                     <div className={props.className.content.text}>
                         <a href={`/projects#${props.event.project.id}`}>{props.event.project.name}</a>
@@ -113,7 +109,7 @@ const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
                         <span>for </span><a href={`/customers#${props.event.customer.id}`}><span>{props.event.customer.name}</span></a>
                     </div>
                 </div>
-                <ClearManualMatchButton onClick={() => props.dispatch({ type: 'CLEAR_MANUAL_MATCH', payload: props.event })} className={props.className.clearButton} hidden={!props.event.isManualMatch} />
+                <ClearManualMatchButton onClick={() => dispatch({ type: 'CLEAR_MANUAL_MATCH', payload: props.event.id })} className={props.className.clearButton} hidden={!props.event.isManualMatch} />
             </div>
         </TooltipHost>
     );

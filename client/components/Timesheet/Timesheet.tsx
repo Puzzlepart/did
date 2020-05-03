@@ -1,4 +1,3 @@
-
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import EventList from 'common/components/EventList';
 import { UserAllocation } from 'components/UserAllocation';
@@ -20,6 +19,8 @@ import { reducer } from './TimesheetReducer';
 import { TimesheetScope } from './TimesheetScope';
 import { TimesheetView, ITimesheetState } from './types';
 import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD';
+import { generateColumn as col } from 'utils/generateColumn';
+import ProjectColumn from './ProjectColumn';
 
 const intialState: ITimesheetState = {
     periods: [],
@@ -30,10 +31,10 @@ const intialState: ITimesheetState = {
 export const Timesheet = () => {
     const history = useHistory();
     const params = useParams<{ startDateTime: string; view: TimesheetView }>();
-    const [{ loading, periods, selectedPeriod, scope }, dispatch] = React.useReducer(reducer, intialState);
+    const [state, dispatch] = React.useReducer(reducer, intialState);
     const timesheetQuery = useQuery<{ timesheet: TimesheetPeriod[] }>(GET_TIMESHEET, {
         variables: {
-            ...scope.iso,
+            ...state.scope.iso,
             dateFormat: 'dddd DD',
         },
         fetchPolicy: 'network-only',
@@ -47,42 +48,49 @@ export const Timesheet = () => {
 
     const onConfirmPeriod = () => {
         dispatch({ type: 'CONFIRMING_PERIOD' });
-        confirmPeriod({ variables: { ...selectedPeriod.scope, entries: selectedPeriod.matchedEvents } }).then(timesheetQuery.refetch);
+        confirmPeriod({ variables: { ...state.selectedPeriod.scope, entries: state.selectedPeriod.matchedEvents } }).then(timesheetQuery.refetch);
     }
 
     const onUnconfirmPeriod = () => {
         dispatch({ type: 'UNCONFIRMING_PERIOD' });
-        unconfirmPeriod({ variables: selectedPeriod.scope }).then(timesheetQuery.refetch);
+        unconfirmPeriod({ variables: state.selectedPeriod.scope }).then(timesheetQuery.refetch);
     }
 
     return (
-        <TimesheetContext.Provider value={{ periods, selectedPeriod, scope, loading: !!loading }}>
+        <TimesheetContext.Provider value={{ ...state, dispatch }}>
             <div className='c-Timesheet'>
-                <ActionBar {...{ dispatch, onConfirmPeriod, onUnconfirmPeriod }} />
+                <ActionBar {...{ onConfirmPeriod, onUnconfirmPeriod }} />
                 <Pivot
                     defaultSelectedKey={params.view}
-                    onLinkClick={item => history.push(`/timesheet/${item.props.itemKey}/${scope.iso.startDateTime}`)}>
+                    onLinkClick={item => history.push(`/timesheet/${item.props.itemKey}/${state.scope.iso.startDateTime}`)}>
                     <PivotItem
                         itemKey='overview'
                         headerText={resource('TIMESHEET.OVERVIEW_HEADER_TEXT')}
                         itemIcon='CalendarWeek'>
                         <div className='c-Timesheet-overview'>
-                            <StatusBar dispatch={dispatch} />
-                            {loading && <ProgressIndicator {...loading} />}
+                            <StatusBar />
+                            {state.loading && <ProgressIndicator {...state.loading} />}
                             <EventList
-                                enableShimmer={!!loading}
-                                events={selectedPeriod.events.filter(e => e.durationMinutes > 0)}
-                                showEmptyDays={periods.length === 1}
+                                enableShimmer={!!state.loading}
+                                events={state.selectedPeriod.events.filter(e => e.durationMinutes > 0)}
+                                showEmptyDays={state.periods.length === 1}
                                 dateFormat={'HH:mm'}
                                 groups={{
                                     fieldName: 'date',
-                                    groupNames: scope.weekdays('dddd DD'),
+                                    groupNames: state.scope.weekdays('dddd DD'),
                                     totalFunc: (items: ITimeEntry[]) => {
                                         const totalMins = items.reduce((sum, i) => sum = i.durationMinutes, 0);
                                         return ` (${helpers.getDurationDisplay(totalMins)})`;
                                     },
                                 }}
-                                projectColumn={{ isLocked: selectedPeriod.isConfirmed, dispatch }} />
+                                additionalColumns={[
+                                    col(
+                                        'project',
+                                        'Project',
+                                        { minWidth: 350, maxWidth: 350 },
+                                        (event: ITimeEntry) => <ProjectColumn event={event} />
+                                    ),
+                                ]} />
                         </div>
                     </PivotItem>
                     <PivotItem
@@ -96,7 +104,7 @@ export const Timesheet = () => {
                         headerText={resource('TIMESHEET.ALLOCATION_HEADER_TEXT')}
                         itemIcon='ReportDocument'>
                         <UserAllocation
-                            entries={selectedPeriod.events}
+                            entries={state.selectedPeriod.events}
                             charts={{
                                 'project.name': resource('TIMESHEET.ALLOCATION_PROJECT_CHART_TITLE'),
                                 'customer.name': resource('TIMESHEET.ALLOCATION_CUSTOMER_CHART_TITLE'),

@@ -113,7 +113,6 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                             <EventList
                                 events={timeentries}
                                 additionalColumns={[col('resourceName', 'User')]}
-                                hideColumns={['project', 'customer']}
                                 dateFormat='MMM Do YYYY HH:mm'
                                 columnWidths={{ time: 250 }} />
                         )}

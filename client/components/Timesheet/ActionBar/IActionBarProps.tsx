@@ -2,8 +2,6 @@
  * @category Timesheet
  */
 export interface IActionBarProps {
-    dispatch: React.Dispatch<any>;
-
     /**
      * On confirm period callback
      */

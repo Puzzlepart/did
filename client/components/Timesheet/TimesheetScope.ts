@@ -2,12 +2,19 @@ import moment from 'moment';
 import * as helpers from 'helpers';
 
 /**
+ * Handles a scope, the timing between a startDateTime and endDateTime
+ * 
  * @category Timesheet
  */
 export class TimesheetScope {
     private _startDateTime?: moment.Moment;
     private _endDateTime?: moment.Moment;
 
+    /**
+     * Intializes a scope with a new startDateTime
+     * 
+     * @param {string | Date} startDateTime Start date time
+     */
     constructor(startDateTime?: string | Date) {
         const startIsValid = !isNaN(Date.parse(startDateTime as string));
         let start = moment();

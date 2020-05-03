@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { TimesheetPeriod } from './TimesheetPeriod';
-import { TimesheetScope } from './TimesheetScope';
+import { ITimesheetState } from './types';
 
-export const TimesheetContext = React.createContext<{ selectedPeriod?: TimesheetPeriod; loading?: boolean; scope?: TimesheetScope; periods?: TimesheetPeriod[] }>({});
+export interface ITimesheetContext extends ITimesheetState { dispatch?: React.Dispatch<any> }
+
+export const TimesheetContext = React.createContext<ITimesheetContext>(null);

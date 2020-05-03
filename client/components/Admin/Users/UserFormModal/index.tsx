@@ -13,7 +13,7 @@ import UPDATE_USER from './UPDATE_USER';
 
 
 /**
- * @category AdminView
+ * @category Admin
  */
 export const UserFormModal = (props: IUserFormModalProps) => {
     const [user, setUser] = React.useState<IUser>(props.user || { id: '', fullName: '', role: 'User' });

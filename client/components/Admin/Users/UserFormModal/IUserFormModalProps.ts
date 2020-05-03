@@ -2,7 +2,7 @@ import { IModalProps } from 'office-ui-fabric-react/lib/Modal';
 import { IUser } from 'interfaces';
 
 /**
- * @category AdminView
+ * @category Admin
  */
 export interface IUserFormModalProps {
     title?: string;

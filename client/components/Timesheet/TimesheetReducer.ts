@@ -1,20 +1,27 @@
-import { ITimesheetState } from './types';
+import { IProject } from 'interfaces';
+import _ from 'underscore';
 import { TimesheetPeriod } from './TimesheetPeriod';
 import { TimesheetScope } from './TimesheetScope';
-import _ from 'underscore';
+import { ITimesheetState } from './types';
 
-export type ActionType =
-    'DATA_UPDATED'
-    | 'UPDATE_SCOPE'
-    | 'CONFIRMING_PERIOD'
-    | 'UNCONFIRMING_PERIOD'
-    | 'CHANGE_PERIOD'
-    | 'MANUAL_MATCH'
-    | 'CLEAR_MANUAL_MATCH'
-    | 'IGNORE_EVENT'
-    | 'CLEAR_IGNORES';
+type Action =
+    { type: 'DATA_UPDATED'; payload: { data: { timesheet: TimesheetPeriod[] }; loading: boolean } }
+    | { type: 'UPDATE_SCOPE'; payload: string }
+    | { type: 'CONFIRMING_PERIOD' }
+    | { type: 'UNCONFIRMING_PERIOD' }
+    | { type: 'CHANGE_PERIOD'; payload: string }
+    | { type: 'MANUAL_MATCH'; payload: { eventId: string; project: IProject } }
+    | { type: 'CLEAR_MANUAL_MATCH'; payload: string }
+    | { type: 'IGNORE_EVENT'; payload: string }
+    | { type: 'CLEAR_IGNORES'; payload: string };
 
-export const reducer = (state: ITimesheetState, action: { type: ActionType; payload?: any }): ITimesheetState => {
+/**
+ * Reducer for Timesheet
+ * 
+ * @param {ITimesheetState} state State
+ * @param {IAction} action Action
+ */
+export const reducer = <T>(state: ITimesheetState, action: Action): ITimesheetState => {
     // eslint-disable-next-line prefer-const
     let newState = { ...state };
     switch (action.type) {
@@ -42,22 +49,21 @@ export const reducer = (state: ITimesheetState, action: { type: ActionType; payl
         }
             break;
         case 'MANUAL_MATCH': {
-            const { selectedPeriod, event, project } = action.payload;
-            selectedPeriod.setManualMatch(event.id, project);
+            const { selectedPeriod } = newState;
+            const { eventId, project } = action.payload;
+            selectedPeriod.setManualMatch(eventId, project);
             newState.periods = newState.periods.map(p => p.id === newState.selectedPeriodId ? selectedPeriod : p);
         }
             break;
         case 'CLEAR_MANUAL_MATCH': {
             const { selectedPeriod } = newState;
-            const { event } = action.payload;
-            selectedPeriod.clearManualMatch(event.id);
+            selectedPeriod.clearManualMatch(action.payload);
             newState.periods = newState.periods.map(p => p.id === newState.selectedPeriodId ? selectedPeriod : p);
         }
             break;
         case 'IGNORE_EVENT': {
             const { selectedPeriod } = newState;
-            const { event } = action.payload;
-            selectedPeriod.ignoreEvent(event.id);
+            selectedPeriod.ignoreEvent(action.payload);
             newState.periods = newState.periods.map(p => p.id === newState.selectedPeriodId ? selectedPeriod : p);
         }
             break;

@@ -45,13 +45,5 @@ export interface IProjectColumnTooltipProps {
  */
 export interface IProjectColumnProps {
     event: ITimeEntry;
-
-    isLocked?: boolean;
-
-    /**
-     * Class names
-     */
     className?: IProjectColumnClassName;
-
-    dispatch?: React.Dispatch<any>;
 }

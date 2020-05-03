@@ -12,7 +12,7 @@ import GET_USERS from './GET_USERS';
 import { UserFormModal, IUserFormModalProps } from './UserFormModal';
 
 /**
- * @category AdminView
+ * @category Admin
  */
 export const Users = () => {
     const [userForm, setUserForm] = React.useState<IUserFormModalProps>(null);

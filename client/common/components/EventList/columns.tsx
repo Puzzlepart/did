@@ -1,12 +1,11 @@
 
-import * as hlp from 'helpers';
+import * as helpers from 'helpers';
 import { ITimeEntry } from 'interfaces';
 import * as React from 'react';
 import { generateColumn as col } from 'utils/generateColumn';
-import { DurationDisplay } from './DurationDisplay';
-import ProjectColumn from './ProjectColumn';
-import { IEventListProps } from './types';
 import { IColumn } from '../List';
+import { DurationDisplay } from './DurationDisplay';
+import { IEventListProps } from './types';
 
 /**
  * Get sizing for column
@@ -20,8 +19,8 @@ import { IColumn } from '../List';
  */
 function getSizing(props: IEventListProps, fieldName: string, defMinWidth: number, defMaxWidth: number): { minWidth: number; maxWidth: number } {
     return {
-        minWidth: hlp.getValueTyped(props, `columnWidths.${fieldName}`, defMinWidth),
-        maxWidth: hlp.getValueTyped(props, `columnWidths.${fieldName}`, defMaxWidth),
+        minWidth: helpers.getValueTyped(props, `columnWidths.${fieldName}`, defMinWidth),
+        maxWidth: helpers.getValueTyped(props, `columnWidths.${fieldName}`, defMaxWidth),
     };
 }
 
@@ -56,7 +55,7 @@ export const Time = (props: IEventListProps, fieldName = 'time'): IColumn => col
     (event: ITimeEntry) => {
         return (
             <span>
-                {hlp.formatDate(event.startTime, props.dateFormat)} - {hlp.formatDate(event.endTime, props.dateFormat)}
+                {helpers.formatDate(event.startTime, props.dateFormat)} - {helpers.formatDate(event.endTime, props.dateFormat)}
             </span>
         )
     }
@@ -76,27 +75,3 @@ export const Duration = (props: IEventListProps, fieldName = 'durationMinutes'):
     { ...getSizing(props, fieldName, 75, 75) },
     (event: ITimeEntry) => <DurationDisplay minutes={event.durationMinutes} />
 );
-
-/**
- * Project column
- * 
- * @param {IEventListProps} props Props
- * @param {string} fieldName Field name
- * 
- * @ignore
- */
-export const Project = (props: IEventListProps, fieldName = 'project'): IColumn => col(
-    fieldName,
-    'Project',
-    { ...getSizing(props, fieldName, 350, 350) },
-    (event: ITimeEntry) => <ProjectColumn {...props.projectColumn} event={event} />
-);
-
-/**
- * All columns
- * 
- * @param {IEventListProps} props Props
- * 
- * @ignore
- */
-export const GetAllColumns = (props: IEventListProps): IColumn[] => [Title(props), Time(props), Duration(props), Project(props)];

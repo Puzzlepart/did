@@ -10,7 +10,9 @@ import { withDefaultProps } from 'with-default-props';
  */
 const EventList = (props: IEventListProps): JSX.Element => {
     const columns = [
-        ...col.GetAllColumns(props).filter(col => props.hideColumns.indexOf(col.key) === -1),
+        col.Title(props),
+        col.Time(props),
+        col.Duration(props),
         ...props.additionalColumns
     ];
 
@@ -29,7 +31,6 @@ const EventList = (props: IEventListProps): JSX.Element => {
 export default withDefaultProps(
     EventList,
     {
-        hideColumns: [],
         additionalColumns: [],
     }
 );

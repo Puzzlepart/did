@@ -1,6 +1,6 @@
 
 import { useQuery } from '@apollo/react-hooks';
-import { TimesheetContext } from 'components/Timesheet';
+import { SummaryView, SummaryViewType } from 'components/Timesheet/SummaryView';
 import * as moment from 'moment';
 import { IPivotItemProps, Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
@@ -9,7 +9,6 @@ import * as React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import * as _ from 'underscore';
 import TIME_ENTRIES from './TIME_ENTRIES';
-import { SummaryView, SummaryViewType } from 'components/Timesheet/SummaryView';
 require('moment/locale/en-gb');
 
 /**
@@ -31,7 +30,7 @@ export interface IAdminSummaryViewParams {
 }
 
 /**
- * @category AdminView
+ * @category Admin
  */
 export const AdminSummaryView = (): JSX.Element => {
     const history = useHistory();
@@ -49,7 +48,6 @@ export const AdminSummaryView = (): JSX.Element => {
     const onNavigate = (year: string) => history.push(`/admin/summary/${year}`);
 
     return (
-        <TimesheetContext.Provider value={{ loading }}>
             <Pivot
                 defaultSelectedKey={year}
                 onLinkClick={({ props }) => onNavigate(props.itemKey)}
@@ -93,6 +91,5 @@ export const AdminSummaryView = (): JSX.Element => {
                     </PivotItem>
                 ))}
             </Pivot>
-        </TimesheetContext.Provider >
     );
 }

@@ -16,7 +16,7 @@ require('moment/locale/en-gb');
  */
 export const ActionBar = (props: IActionBarProps) => {
     const history = useHistory();
-    const { scope, loading, periods, selectedPeriod } = React.useContext(TimesheetContext);
+    const { scope, loading, periods, selectedPeriod, dispatch } = React.useContext(TimesheetContext);
     const items = [
         {
             key: 'THIS_WEEK',
@@ -66,9 +66,9 @@ export const ActionBar = (props: IActionBarProps) => {
                 itemType: ContextualMenuItemType.Normal,
                 onRender: () => (
                     <DefaultButton
-                        hidden={loading}
+                        hidden={!!loading}
                         iconProps={{ iconName: 'DateTime' }}
-                        onClick={() => props.dispatch({ type: 'CHANGE_PERIOD', payload: period.id })}
+                        onClick={() => dispatch({ type: 'CHANGE_PERIOD', payload: period.id })}
                         text={period.name}
                         styles={{ root: { height: 44, marginLeft: 4 } }}
                         checked={period.id === selectedPeriod.id} />
@@ -81,13 +81,13 @@ export const ActionBar = (props: IActionBarProps) => {
             itemType: ContextualMenuItemType.Normal,
             onRender: () => selectedPeriod.isConfirmed
                 ? <DefaultButton
-                    disabled={loading}
+                    disabled={!!loading}
                     iconProps={{ iconName: 'Cancel' }}
                     onClick={props.onUnconfirmPeriod}
                     text={resource('TIMESHEET.UNCONFIRM_HOURS_TEXT')}
                     styles={{ root: { height: 44, marginLeft: 4 } }} />
                 : <PrimaryButton
-                    disabled={loading || selectedPeriod.unmatchedDuration > 0 || selectedPeriod.events.length === 0}
+                    disabled={!!loading || selectedPeriod.unmatchedDuration > 0 || selectedPeriod.events.length === 0}
                     iconProps={{ iconName: 'CheckMark' }}
                     onClick={props.onConfirmPeriod}
                     text={resource('TIMESHEET.CONFIRM_HOURS_TEXT')}

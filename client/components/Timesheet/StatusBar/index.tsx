@@ -6,14 +6,13 @@ import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { Shimmer } from 'office-ui-fabric-react/lib/Shimmer';
 import * as React from 'react';
 import * as format from 'string-format';
-import { IStatusBarProps } from './IStatusBarProps';
 import { TimesheetContext } from '../';
 
 /**
  * @category Timesheet
  */
-export const StatusBar = ({ dispatch }: IStatusBarProps) => {
-    const { loading, periods, selectedPeriod } = React.useContext(TimesheetContext);
+export const StatusBar = () => {
+    const { loading, periods, selectedPeriod, dispatch } = React.useContext(TimesheetContext);
     return (
         <div className='c-Timesheet-statusbar' style={{ marginTop: 10, marginLeft: -10, marginRight: -10 }}>
             <Shimmer isDataLoaded={!loading} />
