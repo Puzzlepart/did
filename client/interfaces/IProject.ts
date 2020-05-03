@@ -1,5 +1,6 @@
 import { IObjectWithKey } from 'office-ui-fabric-react/lib/DetailsList';
 import { ICustomer, IOutlookCategory } from './';
+import { ILabel } from './ILabel';
 
 /**
  * @category Common
@@ -14,4 +15,5 @@ export interface IProject extends IObjectWithKey {
     customer: ICustomer;
     outlookCategory?: IOutlookCategory;
     inactive?: boolean;
+    labels?: ILabel[];
 }
