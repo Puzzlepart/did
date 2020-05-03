@@ -39,9 +39,11 @@ export const ProjectColumnTooltip = ({ project, className }: IProjectColumnToolt
             <div hidden={stringIsNullOrEmpty(project.description)} className={className.description}>
                 <p>{project.description}</p>
             </div>
-            <div hidden={!!project.labels && _.isEmpty(project.labels)} className={className.labels}>
-                {project.labels.map((label, idx) => <EntityLabel key={idx} {...label} />)}
-            </div>
+            {!!project.labels && !_.isEmpty(project.labels) && (
+                <div className={className.labels}>
+                    {project.labels.map((label, idx) => <EntityLabel key={idx} {...label} />)}
+                </div>
+            )}
             <div className={className.tag}><span>{project.key}</span></div>
         </div>
     );
@@ -132,7 +134,7 @@ export default withDefaultProps(ProjectColumn, {
         root: 'c-Timesheet-projectColumn',
         content: {
             root: 'c-Timesheet-projectColumn-content',
-            icon:  'c-Timesheet-projectColumn-content-icon',
+            icon: 'c-Timesheet-projectColumn-content-icon',
             text: 'c-Timesheet-projectColumn-content-text',
             subText: 'c-Timesheet-projectColumn-content-subText',
         },
