@@ -35,11 +35,17 @@ async function labels(_obj, _variables, { services: { storage: StorageService } 
     return labels;
 }
 
-async function addLabel(_obj, _variables, { services: { storage: StorageService } }) {
-
+async function addLabel(_obj, { label }, { services: { storage: StorageService } }) {
+    try {
+        await StorageService.addLabel(label);
+        return { success: true, error: null };
+    } catch (error) {
+        return { success: false, error: _.omit(error, 'requestId') };
+    }
 };
 
-async function updateLabel(_obj, _variables, { services: { storage: StorageService } }) {
+// TODO: Create updateLabel mutation
+async function updateLabel(_obj, { }, { services: { storage: StorageService } }) {
 
 }
 
