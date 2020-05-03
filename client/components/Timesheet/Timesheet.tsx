@@ -23,7 +23,7 @@ import { TimesheetContext } from './TimesheetContext';
 
 export const Timesheet = () => {
     const history = useHistory();
-    const params = useParams<{ startDateTime: string, view: TimesheetView }>();
+    const params = useParams<{ startDateTime: string; view: TimesheetView }>();
     const [loading, setLoading] = React.useState<IProgressIndicatorProps>({});
     const [scope, setScope] = React.useState<TimesheetScope>(new TimesheetScope());
     const [periods, setPeriods] = React.useState<TimesheetPeriod[]>([]);
@@ -36,8 +36,8 @@ export const Timesheet = () => {
         fetchPolicy: 'network-only',
         skip: false
     });
-    const [confirmPeriod] = useMutation<{ entries: any[], startDateTime: string, endDateTime: string }>(CONFIRM_PERIOD);
-    const [unconfirmPeriod] = useMutation<{ startDateTime: string, endDateTime: string }>(UNCONFIRM_PERIOD);
+    const [confirmPeriod] = useMutation<{ entries: any[]; startDateTime: string; endDateTime: string }>(CONFIRM_PERIOD);
+    const [unconfirmPeriod] = useMutation<{ startDateTime: string; endDateTime: string }>(UNCONFIRM_PERIOD);
 
     React.useEffect(() => {
         setLoading(timesheetQuery.loading ? { label: 'Loading events', description: 'Please wait...' } : null);
@@ -45,7 +45,7 @@ export const Timesheet = () => {
     }, [timesheetQuery]);
 
 
-    let selectedPeriod = _.find(periods, p => p.id === selectedPeriodId) || _.first(periods) || new TimesheetPeriod();
+    const selectedPeriod = _.find(periods, p => p.id === selectedPeriodId) || _.first(periods) || new TimesheetPeriod();
 
     React.useEffect(() => setScope(new TimesheetScope(params.startDateTime)), [params.startDateTime]);
 
@@ -104,7 +104,7 @@ export const Timesheet = () => {
                                     fieldName: 'date',
                                     groupNames: scope.weekdays('dddd DD'),
                                     totalFunc: (items: ITimeEntry[]) => {
-                                        let totalMins = items.reduce((sum, i) => sum += i.durationMinutes, 0);
+                                        const totalMins = items.reduce((sum, i) => sum += i.durationMinutes, 0);
                                         return ` (${helpers.getDurationDisplay(totalMins)})`;
                                     },
                                 }}

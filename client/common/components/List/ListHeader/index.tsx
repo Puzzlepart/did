@@ -10,7 +10,7 @@ import * as React from 'react';
 export interface IListHeaderProps {
     headerProps: IDetailsHeaderProps;
     defaultRender: IRenderFunction<IDetailsHeaderProps>;
-    commandBar?: ICommandBarProps
+    commandBar?: ICommandBarProps;
 }
 
 /**

@@ -1,5 +1,5 @@
 import { TimesheetContext } from 'components/Timesheet';
-import * as helpers from 'helpers';
+import { TimesheetScope } from 'components/Timesheet/TimesheetScope';
 import { Calendar, DateRangeType, DayOfWeek } from 'office-ui-fabric-react/lib/Calendar';
 import { Callout, DirectionalHint } from 'office-ui-fabric-react/lib/Callout';
 import { FocusTrapZone } from 'office-ui-fabric-react/lib/FocusTrapZone';
@@ -9,7 +9,6 @@ import { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { ACTIONBAR_ICON_PROPS } from '../ACTIONBAR_ICON_PROPS';
 import { CALENDAR_STRINGS } from './CALENDAR_STRINGS';
-import { TimesheetScope } from 'components/Timesheet/TimesheetScope';
 
 /**
  * @category Timesheet
@@ -17,7 +16,7 @@ import { TimesheetScope } from 'components/Timesheet/TimesheetScope';
 export const WeekPicker = () => {
     const { scope } = React.useContext(TimesheetContext);
     const history = useHistory();
-    let [calendar, setCalendar] = useState(null);
+    const [calendar, setCalendar] = useState(null);
 
     return (
         <>
@@ -39,7 +38,7 @@ export const WeekPicker = () => {
                     doNotLayer={false}
                     target={calendar}
                     directionalHint={DirectionalHint.bottomLeftEdge}
-                    onDismiss={_ => setCalendar(null)}
+                    onDismiss={() => setCalendar(null)}
                     setInitialFocus={true}>
                     <FocusTrapZone isClickableOutsideFocusTrap={true}>
                         <Calendar

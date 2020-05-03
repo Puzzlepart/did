@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 
 import { stringIsNullOrEmpty } from '@pnp/common';
 import { useId } from '@uifabric/react-hooks';
@@ -16,7 +18,7 @@ import { IClearManualMatchButtonProps, IProjectColumnProps, IProjectColumnToolti
 /**
  * @category EventList
  */
-export const ClearManualMatchButton = ({ onClick, hidden, className }: IClearManualMatchButtonProps) => {
+export const ClearManualMatchButton = ({ onClick, hidden, className }: IClearManualMatchButtonProps): JSX.Element => {
     return (
         <div className={className} title={resource('TIMESHEET.CLEAR_PROJECT_MATCH_TOOLTIP_TEXT')} hidden={hidden}>
             <span onClick={onClick} style={{ cursor: 'pointer' }}><Icon iconName='Cancel' styles={{ root: { fontSize: 14 } }} /></span>
@@ -27,7 +29,7 @@ export const ClearManualMatchButton = ({ onClick, hidden, className }: IClearMan
 /**
  * @category EventList
  */
-export const ProjectColumnTooltip = ({ project, className }: IProjectColumnTooltipProps) => {
+export const ProjectColumnTooltip = ({ project, className }: IProjectColumnTooltipProps): JSX.Element => {
     return (
         <div className={className.root}>
             <div className={className.title}><span>{project.name}</span></div>
@@ -41,7 +43,7 @@ export const ProjectColumnTooltip = ({ project, className }: IProjectColumnToolt
 /**
  * @category EventList
  */
-const ProjectColumn = (props: IProjectColumnProps) => {
+const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
     const tooltipId = useId('tooltip');
     const toggleId = useId('toggle-callout');
     const [showResolveModal, setShowResolveModal] = React.useState<boolean>(false);
@@ -73,12 +75,12 @@ const ProjectColumn = (props: IProjectColumnProps) => {
                             <MessageBarButton
                                 text={resource('TIMESHEET.RESOLVE_PROJECT_BUTTON_LABEL')}
                                 iconProps={{ iconName: 'ReviewResponseSolid' }}
-                                onClick={_ => setShowResolveModal(true)}
+                                onClick={() => setShowResolveModal(true)}
                                 id={toggleId} />
                             <MessageBarButton
                                 text={resource('TIMESHEET.IGNORE_EVENT_BUTTON_LABEL')}
                                 iconProps={{ iconName: 'Blocked2' }}
-                                onClick={_ => props.onIgnoreEvent(props.event)} />
+                                onClick={() => props.onIgnoreEvent(props.event)} />
                         </div>
                     } />
                 <ResolveProjectModal

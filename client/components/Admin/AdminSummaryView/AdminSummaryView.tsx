@@ -1,16 +1,15 @@
 
 import { useQuery } from '@apollo/react-hooks';
-import { SummaryView, SummaryViewType } from 'components/Timesheet/SummaryView';
 import { TimesheetContext } from 'components/Timesheet';
 import * as moment from 'moment';
 import { IPivotItemProps, Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import { Slider } from 'office-ui-fabric-react/lib/Slider';
 import * as React from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import * as _ from 'underscore';
-import { IAdminSummaryViewProps } from './IAdminSummaryViewProps';
 import TIME_ENTRIES from './TIME_ENTRIES';
+import { SummaryView, SummaryViewType } from 'components/Timesheet/SummaryView';
 require('moment/locale/en-gb');
 
 /**
@@ -19,7 +18,7 @@ require('moment/locale/en-gb');
  * @param {number} range Range
  */
 function createPeriods(range: number): IPivotItemProps[] {
-    let periods = [];
+    const periods = [];
     for (let i = range; i >= 0; i--) {
         const key = (moment().year() - i).toString();
         periods.push({ key, itemKey: key, headerText: key });
@@ -34,7 +33,7 @@ export interface IAdminSummaryViewParams {
 /**
  * @category AdminView
  */
-export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
+export const AdminSummaryView = (): JSX.Element => {
     const history = useHistory();
     const params = useParams<IAdminSummaryViewParams>();
     const year = params.year || moment().year().toString();
@@ -45,7 +44,7 @@ export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
     });
     const timeentries = (data ? data.timeentries : []).filter(e => e.monthNumber > 0);
 
-    let periods = createPeriods(2);
+    const periods = createPeriods(2);
 
     const onNavigate = (year: string) => history.push(`/admin/summary/${year}`);
 
@@ -53,10 +52,10 @@ export const AdminSummaryView = (props: IAdminSummaryViewProps) => {
         <TimesheetContext.Provider value={{ loading }}>
             <Pivot
                 defaultSelectedKey={year}
-                onLinkClick={({ props }) => onNavigate(year)}
+                onLinkClick={({ props }) => onNavigate(props.itemKey)}
                 styles={{ itemContainer: { paddingTop: 10 } }}>
                 {periods.map(itemProps => (
-                    <PivotItem {...itemProps}>
+                    <PivotItem key={itemProps.itemKey} {...itemProps}>
                         <Pivot styles={{ itemContainer: { paddingTop: 10 } }}>
                             <PivotItem key='month' itemKey='month' headerText='Month' itemIcon='Calendar'>
                                 {!loading && (

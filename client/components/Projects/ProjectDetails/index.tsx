@@ -30,7 +30,7 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
      * On export to Excel
      */
     async function onExportExcel() {
-        let key = project.id.replace(/\s+/g, '-').toUpperCase();
+        const key = project.id.replace(/\s+/g, '-').toUpperCase();
         await excel.exportExcel(
             timeentries,
             {
@@ -95,7 +95,7 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                             hidden={!!project.outlookCategory}
                             text={resource('PROJECTS.CREATE_OUTLOOK_CATEGORY_LABEL')}
                             iconProps={{ iconName: 'OutlookLogoInverse' }}
-                            onClick={_event => onCreateCategory()}
+                            onClick={() => onCreateCategory()}
                             disabled={loading}
                             style={{ marginLeft: 5 }} />
                     </div>

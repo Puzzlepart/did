@@ -14,39 +14,40 @@ import { SearchCustomer } from './SearchCustomer';
  * @category Projects
  */
 export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey: '', name: '', description: '', icon: 'Page' } }: ICreateProjectFormProps) => {
-    let [validation, setValidation] = React.useState<ICreateProjectFormValidation>({ errors: {}, invalid: true });
-    let [message, setMessage] = useMessage();
-    let [model, setModel] = React.useState<ICreateProjectFormModel>(initialModel);
-    let [addProject, { loading }] = useMutation<any, ICreateProjectFormModel>(CREATE_PROJECT);
+    const [validation, setValidation] = React.useState<ICreateProjectFormValidation>({ errors: {}, invalid: true });
+    const [message, setMessage] = useMessage();
+    const [model, setModel] = React.useState<ICreateProjectFormModel>(initialModel);
+    const [addProject, { loading }] = useMutation<any, ICreateProjectFormModel>(CREATE_PROJECT);
+
+
+    /**
+     * Validate form
+     */
+    const validateForm = (): ICreateProjectFormValidation => {
+        const errors: { [key: string]: string } = {};
+        if (!model.customerKey) errors.customerKey = '';
+        if (model.name.length < 2) errors.name = 'Name should be at least 2 characters long.';
+        if (!(/(^[A-ZÆØÅ0-9]{3,8}$)/gm).test(model.projectKey)) errors.projectKey = 'Project key should be between 3 and 8 characters long, and all uppercase.';
+        return { errors, invalid: Object.keys(errors).length > 0 };
+    }
 
     /**
      * On form submit
      */
     const onFormSubmit = async () => {
-        let _validation = validateForm();
+        const _validation = validateForm();
         if (_validation.invalid) {
             setValidation(_validation);
             return;
         }
         setValidation({ errors: {}, invalid: false });
-        let { data: { result } } = await addProject({ variables: model });
+        const { data: { result } } = await addProject({ variables: model });
         if (result.success) {
             setMessage({ text: `The project **${model.name}** was succesfully created.`, type: MessageBarType.success })
         } else {
             setMessage({ text: result.error.message, type: MessageBarType.error });
         }
         setModel(initialModel);
-    }
-
-    /**
-     * Validate form
-     */
-    const validateForm = (): ICreateProjectFormValidation => {
-        let errors: { [key: string]: string } = {};
-        if (!model.customerKey) errors.customerKey = '';
-        if (model.name.length < 2) errors.name = 'Name should be at least 2 characters long.';
-        if (!(/(^[A-ZÆØÅ0-9]{3,8}$)/gm).test(model.projectKey)) errors.projectKey = 'Project key should be between 3 and 8 characters long, and all uppercase.';
-        return { errors, invalid: Object.keys(errors).length > 0 };
     }
 
     return (

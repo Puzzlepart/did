@@ -7,7 +7,7 @@ import { humanize } from 'underscore.string';
 /**
  * @category IconPicker
  */
-export interface IIconPickerProps extends IDropdownProps {}
+export type IIconPickerProps = IDropdownProps
 
 /**
  * @category IconPicker

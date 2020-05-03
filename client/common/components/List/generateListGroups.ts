@@ -15,14 +15,14 @@ import * as _ from 'underscore';
  * 
  * @category List
  */
-export function generateListGroups(items: any[], groupBy: string, uniqueGroupNames: string[], emptyGroupName: string = '', totalFunc?: Function): { items: any[], groups: IGroup[] } {
+export function generateListGroups(items: any[], groupBy: string, uniqueGroupNames: string[], emptyGroupName = '', totalFunc?: Function): { items: any[]; groups: IGroup[] } {
     const itemsSort = { props: [groupBy], opts: { reverse: false } };
     items = arraySort([...items], itemsSort.props, itemsSort.opts);
-    let groupNames = items.map(g => value<string>(g, groupBy, emptyGroupName));
+    const groupNames = items.map(g => value<string>(g, groupBy, emptyGroupName));
     uniqueGroupNames = uniqueGroupNames || _.uniq(groupNames).sort((a, b) => a > b ? 1 : -1);
     const groups = uniqueGroupNames.map((name, idx) => {
-        let itemsInGroup = items.filter(item => value<string>(item, groupBy, emptyGroupName) === name);
-        let total = totalFunc ? totalFunc(itemsInGroup) : '';
+        const itemsInGroup = items.filter(item => value<string>(item, groupBy, emptyGroupName) === name);
+        const total = totalFunc ? totalFunc(itemsInGroup) : '';
         const group: IGroup = {
             key: idx.toString(),
             name: `${name} ${total}`,

@@ -39,9 +39,9 @@ export class TimesheetScope {
 
     //TODO: Add comment
     public add(amount: number, unit: any): TimesheetScope {
-        let start = this._startDateTime.clone();
+        const start = this._startDateTime.clone();
         start.add(amount, unit);
-        let n = new TimesheetScope();
+        const n = new TimesheetScope();
         n._update(start);
         return n;
     }

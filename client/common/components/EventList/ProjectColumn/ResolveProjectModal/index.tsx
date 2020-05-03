@@ -1,4 +1,3 @@
-
 import { UserMessage, SearchProject } from 'common/components';
 import { getValueTyped as value } from 'helpers';
 import { Modal } from 'office-ui-fabric-react/lib/Modal';
@@ -10,11 +9,11 @@ import * as format from 'string-format';
 import { IResolveProjectModalProps } from './types';
 import resource from 'i18n';
 
- /**
-  * Modal for resolving a project that hasn't been matched to a project
-  * 
-  * @category EventList
- */
+/**
+ * Modal for resolving a project that hasn't been matched to a project
+ * 
+ * @category EventList
+*/
 export const ResolveProjectModal = ({ isOpen, onDismiss, onProjectSelected, event }: IResolveProjectModalProps) => {
     const [scope, setScope] = useState<boolean>(!!event.customer);
     return (
@@ -31,7 +30,7 @@ export const ResolveProjectModal = ({ isOpen, onDismiss, onProjectSelected, even
                 hidden={!event.suggestedProject}
                 style={{ marginTop: 5 }}
                 iconName='Lightbulb' >
-                <p>{resource('TIMESHEET.DID_YOU_MEAN_TEXT')}<a href="#" onClick={_ => onProjectSelected(event.suggestedProject)}>{value(event, 'suggestedProject.id', '')}</a>?</p>
+                <p>{resource('TIMESHEET.DID_YOU_MEAN_TEXT')}<a href="#" onClick={() => onProjectSelected(event.suggestedProject)}>{value(event, 'suggestedProject.id', '')}</a>?</p>
             </UserMessage>
 
             <UserMessage

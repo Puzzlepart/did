@@ -23,7 +23,7 @@ export const Users = () => {
         col('edit', '', {}, (user: any) => <DefaultButton text='Edit' onClick={() => setUserForm({ title: user.fullName, user })} />)
     ];
 
-    let commands: IContextualMenuItem[] = [
+    const commands: IContextualMenuItem[] = [
         {
             key: 'ENROLL_USER',
             name: 'Enroll user',

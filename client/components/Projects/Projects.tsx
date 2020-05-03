@@ -28,7 +28,7 @@ export const Projects = () => {
 
     React.useEffect(() => {
         if (!selected && params.key) {
-            let _selected = _.find(projects, p => p.id === params.key.toUpperCase());
+            const _selected = _.find(projects, p => p.id === params.key.toUpperCase());
             setSelected(_selected);
         }
     }, [params.key, projects]);

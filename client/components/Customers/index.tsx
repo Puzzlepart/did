@@ -6,7 +6,7 @@ import { Customers } from './Customers';
  * @ignore
  */
 const _ = () => {
-    let match = useRouteMatch();
+    const match = useRouteMatch();
     return (
         <Switch>
             <Route path={`${match.path}/:key`}>

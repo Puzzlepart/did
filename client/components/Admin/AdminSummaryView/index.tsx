@@ -3,7 +3,7 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { AdminSummaryView } from './AdminSummaryView';
 
 export default () => {
-    let match = useRouteMatch();
+    const match = useRouteMatch();
     return (
         <Switch>
             <Route path={`${match.path}/:year`}>

@@ -1,4 +1,4 @@
-export function tryParseJson<T>(str: string, fallbackValue: T = {} as T) {
+export function tryParseJson<T>(str: string, fallbackValue: T = {} as T): T {
     try {
         return JSON.parse(str);
     } catch (error) {

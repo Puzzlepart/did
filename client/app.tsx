@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { AppContext, IAppContext } from './AppContext';
 import { Navigation, Timesheet, Customers, Projects, Reports, Admin, Home } from 'components';
 
-const App = (context: IAppContext) => {
+const App = (context: IAppContext): JSX.Element => {
     return (
         <AppContext.Provider value={context}>
             <Router>

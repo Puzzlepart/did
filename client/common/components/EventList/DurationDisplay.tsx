@@ -3,6 +3,6 @@ import { getDurationDisplay } from 'helpers';
 import * as React from 'react';
 
 /**
- * @category EventList
+ * @ignore
  */
-export const DurationDisplay = ({ minutes }) => <span>{getDurationDisplay(minutes)}</span>;
+export const DurationDisplay = ({ minutes }): JSX.Element => <span>{getDurationDisplay(minutes)}</span>;

@@ -1,10 +1,9 @@
 
-import { ITypedHash } from '@pnp/common';
 import { getValueTyped as value } from 'helpers';
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import * as React from 'react';
-import { ITimeEntry, IUserAllocationProps } from './types';
+import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from 'recharts';
 import _ from 'underscore';
+import { ITimeEntry, IUserAllocationProps } from './types';
 
 /**
  * Calculates durations based on exp
@@ -14,11 +13,11 @@ import _ from 'underscore';
  * 
  * @category UserAllocation
  */
-export const GetAllocation = (entries: ITimeEntry[], exp: string): Array<{ name: string, hours: number }> => {
-    let items = entries.reduce((_items, entry) => {
-        let key = value(entry, exp, null);
+export const GetAllocation = (entries: ITimeEntry[], exp: string): Array<{ name: string; hours: number }> => {
+    const items = entries.reduce((_items, entry) => {
+        const key = value(entry, exp, null);
         if (key) {
-            let item = _.find(_items, i => i.name === key);
+            const item = _.find(_items, i => i.name === key);
             if (item) {
                 item.hours += entry.durationHours;
             } else {
@@ -35,7 +34,7 @@ export const GetAllocation = (entries: ITimeEntry[], exp: string): Array<{ name:
  * 
  * @category UserAllocation
  */
-export const UserAllocation = (props: IUserAllocationProps) => {
+export const UserAllocation = (props: IUserAllocationProps): JSX.Element => {
     const [dimensions, setDimensions] = React.useState({ width: 0, height: 0 });
     const ref = React.useRef<HTMLDivElement>();
 

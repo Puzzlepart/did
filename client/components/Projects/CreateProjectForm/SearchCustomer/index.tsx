@@ -15,9 +15,9 @@ import { ISearchCustomerProps } from './ISearchCustomerProps';
  * @category Projects
  */
 export const SearchCustomer = (props: ISearchCustomerProps) => {
-    let [customers, setCustomers] = useState<ICustomer[]>(null);
-    let [suggestions, setSuggestions] = useState([]);
-    let [value, setValue] = useState('');
+    const [customers, setCustomers] = useState<ICustomer[]>(null);
+    const [suggestions, setSuggestions] = useState([]);
+    const [value, setValue] = useState('');
     const { loading, data } = useQuery(GET_CUSTOMERS, { skip: !!customers, variables: { sortBy: 'name' }, fetchPolicy: 'cache-first', });
 
     React.useEffect(() => { (!loading && !!data) && setCustomers(data.customers); }, [data, loading]);
@@ -28,12 +28,12 @@ export const SearchCustomer = (props: ISearchCustomerProps) => {
      * @param {string} value Value
      * @param {number} maxSuggestions Max suggestions count
      */
-    const getSuggestions = (value: string, maxSuggestions: number = 5) => {
+    const getSuggestions = (value: string, maxSuggestions = 5) => {
         const inputValue = value.trim().toLowerCase();
         if (inputValue.length === 0) return [];
         return [...customers].filter(customer => {
-            let searchString = [customer.name, customer.id].join(' ').toLowerCase();
-            let isMatch = searchString.indexOf(inputValue) !== -1;
+            const searchString = [customer.name, customer.id].join(' ').toLowerCase();
+            const isMatch = searchString.indexOf(inputValue) !== -1;
             return isMatch;
         }).splice(0, maxSuggestions);
     };

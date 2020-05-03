@@ -20,7 +20,7 @@ import TIME_ENTRIES from './TIME_ENTRIES';
  * 
  * @category Reports
  */
-function getColumns(entry: Object = {}, skip: string[]): IColumn[] {
+function getColumns(entry: Record<string, any> = {}, skip: string[]): IColumn[] {
     return Object.keys(entry)
         .filter(f => skip.indexOf(f) === -1)
         .map(fieldName => col(fieldName, humanize(fieldName), { minWidth: 60, maxWidth: 100 }));;
@@ -60,9 +60,9 @@ export const Reports = () => {
      * @param {IFilter[]} filters 
      */
     const onFilterUpdated = (filters: IFilter[]) => {
-        let _entries = timeentries.filter(entry => {
+        const _entries = timeentries.filter(entry => {
             return filters.filter(f => {
-                let selectedKeys = f.selected.map(s => s.key);
+                const selectedKeys = f.selected.map(s => s.key);
                 return selectedKeys.indexOf(value(entry, f.key, '')) !== -1;
             }).length === filters.length;
         });

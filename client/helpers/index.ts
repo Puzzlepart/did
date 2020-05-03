@@ -13,8 +13,8 @@ require('twix');
  * @category Helper
  */
 export function getDurationDisplay(minutes: number, hours?: number): string {
-    let hrs = hours ? Math.floor(hours) : Math.floor(minutes / 60);
-    let mins = hours ? ((hours % 1) * 60) : minutes % 60;
+    const hrs = hours ? Math.floor(hours) : Math.floor(minutes / 60);
+    const mins = hours ? ((hours % 1) * 60) : minutes % 60;
     return mins === 0 ? `${hrs}h` : hrs === 0
         ? `${mins}min`
         : [(`${hrs}h`), (`${mins}min`)].join(' ');
@@ -39,7 +39,7 @@ export function getUrlParameter(name: string, fallbackValue: string = null): str
  * 
  * @category Helper
  */
-export function stringToArrayBuffer(str: string) {
+export function stringToArrayBuffer(str: string): ArrayBuffer {
     const buf = new ArrayBuffer(str.length);
     const view = new Uint8Array(buf);
     for (let i = 0; i !== str.length; ++i) {
@@ -57,7 +57,7 @@ export function stringToArrayBuffer(str: string) {
  * 
  * @category Helper
  */
-export function currencyDisplay(num: number, currency: string = 'NOK', minimumFractionDigits: number = 0) {
+export function currencyDisplay(num: number, currency = 'NOK', minimumFractionDigits = 0): string {
     const formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency,
@@ -138,7 +138,7 @@ export function getWeekdays(start: moment.Moment, dateFormat: string): string[] 
  * 
  * @category Helper
  */
-export function getTimespanString(start: moment.Moment | string, end: moment.Moment | string, options: object = { monthFormat: 'MMMM', yearFormat: 'YYYY', hideYear: false, implicitYear: false }) {
+export function getTimespanString(start: moment.Moment | string, end: moment.Moment | string, options: object = { monthFormat: 'MMMM', yearFormat: 'YYYY', hideYear: false, implicitYear: false }): string {
     if (typeof start === 'string') start = moment(start);
     if (typeof end === 'string') end = moment(end);
     return start['twix'](end, { allDay: true }).format(options).toLowerCase();
@@ -161,10 +161,10 @@ export function getMonthName(monthNumber: number): string {
  * @category Helper
  */
 export function parseUrlHash<T>(defaultValue: T = {} as T): T {
-    var hash = window.location.hash.substr(1);
+    const hash = window.location.hash.substr(1);
     if (stringIsNullOrEmpty(hash)) return defaultValue;
-    let hashObject = hash.split('&').reduce(function (result, item) {
-        var [key, value] = item.split('=');
+    const hashObject = hash.split('&').reduce(function (result, item) {
+        const [key, value] = item.split('=');
         result[key] = decodeURIComponent(value);
         return result;
     }, {}) as T;
@@ -178,9 +178,9 @@ export function parseUrlHash<T>(defaultValue: T = {} as T): T {
  * @param {boolean} persistPrevious Persist previous hash
  * @param {boolean} redirect Redirect (defaults to true)
  */
-export function updateUrlHash(hashObject: ITypedHash<string>, persistPrevious: boolean = true, redirect: boolean = true): string {
+export function updateUrlHash(hashObject: ITypedHash<string>, persistPrevious = true, redirect = true): string {
     if (persistPrevious) hashObject = { ...parseUrlHash(), ...hashObject };
-    let urlHash = Object.keys(hashObject).map(key => `${key}=${hashObject[key]}`).join('&');
+    const urlHash = Object.keys(hashObject).map(key => `${key}=${hashObject[key]}`).join('&');
     if (redirect) document.location.hash = urlHash;
     return urlHash;
 }
@@ -192,7 +192,7 @@ export function updateUrlHash(hashObject: ITypedHash<string>, persistPrevious: b
  * 
  * @category Helper
  */
-export function sortAlphabetically(strArray: string[]) {
+export function sortAlphabetically(strArray: string[]): string[] {
     return strArray.sort((a, b) => {
         if (a > b) return 1;
         if (a < b) return -1;

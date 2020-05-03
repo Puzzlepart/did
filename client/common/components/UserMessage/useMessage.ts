@@ -13,7 +13,7 @@ export function useMessage(): [IUserMessageProps, (message: IUserMessageProps, d
      * @param {IUserMessageProps} message Message
      * @param {number} duration Duration in ms (defaults to 5000)
      */
-    function set(message: IUserMessageProps, duration: number = 5000) {
+    function set(message: IUserMessageProps, duration = 5000) {
         setState(message);
         window.setTimeout(() => setState(null), duration);
     }

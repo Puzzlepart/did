@@ -14,22 +14,32 @@ import { ICreateCustomerFormValidation } from './ICreateCustomerFormValidation';
  * @category Customers
  */
 export const CreateCustomerForm = ({ initialModel = { key: '', name: '', description: '', icon: 'Page' } }: ICreateCustomerFormProps) => {
-    let [validation, setValidation] = useState<ICreateCustomerFormValidation>({ errors: {}, invalid: true });
-    let [message, setMessage] = useState<{ text: string, type: MessageBarType }>(null);
-    let [model, setModel] = useState<ICreateCustomerFormModel>(initialModel);
-    let [addCustomer, { loading }] = useMutation(CREATE_CUSTOMER);
+    const [validation, setValidation] = useState<ICreateCustomerFormValidation>({ errors: {}, invalid: true });
+    const [message, setMessage] = useState<{ text: string; type: MessageBarType }>(null);
+    const [model, setModel] = useState<ICreateCustomerFormModel>(initialModel);
+    const [addCustomer, { loading }] = useMutation(CREATE_CUSTOMER);
+
+    /**
+     * Validate form
+     */
+    const validateForm = (): ICreateCustomerFormValidation => {
+        const errors: { [key: string]: string } = {};
+        if (model.name.length < 2) errors.name = 'Name should be at least 2 characters long.';
+        if (!(/(^[A-ZÆØÅ0-9]{3,8}$)/gm).test(model.key)) errors.key = 'Customer key should be between 3 and 8 characters long, and all uppercase.';
+        return { errors, invalid: Object.keys(errors).length > 0 };
+    }
 
     /**
      * On form submit
      */
     const onFormSubmit = async () => {
-        let _validation = validateForm();
+        const _validation = validateForm();
         if (_validation.invalid) {
             setValidation(_validation);
             return;
         }
         setValidation({ errors: {}, invalid: false });
-        let { data: { result } } = await addCustomer({ variables: model });
+        const { data: { result } } = await addCustomer({ variables: model });
         if (result.success) {
             setMessage({ text: `The customer **${model.name}** was succesfully created.`, type: MessageBarType.success });
         } else {
@@ -37,16 +47,6 @@ export const CreateCustomerForm = ({ initialModel = { key: '', name: '', descrip
         }
         setModel(initialModel);
         window.setTimeout(() => setMessage(null), 5000);
-    }
-
-    /**
-     * Validate form
-     */
-    const validateForm = (): ICreateCustomerFormValidation => {
-        let errors: { [key: string]: string } = {};
-        if (model.name.length < 2) errors.name = 'Name should be at least 2 characters long.';
-        if (!(/(^[A-ZÆØÅ0-9]{3,8}$)/gm).test(model.key)) errors.key = 'Customer key should be between 3 and 8 characters long, and all uppercase.';
-        return { errors, invalid: Object.keys(errors).length > 0 };
     }
 
     return (

@@ -6,7 +6,7 @@ import { Admin } from './Admin';
  * @ignore
  */
 const _ = () => {
-    let match = useRouteMatch();
+    const match = useRouteMatch();
     return (
         <Switch>
             <Route path={`${match.path}/:view/:year`}>

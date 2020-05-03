@@ -8,9 +8,9 @@ import { withDefaultProps } from 'with-default-props';
 /**
  * @category EventList
  */
-let EventList = (props: IEventListProps) => {
+const EventList = (props: IEventListProps): JSX.Element => {
     const columns = [
-        ...col.GetAll(props).filter(col => props.hideColumns.indexOf(col.key) === -1),
+        ...col.GetAllColumns(props).filter(col => props.hideColumns.indexOf(col.key) === -1),
         ...props.additionalColumns
     ];
 

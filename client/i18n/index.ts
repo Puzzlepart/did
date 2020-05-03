@@ -20,7 +20,7 @@ export default function resource(key: string): string {
  * 
  * @ignore
  */
-export async function setup(languages: ITypedHash<any>, defaultNS: string = 'translation'): Promise<boolean> {
+export async function setup(languages: ITypedHash<any>, defaultNS = 'translation'): Promise<boolean> {
     await i18n.init({
         debug: false,
         fallbackLng: 'en',

@@ -14,9 +14,9 @@ import { ISearchProjectProps } from './types';
  * @category SearchProject
  */
 export const SearchProject = (props: ISearchProjectProps) => {
-    let [projects, setProjects] = useState<IProject[]>(null);
-    let [suggestions, setSuggestions] = useState([]);
-    let [value, setValue] = useState('');
+    const [projects, setProjects] = useState<IProject[]>(null);
+    const [suggestions, setSuggestions] = useState([]);
+    const [value, setValue] = useState('');
     const { loading, data } = useQuery(GET_PROJECTS, { skip: !!projects, variables: { sortBy: 'name' }, fetchPolicy: 'cache-first', });
 
     React.useEffect(() => { (!loading && !!data) && setProjects(data.projects); }, [data, loading]);
@@ -27,11 +27,11 @@ export const SearchProject = (props: ISearchProjectProps) => {
      * @param {string} value Value
      * @param {number} maxSuggestions Max suggestions count
      */
-    const getSuggestions = (value: string, maxSuggestions: number = 5) => {
+    const getSuggestions = (value: string, maxSuggestions = 5) => {
         const inputValue = value.trim().toLowerCase();
         if (inputValue.length === 0) return [];
         return [...projects].filter(project => {
-            let searchString = [project.name, project.customer.name, project.id].join(' ').toLowerCase();
+            const searchString = [project.name, project.customer.name, project.id].join(' ').toLowerCase();
             let isMatch = searchString.indexOf(inputValue) !== -1;
             if (props.customer) isMatch = isMatch && project.customer.id === props.customer.id;
             return isMatch;

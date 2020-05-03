@@ -1,11 +1,12 @@
 import { getValueTyped as value } from 'helpers';
 import _ from 'underscore';
 import { BaseFilter, IFilter } from "./BaseFilter";
+import moment from 'moment';
 
 /**
  * @ignore
  */
-const MONTH_NAMES: string[] = Array.apply(0, Array(12)).map((_: any, i: number) => require('moment')().month(i).format('MMMM'));
+const MONTH_NAMES: string[] = Array.apply(0, Array(12)).map((_: any, i: number) => moment().month(i).format('MMMM'));
 
 /**
  * @category FilterPanel

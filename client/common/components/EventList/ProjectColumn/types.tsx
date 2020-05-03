@@ -20,7 +20,7 @@ export interface IProjectColumnClassName {
         root: string;
         text: string;
         subText: string;
-    },
+    };
     clearButton: string;
     tooltip: IProjectColumnTooltipClassName;
 }

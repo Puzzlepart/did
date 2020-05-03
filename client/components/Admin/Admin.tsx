@@ -1,10 +1,9 @@
 
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import * as React from 'react';
-import { useParams, useHistory } from 'react-router-dom';
-import  AdminSummaryView  from './AdminSummaryView';
+import { useHistory, useParams } from 'react-router-dom';
+import AdminSummaryView from './AdminSummaryView';
 import { Users } from './Users';
-import moment from 'moment';
 
 /**
  * @category Admin

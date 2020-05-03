@@ -17,8 +17,8 @@ import UPDATE_USER from './UPDATE_USER';
  */
 export const UserFormModal = (props: IUserFormModalProps) => {
     const [user, setUser] = React.useState<IUser>(props.user || { id: '', fullName: '', role: 'User' });
-    let [updateUser] = useMutation(UPDATE_USER);
-    let [addUser] = useMutation(ADD_USER);
+    const [updateUser] = useMutation(UPDATE_USER);
+    const [addUser] = useMutation(ADD_USER);
 
     /**
      * On save

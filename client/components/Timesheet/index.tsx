@@ -3,7 +3,7 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { Timesheet } from './Timesheet';
 
 const _ = () => {
-    let match = useRouteMatch();
+    const match = useRouteMatch();
     return (
         <Switch>
             <Route path={`${match.path}/:view/:startDateTime`}>

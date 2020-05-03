@@ -1,14 +1,14 @@
 import resource from 'i18n';
-import _ from 'underscore';
+import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react/lib/Button';
 import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
 import { ContextualMenuItemType, IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
-import { PrimaryButton, DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import * as React from 'react';
+import { useHistory } from "react-router-dom";
+import _ from 'underscore';
+import { TimesheetContext } from '../';
 import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS';
 import { IActionBarProps } from './IActionBarProps';
 import { WeekPicker } from './WeekPicker';
-import { useHistory } from "react-router-dom";
-import { TimesheetContext } from '../';
 require('moment/locale/en-gb');
 
 /**
@@ -70,7 +70,7 @@ export const ActionBar = (props: IActionBarProps) => {
                     <DefaultButton
                         hidden={loading}
                         iconProps={{ iconName: 'DateTime' }}
-                        onClick={_ => props.onChangePeriod(period.id)}
+                        onClick={() => props.onChangePeriod(period.id)}
                         text={period.name}
                         styles={{ root: { height: 44, marginLeft: 4 } }}
                         checked={period.id === selectedPeriod.id} />

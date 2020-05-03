@@ -25,7 +25,7 @@ export const Customers = () => {
 
     React.useEffect(() => {
         if (!selected && params.key) {
-            let _selected = _.find(customers, p => p.id === params.key.toUpperCase());
+            const _selected = _.find(customers, p => p.id === params.key.toUpperCase());
             setSelected(_selected);
         }
     }, [params.key, customers]);
