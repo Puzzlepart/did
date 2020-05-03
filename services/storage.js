@@ -109,9 +109,11 @@ class StorageService {
     }
     /**
      * Get customers
+     *
+     * @param {*} limit
      */
-    async getCustomers() {
-        const query = createQuery(1000, undefined, this.filter);
+    async getCustomers(limit) {
+        const query = createQuery(limit || 1000, undefined, this.filter);
         const { entries } = await queryTable('Customers', query);
         return parseArray(entries, undefined, { idUpper: true });
     }
