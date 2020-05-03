@@ -49,7 +49,7 @@ export const Reports = () => {
             {
                 columns,
                 skip: ['id', '__typename', 'monthNumber'],
-                fileName: format('TimeEntries-{0}.xlsx', new Date().toDateString().split(" ").join("-")),
+                fileName: format('TimeEntries-{0}.xlsx', new Date().toDateString().split(' ').join('-')),
             }
         );
     }
@@ -70,7 +70,7 @@ export const Reports = () => {
     }
 
 
-    if (loading) return <ProgressIndicator label={'Generating report'} description={`To give you the freshest results, we're generating a report from the latest data...`} />;
+    if (loading) return <ProgressIndicator label={'Generating report'} description={'To give you the freshest results, we\'re generating a report from the latest data...'} />;
 
     return (
         <div>
@@ -98,7 +98,7 @@ export const Reports = () => {
                         }
                     ]
                 }} />
-            <UserMessage hidden={timeentries.length > 0 || loading} text={`There's no confirmed time entries at this time.`} />
+            <UserMessage hidden={timeentries.length > 0 || loading} text={'There\'s no confirmed time entries at this time.'} />
             <FilterPanel
                 isOpen={filterPanelOpen}
                 filters={REPORTS_FILTERS}

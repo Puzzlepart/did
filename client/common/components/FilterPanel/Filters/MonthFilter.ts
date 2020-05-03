@@ -1,6 +1,6 @@
 import { getValueTyped as value } from 'helpers';
 import _ from 'underscore';
-import { BaseFilter, IFilter } from "./BaseFilter";
+import { BaseFilter, IFilter } from './BaseFilter';
 import moment from 'moment';
 
 /**

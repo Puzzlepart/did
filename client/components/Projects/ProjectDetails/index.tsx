@@ -60,8 +60,8 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                     </div>
                 </div>
                 {project.inactive && (
-                    <div className="row" style={{ marginBottom: 10 }}>
-                        <div className="col-sm">
+                    <div className='row' style={{ marginBottom: 10 }}>
+                        <div className='col-sm'>
                             <UserMessage text={resource('PROJECTS.PROJECT_INACTIVE_TEXT')} iconName='Warning' type={MessageBarType.warning} />
                         </div>
                     </div>

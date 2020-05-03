@@ -3,7 +3,7 @@ import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
 import { ContextualMenuItemType, IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
 import * as React from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import _ from 'underscore';
 import { TimesheetContext } from '../';
 import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS';
@@ -24,7 +24,7 @@ export const ActionBar = (props: IActionBarProps) => {
             iconOnly: true,
             iconProps: { iconName: 'RenewalCurrent', ...ACTIONBAR_ICON_PROPS },
             onClick: () => {
-                history.push(`/timesheet`);
+                history.push('/timesheet');
             },
             disabled: scope.isCurrentWeek,
             title: resource('TIMESHEET.COMMANDBAR_CURRENT_WEEK_TEXT'),
@@ -53,7 +53,7 @@ export const ActionBar = (props: IActionBarProps) => {
         ...(periods.length === 1
             ? [
                 {
-                    key: `PERIOD_0`,
+                    key: 'PERIOD_0',
                     itemType: ContextualMenuItemType.Header,
                     onRender: () => (
                         <span style={{ paddingTop: 12 }}>

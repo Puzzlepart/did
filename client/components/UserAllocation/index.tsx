@@ -41,25 +41,25 @@ export const UserAllocation = (props: IUserAllocationProps): JSX.Element => {
     React.useLayoutEffect(() => setDimensions({ width: ref.current.clientWidth, height: 400 }), []);
 
     return (
-        <div className="c-UserAllocation" ref={ref}>
+        <div className='c-UserAllocation' ref={ref}>
             {Object.keys(props.charts).map(exp => {
                 const title = props.charts[exp];
                 const data = GetAllocation(props.entries, exp);
                 return (
-                    <div className="c-UserAllocation-row row" key={exp}>
-                        <div className="c-UserAllocation-chart col-sm">
-                            <div className="c-UserAllocation-chart-title">{title}</div>
+                    <div className='c-UserAllocation-row row' key={exp}>
+                        <div className='c-UserAllocation-chart col-sm'>
+                            <div className='c-UserAllocation-chart-title'>{title}</div>
                             <BarChart
                                 width={dimensions.width}
                                 height={dimensions.height}
                                 data={data}
                                 margin={{ left: -25 }}>
-                                <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="name" />
+                                <CartesianGrid strokeDasharray='3 3' />
+                                <XAxis dataKey='name' />
                                 <YAxis />
                                 <Tooltip />
                                 <Legend />
-                                <Bar dataKey="hours" name='Hours' fill="#8884d8" />
+                                <Bar dataKey='hours' name='Hours' fill='#8884d8' />
                             </BarChart>
                         </div>
                     </div>

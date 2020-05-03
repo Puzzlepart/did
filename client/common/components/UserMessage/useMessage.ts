@@ -1,4 +1,4 @@
-import { IUserMessageProps } from "./IUserMessageProps";
+import { IUserMessageProps } from './IUserMessageProps';
 import * as React from 'react';
 
 /**

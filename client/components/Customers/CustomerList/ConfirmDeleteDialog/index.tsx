@@ -28,8 +28,8 @@ export const ConfirmDeleteDialog = (props: IConfirmDeleteDialogProps) => {
                 {props.projects.map(p => <li key={p.id}>{p.name}</li>)}
             </ul>
             <DialogFooter>
-                <PrimaryButton onClick={props.onConfirm} text="Yes" />
-                <DefaultButton onClick={props.onDismiss} text="Cancel" />
+                <PrimaryButton onClick={props.onConfirm} text='Yes' />
+                <DefaultButton onClick={props.onDismiss} text='Cancel' />
             </DialogFooter>
         </Dialog>
     );

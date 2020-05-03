@@ -12,12 +12,39 @@ module.exports = {
         },
     },
     rules: {
+        /**
+         * 0 = off, 1 = warn, 2 = error
+         */
+
         "@typescript-eslint/interface-name-prefix": 0,
+
         "@typescript-eslint/no-explicit-any": 0,
+
         "react/prop-types": 0,
+
         "no-inferrable-types": 0,
+
         "@typescript-eslint/explicit-function-return-type": 0,
+
         "react/display-name": 0,
+
+        "no-compare-neg-zero": 1,
+
+        "no-console": 2,
+
+        "default-case": 2,
+
+        "eqeqeq": 1,
+
+        "max-classes-per-file": 1,
+
+        "jsx-quotes": ["error", "prefer-single"],
+
+        "quotes": ["error", "single"],
+
+        "yoda": 2,
+
+        "require-await": 1
     },
     settings: {
         react: {

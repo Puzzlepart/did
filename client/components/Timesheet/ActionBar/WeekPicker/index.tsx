@@ -6,7 +6,7 @@ import { FocusTrapZone } from 'office-ui-fabric-react/lib/FocusTrapZone';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import * as React from 'react';
 import { useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import { ACTIONBAR_ICON_PROPS } from '../ACTIONBAR_ICON_PROPS';
 import { CALENDAR_STRINGS } from './CALENDAR_STRINGS';
 

@@ -30,7 +30,7 @@ export const ResolveProjectModal = ({ isOpen, onDismiss, onProjectSelected, even
                 hidden={!event.suggestedProject}
                 style={{ marginTop: 5 }}
                 iconName='Lightbulb' >
-                <p>{resource('TIMESHEET.DID_YOU_MEAN_TEXT')}<a href="#" onClick={() => onProjectSelected(event.suggestedProject)}>{value(event, 'suggestedProject.id', '')}</a>?</p>
+                <p>{resource('TIMESHEET.DID_YOU_MEAN_TEXT')}<a href='#' onClick={() => onProjectSelected(event.suggestedProject)}>{value(event, 'suggestedProject.id', '')}</a>?</p>
             </UserMessage>
 
             <UserMessage

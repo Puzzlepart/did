@@ -17,31 +17,31 @@ export const CustomerDetails = (props: ICustomerDetailsProps) => {
 
     return (
         <div className='c-CustomerDetails'>
-            <div className="container">
-                <div className="row">
-                    <div className="col-sm">
+            <div className='container'>
+                <div className='row'>
+                    <div className='col-sm'>
                         <h3>{props.customer.name}</h3>
                     </div>
                 </div>
                 {props.customer.inactive && (
-                    <div className="row" style={{ marginBottom: 10 }}>
-                        <div className="col-sm">
+                    <div className='row' style={{ marginBottom: 10 }}>
+                        <div className='col-sm'>
                             <UserMessage text={resource('CUSTOMERS.CUSTOMER_INACTIVE_TEXT')} iconName='Warning' type={MessageBarType.warning} />
                         </div>
                     </div>
                 )}
-                <div className="row">
-                    <div className="col-sm">
+                <div className='row'>
+                    <div className='col-sm'>
                         <p>{props.customer.description}</p>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-sm">
+                <div className='row'>
+                    <div className='col-sm'>
                         <Link href={props.customer.webLink}>{props.customer.webLink}</Link>
                     </div>
                 </div>
-                <div className="row" style={{ marginTop: 20 }}>
-                    <div className="col-sm">
+                <div className='row' style={{ marginTop: 20 }}>
+                    <div className='col-sm'>
                         {error && <MessageBar messageBarType={MessageBarType.error}>{resource('COMMON.GENERIC_ERROR_TEXT')}</MessageBar>}
                         {!error && (
                             <ProjectList

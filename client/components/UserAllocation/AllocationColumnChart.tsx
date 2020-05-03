@@ -37,7 +37,7 @@ export const AllocationColumnChart = (title: string, allocation: ITypedHash<numb
     },
     series: [{
         showInLegend: false,
-        name: "Hours",
+        name: 'Hours',
         data: Object.keys(allocation).map(key => allocation[key]),
 
     }],

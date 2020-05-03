@@ -16,7 +16,7 @@ import { TimesheetScope } from '../TimesheetScope';
 import { DurationColumn } from './DurationColumn';
 import { ISummaryViewProps } from './ISummaryViewProps';
 import { LabelColumn } from './LabelColumn';
-import { SummaryViewType } from "./SummaryViewType";
+import { SummaryViewType } from './SummaryViewType';
 
 /**
  * Create columns
@@ -49,6 +49,9 @@ function createColumns(type: SummaryViewType, scope: TimesheetScope, entries: an
             columns = monthNumbers.map(mn => col(mn, moment().month(mn - 1).format('MMM'), { maxWidth: 70, minWidth: 70 }, onRender));
         }
             break;
+        default: {
+            return [];
+        }
     }
     if (range) columns = [].concat(columns).splice(columns.length - range);
     return [
@@ -109,6 +112,9 @@ function generateRows({ type }: ISummaryViewProps, events: any[], columns: IColu
                 }, { label: res, sum: 0 })
             });
         }
+        default: {
+            return [];
+        }
     }
 }
 
@@ -150,6 +156,9 @@ function generateTotalRow({ type }: ISummaryViewProps, events: any[], columns: I
                 obj.sum += sum;
                 return obj;
             }, { label: 'Total', sum: 0 });
+        }
+        default: {
+            return [];
         }
     }
 }
