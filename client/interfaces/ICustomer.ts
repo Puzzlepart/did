@@ -1,6 +1,4 @@
 import { IObjectWithKey } from 'office-ui-fabric-react/lib/DetailsList';
-import { ILabel } from './ILabel';
-
 /**
  * @category Common
  */
@@ -11,5 +9,4 @@ export interface ICustomer extends IObjectWithKey {
     webLink: string;
     icon: string;
     inactive?: boolean;
-    labels?: ILabel[];
 }

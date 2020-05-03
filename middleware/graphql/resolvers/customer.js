@@ -12,7 +12,6 @@ const typeDef = `
     webLink: String
     icon: String
     inactive: Boolean
-    labels: [Label]
   }
   
   extend type Query {
@@ -27,17 +26,7 @@ const typeDef = `
 
 
 async function customers(_obj, { limit }, { services: { storage: StorageService } }) {
-  let [customers, labels] = await Promise.all([
-    StorageService.getCustomers(limit),
-    StorageService.getLabels(),
-  ]);
-  customers = customers.map(customer => ({
-    ...customer,
-    labels: _.filter(labels, label => {
-      const labels = value(customer, 'labels', { default: '' });
-      return labels.indexOf(label.id) !== -1;
-    }),
-  }));
+  const customers = await StorageService.getCustomers(limit);
   return customers;
 };
 

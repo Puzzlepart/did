@@ -22,12 +22,5 @@ export default gql`
         webLink
         icon
         inactive
-        labels { 
-            id
-            name
-            description
-            color
-            icon
-        }
     }
 }`;

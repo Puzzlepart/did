@@ -1,4 +1,3 @@
-import { EntityLabel } from 'common/components/EntityLabel';
 import List from 'common/components/List';
 import resource from 'i18n';
 import { ICustomer } from 'interfaces/ICustomer';
@@ -33,12 +32,6 @@ export const CustomerListColumns = (): IColumn[] => ([
         'Name',
         { maxWidth: 300 },
         (customer: ICustomer) => <Link to={`/customers/${customer.id}`}>{customer.name}</Link>
-    ),
-    col(
-        'labels',
-        '',
-        {},
-        (customer: ICustomer) => customer.labels.map((label, idx) => <EntityLabel key={idx} {...label} />),
     ),
 ])
 
