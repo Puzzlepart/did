@@ -27,7 +27,6 @@ const typeDef = `
 
 
 async function customers(_obj, { limit }, { services: { storage: StorageService } }) {
-  console.log(limit);
   let [customers, labels] = await Promise.all([
     StorageService.getCustomers(limit),
     StorageService.getLabels(),
