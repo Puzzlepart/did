@@ -1,4 +1,5 @@
 const _ = require('underscore');
+const uuidv4 = require('uuid').v4;
 const {
     queryTable,
     queryTableAll,
@@ -43,26 +44,6 @@ class StorageService {
         const query = createQuery(1, ['Role', 'StartPage']).where(filter);
         const { entries } = await queryTable('Users', query);
         return parseArray(entries)[0];
-    }
-    /**
-     * Get weeks
-     */
-    async getWeeks() {
-        let query = createQuery(1000, undefined, this.filter);
-        const { entries } = await queryTable('Weeks', query);
-        const weeks = parseArray(entries);
-        return weeks;
-    }
-    /**
-     * Update week
-     */
-    async updateWeek(weekNumber, closed) {
-        const result = await updateEntity('Weeks', {
-            PartitionKey: entGen.String(this.tenantId),
-            RowKey: entGen.String(weekNumber.toString()),
-            Closed: entGen.Boolean(closed),
-        });
-        return result;
     }
     /**
      * Update user
@@ -222,6 +203,47 @@ class StorageService {
     async deleteProject(key) {
         try {
             const result = await deleteEntity('Projects', {
+                PartitionKey: entGen.String(this.tenantId),
+                RowKey: entGen.String(key),
+            });
+            return result;
+        }
+        catch (error) {
+            throw error;
+        }
+    }
+    /**
+     * Get labels
+     */
+    async getLabels() {
+        const query = createQuery(1000, undefined).where(this.filter);
+        const { entries } = await queryTable('Labels', query);
+        return parseArray(entries);
+    }
+    /**
+     * Add label
+     *
+     * @param {*} label
+     */
+    async addLabel(label) {
+        let entity = await addEntity('Labels', {
+            PartitionKey: entGen.String(this.tenantId),
+            RowKey: entGen.String(uuidv4()),
+            Name: entGen.String(label.name),
+            Description: entGen.String(label.description),
+            Color: entGen.String(label.color),
+            Icon: entGen.String(label.icon),
+        });
+        return entity;
+    }
+    /**
+     * Delete label
+     *
+     * @param {*} key
+     */
+    async deleteLabel(key) {
+        try {
+            const result = await deleteEntity('Labels', {
                 PartitionKey: entGen.String(this.tenantId),
                 RowKey: entGen.String(key),
             });
