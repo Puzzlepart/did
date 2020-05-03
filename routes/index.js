@@ -21,7 +21,7 @@ function getContext(req) {
 
 
 router.get('/', (req, res) => {
-  if (!req.isAuthenticated()) {
+  if (!req.user  || !req.isAuthenticated()) {
     res.redirect('/auth/signin');
   } else {
     const context = getContext(req);

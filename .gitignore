@@ -126,3 +126,5 @@ public/css
 # Lock files
 pnpm-lock.yaml
 package-lock.json
+
+azcopy/
