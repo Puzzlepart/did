@@ -80,7 +80,7 @@ const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
                             <MessageBarButton
                                 text={resource('TIMESHEET.IGNORE_EVENT_BUTTON_LABEL')}
                                 iconProps={{ iconName: 'Blocked2' }}
-                                onClick={() => props.onIgnoreEvent(props.event)} />
+                                onClick={() => props.dispatch({ type: 'IGNORE_EVENT', payload: { event: props.event } })} />
                         </div>
                     } />
                 <ResolveProjectModal
@@ -89,7 +89,7 @@ const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
                     isOpen={showResolveModal}
                     onProjectSelected={project => {
                         setShowResolveModal(false);
-                        props.onManualMatch(props.event, project);
+                        props.dispatch({ type: 'MANUAL_MATCH', payload: { event: props.event, project } })
                     }} />
             </div>
         );
@@ -113,7 +113,7 @@ const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
                         <span>for </span><a href={`/customers#${props.event.customer.id}`}><span>{props.event.customer.name}</span></a>
                     </div>
                 </div>
-                <ClearManualMatchButton onClick={() => props.onClearManualMatch(props.event)} className={props.className.clearButton} hidden={!props.event.isManualMatch} />
+                <ClearManualMatchButton onClick={() => props.dispatch({ type: 'CLEAR_MANUAL_MATCH', payload: props.event })} className={props.className.clearButton} hidden={!props.event.isManualMatch} />
             </div>
         </TooltipHost>
     );

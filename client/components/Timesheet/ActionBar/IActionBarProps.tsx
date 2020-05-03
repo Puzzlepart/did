@@ -2,11 +2,7 @@
  * @category Timesheet
  */
 export interface IActionBarProps {
-
-    /**
-     * On change period callback
-     */
-    onChangePeriod: (periodId: string) => void;
+    dispatch: React.Dispatch<any>;
 
     /**
      * On confirm period callback

@@ -23,9 +23,7 @@ export const ActionBar = (props: IActionBarProps) => {
             itemType: ContextualMenuItemType.Normal,
             iconOnly: true,
             iconProps: { iconName: 'RenewalCurrent', ...ACTIONBAR_ICON_PROPS },
-            onClick: () => {
-                history.push('/timesheet');
-            },
+            onClick: () => history.push('/timesheet'),
             disabled: scope.isCurrentWeek,
             title: resource('TIMESHEET.COMMANDBAR_CURRENT_WEEK_TEXT'),
         },
@@ -70,7 +68,7 @@ export const ActionBar = (props: IActionBarProps) => {
                     <DefaultButton
                         hidden={loading}
                         iconProps={{ iconName: 'DateTime' }}
-                        onClick={() => props.onChangePeriod(period.id)}
+                        onClick={() => props.dispatch({ type: 'CHANGE_PERIOD', payload: period.id })}
                         text={period.name}
                         styles={{ root: { height: 44, marginLeft: 4 } }}
                         checked={period.id === selectedPeriod.id} />

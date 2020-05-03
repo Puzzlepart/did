@@ -11,9 +11,9 @@ export type TimesheetView = 'overview' | 'summary' | 'allocation';
  * @category Timesheet
  */
 export interface ITimesheetState {
-    loading: IProgressIndicatorProps;
     periods: TimesheetPeriod[];
-    selectedPeriodId: string;
     selectedPeriod: TimesheetPeriod;
     scope: TimesheetScope;
+    selectedPeriodId?: string;
+    loading?: IProgressIndicatorProps;
 }

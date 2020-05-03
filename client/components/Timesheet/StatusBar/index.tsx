@@ -12,7 +12,7 @@ import { TimesheetContext } from '../';
 /**
  * @category Timesheet
  */
-export const StatusBar = (props: IStatusBarProps) => {
+export const StatusBar = ({ dispatch }: IStatusBarProps) => {
     const { loading, periods, selectedPeriod } = React.useContext(TimesheetContext);
     return (
         <div className='c-Timesheet-statusbar' style={{ marginTop: 10, marginLeft: -10, marginRight: -10 }}>
@@ -47,7 +47,7 @@ export const StatusBar = (props: IStatusBarProps) => {
                             <UserMessage
                                 type={MessageBarType.info}
                                 iconName='DependencyRemove'>
-                                <p>{format(resource('TIMESHEET.IGNORED_EVENTS_TEXT'), selectedPeriod.ignoredEvents.length)} <a href='#' onClick={props.onClearIgnores}>{resource('TIMESHEET.UNDO_IGNORE_LINK_TEXT')}</a></p>
+                                <p>{format(resource('TIMESHEET.IGNORED_EVENTS_TEXT'), selectedPeriod.ignoredEvents.length)} <a href='#' onClick={() => dispatch({ type: 'CLEAR_IGNORES' })}>{resource('TIMESHEET.UNDO_IGNORE_LINK_TEXT')}</a></p>
                             </UserMessage>
                         </div>
                         <div className='col-sm' hidden={selectedPeriod.errors.length === 0}>
