@@ -192,7 +192,7 @@ export const SummaryView = (props: ISummaryViewProps) => {
     const context = React.useContext(TimesheetContext);
     let entries = props.entries || context.selectedPeriod.events;
     const [customer, setCustomer] = React.useState<IContextualMenuItem>({ key: 'All', text: 'All customers' });
-    const columns = createColumns(props.type, context.scope, entries, props.range);
+    const columns = createColumns(props.type, context && context.scope, entries, props.range);
     entries = entries.filter(e => !!e.project);
     const customerOptions = createCustomerOptions(entries, setCustomer);
 
@@ -224,10 +224,7 @@ export const SummaryView = (props: ISummaryViewProps) => {
     return (
         <div className='c-Timesheet-summary'>
             <CommandBar styles={{ root: { padding: 0 } }} items={commands} />
-            <List
-                enableShimmer={context.loading}
-                columns={columns}
-                items={items} />
+            <List {...{ columns, items }} enableShimmer={context && !!context.loading} />
         </div>
     );
 }
