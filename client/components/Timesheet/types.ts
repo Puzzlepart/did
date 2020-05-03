@@ -14,6 +14,5 @@ export interface ITimesheetState {
     periods: TimesheetPeriod[];
     selectedPeriod: TimesheetPeriod;
     scope: TimesheetScope;
-    selectedPeriodId?: string;
     loading?: IProgressIndicatorProps;
 }

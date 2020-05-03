@@ -29,54 +29,45 @@ export const reducer = <T>(state: ITimesheetState, action: Action): ITimesheetSt
             newState.loading = action.payload.loading ? { label: 'Loading events', description: 'Please wait...' } : null
             if (action.payload.data) {
                 newState.periods = action.payload.data.timesheet.map(period => new TimesheetPeriod(period));
+                newState.selectedPeriod = _.first(newState.periods);
             }
         }
             break;
-        case 'CONFIRMING_PERIOD': {
+        case 'CONFIRMING_PERIOD':
             newState.loading = { label: 'Confirming period', description: 'Hang on a minute...' };
-        }
             break;
-        case 'UNCONFIRMING_PERIOD': {
+        case 'UNCONFIRMING_PERIOD':
             newState.loading = { label: 'Unconfirming period', description: 'Hang on a minute...' };
-        }
             break;
-        case 'UPDATE_SCOPE': {
+        case 'UPDATE_SCOPE':
             newState.scope = new TimesheetScope(action.payload);
-        }
             break;
         case 'CHANGE_PERIOD': {
-            newState.selectedPeriodId = action.payload;
+            newState.selectedPeriod = _.find(newState.periods, (p: TimesheetPeriod) => p.id === action.payload);
         }
             break;
         case 'MANUAL_MATCH': {
-            const { selectedPeriod } = newState;
             const { eventId, project } = action.payload;
-            selectedPeriod.setManualMatch(eventId, project);
-            newState.periods = newState.periods.map(p => p.id === newState.selectedPeriodId ? selectedPeriod : p);
+            state.selectedPeriod.setManualMatch(eventId, project);
+            newState.periods = newState.periods.map(p => p.id === state.selectedPeriod.id ? state.selectedPeriod : p);
         }
             break;
         case 'CLEAR_MANUAL_MATCH': {
-            const { selectedPeriod } = newState;
-            selectedPeriod.clearManualMatch(action.payload);
-            newState.periods = newState.periods.map(p => p.id === newState.selectedPeriodId ? selectedPeriod : p);
+            state.selectedPeriod.clearManualMatch(action.payload);
+            newState.periods = newState.periods.map(p => p.id === state.selectedPeriod.id ? state.selectedPeriod : p);
         }
             break;
         case 'IGNORE_EVENT': {
-            const { selectedPeriod } = newState;
-            selectedPeriod.ignoreEvent(action.payload);
-            newState.periods = newState.periods.map(p => p.id === newState.selectedPeriodId ? selectedPeriod : p);
+            state.selectedPeriod.ignoreEvent(action.payload);
+            newState.periods = newState.periods.map(p => p.id === state.selectedPeriod.id ? state.selectedPeriod : p);
         }
             break;
         case 'CLEAR_IGNORES': {
-            const { selectedPeriod } = newState;
-            selectedPeriod.clearIgnoredEvents();
-            newState.periods = newState.periods.map(p => p.id === newState.selectedPeriodId ? selectedPeriod : p);
+            state.selectedPeriod.clearIgnoredEvents();
+            newState.periods = newState.periods.map(p => p.id === state.selectedPeriod.id ? state.selectedPeriod : p);
         }
             break;
         default: throw new Error();
-    }
-    if (newState.periods.length > 0) {
-        newState.selectedPeriod = _.find(newState.periods, (p: TimesheetPeriod) => p.id === newState.selectedPeriodId) || _.first(newState.periods);
     }
     return newState;
 }
