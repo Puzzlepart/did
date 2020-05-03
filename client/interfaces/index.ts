@@ -3,3 +3,4 @@ export * from './IProject';
 export * from './ICustomer';
 export * from './IUser';
 export * from './IOutlookCategory';
+export * from './ILabel';
