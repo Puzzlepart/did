@@ -41,7 +41,7 @@ export const ProjectListColumns = (renderLink: boolean, hideColumns: string[]): 
     col(
         'customer',
         'Customer',
-        { maxWidth: 240 },
+        { maxWidth: 300 },
         (project: IProject) => <Link to={`/customers/${project.customer.id}`}>{project.customer.name}</Link>,
     ),
     col(

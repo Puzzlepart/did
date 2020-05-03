@@ -22,6 +22,7 @@ export const GET_PROJECTS = gql`
             webLink
             icon
             customerKey
+            inactive
             customer {
                 id
                 name
@@ -33,7 +34,6 @@ export const GET_PROJECTS = gql`
                 color
                 icon
             }
-            inactive
         }
         outlookCategories { 
             id
