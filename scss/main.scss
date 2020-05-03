@@ -1,9 +1,11 @@
 @import "./layout.scss";
 @import "./theme.scss";
 @import "./react-autosuggest.scss";
+@import "../client/common/components/EntityLabel/EntityLabel.scss";
 @import "../client/common/components/UserMessage/UserMessage.scss";
 @import "../client/common/components/EventList/ProjectColumn/ProjectColumn.scss";
 @import "../client/components/Admin/Users/UserFormModal/UserFormModal.scss";
+@import "../client/components/Admin/Labels/LabelFormModal/LabelFormModal.scss";
 @import "../client/components/Timesheet/Timesheet.scss";
 @import "../client/components/Timesheet/SummaryView/SummaryView.scss";
 @import "../client/components/Timesheet/ActionBar/WeekPicker/WeekPicker.scss";
