@@ -8,6 +8,7 @@ export interface IProjectColumnTooltipClassName {
     title: string;
     subTitle: string;
     description: string;
+    labels: string;
     tag: string;
 }
 

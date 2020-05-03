@@ -1,6 +1,7 @@
 /* eslint-disable react/display-name */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
+import _ from 'underscore';
 import { stringIsNullOrEmpty } from '@pnp/common';
 import { useId } from '@uifabric/react-hooks';
 import { UserMessage } from 'common/components/UserMessage';
@@ -13,7 +14,8 @@ import * as React from 'react';
 import { withDefaultProps } from 'with-default-props';
 import { ResolveProjectModal } from './ResolveProjectModal';
 import { IClearManualMatchButtonProps, IProjectColumnProps, IProjectColumnTooltipProps } from './types';
-
+import { EntityLabel } from 'common/components/EntityLabel';
+import { Link } from 'react-router-dom';
 
 /**
  * @category EventList
@@ -34,7 +36,12 @@ export const ProjectColumnTooltip = ({ project, className }: IProjectColumnToolt
         <div className={className.root}>
             <div className={className.title}><span>{project.name}</span></div>
             <div className={className.subTitle}><span>for {project.customer.name}</span></div>
-            <div className={className.description}>{!stringIsNullOrEmpty(project.description) ? <span>{project.description}</span> : <UserMessage text='No description available.' />}</div>
+            <div hidden={stringIsNullOrEmpty(project.description)} className={className.description}>
+                <p>{project.description}</p>
+            </div>
+            <div hidden={_.isEmpty(project.labels)} className={className.labels}>
+                {project.labels.map((label, idx) => <EntityLabel key={idx} {...label} />)}
+            </div>
             <div className={className.tag}><span>{project.key}</span></div>
         </div>
     );
@@ -107,10 +114,10 @@ const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
             <div className={props.className.root} aria-describedby={tooltipId}>
                 <div className={props.className.content.root}>
                     <div className={props.className.content.text}>
-                        <a href={`/projects#${props.event.project.id}`}>{props.event.project.name}</a>
+                        <Link to={`/projects/${props.event.project.id}`}>{props.event.project.name}</Link>
                     </div>
                     <div className={props.className.content.subText}>
-                        <span>for </span><a href={`/customers#${props.event.customer.id}`}><span>{props.event.customer.name}</span></a>
+                        <span>for </span><Link to={`/customers/${props.event.customer.id}`}>{props.event.customer.name}</Link>
                     </div>
                 </div>
                 <ClearManualMatchButton onClick={() => props.onClearManualMatch(props.event)} className={props.className.clearButton} hidden={!props.event.isManualMatch} />
@@ -133,6 +140,7 @@ export default withDefaultProps(ProjectColumn, {
             title: 'c-Timesheet-projectColumn-tooltip-title',
             subTitle: 'c-Timesheet-projectColumn-tooltip-subTitle',
             description: 'c-Timesheet-projectColumn-tooltip-description',
+            labels: 'c-Timesheet-projectColumn-tooltip-labels',
             tag: 'c-Timesheet-projectColumn-tooltip-tag',
         }
     }

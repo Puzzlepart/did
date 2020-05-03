@@ -114,8 +114,13 @@ class StorageService {
      */
     async getCustomers(limit) {
         const query = createQuery(limit || 1000, undefined, this.filter);
-        const { entries } = await queryTable('Customers', query);
-        return parseArray(entries, undefined, { idUpper: true });
+        if (limit) {
+            const { entries } = await queryTable('Customers', query);
+            return parseArray(entries, undefined, { idUpper: true });
+        } else {
+            const entries = await queryTableAll('Customers', query);
+            return parseArray(entries, undefined, { idUpper: true });
+        }
     }
     /**
      * Get projects
@@ -129,7 +134,7 @@ class StorageService {
         if (customerKey)
             filter = combine(filter, and, stringFilter('CustomerKey', TableUtilities.QueryComparisons.EQUAL, customerKey));
         let query = createQuery(1000, undefined, filter);
-        let { entries } = await queryTable('Projects', query);
+        let entries = await queryTableAll('Projects', query);
         if (!options.noParse)
             entries = parseArray(entries, undefined, { idUpper: true });
         if (options.sortBy)

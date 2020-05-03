@@ -1,4 +1,5 @@
 const _ = require('underscore');
+const value = require('get-value');
 const { TableBatch } = require('azure-storage');
 const { executeBatch, addEntity, entGen } = require('../../../utils/table');
 const { getDurationHours, getDurationMinutes, formatDate, getMonthIndex, getWeek, startOfMonth, endOfMonth, getYear } = require('../../../utils');
@@ -71,7 +72,7 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat }, { use
         periods = periods.map(period => ({ ...period, name: `Week ${week} (${formatDate(period.startDateTime, 'MMMM')})` }))
     }
 
-    let [projects, customers, timeentries] = await Promise.all([
+    let [projects, customers, timeentries, labels] = await Promise.all([
         StorageService.getProjects(),
         StorageService.getCustomers(),
         StorageService.getTimeEntries({
@@ -79,12 +80,17 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat }, { use
             startDateTime,
             endDateTime,
         }),
+        StorageService.getLabels(),
     ]);
 
     projects = projects
-        .map(p => ({
-            ...p,
-            customer: _.find(customers, c => c.id.toUpperCase() === p.customerKey.toUpperCase())
+        .map(project => ({
+            ...project,
+            customer: _.find(customers, c => c.id.toUpperCase() === project.customerKey.toUpperCase()),
+            labels: _.filter(labels, label => {
+                const labels = value(project, 'labels', { default: '' });
+                return labels.indexOf(label.id) !== -1;
+            }),
         }))
         .filter(p => p.customer);
 
