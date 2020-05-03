@@ -6,6 +6,7 @@ const { typeDef: Timesheet } = require('./resolvers/timesheet');
 const { typeDef: TimeEntry } = require('./resolvers/timeentry');
 const { typeDef: OutlookCategory } = require('./resolvers/outlookCategory');
 const { typeDef: User } = require('./resolvers/user');
+const { typeDef: Label } = require('./resolvers/label');
 const StorageService = require('../../services/storage');
 const GraphService = require('../../services/graph');
 
@@ -46,6 +47,7 @@ const schema = makeExecutableSchema({
     TimeEntry,
     User,
     OutlookCategory,
+    Label,
   ],
   resolvers: require('./resolvers'),
   resolverValidationOptions: {

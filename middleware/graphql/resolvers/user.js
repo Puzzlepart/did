@@ -24,12 +24,12 @@ const typeDef = `
     }
 `;
 
-async function users(_obj, _args, context) {
+async function users(_obj, _variables, context) {
     let users = await context.services.storage.getUsers();
     return users;
 }
 
-async function currentUser(_obj, _args, context) {
+async function currentUser(_obj, _variables, context) {
     let user = await context.services.storage.getUser(context.user.profile.oid);
     return user;
 }
