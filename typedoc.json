@@ -8,14 +8,5 @@
     "excludeExternals": true,
     "includeVersion": true,
     "hideGenerator": true,
-    "theme": "./typedoc-theme",
-    "categoryOrder": [
-        "Timesheet",
-        "Customers",
-        "Projects",
-        "Reports",
-        "AdminView",
-        "Common",
-        "*"
-    ]
+    "theme": "./node_modules/typedoc-neo-theme/bin/default"
 }

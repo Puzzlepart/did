@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { AppContext, IAppContext } from './AppContext';
-import { Navigation, Timesheet, Customers, Projects, Reports, Admin, Home } from 'components';
+import { Navigation, Timesheet, Customers, Projects, Reports, Admin, Home } from './pages';
 
 const App = (context: IAppContext): JSX.Element => {
     return (

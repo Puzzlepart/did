@@ -16,7 +16,7 @@
         "packageStyles": "node-sass --include-path scss scss/main.scss public/css/main.css",
         "packageClient": "tsc --build && webpack --config webpack.config.js",
         "lint": "eslint --ext .ts,.tsx ./client --color --fix",
-        "makeDoc": "typedoc --options typedoc.json"
+        "makeDoc": "rimraf.cmd ./doc && typedoc --options typedoc.json"
     },
     "dependencies": {
         "@apollo/react-hooks": "3.1.3",
@@ -111,7 +111,9 @@
         "eslint-plugin-react": "7.19.0",
         "nodemon": "2.0.3",
         "onchange": "6.1.0",
+        "rimraf": "3.0.2",
         "typedoc": "^0.17.6",
+        "typedoc-neo-theme": "1.0.8",
         "typedoc-plugin-external-module-name": "3.1.0",
         "webpack-dev-middleware": "3.7.2",
         "webpack-hot-middleware": "2.25.0",
