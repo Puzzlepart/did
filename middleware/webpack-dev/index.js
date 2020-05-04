@@ -7,7 +7,6 @@ function webpackDevMiddleware(app) {
         publicPath: webpackConfig.output.path,
         writeToDisk: true,
     }));
-    app.use(require('webpack-hot-middleware')(webpack));
 }
 
 module.exports = webpackDevMiddleware
