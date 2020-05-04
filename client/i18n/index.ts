@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import i18n from 'i18next';
-import { ITypedHash } from '@pnp/common';
+import languages from '../../resources';
 
 /**
  * Returns the resource value for the specified key
@@ -15,20 +16,20 @@ export default function resource(key: string): string {
 /**
  * Setup i18n with default namespace translation
  * 
- * @param {ITypedHash} languages Languages
- * @param {string} defaultNS Default namespace
+ * @param {string} lng Language (defaults to en)
  * 
  * @ignore
  */
-export async function setup(languages: ITypedHash<any>, defaultNS = 'translation'): Promise<boolean> {
+export async function setup(lng = 'en'): Promise<void> {
+    const resources = Object.keys(languages).reduce((obj, key) => ({
+        ...obj,
+        [key]: languages[key]
+    }), {});
     await i18n.init({
         debug: false,
-        fallbackLng: 'en',
-        defaultNS,
-        resources: Object.keys(languages).reduce((obj, key) => ({
-            ...obj,
-            [key]: { [defaultNS]: languages[key] }
-        }), {})
+        lng,
+        resources,
     });
-    return true;
 }
+
+export { languages };

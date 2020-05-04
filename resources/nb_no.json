@@ -1,4 +1,6 @@
 {
+  "lng": "Norsk (bokmål)",
+  "translation": {
     "TIMESHEET": {
       "OVERVIEW_HEADER_TEXT": "Oversikt",
       "SUMMARY_HEADER_TEXT": "Sammendrag",
@@ -55,3 +57,4 @@
       "TOGGLE_INACTIVE_OFF_TEXT": "Skjul inaktive"
     }
   }
+}

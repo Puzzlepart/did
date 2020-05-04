@@ -3,7 +3,7 @@ import { Panel } from 'office-ui-fabric-react/lib/Panel';
 import * as React from 'react';
 import { UserSettingInput } from './UserSettingInput';
 import styles from './UserSettings.module.scss';
-import { USER_SETTINGS_TEMP } from './USER_SETTINGS_TEMP';
+import { USER_SETTINGS } from './USER_SETTINGS';
 
 export type IUserSettingsProps = React.HTMLProps<HTMLDivElement>
 
@@ -26,7 +26,7 @@ export const UserSettings = (props: IUserSettingsProps) => {
                 isOpen={isOpen}
                 onDismiss={() => toggle(false)}
                 isLightDismiss={true}>
-                {[...USER_SETTINGS_TEMP].map((s, idx) => (
+                {[...USER_SETTINGS].map((s, idx) => (
                     <UserSettingInput
                         key={idx}
                         user={user}

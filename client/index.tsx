@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
-
 import { initializeIcons } from '@uifabric/icons';
 import 'core-js/stable';
 import * as React from 'react';
@@ -15,10 +13,7 @@ import * as i18n from './i18n';
 
 (async () => {
     initializeIcons();
-    await i18n.setup({ 
-        en: require('../../resources/en.json'), 
-        nb_no: require('../../resources/nb_no.json'),
-    });
+    await i18n.setup();
 
     const container = document.getElementById('app');
 
@@ -27,8 +22,6 @@ import * as i18n from './i18n';
 
     const { data } = await client.query<{ currentUser: any }>({ query: GET_CURRENT_USER });
     context.user = data.currentUser;
-    context.user.userLanguage = 'nb_no';
-    context.user['darkMode'] = true;
 
     ReactDom.render((
         <ApolloProvider client={client}>

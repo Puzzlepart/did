@@ -2,7 +2,7 @@ import { Dropdown } from 'office-ui-fabric-react/lib/Dropdown';
 import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
 import * as React from 'react';
 import styles from './UserSettings.module.scss';
-import { IUserSetting, IUserSettingDropdown } from './USER_SETTINGS_TEMP';
+import { IUserSetting, IUserSettingDropdown } from './USER_SETTINGS';
 
 export interface IUserSettingInputProps {
     user: any;

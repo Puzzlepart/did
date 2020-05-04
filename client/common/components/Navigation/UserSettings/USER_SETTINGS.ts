@@ -1,3 +1,4 @@
+import { languages } from 'i18n';
 import { IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
 
 export interface IUserSetting {
@@ -12,21 +13,15 @@ export interface IUserSettingDropdown extends IUserSetting {
     options: IDropdownOption[];
 }
 
-export const USER_SETTINGS_TEMP = new Set<IUserSetting>([
+export const USER_SETTINGS = new Set<IUserSetting>([
     {
         key: 'userLanguage',
         label: 'Language',
         type: 'dropdown',
-        options: [
-            {
-                key: 'nb_no',
-                text: 'Norsk (bokmål)'
-            },
-            {
-                key: 'en',
-                text: 'English (US)'
-            }
-        ],
+        options: Object.keys(languages).map(key => ({
+            key,
+            text: languages[key].lng,
+        })),
         defaultValue: 'en',
     } as IUserSettingDropdown,
     {
