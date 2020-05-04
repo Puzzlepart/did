@@ -8,6 +8,7 @@ import 'regenerator-runtime/runtime.js';
 import { tryParseJson } from 'utils/tryParseJson';
 import { App } from './app';
 import { IAppContext } from './AppContext';
+import GET_CURRENT_USER from './GET_CURRENT_USER';
 import { client } from './graphql';
 import * as i18n from './i18n';
 
@@ -17,10 +18,13 @@ import * as i18n from './i18n';
 
     const container = document.getElementById('app');
 
-    const context = tryParseJson<IAppContext>(container.attributes.getNamedItem('data-props').value, { user: {} });
+    const context = tryParseJson<IAppContext>(container.attributes.getNamedItem('data-props').value, {});
     container.attributes.removeNamedItem('data-props');
 
+    const { data } = await client.query<{ currentUser: any }>({ query: GET_CURRENT_USER });
+    context.user = data.currentUser;
     context.user.userLanguage = 'nb_no';
+    context.user['darkMode'] = true;
 
     ReactDom.render((
         <ApolloProvider client={client}>

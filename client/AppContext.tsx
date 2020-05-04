@@ -1,3 +1,4 @@
+import { IUser } from 'interfaces/IUser';
 import * as React from 'react';
 
 export interface IVersionInfo {
@@ -6,13 +7,7 @@ export interface IVersionInfo {
 }
 
 export interface IAppContext {
-    user?: {
-        fullName?: string;
-        email?: string;
-        role?: string;
-        sub?: string;
-        userLanguage?: 'en' | 'nb_no';
-    };
+    user?: IUser;
     info?: IVersionInfo;
 }
 

@@ -3,7 +3,7 @@ import { IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
 export interface IUserSetting {
     key: string;
     label: string;
-    type: 'dropdown' | 'text' | 'bool';
+    type: 'dropdown' | 'bool';
     description?: string;
     defaultValue?: any;
 }
@@ -29,4 +29,10 @@ export const USER_SETTINGS_TEMP = new Set<IUserSetting>([
         ],
         defaultValue: 'en',
     } as IUserSettingDropdown,
+    {
+        key: 'darkMode',
+        label: 'Dark mode',
+        type: 'bool',
+        defaultValue: false,
+    } as IUserSetting,
 ]);
