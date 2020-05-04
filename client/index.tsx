@@ -12,7 +12,10 @@ import { tryParseJson } from 'utils/tryParseJson';
 
 (async () => {
     initializeIcons();
-    await i18n.setup({ en: require('../../resources/en.json') });
+    await i18n.setup({ 
+        en: require('../../resources/en.json'), 
+        nb_no: require('../../resources/nb_no.json'),
+    });
 
     const container = document.getElementById('app');
 
