@@ -22,13 +22,13 @@ export interface IExcelExportOptions {
  * 
  * @category Utility
  */
-export async function exportExcel(items: any[], options: IExcelExportOptions) {
+export async function exportExcel(items: any[], options: IExcelExportOptions): Promise<void> {
     await loadScripts([
         'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js',
         'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.5/xlsx.full.min.js',
     ]);
 
-    let xlsx = ((window as any)).XLSX;
+    const xlsx = ((window as any)).XLSX;
 
     if (!options.columns) {
         options.columns = Object.keys(items[0]).filter(f => (options.skip || []).indexOf(f) === -1).map(fieldName => ({ key: fieldName, fieldName, name: humanize(fieldName), minWidth: 0 }));

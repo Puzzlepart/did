@@ -8,14 +8,16 @@ import { withDefaultProps } from 'with-default-props';
 /**
  * @category EventList
  */
-let EventList = (props: IEventListProps) => {
+const EventList = (props: IEventListProps): JSX.Element => {
     const columns = [
-        ...col.GetAll(props).filter(col => props.hideColumns.indexOf(col.key) === -1),
+        col.Title(props),
+        col.Time(props),
+        col.Duration(props),
         ...props.additionalColumns
     ];
 
     return (
-        <div style={{ marginBottom: 250 }}>
+        <div style={{ marginBottom: 250 }} hidden={props.hidden}>
             <List
                 enableShimmer={props.enableShimmer}
                 columns={columns}
@@ -29,7 +31,6 @@ let EventList = (props: IEventListProps) => {
 export default withDefaultProps(
     EventList,
     {
-        hideColumns: [],
         additionalColumns: [],
     }
 );

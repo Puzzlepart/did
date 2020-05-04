@@ -13,7 +13,7 @@ export const UserMessage = (props: IUserMessageProps) => {
     return (
         <div
             id={props.id}
-            className='c-UserMessage'
+            className={['c-UserMessage', props.className || ''].join(' ')}
             style={props.style}
             hidden={props.hidden}
             onClick={props.onClick}>

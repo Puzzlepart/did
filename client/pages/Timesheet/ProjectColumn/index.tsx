@@ -1,0 +1,135 @@
+/* eslint-disable react/display-name */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+
+import { stringIsNullOrEmpty } from '@pnp/common';
+import { UserMessage } from 'common/components/UserMessage';
+import resource from 'i18n';
+import { MessageBarButton } from 'office-ui-fabric-react/lib/Button';
+import { Icon } from 'office-ui-fabric-react/lib/Icon';
+import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
+import { TooltipDelay, TooltipHost } from 'office-ui-fabric-react/lib/Tooltip';
+import * as React from 'react';
+import { withDefaultProps } from 'with-default-props';
+import { ResolveProjectModal } from './ResolveProjectModal';
+import { IClearManualMatchButtonProps, IProjectColumnProps, IProjectColumnTooltipProps } from './types';
+import { TimesheetContext } from '../TimesheetContext';
+
+
+/**
+ * @category Timesheet
+ */
+export const ClearManualMatchButton = ({ onClick, hidden, className }: IClearManualMatchButtonProps): JSX.Element => {
+    return (
+        <div className={className} title={resource('TIMESHEET.CLEAR_PROJECT_MATCH_TOOLTIP_TEXT')} hidden={hidden}>
+            <span onClick={onClick} style={{ cursor: 'pointer' }}><Icon iconName='Cancel' styles={{ root: { fontSize: 14 } }} /></span>
+        </div>
+    );
+}
+
+/**
+ * @category Timesheet
+ */
+export const ProjectColumnTooltip = ({ project, className }: IProjectColumnTooltipProps): JSX.Element => {
+    return (
+        <div className={className.root}>
+            <div className={className.title}><span>{project.name}</span></div>
+            <div className={className.subTitle}><span>for {project.customer.name}</span></div>
+            <div className={className.description}>{!stringIsNullOrEmpty(project.description) ? <span>{project.description}</span> : <UserMessage text='No description available.' />}</div>
+            <div className={className.tag}><span>{project.key}</span></div>
+        </div>
+    );
+}
+
+/**
+ * @category Timesheet
+ */
+const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
+    const { dispatch } = React.useContext(TimesheetContext);
+    const [showResolveModal, setShowResolveModal] = React.useState<boolean>(false);
+
+    if (!props.event.project) {
+        if (props.event.error) {
+            return (
+                <div className={props.className.root}>
+                    <UserMessage
+                        style={{ marginTop: 10 }}
+                        isMultiline={false}
+                        type={MessageBarType.severeWarning}
+                        iconName='Warning'
+                        text={`${resource('TIMESHEET.EVENT_ERROR_PREFIX')} ${props.event.error.message}`} />
+                </div>
+            );
+        }
+        return (
+            <div className={props.className.root}>
+                <UserMessage
+                    style={{ marginTop: 10 }}
+                    isMultiline={false}
+                    type={MessageBarType.warning}
+                    iconName='TagUnknown'
+                    text={resource('TIMESHEET.NO_PROJECT_MATCH_FOUND_TEXT')}
+                    actions={
+                        <div>
+                            <MessageBarButton
+                                text={resource('TIMESHEET.RESOLVE_PROJECT_BUTTON_LABEL')}
+                                iconProps={{ iconName: 'ReviewResponseSolid' }}
+                                onClick={() => setShowResolveModal(true)} />
+                            <MessageBarButton
+                                text={resource('TIMESHEET.IGNORE_EVENT_BUTTON_LABEL')}
+                                iconProps={{ iconName: 'Blocked2' }}
+                                onClick={() => dispatch({ type: 'IGNORE_EVENT', payload: props.event.id })} />
+                        </div>
+                    } />
+                <ResolveProjectModal
+                    event={props.event}
+                    onDismiss={() => setShowResolveModal(false)}
+                    isOpen={showResolveModal}
+                    onProjectSelected={project => {
+                        setShowResolveModal(false);
+                        dispatch({ type: 'MANUAL_MATCH', payload: { event: props.event, project } })
+                    }} />
+            </div>
+        );
+    }
+
+    return (
+        <TooltipHost
+            tooltipProps={{
+                onRenderContent: () => <ProjectColumnTooltip project={props.event.project} className={props.className.tooltip} />,
+            }}
+            delay={TooltipDelay.long}
+            closeDelay={TooltipDelay.long}
+            calloutProps={{ gapSpace: 0 }}>
+            <div className={props.className.root}>
+                <div className={props.className.content.root}>
+                    <div className={props.className.content.text}>
+                        <a href={`/projects#${props.event.project.id}`}>{props.event.project.name}</a>
+                    </div>
+                    <div className={props.className.content.subText}>
+                        <span>for </span><a href={`/customers#${props.event.customer.id}`}><span>{props.event.customer.name}</span></a>
+                    </div>
+                </div>
+                <ClearManualMatchButton onClick={() => dispatch({ type: 'CLEAR_MANUAL_MATCH', payload: props.event.id })} className={props.className.clearButton} hidden={!props.event.isManualMatch} />
+            </div>
+        </TooltipHost>
+    );
+}
+
+export default withDefaultProps(ProjectColumn, {
+    className: {
+        root: 'c-Timesheet-projectColumn',
+        content: {
+            root: 'c-Timesheet-projectColumn-content',
+            text: 'c-Timesheet-projectColumn-content-text',
+            subText: 'c-Timesheet-projectColumn-content-subText',
+        },
+        clearButton: 'c-Timesheet-projectColumn-clearButton',
+        tooltip: {
+            root: 'c-Timesheet-projectColumn-tooltip',
+            title: 'c-Timesheet-projectColumn-tooltip-title',
+            subTitle: 'c-Timesheet-projectColumn-tooltip-subTitle',
+            description: 'c-Timesheet-projectColumn-tooltip-description',
+            tag: 'c-Timesheet-projectColumn-tooltip-tag',
+        }
+    }
+})

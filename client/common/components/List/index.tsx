@@ -1,16 +1,14 @@
 import { ScrollablePaneWrapper } from 'common/components/ScrollablePaneWrapper';
-import { ConstrainMode, DetailsListLayoutMode, IColumn, IDetailsHeaderProps, Selection, SelectionMode, IDetailsGroupDividerProps } from 'office-ui-fabric-react/lib/DetailsList';
+import { ConstrainMode, DetailsListLayoutMode, IColumn, IDetailsGroupDividerProps, IDetailsHeaderProps, Selection, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList';
 import { GroupHeader } from 'office-ui-fabric-react/lib/GroupedList';
-import { ShimmeredDetailsList } from 'office-ui-fabric-react/lib/ShimmeredDetailsList';
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
+import { ShimmeredDetailsList } from 'office-ui-fabric-react/lib/ShimmeredDetailsList';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+import { withDefaultProps } from 'with-default-props';
 import { generateListGroups } from './generateListGroups';
 import { IListProps } from './IListProps';
 import { ListHeader } from './ListHeader';
-import { withDefaultProps } from 'with-default-props';
-import _ from 'underscore';
-import { updateUrlHash } from 'helpers';
 
 /**
  * @category List
@@ -20,6 +18,7 @@ const List = (props: IListProps) => {
     let selection = null;
     let groups = null;
 
+    // eslint-disable-next-line prefer-const
     let [items, setItems] = useState(props.items);
 
     useEffect(() => setItems(props.items), [props.items]);
@@ -28,7 +27,6 @@ const List = (props: IListProps) => {
         onSelectionChanged: () => {
             const [selected] = selection.getSelection();
             props.selection.onChanged(selected);
-            selected && updateUrlHash({ key: selected.key.toString() });
         }
     });
 
@@ -40,7 +38,7 @@ const List = (props: IListProps) => {
     const onSearch = (searchTerm: string) => {
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(() => {
-            let _items = props.items.filter(i => JSON.stringify(i).toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
+            const _items = props.items.filter(i => JSON.stringify(i).toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
             setItems(_items);
         }, 500);
     }
@@ -53,7 +51,7 @@ const List = (props: IListProps) => {
      */
     const onRenderListHeader = (headerProps: IDetailsHeaderProps, defaultRender: (props: IDetailsHeaderProps) => JSX.Element) => {
         if (props.onRenderDetailsHeader) return onRenderListHeader(headerProps, defaultRender);
-        let searchBox = props.searchBox && ({
+        const searchBox = props.searchBox && ({
             key: 'SEARCH_BOX',
             onRender: () => (
                 <SearchBox
@@ -80,7 +78,7 @@ const List = (props: IListProps) => {
     }
 
     if (props.groups) {
-        let _ = generateListGroups(
+        const _ = generateListGroups(
             items,
             props.groups.fieldName,
             props.groups.groupNames,

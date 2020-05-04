@@ -40,7 +40,7 @@ let config = {
       interfaces: path.resolve(clientLib, 'interfaces'),
       utils: path.resolve(clientLib, 'utils'),
       helpers: path.resolve(clientLib, 'helpers'),
-      components: path.resolve(clientLib, 'components'),
+      pages: path.resolve(clientLib, 'pages'),
       common: path.resolve(clientLib, 'common'),
       i18n: path.resolve(clientLib, 'i18n'),
     }

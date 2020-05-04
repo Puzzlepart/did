@@ -19,7 +19,7 @@ router.post('/callback', (req, res, next) => {
     {
       response: res,
       failureRedirect: '/',
-      successRedirect: '/',
+      successRedirect: '/timesheet',
     }
   )(req, res, next);
 });

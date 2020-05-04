@@ -4,12 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## x.x.x - [TBD]
+## Unreleased version - [TBD]
 
 ### Added
-- Added toggle for showing/hiding inactive projects/customers #285
+- Added toggle for showing/hiding inactive projects andcustomers #285
+- Redirect user to timesheet after logging in #303
+- Adjustments to Reports #269 
+- Reports: Changed name of export button to 'Export current view' #269
 
-## 0.4.0 - [TBD]
+### Fixed
+- Fix for scrollbar glitching #302 
+
+## 0.4.0 - 11.5.2020
 
 ### Added
 - Support for split weeks #232

@@ -1,10 +1,10 @@
 
-import * as hlp from 'helpers';
+import * as helpers from 'helpers';
 import { ITimeEntry } from 'interfaces';
 import * as React from 'react';
 import { generateColumn as col } from 'utils/generateColumn';
+import { IColumn } from '../List';
 import { DurationDisplay } from './DurationDisplay';
-import ProjectColumn from './ProjectColumn';
 import { IEventListProps } from './types';
 
 /**
@@ -17,10 +17,10 @@ import { IEventListProps } from './types';
  * 
  * @ignore
  */
-function getSizing(props: IEventListProps, fieldName: string, defMinWidth: number, defMaxWidth: number) {
+function getSizing(props: IEventListProps, fieldName: string, defMinWidth: number, defMaxWidth: number): { minWidth: number; maxWidth: number } {
     return {
-        minWidth: hlp.getValueTyped(props, `columnWidths.${fieldName}`, defMinWidth),
-        maxWidth: hlp.getValueTyped(props, `columnWidths.${fieldName}`, defMaxWidth),
+        minWidth: helpers.getValueTyped(props, `columnWidths.${fieldName}`, defMinWidth),
+        maxWidth: helpers.getValueTyped(props, `columnWidths.${fieldName}`, defMaxWidth),
     };
 }
 
@@ -32,11 +32,11 @@ function getSizing(props: IEventListProps, fieldName: string, defMinWidth: numbe
  * 
  * @ignore
  */
-export const Title = (props: IEventListProps, fieldName: string = 'title') => col(
+export const Title = (props: IEventListProps, fieldName = 'title'): IColumn => col(
     fieldName,
     'Title',
     { ...getSizing(props, fieldName, 320, 400) },
-    (event: ITimeEntry) => <a href={event.webLink} target='_blank' className='truncate' title={event.title}>{event.title}</a>,
+    (event: ITimeEntry) => <a href={event.webLink} target='_blank' rel='noopener noreferrer' className='truncate' title={event.title}>{event.title}</a>,
 );
 
 
@@ -48,14 +48,14 @@ export const Title = (props: IEventListProps, fieldName: string = 'title') => co
  * 
  * @ignore
  */
-export const Time = (props: IEventListProps, fieldName: string = 'time') => col(
+export const Time = (props: IEventListProps, fieldName = 'time'): IColumn => col(
     fieldName,
     'Time',
     { ...getSizing(props, fieldName, 90, 90) },
     (event: ITimeEntry) => {
         return (
             <span>
-                {hlp.formatDate(event.startTime, props.dateFormat)} - {hlp.formatDate(event.endTime, props.dateFormat)}
+                {helpers.formatDate(event.startTime, props.dateFormat)} - {helpers.formatDate(event.endTime, props.dateFormat)}
             </span>
         )
     }
@@ -69,33 +69,9 @@ export const Time = (props: IEventListProps, fieldName: string = 'time') => col(
  * 
  * @ignore
  */
-export const Duration = (props: IEventListProps, fieldName: string = 'durationMinutes') => col(
+export const Duration = (props: IEventListProps, fieldName = 'durationMinutes'): IColumn => col(
     fieldName,
     'Duration',
     { ...getSizing(props, fieldName, 75, 75) },
     (event: ITimeEntry) => <DurationDisplay minutes={event.durationMinutes} />
 );
-
-/**
- * Project column
- * 
- * @param {IEventListProps} props Props
- * @param {string} fieldName Field name
- * 
- * @ignore
- */
-export const Project = (props: IEventListProps, fieldName: string = 'project') => col(
-    fieldName,
-    'Project',
-    { ...getSizing(props, fieldName, 350, 350) },
-    (event: ITimeEntry) => <ProjectColumn {...props.projectColumn} event={event} />
-);
-
-/**
- * All columns
- * 
- * @param {IEventListProps} props Props
- * 
- * @ignore
- */
-export const GetAll = (props: IEventListProps) => [Title(props), Time(props), Duration(props), Project(props)];

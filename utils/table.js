@@ -124,6 +124,7 @@ function addEntity(table, item) {
             if (!error) {
                 return resolve(result['.metadata']);
             } else {
+                console.log(error);
                 reject(error);
             }
         })
@@ -185,6 +186,7 @@ function executeBatch(table, batch) {
 };
 
 module.exports = {
+    createQuery,
     queryTable,
     queryTableAll,
     addEntity,
@@ -193,6 +195,7 @@ module.exports = {
     deleteEntity,
     executeBatch,
     parseArray,
+    queryComparisons: TableUtilities.QueryComparisons,
     gt: TableUtilities.QueryComparisons.GREATER_THAN,
     lt: TableUtilities.QueryComparisons.LESS_THAN,
     isEqual: TableUtilities.QueryComparisons.EQUAL,
@@ -201,6 +204,5 @@ module.exports = {
     stringFilter: TableQuery.stringFilter,
     intFilter: TableQuery.int32Filter,
     dateFilter: TableQuery.dateFilter,
-    createQuery: createQuery,
     entGen: TableUtilities.entityGenerator,
 }

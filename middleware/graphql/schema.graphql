@@ -1,90 +1,4 @@
-interface BaseEntity {
-	id: String
-	key: String
-}
 
-type Error {
-	name: String
-	message: String
-	code: String
-	statusCode: String
-}
-
-type BaseResult {
-	success: Boolean
-	error: Error
-	data: String
-}
-
-type EventError {
-	message: String!
-}
-
-type Project implements BaseEntity {
-	id: String
-	key: String
-	name: String
-	description: String
-	webLink: String
-	icon: String
-	customerKey: String
-	customer: Customer
-	inactive: Boolean
-}
-
-type Customer implements BaseEntity {
-	id: String
-	key: String
-	name: String
-	description: String
-	webLink: String
-	icon: String
-	inactive: Boolean
-}
-
-type Event implements BaseEntity {
-	id: String
-	key: String
-	title: String!
-	body: String
-	isOrganizer: Boolean
-	startTime: String
-	endTime: String
-	date: String
-	durationHours: Float
-	durationMinutes: Int
-	project: Project
-	customer: Customer
-	projectKey: String
-	customerKey: String
-	suggestedProject: Project
-	webLink: String
-	lastModifiedDateTime: String
-	error: EventError
-}
-
-type TimeEntry implements BaseEntity {
-	id: String
-	key: String
-	eventId: String!
-	title: String!
-	description: String
-	startTime: String
-	endTime: String
-	webLink: String
-	durationHours: Float
-	durationMinutes: Int
-	projectId: String
-	weekNumber: Int
-	monthNumber: Int
-	yearNumber: Int
-	resourceId: String
-	resourceEmail: String
-	resourceName: String
-	webUrl: String
-	project: Project
-	customer: Customer
-}
 
 type Week implements BaseEntity {
 	id: String
@@ -92,71 +6,14 @@ type Week implements BaseEntity {
 	closed: Boolean!
 }
 
-type User implements BaseEntity {
-	id: String
-	key: String
-	role: String!
-	fullName: String!
-}
 
-type OutlookCategory implements BaseEntity {
-	id: String
-	key: String
-	displayName: String
-	color: String
-}
 
-input OutlookCategoryInput {	
-	displayName: String
-	color: String
-}
-
-input TimeEntryInput {
-	id: String!
-	projectId: String!
-	isManualMatch: Boolean
-}
-
-input UserInput  {
-	id: String!
-	fullName: String!
-	role: String!
-}
-
-type TimesheetPeriod {
-	id: String!
-	name: String!
-	startDateTime: String!
-	endDateTime: String!
-	events: [Event!]!
-	matchedEvents: [Event!]!
-	confirmedDuration: Float!
-}
-
-type ConfirmedTimeEntries {
-	entries: [TimeEntry!]
-	duration: Float
-}
 
 type Query {
-	customers: [Customer!]!
-	projects(customerKey: String, sortBy: String): [Project!]!
-	timesheet(startDateTime: String!, endDateTime: String!, dateFormat: String!): [TimesheetPeriod]!
-	confirmedTimeEntries(projectId: String, resourceId: String, weekNumber: Int, yearNumber: Int, currentUser: Boolean, 	dateFormat: String): ConfirmedTimeEntries
-	weeks: [Week!]!
-	users: [User!]!
 	currentUser: User!
-	outlookCategories: [OutlookCategory!]!
 }
 
 type Mutation {
-	addUser(user: UserInput!): BaseResult!
-	createProject(customerKey: String!, projectKey: String!, name: String!, description: String!, icon: String!): BaseResult
-	createCustomer(key: String!, name: String!, description: String!, icon: String!): BaseResult
-	deleteCustomer(key: String!): BaseResult
-	confirmPeriod(entries: [TimeEntryInput!], startDateTime: String!, endDateTime: String!): BaseResult!
-	unconfirmPeriod(startDateTime: String!, endDateTime: String!): BaseResult!
+
 	updateWeek(weekNumber: Int!, closed: Boolean!): Boolean!
-	updateUser(user: UserInput!): BaseResult!
-	createOutlookCategory(category: OutlookCategoryInput!): BaseResult!
 }

@@ -21,7 +21,7 @@ export const FilterPanel = (props: IFilterPanelProps) => {
     const onFilterUpdated = (filter: IFilter, item: IFilterItem, checked: boolean) => {
         if (checked) filter.selected.push(item);
         else filter.selected = filter.selected.filter(f => f.key !== item.key);
-        let updatedFilters = filters.map(f => {
+        const updatedFilters = filters.map(f => {
             if (f.key === filter.key) {
                 return filter;
             }

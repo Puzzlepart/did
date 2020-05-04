@@ -4,6 +4,7 @@ export * from './ScrollablePaneWrapper';
 export * from './UserMessage';
 export * from './SearchProject';
 export * from './EventList';
+export * from './UserAllocation';
 import List from './List';
 
 export { List };

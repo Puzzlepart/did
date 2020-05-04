@@ -6,7 +6,7 @@ import { IFilterItemProps } from './IFilterItemProps';
  * @category FilterPanel
  */
 export const FilterItem = ({ filter, onFilterUpdated: filterUpdated }: IFilterItemProps) => {
-    let selectedKeys = filter.selected.map(f => f.key);
+    const selectedKeys = filter.selected.map(f => f.key);
     return (
         <div key={filter.key} style={{ marginTop: 15 }}>
             <h4>{filter.name}</h4>

@@ -1,7 +1,5 @@
 global.fetch = require("node-fetch");
-const {
-  refreshAccessToken
-} = require('./tokens');
+const { refreshAccessToken } = require('./tokens');
 const stripHtml = require("string-strip-html");
 const utils = require('../utils');
 const log = require('debug')('services/graph');
