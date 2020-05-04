@@ -1,7 +1,7 @@
 require('dotenv').config();
 const path = require('path');
 const webpack = require('webpack');
-const clientLib = path.resolve(__dirname, 'lib/client/');
+const src = path.resolve(__dirname, 'client/');
 const package = require('./package.json');
 
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
@@ -11,7 +11,7 @@ console.log("PACKAGE_VERSION: %s", package.version);
 
 let config = {
   mode,
-  entry: { [package.name]: './lib/client' },
+  entry: { [package.name]: './client' },
   output: {
     path: path.resolve(__dirname, './public/js'),
     filename: '[name].js'
@@ -24,26 +24,65 @@ let config = {
   module: {
     rules: [
       {
-        test: /\.m?js$/,
+        test: /\.ts(x?)$/,
         exclude: /(node_modules)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env']
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env']
+            }
+          },
+          {
+            loader: 'ts-loader'
           }
-        }
+        ]
+      },
+      {
+        test: /\.module\.s(a|c)ss$/,
+        loader: [
+          mode === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              sourceMap: mode === 'development'
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: mode === 'development'
+            }
+          }
+        ]
+      },
+      {
+        test: /\.s(a|c)ss$/,
+        exclude: /\.module.(s(a|c)ss)$/,
+        loader: [
+          mode === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: mode === 'development'
+            }
+          }
+        ]
       }
     ]
   },
   resolve: {
     alias: {
-      interfaces: path.resolve(clientLib, 'interfaces'),
-      utils: path.resolve(clientLib, 'utils'),
-      helpers: path.resolve(clientLib, 'helpers'),
-      pages: path.resolve(clientLib, 'pages'),
-      common: path.resolve(clientLib, 'common'),
-      i18n: path.resolve(clientLib, 'i18n'),
-    }
+      interfaces: path.resolve(src, 'interfaces'),
+      utils: path.resolve(src, 'utils'),
+      helpers: path.resolve(src, 'helpers'),
+      pages: path.resolve(src, 'pages'),
+      common: path.resolve(src, 'common'),
+      i18n: path.resolve(src, 'i18n'),
+    },
+    extensions: ['.ts', '.tsx', '.js']
   },
   plugins: [
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
@@ -61,7 +100,8 @@ let config = {
 
 switch (mode) {
   case 'development': {
-    config.plugins.push(new (require('webpackbar'))());
+    config.watch = true;
+    config.stats = 'errors-only';
   }
     break;
   case 'production': {
