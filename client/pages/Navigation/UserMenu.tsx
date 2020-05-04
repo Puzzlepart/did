@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { AppContext } from '../../AppContext';
-import { UserMenuContext } from './UserMenuContext';
 import { UserSettings } from './UserSettings';
 
 const MenuDivider = () => <div className='dropdown-divider'></div>;
@@ -8,10 +7,8 @@ const MenuItem = ({ text }) => <p className='dropdown-item-text text-muted mb-0'
 
 export const UserMenu = () => {
     const { user } = React.useContext(AppContext);
-    const [showSettings, setShowSettings] = React.useState(false);
 
     return (
-        <UserMenuContext.Provider value={{ showSettings, setShowSettings }}>
             <ul className='navbar-nav justify-content-end'>
                 <li className='nav-item dropdown'>
                     <a className='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button'
@@ -32,6 +29,5 @@ export const UserMenu = () => {
                     </div>
                 </li>
             </ul>
-        </UserMenuContext.Provider>
     );
 }
