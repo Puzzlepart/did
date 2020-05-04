@@ -31,7 +31,7 @@
     },
     "include": [
       "client/**/*.ts",     
-      "client/**/*.tsx",
+      "client/**/*.tsx",  
       "client/i18n/*.json"
     ],
     "exclude": [
