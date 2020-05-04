@@ -1,6 +1,5 @@
 
 import { initializeIcons } from '@uifabric/icons';
-import { IAppContext } from 'AppContext';
 import 'core-js/stable';
 import * as React from 'react';
 import { ApolloProvider } from 'react-apollo';
@@ -8,6 +7,7 @@ import * as ReactDom from 'react-dom';
 import 'regenerator-runtime/runtime.js';
 import { tryParseJson } from 'utils/tryParseJson';
 import { App } from './app';
+import { IAppContext } from './AppContext';
 import { client } from './graphql';
 import * as i18n from './i18n';
 

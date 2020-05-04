@@ -12,6 +12,8 @@
     "views": false,
     "services": false,
     ".env": false,
-    "server.js": true
+    "server.js": true,
+    " client/**/*.js": true,
+    "client/**/*.d.ts": true
   },
 }
