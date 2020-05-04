@@ -10,6 +10,8 @@ import { client } from './graphql';
 import * as i18n from './i18n';
 import { tryParseJson } from 'utils/tryParseJson';
 
+//
+
 (async () => {
     initializeIcons();
     await i18n.setup({ en: require('../../resources/en.json') });
