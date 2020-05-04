@@ -117,7 +117,6 @@
         "typedoc-neo-theme": "1.0.8",
         "typedoc-plugin-external-module-name": "3.1.0",
         "webpack-dev-middleware": "3.7.2",
-        "webpack-hot-middleware": "2.25.0",
         "webpackbar": "4.0.0"
     },
     "resolutions": {
