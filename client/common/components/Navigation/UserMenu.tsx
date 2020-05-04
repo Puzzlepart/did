@@ -1,5 +1,5 @@
+import { AppContext } from 'AppContext';
 import * as React from 'react';
-import { AppContext } from '../../AppContext';
 import { UserSettings } from './UserSettings';
 
 const MenuDivider = () => <div className='dropdown-divider'></div>;

@@ -1,7 +1,7 @@
+import { AppContext } from 'AppContext';
 import { Admin, Customers, Projects, Reports, Timesheet } from 'pages';
 import * as React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { AppContext } from '../../AppContext';
 import { UserMenu } from './UserMenu';
 
 

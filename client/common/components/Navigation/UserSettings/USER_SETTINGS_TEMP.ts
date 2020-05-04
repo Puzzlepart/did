@@ -14,7 +14,7 @@ export interface IUserSettingDropdown extends IUserSetting {
 
 export const USER_SETTINGS_TEMP = new Set<IUserSetting>([
     {
-        key: 'UserLanguage',
+        key: 'userLanguage',
         label: 'Language',
         type: 'dropdown',
         options: [
