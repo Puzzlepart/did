@@ -1,0 +1,57 @@
+{
+    "TIMESHEET": {
+      "OVERVIEW_HEADER_TEXT": "Oversikt",
+      "SUMMARY_HEADER_TEXT": "Sammendrag",
+      "ALLOCATION_HEADER_TEXT": "Allokering",
+      "ALLOCATION_PROJECT_CHART_TITLE": "Allokering per prosjekt",
+      "ALLOCATION_CUSTOMER_CHART_TITLE": "Allokering per kunde",
+      "CONFIRM_HOURS_TEXT": "Bekreft timer",
+      "UNCONFIRM_HOURS_TEXT": "Angre bekreft timer",
+      "COMMANDBAR_CURRENT_WEEK_TEXT": "Gå til inneværende uke",
+      "COMMANDBAR_PREV_WEEK_TEXT": "Gå til forrige uke",
+      "COMMANDBAR_NEXT_WEEK_TEXT": "Gå til neste uke",
+      "PERIOD_HOURS_SUMMARY_TEXT": "Du har totalt **{0}** denne perioden",
+      "HOURS_NOT_MATCHED_TEXT": "Du har **{0}** som ikke er matchet. Alle avtaler må være matchet før du kan bekrefte timene dine.",
+      "ALL_HOURS_MATCHED_TEXT": "Alle timene dine er matchet. Er du klar til å bekrefte uken din?",
+      "PERIOD_CONFIRMED_TEXT": "Perioden er bekreftet med {0}. Klikk **Angre bekref timer** dersom du vil gjøre noen justeringer.",
+      "IGNORED_EVENTS_TEXT": "Du har {0} ignorerte hendelse(r).",
+      "UNDO_IGNORE_LINK_TEXT": "Trykk for å angre",
+      "UNRESOLVER_ERRORS_TEXT": "Du har {0} uløste feil. Du må løse disse før du kan bekrefte timene dine.",
+      "SPLIT_WEEK_TEXT": "Valgt uke strekker seg over to måneder. Navigér mellom periodene ved å bruke knappene over.",
+      "EVENT_ERROR_PREFIX": "**MERK:**",
+      "NO_PROJECT_MATCH_FOUND_TEXT": "Ingen match funnet",
+      "RESOLVE_PROJECT_BUTTON_LABEL": "Søk prosjekt",
+      "IGNORE_EVENT_BUTTON_LABEL": "Ingnorer",
+      "CLEAR_PROJECT_MATCH_TOOLTIP_TEXT": "Fjern match",
+      "MATCH_OUTLOOK_NOTE": "**Tips:** Prøv å sørge for at <a href='{0}' target='_blank'>Outlook-avtalen</a> matches automatisk. I noen tilfeller kan det dog være nødvendig å matche manuelt.",
+      "DID_YOU_MEAN_TEXT": "Mente du",
+      "EVENT_NOT_FULLY_MATCHED_TEXT": "Hendelse kunne ikke matches. Vi fant matchende kunde `{0}`, men ikke noe prosjekt med den spesifiserte nøkkelen."
+    },
+    "PROJECTS": {
+      "PROJECT_INACTIVE_TEXT": "Dette prosjektet er markert som inaktivt.",
+      "SEARCH_PLACEHOLDER": "Søk i prosjekter...",
+      "CATEGORY_OUTLOOK_TEXT": "Dette prosjektet har en Outlook-kategori.",
+      "PROJECT_WORKSPACE_LABEL": "Prosjekt-workspace",
+      "CREATE_OUTLOOK_CATEGORY_LABEL": "Lag en Outlook-kategori",
+      "OUTLOOK_CATEGORY_INFO_TEXT": "Her kan du se alle prosjektene med korresponderende Outlook-kategori.",
+      "NO_TIME_ENTRIES_TEXT": "Ingen timer registrert på dette prosjektet.",
+      "TIME_ENTRIES_ERROR_TEXT": "En feil opppstod ved innlasting av timene for dette prosjektet.",
+      "TIME_ENTRIES_LOADING_LABEL": "Laster timeføring",
+      "MY_PROJECTS_TEXT": "Mine prosjekter",
+      "MY_PROJECTS_SEARCH_PLACEHOLDER": "Søk i mine prosjekter..."
+    },
+    "CUSTOMERS": {
+      "CUSTOMER_INACTIVE_TEXT": "Denne kunden er markert som inaktiv.",
+      "CUSTOMER_DELETE_BUTTON_LABEL": "Slett kunde",
+      "CUSTOMER_DELETE_CONFIRMATION_TEXT": "Slettet kunde {0} og tilhørende prosjekter."
+    },
+    "COMMON": {
+      "SEARCH_PLACEHOLDER": "Søk...",
+      "GENERIC_ERROR_TEXT": "En feil oppstod.",
+      "EXPORT_TO_EXCEL_LABEL": "Eksporter til Excel",
+      "SEARCH_TEXT": "Søk",
+      "CREATE_NEW_TEXT": "Lag ny",
+      "TOGGLE_INACTIVE_ON_TEXT": "Vis inaktive",
+      "TOGGLE_INACTIVE_OFF_TEXT": "Skjul inaktive"
+    }
+  }
