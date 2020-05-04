@@ -4,6 +4,9 @@ const typeDef = `
         key: String
         role: String!
         fullName: String!
+        email: String
+        userLanguage: String
+        sub: Subscription
     }
 
     
@@ -29,9 +32,10 @@ async function users(_obj, _args, context) {
     return users;
 }
 
-async function currentUser(_obj, _args, context) {
-    let user = await context.services.storage.getUser(context.user.profile.oid);
-    return user;
+async function currentUser(_obj, _args, { user, services: { storage: StorageService } }) {
+    const currentUser = await StorageService.getUser(user.profile.oid);
+    const sub = await StorageService.getSubscription();
+    return { ...currentUser, sub };
 }
 
 async function addUser(_obj, variables, context) {
