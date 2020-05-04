@@ -2,15 +2,15 @@
 @import "./theme.scss";
 @import "./react-autosuggest.scss";
 @import "../client/common/components/UserMessage/UserMessage.scss";
-@import "../client/components/Admin/Users/UserFormModal/UserFormModal.scss";
-@import "../client/components/Timesheet/Timesheet.scss";
-@import "../client/components/Timesheet/SummaryView/SummaryView.scss";
-@import "../client/components/Timesheet/ActionBar/WeekPicker/WeekPicker.scss";
-@import "../client/components/Timesheet/ProjectColumn/ProjectColumn.scss";
-@import "../client/components/Projects/ProjectDetails/ProjectDetails.scss";
-@import "../client/components/Customers/CustomerList/ConfirmDeleteDialog/ConfirmDeleteDialog.scss";
-@import "../client/components/UserAllocation/UserAllocation.scss";
-@import "../client/components/Projects/CreateProjectForm/SearchCustomer/SearchCustomer.scss";
+@import "../client/common/components/UserAllocation/UserAllocation.scss";
+@import "../client/pages/Admin/Users/UserFormModal/UserFormModal.scss";
+@import "../client/pages/Timesheet/Timesheet.scss";
+@import "../client/pages/Timesheet/SummaryView/SummaryView.scss";
+@import "../client/pages/Timesheet/ActionBar/WeekPicker/WeekPicker.scss";
+@import "../client/pages/Timesheet/ProjectColumn/ProjectColumn.scss";
+@import "../client/pages/Projects/ProjectDetails/ProjectDetails.scss";
+@import "../client/pages/Customers/CustomerList/ConfirmDeleteDialog/ConfirmDeleteDialog.scss";
+@import "../client/pages/Projects/CreateProjectForm/SearchCustomer/SearchCustomer.scss";
 
 button:focus {
   outline: none;
