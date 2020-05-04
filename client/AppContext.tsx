@@ -6,7 +6,13 @@ export interface IVersionInfo {
 }
 
 export interface IAppContext {
-    user?: any;
+    user?: {
+        fullName?: string;
+        email?: string;
+        role?: string;
+        sub?: string;
+        userLanguage?: 'en' | 'nb_no';
+    };
     info?: IVersionInfo;
 }
 
