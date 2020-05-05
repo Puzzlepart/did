@@ -3,6 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 const src = path.resolve(__dirname, 'client/');
 const package = require('./package.json');
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
 
@@ -62,12 +63,12 @@ let config = {
     extensions: [".ts", ".tsx", ".js", ".css", ".scss"]
   },
   plugins: [
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new webpack.DefinePlugin({
       'process.env': {
         'AZURE_APPLICATION_INSIGHTS_INSTRUMENTATION_KEY': JSON.stringify(process.env.AZURE_APPLICATION_INSIGHTS_INSTRUMENTATION_KEY),
       },
     }),
+    new MomentLocalesPlugin({ localesToKeep: ['en-gb', 'nb'] }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()

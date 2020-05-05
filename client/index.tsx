@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import { initializeIcons } from '@uifabric/icons';
 import 'core-js/stable';
+import moment from 'moment';
 import * as React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import * as ReactDom from 'react-dom';
@@ -22,11 +23,17 @@ initializeIcons();
     const { data } = await client.query<{ currentUser: any }>({ query: GET_CURRENT_USER });
     context.user = data.currentUser;
 
-    
-    await i18n.setup({ 
-        en: require('../resources/en.json'), 
+
+    await i18n.setup({
+        en: require('../resources/en.json'),
         nb_no: require('../resources/nb_no.json'),
     }, context.user.userLanguage);
+
+    if (context.user.userLanguage.startsWith('nb')) {
+        moment.locale('nb');
+    } else {
+        moment.locale(context.user.userLanguage);
+    }
 
     ReactDom.render((
         <ApolloProvider client={client}>
