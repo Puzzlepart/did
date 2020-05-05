@@ -51,6 +51,17 @@
     "EXPORT_TO_EXCEL_LABEL": "Export to Excel",
     "SEARCH_TEXT": "Search",
     "CREATE_NEW_TEXT": "Create new",
-    "TOGGLE_INACTIVE_TEXT": "Show inactive"
+    "TOGGLE_INACTIVE_TEXT": "Show inactive",
+    "SETTINGS": "Settings",
+    "LANGUAGE": "Language",
+    "KEY_LABEL": "Nøkkel",
+    "NAME_LABEL": "Navn"
+  },
+  "NAVIGATION": {
+    "TIMESHEET": "Timesheet",
+    "CUSTOMERS": "Customers",
+    "PROJECTS": "Projects",
+    "REPORTS": "Reports",
+    "ADMIN": "Admin"
   }
 }

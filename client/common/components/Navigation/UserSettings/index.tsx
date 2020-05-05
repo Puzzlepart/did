@@ -1,4 +1,5 @@
 import { AppContext } from 'AppContext';
+import resource from 'i18n';
 import { Panel } from 'office-ui-fabric-react/lib/Panel';
 import * as React from 'react';
 import { UserSettingInput } from './UserSettingInput';
@@ -12,21 +13,21 @@ export type IUserSettingsProps = React.HTMLProps<HTMLDivElement>
  */
 export const UserSettings = (props: IUserSettingsProps) => {
     const { user } = React.useContext(AppContext);
-    const [isOpen, toggle] = React.useState(true);
+    const [isOpen, toggle] = React.useState<boolean>(false);
 
     return (
         <a
             href='#'
             className={props.className}
             onClick={() => toggle(true)} style={{ fontSize: 12 }}>
-            <span>Settings</span>
+            <span>{resource('COMMON.SETTINGS')}</span>
             <Panel
                 className={styles.panel}
-                headerText='Settings'
+                headerText={resource('COMMON.SETTINGS')}
                 isOpen={isOpen}
                 onDismiss={() => toggle(false)}
                 isLightDismiss={true}>
-                {[...USER_SETTINGS].map((s, idx) => (
+                {[...USER_SETTINGS(resource)].map((s, idx) => (
                     <UserSettingInput
                         key={idx}
                         user={user}

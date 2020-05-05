@@ -1,5 +1,4 @@
 {
-  "lng": "Norsk (bokmål)",
   "translation": {
     "TIMESHEET": {
       "OVERVIEW_HEADER_TEXT": "Oversikt",
@@ -13,7 +12,7 @@
       "COMMANDBAR_PREV_WEEK_TEXT": "Gå til forrige uke",
       "COMMANDBAR_NEXT_WEEK_TEXT": "Gå til neste uke",
       "PERIOD_HOURS_SUMMARY_TEXT": "Du har totalt **{0}** denne perioden",
-      "HOURS_NOT_MATCHED_TEXT": "Du har **{0}** som ikke er matchet. Alle avtaler må være matchet før du kan bekrefte timene dine.",
+      "HOURS_NOT_MATCHED_TEXT": "Du har **{0}** som ikke er koblet mot et prosjekt. Alle avtaler må være matchet før du kan bekrefte timene dine.",
       "ALL_HOURS_MATCHED_TEXT": "Alle timene dine er matchet. Er du klar til å bekrefte uken din?",
       "PERIOD_CONFIRMED_TEXT": "Perioden er bekreftet med {0}. Klikk **Angre bekref timer** dersom du vil gjøre noen justeringer.",
       "IGNORED_EVENTS_TEXT": "Du har {0} ignorerte hendelse(r).",
@@ -23,7 +22,7 @@
       "EVENT_ERROR_PREFIX": "**MERK:**",
       "NO_PROJECT_MATCH_FOUND_TEXT": "Ingen match funnet",
       "RESOLVE_PROJECT_BUTTON_LABEL": "Søk prosjekt",
-      "IGNORE_EVENT_BUTTON_LABEL": "Ingnorer",
+      "IGNORE_EVENT_BUTTON_LABEL": "Ignorer",
       "CLEAR_PROJECT_MATCH_TOOLTIP_TEXT": "Fjern match",
       "MATCH_OUTLOOK_NOTE": "**Tips:** Prøv å sørge for at <a href='{0}' target='_blank'>Outlook-avtalen</a> matches automatisk. I noen tilfeller kan det dog være nødvendig å matche manuelt.",
       "DID_YOU_MEAN_TEXT": "Mente du",
@@ -53,7 +52,18 @@
       "EXPORT_TO_EXCEL_LABEL": "Eksporter til Excel",
       "SEARCH_TEXT": "Søk",
       "CREATE_NEW_TEXT": "Lag ny",
-      "TOGGLE_INACTIVE_TEXT": "Vis inaktive"
+      "TOGGLE_INACTIVE_TEXT": "Vis inaktive",
+      "SETTINGS": "Innstillinger",
+      "LANGUAGE": "Språk",
+      "KEY_LABEL": "Nøkkel",
+      "NAME_LABEL": "Navn"
+    },
+    "NAVIGATION": {
+      "TIMESHEET": "Timeliste",
+      "CUSTOMERS": "Kunder",
+      "PROJECTS": "Prosjekter",
+      "REPORTS": "Rapporter",
+      "ADMIN": "Administrasjon"
     }
   }
 }

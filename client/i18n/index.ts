@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import i18n from 'i18next';
-import languages from '../../resources';
 
 /**
  * Returns the resource value for the specified key
@@ -16,20 +15,16 @@ export default function resource(key: string): string {
 /**
  * Setup i18n with default namespace translation
  * 
+ * @param resources
  * @param {string} lng Language (defaults to en)
  * 
  * @ignore
  */
-export async function setup(lng = 'en'): Promise<void> {
-    const resources = Object.keys(languages).reduce((obj, key) => ({
-        ...obj,
-        [key]: languages[key]
-    }), {});
+export async function setup(resources, lng = 'en'): Promise<void> {
     await i18n.init({
         debug: false,
         lng,
+        defaultNS: 'translation',
         resources,
     });
 }
-
-export { languages };

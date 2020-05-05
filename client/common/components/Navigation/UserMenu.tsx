@@ -21,7 +21,7 @@ export const UserMenu = () => {
                         </h5>
                         <MenuItem text={user.email} />
                         <MenuDivider />
-                        <MenuItem text={`${user.role} (${user.sub}`} />
+                        <MenuItem text={`${user.role} (${user.sub.name}`} />
                         <MenuDivider />
                         <UserSettings className='dropdown-item' />
                         <MenuDivider />

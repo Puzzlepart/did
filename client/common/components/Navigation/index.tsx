@@ -1,5 +1,5 @@
 import { AppContext } from 'AppContext';
-import { Admin, Customers, Projects, Reports, Timesheet } from 'pages';
+import resource from 'i18n';
 import * as React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { UserMenu } from './UserMenu';
@@ -17,19 +17,19 @@ export const Navigation = () => {
                 <div className='collapse navbar-collapse' id='navbarCollapse'>
                     <ul className='navbar-nav mr-auto'>
                         <li className='nav-item' hidden={!user}>
-                            <NavLink to='/timesheet' className='nav-link' activeClassName='active'>{Timesheet['displayName']}</NavLink>
+                            <NavLink to='/timesheet' className='nav-link' activeClassName='active'>{resource('NAVIGATION.TIMESHEET')}</NavLink>
                         </li>
                         <li className='nav-item' hidden={!user}>
-                            <NavLink to='/customers' className='nav-link' activeClassName='active'>{Customers['displayName']}</NavLink>
+                            <NavLink to='/customers' className='nav-link' activeClassName='active'>{resource('NAVIGATION.CUSTOMERS')}</NavLink>
                         </li>
                         <li className='nav-item' hidden={!user}>
-                            <NavLink to='/projects' className='nav-link' activeClassName='active'>{Projects['displayName']}</NavLink>
+                            <NavLink to='/projects' className='nav-link' activeClassName='active'>{resource('NAVIGATION.PROJECTS')}</NavLink>
                         </li>
                         <li className='nav-item' hidden={!user}>
-                            <NavLink to='/reports' className='nav-link' activeClassName='active'>{Reports['displayName']}</NavLink>
+                            <NavLink to='/reports' className='nav-link' activeClassName='active'>{resource('NAVIGATION.REPORTS')}</NavLink>
                         </li>
                         <li className='nav-item' hidden={!user}>
-                            <NavLink to='/admin' className='nav-link' activeClassName='active'>{Admin['displayName']}</NavLink>
+                            <NavLink to='/admin' className='nav-link' activeClassName='active'>{resource('NAVIGATION.ADMIN')}</NavLink>
                         </li>
                     </ul>
                     <UserMenu />
