@@ -1,6 +1,12 @@
 {
   "translation": {
     "TIMESHEET": {
+      "LOADING_EVENTS_LABEL": "Loading events",
+      "LOADING_EVENTS_DESCRIPTION": "Please wait...",
+      "CONFIRMING_PERIOD_LABEL": "Confirming period",
+      "CONFIRMING_PERIOD_DESCRIPTION": "Hang on a minute...",
+      "UNCONFIRMING_PERIOD_LABEL": "Unconfirming period",
+      "UNCONFIRMING_PERIOD_DESCRIPTION": "Hang on a minute...",
       "OVERVIEW_HEADER_TEXT": "Overview",
       "SUMMARY_HEADER_TEXT": "Summary",
       "ALLOCATION_HEADER_TEXT": "Allocation",
@@ -40,7 +46,7 @@
       "TIME_ENTRIES_LOADING_LABEL": "Loading time entries",
       "MY_PROJECTS_TEXT": "My projects",
       "MY_PROJECTS_SEARCH_PLACEHOLDER": "Search my projects..."
-    },
+    },    
     "CUSTOMERS": {
       "CUSTOMER_INACTIVE_TEXT": "This customer has been marked as inactive.",
       "CUSTOMER_DELETE_BUTTON_LABEL": "Delete customer",
@@ -61,7 +67,7 @@
       "GENERATING_REPORT_DESCRIPTION": "To give you the freshest results, we're generating a report from the latest data..."
     },
     "COMMON": {
-      "SEARCH": "Søk",
+      "SEARCH": "Search",
       "SEARCH_PLACEHOLDER": "Search...",
       "GENERIC_ERROR_TEXT": "An error occured.",
       "EXPORT_TO_EXCEL_LABEL": "Export to Excel",

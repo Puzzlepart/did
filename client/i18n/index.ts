@@ -21,11 +21,9 @@ export default function resource(key: string, returnObj = false): string {
  * 
  * @ignore
  */
-export async function setup(resources: any, lng: string): Promise<void> {
-    await i18n.init({
-        debug: false,
-        lng,
-        defaultNS: 'translation',
-        resources,
-    });
-}
+export const setup = (resources: any, lng: string) => i18n.init({
+    debug: false,
+    lng,
+    defaultNS: 'translation',
+    resources,
+});

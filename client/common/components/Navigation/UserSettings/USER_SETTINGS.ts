@@ -19,14 +19,14 @@ export const USER_SETTINGS = (resource: (key: string) => string) => new Set<IUse
         type: 'dropdown',
         options: [
             {
-                key: 'en',
-                text: 'English',
+                key: 'en-GB',
+                text: '	English (United Kingdom)',
             },
             {
                 key: 'nb',
                 text: 'Norsk (bokmål)',
             }
         ],
-        defaultValue: 'en',
+        defaultValue: 'en-GB',
     } as IUserSettingDropdown,
 ]);

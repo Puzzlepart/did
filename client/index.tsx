@@ -22,11 +22,11 @@ initializeIcons();
 
     const { data } = await client.query<{ currentUser: any }>({ query: GET_CURRENT_USER });
     context.user = data.currentUser;
-    context.user.userLanguage = context.user.userLanguage || 'en'
+    context.user.userLanguage = context.user.userLanguage || 'en-GB';
 
     await i18n.setup({
-        en: require('../resources/en.json'),
-        nb: require('../resources/nb.json'),
+        'en-GB': require('../resources/en-GB.json'),
+        'nb': require('../resources/nb.json'),
     }, context.user.userLanguage);
 
     moment.locale(context.user.userLanguage);

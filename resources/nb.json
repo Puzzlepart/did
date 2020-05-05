@@ -1,6 +1,12 @@
 {
   "translation": {
     "TIMESHEET": {
+      "LOADING_EVENTS_LABEL": "Laster hendelser",
+      "LOADING_EVENTS_DESCRIPTION": "Vent et lite øyeblikk...",
+      "CONFIRMING_PERIOD_LABEL": "Bekrefter timene dine",
+      "CONFIRMING_PERIOD_DESCRIPTION": "Vent et lite øyeblikk...",
+      "UNCONFIRMING_PERIOD_LABEL": "Vi nullstiller timene dine",
+      "UNCONFIRMING_PERIOD_DESCRIPTION": "Vent et lite øyeblikk...",
       "OVERVIEW_HEADER_TEXT": "Oversikt",
       "SUMMARY_HEADER_TEXT": "Sammendrag",
       "ALLOCATION_HEADER_TEXT": "Allokering",
