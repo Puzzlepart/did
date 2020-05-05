@@ -1,14 +1,15 @@
-import { TimesheetContext } from 'pages/Timesheet';
-import { TimesheetScope } from 'pages/Timesheet/TimesheetScope';
 import { Calendar, DateRangeType, DayOfWeek } from 'office-ui-fabric-react/lib/Calendar';
 import { Callout, DirectionalHint } from 'office-ui-fabric-react/lib/Callout';
 import { FocusTrapZone } from 'office-ui-fabric-react/lib/FocusTrapZone';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
+import { TimesheetContext } from 'pages/Timesheet';
+import { TimesheetScope } from 'pages/Timesheet/TimesheetScope';
 import * as React from 'react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ACTIONBAR_ICON_PROPS } from '../ACTIONBAR_ICON_PROPS';
 import { CALENDAR_STRINGS } from './CALENDAR_STRINGS';
+import styles from './WeekPicker.module.scss';
 
 /**
  * @category Timesheet
@@ -22,7 +23,7 @@ export const WeekPicker = () => {
         <>
             <div>
                 <TextField
-                    className='c-Timesheet-weekPicker'
+                    className={styles.root}
                     onClick={event => setCalendar(event.currentTarget)}
                     value={scope.timespan}
                     styles={{ field: { color: 'rgb(120, 120, 120)', cursor: 'pointer' }, root: { width: 280, marginTop: 6 } }}
@@ -33,7 +34,7 @@ export const WeekPicker = () => {
             {calendar && (
                 <Callout
                     isBeakVisible={false}
-                    className='c-Timesheet-weekpicker--callout'
+                    className={styles.callout}
                     gapSpace={5}
                     doNotLayer={false}
                     target={calendar}

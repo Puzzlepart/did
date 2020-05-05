@@ -1,10 +1,9 @@
+export * from './EventList';
+export { default as EventList } from './EventList';
 export * from './FilterPanel';
 export * from './IconPicker';
+export { default as List } from './List';
 export * from './ScrollablePaneWrapper';
-export * from './UserMessage';
 export * from './SearchProject';
-export * from './EventList';
 export * from './UserAllocation';
-import List from './List';
-
-export { List };
+export * from './UserMessage';

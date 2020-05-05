@@ -4,7 +4,7 @@ import { GET_PROJECTS, ProjectList } from 'pages/Projects';
 import { getValueTyped as value } from 'helpers';
 import resource from 'i18n';
 import { IProject } from 'interfaces/IProject';
-import { Link } from 'office-ui-fabric-react/lib/Link';
+import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import * as React from 'react';
 import { ICustomerDetailsProps } from './ICustomerDetailsProps';
@@ -37,7 +37,20 @@ export const CustomerDetails = (props: ICustomerDetailsProps) => {
                 </div>
                 <div className='row'>
                     <div className='col-sm'>
-                        <Link href={props.customer.webLink}>{props.customer.webLink}</Link>
+                        <DefaultButton
+                            hidden={!props.customer.webLink}
+                            text={resource('CUSTOMERS.CUSTOMER_WEBLINK_TEXT')}
+                            onClick={() => window.location.replace(props.customer.webLink)}
+                            iconProps={{ iconName: 'WorkforceManagement' }}
+                            disabled={loading || !!error || !props.customer.webLink}
+                            />
+                        <DefaultButton
+                            hidden={!props.customer.externalSystemURL}
+                            text={resource('CUSTOMERS.CUSTOMER_EXTERNAL_SYSTEM_URL_TEXT')}
+                            onClick={() => window.location.replace(props.customer.externalSystemURL)}
+                            iconProps={{ iconName: 'WorkforceManagement' }}
+                            disabled={loading || !!error || !props.customer.externalSystemURL}
+                            />
                     </div>
                 </div>
                 <div className='row' style={{ marginTop: 20 }}>

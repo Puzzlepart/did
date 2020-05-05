@@ -1,26 +1,25 @@
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import EventList from 'common/components/EventList';
-import { UserAllocation } from 'common/components/UserAllocation';
+import { EventList, UserAllocation } from 'common/components';
 import * as helpers from 'helpers';
 import resource from 'i18n';
 import { ITimeEntry } from 'interfaces';
-import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
-import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
+import { Pivot, PivotItem, ProgressIndicator } from 'office-ui-fabric-react';
 import * as React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { generateColumn as col } from 'utils/generateColumn';
 import { ActionBar } from './ActionBar';
 import CONFIRM_PERIOD from './CONFIRM_PERIOD';
 import GET_TIMESHEET from './GET_TIMESHEET';
+import ProjectColumn from './ProjectColumn';
 import { StatusBar } from './StatusBar';
 import { SummaryView, SummaryViewType } from './SummaryView';
+import styles from './Timesheet.module.scss';
 import { TimesheetContext } from './TimesheetContext';
 import { TimesheetPeriod } from './TimesheetPeriod';
 import { reducer } from './TimesheetReducer';
 import { TimesheetScope } from './TimesheetScope';
-import { TimesheetView, ITimesheetState } from './types';
+import { ITimesheetState, TimesheetView } from './types';
 import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD';
-import { generateColumn as col } from 'utils/generateColumn';
-import ProjectColumn from './ProjectColumn';
 
 const intialState: ITimesheetState = {
     periods: [],
@@ -49,7 +48,7 @@ export const Timesheet = () => {
     React.useEffect(() => dispatch({ type: 'DATA_UPDATED', payload: timesheetQuery }), [timesheetQuery])
     React.useEffect(() => dispatch({ type: 'UPDATE_SCOPE', payload: params.startDateTime }), [params.startDateTime]);
 
-    
+
     const onConfirmPeriod = () => {
         dispatch({ type: 'CONFIRMING_PERIOD' });
         confirmPeriod({ variables: { ...state.selectedPeriod.scope, entries: state.selectedPeriod.matchedEvents } }).then(timesheetQuery.refetch);
@@ -62,7 +61,7 @@ export const Timesheet = () => {
 
     return (
         <TimesheetContext.Provider value={{ ...state, dispatch }}>
-            <div className='c-Timesheet'>
+            <div className={styles.root}>
                 <ActionBar {...{ onConfirmPeriod, onUnconfirmPeriod }} />
                 <Pivot
                     defaultSelectedKey={params.view}
@@ -71,7 +70,7 @@ export const Timesheet = () => {
                         itemKey='overview'
                         headerText={resource('TIMESHEET.OVERVIEW_HEADER_TEXT')}
                         itemIcon='CalendarWeek'>
-                        <div className='c-Timesheet-overview'>
+                        <div>
                             <StatusBar />
                             {state.loading && <ProgressIndicator {...state.loading} />}
                             <EventList

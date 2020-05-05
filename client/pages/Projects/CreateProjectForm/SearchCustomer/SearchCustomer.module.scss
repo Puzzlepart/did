@@ -1,4 +1,4 @@
-.c-SearchCustomer {
+.root {
   font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto,
     "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -11,8 +11,8 @@
   position: relative;
   width: 450px;
 
-  .c-SearchCustomer-wrapper {
-    .c-SearchCustomer-fieldGroup {
+  .wrapper {
+    .fieldGroup {
       box-shadow: none;
       margin: 0;
       padding: 0;
@@ -29,7 +29,8 @@
       border-image: initial;
       border-radius: 2px;
       background: rgb(255, 255, 255);
-      .c-SearchCustomer-field {
+
+      .field {
         font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto,
           "Helvetica Neue", sans-serif;
         -webkit-font-smoothing: antialiased;
@@ -53,39 +54,5 @@
         line-height: 2em;
       }
     }
-  }
-
-  .react-autosuggest__container {
-    position: relative;
-  }
-  .react-autosuggest__input--focused {
-    outline: none;
-  }
-
-  .react-autosuggest__suggestions-container {
-    display: none;
-  }
-
-  .react-autosuggest__suggestions-container--open {
-    display: block;
-    position: absolute;
-    top: 35px;
-    width: 450px;
-    border: 1px solid #aaa;
-    background-color: #fff;
-    max-height: 200px;
-    overflow-y: auto;
-    z-index: 2;
-  }
-
-  .react-autosuggest__suggestions-list {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-  }
-
-  .react-autosuggest__suggestion {
-    cursor: pointer;
-    padding: 10px 20px;
   }
 }
