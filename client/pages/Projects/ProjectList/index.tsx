@@ -2,7 +2,7 @@ import List from 'common/components/List';
 import resource from 'i18n';
 import { IProject } from 'interfaces';
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
-import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
+import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import * as React from 'react';
 import { generateColumn as col } from 'utils/generateColumn';
@@ -72,10 +72,9 @@ const ProjectList = (props: IProjectListProps) => {
                     {
                         key: 'TOGGLE_INACTIVE',
                         onRender: () => (
-                            <Toggle
+                            <Checkbox
                                 styles={{ root: { margin: '6px 0 0 8px' } }}
-                                offText={resource('COMMON.TOGGLE_INACTIVE_OFF_TEXT')}
-                                onText={resource('COMMON.TOGGLE_INACTIVE_ON_TEXT')}
+                                label={resource('COMMON.TOGGLE_INACTIVE_TEXT')}
                                 onChange={onToggleInactive} />
                         ),
                     }

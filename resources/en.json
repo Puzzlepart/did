@@ -51,7 +51,6 @@
     "EXPORT_TO_EXCEL_LABEL": "Export to Excel",
     "SEARCH_TEXT": "Search",
     "CREATE_NEW_TEXT": "Create new",
-    "TOGGLE_INACTIVE_ON_TEXT": "Show inactive",
-    "TOGGLE_INACTIVE_OFF_TEXT": "Hide inactive"
+    "TOGGLE_INACTIVE_TEXT": "Show inactive"
   }
 }
