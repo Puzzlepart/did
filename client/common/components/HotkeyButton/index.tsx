@@ -1,26 +1,26 @@
 
 import { ActionButton, DefaultButton, PrimaryButton } from 'office-ui-fabric-react/lib/Button';
-import { TooltipHost, TooltipDelay } from 'office-ui-fabric-react/lib/Tooltip';
-import { Icon } from 'office-ui-fabric-react/lib/Icon';
+import { TooltipDelay, TooltipHost } from 'office-ui-fabric-react/lib/Tooltip';
 import * as React from 'react';
 import Hotkeys from 'react-hot-keys';
 import _ from 'underscore';
 import { IHotkeyButtonProps } from './IHotkeyButtonProps';
 
+export const HotKeyContext = React.createContext<{ registry: Map<string, string> }>(null);
+
 /**
  * @category HotkeyButton
  */
 export const HotkeyButton = (props: IHotkeyButtonProps) => {
-    if (props.registry) props.registry.set(props.hotkey, props.hotkeyDescription || props.text);
-    let buttonElement = <DefaultButton {..._.omit(props, 'hotkey', 'registry')} />;
+    const context = React.useContext(HotKeyContext);
+    if (!context) return null;
+    context.registry.set(props.hotkey, props.hotkeyDescription || props.text);
+    let buttonElement = null;
 
     switch (props.type) {
-        case 'primary': {
-            buttonElement = <PrimaryButton {..._.omit(props, 'hotkey', 'registry')} />;
-        }
-        case 'action': {
-            buttonElement = <ActionButton {..._.omit(props, 'hotkey', 'registry')} text='' />;
-        }
+        case 'primary': buttonElement = <PrimaryButton {..._.omit(props, 'hotkey', 'registry')} />; break;
+        case 'action': buttonElement = <ActionButton {..._.omit(props, 'hotkey', 'registry')} text='' />; break;
+        default: buttonElement = <DefaultButton {..._.omit(props, 'hotkey', 'registry')} />;
     }
 
     return (
@@ -43,7 +43,7 @@ export const HotkeyButton = (props: IHotkeyButtonProps) => {
             <Hotkeys
                 keyName={props.hotkey}
                 disabled={props.disabled}
-                onKeyUp={_ => props.onClick(null)}>
+                onKeyUp={() => props.onClick(null)}>
                 {buttonElement}
             </Hotkeys>
         </TooltipHost>
