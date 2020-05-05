@@ -6,7 +6,7 @@
 - [ ] Check the commit's or even all commits' message styles matches our requested structure.
 - [ ] Check your code additions locally using `npm run watch`
 - [ ] Make sure you've updated the CHANGELOG (if applicable)
-- [ ] Make sure strings are added using the resource files
+- [ ] Make sure strings/resources are added using our [resource files](https://github.com/Puzzlepart/did365/tree/dev/resources)
 
 ### Description
 Please describe your pull request.
