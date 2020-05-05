@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/react-hooks';
-import { IconPicker, UserMessage, useMessage } from 'common/components';
+import { IconPicker, useMessage, UserMessage } from 'common/components';
+import resource from 'i18n';
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button';
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
@@ -63,7 +64,7 @@ export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey
                 onSelected={({ key }) => setModel({ ...model, customerKey: key as string })} />
             <TextField
                 styles={{ root: { marginTop: 12, width: 450 } }}
-                label='Key'
+                label={resource('COMMON.KEY_LABEL')}
                 description='Project key. 3-8 characters, all uppercase.'
                 title='Project key. 3-8 characters, all uppercase.'
                 required={true}
@@ -72,7 +73,7 @@ export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey
                 value={model.projectKey} />
             <TextField
                 styles={{ root: { marginTop: 12, width: 450 } }}
-                label='Name'
+                label={resource('COMMON.NAME_LABEL')}
                 description='Name of the project.'
                 title='Name of the project.'
                 required={true}
