@@ -1,4 +1,5 @@
 import { getValueTyped as value } from 'helpers';
+import resource from 'i18n';
 import _ from 'underscore';
 import { BaseFilter, IFilter } from './BaseFilter';
 
@@ -6,8 +7,8 @@ import { BaseFilter, IFilter } from './BaseFilter';
  * @category FilterPanel
  */
 export class ResourceFilter extends BaseFilter {
-    constructor(fieldName: string, name: string) {
-        super(fieldName, name);
+    constructor(fieldName: string) {
+        super(fieldName);
     }
 
     /**
@@ -21,6 +22,10 @@ export class ResourceFilter extends BaseFilter {
             key: resource,
             value: resource,
         }));
-        return { key: this.fieldName, name: this.name, items, selected: [] }
+        return {
+            key: this.fieldName,
+            name:  resource('COMMON.EMPLOYEE_LABEL'),
+            items, selected: [],
+        }
     }
 }
