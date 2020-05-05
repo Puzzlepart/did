@@ -65,7 +65,7 @@ export const CustomerList = (props: ICustomerListProps) => {
                         onRender: () => (
                             <Checkbox
                                 styles={{ root: { margin: '6px 0 0 8px' } }}
-                                label={resource('COMMON.TOGGLE_INACTIVE_ON_TEXT')}
+                                label={resource('COMMON.TOGGLE_INACTIVE_TEXT')}
                                 onChange={onToggleInactive} />
                         ),
                     }
