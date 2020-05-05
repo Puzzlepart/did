@@ -1,3 +1,5 @@
+import { ISubscription } from './ISubscription';
+
 /**
  * @category Common
  */
@@ -6,6 +8,6 @@ export interface IUser {
     fullName?: string;
     email?: string;
     role?: string;
-    sub?: string;
+    sub?: ISubscription;
     userLanguage?: 'en' | 'nb_no';
 }
