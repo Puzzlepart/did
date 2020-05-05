@@ -21,6 +21,7 @@ export const GET_PROJECTS = gql`
             description
             webLink
             icon
+            externalSystemURL
             customerKey
             customer {
                 id
