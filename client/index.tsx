@@ -29,7 +29,9 @@ initializeIcons();
         nb_no: require('../resources/nb_no.json'),
     }, context.user.userLanguage);
 
-    if (context.user.userLanguage.startsWith('nb')) {
+    if (!context.user.userLanguage) {
+        moment.locale('en');
+    } else if (context.user.userLanguage.startsWith('nb')) {
         moment.locale('nb');
     } else {
         moment.locale(context.user.userLanguage);
