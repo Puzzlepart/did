@@ -5,10 +5,15 @@
 - [ ] Make sure you are making a pull request against the **dev branch** (left side). Also you should start *your branch* off *our dev branch*.
 - [ ] Check the commit's or even all commits' message styles matches our requested structure.
 - [ ] Check your code additions locally using `npm run watch`
-- [ ] Make sure you've updated the CHANGELOG if applicable
+- [ ] Make sure you've updated the CHANGELOG (if applicable)
+- [ ] Make sure strings are added using the resource files
 
 ### Description
 Please describe your pull request.
 
 
 ### Relevant issues
+_Remove section if not._
+
+### Relevant PRs
+_Remove section if not._
