@@ -38,7 +38,13 @@ export async function exportExcel(items: any[], options: IExcelExportOptions): P
         name: 'Sheet 1',
         data: [
             options.columns.map(c => c.name),
-            ...items.map(item => options.columns.map(col => item[col.fieldName])),
+            ...items.map(item => options.columns.map(col =>
+                (col.fieldName === "startTime" || col.fieldName === "endTime")
+                // v===raw value, t===type, where "d" is date
+                // consider changing localeString to be automatic (i.e. no params), although export might bomb in some cases
+                    ? { v: new Date(item[col.fieldName]).toLocaleString("en"), t: "d" } 
+                    : item[col.fieldName]
+            )),
         ],
     }];
     const workBook = xlsx.utils.book_new();
