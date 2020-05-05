@@ -6,7 +6,8 @@ const typeDef = `
 	key: String
 	name: String
 	description: String
-	webLink: String
+        webLink: String
+        externalSystemURL: String
 	icon: String
 	customerKey: String
 	customer: Customer

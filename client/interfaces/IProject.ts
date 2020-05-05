@@ -10,6 +10,7 @@ export interface IProject extends IObjectWithKey {
     name: string;
     description: string;
     webLink: string;
+    externalSystemURL: string;
     icon: string;
     customer: ICustomer;
     outlookCategory?: IOutlookCategory;

@@ -20,6 +20,7 @@ export default gql`
         name
         description
         webLink
+        externalSystemURL
         icon
         inactive
     }

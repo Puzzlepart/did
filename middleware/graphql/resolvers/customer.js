@@ -9,6 +9,7 @@ const typeDef = `
     name: String
     description: String
     webLink: String
+    externalSystemURL: String
     icon: String
     inactive: Boolean
   }
