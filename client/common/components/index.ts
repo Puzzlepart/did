@@ -1,4 +1,5 @@
 export * from './EventList';
+export { default as EventList } from './EventList';
 export * from './FilterPanel';
 export * from './HotkeyButton';
 export * from './HotkeyContextualMenuItem';
