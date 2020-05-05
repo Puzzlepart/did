@@ -10,7 +10,6 @@
         "start": "node ./bin/www",
         "watch": "concurrently \"webpack --watch\" \"npm run watchServer\"  \"livereload ./public/js -w 1000 -d\"",
         "watchServer": "nodemon --ignore client --ignore public --ignore lib ./bin/www",
-        "packageStyles": "node-sass --include-path scss scss/main.scss public/css/main.css",
         "packageClient": "webpack",
         "lint": "eslint --ext .ts,.tsx ./client --color --fix",
         "makeDoc": "rimraf.cmd ./doc && typedoc --options typedoc.json"
