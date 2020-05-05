@@ -2,14 +2,15 @@
 import { useQuery } from '@apollo/react-hooks';
 import AutosuggestHighlightMatch from 'autosuggest-highlight/match';
 import AutosuggestHighlightParse from 'autosuggest-highlight/parse';
-import GET_CUSTOMERS from 'pages/Customers/GET_CUSTOMERS';
 import { ICustomer } from 'interfaces';
 import { Label } from 'office-ui-fabric-react/lib/Label';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
+import GET_CUSTOMERS from 'pages/Customers/GET_CUSTOMERS';
 import * as React from 'react';
 import { useState } from 'react';
 import AutoSuggest from 'react-autosuggest';
 import { ISearchCustomerProps } from './ISearchCustomerProps';
+import styles from './SearchCustomer.module.scss';
 
 /**
  * @category Projects
@@ -20,6 +21,7 @@ export const SearchCustomer = (props: ISearchCustomerProps) => {
     const [value, setValue] = useState('');
     const { loading, data } = useQuery(GET_CUSTOMERS, { skip: !!customers, variables: { sortBy: 'name' }, fetchPolicy: 'cache-first', });
 
+    
     React.useEffect(() => { (!loading && !!data) && setCustomers(data.customers); }, [data, loading]);
 
     /**
@@ -71,10 +73,10 @@ export const SearchCustomer = (props: ISearchCustomerProps) => {
     if (!customers) return <TextField {...props} disabled={true} />;
 
     return (
-        <div className='c-SearchCustomer'>
-            <div className='c-SearchCustomer-wrapper'>
+        <div className={styles.root}>
+            <div className={styles.wrapper}>
                 <Label hidden={!props.label} required={props.required}>{props.label}</Label>
-                <div className='c-SearchCustomer-fieldGroup'>
+                <div className={styles.fieldGroup}>
                     <AutoSuggest
                         suggestions={suggestions}
                         onSuggestionsFetchRequested={({ value }) => setSuggestions(getSuggestions(value))}
@@ -83,7 +85,7 @@ export const SearchCustomer = (props: ISearchCustomerProps) => {
                         renderSuggestion={renderSuggestion}
                         onSuggestionSelected={(_event, { suggestion }) => props.onSelected(suggestion)}
                         inputProps={{
-                            className: 'c-SearchCustomer-field',
+                            className: styles.field,
                             style: props.style,
                             placeholder: props.placeholder,
                             title: props.title,

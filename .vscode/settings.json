@@ -13,7 +13,8 @@
     "services": false,
     ".env": false,
     "server.js": true,
-    " client/**/*.js": true,
-    "client/**/*.d.ts": true
-  },
+    "client/**/*.d.ts": true,
+    "client/**/*js": true,
+    "client/**/*js.map": true
+  }
 }

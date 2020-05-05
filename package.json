@@ -8,13 +8,12 @@
     },
     "scripts": {
         "start": "node ./bin/www",
-        "watch": "concurrently \"npm run watchStyles\" \"webpack --watch\" \"npm run watchServer\"  \"livereload ./public/js -w 1000 -d\"",
+        "watch": "concurrently \"webpack --watch\" \"npm run watchServer\" \"livereload ./public/js -w 1000 -d\"",
         "watchServer": "nodemon --ignore client --ignore public --ignore lib ./bin/www",
-        "watchStyles": "onchange -k -i -d 250 \"./**/*.scss\" -- npm run packageStyles",
         "packageClient": "webpack",
-        "packageStyles": "node-sass --include-path scss scss/main.scss public/css/main.css",
         "lint": "eslint --ext .ts,.tsx ./client --color --fix",
-        "makeDoc": "rimraf.cmd ./doc && typedoc --options typedoc.json"
+        "makeDoc": "rimraf.cmd ./doc && typedoc --options typedoc.json",
+        "webpack": "webpack"
     },
     "dependencies": {
         "@apollo/react-hooks": "3.1.3",

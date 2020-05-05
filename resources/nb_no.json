@@ -53,8 +53,7 @@
       "EXPORT_TO_EXCEL_LABEL": "Eksporter til Excel",
       "SEARCH_TEXT": "Søk",
       "CREATE_NEW_TEXT": "Lag ny",
-      "TOGGLE_INACTIVE_ON_TEXT": "Vis inaktive",
-      "TOGGLE_INACTIVE_OFF_TEXT": "Skjul inaktive"
+      "TOGGLE_INACTIVE_TEXT": "Vis inaktive"
     }
   }
 }

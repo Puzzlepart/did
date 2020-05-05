@@ -128,6 +128,8 @@ pnpm-lock.yaml
 package-lock.json
 
 azcopy/
-
-client/**/*.js
 client/**/*.d.ts
+client/**/*js
+client/**/*js.map
+!client/**/*scss.d.ts
+!client/declarations.d.ts

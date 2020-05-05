@@ -7,14 +7,16 @@ import { Shimmer } from 'office-ui-fabric-react/lib/Shimmer';
 import * as React from 'react';
 import * as format from 'string-format';
 import { TimesheetContext } from '../';
+import styles from './StatusBar.module.scss';
 
 /**
  * @category Timesheet
  */
 export const StatusBar = () => {
     const { loading, periods, selectedPeriod, dispatch } = React.useContext(TimesheetContext);
+    
     return (
-        <div className='c-Timesheet-statusbar' style={{ marginTop: 10, marginLeft: -10, marginRight: -10 }}>
+        <div className={styles.root}>
             <Shimmer isDataLoaded={!loading} />
             <Shimmer isDataLoaded={!loading} />
             {!loading && (

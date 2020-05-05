@@ -3,7 +3,7 @@ import resource from 'i18n';
 import { ICustomer } from 'interfaces/ICustomer';
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
-import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
+import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 import * as React from 'react';
 import { generateColumn as col } from 'utils/generateColumn';
 import { ICustomerListProps } from './ICustomerListProps';
@@ -63,10 +63,9 @@ export const CustomerList = (props: ICustomerListProps) => {
                     {
                         key: 'TOGGLE_INACTIVE',
                         onRender: () => (
-                            <Toggle
+                            <Checkbox
                                 styles={{ root: { margin: '6px 0 0 8px' } }}
-                                offText={resource('COMMON.TOGGLE_INACTIVE_OFF_TEXT')}
-                                onText={resource('COMMON.TOGGLE_INACTIVE_ON_TEXT')}
+                                label={resource('COMMON.TOGGLE_INACTIVE_TEXT')}
                                 onChange={onToggleInactive} />
                         ),
                     }
