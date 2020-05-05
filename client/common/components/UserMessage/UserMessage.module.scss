@@ -4,7 +4,13 @@
     white-space: normal;
     margin: 0;
   }
+
   [class*="ms-MessageBar-text"] {
     font-size: 14px;
+  }
+
+  [class*="ms-MessageBar-icon"] {
+    display: flex;
+    align-self: center;
   }
 }
