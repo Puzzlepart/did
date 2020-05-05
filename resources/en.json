@@ -47,6 +47,14 @@
     "CUSTOMER_WEBLINK_TEXT": "Website",
     "CUSTOMER_EXTERNAL_SYSTEM_URL_TEXT": "External LOB system"
   },
+  "ADMIN": {
+    "USERS": "Users",
+    "SUMMARY": "Summary",
+    "ADD_NEW_USER": "Add new",
+    "EDIT_USER": "Edit",
+    "RANGE_MONTH": "Show last {0} months",
+    "RANGE_WEEK": "Show last {0} weeks"
+  },
   "COMMON": {
     "SEARCH_PLACEHOLDER": "Search...",
     "GENERIC_ERROR_TEXT": "An error occured.",
@@ -60,9 +68,12 @@
     "NAME_LABEL": "Label",
     "EXPORT_CURRENT_VIEW": "Export current view",
     "MONTH_LABEL": "Month",
-    "WEEK_LABEL": "Week number",
+    "WEEK_NUMER_LABEL": "Week number",
+    "WEEK_LABEL": "Week",
     "EMPLOYEE_LABEL": "Employee",
-    "YEAR_LABEL": "Year"
+    "YEAR_LABEL": "Year",
+    "ROLE_LABEL": "Role",
+    "ALL_CUSTOMERS": "All customers"
   },
   "NAVIGATION": {
     "TIMESHEET": "Timesheet",

@@ -1,6 +1,7 @@
 
 import List from 'common/components/List';
 import { formatDate, sortAlphabetically } from 'helpers';
+import resource from 'i18n';
 import { ICustomer, IProject } from 'interfaces';
 import * as moment from 'moment';
 import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
@@ -191,7 +192,10 @@ function createCustomerOptions(events: any[], setCustomer: React.Dispatch<React.
 export const SummaryView = (props: ISummaryViewProps) => {
     const context = React.useContext(TimesheetContext);
     let entries = props.entries || context.selectedPeriod.events;
-    const [customer, setCustomer] = React.useState<IContextualMenuItem>({ key: 'All', text: 'All customers' });
+    const [customer, setCustomer] = React.useState<IContextualMenuItem>({
+        key: 'All',
+        text: resource('COMMON.ALL_CUSTOMERS'),
+    });
     const columns = createColumns(props.type, context && context.scope, entries, props.range);
     entries = entries.filter(e => !!e.project);
     const customerOptions = createCustomerOptions(entries, setCustomer);
@@ -213,7 +217,7 @@ export const SummaryView = (props: ISummaryViewProps) => {
     if (props.exportFileNameTemplate) {
         commands.push({
             key: 'EXPORT_TO_EXCEL',
-            text: 'Export to Excel',
+            text: resource('COMMON.EXPORT_CURRENT_VIEW'),
             iconProps: { iconName: 'ExcelDocument' },
             onClick: () => {
                 excelUtils.exportExcel(items, { columns, fileName: format(props.exportFileNameTemplate, new Date().getTime()) });

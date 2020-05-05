@@ -24,7 +24,7 @@ export class WeekFilter extends BaseFilter {
         }));
         return {
             key: this.fieldName,
-            name: resource('COMMON.WEEK_LABEL'),
+            name: resource('COMMON.WEEK_NUMER_LABEL'),
             items,
             selected: [],
         }

@@ -46,6 +46,14 @@
       "CUSTOMER_DELETE_BUTTON_LABEL": "Slett kunde",
       "CUSTOMER_DELETE_CONFIRMATION_TEXT": "Slettet kunde {0} og tilhørende prosjekter."
     },
+    "ADMIN": {
+      "USERS": "Brukere",
+      "SUMMARY": "Sammendrag",
+      "ADD_NEW_USER": "Legg til ny",
+      "EDIT_USER": "Rediger",
+      "RANGE_MONTH": "Vis siste {0} måneder",
+      "RANGE_WEEK": "Vis siste {0} uker"
+    },
     "COMMON": {
       "SEARCH_PLACEHOLDER": "Søk...",
       "GENERIC_ERROR_TEXT": "En feil oppstod.",
@@ -59,9 +67,12 @@
       "NAME_LABEL": "Navn",
       "EXPORT_CURRENT_VIEW": "Eksporter visning",
       "MONTH_LABEL": "Måned",
-      "WEEK_LABEL": "Ukenummer",
+      "WEEK_NUMER_LABEL": "Ukenummer",
+      "WEEK_LABEL": "Uke",
       "EMPLOYEE_LABEL": "Ansatt",
-      "YEAR_LABEL": "Year"
+      "YEAR_LABEL": "Year",
+      "ROLE_LABEL": "Rolle",
+      "ALL_CUSTOMERS": "Alle kunder"
     },
     "NAVIGATION": {
       "TIMESHEET": "Timeliste",
