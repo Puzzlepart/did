@@ -43,7 +43,9 @@
   "CUSTOMERS": {
     "CUSTOMER_INACTIVE_TEXT": "This customer has been marked as inactive.",
     "CUSTOMER_DELETE_BUTTON_LABEL": "Delete customer",
-    "CUSTOMER_DELETE_CONFIRMATION_TEXT": "The customer {0} and connected projects was deleted."
+    "CUSTOMER_DELETE_CONFIRMATION_TEXT": "The customer {0} and connected projects was deleted.",
+    "CUSTOMER_WEBLINK_TEXT": "Website",
+    "CUSTOMER_EXTERNAL_SYSTEM_URL_TEXT": "External LOB system"
   },
   "COMMON": {
     "SEARCH_PLACEHOLDER": "Search...",
