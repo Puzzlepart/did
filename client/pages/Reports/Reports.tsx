@@ -1,30 +1,15 @@
 import { useQuery } from '@apollo/react-hooks';
 import { BaseFilter, FilterPanel, IFilter, MonthFilter, ResourceFilter, UserMessage, WeekFilter, YearFilter } from 'common/components';
 import List from 'common/components/List';
-import { getMonthName, getValueTyped as value } from 'helpers';
+import { getValueTyped as value } from 'helpers';
 import resource from 'i18n';
-import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import * as React from 'react';
 import { useState } from 'react';
 import * as format from 'string-format';
-import { humanize } from 'underscore.string';
-import * as excelUtils from 'utils/exportExcel';
-import { generateColumn as col } from 'utils/generateColumn';
+import { exportExcel } from 'utils/exportExcel';
+import columns from './columns';
 import TIME_ENTRIES from './TIME_ENTRIES';
-/**
- * Get columns
- * 
- * @param {Object} entry Entry
- * @param {string[]} skip Skip
- * 
- * @category Reports
- */
-function getColumns(entry: Record<string, any> = {}, skip: string[]): IColumn[] {
-    return Object.keys(entry)
-        .filter(f => skip.indexOf(f) === -1)
-        .map(fieldName => col(fieldName, humanize(fieldName), { minWidth: 60, maxWidth: 100 }));;
-}
 
 /**
  * @category Reports
@@ -38,27 +23,18 @@ export const Reports = () => {
     ]
     const [filterPanelOpen, setFilterPanelOpen] = useState<boolean>(undefined);
     const [subset, setSubset] = useState<any[]>(undefined);
-
     const { loading, error, data } = useQuery<{ timeentries: any[] }>(TIME_ENTRIES, { fetchPolicy: 'cache-first' });
 
-    const timeentries = (data ? data.timeentries : []).map(entry => ({
-        ...entry,
-        customer: value(entry, 'customer.name', ''),
-        month: getMonthName(entry.monthNumber - 1),
-    }));
+    const timeentries = data ? data.timeentries : [];
+    
 
-    const columns = getColumns(timeentries[0], ['id', '__typename', 'monthNumber']);
-
-    const onExportExcel = () => {
-        excelUtils.exportExcel(
-            subset || timeentries,
-            {
-                columns,
-                skip: ['id', '__typename', 'monthNumber'],
-                fileName: format('TimeEntries-{0}.xlsx', new Date().toDateString().split(' ').join('-')),
-            }
-        );
-    }
+    const onExportExcel = () => exportExcel(
+        subset || timeentries,
+        {
+            columns: columns(resource),
+            fileName: format('TimeEntries-{0}.xlsx', new Date().toDateString().split(' ').join('-')),
+        }
+    );
 
     /**
      * On filterr updated in FilterPanel
@@ -85,8 +61,9 @@ export const Reports = () => {
     return (
         <div>
             <List
+                hidden={timeentries.length === 0 && !loading}
                 items={subset || timeentries}
-                columns={columns}
+                columns={columns(resource)}
                 enableShimmer={loading}
                 commandBar={{
                     items: [
@@ -108,7 +85,9 @@ export const Reports = () => {
                         }
                     ]
                 }} />
-            <UserMessage hidden={timeentries.length > 0 || loading} text={'There\'s no confirmed time entries at this time.'} />
+            <UserMessage
+                hidden={timeentries.length > 0 || loading}
+                text={resource('REPORTS.NO_ENTRIES_TEXT')} />
             <FilterPanel
                 isOpen={filterPanelOpen}
                 filters={filters}

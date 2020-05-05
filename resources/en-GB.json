@@ -46,7 +46,7 @@
       "TIME_ENTRIES_LOADING_LABEL": "Loading time entries",
       "MY_PROJECTS_TEXT": "My projects",
       "MY_PROJECTS_SEARCH_PLACEHOLDER": "Search my projects..."
-    },    
+    },
     "CUSTOMERS": {
       "CUSTOMER_INACTIVE_TEXT": "This customer has been marked as inactive.",
       "CUSTOMER_DELETE_BUTTON_LABEL": "Delete customer",
@@ -64,7 +64,8 @@
     },
     "REPORTS": {
       "GENERATING_REPORT_LABEL": "Generating report",
-      "GENERATING_REPORT_DESCRIPTION": "To give you the freshest results, we're generating a report from the latest data..."
+      "GENERATING_REPORT_DESCRIPTION": "To give you the freshest results, we're generating a report from the latest data...",
+      "NO_ENTRIES_TEXT": "There's no confirmed time entries at this time."
     },
     "COMMON": {
       "SEARCH": "Search",
@@ -95,7 +96,10 @@
       "TIME_LABEL": "Time",
       "DURATION_LABEL": "Duration",
       "PROJECT": "Project",
-      "SUM_LABEL": "Sum"
+      "SUM_LABEL": "Sum",
+      "CUSTOMER": "Customer",
+      "START_TIME_LABEL": "Start time",
+      "END_TIME_LABEL": "End time"
     },
     "NAVIGATION": {
       "TIMESHEET": "Timesheet",

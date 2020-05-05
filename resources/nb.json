@@ -62,7 +62,8 @@
     },
     "REPORTS": {
       "GENERATING_REPORT_LABEL": "Genererer rapport",
-      "GENERATING_REPORT_DESCRIPTION": "For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene..."
+      "GENERATING_REPORT_DESCRIPTION": "For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene...",
+      "NO_ENTRIES_TEXT": "Det er ingen bekreftede tidsoppføringer på dette tidspunktet."
     },
     "COMMON": {
       "SEARCH": "Søk",
@@ -81,7 +82,7 @@
       "WEEK_NUMER_LABEL": "Ukenummer",
       "WEEK_LABEL": "Uke",
       "EMPLOYEE_LABEL": "Ansatt",
-      "YEAR_LABEL": "Year",
+      "YEAR_LABEL": "År",
       "ROLE_LABEL": "Rolle",
       "ALL_CUSTOMERS": "Alle kunder",
       "LOG_OUT_TEXT": "Logg ut",
@@ -93,7 +94,10 @@
       "TIME_LABEL": "Tidspunkt",
       "DURATION_LABEL": "Varighet",
       "PROJECT": "Prosjekt",
-      "SUM_LABEL": "Sum"
+      "SUM_LABEL": "Sum",
+      "CUSTOMER": "Kunde",
+      "START_TIME_LABEL": "Starttid",
+      "END_TIME_LABEL": "Sluttid"
     },
     "NAVIGATION": {
       "TIMESHEET": "Timeliste",
