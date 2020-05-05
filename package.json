@@ -8,7 +8,7 @@
     },
     "scripts": {
         "start": "node ./bin/www",
-        "watch": "concurrently \"webpack --watch\" \"npm run watchServer\"  \"livereload ./public/js -w 1000 -d\"",
+        "watch": "concurrently \"webpack --watch\" \"npm run watchServer\" \"livereload ./public/js -w 1000 -d\"",
         "watchServer": "nodemon --ignore client --ignore public --ignore lib ./bin/www",
         "packageClient": "webpack",
         "lint": "eslint --ext .ts,.tsx ./client --color --fix",
