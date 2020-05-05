@@ -10,7 +10,7 @@ import validator from 'validator';
 import ADD_USER from './ADD_USER';
 import { IUserFormModalProps } from './IUserFormModalProps';
 import UPDATE_USER from './UPDATE_USER';
-
+import styles from './UserFormModal.module.scss';
 
 /**
  * @category Admin
@@ -36,9 +36,9 @@ export const UserFormModal = (props: IUserFormModalProps) => {
     return (
         <Modal
             {...props.modal}
-            containerClassName='c-Admin-userFormModal'
+            containerClassName={styles.root}
             isOpen={true}>
-            <div className='c-Admin-userFormModal-title' hidden={!props.title}>{props.title}</div>
+            <div className={styles.title} hidden={!props.title}>{props.title}</div>
             <TextField
                 label='ID'
                 description='ID of the user in Azure Active Directory.'
@@ -62,7 +62,7 @@ export const UserFormModal = (props: IUserFormModalProps) => {
                 defaultSelectedKey={user.role}
                 onChange={(_, opt) => setUser({ ...user, role: opt.key.toString() })} />
             <PrimaryButton
-                className='c-Admin-userFormModal-saveBtn'
+                className={styles.saveBtn}
                 text='Save'
                 disabled={!isFormValid()}
                 onClick={onSave} />
@@ -71,3 +71,4 @@ export const UserFormModal = (props: IUserFormModalProps) => {
 }
 
 export { IUserFormModalProps };
+
