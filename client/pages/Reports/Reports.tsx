@@ -1,7 +1,8 @@
 import { useQuery } from '@apollo/react-hooks';
-import { FilterPanel, IFilter, UserMessage } from 'common/components';
+import { BaseFilter, FilterPanel, IFilter, MonthFilter, ResourceFilter, UserMessage, WeekFilter, YearFilter } from 'common/components';
 import List from 'common/components/List';
 import { getMonthName, getValueTyped as value } from 'helpers';
+import resource from 'i18n';
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import * as React from 'react';
@@ -10,7 +11,6 @@ import * as format from 'string-format';
 import { humanize } from 'underscore.string';
 import * as excelUtils from 'utils/exportExcel';
 import { generateColumn as col } from 'utils/generateColumn';
-import { REPORTS_FILTERS } from './REPORTS_FILTERS';
 import TIME_ENTRIES from './TIME_ENTRIES';
 /**
  * Get columns
@@ -30,6 +30,12 @@ function getColumns(entry: Record<string, any> = {}, skip: string[]): IColumn[] 
  * @category Reports
  */
 export const Reports = () => {
+    const filters: BaseFilter[] = [
+        new WeekFilter('weekNumber'),
+        new MonthFilter('month'),
+        new YearFilter('yearNumber'),
+        new ResourceFilter('resourceName'),
+    ]
     const [filterPanelOpen, setFilterPanelOpen] = useState<boolean>(undefined);
     const [subset, setSubset] = useState<any[]>(undefined);
 
@@ -83,7 +89,7 @@ export const Reports = () => {
                         {
                             id: 'EXPORT_TO_EXCEL',
                             key: 'EXPORT_TO_EXCEL',
-                            text: 'Export current view',
+                            text: resource('COMMON.EXPORT_CURRENT_VIEW'),
                             onClick: onExportExcel,
                             iconProps: { iconName: 'ExcelDocument' },
                             disabled: loading || !!error,
@@ -101,7 +107,7 @@ export const Reports = () => {
             <UserMessage hidden={timeentries.length > 0 || loading} text={'There\'s no confirmed time entries at this time.'} />
             <FilterPanel
                 isOpen={filterPanelOpen}
-                filters={REPORTS_FILTERS}
+                filters={filters}
                 entries={timeentries}
                 onDismiss={() => setFilterPanelOpen(false)}
                 onFilterUpdated={onFilterUpdated} />

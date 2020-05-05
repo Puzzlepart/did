@@ -56,7 +56,12 @@
       "SETTINGS": "Innstillinger",
       "LANGUAGE": "Språk",
       "KEY_LABEL": "Nøkkel",
-      "NAME_LABEL": "Navn"
+      "NAME_LABEL": "Navn",
+      "EXPORT_CURRENT_VIEW": "Eksporter visning",
+      "MONTH_LABEL": "Måned",
+      "WEEK_LABEL": "Ukenummer",
+      "EMPLOYEE_LABEL": "Ansatt",
+      "YEAR_LABEL": "Year"
     },
     "NAVIGATION": {
       "TIMESHEET": "Timeliste",

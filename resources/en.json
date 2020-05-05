@@ -56,8 +56,13 @@
     "TOGGLE_INACTIVE_TEXT": "Show inactive",
     "SETTINGS": "Settings",
     "LANGUAGE": "Language",
-    "KEY_LABEL": "Nøkkel",
-    "NAME_LABEL": "Navn"
+    "KEY_LABEL": "Key",
+    "NAME_LABEL": "Label",
+    "EXPORT_CURRENT_VIEW": "Export current view",
+    "MONTH_LABEL": "Month",
+    "WEEK_LABEL": "Week number",
+    "EMPLOYEE_LABEL": "Employee",
+    "YEAR_LABEL": "Year"
   },
   "NAVIGATION": {
     "TIMESHEET": "Timesheet",
