@@ -19,7 +19,7 @@ export const UserSettings = (props: IUserSettingsProps) => {
         <a
             href='#'
             className={props.className}
-            onClick={() => toggle(true)} style={{ fontSize: 12 }}>
+            onClick={() => toggle(true)}>
             <span>{resource('COMMON.SETTINGS')}</span>
             <Panel
                 className={styles.panel}

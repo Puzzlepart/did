@@ -72,7 +72,8 @@
       "EMPLOYEE_LABEL": "Ansatt",
       "YEAR_LABEL": "Year",
       "ROLE_LABEL": "Rolle",
-      "ALL_CUSTOMERS": "Alle kunder"
+      "ALL_CUSTOMERS": "Alle kunder",
+      "LOG_OUT_TEXT": "Logg ut"
     },
     "NAVIGATION": {
       "TIMESHEET": "Timeliste",
