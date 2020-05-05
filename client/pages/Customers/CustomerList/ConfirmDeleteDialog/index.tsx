@@ -4,6 +4,7 @@ import * as React from 'react';
 import styles from './ConfirmDeleteDialog.module.scss';
 import { IConfirmDeleteDialogProps } from './IConfirmDeleteDialogProps';
 
+
 /**
  * @category Customers
  */

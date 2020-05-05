@@ -129,5 +129,6 @@ package-lock.json
 
 azcopy/
 client/**/*.d.ts
+!client/**/*scss.d.ts
 client/**/*js
 client/**/*js.map
