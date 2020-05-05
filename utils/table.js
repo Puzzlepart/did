@@ -136,16 +136,27 @@ function addEntity(table, item) {
  * 
  * @param {*} table 
  * @param {*} item 
+ * @param {*} merge 
  */
-function updateEntity(table, item) {
+function updateEntity(table, item, merge) {
     return new Promise((resolve, reject) => {
-        azureTableService.insertOrReplaceEntity(table, item, undefined, (error, result) => {
-            if (!error) {
-                resolve(result);
-            } else {
-                reject(error);
-            }
-        })
+        if (merge) {
+            azureTableService.insertOrMergeEntity(table, item, undefined, (error, result) => {
+                if (!error) {
+                    resolve(result);
+                } else {
+                    reject(error);
+                }
+            });
+        } else {
+            azureTableService.insertOrReplaceEntity(table, item, undefined, (error, result) => {
+                if (!error) {
+                    resolve(result);
+                } else {
+                    reject(error);
+                }
+            });
+        }
     });
 };
 
