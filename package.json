@@ -12,7 +12,8 @@
         "watchServer": "nodemon --ignore client --ignore public --ignore lib ./bin/www",
         "packageClient": "webpack",
         "lint": "eslint --ext .ts,.tsx ./client --color --fix",
-        "makeDoc": "rimraf.cmd ./doc && typedoc --options typedoc.json"
+        "makeDoc": "rimraf.cmd ./doc && typedoc --options typedoc.json",
+        "webpack": "webpack"
     },
     "dependencies": {
         "@apollo/react-hooks": "3.1.3",

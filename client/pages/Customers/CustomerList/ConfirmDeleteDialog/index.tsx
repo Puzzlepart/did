@@ -4,14 +4,14 @@ import * as React from 'react';
 import styles from './ConfirmDeleteDialog.module.scss';
 import { IConfirmDeleteDialogProps } from './IConfirmDeleteDialogProps';
 
-
 /**
  * @category Customers
  */
 export const ConfirmDeleteDialog = (props: IConfirmDeleteDialogProps) => {
     const subText = props.projects.length > 0
         ? `All the ${props.projects.length} projects for the customer will also be deleted.`
-        : 'There\'s no projects connected to the customer.';
+        : 'There\'s no projects connected to the customer.';    
+            
     return (
         <Dialog
             hidden={false}
