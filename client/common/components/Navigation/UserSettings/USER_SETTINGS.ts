@@ -23,7 +23,7 @@ export const USER_SETTINGS = (resource: (key: string) => string) => new Set<IUse
                 text: 'English',
             },
             {
-                key: 'nb_no',
+                key: 'nb',
                 text: 'Norsk (bokmål)',
             }
         ],

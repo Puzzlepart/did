@@ -13,7 +13,7 @@
       "COMMANDBAR_NEXT_WEEK_TEXT": "Gå til neste uke",
       "PERIOD_HOURS_SUMMARY_TEXT": "Du har totalt **{0}** denne perioden",
       "HOURS_NOT_MATCHED_TEXT": "Du har **{0}** som ikke er koblet mot et prosjekt. Alle avtaler må være matchet før du kan bekrefte timene dine.",
-      "ALL_HOURS_MATCHED_TEXT": "Alle timene dine er matchet. Er du klar til å bekrefte uken din?",
+      "ALL_HOURS_MATCHED_TEXT": "Alle timene dine er klare. Er du klar til å bekrefte uken din?",
       "PERIOD_CONFIRMED_TEXT": "Perioden er bekreftet med {0}. Klikk **Angre bekref timer** dersom du vil gjøre noen justeringer.",
       "IGNORED_EVENTS_TEXT": "Du har {0} ignorerte hendelse(r).",
       "UNDO_IGNORE_LINK_TEXT": "Trykk for å angre",
@@ -55,6 +55,7 @@
       "RANGE_WEEK": "Vis siste {0} uker"
     },
     "COMMON": {
+      "SEARCH": "Søk",
       "SEARCH_PLACEHOLDER": "Søk...",
       "GENERIC_ERROR_TEXT": "En feil oppstod.",
       "EXPORT_TO_EXCEL_LABEL": "Eksporter til Excel",
@@ -77,7 +78,11 @@
       "USER_ID_DESCRIPTION": "ID for brukeren i Azure Active Directory",
       "ROLE_USER_TEXT": "Bruker",
       "ROLE_ADMIN_TEXT": "Administrator",
-      "SAVE": "Lagre"
+      "SAVE": "Lagre",
+      "TITLE_LABEL": "Tittel",
+      "TIME_LABEL": "Tidspunkt",
+      "DURATION_LABEL": "Varighet",
+      "PROJECT": "Prosjekt"
     },
     "NAVIGATION": {
       "TIMESHEET": "Timeliste",
@@ -85,6 +90,63 @@
       "PROJECTS": "Prosjekter",
       "REPORTS": "Rapporter",
       "ADMIN": "Administrasjon"
+    },
+    "CALENDAR_STRINGS": {
+      "months": [
+        "Januar",
+        "Februar",
+        "Mars",
+        "April",
+        "Mai",
+        "Juni",
+        "Juli",
+        "August",
+        "September",
+        "Oktober",
+        "November",
+        "Desember"
+      ],
+      "shortMonths": [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "Mai",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Des"
+      ],
+      "days": [
+        "Søndag",
+        "Mandag",
+        "Tirsdag",
+        "Onsdag",
+        "Torsdag",
+        "Fredag",
+        "Lørdag"
+      ],
+      "shortDays": [
+        "S",
+        "M",
+        "T",
+        "O",
+        "T",
+        "F",
+        "S"
+      ],
+      "goToToday": "Gå til i dag",
+      "weekNumberFormatString": "Ukenummer {0}",
+      "prevMonthAriaLabel": "Forrige måned",
+      "nextMonthAriaLabel": "Neste måned",
+      "prevYearAriaLabel": "Forrige år",
+      "nextYearAriaLabel": "Neste år",
+      "prevYearRangeAriaLabel": "Previous year range",
+      "nextYearRangeAriaLabel": "Next year range",
+      "closeButtonAriaLabel": "Lukk"
     }
   }
 }

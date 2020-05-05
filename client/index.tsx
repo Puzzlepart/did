@@ -22,20 +22,15 @@ initializeIcons();
 
     const { data } = await client.query<{ currentUser: any }>({ query: GET_CURRENT_USER });
     context.user = data.currentUser;
-
+    context.user.userLanguage = context.user.userLanguage || 'en'
 
     await i18n.setup({
         en: require('../resources/en.json'),
-        nb_no: require('../resources/nb_no.json'),
+        nb: require('../resources/nb.json'),
     }, context.user.userLanguage);
 
-    if (!context.user.userLanguage) {
-        moment.locale('en');
-    } else if (context.user.userLanguage.startsWith('nb')) {
-        moment.locale('nb');
-    } else {
-        moment.locale(context.user.userLanguage);
-    }
+    moment.locale(context.user.userLanguage);
+
 
     ReactDom.render((
         <ApolloProvider client={client}>

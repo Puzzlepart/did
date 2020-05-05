@@ -2,6 +2,7 @@
 // Please do not change this file!
 interface CssExports {
   'root': string;
+  'searchProject': string;
   'title': string;
 }
 export const cssExports: CssExports;

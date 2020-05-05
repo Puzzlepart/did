@@ -9,5 +9,5 @@ export interface IUser {
     email?: string;
     role?: string;
     sub?: ISubscription;
-    userLanguage?: 'en' | 'nb_no';
+    userLanguage?: 'en' | 'nb';
 }

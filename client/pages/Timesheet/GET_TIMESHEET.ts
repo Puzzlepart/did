@@ -5,8 +5,13 @@ import gql from 'graphql-tag';
  * @ignore
  */
 export default gql`
-query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!) {
-  timesheet(startDateTime: $startDateTime, endDateTime: $endDateTime, dateFormat: $dateFormat) {
+query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!, $locale: String!) {
+  timesheet(
+    startDateTime: $startDateTime, 
+    endDateTime: $endDateTime, 
+    dateFormat: $dateFormat
+    locale: $locale
+  ) {
     id
     name
     startDateTime
@@ -28,8 +33,8 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!) {
         name
         description
         icon
-        customer {          
-          id       
+        customer {
+          id
           key
           name
           inactive
@@ -40,8 +45,8 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!) {
         key
         name
         description
-        customer {   
-          id       
+        customer {
+          id
           key
           name
           inactive
@@ -52,11 +57,11 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!) {
         key
         name
         inactive
-      }      
-	    error {
+      }
+      error {
         message
       }
-    } 
+    }
     confirmedDuration
   }
 }
