@@ -73,7 +73,11 @@
       "YEAR_LABEL": "Year",
       "ROLE_LABEL": "Rolle",
       "ALL_CUSTOMERS": "Alle kunder",
-      "LOG_OUT_TEXT": "Logg ut"
+      "LOG_OUT_TEXT": "Logg ut",
+      "USER_ID_DESCRIPTION": "ID for brukeren i Azure Active Directory",
+      "ROLE_USER_TEXT": "Bruker",
+      "ROLE_ADMIN_TEXT": "Administrator",
+      "SAVE": "Lagre"
     },
     "NAVIGATION": {
       "TIMESHEET": "Timeliste",

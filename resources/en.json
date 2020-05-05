@@ -74,7 +74,11 @@
     "YEAR_LABEL": "Year",
     "ROLE_LABEL": "Role",
     "ALL_CUSTOMERS": "All customers",
-    "LOG_OUT_TEXT": "Sign out"
+    "LOG_OUT_TEXT": "Sign out",
+    "USER_ID_DESCRIPTION": "ID for the user in Azure Active Directory",
+    "ROLE_USER_TEXT": "User",
+    "ROLE_ADMIN_TEXT": "Administrator",
+    "SAVE": "Save"
   },
   "NAVIGATION": {
     "TIMESHEET": "Timesheet",

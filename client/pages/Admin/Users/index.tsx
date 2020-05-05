@@ -33,7 +33,7 @@ export const Users = () => {
             key: 'ADD_NEW_USER',
             name: resource('ADMIN.ADD_NEW_USER'),
             iconProps: { iconName: 'AddFriend' },
-            onClick: () => setUserForm({ title: 'Enroll new user' }),
+            onClick: () => setUserForm({ title: resource('ADMIN.ADD_NEW_USER') }),
         },
     ];
 
