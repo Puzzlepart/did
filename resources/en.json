@@ -56,6 +56,10 @@
       "RANGE_MONTH": "Show last {0} months",
       "RANGE_WEEK": "Show last {0} weeks"
     },
+    "REPORTS": {
+      "GENERATING_REPORT_LABEL": "Generating report",
+      "GENERATING_REPORT_DESCRIPTION": "To give you the freshest results, we're generating a report from the latest data..."
+    },
     "COMMON": {
       "SEARCH": "Søk",
       "SEARCH_PLACEHOLDER": "Search...",
@@ -84,7 +88,8 @@
       "TITLE_LABEL": "Title",
       "TIME_LABEL": "Time",
       "DURATION_LABEL": "Duration",
-      "PROJECT": "Project"
+      "PROJECT": "Project",
+      "SUM_LABEL": "Sum"
     },
     "NAVIGATION": {
       "TIMESHEET": "Timesheet",

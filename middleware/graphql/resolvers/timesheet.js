@@ -29,7 +29,8 @@ const typeDef = `
 
   type TimesheetPeriod {
 	id: String!
-	name: String!
+	week: Int!
+	month: String!
 	startDateTime: String!
 	endDateTime: String!
 	events: [Event!]!
@@ -55,7 +56,8 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale 
 
     let periods = [{
         id: `${week}_${startMonthIdx}`,
-        name: `Week ${week}`,
+        week,
+        month: formatDate(startDateTime, 'MMMM', locale),
         startDateTime,
         endDateTime: isSplit
             ? endOfMonth(startDateTime).toISOString()
@@ -65,10 +67,11 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale 
     if (isSplit) {
         periods.push({
             id: `${week}_${endMonthIdx}`,
+            week,
+            month: formatDate(endDateTime, 'MMMM', locale),
             startDateTime: startOfMonth(endDateTime).toISOString(),
             endDateTime: endDateTime,
         });
-        periods = periods.map(period => ({ ...period, name: `Week ${week} (${formatDate(period.startDateTime, 'MMMM')})` }))
     }
 
     let [projects, customers, timeentries] = await Promise.all([

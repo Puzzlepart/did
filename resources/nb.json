@@ -54,6 +54,10 @@
       "RANGE_MONTH": "Vis siste {0} måneder",
       "RANGE_WEEK": "Vis siste {0} uker"
     },
+    "REPORTS": {
+      "GENERATING_REPORT_LABEL": "Genererer rapport",
+      "GENERATING_REPORT_DESCRIPTION": "For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene..."
+    },
     "COMMON": {
       "SEARCH": "Søk",
       "SEARCH_PLACEHOLDER": "Søk...",
@@ -82,7 +86,8 @@
       "TITLE_LABEL": "Tittel",
       "TIME_LABEL": "Tidspunkt",
       "DURATION_LABEL": "Varighet",
-      "PROJECT": "Prosjekt"
+      "PROJECT": "Prosjekt",
+      "SUM_LABEL": "Sum"
     },
     "NAVIGATION": {
       "TIMESHEET": "Timeliste",

@@ -4,7 +4,7 @@ import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
 import { ContextualMenuItemType, IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
 import * as React from 'react';
 import { useHistory } from 'react-router-dom';
-import _ from 'underscore';
+import { first } from 'underscore';
 import { TimesheetContext } from '../';
 import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS';
 import { IActionBarProps } from './IActionBarProps';
@@ -55,7 +55,7 @@ export const ActionBar = (props: IActionBarProps) => {
                     itemType: ContextualMenuItemType.Header,
                     onRender: () => (
                         <span style={{ paddingTop: 12 }}>
-                            {_.first(periods).name}
+                            {first(periods).getName(false)}
                         </span>
                     ),
                 } as IContextualMenuItem,
@@ -69,7 +69,7 @@ export const ActionBar = (props: IActionBarProps) => {
                         hidden={!!loading}
                         iconProps={{ iconName: 'DateTime' }}
                         onClick={() => dispatch({ type: 'CHANGE_PERIOD', payload: period.id })}
-                        text={period.name}
+                        text={period.getName(true)}
                         styles={{ root: { height: 44, marginLeft: 4 } }}
                         checked={period.id === selectedPeriod.id} />
                 ),

@@ -9,7 +9,8 @@ import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import * as React from 'react';
 import * as format from 'string-format';
-import * as _ from 'underscore';
+import { sortBy, unique } from 'underscore';
+import { capitalize } from 'underscore.string';
 import * as excelUtils from 'utils/exportExcel';
 import { generateColumn as col } from 'utils/generateColumn';
 import { TimesheetContext } from '../';
@@ -17,6 +18,7 @@ import { TimesheetScope } from '../TimesheetScope';
 import { DurationColumn } from './DurationColumn';
 import { ISummaryViewProps } from './ISummaryViewProps';
 import { LabelColumn } from './LabelColumn';
+import styles from './SummaryView.module.scss';
 import { SummaryViewType } from './SummaryViewType';
 
 /**
@@ -36,17 +38,17 @@ function createColumns(type: SummaryViewType, scope: TimesheetScope, entries: an
         case SummaryViewType.UserWeek: {
             columns = Array.from(Array(7).keys()).map(i => {
                 const day = scope.getDay(i);
-                return col(day.format('L'), day.format('ddd DD'), { maxWidth: 70, minWidth: 70 }, onRender);
+                return col(day.format('L'), capitalize(day.format('ddd DD')), { maxWidth: 70, minWidth: 70 }, onRender);
             });
         }
             break;
         case SummaryViewType.AdminWeek: {
-            const weekNumbers = _.unique(entries.map(e => e.weekNumber), w => w).sort((a, b) => a - b);
+            const weekNumbers = unique(entries.map(e => e.weekNumber), w => w).sort((a, b) => a - b);
             columns = weekNumbers.map(wn => col(wn, `Week ${wn}`, { maxWidth: 70, minWidth: 70 }, onRender));
         }
             break;
         case SummaryViewType.AdminMonth: {
-            const monthNumbers = _.unique(entries.map(e => e.monthNumber), m => m).sort((a, b) => a - b);
+            const monthNumbers = unique(entries.map(e => e.monthNumber), m => m).sort((a, b) => a - b);
             columns = monthNumbers.map(mn => col(mn, moment().month(mn - 1).format('MMM'), { maxWidth: 70, minWidth: 70 }, onRender));
         }
             break;
@@ -72,7 +74,7 @@ function createColumns(type: SummaryViewType, scope: TimesheetScope, entries: an
 function generateRows({ type }: ISummaryViewProps, events: any[], columns: IColumn[]) {
     switch (type) {
         case SummaryViewType.UserWeek: {
-            const projects = _.unique(events.map(e => e.project), (p: IProject) => p.id);
+            const projects = unique(events.map(e => e.project), (p: IProject) => p.id);
             return projects.map(project => {
                 const projectEvents = events.filter(event => event.project.id === project.id);
                 return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
@@ -86,7 +88,7 @@ function generateRows({ type }: ISummaryViewProps, events: any[], columns: IColu
             });
         }
         case SummaryViewType.AdminWeek: {
-            const resources = sortAlphabetically(_.unique(events.map(e => e.resourceName), r => r));
+            const resources = sortAlphabetically(unique(events.map(e => e.resourceName), r => r));
             return resources.map(res => {
                 const resourceEvents = events.filter(event => event.resourceName === res);
                 return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
@@ -100,7 +102,7 @@ function generateRows({ type }: ISummaryViewProps, events: any[], columns: IColu
             });
         }
         case SummaryViewType.AdminMonth: {
-            const resources = sortAlphabetically(_.unique(events.map(e => e.resourceName), r => r));
+            const resources = sortAlphabetically(unique(events.map(e => e.resourceName), r => r));
             return resources.map(res => {
                 const resourceEvents = events.filter(event => event.resourceName === res);
                 return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
@@ -136,7 +138,7 @@ function generateTotalRow({ type }: ISummaryViewProps, events: any[], columns: I
                 obj[col.fieldName] = sum;
                 obj.sum += sum;
                 return obj;
-            }, { label: 'Total', sum: 0 });
+            }, { label: resource('COMMON.SUM_LABEL'), sum: 0 });
         }
         case SummaryViewType.AdminWeek: {
             return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
@@ -146,7 +148,7 @@ function generateTotalRow({ type }: ISummaryViewProps, events: any[], columns: I
                 obj[col.fieldName] = sum;
                 obj.sum += sum;
                 return obj;
-            }, { label: 'Total', sum: 0 });
+            }, { label: resource('COMMON.SUM_LABEL'), sum: 0 });
         }
         case SummaryViewType.AdminMonth: {
             return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
@@ -156,7 +158,7 @@ function generateTotalRow({ type }: ISummaryViewProps, events: any[], columns: I
                 obj[col.fieldName] = sum;
                 obj.sum += sum;
                 return obj;
-            }, { label: 'Total', sum: 0 });
+            }, { label: resource('COMMON.SUM_LABEL'), sum: 0 });
         }
         default: {
             return [];
@@ -171,11 +173,11 @@ function generateTotalRow({ type }: ISummaryViewProps, events: any[], columns: I
 * @param {React.Dispatch<React.SetStateAction<IContextualMenuItem>>} setCustomer Set customer
 */
 function createCustomerOptions(events: any[], setCustomer: React.Dispatch<React.SetStateAction<IContextualMenuItem>>): IContextualMenuItem[] {
-    let customers = _.unique(events.map(e => e.customer), (c: ICustomer) => c.id);
-    customers = _.sortBy(customers, 'name');
+    let customers = unique(events.map(e => e.customer), (c: ICustomer) => c.id);
+    customers = sortBy(customers, 'name');
 
     return [
-        { key: 'All', text: 'All customers' },
+        { key: '_all', text: resource('COMMON.ALL_CUSTOMERS') },
         ...customers.map(c => ({ key: c.id, text: c.name })),
     ].map(opt => ({
         ...opt,
@@ -193,14 +195,14 @@ export const SummaryView = (props: ISummaryViewProps) => {
     const context = React.useContext(TimesheetContext);
     let entries = props.entries || context.selectedPeriod.events;
     const [customer, setCustomer] = React.useState<IContextualMenuItem>({
-        key: 'All',
+        key: '_all',
         text: resource('COMMON.ALL_CUSTOMERS'),
     });
     const columns = createColumns(props.type, context && context.scope, entries, props.range);
     entries = entries.filter(e => !!e.project);
     const customerOptions = createCustomerOptions(entries, setCustomer);
 
-    if (customer.key !== 'All') entries = entries.filter(e => e.customer.id === customer.key);
+    if (customer.key !== '_all') entries = entries.filter(e => e.customer.id === customer.key);
 
     const items = [
         ...generateRows(props, entries, columns),
@@ -226,10 +228,10 @@ export const SummaryView = (props: ISummaryViewProps) => {
     }
 
     return (
-        <>
+        <div className={styles.root}>
             <CommandBar styles={{ root: { padding: 0 } }} items={commands} />
             <List {...{ columns, items }} enableShimmer={context && !!context.loading} />
-        </>
+        </div>
     );
 }
 

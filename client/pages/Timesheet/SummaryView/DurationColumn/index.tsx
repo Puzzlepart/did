@@ -1,4 +1,5 @@
 import { IColumn } from 'common/components/List';
+import resource from 'i18n';
 import * as React from 'react';
 
 export interface IDurationColumnProps {
@@ -12,7 +13,7 @@ export interface IDurationColumnProps {
  */
 export const DurationColumn = ({ row, column }: IDurationColumnProps) => {
     const style: React.CSSProperties = { ...column.data.style };
-    if (row.label === 'Total') style.fontWeight = 500;
+    if (row.label === resource('COMMON.SUM_LABEL')) style.fontWeight = 500;
     const value = row[column.fieldName] ? Number.parseFloat(row[column.fieldName]).toFixed(2) : null;
     return (
         <div style={style}>

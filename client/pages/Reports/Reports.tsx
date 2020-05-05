@@ -76,7 +76,11 @@ export const Reports = () => {
     }
 
 
-    if (loading) return <ProgressIndicator label={'Generating report'} description={'To give you the freshest results, we\'re generating a report from the latest data...'} />;
+    if (loading) return (
+        <ProgressIndicator
+            label={resource('REPORTS.GENERATING_REPORT_LABEL')}
+            description={resource('REPORTS.GENERATING_REPORT_DESCRIPTION')} />
+    );
 
     return (
         <div>

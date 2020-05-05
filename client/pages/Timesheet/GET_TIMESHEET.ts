@@ -6,14 +6,10 @@ import gql from 'graphql-tag';
  */
 export default gql`
 query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!, $locale: String!) {
-  timesheet(
-    startDateTime: $startDateTime, 
-    endDateTime: $endDateTime, 
-    dateFormat: $dateFormat
-    locale: $locale
-  ) {
+  timesheet(startDateTime: $startDateTime, endDateTime: $endDateTime, dateFormat: $dateFormat, locale: $locale) {
     id
-    name
+    week
+    month
     startDateTime
     endDateTime
     events {

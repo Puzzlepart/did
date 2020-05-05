@@ -1,15 +1,18 @@
 /* eslint-disable prefer-const */
-import _ from 'underscore';
 import { dateAdd, IPnPClientStore, ITypedHash, PnPClientStorage } from '@pnp/common';
+import resource from 'i18n';
 import { IProject } from 'interfaces/IProject';
 import { ITimeEntry } from 'interfaces/ITimeEntry';
+import { omit } from 'underscore';
+import { capitalize } from 'underscore.string';
 
 /**
  * @category Timesheet
  */
 export class TimesheetPeriod {
     public id?: string;
-    public name?: string;
+    public week?: number;
+    public month?: string;
     public startDateTime?: string;
     public endDateTime?: string;
     public confirmedDuration?: number;
@@ -22,7 +25,8 @@ export class TimesheetPeriod {
     constructor(private _period?: Partial<TimesheetPeriod>) {
         if (_period) {
             this.id = _period.id;
-            this.name = _period.name;
+            this.week = _period.week;
+            this.month = capitalize(_period.month);
             this.startDateTime = _period.startDateTime;
             this.endDateTime = _period.endDateTime;
             this.confirmedDuration = _period.confirmedDuration;
@@ -31,6 +35,12 @@ export class TimesheetPeriod {
             this.ignoredEvents = this._localStorage.get(this._uiIgnoredEventsStorageKey) || [];
             this.manualMatches = this._localStorage.get(this._uiMatchedEventsStorageKey) || {};
         }
+    }
+
+    public getName(includeMonth: boolean) {
+        let name = `${resource('COMMON.WEEK_LABEL')} ${this.week}`;
+        if (includeMonth) name += ` (${this.month})`;
+        return name;
     }
 
     private _handleManualMatches(event: ITimeEntry) {
@@ -94,7 +104,7 @@ export class TimesheetPeriod {
      * @param {string} eventId Event id
      */
     public clearManualMatch(eventId: string) {
-        this.manualMatches = _.omit(this.manualMatches, eventId);
+        this.manualMatches = omit(this.manualMatches, eventId);
         this._localStorage.put(this._uiMatchedEventsStorageKey, this.manualMatches, dateAdd(new Date(), 'month', 1));
     }
 
