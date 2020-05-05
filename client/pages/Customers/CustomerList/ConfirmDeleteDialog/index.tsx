@@ -1,8 +1,8 @@
-import { Dialog, DialogType, DialogFooter } from 'office-ui-fabric-react/lib/Dialog';
-import { PrimaryButton, DefaultButton } from 'office-ui-fabric-react/lib/Button';
+import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react/lib/Button';
+import { Dialog, DialogFooter, DialogType } from 'office-ui-fabric-react/lib/Dialog';
 import * as React from 'react';
+import styles from './ConfirmDeleteDialog.module.scss';
 import { IConfirmDeleteDialogProps } from './IConfirmDeleteDialogProps';
-
 
 /**
  * @category Customers
@@ -14,7 +14,7 @@ export const ConfirmDeleteDialog = (props: IConfirmDeleteDialogProps) => {
     return (
         <Dialog
             hidden={false}
-            containerClassName='c-ConfirmDeleteDialog'
+            containerClassName={styles.root}
             dialogContentProps={{
                 type: DialogType.largeHeader,
                 title: `Are you sure you want to delete customer ${props.customer.name}?`,

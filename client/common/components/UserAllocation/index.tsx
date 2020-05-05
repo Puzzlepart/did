@@ -4,6 +4,7 @@ import * as React from 'react';
 import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from 'recharts';
 import _ from 'underscore';
 import { ITimeEntry, IUserAllocationProps } from './types';
+import styles from './UserAllocation.module.scss';
 
 /**
  * Calculates durations based on exp
@@ -41,14 +42,14 @@ export const UserAllocation = (props: IUserAllocationProps): JSX.Element => {
     React.useLayoutEffect(() => setDimensions({ width: ref.current.clientWidth, height: 400 }), []);
 
     return (
-        <div className='c-UserAllocation' ref={ref}>
+        <div className={styles.root} ref={ref}>
             {Object.keys(props.charts).map(exp => {
                 const title = props.charts[exp];
                 const data = GetAllocation(props.entries, exp);
                 return (
-                    <div className='c-UserAllocation-row row' key={exp}>
-                        <div className='c-UserAllocation-chart col-sm'>
-                            <div className='c-UserAllocation-chart-title'>{title}</div>
+                    <div className='row' key={exp}>
+                        <div className={`${styles.chart} col-sm`}>
+                            <div className={styles.title}>{title}</div>
                             <BarChart
                                 width={dimensions.width}
                                 height={dimensions.height}
