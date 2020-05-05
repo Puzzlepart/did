@@ -1,7 +1,7 @@
 
 import * as arraySort from 'array-sort';
-import { IGroup } from 'office-ui-fabric-react/lib/DetailsList';
 import { getValueTyped as value } from 'helpers';
+import { IGroup } from 'office-ui-fabric-react/lib/DetailsList';
 import * as _ from 'underscore';
 
 /**
@@ -15,7 +15,7 @@ import * as _ from 'underscore';
  * 
  * @category List
  */
-export function generateListGroups(items: any[], groupBy: string, uniqueGroupNames: string[], emptyGroupName = '', totalFunc?: Function): { items: any[]; groups: IGroup[] } {
+export function generateListGroups(items: any[], groupBy: string, uniqueGroupNames: string[], emptyGroupName = '', totalFunc?: Function): [IGroup[], any[]] {
     const itemsSort = { props: [groupBy], opts: { reverse: false } };
     items = arraySort([...items], itemsSort.props, itemsSort.opts);
     const groupNames = items.map(g => value<string>(g, groupBy, emptyGroupName));
@@ -34,5 +34,5 @@ export function generateListGroups(items: any[], groupBy: string, uniqueGroupNam
         };
         return group;
     });
-    return { groups, items };
+    return [groups, items];
 }

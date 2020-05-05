@@ -1,13 +1,13 @@
 import List from 'common/components/List';
 import resource from 'i18n';
 import { ICustomer } from 'interfaces/ICustomer';
+import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
-import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { generateColumn as col } from 'utils/generateColumn';
 import { ICustomerListProps } from './ICustomerListProps';
-import { Link } from 'react-router-dom';
 
 /**
  * Generate column definitions

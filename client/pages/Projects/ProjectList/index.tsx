@@ -1,14 +1,14 @@
 import List from 'common/components/List';
 import resource from 'i18n';
 import { IProject } from 'interfaces';
-import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
+import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { generateColumn as col } from 'utils/generateColumn';
 import { withDefaultProps } from 'with-default-props';
 import { IProjectListProps } from './IProjectListProps';
-import { Link } from 'react-router-dom';
 
 /**
  * Generate column definitions based on parameters specified
@@ -59,7 +59,6 @@ const ProjectList = (props: IProjectListProps) => {
     }
 
     React.useEffect(() => setItems([...props.items].filter(p => !p.inactive)), [props.items]);
-
 
     return (
         <List
