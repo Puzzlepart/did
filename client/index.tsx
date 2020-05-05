@@ -1,20 +1,21 @@
-
+/* eslint-disable @typescript-eslint/camelcase */
 import { initializeIcons } from '@uifabric/icons';
 import 'core-js/stable';
 import * as React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import * as ReactDom from 'react-dom';
 import 'regenerator-runtime/runtime.js';
+import { tryParseJson } from 'utils/tryParseJson';
 import { App } from './app';
 import { client } from './graphql';
 import * as i18n from './i18n';
-import { tryParseJson } from 'utils/tryParseJson';
+import './_global.scss';
 
 (async () => {
     initializeIcons();
     await i18n.setup({ 
-        en: require('../../resources/en.json'), 
-        nb_no: require('../../resources/nb_no.json'),
+        en: require('../resources/en.json'), 
+        nb_no: require('../resources/nb_no.json'),
     });
 
     const container = document.getElementById('app');

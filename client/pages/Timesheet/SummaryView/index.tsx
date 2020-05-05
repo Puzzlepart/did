@@ -222,10 +222,10 @@ export const SummaryView = (props: ISummaryViewProps) => {
     }
 
     return (
-        <div className='c-Timesheet-summary'>
+        <>
             <CommandBar styles={{ root: { padding: 0 } }} items={commands} />
             <List {...{ columns, items }} enableShimmer={context && !!context.loading} />
-        </div>
+        </>
     );
 }
 

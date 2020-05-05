@@ -1,5 +1,5 @@
 import ICONS from 'common/icons';
-import { Dropdown, IDropdownProps, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
+import { Dropdown, IDropdownOption, IDropdownProps } from 'office-ui-fabric-react/lib/Dropdown';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import * as React from 'react';
 import { humanize } from 'underscore.string';

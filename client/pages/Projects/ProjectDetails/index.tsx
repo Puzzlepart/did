@@ -12,6 +12,7 @@ import * as excel from 'utils/exportExcel';
 import { generateColumn as col } from 'utils/generateColumn';
 import { CREATE_OUTLOOK_CATEGORY } from './CREATE_OUTLOOK_CATEGORY';
 import { IProjectDetailsProps } from './IProjectDetailsProps';
+import styles from './ProjectDetails.module.scss';
 import PROJECT_TIME_ENTRIES from './PROJECT_TIME_ENTRIES';
 
 /**
@@ -26,9 +27,6 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
 
     const timeentries = data ? data.timeentries : [];
 
-    /**
-     * On export to Excel
-     */
     async function onExportExcel() {
         const key = project.id.replace(/\s+/g, '-').toUpperCase();
         await excel.exportExcel(
@@ -44,7 +42,7 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
      * 
      * @param {string} color Color for the category (randomized if not specified)
      */
-    async function onCreateCategory(color = 'preset' + Math.floor(Math.random() * Math.floor(25))) {
+    async function onCreateCategory(color: string = 'preset' + Math.floor(Math.random() * Math.floor(25))) {
         const { data: { result } } = await createOutlookCategory({ variables: { category: { displayName: project.key.toString(), color } } });
         if (result.success) {
             setProject({ ...project, outlookCategory: JSON.parse(result.data) });
@@ -52,31 +50,31 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
     }
 
     return (
-        <div className='c-ProjectDetails'>
-            <div className='container'>
-                <div className='row'>
+        <div className={styles.root}>
+            <div className={`container ${styles.container}`}>
+                <div className={`row ${styles.row}`}>
                     <div className='col-sm'>
                         <h3>{project.name}</h3>
                     </div>
                 </div>
                 {project.inactive && (
-                    <div className='row' style={{ marginBottom: 10 }}>
+                    <div className={`row ${styles.row}`} style={{ marginBottom: 10 }}>
                         <div className='col-sm'>
                             <UserMessage text={resource('PROJECTS.PROJECT_INACTIVE_TEXT')} iconName='Warning' type={MessageBarType.warning} />
                         </div>
                     </div>
                 )}
-                <div className='row'>
+                <div className={`row ${styles.row}`}>
                     <div className='col-sm'>
                         <p>{project.description}</p>
                     </div>
                 </div>
-                <div className='row' hidden={!project.outlookCategory}>
+                <div className={`row ${styles.row}`} hidden={!project.outlookCategory}>
                     <div className='col-sm'>
                         <MessageBar messageBarIconProps={{ iconName: 'OutlookLogoInverse' }}>{resource('PROJECTS.CATEGORY_OUTLOOK_TEXT')}</MessageBar>
                     </div>
                 </div>
-                <div className='row'>
+                <div className={`row ${styles.row}`}>
                     <div className='col-sm'>
                         <DefaultButton
                             hidden={!project.webLink}
@@ -100,7 +98,7 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                             style={{ marginLeft: 5 }} />
                     </div>
                 </div>
-                <div className='row' style={{ marginTop: 20 }}>
+                <div className={`row ${styles.row}`} style={{ marginTop: 20 }}>
                     <div className='col-sm'>
                         {error && <UserMessage type={MessageBarType.error} text={resource('PROJECTS.TIME_ENTRIES_ERROR_TEXT')} />}
                         {(timeentries.length === 0 && !loading) && <UserMessage text={resource('PROJECTS.NO_TIME_ENTRIES_TEXT')} />}

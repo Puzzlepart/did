@@ -3,6 +3,7 @@ import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
 import * as React from 'react';
 import ReactMarkdown from 'react-markdown/with-html';
 import { IUserMessageProps } from './IUserMessageProps';
+import styles from './UserMessage.module.scss';
 
 /**
  * A component that supports a MessageBar with markdown using react-markdown
@@ -13,7 +14,7 @@ export const UserMessage = (props: IUserMessageProps) => {
     return (
         <div
             id={props.id}
-            className={['c-UserMessage', props.className || ''].join(' ')}
+            className={[styles.root, props.className || ''].join(' ')}
             style={props.style}
             hidden={props.hidden}
             onClick={props.onClick}>

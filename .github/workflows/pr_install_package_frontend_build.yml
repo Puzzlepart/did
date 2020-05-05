@@ -27,6 +27,3 @@ jobs:
           npm run packageClient
         env:
           NODE_ENV: production
-      - name: Package client CSS
-        run: |
-          npm run packageStyles

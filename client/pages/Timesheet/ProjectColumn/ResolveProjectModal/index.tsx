@@ -1,27 +1,27 @@
-import { UserMessage, SearchProject } from 'common/components';
+import { SearchProject, UserMessage } from 'common/components';
 import { getValueTyped as value } from 'helpers';
+import resource from 'i18n';
 import { Modal } from 'office-ui-fabric-react/lib/Modal';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
 import * as React from 'react';
 import { useState } from 'react';
 import * as format from 'string-format';
+import styles from './ResolveProjectModal.module.scss';
 import { IResolveProjectModalProps } from './types';
-import resource from 'i18n';
 
 /**
- * Modal for resolving a project that hasn't been matched to a project
- * 
- * @category EventList
+ * @category Timesheet
 */
 export const ResolveProjectModal = ({ isOpen, onDismiss, onProjectSelected, event }: IResolveProjectModalProps) => {
     const [scope, setScope] = useState<boolean>(!!event.customer);
+
     return (
         <Modal
-            containerClassName='c-ResolveProjectModal'
+            containerClassName={styles.root}
             isOpen={isOpen}
             onDismiss={onDismiss}>
-            <div className='c-ResolveProjectModal-title'>{event.title}</div>
+            <div className={styles.title}>{event.title}</div>
             <UserMessage
                 iconName='OutlookLogo'
                 text={format(resource('TIMESHEET.MATCH_OUTLOOK_NOTE'), event.webLink)} />

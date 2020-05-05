@@ -10,17 +10,17 @@ import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { TooltipDelay, TooltipHost } from 'office-ui-fabric-react/lib/Tooltip';
 import * as React from 'react';
 import { withDefaultProps } from 'with-default-props';
+import { TimesheetContext } from '../TimesheetContext';
+import styles from './ProjectColumn.module.scss';
 import { ResolveProjectModal } from './ResolveProjectModal';
 import { IClearManualMatchButtonProps, IProjectColumnProps, IProjectColumnTooltipProps } from './types';
-import { TimesheetContext } from '../TimesheetContext';
-
 
 /**
  * @category Timesheet
  */
-export const ClearManualMatchButton = ({ onClick, hidden, className }: IClearManualMatchButtonProps): JSX.Element => {
+export const ClearManualMatchButton = ({ onClick, hidden }: IClearManualMatchButtonProps): JSX.Element => {
     return (
-        <div className={className} title={resource('TIMESHEET.CLEAR_PROJECT_MATCH_TOOLTIP_TEXT')} hidden={hidden}>
+        <div className={styles.clearButton} title={resource('TIMESHEET.CLEAR_PROJECT_MATCH_TOOLTIP_TEXT')} hidden={hidden}>
             <span onClick={onClick} style={{ cursor: 'pointer' }}><Icon iconName='Cancel' styles={{ root: { fontSize: 14 } }} /></span>
         </div>
     );
@@ -29,13 +29,13 @@ export const ClearManualMatchButton = ({ onClick, hidden, className }: IClearMan
 /**
  * @category Timesheet
  */
-export const ProjectColumnTooltip = ({ project, className }: IProjectColumnTooltipProps): JSX.Element => {
+export const ProjectColumnTooltip = ({ project }: IProjectColumnTooltipProps): JSX.Element => {
     return (
-        <div className={className.root}>
-            <div className={className.title}><span>{project.name}</span></div>
-            <div className={className.subTitle}><span>for {project.customer.name}</span></div>
-            <div className={className.description}>{!stringIsNullOrEmpty(project.description) ? <span>{project.description}</span> : <UserMessage text='No description available.' />}</div>
-            <div className={className.tag}><span>{project.key}</span></div>
+        <div className={styles.tooltip}>
+            <div className={styles.title}><span>{project.name}</span></div>
+            <div className={styles.subTitle}><span>for {project.customer.name}</span></div>
+            <div className={styles.description}>{!stringIsNullOrEmpty(project.description) ? <span>{project.description}</span> : <UserMessage text='No description available.' />}</div>
+            <div className={styles.tag}><span>{project.key}</span></div>
         </div>
     );
 }
@@ -50,7 +50,7 @@ const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
     if (!props.event.project) {
         if (props.event.error) {
             return (
-                <div className={props.className.root}>
+                <div className={styles.root}>
                     <UserMessage
                         style={{ marginTop: 10 }}
                         isMultiline={false}
@@ -61,7 +61,7 @@ const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
             );
         }
         return (
-            <div className={props.className.root}>
+            <div className={styles.root}>
                 <UserMessage
                     style={{ marginTop: 10 }}
                     isMultiline={false}
@@ -95,41 +95,27 @@ const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
     return (
         <TooltipHost
             tooltipProps={{
-                onRenderContent: () => <ProjectColumnTooltip project={props.event.project} className={props.className.tooltip} />,
+                onRenderContent: () => <ProjectColumnTooltip project={props.event.project} />,
             }}
             delay={TooltipDelay.long}
             closeDelay={TooltipDelay.long}
             calloutProps={{ gapSpace: 0 }}>
-            <div className={props.className.root}>
-                <div className={props.className.content.root}>
-                    <div className={props.className.content.text}>
+            <div className={styles.root}>
+                <div className={styles.content}>
+                    <div>
                         <a href={`/projects#${props.event.project.id}`}>{props.event.project.name}</a>
                     </div>
-                    <div className={props.className.content.subText}>
+                    <div className={styles.subText}>
                         <span>for </span><a href={`/customers#${props.event.customer.id}`}><span>{props.event.customer.name}</span></a>
                     </div>
                 </div>
-                <ClearManualMatchButton onClick={() => dispatch({ type: 'CLEAR_MANUAL_MATCH', payload: props.event.id })} className={props.className.clearButton} hidden={!props.event.isManualMatch} />
+                <ClearManualMatchButton
+                    onClick={() => dispatch({ type: 'CLEAR_MANUAL_MATCH', payload: props.event.id })}
+                    className={styles.clearButton}
+                    hidden={!props.event.isManualMatch} />
             </div>
         </TooltipHost>
     );
 }
 
-export default withDefaultProps(ProjectColumn, {
-    className: {
-        root: 'c-Timesheet-projectColumn',
-        content: {
-            root: 'c-Timesheet-projectColumn-content',
-            text: 'c-Timesheet-projectColumn-content-text',
-            subText: 'c-Timesheet-projectColumn-content-subText',
-        },
-        clearButton: 'c-Timesheet-projectColumn-clearButton',
-        tooltip: {
-            root: 'c-Timesheet-projectColumn-tooltip',
-            title: 'c-Timesheet-projectColumn-tooltip-title',
-            subTitle: 'c-Timesheet-projectColumn-tooltip-subTitle',
-            description: 'c-Timesheet-projectColumn-tooltip-description',
-            tag: 'c-Timesheet-projectColumn-tooltip-tag',
-        }
-    }
-})
+export default withDefaultProps(ProjectColumn, {})

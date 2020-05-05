@@ -3,31 +3,6 @@ import { IProject, ITimeEntry } from 'interfaces';
 /**
  * @category EventList
  */
-export interface IProjectColumnTooltipClassName {
-    root: string;
-    title: string;
-    subTitle: string;
-    description: string;
-    tag: string;
-}
-
-/**
- * @category EventList
- */
-export interface IProjectColumnClassName {
-    root: string;
-    content: {
-        root: string;
-        text: string;
-        subText: string;
-    };
-    clearButton: string;
-    tooltip: IProjectColumnTooltipClassName;
-}
-
-/**
- * @category EventList
- */
 export interface IClearManualMatchButtonProps extends React.HTMLProps<HTMLDivElement> {
     onClick: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
 }
@@ -37,7 +12,6 @@ export interface IClearManualMatchButtonProps extends React.HTMLProps<HTMLDivEle
  */
 export interface IProjectColumnTooltipProps {
     project: IProject;
-    className: IProjectColumnTooltipClassName;
 }
 
 /**
@@ -45,5 +19,4 @@ export interface IProjectColumnTooltipProps {
  */
 export interface IProjectColumnProps {
     event: ITimeEntry;
-    className?: IProjectColumnClassName;
 }
