@@ -66,7 +66,7 @@ goto :EOF
 :Deployment
 
 echo.
-echo [1/5] SYNCHRONIZING DEPLOYMENT SOURCE TO DEPLOYMENT TARGET 
+echo [1/4] SYNCHRONIZING DEPLOYMENT SOURCE TO DEPLOYMENT TARGET 
 echo.
 
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (  
@@ -85,30 +85,23 @@ echo Missing package.json
 pushd "%DEPLOYMENT_TARGET%"
 
 echo.
-echo [2/5] INSTALLING NPM PACKAGES
+echo [2/4] INSTALLING NPM PACKAGES
 echo.
 call :ExecuteCmd !NPM_CMD! install --production --no-progress --loglevel silent --no-shrinkwrap --no-fund          
 IF !ERRORLEVEL! NEQ 0 goto error
 
 echo.
-echo [3/5] UPDATING NPM PACKAGES
+echo [3/4] UPDATING NPM PACKAGES
 echo.
 
 call :ExecuteCmd !NPM_CMD! update --production --no-progress --loglevel silent --no-fund 
 IF !ERRORLEVEL! NEQ 0 goto error
 
 echo.
-echo [4/5] PACKAGING JS
+echo [4/4] PACKAGING JS
 echo.
 
 call :ExecuteCmd !NPM_CMD! run packageClient --loglevel silent
-IF !ERRORLEVEL! NEQ 0 goto error
-
-echo.
-echo [5/5] PACKAGING CSS
-echo.
-
-call :ExecuteCmd !NPM_CMD! run packageStyles --loglevel silent
 IF !ERRORLEVEL! NEQ 0 goto error
 
 popd
