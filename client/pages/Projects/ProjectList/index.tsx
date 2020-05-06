@@ -1,14 +1,14 @@
 import List from 'common/components/List';
 import resource from 'i18n';
 import { IProject } from 'interfaces';
-import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
+import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { generateColumn as col } from 'utils/generateColumn';
 import { withDefaultProps } from 'with-default-props';
 import { IProjectListProps } from './IProjectListProps';
-import { Link } from 'react-router-dom';
 
 /**
  * Generate column definitions based on parameters specified
@@ -30,10 +30,10 @@ export const ProjectListColumns = (renderLink: boolean, hideColumns: string[]): 
             return <Icon iconName={project.icon || 'Page'} styles={{ root: { fontSize: 16 } }} />;
         },
     ),
-    col('key', 'Key', { maxWidth: 120 }),
+    col('key', resource('COMMON.KEY_LABEL'), { maxWidth: 120 }),
     col(
         'name',
-        'Name',
+        resource('COMMON.NAME_LABEL'),
         { maxWidth: 180 },
         (project: IProject) => <Link to={`/projects/${project.id}`}>{project.name}</Link>
     ),

@@ -1,6 +1,7 @@
+import { ITypedHash, stringIsNullOrEmpty } from '@pnp/common';
 import * as get from 'get-value';
 import * as moment from 'moment';
-import { ITypedHash, stringIsNullOrEmpty } from '@pnp/common';
+import { capitalize } from 'underscore.string';
 require('moment/locale/en-gb');
 require('twix');
 
@@ -126,7 +127,8 @@ export function endOfWeek(date?: string | Date | moment.Moment): moment.Moment {
  * @category Helper
  */
 export function getWeekdays(start: moment.Moment, dateFormat: string): string[] {
-    return moment.weekdays(true).map((_, index) => moment(start).add(index, 'days').format(dateFormat));
+    const weekdays = moment.weekdays(true);
+    return weekdays.map((_, index) => capitalize(moment(start).add(index, 'days').format(dateFormat)));
 }
 
 /**

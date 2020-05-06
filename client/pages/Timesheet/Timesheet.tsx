@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from '@apollo/react-hooks';
+import { AppContext } from 'AppContext';
 import { EventList, UserAllocation } from 'common/components';
 import * as helpers from 'helpers';
 import resource from 'i18n';
@@ -31,6 +32,7 @@ const intialState: ITimesheetState = {
  * @category Timesheet
  */
 export const Timesheet = () => {
+    const { user } = React.useContext(AppContext);
     const history = useHistory();
     const params = useParams<{ startDateTime: string; view: TimesheetView }>();
     const [state, dispatch] = React.useReducer(reducer, intialState);
@@ -38,6 +40,7 @@ export const Timesheet = () => {
         variables: {
             ...state.scope.iso,
             dateFormat: 'dddd DD',
+            locale: user.userLanguage,
         },
         fetchPolicy: 'network-only',
         skip: false
@@ -89,7 +92,7 @@ export const Timesheet = () => {
                                 additionalColumns={[
                                     col(
                                         'project',
-                                        'Project',
+                                        resource('COMMON.PROJECT'),
                                         { minWidth: 350, maxWidth: 350 },
                                         (event: ITimeEntry) => <ProjectColumn event={event} />
                                     ),

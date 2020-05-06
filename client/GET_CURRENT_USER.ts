@@ -6,7 +6,15 @@ import gql from 'graphql-tag';
  */
 export default gql`
 {
-    user: currentUser {
-        role
+    currentUser {
+      id
+      email
+      fullName
+      role
+      userLanguage
+      sub {
+        name
+      }
     }
-}`;
+  }  
+`;

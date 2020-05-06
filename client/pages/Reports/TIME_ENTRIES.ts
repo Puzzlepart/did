@@ -7,7 +7,6 @@ export default gql`
     query {
          timeentries(dateFormat: "MMM DD, YYYY kk:mm")  {
             title
-            projectId
             durationHours
             startTime
             endTime
@@ -16,6 +15,10 @@ export default gql`
             resourceName     
             monthNumber           
             customer {
+                id
+                name
+            }
+            project {
                 id
                 name
             }

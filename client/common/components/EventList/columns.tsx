@@ -1,5 +1,6 @@
 
 import * as helpers from 'helpers';
+import resource from 'i18n';
 import { ITimeEntry } from 'interfaces';
 import * as React from 'react';
 import { generateColumn as col } from 'utils/generateColumn';
@@ -23,7 +24,6 @@ function getSizing(props: IEventListProps, fieldName: string, defMinWidth: numbe
         maxWidth: helpers.getValueTyped(props, `columnWidths.${fieldName}`, defMaxWidth),
     };
 }
-
 /**
  * Title column
  * 
@@ -34,7 +34,7 @@ function getSizing(props: IEventListProps, fieldName: string, defMinWidth: numbe
  */
 export const Title = (props: IEventListProps, fieldName = 'title'): IColumn => col(
     fieldName,
-    'Title',
+    resource('COMMON.TITLE_LABEL'),
     { ...getSizing(props, fieldName, 320, 400) },
     (event: ITimeEntry) => <a href={event.webLink} target='_blank' rel='noopener noreferrer' className='truncate' title={event.title}>{event.title}</a>,
 );
@@ -50,7 +50,7 @@ export const Title = (props: IEventListProps, fieldName = 'title'): IColumn => c
  */
 export const Time = (props: IEventListProps, fieldName = 'time'): IColumn => col(
     fieldName,
-    'Time',
+    resource('COMMON.TIME_LABEL'),
     { ...getSizing(props, fieldName, 90, 90) },
     (event: ITimeEntry) => {
         return (
@@ -71,7 +71,7 @@ export const Time = (props: IEventListProps, fieldName = 'time'): IColumn => col
  */
 export const Duration = (props: IEventListProps, fieldName = 'durationMinutes'): IColumn => col(
     fieldName,
-    'Duration',
+    resource('COMMON.DURATION_LABEL'),
     { ...getSizing(props, fieldName, 75, 75) },
     (event: ITimeEntry) => <DurationDisplay minutes={event.durationMinutes} />
 );

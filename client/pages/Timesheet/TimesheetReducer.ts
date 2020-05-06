@@ -1,3 +1,4 @@
+import resource from 'i18n';
 import { IProject } from 'interfaces';
 import _ from 'underscore';
 import { TimesheetPeriod } from './TimesheetPeriod';
@@ -26,7 +27,10 @@ export const reducer = <T>(state: ITimesheetState, action: Action): ITimesheetSt
     let newState = { ...state };
     switch (action.type) {
         case 'DATA_UPDATED': {
-            newState.loading = action.payload.loading ? { label: 'Loading events', description: 'Please wait...' } : null
+            newState.loading = action.payload.loading && {
+                label: resource('TIMESHEET.LOADING_EVENTS_LABEL'),
+                description: resource('TIMESHEET.LOADING_EVENTS_DESCRIPTION'),
+            };
             if (action.payload.data) {
                 newState.periods = action.payload.data.timesheet.map(period => new TimesheetPeriod(period));
                 newState.selectedPeriod = _.first(newState.periods);
@@ -34,10 +38,16 @@ export const reducer = <T>(state: ITimesheetState, action: Action): ITimesheetSt
         }
             break;
         case 'CONFIRMING_PERIOD':
-            newState.loading = { label: 'Confirming period', description: 'Hang on a minute...' };
+            newState.loading = {
+                label: resource('TIMESHEET.CONFIRMING_PERIOD_LABEL'),
+                description: resource('TIMESHEET.CONFIRMING_PERIOD_DESCRIPTION'),
+            };
             break;
         case 'UNCONFIRMING_PERIOD':
-            newState.loading = { label: 'Unconfirming period', description: 'Hang on a minute...' };
+            newState.loading = {
+                label: resource('TIMESHEET.UNCONFIRMING_PERIOD_LABEL'),
+                description: resource('TIMESHEET.UNCONFIRMING_PERIOD_DESCRIPTION'),
+            };
             break;
         case 'UPDATE_SCOPE':
             newState.scope = new TimesheetScope(action.payload);

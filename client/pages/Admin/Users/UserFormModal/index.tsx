@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/react-hooks';
+import resource from 'i18n';
 import { IUser } from 'interfaces';
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button';
 import { Dropdown } from 'office-ui-fabric-react/lib/Dropdown';
@@ -38,32 +39,33 @@ export const UserFormModal = (props: IUserFormModalProps) => {
             {...props.modal}
             containerClassName={styles.root}
             isOpen={true}>
-            <div className={styles.title} hidden={!props.title}>{props.title}</div>
+            <div className={styles.title} hidden={!props.title}>
+
+            </div>
             <TextField
                 label='ID'
-                description='ID of the user in Azure Active Directory.'
+                description={resource('COMMON.USER_ID_DESCRIPTION')}
                 value={user.id}
                 disabled={!!props.user}
                 required={!props.user}
                 onChange={(_, id) => setUser({ ...user, id })} />
             <TextField
-                label='Name'
-                description='Full name of the user.'
+                label={resource('COMMON.NAME_LABEL')}
                 value={user.fullName}
                 disabled={!!props.user}
                 required={!props.user}
                 onChange={(_, fullName) => setUser({ ...user, fullName })} />
             <Dropdown
-                label='Role'
+                label={resource('COMMON.ROLE_LABEL')}
                 options={[
-                    { key: 'User', text: 'User' },
-                    { key: 'Admin', text: 'Admin' },
+                    { key: 'User', text: resource('COMMON.ROLE_USER_TEXT') },
+                    { key: 'Admin', text: resource('COMMON.ROLE_ADMIN_TEXT') },
                 ]}
                 defaultSelectedKey={user.role}
                 onChange={(_, opt) => setUser({ ...user, role: opt.key.toString() })} />
             <PrimaryButton
                 className={styles.saveBtn}
-                text='Save'
+                text={resource('COMMON.SAVE')}
                 disabled={!isFormValid()}
                 onClick={onSave} />
         </Modal>

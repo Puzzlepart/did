@@ -1,7 +1,7 @@
-import { stringToArrayBuffer } from 'helpers';
-import { loadScripts } from './loadScripts';
-import { humanize } from 'underscore.string';
+import { getValueTyped, stringToArrayBuffer } from 'helpers';
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
+import { humanize } from 'underscore.string';
+import { loadScripts } from './loadScripts';
 
 /**
  * @ignore
@@ -11,6 +11,8 @@ export interface IExcelExportOptions {
     columns?: IColumn[];
     skip?: string[];
 }
+
+export type ExcelColumnType = 'date' | null;
 
 /**
  * Export to Excel
@@ -38,13 +40,12 @@ export async function exportExcel(items: any[], options: IExcelExportOptions): P
         name: 'Sheet 1',
         data: [
             options.columns.map(c => c.name),
-            ...items.map(item => options.columns.map(col =>
-                (col.fieldName === "startTime" || col.fieldName === "endTime")
-                // v===raw value, t===type, where "d" is date
-                // consider changing localeString to be automatic (i.e. no params), although export might bomb in some cases
-                    ? { v: new Date(item[col.fieldName]).toLocaleString("en"), t: "d" } 
-                    : item[col.fieldName]
-            )),
+            ...items.map(item => options.columns.map(col => {
+                switch (getValueTyped<ExcelColumnType>(col, 'data.excelColFormat', null)) {
+                    case 'date': return { v: new Date(item[col.fieldName]).toLocaleString("en"), t: "d" };
+                    default: return item[col.fieldName];
+                }
+            })),
         ],
     }];
     const workBook = xlsx.utils.book_new();

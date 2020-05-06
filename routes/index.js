@@ -6,10 +6,6 @@ const _ = require('underscore');
 function getContext(req) {
   const host = req.get('host');
   let context = { info: { version } };
-  if (req.user) {
-    let user = _.omit(req.user, 'oauthToken');
-    context.user = { ...user.data, ...user.profile };
-  }
   let sub = host.split('.')[0].split('-');
   if (process.env.DEVELOPMENT_BRANCH) {
     context.info.branch = process.env.DEVELOPMENT_BRANCH;
@@ -21,7 +17,7 @@ function getContext(req) {
 
 
 router.get('/', (req, res) => {
-  if (!req.user  || !req.isAuthenticated()) {
+  if (!req.user || !req.isAuthenticated()) {
     res.redirect('/auth/signin');
   } else {
     const context = getContext(req);

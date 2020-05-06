@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/react-hooks';
 import { IconPicker, UserMessage } from 'common/components';
+import resource from 'i18n';
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button';
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
@@ -54,7 +55,7 @@ export const CreateCustomerForm = ({ initialModel = { key: '', name: '', descrip
             {message && <UserMessage style={{ marginTop: 12, marginBottom: 12, width: 450 }} text={message.text} type={message.type} />}
             <TextField
                 styles={{ root: { marginTop: 12, width: 450 } }}
-                label='Key'
+                label={resource('COMMON.KEY_LABEL')}
                 description='Customer key. 3-8 characters, all uppercase.'
                 title='Customer key. 3-8 characters, all uppercase.'
                 required={true}
@@ -63,7 +64,7 @@ export const CreateCustomerForm = ({ initialModel = { key: '', name: '', descrip
                 value={model.key} />
             <TextField
                 styles={{ root: { marginTop: 12, width: 450 } }}
-                label='Name'
+                label={resource('COMMON.NAME_LABEL')}
                 description='Name of the customer.'
                 title='Name of the customer.'
                 required={true}

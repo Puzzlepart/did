@@ -20,7 +20,9 @@ export interface IFilter {
  * @category FilterPanel
  */
 export abstract class BaseFilter {
-    constructor(public fieldName: string, public name: string) { }
+    public name: string;
+
+    constructor(public fieldName: string) { }
 
     public abstract initialize(entries: any[]): IFilter;
 }

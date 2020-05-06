@@ -1,13 +1,13 @@
 import List from 'common/components/List';
 import resource from 'i18n';
 import { ICustomer } from 'interfaces/ICustomer';
+import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
-import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { generateColumn as col } from 'utils/generateColumn';
 import { ICustomerListProps } from './ICustomerListProps';
-import { Link } from 'react-router-dom';
 
 /**
  * Generate column definitions
@@ -26,10 +26,10 @@ export const CustomerListColumns = (): IColumn[] => ([
             return <Icon iconName={customer.icon || 'Page'} styles={{ root: { fontSize: 16 } }} />;
         },
     ),
-    col('key', 'Key', { maxWidth: 120 }),
+    col('key', resource('COMMON.KEY_LABEL'), { maxWidth: 120 }),
     col(
         'name',
-        'Name',
+        resource('COMMON.NAME_LABEL'),
         { maxWidth: 300 },
         (customer: ICustomer) => <Link to={`/customers/${customer.id}`}>{customer.name}</Link>
     ),

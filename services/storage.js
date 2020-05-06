@@ -45,35 +45,19 @@ class StorageService {
         return parseArray(entries)[0];
     }
     /**
-     * Get weeks
-     */
-    async getWeeks() {
-        let query = createQuery(1000, undefined, this.filter);
-        const { entries } = await queryTable('Weeks', query);
-        const weeks = parseArray(entries);
-        return weeks;
-    }
-    /**
-     * Update week
-     */
-    async updateWeek(weekNumber, closed) {
-        const result = await updateEntity('Weeks', {
-            PartitionKey: entGen.String(this.tenantId),
-            RowKey: entGen.String(weekNumber.toString()),
-            Closed: entGen.Boolean(closed),
-        });
-        return result;
-    }
-    /**
      * Update user
+     * 
+     * @param {*} user
      */
     async updateUser(user) {
-        const result = await updateEntity('Users', {
+        const entity = {
             PartitionKey: entGen.String(this.tenantId),
             RowKey: entGen.String(user.id),
-            FullName: entGen.String(user.fullName),
-            Role: entGen.String(user.role),
-        });
+        };
+        if (user.fullName) entity.FullName = entGen.String(user.fullName);
+        if (user.role) entity.Role = entGen.String(user.role);
+        if (user.userLanguage) entity.UserLanguage = entGen.String(user.userLanguage);
+        const result = await updateEntity('Users', entity, true);
         return result;
     }
     /**
