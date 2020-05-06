@@ -4,8 +4,6 @@ import { getValueTyped as value } from 'helpers';
 import { IGroup } from 'office-ui-fabric-react/lib/DetailsList';
 import { unique } from 'underscore';
 
-export type IGenerateListGroups = { items: any[]; groups: IGroup[] };
-
 /**
  * Create groups
  * 
@@ -17,7 +15,7 @@ export type IGenerateListGroups = { items: any[]; groups: IGroup[] };
  * 
  * @category List
  */
-export function generateListGroups(items: any[], groupBy: string, uniqueGroupNames: string[], emptyGroupName = '', totalFunc?: Function): IGenerateListGroups {
+export function generateListGroups(items: any[], groupBy: string, uniqueGroupNames: string[], emptyGroupName = '', totalFunc?: Function): [IGroup[], any[]] {
     const itemsSort = { props: [groupBy], opts: { reverse: false } };
     items = arraySort([...items], itemsSort.props, itemsSort.opts);
     const groupNames = items.map(g => value<string>(g, groupBy, emptyGroupName));
@@ -39,5 +37,5 @@ export function generateListGroups(items: any[], groupBy: string, uniqueGroupNam
         };
         return group;
     });
-    return { groups, items };
+    return [groups, items];
 }

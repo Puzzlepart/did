@@ -60,7 +60,6 @@ const ProjectList = (props: IProjectListProps) => {
 
     React.useEffect(() => setItems([...props.items].filter(p => !p.inactive)), [props.items]);
 
-
     return (
         <List
             {...props}

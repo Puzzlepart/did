@@ -4,24 +4,26 @@ import { GroupHeader } from 'office-ui-fabric-react/lib/GroupedList';
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import { ShimmeredDetailsList } from 'office-ui-fabric-react/lib/ShimmeredDetailsList';
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { delay } from 'utils';
 import { withDefaultProps } from 'with-default-props';
 import { generateListGroups } from './generateListGroups';
 import { IListProps } from './IListProps';
 import { ListHeader } from './ListHeader';
+import { reducer } from './ListReducer';
 
 /**
  * @category List
  */
 const List = (props: IListProps) => {
-    let searchTimeout: any;
+    const [state, dispatch] = React.useReducer(reducer, {
+        origItems: props.items,
+        items: props.items,
+        searchTerm: null,
+    });
     let selection = null;
-    let groups = null;
 
-    // eslint-disable-next-line prefer-const
-    let [items, setItems] = useState(props.items);
-
-    useEffect(() => setItems(props.items), [props.items]);
+    useEffect(() => dispatch({ type: 'PROPS_UPDATED', payload: props }), [props.items]);
 
     selection = props.selection && new Selection({
         onSelectionChanged: () => {
@@ -30,25 +32,6 @@ const List = (props: IListProps) => {
         }
     });
 
-    /**
-     * On search
-     * 
-     * @param {string} searchTerm Search term
-     */
-    const onSearch = (searchTerm: string) => {
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(() => {
-            const _items = props.items.filter(i => JSON.stringify(i).toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
-            setItems(_items);
-        }, 500);
-    }
-
-    /**
-     * On render details header
-     * 
-     * @param {IDetailsHeaderProps} headerProps Header props
-     * @param {Function} defaultRender Default render function
-     */
     const onRenderListHeader = (headerProps: IDetailsHeaderProps, defaultRender: (props: IDetailsHeaderProps) => JSX.Element) => {
         if (props.onRenderDetailsHeader) return onRenderListHeader(headerProps, defaultRender);
         const searchBox = props.searchBox && ({
@@ -57,7 +40,7 @@ const List = (props: IListProps) => {
                 <SearchBox
                     {...props.searchBox}
                     styles={{ field: { fontSize: '10pt', letterSpacing: '1px' }, root: { width: 400, maxWidth: 400 } }}
-                    onChange={(_, newValue) => onSearch(newValue)} />
+                    onChange={(_, newValue) => delay(400).then(() => dispatch({ type: 'SEARCH', payload: newValue }))} />
             ),
         });
         const commandBarItems = [searchBox, ...props.commandBar.items].filter(c => c);
@@ -68,25 +51,21 @@ const List = (props: IListProps) => {
                 commandBar={{ ...props.commandBar, items: commandBarItems }} />
         );
     }
-    /**
-     * On render group header
-     * 
-     * @param {IDetailsGroupDividerProps} headerProps Header props
-     */
+
     const onRenderGroupHeader = (headerProps: IDetailsGroupDividerProps) => {
         return <GroupHeader {...headerProps} styles={{ title: { cursor: 'initial' }, expand: { cursor: 'pointer' }, headerCount: { display: 'none' } }}></GroupHeader>;
     }
 
+    let groups = null;
+    let items = [...state.items];
     if (props.groups) {
-        const _ = generateListGroups(
+        [groups, items] = generateListGroups(
             items,
             props.groups.fieldName,
             props.groups.groupNames,
             props.groups.emptyGroupName,
             props.groups.totalFunc,
         );
-        groups = _.groups;
-        items = _.items;
     }
 
     return (
