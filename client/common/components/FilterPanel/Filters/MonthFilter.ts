@@ -1,19 +1,22 @@
 import { getValueTyped as value } from 'helpers';
-import _ from 'underscore';
-import { BaseFilter, IFilter } from './BaseFilter';
+import resource from 'i18n';
 import moment from 'moment';
+import { unique } from 'underscore';
+import { capitalize } from 'underscore.string';
+import { BaseFilter, IFilter } from './BaseFilter';
 
 /**
  * @ignore
  */
-const MONTH_NAMES: string[] = Array.apply(0, Array(12)).map((_: any, i: number) => moment().month(i).format('MMMM'));
+const getMonthNames = (): string[] =>
+    Array.apply(0, Array(12)).map((_: any, i: number) => moment().month(i).format('MMMM'));
 
 /**
  * @category FilterPanel
  */
 export class MonthFilter extends BaseFilter {
-    constructor(fieldName: string, name: string) {
-        super(fieldName, name);
+    constructor(fieldName: string) {
+        super(fieldName);
     }
 
     /**
@@ -22,12 +25,14 @@ export class MonthFilter extends BaseFilter {
      * @param {any[]} entries Entries
      */
     public initialize(entries: any[]): IFilter {
-        let months: string[] = _.unique(entries.map(e => value(e, this.fieldName, null)));
-        months = MONTH_NAMES.filter(m => months.indexOf(m) !== -1);
+        let months: string[] = unique(entries.map(e => value(e, this.fieldName, null)));
+        months = getMonthNames()
+            .filter(m => months.indexOf(m) !== -1)
+            .map(m => capitalize(m))
         const items = months.map(month => ({ key: month, value: month, }));
         return {
             key: this.fieldName,
-            name: this.name,
+            name: resource('COMMON.MONTH_LABEL'),
             items,
             selected: [],
         };

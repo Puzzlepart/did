@@ -1,13 +1,15 @@
 
 import { useQuery } from '@apollo/react-hooks';
-import { SummaryView, SummaryViewType } from 'pages/Timesheet/SummaryView';
+import resource from 'i18n';
 import * as moment from 'moment';
 import { IPivotItemProps, Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import { Slider } from 'office-ui-fabric-react/lib/Slider';
+import { SummaryView, SummaryViewType } from 'pages/Timesheet/SummaryView';
 import * as React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import * as _ from 'underscore';
+import format from 'string-format';
+import { unique } from 'underscore';
 import TIME_ENTRIES from './TIME_ENTRIES';
 require('moment/locale/en-gb');
 
@@ -47,49 +49,58 @@ export const AdminSummaryView = (): JSX.Element => {
 
     const onNavigate = (year: string) => history.push(`/admin/summary/${year}`);
 
+    // "RANGE_MONTH": "Show last {0} months",
+    // "RANGE_WEEK": "Show last {0} weeks"
+
     return (
-            <Pivot
-                defaultSelectedKey={year}
-                onLinkClick={({ props }) => onNavigate(props.itemKey)}
-                styles={{ itemContainer: { paddingTop: 10 } }}>
-                {periods.map(itemProps => (
-                    <PivotItem key={itemProps.itemKey} {...itemProps}>
-                        <Pivot styles={{ itemContainer: { paddingTop: 10 } }}>
-                            <PivotItem key='month' itemKey='month' headerText='Month' itemIcon='Calendar'>
-                                {!loading && (
-                                    <Slider
-                                        valueFormat={value => `Show last ${value} months`}
-                                        min={1}
-                                        max={_.unique(timeentries, e => e.monthNumber).length}
-                                        defaultValue={range}
-                                        onChange={value => setRange(value)} />
-                                )}
-                                {loading && <ProgressIndicator />}
-                                <SummaryView
-                                    entries={timeentries}
-                                    type={SummaryViewType.AdminMonth}
-                                    range={range}
-                                    exportFileNameTemplate='Summary-Month-{0}.xlsx' />
-                            </PivotItem>
-                            <PivotItem key='week' itemKey='week' headerText='Week' itemIcon='CalendarWeek'>
-                                {!loading && (
-                                    <Slider
-                                        valueFormat={value => `Show last ${value} weeks`}
-                                        min={1}
-                                        max={_.unique(timeentries, e => e.weekNumber).length}
-                                        defaultValue={range}
-                                        onChange={value => setRange(value)} />
-                                )}
-                                {loading && <ProgressIndicator />}
-                                <SummaryView
-                                    entries={timeentries}
-                                    type={SummaryViewType.AdminWeek}
-                                    range={range}
-                                    exportFileNameTemplate='Summary-Week-{0}.xlsx' />
-                            </PivotItem>
-                        </Pivot>
-                    </PivotItem>
-                ))}
-            </Pivot>
+        <Pivot
+            defaultSelectedKey={year}
+            onLinkClick={({ props }) => onNavigate(props.itemKey)}
+            styles={{ itemContainer: { paddingTop: 10 } }}>
+            {periods.map(itemProps => (
+                <PivotItem key={itemProps.itemKey} {...itemProps}>
+                    <Pivot styles={{ itemContainer: { paddingTop: 10 } }}>
+                        <PivotItem
+                            itemKey='month'
+                            headerText={resource('COMMON.MONTH_LABEL')}
+                            itemIcon='Calendar'>
+                            {!loading && (
+                                <Slider
+                                    valueFormat={value => format(resource('ADMIN.RANGE_MONTH'), value)}
+                                    min={1}
+                                    max={unique(timeentries, e => e.monthNumber).length}
+                                    defaultValue={range}
+                                    onChange={value => setRange(value)} />
+                            )}
+                            {loading && <ProgressIndicator />}
+                            <SummaryView
+                                entries={timeentries}
+                                type={SummaryViewType.AdminMonth}
+                                range={range}
+                                exportFileNameTemplate='Summary-Month-{0}.xlsx' />
+                        </PivotItem>
+                        <PivotItem
+                            itemKey='week'
+                            headerText={resource('COMMON.WEEK_LABEL')}
+                            itemIcon='CalendarWeek'>
+                            {!loading && (
+                                <Slider
+                                    valueFormat={value => format(resource('ADMIN.RANGE_WEEK'), value)}
+                                    min={1}
+                                    max={unique(timeentries, e => e.weekNumber).length}
+                                    defaultValue={range}
+                                    onChange={value => setRange(value)} />
+                            )}
+                            {loading && <ProgressIndicator />}
+                            <SummaryView
+                                entries={timeentries}
+                                type={SummaryViewType.AdminWeek}
+                                range={range}
+                                exportFileNameTemplate='Summary-Week-{0}.xlsx' />
+                        </PivotItem>
+                    </Pivot>
+                </PivotItem>
+            ))}
+        </Pivot>
     );
 }

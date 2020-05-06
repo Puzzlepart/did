@@ -1,3 +1,4 @@
+import resource from 'i18n';
 import { Calendar, DateRangeType, DayOfWeek } from 'office-ui-fabric-react/lib/Calendar';
 import { Callout, DirectionalHint } from 'office-ui-fabric-react/lib/Callout';
 import { FocusTrapZone } from 'office-ui-fabric-react/lib/FocusTrapZone';
@@ -8,7 +9,6 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ACTIONBAR_ICON_PROPS } from '../ACTIONBAR_ICON_PROPS';
-import { CALENDAR_STRINGS } from './CALENDAR_STRINGS';
 import styles from './WeekPicker.module.scss';
 
 /**
@@ -26,7 +26,16 @@ export const WeekPicker = () => {
                     className={styles.root}
                     onClick={event => setCalendar(event.currentTarget)}
                     value={scope.timespan}
-                    styles={{ field: { color: 'rgb(120, 120, 120)', cursor: 'pointer' }, root: { width: 280, marginTop: 6 } }}
+                    styles={{
+                        field: {
+                            color: 'rgb(120, 120, 120)',
+                            cursor: 'pointer'
+                        },
+                        root: {
+                            width: 280,
+                            marginTop: 6
+                        }
+                    }}
                     readOnly
                     borderless
                     iconProps={{ iconName: 'ChevronDown', ...ACTIONBAR_ICON_PROPS }} />
@@ -49,7 +58,7 @@ export const WeekPicker = () => {
                                 setCalendar(null);
                             }}
                             firstDayOfWeek={DayOfWeek.Monday}
-                            strings={CALENDAR_STRINGS}
+                            strings={resource('CALENDAR_STRINGS', true) as any}
                             showGoToToday={false}
                             showWeekNumbers={true}
                             dateRangeType={DateRangeType.Week}

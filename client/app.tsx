@@ -1,7 +1,8 @@
+import { Navigation } from 'common/components/Navigation';
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { AppContext, IAppContext } from './AppContext';
-import { Navigation, Timesheet, Customers, Projects, Reports, Admin, Home } from './pages';
+import { Admin, Customers, Home, Projects, Reports, Timesheet } from './pages';
 
 const App = (context: IAppContext): JSX.Element => {
     return (

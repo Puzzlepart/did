@@ -30,10 +30,10 @@ export const ProjectListColumns = (renderLink: boolean, hideColumns: string[]): 
             return <Icon iconName={project.icon || 'Page'} styles={{ root: { fontSize: 16 } }} />;
         },
     ),
-    col('key', 'Key', { maxWidth: 120 }),
+    col('key', resource('COMMON.KEY_LABEL'), { maxWidth: 120 }),
     col(
         'name',
-        'Name',
+        resource('COMMON.NAME_LABEL'),
         { maxWidth: 180 },
         (project: IProject) => <Link to={`/projects/${project.id}`}>{project.name}</Link>
     ),

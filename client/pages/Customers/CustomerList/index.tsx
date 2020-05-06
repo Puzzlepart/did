@@ -26,10 +26,10 @@ export const CustomerListColumns = (): IColumn[] => ([
             return <Icon iconName={customer.icon || 'Page'} styles={{ root: { fontSize: 16 } }} />;
         },
     ),
-    col('key', 'Key', { maxWidth: 120 }),
+    col('key', resource('COMMON.KEY_LABEL'), { maxWidth: 120 }),
     col(
         'name',
-        'Name',
+        resource('COMMON.NAME_LABEL'),
         { maxWidth: 300 },
         (customer: ICustomer) => <Link to={`/customers/${customer.id}`}>{customer.name}</Link>
     ),
