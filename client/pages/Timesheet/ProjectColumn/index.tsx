@@ -18,10 +18,14 @@ import { IClearManualMatchButtonProps, IProjectColumnProps, IProjectColumnToolti
 /**
  * @category Timesheet
  */
-export const ClearManualMatchButton = ({ onClick, hidden }: IClearManualMatchButtonProps): JSX.Element => {
+export const ClearManualMatchButton = ({ onClick }: IClearManualMatchButtonProps): JSX.Element => {
     return (
-        <div className={styles.clearButton} title={resource('TIMESHEET.CLEAR_PROJECT_MATCH_TOOLTIP_TEXT')} hidden={hidden}>
-            <span onClick={onClick} style={{ cursor: 'pointer' }}><Icon iconName='Cancel' styles={{ root: { fontSize: 14 } }} /></span>
+        <div
+            className={styles.clearButton}
+            title={resource('TIMESHEET.CLEAR_PROJECT_MATCH_TOOLTIP_TEXT')}>
+            <span onClick={onClick} style={{ cursor: 'pointer' }}>
+                <Icon iconName='Cancel' styles={{ root: { fontSize: 14 } }} />
+            </span>
         </div>
     );
 }
@@ -92,6 +96,8 @@ const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
         );
     }
 
+    console.log(props.event);
+
     return (
         <TooltipHost
             tooltipProps={{
@@ -109,10 +115,14 @@ const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
                         <span>for </span><a href={`/customers/${props.event.customer.id}`}><span>{props.event.customer.name}</span></a>
                     </div>
                 </div>
-                <ClearManualMatchButton
-                    onClick={() => dispatch({ type: 'CLEAR_MANUAL_MATCH', payload: props.event.id })}
-                    className={styles.clearButton}
-                    hidden={!props.event.isManualMatch} />
+                {props.event.isManualMatch && (
+                    <ClearManualMatchButton
+                        onClick={() => dispatch({
+                            type: 'CLEAR_MANUAL_MATCH',
+                            payload: props.event.id,
+                        })}
+                        className={styles.clearButton} />
+                )}
             </div>
         </TooltipHost>
     );

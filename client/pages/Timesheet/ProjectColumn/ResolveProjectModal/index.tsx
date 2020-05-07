@@ -2,9 +2,8 @@ import { SearchProject, UserMessage } from 'components';
 import { getValueTyped as value } from 'helpers';
 import resource from 'i18n';
 import { Modal } from 'office-ui-fabric-react/lib/Modal';
-import * as React from 'react';
-import { useState } from 'react';
-import * as format from 'string-format';
+import React from 'react';
+import format from 'string-format';
 import styles from './ResolveProjectModal.module.scss';
 import { IResolveProjectModalProps } from './types';
 
@@ -12,8 +11,6 @@ import { IResolveProjectModalProps } from './types';
  * @category Timesheet
 */
 export const ResolveProjectModal = ({ isOpen, onDismiss, onProjectSelected, event }: IResolveProjectModalProps) => {
-    const [scope, setScope] = useState<boolean>(!!event.customer);
-
     return (
         <Modal
             containerClassName={styles.root}
@@ -39,7 +36,7 @@ export const ResolveProjectModal = ({ isOpen, onDismiss, onProjectSelected, even
             <SearchProject
                 className={styles.searchProject}
                 onSelected={onProjectSelected}
-                customer={scope && event.customer}
+                customer={undefined}
                 placeholder={resource('PROJECTS.SEARCH_PLACEHOLDER')} />
         </Modal >
     );
