@@ -11,7 +11,7 @@ export const Navigation = () => {
     return (
         <nav className={styles.root}>
             <div className={styles.container}>
-                <Link to='/' className={styles.logo}>
+                <Link to='/' className={styles.logo} title='Did 365 - The Calendar is the Timesheet'>
                     <img src='/images/D_beta_sm.png' />
                 </Link>
                 <ul className={styles.nav} hidden={!user}>
