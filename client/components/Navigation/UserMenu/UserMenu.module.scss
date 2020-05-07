@@ -1,3 +1,5 @@
+$menu_height: 115px;
+
 .root {
   flex-grow: 1;
   display: flex;
@@ -28,7 +30,7 @@
       top: 45px;
       right: -24px;
       padding: 15px 0 50px 0;
-      height: 100px;
+      height: $menu_height;
       z-index: 100;
 
       .header {
