@@ -7,7 +7,7 @@ import { ApolloProvider } from 'react-apollo';
 import * as ReactDom from 'react-dom';
 import 'regenerator-runtime/runtime.js';
 import { tryParseJson } from 'utils/tryParseJson';
-import { App } from './app';
+import { App } from './App';
 import { IAppContext } from './AppContext';
 import GET_CURRENT_USER from './GET_CURRENT_USER';
 import { client } from './graphql';

@@ -1,0 +1,56 @@
+.root {
+    width: 100%;
+    display: inline-flex;
+    height: 55px;
+    background: #333;
+
+    .hamburger {
+        color: #fff;
+        display: none; // TODO: BREAKPOINT FOR SMALLER SCREENS
+
+        .icon {
+            background: green;
+        }
+    }
+
+    .nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 500px;
+        height: 100%;
+        padding: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+
+        .navItem {
+            color: red;
+            display: flex;
+            align-items: center;
+            height: 100%;
+
+            .navLink {
+                display: flex;
+                color: #f1fafa;
+                font-weight: 400;
+                font-family: Helvetica, Arial, sans-serif;
+                font-size: 14px;
+                text-decoration: none;
+                letter-spacing: .05rem;
+
+                &:hover {
+                    color: #bbb;
+                }
+            }
+        }
+    }
+
+    .logo {
+        align-self: center;
+        padding-left: 10px;
+
+        img {
+            height: 37px;
+        }
+    }
+}

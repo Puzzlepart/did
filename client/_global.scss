@@ -4,22 +4,11 @@
   }
 }
 body {
-  padding-top: 20px;
-  margin-top: 63px;
   font-family: "Segoe UI Light", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto,
     "Helvetica Neue", sans-serif;
   font-size: 100%;
-}
-
-.alert-pre {
-  word-wrap: break-word;
-  word-break: break-all;
-  white-space: pre-wrap;
-}
-
-.navbar-nav .nav-link {
-  font-size: 1em;
-  letter-spacing: 1px;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
