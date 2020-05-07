@@ -37,7 +37,7 @@ export const SearchProject = (props: ISearchProjectProps) => {
 
     const renderSuggestion = (project: IProject, { query }: any) => {
         return (
-            <div style={{ marginLeft: 4, padding: 4, cursor: 'pointer' }}>
+            <div containerStyle={{ marginLeft: 4, padding: 4, cursor: 'pointer' }}>
                 <div>
                     {AutosuggestHighlightParse(getDisplayValue(project), AutosuggestHighlightMatch(getDisplayValue(project), query)).map((part, index) => {
                         const className = part.highlight ? 'react-autosuggest__suggestion-match' : null;
@@ -48,7 +48,7 @@ export const SearchProject = (props: ISearchProjectProps) => {
                         );
                     })}
                 </div>
-                <div style={{ fontSize: '7pt' }}>
+                <div containerStyle={{ fontSize: '7pt' }}>
                     <span>for </span>
                     {AutosuggestHighlightParse(project.customer.name, AutosuggestHighlightMatch(project.customer.name, query)).map((part, index) => {
                         const className = part.highlight ? 'react-autosuggest__suggestion-match' : null;

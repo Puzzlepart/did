@@ -55,7 +55,7 @@ export const SearchCustomer = (props: ISearchCustomerProps) => {
      */
     const renderSuggestion = (customer: ICustomer, { query }: any) => {
         return (
-            <div style={{ marginLeft: 4, padding: 4, cursor: 'pointer' }}>
+            <div containerStyle={{ marginLeft: 4, padding: 4, cursor: 'pointer' }}>
                 <div>
                     {AutosuggestHighlightParse(getDisplayValue(customer), AutosuggestHighlightMatch(getDisplayValue(customer), query)).map((part, index) => {
                         const className = part.highlight ? 'react-autosuggest__suggestion-match' : null;
@@ -86,7 +86,7 @@ export const SearchCustomer = (props: ISearchCustomerProps) => {
                         onSuggestionSelected={(_event, { suggestion }) => props.onSelected(suggestion)}
                         inputProps={{
                             className: styles.field,
-                            style: props.style,
+                            containerStyle: props.containerStyle,
                             placeholder: props.placeholder,
                             title: props.title,
                             value,

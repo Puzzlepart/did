@@ -66,7 +66,7 @@ export const Projects = () => {
                     ? <UserMessage type={MessageBarType.error} text={resource('COMMON.GENERIC_ERROR_TEXT')} />
                     : (
                         <>
-                            <UserMessage style={{ marginBottom: 12 }} iconName='OutlookLogoInverse' text={resource('PROJECTS.OUTLOOK_CATEGORY_INFO_TEXT')} />
+                            <UserMessage containerStyle={{ marginBottom: 12 }} iconName='OutlookLogoInverse' text={resource('PROJECTS.OUTLOOK_CATEGORY_INFO_TEXT')} />
                             <ProjectList
                                 enableShimmer={loading}
                                 items={projects.filter(p => !!p.outlookCategory)}

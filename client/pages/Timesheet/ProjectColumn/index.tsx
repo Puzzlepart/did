@@ -23,7 +23,7 @@ export const ClearManualMatchButton = ({ onClick }: IClearManualMatchButtonProps
         <div
             className={styles.clearButton}
             title={resource('TIMESHEET.CLEAR_PROJECT_MATCH_TOOLTIP_TEXT')}>
-            <span onClick={onClick} style={{ cursor: 'pointer' }}>
+            <span onClick={onClick} containerStyle={{ cursor: 'pointer' }}>
                 <Icon iconName='Cancel' styles={{ root: { fontSize: 14 } }} />
             </span>
         </div>
@@ -56,7 +56,7 @@ const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
             return (
                 <div className={styles.root}>
                     <UserMessage
-                        style={{ marginTop: 10 }}
+                        containerStyle={{ marginTop: 10 }}
                         isMultiline={false}
                         type={MessageBarType.severeWarning}
                         iconName='Warning'
@@ -67,7 +67,7 @@ const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
         return (
             <div className={styles.root}>
                 <UserMessage
-                    style={{ marginTop: 10 }}
+                    containerStyle={{ marginTop: 10 }}
                     isMultiline={false}
                     type={MessageBarType.warning}
                     iconName='TagUnknown'
@@ -95,8 +95,6 @@ const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
             </div>
         );
     }
-
-    console.log(props.event);
 
     return (
         <TooltipHost

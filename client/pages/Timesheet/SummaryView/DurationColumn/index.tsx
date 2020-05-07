@@ -16,7 +16,7 @@ export const DurationColumn = ({ row, column }: IDurationColumnProps) => {
     if (row.label === resource('COMMON.SUM_LABEL')) style.fontWeight = 500;
     const value = row[column.fieldName] ? Number.parseFloat(row[column.fieldName]).toFixed(2) : null;
     return (
-        <div style={style}>
+        <div containerStyle={style}>
             {value}
         </div>
     );

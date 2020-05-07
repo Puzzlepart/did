@@ -23,14 +23,14 @@ export const ResolveProjectModal = ({ isOpen, onDismiss, onProjectSelected, even
 
             <UserMessage
                 hidden={!event.suggestedProject}
-                style={{ marginTop: 5 }}
+                containerStyle={{ marginTop: 5 }}
                 iconName='Lightbulb' >
                 <p>{resource('TIMESHEET.DID_YOU_MEAN_TEXT')}<a href='#' onClick={() => onProjectSelected(event.suggestedProject)}>{value(event, 'suggestedProject.id', '')}</a>?</p>
             </UserMessage>
 
             <UserMessage
                 hidden={!event.customer || !!event.suggestedProject}
-                style={{ marginTop: 5 }}
+                containerStyle={{ marginTop: 5 }}
                 text={format(resource('TIMESHEET.EVENT_NOT_FULLY_MATCHED_TEXT'), value(event, 'customer.name', ''))} />
 
             <SearchProject
