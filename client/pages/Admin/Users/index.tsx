@@ -1,7 +1,7 @@
 
 import { useQuery } from '@apollo/react-hooks';
 import List from 'components/List';
-import { getValueTyped as value } from 'helpers';
+import { value as value } from 'helpers';
 import resource from 'i18n';
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';

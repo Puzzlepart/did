@@ -1,6 +1,8 @@
 import { ITypedHash, stringIsNullOrEmpty } from '@pnp/common';
-import * as get from 'get-value';
-import * as moment from 'moment';
+import getValue from 'get-value';
+import resource from 'i18n';
+import moment from 'moment';
+import format from 'string-format';
 import { capitalize } from 'underscore.string';
 require('moment/locale/en-gb');
 require('twix');
@@ -14,23 +16,15 @@ require('twix');
  * @category Helper
  */
 export function getDurationDisplay(minutes: number, hours?: number): string {
+    const hrsShortFormat = resource('COMMON.HOURS_SHORTFORMAT');
+    const minShortFormat = resource('COMMON.MINUTES_SHORTFORMAT');
     const hrs = hours ? Math.floor(hours) : Math.floor(minutes / 60);
     const mins = hours ? ((hours % 1) * 60) : minutes % 60;
-    return mins === 0 ? `${hrs}h` : hrs === 0
-        ? `${mins}min`
-        : [(`${hrs}h`), (`${mins}min`)].join(' ');
-}
-
-/**
- * Get url parameter
- * 
- * @param {string} name Name
- * @param {string} fallbackValue Fallback value
- * 
- * @category Helper
- */
-export function getUrlParameter(name: string, fallbackValue: string = null): string {
-    return new URL(document.location.href).searchParams.get(name) || fallbackValue;
+    const hrsStr = format(hrsShortFormat, hrs);
+    const minStr = format(minShortFormat, mins);;
+    if (mins === 0) return hrsStr;
+    if (hrs === 0) return minStr;
+    return `${hrsStr} ${minStr}`;
 }
 
 /**
@@ -77,8 +71,8 @@ export function currencyDisplay(num: number, currency = 'NOK', minimumFractionDi
  * 
  * @category Helper
  */
-export function getValueTyped<T>(obj: any, exp: string, defaultValue: T): T {
-    return get(obj, exp, { default: defaultValue });
+export function value<T>(obj: any, exp: string, defaultValue: T): T {
+    return getValue(obj, exp, { default: defaultValue });
 }
 
 /**

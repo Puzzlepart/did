@@ -1,11 +1,11 @@
 import { useQuery } from '@apollo/react-hooks';
-import { CreateCustomerForm } from 'pages/Customers/CreateCustomerForm';
-import { getValueTyped as value } from 'helpers';
+import { value as value } from 'helpers';
 import resource from 'i18n';
 import { ICustomer } from 'interfaces';
 import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
+import { CreateCustomerForm } from 'pages/Customers/CreateCustomerForm';
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
 import _ from 'underscore';

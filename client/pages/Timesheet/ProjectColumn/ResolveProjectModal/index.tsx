@@ -1,5 +1,5 @@
 import { SearchProject, UserMessage } from 'components';
-import { getValueTyped as value } from 'helpers';
+import { value as value } from 'helpers';
 import resource from 'i18n';
 import { IProject } from 'interfaces/IProject';
 import { MessageBarButton } from 'office-ui-fabric-react/lib/Button';

@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks';
 import { BaseFilter, FilterPanel, IFilter, MonthFilter, ResourceFilter, UserMessage, WeekFilter, YearFilter } from 'components';
 import List from 'components/List';
-import { getValueTyped as value } from 'helpers';
+import { value as value } from 'helpers';
 import resource from 'i18n';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import * as React from 'react';

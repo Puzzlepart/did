@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks';
 import { UserMessage } from 'components/UserMessage';
-import { getValueTyped as value } from 'helpers';
+import { value as value } from 'helpers';
 import resource from 'i18n';
 import { IOutlookCategory, IProject } from 'interfaces';
 import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList';

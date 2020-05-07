@@ -1,4 +1,4 @@
-import { getValueTyped as value } from 'helpers';
+import { value as value } from 'helpers';
 import resource from 'i18n';
 import _ from 'underscore';
 import { BaseFilter, IFilter } from './BaseFilter';

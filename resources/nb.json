@@ -108,7 +108,9 @@
       "SUM_LABEL": "Sum",
       "CUSTOMER": "Kunde",
       "START_TIME_LABEL": "Starttid",
-      "END_TIME_LABEL": "Sluttid"
+      "END_TIME_LABEL": "Sluttid",
+      "HOURS_SHORTFORMAT": "{0}t",
+      "MINUTES_SHORTFORMAT": "{0}min"
     },
     "NAVIGATION": {
       "TIMESHEET": "Timeliste",

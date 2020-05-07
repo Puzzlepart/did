@@ -1,5 +1,5 @@
 
-import { getValueTyped as value } from 'helpers';
+import { value as value } from 'helpers';
 import * as React from 'react';
 import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from 'recharts';
 import _ from 'underscore';
