@@ -54,7 +54,7 @@ export const ActionBar = (props: IActionBarProps) => {
                     key: 'PERIOD_0',
                     itemType: ContextualMenuItemType.Header,
                     onRender: () => (
-                        <span containerStyle={{ paddingTop: 12 }}>
+                        <span style={{ paddingTop: 12 }}>
                             {first(periods).getName(false)}
                         </span>
                     ),

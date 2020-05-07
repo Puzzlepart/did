@@ -23,7 +23,7 @@ export const ClearManualMatchButton = ({ onClick }: IClearManualMatchButtonProps
         <div
             className={styles.clearButton}
             title={resource('TIMESHEET.CLEAR_PROJECT_MATCH_TOOLTIP_TEXT')}>
-            <span onClick={onClick} containerStyle={{ cursor: 'pointer' }}>
+            <span onClick={onClick} style={{ cursor: 'pointer' }}>
                 <Icon iconName='Cancel' styles={{ root: { fontSize: 14 } }} />
             </span>
         </div>

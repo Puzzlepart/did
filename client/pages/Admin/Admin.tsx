@@ -19,7 +19,7 @@ export const Admin = () => {
                     itemKey='users'
                     headerText={resource('ADMIN.USERS')}
                     itemIcon='FabricUserFolder'
-                    containerStyle={{ padding: 10 }}>
+                    style={{ padding: 10 }}>
                     <Users />
                 </PivotItem>
                 <PivotItem
@@ -27,7 +27,7 @@ export const Admin = () => {
                     itemKey='summary'
                     headerText={resource('ADMIN.SUMMARY')}
                     itemIcon='CalendarWeek'
-                    containerStyle={{ padding: 10 }}>
+                    style={{ padding: 10 }}>
                     <AdminSummaryView />
                 </PivotItem>
             </Pivot>

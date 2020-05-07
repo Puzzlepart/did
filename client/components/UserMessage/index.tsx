@@ -15,7 +15,7 @@ export const UserMessage = (props: IUserMessageProps) => {
         <div
             id={props.id}
             className={`${styles.root} ${props.className}`}
-            containerStyle={props.containerStyle}
+            style={props.style}
             hidden={props.hidden}
             onClick={props.onClick}>
             <MessageBar

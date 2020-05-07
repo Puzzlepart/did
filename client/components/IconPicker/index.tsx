@@ -16,7 +16,7 @@ export const IconPicker = (props: IIconPickerProps) => {
     function onRenderOption(option: IDropdownOption): JSX.Element {
         return (
             <div>
-                <Icon containerStyle={{ marginRight: 8 }} iconName={option.key as string} aria-hidden='true' title={option.text} />
+                <Icon style={{ marginRight: 8 }} iconName={option.key as string} aria-hidden='true' title={option.text} />
                 <span>{option.text}</span>
             </div>
         );
@@ -25,7 +25,7 @@ export const IconPicker = (props: IIconPickerProps) => {
     function onRenderTitle([option]: IDropdownOption[]): JSX.Element {
         return (
             <div>
-                <Icon containerStyle={{ marginRight: 8 }} iconName={option.key as string} aria-hidden='true' title={option.text} />
+                <Icon style={{ marginRight: 8 }} iconName={option.key as string} aria-hidden='true' title={option.text} />
                 <span>{option.text}</span>
             </div>
         );

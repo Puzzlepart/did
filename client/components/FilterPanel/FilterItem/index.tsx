@@ -8,7 +8,7 @@ import { IFilterItemProps } from './IFilterItemProps';
 export const FilterItem = ({ filter, onFilterUpdated: filterUpdated }: IFilterItemProps) => {
     const selectedKeys = filter.selected.map(f => f.key);
     return (
-        <div key={filter.key} containerStyle={{ marginTop: 15 }}>
+        <div key={filter.key} style={{ marginTop: 15 }}>
             <h4>{filter.name}</h4>
             {filter.items.map(item => (
                 <Checkbox

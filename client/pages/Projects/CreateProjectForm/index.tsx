@@ -60,7 +60,7 @@ export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey
                 title='Customer'
                 required={true}
                 styles={{ root: { marginTop: 12, width: 450 } }}
-                containerStyle={{ width: 450 }}
+                style={{ width: 450 }}
                 onSelected={({ key }) => setModel({ ...model, customerKey: key as string })} />
             <TextField
                 styles={{ root: { marginTop: 12, width: 450 } }}
