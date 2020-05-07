@@ -40,14 +40,14 @@ export const CustomerDetails = (props: ICustomerDetailsProps) => {
                         <DefaultButton
                             hidden={!props.customer.webLink}
                             text={resource('CUSTOMERS.CUSTOMER_WEBLINK_TEXT')}
-                            onClick={() => window.location.replace(props.customer.webLink)}
+                            href={props.customer.webLink}
                             iconProps={{ iconName: 'WorkforceManagement' }}
                             disabled={loading || !!error || !props.customer.webLink}
                             />
                         <DefaultButton
                             hidden={!props.customer.externalSystemURL}
                             text={resource('CUSTOMERS.CUSTOMER_EXTERNAL_SYSTEM_URL_TEXT')}
-                            onClick={() => window.location.replace(props.customer.externalSystemURL)}
+                            href={props.customer.externalSystemURL}
                             iconProps={{ iconName: 'WorkforceManagement' }}
                             disabled={loading || !!error || !props.customer.externalSystemURL}
                             />
