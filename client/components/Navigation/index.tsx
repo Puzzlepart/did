@@ -7,6 +7,7 @@ import { UserMenu } from './UserMenu';
 
 export const Navigation = () => {
     const { user } = React.useContext(AppContext);
+    const navLinkProps = { className: styles.navLink, activeClassName: styles.active };
     return (
         <nav className={styles.root}>
             <div className={styles.container}>
@@ -15,19 +16,19 @@ export const Navigation = () => {
                 </Link>
                 <ul className={styles.nav} hidden={!user}>
                     <li className={styles.navItem}>
-                        <NavLink to='/timesheet' className={styles.navLink} activeClassName={styles.active}>{resource('NAVIGATION.TIMESHEET')}</NavLink>
+                        <NavLink to='/timesheet' {...navLinkProps}>{resource('NAVIGATION.TIMESHEET')}</NavLink>
                     </li>
                     <li className={styles.navItem}>
-                        <NavLink to='/customers' className={styles.navLink} activeClassName={styles.active}>{resource('NAVIGATION.CUSTOMERS')}</NavLink>
+                        <NavLink to='/customers' {...navLinkProps}>{resource('NAVIGATION.CUSTOMERS')}</NavLink>
                     </li>
                     <li className={styles.navItem}>
-                        <NavLink to='/projects' className={styles.navLink} activeClassName={styles.active}>{resource('NAVIGATION.PROJECTS')}</NavLink>
+                        <NavLink to='/projects' {...navLinkProps}>{resource('NAVIGATION.PROJECTS')}</NavLink>
                     </li>
                     <li className={styles.navItem}>
-                        <NavLink to='/reports' className={styles.navLink} activeClassName={styles.active}>{resource('NAVIGATION.REPORTS')}</NavLink>
+                        <NavLink to='/reports' {...navLinkProps}>{resource('NAVIGATION.REPORTS')}</NavLink>
                     </li>
                     <li className={styles.navItem}>
-                        <NavLink to='/admin' className={styles.navLink} activeClassName={styles.active}>{resource('NAVIGATION.ADMIN')}</NavLink>
+                        <NavLink to='/admin' {...navLinkProps}>{resource('NAVIGATION.ADMIN')}</NavLink>
                     </li>
                 </ul>
                 <UserMenu />
