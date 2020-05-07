@@ -12,7 +12,7 @@ import { USER_SETTINGS } from './USER_SETTINGS';
 /**
  * @category UserSettings
  */
-export const UserSettings = () => {
+export const UserSettings = (props: React.HTMLProps<HTMLDivElement>) => {
     const { user } = React.useContext(AppContext);
     const [isOpen, toggle] = React.useState<boolean>(false);
     const [updateUser] = useMutation(UPDATE_USER);
@@ -24,8 +24,8 @@ export const UserSettings = () => {
     return (
         <UserSettingsContext.Provider value={{ onUpdateUserSettings }}>
             <div className={styles.root}>
-                <a href='#' onClick={() => toggle(true)}>
-                    <span>{resource('COMMON.SETTINGS')}</span>                    
+                <a href='#' className={props.className} onClick={() => toggle(true)}>
+                    <span>{resource('COMMON.SETTINGS')}</span>
                     <Panel
                         className={styles.panel}
                         headerText={resource('COMMON.SETTINGS')}

@@ -29,9 +29,6 @@ export const Navigation = () => {
                     <li className={styles.navItem}>
                         <NavLink to='/admin' className={styles.navLink} activeClassName={styles.active}>{resource('NAVIGATION.ADMIN')}</NavLink>
                     </li>
-                    {/* <button className={styles.hamburger} type='button'>
-                        <span className={styles.icon}></span>
-                    </button> */}
                 </ul>
                 <UserMenu />
             </div>

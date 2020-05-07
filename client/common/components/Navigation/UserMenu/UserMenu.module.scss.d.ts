@@ -3,13 +3,12 @@
 interface CssExports {
   'container': string;
   'divider': string;
+  'header': string;
   'menu': string;
+  'menuItem': string;
   'root': string;
   'toggle': string;
-  'userDetail': string;
-  'userEmail': string;
   'userName': string;
-  'userSignOut': string;
 }
 export const cssExports: CssExports;
 export default cssExports;
