@@ -21,6 +21,7 @@ export const UserMenu = () => {
 
             {menuTarget && (
                 <Callout
+                    styles={{ root: { marginRight: -4 } }}
                     hidden={!menuTarget}
                     target={menuTarget}
                     onDismiss={() => setMenuTarget(null)}
