@@ -18,7 +18,7 @@ export const StatusBar = () => {
 
     const defaultProps: IUserMessageProps = {
         className: styles.message,
-        fixedCenter: 60,
+        fixedCenter: 65,
         containerStyle: { padding: '0 4px 0 4px' },
     };
 
