@@ -2,7 +2,6 @@ import { SearchProject, UserMessage } from 'common/components';
 import { getValueTyped as value } from 'helpers';
 import resource from 'i18n';
 import { Modal } from 'office-ui-fabric-react/lib/Modal';
-import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
 import * as React from 'react';
 import { useState } from 'react';
 import * as format from 'string-format';
@@ -37,21 +36,8 @@ export const ResolveProjectModal = ({ isOpen, onDismiss, onProjectSelected, even
                 style={{ marginTop: 5 }}
                 text={format(resource('TIMESHEET.EVENT_NOT_FULLY_MATCHED_TEXT'), value(event, 'customer.name', ''))} />
 
-            {event.customer && (
-                <Toggle
-                    styles={{
-                        root: { margin: '0 0 8px 0' },
-                        text: { fontSize: 12, color: 'rgb(120, 120, 120)' },
-                        label: { fontSize: 12, color: 'rgb(120, 120, 120)' },
-                    }}
-                    defaultChecked={scope}
-                    onChange={(_event, scope) => setScope(scope)}
-                    offText='All'
-                    onText={event.customer.name}
-                    label='Customer:'
-                    inlineLabel={true} />
-            )}
             <SearchProject
+                className={styles.searchProject}
                 onSelected={onProjectSelected}
                 customer={scope && event.customer}
                 placeholder={resource('PROJECTS.SEARCH_PLACEHOLDER')} />

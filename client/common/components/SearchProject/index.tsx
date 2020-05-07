@@ -21,7 +21,7 @@ export const SearchProject = (props: ISearchProjectProps) => {
     const { loading, data } = useQuery(GET_PROJECTS, { skip: !!projects, variables: { sortBy: 'name' }, fetchPolicy: 'cache-first', });
 
     React.useEffect(() => { (!loading && !!data) && setProjects(data.projects); }, [data, loading]);
- 
+
     const getSuggestions = (value: string, maxSuggestions = 5) => {
         const inputValue = value.trim().toLowerCase();
         if (inputValue.length === 0) return [];
@@ -71,7 +71,7 @@ export const SearchProject = (props: ISearchProjectProps) => {
     );
 
     return (
-        <div className={styles.root}>
+        <div className={`${props.className} ${styles.root}`}>
             <AutoSuggest
                 suggestions={suggestions}
                 onSuggestionsFetchRequested={({ value }) => setSuggestions(getSuggestions(value))}
