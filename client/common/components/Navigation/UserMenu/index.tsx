@@ -7,7 +7,7 @@ import { UserSettings } from './UserSettings';
 
 export const UserMenu = () => {
     const { user } = React.useContext(AppContext);
-    const [showMenu, setShowMenu] = React.useState<boolean>(true);
+    const [showMenu, setShowMenu] = React.useState<boolean>(false);
     
     return (
         <div className={styles.root}>
