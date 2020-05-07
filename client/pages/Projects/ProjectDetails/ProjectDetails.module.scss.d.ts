@@ -3,6 +3,7 @@
 interface CssExports {
   'actions': string;
   'buttonContainer': string;
+  'customer': string;
   'description': string;
   'name': string;
   'root': string;

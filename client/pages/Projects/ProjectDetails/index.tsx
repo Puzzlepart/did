@@ -10,6 +10,7 @@ import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
 import * as React from 'react';
 import * as excel from 'utils/exportExcel';
 import { generateColumn as col } from 'utils/generateColumn';
+import columns from './columns';
 import { CREATE_OUTLOOK_CATEGORY } from './CREATE_OUTLOOK_CATEGORY';
 import { IProjectDetailsProps } from './IProjectDetailsProps';
 import styles from './ProjectDetails.module.scss';
@@ -32,8 +33,9 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
         await excel.exportExcel(
             timeentries,
             {
-                fileName: `ApprovedTimeEntries-${key}-${new Date().getTime()}.xlsx`,
-                skip: ['id', '__typename'],
+
+                columns: columns(resource),
+                fileName: `TimeEntries-${key}-${new Date().toDateString().split(' ').join('-')}.xlsx`,
             });
     }
 
@@ -52,6 +54,7 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
     return (
         <div className={styles.root}>
             <h3 className={styles.name}>{project.name}</h3>
+            <h5 className={styles.customer}>{project.customer.name}</h5>
             {project.inactive && (
                 <UserMessage
                     text={resource('PROJECTS.PROJECT_INACTIVE_TEXT')}

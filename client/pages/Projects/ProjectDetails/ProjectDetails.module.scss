@@ -3,7 +3,12 @@
   flex-direction: column;
   .name {
     font-weight: 500;
-    margin-bottom: 8px;
+    margin-bottom: 0;
+  }
+  .customer {
+    color: #787878;
+    font-weight: 400;
+    margin: 0 0 8px 0;
   }
   .description {
     font-size: 14px;

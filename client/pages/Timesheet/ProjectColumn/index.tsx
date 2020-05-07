@@ -103,10 +103,10 @@ const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
             <div className={styles.root}>
                 <div className={styles.content}>
                     <div>
-                        <a href={`/projects#${props.event.project.id}`}>{props.event.project.name}</a>
+                        <a href={`/projects/${props.event.project.id}`}>{props.event.project.name}</a>
                     </div>
                     <div className={styles.subText}>
-                        <span>for </span><a href={`/customers#${props.event.customer.id}`}><span>{props.event.customer.name}</span></a>
+                        <span>for </span><a href={`/customers/${props.event.customer.id}`}><span>{props.event.customer.name}</span></a>
                     </div>
                 </div>
                 <ClearManualMatchButton
