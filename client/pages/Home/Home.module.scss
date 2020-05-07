@@ -1,0 +1,13 @@
+.root {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .logo {
+        width: 175px;
+    }
+
+    .motto {
+        font-size: 16px;
+    }
+}
