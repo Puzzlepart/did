@@ -22,25 +22,30 @@ export const StatusBar = () => {
             {!loading && (
                 <div className={styles.container}>
                     <UserMessage
+                        className={styles.message}
                         hidden={selectedPeriod.isConfirmed}
                         text={format(resource('TIMESHEET.PERIOD_HOURS_SUMMARY_TEXT'), getDurationDisplay(selectedPeriod.totalDuration))}
                         iconName='ReminderTime' />
                     <UserMessage
+                        className={styles.message}
                         hidden={selectedPeriod.unmatchedDuration === 0 || selectedPeriod.isConfirmed}
                         text={format(resource('TIMESHEET.HOURS_NOT_MATCHED_TEXT'), getDurationDisplay(selectedPeriod.unmatchedDuration))}
                         type={MessageBarType.warning}
                         iconName='BufferTimeBoth' />
                     <UserMessage
+                        className={styles.message}
                         hidden={selectedPeriod.unmatchedDuration > 0 || selectedPeriod.isConfirmed}
                         text={resource('TIMESHEET.ALL_HOURS_MATCHED_TEXT')}
                         type={MessageBarType.success}
                         iconName='BufferTimeBoth' />
                     <UserMessage
+                        className={styles.message}
                         hidden={!selectedPeriod.isConfirmed}
                         text={format(resource('TIMESHEET.PERIOD_CONFIRMED_TEXT'), getDurationDisplay(selectedPeriod.matchedDuration))}
                         type={MessageBarType.success}
                         iconName='CheckMark' />
                     <UserMessage
+                        className={styles.message}
                         hidden={selectedPeriod.ignoredEvents.length === 0 || selectedPeriod.isConfirmed}
                         iconName='DependencyRemove'>
                         <p>
@@ -49,12 +54,14 @@ export const StatusBar = () => {
                         </p>
                     </UserMessage>
                     <UserMessage
+                        className={styles.message}
                         hidden={selectedPeriod.errors.length === 0}
                         type={MessageBarType.severeWarning}
                         iconName='ErrorBadge'>
                         <p>{format(resource('TIMESHEET.UNRESOLVER_ERRORS_TEXT'), selectedPeriod.errors.length)}</p>
                     </UserMessage>
                     <UserMessage
+                        className={styles.message}
                         hidden={periods.length < 2}
                         iconName='SplitObject'>
                         <p>{resource('TIMESHEET.SPLIT_WEEK_TEXT')}</p>

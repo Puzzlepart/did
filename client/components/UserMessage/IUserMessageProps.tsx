@@ -1,4 +1,4 @@
-import { MessageBarType, IMessageBarProps } from 'office-ui-fabric-react/lib/MessageBar';
+import { IMessageBarProps, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 
 /**
  * @category UserMessage

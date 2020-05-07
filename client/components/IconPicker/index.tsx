@@ -32,7 +32,6 @@ export const IconPicker = (props: IIconPickerProps) => {
     };
 
     const options = getIcons(100).map(key => ({ key, text: humanize(key) }));
-    console.log(options.length);
 
     return (
         <Dropdown

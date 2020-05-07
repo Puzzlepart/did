@@ -14,7 +14,7 @@ export const UserMessage = (props: IUserMessageProps) => {
     return (
         <div
             id={props.id}
-            className={[styles.root, props.className || ''].join(' ')}
+            className={`${styles.root} ${props.className}`}
             style={props.style}
             hidden={props.hidden}
             onClick={props.onClick}>
