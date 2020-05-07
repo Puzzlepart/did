@@ -1,9 +1,10 @@
 
 import List from 'common/components/List';
 import * as React from 'react';
-import * as col from './columns';
-import { IEventListProps } from './types';
 import { withDefaultProps } from 'with-default-props';
+import * as col from './columns';
+import styles from './EventList.module.scss';
+import { IEventListProps } from './types';
 
 /**
  * @category EventList
@@ -17,7 +18,7 @@ const EventList = (props: IEventListProps): JSX.Element => {
     ];
 
     return (
-        <div style={{ marginBottom: 250 }} hidden={props.hidden}>
+        <div className={styles.root}>
             <List
                 enableShimmer={props.enableShimmer}
                 columns={columns}

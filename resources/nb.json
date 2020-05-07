@@ -38,14 +38,15 @@
       "PROJECT_INACTIVE_TEXT": "Dette prosjektet er markert som inaktivt.",
       "SEARCH_PLACEHOLDER": "Søk i prosjekter...",
       "CATEGORY_OUTLOOK_TEXT": "Dette prosjektet har en Outlook-kategori.",
-      "PROJECT_WORKSPACE_LABEL": "Prosjekt-workspace",
+      "PROJECT_WORKSPACE_LABEL": "Prosjektområde",
       "CREATE_OUTLOOK_CATEGORY_LABEL": "Lag en Outlook-kategori",
       "OUTLOOK_CATEGORY_INFO_TEXT": "Her kan du se alle prosjektene med korresponderende Outlook-kategori.",
       "NO_TIME_ENTRIES_TEXT": "Ingen timer registrert på dette prosjektet.",
       "TIME_ENTRIES_ERROR_TEXT": "En feil opppstod ved innlasting av timene for dette prosjektet.",
       "TIME_ENTRIES_LOADING_LABEL": "Laster timeføring",
       "MY_PROJECTS_TEXT": "Mine prosjekter",
-      "MY_PROJECTS_SEARCH_PLACEHOLDER": "Søk i mine prosjekter..."
+      "MY_PROJECTS_SEARCH_PLACEHOLDER": "Søk i mine prosjekter...",
+      "EXPORT_TIME_ENTIRES_TO_EXCEL_LABEL": "Eksporter timeoppføringer til Excel"
     },
     "CUSTOMERS": {
       "CUSTOMER_INACTIVE_TEXT": "Denne kunden er markert som inaktiv.",

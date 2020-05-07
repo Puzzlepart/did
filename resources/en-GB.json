@@ -45,7 +45,8 @@
       "TIME_ENTRIES_ERROR_TEXT": "An error occured loading time entries for the project.",
       "TIME_ENTRIES_LOADING_LABEL": "Loading time entries",
       "MY_PROJECTS_TEXT": "My projects",
-      "MY_PROJECTS_SEARCH_PLACEHOLDER": "Search my projects..."
+      "MY_PROJECTS_SEARCH_PLACEHOLDER": "Search my projects...",
+      "EXPORT_TIME_ENTIRES_TO_EXCEL_LABEL": "Export time entires to Excel"
     },
     "CUSTOMERS": {
       "CUSTOMER_INACTIVE_TEXT": "This customer has been marked as inactive.",

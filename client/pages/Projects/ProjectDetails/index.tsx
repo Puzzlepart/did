@@ -51,72 +51,57 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
 
     return (
         <div className={styles.root}>
-            <div className={`container ${styles.container}`}>
-                <div className={`row ${styles.row}`}>
-                    <div className='col-sm'>
-                        <h3>{project.name}</h3>
-                    </div>
+            <h3 className={styles.name}>{project.name}</h3>
+            {project.inactive && (
+                <UserMessage
+                    text={resource('PROJECTS.PROJECT_INACTIVE_TEXT')}
+                    iconName='Warning'
+                    type={MessageBarType.warning} />
+            )}
+            <div className={styles.description}>{project.description}</div>
+            <div hidden={!project.outlookCategory}>
+                <MessageBar messageBarIconProps={{ iconName: 'OutlookLogoInverse' }}>{resource('PROJECTS.CATEGORY_OUTLOOK_TEXT')}</MessageBar>
+            </div>
+            <div className={styles.actions}>
+                <div
+                    className={styles.buttonContainer}
+                    hidden={loading || !!error || !project.webLink}>
+                    <DefaultButton
+                        text={resource('PROJECTS.PROJECT_WORKSPACE_LABEL')}
+                        onClick={() => window.location.replace(project.webLink)}
+                        iconProps={{ iconName: 'WorkforceManagement' }} />
                 </div>
-                {project.inactive && (
-                    <div className={`row ${styles.row}`} style={{ marginBottom: 10 }}>
-                        <div className='col-sm'>
-                            <UserMessage text={resource('PROJECTS.PROJECT_INACTIVE_TEXT')} iconName='Warning' type={MessageBarType.warning} />
-                        </div>
-                    </div>
-                )}
-                <div className={`row ${styles.row}`}>
-                    <div className='col-sm'>
-                        <p>{project.description}</p>
-                    </div>
+                <div
+                    className={styles.buttonContainer}
+                    hidden={loading || !!error || timeentries.length === 0}>
+                    <DefaultButton
+                        text={resource('PROJECTS.EXPORT_TIME_ENTIRES_TO_EXCEL_LABEL')}
+                        iconProps={{ iconName: 'ExcelDocument' }}
+                        onClick={onExportExcel} />
                 </div>
-                <div className={`row ${styles.row}`} hidden={!project.outlookCategory}>
-                    <div className='col-sm'>
-                        <MessageBar messageBarIconProps={{ iconName: 'OutlookLogoInverse' }}>{resource('PROJECTS.CATEGORY_OUTLOOK_TEXT')}</MessageBar>
-                    </div>
-                </div>
-                <div className={`row ${styles.row}`}>
-                    <div className='col-sm'>
-                        <DefaultButton
-                            hidden={!project.webLink}
-                            text={resource('PROJECTS.PROJECT_WORKSPACE_LABEL')}
-                            onClick={() => window.location.replace(project.webLink)}
-                            iconProps={{ iconName: 'WorkforceManagement' }}
-                            disabled={loading || !!error || !project.webLink} />
-                        <DefaultButton
-                            hidden={timeentries.length === 0}
-                            text={resource('COMMON.EXPORT_TO_EXCEL_LABEL')}
-                            iconProps={{ iconName: 'ExcelDocument' }}
-                            onClick={onExportExcel}
-                            disabled={loading || !!error}
-                            style={{ marginLeft: 5 }} />
-                        <DefaultButton
-                            hidden={!!project.outlookCategory}
-                            text={resource('PROJECTS.CREATE_OUTLOOK_CATEGORY_LABEL')}
-                            iconProps={{ iconName: 'OutlookLogoInverse' }}
-                            onClick={() => onCreateCategory()}
-                            disabled={loading}
-                            style={{ marginLeft: 5 }} />
-                    </div>
-                </div>
-                <div className={`row ${styles.row}`} style={{ marginTop: 20 }}>
-                    <div className='col-sm'>
-                        {error && <UserMessage type={MessageBarType.error} text={resource('PROJECTS.TIME_ENTRIES_ERROR_TEXT')} />}
-                        {(timeentries.length === 0 && !loading) && <UserMessage text={resource('PROJECTS.NO_TIME_ENTRIES_TEXT')} />}
-                        {loading && <ProgressIndicator label={resource('PROJECTS.TIME_ENTRIES_LOADING_LABEL')} />}
-                    </div>
-                </div>
-                <div className='col-sm'>
-                    <div className='row'>
-                        {timeentries.length > 0 && (
-                            <EventList
-                                events={timeentries}
-                                additionalColumns={[col('resourceName', 'User')]}
-                                dateFormat='MMM Do YYYY HH:mm'
-                                columnWidths={{ time: 250 }} />
-                        )}
-                    </div>
+                <div
+                    className={styles.buttonContainer}
+                    hidden={loading || !!project.outlookCategory}>
+                    <DefaultButton
+                        text={resource('PROJECTS.CREATE_OUTLOOK_CATEGORY_LABEL')}
+                        iconProps={{ iconName: 'OutlookLogoInverse' }}
+                        onClick={() => onCreateCategory()} />
                 </div>
             </div>
-        </div>
+            <div>
+                {error && <UserMessage type={MessageBarType.error} text={resource('PROJECTS.TIME_ENTRIES_ERROR_TEXT')} />}
+                {(timeentries.length === 0 && !loading) && <UserMessage text={resource('PROJECTS.NO_TIME_ENTRIES_TEXT')} />}
+                {loading && <ProgressIndicator label={resource('PROJECTS.TIME_ENTRIES_LOADING_LABEL')} />}
+            </div>
+            <div>
+                {timeentries.length > 0 && (
+                    <EventList
+                        events={timeentries}
+                        additionalColumns={[col('resourceName', resource('COMMON.EMPLOYEE_LABEL'))]}
+                        dateFormat='MMM Do YYYY HH:mm'
+                        columnWidths={{ time: 250 }} />
+                )}
+            </div>
+        </div >
     );
 };

@@ -36,7 +36,6 @@ export const CustomerDetails = (props: ICustomerDetailsProps) => {
                         href={props.customer.webLink}
                         iconProps={{ iconName: 'WorkforceManagement' }} />
                 </div>
-
                 <div
                     className={styles.buttonContainer}
                     hidden={loading || !!error || !props.customer.externalSystemURL} >

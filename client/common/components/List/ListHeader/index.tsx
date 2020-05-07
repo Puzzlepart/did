@@ -19,7 +19,10 @@ export interface IListHeaderProps {
 export const ListHeader = ({ headerProps, defaultRender, commandBar }: IListHeaderProps) => {
     return (
         <Sticky stickyPosition={StickyPositionType.Header} isScrollSynced={true}>
-            <CommandBar                {...commandBar} styles={{ root: { margin: 0, padding: 0 } }} />
+            <CommandBar
+                {...commandBar}
+                hidden={commandBar.items.length === 0 && commandBar.farItems.length === 0}
+                styles={{ root: { margin: 0, padding: 0 } }} />
             {defaultRender(headerProps)}
         </Sticky>
     );
