@@ -8,13 +8,10 @@ import { UserSettings } from './UserSettings';
 export const UserMenu = () => {
     const { user } = React.useContext(AppContext);
     const [showMenu, setShowMenu] = React.useState<boolean>(false);
-    
+
     return (
         <div className={styles.root}>
             <div className={styles.container}>
-                <a className={styles.toggle} href='#'>
-                    <span className={styles.toggle} onClick={() => setShowMenu(!showMenu)}>👨‍💼</span>
-                </a>
                 {showMenu && (
                     <FadeIn className={styles.menu}>
                         <div className={`${styles.menuItem} ${styles.userName}`}>{user.fullName}</div>
@@ -26,6 +23,7 @@ export const UserMenu = () => {
                         <a href='/auth/signout' className={styles.menuItem}>{resource('COMMON.LOG_OUT_TEXT')}</a>
                     </FadeIn>
                 )}
+                <a className={styles.toggle} href='#' onClick={() => setShowMenu(!showMenu)}>👨‍💼</a>
             </div>
         </div>
     );
