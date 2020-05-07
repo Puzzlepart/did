@@ -1,6 +1,5 @@
 /* eslint-disable react/display-name */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-
 import { stringIsNullOrEmpty } from '@pnp/common';
 import { UserMessage } from 'components/UserMessage';
 import resource from 'i18n';
@@ -74,24 +73,13 @@ const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
                     text={resource('TIMESHEET.NO_PROJECT_MATCH_FOUND_TEXT')}
                     actions={
                         <div>
-                            <MessageBarButton
-                                text={resource('TIMESHEET.RESOLVE_PROJECT_BUTTON_LABEL')}
-                                iconProps={{ iconName: 'ReviewResponseSolid' }}
-                                onClick={() => setShowResolveModal(true)} />
+                            <ResolveProjectModal event={props.event} />
                             <MessageBarButton
                                 text={resource('TIMESHEET.IGNORE_EVENT_BUTTON_LABEL')}
                                 iconProps={{ iconName: 'Blocked2' }}
                                 onClick={() => dispatch({ type: 'IGNORE_EVENT', payload: props.event.id })} />
                         </div>
                     } />
-                <ResolveProjectModal
-                    event={props.event}
-                    onDismiss={() => setShowResolveModal(false)}
-                    isOpen={showResolveModal}
-                    onProjectSelected={project => {
-                        setShowResolveModal(false);
-                        dispatch({ type: 'MANUAL_MATCH', payload: { event: props.event, project } })
-                    }} />
             </div>
         );
     }

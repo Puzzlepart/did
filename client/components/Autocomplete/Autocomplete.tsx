@@ -3,7 +3,8 @@ import { FocusZone, FocusZoneDirection } from 'office-ui-fabric-react/lib/FocusZ
 import { List } from 'office-ui-fabric-react/lib/List';
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import * as React from 'react';
-import { IAutocompleteProps, IAutocompleteState, ISuggestionItem, SuggestionListItemStyle, SuggestionListStyle } from '.';
+import { IAutocompleteProps, IAutocompleteState, ISuggestionItem } from '.';
+import styles from './Autocomplete.module.scss';
 
 const KeyCodes = {
   tab: 9 as 9,
@@ -15,7 +16,14 @@ const KeyCodes = {
 }
 type ISearchSuggestionsProps = IAutocompleteProps;
 
-export class Autocomplete extends React.Component<ISearchSuggestionsProps, IAutocompleteState> {
+export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsProps, IAutocompleteState> {
+  public static defaultProps: Partial<ISearchSuggestionsProps> = {
+    classNames: {
+      suggestionsCallout: styles.callout,
+      suggestionContainer: styles.suggestionContainer,
+      suggestion: styles.suggestion
+    }
+  };
   private _containerElement = React.createRef<HTMLDivElement>();
 
   constructor(props: ISearchSuggestionsProps) {
@@ -26,7 +34,7 @@ export class Autocomplete extends React.Component<ISearchSuggestionsProps, IAuto
     };
   }
 
-  private handleClick = (item: ISuggestionItem) => {
+  private handleClick = (item: ISuggestionItem<T>) => {
     this.props.onSelected(item);
     this.setState({ searchText: item.displayValue, isSuggestionDisabled: false });
   }
@@ -70,6 +78,7 @@ export class Autocomplete extends React.Component<ISearchSuggestionsProps, IAuto
     return (
       <Callout
         id='SuggestionContainer'
+        className={this.props.classNames.suggestionsCallout}
         gapSpace={2}
         coverTarget={false}
         alignTargetEdge={true}
@@ -100,20 +109,24 @@ export class Autocomplete extends React.Component<ISearchSuggestionsProps, IAuto
   private onRenderCell = (item: any) => {
     if (item.key !== -1) {
       return (
-        <div key={item.key}
-          className={SuggestionListItemStyle.root}
+        <div
+          id={`sc_${item.key}`}
           data-is-focusable={true}
+          className={this.props.classNames.suggestionContainer}
           onKeyDown={(ev: React.KeyboardEvent<HTMLElement>) => this.handleListItemKeyDown(ev, item)}>
-          <div id={'link' + item.key}
-            style={SuggestionListStyle()}
+          <div
+            id={`s_${item.key}`}
+            className={this.props.classNames.suggestion}
             onClick={() => this.handleClick(item)}>
-            {item.displayValue}
+            <div>{item.displayValue}</div>
           </div>
         </div>
       );
     } else {
       return (
-        <div key={item.key} data-is-focusable={true}>
+        <div
+          key={item.key}
+          data-is-focusable={true}>
           {item.displayValue}
         </div>
       );
@@ -128,7 +141,7 @@ export class Autocomplete extends React.Component<ISearchSuggestionsProps, IAuto
     this.setState({ isSuggestionDisabled: false });
   }
 
-  private suggestedTagsFiltered = (list: ISuggestionItem[]) => {
+  private suggestedTagsFiltered = (list: ISuggestionItem<T>[]) => {
     let suggestedTags = list.filter(tag => tag.searchValue.toLowerCase().includes(this.state.searchText.toLowerCase()));
     suggestedTags = suggestedTags.sort((a, b) => a.searchValue.localeCompare(b.searchValue));
     if (suggestedTags.length === 0) {
@@ -141,7 +154,7 @@ export class Autocomplete extends React.Component<ISearchSuggestionsProps, IAuto
     return suggestedTags;
   }
 
-  protected handleListItemKeyDown = (ev: React.KeyboardEvent<HTMLElement>, item: ISuggestionItem): void => {
+  protected handleListItemKeyDown = (ev: React.KeyboardEvent<HTMLElement>, item: ISuggestionItem<T>): void => {
     const keyCode = ev.which;
     switch (keyCode) {
       case KeyCodes.enter:

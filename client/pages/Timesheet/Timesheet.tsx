@@ -15,7 +15,7 @@ import ProjectColumn from './ProjectColumn';
 import { StatusBar } from './StatusBar';
 import { SummaryView, SummaryViewType } from './SummaryView';
 import styles from './Timesheet.module.scss';
-import { TimesheetContext } from './TimesheetContext';
+import { ITimesheetContext, TimesheetContext } from './TimesheetContext';
 import { TimesheetPeriod } from './TimesheetPeriod';
 import { reducer } from './TimesheetReducer';
 import { TimesheetScope } from './TimesheetScope';
@@ -62,8 +62,10 @@ export const Timesheet = () => {
         unconfirmPeriod({ variables: state.selectedPeriod.scope }).then(timesheetQuery.refetch);
     }
 
+    const contextValue: ITimesheetContext = React.useMemo(() => ({ ...state, dispatch }), [state]);
+
     return (
-        <TimesheetContext.Provider value={{ ...state, dispatch }}>
+        <TimesheetContext.Provider value={contextValue}>
             <div className={styles.root}>
                 <ActionBar {...{ onConfirmPeriod, onUnconfirmPeriod }} />
                 <Pivot

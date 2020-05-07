@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/react-hooks';
-import { IconPicker, useMessage, UserMessage } from 'components';
+import { IconPicker, SearchCustomer, useMessage, UserMessage } from 'components';
 import resource from 'i18n';
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button';
 import { Label } from 'office-ui-fabric-react/lib/Label';
@@ -11,7 +11,6 @@ import styles from './CreateProjectForm.module.scss';
 import CREATE_PROJECT from './CREATE_PROJECT';
 import { ICreateProjectFormModel } from './ICreateProjectFormModel';
 import { ICreateProjectFormValidation } from './ICreateProjectFormValidation';
-import { SearchCustomer } from './SearchCustomer';
 
 const initialModel = { customerKey: '', projectKey: '', name: '', description: '', icon: 'Page' };
 

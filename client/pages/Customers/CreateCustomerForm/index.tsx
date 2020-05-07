@@ -6,6 +6,7 @@ import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import * as React from 'react';
 import { useState } from 'react';
+import styles from './CreateCustomerForm.module.scss';
 import CREATE_CUSTOMER from './CREATE_CUSTOMER';
 import { ICreateCustomerFormModel } from './ICreateCustomerFormModel';
 import { ICreateCustomerFormProps } from './ICreateCustomerFormProps';
@@ -20,9 +21,6 @@ export const CreateCustomerForm = ({ initialModel = { key: '', name: '', descrip
     const [model, setModel] = useState<ICreateCustomerFormModel>(initialModel);
     const [addCustomer, { loading }] = useMutation(CREATE_CUSTOMER);
 
-    /**
-     * Validate form
-     */
     const validateForm = (): ICreateCustomerFormValidation => {
         const errors: { [key: string]: string } = {};
         if (model.name.length < 2) errors.name = 'Name should be at least 2 characters long.';
@@ -30,9 +28,6 @@ export const CreateCustomerForm = ({ initialModel = { key: '', name: '', descrip
         return { errors, invalid: Object.keys(errors).length > 0 };
     }
 
-    /**
-     * On form submit
-     */
     const onFormSubmit = async () => {
         const _validation = validateForm();
         if (_validation.invalid) {
@@ -51,44 +46,40 @@ export const CreateCustomerForm = ({ initialModel = { key: '', name: '', descrip
     }
 
     return (
-        <>
+        <div className={styles.root}>
             {message && <UserMessage containerStyle={{ marginTop: 12, marginBottom: 12, width: 450 }} text={message.text} type={message.type} />}
             <TextField
-                styles={{ root: { marginTop: 12, width: 450 } }}
+                className={styles.inputField}
                 label={resource('COMMON.KEY_LABEL')}
-                description='Customer key. 3-8 characters, all uppercase.'
-                title='Customer key. 3-8 characters, all uppercase.'
+                description={resource('CUSTOMERS.CUSTOMER_KEY_DESCRIPTION')}
                 required={true}
                 errorMessage={validation.errors.key}
                 onChange={(_event, key) => setModel({ ...model, key })}
                 value={model.key} />
             <TextField
-                styles={{ root: { marginTop: 12, width: 450 } }}
+                className={styles.inputField}
                 label={resource('COMMON.NAME_LABEL')}
-                description='Name of the customer.'
-                title='Name of the customer.'
                 required={true}
                 errorMessage={validation.errors.name}
                 onChange={(_event, name) => setModel({ ...model, name })}
                 value={model.name} />
             <TextField
-                styles={{ root: { marginTop: 12, width: 450 }, field: { height: 180 } }}
-                label='Description'
-                title='Description'
+                className={styles.inputField}
+                label={resource('COMMON.DESCRIPTION_LABEL')}
                 multiline={true}
                 errorMessage={validation.errors.description}
                 onChange={(_event, description) => setModel({ ...model, description })}
                 value={model.description} />
             <IconPicker
-                styles={{ root: { marginTop: 12, width: 300 } }}
+                className={styles.iconPicker}
                 options={undefined}
                 onChange={(_event, opt) => setModel({ ...model, icon: opt.key as string })} />
             <PrimaryButton
                 styles={{ root: { marginTop: 16 } }}
-                text='Add'
+                text={resource('COMMON.ADD')}
                 iconProps={{ iconName: 'CirclePlus' }}
                 onClick={onFormSubmit}
                 disabled={loading || !!message} />
-        </>
+        </div>
     );
 }

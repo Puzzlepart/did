@@ -1,3 +1,4 @@
+import resource from 'i18n';
 import { Dropdown, IDropdownOption, IDropdownProps } from 'office-ui-fabric-react/lib/Dropdown';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import * as React from 'react';
@@ -35,9 +36,10 @@ export const IconPicker = (props: IIconPickerProps) => {
 
     return (
         <Dropdown
+            className={props.className}
             styles={props.styles}
-            label='Icon'
-            title='Icon'
+            label={resource('COMMON.ICON_LABEL')}
+            title={resource('COMMON.ICON_LABEL')}
             options={options}
             defaultValue={props.defaultValue}
             onChange={props.onChange}

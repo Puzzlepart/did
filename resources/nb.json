@@ -46,14 +46,19 @@
       "TIME_ENTRIES_LOADING_LABEL": "Laster timeføring",
       "MY_PROJECTS_TEXT": "Mine prosjekter",
       "MY_PROJECTS_SEARCH_PLACEHOLDER": "Søk i mine prosjekter...",
-      "EXPORT_TIME_ENTIRES_TO_EXCEL_LABEL": "Eksporter timeoppføringer til Excel"
+      "EXPORT_TIME_ENTIRES_TO_EXCEL_LABEL": "Eksporter timeoppføringer til Excel",
+      "PROJECT_KEY_DESCRIPTION": "En unik identifikator for prosjektet. Holdt det kort, maks 8 tegn.",
+      "NAME_FORM_VALIDATION": "Prosjektnavnet må være minst 2 tegn langt.",
+      "KEY_FORM_VALIDATION": "Prosjektnøkkelen må være mellom 3 og 8 tegn lang, og bare store bokstaver.",
+      "CREATE_SUCCESS_MESSAGE": "Prosjektet **{0}** ble opprettet."
     },
     "CUSTOMERS": {
       "CUSTOMER_INACTIVE_TEXT": "Denne kunden er markert som inaktiv.",
       "CUSTOMER_DELETE_BUTTON_LABEL": "Slett kunde",
       "CUSTOMER_DELETE_CONFIRMATION_TEXT": "Slettet kunde {0} og tilhørende prosjekter.",
       "CUSTOMER_WEBLINK_TEXT": "Webside",
-      "CUSTOMER_EXTERNAL_SYSTEM_URL_TEXT": "Eksternt LOB-system"
+      "CUSTOMER_EXTERNAL_SYSTEM_URL_TEXT": "Eksternt LOB-system",
+      "CUSTOMER_KEY_DESCRIPTION": "En unik identifikator for kunden. Holdt det kort, maks 8 tegn."
     },
     "ADMIN": {
       "USERS": "Brukere",
@@ -69,6 +74,7 @@
       "NO_ENTRIES_TEXT": "Det er ingen bekreftede tidsoppføringer på dette tidspunktet."
     },
     "COMMON": {
+      "ADD": "Legg til",
       "SEARCH": "Søk",
       "SEARCH_PLACEHOLDER": "Søk...",
       "GENERIC_ERROR_TEXT": "En feil oppstod.",
@@ -80,6 +86,8 @@
       "LANGUAGE": "Språk",
       "KEY_LABEL": "Nøkkel",
       "NAME_LABEL": "Navn",
+      "DESCRIPTION_LABEL": "Beskrivelse",
+      "ICON_LABEL": "Ikon",
       "EXPORT_CURRENT_VIEW": "Eksporter visning",
       "MONTH_LABEL": "Måned",
       "WEEK_NUMER_LABEL": "Ukenummer",

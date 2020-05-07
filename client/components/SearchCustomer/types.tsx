@@ -1,4 +1,4 @@
-import { ICustomer } from 'interfaces';
+import { ICustomer } from 'interfaces/ICustomer';
 import { ISearchBoxProps } from 'office-ui-fabric-react/lib/SearchBox';
 
 /**

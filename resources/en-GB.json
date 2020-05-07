@@ -46,14 +46,19 @@
       "TIME_ENTRIES_LOADING_LABEL": "Loading time entries",
       "MY_PROJECTS_TEXT": "My projects",
       "MY_PROJECTS_SEARCH_PLACEHOLDER": "Search my projects...",
-      "EXPORT_TIME_ENTIRES_TO_EXCEL_LABEL": "Export time entires to Excel"
+      "EXPORT_TIME_ENTIRES_TO_EXCEL_LABEL": "Export time entires to Excel",
+      "PROJECT_KEY_DESCRIPTION": "A unique identifier for the project. Keep it short, maximum 8 characters.",
+      "NAME_FORM_VALIDATION": "Name should be at least 2 characters long.",
+      "KEY_FORM_VALIDATION": "Project key should be between 3 and 8 characters long, and all uppercase.",
+      "CREATE_SUCCESS_MESSAGE": "The project **{0}** was succesfully created."
     },
     "CUSTOMERS": {
       "CUSTOMER_INACTIVE_TEXT": "This customer has been marked as inactive.",
       "CUSTOMER_DELETE_BUTTON_LABEL": "Delete customer",
       "CUSTOMER_DELETE_CONFIRMATION_TEXT": "The customer {0} and connected projects was deleted.",
       "CUSTOMER_WEBLINK_TEXT": "Website",
-      "CUSTOMER_EXTERNAL_SYSTEM_URL_TEXT": "External LOB system"
+      "CUSTOMER_EXTERNAL_SYSTEM_URL_TEXT": "External LOB system",
+      "CUSTOMER_KEY_DESCRIPTION": "A unique identifier for the customer. Keep it short, maximum 8 characters."
     },
     "ADMIN": {
       "USERS": "Users",
@@ -69,6 +74,7 @@
       "NO_ENTRIES_TEXT": "There's no confirmed time entries at this time."
     },
     "COMMON": {
+      "ADD": "Add",
       "SEARCH": "Search",
       "SEARCH_PLACEHOLDER": "Search...",
       "GENERIC_ERROR_TEXT": "An error occured.",
@@ -79,7 +85,9 @@
       "SETTINGS": "Settings",
       "LANGUAGE": "Language",
       "KEY_LABEL": "Key",
-      "NAME_LABEL": "Label",
+      "NAME_LABEL": "Name",
+      "DESCRIPTION_LABEL": "Description",
+      "ICON_LABEL": "Icon",
       "EXPORT_CURRENT_VIEW": "Export current view",
       "MONTH_LABEL": "Month",
       "WEEK_NUMER_LABEL": "Week number",
