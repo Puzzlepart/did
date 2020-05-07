@@ -13,9 +13,6 @@ export const Navigation = () => {
                 <Link to='/' className={styles.logo}>
                     <img src='/images/did365navlogobeta.png' />
                 </Link>
-                <button className={styles.hamburger} type='button'>
-                    <span className={styles.icon}></span>
-                </button>
                 <ul className={styles.nav} hidden={!user}>
                     <li className={styles.navItem}>
                         <NavLink to='/timesheet' className={styles.navLink} activeClassName={styles.active}>{resource('NAVIGATION.TIMESHEET')}</NavLink>
@@ -32,8 +29,11 @@ export const Navigation = () => {
                     <li className={styles.navItem}>
                         <NavLink to='/admin' className={styles.navLink} activeClassName={styles.active}>{resource('NAVIGATION.ADMIN')}</NavLink>
                     </li>
-                    <UserMenu />
+                    {/* <button className={styles.hamburger} type='button'>
+                        <span className={styles.icon}></span>
+                    </button> */}
                 </ul>
+                    <UserMenu />
             </div>
         </nav>
     );
