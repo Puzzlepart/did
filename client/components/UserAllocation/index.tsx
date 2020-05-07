@@ -47,22 +47,20 @@ export const UserAllocation = (props: IUserAllocationProps): JSX.Element => {
                 const title = props.charts[exp];
                 const data = GetAllocation(props.entries, exp);
                 return (
-                    <div className='row' key={exp}>
-                        <div className={`${styles.chart} col-sm`}>
-                            <div className={styles.title}>{title}</div>
-                            <BarChart
-                                width={dimensions.width}
-                                height={dimensions.height}
-                                data={data}
-                                margin={{ left: -25 }}>
-                                <CartesianGrid strokeDasharray='3 3' />
-                                <XAxis dataKey='name' />
-                                <YAxis />
-                                <Tooltip />
-                                <Legend />
-                                <Bar dataKey='hours' name='Hours' fill='#8884d8' />
-                            </BarChart>
-                        </div>
+                    <div className={styles.chart} key={exp}>
+                        <div className={styles.title}>{title}</div>
+                        <BarChart
+                            width={dimensions.width}
+                            height={dimensions.height}
+                            data={data}
+                            margin={{ left: -25 }}>
+                            <CartesianGrid strokeDasharray='3 3' />
+                            <XAxis dataKey='name' />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Bar dataKey='hours' name='Hours' fill='#8884d8' />
+                        </BarChart>
                     </div>
                 )
             })}
