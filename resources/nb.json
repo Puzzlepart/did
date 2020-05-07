@@ -50,7 +50,9 @@
     "CUSTOMERS": {
       "CUSTOMER_INACTIVE_TEXT": "Denne kunden er markert som inaktiv.",
       "CUSTOMER_DELETE_BUTTON_LABEL": "Slett kunde",
-      "CUSTOMER_DELETE_CONFIRMATION_TEXT": "Slettet kunde {0} og tilhørende prosjekter."
+      "CUSTOMER_DELETE_CONFIRMATION_TEXT": "Slettet kunde {0} og tilhørende prosjekter.",
+      "CUSTOMER_WEBLINK_TEXT": "Webside",
+      "CUSTOMER_EXTERNAL_SYSTEM_URL_TEXT": "Eksternt LOB-system"
     },
     "ADMIN": {
       "USERS": "Brukere",
