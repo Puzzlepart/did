@@ -9,30 +9,32 @@ export const Navigation = () => {
     const { user } = React.useContext(AppContext);
     return (
         <nav className={styles.root}>
-            <Link to='/' className={styles.logo}>
-                <img src='/images/did365navlogobeta.png' />
-            </Link>
-            <button className={styles.hamburger} type='button'>
-                <span className={styles.icon}></span>
-            </button>
-            <ul className={styles.nav} hidden={!user}>
-                <li className={styles.navItem}>
-                    <NavLink to='/timesheet' className={styles.navLink}>{resource('NAVIGATION.TIMESHEET')}</NavLink>
-                </li>
-                <li className={styles.navItem}>
-                    <NavLink to='/customers' className={styles.navLink}>{resource('NAVIGATION.CUSTOMERS')}</NavLink>
-                </li>
-                <li className={styles.navItem}>
-                    <NavLink to='/projects' className={styles.navLink}>{resource('NAVIGATION.PROJECTS')}</NavLink>
-                </li>
-                <li className={styles.navItem}>
-                    <NavLink to='/reports' className={styles.navLink}>{resource('NAVIGATION.REPORTS')}</NavLink>
-                </li>
-                <li className={styles.navItem}>
-                    <NavLink to='/admin' className={styles.navLink}>{resource('NAVIGATION.ADMIN')}</NavLink>
-                </li>
-                <UserMenu />
-            </ul>
+            <div className={styles.container}>
+                <Link to='/' className={styles.logo}>
+                    <img src='/images/did365navlogobeta.png' />
+                </Link>
+                <button className={styles.hamburger} type='button'>
+                    <span className={styles.icon}></span>
+                </button>
+                <ul className={styles.nav} hidden={!user}>
+                    <li className={styles.navItem}>
+                        <NavLink to='/timesheet' className={styles.navLink} activeClassName={styles.active}>{resource('NAVIGATION.TIMESHEET')}</NavLink>
+                    </li>
+                    <li className={styles.navItem}>
+                        <NavLink to='/customers' className={styles.navLink} activeClassName={styles.active}>{resource('NAVIGATION.CUSTOMERS')}</NavLink>
+                    </li>
+                    <li className={styles.navItem}>
+                        <NavLink to='/projects' className={styles.navLink} activeClassName={styles.active}>{resource('NAVIGATION.PROJECTS')}</NavLink>
+                    </li>
+                    <li className={styles.navItem}>
+                        <NavLink to='/reports' className={styles.navLink} activeClassName={styles.active}>{resource('NAVIGATION.REPORTS')}</NavLink>
+                    </li>
+                    <li className={styles.navItem}>
+                        <NavLink to='/admin' className={styles.navLink} activeClassName={styles.active}>{resource('NAVIGATION.ADMIN')}</NavLink>
+                    </li>
+                    <UserMenu />
+                </ul>
+            </div>
         </nav>
     );
 }

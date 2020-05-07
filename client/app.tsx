@@ -9,9 +9,9 @@ const App = (context: IAppContext): JSX.Element => {
     return (
         <AppContext.Provider value={context}>
             <Router>
-                <div>
+                <div className={styles.root}>
                     <Navigation />
-                    <div className={styles.root}>
+                    <div className={styles.container}>
                         <Switch>
                             <Route path='/timesheet'>
                                 <Timesheet />

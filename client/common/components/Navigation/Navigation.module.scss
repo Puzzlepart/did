@@ -1,8 +1,38 @@
 .root {
     width: 100%;
-    display: inline-flex;
     height: 55px;
-    background: #333;
+    background: #343a40;
+
+    .container {
+        max-width: 1440px;
+        margin: auto;
+        display: flex;
+        height: 100%;
+    }
+
+    @media (min-width: 576px) {
+        .container {
+            max-width: 540px;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .container {
+            max-width: 720px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .container {
+            max-width: 960px;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .container {
+            max-width: 1140px;
+        }
+    }
 
     .hamburger {
         color: #fff;
@@ -18,10 +48,7 @@
         flex-direction: row;
         justify-content: space-evenly;
         width: 500px;
-        height: 100%;
-        padding: 0;
-        margin-top: 0;
-        margin-bottom: 0;
+        padding-left: 0;
 
         .navItem {
             color: red;
@@ -31,14 +58,14 @@
 
             .navLink {
                 display: flex;
-                color: #f1fafa;
-                font-weight: 400;
-                font-family: Helvetica, Arial, sans-serif;
+                color: #fff;
+                font-weight: 500;
+                font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
                 font-size: 14px;
                 text-decoration: none;
-                letter-spacing: .05rem;
 
-                &:hover {
+                &:hover,
+                &.active {
                     color: #bbb;
                 }
             }
@@ -47,10 +74,10 @@
 
     .logo {
         align-self: center;
-        padding-left: 10px;
 
         img {
             height: 37px;
+            margin-top: 5px;
         }
     }
 }
