@@ -1,9 +1,9 @@
 import { ICustomer } from 'interfaces';
-import { ITextFieldProps } from 'office-ui-fabric-react/lib/TextField';
+import { ISearchBoxProps } from 'office-ui-fabric-react/lib/SearchBox';
 
 /**
  * @category Projects
  */
-export interface ISearchCustomerProps extends ITextFieldProps {
+export interface ISearchCustomerProps extends ISearchBoxProps {
     onSelected: (customer: ICustomer) => void;
 }

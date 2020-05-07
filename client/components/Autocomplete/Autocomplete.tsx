@@ -27,7 +27,7 @@ export class Autocomplete extends React.Component<ISearchSuggestionsProps, IAuto
   }
 
   private handleClick = (item: ISuggestionItem) => {
-    this.props.suggestionCallback(item);
+    this.props.onSelected(item);
     this.setState({ searchText: item.displayValue, isSuggestionDisabled: false });
   }
 
@@ -46,7 +46,9 @@ export class Autocomplete extends React.Component<ISearchSuggestionsProps, IAuto
           value={this.state.searchText}
           className={this.props.className}
           placeholder={this.props.placeholder}
-          onSearch={newValue => this.onSearch(newValue)}
+          disabled={this.props.disabled}
+          onSearch={this.onSearch}
+          onClear={this.props.onClear}
           onChange={(_event, searchText) => {
             searchText.trim() !== ''
               ? this.showSuggestionCallOut()
@@ -60,11 +62,11 @@ export class Autocomplete extends React.Component<ISearchSuggestionsProps, IAuto
   }
 
   private onSearch(enteredEntityValue: string) {
+    if (!this.props.searchCallback) return;
     this.props.searchCallback(enteredEntityValue.trim());
   }
 
   private renderSuggestions = () => {
-    console.log(this._containerElement);
     return (
       <Callout
         id='SuggestionContainer'
