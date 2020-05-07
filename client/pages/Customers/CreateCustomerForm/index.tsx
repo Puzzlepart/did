@@ -52,7 +52,7 @@ export const CreateCustomerForm = ({ initialModel = { key: '', name: '', descrip
 
     return (
         <>
-            {message && <UserMessage style={{ marginTop: 12, marginBottom: 12, width: 450 }} text={message.text} type={message.type} />}
+            {message && <UserMessage containerStyle={{ marginTop: 12, marginBottom: 12, width: 450 }} text={message.text} type={message.type} />}
             <TextField
                 styles={{ root: { marginTop: 12, width: 450 } }}
                 label={resource('COMMON.KEY_LABEL')}

@@ -6,7 +6,7 @@ import * as React from 'react';
  */
 export const ScrollablePaneWrapper = ({ children, condition, height }) => condition ?
     (
-        <div style={{ position: 'relative', height }}>
+        <div containerStyle={{ position: 'relative', height }}>
             <ScrollablePane scrollbarVisibility={ScrollbarVisibility.auto} styles={{ contentContainer: { overflowX: 'hidden' } }}>
                 {children}
             </ScrollablePane>

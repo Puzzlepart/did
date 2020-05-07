@@ -69,7 +69,7 @@ const List = (props: IListProps) => {
     }
 
     return (
-        <div style={{ marginBottom: 25 }} hidden={props.hidden}>
+        <div containerStyle={{ marginBottom: 25 }} hidden={props.hidden}>
             <ScrollablePaneWrapper condition={!!props.height} height={props.height}>
                 <ShimmeredDetailsList
                     setKey={'list_selection'}

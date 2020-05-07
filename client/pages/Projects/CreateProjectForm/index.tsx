@@ -53,14 +53,14 @@ export const CreateProjectForm = ({ initialModel = { customerKey: '', projectKey
 
     return (
         <>
-            {message && <UserMessage {...message} style={{ marginTop: 12, marginBottom: 12, width: 450 }} />}
+            {message && <UserMessage {...message} containerStyle={{ marginTop: 12, marginBottom: 12, width: 450 }} />}
             <SearchCustomer
                 label='Customer'
                 placeholder='Search customer...'
                 title='Customer'
                 required={true}
                 styles={{ root: { marginTop: 12, width: 450 } }}
-                style={{ width: 450 }}
+                containerStyle={{ width: 450 }}
                 onSelected={({ key }) => setModel({ ...model, customerKey: key as string })} />
             <TextField
                 styles={{ root: { marginTop: 12, width: 450 } }}
