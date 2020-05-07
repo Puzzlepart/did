@@ -1,5 +1,6 @@
 
-import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
+import { IMessageBarStyleProps, IMessageBarStyles, MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
+import { IStyleFunctionOrObject } from 'office-ui-fabric-react/lib/Utilities';
 import * as React from 'react';
 import ReactMarkdown from 'react-markdown/with-html';
 import { IUserMessageProps } from './IUserMessageProps';
@@ -11,6 +12,17 @@ import styles from './UserMessage.module.scss';
  * @category UserMessage
  */
 export const UserMessage = (props: IUserMessageProps) => {
+    const _styles: IStyleFunctionOrObject<IMessageBarStyleProps, IMessageBarStyles> = {};
+
+    if (props.fixedCenter) {
+        _styles.root = {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: props.fixedCenter,
+        };
+    }
+
     return (
         <div
             id={props.id}
@@ -19,6 +31,7 @@ export const UserMessage = (props: IUserMessageProps) => {
             hidden={props.hidden}
             onClick={props.onClick}>
             <MessageBar
+                styles={_styles}
                 isMultiline={props.isMultiline}
                 messageBarType={props.type}
                 messageBarIconProps={props.iconName && { iconName: props.iconName }}

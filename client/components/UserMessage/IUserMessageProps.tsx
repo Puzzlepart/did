@@ -28,11 +28,16 @@ export interface IUserMessageProps extends IMessageBarProps {
 
     /**
      * Icon to use if not default for the type
-     */ 
+     */
     iconName?: string;
 
     /**
      * Container style
      */
     containerStyle?: React.CSSProperties;
+
+    /**
+     * To flex the message center, speficy a fixed height
+     */
+    fixedCenter?: number;
 }
