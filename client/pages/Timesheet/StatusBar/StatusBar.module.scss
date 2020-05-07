@@ -1,4 +1,15 @@
 .root {
   min-height: 40px;
   margin: 10px -10px 0 -10px;
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    > div {
+      flex-grow: 1;
+      flex-basis: 0;
+      justify-content: space-evenly;
+      margin-right: 8px;
+    }
+  }
 }
