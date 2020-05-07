@@ -1,5 +1,6 @@
 import { AppContext } from 'AppContext';
 import resource from 'i18n';
+import { Callout, Target } from 'office-ui-fabric-react/lib/Callout';
 import * as React from 'react';
 import FadeIn from 'react-fade-in';
 import styles from './UserMenu.module.scss';
@@ -7,12 +8,23 @@ import { UserSettings } from './UserSettings';
 
 export const UserMenu = () => {
     const { user } = React.useContext(AppContext);
-    const [showMenu, setShowMenu] = React.useState<boolean>(false);
+    const [menuTarget, setMenuTarget] = React.useState<Target>(null);
 
     return (
         <div className={styles.root}>
             <div className={styles.container}>
-                {showMenu && (
+                <a
+                    className={styles.toggle}
+                    href='#'
+                    onClick={event => setMenuTarget(event.currentTarget)}>👨‍💼</a>
+            </div>
+
+            {menuTarget && (
+                <Callout
+                    hidden={!menuTarget}
+                    target={menuTarget}
+                    onDismiss={() => setMenuTarget(null)}
+                    gapSpace={8}>
                     <FadeIn className={styles.menu}>
                         <div className={`${styles.menuItem} ${styles.userName}`}>{user.fullName}</div>
                         <div className={styles.menuItem}>{user.email}</div>
@@ -22,9 +34,8 @@ export const UserMenu = () => {
                         <div className={styles.divider}></div>
                         <a href='/auth/signout' className={styles.menuItem}>{resource('COMMON.LOG_OUT_TEXT')}</a>
                     </FadeIn>
-                )}
-                <a className={styles.toggle} href='#' onClick={() => setShowMenu(!showMenu)}>👨‍💼</a>
-            </div>
+                </Callout>
+            )}
         </div>
     );
 }
