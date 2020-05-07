@@ -2,6 +2,9 @@
   padding: 0;
 }
 
-.inputContainer {
-  margin: 5px 0 5px 0;
+.root {
+  font-size: 12px;
+  .inputContainer {
+    margin: 5px 0 5px 0;
+  }
 }

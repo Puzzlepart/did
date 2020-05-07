@@ -9,13 +9,10 @@ import styles from './UserSettings.module.scss';
 import { UserSettingsContext } from './UserSettingsContext';
 import { USER_SETTINGS } from './USER_SETTINGS';
 
-export type IUserSettingsProps = React.HTMLProps<HTMLDivElement>
-
-
 /**
  * @category UserSettings
  */
-export const UserSettings = (props: IUserSettingsProps) => {
+export const UserSettings = () => {
     const { user } = React.useContext(AppContext);
     const [isOpen, toggle] = React.useState<boolean>(false);
     const [updateUser] = useMutation(UPDATE_USER);
@@ -26,25 +23,24 @@ export const UserSettings = (props: IUserSettingsProps) => {
 
     return (
         <UserSettingsContext.Provider value={{ onUpdateUserSettings }}>
-            <a
-                href='#'
-                className={props.className}
-                onClick={() => toggle(true)}>
-                <span>{resource('COMMON.SETTINGS')}</span>
-                <Panel
-                    className={styles.panel}
-                    headerText={resource('COMMON.SETTINGS')}
-                    isOpen={isOpen}
-                    onDismiss={() => toggle(false)}
-                    isLightDismiss={true}>
-                    {[...USER_SETTINGS(resource)].map((s, idx) => (
-                        <UserSettingInput
-                            key={idx}
-                            user={user}
-                            setting={s} />
-                    ))}
-                </Panel>
-            </a>
+            <div className={styles.root}>
+                <a href='#' onClick={() => toggle(true)}>
+                    <span>{resource('COMMON.SETTINGS')}</span>                    
+                    <Panel
+                        className={styles.panel}
+                        headerText={resource('COMMON.SETTINGS')}
+                        isOpen={isOpen}
+                        onDismiss={() => toggle(false)}
+                        isLightDismiss={true}>
+                        {[...USER_SETTINGS(resource)].map((s, idx) => (
+                            <UserSettingInput
+                                key={idx}
+                                user={user}
+                                setting={s} />
+                        ))}
+                    </Panel>
+                </a>
+            </div>
         </UserSettingsContext.Provider>
     );
 }
