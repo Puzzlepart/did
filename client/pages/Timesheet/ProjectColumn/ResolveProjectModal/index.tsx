@@ -1,4 +1,4 @@
-import { SearchProject, UserMessage } from 'common/components';
+import { SearchProject, UserMessage } from 'components';
 import { getValueTyped as value } from 'helpers';
 import resource from 'i18n';
 import { Modal } from 'office-ui-fabric-react/lib/Modal';

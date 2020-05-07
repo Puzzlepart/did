@@ -1,4 +1,4 @@
-import List from 'common/components/List';
+import List from 'components/List';
 import resource from 'i18n';
 import { ICustomer } from 'interfaces/ICustomer';
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';

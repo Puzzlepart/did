@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { AppContext } from 'AppContext';
-import { EventList, UserAllocation } from 'common/components';
+import { EventList, UserAllocation } from 'components';
 import * as helpers from 'helpers';
 import resource from 'i18n';
 import { ITimeEntry } from 'interfaces';

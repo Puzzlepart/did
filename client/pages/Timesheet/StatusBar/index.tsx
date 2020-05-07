@@ -1,5 +1,5 @@
 
-import { UserMessage } from 'common/components/UserMessage';
+import { UserMessage } from 'components/UserMessage';
 import { getDurationDisplay } from 'helpers';
 import resource from 'i18n';
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';

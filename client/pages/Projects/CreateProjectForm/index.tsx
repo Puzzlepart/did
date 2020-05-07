@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/react-hooks';
-import { IconPicker, useMessage, UserMessage } from 'common/components';
+import { IconPicker, useMessage, UserMessage } from 'components';
 import resource from 'i18n';
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button';
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';

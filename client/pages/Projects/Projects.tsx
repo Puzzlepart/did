@@ -1,12 +1,12 @@
 import { useQuery } from '@apollo/react-hooks';
-import { UserMessage } from 'common/components/UserMessage';
-import { CreateProjectForm } from 'pages/Projects/CreateProjectForm';
+import { UserMessage } from 'components/UserMessage';
 import { getValueTyped as value } from 'helpers';
 import resource from 'i18n';
 import { IOutlookCategory, IProject } from 'interfaces';
 import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList';
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
+import { CreateProjectForm } from 'pages/Projects/CreateProjectForm';
 import * as React from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';

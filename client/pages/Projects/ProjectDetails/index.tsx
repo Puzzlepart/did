@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import EventList from 'common/components/EventList';
-import { UserMessage } from 'common/components/UserMessage';
+import EventList from 'components/EventList';
+import { UserMessage } from 'components/UserMessage';
 import { IBaseResult } from 'graphql';
 import resource from 'i18n';
 import { IOutlookCategory } from 'interfaces';

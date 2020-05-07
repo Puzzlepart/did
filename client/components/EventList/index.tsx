@@ -1,5 +1,5 @@
 
-import List from 'common/components/List';
+import List from 'components/List';
 import * as React from 'react';
 import { withDefaultProps } from 'with-default-props';
 import * as col from './columns';

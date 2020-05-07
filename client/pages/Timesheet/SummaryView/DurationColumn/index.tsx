@@ -1,4 +1,4 @@
-import { IColumn } from 'common/components/List';
+import { IColumn } from 'components/List';
 import resource from 'i18n';
 import * as React from 'react';
 

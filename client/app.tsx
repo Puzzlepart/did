@@ -1,9 +1,9 @@
-import { Navigation } from 'common/components/Navigation';
+import { Navigation } from 'components/Navigation';
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import styles from './App.module.scss';
 import { AppContext, IAppContext } from './AppContext';
 import { Admin, Customers, Home, Projects, Reports, Timesheet } from './pages';
-import styles from './App.module.scss';
 
 const App = (context: IAppContext): JSX.Element => {
     return (

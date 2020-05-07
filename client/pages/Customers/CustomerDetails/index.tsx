@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks';
-import { UserMessage } from 'common/components/UserMessage';
+import { UserMessage } from 'components/UserMessage';
 import { getValueTyped as value } from 'helpers';
 import resource from 'i18n';
 import { IProject } from 'interfaces/IProject';

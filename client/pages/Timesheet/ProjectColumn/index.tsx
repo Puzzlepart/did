@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
 import { stringIsNullOrEmpty } from '@pnp/common';
-import { UserMessage } from 'common/components/UserMessage';
+import { UserMessage } from 'components/UserMessage';
 import resource from 'i18n';
 import { MessageBarButton } from 'office-ui-fabric-react/lib/Button';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';

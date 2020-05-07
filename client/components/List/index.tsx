@@ -1,4 +1,4 @@
-import { ScrollablePaneWrapper } from 'common/components/ScrollablePaneWrapper';
+import { ScrollablePaneWrapper } from 'components/ScrollablePaneWrapper';
 import { ConstrainMode, DetailsListLayoutMode, IColumn, IDetailsGroupDividerProps, IDetailsHeaderProps, Selection, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList';
 import { GroupHeader } from 'office-ui-fabric-react/lib/GroupedList';
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';

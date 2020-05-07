@@ -1,4 +1,4 @@
-import { IListProps } from 'common/components/List/IListProps';
+import { IListProps } from 'components/List/IListProps';
 import { IProject } from 'interfaces/IProject';
 
 /**
