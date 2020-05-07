@@ -1,8 +1,8 @@
-import ICONS from 'common/icons';
 import { Dropdown, IDropdownOption, IDropdownProps } from 'office-ui-fabric-react/lib/Dropdown';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import * as React from 'react';
 import { humanize } from 'underscore.string';
+import { getIcons } from '../../common/icons';
 
 /**
  * @category IconPicker
@@ -31,7 +31,8 @@ export const IconPicker = (props: IIconPickerProps) => {
         );
     };
 
-    const options = ICONS.map(key => ({ key, text: humanize(key) }));
+    const options = getIcons(100).map(key => ({ key, text: humanize(key) }));
+    console.log(options.length);
 
     return (
         <Dropdown

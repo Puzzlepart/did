@@ -1716,4 +1716,11 @@ const ICONS = [
     'SizeLegacy'
 ];
 
-export default ICONS;
+/**
+ * Get n icons from a collection of Office UI Fabric Icons
+ * 
+ * @param {number} n Number of icons
+ */
+export function getIcons(n: number) {
+    return ICONS.sort(() => 0.5 - Math.random()).slice(0, n);
+}
