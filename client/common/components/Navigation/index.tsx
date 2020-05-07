@@ -2,8 +2,8 @@ import { AppContext } from 'AppContext';
 import resource from 'i18n';
 import * as React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { UserMenu } from './UserMenu';
 import styles from './Navigation.module.scss';
+import { UserMenu } from './UserMenu';
 
 export const Navigation = () => {
     const { user } = React.useContext(AppContext);
@@ -33,7 +33,7 @@ export const Navigation = () => {
                         <span className={styles.icon}></span>
                     </button> */}
                 </ul>
-                    <UserMenu />
+                <UserMenu />
             </div>
         </nav>
     );

@@ -6,14 +6,15 @@ import { UserSettings } from './UserSettings';
 
 export const UserMenu = () => {
     const { user } = React.useContext(AppContext);
+    const [showMenu, setShowMenu] = React.useState<boolean>(false);
 
     return (
         <div className={styles.root}>
             <div className={styles.container}>
                 <a className={styles.toggle} href='#'>
-                    <span className={styles.toggle}>👨‍💼</span>
+                    <span className={styles.toggle} onClick={() => setShowMenu(!showMenu)}>👨‍💼</span>
                 </a>
-                <div className={styles.menu}>
+                <div className={styles.menu} hidden={!showMenu}>
                     <div className={styles.userName}>{user.fullName}</div>
                     <div className={styles.userEmail}>{user.email}</div>
                     <div className={styles.userDetail}>{user.role}</div>
