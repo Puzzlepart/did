@@ -11,7 +11,7 @@ export const Navigation = () => {
         <nav className={styles.root}>
             <div className={styles.container}>
                 <Link to='/' className={styles.logo}>
-                    <img src='/images/did365navlogobeta.png' />
+                    <img src='/images/D_beta_sm.png' />
                 </Link>
                 <ul className={styles.nav} hidden={!user}>
                     <li className={styles.navItem}>
