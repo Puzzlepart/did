@@ -1,4 +1,5 @@
 export * from './Autocomplete';
+export * from './EntityLabel';
 export * from './EventList';
 export { default as EventList } from './EventList';
 export * from './FilterPanel';

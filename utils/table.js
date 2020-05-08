@@ -68,10 +68,14 @@ function createQuery(top, select, filter) {
  */
 function queryTable(table, query, continuationToken) {
     return new Promise((resolve, reject) => {
-        azureTableService.queryEntities(table, query, continuationToken, (error, result) => {
-            if (!error) return resolve(result);
-            else reject(error);
-        });
+        azureTableService.queryEntities(
+            table,
+            query,
+            continuationToken,
+            (error, result) => {
+                if (!error) return resolve(result);
+                else reject(error);
+            });
     });
 };
 
@@ -210,10 +214,5 @@ module.exports = {
     gt: TableUtilities.QueryComparisons.GREATER_THAN,
     lt: TableUtilities.QueryComparisons.LESS_THAN,
     isEqual: TableUtilities.QueryComparisons.EQUAL,
-    and: TableUtilities.TableOperators.AND,
-    combine: TableQuery.combineFilters,
-    stringFilter: TableQuery.stringFilter,
-    intFilter: TableQuery.int32Filter,
-    dateFilter: TableQuery.dateFilter,
     entGen: TableUtilities.entityGenerator,
 }

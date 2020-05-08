@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from '@apollo/react-hooks';
+import { EntityLabel } from 'components/EntityLabel';
 import EventList from 'components/EventList';
 import { UserMessage } from 'components/UserMessage';
 import { IBaseResult } from 'graphql';
@@ -62,6 +63,14 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                     type={MessageBarType.warning} />
             )}
             <div className={styles.description}>{project.description}</div>
+            <div className={styles.description}>
+                {project.labels.map((label, idx) => (
+                    <EntityLabel
+                        key={idx}
+                        label={label}
+                        size='small' />
+                ))}
+            </div>
             <div hidden={!project.outlookCategory}>
                 <MessageBar messageBarIconProps={{ iconName: 'OutlookLogoInverse' }}>{resource('PROJECTS.CATEGORY_OUTLOOK_TEXT')}</MessageBar>
             </div>

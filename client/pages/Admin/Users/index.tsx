@@ -4,8 +4,6 @@ import List from 'components/List';
 import { value as value } from 'helpers';
 import resource from 'i18n';
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
-import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
-import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import * as React from 'react';
 import { generateColumn as col } from 'utils/generateColumn';
@@ -27,22 +25,24 @@ export const Users = () => {
                 onClick={() => setUserForm({ title: user.fullName, user })} />
         ))
     ];
-
-    const commands: IContextualMenuItem[] = [
-        {
-            key: 'ADD_NEW_USER',
-            name: resource('ADMIN.ADD_NEW_USER'),
-            iconProps: { iconName: 'AddFriend' },
-            onClick: () => setUserForm({ title: resource('ADMIN.ADD_NEW_USER') }),
-        },
-    ];
-
     if (loading) return <ProgressIndicator />;
 
     return (
         <>
-            <CommandBar styles={{ root: { padding: 0 } }} items={commands} />
-            <List items={value(data, 'users', [])} columns={columns} />
+            <List
+                items={value(data, 'users', [])}
+                columns={columns}
+                commandBar={{
+                    items: [
+                        {
+                            key: 'ADD_NEW_USER',
+                            name: resource('ADMIN.ADD_NEW_USER'),
+                            iconProps: { iconName: 'AddFriend' },
+                            onClick: () => setUserForm({ title: resource('ADMIN.ADD_NEW_USER') }),
+                        },
+                    ],
+                    farItems: []
+                }} />
             {userForm && (
                 <UserFormModal
                     {...userForm}

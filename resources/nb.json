@@ -63,10 +63,13 @@
     "ADMIN": {
       "USERS": "Brukere",
       "SUMMARY": "Sammendrag",
+      "LABELS": "Merkelapper",
       "ADD_NEW_USER": "Legg til ny",
       "EDIT_USER": "Rediger",
       "RANGE_MONTH": "Vis siste {0} måneder",
-      "RANGE_WEEK": "Vis siste {0} uker"
+      "RANGE_WEEK": "Vis siste {0} uker",
+      "DEFAULT_LABEL_TITLE": "Ny merkelapp",
+      "ADD_NEW_LABEL": "Opprett ny merkelapp"
     },
     "REPORTS": {
       "GENERATING_REPORT_LABEL": "Genererer rapport",
@@ -74,6 +77,7 @@
       "NO_ENTRIES_TEXT": "Det er ingen bekreftede tidsoppføringer på dette tidspunktet."
     },
     "COMMON": {
+      "DELETE_LABEL": "Slett",
       "ADD": "Legg til",
       "SEARCH": "Søk",
       "SEARCH_PLACEHOLDER": "Søk...",
@@ -88,6 +92,10 @@
       "NAME_LABEL": "Navn",
       "DESCRIPTION_LABEL": "Beskrivelse",
       "ICON_LABEL": "Ikon",
+      "COLOR_LABEL": "Farge",
+      "CLOSE_COLOR_PICKER_TEXT": "Lukk fargevelger",
+      "OPEN_COLOR_PICKER_TEXT": "Åpne fargevelger",
+      "PREVIEW_TEXT": "Forhåndsvisning",
       "EXPORT_CURRENT_VIEW": "Eksporter visning",
       "MONTH_LABEL": "Måned",
       "WEEK_NUMER_LABEL": "Ukenummer",
@@ -110,7 +118,8 @@
       "START_TIME_LABEL": "Starttid",
       "END_TIME_LABEL": "Sluttid",
       "HOURS_SHORTFORMAT": "{0}t",
-      "MINUTES_SHORTFORMAT": "{0}min"
+      "MINUTES_SHORTFORMAT": "{0}min",      
+      "EDIT_LABEL": "Rediger"
     },
     "NAVIGATION": {
       "TIMESHEET": "Timeliste",

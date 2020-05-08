@@ -3,8 +3,11 @@ import resource from 'i18n';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import * as React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import styles from './Admin.module.scss';
 import AdminSummaryView from './AdminSummaryView';
+import { Labels } from './Labels';
 import { Users } from './Users';
+
 /**
  * @category Admin
  */
@@ -12,23 +15,30 @@ export const Admin = () => {
     const history = useHistory();
     const { view } = useParams<{ view: string }>();
     return (
-        <div>
-            <Pivot defaultSelectedKey={view} onLinkClick={item => history.push(`/admin/${item.props.itemKey}`)}>
+        <div className={styles.root}>
+            <Pivot
+                defaultSelectedKey={view}
+                onLinkClick={item => history.push(`/admin/${item.props.itemKey}`)}>
                 <PivotItem
-                    itemID='users'
+                    className={styles.tab}
                     itemKey='users'
                     headerText={resource('ADMIN.USERS')}
-                    itemIcon='FabricUserFolder'
-                    style={{ padding: 10 }}>
+                    itemIcon='FabricUserFolder'>
                     <Users />
                 </PivotItem>
                 <PivotItem
-                    itemID='summary'
+                    className={styles.tab}
                     itemKey='summary'
                     headerText={resource('ADMIN.SUMMARY')}
-                    itemIcon='CalendarWeek'
-                    style={{ padding: 10 }}>
+                    itemIcon='CalendarWeek'>
                     <AdminSummaryView />
+                </PivotItem>
+                <PivotItem
+                    className={styles.tab}
+                    itemKey='labels'
+                    headerText={resource('ADMIN.LABELS')}
+                    itemIcon='Label'>
+                    <Labels />
                 </PivotItem>
             </Pivot>
         </div>

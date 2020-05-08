@@ -11,9 +11,9 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import _ from 'underscore';
-import { GET_PROJECTS, IGetProjectsData } from './GET_PROJECTS';
 import { ProjectDetails } from './ProjectDetails';
 import ProjectList from './ProjectList';
+import { GET_PROJECTS, IGetProjectsData } from './types';
 
 /**
  * @category Projects

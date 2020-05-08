@@ -22,6 +22,4 @@ const _ = () => {
     );
 }
 
-_['displayName'] = 'Admin';
-
 export default _;

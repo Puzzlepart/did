@@ -2,41 +2,48 @@
   width: 100%;
 
   .content {
-    vertical-align: top;
-    display: inline-block;
-  }
+    display: flex;
+    flex-direction: row;
 
-  .subText {
-    font-size: 7pt;
-  }
+    .subText {
+      font-size: 7pt;
+    }
 
-  .clearButton {
-    vertical-align: top;
-    display: inline-block;
-    margin: 0 0 0 4px;
+    .labelIcon {
+      margin: 0 0 0 6px;
+      align-self: center;
+    }
+
+    .clearButton {
+      margin: 0 0 0 4px;
+    }
   }
 }
 
 .tooltip {
   margin: 0;
   min-width: 200px;
-  
+
   .title {
     font-size: 13pt;
     margin: 0;
   }
-  
+
   .subTitle {
     font-size: 8pt;
     margin: 0 0 10px 0;
   }
-  
-  .description {    
+
+  .description {
     font-size: 8pt;
     margin: 4px 0 10px 0;
   }
-  
-  .tag {    
+
+  .labels {
+    margin: 4px 0 10px 0;
+  }
+
+  .tag {
     font-size: 9pt;
     font-weight: 600;
   }
