@@ -1,12 +1,12 @@
 import { useQuery } from '@apollo/react-hooks';
-import { UserMessage } from 'common/components/UserMessage';
-import { CreateProjectForm } from 'pages/Projects/CreateProjectForm';
-import { getValueTyped as value } from 'helpers';
+import { UserMessage } from 'components/UserMessage';
+import { value as value } from 'helpers';
 import resource from 'i18n';
 import { IOutlookCategory, IProject } from 'interfaces';
 import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList';
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
+import { CreateProjectForm } from 'pages/Projects/CreateProjectForm';
 import * as React from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -66,7 +66,7 @@ export const Projects = () => {
                     ? <UserMessage type={MessageBarType.error} text={resource('COMMON.GENERIC_ERROR_TEXT')} />
                     : (
                         <>
-                            <UserMessage style={{ marginBottom: 12 }} iconName='OutlookLogoInverse' text={resource('PROJECTS.OUTLOOK_CATEGORY_INFO_TEXT')} />
+                            <UserMessage containerStyle={{ marginBottom: 12 }} iconName='OutlookLogoInverse' text={resource('PROJECTS.OUTLOOK_CATEGORY_INFO_TEXT')} />
                             <ProjectList
                                 enableShimmer={loading}
                                 items={projects.filter(p => !!p.outlookCategory)}

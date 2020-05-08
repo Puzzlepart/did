@@ -1,25 +1,14 @@
 import * as React from 'react';
+import styles from './Home.module.scss';
 
 /**
  * @ignore
  */
-const _ = () => {
+export default () => {
     return (
-        <div className='jumbotron'>
-            <div className='container'>
-                <div className='row'>
-                    <div className='col-sm'>
-                        <div style={{ margin: '0 auto', width: 200 }}>
-                            <img src='/images/did365logobeta.png' width='175px' />
-                            <p><i>The Calendar is the Timesheet</i></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div className={styles.root}>
+            <img src='/images/did365logobeta.png' className={styles.logo} />
+            <p className={styles.motto}>The Calendar is the Timesheet</p>
         </div>
     );
 }
-
-_['displayName'] = 'Home';
-
-export default _;

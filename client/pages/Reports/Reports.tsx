@@ -1,12 +1,11 @@
 import { useQuery } from '@apollo/react-hooks';
-import { BaseFilter, FilterPanel, IFilter, MonthFilter, ResourceFilter, UserMessage, WeekFilter, YearFilter } from 'common/components';
-import List from 'common/components/List';
-import { getValueTyped as value } from 'helpers';
+import { BaseFilter, FilterPanel, IFilter, MonthFilter, ResourceFilter, UserMessage, WeekFilter, YearFilter } from 'components';
+import List from 'components/List';
+import { value as value } from 'helpers';
 import resource from 'i18n';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import * as React from 'react';
 import { useState } from 'react';
-import * as format from 'string-format';
 import { exportExcel } from 'utils/exportExcel';
 import columns from './columns';
 import TIME_ENTRIES from './TIME_ENTRIES';
@@ -26,13 +25,13 @@ export const Reports = () => {
     const { loading, error, data } = useQuery<{ timeentries: any[] }>(TIME_ENTRIES, { fetchPolicy: 'cache-first' });
 
     const timeentries = data ? data.timeentries : [];
-    
+
 
     const onExportExcel = () => exportExcel(
         subset || timeentries,
         {
             columns: columns(resource),
-            fileName: format('TimeEntries-{0}.xlsx', new Date().toDateString().split(' ').join('-')),
+            fileName: `TimeEntries-${new Date().toDateString().split(' ').join('-')}.xlsx`,
         }
     );
 

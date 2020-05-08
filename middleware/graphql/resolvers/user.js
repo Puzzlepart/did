@@ -28,7 +28,7 @@ const typeDef = `
     }
 `;
 
-async function users(_obj, _args,  { services: { storage: StorageService } }) {
+async function users(_obj, _args, { services: { storage: StorageService } }) {
     let users = await StorageService.getUsers();
     return users;
 }
@@ -36,10 +36,14 @@ async function users(_obj, _args,  { services: { storage: StorageService } }) {
 async function currentUser(_obj, _args, { user, services: { storage: StorageService } }) {
     const currentUser = await StorageService.getUser(user.profile.oid);
     const sub = await StorageService.getSubscription();
-    return { ...currentUser, sub };
+    return {
+        ...currentUser,
+        email: user.profile.email,
+        sub,
+    };
 }
 
-async function addUser(_obj, variables,  { services: { storage: StorageService } }) {
+async function addUser(_obj, variables, { services: { storage: StorageService } }) {
     try {
         await StorageService.addUser(variables.user);
         return { success: true, error: null };

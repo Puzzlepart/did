@@ -1,4 +1,4 @@
-import List from 'common/components/List';
+import List from 'components/List';
 import resource from 'i18n';
 import { IProject } from 'interfaces';
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
@@ -34,7 +34,7 @@ export const ProjectListColumns = (renderLink: boolean, hideColumns: string[]): 
     col(
         'name',
         resource('COMMON.NAME_LABEL'),
-        { maxWidth: 180 },
+        { maxWidth: 220 },
         (project: IProject) => <Link to={`/projects/${project.id}`}>{project.name}</Link>
     ),
     col(

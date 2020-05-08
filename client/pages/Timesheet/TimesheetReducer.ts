@@ -5,7 +5,7 @@ import { TimesheetPeriod } from './TimesheetPeriod';
 import { TimesheetScope } from './TimesheetScope';
 import { ITimesheetState } from './types';
 
-type Action =
+export type TimesheetAction =
     { type: 'DATA_UPDATED'; payload: { data: { timesheet: TimesheetPeriod[] }; loading: boolean } }
     | { type: 'UPDATE_SCOPE'; payload: string }
     | { type: 'CONFIRMING_PERIOD' }
@@ -14,7 +14,7 @@ type Action =
     | { type: 'MANUAL_MATCH'; payload: { eventId: string; project: IProject } }
     | { type: 'CLEAR_MANUAL_MATCH'; payload: string }
     | { type: 'IGNORE_EVENT'; payload: string }
-    | { type: 'CLEAR_IGNORES'; payload: string };
+    | { type: 'CLEAR_IGNORES' };
 
 /**
  * Reducer for Timesheet
@@ -22,7 +22,7 @@ type Action =
  * @param {ITimesheetState} state State
  * @param {IAction} action Action
  */
-export const reducer = <T>(state: ITimesheetState, action: Action): ITimesheetState => {
+export const reducer = (state: ITimesheetState, action: TimesheetAction): ITimesheetState => {
     // eslint-disable-next-line prefer-const
     let newState = { ...state };
     switch (action.type) {

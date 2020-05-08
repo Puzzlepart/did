@@ -1,5 +1,5 @@
 
-import List from 'common/components/List';
+import List from 'components/List';
 import { formatDate, sortAlphabetically } from 'helpers';
 import resource from 'i18n';
 import { ICustomer, IProject } from 'interfaces';

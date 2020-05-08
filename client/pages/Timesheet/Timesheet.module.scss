@@ -2,12 +2,6 @@ $lightgray_background: #fafafc;
 $gray_background: #f1f1f1;
 
 .root {
-  [class*="ms-DetailsRow-check"],
-  [class*="ms-DetailsRow-cellCheck"],
-  [class*="ms-DetailsHeader-cellIsCheck"] {
-    display: none;
-  }
-
   [class*="ms-DetailsHeader-cellName"],
   [class*="ms-GroupHeader-title"] {
     font-weight: normal;

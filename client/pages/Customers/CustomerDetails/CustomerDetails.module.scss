@@ -1,0 +1,23 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  .name {
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .description {
+    font-size: 14px;
+  }
+  .actions {
+    display: flex;
+    margin: 10px 0 10px 0;
+    .buttonContainer {
+      margin: 0 5px 0 0;
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  }
+}
