@@ -1,5 +1,6 @@
-const _ = require('underscore');
+const { filter, find, omit } = require('underscore');
 const { TableBatch } = require('azure-storage');
+const value = require('get-value');
 const { executeBatch, addEntity, entGen } = require('../../../utils/table');
 const { getDurationHours, getDurationMinutes, formatDate, getMonthIndex, getWeek, startOfMonth, endOfMonth, getYear } = require('../../../utils');
 const uuidv4 = require('uuid').v4;
@@ -93,7 +94,7 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale 
     projects = projects
         .map(project => ({
             ...project,
-            customer: _.find(customers, c => c.id.toUpperCase() === project.customerKey.toUpperCase()),
+            customer: find(customers, c => c.id.toUpperCase() === project.customerKey.toUpperCase()),
             labels: filter(labels, label => {
                 const labels = value(project, 'labels', { default: '' });
                 return labels.indexOf(label.id) !== -1;
@@ -109,8 +110,8 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale 
         if (isConfirmed) {
             period.events = entries.map(entry => ({
                 ...entry,
-                project: _.find(projects, p => p.id === entry.projectId),
-                customer: _.find(customers, c => c.id === entry.customerId),
+                project: find(projects, p => p.id === entry.projectId),
+                customer: find(customers, c => c.id === entry.customerId),
             }));
             period.matchedEvents = period.events;
             period.confirmedDuration = period.events.reduce((sum, evt) => sum + evt.durationMinutes, 0);
@@ -182,7 +183,7 @@ async function confirmPeriod(_obj, { entries, startDateTime, endDateTime }, { us
         return { success: true, error: null };
     } catch (error) {
         console.log(error);
-        return { success: false, error: _.omit(error, 'requestId') };
+        return { success: false, error: omit(error, 'requestId') };
     }
 };
 
@@ -198,7 +199,7 @@ async function unconfirmPeriod(_obj, { startDateTime, endDateTime }, { user, ser
         await executeBatch('ConfirmedTimeEntries', batch);
         return { success: true, error: null };
     } catch (error) {
-        return { success: false, error: _.omit(error, 'requestId') };
+        return { success: false, error: omit(error, 'requestId') };
     }
 };
 

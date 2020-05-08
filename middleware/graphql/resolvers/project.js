@@ -22,14 +22,22 @@ const typeDef = `
 
   extend type Mutation {
     createProject(customerKey: String!, projectKey: String!, name: String!, description: String!, icon: String!): BaseResult
+    addLabelToProject(projectId: String!, labelId: String!): BaseResult
   }
 `;
 
-async function createProject(_obj, variables, context) {
+async function createProject(_obj, variables, { services: { storage: StorageService } }) {
   try {
-    log('Attempting to create project in storage: ', JSON.stringify(variables));
-    await context.services.storage.createProject(variables, context.user.profile.oid);
-    log('Created project with key %s in storage', variables.projectKey);
+    await StorageService.createProject(variables, context.user.profile.oid);
+    return { success: true, error: null };
+  } catch (error) {
+    return { success: false, error: omit(error, 'requestId') };
+  }
+}
+
+async function addLabelToProject(_obj, { projectId, labelId }, { services: { storage: StorageService } }) {
+  try {
+    await StorageService.addLabelToProject(projectId, labelId);
     return { success: true, error: null };
   } catch (error) {
     return { success: false, error: omit(error, 'requestId') };
@@ -61,7 +69,7 @@ async function projects(_obj, variables, { services: { storage: StorageService }
 module.exports = {
   resolvers: {
     Query: { projects },
-    Mutation: { createProject }
+    Mutation: { createProject, addLabelToProject }
   },
   typeDef
 }

@@ -68,10 +68,14 @@ function createQuery(top, select, filter) {
  */
 function queryTable(table, query, continuationToken) {
     return new Promise((resolve, reject) => {
-        azureTableService.queryEntities(table, query, continuationToken, (error, result) => {
-            if (!error) return resolve(result);
-            else reject(error);
-        });
+        azureTableService.queryEntities(
+            table,
+            query,
+            continuationToken,
+            (error, result) => {
+                if (!error) return resolve(result);
+                else reject(error);
+            });
     });
 };
 

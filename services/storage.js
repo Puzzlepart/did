@@ -1,7 +1,7 @@
 const _ = require('underscore');
 const tableUtils = require('../utils/table');
 const arraySort = require('array-sort');
-const { first } = require('underscore');
+const { first, pick } = require('underscore');
 const { TableUtilities, TableQuery } = require('azure-storage');
 const uuidv4 = require('uuid').v4;
 
@@ -260,6 +260,23 @@ class StorageService {
         catch (error) {
             throw error;
         }
+    }
+    /**
+     * Add label to project
+     *
+     * @param {*} projectKey
+     * @param {*} labelId
+     */
+    async addLabelToProject(projectId, labelId) {
+        const entity = await tableUtils.retrieveEntity('Projects', this.tenantId, projectId);
+        let labels = entity.Labels ? entity.Labels._.split(";") : []
+        labels.push(labelId);
+        const updatedEntity = {
+            ...pick(entity, 'PartitionKey', 'RowKey'),
+            Labels: tableUtils.entGen.String(labels.join(';')),
+        }
+        const result = await tableUtils.updateEntity('Projects', updatedEntity, true);
+        return result;
     }
 }
 
