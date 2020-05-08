@@ -81,6 +81,7 @@
         "passport-azure-ad": "4.2.1",
         "react": "16.13.1",
         "react-apollo": "3.1.5",
+        "react-color": "2.18.1",
         "react-dom": "16.13.1",
         "react-fade-in": "1.0.0",
         "react-markdown": "4.3.1",
