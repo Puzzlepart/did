@@ -5,11 +5,6 @@ import { TimesheetScope } from './TimesheetScope';
 /**
  * @category Timesheet
  */
-export type TimesheetView = 'overview' | 'summary' | 'allocation';
-
-/**
- * @category Timesheet
- */
 export interface ITimesheetState {
     periods: TimesheetPeriod[];
     selectedPeriod: TimesheetPeriod;

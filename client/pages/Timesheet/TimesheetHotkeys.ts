@@ -1,7 +1,7 @@
-/* eslint-disable quotes */
-import { ITimesheetContext } from "./TimesheetContext";
+import { GlobalHotKeysProps } from 'react-hotkeys';
+import { ITimesheetContext } from './TimesheetContext';
 
-export default (context: ITimesheetContext) => ({
+export default (context: ITimesheetContext): GlobalHotKeysProps => ({
     keyMap: {
         PREV_WEEK: 'SHIFT+LEFT',
         NEXT_WEEK: 'SHIFT+RIGHT'

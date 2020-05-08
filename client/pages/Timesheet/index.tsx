@@ -19,8 +19,6 @@ const _ = () => {
     );
 }
 
-_['displayName'] = 'Timesheet';
-
 export default _;
 
 export * from './TimesheetContext';

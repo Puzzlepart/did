@@ -1,3 +1,4 @@
+//#region imports
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { AppContext } from 'AppContext';
 import { EventList, UserAllocation } from 'components';
@@ -7,7 +8,6 @@ import { ITimeEntry } from 'interfaces';
 import { Pivot, PivotItem, ProgressIndicator } from 'office-ui-fabric-react';
 import * as React from 'react';
 import { GlobalHotKeys } from 'react-hotkeys';
-import { useHistory, useParams } from 'react-router-dom';
 import { generateColumn as col } from 'utils/generateColumn';
 import { ActionBar } from './ActionBar';
 import CONFIRM_PERIOD from './CONFIRM_PERIOD';
@@ -21,8 +21,9 @@ import hotkeys from './TimesheetHotkeys';
 import { TimesheetPeriod } from './TimesheetPeriod';
 import { reducer } from './TimesheetReducer';
 import { TimesheetScope } from './TimesheetScope';
-import { ITimesheetState, TimesheetView } from './types';
+import { ITimesheetState } from './types';
 import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD';
+///#endregion
 
 const intialState: ITimesheetState = {
     periods: [],
@@ -35,8 +36,6 @@ const intialState: ITimesheetState = {
  */
 export const Timesheet = () => {
     const { user } = React.useContext(AppContext);
-    const history = useHistory();
-    const params = useParams<{ view: TimesheetView }>();
     const [state, dispatch] = React.useReducer(reducer, intialState);
     const timesheetQuery = useQuery<{ timesheet: TimesheetPeriod[] }>(GET_TIMESHEET, {
         variables: {

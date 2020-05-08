@@ -19,6 +19,5 @@ const _ = () => {
     );
 }
 
-_['displayName'] = 'Customers';
 
 export default _;
