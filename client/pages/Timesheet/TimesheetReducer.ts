@@ -2,12 +2,12 @@ import resource from 'i18n';
 import { IProject } from 'interfaces';
 import _ from 'underscore';
 import { TimesheetPeriod } from './TimesheetPeriod';
-import { TimesheetScope } from './TimesheetScope';
+import { ITimesheetScopeOptions, TimesheetScope } from './TimesheetScope';
 import { ITimesheetState } from './types';
 
 export type TimesheetAction =
     { type: 'DATA_UPDATED'; payload: { data: { timesheet: TimesheetPeriod[] }; loading: boolean } }
-    | { type: 'UPDATE_SCOPE'; payload: string }
+    | { type: 'MOVE_SCOPE'; payload: ITimesheetScopeOptions | string }
     | { type: 'CONFIRMING_PERIOD' }
     | { type: 'UNCONFIRMING_PERIOD' }
     | { type: 'CHANGE_PERIOD'; payload: string }
@@ -23,8 +23,7 @@ export type TimesheetAction =
  * @param {IAction} action Action
  */
 export const reducer = (state: ITimesheetState, action: TimesheetAction): ITimesheetState => {
-    // eslint-disable-next-line prefer-const
-    let newState = { ...state };
+    const newState = { ...state };
     switch (action.type) {
         case 'DATA_UPDATED': {
             newState.loading = action.payload.loading && {
@@ -37,46 +36,59 @@ export const reducer = (state: ITimesheetState, action: TimesheetAction): ITimes
             }
         }
             break;
+
         case 'CONFIRMING_PERIOD':
             newState.loading = {
                 label: resource('TIMESHEET.CONFIRMING_PERIOD_LABEL'),
                 description: resource('TIMESHEET.CONFIRMING_PERIOD_DESCRIPTION'),
             };
             break;
+
         case 'UNCONFIRMING_PERIOD':
             newState.loading = {
                 label: resource('TIMESHEET.UNCONFIRMING_PERIOD_LABEL'),
                 description: resource('TIMESHEET.UNCONFIRMING_PERIOD_DESCRIPTION'),
             };
             break;
-        case 'UPDATE_SCOPE':
-            newState.scope = new TimesheetScope(action.payload);
+
+        case 'MOVE_SCOPE':
+            if (typeof action.payload === 'string') {
+                newState.scope = new TimesheetScope(action.payload);
+            } else {
+                newState.scope = state.scope.add(action.payload);
+            }
             break;
+
         case 'CHANGE_PERIOD': {
             newState.selectedPeriod = _.find(newState.periods, (p: TimesheetPeriod) => p.id === action.payload);
         }
             break;
+
         case 'MANUAL_MATCH': {
             const { eventId, project } = action.payload;
             newState.selectedPeriod.setManualMatch(eventId, project);
             newState.periods = newState.periods.map(p => p.id === newState.selectedPeriod.id ? newState.selectedPeriod : p);
         }
             break;
+
         case 'CLEAR_MANUAL_MATCH': {
             newState.selectedPeriod.clearManualMatch(action.payload);
             newState.periods = newState.periods.map(p => p.id === newState.selectedPeriod.id ? newState.selectedPeriod : p);
         }
             break;
+
         case 'IGNORE_EVENT': {
             newState.selectedPeriod.ignoreEvent(action.payload);
             newState.periods = newState.periods.map(p => p.id === newState.selectedPeriod.id ? newState.selectedPeriod : p);
         }
             break;
+
         case 'CLEAR_IGNORES': {
             newState.selectedPeriod.clearIgnoredEvents();
             newState.periods = newState.periods.map(p => p.id === newState.selectedPeriod.id ? newState.selectedPeriod : p);
         }
             break;
+
         default: throw new Error();
     }
     return newState;

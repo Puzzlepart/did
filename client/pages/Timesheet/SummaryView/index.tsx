@@ -192,13 +192,13 @@ function createCustomerOptions(events: any[], setCustomer: React.Dispatch<React.
  * @param {ISummaryViewProps} props Props
  */
 export const SummaryView = (props: ISummaryViewProps) => {
-    const context = React.useContext(TimesheetContext);
-    let entries = props.entries || context.selectedPeriod.events;
+    const { state } = React.useContext(TimesheetContext);
+    let entries = props.entries || state.selectedPeriod.events;
     const [customer, setCustomer] = React.useState<IContextualMenuItem>({
         key: '_all',
         text: resource('COMMON.ALL_CUSTOMERS'),
     });
-    const columns = createColumns(props.type, context && context.scope, entries, props.range);
+    const columns = createColumns(props.type, state && state.scope, entries, props.range);
     entries = entries.filter(e => !!e.project);
     const customerOptions = createCustomerOptions(entries, setCustomer);
 
@@ -230,7 +230,7 @@ export const SummaryView = (props: ISummaryViewProps) => {
     return (
         <div className={styles.root}>
             <CommandBar styles={{ root: { padding: 0 } }} items={commands} />
-            <List {...{ columns, items }} enableShimmer={context && !!context.loading} />
+            <List {...{ columns, items }} enableShimmer={state && !!state.loading} />
         </div>
     );
 }

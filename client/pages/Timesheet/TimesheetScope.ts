@@ -1,6 +1,11 @@
 import * as helpers from 'helpers';
 import moment from 'moment';
 
+export interface ITimesheetScopeOptions {
+    amount: moment.DurationInputArg1;
+    unit: moment.unitOfTime.DurationConstructor;
+}
+
 /**
  * Handles a scope, the timing between a startDateTime and endDateTime
  * 
@@ -41,9 +46,9 @@ export class TimesheetScope {
         this._endDateTime = helpers.endOfWeek(start);
     }
 
-    public add(amount: number, unit: any): TimesheetScope {
+    public add(options: ITimesheetScopeOptions): TimesheetScope {
         const start = this._startDateTime.clone();
-        start.add(amount, unit);
+        start.add(options.amount, options.unit);
         const n = new TimesheetScope();
         n._update(start);
         return n;
