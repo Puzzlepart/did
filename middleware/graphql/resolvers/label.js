@@ -6,7 +6,7 @@ const typeDef = `
     type Label  {
         id: String
         name: String!
-        description: String!
+        description: String
         color: String!
         icon: String
     }
@@ -25,7 +25,7 @@ const typeDef = `
     extend type Mutation {	
         addLabel(label: LabelInput!): BaseResult   
         updateLabel(label: LabelInput!): BaseResult   
-        deleteLabel(id: Int!): BaseResult
+        deleteLabel(id: String!): BaseResult
     }
 `;
 
@@ -35,6 +35,7 @@ async function labels(_obj, _variables, { services: { storage: StorageService } 
 }
 
 async function addLabel(_obj, { label }, { services: { storage: StorageService } }) {
+    console.log(label, 'addLabel');
     try {
         await StorageService.addLabel(label);
         return { success: true, error: null };
@@ -43,9 +44,13 @@ async function addLabel(_obj, { label }, { services: { storage: StorageService }
     }
 };
 
-// TODO: Create updateLabel mutation
-async function updateLabel(_obj, { }, { services: { storage: StorageService } }) {
-
+async function updateLabel(_obj, { label }, { services: { storage: StorageService } }) {
+    try {
+        await StorageService.updateLabel(label);
+        return { success: true, error: null };
+    } catch (error) {
+        return { success: false, error: _.omit(error, 'requestId') };
+    }
 }
 
 async function deleteLabel(_obj, { id }, { services: { storage: StorageService } }) {

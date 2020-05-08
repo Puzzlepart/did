@@ -63,10 +63,13 @@
     "ADMIN": {
       "USERS": "Users",
       "SUMMARY": "Summary",
+      "LABELS": "Labels",
       "ADD_NEW_USER": "Add new",
       "EDIT_USER": "Edit",
       "RANGE_MONTH": "Show last {0} months",
-      "RANGE_WEEK": "Show last {0} weeks"
+      "RANGE_WEEK": "Show last {0} weeks",
+      "DEFAULT_LABEL_TITLE": "My new label",
+      "ADD_NEW_LABEL": "Add new label"
     },
     "REPORTS": {
       "GENERATING_REPORT_LABEL": "Generating report",
@@ -74,6 +77,7 @@
       "NO_ENTRIES_TEXT": "There's no confirmed time entries at this time."
     },
     "COMMON": {
+      "DELETE_LABEL": "Delete",
       "ADD": "Add",
       "SEARCH": "Search",
       "SEARCH_PLACEHOLDER": "Search...",
@@ -88,6 +92,10 @@
       "NAME_LABEL": "Name",
       "DESCRIPTION_LABEL": "Description",
       "ICON_LABEL": "Icon",
+      "COLOR_LABEL": "Color",
+      "CLOSE_COLOR_PICKER_TEXT": "Close color picker",
+      "OPEN_COLOR_PICKER_TEXT": "Click to pick color",
+      "PREVIEW_TEXT": "Preview",
       "EXPORT_CURRENT_VIEW": "Export current view",
       "MONTH_LABEL": "Month",
       "WEEK_NUMER_LABEL": "Week number",
@@ -110,7 +118,8 @@
       "START_TIME_LABEL": "Start time",
       "END_TIME_LABEL": "End time",
       "HOURS_SHORTFORMAT": "{0}h",
-      "MINUTES_SHORTFORMAT": "{0}min"
+      "MINUTES_SHORTFORMAT": "{0}min",     
+      "EDIT_LABEL": "Rediger"
     },
     "NAVIGATION": {
       "TIMESHEET": "Timesheet",

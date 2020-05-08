@@ -26,7 +26,7 @@ class StorageService {
     async getLabels() {
         const query = tableUtils.createQuery(1000, undefined, this.filter);
         const { entries } = await tableUtils.queryTable('Labels', query);
-        return tableUtils.parseArray(entries, undefined, { idUpper: true });
+        return tableUtils.parseArray(entries);
     }
     /**
      * Add label
@@ -48,7 +48,7 @@ class StorageService {
      * 
      * @param {*} label
      */
-    async updateUser(label) {
+    async updateLabel(label) {
         const entity = {
             PartitionKey: tableUtils.entGen.String(this.tenantId),
             RowKey: tableUtils.entGen.String(label.id),
@@ -58,6 +58,26 @@ class StorageService {
         if (label.icon) entity.Icon = tableUtils.entGen.String(label.icon);
         const result = await tableUtils.updateEntity('Labels', entity, true);
         return result;
+    }
+    /**
+     * Delete label
+     * 
+     * @param {*} id
+     */
+    async deleteLabel(id) {
+        console.log(this.tenantId, id);
+        try {
+            const result = await tableUtils.deleteEntity('Labels', {
+                PartitionKey: tableUtils.entGen.String(this.tenantId),
+                RowKey: tableUtils.entGen.String(id),
+            });
+            console.log(result);
+            return result;
+        }
+        catch (error) {
+            console.log(error);
+            throw error;
+        }
     }
     /**
      * Get user
