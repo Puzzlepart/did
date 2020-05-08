@@ -210,10 +210,5 @@ module.exports = {
     gt: TableUtilities.QueryComparisons.GREATER_THAN,
     lt: TableUtilities.QueryComparisons.LESS_THAN,
     isEqual: TableUtilities.QueryComparisons.EQUAL,
-    and: TableUtilities.TableOperators.AND,
-    combine: TableQuery.combineFilters,
-    stringFilter: TableQuery.stringFilter,
-    intFilter: TableQuery.int32Filter,
-    dateFilter: TableQuery.dateFilter,
     entGen: TableUtilities.entityGenerator,
 }
