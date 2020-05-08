@@ -74,7 +74,12 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale 
         });
     }
 
-    let [projects, customers, timeentries] = await Promise.all([
+    let [
+        projects,
+        customers,
+        timeentries,
+        labels,
+    ] = await Promise.all([
         StorageService.getProjects(),
         StorageService.getCustomers(),
         StorageService.getTimeEntries({
@@ -82,12 +87,17 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale 
             startDateTime,
             endDateTime,
         }),
+        StorageService.getLabels(),
     ]);
 
     projects = projects
-        .map(p => ({
-            ...p,
-            customer: _.find(customers, c => c.id.toUpperCase() === p.customerKey.toUpperCase())
+        .map(project => ({
+            ...project,
+            customer: _.find(customers, c => c.id.toUpperCase() === project.customerKey.toUpperCase()),
+            labels: filter(labels, label => {
+                const labels = value(project, 'labels', { default: '' });
+                return labels.indexOf(label.id) !== -1;
+            }),
         }))
         .filter(p => p.customer);
 

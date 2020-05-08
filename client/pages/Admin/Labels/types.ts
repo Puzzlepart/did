@@ -47,12 +47,12 @@ export const DELETE_LABEL = gql`
  */
 export const GET_LABELS = gql`
     query {
-    labels {
-        id
-        name
-        description
-        color
-        icon
-    }
+        labels {
+            id
+            name
+            description
+            color
+            icon
+        }
     }
 `;

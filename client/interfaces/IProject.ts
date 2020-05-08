@@ -1,3 +1,4 @@
+import { IEntityLabel } from 'components/EntityLabel';
 import { IObjectWithKey } from 'office-ui-fabric-react/lib/DetailsList';
 import { ICustomer, IOutlookCategory } from './';
 
@@ -15,4 +16,5 @@ export interface IProject extends IObjectWithKey {
     customer: ICustomer;
     outlookCategory?: IOutlookCategory;
     inactive?: boolean;
+    labels?: IEntityLabel[];
 }
