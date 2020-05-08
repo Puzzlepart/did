@@ -12,13 +12,25 @@ export interface IEntityLabel {
     icon?: string;
 }
 
+export interface IEntityLabelProps {
+    label: IEntityLabel;
+    size?: 'small' | 'medium' | 'large';
+}
+
 /**
  * @category EntityLabel
  */
-export const EntityLabel = (label: IEntityLabel) => {
+export const EntityLabel = ({ size, label }: IEntityLabelProps) => {
+    const className = [styles.root]
+    // eslint-disable-next-line default-case
+    switch (size) {
+        case 'medium': className.push(styles.sizeMedium); break;
+        case 'large': className.push(styles.sizeLarge); break;
+    }
+
     return (
         <div
-            className={styles.root}
+            className={className.join(' ')}
             style={{ backgroundColor: label.color }}
             title={label.description}>
             {label.icon && <Icon iconName={label.icon} style={{ marginRight: 4 }} />}

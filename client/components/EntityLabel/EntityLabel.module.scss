@@ -6,4 +6,14 @@
   font-weight: 600;
   border-radius: 3px;
   transition: opacity 0.2s linear;
+
+  &.sizeMedium {
+    padding: 6px 10px;
+    font-size: 1.0em;
+  }
+
+  &.sizeLarge {
+    padding: 8px 12px;
+    font-size: 1.2em;
+  }
 }
