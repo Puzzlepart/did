@@ -7,6 +7,7 @@ const { typeDef: TimeEntry } = require('./resolvers/timeentry');
 const { typeDef: OutlookCategory } = require('./resolvers/outlookCategory');
 const { typeDef: User } = require('./resolvers/user');
 const { typeDef: Subscription } = require('./resolvers/subscription');
+const { typeDef: Label } = require('./resolvers/label');
 const StorageService = require('../../services/storage');
 const GraphService = require('../../services/graph');
 
@@ -48,6 +49,7 @@ const schema = makeExecutableSchema({
     User,
     OutlookCategory,
     Subscription,
+    Label,
   ],
   resolvers: require('./resolvers'),
   resolverValidationOptions: {
