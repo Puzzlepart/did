@@ -48,7 +48,7 @@ export default (hideColumns: string[]): IColumn[] => ([
         '',
         {},
         (project: IProject) => project.labels.map((label, idx) => (
-            <EntityLabel key={idx} {...label} />
+            <EntityLabel key={idx} label={label} />
         )),
     )
 ].filter(col => hideColumns.indexOf(col.key) === -1))

@@ -75,7 +75,7 @@ export const LabelForm = (props: ILabelFormProps) => {
             {colorPickerVisible && <SketchPicker color={label.color} onChange={({ hex }) => setLabel({ ...label, color: hex })} />}
 
             <Label>{resource('COMMON.PREVIEW_TEXT')}</Label>
-            <EntityLabel {...label} />
+            <EntityLabel label={label} />
 
             <PrimaryButton
                 className={styles.saveBtn}
@@ -87,3 +87,4 @@ export const LabelForm = (props: ILabelFormProps) => {
 }
 
 export { ILabelFormProps };
+

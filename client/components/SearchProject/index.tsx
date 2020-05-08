@@ -2,7 +2,7 @@
 import { useQuery } from '@apollo/react-hooks';
 import resource from 'i18n';
 import { IProject } from 'interfaces/IProject';
-import { GET_PROJECTS } from 'pages/Projects/GET_PROJECTS';
+import { GET_PROJECTS } from 'pages/Projects/types';
 import * as React from 'react';
 import { Autocomplete, ISuggestionItem } from '../Autocomplete';
 import { ISearchProjectProps } from './types';

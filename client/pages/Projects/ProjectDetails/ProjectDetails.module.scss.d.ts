@@ -5,6 +5,7 @@ interface CssExports {
   'buttonContainer': string;
   'customer': string;
   'description': string;
+  'labels': string;
   'name': string;
   'root': string;
 }

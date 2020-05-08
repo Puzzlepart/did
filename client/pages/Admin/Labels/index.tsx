@@ -21,7 +21,7 @@ export const Labels = () => {
             'name',
             resource('COMMON.NAME_LABEL'),
             { maxWidth: 180 },
-            (label: IEntityLabel) => <EntityLabel {...label} />,
+            (label: IEntityLabel) => <EntityLabel label={label} />,
         ),
         col('description', resource('COMMON.DESCRIPTION_LABEL')),
         col(

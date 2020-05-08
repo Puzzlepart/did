@@ -34,6 +34,13 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!, $lo
           key
           name
           inactive
+        }                
+        labels {
+          id
+          name
+          description
+          color
+          icon
         }
       }
       suggestedProject {

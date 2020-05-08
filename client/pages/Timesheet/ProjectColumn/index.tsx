@@ -1,6 +1,7 @@
 /* eslint-disable react/display-name */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { stringIsNullOrEmpty } from '@pnp/common';
+import { EntityLabel } from 'components/EntityLabel';
 import { UserMessage } from 'components/UserMessage';
 import resource from 'i18n';
 import { MessageBarButton } from 'office-ui-fabric-react/lib/Button';
@@ -8,6 +9,7 @@ import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { TooltipDelay, TooltipHost } from 'office-ui-fabric-react/lib/Tooltip';
 import * as React from 'react';
+import { isEmpty } from 'underscore';
 import { withDefaultProps } from 'with-default-props';
 import { TimesheetContext } from '../TimesheetContext';
 import styles from './ProjectColumn.module.scss';
@@ -37,7 +39,14 @@ export const ProjectColumnTooltip = ({ project }: IProjectColumnTooltipProps): J
         <div className={styles.tooltip}>
             <div className={styles.title}><span>{project.name}</span></div>
             <div className={styles.subTitle}><span>for {project.customer.name}</span></div>
-            <div className={styles.description}>{!stringIsNullOrEmpty(project.description) ? <span>{project.description}</span> : <UserMessage text='No description available.' />}</div>
+            <div hidden={stringIsNullOrEmpty(project.description)} className={styles.description}>
+                <p>{project.description}</p>
+            </div>
+            {!isEmpty(project.labels) && (
+                <div className={styles.labels}>
+                    {project.labels.map((label, idx) => <EntityLabel key={idx} label={label} />)}
+                </div>
+            )}
             <div className={styles.tag}><span>{project.key}</span></div>
         </div>
     );
@@ -46,12 +55,10 @@ export const ProjectColumnTooltip = ({ project }: IProjectColumnTooltipProps): J
 /**
  * @category Timesheet
  */
-const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
+const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
     const { dispatch } = React.useContext(TimesheetContext);
-    const [showResolveModal, setShowResolveModal] = React.useState<boolean>(false);
-
-    if (!props.event.project) {
-        if (props.event.error) {
+    if (!event.project) {
+        if (event.error) {
             return (
                 <div className={styles.root}>
                     <UserMessage
@@ -59,7 +66,7 @@ const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
                         isMultiline={false}
                         type={MessageBarType.severeWarning}
                         iconName='Warning'
-                        text={`${resource('TIMESHEET.EVENT_ERROR_PREFIX')} ${props.event.error.message}`} />
+                        text={`${resource('TIMESHEET.EVENT_ERROR_PREFIX')} ${event.error.message}`} />
                 </div>
             );
         }
@@ -73,11 +80,11 @@ const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
                     text={resource('TIMESHEET.NO_PROJECT_MATCH_FOUND_TEXT')}
                     actions={
                         <div>
-                            <ResolveProjectModal event={props.event} />
+                            <ResolveProjectModal event={event} />
                             <MessageBarButton
                                 text={resource('TIMESHEET.IGNORE_EVENT_BUTTON_LABEL')}
                                 iconProps={{ iconName: 'Blocked2' }}
-                                onClick={() => dispatch({ type: 'IGNORE_EVENT', payload: props.event.id })} />
+                                onClick={() => dispatch({ type: 'IGNORE_EVENT', payload: event.id })} />
                         </div>
                     } />
             </div>
@@ -87,7 +94,7 @@ const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
     return (
         <TooltipHost
             tooltipProps={{
-                onRenderContent: () => <ProjectColumnTooltip project={props.event.project} />,
+                onRenderContent: () => <ProjectColumnTooltip project={event.project} />,
             }}
             delay={TooltipDelay.long}
             closeDelay={TooltipDelay.long}
@@ -95,20 +102,21 @@ const ProjectColumn = (props: IProjectColumnProps): JSX.Element => {
             <div className={styles.root}>
                 <div className={styles.content}>
                     <div>
-                        <a href={`/projects/${props.event.project.id}`}>{props.event.project.name}</a>
+                        <a href={`/projects/${event.project.id}`}>{event.project.name}</a>
+                        <div className={styles.subText}>
+                            <span>for </span><a href={`/customers/${event.customer.id}`}><span>{event.customer.name}</span></a>
+                        </div>
                     </div>
-                    <div className={styles.subText}>
-                        <span>for </span><a href={`/customers/${props.event.customer.id}`}><span>{props.event.customer.name}</span></a>
-                    </div>
+                    {!isEmpty(event.project.labels) && <Icon iconName='Tag' className={styles.labelIcon} />}
+                    {event.isManualMatch && (
+                        <ClearManualMatchButton
+                            onClick={() => dispatch({
+                                type: 'CLEAR_MANUAL_MATCH',
+                                payload: event.id,
+                            })}
+                            className={styles.clearButton} />
+                    )}
                 </div>
-                {props.event.isManualMatch && (
-                    <ClearManualMatchButton
-                        onClick={() => dispatch({
-                            type: 'CLEAR_MANUAL_MATCH',
-                            payload: props.event.id,
-                        })}
-                        className={styles.clearButton} />
-                )}
             </div>
         </TooltipHost>
     );
