@@ -1,5 +1,5 @@
 import * as helpers from 'helpers';
-import moment from 'moment';
+import * as moment from 'moment';
 
 export interface ITimesheetScopeOptions {
     amount: moment.DurationInputArg1;

@@ -1,6 +1,6 @@
 import { value as value } from 'helpers';
 import resource from 'i18n';
-import moment from 'moment';
+import * as moment from 'moment';
 import { unique } from 'underscore';
 import { capitalize } from 'underscore.string';
 import { BaseFilter, IFilter } from './BaseFilter';

@@ -1,7 +1,7 @@
 import { ITypedHash, stringIsNullOrEmpty } from '@pnp/common';
 import getValue from 'get-value';
 import resource from 'i18n';
-import moment from 'moment';
+import * as moment from 'moment';
 import format from 'string-format';
 import { capitalize } from 'underscore.string';
 require('moment/locale/en-gb');
