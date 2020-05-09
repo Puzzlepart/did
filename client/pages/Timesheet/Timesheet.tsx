@@ -6,7 +6,6 @@ import resource from 'i18n';
 import { ITimeEntry } from 'interfaces';
 import { Pivot, PivotItem, ProgressIndicator } from 'office-ui-fabric-react';
 import * as React from 'react';
-import { useHistory, useParams } from 'react-router-dom';
 import { generateColumn as col } from 'utils/generateColumn';
 import { ActionBar } from './ActionBar';
 import CONFIRM_PERIOD from './CONFIRM_PERIOD';
@@ -19,7 +18,7 @@ import { ITimesheetContext, TimesheetContext } from './TimesheetContext';
 import { TimesheetPeriod } from './TimesheetPeriod';
 import { reducer } from './TimesheetReducer';
 import { TimesheetScope } from './TimesheetScope';
-import { ITimesheetState, TimesheetView } from './types';
+import { ITimesheetState } from './types';
 import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD';
 
 const intialState: ITimesheetState = {
@@ -33,8 +32,6 @@ const intialState: ITimesheetState = {
  */
 export const Timesheet = () => {
     const { user } = React.useContext(AppContext);
-    const history = useHistory();
-    const params = useParams<{ startDateTime: string; view: TimesheetView }>();
     const [state, dispatch] = React.useReducer(reducer, intialState);
     const timesheetQuery = useQuery<{ timesheet: TimesheetPeriod[] }>(GET_TIMESHEET, {
         variables: {
@@ -47,9 +44,7 @@ export const Timesheet = () => {
     const [confirmPeriod] = useMutation<{ entries: any[]; startDateTime: string; endDateTime: string }>(CONFIRM_PERIOD);
     const [unconfirmPeriod] = useMutation<{ startDateTime: string; endDateTime: string }>(UNCONFIRM_PERIOD);
 
-    React.useEffect(() => dispatch({ type: 'DATA_UPDATED', payload: timesheetQuery }), [timesheetQuery])
-    React.useEffect(() => dispatch({ type: 'UPDATE_SCOPE', payload: params.startDateTime }), [params.startDateTime]);
-
+    React.useEffect(() => dispatch({ type: 'DATA_UPDATED', payload: timesheetQuery }), [timesheetQuery]);
 
     const onConfirmPeriod = () => {
         dispatch({ type: 'CONFIRMING_PERIOD' });

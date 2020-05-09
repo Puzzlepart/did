@@ -1,5 +1,9 @@
-import moment from 'moment';
-import dateUtils from 'utils/date';
+import dateUtils, { moment } from 'utils/date';
+
+export interface ITimesheetScopeOptions {
+    amount: moment.DurationInputArg1;
+    unit: moment.unitOfTime.DurationConstructor;
+}
 
 /**
  * Handles a scope, the period of time between a startDateTime and endDateTime
@@ -41,14 +45,13 @@ export class TimesheetScope {
         this._endDateTime = dateUtils.endOfWeek(start);
     }
 
-    public add(amount: number, unit: any): TimesheetScope {
+    public add(options: ITimesheetScopeOptions): TimesheetScope {
         const start = this._startDateTime.clone();
-        start.add(amount, unit);
+        start.add(options.amount, options.unit);
         const n = new TimesheetScope();
         n._update(start);
         return n;
     }
-
 
     public getDay(index: number) {
         return this._startDateTime.clone().add(index, 'days' as moment.DurationInputArg2);

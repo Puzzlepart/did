@@ -2,6 +2,8 @@ import moment from 'moment';
 import { capitalize } from 'underscore.string';
 require('twix');
 
+export { moment };
+
 export default new class DateUtils {
     private _locale: string;
 
@@ -58,7 +60,7 @@ export default new class DateUtils {
      */
     getWeekdays(start: moment.Moment, dateFormat: string): string[] {
         return moment.weekdays(true).map((_, index) => {
-            return capitalize(start.clone().add(index, 'days').format(dateFormat));
+            return capitalize(start.clone().add(index, 'days').locale(this._locale).format(dateFormat));
         });
     }
 
@@ -71,22 +73,20 @@ export default new class DateUtils {
      * @category Helper
      */
     getMonthName(monthNumber: number): string {
-        return moment().month(monthNumber).format('MMMM');
+        return moment().locale(this._locale).month(monthNumber).format('MMMM');
     }
 
     /**
      * Get timespan string
      * 
-     * @param {moment.Moment | string} start Start
-     * @param {moment.Moment | string} end End
+     * @param {moment.Moment} start Start
+     * @param {moment.Moment} end End
      * @param {object} options Options
      * 
      * @category Helper
      */
-    getTimespanString(start: moment.Moment | string, end: moment.Moment | string, options: object = { monthFormat: 'MMMM', yearFormat: 'YYYY', hideYear: false, implicitYear: false }): string {
-        if (typeof start === 'string') start = moment(start);
-        if (typeof end === 'string') end = moment(end);
-        return start['twix'](end, { allDay: true }).format(options).toLowerCase();
+    getTimespanString(start: moment.Moment, end: moment.Moment, options: object = { monthFormat: 'MMMM', yearFormat: 'YYYY', hideYear: false, implicitYear: false }): string {
+        return start.locale(this._locale)['twix'](end.locale(this._locale), { allDay: true }).format(options).toLowerCase();
     }
 
     /**
