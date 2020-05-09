@@ -3,7 +3,7 @@ import * as helpers from 'helpers';
 import resource from 'i18n';
 import { ITimeEntry } from 'interfaces';
 import * as React from 'react';
-import * as dateUtils from 'utils/date';
+import dateUtils from 'utils/date';
 import { generateColumn as col } from 'utils/generateColumn';
 import { IColumn } from '../List';
 import { DurationDisplay } from './DurationDisplay';

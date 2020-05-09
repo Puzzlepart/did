@@ -67,9 +67,7 @@ export const Timesheet = () => {
         <TimesheetContext.Provider value={contextValue}>
             <div className={styles.root}>
                 <ActionBar {...{ onConfirmPeriod, onUnconfirmPeriod }} />
-                <Pivot
-                    defaultSelectedKey={params.view}
-                    onLinkClick={item => history.push(`/timesheet/${item.props.itemKey}/${state.scope.iso.startDateTime}`)}>
+                <Pivot>
                     <PivotItem
                         itemKey='overview'
                         headerText={resource('TIMESHEET.OVERVIEW_HEADER_TEXT')}

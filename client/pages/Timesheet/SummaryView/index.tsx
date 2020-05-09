@@ -6,7 +6,7 @@ import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import * as React from 'react';
 import { unique } from 'underscore';
 import { capitalize } from 'underscore.string';
-import * as dateUtils from 'utils/date';
+import dateUtils from 'utils/date';
 import { TimesheetContext } from '../';
 import { TimesheetScope } from '../TimesheetScope';
 import { DurationColumn } from './DurationColumn';

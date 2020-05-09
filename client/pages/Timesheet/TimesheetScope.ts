@@ -1,5 +1,5 @@
 import moment from 'moment';
-import * as dateUtils from 'utils/date';
+import dateUtils from 'utils/date';
 
 /**
  * Handles a scope, the period of time between a startDateTime and endDateTime
