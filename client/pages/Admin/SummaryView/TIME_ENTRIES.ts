@@ -8,6 +8,7 @@ export default gql`
         timeentries(yearNumber: $yearNumber, dateFormat: "LL") {
             project {
                 id
+                name
             }
             durationHours
             weekNumber

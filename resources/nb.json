@@ -69,7 +69,8 @@
       "RANGE_MONTH": "Vis siste {0} måneder",
       "RANGE_WEEK": "Vis siste {0} uker",
       "DEFAULT_LABEL_TITLE": "Ny merkelapp",
-      "ADD_NEW_LABEL": "Opprett ny merkelapp"
+      "ADD_NEW_LABEL": "Opprett ny merkelapp",
+      "SUMMARY_NO_TIME_ENTRIES": "Det er ingen registrerte timer for det valgte året."
     },
     "REPORTS": {
       "GENERATING_REPORT_LABEL": "Genererer rapport",

@@ -4,8 +4,7 @@ import { ILabelColumnProps } from './ILabelColumnProps';
 import styles from './LabelColumn.module.scss';
 
 /**
- * @component LabelColumn
- * @category Timesheet
+ * @category LabelColumn
  */
 export const LabelColumn = ({ row }: ILabelColumnProps) => {
     if (row.label) return <div style={{ fontWeight: 500 }}>{row.label}</div>;

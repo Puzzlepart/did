@@ -1,4 +1,6 @@
 
+import { DurationColumn } from 'components/DurationColumn';
+import { LabelColumn } from 'components/LabelColumn';
 import List from 'components/List';
 import resource from 'i18n';
 import { IProject } from 'interfaces';
@@ -9,8 +11,6 @@ import { capitalize } from 'underscore.string';
 import dateUtils from 'utils/date';
 import { TimesheetContext } from '../';
 import { TimesheetScope } from '../TimesheetScope';
-import { DurationColumn } from './DurationColumn';
-import { LabelColumn } from './LabelColumn';
 import styles from './SummaryView.module.scss';
 
 function createColumns(scope: TimesheetScope) {
