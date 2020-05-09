@@ -13,7 +13,7 @@ import CONFIRM_PERIOD from './CONFIRM_PERIOD';
 import GET_TIMESHEET from './GET_TIMESHEET';
 import ProjectColumn from './ProjectColumn';
 import { StatusBar } from './StatusBar';
-import { SummaryView, SummaryViewType } from './SummaryView';
+import { SummaryView } from './SummaryView';
 import styles from './Timesheet.module.scss';
 import { ITimesheetContext, TimesheetContext } from './TimesheetContext';
 import { TimesheetPeriod } from './TimesheetPeriod';
@@ -42,8 +42,7 @@ export const Timesheet = () => {
             dateFormat: 'dddd DD',
             locale: user.userLanguage,
         },
-        fetchPolicy: 'network-only',
-        skip: false
+        fetchPolicy: 'cache-and-network',
     });
     const [confirmPeriod] = useMutation<{ entries: any[]; startDateTime: string; endDateTime: string }>(CONFIRM_PERIOD);
     const [unconfirmPeriod] = useMutation<{ startDateTime: string; endDateTime: string }>(UNCONFIRM_PERIOD);
@@ -105,7 +104,7 @@ export const Timesheet = () => {
                         itemKey='summary'
                         headerText={resource('TIMESHEET.SUMMARY_HEADER_TEXT')}
                         itemIcon='List'>
-                        <SummaryView type={SummaryViewType.UserWeek} />
+                        <SummaryView />
                     </PivotItem>
                     <PivotItem
                         itemKey='allocation'

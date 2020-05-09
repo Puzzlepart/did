@@ -1,10 +1,6 @@
-import { ITypedHash, stringIsNullOrEmpty } from '@pnp/common';
 import getValue from 'get-value';
 import resource from 'i18n';
-import moment from 'moment';
 import format from 'string-format';
-import { capitalize } from 'underscore.string';
-require('moment/locale/en-gb');
 require('twix');
 
 /**
@@ -73,112 +69,6 @@ export function currencyDisplay(num: number, currency = 'NOK', minimumFractionDi
  */
 export function value<T>(obj: any, exp: string, defaultValue: T): T {
     return getValue(obj, exp, { default: defaultValue });
-}
-
-/**
- * Format date
- * 
- * @param {string} date Date string
- * @param {string} dateFormat Date format
- * 
- * @category Helper
- */
-export function formatDate(date: string, dateFormat: string): string {
-    const m = moment.utc(date);
-    return m.add(-m.toDate().getTimezoneOffset(), 'minutes').format(dateFormat);
-}
-
-/**
- * Get start of week
- * 
- * @param {string | Date | moment.Moment} date Date string
- * 
- * @category Helper
- */
-export function startOfWeek(date?: string | Date | moment.Moment): moment.Moment {
-    const m = moment.utc(date);
-    return m.add(-m.toDate().getTimezoneOffset(), 'minutes').startOf('isoWeek');
-}
-
-/**
- * Get end of week
- * 
- * @param {string | Date} date Date string
- * 
- * @category Helper
- */
-export function endOfWeek(date?: string | Date | moment.Moment): moment.Moment {
-    const m = moment.utc(date);
-    return m.add(-m.toDate().getTimezoneOffset(), 'minutes').endOf('isoWeek');
-}
-
-/**
- * Get weekdays
- * 
- * @param {moment.Moment | string} start Start
- * @param {string} dateFormat Date format
- * 
- * @category Helper
- */
-export function getWeekdays(start: moment.Moment, dateFormat: string): string[] {
-    const weekdays = moment.weekdays(true);
-    return weekdays.map((_, index) => capitalize(moment(start).add(index, 'days').format(dateFormat)));
-}
-
-/**
- * Get timespan string
- * 
- * @param {moment.Moment | string} start Start
- * @param {moment.Moment | string} end End
- * @param {object} options Options
- * 
- * @category Helper
- */
-export function getTimespanString(start: moment.Moment | string, end: moment.Moment | string, options: object = { monthFormat: 'MMMM', yearFormat: 'YYYY', hideYear: false, implicitYear: false }): string {
-    if (typeof start === 'string') start = moment(start);
-    if (typeof end === 'string') end = moment(end);
-    return start['twix'](end, { allDay: true }).format(options).toLowerCase();
-}
-
-/**
- * Get month name
- * 
- * @param {number} monthNumber Month number
- * 
- * @category Helper
- */
-export function getMonthName(monthNumber: number): string {
-    return moment().month(monthNumber).format('MMMM');
-}
-
-/**
- * Parse URL hash
- * 
- * @category Helper
- */
-export function parseUrlHash<T>(defaultValue: T = {} as T): T {
-    const hash = window.location.hash.substr(1);
-    if (stringIsNullOrEmpty(hash)) return defaultValue;
-    const hashObject = hash.split('&').reduce(function (result, item) {
-        const [key, value] = item.split('=');
-        result[key] = decodeURIComponent(value);
-        return result;
-    }, {}) as T;
-    return hashObject;
-}
-
-/**
- * Update URL hash
- * 
- * @param {ITypedHash} hashObject Hash object
- * @param {boolean} persistPrevious Persist previous hash
- * @param {boolean} redirect Redirect (defaults to true)
- */
-export function updateUrlHash(hashObject: ITypedHash<string>, persistPrevious = true, redirect = true): string {
-    if (persistPrevious) hashObject = { ...parseUrlHash(), ...hashObject };
-    const urlHash = Object.keys(hashObject).map(key => `${key}=${hashObject[key]}`).join('&');
-    if (redirect) document.location.hash = urlHash;
-    return urlHash;
 }
 
 /**

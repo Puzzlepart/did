@@ -1,8 +1,8 @@
-import * as helpers from 'helpers';
 import moment from 'moment';
+import * as dateUtils from 'utils/date';
 
 /**
- * Handles a scope, the timing between a startDateTime and endDateTime
+ * Handles a scope, the period of time between a startDateTime and endDateTime
  * 
  * @category Timesheet
  */
@@ -37,8 +37,8 @@ export class TimesheetScope {
     }
 
     private _update(start: moment.Moment) {
-        this._startDateTime = helpers.startOfWeek(start);
-        this._endDateTime = helpers.endOfWeek(start);
+        this._startDateTime = dateUtils.startOfWeek(start);
+        this._endDateTime = dateUtils.endOfWeek(start);
     }
 
     public add(amount: number, unit: any): TimesheetScope {
@@ -59,10 +59,10 @@ export class TimesheetScope {
     }
 
     public weekdays(dateFormat = 'dddd DD') {
-        return helpers.getWeekdays(this._startDateTime, dateFormat);
+        return dateUtils.getWeekdays(this._startDateTime, dateFormat);
     }
 
     public get timespan() {
-        return helpers.getTimespanString(this._startDateTime, this._endDateTime);
+        return dateUtils.getTimespanString(this._startDateTime, this._endDateTime);
     }
 }

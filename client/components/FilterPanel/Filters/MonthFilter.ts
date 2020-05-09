@@ -1,15 +1,10 @@
 import { value as value } from 'helpers';
 import resource from 'i18n';
-import moment from 'moment';
 import { unique } from 'underscore';
 import { capitalize } from 'underscore.string';
+import { getMonthNames } from 'utils/date';
 import { BaseFilter, IFilter } from './BaseFilter';
 
-/**
- * @ignore
- */
-const getMonthNames = (): string[] =>
-    Array.apply(0, Array(12)).map((_: any, i: number) => moment().month(i).format('MMMM'));
 
 /**
  * @category FilterPanel

@@ -1,12 +1,12 @@
 
 import List from 'components/List';
-import { formatDate } from 'helpers';
 import resource from 'i18n';
 import { IProject } from 'interfaces';
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import * as React from 'react';
 import { unique } from 'underscore';
 import { capitalize } from 'underscore.string';
+import * as dateUtils from 'utils/date';
 import { TimesheetContext } from '../';
 import { TimesheetScope } from '../TimesheetScope';
 import { DurationColumn } from './DurationColumn';
@@ -59,7 +59,7 @@ function generateRows(events: any[], columns: IColumn[]) {
         const projectEvents = events.filter(event => event.project.id === project.id);
         return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
             const sum = [...projectEvents]
-                .filter(event => formatDate(event.startTime, 'L') === col.fieldName)
+                .filter(event => dateUtils.formatDate(event.startTime, 'L') === col.fieldName)
                 .reduce((sum, event) => sum += event.durationHours, 0);
             obj[col.fieldName] = sum;
             obj.sum += sum;
@@ -71,7 +71,7 @@ function generateRows(events: any[], columns: IColumn[]) {
 function generateTotalRow(events: any[], columns: IColumn[]) {
     return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
         const sum = [...events]
-            .filter(event => formatDate(event.startTime, 'L') === col.fieldName)
+            .filter(event => dateUtils.formatDate(event.startTime, 'L') === col.fieldName)
             .reduce((sum, event) => sum += event.durationHours, 0);
         obj[col.fieldName] = sum;
         obj.sum += sum;
