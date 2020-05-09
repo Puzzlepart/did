@@ -1,5 +1,6 @@
 
 import { value as value } from 'helpers';
+import resource from 'i18n';
 import * as React from 'react';
 import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from 'recharts';
 import _ from 'underscore';
@@ -59,7 +60,7 @@ export const UserAllocation = (props: IUserAllocationProps): JSX.Element => {
                             <YAxis />
                             <Tooltip />
                             <Legend />
-                            <Bar dataKey='hours' name='Hours' fill='#8884d8' />
+                            <Bar dataKey='hours' name={resource('COMMON.HOURS')} fill='#444' />
                         </BarChart>
                     </div>
                 )

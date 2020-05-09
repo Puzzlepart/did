@@ -3,19 +3,7 @@ import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import * as React from 'react';
 import { isBlank } from 'underscore.string';
 import styles from './EntityLabel.module.scss';
-
-export interface IEntityLabel {
-    id?: string;
-    name: string;
-    description: string;
-    color: string;
-    icon?: string;
-}
-
-export interface IEntityLabelProps {
-    label: IEntityLabel;
-    size?: 'small' | 'medium' | 'large';
-}
+import { IEntityLabelProps } from './IEntityLabelProps';
 
 /**
  * @category EntityLabel

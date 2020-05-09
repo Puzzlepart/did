@@ -14,9 +14,9 @@
       "ALLOCATION_CUSTOMER_CHART_TITLE": "Allokering per kunde",
       "CONFIRM_HOURS_TEXT": "Bekreft timer",
       "UNCONFIRM_HOURS_TEXT": "Angre bekreft timer",
-      "COMMANDBAR_CURRENT_WEEK_TEXT": "Gå til inneværende uke",
-      "COMMANDBAR_PREV_WEEK_TEXT": "Gå til forrige uke",
-      "COMMANDBAR_NEXT_WEEK_TEXT": "Gå til neste uke",
+      "MOVE_CURRENT_WEEK": "Gå til inneværende uke",
+      "MOVE_PREV_WEEK": "Gå til forrige uke",
+      "MOVE_NEXT_WEEK": "Gå til neste uke",
       "PERIOD_HOURS_SUMMARY_TEXT": "Du har totalt **{0}** denne perioden",
       "HOURS_NOT_MATCHED_TEXT": "Du har **{0}** som ikke er koblet mot et prosjekt. Alle avtaler må være matchet før du kan bekrefte timene dine.",
       "ALL_HOURS_MATCHED_TEXT": "Alle timene dine er klare. Er du klar til å bekrefte uken din?",
@@ -69,7 +69,8 @@
       "RANGE_MONTH": "Vis siste {0} måneder",
       "RANGE_WEEK": "Vis siste {0} uker",
       "DEFAULT_LABEL_TITLE": "Ny merkelapp",
-      "ADD_NEW_LABEL": "Opprett ny merkelapp"
+      "ADD_NEW_LABEL": "Opprett ny merkelapp",
+      "SUMMARY_NO_TIME_ENTRIES": "Det er ingen registrerte timer for det valgte året."
     },
     "REPORTS": {
       "GENERATING_REPORT_LABEL": "Genererer rapport",
@@ -77,6 +78,9 @@
       "NO_ENTRIES_TEXT": "Det er ingen bekreftede tidsoppføringer på dette tidspunktet."
     },
     "COMMON": {
+      "HOURS": "Timer",
+      "SHOW_SHORTCUTS_TEXT": "Vis tilgjengelige snarveier",
+      "SHORTCUTS": "Snarveier",
       "DELETE_LABEL": "Slett",
       "ADD": "Legg til",
       "SEARCH": "Søk",
@@ -118,7 +122,7 @@
       "START_TIME_LABEL": "Starttid",
       "END_TIME_LABEL": "Sluttid",
       "HOURS_SHORTFORMAT": "{0}t",
-      "MINUTES_SHORTFORMAT": "{0}min",      
+      "MINUTES_SHORTFORMAT": "{0}min",
       "EDIT_LABEL": "Rediger"
     },
     "NAVIGATION": {

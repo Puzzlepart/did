@@ -14,9 +14,9 @@
       "ALLOCATION_CUSTOMER_CHART_TITLE": "Allocation per customer",
       "CONFIRM_HOURS_TEXT": "Confirm hours",
       "UNCONFIRM_HOURS_TEXT": "Unconfirm hours",
-      "COMMANDBAR_CURRENT_WEEK_TEXT": "Go to current week",
-      "COMMANDBAR_PREV_WEEK_TEXT": "Go to previous week",
-      "COMMANDBAR_NEXT_WEEK_TEXT": "Go to next week",
+      "MOVE_CURRENT_WEEK": "Go to current week",
+      "MOVE_PREV_WEEK": "Go to previous week",
+      "MOVE_NEXT_WEEK": "Go to next week",
       "PERIOD_HOURS_SUMMARY_TEXT": "You have a total of **{0}** this period",
       "HOURS_NOT_MATCHED_TEXT": "You have **{0}** that are not matched. All events must be matched before you can confirm your hours.",
       "ALL_HOURS_MATCHED_TEXT": "All your hours are matched. Are you ready to confirm the period?",
@@ -69,7 +69,8 @@
       "RANGE_MONTH": "Show last {0} months",
       "RANGE_WEEK": "Show last {0} weeks",
       "DEFAULT_LABEL_TITLE": "My new label",
-      "ADD_NEW_LABEL": "Add new label"
+      "ADD_NEW_LABEL": "Add new label",
+      "SUMMARY_NO_TIME_ENTRIES": "There are no recorded hours for the selected year."
     },
     "REPORTS": {
       "GENERATING_REPORT_LABEL": "Generating report",
@@ -77,6 +78,9 @@
       "NO_ENTRIES_TEXT": "There's no confirmed time entries at this time."
     },
     "COMMON": {
+      "HOURS": "Hours",
+      "SHOW_SHORTCUTS_TEXT": "Display keyboard shortcuts",
+      "SHORTCUTS": "Shortcuts",
       "DELETE_LABEL": "Delete",
       "ADD": "Add",
       "SEARCH": "Search",
@@ -118,7 +122,7 @@
       "START_TIME_LABEL": "Start time",
       "END_TIME_LABEL": "End time",
       "HOURS_SHORTFORMAT": "{0}h",
-      "MINUTES_SHORTFORMAT": "{0}min",     
+      "MINUTES_SHORTFORMAT": "{0}min",
       "EDIT_LABEL": "Rediger"
     },
     "NAVIGATION": {

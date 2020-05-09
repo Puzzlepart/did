@@ -1,16 +1,13 @@
 import * as React from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import { AdminSummaryView } from './AdminSummaryView';
+import { SummaryView } from './SummaryView';
 
 export default () => {
     const match = useRouteMatch();
     return (
         <Switch>
-            <Route path={`${match.path}/:year`}>
-                <AdminSummaryView />
-            </Route>
             <Route path={match.path}>
-                <AdminSummaryView />
+                <SummaryView />
             </Route>
         </Switch>
     );

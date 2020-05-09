@@ -15,4 +15,11 @@ export interface ITimesheetState {
     selectedPeriod: TimesheetPeriod;
     scope: TimesheetScope;
     loading?: IProgressIndicatorProps;
+    showHotkeysModal?: boolean;
+}
+
+export interface ITimesheetParams {
+    year: string;
+    month: string;
+    week: string;
 }

@@ -55,6 +55,15 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale 
     const endMonthIdx = getMonthIndex(endDateTime);
     const isSplit = endMonthIdx !== startMonthIdx;
 
+    console.log(
+        week,
+        startDateTime,
+        endDateTime,
+        startMonthIdx,
+        endMonthIdx,
+        isSplit,
+    );
+
     let periods = [{
         id: `${week}_${startMonthIdx}`,
         week,
