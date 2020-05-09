@@ -5,13 +5,11 @@ import * as moment from 'moment';
 import { IPivotItemProps, Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import { Slider } from 'office-ui-fabric-react/lib/Slider';
-import { SummaryView, SummaryViewType } from 'pages/Timesheet/SummaryView';
 import * as React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import format from 'string-format';
 import { unique } from 'underscore';
 import TIME_ENTRIES from './TIME_ENTRIES';
-require('moment/locale/en-gb');
 
 /**
  * Create periods
@@ -49,9 +47,6 @@ export const AdminSummaryView = (): JSX.Element => {
 
     const onNavigate = (year: string) => history.push(`/admin/summary/${year}`);
 
-    // "RANGE_MONTH": "Show last {0} months",
-    // "RANGE_WEEK": "Show last {0} weeks"
-
     return (
         <Pivot
             defaultSelectedKey={year}
@@ -73,11 +68,11 @@ export const AdminSummaryView = (): JSX.Element => {
                                     onChange={value => setRange(value)} />
                             )}
                             {loading && <ProgressIndicator />}
-                            <SummaryView
+                            {/* <SummaryView
                                 entries={timeentries}
                                 type={SummaryViewType.AdminMonth}
                                 range={range}
-                                exportFileNameTemplate='Summary-Month-{0}.xlsx' />
+                                exportFileNameTemplate='Summary-Month-{0}.xlsx' /> */}
                         </PivotItem>
                         <PivotItem
                             itemKey='week'
@@ -92,11 +87,11 @@ export const AdminSummaryView = (): JSX.Element => {
                                     onChange={value => setRange(value)} />
                             )}
                             {loading && <ProgressIndicator />}
-                            <SummaryView
+                            {/* <SummaryView
                                 entries={timeentries}
                                 type={SummaryViewType.AdminWeek}
                                 range={range}
-                                exportFileNameTemplate='Summary-Week-{0}.xlsx' />
+                                exportFileNameTemplate='Summary-Week-{0}.xlsx' /> */}
                         </PivotItem>
                     </Pivot>
                 </PivotItem>

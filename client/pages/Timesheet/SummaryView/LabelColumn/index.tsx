@@ -1,22 +1,24 @@
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import * as React from 'react';
+import { ILabelColumnProps } from './ILabelColumnProps';
+import styles from './LabelColumn.module.scss';
 
 /**
  * @component LabelColumn
  * @category Timesheet
  */
-export const LabelColumn = ({ row }) => {
+export const LabelColumn = ({ row }: ILabelColumnProps) => {
     if (row.label) return <div style={{ fontWeight: 500 }}>{row.label}</div>;
-        
+
     return (
-        <>
-            <div style={{ display: 'inline-block', verticalAlign: 'top', width: 30 }}>
+        <div className={styles.root}>
+            <div className={styles.iconContainer}>
                 <Icon iconName={row.project.icon || 'Page'} styles={{ root: { fontSize: 18 } }} />
             </div>
-            <div style={{ display: 'inline-block', verticalAlign: 'top', width: 'calc(100% - 30px)' }}>
-                <div>{row.project.name}</div>
-                <div style={{ fontSize: '7pt' }}>for {row.customer.name}</div>
+            <div className={styles.content}>
+                <div className={styles.title}>{row.project.name}</div>
+                <div className={styles.description}>for {row.customer.name}</div>
             </div>
-        </>
+        </div>
     );
 }
