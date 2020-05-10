@@ -12,7 +12,6 @@ export * from './Navigation';
 export * from './ScrollablePaneWrapper';
 export * from './SearchCustomer';
 export * from './SearchProject';
-export * from './UserAllocation';
 export * from './UserMessage';
 
 

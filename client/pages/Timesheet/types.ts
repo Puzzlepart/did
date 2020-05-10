@@ -23,3 +23,5 @@ export interface ITimesheetParams {
     month: string;
     week: string;
 }
+
+export { TimesheetPeriod, TimesheetScope };

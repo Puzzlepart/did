@@ -1,28 +1,22 @@
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { AppContext } from 'AppContext';
-import { EventList, HotkeyModal, UserAllocation } from 'components';
-import { getDurationDisplay } from 'helpers';
+import { HotkeyModal } from 'components';
 import resource from 'i18n';
-import { ITimeEntry } from 'interfaces';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
-import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import React from 'react';
 import { GlobalHotKeys } from 'react-hotkeys';
 import { useHistory, useParams } from 'react-router-dom';
-import { generateColumn as col } from 'utils/generateColumn';
 import { ActionBar } from './ActionBar';
+import { AllocationView } from './AllocationView';
 import CONFIRM_PERIOD from './CONFIRM_PERIOD';
 import GET_TIMESHEET from './GET_TIMESHEET';
 import hotkeys from './hotkeys';
-import ProjectColumn from './ProjectColumn';
-import { StatusBar } from './StatusBar';
+import { Overview } from './Overview';
 import { SummaryView } from './SummaryView';
 import styles from './Timesheet.module.scss';
 import { ITimesheetContext, TimesheetContext } from './TimesheetContext';
-import { TimesheetPeriod } from './TimesheetPeriod';
 import { reducer } from './TimesheetReducer';
-import { TimesheetScope } from './TimesheetScope';
-import { ITimesheetParams } from './types';
+import { ITimesheetParams, TimesheetPeriod, TimesheetScope } from './types';
 import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD';
 
 
@@ -85,29 +79,7 @@ export const Timesheet = () => {
                             itemKey='overview'
                             headerText={resource('TIMESHEET.OVERVIEW_HEADER_TEXT')}
                             itemIcon='CalendarWeek'>
-                            <StatusBar />
-                            {state.loading && <ProgressIndicator {...state.loading} />}
-                            <EventList
-                                enableShimmer={!!state.loading}
-                                events={state.selectedPeriod.events.filter(e => e.durationMinutes > 0)}
-                                showEmptyDays={state.periods.length === 1}
-                                dateFormat={'HH:mm'}
-                                groups={{
-                                    fieldName: 'date',
-                                    groupNames: state.scope.weekdays('dddd DD'),
-                                    totalFunc: (items: ITimeEntry[]) => {
-                                        const totalMins = items.reduce((sum, i) => sum = i.durationMinutes, 0);
-                                        return ` (${getDurationDisplay(totalMins)})`;
-                                    },
-                                }}
-                                additionalColumns={[
-                                    col(
-                                        'project',
-                                        resource('COMMON.PROJECT'),
-                                        { minWidth: 350, maxWidth: 350 },
-                                        (event: ITimeEntry) => <ProjectColumn event={event} />
-                                    ),
-                                ]} />
+                            <Overview dayFormat='dddd DD' timeFormat='HH:mm' />
                         </PivotItem>
                         <PivotItem
                             itemKey='summary'
@@ -119,12 +91,7 @@ export const Timesheet = () => {
                             itemKey='allocation'
                             headerText={resource('TIMESHEET.ALLOCATION_HEADER_TEXT')}
                             itemIcon='ReportDocument'>
-                            <UserAllocation
-                                entries={state.selectedPeriod.events}
-                                charts={{
-                                    'project.name': resource('TIMESHEET.ALLOCATION_PROJECT_CHART_TITLE'),
-                                    'customer.name': resource('TIMESHEET.ALLOCATION_CUSTOMER_CHART_TITLE'),
-                                }} />
+                            <AllocationView />
                         </PivotItem>
                     </Pivot>
                 </div>
