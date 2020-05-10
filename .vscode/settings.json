@@ -3,7 +3,6 @@
     "pnpm-lock.yaml": true,
     "node_modules": true,
     "lib": true,
-    "bin": true,
     "client": false,
     "config": false,
     "public": false,
@@ -13,12 +12,9 @@
     "views": false,
     "services": false,
     ".env": false,
-    "server.js": true
-  },
-  "todo.file.name": ".todo",
-  "todo.embedded.include": [
-    "middleware/**/*",
-    "client/**/*",
-    "services/**/*"
-  ]
+    "server.js": true,
+    "client/**/*.d.ts": true,
+    "client/**/*js": true,
+    "client/**/*js.map": true
+  }
 }

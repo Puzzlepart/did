@@ -1,0 +1,21 @@
+.root {
+  [class*="react-autosuggest__suggestion-match"] {
+    color: #007bff;
+  }
+
+  [class*="react-autosuggest__container"] {
+    width: 100%;
+    max-height: 400px;
+  }
+
+  [class*="react-autosuggest__input"] {
+    width: 100%;
+    padding: 4px;
+  }
+
+  [class*="react-autosuggest__suggestions-container"] ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+}

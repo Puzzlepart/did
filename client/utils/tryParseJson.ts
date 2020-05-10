@@ -1,13 +1,7 @@
-/**
- * Try parse JSON
- * 
- * @param {string} str String to parse
- * @param {any} fallbackValue Fallback value (default to empty object)
- */
-export function tryParseJson(str: string, fallbackValue: any = {}) {
+export function tryParseJson<T>(str: string, fallbackValue: T = {} as T): T {
     try {
         return JSON.parse(str);
-    } catch {
-        return {};
+    } catch (error) {
+        return fallbackValue;
     }
 }

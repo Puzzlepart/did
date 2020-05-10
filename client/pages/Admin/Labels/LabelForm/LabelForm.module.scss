@@ -1,0 +1,18 @@
+.root {
+  padding: 20px;
+  min-width: 450px;
+
+  .title {
+    font-size: 1.6em;
+    margin: 0 0 12px 0;
+  }
+
+  .saveBtn {
+    width: 100%;
+    margin: 8px 0 0 0;
+  }
+
+  .colorPicker {
+    position: relative;
+  }
+}

@@ -1,4 +1,6 @@
 require('dotenv').config();
+const _ = require('underscore');
+const log = require('debug')('app');
 const createError = require('http-errors');
 const express = require('express');
 const favicon = require('express-favicon');
@@ -11,8 +13,19 @@ const isAuthenticated = require('./middleware/passport/isAuthenticated');
 const hbs = require('hbs');
 const app = express();
 
+app.use((req, res, next) => {
+  const host = req.get('host');
+  if (host.indexOf('localhost') !== -1 && process.env.AZURE_STORAGE_CONNECTION_STRING.indexOf('dev') === -1) {
+    res.render('error', {
+      error_header: 'Development error',
+      error_message: `Running the server on ${host} requires usage of dev storage.`,
+    });
+  }
+  next();
+});
+
 app.use(require('./middleware/helmet'));
-app.use(favicon(__dirname + '/public/images/favicon.ico'));
+app.use(favicon(__dirname + '/public/images/favicon/favicon.ico'));
 
 //#region Setting up session using connect-azuretables
 app.use(require('./middleware/session'));
@@ -41,24 +54,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 //#endregion
 
-//#region Storing user for hbs
-app.use((req, res, next) => {
-  if (req.user && req.user.data) {
-    res.locals.user = {
-      ...req.user.profile,
-      role: req.user.data.role,
-      isAdmin: req.user.data.role === 'Admin',
-    };
-  }
-  res.locals.package = require('./package.json');
-  next();
-});
-//#endregion
-
 //#region Routes/middleware
-app.use('/', require('./routes/index'));
 app.use('/auth', require('./routes/auth'));
 app.use('/graphql', isAuthenticated, require('./middleware/graphql'));
+app.use('*', require('./routes/index'));
 //#endregion
 
 //#region Error handling
@@ -73,7 +72,5 @@ app.use((error, req, res, _next) => {
   res.render('error');
 });
 //#endregion
-
-if (process.env.NODE_ENV === 'development') require('./middleware/webpack-dev')(app);
 
 module.exports = app;

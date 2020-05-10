@@ -68,10 +68,14 @@ function createQuery(top, select, filter) {
  */
 function queryTable(table, query, continuationToken) {
     return new Promise((resolve, reject) => {
-        azureTableService.queryEntities(table, query, continuationToken, (error, result) => {
-            if (!error) return resolve(result);
-            else reject(error);
-        });
+        azureTableService.queryEntities(
+            table,
+            query,
+            continuationToken,
+            (error, result) => {
+                if (!error) return resolve(result);
+                else reject(error);
+            });
     });
 };
 
@@ -124,6 +128,7 @@ function addEntity(table, item) {
             if (!error) {
                 return resolve(result['.metadata']);
             } else {
+                console.log(error);
                 reject(error);
             }
         })
@@ -135,16 +140,27 @@ function addEntity(table, item) {
  * 
  * @param {*} table 
  * @param {*} item 
+ * @param {*} merge 
  */
-function updateEntity(table, item) {
+function updateEntity(table, item, merge) {
     return new Promise((resolve, reject) => {
-        azureTableService.insertOrReplaceEntity(table, item, undefined, (error, result) => {
-            if (!error) {
-                resolve(result);
-            } else {
-                reject(error);
-            }
-        })
+        if (merge) {
+            azureTableService.insertOrMergeEntity(table, item, undefined, (error, result) => {
+                if (!error) {
+                    resolve(result);
+                } else {
+                    reject(error);
+                }
+            });
+        } else {
+            azureTableService.insertOrReplaceEntity(table, item, undefined, (error, result) => {
+                if (!error) {
+                    resolve(result);
+                } else {
+                    reject(error);
+                }
+            });
+        }
     });
 };
 
@@ -185,6 +201,7 @@ function executeBatch(table, batch) {
 };
 
 module.exports = {
+    createQuery,
     queryTable,
     queryTableAll,
     addEntity,
@@ -193,14 +210,9 @@ module.exports = {
     deleteEntity,
     executeBatch,
     parseArray,
+    queryComparisons: TableUtilities.QueryComparisons,
     gt: TableUtilities.QueryComparisons.GREATER_THAN,
     lt: TableUtilities.QueryComparisons.LESS_THAN,
     isEqual: TableUtilities.QueryComparisons.EQUAL,
-    and: TableUtilities.TableOperators.AND,
-    combine: TableQuery.combineFilters,
-    stringFilter: TableQuery.stringFilter,
-    intFilter: TableQuery.int32Filter,
-    dateFilter: TableQuery.dateFilter,
-    createQuery: createQuery,
     entGen: TableUtilities.entityGenerator,
 }

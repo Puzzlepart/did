@@ -1,7 +1,7 @@
-import { stringToArrayBuffer } from 'helpers';
-import { loadScripts } from './loadScripts';
-import { humanize } from 'underscore.string';
+import { stringToArrayBuffer, value } from 'helpers';
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
+import { humanize } from 'underscore.string';
+import { loadScripts } from './loadScripts';
 
 /**
  * @ignore
@@ -11,6 +11,8 @@ export interface IExcelExportOptions {
     columns?: IColumn[];
     skip?: string[];
 }
+
+export type ExcelColumnType = 'date' | null;
 
 /**
  * Export to Excel
@@ -22,13 +24,13 @@ export interface IExcelExportOptions {
  * 
  * @category Utility
  */
-export async function exportExcel(items: any[], options: IExcelExportOptions) {
+export async function exportExcel(items: any[], options: IExcelExportOptions): Promise<void> {
     await loadScripts([
         'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js',
         'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.5/xlsx.full.min.js',
     ]);
 
-    let xlsx = ((window as any)).XLSX;
+    const xlsx = ((window as any)).XLSX;
 
     if (!options.columns) {
         options.columns = Object.keys(items[0]).filter(f => (options.skip || []).indexOf(f) === -1).map(fieldName => ({ key: fieldName, fieldName, name: humanize(fieldName), minWidth: 0 }));
@@ -38,7 +40,12 @@ export async function exportExcel(items: any[], options: IExcelExportOptions) {
         name: 'Sheet 1',
         data: [
             options.columns.map(c => c.name),
-            ...items.map(item => options.columns.map(col => item[col.fieldName])),
+            ...items.map(item => options.columns.map(col => {
+                switch (value<ExcelColumnType>(col, 'data.excelColFormat', null)) {
+                    case 'date': return { v: new Date(item[col.fieldName]).toLocaleString("en"), t: "d" };
+                    default: return item[col.fieldName];
+                }
+            })),
         ],
     }];
     const workBook = xlsx.utils.book_new();

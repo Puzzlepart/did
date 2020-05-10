@@ -73,12 +73,9 @@ module.exports = {
      * 
      * @param {*} date Date
      * @param {*} dateFormat Date format
+     * @param {*} locale Locale
      */
-    formatDate: (date, dateFormat) => {
-        return require('moment')(date).tz('Europe/Oslo').format(dateFormat);
-    },
-
-    getWeeksInMonth: (firstDay, lastDay) => {
-        
-    },
+    formatDate: (date, dateFormat, locale) => {
+        return moment(date).locale(locale).tz('Europe/Oslo').format(dateFormat);
+    }
 }

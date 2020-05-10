@@ -1,30 +1,29 @@
+const { version } = require('../package.json');
 const express = require('express');
-const router = express.Router()
-const isAuthenticated = require('../middleware/passport/isAuthenticated');
-const isAdmin = require('../middleware/passport/isAdmin');
+const router = express.Router();
+const _ = require('underscore');
 
-router.get('/', function (_req, res) {
-  res.render('index', { active: { home: true } });
-});
+function getContext(req) {
+  const host = req.get('host');
+  let context = { info: { version } };
+  let sub = host.split('.')[0].split('-');
+  if (process.env.DEVELOPMENT_BRANCH) {
+    context.info.branch = process.env.DEVELOPMENT_BRANCH;
+  } else {
+    context.info.branch = sub[1] || null;
+  }
+  return context;
+}
 
-router.get('/timesheet', isAuthenticated, (req, res) => {
-  res.render('timesheet', { active: { timesheet: true }, props: JSON.stringify(req.params) });
-});
 
-router.get('/customers', isAuthenticated, (req, res) => {
-  res.render('customers', { active: { customers: true }, props: JSON.stringify(req.params) });
-});
-
-router.get('/projects', isAuthenticated, (req, res) => {
-  res.render('projects', { active: { projects: true }, props: JSON.stringify(req.params) });
-});
-
-router.get('/reports', [isAuthenticated, isAdmin], (req, res) => {
-  res.render('reports', { active: { reports: true }, props: JSON.stringify(req.params) });
-});
-
-router.get('/admin', [isAuthenticated, isAdmin], (req, res) => {
-  res.render('admin', { active: { admin: true }, props: JSON.stringify({ view: 'reports' }) });
+router.get('/', (req, res) => {
+  if (!req.user || !req.isAuthenticated()) {
+    res.redirect('/auth/signin');
+  } else {
+    const context = getContext(req);
+    res.locals.version = context.info.version;
+    res.render('index', { context: JSON.stringify(context) });
+  }
 });
 
 module.exports = router;

@@ -1,6 +1,6 @@
-import * as get from 'get-value';
-import * as moment from 'moment';
-require('moment/locale/en-gb');
+import getValue from 'get-value';
+import resource from 'i18n';
+import format from 'string-format';
 require('twix');
 
 /**
@@ -12,23 +12,15 @@ require('twix');
  * @category Helper
  */
 export function getDurationDisplay(minutes: number, hours?: number): string {
-    let hrs = hours ? Math.floor(hours) : Math.floor(minutes / 60);
-    let mins = hours ? ((hours % 1) * 60) : minutes % 60;
-    return mins === 0 ? `${hrs}h` : hrs === 0
-        ? `${mins}min`
-        : [(`${hrs}h`), (`${mins}min`)].join(' ');
-}
-
-/**
- * Get url parameter
- * 
- * @param {string} name Name
- * @param {string} fallbackValue Fallback value
- * 
- * @category Helper
- */
-export function getUrlParameter(name: string, fallbackValue: string = null): string {
-    return new URL(document.location.href).searchParams.get(name) || fallbackValue;
+    const hrsShortFormat = resource('COMMON.HOURS_SHORTFORMAT');
+    const minShortFormat = resource('COMMON.MINUTES_SHORTFORMAT');
+    const hrs = hours ? Math.floor(hours) : Math.floor(minutes / 60);
+    const mins = hours ? ((hours % 1) * 60) : minutes % 60;
+    const hrsStr = format(hrsShortFormat, hrs);
+    const minStr = format(minShortFormat, mins);;
+    if (mins === 0) return hrsStr;
+    if (hrs === 0) return minStr;
+    return `${hrsStr} ${minStr}`;
 }
 
 /**
@@ -38,7 +30,7 @@ export function getUrlParameter(name: string, fallbackValue: string = null): str
  * 
  * @category Helper
  */
-export function stringToArrayBuffer(str: string) {
+export function stringToArrayBuffer(str: string): ArrayBuffer {
     const buf = new ArrayBuffer(str.length);
     const view = new Uint8Array(buf);
     for (let i = 0; i !== str.length; ++i) {
@@ -56,7 +48,7 @@ export function stringToArrayBuffer(str: string) {
  * 
  * @category Helper
  */
-export function currencyDisplay(num: number, currency: string = 'NOK', minimumFractionDigits: number = 0) {
+export function currencyDisplay(num: number, currency = 'NOK', minimumFractionDigits = 0): string {
     const formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency,
@@ -75,97 +67,8 @@ export function currencyDisplay(num: number, currency: string = 'NOK', minimumFr
  * 
  * @category Helper
  */
-export function getValueTyped<T>(obj: any, exp: string, defaultValue: T): T {
-    return get(obj, exp, { default: defaultValue });
-}
-
-/**
- * Format date
- * 
- * @param {string} date Date string
- * @param {string} dateFormat Date format
- * 
- * @category Helper
- */
-export function formatDate(date: string, dateFormat: string): string {
-    const m = moment.utc(date);
-    return m.add(-m.toDate().getTimezoneOffset(), 'minutes').format(dateFormat);
-}
-
-/**
- * Get start of week
- * 
- * @param {string | Date | moment.Moment} date Date string
- * 
- * @category Helper
- */
-export function startOfWeek(date?: string | Date | moment.Moment): moment.Moment {
-    const m = moment.utc(date);
-    return m.add(-m.toDate().getTimezoneOffset(), 'minutes').startOf('isoWeek');
-}
-
-/**
- * Get end of week
- * 
- * @param {string | Date} date Date string
- * 
- * @category Helper
- */
-export function endOfWeek(date?: string | Date): moment.Moment {
-    const m = moment.utc(date);
-    return m.add(-m.toDate().getTimezoneOffset(), 'minutes').endOf('isoWeek');
-}
-
-/**
- * Get weekdays
- * 
- * @param {moment.Moment | string} start Start
- * @param {string} dateFormat Date format
- * 
- * @category Helper
- */
-export function getWeekdays(start: moment.Moment, dateFormat: string): string[] {
-    return moment.weekdays(true).map((_, index) => moment(start).add(index, 'days').format(dateFormat));
-}
-
-/**
- * Get timespan string
- * 
- * @param {moment.Moment | string} start Start
- * @param {moment.Moment | string} end End
- * @param {object} options Options
- * 
- * @category Helper
- */
-export function getTimespanString(start: moment.Moment | string, end: moment.Moment | string, options: object = { monthFormat: 'MMMM', yearFormat: 'YYYY', hideYear: false, implicitYear: false }) {
-    if (typeof start === 'string') start = moment(start);
-    if (typeof end === 'string') end = moment(end);
-    return start['twix'](end, { allDay: true }).format(options).toLowerCase();
-}
-
-/**
- * Get month name
- * 
- * @param {number} monthNumber Month number
- * 
- * @category Helper
- */
-export function getMonthName(monthNumber: number): string {
-    return moment().month(monthNumber).format('MMMM');
-}
-
-/**
- * Parse URL hash
- * 
- * @category Helper
- */
-export function parseUrlHash<T>(): T {
-    var hash = window.location.hash.substr(1);
-    return hash.split('&').reduce(function (result, item) {
-        var parts = item.split('=');
-        result[parts[0]] = parts[1];
-        return result;
-    }, {}) as T;
+export function value<T>(obj: any, exp: string, defaultValue: T): T {
+    return getValue(obj, exp, { default: defaultValue });
 }
 
 /**
@@ -175,7 +78,7 @@ export function parseUrlHash<T>(): T {
  * 
  * @category Helper
  */
-export function sortAlphabetically(strArray: string[]) {
+export function sortAlphabetically(strArray: string[]): string[] {
     return strArray.sort((a, b) => {
         if (a > b) return 1;
         if (a < b) return -1;
