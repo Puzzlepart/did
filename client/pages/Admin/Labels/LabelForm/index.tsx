@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/react-hooks';
-import { EntityLabel, IEntityLabel } from 'components';
+import { EntityLabel } from 'components/EntityLabel';
 import resource from 'i18n';
+import { IEntityLabel } from 'interfaces/IEntityLabel';
 import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react/lib/Button';
 import { Label } from 'office-ui-fabric-react/lib/Label';
 import { Modal } from 'office-ui-fabric-react/lib/Modal';
@@ -35,9 +36,7 @@ export const LabelForm = (props: ILabelFormProps) => {
         props.onSave(label);
     }
 
-    const isFormValid = (): boolean => {
-        return !validator.isEmpty(label.name) && !validator.isEmpty(label.color);
-    }
+    const isFormValid = (): boolean => !validator.isEmpty(label.name) && !validator.isEmpty(label.color);
 
     return (
         <Modal
