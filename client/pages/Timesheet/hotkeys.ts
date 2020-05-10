@@ -6,22 +6,22 @@ export default (context: ITimesheetContext, resource: (key: string) => string): 
         MOVE_CURRENT_WEEK: {
             name: resource('TIMESHEET.MOVE_CURRENT_WEEK'),
             sequence: 'SHIFT+DOWN',
-            action: 'keyup'
+            action: 'keydown'
         },
         PREV_WEEK: {
             name: resource('TIMESHEET.MOVE_PREV_WEEK'),
             sequence: 'SHIFT+LEFT',
-            action: 'keyup'
+            action: 'keydown'
         },
         NEXT_WEEK: {
             name: resource('TIMESHEET.MOVE_NEXT_WEEK'),
             sequence: 'SHIFT+RIGHT',
-            action: 'keyup'
+            action: 'keydown'
         },
         SHOW_SHORTCUTS: {
             name: resource('COMMON.SHOW_SHORTCUTS_TEXT'),
             sequence: 'SHIFT+I',
-            action: 'keyup'
+            action: 'keydown'
         },
     },
     handlers: {
