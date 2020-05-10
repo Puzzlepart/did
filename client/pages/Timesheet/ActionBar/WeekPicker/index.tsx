@@ -4,10 +4,8 @@ import { Callout, DirectionalHint } from 'office-ui-fabric-react/lib/Callout';
 import { FocusTrapZone } from 'office-ui-fabric-react/lib/FocusTrapZone';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import { TimesheetContext } from 'pages/Timesheet';
-import { TimesheetScope } from 'pages/Timesheet/TimesheetScope';
 import * as React from 'react';
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { ACTIONBAR_ICON_PROPS } from '../ACTIONBAR_ICON_PROPS';
 import styles from './WeekPicker.module.scss';
 
@@ -15,8 +13,7 @@ import styles from './WeekPicker.module.scss';
  * @category Timesheet
  */
 export const WeekPicker = () => {
-    const { scope } = React.useContext(TimesheetContext);
-    const history = useHistory();
+    const { scope, dispatch } = React.useContext(TimesheetContext);
     const [calendar, setCalendar] = useState(null);
 
     return (
@@ -53,8 +50,7 @@ export const WeekPicker = () => {
                     <FocusTrapZone isClickableOutsideFocusTrap={true}>
                         <Calendar
                             onSelectDate={date => {
-                                const { iso } = new TimesheetScope(date)
-                                history.push(`/timesheet/${iso.startDateTime}`);
+                                dispatch({ type: 'MOVE_SCOPE', payload: date.toISOString() });
                                 setCalendar(null);
                             }}
                             firstDayOfWeek={DayOfWeek.Monday}

@@ -1,15 +1,10 @@
 import { value as value } from 'helpers';
 import resource from 'i18n';
-import moment from 'moment';
 import { unique } from 'underscore';
 import { capitalize } from 'underscore.string';
+import dateUtils from 'utils/date';
 import { BaseFilter, IFilter } from './BaseFilter';
 
-/**
- * @ignore
- */
-const getMonthNames = (): string[] =>
-    Array.apply(0, Array(12)).map((_: any, i: number) => moment().month(i).format('MMMM'));
 
 /**
  * @category FilterPanel
@@ -26,7 +21,7 @@ export class MonthFilter extends BaseFilter {
      */
     public initialize(entries: any[]): IFilter {
         let months: string[] = unique(entries.map(e => value(e, this.fieldName, null)));
-        months = getMonthNames()
+        months = dateUtils.getMonthNames()
             .filter(m => months.indexOf(m) !== -1)
             .map(m => capitalize(m))
         const items = months.map(month => ({ key: month, value: month, }));

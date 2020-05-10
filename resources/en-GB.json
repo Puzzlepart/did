@@ -69,7 +69,8 @@
       "RANGE_MONTH": "Show last {0} months",
       "RANGE_WEEK": "Show last {0} weeks",
       "DEFAULT_LABEL_TITLE": "My new label",
-      "ADD_NEW_LABEL": "Add new label"
+      "ADD_NEW_LABEL": "Add new label",
+      "SUMMARY_NO_TIME_ENTRIES": "There are no recorded hours for the selected year."
     },
     "REPORTS": {
       "GENERATING_REPORT_LABEL": "Generating report",
@@ -118,7 +119,7 @@
       "START_TIME_LABEL": "Start time",
       "END_TIME_LABEL": "End time",
       "HOURS_SHORTFORMAT": "{0}h",
-      "MINUTES_SHORTFORMAT": "{0}min",     
+      "MINUTES_SHORTFORMAT": "{0}min",
       "EDIT_LABEL": "Rediger"
     },
     "NAVIGATION": {

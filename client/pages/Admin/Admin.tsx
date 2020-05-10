@@ -4,8 +4,8 @@ import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import * as React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styles from './Admin.module.scss';
-import AdminSummaryView from './AdminSummaryView';
 import { Labels } from './Labels';
+import AdminSummaryView from './SummaryView';
 import { Users } from './Users';
 
 /**

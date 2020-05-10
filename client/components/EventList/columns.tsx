@@ -3,6 +3,7 @@ import * as helpers from 'helpers';
 import resource from 'i18n';
 import { ITimeEntry } from 'interfaces';
 import * as React from 'react';
+import dateUtils from 'utils/date';
 import { generateColumn as col } from 'utils/generateColumn';
 import { IColumn } from '../List';
 import { DurationDisplay } from './DurationDisplay';
@@ -55,7 +56,7 @@ export const Time = (props: IEventListProps, fieldName = 'time'): IColumn => col
     (event: ITimeEntry) => {
         return (
             <span>
-                {helpers.formatDate(event.startTime, props.dateFormat)} - {helpers.formatDate(event.endTime, props.dateFormat)}
+                {dateUtils.formatDate(event.startTime, props.dateFormat)} - {dateUtils.formatDate(event.endTime, props.dateFormat)}
             </span>
         )
     }

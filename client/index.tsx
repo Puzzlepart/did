@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import { initializeIcons } from '@uifabric/icons';
 import 'core-js/stable';
-import moment from 'moment';
 import * as React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import * as ReactDom from 'react-dom';
 import 'regenerator-runtime/runtime.js';
+import DateUtils from 'utils/date';
 import { tryParseJson } from 'utils/tryParseJson';
 import { App } from './App';
 import { IAppContext } from './AppContext';
@@ -29,7 +29,9 @@ initializeIcons();
         'nb': require('../resources/nb.json'),
     }, context.user.userLanguage);
 
-    moment.locale(context.user.userLanguage);
+
+
+    DateUtils.setup(context.user.userLanguage);
 
 
     ReactDom.render((

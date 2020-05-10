@@ -1,0 +1,20 @@
+.root {
+  display: flex;
+  flex-direction: row;
+
+  .iconContainer {
+    align-self: center;
+  }
+
+  .content {
+    padding: 0 0 0 5px;
+
+    .title {
+font-size: 12px;
+    }
+
+    .description {
+      font-size: 10px;
+    }
+  }
+}
