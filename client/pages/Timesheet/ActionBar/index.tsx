@@ -2,14 +2,13 @@ import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
 import * as React from 'react';
 import { TimesheetContext } from '../';
-import { IActionBarProps } from './IActionBarProps';
 import { CHANGE_PERIOD, CONFIRM_ACTIONS, MOVE_CURRENT_WEEK, MOVE_NEXT_WEEK, MOVE_PREV_WEEK } from './items';
 import { WeekPicker } from './WeekPicker';
 
 /**
  * @category Timesheet
  */
-export const ActionBar = (props: IActionBarProps) => {
+export const ActionBar = () => {
     const context = React.useContext(TimesheetContext);
     const items = [
         MOVE_CURRENT_WEEK(context),
@@ -22,7 +21,7 @@ export const ActionBar = (props: IActionBarProps) => {
         },
         ...CHANGE_PERIOD(context),
     ];
-    const farItems = [CONFIRM_ACTIONS(context, props)];
+    const farItems = [CONFIRM_ACTIONS(context)];
 
     return (
         <CommandBar

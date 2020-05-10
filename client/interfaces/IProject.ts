@@ -1,6 +1,6 @@
-import { IEntityLabel } from 'components/EntityLabel';
 import { IObjectWithKey } from 'office-ui-fabric-react/lib/DetailsList';
 import { ICustomer, IOutlookCategory } from './';
+import { IEntityLabel } from './IEntityLabel';
 
 /**
  * @category Common

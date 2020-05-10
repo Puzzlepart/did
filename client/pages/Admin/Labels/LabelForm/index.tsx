@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/react-hooks';
-import { EntityLabel, IEntityLabel } from 'components';
+import { EntityLabel } from 'components/EntityLabel';
 import resource from 'i18n';
+import { IEntityLabel } from 'interfaces/IEntityLabel';
 import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react/lib/Button';
 import { Label } from 'office-ui-fabric-react/lib/Label';
 import { Modal } from 'office-ui-fabric-react/lib/Modal';
@@ -27,38 +28,40 @@ export const LabelForm = (props: ILabelFormProps) => {
     const [updateLabel] = useMutation(UPDATE_LABEL);
 
     const onSave = async () => {
-        if (props.label) {
-            await updateLabel({ variables: { label: omit(label, '__typename') } });
-        } else {
-            await addLabel({ variables: { label: omit(label, '__typename') } });
-        }
+        if (props.label) await updateLabel({ variables: { label: omit(label, '__typename') } });
+        else await addLabel({ variables: { label: omit(label, '__typename') } });
         props.onSave(label);
     }
 
-    const isFormValid = (): boolean => {
-        return !validator.isEmpty(label.name) && !validator.isEmpty(label.color);
-    }
+    const isFormValid = (): boolean => !validator.isEmpty(label.name) && !validator.isEmpty(label.color);
 
     return (
         <Modal
             {...props}
             containerClassName={styles.root}
             isOpen={true}>
-            <div className={styles.title}>{resource('ADMIN.ADD_NEW_LABEL')}</div>
+            <div className={styles.title}>{
+                props.label
+                    ? resource('ADMIN.EDIT_LABEL')
+                    : resource('ADMIN.ADD_NEW_LABEL')
+            }</div>
 
             <TextField
+                spellCheck={false}
                 label={resource('COMMON.NAME_LABEL')}
                 value={label.name}
                 required={true}
                 onChange={(_, name) => setLabel({ ...label, name })} />
 
             <TextField
+                spellCheck={false}
                 label={resource('COMMON.DESCRIPTION_LABEL')}
                 value={label.description}
                 multiline={true}
                 onChange={(_, description) => setLabel({ ...label, description })} />
 
             <TextField
+                spellCheck={false}
                 label={resource('COMMON.ICON_LABEL')}
                 value={label.icon}
                 onChange={(_, icon) => setLabel({ ...label, icon })} />
@@ -72,10 +75,14 @@ export const LabelForm = (props: ILabelFormProps) => {
                 }
                 iconProps={{ iconName: colorPickerVisible ? 'ChromeClose' : 'Color' }}
                 onClick={() => setColorPickerVisible(!colorPickerVisible)} />
-            {colorPickerVisible && <SketchPicker color={label.color} onChange={({ hex }) => setLabel({ ...label, color: hex })} />}
+            {colorPickerVisible && (
+                <SketchPicker
+                    color={label.color}
+                    onChange={({ hex }) => setLabel({ ...label, color: hex })} />
+            )}
 
             <Label>{resource('COMMON.PREVIEW_TEXT')}</Label>
-            <EntityLabel label={label} />
+            <EntityLabel label={label} size='medium' />
 
             <PrimaryButton
                 className={styles.saveBtn}

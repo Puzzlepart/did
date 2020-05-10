@@ -1,7 +1,7 @@
-import { Projects } from './Projects';
-export { ProjectList, GET_PROJECTS } from './Projects';
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import * as React from 'react';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import { Projects } from './Projects';
+export { GET_PROJECTS, ProjectList } from './Projects';
 
 /**
  * @ignore
@@ -19,7 +19,5 @@ const _ = () => {
         </Switch>
     );
 }
-
-_['displayName'] = 'Projects';
 
 export default _;

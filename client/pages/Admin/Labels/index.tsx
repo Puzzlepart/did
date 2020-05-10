@@ -1,7 +1,8 @@
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { EntityLabel, IEntityLabel, List } from 'components';
+import { EntityLabel, List } from 'components';
 import { value } from 'helpers';
 import resource from 'i18n';
+import { IEntityLabel } from 'interfaces/IEntityLabel';
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import * as React from 'react';
 import { generateColumn as col } from 'utils/generateColumn';

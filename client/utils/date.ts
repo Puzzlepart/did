@@ -17,8 +17,6 @@ export default new class DateUtils {
      * 
      * @param {string} date Date string
      * @param {string} dateFormat Date format
-     * 
-     * @category Helper
      */
     formatDate(date: string, dateFormat: string): string {
         const m = moment.utc(date);
@@ -30,8 +28,6 @@ export default new class DateUtils {
      * Get start of week
      * 
      * @param {string | Date | moment.Moment} date Date string
-     * 
-     * @category Helper
      */
     startOfWeek(date?: string | Date | moment.Moment): moment.Moment {
         const m = moment.utc(date);
@@ -42,8 +38,6 @@ export default new class DateUtils {
      * Get end of week
      * 
      * @param {string | Date} date Date string
-     * 
-     * @category Helper
      */
     endOfWeek(date?: string | Date | moment.Moment): moment.Moment {
         const m = moment.utc(date);
@@ -55,8 +49,6 @@ export default new class DateUtils {
      * 
      * @param {moment.Moment | string} start Start
      * @param {string} dateFormat Date format
-     * 
-     * @category Helper
      */
     getWeekdays(start: moment.Moment, dateFormat: string): string[] {
         return moment.weekdays(true).map((_, index) => {
@@ -69,8 +61,6 @@ export default new class DateUtils {
      * Get month name
      * 
      * @param {number} monthNumber Month number
-     * 
-     * @category Helper
      */
     getMonthName(monthNumber: number): string {
         return moment().locale(this._locale).month(monthNumber).format('MMMM');
@@ -82,8 +72,6 @@ export default new class DateUtils {
      * @param {moment.Moment} start Start
      * @param {moment.Moment} end End
      * @param {object} options Options
-     * 
-     * @category Helper
      */
     getTimespanString(start: moment.Moment, end: moment.Moment, options: object = { monthFormat: 'MMMM', yearFormat: 'YYYY', hideYear: false, implicitYear: false }): string {
         return start.locale(this._locale)['twix'](end.locale(this._locale), { allDay: true }).format(options).toLowerCase();
@@ -94,5 +82,12 @@ export default new class DateUtils {
     */
     getMonthNames(): string[] {
         return Array.apply(0, Array(12)).map((_: any, i: number) => moment().month(i).format('MMMM'));
+    }
+
+    /**
+     * Get a string representation of the moment date instance
+     */
+    toString(start: moment.Moment) {
+        return start.toISOString().replace('Z', '');
     }
 }

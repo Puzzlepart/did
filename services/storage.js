@@ -17,7 +17,7 @@ class StorageService {
         return new Promise(async (resolve) => {
             const query = tableUtils.createQuery(1, ['Name']).where('RowKey eq ?', this.tenantId);
             var { entries } = await tableUtils.queryTable('Subscriptions', query);
-            resolve(first(tableUtils.parseArray(entries)));
+            resolve(first(tableUtils.parseEntities(entries)));
         });
     }
     /**
@@ -26,7 +26,7 @@ class StorageService {
     async getLabels() {
         const query = tableUtils.createQuery(1000, undefined, this.filter);
         const { entries } = await tableUtils.queryTable('Labels', query);
-        return tableUtils.parseArray(entries);
+        return tableUtils.parseEntities(entries);
     }
     /**
      * Add label
@@ -88,7 +88,7 @@ class StorageService {
         let filter = TableQuery.combineFilters(this.filter, TableUtilities.TableOperators.AND, TableQuery.stringFilter('RowKey', TableUtilities.QueryComparisons.EQUAL, userId));
         const query = tableUtils.createQuery(1, ['Role', 'StartPage']).where(filter);
         const { entries } = await tableUtils.queryTable('Users', query);
-        return first(tableUtils.parseArray(entries));
+        return first(tableUtils.parseEntities(entries));
     }
     /**
      * Update user
@@ -162,7 +162,7 @@ class StorageService {
     async getCustomers() {
         const query = tableUtils.createQuery(1000, undefined, this.filter);
         const { entries } = await tableUtils.queryTable('Customers', query);
-        return tableUtils.parseArray(entries, undefined, { idUpper: true });
+        return tableUtils.parseEntities(entries, undefined, { idUpper: true });
     }
     /**
      * Get projects
@@ -178,7 +178,7 @@ class StorageService {
         let query = tableUtils.createQuery(1000, undefined, filter);
         let { entries } = await tableUtils.queryTable('Projects', query);
         if (!options.noParse)
-            entries = tableUtils.parseArray(entries, undefined, { idUpper: true });
+            entries = tableUtils.parseEntities(entries, undefined, { idUpper: true });
         if (options.sortBy)
             entries = arraySort(entries, options.sortBy);
         return entries;
@@ -202,7 +202,7 @@ class StorageService {
         let query = tableUtils.createQuery(1000, undefined, filter);
         let result = await tableUtils.queryTableAll('ConfirmedTimeEntries', query);
         if (!options.noParse) {
-            result = tableUtils.parseArray(result, res => {
+            result = tableUtils.parseEntities(result, res => {
                 if (res.projectId) res.customerId = _.first(res.projectId.split(' '));
                 return res;
             }, options);
@@ -216,7 +216,7 @@ class StorageService {
     async getUsers() {
         const query = tableUtils.createQuery(1000, undefined).where(this.filter);
         const { entries } = await tableUtils.queryTable('Users', query);
-        return tableUtils.parseArray(entries);
+        return tableUtils.parseEntities(entries);
     }
     /**
      * Get current user
@@ -225,7 +225,7 @@ class StorageService {
      */
     async getUser(userId) {
         const entry = await tableUtils.retrieveEntity('Users', this.tenantId, userId);
-        return tableUtils.parseArray([entry])[0];
+        return tableUtils.parseEntities([entry])[0];
     }
     /**
      * Delete customer

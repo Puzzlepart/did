@@ -7,9 +7,6 @@ const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
 
-console.log("NODE_ENV: %s", mode);
-console.log("PACKAGE_VERSION: %s", package.version);
-
 let config = {
   mode,
   entry: { [package.name]: './client' },

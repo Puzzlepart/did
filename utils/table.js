@@ -1,24 +1,21 @@
 const { createTableService, TableQuery, TableUtilities } = require('azure-storage');
 const azureTableService = createTableService(process.env.AZURE_STORAGE_CONNECTION_STRING);
-const moment = require('moment');
 
 /**
- * Parse an array of azure table storage entities
+ * Parse an array of Azure table storage entities
  * 
- * Makes the keys camelCase and adds RowKey as 'id' and 'key
- * 
- * Also skips PartitionKey
+ * Adds {RowKey} as 'id' and 'key, skips {PartitionKey}
  * 
  * @param {*} arr The array of entities to parse
  * @param {*} mapFunc Mapping function (optional)
  * @param {*} options Options (optional)
  */
-function parseArray(arr, mapFunc, options) {
+function parseEntities(arr, mapFunc, options) {
     options = options || {};
     let result = arr.map(item => Object.keys(item)
         .filter(key => key !== 'PartitionKey')
         .reduce((obj, key) => {
-            const camelCaseKey = key.charAt(0).toLowerCase() + key.slice(1);
+            const newKey = key.charAt(0).toLowerCase() + key.slice(1);
             const value = item[key]._;
             if (key === 'RowKey') {
                 obj.id = options.idUpper ? value.toUpperCase() : value;
@@ -28,14 +25,11 @@ function parseArray(arr, mapFunc, options) {
             switch (item[key].$) {
                 case 'Edm.DateTime': {
                     let dateValue = value.toISOString();
-                    if (options.dateFormat) {
-                        dateValue = moment(dateValue).format(options.dateFormat);
-                    }
-                    obj[camelCaseKey] = dateValue;
+                    obj[newKey] = dateValue;
                 }
                     break;
                 default: {
-                    obj[camelCaseKey] = value;
+                    obj[newKey] = value;
                 }
             }
             return obj;
@@ -209,10 +203,6 @@ module.exports = {
     updateEntity,
     deleteEntity,
     executeBatch,
-    parseArray,
-    queryComparisons: TableUtilities.QueryComparisons,
-    gt: TableUtilities.QueryComparisons.GREATER_THAN,
-    lt: TableUtilities.QueryComparisons.LESS_THAN,
-    isEqual: TableUtilities.QueryComparisons.EQUAL,
+    parseEntities,
     entGen: TableUtilities.entityGenerator,
 }

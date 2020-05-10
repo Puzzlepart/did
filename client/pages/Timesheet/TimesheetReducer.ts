@@ -14,7 +14,9 @@ export type TimesheetAction =
     | { type: 'MANUAL_MATCH'; payload: { eventId: string; project: IProject } }
     | { type: 'CLEAR_MANUAL_MATCH'; payload: string }
     | { type: 'IGNORE_EVENT'; payload: string }
-    | { type: 'CLEAR_IGNORES' };
+    | { type: 'CLEAR_IGNORES' }
+    | { type: 'TOGGLE_SHORTCUTS' };
+
 
 /**
  * Reducer for Timesheet
@@ -37,12 +39,14 @@ export const reducer = (state: ITimesheetState, action: TimesheetAction): ITimes
             }
         }
             break;
+
         case 'CONFIRMING_PERIOD':
             newState.loading = {
                 label: resource('TIMESHEET.CONFIRMING_PERIOD_LABEL'),
                 description: resource('TIMESHEET.CONFIRMING_PERIOD_DESCRIPTION'),
             };
             break;
+
         case 'UNCONFIRMING_PERIOD':
             newState.loading = {
                 label: resource('TIMESHEET.UNCONFIRMING_PERIOD_LABEL'),
@@ -56,29 +60,39 @@ export const reducer = (state: ITimesheetState, action: TimesheetAction): ITimes
                 newState.scope = state.scope.add(action.payload);
             }
             break;
+
         case 'CHANGE_PERIOD': {
             newState.selectedPeriod = _.find(newState.periods, (p: TimesheetPeriod) => p.id === action.payload);
         }
             break;
+
         case 'MANUAL_MATCH': {
             const { eventId, project } = action.payload;
             newState.selectedPeriod.setManualMatch(eventId, project);
             newState.periods = newState.periods.map(p => p.id === newState.selectedPeriod.id ? newState.selectedPeriod : p);
         }
             break;
+
         case 'CLEAR_MANUAL_MATCH': {
             newState.selectedPeriod.clearManualMatch(action.payload);
             newState.periods = newState.periods.map(p => p.id === newState.selectedPeriod.id ? newState.selectedPeriod : p);
         }
             break;
+
         case 'IGNORE_EVENT': {
             newState.selectedPeriod.ignoreEvent(action.payload);
             newState.periods = newState.periods.map(p => p.id === newState.selectedPeriod.id ? newState.selectedPeriod : p);
         }
             break;
+
         case 'CLEAR_IGNORES': {
             newState.selectedPeriod.clearIgnoredEvents();
             newState.periods = newState.periods.map(p => p.id === newState.selectedPeriod.id ? newState.selectedPeriod : p);
+        }
+            break;
+
+        case 'TOGGLE_SHORTCUTS': {
+            newState.showHotkeysModal = !newState.showHotkeysModal;
         }
             break;
         default: throw new Error();

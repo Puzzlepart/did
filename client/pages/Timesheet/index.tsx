@@ -9,7 +9,7 @@ const _ = () => {
     const match = useRouteMatch();
     return (
         <Switch>
-            <Route path={`${match.path}/:view`}>
+            <Route path={`${match.path}/:year/:week`}>
                 <Timesheet />
             </Route>
             <Route path={match.path}>
@@ -18,8 +18,6 @@ const _ = () => {
         </Switch>
     );
 }
-
-_['displayName'] = 'Timesheet';
 
 export default _;
 

@@ -4,7 +4,6 @@ import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
 import * as React from 'react';
 import { ITimesheetContext } from '../TimesheetContext';
 import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS';
-import { IActionBarProps } from './IActionBarProps';
 
 export const MOVE_CURRENT_WEEK = ({ scope, dispatch }: ITimesheetContext): IContextualMenuItem => ({
     key: 'MOVE_CURRENT_WEEK',
@@ -12,7 +11,7 @@ export const MOVE_CURRENT_WEEK = ({ scope, dispatch }: ITimesheetContext): ICont
     iconProps: { iconName: 'RenewalCurrent', ...ACTIONBAR_ICON_PROPS },
     onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: new Date().toISOString() }),
     disabled: scope.isCurrentWeek,
-    title: resource('TIMESHEET.COMMANDBAR_CURRENT_WEEK_TEXT'),
+    title: resource('TIMESHEET.MOVE_CURRENT_WEEK'),
 });
 
 export const MOVE_PREV_WEEK = ({ dispatch }: ITimesheetContext): IContextualMenuItem => ({
@@ -20,7 +19,7 @@ export const MOVE_PREV_WEEK = ({ dispatch }: ITimesheetContext): IContextualMenu
     iconOnly: true,
     iconProps: { iconName: 'Back', ...ACTIONBAR_ICON_PROPS },
     onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: { amount: -1, unit: 'week' } }),
-    title: resource('TIMESHEET.COMMANDBAR_PREV_WEEK_TEXT')
+    title: resource('TIMESHEET.MOVE_PREV_WEEK')
 });
 
 export const MOVE_NEXT_WEEK = ({ dispatch }: ITimesheetContext): IContextualMenuItem => ({
@@ -28,7 +27,7 @@ export const MOVE_NEXT_WEEK = ({ dispatch }: ITimesheetContext): IContextualMenu
     iconOnly: true,
     iconProps: { iconName: 'Forward', ...ACTIONBAR_ICON_PROPS },
     onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: { amount: 1, unit: 'week' } }),
-    title: resource('TIMESHEET.COMMANDBAR_NEXT_WEEK_TEXT'),
+    title: resource('TIMESHEET.MOVE_NEXT_WEEK'),
 });
 
 export const CHANGE_PERIOD = ({ periods, loading, selectedPeriod, dispatch }: ITimesheetContext): IContextualMenuItem[] => {
@@ -58,22 +57,24 @@ export const CHANGE_PERIOD = ({ periods, loading, selectedPeriod, dispatch }: IT
     }));
 };
 
-export const CONFIRM_ACTIONS = (
-    { loading, selectedPeriod }: ITimesheetContext,
-    { onConfirmPeriod, onUnconfirmPeriod }: IActionBarProps,
+export const CONFIRM_ACTIONS = (context: ITimesheetContext
 ): IContextualMenuItem => ({
     key: 'CONFIRM_HOURS',
-    onRender: () => selectedPeriod.isConfirmed
+    onRender: () => context.selectedPeriod.isConfirmed
         ? <DefaultButton
-            disabled={!!loading}
+            disabled={!!context.loading}
             iconProps={{ iconName: 'Cancel' }}
-            onClick={onUnconfirmPeriod}
+            onClick={context.onUnconfirmPeriod}
             text={resource('TIMESHEET.UNCONFIRM_HOURS_TEXT')}
             styles={{ root: { height: 44, marginLeft: 4 } }} />
         : <PrimaryButton
-            disabled={!!loading || selectedPeriod.unmatchedDuration > 0 || selectedPeriod.events.length === 0}
+            disabled={
+                !!context.loading
+                || context.selectedPeriod.unmatchedDuration > 0
+                || context.selectedPeriod.events.length === 0
+            }
             iconProps={{ iconName: 'CheckMark' }}
-            onClick={onConfirmPeriod}
+            onClick={context.onConfirmPeriod}
             text={resource('TIMESHEET.CONFIRM_HOURS_TEXT')}
             styles={{ root: { height: 44, marginLeft: 4 } }} />
 });

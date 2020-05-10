@@ -1,0 +1,21 @@
+.root {
+  .container {
+    padding: 20px;
+    overflow: hidden;
+
+    .title {
+      margin: 0 0 15px 0;
+      font-size: 14pt;
+      font-weight: 500;
+    }
+
+    .sequence {
+      display: inline-block;
+      width: 120px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji,
+        Segoe UI Emoji;
+    }
+  }
+}
