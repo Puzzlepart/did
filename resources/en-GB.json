@@ -70,6 +70,7 @@
       "RANGE_WEEK": "Show last {0} weeks",
       "DEFAULT_LABEL_TITLE": "My new label",
       "ADD_NEW_LABEL": "Add new label",
+      "EDIT_LABEL": "Edit label",
       "SUMMARY_NO_TIME_ENTRIES": "There are no recorded hours for the selected year."
     },
     "REPORTS": {

@@ -43,21 +43,28 @@ export const LabelForm = (props: ILabelFormProps) => {
             {...props}
             containerClassName={styles.root}
             isOpen={true}>
-            <div className={styles.title}>{resource('ADMIN.ADD_NEW_LABEL')}</div>
+            <div className={styles.title}>{
+                props.label
+                    ? resource('ADMIN.EDIT_LABEL')
+                    : resource('ADMIN.ADD_NEW_LABEL')
+            }</div>
 
             <TextField
+                spellCheck={false}
                 label={resource('COMMON.NAME_LABEL')}
                 value={label.name}
                 required={true}
                 onChange={(_, name) => setLabel({ ...label, name })} />
 
             <TextField
+                spellCheck={false}
                 label={resource('COMMON.DESCRIPTION_LABEL')}
                 value={label.description}
                 multiline={true}
                 onChange={(_, description) => setLabel({ ...label, description })} />
 
             <TextField
+                spellCheck={false}
                 label={resource('COMMON.ICON_LABEL')}
                 value={label.icon}
                 onChange={(_, icon) => setLabel({ ...label, icon })} />
@@ -74,7 +81,7 @@ export const LabelForm = (props: ILabelFormProps) => {
             {colorPickerVisible && <SketchPicker color={label.color} onChange={({ hex }) => setLabel({ ...label, color: hex })} />}
 
             <Label>{resource('COMMON.PREVIEW_TEXT')}</Label>
-            <EntityLabel label={label} />
+            <EntityLabel label={label} size='medium' />
 
             <PrimaryButton
                 className={styles.saveBtn}

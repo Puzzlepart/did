@@ -70,6 +70,7 @@
       "RANGE_WEEK": "Vis siste {0} uker",
       "DEFAULT_LABEL_TITLE": "Ny merkelapp",
       "ADD_NEW_LABEL": "Opprett ny merkelapp",
+      "EDIT_LABEL": "Rediger merkelapp",
       "SUMMARY_NO_TIME_ENTRIES": "Det er ingen registrerte timer for det valgte året."
     },
     "REPORTS": {
