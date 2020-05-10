@@ -53,7 +53,6 @@ export const reducer = (state: ITimesheetState, action: TimesheetAction): ITimes
                 description: resource('TIMESHEET.UNCONFIRMING_PERIOD_DESCRIPTION'),
             };
             break;
-
         case 'MOVE_SCOPE':
             if (typeof action.payload === 'string') {
                 newState.scope = new TimesheetScope(action.payload);
