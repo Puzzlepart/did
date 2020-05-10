@@ -1,6 +1,5 @@
 const { createTableService, TableQuery, TableUtilities } = require('azure-storage');
 const azureTableService = createTableService(process.env.AZURE_STORAGE_CONNECTION_STRING);
-const moment = require('moment');
 
 /**
  * Parse an array of Azure table storage entities
@@ -26,9 +25,6 @@ function parseEntities(arr, mapFunc, options) {
             switch (item[key].$) {
                 case 'Edm.DateTime': {
                     let dateValue = value.toISOString();
-                    if (options.dateFormat) {
-                        dateValue = moment(dateValue).format(options.dateFormat);
-                    }
                     obj[newKey] = dateValue;
                 }
                     break;
