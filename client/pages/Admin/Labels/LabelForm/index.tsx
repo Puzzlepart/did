@@ -28,11 +28,8 @@ export const LabelForm = (props: ILabelFormProps) => {
     const [updateLabel] = useMutation(UPDATE_LABEL);
 
     const onSave = async () => {
-        if (props.label) {
-            await updateLabel({ variables: { label: omit(label, '__typename') } });
-        } else {
-            await addLabel({ variables: { label: omit(label, '__typename') } });
-        }
+        if (props.label) await updateLabel({ variables: { label: omit(label, '__typename') } });
+        else await addLabel({ variables: { label: omit(label, '__typename') } });
         props.onSave(label);
     }
 
@@ -78,7 +75,11 @@ export const LabelForm = (props: ILabelFormProps) => {
                 }
                 iconProps={{ iconName: colorPickerVisible ? 'ChromeClose' : 'Color' }}
                 onClick={() => setColorPickerVisible(!colorPickerVisible)} />
-            {colorPickerVisible && <SketchPicker color={label.color} onChange={({ hex }) => setLabel({ ...label, color: hex })} />}
+            {colorPickerVisible && (
+                <SketchPicker
+                    color={label.color}
+                    onChange={({ hex }) => setLabel({ ...label, color: hex })} />
+            )}
 
             <Label>{resource('COMMON.PREVIEW_TEXT')}</Label>
             <EntityLabel label={label} size='medium' />
