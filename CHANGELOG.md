@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Including project code in tooltip #243
 - Presenting active/inactive status for customers and projects in views #168
 - Changed chart library from `highcharts` to `recharts` due to licenses #273
+- Support for adding DID365 as an app in Microsoft Teams #170
 
 ### Fixed
 - Sorted customer options alphabetically by name in summary view(s) #260
