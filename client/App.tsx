@@ -1,9 +1,9 @@
 
+import { ApolloProvider } from '@apollo/react-common';
 import { ApplicationInsights } from '@microsoft/applicationinsights-web';
 import { initializeIcons } from '@uifabric/icons';
 import i18n from 'i18next';
 import * as React from 'react';
-import { ApolloProvider } from 'react-apollo';
 import * as ReactDom from 'react-dom';
 import { AdminView } from './components/AdminView';
 import { Customers } from './components/Customers';
