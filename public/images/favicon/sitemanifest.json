@@ -1,6 +1,7 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "DID365",
+    "short_name": "DID 365: The Calendar is the Timesheet",
+    "description": "Timetracking made easy",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -13,7 +14,9 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#ffffff",
+    "start_url":"/",
+    "scope":"/",
+    "theme_color": "#cf5f00",
     "background_color": "#ffffff",
     "display": "standalone"
 }
