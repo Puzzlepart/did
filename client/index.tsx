@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/camelcase */
+import { ApolloProvider } from '@apollo/react-common';
 import { initializeIcons } from '@uifabric/icons';
 import 'core-js/stable';
 import * as React from 'react';
-import { ApolloProvider } from 'react-apollo';
 import * as ReactDom from 'react-dom';
 import 'regenerator-runtime/runtime.js';
 import DateUtils from 'utils/date';
