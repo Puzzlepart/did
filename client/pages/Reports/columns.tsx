@@ -1,6 +1,7 @@
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import dateUtils from 'utils/date';
 import { ExcelColumnType } from 'utils/exportExcel';
 
 
@@ -37,6 +38,7 @@ const columns = (resource: any): IColumn[] => ([
         name: resource('COMMON.START_TIME_LABEL'),
         minWidth: 100,
         data: { excelColFormat: 'date' as ExcelColumnType },
+        onRender: ({ startTime }) => dateUtils.formatDate(startTime, 'MMM DD, YYYY kk:mm')
     },
     {
         key: 'endTime',
@@ -44,6 +46,7 @@ const columns = (resource: any): IColumn[] => ([
         name: resource('COMMON.END_TIME_LABEL'),
         minWidth: 100,
         data: { excelColFormat: 'date' as ExcelColumnType },
+        onRender: ({ endTime }) => dateUtils.formatDate(endTime, 'MMM DD, YYYY kk:mm')
     },
     {
         key: 'weekNumber',
