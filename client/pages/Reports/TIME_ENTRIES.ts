@@ -5,7 +5,7 @@ import gql from 'graphql-tag';
  */
 export default gql`
     query {
-         timeentries(dateFormat: "MMM DD, YYYY kk:mm")  {
+         timeentries {
             title
             durationHours
             startTime
