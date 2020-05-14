@@ -1,0 +1,55 @@
+{
+  "TIMESHEET": {
+    "OVERVIEW_HEADER_TEXT": "Overview",
+    "SUMMARY_HEADER_TEXT": "Summary",
+    "ALLOCATION_HEADER_TEXT": "Allocation",
+    "ALLOCATION_PROJECT_CHART_TITLE": "Allocation per project",
+    "ALLOCATION_CUSTOMER_CHART_TITLE": "Allocation per customer",
+    "CONFIRM_HOURS_TEXT": "Confirm hours",
+    "UNCONFIRM_HOURS_TEXT": "Unconfirm hours",
+    "COMMANDBAR_CURRENT_WEEK_TEXT": "Go to current week",
+    "COMMANDBAR_PREV_WEEK_TEXT": "Go to previous week",
+    "COMMANDBAR_NEXT_WEEK_TEXT": "Go to next week",
+    "PERIOD_HOURS_SUMMARY_TEXT": "You have a total of **{0}** this period",
+    "HOURS_NOT_MATCHED_TEXT": "You have **{0}** that are not matched. All events must be matched before you can confirm your hours.",
+    "ALL_HOURS_MATCHED_TEXT": "All your hours are matched. Are you ready to confirm the period?",
+    "PERIOD_CONFIRMED_TEXT": "The period is confirmed with {0}. Click **Unconfirm hours** if you want to do some adjustments.",
+    "IGNORED_EVENTS_TEXT": "You have {0} ignored event(s).",
+    "UNDO_IGNORE_LINK_TEXT": "Click to undo",
+    "UNRESOLVER_ERRORS_TEXT": "You have {0} unresolved errors. You need to resolve them before confirming the hours",
+    "SPLIT_WEEK_TEXT": "Selected week spans two months. Navigate between the first and second period using the command bar above.",
+    "EVENT_ERROR_PREFIX": "**NOTE:**",
+    "NO_PROJECT_MATCH_FOUND_TEXT": "No match found",
+    "RESOLVE_PROJECT_BUTTON_LABEL": "Resolve",
+    "IGNORE_EVENT_BUTTON_LABEL": "Ignore",
+    "CLEAR_PROJECT_MATCH_TOOLTIP_TEXT": "Clear match",
+    "MATCH_OUTLOOK_NOTE": "**Please note:** You should try your best to match<a href='{0}' target='_blank'>the event in Outlook</a>, but in some cases it might be neccessary to manually match.",
+    "DID_YOU_MEAN_TEXT": "Did you mean",
+    "EVENT_NOT_FULLY_MATCHED_TEXT": "Event not matched. We found a matching customer `{0}`, but not a project with the specified key."
+  },
+  "PROJECTS": {
+    "PROJECT_INACTIVE_TEXT": "This project has been marked as inactive.",
+    "SEARCH_PLACEHOLDER": "Search in projects...",
+    "CATEGORY_OUTLOOK_TEXT": "This project has a category in your Outlook.",
+    "PROJECT_WORKSPACE_LABEL": "Project workspace",
+    "CREATE_OUTLOOK_CATEGORY_LABEL": "Create category in Outlook",
+    "OUTLOOK_CATEGORY_INFO_TEXT": "Here you can see the projects that have a corresponding category in Outlook.",
+    "NO_TIME_ENTRIES_TEXT": "No time entries registered for the project.",
+    "TIME_ENTRIES_ERROR_TEXT": "An error occured loading time entries for the project.",
+    "TIME_ENTRIES_LOADING_LABEL": "Loading time entries",
+    "MY_PROJECTS_TEXT": "My projects",
+    "MY_PROJECTS_SEARCH_PLACEHOLDER": "Search my projects..."
+  },
+  "CUSTOMERS": {
+    "CUSTOMER_INACTIVE_TEXT": "This customer has been marked as inactive.",
+    "CUSTOMER_DELETE_BUTTON_LABEL": "Delete customer",
+    "CUSTOMER_DELETE_CONFIRMATION_TEXT": "The customer {0} and connected projects was deleted."
+  },
+  "COMMON": {
+    "SEARCH_PLACEHOLDER": "Search...",
+    "GENERIC_ERROR_TEXT": "An error occured.",
+    "EXPORT_TO_EXCEL_LABEL": "Export to Excel",
+    "SEARCH_TEXT": "Search",
+    "CREATE_NEW_TEXT": "Create new"
+  }
+}

@@ -55,6 +55,14 @@ const List = (props: IListProps) => {
     const onRenderGroupHeader = (headerProps: IDetailsGroupDividerProps) => {
         return <GroupHeader {...headerProps} styles={{ title: { cursor: 'initial' }, expand: { cursor: 'pointer' }, headerCount: { display: 'none' } }}></GroupHeader>;
     }
+    /**
+     * On render group header
+     * 
+     * @param {IDetailsGroupDividerProps} headerProps Header props
+     */
+    const onRenderGroupHeader = (headerProps: IDetailsGroupDividerProps) => {
+        return <GroupHeader {...headerProps} styles={{ title: { cursor: 'initial' }, expand: { cursor: 'pointer' }, headerCount: { display: 'none' } }}></GroupHeader>;
+    }
 
     let groups = null;
     let items = [...state.items];
