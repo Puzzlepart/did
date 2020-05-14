@@ -1,6 +1,6 @@
-import { ITimeEntry } from 'interfaces/ITimeEntry';
-import { ITypedHash, IPnPClientStore, dateAdd, PnPClientStorage } from '@pnp/common';
+import { dateAdd, IPnPClientStore, ITypedHash, PnPClientStorage } from '@pnp/common';
 import { IProject } from 'interfaces/IProject';
+import { ITimeEntry } from 'interfaces/ITimeEntry';
 
 export class TimesheetPeriod {
     public id?: string;
@@ -68,7 +68,7 @@ export class TimesheetPeriod {
     */
     public saveManualMatch(eventId: string, project: IProject) {
         let matches = this.manualMatches;
-        this[eventId] = project;
+        matches[eventId] = project;
         this._localStorage.put(this._uiMatchedEventsStorageKey, matches, dateAdd(new Date(), 'month', 1));
     }
 
