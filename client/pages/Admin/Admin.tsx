@@ -1,7 +1,7 @@
 
-import resource from 'i18n';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import styles from './Admin.module.scss';
 import { Labels } from './Labels';
@@ -12,6 +12,7 @@ import { Users } from './Users';
  * @category Admin
  */
 export const Admin = () => {
+    const { t } = useTranslation('admin');
     const history = useHistory();
     const { view } = useParams<{ view: string }>();
     return (
@@ -22,21 +23,21 @@ export const Admin = () => {
                 <PivotItem
                     className={styles.tab}
                     itemKey='users'
-                    headerText={resource('ADMIN.USERS')}
+                    headerText={t('users')}
                     itemIcon='FabricUserFolder'>
                     <Users />
                 </PivotItem>
                 <PivotItem
                     className={styles.tab}
                     itemKey='summary'
-                    headerText={resource('ADMIN.SUMMARY')}
+                    headerText={t('summary')}
                     itemIcon='CalendarWeek'>
                     <AdminSummaryView />
                 </PivotItem>
                 <PivotItem
                     className={styles.tab}
                     itemKey='labels'
-                    headerText={resource('ADMIN.LABELS')}
+                    headerText={t('labels')}
                     itemIcon='Label'>
                     <Labels />
                 </PivotItem>

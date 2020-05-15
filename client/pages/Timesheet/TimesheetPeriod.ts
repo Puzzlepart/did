@@ -1,6 +1,6 @@
 /* eslint-disable prefer-const */
 import { dateAdd, IPnPClientStore, ITypedHash, PnPClientStorage } from '@pnp/common';
-import resource from 'i18n';
+import { TFunction } from 'i18next';
 import { IProject } from 'interfaces/IProject';
 import { ITimeEntry } from 'interfaces/ITimeEntry';
 import { omit } from 'underscore';
@@ -37,8 +37,8 @@ export class TimesheetPeriod {
         }
     }
 
-    public getName(includeMonth: boolean) {
-        let name = `${resource('COMMON.WEEK_LABEL')} ${this.week}`;
+    public getName(includeMonth: boolean, t: TFunction) {
+        let name = `${t('weekLabel', { ns: 'COMMON' })} ${this.week}`;
         if (includeMonth) name += ` (${this.month})`;
         return name;
     }

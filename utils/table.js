@@ -122,7 +122,6 @@ function addEntity(table, item) {
             if (!error) {
                 return resolve(result['.metadata']);
             } else {
-                console.log(error);
                 reject(error);
             }
         })

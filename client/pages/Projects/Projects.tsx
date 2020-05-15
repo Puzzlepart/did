@@ -1,7 +1,6 @@
 import { useQuery } from '@apollo/react-hooks';
 import { UserMessage } from 'components/UserMessage';
 import { value as value } from 'helpers';
-import resource from 'i18n';
 import { IOutlookCategory, IProject } from 'interfaces';
 import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList';
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
@@ -9,6 +8,7 @@ import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import { CreateProjectForm } from 'pages/Projects/CreateProjectForm';
 import * as React from 'react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import _ from 'underscore';
 import { ProjectDetails } from './ProjectDetails';
@@ -19,6 +19,7 @@ import { GET_PROJECTS, IGetProjectsData } from './types';
  * @category Projects
  */
 export const Projects = () => {
+    const { t } = useTranslation(['projects', 'COMMON']);
     const params = useParams<{ key: string }>();
     const [selected, setSelected] = useState<IProject>(null);
     const { loading, error, data } = useQuery<IGetProjectsData>(GET_PROJECTS, { variables: { sortBy: 'name' }, fetchPolicy: 'cache-first' });
@@ -38,16 +39,16 @@ export const Projects = () => {
             <PivotItem
                 itemID='search'
                 itemKey='search'
-                headerText={resource('COMMON.SEARCH_TEXT')}
+                headerText={t('search', { ns: 'COMMON' })}
                 itemIcon='FabricFolderSearch'>
                 {error
-                    ? <UserMessage type={MessageBarType.error} text={resource('COMMON.GENERIC_ERROR_TEXT')} />
+                    ? <UserMessage type={MessageBarType.error} text={t('genericErrorText')} />
                     : (
                         <>
                             <ProjectList
                                 enableShimmer={loading}
                                 items={projects}
-                                searchBox={{ placeholder: resource('COMMON.SEARCH_PLACEHOLDER') }}
+                                searchBox={{ placeholder: t('searchPlaceholder') }}
                                 selection={{
                                     mode: SelectionMode.single,
                                     onChanged: selected => setSelected(selected),
@@ -60,17 +61,20 @@ export const Projects = () => {
             <PivotItem
                 itemID='myprojects'
                 itemKey='myprojects'
-                headerText={resource('PROJECTS.MY_PROJECTS_TEXT')}
+                headerText={t('myProjectsText')}
                 itemIcon='FabricUserFolder'>
                 {error
-                    ? <UserMessage type={MessageBarType.error} text={resource('COMMON.GENERIC_ERROR_TEXT')} />
+                    ? <UserMessage type={MessageBarType.error} text={t('genericErrorText', { ns: 'COMMON' })} />
                     : (
                         <>
-                            <UserMessage containerStyle={{ marginBottom: 12 }} iconName='OutlookLogoInverse' text={resource('PROJECTS.OUTLOOK_CATEGORY_INFO_TEXT')} />
+                            <UserMessage
+                                containerStyle={{ marginBottom: 12 }}
+                                iconName='OutlookLogoInverse'
+                                text={t('outlookCategoryInfoText')} />
                             <ProjectList
                                 enableShimmer={loading}
                                 items={projects.filter(p => !!p.outlookCategory)}
-                                searchBox={{ placeholder: resource('PROJECTS.MY_PROJECTS_SEARCH_PLACEHOLDER') }}
+                                searchBox={{ placeholder: t('myProjectsSearchPlaceholder') }}
                                 selection={{
                                     mode: SelectionMode.single,
                                     onChanged: selected => setSelected(selected),
@@ -85,7 +89,7 @@ export const Projects = () => {
             <PivotItem
                 itemID='new'
                 itemKey='new'
-                headerText={resource('COMMON.CREATE_NEW_TEXT')}
+                headerText={t('createNewText', { ns: 'COMMON' })}
                 itemIcon='AddTo'>
                 <CreateProjectForm />
             </PivotItem>

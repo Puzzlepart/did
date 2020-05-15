@@ -1,11 +1,11 @@
 import { SearchProject, UserMessage } from 'components';
 import { value as value } from 'helpers';
-import resource from 'i18n';
 import { IProject } from 'interfaces/IProject';
 import { MessageBarButton } from 'office-ui-fabric-react/lib/Button';
 import { Modal } from 'office-ui-fabric-react/lib/Modal';
 import { ITimesheetContext, TimesheetContext } from 'pages/Timesheet/TimesheetContext';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import format from 'string-format';
 import styles from './ResolveProjectModal.module.scss';
 import { IResolveProjectModalProps } from './types';
@@ -14,6 +14,7 @@ import { IResolveProjectModalProps } from './types';
  * @category Timesheet
 */
 export const ResolveProjectModal = ({ event }: IResolveProjectModalProps) => {
+    const { t } = useTranslation(['timesheet', 'COMMON']);
     const { dispatch } = React.useContext<ITimesheetContext>(TimesheetContext);
     const [showResolveModal, setShowResolveModal] = React.useState<boolean>(false);
 
@@ -25,7 +26,7 @@ export const ResolveProjectModal = ({ event }: IResolveProjectModalProps) => {
     return (
         <>
             <MessageBarButton
-                text={resource('TIMESHEET.RESOLVE_PROJECT_BUTTON_LABEL')}
+                text={t('resolveProjectButtonLabel')}
                 iconProps={{ iconName: 'ReviewResponseSolid' }}
                 onClick={() => setShowResolveModal(true)} />
             <Modal
@@ -35,14 +36,14 @@ export const ResolveProjectModal = ({ event }: IResolveProjectModalProps) => {
                 <div className={styles.title}>{event.title}</div>
                 <UserMessage
                     iconName='OutlookLogo'
-                    text={format(resource('TIMESHEET.MATCH_OUTLOOK_NOTE'), event.webLink)} />
+                    text={format(t('matchOutlookInfoText'), event.webLink)} />
 
                 <UserMessage
                     hidden={!event.suggestedProject}
                     containerStyle={{ marginTop: 10 }}
                     iconName='Lightbulb' >
                     <p>
-                        <span>{resource('TIMESHEET.DID_YOU_MEAN_TEXT')}</span>
+                        <span>{t('didYouMeanText')}</span>
                         <a href='#' onClick={() => onResolve(event.suggestedProject)}>
                             {value(event, 'suggestedProject.id', '')}
                         </a>?
@@ -52,12 +53,12 @@ export const ResolveProjectModal = ({ event }: IResolveProjectModalProps) => {
                 <UserMessage
                     hidden={!event.customer || !!event.suggestedProject}
                     containerStyle={{ marginTop: 10 }}
-                    text={format(resource('TIMESHEET.EVENT_NOT_FULLY_MATCHED_TEXT'), value(event, 'customer.name', ''))} />
+                    text={format(t('eventNotFullyMatchedText'), value(event, 'customer.name', ''))} />
                 <SearchProject
                     width={450}
                     className={styles.searchProject}
                     onSelected={project => onResolve(project)}
-                    placeholder={resource('PROJECTS.SEARCH_PLACEHOLDER')} />
+                    placeholder={t('searchPlaceholder', { ns: 'COMMON' })} />
             </Modal>
         </>
     );

@@ -1,6 +1,5 @@
 
 import { useQuery } from '@apollo/react-hooks';
-import resource from 'i18n';
 import { IProject } from 'interfaces/IProject';
 import { GET_PROJECTS } from 'pages/Projects/types';
 import * as React from 'react';
@@ -30,7 +29,7 @@ export const SearchProject = (props: ISearchProjectProps) => {
             disabled={loading}
             items={searchData}
             width={450}
-            placeholder={resource('COMMON.SEARCH_PLACEHOLDER')}
+            placeholder={props.placeholder}
             onClear={() => props.onSelected(null)}
             onSelected={item => props.onSelected(item.data)} />
     );

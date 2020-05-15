@@ -1,5 +1,4 @@
 import { value as value } from 'helpers';
-import resource from 'i18n';
 import { unique } from 'underscore';
 import { capitalize } from 'underscore.string';
 import dateUtils from 'utils/date';
@@ -10,7 +9,7 @@ import { BaseFilter, IFilter } from './BaseFilter';
  * @category FilterPanel
  */
 export class MonthFilter extends BaseFilter {
-    constructor(fieldName: string) {
+    constructor(public fieldName: string, public name: string) {
         super(fieldName);
     }
 
@@ -27,7 +26,7 @@ export class MonthFilter extends BaseFilter {
         const items = months.map(month => ({ key: month, value: month, }));
         return {
             key: this.fieldName,
-            name: resource('COMMON.MONTH_LABEL'),
+            name: this.name,
             items,
             selected: [],
         };

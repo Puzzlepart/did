@@ -1,5 +1,4 @@
 import { value as value } from 'helpers';
-import resource from 'i18n';
 import _ from 'underscore';
 import { BaseFilter, IFilter } from './BaseFilter';
 
@@ -7,7 +6,7 @@ import { BaseFilter, IFilter } from './BaseFilter';
  * @category FilterPanel
  */
 export class YearFilter extends BaseFilter {
-    constructor(fieldName: string) {
+    constructor(public fieldName: string, public name: string) {
         super(fieldName);
     }
 
@@ -24,7 +23,7 @@ export class YearFilter extends BaseFilter {
         }));
         return {
             key: this.fieldName,
-            name: resource('COMMON.YEAR_LABEL'),
+            name: this.name,
             items,
             selected: [],
         }

@@ -1,15 +1,14 @@
 import { DurationColumn } from 'components/DurationColumn';
 import { LabelColumn } from 'components/LabelColumn';
 import { value } from 'helpers';
-import resource from 'i18n';
+import { TFunction } from 'i18next';
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import * as React from 'react';
 import { unique } from 'underscore';
 import { generateColumn as col } from 'utils/generateColumn';
 import { ISummaryViewState } from './types';
 
-
-export function createColumns({ scope, range, timeentries }: ISummaryViewState): IColumn[] {
+export function createColumns({ scope, range, timeentries }: ISummaryViewState, t: TFunction): IColumn[] {
     const data = unique(
         timeentries.map(e => value(e, scope.fieldName, null)), m => m
     ).sort((a, b) => a - b);
@@ -46,7 +45,7 @@ export function createColumns({ scope, range, timeentries }: ISummaryViewState):
         ...columns,
         col(
             'sum',
-            resource('COMMON.SUM_LABEL'),
+            t('sumLabel'),
             {
                 minWidth: 50,
                 maxWidth: 50,

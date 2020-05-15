@@ -1,6 +1,5 @@
 
 import * as helpers from 'helpers';
-import resource from 'i18n';
 import { ITimeEntry } from 'interfaces';
 import * as React from 'react';
 import dateUtils from 'utils/date';
@@ -29,13 +28,14 @@ function getSizing(props: IEventListProps, fieldName: string, defMinWidth: numbe
  * Title column
  * 
  * @param {IEventListProps} props Props
+ * @param {string} name Name
  * @param {string} fieldName Field name
  * 
  * @ignore
  */
-export const Title = (props: IEventListProps, fieldName = 'title'): IColumn => col(
+export const Title = (props: IEventListProps, name: string, fieldName = 'title'): IColumn => col(
     fieldName,
-    resource('COMMON.TITLE_LABEL'),
+    name,
     { ...getSizing(props, fieldName, 320, 400) },
     (event: ITimeEntry) => <a href={event.webLink} target='_blank' rel='noopener noreferrer' className='truncate' title={event.title}>{event.title}</a>,
 );
@@ -45,13 +45,14 @@ export const Title = (props: IEventListProps, fieldName = 'title'): IColumn => c
  * Time column
  * 
  * @param {IEventListProps} props Props
+ * @param {string} name Name
  * @param {string} fieldName Field name
  * 
  * @ignore
  */
-export const Time = (props: IEventListProps, fieldName = 'time'): IColumn => col(
+export const Time = (props: IEventListProps, name: string, fieldName = 'time'): IColumn => col(
     fieldName,
-    resource('COMMON.TIME_LABEL'),
+    name,
     { ...getSizing(props, fieldName, 90, 90) },
     (event: ITimeEntry) => {
         return (
@@ -66,13 +67,14 @@ export const Time = (props: IEventListProps, fieldName = 'time'): IColumn => col
  * Duration column
  * 
  * @param {IEventListProps} props Props
+ * @param {string} name Name
  * @param {string} fieldName Field name
  * 
  * @ignore
  */
-export const Duration = (props: IEventListProps, fieldName = 'durationMinutes'): IColumn => col(
+export const Duration = (props: IEventListProps, name: string, fieldName = 'durationMinutes'): IColumn => col(
     fieldName,
-    resource('COMMON.DURATION_LABEL'),
+    name,
     { ...getSizing(props, fieldName, 75, 75) },
     (event: ITimeEntry) => <DurationDisplay minutes={event.durationMinutes} />
 );

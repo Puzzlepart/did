@@ -65,17 +65,14 @@ class StorageService {
      * @param {*} id
      */
     async deleteLabel(id) {
-        console.log(this.tenantId, id);
         try {
             const result = await tableUtils.deleteEntity('Labels', {
                 PartitionKey: tableUtils.entGen.String(this.tenantId),
                 RowKey: tableUtils.entGen.String(id),
             });
-            console.log(result);
             return result;
         }
         catch (error) {
-            console.log(error);
             throw error;
         }
     }

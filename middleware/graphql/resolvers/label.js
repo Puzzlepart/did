@@ -35,7 +35,6 @@ async function labels(_obj, _variables, { services: { storage: StorageService } 
 }
 
 async function addLabel(_obj, { label }, { services: { storage: StorageService } }) {
-    console.log(label, 'addLabel');
     try {
         await StorageService.addLabel(label);
         return { success: true, error: null };

@@ -1,6 +1,5 @@
 import { useMutation } from '@apollo/react-hooks';
 import { EntityLabel } from 'components/EntityLabel';
-import resource from 'i18n';
 import { IEntityLabel } from 'interfaces/IEntityLabel';
 import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react/lib/Button';
 import { Label } from 'office-ui-fabric-react/lib/Label';
@@ -8,6 +7,7 @@ import { Modal } from 'office-ui-fabric-react/lib/Modal';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import * as React from 'react';
 import SketchPicker from 'react-color/lib/components/sketch/Sketch';
+import { useTranslation } from 'react-i18next';
 import { omit } from 'underscore';
 import validator from 'validator';
 import { ADD_LABEL, UPDATE_LABEL } from '../types';
@@ -18,6 +18,7 @@ import { ILabelFormProps } from './types';
  * @category LabelForm
  */
 export const LabelForm = (props: ILabelFormProps) => {
+    const { t } = useTranslation(['COMMON', 'admin']);
     const [label, setLabel] = React.useState<IEntityLabel>(props.label || {
         name: '',
         description: '',
@@ -42,36 +43,36 @@ export const LabelForm = (props: ILabelFormProps) => {
             isOpen={true}>
             <div className={styles.title}>{
                 props.label
-                    ? resource('ADMIN.EDIT_LABEL')
-                    : resource('ADMIN.ADD_NEW_LABEL')
+                    ? t('editLabel', { ns: 'admin' })
+                    : t('addNewLabel', { ns: 'admin' })
             }</div>
 
             <TextField
                 spellCheck={false}
-                label={resource('COMMON.NAME_LABEL')}
+                label={t('nameLabel')}
                 value={label.name}
                 required={true}
                 onChange={(_, name) => setLabel({ ...label, name })} />
 
             <TextField
                 spellCheck={false}
-                label={resource('COMMON.DESCRIPTION_LABEL')}
+                label={t('descriptionLabel')}
                 value={label.description}
                 multiline={true}
                 onChange={(_, description) => setLabel({ ...label, description })} />
 
             <TextField
                 spellCheck={false}
-                label={resource('COMMON.ICON_LABEL')}
+                label={t('iconLabel')}
                 value={label.icon}
                 onChange={(_, icon) => setLabel({ ...label, icon })} />
 
-            <Label>{resource('COMMON.COLOR_LABEL')}</Label>
+            <Label>{t('colorLabel')}</Label>
             <DefaultButton
                 text={
                     colorPickerVisible
-                        ? resource('COMMON.CLOSE_COLOR_PICKER_TEXT')
-                        : resource('COMMON.OPEN_COLOR_PICKER_TEXT')
+                        ? t('closeColorPickerText')
+                        : t('openColorPickerText')
                 }
                 iconProps={{ iconName: colorPickerVisible ? 'ChromeClose' : 'Color' }}
                 onClick={() => setColorPickerVisible(!colorPickerVisible)} />
@@ -81,12 +82,12 @@ export const LabelForm = (props: ILabelFormProps) => {
                     onChange={({ hex }) => setLabel({ ...label, color: hex })} />
             )}
 
-            <Label>{resource('COMMON.PREVIEW_TEXT')}</Label>
+            <Label>{t('previewText')}</Label>
             <EntityLabel label={label} size='medium' />
 
             <PrimaryButton
                 className={styles.saveBtn}
-                text={resource('COMMON.SAVE')}
+                text={t('save', { ns: 'COMMON' })}
                 disabled={!isFormValid()}
                 onClick={onSave} />
         </Modal>

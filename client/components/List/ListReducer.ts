@@ -8,7 +8,7 @@ export interface IListState {
 
 type Action =
     { type: 'PROPS_UPDATED'; payload: IListProps }
-    | { type: 'SEARCH'; payload: string };
+    | { type: 'search'; payload: string };
 
 /**
  * Reducer for Timesheet
@@ -24,7 +24,7 @@ export const reducer = (state: IListState, action: Action): IListState => {
             newState.origItems = action.payload.items;
             newState.items = newState.origItems.filter(i => searchObject(i, newState.searchTerm));
             break;
-        case 'SEARCH':
+        case 'search':
             newState.searchTerm = action.payload;
             newState.items = newState.origItems.filter(i => searchObject(i, newState.searchTerm));
             break;
