@@ -8,17 +8,23 @@ const uuidv4 = require('uuid').v4
 class StorageService {
     constructor(tid) {
         this.tenantId = tid
-        this.filter = TableQuery.stringFilter('PartitionKey', TableUtilities.QueryComparisons.EQUAL, this.tenantId)
+        this.filter = TableQuery.stringFilter(
+            'PartitionKey',
+            TableUtilities.QueryComparisons.EQUAL,
+            this.tenantId
+        )
     }
     /**
      * Checks if the tenant id has a active subscription
      */
-    getSubscription() {
-        return new Promise(async (resolve) => {
+    async getSubscription() {
+        try {
             const query = tableUtils.createQuery(1, ['Name']).where('RowKey eq ?', this.tenantId)
             var { entries } = await tableUtils.queryTable('Subscriptions', query)
-            resolve(first(tableUtils.parseEntities(entries)))
-        })
+            return first(tableUtils.parseEntities(entries));
+        } catch (error) {
+            return null;
+        }
     }
     /**
      * Get labels
