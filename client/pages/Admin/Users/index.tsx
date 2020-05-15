@@ -37,9 +37,9 @@ export const Users = () => {
                     items: [
                         {
                             key: 'ADD_NEW_USER',
-                            name: t('ADD_NEW_USER'),
+                            name: t('ADD_NEW_USER', { ns: 'ADMIN' }),
                             iconProps: { iconName: 'AddFriend' },
-                            onClick: () => setUserForm({ title: t('ADD_NEW_USER') }),
+                            onClick: () => setUserForm({ title: t('ADD_NEW_USER', { ns: 'ADMIN' }) }),
                         },
                     ],
                     farItems: []

@@ -37,9 +37,6 @@ export const SummaryView = (): JSX.Element => {
         variables: { yearNumber: state.year },
     });
 
-    // eslint-disable-next-line no-console
-    console.log(t('SUMMARY_NO_TIME_ENTRIES'));
-
     React.useEffect(() => { dispatch({ type: 'DATA_UPDATED', payload: data }) }, [data]);
 
     const contextValue: ISummaryViewContext = React.useMemo(() => ({
@@ -50,7 +47,7 @@ export const SummaryView = (): JSX.Element => {
     }), [state]);
 
     const periods = React.useMemo(() => createPeriods(2), []);
-    const columns = React.useMemo(() => createColumns(state), [state]);
+    const columns = React.useMemo(() => createColumns(state, t), [state]);
     const items = React.useMemo(() => createRows(state, columns, t), [state]);
 
     return (
@@ -68,7 +65,7 @@ export const SummaryView = (): JSX.Element => {
                         commandBar={commandBar(contextValue, items, columns, t)} />
                     <UserMessage
                         hidden={!isEmpty(items) || loading}
-                        text={t('SUMMARY_NO_TIME_ENTRIES')} />
+                        text={t('SUMMARY_NO_TIME_ENTRIES', { ns: 'ADMIN' })} />
                 </PivotItem>
             ))}
         </Pivot>

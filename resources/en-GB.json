@@ -57,7 +57,10 @@
     "CUSTOMER_DELETE_CONFIRMATION_TEXT": "The customer {0} and connected projects was deleted.",
     "CUSTOMER_WEBLINK_TEXT": "Website",
     "CUSTOMER_EXTERNAL_SYSTEM_URL_TEXT": "External LOB system",
-    "CUSTOMER_KEY_DESCRIPTION": "A unique identifier for the customer. Keep it short, maximum 8 characters."
+    "CUSTOMER_KEY_DESCRIPTION": "A unique identifier for the customer. Keep it short, maximum 8 characters.",
+    "NAME_FORM_VALIDATION": "Name should be at least 2 characters long.",
+    "KEY_FORM_VALIDATION": "Customer key should be between 3 and 8 characters long, and all uppercase.",
+    "CREATE_SUCCESS_MESSAGE": "The customer **{0}** was succesfully created."
   },
   "ADMIN": {
     "USERS": "Users",

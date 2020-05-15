@@ -19,7 +19,7 @@ import { GET_PROJECTS, IGetProjectsData } from './types';
  * @category Projects
  */
 export const Projects = () => {
-    const { t } = useTranslation(['COMMON', 'PROJECTS']);
+    const { t } = useTranslation(['PROJECTS', 'COMMON']);
     const params = useParams<{ key: string }>();
     const [selected, setSelected] = useState<IProject>(null);
     const { loading, error, data } = useQuery<IGetProjectsData>(GET_PROJECTS, { variables: { sortBy: 'name' }, fetchPolicy: 'cache-first' });
@@ -39,7 +39,7 @@ export const Projects = () => {
             <PivotItem
                 itemID='search'
                 itemKey='search'
-                headerText={t('SEARCH_TEXT')}
+                headerText={t('SEARCH_TEXT', { ns: 'COMMON' })}
                 itemIcon='FabricFolderSearch'>
                 {error
                     ? <UserMessage type={MessageBarType.error} text={t('GENERIC_ERROR_TEXT')} />
@@ -64,10 +64,13 @@ export const Projects = () => {
                 headerText={t('MY_PROJECTS_TEXT')}
                 itemIcon='FabricUserFolder'>
                 {error
-                    ? <UserMessage type={MessageBarType.error} text={t('GENERIC_ERROR_TEXT')} />
+                    ? <UserMessage type={MessageBarType.error} text={t('GENERIC_ERROR_TEXT', { ns: 'COMMON' })} />
                     : (
                         <>
-                            <UserMessage containerStyle={{ marginBottom: 12 }} iconName='OutlookLogoInverse' text={t('OUTLOOK_CATEGORY_INFO_TEXT')} />
+                            <UserMessage
+                                containerStyle={{ marginBottom: 12 }}
+                                iconName='OutlookLogoInverse'
+                                text={t('OUTLOOK_CATEGORY_INFO_TEXT')} />
                             <ProjectList
                                 enableShimmer={loading}
                                 items={projects.filter(p => !!p.outlookCategory)}
@@ -86,7 +89,7 @@ export const Projects = () => {
             <PivotItem
                 itemID='new'
                 itemKey='new'
-                headerText={t('CREATE_NEW_TEXT')}
+                headerText={t('CREATE_NEW_TEXT', { ns: 'COMMON' })}
                 itemIcon='AddTo'>
                 <CreateProjectForm />
             </PivotItem>

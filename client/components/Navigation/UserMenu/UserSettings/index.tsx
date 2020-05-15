@@ -1,6 +1,5 @@
 import { useMutation } from '@apollo/react-hooks';
 import { AppContext } from 'AppContext';
-import i18n from 'i18n';
 import { Panel } from 'office-ui-fabric-react/lib/Panel';
 import UPDATE_USER from 'pages/Admin/Users/UserFormModal/UPDATE_USER';
 import React from 'react';
@@ -20,14 +19,7 @@ export const UserSettings = (props: React.HTMLProps<HTMLDivElement>) => {
     const [updateUser] = useMutation(UPDATE_USER);
 
     const onUpdateUserSettings = async (key: string, value: string | boolean) => {
-        await updateUser({ variables: { user: { id: user.id, [key]: value } } });
-        console.log(value);
-        // eslint-disable-next-line default-case
-        switch (key) {
-            case 'userLanguage': i18n.changeLanguage(value as string);
-                break;
-        }
-
+        await updateUser({ variables: { user: { id: user.id, [key]: value } } }).then(() => location.reload());
     };
 
     return (

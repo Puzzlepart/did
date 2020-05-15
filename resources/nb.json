@@ -57,7 +57,10 @@
       "CUSTOMER_DELETE_CONFIRMATION_TEXT": "Slettet kunde {0} og tilhørende prosjekter.",
       "CUSTOMER_WEBLINK_TEXT": "Webside",
       "CUSTOMER_EXTERNAL_SYSTEM_URL_TEXT": "Eksternt business-system",
-      "CUSTOMER_KEY_DESCRIPTION": "En unik identifikator for kunden. Holdt det kort, maks 8 tegn."
+      "CUSTOMER_KEY_DESCRIPTION": "En unik identifikator for kunden. Holdt det kort, maks 8 tegn.",
+      "NAME_FORM_VALIDATION": "Kundenavnet må være minst 2 tegn langt.",
+      "KEY_FORM_VALIDATION": "Kundenøkkelen må være mellom 3 og 8 tegn lang, og bare store bokstaver.",
+      "CREATE_SUCCESS_MESSAGE": "Kunden **{0}** ble opprettet."
     },
     "ADMIN": {
       "USERS": "Brukere",

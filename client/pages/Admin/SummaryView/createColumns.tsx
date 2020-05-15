@@ -1,15 +1,14 @@
 import { DurationColumn } from 'components/DurationColumn';
 import { LabelColumn } from 'components/LabelColumn';
 import { value } from 'helpers';
+import { TFunction } from 'i18next';
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import * as React from 'react';
-import { useTranslation } from 'react-i18next';
 import { unique } from 'underscore';
 import { generateColumn as col } from 'utils/generateColumn';
 import { ISummaryViewState } from './types';
 
-export function createColumns({ scope, range, timeentries }: ISummaryViewState): IColumn[] {
-    const { t } = useTranslation('COMMON');
+export function createColumns({ scope, range, timeentries }: ISummaryViewState, t: TFunction): IColumn[] {
     const data = unique(
         timeentries.map(e => value(e, scope.fieldName, null)), m => m
     ).sort((a, b) => a - b);

@@ -51,7 +51,7 @@ export const CreateProjectForm = () => {
     return (
         <div className={styles.root}>
             {message && <UserMessage {...message} containerStyle={{ marginTop: 12, marginBottom: 12, width: 450 }} />}
-            <Label>{t('CUSTOMER')}</Label>
+            <Label>{t('CUSTOMER', { ns: 'COMMON' })}</Label>
             <SearchCustomer
                 required={true}
                 className={styles.inputField}
@@ -59,7 +59,7 @@ export const CreateProjectForm = () => {
                 onSelected={customer => setModel({ ...model, customerKey: customer && customer.id })} />
             <TextField
                 className={styles.inputField}
-                label={t('KEY_LABEL')}
+                label={t('KEY_LABEL', { ns: 'COMMON' })}
                 description={t('PROJECT_KEY_DESCRIPTION')}
                 title={t('PROJECT_KEY_DESCRIPTION')}
                 required={true}
@@ -68,14 +68,14 @@ export const CreateProjectForm = () => {
                 value={model.projectKey} />
             <TextField
                 className={styles.inputField}
-                label={t('NAME_LABEL')}
+                label={t('NAME_LABEL', { ns: 'COMMON' })}
                 required={true}
                 errorMessage={validation.errors.name}
                 onChange={(_event, name) => setModel({ ...model, name })}
                 value={model.name} />
             <TextField
                 className={styles.inputField}
-                label={t('DESCRIPTION_LABEL')}
+                label={t('DESCRIPTION_LABEL', { ns: 'COMMON' })}
                 multiline={true}
                 errorMessage={validation.errors.description}
                 onChange={(_event, description) => setModel({ ...model, description })}
@@ -87,11 +87,10 @@ export const CreateProjectForm = () => {
                 onChange={(_event, opt) => setModel({ ...model, icon: opt.key as string })} />
             <PrimaryButton
                 styles={{ root: { marginTop: 16 } }}
-                text={t('ADD')}
+                text={t('ADD', { ns: 'COMMON' })}
                 iconProps={{ iconName: 'CirclePlus' }}
                 onClick={onFormSubmit}
                 disabled={loading || !!message} />
-            {JSON.stringify(model)}
         </div>
     );
 }

@@ -13,7 +13,7 @@ import { DELETE_LABEL, GET_LABELS } from './types';
  * @category Admin
  */
 export const Labels = () => {
-    const { t } = useTranslation(['COMMON', 'LABELS']);
+    const { t } = useTranslation(['ADMIN', 'COMMON']);
     const { data, refetch } = useQuery(GET_LABELS, { fetchPolicy: 'cache-and-network' });
     const [deleteLabel] = useMutation(DELETE_LABEL);
     const [form, setForm] = React.useState<ILabelFormProps>(null);
@@ -21,11 +21,11 @@ export const Labels = () => {
     const columns = [
         col(
             'name',
-            t('NAME_LABEL'),
+            t('NAME_LABEL', { ns: 'COMMON' }),
             { maxWidth: 180 },
             (label: IEntityLabel) => <EntityLabel label={label} />,
         ),
-        col('description', t('DESCRIPTION_LABEL')),
+        col('description', t('DESCRIPTION_LABEL', { ns: 'COMMON' })),
         col(
             'edit_delete',
             '',
@@ -34,10 +34,10 @@ export const Labels = () => {
                 <>
                     <DefaultButton
                         styles={{ root: { marginRight: 4 } }}
-                        text={t('EDIT_LABEL')}
+                        text={t('EDIT_LABEL', { ns: 'COMMON' })}
                         onClick={() => setForm({ label })} />
                     <DefaultButton
-                        text={t('DELETE_LABEL')}
+                        text={t('DELETE_LABEL', { ns: 'COMMON' })}
                         onClick={() => {
                             deleteLabel({ variables: { id: label.id } }).then(refetch);
                         }} />

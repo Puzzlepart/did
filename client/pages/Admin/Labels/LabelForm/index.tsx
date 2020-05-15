@@ -43,8 +43,8 @@ export const LabelForm = (props: ILabelFormProps) => {
             isOpen={true}>
             <div className={styles.title}>{
                 props.label
-                    ? t('EDIT_LABEL')
-                    : t('ADD_NEW_LABEL')
+                    ? t('EDIT_LABEL', { ns: 'ADMIN' })
+                    : t('ADD_NEW_LABEL', { ns: 'ADMIN' })
             }</div>
 
             <TextField
@@ -87,7 +87,7 @@ export const LabelForm = (props: ILabelFormProps) => {
 
             <PrimaryButton
                 className={styles.saveBtn}
-                text={t('SAVE')}
+                text={t('SAVE', { ns: 'COMMON' })}
                 disabled={!isFormValid()}
                 onClick={onSave} />
         </Modal>

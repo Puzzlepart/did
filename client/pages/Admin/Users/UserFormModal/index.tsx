@@ -41,7 +41,7 @@ export const UserFormModal = (props: IUserFormModalProps) => {
             containerClassName={styles.root}
             isOpen={true}>
             <div className={styles.title} hidden={!props.title}>
-
+                {props.title}
             </div>
             <TextField
                 label='ID'

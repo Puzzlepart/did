@@ -54,8 +54,8 @@ export const Reports = () => {
 
     if (loading) return (
         <ProgressIndicator
-            label={t('GENERATING_REPORT_LABEL')}
-            description={t('GENERATING_REPORT_DESCRIPTION')} />
+            label={t('GENERATING_REPORT_LABEL', { ns: 'REPORTS' })}
+            description={t('GENERATING_REPORT_DESCRIPTION', { ns: 'REPORTS' })} />
     );
 
     return (
@@ -87,7 +87,7 @@ export const Reports = () => {
                 }} />
             <UserMessage
                 hidden={timeentries.length > 0 || loading}
-                text={t('NO_ENTRIES_TEXT')} />
+                text={t('NO_ENTRIES_TEXT', { ns: 'REPORTS' })} />
             <FilterPanel
                 isOpen={filterPanelOpen}
                 filters={filters}

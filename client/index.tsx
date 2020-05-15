@@ -7,7 +7,6 @@ import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import 'regenerator-runtime/runtime.js';
 import DateUtils from 'utils/date';
-import { tryParseJson } from 'utils/tryParseJson';
 import { App } from './App';
 import { IAppContext } from './AppContext';
 import GET_CURRENT_USER from './GET_CURRENT_USER';
@@ -19,13 +18,9 @@ initializeIcons();
 
 (async () => {
     const container = document.getElementById('app');
-    const context = tryParseJson<IAppContext>(container.attributes.getNamedItem('data-props').value, {});
-    container.attributes.removeNamedItem('data-props');
-
     const { data } = await client.query<{ currentUser: any }>({ query: GET_CURRENT_USER });
-    context.user = data.currentUser;
+    const context: IAppContext = { user: data.currentUser };
     context.user.userLanguage = context.user.userLanguage || 'en-GB';
-
 
     DateUtils.setup(context.user.userLanguage);
     i18n.changeLanguage(context.user.userLanguage);
