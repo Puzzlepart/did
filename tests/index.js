@@ -9,8 +9,8 @@ describe('[Event matching]', () => {
 
     beforeEach(() => {
         testEvent = {
-            "title": "hello",
-            "categories": [],
+            title: "Important meeting",
+            categories: [],
         };
     })
 
@@ -20,7 +20,6 @@ describe('[Event matching]', () => {
             const event = _.first(matchEvents([testEvent], projects, customers));
             assert.strictEqual(event.customer.name, 'Employee Absence');
         });
-
 
         it('[IAM VAC] in subject should match against customer Employee Absence', () => {
             testEvent.title = '[IAM VAC]';
@@ -45,6 +44,13 @@ describe('[Event matching]', () => {
             const event = _.first(matchEvents([testEvent], projects, customers));
             assert.strictEqual(event.customer.name, 'Employee Absence');
         });
+
+        it('IAM ILL in category should take presedence bfore IAM VAC in subject', () => {
+            testEvent.body = 'Hello this is an event /IAM VAC/';
+            testEvent.categories.push('IAM ILL');
+            const event = _.first(matchEvents([testEvent], projects, customers));
+            assert.strictEqual(event.project.key, 'IAM ILL');
+        });
     });
 
 
@@ -67,7 +73,7 @@ describe('[Event matching]', () => {
             assert.strictEqual(event.suggestedProject.key, 'IAM VAC');
         });
 
-        it('{IAM WHAAT} in category should yield no project but a match against Employee Absence', () => {
+        it('{IAM TRAVELLING} in category should yield no project but a match against Employee Absence', () => {
             testEvent.categories.push('{IAM WHAAT}');
             const event = _.first(matchEvents([testEvent], projects, customers));
             assert.strictEqual(event.customer.name, 'Employee Absence');
