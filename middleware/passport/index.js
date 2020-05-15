@@ -1,23 +1,23 @@
-const passport = require('passport');
-const OIDCStrategy = require('passport-azure-ad').OIDCStrategy;
-const StorageService = require('../../services/storage');
+const passport = require('passport')
+const OIDCStrategy = require('passport-azure-ad').OIDCStrategy
+const StorageService = require('../../services/storage')
 
 passport.serializeUser((user, done) => {
-    done(null, user);
-});
+    done(null, user)
+})
 
 passport.deserializeUser(async (user, done) => {
     if (!user.data) {
-        user.data = await new StorageService(user.profile._json.tid).getUser(user.profile.oid);
+        user.data = await new StorageService(user.profile._json.tid).getUser(user.profile.oid)
     } if (user.data) {
-        done(null, user);
+        done(null, user)
     } else {
-        let error = new Error();
-        error.name = 'USER_NOT_ENROLLED';
-        error.message = 'You\'re not enrolled in Did 365. Please contact your system owner.';
-        done(error, null);
+        let error = new Error()
+        error.name = 'USER_NOT_ENROLLED'
+        error.message = 'You\'re not enrolled in Did 365. Please contact your system owner.'
+        done(error, null)
     }
-});
+})
 
 const strategy = new OIDCStrategy(
     {
@@ -33,8 +33,8 @@ const strategy = new OIDCStrategy(
         scope: process.env.OAUTH_SCOPES.split(' ')
     },
     require('./onVerifySubscription'),
-);
+)
 
-passport.use(strategy);
+passport.use(strategy)
 
-module.exports = passport;
+module.exports = passport

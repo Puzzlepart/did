@@ -1,4 +1,4 @@
-const helmet = require('helmet');
+const helmet = require('helmet')
 
 module.exports = helmet({
     frameguard: {
@@ -9,4 +9,4 @@ module.exports = helmet({
     hsts: helmet.hsts({ maxAge: 5184000 }),
     ieNoOpen: true,
     noSniff: true,
-});
+})

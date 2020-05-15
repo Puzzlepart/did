@@ -1,8 +1,8 @@
 
-const session = require('express-session');
-const connectAzureTables = require('connect-azuretables')(session);
+const session = require('express-session')
+const connectAzureTables = require('connect-azuretables')(session)
 
-const store = connectAzureTables.create({ table: 'Sessions', sessionTimeOut: 360 });
+const store = connectAzureTables.create({ table: 'Sessions', sessionTimeOut: 360 })
 
 module.exports = session({
     store: store,
@@ -10,4 +10,4 @@ module.exports = session({
     resave: false,
     saveUninitialized: false,
     rolling: true,
-});
+})

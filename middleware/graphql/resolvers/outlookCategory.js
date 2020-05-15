@@ -1,4 +1,4 @@
-const _ = require('underscore');
+const _ = require('underscore')
 
 const typeDef = `  
     type OutlookCategory {
@@ -20,19 +20,19 @@ const typeDef = `
     extend type Mutation {
         createOutlookCategory(category: OutlookCategoryInput!): BaseResult!
     }
-`;
+`
 
 async function outlookCategories(_obj, _args, context) {
-    let categories = await context.services.graph.getOutlookCategories();
-    return categories.map(c => ({ ...c, key: c.id }));
+    let categories = await context.services.graph.getOutlookCategories()
+    return categories.map(c => ({ ...c, key: c.id }))
 }
 
 async function createOutlookCategory(_obj, variables, context) {
     try {
-        const category = await context.services.graph.createOutlookCategory(variables.category);
-        return { data: JSON.stringify(category), success: true, error: null };
+        const category = await context.services.graph.createOutlookCategory(variables.category)
+        return { data: JSON.stringify(category), success: true, error: null }
     } catch (error) {
-        return { success: false, error: _.omit(error, 'requestId') };
+        return { success: false, error: _.omit(error, 'requestId') }
     }
 }
 

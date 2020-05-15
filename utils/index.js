@@ -1,4 +1,4 @@
-const moment = require('moment');
+const moment = require('moment')
 
 module.exports = {
     /**
@@ -27,7 +27,7 @@ module.exports = {
      * @param {*} date Date
      */
     getWeek: (date) => {
-        return moment(date).isoWeek();
+        return moment(date).isoWeek()
     },
 
     /**
@@ -36,7 +36,7 @@ module.exports = {
      * @param {*} date Date
      */
     getYear: (date) => {
-        return moment(date).year();
+        return moment(date).year()
     },
 
     /**
@@ -47,7 +47,7 @@ module.exports = {
      * @param {*} date Date
      */
     getMonthIndex: (date) => {
-        return moment(date).month() + 1;
+        return moment(date).month() + 1
     },
 
     /**
@@ -56,7 +56,7 @@ module.exports = {
      * @param {*} date Date
      */
     startOfMonth: (date) => {
-        return moment(date).startOf('month');
+        return moment(date).startOf('month')
     },
 
     /**
@@ -65,7 +65,7 @@ module.exports = {
      * @param {*} date Date
      */
     endOfMonth: (date) => {
-        return moment(date).endOf('month');
+        return moment(date).endOf('month')
     },
 
     /**
@@ -76,6 +76,6 @@ module.exports = {
      * @param {*} locale Locale
      */
     formatDate: (date, dateFormat, locale) => {
-        return moment(date).locale(locale).tz('Europe/Oslo').format(dateFormat);
+        return moment(date).locale(locale).tz('Europe/Oslo').format(dateFormat)
     }
 }

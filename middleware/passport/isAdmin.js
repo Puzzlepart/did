@@ -1,7 +1,7 @@
 module.exports = async (req, res, next) => {
     if (req.user.data.role === "Admin") {
-        next();
+        next()
     } else {
-        res.redirect('/');
+        res.redirect('/')
     }
-};
+}

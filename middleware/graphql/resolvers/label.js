@@ -1,6 +1,6 @@
-const _ = require('underscore');
-const { TableBatch } = require('azure-storage');
-const { executeBatch } = require('../../../utils/table');
+const _ = require('underscore')
+const { TableBatch } = require('azure-storage')
+const { executeBatch } = require('../../../utils/table')
 
 const typeDef = `   
     type Label  {
@@ -27,37 +27,37 @@ const typeDef = `
         updateLabel(label: LabelInput!): BaseResult   
         deleteLabel(id: String!): BaseResult
     }
-`;
+`
 
 async function labels(_obj, _variables, { services: { storage: StorageService } }) {
-    let labels = await StorageService.getLabels();
-    return labels;
+    let labels = await StorageService.getLabels()
+    return labels
 }
 
 async function addLabel(_obj, { label }, { services: { storage: StorageService } }) {
     try {
-        await StorageService.addLabel(label);
-        return { success: true, error: null };
+        await StorageService.addLabel(label)
+        return { success: true, error: null }
     } catch (error) {
-        return { success: false, error: _.omit(error, 'requestId') };
+        return { success: false, error: _.omit(error, 'requestId') }
     }
-};
+}
 
 async function updateLabel(_obj, { label }, { services: { storage: StorageService } }) {
     try {
-        await StorageService.updateLabel(label);
-        return { success: true, error: null };
+        await StorageService.updateLabel(label)
+        return { success: true, error: null }
     } catch (error) {
-        return { success: false, error: _.omit(error, 'requestId') };
+        return { success: false, error: _.omit(error, 'requestId') }
     }
 }
 
 async function deleteLabel(_obj, { id }, { services: { storage: StorageService } }) {
     try {
-        await StorageService.deleteLabel(id);
-        return { success: true, error: null };
+        await StorageService.deleteLabel(id)
+        return { success: true, error: null }
     } catch (error) {
-        return { success: false, error };
+        return { success: false, error }
     }
 }
 
