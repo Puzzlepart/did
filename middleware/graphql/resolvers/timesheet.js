@@ -102,7 +102,7 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale 
         }))
         .filter(p => p.customer)
 
-    for (let i = 0 i < periods.length i++) {
+    for (let i = 0; i < periods.length; i++) {
         let period = periods[i]
         period.confirmedDuration = 0
         const entries = [...timeentries].filter(entry => `${entry.weekNumber}_${entry.monthNumber}` === period.id)

@@ -8,46 +8,71 @@ const logger = require('morgan')
 const passport = require('./middleware/passport')
 const serveGzipped = require('./middleware/gzip')
 const isAuthenticated = require('./middleware/passport/isAuthenticated')
-const app = express()
 
-app.use(require('./middleware/helmet'))
-app.use(favicon(__dirname + '/public/images/favicon/favicon.ico'))
+class App {
+    constructor() {
+        this._ = express();
+        this._.use(require('./middleware/helmet'))
+        this._.use(favicon(__dirname + '/public/images/favicon/favicon.ico'))
+        this._.use(logger('dev'))
+        this._.use(express.json())
+        this._.use(express.urlencoded({ extended: false }))
+        this._.use(cookieParser())
+        this.setupSession();
+        this.setupViewEngine();
+        this.setupAssets();
+        this.setupAuth();
+        this.setupApi();
+        this.setupRoutes();
+        this.setupErrorHandling();
+    }
 
-// Setting up session using connect-azuretables
-app.use(require('./middleware/session'))
+    setupSession() {
+        this._.use(require('./middleware/session'))
+    }
 
-// HBS views setup
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'hbs')
+    setupViewEngine() {
+        this._.set('views', path.join(__dirname, 'views'))
+        this._.set('view engine', 'hbs')
+    }
 
-// API setup
-app.use(logger('dev'))
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
-app.use(cookieParser())
+    setupAssets() {
+        this._.use('/*.js', serveGzipped('text/javascript'))
+        this._.use(express.static(path.join(__dirname, 'public')))
+    }
+
+    setupAuth() {
+        this._.use(passport.initialize())
+        this._.use(passport.session())
+        this._.use('/auth', require('./routes/auth'))
+    }
+
+    setupApi() {
+        this._.use(
+            '/graphql',
+            isAuthenticated,
+            require('./middleware/graphql')
+        )
+    }
+
+    setupRoutes() {
+        this._.use('*', require('./routes/index'))
+    }
+
+    setupErrorHandling() {
+        this._.use((_req, _res, next) => { next(createError(404)) })
+        this._.use((error, req, res, _next) => {
+            res.locals.error_header = 'We\'re sorry'
+            res.locals.error_message = error.message
+            res.status(error.status || 500)
+            res.render('error')
+        })
+    }
+
+    instance() {
+        return this._
+    }
+}
 
 
-// Passport
-app.use(passport.initialize())
-app.use(passport.session())
-
-// Routes and middleware
-app.use('/*.js', serveGzipped('text/javascript'))
-app.use(express.static(path.join(__dirname, 'public')))
-app.use('/auth', require('./routes/auth'))
-app.use('/graphql', isAuthenticated, require('./middleware/graphql'))
-app.use('*', require('./routes/index'))
-
-// Error handling
-app.use((_req, _res, next) => {
-    next(createError(404))
-})
-
-app.use((error, req, res, _next) => {
-    res.locals.error_header = 'We\'re sorry'
-    res.locals.error_message = error.message
-    res.status(error.status || 500)
-    res.render('error')
-})
-
-module.exports = app;
+module.exports = new App();

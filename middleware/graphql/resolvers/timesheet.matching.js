@@ -72,7 +72,7 @@ function matchEvent(evt, projects, customers) {
     let matches = findMatches(content, categories)
     let projectKey
     if (matches) {
-        for (let i = 0 i < matches.length i++) {
+        for (let i = 0; i < matches.length; i++) {
             let currentMatch = matches[i]
             evt.customer = _.find(customers, c => currentMatch.customerKey === c.id)
             if (evt.customer) {
