@@ -1,12 +1,12 @@
-import { IObjectWithKey } from 'office-ui-fabric-react/lib/DetailsList'
-import { ICustomer } from './ICustomer'
-import { IProject } from './IProject'
+import { ICustomer } from './ICustomer';
+import { IProject } from './IProject';
 
 /**
  * @category Common
  */
-export interface ITimeEntry extends IObjectWithKey {
+export interface ITimeEntry {
     id: string;
+    key: string;
     title: string;
     isOrganizer: boolean;
     project: IProject;

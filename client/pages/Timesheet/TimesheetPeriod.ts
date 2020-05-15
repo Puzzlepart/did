@@ -66,7 +66,7 @@ export class TimesheetPeriod {
         return []
     }
 
-    public get isConfirmed(): boolean {
+    public get confirmed(): boolean {
         return this.confirmedDuration > 0
     }
 

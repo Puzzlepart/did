@@ -31,30 +31,30 @@ export const StatusBar = () => {
                 <div className={styles.container}>
                     <UserMessage
                         {...defaultProps}
-                        hidden={selectedPeriod.isConfirmed}
+                        hidden={selectedPeriod.confirmed}
                         text={format(t('periodHoursSummaryText'), getDurationDisplay(selectedPeriod.totalDuration, t))}
                         iconName='ReminderTime' />
                     <UserMessage
                         {...defaultProps}
-                        hidden={selectedPeriod.unmatchedDuration === 0 || selectedPeriod.isConfirmed}
+                        hidden={selectedPeriod.unmatchedDuration === 0 || selectedPeriod.confirmed}
                         text={format(t('hoursNotMatchedText'), getDurationDisplay(selectedPeriod.unmatchedDuration, t))}
                         type={MessageBarType.warning}
                         iconName='BufferTimeBoth' />
                     <UserMessage
                         {...defaultProps}
-                        hidden={selectedPeriod.unmatchedDuration > 0 || selectedPeriod.isConfirmed}
+                        hidden={selectedPeriod.unmatchedDuration > 0 || selectedPeriod.confirmed}
                         text={t('allHoursMatchedText')}
                         type={MessageBarType.success}
                         iconName='BufferTimeBoth' />
                     <UserMessage
                         {...defaultProps}
-                        hidden={!selectedPeriod.isConfirmed}
+                        hidden={!selectedPeriod.confirmed}
                         text={format(t('periodConfirmedText'), getDurationDisplay(selectedPeriod.matchedDuration, t))}
                         type={MessageBarType.success}
                         iconName='CheckMark' />
                     <UserMessage
                         {...defaultProps}
-                        hidden={selectedPeriod.ignoredEvents.length === 0 || selectedPeriod.isConfirmed}
+                        hidden={selectedPeriod.ignoredEvents.length === 0 || selectedPeriod.confirmed}
                         iconName='DependencyRemove'>
                         <p>
                             <span>{format(t('ignoredEventsText'), selectedPeriod.ignoredEvents.length)}</span>

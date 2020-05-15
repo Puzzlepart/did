@@ -59,7 +59,7 @@ export const CHANGE_PERIOD = ({ periods, loading, selectedPeriod, dispatch }: IT
 
 export const CONFIRM_ACTIONS = (context: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
     key: 'CONFIRM_HOURS',
-    onRender: () => context.selectedPeriod.isConfirmed
+    onRender: () => context.selectedPeriod.confirmed
         ? <DefaultButton
             disabled={!!context.loading}
             iconProps={{ iconName: 'Cancel' }}

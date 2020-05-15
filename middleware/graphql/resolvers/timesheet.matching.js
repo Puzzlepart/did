@@ -15,7 +15,7 @@ const CONTENT_REGEX = /[\(\{\[]((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>
  */
 function getProjectSuggestion(projects, customer, projectKey) {
     try {
-        let customerProjects = projects.filter(p => p.customerKey === customer.id)
+        let customerProjects = projects.filter(p => p.customerKey === customer.key)
         let projectKeys = customerProjects.map(p => p.id.split(' ')[1])
         let sm = findBestMatch(projectKey, projectKeys)
         let target = (sm.bestMatch && sm.bestMatch.rating > 0) ? sm.bestMatch.target : null

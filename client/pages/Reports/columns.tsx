@@ -25,7 +25,7 @@ const columns = (t: TFunction): IColumn[] => ([
         fieldName: 'customer',
         name: t('customer'),
         minWidth: 100,
-        onRender: ({ customer }) => <Link to={`/customers/${customer.id}`}>{customer.name}</Link>,
+        onRender: ({ customer }) => <Link to={`/customers/${customer.key}`}>{customer.name}</Link>,
     },
     {
         key: 'duration',

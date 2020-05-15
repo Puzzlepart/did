@@ -1,6 +1,5 @@
-const _ = require('underscore')
 const tableUtil = require('../utils/table')
-const { getDurationHours } = require('../utils')
+const { getDurationHours, getWeek, getMonthIndex, getYear } = require('../utils')
 const arraySort = require('array-sort')
 const { first, pick } = require('underscore')
 const { TableUtilities, TableQuery, createTableService } = require('azure-storage')
@@ -10,13 +9,15 @@ class StorageService {
     constructor(subscription) {
         tableUtil.tableService = createTableService(subscription.connectionString)
     }
+
     async getLabels() {
         const query = tableUtil.createQuery(1000, undefined)
-        const { entries } = await tableUtil.queryTable('Labels', query)
-        return tableUtil.parseEntities(entries)
+        const { entries } = await tableUtil.queryTable('Labels', query, {})
+        return entries
     }
+
     async addLabel(label) {
-        const { string } = tableUtil.entGen();
+        const { string } = tableUtil.entGen()
         const entity = await tableUtil.addEntity(
             'Labels',
             {
@@ -29,8 +30,9 @@ class StorageService {
         )
         return entity
     }
+
     async updateLabel(label) {
-        const { string } = tableUtil.entGen();
+        const { string } = tableUtil.entGen()
         const entity = {
             PartitionKey: string('Default'),
             RowKey: string(label.id),
@@ -45,8 +47,9 @@ class StorageService {
         )
         return result
     }
+
     async deleteLabel(id) {
-        const { string } = tableUtil.entGen();
+        const { string } = tableUtil.entGen()
         try {
             const result = await tableUtil.deleteEntity(
                 'Labels',
@@ -61,50 +64,15 @@ class StorageService {
             throw error
         }
     }
-    async getUser(userId) {
-        let filter = TableQuery.stringFilter('RowKey', TableUtilities.QueryComparisons.EQUAL, userId)
-        const query = tableUtil.createQuery(1).where(filter)
-        const { entries } = await tableUtil.queryTable(
-            'Users',
-            query,
-        )
-        return first(tableUtil.parseEntities(entries))
+
+    async getCustomers() {
+        const query = tableUtil.createQuery(1000)
+        const { entries } = await tableUtil.queryTable('Customers', query, { RowKey: 'key' })
+        return entries
     }
-    async updateUser(user) {
-        const { string } = tableUtil.entGen();
-        const entity = {
-            PartitionKey: string('Default'),
-            RowKey: string(user.id),
-        }
-        if (user.fullName) entity.FullName = string(user.fullName)
-        if (user.role) entity.Role = string(user.role)
-        if (user.userLanguage) entity.UserLanguage = string(user.userLanguage)
-        const result = await tableUtil.updateEntity(
-            'Users',
-            entity,
-            true,
-        )
-        return result
-    }
-    async createProject(model, createdBy) {
-        const { string } = tableUtil.entGen();
-        const projectId = (`${model.customerKey} ${model.projectKey}`).toUpperCase()
-        const entity = await tableUtil.addEntity(
-            'Projects',
-            {
-                PartitionKey: string('Default'),
-                RowKey: string(projectId),
-                Name: string(model.name),
-                Description: string(model.description),
-                CustomerKey: string(model.customerKey.toUpperCase()),
-                Icon: string(model.icon || 'Page'),
-                CreatedBy: string(createdBy),
-            }
-        )
-        return entity
-    }
+
     async createCustomer(model, createdBy) {
-        const { string } = tableUtil.entGen();
+        const { string } = tableUtil.entGen()
         const entity = await tableUtil.addEntity(
             'Customers',
             {
@@ -119,77 +87,8 @@ class StorageService {
         return entity
     }
 
-    async addUser(user) {
-        const { string } = tableUtil.entGen();
-        const entity = await tableUtil.addEntity(
-            'Users',
-            {
-                PartitionKey: string('Default'),
-                RowKey: string(user.id),
-                FullName: string(user.fullName),
-                Role: string(user.role),
-            }
-        )
-        return entity
-    }
-    async getCustomers() {
-        const query = tableUtil.createQuery(1000)
-        const { entries } = await tableUtil.queryTable(
-            'Customers',
-            query
-        )
-        return tableUtil.parseEntities(entries, undefined, { idUpper: true })
-    }
-    async getProjects(customerKey, options) {
-        options = options || {}
-        let filter = null
-        if (customerKey)
-            filter = TableQuery.stringFilter('CustomerKey', TableUtilities.QueryComparisons.EQUAL, customerKey)
-        let query = tableUtil.createQuery(1000, undefined, filter)
-        let { entries } = await tableUtil.queryTable(
-            'Projects',
-            query
-        )
-        if (!options.noParse) entries = tableUtil.parseEntities(entries, undefined, { idUpper: true })
-        if (options.sortBy) entries = arraySort(entries, options.sortBy)
-        return entries
-    }
-    async getTimeEntries(filters, options) {
-        filters = filters || {}
-        options = options || {}
-        let filter = TableQuery.stringFilter('PartitionKey', TableUtilities.QueryComparisons.EQUAL, 'Default')
-        if (filters.projectId) filter = TableQuery.combineFilters(filter, TableUtilities.TableOperators.AND, TableQuery.stringFilter('ProjectId', TableUtilities.QueryComparisons.EQUAL, filters.projectId))
-        if (filters.resourceId) filter = TableQuery.combineFilters(filter, TableUtilities.TableOperators.AND, TableQuery.stringFilter('ResourceId', TableUtilities.QueryComparisons.EQUAL, filters.resourceId))
-        if (filters.weekNumber) filter = TableQuery.combineFilters(filter, TableUtilities.TableOperators.AND, TableQuery.int32Filter('WeekNumber', TableUtilities.QueryComparisons.EQUAL, filters.weekNumber))
-        if (filters.year) filter = TableQuery.combineFilters(filter, TableUtilities.TableOperators.AND, TableQuery.int32Filter('Year', TableUtilities.QueryComparisons.EQUAL, filters.year))
-        if (filters.startDateTime) filter = TableQuery.combineFilters(filter, TableUtilities.TableOperators.AND, TableQuery.dateFilter('StartTime', TableUtilities.QueryComparisons.GREATER_THAN, TableUtilities.entityGenerator.DateTime(new Date(filters.startDateTime))._))
-        if (filters.endDateTime) filter = TableQuery.combineFilters(filter, TableUtilities.TableOperators.AND, TableQuery.dateFilter('StartTime', TableUtilities.QueryComparisons.LESS_THAN, TableUtilities.entityGenerator.DateTime(new Date(filters.endDateTime))._))
-        let query = tableUtil.createQuery(1000, undefined, filter)
-        let result = await tableUtil.queryTableAll('TimeEntries', query)
-        if (!options.noParse) {
-            result = tableUtil.parseEntities(result, res => {
-                if (res.projectId) res.customerId = _.first(res.projectId.split(' '))
-                return res
-            }, options)
-        }
-        result = result.sort((a, b) => new Date(a.startTime) - new Date(b.startTime))
-        return result
-    }
-    async getUsers() {
-        const query = tableUtil.createQuery(1000, undefined)
-        const { entries } = await tableUtil.queryTable('Users', query)
-        return tableUtil.parseEntities(entries)
-    }
-    async getUser(userId) {
-        const entry = await tableUtil.retrieveEntity(
-            'Users',
-            'Default',
-            userId
-        )
-        return tableUtil.parseEntities([entry])[0]
-    }
     async deleteCustomer(key) {
-        const { string } = tableUtil.entGen();
+        const { string } = tableUtil.entGen()
         try {
             const result = await tableUtil.deleteEntity(
                 'Customers',
@@ -204,8 +103,44 @@ class StorageService {
             throw error
         }
     }
+
+    async getProjects(customerKey, options) {
+        options = options || {}
+        const q = tableUtil.query()
+        const filter = [['PartitionKey', customerKey, q.string, q.equal]]
+        const query = tableUtil.createQuery(1000, undefined, filter)
+        const parse = !options.noParse
+        let { entries } = await tableUtil.queryTable(
+            'Projects',
+            query,
+            parse && {
+                RowKey: 'key',
+                PartitionKey: 'customerKey'
+            }
+        )
+        if (options.sortBy) entries = arraySort(entries, options.sortBy)
+        return entries
+    }
+
+    async createProject(project, createdBy) {
+        const { string } = tableUtil.entGen()
+        const entity = await tableUtil.addEntity(
+            'Projects',
+            {
+                PartitionKey: string(project.customerKey),
+                RowKey: string(project.key),
+                Id: string([project.customerKey, project.key].join(' ')),
+                Name: string(project.name),
+                Description: string(project.description),
+                Icon: string(project.icon || 'Page'),
+                CreatedBy: string(createdBy),
+            }
+        )
+        return entity
+    }
+
     async deleteProject(key) {
-        const { string } = tableUtil.entGen();
+        const { string } = tableUtil.entGen()
         try {
             const result = await tableUtil.deleteEntity(
                 'Projects',
@@ -220,8 +155,9 @@ class StorageService {
             throw error
         }
     }
+
     async addLabelToProject(projectId, labelId) {
-        const { string } = tableUtil.entGen();
+        const { string } = tableUtil.entGen()
         const entity = await tableUtil.retrieveEntity(
             'Projects',
             'Default',
@@ -236,27 +172,160 @@ class StorageService {
         const result = await tableUtil.updateEntity('Projects', updatedEntity, true)
         return result
     }
+
+    async getUsers() {
+        const query = tableUtil.createQuery(1000, undefined)
+        const { entries } = await tableUtil.queryTable('Users', query, {})
+        return entries
+    }
+
+    async getUser(userId) {
+        const entry = await tableUtil.retrieveEntity(
+            'Users',
+            'Default',
+            userId
+        )
+        return tableUtil.parseEntity(entry)
+    }
+
+    async addUser(user) {
+        const { string } = tableUtil.entGen()
+        const entity = await tableUtil.addEntity(
+            'Users',
+            {
+                PartitionKey: string('Default'),
+                RowKey: string(user.id),
+                FullName: string(user.fullName),
+                Role: string(user.role),
+            }
+        )
+        return entity
+    }
+
+    async updateUser(user) {
+        const { string } = tableUtil.entGen()
+        const entity = {
+            PartitionKey: string('Default'),
+            RowKey: string(user.id),
+        }
+        if (user.fullName) entity.FullName = string(user.fullName)
+        if (user.role) entity.Role = string(user.role)
+        if (user.userLanguage) entity.UserLanguage = string(user.userLanguage)
+        const result = await tableUtil.updateEntity(
+            'Users',
+            entity,
+            true,
+        )
+        return result
+    }
+
+    async getTimeEntries(filters, options) {
+        filters = filters || {}
+        options = options || {}
+        const { datetime } = tableUtil.entGen()
+        const q = tableUtil.query()
+        const filter = [
+            ['ProjectId', filters.projectId, q.string, q.equal],
+            ['PartitionKey', filters.resourceId, q.string, q.equal],
+            ['WeekNumber', filters.weekNumber, q.int, q.equal],
+            ['Year', filters.year, q.int, q.equal],
+            ['StartTime', filters.startDateTime && datetime(new Date(filters.startDateTime))._, q.date, q.greaterThan],
+            ['EndTime', filters.endDateTime && datetime(new Date(filters.endDateTime))._, q.date, q.lessThan],
+        ]
+        const query = tableUtil.createQuery(1000, undefined, filter)
+        let result = await tableUtil.queryTableAll(
+            'TimeEntries',
+            query,
+            !options.noParse && {
+                PartitionKey: 'resourceId',
+                RowKey: 'id'
+            }
+        )
+        result = result.sort((a, b) => new Date(a.startTime) - new Date(b.startTime))
+        return result
+    }
+
     async addTimeEntries(timeentries) {
-        const { string, datetime, double, int, boolean } = tableUtil.entGen();
-        const entities = timeentries.map(entry => ({
-            PartitionKey: string(user.profile.oid),
-            RowKey: string(entry.id),
-            ResourceName: string(user.profile.displayName),
-            Title: string(event.title),
-            Description: string(event.body),
-            StartTime: datetime(event.startTime),
-            EndTime: datetime(event.endTime),
-            Duration: double(getDurationHours(event.startTime, event.endTime)),
-            ProjectId: string(entry.projectId),
-            WebLink: string(event.webLink),
-            WeekNumber: int(getWeek(event.startTime)),
-            MonthNumber: int(getMonthIndex(event.startTime)),
-            Year: int(getYear(event.startTime)),
-            ManualMatch: boolean(entry.isManualMatch),
-        }));
-        const batch = tableUtil.createBatch();
+        let totalDuration = 0
+        const { string, datetime, double, int, boolean } = tableUtil.entGen()
+        const entities = timeentries.map(({ entry, event, user, }) => {
+            const week = getWeek(event.startTime);
+            const month = getMonthIndex(event.startTime)
+            const duration = getDurationHours(event.startTime, event.endTime)
+            totalDuration += duration
+            return {
+                PartitionKey: string(user.profile.oid),
+                RowKey: string(entry.id),
+                ResourceName: string(user.profile.displayName),
+                Title: string(event.title),
+                Description: string(event.body),
+                StartTime: datetime(event.startTime),
+                EndTime: datetime(event.endTime),
+                Duration: double(duration),
+                ProjectId: string(entry.projectId),
+                WebLink: string(event.webLink),
+                WeekNumber: int(week),
+                MonthNumber: int(month),
+                PeriodId: string(`${week}_${month}`),
+                Year: int(getYear(event.startTime)),
+                ManualMatch: boolean(entry.isManualMatch),
+            }
+        })
+        const batch = tableUtil.createBatch()
         entities.forEach(entity => batch.insertEntity(entity))
         await tableUtil.executeBatch('TimeEntries', batch)
+        return totalDuration
+    }
+
+    async deleteTimeEntries(filters) {
+        filters = filters || {}
+        const entities = await this.getTimeEntries(filters, { noParse: true })
+        const batch = tableUtil.createBatch()
+        entities.forEach(entity => batch.deleteEntity(entity))
+        await tableUtil.executeBatch('TimeEntries', batch)
+    }
+
+    async getConfirmedPeriod(resourceId, period) {
+        try {
+            const entry = await tableUtil.retrieveEntity(
+                'ConfirmedPeriods',
+                resourceId,
+                period
+            )
+            return tableUtil.parseEntity(entry)
+        } catch (error) {
+            return null
+        }
+    }
+
+    async addConfirmedPeriod(resourceId, period, hours) {
+        const { string, double } = tableUtil.entGen()
+        const entity = await tableUtil.addEntity(
+            'ConfirmedPeriods',
+            {
+                PartitionKey: string(resourceId),
+                RowKey: string(period),
+                Hours: double(hours),
+            }
+        )
+        return entity
+    }
+
+    async removeConfirmedPeriod(resourceId, period) {
+        const { string } = tableUtil.entGen()
+        try {
+            const result = await tableUtil.deleteEntity(
+                'ConfirmedPeriods',
+                {
+                    PartitionKey: string(resourceId),
+                    RowKey: string(period),
+                }
+            )
+            return result
+        }
+        catch (error) {
+            throw error
+        }
     }
 }
 

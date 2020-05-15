@@ -1,5 +1,6 @@
-const { find, filter, omit, first } = require('underscore')
+const { find, filter, omit } = require('underscore')
 const value = require('get-value')
+const { enrichProjects } = require('./project.utils')
 
 const typeDef = `  
   type Project {
@@ -62,15 +63,7 @@ async function projects(_obj, variables, { services: { storage: StorageService }
     StorageService.getCustomers(),
     StorageService.getLabels(),
   ])
-  projects = projects.map(project => ({
-    ...project,
-    customer: find(customers, c => c.key === project.customerKey),
-    labels: filter(labels, label => {
-      const labels = value(project, 'labels', { default: '' })
-      return labels.indexOf(label.id) !== -1
-    }),
-  }))
-  projects = projects.filter(p => p.customer)
+  projects = enrichProjects(projects, customers, labels)
   return projects
 }
 

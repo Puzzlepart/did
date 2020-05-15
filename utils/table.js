@@ -1,55 +1,67 @@
-const { TableQuery, TableUtilities, TableBatch } = require('azure-storage')
+const az = require('azure-storage')
 
 class TableUtil {
+    parseEntity(ent, colMap) {
+        colMap = colMap || {}
+        let parsed = Object.keys(ent)
+            .reduce((obj, key) => {
+                const newKey = key.charAt(0).toLowerCase() + key.slice(1)
+                const value = ent[key]._
+                if (colMap[key]) {
+                    obj[colMap[key]] = value
+                    return obj
+                }
+                switch (ent[key].$) {
+                    case 'Edm.DateTime': obj[newKey] = value.toISOString()
+                        break
+                    default: obj[newKey] = value
+                }
+                return obj
+            }, {})
+        return parsed
+    }
+
     /**
      * Parse an array of Azure table storage entities
      * 
      * Adds {RowKey} as 'id' and 'key, skips {PartitionKey}
      * 
-     * @param {*} arr The array of entities to parse
-     * @param {*} mapFunc Mapping function (optional)
-     * @param {*} options Options (optional)
+     * @param {*} result Result
+     * @param {*} colMap Column map
      */
-    parseEntities(arr, mapFunc, options) {
-        options = options || {}
-        let result = arr.map(item => Object.keys(item)
-            .filter(key => key !== 'PartitionKey')
-            .reduce((obj, key) => {
-                const newKey = key.charAt(0).toLowerCase() + key.slice(1)
-                const value = item[key]._
-                if (key === 'RowKey') {
-                    obj.id = options.idUpper ? value.toUpperCase() : value
-                    obj.key = obj.id
-                    return obj
-                }
-                switch (item[key].$) {
-                    case 'Edm.DateTime': {
-                        let dateValue = value.toISOString()
-                        obj[newKey] = dateValue
-                    }
-                        break
-                    default: {
-                        obj[newKey] = value
-                    }
-                }
-                return obj
-            }, {}))
-        if (mapFunc) result = result.map(mapFunc)
-        return result
+    parseEntities({ entries, continuationToken }, colMap) {
+        colMap = colMap || {}
+        entries = entries.map(ent => this.parseEntity(ent, colMap))
+        return { entries, continuationToken }
     }
 
     entGen() {
         return {
-            string: TableUtilities.entityGenerator.String,
-            int: TableUtilities.entityGenerator.Int32,
-            double: TableUtilities.entityGenerator.Double,
-            datetime: TableUtilities.entityGenerator.DateTime,
-            boolean: TableUtilities.entityGenerator.Boolean
+            string: az.TableUtilities.entityGenerator.String,
+            int: az.TableUtilities.entityGenerator.Int32,
+            double: az.TableUtilities.entityGenerator.Double,
+            datetime: az.TableUtilities.entityGenerator.DateTime,
+            boolean: az.TableUtilities.entityGenerator.Boolean
+        }
+    }
+
+    query() {
+        return {
+            string: az.TableQuery.stringFilter,
+            boolean: az.TableQuery.booleanFilter,
+            date: az.TableQuery.dateFilter,
+            int: az.TableQuery.int32Filter,
+            double: az.TableQuery.doubleFilter,
+            combine: az.TableQuery.combineFilters,
+            equal: az.TableUtilities.QueryComparisons.EQUAL,
+            greaterThan: az.TableUtilities.QueryComparisons.GREATER_THAN,
+            lessThan: az.TableUtilities.QueryComparisons.LESS_THAN,
+            and: az.TableUtilities.TableOperators.AND
         }
     }
 
     createBatch() {
-        return new TableBatch();
+        return new az.TableBatch()
     }
 
     /**
@@ -57,14 +69,28 @@ class TableUtil {
      * 
      * @param {*} top 
      * @param {*} select 
-     * @param {*} filter 
+     * @param {*} filters 
      */
-    createQuery(top, select, filter) {
-        let query = new TableQuery().top(top)
+    createQuery(top, select, filters) {
+        let query = new az.TableQuery().top(top)
         if (top) query = query.top(top)
         if (select) query = query.select(select)
-        if (filter) query = query.where(filter)
+        if (filters) {
+            const combined = this.combineFilters(filters)
+            if (combined) query = query.where(combined)
+        }
         return query
+    }
+
+    combineFilters(filters) {
+        const { combine, and } = this.query()
+        return filters.reduce((combined, [col, value, type, comp]) => {
+            if (value) {
+                let filter = type(col, comp, value)
+                combined = combined ? combine(combined, and, filter) : filter
+            }
+            return combined;
+        }, null);
     }
 
     /**
@@ -72,16 +98,21 @@ class TableUtil {
      * 
      * @param {*} table 
      * @param {*} query 
+     * @param {*} parse 
      * @param {*} continuationToken 
      */
-    queryTable(table, query, continuationToken) {
+    queryTable(table, query, parse, continuationToken) {
         return new Promise((resolve, reject) => {
             this.tableService.queryEntities(
                 table,
                 query,
                 continuationToken,
                 (error, result) => {
-                    if (!error) return resolve(result)
+                    if (!error) {
+                        return parse
+                            ? resolve(this.parseEntities(result, parse))
+                            : resolve(result)
+                    }
                     else reject(error)
                 })
         })
@@ -92,13 +123,14 @@ class TableUtil {
      * 
      * @param {*} table 
      * @param {*} query 
+     * @param {*} parse 
      */
-    async queryTableAll(table, query) {
+    async queryTableAll(table, query, parse) {
         let token = null
-        let { entries, continuationToken } = await this.queryTable(table, query, token)
+        let { entries, continuationToken } = await this.queryTable(table, query, parse, token)
         token = continuationToken
         while (token != null) {
-            let result = await this.queryTable(table, query, token)
+            let result = await this.queryTable(table, query, parse, token)
             entries.push(...result.entries)
             token = result.continuationToken
         }
@@ -209,4 +241,4 @@ class TableUtil {
     }
 }
 
-module.exports = new TableUtil();
+module.exports = new TableUtil()

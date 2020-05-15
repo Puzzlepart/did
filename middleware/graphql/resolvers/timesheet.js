@@ -1,9 +1,7 @@
-const { filter, find, omit } = require('underscore')
-const { TableBatch } = require('azure-storage')
-const value = require('get-value')
-const { executeBatch } = require('../../../utils/table')
+const { find, omit } = require('underscore')
 const { formatDate, getMonthIndex, getWeek, startOfMonth, endOfMonth } = require('../../../utils')
 const matchEvents = require('./timesheet.matching')
+const { enrichProjects } = require('./project.utils')
 
 const typeDef = `  
  type Event {
@@ -89,34 +87,24 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale 
         StorageService.getLabels(),
     ])
 
-    projects = projects
-        .map(project => ({
-            ...project,
-            customer: find(customers, c => c.id.toUpperCase() === project.customerKey.toUpperCase()),
-            labels: filter(labels, label => {
-                const labels = value(project, 'labels', { default: '' })
-                return labels.indexOf(label.id) !== -1
-            }),
-        }))
-        .filter(p => p.customer)
+    projects = enrichProjects(projects, customers, labels)
 
     for (let i = 0; i < periods.length; i++) {
         let period = periods[i]
-        period.confirmedDuration = 0
-        const entries = [...timeentries].filter(entry => `${entry.weekNumber}_${entry.monthNumber}` === period.id)
-        const isConfirmed = entries.length > 0
-        if (isConfirmed) {
-            period.events = entries.map(entry => ({
+        let confirmed = await StorageService.getConfirmedPeriod(user.profile.oid, period.id)
+        if (confirmed) {
+            period.events = timeentries.map(entry => ({
                 ...entry,
                 project: find(projects, p => p.id === entry.projectId),
                 customer: find(customers, c => c.id === entry.customerId),
             }))
             period.matchedEvents = period.events
-            period.confirmedDuration = period.events.reduce((sum, evt) => sum + evt.duration, 0)
+            period.confirmedDuration = confirmed.hours
         } else {
             period.events = await GraphService.getEvents(period.startDateTime, period.endDateTime)
             period.events = matchEvents(period.events, projects, customers)
             period.matchedEvents = period.events.filter(evt => evt.project)
+            period.confirmedDuration = 0
         }
         period.events = period.events.map(evt => ({
             ...evt,
@@ -130,11 +118,13 @@ async function confirmPeriod(_obj, { entries, startDateTime, endDateTime }, { us
     try {
         const calendarView = await GraphService.getEvents(startDateTime, endDateTime)
         let timeentries = entries.map(entry => {
-            const event = calendarView.filter(e => e.id === entry.id)[0]
+            const event = find(calendarView, e => e.id === entry.id)
             if (!event) return
             return { user, entry, event }
         }).filter(entry => entry)
-        await StorageService.addTimeEntries(timeentries);
+        const period = `${getWeek(startDateTime)}_${getMonthIndex(startDateTime)}`
+        const hours = await StorageService.addTimeEntries(timeentries)
+        await StorageService.addConfirmedPeriod(user.profile.oid, period, hours)
         return { success: true, error: null }
     } catch (error) {
         return { success: false, error: omit(error, 'requestId') }
@@ -143,14 +133,15 @@ async function confirmPeriod(_obj, { entries, startDateTime, endDateTime }, { us
 
 async function unconfirmPeriod(_obj, { startDateTime, endDateTime }, { user, services: { storage: StorageService } }) {
     try {
-        const entities = await StorageService.getTimeEntries({
-            resourceId: user.profile.oid,
-            startDateTime,
-            endDateTime,
-        }, { noParse: true })
-        const batch = new TableBatch()
-        entities.forEach(entity => batch.deleteEntity(entity))
-        await executeBatch('TimeEntries', batch)
+        const period = `${getWeek(startDateTime)}_${getMonthIndex(startDateTime)}`
+        await Promise.all([
+            StorageService.deleteTimeEntries({
+                resourceId: user.profile.oid,
+                startDateTime,
+                endDateTime,
+            }, { noParse: true }),
+            StorageService.removeConfirmedPeriod(user.profile.oid, period)
+        ])
         return { success: true, error: null }
     } catch (error) {
         return { success: false, error: omit(error, 'requestId') }

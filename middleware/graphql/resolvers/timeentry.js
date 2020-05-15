@@ -1,4 +1,4 @@
-const _ = require('underscore')
+const { find, first } = require('underscore')
 
 const typeDef = `   
     type TimeEntry {
@@ -32,24 +32,31 @@ const typeDef = `
         resourceId: String, 
         weekNumber: Int, 
         year: Int, 
-        currentUser: Boolean, 
-        dateFormat: String
+        currentUser: Boolean
     ): [TimeEntry!]
     } 
 `
 
-async function timeentries(_obj, variables, context) {
-    let resourceId = variables.resourceId
-    if (variables.currentUser) resourceId = context.user.profile.oid
+async function timeentries(
+    _obj,
+    { resourceId, weekNumber, year, projectId, currentUser },
+    { user, services: { storage: StorageService } }
+) {
+    if (currentUser) resourceId = user.profile.oid
     let [projects, customers, timeentries] = await Promise.all([
-        context.services.storage.getProjects(),
-        context.services.storage.getCustomers(),
-        context.services.storage.getTimeEntries({ resourceId, weekNumber: variables.weekNumber, year: variables.year, projectId: variables.projectId }, { dateFormat: variables.dateFormat }),
+        StorageService.getProjects(),
+        StorageService.getCustomers(),
+        StorageService.getTimeEntries({
+            resourceId,
+            weekNumber,
+            year,
+            projectId
+        })
     ])
     let entries = timeentries.map(entry => ({
         ...entry,
-        project: entry.projectId && _.find(projects, p => p.id === entry.projectId),
-        customer: entry.customerId && _.find(customers, c => c.id === entry.customerId),
+        project: entry.projectId && find(projects, p => p.id === entry.projectId),
+        customer: entry.projectId && find(customers, c => c.key === first(entry.projectId.split(' '))),
     }))
     return entries
 }

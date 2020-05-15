@@ -57,7 +57,7 @@ export const ProjectColumnTooltip = ({ project }: IProjectColumnTooltipProps): J
  */
 const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
     const { t } = useTranslation('timesheet')
-    const { dispatch } = React.useContext(TimesheetContext)
+    const { dispatch, selectedPeriod } = React.useContext(TimesheetContext)
     if (!event.project) {
         if (event.error) {
             return (
@@ -105,11 +105,11 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
                     <div>
                         <a href={`/projects/${event.project.id}`}>{event.project.name}</a>
                         <div className={styles.subText}>
-                            <span>for </span><a href={`/customers/${event.customer.id}`}><span>{event.customer.name}</span></a>
+                            <span>for </span><a href={`/customers/${event.customer.key}`}><span>{event.customer.name}</span></a>
                         </div>
                     </div>
                     {!isEmpty(event.project.labels) && <Icon iconName='Tag' className={styles.labelIcon} />}
-                    {event.isManualMatch && (
+                    {(event.isManualMatch && !selectedPeriod.confirmed) && (
                         <ClearManualMatchButton
                             onClick={() => dispatch({
                                 type: 'CLEAR_MANUAL_MATCH',

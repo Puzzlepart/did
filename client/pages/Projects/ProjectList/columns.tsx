@@ -50,7 +50,7 @@ export default (hideColumns: string[], t: TFunction): IColumn[] => ([
         { maxWidth: 220 },
         (project: IProject) => {
             if (!project.customer) return null
-            return <Link to={`/customers/${project.customer.id}`}>{project.customer.name}</Link>
+            return <Link to={`/customers/${project.customer.key}`}>{project.customer.name}</Link>
         }
     ),
     col(
