@@ -1,4 +1,5 @@
 require('dotenv').config()
+const pkg = require('./package.json');
 const createError = require('http-errors')
 const express = require('express')
 const favicon = require('express-favicon')
@@ -13,7 +14,7 @@ class App {
     constructor() {
         this._ = express();
         this._.use(require('./middleware/helmet'))
-        this._.use(favicon(__dirname + '/public/images/favicon/favicon.ico'))
+        this._.use(favicon(path.join(__dirname, pkg.config.public, 'images/favicon/favicon.ico')))
         this._.use(logger('dev'))
         this._.use(express.json())
         this._.use(express.urlencoded({ extended: false }))
@@ -38,7 +39,7 @@ class App {
 
     setupAssets() {
         this._.use('/*.js', serveGzipped('text/javascript'))
-        this._.use(express.static(path.join(__dirname, 'public')))
+        this._.use(express.static(path.join(__dirname, pkg.config.public)))
     }
 
     setupAuth() {

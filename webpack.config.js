@@ -2,7 +2,7 @@ require('dotenv').config();
 const path = require('path');
 const webpack = require('webpack');
 const src = path.resolve(__dirname, 'client/');
-const package = require('./package.json');
+const pkg = require('./package.json');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -12,10 +12,10 @@ const mode = process.env.NODE_ENV === 'development' ? 'development' : 'productio
 let config = {
     mode,
     entry: {
-        [package.name]: './client'
+        [pkg.name]: './client'
     },
     output: {
-        path: path.resolve(__dirname, './public/js'),
+        path: path.resolve(__dirname, pkg.config.public, 'js'),
         filename: '[name].[hash].js',
         publicPath: '/js' // correct path prefixing, '/' == '/public'
     },
