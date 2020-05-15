@@ -1,6 +1,7 @@
 const passport = require('passport')
 const OIDCStrategy = require('passport-azure-ad').OIDCStrategy
 const StorageService = require('../../services/storage')
+const { USER_NOT_ENROLLED } = require('./errors')
 
 passport.serializeUser((user, done) => {
     done(null, user)
@@ -11,11 +12,7 @@ passport.deserializeUser(async (user, done) => {
         if (!user.data) user.data = await new StorageService(user.profile._json.tid).getUser(user.profile.oid)
         done(null, user)
     } catch (e) {
-        const error = new Error()
-        error.name = 'USER_NOT_ENROLLED'
-        error.message = 'It seems you\'re not enrolled in Did 365. Please contact your system owner.'
-        error.status = 401;
-        done(error, null)
+        done(USER_NOT_ENROLLED, null)
     }
 })
 
