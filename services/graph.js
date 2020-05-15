@@ -118,12 +118,11 @@ class GraphService {
             lastModifiedDateTime: evt.lastModifiedDateTime,
             startTime: evt.start.dateTime,
             endTime: evt.end.dateTime,
-            durationHours: utils.getDurationHours(evt.start.dateTime, evt.end.dateTime),
-            durationMinutes: utils.getDurationMinutes(evt.start.dateTime, evt.end.dateTime),
+            duration: utils.getDurationHours(evt.start.dateTime, evt.end.dateTime),
           })
         })
       events = this.removeIgnoredEvents(events)
-      events = events.filter(evt => evt.durationHours <= 24)
+      events = events.filter(evt => evt.duration <= 24)
       return events
     } catch (error) {
       switch (error.statusCode) {

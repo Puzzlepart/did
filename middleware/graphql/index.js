@@ -10,6 +10,7 @@ const { typeDef: Subscription } = require('./resolvers/subscription')
 const { typeDef: Label } = require('./resolvers/label')
 const StorageService = require('../../services/storage')
 const GraphService = require('../../services/graph')
+const SubscriptionService = require('../../services/subscription')
 
 const Query = `
   type Error {
@@ -65,7 +66,8 @@ module.exports = graphql(req => ({
   context: {
     services: {
       graph: new GraphService(req),
-      storage: new StorageService(req.user.profile._json.tid),
+      storage: new StorageService(req.user.profile.subscription),
+      subscription: new SubscriptionService()
     },
     user: req.user,
     tenantId: req.user.profile._json.tid,

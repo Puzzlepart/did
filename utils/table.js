@@ -1,10 +1,6 @@
-const { createTableService, TableQuery, TableUtilities } = require('azure-storage')
+const { TableQuery } = require('azure-storage')
 
 class TableUtil {
-    useConnectionString(connectionString) {
-        this.azureTableService = createTableService(connectionString);
-    }
-
     /**
      * Parse an array of Azure table storage entities
      * 
@@ -60,13 +56,14 @@ class TableUtil {
     /**
      * Queries a table using the specified query
      * 
+     * @param {*} tableService 
      * @param {*} table 
      * @param {*} query 
      * @param {*} continuationToken 
      */
-    queryTable(table, query, continuationToken) {
+    queryTable(tableService, table, query, continuationToken) {
         return new Promise((resolve, reject) => {
-            this.azureTableService.queryEntities(
+            tableService.queryEntities(
                 table,
                 query,
                 continuationToken,
@@ -80,15 +77,16 @@ class TableUtil {
     /**
      * Queries all entries in a table using the specified query
      * 
+     * @param {*} tableService 
      * @param {*} table 
      * @param {*} query 
      */
     async queryTableAll(table, query) {
         let token = null
-        let { entries, continuationToken } = await queryTable(table, query, token)
+        let { entries, continuationToken } = await queryTable(tableService, table, query, token)
         token = continuationToken
         while (token != null) {
-            let result = await queryTable(table, query, token)
+            let result = await queryTable(tableService, table, query, token)
             entries.push(...result.entries)
             token = result.continuationToken
         }
@@ -98,13 +96,14 @@ class TableUtil {
     /**
      * Retrieves an entity
      * 
+     * @param {*} tableService 
      * @param {*} table 
      * @param {*} partitionKey 
      * @param {*} rowKey 
      */
-    retrieveEntity(table, partitionKey, rowKey) {
+    retrieveEntity(tableService, table, partitionKey, rowKey) {
         return new Promise((resolve, reject) => {
-            this.azureTableService.retrieveEntity(table, partitionKey, rowKey, (error, result) => {
+            tableService.retrieveEntity(table, partitionKey, rowKey, (error, result) => {
                 if (!error) {
                     return resolve(result)
                 } else {
@@ -117,12 +116,13 @@ class TableUtil {
     /**
      * Adds an entity
      * 
+     * @param {*} tableService 
      * @param {*} table 
      * @param {*} item 
      */
-    addEntity(table, item) {
+    addEntity(tableService, table, item) {
         return new Promise((resolve, reject) => {
-            this. azureTableService.insertEntity(table, item, (error, result) => {
+            tableService.insertEntity(table, item, (error, result) => {
                 if (!error) {
                     return resolve(result['.metadata'])
                 } else {
@@ -135,14 +135,15 @@ class TableUtil {
     /**
      * Updates the entity
      * 
+     * @param {*} tableService 
      * @param {*} table 
      * @param {*} item 
      * @param {*} merge 
      */
-    updateEntity(table, item, merge) {
+    updateEntity(tableService, table, item, merge) {
         return new Promise((resolve, reject) => {
             if (merge) {
-                this.azureTableService.insertOrMergeEntity(table, item, undefined, (error, result) => {
+                tableService.insertOrMergeEntity(table, item, undefined, (error, result) => {
                     if (!error) {
                         resolve(result)
                     } else {
@@ -150,7 +151,7 @@ class TableUtil {
                     }
                 })
             } else {
-                this.azureTableService.insertOrReplaceEntity(table, item, undefined, (error, result) => {
+                tableService.insertOrReplaceEntity(table, item, undefined, (error, result) => {
                     if (!error) {
                         resolve(result)
                     } else {
@@ -168,7 +169,7 @@ class TableUtil {
      */
     deleteEntity(table, item) {
         return new Promise((resolve, reject) => {
-            this.azureTableService.deleteEntity(table, item, undefined, (error, result) => {
+            tableService.deleteEntity(table, item, undefined, (error, result) => {
                 if (!error) {
                     resolve(result)
                 } else {
@@ -187,7 +188,7 @@ class TableUtil {
      */
     executeBatch(table, batch) {
         return new Promise((resolve, reject) => {
-            this.azureTableService.executeBatch(table, batch, (error, result) => {
+            tableService.executeBatch(table, batch, (error, result) => {
                 if (!error) {
                     return resolve(result)
                 } else {
@@ -199,16 +200,3 @@ class TableUtil {
 }
 
 module.exports = new TableUtil();
-
-// module.exports = {
-//     createQuery,
-//     queryTable,
-//     queryTableAll,
-//     addEntity,
-//     retrieveEntity,
-//     updateEntity,
-//     deleteEntity,
-//     executeBatch,
-//     parseEntities,
-//     entGen: TableUtilities.entityGenerator,
-// }
