@@ -15,7 +15,7 @@ import { ICustomerDetailsProps } from './ICustomerDetailsProps';
  * @category Customers
  */
 export const CustomerDetails = (props: ICustomerDetailsProps) => {
-    const { t } = useTranslation(['CUSTOMERS', 'COMMON', 'PROJECTS']);
+    const { t } = useTranslation(['customers', 'COMMON', 'projects']);
     const { loading, error, data } = useQuery(GET_PROJECTS, { variables: { customerKey: value<string>(props, 'customer.key', '') } });
 
     return (
@@ -23,7 +23,7 @@ export const CustomerDetails = (props: ICustomerDetailsProps) => {
             <h3 className={styles.name}>{props.customer.name}</h3>
             {props.customer.inactive && (
                 <UserMessage
-                    text={t('CUSTOMER_INACTIVE_TEXT')}
+                    text={t('inactiveText')}
                     iconName='Warning'
                     type={MessageBarType.warning} />
             )}
@@ -33,7 +33,7 @@ export const CustomerDetails = (props: ICustomerDetailsProps) => {
                     className={styles.buttonContainer}
                     hidden={loading || !!error || !props.customer.webLink}>
                     <DefaultButton
-                        text={t('CUSTOMER_WEBLINK_TEXT')}
+                        text={t('webLinkText')}
                         href={props.customer.webLink}
                         iconProps={{ iconName: 'WorkforceManagement' }} />
                 </div>
@@ -41,18 +41,18 @@ export const CustomerDetails = (props: ICustomerDetailsProps) => {
                     className={styles.buttonContainer}
                     hidden={loading || !!error || !props.customer.externalSystemURL} >
                     <DefaultButton
-                        text={t('CUSTOMER_EXTERNAL_SYSTEM_URL_TEXT')}
+                        text={t('externalSystemUrlText')}
                         href={props.customer.externalSystemURL}
                         iconProps={{ iconName: 'WorkforceManagement' }} />
                 </div>
             </div>
             <div>
-                {error && <MessageBar messageBarType={MessageBarType.error}>{t('GENERIC_ERROR_TEXT')}</MessageBar>}
+                {error && <MessageBar messageBarType={MessageBarType.error}>{t('genericErrorText')}</MessageBar>}
                 {!error && (
                     <ProjectList
                         items={value<IProject[]>(data, 'projects', [])}
                         enableShimmer={loading}
-                        searchBox={{ placeholder: t('SEARCH_PLACEHOLDER', { ns: 'PROJECTS' }) }}
+                        searchBox={{ placeholder: t('searchPlaceholder', { ns: 'projects' }) }}
                         renderLink={true}
                         height={300} />
                 )}

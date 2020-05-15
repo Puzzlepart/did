@@ -22,15 +22,15 @@ export const columns = (t: TFunction): IColumn[] => ([
         { maxWidth: 35, minWidth: 35 },
         (customer: ICustomer) => {
             if (customer.inactive) {
-                return <Icon title={t('CUSTOMER_INACTIVE_TEXT')} iconName='Warning' styles={{ root: { fontSize: 16, color: '#ffbf00' } }} />;
+                return <Icon title={t('inactiveText')} iconName='Warning' styles={{ root: { fontSize: 16, color: '#ffbf00' } }} />;
             }
             return <Icon iconName={customer.icon || 'Page'} styles={{ root: { fontSize: 16 } }} />;
         },
     ),
-    col('key', t('KEY_LABEL'), { maxWidth: 120 }),
+    col('key', t('keyLabel'), { maxWidth: 120 }),
     col(
         'name',
-        t('NAME_LABEL'),
+        t('nameLabel'),
         { maxWidth: 300 },
         (customer: ICustomer) => <Link to={`/customers/${customer.id}`}>{customer.name}</Link>
     ),
@@ -40,7 +40,7 @@ export const columns = (t: TFunction): IColumn[] => ([
  * @category Customers
  */
 export const CustomerList = (props: ICustomerListProps) => {
-    const { t } = useTranslation(['COMMON', 'CUSTOMERS']);
+    const { t } = useTranslation(['COMMON', 'customers']);
     const [items, setItems] = React.useState([...props.items]);
 
     /**
@@ -67,7 +67,7 @@ export const CustomerList = (props: ICustomerListProps) => {
                         onRender: () => (
                             <Checkbox
                                 styles={{ root: { margin: '6px 0 0 8px' } }}
-                                label={t('TOGGLE_INACTIVE_TEXT')}
+                                label={t('toggleInactiveText')}
                                 onChange={onToggleInactive} />
                         ),
                     }

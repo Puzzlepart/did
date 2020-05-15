@@ -40,8 +40,8 @@ export const IconPicker = (props: IIconPickerProps) => {
         <Dropdown
             className={props.className}
             styles={props.styles}
-            label={t('ICON_LABEL')}
-            title={t('ICON_LABEL')}
+            label={t('iconLabel')}
+            title={t('iconLabel')}
             options={options}
             defaultValue={props.defaultValue}
             onChange={props.onChange}

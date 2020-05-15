@@ -38,7 +38,7 @@ export const GetAllocation = (entries: ITimeEntry[], exp: string): Array<{ name:
  * @category Timesheet
  */
 export const AllocationView = (): JSX.Element => {
-    const { t } = useTranslation(['TIMESHEET', 'COMMON']);
+    const { t } = useTranslation(['timesheet', 'COMMON']);
     const { selectedPeriod } = React.useContext(TimesheetContext);
     const [dimensions, setDimensions] = React.useState({ width: 0, height: 0 });
     const ref = React.useRef<HTMLDivElement>();
@@ -46,8 +46,8 @@ export const AllocationView = (): JSX.Element => {
     React.useLayoutEffect(() => setDimensions({ width: ref.current.clientWidth, height: 400 }), []);
 
     const charts = {
-        'project.name': t('ALLOCATION_PROJECT_CHART_TITLE'),
-        'customer.name': t('ALLOCATION_CUSTOMER_CHART_TITLE'),
+        'project.name': t('projectChartTitle'),
+        'customer.name': t('customerChartTitle'),
     };
 
     return (
@@ -68,7 +68,7 @@ export const AllocationView = (): JSX.Element => {
                             <YAxis />
                             <Tooltip />
                             <Legend />
-                            <Bar dataKey='hours' name={t('HOURS', { ns: 'COMMON' }) as string} fill='#444' />
+                            <Bar dataKey='hours' name={t('hours', { ns: 'COMMON' }) as string} fill='#444' />
                         </BarChart>
                     </div>
                 )

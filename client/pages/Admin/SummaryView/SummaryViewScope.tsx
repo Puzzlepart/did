@@ -8,14 +8,14 @@ export const getScopes = (t: TFunction): ISummaryViewScope[] => ([
         key: 'month',
         fieldName: 'monthNumber',
         iconProps: { iconName: 'Calendar' },
-        name: t('MONTH_LABEL'),
+        name: t('monthLabel'),
         getColumnHeader: (idx: number) => capitalize(moment().month(idx - 1).format('MMMM')),
     } as ISummaryViewScope,
     {
         key: 'week',
         fieldName: 'weekNumber',
         iconProps: { iconName: 'CalendarWeek' },
-        name: t('WEEK_LABEL'),
-        getColumnHeader: (idx: number) => `${t('WEEK_LABEL')} ${idx}`,
+        name: t('weekLabel'),
+        getColumnHeader: (idx: number) => `${t('weekLabel')} ${idx}`,
     } as ISummaryViewScope,
 ]);

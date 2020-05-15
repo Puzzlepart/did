@@ -45,28 +45,28 @@ export const UserFormModal = (props: IUserFormModalProps) => {
             </div>
             <TextField
                 label='ID'
-                description={t('USER_ID_DESCRIPTION')}
+                description={t('userIdDescription')}
                 value={user.id}
                 disabled={!!props.user}
                 required={!props.user}
                 onChange={(_, id) => setUser({ ...user, id })} />
             <TextField
-                label={t('NAME_LABEL')}
+                label={t('nameLabel')}
                 value={user.fullName}
                 disabled={!!props.user}
                 required={!props.user}
                 onChange={(_, fullName) => setUser({ ...user, fullName })} />
             <Dropdown
-                label={t('ROLE_LABEL')}
+                label={t('roleLabel')}
                 options={[
-                    { key: 'User', text: t('ROLE_USER_TEXT') },
-                    { key: 'Admin', text: t('ROLE_ADMIN_TEXT') },
+                    { key: 'User', text: t('roleUser') },
+                    { key: 'Admin', text: t('roleAdmin') },
                 ]}
                 defaultSelectedKey={user.role}
                 onChange={(_, opt) => setUser({ ...user, role: opt.key.toString() })} />
             <PrimaryButton
                 className={styles.saveBtn}
-                text={t('SAVE')}
+                text={t('save')}
                 disabled={!isFormValid()}
                 onClick={onSave} />
         </Modal>

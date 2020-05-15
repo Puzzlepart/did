@@ -13,8 +13,8 @@ require('twix');
  * @category Helper
  */
 export function getDurationDisplay(minutes: number, hours?: number, t?: TFunction): string {
-    const hrsShortFormat = t ? t('HOURS_SHORTFORMAT', { ns: 'COMMON', defaultValue: undefined }) : '{0}h';
-    const minShortFormat = t ? t('MINUTES_SHORTFORMAT', { ns: 'COMMON', defaultValue: undefined }) : '{0}min';
+    const hrsShortFormat = t ? t('hoursShortFormat', { ns: 'COMMON', defaultValue: undefined }) : '{0}h';
+    const minShortFormat = t ? t('minutesShortFormat', { ns: 'COMMON', defaultValue: undefined }) : '{0}min';
     const hrs = hours ? Math.floor(hours) : Math.floor(minutes / 60);
     const mins = hours ? ((hours % 1) * 60) : minutes % 60;
     const hrsStr = format(hrsShortFormat, hrs);

@@ -14,7 +14,7 @@ import styles from './StatusBar.module.scss';
  * @category Timesheet
  */
 export const StatusBar = () => {
-    const { t } = useTranslation(['TIMESHEET', 'COMMON']);
+    const { t } = useTranslation(['timesheet', 'COMMON']);
     const { loading, periods, selectedPeriod, dispatch } = React.useContext(TimesheetContext);
 
     const defaultProps: IUserMessageProps = {
@@ -32,24 +32,24 @@ export const StatusBar = () => {
                     <UserMessage
                         {...defaultProps}
                         hidden={selectedPeriod.isConfirmed}
-                        text={format(t('PERIOD_HOURS_SUMMARY_TEXT'), getDurationDisplay(selectedPeriod.totalDuration, undefined, t))}
+                        text={format(t('periodHoursSummaryText'), getDurationDisplay(selectedPeriod.totalDuration, undefined, t))}
                         iconName='ReminderTime' />
                     <UserMessage
                         {...defaultProps}
                         hidden={selectedPeriod.unmatchedDuration === 0 || selectedPeriod.isConfirmed}
-                        text={format(t('HOURS_NOT_MATCHED_TEXT'), getDurationDisplay(selectedPeriod.unmatchedDuration, undefined, t))}
+                        text={format(t('hoursNotMatchedText'), getDurationDisplay(selectedPeriod.unmatchedDuration, undefined, t))}
                         type={MessageBarType.warning}
                         iconName='BufferTimeBoth' />
                     <UserMessage
                         {...defaultProps}
                         hidden={selectedPeriod.unmatchedDuration > 0 || selectedPeriod.isConfirmed}
-                        text={t('ALL_HOURS_MATCHED_TEXT')}
+                        text={t('allHoursMatchedText')}
                         type={MessageBarType.success}
                         iconName='BufferTimeBoth' />
                     <UserMessage
                         {...defaultProps}
                         hidden={!selectedPeriod.isConfirmed}
-                        text={format(t('PERIOD_CONFIRMED_TEXT'), getDurationDisplay(selectedPeriod.matchedDuration, undefined, t))}
+                        text={format(t('periodConfirmedText'), getDurationDisplay(selectedPeriod.matchedDuration, undefined, t))}
                         type={MessageBarType.success}
                         iconName='CheckMark' />
                     <UserMessage
@@ -57,8 +57,8 @@ export const StatusBar = () => {
                         hidden={selectedPeriod.ignoredEvents.length === 0 || selectedPeriod.isConfirmed}
                         iconName='DependencyRemove'>
                         <p>
-                            <span>{format(t('IGNORED_EVENTS_TEXT'), selectedPeriod.ignoredEvents.length)}</span>
-                            <a href='#' onClick={() => dispatch({ type: 'CLEAR_IGNORES' })}>{t('UNDO_IGNORE_LINK_TEXT')}</a>
+                            <span>{format(t('ignoredEventsText'), selectedPeriod.ignoredEvents.length)}</span>
+                            <a href='#' onClick={() => dispatch({ type: 'CLEAR_IGNORES' })}>{t('undoIgnoreText')}</a>
                         </p>
                     </UserMessage>
                     <UserMessage
@@ -66,13 +66,13 @@ export const StatusBar = () => {
                         hidden={selectedPeriod.errors.length === 0}
                         type={MessageBarType.severeWarning}
                         iconName='ErrorBadge'>
-                        <p>{format(t('UNRESOLVER_ERRORS_TEXT'), selectedPeriod.errors.length)}</p>
+                        <p>{format(t('unresolvedErrorText'), selectedPeriod.errors.length)}</p>
                     </UserMessage>
                     <UserMessage
                         {...defaultProps}
                         hidden={periods.length < 2}
                         iconName='SplitObject'>
-                        <p>{t('SPLIT_WEEK_TEXT')}</p>
+                        <p>{t('splitWeekInfoText')}</p>
                     </UserMessage>
                 </div>
             )}

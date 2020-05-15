@@ -19,11 +19,11 @@ import { IClearManualMatchButtonProps, IProjectColumnProps, IProjectColumnToolti
  * @category Timesheet
  */
 export const ClearManualMatchButton = ({ onClick }: IClearManualMatchButtonProps): JSX.Element => {
-    const { t } = useTranslation('TIMESHEET');
+    const { t } = useTranslation('timesheet');
     return (
         <div
             className={styles.clearButton}
-            title={t('CLEAR_PROJECT_MATCH_TOOLTIP_TEXT')}>
+            title={t('clearProjectMatchTooltipText')}>
             <span onClick={onClick} style={{ cursor: 'pointer' }}>
                 <Icon iconName='Cancel' styles={{ root: { fontSize: 14 } }} />
             </span>
@@ -56,7 +56,7 @@ export const ProjectColumnTooltip = ({ project }: IProjectColumnTooltipProps): J
  * @category Timesheet
  */
 const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
-    const { t } = useTranslation('TIMESHEET');
+    const { t } = useTranslation('timesheet');
     const { dispatch } = React.useContext(TimesheetContext);
     if (!event.project) {
         if (event.error) {
@@ -67,7 +67,7 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
                         isMultiline={false}
                         type={MessageBarType.severeWarning}
                         iconName='Warning'
-                        text={`${t('EVENT_ERROR_PREFIX')} ${event.error.message}`} />
+                        text={`${t('eventErrorPrefix')} ${event.error.message}`} />
                 </div>
             );
         }
@@ -78,12 +78,12 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
                     isMultiline={false}
                     type={MessageBarType.warning}
                     iconName='TagUnknown'
-                    text={t('NO_PROJECT_MATCH_FOUND_TEXT')}
+                    text={t('noProjectMatchFoundText')}
                     actions={
                         <div>
                             <ResolveProjectModal event={event} />
                             <MessageBarButton
-                                text={t('IGNORE_EVENT_BUTTON_LABEL')}
+                                text={t('ignoreEventButtonLabel')}
                                 iconProps={{ iconName: 'Blocked2' }}
                                 onClick={() => dispatch({ type: 'IGNORE_EVENT', payload: event.id })} />
                         </div>

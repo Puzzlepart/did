@@ -38,7 +38,7 @@ export class TimesheetPeriod {
     }
 
     public getName(includeMonth: boolean, t: TFunction) {
-        let name = `${t('WEEK_LABEL', { ns: 'COMMON' })} ${this.week}`;
+        let name = `${t('weekLabel', { ns: 'COMMON' })} ${this.week}`;
         if (includeMonth) name += ` (${this.month})`;
         return name;
     }

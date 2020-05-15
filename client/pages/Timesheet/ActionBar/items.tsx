@@ -5,29 +5,29 @@ import * as React from 'react';
 import { ITimesheetContext } from '../TimesheetContext';
 import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS';
 
-export const MOVE_CURRENT_WEEK = ({ scope, dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
-    key: 'MOVE_CURRENT_WEEK',
+export const goToCurrentWeek = ({ scope, dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
+    key: 'goToCurrentWeek',
     iconOnly: true,
     iconProps: { iconName: 'RenewalCurrent', ...ACTIONBAR_ICON_PROPS },
     onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: new Date().toISOString() }),
     disabled: scope.isCurrentWeek,
-    title: t('MOVE_CURRENT_WEEK'),
+    title: t('goToCurrentWeek'),
 });
 
-export const MOVE_PREV_WEEK = ({ dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
-    key: 'MOVE_PREV_WEEK',
+export const goToPrevWeek = ({ dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
+    key: 'goToPrevWeek',
     iconOnly: true,
     iconProps: { iconName: 'Back', ...ACTIONBAR_ICON_PROPS },
     onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: { amount: -1, unit: 'week' } }),
-    title: t('MOVE_PREV_WEEK')
+    title: t('goToPrevWeek')
 });
 
-export const MOVE_NEXT_WEEK = ({ dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
-    key: 'MOVE_NEXT_WEEK',
+export const goToNextWeek = ({ dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
+    key: 'goToNextWeek',
     iconOnly: true,
     iconProps: { iconName: 'Forward', ...ACTIONBAR_ICON_PROPS },
     onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: { amount: 1, unit: 'week' } }),
-    title: t('MOVE_NEXT_WEEK'),
+    title: t('goToNextWeek'),
 });
 
 export const CHANGE_PERIOD = ({ periods, loading, selectedPeriod, dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem[] => {
@@ -64,7 +64,7 @@ export const CONFIRM_ACTIONS = (context: ITimesheetContext, t: TFunction): ICont
             disabled={!!context.loading}
             iconProps={{ iconName: 'Cancel' }}
             onClick={context.onUnconfirmPeriod}
-            text={t('UNCONFIRM_HOURS_TEXT')}
+            text={t('unconfirmHoursText')}
             styles={{ root: { height: 44, marginLeft: 4 } }} />
         : <PrimaryButton
             disabled={
@@ -74,6 +74,6 @@ export const CONFIRM_ACTIONS = (context: ITimesheetContext, t: TFunction): ICont
             }
             iconProps={{ iconName: 'CheckMark' }}
             onClick={context.onConfirmPeriod}
-            text={t('CONFIRM_HOURS_TEXT')}
+            text={t('confirmHoursText')}
             styles={{ root: { height: 44, marginLeft: 4 } }} />
 });

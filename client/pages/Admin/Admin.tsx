@@ -12,7 +12,7 @@ import { Users } from './Users';
  * @category Admin
  */
 export const Admin = () => {
-    const { t } = useTranslation('ADMIN');
+    const { t } = useTranslation('admin');
     const history = useHistory();
     const { view } = useParams<{ view: string }>();
     return (
@@ -23,21 +23,21 @@ export const Admin = () => {
                 <PivotItem
                     className={styles.tab}
                     itemKey='users'
-                    headerText={t('USERS')}
+                    headerText={t('users')}
                     itemIcon='FabricUserFolder'>
                     <Users />
                 </PivotItem>
                 <PivotItem
                     className={styles.tab}
                     itemKey='summary'
-                    headerText={t('SUMMARY')}
+                    headerText={t('summary')}
                     itemIcon='CalendarWeek'>
                     <AdminSummaryView />
                 </PivotItem>
                 <PivotItem
                     className={styles.tab}
                     itemKey='labels'
-                    headerText={t('LABELS')}
+                    headerText={t('labels')}
                     itemIcon='Label'>
                     <Labels />
                 </PivotItem>

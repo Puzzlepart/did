@@ -40,8 +40,8 @@ export const reducer = (state: ITimesheetState, action: TimesheetAction): ITimes
     switch (action.type) {
         case 'DATA_UPDATED': {
             newState.loading = action.payload.query.loading && {
-                label: t('LOADING_EVENTS_LABEL'),
-                description: t('LOADING_EVENTS_DESCRIPTION'),
+                label: t('loadingEventsLabel'),
+                description: t('loadingEventsDescription'),
             };
             if (action.payload.query.data) {
                 newState.periods = action.payload.query.data.timesheet.map(period => new TimesheetPeriod(period));
@@ -52,15 +52,15 @@ export const reducer = (state: ITimesheetState, action: TimesheetAction): ITimes
 
         case 'CONFIRMING_PERIOD':
             newState.loading = {
-                label: t('CONFIRMING_PERIOD_LABEL'),
-                description: t('CONFIRMING_PERIOD_DESCRIPTION'),
+                label: t('confirmingPeriodLabel'),
+                description: t('confirmingPeriodDescription'),
             };
             break;
 
         case 'UNCONFIRMING_PERIOD':
             newState.loading = {
-                label: t('UNCONFIRMING_PERIOD_LABEL'),
-                description: t('UNCONFIRMING_PERIOD_DESCRIPTION'),
+                label: t('unconfirmingPeriodLabel'),
+                description: t('unconfirmingPeriodDescription'),
             };
             break;
         case 'MOVE_SCOPE':

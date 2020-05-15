@@ -18,7 +18,7 @@ import { ILabelFormProps } from './types';
  * @category LabelForm
  */
 export const LabelForm = (props: ILabelFormProps) => {
-    const { t } = useTranslation(['COMMON', 'ADMIN']);
+    const { t } = useTranslation(['COMMON', 'admin']);
     const [label, setLabel] = React.useState<IEntityLabel>(props.label || {
         name: '',
         description: '',
@@ -43,36 +43,36 @@ export const LabelForm = (props: ILabelFormProps) => {
             isOpen={true}>
             <div className={styles.title}>{
                 props.label
-                    ? t('EDIT_LABEL', { ns: 'ADMIN' })
-                    : t('ADD_NEW_LABEL', { ns: 'ADMIN' })
+                    ? t('editLabel', { ns: 'admin' })
+                    : t('addNewLabel', { ns: 'admin' })
             }</div>
 
             <TextField
                 spellCheck={false}
-                label={t('NAME_LABEL')}
+                label={t('nameLabel')}
                 value={label.name}
                 required={true}
                 onChange={(_, name) => setLabel({ ...label, name })} />
 
             <TextField
                 spellCheck={false}
-                label={t('DESCRIPTION_LABEL')}
+                label={t('descriptionLabel')}
                 value={label.description}
                 multiline={true}
                 onChange={(_, description) => setLabel({ ...label, description })} />
 
             <TextField
                 spellCheck={false}
-                label={t('ICON_LABEL')}
+                label={t('iconLabel')}
                 value={label.icon}
                 onChange={(_, icon) => setLabel({ ...label, icon })} />
 
-            <Label>{t('COLOR_LABEL')}</Label>
+            <Label>{t('colorLabel')}</Label>
             <DefaultButton
                 text={
                     colorPickerVisible
-                        ? t('CLOSE_COLOR_PICKER_TEXT')
-                        : t('OPEN_COLOR_PICKER_TEXT')
+                        ? t('closeColorPickerText')
+                        : t('openColorPickerText')
                 }
                 iconProps={{ iconName: colorPickerVisible ? 'ChromeClose' : 'Color' }}
                 onClick={() => setColorPickerVisible(!colorPickerVisible)} />
@@ -82,12 +82,12 @@ export const LabelForm = (props: ILabelFormProps) => {
                     onChange={({ hex }) => setLabel({ ...label, color: hex })} />
             )}
 
-            <Label>{t('PREVIEW_TEXT')}</Label>
+            <Label>{t('previewText')}</Label>
             <EntityLabel label={label} size='medium' />
 
             <PrimaryButton
                 className={styles.saveBtn}
-                text={t('SAVE', { ns: 'COMMON' })}
+                text={t('save', { ns: 'COMMON' })}
                 disabled={!isFormValid()}
                 onClick={onSave} />
         </Modal>

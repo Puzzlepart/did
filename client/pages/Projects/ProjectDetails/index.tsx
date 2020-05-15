@@ -21,7 +21,7 @@ import PROJECT_TIME_ENTRIES from './PROJECT_TIME_ENTRIES';
  * @category Projects
  */
 export const ProjectDetails = (props: IProjectDetailsProps) => {
-    const { t } = useTranslation(['PROJECTS', 'COMMON']);
+    const { t } = useTranslation(['projects', 'COMMON']);
     const [project, setProject] = React.useState({ ...props.project });
     const { loading, error, data } = useQuery<{ timeentries: any[] }>(PROJECT_TIME_ENTRIES, { variables: { projectId: props.project.id } });
     const [createOutlookCategory] = useMutation<{ result: IBaseResult }, { category: IOutlookCategory }>(CREATE_OUTLOOK_CATEGORY);
@@ -59,7 +59,7 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
             <h5 className={styles.customer}>{project.customer.name}</h5>
             {project.inactive && (
                 <UserMessage
-                    text={t('PROJECT_INACTIVE_TEXT')}
+                    text={t('inactiveText')}
                     iconName='Warning'
                     type={MessageBarType.warning} />
             )}
@@ -73,14 +73,14 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                 ))}
             </div>
             <div hidden={!project.outlookCategory}>
-                <MessageBar messageBarIconProps={{ iconName: 'OutlookLogoInverse' }}>{t('CATEGORY_OUTLOOK_TEXT')}</MessageBar>
+                <MessageBar messageBarIconProps={{ iconName: 'OutlookLogoInverse' }}>{t('categoryOutlookText')}</MessageBar>
             </div>
             <div className={styles.actions}>
                 <div
                     className={styles.buttonContainer}
                     hidden={loading || !!error || !project.webLink}>
                     <DefaultButton
-                        text={t('PROJECT_WORKSPACE_LABEL')}
+                        text={t('workspaceLabel')}
                         onClick={() => window.location.replace(project.webLink)}
                         iconProps={{ iconName: 'WorkforceManagement' }} />
                 </div>
@@ -88,7 +88,7 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                     className={styles.buttonContainer}
                     hidden={loading || !!error || timeentries.length === 0}>
                     <DefaultButton
-                        text={t('EXPORT_TIME_ENTIRES_TO_EXCEL_LABEL')}
+                        text={t('exportTimeEntriesLabel')}
                         iconProps={{ iconName: 'ExcelDocument' }}
                         onClick={onExportExcel} />
                 </div>
@@ -96,21 +96,21 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                     className={styles.buttonContainer}
                     hidden={loading || !!project.outlookCategory}>
                     <DefaultButton
-                        text={t('CREATE_OUTLOOK_CATEGORY_LABEL')}
+                        text={t('createOutlookCategoryLabel')}
                         iconProps={{ iconName: 'OutlookLogoInverse' }}
                         onClick={() => onCreateCategory()} />
                 </div>
             </div>
             <div>
-                {error && <UserMessage type={MessageBarType.error} text={t('TIME_ENTRIES_ERROR_TEXT')} />}
-                {(timeentries.length === 0 && !loading) && <UserMessage text={t('NO_TIME_ENTRIES_TEXT')} />}
-                {loading && <ProgressIndicator label={t('TIME_ENTRIES_LOADING_LABEL')} />}
+                {error && <UserMessage type={MessageBarType.error} text={t('timeEntriesErrorText')} />}
+                {(timeentries.length === 0 && !loading) && <UserMessage text={t('noTimeEntriesText')} />}
+                {loading && <ProgressIndicator label={t('timeEntriesLoadingLabel')} />}
             </div>
             <div>
                 {timeentries.length > 0 && (
                     <EventList
                         events={timeentries}
-                        additionalColumns={[col('resourceName', t('EMPLOYEE_LABEL', { ns: 'COMMON' }))]}
+                        additionalColumns={[col('resourceName', t('employeeLabel', { ns: 'COMMON' }))]}
                         dateFormat='MMM Do YYYY HH:mm'
                         columnWidths={{ time: 250 }} />
                 )}

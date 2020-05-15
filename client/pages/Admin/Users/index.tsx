@@ -14,15 +14,15 @@ import { IUserFormModalProps, UserFormModal } from './UserFormModal';
  * @category Admin
  */
 export const Users = () => {
-    const { t } = useTranslation(['COMMON', 'ADMIN']);
+    const { t } = useTranslation(['COMMON', 'admin']);
     const [userForm, setUserForm] = React.useState<IUserFormModalProps>(null);
     const { data, loading, refetch } = useQuery(GET_USERS, { fetchPolicy: 'cache-and-network' });
     const columns = [
-        col('fullName', t('NAME_LABEL'), { maxWidth: 180 }),
-        col('role', t('ROLE_LABEL')),
+        col('fullName', t('nameLabel'), { maxWidth: 180 }),
+        col('role', t('roleLabel')),
         col('edit', '', {}, (user: any) => (
             <DefaultButton
-                text={t('EDIT_USER', { ns: 'ADMIN' })}
+                text={t('editUser', { ns: 'admin' })}
                 onClick={() => setUserForm({ title: user.fullName, user })} />
         ))
     ];
@@ -36,10 +36,10 @@ export const Users = () => {
                 commandBar={{
                     items: [
                         {
-                            key: 'ADD_NEW_USER',
-                            name: t('ADD_NEW_USER', { ns: 'ADMIN' }),
+                            key: 'addNewUser',
+                            name: t('addNewUser', { ns: 'admin' }),
                             iconProps: { iconName: 'AddFriend' },
-                            onClick: () => setUserForm({ title: t('ADD_NEW_USER', { ns: 'ADMIN' }) }),
+                            onClick: () => setUserForm({ title: t('addNewUser', { ns: 'admin' }) }),
                         },
                     ],
                     farItems: []

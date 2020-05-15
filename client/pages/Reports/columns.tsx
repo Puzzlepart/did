@@ -10,33 +10,33 @@ const columns = (t: TFunction): IColumn[] => ([
     {
         key: 'title',
         fieldName: 'title',
-        name: t('TITLE_LABEL'),
+        name: t('titleLabel'),
         minWidth: 100,
     },
     {
         key: 'project',
         fieldName: 'project',
-        name: t('PROJECT'),
+        name: t('project'),
         minWidth: 100,
         onRender: ({ project }) => <Link to={`/projects/${project.id}`}>{project.name}</Link>
     },
     {
         key: 'customer',
         fieldName: 'customer',
-        name: t('CUSTOMER'),
+        name: t('customer'),
         minWidth: 100,
         onRender: ({ customer }) => <Link to={`/customers/${customer.id}`}>{customer.name}</Link>,
     },
     {
         key: 'durationHours',
         fieldName: 'durationHours',
-        name: t('DURATION_LABEL'),
+        name: t('durationLabel'),
         minWidth: 100,
     },
     {
         key: 'startTime',
         fieldName: 'startTime',
-        name: t('START_TIME_LABEL'),
+        name: t('startTimeLabel'),
         minWidth: 100,
         data: { excelColFormat: 'date' as ExcelColumnType },
         onRender: ({ startTime }) => dateUtils.formatDate(startTime, 'MMM DD, YYYY kk:mm')
@@ -44,7 +44,7 @@ const columns = (t: TFunction): IColumn[] => ([
     {
         key: 'endTime',
         fieldName: 'endTime',
-        name: t('END_TIME_LABEL'),
+        name: t('endTimeLabel'),
         minWidth: 100,
         data: { excelColFormat: 'date' as ExcelColumnType },
         onRender: ({ endTime }) => dateUtils.formatDate(endTime, 'MMM DD, YYYY kk:mm')
@@ -52,19 +52,19 @@ const columns = (t: TFunction): IColumn[] => ([
     {
         key: 'weekNumber',
         fieldName: 'weekNumber',
-        name: t('WEEK_LABEL'),
+        name: t('weekLabel'),
         minWidth: 100,
     },
     {
         key: 'yearNumber',
         fieldName: 'yearNumber',
-        name: t('YEAR_LABEL'),
+        name: t('yearLabel'),
         minWidth: 100,
     },
     {
         key: 'resourceName',
         fieldName: 'resourceName',
-        name: t('EMPLOYEE_LABEL'),
+        name: t('employeeLabel'),
         minWidth: 100,
     },
 ]);

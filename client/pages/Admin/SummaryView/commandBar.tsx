@@ -59,7 +59,7 @@ export const commandBar = (
         farItems: [
             {
                 key: 'EXPORT_TO_EXCEL',
-                text: t('EXPORT_CURRENT_VIEW'),
+                text: t('exportCurrentView'),
                 iconProps: { iconName: 'ExcelDocument' },
                 onClick: () => {
                     excelUtils.exportExcel(

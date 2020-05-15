@@ -41,7 +41,7 @@ export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
                 additionalColumns={[
                     col(
                         'project',
-                        t('PROJECT'),
+                        t('project'),
                         { minWidth: 350, maxWidth: 350 },
                         (event: ITimeEntry) => <ProjectColumn event={event} />
                     ),

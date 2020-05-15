@@ -14,12 +14,12 @@ import TIME_ENTRIES from './TIME_ENTRIES';
  * @category Reports
  */
 export const Reports = () => {
-    const { t } = useTranslation(['COMMON', 'REPORTS']);
+    const { t } = useTranslation(['COMMON', 'reports']);
     const filters: BaseFilter[] = [
-        new WeekFilter('weekNumber', t('WEEK_NUMER_LABEL')),
-        new MonthFilter('month', t('MONTH_LABEL')),
-        new YearFilter('yearNumber', t('YEAR_LABEL')),
-        new ResourceFilter('resourceName', t('EMPLOYEE_LABEL')),
+        new WeekFilter('weekNumber', t('weekNumberLabel')),
+        new MonthFilter('month', t('monthLabel')),
+        new YearFilter('yearNumber', t('yearLabel')),
+        new ResourceFilter('resourceName', t('employeeLabel')),
     ]
     const [filterPanelOpen, setFilterPanelOpen] = useState<boolean>(undefined);
     const [subset, setSubset] = useState<any[]>(undefined);
@@ -54,8 +54,8 @@ export const Reports = () => {
 
     if (loading) return (
         <ProgressIndicator
-            label={t('GENERATING_REPORT_LABEL', { ns: 'REPORTS' })}
-            description={t('GENERATING_REPORT_DESCRIPTION', { ns: 'REPORTS' })} />
+            label={t('generatingReportLabel', { ns: 'reports' })}
+            description={t('generatingReportDescription', { ns: 'reports' })} />
     );
 
     return (
@@ -70,7 +70,7 @@ export const Reports = () => {
                         {
                             id: 'EXPORT_TO_EXCEL',
                             key: 'EXPORT_TO_EXCEL',
-                            text: t('EXPORT_CURRENT_VIEW'),
+                            text: t('exportCurrentView'),
                             onClick: onExportExcel,
                             iconProps: { iconName: 'ExcelDocument' },
                             disabled: loading || !!error,
@@ -87,7 +87,7 @@ export const Reports = () => {
                 }} />
             <UserMessage
                 hidden={timeentries.length > 0 || loading}
-                text={t('NO_ENTRIES_TEXT', { ns: 'REPORTS' })} />
+                text={t('noEntriesText', { ns: 'reports' })} />
             <FilterPanel
                 isOpen={filterPanelOpen}
                 filters={filters}

@@ -45,7 +45,7 @@ export function createColumns({ scope, range, timeentries }: ISummaryViewState, 
         ...columns,
         col(
             'sum',
-            t('SUM_LABEL'),
+            t('sumLabel'),
             {
                 minWidth: 50,
                 maxWidth: 50,

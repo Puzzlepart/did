@@ -32,7 +32,7 @@ export const createRows = (
         obj[col.fieldName] = sum;
         obj.sum += sum;
         return obj;
-    }, { label: t('SUM_LABEL'), sum: 0 });
+    }, { label: t('sumLabel'), sum: 0 });
 
     rows.push(totalRow);
 

@@ -55,7 +55,7 @@ export const WeekPicker = () => {
                                 setCalendar(null);
                             }}
                             firstDayOfWeek={DayOfWeek.Monday}
-                            strings={t('CALENDAR_STRINGS', { returnObjects: true }) as any}
+                            strings={t('calendarStrings', { returnObjects: true }) as any}
                             showGoToToday={false}
                             showWeekNumbers={true}
                             dateRangeType={DateRangeType.Week}

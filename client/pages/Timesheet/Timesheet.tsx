@@ -24,7 +24,7 @@ import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD';
  * @category Timesheet
  */
 export const Timesheet = () => {
-    const { t } = useTranslation(['TIMESHEET', 'COMMON']);
+    const { t } = useTranslation(['timesheet', 'COMMON']);
     const { user } = React.useContext(AppContext);
     const history = useHistory();
     const [state, dispatch] = React.useReducer(reducer, {
@@ -78,19 +78,19 @@ export const Timesheet = () => {
                     <Pivot>
                         <PivotItem
                             itemKey='overview'
-                            headerText={t('OVERVIEW_HEADER_TEXT')}
+                            headerText={t('overviewHeaderText')}
                             itemIcon='CalendarWeek'>
                             <Overview dayFormat='dddd DD' timeFormat='HH:mm' />
                         </PivotItem>
                         <PivotItem
                             itemKey='summary'
-                            headerText={t('SUMMARY_HEADER_TEXT')}
+                            headerText={t('summaryHeaderText')}
                             itemIcon='List'>
                             <SummaryView />
                         </PivotItem>
                         <PivotItem
                             itemKey='allocation'
-                            headerText={t('ALLOCATION_HEADER_TEXT')}
+                            headerText={t('allocationHeaderText')}
                             itemIcon='ReportDocument'>
                             <AllocationView />
                         </PivotItem>

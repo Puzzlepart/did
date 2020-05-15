@@ -5,19 +5,19 @@ export const getTypes = (t: TFunction): ISummaryViewType[] => ([
     {
         key: 'resource',
         fieldName: 'resourceName',
-        name: t('EMPLOYEE_LABEL'),
+        name: t('employeeLabel'),
         iconProps: { iconName: 'FabricUserFolder' },
     },
     {
         key: 'project',
         fieldName: 'project.name',
-        name: t('PROJECT'),
+        name: t('project'),
         iconProps: { iconName: 'Teamwork' },
     },
     {
         key: 'customer',
         fieldName: 'customer.name',
-        name: t('CUSTOMER'),
+        name: t('customer'),
         iconProps: { iconName: 'CustomList' },
     }
 ]);

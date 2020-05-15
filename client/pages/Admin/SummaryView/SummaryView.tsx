@@ -21,7 +21,7 @@ import { ISummaryViewContext } from './types';
  * @category Admin
  */
 export const SummaryView = (): JSX.Element => {
-    const { t } = useTranslation(['COMMON', 'ADMIN']);
+    const { t } = useTranslation(['COMMON', 'admin']);
     const scopes = getScopes(t);
     const types = getTypes(t);
 
@@ -65,7 +65,7 @@ export const SummaryView = (): JSX.Element => {
                         commandBar={commandBar(contextValue, items, columns, t)} />
                     <UserMessage
                         hidden={!isEmpty(items) || loading}
-                        text={t('SUMMARY_NO_TIME_ENTRIES', { ns: 'ADMIN' })} />
+                        text={t('noTimeEntriesText', { ns: 'admin' })} />
                 </PivotItem>
             ))}
         </Pivot>

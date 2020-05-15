@@ -18,7 +18,7 @@ const initialModel = { customerKey: '', projectKey: '', name: '', description: '
  * @category Projects
  */
 export const CreateProjectForm = () => {
-    const { t } = useTranslation(['PROJECTS', 'COMMON']);
+    const { t } = useTranslation(['projects', 'COMMON']);
     const [validation, setValidation] = React.useState<ICreateProjectFormValidation>({ errors: {}, invalid: true });
     const [message, setMessage] = useMessage();
     const [model, setModel] = React.useState<ICreateProjectFormModel>(initialModel);
@@ -27,8 +27,8 @@ export const CreateProjectForm = () => {
     const validateForm = (): ICreateProjectFormValidation => {
         const errors: { [key: string]: string } = {};
         if (!model.customerKey) errors.customerKey = '';
-        if (model.name.length < 2) errors.name = t('NAME_FORM_VALIDATION')
-        if (!(/(^[A-ZÆØÅ0-9]{3,8}$)/gm).test(model.projectKey)) errors.projectKey = t('KEY_FORM_VALIDATION');
+        if (model.name.length < 2) errors.name = t('nameFormValidationText')
+        if (!(/(^[A-ZÆØÅ0-9]{3,8}$)/gm).test(model.projectKey)) errors.projectKey = t('keyFormValidationText');
         return { errors, invalid: Object.keys(errors).length > 0 };
     }
 
@@ -41,7 +41,7 @@ export const CreateProjectForm = () => {
         setValidation({ errors: {}, invalid: false });
         const { data: { result } } = await addProject({ variables: model });
         if (result.success) {
-            setMessage({ text: format(t('CREATE_SUCCESS_MESSAGE'), model.name), type: MessageBarType.success })
+            setMessage({ text: format(t('createSuccess'), model.name), type: MessageBarType.success })
         } else {
             setMessage({ text: result.error.message, type: MessageBarType.error });
         }
@@ -51,31 +51,31 @@ export const CreateProjectForm = () => {
     return (
         <div className={styles.root}>
             {message && <UserMessage {...message} containerStyle={{ marginTop: 12, marginBottom: 12, width: 450 }} />}
-            <Label>{t('CUSTOMER', { ns: 'COMMON' })}</Label>
+            <Label>{t('customer', { ns: 'COMMON' })}</Label>
             <SearchCustomer
                 required={true}
                 className={styles.inputField}
-                placeholder={t('SEARCH_PLACEHOLDER')}
+                placeholder={t('searchPlaceholder')}
                 onSelected={customer => setModel({ ...model, customerKey: customer && customer.id })} />
             <TextField
                 className={styles.inputField}
-                label={t('KEY_LABEL', { ns: 'COMMON' })}
-                description={t('PROJECT_KEY_DESCRIPTION')}
-                title={t('PROJECT_KEY_DESCRIPTION')}
+                label={t('keyLabel', { ns: 'COMMON' })}
+                description={t('keyDescription')}
+                title={t('keyDescription')}
                 required={true}
                 errorMessage={validation.errors.projectKey}
                 onChange={(_event, projectKey) => setModel({ ...model, projectKey })}
                 value={model.projectKey} />
             <TextField
                 className={styles.inputField}
-                label={t('NAME_LABEL', { ns: 'COMMON' })}
+                label={t('nameLabel', { ns: 'COMMON' })}
                 required={true}
                 errorMessage={validation.errors.name}
                 onChange={(_event, name) => setModel({ ...model, name })}
                 value={model.name} />
             <TextField
                 className={styles.inputField}
-                label={t('DESCRIPTION_LABEL', { ns: 'COMMON' })}
+                label={t('descriptionLabel', { ns: 'COMMON' })}
                 multiline={true}
                 errorMessage={validation.errors.description}
                 onChange={(_event, description) => setModel({ ...model, description })}
@@ -87,7 +87,7 @@ export const CreateProjectForm = () => {
                 onChange={(_event, opt) => setModel({ ...model, icon: opt.key as string })} />
             <PrimaryButton
                 styles={{ root: { marginTop: 16 } }}
-                text={t('ADD', { ns: 'COMMON' })}
+                text={t('add', { ns: 'COMMON' })}
                 iconProps={{ iconName: 'CirclePlus' }}
                 onClick={onFormSubmit}
                 disabled={loading || !!message} />

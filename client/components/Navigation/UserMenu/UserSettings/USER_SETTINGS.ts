@@ -16,7 +16,7 @@ export interface IUserSettingDropdown extends IUserSetting {
 export const USER_SETTINGS = (t: TFunction) => new Set<IUserSetting>([
     {
         key: 'userLanguage',
-        label: t('LANGUAGE'),
+        label: t('language'),
         type: 'dropdown',
         options: [
             {

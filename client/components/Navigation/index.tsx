@@ -17,19 +17,19 @@ export const Navigation = () => {
                 </Link>
                 <ul className={styles.nav} hidden={!user}>
                     <li className={styles.navItem}>
-                        <NavLink to='/timesheet' {...navLinkProps}>{t('TIMESHEET')}</NavLink>
+                        <NavLink to='/timesheet' {...navLinkProps}>{t('timesheet')}</NavLink>
                     </li>
                     <li className={styles.navItem}>
-                        <NavLink to='/customers' {...navLinkProps}>{t('CUSTOMERS')}</NavLink>
+                        <NavLink to='/customers' {...navLinkProps}>{t('customers')}</NavLink>
                     </li>
                     <li className={styles.navItem}>
-                        <NavLink to='/projects' {...navLinkProps}>{t('PROJECTS')}</NavLink>
+                        <NavLink to='/projects' {...navLinkProps}>{t('projects')}</NavLink>
                     </li>
                     <li className={styles.navItem}>
-                        <NavLink to='/reports' {...navLinkProps}>{t('REPORTS')}</NavLink>
+                        <NavLink to='/reports' {...navLinkProps}>{t('reports')}</NavLink>
                     </li>
                     <li className={styles.navItem}>
-                        <NavLink to='/admin' {...navLinkProps}>{t('ADMIN')}</NavLink>
+                        <NavLink to='/admin' {...navLinkProps}>{t('admin')}</NavLink>
                     </li>
                 </ul>
                 <UserMenu />

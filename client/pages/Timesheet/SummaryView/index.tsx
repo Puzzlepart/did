@@ -92,7 +92,7 @@ export const SummaryView = () => {
 
     const items = [
         ...generateRows(events, columns),
-        generateTotalRow(events, columns, t('SUM_LABEL')),
+        generateTotalRow(events, columns, t('sumLabel')),
     ];
 
     return (

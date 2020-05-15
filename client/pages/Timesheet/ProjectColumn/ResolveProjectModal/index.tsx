@@ -14,7 +14,7 @@ import { IResolveProjectModalProps } from './types';
  * @category Timesheet
 */
 export const ResolveProjectModal = ({ event }: IResolveProjectModalProps) => {
-    const { t } = useTranslation(['TIMESHEET', 'COMMON']);
+    const { t } = useTranslation(['timesheet', 'COMMON']);
     const { dispatch } = React.useContext<ITimesheetContext>(TimesheetContext);
     const [showResolveModal, setShowResolveModal] = React.useState<boolean>(false);
 
@@ -26,7 +26,7 @@ export const ResolveProjectModal = ({ event }: IResolveProjectModalProps) => {
     return (
         <>
             <MessageBarButton
-                text={t('RESOLVE_PROJECT_BUTTON_LABEL')}
+                text={t('resolveProjectButtonLabel')}
                 iconProps={{ iconName: 'ReviewResponseSolid' }}
                 onClick={() => setShowResolveModal(true)} />
             <Modal
@@ -36,14 +36,14 @@ export const ResolveProjectModal = ({ event }: IResolveProjectModalProps) => {
                 <div className={styles.title}>{event.title}</div>
                 <UserMessage
                     iconName='OutlookLogo'
-                    text={format(t('MATCH_OUTLOOK_NOTE'), event.webLink)} />
+                    text={format(t('matchOutlookInfoText'), event.webLink)} />
 
                 <UserMessage
                     hidden={!event.suggestedProject}
                     containerStyle={{ marginTop: 10 }}
                     iconName='Lightbulb' >
                     <p>
-                        <span>{t('DID_YOU_MEAN_TEXT')}</span>
+                        <span>{t('didYouMeanText')}</span>
                         <a href='#' onClick={() => onResolve(event.suggestedProject)}>
                             {value(event, 'suggestedProject.id', '')}
                         </a>?
@@ -53,12 +53,12 @@ export const ResolveProjectModal = ({ event }: IResolveProjectModalProps) => {
                 <UserMessage
                     hidden={!event.customer || !!event.suggestedProject}
                     containerStyle={{ marginTop: 10 }}
-                    text={format(t('EVENT_NOT_FULLY_MATCHED_TEXT'), value(event, 'customer.name', ''))} />
+                    text={format(t('eventNotFullyMatchedText'), value(event, 'customer.name', ''))} />
                 <SearchProject
                     width={450}
                     className={styles.searchProject}
                     onSelected={project => onResolve(project)}
-                    placeholder={t('SEARCH_PLACEHOLDER', { ns: 'COMMON' })} />
+                    placeholder={t('searchPlaceholder', { ns: 'COMMON' })} />
             </Modal>
         </>
     );
