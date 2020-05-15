@@ -68,7 +68,7 @@ export const AllocationView = (): JSX.Element => {
                             <YAxis />
                             <Tooltip />
                             <Legend />
-                            <Bar dataKey='hours' name={t('HOURS') as string} fill='#444' />
+                            <Bar dataKey='hours' name={t('HOURS', { ns: 'COMMON' }) as string} fill='#444' />
                         </BarChart>
                     </div>
                 )

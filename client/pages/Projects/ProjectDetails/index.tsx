@@ -21,7 +21,7 @@ import PROJECT_TIME_ENTRIES from './PROJECT_TIME_ENTRIES';
  * @category Projects
  */
 export const ProjectDetails = (props: IProjectDetailsProps) => {
-    const { t } = useTranslation(['COMMON', 'PROJECTS']);
+    const { t } = useTranslation(['PROJECTS', 'COMMON']);
     const [project, setProject] = React.useState({ ...props.project });
     const { loading, error, data } = useQuery<{ timeentries: any[] }>(PROJECT_TIME_ENTRIES, { variables: { projectId: props.project.id } });
     const [createOutlookCategory] = useMutation<{ result: IBaseResult }, { category: IOutlookCategory }>(CREATE_OUTLOOK_CATEGORY);
@@ -110,7 +110,7 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                 {timeentries.length > 0 && (
                     <EventList
                         events={timeentries}
-                        additionalColumns={[col('resourceName', t('EMPLOYEE_LABEL'))]}
+                        additionalColumns={[col('resourceName', t('EMPLOYEE_LABEL', { ns: 'COMMON' }))]}
                         dateFormat='MMM Do YYYY HH:mm'
                         columnWidths={{ time: 250 }} />
                 )}

@@ -52,7 +52,7 @@ export const CustomerDetails = (props: ICustomerDetailsProps) => {
                     <ProjectList
                         items={value<IProject[]>(data, 'projects', [])}
                         enableShimmer={loading}
-                        searchBox={{ placeholder: t('SEARCH_PLACEHOLDER') }}
+                        searchBox={{ placeholder: t('SEARCH_PLACEHOLDER', { ns: 'PROJECTS' }) }}
                         renderLink={true}
                         height={300} />
                 )}

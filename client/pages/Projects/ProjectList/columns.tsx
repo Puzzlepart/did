@@ -23,15 +23,24 @@ export default (hideColumns: string[], t: TFunction): IColumn[] => ([
         { maxWidth: 35, minWidth: 35 },
         (project: IProject) => {
             if (project.inactive) {
-                return <Icon title={t('PROJECT_INACTIVE_TEXT')} iconName='Warning' styles={{ root: { fontSize: 16, color: '#ffbf00' } }} />;
+                return (
+                    <Icon
+                        title={t('PROJECT_INACTIVE_TEXT')}
+                        iconName='Warning'
+                        styles={{ root: { fontSize: 16, color: '#ffbf00' } }} />
+                );
             }
             return <Icon iconName={project.icon || 'Page'} styles={{ root: { fontSize: 16 } }} />;
         },
     ),
-    col('key', t('KEY_LABEL'), { maxWidth: 120 }),
+    col(
+        'key',
+        t('KEY_LABEL', { ns: 'COMMON' }),
+        { maxWidth: 120 },
+    ),
     col(
         'name',
-        t('NAME_LABEL'),
+        t('NAME_LABEL', { ns: 'COMMON' }),
         { maxWidth: 220 },
         (project: IProject) => <Link to={`/projects/${project.id}`}>{project.name}</Link>
     ),

@@ -22,7 +22,7 @@ export const Users = () => {
         col('role', t('ROLE_LABEL')),
         col('edit', '', {}, (user: any) => (
             <DefaultButton
-                text={t('EDIT_USER')}
+                text={t('EDIT_USER', { ns: 'ADMIN' })}
                 onClick={() => setUserForm({ title: user.fullName, user })} />
         ))
     ];
