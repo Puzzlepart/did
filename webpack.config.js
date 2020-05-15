@@ -60,7 +60,6 @@ let config = {
   },
   plugins: [
     new MomentLocalesPlugin({ localesToKeep: ['en-gb', 'nb'] }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ],
