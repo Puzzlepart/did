@@ -1,8 +1,7 @@
 global.fetch = require("node-fetch")
 const { refreshAccessToken } = require('./tokens')
-const stripHtml = require("string-strip-html")
-const utils = require('../utils')
 const log = require('debug')('services/graph')
+const Event = require('./graph.event')
 
 class GraphService {
   constructor(req) {
@@ -107,20 +106,7 @@ class GraphService {
       log('Retrieved %s events from /me/calendar/calendarView', value.length)
       let events = value
         .filter(evt => evt.subject)
-        .map(evt => {
-          return ({
-            id: evt.id,
-            title: evt.subject,
-            body: stripHtml(evt.body.content),
-            isOrganizer: evt.isOrganizer,
-            categories: evt.categories,
-            webLink: evt.webLink,
-            lastModifiedDateTime: evt.lastModifiedDateTime,
-            startTime: evt.start.dateTime,
-            endTime: evt.end.dateTime,
-            duration: utils.getDurationHours(evt.start.dateTime, evt.end.dateTime),
-          })
-        })
+        .map(evt => new Event(evt))
       events = this.removeIgnoredEvents(events)
       events = events.filter(evt => evt.duration <= 24)
       return events

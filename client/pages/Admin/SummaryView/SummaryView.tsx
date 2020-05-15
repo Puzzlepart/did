@@ -34,7 +34,7 @@ export const SummaryView = (): JSX.Element => {
     })
     const { data, loading } = useQuery<{ timeentries: any[] }>(TIME_ENTRIES, {
         fetchPolicy: 'cache-first',
-        variables: { yearNumber: state.year },
+        variables: { year: state.year },
     })
 
     React.useEffect(() => { dispatch({ type: 'DATA_UPDATED', payload: data }) }, [data])

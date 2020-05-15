@@ -1,6 +1,6 @@
 const passport = require('passport')
 const OIDCStrategy = require('passport-azure-ad').OIDCStrategy
-const StorageService = require('../../services/storage')
+const SubscriptionService = require('../../services/subscription')
 const { USER_NOT_ENROLLED } = require('./errors')
 
 passport.serializeUser((user, done) => {
@@ -9,7 +9,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (user, done) => {
     try {
-        if (!user.data) user.data = await new StorageService(user.profile._json.tid).getUser(user.profile.oid)
+        if (!user.data) user.data = await new SubscriptionService().getUser(user.profile._json.tid, user.profile.oid)
         done(null, user)
     } catch (e) {
         done(USER_NOT_ENROLLED, null)

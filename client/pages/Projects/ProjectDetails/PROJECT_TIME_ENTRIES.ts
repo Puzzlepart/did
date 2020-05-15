@@ -11,7 +11,7 @@ export default gql`
             startTime
             endTime
             weekNumber
-            yearNumber
+            year
             resourceName            
         }
     }

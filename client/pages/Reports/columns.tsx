@@ -56,8 +56,8 @@ const columns = (t: TFunction): IColumn[] => ([
         minWidth: 100,
     },
     {
-        key: 'yearNumber',
-        fieldName: 'yearNumber',
+        key: 'year',
+        fieldName: 'year',
         name: t('yearLabel'),
         minWidth: 100,
     },
