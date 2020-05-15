@@ -6,5 +6,6 @@ routes
 services
 utils
 views
+tests
 app.js
 webpack.config.js
