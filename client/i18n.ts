@@ -10,7 +10,7 @@ i18n
             'nb': require('../resources/nb.json'),
         },
         fallbackLng: 'nb',
-        debug: true,
+        debug: false,
         interpolation: {
             escapeValue: false,
         }
