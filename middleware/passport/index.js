@@ -7,14 +7,14 @@ passport.serializeUser((user, done) => {
 })
 
 passport.deserializeUser(async (user, done) => {
-    if (!user.data) {
-        user.data = await new StorageService(user.profile._json.tid).getUser(user.profile.oid)
-    } if (user.data) {
+    try {
+        if (!user.data) user.data = await new StorageService(user.profile._json.tid).getUser(user.profile.oid)
         done(null, user)
-    } else {
-        let error = new Error()
+    } catch (e) {
+        const error = new Error()
         error.name = 'USER_NOT_ENROLLED'
-        error.message = 'You\'re not enrolled in Did 365. Please contact your system owner.'
+        error.message = 'It seems you\'re not enrolled in Did 365. Please contact your system owner.'
+        error.status = 401;
         done(error, null)
     }
 })
