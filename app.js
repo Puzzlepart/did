@@ -62,11 +62,9 @@ class App {
 
     setupErrorHandling() {
         this._.use((_req, _res, next) => { next(createError(404)) })
-        this._.use((error, req, res, _next) => {
-            res.locals.error_header = 'We\'re sorry'
-            res.locals.error_message = error.message
+        this._.use((error, _req, res, _next) => {
             res.status(error.status || 500)
-            res.render('error')
+            res.render('error', { error })
         })
     }
 
