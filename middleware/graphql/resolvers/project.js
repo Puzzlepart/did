@@ -15,20 +15,28 @@ const typeDef = `
     inactive: Boolean
     labels: [Label]
   }
+
+  input ProjectInput {
+    key: String
+    name: String
+    description: String
+    icon: String
+    customerKey: String
+  }
   
   extend type Query {
     projects(customerKey: String, sortBy: String): [Project!]!
   }  
 
   extend type Mutation {
-    createProject(customerKey: String!, projectKey: String!, name: String!, description: String!, icon: String!): BaseResult
+    createProject(project: ProjectInput!): BaseResult
     addLabelToProject(projectId: String!, labelId: String!): BaseResult
   }
 `
 
-async function createProject(_obj, variables, { services: { storage: StorageService } }) {
+async function createProject(_obj, { project }, { user, services: { storage: StorageService } }) {
   try {
-    await StorageService.createProject(variables, context.user.profile.oid)
+    await StorageService.createProject(project, user.profile.oid)
     return { success: true, error: null }
   } catch (error) {
     return { success: false, error: omit(error, 'requestId') }
@@ -56,7 +64,7 @@ async function projects(_obj, variables, { services: { storage: StorageService }
   ])
   projects = projects.map(project => ({
     ...project,
-    customer: find(customers, c => c.id === first(project.id.split(' '))),
+    customer: find(customers, c => c.key === project.customerKey),
     labels: filter(labels, label => {
       const labels = value(project, 'labels', { default: '' })
       return labels.indexOf(label.id) !== -1

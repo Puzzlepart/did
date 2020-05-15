@@ -36,8 +36,8 @@ export const CreateCustomerForm = ({ initialModel = { key: '', name: '', descrip
             setValidation(_validation)
             return
         }
-        setValidation({ errors: {}, invalid: false })
-        const { data: { result } } = await addCustomer({ variables: model })
+        setValidation({ errors: {}, invalid: false });
+        const { data: { result } } = await addCustomer({ variables: { customer: model } });
         if (result.success) {
             setMessage({ text: format(t('createSuccess'), model.name), type: MessageBarType.success })
         } else {
