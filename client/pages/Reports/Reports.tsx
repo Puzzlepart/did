@@ -2,10 +2,10 @@ import { useQuery } from '@apollo/react-hooks';
 import { BaseFilter, FilterPanel, IFilter, MonthFilter, ResourceFilter, UserMessage, WeekFilter, YearFilter } from 'components';
 import List from 'components/List';
 import { value as value } from 'helpers';
-import resource from 'i18n';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import * as React from 'react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { exportExcel } from 'utils/exportExcel';
 import columns from './columns';
 import TIME_ENTRIES from './TIME_ENTRIES';
@@ -14,11 +14,12 @@ import TIME_ENTRIES from './TIME_ENTRIES';
  * @category Reports
  */
 export const Reports = () => {
+    const { t } = useTranslation(['COMMON', 'reports']);
     const filters: BaseFilter[] = [
-        new WeekFilter('weekNumber'),
-        new MonthFilter('month'),
-        new YearFilter('yearNumber'),
-        new ResourceFilter('resourceName'),
+        new WeekFilter('weekNumber', t('weekNumberLabel')),
+        new MonthFilter('month', t('monthLabel')),
+        new YearFilter('yearNumber', t('yearLabel')),
+        new ResourceFilter('resourceName', t('employeeLabel')),
     ]
     const [filterPanelOpen, setFilterPanelOpen] = useState<boolean>(undefined);
     const [subset, setSubset] = useState<any[]>(undefined);
@@ -30,7 +31,7 @@ export const Reports = () => {
     const onExportExcel = () => exportExcel(
         subset || timeentries,
         {
-            columns: columns(resource),
+            columns: columns(t),
             fileName: `TimeEntries-${new Date().toDateString().split(' ').join('-')}.xlsx`,
         }
     );
@@ -53,8 +54,8 @@ export const Reports = () => {
 
     if (loading) return (
         <ProgressIndicator
-            label={resource('REPORTS.GENERATING_REPORT_LABEL')}
-            description={resource('REPORTS.GENERATING_REPORT_DESCRIPTION')} />
+            label={t('generatingReportLabel', { ns: 'reports' })}
+            description={t('generatingReportDescription', { ns: 'reports' })} />
     );
 
     return (
@@ -62,14 +63,14 @@ export const Reports = () => {
             <List
                 hidden={timeentries.length === 0 && !loading}
                 items={subset || timeentries}
-                columns={columns(resource)}
+                columns={columns(t)}
                 enableShimmer={loading}
                 commandBar={{
                     items: [
                         {
                             id: 'EXPORT_TO_EXCEL',
                             key: 'EXPORT_TO_EXCEL',
-                            text: resource('COMMON.EXPORT_CURRENT_VIEW'),
+                            text: t('exportCurrentView'),
                             onClick: onExportExcel,
                             iconProps: { iconName: 'ExcelDocument' },
                             disabled: loading || !!error,
@@ -86,7 +87,7 @@ export const Reports = () => {
                 }} />
             <UserMessage
                 hidden={timeentries.length > 0 || loading}
-                text={resource('REPORTS.NO_ENTRIES_TEXT')} />
+                text={t('noEntriesText', { ns: 'reports' })} />
             <FilterPanel
                 isOpen={filterPanelOpen}
                 filters={filters}

@@ -55,15 +55,6 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale 
     const endMonthIdx = getMonthIndex(endDateTime);
     const isSplit = endMonthIdx !== startMonthIdx;
 
-    console.log(
-        week,
-        startDateTime,
-        endDateTime,
-        startMonthIdx,
-        endMonthIdx,
-        isSplit,
-    );
-
     let periods = [{
         id: `${week}_${startMonthIdx}`,
         week,
@@ -191,7 +182,6 @@ async function confirmPeriod(_obj, { entries, startDateTime, endDateTime }, { us
         }
         return { success: true, error: null };
     } catch (error) {
-        console.log(error);
         return { success: false, error: omit(error, 'requestId') };
     }
 };

@@ -2,9 +2,9 @@
 import { useQuery } from '@apollo/react-hooks';
 import { UserMessage } from 'components';
 import List from 'components/List';
-import resource from 'i18n';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import { first, isEmpty } from 'underscore';
 import { moment } from 'utils/date';
 import { commandBar } from './commandBar';
@@ -17,13 +17,13 @@ import { getTypes } from './SummaryViewType';
 import TIME_ENTRIES from './TIME_ENTRIES';
 import { ISummaryViewContext } from './types';
 
-
 /**
  * @category Admin
  */
 export const SummaryView = (): JSX.Element => {
-    const scopes = getScopes(resource);
-    const types = getTypes(resource);
+    const { t } = useTranslation(['COMMON', 'admin']);
+    const scopes = getScopes(t);
+    const types = getTypes(t);
 
     const [state, dispatch] = React.useReducer(reducer, {
         year: moment().year(),
@@ -47,8 +47,8 @@ export const SummaryView = (): JSX.Element => {
     }), [state]);
 
     const periods = React.useMemo(() => createPeriods(2), []);
-    const columns = React.useMemo(() => createColumns(state), [state]);
-    const items = React.useMemo(() => createRows(state, columns, resource), [state]);
+    const columns = React.useMemo(() => createColumns(state, t), [state]);
+    const items = React.useMemo(() => createRows(state, columns, t), [state]);
 
     return (
         <Pivot
@@ -62,10 +62,10 @@ export const SummaryView = (): JSX.Element => {
                         enableShimmer={loading}
                         columns={columns}
                         items={items}
-                        commandBar={commandBar(contextValue, items, columns, resource)} />
+                        commandBar={commandBar(contextValue, items, columns, t)} />
                     <UserMessage
                         hidden={!isEmpty(items) || loading}
-                        text={resource('ADMIN.SUMMARY_NO_TIME_ENTRIES')} />
+                        text={t('noTimeEntriesText', { ns: 'admin' })} />
                 </PivotItem>
             ))}
         </Pivot>

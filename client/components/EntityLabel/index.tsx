@@ -1,6 +1,6 @@
-import resource from 'i18n';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import { isBlank } from 'underscore.string';
 import styles from './EntityLabel.module.scss';
 import { IEntityLabelProps } from './IEntityLabelProps';
@@ -9,6 +9,7 @@ import { IEntityLabelProps } from './IEntityLabelProps';
  * @category EntityLabel
  */
 export const EntityLabel = ({ size, label }: IEntityLabelProps) => {
+    const { t } = useTranslation('admin');
     const className = [styles.root]
     // eslint-disable-next-line default-case
     switch (size) {
@@ -22,7 +23,7 @@ export const EntityLabel = ({ size, label }: IEntityLabelProps) => {
             style={{ backgroundColor: label.color }}
             title={label.description}>
             {label.icon && <Icon iconName={label.icon} style={{ marginRight: 4 }} />}
-            <span>{isBlank(label.name) ? resource('ADMIN.DEFAULT_LABEL_TITLE') : label.name}</span>
+            <span>{isBlank(label.name) ? t('defaultLabelTitle') : label.name}</span>
         </div>
     );
 }

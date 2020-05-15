@@ -1,5 +1,5 @@
 import getValue from 'get-value';
-import resource from 'i18n';
+import { TFunction } from 'i18next';
 import format from 'string-format';
 require('twix');
 
@@ -8,12 +8,13 @@ require('twix');
  * 
  * @param {number} minutes Minutes
  * @param {number} hours Hours
+ * @param {TFunction} t Translate function
  * 
  * @category Helper
  */
-export function getDurationDisplay(minutes: number, hours?: number): string {
-    const hrsShortFormat = resource('COMMON.HOURS_SHORTFORMAT');
-    const minShortFormat = resource('COMMON.MINUTES_SHORTFORMAT');
+export function getDurationDisplay(minutes: number, hours?: number, t?: TFunction): string {
+    const hrsShortFormat = t ? t('hoursShortFormat', { ns: 'COMMON', defaultValue: undefined }) : '{0}h';
+    const minShortFormat = t ? t('minutesShortFormat', { ns: 'COMMON', defaultValue: undefined }) : '{0}min';
     const hrs = hours ? Math.floor(hours) : Math.floor(minutes / 60);
     const mins = hours ? ((hours % 1) * 60) : minutes % 60;
     const hrsStr = format(hrsShortFormat, hrs);
@@ -67,8 +68,8 @@ export function currencyDisplay(num: number, currency = 'NOK', minimumFractionDi
  * 
  * @category Helper
  */
-export function value<T>(obj: any, exp: string, defaultValue: T): T {
-    return getValue(obj, exp, { default: defaultValue });
+export function value<T>(obj: any, exp: string, defaultValue?: T): T {
+    return getValue(obj, exp, defaultValue && { default: defaultValue });
 }
 
 /**

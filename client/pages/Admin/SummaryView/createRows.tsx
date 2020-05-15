@@ -1,4 +1,5 @@
 import { sortAlphabetically, value } from 'helpers';
+import { TFunction } from 'i18next';
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import { unique } from 'underscore';
 import { ISummaryViewState } from './types';
@@ -7,7 +8,7 @@ import { ISummaryViewState } from './types';
 export const createRows = (
     { timeentries, scope, type }: ISummaryViewState,
     columns: IColumn[],
-    resource: (key: string) => string
+    t: TFunction
 ) => {
     const uniqueRowValues = sortAlphabetically(
         unique(timeentries.map(e => value(e, type.fieldName, null)), r => r)
@@ -31,7 +32,7 @@ export const createRows = (
         obj[col.fieldName] = sum;
         obj.sum += sum;
         return obj;
-    }, { label: resource('COMMON.SUM_LABEL'), sum: 0 });
+    }, { label: t('sumLabel'), sum: 0 });
 
     rows.push(totalRow);
 
