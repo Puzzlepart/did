@@ -1,3 +1,4 @@
+import { TFunction } from 'i18next';
 import { IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
 
 export interface IUserSetting {
@@ -12,10 +13,10 @@ export interface IUserSettingDropdown extends IUserSetting {
     options: IDropdownOption[];
 }
 
-export const USER_SETTINGS = (resource: (key: string) => string) => new Set<IUserSetting>([
+export const USER_SETTINGS = (t: TFunction) => new Set<IUserSetting>([
     {
         key: 'userLanguage',
-        label: resource('COMMON.LANGUAGE'),
+        label: t('LANGUAGE'),
         type: 'dropdown',
         options: [
             {

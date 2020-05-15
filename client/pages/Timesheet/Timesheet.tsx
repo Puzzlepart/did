@@ -1,10 +1,10 @@
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { AppContext } from 'AppContext';
 import { HotkeyModal } from 'components';
-import resource from 'i18n';
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
 import React from 'react';
 import { GlobalHotKeys } from 'react-hotkeys';
+import { useTranslation } from 'react-i18next';
 import { useHistory, useParams } from 'react-router-dom';
 import { ActionBar } from './ActionBar';
 import { AllocationView } from './AllocationView';
@@ -24,6 +24,7 @@ import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD';
  * @category Timesheet
  */
 export const Timesheet = () => {
+    const { t } = useTranslation(['TIMESHEET', 'COMMON']);
     const { user } = React.useContext(AppContext);
     const history = useHistory();
     const [state, dispatch] = React.useReducer(reducer, {
@@ -31,7 +32,7 @@ export const Timesheet = () => {
         selectedPeriod: new TimesheetPeriod(),
         scope: new TimesheetScope(useParams<ITimesheetParams>()),
     });
-    const timesheetQuery = useQuery<{ timesheet: TimesheetPeriod[] }>(GET_TIMESHEET, {
+    const query = useQuery<{ timesheet: TimesheetPeriod[] }>(GET_TIMESHEET, {
         variables: {
             ...state.scope.dateStrings,
             dateFormat: 'dddd DD',
@@ -43,21 +44,21 @@ export const Timesheet = () => {
     const [unconfirmPeriod] = useMutation<{ startDateTime: string; endDateTime: string }>(UNCONFIRM_PERIOD);
 
     React.useEffect(() => {
-        dispatch({ type: 'DATA_UPDATED', payload: timesheetQuery });
-    }, [timesheetQuery]);
+        dispatch({ type: 'DATA_UPDATED', payload: { query, t } });
+    }, [query]);
 
     React.useEffect(() => {
         history.push(`/timesheet/${state.scope.path}`)
     }, [state.scope]);
 
     const onConfirmPeriod = () => {
-        dispatch({ type: 'CONFIRMING_PERIOD' });
-        confirmPeriod({ variables: { ...state.selectedPeriod.scope, entries: state.selectedPeriod.matchedEvents } }).then(timesheetQuery.refetch);
+        dispatch({ type: 'CONFIRMING_PERIOD', payload: { t } });
+        confirmPeriod({ variables: { ...state.selectedPeriod.scope, entries: state.selectedPeriod.matchedEvents } }).then(query.refetch);
     }
 
     const onUnconfirmPeriod = () => {
-        dispatch({ type: 'UNCONFIRMING_PERIOD' });
-        unconfirmPeriod({ variables: state.selectedPeriod.scope }).then(timesheetQuery.refetch);
+        dispatch({ type: 'UNCONFIRMING_PERIOD', payload: { t } });
+        unconfirmPeriod({ variables: state.selectedPeriod.scope }).then(query.refetch);
     }
 
     const contextValue: ITimesheetContext = React.useMemo(() => ({
@@ -67,7 +68,7 @@ export const Timesheet = () => {
         dispatch,
     }), [state]);
 
-    const hotkeysProps = React.useMemo(() => hotkeys(contextValue, resource), [contextValue]);
+    const hotkeysProps = React.useMemo(() => hotkeys(contextValue, t), [contextValue]);
 
     return (
         <GlobalHotKeys {...hotkeysProps}>
@@ -77,19 +78,19 @@ export const Timesheet = () => {
                     <Pivot>
                         <PivotItem
                             itemKey='overview'
-                            headerText={resource('TIMESHEET.OVERVIEW_HEADER_TEXT')}
+                            headerText={t('OVERVIEW_HEADER_TEXT')}
                             itemIcon='CalendarWeek'>
                             <Overview dayFormat='dddd DD' timeFormat='HH:mm' />
                         </PivotItem>
                         <PivotItem
                             itemKey='summary'
-                            headerText={resource('TIMESHEET.SUMMARY_HEADER_TEXT')}
+                            headerText={t('SUMMARY_HEADER_TEXT')}
                             itemIcon='List'>
                             <SummaryView />
                         </PivotItem>
                         <PivotItem
                             itemKey='allocation'
-                            headerText={resource('TIMESHEET.ALLOCATION_HEADER_TEXT')}
+                            headerText={t('ALLOCATION_HEADER_TEXT')}
                             itemIcon='ReportDocument'>
                             <AllocationView />
                         </PivotItem>

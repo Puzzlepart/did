@@ -1,6 +1,6 @@
 import { value } from 'helpers';
-import resource from 'i18n';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import { IDurationColumnProps } from './IDurationColumnProps';
 
 /**
@@ -8,9 +8,10 @@ import { IDurationColumnProps } from './IDurationColumnProps';
  * @category Timesheet
  */
 export const DurationColumn = ({ row, column }: IDurationColumnProps) => {
+    const { t } = useTranslation('COMMON');
     const style = { ...value<any>(column, 'data.style', {}) };
 
-    if (row.label === resource('COMMON.SUM_LABEL')) style.fontWeight = 500;
+    if (row.label === t('SUM_LABEL')) style.fontWeight = 500;
 
     const colValue = row[column.fieldName]
         ? Number.parseFloat(row[column.fieldName]).toFixed(2)

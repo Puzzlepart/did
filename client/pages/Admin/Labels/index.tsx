@@ -1,10 +1,10 @@
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { EntityLabel, List } from 'components';
 import { value } from 'helpers';
-import resource from 'i18n';
 import { IEntityLabel } from 'interfaces/IEntityLabel';
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import { generateColumn as col } from 'utils/generateColumn';
 import { ILabelFormProps, LabelForm } from './LabelForm';
 import { DELETE_LABEL, GET_LABELS } from './types';
@@ -13,6 +13,7 @@ import { DELETE_LABEL, GET_LABELS } from './types';
  * @category Admin
  */
 export const Labels = () => {
+    const { t } = useTranslation(['COMMON', 'LABELS']);
     const { data, refetch } = useQuery(GET_LABELS, { fetchPolicy: 'cache-and-network' });
     const [deleteLabel] = useMutation(DELETE_LABEL);
     const [form, setForm] = React.useState<ILabelFormProps>(null);
@@ -20,11 +21,11 @@ export const Labels = () => {
     const columns = [
         col(
             'name',
-            resource('COMMON.NAME_LABEL'),
+            t('NAME_LABEL'),
             { maxWidth: 180 },
             (label: IEntityLabel) => <EntityLabel label={label} />,
         ),
-        col('description', resource('COMMON.DESCRIPTION_LABEL')),
+        col('description', t('DESCRIPTION_LABEL')),
         col(
             'edit_delete',
             '',
@@ -33,10 +34,10 @@ export const Labels = () => {
                 <>
                     <DefaultButton
                         styles={{ root: { marginRight: 4 } }}
-                        text={resource('COMMON.EDIT_LABEL')}
+                        text={t('EDIT_LABEL')}
                         onClick={() => setForm({ label })} />
                     <DefaultButton
-                        text={resource('COMMON.DELETE_LABEL')}
+                        text={t('DELETE_LABEL')}
                         onClick={() => {
                             deleteLabel({ variables: { id: label.id } }).then(refetch);
                         }} />
@@ -55,7 +56,7 @@ export const Labels = () => {
                     items: [
                         {
                             key: 'NEW_LABEL',
-                            name: resource('ADMIN.ADD_NEW_LABEL'),
+                            name: t('ADD_NEW_LABEL'),
                             iconProps: { iconName: 'Add' },
                             onClick: () => setForm({})
                         }

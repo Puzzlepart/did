@@ -1,5 +1,4 @@
 {
-  "translation": {
     "TIMESHEET": {
       "LOADING_EVENTS_LABEL": "Laster hendelser",
       "LOADING_EVENTS_DESCRIPTION": "Vent et lite øyeblikk...",
@@ -190,5 +189,4 @@
       "nextYearRangeAriaLabel": "Neste årsintervall",
       "closeButtonAriaLabel": "Lukk"
     }
-  }
 }

@@ -1,7 +1,7 @@
-import resource from 'i18n';
 import { Dropdown, IDropdownOption, IDropdownProps } from 'office-ui-fabric-react/lib/Dropdown';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import { humanize } from 'underscore.string';
 import { getIcons } from '../../common/icons';
 
@@ -14,6 +14,8 @@ export type IIconPickerProps = IDropdownProps
  * @category IconPicker
  */
 export const IconPicker = (props: IIconPickerProps) => {
+    const { t } = useTranslation('COMMON');
+
     function onRenderOption(option: IDropdownOption): JSX.Element {
         return (
             <div>
@@ -38,8 +40,8 @@ export const IconPicker = (props: IIconPickerProps) => {
         <Dropdown
             className={props.className}
             styles={props.styles}
-            label={resource('COMMON.ICON_LABEL')}
-            title={resource('COMMON.ICON_LABEL')}
+            label={t('ICON_LABEL')}
+            title={t('ICON_LABEL')}
             options={options}
             defaultValue={props.defaultValue}
             onChange={props.onChange}

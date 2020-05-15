@@ -1,14 +1,13 @@
 /* eslint-disable react/display-name */
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { stringIsNullOrEmpty } from '@pnp/common';
 import { EntityLabel } from 'components/EntityLabel';
 import { UserMessage } from 'components/UserMessage';
-import resource from 'i18n';
 import { MessageBarButton } from 'office-ui-fabric-react/lib/Button';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { TooltipDelay, TooltipHost } from 'office-ui-fabric-react/lib/Tooltip';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import { isEmpty } from 'underscore';
 import { withDefaultProps } from 'with-default-props';
 import { TimesheetContext } from '../TimesheetContext';
@@ -20,10 +19,11 @@ import { IClearManualMatchButtonProps, IProjectColumnProps, IProjectColumnToolti
  * @category Timesheet
  */
 export const ClearManualMatchButton = ({ onClick }: IClearManualMatchButtonProps): JSX.Element => {
+    const { t } = useTranslation('TIMESHEET');
     return (
         <div
             className={styles.clearButton}
-            title={resource('TIMESHEET.CLEAR_PROJECT_MATCH_TOOLTIP_TEXT')}>
+            title={t('CLEAR_PROJECT_MATCH_TOOLTIP_TEXT')}>
             <span onClick={onClick} style={{ cursor: 'pointer' }}>
                 <Icon iconName='Cancel' styles={{ root: { fontSize: 14 } }} />
             </span>
@@ -56,6 +56,7 @@ export const ProjectColumnTooltip = ({ project }: IProjectColumnTooltipProps): J
  * @category Timesheet
  */
 const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
+    const { t } = useTranslation('TIMESHEET');
     const { dispatch } = React.useContext(TimesheetContext);
     if (!event.project) {
         if (event.error) {
@@ -66,7 +67,7 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
                         isMultiline={false}
                         type={MessageBarType.severeWarning}
                         iconName='Warning'
-                        text={`${resource('TIMESHEET.EVENT_ERROR_PREFIX')} ${event.error.message}`} />
+                        text={`${t('EVENT_ERROR_PREFIX')} ${event.error.message}`} />
                 </div>
             );
         }
@@ -77,12 +78,12 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
                     isMultiline={false}
                     type={MessageBarType.warning}
                     iconName='TagUnknown'
-                    text={resource('TIMESHEET.NO_PROJECT_MATCH_FOUND_TEXT')}
+                    text={t('NO_PROJECT_MATCH_FOUND_TEXT')}
                     actions={
                         <div>
                             <ResolveProjectModal event={event} />
                             <MessageBarButton
-                                text={resource('TIMESHEET.IGNORE_EVENT_BUTTON_LABEL')}
+                                text={t('IGNORE_EVENT_BUTTON_LABEL')}
                                 iconProps={{ iconName: 'Blocked2' }}
                                 onClick={() => dispatch({ type: 'IGNORE_EVENT', payload: event.id })} />
                         </div>

@@ -1,11 +1,12 @@
 import { AppContext } from 'AppContext';
-import resource from 'i18n';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, NavLink } from 'react-router-dom';
 import styles from './Navigation.module.scss';
 import { UserMenu } from './UserMenu';
 
 export const Navigation = () => {
+    const { t } = useTranslation('NAVIGATION');
     const { user } = React.useContext(AppContext);
     const navLinkProps = { className: styles.navLink, activeClassName: styles.active };
     return (
@@ -16,19 +17,19 @@ export const Navigation = () => {
                 </Link>
                 <ul className={styles.nav} hidden={!user}>
                     <li className={styles.navItem}>
-                        <NavLink to='/timesheet' {...navLinkProps}>{resource('NAVIGATION.TIMESHEET')}</NavLink>
+                        <NavLink to='/timesheet' {...navLinkProps}>{t('TIMESHEET')}</NavLink>
                     </li>
                     <li className={styles.navItem}>
-                        <NavLink to='/customers' {...navLinkProps}>{resource('NAVIGATION.CUSTOMERS')}</NavLink>
+                        <NavLink to='/customers' {...navLinkProps}>{t('CUSTOMERS')}</NavLink>
                     </li>
                     <li className={styles.navItem}>
-                        <NavLink to='/projects' {...navLinkProps}>{resource('NAVIGATION.PROJECTS')}</NavLink>
+                        <NavLink to='/projects' {...navLinkProps}>{t('PROJECTS')}</NavLink>
                     </li>
                     <li className={styles.navItem}>
-                        <NavLink to='/reports' {...navLinkProps}>{resource('NAVIGATION.REPORTS')}</NavLink>
+                        <NavLink to='/reports' {...navLinkProps}>{t('REPORTS')}</NavLink>
                     </li>
                     <li className={styles.navItem}>
-                        <NavLink to='/admin' {...navLinkProps}>{resource('NAVIGATION.ADMIN')}</NavLink>
+                        <NavLink to='/admin' {...navLinkProps}>{t('ADMIN')}</NavLink>
                     </li>
                 </ul>
                 <UserMenu />

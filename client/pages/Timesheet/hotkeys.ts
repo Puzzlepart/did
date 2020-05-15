@@ -1,25 +1,26 @@
+import { TFunction } from 'i18next';
 import { GlobalHotKeysProps } from 'react-hotkeys';
 import { ITimesheetContext } from './TimesheetContext';
 
-export default (context: ITimesheetContext, resource: (key: string) => string): GlobalHotKeysProps => ({
+export default (context: ITimesheetContext, t: TFunction): GlobalHotKeysProps => ({
     keyMap: {
         MOVE_CURRENT_WEEK: {
-            name: resource('TIMESHEET.MOVE_CURRENT_WEEK'),
+            name: t('MOVE_CURRENT_WEEK'),
             sequence: 'SHIFT+DOWN',
             action: 'keydown'
         },
         PREV_WEEK: {
-            name: resource('TIMESHEET.MOVE_PREV_WEEK'),
+            name: t('MOVE_PREV_WEEK'),
             sequence: 'SHIFT+LEFT',
             action: 'keydown'
         },
         NEXT_WEEK: {
-            name: resource('TIMESHEET.MOVE_NEXT_WEEK'),
+            name: t('MOVE_NEXT_WEEK'),
             sequence: 'SHIFT+RIGHT',
             action: 'keydown'
         },
         SHOW_SHORTCUTS: {
-            name: resource('COMMON.SHOW_SHORTCUTS_TEXT'),
+            name: t('SHOW_SHORTCUTS_TEXT', { ns: 'COMMON' }),
             sequence: 'SHIFT+I',
             action: 'keydown'
         },

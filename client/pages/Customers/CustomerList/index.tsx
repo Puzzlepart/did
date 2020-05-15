@@ -1,10 +1,11 @@
 import List from 'components/List';
-import resource from 'i18n';
+import { TFunction } from 'i18next';
 import { ICustomer } from 'interfaces/ICustomer';
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { generateColumn as col } from 'utils/generateColumn';
 import { ICustomerListProps } from './ICustomerListProps';
@@ -14,22 +15,22 @@ import { ICustomerListProps } from './ICustomerListProps';
  * 
  * @category Customers
  */
-export const CustomerListColumns = (): IColumn[] => ([
+export const columns = (t: TFunction): IColumn[] => ([
     col(
         'icon',
         '',
         { maxWidth: 35, minWidth: 35 },
         (customer: ICustomer) => {
             if (customer.inactive) {
-                return <Icon title={resource('CUSTOMERS.CUSTOMER_INACTIVE_TEXT')} iconName='Warning' styles={{ root: { fontSize: 16, color: '#ffbf00' } }} />;
+                return <Icon title={t('CUSTOMER_INACTIVE_TEXT')} iconName='Warning' styles={{ root: { fontSize: 16, color: '#ffbf00' } }} />;
             }
             return <Icon iconName={customer.icon || 'Page'} styles={{ root: { fontSize: 16 } }} />;
         },
     ),
-    col('key', resource('COMMON.KEY_LABEL'), { maxWidth: 120 }),
+    col('key', t('KEY_LABEL'), { maxWidth: 120 }),
     col(
         'name',
-        resource('COMMON.NAME_LABEL'),
+        t('NAME_LABEL'),
         { maxWidth: 300 },
         (customer: ICustomer) => <Link to={`/customers/${customer.id}`}>{customer.name}</Link>
     ),
@@ -39,6 +40,7 @@ export const CustomerListColumns = (): IColumn[] => ([
  * @category Customers
  */
 export const CustomerList = (props: ICustomerListProps) => {
+    const { t } = useTranslation(['COMMON', 'CUSTOMERS']);
     const [items, setItems] = React.useState([...props.items]);
 
     /**
@@ -57,7 +59,7 @@ export const CustomerList = (props: ICustomerListProps) => {
         <List
             {...props}
             items={items}
-            columns={CustomerListColumns()}
+            columns={columns(t)}
             commandBar={{
                 items: [
                     {
@@ -65,7 +67,7 @@ export const CustomerList = (props: ICustomerListProps) => {
                         onRender: () => (
                             <Checkbox
                                 styles={{ root: { margin: '6px 0 0 8px' } }}
-                                label={resource('COMMON.TOGGLE_INACTIVE_TEXT')}
+                                label={t('TOGGLE_INACTIVE_TEXT')}
                                 onChange={onToggleInactive} />
                         ),
                     }

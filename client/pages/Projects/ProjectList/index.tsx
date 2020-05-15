@@ -1,17 +1,16 @@
 import List from 'components/List';
-import resource from 'i18n';
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import { withDefaultProps } from 'with-default-props';
 import columns from './columns';
 import { IProjectListProps } from './IProjectListProps';
-
-
 
 /**
  * @category ProjectList
  */
 const ProjectList = (props: IProjectListProps) => {
+    const { t } = useTranslation(['COMMON', 'PROJECTS']);
     const [items, setItems] = React.useState([...props.items]);
 
     const onToggleInactive = (checked?: boolean) => {
@@ -24,7 +23,7 @@ const ProjectList = (props: IProjectListProps) => {
         <List
             {...props}
             items={items}
-            columns={columns(props.hideColumns)}
+            columns={columns(props.hideColumns, t)}
             groups={props.groups}
             commandBar={{
                 items: [
@@ -33,7 +32,7 @@ const ProjectList = (props: IProjectListProps) => {
                         onRender: () => (
                             <Checkbox
                                 styles={{ root: { margin: '6px 0 0 8px' } }}
-                                label={resource('COMMON.TOGGLE_INACTIVE_TEXT')}
+                                label={t('TOGGLE_INACTIVE_TEXT')}
                                 onChange={(_event, checked) => onToggleInactive(checked)} />
                         ),
                     }

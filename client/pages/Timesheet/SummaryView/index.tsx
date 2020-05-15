@@ -2,10 +2,10 @@
 import { DurationColumn } from 'components/DurationColumn';
 import { LabelColumn } from 'components/LabelColumn';
 import List from 'components/List';
-import resource from 'i18n';
 import { IProject } from 'interfaces';
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import { unique } from 'underscore';
 import { capitalize } from 'underscore.string';
 import dateUtils from 'utils/date';
@@ -68,7 +68,7 @@ function generateRows(events: any[], columns: IColumn[]) {
     });
 }
 
-function generateTotalRow(events: any[], columns: IColumn[]) {
+function generateTotalRow(events: any[], columns: IColumn[], label: string) {
     return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
         const sum = [...events]
             .filter(event => dateUtils.formatDate(event.startTime, 'L') === col.fieldName)
@@ -76,7 +76,7 @@ function generateTotalRow(events: any[], columns: IColumn[]) {
         obj[col.fieldName] = sum;
         obj.sum += sum;
         return obj;
-    }, { label: resource('COMMON.SUM_LABEL'), sum: 0 });
+    }, { label, sum: 0 });
 }
 
 /**
@@ -84,6 +84,7 @@ function generateTotalRow(events: any[], columns: IColumn[]) {
  * @description Generates a summary view of events
  */
 export const SummaryView = () => {
+    const { t } = useTranslation('COMMON');
     const context = React.useContext(TimesheetContext);
     const columns = createColumns(context.scope);
 
@@ -91,7 +92,7 @@ export const SummaryView = () => {
 
     const items = [
         ...generateRows(events, columns),
-        generateTotalRow(events, columns),
+        generateTotalRow(events, columns, t('SUM_LABEL')),
     ];
 
     return (

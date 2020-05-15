@@ -1,4 +1,5 @@
-import resource from 'i18n';
+import { value } from 'helpers';
+import { TFunction } from 'i18next';
 import { IProject } from 'interfaces';
 import _ from 'underscore';
 import { TimesheetPeriod } from './TimesheetPeriod';
@@ -6,10 +7,19 @@ import { ITimesheetScopeOptions, TimesheetScope } from './TimesheetScope';
 import { ITimesheetState } from './types';
 
 export type TimesheetAction =
-    { type: 'DATA_UPDATED'; payload: { data: { timesheet: TimesheetPeriod[] }; loading: boolean } }
+    {
+        type: 'DATA_UPDATED';
+        payload: {
+            query: {
+                data: { timesheet: TimesheetPeriod[] };
+                loading: boolean;
+            };
+            t: TFunction;
+        };
+    }
     | { type: 'MOVE_SCOPE'; payload: ITimesheetScopeOptions | string }
-    | { type: 'CONFIRMING_PERIOD' }
-    | { type: 'UNCONFIRMING_PERIOD' }
+    | { type: 'CONFIRMING_PERIOD'; payload: { t: TFunction } }
+    | { type: 'UNCONFIRMING_PERIOD'; payload: { t: TFunction } }
     | { type: 'CHANGE_PERIOD'; payload: string }
     | { type: 'MANUAL_MATCH'; payload: { eventId: string; project: IProject } }
     | { type: 'CLEAR_MANUAL_MATCH'; payload: string }
@@ -25,16 +35,16 @@ export type TimesheetAction =
  * @param {IAction} action Action
  */
 export const reducer = (state: ITimesheetState, action: TimesheetAction): ITimesheetState => {
-    // eslint-disable-next-line prefer-const
-    let newState = { ...state };
+    const t = value<TFunction>(action, 'payload.t');
+    const newState = { ...state };
     switch (action.type) {
         case 'DATA_UPDATED': {
-            newState.loading = action.payload.loading && {
-                label: resource('TIMESHEET.LOADING_EVENTS_LABEL'),
-                description: resource('TIMESHEET.LOADING_EVENTS_DESCRIPTION'),
+            newState.loading = action.payload.query.loading && {
+                label: t('LOADING_EVENTS_LABEL'),
+                description: t('LOADING_EVENTS_DESCRIPTION'),
             };
-            if (action.payload.data) {
-                newState.periods = action.payload.data.timesheet.map(period => new TimesheetPeriod(period));
+            if (action.payload.query.data) {
+                newState.periods = action.payload.query.data.timesheet.map(period => new TimesheetPeriod(period));
                 newState.selectedPeriod = _.first(newState.periods);
             }
         }
@@ -42,15 +52,15 @@ export const reducer = (state: ITimesheetState, action: TimesheetAction): ITimes
 
         case 'CONFIRMING_PERIOD':
             newState.loading = {
-                label: resource('TIMESHEET.CONFIRMING_PERIOD_LABEL'),
-                description: resource('TIMESHEET.CONFIRMING_PERIOD_DESCRIPTION'),
+                label: t('CONFIRMING_PERIOD_LABEL'),
+                description: t('CONFIRMING_PERIOD_DESCRIPTION'),
             };
             break;
 
         case 'UNCONFIRMING_PERIOD':
             newState.loading = {
-                label: resource('TIMESHEET.UNCONFIRMING_PERIOD_LABEL'),
-                description: resource('TIMESHEET.UNCONFIRMING_PERIOD_DESCRIPTION'),
+                label: t('UNCONFIRMING_PERIOD_LABEL'),
+                description: t('UNCONFIRMING_PERIOD_DESCRIPTION'),
             };
             break;
         case 'MOVE_SCOPE':

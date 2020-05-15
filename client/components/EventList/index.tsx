@@ -1,6 +1,7 @@
 
 import List from 'components/List';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 import { withDefaultProps } from 'with-default-props';
 import * as col from './columns';
 import styles from './EventList.module.scss';
@@ -10,10 +11,11 @@ import { IEventListProps } from './types';
  * @category EventList
  */
 const EventList = (props: IEventListProps): JSX.Element => {
+    const { t } = useTranslation('COMMON');
     const columns = [
-        col.Title(props),
-        col.Time(props),
-        col.Duration(props),
+        col.Title(props, t('TITLE_LABEL')),
+        col.Time(props, t('TIME_LABEL')),
+        col.Duration(props, t('DURATION_LABEL')),
         ...props.additionalColumns
     ];
 
