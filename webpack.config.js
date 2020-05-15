@@ -75,7 +75,7 @@ let config = {
             {{head}}
                 <body>
                     <main role='main'>
-                    <div id="app" data-props="{{ context }}"></div>
+                    <div id="app"></div>
                     </main>
                 </body>
             </html>`,
