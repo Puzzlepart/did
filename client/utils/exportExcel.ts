@@ -2,6 +2,7 @@ import { stringToArrayBuffer, value } from 'helpers';
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import { humanize } from 'underscore.string';
 import { loadScripts } from './loadScripts';
+import { moment } from 'utils/date';
 
 /**
  * @ignore
@@ -42,7 +43,7 @@ export async function exportExcel(items: any[], options: IExcelExportOptions): P
             options.columns.map(c => c.name),
             ...items.map(item => options.columns.map(col => {
                 switch (value<ExcelColumnType>(col, 'data.excelColFormat', null)) {
-                    case 'date': return { v: new Date(item[col.fieldName]).toLocaleString("en"), t: "d" };
+                    case 'date': return { v: moment(item[col.fieldName]).format("YYYY-MM-DD HH:mm"), t: "d" };
                     default: return item[col.fieldName];
                 }
             })),
