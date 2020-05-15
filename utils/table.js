@@ -1,4 +1,4 @@
-const { TableQuery } = require('azure-storage')
+const { TableQuery, TableUtilities, TableBatch } = require('azure-storage')
 
 class TableUtil {
     /**
@@ -36,6 +36,20 @@ class TableUtil {
             }, {}))
         if (mapFunc) result = result.map(mapFunc)
         return result
+    }
+
+    entGen() {
+        return {
+            string: TableUtilities.entityGenerator.String,
+            int: TableUtilities.entityGenerator.Int32,
+            double: TableUtilities.entityGenerator.Double,
+            datetime: TableUtilities.entityGenerator.DateTime,
+            boolean: TableUtilities.entityGenerator.Boolean
+        }
+    }
+
+    createBatch() {
+        return new TableBatch();
     }
 
     /**

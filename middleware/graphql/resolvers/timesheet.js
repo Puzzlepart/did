@@ -1,8 +1,8 @@
 const { filter, find, omit } = require('underscore')
 const { TableBatch } = require('azure-storage')
 const value = require('get-value')
-const { executeBatch, entGen } = require('../../../utils/table')
-const { getDurationHours, formatDate, getMonthIndex, getWeek, startOfMonth, endOfMonth, getYear } = require('../../../utils')
+const { executeBatch } = require('../../../utils/table')
+const { formatDate, getMonthIndex, getWeek, startOfMonth, endOfMonth } = require('../../../utils')
 const matchEvents = require('./timesheet.matching')
 
 const typeDef = `  
@@ -126,32 +126,15 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale 
     return periods
 }
 
-async function confirmPeriod(_obj, { entries, startDateTime, endDateTime }, { user, tenantId, services: { graph: GraphService } }) {
+async function confirmPeriod(_obj, { entries, startDateTime, endDateTime }, { user, services: { graph: GraphService, storage: StorageService } }) {
     try {
         const calendarView = await GraphService.getEvents(startDateTime, endDateTime)
-        let entities = entries.map(entry => {
+        let timeentries = entries.map(entry => {
             const event = calendarView.filter(e => e.id === entry.id)[0]
             if (!event) return
-            return {
-                PartitionKey: entGen.String(user.profile.oid),
-                RowKey: entGen.String(entry.id),
-                ResourceName: entGen.String(user.profile.displayName),
-                Title: entGen.String(event.title),
-                Description: entGen.String(event.body),
-                StartTime: entGen.DateTime(event.startTime),
-                EndTime: entGen.DateTime(event.endTime),
-                Duration: entGen.Double(getDurationHours(event.startTime, event.endTime)),
-                ProjectId: entGen.String(entry.projectId),
-                WebLink: entGen.String(event.webLink),
-                WeekNumber: entGen.Int32(getWeek(event.startTime)),
-                MonthNumber: entGen.Int32(getMonthIndex(event.startTime)),
-                Year: entGen.Int32(getYear(event.startTime)),
-                ManualMatch: entGen.Boolean(entry.isManualMatch),
-            }
+            return { user, entry, event }
         }).filter(entry => entry)
-        const batch = new TableBatch()
-        entities.forEach(entity => batch.insertEntity(entity))
-        await executeBatch('TimeEntries', batch)
+        await StorageService.addTimeEntries(timeentries);
         return { success: true, error: null }
     } catch (error) {
         return { success: false, error: omit(error, 'requestId') }

@@ -1,5 +1,6 @@
 const _ = require('underscore')
 const tableUtil = require('../utils/table')
+const { getDurationHours } = require('../utils')
 const arraySort = require('array-sort')
 const { first, pick } = require('underscore')
 const { TableUtilities, TableQuery, createTableService } = require('azure-storage')
@@ -9,45 +10,34 @@ class StorageService {
     constructor(subscription) {
         tableUtil.tableService = createTableService(subscription.connectionString)
     }
-    /**
-     * Get labels
-     */
     async getLabels() {
         const query = tableUtil.createQuery(1000, undefined)
         const { entries } = await tableUtil.queryTable('Labels', query)
         return tableUtil.parseEntities(entries)
     }
-    /**
-     * Add label
-     *
-     * @param {*} label
-     */
     async addLabel(label) {
-        let entity = await tableUtil.addEntity(
+        const { string } = tableUtil.entGen();
+        const entity = await tableUtil.addEntity(
             'Labels',
             {
-                PartitionKey: TableUtilities.entityGenerator.String('Default'),
-                RowKey: TableUtilities.entityGenerator.String(uuidv4()),
-                Name: TableUtilities.entityGenerator.String(label.name),
-                Color: TableUtilities.entityGenerator.String(label.color),
-                Icon: TableUtilities.entityGenerator.String(label.icon),
+                PartitionKey: string('Default'),
+                RowKey: string(uuidv4()),
+                Name: string(label.name),
+                Color: string(label.color),
+                Icon: string(label.icon),
             }
         )
         return entity
     }
-    /**
-     * Update label
-     * 
-     * @param {*} label
-     */
     async updateLabel(label) {
+        const { string } = tableUtil.entGen();
         const entity = {
-            PartitionKey: TableUtilities.entityGenerator.String('Default'),
-            RowKey: TableUtilities.entityGenerator.String(label.id),
+            PartitionKey: string('Default'),
+            RowKey: string(label.id),
         }
-        if (label.name) entity.Name = TableUtilities.entityGenerator.String(label.name)
-        if (label.color) entity.Color = TableUtilities.entityGenerator.String(label.color)
-        if (label.icon) entity.Icon = TableUtilities.entityGenerator.String(label.icon)
+        if (label.name) entity.Name = string(label.name)
+        if (label.color) entity.Color = string(label.color)
+        if (label.icon) entity.Icon = string(label.icon)
         const result = await tableUtil.updateEntity(
             'Labels',
             entity,
@@ -55,18 +45,14 @@ class StorageService {
         )
         return result
     }
-    /**
-     * Delete label
-     * 
-     * @param {*} id
-     */
     async deleteLabel(id) {
+        const { string } = tableUtil.entGen();
         try {
             const result = await tableUtil.deleteEntity(
                 'Labels',
                 {
-                    PartitionKey: TableUtilities.entityGenerator.String('Default'),
-                    RowKey: TableUtilities.entityGenerator.String(id),
+                    PartitionKey: string('Default'),
+                    RowKey: string(id),
                 }
             )
             return result
@@ -75,13 +61,8 @@ class StorageService {
             throw error
         }
     }
-    /**
-     * Get user
-     *
-     * @param {*} userId
-     */
     async getUser(userId) {
-        let filter = TableQuery.stringFilter('RowKey', TableUtilities.QueryComparisons.EQUAL, userId);
+        let filter = TableQuery.stringFilter('RowKey', TableUtilities.QueryComparisons.EQUAL, userId)
         const query = tableUtil.createQuery(1).where(filter)
         const { entries } = await tableUtil.queryTable(
             'Users',
@@ -89,19 +70,15 @@ class StorageService {
         )
         return first(tableUtil.parseEntities(entries))
     }
-    /**
-     * Update user
-     * 
-     * @param {*} user
-     */
     async updateUser(user) {
+        const { string } = tableUtil.entGen();
         const entity = {
-            PartitionKey: TableUtilities.entityGenerator.String('Default'),
-            RowKey: TableUtilities.entityGenerator.String(user.id),
+            PartitionKey: string('Default'),
+            RowKey: string(user.id),
         }
-        if (user.fullName) entity.FullName = TableUtilities.entityGenerator.String(user.fullName)
-        if (user.role) entity.Role = TableUtilities.entityGenerator.String(user.role)
-        if (user.userLanguage) entity.UserLanguage = TableUtilities.entityGenerator.String(user.userLanguage)
+        if (user.fullName) entity.FullName = string(user.fullName)
+        if (user.role) entity.Role = string(user.role)
+        if (user.userLanguage) entity.UserLanguage = string(user.userLanguage)
         const result = await tableUtil.updateEntity(
             'Users',
             entity,
@@ -109,68 +86,52 @@ class StorageService {
         )
         return result
     }
-    /**
-     * Create project
-     *
-     * @param {*} model
-     * @param {*} createdBy
-     */
     async createProject(model, createdBy) {
-        let projectId = (`${model.customerKey} ${model.projectKey}`).toUpperCase()
-        let entity = await tableUtil.addEntity(
+        const { string } = tableUtil.entGen();
+        const projectId = (`${model.customerKey} ${model.projectKey}`).toUpperCase()
+        const entity = await tableUtil.addEntity(
             'Projects',
             {
-                PartitionKey: TableUtilities.entityGenerator.String('Default'),
-                RowKey: TableUtilities.entityGenerator.String(projectId),
-                Name: TableUtilities.entityGenerator.String(model.name),
-                Description: TableUtilities.entityGenerator.String(model.description),
-                CustomerKey: TableUtilities.entityGenerator.String(model.customerKey.toUpperCase()),
-                Icon: TableUtilities.entityGenerator.String(model.icon || 'Page'),
-                CreatedBy: TableUtilities.entityGenerator.String(createdBy),
+                PartitionKey: string('Default'),
+                RowKey: string(projectId),
+                Name: string(model.name),
+                Description: string(model.description),
+                CustomerKey: string(model.customerKey.toUpperCase()),
+                Icon: string(model.icon || 'Page'),
+                CreatedBy: string(createdBy),
             }
         )
         return entity
     }
-    /**
-     * Create customer
-     *
-     * @param {*} model
-     * @param {*} createdBy
-     */
     async createCustomer(model, createdBy) {
-        let entity = await tableUtil.addEntity(
+        const { string } = tableUtil.entGen();
+        const entity = await tableUtil.addEntity(
             'Customers',
             {
-                PartitionKey: TableUtilities.entityGenerator.String('Default'),
-                RowKey: TableUtilities.entityGenerator.String(model.key.toUpperCase()),
-                Name: TableUtilities.entityGenerator.String(model.name),
-                Description: TableUtilities.entityGenerator.String(model.description),
-                Icon: TableUtilities.entityGenerator.String(model.icon || 'Page'),
-                CreatedBy: TableUtilities.entityGenerator.String(createdBy),
+                PartitionKey: string('Default'),
+                RowKey: string(model.key.toUpperCase()),
+                Name: string(model.name),
+                Description: string(model.description),
+                Icon: string(model.icon || 'Page'),
+                CreatedBy: string(createdBy),
             }
         )
         return entity
     }
-    /**
-     * Add user
-     *
-     * @param {*} user
-     */
+
     async addUser(user) {
-        let entity = await tableUtil.addEntity(
+        const { string } = tableUtil.entGen();
+        const entity = await tableUtil.addEntity(
             'Users',
             {
-                PartitionKey: TableUtilities.entityGenerator.String('Default'),
-                RowKey: TableUtilities.entityGenerator.String(user.id),
-                FullName: TableUtilities.entityGenerator.String(user.fullName),
-                Role: TableUtilities.entityGenerator.String(user.role),
+                PartitionKey: string('Default'),
+                RowKey: string(user.id),
+                FullName: string(user.fullName),
+                Role: string(user.role),
             }
         )
         return entity
     }
-    /**
-     * Get customers
-     */
     async getCustomers() {
         const query = tableUtil.createQuery(1000)
         const { entries } = await tableUtil.queryTable(
@@ -179,12 +140,6 @@ class StorageService {
         )
         return tableUtil.parseEntities(entries, undefined, { idUpper: true })
     }
-    /**
-     * Get projects
-     *
-     * @param {*} customerKey
-     * @param {*} options
-     */
     async getProjects(customerKey, options) {
         options = options || {}
         let filter = null
@@ -199,12 +154,6 @@ class StorageService {
         if (options.sortBy) entries = arraySort(entries, options.sortBy)
         return entries
     }
-    /**
-     * Get time entries
-     *
-     * @param {*} filters
-     * @param {*} options
-     */
     async getTimeEntries(filters, options) {
         filters = filters || {}
         options = options || {}
@@ -226,19 +175,11 @@ class StorageService {
         result = result.sort((a, b) => new Date(a.startTime) - new Date(b.startTime))
         return result
     }
-    /**
-     * Get users
-     */
     async getUsers() {
         const query = tableUtil.createQuery(1000, undefined)
         const { entries } = await tableUtil.queryTable('Users', query)
         return tableUtil.parseEntities(entries)
     }
-    /**
-     * Get current user
-     *
-     * @param {*} userId
-     */
     async getUser(userId) {
         const entry = await tableUtil.retrieveEntity(
             'Users',
@@ -247,18 +188,14 @@ class StorageService {
         )
         return tableUtil.parseEntities([entry])[0]
     }
-    /**
-     * Delete customer
-     *
-     * @param {*} key
-     */
     async deleteCustomer(key) {
+        const { string } = tableUtil.entGen();
         try {
             const result = await tableUtil.deleteEntity(
                 'Customers',
                 {
-                    PartitionKey: TableUtilities.entityGenerator.String('Default'),
-                    RowKey: TableUtilities.entityGenerator.String(key),
+                    PartitionKey: string('Default'),
+                    RowKey: string(key),
                 }
             )
             return result
@@ -267,18 +204,14 @@ class StorageService {
             throw error
         }
     }
-    /**
-     * Delete project
-     *
-     * @param {*} key
-     */
     async deleteProject(key) {
+        const { string } = tableUtil.entGen();
         try {
             const result = await tableUtil.deleteEntity(
                 'Projects',
                 {
-                    PartitionKey: TableUtilities.entityGenerator.String('Default'),
-                    RowKey: TableUtilities.entityGenerator.String(key),
+                    PartitionKey: string('Default'),
+                    RowKey: string(key),
                 }
             )
             return result
@@ -287,13 +220,8 @@ class StorageService {
             throw error
         }
     }
-    /**
-     * Add label to project
-     *
-     * @param {*} projectKey
-     * @param {*} labelId
-     */
     async addLabelToProject(projectId, labelId) {
+        const { string } = tableUtil.entGen();
         const entity = await tableUtil.retrieveEntity(
             'Projects',
             'Default',
@@ -303,10 +231,32 @@ class StorageService {
         labels.push(labelId)
         const updatedEntity = {
             ...pick(entity, 'PartitionKey', 'RowKey'),
-            Labels: TableUtilities.entityGenerator.String(labels.join('')),
+            Labels: string(labels.join('')),
         }
         const result = await tableUtil.updateEntity('Projects', updatedEntity, true)
         return result
+    }
+    async addTimeEntries(timeentries) {
+        const { string, datetime, double, int, boolean } = tableUtil.entGen();
+        const entities = timeentries.map(entry => ({
+            PartitionKey: string(user.profile.oid),
+            RowKey: string(entry.id),
+            ResourceName: string(user.profile.displayName),
+            Title: string(event.title),
+            Description: string(event.body),
+            StartTime: datetime(event.startTime),
+            EndTime: datetime(event.endTime),
+            Duration: double(getDurationHours(event.startTime, event.endTime)),
+            ProjectId: string(entry.projectId),
+            WebLink: string(event.webLink),
+            WeekNumber: int(getWeek(event.startTime)),
+            MonthNumber: int(getMonthIndex(event.startTime)),
+            Year: int(getYear(event.startTime)),
+            ManualMatch: boolean(entry.isManualMatch),
+        }));
+        const batch = tableUtil.createBatch();
+        entities.forEach(entity => batch.insertEntity(entity))
+        await tableUtil.executeBatch('TimeEntries', batch)
     }
 }
 
