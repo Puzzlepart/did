@@ -22,4 +22,4 @@ const serveGzipped = contentType => (req, res, next) => {
     next()
 }
 
-module.exports = serveGzipped;
+module.exports = serveGzipped

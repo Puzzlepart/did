@@ -1,12 +1,12 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 
 router.get('/', (req, res) => {
   if (!req.user || !req.isAuthenticated()) {
-    res.redirect('/auth/signin');
+    res.redirect('/auth/signin')
   } else {
-    res.render('index');
+    res.render('index')
   }
-});
+})
 
-module.exports = router;
+module.exports = router

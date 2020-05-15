@@ -1,13 +1,13 @@
-global.fetch = require("node-fetch");
-const { refreshAccessToken } = require('./tokens');
-const stripHtml = require("string-strip-html");
-const utils = require('../utils');
-const log = require('debug')('services/graph');
+global.fetch = require("node-fetch")
+const { refreshAccessToken } = require('./tokens')
+const stripHtml = require("string-strip-html")
+const utils = require('../utils')
+const log = require('debug')('services/graph')
 
 class GraphService {
   constructor(req) {
-    this.req = req;
-    this.oauthToken = this.req.user.oauthToken;
+    this.req = req
+    this.oauthToken = this.req.user.oauthToken
   }
 
   /**
@@ -18,12 +18,12 @@ class GraphService {
    * @param {*} events
    */
   removeIgnoredEvents(events) {
-    let ignoreRegex = /[(\[\{]IGNORE[)\]\}]/gi;
+    let ignoreRegex = /[(\[\{]IGNORE[)\]\}]/gi
     return events.filter(evt => {
-      let categories = evt.categories.join(' ').toLowerCase();
-      let content = [evt.title, evt.body, categories].join(' ').toLowerCase();
-      return content.match(ignoreRegex) == null && categories.indexOf('ignore') === -1;
-    });
+      let categories = evt.categories.join(' ').toLowerCase()
+      let content = [evt.title, evt.body, categories].join(' ').toLowerCase()
+      return content.match(ignoreRegex) == null && categories.indexOf('ignore') === -1
+    })
   }
 
   /**
@@ -32,27 +32,27 @@ class GraphService {
   getClient() {
     const client = require('@microsoft/microsoft-graph-client').Client.init({
       authProvider: (done) => {
-        done(null, this.oauthToken.access_token);
+        done(null, this.oauthToken.access_token)
       }
-    });
-    return client;
+    })
+    return client
   }
 
   async createOutlookCategory(category) {
     try {
-      log('Querying Graph /me/outlook/masterCategories');
+      log('Querying Graph /me/outlook/masterCategories')
       const res = await this.getClient()
         .api('/me/outlook/masterCategories')
-        .post(JSON.stringify(category));
-      return res;
+        .post(JSON.stringify(category))
+      return res
     } catch (error) {
       switch (error.statusCode) {
         case 401: {
-          this.oauthToken = await refreshAccessToken(this.req);
-          return this.createOutlookCategory(category);
+          this.oauthToken = await refreshAccessToken(this.req)
+          return this.createOutlookCategory(category)
         }
         default: {
-          throw new Error();
+          throw new Error()
         }
       }
     }
@@ -63,19 +63,19 @@ class GraphService {
    */
   async getOutlookCategories() {
     try {
-      log('Querying Graph /me/outlook/masterCategories');
+      log('Querying Graph /me/outlook/masterCategories')
       const { value } = await this.getClient()
         .api('/me/outlook/masterCategories')
-        .get();
-      return value;
+        .get()
+      return value
     } catch (error) {
       switch (error.statusCode) {
         case 401: {
-          this.oauthToken = await refreshAccessToken(this.req);
-          return this.getOutlookCategories();
+          this.oauthToken = await refreshAccessToken(this.req)
+          return this.getOutlookCategories()
         }
         default: {
-          throw new Error();
+          throw new Error()
         }
       }
     }
@@ -92,7 +92,7 @@ class GraphService {
       log('Querying Graph /me/calendar/calendarView: %s', JSON.stringify({
         startDateTime,
         endDateTime
-      }));
+      }))
       const { value } = await this.getClient()
         .api('/me/calendar/calendarView')
         .query({
@@ -103,8 +103,8 @@ class GraphService {
         .filter(`sensitivity ne 'private' and isallday eq false and iscancelled eq false`)
         .orderby('start/dateTime asc')
         .top(500)
-        .get();
-      log('Retrieved %s events from /me/calendar/calendarView', value.length);
+        .get()
+      log('Retrieved %s events from /me/calendar/calendarView', value.length)
       let events = value
         .filter(evt => evt.subject)
         .map(evt => {
@@ -121,18 +121,18 @@ class GraphService {
             durationHours: utils.getDurationHours(evt.start.dateTime, evt.end.dateTime),
             durationMinutes: utils.getDurationMinutes(evt.start.dateTime, evt.end.dateTime),
           })
-        });
-      events = this.removeIgnoredEvents(events);
-      events = events.filter(evt => evt.durationHours <= 24);
-      return events;
+        })
+      events = this.removeIgnoredEvents(events)
+      events = events.filter(evt => evt.durationHours <= 24)
+      return events
     } catch (error) {
       switch (error.statusCode) {
         case 401: {
-          this.oauthToken = await refreshAccessToken(this.req);
-          return this.getEvents(startDateTime, endDateTime);
+          this.oauthToken = await refreshAccessToken(this.req)
+          return this.getEvents(startDateTime, endDateTime)
         }
         default: {
-          throw new Error();
+          throw new Error()
         }
       }
     }
@@ -143,4 +143,4 @@ class GraphService {
 
 
 
-module.exports = GraphService;
+module.exports = GraphService

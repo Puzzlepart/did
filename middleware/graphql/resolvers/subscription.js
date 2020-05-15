@@ -4,7 +4,7 @@ const typeDef = `
         key: String
         name: String!
     }
-`;
+`
 
 module.exports = {
     resolvers: {

@@ -1,10 +1,10 @@
-const { filter, find, omit } = require('underscore');
-const { TableBatch } = require('azure-storage');
-const value = require('get-value');
-const { executeBatch, addEntity, entGen } = require('../../../utils/table');
-const { getDurationHours, getDurationMinutes, formatDate, getMonthIndex, getWeek, startOfMonth, endOfMonth, getYear } = require('../../../utils');
-const uuidv4 = require('uuid').v4;
-const matchEvents = require('./timesheet.matching');
+const { filter, find, omit } = require('underscore')
+const { TableBatch } = require('azure-storage')
+const value = require('get-value')
+const { executeBatch, addEntity, entGen } = require('../../../utils/table')
+const { getDurationHours, getDurationMinutes, formatDate, getMonthIndex, getWeek, startOfMonth, endOfMonth, getYear } = require('../../../utils')
+const uuidv4 = require('uuid').v4
+const matchEvents = require('./timesheet.matching')
 
 const typeDef = `  
  type Event {
@@ -47,13 +47,13 @@ const typeDef = `
     confirmPeriod(entries: [TimeEntryInput!], startDateTime: String!, endDateTime: String!): BaseResult!
 	unconfirmPeriod(startDateTime: String!, endDateTime: String!): BaseResult!
   }
-`;
+`
 
 async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale }, { user, services: { graph: GraphService, storage: StorageService } }) {
-    const week = getWeek(startDateTime);
-    const startMonthIdx = getMonthIndex(startDateTime);
-    const endMonthIdx = getMonthIndex(endDateTime);
-    const isSplit = endMonthIdx !== startMonthIdx;
+    const week = getWeek(startDateTime)
+    const startMonthIdx = getMonthIndex(startDateTime)
+    const endMonthIdx = getMonthIndex(endDateTime)
+    const isSplit = endMonthIdx !== startMonthIdx
 
     let periods = [{
         id: `${week}_${startMonthIdx}`,
@@ -63,7 +63,7 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale 
         endDateTime: isSplit
             ? endOfMonth(startDateTime).toISOString()
             : endDateTime,
-    }];
+    }]
 
     if (isSplit) {
         periods.push({
@@ -72,7 +72,7 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale 
             month: formatDate(endDateTime, 'MMMM', locale),
             startDateTime: startOfMonth(endDateTime).toISOString(),
             endDateTime: endDateTime,
-        });
+        })
     }
 
     let [
@@ -89,50 +89,50 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale 
             endDateTime,
         }),
         StorageService.getLabels(),
-    ]);
+    ])
 
     projects = projects
         .map(project => ({
             ...project,
             customer: find(customers, c => c.id.toUpperCase() === project.customerKey.toUpperCase()),
             labels: filter(labels, label => {
-                const labels = value(project, 'labels', { default: '' });
-                return labels.indexOf(label.id) !== -1;
+                const labels = value(project, 'labels', { default: '' })
+                return labels.indexOf(label.id) !== -1
             }),
         }))
-        .filter(p => p.customer);
+        .filter(p => p.customer)
 
-    for (let i = 0; i < periods.length; i++) {
-        let period = periods[i];
-        period.confirmedDuration = 0;
-        const entries = [...timeentries].filter(entry => `${entry.weekNumber}_${entry.monthNumber}` === period.id);
-        const isConfirmed = entries.length > 0;
+    for (let i = 0 i < periods.length i++) {
+        let period = periods[i]
+        period.confirmedDuration = 0
+        const entries = [...timeentries].filter(entry => `${entry.weekNumber}_${entry.monthNumber}` === period.id)
+        const isConfirmed = entries.length > 0
         if (isConfirmed) {
             period.events = entries.map(entry => ({
                 ...entry,
                 project: find(projects, p => p.id === entry.projectId),
                 customer: find(customers, c => c.id === entry.customerId),
-            }));
-            period.matchedEvents = period.events;
-            period.confirmedDuration = period.events.reduce((sum, evt) => sum + evt.durationMinutes, 0);
+            }))
+            period.matchedEvents = period.events
+            period.confirmedDuration = period.events.reduce((sum, evt) => sum + evt.durationMinutes, 0)
         } else {
-            period.events = await GraphService.getEvents(period.startDateTime, period.endDateTime);
-            period.events = matchEvents(period.events, projects, customers);
-            period.matchedEvents = period.events.filter(evt => evt.project);
+            period.events = await GraphService.getEvents(period.startDateTime, period.endDateTime)
+            period.events = matchEvents(period.events, projects, customers)
+            period.matchedEvents = period.events.filter(evt => evt.project)
         }
         period.events = period.events.map(evt => ({
             ...evt,
             date: formatDate(evt.startTime, dateFormat, locale),
-        }));
+        }))
     }
-    return periods;
-};
+    return periods
+}
 
 async function confirmPeriod(_obj, { entries, startDateTime, endDateTime }, { user, tenantId, services: { graph: GraphService } }) {
     try {
-        let entities = [];
+        let entities = []
         if (!entries || entries.length === 0) {
-            const key = uuidv4();
+            const key = uuidv4()
             entities.push({
                 PartitionKey: entGen.String(tenantId),
                 RowKey: entGen.String(key),
@@ -145,12 +145,12 @@ async function confirmPeriod(_obj, { entries, startDateTime, endDateTime }, { us
                 WeekNumber: entGen.Int32(getWeek(startDateTime)),
                 MonthNumber: entGen.Int32(getMonthIndex(startDateTime)),
                 YearNumber: entGen.Int32(getYear(startDateTime))
-            });
+            })
         } else {
-            const calendarView = await GraphService.getEvents(startDateTime, endDateTime);
+            const calendarView = await GraphService.getEvents(startDateTime, endDateTime)
             entities = entries.map(entry => {
-                const event = calendarView.filter(e => e.id === entry.id)[0];
-                if (!event) return;
+                const event = calendarView.filter(e => e.id === entry.id)[0]
+                if (!event) return
                 return {
                     PartitionKey: entGen.String(tenantId),
                     RowKey: entGen.String(uuidv4()),
@@ -170,21 +170,21 @@ async function confirmPeriod(_obj, { entries, startDateTime, endDateTime }, { us
                     ResourceEmail: entGen.String(user.profile.email),
                     ResourceName: entGen.String(user.profile.displayName),
                     ManualMatch: entGen.Boolean(entry.isManualMatch),
-                };
-            }).filter(entry => entry);
+                }
+            }).filter(entry => entry)
         }
         if (entities.length === 1) {
-            await addEntity('ConfirmedTimeEntries', _.first(entities));
+            await addEntity('ConfirmedTimeEntries', _.first(entities))
         } else {
-            const batch = new TableBatch();
-            entities.forEach(entity => batch.insertEntity(entity));
-            await executeBatch('ConfirmedTimeEntries', batch);
+            const batch = new TableBatch()
+            entities.forEach(entity => batch.insertEntity(entity))
+            await executeBatch('ConfirmedTimeEntries', batch)
         }
-        return { success: true, error: null };
+        return { success: true, error: null }
     } catch (error) {
-        return { success: false, error: omit(error, 'requestId') };
+        return { success: false, error: omit(error, 'requestId') }
     }
-};
+}
 
 async function unconfirmPeriod(_obj, { startDateTime, endDateTime }, { user, services: { storage: StorageService } }) {
     try {
@@ -192,15 +192,15 @@ async function unconfirmPeriod(_obj, { startDateTime, endDateTime }, { user, ser
             resourceId: user.profile.oid,
             startDateTime,
             endDateTime,
-        }, { noParse: true });
-        const batch = new TableBatch();
-        entities.forEach(entity => batch.deleteEntity(entity));
-        await executeBatch('ConfirmedTimeEntries', batch);
-        return { success: true, error: null };
+        }, { noParse: true })
+        const batch = new TableBatch()
+        entities.forEach(entity => batch.deleteEntity(entity))
+        await executeBatch('ConfirmedTimeEntries', batch)
+        return { success: true, error: null }
     } catch (error) {
-        return { success: false, error: omit(error, 'requestId') };
+        return { success: false, error: omit(error, 'requestId') }
     }
-};
+}
 
 module.exports = {
     resolvers: {
