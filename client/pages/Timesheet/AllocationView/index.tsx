@@ -22,9 +22,9 @@ export const GetAllocation = (entries: ITimeEntry[], exp: string): Array<{ name:
         if (name) {
             const item = _.find(_items, i => i.name === name)
             if (item) {
-                item.hours += entry.durationHours
+                item.hours += entry.duration
             } else {
-                _items.push({ name, hours: entry.durationHours })
+                _items.push({ name, hours: entry.duration })
             }
         }
         return _items

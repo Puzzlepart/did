@@ -10,7 +10,7 @@ export default gql`
                 id
                 name
             }
-            durationHours
+            duration
             weekNumber
             yearNumber
             monthNumber

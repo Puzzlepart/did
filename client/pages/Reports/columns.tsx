@@ -28,8 +28,8 @@ const columns = (t: TFunction): IColumn[] => ([
         onRender: ({ customer }) => <Link to={`/customers/${customer.id}`}>{customer.name}</Link>,
     },
     {
-        key: 'durationHours',
-        fieldName: 'durationHours',
+        key: 'duration',
+        fieldName: 'duration',
         name: t('durationLabel'),
         minWidth: 100,
     },

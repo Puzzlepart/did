@@ -1,6 +1,6 @@
-import { IProject } from './IProject'
 import { IObjectWithKey } from 'office-ui-fabric-react/lib/DetailsList'
 import { ICustomer } from './ICustomer'
+import { IProject } from './IProject'
 
 /**
  * @category Common
@@ -15,8 +15,7 @@ export interface ITimeEntry extends IObjectWithKey {
     projectKey: string;
     customerKey: string;
     webLink: string;
-    durationMinutes: number;
-    durationHours: number;
+    duration: number;
     startTime: string;
     endTime: string;
     day: string;

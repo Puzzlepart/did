@@ -6,17 +6,16 @@ require('twix')
 /**
  * Get duration display
  * 
- * @param {number} minutes Minutes
- * @param {number} hours Hours
+ * @param {number} duration Duration
  * @param {TFunction} t Translate function
  * 
  * @category Helper
  */
-export function getDurationDisplay(minutes: number, hours?: number, t?: TFunction): string {
+export function getDurationDisplay(duration: number, t?: TFunction): string {
     const hrsShortFormat = t ? t('hoursShortFormat', { ns: 'COMMON', defaultValue: undefined }) : '{0}h'
     const minShortFormat = t ? t('minutesShortFormat', { ns: 'COMMON', defaultValue: undefined }) : '{0}min'
-    const hrs = hours ? Math.floor(hours) : Math.floor(minutes / 60)
-    const mins = hours ? ((hours % 1) * 60) : minutes % 60
+    const hrs = Math.floor(duration)
+    const mins = ((duration % 1) * 60)
     const hrsStr = format(hrsShortFormat, hrs)
     const minStr = format(minShortFormat, mins)
     if (mins === 0) return hrsStr

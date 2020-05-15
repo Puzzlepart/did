@@ -18,8 +18,7 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!, $lo
       title
       isOrganizer
       webLink
-      durationMinutes
-      durationHours
+      duration
       startTime
       endTime
       date

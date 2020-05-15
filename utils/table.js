@@ -56,14 +56,13 @@ class TableUtil {
     /**
      * Queries a table using the specified query
      * 
-     * @param {*} tableService 
      * @param {*} table 
      * @param {*} query 
      * @param {*} continuationToken 
      */
-    queryTable(tableService, table, query, continuationToken) {
+    queryTable(table, query, continuationToken) {
         return new Promise((resolve, reject) => {
-            tableService.queryEntities(
+            this.tableService.queryEntities(
                 table,
                 query,
                 continuationToken,
@@ -77,16 +76,15 @@ class TableUtil {
     /**
      * Queries all entries in a table using the specified query
      * 
-     * @param {*} tableService 
      * @param {*} table 
      * @param {*} query 
      */
     async queryTableAll(table, query) {
         let token = null
-        let { entries, continuationToken } = await queryTable(tableService, table, query, token)
+        let { entries, continuationToken } = await this.queryTable(table, query, token)
         token = continuationToken
         while (token != null) {
-            let result = await queryTable(tableService, table, query, token)
+            let result = await this.queryTable(table, query, token)
             entries.push(...result.entries)
             token = result.continuationToken
         }
@@ -96,14 +94,13 @@ class TableUtil {
     /**
      * Retrieves an entity
      * 
-     * @param {*} tableService 
      * @param {*} table 
      * @param {*} partitionKey 
      * @param {*} rowKey 
      */
-    retrieveEntity(tableService, table, partitionKey, rowKey) {
+    retrieveEntity(table, partitionKey, rowKey) {
         return new Promise((resolve, reject) => {
-            tableService.retrieveEntity(table, partitionKey, rowKey, (error, result) => {
+            this.tableService.retrieveEntity(table, partitionKey, rowKey, (error, result) => {
                 if (!error) {
                     return resolve(result)
                 } else {
@@ -116,13 +113,12 @@ class TableUtil {
     /**
      * Adds an entity
      * 
-     * @param {*} tableService 
      * @param {*} table 
      * @param {*} item 
      */
-    addEntity(tableService, table, item) {
+    addEntity(table, item) {
         return new Promise((resolve, reject) => {
-            tableService.insertEntity(table, item, (error, result) => {
+            this.tableService.insertEntity(table, item, (error, result) => {
                 if (!error) {
                     return resolve(result['.metadata'])
                 } else {
@@ -135,15 +131,14 @@ class TableUtil {
     /**
      * Updates the entity
      * 
-     * @param {*} tableService 
      * @param {*} table 
      * @param {*} item 
      * @param {*} merge 
      */
-    updateEntity(tableService, table, item, merge) {
+    updateEntity(table, item, merge) {
         return new Promise((resolve, reject) => {
             if (merge) {
-                tableService.insertOrMergeEntity(table, item, undefined, (error, result) => {
+                this.tableService.insertOrMergeEntity(table, item, undefined, (error, result) => {
                     if (!error) {
                         resolve(result)
                     } else {
@@ -151,7 +146,7 @@ class TableUtil {
                     }
                 })
             } else {
-                tableService.insertOrReplaceEntity(table, item, undefined, (error, result) => {
+                this.tableService.insertOrReplaceEntity(table, item, undefined, (error, result) => {
                     if (!error) {
                         resolve(result)
                     } else {
@@ -165,11 +160,12 @@ class TableUtil {
     /**
      * Delete entity
      * 
+     * @param {*} table 
      * @param {*} item 
      */
     deleteEntity(table, item) {
         return new Promise((resolve, reject) => {
-            tableService.deleteEntity(table, item, undefined, (error, result) => {
+            this.tableService.deleteEntity(table, item, undefined, (error, result) => {
                 if (!error) {
                     resolve(result)
                 } else {
@@ -188,7 +184,7 @@ class TableUtil {
      */
     executeBatch(table, batch) {
         return new Promise((resolve, reject) => {
-            tableService.executeBatch(table, batch, (error, result) => {
+            this.tableService.executeBatch(table, batch, (error, result) => {
                 if (!error) {
                     return resolve(result)
                 } else {

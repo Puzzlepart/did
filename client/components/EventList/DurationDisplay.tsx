@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 /**
  * @ignore
  */
-export const DurationDisplay = ({ minutes }): JSX.Element => {
+export const DurationDisplay = ({ duration }): JSX.Element => {
     const { t } = useTranslation('COMMON')
-    return <span>{getDurationDisplay(minutes, undefined, t)}</span>
+    return <span>{getDurationDisplay(duration, t)}</span>
 }

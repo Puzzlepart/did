@@ -4,20 +4,16 @@ const typeDef = `
     type TimeEntry {
         id: String
         key: String
-        eventId: String!
         title: String!
         description: String
         startTime: String
         endTime: String
         webLink: String
-        durationHours: Float
-        durationMinutes: Int
+        duration: Float
         projectId: String
         weekNumber: Int
         monthNumber: Int
-        yearNumber: Int
-        resourceId: String
-        resourceEmail: String
+        year: Int
         resourceName: String
         webUrl: String
         project: Project
@@ -35,7 +31,7 @@ const typeDef = `
         projectId: String, 
         resourceId: String, 
         weekNumber: Int, 
-        yearNumber: Int, 
+        year: Int, 
         currentUser: Boolean, 
         dateFormat: String
     ): [TimeEntry!]
@@ -48,7 +44,7 @@ async function timeentries(_obj, variables, context) {
     let [projects, customers, timeentries] = await Promise.all([
         context.services.storage.getProjects(),
         context.services.storage.getCustomers(),
-        context.services.storage.getTimeEntries({ resourceId, weekNumber: variables.weekNumber, yearNumber: variables.yearNumber, projectId: variables.projectId }, { dateFormat: variables.dateFormat }),
+        context.services.storage.getTimeEntries({ resourceId, weekNumber: variables.weekNumber, year: variables.year, projectId: variables.projectId }, { dateFormat: variables.dateFormat }),
     ])
     let entries = timeentries.map(entry => ({
         ...entry,

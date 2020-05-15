@@ -32,12 +32,12 @@ export const StatusBar = () => {
                     <UserMessage
                         {...defaultProps}
                         hidden={selectedPeriod.isConfirmed}
-                        text={format(t('periodHoursSummaryText'), getDurationDisplay(selectedPeriod.totalDuration, undefined, t))}
+                        text={format(t('periodHoursSummaryText'), getDurationDisplay(selectedPeriod.totalDuration, t))}
                         iconName='ReminderTime' />
                     <UserMessage
                         {...defaultProps}
                         hidden={selectedPeriod.unmatchedDuration === 0 || selectedPeriod.isConfirmed}
-                        text={format(t('hoursNotMatchedText'), getDurationDisplay(selectedPeriod.unmatchedDuration, undefined, t))}
+                        text={format(t('hoursNotMatchedText'), getDurationDisplay(selectedPeriod.unmatchedDuration, t))}
                         type={MessageBarType.warning}
                         iconName='BufferTimeBoth' />
                     <UserMessage
@@ -49,7 +49,7 @@ export const StatusBar = () => {
                     <UserMessage
                         {...defaultProps}
                         hidden={!selectedPeriod.isConfirmed}
-                        text={format(t('periodConfirmedText'), getDurationDisplay(selectedPeriod.matchedDuration, undefined, t))}
+                        text={format(t('periodConfirmedText'), getDurationDisplay(selectedPeriod.matchedDuration, t))}
                         type={MessageBarType.success}
                         iconName='CheckMark' />
                     <UserMessage

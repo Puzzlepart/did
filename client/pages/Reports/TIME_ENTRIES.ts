@@ -7,7 +7,7 @@ export default gql`
     query {
          timeentries {
             title
-            durationHours
+            duration
             startTime
             endTime
             weekNumber

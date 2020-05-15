@@ -19,7 +19,7 @@ export const createRows = (
         return _columns.reduce((obj, col) => {
             const sum = [...rowEntries]
                 .filter(e => value(e, scope.fieldName, null) === col.fieldName)
-                .reduce((sum, { durationHours }) => sum + durationHours, 0)
+                .reduce((sum, { duration }) => sum + duration, 0)
             obj[col.fieldName] = sum
             obj.sum += sum
             return obj
@@ -28,7 +28,7 @@ export const createRows = (
     const totalRow = _columns.reduce((obj, col) => {
         const sum = [...timeentries]
             .filter(e => value(e, scope.fieldName, null) === col.fieldName)
-            .reduce((sum, { durationHours }) => sum + durationHours, 0)
+            .reduce((sum, { duration }) => sum + duration, 0)
         obj[col.fieldName] = sum
         obj.sum += sum
         return obj

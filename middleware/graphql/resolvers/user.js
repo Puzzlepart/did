@@ -33,9 +33,9 @@ async function users(_obj, _args, { services: { storage: StorageService } }) {
     return users
 }
 
-async function currentUser(_obj, _args, { user, services: { storage: StorageService } }) {
+async function currentUser(_obj, _args, { user, services: { subscription: SubscriptionService, storage: StorageService } }) {
     const currentUser = await StorageService.getUser(user.profile.oid)
-    const sub = await StorageService.getSubscription()
+    const sub = await SubscriptionService.getSubscription(user.profile._json.tid)
     return {
         ...currentUser,
         email: user.profile.email,

@@ -75,11 +75,11 @@ export class TimesheetPeriod {
     }
 
     public get totalDuration(): number {
-        return this.events.reduce((sum, event) => sum += event.durationMinutes, 0)
+        return this.events.reduce((sum, event) => sum += event.duration, 0)
     }
 
     public get matchedDuration(): number {
-        return this.events.filter(event => !!event.project).reduce((sum, event) => sum += event.durationMinutes, 0)
+        return this.events.filter(event => !!event.project).reduce((sum, event) => sum += event.duration, 0)
     }
 
     public get unmatchedDuration(): number {

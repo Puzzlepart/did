@@ -34,8 +34,8 @@ export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
                     fieldName: 'date',
                     groupNames: scope.weekdays(dayFormat),
                     totalFunc: (items: ITimeEntry[]) => {
-                        const mins = items.reduce((sum, i) => sum = i.durationMinutes, 0)
-                        return ` (${getDurationDisplay(mins, undefined, t)})`
+                        const duration = items.reduce((sum, i) => sum = i.duration, 0)
+                        return ` (${getDurationDisplay(duration, t)})`
                     },
                 }}
                 additionalColumns={[
