@@ -60,7 +60,6 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!, $lo
         message
       }
     }
-    confirmedDuration
     confirmed
   }
 }

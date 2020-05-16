@@ -1,27 +1,4 @@
 import getValue from 'get-value'
-import { TFunction } from 'i18next'
-import format from 'string-format'
-require('twix')
-
-/**
- * Get duration display
- * 
- * @param {number} duration Duration
- * @param {TFunction} t Translate function
- * 
- * @category Helper
- */
-export function getDurationDisplay(duration: number, t?: TFunction): string {
-    const hrsShortFormat = t ? t('hoursShortFormat', { ns: 'COMMON', defaultValue: undefined }) : '{0}h'
-    const minShortFormat = t ? t('minutesShortFormat', { ns: 'COMMON', defaultValue: undefined }) : '{0}min'
-    const hrs = Math.floor(duration)
-    const mins = ((duration % 1) * 60)
-    const hrsStr = format(hrsShortFormat, hrs)
-    const minStr = format(minShortFormat, mins)
-    if (mins === 0) return hrsStr
-    if (hrs === 0) return minStr
-    return `${hrsStr} ${minStr}`
-}
 
 /**
  * Converts string to array buffer
@@ -48,7 +25,8 @@ export function stringToArrayBuffer(str: string): ArrayBuffer {
  * 
  * @category Helper
  */
-export function currencyDisplay(num: number, currency = 'NOK', minimumFractionDigits = 0): string {
+// eslint-disable-next-line @typescript-eslint/no-inferrable-types
+export function currencyDisplay(num: number, currency: string = 'NOK', minimumFractionDigits: number = 0): string {
     const formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency,

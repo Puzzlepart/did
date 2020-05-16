@@ -2,13 +2,13 @@ const { filter, find } = require('underscore')
 const value = require('get-value')
 
 /**
- * Combines projects, customers and labels
+ * Connects projects, customers and labels
  * 
  * @param projects
  * @param customers
  * @param labels
  */
-function enrichProjects(projects, customers, labels) {
+function connectEntities(projects, customers, labels) {
     return projects
         .map(project => ({
             ...project,
@@ -21,4 +21,4 @@ function enrichProjects(projects, customers, labels) {
         .filter(p => p.customer)
 }
 
-module.exports = { enrichProjects }
+module.exports = { connectEntities }

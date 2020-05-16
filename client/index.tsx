@@ -9,8 +9,7 @@ import 'regenerator-runtime/runtime.js'
 import DateUtils from 'utils/date'
 import { App } from './App'
 import { IAppContext } from './AppContext'
-import GET_CURRENT_USER from './GET_CURRENT_USER'
-import { client } from './graphql'
+import { client, GET_CURRENT_USER } from './graphql'
 import './i18n'
 import './_global.scss'
 
@@ -29,4 +28,5 @@ client.query<{ currentUser: any }>({ query: GET_CURRENT_USER }).then(({ data }) 
             <App {...context} />
         </ApolloProvider>
     ), container)
+
 })

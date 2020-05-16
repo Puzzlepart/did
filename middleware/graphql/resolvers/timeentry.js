@@ -43,6 +43,7 @@ async function timeentries(
     { user, services: { storage: StorageService } }
 ) {
     if (currentUser) resourceId = user.profile.oid
+    console.log(resourceId)
     let [projects, customers, timeentries] = await Promise.all([
         StorageService.getProjects(),
         StorageService.getCustomers(),

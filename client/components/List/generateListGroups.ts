@@ -3,29 +3,27 @@ import * as arraySort from 'array-sort'
 import { value as value } from 'helpers'
 import { IGroup } from 'office-ui-fabric-react/lib/DetailsList'
 import { unique } from 'underscore'
+import { IListGroups } from './types'
 
 /**
  * Create groups
  * 
  * @param {any[]} items Items
- * @param {string} groupBy Group by field name
- * @param {string[]} uniqueGroupNames Group names
- * @param {string} emptyGroupName Empty group name
- * @param {Function} totalFunc Function to calculate sum for the group
+ * @param {IListGroups} props Props
  * 
  * @category List
  */
-export function generateListGroups(items: any[], groupBy: string, uniqueGroupNames: string[], emptyGroupName = '', totalFunc?: Function): [IGroup[], any[]] {
-    const itemsSort = { props: [groupBy], opts: { reverse: false } }
+export function generateListGroups(items: any[], props: IListGroups): [IGroup[], any[]] {
+    const itemsSort = { props: [props.fieldName], opts: { reverse: false } }
     items = arraySort([...items], itemsSort.props, itemsSort.opts)
-    const groupNames = items.map(g => value<string>(g, groupBy, emptyGroupName))
-    uniqueGroupNames = uniqueGroupNames || unique(groupNames).sort((a, b) => a > b ? 1 : -1)
+    const groupNames = items.map(g => value<string>(g, props.fieldName, props.emptyGroupName))
+    const uniqueGroupNames = props.groupNames || unique(groupNames).sort((a, b) => a > b ? 1 : -1)
     const groups = uniqueGroupNames.map((name, idx) => {
         const itemsInGroup = items.filter(item => {
-            const itemValue = value<string>(item, groupBy, emptyGroupName)
+            const itemValue = value<string>(item, props.fieldName, props.emptyGroupName)
             return itemValue.toLowerCase() === name.toLowerCase()
         })
-        const total = totalFunc ? totalFunc(itemsInGroup) : ''
+        const total = props.totalFunc ? props.totalFunc(itemsInGroup) : ''
         const group: IGroup = {
             key: idx.toString(),
             name: `${name} ${total}`,

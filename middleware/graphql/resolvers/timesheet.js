@@ -1,7 +1,7 @@
 const { find, omit } = require('underscore')
-const { formatDate, getMonthIndex, getWeek, startOfMonth, endOfMonth } = require('../../../utils')
+const { formatDate, getMonthIndex, getWeek } = require('../../../utils')
 const matchEvents = require('./timesheet.matching')
-const { enrichProjects } = require('./project.utils')
+const { connectEntities } = require('./project.utils')
 const { getPeriods } = require('./timesheet.utils')
 
 const typeDef = `  
@@ -65,7 +65,7 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale 
         StorageService.getLabels(),
     ])
 
-    projects = enrichProjects(projects, customers, labels)
+    projects = connectEntities(projects, customers, labels)
 
     for (let i = 0; i < periods.length; i++) {
         let period = periods[i]
@@ -111,6 +111,7 @@ async function confirmPeriod(_obj, { entries, startDateTime, endDateTime }, { us
         await StorageService.addConfirmedPeriod(user.profile.oid, period, hours)
         return { success: true, error: null }
     } catch (error) {
+        console.log(error)
         return { success: false, error: omit(error, 'requestId') }
     }
 }

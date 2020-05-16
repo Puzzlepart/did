@@ -23,6 +23,7 @@ export const GET_PROJECTS = gql`
             externalSystemURL
             customerKey
             customer {
+                key
                 name
             }
             labels {

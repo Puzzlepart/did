@@ -1,5 +1,5 @@
-import { ApolloClient, FetchPolicy } from 'apollo-client'
 import { InMemoryCache } from 'apollo-cache-inmemory'
+import { ApolloClient, FetchPolicy } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
 
 /**
@@ -7,9 +7,9 @@ import { HttpLink } from 'apollo-link-http'
  */
 export interface IError {
   name: string;
-	message: string;
-	code: string;
-	statusCode: string;
+  message: string;
+  code: string;
+  statusCode: string;
 }
 
 /**
@@ -30,4 +30,6 @@ export const client = new ApolloClient({
   defaultOptions: { watchQuery: { fetchPolicy: 'cache-and-network' } },
 })
 
+export { default as GET_CURRENT_USER } from './GET_CURRENT_USER'
 export { FetchPolicy }
+

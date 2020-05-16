@@ -1,6 +1,5 @@
-const { find, filter, omit } = require('underscore')
-const value = require('get-value')
-const { enrichProjects } = require('./project.utils')
+const { omit } = require('underscore')
+const { connectEntities } = require('./project.utils')
 
 const typeDef = `  
   type Project {
@@ -63,7 +62,7 @@ async function projects(_obj, variables, { services: { storage: StorageService }
     StorageService.getCustomers(),
     StorageService.getLabels(),
   ])
-  projects = enrichProjects(projects, customers, labels)
+  projects = connectEntities(projects, customers, labels)
   return projects
 }
 

@@ -1,4 +1,6 @@
+import { TFunction } from 'i18next';
 import moment from 'moment';
+import format from 'string-format';
 import { capitalize } from 'underscore.string';
 require('twix');
 
@@ -15,6 +17,18 @@ export default new class DateUtils {
     toMoment(date: string) {
         const m = moment(date);
         return m.add(m.toDate().getTimezoneOffset(), 'minutes')
+    }
+
+    getDurationDisplay(duration: number, t?: TFunction): string {
+        const hrsShortFormat = t ? t('hoursShortFormat', { ns: 'COMMON', defaultValue: undefined }) : '{0}h'
+        const minShortFormat = t ? t('minutesShortFormat', { ns: 'COMMON', defaultValue: undefined }) : '{0}min'
+        const hrs = Math.floor(duration)
+        const mins = parseInt(((duration % 1) * 60).toFixed(0))
+        const hrsStr = format(hrsShortFormat, hrs)
+        const minStr = format(minShortFormat, mins)
+        if (mins === 0) return hrsStr
+        if (hrs === 0) return minStr
+        return `${hrsStr} ${minStr}`
     }
 
     /**

@@ -1,14 +1,12 @@
 const typeDef = `  
     type User {
         id: String
-        key: String
-        role: String!
-        fullName: String!
+        role: String
+        fullName: String
         email: String
         userLanguage: String
         sub: Subscription
     }
-
     
     input UserInput  {
         id: String!

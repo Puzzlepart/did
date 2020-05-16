@@ -1,8 +1,8 @@
 const tableUtil = require('../utils/table')
 const { getDurationHours, getWeek, getMonthIndex, getYear } = require('../utils')
 const arraySort = require('array-sort')
-const { first, pick } = require('underscore')
-const { TableUtilities, TableQuery, createTableService } = require('azure-storage')
+const { pick } = require('underscore')
+const { createTableService } = require('azure-storage')
 const uuidv4 = require('uuid').v4
 
 class StorageService {
@@ -210,7 +210,7 @@ class StorageService {
      */
     async getUsers() {
         const query = tableUtil.createQuery(1000, undefined)
-        const { entries } = await tableUtil.queryTable('Users', query, {})
+        const { entries } = await tableUtil.queryTable('Users', query, { RowKey: 'id' })
         return entries
     }
 
@@ -226,7 +226,7 @@ class StorageService {
                 'Default',
                 userId
             )
-            return tableUtil.parseEntity(entry)
+            return tableUtil.parseEntity(entry, { RowKey: 'id' })
         } catch (error) {
             return null
         }
@@ -300,7 +300,7 @@ class StorageService {
             }
         )
         result = result.sort((a, b) => new Date(a.startDateTime) - new Date(b.startDateTime))
-        return []
+        return result
     }
 
     /**

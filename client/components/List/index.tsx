@@ -8,9 +8,9 @@ import { useEffect } from 'react'
 import { delay } from 'utils'
 import { withDefaultProps } from 'with-default-props'
 import { generateListGroups } from './generateListGroups'
-import { IListProps } from './IListProps'
 import { ListHeader } from './ListHeader'
-import { reducer } from './ListReducer'
+import reducer from './reducer'
+import { IListProps } from './types'
 
 /**
  * @category List
@@ -58,15 +58,7 @@ const List = (props: IListProps) => {
 
     let groups = null
     let items = [...state.items]
-    if (props.groups) {
-        [groups, items] = generateListGroups(
-            items,
-            props.groups.fieldName,
-            props.groups.groupNames,
-            props.groups.emptyGroupName,
-            props.groups.totalFunc,
-        )
-    }
+    if (props.groups) [groups, items] = generateListGroups(items, props.groups)
 
     return (
         <div style={{ marginBottom: 25 }} hidden={props.hidden}>

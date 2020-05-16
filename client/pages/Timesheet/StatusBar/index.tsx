@@ -1,12 +1,12 @@
 
 import { UserMessage } from 'components/UserMessage'
 import { IUserMessageProps } from 'components/UserMessage/IUserMessageProps'
-import { getDurationDisplay } from 'helpers'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { Shimmer } from 'office-ui-fabric-react/lib/Shimmer'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import * as format from 'string-format'
+import DateUtils from 'utils/date'
 import { TimesheetContext } from '../'
 import styles from './StatusBar.module.scss'
 
@@ -32,12 +32,12 @@ export const StatusBar = () => {
                     <UserMessage
                         {...defaultProps}
                         hidden={selectedPeriod.confirmed}
-                        text={format(t('periodHoursSummaryText'), getDurationDisplay(selectedPeriod.totalDuration, t))}
+                        text={format(t('periodHoursSummaryText'), DateUtils.getDurationDisplay(selectedPeriod.totalDuration, t))}
                         iconName='ReminderTime' />
                     <UserMessage
                         {...defaultProps}
                         hidden={selectedPeriod.unmatchedDuration === 0 || selectedPeriod.confirmed}
-                        text={format(t('hoursNotMatchedText'), getDurationDisplay(selectedPeriod.unmatchedDuration, t))}
+                        text={format(t('hoursNotMatchedText'), DateUtils.getDurationDisplay(selectedPeriod.unmatchedDuration, t))}
                         type={MessageBarType.warning}
                         iconName='BufferTimeBoth' />
                     <UserMessage
@@ -49,7 +49,7 @@ export const StatusBar = () => {
                     <UserMessage
                         {...defaultProps}
                         hidden={!selectedPeriod.confirmed}
-                        text={format(t('periodConfirmedText'), getDurationDisplay(selectedPeriod.matchedDuration, t))}
+                        text={format(t('periodConfirmedText'), DateUtils.getDurationDisplay(selectedPeriod.matchedDuration, t))}
                         type={MessageBarType.success}
                         iconName='CheckMark' />
                     <UserMessage

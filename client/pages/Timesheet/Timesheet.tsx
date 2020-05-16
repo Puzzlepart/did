@@ -12,11 +12,10 @@ import CONFIRM_PERIOD from './CONFIRM_PERIOD'
 import GET_TIMESHEET from './GET_TIMESHEET'
 import hotkeys from './hotkeys'
 import { Overview } from './Overview'
+import reducer from './reducer'
 import { SummaryView } from './SummaryView'
 import styles from './Timesheet.module.scss'
-import { ITimesheetContext, TimesheetContext } from './TimesheetContext'
-import { reducer } from './TimesheetReducer'
-import { ITimesheetParams, TimesheetPeriod, TimesheetScope } from './types'
+import { ITimesheetContext, ITimesheetParams, ITimesheetPeriod, TimesheetContext, TimesheetPeriod, TimesheetScope } from './types'
 import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD'
 
 
@@ -32,7 +31,7 @@ export const Timesheet = () => {
         selectedPeriod: new TimesheetPeriod(),
         scope: new TimesheetScope(useParams<ITimesheetParams>()),
     })
-    const query = useQuery<{ timesheet: TimesheetPeriod[] }>(GET_TIMESHEET, {
+    const query = useQuery<{ timesheet: ITimesheetPeriod[] }>(GET_TIMESHEET, {
         variables: {
             ...state.scope.dateStrings,
             dateFormat: 'dddd DD',

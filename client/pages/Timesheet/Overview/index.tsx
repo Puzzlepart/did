@@ -1,9 +1,9 @@
 import EventList from 'components/EventList'
-import { getDurationDisplay } from 'helpers'
 import { ITimeEntry } from 'interfaces/ITimeEntry'
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
+import DateUtils from 'utils/date'
 import { generateColumn as col } from 'utils/generateColumn'
 import { TimesheetContext } from '../'
 import ProjectColumn from '../ProjectColumn'
@@ -29,8 +29,8 @@ export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
                     fieldName: 'date',
                     groupNames: selectedPeriod.weekdays(dayFormat),
                     totalFunc: (items: ITimeEntry[]) => {
-                        const duration = items.reduce((sum, i) => sum = i.duration, 0)
-                        return ` (${getDurationDisplay(duration, t)})`
+                        const duration = items.reduce((sum, i) => sum + i.duration, 0)
+                        return ` (${DateUtils.getDurationDisplay(duration, t)})`
                     },
                 }}
                 additionalColumns={[

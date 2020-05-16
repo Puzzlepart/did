@@ -15,7 +15,7 @@ export default gql`
             resourceName     
             monthNumber           
             customer {
-                id
+                key
                 name
             }
             project {
