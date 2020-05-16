@@ -1,5 +1,5 @@
-import { ICustomer, IOutlookCategory } from './';
-import { IEntityLabel } from './IEntityLabel';
+import { ICustomer, IOutlookCategory } from './'
+import { IEntityLabel } from './IEntityLabel'
 
 /**
  * @category Common

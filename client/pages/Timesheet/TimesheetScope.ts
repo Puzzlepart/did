@@ -90,10 +90,6 @@ export class TimesheetScope {
         return this._startDateTime.week() === moment().week()
     }
 
-    public weekdays(dateFormat = 'dddd DD') {
-        return dateUtils.getWeekdays(this._startDateTime, dateFormat)
-    }
-
     public get timespan() {
         return dateUtils.getTimespanString(this._startDateTime, this._endDateTime)
     }

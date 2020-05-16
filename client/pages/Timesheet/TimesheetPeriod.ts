@@ -5,6 +5,7 @@ import { IProject } from 'interfaces/IProject'
 import { ITimeEntry } from 'interfaces/ITimeEntry'
 import { omit } from 'underscore'
 import { capitalize } from 'underscore.string'
+import dateUtils, { moment } from 'utils/date'
 
 /**
  * @category Timesheet
@@ -16,6 +17,7 @@ export class TimesheetPeriod {
     public startDateTime?: string;
     public endDateTime?: string;
     public confirmedDuration?: number;
+    public confirmed?: boolean;
     public manualMatches: ITypedHash<any> = {};
     public ignoredEvents: string[] = [];
     private _localStorage: IPnPClientStore = new PnPClientStorage().local;
@@ -23,18 +25,19 @@ export class TimesheetPeriod {
     private _uiIgnoredEventsStorageKey: string;
 
     constructor(private _period?: Partial<TimesheetPeriod>) {
-        if (_period) {
-            this.id = _period.id
-            this.week = _period.week
-            this.month = capitalize(_period.month)
-            this.startDateTime = _period.startDateTime
-            this.endDateTime = _period.endDateTime
-            this.confirmedDuration = _period.confirmedDuration
-            this._uiMatchedEventsStorageKey = `did365_ui_matched_events_${this.id}`
-            this._uiIgnoredEventsStorageKey = `did365_ui_ignored_events_${this.id}`
-            this.ignoredEvents = this._localStorage.get(this._uiIgnoredEventsStorageKey) || []
-            this.manualMatches = this._localStorage.get(this._uiMatchedEventsStorageKey) || {}
-        }
+        if (!_period) return
+        this.id = _period.id
+        this.week = _period.week
+        this.month = capitalize(_period.month)
+        this.startDateTime = _period.startDateTime
+        this.endDateTime = _period.endDateTime
+        this.confirmedDuration = _period.confirmedDuration
+        this.confirmed = _period.confirmed
+        this._uiMatchedEventsStorageKey = `did365_ui_matched_events_${this.id}`
+        this._uiIgnoredEventsStorageKey = `did365_ui_ignored_events_${this.id}`
+        this.ignoredEvents = this._localStorage.get(this._uiIgnoredEventsStorageKey) || []
+        this.manualMatches = this._localStorage.get(this._uiMatchedEventsStorageKey) || {}
+
     }
 
     public getName(includeMonth: boolean, t: TFunction) {
@@ -64,10 +67,6 @@ export class TimesheetPeriod {
                 .map(event => this._handleManualMatches(event))
         }
         return []
-    }
-
-    public get confirmed(): boolean {
-        return this.confirmedDuration > 0
     }
 
     public get errors(): Error[] {
@@ -145,5 +144,9 @@ export class TimesheetPeriod {
             startDateTime: this.startDateTime,
             endDateTime: this.endDateTime,
         }
+    }
+
+    public weekdays(dayFormat = 'dddd DD') {
+        return dateUtils.getDays(moment(this.startDateTime), moment(this.endDateTime), dayFormat)
     }
 }  

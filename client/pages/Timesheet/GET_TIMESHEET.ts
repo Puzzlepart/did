@@ -65,6 +65,7 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!, $lo
       }
     }
     confirmedDuration
+    confirmed
   }
 }
 `

@@ -1,5 +1,5 @@
-import { ICustomer } from './ICustomer';
-import { IProject } from './IProject';
+import { ICustomer } from './ICustomer'
+import { IProject } from './IProject'
 
 /**
  * @category Common

@@ -31,7 +31,8 @@ const typeDef = `
 	startDateTime: String!
 	endDateTime: String!
 	events: [Event!]!
-	matchedEvents: [Event!]!
+    matchedEvents: [Event!]!
+    confirmed: Boolean
 	confirmedDuration: Float!
   }
   
@@ -99,6 +100,7 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale 
                 customer: find(customers, c => c.id === entry.customerId),
             }))
             period.matchedEvents = period.events
+            period.confirmed = true
             period.confirmedDuration = confirmed.hours
         } else {
             period.events = await GraphService.getEvents(period.startDateTime, period.endDateTime)
@@ -116,14 +118,19 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale 
 
 async function confirmPeriod(_obj, { entries, startDateTime, endDateTime }, { user, services: { graph: GraphService, storage: StorageService } }) {
     try {
-        const calendarView = await GraphService.getEvents(startDateTime, endDateTime)
-        let timeentries = entries.map(entry => {
-            const event = find(calendarView, e => e.id === entry.id)
-            if (!event) return
-            return { user, entry, event }
-        }).filter(entry => entry)
         const period = `${getWeek(startDateTime)}_${getMonthIndex(startDateTime)}`
-        const hours = await StorageService.addTimeEntries(timeentries)
+        let hours = 0;
+        if (entries.length > 0) {
+            const calendarView = await GraphService.getEvents(startDateTime, endDateTime)
+
+            let timeentries = entries.map(entry => {
+                const event = find(calendarView, e => e.id === entry.id)
+                if (!event) return
+                return { user, entry, event }
+            }).filter(entry => entry)
+
+            hours = await StorageService.addTimeEntries(timeentries)
+        }
         await StorageService.addConfirmedPeriod(user.profile.oid, period, hours)
         return { success: true, error: null }
     } catch (error) {

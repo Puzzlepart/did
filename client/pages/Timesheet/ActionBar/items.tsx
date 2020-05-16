@@ -67,11 +67,7 @@ export const CONFIRM_ACTIONS = (context: ITimesheetContext, t: TFunction): ICont
             text={t('unconfirmHoursText')}
             styles={{ root: { height: 44, marginLeft: 4 } }} />
         : <PrimaryButton
-            disabled={
-                !!context.loading
-                || context.selectedPeriod.unmatchedDuration > 0
-                || context.selectedPeriod.events.length === 0
-            }
+            disabled={!!context.loading || context.selectedPeriod.unmatchedDuration > 0}
             iconProps={{ iconName: 'CheckMark' }}
             onClick={context.onConfirmPeriod}
             text={t('confirmHoursText')}

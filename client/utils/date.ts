@@ -12,6 +12,11 @@ export default new class DateUtils {
         moment.locale(this._locale);
     }
 
+    toMoment(date: string) {
+        const m = moment(date);
+        return m.add(m.toDate().getTimezoneOffset(), 'minutes')
+    }
+
     /**
      * Format date
      * 
@@ -45,15 +50,18 @@ export default new class DateUtils {
     }
 
     /**
-     * Get weekdays
+     * Get days between a start and end time
      * 
-     * @param {moment.Moment | string} start Start
-     * @param {string} dateFormat Date format
+     * @param {moment.Moment} start Start
+     * @param {moment.Moment} end End
+     * @param {string} dayFormat Date format
      */
-    getWeekdays(start: moment.Moment, dateFormat: string): string[] {
-        return moment.weekdays(true).map((_, index) => {
-            return capitalize(start.clone().add(index, 'days').locale(this._locale).format(dateFormat));
-        });
+    getDays(start: moment.Moment, end: moment.Moment, dayFormat: string): string[] {
+        const days = []
+        for (let i = 0; i <= (end.weekday() - start.weekday()); i++) {
+            days.push(capitalize(start.clone().add(i, 'days').locale(this._locale).format(dayFormat)));
+        }
+        return days;
     }
 
 
