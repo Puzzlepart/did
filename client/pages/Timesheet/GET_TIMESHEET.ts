@@ -29,7 +29,6 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!, $lo
         description
         icon
         customer {
-          id
           key
           name
           inactive
@@ -48,14 +47,12 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!, $lo
         name
         description
         customer {
-          id
           key
           name
           inactive
         }
       }
       customer {
-        id
         key
         name
         inactive

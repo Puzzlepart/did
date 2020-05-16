@@ -180,12 +180,16 @@ class StorageService {
     }
 
     async getUser(userId) {
-        const entry = await tableUtil.retrieveEntity(
-            'Users',
-            'Default',
-            userId
-        )
-        return tableUtil.parseEntity(entry)
+        try {
+            const entry = await tableUtil.retrieveEntity(
+                'Users',
+                'Default',
+                userId
+            )
+            return tableUtil.parseEntity(entry)
+        } catch (error) {
+            return null
+        }
     }
 
     async addUser(user) {
@@ -249,7 +253,7 @@ class StorageService {
         let totalDuration = 0
         const { string, datetime, double, int, boolean } = tableUtil.entGen()
         const entities = timeentries.map(({ entry, event, user, }) => {
-            const week = getWeek(event.startTime);
+            const week = getWeek(event.startTime)
             const month = getMonthIndex(event.startTime)
             const duration = getDurationHours(event.startTime, event.endTime)
             totalDuration += duration

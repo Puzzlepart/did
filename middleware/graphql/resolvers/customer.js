@@ -3,7 +3,6 @@ const { executeBatch, createBatch } = require('../../../utils/table')
 
 const typeDef = `  
   type Customer {
-    id: String
     key: String
     name: String
     description: String
@@ -14,7 +13,6 @@ const typeDef = `
   } 
 
   input CustomerInput {
-    id: String
     key: String
     name: String
     description: String

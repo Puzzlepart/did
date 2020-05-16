@@ -1,20 +1,9 @@
 const passport = require('passport')
 const OIDCStrategy = require('passport-azure-ad').OIDCStrategy
-const SubscriptionService = require('../../services/subscription')
 const { USER_NOT_ENROLLED } = require('./errors')
 
-passport.serializeUser((user, done) => {
-    done(null, user)
-})
-
-passport.deserializeUser(async (user, done) => {
-    try {
-        if (!user.data) user.data = await new SubscriptionService().getUser(user.profile._json.tid, user.profile.oid)
-        done(null, user)
-    } catch (e) {
-        done(USER_NOT_ENROLLED, null)
-    }
-})
+passport.serializeUser((user, done) => { done(null, user) })
+passport.deserializeUser(async (user, done) => { done(null, user) })
 
 const strategy = new OIDCStrategy(
     {
@@ -29,7 +18,7 @@ const strategy = new OIDCStrategy(
         passReqToCallback: false,
         scope: process.env.OAUTH_SCOPES.split(' ')
     },
-    require('./onVerifySubscription'),
+    require('./onVerifySignin'),
 )
 
 passport.use(strategy)

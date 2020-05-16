@@ -34,7 +34,7 @@ export default (hideColumns: string[], t: TFunction): IColumn[] => ([
         },
     ),
     col(
-        'key',
+        'id',
         t('keyLabel', { ns: 'COMMON' }),
         { maxWidth: 120 },
     ),

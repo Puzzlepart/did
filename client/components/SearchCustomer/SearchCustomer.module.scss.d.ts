@@ -7,5 +7,5 @@ interface CssExports {
   'suggestion': string;
   'wrapper': string;
 }
-export const cssExports: CssExports;
-export default cssExports;
+export const cssExports: CssExports
+export default cssExports
