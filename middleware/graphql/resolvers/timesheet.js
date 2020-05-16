@@ -57,9 +57,10 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale 
         week,
         month: formatDate(startDateTime, 'MMMM', locale),
         startDateTime,
-        endDateTime: isSplit
-            ? endOfMonth(startDateTime).toISOString()
-            : endDateTime,
+        endDateTime:
+            isSplit
+                ? endOfMonth(startDateTime).toISOString()
+                : endDateTime,
     }]
 
     if (isSplit) {
@@ -142,11 +143,7 @@ async function unconfirmPeriod(_obj, { startDateTime, endDateTime }, { user, ser
     try {
         const period = `${getWeek(startDateTime)}_${getMonthIndex(startDateTime)}`
         await Promise.all([
-            StorageService.deleteTimeEntries({
-                resourceId: user.profile.oid,
-                startDateTime,
-                endDateTime,
-            }, { noParse: true }),
+            StorageService.deleteUserTimeEntries(user.profile.oid, startDateTime, endDateTime),
             StorageService.removeConfirmedPeriod(user.profile.oid, period)
         ])
         return { success: true, error: null }

@@ -62,44 +62,45 @@ function findMatches(content, categories) {
 /**
  * Checks for project match in event
  * 
- * @param {*} evt 
+ * @param {*} event 
  * @param {*} projects 
  * @param {*} customers 
  */
-function matchEvent(evt, projects, customers) {
-    let categories = evt.categories.join(' ').toUpperCase()
-    let content = [evt.title, evt.body, categories].join(' ').toUpperCase()
+function matchEvent(event, projects, customers) {
+    let categories = event.categories.join(' ').toUpperCase()
+    let content = [event.title, event.body, categories].join(' ').toUpperCase()
     let matches = findMatches(content, categories)
     let projectKey
     if (matches) {
         for (let i = 0; i < matches.length; i++) {
-            let currentMatch = matches[i]
-            evt.customer = _.find(customers, c => currentMatch.customerKey === c.id)
-            if (evt.customer) {
-                evt.project = _.find(projects, p => currentMatch.key === p.id && evt.customer.key === p.customerKey)
-                projectKey = currentMatch.projectKey
+            let match = matches[i]
+            event.customer = _.find(customers, c => match.customerKey === c.key)
+            if (event.customer) {
+                event.project = _.find(projects, p => p.id === match.key)
+                projectKey = match.projectKey
             }
-            if (evt.project) break
+            if (event.project) break
         }
     } else {
-        let project = _.find(projects, p => content.indexOf(p.id) !== -1)
-        if (project) {
-            evt.project = project
-            if (evt.project) {
-                evt.customer = _.find(customers, c => c.key === evt.project.key.split(' ')[0])
-            }
+        event.project = _.find(projects, p => content.indexOf(p.id) !== -1)
+        if (event.project) {
+            event.customer = _.find(customers, c => c.key === event.customerKey)
         }
     }
-    if (evt.customer && !evt.project) {
-        evt.suggestedProject = getProjectSuggestion(projects, evt.customer, projectKey)
+    if (event.customer && !event.project) {
+        event.suggestedProject = getProjectSuggestion(projects, event.customer, projectKey)
     }
-    if (evt.project && (value(evt, 'project.inactive') || value(evt, 'customer.inactive'))) {
-        if (value(evt, 'project.inactive')) evt.error = { message: format('Project {0} for {1} is no longer active. Please resolve the event in Outlook.', evt.project.name, evt.customer.name) }
-        if (value(evt, 'customer.inactive')) evt.error = { message: format('Customer {0} is no longer active. Please resolve the event in Outlook.', evt.customer.name) }
-        evt.project = null
-        evt.customer = null
+    const inactiveProject = value(event, 'project.inactive')
+    const inactiveCustomer = value(event, 'customer.inactive')
+    if (event.project && (inactiveProject || inactiveCustomer)) {
+        if (inactiveProject)
+            event.error = { message: format('Project {0} for {1} is no longer active. Please resolve the event in Outlook.', event.project.name, event.customer.name) }
+        if (inactiveCustomer)
+            event.error = { message: format('Customer {0} is no longer active. Please resolve the event in Outlook.', event.customer.name) }
+        event.project = null
+        event.customer = null
     }
-    return evt
+    return event
 }
 
 /**

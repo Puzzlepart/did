@@ -16,7 +16,13 @@ class StorageService {
         return entries
     }
 
-    async addLabel(label) {
+    /**
+     * Create label in table Labels
+     * 
+     * @param label Label data
+     * @param createdBy Created by ID
+     */
+    async addLabel(label, createdBy) {
         const { string } = tableUtil.entGen()
         const entity = await tableUtil.addEntity(
             'Labels',
@@ -26,11 +32,17 @@ class StorageService {
                 Name: string(label.name),
                 Color: string(label.color),
                 Icon: string(label.icon),
+                CreatedBy: string(createdBy),
             }
         )
         return entity
     }
 
+    /**
+     * Update label in table Labels
+     * 
+     * @param label Label data
+     */
     async updateLabel(label) {
         const { string } = tableUtil.entGen()
         const entity = {
@@ -48,6 +60,11 @@ class StorageService {
         return result
     }
 
+    /**
+    * Delete label from table Labels
+    * 
+    * @param id Label ID
+    */
     async deleteLabel(id) {
         const { string } = tableUtil.entGen()
         try {
@@ -65,28 +82,42 @@ class StorageService {
         }
     }
 
+    /**
+     * Get customers from table Customers
+     */
     async getCustomers() {
         const query = tableUtil.createQuery(1000)
         const { entries } = await tableUtil.queryTable('Customers', query, { RowKey: 'key' })
         return entries
     }
 
-    async createCustomer(model, createdBy) {
+    /**
+     * Create customer in table Customers
+     * 
+     * @param customer Customer data
+     * @param createdBy Created by ID
+     */
+    async createCustomer(customer, createdBy) {
         const { string } = tableUtil.entGen()
         const entity = await tableUtil.addEntity(
             'Customers',
             {
                 PartitionKey: string('Default'),
-                RowKey: string(model.key.toUpperCase()),
-                Name: string(model.name),
-                Description: string(model.description),
-                Icon: string(model.icon || 'Page'),
+                RowKey: string(customer.key.toUpperCase()),
+                Name: string(customer.name),
+                Description: string(customer.description),
+                Icon: string(customer.icon || 'Page'),
                 CreatedBy: string(createdBy),
             }
         )
         return entity
     }
 
+    /**
+     * Delete customer from table Custoemrs
+     * 
+     * @param key Customer key
+     */
     async deleteCustomer(key) {
         const { string } = tableUtil.entGen()
         try {
@@ -104,6 +135,12 @@ class StorageService {
         }
     }
 
+    /**
+     * Get projects from table Project
+     * 
+     * @param customerKey Customer key
+     * @param options Options
+     */
     async getProjects(customerKey, options) {
         options = options || {}
         const q = tableUtil.query()
@@ -122,6 +159,12 @@ class StorageService {
         return entries
     }
 
+    /**
+     * Create project in table Projects
+     * 
+     * @param project Project data
+     * @param createdBy Created by ID
+     */
     async createProject(project, createdBy) {
         const { string } = tableUtil.entGen()
         const entity = await tableUtil.addEntity(
@@ -139,23 +182,12 @@ class StorageService {
         return entity
     }
 
-    async deleteProject(key) {
-        const { string } = tableUtil.entGen()
-        try {
-            const result = await tableUtil.deleteEntity(
-                'Projects',
-                {
-                    PartitionKey: string('Default'),
-                    RowKey: string(key),
-                }
-            )
-            return result
-        }
-        catch (error) {
-            throw error
-        }
-    }
-
+    /**
+     * Add label to project
+     * 
+     * @param projectId Project ID
+     * @param labelId Label ID
+     */
     async addLabelToProject(projectId, labelId) {
         const { string } = tableUtil.entGen()
         const entity = await tableUtil.retrieveEntity(
@@ -173,12 +205,20 @@ class StorageService {
         return result
     }
 
+    /**
+     * Get users from table Users
+     */
     async getUsers() {
         const query = tableUtil.createQuery(1000, undefined)
         const { entries } = await tableUtil.queryTable('Users', query, {})
         return entries
     }
 
+    /**
+     * Get user from table Users
+     * 
+     * @param userId The user ID
+     */
     async getUser(userId) {
         try {
             const entry = await tableUtil.retrieveEntity(
@@ -192,6 +232,11 @@ class StorageService {
         }
     }
 
+    /**
+     * Add user to table Users
+     * 
+     * @param user The user data
+     */
     async addUser(user) {
         const { string } = tableUtil.entGen()
         const entity = await tableUtil.addEntity(
@@ -206,6 +251,11 @@ class StorageService {
         return entity
     }
 
+    /**
+     * Update user in table Users
+     * 
+     * @param user The user data
+     */
     async updateUser(user) {
         const { string } = tableUtil.entGen()
         const entity = {
@@ -223,18 +273,24 @@ class StorageService {
         return result
     }
 
-    async getTimeEntries(filters, options) {
-        filters = filters || {}
+    /**
+     * Get entries from table TimeEntries
+     * 
+     * @param filterValues Filtervalues
+     * @param options Options
+     */
+    async getTimeEntries(filterValues, options) {
+        filterValues = filterValues || {}
         options = options || {}
         const { datetime } = tableUtil.entGen()
         const q = tableUtil.query()
         const filter = [
-            ['ProjectId', filters.projectId, q.string, q.equal],
-            ['PartitionKey', filters.resourceId, q.string, q.equal],
-            ['WeekNumber', filters.weekNumber, q.int, q.equal],
-            ['Year', filters.year, q.int, q.equal],
-            ['StartTime', filters.startDateTime && datetime(new Date(filters.startDateTime))._, q.date, q.greaterThan],
-            ['EndTime', filters.endDateTime && datetime(new Date(filters.endDateTime))._, q.date, q.lessThan],
+            ['ProjectId', filterValues.projectId, q.string, q.equal],
+            ['PartitionKey', filterValues.resourceId, q.string, q.equal],
+            ['WeekNumber', filterValues.weekNumber, q.int, q.equal],
+            ['Year', filterValues.year, q.int, q.equal],
+            ['StartDateTime', tableUtil.convertDate(filterValues.startDateTime), q.date, q.greaterThan],
+            ['EndDateTime', tableUtil.convertDate(filterValues.endDateTime), q.date, q.lessThan],
         ]
         const query = tableUtil.createQuery(1000, undefined, filter)
         let result = await tableUtil.queryTableAll(
@@ -249,12 +305,17 @@ class StorageService {
         return result
     }
 
+    /**
+     * Delete entries to table TimeEntries
+     * 
+     * @param timeentries Collection of time entries
+     */
     async addTimeEntries(timeentries) {
         let totalDuration = 0
         const { string, datetime, double, int, boolean } = tableUtil.entGen()
         const entities = timeentries.map(({ entry, event, user, }) => {
             const week = getWeek(event.startTime)
-            const month = getMonthIndex(event.startTime)
+            const monthIdx = getMonthIndex(event.startTime)
             const duration = getDurationHours(event.startTime, event.endTime)
             totalDuration += duration
             return {
@@ -263,14 +324,14 @@ class StorageService {
                 ResourceName: string(user.profile.displayName),
                 Title: string(event.title),
                 Description: string(event.body),
-                StartTime: datetime(event.startTime),
-                EndTime: datetime(event.endTime),
+                StartDateTime: datetime(event.startTime),
+                EndDateTime: datetime(event.endTime),
                 Duration: double(duration),
                 ProjectId: string(entry.projectId),
                 WebLink: string(event.webLink),
                 WeekNumber: int(week),
-                MonthNumber: int(month),
-                PeriodId: string(`${week}_${month}`),
+                MonthNumber: int(monthIdx),
+                PeriodId: string(`${week}_${monthIdx}`),
                 Year: int(getYear(event.startTime)),
                 ManualMatch: boolean(entry.isManualMatch),
             }
@@ -281,14 +342,30 @@ class StorageService {
         return totalDuration
     }
 
-    async deleteTimeEntries(filters) {
-        filters = filters || {}
-        const entities = await this.getTimeEntries(filters, { noParse: true })
+    /**
+     * Delete the user entries from table TimeEntries
+     * 
+     * @param resourceId ID of the resource
+     * @param startDateTime Start datetime
+     * @param endDateTime End datetime
+     */
+    async deleteUserTimeEntries(resourceId, startDateTime, endDateTime) {
+        const entities = await this.getTimeEntries({
+            resourceId,
+            startDateTime,
+            endDateTime,
+        }, { noParse: true })
         const batch = tableUtil.createBatch()
         entities.forEach(entity => batch.deleteEntity(entity))
         await tableUtil.executeBatch('TimeEntries', batch)
     }
 
+    /**
+     * Get entry for the period from table ConfirmedPeriods
+     * 
+     * @param resourceId ID of the resource
+     * @param period The period
+     */
     async getConfirmedPeriod(resourceId, period) {
         try {
             const entry = await tableUtil.retrieveEntity(
@@ -302,6 +379,13 @@ class StorageService {
         }
     }
 
+    /**
+     * Add entry for the period to table ConfirmedPeriods
+     * 
+     * @param resourceId ID of the resource
+     * @param period The period
+     * @param hours Total hours for the train
+     */
     async addConfirmedPeriod(resourceId, period, hours) {
         const { string, double } = tableUtil.entGen()
         const entity = await tableUtil.addEntity(
@@ -315,6 +399,12 @@ class StorageService {
         return entity
     }
 
+    /**
+     * Removed the entry for the period in table ConfirmedPeriods
+     * 
+     * @param resourceId ID of the resource
+     * @param period The period
+     */
     async removeConfirmedPeriod(resourceId, period) {
         const { string } = tableUtil.entGen()
         try {

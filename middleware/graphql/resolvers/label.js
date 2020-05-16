@@ -1,6 +1,4 @@
-const _ = require('underscore')
-const { TableBatch } = require('azure-storage')
-const { executeBatch } = require('../../../utils/table')
+const { omit } = require('underscore')
 
 const typeDef = `   
     type Label  {
@@ -36,10 +34,10 @@ async function labels(_obj, _variables, { services: { storage: StorageService } 
 
 async function addLabel(_obj, { label }, { services: { storage: StorageService } }) {
     try {
-        await StorageService.addLabel(label)
+        await StorageService.addLabel(label, user.profile.oid)
         return { success: true, error: null }
     } catch (error) {
-        return { success: false, error: _.omit(error, 'requestId') }
+        return { success: false, error: omit(error, 'requestId') }
     }
 }
 
@@ -48,7 +46,7 @@ async function updateLabel(_obj, { label }, { services: { storage: StorageServic
         await StorageService.updateLabel(label)
         return { success: true, error: null }
     } catch (error) {
-        return { success: false, error: _.omit(error, 'requestId') }
+        return { success: false, error: omit(error, 'requestId') }
     }
 }
 

@@ -60,6 +60,16 @@ class TableUtil {
         }
     }
 
+    /**
+     * Converts the date string to azure table storage date format
+     * 
+     * @param dateString The date string to convert
+     */
+    convertDate(dateString) {
+        if (dateString) return this.query().date(new Date(dateString))._
+        return null
+    }
+
     createBatch() {
         return new az.TableBatch()
     }
