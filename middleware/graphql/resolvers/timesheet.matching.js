@@ -84,7 +84,7 @@ function matchEvent(event, projects, customers) {
     } else {
         event.project = _.find(projects, p => content.indexOf(p.id) !== -1)
         if (event.project) {
-            event.customer = _.find(customers, c => c.key === event.customerKey)
+            event.customer = _.find(customers, c => c.key === event.project.customerKey)
         }
     }
     if (event.customer && !event.project) {
