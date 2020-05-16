@@ -69,17 +69,8 @@ let config = {
         new webpack.NoEmitOnErrorsPlugin(),
         new CompressionPlugin(),
         new HtmlWebpackPlugin({
-            templateContent: `
-            <!DOCTYPE html>
-            <html>
-            {{head}}
-                <body>
-                    <main role='main'>
-                    <div id="app"></div>
-                    </main>
-                </body>
-            </html>`,
-            filename: "../../views/index.hbs",
+            template: path.resolve(__dirname, 'views/index_template.hbs'),
+            filename: path.resolve(__dirname, 'views/index.hbs'),
             inject: true,
         }),
     ],
