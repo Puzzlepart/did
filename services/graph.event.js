@@ -10,8 +10,8 @@ class Event {
         this.categories = evt.categories
         this.webLink = evt.webLink
         this.lastModifiedDateTime = evt.lastModifiedDateTime
-        this.startTime = evt.start.dateTime
-        this.endTime = evt.end.dateTime
+        this.startDateTime = evt.start.dateTime
+        this.endDateTime = evt.end.dateTime
         this.duration = utils.getDurationHours(evt.start.dateTime, evt.end.dateTime)
     }
 }

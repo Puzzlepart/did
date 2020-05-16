@@ -8,8 +8,8 @@ export default gql`
          timeentries {
             title
             duration
-            startTime
-            endTime
+            startDateTime
+            endDateTime
             weekNumber
             year
             resourceName     

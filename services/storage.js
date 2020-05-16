@@ -279,18 +279,16 @@ class StorageService {
      * @param filterValues Filtervalues
      * @param options Options
      */
-    async getTimeEntries(filterValues, options) {
-        filterValues = filterValues || {}
+    async getTimeEntries({ projectId, resourceId, weekNumber, year, startDateTime, endDateTime }, options) {
         options = options || {}
-        const { datetime } = tableUtil.entGen()
         const q = tableUtil.query()
         const filter = [
-            ['ProjectId', filterValues.projectId, q.string, q.equal],
-            ['PartitionKey', filterValues.resourceId, q.string, q.equal],
-            ['WeekNumber', filterValues.weekNumber, q.int, q.equal],
-            ['Year', filterValues.year, q.int, q.equal],
-            ['StartDateTime', tableUtil.convertDate(filterValues.startDateTime), q.date, q.greaterThan],
-            ['EndDateTime', tableUtil.convertDate(filterValues.endDateTime), q.date, q.lessThan],
+            ['ProjectId', projectId, q.string, q.equal],
+            ['PartitionKey', resourceId, q.string, q.equal],
+            ['WeekNumber', weekNumber, q.int, q.equal],
+            ['Year', year, q.int, q.equal],
+            ['StartDateTime', tableUtil.convertDate(startDateTime), q.date, q.greaterThan],
+            ['EndDateTime', tableUtil.convertDate(endDateTime), q.date, q.lessThan],
         ]
         const query = tableUtil.createQuery(1000, undefined, filter)
         let result = await tableUtil.queryTableAll(
@@ -301,8 +299,8 @@ class StorageService {
                 RowKey: 'id'
             }
         )
-        result = result.sort((a, b) => new Date(a.startTime) - new Date(b.startTime))
-        return result
+        result = result.sort((a, b) => new Date(a.startDateTime) - new Date(b.startDateTime))
+        return []
     }
 
     /**
@@ -314,9 +312,9 @@ class StorageService {
         let totalDuration = 0
         const { string, datetime, double, int, boolean } = tableUtil.entGen()
         const entities = timeentries.map(({ entry, event, user, }) => {
-            const week = getWeek(event.startTime)
-            const monthIdx = getMonthIndex(event.startTime)
-            const duration = getDurationHours(event.startTime, event.endTime)
+            const week = getWeek(event.startDateTime)
+            const monthIdx = getMonthIndex(event.startDateTime)
+            const duration = getDurationHours(event.startDateTime, event.endDateTime)
             totalDuration += duration
             return {
                 PartitionKey: string(user.profile.oid),
@@ -324,15 +322,15 @@ class StorageService {
                 ResourceName: string(user.profile.displayName),
                 Title: string(event.title),
                 Description: string(event.body),
-                StartDateTime: datetime(event.startTime),
-                EndDateTime: datetime(event.endTime),
+                StartDateTime: datetime(event.startDateTime),
+                EndDateTime: datetime(event.endDateTime),
                 Duration: double(duration),
                 ProjectId: string(entry.projectId),
                 WebLink: string(event.webLink),
                 WeekNumber: int(week),
                 MonthNumber: int(monthIdx),
                 PeriodId: string(`${week}_${monthIdx}`),
-                Year: int(getYear(event.startTime)),
+                Year: int(getYear(event.startDateTime)),
                 ManualMatch: boolean(entry.isManualMatch),
             }
         })

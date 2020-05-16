@@ -6,8 +6,8 @@ const typeDef = `
         key: String
         title: String!
         description: String
-        startTime: String
-        endTime: String
+        startDateTime: String
+        endDateTime: String
         webLink: String
         duration: Float
         projectId: String

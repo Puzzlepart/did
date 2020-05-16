@@ -8,8 +8,8 @@ export default gql`
          timeentries(projectId: $projectId)  {            
             title
             duration
-            startTime
-            endTime
+            startDateTime
+            endDateTime
             weekNumber
             year
             resourceName            

@@ -2,16 +2,16 @@ const { find, omit } = require('underscore')
 const { formatDate, getMonthIndex, getWeek, startOfMonth, endOfMonth } = require('../../../utils')
 const matchEvents = require('./timesheet.matching')
 const { enrichProjects } = require('./project.utils')
+const { getPeriods } = require('./timesheet.utils')
 
 const typeDef = `  
  type Event {
 	id: String
-	key: String
 	title: String
 	body: String
 	isOrganizer: Boolean
-	startTime: String
-	endTime: String
+	startDateTime: String
+	endDateTime: String
 	date: String
 	duration: Float
 	project: Project
@@ -47,31 +47,7 @@ const typeDef = `
 `
 
 async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale }, { user, services: { graph: GraphService, storage: StorageService } }) {
-    const week = getWeek(startDateTime)
-    const startMonthIdx = getMonthIndex(startDateTime)
-    const endMonthIdx = getMonthIndex(endDateTime)
-    const isSplit = endMonthIdx !== startMonthIdx
-
-    let periods = [{
-        id: `${week}_${startMonthIdx}`,
-        week,
-        month: formatDate(startDateTime, 'MMMM', locale),
-        startDateTime,
-        endDateTime:
-            isSplit
-                ? endOfMonth(startDateTime).toISOString()
-                : endDateTime,
-    }]
-
-    if (isSplit) {
-        periods.push({
-            id: `${week}_${endMonthIdx}`,
-            week,
-            month: formatDate(endDateTime, 'MMMM', locale),
-            startDateTime: startOfMonth(endDateTime).toISOString(),
-            endDateTime: endDateTime,
-        })
-    }
+    let periods = getPeriods(startDateTime, endDateTime, locale)
 
     let [
         projects,
@@ -111,7 +87,7 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale 
         }
         period.events = period.events.map(evt => ({
             ...evt,
-            date: formatDate(evt.startTime, dateFormat, locale),
+            date: formatDate(evt.startDateTime, dateFormat, locale),
         }))
     }
     return periods

@@ -4,21 +4,21 @@ module.exports = {
     /**
      * Get duration between two times in minutes
      * 
-     * @param {*} startTime Start time
-     * @param {*} endTime End time
+     * @param {*} startDateTime Start time
+     * @param {*} endDateTime End time
      */
-    getDurationMinutes: (startTime, endTime) => {
-        return moment.duration(moment(endTime).diff(moment(startTime))).asMinutes()
+    getDurationMinutes: (startDateTime, endDateTime) => {
+        return moment.duration(moment(endDateTime).diff(moment(startDateTime))).asMinutes()
     },
 
     /**
      * Get duration between two times in hours
      * 
-     * @param {*} startTime Start time
-     * @param {*} endTime End time
+     * @param {*} startDateTime Start time
+     * @param {*} endDateTime End time
      */
-    getDurationHours: (startTime, endTime) => {
-        return moment.duration(moment(endTime).diff(moment(startTime))).asHours()
+    getDurationHours: (startDateTime, endDateTime) => {
+        return moment.duration(moment(endDateTime).diff(moment(startDateTime))).asHours()
     },
 
     /**

@@ -13,14 +13,13 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!, $lo
     startDateTime
     endDateTime
     events {
-      key
       id
       title
       isOrganizer
       webLink
       duration
-      startTime
-      endTime
+      startDateTime
+      endDateTime
       date
       project {
         id

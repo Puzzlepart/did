@@ -59,7 +59,7 @@ function generateRows(events: any[], columns: IColumn[]) {
         const projectEvents = events.filter(event => event.project.id === project.id)
         return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
             const sum = [...projectEvents]
-                .filter(event => dateUtils.formatDate(event.startTime, 'L') === col.fieldName)
+                .filter(event => dateUtils.formatDate(event.startDateTime, 'L') === col.fieldName)
                 .reduce((sum, event) => sum += event.duration, 0)
             obj[col.fieldName] = sum
             obj.sum += sum
@@ -71,7 +71,7 @@ function generateRows(events: any[], columns: IColumn[]) {
 function generateTotalRow(events: any[], columns: IColumn[], label: string) {
     return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
         const sum = [...events]
-            .filter(event => dateUtils.formatDate(event.startTime, 'L') === col.fieldName)
+            .filter(event => dateUtils.formatDate(event.startDateTime, 'L') === col.fieldName)
             .reduce((sum, event) => sum += event.duration, 0)
         obj[col.fieldName] = sum
         obj.sum += sum

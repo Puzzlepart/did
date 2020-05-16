@@ -66,7 +66,7 @@ class TableUtil {
      * @param dateString The date string to convert
      */
     convertDate(dateString) {
-        if (dateString) return this.query().date(new Date(dateString))._
+        if (dateString) return this.entGen().datetime(new Date(dateString))._
         return null
     }
 

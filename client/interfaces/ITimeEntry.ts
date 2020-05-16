@@ -16,8 +16,8 @@ export interface ITimeEntry {
     customerKey: string;
     webLink: string;
     duration: number;
-    startTime: string;
-    endTime: string;
+    startDateTime: string;
+    endDateTime: string;
     day: string;
     isManualMatch?: boolean;
     isIgnored?: boolean;
