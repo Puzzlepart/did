@@ -38,7 +38,7 @@ export const GetAllocation = (entries: ITimeEntry[], exp: string): Array<{ name:
  * @category Timesheet
  */
 export const AllocationView = (): JSX.Element => {
-    const { t } = useTranslation(['timesheet', 'COMMON'])
+    const { t } = useTranslation(['timesheet', 'common'])
     const { selectedPeriod } = React.useContext(TimesheetContext)
     const [dimensions, setDimensions] = React.useState({ width: 0, height: 0 })
     const ref = React.useRef<HTMLDivElement>()
@@ -68,7 +68,7 @@ export const AllocationView = (): JSX.Element => {
                             <YAxis />
                             <Tooltip />
                             <Legend />
-                            <Bar dataKey='hours' name={t('hours', { ns: 'COMMON' }) as string} fill='#444' />
+                            <Bar dataKey='hours' name={t('hours', { ns: 'common' }) as string} fill='#444' />
                         </BarChart>
                     </div>
                 )

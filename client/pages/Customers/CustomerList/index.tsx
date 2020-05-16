@@ -40,7 +40,7 @@ export const columns = (t: TFunction): IColumn[] => ([
  * @category Customers
  */
 export const CustomerList = (props: ICustomerListProps) => {
-    const { t } = useTranslation(['COMMON', 'customers'])
+    const { t } = useTranslation(['common', 'customers'])
     const [items, setItems] = React.useState([...props.items])
 
     /**

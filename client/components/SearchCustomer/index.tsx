@@ -11,7 +11,7 @@ import { ISearchCustomerProps } from './types'
  * @category SearchCustomer
  */
 export const SearchCustomer = (props: ISearchCustomerProps) => {
-    const { t } = useTranslation('COMMON')
+    const { t } = useTranslation('common')
     const { loading, data } = useQuery<{ customers: ICustomer[] }>(GET_CUSTOMERS, {
         variables: { sortBy: 'name' },
         fetchPolicy: 'cache-first',

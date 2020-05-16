@@ -17,7 +17,7 @@ import styles from './UserFormModal.module.scss'
  * @category Admin
  */
 export const UserFormModal = (props: IUserFormModalProps) => {
-    const { t } = useTranslation('COMMON')
+    const { t } = useTranslation('common')
     const [user, setUser] = React.useState<IUser>(props.user || { id: '', fullName: '', role: 'User' })
     const [updateUser] = useMutation(UPDATE_USER)
     const [addUser] = useMutation(ADD_USER)

@@ -1,11 +1,12 @@
 const { first } = require('underscore')
 const tableUtil = require('../utils/table')
-const StorageService = require('../services/storage')
 const { createTableService } = require('azure-storage')
 
 class SubscriptionService {
   /**
-   * Checks if the tenant id has a active subscription
+   * Get the subscription for the specified tenant id 
+   * 
+   * Returns null if there's no active subscription
    */
   async getSubscription(tenantId) {
     try {

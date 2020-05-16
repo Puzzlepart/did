@@ -21,7 +21,7 @@ import { ISummaryViewContext } from './types'
  * @category Admin
  */
 export const SummaryView = (): JSX.Element => {
-    const { t } = useTranslation(['COMMON', 'admin'])
+    const { t } = useTranslation(['common', 'admin'])
     const scopes = getScopes(t)
     const types = getTypes(t)
 

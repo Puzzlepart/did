@@ -84,7 +84,7 @@ function generateTotalRow(events: any[], columns: IColumn[], label: string) {
  * @description Generates a summary view of events
  */
 export const SummaryView = () => {
-    const { t } = useTranslation('COMMON')
+    const { t } = useTranslation('common')
     const context = React.useContext(TimesheetContext)
     const columns = createColumns(context.scope)
 

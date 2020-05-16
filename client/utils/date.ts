@@ -20,8 +20,8 @@ export default new class DateUtils {
     }
 
     getDurationDisplay(duration: number, t?: TFunction): string {
-        const hrsShortFormat = t ? t('hoursShortFormat', { ns: 'COMMON', defaultValue: undefined }) : '{0}h'
-        const minShortFormat = t ? t('minutesShortFormat', { ns: 'COMMON', defaultValue: undefined }) : '{0}min'
+        const hrsShortFormat = t ? t('hoursShortFormat', { ns: 'common', defaultValue: undefined }) : '{0}h'
+        const minShortFormat = t ? t('minutesShortFormat', { ns: 'common', defaultValue: undefined }) : '{0}min'
         const hrs = Math.floor(duration)
         const mins = parseInt(((duration % 1) * 60).toFixed(0))
         const hrsStr = format(hrsShortFormat, hrs)

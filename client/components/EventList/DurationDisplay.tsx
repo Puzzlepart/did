@@ -6,6 +6,6 @@ import DateUtils from 'utils/date'
  * @ignore
  */
 export const DurationDisplay = ({ duration }): JSX.Element => {
-    const { t } = useTranslation('COMMON')
+    const { t } = useTranslation('common')
     return <span>{DateUtils.getDurationDisplay(duration, t)}</span>
 }

@@ -14,7 +14,7 @@ export type IIconPickerProps = IDropdownProps
  * @category IconPicker
  */
 export const IconPicker = (props: IIconPickerProps) => {
-    const { t } = useTranslation('COMMON')
+    const { t } = useTranslation('common')
 
     function onRenderOption(option: IDropdownOption): JSX.Element {
         return (

@@ -13,7 +13,7 @@ import styles from './WeekPicker.module.scss'
  * @category Timesheet
  */
 export const WeekPicker = () => {
-    const { t } = useTranslation('COMMON')
+    const { t } = useTranslation('common')
     const { scope, dispatch } = React.useContext(TimesheetContext)
     const [calendar, setCalendar] = useState(null)
 

@@ -17,7 +17,7 @@ import GET_CUSTOMERS, { IGetCustomersData } from './GET_CUSTOMERS'
  * @category Customers
  */
 export const Customers = () => {
-    const { t } = useTranslation(['COMMON', 'ADMINS'])
+    const { t } = useTranslation(['common', 'ADMINS'])
     const params = useParams<{ key: string }>()
     const [selected, setSelected] = React.useState<ICustomer>(null)
     const { loading, error, data } = useQuery<IGetCustomersData>(GET_CUSTOMERS, { fetchPolicy: 'cache-first' })

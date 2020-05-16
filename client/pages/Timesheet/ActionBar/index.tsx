@@ -10,7 +10,7 @@ import { WeekPicker } from './WeekPicker'
  * @category Timesheet
  */
 export const ActionBar = () => {
-    const { t } = useTranslation(['timesheet', 'COMMON'])
+    const { t } = useTranslation(['timesheet', 'common'])
     const context = React.useContext(TimesheetContext)
     const items = [
         goToCurrentWeek(context, t),

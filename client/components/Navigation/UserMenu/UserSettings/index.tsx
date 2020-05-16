@@ -13,7 +13,7 @@ import { USER_SETTINGS } from './USER_SETTINGS'
  * @category UserSettings
  */
 export const UserSettings = (props: React.HTMLProps<HTMLDivElement>) => {
-    const { t } = useTranslation('COMMON')
+    const { t } = useTranslation('common')
     const { user } = React.useContext(AppContext)
     const [isOpen, toggle] = React.useState<boolean>(false)
     const [updateUser] = useMutation(UPDATE_USER)

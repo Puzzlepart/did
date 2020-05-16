@@ -15,7 +15,7 @@ import { ICustomerDetailsProps } from './ICustomerDetailsProps'
  * @category Customers
  */
 export const CustomerDetails = (props: ICustomerDetailsProps) => {
-    const { t } = useTranslation(['customers', 'COMMON', 'projects'])
+    const { t } = useTranslation(['customers', 'common', 'projects'])
     const { loading, error, data } = useQuery(GET_PROJECTS, { variables: { customerKey: value<string>(props, 'customer.key', '') } })
 
     return (

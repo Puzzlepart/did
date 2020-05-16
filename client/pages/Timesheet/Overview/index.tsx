@@ -14,7 +14,7 @@ import { IOverviewProps } from './types'
  * @category Timesheet
  */
 export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
-    const { t } = useTranslation('COMMON')
+    const { t } = useTranslation('common')
     const { loading, selectedPeriod } = React.useContext(TimesheetContext)
     return (
         <>

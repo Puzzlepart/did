@@ -35,12 +35,12 @@ export default (hideColumns: string[], t: TFunction): IColumn[] => ([
     ),
     col(
         'id',
-        t('keyLabel', { ns: 'COMMON' }),
+        t('keyLabel', { ns: 'common' }),
         { maxWidth: 120 },
     ),
     col(
         'name',
-        t('nameLabel', { ns: 'COMMON' }),
+        t('nameLabel', { ns: 'common' }),
         { maxWidth: 220 },
         (project: IProject) => <Link to={`/projects/${project.id}`}>{project.name}</Link>
     ),

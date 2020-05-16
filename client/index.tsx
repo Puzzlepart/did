@@ -28,5 +28,4 @@ client.query<{ currentUser: any }>({ query: GET_CURRENT_USER }).then(({ data }) 
             <App {...context} />
         </ApolloProvider>
     ), container)
-
 })

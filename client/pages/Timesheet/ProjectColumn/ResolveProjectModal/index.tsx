@@ -14,7 +14,7 @@ import { IResolveProjectModalProps } from './types'
  * @category Timesheet
 */
 export const ResolveProjectModal = ({ event }: IResolveProjectModalProps) => {
-    const { t } = useTranslation(['timesheet', 'COMMON'])
+    const { t } = useTranslation(['timesheet', 'common'])
     const { dispatch } = React.useContext<ITimesheetContext>(TimesheetContext)
     const [showResolveModal, setShowResolveModal] = React.useState<boolean>(false)
 
@@ -58,7 +58,7 @@ export const ResolveProjectModal = ({ event }: IResolveProjectModalProps) => {
                     width={450}
                     className={styles.searchProject}
                     onSelected={project => onResolve(project)}
-                    placeholder={t('searchPlaceholder', { ns: 'COMMON' })} />
+                    placeholder={t('searchPlaceholder', { ns: 'common' })} />
             </Modal>
         </>
     )

@@ -1,17 +1,23 @@
 const az = require('azure-storage')
 
 class TableUtil {
-    parseEntity(ent, colMap) {
-        colMap = colMap || {}
-        let parsed = Object.keys(ent)
+    /**
+     * Parse an table storage entity
+     * 
+     * @param {*} result Result
+     * @param {*} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
+     */
+    parseEntity(entity, columnMap) {
+        columnMap = columnMap || {}
+        let parsed = Object.keys(entity)
             .reduce((obj, key) => {
                 const newKey = key.charAt(0).toLowerCase() + key.slice(1)
-                const value = ent[key]._
-                if (colMap[key]) {
-                    obj[colMap[key]] = value
+                const value = entity[key]._
+                if (columnMap[key]) {
+                    obj[columnMap[key]] = value
                     return obj
                 }
-                switch (ent[key].$) {
+                switch (entity[key].$) {
                     case 'Edm.DateTime': obj[newKey] = value.toISOString()
                         break
                     default: obj[newKey] = value
@@ -27,14 +33,17 @@ class TableUtil {
      * Adds {RowKey} as 'id' and 'key, skips {PartitionKey}
      * 
      * @param {*} result Result
-     * @param {*} colMap Column map
+     * @param {*} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
      */
-    parseEntities({ entries, continuationToken }, colMap) {
-        colMap = colMap || {}
-        entries = entries.map(ent => this.parseEntity(ent, colMap))
+    parseEntities({ entries, continuationToken }, columnMap) {
+        columnMap = columnMap || {}
+        entries = entries.map(ent => this.parseEntity(ent, columnMap))
         return { entries, continuationToken }
     }
 
+    /**
+     * entityGenerator from azure-storage TableUtilities
+     */
     entGen() {
         return {
             string: az.TableUtilities.entityGenerator.String,
@@ -45,6 +54,9 @@ class TableUtil {
         }
     }
 
+    /**
+     * Query
+     */
     query() {
         return {
             string: az.TableQuery.stringFilter,
@@ -70,6 +82,9 @@ class TableUtil {
         return null
     }
 
+    /**
+     * Create table batch
+     */
     createBatch() {
         return new az.TableBatch()
     }
@@ -77,9 +92,9 @@ class TableUtil {
     /**
      * Function that simplifes creating a new TableQuery from azure-storage
      * 
-     * @param {*} top 
-     * @param {*} select 
-     * @param {*} filters 
+     * @param {*} top Number of items to retrieve
+     * @param {*} select Columns to retrieve
+     * @param {*} filters Filters
      */
     createQuery(top, select, filters) {
         let query = new az.TableQuery().top(top)
@@ -92,6 +107,11 @@ class TableUtil {
         return query
     }
 
+    /**
+     * Combine an array of filters
+     * 
+     * @param filters Filter array
+     */
     combineFilters(filters) {
         const { combine, and } = this.query()
         return filters.reduce((combined, [col, value, type, comp]) => {
@@ -106,12 +126,12 @@ class TableUtil {
     /**
      * Queries a table using the specified query
      * 
-     * @param {*} table 
-     * @param {*} query 
-     * @param {*} parse 
-     * @param {*} continuationToken 
+     * @param {*} table Table name
+     * @param {*} query Table query
+     * @param {*} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
+     * @param {*} continuationToken Continuation token
      */
-    queryTable(table, query, parse, continuationToken) {
+    queryTable(table, query, columnMap, continuationToken) {
         return new Promise((resolve, reject) => {
             this.tableService.queryEntities(
                 table,
@@ -119,8 +139,8 @@ class TableUtil {
                 continuationToken,
                 (error, result) => {
                     if (!error) {
-                        return parse
-                            ? resolve(this.parseEntities(result, parse))
+                        return columnMap
+                            ? resolve(this.parseEntities(result, columnMap))
                             : resolve(result)
                     }
                     else reject(error)
@@ -131,16 +151,16 @@ class TableUtil {
     /**
      * Queries all entries in a table using the specified query
      * 
-     * @param {*} table 
-     * @param {*} query 
-     * @param {*} parse 
+     * @param {*} table Table name
+     * @param {*} query Table query
+     * @param {*} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
      */
-    async queryTableAll(table, query, parse) {
+    async queryTableAll(table, query, columnMap) {
         let token = null
-        let { entries, continuationToken } = await this.queryTable(table, query, parse, token)
+        let { entries, continuationToken } = await this.queryTable(table, query, columnMap, token)
         token = continuationToken
         while (token != null) {
-            let result = await this.queryTable(table, query, parse, token)
+            let result = await this.queryTable(table, query, columnMap, token)
             entries.push(...result.entries)
             token = result.continuationToken
         }
@@ -150,9 +170,9 @@ class TableUtil {
     /**
      * Retrieves an entity
      * 
-     * @param {*} table 
-     * @param {*} partitionKey 
-     * @param {*} rowKey 
+     * @param {*} table Table name
+     * @param {*} partitionKey Partition key
+     * @param {*} rowKey Row key
      */
     retrieveEntity(table, partitionKey, rowKey) {
         return new Promise((resolve, reject) => {
@@ -169,12 +189,12 @@ class TableUtil {
     /**
      * Adds an entity
      * 
-     * @param {*} table 
-     * @param {*} item 
+     * @param {*} table Table name
+     * @param {*} entity Entity
      */
-    addEntity(table, item) {
+    addEntity(table, entity) {
         return new Promise((resolve, reject) => {
-            this.tableService.insertEntity(table, item, (error, result) => {
+            this.tableService.insertEntity(table, entity, (error, result) => {
                 if (!error) {
                     return resolve(result['.metadata'])
                 } else {
@@ -187,14 +207,14 @@ class TableUtil {
     /**
      * Updates the entity
      * 
-     * @param {*} table 
-     * @param {*} item 
-     * @param {*} merge 
+     * @param {*} table Table name
+     * @param {*} entity Entity
+     * @param {*} merge If the entity should be inserted using insertOrMergeEntity
      */
-    updateEntity(table, item, merge) {
+    updateEntity(table, entity, merge) {
         return new Promise((resolve, reject) => {
             if (merge) {
-                this.tableService.insertOrMergeEntity(table, item, undefined, (error, result) => {
+                this.tableService.insertOrMergeEntity(table, entity, undefined, (error, result) => {
                     if (!error) {
                         resolve(result)
                     } else {
@@ -202,7 +222,7 @@ class TableUtil {
                     }
                 })
             } else {
-                this.tableService.insertOrReplaceEntity(table, item, undefined, (error, result) => {
+                this.tableService.insertOrReplaceEntity(table, entity, undefined, (error, result) => {
                     if (!error) {
                         resolve(result)
                     } else {
@@ -216,12 +236,12 @@ class TableUtil {
     /**
      * Delete entity
      * 
-     * @param {*} table 
-     * @param {*} item 
+     * @param {*} table Table name
+     * @param {*} entity Entity
      */
-    deleteEntity(table, item) {
+    deleteEntity(table, entity) {
         return new Promise((resolve, reject) => {
-            this.tableService.deleteEntity(table, item, undefined, (error, result) => {
+            this.tableService.deleteEntity(table, entity, undefined, (error, result) => {
                 if (!error) {
                     resolve(result)
                 } else {
@@ -235,8 +255,8 @@ class TableUtil {
     /**
      * Executes a batch operation
      * 
-     * @param {*} table 
-     * @param {*} batch 
+     * @param {*} table Table name
+     * @param {*} batch Table batch
      */
     executeBatch(table, batch) {
         return new Promise((resolve, reject) => {

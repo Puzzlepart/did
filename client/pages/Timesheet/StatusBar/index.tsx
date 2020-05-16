@@ -14,7 +14,7 @@ import styles from './StatusBar.module.scss'
  * @category Timesheet
  */
 export const StatusBar = () => {
-    const { t } = useTranslation(['timesheet', 'COMMON'])
+    const { t } = useTranslation(['timesheet', 'common'])
     const { loading, periods, selectedPeriod, dispatch } = React.useContext(TimesheetContext)
 
     const defaultProps: IUserMessageProps = {

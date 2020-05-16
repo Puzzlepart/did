@@ -17,7 +17,7 @@ import { ICreateCustomerFormValidation } from './ICreateCustomerFormValidation'
  * @category Customers
  */
 export const CreateCustomerForm = ({ initialModel = { key: '', name: '', description: '', icon: 'Page' } }: ICreateCustomerFormProps) => {
-    const { t } = useTranslation(['customers', 'COMMON'])
+    const { t } = useTranslation(['customers', 'common'])
     const [validation, setValidation] = useState<ICreateCustomerFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useState<{ text: string; type: MessageBarType }>(null)
     const [model, setModel] = useState<ICreateCustomerFormModel>(initialModel)
@@ -52,7 +52,7 @@ export const CreateCustomerForm = ({ initialModel = { key: '', name: '', descrip
             {message && <UserMessage containerStyle={{ marginTop: 12, marginBottom: 12, width: 450 }} text={message.text} type={message.type} />}
             <TextField
                 className={styles.inputField}
-                label={t('keyLabel', { ns: 'COMMON' })}
+                label={t('keyLabel', { ns: 'common' })}
                 description={t('keyDescription')}
                 required={true}
                 errorMessage={validation.errors.key}
@@ -60,14 +60,14 @@ export const CreateCustomerForm = ({ initialModel = { key: '', name: '', descrip
                 value={model.key} />
             <TextField
                 className={styles.inputField}
-                label={t('nameLabel', { ns: 'COMMON' })}
+                label={t('nameLabel', { ns: 'common' })}
                 required={true}
                 errorMessage={validation.errors.name}
                 onChange={(_event, name) => setModel({ ...model, name })}
                 value={model.name} />
             <TextField
                 className={styles.inputField}
-                label={t('descriptionLabel', { ns: 'COMMON' })}
+                label={t('descriptionLabel', { ns: 'common' })}
                 multiline={true}
                 errorMessage={validation.errors.description}
                 onChange={(_event, description) => setModel({ ...model, description })}
@@ -78,7 +78,7 @@ export const CreateCustomerForm = ({ initialModel = { key: '', name: '', descrip
                 onChange={(_event, opt) => setModel({ ...model, icon: opt.key as string })} />
             <PrimaryButton
                 styles={{ root: { marginTop: 16 } }}
-                text={t('add', { ns: 'COMMON' })}
+                text={t('add', { ns: 'common' })}
                 iconProps={{ iconName: 'CirclePlus' }}
                 onClick={onFormSubmit}
                 disabled={loading || !!message} />

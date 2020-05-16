@@ -23,7 +23,7 @@ import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD'
  * @category Timesheet
  */
 export const Timesheet = () => {
-    const { t } = useTranslation(['timesheet', 'COMMON'])
+    const { t } = useTranslation(['timesheet', 'common'])
     const { user } = React.useContext(AppContext)
     const history = useHistory()
     const [state, dispatch] = React.useReducer(reducer, {

@@ -8,7 +8,7 @@ import { IDurationColumnProps } from './IDurationColumnProps'
  * @category Timesheet
  */
 export const DurationColumn = ({ row, column }: IDurationColumnProps) => {
-    const { t } = useTranslation('COMMON')
+    const { t } = useTranslation('common')
     const style = { ...value<any>(column, 'data.style', {}) }
 
     if (row.label === t('sumLabel')) style.fontWeight = 500
