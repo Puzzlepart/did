@@ -7,6 +7,8 @@ class SubscriptionService {
    * Get the subscription for the specified tenant id 
    * 
    * Returns null if there's no active subscription
+   * 
+   * @param tenantId Tenant ID
    */
   async getSubscription(tenantId) {
     try {

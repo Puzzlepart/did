@@ -70,6 +70,5 @@ module.exports = graphql(req => ({
       subscription: new SubscriptionService()
     },
     user: req.user,
-    tenantId: req.user.tenantId,
   }
 }))
