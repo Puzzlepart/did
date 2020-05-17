@@ -37,7 +37,7 @@ export interface IUserMessageProps extends IMessageBarProps {
     containerStyle?: React.CSSProperties;
 
     /**
-     * To flex the message center, speficy a fixed height
+     * To flex the message center, speficy a min height
      */
     fixedCenter?: number;
 }

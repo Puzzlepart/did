@@ -19,7 +19,7 @@ export const UserMessage = (props: IUserMessageProps) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            height: props.fixedCenter,
+            minHeight: props.fixedCenter,
         }
     }
 
