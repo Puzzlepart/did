@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Link, NavLink } from 'react-router-dom';
 import styles from './Navigation.module.scss';
 import { UserMenu } from './UserMenu';
+import { Icon } from 'office-ui-fabric-react/lib/Icon';
 
 export const Navigation = () => {
     const { t } = useTranslation('NAVIGATION');
@@ -17,19 +18,44 @@ export const Navigation = () => {
                 </Link>
                 <ul className={styles.nav} hidden={!user}>
                     <li className={styles.navItem}>
-                        <NavLink to='/timesheet' {...navLinkProps}>{t('timesheet')}</NavLink>
+                        <NavLink to='/timesheet' {...navLinkProps}>
+                            <Icon iconName={'FabricUserFolder'} className={styles.navIcon} />
+                            <span className={styles.navText}>
+                                {t('timesheet')}
+                            </span>
+                        </NavLink>
                     </li>
                     <li className={styles.navItem}>
-                        <NavLink to='/customers' {...navLinkProps}>{t('customers')}</NavLink>
+                        <NavLink to='/customers' {...navLinkProps}>
+                            <Icon iconName={'FabricUserFolder'} className={styles.navIcon} />
+                            <span className={styles.navText}>
+                                {t('customers')}
+                            </span>
+                        </NavLink>
                     </li>
                     <li className={styles.navItem}>
-                        <NavLink to='/projects' {...navLinkProps}>{t('projects')}</NavLink>
+                        <NavLink to='/projects' {...navLinkProps}>
+                            <Icon iconName={'FabricUserFolder'} className={styles.navIcon} />
+                            <span className={styles.navText}>
+                                {t('projects')}
+                            </span>
+                        </NavLink>
                     </li>
                     <li className={styles.navItem}>
-                        <NavLink to='/reports' {...navLinkProps}>{t('reports')}</NavLink>
+                        <NavLink to='/reports' {...navLinkProps}>
+                            <Icon iconName={'FabricUserFolder'} className={styles.navIcon} />
+                            <span className={styles.navText}>
+                                {t('reports')}
+                            </span>
+                        </NavLink>
                     </li>
                     <li className={styles.navItem}>
-                        <NavLink to='/admin' {...navLinkProps}>{t('admin')}</NavLink>
+                        <NavLink to='/admin' {...navLinkProps}>
+                            <Icon iconName={'FabricUserFolder'} className={styles.navIcon} />
+                            <span className={styles.navText}>
+                                {t('admin')}
+                            </span>
+                        </NavLink>
                     </li>
                 </ul>
                 <UserMenu />
