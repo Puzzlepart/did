@@ -1,34 +1,34 @@
-const { formatDate, getMonthIndex, getWeek, startOfMonth, endOfMonth, getPeriod } = require('../../../utils')
+const utils = require('../../../utils')
 
 /**
  * Get periods between specified dates
  * 
- * @param startDateTime
- * @param endDateTime
- * @param locale
+ * @param startDateTime Start date time in ISO format
+ * @param endDateTime End date time in ISO format
+ * @param locale User locale for moment formatting
  */
 function getPeriods(startDateTime, endDateTime, locale) {
-    const week = getWeek(startDateTime)
-    const startMonthIdx = getMonthIndex(startDateTime)
-    const endMonthIdx = getMonthIndex(endDateTime)
+    const week = utils.getWeek(startDateTime)
+    const startMonthIdx = utils.getMonthIndex(startDateTime)
+    const endMonthIdx = utils.getMonthIndex(endDateTime)
     const isSplit = endMonthIdx !== startMonthIdx
 
     let periods = [{
-        id: getPeriod(startDateTime),
+        id: utils.getPeriod(startDateTime),
         week,
-        month: formatDate(startDateTime, 'MMMM', locale),
+        month: utils.formatDate(startDateTime, 'MMMM', locale),
         startDateTime,
         endDateTime: isSplit
-            ? endOfMonth(startDateTime).toISOString()
+            ? utils.endOfMonth(startDateTime).toISOString()
             : endDateTime,
     }]
 
     if (isSplit) {
         periods.push({
-            id: getPeriod(endDateTime),
+            id: utils.getPeriod(endDateTime),
             week,
-            month: formatDate(endDateTime, 'MMMM', locale),
-            startDateTime: startOfMonth(endDateTime).toISOString(),
+            month: utils.formatDate(endDateTime, 'MMMM', locale),
+            startDateTime: utils.startOfMonth(endDateTime).toISOString(),
             endDateTime: endDateTime,
         })
     }
