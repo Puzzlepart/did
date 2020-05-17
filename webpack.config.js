@@ -1,11 +1,10 @@
-require('dotenv').config();
-const path = require('path');
-const webpack = require('webpack');
-const src = path.resolve(__dirname, 'client/');
-const pkg = require('./package.json');
-const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
+require('dotenv').config()
+const path = require('path')
+const src = path.resolve(__dirname, 'client/')
+const pkg = require('./package.json')
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
 
@@ -67,7 +66,6 @@ let config = {
         new MomentLocalesPlugin({ localesToKeep: ['en-gb', 'nb'] }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
-        new CompressionPlugin(),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'views/index_template.hbs'),
             filename: path.resolve(__dirname, 'views/index.hbs'),
@@ -79,23 +77,16 @@ let config = {
 
 switch (mode) {
     case 'development': {
-        config.stats = 'errors-only';
+        config.stats = 'errors-only'
+        config.watch = true
+        config.watchOptions = { aggregateTimeout: 200 }
     }
         break;
     case 'production': {
-        config.stats = {
-            chunks: false,
-            assets: false,
-            colors: false,
-            timings: true,
-            errors: true,
-            warnings: false,
-            errorDetails: true,
-            logging: 'error',
-            loggingTrace: false,
-            modules: false,
-            performance: false
-        }
+        config.stats = 'errors-only'
+        config.plugins.push(
+            new CompressionPlugin(),
+        )
     }
         break;
 }
