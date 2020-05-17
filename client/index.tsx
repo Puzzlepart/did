@@ -14,12 +14,11 @@ import { client } from './graphql'
 import './i18n'
 import './_global.scss'
 
-initializeIcons();
+initializeIcons()
 
-(async () => {
-    const container = document.getElementById('app')
-    try {
-        const { data } = await client.query<{ currentUser: any }>({ query: GET_CURRENT_USER })
+client.query<{ currentUser: any }>({ query: GET_CURRENT_USER })
+    .then(({ data }) => {
+        const container = document.getElementById('app')
         const context: IAppContext = { user: data.currentUser }
         context.user.userLanguage = context.user.userLanguage || 'en-GB'
 
@@ -31,5 +30,4 @@ initializeIcons();
                 <App {...context} />
             </ApolloProvider>
         ), container)
-    } catch (error) {}
-})()
+    })
