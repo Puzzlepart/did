@@ -11,7 +11,7 @@ const typeDef = `
     input LabelInput  {
         id: String
         name: String!
-        description: String!
+        description: String
         color: String!
         icon: String
     }
@@ -32,7 +32,7 @@ async function labels(_obj, _variables, { services: { storage: StorageService } 
     return labels
 }
 
-async function addLabel(_obj, { label }, { services: { storage: StorageService } }) {
+async function addLabel(_obj, { label }, { user, services: { storage: StorageService } }) {
     try {
         await StorageService.addLabel(label, user.profile.oid)
         return { success: true, error: null }

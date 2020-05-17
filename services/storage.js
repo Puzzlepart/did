@@ -12,7 +12,9 @@ class StorageService {
 
     async getLabels() {
         const query = tableUtil.createQuery(1000, undefined)
-        const { entries } = await tableUtil.queryTable('Labels', query, {})
+        const { entries } = await tableUtil.queryTable('Labels', query, {
+            RowKey: 'id'
+        })
         return entries
     }
 
