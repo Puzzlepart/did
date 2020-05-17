@@ -37,6 +37,11 @@ class GraphService {
     return client
   }
 
+  /**
+   * Create Outlook category
+   * 
+   * @param category Category
+   */
   async createOutlookCategory(category) {
     try {
       log('Querying Graph /me/outlook/masterCategories')
@@ -58,7 +63,7 @@ class GraphService {
   }
 
   /**
-   * Get  categories
+   * Get Outlook categories
    */
   async getOutlookCategories() {
     try {
@@ -123,9 +128,5 @@ class GraphService {
     }
   }
 }
-
-
-
-
 
 module.exports = GraphService
