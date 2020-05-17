@@ -64,8 +64,6 @@ let config = {
     },
     plugins: [
         new MomentLocalesPlugin({ localesToKeep: ['en-gb', 'nb'] }),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoEmitOnErrorsPlugin(),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'views/index_template.hbs'),
             filename: path.resolve(__dirname, 'views/index.hbs'),
