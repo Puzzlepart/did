@@ -19,7 +19,7 @@ export interface ITimeEntry {
     startDateTime: string;
     endDateTime: string;
     day: string;
-    isManualMatch?: boolean;
+    manualMatch?: boolean;
     isIgnored?: boolean;
     error?: Error;
 }

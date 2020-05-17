@@ -23,7 +23,7 @@ const typeDef = `
     input TimeEntryInput {
         id: String!
         projectId: String!
-        isManualMatch: Boolean
+        manualMatch: Boolean
     }
 
     extend type Query {

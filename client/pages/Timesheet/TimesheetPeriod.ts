@@ -8,13 +8,13 @@ import { capitalize } from 'underscore.string'
 import dateUtils, { moment } from 'utils/date'
 
 export interface ITimesheetPeriod {
-    id?: string;
-    week?: number;
-    month?: string;
-    startDateTime?: string;
-    endDateTime?: string;
-    confirmed?: boolean;
-    events?: ITimeEntry[];
+    id: string;
+    week: number;
+    month: string;
+    startDateTime: string;
+    endDateTime: string;
+    confirmed: boolean;
+    events: ITimeEntry[];
 }
 
 /**
@@ -46,7 +46,6 @@ export class TimesheetPeriod {
         this._uiIgnoredEventsStorageKey = `did365_ui_ignored_events_${this.id}`
         this.ignoredEvents = this._localStorage.get(this._uiIgnoredEventsStorageKey) || []
         this._manualMatches = this._localStorage.get(this._uiMatchedEventsStorageKey) || {}
-
     }
 
     public get id() {
@@ -72,12 +71,12 @@ export class TimesheetPeriod {
      */
     private _checkManualMatch(event: ITimeEntry) {
         let manualMatch = this._manualMatches[event.id]
-        if (event.isManualMatch && !manualMatch) {
-            event.isManualMatch = false
+        if (event.manualMatch && !manualMatch) {
+            event.manualMatch = false
             event.project = event.customer = null
         }
         if (!!manualMatch) {
-            event.isManualMatch = true
+            event.manualMatch = true
             event.project = manualMatch
             event.customer = manualMatch.customer
         }
@@ -180,26 +179,30 @@ export class TimesheetPeriod {
     }
 
     /**
-     * Get matched events with properties {id}, {projectId} and {isManualMatch}
+     * Get matched events with properties id, projectId and manualMatch
      */
-    public get matchedEvents() {
+    private get matchedEvents() {
         const events = [...this.events]
             .filter(event => !!event.project)
             .map(event => ({
                 id: event.id,
                 projectId: event.project.id,
-                isManualMatch: event.isManualMatch,
+                manualMatch: event.manualMatch,
             }))
         return events
     }
 
     /**
-     * Get scope for the period
+     * Get data for the period
+     * 
+     * Returns the id, startDateTime, endDateTime and matchedEvents
      */
-    public get scope() {
+    public get data() {
         return {
+            id: this.id,
             startDateTime: this._startDateTime.toISOString(),
-            endDateTime: this._endDateTime.toISOString()
+            endDateTime: this._endDateTime.toISOString(),
+            matchedEvents: this.matchedEvents,
         }
     }
 

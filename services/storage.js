@@ -306,9 +306,10 @@ class StorageService {
     /**
      * Delete entries to table TimeEntries
      * 
+     * @param periodId Period ID
      * @param timeentries Collection of time entries
      */
-    async addTimeEntries(timeentries) {
+    async addTimeEntries(periodId, timeentries) {
         let totalDuration = 0
         const { string, datetime, double, int, boolean } = tableUtil.entGen()
         const entities = timeentries.map(({ entry, event, user, }) => {
@@ -329,9 +330,9 @@ class StorageService {
                 WebLink: string(event.webLink),
                 WeekNumber: int(week),
                 MonthNumber: int(monthIdx),
-                PeriodId: string(`${week}_${monthIdx}`),
+                PeriodId: string(periodId),
                 Year: int(getYear(event.startDateTime)),
-                ManualMatch: boolean(entry.isManualMatch),
+                ManualMatch: boolean(entry.manualMatch),
             }
         })
         const batch = tableUtil.createBatch()
@@ -343,15 +344,14 @@ class StorageService {
     /**
      * Delete the user entries from table TimeEntries
      * 
+     * @param period Period
      * @param resourceId ID of the resource
-     * @param startDateTime Start datetime
-     * @param endDateTime End datetime
      */
-    async deleteUserTimeEntries(resourceId, startDateTime, endDateTime) {
+    async deleteUserTimeEntries(period, resourceId) {
         const entities = await this.getTimeEntries({
             resourceId,
-            startDateTime,
-            endDateTime,
+            startDateTime: period.startDateTime,
+            endDateTime: period.endDateTime,
         }, { noParse: true })
         const batch = tableUtil.createBatch()
         entities.forEach(entity => batch.deleteEntity(entity))
@@ -400,17 +400,17 @@ class StorageService {
     /**
      * Removed the entry for the period in table ConfirmedPeriods
      * 
+     * @param periodId The period ID
      * @param resourceId ID of the resource
-     * @param period The period
      */
-    async removeConfirmedPeriod(resourceId, period) {
+    async removeConfirmedPeriod(periodId, resourceId) {
         const { string } = tableUtil.entGen()
         try {
             const result = await tableUtil.deleteEntity(
                 'ConfirmedPeriods',
                 {
                     PartitionKey: string(resourceId),
-                    RowKey: string(period),
+                    RowKey: string(periodId),
                 }
             )
             return result

@@ -71,7 +71,7 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
                         </div>
                     </div>
                     {!isEmpty(event.project.labels) && <Icon iconName='Tag' className={styles.labelIcon} />}
-                    {(event.isManualMatch && !selectedPeriod.confirmed) && (
+                    {(event.manualMatch && !selectedPeriod.confirmed) && (
                         <ClearManualMatchButton
                             onClick={() => dispatch({
                                 type: 'CLEAR_MANUAL_MATCH',

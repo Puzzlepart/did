@@ -35,17 +35,33 @@ const typeDef = `
     confirmed: Boolean
 	confirmedDuration: Float!
   }
+
+  input EventInput {
+    id: String!
+    projectId: String!
+    manualMatch: Boolean
+  }
+
+  input TimesheetPeriodInput {
+	id: String!
+	startDateTime: String!
+    endDateTime: String!
+    matchedEvents: [EventInput]
+  }
   
   extend type Query {
     timesheet(startDateTime: String!, endDateTime: String!, dateFormat: String!, locale: String!): [TimesheetPeriod]!
   } 
 
   extend type Mutation {
-    confirmPeriod(entries: [TimeEntryInput!], startDateTime: String!, endDateTime: String!): BaseResult!
-	unconfirmPeriod(startDateTime: String!, endDateTime: String!): BaseResult!
+    confirmPeriod(entries: [TimeEntryInput!], period: TimesheetPeriodInput!): BaseResult!
+	unconfirmPeriod(period: TimesheetPeriodInput!): BaseResult!
   }
 `
 
+/**
+ * Query: Get timesheet
+ */
 async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale }, { user, services: { graph: GraphService, storage: StorageService } }) {
     let periods = getPeriods(startDateTime, endDateTime, locale)
 
@@ -93,22 +109,24 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale 
     return periods
 }
 
-async function confirmPeriod(_obj, { entries, startDateTime, endDateTime }, { user, services: { graph: GraphService, storage: StorageService } }) {
+/**
+ * Mutation: Confirm period
+ */
+async function confirmPeriod(_obj, { period }, { user, services: { graph: GraphService, storage: StorageService } }) {
     try {
-        const period = `${getWeek(startDateTime)}_${getMonthIndex(startDateTime)}`
         let hours = 0;
-        if (entries.length > 0) {
-            const calendarView = await GraphService.getEvents(startDateTime, endDateTime)
+        if (period.matchedEvents.length > 0) {
+            const calendarView = await GraphService.getEvents(period.startDateTime, period.endDateTime)
 
-            let timeentries = entries.map(entry => {
+            let timeentries = period.matchedEvents.map(entry => {
                 const event = find(calendarView, e => e.id === entry.id)
                 if (!event) return
                 return { user, entry, event }
             }).filter(entry => entry)
 
-            hours = await StorageService.addTimeEntries(timeentries)
+            hours = await StorageService.addTimeEntries(period.id, timeentries)
         }
-        await StorageService.addConfirmedPeriod(user.profile.oid, period, hours)
+        await StorageService.addConfirmedPeriod(user.profile.oid, period.id, hours)
         return { success: true, error: null }
     } catch (error) {
         console.log(error)
@@ -116,12 +134,14 @@ async function confirmPeriod(_obj, { entries, startDateTime, endDateTime }, { us
     }
 }
 
-async function unconfirmPeriod(_obj, { startDateTime, endDateTime }, { user, services: { storage: StorageService } }) {
+/**
+ * Mutation: Unconfirm period
+ */
+async function unconfirmPeriod(_obj, { period }, { user, services: { storage: StorageService } }) {
     try {
-        const period = `${getWeek(startDateTime)}_${getMonthIndex(startDateTime)}`
         await Promise.all([
-            StorageService.deleteUserTimeEntries(user.profile.oid, startDateTime, endDateTime),
-            StorageService.removeConfirmedPeriod(user.profile.oid, period)
+            StorageService.deleteUserTimeEntries(period, user.profile.oid),
+            StorageService.removeConfirmedPeriod(period.id, user.profile.oid)
         ])
         return { success: true, error: null }
     } catch (error) {

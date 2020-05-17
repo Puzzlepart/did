@@ -52,12 +52,12 @@ export const Timesheet = () => {
 
     const onConfirmPeriod = () => {
         dispatch({ type: 'CONFIRMING_PERIOD', payload: { t } })
-        confirmPeriod({ variables: { ...state.selectedPeriod.scope, entries: state.selectedPeriod.matchedEvents } }).then(query.refetch)
+        confirmPeriod({ variables: { period: state.selectedPeriod.data } }).then(query.refetch)
     }
 
     const onUnconfirmPeriod = () => {
         dispatch({ type: 'UNCONFIRMING_PERIOD', payload: { t } })
-        unconfirmPeriod({ variables: state.selectedPeriod.scope }).then(query.refetch)
+        unconfirmPeriod({ variables: { period: state.selectedPeriod.data } }).then(query.refetch)
     }
 
     const contextValue: ITimesheetContext = React.useMemo(() => ({

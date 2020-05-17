@@ -22,6 +22,16 @@ module.exports = {
     },
 
     /**
+     * Get period id for the date
+     * 
+     * @param {*} date Date
+     */
+    getPeriod: (date) => {
+        let d = moment(date)
+        return [d.isoWeek(), d.month() + 1, d.year()].join('_')
+    },
+
+    /**
      * Get week for the specified date
      * 
      * @param {*} date Date

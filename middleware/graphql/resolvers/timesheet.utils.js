@@ -1,4 +1,4 @@
-const { formatDate, getMonthIndex, getWeek, startOfMonth, endOfMonth } = require('../../../utils')
+const { formatDate, getMonthIndex, getWeek, startOfMonth, endOfMonth, getPeriod } = require('../../../utils')
 
 /**
  * Get periods between specified dates
@@ -14,7 +14,7 @@ function getPeriods(startDateTime, endDateTime, locale) {
     const isSplit = endMonthIdx !== startMonthIdx
 
     let periods = [{
-        id: `${week}_${startMonthIdx}`,
+        id: getPeriod(startDateTime),
         week,
         month: formatDate(startDateTime, 'MMMM', locale),
         startDateTime,
@@ -25,7 +25,7 @@ function getPeriods(startDateTime, endDateTime, locale) {
 
     if (isSplit) {
         periods.push({
-            id: `${week}_${endMonthIdx}`,
+            id: getPeriod(endDateTime),
             week,
             month: formatDate(endDateTime, 'MMMM', locale),
             startDateTime: startOfMonth(endDateTime).toISOString(),
