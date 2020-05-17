@@ -1,9 +1,9 @@
-import { TFunction } from 'i18next';
-import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react/lib/Button';
-import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
-import * as React from 'react';
-import { ITimesheetContext } from '../TimesheetContext';
-import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS';
+import { TFunction } from 'i18next'
+import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react/lib/Button'
+import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
+import * as React from 'react'
+import { ITimesheetContext } from '../TimesheetContext'
+import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS'
 
 export const goToCurrentWeek = ({ scope, dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
     key: 'goToCurrentWeek',
@@ -12,7 +12,7 @@ export const goToCurrentWeek = ({ scope, dispatch }: ITimesheetContext, t: TFunc
     onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: new Date().toISOString() }),
     disabled: scope.isCurrentWeek,
     title: t('goToCurrentWeek'),
-});
+})
 
 export const goToPrevWeek = ({ dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
     key: 'goToPrevWeek',
@@ -20,7 +20,7 @@ export const goToPrevWeek = ({ dispatch }: ITimesheetContext, t: TFunction): ICo
     iconProps: { iconName: 'Back', ...ACTIONBAR_ICON_PROPS },
     onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: { amount: -1, unit: 'week' } }),
     title: t('goToPrevWeek')
-});
+})
 
 export const goToNextWeek = ({ dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
     key: 'goToNextWeek',
@@ -28,7 +28,7 @@ export const goToNextWeek = ({ dispatch }: ITimesheetContext, t: TFunction): ICo
     iconProps: { iconName: 'Forward', ...ACTIONBAR_ICON_PROPS },
     onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: { amount: 1, unit: 'week' } }),
     title: t('goToNextWeek'),
-});
+})
 
 export const CHANGE_PERIOD = ({ periods, loading, selectedPeriod, dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem[] => {
     if (periods.length === 1) {
@@ -54,8 +54,8 @@ export const CHANGE_PERIOD = ({ periods, loading, selectedPeriod, dispatch }: IT
                 styles={{ root: { height: 44, marginLeft: 4 } }}
                 checked={period.id === selectedPeriod.id} />
         ),
-    }));
-};
+    }))
+}
 
 export const CONFIRM_ACTIONS = (context: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
     key: 'CONFIRM_HOURS',
@@ -76,4 +76,4 @@ export const CONFIRM_ACTIONS = (context: ITimesheetContext, t: TFunction): ICont
             onClick={context.onConfirmPeriod}
             text={t('confirmHoursText')}
             styles={{ root: { height: 44, marginLeft: 4 } }} />
-});
+})

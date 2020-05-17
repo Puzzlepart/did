@@ -1,44 +1,44 @@
-import { useMutation, useQuery } from '@apollo/react-hooks';
-import { EntityLabel } from 'components/EntityLabel';
-import EventList from 'components/EventList';
-import { UserMessage } from 'components/UserMessage';
-import { IBaseResult } from 'graphql';
-import { IOutlookCategory } from 'interfaces';
-import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
-import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
-import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
-import * as React from 'react';
-import { useTranslation } from 'react-i18next';
-import * as excel from 'utils/exportExcel';
-import { generateColumn as col } from 'utils/generateColumn';
-import columns from './columns';
-import { CREATE_OUTLOOK_CATEGORY } from './CREATE_OUTLOOK_CATEGORY';
-import { IProjectDetailsProps } from './IProjectDetailsProps';
-import styles from './ProjectDetails.module.scss';
-import PROJECT_TIME_ENTRIES from './PROJECT_TIME_ENTRIES';
+import { useMutation, useQuery } from '@apollo/react-hooks'
+import { EntityLabel } from 'components/EntityLabel'
+import EventList from 'components/EventList'
+import { UserMessage } from 'components/UserMessage'
+import { IBaseResult } from 'graphql'
+import { IOutlookCategory } from 'interfaces'
+import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
+import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
+import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
+import * as React from 'react'
+import { useTranslation } from 'react-i18next'
+import * as excel from 'utils/exportExcel'
+import { generateColumn as col } from 'utils/generateColumn'
+import columns from './columns'
+import { CREATE_OUTLOOK_CATEGORY } from './CREATE_OUTLOOK_CATEGORY'
+import { IProjectDetailsProps } from './IProjectDetailsProps'
+import styles from './ProjectDetails.module.scss'
+import PROJECT_TIME_ENTRIES from './PROJECT_TIME_ENTRIES'
 
 /**
  * @category Projects
  */
 export const ProjectDetails = (props: IProjectDetailsProps) => {
-    const { t } = useTranslation(['projects', 'COMMON']);
-    const [project, setProject] = React.useState({ ...props.project });
-    const { loading, error, data } = useQuery<{ timeentries: any[] }>(PROJECT_TIME_ENTRIES, { variables: { projectId: props.project.id } });
-    const [createOutlookCategory] = useMutation<{ result: IBaseResult }, { category: IOutlookCategory }>(CREATE_OUTLOOK_CATEGORY);
+    const { t } = useTranslation(['projects', 'COMMON'])
+    const [project, setProject] = React.useState({ ...props.project })
+    const { loading, error, data } = useQuery<{ timeentries: any[] }>(PROJECT_TIME_ENTRIES, { variables: { projectId: props.project.id } })
+    const [createOutlookCategory] = useMutation<{ result: IBaseResult }, { category: IOutlookCategory }>(CREATE_OUTLOOK_CATEGORY)
 
-    React.useEffect(() => setProject({ ...props.project }), [props.project]);
+    React.useEffect(() => setProject({ ...props.project }), [props.project])
 
-    const timeentries = data ? data.timeentries : [];
+    const timeentries = data ? data.timeentries : []
 
     async function onExportExcel() {
-        const key = project.id.replace(/\s+/g, '-').toUpperCase();
+        const key = project.id.replace(/\s+/g, '-').toUpperCase()
         await excel.exportExcel(
             timeentries,
             {
 
                 columns: columns(t),
                 fileName: `TimeEntries-${key}-${new Date().toDateString().split(' ').join('-')}.xlsx`,
-            });
+            })
     }
 
     /**
@@ -47,9 +47,9 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
      * @param {string} color Color for the category (randomized if not specified)
      */
     async function onCreateCategory(color: string = 'preset' + Math.floor(Math.random() * Math.floor(25))) {
-        const { data: { result } } = await createOutlookCategory({ variables: { category: { displayName: project.key.toString(), color } } });
+        const { data: { result } } = await createOutlookCategory({ variables: { category: { displayName: project.key.toString(), color } } })
         if (result.success) {
-            setProject({ ...project, outlookCategory: JSON.parse(result.data) });
+            setProject({ ...project, outlookCategory: JSON.parse(result.data) })
         }
     }
 
@@ -116,5 +116,5 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                 )}
             </div>
         </div >
-    );
-};
+    )
+}

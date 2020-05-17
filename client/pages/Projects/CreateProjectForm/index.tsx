@@ -1,51 +1,51 @@
-import { useMutation } from '@apollo/react-hooks';
-import { IconPicker, SearchCustomer, useMessage, UserMessage } from 'components';
-import { PrimaryButton } from 'office-ui-fabric-react/lib/Button';
-import { Label } from 'office-ui-fabric-react/lib/Label';
-import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
-import { TextField } from 'office-ui-fabric-react/lib/TextField';
-import * as React from 'react';
-import { useTranslation } from 'react-i18next';
-import format from 'string-format';
-import styles from './CreateProjectForm.module.scss';
-import CREATE_PROJECT from './CREATE_PROJECT';
-import { ICreateProjectFormModel } from './ICreateProjectFormModel';
-import { ICreateProjectFormValidation } from './ICreateProjectFormValidation';
+import { useMutation } from '@apollo/react-hooks'
+import { IconPicker, SearchCustomer, useMessage, UserMessage } from 'components'
+import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
+import { Label } from 'office-ui-fabric-react/lib/Label'
+import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
+import { TextField } from 'office-ui-fabric-react/lib/TextField'
+import * as React from 'react'
+import { useTranslation } from 'react-i18next'
+import format from 'string-format'
+import styles from './CreateProjectForm.module.scss'
+import CREATE_PROJECT from './CREATE_PROJECT'
+import { ICreateProjectFormModel } from './ICreateProjectFormModel'
+import { ICreateProjectFormValidation } from './ICreateProjectFormValidation'
 
-const initialModel = { customerKey: '', projectKey: '', name: '', description: '', icon: 'Page' };
+const initialModel = { customerKey: '', projectKey: '', name: '', description: '', icon: 'Page' }
 
 /**
  * @category Projects
  */
 export const CreateProjectForm = () => {
-    const { t } = useTranslation(['projects', 'COMMON']);
-    const [validation, setValidation] = React.useState<ICreateProjectFormValidation>({ errors: {}, invalid: true });
-    const [message, setMessage] = useMessage();
-    const [model, setModel] = React.useState<ICreateProjectFormModel>(initialModel);
-    const [addProject, { loading }] = useMutation<any, ICreateProjectFormModel>(CREATE_PROJECT);
+    const { t } = useTranslation(['projects', 'COMMON'])
+    const [validation, setValidation] = React.useState<ICreateProjectFormValidation>({ errors: {}, invalid: true })
+    const [message, setMessage] = useMessage()
+    const [model, setModel] = React.useState<ICreateProjectFormModel>(initialModel)
+    const [addProject, { loading }] = useMutation<any, ICreateProjectFormModel>(CREATE_PROJECT)
 
     const validateForm = (): ICreateProjectFormValidation => {
-        const errors: { [key: string]: string } = {};
-        if (!model.customerKey) errors.customerKey = '';
+        const errors: { [key: string]: string } = {}
+        if (!model.customerKey) errors.customerKey = ''
         if (model.name.length < 2) errors.name = t('nameFormValidationText')
-        if (!(/(^[A-ZÆØÅ0-9]{3,8}$)/gm).test(model.projectKey)) errors.projectKey = t('keyFormValidationText');
-        return { errors, invalid: Object.keys(errors).length > 0 };
+        if (!(/(^[A-ZÆØÅ0-9]{3,8}$)/gm).test(model.projectKey)) errors.projectKey = t('keyFormValidationText')
+        return { errors, invalid: Object.keys(errors).length > 0 }
     }
 
     const onFormSubmit = async () => {
-        const _validation = validateForm();
+        const _validation = validateForm()
         if (_validation.invalid) {
-            setValidation(_validation);
-            return;
+            setValidation(_validation)
+            return
         }
-        setValidation({ errors: {}, invalid: false });
-        const { data: { result } } = await addProject({ variables: model });
+        setValidation({ errors: {}, invalid: false })
+        const { data: { result } } = await addProject({ variables: model })
         if (result.success) {
             setMessage({ text: format(t('createSuccess'), model.name), type: MessageBarType.success })
         } else {
-            setMessage({ text: result.error.message, type: MessageBarType.error });
+            setMessage({ text: result.error.message, type: MessageBarType.error })
         }
-        setModel(initialModel);
+        setModel(initialModel)
     }
 
     return (
@@ -92,5 +92,5 @@ export const CreateProjectForm = () => {
                 onClick={onFormSubmit}
                 disabled={loading || !!message} />
         </div>
-    );
+    )
 }

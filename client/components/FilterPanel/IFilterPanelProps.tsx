@@ -1,5 +1,5 @@
-import { IPanelProps } from 'office-ui-fabric-react/lib/Panel';
-import { BaseFilter, IFilter } from './Filters';
+import { IPanelProps } from 'office-ui-fabric-react/lib/Panel'
+import { BaseFilter, IFilter } from './Filters'
 
 /**
  * @category FilterPanel

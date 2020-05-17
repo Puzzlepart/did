@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import { Admin } from './Admin';
+import * as React from 'react'
+import { Route, Switch, useRouteMatch } from 'react-router-dom'
+import { Admin } from './Admin'
 
 /**
  * @ignore
  */
 const _ = () => {
-    const match = useRouteMatch();
+    const match = useRouteMatch()
     return (
         <Switch>
             <Route path={`${match.path}/:view/:year`}>
@@ -19,7 +19,7 @@ const _ = () => {
                 <Admin />
             </Route>
         </Switch>
-    );
+    )
 }
 
-export default _;
+export default _

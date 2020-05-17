@@ -1,50 +1,50 @@
-import { useMutation } from '@apollo/react-hooks';
-import { IconPicker, UserMessage } from 'components';
-import { PrimaryButton } from 'office-ui-fabric-react/lib/Button';
-import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
-import { TextField } from 'office-ui-fabric-react/lib/TextField';
-import * as React from 'react';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import format from 'string-format';
-import styles from './CreateCustomerForm.module.scss';
-import CREATE_CUSTOMER from './CREATE_CUSTOMER';
-import { ICreateCustomerFormModel } from './ICreateCustomerFormModel';
-import { ICreateCustomerFormProps } from './ICreateCustomerFormProps';
-import { ICreateCustomerFormValidation } from './ICreateCustomerFormValidation';
+import { useMutation } from '@apollo/react-hooks'
+import { IconPicker, UserMessage } from 'components'
+import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
+import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
+import { TextField } from 'office-ui-fabric-react/lib/TextField'
+import * as React from 'react'
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import format from 'string-format'
+import styles from './CreateCustomerForm.module.scss'
+import CREATE_CUSTOMER from './CREATE_CUSTOMER'
+import { ICreateCustomerFormModel } from './ICreateCustomerFormModel'
+import { ICreateCustomerFormProps } from './ICreateCustomerFormProps'
+import { ICreateCustomerFormValidation } from './ICreateCustomerFormValidation'
 
 /**
  * @category Customers
  */
 export const CreateCustomerForm = ({ initialModel = { key: '', name: '', description: '', icon: 'Page' } }: ICreateCustomerFormProps) => {
-    const { t } = useTranslation(['customers', 'COMMON']);
-    const [validation, setValidation] = useState<ICreateCustomerFormValidation>({ errors: {}, invalid: true });
-    const [message, setMessage] = useState<{ text: string; type: MessageBarType }>(null);
-    const [model, setModel] = useState<ICreateCustomerFormModel>(initialModel);
-    const [addCustomer, { loading }] = useMutation(CREATE_CUSTOMER);
+    const { t } = useTranslation(['customers', 'COMMON'])
+    const [validation, setValidation] = useState<ICreateCustomerFormValidation>({ errors: {}, invalid: true })
+    const [message, setMessage] = useState<{ text: string; type: MessageBarType }>(null)
+    const [model, setModel] = useState<ICreateCustomerFormModel>(initialModel)
+    const [addCustomer, { loading }] = useMutation(CREATE_CUSTOMER)
 
     const validateForm = (): ICreateCustomerFormValidation => {
-        const errors: { [key: string]: string } = {};
-        if (model.name.length < 2) errors.name = t('nameFormValidationText');
-        if (!(/(^[A-ZÆØÅ0-9]{3,8}$)/gm).test(model.key)) errors.key = t('keyFormValidationText');
-        return { errors, invalid: Object.keys(errors).length > 0 };
+        const errors: { [key: string]: string } = {}
+        if (model.name.length < 2) errors.name = t('nameFormValidationText')
+        if (!(/(^[A-ZÆØÅ0-9]{3,8}$)/gm).test(model.key)) errors.key = t('keyFormValidationText')
+        return { errors, invalid: Object.keys(errors).length > 0 }
     }
 
     const onFormSubmit = async () => {
-        const _validation = validateForm();
+        const _validation = validateForm()
         if (_validation.invalid) {
-            setValidation(_validation);
-            return;
+            setValidation(_validation)
+            return
         }
-        setValidation({ errors: {}, invalid: false });
-        const { data: { result } } = await addCustomer({ variables: model });
+        setValidation({ errors: {}, invalid: false })
+        const { data: { result } } = await addCustomer({ variables: model })
         if (result.success) {
-            setMessage({ text: format(t('createSuccess'), model.name), type: MessageBarType.success });
+            setMessage({ text: format(t('createSuccess'), model.name), type: MessageBarType.success })
         } else {
-            setMessage({ text: result.error.message, type: MessageBarType.error });
+            setMessage({ text: result.error.message, type: MessageBarType.error })
         }
-        setModel(initialModel);
-        window.setTimeout(() => setMessage(null), 5000);
+        setModel(initialModel)
+        window.setTimeout(() => setMessage(null), 5000)
     }
 
     return (
@@ -83,5 +83,5 @@ export const CreateCustomerForm = ({ initialModel = { key: '', name: '', descrip
                 onClick={onFormSubmit}
                 disabled={loading || !!message} />
         </div>
-    );
+    )
 }

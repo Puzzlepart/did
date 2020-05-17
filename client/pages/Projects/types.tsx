@@ -1,5 +1,5 @@
-import gql from 'graphql-tag';
-import { IProject } from 'interfaces';
+import gql from 'graphql-tag'
+import { IProject } from 'interfaces'
 
 /**
  * {@docCategory Projects}
@@ -42,4 +42,4 @@ export const GET_PROJECTS = gql`
             color
         }
     }
-`;
+`

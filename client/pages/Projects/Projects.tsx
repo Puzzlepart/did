@@ -1,38 +1,38 @@
-import { useQuery } from '@apollo/react-hooks';
-import { UserMessage } from 'components/UserMessage';
-import { value as value } from 'helpers';
-import { IOutlookCategory, IProject } from 'interfaces';
-import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList';
-import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
-import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
-import { CreateProjectForm } from 'pages/Projects/CreateProjectForm';
-import * as React from 'react';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
-import _ from 'underscore';
-import { ProjectDetails } from './ProjectDetails';
-import ProjectList from './ProjectList';
-import { GET_PROJECTS, IGetProjectsData } from './types';
+import { useQuery } from '@apollo/react-hooks'
+import { UserMessage } from 'components/UserMessage'
+import { value as value } from 'helpers'
+import { IOutlookCategory, IProject } from 'interfaces'
+import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
+import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
+import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
+import { CreateProjectForm } from 'pages/Projects/CreateProjectForm'
+import * as React from 'react'
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useParams } from 'react-router-dom'
+import _ from 'underscore'
+import { ProjectDetails } from './ProjectDetails'
+import ProjectList from './ProjectList'
+import { GET_PROJECTS, IGetProjectsData } from './types'
 
 /**
  * @category Projects
  */
 export const Projects = () => {
-    const { t } = useTranslation(['projects', 'COMMON']);
-    const params = useParams<{ key: string }>();
-    const [selected, setSelected] = useState<IProject>(null);
-    const { loading, error, data } = useQuery<IGetProjectsData>(GET_PROJECTS, { variables: { sortBy: 'name' }, fetchPolicy: 'cache-first' });
+    const { t } = useTranslation(['projects', 'COMMON'])
+    const params = useParams<{ key: string }>()
+    const [selected, setSelected] = useState<IProject>(null)
+    const { loading, error, data } = useQuery<IGetProjectsData>(GET_PROJECTS, { variables: { sortBy: 'name' }, fetchPolicy: 'cache-first' })
 
-    const outlookCategories = value<IOutlookCategory[]>(data, 'outlookCategories', []);
+    const outlookCategories = value<IOutlookCategory[]>(data, 'outlookCategories', [])
     const projects = value<IProject[]>(data, 'projects', []).map(p => ({ ...p, outlookCategory: _.find(outlookCategories, c => c.displayName === p.key) }))
 
     React.useEffect(() => {
         if (!selected && params.key) {
-            const _selected = _.find(projects, p => p.id === params.key.toUpperCase());
-            setSelected(_selected);
+            const _selected = _.find(projects, p => p.id === params.key.toUpperCase())
+            setSelected(_selected)
         }
-    }, [params.key, projects]);
+    }, [params.key, projects])
 
     return (
         <Pivot styles={{ itemContainer: { paddingTop: 10 } }}>
@@ -94,8 +94,8 @@ export const Projects = () => {
                 <CreateProjectForm />
             </PivotItem>
         </Pivot >
-    );
+    )
 }
 
-export { ProjectList, GET_PROJECTS };
+export { ProjectList, GET_PROJECTS }
 

@@ -1,12 +1,12 @@
 
-import * as helpers from 'helpers';
-import { ITimeEntry } from 'interfaces';
-import * as React from 'react';
-import dateUtils from 'utils/date';
-import { generateColumn as col } from 'utils/generateColumn';
-import { IColumn } from '../List';
-import { DurationDisplay } from './DurationDisplay';
-import { IEventListProps } from './types';
+import * as helpers from 'helpers'
+import { ITimeEntry } from 'interfaces'
+import * as React from 'react'
+import dateUtils from 'utils/date'
+import { generateColumn as col } from 'utils/generateColumn'
+import { IColumn } from '../List'
+import { DurationDisplay } from './DurationDisplay'
+import { IEventListProps } from './types'
 
 /**
  * Get sizing for column
@@ -22,7 +22,7 @@ function getSizing(props: IEventListProps, fieldName: string, defMinWidth: numbe
     return {
         minWidth: helpers.value(props, `columnWidths.${fieldName}`, defMinWidth),
         maxWidth: helpers.value(props, `columnWidths.${fieldName}`, defMaxWidth),
-    };
+    }
 }
 /**
  * Title column
@@ -38,7 +38,7 @@ export const Title = (props: IEventListProps, name: string, fieldName = 'title')
     name,
     { ...getSizing(props, fieldName, 320, 400) },
     (event: ITimeEntry) => <a href={event.webLink} target='_blank' rel='noopener noreferrer' className='truncate' title={event.title}>{event.title}</a>,
-);
+)
 
 
 /**
@@ -61,7 +61,7 @@ export const Time = (props: IEventListProps, name: string, fieldName = 'time'): 
             </span>
         )
     }
-);
+)
 
 /**
  * Duration column
@@ -77,4 +77,4 @@ export const Duration = (props: IEventListProps, name: string, fieldName = 'dura
     name,
     { ...getSizing(props, fieldName, 75, 75) },
     (event: ITimeEntry) => <DurationDisplay minutes={event.durationMinutes} />
-);
+)

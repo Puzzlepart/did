@@ -1,40 +1,40 @@
-import { useMutation } from '@apollo/react-hooks';
-import { EntityLabel } from 'components/EntityLabel';
-import { IEntityLabel } from 'interfaces/IEntityLabel';
-import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react/lib/Button';
-import { Label } from 'office-ui-fabric-react/lib/Label';
-import { Modal } from 'office-ui-fabric-react/lib/Modal';
-import { TextField } from 'office-ui-fabric-react/lib/TextField';
-import * as React from 'react';
-import SketchPicker from 'react-color/lib/components/sketch/Sketch';
-import { useTranslation } from 'react-i18next';
-import { omit } from 'underscore';
-import validator from 'validator';
-import { ADD_LABEL, UPDATE_LABEL } from '../types';
-import styles from './LabelForm.module.scss';
-import { ILabelFormProps } from './types';
+import { useMutation } from '@apollo/react-hooks'
+import { EntityLabel } from 'components/EntityLabel'
+import { IEntityLabel } from 'interfaces/IEntityLabel'
+import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react/lib/Button'
+import { Label } from 'office-ui-fabric-react/lib/Label'
+import { Modal } from 'office-ui-fabric-react/lib/Modal'
+import { TextField } from 'office-ui-fabric-react/lib/TextField'
+import * as React from 'react'
+import SketchPicker from 'react-color/lib/components/sketch/Sketch'
+import { useTranslation } from 'react-i18next'
+import { omit } from 'underscore'
+import validator from 'validator'
+import { ADD_LABEL, UPDATE_LABEL } from '../types'
+import styles from './LabelForm.module.scss'
+import { ILabelFormProps } from './types'
 
 /**
  * @category LabelForm
  */
 export const LabelForm = (props: ILabelFormProps) => {
-    const { t } = useTranslation(['COMMON', 'admin']);
+    const { t } = useTranslation(['COMMON', 'admin'])
     const [label, setLabel] = React.useState<IEntityLabel>(props.label || {
         name: '',
         description: '',
         color: '#F8E71C',
-    });
-    const [colorPickerVisible, setColorPickerVisible] = React.useState<boolean>(false);
-    const [addLabel] = useMutation(ADD_LABEL);
-    const [updateLabel] = useMutation(UPDATE_LABEL);
+    })
+    const [colorPickerVisible, setColorPickerVisible] = React.useState<boolean>(false)
+    const [addLabel] = useMutation(ADD_LABEL)
+    const [updateLabel] = useMutation(UPDATE_LABEL)
 
     const onSave = async () => {
-        if (props.label) await updateLabel({ variables: { label: omit(label, '__typename') } });
-        else await addLabel({ variables: { label: omit(label, '__typename') } });
-        props.onSave(label);
+        if (props.label) await updateLabel({ variables: { label: omit(label, '__typename') } })
+        else await addLabel({ variables: { label: omit(label, '__typename') } })
+        props.onSave(label)
     }
 
-    const isFormValid = (): boolean => !validator.isEmpty(label.name) && !validator.isEmpty(label.color);
+    const isFormValid = (): boolean => !validator.isEmpty(label.name) && !validator.isEmpty(label.color)
 
     return (
         <Modal
@@ -91,8 +91,8 @@ export const LabelForm = (props: ILabelFormProps) => {
                 disabled={!isFormValid()}
                 onClick={onSave} />
         </Modal>
-    );
+    )
 }
 
-export { ILabelFormProps };
+export { ILabelFormProps }
 

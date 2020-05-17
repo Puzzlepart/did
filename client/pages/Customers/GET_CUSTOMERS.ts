@@ -1,6 +1,6 @@
 
-import gql from 'graphql-tag';
-import { ICustomer } from 'interfaces/ICustomer';
+import gql from 'graphql-tag'
+import { ICustomer } from 'interfaces/ICustomer'
 
 /**
  * {@docCategory Customers}
@@ -24,4 +24,4 @@ export default gql`
         icon
         inactive
     }
-}`;
+}`

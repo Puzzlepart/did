@@ -1,31 +1,31 @@
-import { useQuery } from '@apollo/react-hooks';
-import { BaseFilter, FilterPanel, IFilter, MonthFilter, ResourceFilter, UserMessage, WeekFilter, YearFilter } from 'components';
-import List from 'components/List';
-import { value as value } from 'helpers';
-import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
-import * as React from 'react';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { exportExcel } from 'utils/exportExcel';
-import columns from './columns';
-import TIME_ENTRIES from './TIME_ENTRIES';
+import { useQuery } from '@apollo/react-hooks'
+import { BaseFilter, FilterPanel, IFilter, MonthFilter, ResourceFilter, UserMessage, WeekFilter, YearFilter } from 'components'
+import List from 'components/List'
+import { value as value } from 'helpers'
+import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
+import * as React from 'react'
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { exportExcel } from 'utils/exportExcel'
+import columns from './columns'
+import TIME_ENTRIES from './TIME_ENTRIES'
 
 /**
  * @category Reports
  */
 export const Reports = () => {
-    const { t } = useTranslation(['COMMON', 'reports']);
+    const { t } = useTranslation(['COMMON', 'reports'])
     const filters: BaseFilter[] = [
         new WeekFilter('weekNumber', t('weekNumberLabel')),
         new MonthFilter('month', t('monthLabel')),
         new YearFilter('yearNumber', t('yearLabel')),
         new ResourceFilter('resourceName', t('employeeLabel')),
     ]
-    const [filterPanelOpen, setFilterPanelOpen] = useState<boolean>(undefined);
-    const [subset, setSubset] = useState<any[]>(undefined);
-    const { loading, error, data } = useQuery<{ timeentries: any[] }>(TIME_ENTRIES, { fetchPolicy: 'cache-first' });
+    const [filterPanelOpen, setFilterPanelOpen] = useState<boolean>(undefined)
+    const [subset, setSubset] = useState<any[]>(undefined)
+    const { loading, error, data } = useQuery<{ timeentries: any[] }>(TIME_ENTRIES, { fetchPolicy: 'cache-first' })
 
-    const timeentries = data ? data.timeentries : [];
+    const timeentries = data ? data.timeentries : []
 
 
     const onExportExcel = () => exportExcel(
@@ -34,7 +34,7 @@ export const Reports = () => {
             columns: columns(t),
             fileName: `TimeEntries-${new Date().toDateString().split(' ').join('-')}.xlsx`,
         }
-    );
+    )
 
     /**
      * On filterr updated in FilterPanel
@@ -44,11 +44,11 @@ export const Reports = () => {
     const onFilterUpdated = (filters: IFilter[]) => {
         const _entries = timeentries.filter(entry => {
             return filters.filter(f => {
-                const selectedKeys = f.selected.map(s => s.key);
-                return selectedKeys.indexOf(value(entry, f.key, '')) !== -1;
-            }).length === filters.length;
-        });
-        setSubset(_entries);
+                const selectedKeys = f.selected.map(s => s.key)
+                return selectedKeys.indexOf(value(entry, f.key, '')) !== -1
+            }).length === filters.length
+        })
+        setSubset(_entries)
     }
 
 
@@ -56,7 +56,7 @@ export const Reports = () => {
         <ProgressIndicator
             label={t('generatingReportLabel', { ns: 'reports' })}
             description={t('generatingReportDescription', { ns: 'reports' })} />
-    );
+    )
 
     return (
         <div>
@@ -95,5 +95,5 @@ export const Reports = () => {
                 onDismiss={() => setFilterPanelOpen(false)}
                 onFilterUpdated={onFilterUpdated} />
         </div>
-    );
+    )
 }

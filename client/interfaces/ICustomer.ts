@@ -1,4 +1,4 @@
-import { IObjectWithKey } from 'office-ui-fabric-react/lib/DetailsList';
+import { IObjectWithKey } from 'office-ui-fabric-react/lib/DetailsList'
 
 /**
  * @category Common

@@ -1,5 +1,5 @@
 
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 /**
  * @ignore
@@ -68,4 +68,4 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!, $lo
     confirmedDuration
   }
 }
-`;
+`

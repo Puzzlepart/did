@@ -1,11 +1,11 @@
-import { EntityLabel } from 'components/EntityLabel';
-import { TFunction } from 'i18next';
-import { IProject } from 'interfaces';
-import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
-import { Icon } from 'office-ui-fabric-react/lib/Icon';
-import * as React from 'react';
-import { Link } from 'react-router-dom';
-import { generateColumn as col } from 'utils/generateColumn';
+import { EntityLabel } from 'components/EntityLabel'
+import { TFunction } from 'i18next'
+import { IProject } from 'interfaces'
+import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import * as React from 'react'
+import { Link } from 'react-router-dom'
+import { generateColumn as col } from 'utils/generateColumn'
 
 
 /**
@@ -28,9 +28,9 @@ export default (hideColumns: string[], t: TFunction): IColumn[] => ([
                         title={t('inactiveText')}
                         iconName='Warning'
                         styles={{ root: { fontSize: 16, color: '#ffbf00' } }} />
-                );
+                )
             }
-            return <Icon iconName={project.icon || 'Page'} styles={{ root: { fontSize: 16 } }} />;
+            return <Icon iconName={project.icon || 'Page'} styles={{ root: { fontSize: 16 } }} />
         },
     ),
     col(
@@ -49,8 +49,8 @@ export default (hideColumns: string[], t: TFunction): IColumn[] => ([
         'Customer',
         { maxWidth: 220 },
         (project: IProject) => {
-            if (!project.customer) return null;
-            return <Link to={`/customers/${project.customer.id}`}>{project.customer.name}</Link>;
+            if (!project.customer) return null
+            return <Link to={`/customers/${project.customer.id}`}>{project.customer.name}</Link>
         }
     ),
     col(
