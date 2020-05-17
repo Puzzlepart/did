@@ -11,7 +11,7 @@ class SubscriptionService {
   async getSubscription(tenantId) {
     try {
       tableUtil.tableService = createTableService(process.env.AZURE_STORAGE_CONNECTION_STRING)
-      const query = tableUtil.createQuery(1).where('RowKey eq ?', tenantId)
+      const query = tableUtil.createQuery(1, ['Name', 'ConnectionString']).where('RowKey eq ?', tenantId)
       var { entries } = await tableUtil.queryTable('Subscriptions', query)
       return tableUtil.parseEntity(first(entries))
     } catch (error) {

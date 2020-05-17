@@ -2,8 +2,8 @@ const passport = require('passport')
 const OIDCStrategy = require('passport-azure-ad').OIDCStrategy
 const { USER_NOT_ENROLLED } = require('./errors')
 
-passport.serializeUser((user, done) => { done(null, user) })
-passport.deserializeUser(async (user, done) => { done(null, user) })
+passport.serializeUser((user, done) => done(null, user))
+passport.deserializeUser(async (user, done) => done(null, user))
 
 const strategy = new OIDCStrategy(
     {

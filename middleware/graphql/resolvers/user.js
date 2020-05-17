@@ -31,10 +31,10 @@ async function users(_obj, _args, { services: { storage: StorageService } }) {
     return users
 }
 
-async function currentUser(_obj, _args, { user: { profile }, services: { subscription: SubscriptionService, storage: StorageService } }) {
+async function currentUser(_obj, _args, { user: { id, tenantId, profile }, services: { subscription: SubscriptionService, storage: StorageService } }) {
     const [user, sub] = await Promise.all([
-        StorageService.getUser(profile.oid),
-        SubscriptionService.getSubscription(profile._json.tid)
+        StorageService.getUser(id),
+        SubscriptionService.getSubscription(tenantId)
     ])
     return {
         ...user,

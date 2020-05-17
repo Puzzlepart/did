@@ -76,7 +76,7 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale 
         StorageService.getProjects(),
         StorageService.getCustomers(),
         StorageService.getTimeEntries({
-            resourceId: user.profile.oid,
+            resourceId: user.id,
             startDateTime,
             endDateTime,
         }),
@@ -87,7 +87,7 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale 
 
     for (let i = 0; i < periods.length; i++) {
         let period = periods[i]
-        let confirmed = await StorageService.getConfirmedPeriod(user.profile.oid, period.id)
+        let confirmed = await StorageService.getConfirmedPeriod(user.id, period.id)
         if (confirmed) {
             period.events = timeentries.map(entry => ({
                 ...entry,
@@ -130,7 +130,7 @@ async function confirmPeriod(_obj, { period }, { user, services: { graph: GraphS
 
             hours = await StorageService.addTimeEntries(period.id, timeentries)
         }
-        await StorageService.addConfirmedPeriod(period.id, user.profile.oid, hours)
+        await StorageService.addConfirmedPeriod(period.id, user.id, hours)
         return { success: true, error: null }
     } catch (error) {
         console.log(error)
@@ -146,8 +146,8 @@ async function confirmPeriod(_obj, { period }, { user, services: { graph: GraphS
 async function unconfirmPeriod(_obj, { period }, { user, services: { storage: StorageService } }) {
     try {
         await Promise.all([
-            StorageService.deleteUserTimeEntries(period, user.profile.oid),
-            StorageService.removeConfirmedPeriod(period.id, user.profile.oid)
+            StorageService.deleteUserTimeEntries(period, user.id),
+            StorageService.removeConfirmedPeriod(period.id, user.id)
         ])
         return { success: true, error: null }
     } catch (error) {

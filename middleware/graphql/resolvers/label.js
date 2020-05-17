@@ -34,7 +34,7 @@ async function labels(_obj, _variables, { services: { storage: StorageService } 
 
 async function addLabel(_obj, { label }, { user, services: { storage: StorageService } }) {
     try {
-        await StorageService.addLabel(label, user.profile.oid)
+        await StorageService.addLabel(label, user.id)
         return { success: true, error: null }
     } catch (error) {
         return { success: false, error: omit(error, 'requestId') }

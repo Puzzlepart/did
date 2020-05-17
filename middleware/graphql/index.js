@@ -66,10 +66,10 @@ module.exports = graphql(req => ({
   context: {
     services: {
       graph: new GraphService(req),
-      storage: new StorageService(req.user.profile.subscription),
+      storage: new StorageService(req.user.subscription),
       subscription: new SubscriptionService()
     },
     user: req.user,
-    tenantId: req.user.profile._json.tid,
+    tenantId: req.user.tenantId,
   }
 }))

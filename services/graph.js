@@ -83,8 +83,8 @@ class GraphService {
   /**
    * Get events for the specified period using Microsoft Graph endpoint /me/calendar/calendarView
    *
-   * @param {*} startDateTime  Start time (iso)
-   * @param {*} endDateTime End time (iso)
+   * @param startDateTime Start date time in ISO format
+   * @param endDateTime End date time in ISO format
    */
   async getEvents(startDateTime, endDateTime) {
     try {

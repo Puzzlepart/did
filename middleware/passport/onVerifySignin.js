@@ -14,14 +14,22 @@ async function onVerifySignin(_iss, _sub, profile, _accessToken, _refreshToken, 
         return done(TENANT_NOT_ENROLLED, null)
     }
     log('Subscription found for %s', profile._json.tid)
-    const user = await new StorageService(subscription).getUser(profile.oid)
+    let user = await new StorageService(subscription).getUser(profile.oid)
     if (!user) {
         log('User %s is not registered for %s', profile.oid, subscription.name)
         return done(USER_NOT_ENROLLED, null)
     }
-    profile['email'] = profile._json.preferred_username
-    profile['subscription'] = subscription
-    return done(null, { profile, oauthToken: params })
+    user = {
+        id: profile.oid,
+        tenantId: profile._json.tid,
+        profile: {
+            displayName: profile.displayName,
+            email: profile.email,
+        },
+        subscription,
+        oauthToken: params,
+    }
+    return done(null, user)
 }
 
 module.exports = onVerifySignin

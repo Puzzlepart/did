@@ -320,7 +320,7 @@ class StorageService {
             const duration = getDurationHours(event.startDateTime, event.endDateTime)
             totalDuration += duration
             return {
-                PartitionKey: string(user.profile.oid),
+                PartitionKey: string(user.id),
                 RowKey: string(entry.id),
                 ResourceName: string(user.profile.displayName),
                 Title: string(event.title),

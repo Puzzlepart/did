@@ -36,7 +36,7 @@ async function customers(_obj, _args, { services: { storage: StorageService } })
 
 async function createCustomer(_obj, { customer }, { user, services: { storage: StorageService } }) {
   try {
-    await StorageService.createCustomer(customer, user.profile.oid)
+    await StorageService.createCustomer(customer, user.id)
     return { success: true, error: null }
   } catch (error) {
     return { success: false, error: _.omit(error, 'requestId') }
