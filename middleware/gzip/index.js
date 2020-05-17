@@ -5,7 +5,7 @@ const serveGzipped = contentType => (req, res, next) => {
     const acceptedEncodings = req.acceptsEncodings()
     if (
         acceptedEncodings.indexOf('gzip') === -1
-        || !fs.existsSync(`./public/${req.url}.gz`)
+        || !fs.existsSync(`./public/${req.baseUrl}.gz`)
     ) {
         next()
         return
