@@ -1,4 +1,4 @@
-import { ICreateCustomerFormModel } from './ICreateCustomerFormModel';
+import { ICreateCustomerFormModel } from './ICreateCustomerFormModel'
 
 /**
  * @category Customers

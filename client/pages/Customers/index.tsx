@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import { Customers } from './Customers';
+import * as React from 'react'
+import { Route, Switch, useRouteMatch } from 'react-router-dom'
+import { Customers } from './Customers'
 
 /**
  * @ignore
  */
 const _ = () => {
-    const match = useRouteMatch();
+    const match = useRouteMatch()
     return (
         <Switch>
             <Route path={`${match.path}/:key`}>
@@ -16,7 +16,7 @@ const _ = () => {
                 <Customers />
             </Route>
         </Switch>
-    );
+    )
 }
 
-export default _;
+export default _

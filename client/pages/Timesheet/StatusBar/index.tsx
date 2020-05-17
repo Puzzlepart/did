@@ -1,27 +1,27 @@
 
-import { UserMessage } from 'components/UserMessage';
-import { IUserMessageProps } from 'components/UserMessage/IUserMessageProps';
-import { getDurationDisplay } from 'helpers';
-import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
-import { Shimmer } from 'office-ui-fabric-react/lib/Shimmer';
-import * as React from 'react';
-import { useTranslation } from 'react-i18next';
-import * as format from 'string-format';
-import { TimesheetContext } from '../';
-import styles from './StatusBar.module.scss';
+import { UserMessage } from 'components/UserMessage'
+import { IUserMessageProps } from 'components/UserMessage/IUserMessageProps'
+import { getDurationDisplay } from 'helpers'
+import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
+import { Shimmer } from 'office-ui-fabric-react/lib/Shimmer'
+import * as React from 'react'
+import { useTranslation } from 'react-i18next'
+import * as format from 'string-format'
+import { TimesheetContext } from '../'
+import styles from './StatusBar.module.scss'
 
 /**
  * @category Timesheet
  */
 export const StatusBar = () => {
-    const { t } = useTranslation(['timesheet', 'COMMON']);
-    const { loading, periods, selectedPeriod, dispatch } = React.useContext(TimesheetContext);
+    const { t } = useTranslation(['timesheet', 'COMMON'])
+    const { loading, periods, selectedPeriod, dispatch } = React.useContext(TimesheetContext)
 
     const defaultProps: IUserMessageProps = {
         className: styles.message,
         fixedCenter: 65,
         containerStyle: { padding: '0 4px 0 4px' },
-    };
+    }
 
     return (
         <div className={styles.root}>
@@ -77,5 +77,5 @@ export const StatusBar = () => {
                 </div>
             )}
         </div >
-    );
+    )
 }

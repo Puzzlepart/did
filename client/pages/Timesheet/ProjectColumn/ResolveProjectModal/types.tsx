@@ -1,4 +1,4 @@
-import { ITimeEntry } from 'interfaces';
+import { ITimeEntry } from 'interfaces'
 
 /**
  * @category EventList

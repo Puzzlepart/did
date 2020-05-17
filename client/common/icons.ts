@@ -1714,7 +1714,7 @@ const ICONS = [
     'DecreaseIndentLegacy',
     'IncreaseIndentLegacy',
     'SizeLegacy'
-];
+]
 
 /**
  * Get n icons from a collection of Office UI Fabric Icons
@@ -1722,5 +1722,5 @@ const ICONS = [
  * @param {number} n Number of icons
  */
 export function getIcons(n: number) {
-    return ICONS.sort(() => 0.5 - Math.random()).slice(0, n);
+    return ICONS.sort(() => 0.5 - Math.random()).slice(0, n)
 }

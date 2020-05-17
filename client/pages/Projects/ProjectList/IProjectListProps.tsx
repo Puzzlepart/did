@@ -1,5 +1,5 @@
-import { IListProps } from 'components/List/IListProps';
-import { IProject } from 'interfaces/IProject';
+import { IListProps } from 'components/List/IListProps'
+import { IProject } from 'interfaces/IProject'
 
 /**
  * @category ProjectList

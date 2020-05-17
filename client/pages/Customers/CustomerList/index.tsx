@@ -1,14 +1,14 @@
-import List from 'components/List';
-import { TFunction } from 'i18next';
-import { ICustomer } from 'interfaces/ICustomer';
-import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
-import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
-import { Icon } from 'office-ui-fabric-react/lib/Icon';
-import * as React from 'react';
-import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
-import { generateColumn as col } from 'utils/generateColumn';
-import { ICustomerListProps } from './ICustomerListProps';
+import List from 'components/List'
+import { TFunction } from 'i18next'
+import { ICustomer } from 'interfaces/ICustomer'
+import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox'
+import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import * as React from 'react'
+import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
+import { generateColumn as col } from 'utils/generateColumn'
+import { ICustomerListProps } from './ICustomerListProps'
 
 /**
  * Generate column definitions
@@ -22,9 +22,9 @@ export const columns = (t: TFunction): IColumn[] => ([
         { maxWidth: 35, minWidth: 35 },
         (customer: ICustomer) => {
             if (customer.inactive) {
-                return <Icon title={t('inactiveText')} iconName='Warning' styles={{ root: { fontSize: 16, color: '#ffbf00' } }} />;
+                return <Icon title={t('inactiveText')} iconName='Warning' styles={{ root: { fontSize: 16, color: '#ffbf00' } }} />
             }
-            return <Icon iconName={customer.icon || 'Page'} styles={{ root: { fontSize: 16 } }} />;
+            return <Icon iconName={customer.icon || 'Page'} styles={{ root: { fontSize: 16 } }} />
         },
     ),
     col('key', t('keyLabel'), { maxWidth: 120 }),
@@ -40,8 +40,8 @@ export const columns = (t: TFunction): IColumn[] => ([
  * @category Customers
  */
 export const CustomerList = (props: ICustomerListProps) => {
-    const { t } = useTranslation(['COMMON', 'customers']);
-    const [items, setItems] = React.useState([...props.items]);
+    const { t } = useTranslation(['COMMON', 'customers'])
+    const [items, setItems] = React.useState([...props.items])
 
     /**
      * On toggle inactive
@@ -50,10 +50,10 @@ export const CustomerList = (props: ICustomerListProps) => {
      * @param {boolean} checked Is checked
      */
     const onToggleInactive = (_event: React.MouseEvent<HTMLElement, MouseEvent>, checked?: boolean) => {
-        setItems([...props.items].filter(customer => checked ? true : !customer.inactive));
+        setItems([...props.items].filter(customer => checked ? true : !customer.inactive))
     }
 
-    React.useEffect(() => setItems([...props.items].filter(customer => !customer.inactive)), [props.items]);
+    React.useEffect(() => setItems([...props.items].filter(customer => !customer.inactive)), [props.items])
 
     return (
         <List
@@ -74,5 +74,5 @@ export const CustomerList = (props: ICustomerListProps) => {
                 ],
                 farItems: []
             }} />
-    );
-};
+    )
+}

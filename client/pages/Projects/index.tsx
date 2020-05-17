@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import { Projects } from './Projects';
-export { GET_PROJECTS, ProjectList } from './Projects';
+import * as React from 'react'
+import { Route, Switch, useRouteMatch } from 'react-router-dom'
+import { Projects } from './Projects'
+export { GET_PROJECTS, ProjectList } from './Projects'
 
 /**
  * @ignore
  */
 const _ = () => {
-    const match = useRouteMatch();
+    const match = useRouteMatch()
     return (
         <Switch>
             <Route path={`${match.path}/:key`}>
@@ -17,7 +17,7 @@ const _ = () => {
                 <Projects />
             </Route>
         </Switch>
-    );
+    )
 }
 
-export default _;
+export default _

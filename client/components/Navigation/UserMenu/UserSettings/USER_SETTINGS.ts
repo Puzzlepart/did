@@ -1,5 +1,5 @@
-import { TFunction } from 'i18next';
-import { IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
+import { TFunction } from 'i18next'
+import { IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown'
 
 export interface IUserSetting {
     key: string;
@@ -30,4 +30,4 @@ export const USER_SETTINGS = (t: TFunction) => new Set<IUserSetting>([
         ],
         defaultValue: 'en-GB',
     } as IUserSettingDropdown,
-]);
+])

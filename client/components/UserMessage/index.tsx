@@ -1,10 +1,10 @@
 
-import { IMessageBarStyleProps, IMessageBarStyles, MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
-import { IStyleFunctionOrObject } from 'office-ui-fabric-react/lib/Utilities';
-import * as React from 'react';
-import ReactMarkdown from 'react-markdown/with-html';
-import { IUserMessageProps } from './IUserMessageProps';
-import styles from './UserMessage.module.scss';
+import { IMessageBarStyleProps, IMessageBarStyles, MessageBar } from 'office-ui-fabric-react/lib/MessageBar'
+import { IStyleFunctionOrObject } from 'office-ui-fabric-react/lib/Utilities'
+import * as React from 'react'
+import ReactMarkdown from 'react-markdown/with-html'
+import { IUserMessageProps } from './IUserMessageProps'
+import styles from './UserMessage.module.scss'
 
 /**
  * A component that supports a MessageBar with markdown using react-markdown
@@ -12,7 +12,7 @@ import styles from './UserMessage.module.scss';
  * @category UserMessage
  */
 export const UserMessage = (props: IUserMessageProps) => {
-    const _styles: IStyleFunctionOrObject<IMessageBarStyleProps, IMessageBarStyles> = {};
+    const _styles: IStyleFunctionOrObject<IMessageBarStyleProps, IMessageBarStyles> = {}
 
     if (props.fixedCenter) {
         _styles.root = {
@@ -20,7 +20,7 @@ export const UserMessage = (props: IUserMessageProps) => {
             alignItems: 'center',
             justifyContent: 'center',
             height: props.fixedCenter,
-        };
+        }
     }
 
     return (
@@ -41,8 +41,8 @@ export const UserMessage = (props: IUserMessageProps) => {
                 {props.children && props.children}
             </MessageBar>
         </div>
-    );
+    )
 }
 
-export * from './useMessage';
+export * from './useMessage'
 

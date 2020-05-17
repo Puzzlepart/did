@@ -1,6 +1,6 @@
-import { TFunction } from 'i18next';
-import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
-import { ExcelColumnType } from 'utils/exportExcel';
+import { TFunction } from 'i18next'
+import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
+import { ExcelColumnType } from 'utils/exportExcel'
 
 
 const columns = (t: TFunction): IColumn[] => ([
@@ -48,6 +48,6 @@ const columns = (t: TFunction): IColumn[] => ([
         name: t('employeeLabel'),
         minWidth: 100,
     },
-]);
+])
 
-export default columns;
+export default columns

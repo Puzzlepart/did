@@ -1,13 +1,13 @@
-import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
-import * as React from 'react';
-import styles from './FilterItem.module.scss';
-import { IFilterItemProps } from './IFilterItemProps';
+import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox'
+import * as React from 'react'
+import styles from './FilterItem.module.scss'
+import { IFilterItemProps } from './IFilterItemProps'
 
 /**
  * @category FilterPanel
  */
 export const FilterItem = ({ filter, onFilterUpdated: filterUpdated }: IFilterItemProps) => {
-    const selectedKeys = filter.selected.map(f => f.key);
+    const selectedKeys = filter.selected.map(f => f.key)
     return (
         <div key={filter.key} className={styles.root}>
             <div className={styles.name}>{filter.name}</div>
@@ -21,5 +21,5 @@ export const FilterItem = ({ filter, onFilterUpdated: filterUpdated }: IFilterIt
             ))
             }
         </div >
-    );
+    )
 }

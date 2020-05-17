@@ -1,5 +1,5 @@
-import dateUtils, { moment } from 'utils/date';
-import { ITimesheetParams } from './types';
+import dateUtils, { moment } from 'utils/date'
+import { ITimesheetParams } from './types'
 
 export interface ITimesheetScopeOptions {
     amount: moment.DurationInputArg1;
@@ -21,19 +21,19 @@ export class TimesheetScope {
      * @param {ITimesheetParams | strin} value Init value
      */
     constructor(value?: ITimesheetParams | string) {
-        let start = moment();
+        let start = moment()
         if (value) {
             if (typeof value === 'string') {
-                const startIsValid = !isNaN(Date.parse(value));
-                if (startIsValid) start = moment(value);
+                const startIsValid = !isNaN(Date.parse(value))
+                if (startIsValid) start = moment(value)
             } else {
                 start = moment()
                     .year(parseInt(value.year))
                     .week(parseInt(value.week))
-                    .startOf('isoWeek');
+                    .startOf('isoWeek')
             }
         }
-        this._set(start);
+        this._set(start)
     }
 
     /**
@@ -60,8 +60,8 @@ export class TimesheetScope {
      * Sets the scope
      */
     private _set(start: moment.Moment) {
-        this._startDateTime = dateUtils.startOfWeek(start);
-        this._endDateTime = dateUtils.endOfWeek(start);
+        this._startDateTime = dateUtils.startOfWeek(start)
+        this._endDateTime = dateUtils.endOfWeek(start)
     }
 
     /**
@@ -70,11 +70,11 @@ export class TimesheetScope {
      * @param {ITimesheetScopeOptions} options Options
      */
     public add(options: ITimesheetScopeOptions): TimesheetScope {
-        const start = this._startDateTime.clone();
-        start.add(options.amount, options.unit);
-        const n = new TimesheetScope();
-        n._set(start);
-        return n;
+        const start = this._startDateTime.clone()
+        start.add(options.amount, options.unit)
+        const n = new TimesheetScope()
+        n._set(start)
+        return n
     }
 
     /**
@@ -83,19 +83,19 @@ export class TimesheetScope {
      * @param {number} index Index
      */
     public getDay(index: number) {
-        return this._startDateTime.clone().add(index, 'days' as moment.DurationInputArg2);
+        return this._startDateTime.clone().add(index, 'days' as moment.DurationInputArg2)
     }
 
     public get isCurrentWeek() {
-        return this._startDateTime.week() === moment().week();
+        return this._startDateTime.week() === moment().week()
     }
 
     public weekdays(dateFormat = 'dddd DD') {
-        return dateUtils.getWeekdays(this._startDateTime, dateFormat);
+        return dateUtils.getWeekdays(this._startDateTime, dateFormat)
     }
 
     public get timespan() {
-        return dateUtils.getTimespanString(this._startDateTime, this._endDateTime);
+        return dateUtils.getTimespanString(this._startDateTime, this._endDateTime)
     }
 
     /**
@@ -105,6 +105,6 @@ export class TimesheetScope {
         return [
             this._startDateTime.year(),
             this._startDateTime.week()
-        ].join('/');
+        ].join('/')
     }
 }

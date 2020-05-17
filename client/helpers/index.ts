@@ -1,7 +1,7 @@
-import getValue from 'get-value';
-import { TFunction } from 'i18next';
-import format from 'string-format';
-require('twix');
+import getValue from 'get-value'
+import { TFunction } from 'i18next'
+import format from 'string-format'
+require('twix')
 
 /**
  * Get duration display
@@ -13,15 +13,15 @@ require('twix');
  * @category Helper
  */
 export function getDurationDisplay(minutes: number, hours?: number, t?: TFunction): string {
-    const hrsShortFormat = t ? t('hoursShortFormat', { ns: 'COMMON', defaultValue: undefined }) : '{0}h';
-    const minShortFormat = t ? t('minutesShortFormat', { ns: 'COMMON', defaultValue: undefined }) : '{0}min';
-    const hrs = hours ? Math.floor(hours) : Math.floor(minutes / 60);
-    const mins = hours ? ((hours % 1) * 60) : minutes % 60;
-    const hrsStr = format(hrsShortFormat, hrs);
-    const minStr = format(minShortFormat, mins);;
-    if (mins === 0) return hrsStr;
-    if (hrs === 0) return minStr;
-    return `${hrsStr} ${minStr}`;
+    const hrsShortFormat = t ? t('hoursShortFormat', { ns: 'COMMON', defaultValue: undefined }) : '{0}h'
+    const minShortFormat = t ? t('minutesShortFormat', { ns: 'COMMON', defaultValue: undefined }) : '{0}min'
+    const hrs = hours ? Math.floor(hours) : Math.floor(minutes / 60)
+    const mins = hours ? ((hours % 1) * 60) : minutes % 60
+    const hrsStr = format(hrsShortFormat, hrs)
+    const minStr = format(minShortFormat, mins)
+    if (mins === 0) return hrsStr
+    if (hrs === 0) return minStr
+    return `${hrsStr} ${minStr}`
 }
 
 /**
@@ -32,12 +32,12 @@ export function getDurationDisplay(minutes: number, hours?: number, t?: TFunctio
  * @category Helper
  */
 export function stringToArrayBuffer(str: string): ArrayBuffer {
-    const buf = new ArrayBuffer(str.length);
-    const view = new Uint8Array(buf);
+    const buf = new ArrayBuffer(str.length)
+    const view = new Uint8Array(buf)
     for (let i = 0; i !== str.length; ++i) {
-        view[i] = str.charCodeAt(i) & 0xFF;
+        view[i] = str.charCodeAt(i) & 0xFF
     }
-    return buf;
+    return buf
 }
 
 /**
@@ -55,7 +55,7 @@ export function currencyDisplay(num: number, currency = 'NOK', minimumFractionDi
         currency,
         minimumFractionDigits,
     })
-    return formatter.format(num);
+    return formatter.format(num)
 }
 
 
@@ -69,7 +69,7 @@ export function currencyDisplay(num: number, currency = 'NOK', minimumFractionDi
  * @category Helper
  */
 export function value<T>(obj: any, exp: string, defaultValue?: T): T {
-    return getValue(obj, exp, defaultValue && { default: defaultValue });
+    return getValue(obj, exp, defaultValue && { default: defaultValue })
 }
 
 /**
@@ -81,8 +81,8 @@ export function value<T>(obj: any, exp: string, defaultValue?: T): T {
  */
 export function sortAlphabetically(strArray: string[]): string[] {
     return strArray.sort((a, b) => {
-        if (a > b) return 1;
-        if (a < b) return -1;
-        return 0;
-    });
+        if (a > b) return 1
+        if (a < b) return -1
+        return 0
+    })
 }

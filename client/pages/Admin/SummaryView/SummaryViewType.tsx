@@ -1,5 +1,5 @@
-import { TFunction } from 'i18next';
-import { ISummaryViewType } from './types';
+import { TFunction } from 'i18next'
+import { ISummaryViewType } from './types'
 
 export const getTypes = (t: TFunction): ISummaryViewType[] => ([
     {
@@ -20,4 +20,4 @@ export const getTypes = (t: TFunction): ISummaryViewType[] => ([
         name: t('customer'),
         iconProps: { iconName: 'CustomList' },
     }
-]);
+])

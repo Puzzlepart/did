@@ -1,4 +1,4 @@
-import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList';
+import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 
 /**
  * @category List

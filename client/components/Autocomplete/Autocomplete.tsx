@@ -1,10 +1,10 @@
-import { Callout } from 'office-ui-fabric-react/lib/Callout';
-import { FocusZone, FocusZoneDirection } from 'office-ui-fabric-react/lib/FocusZone';
-import { List } from 'office-ui-fabric-react/lib/List';
-import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
-import * as React from 'react';
-import { IAutocompleteProps, IAutocompleteState, ISuggestionItem } from '.';
-import styles from './Autocomplete.module.scss';
+import { Callout } from 'office-ui-fabric-react/lib/Callout'
+import { FocusZone, FocusZoneDirection } from 'office-ui-fabric-react/lib/FocusZone'
+import { List } from 'office-ui-fabric-react/lib/List'
+import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox'
+import * as React from 'react'
+import { IAutocompleteProps, IAutocompleteState, ISuggestionItem } from '.'
+import styles from './Autocomplete.module.scss'
 
 const KeyCodes = {
   tab: 9 as 9,
@@ -27,20 +27,20 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
   private _containerElement = React.createRef<HTMLDivElement>();
 
   constructor(props: ISearchSuggestionsProps) {
-    super(props);
+    super(props)
     this.state = {
       isSuggestionDisabled: false,
       searchText: '',
-    };
+    }
   }
 
   private handleClick = (item: ISuggestionItem<T>) => {
-    this.props.onSelected(item);
-    this.setState({ searchText: item.displayValue, isSuggestionDisabled: false });
+    this.props.onSelected(item)
+    this.setState({ searchText: item.displayValue, isSuggestionDisabled: false })
   }
 
   public render() {
-    return this.renderSearch();
+    return this.renderSearch()
   }
 
   private renderSearch = () => {
@@ -60,18 +60,18 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
           onChange={(_event, searchText) => {
             searchText.trim() !== ''
               ? this.showSuggestionCallOut()
-              : this.hideSuggestionCallOut();
-            this.setState({ searchText });
+              : this.hideSuggestionCallOut()
+            this.setState({ searchText })
           }}
         />
         {this.renderSuggestions()}
       </div>
-    );
+    )
   }
 
   private onSearch(enteredEntityValue: string) {
-    if (!this.props.searchCallback) return;
-    this.props.searchCallback(enteredEntityValue.trim());
+    if (!this.props.searchCallback) return
+    this.props.searchCallback(enteredEntityValue.trim())
   }
 
   private renderSuggestions = () => {
@@ -91,7 +91,7 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
         isBeakVisible={false}>
         {this.renderSuggestionList()}
       </Callout >
-    );
+    )
   }
 
   private renderSuggestionList = () => {
@@ -103,7 +103,7 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
           items={this.suggestedTagsFiltered(this.props.items)}
           onRenderCell={this.onRenderCell} />
       </FocusZone>
-    );
+    )
   }
 
   private onRenderCell = (item: any) => {
@@ -121,7 +121,7 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
             <div>{item.displayValue}</div>
           </div>
         </div>
-      );
+      )
     } else {
       return (
         <div
@@ -129,49 +129,49 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
           data-is-focusable={true}>
           {item.displayValue}
         </div>
-      );
+      )
     }
   }
 
   private showSuggestionCallOut() {
-    this.setState({ isSuggestionDisabled: true });
+    this.setState({ isSuggestionDisabled: true })
   }
 
   private hideSuggestionCallOut() {
-    this.setState({ isSuggestionDisabled: false });
+    this.setState({ isSuggestionDisabled: false })
   }
 
   private suggestedTagsFiltered = (list: ISuggestionItem<T>[]) => {
-    let suggestedTags = list.filter(tag => tag.searchValue.toLowerCase().includes(this.state.searchText.toLowerCase()));
-    suggestedTags = suggestedTags.sort((a, b) => a.searchValue.localeCompare(b.searchValue));
+    let suggestedTags = list.filter(tag => tag.searchValue.toLowerCase().includes(this.state.searchText.toLowerCase()))
+    suggestedTags = suggestedTags.sort((a, b) => a.searchValue.localeCompare(b.searchValue))
     if (suggestedTags.length === 0) {
       suggestedTags = [{
         key: -1,
         displayValue: this.props.noSuggestionsText,
         searchValue: '',
-      }];
+      }]
     }
-    return suggestedTags;
+    return suggestedTags
   }
 
   protected handleListItemKeyDown = (ev: React.KeyboardEvent<HTMLElement>, item: ISuggestionItem<T>): void => {
-    const keyCode = ev.which;
+    const keyCode = ev.which
     switch (keyCode) {
       case KeyCodes.enter:
-        this.handleClick(item);
-        break;
-      default: return;
+        this.handleClick(item)
+        break
+      default: return
     }
   };
 
   protected onKeyDown = (ev: React.KeyboardEvent<HTMLElement>): void => {
-    const keyCode = ev.which;
+    const keyCode = ev.which
     switch (keyCode) {
       case KeyCodes.down:
-        const el: any = window.document.querySelector('#SearchList');
-        el.focus();
-        break;
-      default: return;
+        const el: any = window.document.querySelector('#SearchList')
+        el.focus()
+        break
+      default: return
     }
   };
 }

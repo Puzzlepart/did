@@ -1,4 +1,4 @@
-import { IIconProps } from 'office-ui-fabric-react/lib/Icon';
+import { IIconProps } from 'office-ui-fabric-react/lib/Icon'
 
 /**
  * @ignore

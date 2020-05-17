@@ -1,4 +1,4 @@
-import { ISubscription } from './ISubscription';
+import { ISubscription } from './ISubscription'
 
 /**
  * @category Common

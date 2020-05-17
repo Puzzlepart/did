@@ -1,10 +1,10 @@
-import { TFunction } from 'i18next';
-import { IColumn } from 'office-ui-fabric-react';
-import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
-import { Slider } from 'office-ui-fabric-react/lib/Slider';
-import React from 'react';
-import * as excelUtils from 'utils/exportExcel';
-import { ISummaryViewContext } from './types';
+import { TFunction } from 'i18next'
+import { IColumn } from 'office-ui-fabric-react'
+import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
+import { Slider } from 'office-ui-fabric-react/lib/Slider'
+import React from 'react'
+import * as excelUtils from 'utils/exportExcel'
+import { ISummaryViewContext } from './types'
 
 export const commandBar = (
     { scope, scopes, types, type, dispatch }: ISummaryViewContext,
@@ -67,9 +67,9 @@ export const commandBar = (
                         {
                             columns,
                             fileName: `Summary-${new Date().toDateString().split(' ').join('-')}.xlsx`,
-                        });
+                        })
                 },
             }
         ],
-    };
+    }
 }

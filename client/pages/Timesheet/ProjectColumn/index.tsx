@@ -1,25 +1,25 @@
 /* eslint-disable react/display-name */
-import { stringIsNullOrEmpty } from '@pnp/common';
-import { EntityLabel } from 'components/EntityLabel';
-import { UserMessage } from 'components/UserMessage';
-import { MessageBarButton } from 'office-ui-fabric-react/lib/Button';
-import { Icon } from 'office-ui-fabric-react/lib/Icon';
-import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
-import { TooltipDelay, TooltipHost } from 'office-ui-fabric-react/lib/Tooltip';
-import * as React from 'react';
-import { useTranslation } from 'react-i18next';
-import { isEmpty } from 'underscore';
-import { withDefaultProps } from 'with-default-props';
-import { TimesheetContext } from '../TimesheetContext';
-import styles from './ProjectColumn.module.scss';
-import { ResolveProjectModal } from './ResolveProjectModal';
-import { IClearManualMatchButtonProps, IProjectColumnProps, IProjectColumnTooltipProps } from './types';
+import { stringIsNullOrEmpty } from '@pnp/common'
+import { EntityLabel } from 'components/EntityLabel'
+import { UserMessage } from 'components/UserMessage'
+import { MessageBarButton } from 'office-ui-fabric-react/lib/Button'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
+import { TooltipDelay, TooltipHost } from 'office-ui-fabric-react/lib/Tooltip'
+import * as React from 'react'
+import { useTranslation } from 'react-i18next'
+import { isEmpty } from 'underscore'
+import { withDefaultProps } from 'with-default-props'
+import { TimesheetContext } from '../TimesheetContext'
+import styles from './ProjectColumn.module.scss'
+import { ResolveProjectModal } from './ResolveProjectModal'
+import { IClearManualMatchButtonProps, IProjectColumnProps, IProjectColumnTooltipProps } from './types'
 
 /**
  * @category Timesheet
  */
 export const ClearManualMatchButton = ({ onClick }: IClearManualMatchButtonProps): JSX.Element => {
-    const { t } = useTranslation('timesheet');
+    const { t } = useTranslation('timesheet')
     return (
         <div
             className={styles.clearButton}
@@ -28,7 +28,7 @@ export const ClearManualMatchButton = ({ onClick }: IClearManualMatchButtonProps
                 <Icon iconName='Cancel' styles={{ root: { fontSize: 14 } }} />
             </span>
         </div>
-    );
+    )
 }
 
 /**
@@ -49,15 +49,15 @@ export const ProjectColumnTooltip = ({ project }: IProjectColumnTooltipProps): J
             )}
             <div className={styles.tag}><span>{project.key}</span></div>
         </div>
-    );
+    )
 }
 
 /**
  * @category Timesheet
  */
 const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
-    const { t } = useTranslation('timesheet');
-    const { dispatch } = React.useContext(TimesheetContext);
+    const { t } = useTranslation('timesheet')
+    const { dispatch } = React.useContext(TimesheetContext)
     if (!event.project) {
         if (event.error) {
             return (
@@ -69,7 +69,7 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
                         iconName='Warning'
                         text={`${t('eventErrorPrefix')} ${event.error.message}`} />
                 </div>
-            );
+            )
         }
         return (
             <div className={styles.root}>
@@ -89,7 +89,7 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
                         </div>
                     } />
             </div>
-        );
+        )
     }
 
     return (
@@ -120,7 +120,7 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
                 </div>
             </div>
         </TooltipHost>
-    );
+    )
 }
 
 export default withDefaultProps(ProjectColumn, {})

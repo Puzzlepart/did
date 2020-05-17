@@ -1,37 +1,37 @@
-import { useMutation, useQuery } from '@apollo/react-hooks';
-import { AppContext } from 'AppContext';
-import { HotkeyModal } from 'components';
-import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
-import React from 'react';
-import { GlobalHotKeys } from 'react-hotkeys';
-import { useTranslation } from 'react-i18next';
-import { useHistory, useParams } from 'react-router-dom';
-import { ActionBar } from './ActionBar';
-import { AllocationView } from './AllocationView';
-import CONFIRM_PERIOD from './CONFIRM_PERIOD';
-import GET_TIMESHEET from './GET_TIMESHEET';
-import hotkeys from './hotkeys';
-import { Overview } from './Overview';
-import { SummaryView } from './SummaryView';
-import styles from './Timesheet.module.scss';
-import { ITimesheetContext, TimesheetContext } from './TimesheetContext';
-import { reducer } from './TimesheetReducer';
-import { ITimesheetParams, TimesheetPeriod, TimesheetScope } from './types';
-import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD';
+import { useMutation, useQuery } from '@apollo/react-hooks'
+import { AppContext } from 'AppContext'
+import { HotkeyModal } from 'components'
+import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
+import React from 'react'
+import { GlobalHotKeys } from 'react-hotkeys'
+import { useTranslation } from 'react-i18next'
+import { useHistory, useParams } from 'react-router-dom'
+import { ActionBar } from './ActionBar'
+import { AllocationView } from './AllocationView'
+import CONFIRM_PERIOD from './CONFIRM_PERIOD'
+import GET_TIMESHEET from './GET_TIMESHEET'
+import hotkeys from './hotkeys'
+import { Overview } from './Overview'
+import { SummaryView } from './SummaryView'
+import styles from './Timesheet.module.scss'
+import { ITimesheetContext, TimesheetContext } from './TimesheetContext'
+import { reducer } from './TimesheetReducer'
+import { ITimesheetParams, TimesheetPeriod, TimesheetScope } from './types'
+import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD'
 
 
 /**
  * @category Timesheet
  */
 export const Timesheet = () => {
-    const { t } = useTranslation(['timesheet', 'COMMON']);
-    const { user } = React.useContext(AppContext);
-    const history = useHistory();
+    const { t } = useTranslation(['timesheet', 'COMMON'])
+    const { user } = React.useContext(AppContext)
+    const history = useHistory()
     const [state, dispatch] = React.useReducer(reducer, {
         periods: [],
         selectedPeriod: new TimesheetPeriod(),
         scope: new TimesheetScope(useParams<ITimesheetParams>()),
-    });
+    })
     const query = useQuery<{ timesheet: TimesheetPeriod[] }>(GET_TIMESHEET, {
         variables: {
             ...state.scope.dateStrings,
@@ -39,26 +39,26 @@ export const Timesheet = () => {
             locale: user.userLanguage,
         },
         fetchPolicy: 'cache-and-network',
-    });
-    const [confirmPeriod] = useMutation<{ entries: any[]; startDateTime: string; endDateTime: string }>(CONFIRM_PERIOD);
-    const [unconfirmPeriod] = useMutation<{ startDateTime: string; endDateTime: string }>(UNCONFIRM_PERIOD);
+    })
+    const [confirmPeriod] = useMutation<{ entries: any[]; startDateTime: string; endDateTime: string }>(CONFIRM_PERIOD)
+    const [unconfirmPeriod] = useMutation<{ startDateTime: string; endDateTime: string }>(UNCONFIRM_PERIOD)
 
     React.useEffect(() => {
-        dispatch({ type: 'DATA_UPDATED', payload: { query, t } });
-    }, [query]);
+        dispatch({ type: 'DATA_UPDATED', payload: { query, t } })
+    }, [query])
 
     React.useEffect(() => {
         history.push(`/timesheet/${state.scope.path}`)
-    }, [state.scope]);
+    }, [state.scope])
 
     const onConfirmPeriod = () => {
-        dispatch({ type: 'CONFIRMING_PERIOD', payload: { t } });
-        confirmPeriod({ variables: { ...state.selectedPeriod.scope, entries: state.selectedPeriod.matchedEvents } }).then(query.refetch);
+        dispatch({ type: 'CONFIRMING_PERIOD', payload: { t } })
+        confirmPeriod({ variables: { ...state.selectedPeriod.scope, entries: state.selectedPeriod.matchedEvents } }).then(query.refetch)
     }
 
     const onUnconfirmPeriod = () => {
-        dispatch({ type: 'UNCONFIRMING_PERIOD', payload: { t } });
-        unconfirmPeriod({ variables: state.selectedPeriod.scope }).then(query.refetch);
+        dispatch({ type: 'UNCONFIRMING_PERIOD', payload: { t } })
+        unconfirmPeriod({ variables: state.selectedPeriod.scope }).then(query.refetch)
     }
 
     const contextValue: ITimesheetContext = React.useMemo(() => ({
@@ -66,9 +66,9 @@ export const Timesheet = () => {
         onConfirmPeriod,
         onUnconfirmPeriod,
         dispatch,
-    }), [state]);
+    }), [state])
 
-    const hotkeysProps = React.useMemo(() => hotkeys(contextValue, t), [contextValue]);
+    const hotkeysProps = React.useMemo(() => hotkeys(contextValue, t), [contextValue])
 
     return (
         <GlobalHotKeys {...hotkeysProps}>
@@ -102,5 +102,5 @@ export const Timesheet = () => {
                 isOpen={state.showHotkeysModal}
                 onDismiss={() => dispatch({ type: 'TOGGLE_SHORTCUTS' })} />
         </GlobalHotKeys>
-    );
+    )
 }

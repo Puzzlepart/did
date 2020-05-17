@@ -1,5 +1,5 @@
 
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 /**
  * @ignore
@@ -17,4 +17,4 @@ export default gql`
       }
     }
   }  
-`;
+`

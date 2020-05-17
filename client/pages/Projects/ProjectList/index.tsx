@@ -1,23 +1,23 @@
-import List from 'components/List';
-import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
-import * as React from 'react';
-import { useTranslation } from 'react-i18next';
-import { withDefaultProps } from 'with-default-props';
-import columns from './columns';
-import { IProjectListProps } from './IProjectListProps';
+import List from 'components/List'
+import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox'
+import * as React from 'react'
+import { useTranslation } from 'react-i18next'
+import { withDefaultProps } from 'with-default-props'
+import columns from './columns'
+import { IProjectListProps } from './IProjectListProps'
 
 /**
  * @category ProjectList
  */
 const ProjectList = (props: IProjectListProps) => {
-    const { t } = useTranslation(['projects', 'COMMON']);
-    const [items, setItems] = React.useState([...props.items]);
+    const { t } = useTranslation(['projects', 'COMMON'])
+    const [items, setItems] = React.useState([...props.items])
 
     const onToggleInactive = (checked?: boolean) => {
-        setItems([...props.items].filter(project => checked ? true : !project.inactive));
+        setItems([...props.items].filter(project => checked ? true : !project.inactive))
     }
 
-    React.useEffect(() => setItems([...props.items].filter(p => !p.inactive)), [props.items]);
+    React.useEffect(() => setItems([...props.items].filter(p => !p.inactive)), [props.items])
 
     return (
         <List
@@ -39,7 +39,7 @@ const ProjectList = (props: IProjectListProps) => {
                 ],
                 farItems: []
             }} />
-    );
+    )
 }
 
 export default withDefaultProps(ProjectList, { hideColumns: [] })

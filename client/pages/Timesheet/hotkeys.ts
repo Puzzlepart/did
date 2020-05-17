@@ -1,6 +1,6 @@
-import { TFunction } from 'i18next';
-import { GlobalHotKeysProps } from 'react-hotkeys';
-import { ITimesheetContext } from './TimesheetContext';
+import { TFunction } from 'i18next'
+import { GlobalHotKeysProps } from 'react-hotkeys'
+import { ITimesheetContext } from './TimesheetContext'
 
 export default (context: ITimesheetContext, t: TFunction): GlobalHotKeysProps => ({
     keyMap: {
@@ -32,4 +32,4 @@ export default (context: ITimesheetContext, t: TFunction): GlobalHotKeysProps =>
         SHOW_SHORTCUTS: () => context.dispatch({ type: 'TOGGLE_SHORTCUTS' }),
     },
     allowChanges: false,
-});
+})
