@@ -61,6 +61,8 @@ const typeDef = `
 
 /**
  * Query: Get timesheet
+ * 
+ * Returns an array of periods (week_month_year)
  */
 async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale }, { user, services: { graph: GraphService, storage: StorageService } }) {
     let periods = getPeriods(startDateTime, endDateTime, locale)
@@ -111,6 +113,8 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale 
 
 /**
  * Mutation: Confirm period
+ * 
+ * Adds matched time entries for the specified period and an entry for the confirmed period
  */
 async function confirmPeriod(_obj, { period }, { user, services: { graph: GraphService, storage: StorageService } }) {
     try {
@@ -126,7 +130,7 @@ async function confirmPeriod(_obj, { period }, { user, services: { graph: GraphS
 
             hours = await StorageService.addTimeEntries(period.id, timeentries)
         }
-        await StorageService.addConfirmedPeriod(user.profile.oid, period.id, hours)
+        await StorageService.addConfirmedPeriod(period.id, user.profile.oid, hours)
         return { success: true, error: null }
     } catch (error) {
         console.log(error)
@@ -136,6 +140,8 @@ async function confirmPeriod(_obj, { period }, { user, services: { graph: GraphS
 
 /**
  * Mutation: Unconfirm period
+ * 
+ * Deletes time entries for the specified period and the entry for the confirmed period
  */
 async function unconfirmPeriod(_obj, { period }, { user, services: { storage: StorageService } }) {
     try {

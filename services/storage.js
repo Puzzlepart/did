@@ -380,17 +380,21 @@ class StorageService {
     /**
      * Add entry for the period to table ConfirmedPeriods
      * 
+     * @param periodId The period ID
      * @param resourceId ID of the resource
-     * @param period The period
      * @param hours Total hours for the train
      */
-    async addConfirmedPeriod(resourceId, period, hours) {
+    async addConfirmedPeriod(periodId, resourceId, hours) {
+        const [week, month, year] = periodId.split('_')
         const { string, double } = tableUtil.entGen()
         const entity = await tableUtil.addEntity(
             'ConfirmedPeriods',
             {
                 PartitionKey: string(resourceId),
-                RowKey: string(period),
+                RowKey: string(periodId),
+                WeekNumber: string(week),
+                MonthNumber: string(month),
+                Year: string(year),
                 Hours: double(hours),
             }
         )
