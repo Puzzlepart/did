@@ -11,9 +11,10 @@
     },
     "scripts": {
         "start": "node ./bin/www",
-        "watch": "concurrently \"webpack && webpack --watch\" \"npm run watchServer\" \"livereload ./public/js -w 1000 -d\"",
+        "watch": "concurrently \"webpack\" \"npm run watchServer\" \"livereload ./public/js -w 300 -d\"",
         "watchServer": "nodemon --ignore client --ignore public --ignore lib ./bin/www",
-        "packageClient": "rimraf ./public/js && webpack",
+        "packageClient": "npm run clean && webpack",
+        "clean": "rimraf ./public/js",
         "lint": "eslint --ext .ts,.tsx ./client --color --fix",
         "makeDoc": "rimraf ./doc && typedoc --options typedoc.json",
         "webpack": "webpack",
@@ -111,7 +112,8 @@
         "validator": "13.0.0",
         "webpack": "4.42.1",
         "webpack-cli": "3.3.11",
-        "with-default-props": "^0.2.1"
+        "with-default-props": "^0.2.1",
+        "rimraf": "3.0.2"
     },
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "2.30.0",
@@ -120,13 +122,9 @@
         "eslint-plugin-react": "7.19.0",
         "livereload": "0.9.1",
         "nodemon": "2.0.3",
-        "onchange": "6.1.0",
-        "rimraf": "3.0.2",
         "typedoc": "^0.17.6",
         "typedoc-neo-theme": "1.0.8",
-        "typedoc-plugin-external-module-name": "3.1.0",
-        "webpack-dev-middleware": "3.7.2",
-        "webpackbar": "4.0.0"
+        "typedoc-plugin-external-module-name": "3.1.0"
     },
     "resolutions": {
         "@babel/preset-env": "7.8.0"
