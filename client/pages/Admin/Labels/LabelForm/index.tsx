@@ -18,7 +18,7 @@ import { ILabelFormProps } from './types'
  * @category LabelForm
  */
 export const LabelForm = (props: ILabelFormProps) => {
-    const { t } = useTranslation(['COMMON', 'admin'])
+    const { t } = useTranslation(['common', 'admin'])
     const [label, setLabel] = React.useState<IEntityLabel>(props.label || {
         name: '',
         description: '',
@@ -87,7 +87,7 @@ export const LabelForm = (props: ILabelFormProps) => {
 
             <PrimaryButton
                 className={styles.saveBtn}
-                text={t('save', { ns: 'COMMON' })}
+                text={t('save', { ns: 'common' })}
                 disabled={!isFormValid()}
                 onClick={onSave} />
         </Modal>

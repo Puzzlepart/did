@@ -5,5 +5,4 @@ export * from './getHash';
 export * from './loadScripts';
 export { default as log } from './log';
 export * from './searchObject';
-export * from './tryParseJson';
 

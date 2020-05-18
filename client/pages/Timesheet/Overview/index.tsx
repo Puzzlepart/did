@@ -1,9 +1,9 @@
 import EventList from 'components/EventList'
-import { getDurationDisplay } from 'helpers'
 import { ITimeEntry } from 'interfaces/ITimeEntry'
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
+import DateUtils from 'utils/date'
 import { generateColumn as col } from 'utils/generateColumn'
 import { TimesheetContext } from '../'
 import ProjectColumn from '../ProjectColumn'
@@ -14,13 +14,8 @@ import { IOverviewProps } from './types'
  * @category Timesheet
  */
 export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
-    const { t } = useTranslation('COMMON')
-    const {
-        loading,
-        selectedPeriod,
-        periods,
-        scope,
-    } = React.useContext(TimesheetContext)
+    const { t } = useTranslation('common')
+    const { loading, selectedPeriod } = React.useContext(TimesheetContext)
     return (
         <>
             <StatusBar />
@@ -28,14 +23,14 @@ export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
             <EventList
                 enableShimmer={!!loading}
                 events={selectedPeriod.events}
-                showEmptyDays={periods.length === 1}
+                showEmptyDays={true}
                 dateFormat={timeFormat}
                 groups={{
                     fieldName: 'date',
-                    groupNames: scope.weekdays(dayFormat),
+                    groupNames: selectedPeriod.weekdays(dayFormat),
                     totalFunc: (items: ITimeEntry[]) => {
-                        const mins = items.reduce((sum, i) => sum = i.durationMinutes, 0)
-                        return ` (${getDurationDisplay(mins, undefined, t)})`
+                        const duration = items.reduce((sum, i) => sum + i.duration, 0)
+                        return ` (${DateUtils.getDurationDisplay(duration, t)})`
                     },
                 }}
                 additionalColumns={[

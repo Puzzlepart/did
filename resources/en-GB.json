@@ -78,7 +78,7 @@
     "generatingReportDescription": "To give you the freshest results, we're generating a report from the latest data...",
     "noEntriesText": "There's no confirmed time entries at this time."
   },
-  "COMMON": {
+  "common": {
     "hours": "Hours",
     "showShortcutsText": "Display keyboard shortcuts",
     "shortcuts": "Shortcuts",
@@ -180,7 +180,7 @@
       "closeButtonAriaLabel": "Close"
     }
   },
-  "NAVIGATION": {
+  "navigation": {
     "timesheet": "Timesheet",
     "customers": "Customers",
     "projects": "Projects",

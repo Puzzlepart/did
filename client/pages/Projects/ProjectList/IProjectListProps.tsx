@@ -1,4 +1,4 @@
-import { IListProps } from 'components/List/IListProps'
+import { IListProps } from 'components/List/types'
 import { IProject } from 'interfaces/IProject'
 
 /**
@@ -8,3 +8,4 @@ export interface IProjectListProps extends IListProps<IProject> {
     renderLink?: boolean;
     hideColumns?: string[];
 }
+

@@ -6,7 +6,7 @@ const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
+const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production'
 
 let config = {
     mode,
@@ -16,7 +16,7 @@ let config = {
     output: {
         path: path.resolve(__dirname, pkg.config.public, 'js'),
         filename: '[name].[hash].js',
-        publicPath: '/js' // correct path prefixing, '/' == '/public'
+        publicPath: '/js'
     },
     optimization: {
         splitChunks: {
@@ -70,8 +70,7 @@ let config = {
             inject: true,
         }),
     ],
-    stats: 'detailed',
-};
+}
 
 switch (mode) {
     case 'development': {
@@ -79,14 +78,14 @@ switch (mode) {
         config.watch = true
         config.watchOptions = { aggregateTimeout: 200 }
     }
-        break;
+        break
     case 'production': {
         config.stats = 'errors-only'
         config.plugins.push(
             new CompressionPlugin(),
         )
     }
-        break;
+        break
 }
 
-module.exports = config;
+module.exports = config

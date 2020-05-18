@@ -32,7 +32,7 @@ export const columns = (t: TFunction): IColumn[] => ([
         'name',
         t('nameLabel'),
         { maxWidth: 300 },
-        (customer: ICustomer) => <Link to={`/customers/${customer.id}`}>{customer.name}</Link>
+        (customer: ICustomer) => <Link to={`/customers/${customer.key}`}>{customer.name}</Link>
     ),
 ])
 
@@ -40,7 +40,7 @@ export const columns = (t: TFunction): IColumn[] => ([
  * @category Customers
  */
 export const CustomerList = (props: ICustomerListProps) => {
-    const { t } = useTranslation(['COMMON', 'customers'])
+    const { t } = useTranslation(['common', 'customers'])
     const [items, setItems] = React.useState([...props.items])
 
     /**

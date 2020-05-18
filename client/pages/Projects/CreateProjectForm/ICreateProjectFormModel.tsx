@@ -2,9 +2,9 @@
  * @category Projects
  */
 export interface ICreateProjectFormModel {
-    customerKey?: string;
-    projectKey?: string;
+    key?: string;
     name?: string;
+    customerKey?: string;
     description?: string;
     icon?: string;
 }

@@ -10,7 +10,7 @@ import { IProjectListProps } from './IProjectListProps'
  * @category ProjectList
  */
 const ProjectList = (props: IProjectListProps) => {
-    const { t } = useTranslation(['projects', 'COMMON'])
+    const { t } = useTranslation(['projects', 'common'])
     const [items, setItems] = React.useState([...props.items])
 
     const onToggleInactive = (checked?: boolean) => {
@@ -32,7 +32,7 @@ const ProjectList = (props: IProjectListProps) => {
                         onRender: () => (
                             <Checkbox
                                 styles={{ root: { margin: '6px 0 0 8px' } }}
-                                label={t('toggleInactiveText', { ns: 'COMMON' })}
+                                label={t('toggleInactiveText', { ns: 'common' })}
                                 onChange={(_event, checked) => onToggleInactive(checked)} />
                         ),
                     }

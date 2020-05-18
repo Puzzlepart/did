@@ -19,7 +19,7 @@ import { GET_PROJECTS, IGetProjectsData } from './types'
  * @category Projects
  */
 export const Projects = () => {
-    const { t } = useTranslation(['projects', 'COMMON'])
+    const { t } = useTranslation(['projects', 'common'])
     const params = useParams<{ key: string }>()
     const [selected, setSelected] = useState<IProject>(null)
     const { loading, error, data } = useQuery<IGetProjectsData>(GET_PROJECTS, { variables: { sortBy: 'name' }, fetchPolicy: 'cache-first' })
@@ -39,7 +39,7 @@ export const Projects = () => {
             <PivotItem
                 itemID='search'
                 itemKey='search'
-                headerText={t('search', { ns: 'COMMON' })}
+                headerText={t('search', { ns: 'common' })}
                 itemIcon='FabricFolderSearch'>
                 {error
                     ? <UserMessage type={MessageBarType.error} text={t('genericErrorText')} />
@@ -64,7 +64,7 @@ export const Projects = () => {
                 headerText={t('myProjectsText')}
                 itemIcon='FabricUserFolder'>
                 {error
-                    ? <UserMessage type={MessageBarType.error} text={t('genericErrorText', { ns: 'COMMON' })} />
+                    ? <UserMessage type={MessageBarType.error} text={t('genericErrorText', { ns: 'common' })} />
                     : (
                         <>
                             <UserMessage
@@ -89,7 +89,7 @@ export const Projects = () => {
             <PivotItem
                 itemID='new'
                 itemKey='new'
-                headerText={t('createNewText', { ns: 'COMMON' })}
+                headerText={t('createNewText', { ns: 'common' })}
                 itemIcon='AddTo'>
                 <CreateProjectForm />
             </PivotItem>

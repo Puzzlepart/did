@@ -4,19 +4,19 @@ import gql from 'graphql-tag'
  * @ignore
  */
 export default gql`
-    query($yearNumber: Int!) {
-        timeentries(yearNumber: $yearNumber, dateFormat: "LL") {
+    query($year: Int!) {
+        timeentries(year: $year) {
             project {
                 id
                 name
             }
-            durationHours
+            duration
             weekNumber
-            yearNumber
+            year
             monthNumber
             resourceName   
             customer {
-                id
+                key
                 name
             }
         }

@@ -1,7 +1,5 @@
 const typeDef = `  
     type Subscription {
-        id: String
-        key: String
         name: String!
     }
 `

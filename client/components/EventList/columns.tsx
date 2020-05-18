@@ -57,7 +57,7 @@ export const Time = (props: IEventListProps, name: string, fieldName = 'time'): 
     (event: ITimeEntry) => {
         return (
             <span>
-                {dateUtils.formatDate(event.startTime, props.dateFormat)} - {dateUtils.formatDate(event.endTime, props.dateFormat)}
+                {dateUtils.formatDate(event.startDateTime, props.dateFormat)} - {dateUtils.formatDate(event.endDateTime, props.dateFormat)}
             </span>
         )
     }
@@ -72,9 +72,9 @@ export const Time = (props: IEventListProps, name: string, fieldName = 'time'): 
  * 
  * @ignore
  */
-export const Duration = (props: IEventListProps, name: string, fieldName = 'durationMinutes'): IColumn => col(
+export const Duration = (props: IEventListProps, name: string, fieldName = 'duration'): IColumn => col(
     fieldName,
     name,
     { ...getSizing(props, fieldName, 75, 75) },
-    (event: ITimeEntry) => <DurationDisplay minutes={event.durationMinutes} />
+    (event: ITimeEntry) => <DurationDisplay duration={event.duration} />
 )

@@ -34,13 +34,13 @@ export default (hideColumns: string[], t: TFunction): IColumn[] => ([
         },
     ),
     col(
-        'key',
-        t('keyLabel', { ns: 'COMMON' }),
+        'id',
+        t('keyLabel', { ns: 'common' }),
         { maxWidth: 120 },
     ),
     col(
         'name',
-        t('nameLabel', { ns: 'COMMON' }),
+        t('nameLabel', { ns: 'common' }),
         { maxWidth: 220 },
         (project: IProject) => <Link to={`/projects/${project.id}`}>{project.name}</Link>
     ),
@@ -50,7 +50,7 @@ export default (hideColumns: string[], t: TFunction): IColumn[] => ([
         { maxWidth: 220 },
         (project: IProject) => {
             if (!project.customer) return null
-            return <Link to={`/customers/${project.customer.id}`}>{project.customer.name}</Link>
+            return <Link to={`/customers/${project.customer.key}`}>{project.customer.name}</Link>
         }
     ),
     col(

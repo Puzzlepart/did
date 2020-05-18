@@ -14,7 +14,7 @@ import { IUserFormModalProps, UserFormModal } from './UserFormModal'
  * @category Admin
  */
 export const Users = () => {
-    const { t } = useTranslation(['COMMON', 'admin'])
+    const { t } = useTranslation(['common', 'admin'])
     const [userForm, setUserForm] = React.useState<IUserFormModalProps>(null)
     const { data, loading, refetch } = useQuery(GET_USERS, { fetchPolicy: 'cache-and-network' })
     const columns = [

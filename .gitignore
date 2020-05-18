@@ -139,3 +139,4 @@ client/**/*js.map
 
 # Documentation
 doc/
+.env copy

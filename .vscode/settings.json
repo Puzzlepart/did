@@ -16,5 +16,6 @@
     "client/**/*.d.ts": true,
     "client/**/*js": true,
     "client/**/*js.map": true
-  }
+  },
+  "javascript.validate.enable": false
 }

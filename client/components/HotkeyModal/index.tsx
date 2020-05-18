@@ -10,7 +10,7 @@ export type IHotkeyModal = GlobalHotKeysProps & IModalProps;
  * @category HotkeyModal
  */
 export const HotkeyModal = (props: IHotkeyModal) => {
-    const { t } = useTranslation('COMMON')
+    const { t } = useTranslation('common')
     return (
         <Modal
             isOpen={props.isOpen}

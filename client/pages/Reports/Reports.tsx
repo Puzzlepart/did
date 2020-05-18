@@ -14,11 +14,11 @@ import TIME_ENTRIES from './TIME_ENTRIES'
  * @category Reports
  */
 export const Reports = () => {
-    const { t } = useTranslation(['COMMON', 'reports'])
+    const { t } = useTranslation(['common', 'reports'])
     const filters: BaseFilter[] = [
         new WeekFilter('weekNumber', t('weekNumberLabel')),
         new MonthFilter('month', t('monthLabel')),
-        new YearFilter('yearNumber', t('yearLabel')),
+        new YearFilter('year', t('yearLabel')),
         new ResourceFilter('resourceName', t('employeeLabel')),
     ]
     const [filterPanelOpen, setFilterPanelOpen] = useState<boolean>(undefined)

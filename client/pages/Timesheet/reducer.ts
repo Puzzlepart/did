@@ -2,16 +2,14 @@ import { value } from 'helpers'
 import { TFunction } from 'i18next'
 import { IProject } from 'interfaces'
 import _ from 'underscore'
-import { TimesheetPeriod } from './TimesheetPeriod'
-import { ITimesheetScopeOptions, TimesheetScope } from './TimesheetScope'
-import { ITimesheetState } from './types'
+import { ITimesheetPeriod, ITimesheetScopeOptions, ITimesheetState, TimesheetPeriod, TimesheetScope } from './types'
 
 export type TimesheetAction =
     {
         type: 'DATA_UPDATED';
         payload: {
             query: {
-                data: { timesheet: TimesheetPeriod[] };
+                data: { timesheet: ITimesheetPeriod[] };
                 loading: boolean;
             };
             t: TFunction;
@@ -34,7 +32,7 @@ export type TimesheetAction =
  * @param {ITimesheetState} state State
  * @param {IAction} action Action
  */
-export const reducer = (state: ITimesheetState, action: TimesheetAction): ITimesheetState => {
+export default (state: ITimesheetState, action: TimesheetAction): ITimesheetState => {
     const t = value<TFunction>(action, 'payload.t')
     const newState = { ...state }
     switch (action.type) {

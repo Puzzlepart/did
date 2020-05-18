@@ -11,7 +11,7 @@ import { IEventListProps } from './types'
  * @category EventList
  */
 const EventList = (props: IEventListProps): JSX.Element => {
-    const { t } = useTranslation('COMMON')
+    const { t } = useTranslation('common')
     const columns = [
         col.Title(props, t('titleLabel')),
         col.Time(props, t('timeLabel')),

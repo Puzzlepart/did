@@ -59,8 +59,8 @@ function generateRows(events: any[], columns: IColumn[]) {
         const projectEvents = events.filter(event => event.project.id === project.id)
         return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
             const sum = [...projectEvents]
-                .filter(event => dateUtils.formatDate(event.startTime, 'L') === col.fieldName)
-                .reduce((sum, event) => sum += event.durationHours, 0)
+                .filter(event => dateUtils.formatDate(event.startDateTime, 'L') === col.fieldName)
+                .reduce((sum, event) => sum += event.duration, 0)
             obj[col.fieldName] = sum
             obj.sum += sum
             return obj
@@ -71,8 +71,8 @@ function generateRows(events: any[], columns: IColumn[]) {
 function generateTotalRow(events: any[], columns: IColumn[], label: string) {
     return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
         const sum = [...events]
-            .filter(event => dateUtils.formatDate(event.startTime, 'L') === col.fieldName)
-            .reduce((sum, event) => sum += event.durationHours, 0)
+            .filter(event => dateUtils.formatDate(event.startDateTime, 'L') === col.fieldName)
+            .reduce((sum, event) => sum += event.duration, 0)
         obj[col.fieldName] = sum
         obj.sum += sum
         return obj
@@ -84,7 +84,7 @@ function generateTotalRow(events: any[], columns: IColumn[], label: string) {
  * @description Generates a summary view of events
  */
 export const SummaryView = () => {
-    const { t } = useTranslation('COMMON')
+    const { t } = useTranslation('common')
     const context = React.useContext(TimesheetContext)
     const columns = createColumns(context.scope)
 

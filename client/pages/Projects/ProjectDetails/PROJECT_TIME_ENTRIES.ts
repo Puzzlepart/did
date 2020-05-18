@@ -7,12 +7,11 @@ export default gql`
     query($projectId: String) {
          timeentries(projectId: $projectId)  {            
             title
-            durationHours
-            durationMinutes
-            startTime
-            endTime
+            duration
+            startDateTime
+            endDateTime
             weekNumber
-            yearNumber
+            year
             resourceName            
         }
     }

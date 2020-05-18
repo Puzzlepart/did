@@ -12,11 +12,10 @@ import CONFIRM_PERIOD from './CONFIRM_PERIOD'
 import GET_TIMESHEET from './GET_TIMESHEET'
 import hotkeys from './hotkeys'
 import { Overview } from './Overview'
+import reducer from './reducer'
 import { SummaryView } from './SummaryView'
 import styles from './Timesheet.module.scss'
-import { ITimesheetContext, TimesheetContext } from './TimesheetContext'
-import { reducer } from './TimesheetReducer'
-import { ITimesheetParams, TimesheetPeriod, TimesheetScope } from './types'
+import { ITimesheetContext, ITimesheetParams, ITimesheetPeriod, TimesheetContext, TimesheetPeriod, TimesheetScope } from './types'
 import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD'
 
 
@@ -24,7 +23,7 @@ import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD'
  * @category Timesheet
  */
 export const Timesheet = () => {
-    const { t } = useTranslation(['timesheet', 'COMMON'])
+    const { t } = useTranslation(['timesheet', 'common'])
     const { user } = React.useContext(AppContext)
     const history = useHistory()
     const [state, dispatch] = React.useReducer(reducer, {
@@ -32,7 +31,7 @@ export const Timesheet = () => {
         selectedPeriod: new TimesheetPeriod(),
         scope: new TimesheetScope(useParams<ITimesheetParams>()),
     })
-    const query = useQuery<{ timesheet: TimesheetPeriod[] }>(GET_TIMESHEET, {
+    const query = useQuery<{ timesheet: ITimesheetPeriod[] }>(GET_TIMESHEET, {
         variables: {
             ...state.scope.dateStrings,
             dateFormat: 'dddd DD',
@@ -53,12 +52,12 @@ export const Timesheet = () => {
 
     const onConfirmPeriod = () => {
         dispatch({ type: 'CONFIRMING_PERIOD', payload: { t } })
-        confirmPeriod({ variables: { ...state.selectedPeriod.scope, entries: state.selectedPeriod.matchedEvents } }).then(query.refetch)
+        confirmPeriod({ variables: { period: state.selectedPeriod.data } }).then(query.refetch)
     }
 
     const onUnconfirmPeriod = () => {
         dispatch({ type: 'UNCONFIRMING_PERIOD', payload: { t } })
-        unconfirmPeriod({ variables: state.selectedPeriod.scope }).then(query.refetch)
+        unconfirmPeriod({ variables: { period: state.selectedPeriod.data } }).then(query.refetch)
     }
 
     const contextValue: ITimesheetContext = React.useMemo(() => ({

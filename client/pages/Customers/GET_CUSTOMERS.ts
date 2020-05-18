@@ -15,7 +15,6 @@ export interface IGetCustomersData {
 export default gql`
 {
     customers {
-        id
         key
         name
         description

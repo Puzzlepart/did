@@ -6,7 +6,7 @@ import styles from './Navigation.module.scss'
 import { UserMenu } from './UserMenu'
 
 export const Navigation = () => {
-    const { t } = useTranslation('NAVIGATION')
+    const { t } = useTranslation('navigation')
     const { user } = React.useContext(AppContext)
     const navLinkProps = { className: styles.navLink, activeClassName: styles.active }
     return (

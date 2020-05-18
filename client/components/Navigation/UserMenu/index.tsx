@@ -7,7 +7,7 @@ import styles from './UserMenu.module.scss'
 import { UserSettings } from './UserSettings'
 
 export const UserMenu = () => {
-    const { t } = useTranslation('COMMON')
+    const { t } = useTranslation('common')
     const { user } = React.useContext(AppContext)
     const [menuTarget, setMenuTarget] = React.useState<Target>(null)
 

@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { IProject } from 'interfaces'
 
 /**
- * {@docCategory Projects}
+ * @ignore
  */
 export interface IGetProjectsData {
     projects: IProject[];
@@ -23,7 +23,7 @@ export const GET_PROJECTS = gql`
             externalSystemURL
             customerKey
             customer {
-                id
+                key
                 name
             }
             labels {

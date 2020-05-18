@@ -21,7 +21,7 @@ import { ISummaryViewContext } from './types'
  * @category Admin
  */
 export const SummaryView = (): JSX.Element => {
-    const { t } = useTranslation(['COMMON', 'admin'])
+    const { t } = useTranslation(['common', 'admin'])
     const scopes = getScopes(t)
     const types = getTypes(t)
 
@@ -34,7 +34,7 @@ export const SummaryView = (): JSX.Element => {
     })
     const { data, loading } = useQuery<{ timeentries: any[] }>(TIME_ENTRIES, {
         fetchPolicy: 'cache-first',
-        variables: { yearNumber: state.year },
+        variables: { year: state.year },
     })
 
     React.useEffect(() => { dispatch({ type: 'DATA_UPDATED', payload: data }) }, [data])

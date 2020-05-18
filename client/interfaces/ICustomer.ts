@@ -1,10 +1,8 @@
-import { IObjectWithKey } from 'office-ui-fabric-react/lib/DetailsList'
-
 /**
  * @category Common
  */
-export interface ICustomer extends IObjectWithKey {
-    id: string;
+export interface ICustomer {
+    key: string;
     name: string;
     description: string;
     webLink: string;
