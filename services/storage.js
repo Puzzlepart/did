@@ -364,14 +364,14 @@ class StorageService {
      * Get entry for the period from table ConfirmedPeriods
      * 
      * @param resourceId ID of the resource
-     * @param period The period
+     * @param periodId The period
      */
-    async getConfirmedPeriod(resourceId, period) {
+    async getConfirmedPeriod(resourceId, periodId) {
         try {
             const entry = await tableUtil.retrieveEntity(
                 'ConfirmedPeriods',
                 resourceId,
-                period
+                periodId
             )
             return tableUtil.parseEntity(entry)
         } catch (error) {
@@ -388,15 +388,15 @@ class StorageService {
      */
     async addConfirmedPeriod(periodId, resourceId, hours) {
         const [week, month, year] = periodId.split('_')
-        const { string, double } = tableUtil.entGen()
+        const { string, double,int } = tableUtil.entGen()
         const entity = await tableUtil.addEntity(
             'ConfirmedPeriods',
             {
                 PartitionKey: string(resourceId),
                 RowKey: string(periodId),
-                WeekNumber: string(week),
-                MonthNumber: string(month),
-                Year: string(year),
+                WeekNumber: int(week),
+                MonthNumber: int(month),
+                Year: int(year),
                 Hours: double(hours),
             }
         )

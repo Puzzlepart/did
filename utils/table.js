@@ -4,6 +4,8 @@ class TableUtil {
     /**
      * Parse an table storage entity
      * 
+     * In the azure table entity we'll find the value in _ and the type in $
+     * 
      * @param {*} result Result
      * @param {*} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
      */
@@ -177,11 +179,8 @@ class TableUtil {
     retrieveEntity(table, partitionKey, rowKey) {
         return new Promise((resolve, reject) => {
             this.tableService.retrieveEntity(table, partitionKey, rowKey, (error, result) => {
-                if (!error) {
-                    return resolve(result)
-                } else {
-                    reject(error)
-                }
+                if (error) reject(error)
+                else return resolve(result)
             })
         })
     }
@@ -195,11 +194,8 @@ class TableUtil {
     addEntity(table, entity) {
         return new Promise((resolve, reject) => {
             this.tableService.insertEntity(table, entity, (error, result) => {
-                if (!error) {
-                    return resolve(result['.metadata'])
-                } else {
-                    reject(error)
-                }
+                if (error) reject(error)
+                else return resolve(result['.metadata'])
             })
         })
     }
@@ -215,19 +211,13 @@ class TableUtil {
         return new Promise((resolve, reject) => {
             if (merge) {
                 this.tableService.insertOrMergeEntity(table, entity, undefined, (error, result) => {
-                    if (!error) {
-                        resolve(result)
-                    } else {
-                        reject(error)
-                    }
+                    if (error) reject(error)
+                    else resolve(result)
                 })
             } else {
                 this.tableService.insertOrReplaceEntity(table, entity, undefined, (error, result) => {
-                    if (!error) {
-                        resolve(result)
-                    } else {
-                        reject(error)
-                    }
+                    if (error) reject(error)
+                    else resolve(result)
                 })
             }
         })
@@ -242,11 +232,8 @@ class TableUtil {
     deleteEntity(table, entity) {
         return new Promise((resolve, reject) => {
             this.tableService.deleteEntity(table, entity, undefined, (error, result) => {
-                if (!error) {
-                    resolve(result)
-                } else {
-                    reject(error)
-                }
+                if (error) reject(error)
+                else resolve(result)
             })
         })
     }
@@ -261,11 +248,8 @@ class TableUtil {
     executeBatch(table, batch) {
         return new Promise((resolve, reject) => {
             this.tableService.executeBatch(table, batch, (error, result) => {
-                if (!error) {
-                    return resolve(result)
-                } else {
-                    reject(error)
-                }
+                if (error) reject(error)
+                else resolve(result)
             })
         })
     }
