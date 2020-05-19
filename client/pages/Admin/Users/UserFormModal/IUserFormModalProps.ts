@@ -1,5 +1,5 @@
-import { IModalProps } from 'office-ui-fabric-react/lib/Modal';
-import { IUser } from 'interfaces';
+import { IModalProps } from 'office-ui-fabric-react/lib/Modal'
+import { IUser } from 'interfaces'
 
 /**
  * @category Admin

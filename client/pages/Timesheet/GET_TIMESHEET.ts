@@ -1,5 +1,5 @@
 
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 /**
  * @ignore
@@ -13,15 +13,13 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!, $lo
     startDateTime
     endDateTime
     events {
-      key
       id
       title
       isOrganizer
       webLink
-      durationMinutes
-      durationHours
-      startTime
-      endTime
+      duration
+      startDateTime
+      endDateTime
       date
       project {
         id
@@ -30,7 +28,6 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!, $lo
         description
         icon
         customer {
-          id
           key
           name
           inactive
@@ -49,14 +46,12 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!, $lo
         name
         description
         customer {
-          id
           key
           name
           inactive
         }
       }
       customer {
-        id
         key
         name
         inactive
@@ -65,7 +60,7 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!, $lo
         message
       }
     }
-    confirmedDuration
+    confirmed
   }
 }
-`;
+`

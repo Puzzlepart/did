@@ -1,27 +1,27 @@
-import { SearchProject, UserMessage } from 'components';
-import { value as value } from 'helpers';
-import { IProject } from 'interfaces/IProject';
-import { MessageBarButton } from 'office-ui-fabric-react/lib/Button';
-import { Modal } from 'office-ui-fabric-react/lib/Modal';
-import { ITimesheetContext, TimesheetContext } from 'pages/Timesheet/TimesheetContext';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import format from 'string-format';
-import styles from './ResolveProjectModal.module.scss';
-import { IResolveProjectModalProps } from './types';
+import { SearchProject, UserMessage } from 'components'
+import { value as value } from 'helpers'
+import { IProject } from 'interfaces/IProject'
+import { MessageBarButton } from 'office-ui-fabric-react/lib/Button'
+import { Modal } from 'office-ui-fabric-react/lib/Modal'
+import { ITimesheetContext, TimesheetContext } from 'pages/Timesheet/TimesheetContext'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+import format from 'string-format'
+import styles from './ResolveProjectModal.module.scss'
+import { IResolveProjectModalProps } from './types'
 
 /**
  * @category Timesheet
 */
 export const ResolveProjectModal = ({ event }: IResolveProjectModalProps) => {
-    const { t } = useTranslation(['timesheet', 'COMMON']);
-    const { dispatch } = React.useContext<ITimesheetContext>(TimesheetContext);
-    const [showResolveModal, setShowResolveModal] = React.useState<boolean>(false);
+    const { t } = useTranslation(['timesheet', 'common'])
+    const { dispatch } = React.useContext<ITimesheetContext>(TimesheetContext)
+    const [showResolveModal, setShowResolveModal] = React.useState<boolean>(false)
 
     const onResolve = (project: IProject) => {
-        setShowResolveModal(false);
-        dispatch({ type: 'MANUAL_MATCH', payload: { eventId: event.id, project } });
-    };
+        setShowResolveModal(false)
+        dispatch({ type: 'MANUAL_MATCH', payload: { eventId: event.id, project } })
+    }
 
     return (
         <>
@@ -58,8 +58,8 @@ export const ResolveProjectModal = ({ event }: IResolveProjectModalProps) => {
                     width={450}
                     className={styles.searchProject}
                     onSelected={project => onResolve(project)}
-                    placeholder={t('searchPlaceholder', { ns: 'COMMON' })} />
+                    placeholder={t('searchPlaceholder', { ns: 'common' })} />
             </Modal>
         </>
-    );
+    )
 }

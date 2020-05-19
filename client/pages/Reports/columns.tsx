@@ -1,9 +1,9 @@
-import { TFunction } from 'i18next';
-import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
-import React from 'react';
-import { Link } from 'react-router-dom';
-import dateUtils from 'utils/date';
-import { ExcelColumnType } from 'utils/exportExcel';
+import { TFunction } from 'i18next'
+import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
+import React from 'react'
+import { Link } from 'react-router-dom'
+import dateUtils from 'utils/date'
+import { ExcelColumnType } from 'utils/exportExcel'
 
 
 const columns = (t: TFunction): IColumn[] => ([
@@ -25,29 +25,29 @@ const columns = (t: TFunction): IColumn[] => ([
         fieldName: 'customer',
         name: t('customer'),
         minWidth: 100,
-        onRender: ({ customer }) => <Link to={`/customers/${customer.id}`}>{customer.name}</Link>,
+        onRender: ({ customer }) => <Link to={`/customers/${customer.key}`}>{customer.name}</Link>,
     },
     {
-        key: 'durationHours',
-        fieldName: 'durationHours',
+        key: 'duration',
+        fieldName: 'duration',
         name: t('durationLabel'),
         minWidth: 100,
     },
     {
-        key: 'startTime',
-        fieldName: 'startTime',
+        key: 'startDateTime',
+        fieldName: 'startDateTime',
         name: t('startTimeLabel'),
         minWidth: 100,
         data: { excelColFormat: 'date' as ExcelColumnType },
-        onRender: ({ startTime }) => dateUtils.formatDate(startTime, 'MMM DD, YYYY kk:mm')
+        onRender: ({ startDateTime }) => dateUtils.formatDate(startDateTime, 'MMM DD, YYYY kk:mm')
     },
     {
-        key: 'endTime',
-        fieldName: 'endTime',
+        key: 'endDateTime',
+        fieldName: 'endDateTime',
         name: t('endTimeLabel'),
         minWidth: 100,
         data: { excelColFormat: 'date' as ExcelColumnType },
-        onRender: ({ endTime }) => dateUtils.formatDate(endTime, 'MMM DD, YYYY kk:mm')
+        onRender: ({ endDateTime }) => dateUtils.formatDate(endDateTime, 'MMM DD, YYYY kk:mm')
     },
     {
         key: 'weekNumber',
@@ -56,8 +56,8 @@ const columns = (t: TFunction): IColumn[] => ([
         minWidth: 100,
     },
     {
-        key: 'yearNumber',
-        fieldName: 'yearNumber',
+        key: 'year',
+        fieldName: 'year',
         name: t('yearLabel'),
         minWidth: 100,
     },
@@ -67,6 +67,6 @@ const columns = (t: TFunction): IColumn[] => ([
         name: t('employeeLabel'),
         minWidth: 100,
     },
-]);
+])
 
-export default columns;
+export default columns

@@ -1,20 +1,20 @@
 
-import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
-import * as React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useHistory, useParams } from 'react-router-dom';
-import styles from './Admin.module.scss';
-import { Labels } from './Labels';
-import AdminSummaryView from './SummaryView';
-import { Users } from './Users';
+import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
+import * as React from 'react'
+import { useTranslation } from 'react-i18next'
+import { useHistory, useParams } from 'react-router-dom'
+import styles from './Admin.module.scss'
+import { Labels } from './Labels'
+import AdminSummaryView from './SummaryView'
+import { Users } from './Users'
 
 /**
  * @category Admin
  */
 export const Admin = () => {
-    const { t } = useTranslation('admin');
-    const history = useHistory();
-    const { view } = useParams<{ view: string }>();
+    const { t } = useTranslation('admin')
+    const history = useHistory()
+    const { view } = useParams<{ view: string }>()
     return (
         <div className={styles.root}>
             <Pivot
@@ -43,5 +43,5 @@ export const Admin = () => {
                 </PivotItem>
             </Pivot>
         </div>
-    );
+    )
 }

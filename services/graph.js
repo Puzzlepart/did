@@ -1,8 +1,7 @@
 global.fetch = require("node-fetch")
 const { refreshAccessToken } = require('./tokens')
-const stripHtml = require("string-strip-html")
-const utils = require('../utils')
 const log = require('debug')('services/graph')
+const Event = require('./graph.event')
 
 class GraphService {
   constructor(req) {
@@ -38,6 +37,11 @@ class GraphService {
     return client
   }
 
+  /**
+   * Create Outlook category
+   * 
+   * @param category Category
+   */
   async createOutlookCategory(category) {
     try {
       log('Querying Graph /me/outlook/masterCategories')
@@ -59,7 +63,7 @@ class GraphService {
   }
 
   /**
-   * Get  categories
+   * Get Outlook categories
    */
   async getOutlookCategories() {
     try {
@@ -84,8 +88,8 @@ class GraphService {
   /**
    * Get events for the specified period using Microsoft Graph endpoint /me/calendar/calendarView
    *
-   * @param {*} startDateTime  Start time (iso)
-   * @param {*} endDateTime End time (iso)
+   * @param startDateTime Start date time in ISO format
+   * @param endDateTime End date time in ISO format
    */
   async getEvents(startDateTime, endDateTime) {
     try {
@@ -107,23 +111,9 @@ class GraphService {
       log('Retrieved %s events from /me/calendar/calendarView', value.length)
       let events = value
         .filter(evt => evt.subject)
-        .map(evt => {
-          return ({
-            id: evt.id,
-            title: evt.subject,
-            body: stripHtml(evt.body.content),
-            isOrganizer: evt.isOrganizer,
-            categories: evt.categories,
-            webLink: evt.webLink,
-            lastModifiedDateTime: evt.lastModifiedDateTime,
-            startTime: evt.start.dateTime,
-            endTime: evt.end.dateTime,
-            durationHours: utils.getDurationHours(evt.start.dateTime, evt.end.dateTime),
-            durationMinutes: utils.getDurationMinutes(evt.start.dateTime, evt.end.dateTime),
-          })
-        })
+        .map(evt => new Event(evt))
       events = this.removeIgnoredEvents(events)
-      events = events.filter(evt => evt.durationHours <= 24)
+      events = events.filter(evt => evt.duration <= 24)
       return events
     } catch (error) {
       switch (error.statusCode) {
@@ -138,9 +128,5 @@ class GraphService {
     }
   }
 }
-
-
-
-
 
 module.exports = GraphService

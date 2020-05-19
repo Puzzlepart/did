@@ -11,5 +11,5 @@ interface CssExports {
   'react-autosuggest__suggestions-container--open': string;
   'react-autosuggest__suggestions-list': string;
 }
-export const cssExports: CssExports;
-export default cssExports;
+export const cssExports: CssExports
+export default cssExports

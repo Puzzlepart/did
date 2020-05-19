@@ -78,7 +78,7 @@
     "generatingReportDescription": "For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene...",
     "noEntriesText": "Det er ingen bekreftede tidsoppføringer på dette tidspunktet."
   },
-  "COMMON": {
+  "common": {
     "hours": "Timer",
     "showShortcutsText": "Vis tilgjengelige snarveier",
     "shortcuts": "Snarveier",
@@ -180,7 +180,7 @@
       "closeButtonAriaLabel": "Lukk"
     }
   },
-  "NAVIGATION": {
+  "navigation": {
     "timesheet": "Timeliste",
     "customers": "Kunder",
     "projects": "Prosjekter",

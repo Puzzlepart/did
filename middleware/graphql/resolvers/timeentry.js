@@ -1,23 +1,19 @@
-const _ = require('underscore')
+const { find, first } = require('underscore')
 
 const typeDef = `   
     type TimeEntry {
         id: String
         key: String
-        eventId: String!
         title: String!
         description: String
-        startTime: String
-        endTime: String
+        startDateTime: String
+        endDateTime: String
         webLink: String
-        durationHours: Float
-        durationMinutes: Int
+        duration: Float
         projectId: String
         weekNumber: Int
         monthNumber: Int
-        yearNumber: Int
-        resourceId: String
-        resourceEmail: String
+        year: Int
         resourceName: String
         webUrl: String
         project: Project
@@ -27,7 +23,7 @@ const typeDef = `
     input TimeEntryInput {
         id: String!
         projectId: String!
-        isManualMatch: Boolean
+        manualMatch: Boolean
     }
 
     extend type Query {
@@ -35,25 +31,33 @@ const typeDef = `
         projectId: String, 
         resourceId: String, 
         weekNumber: Int, 
-        yearNumber: Int, 
-        currentUser: Boolean, 
-        dateFormat: String
+        year: Int, 
+        currentUser: Boolean
     ): [TimeEntry!]
     } 
 `
 
-async function timeentries(_obj, variables, context) {
-    let resourceId = variables.resourceId
-    if (variables.currentUser) resourceId = context.user.profile.oid
+async function timeentries(
+    _obj,
+    { resourceId, weekNumber, year, projectId, currentUser },
+    { user, services: { storage: StorageService } }
+) {
+    if (currentUser) resourceId = user.id
+    console.log(resourceId)
     let [projects, customers, timeentries] = await Promise.all([
-        context.services.storage.getProjects(),
-        context.services.storage.getCustomers(),
-        context.services.storage.getTimeEntries({ resourceId, weekNumber: variables.weekNumber, yearNumber: variables.yearNumber, projectId: variables.projectId }, { dateFormat: variables.dateFormat }),
+        StorageService.getProjects(),
+        StorageService.getCustomers(),
+        StorageService.getTimeEntries({
+            resourceId,
+            weekNumber,
+            year,
+            projectId
+        })
     ])
     let entries = timeentries.map(entry => ({
         ...entry,
-        project: entry.projectId && _.find(projects, p => p.id === entry.projectId),
-        customer: entry.customerId && _.find(customers, c => c.id === entry.customerId),
+        project: entry.projectId && find(projects, p => p.id === entry.projectId),
+        customer: entry.projectId && find(customers, c => c.key === first(entry.projectId.split(' '))),
     }))
     return entries
 }

@@ -1,5 +1,5 @@
-import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
-import { SummaryViewAction } from './SummaryViewReducer';
+import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
+import { SummaryViewAction } from './SummaryViewReducer'
 
 export interface ISummaryViewState {
     year: number;

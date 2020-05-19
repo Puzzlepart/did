@@ -1,5 +1,5 @@
-import { ScrollablePane, ScrollbarVisibility } from 'office-ui-fabric-react/lib/ScrollablePane';
-import * as React from 'react';
+import { ScrollablePane, ScrollbarVisibility } from 'office-ui-fabric-react/lib/ScrollablePane'
+import * as React from 'react'
 
 /**
  * @category ScrollablePaneWrapper

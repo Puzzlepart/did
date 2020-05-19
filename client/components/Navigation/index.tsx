@@ -1,15 +1,16 @@
-import { AppContext } from 'AppContext';
-import * as React from 'react';
-import { useTranslation } from 'react-i18next';
-import { Link, NavLink } from 'react-router-dom';
-import styles from './Navigation.module.scss';
-import { UserMenu } from './UserMenu';
-import { Icon } from 'office-ui-fabric-react/lib/Icon';
+import { AppContext } from 'AppContext'
+import * as React from 'react'
+import { useTranslation } from 'react-i18next'
+import { Link, NavLink } from 'react-router-dom'
+import styles from './Navigation.module.scss'
+import { UserMenu } from './UserMenu'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
+
 
 export const Navigation = () => {
-    const { t } = useTranslation('NAVIGATION');
-    const { user } = React.useContext(AppContext);
-    const navLinkProps = { className: styles.navLink, activeClassName: styles.active };
+    const { t } = useTranslation('navigation')
+    const { user } = React.useContext(AppContext)
+    const navLinkProps = { className: styles.navLink, activeClassName: styles.active }
     return (
         <nav className={styles.root}>
             <div className={styles.container}>
@@ -61,5 +62,5 @@ export const Navigation = () => {
                 <UserMenu />
             </div>
         </nav>
-    );
+    )
 }

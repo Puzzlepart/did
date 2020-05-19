@@ -1,22 +1,22 @@
-import { useQuery } from '@apollo/react-hooks';
-import { UserMessage } from 'components/UserMessage';
-import { value as value } from 'helpers';
-import { IProject } from 'interfaces/IProject';
-import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
-import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
-import { GET_PROJECTS, ProjectList } from 'pages/Projects';
-import * as React from 'react';
-import { useTranslation } from 'react-i18next';
-import styles from './CustomerDetails.module.scss';
-import { ICustomerDetailsProps } from './ICustomerDetailsProps';
+import { useQuery } from '@apollo/react-hooks'
+import { UserMessage } from 'components/UserMessage'
+import { value as value } from 'helpers'
+import { IProject } from 'interfaces/IProject'
+import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
+import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
+import { GET_PROJECTS, ProjectList } from 'pages/Projects'
+import * as React from 'react'
+import { useTranslation } from 'react-i18next'
+import styles from './CustomerDetails.module.scss'
+import { ICustomerDetailsProps } from './ICustomerDetailsProps'
 
 
 /**
  * @category Customers
  */
 export const CustomerDetails = (props: ICustomerDetailsProps) => {
-    const { t } = useTranslation(['customers', 'COMMON', 'projects']);
-    const { loading, error, data } = useQuery(GET_PROJECTS, { variables: { customerKey: value<string>(props, 'customer.key', '') } });
+    const { t } = useTranslation(['customers', 'common', 'projects'])
+    const { loading, error, data } = useQuery(GET_PROJECTS, { variables: { customerKey: value<string>(props, 'customer.key', '') } })
 
     return (
         <div className={styles.root}>
@@ -58,5 +58,5 @@ export const CustomerDetails = (props: ICustomerDetailsProps) => {
                 )}
             </div>
         </div>
-    );
-};
+    )
+}
