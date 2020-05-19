@@ -46,7 +46,7 @@ export default (hideColumns: string[], t: TFunction): IColumn[] => ([
     ),
     col(
         'customer',
-        'Customer',
+        t('customer', { ns: 'common' }),
         { maxWidth: 220 },
         (project: IProject) => {
             if (!project.customer) return null
