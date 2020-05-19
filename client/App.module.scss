@@ -8,6 +8,11 @@
 
     }
 
+    @media(max-width:600px) {
+        // Overflowing #app instead of body, to keep bottom menu sticky on mobile
+        overflow: scroll;
+    }
+
     @media (min-width: 576px) {
         .container {
             max-width: 540px;
@@ -25,7 +30,7 @@
             max-width: 960px;
         }
     }
-    
+
     @media (min-width: 1200px) {
         .container {
             max-width: 1140px;

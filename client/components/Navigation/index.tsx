@@ -20,7 +20,7 @@ export const Navigation = () => {
                 <ul className={styles.nav} hidden={!user}>
                     <li className={styles.navItem}>
                         <NavLink to='/timesheet' {...navLinkProps}>
-                            <Icon iconName={'FabricUserFolder'} className={styles.navIcon} />
+                            <Icon iconName={'TimeSheet'} className={styles.navIcon} />
                             <span className={styles.navText}>
                                 {t('timesheet')}
                             </span>
@@ -28,7 +28,7 @@ export const Navigation = () => {
                     </li>
                     <li className={styles.navItem}>
                         <NavLink to='/customers' {...navLinkProps}>
-                            <Icon iconName={'FabricUserFolder'} className={styles.navIcon} />
+                            <Icon iconName={'People'} className={styles.navIcon} />
                             <span className={styles.navText}>
                                 {t('customers')}
                             </span>
@@ -36,7 +36,7 @@ export const Navigation = () => {
                     </li>
                     <li className={styles.navItem}>
                         <NavLink to='/projects' {...navLinkProps}>
-                            <Icon iconName={'FabricUserFolder'} className={styles.navIcon} />
+                            <Icon iconName={'ProjectCollection'} className={styles.navIcon} />
                             <span className={styles.navText}>
                                 {t('projects')}
                             </span>
@@ -44,7 +44,7 @@ export const Navigation = () => {
                     </li>
                     <li className={styles.navItem}>
                         <NavLink to='/reports' {...navLinkProps}>
-                            <Icon iconName={'FabricUserFolder'} className={styles.navIcon} />
+                            <Icon iconName={'ReportDocument'} className={styles.navIcon} />
                             <span className={styles.navText}>
                                 {t('reports')}
                             </span>
@@ -52,7 +52,7 @@ export const Navigation = () => {
                     </li>
                     <li className={styles.navItem}>
                         <NavLink to='/admin' {...navLinkProps}>
-                            <Icon iconName={'FabricUserFolder'} className={styles.navIcon} />
+                            <Icon iconName={'Settings'} className={styles.navIcon} />
                             <span className={styles.navText}>
                                 {t('admin')}
                             </span>

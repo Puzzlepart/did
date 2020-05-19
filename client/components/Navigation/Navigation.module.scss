@@ -13,55 +13,110 @@
             max-width: 540px;
         }
 
-        .container {
-            max-width: 1440px;
-            margin: auto;
+        @media (min-width: 992px) {
+            max-width: 960px;
+        }
+
+        @media (min-width: 1200px) {
+            max-width: 1140px;
+        }
+
+        .hamburger {
+            color: #fff;
+
+            .icon {
+                background: green;
+            }
+        }
+
+        .nav {
             display: flex;
-            height: 100%;
+            flex-direction: row;
+            justify-content: space-evenly;
+            width: 500px;
+            padding-left: 0;
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji,
+                Segoe UI Emoji;
 
-            @media (min-width: 992px) {
-                max-width: 960px;
-            }
+            .navItem {
+                display: flex;
+                align-items: center;
+                height: 100%;
 
-            @media (min-width: 1200px) {
-                max-width: 1140px;
-            }
+                .navLink {
+                    display: flex;
+                    color: #fff;
+                    font-weight: 500;
+                    font-size: 14px;
+                    text-decoration: none;
 
-            .hamburger {
-                color: #fff;
+                    .navIcon{
+                        display: none;
+                    }
 
-                .icon {
-                    background: green;
+                    &:hover {
+                        color: #bbb;
+                    }
+
+                    &.active {
+                        color: #cf5f00;
+                    }
                 }
             }
+        }
+
+        .logo {
+            align-self: center;
+
+            img {
+                height: 37px;
+                margin-top: 5px;
+            }
+        }
+    }
+}
+
+
+@media (max-width: 600px) {
+    .root {
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+        z-index: 100;
+        height: 45px;
+
+
+        .container {
+            padding: 0 2rem;
 
             .nav {
                 display: flex;
                 flex-direction: row;
                 justify-content: space-evenly;
-                width: 500px;
+                width: 100%;
                 padding-left: 0;
-                font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji,
-                    Segoe UI Emoji;
 
                 .navItem {
                     display: flex;
-                    align-items: center;
-                    height: 100%;
 
                     .navLink {
-                        display: flex;
-                        color: #fff;
-                        font-weight: 500;
-                        font-size: 14px;
-                        text-decoration: none;
+                        width: 100%;
 
-                        &:hover {
-                            color: #bbb;
+                        .navText {
+                            display: none;
+                        }
+
+                        .navIcon {
+                            display: flex;
+                            color: #fff;
+                            font-size: 18px;
+                            -webkit-font-smoothing: subpixel-antialiased;
                         }
 
                         &.active {
-                            color: #cf5f00;
+                            .navIcon {
+                                color: #cf5f00;
+                            }
                         }
                     }
                 }
@@ -71,30 +126,8 @@
                 align-self: center;
 
                 img {
-                    height: 37px;
-                    margin-top: 5px;
+                    height: 20px;
                 }
-            }
-        }
-    }
-}
-
-@media (max-width: 600px) {
-    .root {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        z-index: 100;
-
-        .container {
-            padding: 0 2rem;
-
-            .navText {
-                display: none;
-            }
-
-            navIcon {
-                display: flex;
             }
         }
     }
