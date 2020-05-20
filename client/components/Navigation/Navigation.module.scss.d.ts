@@ -3,12 +3,12 @@
 interface CssExports {
   'active': string;
   'container': string;
-  'hamburger': string;
-  'icon': string;
   'logo': string;
   'nav': string;
+  'navIcon': string;
   'navItem': string;
   'navLink': string;
+  'navText': string;
   'root': string;
 }
 export const cssExports: CssExports;
