@@ -36,7 +36,7 @@ export const CHANGE_PERIOD = ({ periods, loading, selectedPeriod, dispatch }: IT
             {
                 key: 'CHANGE_PERIOD_0',
                 onRender: () => (
-                    <span style={{ paddingTop: 12 }}>
+                    <span style={{ lineHeight: '44px', paddingLeft: 8 }}>
                         {selectedPeriod.getName(false, t)}
                     </span>
                 ),

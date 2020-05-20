@@ -2,14 +2,14 @@ import EventList from 'components/EventList'
 import { ITimeEntry } from 'interfaces/ITimeEntry'
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
 import * as React from 'react'
-import { BrowserView, isMobile } from 'react-device-detect'
+import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import DateUtils from 'utils/date'
 import { generateColumn as col } from 'utils/generateColumn'
 import { TimesheetContext } from '../'
-import ProjectColumn from '../ProjectColumn'
 import { StatusBar } from '../StatusBar'
 import styles from './Overview.module.scss'
+import ProjectColumn from './ProjectColumn'
 import { IOverviewProps } from './types'
 
 /**
@@ -42,7 +42,7 @@ export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
                         'project',
                         t('project'),
                         { minWidth: 350, maxWidth: 350 },
-                        (event: ITimeEntry) => <BrowserView><ProjectColumn event={event} /></BrowserView>
+                        (event: ITimeEntry) => <ProjectColumn event={event} />
                     ),
                 ]} />
         </div>

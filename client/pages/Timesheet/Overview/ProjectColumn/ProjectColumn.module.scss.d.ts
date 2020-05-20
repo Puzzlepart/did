@@ -3,15 +3,9 @@
 interface CssExports {
   'clearButton': string;
   'content': string;
-  'description': string;
   'labelIcon': string;
-  'labels': string;
   'root': string;
   'subText': string;
-  'subTitle': string;
-  'tag': string;
-  'title': string;
-  'tooltip': string;
 }
 export const cssExports: CssExports;
 export default cssExports;
