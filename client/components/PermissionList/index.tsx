@@ -9,17 +9,19 @@ import { contains } from 'underscore'
  * @category PermissionList
  */
 export const PermissionList = ({ permissionIds }: IPermissionListProps) => {
-    const { t } = useTranslation(['admin', 'common'])
+    const { t } = useTranslation()
     const permissions = React.useMemo(() => {
         return securityConfig.permissions(t).filter(perm => contains(permissionIds, perm.id))
     }, [permissionIds])
     return (
         <div className={styles.root}>
-            {permissions.map(perm => (
-                <div key={perm.key}>
-                    {perm.name}
-                </div>
-            ))}
+            <div className={styles.container}>
+                {permissions.map(perm => (
+                    <div key={perm.key} className={styles.item}>
+                        {perm.name}
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }

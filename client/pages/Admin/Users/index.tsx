@@ -17,7 +17,7 @@ import { IUser } from 'interfaces/IUser'
 export const Users = () => {
     const { t } = useTranslation(['common', 'admin'])
     const [userForm, setUserForm] = React.useState<IUserFormModalProps>(null)
-    const { data, loading, refetch } = useQuery(GET_DATA, { fetchPolicy: 'cache-and-network' })
+    const { data, refetch, loading, called } = useQuery(GET_DATA, { fetchPolicy: 'cache-and-network' })
     const columns = [
         col('fullName', t('nameLabel'), { maxWidth: 180 }),
         col(
@@ -36,11 +36,11 @@ export const Users = () => {
                 })} />
         ))
     ]
-    if (loading) return <ProgressIndicator />
 
     return (
         <>
             <List
+                enableShimmer={loading && !called}
                 items={value(data, 'users', [])}
                 columns={columns}
                 commandBar={{

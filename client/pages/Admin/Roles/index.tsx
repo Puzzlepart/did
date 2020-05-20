@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 import { generateColumn as col } from 'utils/generateColumn'
 import { IRoleModalProps, RoleModal } from './RoleModal'
 import { GET_ROLES } from './GET_ROLES'
+import { PermissionList } from 'components/PermissionList'
 
 /**
  * @category Admin
@@ -23,9 +24,15 @@ export const Roles = () => {
             { maxWidth: 180 },
         ),
         col(
+            'permissions',
+            '',
+            { minWidth: 400, isMultiline: true },
+            (role: IRole) => <PermissionList permissionIds={role.permissions} />
+        ),
+        col(
             'edit_delete',
             '',
-            { minWidth: 180 },
+            { minWidth: 300, },
             (role: IRole) => (
                 <>
                     <DefaultButton
