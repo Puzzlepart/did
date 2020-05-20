@@ -4,8 +4,8 @@
     }
 
     &.mobile {
-        [class*="ms-DetailsList-headerWrapper"] {
-            display: none;
+        [class*="ms-DetailsList-headerWrapper"],[class*="ms-GroupSpacer"],[class*="ms-GroupHeader-expand"] {
+            display: none !important;
         }
 
         [class*="ms-DetailsRow-fields"] {
