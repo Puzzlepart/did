@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import styles from './Admin.module.scss'
 import { Labels } from './Labels'
-import { Security } from './Security'
+import { Roles } from './Roles'
 import AdminSummaryView from './SummaryView'
 import { Users } from './Users'
 
@@ -44,10 +44,10 @@ export const Admin = () => {
                 </PivotItem>
                 <PivotItem
                     className={styles.tab}
-                    itemKey='security'
-                    headerText={'Security'}
+                    itemKey='roles'
+                    headerText={'Roles'}
                     itemIcon='SecurityGroup'>
-                    <Security />
+                    <Roles />
                 </PivotItem>
             </Pivot>
         </div>

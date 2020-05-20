@@ -8,7 +8,7 @@ import { PermissionModal } from './PermissionModal'
 /**
  * @category Admin
  */
-export const Security = () => {
+export const Roles = () => {
     const { t } = useTranslation(['admin', 'common'])
     const [form, setForm] = React.useState<boolean>(false)
     const columns = [
@@ -17,7 +17,6 @@ export const Security = () => {
             'Role',
             { maxWidth: 180 },
         ),
-        col('description', 'Description'),
         col(
             'edit_delete',
             '',
@@ -35,15 +34,12 @@ export const Security = () => {
     const items = [
         {
             role: 'User',
-            description: ''
         },
         {
             role: 'Invoice Manager',
-            description: ''
         },
         {
             role: 'Admin',
-            description: ''
         }
     ]
 
@@ -51,12 +47,10 @@ export const Security = () => {
         <>
             <List
                 items={items}
-                columns={columns}
-                commandBar={{
-                    items: [],
-                    farItems: []
-                }} />
-            {form && <PermissionModal modal={{ onDismiss: () => setForm(false) }} />}
+                columns={columns} />
+            {form && (
+                <PermissionModal modal={{ onDismiss: () => setForm(false) }} />
+            )}
         </>
     )
 }
