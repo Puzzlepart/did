@@ -1,5 +1,5 @@
-const tableUtil = require('../utils/table')
-const { getDurationHours, getWeek, getMonthIndex, getYear } = require('../utils')
+const TableUtil = require('../utils/table')
+const { getDurationHours, getWeek, getMonthIndex, getYear, toArray } = require('../utils')
 const arraySort = require('array-sort')
 const { pick } = require('underscore')
 const { createTableService } = require('azure-storage')
@@ -7,12 +7,12 @@ const uuidv4 = require('uuid').v4
 
 class StorageService {
     constructor(subscription) {
-        tableUtil.tableService = createTableService(subscription.connectionString)
+        this.tableUtil = new TableUtil(createTableService(subscription.connectionString))
     }
 
     async getLabels() {
-        const query = tableUtil.createQuery(1000, undefined)
-        const { entries } = await tableUtil.queryTable('Labels', query, {
+        const query = this.tableUtil.createQuery(1000, undefined)
+        const { entries } = await this.tableUtil.queryTable('Labels', query, {
             RowKey: 'id'
         })
         return entries
@@ -25,8 +25,8 @@ class StorageService {
      * @param createdBy Created by ID
      */
     async addLabel(label, createdBy) {
-        const { string } = tableUtil.entGen()
-        const entity = await tableUtil.addEntity(
+        const { string } = this.tableUtil.entGen()
+        const entity = await this.tableUtil.addEntity(
             'Labels',
             {
                 PartitionKey: string('Default'),
@@ -46,7 +46,7 @@ class StorageService {
      * @param label Label data
      */
     async updateLabel(label) {
-        const { string } = tableUtil.entGen()
+        const { string } = this.tableUtil.entGen()
         const entity = {
             PartitionKey: string('Default'),
             RowKey: string(label.id),
@@ -54,7 +54,7 @@ class StorageService {
         if (label.name) entity.Name = string(label.name)
         if (label.color) entity.Color = string(label.color)
         if (label.icon) entity.Icon = string(label.icon)
-        const result = await tableUtil.updateEntity(
+        const result = await this.tableUtil.updateEntity(
             'Labels',
             entity,
             true,
@@ -68,9 +68,9 @@ class StorageService {
     * @param id Label ID
     */
     async deleteLabel(id) {
-        const { string } = tableUtil.entGen()
+        const { string } = this.tableUtil.entGen()
         try {
-            const result = await tableUtil.deleteEntity(
+            const result = await this.tableUtil.deleteEntity(
                 'Labels',
                 {
                     PartitionKey: string('Default'),
@@ -88,8 +88,8 @@ class StorageService {
      * Get customers from table Customers
      */
     async getCustomers() {
-        const query = tableUtil.createQuery(1000)
-        const { entries } = await tableUtil.queryTable('Customers', query, { RowKey: 'key' })
+        const query = this.tableUtil.createQuery(1000)
+        const { entries } = await this.tableUtil.queryTable('Customers', query, { RowKey: 'key' })
         return entries
     }
 
@@ -100,8 +100,8 @@ class StorageService {
      * @param createdBy Created by ID
      */
     async createCustomer(customer, createdBy) {
-        const { string } = tableUtil.entGen()
-        const entity = await tableUtil.addEntity(
+        const { string } = this.tableUtil.entGen()
+        const entity = await this.tableUtil.addEntity(
             'Customers',
             {
                 PartitionKey: string('Default'),
@@ -121,9 +121,9 @@ class StorageService {
      * @param key Customer key
      */
     async deleteCustomer(key) {
-        const { string } = tableUtil.entGen()
+        const { string } = this.tableUtil.entGen()
         try {
-            const result = await tableUtil.deleteEntity(
+            const result = await this.tableUtil.deleteEntity(
                 'Customers',
                 {
                     PartitionKey: string('Default'),
@@ -145,11 +145,11 @@ class StorageService {
      */
     async getProjects(customerKey, options) {
         options = options || {}
-        const q = tableUtil.query()
+        const q = this.tableUtil.query()
         const filter = [['PartitionKey', customerKey, q.string, q.equal]]
-        const query = tableUtil.createQuery(1000, undefined, filter)
+        const query = this.tableUtil.createQuery(1000, undefined, filter)
         const parse = !options.noParse
-        let { entries } = await tableUtil.queryTable(
+        let { entries } = await this.tableUtil.queryTable(
             'Projects',
             query,
             parse && {
@@ -168,8 +168,8 @@ class StorageService {
      * @param createdBy Created by ID
      */
     async createProject(project, createdBy) {
-        const { string } = tableUtil.entGen()
-        const entity = await tableUtil.addEntity(
+        const { string } = this.tableUtil.entGen()
+        const entity = await this.tableUtil.addEntity(
             'Projects',
             {
                 PartitionKey: string(project.customerKey),
@@ -191,8 +191,8 @@ class StorageService {
      * @param labelId Label ID
      */
     async addLabelToProject(projectId, labelId) {
-        const { string } = tableUtil.entGen()
-        const entity = await tableUtil.retrieveEntity(
+        const { string } = this.tableUtil.entGen()
+        const entity = await this.tableUtil.retrieveEntity(
             'Projects',
             'Default',
             projectId,
@@ -203,7 +203,7 @@ class StorageService {
             ...pick(entity, 'PartitionKey', 'RowKey'),
             Labels: string(labels.join('')),
         }
-        const result = await tableUtil.updateEntity('Projects', updatedEntity, true)
+        const result = await this.tableUtil.updateEntity('Projects', updatedEntity, true)
         return result
     }
 
@@ -211,8 +211,8 @@ class StorageService {
      * Get users from table Users
      */
     async getUsers() {
-        const query = tableUtil.createQuery(1000, undefined)
-        const { entries } = await tableUtil.queryTable('Users', query, { RowKey: 'id' })
+        const query = this.tableUtil.createQuery(1000, undefined)
+        const { entries } = await this.tableUtil.queryTable('Users', query, { RowKey: 'id' })
         return entries
     }
 
@@ -223,12 +223,12 @@ class StorageService {
      */
     async getUser(userId) {
         try {
-            const entry = await tableUtil.retrieveEntity(
+            const entry = await this.tableUtil.retrieveEntity(
                 'Users',
                 'Default',
                 userId
             )
-            return tableUtil.parseEntity(entry, { RowKey: 'id' })
+            return this.tableUtil.parseEntity(entry, { RowKey: 'id' })
         } catch (error) {
             return null
         }
@@ -240,8 +240,8 @@ class StorageService {
      * @param user The user data
      */
     async addUser(user) {
-        const { string } = tableUtil.entGen()
-        const entity = await tableUtil.addEntity(
+        const { string } = this.tableUtil.entGen()
+        const entity = await this.tableUtil.addEntity(
             'Users',
             {
                 PartitionKey: string('Default'),
@@ -259,7 +259,7 @@ class StorageService {
      * @param user The user data
      */
     async updateUser(user) {
-        const { string } = tableUtil.entGen()
+        const { string } = this.tableUtil.entGen()
         const entity = {
             PartitionKey: string('Default'),
             RowKey: string(user.id),
@@ -267,7 +267,7 @@ class StorageService {
         if (user.fullName) entity.FullName = string(user.fullName)
         if (user.role) entity.Role = string(user.role)
         if (user.userLanguage) entity.UserLanguage = string(user.userLanguage)
-        const result = await tableUtil.updateEntity(
+        const result = await this.tableUtil.updateEntity(
             'Users',
             entity,
             true,
@@ -283,17 +283,17 @@ class StorageService {
      */
     async getTimeEntries({ projectId, resourceId, weekNumber, year, startDateTime, endDateTime }, options) {
         options = options || {}
-        const q = tableUtil.query()
+        const q = this.tableUtil.query()
         const filter = [
             ['ProjectId', projectId, q.string, q.equal],
             ['PartitionKey', resourceId, q.string, q.equal],
             ['WeekNumber', weekNumber, q.int, q.equal],
             ['Year', year, q.int, q.equal],
-            ['StartDateTime', tableUtil.convertDate(startDateTime), q.date, q.greaterThan],
-            ['EndDateTime', tableUtil.convertDate(endDateTime), q.date, q.lessThan],
+            ['StartDateTime', this.tableUtil.convertDate(startDateTime), q.date, q.greaterThan],
+            ['EndDateTime', this.tableUtil.convertDate(endDateTime), q.date, q.lessThan],
         ]
-        const query = tableUtil.createQuery(1000, undefined, filter)
-        let result = await tableUtil.queryTableAll(
+        const query = this.tableUtil.createQuery(1000, undefined, filter)
+        let result = await this.tableUtil.queryTableAll(
             'TimeEntries',
             query,
             !options.noParse && {
@@ -313,7 +313,7 @@ class StorageService {
      */
     async addTimeEntries(periodId, timeentries) {
         let totalDuration = 0
-        const { string, datetime, double, int, boolean } = tableUtil.entGen()
+        const { string, datetime, double, int, boolean } = this.tableUtil.entGen()
         const entities = timeentries.map(({ entry, event, user, }) => {
             const week = getWeek(event.startDateTime)
             const monthIdx = getMonthIndex(event.startDateTime)
@@ -337,9 +337,9 @@ class StorageService {
                 ManualMatch: boolean(entry.manualMatch),
             }
         })
-        const batch = tableUtil.createBatch()
+        const batch = this.tableUtil.createBatch()
         entities.forEach(entity => batch.insertEntity(entity))
-        await tableUtil.executeBatch('TimeEntries', batch)
+        await this.tableUtil.executeBatch('TimeEntries', batch)
         return totalDuration
     }
 
@@ -355,9 +355,9 @@ class StorageService {
             startDateTime: period.startDateTime,
             endDateTime: period.endDateTime,
         }, { noParse: true })
-        const batch = tableUtil.createBatch()
+        const batch = this.tableUtil.createBatch()
         entities.forEach(entity => batch.deleteEntity(entity))
-        await tableUtil.executeBatch('TimeEntries', batch)
+        await this.tableUtil.executeBatch('TimeEntries', batch)
     }
 
     /**
@@ -368,12 +368,12 @@ class StorageService {
      */
     async getConfirmedPeriod(resourceId, periodId) {
         try {
-            const entry = await tableUtil.retrieveEntity(
+            const entry = await this.tableUtil.retrieveEntity(
                 'ConfirmedPeriods',
                 resourceId,
                 periodId
             )
-            return tableUtil.parseEntity(entry)
+            return this.tableUtil.parseEntity(entry)
         } catch (error) {
             return null
         }
@@ -388,8 +388,8 @@ class StorageService {
      */
     async addConfirmedPeriod(periodId, resourceId, hours) {
         const [week, month, year] = periodId.split('_')
-        const { string, double,int } = tableUtil.entGen()
-        const entity = await tableUtil.addEntity(
+        const { string, double, int } = this.tableUtil.entGen()
+        const entity = await this.tableUtil.addEntity(
             'ConfirmedPeriods',
             {
                 PartitionKey: string(resourceId),
@@ -410,9 +410,9 @@ class StorageService {
      * @param resourceId ID of the resource
      */
     async removeConfirmedPeriod(periodId, resourceId) {
-        const { string } = tableUtil.entGen()
+        const { string } = this.tableUtil.entGen()
         try {
-            const result = await tableUtil.deleteEntity(
+            const result = await this.tableUtil.deleteEntity(
                 'ConfirmedPeriods',
                 {
                     PartitionKey: string(resourceId),
@@ -424,6 +424,43 @@ class StorageService {
         catch (error) {
             throw error
         }
+    }
+
+    /**
+     * Get roles
+     */
+    async getRoles() {
+        try {
+            const query = this.tableUtil.createQuery(1000, undefined)
+            let { entries } = await this.tableUtil.queryTable('Roles', query, { RowKey: 'id' })
+            entries = entries.map(entry => ({
+                ...entry,
+                permissions: toArray(entry.permissions, '|'),
+            }))
+            return entries
+        } catch (error) {
+            return []
+        }
+    }
+
+    /**
+     * Update role in table Roles
+     * 
+     * @param role The role data
+     */
+    async updateRole(role) {
+        const { string } = this.tableUtil.entGen()
+        const entity = {
+            PartitionKey: string('Default'),
+            RowKey: string(role.id),
+            Permissions: string(role.permissions.join('|'))
+        }
+        const result = await this.tableUtil.updateEntity(
+            'Roles',
+            entity,
+            true,
+        )
+        return result
     }
 }
 

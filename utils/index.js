@@ -87,5 +87,15 @@ module.exports = {
      */
     formatDate: (date, dateFormat, locale) => {
         return moment(date).locale(locale).tz('Europe/Oslo').format(dateFormat)
+    },
+
+    /**
+     * Converts a string to an array
+     * 
+     * @param {*} str String
+     * @param {*} separator String separator
+     */
+    toArray: (str, separator) => {
+        return (str || '').split(separator).filter(p => p)
     }
 }
