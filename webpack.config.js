@@ -58,6 +58,7 @@ let config = {
             pages: path.resolve(src, 'pages'),
             components: path.resolve(src, 'components'),
             i18n: path.resolve(src, 'i18n'),
+            config: path.resolve(src, 'config'),
             AppContext: path.resolve(src, 'AppContext'),
         },
         extensions: [".ts", ".tsx", ".js", ".css", ".scss"]
