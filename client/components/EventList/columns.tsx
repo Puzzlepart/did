@@ -36,8 +36,15 @@ function getSizing(props: IEventListProps, fieldName: string, defMinWidth: numbe
 export const Title = (props: IEventListProps, name: string, fieldName = 'title'): IColumn => col(
     fieldName,
     name,
-    { ...getSizing(props, fieldName, 320, 400) },
-    (event: ITimeEntry) => <a href={event.webLink} target='_blank' rel='noopener noreferrer' title={event.title}>{event.title}</a>,
+    { ...getSizing(props, fieldName, 320, 400), isMultiline: true },
+    (event: ITimeEntry) => (
+        <a href={event.webLink}
+            target='_blank'
+            rel='noopener noreferrer'
+            title={event.title}>
+            <span>{event.title}</span>
+        </a>
+    ),
 )
 
 
