@@ -8,9 +8,7 @@ import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import _ from 'underscore'
 import validator from 'validator'
-import ADD_USER from './ADD_USER'
-import { IUserFormModalProps } from './IUserFormModalProps'
-import UPDATE_USER from './UPDATE_USER'
+import { IUserFormModalProps, ADD_USER, UPDATE_USER } from './types'
 import styles from './UserFormModal.module.scss'
 
 /**
@@ -18,13 +16,10 @@ import styles from './UserFormModal.module.scss'
  */
 export const UserFormModal = (props: IUserFormModalProps) => {
     const { t } = useTranslation('common')
-    const [user, setUser] = React.useState<IUser>(props.user || { id: '', fullName: '', role: 'User' })
+    const [user, setUser] = React.useState<IUser>(props.user || { id: '', fullName: '' })
     const [updateUser] = useMutation(UPDATE_USER)
     const [addUser] = useMutation(ADD_USER)
-
-    /**
-     * On save
-     */
+    
     const onSave = async () => {
         if (props.user) await updateUser({ variables: { user: _.omit(user, '__typename') } })
         else await addUser({ variables: { user } })
@@ -58,12 +53,13 @@ export const UserFormModal = (props: IUserFormModalProps) => {
                 onChange={(_, fullName) => setUser({ ...user, fullName })} />
             <Dropdown
                 label={t('roleLabel')}
-                options={[
-                    { key: 'User', text: t('roleUser') },
-                    { key: 'Admin', text: t('roleAdmin') },
-                ]}
-                defaultSelectedKey={user.role}
-                onChange={(_, opt) => setUser({ ...user, role: opt.key.toString() })} />
+                options={props.roles.map(role => ({
+                    key: role.name,
+                    text: role.name,
+                    data: role,
+                }))}
+                defaultSelectedKey={user.role.name}
+                onChange={(_, { data: role }) => setUser({ ...user, role })} />
             <PrimaryButton
                 className={styles.saveBtn}
                 text={t('save')}

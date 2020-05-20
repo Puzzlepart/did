@@ -45,7 +45,7 @@ export const Admin = () => {
                 <PivotItem
                     className={styles.tab}
                     itemKey='roles'
-                    headerText={'Roles'}
+                    headerText={t('roles')}
                     itemIcon='SecurityGroup'>
                     <Roles />
                 </PivotItem>
