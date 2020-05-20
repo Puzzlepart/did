@@ -34,7 +34,7 @@ export const IconPicker = (props: IIconPickerProps) => {
         )
     };
 
-    const options = getIcons(100).map(key => ({ key, text: humanize(key) }))
+    const options = React.useMemo(() => getIcons(100).map(key => ({ key, text: humanize(key) })), [])
 
     return (
         <Dropdown
