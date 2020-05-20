@@ -1,0 +1,24 @@
+.root {
+  .container {
+    width: auto;
+  }
+}
+
+[class*="ms-DetailsList-headerWrapper"] {
+  display: none;
+}
+[class*="ms-DetailsRow-fields"] {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0 0 15px 0;
+}
+
+[class*="ms-DetailsRow-cell"] {
+  display: inherit !important;
+  align-items: unset !important;
+  align-self: unset !important;
+  min-height: auto !important;
+}
