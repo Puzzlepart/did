@@ -3,12 +3,14 @@ import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { generateColumn as col } from 'utils/generateColumn'
+import { PermissionModal } from './PermissionModal'
 
 /**
  * @category Admin
  */
 export const Security = () => {
     const { t } = useTranslation(['admin', 'common'])
+    const [form, setForm] = React.useState<boolean>(false)
     const columns = [
         col(
             'role',
@@ -24,7 +26,8 @@ export const Security = () => {
                 <>
                     <DefaultButton
                         styles={{ root: { marginRight: 4 } }}
-                        text={t('editLabel', { ns: 'common' })} />
+                        text={t('editLabel', { ns: 'common' })}
+                        onClick={() => setForm(true)} />
                 </>
             )),
     ]
@@ -32,6 +35,14 @@ export const Security = () => {
     const items = [
         {
             role: 'User',
+            description: ''
+        },
+        {
+            role: 'Invoice Manager',
+            description: ''
+        },
+        {
+            role: 'Admin',
             description: ''
         }
     ]
@@ -45,6 +56,7 @@ export const Security = () => {
                     items: [],
                     farItems: []
                 }} />
+            {form && <PermissionModal modal={{ onDismiss: () => setForm(false) }} />}
         </>
     )
 }

@@ -1,0 +1,28 @@
+.root {
+  padding: 20px;
+  width: 520px;
+  box-sizing: border-box;
+
+  .title {
+    font-size: 1.6em;
+    margin: 0 0 12px 0;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    overflow: hidden;
+
+    .section {
+      margin: 10px 0 0 0;
+      width: 220px;
+
+      .title {
+        font-size: 1.1em;
+        margin: 0 0 12px 0;
+      }
+    }
+  }
+}
