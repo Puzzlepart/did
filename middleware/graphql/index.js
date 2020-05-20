@@ -8,6 +8,7 @@ const { typeDef: OutlookCategory } = require('./resolvers/outlookCategory')
 const { typeDef: User } = require('./resolvers/user')
 const { typeDef: Subscription } = require('./resolvers/subscription')
 const { typeDef: Label } = require('./resolvers/label')
+const { typeDef: Role } = require('./resolvers/role')
 const StorageService = require('../../services/storage')
 const GraphService = require('../../services/graph')
 const SubscriptionService = require('../../services/subscription')
@@ -51,6 +52,7 @@ const schema = makeExecutableSchema({
     OutlookCategory,
     Subscription,
     Label,
+    Role,
   ],
   resolvers: require('./resolvers'),
   resolverValidationOptions: {
