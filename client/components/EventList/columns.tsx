@@ -37,7 +37,7 @@ export const Title = (props: IEventListProps, name: string, fieldName = 'title')
     fieldName,
     name,
     { ...getSizing(props, fieldName, 320, 400) },
-    (event: ITimeEntry) => <a href={event.webLink} target='_blank' rel='noopener noreferrer' className='truncate' title={event.title}>{event.title}</a>,
+    (event: ITimeEntry) => <a href={event.webLink} target='_blank' rel='noopener noreferrer' title={event.title}>{event.title}</a>,
 )
 
 
