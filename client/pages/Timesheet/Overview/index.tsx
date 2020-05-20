@@ -2,7 +2,7 @@ import EventList from 'components/EventList'
 import { ITimeEntry } from 'interfaces/ITimeEntry'
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
 import * as React from 'react'
-import { BrowserView } from 'react-device-detect'
+import { BrowserView, isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import DateUtils from 'utils/date'
 import { generateColumn as col } from 'utils/generateColumn'
@@ -18,8 +18,10 @@ import { IOverviewProps } from './types'
 export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
     const { t } = useTranslation('common')
     const { loading, selectedPeriod } = React.useContext(TimesheetContext)
+    const className = [styles.root]
+    if(isMobile) className.push(styles.mobile)
     return (
-        <div className={styles.root}>
+        <div className={className.join(' ')}>
             <StatusBar />
             {loading && <ProgressIndicator {...loading} />}
             <EventList
