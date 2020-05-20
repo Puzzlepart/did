@@ -3,8 +3,6 @@
 interface CssExports {
   'active': string;
   'container': string;
-  'hamburger': string;
-  'icon': string;
   'logo': string;
   'nav': string;
   'navIcon': string;
