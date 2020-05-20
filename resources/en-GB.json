@@ -71,7 +71,9 @@
     "defaultLabelTitle": "My new label",
     "addNewLabel": "Add new label",
     "editLabel": "Edit label",
-    "noTimeEntriesText": "There are no recorded hours for the selected year."
+    "noTimeEntriesText": "There are no recorded hours for the selected year.",    
+    "editRole": "Edit role",
+    "roles": "Roles"
   },
   "reports": {
     "generatingReportLabel": "Generating report",
@@ -186,5 +188,15 @@
     "projects": "Projects",
     "reports": "Reports",
     "admin": "Admin"
+  },
+  "permissions": {
+    "accessAdmin": "Tilgang til administrasjon",
+    "accessReports": "Tilgang til rapporter",
+    "manageLabels": "Administere merkelapper",
+    "deleteLabels": "Slette merkelapper",
+    "manageProjects": "Administrere prosjekter",
+    "deleteProjects": "Slette prosjekter",
+    "manageCustomers": "Administrere kunder",
+    "deleteCustomers": "Slette kunder"
   }
 }
