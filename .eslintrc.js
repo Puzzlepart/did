@@ -44,7 +44,9 @@ module.exports = {
 
         "yoda": 2,
 
-        "require-await": 1
+        "require-await": 1,
+
+        "semi": ["error", "never", {}]
     },
     settings: {
         react: {

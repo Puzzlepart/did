@@ -1,5 +1,5 @@
-const { find, filter, omit, first } = require('underscore');
-const value = require('get-value');
+const { omit } = require('underscore')
+const { connectEntities } = require('./project.utils')
 
 const typeDef = `  
   type Project {
@@ -15,32 +15,40 @@ const typeDef = `
     inactive: Boolean
     labels: [Label]
   }
+
+  input ProjectInput {
+    key: String
+    name: String
+    description: String
+    icon: String
+    customerKey: String
+  }
   
   extend type Query {
     projects(customerKey: String, sortBy: String): [Project!]!
   }  
 
   extend type Mutation {
-    createProject(customerKey: String!, projectKey: String!, name: String!, description: String!, icon: String!): BaseResult
+    createProject(project: ProjectInput!): BaseResult
     addLabelToProject(projectId: String!, labelId: String!): BaseResult
   }
-`;
+`
 
-async function createProject(_obj, variables, { services: { storage: StorageService } }) {
+async function createProject(_obj, { project }, { user, services: { storage: StorageService } }) {
   try {
-    await StorageService.createProject(variables, context.user.profile.oid);
-    return { success: true, error: null };
+    await StorageService.createProject(project, user.id)
+    return { success: true, error: null }
   } catch (error) {
-    return { success: false, error: omit(error, 'requestId') };
+    return { success: false, error: omit(error, 'requestId') }
   }
 }
 
 async function addLabelToProject(_obj, { projectId, labelId }, { services: { storage: StorageService } }) {
   try {
-    await StorageService.addLabelToProject(projectId, labelId);
-    return { success: true, error: null };
+    await StorageService.addLabelToProject(projectId, labelId)
+    return { success: true, error: null }
   } catch (error) {
-    return { success: false, error: omit(error, 'requestId') };
+    return { success: false, error: omit(error, 'requestId') }
   }
 }
 
@@ -53,17 +61,9 @@ async function projects(_obj, variables, { services: { storage: StorageService }
     StorageService.getProjects(variables.customerKey, { sortBy: variables.sortBy }),
     StorageService.getCustomers(),
     StorageService.getLabels(),
-  ]);
-  projects = projects.map(project => ({
-    ...project,
-    customer: find(customers, c => c.id === first(project.id.split(' '))),
-    labels: filter(labels, label => {
-      const labels = value(project, 'labels', { default: '' });
-      return labels.indexOf(label.id) !== -1;
-    }),
-  }));
-  projects = projects.filter(p => p.customer);
-  return projects;
+  ])
+  projects = connectEntities(projects, customers, labels)
+  return projects
 }
 
 module.exports = {

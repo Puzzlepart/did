@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 /**
  * @ignore
@@ -12,7 +12,7 @@ export const ADD_LABEL = gql`
             }
         }
     }
-`;
+`
 
 /**
  * @ignore
@@ -26,7 +26,7 @@ export const UPDATE_LABEL = gql`
             }
         }
     }
-`;
+`
 
 /**
  * @ignore
@@ -40,7 +40,7 @@ export const DELETE_LABEL = gql`
             }
         }
     }
-`;
+`
 
 /**
  * @ignore
@@ -55,4 +55,4 @@ export const GET_LABELS = gql`
             icon
         }
     }
-`;
+`

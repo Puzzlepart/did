@@ -1,79 +1,136 @@
 .root {
-  width: 100%;
-  height: 55px;
-  //   background: #0E1428; // Xiketic
-  //   background: #342E37; // Raisin black
-  background: #252422; // Eerie black
+    width: 100%;
+    height: 55px;
+    background: #252422; // Eerie black
 
-  .container {
-    max-width: 1440px;
-    margin: auto;
-    display: flex;
-    height: 100%;
-
-    @media (min-width: 576px) {
-      max-width: 540px;
-    }
-
-    @media (min-width: 768px) {
-      max-width: 720px;
-    }
-
-    @media (min-width: 992px) {
-      max-width: 960px;
-    }
-
-    @media (min-width: 1200px) {
-      max-width: 1140px;
-    }
-
-    .hamburger {
-      color: #fff;
-      display: none;
-
-      .icon {
-        background: green;
-      }
-    }
-
-    .nav {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-evenly;
-      width: 500px;
-      padding-left: 0;
-      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji,
-        Segoe UI Emoji;
-
-      .navItem {
+    .container {
+        max-width: 1440px;
+        margin: auto;
         display: flex;
-        align-items: center;
         height: 100%;
 
-        .navLink {
-          display: flex;
-          color: #fff;
-          font-weight: 500;
-          font-size: 14px;
-          text-decoration: none;
-
-          &:hover {
-            color: #bbb;
-          }
-          &.active {
-            color: #cf5f00;
-          }
+        @media (min-width: 576px) {
+            max-width: 540px;
         }
-      }
+
+        @media (min-width: 992px) {
+            max-width: 960px;
+        }
+
+        @media (min-width: 1200px) {
+            max-width: 1140px;
+        }
+        
+        .nav {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            width: 500px;
+            padding-left: 0;
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji,
+                Segoe UI Emoji;
+
+            .navItem {
+                display: flex;
+                align-items: center;
+                height: 100%;
+
+                .navLink {
+                    display: flex;
+                    color: #fff;
+                    font-weight: 500;
+                    font-size: 14px;
+                    text-decoration: none;
+
+                    .navIcon{
+                        display: none;
+                    }
+
+                    &:hover {
+                        color: #bbb;
+                    }
+
+                    &.active {
+                        color: #cf5f00;
+                    }
+                }
+            }
+        }
+
+        .logo {
+            align-self: center;
+
+            img {
+                height: 37px;
+                margin-top: 5px;
+            }
+        }
+    }
+}
+
+
+@media (max-width: 600px) {
+    .root {
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+        z-index: 100;
+        height: 45px;
+
+
+        .container {
+            padding: 0 2rem;
+
+            .nav {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+                width: 100%;
+                padding-left: 0;
+
+                .navItem {
+                    display: flex;
+
+                    .navLink {
+                        width: 100%;
+
+                        .navText {
+                            display: none;
+                        }
+
+                        .navIcon {
+                            display: flex;
+                            color: #fff;
+                            font-size: 18px;
+                            -webkit-font-smoothing: subpixel-antialiased;
+                        }
+
+                        &.active {
+                            .navIcon {
+                                color: #cf5f00;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .logo {
+                align-self: center;
+
+                img {
+                    height: 20px;
+                }
+            }
+        }
     }
 
-    .logo {
-      align-self: center;
+    @media (min-width: 601px) {
+        .navIcon {
+            display: none;
+        }
 
-      img {
-        height: 24px;
-        margin-top: 5px;
-      }
+        .navText {
+            display: flex;
+        }
     }
-  }
 }

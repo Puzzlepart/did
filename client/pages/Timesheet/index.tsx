@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import { Timesheet } from './Timesheet';
+import * as React from 'react'
+import { Route, Switch, useRouteMatch } from 'react-router-dom'
+import { Timesheet } from './Timesheet'
 
 /**
  * @ignore
  */
 const _ = () => {
-    const match = useRouteMatch();
+    const match = useRouteMatch()
     return (
         <Switch>
             <Route path={`${match.path}/:year/:week`}>
@@ -16,10 +16,11 @@ const _ = () => {
                 <Timesheet />
             </Route>
         </Switch>
-    );
+    )
 }
 
-export default _;
 
-export * from './TimesheetContext';
+export default _
+
+export * from './TimesheetContext'
 

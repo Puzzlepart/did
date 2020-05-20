@@ -1,6 +1,6 @@
-var express = require('express');
-var passport = require('passport');
-var router = express.Router();
+var express = require('express')
+var passport = require('passport')
+var router = express.Router()
 
 router.get('/signin',
   (req, res, next) => {
@@ -10,9 +10,9 @@ router.get('/signin',
         prompt: process.env.OAUTH_SIGNIN_PROMPT,
         failureRedirect: '/',
       }
-    )(req, res, next);
+    )(req, res, next)
   },
-);
+)
 
 router.post('/callback', (req, res, next) => {
   passport.authenticate('azuread-openidconnect',
@@ -21,14 +21,14 @@ router.post('/callback', (req, res, next) => {
       failureRedirect: '/',
       successRedirect: '/timesheet',
     }
-  )(req, res, next);
-});
+  )(req, res, next)
+})
 
 router.get('/signout', (req, res) => {
   req.session.destroy((_err) => {
-    req.logout();
-    res.redirect('/');
-  });
-});
+    req.logout()
+    res.redirect('/')
+  })
+})
 
-module.exports = router;
+module.exports = router

@@ -1,12 +1,12 @@
-import { IObjectWithKey } from 'office-ui-fabric-react/lib/DetailsList';
-import { ICustomer, IOutlookCategory } from './';
-import { IEntityLabel } from './IEntityLabel';
+import { ICustomer, IOutlookCategory } from './'
+import { IEntityLabel } from './IEntityLabel'
 
 /**
  * @category Common
  */
-export interface IProject extends IObjectWithKey {
+export interface IProject  {
     id: string;
+    key: string;
     customerKey: string;
     name: string;
     description: string;

@@ -1,4 +1,4 @@
-const log = require('debug')('services/tokens');
+const log = require('debug')('services/tokens')
 const simpleoauth2 = require('simple-oauth2').create({
     client: {
         id: process.env.OAUTH_APP_ID,
@@ -9,22 +9,22 @@ const simpleoauth2 = require('simple-oauth2').create({
         authorizePath: process.env.OAUTH_AUTHORIZE_ENDPOINT,
         tokenPath: process.env.OAUTH_TOKEN_ENDPOINT
     }
-});
+})
 
 module.exports = {
     refreshAccessToken: async function (req) {
-        var storedToken = simpleoauth2.accessToken.create(req.user.oauthToken);
+        var storedToken = simpleoauth2.accessToken.create(req.user.oauthToken)
         if (storedToken) {
             try {
-                var { token: oauthToken } = await storedToken.refresh();
-                log('Successfully refreshed auth token');
-                req.user.oauthToken = oauthToken;
-                return oauthToken;
+                var { token: oauthToken } = await storedToken.refresh()
+                log('Successfully refreshed auth token')
+                req.user.oauthToken = oauthToken
+                return oauthToken
             } catch (error) {
-                throw new Error('Failed to refresh access token');
+                throw new Error('Failed to refresh access token')
             }
         } else {
-            throw new Error('Invalid oauth token found in request');
+            throw new Error('Invalid oauth token found in request')
         }
     }
-};
+}

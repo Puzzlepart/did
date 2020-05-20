@@ -9,3 +9,4 @@ views
 tests
 app.js
 webpack.config.js
+client/**/*.d.ts

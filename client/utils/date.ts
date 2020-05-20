@@ -1,4 +1,6 @@
+import { TFunction } from 'i18next';
 import moment from 'moment';
+import format from 'string-format';
 import { capitalize } from 'underscore.string';
 require('twix');
 
@@ -10,6 +12,23 @@ export default new class DateUtils {
     public setup(locale: string) {
         this._locale = locale;
         moment.locale(this._locale);
+    }
+
+    toMoment(date: string) {
+        const m = moment(date);
+        return m.add(m.toDate().getTimezoneOffset(), 'minutes')
+    }
+
+    getDurationDisplay(duration: number, t?: TFunction): string {
+        const hrsShortFormat = t ? t('hoursShortFormat', { ns: 'common', defaultValue: undefined }) : '{0}h'
+        const minShortFormat = t ? t('minutesShortFormat', { ns: 'common', defaultValue: undefined }) : '{0}min'
+        const hrs = Math.floor(duration)
+        const mins = parseInt(((duration % 1) * 60).toFixed(0))
+        const hrsStr = format(hrsShortFormat, hrs)
+        const minStr = format(minShortFormat, mins)
+        if (mins === 0) return hrsStr
+        if (hrs === 0) return minStr
+        return `${hrsStr} ${minStr}`
     }
 
     /**
@@ -45,15 +64,18 @@ export default new class DateUtils {
     }
 
     /**
-     * Get weekdays
+     * Get days between a start and end time
      * 
-     * @param {moment.Moment | string} start Start
-     * @param {string} dateFormat Date format
+     * @param {moment.Moment} start Start
+     * @param {moment.Moment} end End
+     * @param {string} dayFormat Date format
      */
-    getWeekdays(start: moment.Moment, dateFormat: string): string[] {
-        return moment.weekdays(true).map((_, index) => {
-            return capitalize(start.clone().add(index, 'days').locale(this._locale).format(dateFormat));
-        });
+    getDays(start: moment.Moment, end: moment.Moment, dayFormat: string): string[] {
+        const days = []
+        for (let i = 0; i <= (end.weekday() - start.weekday()); i++) {
+            days.push(capitalize(start.clone().add(i, 'days').locale(this._locale).format(dayFormat)));
+        }
+        return days;
     }
 
 

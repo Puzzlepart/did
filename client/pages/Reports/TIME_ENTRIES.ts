@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 /**
  * @ignore
@@ -7,15 +7,15 @@ export default gql`
     query {
          timeentries {
             title
-            durationHours
-            startTime
-            endTime
+            duration
+            startDateTime
+            endDateTime
             weekNumber
-            yearNumber
+            year
             resourceName     
             monthNumber           
             customer {
-                id
+                key
                 name
             }
             project {
@@ -24,4 +24,4 @@ export default gql`
             }
         }
     }
-`;
+`
