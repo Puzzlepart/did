@@ -1,21 +1,39 @@
 .root {
-  width: 90%;
-  
-  .content {
-    display: flex;
-    flex-direction: row;
+    width: 90%;
 
-    .subText {
-      font-size: 7pt;
+    &.mobile {
+        .content {
+            .projectLink {
+                font-size: 10pt;
+                margin: 0;
+            }
+
+            .subText {
+
+                span,
+                a {
+                    font-size: 9pt;
+                    margin: 0;
+                }
+            }
+        }
     }
 
-    .labelIcon {
-      margin: 0 0 0 6px;
-      align-self: center;
-    }
+    .content {
+        display: flex;
+        flex-direction: row;
 
-    .clearButton {
-      margin: 0 0 0 4px;
+        .subText {
+            font-size: 7pt;
+        }
+
+        .labelIcon {
+            margin: 0 0 0 6px;
+            align-self: center;
+        }
+
+        .clearButton {
+            margin: 0 0 0 4px;
+        }
     }
-  }
 }

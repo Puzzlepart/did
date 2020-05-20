@@ -4,6 +4,8 @@ interface CssExports {
   'clearButton': string;
   'content': string;
   'labelIcon': string;
+  'mobile': string;
+  'projectLink': string;
   'root': string;
   'subText': string;
 }

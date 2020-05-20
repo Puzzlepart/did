@@ -3,7 +3,6 @@
 interface CssExports {
   'description': string;
   'labels': string;
-  'mobile': string;
   'root': string;
   'subTitle': string;
   'tag': string;
