@@ -18,13 +18,23 @@ const typeDef = `
     }  
 
     extend type Mutation {
+        addRole(role: RoleInput!): BaseResult
         updateRole(role: RoleInput!): BaseResult
     }
 `
 
 async function roles(_obj, _variables, { services: { storage: StorageService } }) {
-    let roles = await StorageService.getRoles() 
+    let roles = await StorageService.getRoles()
     return roles
+}
+
+async function addRole(_obj, { role }, { services: { storage: StorageService } }) {
+    try {
+        await StorageService.addRole(role)
+        return { success: true, error: null }
+    } catch (error) {
+        return { success: false, error: omit(error, 'requestId') }
+    }
 }
 
 async function updateRole(_obj, { role }, { services: { storage: StorageService } }) {
@@ -39,7 +49,7 @@ async function updateRole(_obj, { role }, { services: { storage: StorageService 
 module.exports = {
     resolvers: {
         Query: { roles },
-        Mutation: { updateRole }
+        Mutation: { addRole, updateRole }
     },
     typeDef
 }

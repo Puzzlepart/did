@@ -10,6 +10,9 @@ class StorageService {
         this.tableUtil = new TableUtil(createTableService(subscription.connectionString))
     }
 
+    /**
+     * Get labels from table Labels
+     */
     async getLabels() {
         const query = this.tableUtil.createQuery(1000, undefined)
         const { entries } = await this.tableUtil.queryTable('Labels', query, {
@@ -441,6 +444,25 @@ class StorageService {
         } catch (error) {
             return []
         }
+    }
+
+    /**
+     * Add role to table Roles
+     * 
+     * @param role The role data
+     */
+    async addRole(role) {
+        const { string } = this.tableUtil.entGen()
+        const entity = await this.tableUtil.addEntity(
+            'Roles',
+            {
+                PartitionKey: string('Default'),
+                RowKey: string(uuidv4()),
+                Name: string(role.name),
+                Permissions: string(role.permissions.join('|'))
+            }
+        )
+        return entity
     }
 
     /**
