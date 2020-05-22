@@ -17,7 +17,8 @@
         "clean": "rimraf ./public/js",
         "lint": "eslint --ext .ts,.tsx ./client --color --fix",
         "makeDoc": "rimraf ./doc && typedoc --options typedoc.json",
-        "debug": "nodemon --inspect ./bin/www"
+        "debug": "nodemon --inspect ./bin/www",
+        "test": "mocha tests --exit"
     },
     "dependencies": {
         "@apollo/react-common": "3.1.3",
