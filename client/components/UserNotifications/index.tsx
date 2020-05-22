@@ -56,9 +56,6 @@ export const UserNotifications = () => {
             <UserNotificationsPanel
                 isOpen={showPanel}
                 notifications={notifications}
-                className={styles.root}
-                bodyClassName={styles.body}
-                notificationClassName={styles.notification}
                 onDismiss={() => setShowPanel(false)}
                 onDismissNotification={onDismissNotification} />
         </div>
