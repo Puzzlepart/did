@@ -1,14 +1,15 @@
-import { AppContext } from 'AppContext';
-import resource from 'i18n';
-import { Callout, Target } from 'office-ui-fabric-react/lib/Callout';
-import * as React from 'react';
-import FadeIn from 'react-fade-in';
-import styles from './UserMenu.module.scss';
-import { UserSettings } from './UserSettings';
+import { AppContext } from 'AppContext'
+import { Callout, Target } from 'office-ui-fabric-react/lib/Callout'
+import * as React from 'react'
+import FadeIn from 'react-fade-in'
+import { useTranslation } from 'react-i18next'
+import styles from './UserMenu.module.scss'
+import { UserSettings } from './UserSettings'
 
 export const UserMenu = () => {
-    const { user } = React.useContext(AppContext);
-    const [menuTarget, setMenuTarget] = React.useState<Target>(null);
+    const { t } = useTranslation('common')
+    const { user } = React.useContext(AppContext)
+    const [menuTarget, setMenuTarget] = React.useState<Target>(null)
 
     return (
         <div className={styles.root}>
@@ -33,10 +34,10 @@ export const UserMenu = () => {
                         <div className={styles.divider}></div>
                         <UserSettings className={styles.menuItem} />
                         <div className={styles.divider}></div>
-                        <a href='/auth/signout' className={styles.menuItem}>{resource('COMMON.LOG_OUT_TEXT')}</a>
+                        <a href='/auth/signout' className={styles.menuItem}>{t('logOutText')}</a>
                     </FadeIn>
                 </Callout>
             )}
         </div>
-    );
+    )
 }

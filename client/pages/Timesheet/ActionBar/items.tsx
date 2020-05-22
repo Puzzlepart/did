@@ -1,44 +1,43 @@
-import resource from 'i18n';
-import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react/lib/Button';
-import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu';
-import * as React from 'react';
-import { ITimesheetContext } from '../TimesheetContext';
-import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS';
-import { IActionBarProps } from './IActionBarProps';
+import { TFunction } from 'i18next'
+import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react/lib/Button'
+import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
+import * as React from 'react'
+import { ITimesheetContext } from '../TimesheetContext'
+import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS'
 
-export const MOVE_CURRENT_WEEK = ({ scope, dispatch }: ITimesheetContext): IContextualMenuItem => ({
-    key: 'MOVE_CURRENT_WEEK',
+export const goToCurrentWeek = ({ scope, dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
+    key: 'goToCurrentWeek',
     iconOnly: true,
     iconProps: { iconName: 'RenewalCurrent', ...ACTIONBAR_ICON_PROPS },
     onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: new Date().toISOString() }),
     disabled: scope.isCurrentWeek,
-    title: resource('TIMESHEET.COMMANDBAR_CURRENT_WEEK_TEXT'),
-});
+    title: t('goToCurrentWeek'),
+})
 
-export const MOVE_PREV_WEEK = ({ dispatch }: ITimesheetContext): IContextualMenuItem => ({
-    key: 'MOVE_PREV_WEEK',
+export const goToPrevWeek = ({ dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
+    key: 'goToPrevWeek',
     iconOnly: true,
     iconProps: { iconName: 'Back', ...ACTIONBAR_ICON_PROPS },
     onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: { amount: -1, unit: 'week' } }),
-    title: resource('TIMESHEET.COMMANDBAR_PREV_WEEK_TEXT')
-});
+    title: t('goToPrevWeek')
+})
 
-export const MOVE_NEXT_WEEK = ({ dispatch }: ITimesheetContext): IContextualMenuItem => ({
-    key: 'MOVE_NEXT_WEEK',
+export const goToNextWeek = ({ dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
+    key: 'goToNextWeek',
     iconOnly: true,
     iconProps: { iconName: 'Forward', ...ACTIONBAR_ICON_PROPS },
     onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: { amount: 1, unit: 'week' } }),
-    title: resource('TIMESHEET.COMMANDBAR_NEXT_WEEK_TEXT'),
-});
+    title: t('goToNextWeek'),
+})
 
-export const CHANGE_PERIOD = ({ periods, loading, selectedPeriod, dispatch }: ITimesheetContext): IContextualMenuItem[] => {
+export const CHANGE_PERIOD = ({ periods, loading, selectedPeriod, dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem[] => {
     if (periods.length === 1) {
         return [
             {
                 key: 'CHANGE_PERIOD_0',
                 onRender: () => (
-                    <span style={{ paddingTop: 12 }}>
-                        {selectedPeriod.getName(false)}
+                    <span style={{ lineHeight: '44px', paddingLeft: 8 }}>
+                        {selectedPeriod.getName(false, t)}
                     </span>
                 ),
             }
@@ -51,29 +50,26 @@ export const CHANGE_PERIOD = ({ periods, loading, selectedPeriod, dispatch }: IT
                 hidden={!!loading}
                 iconProps={{ iconName: 'DateTime' }}
                 onClick={() => dispatch({ type: 'CHANGE_PERIOD', payload: period.id })}
-                text={period.getName(true)}
+                text={period.getName(true, t)}
                 styles={{ root: { height: 44, marginLeft: 4 } }}
                 checked={period.id === selectedPeriod.id} />
         ),
-    }));
-};
+    }))
+}
 
-export const CONFIRM_ACTIONS = (
-    { loading, selectedPeriod }: ITimesheetContext,
-    { onConfirmPeriod, onUnconfirmPeriod }: IActionBarProps,
-): IContextualMenuItem => ({
+export const CONFIRM_ACTIONS = (context: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
     key: 'CONFIRM_HOURS',
-    onRender: () => selectedPeriod.isConfirmed
+    onRender: () => context.selectedPeriod.confirmed
         ? <DefaultButton
-            disabled={!!loading}
+            disabled={!!context.loading}
             iconProps={{ iconName: 'Cancel' }}
-            onClick={onUnconfirmPeriod}
-            text={resource('TIMESHEET.UNCONFIRM_HOURS_TEXT')}
+            onClick={context.onUnconfirmPeriod}
+            text={t('unconfirmHoursText')}
             styles={{ root: { height: 44, marginLeft: 4 } }} />
         : <PrimaryButton
-            disabled={!!loading || selectedPeriod.unmatchedDuration > 0 || selectedPeriod.events.length === 0}
+            disabled={!!context.loading || context.selectedPeriod.unmatchedDuration > 0}
             iconProps={{ iconName: 'CheckMark' }}
-            onClick={onConfirmPeriod}
-            text={resource('TIMESHEET.CONFIRM_HOURS_TEXT')}
+            onClick={context.onConfirmPeriod}
+            text={t('confirmHoursText')}
             styles={{ root: { height: 44, marginLeft: 4 } }} />
-});
+})

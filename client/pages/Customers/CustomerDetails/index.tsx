@@ -1,28 +1,29 @@
-import { useQuery } from '@apollo/react-hooks';
-import { UserMessage } from 'components/UserMessage';
-import { value as value } from 'helpers';
-import resource from 'i18n';
-import { IProject } from 'interfaces/IProject';
-import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
-import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
-import { GET_PROJECTS, ProjectList } from 'pages/Projects';
-import * as React from 'react';
-import styles from './CustomerDetails.module.scss';
-import { ICustomerDetailsProps } from './ICustomerDetailsProps';
+import { useQuery } from '@apollo/react-hooks'
+import { UserMessage } from 'components/UserMessage'
+import { value as value } from 'helpers'
+import { IProject } from 'interfaces/IProject'
+import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
+import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
+import { GET_PROJECTS, ProjectList } from 'pages/Projects'
+import * as React from 'react'
+import { useTranslation } from 'react-i18next'
+import styles from './CustomerDetails.module.scss'
+import { ICustomerDetailsProps } from './ICustomerDetailsProps'
 
 
 /**
  * @category Customers
  */
 export const CustomerDetails = (props: ICustomerDetailsProps) => {
-    const { loading, error, data } = useQuery(GET_PROJECTS, { variables: { customerKey: value<string>(props, 'customer.key', '') } });
+    const { t } = useTranslation(['customers', 'common', 'projects'])
+    const { loading, error, data } = useQuery(GET_PROJECTS, { variables: { customerKey: value<string>(props, 'customer.key', '') } })
 
     return (
         <div className={styles.root}>
             <h3 className={styles.name}>{props.customer.name}</h3>
             {props.customer.inactive && (
                 <UserMessage
-                    text={resource('CUSTOMERS.CUSTOMER_INACTIVE_TEXT')}
+                    text={t('inactiveText')}
                     iconName='Warning'
                     type={MessageBarType.warning} />
             )}
@@ -32,7 +33,7 @@ export const CustomerDetails = (props: ICustomerDetailsProps) => {
                     className={styles.buttonContainer}
                     hidden={loading || !!error || !props.customer.webLink}>
                     <DefaultButton
-                        text={resource('CUSTOMERS.CUSTOMER_WEBLINK_TEXT')}
+                        text={t('webLinkText')}
                         href={props.customer.webLink}
                         iconProps={{ iconName: 'WorkforceManagement' }} />
                 </div>
@@ -40,22 +41,22 @@ export const CustomerDetails = (props: ICustomerDetailsProps) => {
                     className={styles.buttonContainer}
                     hidden={loading || !!error || !props.customer.externalSystemURL} >
                     <DefaultButton
-                        text={resource('CUSTOMERS.CUSTOMER_EXTERNAL_SYSTEM_URL_TEXT')}
+                        text={t('externalSystemUrlText')}
                         href={props.customer.externalSystemURL}
                         iconProps={{ iconName: 'WorkforceManagement' }} />
                 </div>
             </div>
             <div>
-                {error && <MessageBar messageBarType={MessageBarType.error}>{resource('COMMON.GENERIC_ERROR_TEXT')}</MessageBar>}
+                {error && <MessageBar messageBarType={MessageBarType.error}>{t('genericErrorText')}</MessageBar>}
                 {!error && (
                     <ProjectList
                         items={value<IProject[]>(data, 'projects', [])}
                         enableShimmer={loading}
-                        searchBox={{ placeholder: resource('PROJECTS.SEARCH_PLACEHOLDER') }}
+                        searchBox={{ placeholder: t('searchPlaceholder', { ns: 'projects' }) }}
                         renderLink={true}
                         height={300} />
                 )}
             </div>
         </div>
-    );
-};
+    )
+}

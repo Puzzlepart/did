@@ -1,4 +1,4 @@
-import { IFilter, IFilterItem } from '../Filters';
+import { IFilter, IFilterItem } from '../Filters'
 
 /**
  * @category FilterPanel

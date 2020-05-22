@@ -1,12 +1,12 @@
-import { IProject } from './IProject';
-import { IObjectWithKey } from 'office-ui-fabric-react/lib/DetailsList';
-import { ICustomer } from './ICustomer';
+import { ICustomer } from './ICustomer'
+import { IProject } from './IProject'
 
 /**
  * @category Common
  */
-export interface ITimeEntry extends IObjectWithKey {
+export interface ITimeEntry {
     id: string;
+    key: string;
     title: string;
     isOrganizer: boolean;
     project: IProject;
@@ -15,12 +15,11 @@ export interface ITimeEntry extends IObjectWithKey {
     projectKey: string;
     customerKey: string;
     webLink: string;
-    durationMinutes: number;
-    durationHours: number;
-    startTime: string;
-    endTime: string;
+    duration: number;
+    startDateTime: string;
+    endDateTime: string;
     day: string;
-    isManualMatch?: boolean;
+    manualMatch?: boolean;
     isIgnored?: boolean;
     error?: Error;
 }

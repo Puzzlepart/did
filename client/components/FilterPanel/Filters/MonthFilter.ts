@@ -1,17 +1,16 @@
-import { value as value } from 'helpers';
-import resource from 'i18n';
-import { unique } from 'underscore';
-import { capitalize } from 'underscore.string';
-import dateUtils from 'utils/date';
-import { BaseFilter, IFilter } from './BaseFilter';
+import { value as value } from 'helpers'
+import { unique } from 'underscore'
+import { capitalize } from 'underscore.string'
+import dateUtils from 'utils/date'
+import { BaseFilter, IFilter } from './BaseFilter'
 
 
 /**
  * @category FilterPanel
  */
 export class MonthFilter extends BaseFilter {
-    constructor(fieldName: string) {
-        super(fieldName);
+    constructor(public fieldName: string, public name: string) {
+        super(fieldName)
     }
 
     /**
@@ -20,16 +19,16 @@ export class MonthFilter extends BaseFilter {
      * @param {any[]} entries Entries
      */
     public initialize(entries: any[]): IFilter {
-        let months: string[] = unique(entries.map(e => value(e, this.fieldName, null)));
+        let months: string[] = unique(entries.map(e => value(e, this.fieldName, null)))
         months = dateUtils.getMonthNames()
             .filter(m => months.indexOf(m) !== -1)
             .map(m => capitalize(m))
-        const items = months.map(month => ({ key: month, value: month, }));
+        const items = months.map(month => ({ key: month, value: month, }))
         return {
             key: this.fieldName,
-            name: resource('COMMON.MONTH_LABEL'),
+            name: this.name,
             items,
             selected: [],
-        };
+        }
     }
 }

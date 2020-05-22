@@ -1,4 +1,4 @@
-import { IMessageBarProps, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
+import { IMessageBarProps, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 
 /**
  * @category UserMessage
@@ -37,7 +37,7 @@ export interface IUserMessageProps extends IMessageBarProps {
     containerStyle?: React.CSSProperties;
 
     /**
-     * To flex the message center, speficy a fixed height
+     * To flex the message center, speficy a min height
      */
     fixedCenter?: number;
 }

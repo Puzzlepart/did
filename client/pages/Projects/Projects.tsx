@@ -1,53 +1,54 @@
-import { useQuery } from '@apollo/react-hooks';
-import { UserMessage } from 'components/UserMessage';
-import { value as value } from 'helpers';
-import resource from 'i18n';
-import { IOutlookCategory, IProject } from 'interfaces';
-import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList';
-import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
-import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot';
-import { CreateProjectForm } from 'pages/Projects/CreateProjectForm';
-import * as React from 'react';
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import _ from 'underscore';
-import { ProjectDetails } from './ProjectDetails';
-import ProjectList from './ProjectList';
-import { GET_PROJECTS, IGetProjectsData } from './types';
+import { useQuery } from '@apollo/react-hooks'
+import { UserMessage } from 'components/UserMessage'
+import { value as value } from 'helpers'
+import { IOutlookCategory, IProject } from 'interfaces'
+import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
+import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
+import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
+import { CreateProjectForm } from 'pages/Projects/CreateProjectForm'
+import * as React from 'react'
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useParams } from 'react-router-dom'
+import _ from 'underscore'
+import { ProjectDetails } from './ProjectDetails'
+import ProjectList from './ProjectList'
+import { GET_PROJECTS, IGetProjectsData } from './types'
 
 /**
  * @category Projects
  */
 export const Projects = () => {
-    const params = useParams<{ key: string }>();
-    const [selected, setSelected] = useState<IProject>(null);
-    const { loading, error, data } = useQuery<IGetProjectsData>(GET_PROJECTS, { variables: { sortBy: 'name' }, fetchPolicy: 'cache-first' });
+    const { t } = useTranslation(['projects', 'common'])
+    const params = useParams<{ key: string }>()
+    const [selected, setSelected] = useState<IProject>(null)
+    const { loading, error, data } = useQuery<IGetProjectsData>(GET_PROJECTS, { variables: { sortBy: 'name' }, fetchPolicy: 'cache-first' })
 
-    const outlookCategories = value<IOutlookCategory[]>(data, 'outlookCategories', []);
+    const outlookCategories = value<IOutlookCategory[]>(data, 'outlookCategories', [])
     const projects = value<IProject[]>(data, 'projects', []).map(p => ({ ...p, outlookCategory: _.find(outlookCategories, c => c.displayName === p.key) }))
 
     React.useEffect(() => {
         if (!selected && params.key) {
-            const _selected = _.find(projects, p => p.id === params.key.toUpperCase());
-            setSelected(_selected);
+            const _selected = _.find(projects, p => p.id === params.key.toUpperCase())
+            setSelected(_selected)
         }
-    }, [params.key, projects]);
+    }, [params.key, projects])
 
     return (
         <Pivot styles={{ itemContainer: { paddingTop: 10 } }}>
             <PivotItem
                 itemID='search'
                 itemKey='search'
-                headerText={resource('COMMON.SEARCH_TEXT')}
+                headerText={t('search', { ns: 'common' })}
                 itemIcon='FabricFolderSearch'>
                 {error
-                    ? <UserMessage type={MessageBarType.error} text={resource('COMMON.GENERIC_ERROR_TEXT')} />
+                    ? <UserMessage type={MessageBarType.error} text={t('genericErrorText')} />
                     : (
                         <>
                             <ProjectList
                                 enableShimmer={loading}
                                 items={projects}
-                                searchBox={{ placeholder: resource('COMMON.SEARCH_PLACEHOLDER') }}
+                                searchBox={{ placeholder: t('searchPlaceholder') }}
                                 selection={{
                                     mode: SelectionMode.single,
                                     onChanged: selected => setSelected(selected),
@@ -60,17 +61,20 @@ export const Projects = () => {
             <PivotItem
                 itemID='myprojects'
                 itemKey='myprojects'
-                headerText={resource('PROJECTS.MY_PROJECTS_TEXT')}
+                headerText={t('myProjectsText')}
                 itemIcon='FabricUserFolder'>
                 {error
-                    ? <UserMessage type={MessageBarType.error} text={resource('COMMON.GENERIC_ERROR_TEXT')} />
+                    ? <UserMessage type={MessageBarType.error} text={t('genericErrorText', { ns: 'common' })} />
                     : (
                         <>
-                            <UserMessage containerStyle={{ marginBottom: 12 }} iconName='OutlookLogoInverse' text={resource('PROJECTS.OUTLOOK_CATEGORY_INFO_TEXT')} />
+                            <UserMessage
+                                containerStyle={{ marginBottom: 12 }}
+                                iconName='OutlookLogoInverse'
+                                text={t('outlookCategoryInfoText')} />
                             <ProjectList
                                 enableShimmer={loading}
                                 items={projects.filter(p => !!p.outlookCategory)}
-                                searchBox={{ placeholder: resource('PROJECTS.MY_PROJECTS_SEARCH_PLACEHOLDER') }}
+                                searchBox={{ placeholder: t('myProjectsSearchPlaceholder') }}
                                 selection={{
                                     mode: SelectionMode.single,
                                     onChanged: selected => setSelected(selected),
@@ -85,13 +89,13 @@ export const Projects = () => {
             <PivotItem
                 itemID='new'
                 itemKey='new'
-                headerText={resource('COMMON.CREATE_NEW_TEXT')}
+                headerText={t('createNewText', { ns: 'common' })}
                 itemIcon='AddTo'>
                 <CreateProjectForm />
             </PivotItem>
         </Pivot >
-    );
+    )
 }
 
-export { ProjectList, GET_PROJECTS };
+export { ProjectList, GET_PROJECTS }
 

@@ -1,5 +1,6 @@
-import { IEntityLabel } from 'components';
-import { IModalProps } from 'office-ui-fabric-react/lib/Modal';
+import { IEntityLabel } from 'interfaces/IEntityLabel'
+import { IModalProps } from 'office-ui-fabric-react/lib/Modal'
+
 /**
  * @category LabelForm
  */

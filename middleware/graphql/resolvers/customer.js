@@ -1,10 +1,8 @@
-const _ = require('underscore');
-const { TableBatch } = require('azure-storage');
-const { executeBatch } = require('../../../utils/table');
+const _ = require('underscore')
+const { executeBatch, createBatch } = require('../../../utils/table')
 
 const typeDef = `  
   type Customer {
-    id: String
     key: String
     name: String
     description: String
@@ -12,6 +10,13 @@ const typeDef = `
     externalSystemURL: String
     icon: String
     inactive: Boolean
+  } 
+
+  input CustomerInput {
+    key: String
+    name: String
+    description: String
+    icon: String
   }
   
   extend type Query {
@@ -19,39 +24,39 @@ const typeDef = `
   }  
 
   extend type Mutation {	
-    createCustomer(key: String!, name: String!, description: String!, icon: String!): BaseResult   
+    createCustomer(customer: CustomerInput!): BaseResult   
     deleteCustomer(key: String!): BaseResult
   }
-`;
+`
 
 
-async function customers(_obj, _args, context) {
-  return await context.services.storage.getCustomers();
-};
+async function customers(_obj, _args, { services: { storage: StorageService } }) {
+  return await StorageService.getCustomers()
+}
 
-async function createCustomer(_obj, variables, context) {
+async function createCustomer(_obj, { customer }, { user, services: { storage: StorageService } }) {
   try {
-    await context.services.storage.createCustomer(variables, context.user.profile.oid);
-    return { success: true, error: null };
+    await StorageService.createCustomer(customer, user.id)
+    return { success: true, error: null }
   } catch (error) {
-    return { success: false, error: _.omit(error, 'requestId') };
+    return { success: false, error: _.omit(error, 'requestId') }
   }
 }
 
-async function deleteCustomer(_obj, variables, context) {
+async function deleteCustomer(_obj, variables, { services: { storage: StorageService } }) {
   try {
-    let projects = await context.services.storage.getProjects(variables.key, { noParse: true });
+    let projects = await StorageService.getProjects(variables.key, { noParse: true })
     if (projects.length > 0) {
       const batch = projects.reduce((b, entity) => {
-        b.deleteEntity(entity);
-        return b;
-      }, new TableBatch());
-      await executeBatch('Projects', batch);
+        b.deleteEntity(entity)
+        return b
+      }, createBatch())
+      await executeBatch('Projects', batch)
     }
-    await context.services.storage.deleteCustomer(variables.key);
-    return { success: true, error: null };
+    await context.services.storage.deleteCustomer(variables.key)
+    return { success: true, error: null }
   } catch (error) {
-    return { success: false, error: _.omit(error, 'requestId') };
+    return { success: false, error: _.omit(error, 'requestId') }
   }
 }
 

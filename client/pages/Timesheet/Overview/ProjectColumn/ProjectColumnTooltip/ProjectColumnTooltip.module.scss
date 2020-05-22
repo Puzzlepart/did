@@ -1,0 +1,28 @@
+.root {
+  margin: 0;
+  min-width: 200px;
+
+  .title {
+    font-size: 13pt;
+    margin: 0;
+  }
+
+  .subTitle {
+    font-size: 8pt;
+    margin: 0 0 10px 0;
+  }
+
+  .description {
+    font-size: 8pt;
+    margin: 4px 0 10px 0;
+  }
+
+  .labels {
+    margin: 4px 0 10px 0;
+  }
+
+  .tag {
+    font-size: 9pt;
+    font-weight: 600;
+  }
+}

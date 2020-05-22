@@ -1,4 +1,6 @@
+import { TFunction } from 'i18next';
 import moment from 'moment';
+import format from 'string-format';
 import { capitalize } from 'underscore.string';
 require('twix');
 
@@ -12,13 +14,28 @@ export default new class DateUtils {
         moment.locale(this._locale);
     }
 
+    toMoment(date: string) {
+        const m = moment(date);
+        return m.add(m.toDate().getTimezoneOffset(), 'minutes')
+    }
+
+    getDurationDisplay(duration: number, t?: TFunction): string {
+        const hrsShortFormat = t ? t('hoursShortFormat', { ns: 'common', defaultValue: undefined }) : '{0}h'
+        const minShortFormat = t ? t('minutesShortFormat', { ns: 'common', defaultValue: undefined }) : '{0}min'
+        const hrs = Math.floor(duration)
+        const mins = parseInt(((duration % 1) * 60).toFixed(0))
+        const hrsStr = format(hrsShortFormat, hrs)
+        const minStr = format(minShortFormat, mins)
+        if (mins === 0) return hrsStr
+        if (hrs === 0) return minStr
+        return `${hrsStr} ${minStr}`
+    }
+
     /**
      * Format date
      * 
      * @param {string} date Date string
      * @param {string} dateFormat Date format
-     * 
-     * @category Helper
      */
     formatDate(date: string, dateFormat: string): string {
         const m = moment.utc(date);
@@ -30,8 +47,6 @@ export default new class DateUtils {
      * Get start of week
      * 
      * @param {string | Date | moment.Moment} date Date string
-     * 
-     * @category Helper
      */
     startOfWeek(date?: string | Date | moment.Moment): moment.Moment {
         const m = moment.utc(date);
@@ -42,8 +57,6 @@ export default new class DateUtils {
      * Get end of week
      * 
      * @param {string | Date} date Date string
-     * 
-     * @category Helper
      */
     endOfWeek(date?: string | Date | moment.Moment): moment.Moment {
         const m = moment.utc(date);
@@ -51,17 +64,18 @@ export default new class DateUtils {
     }
 
     /**
-     * Get weekdays
+     * Get days between a start and end time
      * 
-     * @param {moment.Moment | string} start Start
-     * @param {string} dateFormat Date format
-     * 
-     * @category Helper
+     * @param {moment.Moment} start Start
+     * @param {moment.Moment} end End
+     * @param {string} dayFormat Date format
      */
-    getWeekdays(start: moment.Moment, dateFormat: string): string[] {
-        return moment.weekdays(true).map((_, index) => {
-            return capitalize(start.clone().add(index, 'days').locale(this._locale).format(dateFormat));
-        });
+    getDays(start: moment.Moment, end: moment.Moment, dayFormat: string): string[] {
+        const days = []
+        for (let i = 0; i <= (end.weekday() - start.weekday()); i++) {
+            days.push(capitalize(start.clone().add(i, 'days').locale(this._locale).format(dayFormat)));
+        }
+        return days;
     }
 
 
@@ -69,8 +83,6 @@ export default new class DateUtils {
      * Get month name
      * 
      * @param {number} monthNumber Month number
-     * 
-     * @category Helper
      */
     getMonthName(monthNumber: number): string {
         return moment().locale(this._locale).month(monthNumber).format('MMMM');
@@ -82,8 +94,6 @@ export default new class DateUtils {
      * @param {moment.Moment} start Start
      * @param {moment.Moment} end End
      * @param {object} options Options
-     * 
-     * @category Helper
      */
     getTimespanString(start: moment.Moment, end: moment.Moment, options: object = { monthFormat: 'MMMM', yearFormat: 'YYYY', hideYear: false, implicitYear: false }): string {
         return start.locale(this._locale)['twix'](end.locale(this._locale), { allDay: true }).format(options).toLowerCase();
@@ -94,5 +104,12 @@ export default new class DateUtils {
     */
     getMonthNames(): string[] {
         return Array.apply(0, Array(12)).map((_: any, i: number) => moment().month(i).format('MMMM'));
+    }
+
+    /**
+     * Get a string representation of the moment date instance
+     */
+    toString(start: moment.Moment) {
+        return start.toISOString().replace('Z', '');
     }
 }

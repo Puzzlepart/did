@@ -1,6 +1,6 @@
-import { ApolloClient, FetchPolicy, WatchQueryFetchPolicy } from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { HttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory'
+import { ApolloClient, FetchPolicy } from 'apollo-client'
+import { HttpLink } from 'apollo-link-http'
 
 /**
  * @ignore
@@ -29,8 +29,10 @@ export interface IBaseResult {
  */
 export const getClient = (uri: string = `${document.location.origin}/graphql`, fetchPolicy: WatchQueryFetchPolicy = 'cache-and-network') => new ApolloClient({
   cache: new InMemoryCache(),
-  link: new HttpLink({ uri }),
-  defaultOptions: { watchQuery: { fetchPolicy } },
-});
+  link: new HttpLink({ uri: `${document.location.origin}/graphql` }),
+  defaultOptions: { watchQuery: { fetchPolicy: 'cache-and-network' } },
+})
 
+export { default as GET_CURRENT_USER } from './GET_CURRENT_USER'
 export { FetchPolicy }
+

@@ -1,27 +1,4 @@
-import getValue from 'get-value';
-import resource from 'i18n';
-import format from 'string-format';
-require('twix');
-
-/**
- * Get duration display
- * 
- * @param {number} minutes Minutes
- * @param {number} hours Hours
- * 
- * @category Helper
- */
-export function getDurationDisplay(minutes: number, hours?: number): string {
-    const hrsShortFormat = resource('COMMON.HOURS_SHORTFORMAT');
-    const minShortFormat = resource('COMMON.MINUTES_SHORTFORMAT');
-    const hrs = hours ? Math.floor(hours) : Math.floor(minutes / 60);
-    const mins = hours ? ((hours % 1) * 60) : minutes % 60;
-    const hrsStr = format(hrsShortFormat, hrs);
-    const minStr = format(minShortFormat, mins);;
-    if (mins === 0) return hrsStr;
-    if (hrs === 0) return minStr;
-    return `${hrsStr} ${minStr}`;
-}
+import getValue from 'get-value'
 
 /**
  * Converts string to array buffer
@@ -31,12 +8,12 @@ export function getDurationDisplay(minutes: number, hours?: number): string {
  * @category Helper
  */
 export function stringToArrayBuffer(str: string): ArrayBuffer {
-    const buf = new ArrayBuffer(str.length);
-    const view = new Uint8Array(buf);
+    const buf = new ArrayBuffer(str.length)
+    const view = new Uint8Array(buf)
     for (let i = 0; i !== str.length; ++i) {
-        view[i] = str.charCodeAt(i) & 0xFF;
+        view[i] = str.charCodeAt(i) & 0xFF
     }
-    return buf;
+    return buf
 }
 
 /**
@@ -48,13 +25,14 @@ export function stringToArrayBuffer(str: string): ArrayBuffer {
  * 
  * @category Helper
  */
-export function currencyDisplay(num: number, currency = 'NOK', minimumFractionDigits = 0): string {
+// eslint-disable-next-line @typescript-eslint/no-inferrable-types
+export function currencyDisplay(num: number, currency: string = 'NOK', minimumFractionDigits: number = 0): string {
     const formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency,
         minimumFractionDigits,
     })
-    return formatter.format(num);
+    return formatter.format(num)
 }
 
 
@@ -67,8 +45,8 @@ export function currencyDisplay(num: number, currency = 'NOK', minimumFractionDi
  * 
  * @category Helper
  */
-export function value<T>(obj: any, exp: string, defaultValue: T): T {
-    return getValue(obj, exp, { default: defaultValue });
+export function value<T>(obj: any, exp: string, defaultValue?: T): T {
+    return getValue(obj, exp, defaultValue && { default: defaultValue })
 }
 
 /**
@@ -80,8 +58,8 @@ export function value<T>(obj: any, exp: string, defaultValue: T): T {
  */
 export function sortAlphabetically(strArray: string[]): string[] {
     return strArray.sort((a, b) => {
-        if (a > b) return 1;
-        if (a < b) return -1;
-        return 0;
-    });
+        if (a > b) return 1
+        if (a < b) return -1
+        return 0
+    })
 }

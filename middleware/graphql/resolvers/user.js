@@ -1,14 +1,12 @@
 const typeDef = `  
     type User {
         id: String
-        key: String
-        role: String!
-        fullName: String!
+        role: String
+        fullName: String
         email: String
         userLanguage: String
         sub: Subscription
     }
-
     
     input UserInput  {
         id: String!
@@ -26,38 +24,40 @@ const typeDef = `
         updateUser(user: UserInput!): BaseResult!
         addUser(user: UserInput!): BaseResult!
     }
-`;
+`
 
 async function users(_obj, _args, { services: { storage: StorageService } }) {
-    let users = await StorageService.getUsers();
-    return users;
+    let users = await StorageService.getUsers()
+    return users
 }
 
-async function currentUser(_obj, _args, { user, services: { storage: StorageService } }) {
-    const currentUser = await StorageService.getUser(user.profile.oid);
-    const sub = await StorageService.getSubscription();
+async function currentUser(_obj, _args, { user: { id, tenantId, profile }, services: { subscription: SubscriptionService, storage: StorageService } }) {
+    const [user, sub] = await Promise.all([
+        StorageService.getUser(id),
+        SubscriptionService.getSubscription(tenantId)
+    ])
     return {
-        ...currentUser,
-        email: user.profile.email,
+        ...user,
+        email: profile.email,
         sub,
-    };
+    }
 }
 
 async function addUser(_obj, variables, { services: { storage: StorageService } }) {
     try {
-        await StorageService.addUser(variables.user);
-        return { success: true, error: null };
+        await StorageService.addUser(variables.user)
+        return { success: true, error: null }
     } catch (error) {
-        return { success: false, error: _.omit(error, 'requestId') };
+        return { success: false, error: _.omit(error, 'requestId') }
     }
 }
 
 async function updateUser(_obj, variables, { services: { storage: StorageService } }) {
     try {
-        await StorageService.updateUser(variables.user);
-        return { success: true, error: null };
+        await StorageService.updateUser(variables.user)
+        return { success: true, error: null }
     } catch (error) {
-        return { success: false, error: _.omit(error, 'requestId') };
+        return { success: false, error: _.omit(error, 'requestId') }
     }
 }
 

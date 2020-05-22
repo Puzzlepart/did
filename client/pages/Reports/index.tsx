@@ -1,21 +1,19 @@
-import { Reports } from './Reports';
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import * as React from 'react';
+import * as React from 'react'
+import { Route, Switch, useRouteMatch } from 'react-router-dom'
+import { Reports } from './Reports'
 
 /**
  * @ignore
  */
 const _ = () => {
-    const match = useRouteMatch();
+    const match = useRouteMatch()
     return (
         <Switch>
             <Route path={match.path}>
                 <Reports />
             </Route>
         </Switch>
-    );
+    )
 }
 
-_['displayName'] = 'Reports';
-
-export default _;
+export default _

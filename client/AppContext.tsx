@@ -1,14 +1,8 @@
-import { IUser } from 'interfaces/IUser';
-import * as React from 'react';
-
-export interface IVersionInfo {
-    branch?: string;
-    version?: string;
-}
+import { IUser } from 'interfaces/IUser'
+import * as React from 'react'
 
 export interface IAppContext {
     user?: IUser;
-    info?: IVersionInfo;
 }
 
-export const AppContext = React.createContext<IAppContext>({});
+export const AppContext = React.createContext<IAppContext>({})

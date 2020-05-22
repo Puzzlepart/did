@@ -1,22 +1,23 @@
-import { ISummaryViewType } from './types';
+import { TFunction } from 'i18next'
+import { ISummaryViewType } from './types'
 
-export const getTypes = (resource: (key: string) => string): ISummaryViewType[] => ([
+export const getTypes = (t: TFunction): ISummaryViewType[] => ([
     {
         key: 'resource',
         fieldName: 'resourceName',
-        name: resource('COMMON.EMPLOYEE_LABEL'),
+        name: t('employeeLabel'),
         iconProps: { iconName: 'FabricUserFolder' },
     },
     {
         key: 'project',
         fieldName: 'project.name',
-        name: resource('COMMON.PROJECT'),
+        name: t('project'),
         iconProps: { iconName: 'Teamwork' },
     },
     {
         key: 'customer',
         fieldName: 'customer.name',
-        name: resource('COMMON.CUSTOMER'),
+        name: t('customer'),
         iconProps: { iconName: 'CustomList' },
     }
-]);
+])

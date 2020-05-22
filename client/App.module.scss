@@ -3,9 +3,14 @@
 
     .container {
         max-width: 1440px;
+        padding: 0 10px 0 10px;
+        box-sizing: border-box;
         margin: auto;
         margin-top: 20px;
+    }
 
+    @media(max-width:600px) {
+        overflow: scroll;
     }
 
     @media (min-width: 576px) {
@@ -25,7 +30,7 @@
             max-width: 960px;
         }
     }
-    
+
     @media (min-width: 1200px) {
         .container {
             max-width: 1140px;
