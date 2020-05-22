@@ -190,13 +190,13 @@
     "admin": "Admin"
   },
   "permissions": {
-    "accessAdmin": "Tilgang til administrasjon",
-    "accessReports": "Tilgang til rapporter",
-    "manageLabels": "Administere merkelapper",
-    "deleteLabels": "Slette merkelapper",
-    "manageProjects": "Administrere prosjekter",
-    "deleteProjects": "Slette prosjekter",
-    "manageCustomers": "Administrere kunder",
-    "deleteCustomers": "Slette kunder"
+    "accessCustomers": "Access to kunder",
+    "accessProjects": "Access to projects",
+    "accessAdmin": "Access to Admin",
+    "accessReports": "Access to Reports",
+    "manageProjects": "Manage projects",
+    "deleteProjects": "Delete projects",
+    "manageCustomers": "Manage customers",
+    "deleteCustomers": "Delete customers"
   }
 }

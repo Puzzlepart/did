@@ -15,6 +15,7 @@ import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
 import { GET_PROJECTS, IGetProjectsData } from './types'
 import { AppContext } from 'AppContext'
+import { manageProjects } from 'config/security/permissions'
 
 /**
  * @category Projects
@@ -88,7 +89,7 @@ export const Projects = () => {
                         </>
                     )}
             </PivotItem>
-            {contains(user.role.permissions, 'ef4032fb') && (
+            {contains(user.role.permissions, manageProjects) && (
                 <PivotItem
                     itemID='new'
                     itemKey='new'

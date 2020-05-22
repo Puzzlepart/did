@@ -13,6 +13,7 @@ import { contains, find } from 'underscore'
 import { CustomerDetails } from './CustomerDetails'
 import { CustomerList } from './CustomerList'
 import GET_CUSTOMERS, { IGetCustomersData } from './GET_CUSTOMERS'
+import { manageCustomers } from 'config/security/permissions'
 
 /**
  * @category Customers
@@ -54,7 +55,7 @@ export const Customers = () => {
                         </>
                     )}
             </PivotItem>
-            {contains(user.role.permissions, '09909241') && (
+            {contains(user.role.permissions, manageCustomers) && (
                 <PivotItem
                     itemID='new'
                     itemKey='new'

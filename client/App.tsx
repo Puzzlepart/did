@@ -5,6 +5,7 @@ import styles from './App.module.scss'
 import { AppContext, IAppContext } from './AppContext'
 import { Admin, Customers, Home, Projects, Reports, Timesheet } from './pages'
 import { ProtectedRoute } from './ProtectedRoute'
+import { accessReports, accessAdmin, accessCustomers, accessProjects } from 'config/security/permissions'
 
 
 const App = (context: IAppContext): JSX.Element => {
@@ -18,20 +19,24 @@ const App = (context: IAppContext): JSX.Element => {
                             <Route path='/timesheet'>
                                 <Timesheet />
                             </Route>
-                            <Route path='/customers'>
+                            <Route
+                                path='/customers'
+                                permissionId={accessCustomers}>
                                 <Customers />
                             </Route>
-                            <Route path='/projects'>
+                            <Route
+                                path='/projects'
+                                permissionId={accessProjects}>
                                 <Projects />
                             </Route>
                             <ProtectedRoute
                                 path='/reports'
-                                permissionId='a031c42f'>
+                                permissionId={accessReports}>
                                 <Reports />
                             </ProtectedRoute>
                             <ProtectedRoute
                                 path='/admin'
-                                permissionId='2653c3aa'>
+                                permissionId={accessAdmin}>
                                 <Admin />
                             </ProtectedRoute>
                             <Route path='/'>
@@ -41,7 +46,7 @@ const App = (context: IAppContext): JSX.Element => {
                     </div>
                 </div>
             </Router>
-        </AppContext.Provider>
+        </AppContext.Provider >
     )
 }
 

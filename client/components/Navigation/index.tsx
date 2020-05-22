@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import styles from './Navigation.module.scss'
 import { NavItem } from './NavItem'
 import { UserMenu } from './UserMenu'
+import { accessAdmin, accessReports, accessCustomers, accessProjects } from 'config/security/permissions'
 
 export const Navigation = () => {
     const { t } = useTranslation('navigation')
@@ -23,21 +24,23 @@ export const Navigation = () => {
                     <NavItem
                         text={t('customers')}
                         iconName='People'
-                        to='/customers' />
+                        to='/customers'
+                        permission={accessCustomers}  />
                     <NavItem
                         text={t('projects')}
                         iconName='ProjectCollection'
-                        to='/projects' />
+                        to='/projects' 
+                        permission={accessProjects} />
                     <NavItem
                         text={t('reports')}
                         iconName='ReportDocument'
                         to='/reports'
-                        permissionId='a031c42f' />
+                        permission={accessReports} />
                     <NavItem
                         text={t('admin')}
                         iconName='Settings'
                         to='/admin'
-                        permissionId='2653c3aa' />
+                        permission={accessAdmin} />
                 </ul>
                 <UserMenu />
             </div>

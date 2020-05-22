@@ -8,7 +8,7 @@ import { INavItemProps } from './types'
 
 export const NavItem = (props: INavItemProps) => {
     const { user } = React.useContext(AppContext)
-    if (!!props.permissionId && !contains(user.role.permissions, props.permissionId)) return null
+    if (!!props.permission && !contains(user.role.permissions, props.permission)) return null
     return (
         <li className={styles.root}>
             <NavLink

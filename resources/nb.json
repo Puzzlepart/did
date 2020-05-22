@@ -190,10 +190,10 @@
     "admin": "Administrasjon"
   },
   "permissions": {
+    "accessCustomers": "Tilgang til kunder",
+    "accessProjects": "Tilgang til prosjekter",
     "accessAdmin": "Tilgang til administrasjon",
     "accessReports": "Tilgang til rapporter",
-    "manageLabels": "Administere merkelapper",
-    "deleteLabels": "Slette merkelapper",
     "manageProjects": "Administrere prosjekter",
     "deleteProjects": "Slette prosjekter",
     "manageCustomers": "Administrere kunder",
