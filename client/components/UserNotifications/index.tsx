@@ -49,7 +49,9 @@ export const UserNotifications = () => {
                 <div className={styles.icon}>
                     <Icon iconName='Ringer' />
                 </div>
-                <div className={styles.count}>{notifications.size}</div>
+                <div
+                    hidden={notifications.size === 0}
+                    className={styles.count}>{notifications.size}</div>
             </div>
             <UserNotificationsPanel
                 isOpen={showPanel}
