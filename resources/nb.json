@@ -71,6 +71,9 @@
     "defaultLabelTitle": "Ny merkelapp",
     "addNewLabel": "Opprett ny merkelapp",
     "editLabel": "Rediger merkelapp",
+    "addNewRole": "Legg til ny rolle",
+    "roleNameLabel": "Rollenavn",
+    "permissionsHeader": "Tilganger",
     "noTimeEntriesText": "Det er ingen registrerte timer for det valgte året.",
     "editRole": "Rediger rolle",
     "roles": "Roller"

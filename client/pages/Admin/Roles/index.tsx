@@ -16,7 +16,7 @@ import { PermissionList } from 'components/PermissionList'
 export const Roles = () => {
     const { t } = useTranslation(['admin', 'common'])
     const { data, loading, refetch } = useQuery(GET_ROLES)
-    const [editModal, setEditModal] = React.useState<IRoleModalProps>(null)
+    const [modal, setModal] = React.useState<IRoleModalProps>(null)
     const columns = [
         col(
             'name',
@@ -30,7 +30,7 @@ export const Roles = () => {
             (role: IRole) => <PermissionList permissionIds={role.permissions} />
         ),
         col(
-            'edit_delete',
+            'edit',
             '',
             { minWidth: 300, },
             (role: IRole) => (
@@ -38,11 +38,9 @@ export const Roles = () => {
                     <DefaultButton
                         styles={{ root: { marginRight: 4 } }}
                         text={t('editRole')}
-                        onClick={() => setEditModal({
-                            role,
-                            onSave: () => {
-                                refetch().then(() => setEditModal(null))
-                            }
+                        onClick={() => setModal({
+                            title: t('editRole'),
+                            edit: role,
                         })} />
                 </>
             )),
@@ -53,11 +51,27 @@ export const Roles = () => {
             <List
                 enableShimmer={loading}
                 items={value(data, 'roles', [])}
-                columns={columns} />
-            {editModal && (
+                columns={columns}
+                commandBar={{
+                    items: [
+                        {
+                            key: 'addNewRole',
+                            name: t('addNewRole'),
+                            iconProps: { iconName: 'AddFriend' },
+                            onClick: () => setModal({
+                                title: t('addNewRole'),
+                            }),
+                        },
+                    ],
+                    farItems: []
+                }} />
+            {modal && (
                 <RoleModal
-                    {...editModal}
-                    modal={{ onDismiss: () => setEditModal(null) }} />
+                    {...modal}
+                    onSave={() => {
+                        refetch().then(() => setModal(null))
+                    }}
+                    modal={{ onDismiss: () => setModal(null) }} />
             )}
         </>
     )

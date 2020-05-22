@@ -1,36 +1,35 @@
 import { useMutation } from '@apollo/react-hooks'
 import * as securityConfig from 'config/security'
-import { IPermission } from 'interfaces/IPermission'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
+import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import { Modal } from 'office-ui-fabric-react/lib/Modal'
 import { Toggle } from 'office-ui-fabric-react/lib/Toggle'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
-import { contains, omit } from 'underscore'
+import { contains, omit, isEmpty } from 'underscore'
 import styles from './RoleModal.module.scss'
-import { IRoleModalProps, UPDATE_ROLE } from './types'
+import { IRoleModalProps, UPDATE_ROLE, ADD_ROLE } from './types'
 
 /**
  * @category Admin
  */
 export const RoleModal = (props: IRoleModalProps) => {
-    const { t } = useTranslation(['admin', 'common'])
-    const [updateRole] = useMutation(UPDATE_ROLE)
-    const [role, setRole] = React.useState({ ...props.role })
+    const { t } = useTranslation('admin')
+    const [[addRole], [updateRole]] = [useMutation(ADD_ROLE), useMutation(UPDATE_ROLE)]
+    const [role, setRole] = React.useState(props.edit || { permissions: [] })
     const permissions = React.useMemo(() => securityConfig.permissions(t), [])
 
-    function togglePermission(permission: IPermission, checked: boolean) {
+    function togglePermission(permissionId: string, checked: boolean) {
         const rolePermissions = [...role.permissions]
-        const index = rolePermissions.indexOf(permission.id)
-        if (checked && index === -1) rolePermissions.push(permission.id)
+        const index = rolePermissions.indexOf(permissionId)
+        if (checked && index === -1) rolePermissions.push(permissionId)
         else rolePermissions.splice(index, 1)
         setRole({ ...role, permissions: rolePermissions })
     }
 
-
-
     async function onSave() {
-        await updateRole({ variables: { role: omit(role, '__typename') } })
+        if (props.edit) await updateRole({ variables: { role: omit(role, '__typename') } })
+        else await addRole({ variables: { role: omit(role, '__typename') } })
         props.onSave(role)
     }
 
@@ -40,21 +39,33 @@ export const RoleModal = (props: IRoleModalProps) => {
             containerClassName={styles.root}
             isOpen={true}>
             <div className={styles.title}>
-                {t('editRole')}
+                {props.title}
             </div>
             <div className={styles.container}>
-                {permissions.map(pl => (
-                    <div key={pl.key} className={styles.permissionItem}>
-                        <Toggle
-                            label={pl.name}
-                            defaultChecked={contains(role.permissions, pl.id)}
-                            onChange={(_event, checked) => togglePermission(pl, checked)} />
-                    </div>
-                ))}
+                <div className={styles.inputField}>
+                    <TextField
+                        label={t('roleNameLabel')}
+                        defaultValue={props.edit ? props.edit.name : ''}
+                        disabled={!!props.edit}
+                        required={true}
+                        onChange={(_event, name) => setRole({ ...role, name })} />
+                </div>
+                <div className={styles.subHeader}>{t('permissionsHeader')}</div>
+                <div className={styles.permissions}>
+                    {permissions.map(({ key, id, name }) => (
+                        <div key={key} className={styles.permissionItem}>
+                            <Toggle
+                                label={name}
+                                defaultChecked={contains(role.permissions, id)}
+                                onChange={(_event, checked) => togglePermission(id, checked)} />
+                        </div>
+                    ))}
+                </div>
                 <PrimaryButton
-                   className={styles.saveBtn}
+                    className={styles.saveBtn}
                     text={t('save', { ns: 'common' })}
-                    onClick={onSave} />
+                    onClick={onSave}
+                    disabled={!props.edit && isEmpty(role.name)} />
             </div>
         </Modal>
     )

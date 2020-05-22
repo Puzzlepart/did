@@ -2,9 +2,12 @@
 // Please do not change this file!
 interface CssExports {
   'container': string;
+  'inputField': string;
   'permissionItem': string;
+  'permissions': string;
   'root': string;
   'saveBtn': string;
+  'subHeader': string;
   'title': string;
 }
 export const cssExports: CssExports;

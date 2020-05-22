@@ -71,6 +71,9 @@
     "defaultLabelTitle": "My new label",
     "addNewLabel": "Add new label",
     "editLabel": "Edit label",
+    "addNewRole": "Add new role",
+    "roleNameLabel": "Rolename",
+    "permissionsHeader": "Permissions",
     "noTimeEntriesText": "There are no recorded hours for the selected year.",    
     "editRole": "Edit role",
     "roles": "Roles"
