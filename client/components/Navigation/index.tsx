@@ -32,12 +32,12 @@ export const Navigation = () => {
                         text={t('reports')}
                         iconName='ReportDocument'
                         to='/reports'
-                        permissionId='a031c42f-adcd-4314-bede-60ab7de2195c' />
+                        permissionId='a031c42f' />
                     <NavItem
                         text={t('admin')}
                         iconName='Settings'
                         to='/admin'
-                        permissionId='2653c3aa-e145-4a5d-a360-1e1f89e37597' />
+                        permissionId='2653c3aa' />
                 </ul>
                 <UserMenu />
             </div>
