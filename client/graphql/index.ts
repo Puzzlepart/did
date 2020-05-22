@@ -22,12 +22,9 @@ export interface IBaseResult {
 }
 
 /**
- * Get GraphQL client
- * 
- * @param {string} uri Base URI
- * @param {WatchQueryFetchPolicy} fetchPolicy Fetch policy
+ * @ignore
  */
-export const getClient = (uri: string = `${document.location.origin}/graphql`, fetchPolicy: WatchQueryFetchPolicy = 'cache-and-network') => new ApolloClient({
+export const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: new HttpLink({ uri: `${document.location.origin}/graphql` }),
   defaultOptions: { watchQuery: { fetchPolicy: 'cache-and-network' } },

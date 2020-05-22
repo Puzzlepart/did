@@ -1,5 +1,5 @@
-import { UserNotificationMessageModel } from '../types';
-import { IPanelProps } from 'office-ui-fabric-react/lib/Panel';
+import { UserNotificationMessageModel } from '../types'
+import { IPanelProps } from 'office-ui-fabric-react/lib/Panel'
 
 /**
  * @category UserNotifications

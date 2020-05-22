@@ -1,4 +1,4 @@
-import { UserNotificationMessageModel } from '../types';
+import { UserNotificationMessageModel } from '../types'
 
 /**
  * @category UserNotifications

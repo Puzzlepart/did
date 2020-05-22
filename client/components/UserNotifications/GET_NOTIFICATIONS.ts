@@ -1,6 +1,6 @@
 
-import gql from 'graphql-tag';
-import { IUserNotificationMessage } from './types';
+import gql from 'graphql-tag'
+import { IUserNotificationMessage } from './types'
 
 /**
  * @ignore
@@ -23,4 +23,4 @@ export default gql`
     moreLink
   }
 }
-`;
+`

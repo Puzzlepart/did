@@ -1,7 +1,7 @@
-import { IIconStyleProps, IIconStyles } from 'office-ui-fabric-react/lib/Icon';
-import { IMessageBarProps, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
-import { IStyleFunctionOrObject } from 'office-ui-fabric-react/lib/Utilities';
-import { IUserNotificationsPanelClassName } from './UserNotificationsPanel/types';
+import { IIconStyleProps, IIconStyles } from 'office-ui-fabric-react/lib/Icon'
+import { IMessageBarProps, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
+import { IStyleFunctionOrObject } from 'office-ui-fabric-react/lib/Utilities'
+import { IUserNotificationsPanelClassName } from './UserNotificationsPanel/types'
 
 /**
  * @category UserNotifications
@@ -12,7 +12,7 @@ export interface IUserNotificationsClassName {
         root: string;
         icon: string;
         count: string;
-    }
+    };
     panel: IUserNotificationsPanelClassName;
 }
 
@@ -61,60 +61,60 @@ export class UserNotificationMessageModel {
      * @param {IUserNotificationMessage} msg The message
      */
     constructor(msg: IUserNotificationMessage) {
-        this.id = msg.id;
-        this.type = msg.type;
-        this.severity = msg.severity;
-        this.text = msg.text;
-        this.moreLink = msg.moreLink;
+        this.id = msg.id
+        this.type = msg.type
+        this.severity = msg.severity
+        this.text = msg.text
+        this.moreLink = msg.moreLink
     }
 
     private get _messageBarType(): MessageBarType {
-        let messageBarType = MessageBarType.info;
+        let messageBarType = MessageBarType.info
         switch (this.type) {
             case UserNotificationMessageType.WEEK_NOT_CONFIRMED: {
                 messageBarType = MessageBarType.warning
             }
-                break;
+                break
             case UserNotificationMessageType.SERVICE_ANNOUNCEMENT: {
                 messageBarType = MessageBarType.warning
                 if (this.severity === UserNotificationMessageSeverity.HIGH) {
-                    messageBarType = MessageBarType.severeWarning;
+                    messageBarType = MessageBarType.severeWarning
                 }
             }
-                break;
+                break
         }
-        return messageBarType;
+        return messageBarType
     }
 
 
 
     private get _messageBarIconProps(): { iconName: string } {
-        let messageBarIconProps = undefined;
+        let messageBarIconProps = undefined
         switch (this.type) {
             case UserNotificationMessageType.WEEK_NOT_CONFIRMED: {
-                messageBarIconProps = { iconName: 'CalendarWorkWeek' };
+                messageBarIconProps = { iconName: 'CalendarWorkWeek' }
             }
-                break;
+                break
             case UserNotificationMessageType.SERVICE_ANNOUNCEMENT: {
-                messageBarIconProps = { iconName: 'Manufacturing' };
+                messageBarIconProps = { iconName: 'Manufacturing' }
             }
-                break;
+                break
             case UserNotificationMessageType.FEATURE_ANNOUNCEMENT: {
-                messageBarIconProps = { iconName: 'BuildQueueNew' };
+                messageBarIconProps = { iconName: 'BuildQueueNew' }
             }
-                break;
+                break
         }
-        return messageBarIconProps;
+        return messageBarIconProps
     }
 
 
     public get messageBarProps(): IMessageBarProps {
-        let messageBarProps: IMessageBarProps = {
+        const messageBarProps: IMessageBarProps = {
             itemID: this.id,
             messageBarType: this._messageBarType,
             messageBarIconProps: this._messageBarIconProps,
         }
-        return messageBarProps;
+        return messageBarProps
     }
 }
 
