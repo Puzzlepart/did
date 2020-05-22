@@ -1,0 +1,1211 @@
+{
+    "data": {
+        "customers": [
+            {
+                "id": "4SUBSEA",
+                "key": "4SUBSEA",
+                "name": "4Subsea"
+            },
+            {
+                "id": "99X",
+                "key": "99X",
+                "name": "99X"
+            },
+            {
+                "id": "99XT",
+                "key": "99XT",
+                "name": "99X Technology"
+            },
+            {
+                "id": "AFK",
+                "key": "AFK",
+                "name": "Akershus Fylkeskommune"
+            },
+            {
+                "id": "AGD",
+                "key": "AGD",
+                "name": "Agder Fylkeskommune"
+            },
+            {
+                "id": "AGDER",
+                "key": "AGDER",
+                "name": "Agder Fylkeskommune"
+            },
+            {
+                "id": "AIBEL",
+                "key": "AIBEL",
+                "name": "Aibel AS"
+            },
+            {
+                "id": "AK",
+                "key": "AK",
+                "name": "Asker Kommune"
+            },
+            {
+                "id": "AMENDE",
+                "key": "AMENDE",
+                "name": "Amende"
+            },
+            {
+                "id": "ANIMALIA",
+                "key": "ANIMALIA",
+                "name": "Animalia"
+            },
+            {
+                "id": "ARBS",
+                "key": "ARBS",
+                "name": "Arbeidstilsynet"
+            },
+            {
+                "id": "ARKIV",
+                "key": "ARKIV",
+                "name": "Arkivverket"
+            },
+            {
+                "id": "AS",
+                "key": "AS",
+                "name": "Aker Solutions"
+            },
+            {
+                "id": "ASKIM",
+                "key": "ASKIM",
+                "name": "Askim"
+            },
+            {
+                "id": "ASSIST",
+                "key": "ASSIST",
+                "name": "Assist365"
+            },
+            {
+                "id": "AVFALL",
+                "key": "AVFALL",
+                "name": "Avfall Sør"
+            },
+            {
+                "id": "AXESS",
+                "key": "AXESS",
+                "name": "Axess"
+            },
+            {
+                "id": "BAERUM",
+                "key": "BAERUM",
+                "name": "Bærum kommune"
+            },
+            {
+                "id": "BAMA",
+                "key": "BAMA",
+                "name": "Bama"
+            },
+            {
+                "id": "BBLDK",
+                "key": "BBLDK",
+                "name": "BBL DK"
+            },
+            {
+                "id": "BFK",
+                "key": "BFK",
+                "name": "Buskerud Fylkeskommune"
+            },
+            {
+                "id": "BI",
+                "key": "BI",
+                "name": "Bedriftsøkonomisk Institutt"
+            },
+            {
+                "id": "BITASTAD",
+                "key": "BITASTAD",
+                "name": "Bitastad"
+            },
+            {
+                "id": "BJK",
+                "key": "BJK",
+                "name": "Bjørnafjorden kommune"
+            },
+            {
+                "id": "BKK",
+                "key": "BKK",
+                "name": "BKK"
+            },
+            {
+                "id": "BM",
+                "key": "BM",
+                "name": "BM Norge"
+            },
+            {
+                "id": "BOKOM",
+                "key": "BOKOM",
+                "name": "Bø kommune"
+            },
+            {
+                "id": "BOS",
+                "key": "BOS",
+                "name": "Bertel O. Steen"
+            },
+            {
+                "id": "BOU",
+                "key": "BOU",
+                "name": "Uloba"
+            },
+            {
+                "id": "BRG",
+                "key": "BRG",
+                "name": "Bergen kommune"
+            },
+            {
+                "id": "BSLAW",
+                "key": "BSLAW",
+                "name": "Berngaard/Sandbek"
+            },
+            {
+                "id": "BUFDIR",
+                "key": "BUFDIR",
+                "name": "Barne- ungdoms- og familiedirektoratet"
+            },
+            {
+                "id": "CASA",
+                "key": "CASA",
+                "name": "Crayon ASA"
+            },
+            {
+                "id": "CBR",
+                "key": "CBR",
+                "name": "Ciber Norge AS"
+            },
+            {
+                "id": "CC",
+                "key": "CC",
+                "name": "Communicate"
+            },
+            {
+                "id": "CEMASYS",
+                "key": "CEMASYS",
+                "name": "Cemasys"
+            },
+            {
+                "id": "CL",
+                "key": "CL",
+                "name": "Color Line"
+            },
+            {
+                "id": "CLOUDWAY",
+                "key": "CLOUDWAY",
+                "name": "Cloudway"
+            },
+            {
+                "id": "COMPUTAS",
+                "key": "COMPUTAS",
+                "name": "Computas"
+            },
+            {
+                "id": "CRAYON",
+                "key": "CRAYON",
+                "name": "Crayon"
+            },
+            {
+                "id": "CUBERA",
+                "key": "CUBERA",
+                "name": "Cubera"
+            },
+            {
+                "id": "CUSTA",
+                "key": "CUSTA",
+                "name": "Customer A"
+            },
+            {
+                "id": "CUSTB",
+                "key": "CUSTB",
+                "name": "Customer B"
+            },
+            {
+                "id": "DDV",
+                "key": "DDV",
+                "name": "DDV"
+            },
+            {
+                "id": "DFØ",
+                "key": "DFØ",
+                "name": "DFØ"
+            },
+            {
+                "id": "DGI",
+                "key": "DGI",
+                "name": "DGI"
+            },
+            {
+                "id": "DIFI",
+                "key": "DIFI",
+                "name": "Difi"
+            },
+            {
+                "id": "DNB",
+                "key": "DNB",
+                "name": "DNB"
+            },
+            {
+                "id": "DNV",
+                "key": "DNV",
+                "name": "Det Norske Veritas"
+            },
+            {
+                "id": "DRIKT",
+                "key": "DRIKT",
+                "name": "Drammensregionen IKT"
+            },
+            {
+                "id": "DSS",
+                "key": "DSS",
+                "name": "Departementenes sikkerhets- og serviceorganisasjon"
+            },
+            {
+                "id": "ECCOL",
+                "key": "ECCOL",
+                "name": "Eurocenter"
+            },
+            {
+                "id": "EIDSIVA",
+                "key": "EIDSIVA",
+                "name": "Eidsiva"
+            },
+            {
+                "id": "EIKA",
+                "key": "EIKA",
+                "name": "Eika Gruppen"
+            },
+            {
+                "id": "EITZEN",
+                "key": "EITZEN",
+                "name": "Eitzen Chemical"
+            },
+            {
+                "id": "ELOPAK",
+                "key": "ELOPAK",
+                "name": "Elopak"
+            },
+            {
+                "id": "ELVERUM",
+                "key": "ELVERUM",
+                "name": "Elverum kommune"
+            },
+            {
+                "id": "EMU",
+                "key": "EMU",
+                "name": "Ekspert Maskinutleie AS"
+            },
+            {
+                "id": "ENABLE",
+                "key": "ENABLE",
+                "name": "Enable"
+            },
+            {
+                "id": "ERPT",
+                "key": "ERPT",
+                "name": "Earthport"
+            },
+            {
+                "id": "ESTATEC",
+                "key": "ESTATEC",
+                "name": "Estatec"
+            },
+            {
+                "id": "ETJ",
+                "key": "ETJ",
+                "name": "Forsvaret"
+            },
+            {
+                "id": "FARMEEN",
+                "key": "FARMEEN",
+                "name": "Frelsesarmeen"
+            },
+            {
+                "id": "FB",
+                "key": "FB",
+                "name": "Forsvarsbygg"
+            },
+            {
+                "id": "FF",
+                "key": "FF",
+                "name": "Formuesforvaltning"
+            },
+            {
+                "id": "FFK",
+                "key": "FFK",
+                "name": "FFK"
+            },
+            {
+                "id": "FHI",
+                "key": "FHI",
+                "name": "Folkehelseinstituttet"
+            },
+            {
+                "id": "FIFY",
+                "key": "FIFY",
+                "name": "Finnmark Fylkeskommune"
+            },
+            {
+                "id": "FREMTIND",
+                "key": "FREMTIND",
+                "name": "Fremtind Forsikring"
+            },
+            {
+                "id": "FRETEX",
+                "key": "FRETEX",
+                "name": "Fretex"
+            },
+            {
+                "id": "FS",
+                "key": "FS",
+                "name": "Firstservis"
+            },
+            {
+                "id": "GCE",
+                "key": "GCE",
+                "name": "GCE Node"
+            },
+            {
+                "id": "GLITRE",
+                "key": "GLITRE",
+                "name": "Glitre"
+            },
+            {
+                "id": "GNF",
+                "key": "GNF",
+                "name": "Gyldendal Norsk Forlag"
+            },
+            {
+                "id": "GOOD",
+                "key": "GOOD",
+                "name": "Goodtech"
+            },
+            {
+                "id": "GP",
+                "key": "GP",
+                "name": "Glasspaper"
+            },
+            {
+                "id": "GPN",
+                "key": "GPN",
+                "name": "Grønt Punkt Norge"
+            },
+            {
+                "id": "GUNDERS",
+                "key": "GUNDERS",
+                "name": "Gundersen"
+            },
+            {
+                "id": "HAFSLUND",
+                "key": "HAFSLUND",
+                "name": "Hafslund"
+            },
+            {
+                "id": "HAM",
+                "key": "HAM",
+                "name": "Hammerfest Kommune"
+            },
+            {
+                "id": "HARSTAD",
+                "key": "HARSTAD",
+                "name": "Harstad kommune"
+            },
+            {
+                "id": "HC",
+                "key": "HC",
+                "name": "Handicare"
+            },
+            {
+                "id": "HEDMARK",
+                "key": "HEDMARK",
+                "name": "Hedmark"
+            },
+            {
+                "id": "HEMIT",
+                "key": "HEMIT",
+                "name": "Hemit"
+            },
+            {
+                "id": "HEX",
+                "key": "HEX",
+                "name": "Hexagon Ragasco"
+            },
+            {
+                "id": "HII",
+                "key": "HII",
+                "name": "HI Industri"
+            },
+            {
+                "id": "HINN",
+                "key": "HINN",
+                "name": "Høgskolen i Innlandet"
+            },
+            {
+                "id": "HIOA",
+                "key": "HIOA",
+                "name": "Høgskolen i Oslo og Akershus"
+            },
+            {
+                "id": "HNIKT",
+                "key": "HNIKT",
+                "name": "Helse Nord IKT"
+            },
+            {
+                "id": "HOEGHL",
+                "key": "HOEGHL",
+                "name": "Høegh LNG"
+            },
+            {
+                "id": "HOLME",
+                "key": "HOLME",
+                "name": "Holmestrand kommune"
+            },
+            {
+                "id": "HORN",
+                "key": "HORN",
+                "name": "Hornindal kommune"
+            },
+            {
+                "id": "HPV",
+                "key": "HPV",
+                "name": "Høgskulen på Vestlandet"
+            },
+            {
+                "id": "HSH",
+                "key": "HSH",
+                "name": "Holmestrand kommune"
+            },
+            {
+                "id": "HT",
+                "key": "HT",
+                "name": "Høydeteknikk AS"
+            },
+            {
+                "id": "HYDRO",
+                "key": "HYDRO",
+                "name": "Norsk Hydro"
+            },
+            {
+                "id": "IAM",
+                "key": "IAM",
+                "name": "Employee Absence"
+            },
+            {
+                "id": "IMDI",
+                "key": "IMDI",
+                "name": "Imdi"
+            },
+            {
+                "id": "IN",
+                "key": "IN",
+                "name": "Innovasjon Norge"
+            },
+            {
+                "id": "INFIMA",
+                "key": "INFIMA",
+                "name": "Infima"
+            },
+            {
+                "id": "ITE",
+                "key": "ITE",
+                "name": "ITE Østerhus"
+            },
+            {
+                "id": "JBD",
+                "key": "JBD",
+                "name": "Jernbanedirektoratet"
+            },
+            {
+                "id": "KART",
+                "key": "KART",
+                "name": "Kartverket"
+            },
+            {
+                "id": "KH",
+                "key": "KH",
+                "name": "Kjedehuset"
+            },
+            {
+                "id": "KLP",
+                "key": "KLP",
+                "name": "KLP"
+            },
+            {
+                "id": "KOG",
+                "key": "KOG",
+                "name": "Kongsberg Gruppen ASA"
+            },
+            {
+                "id": "KRIKT",
+                "key": "KRIKT",
+                "name": "KR-IKT"
+            },
+            {
+                "id": "KRK",
+                "key": "KRK",
+                "name": "Kristiansand kommune"
+            },
+            {
+                "id": "KSVINGER",
+                "key": "KSVINGER",
+                "name": "Kongsvinger kommune"
+            },
+            {
+                "id": "LEVANGER",
+                "key": "LEVANGER",
+                "name": "Levanger Kommune"
+            },
+            {
+                "id": "LIER",
+                "key": "LIER",
+                "name": "Lier kommune"
+            },
+            {
+                "id": "LIK",
+                "key": "LIK",
+                "name": "Lindås Kommune"
+            },
+            {
+                "id": "LILLESAND",
+                "key": "LILLESAND",
+                "name": "Lillesand Kommune"
+            },
+            {
+                "id": "LINDORFF",
+                "key": "LINDORFF",
+                "name": "Lindorff"
+            },
+            {
+                "id": "LMV",
+                "key": "LMV",
+                "name": "Statens legemiddelverk"
+            },
+            {
+                "id": "LOKAL",
+                "key": "LOKAL",
+                "name": "Longyearbyen lokalstyre"
+            },
+            {
+                "id": "LSKOG",
+                "key": "LSKOG",
+                "name": "Lørenskog kommune"
+            },
+            {
+                "id": "LUNNER",
+                "key": "LUNNER",
+                "name": "Lunner kommune"
+            },
+            {
+                "id": "MAJEDIE",
+                "key": "MAJEDIE",
+                "name": "Majedie Asset Management"
+            },
+            {
+                "id": "MALLING",
+                "key": "MALLING",
+                "name": "Malling & Co"
+            },
+            {
+                "id": "MARINT",
+                "key": "MARINT",
+                "name": "Marint miljø"
+            },
+            {
+                "id": "MG",
+                "key": "MG",
+                "name": "Møller"
+            },
+            {
+                "id": "MILIAR",
+                "key": "MILIAR",
+                "name": "Miliarium"
+            },
+            {
+                "id": "MILLS",
+                "key": "MILLS",
+                "name": "Mills Agra"
+            },
+            {
+                "id": "MK",
+                "key": "MK",
+                "name": "Molde Kommune"
+            },
+            {
+                "id": "MOD",
+                "key": "MOD",
+                "name": "Mat og drikke AS"
+            },
+            {
+                "id": "MOLDE",
+                "key": "MOLDE",
+                "name": "Molde Kommune"
+            },
+            {
+                "id": "MOSS",
+                "key": "MOSS",
+                "name": "Moss kommune"
+            },
+            {
+                "id": "MRFYLKE",
+                "key": "MRFYLKE",
+                "name": "MRFYLKE"
+            },
+            {
+                "id": "MSFT",
+                "key": "MSFT",
+                "name": "Microsoft"
+            },
+            {
+                "id": "NAF",
+                "key": "NAF",
+                "name": "Norges Automobil Forbund"
+            },
+            {
+                "id": "NAMSOS",
+                "key": "NAMSOS",
+                "name": "Namsos Kommune"
+            },
+            {
+                "id": "NAS",
+                "key": "NAS",
+                "name": "Norwegian"
+            },
+            {
+                "id": "NAV",
+                "key": "NAV",
+                "name": "NAV"
+            },
+            {
+                "id": "NBREM",
+                "key": "NBREM",
+                "name": "Norges Bank Real Estate Mgmt."
+            },
+            {
+                "id": "NC",
+                "key": "NC",
+                "name": "Norconsult"
+            },
+            {
+                "id": "NES",
+                "key": "NES",
+                "name": "Nesodden kommune"
+            },
+            {
+                "id": "NFD",
+                "key": "NFD",
+                "name": "Nærings- og fiskeridepratementet"
+            },
+            {
+                "id": "NFK",
+                "key": "NFK",
+                "name": "Nordre Follo kommune"
+            },
+            {
+                "id": "NFR",
+                "key": "NFR",
+                "name": "Forskningsrådet"
+            },
+            {
+                "id": "NGI",
+                "key": "NGI",
+                "name": "Foreningen Norges Geotekniske Institutt"
+            },
+            {
+                "id": "NHO",
+                "key": "NHO",
+                "name": "NHO - Næringslivets hovedorganisasjon"
+            },
+            {
+                "id": "NITTEDAL",
+                "key": "NITTEDAL",
+                "name": "Nittedal kommune"
+            },
+            {
+                "id": "NMBU",
+                "key": "NMBU",
+                "name": "Norges miljø- og biovitenskapelige universitet"
+            },
+            {
+                "id": "NORDREFOLLO",
+                "key": "NORDREFOLLO",
+                "name": "Nordre Follo Kommune"
+            },
+            {
+                "id": "NORF",
+                "key": "NORF",
+                "name": "Nordfjord Nett"
+            },
+            {
+                "id": "NOROG",
+                "key": "NOROG",
+                "name": "Norsk olje og gass"
+            },
+            {
+                "id": "NORTERMINAL",
+                "key": "NORTERMINAL",
+                "name": "Norterminal"
+            },
+            {
+                "id": "NOX",
+                "key": "NOX",
+                "name": "NOX"
+            },
+            {
+                "id": "NPB",
+                "key": "NPB",
+                "name": "NP Bygg"
+            },
+            {
+                "id": "NPRO",
+                "key": "NPRO",
+                "name": "Norwegian Property"
+            },
+            {
+                "id": "NRK",
+                "key": "NRK",
+                "name": "NRK"
+            },
+            {
+                "id": "NTNU",
+                "key": "NTNU",
+                "name": "NTNU"
+            },
+            {
+                "id": "NYEMOSS",
+                "key": "NYEMOSS",
+                "name": "Nye Moss kommune"
+            },
+            {
+                "id": "NYKOM",
+                "key": "NYKOM",
+                "name": "Ny kommune i Indre Sunnfjord"
+            },
+            {
+                "id": "OB",
+                "key": "OB",
+                "name": "Omsorgsbygg"
+            },
+            {
+                "id": "OEIKER",
+                "key": "OEIKER",
+                "name": "Øvre Eiker kommune"
+            },
+            {
+                "id": "OFK",
+                "key": "OFK",
+                "name": "Oppland Fylkeskommune"
+            },
+            {
+                "id": "ORKLA",
+                "key": "ORKLA",
+                "name": "Orkla"
+            },
+            {
+                "id": "OSLK",
+                "key": "OSLK",
+                "name": "Oslo Kommune"
+            },
+            {
+                "id": "OTK",
+                "key": "OTK",
+                "name": "Østre-Toten Kommune"
+            },
+            {
+                "id": "OYEREN",
+                "key": "OYEREN",
+                "name": "Øyeren IKT"
+            },
+            {
+                "id": "PEBMAC",
+                "key": "PEBMAC",
+                "name": "Problem Exists Between Monitor And Chair"
+            },
+            {
+                "id": "PELICO",
+                "key": "PELICO",
+                "name": "Pelico AS"
+            },
+            {
+                "id": "PIT",
+                "key": "PIT",
+                "name": "Politiets IT"
+            },
+            {
+                "id": "PMI",
+                "key": "PMI",
+                "name": "Missions"
+            },
+            {
+                "id": "PORS",
+                "key": "PORS",
+                "name": "Porsgrunn kommune"
+            },
+            {
+                "id": "PROCANO",
+                "key": "PROCANO",
+                "name": "Procano"
+            },
+            {
+                "id": "PROTECTOR",
+                "key": "PROTECTOR",
+                "name": "Protector"
+            },
+            {
+                "id": "PZL",
+                "key": "PZL",
+                "name": "Puzzlepart"
+            },
+            {
+                "id": "RANA",
+                "key": "RANA",
+                "name": "Rana kommune"
+            },
+            {
+                "id": "RAND",
+                "key": "RAND",
+                "name": "Randaberg kommune"
+            },
+            {
+                "id": "RAP",
+                "key": "RAP",
+                "name": "Rapid Circle"
+            },
+            {
+                "id": "REDCROSS",
+                "key": "REDCROSS",
+                "name": "Røde Kors"
+            },
+            {
+                "id": "REV",
+                "key": "REV",
+                "name": "Riksrevisjonen"
+            },
+            {
+                "id": "REWIRED",
+                "key": "REWIRED",
+                "name": "Rewired"
+            },
+            {
+                "id": "RORIKT",
+                "key": "RORIKT",
+                "name": "ROR-IKT"
+            },
+            {
+                "id": "SAND",
+                "key": "SAND",
+                "name": "Sandnes Kommune"
+            },
+            {
+                "id": "SANDE",
+                "key": "SANDE",
+                "name": "Sande kommune"
+            },
+            {
+                "id": "SANDEFJORD",
+                "key": "SANDEFJORD",
+                "name": "Sandefjord kommune"
+            },
+            {
+                "id": "SB1",
+                "key": "SB1",
+                "name": "Sparebank1 (Sentralt/Utvikling)"
+            },
+            {
+                "id": "SBORG",
+                "key": "SBORG",
+                "name": "Sarpsborg kommune"
+            },
+            {
+                "id": "SBYGG",
+                "key": "SBYGG",
+                "name": "Statsbygg"
+            },
+            {
+                "id": "SEPTIK",
+                "key": "SEPTIK",
+                "name": "Sørmiljø Septikservice"
+            },
+            {
+                "id": "SGCM",
+                "key": "SGCM",
+                "name": "Saint-Gobain"
+            },
+            {
+                "id": "SIA",
+                "key": "SIA",
+                "name": "Studantsamskipnaden i Agder"
+            },
+            {
+                "id": "SKANSKA",
+                "key": "SKANSKA",
+                "name": "Skanska"
+            },
+            {
+                "id": "SKEDSMO",
+                "key": "SKEDSMO",
+                "name": "Skedsmo kommune"
+            },
+            {
+                "id": "SKI",
+                "key": "SKI",
+                "name": "Ski kommune"
+            },
+            {
+                "id": "SKIEIE",
+                "key": "SKIEIE",
+                "name": "Ski kommune Eiendom"
+            },
+            {
+                "id": "SKIKT",
+                "key": "SKIKT",
+                "name": "Ski kommune Kommunaltekniokk"
+            },
+            {
+                "id": "SKULD",
+                "key": "SKULD",
+                "name": "Skuld"
+            },
+            {
+                "id": "SLV",
+                "key": "SLV",
+                "name": "Statens legemiddelverk"
+            },
+            {
+                "id": "SMN",
+                "key": "SMN",
+                "name": "Sparebank Midt-Norge"
+            },
+            {
+                "id": "SMW",
+                "key": "SMW",
+                "name": "SmartWorks"
+            },
+            {
+                "id": "SOR",
+                "key": "SOR",
+                "name": "SOR"
+            },
+            {
+                "id": "SPNN",
+                "key": "SPNN",
+                "name": "Sparebank1 Nord-Norge"
+            },
+            {
+                "id": "SPORV",
+                "key": "SPORV",
+                "name": "Sporveien"
+            },
+            {
+                "id": "SSB",
+                "key": "SSB",
+                "name": "Statistisk Sentralbyrå"
+            },
+            {
+                "id": "SSO",
+                "key": "SSO",
+                "name": "Scatec Solar ASA"
+            },
+            {
+                "id": "STANGE",
+                "key": "STANGE",
+                "name": "Stange kommune"
+            },
+            {
+                "id": "STATKART",
+                "key": "STATKART",
+                "name": "Statens kartverk"
+            },
+            {
+                "id": "STATNETT",
+                "key": "STATNETT",
+                "name": "Statnett"
+            },
+            {
+                "id": "STATPED",
+                "key": "STATPED",
+                "name": "Statped"
+            },
+            {
+                "id": "STATSKOG",
+                "key": "STATSKOG",
+                "name": "Statskog"
+            },
+            {
+                "id": "STOREBRAND",
+                "key": "STOREBRAND",
+                "name": "Storebrand"
+            },
+            {
+                "id": "STORFOLLO",
+                "key": "STORFOLLO",
+                "name": "Storfollo IKT"
+            },
+            {
+                "id": "STORTINGET",
+                "key": "STORTINGET",
+                "name": "Stortinget"
+            },
+            {
+                "id": "STROMME",
+                "key": "STROMME",
+                "name": "Strømmestiftelsen"
+            },
+            {
+                "id": "SVGK",
+                "key": "SVGK",
+                "name": "Stavanger Kommune"
+            },
+            {
+                "id": "SYKEPART",
+                "key": "SYKEPART",
+                "name": "Sykehuspartner"
+            },
+            {
+                "id": "SYKINN",
+                "key": "SYKINN",
+                "name": "Sykehusinnkjøp"
+            },
+            {
+                "id": "TAG",
+                "key": "TAG",
+                "name": "TAG"
+            },
+            {
+                "id": "TEKNA",
+                "key": "TEKNA",
+                "name": "Tekna"
+            },
+            {
+                "id": "THON",
+                "key": "THON",
+                "name": "Olav Thon gruppen"
+            },
+            {
+                "id": "TIPPING",
+                "key": "TIPPING",
+                "name": "TIPPING"
+            },
+            {
+                "id": "TOMRA",
+                "key": "TOMRA",
+                "name": "Tomra"
+            },
+            {
+                "id": "TROMSO",
+                "key": "TROMSO",
+                "name": "Tromsø kommune"
+            },
+            {
+                "id": "TYS",
+                "key": "TYS",
+                "name": "Tysvær kommune"
+            },
+            {
+                "id": "UBYGG",
+                "key": "UBYGG",
+                "name": "Undervisningsbygg"
+            },
+            {
+                "id": "UD",
+                "key": "UD",
+                "name": "Utenriksdepartmentet"
+            },
+            {
+                "id": "UDI",
+                "key": "UDI",
+                "name": "Utlendingsdirektoratet"
+            },
+            {
+                "id": "UDIR",
+                "key": "UDIR",
+                "name": "Utdanningsdirektoratet"
+            },
+            {
+                "id": "UECC",
+                "key": "UECC",
+                "name": "United European Car Carriers"
+            },
+            {
+                "id": "UIA",
+                "key": "UIA",
+                "name": "Universitetet i Agder"
+            },
+            {
+                "id": "UIB",
+                "key": "UIB",
+                "name": "Universitetet i Bergen"
+            },
+            {
+                "id": "UIT",
+                "key": "UIT",
+                "name": "Universitetet i Tromsø"
+            },
+            {
+                "id": "VAERNES",
+                "key": "VAERNES",
+                "name": "Værnes"
+            },
+            {
+                "id": "VAF",
+                "key": "VAF",
+                "name": "Vest Agder Fylkeskommune"
+            },
+            {
+                "id": "VEI",
+                "key": "VEI",
+                "name": "Veidekke"
+            },
+            {
+                "id": "VFK",
+                "key": "VFK",
+                "name": "Vestfold Fylkeskommune"
+            },
+            {
+                "id": "VINO",
+                "key": "VINO",
+                "name": "Vinmonopolet"
+            },
+            {
+                "id": "VIPPS",
+                "key": "VIPPS",
+                "name": "VIPPS"
+            },
+            {
+                "id": "VOLDA",
+                "key": "VOLDA",
+                "name": "Volda kommune"
+            },
+            {
+                "id": "VY",
+                "key": "VY",
+                "name": "Vy"
+            },
+            {
+                "id": "WID",
+                "key": "WID",
+                "name": "Widerøe"
+            },
+            {
+                "id": "WMS",
+                "key": "WMS",
+                "name": "Wilhelmsen Maritime Services"
+            },
+            {
+                "id": "WR",
+                "key": "WR",
+                "name": "Wikborg Rein"
+            },
+            {
+                "id": "WWH",
+                "key": "WWH",
+                "name": "Wilhemsen Holding"
+            },
+            {
+                "id": "WWL",
+                "key": "WWL",
+                "name": "Wallenius Wilhelmsen"
+            },
+            {
+                "id": "YARA",
+                "key": "YARA",
+                "name": "Yara"
+            }
+        ]
+    }
+}
