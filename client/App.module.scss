@@ -3,13 +3,13 @@
 
     .container {
         max-width: 1440px;
+        padding: 0 10px 0 10px;
+        box-sizing: border-box;
         margin: auto;
         margin-top: 20px;
-
     }
 
     @media(max-width:600px) {
-        // Overflowing #app instead of body, to keep bottom menu sticky on mobile
         overflow: scroll;
     }
 

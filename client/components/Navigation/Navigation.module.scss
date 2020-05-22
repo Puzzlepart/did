@@ -75,7 +75,9 @@
         bottom: 0px;
         width: 100%;
         z-index: 100;
-        height: 45px;
+        height: 50px;
+        padding-bottom:10px;
+        background-color:  #363533;
 
 
         .container {
@@ -100,7 +102,7 @@
 
                         .navIcon {
                             display: flex;
-                            color: #fff;
+                            color: #f1f1f1;
                             font-size: 18px;
                             -webkit-font-smoothing: subpixel-antialiased;
                         }

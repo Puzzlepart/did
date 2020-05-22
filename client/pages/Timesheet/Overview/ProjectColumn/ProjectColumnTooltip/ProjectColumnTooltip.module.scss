@@ -1,26 +1,4 @@
 .root {
-  width: 100%;
-
-  .content {
-    display: flex;
-    flex-direction: row;
-
-    .subText {
-      font-size: 7pt;
-    }
-
-    .labelIcon {
-      margin: 0 0 0 6px;
-      align-self: center;
-    }
-
-    .clearButton {
-      margin: 0 0 0 4px;
-    }
-  }
-}
-
-.tooltip {
   margin: 0;
   min-width: 200px;
 

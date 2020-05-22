@@ -4,15 +4,17 @@ import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { TooltipDelay, TooltipHost } from 'office-ui-fabric-react/lib/Tooltip'
 import * as React from 'react'
+import { BrowserView } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
 import { withDefaultProps } from 'with-default-props'
-import { TimesheetContext } from '../TimesheetContext'
+import { TimesheetContext } from '../../TimesheetContext'
 import { ClearManualMatchButton } from './ClearManualMatchButton'
-import styles from './ProjectColumn.module.scss'
-import { ProjectColumnTooltip } from './ProjectColumnTooltip'
+import { ProjectColumnTooltip } from './ProjectColumnTooltip/ProjectColumnTooltip'
 import { ResolveProjectModal } from './ResolveProjectModal'
 import { IProjectColumnProps } from './types'
+import { isMobile } from 'react-device-detect'
+import styles from './ProjectColumn.module.scss'
 
 /**
  * @category Timesheet
@@ -20,10 +22,12 @@ import { IProjectColumnProps } from './types'
 const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
     const { t } = useTranslation('timesheet')
     const { dispatch, selectedPeriod } = React.useContext(TimesheetContext)
+    const className = [styles.root]
+    if (isMobile) className.push(styles.mobile)
     if (!event.project) {
         if (event.error) {
             return (
-                <div className={styles.root}>
+                <div className={className.join(' ')}>
                     <UserMessage
                         containerStyle={{ marginTop: 10 }}
                         isMultiline={false}
@@ -34,7 +38,7 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
             )
         }
         return (
-            <div className={styles.root}>
+            <div className={className.join(' ')}>
                 <UserMessage
                     containerStyle={{ marginTop: 10 }}
                     isMultiline={false}
@@ -42,13 +46,13 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
                     iconName='TagUnknown'
                     text={t('noProjectMatchFoundText')}
                     actions={
-                        <div>
+                        <BrowserView>
                             <ResolveProjectModal event={event} />
                             <MessageBarButton
                                 text={t('ignoreEventButtonLabel')}
                                 iconProps={{ iconName: 'Blocked2' }}
                                 onClick={() => dispatch({ type: 'IGNORE_EVENT', payload: event.id })} />
-                        </div>
+                        </BrowserView>
                     } />
             </div>
         )
@@ -62,10 +66,10 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
             delay={TooltipDelay.long}
             closeDelay={TooltipDelay.long}
             calloutProps={{ gapSpace: 0 }}>
-            <div className={styles.root}>
+            <div className={className.join(' ')}>
                 <div className={styles.content}>
                     <div>
-                        <a href={`/projects/${event.project.id}`}>{event.project.name}</a>
+                        <a className={styles.projectLink} href={`/projects/${event.project.id}`}>{event.project.name}</a>
                         <div className={styles.subText}>
                             <span>for </span><a href={`/customers/${event.customer.key}`}><span>{event.customer.name}</span></a>
                         </div>
