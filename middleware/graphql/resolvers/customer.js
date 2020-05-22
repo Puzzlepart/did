@@ -60,7 +60,6 @@ async function deleteCustomer(_obj, variables, { services: { storage: StorageSer
   }
 }
 
-
 module.exports = {
   resolvers: {
     Query: { customers },

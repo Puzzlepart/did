@@ -5,6 +5,7 @@ import { Link, NavLink } from 'react-router-dom'
 import styles from './Navigation.module.scss'
 import { UserMenu } from './UserMenu'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import { UserNotifications } from 'components/UserNotifications'
 
 
 export const Navigation = () => {
@@ -59,6 +60,7 @@ export const Navigation = () => {
                         </NavLink>
                     </li>
                 </ul>
+                <UserNotifications />
                 <UserMenu />
             </div>
         </nav>

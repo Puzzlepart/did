@@ -3,17 +3,18 @@ import { dateAdd, IPnPClientStore, PnPClientStorage } from '@pnp/common'
 import { value } from 'helpers'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import * as React from 'react'
-import { withDefaultProps } from 'with-default-props'
+import styles from './UserNotifications.module.scss'
 import GET_NOTIFICATIONS, { IGetNotifications } from './GET_NOTIFICATIONS'
-import { IUserNotificationsProps, UserNotificationMessageModel } from './types'
+import { UserNotificationMessageModel } from './types'
 import { UserNotificationsPanel } from './UserNotificationsPanel'
 
 const BROWSER_STORAGE: IPnPClientStore = new PnPClientStorage().session
+const STORAGE_KEY = 'did365_dismissed_notifications'
 
 /**
  * @category UserNotifications
  */
-const UserNotifications = (props: IUserNotificationsProps) => {
+export const UserNotifications = () => {
     const [showPanel, setShowPanel] = React.useState(false)
     const [notifications, setNotifications] = React.useState<Set<UserNotificationMessageModel>>(new Set())
     const { loading, data } = useQuery<IGetNotifications>(GET_NOTIFICATIONS, { skip: notifications.size > 0, fetchPolicy: 'cache-first' })
@@ -25,16 +26,16 @@ const UserNotifications = (props: IUserNotificationsProps) => {
      */
     const onDismissNotification = (notification: UserNotificationMessageModel) => {
         const _notifications = new Set(notifications)
-        _notifications.delete(notification)        
-        const _dismissedIds = new Set<string>(BROWSER_STORAGE.get(props.storageKey) || [])
+        _notifications.delete(notification)
+        const _dismissedIds = new Set<string>(BROWSER_STORAGE.get(STORAGE_KEY) || [])
         _dismissedIds.add(notification.id)
-        BROWSER_STORAGE.put(props.storageKey, [..._dismissedIds], dateAdd(new Date(), 'year', 1))
+        BROWSER_STORAGE.put(STORAGE_KEY, [..._dismissedIds], dateAdd(new Date(), 'year', 1))
         setNotifications(_notifications)
     }
 
 
     React.useEffect(() => {
-        const _dismissedIds = new Set<string>(BROWSER_STORAGE.get(props.storageKey) || [])
+        const _dismissedIds = new Set<string>(BROWSER_STORAGE.get(STORAGE_KEY) || [])
         let _notifications = value(data, 'notifications', []).map(n => new UserNotificationMessageModel(n))
         _notifications = _notifications.filter(n => !_dismissedIds.has(n.id))
         if (_notifications.length > 0) {
@@ -43,42 +44,21 @@ const UserNotifications = (props: IUserNotificationsProps) => {
     }, [loading])
 
     return (
-        <div className={props.className.root} hidden={loading}>
-            <div className={props.className.toggle.root} onClick={() => setShowPanel(!showPanel)}>
-                <div className={props.className.toggle.icon}>
-                    <Icon iconName={props.toggleIcon} styles={props.toggleStyles} />
+        <div className={styles.root} hidden={loading}>
+            <div className={styles.toggle} onClick={() => setShowPanel(!showPanel)}>
+                <div className={styles.icon}>
+                    <Icon iconName='Ringer' />
                 </div>
-                <div className={props.className.toggle.count}>{notifications.size}</div>
+                <div className={styles.count}>{notifications.size}</div>
             </div>
             <UserNotificationsPanel
                 isOpen={showPanel}
-                headerText={props.panelHeaderText}
                 notifications={notifications}
-                className={props.className.panel.root}
-                bodyClassName={props.className.panel.body}
-                notificationClassName={props.className.panel.notification}
+                className={styles.root}
+                bodyClassName={styles.body}
+                notificationClassName={styles.notification}
                 onDismiss={() => setShowPanel(false)}
                 onDismissNotification={onDismissNotification} />
         </div>
     )
 }
-
-export default withDefaultProps(UserNotifications, {
-    storageKey: 'did365_notifications_dismissed',
-    toggleIcon: 'Ringer',
-    toggleStyles: { root: { color: '#fff', fontSize: '14pt' } },
-    panelHeaderText: 'Notifications',
-    className: {
-        root: 'c-UserNotifications',
-        toggle: {
-            root: 'c-UserNotifications-toggle',
-            icon: 'c-UserNotifications-toggle-icon',
-            count: 'c-UserNotifications-toggle-count',
-        },
-        panel: {
-            root: 'c-UserNotifications-panel',
-            body: 'c-UserNotifications-panel-body',
-            notification: 'c-UserNotifications-panel-notification'
-        }
-    }
-})

@@ -1,11 +1,15 @@
-.c-UserNotifications {
-  margin: 10px 25px 0 0;
-
-  .c-UserNotifications-toggle {
+.root {
+  line-height: 55px;
+  .toggle {
     cursor: pointer;
     position: relative;
 
-    .c-UserNotifications-toggle-count {
+    .icon {
+      color: #fff;
+      font-size: 14pt;
+    }
+
+    .count {
       position: absolute;
       color: white;
       background-color: red;
@@ -16,17 +20,17 @@
       font-size: 0.8125rem;
       text-align: center;
       padding-top: 2px;
-      top: -9px;
+      top: 8px;
       right: -9px;
     }
   }
 }
 
-.c-UserNotifications-panel {
-  .c-UserNotifications-panel-body {
+.panel {
+  .body {
     padding: 20px 0 0 0;
   }
-  .c-UserNotifications-panel-notification {
+  .notification {
     margin: 10px 0 0 0;
   }
 }

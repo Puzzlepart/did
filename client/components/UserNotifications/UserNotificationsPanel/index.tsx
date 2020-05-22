@@ -12,7 +12,7 @@ export const UserNotificationsPanel = (props: IUserNotificationsPanelProps) => {
             type={props.type}
             isOpen={props.isOpen}
             className={props.className}
-            headerText={props.headerText}
+            headerText='Notifications'
             onDismiss={props.onDismiss}
             isLightDismiss={true}>
             <div className={props.bodyClassName}>

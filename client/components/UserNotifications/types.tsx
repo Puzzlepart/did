@@ -1,20 +1,4 @@
-import { IIconStyleProps, IIconStyles } from 'office-ui-fabric-react/lib/Icon'
 import { IMessageBarProps, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
-import { IStyleFunctionOrObject } from 'office-ui-fabric-react/lib/Utilities'
-import { IUserNotificationsPanelClassName } from './UserNotificationsPanel/types'
-
-/**
- * @category UserNotifications
- */
-export interface IUserNotificationsClassName {
-    root: string;
-    toggle: {
-        root: string;
-        icon: string;
-        count: string;
-    };
-    panel: IUserNotificationsPanelClassName;
-}
 
 /**
  * @category UserNotifications
@@ -114,15 +98,4 @@ export class UserNotificationMessageModel {
         }
         return messageBarProps
     }
-}
-
-/**
- * @category UserNotifications
- */
-export interface IUserNotificationsProps {
-    storageKey?: string;
-    toggleIcon?: string;
-    toggleStyles?: IStyleFunctionOrObject<IIconStyleProps, IIconStyles>;
-    panelHeaderText?: string;
-    className?: IUserNotificationsClassName;
 }
