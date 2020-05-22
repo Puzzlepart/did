@@ -17,8 +17,9 @@ export interface ITimesheetPeriod {
     events: ITimeEntry[];
 }
 
-const LOCAL_STORAGE: IPnPClientStore = new PnPClientStorage().local
-
+/**
+ * @category Timesheet
+ */
 export class TimesheetPeriod {
     public confirmed?: boolean;
     public ignoredEvents: string[] = [];
