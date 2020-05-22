@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import { AppContext } from 'AppContext'
 import { value as value } from 'helpers'
 import { ICustomer } from 'interfaces'
 import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
@@ -8,7 +9,7 @@ import { CreateCustomerForm } from 'pages/Customers/CreateCustomerForm'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import _ from 'underscore'
+import { contains, find } from 'underscore'
 import { CustomerDetails } from './CustomerDetails'
 import { CustomerList } from './CustomerList'
 import GET_CUSTOMERS, { IGetCustomersData } from './GET_CUSTOMERS'
@@ -18,6 +19,7 @@ import GET_CUSTOMERS, { IGetCustomersData } from './GET_CUSTOMERS'
  */
 export const Customers = () => {
     const { t } = useTranslation(['common', 'ADMINS'])
+    const { user } = React.useContext(AppContext)
     const params = useParams<{ key: string }>()
     const [selected, setSelected] = React.useState<ICustomer>(null)
     const { loading, error, data } = useQuery<IGetCustomersData>(GET_CUSTOMERS, { fetchPolicy: 'cache-first' })
@@ -26,7 +28,7 @@ export const Customers = () => {
 
     React.useEffect(() => {
         if (!selected && params.key) {
-            const _selected = _.find(customers, p => p.key === params.key)
+            const _selected = find(customers, p => p.key === params.key)
             setSelected(_selected)
         }
     }, [params.key, customers])
@@ -52,13 +54,15 @@ export const Customers = () => {
                         </>
                     )}
             </PivotItem>
-            <PivotItem
-                itemID='new'
-                itemKey='new'
-                headerText={t('createNewText')}
-                itemIcon='AddTo'>
-                <CreateCustomerForm />
-            </PivotItem>
+            {contains(user.role.permissions, '09909241') && (
+                <PivotItem
+                    itemID='new'
+                    itemKey='new'
+                    headerText={t('createNewText')}
+                    itemIcon='AddTo'>
+                    <CreateCustomerForm />
+                </PivotItem>
+            )}
         </Pivot >
     )
 }

@@ -13,16 +13,6 @@ export default (t: TFunction): IPermission[] => [
         name: t('accessReports', { ns: 'permissions' })
     },
     {
-        id: '7bbc0cef',
-        key: 'manageLabels',
-        name: t('manageLabels', { ns: 'permissions' })
-    },
-    {
-        id: 'a00f1c73-18a7-493f-89f7-a9c6267dedae',
-        key: 'deleteLabels',
-        name: t('deleteLabels', { ns: 'permissions' })
-    },
-    {
         id: 'ef4032fb',
         key: 'manageProjects',
         name: t('manageProjects', { ns: 'permissions' })

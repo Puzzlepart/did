@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import { UserMessage } from 'components/UserMessage'
-import { value as value } from 'helpers'
+import { value } from 'helpers'
 import { IOutlookCategory, IProject } from 'interfaces'
 import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
@@ -10,26 +10,28 @@ import * as React from 'react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import _ from 'underscore'
+import { find, contains } from 'underscore'
 import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
 import { GET_PROJECTS, IGetProjectsData } from './types'
+import { AppContext } from 'AppContext'
 
 /**
  * @category Projects
  */
 export const Projects = () => {
     const { t } = useTranslation(['projects', 'common'])
+    const { user } = React.useContext(AppContext)
     const params = useParams<{ key: string }>()
     const [selected, setSelected] = useState<IProject>(null)
     const { loading, error, data } = useQuery<IGetProjectsData>(GET_PROJECTS, { variables: { sortBy: 'name' }, fetchPolicy: 'cache-first' })
 
     const outlookCategories = value<IOutlookCategory[]>(data, 'outlookCategories', [])
-    const projects = value<IProject[]>(data, 'projects', []).map(p => ({ ...p, outlookCategory: _.find(outlookCategories, c => c.displayName === p.key) }))
+    const projects = value<IProject[]>(data, 'projects', []).map(p => ({ ...p, outlookCategory: find(outlookCategories, c => c.displayName === p.key) }))
 
     React.useEffect(() => {
         if (!selected && params.key) {
-            const _selected = _.find(projects, p => p.id === params.key.toUpperCase())
+            const _selected = find(projects, p => p.id === params.key.toUpperCase())
             setSelected(_selected)
         }
     }, [params.key, projects])
@@ -86,13 +88,15 @@ export const Projects = () => {
                         </>
                     )}
             </PivotItem>
-            <PivotItem
-                itemID='new'
-                itemKey='new'
-                headerText={t('createNewText', { ns: 'common' })}
-                itemIcon='AddTo'>
-                <CreateProjectForm />
-            </PivotItem>
+            {contains(user.role.permissions, 'ef4032fb') && (
+                <PivotItem
+                    itemID='new'
+                    itemKey='new'
+                    headerText={t('createNewText', { ns: 'common' })}
+                    itemIcon='AddTo'>
+                    <CreateProjectForm />
+                </PivotItem>
+            )}
         </Pivot >
     )
 }
