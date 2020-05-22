@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Redirect user to timesheet after logging in #303
 - Adjustments to Reports #269 
 - Reports: Changed name of export button to 'Export current view' #269
+- Hotkeys for Timesheet #337
+- Summary view can be grouped by customer #242
 
 ### Fixed
 - Fix for scrollbar glitching #302 
