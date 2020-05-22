@@ -9,7 +9,7 @@ export const UserNotificationMessage = ({ model, onDismiss, className }: IUserNo
     return (
         <MessageBar
             {...model.messageBarProps}
-            onDismiss={_ => onDismiss(model)}
+            onDismiss={() => onDismiss(model)}
             className={className}>
             <span>{model.text} </span>
             {model.moreLink && <a href={model.moreLink}>Read more here</a>}

@@ -1,4 +1,4 @@
-import { Panel, PanelType } from 'office-ui-fabric-react/lib/Panel'
+import { Panel } from 'office-ui-fabric-react/lib/Panel'
 import * as React from 'react'
 import { UserNotificationMessage } from '../UserNotificationMessage'
 import { IUserNotificationsPanelProps } from './types'

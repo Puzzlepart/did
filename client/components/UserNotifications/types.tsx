@@ -69,42 +69,40 @@ export class UserNotificationMessageModel {
     }
 
     private get _messageBarType(): MessageBarType {
-        let messageBarType = MessageBarType.info
         switch (this.type) {
             case UserNotificationMessageType.WEEK_NOT_CONFIRMED: {
-                messageBarType = MessageBarType.warning
+                return MessageBarType.warning
             }
                 break
             case UserNotificationMessageType.SERVICE_ANNOUNCEMENT: {
-                messageBarType = MessageBarType.warning
                 if (this.severity === UserNotificationMessageSeverity.HIGH) {
-                    messageBarType = MessageBarType.severeWarning
+                    return MessageBarType.severeWarning
+                } else {
+                    return MessageBarType.warning
                 }
             }
-                break
+            default: return MessageBarType.info
         }
-        return messageBarType
     }
 
 
 
     private get _messageBarIconProps(): { iconName: string } {
-        let messageBarIconProps = undefined
         switch (this.type) {
             case UserNotificationMessageType.WEEK_NOT_CONFIRMED: {
-                messageBarIconProps = { iconName: 'CalendarWorkWeek' }
+                return { iconName: 'CalendarWorkWeek' }
             }
                 break
             case UserNotificationMessageType.SERVICE_ANNOUNCEMENT: {
-                messageBarIconProps = { iconName: 'Manufacturing' }
+                return { iconName: 'Manufacturing' }
             }
                 break
             case UserNotificationMessageType.FEATURE_ANNOUNCEMENT: {
-                messageBarIconProps = { iconName: 'BuildQueueNew' }
+                return { iconName: 'BuildQueueNew' }
             }
                 break
+                default: return undefined
         }
-        return messageBarIconProps
     }
 
 
