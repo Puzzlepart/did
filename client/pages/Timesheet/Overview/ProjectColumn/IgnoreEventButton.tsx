@@ -28,7 +28,7 @@ export const IgnoreEventButton = ({ event }: IIgnoreEventButton): JSX.Element =>
             </BrowserView>
             <MobileView renderWithFragment={true}>
                 <Icon
-                    styles={{ root: { marginLeft: 6 } }}
+                    styles={{ root: { marginLeft: 6, fontSize: 18 } }}
                     iconName='Blocked2'
                     onClick={onClick} />
             </MobileView>

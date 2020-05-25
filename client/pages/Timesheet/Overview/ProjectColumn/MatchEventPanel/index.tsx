@@ -35,6 +35,7 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
             </BrowserView>
             <MobileView renderWithFragment={true}>
                 <Icon
+                    styles={{ root: { fontSize: 18 } }}
                     iconName='ReviewResponseSolid'
                     onClick={() => setShowPanel(true)} />
             </MobileView>
