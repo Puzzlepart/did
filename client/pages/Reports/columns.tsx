@@ -56,8 +56,15 @@ const columns = (t: TFunction): IColumn[] => ([
         minWidth: 100,
     },
     {
-        key: 'yearNumber',
-        fieldName: 'yearNumber',
+        key: 'monthNumber',
+        fieldName: 'monthNumber',
+        name: t('monthLabel'),
+        minWidth: 100,
+        onRender: ({ monthNumber }) => dateUtils.getMonthNames()[monthNumber - 1]
+    },
+    {
+        key: 'year',
+        fieldName: 'year',
         name: t('yearLabel'),
         minWidth: 100,
     },
