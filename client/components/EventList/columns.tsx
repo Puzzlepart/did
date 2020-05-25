@@ -7,6 +7,7 @@ import { generateColumn as col } from 'utils/generateColumn'
 import { IColumn } from '../List'
 import { DurationDisplay } from './DurationDisplay'
 import { IEventListProps } from './types'
+import { MobileView, BrowserView } from 'react-device-detect'
 
 /**
  * Get sizing for column
@@ -62,10 +63,20 @@ export const Time = (props: IEventListProps, name: string, fieldName = 'time'): 
     name,
     { ...getSizing(props, fieldName, 90, 90) },
     (event: ITimeEntry) => {
+        const startTime = dateUtils.formatDate(event.startDateTime, props.dateFormat)
+        const endTime = dateUtils.formatDate(event.endDateTime, props.dateFormat)
         return (
-            <span>
-                {dateUtils.formatDate(event.startDateTime, props.dateFormat)} - {dateUtils.formatDate(event.endDateTime, props.dateFormat)}
-            </span>
+            <>
+                <span>
+                    {startTime} - {endTime}
+                </span>
+                <MobileView renderWithFragment={true}>
+                    <DurationDisplay
+                        displayFormat='({0})'
+                        duration={event.duration}
+                        style={{ marginLeft: 4 }} />
+                </MobileView>
+            </>
         )
     }
 )
@@ -83,5 +94,9 @@ export const Duration = (props: IEventListProps, name: string, fieldName = 'dura
     fieldName,
     name,
     { ...getSizing(props, fieldName, 75, 75) },
-    (event: ITimeEntry) => <DurationDisplay duration={event.duration} />
+    (event: ITimeEntry) => (
+        <BrowserView renderWithFragment={true}>
+            <DurationDisplay duration={event.duration} />
+        </BrowserView>
+    )
 )

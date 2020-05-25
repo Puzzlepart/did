@@ -14,6 +14,7 @@ const KeyCodes = {
   right: 39 as 39,
   down: 40 as 40,
 }
+
 type ISearchSuggestionsProps = IAutocompleteProps;
 
 export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsProps, IAutocompleteState> {
@@ -56,6 +57,8 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
           placeholder={this.props.placeholder}
           disabled={this.props.disabled}
           onSearch={this.onSearch}
+          autoComplete='off'
+          autoCorrect='off'
           onClear={this.props.onClear}
           onChange={(_event, searchText) => {
             searchText.trim() !== ''
@@ -75,17 +78,17 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
   }
 
   private renderSuggestions = () => {
+    if (!this._containerElement.current) return null
     return (
       <Callout
         id='SuggestionContainer'
         className={this.props.classNames.suggestionsCallout}
         gapSpace={2}
-        coverTarget={false}
         alignTargetEdge={true}
         onDismiss={() => this.hideSuggestionCallOut()}
         hidden={!this.state.isSuggestionDisabled}
         calloutMaxHeight={300}
-        style={{ width: this.props.width }}
+        style={{ width: this._containerElement.current.clientWidth }}
         target={this._containerElement.current}
         directionalHint={5}
         isBeakVisible={false}>
