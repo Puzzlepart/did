@@ -18,7 +18,6 @@ import styles from './Timesheet.module.scss'
 import { ITimesheetContext, ITimesheetParams, ITimesheetPeriod, TimesheetContext, TimesheetPeriod, TimesheetScope } from './types'
 import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD'
 
-
 /**
  * @category Timesheet
  */

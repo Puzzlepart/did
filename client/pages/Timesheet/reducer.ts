@@ -1,7 +1,7 @@
 import { value } from 'helpers'
 import { TFunction } from 'i18next'
 import { IProject } from 'interfaces'
-import _ from 'underscore'
+import { find, first } from 'underscore'
 import { ITimesheetPeriod, ITimesheetScopeOptions, ITimesheetState, TimesheetPeriod, TimesheetScope } from './types'
 
 export type TimesheetAction =
@@ -15,15 +15,24 @@ export type TimesheetAction =
             t: TFunction;
         };
     }
-    | { type: 'MOVE_SCOPE'; payload: ITimesheetScopeOptions | string }
-    | { type: 'CONFIRMING_PERIOD'; payload: { t: TFunction } }
-    | { type: 'UNCONFIRMING_PERIOD'; payload: { t: TFunction } }
-    | { type: 'CHANGE_PERIOD'; payload: string }
-    | { type: 'MANUAL_MATCH'; payload: { eventId: string; project: IProject } }
-    | { type: 'CLEAR_MANUAL_MATCH'; payload: string }
-    | { type: 'IGNORE_EVENT'; payload: string }
-    | { type: 'CLEAR_IGNORES' }
-    | { type: 'TOGGLE_SHORTCUTS' };
+    |
+    { type: 'MOVE_SCOPE'; payload: ITimesheetScopeOptions | string }
+    |
+    { type: 'CONFIRMING_PERIOD'; payload: { t: TFunction } }
+    |
+    { type: 'UNCONFIRMING_PERIOD'; payload: { t: TFunction } }
+    |
+    { type: 'CHANGE_PERIOD'; payload: string }
+    |
+    { type: 'MANUAL_MATCH'; payload: { eventId: string; project: IProject } }
+    |
+    { type: 'CLEAR_MANUAL_MATCH'; payload: string }
+    |
+    { type: 'IGNORE_EVENT'; payload: string }
+    |
+    { type: 'CLEAR_IGNORES' }
+    |
+    { type: 'TOGGLE_SHORTCUTS' };
 
 
 /**
@@ -37,13 +46,17 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
     const newState = { ...state }
     switch (action.type) {
         case 'DATA_UPDATED': {
-            newState.loading = action.payload.query.loading && {
+            const { loading, data } = action.payload.query
+            newState.loading = loading && {
                 label: t('loadingEventsLabel'),
                 description: t('loadingEventsDescription'),
             }
-            if (action.payload.query.data) {
-                newState.periods = action.payload.query.data.timesheet.map(period => new TimesheetPeriod(period))
-                newState.selectedPeriod = _.first(newState.periods)
+            if (data) {
+                newState.periods = data.timesheet.map(period => new TimesheetPeriod(period))
+                newState.selectedPeriod = find(
+                    newState.periods,
+                    p => p.id === value(state, 'selectedPeriod.id', null)
+                ) || first(newState.periods)
             }
         }
             break
@@ -70,7 +83,7 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
             break
 
         case 'CHANGE_PERIOD': {
-            newState.selectedPeriod = _.find(newState.periods, (p: TimesheetPeriod) => p.id === action.payload)
+            newState.selectedPeriod = find(newState.periods, (p: TimesheetPeriod) => p.id === action.payload)
         }
             break
 
@@ -103,6 +116,7 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
             newState.showHotkeysModal = !newState.showHotkeysModal
         }
             break
+            
         default: throw new Error()
     }
     return newState
