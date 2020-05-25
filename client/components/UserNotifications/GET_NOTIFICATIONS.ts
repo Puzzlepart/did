@@ -13,8 +13,8 @@ export interface IGetNotifications {
  * @ignore
  */
 export default gql`
-{
-  notifications {
+query($templates: NotificationTemplates!) {
+  notifications(templates:$templates) {
     id
     type
     severity

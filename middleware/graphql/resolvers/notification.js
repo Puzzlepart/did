@@ -9,22 +9,22 @@ const typeDef = `
     text: String!
     moreLink: String
   }
+
+  input NotificationTemplates {
+    unconfirmedWeek: String!
+  }
   
   extend type Query {
-    notifications: [Notification!]!
+    notifications(templates: NotificationTemplates!): [Notification!]!
   }  
 `
 
 /**
  * Get notifications
- * 
- * @param {*} _obj The previous object, which for a field on the root Query type is often not used.
- * @param {*} _args Unused args
- * @param {*} context Context
  */
-async function notifications(_obj, _args, { user, services: { storage: StorageService } }) {
+async function notifications(_obj, args, { user, services: { storage: StorageService } }) {
   let [notifications] = await Promise.all([
-    unconfirmed_weeks(user, StorageService),
+    unconfirmed_weeks(args.templates.unconfirmedWeek, user, StorageService),
   ])
   return notifications
 }

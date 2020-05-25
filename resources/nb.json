@@ -186,5 +186,10 @@
     "projects": "Prosjekter",
     "reports": "Rapporter",
     "admin": "Administrasjon"
+  },
+  "notifications": {
+    "templates": {
+      "unconfirmedWeek": "Du har ikke bekreftet uke {0}"
+    }
   }
 }

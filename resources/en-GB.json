@@ -186,5 +186,10 @@
     "projects": "Projects",
     "reports": "Reports",
     "admin": "Admin"
+  },
+  "notifications": {
+    "templates": {
+      "unconfirmedWeek": "You've not confirmed week {0}"
+    }
   }
 }

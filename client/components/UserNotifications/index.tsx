@@ -7,6 +7,7 @@ import styles from './UserNotifications.module.scss'
 import GET_NOTIFICATIONS, { IGetNotifications } from './GET_NOTIFICATIONS'
 import { UserNotificationMessageModel } from './types'
 import { UserNotificationsPanel } from './UserNotificationsPanel'
+import { useTranslation } from 'react-i18next'
 
 const BROWSER_STORAGE: IPnPClientStore = new PnPClientStorage().session
 const STORAGE_KEY = 'did365_dismissed_notifications'
@@ -15,9 +16,24 @@ const STORAGE_KEY = 'did365_dismissed_notifications'
  * @category UserNotifications
  */
 export const UserNotifications = () => {
+    const { t } = useTranslation(['notifications'])
     const [showPanel, setShowPanel] = React.useState(false)
     const [notifications, setNotifications] = React.useState<Set<UserNotificationMessageModel>>(new Set())
-    const { loading, data } = useQuery<IGetNotifications>(GET_NOTIFICATIONS, { skip: notifications.size > 0, fetchPolicy: 'cache-first' })
+    const { loading, data } = useQuery<IGetNotifications>(
+        GET_NOTIFICATIONS,
+        {
+            variables: {
+                templates: t('templates', { returnObjects: true })
+            },
+            skip: notifications.size > 0,
+            fetchPolicy: 'cache-first',
+        })
+
+    console.log({
+        variables: {
+            templates: t('templates', { returnObjects: true })
+        },
+    })
 
     /**
      * On dismiss notification. Updates state and persists in browser storage.
