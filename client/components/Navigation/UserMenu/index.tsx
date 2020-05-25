@@ -5,6 +5,7 @@ import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
 import styles from './UserMenu.module.scss'
 import { UserSettings } from './UserSettings'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 
 export const UserMenu = () => {
     const { t } = useTranslation('common')
@@ -17,7 +18,9 @@ export const UserMenu = () => {
                 <a
                     className={styles.toggle}
                     href='#'
-                    onClick={event => setMenuTarget(event.currentTarget)}>👨‍💼</a>
+                    onClick={event => setMenuTarget(event.currentTarget)}>‍
+                    <Icon iconName={'PlayerSettings'} className={styles.avatar} />
+                    </a>
             </div>
 
             {menuTarget && (
