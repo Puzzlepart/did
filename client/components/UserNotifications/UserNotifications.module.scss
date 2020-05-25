@@ -1,0 +1,27 @@
+.root {
+  line-height: 55px;
+  .toggle {
+    cursor: pointer;
+    position: relative;
+
+    .icon {
+      color: #fff;
+      font-size: 14pt;
+    }
+
+    .count {
+      position: absolute;
+      color: white;
+      background-color: red;
+      border-radius: 50%;
+      height: 19px;
+      line-height: 1;
+      min-width: 19px;
+      font-size: 0.8125rem;
+      text-align: center;
+      padding-top: 2px;
+      top: 8px;
+      right: -9px;
+    }
+  }
+}
