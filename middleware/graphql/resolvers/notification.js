@@ -1,4 +1,4 @@
-const unconfirmed_weeks = require('./notification.unconfirmed-weeks')
+const unconfirmed_periods = require('./notification.unconfirmed-periods')
 
 const typeDef = `  
   type Notification {
@@ -11,7 +11,7 @@ const typeDef = `
   }
 
   input NotificationTemplates {
-    unconfirmedWeek: String!
+    unconfirmedPeriods: String!
   }
   
   extend type Query {
@@ -24,7 +24,11 @@ const typeDef = `
  */
 async function notifications(_obj, args, { user, services: { storage: StorageService } }) {
   let [notifications] = await Promise.all([
-    unconfirmed_weeks(args.templates.unconfirmedWeek, user, StorageService),
+    unconfirmed_periods({
+      template: args.templates.unconfirmedPeriods,
+      user,
+      StorageService,
+    }),
   ])
   return notifications
 }
