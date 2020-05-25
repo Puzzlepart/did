@@ -50,7 +50,7 @@ const typeDef = `
   }
   
   extend type Query {
-    timesheet(startDateTime: String!, endDateTime: String!, dateFormat: String!, locale: String!): [TimesheetPeriod]!
+    timesheet(startDateTime: String!, endDateTime: String!, dateFormat: String!): [TimesheetPeriod]!
   } 
 
   extend type Mutation {
@@ -64,8 +64,8 @@ const typeDef = `
  * 
  * Returns an array of periods (week_month_year)
  */
-async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale }, { user, services: { graph: GraphService, storage: StorageService } }) {
-    let periods = getPeriods(startDateTime, endDateTime, locale)
+async function timesheet(_obj, { startDateTime, endDateTime, dateFormat }, { user, services: { graph: GraphService, storage: StorageService } }) {
+    let periods = getPeriods(startDateTime, endDateTime, user.locale)
 
     let [
         projects,
@@ -105,7 +105,7 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat, locale 
         }
         period.events = period.events.map(evt => ({
             ...evt,
-            date: formatDate(evt.startDateTime, dateFormat, locale),
+            date: formatDate(evt.startDateTime, dateFormat, user.locale),
         }))
     }
     return periods
