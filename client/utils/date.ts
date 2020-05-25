@@ -103,7 +103,7 @@ export default new class DateUtils {
      * Get month names 
     */
     getMonthNames(): string[] {
-        return Array.apply(0, Array(12)).map((_: any, i: number) => moment().month(i).format('MMMM'));
+        return Array.apply(0, Array(12)).map((_: any, i: number) => capitalize(moment().month(i).format('MMMM')));
     }
 
     /**
