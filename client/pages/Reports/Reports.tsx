@@ -17,7 +17,7 @@ export const Reports = () => {
     const { t } = useTranslation(['COMMON', 'reports'])
     const filters: BaseFilter[] = [
         new WeekFilter('weekNumber', t('weekNumberLabel')),
-        new MonthFilter('month', t('monthLabel')),
+        new MonthFilter('monthNumber', t('monthLabel')),
         new YearFilter('yearNumber', t('yearLabel')),
         new ResourceFilter('resourceName', t('employeeLabel')),
     ]
