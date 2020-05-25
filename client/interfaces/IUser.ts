@@ -10,4 +10,5 @@ export interface IUser {
     role?: string;
     sub?: ISubscription;
     userLanguage?: 'en-GB' | 'nb';
+    userTheme?: 'light' | 'dark';
 }

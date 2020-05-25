@@ -267,6 +267,7 @@ class StorageService {
         if (user.fullName) entity.FullName = string(user.fullName)
         if (user.role) entity.Role = string(user.role)
         if (user.userLanguage) entity.UserLanguage = string(user.userLanguage)
+        if (user.userTheme) entity.UserTheme = string(user.userTheme)
         const result = await tableUtil.updateEntity(
             'Users',
             entity,

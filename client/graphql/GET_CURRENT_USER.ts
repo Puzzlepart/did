@@ -12,6 +12,7 @@ export default gql`
       fullName
       role
       userLanguage
+      userTheme
       sub {
         name
       }

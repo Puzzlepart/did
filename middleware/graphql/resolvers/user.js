@@ -5,6 +5,7 @@ const typeDef = `
         fullName: String
         email: String
         userLanguage: String
+        userTheme: String
         sub: Subscription
     }
     
@@ -13,6 +14,7 @@ const typeDef = `
         fullName: String
         role: String
         userLanguage: String
+        userTheme: String
     }
     
     extend type Query {    

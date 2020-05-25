@@ -10,6 +10,7 @@ import DateUtils from 'utils/date'
 import { App } from './App'
 import { IAppContext } from './AppContext'
 import { client, GET_CURRENT_USER } from './graphql'
+import { LoadTheme } from './utils/theme'
 import './i18n'
 import './_global.scss'
 
@@ -19,6 +20,9 @@ client.query<{ currentUser: any }>({ query: GET_CURRENT_USER }).then(({ data }) 
     const container = document.getElementById('app')
     const context: IAppContext = { user: data.currentUser }
     context.user.userLanguage = context.user.userLanguage || 'en-GB'
+    context.user.userTheme = context.user.userTheme || 'light'
+    LoadTheme(context.user.userTheme)
+    container.className = context.user.userTheme
 
     DateUtils.setup(context.user.userLanguage)
     i18n.changeLanguage(context.user.userLanguage)

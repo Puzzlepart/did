@@ -30,4 +30,20 @@ export const USER_SETTINGS = (t: TFunction) => new Set<IUserSetting>([
         ],
         defaultValue: 'en-GB',
     } as IUserSettingDropdown,
+    {
+        key: 'userTheme',
+        label: t('Theme'),
+        type: 'dropdown',
+        options: [
+            {
+                key: 'light',
+                text: 'Light',
+            },
+            {
+                key: 'dark',
+                text: 'Dark',
+            }
+        ],
+        defaultValue: 'light',
+    } as IUserSettingDropdown,
 ])
