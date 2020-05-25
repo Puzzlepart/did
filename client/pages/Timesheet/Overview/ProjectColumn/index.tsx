@@ -1,5 +1,4 @@
 import { UserMessage } from 'components/UserMessage'
-import { MessageBarButton } from 'office-ui-fabric-react/lib/Button'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { TooltipDelay, TooltipHost } from 'office-ui-fabric-react/lib/Tooltip'
@@ -10,11 +9,11 @@ import { isEmpty } from 'underscore'
 import { withDefaultProps } from 'with-default-props'
 import { TimesheetContext } from '../../TimesheetContext'
 import { ClearManualMatchButton } from './ClearManualMatchButton'
-import { ProjectColumnTooltip } from './ProjectColumnTooltip/ProjectColumnTooltip'
+import { IgnoreEventButton } from './IgnoreEventButton'
 import { MatchEventPanel } from './MatchEventPanel'
-import { IProjectColumnProps } from './types'
-import { isMobile } from 'react-device-detect'
 import styles from './ProjectColumn.module.scss'
+import { ProjectColumnTooltip } from './ProjectColumnTooltip/ProjectColumnTooltip'
+import { IProjectColumnProps } from './types'
 
 /**
  * @category Timesheet
@@ -41,17 +40,14 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
             <div className={className.join(' ')}>
                 <UserMessage
                     containerStyle={{ marginTop: 10 }}
-                    isMultiline={isMobile}
+                    isMultiline={false}
                     type={MessageBarType.warning}
                     iconName='TagUnknown'
                     text={t('noProjectMatchFoundText')}
                     actions={
                         <div>
                             <MatchEventPanel event={event} />
-                            <MessageBarButton
-                                text={t('ignoreEventButtonLabel')}
-                                iconProps={{ iconName: 'Blocked2' }}
-                                onClick={() => dispatch({ type: 'IGNORE_EVENT', payload: event.id })} />
+                            <IgnoreEventButton event={event} />
                         </div>
                     } />
             </div>

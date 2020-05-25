@@ -2,6 +2,7 @@ import { SearchProject, UserMessage } from 'components'
 import { value as value } from 'helpers'
 import { IProject } from 'interfaces/IProject'
 import { MessageBarButton } from 'office-ui-fabric-react/lib/Button'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { Panel } from 'office-ui-fabric-react/lib/Panel'
 import { ITimesheetContext, TimesheetContext } from 'pages/Timesheet/TimesheetContext'
 import React from 'react'
@@ -9,6 +10,7 @@ import { useTranslation } from 'react-i18next'
 import format from 'string-format'
 import styles from './MatchEventPanel.module.scss'
 import { IMatchEventPanelProps } from './types'
+import { isMobile, MobileView, BrowserView } from 'react-device-detect'
 
 /**
  * @category Timesheet
@@ -25,10 +27,17 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
 
     return (
         <>
-            <MessageBarButton
-                text={t('resolveProjectButtonLabel')}
-                iconProps={{ iconName: 'ReviewResponseSolid' }}
-                onClick={() => setShowPanel(true)} />
+            <BrowserView renderWithFragment={true}>
+                <MessageBarButton
+                    text={t('resolveProjectButtonLabel')}
+                    iconProps={{ iconName: 'ReviewResponseSolid' }}
+                    onClick={() => setShowPanel(true)} />
+            </BrowserView>
+            <MobileView renderWithFragment={true}>
+                <Icon
+                    iconName='ReviewResponseSolid'
+                    onClick={() => setShowPanel(true)} />
+            </MobileView>
             <Panel
                 className={styles.root}
                 isOpen={showPanel}

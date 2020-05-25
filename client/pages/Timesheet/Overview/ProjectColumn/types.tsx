@@ -10,6 +10,13 @@ export interface IClearManualMatchButtonProps extends React.HTMLProps<HTMLDivEle
 /**
  * @category EventList
  */
+export interface IIgnoreEventButton {
+    event: ITimeEntry;
+}
+
+/**
+ * @category EventList
+ */
 export interface IProjectColumnTooltipProps {
     project: IProject;
 }
