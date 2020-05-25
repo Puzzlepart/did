@@ -28,7 +28,7 @@ export const SearchProject = (props: ISearchProjectProps) => {
             {...props}
             disabled={loading}
             items={searchData}
-            width={450}
+            width={props.width}
             placeholder={props.placeholder}
             onClear={() => props.onSelected(null)}
             onSelected={item => props.onSelected(item.data)} />

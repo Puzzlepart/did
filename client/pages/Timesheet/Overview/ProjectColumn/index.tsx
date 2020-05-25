@@ -4,14 +4,14 @@ import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { TooltipDelay, TooltipHost } from 'office-ui-fabric-react/lib/Tooltip'
 import * as React from 'react'
-import { BrowserView } from 'react-device-detect'
+import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
 import { withDefaultProps } from 'with-default-props'
 import { TimesheetContext } from '../../TimesheetContext'
 import { ClearManualMatchButton } from './ClearManualMatchButton'
 import { ProjectColumnTooltip } from './ProjectColumnTooltip/ProjectColumnTooltip'
-import { ResolveProjectModal } from './ResolveProjectModal'
+import { MatchEventPanel } from './MatchEventPanel'
 import { IProjectColumnProps } from './types'
 import { isMobile } from 'react-device-detect'
 import styles from './ProjectColumn.module.scss'
@@ -41,18 +41,18 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
             <div className={className.join(' ')}>
                 <UserMessage
                     containerStyle={{ marginTop: 10 }}
-                    isMultiline={false}
+                    isMultiline={isMobile}
                     type={MessageBarType.warning}
                     iconName='TagUnknown'
                     text={t('noProjectMatchFoundText')}
                     actions={
-                        <BrowserView>
-                            <ResolveProjectModal event={event} />
+                        <div>
+                            <MatchEventPanel event={event} />
                             <MessageBarButton
                                 text={t('ignoreEventButtonLabel')}
                                 iconProps={{ iconName: 'Blocked2' }}
                                 onClick={() => dispatch({ type: 'IGNORE_EVENT', payload: event.id })} />
-                        </BrowserView>
+                        </div>
                     } />
             </div>
         )

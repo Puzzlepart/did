@@ -3,6 +3,6 @@ import { ITimeEntry } from 'interfaces'
 /**
  * @category EventList
  */
-export interface IResolveProjectModalProps {
+export interface IMatchEventPanelProps {
     event: ITimeEntry;
 }

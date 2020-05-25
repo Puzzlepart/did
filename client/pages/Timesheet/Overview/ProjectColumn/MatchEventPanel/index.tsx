@@ -2,24 +2,24 @@ import { SearchProject, UserMessage } from 'components'
 import { value as value } from 'helpers'
 import { IProject } from 'interfaces/IProject'
 import { MessageBarButton } from 'office-ui-fabric-react/lib/Button'
-import { Modal } from 'office-ui-fabric-react/lib/Modal'
+import { Panel } from 'office-ui-fabric-react/lib/Panel'
 import { ITimesheetContext, TimesheetContext } from 'pages/Timesheet/TimesheetContext'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import format from 'string-format'
-import styles from './ResolveProjectModal.module.scss'
-import { IResolveProjectModalProps } from './types'
+import styles from './MatchEventPanel.module.scss'
+import { IMatchEventPanelProps } from './types'
 
 /**
  * @category Timesheet
 */
-export const ResolveProjectModal = ({ event }: IResolveProjectModalProps) => {
+export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
     const { t } = useTranslation(['timesheet', 'common'])
     const { dispatch } = React.useContext<ITimesheetContext>(TimesheetContext)
-    const [showResolveModal, setShowResolveModal] = React.useState<boolean>(false)
+    const [showPanel, setShowPanel] = React.useState<boolean>(false)
 
     const onResolve = (project: IProject) => {
-        setShowResolveModal(false)
+        setShowPanel(false)
         dispatch({ type: 'MANUAL_MATCH', payload: { eventId: event.id, project } })
     }
 
@@ -28,11 +28,11 @@ export const ResolveProjectModal = ({ event }: IResolveProjectModalProps) => {
             <MessageBarButton
                 text={t('resolveProjectButtonLabel')}
                 iconProps={{ iconName: 'ReviewResponseSolid' }}
-                onClick={() => setShowResolveModal(true)} />
-            <Modal
-                containerClassName={styles.root}
-                isOpen={showResolveModal}
-                onDismiss={() => setShowResolveModal(false)}>
+                onClick={() => setShowPanel(true)} />
+            <Panel
+                className={styles.root}
+                isOpen={showPanel}
+                onDismiss={() => setShowPanel(false)}>
                 <div className={styles.title}>{event.title}</div>
                 <UserMessage
                     iconName='OutlookLogo'
@@ -54,12 +54,13 @@ export const ResolveProjectModal = ({ event }: IResolveProjectModalProps) => {
                     hidden={!event.customer || !!event.suggestedProject}
                     containerStyle={{ marginTop: 10 }}
                     text={format(t('eventNotFullyMatchedText'), value(event, 'customer.name', ''))} />
+
                 <SearchProject
-                    width={450}
+                    width='100%'
                     className={styles.searchProject}
                     onSelected={project => onResolve(project)}
                     placeholder={t('searchPlaceholder', { ns: 'common' })} />
-            </Modal>
+            </Panel>
         </>
     )
 }
