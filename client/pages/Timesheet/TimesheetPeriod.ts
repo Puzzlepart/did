@@ -48,8 +48,8 @@ export class TimesheetPeriod {
         this._manualMatches = this._localStorage.get(this._uiMatchedEventsStorageKey) || {}
     }
 
-    public get id() {
-        return this._period.id
+    public get id(): string {
+        return this._period ? this._period.id : '-1'
     }
 
     /**
