@@ -189,7 +189,7 @@
   },
   "notifications": {
     "templates": {
-      "unconfirmedWeek": "You've not confirmed week {0}"
+      "unconfirmedPeriods": "You've not confirmed week {0} ({1})."
     }
   }
 }

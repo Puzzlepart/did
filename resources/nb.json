@@ -189,7 +189,7 @@
   },
   "notifications": {
     "templates": {
-      "unconfirmedWeek": "Du har ikke bekreftet uke {0}"
+      "unconfirmedPeriods": "Du har ikke bekreftet uke {0} ({1})."
     }
   }
 }
