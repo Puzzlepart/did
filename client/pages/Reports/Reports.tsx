@@ -18,7 +18,7 @@ export const Reports = () => {
     const filters: BaseFilter[] = [
         new WeekFilter('weekNumber', t('weekNumberLabel')),
         new MonthFilter('monthNumber', t('monthLabel')),
-        new YearFilter('year', t('yearLabel')),
+        new YearFilter('yearNumber', t('yearLabel')),
         new ResourceFilter('resourceName', t('employeeLabel')),
     ]
     const [filterPanelOpen, setFilterPanelOpen] = useState<boolean>(undefined)

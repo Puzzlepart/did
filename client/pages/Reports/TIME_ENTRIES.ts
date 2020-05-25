@@ -12,7 +12,7 @@ export default gql`
             endTime
             weekNumber
             monthNumber
-            year
+            yearNumber
             resourceName     
             monthNumber           
             customer {
