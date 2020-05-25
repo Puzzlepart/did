@@ -11,6 +11,7 @@ export default gql`
             startDateTime
             endDateTime
             weekNumber
+            monthNumber
             year
             resourceName     
             monthNumber           

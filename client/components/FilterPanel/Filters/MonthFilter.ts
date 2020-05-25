@@ -1,6 +1,5 @@
 import { value as value } from 'helpers'
 import { unique } from 'underscore'
-import { capitalize } from 'underscore.string'
 import dateUtils from 'utils/date'
 import { BaseFilter, IFilter } from './BaseFilter'
 
@@ -19,11 +18,9 @@ export class MonthFilter extends BaseFilter {
      * @param {any[]} entries Entries
      */
     public initialize(entries: any[]): IFilter {
-        let months: string[] = unique(entries.map(e => value(e, this.fieldName, null)))
-        months = dateUtils.getMonthNames()
-            .filter(m => months.indexOf(m) !== -1)
-            .map(m => capitalize(m))
-        const items = months.map(month => ({ key: month, value: month, }))
+        const values = unique(entries.map(e => value(e, this.fieldName, null)))
+        const monthNames = dateUtils.getMonthNames()
+        const items = values.map(month => ({ key: month, value: monthNames[month - 1] }))
         return {
             key: this.fieldName,
             name: this.name,
