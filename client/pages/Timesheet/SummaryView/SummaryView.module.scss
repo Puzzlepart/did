@@ -1,39 +1,50 @@
-$lightgray_background: #fafafc;
-$gray_background: #f1f1f1;
-
 .root {
-  [class*="ms-DetailsRow-cell"] {
-    background: transparent;
-    font-size: 1.2em;
-    align-self: center;
-    padding: 0px 12px;
-
-    span,
-    a {
-      font-size: 1em;
-    }
-  }
-
-  [class*="ms-List-cell"] {
-    min-height: 0;
-    [class*="ms-DetailsRow"] {
-      min-height: 45px;
-      border: none;
-      background: transparent;
-
-      &:hover {
-        background: $lightgray_background;
-      }
-      [class*="ms-DetailsRow-cell"] {
+    [class*="ms-DetailsRow-cell"] {
+        background: transparent;
         font-size: 1.2em;
-        display: flex;
-        align-items: center;
+        align-self: center;
+        padding: 0px 12px;
 
         span,
         a {
-          vertical-align: middle;
+            font-size: 1em;
         }
-      }
     }
-  }
+
+    [class*="ms-List-cell"] {
+        min-height: 0;
+
+        [class*="ms-DetailsRow"] {
+            min-height: 45px;
+            border: none;
+            background: transparent;
+
+            &:hover {
+                background: #fafafc;
+            }
+
+            [class*="ms-DetailsRow-cell"] {
+                font-size: 1.2em;
+                display: flex;
+                align-items: center;
+
+                span,
+                a {
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+}
+
+[class*="theme-dark"] {
+    .root {
+        [class*="ms-List-cell"] {
+            [class*="ms-DetailsRow"] {
+                &:hover {
+                    background: #000000;
+                }
+            }
+        }
+    }
 }

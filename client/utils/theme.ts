@@ -51,8 +51,4 @@ const themes = {
     }
 }
 
-export const LoadTheme = (themeName) => {
-    if (themes[themeName])
-        loadTheme({ palette: themes[themeName]
-        })
-}
+export default (themeName) => loadTheme({ palette: themes[themeName] })

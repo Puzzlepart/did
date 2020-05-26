@@ -9,7 +9,7 @@ const App = (context: IAppContext): JSX.Element => {
     return (
         <AppContext.Provider value={context}>
             <Router>
-                <div className={`${styles.root} ${styles[context.user.userTheme]}`}>
+                <div className={styles.root}>
                     <Navigation />
                     <div className={styles.container}>
                         <Switch>
