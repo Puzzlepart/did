@@ -3,7 +3,7 @@ import { IMessageBarProps, MessageBarType } from 'office-ui-fabric-react/lib/Mes
 /**
  * @category UserNotifications
  */
-export interface IUserNotificationMessage {
+export interface INotification {
     id: string;
     type: number;
     severity: number;
@@ -42,9 +42,9 @@ export class UserNotificationMessageModel {
     /**
      * Constructs a new instance of UserNotificationMessageModel
      * 
-     * @param {IUserNotificationMessage} msg The message
+     * @param {INotification} msg The message
      */
-    constructor(msg: IUserNotificationMessage) {
+    constructor(msg: INotification) {
         this.id = msg.id
         this.type = msg.type
         this.severity = msg.severity

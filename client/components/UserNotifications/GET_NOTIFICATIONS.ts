@@ -1,12 +1,12 @@
 
 import gql from 'graphql-tag'
-import { IUserNotificationMessage } from './types'
+import { INotification } from './types'
 
 /**
  * @ignore
  */
 export interface IGetNotifications {
-  notifications: IUserNotificationMessage[];
+  notifications: INotification[];
 }
 
 /**
