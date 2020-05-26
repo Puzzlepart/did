@@ -8,7 +8,7 @@ module.exports = async function ({ template, user, StorageService }) {
     const currentWeek = utils.getWeek();
     const periods = [];
 
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 5; i > 0; i--) {
         periods.push(
             ...getPeriods(
                 utils.startOfWeek(currentWeek - i),
