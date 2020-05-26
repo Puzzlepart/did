@@ -42,9 +42,10 @@ export async function exportExcel(items: any[], options: IExcelExportOptions): P
         data: [
             options.columns.map(c => c.name),
             ...items.map(item => options.columns.map(col => {
+                const fieldValue = value<string>(item, col.fieldName)
                 switch (value<ExcelColumnType>(col, 'data.excelColFormat', null)) {
-                    case 'date': return { v: moment(item[col.fieldName]).format("YYYY-MM-DD HH:mm"), t: "d" };
-                    default: return item[col.fieldName];
+                    case 'date': return { v: moment(fieldValue).format("YYYY-MM-DD HH:mm"), t: "d" };
+                    default: return fieldValue
                 }
             })),
         ],
