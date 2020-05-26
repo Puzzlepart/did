@@ -133,7 +133,6 @@ async function confirmPeriod(_obj, { period }, { user, services: { graph: GraphS
         await StorageService.addConfirmedPeriod(period.id, user.id, hours)
         return { success: true, error: null }
     } catch (error) {
-        console.log(error)
         return { success: false, error: omit(error, 'requestId') }
     }
 }
