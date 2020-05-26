@@ -5,13 +5,16 @@ import { Link } from 'react-router-dom'
 import styles from './Navigation.module.scss'
 import { NavItem } from './NavItem'
 import { UserMenu } from './UserMenu'
+import { isMobile } from 'react-device-detect'
 import { accessAdmin, accessReports, accessCustomers, accessProjects } from 'config/security/permissions'
 
 export const Navigation = () => {
     const { t } = useTranslation('navigation')
     const { user } = React.useContext(AppContext)
+    let className = styles.root
+    if (isMobile) className += ` ${styles.mobile}`
     return (
-        <nav className={styles.root}>
+        <nav className={className}>
             <div className={styles.container}>
                 <Link to='/' className={styles.logo} title='Did 365 - The Calendar is the Timesheet'>
                     <img src='/images/D_beta_sm.png' />
@@ -25,11 +28,11 @@ export const Navigation = () => {
                         text={t('customers')}
                         iconName='People'
                         to='/customers'
-                        permission={accessCustomers}  />
+                        permission={accessCustomers} />
                     <NavItem
                         text={t('projects')}
                         iconName='ProjectCollection'
-                        to='/projects' 
+                        to='/projects'
                         permission={accessProjects} />
                     <NavItem
                         text={t('reports')}

@@ -3,6 +3,7 @@
 interface CssExports {
   'active': string;
   'link': string;
+  'mobile': string;
   'navIcon': string;
   'navText': string;
   'root': string;

@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next'
 import format from 'string-format'
 import styles from './MatchEventPanel.module.scss'
 import { IMatchEventPanelProps } from './types'
-import { isMobile, MobileView, BrowserView } from 'react-device-detect'
+import { MobileView, BrowserView } from 'react-device-detect'
 
 /**
  * @category Timesheet

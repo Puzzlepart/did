@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   height: 100%;
+  margin: 0 8px;
 
   .link {
     display: flex;
@@ -24,39 +25,25 @@
   }
 }
 
-@media (max-width: 600px) {
-  .root {
-    display: flex;
+.root.mobile {
+  .link {
+    width: 100%;
 
-    .link {
-      width: 100%;
+    .navText {
+      display: none;
+    }
 
-      .navText {
-        display: none;
-      }
+    .navIcon {
+      display: flex;
+      color: #f1f1f1;
+      font-size: 18px;
+      -webkit-font-smoothing: subpixel-antialiased;
+    }
 
+    &.active {
       .navIcon {
-        display: flex;
-        color: #f1f1f1;
-        font-size: 18px;
-        -webkit-font-smoothing: subpixel-antialiased;
-      }
-
-      &.active {
-        .navIcon {
-          color: #cf5f00;
-        }
+        color: #cf5f00;
       }
     }
-  }
-}
-
-@media (min-width: 601px) {
-  .navIcon {
-    display: none;
-  }
-
-  .navText {
-    display: flex;
   }
 }
