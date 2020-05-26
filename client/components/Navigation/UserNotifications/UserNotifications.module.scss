@@ -1,5 +1,7 @@
 .root {
-  line-height: 55px;
+  display: flex;
+  align-items: center;
+  height: 100%;
   padding: 0 12px 0 12px;
   cursor: pointer;
   position: relative;
@@ -10,7 +12,7 @@
 
   .icon {
     color: #fff;
-    font-size: 24px;
+    font-size: 18px;
   }
 
   .count {
@@ -18,13 +20,13 @@
     color: white;
     background-color: red;
     border-radius: 50%;
-    height: 19px;
-    line-height: 1;
-    min-width: 19px;
-    font-size: 0.8125rem;
+    height: 15px;
+    width: 17px;
+    line-height: 12px;
+    font-size: 12px;
     text-align: center;
     padding-top: 2px;
-    top: 8px;
+    top: 10px;
     right: 4px;
   }
 }

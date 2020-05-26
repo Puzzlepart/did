@@ -1,6 +1,10 @@
 const az = require('azure-storage')
 
 class TableUtil {
+    constructor(tableService) {
+        this.tableService = tableService
+    }
+
     /**
      * Parse an table storage entity
      * 
@@ -255,4 +259,4 @@ class TableUtil {
     }
 }
 
-module.exports = new TableUtil()
+module.exports = TableUtil

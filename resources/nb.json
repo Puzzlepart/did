@@ -71,7 +71,12 @@
     "defaultLabelTitle": "Ny merkelapp",
     "addNewLabel": "Opprett ny merkelapp",
     "editLabel": "Rediger merkelapp",
-    "noTimeEntriesText": "Det er ingen registrerte timer for det valgte året."
+    "addNewRole": "Legg til ny rolle",
+    "roleNameLabel": "Rollenavn",
+    "permissionsHeader": "Tilganger",
+    "noTimeEntriesText": "Det er ingen registrerte timer for det valgte året.",
+    "editRole": "Rediger rolle",
+    "roles": "Roller"
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport",
@@ -187,6 +192,16 @@
     "projects": "Prosjekter",
     "reports": "Rapporter",
     "admin": "Administrasjon"
+  },
+  "permissions": {
+    "accessCustomers": "Tilgang til kunder",
+    "accessProjects": "Tilgang til prosjekter",
+    "accessAdmin": "Tilgang til administrasjon",
+    "accessReports": "Tilgang til rapporter",
+    "manageProjects": "Administrere prosjekter",
+    "deleteProjects": "Slette prosjekter",
+    "manageCustomers": "Administrere kunder",
+    "deleteCustomers": "Slette kunder"
   },
   "notifications": {
     "moreLinkText": "Les mer her",

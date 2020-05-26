@@ -8,7 +8,6 @@ const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const passport = require('./middleware/passport')
 const serveGzipped = require('./middleware/gzip')
-const isAuthenticated = require('./middleware/passport/isAuthenticated')
 
 class App {
     constructor() {
@@ -51,7 +50,10 @@ class App {
     setupApi() {
         this._.use(
             '/graphql',
-            isAuthenticated,
+            async (req, res, next) => {
+                if (!req.user || !req.isAuthenticated()) res.redirect('/')
+                else next()
+            },
             require('./middleware/graphql')
         )
     }

@@ -4,13 +4,17 @@ import gql from 'graphql-tag'
 /**
  * @ignore
  */
-export default gql`
+export const GET_CURRENT_USER = gql`
 {
     currentUser {
       id
       email
       fullName
-      role
+      role {
+        id
+        name
+        permissions
+      }
       userLanguage
       sub {
         name

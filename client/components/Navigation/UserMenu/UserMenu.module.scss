@@ -3,16 +3,19 @@ $menu_width: 200px;
 
 .root {
   cursor: pointer;
-  line-height: 55px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin: 0 8px;
   padding: 0 12px 0 12px;
 
   &:hover {
     background-color: #787878;
   }
 
-  .avatar {
+  .icon {
     color: #fff;
-    font-size: 24px;
+    font-size: 18px;
     -webkit-font-smoothing: antialiased;
   }
 }

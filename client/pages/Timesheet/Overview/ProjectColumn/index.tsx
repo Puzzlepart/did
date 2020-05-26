@@ -21,12 +21,12 @@ import { IProjectColumnProps } from './types'
 const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
     const { t } = useTranslation('timesheet')
     const { dispatch, selectedPeriod } = React.useContext(TimesheetContext)
-    const className = [styles.root]
-    if (isMobile) className.push(styles.mobile)
+    let className = styles.root
+    if (isMobile) className += ` ${styles.mobile}`
     if (!event.project) {
         if (event.error) {
             return (
-                <div className={className.join(' ')}>
+                <div className={className}>
                     <UserMessage
                         containerStyle={{ marginTop: 10 }}
                         isMultiline={false}
@@ -37,7 +37,7 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
             )
         }
         return (
-            <div className={className.join(' ')}>
+            <div className={className}>
                 <UserMessage
                     containerStyle={{ marginTop: 10 }}
                     isMultiline={false}
@@ -62,7 +62,7 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
             delay={TooltipDelay.long}
             closeDelay={TooltipDelay.long}
             calloutProps={{ gapSpace: 0 }}>
-            <div className={className.join(' ')}>
+            <div className={className}>
                 <div className={styles.content}>
                     <div>
                         <a className={styles.projectLink} href={`/projects/${event.project.id}`}>{event.project.name}</a>

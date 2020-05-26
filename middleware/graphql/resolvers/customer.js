@@ -1,5 +1,6 @@
 const _ = require('underscore')
-const { executeBatch, createBatch } = require('../../../utils/table')
+const TableUtil = require('../../../utils/table')
+const { executeBatch, createBatch } = new TableUtil()
 
 const typeDef = `  
   type Customer {
