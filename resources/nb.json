@@ -79,7 +79,6 @@
     "noEntriesText": "Det er ingen bekreftede tidsoppføringer på dette tidspunktet."
   },
   "common": {
-    "moreLinkText": "Les mer her",
     "deviceViewNotSupported": "Denne visningen er ikke tilgjengelig på din enhet.",
     "hours": "Timer",
     "showShortcutsText": "Vis tilgjengelige snarveier",
@@ -190,10 +189,12 @@
     "admin": "Administrasjon"
   },
   "notifications": {
+    "moreLinkText": "Les mer her",
+    "goToPeriodText": "Gå til periode",
     "headerText": "Varsler",
     "emptyText": "Du har ingen aktive varsler for øyeblikket.",
     "templates": {
-      "unconfirmedPeriods": "Du har ikke bekreftet uke {0} ({1})."
+      "unconfirmedPeriods": "Uke {0} ({1}) mangler bekreftelse."
     }
   }
 }

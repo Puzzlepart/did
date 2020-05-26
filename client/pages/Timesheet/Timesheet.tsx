@@ -36,6 +36,7 @@ export const Timesheet = () => {
         },
         fetchPolicy: 'cache-and-network',
     })
+    
     const [confirmPeriod] = useMutation<{ entries: any[]; startDateTime: string; endDateTime: string }>(CONFIRM_PERIOD)
     const [unconfirmPeriod] = useMutation<{ startDateTime: string; endDateTime: string }>(UNCONFIRM_PERIOD)
 

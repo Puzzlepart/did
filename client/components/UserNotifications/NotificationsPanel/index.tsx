@@ -2,14 +2,14 @@ import { UserMessage } from 'components/UserMessage'
 import { Panel } from 'office-ui-fabric-react/lib/Panel'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
-import { UserNotificationMessage } from '../UserNotificationMessage'
-import { IUserNotificationsPanelProps } from './types'
+import { UserNotification } from '../UserNotification'
+import { INotificationsPanelProps } from './types'
 import styles from './UserNotificationsPanel.module.scss'
 
 /**
  * @category UserNotifications
  */
-export const UserNotificationsPanel = (props: IUserNotificationsPanelProps) => {
+export const NotificationsPanel = (props: INotificationsPanelProps) => {
     const { t } = useTranslation('notifications')
     return (
         <Panel
@@ -24,7 +24,7 @@ export const UserNotificationsPanel = (props: IUserNotificationsPanelProps) => {
                 </div>
                 <div hidden={props.notifications.size === 0}>
                     {[...props.notifications].map((n, idx) => (
-                        <UserNotificationMessage
+                        <UserNotification
                             key={idx}
                             model={n}
                             onDismiss={props.onDismissNotification} />

@@ -33,5 +33,6 @@ module.exports = async function ({ template, user, StorageService }) {
         type: 0,
         severity: 2,
         text: format(template, period.week, period.month),
+        moreLink: ['', 'timesheet', ...period.id.split('_')].join('/')
     }))
 }

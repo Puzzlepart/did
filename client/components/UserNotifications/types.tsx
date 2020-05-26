@@ -1,4 +1,5 @@
 import { IMessageBarProps, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
+import { TFunction } from 'i18next'
 
 /**
  * @category UserNotifications
@@ -32,7 +33,7 @@ export enum NotificationSeverity {
 /**
  * @category UserNotifications
  */
-export class UserNotificationMessageModel {
+export class NotificationModel {
     public id: string;
     public type: NotificationType;
     public severity: NotificationSeverity;
@@ -52,12 +53,12 @@ export class UserNotificationMessageModel {
         this.moreLink = msg.moreLink
     }
 
-    private get _messageBarType(): MessageBarType {
+    private get _messageType(): MessageBarType {
         switch (this.type) {
             case NotificationType.WEEK_NOT_CONFIRMED: {
                 return MessageBarType.warning
             }
-                break
+
             case NotificationType.SERVICE_ANNOUNCEMENT: {
                 if (this.severity === NotificationSeverity.HIGH) {
                     return MessageBarType.severeWarning
@@ -69,9 +70,7 @@ export class UserNotificationMessageModel {
         }
     }
 
-
-
-    private get _messageBarIconProps(): { iconName: string } {
+    private get _iconProps(): { iconName: string } {
         switch (this.type) {
             case NotificationType.WEEK_NOT_CONFIRMED: {
                 return { iconName: 'CalendarWorkWeek' }
@@ -85,17 +84,32 @@ export class UserNotificationMessageModel {
                 return { iconName: 'BuildQueueNew' }
             }
                 break
-                default: return undefined
+            default: return undefined
         }
     }
 
-
-    public get messageBarProps(): IMessageBarProps {
+    public get messageProps(): IMessageBarProps {
         const messageBarProps: IMessageBarProps = {
             itemID: this.id,
-            messageBarType: this._messageBarType,
-            messageBarIconProps: this._messageBarIconProps,
+            messageBarType: this._messageType,
+            messageBarIconProps: this._iconProps,
         }
         return messageBarProps
+    }
+
+    /**
+     * Get text for more link
+     * 
+     * @param {TFunction} t Translate function
+     */
+    public getMoreLinkText(t: TFunction): string {
+        switch (this.type) {
+            case NotificationType.WEEK_NOT_CONFIRMED: {
+                return t('goToPeriodText')
+            }
+
+            default: return t('moreLinkText')
+        }
+
     }
 }

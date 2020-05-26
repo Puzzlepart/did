@@ -5,8 +5,8 @@ import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import * as React from 'react'
 import styles from './UserNotifications.module.scss'
 import GET_NOTIFICATIONS, { IGetNotifications } from './GET_NOTIFICATIONS'
-import { UserNotificationMessageModel } from './types'
-import { UserNotificationsPanel } from './UserNotificationsPanel'
+import { NotificationModel } from './types'
+import { NotificationsPanel } from './NotificationsPanel'
 import { useTranslation } from 'react-i18next'
 
 const BROWSER_STORAGE: IPnPClientStore = new PnPClientStorage().session
@@ -18,7 +18,7 @@ const STORAGE_KEY = 'did365_dismissed_notifications'
 export const UserNotifications = () => {
     const { t } = useTranslation('notifications')
     const [showPanel, setShowPanel] = React.useState(false)
-    const [notifications, setNotifications] = React.useState<Set<UserNotificationMessageModel>>(new Set())
+    const [notifications, setNotifications] = React.useState<Set<NotificationModel>>(new Set())
     const { loading, data } = useQuery<IGetNotifications>(
         GET_NOTIFICATIONS,
         {
@@ -26,15 +26,15 @@ export const UserNotifications = () => {
                 templates: t('templates', { returnObjects: true })
             },
             skip: notifications.size > 0,
-            fetchPolicy: 'cache-first',
+            fetchPolicy: 'cache-and-network',
         })
         
     /**
      * On dismiss notification. Updates state and persists in browser storage.
      * 
-     * @param {UserNotificationMessageModel} notification Notification
+     * @param {NotificationModel} notification Notification
      */
-    const onDismissNotification = (notification: UserNotificationMessageModel) => {
+    const onDismissNotification = (notification: NotificationModel) => {
         const _notifications = new Set(notifications)
         _notifications.delete(notification)
         const _dismissedIds = new Set<string>(BROWSER_STORAGE.get(STORAGE_KEY) || [])
@@ -46,7 +46,7 @@ export const UserNotifications = () => {
 
     React.useEffect(() => {
         const _dismissedIds = new Set<string>(BROWSER_STORAGE.get(STORAGE_KEY) || [])
-        let _notifications = value(data, 'notifications', []).map(n => new UserNotificationMessageModel(n))
+        let _notifications = value(data, 'notifications', []).map(n => new NotificationModel(n))
         _notifications = _notifications.filter(n => !_dismissedIds.has(n.id))
         if (_notifications.length > 0) {
             setNotifications(new Set(_notifications))
@@ -63,7 +63,7 @@ export const UserNotifications = () => {
                     hidden={notifications.size === 0}
                     className={styles.count}>{notifications.size}</div>
             </div>
-            <UserNotificationsPanel
+            <NotificationsPanel
                 isOpen={showPanel}
                 notifications={notifications}
                 onDismiss={() => setShowPanel(false)}

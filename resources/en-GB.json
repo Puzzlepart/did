@@ -79,7 +79,6 @@
     "noEntriesText": "There's no confirmed time entries at this time."
   },
   "common": {
-    "moreLinkText": "Read more here",
     "deviceViewNotSupported": "This view is not available on your device.",
     "hours": "Hours",
     "showShortcutsText": "Display keyboard shortcuts",
@@ -190,10 +189,12 @@
     "admin": "Admin"
   },
   "notifications": {
+    "moreLinkText": "Read more here",
+    "goToPeriodText": "Go to period",
     "headerText": "Notifications",
     "emptyText": "You have no active notifications at this time.",
     "templates": {
-      "unconfirmedPeriods": "You've not confirmed week {0} ({1})."
+      "unconfirmedPeriods": "Week {0} ({1}) has not been confirmed."
     }
   }
 }
