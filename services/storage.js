@@ -368,13 +368,13 @@ class StorageService {
      */
     async getConfirmedPeriods({ resourceId, year }) {
         try {
-            const q = tableUtil.query()
+            const q = this.tableUtil.query()
             const filter = [
                 ['PartitionKey', resourceId, q.string, q.equal],
                 ['Year', year, q.int, q.equal],
             ]
-            const query = tableUtil.createQuery(1000, undefined, filter)
-            let result = await tableUtil.queryTableAll(
+            const query = this.tableUtil.createQuery(1000, undefined, filter)
+            let result = await this.tableUtil.queryTableAll(
                 'ConfirmedPeriods',
                 query,
                 {
@@ -416,8 +416,8 @@ class StorageService {
      */
     async addConfirmedPeriod(periodId, resourceId, hours) {
         const [week, month, year] = periodId.split('_')
-        const { string, double, int } = tableUtil.entGen()
-        const entity = await tableUtil.addEntity(
+        const { string, double, int } = this.tableUtil.entGen()
+        const entity = await this.tableUtil.addEntity(
             'ConfirmedPeriods',
             {
                 PartitionKey: string(resourceId),
