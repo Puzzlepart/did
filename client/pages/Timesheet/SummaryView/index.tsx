@@ -4,6 +4,7 @@ import { LabelColumn } from 'components/LabelColumn'
 import List from 'components/List'
 import { IProject } from 'interfaces'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
+import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { unique } from 'underscore'
@@ -12,6 +13,7 @@ import dateUtils from 'utils/date'
 import { TimesheetContext } from '../'
 import { TimesheetScope } from '../TimesheetScope'
 import styles from './SummaryView.module.scss'
+import { isMobile } from 'react-device-detect'
 
 function createColumns(scope: TimesheetScope) {
     const onRender = (row: any, _index: number, col: IColumn) => (
@@ -85,19 +87,23 @@ function generateTotalRow(events: any[], columns: IColumn[], label: string) {
  */
 export const SummaryView = () => {
     const { t } = useTranslation('common')
-    const context = React.useContext(TimesheetContext)
-    const columns = createColumns(context.scope)
+    if (isMobile) {
+        return <MessageBar styles={{ root: { marginTop: 8 } }}>{t('deviceViewNotSupported')}</MessageBar>
+    } else {
+        const context = React.useContext(TimesheetContext)
+        const columns = createColumns(context.scope)
 
-    const events = context.selectedPeriod.events.filter(e => e.project)
+        const events = context.selectedPeriod.events.filter(e => e.project)
 
-    const items = [
-        ...generateRows(events, columns),
-        generateTotalRow(events, columns, t('sumLabel')),
-    ]
+        const items = [
+            ...generateRows(events, columns),
+            generateTotalRow(events, columns, t('sumLabel')),
+        ]
 
-    return (
-        <div className={styles.root}>
-            <List {...{ columns, items }} enableShimmer={context && !!context.loading} />
-        </div>
-    )
+        return (
+            <div className={styles.root}>
+                <List {...{ columns, items }} enableShimmer={context && !!context.loading} />
+            </div>
+        )
+    }
 }
