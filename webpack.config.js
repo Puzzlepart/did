@@ -5,6 +5,7 @@ const pkg = require('./package.json')
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const RemovePlugin = require('remove-files-webpack-plugin')
 
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production'
 
@@ -70,6 +71,17 @@ let config = {
             filename: path.resolve(__dirname, 'views/index.hbs'),
             inject: true,
         }),
+        new RemovePlugin({
+            /**
+             * Before compilation permanently removes
+             * entire `./public/js` folder.
+             */
+            before: {
+                include: [
+                    './public/js'
+                ]
+            }
+        })
     ],
 }
 
