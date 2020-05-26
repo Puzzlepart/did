@@ -202,5 +202,14 @@
     "deleteProjects": "Slette prosjekter",
     "manageCustomers": "Administrere kunder",
     "deleteCustomers": "Slette kunder"
+  },
+  "notifications": {
+    "moreLinkText": "Les mer her",
+    "goToPeriodText": "Gå til periode",
+    "headerText": "Varsler",
+    "emptyText": "Du har ingen aktive varsler for øyeblikket.",
+    "templates": {
+      "unconfirmedPeriods": "Uke {0} ({1}) mangler bekreftelse."
+    }
   }
 }

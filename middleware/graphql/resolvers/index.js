@@ -6,6 +6,7 @@ const { resolvers: userResolvers } = require('./user')
 const { resolvers: outlookCategoryResolvers } = require('./outlookCategory')
 const { resolvers: labelResolvers } = require('./label')
 const { resolvers: roleResolvers } = require('./role')
+const { resolvers: notificationResolvers } = require('./notification')
 const merge = require('lodash').merge
 
 
@@ -17,5 +18,6 @@ module.exports = merge(
     userResolvers,
     outlookCategoryResolvers,
     labelResolvers,
-    roleResolvers
+    roleResolvers,
+    notificationResolvers
 )

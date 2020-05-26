@@ -9,6 +9,7 @@ const { typeDef: User } = require('./resolvers/user')
 const { typeDef: Subscription } = require('./resolvers/subscription')
 const { typeDef: Label } = require('./resolvers/label')
 const { typeDef: Role } = require('./resolvers/role')
+const { typeDef: Notification } = require('./resolvers/notification')
 const StorageService = require('../../services/storage')
 const GraphService = require('../../services/graph')
 const SubscriptionService = require('../../services/subscription')
@@ -53,6 +54,7 @@ const schema = makeExecutableSchema({
     Subscription,
     Label,
     Role,
+    Notification
   ],
   resolvers: require('./resolvers'),
   resolverValidationOptions: {
@@ -61,7 +63,7 @@ const schema = makeExecutableSchema({
 })
 
 module.exports = graphql(req => ({
-  schema: schema,
+  schema,
   rootValue: global,
   graphiql: process.env.GRAPHIQL_ENABLED == '1',
   pretty: req.app.get('env') === 'development',

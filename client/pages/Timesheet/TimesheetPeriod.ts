@@ -6,6 +6,7 @@ import { ITimeEntry } from 'interfaces/ITimeEntry'
 import { omit } from 'underscore'
 import { capitalize } from 'underscore.string'
 import dateUtils, { moment } from 'utils/date'
+import { ITimesheetParams } from './types'
 
 export interface ITimesheetPeriod {
     id: string;
@@ -21,6 +22,7 @@ export interface ITimesheetPeriod {
  * @category Timesheet
  */
 export class TimesheetPeriod {
+    public id: string;
     public confirmed?: boolean;
     public ignoredEvents: string[] = [];
     private _manualMatches: ITypedHash<any> = {};
@@ -35,9 +37,12 @@ export class TimesheetPeriod {
      * Creates a new instance of TimesheetPeriod
      * 
      * @param {ITimesheetPeriod} _period Period
+     * @param {ITimesheetPeriod} params Params
      */
-    constructor(private _period?: ITimesheetPeriod) {
+    constructor(private _period?: ITimesheetPeriod, params?: ITimesheetParams) {
+        if (params) this.id = [params.week, params.month, params.year].join('_')
         if (!_period) return
+        this.id = _period.id
         this._month = capitalize(_period.month)
         this._startDateTime = moment(_period.startDateTime)
         this._endDateTime = moment(_period.endDateTime)
@@ -46,10 +51,6 @@ export class TimesheetPeriod {
         this._uiIgnoredEventsStorageKey = `did365_ui_ignored_events_${this.id}`
         this.ignoredEvents = this._localStorage.get(this._uiIgnoredEventsStorageKey) || []
         this._manualMatches = this._localStorage.get(this._uiMatchedEventsStorageKey) || {}
-    }
-
-    public get id(): string {
-        return this._period ? this._period.id : '-1'
     }
 
     /**
@@ -213,5 +214,12 @@ export class TimesheetPeriod {
             this._endDateTime,
             dayFormat
         )
+    }
+
+    /**
+     * Returns path for period
+     */
+    public get path() {
+        return this.id.split('_').join('/')
     }
 }  

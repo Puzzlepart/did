@@ -7,6 +7,8 @@ import { NavItem } from './NavItem'
 import { UserMenu } from './UserMenu'
 import { isMobile } from 'react-device-detect'
 import { accessAdmin, accessReports, accessCustomers, accessProjects } from 'config/security/permissions'
+import { UserNotifications } from 'components/UserNotifications'
+
 
 export const Navigation = () => {
     const { t } = useTranslation('navigation')
@@ -45,7 +47,10 @@ export const Navigation = () => {
                         to='/admin'
                         permission={accessAdmin} />
                 </ul>
-                <UserMenu />
+                <div className={styles.navRight}>
+                    <UserNotifications />
+                    <UserMenu />
+                </div>
             </div>
         </nav>
     )

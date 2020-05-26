@@ -74,7 +74,7 @@
     "addNewRole": "Add new role",
     "roleNameLabel": "Rolename",
     "permissionsHeader": "Permissions",
-    "noTimeEntriesText": "There are no recorded hours for the selected year.",    
+    "noTimeEntriesText": "There are no recorded hours for the selected year.",
     "editRole": "Edit role",
     "roles": "Roles"
   },
@@ -202,5 +202,14 @@
     "deleteProjects": "Delete projects",
     "manageCustomers": "Manage customers",
     "deleteCustomers": "Delete customers"
+  },
+  "notifications": {
+    "moreLinkText": "Read more here",
+    "goToPeriodText": "Go to period",
+    "headerText": "Notifications",
+    "emptyText": "You have no active notifications at this time.",
+    "templates": {
+      "unconfirmedPeriods": "Week {0} ({1}) has not been confirmed."
+    }
   }
 }
