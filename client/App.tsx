@@ -1,10 +1,10 @@
 import { Navigation } from 'components/Navigation'
 import * as React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import styles from './App.module.scss'
 import { AppContext, IAppContext } from './AppContext'
 import { Admin, Customers, Home, Projects, Reports, Timesheet } from './pages'
-import { ProtectedRoute } from './ProtectedRoute'
+import { ProtectedRoute as Route } from './ProtectedRoute'
 import { accessReports, accessAdmin, accessCustomers, accessProjects } from 'config/security/permissions'
 
 
@@ -21,24 +21,24 @@ const App = (context: IAppContext): JSX.Element => {
                             </Route>
                             <Route
                                 path='/customers'
-                                permissionId={accessCustomers}>
+                                permission={accessCustomers}>
                                 <Customers />
                             </Route>
                             <Route
                                 path='/projects'
-                                permissionId={accessProjects}>
+                                permission={accessProjects}>
                                 <Projects />
                             </Route>
-                            <ProtectedRoute
+                            <Route
                                 path='/reports'
-                                permissionId={accessReports}>
+                                permission={accessReports}>
                                 <Reports />
-                            </ProtectedRoute>
-                            <ProtectedRoute
+                            </Route>
+                            <Route
                                 path='/admin'
-                                permissionId={accessAdmin}>
+                                permission={accessAdmin}>
                                 <Admin />
-                            </ProtectedRoute>
+                            </Route>
                             <Route path='/'>
                                 <Home />
                             </Route>
