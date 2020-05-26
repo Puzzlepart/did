@@ -190,6 +190,8 @@
     "admin": "Admin"
   },
   "notifications": {
+    "headerText": "Notifications",
+    "emptyText": "You have no active notifications at this time.",
     "templates": {
       "unconfirmedPeriods": "You've not confirmed week {0} ({1})."
     }
