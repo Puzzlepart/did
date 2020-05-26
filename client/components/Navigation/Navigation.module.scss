@@ -109,7 +109,13 @@
                             -webkit-font-smoothing: antialiased;
                         }
 
+                        &:hover {
+                            color: #bbb;
+                        }
+
                         &.active {
+                            color: #cf5f00;
+
                             .navIcon {
                                 color: #cf5f00;
                             }
@@ -135,6 +141,28 @@
 
         .navText {
             display: flex;
+        }
+    }
+}
+
+[class*='theme-dark'] {
+    .root {
+        background-color: #f1f1fa;
+
+        .container {
+            .nav {
+                .navItem {
+                    .navLink {
+                        color: #26413C;
+
+                        &.active {
+                            .navIcon {
+                                color: #cf5f00;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

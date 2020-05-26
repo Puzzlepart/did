@@ -39,10 +39,12 @@
 
 [class*="theme-dark"] {
     .root {
-        [class*="ms-List-cell"] {
-            [class*="ms-DetailsRow"] {
-                &:hover {
-                    background: #000000;
+        [class*="ms-List-page"] {
+            [class*="ms-GroupedList-group"] {
+                [class*="ms-GroupHeader"] {
+                    &:hover {
+                        background: #000000;
+                    }
                 }
             }
         }

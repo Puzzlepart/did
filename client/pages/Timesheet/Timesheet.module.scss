@@ -64,26 +64,26 @@
 }
 
 [class*="theme-dark"] {
+    $dark-bg: #181c1f;
+    $light-dark-bg: rgb(40, 45, 49);
+
     .root {
+        [class*="icon"] {
+            color:#eee;
+        }
         [class*="ms-List-page"] {
             background: transparent;
 
             [class*="ms-GroupedList-group"] {
-                background: #000000;
+                background: $light-dark-bg;
 
                 [class*="ms-GroupHeader"] {
-                    &:hover {
-                        background: #000000;
-                    }
+                    background: $light-dark-bg;
                 }
 
                 [class*="ms-List-cell"] {
                     [class*="ms-DetailsRow"] {
                         background: transparent;
-
-                        &:hover {
-                            background: #000000;
-                        }
                     }
                 }
             }
