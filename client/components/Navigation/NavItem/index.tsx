@@ -9,7 +9,7 @@ import { isMobile } from 'react-device-detect'
 
 export const NavItem = (props: INavItemProps) => {
     const { user } = React.useContext(AppContext)
-    if (!!props.permission && !contains(user.role.permissions, props.permission)) return null
+    if (props.permission && !contains(user.role.permissions, props.permission)) return null
     let className = styles.root
     if (isMobile) className += ` ${styles.mobile}`
     return (

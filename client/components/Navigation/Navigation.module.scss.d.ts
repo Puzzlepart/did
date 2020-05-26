@@ -5,6 +5,7 @@ interface CssExports {
   'logo': string;
   'mobile': string;
   'nav': string;
+  'navRight': string;
   'root': string;
 }
 export const cssExports: CssExports;

@@ -14,12 +14,11 @@ export const UserMenu = () => {
 
     return (
         <>
-            <a
+            <div
                 className={styles.root}
-                href='#'
                 onClick={event => setMenuTarget(event.currentTarget)}>‍
-                    <Icon iconName={'PlayerSettings'} className={styles.avatar} />
-            </a>
+                    <Icon iconName={'PlayerSettings'} className={styles.icon} />
+            </div>
 
             {menuTarget && (
                 <Callout

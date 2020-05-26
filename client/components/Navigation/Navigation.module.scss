@@ -31,6 +31,14 @@
         Segoe UI Emoji;
     }
 
+    .navRight {
+      display: flex;
+      flex-grow: 1;
+      justify-content: flex-end;
+      padding: 0;
+      margin: 0;
+    }
+
     .logo {
       align-self: center;
 
