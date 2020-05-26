@@ -15,14 +15,14 @@ const columns = (t: TFunction): IColumn[] => ([
     },
     {
         key: 'project',
-        fieldName: 'project',
+        fieldName: 'project.name',
         name: t('project'),
         minWidth: 100,
         onRender: ({ project }) => <Link to={`/projects/${project.id}`}>{project.name}</Link>
     },
     {
         key: 'customer',
-        fieldName: 'customer',
+        fieldName: 'customer.name',
         name: t('customer'),
         minWidth: 100,
         onRender: ({ customer }) => <Link to={`/customers/${customer.id}`}>{customer.name}</Link>,
