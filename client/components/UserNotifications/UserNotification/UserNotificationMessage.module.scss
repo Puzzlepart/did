@@ -8,4 +8,9 @@
   .moreLink {
     margin: 0;
   }
+
+  [class*="ms-MessageBar-actions"] {
+    flex-direction: row;
+    padding: 0 0 0 28px;
+  }
 }

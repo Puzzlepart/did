@@ -7,10 +7,8 @@ import { useTranslation } from 'react-i18next'
 
 export const UserNotificationActions = ({ model }: IUserNotificationProps) => {
     const { t } = useTranslation('notifications')
-    if (model.moreLink) {
-        return <Link className={styles.moreLink} href={model.moreLink}>{model.getMoreLinkText(t)}</Link>
-    }
-    return null
+    if (!model.moreLink) return null
+    return <Link href={model.moreLink}>{model.getMoreLinkText(t)}</Link>
 }
 
 /**
@@ -23,7 +21,7 @@ export const UserNotification = ({ model, onDismiss }: IUserNotificationProps) =
             onDismiss={() => onDismiss(model)}
             className={styles.root}
             actions={<UserNotificationActions model={model} />}>
-            <div className={styles.text}>{model.text}</div>
+            <span className={styles.text}>{model.text}</span>
         </MessageBar>
     )
 }
