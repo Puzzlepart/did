@@ -7,11 +7,11 @@ require('twix');
 export { moment };
 
 export default new class DateUtils {
-    private _locale: string;
+    private _momentLocale: string;
 
     public setup(locale: string) {
-        this._locale = locale;
-        moment.locale(this._locale);
+        this._momentLocale = locale;
+        moment.locale(this._momentLocale);
     }
 
     toMoment(date: string) {
@@ -73,7 +73,7 @@ export default new class DateUtils {
     getDays(start: moment.Moment, end: moment.Moment, dayFormat: string): string[] {
         const days = []
         for (let i = 0; i <= (end.weekday() - start.weekday()); i++) {
-            days.push(capitalize(start.clone().add(i, 'days').locale(this._locale).format(dayFormat)));
+            days.push(capitalize(start.clone().add(i, 'days').locale(this._momentLocale).format(dayFormat)));
         }
         return days;
     }
@@ -85,7 +85,7 @@ export default new class DateUtils {
      * @param {number} monthNumber Month number
      */
     getMonthName(monthNumber: number): string {
-        return moment().locale(this._locale).month(monthNumber).format('MMMM');
+        return moment().locale(this._momentLocale).month(monthNumber).format('MMMM');
     }
 
     /**
@@ -96,7 +96,7 @@ export default new class DateUtils {
      * @param {object} options Options
      */
     getTimespanString(start: moment.Moment, end: moment.Moment, options: object = { monthFormat: 'MMMM', yearFormat: 'YYYY', hideYear: false, implicitYear: false }): string {
-        return start.locale(this._locale)['twix'](end.locale(this._locale), { allDay: true }).format(options).toLowerCase();
+        return start.locale(this._momentLocale)['twix'](end.locale(this._momentLocale), { allDay: true }).format(options).toLowerCase();
     }
 
     /**

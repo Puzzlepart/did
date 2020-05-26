@@ -8,6 +8,7 @@ import { IColumn } from '../List'
 import { DurationDisplay } from './DurationDisplay'
 import { IEventListProps } from './types'
 import { MobileView, BrowserView } from 'react-device-detect'
+import { Link } from 'office-ui-fabric-react/lib/Link'
 
 /**
  * Get sizing for column
@@ -39,12 +40,11 @@ export const Title = (props: IEventListProps, name: string, fieldName = 'title')
     name,
     { ...getSizing(props, fieldName, 320, 400), isMultiline: true },
     (event: ITimeEntry) => (
-        <a href={event.webLink}
+        <Link href={event.webLink}
             target='_blank'
-            rel='noopener noreferrer'
             title={event.title}>
             <span>{event.title}</span>
-        </a>
+        </Link>
     ),
 )
 

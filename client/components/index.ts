@@ -13,5 +13,6 @@ export * from './ScrollablePaneWrapper'
 export * from './SearchCustomer'
 export * from './SearchProject'
 export * from './UserMessage'
+export * from './UserNotifications'
 
 

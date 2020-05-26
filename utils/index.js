@@ -61,7 +61,7 @@ module.exports = {
     },
 
     /**
-     * Get end of month
+     * Get start of month
      * 
      * @param {*} date Date
      */
@@ -76,6 +76,24 @@ module.exports = {
      */
     endOfMonth: (date) => {
         return moment(date).endOf('month')
+    },
+
+    /**
+     * Get start of week
+     * 
+     * @param {*} week Week number
+     */
+    startOfWeek: (week) => {
+        return moment().week(week).startOf('isoWeek')
+    },
+
+    /**
+     * Get end of week
+     * 
+     * @param {*} week Week number
+     */
+    endOfWeek: (week) => {
+        return moment().week(week).endOf('isoWeek')
     },
 
     /**

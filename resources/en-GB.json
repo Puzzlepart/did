@@ -187,5 +187,14 @@
     "projects": "Projects",
     "reports": "Reports",
     "admin": "Admin"
+  },
+  "notifications": {
+    "moreLinkText": "Read more here",
+    "goToPeriodText": "Go to period",
+    "headerText": "Notifications",
+    "emptyText": "You have no active notifications at this time.",
+    "templates": {
+      "unconfirmedPeriods": "Week {0} ({1}) has not been confirmed."
+    }
   }
 }
