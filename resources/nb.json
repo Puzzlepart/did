@@ -79,6 +79,7 @@
     "noEntriesText": "Det er ingen bekreftede tidsoppføringer på dette tidspunktet."
   },
   "common": {
+    "deviceViewNotSupported": "Denne visningen er ikke tilgjengelig på din enhet.",
     "hours": "Timer",
     "showShortcutsText": "Vis tilgjengelige snarveier",
     "shortcuts": "Snarveier",
