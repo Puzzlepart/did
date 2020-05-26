@@ -84,6 +84,7 @@
     "noEntriesText": "There's no confirmed time entries at this time."
   },
   "common": {
+    "deviceViewNotSupported": "This view is not available on your device.",
     "hours": "Hours",
     "showShortcutsText": "Display keyboard shortcuts",
     "shortcuts": "Shortcuts",
