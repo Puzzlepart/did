@@ -31,8 +31,7 @@ module.exports = async function ({ template, user, StorageService }) {
     return ucPeriods.map(period => ({
         id: `unconfirmed_period_${period.id}`,
         type: 0,
-        text: format(template, period.week, period.month),
         severity: 2,
-        dismissable: 0,
+        text: format(template, period.week, period.month),
     }))
 }

@@ -18,7 +18,6 @@ query($templates: NotificationTemplates!) {
     id
     type
     severity
-    dismissable
     text
     moreLink
   }

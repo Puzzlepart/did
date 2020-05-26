@@ -5,7 +5,6 @@ const typeDef = `
     id: String
     type: Int!
     severity: Int!
-    dismissable: Int!
     text: String!
     moreLink: String
   }

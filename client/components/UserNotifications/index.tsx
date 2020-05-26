@@ -28,13 +28,7 @@ export const UserNotifications = () => {
             skip: notifications.size > 0,
             fetchPolicy: 'cache-first',
         })
-
-    console.log({
-        variables: {
-            templates: t('templates', { returnObjects: true })
-        },
-    })
-
+        
     /**
      * On dismiss notification. Updates state and persists in browser storage.
      * 
