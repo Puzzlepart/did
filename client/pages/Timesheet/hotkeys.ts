@@ -4,7 +4,7 @@ import { ITimesheetContext } from './TimesheetContext'
 
 export default (context: ITimesheetContext, t: TFunction): GlobalHotKeysProps => ({
     keyMap: {
-        goToCurrentWeek: {
+        GO_TO_CURRENT_WEEK: {
             name: t('goToCurrentWeek'),
             sequence: 'SHIFT+DOWN',
             action: 'keydown'
@@ -26,7 +26,7 @@ export default (context: ITimesheetContext, t: TFunction): GlobalHotKeysProps =>
         },
     },
     handlers: {
-        goToCurrentWeek: () => context.dispatch({ type: 'MOVE_SCOPE', payload: new Date().toISOString() }),
+        GO_TO_CURRENT_WEEK: () => context.dispatch({ type: 'MOVE_SCOPE', payload: new Date().toISOString() }),
         PREV_WEEK: () => context.dispatch({ type: 'MOVE_SCOPE', payload: { amount: -1, unit: 'week' } }),
         NEXT_WEEK: () => context.dispatch({ type: 'MOVE_SCOPE', payload: { amount: 1, unit: 'week' } }),
         SHOW_SHORTCUTS: () => context.dispatch({ type: 'TOGGLE_SHORTCUTS' }),
