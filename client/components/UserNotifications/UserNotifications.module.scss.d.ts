@@ -4,7 +4,6 @@ interface CssExports {
   'count': string;
   'icon': string;
   'root': string;
-  'toggle': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

@@ -6,7 +6,11 @@ $menu_width: 200px;
   font-weight: bold;
   cursor: hand;
   line-height: 55px;
-  margin-left: 16px;
+  padding: 0 12px 0 12px;
+
+  &:hover {
+    background-color: #787878;
+  }
 
   .avatar {
     color: #fff;

@@ -1,27 +1,30 @@
 .root {
   line-height: 55px;
-  .toggle {
-    cursor: pointer;
-    position: relative;
+  padding: 0 12px 0 12px;
+  cursor: pointer;
+  position: relative;
 
-    .icon {
-      color: #fff;
-      font-size: 24px;
-    }
+  &:hover {
+    background-color: #787878;
+  }
 
-    .count {
-      position: absolute;
-      color: white;
-      background-color: red;
-      border-radius: 50%;
-      height: 19px;
-      line-height: 1;
-      min-width: 19px;
-      font-size: 0.8125rem;
-      text-align: center;
-      padding-top: 2px;
-      top: 8px;
-      right: -9px;
-    }
+  .icon {
+    color: #fff;
+    font-size: 24px;
+  }
+
+  .count {
+    position: absolute;
+    color: white;
+    background-color: red;
+    border-radius: 50%;
+    height: 19px;
+    line-height: 1;
+    min-width: 19px;
+    font-size: 0.8125rem;
+    text-align: center;
+    padding-top: 2px;
+    top: 8px;
+    right: 4px;
   }
 }

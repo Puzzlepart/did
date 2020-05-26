@@ -28,7 +28,7 @@ export const UserNotifications = () => {
             skip: notifications.size > 0,
             fetchPolicy: 'cache-and-network',
         })
-        
+
     /**
      * On dismiss notification. Updates state and persists in browser storage.
      * 
@@ -54,8 +54,8 @@ export const UserNotifications = () => {
     }, [loading])
 
     return (
-        <div className={styles.root} hidden={loading}>
-            <div className={styles.toggle} onClick={() => setShowPanel(!showPanel)}>
+        <>
+            <div hidden={loading} className={styles.root} onClick={() => setShowPanel(!showPanel)}>
                 <div className={styles.icon}>
                     <Icon iconName='Ringer' />
                 </div>
@@ -68,6 +68,6 @@ export const UserNotifications = () => {
                 notifications={notifications}
                 onDismiss={() => setShowPanel(false)}
                 onDismissNotification={onDismissNotification} />
-        </div>
+        </>
     )
 }
