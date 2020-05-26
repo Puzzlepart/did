@@ -14,7 +14,7 @@ export interface IUserNotificationMessage {
 /**
  * @category UserNotifications
  */
-export enum UserNotificationMessageType {
+export enum NotificationType {
     WEEK_NOT_CONFIRMED,
     SERVICE_ANNOUNCEMENT,
     FEATURE_ANNOUNCEMENT,
@@ -23,7 +23,7 @@ export enum UserNotificationMessageType {
 /**
  * @category UserNotifications
  */
-export enum UserNotificationMessageSeverity {
+export enum NotificationSeverity {
     LOW,
     MEDIUM,
     HIGH,
@@ -34,8 +34,8 @@ export enum UserNotificationMessageSeverity {
  */
 export class UserNotificationMessageModel {
     public id: string;
-    public type: UserNotificationMessageType;
-    public severity: UserNotificationMessageSeverity;
+    public type: NotificationType;
+    public severity: NotificationSeverity;
     public text: string;
     public moreLink: string;
 
@@ -54,12 +54,12 @@ export class UserNotificationMessageModel {
 
     private get _messageBarType(): MessageBarType {
         switch (this.type) {
-            case UserNotificationMessageType.WEEK_NOT_CONFIRMED: {
+            case NotificationType.WEEK_NOT_CONFIRMED: {
                 return MessageBarType.warning
             }
                 break
-            case UserNotificationMessageType.SERVICE_ANNOUNCEMENT: {
-                if (this.severity === UserNotificationMessageSeverity.HIGH) {
+            case NotificationType.SERVICE_ANNOUNCEMENT: {
+                if (this.severity === NotificationSeverity.HIGH) {
                     return MessageBarType.severeWarning
                 } else {
                     return MessageBarType.warning
@@ -73,15 +73,15 @@ export class UserNotificationMessageModel {
 
     private get _messageBarIconProps(): { iconName: string } {
         switch (this.type) {
-            case UserNotificationMessageType.WEEK_NOT_CONFIRMED: {
+            case NotificationType.WEEK_NOT_CONFIRMED: {
                 return { iconName: 'CalendarWorkWeek' }
             }
                 break
-            case UserNotificationMessageType.SERVICE_ANNOUNCEMENT: {
+            case NotificationType.SERVICE_ANNOUNCEMENT: {
                 return { iconName: 'Manufacturing' }
             }
                 break
-            case UserNotificationMessageType.FEATURE_ANNOUNCEMENT: {
+            case NotificationType.FEATURE_ANNOUNCEMENT: {
                 return { iconName: 'BuildQueueNew' }
             }
                 break

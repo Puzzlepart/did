@@ -16,7 +16,7 @@ const STORAGE_KEY = 'did365_dismissed_notifications'
  * @category UserNotifications
  */
 export const UserNotifications = () => {
-    const { t } = useTranslation(['notifications'])
+    const { t } = useTranslation('notifications')
     const [showPanel, setShowPanel] = React.useState(false)
     const [notifications, setNotifications] = React.useState<Set<UserNotificationMessageModel>>(new Set())
     const { loading, data } = useQuery<IGetNotifications>(
@@ -32,7 +32,7 @@ export const UserNotifications = () => {
     /**
      * On dismiss notification. Updates state and persists in browser storage.
      * 
-     * @param {UserNotificationMessageModel} UserNotificationMessageModel Notification
+     * @param {UserNotificationMessageModel} notification Notification
      */
     const onDismissNotification = (notification: UserNotificationMessageModel) => {
         const _notifications = new Set(notifications)
