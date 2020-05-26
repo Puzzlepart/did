@@ -2,13 +2,11 @@
 // Please do not change this file!
 interface CssExports {
   'avatar': string;
-  'container': string;
   'divider': string;
   'header': string;
   'menu': string;
   'menuItem': string;
   'root': string;
-  'toggle': string;
   'userName': string;
 }
 export const cssExports: CssExports;

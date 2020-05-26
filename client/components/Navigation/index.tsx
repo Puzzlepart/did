@@ -60,8 +60,10 @@ export const Navigation = () => {
                         </NavLink>
                     </li>
                 </ul>
-                <UserNotifications />
-                <UserMenu />
+                <div className={styles.navRight}>
+                    <UserNotifications />
+                    <UserMenu />
+                </div>
             </div>
         </nav>
     )

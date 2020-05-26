@@ -8,6 +8,7 @@ interface CssExports {
   'navIcon': string;
   'navItem': string;
   'navLink': string;
+  'navRight': string;
   'navText': string;
   'root': string;
 }
