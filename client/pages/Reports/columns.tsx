@@ -15,14 +15,14 @@ const columns = (t: TFunction): IColumn[] => ([
     },
     {
         key: 'project',
-        fieldName: 'project',
+        fieldName: 'project.name',
         name: t('project'),
         minWidth: 100,
         onRender: ({ project }) => <Link to={`/projects/${project.id}`}>{project.name}</Link>
     },
     {
         key: 'customer',
-        fieldName: 'customer',
+        fieldName: 'customer.name',
         name: t('customer'),
         minWidth: 100,
         onRender: ({ customer }) => <Link to={`/customers/${customer.key}`}>{customer.name}</Link>,
@@ -54,6 +54,13 @@ const columns = (t: TFunction): IColumn[] => ([
         fieldName: 'weekNumber',
         name: t('weekLabel'),
         minWidth: 100,
+    },
+    {
+        key: 'monthNumber',
+        fieldName: 'monthNumber',
+        name: t('monthLabel'),
+        minWidth: 100,
+        onRender: ({ monthNumber }) => dateUtils.getMonthNames()[monthNumber - 1]
     },
     {
         key: 'year',

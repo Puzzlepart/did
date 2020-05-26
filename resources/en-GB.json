@@ -31,7 +31,7 @@
     "clearProjectMatchTooltipText": "Clear match",
     "matchOutlookInfoText": "**Please note:** You should try your best to match<a href='{0}' target='_blank'>the event in Outlook</a>, but in some cases it might be neccessary to manually match.",
     "didYouMeanText": "Did you mean",
-    "eventNotFullyMatchedText": "Event not matched. We found a matching customer `{0}`, but not a project with the specified key."
+    "eventNotFullyMatchedText": "Event not matched. We found a matching customer **{0}**, but not a project with the specified key."
   },
   "projects": {
     "inactiveText": "This project has been marked as inactive.",
