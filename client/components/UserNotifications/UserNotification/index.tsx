@@ -5,6 +5,9 @@ import { IUserNotificationProps } from './types'
 import styles from './UserNotificationMessage.module.scss'
 import { useTranslation } from 'react-i18next'
 
+/**
+ * @category UserNotifications
+ */
 export const UserNotificationActions = ({ model }: IUserNotificationProps) => {
     const { t } = useTranslation('notifications')
     if (!model.moreLink) return null
@@ -20,6 +23,7 @@ export const UserNotification = ({ model, onDismiss }: IUserNotificationProps) =
             {...model.messageProps}
             onDismiss={() => onDismiss(model)}
             className={styles.root}
+            styles={{ actions: { flexDirection: 'row', paddingLeft: 28 } }}
             actions={<UserNotificationActions model={model} />}>
             <span className={styles.text}>{model.text}</span>
         </MessageBar>
