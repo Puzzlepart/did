@@ -20,8 +20,7 @@ client.query<{ currentUser: any }>({ query: GET_CURRENT_USER }).then(({ data }) 
     const container = document.getElementById('app')
     const context: IAppContext = { user: data.currentUser }
     context.user.userLanguage = context.user.userLanguage || 'en-GB'
-    context.user.userTheme = context.user.userTheme || 'light'
-    loadTheme(context.user.userTheme)
+    context.theme = loadTheme(context.user.userTheme || 'light')
     document.body.className = `theme-${context.user.userTheme}`
 
     DateUtils.setup(context.user.userLanguage)
