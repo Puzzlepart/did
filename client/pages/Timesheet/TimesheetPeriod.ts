@@ -220,7 +220,6 @@ export class TimesheetPeriod {
      * Returns path for period
      */
     public get path() {
-        if (this.id.length < 4) return ''
         return this.id.split('_').join('/')
     }
 }  
