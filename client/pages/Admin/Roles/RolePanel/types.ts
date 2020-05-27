@@ -1,17 +1,8 @@
 import gql from 'graphql-tag'
 import { IRole } from 'interfaces/IRole'
-import { IModalProps } from 'office-ui-fabric-react/lib/Modal'
+import { IPanelProps } from 'office-ui-fabric-react/lib/Panel'
 
-export interface IRoleModalProps {
-    /**
-     * Modal props
-     */
-    modal?: IModalProps;
-
-    /**
-     * Modal title
-     */
-    title?: string;
+export interface IRolePanelProps extends IPanelProps {
 
     /**
      * Role to edit

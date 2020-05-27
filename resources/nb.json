@@ -66,6 +66,7 @@
     "users": "Brukere",
     "summary": "Sammendrag",
     "labels": "Merkelapper",
+    "rolesPermissions": "Roller og tilganger",
     "addNewUser": "Legg til ny",
     "editUser": "Rediger",
     "defaultLabelTitle": "Ny merkelapp",
@@ -73,10 +74,9 @@
     "editLabel": "Rediger merkelapp",
     "addNewRole": "Legg til ny rolle",
     "roleNameLabel": "Rollenavn",
-    "permissionsHeader": "Tilganger",
     "noTimeEntriesText": "Det er ingen registrerte timer for det valgte året.",
     "editRole": "Rediger rolle",
-    "roles": "Roller"
+    "permissonsLabel": "Tilganger"
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport",

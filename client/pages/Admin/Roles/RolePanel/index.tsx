@@ -2,18 +2,18 @@ import { useMutation } from '@apollo/react-hooks'
 import * as securityConfig from 'config/security'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
-import { Modal } from 'office-ui-fabric-react/lib/Modal'
+import { Panel } from 'office-ui-fabric-react/lib/Panel'
 import { Toggle } from 'office-ui-fabric-react/lib/Toggle'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { contains, omit, isEmpty } from 'underscore'
-import styles from './RoleModal.module.scss'
-import { IRoleModalProps, UPDATE_ROLE, ADD_ROLE } from './types'
+import styles from './RolePanel.module.scss'
+import { IRolePanelProps, UPDATE_ROLE, ADD_ROLE } from './types'
 
 /**
  * @category Admin
  */
-export const RoleModal = (props: IRoleModalProps) => {
+export const RolePanel = (props: IRolePanelProps) => {
     const { t } = useTranslation('admin')
     const [[addRole], [updateRole]] = [useMutation(ADD_ROLE), useMutation(UPDATE_ROLE)]
     const [role, setRole] = React.useState(props.edit || { permissions: [] })
@@ -34,13 +34,11 @@ export const RoleModal = (props: IRoleModalProps) => {
     }
 
     return (
-        <Modal
-            {...props.modal}
-            containerClassName={styles.root}
-            isOpen={true}>
-            <div className={styles.title}>
-                {props.title}
-            </div>
+        <Panel
+            className={styles.root}
+            isOpen={true}
+            title={props.title}
+            onDismiss={props.onDismiss}>
             <div className={styles.container}>
                 <div className={styles.inputField}>
                     <TextField
@@ -50,7 +48,7 @@ export const RoleModal = (props: IRoleModalProps) => {
                         required={true}
                         onChange={(_event, name) => setRole({ ...role, name })} />
                 </div>
-                <div className={styles.subHeader}>{t('permissionsHeader')}</div>
+                <div className={styles.subHeader}>{t('permissonsLabel')}</div>
                 <div className={styles.permissions}>
                     {permissions.map(({ key, id, name }) => (
                         <div key={key} className={styles.permissionItem}>
@@ -67,7 +65,7 @@ export const RoleModal = (props: IRoleModalProps) => {
                     onClick={onSave}
                     disabled={!props.edit && isEmpty(role.name)} />
             </div>
-        </Modal>
+        </Panel>
     )
 }
 

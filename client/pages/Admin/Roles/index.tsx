@@ -6,7 +6,7 @@ import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { generateColumn as col } from 'utils/generateColumn'
-import { IRoleModalProps, RoleModal } from './RoleModal'
+import { IRolePanelProps, RolePanel } from './RolePanel'
 import { GET_ROLES } from './GET_ROLES'
 import { PermissionList } from 'components/PermissionList'
 
@@ -16,17 +16,17 @@ import { PermissionList } from 'components/PermissionList'
 export const Roles = () => {
     const { t } = useTranslation(['admin', 'common'])
     const { data, loading, refetch } = useQuery(GET_ROLES)
-    const [modal, setModal] = React.useState<IRoleModalProps>(null)
+    const [panel, setPanel] = React.useState<IRolePanelProps>(null)
     const columns = [
         col(
             'name',
             t('roleLabel', { ns: 'common' }),
-            { maxWidth: 180 },
+            { maxWidth: 140 },
         ),
         col(
             'permissions',
-            '',
-            { minWidth: 400, isMultiline: true },
+            t('permissonsLabel'),
+            { minWidth: 200, isMultiline: true },
             (role: IRole) => <PermissionList permissionIds={role.permissions} />
         ),
         col(
@@ -38,7 +38,7 @@ export const Roles = () => {
                     <DefaultButton
                         styles={{ root: { marginRight: 4 } }}
                         text={t('editRole')}
-                        onClick={() => setModal({
+                        onClick={() => setPanel({
                             title: t('editRole'),
                             edit: role,
                         })} />
@@ -58,20 +58,20 @@ export const Roles = () => {
                             key: 'addNewRole',
                             name: t('addNewRole'),
                             iconProps: { iconName: 'AddFriend' },
-                            onClick: () => setModal({
+                            onClick: () => setPanel({
                                 title: t('addNewRole'),
                             }),
                         },
                     ],
                     farItems: []
                 }} />
-            {modal && (
-                <RoleModal
-                    {...modal}
+            {panel && (
+                <RolePanel
+                    {...panel}
                     onSave={() => {
-                        refetch().then(() => setModal(null))
+                        refetch().then(() => setPanel(null))
                     }}
-                    modal={{ onDismiss: () => setModal(null) }} />
+                    onDismiss={() => setPanel(null)} />
             )}
         </>
     )
