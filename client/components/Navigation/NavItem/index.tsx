@@ -6,15 +6,20 @@ import { contains } from 'underscore'
 import styles from './NavItem.module.scss'
 import { INavItemProps } from './types'
 import { isMobile } from 'react-device-detect'
+import { getTheme } from 'office-ui-fabric-react/lib/Styling'
+
 
 export const NavItem = (props: INavItemProps) => {
     const { user } = React.useContext(AppContext)
+    const theme = getTheme()
     if (props.permission && !contains(user.role.permissions, props.permission)) return null
     let className = styles.root
     if (isMobile) className += ` ${styles.mobile}`
     return (
         <li className={className}>
             <NavLink
+                style={{ color: theme.palette.white }}
+                activeStyle={{color: theme.palette.themePrimary}}
                 to={props.to}
                 className={styles.link}
                 activeClassName={styles.active} >

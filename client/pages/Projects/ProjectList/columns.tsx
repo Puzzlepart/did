@@ -6,7 +6,9 @@ import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { generateColumn as col } from 'utils/generateColumn'
+import { getTheme } from 'office-ui-fabric-react/lib/Styling'
 
+const theme = getTheme()
 
 /**
  * Generate column definitions based on parameters specified
@@ -30,7 +32,7 @@ export default (hideColumns: string[], t: TFunction): IColumn[] => ([
                         styles={{ root: { fontSize: 16, color: '#ffbf00' } }} />
                 )
             }
-            return <Icon iconName={project.icon || 'Page'} styles={{ root: { fontSize: 16 } }} />
+            return <Icon iconName={project.icon || 'Page'} styles={{ root: { fontSize: 16 }}} style={{color: theme.palette.themePrimary}} />
         },
     ),
     col(
@@ -42,7 +44,7 @@ export default (hideColumns: string[], t: TFunction): IColumn[] => ([
         'name',
         t('nameLabel', { ns: 'common' }),
         { maxWidth: 220 },
-        (project: IProject) => <Link to={`/projects/${project.id}`}>{project.name}</Link>
+        (project: IProject) => <Link to={`/projects/${project.id}`} style={{color: theme.palette.themePrimary}}>{project.name}</Link>
     ),
     col(
         'customer',
@@ -50,7 +52,7 @@ export default (hideColumns: string[], t: TFunction): IColumn[] => ([
         { maxWidth: 220 },
         (project: IProject) => {
             if (!project.customer) return null
-            return <Link to={`/customers/${project.customer.key}`}>{project.customer.name}</Link>
+            return <Link to={`/customers/${project.customer.key}`} style={{color: theme.palette.themePrimary}}>{project.customer.name}</Link>
         }
     ),
     col(

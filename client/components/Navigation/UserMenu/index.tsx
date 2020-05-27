@@ -6,8 +6,10 @@ import { useTranslation } from 'react-i18next'
 import styles from './UserMenu.module.scss'
 import { UserSettings } from './UserSettings'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import { getTheme } from 'office-ui-fabric-react/lib/Styling'
 
 export const UserMenu = () => {
+    const theme = getTheme()
     const { t } = useTranslation('common')
     const { user } = React.useContext(AppContext)
     const [menuTarget, setMenuTarget] = React.useState<Target>(null)
@@ -17,7 +19,7 @@ export const UserMenu = () => {
             <div
                 className={styles.root}
                 onClick={event => setMenuTarget(event.currentTarget)}>‍
-                    <Icon iconName={'PlayerSettings'} className={styles.icon} />
+                    <Icon iconName={'PlayerSettings'} className={styles.icon} style={{ color: theme.palette.white }} />
             </div>
 
             {menuTarget && (

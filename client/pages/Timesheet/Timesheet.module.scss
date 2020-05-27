@@ -25,13 +25,13 @@
         [class*="ms-GroupedList-group"] {
             margin-top: 1.5em;
             padding-bottom: 1em;
-            background: #fafafc;
+            // background: #fafafc;
 
             [class*="ms-GroupHeader"] {
                 border-bottom: 0px;
 
                 &:hover {
-                    background: #fafafc;
+                    // background: #fafafc;
                 }
             }
 
@@ -44,7 +44,7 @@
                     background: transparent;
 
                     &:hover {
-                        background: #fafafc;
+                        // background: #fafafc;
                     }
 
                     [class*="ms-DetailsRow-cell"] {
@@ -56,34 +56,6 @@
                         a {
                             vertical-align: middle;
                         }
-                    }
-                }
-            }
-        }
-    }
-}
-
-[class*="theme-dark"] {
-    $dark-bg: #181c1f;
-    $light-dark-bg: rgb(40, 45, 49);
-
-    .root {
-        [class*="icon"] {
-            color:#eee;
-        }
-        [class*="ms-List-page"] {
-            background: transparent;
-
-            [class*="ms-GroupedList-group"] {
-                background: $light-dark-bg;
-
-                [class*="ms-GroupHeader"] {
-                    background: $light-dark-bg;
-                }
-
-                [class*="ms-List-cell"] {
-                    [class*="ms-DetailsRow"] {
-                        background: transparent;
                     }
                 }
             }

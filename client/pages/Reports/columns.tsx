@@ -4,8 +4,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import dateUtils from 'utils/date'
 import { ExcelColumnType } from 'utils/exportExcel'
+import { getTheme } from 'office-ui-fabric-react/lib/Styling'
 
-
+const theme = getTheme()
 const columns = (t: TFunction): IColumn[] => ([
     {
         key: 'title',
@@ -18,14 +19,14 @@ const columns = (t: TFunction): IColumn[] => ([
         fieldName: 'project.name',
         name: t('project'),
         minWidth: 100,
-        onRender: ({ project }) => <Link to={`/projects/${project.id}`}>{project.name}</Link>
+        onRender: ({ project }) => <Link to={`/projects/${project.id}`} style={{color: theme.palette.themePrimary}}>{project.name}</Link>
     },
     {
         key: 'customer',
         fieldName: 'customer.name',
         name: t('customer'),
         minWidth: 100,
-        onRender: ({ customer }) => <Link to={`/customers/${customer.key}`}>{customer.name}</Link>,
+        onRender: ({ customer }) => <Link to={`/customers/${customer.key}`} style={{color: theme.palette.themePrimary}}>{customer.name}</Link>,
     },
     {
         key: 'duration',

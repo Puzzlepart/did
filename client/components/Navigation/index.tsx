@@ -8,14 +8,17 @@ import { UserMenu } from './UserMenu'
 import { isMobile } from 'react-device-detect'
 import { accessAdmin, accessReports, accessCustomers, accessProjects } from 'config/security/permissions'
 import { UserNotifications } from './UserNotifications'
+import { getTheme } from 'office-ui-fabric-react/lib/Styling'
 
 export const Navigation = () => {
+    const theme = getTheme()
     const { t } = useTranslation('navigation')
     const { user } = React.useContext(AppContext)
     let className = styles.root
     if (isMobile) className += ` ${styles.mobile}`
     return (
-        <nav className={className}>
+        <nav className={className}
+            style={{ backgroundColor: theme.palette.black }} >
             <div className={styles.container}>
                 <Link to='/' className={styles.logo} title='Did 365 - The Calendar is the Timesheet'>
                     <img src='/images/D_beta_sm.png' />

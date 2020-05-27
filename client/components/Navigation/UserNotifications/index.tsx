@@ -8,6 +8,8 @@ import GET_NOTIFICATIONS, { IGetNotifications } from './GET_NOTIFICATIONS'
 import { NotificationModel } from './types'
 import { NotificationsPanel } from './NotificationsPanel'
 import { useTranslation } from 'react-i18next'
+import { getTheme } from 'office-ui-fabric-react/lib/Styling'
+
 
 const BROWSER_STORAGE: IPnPClientStore = new PnPClientStorage().session
 const STORAGE_KEY = 'did365_dismissed_notifications'
@@ -16,6 +18,7 @@ const STORAGE_KEY = 'did365_dismissed_notifications'
  * @category UserNotifications
  */
 export const UserNotifications = () => {
+    const theme = getTheme()
     const { t } = useTranslation('notifications')
     const [showPanel, setShowPanel] = React.useState(false)
     const [notifications, setNotifications] = React.useState<Set<NotificationModel>>(new Set())
@@ -57,7 +60,7 @@ export const UserNotifications = () => {
         <>
             <div hidden={loading} className={styles.root} onClick={() => setShowPanel(!showPanel)}>
                 <div className={styles.icon}>
-                    <Icon iconName='Ringer' />
+                    <Icon iconName='Ringer' style={{color: theme.palette.white}} />
                 </div>
                 <div
                     hidden={notifications.size === 0}

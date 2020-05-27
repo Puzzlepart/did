@@ -1,4 +1,5 @@
 .root {
+
     [class*="ms-DetailsRow-cell"] {
         background: transparent;
         font-size: 1.2em;
@@ -19,10 +20,6 @@
             border: none;
             background: transparent;
 
-            &:hover {
-                background: #fafafc;
-            }
-
             [class*="ms-DetailsRow-cell"] {
                 font-size: 1.2em;
                 display: flex;
@@ -31,20 +28,6 @@
                 span,
                 a {
                     vertical-align: middle;
-                }
-            }
-        }
-    }
-}
-
-[class*="theme-dark"] {
-    .root {
-        [class*="ms-List-page"] {
-            [class*="ms-GroupedList-group"] {
-                [class*="ms-GroupHeader"] {
-                    &:hover {
-                        background: #000000;
-                    }
                 }
             }
         }

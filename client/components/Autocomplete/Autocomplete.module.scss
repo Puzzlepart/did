@@ -8,22 +8,8 @@
             cursor: pointer;
 
             &:hover {
-                background-color: #cf5f00;
-                color: #fff;
                 font-weight: 500;
             }
         }
     }
-}
-
-[class*='theme-dark'] {
-    .suggestionContainer {
-        .suggestion {
-            &:hover {
-                background-color: #cf5f00;
-                color: #000;
-            }
-        }
-    }
-
 }
