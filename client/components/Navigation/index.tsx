@@ -1,19 +1,17 @@
 import { AppContext } from 'AppContext'
+import { accessAdmin, accessCustomers, accessProjects, accessReports } from 'config/security/permissions'
 import * as React from 'react'
+import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import styles from './Navigation.module.scss'
 import { NavItem } from './NavItem'
 import { UserMenu } from './UserMenu'
-import { isMobile } from 'react-device-detect'
-import { accessAdmin, accessReports, accessCustomers, accessProjects } from 'config/security/permissions'
 import { UserNotifications } from './UserNotifications'
-import { getTheme } from 'office-ui-fabric-react/lib/Styling'
 
 export const Navigation = () => {
-    const theme = getTheme()
     const { t } = useTranslation('navigation')
-    const { user } = React.useContext(AppContext)
+    const { user,theme } = React.useContext(AppContext)
     let className = styles.root
     if (isMobile) className += ` ${styles.mobile}`
     return (

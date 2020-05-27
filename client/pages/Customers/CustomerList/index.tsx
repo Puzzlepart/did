@@ -11,6 +11,7 @@ import { generateColumn as col } from 'utils/generateColumn'
 import { ICustomerListProps } from './ICustomerListProps'
 import { getTheme } from 'office-ui-fabric-react/lib/Styling'
 const theme = getTheme()
+
 /**
  * Generate column definitions
  * 
@@ -33,7 +34,7 @@ export const columns = (t: TFunction): IColumn[] => ([
         'name',
         t('nameLabel'),
         { maxWidth: 300 },
-        (customer: ICustomer) => <Link to={`/customers/${customer.key}`} style={{color: theme.palette.themePrimary}}>{customer.name}</Link>
+        (customer: ICustomer) => <Link to={`/customers/${customer.key}`} style={{ color: theme.palette.themePrimary }}>{customer.name}</Link>
     ),
 ])
 

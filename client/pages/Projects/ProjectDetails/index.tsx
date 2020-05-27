@@ -16,13 +16,11 @@ import { CREATE_OUTLOOK_CATEGORY } from './CREATE_OUTLOOK_CATEGORY'
 import { IProjectDetailsProps } from './IProjectDetailsProps'
 import styles from './ProjectDetails.module.scss'
 import PROJECT_TIME_ENTRIES from './PROJECT_TIME_ENTRIES'
-import { getTheme } from 'office-ui-fabric-react/lib/Styling'
 
 /**
  * @category Projects
  */
 export const ProjectDetails = (props: IProjectDetailsProps) => {
-    const theme = getTheme()
     const { t } = useTranslation(['projects', 'common'])
     const [project, setProject] = React.useState({ ...props.project })
     const { loading, error, data } = useQuery<{ timeentries: any[] }>(PROJECT_TIME_ENTRIES, { variables: { projectId: props.project.id } })
