@@ -14,7 +14,7 @@ import { Overview } from './Overview'
 import reducer from './reducer'
 import { SummaryView } from './SummaryView'
 import styles from './Timesheet.module.scss'
-import { ITimesheetContext, ITimesheetParams, ITimesheetPeriod, TimesheetContext, TimesheetPeriod, TimesheetScope } from './types'
+import { ITimesheetContext, ITimesheetParams, ITimesheetPeriod, TimesheetContext, TimesheetPeriod, TimesheetScope, TimesheetView } from './types'
 import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD'
 
 /**
@@ -28,6 +28,7 @@ export const Timesheet = () => {
         periods: [],
         selectedPeriod: new TimesheetPeriod(undefined, params),
         scope: new TimesheetScope(params),
+        selectedView: params.view || 'overview'
     })
     const query = useQuery<{ timesheet: ITimesheetPeriod[] }>(GET_TIMESHEET, {
         variables: {
@@ -36,22 +37,26 @@ export const Timesheet = () => {
         },
         fetchPolicy: 'cache-and-network',
     })
-    
-    const [confirmPeriod] = useMutation<{ entries: any[]; startDateTime: string; endDateTime: string }>(CONFIRM_PERIOD)
-    const [unconfirmPeriod] = useMutation<{ startDateTime: string; endDateTime: string }>(UNCONFIRM_PERIOD)
 
     useEffect(() => { dispatch({ type: 'DATA_UPDATED', payload: { query, t } }) }, [query])
 
-    useEffect(() => { history.push(`/timesheet/${state.selectedPeriod.path}`) }, [state.selectedPeriod])
+    useEffect(() => { history.push(`/timesheet/${state.selectedView}/${state.selectedPeriod.path}`) }, [state.selectedView, state.selectedPeriod])
+
+    const [[confirmPeriod], [unconfirmPeriod]] = [
+        useMutation<{ entries: any[]; startDateTime: string; endDateTime: string }>(CONFIRM_PERIOD),
+        useMutation<{ startDateTime: string; endDateTime: string }>(UNCONFIRM_PERIOD)
+    ]
 
     const onConfirmPeriod = () => {
         dispatch({ type: 'CONFIRMING_PERIOD', payload: { t } })
-        confirmPeriod({ variables: { period: state.selectedPeriod.data } }).then(query.refetch)
+        const variables = { period: state.selectedPeriod.data }
+        confirmPeriod({ variables }).then(query.refetch)
     }
 
     const onUnconfirmPeriod = () => {
         dispatch({ type: 'UNCONFIRMING_PERIOD', payload: { t } })
-        unconfirmPeriod({ variables: { period: state.selectedPeriod.data } }).then(query.refetch)
+        const variables = { period: state.selectedPeriod.data }
+        unconfirmPeriod({ variables }).then(query.refetch)
     }
 
     const ctx: ITimesheetContext = useMemo(() => ({
@@ -68,7 +73,12 @@ export const Timesheet = () => {
             <TimesheetContext.Provider value={ctx}>
                 <div className={styles.root}>
                     <ActionBar />
-                    <Pivot>
+                    <Pivot
+                        defaultSelectedKey={state.selectedView}
+                        onLinkClick={({ props }) => dispatch({
+                            type: 'CHANGE_VIEW',
+                            payload: props.itemKey as TimesheetView
+                        })}>
                         <PivotItem
                             itemKey='overview'
                             headerText={t('overviewHeaderText')}

@@ -2,7 +2,7 @@ import { value } from 'helpers'
 import { TFunction } from 'i18next'
 import { IProject } from 'interfaces'
 import { find, first } from 'underscore'
-import { ITimesheetPeriod, ITimesheetScopeOptions, ITimesheetState, TimesheetPeriod, TimesheetScope } from './types'
+import { ITimesheetPeriod, ITimesheetScopeOptions, ITimesheetState, TimesheetPeriod, TimesheetScope, TimesheetView } from './types'
 
 export type TimesheetAction =
     {
@@ -23,6 +23,8 @@ export type TimesheetAction =
     { type: 'UNCONFIRMING_PERIOD'; payload: { t: TFunction } }
     |
     { type: 'CHANGE_PERIOD'; payload: string }
+    |
+    { type: 'CHANGE_VIEW'; payload: TimesheetView }
     |
     { type: 'MANUAL_MATCH'; payload: { eventId: string; project: IProject } }
     |
@@ -87,6 +89,12 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
         }
             break
 
+        case 'CHANGE_VIEW': {
+            newState.selectedView = action.payload
+        }
+            break
+
+
         case 'MANUAL_MATCH': {
             const { eventId, project } = action.payload
             newState.selectedPeriod.setManualMatch(eventId, project)
@@ -116,7 +124,7 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
             newState.showHotkeysModal = !newState.showHotkeysModal
         }
             break
-            
+
         default: throw new Error()
     }
     return newState
