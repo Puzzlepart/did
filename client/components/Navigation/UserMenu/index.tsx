@@ -13,27 +13,23 @@ export const UserMenu = () => {
     const [menuTarget, setMenuTarget] = React.useState<Target>(null)
 
     return (
-        <div className={styles.root}>
-            <div className={styles.container}>
-                <a
-                    className={styles.toggle}
-                    href='#'
-                    onClick={event => setMenuTarget(event.currentTarget)}>‍
-                    <Icon iconName={'PlayerSettings'} className={styles.avatar} />
-                    </a>
+        <>
+            <div
+                className={styles.root}
+                onClick={event => setMenuTarget(event.currentTarget)}>‍
+                    <Icon iconName={'PlayerSettings'} className={styles.icon} />
             </div>
 
             {menuTarget && (
                 <Callout
-                    styles={{ root: { marginRight: -4 } }}
                     hidden={!menuTarget}
                     target={menuTarget}
                     onDismiss={() => setMenuTarget(null)}
-                    gapSpace={8}>
+                    gapSpace={-8}>
                     <FadeIn className={styles.menu}>
                         <div className={`${styles.menuItem} ${styles.userName}`}>{user.fullName}</div>
                         <div className={styles.menuItem}>{user.email}</div>
-                        <div className={styles.menuItem}>{user.role} ({user.sub.name})</div>
+                        <div className={styles.menuItem}>{user.role.name} ({user.sub.name})</div>
                         <div className={styles.divider}></div>
                         <UserSettings className={styles.menuItem} />
                         <div className={styles.divider}></div>
@@ -41,6 +37,6 @@ export const UserMenu = () => {
                     </FadeIn>
                 </Callout>
             )}
-        </div>
+        </>
     )
 }

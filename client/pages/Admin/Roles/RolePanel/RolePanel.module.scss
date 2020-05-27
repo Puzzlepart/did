@@ -1,0 +1,30 @@
+.root {
+  .container {
+    overflow: hidden;
+
+    .inputField {
+      margin: 8px 0 8px 0;
+    }
+
+    .subHeader {
+      font-size: 1.2em;
+      margin: 12px 0 12px 0;
+    }
+
+    .permissions {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      overflow: hidden;
+      .permissionItem {
+        width: 200px;
+      }
+    }
+
+    .saveBtn {
+      width: 100%;
+      margin: 15px 0 0 0;
+    }
+  }
+}

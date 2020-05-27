@@ -66,12 +66,17 @@
     "users": "Brukere",
     "summary": "Sammendrag",
     "labels": "Merkelapper",
+    "rolesPermissions": "Roller og tilganger",
     "addNewUser": "Legg til ny",
     "editUser": "Rediger",
     "defaultLabelTitle": "Ny merkelapp",
     "addNewLabel": "Opprett ny merkelapp",
     "editLabel": "Rediger merkelapp",
-    "noTimeEntriesText": "Det er ingen registrerte timer for det valgte året."
+    "addNewRole": "Legg til ny rolle",
+    "roleNameLabel": "Rollenavn",
+    "noTimeEntriesText": "Det er ingen registrerte timer for det valgte året.",
+    "editRole": "Rediger rolle",
+    "permissonsLabel": "Tilganger"
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport",
@@ -187,5 +192,24 @@
     "projects": "Prosjekter",
     "reports": "Rapporter",
     "admin": "Administrasjon"
+  },
+  "permissions": {
+    "accessCustomers": "Tilgang til kunder",
+    "accessProjects": "Tilgang til prosjekter",
+    "accessAdmin": "Tilgang til administrasjon",
+    "accessReports": "Tilgang til rapporter",
+    "manageProjects": "Administrere prosjekter",
+    "deleteProjects": "Slette prosjekter",
+    "manageCustomers": "Administrere kunder",
+    "deleteCustomers": "Slette kunder"
+  },
+  "notifications": {
+    "moreLinkText": "Les mer her",
+    "goToPeriodText": "Gå til periode",
+    "headerText": "Varsler",
+    "emptyText": "Du har ingen aktive varsler for øyeblikket.",
+    "templates": {
+      "unconfirmedPeriods": "Uke {0} ({1}) mangler bekreftelse."
+    }
   }
 }

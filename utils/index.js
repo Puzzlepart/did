@@ -61,7 +61,7 @@ module.exports = {
     },
 
     /**
-     * Get end of month
+     * Get start of month
      * 
      * @param {*} date Date
      */
@@ -79,6 +79,24 @@ module.exports = {
     },
 
     /**
+     * Get start of week
+     * 
+     * @param {*} week Week number
+     */
+    startOfWeek: (week) => {
+        return moment().week(week).startOf('isoWeek')
+    },
+
+    /**
+     * Get end of week
+     * 
+     * @param {*} week Week number
+     */
+    endOfWeek: (week) => {
+        return moment().week(week).endOf('isoWeek')
+    },
+
+    /**
      * Format date
      * 
      * @param {*} date Date
@@ -87,5 +105,15 @@ module.exports = {
      */
     formatDate: (date, dateFormat, locale) => {
         return moment(date).locale(locale).tz('Europe/Oslo').format(dateFormat)
+    },
+
+    /**
+     * Converts a string to an array
+     * 
+     * @param {*} str String
+     * @param {*} separator String separator
+     */
+    toArray: (str, separator) => {
+        return (str || '').split(separator).filter(p => p)
     }
 }

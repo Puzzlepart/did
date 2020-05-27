@@ -93,14 +93,4 @@ export class TimesheetScope {
     public get timespan() {
         return dateUtils.getTimespanString(this._startDateTime, this._endDateTime)
     }
-
-    /**
-     * Returns path for scope
-     */
-    public get path() {
-        return [
-            this._startDateTime.year(),
-            this._startDateTime.week()
-        ].join('/')
-    }
 }

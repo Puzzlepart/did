@@ -1,5 +1,5 @@
 const { first } = require('underscore')
-const tableUtil = require('../utils/table')
+const TableUtil = require('../utils/table')
 const { createTableService } = require('azure-storage')
 
 class SubscriptionService {
@@ -12,7 +12,8 @@ class SubscriptionService {
    */
   async getSubscription(tenantId) {
     try {
-      tableUtil.tableService = createTableService(process.env.AZURE_STORAGE_CONNECTION_STRING)
+      const tableService = createTableService(process.env.AZURE_STORAGE_CONNECTION_STRING)
+      const tableUtil = new TableUtil(tableService)
       const query = tableUtil.createQuery(1, ['Name', 'ConnectionString']).where('RowKey eq ?', tenantId)
       var { entries } = await tableUtil.queryTable('Subscriptions', query)
       return tableUtil.parseEntity(first(entries))

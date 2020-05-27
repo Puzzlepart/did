@@ -7,8 +7,9 @@ import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { generateColumn as col } from 'utils/generateColumn'
-import GET_USERS from './GET_USERS'
+import { GET_DATA } from './GET_DATA'
 import { IUserFormModalProps, UserFormModal } from './UserFormModal'
+import { IUser } from 'interfaces/IUser'
 
 /**
  * @category Admin
@@ -16,21 +17,30 @@ import { IUserFormModalProps, UserFormModal } from './UserFormModal'
 export const Users = () => {
     const { t } = useTranslation(['common', 'admin'])
     const [userForm, setUserForm] = React.useState<IUserFormModalProps>(null)
-    const { data, loading, refetch } = useQuery(GET_USERS, { fetchPolicy: 'cache-and-network' })
+    const { data, refetch, loading, called } = useQuery(GET_DATA, { fetchPolicy: 'cache-and-network' })
     const columns = [
         col('fullName', t('nameLabel'), { maxWidth: 180 }),
-        col('role', t('roleLabel')),
+        col(
+            'role',
+            t('roleLabel'),
+            {},
+            (user: IUser) => user.role.name,
+        ),
         col('edit', '', {}, (user: any) => (
             <DefaultButton
                 text={t('editUser', { ns: 'admin' })}
-                onClick={() => setUserForm({ title: user.fullName, user })} />
+                onClick={() => setUserForm({
+                    title: user.fullName,
+                    user,
+                    roles: value(data, 'roles', [])
+                })} />
         ))
     ]
-    if (loading) return <ProgressIndicator />
 
     return (
         <>
             <List
+                enableShimmer={loading && !called}
                 items={value(data, 'users', [])}
                 columns={columns}
                 commandBar={{
@@ -39,7 +49,10 @@ export const Users = () => {
                             key: 'addNewUser',
                             name: t('addNewUser', { ns: 'admin' }),
                             iconProps: { iconName: 'AddFriend' },
-                            onClick: () => setUserForm({ title: t('addNewUser', { ns: 'admin' }) }),
+                            onClick: () => setUserForm({
+                                title: t('addNewUser', { ns: 'admin' }),
+                                roles: value(data, 'roles', []),
+                            }),
                         },
                     ],
                     farItems: []

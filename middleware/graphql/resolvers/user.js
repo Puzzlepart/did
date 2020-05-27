@@ -1,7 +1,9 @@
+const { find } = require('underscore')
+
 const typeDef = `  
     type User {
         id: String
-        role: String
+        role: Role
         fullName: String
         email: String
         userLanguage: String
@@ -29,19 +31,28 @@ const typeDef = `
 `
 
 async function users(_obj, _args, { services: { storage: StorageService } }) {
-    let users = await StorageService.getUsers()
+    let [users, roles] = await Promise.all([
+        StorageService.getUsers(),
+        StorageService.getRoles()
+    ])
+    users = users.map(user => ({
+        ...user,
+        role: find(roles, role => role.name === user.role)
+    })).filter(user => user.role)
     return users
 }
 
 async function currentUser(_obj, _args, { user: { id, tenantId, profile }, services: { subscription: SubscriptionService, storage: StorageService } }) {
-    const [user, sub] = await Promise.all([
+    const [user, sub, roles] = await Promise.all([
         StorageService.getUser(id),
-        SubscriptionService.getSubscription(tenantId)
+        SubscriptionService.getSubscription(tenantId),
+        StorageService.getRoles()
     ])
     return {
         ...user,
         email: profile.email,
         sub,
+        role: find(roles, role => role.name === user.role),
     }
 }
 

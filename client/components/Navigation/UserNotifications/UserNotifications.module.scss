@@ -1,0 +1,32 @@
+.root {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 12px 0 12px;
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    background-color: #787878;
+  }
+
+  .icon {
+    color: #fff;
+    font-size: 18px;
+  }
+
+  .count {
+    position: absolute;
+    color: white;
+    background-color: red;
+    border-radius: 50%;
+    height: 15px;
+    width: 17px;
+    line-height: 12px;
+    font-size: 12px;
+    text-align: center;
+    padding-top: 2px;
+    top: 10px;
+    right: 4px;
+  }
+}

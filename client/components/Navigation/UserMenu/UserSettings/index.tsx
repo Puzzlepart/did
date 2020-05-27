@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/react-hooks'
 import { AppContext } from 'AppContext'
 import { Panel } from 'office-ui-fabric-react/lib/Panel'
-import UPDATE_USER from 'pages/Admin/Users/UserFormModal/UPDATE_USER'
+import { UPDATE_USER } from 'pages/Admin/Users/UserFormModal/types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { UserSettingInput } from './UserSettingInput'

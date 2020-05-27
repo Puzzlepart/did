@@ -6,11 +6,9 @@ import { Modal } from 'office-ui-fabric-react/lib/Modal'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
-import _ from 'underscore'
+import { omit, find } from 'underscore'
 import validator from 'validator'
-import ADD_USER from './ADD_USER'
-import { IUserFormModalProps } from './IUserFormModalProps'
-import UPDATE_USER from './UPDATE_USER'
+import { IUserFormModalProps, ADD_USER, UPDATE_USER } from './types'
 import styles from './UserFormModal.module.scss'
 
 /**
@@ -18,16 +16,18 @@ import styles from './UserFormModal.module.scss'
  */
 export const UserFormModal = (props: IUserFormModalProps) => {
     const { t } = useTranslation('common')
-    const [user, setUser] = React.useState<IUser>(props.user || { id: '', fullName: '', role: 'User' })
+    const [user, setUser] = React.useState<IUser>(props.user || {
+        id: '',
+        fullName: '',
+        role: find(props.roles, r => r.name === 'User'),
+    })
     const [updateUser] = useMutation(UPDATE_USER)
     const [addUser] = useMutation(ADD_USER)
 
-    /**
-     * On save
-     */
     const onSave = async () => {
-        if (props.user) await updateUser({ variables: { user: _.omit(user, '__typename') } })
-        else await addUser({ variables: { user } })
+        const _user = omit({ ...user, role: user.role.name }, '__typename')
+        if (props.user) await updateUser({ variables: { user: _user } })
+        else await addUser({ variables: { user: _user } })
         props.modal.onDismiss()
     }
 
@@ -43,27 +43,33 @@ export const UserFormModal = (props: IUserFormModalProps) => {
             <div className={styles.title} hidden={!props.title}>
                 {props.title}
             </div>
-            <TextField
-                label='ID'
-                description={t('userIdDescription')}
-                value={user.id}
-                disabled={!!props.user}
-                required={!props.user}
-                onChange={(_, id) => setUser({ ...user, id })} />
-            <TextField
-                label={t('nameLabel')}
-                value={user.fullName}
-                disabled={!!props.user}
-                required={!props.user}
-                onChange={(_, fullName) => setUser({ ...user, fullName })} />
-            <Dropdown
-                label={t('roleLabel')}
-                options={[
-                    { key: 'User', text: t('roleUser') },
-                    { key: 'Admin', text: t('roleAdmin') },
-                ]}
-                defaultSelectedKey={user.role}
-                onChange={(_, opt) => setUser({ ...user, role: opt.key.toString() })} />
+            <div className={styles.inputContainer} hidden={!!props.user}>
+                <TextField
+                    label='ID'
+                    placeholder='00000000-0000-0000-0000-000000000000'
+                    description={t('userIdDescription')}
+                    value={user.id}
+                    required={!props.user}
+                    onChange={(_, id) => setUser({ ...user, id })} />
+            </div>
+            <div className={styles.inputContainer} hidden={!!props.user}>
+                <TextField
+                    label={t('nameLabel')}
+                    value={user.fullName}
+                    required={!props.user}
+                    onChange={(_, fullName) => setUser({ ...user, fullName })} />
+            </div>
+            <div className={styles.inputContainer}>
+                <Dropdown
+                    label={t('roleLabel')}
+                    options={props.roles.map(role => ({
+                        key: role.name,
+                        text: role.name,
+                        data: role,
+                    }))}
+                    defaultSelectedKey={user.role ? user.role.name : 'User'}
+                    onChange={(_, { data: role }) => setUser({ ...user, role })} />
+            </div>
             <PrimaryButton
                 className={styles.saveBtn}
                 text={t('save')}

@@ -66,12 +66,17 @@
     "users": "Users",
     "summary": "Summary",
     "labels": "Labels",
+    "rolesPermissions": "Roles and permissions",
     "addNewUser": "Add new",
     "editUser": "Edit",
     "defaultLabelTitle": "My new label",
     "addNewLabel": "Add new label",
     "editLabel": "Edit label",
-    "noTimeEntriesText": "There are no recorded hours for the selected year."
+    "addNewRole": "Add new role",
+    "roleNameLabel": "Rolename",
+    "noTimeEntriesText": "There are no recorded hours for the selected year.",
+    "editRole": "Edit role",
+    "permissonsLabel": "Permissions"
   },
   "reports": {
     "generatingReportLabel": "Generating report",
@@ -187,5 +192,24 @@
     "projects": "Projects",
     "reports": "Reports",
     "admin": "Admin"
+  },
+  "permissions": {
+    "accessCustomers": "Access to kunder",
+    "accessProjects": "Access to projects",
+    "accessAdmin": "Access to Admin",
+    "accessReports": "Access to Reports",
+    "manageProjects": "Manage projects",
+    "deleteProjects": "Delete projects",
+    "manageCustomers": "Manage customers",
+    "deleteCustomers": "Delete customers"
+  },
+  "notifications": {
+    "moreLinkText": "Read more here",
+    "goToPeriodText": "Go to period",
+    "headerText": "Notifications",
+    "emptyText": "You have no active notifications at this time.",
+    "templates": {
+      "unconfirmedPeriods": "Week {0} ({1}) has not been confirmed."
+    }
   }
 }
