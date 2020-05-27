@@ -66,6 +66,7 @@
     "users": "Users",
     "summary": "Summary",
     "labels": "Labels",
+    "rolesPermissions": "Roles and permissions",
     "addNewUser": "Add new",
     "editUser": "Edit",
     "defaultLabelTitle": "My new label",
@@ -73,10 +74,9 @@
     "editLabel": "Edit label",
     "addNewRole": "Add new role",
     "roleNameLabel": "Rolename",
-    "permissionsHeader": "Permissions",
     "noTimeEntriesText": "There are no recorded hours for the selected year.",
     "editRole": "Edit role",
-    "roles": "Roles"
+    "permissonsLabel": "Permissions"
   },
   "reports": {
     "generatingReportLabel": "Generating report",
