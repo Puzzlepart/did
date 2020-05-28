@@ -103,8 +103,8 @@ fi
 #4 Package client
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
-  echo "Running $NPM_CMD packageClient"
-  eval $NPM_CMD packageClient
+  echo "Running $NPM_CMD script packageClient"
+  eval $NPM_CMD run packageClient
   exitWithMessageOnError "Packaging of client failed"
   cd - > /dev/null
 fi
