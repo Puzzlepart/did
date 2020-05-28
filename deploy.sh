@@ -84,26 +84,30 @@ selectNodeVersion () {
   fi
 }
 
-#1 Copy everything to wwwroot
+echo ""
+echo "[1/3] KUDU SYNC"
+echo ""
 "$KUDU_SYNC_CMD" -v 50 -f "$DEPLOYMENT_SOURCE" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" -i ".git;.hg;.deployment;deploy.sh;.github;.vscode;azcopy;doc;lib;node_modules;tests;.eslintignore;.eslintrc.js;.gitignore;CHANGELOG.md;CONTRIBUTING.md;README.md;typedoc.json"
 exitWithMessageOnError "Kudu Sync failed"
 
 #2 Select node version
 selectNodeVersion
 
-#3 Install npm packages
+echo ""
+echo "[2/3] INSTALLING NPM PACKAGES"
+echo ""
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
-  echo "Running $NPM_CMD install --production"
   eval $NPM_CMD install --production --loglevel=error --no-progress --no-shrinkwrap --no-fund   
   exitWithMessageOnError "Installation of npm packages failed"
   cd - > /dev/null
 fi
 
-#4 Package client
+echo ""
+echo "[3/3] PACKAGING JS"
+echo ""
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
-  echo "Running $NPM_CMD script packageClient"
   eval $NPM_CMD run packageClient
   exitWithMessageOnError "Packaging of client failed"
   cd - > /dev/null
