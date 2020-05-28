@@ -1,132 +1,110 @@
-@if "%SCM_TRACE_LEVEL%" NEQ "4" @echo off
+# Helpers
+# -------
 
-where node 2>nul >nul
-IF %ERRORLEVEL% NEQ 0 (
-  echo Missing node.js executable, please install node.js, if already installed make sure it can be reached from current environment.
-  goto error
-)
+exitWithMessageOnError () {
+  if [ ! $? -eq 0 ]; then
+    echo "An error has occurred during web site deployment."
+    echo $1
+    exit 1
+  fi
+}
 
-setlocal enabledelayedexpansion
+# Prerequisites
+# -------------
 
-SET ARTIFACTS=%~dp0%..\artifacts
+# Verify node.js installed
+hash node 2>/dev/null
+exitWithMessageOnError "Missing node.js executable, please install node.js, if already installed make sure it can be reached from current environment."
 
-IF NOT DEFINED DEPLOYMENT_SOURCE (
-  SET DEPLOYMENT_SOURCE=%~dp0%.
-)
+# Setup
+# -----
 
-IF NOT DEFINED DEPLOYMENT_TARGET (
-  SET DEPLOYMENT_TARGET=%ARTIFACTS%\wwwroot
-)
+SCRIPT_DIR="${BASH_SOURCE[0]%\\*}"
+SCRIPT_DIR="${SCRIPT_DIR%/*}"
+ARTIFACTS=$SCRIPT_DIR/../artifacts
+KUDU_SYNC_CMD=${KUDU_SYNC_CMD//\"}
 
-IF NOT DEFINED NEXT_MANIFEST_PATH (
-  SET NEXT_MANIFEST_PATH=%ARTIFACTS%\manifest
+if [[ ! -n "$DEPLOYMENT_SOURCE" ]]; then
+  DEPLOYMENT_SOURCE=$SCRIPT_DIR
+fi
 
-  IF NOT DEFINED PREVIOUS_MANIFEST_PATH (
-    SET PREVIOUS_MANIFEST_PATH=%ARTIFACTS%\manifest
-  )
-)
+if [[ ! -n "$NEXT_MANIFEST_PATH" ]]; then
+  NEXT_MANIFEST_PATH=$ARTIFACTS/manifest
 
-IF NOT DEFINED KUDU_SYNC_CMD (
-  echo Installing kudusync globally
-  call npm install kudusync -g --silent
-  IF !ERRORLEVEL! NEQ 0 goto error
-  SET KUDU_SYNC_CMD=%appdata%\npm\kuduSync.cmd
-)
-goto Deployment
+  if [[ ! -n "$PREVIOUS_MANIFEST_PATH" ]]; then
+    PREVIOUS_MANIFEST_PATH=$NEXT_MANIFEST_PATH
+  fi
+fi
 
+if [[ ! -n "$DEPLOYMENT_TARGET" ]]; then
+  DEPLOYMENT_TARGET=$ARTIFACTS/wwwroot
+else
+  KUDU_SERVICE=true
+fi
 
-:SelectNodeVersion
+if [[ ! -n "$KUDU_SYNC_CMD" ]]; then
+  # Install kudu sync
+  echo Installing Kudu Sync
+  npm install kudusync -g --silent
+  exitWithMessageOnError "npm failed"
 
-IF DEFINED KUDU_SELECT_NODE_VERSION_CMD (
-  call %KUDU_SELECT_NODE_VERSION_CMD% "%DEPLOYMENT_SOURCE%" "%DEPLOYMENT_TARGET%" "%DEPLOYMENT_TEMP%"
-  IF !ERRORLEVEL! NEQ 0 goto error
+  if [[ ! -n "$KUDU_SERVICE" ]]; then
+    # In case we are running locally this is the correct location of kuduSync
+    KUDU_SYNC_CMD=kuduSync
+  else
+    # In case we are running on kudu service this is the correct location of kuduSync
+    KUDU_SYNC_CMD=$APPDATA/npm/node_modules/kuduSync/bin/kuduSync
+  fi
+fi
 
-  IF EXIST "%DEPLOYMENT_TEMP%\__nodeVersion.tmp" (
-    SET /p NODE_EXE=<"%DEPLOYMENT_TEMP%\__nodeVersion.tmp"
-    IF !ERRORLEVEL! NEQ 0 goto error
-  )
-  
-  IF EXIST "%DEPLOYMENT_TEMP%\__npmVersion.tmp" (
-    SET /p NPM_JS_PATH=<"%DEPLOYMENT_TEMP%\__npmVersion.tmp"
-    IF !ERRORLEVEL! NEQ 0 goto error
-  )
+selectNodeVersion () {
+  if [[ -n "$KUDU_SELECT_NODE_VERSION_CMD" ]]; then
+    SELECT_NODE_VERSION="$KUDU_SELECT_NODE_VERSION_CMD \"$DEPLOYMENT_SOURCE\" \"$DEPLOYMENT_TARGET\" \"$DEPLOYMENT_TEMP\""
+    eval $SELECT_NODE_VERSION
+    exitWithMessageOnError "select node version failed"
 
-  IF NOT DEFINED NODE_EXE (
-    SET NODE_EXE=node
-  )
+    if [[ -e "$DEPLOYMENT_TEMP/__nodeVersion.tmp" ]]; then
+      NODE_EXE=`cat "$DEPLOYMENT_TEMP/__nodeVersion.tmp"`
+      exitWithMessageOnError "getting node version failed"
+    fi
+    
+    if [[ -e "$DEPLOYMENT_TEMP/__npmVersion.tmp" ]]; then
+      NPM_JS_PATH=`cat "$DEPLOYMENT_TEMP/__npmVersion.tmp"`
+      exitWithMessageOnError "getting npm version failed"
+    fi
 
-  SET NPM_CMD="!NODE_EXE!" "!NPM_JS_PATH!"
-) ELSE (
-  SET NPM_CMD=npm
-  SET NODE_EXE=node
-)
+    if [[ ! -n "$NODE_EXE" ]]; then
+      NODE_EXE=node
+    fi
 
-goto :EOF
+    NPM_CMD="\"$NODE_EXE\" \"$NPM_JS_PATH\""
+  else
+    NPM_CMD=npm
+    NODE_EXE=node
+  fi
+}
 
-:Deployment
+#1 Copy everything to wwwroot
+"$KUDU_SYNC_CMD" -v 50 -f "$DEPLOYMENT_SOURCE" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" -i ".git;.hg;.deployment;deploy.sh;.github;.vscode;azcopy;doc;lib;node_modules;tests;.eslintignore;.eslintrc.js;.gitignore;CHANGELOG.md;CONTRIBUTING.md;README.md;typedoc.json"
+exitWithMessageOnError "Kudu Sync failed"
 
-echo.
-echo [1/4] SYNCHRONIZING DEPLOYMENT SOURCE TO DEPLOYMENT TARGET 
-echo.
+#2 Select node version
+selectNodeVersion
 
-IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (  
-  call :ExecuteCmd "%KUDU_SYNC_CMD%" --quiet --perf --from "%DEPLOYMENT_SOURCE%" --to "%DEPLOYMENT_TARGET%" --nextManifest "%NEXT_MANIFEST_PATH%" --previousManifest "%PREVIOUS_MANIFEST_PATH%" --ignore ".git;.hg;.deployment;deploy.cmd;.env.sample;CHANGELOG.md;CONTRIBUTING.md;README.md;.gitignore;.vscode;.github;typedoc-theme"
-  IF !ERRORLEVEL! NEQ 0 goto error
-)
+#3 Install npm packages
+if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
+  cd "$DEPLOYMENT_TARGET"
+  echo "Running $NPM_CMD install --production"
+  eval $NPM_CMD install --production
+  exitWithMessageOnError "Installation of npm packages failed"
+  cd - > /dev/null
+fi
 
-call :SelectNodeVersion
-
-IF NOT EXIST "%DEPLOYMENT_TARGET%\package.json" (  
-echo Missing package.json
- goto error
-)
-
-
-pushd "%DEPLOYMENT_TARGET%"
-
-echo.
-echo [2/4] INSTALLING NPM PACKAGES
-echo.
-call :ExecuteCmd !NPM_CMD! install --production --no-progress --loglevel silent --no-shrinkwrap --no-fund          
-IF !ERRORLEVEL! NEQ 0 goto error
-
-echo.
-echo [3/4] UPDATING NPM PACKAGES
-echo.
-
-call :ExecuteCmd !NPM_CMD! update --production --no-progress --loglevel silent --no-fund 
-IF !ERRORLEVEL! NEQ 0 goto error
-
-echo.
-echo [4/4] PACKAGING JS
-echo.
-
-call :ExecuteCmd !NPM_CMD! run packageClient --loglevel silent
-IF !ERRORLEVEL! NEQ 0 goto error
-
-popd
-
-
-goto end
-:ExecuteCmd
-setlocal
-set _CMD_=%*
-call %_CMD_%
-if "%ERRORLEVEL%" NEQ "0" echo Failed exitCode=%ERRORLEVEL%, command=%_CMD_%
-exit /b %ERRORLEVEL%
-
-:error
-endlocal
-echo An error has occurred during deployment.
-call :exitSetErrorLevel
-call :exitFromFunction 2>nul
-
-:exitSetErrorLevel
-exit /b 1
-
-:exitFromFunction
-()
-
-:end
-endlocal
-echo Finished successfully.
+#4 Package client
+if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
+  cd "$DEPLOYMENT_TARGET"
+  echo "Running $NPM_CMD packageClient"
+  eval $NPM_CMD packageClient
+  exitWithMessageOnError "Packaging of client failed"
+  cd - > /dev/null
+fi
