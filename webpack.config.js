@@ -9,6 +9,8 @@ const RemovePlugin = require('remove-files-webpack-plugin')
 
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production'
 
+console.log(mode)
+
 let config = {
     mode,
     entry: {
