@@ -26,9 +26,9 @@ const typeDef = `
   }
 `
 
-async function createProject(_obj, variables, { services: { storage: StorageService } }) {
+async function createProject(_obj, variables, { user, services: { storage: StorageService } }) {
   try {
-    await StorageService.createProject(variables, context.user.profile.oid)
+    await StorageService.createProject(variables, user.profile.oid)
     return { success: true, error: null }
   } catch (error) {
     return { success: false, error: omit(error, 'requestId') }
