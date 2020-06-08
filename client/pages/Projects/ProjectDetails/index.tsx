@@ -64,7 +64,7 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                     type={MessageBarType.warning} />
             )}
             <div className={styles.description}>{project.description}</div>
-            <div className={styles.description}>
+            <div className={styles.labels}>
                 {project.labels.map((label, idx) => (
                     <EntityLabel
                         key={idx}
