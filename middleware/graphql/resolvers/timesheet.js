@@ -21,6 +21,7 @@ const typeDef = `
 	suggestedProject: Project
 	webLink: String
 	lastModifiedDateTime: String
+    labels: [Label]
 	error: EventError
   }
 
@@ -84,6 +85,8 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat }, { use
     ])
 
     projects = connectEntities(projects, customers, labels)
+    
+    const eventMatching = new EventMatching(projects, customers, labels)
 
     for (let i = 0; i < periods.length; i++) {
         let period = periods[i]
@@ -98,9 +101,8 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat }, { use
             period.confirmed = true
             period.confirmedDuration = confirmed.hours
         } else {
-            const eventMatching = new EventMatching(period.events, projects, customers, labels)
             period.events = await GraphService.getEvents(period.startDateTime, period.endDateTime)
-            period.events = eventMatching.match(period.events, projects, customers)
+            period.events = eventMatching.match(period.events)
             period.matchedEvents = period.events.filter(evt => evt.project)
             period.confirmedDuration = 0
         }

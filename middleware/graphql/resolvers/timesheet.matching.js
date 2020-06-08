@@ -1,4 +1,4 @@
-const _ = require('underscore')
+const { find, filter, contains } = require('underscore')
 const { findBestMatch } = require('string-similarity')
 const format = require('string-format')
 const value = require('get-value')
@@ -7,20 +7,19 @@ const CATEGORY_REGEX = /((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>[A-Za-z
 const CONTENT_REGEX = /[\(\{\[]((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>[A-Za-z0-9]{2,}?))[\)\]\}]/gmi
 
 class EventMatching {
-    constructor(events, projects, customers, labels) {
-        this.events = events
+    constructor(projects, customers, labels) {
         this.projects = projects
         this.customers = customers
         this.labels = labels
     }
 
     /**
-     * Get project best match using string-similarity findBestMatch
+     * Find project suggestions using string-similarity findBestMatch
      * 
      * @param {*} customer 
      * @param {*} projectKey 
      */
-    getProjectSuggestion(projectKey) {
+    findProjectSuggestion(projectKey) {
         try {
             const customerProjects = this.projects.filter(p => p.customerKey === customer.key)
             const projectKeys = customerProjects.map(p => p.id.split(' ')[1])
@@ -60,41 +59,59 @@ class EventMatching {
      * @param {*} content 
      * @param {*} categories 
      */
-    findMatches(content, categories) {
+    findProjectMatches(content, categories) {
         let matches = this.searchString(CATEGORY_REGEX, categories)
         if (matches) return matches
         return this.searchString(CONTENT_REGEX, content)
     }
 
     /**
+     * Find labels
+     * 
+     * @param {*} categories 
+     */
+    findLabels(categories) {
+        return filter(this.labels, label => contains(categories, label.name))
+    }
+
+    /**
      * Checks for project match in event
+     * 
+     * @param {*} event 
      */
     matchEvent(event) {
         let categories = event.categories.join(' ').toUpperCase()
         let content = [event.title, event.body, categories].join(' ').toUpperCase()
-        let matches = this.findMatches(content, categories)
+        let matches = this.findProjectMatches(content, categories)
         let projectKey
         if (matches) {
             for (let i = 0; i < matches.length; i++) {
                 let match = matches[i]
-                event.customer = _.find(this.customers, c => match.customerKey === c.key)
+                event.customer = find(this.customers, c => match.customerKey === c.key)
                 if (event.customer) {
-                    event.project = _.find(this.projects, p => p.id === match.key)
+                    event.project = find(this.projects, p => p.id === match.key)
                     projectKey = match.projectKey
                 }
                 if (event.project) break
             }
         } else {
-            event.project = _.find(this.projects, p => content.indexOf(p.id) !== -1)
+            event.project = find(this.projects, p => content.indexOf(p.id) !== -1)
             if (event.project) {
-                event.customer = _.find(this.customers, c => c.key === event.project.customerKey)
+                event.customer = find(this.customers, c => c.key === event.project.customerKey)
             }
         }
-        if (event.customer && !event.project) {
-            event.suggestedProject = getProjectSuggestion(this.projects, event.customer, projectKey)
-        }
+
+        if (event.customer && !event.project) event.suggestedProject = this.findProjectSuggestion(
+            this.projects,
+            event.customer,
+            projectKey
+        )
+
+        event.labels = this.findLabels(event.categories)
+
         const inactiveProject = value(event, 'project.inactive')
         const inactiveCustomer = value(event, 'customer.inactive')
+
         if (event.project && (inactiveProject || inactiveCustomer)) {
             if (inactiveProject)
                 event.error = { message: format('Project {0} for {1} is no longer active. Please resolve the event in Outlook.', event.project.name, event.customer.name) }
@@ -106,8 +123,13 @@ class EventMatching {
         return event
     }
 
-    match() {
-        return this.events.map(event => matchEvent(event))
+    /**
+     * Match events
+     * 
+     * @param {*} events 
+     */
+    match(events) {
+        return events.map(event => this.matchEvent(event))
     }
 }
 
