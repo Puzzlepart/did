@@ -28,10 +28,10 @@ const typeDef = `
     }
 `
 
-async function users(_obj, _args, { services: { storage: StorageService } }) {
+async function users(_obj, _variables, ctx) {
     let [users, roles] = await Promise.all([
-        StorageService.getUsers(),
-        StorageService.getRoles()
+        ctx.services.storage.getUsers(),
+        ctx.services.storage.getRoles()
     ])
     users = users.map(user => ({
         ...user,
@@ -41,16 +41,20 @@ async function users(_obj, _args, { services: { storage: StorageService } }) {
 }
 
 async function currentUser(_obj, _variables, ctx) {
-    const [user, sub, roles] = await Promise.all([
-        ctx.services.storage.getUser(ctx.user.id),
-        ctx.services.subscription.getSubscription(ctx.user.tenantId),
-        ctx.services.storage.getRoles()
-    ])
-    return {
-        ...ctx.user,
-        email: ctx.user.profile.email,
-        sub,
-        role: find(roles, role => role.name === ctx.user.role),
+    try {
+        const [user, sub, roles] = await Promise.all([
+            ctx.services.storage.getUser(ctx.user.id),
+            ctx.services.subscription.getSubscription(ctx.user.tenantId),
+            ctx.services.storage.getRoles()
+        ])
+        return {
+            ...user,
+            email: ctx.user.profile.email,
+            sub,
+            role: find(roles, role => role.name === user.role),
+        }
+    } catch (error) {
+        console.log(error)
     }
 }
 

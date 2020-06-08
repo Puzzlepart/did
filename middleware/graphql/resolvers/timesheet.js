@@ -120,17 +120,17 @@ async function confirmPeriod(_obj, variables, ctx) {
     try {
         let hours = 0;
         if (variables.period.matchedEvents.length > 0) {
-            const calendarView = await  ctx.services.graph.getEvents(variables.period.startDateTime, variables.period.endDateTime)
+            const calendarView = await ctx.services.graph.getEvents(variables.period.startDateTime, variables.period.endDateTime)
 
             let timeentries = variables.period.matchedEvents.map(entry => {
                 const event = find(calendarView, e => e.id === entry.id)
                 if (!event) return
-                return { user, entry, event }
+                return { user: ctx.user, entry, event }
             }).filter(entry => entry)
 
-            hours = await  ctx.services.storage.addTimeEntries(variables.period.id, timeentries)
+            hours = await ctx.services.storage.addTimeEntries(variables.period.id, timeentries)
         }
-        await  ctx.services.storage.addConfirmedPeriod(variables.period.id, ctx.user.id, hours)
+        await ctx.services.storage.addConfirmedPeriod(variables.period.id, ctx.user.id, hours)
         return { success: true, error: null }
     } catch (error) {
         return { success: false, error: omit(error, 'requestId') }

@@ -38,7 +38,7 @@ const typeDef = `
 `
 
 async function timeentries(_obj, variables, ctx) {
-    if (currentUser) resourceId = ctx.user.id
+    if (variables.currentUser) resourceId = ctx.user.id
     let [projects, customers, timeentries] = await Promise.all([
         ctx.services.storage.getProjects(),
         ctx.services.storage.getCustomers(),
