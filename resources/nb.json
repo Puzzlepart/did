@@ -83,6 +83,9 @@
     "noEntriesText": "Det er ingen bekreftede tidsoppføringer på dette tidspunktet."
   },
   "common": {
+    "hoursCurrentMonth": "Timer denne måneden",
+    "hoursPrevMonth": "Timer forrige måned",
+    "hoursCurrentYear": "Timer i år",
     "deviceViewNotSupported": "Denne visningen er ikke tilgjengelig på din enhet.",
     "hours": "Timer",
     "showShortcutsText": "Vis tilgjengelige snarveier",
@@ -127,6 +130,7 @@
     "hoursShortFormat": "{0}t",
     "minutesShortFormat": "{0}min",
     "editLabel": "Rediger",
+    "timeEntries": "Timeoppføringer",
     "calendarStrings": {
       "months": [
         "Januar",

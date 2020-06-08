@@ -36,8 +36,8 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
 
     return (
         <div className={styles.root}>
-            <div className={styles.info}>
-                <div className={styles.left}>
+            <div className={styles.row}>
+                <div className={styles.colLeft}>
                     <h3 className={styles.name}>{project.name}</h3>
                     <h5 className={styles.customer}>{project.customer.name}</h5>
                     {project.inactive && (
@@ -59,7 +59,7 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                         <MessageBar messageBarIconProps={{ iconName: 'OutlookLogoInverse' }}>{t('categoryOutlookText')}</MessageBar>
                     </div>
                 </div>
-                <div className={`${styles.actions} ${styles.right}`}>
+                <div className={`${styles.actions} ${styles.colRight}`}>
                     <div
                         className={styles.buttonContainer}
                         hidden={!project.webLink}>

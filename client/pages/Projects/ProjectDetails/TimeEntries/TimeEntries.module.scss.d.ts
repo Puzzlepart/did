@@ -3,8 +3,11 @@
 interface CssExports {
   'actions': string;
   'buttonContainer': string;
+  'label': string;
   'root': string;
-  'title': string;
+  'row': string;
+  'summary': string;
+  'value': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

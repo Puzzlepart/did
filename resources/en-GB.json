@@ -71,7 +71,6 @@
     "defaultLabelTitle": "My new label",
     "addNewLabel": "Add new label",
     "editLabel": "Edit label",
-    "addNewRole": "Add new role",
     "roleNameLabel": "Rolename",
     "noTimeEntriesText": "There are no recorded hours for the selected year.",
     "editRole": "Edit role",
@@ -83,6 +82,9 @@
     "noEntriesText": "There's no confirmed time entries at this time."
   },
   "common": {
+    "hoursCurrentMonth": "Hours this month",
+    "hoursPrevMonth": "Hours last month",
+    "hoursCurrentYear": "Hours this year",
     "deviceViewNotSupported": "This view is not available on your device.",
     "hours": "Hours",
     "showShortcutsText": "Display keyboard shortcuts",
@@ -127,6 +129,7 @@
     "hoursShortFormat": "{0}h",
     "minutesShortFormat": "{0}min",
     "editLabel": "Rediger",
+    "timeEntries": "Time entries",
     "calendarStrings": {
       "months": [
         "January",

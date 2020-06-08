@@ -35,22 +35,15 @@
     }
   }
 
-  .info {
+  .row {
     display: flex;
     flex-direction: row;
-    .left,
-    .right {
+    .colLeft,
+    .colRight {
       width: 50%;
     }
-    .right {
+    .colRight {
       flex-direction: row-reverse;
-    }
-  }
-
-  .timeEntries {
-    .title {
-      font-weight: 500;
-      margin-bottom: 0;
     }
   }
 }
