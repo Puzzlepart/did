@@ -116,21 +116,21 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat }, { use
  * 
  * Adds matched time entries for the specified period and an entry for the confirmed period
  */
-async function confirmPeriod(_obj, { period }, { user, services: { graph: GraphService, storage: StorageService } }) {
+async function confirmPeriod(_obj, variables, ctx) {
     try {
         let hours = 0;
-        if (period.matchedEvents.length > 0) {
-            const calendarView = await GraphService.getEvents(period.startDateTime, period.endDateTime)
+        if (variables.period.matchedEvents.length > 0) {
+            const calendarView = await  ctx.services.graph.getEvents(variables.period.startDateTime, variables.period.endDateTime)
 
-            let timeentries = period.matchedEvents.map(entry => {
+            let timeentries = variables.period.matchedEvents.map(entry => {
                 const event = find(calendarView, e => e.id === entry.id)
                 if (!event) return
                 return { user, entry, event }
             }).filter(entry => entry)
 
-            hours = await StorageService.addTimeEntries(period.id, timeentries)
+            hours = await  ctx.services.storage.addTimeEntries(variables.period.id, timeentries)
         }
-        await StorageService.addConfirmedPeriod(period.id, user.id, hours)
+        await  ctx.services.storage.addConfirmedPeriod(variables.period.id, ctx.user.id, hours)
         return { success: true, error: null }
     } catch (error) {
         return { success: false, error: omit(error, 'requestId') }
@@ -142,11 +142,11 @@ async function confirmPeriod(_obj, { period }, { user, services: { graph: GraphS
  * 
  * Deletes time entries for the specified period and the entry for the confirmed period
  */
-async function unconfirmPeriod(_obj, { period }, { user, services: { storage: StorageService } }) {
+async function unconfirmPeriod(_obj, variables, ctx) {
     try {
         await Promise.all([
-            StorageService.deleteUserTimeEntries(period, user.id),
-            StorageService.removeConfirmedPeriod(period.id, user.id)
+            ctx.services.storage.deleteUserTimeEntries(variables.period, ctx.user.id),
+            ctx.services.storage.removeConfirmedPeriod(variables.period.id, ctx.user.id)
         ])
         return { success: true, error: null }
     } catch (error) {

@@ -40,32 +40,32 @@ async function users(_obj, _args, { services: { storage: StorageService } }) {
     return users
 }
 
-async function currentUser(_obj, _args, { user: { id, tenantId, profile }, services: { subscription: SubscriptionService, storage: StorageService } }) {
+async function currentUser(_obj, _variables, ctx) {
     const [user, sub, roles] = await Promise.all([
-        StorageService.getUser(id),
-        SubscriptionService.getSubscription(tenantId),
-        StorageService.getRoles()
+        ctx.services.storage.getUser(ctx.user.id),
+        ctx.services.subscription.getSubscription(ctx.user.tenantId),
+        ctx.services.storage.getRoles()
     ])
     return {
-        ...user,
-        email: profile.email,
+        ...ctx.user,
+        email: ctx.user.profile.email,
         sub,
-        role: find(roles, role => role.name === user.role),
+        role: find(roles, role => role.name === ctx.user.role),
     }
 }
 
-async function addUser(_obj, variables, { services: { storage: StorageService } }) {
+async function addUser(_obj, variables, ctx) {
     try {
-        await StorageService.addUser(variables.user)
+        await ctx.services.storage.addUser(variables.user)
         return { success: true, error: null }
     } catch (error) {
         return { success: false, error: _.omit(error, 'requestId') }
     }
 }
 
-async function updateUser(_obj, variables, { services: { storage: StorageService } }) {
+async function updateUser(_obj, variables, ctx) {
     try {
-        await StorageService.updateUser(variables.user)
+        await ctx.services.storage.updateUser(variables.user)
         return { success: true, error: null }
     } catch (error) {
         return { success: false, error: _.omit(error, 'requestId') }
