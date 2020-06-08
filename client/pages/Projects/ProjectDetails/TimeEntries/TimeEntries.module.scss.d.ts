@@ -3,15 +3,7 @@
 interface CssExports {
   'actions': string;
   'buttonContainer': string;
-  'customer': string;
-  'description': string;
-  'info': string;
-  'labels': string;
-  'left': string;
-  'name': string;
-  'right': string;
   'root': string;
-  'timeEntries': string;
   'title': string;
 }
 export const cssExports: CssExports;

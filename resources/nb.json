@@ -45,7 +45,6 @@
     "timeEntriesLoadingLabel": "Laster timeliste",
     "myProjectsText": "Mine prosjekter",
     "myProjectsSearchPlaceholder": "Søk i mine prosjekter...",
-    "exportTimeEntriesLabel": "Eksporter timeoppføringer til Excel",
     "keyDescription": "En unik identifikator for prosjektet. Holdt det kort, maks 8 tegn.",
     "nameFormValidationText": "Prosjektnavnet må være minst 2 tegn langt.",
     "keyFormValidationText": "Prosjektnøkkelen må være mellom 3 og 8 tegn lang, og bare store bokstaver.",
