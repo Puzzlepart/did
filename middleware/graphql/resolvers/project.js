@@ -34,33 +34,33 @@ const typeDef = `
   }
 `
 
-async function createProject(_obj, { project }, { user, services: { storage: StorageService } }) {
+async function createProject(_obj, variables, ctx) {
   try {
-    await StorageService.createProject(project, user.id)
+    await ctx.services.storage.createProject(variables.project, ctx.user.id)
     return { success: true, error: null }
   } catch (error) {
     return { success: false, error: omit(error, 'requestId') }
   }
 }
 
-async function addLabelToProject(_obj, { projectId, labelId }, { services: { storage: StorageService } }) {
+async function addLabelToProject(_obj, variables, ctx) {
   try {
-    await StorageService.addLabelToProject(projectId, labelId)
+    await ctx.services.storage.addLabelToProject(variables.projectId, variables.labelId)
     return { success: true, error: null }
   } catch (error) {
     return { success: false, error: omit(error, 'requestId') }
   }
 }
 
-async function projects(_obj, variables, { services: { storage: StorageService } }) {
+async function projects(_obj, variables, ctx) {
   let [
     projects,
     customers,
     labels,
   ] = await Promise.all([
-    StorageService.getProjects(variables.customerKey, { sortBy: variables.sortBy }),
-    StorageService.getCustomers(),
-    StorageService.getLabels(),
+    ctx.services.storage.getProjects(variables.customerKey, { sortBy: variables.sortBy }),
+    ctx.services.storage.getCustomers(),
+    ctx.services.storage.getLabels(),
   ])
   projects = connectEntities(projects, customers, labels)
   return projects
