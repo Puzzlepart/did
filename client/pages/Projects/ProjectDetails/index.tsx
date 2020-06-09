@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { EntityLabel } from 'components/EntityLabel'
 import { UserMessage } from 'components/UserMessage'
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import React, { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Actions } from './Actions'
@@ -21,7 +22,7 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
     const timeentries = data ? data.timeentries : []
 
     useEffect(() => setProject({ ...props.project }), [props.project])
-    
+
     const ctxValue = useMemo(() => ({
         loading,
         error,
@@ -33,8 +34,15 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
     return (
         <ProjectDetailsContext.Provider value={ctxValue}>
             <div className={styles.root}>
-                <h3 className={styles.name}>{project.name}</h3>
-                <h5 className={styles.customer}>{project.customer.name}</h5>
+                <div className={styles.header}>
+                    <div className={styles.icon}>
+                        <Icon iconName={project.icon} />
+                    </div>
+                    <div className={styles.title}>
+                        <div className={styles.text}>{project.name}</div>
+                        <div className={styles.subText}>{project.customer.name}</div>
+                    </div>
+                </div>
                 {project.inactive && (
                     <UserMessage
                         text={t('inactiveText')}
