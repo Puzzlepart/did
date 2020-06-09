@@ -5,7 +5,7 @@ import { IBaseResult } from 'graphql'
 import { IOutlookCategory } from 'interfaces'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
-import * as React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CREATE_OUTLOOK_CATEGORY } from './CREATE_OUTLOOK_CATEGORY'
 import { IProjectDetailsProps } from './IProjectDetailsProps'
@@ -17,10 +17,10 @@ import { TimeEntries } from './TimeEntries'
  */
 export const ProjectDetails = (props: IProjectDetailsProps) => {
     const { t } = useTranslation(['projects', 'common'])
-    const [project, setProject] = React.useState({ ...props.project })
+    const [project, setProject] = useState({ ...props.project })
     const [createOutlookCategory] = useMutation<{ result: IBaseResult }, { category: IOutlookCategory }>(CREATE_OUTLOOK_CATEGORY)
 
-    React.useEffect(() => setProject({ ...props.project }), [props.project])
+    useEffect(() => setProject({ ...props.project }), [props.project])
 
     /**
      * On create category in Outlook

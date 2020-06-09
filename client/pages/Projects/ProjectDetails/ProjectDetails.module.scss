@@ -23,8 +23,8 @@
   }
 
   .actions {
-    display: flex;
     margin: 10px 0 10px 0;
+    
     .buttonContainer {
       margin: 0 5px 0 0;
 
@@ -43,6 +43,7 @@
       width: 50%;
     }
     .colRight {
+      display: flex;
       flex-direction: row-reverse;
     }
   }
