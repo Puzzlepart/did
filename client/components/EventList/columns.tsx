@@ -48,11 +48,13 @@ export const Title = (props: IEventListProps, name: string, fieldName = 'title')
                 title={event.title}>
                 <span>{event.title}</span>
             </Link>
-            <div className={styles.labels}>
-                {event.labels.map((label, idx) => (
-                    <EntityLabel key={idx} label={label} />
-                ))}
-            </div>
+            {event.labels && (
+                <div className={styles.labels}>
+                    {event.labels.map((label, idx) => (
+                        <EntityLabel key={idx} label={label} />
+                    ))}
+                </div>
+            )}
         </div>
     ),
 )
