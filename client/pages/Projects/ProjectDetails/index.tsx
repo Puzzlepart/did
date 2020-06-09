@@ -7,7 +7,7 @@ import { IOutlookCategory } from 'interfaces'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
-import * as React from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import * as excel from 'utils/exportExcel'
 import { generateColumn as col } from 'utils/generateColumn'
@@ -16,6 +16,7 @@ import { CREATE_OUTLOOK_CATEGORY } from './CREATE_OUTLOOK_CATEGORY'
 import { IProjectDetailsProps } from './IProjectDetailsProps'
 import styles from './ProjectDetails.module.scss'
 import PROJECT_TIME_ENTRIES from './PROJECT_TIME_ENTRIES'
+import { getSummary } from './utils'
 
 /**
  * @category Projects
@@ -26,10 +27,15 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
     const { loading, error, data } = useQuery<{ timeentries: any[] }>(PROJECT_TIME_ENTRIES, { variables: { projectId: props.project.id } })
     const [createOutlookCategory] = useMutation<{ result: IBaseResult }, { category: IOutlookCategory }>(CREATE_OUTLOOK_CATEGORY)
 
-    React.useEffect(() => setProject({ ...props.project }), [props.project])
 
     const timeentries = data ? data.timeentries : []
 
+    const summary = useMemo(() => getSummary(timeentries, t), [timeentries])
+    useEffect(() => setProject({ ...props.project }), [props.project])
+
+    /**
+     * On export to Excel
+     */
     async function onExportExcel() {
         const key = project.id.replace(/\s+/g, '-').toUpperCase()
         await excel.exportExcel(
@@ -74,6 +80,16 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
             </div>
             <div hidden={!project.outlookCategory}>
                 <MessageBar messageBarIconProps={{ iconName: 'OutlookLogoInverse' }}>{t('categoryOutlookText')}</MessageBar>
+            </div>
+            <div className={styles.summary}>
+                <ul>
+                    {summary.map(({ label, value }, idx) => (
+                        <li key={idx}>
+                            <span className={styles.label}>{label}</span>
+                            <span className={styles.value}>{value}</span>
+                        </li>
+                    ))}
+                </ul>
             </div>
             <div className={styles.actions}>
                 <div

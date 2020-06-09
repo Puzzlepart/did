@@ -5,9 +5,12 @@ interface CssExports {
   'buttonContainer': string;
   'customer': string;
   'description': string;
+  'label': string;
   'labels': string;
   'name': string;
   'root': string;
+  'summary': string;
+  'value': string;
 }
 export const cssExports: CssExports;
 export default cssExports;
