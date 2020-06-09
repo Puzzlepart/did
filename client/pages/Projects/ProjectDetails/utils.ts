@@ -11,7 +11,7 @@ import { TFunction } from 'i18next'
 export function getSummary(timeentries: any[], t: TFunction) {
     return [
         {
-            label: t('hoursCurrentMonth', { ns: 'common' }),
+            label: t('hoursCurrentMonth'),
             value: getSum(
                 filter(
                     timeentries,
@@ -21,7 +21,7 @@ export function getSummary(timeentries: any[], t: TFunction) {
             ),
         },
         {
-            label: t('hoursPrevMonth', { ns: 'common' }),
+            label: t('hoursPrevMonth'),
             value: getSum(
                 filter(
                     timeentries,
@@ -31,7 +31,7 @@ export function getSummary(timeentries: any[], t: TFunction) {
             ),
         },
         {
-            label: t('hoursCurrentYear', { ns: 'common' }),
+            label: t('hoursCurrentYear'),
             value: getSum(
                 filter(
                     timeentries,
