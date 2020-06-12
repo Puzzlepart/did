@@ -84,6 +84,9 @@
     "noEntriesText": "There's no confirmed time entries at this time."
   },
   "common": {
+    "hoursCurrentMonth": "Hours this month",
+    "hoursPrevMonth": "Hours last month",
+    "hoursCurrentYear": "Hours this year",
     "deviceViewNotSupported": "This view is not available on your device.",
     "hours": "Hours",
     "showShortcutsText": "Display keyboard shortcuts",
