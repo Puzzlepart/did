@@ -1,5 +1,5 @@
 import { ScrollablePaneWrapper } from 'components/ScrollablePaneWrapper'
-import { ConstrainMode, DetailsListLayoutMode, IColumn, IDetailsGroupDividerProps, IDetailsHeaderProps, Selection, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
+import {CheckboxVisibility, ConstrainMode, DetailsListLayoutMode, IColumn, IDetailsGroupDividerProps, IDetailsHeaderProps, Selection, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { GroupHeader } from 'office-ui-fabric-react/lib/GroupedList'
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox'
 import { ShimmeredDetailsList } from 'office-ui-fabric-react/lib/ShimmeredDetailsList'
@@ -78,7 +78,8 @@ const List = (props: IListProps) => {
                         ...props.groupProps,
                         onRenderHeader: onRenderGroupHeader,
                     }}
-                    onRenderDetailsHeader={onRenderListHeader} />
+                    onRenderDetailsHeader={onRenderListHeader}
+                    checkboxVisibility={CheckboxVisibility.hidden} />
             </ScrollablePaneWrapper>
         </div>
     )
