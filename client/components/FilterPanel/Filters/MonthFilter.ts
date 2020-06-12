@@ -1,5 +1,5 @@
 import { value as value } from 'helpers'
-import { unique } from 'underscore'
+import { unique, contains, indexOf } from 'underscore'
 import dateUtils from 'utils/date'
 import { BaseFilter, IFilter } from './BaseFilter'
 
@@ -20,7 +20,9 @@ export class MonthFilter extends BaseFilter {
     public initialize(entries: any[]): IFilter {
         const values = unique(entries.map(e => value(e, this.fieldName, null)))
         const monthNames = dateUtils.getMonthNames()
-        const items = values.map(month => ({ key: month, value: monthNames[month - 1] }))
+        const items = monthNames
+            .filter((_, idx) => contains(values, idx + 1))
+            .map(value => ({ key: indexOf(monthNames, value) + 1, value }))
         return {
             key: this.fieldName,
             name: this.name,
