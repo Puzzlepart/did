@@ -1,6 +1,6 @@
 const { find, omit } = require('underscore')
 const { formatDate, getMonthIndex, getWeek } = require('../../../utils')
-const matchEvents = require('./timesheet.matching')
+const EventMatching = require('./timesheet.matching')
 const { connectEntities } = require('./project.utils')
 const { getPeriods } = require('./timesheet.utils')
 
@@ -21,6 +21,7 @@ const typeDef = `
 	suggestedProject: Project
 	webLink: String
 	lastModifiedDateTime: String
+    labels: [Label]
 	error: EventError
   }
 
@@ -84,6 +85,8 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat }, { use
     ])
 
     projects = connectEntities(projects, customers, labels)
+    
+    const eventMatching = new EventMatching(projects, customers, labels)
 
     for (let i = 0; i < periods.length; i++) {
         let period = periods[i]
@@ -99,7 +102,7 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat }, { use
             period.confirmedDuration = confirmed.hours
         } else {
             period.events = await GraphService.getEvents(period.startDateTime, period.endDateTime)
-            period.events = matchEvents(period.events, projects, customers)
+            period.events = eventMatching.match(period.events)
             period.matchedEvents = period.events.filter(evt => evt.project)
             period.confirmedDuration = 0
         }

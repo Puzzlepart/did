@@ -1,5 +1,6 @@
 import { ICustomer } from './ICustomer'
 import { IProject } from './IProject'
+import { IEntityLabel } from './IEntityLabel'
 
 /**
  * @category Common
@@ -22,4 +23,5 @@ export interface ITimeEntry {
     manualMatch?: boolean;
     isIgnored?: boolean;
     error?: Error;
+    labels?: IEntityLabel[];
 }

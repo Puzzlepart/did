@@ -56,6 +56,13 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!) {
         name
         inactive
       }
+      labels {
+        id
+        name
+        description
+        color
+        icon
+      }
       error {
         message
       }
