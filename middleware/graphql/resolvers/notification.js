@@ -21,12 +21,11 @@ const typeDef = `
 /**
  * Get notifications
  */
-async function notifications(_obj, args, { user, services: { storage: StorageService } }) {
+async function notifications(_obj, variables, ctx) {
   let [notifications] = await Promise.all([
     unconfirmed_periods({
-      template: args.templates.unconfirmedPeriods,
-      user,
-      StorageService,
+      template: variables.templates.unconfirmedPeriods,
+      ctx,
     }),
   ])
   return notifications

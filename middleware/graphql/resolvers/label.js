@@ -27,23 +27,23 @@ const typeDef = `
     }
 `
 
-async function labels(_obj, _variables, { services: { storage: StorageService } }) {
-    let labels = await StorageService.getLabels()
+async function labels(_obj, _variables, ctx) {
+    let labels = await ctx.services.storage.getLabels()
     return labels
 }
 
-async function addLabel(_obj, { label }, { user, services: { storage: StorageService } }) {
+async function addLabel(_obj, variables, ctx) {
     try {
-        await StorageService.addLabel(label, user.id)
+        await ctx.services.storage.addLabel(variables.label, ctx.user.id)
         return { success: true, error: null }
     } catch (error) {
         return { success: false, error: omit(error, 'requestId') }
     }
 }
 
-async function updateLabel(_obj, { label }, { services: { storage: StorageService } }) {
+async function updateLabel(_obj, variables, ctx) {
     try {
-        await StorageService.updateLabel(label)
+        await ctx.services.storage.updateLabel(variables.label)
         return { success: true, error: null }
     } catch (error) {
         return { success: false, error: omit(error, 'requestId') }

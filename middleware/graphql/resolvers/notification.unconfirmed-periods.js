@@ -3,7 +3,7 @@ const { unique, difference, filter, find, first, last } = require('underscore')
 const format = require('string-format')
 const { getPeriods } = require('./timesheet.utils')
 
-module.exports = async function ({ template, user, StorageService }) {
+module.exports = async function ({ template, ctx }) {
     const currentWeek = utils.getWeek();
     const periods = [];
 
@@ -12,13 +12,13 @@ module.exports = async function ({ template, user, StorageService }) {
             ...getPeriods(
                 utils.startOfWeek(currentWeek - i),
                 utils.endOfWeek(currentWeek - i),
-                user.locale,
+                ctx.user.locale,
             )
         )
     }
 
-    var confirmedPeriods = await StorageService.getConfirmedPeriods({
-        resourceId: user.id,
+    var confirmedPeriods = await ctx.services.storage.getConfirmedPeriods({
+        resourceId: ctx.user.id,
         year: utils.getYear(),
     })
 

@@ -31,22 +31,22 @@ const typeDef = `
 `
 
 
-async function customers(_obj, _args, { services: { storage: StorageService } }) {
-  return await StorageService.getCustomers()
+async function customers(_obj, _variables, ctx) {
+  return await ctx.services.storage.getCustomers()
 }
 
-async function createCustomer(_obj, { customer }, { user, services: { storage: StorageService } }) {
+async function createCustomer(_obj, variables, ctx) {
   try {
-    await StorageService.createCustomer(customer, user.id)
+    await ctx.services.storage.createCustomer(variables.customer, ctx.user.id)
     return { success: true, error: null }
   } catch (error) {
     return { success: false, error: _.omit(error, 'requestId') }
   }
 }
 
-async function deleteCustomer(_obj, variables, { services: { storage: StorageService } }) {
+async function deleteCustomer(_obj, variables, ctx) {
   try {
-    let projects = await StorageService.getProjects(variables.key, { noParse: true })
+    let projects = await ctx.services.storage.getProjects(variables.key, { noParse: true })
     if (projects.length > 0) {
       const batch = projects.reduce((b, entity) => {
         b.deleteEntity(entity)
@@ -54,7 +54,7 @@ async function deleteCustomer(_obj, variables, { services: { storage: StorageSer
       }, createBatch())
       await executeBatch('Projects', batch)
     }
-    await context.services.storage.deleteCustomer(variables.key)
+    await ctx.services.storage.deleteCustomer(variables.key)
     return { success: true, error: null }
   } catch (error) {
     return { success: false, error: _.omit(error, 'requestId') }
