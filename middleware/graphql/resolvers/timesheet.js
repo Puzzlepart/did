@@ -1,6 +1,6 @@
 const { find, omit } = require('underscore')
 const { formatDate, getMonthIndex, getWeek } = require('../../../utils')
-const matchEvents = require('./timesheet.matching')
+const EventMatching = require('./timesheet.matching')
 const { connectEntities } = require('./project.utils')
 const { getPeriods } = require('./timesheet.utils')
 
@@ -21,6 +21,7 @@ const typeDef = `
 	suggestedProject: Project
 	webLink: String
 	lastModifiedDateTime: String
+    labels: [Label]
 	error: EventError
   }
 
@@ -84,6 +85,8 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat }, { use
     ])
 
     projects = connectEntities(projects, customers, labels)
+    
+    const eventMatching = new EventMatching(projects, customers, labels)
 
     for (let i = 0; i < periods.length; i++) {
         let period = periods[i]
@@ -99,7 +102,7 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat }, { use
             period.confirmedDuration = confirmed.hours
         } else {
             period.events = await GraphService.getEvents(period.startDateTime, period.endDateTime)
-            period.events = matchEvents(period.events, projects, customers)
+            period.events = eventMatching.match(period.events)
             period.matchedEvents = period.events.filter(evt => evt.project)
             period.confirmedDuration = 0
         }
@@ -116,21 +119,21 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat }, { use
  * 
  * Adds matched time entries for the specified period and an entry for the confirmed period
  */
-async function confirmPeriod(_obj, { period }, { user, services: { graph: GraphService, storage: StorageService } }) {
+async function confirmPeriod(_obj, variables, ctx) {
     try {
         let hours = 0;
-        if (period.matchedEvents.length > 0) {
-            const calendarView = await GraphService.getEvents(period.startDateTime, period.endDateTime)
+        if (variables.period.matchedEvents.length > 0) {
+            const calendarView = await ctx.services.graph.getEvents(variables.period.startDateTime, variables.period.endDateTime)
 
-            let timeentries = period.matchedEvents.map(entry => {
+            let timeentries = variables.period.matchedEvents.map(entry => {
                 const event = find(calendarView, e => e.id === entry.id)
                 if (!event) return
-                return { user, entry, event }
+                return { user: ctx.user, entry, event }
             }).filter(entry => entry)
 
-            hours = await StorageService.addTimeEntries(period.id, timeentries)
+            hours = await ctx.services.storage.addTimeEntries(variables.period.id, timeentries)
         }
-        await StorageService.addConfirmedPeriod(period.id, user.id, hours)
+        await ctx.services.storage.addConfirmedPeriod(variables.period.id, ctx.user.id, hours)
         return { success: true, error: null }
     } catch (error) {
         return { success: false, error: omit(error, 'requestId') }
@@ -142,11 +145,11 @@ async function confirmPeriod(_obj, { period }, { user, services: { graph: GraphS
  * 
  * Deletes time entries for the specified period and the entry for the confirmed period
  */
-async function unconfirmPeriod(_obj, { period }, { user, services: { storage: StorageService } }) {
+async function unconfirmPeriod(_obj, variables, ctx) {
     try {
         await Promise.all([
-            StorageService.deleteUserTimeEntries(period, user.id),
-            StorageService.removeConfirmedPeriod(period.id, user.id)
+            ctx.services.storage.deleteUserTimeEntries(variables.period, ctx.user.id),
+            ctx.services.storage.removeConfirmedPeriod(variables.period.id, ctx.user.id)
         ])
         return { success: true, error: null }
     } catch (error) {

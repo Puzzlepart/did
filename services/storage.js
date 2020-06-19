@@ -35,6 +35,7 @@ class StorageService {
                 PartitionKey: string('Default'),
                 RowKey: string(uuidv4()),
                 Name: string(label.name),
+                Description: string(label.description),
                 Color: string(label.color),
                 Icon: string(label.icon),
                 CreatedBy: string(createdBy),
@@ -55,6 +56,7 @@ class StorageService {
             RowKey: string(label.id),
         }
         if (label.name) entity.Name = string(label.name)
+        if (label.description) entity.Description = string(label.description)
         if (label.color) entity.Color = string(label.color)
         if (label.icon) entity.Icon = string(label.icon)
         const result = await this.tableUtil.updateEntity(
