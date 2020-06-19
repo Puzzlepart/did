@@ -37,21 +37,12 @@ const typeDef = `
     } 
 `
 
-async function timeentries(
-    _obj,
-    { resourceId, weekNumber, year, projectId, currentUser },
-    { user, services: { storage: StorageService } }
-) {
-    if (currentUser) resourceId = user.id
+async function timeentries(_obj, variables, ctx) {
+    if (variables.currentUser) resourceId = ctx.user.id
     let [projects, customers, timeentries] = await Promise.all([
-        StorageService.getProjects(),
-        StorageService.getCustomers(),
-        StorageService.getTimeEntries({
-            resourceId,
-            weekNumber,
-            year,
-            projectId
-        })
+        ctx.services.storage.getProjects(),
+        ctx.services.storage.getCustomers(),
+        ctx.services.storage.getTimeEntries(variables)
     ])
     let entries = timeentries.map(entry => ({
         ...entry,

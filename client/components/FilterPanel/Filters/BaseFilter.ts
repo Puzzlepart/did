@@ -2,7 +2,7 @@
  * @category FilterPanel
  */
 export interface IFilterItem {
-    key: string;
+    key: string | number;
     value: string;
 }
 

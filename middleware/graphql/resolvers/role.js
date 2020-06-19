@@ -23,23 +23,23 @@ const typeDef = `
     }
 `
 
-async function roles(_obj, _variables, { services: { storage: StorageService } }) {
-    let roles = await StorageService.getRoles()
+async function roles(_obj, _variables, ctx) {
+    let roles = await ctx.services.storage.getRoles()
     return roles
 }
 
-async function addRole(_obj, { role }, { services: { storage: StorageService } }) {
+async function addRole(_obj, variables, ctx) {
     try {
-        await StorageService.addRole(role)
+        await ctx.services.storage.addRole(variables.role)
         return { success: true, error: null }
     } catch (error) {
         return { success: false, error: omit(error, 'requestId') }
     }
 }
 
-async function updateRole(_obj, { role }, { services: { storage: StorageService } }) {
+async function updateRole(_obj, variables, ctx) {
     try {
-        await StorageService.updateRole(role)
+        await ctx.services.storage.updateRole(variables.role)
         return { success: true, error: null }
     } catch (error) {
         return { success: false, error: omit(error, 'requestId') }
