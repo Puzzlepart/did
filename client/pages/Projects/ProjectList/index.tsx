@@ -1,6 +1,6 @@
 import List from 'components/List'
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox'
-import * as React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { withDefaultProps } from 'with-default-props'
 import columns from './columns'
@@ -11,13 +11,13 @@ import { IProjectListProps } from './IProjectListProps'
  */
 const ProjectList = (props: IProjectListProps) => {
     const { t } = useTranslation(['projects', 'common'])
-    const [items, setItems] = React.useState([...props.items])
+    const [items, setItems] = useState([...props.items])
 
     const onToggleInactive = (checked?: boolean) => {
         setItems([...props.items].filter(project => checked ? true : !project.inactive))
     }
 
-    React.useEffect(() => setItems([...props.items].filter(p => !p.inactive)), [props.items])
+    useEffect(() => setItems([...props.items].filter(p => !p.inactive)), [props.items])
 
     return (
         <List
@@ -25,6 +25,7 @@ const ProjectList = (props: IProjectListProps) => {
             items={items}
             columns={columns(props.hideColumns, t)}
             groups={props.groups}
+            selection={props.selection}
             commandBar={{
                 items: [
                     {

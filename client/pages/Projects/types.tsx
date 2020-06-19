@@ -43,3 +43,8 @@ export const GET_PROJECTS = gql`
         }
     }
 `
+
+export interface IProjectsParams {
+    key: string;
+    view: string;
+}
