@@ -8,7 +8,7 @@ import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import { CreateProjectForm } from 'pages/Projects/CreateProjectForm'
-import * as React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
@@ -23,7 +23,7 @@ import { GET_PROJECTS, IGetProjectsData, IProjectsParams } from './types'
 export const Projects = () => {
     const { t } = useTranslation(['projects', 'common'])
     const history = useHistory()
-    const { user } = React.useContext(AppContext)
+    const { user } = useContext(AppContext)
     const params = useParams<IProjectsParams>()
     const [selected, setSelected] = useState<IProject>(null)
     const { loading, error, data } = useQuery<IGetProjectsData>(GET_PROJECTS, { variables: { sortBy: 'name' }, fetchPolicy: 'cache-first' })
@@ -33,7 +33,7 @@ export const Projects = () => {
         ...p, outlookCategory: find(outlookCategories, c => c.displayName === p.key),
     }))
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (!selected && params.key) {
             const _selected = find(projects, p => p.id === params.key.toUpperCase())
             setSelected(_selected)
@@ -41,6 +41,7 @@ export const Projects = () => {
     }, [params.key, projects])
 
     function onChangeTab({ props }: PivotItem) {
+        setSelected(null)
         history.push(`/projects/${props.itemKey}`)
     }
 
@@ -64,7 +65,14 @@ export const Projects = () => {
                                 searchBox={{ placeholder: t('searchPlaceholder') }}
                                 selection={{
                                     mode: SelectionMode.single,
-                                    onChanged: selected => setSelected(selected),
+                                    onChanged: selected => {
+                                        selected && history.push([
+                                            '/projects',
+                                            params.view || 'search',
+                                            selected.id
+                                        ].filter(p => p).join('/'))
+                                        setSelected(selected)
+                                    },
                                 }}
                                 height={selected && 400} />
                             {selected && <ProjectDetails project={selected} />}
@@ -77,7 +85,9 @@ export const Projects = () => {
                 headerText={t('myProjectsText')}
                 itemIcon='FabricUserFolder'>
                 {error
-                    ? <UserMessage type={MessageBarType.error} text={t('genericErrorText', { ns: 'common' })} />
+                    ? <UserMessage
+                        type={MessageBarType.error}
+                        text={t('genericErrorText', { ns: 'common' })} />
                     : (
                         <>
                             <UserMessage
