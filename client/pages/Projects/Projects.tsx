@@ -29,9 +29,12 @@ export const Projects = () => {
     const { loading, error, data } = useQuery<IGetProjectsData>(GET_PROJECTS, { variables: { sortBy: 'name' }, fetchPolicy: 'cache-first' })
 
     const outlookCategories = value<IOutlookCategory[]>(data, 'outlookCategories', [])
+
     const projects = value<IProject[]>(data, 'projects', []).map(p => ({
-        ...p, outlookCategory: find(outlookCategories, c => c.displayName === p.key),
+        ...p, outlookCategory: find(outlookCategories, c => c.displayName === p.id),
     }))
+
+    console.log(params.key)
 
     useEffect(() => {
         if (!selected && params.key) {

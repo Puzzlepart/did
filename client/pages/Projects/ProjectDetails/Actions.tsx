@@ -29,15 +29,16 @@ export const Actions = () => {
                 fileName: `TimeEntries-${key}-${new Date().toDateString().split(' ').join('-')}.xlsx`,
             })
     }
-
+    
     /**
      * On create category in Outlook
      * 
      * @param {string} color Color for the category (randomized if not specified)
      */
     async function onCreateCategory(color: string = 'preset' + Math.floor(Math.random() * Math.floor(25))) {
+        const colorIdx = [].slice.call(context.project.id).map(c => c.charCodeAt()).reduce((a, b) => a + b) % 24
         const { data: { result } } = await createOutlookCategory({
-            variables: { category: { displayName: context.project.key.toString(), color } }
+            variables: { category: { displayName: context.project.id.toString(), color: `preset${colorIdx}` } }
         })
         if (result.success) {
             context.setProject({
