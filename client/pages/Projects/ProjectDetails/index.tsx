@@ -45,6 +45,7 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                 </div>
                 {project.inactive && (
                     <UserMessage
+                    hidden={!project.inactive}
                         text={t('inactiveText')}
                         iconName='Warning'
                         type={MessageBarType.warning} />
@@ -58,12 +59,11 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                             size='small' />
                     ))}
                 </div>
-                <div hidden={!project.outlookCategory}>
-                    <UserMessage
-                        containerStyle={{ margin: '15px 0 15px 0' }}
-                        text={t('categoryOutlookText')}
-                        iconName= 'OutlookLogoInverse' />
-                </div>
+                <UserMessage
+                    hidden={!project.outlookCategory}
+                    containerStyle={{ margin: '15px 0 15px 0' }}
+                    text={t('categoryOutlookText')}
+                    iconName='OutlookLogoInverse' />
                 <Summary />
                 <Actions />
                 <TimeEntries />
