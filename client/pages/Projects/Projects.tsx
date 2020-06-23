@@ -40,15 +40,15 @@ export const Projects = () => {
         }
     }, [params.key, projects])
 
-    function onChangeTab({ props }: PivotItem) {
+    function onPivotClick({ props }: PivotItem) {
         setSelected(null)
         history.push(`/projects/${props.itemKey}`)
     }
 
     return (
         <Pivot
-            defaultSelectedKey={params.view}
-            onLinkClick={onChangeTab}
+            selectedKey={params.view || 'search'}
+            onLinkClick={onPivotClick}
             styles={{ itemContainer: { paddingTop: 10 } }}>
             <PivotItem
                 itemID='search'
