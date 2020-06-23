@@ -1,16 +1,16 @@
 import { useQuery } from '@apollo/react-hooks'
 import { EntityLabel } from 'components/EntityLabel'
 import { UserMessage } from 'components/UserMessage'
-import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import React, { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Actions } from './Actions'
 import styles from './ProjectDetails.module.scss'
 import PROJECT_TIME_ENTRIES from './PROJECT_TIME_ENTRIES'
 import { Summary } from './Summary'
-import { IProjectDetailsProps, ProjectDetailsContext } from './types'
 import { TimeEntries } from './TimeEntries'
+import { IProjectDetailsProps, ProjectDetailsContext } from './types'
 
 /**
  * @category Projects
@@ -45,6 +45,7 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                 </div>
                 {project.inactive && (
                     <UserMessage
+                    hidden={!project.inactive}
                         text={t('inactiveText')}
                         iconName='Warning'
                         type={MessageBarType.warning} />
@@ -58,9 +59,11 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                             size='small' />
                     ))}
                 </div>
-                <div hidden={!project.outlookCategory}>
-                    <MessageBar messageBarIconProps={{ iconName: 'OutlookLogoInverse' }}>{t('categoryOutlookText')}</MessageBar>
-                </div>
+                <UserMessage
+                    hidden={!project.outlookCategory}
+                    containerStyle={{ margin: '15px 0 15px 0' }}
+                    text={t('categoryOutlookText')}
+                    iconName='OutlookLogoInverse' />
                 <Summary />
                 <Actions />
                 <TimeEntries />
