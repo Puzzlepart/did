@@ -7,4 +7,5 @@ export interface ICreateProjectFormModel {
     customerKey?: string;
     description?: string;
     icon?: string;
+    labels?: string[];
 }

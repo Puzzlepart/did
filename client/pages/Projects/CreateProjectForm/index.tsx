@@ -18,6 +18,7 @@ const initialModel: ICreateProjectFormModel = {
     customerKey: '',
     description: '',
     icon: 'Page',
+    labels: [],
 }
 
 /**
@@ -94,7 +95,9 @@ export const CreateProjectForm = () => {
                 options={undefined}
                 defaultSelectedKey={initialModel.icon}
                 onChange={(_event, opt) => setModel({ ...model, icon: opt.key as string })} />
-            <LabelPicker />
+            <LabelPicker
+                label='Merkelapper'
+                onChange={labels => setModel({ ...model, labels: labels.map(lbl => lbl.id) })} />
             <PrimaryButton
                 styles={{ root: { marginTop: 16 } }}
                 text={t('add', { ns: 'common' })}

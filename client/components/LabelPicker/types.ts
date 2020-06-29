@@ -1,9 +1,13 @@
 import gql from 'graphql-tag'
+import { IEntityLabel } from 'interfaces'
 
 /**
  * @category LabelPicker
  */
-export type ILabelPickerProps = React.HTMLProps<HTMLDivElement>;
+export interface ILabelPickerProps {
+    label: string;
+    onChange: (labels: IEntityLabel[]) => void
+}
 
 /**
  * @ignore

@@ -34,8 +34,6 @@ export const Projects = () => {
         ...p, outlookCategory: find(outlookCategories, c => c.displayName === p.id),
     }))
 
-    console.log(params.key)
-
     useEffect(() => {
         if (!selected && params.key) {
             const _selected = find(projects, p => p.id === params.key.toUpperCase())
