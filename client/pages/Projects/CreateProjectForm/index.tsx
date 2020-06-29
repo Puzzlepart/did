@@ -96,7 +96,8 @@ export const CreateProjectForm = () => {
                 defaultSelectedKey={initialModel.icon}
                 onChange={(_event, opt) => setModel({ ...model, icon: opt.key as string })} />
             <LabelPicker
-                label='Merkelapper'
+                label={t('labels', { ns: 'admin' })}
+                searchLabelText={t('filterLabels', { ns: 'admin' })}
                 onChange={labels => setModel({ ...model, labels: labels.map(lbl => lbl.id) })} />
             <PrimaryButton
                 styles={{ root: { marginTop: 16 } }}

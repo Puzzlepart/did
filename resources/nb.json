@@ -66,6 +66,7 @@
     "users": "Brukere",
     "summary": "Sammendrag",
     "labels": "Merkelapper",
+    "filterLabels": "Filtrer merkelapper...",
     "rolesPermissions": "Roller og tilganger",
     "addNewUser": "Legg til ny",
     "editUser": "Rediger",
@@ -84,6 +85,7 @@
     "noEntriesText": "Det er ingen bekreftede tidsoppføringer på dette tidspunktet."
   },
   "common": {
+    "noneSelectedMessage": "Ingen valgt enda",
     "hoursCurrentMonth": "Timer denne måneden",
     "hoursPrevMonth": "Timer forrige måned",
     "hoursCurrentYear": "Timer i år",

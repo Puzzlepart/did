@@ -2,6 +2,7 @@
 // Please do not change this file!
 interface CssExports {
   'label': string;
+  'noneSelected': string;
   'root': string;
   'toggleIcon': string;
 }

@@ -8,30 +8,33 @@ import { GET_LABELS, ILabelPickerProps } from './types'
 import { IEntityLabel } from 'interfaces'
 import { SelectCallout } from './SelectCallout'
 import { omit } from 'underscore'
+import { useTranslation } from 'react-i18next'
 
 /**
  * @category LabelPicker
  */
 export const LabelPicker = (props: ILabelPickerProps) => {
+    const { t } = useTranslation('common')
     const { data } = useQuery(GET_LABELS, { fetchPolicy: 'cache-and-network' })
     const toggleRef = useRef()
     const [labels, setLabels] = useState<IEntityLabel[]>([])
     const [selectedLabels, setSelectedLabels] = useState<IEntityLabel[]>([])
     const [showCallout, setShowCallout] = useState<boolean>(false)
 
-    function onToggleLabel(label: IEntityLabel, checked: boolean) {
+    function onToggleLabel(label: IEntityLabel) {
         let _selectedLabels = [...selectedLabels]
-        if (checked) {
-            _selectedLabels.push(omit(label, '__typename'))
+        let index = _selectedLabels.indexOf(label)
+        if (index === -1) {
+            _selectedLabels.push(label)
             setSelectedLabels(_selectedLabels)
         } else {
-            _selectedLabels.splice(_selectedLabels.indexOf(label), 1)
+            _selectedLabels.splice(index, 1)
             setSelectedLabels(_selectedLabels)
         }
         props.onChange(_selectedLabels)
     }
 
-    useEffect(() => setLabels(data ? data.labels : []), [data])
+    useEffect(() => setLabels(data ? data.labels.map(lbl => omit(lbl, '__typename')) : []), [data])
 
     return (
         <div className={styles.root}>
@@ -45,10 +48,12 @@ export const LabelPicker = (props: ILabelPickerProps) => {
                 </span>
             </Label>
             {selectedLabels.map(label => <EntityLabel key={label.id} label={label} />)}
+            <span className={styles.noneSelected} hidden={selectedLabels.length>0}>{t('noneSelectedMessage')}</span>
             <SelectCallout
                 target={toggleRef}
                 hidden={!showCallout}
                 labels={labels}
+                searchLabelText={props.searchLabelText}
                 onToggleLabel={onToggleLabel}
                 onDismiss={() => setShowCallout(false)} />
         </div>
