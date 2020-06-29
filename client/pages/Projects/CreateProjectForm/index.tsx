@@ -1,10 +1,10 @@
 import { useMutation } from '@apollo/react-hooks'
-import { IconPicker, SearchCustomer, useMessage, UserMessage } from 'components'
+import { IconPicker, SearchCustomer, useMessage, UserMessage, LabelPicker } from 'components'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { Label } from 'office-ui-fabric-react/lib/Label'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
-import * as React from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import format from 'string-format'
 import styles from './CreateProjectForm.module.scss'
@@ -12,16 +12,22 @@ import CREATE_PROJECT from './CREATE_PROJECT'
 import { ICreateProjectFormModel } from './ICreateProjectFormModel'
 import { ICreateProjectFormValidation } from './ICreateProjectFormValidation'
 
-const initialModel: ICreateProjectFormModel = { key: '', name: '', customerKey: '', description: '', icon: 'Page' }
+const initialModel: ICreateProjectFormModel = {
+    key: '',
+    name: '',
+    customerKey: '',
+    description: '',
+    icon: 'Page',
+}
 
 /**
  * @category Projects
  */
 export const CreateProjectForm = () => {
     const { t } = useTranslation(['projects', 'common'])
-    const [validation, setValidation] = React.useState<ICreateProjectFormValidation>({ errors: {}, invalid: true })
+    const [validation, setValidation] = useState<ICreateProjectFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useMessage()
-    const [model, setModel] = React.useState<ICreateProjectFormModel>(initialModel)
+    const [model, setModel] = useState<ICreateProjectFormModel>(initialModel)
     const [addProject, { loading }] = useMutation<any, { project: ICreateProjectFormModel }>(CREATE_PROJECT)
 
     const validateForm = (): ICreateProjectFormValidation => {
@@ -88,6 +94,7 @@ export const CreateProjectForm = () => {
                 options={undefined}
                 defaultSelectedKey={initialModel.icon}
                 onChange={(_event, opt) => setModel({ ...model, icon: opt.key as string })} />
+            <LabelPicker />
             <PrimaryButton
                 styles={{ root: { marginTop: 16 } }}
                 text={t('add', { ns: 'common' })}
