@@ -9,15 +9,27 @@ import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox'
 import { useQuery } from '@apollo/react-hooks'
 import { GET_LABELS } from './types'
 import { IEntityLabel } from 'interfaces'
+import { SelectCallout } from './SelectCallout'
 
 /**
  * @category LabelPicker
  */
 export const LabelPicker = () => {
     const { data } = useQuery(GET_LABELS, { fetchPolicy: 'cache-and-network' })
-    const toggle = useRef()
+    const toggleRef = useRef()
 
     const [labels, setLabels] = useState<IEntityLabel[]>([])
+    const [selectedLabels, setSelectedLabels] = useState<IEntityLabel[]>([])
+    const [showCallout, setShowCallout] = useState<boolean>(false)
+
+    function onToggleLabel(label: IEntityLabel, checked: boolean) {
+        if (checked) setSelectedLabels([...selectedLabels, label])
+        else {
+            let _selectedLabels = [...selectedLabels]
+            _selectedLabels.splice(_selectedLabels.indexOf(label), 1)
+            setSelectedLabels(_selectedLabels)
+        }
+    }
 
     useEffect(() => setLabels(data ? data.labels : []), [data])
 
@@ -25,35 +37,22 @@ export const LabelPicker = () => {
         <div className={styles.root}>
             <Label className={styles.label}>
                 <span>Merkelapper</span>
-                <span className={styles.toggleIcon} ref={toggle}>
+                <span
+                    className={styles.toggleIcon}
+                    onClick={_ => setShowCallout(!showCallout)}
+                    ref={toggleRef}>
                     <Icon iconName='Settings' />
                 </span>
             </Label>
-            <EntityLabel label={{ name: 'crayon-timereg', description: '', color: '#a6c0f4' }} />
-            <EntityLabel label={{ name: 'includes-travel', description: '', color: '#a6c0f5' }} />
-            <Callout
-                className={styles.calloutSelector}
-                target={toggle.current}>
-                <SearchBox
-                    className={styles.searchBox}
-                    labelText={'Filter labels...'} />
-                <ul>
-                    {labels.map(lbl => (
-                        <li key={lbl.id}>
-                            <div className={styles.itemContainer}>
-                                <Checkbox className={styles.itemCheckbox} />
-                                <div>
-                                    <div>
-                                        <Icon iconName='CircleFill' style={{ color: lbl.color, fontSize: 10 }} />
-                                        <span style={{ paddingLeft: 5 }}>{lbl.name}</span>
-                                    </div>
-                                    <div>{lbl.description}</div>
-                                </div>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-            </Callout>
+            {selectedLabels.map(label => (
+                <EntityLabel key={label.id} label={label} />
+            ))}
+            <SelectCallout
+                target={toggleRef}
+                hidden={!showCallout}
+                labels={labels}
+                onToggleLabel={onToggleLabel}
+                onDismiss={() => setShowCallout(false)} />
         </div>
     )
 }
