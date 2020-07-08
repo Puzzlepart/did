@@ -1,44 +1,58 @@
 import { useQuery } from '@apollo/react-hooks'
+import { AppContext } from 'AppContext'
 import { UserMessage } from 'components/UserMessage'
+import { manageProjects } from 'config/security/permissions'
 import { value } from 'helpers'
 import { IOutlookCategory, IProject } from 'interfaces'
 import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import { CreateProjectForm } from 'pages/Projects/CreateProjectForm'
-import * as React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
-import { find, contains } from 'underscore'
+import { useHistory, useParams } from 'react-router-dom'
+import { contains, find } from 'underscore'
 import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
-import { GET_PROJECTS, IGetProjectsData } from './types'
-import { AppContext } from 'AppContext'
-import { manageProjects } from 'config/security/permissions'
+import { GET_PROJECTS, IGetProjectsData, IProjectsParams } from './types'
 
 /**
  * @category Projects
  */
 export const Projects = () => {
     const { t } = useTranslation(['projects', 'common'])
-    const { user } = React.useContext(AppContext)
-    const params = useParams<{ key: string }>()
+    const history = useHistory()
+    const { user } = useContext(AppContext)
+    const params = useParams<IProjectsParams>()
     const [selected, setSelected] = useState<IProject>(null)
     const { loading, error, data } = useQuery<IGetProjectsData>(GET_PROJECTS, { variables: { sortBy: 'name' }, fetchPolicy: 'cache-first' })
 
     const outlookCategories = value<IOutlookCategory[]>(data, 'outlookCategories', [])
-    const projects = value<IProject[]>(data, 'projects', []).map(p => ({ ...p, outlookCategory: find(outlookCategories, c => c.displayName === p.key) }))
 
-    React.useEffect(() => {
+    const projects = value<IProject[]>(data, 'projects', []).map(p => ({
+        ...p, outlookCategory: find(outlookCategories, c => c.displayName === p.id),
+    }))
+
+    console.log(params.key)
+
+    useEffect(() => {
         if (!selected && params.key) {
             const _selected = find(projects, p => p.id === params.key.toUpperCase())
             setSelected(_selected)
         }
     }, [params.key, projects])
 
+    function onPivotClick({ props }: PivotItem) {
+        setSelected(null)
+        history.push(`/projects/${props.itemKey}`)
+    }
+
     return (
-        <Pivot styles={{ itemContainer: { paddingTop: 10 } }}>
+        <Pivot
+            selectedKey={params.view || 'search'}
+            onLinkClick={onPivotClick}
+            styles={{ itemContainer: { paddingTop: 10 } }}>
             <PivotItem
                 itemID='search'
                 itemKey='search'
@@ -54,7 +68,14 @@ export const Projects = () => {
                                 searchBox={{ placeholder: t('searchPlaceholder') }}
                                 selection={{
                                     mode: SelectionMode.single,
-                                    onChanged: selected => setSelected(selected),
+                                    onChanged: selected => {
+                                        selected && history.push([
+                                            '/projects',
+                                            params.view || 'search',
+                                            selected.id
+                                        ].filter(p => p).join('/'))
+                                        setSelected(selected)
+                                    },
                                 }}
                                 height={selected && 400} />
                             {selected && <ProjectDetails project={selected} />}
@@ -62,12 +83,14 @@ export const Projects = () => {
                     )}
             </PivotItem>
             <PivotItem
-                itemID='myprojects'
-                itemKey='myprojects'
+                itemID='my'
+                itemKey='my'
                 headerText={t('myProjectsText')}
                 itemIcon='FabricUserFolder'>
                 {error
-                    ? <UserMessage type={MessageBarType.error} text={t('genericErrorText', { ns: 'common' })} />
+                    ? <UserMessage
+                        type={MessageBarType.error}
+                        text={t('genericErrorText', { ns: 'common' })} />
                     : (
                         <>
                             <UserMessage

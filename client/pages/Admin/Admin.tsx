@@ -16,11 +16,17 @@ export const Admin = () => {
     const { t } = useTranslation('admin')
     const history = useHistory()
     const { view } = useParams<{ view: string }>()
+
+
+    function onPivotClick({ props }: PivotItem) {
+        history.push(`/admin/${props.itemKey}`)
+    }
+
     return (
         <div className={styles.root}>
             <Pivot
-                defaultSelectedKey={view}
-                onLinkClick={item => history.push(`/admin/${item.props.itemKey}`)}>
+                selectedKey={view || 'users'}
+                onLinkClick={onPivotClick}>
                 <PivotItem
                     className={styles.tab}
                     itemKey='users'

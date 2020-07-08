@@ -9,6 +9,7 @@ import columns from './columns'
 import { CREATE_OUTLOOK_CATEGORY } from './CREATE_OUTLOOK_CATEGORY'
 import styles from './ProjectDetails.module.scss'
 import { ProjectDetailsContext } from './types'
+import {isEmpty} from 'underscore'
 
 export const Actions = () => {
     const { t } = useTranslation(['projects', 'common'])
@@ -29,15 +30,14 @@ export const Actions = () => {
                 fileName: `TimeEntries-${key}-${new Date().toDateString().split(' ').join('-')}.xlsx`,
             })
     }
-
+    
     /**
      * On create category in Outlook
-     * 
-     * @param {string} color Color for the category (randomized if not specified)
      */
-    async function onCreateCategory(color: string = 'preset' + Math.floor(Math.random() * Math.floor(25))) {
+    async function onCreateCategory() {
+        const colorIdx = context.project.id.split('').map(c => c.charCodeAt(0)).reduce((a, b) => a + b) % 24
         const { data: { result } } = await createOutlookCategory({
-            variables: { category: { displayName: context.project.key.toString(), color } }
+            variables: { category: { displayName: context.project.id.toString(), color: `preset${colorIdx}` } }
         })
         if (result.success) {
             context.setProject({
@@ -51,7 +51,7 @@ export const Actions = () => {
         <div className={styles.actions}>
             <div
                 className={styles.buttonContainer}
-                hidden={context.timeentries.length === 0}>
+                hidden={isEmpty(context.timeentries)}>
                 <DefaultButton
                     text={t('exportTimeEntriesLabel')}
                     iconProps={{ iconName: 'ExcelDocument' }}
