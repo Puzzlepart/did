@@ -9,6 +9,8 @@ import { DurationDisplay } from './DurationDisplay'
 import { IEventListProps } from './types'
 import { MobileView, BrowserView } from 'react-device-detect'
 import { Link } from 'office-ui-fabric-react/lib/Link'
+import { EntityLabel } from 'components/EntityLabel'
+import styles from './EventList.module.scss'
 
 /**
  * Get sizing for column
@@ -40,11 +42,20 @@ export const Title = (props: IEventListProps, name: string, fieldName = 'title')
     name,
     { ...getSizing(props, fieldName, 320, 400), isMultiline: true },
     (event: ITimeEntry) => (
-        <Link href={event.webLink}
-            target='_blank'
-            title={event.title}>
-            <span>{event.title}</span>
-        </Link>
+        <div className={styles.titleColumn}>
+            <Link href={event.webLink}
+                target='_blank'
+                title={event.title}>
+                <span>{event.title}</span>
+            </Link>
+            {event.labels && (
+                <div className={styles.labels}>
+                    {event.labels.map((label, idx) => (
+                        <EntityLabel key={idx} label={label} />
+                    ))}
+                </div>
+            )}
+        </div>
     ),
 )
 

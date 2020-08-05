@@ -6,14 +6,14 @@ const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const RemovePlugin = require('remove-files-webpack-plugin')
+const LiveReloadPlugin = require('webpack-livereload-plugin');
+
 
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production'
 
 let config = {
     mode,
-    entry: {
-        [pkg.name]: './client'
-    },
+    entry: { [pkg.name]: './client' },
     output: {
         path: path.resolve(__dirname, pkg.config.public, 'js'),
         filename: '[name].[hash].js',
@@ -72,10 +72,6 @@ let config = {
             inject: true,
         }),
         new RemovePlugin({
-            /**
-             * Before compilation permanently removes
-             * entire `./public/js` folder.
-             */
             before: {
                 include: [
                     './public/js'
@@ -90,6 +86,7 @@ switch (mode) {
         config.stats = 'errors-only'
         config.watch = true
         config.watchOptions = { aggregateTimeout: 200 }
+        config.plugins.push(new LiveReloadPlugin())
     }
         break
     case 'production': {

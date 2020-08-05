@@ -1,9 +1,9 @@
 import { ScrollablePaneWrapper } from 'components/ScrollablePaneWrapper'
-import { ConstrainMode, DetailsListLayoutMode, IColumn, IDetailsGroupDividerProps, IDetailsHeaderProps, Selection, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
+import {CheckboxVisibility, ConstrainMode, DetailsListLayoutMode, IColumn, IDetailsGroupDividerProps, IDetailsHeaderProps, Selection, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { GroupHeader } from 'office-ui-fabric-react/lib/GroupedList'
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox'
 import { ShimmeredDetailsList } from 'office-ui-fabric-react/lib/ShimmeredDetailsList'
-import * as React from 'react'
+import React,{useReducer} from 'react'
 import { useEffect } from 'react'
 import { delay } from 'utils'
 import { withDefaultProps } from 'with-default-props'
@@ -16,7 +16,7 @@ import { IListProps } from './types'
  * @category List
  */
 const List = (props: IListProps) => {
-    const [state, dispatch] = React.useReducer(reducer, {
+    const [state, dispatch] = useReducer(reducer, {
         origItems: props.items,
         items: props.items,
         searchTerm: null,
@@ -78,7 +78,8 @@ const List = (props: IListProps) => {
                         ...props.groupProps,
                         onRenderHeader: onRenderGroupHeader,
                     }}
-                    onRenderDetailsHeader={onRenderListHeader} />
+                    onRenderDetailsHeader={onRenderListHeader}
+                    checkboxVisibility={CheckboxVisibility.hidden} />
             </ScrollablePaneWrapper>
         </div>
     )

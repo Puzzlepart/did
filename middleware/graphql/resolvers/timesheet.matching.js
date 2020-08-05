@@ -1,4 +1,4 @@
-const _ = require('underscore')
+const { find, filter, contains } = require('underscore')
 const { findBestMatch } = require('string-similarity')
 const format = require('string-format')
 const value = require('get-value')
@@ -6,112 +6,131 @@ const value = require('get-value')
 const CATEGORY_REGEX = /((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>[A-Za-z0-9]{2,}))/gmi
 const CONTENT_REGEX = /[\(\{\[]((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>[A-Za-z0-9]{2,}?))[\)\]\}]/gmi
 
-/**
- * Get project best match using string-similarity findBestMatch
- * 
- * @param {*} projects 
- * @param {*} customer 
- * @param {*} projectKey 
- */
-function getProjectSuggestion(projects, customer, projectKey) {
-    try {
-        let customerProjects = projects.filter(p => p.customerKey === customer.key)
-        let projectKeys = customerProjects.map(p => p.id.split(' ')[1])
-        let sm = findBestMatch(projectKey, projectKeys)
-        let target = (sm.bestMatch && sm.bestMatch.rating > 0) ? sm.bestMatch.target : null
-        if (!target) return null
-        let suggestion = customerProjects.filter(p => p.id.split(' ')[1] === target.toUpperCase())[0]
-        return suggestion
-    } catch (error) {
-        return null
+class EventMatching {
+    constructor(projects, customers, labels) {
+        this.projects = projects
+        this.customers = customers
+        this.labels = labels
     }
-}
 
-/**
- * Find project match in title/subject/categories
- * 
- * @param {*} regex 
- * @param {*} input 
- */
-function searchString(regex, input) {
-    let matches
-    let match
-    while ((match = regex.exec(input)) != null) {
-        matches = matches || []
-        matches.push({
-            key: `${match.groups.customerKey} ${match.groups.projectKey}`,
-            customerKey: match.groups.customerKey,
-            projectKey: match.groups.projectKey,
-        })
+    /**
+     * Find project suggestions using string-similarity findBestMatch
+     * 
+     * @param {*} customer 
+     * @param {*} projectKey 
+     */
+    findProjectSuggestion(projectKey) {
+        try {
+            const customerProjects = this.projects.filter(p => p.customerKey === customer.key)
+            const projectKeys = customerProjects.map(p => p.id.split(' ')[1])
+            const sm = findBestMatch(projectKey, projectKeys)
+            const target = (sm.bestMatch && sm.bestMatch.rating > 0) ? sm.bestMatch.target : null
+            if (!target) return null
+            const suggestion = customerProjects.filter(p => p.id.split(' ')[1] === target.toUpperCase())[0]
+            return suggestion
+        } catch (error) {
+            return null
+        }
     }
-    return matches
-}
 
-/**
- * Find project match in title/subject/categories
- * 
- * @param {*} content 
- * @param {*} categories 
- */
-function findMatches(content, categories) {
-    let matches = searchString(CATEGORY_REGEX, categories)
-    if (matches) return matches
-    return searchString(CONTENT_REGEX, content)
-}
+    /**
+     * Find project match in title/subject/categories
+     * 
+     * @param {*} regex 
+     * @param {*} input 
+     */
+    searchString(regex, input) {
+        let matches
+        let match
+        while ((match = regex.exec(input)) != null) {
+            matches = matches || []
+            matches.push({
+                key: `${match.groups.customerKey} ${match.groups.projectKey}`,
+                customerKey: match.groups.customerKey,
+                projectKey: match.groups.projectKey,
+            })
+        }
+        return matches
+    }
 
-/**
- * Checks for project match in event
- * 
- * @param {*} event 
- * @param {*} projects 
- * @param {*} customers 
- */
-function matchEvent(event, projects, customers) {
-    let categories = event.categories.join(' ').toUpperCase()
-    let content = [event.title, event.body, categories].join(' ').toUpperCase()
-    let matches = findMatches(content, categories)
-    let projectKey
-    if (matches) {
-        for (let i = 0; i < matches.length; i++) {
-            let match = matches[i]
-            event.customer = _.find(customers, c => match.customerKey === c.key)
-            if (event.customer) {
-                event.project = _.find(projects, p => p.id === match.key)
-                projectKey = match.projectKey
+    /**
+     * Find project match in title/subject/categories
+     * 
+     * @param {*} content 
+     * @param {*} categories 
+     */
+    findProjectMatches(content, categories) {
+        let matches = this.searchString(CATEGORY_REGEX, categories)
+        if (matches) return matches
+        return this.searchString(CONTENT_REGEX, content)
+    }
+
+    /**
+     * Find labels
+     * 
+     * @param {*} categories 
+     */
+    findLabels(categories) {
+        return filter(this.labels, label => contains(categories, label.name))
+    }
+
+    /**
+     * Checks for project match in event
+     * 
+     * @param {*} event 
+     */
+    matchEvent(event) {
+        let categories = event.categories.join(' ').toUpperCase()
+        let content = [event.title, event.body, categories].join(' ').toUpperCase()
+        let matches = this.findProjectMatches(content, categories)
+        let projectKey
+        if (matches) {
+            for (let i = 0; i < matches.length; i++) {
+                let match = matches[i]
+                event.customer = find(this.customers, c => match.customerKey === c.key)
+                if (event.customer) {
+                    event.project = find(this.projects, p => p.id === match.key)
+                    projectKey = match.projectKey
+                }
+                if (event.project) break
             }
-            if (event.project) break
+        } else {
+            event.project = find(this.projects, p => content.indexOf(p.id) !== -1)
+            if (event.project) {
+                event.customer = find(this.customers, c => c.key === event.project.customerKey)
+            }
         }
-    } else {
-        event.project = _.find(projects, p => content.indexOf(p.id) !== -1)
-        if (event.project) {
-            event.customer = _.find(customers, c => c.key === event.project.customerKey)
+
+        if (event.customer && !event.project) event.suggestedProject = this.findProjectSuggestion(
+            this.projects,
+            event.customer,
+            projectKey
+        )
+
+        event.labels = this.findLabels(event.categories)
+
+        const inactiveProject = value(event, 'project.inactive')
+        const inactiveCustomer = value(event, 'customer.inactive')
+
+        if (event.project && (inactiveProject || inactiveCustomer)) {
+            if (inactiveProject)
+                event.error = { message: format('Project {0} for {1} is no longer active. Please resolve the event in Outlook.', event.project.name, event.customer.name) }
+            if (inactiveCustomer)
+                event.error = { message: format('Customer {0} is no longer active. Please resolve the event in Outlook.', event.customer.name) }
+            event.project = null
+            event.customer = null
         }
+        return event
     }
-    if (event.customer && !event.project) {
-        event.suggestedProject = getProjectSuggestion(projects, event.customer, projectKey)
+
+    /**
+     * Match events
+     * 
+     * @param {*} events 
+     */
+    match(events) {
+        return events.map(event => this.matchEvent(event))
     }
-    const inactiveProject = value(event, 'project.inactive')
-    const inactiveCustomer = value(event, 'customer.inactive')
-    if (event.project && (inactiveProject || inactiveCustomer)) {
-        if (inactiveProject)
-            event.error = { message: format('Project {0} for {1} is no longer active. Please resolve the event in Outlook.', event.project.name, event.customer.name) }
-        if (inactiveCustomer)
-            event.error = { message: format('Customer {0} is no longer active. Please resolve the event in Outlook.', event.customer.name) }
-        event.project = null
-        event.customer = null
-    }
-    return event
 }
 
-/**
- * Matches events against projects/customers
- * 
- * @param {*} events 
- * @param {*} projects 
- * @param {*} customers 
- */
-function matchEvents(events, projects, customers) {
-    return events.map(evt => matchEvent(evt, projects, customers))
-}
-
-module.exports = matchEvents
+module.exports = EventMatching
