@@ -16,7 +16,7 @@ import { contains, find } from 'underscore'
 import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
 import { GET_PROJECTS, IGetProjectsData, IProjectsParams } from './types'
-import { Modal } from 'office-ui-fabric-react'
+import { Panel } from 'office-ui-fabric-react/lib/Panel'
 
 /**
  * @category Projects
@@ -81,7 +81,7 @@ export const Projects = () => {
                                 height={selected && 400} />
                             {selected && <ProjectDetails project={selected} />}
                             {edit && (
-                                <Modal
+                                <Panel
                                     isOpen={true}
                                     styles={{ scrollableContent: { padding: 20 } }}
                                     onDismiss={() => setEdit(null)}>
@@ -91,7 +91,7 @@ export const Projects = () => {
                                         setEdit(null)
                                         refetch()
                                     }} />
-                                </Modal>
+                                </Panel>
                             )}
                         </>
                     )}
