@@ -1,13 +1,7 @@
-/**
- * @category Projects
- */
-export interface IProjectFormModel {
-    key?: string;
-    name?: string;
-    customerKey?: string;
-    description?: string;
-    icon?: string;
-    labels?: string[];
+import { IProject } from 'interfaces'
+
+export interface IProjectFormProps {
+    project?: IProject;
 }
 
 /**

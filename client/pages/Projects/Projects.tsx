@@ -83,9 +83,9 @@ export const Projects = () => {
                             {edit && (
                                 <Modal
                                     isOpen={true}
-                                    styles={{ root: { padding: 20 } }}
+                                    styles={{ scrollableContent: { padding: 20 } }}
                                     onDismiss={() => setEdit(null)}>
-                                    <ProjectForm />
+                                    <ProjectForm project={edit} />
                                 </Modal>
                             )}
                         </>
