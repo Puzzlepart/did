@@ -22,8 +22,8 @@ export const LabelPicker = (props: ILabelPickerProps) => {
     const [showCallout, setShowCallout] = useState<boolean>(false)
 
     function onToggleLabel(label: IEntityLabel) {
-        let _selectedLabels = [...selectedLabels]
-        let index = _selectedLabels.indexOf(label)
+        const _selectedLabels = [...selectedLabels]
+        const index = _selectedLabels.indexOf(label)
         if (index === -1) {
             _selectedLabels.push(label)
             setSelectedLabels(_selectedLabels)
@@ -34,27 +34,37 @@ export const LabelPicker = (props: ILabelPickerProps) => {
         props.onChange(_selectedLabels)
     }
 
-    useEffect(() => setLabels(data ? data.labels.map(lbl => omit(lbl, '__typename')) : []), [data])
+    useEffect(() => {
+        if (data && data.labels) {
+            const _labels: IEntityLabel[] = data.labels.map((lbl: any) => omit(lbl, '__typename'))
+            setLabels(_labels)
+            if(props.defaultSelectedKeys) {
+                const _selectedLabels = _labels.filter(lbl =>  props.defaultSelectedKeys.indexOf(lbl.id) !== -1) 
+                setSelectedLabels(_selectedLabels)
+            }
+        }
+    }, [data])
 
     return (
-        <div className={styles.root}>
+        <div className={`${styles.root} ${props.className}`}>
             <Label className={styles.label}>
                 <span>{props.label}</span>
                 <span
                     className={styles.toggleIcon}
-                    onClick={_ => setShowCallout(!showCallout)}
+                    onClick={() => setShowCallout(!showCallout)}
                     ref={toggleRef}>
                     <Icon iconName='Settings' />
                 </span>
             </Label>
             {selectedLabels.map(label => <EntityLabel key={label.id} label={label} />)}
-            <span className={styles.noneSelected} hidden={selectedLabels.length>0}>{t('noneSelectedMessage')}</span>
+            <span className={styles.noneSelected} hidden={selectedLabels.length > 0}>{t('noneSelectedMessage')}</span>
             <SelectCallout
                 target={toggleRef}
                 hidden={!showCallout}
                 labels={labels}
                 searchLabelText={props.searchLabelText}
                 onToggleLabel={onToggleLabel}
+                defaultSelectedKeys={props.defaultSelectedKeys}
                 onDismiss={() => setShowCallout(false)} />
         </div>
     )

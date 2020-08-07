@@ -1,16 +1,11 @@
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
-import { Callout, ICalloutProps } from 'office-ui-fabric-react/lib/Callout'
+import { Callout } from 'office-ui-fabric-react/lib/Callout'
 import React, { useState, useEffect } from 'react'
 import styles from './SelectCallout.module.scss'
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox'
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox'
 import { IEntityLabel } from 'interfaces'
-
-export interface ISelectCalloutProps extends ICalloutProps {
-    labels: IEntityLabel[]
-    searchLabelText: string
-    onToggleLabel: (label: IEntityLabel) => void
-}
+import { ISelectCalloutProps } from './types'
 
 /**
  * @category SelectCallout
@@ -24,7 +19,7 @@ export const SelectCallout = (props: ISelectCalloutProps) => {
         let _labels = [...props.labels]
         if (value.length > 0) {
             _labels = _labels.filter(lbl =>
-                lbl.name.toLowerCase().indexOf(value.toLowerCase()) != -1
+                lbl.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
             )
         }
         setLabels(_labels)
@@ -47,6 +42,7 @@ export const SelectCallout = (props: ISelectCalloutProps) => {
                     <li key={lbl.id}>
                         <div className={styles.itemContainer}>
                             <Checkbox
+                                defaultChecked={props.defaultSelectedKeys.indexOf(lbl.id) !== -1}
                                 className={styles.itemCheckbox}
                                 onChange={() => props.onToggleLabel(lbl)} />
                             <div>

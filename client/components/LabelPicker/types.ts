@@ -5,9 +5,11 @@ import { IEntityLabel } from 'interfaces'
  * @category LabelPicker
  */
 export interface ILabelPickerProps {
-    label: string
-    searchLabelText: string
-    onChange: (labels: IEntityLabel[]) => void
+    className?: string;
+    label: string;
+    searchLabelText: string;
+    defaultSelectedKeys?: string[];
+    onChange: (labels: IEntityLabel[]) => void;
 }
 
 /**
