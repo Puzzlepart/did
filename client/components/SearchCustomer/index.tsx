@@ -6,6 +6,7 @@ import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Autocomplete, ISuggestionItem } from '../Autocomplete'
 import { ISearchCustomerProps } from './types'
+import { Label } from 'office-ui-fabric-react/lib/Label'
 
 /**
  * @category SearchCustomer
@@ -25,13 +26,16 @@ export const SearchCustomer = (props: ISearchCustomerProps) => {
     })) : []
 
     return (
-        <Autocomplete
-            {...props}
-            disabled={loading}
-            items={searchData}
-            width={450}
-            placeholder={t('searchPlaceholder')}
-            onClear={() => props.onSelected(null)}
-            onSelected={item => props.onSelected(item.data)} />
+        <div hidden={props.hidden}>
+            <Label>{props.label}</Label>
+            <Autocomplete
+                {...props}
+                disabled={loading}
+                items={searchData}
+                width={450}
+                placeholder={t('searchPlaceholder')}
+                onClear={() => props.onSelected(null)}
+                onSelected={item => props.onSelected(item.data)} />
+        </div>
     )
 }
