@@ -1,11 +1,15 @@
-import { Icon } from 'office-ui-fabric-react/lib/Icon'
-import React, { useState, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { AppContext } from 'AppContext'
 import { ContextualMenu } from 'office-ui-fabric-react'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import React, { useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { contains } from 'underscore'
 import styles from './NameLabel.module.scss'
+import { manageProjects } from 'config/security/permissions'
 
 export const NameLabel = ({ project, actions }) => {
     const target = useRef()
+    const { user } = React.useContext(AppContext)
     const [showMenu, setShowMenu] = useState(false)
 
     function onShowMenu(event: React.MouseEvent<any>) {
@@ -21,7 +25,7 @@ export const NameLabel = ({ project, actions }) => {
                 ref={target}
                 onClick={onShowMenu}
                 className={styles.menuToggle} >
-                <Icon iconName='More' />
+                {contains(user.role.permissions, manageProjects) && <Icon iconName='More' />} 
             </span>
             <ContextualMenu
                 hidden={!showMenu}
