@@ -2,7 +2,7 @@
 // Please do not change this file!
 interface CssExports {
   'iconPicker': string;
-  'inputField': string;
+  'inputElement': string;
   'root': string;
 }
 export const cssExports: CssExports;

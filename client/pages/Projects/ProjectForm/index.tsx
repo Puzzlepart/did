@@ -11,7 +11,7 @@ import styles from './CreateProjectForm.module.scss'
 import CREATE_PROJECT from './CREATE_PROJECT'
 import { IProjectFormProps, IProjectFormValidation } from './types'
 
-const defaultProject = {
+const initialModel = {
     key: '',
     name: '',
     customerKey: '',
@@ -28,7 +28,7 @@ export const ProjectForm = ({ edit, onSubmitted }: IProjectFormProps) => {
     const { t } = useTranslation(['projects', 'common'])
     const [validation, setValidation] = useState<IProjectFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useMessage()
-    const [model, setModel] = useState<any>(edit ? { ...edit, labels: edit.labels.map(lbl => lbl.id) } : defaultProject)
+    const [model, setModel] = useState<any>(edit ? { ...edit, labels: edit.labels.map(lbl => lbl.id) } : initialModel)
     const [addProject, { loading }] = useMutation<any, { project: any }>(CREATE_PROJECT)
 
     const validateForm = (): IProjectFormValidation => {
@@ -46,10 +46,10 @@ export const ProjectForm = ({ edit, onSubmitted }: IProjectFormProps) => {
             return
         }
         setValidation({ errors: {}, invalid: false })
-        const { data: { result } } = await addProject({ variables: { project: pick(model, ...Object.keys(defaultProject)) } })
+        const { data: { result } } = await addProject({ variables: { project: pick(model, ...Object.keys(initialModel)) } })
         if (result.success) setMessage({ text: format(t('createSuccess'), model.name), type: MessageBarType.success })
         else setMessage({ text: result.error.message, type: MessageBarType.error })
-        setModel(defaultProject)
+        setModel(initialModel)
         onSubmitted()
     }
 
@@ -64,7 +64,7 @@ export const ProjectForm = ({ edit, onSubmitted }: IProjectFormProps) => {
                 hidden={isEdit}
                 label={t('customer', { ns: 'common' })}
                 required={true}
-                className={styles.inputField}
+                className={styles.inputElement}
                 placeholder={t('searchPlaceholder')}
                 onSelected={customer => setModel({
                     ...model,
@@ -72,7 +72,7 @@ export const ProjectForm = ({ edit, onSubmitted }: IProjectFormProps) => {
                 })} />
             <TextField
                 disabled={isEdit}
-                className={styles.inputField}
+                className={styles.inputElement}
                 label={t('keyLabel', { ns: 'common' })}
                 description={t('keyDescription')}
                 title={t('keyDescription')}
@@ -81,14 +81,14 @@ export const ProjectForm = ({ edit, onSubmitted }: IProjectFormProps) => {
                 onChange={(_event, key) => setModel({ ...model, key })}
                 value={model.key} />
             <TextField
-                className={styles.inputField}
+                className={styles.inputElement}
                 label={t('nameLabel', { ns: 'common' })}
                 required={true}
                 errorMessage={validation.errors.name}
                 onChange={(_event, name) => setModel({ ...model, name })}
                 value={model.name} />
             <TextField
-                className={styles.inputField}
+                className={styles.inputElement}
                 label={t('descriptionLabel', { ns: 'common' })}
                 multiline={true}
                 errorMessage={validation.errors.description}
@@ -100,15 +100,14 @@ export const ProjectForm = ({ edit, onSubmitted }: IProjectFormProps) => {
                 defaultSelectedKey={model.icon}
                 onChange={(_event, opt) => setModel({ ...model, icon: opt.key as string })} />
             <LabelPicker
-                className={styles.inputField}
+                className={styles.inputElement}
                 label={t('labels', { ns: 'admin' })}
                 searchLabelText={t('filterLabels', { ns: 'admin' })}
-                defaultSelectedKeys={edit && edit.labels.map(lbl => lbl.id)}
+                defaultSelectedKeys={edit ? edit.labels.map(lbl => lbl.id) : []}
                 onChange={labels => setModel({ ...model, labels: labels.map(lbl => lbl.id) })} />
             <PrimaryButton
-                styles={{ root: { marginTop: 16 } }}
+                className={styles.inputElement}
                 text={t(isEdit ? 'save' : 'add', { ns: 'common' })}
-                iconProps={{ iconName: 'CirclePlus' }}
                 onClick={onFormSubmit}
                 disabled={loading || !!message} />
         </div>
