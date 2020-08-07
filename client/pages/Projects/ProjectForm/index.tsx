@@ -9,10 +9,9 @@ import { useTranslation } from 'react-i18next'
 import format from 'string-format'
 import styles from './CreateProjectForm.module.scss'
 import CREATE_PROJECT from './CREATE_PROJECT'
-import { ICreateProjectFormModel } from './ICreateProjectFormModel'
-import { ICreateProjectFormValidation } from './ICreateProjectFormValidation'
+import { IProjectFormModel,IProjectFormValidation } from './types'
 
-const initialModel: ICreateProjectFormModel = {
+const initialModel: IProjectFormModel = {
     key: '',
     name: '',
     customerKey: '',
@@ -24,14 +23,14 @@ const initialModel: ICreateProjectFormModel = {
 /**
  * @category Projects
  */
-export const CreateProjectForm = () => {
+export const ProjectForm = () => {
     const { t } = useTranslation(['projects', 'common'])
-    const [validation, setValidation] = useState<ICreateProjectFormValidation>({ errors: {}, invalid: true })
+    const [validation, setValidation] = useState<IProjectFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useMessage()
-    const [model, setModel] = useState<ICreateProjectFormModel>(initialModel)
-    const [addProject, { loading }] = useMutation<any, { project: ICreateProjectFormModel }>(CREATE_PROJECT)
+    const [model, setModel] = useState<IProjectFormModel>(initialModel)
+    const [addProject, { loading }] = useMutation<any, { project: IProjectFormModel }>(CREATE_PROJECT)
 
-    const validateForm = (): ICreateProjectFormValidation => {
+    const validateForm = (): IProjectFormValidation => {
         const errors: { [key: string]: string } = {}
         if (!model.customerKey) errors.customerKey = ''
         if (model.name.length < 2) errors.name = t('nameFormValidationText')

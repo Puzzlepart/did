@@ -7,12 +7,19 @@ import styles from './NameLabel.module.scss'
 export const NameLabel = ({ project, actions }) => {
     const target = useRef()
     const [showMenu, setShowMenu] = useState(false)
+
+    function onShowMenu(event: React.MouseEvent<any>) {
+        event.preventDefault()
+        event.stopPropagation()
+        setShowMenu(true)
+    }
+
     return (
         <div className={styles.root}>
             <Link to={`/projects/${project.id}`}>{project.name}</Link>
             <span
                 ref={target}
-                onClick={() => setShowMenu(true)}
+                onClick={onShowMenu}
                 className={styles.menuToggle} >
                 <Icon iconName='More' />
             </span>
