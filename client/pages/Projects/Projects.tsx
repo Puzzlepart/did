@@ -28,7 +28,7 @@ export const Projects = () => {
     const params = useParams<IProjectsParams>()
     const [selected, setSelected] = useState<IProject>(null)
     const [edit, setEdit] = useState<IProject>(null)
-    const { loading, error, data } = useQuery<IGetProjectsData>(GET_PROJECTS, { variables: { sortBy: 'name' }, fetchPolicy: 'cache-first' })
+    const { loading, error, data,refetch } = useQuery<IGetProjectsData>(GET_PROJECTS, { variables: { sortBy: 'name' }, fetchPolicy: 'cache-first' })
 
     const outlookCategories = value<IOutlookCategory[]>(data, 'outlookCategories', [])
 
@@ -85,7 +85,12 @@ export const Projects = () => {
                                     isOpen={true}
                                     styles={{ scrollableContent: { padding: 20 } }}
                                     onDismiss={() => setEdit(null)}>
-                                    <ProjectForm project={edit} />
+                                    <ProjectForm 
+                                    edit={edit} 
+                                    onSubmitted={() => {
+                                        setEdit(null)
+                                        refetch()
+                                    }} />
                                 </Modal>
                             )}
                         </>

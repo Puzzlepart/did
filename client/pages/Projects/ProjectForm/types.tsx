@@ -1,7 +1,8 @@
 import { IProject } from 'interfaces'
 
 export interface IProjectFormProps {
-    project?: IProject;
+    edit?: IProject;
+    onSubmitted?: () => void;
 }
 
 /**

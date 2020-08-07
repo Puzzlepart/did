@@ -174,7 +174,7 @@ class StorageService {
      */
     async createProject(project, createdBy) {
         const { string } = this.tableUtil.entGen()
-        const entity = await this.tableUtil.addEntity(
+        const entity = await this.tableUtil.updateEntity(
             'Projects',
             {
                 PartitionKey: string(project.customerKey),
