@@ -83,7 +83,7 @@ export const Projects = () => {
                             {edit && (
                                 <Panel
                                     isOpen={true}
-                                    styles={{ scrollableContent: { padding: 20 } }}
+                                    headerText={edit.name}
                                     onDismiss={() => setEdit(null)}>
                                     <ProjectForm 
                                     edit={edit} 

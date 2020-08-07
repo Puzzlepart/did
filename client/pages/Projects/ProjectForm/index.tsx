@@ -1,16 +1,15 @@
 import { useMutation } from '@apollo/react-hooks'
 import { IconPicker, LabelPicker, SearchCustomer, useMessage, UserMessage } from 'components'
-import { IProject } from 'interfaces'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import format from 'string-format'
+import { pick } from 'underscore'
 import styles from './CreateProjectForm.module.scss'
 import CREATE_PROJECT from './CREATE_PROJECT'
 import { IProjectFormProps, IProjectFormValidation } from './types'
-import { pick } from 'underscore'
 
 const defaultProject = {
     key: '',
@@ -24,7 +23,7 @@ const defaultProject = {
 /**
  * @category Projects
  */
-export const ProjectForm = ({ edit ,onSubmitted}: IProjectFormProps) => {
+export const ProjectForm = ({ edit, onSubmitted }: IProjectFormProps) => {
     const isEdit = !!edit
     const { t } = useTranslation(['projects', 'common'])
     const [validation, setValidation] = useState<IProjectFormValidation>({ errors: {}, invalid: true })
@@ -56,7 +55,11 @@ export const ProjectForm = ({ edit ,onSubmitted}: IProjectFormProps) => {
 
     return (
         <div className={styles.root}>
-            {message && <UserMessage {...message} containerStyle={{ marginTop: 12, marginBottom: 12, width: 450 }} />}
+            {message && (
+                <UserMessage
+                    {...message}
+                    containerStyle={{ marginTop: 12, marginBottom: 12, width: 450 }} />
+            )}
             <SearchCustomer
                 hidden={isEdit}
                 label={t('customer', { ns: 'common' })}
