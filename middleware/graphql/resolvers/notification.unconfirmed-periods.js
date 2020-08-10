@@ -32,6 +32,6 @@ module.exports = async function ({ template, ctx }) {
         type: 0,
         severity: 2,
         text: format(template, period.week, period.month),
-        moreLink: ['', 'timesheet', ...period.id.split('_')].join('/')
+        moreLink: ['', 'timesheet/overview', ...period.id.split('_')].join('/')
     }))
 }

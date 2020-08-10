@@ -11,7 +11,7 @@
     },
     "scripts": {
         "start": "node ./bin/www",
-        "watch": "concurrently \"webpack\" \"npm run watchServer\" \"livereload ./public/js -w 250 -d\"",
+        "watch": "concurrently \"webpack\" \"npm run watchServer\"",
         "watchServer": "nodemon --ignore client --ignore public --ignore lib ./bin/www",
         "packageClient": "webpack",
         "lint": "eslint --ext .ts,.tsx ./client --color --fix",
@@ -113,7 +113,8 @@
         "validator": "13.0.0",
         "webpack": "4.42.1",
         "webpack-cli": "3.3.11",
-        "with-default-props": "0.2.1"
+        "with-default-props": "0.2.1",
+        "webpack-livereload-plugin": "2.3.0"
     },
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "2.30.0",
@@ -121,7 +122,6 @@
         "assert": "2.0.0",
         "eslint": "6.8.0",
         "eslint-plugin-react": "7.19.0",
-        "livereload": "0.9.1",
         "mocha": "7.1.2",
         "nodemon": "2.0.3",
         "typedoc": "0.17.6",
