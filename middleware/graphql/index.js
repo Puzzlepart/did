@@ -10,6 +10,7 @@ const { typeDef: Subscription } = require('./resolvers/subscription')
 const { typeDef: Label } = require('./resolvers/label')
 const { typeDef: Role } = require('./resolvers/role')
 const { typeDef: Notification } = require('./resolvers/notification')
+const { typeDef: Vacation } = require('./resolvers/vacation')
 const StorageService = require('../../services/storage')
 const GraphService = require('../../services/graph')
 const SubscriptionService = require('../../services/subscription')
@@ -54,7 +55,8 @@ const schema = makeExecutableSchema({
     Subscription,
     Label,
     Role,
-    Notification
+    Notification,
+    Vacation,
   ],
   resolvers: require('./resolvers'),
   resolverValidationOptions: {

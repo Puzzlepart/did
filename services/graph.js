@@ -2,6 +2,7 @@ global.fetch = require("node-fetch")
 const { refreshAccessToken } = require('./tokens')
 const log = require('debug')('services/graph')
 const Event = require('./graph.event')
+const utils = require('../utils')
 
 class GraphService {
   constructor(req) {
@@ -77,6 +78,60 @@ class GraphService {
         case 401: {
           this.oauthToken = await refreshAccessToken(this.req)
           return this.getOutlookCategories()
+        }
+        default: {
+          throw new Error()
+        }
+      }
+    }
+  }
+
+  /**
+  * Search events in the specified period of time
+  * 
+  * It does a search in categories and start of the subject of the events
+  *
+  * @param {*} searchString Search string
+  * @param {*} startDateTime Start time (ISO format)
+  * @param {*} endDateTime End time (ISO format)
+  */
+  async searchEvents(searchString, startDateTime, endDateTime) {
+    try {
+      log('Querying Graph /me/calendar/calendarView: %s', JSON.stringify({
+        startDateTime,
+        endDateTime,
+        searchString,
+      }))
+      const { value } = await this.getClient()
+        .api('/me/calendarView')
+        .query({
+          startDateTime,
+          endDateTime
+        })
+        .select('id,subject,start,end')
+        .filter(`categories/any(a:a+eq+'${searchString}')`)
+        .top(500)
+        .count(true)
+        .get()
+      log('Retrieved %s events from /me/calendar/calendarView', value.length)
+      let events = value
+        .filter(evt => evt.subject)
+        .map(evt => {
+          return ({
+            id: evt.id,
+            title: evt.subject,
+            startTime: evt.start.dateTime,
+            endTime: evt.end.dateTime,
+            durationHours: utils.getDurationHours(evt.start.dateTime, evt.end.dateTime),
+          })
+        })
+      return events
+    } catch (error) {
+      console.log(error)
+      switch (error.statusCode) {
+        case 401: {
+          this.oauthToken = await refreshAccessToken(this.req)
+          return this.searchEvents(searchString, startDateTime, endDateTime)
         }
         default: {
           throw new Error()

@@ -1,4 +1,4 @@
-const stripHtml = require("string-strip-html")
+const stripHtml = require('string-strip-html')
 const utils = require('../utils')
 
 class Event {

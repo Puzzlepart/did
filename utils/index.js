@@ -79,6 +79,24 @@ module.exports = {
     },
 
     /**
+     * Get start of year
+     * 
+     * @param {*} date Date
+     */
+    startOfYear: (date) => {
+        return moment(date).startOf('year')
+    },
+
+    /**
+     * Get end of year
+     * 
+     * @param {*} date Date
+     */
+    endOfYear: (date) => {
+        return moment(date).endOf('year')
+    },
+
+    /**
      * Get start of week
      * 
      * @param {*} week Week number
