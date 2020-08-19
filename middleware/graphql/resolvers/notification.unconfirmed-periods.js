@@ -5,7 +5,8 @@ const { getPeriods } = require('./timesheet.utils')
 
 module.exports = async function ({ template, ctx }) {
     const currentWeek = utils.getWeek();
-    let periods = [];
+    const periods = [];
+    const unconfirmedPeriods = []
 
     for (let i = 5; i > 0; i--) {
         periods.push(
@@ -22,15 +23,12 @@ module.exports = async function ({ template, ctx }) {
         year: utils.getYear(),
     })
 
-    let unconfirmedPeriods = []
 
     periods.forEach(period => {
-        var _ = find(confirmedPeriods, cp =>  cp.periodId === period.id)
-        console.log(!_)
-        if(!_) unconfirmedPeriods.push(period)
+        if(!find(confirmedPeriods, cp =>  cp.periodId === period.id)) {
+            unconfirmedPeriods.push(period)
+        }
     })
-
-    console.log(unconfirmedPeriods)
 
     return unconfirmedPeriods.map(period => ({
         id: `unconfirmed_period_${period.id}`,
