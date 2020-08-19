@@ -174,7 +174,7 @@ class StorageService {
      */
     async createProject(project, createdBy) {
         const { string } = this.tableUtil.entGen()
-        const entity = await this.tableUtil.addEntity(
+        const entity = await this.tableUtil.updateEntity(
             'Projects',
             {
                 PartitionKey: string(project.customerKey),
@@ -183,33 +183,11 @@ class StorageService {
                 Name: string(project.name),
                 Description: string(project.description),
                 Icon: string(project.icon || 'Page'),
+                Labels: string(project.labels ? project.labels.join('|') : ''),
                 CreatedBy: string(createdBy),
             }
         )
         return entity
-    }
-
-    /**
-     * Add label to project
-     * 
-     * @param projectId Project ID
-     * @param labelId Label ID
-     */
-    async addLabelToProject(projectId, labelId) {
-        const { string } = this.tableUtil.entGen()
-        const entity = await this.tableUtil.retrieveEntity(
-            'Projects',
-            'Default',
-            projectId,
-        )
-        let labels = entity.Labels ? entity.Labels._.split("") : []
-        labels.push(labelId)
-        const updatedEntity = {
-            ...pick(entity, 'PartitionKey', 'RowKey'),
-            Labels: string(labels.join('')),
-        }
-        const result = await this.tableUtil.updateEntity('Projects', updatedEntity, true)
-        return result
     }
 
     /**

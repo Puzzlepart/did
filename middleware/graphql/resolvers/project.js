@@ -22,6 +22,7 @@ const typeDef = `
     description: String
     icon: String
     customerKey: String
+    labels: [String]
   }
   
   extend type Query {
@@ -30,22 +31,12 @@ const typeDef = `
 
   extend type Mutation {
     createProject(project: ProjectInput!): BaseResult
-    addLabelToProject(projectId: String!, labelId: String!): BaseResult
   }
 `
 
 async function createProject(_obj, variables, ctx) {
   try {
     await ctx.services.storage.createProject(variables.project, ctx.user.id)
-    return { success: true, error: null }
-  } catch (error) {
-    return { success: false, error: omit(error, 'requestId') }
-  }
-}
-
-async function addLabelToProject(_obj, variables, ctx) {
-  try {
-    await ctx.services.storage.addLabelToProject(variables.projectId, variables.labelId)
     return { success: true, error: null }
   } catch (error) {
     return { success: false, error: omit(error, 'requestId') }
@@ -69,7 +60,7 @@ async function projects(_obj, variables, ctx) {
 module.exports = {
   resolvers: {
     Query: { projects },
-    Mutation: { createProject, addLabelToProject }
+    Mutation: { createProject }
   },
   typeDef
 }

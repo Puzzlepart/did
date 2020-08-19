@@ -8,6 +8,7 @@ const typeDef = `
         color: String!
         icon: String
     }
+    
     input LabelInput  {
         id: String
         name: String!

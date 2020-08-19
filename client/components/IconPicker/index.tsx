@@ -5,15 +5,11 @@ import { useTranslation } from 'react-i18next'
 import { humanize } from 'underscore.string'
 import { getIcons } from '../../common/icons'
 
-/**
- * @category IconPicker
- */
-export type IIconPickerProps = IDropdownProps
 
 /**
  * @category IconPicker
  */
-export const IconPicker = (props: IIconPickerProps) => {
+export const IconPicker = (props: IDropdownProps) => {
     const { t } = useTranslation('common')
 
     function onRenderOption(option: IDropdownOption): JSX.Element {
@@ -34,8 +30,8 @@ export const IconPicker = (props: IIconPickerProps) => {
         )
     };
 
-    const options = React.useMemo(() => getIcons(100).map(key => ({ key, text: humanize(key) })), [])
-
+    const options = React.useMemo(() => [props.defaultSelectedKey.toString(), ...getIcons(100)].map(key => ({ key, text: humanize(key) })), [props.defaultSelectedKey])
+    
     return (
         <Dropdown
             className={props.className}
@@ -43,7 +39,7 @@ export const IconPicker = (props: IIconPickerProps) => {
             label={t('iconLabel')}
             title={t('iconLabel')}
             options={options}
-            defaultValue={props.defaultValue}
+            defaultSelectedKey={props.defaultSelectedKey}
             onChange={props.onChange}
             onRenderTitle={onRenderTitle}
             onRenderOption={onRenderOption} />

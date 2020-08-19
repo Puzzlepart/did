@@ -1,0 +1,17 @@
+.root {
+  position: inherit;
+
+  .label {
+    margin: 0 0 8px 0;
+  }
+
+  .toggleIcon {
+    float: right;
+    cursor: pointer;
+  }
+
+  .noneSelected {
+    font-size: 12px;
+    color: #586069;
+  }
+}
