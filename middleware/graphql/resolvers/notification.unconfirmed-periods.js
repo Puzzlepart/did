@@ -1,11 +1,12 @@
 const utils = require('../../../utils')
-const { unique, difference, filter, find, first, last } = require('underscore')
+const { unique, difference, filter, find, first, last, union } = require('underscore')
 const format = require('string-format')
 const { getPeriods } = require('./timesheet.utils')
 
 module.exports = async function ({ template, ctx }) {
     const currentWeek = utils.getWeek();
     const periods = [];
+    const unconfirmedPeriods = []
 
     for (let i = 5; i > 0; i--) {
         periods.push(
@@ -22,12 +23,14 @@ module.exports = async function ({ template, ctx }) {
         year: utils.getYear(),
     })
 
-    const ucPeriods = filter(
-        periods,
-        period => !find(confirmedPeriods, cp => cp.periodId === period.id)
-    )
 
-    return ucPeriods.map(period => ({
+    periods.forEach(period => {
+        if(!find(confirmedPeriods, cp =>  cp.periodId === period.id)) {
+            unconfirmedPeriods.push(period)
+        }
+    })
+
+    return unconfirmedPeriods.map(period => ({
         id: `unconfirmed_period_${period.id}`,
         type: 0,
         severity: 2,

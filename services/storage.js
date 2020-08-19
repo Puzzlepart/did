@@ -351,7 +351,7 @@ class StorageService {
             const q = this.tableUtil.query()
             const filter = [
                 ['PartitionKey', resourceId, q.string, q.equal],
-                ['Year', year, q.int, q.equal],
+                ['YearNumber', year, q.int, q.equal],
             ]
             const query = this.tableUtil.createQuery(1000, undefined, filter)
             let result = await this.tableUtil.queryTableAll(
