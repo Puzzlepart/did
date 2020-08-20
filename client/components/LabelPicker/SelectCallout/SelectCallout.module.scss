@@ -1,0 +1,30 @@
+.root {
+  padding: 0;
+  width: 280px;
+
+  .searchBox,
+  .searchBox * {
+    border: none !important;
+    outline: none !important;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      padding: 12px;
+      border-bottom: 1px solid #eaecef;
+      display: flex;
+
+      .itemContainer {
+        display: flex;
+
+        .itemCheckbox {
+          margin: 0 10px 0 0;
+        }
+      }
+    }
+  }
+}
