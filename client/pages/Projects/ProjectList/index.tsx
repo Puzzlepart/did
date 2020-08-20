@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { withDefaultProps } from 'with-default-props'
 import columns from './columns'
-import { IProjectListProps } from './IProjectListProps'
+import { IProjectListProps } from './types'
 
 /**
  * @category ProjectList
@@ -23,7 +23,7 @@ const ProjectList = (props: IProjectListProps) => {
         <List
             {...props}
             items={items}
-            columns={columns(props.hideColumns, t)}
+            columns={columns(props, t)}
             groups={props.groups}
             selection={props.selection}
             commandBar={{

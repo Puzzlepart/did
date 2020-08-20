@@ -16,18 +16,17 @@ export const SearchProject = (props: ISearchProjectProps) => {
     })
 
     const searchData: ISuggestionItem<IProject>[] = data ? data.projects.map(project => ({
-        key: project.key,
+        key: project.id,
         displayValue: `${project.name} (${project.id})`,
-        searchValue: [project.key, project.name, project.customerKey, project.customer.key].join(' '),
+        searchValue: [project.id, project.name, project.customerKey, project.customer.key].join(' '),
         data: project,
     })) : []
-
 
     return (
         <Autocomplete<IProject>
             {...props}
             disabled={loading}
-            items={searchData}
+            items={searchData}  
             width={props.width}
             placeholder={props.placeholder}
             onClear={() => props.onSelected(null)}
