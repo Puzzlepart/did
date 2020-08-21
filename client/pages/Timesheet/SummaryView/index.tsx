@@ -15,6 +15,11 @@ import { TimesheetScope } from '../TimesheetScope'
 import styles from './SummaryView.module.scss'
 import { isMobile } from 'react-device-detect'
 
+/**
+ * Creates columns from scope
+ *  
+ * @param {TimesheetScope} scope Timesheet scope
+ */
 function createColumns(scope: TimesheetScope) {
     const onRender = (row: any, _index: number, col: IColumn) => (
         <DurationColumn row={row} column={col} />
@@ -55,6 +60,12 @@ function createColumns(scope: TimesheetScope) {
     ]
 }
 
+/**
+ * Generate rows
+ * 
+ * @param {any[]} events Events
+ * @param {IColumn[]} columns Columns
+ */
 function generateRows(events: any[], columns: IColumn[]) {
     const projects = unique(events.map(e => e.project), (p: IProject) => p.id)
     return projects.map(project => {
@@ -70,6 +81,13 @@ function generateRows(events: any[], columns: IColumn[]) {
     })
 }
 
+/**
+ * Generate total row
+ * 
+ * @param {any[]} events Events
+ * @param {IColumn[]} columns Columns
+ * @param {string} label Label
+ */
 function generateTotalRow(events: any[], columns: IColumn[], label: string) {
     return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
         const sum = [...events]

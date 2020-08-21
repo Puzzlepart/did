@@ -3,7 +3,7 @@ import { value as value } from 'helpers'
 import { ITimeEntry } from 'interfaces/ITimeEntry'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from 'recharts'
+import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis, Label } from 'recharts'
 import _ from 'underscore'
 import { TimesheetContext } from '../TimesheetContext'
 import styles from './AllocationView.module.scss'
@@ -21,11 +21,8 @@ export const GetAllocation = (entries: ITimeEntry[], exp: string): Array<{ name:
         const name = value(entry, exp, null)
         if (name) {
             const item = _.find(_items, i => i.name === name)
-            if (item) {
-                item.hours += entry.duration
-            } else {
-                _items.push({ name, hours: entry.duration })
-            }
+            if (item) item.hours += entry.duration
+            else _items.push({ name, hours: entry.duration })
         }
         return _items
     }, [])
@@ -65,7 +62,7 @@ export const AllocationView = (): JSX.Element => {
                             margin={{ left: -25 }}>
                             <XAxis dataKey='name' />
                             <YAxis />
-                            <Tooltip wrapperStyle={{ fontSize: 12 }}  />
+                            <Tooltip wrapperStyle={{ fontSize: 12 }} />
                             <Legend wrapperStyle={{ fontSize: 12 }} />
                             <Bar dataKey='hours' name={t('hours', { ns: 'common' }) as string} fill='#cf6000' />
                         </BarChart>
