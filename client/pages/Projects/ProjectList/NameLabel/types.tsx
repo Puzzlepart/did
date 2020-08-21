@@ -3,5 +3,6 @@ import { IProject } from 'interfaces'
 
 export interface INameLabelProps {
     project: IProject;
-    actions: IContextualMenuItem;
+    actions: IContextualMenuItem[];
+    renderLink?: boolean;
 }

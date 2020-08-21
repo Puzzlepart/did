@@ -46,7 +46,8 @@ export default (props: IProjectListProps, t: TFunction): IColumn[] => ([
         (project: IProject) => (
             <NameLabel
                 project={project}
-                actions={[{ key: 'edit', name: t('editLabel', {ns: 'common'}), onClick: () => props.onEdit(project) }]} />
+                renderLink={props.renderLink}
+                actions={[{ key: 'edit', name: t('editLabel', { ns: 'common' }), onClick: () => props.onEdit(project) }]} />
         ),
     ),
     col(
