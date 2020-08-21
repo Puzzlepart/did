@@ -63,12 +63,11 @@ export const AllocationView = (): JSX.Element => {
                             height={dimensions.height}
                             data={data}
                             margin={{ left: -25 }}>
-                            <CartesianGrid strokeDasharray='3 3' />
                             <XAxis dataKey='name' />
                             <YAxis />
-                            <Tooltip />
-                            <Legend />
-                            <Bar dataKey='hours' name={t('hours', { ns: 'common' }) as string} fill='#444' />
+                            <Tooltip wrapperStyle={{ fontSize: 12 }}  />
+                            <Legend wrapperStyle={{ fontSize: 12 }} />
+                            <Bar dataKey='hours' name={t('hours', { ns: 'common' }) as string} fill='#cf6000' />
                         </BarChart>
                     </div>
                 )
