@@ -1,9 +1,9 @@
 import { ScrollablePaneWrapper } from 'components/ScrollablePaneWrapper'
-import {CheckboxVisibility, ConstrainMode, DetailsListLayoutMode, IColumn, IDetailsGroupDividerProps, IDetailsHeaderProps, Selection, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
+import { CheckboxVisibility, ConstrainMode, DetailsListLayoutMode, IColumn, IDetailsGroupDividerProps, IDetailsHeaderProps, Selection, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { GroupHeader } from 'office-ui-fabric-react/lib/GroupedList'
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox'
 import { ShimmeredDetailsList } from 'office-ui-fabric-react/lib/ShimmeredDetailsList'
-import React,{useReducer} from 'react'
+import React, { useReducer } from 'react'
 import { useEffect } from 'react'
 import { delay } from 'utils'
 import { withDefaultProps } from 'with-default-props'
@@ -64,7 +64,8 @@ const List = (props: IListProps) => {
         <div style={{ marginBottom: 25 }} hidden={props.hidden}>
             <ScrollablePaneWrapper condition={!!props.height} height={props.height}>
                 <ShimmeredDetailsList
-                    setKey={'list_selection'}
+                    getKey={(_item, index) => `list_item_${index}`}
+                    setKey={'list'}
                     enableShimmer={props.enableShimmer}
                     isPlaceholderData={props.enableShimmer}
                     selection={selection}
