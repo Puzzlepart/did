@@ -19,7 +19,7 @@ class EventMatching {
      * @param {*} customer 
      * @param {*} projectKey 
      */
-    findProjectSuggestion(projectKey) {
+    findProjectSuggestion(customer, projectKey) {
         try {
             const customerProjects = this.projects.filter(p => p.customerKey === customer.key)
             const projectKeys = customerProjects.map(p => p.id.split(' ')[1])
@@ -29,6 +29,7 @@ class EventMatching {
             const suggestion = customerProjects.filter(p => p.id.split(' ')[1] === target.toUpperCase())[0]
             return suggestion
         } catch (error) {
+            console.log(error)
             return null
         }
     }
@@ -102,7 +103,6 @@ class EventMatching {
         }
 
         if (event.customer && !event.project) event.suggestedProject = this.findProjectSuggestion(
-            this.projects,
             event.customer,
             projectKey
         )
