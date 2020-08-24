@@ -29,7 +29,6 @@ class EventMatching {
             const suggestion = customerProjects.filter(p => p.id.split(' ')[1] === target.toUpperCase())[0]
             return suggestion
         } catch (error) {
-            console.log(error)
             return null
         }
     }
