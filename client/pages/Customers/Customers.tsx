@@ -5,8 +5,8 @@ import { ICustomer } from 'interfaces'
 import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
-import { CreateCustomerForm } from 'pages/Customers/CreateCustomerForm'
-import * as React from 'react'
+import { CustomerForm } from 'pages/Customers/CustomerForm'
+import React, { useContext, useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { contains, find } from 'underscore'
@@ -20,14 +20,14 @@ import { manageCustomers } from 'config/security/permissions'
  */
 export const Customers = () => {
     const { t } = useTranslation(['common', 'ADMINS'])
-    const { user } = React.useContext(AppContext)
+    const { user } = useContext(AppContext)
     const params = useParams<{ key: string }>()
-    const [selected, setSelected] = React.useState<ICustomer>(null)
+    const [selected, setSelected] = useState<ICustomer>(null)
     const { loading, error, data } = useQuery<IGetCustomersData>(GET_CUSTOMERS, { fetchPolicy: 'cache-first' })
 
     const customers = value<ICustomer[]>(data, 'customers', [])
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (!selected && params.key) {
             const _selected = find(customers, p => p.key === params.key)
             setSelected(_selected)
@@ -61,7 +61,7 @@ export const Customers = () => {
                     itemKey='new'
                     headerText={t('createNewText')}
                     itemIcon='AddTo'>
-                    <CreateCustomerForm />
+                    <CustomerForm />
                 </PivotItem>
             )}
         </Pivot >
