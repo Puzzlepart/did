@@ -48,7 +48,7 @@
     "exportTimeEntriesLabel": "Export time entries to Excel",
     "keyDescription": "A unique identifier for the project. Keep it short, maximum 8 characters.",
     "nameFormValidationText": "Name should be at least 2 characters long.",
-    "keyFormValidationText": "Project key should be between 3 and 8 characters long, and all uppercase.",
+    "keyFormValidationText": "Project key should be between 2 and 8 characters long, and all uppercase.",
     "createSuccess": "The project **{0}** was succesfully created."
   },
   "customers": {
@@ -66,6 +66,7 @@
     "users": "Users",
     "summary": "Summary",
     "labels": "Labels",
+    "filterLabels": "Filter labels...",
     "rolesPermissions": "Roles and permissions",
     "addNewUser": "Add new",
     "editUser": "Edit",
@@ -84,6 +85,7 @@
     "noEntriesText": "There's no confirmed time entries at this time."
   },
   "common": {
+    "noneSelectedMessage": "None selected yet",
     "hoursCurrentMonth": "Hours this month",
     "hoursPrevMonth": "Hours last month",
     "hoursCurrentYear": "Hours this year",

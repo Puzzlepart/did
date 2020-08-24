@@ -6,17 +6,18 @@ import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { generateColumn as col } from 'utils/generateColumn'
-
+import { IProjectListProps } from './types'
+import { NameLabel } from './NameLabel'
 
 /**
  * Generate column definitions based on parameters specified
  * 
- * @param {string[]} hideColumns Columns to hide
+ * @param {IProjectListProps} props Props
  * @param {TFunction} t Translate function
  * 
  * @category ProjectList
  */
-export default (hideColumns: string[], t: TFunction): IColumn[] => ([
+export default (props: IProjectListProps, t: TFunction): IColumn[] => ([
     col(
         'icon',
         '',
@@ -42,7 +43,12 @@ export default (hideColumns: string[], t: TFunction): IColumn[] => ([
         'name',
         t('nameLabel', { ns: 'common' }),
         { maxWidth: 220 },
-        (project: IProject) => <Link to={`/projects/${project.id}`}>{project.name}</Link>
+        (project: IProject) => (
+            <NameLabel
+                project={project}
+                renderLink={props.renderLink}
+                actions={[{ key: 'edit', name: t('editLabel', { ns: 'common' }), onClick: () => props.onEdit(project) }]} />
+        ),
     ),
     col(
         'customer',
@@ -60,5 +66,5 @@ export default (hideColumns: string[], t: TFunction): IColumn[] => ([
         (project: IProject) => project.labels.map((label, idx) => (
             <EntityLabel key={idx} label={label} />
         )),
-    )
-].filter(col => hideColumns.indexOf(col.key) === -1))
+    ),
+].filter(col => props.hideColumns.indexOf(col.key) === -1))

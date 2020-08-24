@@ -1,4 +1,4 @@
-const { find, omit } = require('underscore')
+const { first, find, omit } = require('underscore')
 const { formatDate, getMonthIndex, getWeek } = require('../../../utils')
 const EventMatching = require('./timesheet.matching')
 const { connectEntities } = require('./project.utils')
@@ -95,7 +95,7 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat }, { use
             period.events = timeentries.map(entry => ({
                 ...entry,
                 project: find(projects, p => p.id === entry.projectId),
-                customer: find(customers, c => c.id === entry.customerId),
+                customer: find(customers, c => c.key === first(entry.projectId.split(' '))),
             }))
             period.matchedEvents = period.events
             period.confirmed = true

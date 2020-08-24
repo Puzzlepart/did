@@ -48,7 +48,7 @@
     "exportTimeEntriesLabel": "Eksporter timeoppføringer til Excel",
     "keyDescription": "En unik identifikator for prosjektet. Holdt det kort, maks 8 tegn.",
     "nameFormValidationText": "Prosjektnavnet må være minst 2 tegn langt.",
-    "keyFormValidationText": "Prosjektnøkkelen må være mellom 3 og 8 tegn lang, og bare store bokstaver.",
+    "keyFormValidationText": "Prosjektnøkkelen må være mellom 2 og 8 tegn lang, og bare store bokstaver.",
     "createSuccess": "Prosjektet **{0}** ble opprettet."
   },
   "customers": {
@@ -66,6 +66,7 @@
     "users": "Brukere",
     "summary": "Sammendrag",
     "labels": "Merkelapper",
+    "filterLabels": "Filtrer merkelapper...",
     "rolesPermissions": "Roller og tilganger",
     "addNewUser": "Legg til ny",
     "editUser": "Rediger",
@@ -84,6 +85,7 @@
     "noEntriesText": "Det er ingen bekreftede tidsoppføringer på dette tidspunktet."
   },
   "common": {
+    "noneSelectedMessage": "Ingen valgt enda",
     "hoursCurrentMonth": "Timer denne måneden",
     "hoursPrevMonth": "Timer forrige måned",
     "hoursCurrentYear": "Timer i år",

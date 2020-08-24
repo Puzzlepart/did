@@ -1,32 +1,28 @@
 import { useMutation } from '@apollo/react-hooks'
-import { IconPicker, SearchCustomer, useMessage, UserMessage } from 'components'
+import { IconPicker, UserMessage } from 'components'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
-import { Label } from 'office-ui-fabric-react/lib/Label'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import * as React from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import format from 'string-format'
-import styles from './CreateProjectForm.module.scss'
-import CREATE_PROJECT from './CREATE_PROJECT'
-import { ICreateProjectFormModel } from './ICreateProjectFormModel'
-import { ICreateProjectFormValidation } from './ICreateProjectFormValidation'
-
-const initialModel: ICreateProjectFormModel = { key: '', name: '', customerKey: '', description: '', icon: 'Page' }
+import styles from './CreateCustomerForm.module.scss'
+import CREATE_CUSTOMER from './CREATE_CUSTOMER'
+import { ICustomerFormProps,ICustomerFormModel,ICustomerFormValidation } from './types'
 
 /**
- * @category Projects
+ * @category Customers
  */
-export const CreateProjectForm = () => {
-    const { t } = useTranslation(['projects', 'common'])
-    const [validation, setValidation] = React.useState<ICreateProjectFormValidation>({ errors: {}, invalid: true })
-    const [message, setMessage] = useMessage()
-    const [model, setModel] = React.useState<ICreateProjectFormModel>(initialModel)
-    const [addProject, { loading }] = useMutation<any, { project: ICreateProjectFormModel }>(CREATE_PROJECT)
+export const CustomerForm = ({ initialModel = { key: '', name: '', description: '', icon: 'Page' } }: ICustomerFormProps) => {
+    const { t } = useTranslation(['customers', 'common'])
+    const [validation, setValidation] = useState<ICustomerFormValidation>({ errors: {}, invalid: true })
+    const [message, setMessage] = useState<{ text: string; type: MessageBarType }>(null)
+    const [model, setModel] = useState<ICustomerFormModel>(initialModel)
+    const [addCustomer, { loading }] = useMutation(CREATE_CUSTOMER)
 
-    const validateForm = (): ICreateProjectFormValidation => {
+    const validateForm = (): ICustomerFormValidation => {
         const errors: { [key: string]: string } = {}
-        if (!model.customerKey) errors.customerKey = ''
         if (model.name.length < 2) errors.name = t('nameFormValidationText')
         if (!(/(^[A-ZÆØÅ0-9]{3,8}$)/gm).test(model.key)) errors.key = t('keyFormValidationText')
         return { errors, invalid: Object.keys(errors).length > 0 }
@@ -39,32 +35,23 @@ export const CreateProjectForm = () => {
             return
         }
         setValidation({ errors: {}, invalid: false })
-        const { data: { result } } = await addProject({ variables: { project: model } })
+        const { data: { result } } = await addCustomer({ variables: { customer: model } })
         if (result.success) {
             setMessage({ text: format(t('createSuccess'), model.name), type: MessageBarType.success })
         } else {
             setMessage({ text: result.error.message, type: MessageBarType.error })
         }
         setModel(initialModel)
+        window.setTimeout(() => setMessage(null), 5000)
     }
 
     return (
         <div className={styles.root}>
-            {message && <UserMessage {...message} containerStyle={{ marginTop: 12, marginBottom: 12, width: 450 }} />}
-            <Label>{t('customer', { ns: 'common' })}</Label>
-            <SearchCustomer
-                required={true}
-                className={styles.inputField}
-                placeholder={t('searchPlaceholder')}
-                onSelected={customer => setModel({
-                    ...model,
-                    customerKey: customer && customer.key,
-                })} />
+            {message && <UserMessage containerStyle={{ marginTop: 12, marginBottom: 12, width: 450 }} text={message.text} type={message.type} />}
             <TextField
                 className={styles.inputField}
                 label={t('keyLabel', { ns: 'common' })}
                 description={t('keyDescription')}
-                title={t('keyDescription')}
                 required={true}
                 errorMessage={validation.errors.key}
                 onChange={(_event, key) => setModel({ ...model, key })}
@@ -85,8 +72,8 @@ export const CreateProjectForm = () => {
                 value={model.description} />
             <IconPicker
                 className={styles.iconPicker}
+                defaultSelectedKey={model.icon}
                 options={undefined}
-                defaultSelectedKey={initialModel.icon}
                 onChange={(_event, opt) => setModel({ ...model, icon: opt.key as string })} />
             <PrimaryButton
                 styles={{ root: { marginTop: 16 } }}
