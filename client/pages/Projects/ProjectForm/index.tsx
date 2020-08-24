@@ -35,7 +35,7 @@ export const ProjectForm = ({ edit, onSubmitted }: IProjectFormProps) => {
         const errors: { [key: string]: string } = {}
         if (!model.customerKey) errors.customerKey = ''
         if (model.name.length < 2) errors.name = t('nameFormValidationText')
-        if (!(/(^[A-ZÆØÅ0-9]{3,8}$)/gm).test(model.key)) errors.key = t('keyFormValidationText')
+        if (!(/(^[A-ZÆØÅ0-9]{2,8}$)/gm).test(model.key)) errors.key = t('keyFormValidationText')
         return { errors, invalid: Object.keys(errors).length > 0 }
     }
 

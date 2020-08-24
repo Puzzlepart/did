@@ -3,11 +3,12 @@
   flex-direction: row;
 
   .iconContainer {
-    align-self: center;
+    padding: 6px 0 0 0;
+    align-self: flex-start;
   }
 
   .content {
-    padding: 0 0 0 5px;
+    padding: 0 0 0 8px;
 
     .title {
       font-size: 12px;
@@ -15,6 +16,10 @@
 
     .description {
       font-size: 10px;
+    }
+
+    .labels {
+      margin: 8px 0 0 0;
     }
   }
 }

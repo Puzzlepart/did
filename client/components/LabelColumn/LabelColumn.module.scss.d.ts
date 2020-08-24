@@ -4,6 +4,7 @@ interface CssExports {
   'content': string;
   'description': string;
   'iconContainer': string;
+  'labels': string;
   'root': string;
   'title': string;
 }
