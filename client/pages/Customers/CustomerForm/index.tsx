@@ -9,21 +9,19 @@ import { useTranslation } from 'react-i18next'
 import format from 'string-format'
 import styles from './CreateCustomerForm.module.scss'
 import CREATE_CUSTOMER from './CREATE_CUSTOMER'
-import { ICreateCustomerFormModel } from './ICreateCustomerFormModel'
-import { ICreateCustomerFormProps } from './ICreateCustomerFormProps'
-import { ICreateCustomerFormValidation } from './ICreateCustomerFormValidation'
+import { ICustomerFormProps,ICustomerFormModel,ICustomerFormValidation } from './types'
 
 /**
  * @category Customers
  */
-export const CreateCustomerForm = ({ initialModel = { key: '', name: '', description: '', icon: 'Page' } }: ICreateCustomerFormProps) => {
+export const CustomerForm = ({ initialModel = { key: '', name: '', description: '', icon: 'Page' } }: ICustomerFormProps) => {
     const { t } = useTranslation(['customers', 'common'])
-    const [validation, setValidation] = useState<ICreateCustomerFormValidation>({ errors: {}, invalid: true })
+    const [validation, setValidation] = useState<ICustomerFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useState<{ text: string; type: MessageBarType }>(null)
-    const [model, setModel] = useState<ICreateCustomerFormModel>(initialModel)
+    const [model, setModel] = useState<ICustomerFormModel>(initialModel)
     const [addCustomer, { loading }] = useMutation(CREATE_CUSTOMER)
 
-    const validateForm = (): ICreateCustomerFormValidation => {
+    const validateForm = (): ICustomerFormValidation => {
         const errors: { [key: string]: string } = {}
         if (model.name.length < 2) errors.name = t('nameFormValidationText')
         if (!(/(^[A-ZÆØÅ0-9]{3,8}$)/gm).test(model.key)) errors.key = t('keyFormValidationText')
@@ -74,6 +72,7 @@ export const CreateCustomerForm = ({ initialModel = { key: '', name: '', descrip
                 value={model.description} />
             <IconPicker
                 className={styles.iconPicker}
+                defaultSelectedKey={model.icon}
                 options={undefined}
                 onChange={(_event, opt) => setModel({ ...model, icon: opt.key as string })} />
             <PrimaryButton

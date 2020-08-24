@@ -30,8 +30,11 @@ export const IconPicker = (props: IDropdownProps) => {
         )
     };
 
-    const options = React.useMemo(() => [props.defaultSelectedKey.toString(), ...getIcons(100)].map(key => ({ key, text: humanize(key) })), [props.defaultSelectedKey])
-    
+    const options = React.useMemo(() => [
+        props.defaultSelectedKey && props.defaultSelectedKey.toString(),
+        ...getIcons(200)
+    ].filter(k => k).map(key => ({ key, text: humanize(key) })), [props.defaultSelectedKey])
+
     return (
         <Dropdown
             className={props.className}
