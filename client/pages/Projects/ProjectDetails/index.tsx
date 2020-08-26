@@ -52,7 +52,8 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                     </div>
                     <div className={styles.actions}>
                         <DefaultButton
-                            text='Edit project'
+                            text={t('editLabel')}
+                            iconProps={{ iconName: 'PageEdit' }}
                             hidden={!contains(user.role.permissions, manageProjects)}
                             onClick={() => setShowEditPanel(true)} />
                     </div>
