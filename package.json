@@ -17,7 +17,7 @@
         "lint": "eslint --ext .ts,.tsx ./client --color --fix",
         "makeDoc": "rimraf ./doc && typedoc --options typedoc.json",
         "debug": "nodemon --inspect ./bin/www",
-        "test": "mocha tests --exit"
+        "tests": "mocha tests --exit"
     },
     "dependencies": {
         "@apollo/react-common": "3.1.3",
