@@ -12,7 +12,8 @@ import { useParams } from 'react-router-dom'
 import { contains, find } from 'underscore'
 import { CustomerDetails } from './CustomerDetails'
 import { CustomerList } from './CustomerList'
-import GET_CUSTOMERS, { IGetCustomersData } from './GET_CUSTOMERS'
+import GET_CUSTOMERS from './GET_CUSTOMERS'
+import { IGetCustomersData } from './types'
 import { manageCustomers } from 'config/security/permissions'
 
 /**
@@ -23,7 +24,12 @@ export const Customers = () => {
     const { user } = useContext(AppContext)
     const params = useParams<{ key: string }>()
     const [selected, setSelected] = useState<ICustomer>(null)
-    const { loading, error, data } = useQuery<IGetCustomersData>(GET_CUSTOMERS, { fetchPolicy: 'cache-first' })
+    const { loading, error, data } = useQuery<IGetCustomersData>(
+        GET_CUSTOMERS,
+        {
+            variables: { sortBy: 'name' },
+            fetchPolicy: 'cache-first'
+        })
 
     const customers = value<ICustomer[]>(data, 'customers', [])
 

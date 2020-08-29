@@ -12,6 +12,7 @@ const { typeDef: Role } = require('./resolvers/role')
 const { typeDef: Notification } = require('./resolvers/notification')
 const { typeDef: ApiToken } = require('./resolvers/apiToken')
 const { StorageService, GraphService, SubscriptionService } = require('../../services')
+const { filter } = require('underscore')
 
 const Query = `
   type Error {
@@ -40,30 +41,34 @@ const Query = `
   }
 `
 
-
-const schema = makeExecutableSchema({
-  typeDefs: [
+/**
+ * Get schema
+ * 
+ * @param {*} isLoggedIn Is the user logged in
+ */
+const getSchema = (isLoggedIn) => makeExecutableSchema({
+  typeDefs: filter([
     Query,
     Customer,
     Project,
-    Timesheet,
     TimeEntry,
-    User,
-    OutlookCategory,
     Subscription,
     Label,
-    Role,
-    Notification,
-    ApiToken,
-  ],
-  resolvers: require('./resolvers'),
+    isLoggedIn && OutlookCategory,
+    isLoggedIn && User,
+    isLoggedIn && Role,
+    isLoggedIn && ApiToken,
+    isLoggedIn && Notification,
+    isLoggedIn && Timesheet,
+  ], t => t),
+  resolvers: require('./resolvers')(isLoggedIn),
   resolverValidationOptions: {
     requireResolversForResolveType: false
   },
 })
 
 module.exports = graphql(req => ({
-  schema,
+  schema: getSchema(!!req.user.tenantId),
   rootValue: global,
   graphiql: process.env.GRAPHIQL_ENABLED == '1',
   pretty: req.app.get('env') === 'development',

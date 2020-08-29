@@ -21,7 +21,7 @@ const typeDef = `
   }
   
   extend type Query {
-    customers: [Customer!]!
+    customers(sortBy: String): [Customer!]!
   }  
 
   extend type Mutation {	
@@ -31,8 +31,9 @@ const typeDef = `
 `
 
 
-async function customers(_obj, _variables, ctx) {
-  return await ctx.services.storage.getCustomers()
+async function customers(_obj, variables, ctx) {
+  console.log(variables)
+  return await ctx.services.storage.getCustomers({ sortBy: variables.sortBy })
 }
 
 async function createOrUpdateCustomer(_obj, variables, ctx) {

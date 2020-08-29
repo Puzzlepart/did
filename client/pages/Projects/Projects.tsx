@@ -15,8 +15,9 @@ import { useHistory, useParams } from 'react-router-dom'
 import { contains, find } from 'underscore'
 import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
-import { GET_PROJECTS, IGetProjectsData, IProjectsParams } from './types'
+import { IGetProjectsData, IProjectsParams } from './types'
 import { Panel } from 'office-ui-fabric-react/lib/Panel'
+import GET_PROJECTS from './GET_PROJECTS'
 
 /**
  * @category Projects
@@ -28,7 +29,12 @@ export const Projects = () => {
     const params = useParams<IProjectsParams>()
     const [selected, setSelected] = useState<IProject>(null)
     const [edit, setEdit] = useState<IProject>(null)
-    const { loading, error, data,refetch } = useQuery<IGetProjectsData>(GET_PROJECTS, { variables: { sortBy: 'name' }, fetchPolicy: 'cache-first' })
+    const { loading, error, data, refetch } = useQuery<IGetProjectsData>(
+        GET_PROJECTS,
+        {
+            variables: { sortBy: 'name' },
+            fetchPolicy: 'cache-first'
+        })
 
     const outlookCategories = value<IOutlookCategory[]>(data, 'outlookCategories', [])
 
@@ -85,12 +91,12 @@ export const Projects = () => {
                                     isOpen={true}
                                     headerText={edit.name}
                                     onDismiss={() => setEdit(null)}>
-                                    <ProjectForm 
-                                    edit={edit} 
-                                    onSubmitted={() => {
-                                        setEdit(null)
-                                        refetch()
-                                    }} />
+                                    <ProjectForm
+                                        edit={edit}
+                                        onSubmitted={() => {
+                                            setEdit(null)
+                                            refetch()
+                                        }} />
                                 </Panel>
                             )}
                         </>

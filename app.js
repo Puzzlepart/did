@@ -72,9 +72,7 @@ class App {
         const isAuthenticated = !!req.user || req.isAuthenticated()
         if (!isAuthenticated) {
             if (req.token) {
-                console.log(req.token)
                 const sub = await SubscriptionService.findSubscriptionWithToken(req.token)
-                console.log(sub)
                 if (!sub) res.redirect('/')
                 else req.user = { subscription: sub }
             } else res.redirect('/')

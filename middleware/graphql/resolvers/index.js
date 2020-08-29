@@ -10,16 +10,15 @@ const { resolvers: notificationResolvers } = require('./notification')
 const { resolvers: addApiTokenResolvers } = require('./apiToken')
 const merge = require('lodash').merge
 
-
-module.exports = merge(
+module.exports = (isLoggedIn) => merge(
     customerResolvers,
     projectResolvers,
-    timesheetResolvers,
     timeentryResolvers,
-    userResolvers,
-    outlookCategoryResolvers,
     labelResolvers,
-    roleResolvers,
-    notificationResolvers,
-    addApiTokenResolvers
+    isLoggedIn && outlookCategoryResolvers,
+    isLoggedIn && userResolvers,
+    isLoggedIn && roleResolvers,
+    isLoggedIn && addApiTokenResolvers,
+    isLoggedIn && timesheetResolvers,
+    isLoggedIn && notificationResolvers,
 )

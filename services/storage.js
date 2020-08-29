@@ -91,10 +91,13 @@ class StorageService {
 
     /**
      * Get customers from table Customers
+     * 
+     * @param options Options
      */
-    async getCustomers() {
+    async getCustomers(options = {}) {
         const query = this.tableUtil.createQuery(1000)
-        const { entries } = await this.tableUtil.queryTable('Customers', query, { RowKey: 'key' })
+        let { entries } = await this.tableUtil.queryTable('Customers', query, { RowKey: 'key' })
+        if (options.sortBy) entries = arraySort(entries, options.sortBy)
         return entries
     }
 
@@ -148,8 +151,7 @@ class StorageService {
      * @param customerKey Customer key
      * @param options Options
      */
-    async getProjects(customerKey, options) {
-        options = options || {}
+    async getProjects(customerKey, options = {}) {
         const q = this.tableUtil.query()
         const filter = [['PartitionKey', customerKey, q.string, q.equal]]
         const query = this.tableUtil.createQuery(1000, undefined, filter)
