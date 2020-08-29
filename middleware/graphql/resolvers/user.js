@@ -23,7 +23,6 @@ const typeDef = `
     }  
 
     extend type Mutation {
-        updateUser(user: UserInput!): BaseResult!
         addUser(user: UserInput!): BaseResult!
     }
 `
@@ -58,18 +57,9 @@ async function currentUser(_obj, _variables, ctx) {
     }
 }
 
-async function addUser(_obj, variables, ctx) {
+async function addOrUpdateUser(_obj, variables, ctx) {
     try {
-        await ctx.services.storage.addUser(variables.user)
-        return { success: true, error: null }
-    } catch (error) {
-        return { success: false, error: _.omit(error, 'requestId') }
-    }
-}
-
-async function updateUser(_obj, variables, ctx) {
-    try {
-        await ctx.services.storage.updateUser(variables.user)
+        await ctx.services.storage.addOrUpdateUser(variables.user)
         return { success: true, error: null }
     } catch (error) {
         return { success: false, error: _.omit(error, 'requestId') }
@@ -79,7 +69,7 @@ async function updateUser(_obj, variables, ctx) {
 module.exports = {
     resolvers: {
         Query: { users, currentUser },
-        Mutation: { addUser, updateUser }
+        Mutation: { addOrUpdateUser }
     },
     typeDef
 }

@@ -8,8 +8,9 @@ import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { omit, find } from 'underscore'
 import validator from 'validator'
-import { IUserFormModalProps, ADD_USER, UPDATE_USER } from './types'
+import { IUserFormModalProps, } from './types'
 import styles from './UserFormModal.module.scss'
+import ADD_OR_UPDATE_USER from './ADD_OR_UPDATE_USER'
 
 /**
  * @category Admin
@@ -21,13 +22,11 @@ export const UserFormModal = (props: IUserFormModalProps) => {
         fullName: '',
         role: find(props.roles, r => r.name === 'User'),
     })
-    const [updateUser] = useMutation(UPDATE_USER)
-    const [addUser] = useMutation(ADD_USER)
+    const [addOrUpdateUser] = useMutation(ADD_OR_UPDATE_USER)
 
     const onSave = async () => {
         const _user = omit({ ...user, role: user.role.name }, '__typename')
-        if (props.user) await updateUser({ variables: { user: _user } })
-        else await addUser({ variables: { user: _user } })
+        await addOrUpdateUser({ variables: { user: _user } })
         props.modal.onDismiss()
     }
 

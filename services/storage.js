@@ -28,11 +28,11 @@ class StorageService {
      * @param label Label data
      * @param createdBy Created by ID
      */
-    async addLabel(label, createdBy) {
+    async addOrUpdateLabel(label, createdBy) {
         const { string } = this.tableUtil.entGen()
         const entity = await this.tableUtil.addEntity(
             'Labels',
-            {
+            omit({
                 PartitionKey: string('Default'),
                 RowKey: string(uuidv4()),
                 Name: string(label.name),
@@ -40,32 +40,9 @@ class StorageService {
                 Color: string(label.color),
                 Icon: string(label.icon),
                 CreatedBy: string(createdBy),
-            }
+            }, ({ _ }) => isBlank(_))
         )
         return entity
-    }
-
-    /**
-     * Update label in table Labels
-     * 
-     * @param label Label data
-     */
-    async updateLabel(label) {
-        const { string } = this.tableUtil.entGen()
-        const entity = {
-            PartitionKey: string('Default'),
-            RowKey: string(label.id),
-        }
-        if (label.name) entity.Name = string(label.name)
-        if (label.description) entity.Description = string(label.description)
-        if (label.color) entity.Color = string(label.color)
-        if (label.icon) entity.Icon = string(label.icon)
-        const result = await this.tableUtil.updateEntity(
-            'Labels',
-            entity,
-            true,
-        )
-        return result
     }
 
     /**
@@ -224,44 +201,24 @@ class StorageService {
     }
 
     /**
-     * Add user to table Users
+     * Add or update user in table Users
      * 
      * @param user The user data
      */
-    async addUser(user) {
+    async addOrUpdateUser(user) {
         const { string } = this.tableUtil.entGen()
-        const entity = await this.tableUtil.addEntity(
+        const entity = await this.tableUtil.updateEntity(
             'Users',
-            {
+            omit({
                 PartitionKey: string('Default'),
                 RowKey: string(user.id),
                 FullName: string(user.fullName),
                 Role: string(user.role),
-            }
+                UserLanguage: string(user.userLanguage),
+            }, ({ _ }) => isBlank(_)),
+            true
         )
         return entity
-    }
-
-    /**
-     * Update user in table Users
-     * 
-     * @param user The user data
-     */
-    async updateUser(user) {
-        const { string } = this.tableUtil.entGen()
-        const entity = {
-            PartitionKey: string('Default'),
-            RowKey: string(user.id),
-        }
-        if (user.fullName) entity.FullName = string(user.fullName)
-        if (user.role) entity.Role = string(user.role)
-        if (user.userLanguage) entity.UserLanguage = string(user.userLanguage)
-        const result = await this.tableUtil.updateEntity(
-            'Users',
-            entity,
-            true,
-        )
-        return result
     }
 
     /**
