@@ -25,7 +25,7 @@ const typeDef = `
   }  
 
   extend type Mutation {	
-    createCustomer(customer: CustomerInput!): BaseResult   
+    createOrUpdateCustomer(customer: CustomerInput!): BaseResult   
     deleteCustomer(key: String!): BaseResult
   }
 `
@@ -35,9 +35,9 @@ async function customers(_obj, _variables, ctx) {
   return await ctx.services.storage.getCustomers()
 }
 
-async function createCustomer(_obj, variables, ctx) {
+async function createOrUpdateCustomer(_obj, variables, ctx) {
   try {
-    await ctx.services.storage.createCustomer(variables.customer, ctx.user.id)
+    await ctx.services.storage.createOrUpdateCustomer(variables.customer, ctx.user.id)
     return { success: true, error: null }
   } catch (error) {
     return { success: false, error: _.omit(error, 'requestId') }
@@ -65,7 +65,7 @@ async function deleteCustomer(_obj, variables, ctx) {
 module.exports = {
   resolvers: {
     Query: { customers },
-    Mutation: { createCustomer, deleteCustomer }
+    Mutation: { createOrUpdateCustomer, deleteCustomer }
   },
   typeDef
 }

@@ -30,13 +30,13 @@ const typeDef = `
   }  
 
   extend type Mutation {
-    createProject(project: ProjectInput!): BaseResult
+    createOrUpdateProject(project: ProjectInput!): BaseResult
   }
 `
 
-async function createProject(_obj, variables, ctx) {
+async function createOrUpdateProject(_obj, variables, ctx) {
   try {
-    await ctx.services.storage.createProject(variables.project, ctx.user.id)
+    await ctx.services.storage.createOrUpdateProject(variables.project, ctx.user.id)
     return { success: true, error: null }
   } catch (error) {
     return { success: false, error: omit(error, 'requestId') }
@@ -60,7 +60,7 @@ async function projects(_obj, variables, ctx) {
 module.exports = {
   resolvers: {
     Query: { projects },
-    Mutation: { createProject }
+    Mutation: { createOrUpdateProject }
   },
   typeDef
 }

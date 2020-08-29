@@ -8,7 +8,7 @@ async function onVerifySignin(_iss, _sub, profile, _accessToken, _refreshToken, 
         log('No oid found. Returning error NO_OID_FOUND.')
         return done(NO_OID_FOUND, null)
     }
-    const subscription = await new SubscriptionService().getSubscription(profile._json.tid)
+    const subscription = await SubscriptionService.getSubscription(profile._json.tid)
     if (!subscription) {
         log('No subscription found for %s', profile._json.tid)
         return done(TENANT_NOT_ENROLLED, null)

@@ -8,18 +8,25 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import format from 'string-format'
 import styles from './CreateCustomerForm.module.scss'
-import CREATE_CUSTOMER from './CREATE_CUSTOMER'
-import { ICustomerFormProps,ICustomerFormModel,ICustomerFormValidation } from './types'
+import CREATE_OR_UPDATE_CUSTOMER from './CREATE_OR_UPDATE_CUSTOMER'
+import { ICustomerFormModel, ICustomerFormValidation } from './types'
+
+const initialModel: ICustomerFormModel = {
+    key: '',
+    name: '',
+    description: '',
+    icon: 'Page',
+}
 
 /**
  * @category Customers
  */
-export const CustomerForm = ({ initialModel = { key: '', name: '', description: '', icon: 'Page' } }: ICustomerFormProps) => {
+export const CustomerForm = () => {
     const { t } = useTranslation(['customers', 'common'])
     const [validation, setValidation] = useState<ICustomerFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useState<{ text: string; type: MessageBarType }>(null)
     const [model, setModel] = useState<ICustomerFormModel>(initialModel)
-    const [addCustomer, { loading }] = useMutation(CREATE_CUSTOMER)
+    const [createOrUpdateCustomer, { loading }] = useMutation(CREATE_OR_UPDATE_CUSTOMER)
 
     const validateForm = (): ICustomerFormValidation => {
         const errors: { [key: string]: string } = {}
@@ -35,7 +42,7 @@ export const CustomerForm = ({ initialModel = { key: '', name: '', description: 
             return
         }
         setValidation({ errors: {}, invalid: false })
-        const { data: { result } } = await addCustomer({ variables: { customer: model } })
+        const { data: { result } } = await createOrUpdateCustomer({ variables: { customer: model } })
         if (result.success) {
             setMessage({ text: format(t('createSuccess'), model.name), type: MessageBarType.success })
         } else {

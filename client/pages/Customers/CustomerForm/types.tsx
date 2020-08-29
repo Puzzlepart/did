@@ -17,10 +17,3 @@ export interface ICustomerFormValidation {
     };
     invalid: boolean;
 }
-
-/**
- * @category Customers
- */
-export interface ICustomerFormProps {
-    initialModel?: ICustomerFormModel;
-}

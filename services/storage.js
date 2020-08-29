@@ -99,21 +99,21 @@ class StorageService {
     }
 
     /**
-     * Create customer in table Customers
+     * Create or update customer in table Customers
      * 
-     * @param customer Customer data
+     * @param customer Customer
      * @param createdBy Created by ID
      */
-    async createCustomer(customer, createdBy) {
+    async createOrUpdateCustomer(customer, createdBy) {
         const { string } = this.tableUtil.entGen()
-        const entity = await this.tableUtil.addEntity(
+        const entity = await this.tableUtil.updateEntity(
             'Customers',
             {
                 PartitionKey: string('Default'),
                 RowKey: string(customer.key.toUpperCase()),
                 Name: string(customer.name),
                 Description: string(customer.description),
-                Icon: string(customer.icon || 'Page'),
+                Icon: string(customer.icon),
                 CreatedBy: string(createdBy),
             }
         )
@@ -167,12 +167,12 @@ class StorageService {
     }
 
     /**
-     * Create project in table Projects
+     * Create or update project in table Projects
      * 
      * @param project Project data
      * @param createdBy Created by ID
      */
-    async createProject(project, createdBy) {
+    async createOrUpdateProject(project, createdBy) {
         const { string } = this.tableUtil.entGen()
         const entity = await this.tableUtil.updateEntity(
             'Projects',
@@ -182,7 +182,7 @@ class StorageService {
                 Id: string([project.customerKey, project.key].join(' ')),
                 Name: string(project.name),
                 Description: string(project.description),
-                Icon: string(project.icon || 'Page'),
+                Icon: string(project.icon),
                 Labels: string(project.labels ? project.labels.join('|') : ''),
                 CreatedBy: string(createdBy),
             }

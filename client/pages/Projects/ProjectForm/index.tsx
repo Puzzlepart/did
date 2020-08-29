@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next'
 import format from 'string-format'
 import { pick } from 'underscore'
 import styles from './CreateProjectForm.module.scss'
-import CREATE_PROJECT from './CREATE_PROJECT'
+import CREATE_OR_UPDATE_PROJECT from './CREATE_OR_UPDATE_PROJECT'
 import { IProjectFormProps, IProjectFormValidation } from './types'
 
 const initialModel = {
@@ -29,7 +29,7 @@ export const ProjectForm = ({ edit, onSubmitted }: IProjectFormProps) => {
     const [validation, setValidation] = useState<IProjectFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useMessage()
     const [model, setModel] = useState<any>(edit ? { ...edit, labels: edit.labels.map(lbl => lbl.id) } : initialModel)
-    const [addProject, { loading }] = useMutation<any, { project: any }>(CREATE_PROJECT)
+    const [createOrUpdateProject, { loading }] = useMutation<any, { project: any }>(CREATE_OR_UPDATE_PROJECT)
 
     const validateForm = (): IProjectFormValidation => {
         const errors: { [key: string]: string } = {}
@@ -46,7 +46,7 @@ export const ProjectForm = ({ edit, onSubmitted }: IProjectFormProps) => {
             return
         }
         setValidation({ errors: {}, invalid: false })
-        const { data: { result } } = await addProject({ variables: { project: pick(model, ...Object.keys(initialModel)) } })
+        const { data: { result } } = await createOrUpdateProject({ variables: { project: pick(model, ...Object.keys(initialModel)) } })
         if (result.success) setMessage({ text: format(t('createSuccess'), model.name), type: MessageBarType.success })
         else setMessage({ text: result.error.message, type: MessageBarType.error })
         setModel(initialModel)
