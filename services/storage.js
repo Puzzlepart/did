@@ -1,7 +1,8 @@
 const TableUtil = require('../utils/table')
 const { getDurationHours, getWeek, getMonthIndex, getYear, toArray } = require('../utils')
 const arraySort = require('array-sort')
-const { pick } = require('underscore')
+const { pick, identity, omit } = require('underscore')
+const { isBlank } = require('underscore.string')
 const { createTableService } = require('azure-storage')
 const uuidv4 = require('uuid').v4
 
@@ -111,14 +112,15 @@ class StorageService {
         const { string } = this.tableUtil.entGen()
         const entity = await this.tableUtil.updateEntity(
             'Customers',
-            {
+            omit({
                 PartitionKey: string('Default'),
                 RowKey: string(customer.key.toUpperCase()),
                 Name: string(customer.name),
                 Description: string(customer.description),
                 Icon: string(customer.icon),
                 CreatedBy: string(createdBy),
-            }
+            }, ({ _ }) => isBlank(_)),
+            true
         )
         return entity
     }
@@ -176,18 +178,20 @@ class StorageService {
      */
     async createOrUpdateProject(project, createdBy) {
         const { string } = this.tableUtil.entGen()
+        const id = [project.customerKey, project.key].join(' ')
         const entity = await this.tableUtil.updateEntity(
             'Projects',
-            {
+            omit({
                 PartitionKey: string(project.customerKey),
                 RowKey: string(project.key),
-                Id: string([project.customerKey, project.key].join(' ')),
+                Id: string(id),
                 Name: string(project.name),
                 Description: string(project.description),
                 Icon: string(project.icon),
-                Labels: string(project.labels ? project.labels.join('|') : ''),
+                Labels: string(project.labels && project.labels.join('|')),
                 CreatedBy: string(createdBy),
-            }
+            }, ({ _ }) => isBlank(_)),
+            true
         )
         return entity
     }

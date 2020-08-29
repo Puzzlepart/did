@@ -32,7 +32,6 @@ const typeDef = `
 
 
 async function customers(_obj, variables, ctx) {
-  console.log(variables)
   return await ctx.services.storage.getCustomers({ sortBy: variables.sortBy })
 }
 

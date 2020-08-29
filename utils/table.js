@@ -1,4 +1,6 @@
 const az = require('azure-storage')
+const { decapitalize } = require('underscore.string')
+const { reduceEachLeadingCommentRange } = require('typescript')
 
 class TableUtil {
     constructor(tableService) {
@@ -13,24 +15,21 @@ class TableUtil {
      * @param {*} result Result
      * @param {*} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
      */
-    parseEntity(entity, columnMap) {
-        columnMap = columnMap || {}
-        let parsed = Object.keys(entity)
-            .reduce((obj, key) => {
-                const newKey = key.charAt(0).toLowerCase() + key.slice(1)
-                const value = entity[key]._
-                if (columnMap[key]) {
-                    obj[columnMap[key]] = value
-                    return obj
-                }
-                switch (entity[key].$) {
-                    case 'Edm.DateTime': obj[newKey] = value.toISOString()
-                        break
-                    default: obj[newKey] = value
-                }
+    parseEntity(entity, columnMap = {}) {
+       return Object.keys(entity).reduce((obj, key) => {
+            const { _, $ } = entity[key]
+            if(_ === undefined || _ === null) return obj;
+            if (columnMap[key]) {
+                obj[columnMap[key]] = _
                 return obj
-            }, {})
-        return parsed
+            }
+            switch ($) {
+                case 'Edm.DateTime': obj[decapitalize(key)] = _.toISOString()
+                    break
+                default: obj[decapitalize(key)] = _
+            }
+            return obj
+        }, {})
     }
 
     /**
@@ -42,7 +41,6 @@ class TableUtil {
      * @param {*} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
      */
     parseEntities({ entries, continuationToken }, columnMap) {
-        columnMap = columnMap || {}
         entries = entries.map(ent => this.parseEntity(ent, columnMap))
         return { entries, continuationToken }
     }
