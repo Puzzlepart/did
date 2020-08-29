@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const passport = require('./middleware/passport')
 const serveGzipped = require('./middleware/gzip')
+const SubscriptionService = require('./services/subscription')
 
 class App {
     constructor() {
@@ -22,46 +23,83 @@ class App {
         this.setupViewEngine();
         this.setupAssets();
         this.setupAuth();
-        this.setupApi();
+        this.setupGraphQL();
         this.setupRoutes();
         this.setupErrorHandling();
     }
 
+    /**
+     * Setup sessions
+     */
     setupSession() {
         this._.use(require('./middleware/session'))
     }
 
+    /**
+     * Setup view engine
+     */
     setupViewEngine() {
         this._.set('views', path.join(__dirname, 'views'))
         this._.set('view engine', 'hbs')
     }
 
+    /**
+     * Setup static assets
+     */
     setupAssets() {
         this._.use('/*.js', serveGzipped('text/javascript'))
         this._.use(express.static(path.join(__dirname, pkg.config.public)))
     }
 
+    /**
+     * Setup authentication
+     */
     setupAuth() {
         this._.use(passport.initialize())
         this._.use(passport.session())
         this._.use('/auth', require('./routes/auth'))
     }
 
-    setupApi() {
+    /**
+     * Check API authentication
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     * @param {*} next 
+     */
+    async checkApiAuth(req, res, next) {
+        const isAuthenticated = !!req.user || req.isAuthenticated()
+        if (!isAuthenticated) {
+            if (req.headers.authorization) {
+                const sub = await SubscriptionService.findSubscription(req.headers)
+                if (!sub) res.redirect('/')
+                req.user = { subscription: sub }
+            } else res.redirect('/')
+        }
+        next()
+    }
+
+    /**
+     * Setup graphql
+     */
+    setupGraphQL() {
         this._.use(
             '/graphql',
-            async (req, res, next) => {
-                if (!req.user || !req.isAuthenticated()) res.redirect('/')
-                else next()
-            },
+            this.checkApiAuth,
             require('./middleware/graphql')
         )
     }
 
+    /**
+     * Setup routes
+     */
     setupRoutes() {
         this._.use('*', require('./routes/index'))
     }
 
+    /**
+     * Setup error handling
+     */
     setupErrorHandling() {
         this._.use((_req, _res, next) => { next(createError(404)) })
         this._.use((error, _req, res, _next) => {
@@ -70,6 +108,9 @@ class App {
         })
     }
 
+    /**
+     * App instance
+     */
     instance() {
         return this._
     }
