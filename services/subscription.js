@@ -3,6 +3,10 @@ const TableUtil = require('../utils/table')
 const { createTableService } = require('azure-storage')
 
 class SubscriptionService {
+  constructor() {
+    this.tableService = createTableService(process.env.AZURE_STORAGE_CONNECTION_STRING)
+    this.tableUtil = new TableUtil(this.tableService)
+  }
   /**
    * Get the subscription for the specified tenant id 
    * 
@@ -12,15 +16,31 @@ class SubscriptionService {
    */
   async getSubscription(tenantId) {
     try {
-      const tableService = createTableService(process.env.AZURE_STORAGE_CONNECTION_STRING)
-      const tableUtil = new TableUtil(tableService)
-      const query = tableUtil.createQuery(1, ['Name', 'ConnectionString']).where('RowKey eq ?', tenantId)
-      var { entries } = await tableUtil.queryTable('Subscriptions', query)
-      return tableUtil.parseEntity(first(entries))
+      const query = this.tableUtil.createQuery(1).where('RowKey eq ?', tenantId)
+      var { entries } = await this.tableUtil.queryTable('Subscriptions', query)
+      return this.tableUtil.parseEntity(first(entries))
+    } catch (error) {
+      return null;
+    }
+  }
+
+
+  /**
+   * Find subscription for the speicifed apiKey
+   * 
+   * @param headers Request headers
+   */
+  async findSubscription({ authorization }) {
+    try {
+      const query = this.tableUtil.createQuery(1).where('RowKey eq ?', authorization)
+      var { entries } = await this.tableUtil.queryTable('ApiKeys', query)
+      let entry = this.tableUtil.parseEntity(first(entries))
+      if (entry) return this.getSubscription(entry.partitionKey)
+      return null
     } catch (error) {
       return null;
     }
   }
 }
 
-module.exports = SubscriptionService
+module.exports = new SubscriptionService()
