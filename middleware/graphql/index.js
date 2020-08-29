@@ -69,9 +69,9 @@ module.exports = graphql(req => ({
   pretty: req.app.get('env') === 'development',
   context: {
     services: {
-      graph: new GraphService(req),
+      graph: req.user && new GraphService(req),
       storage: new StorageService(req.user.subscription),
-      subscription: new SubscriptionService()
+      subscription: SubscriptionService,
     },
     user: req.user,
   }

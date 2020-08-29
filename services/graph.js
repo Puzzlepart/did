@@ -1,5 +1,5 @@
 global.fetch = require("node-fetch")
-const { refreshAccessToken } = require('./tokens')
+const TokenService = require('./tokens')
 const log = require('debug')('services/graph')
 const Event = require('./graph.event')
 
@@ -52,7 +52,7 @@ class GraphService {
     } catch (error) {
       switch (error.statusCode) {
         case 401: {
-          this.oauthToken = await refreshAccessToken(this.req)
+          this.oauthToken = await TokenService.refreshAccessToken(this.req)
           return this.createOutlookCategory(category)
         }
         default: {
@@ -75,7 +75,7 @@ class GraphService {
     } catch (error) {
       switch (error.statusCode) {
         case 401: {
-          this.oauthToken = await refreshAccessToken(this.req)
+          this.oauthToken = await TokenService.refreshAccessToken(this.req)
           return this.getOutlookCategories()
         }
         default: {
@@ -118,7 +118,7 @@ class GraphService {
     } catch (error) {
       switch (error.statusCode) {
         case 401: {
-          this.oauthToken = await refreshAccessToken(this.req)
+          this.oauthToken = await TokenService.refreshAccessToken(this.req)
           return this.getEvents(startDateTime, endDateTime)
         }
         default: {
