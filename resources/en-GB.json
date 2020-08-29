@@ -66,6 +66,7 @@
     "users": "Users",
     "summary": "Summary",
     "labels": "Labels",
+    "apiKeys": "API Keys",
     "filterLabels": "Filter labels...",
     "rolesPermissions": "Roles and permissions",
     "addNewUser": "Add new",
@@ -206,7 +207,8 @@
     "manageProjects": "Manage projects",
     "deleteProjects": "Delete projects",
     "manageCustomers": "Manage customers",
-    "deleteCustomers": "Delete customers"
+    "deleteCustomers": "Delete customers",
+    "manageApiKeys": "Manage API-keys"
   },
   "notifications": {
     "moreLinkText": "Read more here",

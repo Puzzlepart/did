@@ -24,19 +24,40 @@ class SubscriptionService {
     }
   }
 
-
   /**
-   * Find subscription for the speicifed apiKey
+   * Find subscription for the specified token
    * 
-   * @param headers Request headers
+   * @param token Request token
    */
-  async findSubscription({ authorization }) {
+  async findSubscriptionWithToken(token) {
     try {
-      const query = this.tableUtil.createQuery(1).where('RowKey eq ?', authorization)
-      var { entries } = await this.tableUtil.queryTable('ApiKeys', query)
+      const query = this.tableUtil.createQuery(1).where('RowKey eq ?', token)
+      var { entries } = await this.tableUtil.queryTable('ApiTokens', query)
       let apiKeyEntry = this.tableUtil.parseEntity(first(entries))
-      if (apiKeyEntry) return this.getSubscription(entry.partitionKey)
+      if (apiKeyEntry) return this.getSubscription(apiKeyEntry.partitionKey)
       return null
+    } catch (error) {
+      return null;
+    }
+  }
+  
+  /**
+   * Add token for the user subscription
+   * 
+   * @param tenantId Tenant id
+   * @param token Request token
+   */
+  async addApiToken(tenantId, token) {
+    try {
+      const { string } = this.tableUtil.entGen()
+      const entity = await this.tableUtil.addEntity(
+          'ApiTokens',
+          {
+              PartitionKey: string(tenantId),
+              RowKey: string(token),
+          }
+      )
+      return entity
     } catch (error) {
       return null;
     }

@@ -66,6 +66,7 @@
     "users": "Brukere",
     "summary": "Sammendrag",
     "labels": "Merkelapper",
+    "apiKeys": "API-nøkler",
     "filterLabels": "Filtrer merkelapper...",
     "rolesPermissions": "Roller og tilganger",
     "addNewUser": "Legg til ny",
@@ -206,7 +207,8 @@
     "manageProjects": "Administrere prosjekter",
     "deleteProjects": "Slette prosjekter",
     "manageCustomers": "Administrere kunder",
-    "deleteCustomers": "Slette kunder"
+    "deleteCustomers": "Slette kunder",
+    "manageApiKeys": "Administrere API-nøkler"
   },
   "notifications": {
     "moreLinkText": "Les mer her",

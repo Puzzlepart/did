@@ -9,6 +9,7 @@ const logger = require('morgan')
 const passport = require('./middleware/passport')
 const serveGzipped = require('./middleware/gzip')
 const SubscriptionService = require('./services/subscription')
+const bearerToken = require('express-bearer-token');
 
 class App {
     constructor() {
@@ -70,10 +71,12 @@ class App {
     async checkApiAuth(req, res, next) {
         const isAuthenticated = !!req.user || req.isAuthenticated()
         if (!isAuthenticated) {
-            if (req.headers.authorization) {
-                const sub = await SubscriptionService.findSubscription(req.headers)
+            if (req.token) {
+                console.log(req.token)
+                const sub = await SubscriptionService.findSubscriptionWithToken(req.token)
+                console.log(sub)
                 if (!sub) res.redirect('/')
-                req.user = { subscription: sub }
+                else req.user = { subscription: sub }
             } else res.redirect('/')
         }
         next()
@@ -85,6 +88,7 @@ class App {
     setupGraphQL() {
         this._.use(
             '/graphql',
+            bearerToken(),
             this.checkApiAuth,
             require('./middleware/graphql')
         )

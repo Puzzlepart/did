@@ -10,9 +10,8 @@ const { typeDef: Subscription } = require('./resolvers/subscription')
 const { typeDef: Label } = require('./resolvers/label')
 const { typeDef: Role } = require('./resolvers/role')
 const { typeDef: Notification } = require('./resolvers/notification')
-const StorageService = require('../../services/storage')
-const GraphService = require('../../services/graph')
-const SubscriptionService = require('../../services/subscription')
+const { typeDef: ApiKey } = require('./resolvers/apiKey')
+const { StorageService, GraphService, SubscriptionService } = require('../../services')
 
 const Query = `
   type Error {
@@ -54,7 +53,8 @@ const schema = makeExecutableSchema({
     Subscription,
     Label,
     Role,
-    Notification
+    Notification,
+    ApiKey,
   ],
   resolvers: require('./resolvers'),
   resolverValidationOptions: {
