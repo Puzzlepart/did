@@ -66,7 +66,7 @@
     "users": "Users",
     "summary": "Summary",
     "labels": "Labels",
-    "apiKeys": "API Keys",
+    "apiTokens": "API tokens",
     "filterLabels": "Filter labels...",
     "rolesPermissions": "Roles and permissions",
     "addNewUser": "Add new",
@@ -78,7 +78,9 @@
     "roleNameLabel": "Rolename",
     "noTimeEntriesText": "There are no recorded hours for the selected year.",
     "editRole": "Edit role",
-    "permissonsLabel": "Permissions"
+    "permissonsLabel": "Permissions",
+    "generateTokenLabel": "Generate API token",
+    "tokenGeneratedText": "Your key has been generated and will only be visible for 10 seconds. You can only see it once. Take good care of it!"
   },
   "reports": {
     "generatingReportLabel": "Generating report",
@@ -207,8 +209,7 @@
     "manageProjects": "Manage projects",
     "deleteProjects": "Delete projects",
     "manageCustomers": "Manage customers",
-    "deleteCustomers": "Delete customers",
-    "manageApiKeys": "Manage API-keys"
+    "deleteCustomers": "Delete customers"
   },
   "notifications": {
     "moreLinkText": "Read more here",

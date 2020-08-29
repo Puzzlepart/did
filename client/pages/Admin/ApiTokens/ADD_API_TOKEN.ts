@@ -3,8 +3,8 @@ import gql from 'graphql-tag'
 /**
  * @ignore
  */
-export const ADD_API_KEY = gql`
+export default gql`
     mutation { 
-        key: addApiKey
+        key: addApiToken
     }
 `

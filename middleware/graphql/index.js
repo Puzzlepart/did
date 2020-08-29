@@ -10,7 +10,7 @@ const { typeDef: Subscription } = require('./resolvers/subscription')
 const { typeDef: Label } = require('./resolvers/label')
 const { typeDef: Role } = require('./resolvers/role')
 const { typeDef: Notification } = require('./resolvers/notification')
-const { typeDef: ApiKey } = require('./resolvers/apiKey')
+const { typeDef: ApiToken } = require('./resolvers/apiToken')
 const { StorageService, GraphService, SubscriptionService } = require('../../services')
 
 const Query = `
@@ -54,7 +54,7 @@ const schema = makeExecutableSchema({
     Label,
     Role,
     Notification,
-    ApiKey,
+    ApiToken,
   ],
   resolvers: require('./resolvers'),
   resolverValidationOptions: {

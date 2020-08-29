@@ -8,7 +8,7 @@ import { Labels } from './Labels'
 import { Roles } from './Roles'
 import AdminSummaryView from './SummaryView'
 import { Users } from './Users'
-import { ApiKeys } from './ApiKeys'
+import { ApiTokens } from './ApiTokens'
 
 /**
  * @category Admin
@@ -58,10 +58,10 @@ export const Admin = () => {
                 </PivotItem>
                 <PivotItem
                     className={styles.tab}
-                    itemKey='apiKeys'
-                    headerText={t('apiKeys')}
+                    itemKey='apiTokens'
+                    headerText={t('apiTokens')}
                     itemIcon='AzureAPIManagement'>
-                    <ApiKeys />
+                    <ApiTokens />
                 </PivotItem>
             </Pivot>
         </div>

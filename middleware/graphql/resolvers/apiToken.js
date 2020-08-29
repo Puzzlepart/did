@@ -3,15 +3,15 @@ const jwt = require('jsonwebtoken');
 
 const typeDef = `
     extend type Mutation {
-        addApiKey: String
+        addApiToken: String
     }
 `
 
-async function addApiKey(_obj, _variables, ctx) {
+async function addApiToken(_obj, _variables, ctx) {
     let token = jwt.sign({
         exp: Math.floor(Date.now() / 1000) + (60 * 60),
-        data: 'foobar'
-    }, 'secret')
+        data: ctx.user.tenantId
+    }, process.env.API_TOKEN_SECRET)
     const entry = await ctx.services.subscription.addApiToken(ctx.user.tenantId, token)
     return entry ? token : null;
 }
@@ -19,7 +19,7 @@ async function addApiKey(_obj, _variables, ctx) {
 module.exports = {
     resolvers: {
         Query: {},
-        Mutation: { addApiKey }
+        Mutation: { addApiToken }
     },
     typeDef
 }

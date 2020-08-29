@@ -9,7 +9,6 @@ export const manageProjects = 'ef4032fb'
 export const deleteProjects = 'c5439319'
 export const manageCustomers = '09909241'
 export const deleteCustomers = '8b39db3d'
-export const manageApiKeys = 'a0d3f902'
 
 export default (t: TFunction): IPermission[] => [       
     {
@@ -52,9 +51,4 @@ export default (t: TFunction): IPermission[] => [
         key: 'deleteCustomers',
         name: t('deleteCustomers', { ns: 'permissions' })
     },
-    {
-        id: manageApiKeys,
-        key: 'manageApiKeys',
-        name: t('manageApiKeys', { ns: 'permissions' })
-    }
 ]

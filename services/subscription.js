@@ -33,8 +33,8 @@ class SubscriptionService {
     try {
       const query = this.tableUtil.createQuery(1).where('RowKey eq ?', token)
       var { entries } = await this.tableUtil.queryTable('ApiTokens', query)
-      let apiKeyEntry = this.tableUtil.parseEntity(first(entries))
-      if (apiKeyEntry) return this.getSubscription(apiKeyEntry.partitionKey)
+      let tokenEntry = this.tableUtil.parseEntity(first(entries))
+      if (tokenEntry) return this.getSubscription(tokenEntry.partitionKey)
       return null
     } catch (error) {
       return null;
