@@ -23,7 +23,7 @@ const typeDef = `
     }  
 
     extend type Mutation {
-        addUser(user: UserInput!): BaseResult!
+        addOrUpdateUser(user: UserInput!): BaseResult!
     }
 `
 

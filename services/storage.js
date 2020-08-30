@@ -260,12 +260,12 @@ class StorageService {
     async addTimeEntries(periodId, timeentries) {
         let totalDuration = 0
         const { string, datetime, double, int, boolean } = this.tableUtil.entGen()
-        const entities = timeentries.map(({ entry, event, user, }) => {
+        const entities = timeentries.map(({ entry, event, user, labels }) => {
             const week = getWeek(event.startDateTime)
             const monthIdx = getMonthIndex(event.startDateTime)
             const duration = getDurationHours(event.startDateTime, event.endDateTime)
             totalDuration += duration
-            return {
+            return omit({
                 PartitionKey: string(user.id),
                 RowKey: string(entry.id),
                 ResourceName: string(user.profile.displayName),
@@ -281,7 +281,8 @@ class StorageService {
                 PeriodId: string(periodId),
                 Year: int(getYear(event.startDateTime)),
                 ManualMatch: boolean(entry.manualMatch),
-            }
+                Labels: string(labels.join('|')),
+            }, ({ _ }) => isBlank(_))
         })
         const batch = this.tableUtil.createBatch()
         entities.forEach(entity => batch.insertEntity(entity))

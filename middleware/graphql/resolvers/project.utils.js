@@ -14,8 +14,8 @@ function connectEntities(projects, customers, labels) {
             ...project,
             customer: find(customers, c => c.key === project.customerKey),
             labels: filter(labels, label => {
-                const labels = value(project, 'labels', { default: '' })
-                return labels.indexOf(label.id) !== -1
+                const str = value(project, 'labels', { default: '' })
+                return str.indexOf(label.id) !== -1
             }),
         }))
         .filter(p => p.customer)
