@@ -1,6 +1,5 @@
 const { find, filter, contains } = require('underscore')
 const { findBestMatch } = require('string-similarity')
-const format = require('string-format')
 const value = require('get-value')
 
 const CATEGORY_REGEX = /((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>[A-Za-z0-9]{2,}))/gmi
@@ -113,9 +112,9 @@ class EventMatching {
 
         if (event.project && (inactiveProject || inactiveCustomer)) {
             if (inactiveProject)
-                event.error = { message: format('Project {0} for {1} is no longer active. Please resolve the event in Outlook.', event.project.name, event.customer.name) }
+                event.error = { message: `Project ${event.project.name} for ${event.customer.name} is no longer active. Please resolve the event in Outlook.` }
             if (inactiveCustomer)
-                event.error = { message: format('Customer {0} is no longer active. Please resolve the event in Outlook.', event.customer.name) }
+                event.error = { message: `Customer ${event.customer.name} is no longer active. Please resolve the event in Outlook.` }
             event.project = null
             event.customer = null
         }
