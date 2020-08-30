@@ -196,7 +196,7 @@ class TableUtil {
                     }
                         break
                     default: {
-                        const isDate = Date.parse(values[key]) > 0
+                        const isDate = Date.parse(values[key]) > 0 && values[key].length > 18
                         if (isDate) value = datetime(new Date(values[key]))
                         else value = string(values[key])
                     }

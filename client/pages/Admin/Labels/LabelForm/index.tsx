@@ -47,6 +47,7 @@ export const LabelForm = (props: ILabelFormProps) => {
 
             <TextField
                 spellCheck={false}
+                maxLength={18}
                 label={t('nameLabel')}
                 value={label.name}
                 required={true}
