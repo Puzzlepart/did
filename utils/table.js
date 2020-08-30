@@ -183,29 +183,30 @@ class TableUtil {
      */
     makeEntity(rowKey, values, partitionKey = 'Default', typesMap = {}) {
         const { string, datetime, double, int, boolean } = this.entGen()
-        const entity = Object.keys(values).reduce((obj, key) => {
-            let value
-
-            switch (typeof values[key]) {
-                case 'boolean': value = boolean(values[key])
-                    break
-                case 'number': {
-                    if (values[key] % 1 === 0) value = int(values[key])
-                    else value = double(values[key])
+        const entity = Object.keys(values)
+            .filter(key => !isBlank(values[key]))
+            .reduce((obj, key) => {
+                let value
+                switch (typeof values[key]) {
+                    case 'boolean': value = boolean(values[key])
+                        break
+                    case 'number': {
+                        if (values[key] % 1 === 0) value = int(values[key])
+                        else value = double(values[key])
+                    }
+                        break
+                    default: {
+                        if (!isNaN(new Date(values[key])) && values[key].length > 10) value = datetime(new Date(values[key]))
+                        else value = string(values[key])
+                    }
+                        break
                 }
-                    break
-                default: {
-                    if (!isNaN(new Date(values[key])) && values[key].length > 10) value = datetime(new Date(values[key]))
-                    else value = string(values[key])
-                }
-                    break
-            }
-            obj[capitalize(key)] = value
-            return obj
-        }, {
-            PartitionKey: string(partitionKey),
-            RowKey: string(rowKey),
-        })
+                obj[capitalize(key)] = value
+                return obj
+            }, {
+                PartitionKey: string(partitionKey),
+                RowKey: string(rowKey),
+            })
         return omit(entity, ({ _ }) => isBlank(_))
     }
 
