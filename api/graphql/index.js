@@ -43,25 +43,23 @@ const Query = `
 
 /**
  * Get schema
- * 
- * @param {*} isLoggedIn Is the user logged in
  */
-const getSchema = (isLoggedIn) => {
-  const typeDefs = filter([
+const getSchema = () => {
+  const typeDefs = fil[
     Query,
     Customer,
     Project,
     TimeEntry,
     Subscription,
     Label,
-    isLoggedIn && OutlookCategory,
-    isLoggedIn && User,
-    isLoggedIn && Role,
-    isLoggedIn && ApiToken,
-    isLoggedIn && Notification,
-    isLoggedIn && Timesheet,
-  ], t => t)
-  const resolvers = require('./resolvers')(isLoggedIn)
+    OutlookCategory,
+    User,
+    Role,
+    ApiToken,
+    Notification,
+    Timesheet,
+  ]
+  const resolvers = require('./resolvers')
   return makeExecutableSchema({
     typeDefs,
     resolvers,
@@ -72,7 +70,7 @@ const getSchema = (isLoggedIn) => {
 }
 
 module.exports = graphql(req => ({
-  schema: getSchema(!!req.user.id),
+  schema: getSchema(),
   rootValue: global,
   graphiql: process.env.GRAPHIQL_ENABLED == '1',
   pretty: req.app.get('env') === 'development',
@@ -83,5 +81,6 @@ module.exports = graphql(req => ({
       subscription: SubscriptionService,
     },
     user: req.user,
-  }
+  },
+  logg
 }))
