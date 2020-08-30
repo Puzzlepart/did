@@ -218,10 +218,10 @@ class StorageService {
      * @param filterValues Filtervalues
      * @param options Options
      */
-    async getTimeEntries({ projectId, resourceId, weekNumber, year, startDateTime, endDateTime }, options) {
-        options = options || {}
+    async getTimeEntries({ periodId, projectId, resourceId, weekNumber, year, startDateTime, endDateTime }, options = {}) {
         const q = this.tableUtil.query()
         const filter = [
+            ['PeriodId', periodId, q.string, q.equal],
             ['ProjectId', projectId, q.string, q.equal],
             ['PartitionKey', resourceId, q.string, q.equal],
             ['WeekNumber', weekNumber, q.int, q.equal],
@@ -283,14 +283,13 @@ class StorageService {
     /**
      * Delete the user entries from table TimeEntries
      * 
-     * @param period Period
+     * @param periodId Period ID
      * @param resourceId ID of the resource
      */
-    async deleteUserTimeEntries(period, resourceId) {
+    async deleteUserTimeEntries(periodId, resourceId) {
         const entities = await this.getTimeEntries({
             resourceId,
-            startDateTime: period.startDateTime,
-            endDateTime: period.endDateTime,
+            periodId,
         }, { noParse: true })
         const batch = this.tableUtil.createBatch()
         entities.forEach(entity => batch.deleteEntity(entity))

@@ -168,7 +168,7 @@ async function confirmPeriod(_obj, variables, ctx) {
  */
 async function unconfirmPeriod(_obj, variables, ctx) {
     try {
-        await ctx.services.storage.deleteUserTimeEntries(variables.period, ctx.user.id)
+        await ctx.services.storage.deleteUserTimeEntries(variables.period.id, ctx.user.id)
         await ctx.services.storage.removeConfirmedPeriod(variables.period.id, ctx.user.id)
         return { success: true, error: null }
     } catch (error) {

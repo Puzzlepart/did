@@ -185,19 +185,20 @@ class TableUtil {
         const { string, datetime, double, int, boolean } = this.entGen()
         const entity = Object.keys(values).reduce((obj, key) => {
             let value
-            if (!isNaN(new Date(values[key]))) value = datetime(new Date(values[key]))
-            else {
-                switch (typeof values[key]) {
-                    case 'boolean': value = boolean(values[key])
-                        break
-                    case 'number': {
-                        if (values[key] % 1 === 0) value = int(values[key])
-                        else value = double(values[key])
-                    }
-                        break
-                    default: value = string(values[key])
-                        break
+
+            switch (typeof values[key]) {
+                case 'boolean': value = boolean(values[key])
+                    break
+                case 'number': {
+                    if (values[key] % 1 === 0) value = int(values[key])
+                    else value = double(values[key])
                 }
+                    break
+                default: {
+                    if (!isNaN(new Date(values[key])) && values[key].length > 10) value = datetime(new Date(values[key]))
+                    else value = string(values[key])
+                }
+                    break
             }
             obj[capitalize(key)] = value
             return obj
@@ -205,7 +206,6 @@ class TableUtil {
             PartitionKey: string(partitionKey),
             RowKey: string(rowKey),
         })
-        console.log(entity)
         return omit(entity, ({ _ }) => isBlank(_))
     }
 
