@@ -68,7 +68,7 @@ const getSchema = (isLoggedIn) => makeExecutableSchema({
 })
 
 module.exports = graphql(req => ({
-  schema: getSchema(!!req.user.tenantId),
+  schema: getSchema(!!req.user.id),
   rootValue: global,
   graphiql: process.env.GRAPHIQL_ENABLED == '1',
   pretty: req.app.get('env') === 'development',

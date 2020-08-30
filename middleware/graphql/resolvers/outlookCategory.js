@@ -14,7 +14,7 @@ const typeDef = `
     }
 
     extend type Query {
-      outlookCategories: [OutlookCategory!]!
+        outlookCategories: [OutlookCategory!]!
     }  
 
     extend type Mutation {
