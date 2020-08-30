@@ -52,7 +52,7 @@ const typeDef = `
   }
   
   extend type Query {
-    timesheet(startDateTime: String!, endDateTime: String!, dateFormat: String!): [TimesheetPeriod]!
+    timesheet(startDateTime: String!, endDateTime: String!, dateFormat: String!, locale: String!): [TimesheetPeriod]!
   } 
 
   extend type Mutation {
@@ -72,7 +72,7 @@ async function timesheet(_obj, variables, ctx) {
     let periods = getPeriods(
         variables.startDateTime,
         variables.endDateTime,
-        ctx.user.locale
+        variables.locale
     )
 
     let [
@@ -122,7 +122,7 @@ async function timesheet(_obj, variables, ctx) {
         }
         period.events = period.events.map(evt => ({
             ...evt,
-            date: formatDate(evt.startDateTime, variables.dateFormat, ctx.user.locale),
+            date: formatDate(evt.startDateTime, variables.dateFormat, variables.locale),
         }))
     }
     return periods

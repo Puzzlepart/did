@@ -1,6 +1,7 @@
 const log = require('debug')('middleware/passport/onVerifySignin')
 const SubscriptionService = require('../../services/subscription')
 const StorageService = require('../../services/storage')
+const {pick} = require('underscore')
 const { NO_OID_FOUND, TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } = require('./errors')
 
 async function onVerifySignin(_iss, _sub, profile, _accessToken, _refreshToken, params, done) {
@@ -23,10 +24,7 @@ async function onVerifySignin(_iss, _sub, profile, _accessToken, _refreshToken, 
         id: profile.oid,
         tenantId: profile._json.tid,
         locale: user.userLanguage,
-        profile: {
-            displayName: profile.displayName,
-            email: profile.email,
-        },
+        profile: pick(profile, 'displayName', 'email'),
         subscription,
         oauthToken: params,
     }
