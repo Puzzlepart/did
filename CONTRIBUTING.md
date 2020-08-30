@@ -33,7 +33,7 @@ Folder/File | Description
 Generate graphql schema documentation using `@2fd/graphdoc`:
 
 ```shell
-graphdoc -e http://localhost:9001/graphql -o ./public/graphql_schema -x "Authorization: Bearer {token}" --force
+graphdoc -e http://localhost:9001/graphql -o ./public/graphdoc -x "Authorization: Bearer {token}" --force
 ```
 
 ## Set up .env ##
