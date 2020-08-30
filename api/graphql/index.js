@@ -82,5 +82,4 @@ module.exports = graphql(req => ({
     },
     user: req.user,
   },
-  logg
 }))
