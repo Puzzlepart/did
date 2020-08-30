@@ -3,6 +3,7 @@ const { formatDate, getMonthIndex, getWeek } = require('../../../utils')
 const EventMatching = require('./timesheet.matching')
 const { connectEntities } = require('./project.utils')
 const { getPeriods } = require('./timesheet.utils')
+const value = require('get-value')
 
 const typeDef = `  
  type Event {
