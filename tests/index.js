@@ -1,12 +1,13 @@
 const assert = require('assert')
-const { first } = require('underscore')
+const { first,any } = require('underscore')
 const EventMatching = require('../api/graphql/resolvers/timesheet.matching')
-const { data: { projects } } = require('./data/projects.json')
-const { data: { customers } } = require('./data/customers.json')
+const projects = require('./data/projects.json')
+const customers = require('./data/customers.json')
+const labels = require('./data/labels.json')
 
 describe('Event matching', () => {
     let testEvent = {}
-    let eventMatching = new EventMatching(projects,customers, [])
+    let eventMatching = new EventMatching(projects, customers, labels)
 
     beforeEach(() => {
         testEvent = {
@@ -54,7 +55,6 @@ describe('Event matching', () => {
         })
     })
 
-
     describe('Matching suggestions', () => {
         it('{4SUBSEA FLEXSHARZ} should suggest {4SUBSEA FLEXSHARE}', () => {
             testEvent.body = 'Hello this is an event [4SUBSEA FLEXSHARZ]'
@@ -90,6 +90,21 @@ describe('Event matching', () => {
             testEvent.body = 'Hello this is an event 4SUBSEA ABC'
             const event = first(eventMatching.match([testEvent]))
             assert.strictEqual(event.customer, undefined)
+        })
+    })
+
+    describe('Matching event labels', () => {
+        it('{overtid-40} in categories should add matching label', () => {
+            testEvent.categories.push('overtid-40')
+            const event = first(eventMatching.match([testEvent]))
+            assert.strictEqual(any(event.labels, label => label.name === 'overtid-40'), true)
+        })
+
+
+        it('{OVERTID-40} in categories should not add any label', () => {
+            testEvent.categories.push('OVERTID-40')
+            const event = first(eventMatching.match([testEvent]))
+            assert.strictEqual(any(event.labels, label => label.name === 'OVERTID-40'), false)
         })
     })
 })
