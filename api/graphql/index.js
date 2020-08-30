@@ -25,7 +25,7 @@ const Query = `
   type EventError {
     message: String!
   }
-
+  
   type BaseResult {
     success: Boolean
     error: Error

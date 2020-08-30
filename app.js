@@ -96,6 +96,7 @@ class App {
      * Setup routes
      */
     setupRoutes() {
+        this._.use('/graphql_schema', express.static(path.join(__dirname, 'public/graphql_schema')))
         this._.use('*', require('./routes/index'))
     }
 

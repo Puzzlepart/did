@@ -18,7 +18,7 @@ Folder/File | Description
 `/views` | Express HBS views
 `app.js` | Express app
 `server.js` | [Node.js](http://nodejs.org/) server  
- 
+
 # Development #
 
 * Check out the dev branch
@@ -28,6 +28,13 @@ Folder/File | Description
 * Install the [Azure App Service extension for vscode](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice)
 * Create an Azure app registration, or ask one of the [maintainers](#maintainers) for access to an existing one
 * Run `npm run-script watch` to watch both `server` and `client` changes concurrently  
+
+# Documentation #
+Generate graphql schema documentation using `@2fd/graphdoc`:
+
+```shell
+graphdoc -e http://localhost:9001/graphql -o ./public/graphql_schema -x "Authorization: Bearer {token}" --force
+```
 
 ## Set up .env ##
 You've copied `.env.sample` into `.env`.
