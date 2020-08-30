@@ -19,9 +19,7 @@ client.query<{ currentUser: any }>({ query: GET_CURRENT_USER }).then(({ data }) 
     const container = document.getElementById('app')
     const context: IAppContext = { user: data.currentUser }
     context.user.userLanguage = context.user.userLanguage || 'en-GB'
-
-    console.log(context.user.userLanguage)
-
+    
     DateUtils.setup(context.user.userLanguage)
     i18n.changeLanguage(context.user.userLanguage)
 

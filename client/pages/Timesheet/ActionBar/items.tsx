@@ -3,6 +3,7 @@ import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
 import * as React from 'react'
 import { ITimesheetContext } from '../TimesheetContext'
+import styles from './ActionBar.module.scss'
 import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS'
 
 export const goToCurrentWeek = ({ scope, dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
@@ -34,9 +35,9 @@ export const CHANGE_PERIOD = ({ periods, loading, selectedPeriod, dispatch }: IT
     if (periods.length === 1) {
         return [
             {
-                key: 'CHANGE_PERIOD_0',
+                key: 'WEEK_NUMBER',
                 onRender: () => (
-                    <span style={{ lineHeight: '44px', paddingLeft: 8 }}>
+                    <span className={styles.weekNumber}>
                         {selectedPeriod.getName(false, t)}
                     </span>
                 ),

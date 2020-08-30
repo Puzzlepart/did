@@ -61,7 +61,6 @@ class SubscriptionService {
       )
       return entity
     } catch (error) {
-      console.log(error)
       return null;
     }
   }
@@ -84,7 +83,6 @@ class SubscriptionService {
       )
       return result
     } catch (error) {
-      console.log(error)
       return null;
     }
   }

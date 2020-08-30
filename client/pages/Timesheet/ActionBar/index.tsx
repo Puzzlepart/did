@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { TimesheetContext } from '../'
 import { CHANGE_PERIOD, CONFIRM_ACTIONS, goToCurrentWeek, goToNextWeek, goToPrevWeek } from './items'
 import { WeekPicker } from './WeekPicker'
+import styles from './ActionBar.module.scss'
 
 /**
  * @category Timesheet
@@ -27,6 +28,7 @@ export const ActionBar = () => {
 
     return (
         <CommandBar
+            className={styles.root}
             styles={{ root: { padding: 0 } }}
             items={items}
             farItems={farItems}
