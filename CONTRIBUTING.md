@@ -56,7 +56,7 @@ Just a random string to secure the sessions.
 # Branching / Deploying #
 
 The `/master` branch requires pull requests, and is set up with a CI/CD pipeline which deploys to [did365.puzzlepart.com](https://did365.puzzlepart.com)  
-The `/dev` branch also requires pull requests, and is set up with a CI/CD pipeline which deploys to [did365-dev.azurewebsites.net](https://did365-dev.azurewebsites.net)  
+The `/dev` branch also requires pull requests, and is set up with a CI/CD pipeline which deploys to [didapp.azurewebsites.net](https://didapp.azurewebsites.net)  
 `/feature/*`-prefixed branches may or may not be included in future releases.
 
 You are encouraged to branch with either of the following prefixes  
