@@ -4,7 +4,7 @@
   flex-direction: column;
 
   .logo {
-    letter-spacing: 0.15rem;
+    letter-spacing: 0.35rem;
     font-size: 44px;
     color: #252422;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
@@ -12,10 +12,11 @@
   }
 
   .motto {
-    letter-spacing: 0.15rem;
-    font-style: italic;
+    background-color: #252422;
+    letter-spacing: 0.25rem;
     font-size: 14px;
-    color: #cf5f00;
+    color: #fff;
+    padding: 8px;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
       sans-serif, Apple Color Emoji, Segoe UI Emoji;
   }
