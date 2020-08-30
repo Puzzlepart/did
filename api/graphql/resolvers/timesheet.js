@@ -67,6 +67,8 @@ const typeDef = `
  * Returns an array of periods (week_month_year)
  */
 async function timesheet(_obj, variables, ctx) {
+    if (!ctx.services.graph) return { success: false, error: null }
+    
     let periods = getPeriods(
         variables.startDateTime,
         variables.endDateTime,
