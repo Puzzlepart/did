@@ -4,7 +4,7 @@ import gql from 'graphql-tag'
  * @ignore
  */
 export default gql`
-    mutation { 
-        key: addApiToken
+    mutation($name: String!) { 
+        key: addApiToken(name: $name)
     }
 `

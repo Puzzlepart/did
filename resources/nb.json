@@ -80,7 +80,10 @@
     "editRole": "Rediger rolle",
     "permissonsLabel": "Tilganger",
     "generateTokenLabel": "Lag API-nøkkel",
-    "tokenGeneratedText": "Nøkkelen din er generert og vil kun være synlig i 10 sekunder. Du kan bare se det en gang. Ta godt vare på den!"
+    "tokenNamePlaceholder": "Fyll inn navn",
+    "tokenGeneratedText": "Nøkkelen din er generert og vil kun være synlig i 10 sekunder. Du kan bare se det en gang. Ta godt vare på den!",
+    "tokenErrorText": "Det skjedde en feil under generering av nøkkel. Prøv igjen senere.",
+    "tokenDeletedText": "Nøkkelen `{0}` ble slettet."
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport",
@@ -110,6 +113,7 @@
     "descriptionLabel": "Beskrivelse",
     "iconLabel": "Ikon",
     "colorLabel": "Farge",
+    "createdLabel": "Opprettet",
     "closeColorPickerText": "Lukk fargevelger",
     "openColorPickerText": "Åpne fargevelger",
     "previewText": "Forhåndsvisning",
@@ -174,15 +178,7 @@
         "Fredag",
         "Lørdag"
       ],
-      "shortDays": [
-        "S",
-        "M",
-        "T",
-        "O",
-        "T",
-        "F",
-        "S"
-      ],
+      "shortDays": ["S", "M", "T", "O", "T", "F", "S"],
       "goToToday": "Gå til dagens dato",
       "weekNumberFormatString": "Ukenummer {0}",
       "prevMonthAriaLabel": "Forrige måned",

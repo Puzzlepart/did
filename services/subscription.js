@@ -31,7 +31,7 @@ class SubscriptionService {
    */
   async findSubscriptionWithToken(token) {
     try {
-      const query = this.tableUtil.createQuery(1).where('RowKey eq ?', token)
+      const query = this.tableUtil.createQuery(1).where('Token eq ?', token)
       var { entries } = await this.tableUtil.queryTable('ApiTokens', query)
       let tokenEntry = this.tableUtil.parseEntity(first(entries))
       if (tokenEntry) return this.getSubscription(tokenEntry.partitionKey)
@@ -40,24 +40,65 @@ class SubscriptionService {
       return null;
     }
   }
-  
+
   /**
    * Add token for the user subscription
    * 
+   * @param name Token name
    * @param tenantId Tenant id
    * @param token Request token
    */
-  async addApiToken(tenantId, token) {
+  async addApiToken(name, tenantId, token) {
     try {
       const { string } = this.tableUtil.entGen()
       const entity = await this.tableUtil.addEntity(
-          'ApiTokens',
-          {
-              PartitionKey: string(tenantId),
-              RowKey: string(token),
-          }
+        'ApiTokens',
+        {
+          PartitionKey: string(tenantId),
+          RowKey: string(name),
+          Token: string(token)
+        }
       )
       return entity
+    } catch (error) {
+      console.log(error)
+      return null;
+    }
+  }
+
+  /**
+   * Remove token for the user subscription
+   * 
+   * @param name Token name
+   * @param tenantId Tenant id
+   */
+  async deleteApiToken(name, tenantId) {
+    try {
+      const { string } = this.tableUtil.entGen()
+      const result = await this.tableUtil.deleteEntity(
+        'ApiTokens',
+        {
+          PartitionKey: string(tenantId),
+          RowKey: string(name),
+        }
+      )
+      return result
+    } catch (error) {
+      console.log(error)
+      return null;
+    }
+  }
+
+  /**
+   * Get tokens for the user subscription
+   * 
+   * @param tenantId Tenant id
+   */
+  async getApiTokens(tenantId) {
+    try {
+      const query = this.tableUtil.createQuery(100).where('PartitionKey eq ?', tenantId)
+      const result = await this.tableUtil.queryTable('ApiTokens', query)
+      return this.tableUtil.parseEntities(result, { RowKey: 'name' }).entries
     } catch (error) {
       return null;
     }

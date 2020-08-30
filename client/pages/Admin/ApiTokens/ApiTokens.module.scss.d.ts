@@ -2,6 +2,7 @@
 // Please do not change this file!
 interface CssExports {
   'field': string;
+  'form': string;
   'message': string;
   'root': string;
 }
