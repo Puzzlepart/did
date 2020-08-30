@@ -32,7 +32,7 @@ class StorageService {
         const { string } = this.tableUtil.entGen()
         const entity = await this.tableUtil.addEntity(
             'Labels',
-            this.tableUtil.makeEntity2(
+            this.tableUtil.makeEntity(
                 uuidv4(),
                 {
                     ...label,
@@ -87,7 +87,7 @@ class StorageService {
         const { string } = this.tableUtil.entGen()
         const entity = await this.tableUtil.updateEntity(
             'Customers',
-            this.tableUtil.makeEntity2(
+            this.tableUtil.makeEntity(
                 customer.key.toUpperCase(),
                 omit(customer, 'key'),
             ),
@@ -152,7 +152,7 @@ class StorageService {
         const id = [project.customerKey, project.key].join(' ')
         const entity = await this.tableUtil.updateEntity(
             'Projects',
-            this.tableUtil.makeEntity2(
+            this.tableUtil.makeEntity(
                 project.customerKey,
                 {
                     ...project,
@@ -203,7 +203,7 @@ class StorageService {
         const { string } = this.tableUtil.entGen()
         const entity = await this.tableUtil.updateEntity(
             'Users',
-            this.tableUtil.makeEntity2(
+            this.tableUtil.makeEntity(
                 user.id,
                 omit(user, 'id'),
             ),
@@ -257,7 +257,7 @@ class StorageService {
             const year = getYear(event.startDateTime)
             const duration = getDurationHours(event.startDateTime, event.endDateTime)
             totalDuration += duration
-            return this.tableUtil.makeEntity2(
+            return this.tableUtil.makeEntity(
                 entry.id,
                 {
                     ...pick(entry, 'projectId', 'manualMatch'),

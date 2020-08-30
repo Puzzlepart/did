@@ -181,7 +181,7 @@ class TableUtil {
      * @param {*} partitionKey Partition key     * 
      * @param {*} typesMap Types map
      */
-    makeEntity2(rowKey, values, partitionKey = 'Default', typesMap = {}) {
+    makeEntity(rowKey, values, partitionKey = 'Default', typesMap = {}) {
         const { string, datetime, double, int, boolean } = this.entGen()
         const entity = Object.keys(values).reduce((obj, key) => {
             let value
@@ -207,16 +207,6 @@ class TableUtil {
             RowKey: string(rowKey),
         })
         return omit(entity, ({ _ }) => isBlank(_))
-    }
-
-
-    /**
-     * Make entity
-     * 
-     * @param {*} values Values
-     */
-    makeEntity(values) {
-        return omit(values, ({ _ }) => isBlank(_))
     }
 
     /**
