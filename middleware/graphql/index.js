@@ -46,8 +46,8 @@ const Query = `
  * 
  * @param {*} isLoggedIn Is the user logged in
  */
-const getSchema = (isLoggedIn) => makeExecutableSchema({
-  typeDefs: filter([
+const getSchema = (isLoggedIn) => {
+  const typeDefs = filter([
     Query,
     Customer,
     Project,
@@ -60,12 +60,17 @@ const getSchema = (isLoggedIn) => makeExecutableSchema({
     isLoggedIn && ApiToken,
     isLoggedIn && Notification,
     isLoggedIn && Timesheet,
-  ], t => t),
-  resolvers: require('./resolvers')(isLoggedIn),
-  resolverValidationOptions: {
-    requireResolversForResolveType: false
-  },
-})
+  ], t => t)
+  const resolvers = require('./resolvers')(isLoggedIn)
+  console.log('getSchema', { typeDefs, resolvers, isLoggedIn })
+  makeExecutableSchema({
+    typeDefs,
+    resolvers,
+    resolverValidationOptions: {
+      requireResolversForResolveType: false
+    },
+  })
+}
 
 module.exports = graphql(req => ({
   schema: getSchema(!!req.user.id),
