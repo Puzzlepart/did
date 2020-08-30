@@ -1,5 +1,5 @@
 const az = require('azure-storage')
-const { omit, } = require('underscore')
+const { omit } = require('underscore')
 const { decapitalize, capitalize, isBlank } = require('underscore.string')
 const { reduceEachLeadingCommentRange } = require('typescript')
 
@@ -196,7 +196,8 @@ class TableUtil {
                     }
                         break
                     default: {
-                        if (!isNaN(new Date(values[key])) && values[key].length > 10) value = datetime(new Date(values[key]))
+                        const isDate = Date.parse(values[key]) > 0
+                        if (isDate) value = datetime(new Date(values[key]))
                         else value = string(values[key])
                     }
                         break

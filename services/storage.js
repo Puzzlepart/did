@@ -30,15 +30,16 @@ class StorageService {
      */
     async addOrUpdateLabel(label, createdBy) {
         const { string } = this.tableUtil.entGen()
-        const entity = await this.tableUtil.addEntity(
+        const entity = await this.tableUtil.updateEntity(
             'Labels',
             this.tableUtil.makeEntity(
-                uuidv4(),
+                label.id || uuidv4(),
                 {
-                    ...label,
+                    ...omit(label, 'id'),
                     createdBy,
                 }
-            )
+            ),
+            true
         )
         return entity
     }
