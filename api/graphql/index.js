@@ -45,7 +45,7 @@ const Query = `
  * Get schema
  */
 const getSchema = () => {
-  const typeDefs = fil[
+  const typeDefs = [
     Query,
     Customer,
     Project,
@@ -70,7 +70,7 @@ const getSchema = () => {
 }
 
 module.exports = graphql(req => ({
-  schema: getSchema(),
+  schema,
   rootValue: global,
   graphiql: process.env.GRAPHIQL_ENABLED == '1',
   pretty: req.app.get('env') === 'development',
