@@ -6,7 +6,6 @@ const { typeDef: Timesheet } = require('./resolvers/timesheet')
 const { typeDef: TimeEntry } = require('./resolvers/timeentry')
 const { typeDef: OutlookCategory } = require('./resolvers/outlookCategory')
 const { typeDef: User } = require('./resolvers/user')
-const { typeDef: Subscription } = require('./resolvers/subscription')
 const { typeDef: Label } = require('./resolvers/label')
 const { typeDef: Role } = require('./resolvers/role')
 const { typeDef: Notification } = require('./resolvers/notification')
@@ -50,7 +49,6 @@ const getSchema = () => {
     Customer,
     Project,
     TimeEntry,
-    Subscription,
     Label,
     OutlookCategory,
     User,

@@ -1,6 +1,10 @@
 const { find } = require('underscore')
 
 const typeDef = `  
+    type Subscription {
+        name: String!
+    }
+
     type User {
         id: String
         role: Role
