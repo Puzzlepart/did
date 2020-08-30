@@ -63,7 +63,7 @@ const getSchema = (isLoggedIn) => {
   ], t => t)
   const resolvers = require('./resolvers')(isLoggedIn)
   console.log('getSchema', { typeDefs, resolvers, isLoggedIn })
-  makeExecutableSchema({
+  return makeExecutableSchema({
     typeDefs,
     resolvers,
     resolverValidationOptions: {
