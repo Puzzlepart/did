@@ -28,8 +28,8 @@
       justify-content: start;
       width: 500px;
       padding-left: 8px;
-      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji,
-        Segoe UI Emoji;
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+        sans-serif, Apple Color Emoji, Segoe UI Emoji;
     }
 
     .navRight {
@@ -46,9 +46,16 @@
       letter-spacing: 0.15rem;
       font-size: 18px;
       color: #fff;
+      border: 1px solid #fff;
+      padding: 0.15rem 0.25rem 0.15rem 0.25rem;
       font-weight: bold;
       font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
         sans-serif, Apple Color Emoji, Segoe UI Emoji;
+      text-decoration: none !important;
+
+      &:hover {
+        background-color: #cf5f00;
+      }
     }
   }
 }
