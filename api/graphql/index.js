@@ -70,7 +70,7 @@ const getSchema = () => {
 }
 
 module.exports = graphql(req => ({
-  schema,
+  schema: getSchema(),
   rootValue: global,
   graphiql: process.env.GRAPHIQL_ENABLED == '1',
   pretty: req.app.get('env') === 'development',
