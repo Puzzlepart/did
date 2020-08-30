@@ -55,6 +55,10 @@
 
       &:hover {
         background-color: #cf5f00;
+        -webkit-transition: background-color 1s ease-out 250ms;
+        -moz-transition: background-color 1s ease-out 250ms;
+        -o-transition: background-color 1s ease-out 250ms;
+        transition: background-color 1s ease-out 250ms;
       }
     }
   }
