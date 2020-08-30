@@ -157,7 +157,6 @@ async function confirmPeriod(_obj, variables, ctx) {
         await ctx.services.storage.addConfirmedPeriod(variables.period.id, ctx.user.id, hours)
         return { success: true, error: null }
     } catch (error) {
-        console.log(error)
         return { success: false, error: omit(error, 'requestId') }
     }
 }
@@ -169,10 +168,8 @@ async function confirmPeriod(_obj, variables, ctx) {
  */
 async function unconfirmPeriod(_obj, variables, ctx) {
     try {
-        await Promise.all([
-            ctx.services.storage.deleteUserTimeEntries(variables.period, ctx.user.id),
-            ctx.services.storage.removeConfirmedPeriod(variables.period.id, ctx.user.id)
-        ])
+        await ctx.services.storage.deleteUserTimeEntries(variables.period, ctx.user.id)
+        await ctx.services.storage.removeConfirmedPeriod(variables.period.id, ctx.user.id)
         return { success: true, error: null }
     } catch (error) {
         return { success: false, error: omit(error, 'requestId') }

@@ -1,5 +1,6 @@
 const az = require('azure-storage')
-const { decapitalize } = require('underscore.string')
+const { omit, } = require('underscore')
+const { decapitalize, capitalize, isBlank } = require('underscore.string')
 const { reduceEachLeadingCommentRange } = require('typescript')
 
 class TableUtil {
@@ -16,9 +17,9 @@ class TableUtil {
      * @param {*} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
      */
     parseEntity(entity, columnMap = {}) {
-       return Object.keys(entity).reduce((obj, key) => {
+        return Object.keys(entity).reduce((obj, key) => {
             const { _, $ } = entity[key]
-            if(_ === undefined || _ === null) return obj;
+            if (_ === undefined || _ === null) return obj;
             if (columnMap[key]) {
                 obj[columnMap[key]] = _
                 return obj
@@ -169,6 +170,53 @@ class TableUtil {
             token = result.continuationToken
         }
         return entries
+    }
+
+
+    /**
+     * Make entity
+     * 
+     * @param {*} rowKey Row key
+     * @param {*} values Values
+     * @param {*} partitionKey Partition key     * 
+     * @param {*} typesMap Types map
+     */
+    makeEntity2(rowKey, values, partitionKey = 'Default', typesMap = {}) {
+        const { string, datetime, double, int, boolean } = this.entGen()
+        const entity = Object.keys(values).reduce((obj, key) => {
+            let value
+            if (!isNaN(new Date(values[key]))) value = datetime(new Date(values[key]))
+            else {
+                switch (typeof values[key]) {
+                    case 'boolean': value = boolean(values[key])
+                        break
+                    case 'number': {
+                        if (values[key] % 1 === 0) value = int(values[key])
+                        else value = double(values[key])
+                    }
+                        break
+                    default: value = string(values[key])
+                        break
+                }
+            }
+            obj[capitalize(key)] = value
+            return obj
+        }, {
+            PartitionKey: string(partitionKey),
+            RowKey: string(rowKey),
+        })
+        console.log(entity)
+        return omit(entity, ({ _ }) => isBlank(_))
+    }
+
+
+    /**
+     * Make entity
+     * 
+     * @param {*} values Values
+     */
+    makeEntity(values) {
+        return omit(values, ({ _ }) => isBlank(_))
     }
 
     /**

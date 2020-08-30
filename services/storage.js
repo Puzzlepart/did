@@ -1,7 +1,7 @@
 const TableUtil = require('../utils/table')
 const { getDurationHours, getWeek, getMonthIndex, getYear, toArray } = require('../utils')
 const arraySort = require('array-sort')
-const { pick, identity, omit } = require('underscore')
+const { omit, pick } = require('underscore')
 const { isBlank } = require('underscore.string')
 const { createTableService } = require('azure-storage')
 const uuidv4 = require('uuid').v4
@@ -32,15 +32,13 @@ class StorageService {
         const { string } = this.tableUtil.entGen()
         const entity = await this.tableUtil.addEntity(
             'Labels',
-            omit({
-                PartitionKey: string('Default'),
-                RowKey: string(uuidv4()),
-                Name: string(label.name),
-                Description: string(label.description),
-                Color: string(label.color),
-                Icon: string(label.icon),
-                CreatedBy: string(createdBy),
-            }, ({ _ }) => isBlank(_))
+            this.tableUtil.makeEntity2(
+                uuidv4(),
+                {
+                    ...label,
+                    createdBy,
+                }
+            )
         )
         return entity
     }
@@ -89,14 +87,10 @@ class StorageService {
         const { string } = this.tableUtil.entGen()
         const entity = await this.tableUtil.updateEntity(
             'Customers',
-            omit({
-                PartitionKey: string('Default'),
-                RowKey: string(customer.key.toUpperCase()),
-                Name: string(customer.name),
-                Description: string(customer.description),
-                Icon: string(customer.icon),
-                CreatedBy: string(createdBy),
-            }, ({ _ }) => isBlank(_)),
+            this.tableUtil.makeEntity2(
+                customer.key.toUpperCase(),
+                omit(customer, 'key'),
+            ),
             true
         )
         return entity
@@ -158,16 +152,16 @@ class StorageService {
         const id = [project.customerKey, project.key].join(' ')
         const entity = await this.tableUtil.updateEntity(
             'Projects',
-            omit({
-                PartitionKey: string(project.customerKey),
-                RowKey: string(project.key),
-                Id: string(id),
-                Name: string(project.name),
-                Description: string(project.description),
-                Icon: string(project.icon),
-                Labels: string(project.labels && project.labels.join('|')),
-                CreatedBy: string(createdBy),
-            }, ({ _ }) => isBlank(_)),
+            this.tableUtil.makeEntity2(
+                project.customerKey,
+                {
+                    ...project,
+                    id,
+                    labels: project.labels && project.labels.join('|'),
+                    createdBy,
+                },
+                project.customerKey
+            ),
             true
         )
         return entity
@@ -209,13 +203,10 @@ class StorageService {
         const { string } = this.tableUtil.entGen()
         const entity = await this.tableUtil.updateEntity(
             'Users',
-            omit({
-                PartitionKey: string('Default'),
-                RowKey: string(user.id),
-                FullName: string(user.fullName),
-                Role: string(user.role),
-                UserLanguage: string(user.userLanguage),
-            }, ({ _ }) => isBlank(_)),
+            this.tableUtil.makeEntity2(
+                user.id,
+                omit(user, 'id'),
+            ),
             true
         )
         return entity
@@ -261,28 +252,27 @@ class StorageService {
         let totalDuration = 0
         const { string, datetime, double, int, boolean } = this.tableUtil.entGen()
         const entities = timeentries.map(({ entry, event, user, labels }) => {
-            const week = getWeek(event.startDateTime)
-            const monthIdx = getMonthIndex(event.startDateTime)
+            const weekNumber = getWeek(event.startDateTime)
+            const monthNumber = getMonthIndex(event.startDateTime)
+            const year = getYear(event.startDateTime)
             const duration = getDurationHours(event.startDateTime, event.endDateTime)
             totalDuration += duration
-            return omit({
-                PartitionKey: string(user.id),
-                RowKey: string(entry.id),
-                ResourceName: string(user.profile.displayName),
-                Title: string(event.title),
-                Description: string(event.body),
-                StartDateTime: datetime(event.startDateTime),
-                EndDateTime: datetime(event.endDateTime),
-                Duration: double(duration),
-                ProjectId: string(entry.projectId),
-                WebLink: string(event.webLink),
-                WeekNumber: int(week),
-                MonthNumber: int(monthIdx),
-                PeriodId: string(periodId),
-                Year: int(getYear(event.startDateTime)),
-                ManualMatch: boolean(entry.manualMatch),
-                Labels: string(labels.join('|')),
-            }, ({ _ }) => isBlank(_))
+            return this.tableUtil.makeEntity2(
+                entry.id,
+                {
+                    ...pick(entry, 'projectId', 'manualMatch'),
+                    ...pick(event, 'title', 'startDateTime', 'endDateTime', 'webLink'),
+                    description: event.body,
+                    resourceName: user.profile.displayName,
+                    duration,
+                    year,
+                    weekNumber,
+                    monthNumber,
+                    periodId,
+                    labels: labels.join('|'),
+                },
+                user.id,
+            )
         })
         const batch = this.tableUtil.createBatch()
         entities.forEach(entity => batch.insertEntity(entity))

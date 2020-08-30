@@ -53,7 +53,7 @@ async function currentUser(_obj, _variables, ctx) {
             role: find(roles, role => role.name === user.role),
         }
     } catch (error) {
-        console.log(error)
+        
     }
 }
 
