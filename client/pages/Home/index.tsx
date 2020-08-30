@@ -7,7 +7,9 @@ import styles from './Home.module.scss'
 export default () => {
     return (
         <div className={styles.root}>
-            <img src='/images/did365logobeta.png' className={styles.logo} />
+            <div className={styles.logo}>
+            Did
+            </div>
             <p className={styles.motto}>The Calendar is the Timesheet</p>
         </div>
     )
