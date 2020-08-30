@@ -1,6 +1,6 @@
 const assert = require('assert')
 const { first } = require('underscore')
-const EventMatching = require('../middleware/graphql/resolvers/timesheet.matching')
+const EventMatching = require('../api/graphql/resolvers/timesheet.matching')
 const { data: { projects } } = require('./data/projects.json')
 const { data: { customers } } = require('./data/customers.json')
 

@@ -11,7 +11,6 @@ const { resolvers: addApiTokenResolvers } = require('./apiToken')
 const { merge } = require('lodash')
 
 module.exports = (isLoggedIn) => {
-  console.log('resolvers', { isLoggedIn })
     return merge(
         customerResolvers,
         projectResolvers,

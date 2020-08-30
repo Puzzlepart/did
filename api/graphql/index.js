@@ -62,7 +62,6 @@ const getSchema = (isLoggedIn) => {
     isLoggedIn && Timesheet,
   ], t => t)
   const resolvers = require('./resolvers')(isLoggedIn)
-  console.log('getSchema', { typeDefs, resolvers, isLoggedIn })
   return makeExecutableSchema({
     typeDefs,
     resolvers,

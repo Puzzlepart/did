@@ -8,10 +8,11 @@ Folder/File | Description
 `/public/css` | CSS files
 `/public/js` | JS files (hidden from `vscode`, the react bundle ends up here)
 `/routes` | [Express](https://expressjs.com/) routes using [HBS](https://handlebarsjs.com/) views
+`/api` | Server side APIs
+`/api/graphql` | [GraphQL](https://github.com/graphql/graphql-js/) implementation
+`/api/graphql/resolvers` | GraphQL resolvers, queries and mutations
 `/middleware` | Server side Express middleware functions
 `/middleware/passport` | [Passport](http://www.passportjs.org/) authentication middleware
-`/middleware/graphql` | [GraphQL](https://github.com/graphql/graphql-js/) implementation
-`/middleware/graphql/resolvers` | GraphQL resolvers, queries and mutations
 `/services` | Services ([MS Graph](https://developer.microsoft.com/en-us/graph) and [Azure Table Storage](https://azure.microsoft.com/en-us/services/storage/tables/))
 `/utils` | Utilities
 `/views` | Express HBS views

@@ -73,7 +73,7 @@ class App {
         if (!isAuthenticated) {
             if (req.token) {
                 const sub = await SubscriptionService.findSubscriptionWithToken(req.token)
-                if (!sub) res.redirect('/')
+                if (!sub) res.status(401).send('You don\'t have access to this resource.')
                 else req.user = { subscription: sub }
             } else res.redirect('/')
         }
@@ -88,7 +88,7 @@ class App {
             '/graphql',
             bearerToken(),
             this.checkApiAuth,
-            require('./middleware/graphql')
+            require('./api/graphql')
         )
     }
 
