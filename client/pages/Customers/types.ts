@@ -1,8 +1,14 @@
 import { ICustomer } from 'interfaces/ICustomer'
-/**
- * {@docCategory Customers}
- */
 
+/**
+ * @ignore
+ */
 export interface IGetCustomersData {
     customers: ICustomer[];
 }
+
+export interface ICustomersParams {
+    key: string;
+    view: string;
+}
+

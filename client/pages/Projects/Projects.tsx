@@ -6,18 +6,17 @@ import { value } from 'helpers'
 import { IOutlookCategory, IProject } from 'interfaces'
 import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
+import { Panel } from 'office-ui-fabric-react/lib/Panel'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import { ProjectForm } from 'pages/Projects/ProjectForm'
-import React, { useContext, useEffect } from 'react'
-import { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { contains, find } from 'underscore'
+import GET_PROJECTS from './GET_PROJECTS'
 import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
 import { IGetProjectsData, IProjectsParams } from './types'
-import { Panel } from 'office-ui-fabric-react/lib/Panel'
-import GET_PROJECTS from './GET_PROJECTS'
 
 /**
  * @category Projects
@@ -49,9 +48,9 @@ export const Projects = () => {
         }
     }, [params.key, projects])
 
-    function onPivotClick({ props }: PivotItem) {
+    function onPivotClick({ props: { itemKey } }: PivotItem) {
         setSelected(null)
-        history.push(`/projects/${props.itemKey}`)
+        history.push(`/projects/${itemKey}`)
     }
 
     return (
@@ -83,7 +82,6 @@ export const Projects = () => {
                                         setSelected(selected)
                                     },
                                 }}
-                                onEdit={setEdit}
                                 height={selected && 400} />
                             {selected && <ProjectDetails project={selected} />}
                             {edit && (

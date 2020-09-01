@@ -1,28 +1,29 @@
 import { useQuery } from '@apollo/react-hooks'
 import { AppContext } from 'AppContext'
-import { value as value } from 'helpers'
+import { manageCustomers } from 'config/security/permissions'
+import { value } from 'helpers'
 import { ICustomer } from 'interfaces'
 import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import { CustomerForm } from 'pages/Customers/CustomerForm'
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { contains, find } from 'underscore'
 import { CustomerDetails } from './CustomerDetails'
 import { CustomerList } from './CustomerList'
 import GET_CUSTOMERS from './GET_CUSTOMERS'
-import { IGetCustomersData } from './types'
-import { manageCustomers } from 'config/security/permissions'
+import { ICustomersParams, IGetCustomersData } from './types'
 
 /**
  * @category Customers
  */
 export const Customers = () => {
     const { t } = useTranslation(['common', 'ADMINS'])
+    const history = useHistory()
     const { user } = useContext(AppContext)
-    const params = useParams<{ key: string }>()
+    const params = useParams<ICustomersParams>()
     const [selected, setSelected] = useState<ICustomer>(null)
     const { loading, error, data } = useQuery<IGetCustomersData>(
         GET_CUSTOMERS,
@@ -40,8 +41,16 @@ export const Customers = () => {
         }
     }, [params.key, customers])
 
+    function onPivotClick({ props: { itemKey } }: PivotItem) {
+        setSelected(null)
+        history.push(`/customers/${itemKey}`)
+    }
+
     return (
-        <Pivot styles={{ itemContainer: { paddingTop: 10 } }}>
+        <Pivot
+            selectedKey={params.view || 'search'}
+            onLinkClick={onPivotClick}
+            styles={{ itemContainer: { paddingTop: 10 } }}>
             <PivotItem
                 itemID='search'
                 itemKey='search'
@@ -55,7 +64,17 @@ export const Customers = () => {
                                 enableShimmer={loading}
                                 items={customers}
                                 searchBox={{ placeholder: t('searchPlaceholder') }}
-                                selection={{ mode: SelectionMode.single, onChanged: selected => setSelected(selected) }}
+                                selection={{
+                                    mode: SelectionMode.single,
+                                    onChanged: selected => {
+                                        selected && history.push([
+                                            '/customers',
+                                            params.view || 'search',
+                                            selected.key
+                                        ].filter(p => p).join('/'))
+                                        setSelected(selected)
+                                    }
+                                }}
                                 height={selected && 400} />
                             {selected && <CustomerDetails customer={selected} />}
                         </>
