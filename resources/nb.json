@@ -49,7 +49,8 @@
     "keyDescription": "En unik identifikator for prosjektet. Holdt det kort, maks 8 tegn.",
     "nameFormValidationText": "Prosjektnavnet må være minst 2 tegn langt.",
     "keyFormValidationText": "Prosjektnøkkelen må være mellom 2 og 8 tegn lang, og bare store bokstaver.",
-    "createSuccess": "Prosjektet **{0}** ble opprettet."
+    "createSuccess": "Prosjektet **{0}** ble opprettet.",
+    "editLabel": "Rediger prosjekt"
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",

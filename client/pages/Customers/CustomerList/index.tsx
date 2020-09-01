@@ -4,7 +4,7 @@ import { ICustomer } from 'interfaces/ICustomer'
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
-import * as React from 'react'
+import  React,{useEffect,useState} from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { generateColumn as col } from 'utils/generateColumn'
@@ -41,7 +41,7 @@ export const columns = (t: TFunction): IColumn[] => ([
  */
 export const CustomerList = (props: ICustomerListProps) => {
     const { t } = useTranslation(['common', 'customers'])
-    const [items, setItems] = React.useState([...props.items])
+    const [items, setItems] = useState([...props.items])
 
     /**
      * On toggle inactive
@@ -53,13 +53,14 @@ export const CustomerList = (props: ICustomerListProps) => {
         setItems([...props.items].filter(customer => checked ? true : !customer.inactive))
     }
 
-    React.useEffect(() => setItems([...props.items].filter(customer => !customer.inactive)), [props.items])
+    useEffect(() => setItems([...props.items].filter(customer => !customer.inactive)), [props.items])
 
     return (
         <List
             {...props}
             items={items}
             columns={columns(t)}
+            selection={props.selection}
             commandBar={{
                 items: [
                     {

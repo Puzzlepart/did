@@ -8,15 +8,13 @@ import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import { ProjectForm } from 'pages/Projects/ProjectForm'
-import React, { useContext, useEffect } from 'react'
-import { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { contains, find } from 'underscore'
 import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
 import { GET_PROJECTS, IGetProjectsData, IProjectsParams } from './types'
-import { Panel } from 'office-ui-fabric-react/lib/Panel'
 
 /**
  * @category Projects
@@ -27,8 +25,7 @@ export const Projects = () => {
     const { user } = useContext(AppContext)
     const params = useParams<IProjectsParams>()
     const [selected, setSelected] = useState<IProject>(null)
-    const [edit, setEdit] = useState<IProject>(null)
-    const { loading, error, data,refetch } = useQuery<IGetProjectsData>(GET_PROJECTS, { variables: { sortBy: 'name' }, fetchPolicy: 'cache-first' })
+    const { loading, error, data } = useQuery<IGetProjectsData>(GET_PROJECTS, { variables: { sortBy: 'name' }, fetchPolicy: 'cache-first' })
 
     const outlookCategories = value<IOutlookCategory[]>(data, 'outlookCategories', [])
 
@@ -43,9 +40,9 @@ export const Projects = () => {
         }
     }, [params.key, projects])
 
-    function onPivotClick({ props }: PivotItem) {
+    function onPivotClick({ props: { itemKey } }: PivotItem) {
         setSelected(null)
-        history.push(`/projects/${props.itemKey}`)
+        history.push(`/projects/${itemKey}`)
     }
 
     return (
@@ -77,22 +74,8 @@ export const Projects = () => {
                                         setSelected(selected)
                                     },
                                 }}
-                                onEdit={setEdit}
                                 height={selected && 400} />
                             {selected && <ProjectDetails project={selected} />}
-                            {edit && (
-                                <Panel
-                                    isOpen={true}
-                                    headerText={edit.name}
-                                    onDismiss={() => setEdit(null)}>
-                                    <ProjectForm 
-                                    edit={edit} 
-                                    onSubmitted={() => {
-                                        setEdit(null)
-                                        refetch()
-                                    }} />
-                                </Panel>
-                            )}
                         </>
                     )}
             </PivotItem>

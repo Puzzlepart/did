@@ -124,7 +124,6 @@ async function confirmPeriod(_obj, variables, ctx) {
         let hours = 0;
         if (variables.period.matchedEvents.length > 0) {
             const calendarView = await ctx.services.graph.getEvents(variables.period.startDateTime, variables.period.endDateTime)
-
             let timeentries = variables.period.matchedEvents.map(entry => {
                 const event = find(calendarView, e => e.id === entry.id)
                 if (!event) return

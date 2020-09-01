@@ -65,9 +65,9 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
             <div className={className}>
                 <div className={styles.content}>
                     <div>
-                        <a className={styles.projectLink} href={`/projects/${event.project.id}`}>{event.project.name}</a>
+                        <a className={styles.projectLink} href={`/projects/search/${event.project.id}`}>{event.project.name}</a>
                         <div className={styles.subText}>
-                            <span>for </span><a href={`/customers/${event.customer.key}`}><span>{event.customer.name}</span></a>
+                            <span>for </span><a href={`/customers/search/${event.customer.key}`}><span>{event.customer.name}</span></a>
                         </div>
                     </div>
                     {!isEmpty(event.project.labels) && <Icon iconName='Tag' className={styles.labelIcon} />}

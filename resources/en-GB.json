@@ -49,7 +49,8 @@
     "keyDescription": "A unique identifier for the project. Keep it short, maximum 8 characters.",
     "nameFormValidationText": "Name should be at least 2 characters long.",
     "keyFormValidationText": "Project key should be between 2 and 8 characters long, and all uppercase.",
-    "createSuccess": "The project **{0}** was succesfully created."
+    "createSuccess": "The project **{0}** was succesfully created.",
+    "editLabel": "Edit project"
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",
