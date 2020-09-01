@@ -7,9 +7,7 @@ import styles from './Home.module.scss'
 export default () => {
     return (
         <div className={styles.root}>
-            <div className={styles.logo}>
-            Did
-            </div>
+            <div className={styles.logo}>did</div>
             <p className={styles.motto}>The Calendar is the Timesheet</p>
         </div>
     )

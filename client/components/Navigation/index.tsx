@@ -18,7 +18,7 @@ export const Navigation = () => {
         <nav className={className}>
             <div className={styles.container}>
                 <Link to='/' className={styles.logo} title='Did - The Calendar is the Timesheet'>
-                    Did
+                    did
                 </Link>
                 <ul className={styles.nav} hidden={!user}>
                     <NavItem
