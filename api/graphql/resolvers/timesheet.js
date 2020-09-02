@@ -1,4 +1,4 @@
-const { first, filter, find, omit, contains } = require('underscore')
+const { first, filter, find, pick,contains } = require('underscore')
 const { formatDate, getMonthIndex, getWeek } = require('../../../utils')
 const EventMatching = require('./timesheet.matching')
 const { connectEntities } = require('./project.utils')
@@ -159,7 +159,7 @@ async function confirmPeriod(_obj, variables, ctx) {
         await ctx.services.storage.addConfirmedPeriod(variables.period.id, ctx.user.id, hours)
         return { success: true, error: null }
     } catch (error) {
-        return { success: false, error: omit(error, 'requestId') }
+        return { success: false, error: pick(error, 'name', 'message', 'code', 'statusCode') }
     }
 }
 
@@ -170,11 +170,12 @@ async function confirmPeriod(_obj, variables, ctx) {
  */
 async function unconfirmPeriod(_obj, variables, ctx) {
     try {
+        throw new Error("hllo world")
         await ctx.services.storage.deleteUserTimeEntries(variables.period.id, ctx.user.id)
         await ctx.services.storage.removeConfirmedPeriod(variables.period.id, ctx.user.id)
         return { success: true, error: null }
     } catch (error) {
-        return { success: false, error: omit(error, 'requestId') }
+        return { success: false, error: pick(error, 'name', 'message', 'code', 'statusCode') }
     }
 }
 

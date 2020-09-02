@@ -1,4 +1,4 @@
-const { omit } = require('underscore')
+const { pick } = require('underscore')
 
 const typeDef = `   
     type Role  {
@@ -33,7 +33,7 @@ async function addRole(_obj, variables, ctx) {
         await ctx.services.storage.addRole(variables.role)
         return { success: true, error: null }
     } catch (error) {
-        return { success: false, error: omit(error, 'requestId') }
+        return { success: false, error: pick(error, 'name', 'message', 'code', 'statusCode') }
     }
 }
 
@@ -42,7 +42,7 @@ async function updateRole(_obj, variables, ctx) {
         await ctx.services.storage.updateRole(variables.role)
         return { success: true, error: null }
     } catch (error) {
-        return { success: false, error: omit(error, 'requestId') }
+        return { success: false, error: pick(error, 'name', 'message', 'code', 'statusCode') }
     }
 }
 

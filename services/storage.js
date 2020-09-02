@@ -235,17 +235,13 @@ class StorageService {
             ['EndDateTime', this.tableUtil.convertDate(filterValues.endDateTime), q.date, q.lessThan],
         ]
         const query = this.tableUtil.createQuery(1000, undefined, filter)
-        let columnMap = {}
-        if (!options.noParse) {
-            columnMap = {
-                PartitionKey: 'resourceId',
-                RowKey: 'id'
-            }
-        }
         let result = await this.tableUtil.queryTableAll(
             'TimeEntries',
             query,
-            columnMap
+            {
+                PartitionKey: 'resourceId',
+                RowKey: 'id'
+            }
         )
         result = result.slice().sort(({ startDateTime: a }, { startDateTime: b }) => {
             return options.sortAsc
@@ -300,12 +296,13 @@ class StorageService {
      * @param resourceId ID of the resource
      */
     async deleteUserTimeEntries(periodId, resourceId) {
-        const timeEntries = await this.getTimeEntries({
-            resourceId,
-            periodId,
-        }, { noParse: true })
+        const { string } = this.tableUtil.entGen()
+        const timeEntries = await this.getTimeEntries({ resourceId, periodId })
         const batch = this.tableUtil.createBatch()
-        timeEntries.forEach(entity => batch.deleteEntity(entity))
+        timeEntries.forEach(e => batch.deleteEntity({
+            PartitionKey: string(resourceId),
+            RowKey: string(e.id)
+        }))
         await this.tableUtil.executeBatch('TimeEntries', batch)
     }
 

@@ -1,4 +1,4 @@
-const { omit } = require('underscore')
+const { pick } = require('underscore')
 const { connectEntities } = require('./project.utils')
 
 const typeDef = `  
@@ -42,7 +42,7 @@ async function createOrUpdateProject(_obj, variables, ctx) {
     await ctx.services.storage.createOrUpdateProject(variables.project, ctx.user.id)
     return { success: true, error: null }
   } catch (error) {
-    return { success: false, error: omit(error, 'requestId') }
+    return { success: false, error: pick(error, 'name', 'message', 'code', 'statusCode') }
   }
 }
 

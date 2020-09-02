@@ -35,7 +35,7 @@ async function deleteApiToken(_obj, variables, ctx) {
         await ctx.services.subscription.deleteApiToken(variables.name, ctx.user.tenantId)
         return { success: true, error: null }
     } catch (error) {
-        return { success: false, error: _.omit(error, 'requestId') }
+        return { success: false, error: pick(error, 'name', 'message', 'code', 'statusCode') }
     }
 }
 

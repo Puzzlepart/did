@@ -1,4 +1,4 @@
-const { omit } = require('underscore')
+const { pick } = require('underscore')
 
 const typeDef = `   
     type Label  {
@@ -37,7 +37,7 @@ async function addOrUpdateLabel(_obj, variables, ctx) {
         await ctx.services.storage.addOrUpdateLabel(variables.label, ctx.user.id)
         return { success: true, error: null }
     } catch (error) {
-        return { success: false, error: omit(error, 'requestId') }
+        return { success: false, error: pick(error, 'name', 'message', 'code', 'statusCode') }
     }
 }
 
@@ -46,7 +46,7 @@ async function updateLabel(_obj, variables, ctx) {
         await ctx.services.storage.updateLabel(variables.label)
         return { success: true, error: null }
     } catch (error) {
-        return { success: false, error: omit(error, 'requestId') }
+        return { success: false, error: pick(error, 'name', 'message', 'code', 'statusCode') }
     }
 }
 
@@ -55,7 +55,7 @@ async function deleteLabel(_obj, { id }, { services: { storage: StorageService }
         await StorageService.deleteLabel(id)
         return { success: true, error: null }
     } catch (error) {
-        return { success: false, error }
+        return { success: false, error: pick(error, 'name', 'message', 'code', 'statusCode') }
     }
 }
 

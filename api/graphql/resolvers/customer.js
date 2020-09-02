@@ -1,4 +1,4 @@
-const _ = require('underscore')
+const { pick } = require('underscore')
 const TableUtil = require('../../../utils/table')
 const { executeBatch, createBatch } = new TableUtil()
 
@@ -43,7 +43,7 @@ async function createOrUpdateCustomer(_obj, variables, ctx) {
     await ctx.services.storage.createOrUpdateCustomer(variables.customer, ctx.user.id)
     return { success: true, error: null }
   } catch (error) {
-    return { success: false, error: _.omit(error, 'requestId') }
+    return { success: false, error: pick(error, 'name', 'message', 'code', 'statusCode') }
   }
 }
 
@@ -60,7 +60,7 @@ async function deleteCustomer(_obj, variables, ctx) {
     await ctx.services.storage.deleteCustomer(variables.key)
     return { success: true, error: null }
   } catch (error) {
-    return { success: false, error: _.omit(error, 'requestId') }
+    return { success: false, error: pick(error, 'name', 'message', 'code', 'statusCode') }
   }
 }
 

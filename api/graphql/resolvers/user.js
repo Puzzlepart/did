@@ -1,4 +1,4 @@
-const { find } = require('underscore')
+const { pick } = require('underscore')
 
 const typeDef = `  
     type Subscription {
@@ -66,7 +66,7 @@ async function addOrUpdateUser(_obj, variables, ctx) {
         await ctx.services.storage.addOrUpdateUser(variables.user)
         return { success: true, error: null }
     } catch (error) {
-        return { success: false, error: _.omit(error, 'requestId') }
+        return { success: false, error: pick(error, 'name', 'message', 'code', 'statusCode') }
     }
 }
 
