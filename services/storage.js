@@ -300,12 +300,12 @@ class StorageService {
      * @param resourceId ID of the resource
      */
     async deleteUserTimeEntries(periodId, resourceId) {
-        const entities = await this.getTimeEntries({
+        const timeEntries = await this.getTimeEntries({
             resourceId,
             periodId,
         }, { noParse: true })
         const batch = this.tableUtil.createBatch()
-        entities.forEach(entity => batch.deleteEntity(entity))
+        timeEntries.forEach(entity => batch.deleteEntity(entity))
         await this.tableUtil.executeBatch('TimeEntries', batch)
     }
 
