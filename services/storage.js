@@ -130,13 +130,17 @@ class StorageService {
         const filter = [['PartitionKey', customerKey, q.string, q.equal]]
         const query = this.tableUtil.createQuery(1000, undefined, filter)
         const parse = !options.noParse
-        let { entries } = await this.tableUtil.queryTable(
-            'Projects',
-            query,
-            parse && {
+        let columnMap = {}
+        if (!options.noParse) {
+            columnMap = {
                 RowKey: 'key',
                 PartitionKey: 'customerKey'
             }
+        }
+        let { entries } = await this.tableUtil.queryTable(
+            'Projects',
+            query,
+            columnMap
         )
         if (options.sortBy) entries = arraySort(entries, options.sortBy)
         return entries
@@ -231,13 +235,17 @@ class StorageService {
             ['EndDateTime', this.tableUtil.convertDate(filterValues.endDateTime), q.date, q.lessThan],
         ]
         const query = this.tableUtil.createQuery(1000, undefined, filter)
-        let result = await this.tableUtil.queryTableAll(
-            'TimeEntries',
-            query,
-            !options.noParse && {
+        let columnMap = {}
+        if (!options.noParse) {
+            columnMap = {
                 PartitionKey: 'resourceId',
                 RowKey: 'id'
             }
+        }
+        let result = await this.tableUtil.queryTableAll(
+            'TimeEntries',
+            query,
+            columnMap
         )
         result = result.slice().sort(({ startDateTime: a }, { startDateTime: b }) => {
             return options.sortAsc
