@@ -219,16 +219,16 @@ class StorageService {
      * @param filterValues Filtervalues
      * @param options Options
      */
-    async getTimeEntries({ periodId, projectId, resourceId, weekNumber, year, startDateTime, endDateTime }, options = {}) {
+    async getTimeEntries(filterValues, options = {}) {
         const q = this.tableUtil.query()
         const filter = [
-            ['PeriodId', periodId, q.string, q.equal],
-            ['ProjectId', projectId, q.string, q.equal],
-            ['PartitionKey', resourceId, q.string, q.equal],
-            ['WeekNumber', weekNumber, q.int, q.equal],
-            ['Year', year, q.int, q.equal],
-            ['StartDateTime', this.tableUtil.convertDate(startDateTime), q.date, q.greaterThan],
-            ['EndDateTime', this.tableUtil.convertDate(endDateTime), q.date, q.lessThan],
+            ['PeriodId', filterValues.periodId, q.string, q.equal],
+            ['ProjectId', filterValues.projectId, q.string, q.equal],
+            ['PartitionKey', filterValues.resourceId, q.string, q.equal],
+            ['WeekNumber', filterValues.weekNumber, q.int, q.equal],
+            ['Year', filterValues.year, q.int, q.equal],
+            ['StartDateTime', this.tableUtil.convertDate(filterValues.startDateTime), q.date, q.greaterThan],
+            ['EndDateTime', this.tableUtil.convertDate(filterValues.endDateTime), q.date, q.lessThan],
         ]
         const query = this.tableUtil.createQuery(1000, undefined, filter)
         let result = await this.tableUtil.queryTableAll(
