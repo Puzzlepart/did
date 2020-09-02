@@ -239,7 +239,7 @@ class StorageService {
                 RowKey: 'id'
             }
         )
-        result = result.sort(({ startDateTime: a }, { startDateTime: b }) => {
+        result = result.slice().sort(({ startDateTime: a }, { startDateTime: b }) => {
             return options.sortAsc
                 ? new Date(a) - new Date(b)
                 : new Date(b) - new Date(a)
