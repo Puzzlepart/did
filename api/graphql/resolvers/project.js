@@ -20,8 +20,11 @@ const typeDef = `
     key: String
     name: String
     description: String
+    webLink: String
+    externalSystemURL: String
     icon: String
     customerKey: String
+    inactive: Boolean
     labels: [String]
   }
   

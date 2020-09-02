@@ -17,7 +17,10 @@ const typeDef = `
     key: String
     name: String
     description: String
+    webLink: String
+    externalSystemURL: String
     icon: String
+    inactive: Boolean
   }
   
   extend type Query {
