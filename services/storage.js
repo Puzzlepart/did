@@ -239,7 +239,11 @@ class StorageService {
                 RowKey: 'id'
             }
         )
-        result = result.sort((a, b) => new Date(a.startDateTime) - new Date(b.startDateTime))
+        result = result.sort(({ startDateTime: a }, { startDateTime: b }) => {
+            return options.sortAsc
+                ? new Date(a) - new Date(b)
+                : new Date(b) - new Date(a)
+        })
         return result
     }
 
@@ -314,7 +318,7 @@ class StorageService {
                 {
                     PartitionKey: 'resourceId',
                     RowKey: 'periodId'
-                }                
+                }
             )
             return result
         } catch (error) {

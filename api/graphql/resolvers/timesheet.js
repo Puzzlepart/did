@@ -68,7 +68,7 @@ const typeDef = `
  */
 async function timesheet(_obj, variables, ctx) {
     if (!ctx.services.graph) return { success: false, error: null }
-    
+
     let periods = getPeriods(
         variables.startDateTime,
         variables.endDateTime,
@@ -87,7 +87,7 @@ async function timesheet(_obj, variables, ctx) {
             resourceId: ctx.user.id,
             startDateTime: variables.startDateTime,
             endDateTime: variables.endDateTime,
-        }),
+        }, { sortAsc: true }),
         ctx.services.storage.getLabels(),
     ])
 
