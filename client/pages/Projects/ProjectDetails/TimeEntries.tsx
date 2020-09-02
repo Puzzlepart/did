@@ -18,7 +18,7 @@ export const TimeEntries = () => {
             {context.loading && <ProgressIndicator label={t('timeEntriesLoadingLabel')} />}
             {!isEmpty(context.timeentries) && (
                 <EventList
-                    events={context.timeentries}
+                    events={context.timeentries.reverse()}
                     additionalColumns={[
                         col(
                             'resourceName',
