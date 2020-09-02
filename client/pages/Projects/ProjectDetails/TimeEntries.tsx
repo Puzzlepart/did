@@ -11,6 +11,7 @@ import { isEmpty } from 'underscore'
 export const TimeEntries = () => {
     const { t } = useTranslation(['projects', 'common'])
     const context = useContext(ProjectDetailsContext)
+    context.timeentries.sort((a, b) => new Date(b.startDateTime).getTime() - new Date(a.startDateTime).getTime())
     return (
         <>
             {context.error && <UserMessage type={MessageBarType.error} text={t('timeEntriesErrorText')} />}
@@ -18,7 +19,7 @@ export const TimeEntries = () => {
             {context.loading && <ProgressIndicator label={t('timeEntriesLoadingLabel')} />}
             {!isEmpty(context.timeentries) && (
                 <EventList
-                    events={context.timeentries.reverse()}
+                    events={context.timeentries}
                     additionalColumns={[
                         col(
                             'resourceName',
