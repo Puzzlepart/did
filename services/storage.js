@@ -110,8 +110,8 @@ class StorageService {
             'Customers',
             {
                 PartitionKey: string('Default'),
-                RowKey: string(customer.key.toUpperCase()),
-                Name: string(customer.name),
+                RowKey: string(customer.key.toUpperCase().trim()),
+                Name: string(customer.name.trim()),
                 Description: string(customer.description),
                 Icon: string(customer.icon || 'Page'),
                 CreatedBy: string(createdBy),
@@ -178,9 +178,9 @@ class StorageService {
             'Projects',
             {
                 PartitionKey: string(project.customerKey),
-                RowKey: string(project.key),
-                Id: string([project.customerKey, project.key].join(' ')),
-                Name: string(project.name),
+                RowKey: string(project.key.trim()),
+                Id: string([project.customerKey, project.key.trim()].join(' ')),
+                Name: string(project.name.trim()),
                 Description: string(project.description),
                 Icon: string(project.icon || 'Page'),
                 Labels: string(project.labels ? project.labels.join('|') : ''),
