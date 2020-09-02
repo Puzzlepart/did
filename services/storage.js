@@ -126,20 +126,17 @@ class StorageService {
      * @param options Options
      */
     async getProjects(customerKey, options = {}) {
-        const { query, createQuery, queryTable } = this.tableUtil
-        const filter = [['PartitionKey', customerKey, query().string, query().equal]]
-        const query = createQuery(1000, undefined, filter)
-        let columnMap = {}
-        if (!options.noParse) {
-            columnMap = {
+        const q = this.tableUtil.query()
+        const filter = [['PartitionKey', customerKey, q.string, q.equal]]
+        const query = this.tableUtil.createQuery(1000, undefined, filter)
+        const parse = !options.noParse
+        let { entries } = await this.tableUtil.queryTable(
+            'Projects',
+            query,
+            parse && {
                 RowKey: 'key',
                 PartitionKey: 'customerKey'
             }
-        }
-        let { entries } = await queryTable(
-            'Projects',
-            query,
-            columnMap
         )
         if (options.sortBy) entries = arraySort(entries, options.sortBy)
         return entries
@@ -223,28 +220,24 @@ class StorageService {
      * @param options Options
      */
     async getTimeEntries(filterValues, options = {}) {
-        const { query, convertDate, createQuery, queryTableAll } = this.tableUtil
+        const q = this.tableUtil.query()
         const filter = [
-            ['PeriodId', filterValues.periodId, query().string, query().equal],
-            ['ProjectId', filterValues.projectId, query().string, query().equal],
-            ['PartitionKey', filterValues.resourceId, query().string, query().equal],
-            ['WeekNumber', filterValues.weekNumber, query().int, query().equal],
-            ['Year', filterValues.year, query().int, query().equal],
-            ['StartDateTime', convertDate(filterValues.startDateTime), query().date, query().greaterThan],
-            ['EndDateTime', convertDate(filterValues.endDateTime), query().date, query().lessThan],
+            ['PeriodId', filterValues.periodId, q.string, q.equal],
+            ['ProjectId', filterValues.projectId, q.string, q.equal],
+            ['PartitionKey', filterValues.resourceId, q.string, q.equal],
+            ['WeekNumber', filterValues.weekNumber, q.int, q.equal],
+            ['Year', filterValues.year, q.int, q.equal],
+            ['StartDateTime', this.tableUtil.convertDate(filterValues.startDateTime), q.date, q.greaterThan],
+            ['EndDateTime', this.tableUtil.convertDate(filterValues.endDateTime), q.date, q.lessThan],
         ]
-        const query = createQuery(1000, undefined, filter)
-        let columnMap = {}
-        if (!options.noParse) {
-            columnMap = {
+        const query = this.tableUtil.createQuery(1000, undefined, filter)
+        let result = await this.tableUtil.queryTableAll(
+            'TimeEntries',
+            query,
+            !options.noParse && {
                 PartitionKey: 'resourceId',
                 RowKey: 'id'
             }
-        }
-        let result = await queryTableAll(
-            'TimeEntries',
-            query,
-            columnMap
         )
         result = result.slice().sort(({ startDateTime: a }, { startDateTime: b }) => {
             return options.sortAsc
@@ -261,16 +254,15 @@ class StorageService {
      * @param timeentries Collection of time entries
      */
     async addTimeEntries(periodId, timeentries) {
-        const { makeEntity, createBatch, executeBatch, entGen } = this.tableUtil
-        const { string, datetime, double, int, boolean } = entGen()
         let totalDuration = 0
+        const { string, datetime, double, int, boolean } = this.tableUtil.entGen()
         const entities = timeentries.map(({ entry, event, user, labels }) => {
             const weekNumber = getWeek(event.startDateTime)
             const monthNumber = getMonthIndex(event.startDateTime)
             const year = getYear(event.startDateTime)
             const duration = getDurationHours(event.startDateTime, event.endDateTime)
             totalDuration += duration
-            return makeEntity(
+            return this.tableUtil.makeEntity(
                 entry.id,
                 {
                     ...pick(entry, 'projectId', 'manualMatch'),
@@ -287,9 +279,9 @@ class StorageService {
                 user.id,
             )
         })
-        const batch = createBatch()
+        const batch = this.tableUtil.createBatch()
         entities.forEach(entity => batch.insertEntity(entity))
-        await executeBatch('TimeEntries', batch)
+        await this.tableUtil.executeBatch('TimeEntries', batch)
         return totalDuration
     }
 
@@ -300,14 +292,13 @@ class StorageService {
      * @param resourceId ID of the resource
      */
     async deleteUserTimeEntries(periodId, resourceId) {
-        const { createBatch, executeBatch } = this.tableUtil
         const entities = await this.getTimeEntries({
             resourceId,
             periodId,
         }, { noParse: true })
-        const batch = createBatch()
+        const batch = this.tableUtil.createBatch()
         entities.forEach(entity => batch.deleteEntity(entity))
-        await executeBatch('TimeEntries', batch)
+        await this.tableUtil.executeBatch('TimeEntries', batch)
     }
 
     /**
@@ -315,13 +306,13 @@ class StorageService {
      */
     async getConfirmedPeriods({ resourceId, year }) {
         try {
-            const { query, createQuery, queryTableAll } = this.tableUtil
+            const q = this.tableUtil.query()
             const filter = [
-                ['PartitionKey', resourceId, query().string, query().equal],
-                ['Year', year, query().int, query().equal],
+                ['PartitionKey', resourceId, q.string, q.equal],
+                ['Year', year, q.int, q.equal],
             ]
-            const query = createQuery(1000, undefined, filter)
-            let result = await queryTableAll(
+            const query = this.tableUtil.createQuery(1000, undefined, filter)
+            let result = await this.tableUtil.queryTableAll(
                 'ConfirmedPeriods',
                 query,
                 {
@@ -362,8 +353,8 @@ class StorageService {
      * @param hours Total hours for the train
      */
     async addConfirmedPeriod(periodId, resourceId, hours) {
-        const { string, double, int } = this.tableUtil.entGen()
         const [week, month, year] = periodId.split('_')
+        const { string, double, int } = this.tableUtil.entGen()
         const entity = await this.tableUtil.addEntity(
             'ConfirmedPeriods',
             {
