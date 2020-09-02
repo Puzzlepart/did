@@ -1,4 +1,4 @@
-const { pick } = require('underscore')
+const { pick, find, filter } = require('underscore')
 
 const typeDef = `  
     type Subscription {
@@ -36,10 +36,10 @@ async function users(_obj, _variables, ctx) {
         ctx.services.storage.getUsers(),
         ctx.services.storage.getRoles()
     ])
-    users = users.map(user => ({
+    users = filter(users.map(user => ({
         ...user,
         role: find(roles, role => role.name === user.role)
-    })).filter(user => user.role)
+    })), user => !!user.role)
     return users
 }
 
@@ -57,7 +57,7 @@ async function currentUser(_obj, _variables, ctx) {
             role: find(roles, role => role.name === user.role),
         }
     } catch (error) {
-        
+
     }
 }
 
