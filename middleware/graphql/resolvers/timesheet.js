@@ -80,7 +80,7 @@ async function timesheet(_obj, { startDateTime, endDateTime, dateFormat }, { use
             resourceId: user.id,
             startDateTime,
             endDateTime,
-        }),
+        }, true),
         StorageService.getLabels(),
     ])
 
