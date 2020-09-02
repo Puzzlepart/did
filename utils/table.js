@@ -174,7 +174,7 @@ class TableUtil {
 
 
     /**
-     * Make entity
+     * Make Table Storage entity from the JSON object
      * 
      * @param {*} rowKey Row key
      * @param {*} values Values
@@ -198,7 +198,7 @@ class TableUtil {
                     default: {
                         const isDate = Date.parse(values[key]) > 0 && values[key].length > 18
                         if (isDate) value = datetime(new Date(values[key]))
-                        else value = string(values[key])
+                        else value = string(values[key].trim())
                     }
                         break
                 }

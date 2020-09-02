@@ -314,8 +314,7 @@ class StorageService {
                 {
                     PartitionKey: 'resourceId',
                     RowKey: 'periodId'
-                }
-                
+                }                
             )
             return result
         } catch (error) {
