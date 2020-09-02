@@ -264,8 +264,7 @@ class StorageService {
      * @param filterValues Filtervalues
      * @param options Options
      */
-    async getTimeEntries({ projectId, resourceId, weekNumber, year, startDateTime, endDateTime }, options) {
-        options = options || {}
+    async getTimeEntries({ projectId, resourceId, weekNumber, year, startDateTime, endDateTime }, sortAsc, options = {}) {
         const q = this.tableUtil.query()
         const filter = [
             ['ProjectId', projectId, q.string, q.equal],
@@ -284,7 +283,9 @@ class StorageService {
                 RowKey: 'id'
             }
         )
-        result = result.sort((a, b) => new Date(a.startDateTime) - new Date(b.startDateTime))
+        result = sortAsc
+            ? result.sort((a, b) => new Date(a.startDateTime) - new Date(b.startDateTime))
+            : result.sort((a, b) => new Date(b.startDateTime) - new Date(a.startDateTime))
         return result
     }
 
