@@ -27,7 +27,7 @@ const typeDef = `
     }  
 
     extend type Mutation {
-        addOrUpdateUser(user: UserInput!): BaseResult!
+        addOrUpdateUser(user: UserInput!, update: Boolean): BaseResult!
     }
 `
 
@@ -63,7 +63,7 @@ async function currentUser(_obj, _variables, ctx) {
 
 async function addOrUpdateUser(_obj, variables, ctx) {
     try {
-        await ctx.services.storage.addOrUpdateUser(variables.user)
+        await ctx.services.storage.addOrUpdateUser(variables.user, variables.update)
         return { success: true, error: null }
     } catch (error) {
         return { success: false, error: pick(error, 'name', 'message', 'code', 'statusCode') }

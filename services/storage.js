@@ -207,18 +207,18 @@ class StorageService {
      * Add or update user in table Users
      * 
      * @param user The user data
+     * @param update Update the existing project
      */
-    async addOrUpdateUser(user) {
+    async addOrUpdateUser(user, update) {
         const { string } = this.tableUtil.entGen()
-        const entity = await this.tableUtil.updateEntity(
-            'Users',
-            this.tableUtil.makeEntity(
-                user.id,
-                omit(user, 'id'),
-            ),
-            true
+        const entity = this.tableUtil.makeEntity(
+            user.id,
+            omit(user, 'id'),
         )
-        return entity
+        let result
+        if (update) result = await this.tableUtil.updateEntity('Users', entity, true)
+        else result = await this.tableUtil.addEntity('Users', entity)
+        return result
     }
 
     /**
