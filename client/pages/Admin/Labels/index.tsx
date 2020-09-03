@@ -39,9 +39,7 @@ export const Labels = () => {
                         onClick={() => setForm({ label })} />
                     <DefaultButton
                         text={t('delete', { ns: 'common' })}
-                        onClick={() => {
-                            deleteLabel({ variables: { id: label.id } }).then(refetch)
-                        }} />
+                        onClick={() => deleteLabel({ variables: { name: label.name } }).then(refetch)} />
                 </>
             )),
     ]

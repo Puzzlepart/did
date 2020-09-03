@@ -105,9 +105,9 @@ async function timesheet(_obj, variables, ctx) {
                     ...entry,
                     project: find(projects, p => p.id === entry.projectId),
                     customer: find(customers, c => c.key === customerKey),
-                    labels: filter(labels, label => {
+                    labels: filter(labels, lbl => {
                         const str = value(entry, 'labels', { default: '' })
-                        return str.indexOf(label.id) !== -1
+                        return str.indexOf(lbl.name) !== -1
                     }),
                 }
             })
@@ -145,7 +145,7 @@ async function confirmPeriod(_obj, variables, ctx) {
             let timeentries = variables.period.matchedEvents.map(entry => {
                 const event = find(events, e => e.id === entry.id)
                 if (!event) return
-                const _labels = filter(labels, label => contains(event.categories, label.name)).map(label => label.id)
+                const _labels = filter(labels, lbl => contains(event.categories, lbl.name)).map(lbl => lbl.name)
                 return {
                     user: ctx.user,
                     entry,

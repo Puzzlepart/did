@@ -17,7 +17,7 @@ class StorageService {
     async getLabels() {
         const query = this.tableUtil.createQuery(1000, undefined)
         const { entries } = await this.tableUtil.queryTable('Labels', query, {
-            RowKey: 'id'
+            RowKey: 'name'
         })
         return entries
     }
@@ -27,36 +27,35 @@ class StorageService {
      * 
      * @param label Label data
      * @param createdBy Created by ID
+     * @param update Update the existing label
      */
-    async addOrUpdateLabel(label, createdBy) {
+    async addOrUpdateLabel(label, createdBy, update) {
         const { string } = this.tableUtil.entGen()
-        const entity = await this.tableUtil.updateEntity(
-            'Labels',
-            this.tableUtil.makeEntity(
-                label.id || uuidv4(),
-                {
-                    ...omit(label, 'id'),
-                    createdBy,
-                }
-            ),
-            true
+        const entity = this.tableUtil.makeEntity(
+            label.name,
+            {
+                ...omit(label, 'name'),
+                createdBy,
+            },
         )
-        return entity
+        if (update) result = await this.tableUtil.updateEntity('Labels', entity, true)
+        else result = await this.tableUtil.addEntity('Labels', entity)
+        return result
     }
 
     /**
     * Delete label from table Labels
     * 
-    * @param id Label ID
+    * @param name Label name
     */
-    async deleteLabel(id) {
+    async deleteLabel(name) {
         const { string } = this.tableUtil.entGen()
         try {
             const result = await this.tableUtil.deleteEntity(
                 'Labels',
                 {
                     PartitionKey: string('Default'),
-                    RowKey: string(id),
+                    RowKey: string(name),
                 }
             )
             return result
@@ -85,7 +84,7 @@ class StorageService {
      * 
      * @param customer Customer
      * @param createdBy Created by ID
-     * @param update Update the existing project
+     * @param update Update the existing customer
      */
     async createOrUpdateCustomer(customer, createdBy, update) {
         const { string } = this.tableUtil.entGen()
@@ -207,7 +206,7 @@ class StorageService {
      * Add or update user in table Users
      * 
      * @param user The user data
-     * @param update Update the existing project
+     * @param update Update the existing user
      */
     async addOrUpdateUser(user, update) {
         const { string } = this.tableUtil.entGen()
@@ -422,7 +421,7 @@ class StorageService {
      * Add role to table Roles
      * 
      * @param role The role data
-     * @param update Update the existing project
+     * @param update Update the existing role
      */
     async addOrUpdateRole(role, update) {
         const { string } = this.tableUtil.entGen()

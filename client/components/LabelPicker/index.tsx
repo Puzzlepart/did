@@ -39,7 +39,7 @@ export const LabelPicker = (props: ILabelPickerProps) => {
             const _labels: IEntityLabel[] = data.labels.map((lbl: any) => omit(lbl, '__typename'))
             setLabels(_labels)
             if(props.defaultSelectedKeys) {
-                const _selectedLabels = _labels.filter(lbl =>  props.defaultSelectedKeys.indexOf(lbl.id) !== -1) 
+                const _selectedLabels = _labels.filter(lbl =>  props.defaultSelectedKeys.indexOf(lbl.name) !== -1) 
                 setSelectedLabels(_selectedLabels)
             }
         }
@@ -56,7 +56,7 @@ export const LabelPicker = (props: ILabelPickerProps) => {
                     <Icon iconName='Settings' />
                 </span>
             </Label>
-            {selectedLabels.map(label => <EntityLabel key={label.id} label={label} />)}
+            {selectedLabels.map(lbl => <EntityLabel key={lbl.name} label={lbl} />)}
             <span className={styles.noneSelected} hidden={selectedLabels.length > 0}>{t('noneSelectedMessage')}</span>
             <SelectCallout
                 target={toggleRef}

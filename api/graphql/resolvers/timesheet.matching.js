@@ -70,7 +70,7 @@ class EventMatching {
      * @param {*} categories 
      */
     findLabels(categories) {
-        return filter(this.labels, label => contains(categories, label.name))
+        return filter(this.labels, lbl => contains(categories, lbl.name))
     }
 
     /**

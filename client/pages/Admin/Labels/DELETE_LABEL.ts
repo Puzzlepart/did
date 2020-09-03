@@ -5,8 +5,8 @@ import gql from 'graphql-tag'
  * @ignore
  */
 export default gql`
-    mutation($id: String!) { 
-        deleteLabel(id: $id) {
+    mutation($name: String!) { 
+        deleteLabel(name: $name) {
             success
             error {
                 message

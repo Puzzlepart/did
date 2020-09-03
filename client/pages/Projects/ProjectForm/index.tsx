@@ -29,7 +29,7 @@ export const ProjectForm = (props: IProjectFormProps) => {
     const [validation, setValidation] = useState<IProjectFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useMessage()
     const [model, setModel] = useState<IProjectInput>(props.edit
-        ? { ...props.edit, labels: props.edit.labels.map(lbl => lbl.id) }
+        ? { ...props.edit, labels: props.edit.labels.map(lbl => lbl.name) }
         : initialModel
     )
     const [createOrUpdateProject, { loading }] = useMutation<any, ICreateOrUpdateProjectVariables>(CREATE_OR_UPDATE_PROJECT)
@@ -117,8 +117,8 @@ export const ProjectForm = (props: IProjectFormProps) => {
                 className={styles.inputElement}
                 label={t('labels', { ns: 'admin' })}
                 searchLabelText={t('filterLabels', { ns: 'admin' })}
-                defaultSelectedKeys={props.edit ? props.edit.labels.map(lbl => lbl.id) : []}
-                onChange={labels => setModel({ ...model, labels: labels.map(lbl => lbl.id) })} />
+                defaultSelectedKeys={props.edit ? props.edit.labels.map(lbl => lbl.name) : []}
+                onChange={labels => setModel({ ...model, labels: labels.map(lbl => lbl.name) })} />
             <PrimaryButton
                 className={styles.inputElement}
                 text={t(isEdit ? 'save' : 'add', { ns: 'common' })}

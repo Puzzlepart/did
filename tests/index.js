@@ -97,14 +97,14 @@ describe('Event matching', () => {
         it('{overtid-40} in categories should add matching label', () => {
             testEvent.categories.push('overtid-40')
             const event = first(eventMatching.match([testEvent]))
-            assert.strictEqual(any(event.labels, label => label.name === 'overtid-40'), true)
+            assert.strictEqual(any(event.labels, lbl => lbl.name === 'overtid-40'), true)
         })
 
 
         it('{OVERTID-40} in categories should not add any label', () => {
             testEvent.categories.push('OVERTID-40')
             const event = first(eventMatching.match([testEvent]))
-            assert.strictEqual(any(event.labels, label => label.name === 'OVERTID-40'), false)
+            assert.strictEqual(any(event.labels, lbl => lbl.name === 'OVERTID-40'), false)
         })
     })
 })

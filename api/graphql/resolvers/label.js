@@ -22,8 +22,8 @@ const typeDef = `
     }  
 
     extend type Mutation {	
-        addOrUpdateLabel(label: LabelInput!): BaseResult    
-        deleteLabel(id: String!): BaseResult
+        addOrUpdateLabel(label: LabelInput!, update: Boolean): BaseResult    
+        deleteLabel(name: String!): BaseResult
     }
 `
 
@@ -34,7 +34,7 @@ async function labels(_obj, _variables, ctx) {
 
 async function addOrUpdateLabel(_obj, variables, ctx) {
     try {
-        await ctx.services.storage.addOrUpdateLabel(variables.label, ctx.user.id)
+        await ctx.services.storage.addOrUpdateLabel(variables.label, ctx.user.id, variables.update)
         return { success: true, error: null }
     } catch (error) {
         return { success: false, error: pick(error, 'name', 'message', 'code', 'statusCode') }
@@ -50,9 +50,9 @@ async function updateLabel(_obj, variables, ctx) {
     }
 }
 
-async function deleteLabel(_obj, { id }, { services: { storage: StorageService } }) {
+async function deleteLabel(_obj, variables, ctx) {
     try {
-        await StorageService.deleteLabel(id)
+        await ctx.services.storage.deleteLabel(variables.name)
         return { success: true, error: null }
     } catch (error) {
         return { success: false, error: pick(error, 'name', 'message', 'code', 'statusCode') }

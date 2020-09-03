@@ -39,10 +39,10 @@ export const SelectCallout = (props: ISelectCalloutProps) => {
                 onChange={(_evt, value) => onSearch(value)} />
             <ul>
                 {labels.map(lbl => (
-                    <li key={lbl.id}>
+                    <li key={lbl.name}>
                         <div className={styles.itemContainer}>
                             <Checkbox
-                                defaultChecked={props.defaultSelectedKeys.indexOf(lbl.id) !== -1}
+                                defaultChecked={props.defaultSelectedKeys.indexOf(lbl.name) !== -1}
                                 className={styles.itemCheckbox}
                                 onChange={() => props.onToggleLabel(lbl)} />
                             <div>
