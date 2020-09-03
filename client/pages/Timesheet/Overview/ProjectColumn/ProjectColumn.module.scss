@@ -1,39 +1,34 @@
 .root {
-    width: 90%;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
 
-    &.mobile {
-        .content {
-            .projectLink {
-                font-size: 10pt;
-                margin: 0;
-            }
-
-            .subText {
-
-                span,
-                a {
-                    font-size: 9pt;
-                    margin: 0;
-                }
-            }
-        }
-    }
-
+  &.mobile {
     .content {
-        display: flex;
-        flex-direction: row;
-
-        .subText {
-            font-size: 7pt;
-        }
-
-        .labelIcon {
-            margin: 0 0 0 6px;
-            align-self: center;
-        }
-
-        .clearButton {
-            margin: 0 0 0 4px;
-        }
+      .link {
+        font-size: 10pt;
+        margin: 0;
+      }
     }
+  }
+
+  .iconContainer {
+    padding: 4px 0 0 0;
+    align-self: flex-start;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: row;
+    padding: 0 0 0 8px;
+
+    .labelIcon {
+      margin: 0 0 0 6px;
+      align-self: center;
+    }
+
+    .clearButton {
+      margin: 0 0 0 4px;
+    }
+  }
 }

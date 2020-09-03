@@ -3,11 +3,11 @@
 interface CssExports {
   'clearButton': string;
   'content': string;
+  'iconContainer': string;
   'labelIcon': string;
+  'link': string;
   'mobile': string;
-  'projectLink': string;
   'root': string;
-  'subText': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

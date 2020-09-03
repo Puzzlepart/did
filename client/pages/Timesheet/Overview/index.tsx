@@ -39,9 +39,15 @@ export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
                 }}
                 additionalColumns={[
                     col(
+                        'customer',
+                        t('customer'),
+                        { minWidth: 150, maxWidth: 200 },
+                        (event: ITimeEntry) => <a href='#'>{event.customer.name}</a>,
+                    ),
+                    col(
                         'project',
                         t('project'),
-                        { minWidth: 350, maxWidth: 350 },
+                        { minWidth: 150, maxWidth: 250 },
                         (event: ITimeEntry) => <ProjectColumn event={event} />
                     ),
                 ]} />
