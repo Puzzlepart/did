@@ -33,13 +33,13 @@ const typeDef = `
   }  
 
   extend type Mutation {
-    createOrUpdateProject(project: ProjectInput!): BaseResult
+    createOrUpdateProject(project: ProjectInput!, update: Boolean): BaseResult
   }
 `
 
 async function createOrUpdateProject(_obj, variables, ctx) {
   try {
-    await ctx.services.storage.createOrUpdateProject(variables.project, ctx.user.id)
+    await ctx.services.storage.createOrUpdateProject(variables.project, ctx.user.id, variables.update)
     return { success: true, error: null }
   } catch (error) {
     return { success: false, error: pick(error, 'name', 'message', 'code', 'statusCode') }

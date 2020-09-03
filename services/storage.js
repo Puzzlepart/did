@@ -151,25 +151,24 @@ class StorageService {
      * 
      * @param project Project data
      * @param createdBy Created by ID
+     * @param update Update the existing project
      */
-    async createOrUpdateProject(project, createdBy) {
-        const { string } = this.tableUtil.entGen()
+    async createOrUpdateProject(project, createdBy, update) {
         const id = [project.customerKey, project.key].join(' ')
-        const entity = await this.tableUtil.updateEntity(
-            'Projects',
-            this.tableUtil.makeEntity(
-                project.customerKey,
-                {
-                    ...project,
-                    id,
-                    labels: project.labels && project.labels.join('|'),
-                    createdBy,
-                },
-                project.customerKey
-            ),
-            true
+        const entity = this.tableUtil.makeEntity(
+            project.key,
+            {
+                ...project,
+                id,
+                labels: project.labels && project.labels.join('|'),
+                createdBy,
+            },
+            project.customerKey
         )
-        return entity
+        let result
+        if (update) result = await this.tableUtil.updateEntity('Projects', entity, true)
+        else result = await this.tableUtil.addEntity('Projects', entity)
+        return result
     }
 
     /**

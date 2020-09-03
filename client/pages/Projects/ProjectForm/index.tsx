@@ -8,10 +8,10 @@ import { useTranslation } from 'react-i18next'
 import { format } from 'office-ui-fabric-react/lib/Utilities'
 import { pick } from 'underscore'
 import styles from './CreateProjectForm.module.scss'
-import CREATE_OR_UPDATE_PROJECT from './CREATE_OR_UPDATE_PROJECT'
+import CREATE_OR_UPDATE_PROJECT, { ICreateOrUpdateProjectVariables, IProjectInput } from './CREATE_OR_UPDATE_PROJECT'
 import { IProjectFormProps, IProjectFormValidation } from './types'
 
-const initialModel = {
+const initialModel: IProjectInput = {
     key: '',
     name: '',
     customerKey: '',
@@ -23,14 +23,20 @@ const initialModel = {
 /**
  * @category Projects
  */
-export const ProjectForm = ({ edit, onSubmitted }: IProjectFormProps) => {
-    const isEdit = !!edit
+export const ProjectForm = (props: IProjectFormProps) => {
+    const isEdit = !!props.edit
     const { t } = useTranslation(['projects', 'common'])
     const [validation, setValidation] = useState<IProjectFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useMessage()
-    const [model, setModel] = useState<any>(edit ? { ...edit, labels: edit.labels.map(lbl => lbl.id) } : initialModel)
-    const [createOrUpdateProject, { loading }] = useMutation<any, { project: any }>(CREATE_OR_UPDATE_PROJECT)
+    const [model, setModel] = useState<any>(props.edit
+        ? { ...props.edit, labels: props.edit.labels.map(lbl => lbl.id) }
+        : initialModel
+    )
+    const [createOrUpdateProject, { loading }] = useMutation<any, ICreateOrUpdateProjectVariables>(CREATE_OR_UPDATE_PROJECT)
 
+    /**
+     * On validate form
+     */
     const validateForm = (): IProjectFormValidation => {
         const errors: { [key: string]: string } = {}
         if (!model.customerKey) errors.customerKey = ''
@@ -39,6 +45,9 @@ export const ProjectForm = ({ edit, onSubmitted }: IProjectFormProps) => {
         return { errors, invalid: Object.keys(errors).length > 0 }
     }
 
+    /**
+     * On form submit
+     */
     const onFormSubmit = async () => {
         const _validation = validateForm()
         if (_validation.invalid) {
@@ -46,11 +55,16 @@ export const ProjectForm = ({ edit, onSubmitted }: IProjectFormProps) => {
             return
         }
         setValidation({ errors: {}, invalid: false })
-        const { data: { result } } = await createOrUpdateProject({ variables: { project: pick(model, ...Object.keys(initialModel)) } })
+        const { data: { result } } = await createOrUpdateProject({
+            variables: {
+                project: pick(model, ...Object.keys(initialModel)) as IProjectInput,
+                update: isEdit,
+            }
+        })
         if (result.success) setMessage({ text: format(t('createSuccess'), model.name), type: MessageBarType.success })
         else setMessage({ text: result.error.message, type: MessageBarType.error })
         setModel(initialModel)
-        onSubmitted()
+        props.onSubmitted()
     }
 
     return (
@@ -103,7 +117,7 @@ export const ProjectForm = ({ edit, onSubmitted }: IProjectFormProps) => {
                 className={styles.inputElement}
                 label={t('labels', { ns: 'admin' })}
                 searchLabelText={t('filterLabels', { ns: 'admin' })}
-                defaultSelectedKeys={edit ? edit.labels.map(lbl => lbl.id) : []}
+                defaultSelectedKeys={props.edit ? props.edit.labels.map(lbl => lbl.id) : []}
                 onChange={labels => setModel({ ...model, labels: labels.map(lbl => lbl.id) })} />
             <PrimaryButton
                 className={styles.inputElement}
