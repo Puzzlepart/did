@@ -28,7 +28,7 @@ const typeDef = `
   }  
 
   extend type Mutation {	
-    createOrUpdateCustomer(customer: CustomerInput!): BaseResult   
+    createOrUpdateCustomer(customer: CustomerInput!, update: Boolean): BaseResult   
     deleteCustomer(key: String!): BaseResult
   }
 `
@@ -40,7 +40,7 @@ async function customers(_obj, variables, ctx) {
 
 async function createOrUpdateCustomer(_obj, variables, ctx) {
   try {
-    await ctx.services.storage.createOrUpdateCustomer(variables.customer, ctx.user.id)
+    await ctx.services.storage.createOrUpdateCustomer(variables.customer, ctx.user.id, variables.update)
     return { success: true, error: null }
   } catch (error) {
     return { success: false, error: pick(error, 'name', 'message', 'code', 'statusCode') }

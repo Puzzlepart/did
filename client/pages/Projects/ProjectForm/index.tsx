@@ -28,7 +28,7 @@ export const ProjectForm = (props: IProjectFormProps) => {
     const { t } = useTranslation(['projects', 'common'])
     const [validation, setValidation] = useState<IProjectFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useMessage()
-    const [model, setModel] = useState<any>(props.edit
+    const [model, setModel] = useState<IProjectInput>(props.edit
         ? { ...props.edit, labels: props.edit.labels.map(lbl => lbl.id) }
         : initialModel
     )
@@ -57,7 +57,7 @@ export const ProjectForm = (props: IProjectFormProps) => {
         setValidation({ errors: {}, invalid: false })
         const { data: { result } } = await createOrUpdateProject({
             variables: {
-                project: pick(model, ...Object.keys(initialModel)) as IProjectInput,
+                project: pick(model, ...Object.keys(initialModel) as any) as IProjectInput,
                 update: isEdit,
             }
         })

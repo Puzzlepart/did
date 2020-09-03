@@ -78,23 +78,28 @@ class StorageService {
         return entries
     }
 
+
+
     /**
      * Create or update customer in table Customers
      * 
      * @param customer Customer
      * @param createdBy Created by ID
+     * @param update Update the existing project
      */
-    async createOrUpdateCustomer(customer, createdBy) {
+    async createOrUpdateCustomer(customer, createdBy, update) {
         const { string } = this.tableUtil.entGen()
-        const entity = await this.tableUtil.updateEntity(
-            'Customers',
-            this.tableUtil.makeEntity(
-                customer.key.toUpperCase(),
-                omit(customer, 'key'),
-            ),
-            true
+        const entity = this.tableUtil.makeEntity(
+            customer.key.toUpperCase(),
+            {
+                ...omit(customer, 'key'),
+                createdBy,
+            }
         )
-        return entity
+        let result
+        if (update) result = await this.tableUtil.updateEntity('Customers', entity, true)
+        else result = await this.tableUtil.addEntity('Customers', entity)
+        return result
     }
 
     /**
