@@ -64,7 +64,7 @@ export const ProjectForm = (props: IProjectFormProps) => {
         if (result.success) setMessage({ text: format(t('createSuccess'), model.name), type: MessageBarType.success })
         else setMessage({ text: result.error.message, type: MessageBarType.error })
         setModel(initialModel)
-        props.onSubmitted()
+        props.onSubmitted && props.onSubmitted()
     }
 
     return (

@@ -6,7 +6,6 @@ import { value } from 'helpers'
 import { IOutlookCategory, IProject } from 'interfaces'
 import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
-import { Panel } from 'office-ui-fabric-react/lib/Panel'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import { ProjectForm } from 'pages/Projects/ProjectForm'
 import React, { useContext, useEffect, useState } from 'react'
@@ -27,8 +26,7 @@ export const Projects = () => {
     const { user } = useContext(AppContext)
     const params = useParams<IProjectsParams>()
     const [selected, setSelected] = useState<IProject>(null)
-    const [edit, setEdit] = useState<IProject>(null)
-    const { loading, error, data, refetch } = useQuery<IGetProjectsData>(
+    const { loading, error, data } = useQuery<IGetProjectsData>(
         GET_PROJECTS,
         {
             variables: { sortBy: 'name' },
@@ -84,19 +82,6 @@ export const Projects = () => {
                                 }}
                                 height={selected && 400} />
                             {selected && <ProjectDetails project={selected} />}
-                            {edit && (
-                                <Panel
-                                    isOpen={true}
-                                    headerText={edit.name}
-                                    onDismiss={() => setEdit(null)}>
-                                    <ProjectForm
-                                        edit={edit}
-                                        onSubmitted={() => {
-                                            setEdit(null)
-                                            refetch()
-                                        }} />
-                                </Panel>
-                            )}
                         </>
                     )}
             </PivotItem>
