@@ -30,7 +30,7 @@ class StorageService {
      * @param update Update the existing label
      */
     async addOrUpdateLabel(label, createdBy, update) {
-        const { string } = this.tableUtil.entGen()
+        const { string } = this.tableUtil.azEntGen()
         const entity = this.tableUtil.convertToAzEntity(
             label.name,
             {
@@ -49,7 +49,7 @@ class StorageService {
     * @param name Label name
     */
     async deleteLabel(name) {
-        const { string } = this.tableUtil.entGen()
+        const { string } = this.tableUtil.azEntGen()
         try {
             const result = await this.tableUtil.deleteEntity(
                 'Labels',
@@ -87,7 +87,7 @@ class StorageService {
      * @param update Update the existing customer
      */
     async createOrUpdateCustomer(customer, createdBy, update) {
-        const { string } = this.tableUtil.entGen()
+        const { string } = this.tableUtil.azEntGen()
         const entity = this.tableUtil.convertToAzEntity(
             customer.key.toUpperCase(),
             {
@@ -107,7 +107,7 @@ class StorageService {
      * @param key Customer key
      */
     async deleteCustomer(key) {
-        const { string } = this.tableUtil.entGen()
+        const { string } = this.tableUtil.azEntGen()
         try {
             const result = await this.tableUtil.deleteEntity(
                 'Customers',
@@ -209,7 +209,7 @@ class StorageService {
      * @param update Update the existing user
      */
     async addOrUpdateUser(user, update) {
-        const { string } = this.tableUtil.entGen()
+        const { string } = this.tableUtil.azEntGen()
         const entity = this.tableUtil.convertToAzEntity(
             user.id,
             omit(user, 'id'),
@@ -262,7 +262,7 @@ class StorageService {
      */
     async addTimeEntries(periodId, timeentries) {
         let totalDuration = 0
-        const { string, datetime, double, int, boolean } = this.tableUtil.entGen()
+        const { string, datetime, double, int, boolean } = this.tableUtil.azEntGen()
         const entities = timeentries.map(({ entry, event, user, labels }) => {
             const weekNumber = getWeek(event.startDateTime)
             const monthNumber = getMonthIndex(event.startDateTime)
@@ -301,7 +301,7 @@ class StorageService {
      * @param resourceId ID of the resource
      */
     async deleteUserTimeEntries(periodId, resourceId) {
-        const { string } = this.tableUtil.entGen()
+        const { string } = this.tableUtil.azEntGen()
         const timeEntries = await this.getTimeEntries({ resourceId, periodId })
         const batch = this.tableUtil.createAzBatch()
         timeEntries.forEach(e => batch.deleteEntity({
@@ -364,7 +364,7 @@ class StorageService {
      */
     async addConfirmedPeriod(periodId, resourceId, hours) {
         const [week, month, year] = periodId.split('_')
-        const { string, double, int } = this.tableUtil.entGen()
+        const { string, double, int } = this.tableUtil.azEntGen()
         const entity = await this.tableUtil.addAzEntity(
             'ConfirmedPeriods',
             {
@@ -386,7 +386,7 @@ class StorageService {
      * @param resourceId ID of the resource
      */
     async removeConfirmedPeriod(periodId, resourceId) {
-        const { string } = this.tableUtil.entGen()
+        const { string } = this.tableUtil.azEntGen()
         try {
             const result = await this.tableUtil.deleteEntity(
                 'ConfirmedPeriods',
@@ -426,7 +426,7 @@ class StorageService {
      * @param update Update the existing role
      */
     async addOrUpdateRole(role, update) {
-        const { string } = this.tableUtil.entGen()
+        const { string } = this.tableUtil.azEntGen()
         const entity = this.tableUtil.convertToAzEntity(
             role.name,
             {

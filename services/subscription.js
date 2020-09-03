@@ -50,7 +50,7 @@ class SubscriptionService {
    */
   async addApiToken(name, tenantId, token) {
     try {
-      const { string } = this.tableUtil.entGen()
+      const { string } = this.tableUtil.azEntGen()
       const entity = await this.tableUtil.addAzEntity(
         'ApiTokens',
         {
@@ -73,7 +73,7 @@ class SubscriptionService {
    */
   async deleteApiToken(name, tenantId) {
     try {
-      const { string } = this.tableUtil.entGen()
+      const { string } = this.tableUtil.azEntGen()
       const result = await this.tableUtil.deleteEntity(
         'ApiTokens',
         {

@@ -49,7 +49,7 @@ class TableUtil {
     /**
      * entityGenerator from azure-storage TableUtilities
      */
-    entGen() {
+    azEntGen() {
         return {
             string: az.TableUtilities.entityGenerator.String,
             int: az.TableUtilities.entityGenerator.Int32,
@@ -83,7 +83,7 @@ class TableUtil {
      * @param dateString The date string to convert
      */
     convertDate(dateString) {
-        if (dateString) return this.entGen().datetime(new Date(dateString))._
+        if (dateString) return this.azEntGen().datetime(new Date(dateString))._
         return null
     }
 
@@ -182,7 +182,7 @@ class TableUtil {
      * @param {*} dateFields Date fields
      */
     convertToAzEntity(rowKey, values, partitionKey = 'Default', dateFields = []) {
-        const { string, datetime, double, int, boolean } = this.entGen()
+        const { string, datetime, double, int, boolean } = this.azEntGen()
         const entity = Object.keys(values)
             .filter(key => !isBlank(values[key]))
             .reduce((obj, key) => {
