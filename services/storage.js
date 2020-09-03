@@ -407,7 +407,7 @@ class StorageService {
     async getRoles() {
         try {
             const query = this.tableUtil.createQuery(1000, undefined)
-            let { entries } = await this.tableUtil.queryTable('Roles', query, { RowKey: 'id' })
+            let { entries } = await this.tableUtil.queryTable('Roles', query, { RowKey: 'name' })
             entries = entries.map(entry => ({
                 ...entry,
                 permissions: toArray(entry.permissions, '|'),
@@ -422,38 +422,19 @@ class StorageService {
      * Add role to table Roles
      * 
      * @param role The role data
+     * @param update Update the existing project
      */
-    async addRole(role) {
+    async addOrUpdateRole(role, update) {
         const { string } = this.tableUtil.entGen()
-        const entity = await this.tableUtil.addEntity(
-            'Roles',
+        const entity = this.tableUtil.makeEntity(
+            role.name,
             {
-                PartitionKey: string('Default'),
-                RowKey: string(uuidv4()),
-                Name: string(role.name),
-                Permissions: string(role.permissions.join('|'))
-            }
+                permissions: role.permissions.join('|')
+            },
         )
-        return entity
-    }
-
-    /**
-     * Update role in table Roles
-     * 
-     * @param role The role data
-     */
-    async updateRole(role) {
-        const { string } = this.tableUtil.entGen()
-        const entity = {
-            PartitionKey: string('Default'),
-            RowKey: string(role.id),
-            Permissions: string(role.permissions.join('|'))
-        }
-        const result = await this.tableUtil.updateEntity(
-            'Roles',
-            entity,
-            true,
-        )
+        let result       
+        if (update) result = await this.tableUtil.updateEntity('Roles', entity, true)
+        else result = await this.tableUtil.addEntity('Roles', entity)
         return result
     }
 }

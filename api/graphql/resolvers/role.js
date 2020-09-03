@@ -2,7 +2,6 @@ const { pick } = require('underscore')
 
 const typeDef = `   
     type Role  {
-        id: String
         name: String!
         permissions: [String]!
     }
@@ -18,8 +17,7 @@ const typeDef = `
     }  
 
     extend type Mutation {
-        addRole(role: RoleInput!): BaseResult
-        updateRole(role: RoleInput!): BaseResult
+        addOrUpdateRole(role: RoleInput!, update: Boolean): BaseResult
     }
 `
 
@@ -28,18 +26,9 @@ async function roles(_obj, _variables, ctx) {
     return roles
 }
 
-async function addRole(_obj, variables, ctx) {
+async function addOrUpdateRole(_obj, variables, ctx) {
     try {
-        await ctx.services.storage.addRole(variables.role)
-        return { success: true, error: null }
-    } catch (error) {
-        return { success: false, error: pick(error, 'name', 'message', 'code', 'statusCode') }
-    }
-}
-
-async function updateRole(_obj, variables, ctx) {
-    try {
-        await ctx.services.storage.updateRole(variables.role)
+        await ctx.services.storage.addRole(variables.role, variables.update)
         return { success: true, error: null }
     } catch (error) {
         return { success: false, error: pick(error, 'name', 'message', 'code', 'statusCode') }
@@ -49,7 +38,7 @@ async function updateRole(_obj, variables, ctx) {
 module.exports = {
     resolvers: {
         Query: { roles },
-        Mutation: { addRole, updateRole }
+        Mutation: { addOrUpdateRole }
     },
     typeDef
 }

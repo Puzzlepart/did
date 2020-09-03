@@ -1,24 +1,31 @@
 import { useMutation } from '@apollo/react-hooks'
 import * as securityConfig from 'config/security'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
-import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import { Panel } from 'office-ui-fabric-react/lib/Panel'
+import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import { Toggle } from 'office-ui-fabric-react/lib/Toggle'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
-import { contains, omit, isEmpty } from 'underscore'
+import { contains, isEmpty, omit } from 'underscore'
 import styles from './RolePanel.module.scss'
-import { IRolePanelProps, UPDATE_ROLE, ADD_ROLE } from './types'
+import { IRolePanelProps } from './types'
+import ADD_OR_UPDATE_ROLE from './ADD_OR_UPDATE_ROLE'
 
 /**
  * @category Admin
  */
 export const RolePanel = (props: IRolePanelProps) => {
     const { t } = useTranslation('admin')
-    const [[addRole], [updateRole]] = [useMutation(ADD_ROLE), useMutation(UPDATE_ROLE)]
+    const [addOrUpdateRole] = useMutation(ADD_OR_UPDATE_ROLE)
     const [role, setRole] = React.useState(props.edit || { permissions: [] })
     const permissions = React.useMemo(() => securityConfig.permissions(t), [])
 
+    /**
+     * On toggle permission
+     * 
+     * @param {string} permissionId Permission ID
+     * @param {boolean} checked Is checked
+     */
     function togglePermission(permissionId: string, checked: boolean) {
         const rolePermissions = [...role.permissions]
         const index = rolePermissions.indexOf(permissionId)
@@ -27,9 +34,16 @@ export const RolePanel = (props: IRolePanelProps) => {
         setRole({ ...role, permissions: rolePermissions })
     }
 
+    /**
+     * On save role
+     */
     async function onSave() {
-        if (props.edit) await updateRole({ variables: { role: omit(role, '__typename') } })
-        else await addRole({ variables: { role: omit(role, '__typename') } })
+        await addOrUpdateRole({
+            variables: {
+                role: omit(role, '__typename'),
+                update: !!props.edit
+            }
+        })
         props.onSave(role)
     }
 
