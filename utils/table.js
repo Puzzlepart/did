@@ -1,5 +1,5 @@
 const az = require('azure-storage')
-const { omit,contains } = require('underscore')
+const { omit, contains } = require('underscore')
 const { decapitalize, capitalize, isBlank } = require('underscore.string')
 const { reduceEachLeadingCommentRange } = require('typescript')
 
@@ -69,7 +69,7 @@ class TableUtil {
             date: az.TableQuery.dateFilter,
             int: az.TableQuery.int32Filter,
             double: az.TableQuery.doubleFilter,
-            combine: az.TableQuery.combineAzFilters,
+            combine: az.TableQuery.combineFilters,
             equal: az.TableUtilities.QueryComparisons.EQUAL,
             greaterThan: az.TableUtilities.QueryComparisons.GREATER_THAN,
             lessThan: az.TableUtilities.QueryComparisons.LESS_THAN,
@@ -220,7 +220,7 @@ class TableUtil {
      */
     retrieveAzEntity(table, partitionKey, rowKey) {
         return new Promise((resolve, reject) => {
-            this.tableService.retrieveAzEntity(table, partitionKey, rowKey, (error, result) => {
+            this.tableService.retrieveEntity(table, partitionKey, rowKey, (error, result) => {
                 if (error) reject(error)
                 else return resolve(result)
             })
