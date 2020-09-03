@@ -1,5 +1,5 @@
 const az = require('azure-storage')
-const { omit } = require('underscore')
+const { omit,contains } = require('underscore')
 const { decapitalize, capitalize, isBlank } = require('underscore.string')
 const { reduceEachLeadingCommentRange } = require('typescript')
 
@@ -16,7 +16,7 @@ class TableUtil {
      * @param {*} result Result
      * @param {*} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
      */
-    parseEntity(entity, columnMap = {}) {
+    parseAzEntity(entity, columnMap = {}) {
         return Object.keys(entity).reduce((obj, key) => {
             const { _, $ } = entity[key]
             if (_ === undefined || _ === null) return obj;
@@ -41,8 +41,8 @@ class TableUtil {
      * @param {*} result Result
      * @param {*} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
      */
-    parseEntities({ entries, continuationToken }, columnMap) {
-        entries = entries.map(ent => this.parseEntity(ent, columnMap))
+    parseAzEntities({ entries, continuationToken }, columnMap) {
+        entries = entries.map(ent => this.parseAzEntity(ent, columnMap))
         return { entries, continuationToken }
     }
 
@@ -69,7 +69,7 @@ class TableUtil {
             date: az.TableQuery.dateFilter,
             int: az.TableQuery.int32Filter,
             double: az.TableQuery.doubleFilter,
-            combine: az.TableQuery.combineFilters,
+            combine: az.TableQuery.combineAzFilters,
             equal: az.TableUtilities.QueryComparisons.EQUAL,
             greaterThan: az.TableUtilities.QueryComparisons.GREATER_THAN,
             lessThan: az.TableUtilities.QueryComparisons.LESS_THAN,
@@ -90,7 +90,7 @@ class TableUtil {
     /**
      * Create table batch
      */
-    createBatch() {
+    createAzBatch() {
         return new az.TableBatch()
     }
 
@@ -101,12 +101,12 @@ class TableUtil {
      * @param {*} select Columns to retrieve
      * @param {*} filters Filters
      */
-    createQuery(top, select, filters) {
+    createAzQuery(top, select, filters) {
         let query = new az.TableQuery().top(top)
         if (top) query = query.top(top)
         if (select) query = query.select(select)
         if (filters) {
-            const combined = this.combineFilters(filters)
+            const combined = this.combineAzFilters(filters)
             if (combined) query = query.where(combined)
         }
         return query
@@ -117,7 +117,7 @@ class TableUtil {
      * 
      * @param filters Filter array
      */
-    combineFilters(filters) {
+    combineAzFilters(filters) {
         const { combine, and } = this.query()
         return filters.reduce((combined, [col, value, type, comp]) => {
             if (value) {
@@ -136,7 +136,7 @@ class TableUtil {
      * @param {*} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
      * @param {*} continuationToken Continuation token
      */
-    queryTable(table, query, columnMap, continuationToken) {
+    queryAzTable(table, query, columnMap, continuationToken) {
         return new Promise((resolve, reject) => {
             this.tableService.queryEntities(
                 table,
@@ -145,7 +145,7 @@ class TableUtil {
                 (error, result) => {
                     if (!error) {
                         return columnMap
-                            ? resolve(this.parseEntities(result, columnMap))
+                            ? resolve(this.parseAzEntities(result, columnMap))
                             : resolve(result)
                     }
                     else reject(error)
@@ -160,12 +160,12 @@ class TableUtil {
      * @param {*} query Table query
      * @param {*} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
      */
-    async queryTableAll(table, query, columnMap) {
+    async queryAzTableAll(table, query, columnMap) {
         let token = null
-        let { entries, continuationToken } = await this.queryTable(table, query, columnMap, token)
+        let { entries, continuationToken } = await this.queryAzTable(table, query, columnMap, token)
         token = continuationToken
         while (token != null) {
-            let result = await this.queryTable(table, query, columnMap, token)
+            let result = await this.queryAzTable(table, query, columnMap, token)
             entries.push(...result.entries)
             token = result.continuationToken
         }
@@ -174,14 +174,14 @@ class TableUtil {
 
 
     /**
-     * Make Table Storage entity from the JSON object
+     * Converts a JSON object to an Azure Table Storage entity
      * 
      * @param {*} rowKey Row key
      * @param {*} values Values
-     * @param {*} partitionKey Partition key     * 
-     * @param {*} typesMap Types map
+     * @param {*} partitionKey Partition key
+     * @param {*} dateFields Date fields
      */
-    makeEntity(rowKey, values, partitionKey = 'Default', typesMap = {}) {
+    convertToAzEntity(rowKey, values, partitionKey = 'Default', dateFields = []) {
         const { string, datetime, double, int, boolean } = this.entGen()
         const entity = Object.keys(values)
             .filter(key => !isBlank(values[key]))
@@ -196,7 +196,7 @@ class TableUtil {
                     }
                         break
                     default: {
-                        const isDate = Date.parse(values[key]) > 0 && values[key].length > 18
+                        const isDate = contains(dateFields, key)
                         if (isDate) value = datetime(new Date(values[key]))
                         else value = string(values[key].trim())
                     }
@@ -218,9 +218,9 @@ class TableUtil {
      * @param {*} partitionKey Partition key
      * @param {*} rowKey Row key
      */
-    retrieveEntity(table, partitionKey, rowKey) {
+    retrieveAzEntity(table, partitionKey, rowKey) {
         return new Promise((resolve, reject) => {
-            this.tableService.retrieveEntity(table, partitionKey, rowKey, (error, result) => {
+            this.tableService.retrieveAzEntity(table, partitionKey, rowKey, (error, result) => {
                 if (error) reject(error)
                 else return resolve(result)
             })
@@ -233,7 +233,7 @@ class TableUtil {
      * @param {*} table Table name
      * @param {*} entity Entity
      */
-    addEntity(table, entity) {
+    addAzEntity(table, entity) {
         return new Promise((resolve, reject) => {
             this.tableService.insertEntity(table, entity, (error, result) => {
                 if (error) reject(error)

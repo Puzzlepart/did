@@ -16,9 +16,9 @@ class SubscriptionService {
    */
   async getSubscription(tenantId) {
     try {
-      const query = this.tableUtil.createQuery(1).where('RowKey eq ?', tenantId)
-      var { entries } = await this.tableUtil.queryTable('Subscriptions', query)
-      return this.tableUtil.parseEntity(first(entries))
+      const query = this.tableUtil.createAzQuery(1).where('RowKey eq ?', tenantId)
+      var { entries } = await this.tableUtil.queryAzTable('Subscriptions', query)
+      return this.tableUtil.parseAzEntity(first(entries))
     } catch (error) {
       return null;
     }
@@ -31,9 +31,9 @@ class SubscriptionService {
    */
   async findSubscriptionWithToken(token) {
     try {
-      const query = this.tableUtil.createQuery(1).where('Token eq ?', token)
-      var { entries } = await this.tableUtil.queryTable('ApiTokens', query)
-      let tokenEntry = this.tableUtil.parseEntity(first(entries))
+      const query = this.tableUtil.createAzQuery(1).where('Token eq ?', token)
+      var { entries } = await this.tableUtil.queryAzTable('ApiTokens', query)
+      let tokenEntry = this.tableUtil.parseAzEntity(first(entries))
       if (tokenEntry) return this.getSubscription(tokenEntry.partitionKey)
       return null
     } catch (error) {
@@ -51,7 +51,7 @@ class SubscriptionService {
   async addApiToken(name, tenantId, token) {
     try {
       const { string } = this.tableUtil.entGen()
-      const entity = await this.tableUtil.addEntity(
+      const entity = await this.tableUtil.addAzEntity(
         'ApiTokens',
         {
           PartitionKey: string(tenantId),
@@ -94,9 +94,9 @@ class SubscriptionService {
    */
   async getApiTokens(tenantId) {
     try {
-      const query = this.tableUtil.createQuery(100).where('PartitionKey eq ?', tenantId)
-      const result = await this.tableUtil.queryTable('ApiTokens', query)
-      return this.tableUtil.parseEntities(result, { RowKey: 'name' }).entries
+      const query = this.tableUtil.createAzQuery(100).where('PartitionKey eq ?', tenantId)
+      const result = await this.tableUtil.queryAzTable('ApiTokens', query)
+      return this.tableUtil.parseAzEntities(result, { RowKey: 'name' }).entries
     } catch (error) {
       return null;
     }

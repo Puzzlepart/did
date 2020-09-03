@@ -15,8 +15,8 @@ class StorageService {
      * Get labels from table Labels
      */
     async getLabels() {
-        const query = this.tableUtil.createQuery(1000, undefined)
-        const { entries } = await this.tableUtil.queryTable('Labels', query, {
+        const query = this.tableUtil.createAzQuery(1000, undefined)
+        const { entries } = await this.tableUtil.queryAzTable('Labels', query, {
             RowKey: 'name'
         })
         return entries
@@ -31,7 +31,7 @@ class StorageService {
      */
     async addOrUpdateLabel(label, createdBy, update) {
         const { string } = this.tableUtil.entGen()
-        const entity = this.tableUtil.makeEntity(
+        const entity = this.tableUtil.convertToAzEntity(
             label.name,
             {
                 ...omit(label, 'name'),
@@ -39,7 +39,7 @@ class StorageService {
             },
         )
         if (update) result = await this.tableUtil.updateEntity('Labels', entity, true)
-        else result = await this.tableUtil.addEntity('Labels', entity)
+        else result = await this.tableUtil.addAzEntity('Labels', entity)
         return result
     }
 
@@ -71,8 +71,8 @@ class StorageService {
      * @param options Options
      */
     async getCustomers(options = {}) {
-        const query = this.tableUtil.createQuery(1000)
-        let { entries } = await this.tableUtil.queryTable('Customers', query, { RowKey: 'key' })
+        const query = this.tableUtil.createAzQuery(1000)
+        let { entries } = await this.tableUtil.queryAzTable('Customers', query, { RowKey: 'key' })
         if (options.sortBy) entries = arraySort(entries, options.sortBy)
         return entries
     }
@@ -88,7 +88,7 @@ class StorageService {
      */
     async createOrUpdateCustomer(customer, createdBy, update) {
         const { string } = this.tableUtil.entGen()
-        const entity = this.tableUtil.makeEntity(
+        const entity = this.tableUtil.convertToAzEntity(
             customer.key.toUpperCase(),
             {
                 ...omit(customer, 'key'),
@@ -97,7 +97,7 @@ class StorageService {
         )
         let result
         if (update) result = await this.tableUtil.updateEntity('Customers', entity, true)
-        else result = await this.tableUtil.addEntity('Customers', entity)
+        else result = await this.tableUtil.addAzEntity('Customers', entity)
         return result
     }
 
@@ -132,7 +132,7 @@ class StorageService {
     async getProjects(customerKey, options = {}) {
         const q = this.tableUtil.query()
         const filter = [['PartitionKey', customerKey, q.string, q.equal]]
-        const query = this.tableUtil.createQuery(1000, undefined, filter)
+        const query = this.tableUtil.createAzQuery(1000, undefined, filter)
         const parse = !options.noParse
         let columnMap = {}
         if (!options.noParse) {
@@ -141,7 +141,7 @@ class StorageService {
                 PartitionKey: 'customerKey'
             }
         }
-        let { entries } = await this.tableUtil.queryTable(
+        let { entries } = await this.tableUtil.queryAzTable(
             'Projects',
             query,
             columnMap
@@ -159,7 +159,7 @@ class StorageService {
      */
     async createOrUpdateProject(project, createdBy, update) {
         const id = [project.customerKey, project.key].join(' ')
-        const entity = this.tableUtil.makeEntity(
+        const entity = this.tableUtil.convertToAzEntity(
             project.key,
             {
                 ...project,
@@ -171,7 +171,7 @@ class StorageService {
         )
         let result
         if (update) result = await this.tableUtil.updateEntity('Projects', entity, true)
-        else result = await this.tableUtil.addEntity('Projects', entity)
+        else result = await this.tableUtil.addAzEntity('Projects', entity)
         return result
     }
 
@@ -179,8 +179,8 @@ class StorageService {
      * Get users from table Users
      */
     async getUsers() {
-        const query = this.tableUtil.createQuery(1000, undefined)
-        const { entries } = await this.tableUtil.queryTable('Users', query, { RowKey: 'id' })
+        const query = this.tableUtil.createAzQuery(1000, undefined)
+        const { entries } = await this.tableUtil.queryAzTable('Users', query, { RowKey: 'id' })
         return entries
     }
 
@@ -191,12 +191,12 @@ class StorageService {
      */
     async getUser(userId) {
         try {
-            const entry = await this.tableUtil.retrieveEntity(
+            const entry = await this.tableUtil.retrieveAzEntity(
                 'Users',
                 'Default',
                 userId
             )
-            return this.tableUtil.parseEntity(entry, { RowKey: 'id' })
+            return this.tableUtil.parseAzEntity(entry, { RowKey: 'id' })
         } catch (error) {
             return null
         }
@@ -210,13 +210,13 @@ class StorageService {
      */
     async addOrUpdateUser(user, update) {
         const { string } = this.tableUtil.entGen()
-        const entity = this.tableUtil.makeEntity(
+        const entity = this.tableUtil.convertToAzEntity(
             user.id,
             omit(user, 'id'),
         )
         let result
         if (update) result = await this.tableUtil.updateEntity('Users', entity, true)
-        else result = await this.tableUtil.addEntity('Users', entity)
+        else result = await this.tableUtil.addAzEntity('Users', entity)
         return result
     }
 
@@ -237,8 +237,8 @@ class StorageService {
             ['StartDateTime', this.tableUtil.convertDate(filterValues.startDateTime), q.date, q.greaterThan],
             ['EndDateTime', this.tableUtil.convertDate(filterValues.endDateTime), q.date, q.lessThan],
         ]
-        const query = this.tableUtil.createQuery(1000, undefined, filter)
-        let result = await this.tableUtil.queryTableAll(
+        const query = this.tableUtil.createAzQuery(1000, undefined, filter)
+        let result = await this.tableUtil.queryAzTableAll(
             'TimeEntries',
             query,
             {
@@ -269,7 +269,7 @@ class StorageService {
             const year = getYear(event.startDateTime)
             const duration = getDurationHours(event.startDateTime, event.endDateTime)
             totalDuration += duration
-            return this.tableUtil.makeEntity(
+            const entity = this.tableUtil.convertToAzEntity(
                 entry.id,
                 {
                     ...pick(entry, 'projectId', 'manualMatch'),
@@ -284,9 +284,11 @@ class StorageService {
                     labels: labels.join('|'),
                 },
                 user.id,
+                ['startDateTime', 'endDateTime']
             )
+            return entity
         })
-        const batch = this.tableUtil.createBatch()
+        const batch = this.tableUtil.createAzBatch()
         entities.forEach(entity => batch.insertEntity(entity))
         await this.tableUtil.executeBatch('TimeEntries', batch)
         return totalDuration
@@ -301,7 +303,7 @@ class StorageService {
     async deleteUserTimeEntries(periodId, resourceId) {
         const { string } = this.tableUtil.entGen()
         const timeEntries = await this.getTimeEntries({ resourceId, periodId })
-        const batch = this.tableUtil.createBatch()
+        const batch = this.tableUtil.createAzBatch()
         timeEntries.forEach(e => batch.deleteEntity({
             PartitionKey: string(resourceId),
             RowKey: string(e.id)
@@ -319,8 +321,8 @@ class StorageService {
                 ['PartitionKey', resourceId, q.string, q.equal],
                 ['Year', year, q.int, q.equal],
             ]
-            const query = this.tableUtil.createQuery(1000, undefined, filter)
-            let result = await this.tableUtil.queryTableAll(
+            const query = this.tableUtil.createAzQuery(1000, undefined, filter)
+            let result = await this.tableUtil.queryAzTableAll(
                 'ConfirmedPeriods',
                 query,
                 {
@@ -342,12 +344,12 @@ class StorageService {
      */
     async getConfirmedPeriod(resourceId, periodId) {
         try {
-            const entry = await this.tableUtil.retrieveEntity(
+            const entry = await this.tableUtil.retrieveAzEntity(
                 'ConfirmedPeriods',
                 resourceId,
                 periodId
             )
-            return this.tableUtil.parseEntity(entry)
+            return this.tableUtil.parseAzEntity(entry)
         } catch (error) {
             return null
         }
@@ -363,7 +365,7 @@ class StorageService {
     async addConfirmedPeriod(periodId, resourceId, hours) {
         const [week, month, year] = periodId.split('_')
         const { string, double, int } = this.tableUtil.entGen()
-        const entity = await this.tableUtil.addEntity(
+        const entity = await this.tableUtil.addAzEntity(
             'ConfirmedPeriods',
             {
                 PartitionKey: string(resourceId),
@@ -405,8 +407,8 @@ class StorageService {
      */
     async getRoles() {
         try {
-            const query = this.tableUtil.createQuery(1000, undefined)
-            let { entries } = await this.tableUtil.queryTable('Roles', query, { RowKey: 'name' })
+            const query = this.tableUtil.createAzQuery(1000, undefined)
+            let { entries } = await this.tableUtil.queryAzTable('Roles', query, { RowKey: 'name' })
             entries = entries.map(entry => ({
                 ...entry,
                 permissions: toArray(entry.permissions, '|'),
@@ -425,15 +427,15 @@ class StorageService {
      */
     async addOrUpdateRole(role, update) {
         const { string } = this.tableUtil.entGen()
-        const entity = this.tableUtil.makeEntity(
+        const entity = this.tableUtil.convertToAzEntity(
             role.name,
             {
                 permissions: role.permissions.join('|')
             },
         )
-        let result       
+        let result
         if (update) result = await this.tableUtil.updateEntity('Roles', entity, true)
-        else result = await this.tableUtil.addEntity('Roles', entity)
+        else result = await this.tableUtil.addAzEntity('Roles', entity)
         return result
     }
 }

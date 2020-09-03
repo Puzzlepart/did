@@ -1,6 +1,6 @@
 const { pick } = require('underscore')
 const TableUtil = require('../../../utils/table')
-const { executeBatch, createBatch } = new TableUtil()
+const { executeBatch, createAzBatch } = new TableUtil()
 
 const typeDef = `  
   type Customer {
@@ -54,7 +54,7 @@ async function deleteCustomer(_obj, variables, ctx) {
       const batch = projects.reduce((b, entity) => {
         b.deleteEntity(entity)
         return b
-      }, createBatch())
+      }, createAzBatch())
       await executeBatch('Projects', batch)
     }
     await ctx.services.storage.deleteCustomer(variables.key)
