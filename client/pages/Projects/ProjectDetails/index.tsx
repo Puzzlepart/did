@@ -1,16 +1,10 @@
 import { useQuery } from '@apollo/react-hooks'
-import { AppContext } from 'AppContext'
 import { EntityLabel } from 'components/EntityLabel'
 import { UserMessage } from 'components/UserMessage'
-import { manageProjects } from 'config/security/permissions'
-import { Panel } from 'office-ui-fabric-react/lib/Panel'
-import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { contains } from 'underscore'
-import { ProjectForm } from '../ProjectForm'
 import { Actions } from './Actions'
 import styles from './ProjectDetails.module.scss'
 import PROJECT_TIME_ENTRIES from './PROJECT_TIME_ENTRIES'
@@ -22,10 +16,8 @@ import { IProjectDetailsProps, ProjectDetailsContext } from './types'
  * @category Projects
  */
 export const ProjectDetails = (props: IProjectDetailsProps) => {
-    const { user } = React.useContext(AppContext)
     const { t } = useTranslation(['projects', 'common'])
     const [project, setProject] = useState({ ...props.project })
-    const [showEditPanel, setShowEditPanel] = useState(false)
     const { loading, error, data } = useQuery<{ timeentries: any[] }>(PROJECT_TIME_ENTRIES, { variables: { projectId: props.project.id } })
     const timeentries = data ? data.timeentries : []
 
@@ -50,13 +42,7 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                         <div className={styles.text}>{project.name}</div>
                         <div className={styles.subText}>{project.customer.name}</div>
                     </div>
-                    <div className={styles.actions}>
-                        <DefaultButton
-                            text={t('editLabel')}
-                            iconProps={{ iconName: 'PageEdit' }}
-                            hidden={!contains(user.role.permissions, manageProjects)}
-                            onClick={() => setShowEditPanel(true)} />
-                    </div>
+                    <Actions project={project} />
                 </div>
                 {project.inactive && (
                     <UserMessage
@@ -80,14 +66,7 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                     text={t('categoryOutlookText')}
                     iconName='OutlookLogoInverse' />
                 <Summary />
-                <Actions />
                 <TimeEntries />
-                <Panel
-                    isOpen={showEditPanel}
-                    headerText={project.name}
-                    onDismiss={() => setShowEditPanel(false)}>
-                    <ProjectForm edit={project} onSubmitted={() => setShowEditPanel(false)} />
-                </Panel>
             </div>
         </ProjectDetailsContext.Provider>
     )
