@@ -29,7 +29,7 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
         project,
         timeentries,
         setProject,
-    }), [project, timeentries])
+    }), [project, timeentries, loading])
 
     return (
         <ProjectDetailsContext.Provider value={ctxValue}>

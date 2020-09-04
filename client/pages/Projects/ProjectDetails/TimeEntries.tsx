@@ -10,15 +10,15 @@ import { isEmpty } from 'underscore'
 
 export const TimeEntries = () => {
     const { t } = useTranslation(['projects', 'common'])
-    const context = useContext(ProjectDetailsContext)
+    const {error,loading,timeentries} = useContext(ProjectDetailsContext)
     return (
         <>
-            {context.error && <UserMessage type={MessageBarType.error} text={t('timeEntriesErrorText')} />}
-            {(isEmpty(context.timeentries) && !context.loading) && <UserMessage text={t('noTimeEntriesText')} />}
-            {context.loading && <ProgressIndicator label={t('timeEntriesLoadingLabel')} />}
-            {!isEmpty(context.timeentries) && (
+            {error && <UserMessage type={MessageBarType.error} text={t('timeEntriesErrorText')} />}
+            {(isEmpty(timeentries) && !loading) && <UserMessage text={t('noTimeEntriesText')} />}
+            {loading && <ProgressIndicator label={t('timeEntriesLoadingLabel')} />}
+            {!isEmpty(timeentries) && (
                 <EventList
-                    events={context.timeentries}
+                    events={timeentries}
                     additionalColumns={[
                         col(
                             'resourceName',
