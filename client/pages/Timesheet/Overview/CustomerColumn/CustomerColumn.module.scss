@@ -1,3 +1,16 @@
 .root {
   width: 100%;
+  word-break: normal;
+  display: flex;
+  flex-direction: row;
+
+  .iconContainer {
+    padding: 4px 0 0 0;
+    align-self: flex-start;
+  }
+
+  .content {
+    padding: 0 0 0 8px;
+    flex-grow: 1 1 1 1;
+  }
 }

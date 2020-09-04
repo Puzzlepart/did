@@ -42,13 +42,13 @@ export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
                     col(
                         'customer',
                         t('customer'),
-                        { minWidth: 150, maxWidth: 200 },
+                        { minWidth: 150, maxWidth: 200, isMultiline: true },
                         (event: ITimeEntry) => <CustomerColumn event={event} />,
                     ),
                     col(
                         'project',
                         t('project'),
-                        { minWidth: 150, maxWidth: 250 },
+                        { minWidth: 150, maxWidth: 300, isMultiline: true },
                         (event: ITimeEntry) => <ProjectColumn event={event} />
                     ),
                 ]} />

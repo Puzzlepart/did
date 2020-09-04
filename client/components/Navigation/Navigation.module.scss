@@ -22,6 +22,10 @@
       max-width: 1140px;
     }
 
+    @media (min-width: 1440px) {
+      max-width: 1330px;
+    }
+
     .nav {
       display: flex;
       flex-direction: row;
