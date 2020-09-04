@@ -9,16 +9,32 @@ export { moment };
 export default new class DateUtils {
     private _momentLocale: string;
 
+    /**
+     * Setup DateUtils class
+     * 
+     * @param {string} locale Locale
+     */
     public setup(locale: string) {
         this._momentLocale = locale;
         moment.locale(this._momentLocale);
     }
 
+    /**
+     * Converts date string to moment, adding timezone offset
+     * 
+     * @param {string} date Date string 
+     */
     toMoment(date: string) {
         const m = moment(date);
         return m.add(m.toDate().getTimezoneOffset(), 'minutes')
     }
 
+    /**
+     * Get duration display
+     * 
+     * @param {number} duration Duration
+     * @param {TFunction} t Translate function
+     */
     getDurationDisplay(duration: number, t?: TFunction): string {
         const hrsShortFormat = t ? t('hoursShortFormat', { ns: 'common', defaultValue: undefined }) : '{0}h'
         const minShortFormat = t ? t('minutesShortFormat', { ns: 'common', defaultValue: undefined }) : '{0}min'
@@ -108,8 +124,10 @@ export default new class DateUtils {
 
     /**
      * Get a string representation of the moment date instance
+     * 
+     * @param {moment.Moment} date Moment date
      */
-    toString(start: moment.Moment) {
-        return start.toISOString().replace('Z', '');
+    toString(date: moment.Moment) {
+        return date.toISOString().replace('Z', '');
     }
 }

@@ -3,12 +3,8 @@ import { Toggle } from 'office-ui-fabric-react/lib/Toggle'
 import * as React from 'react'
 import styles from './UserSettings.module.scss'
 import { UserSettingsContext } from './UserSettingsContext'
-import { IUserSetting, IUserSettingDropdown } from './USER_SETTINGS'
-
-export interface IUserSettingInputProps {
-    user: any;
-    setting: IUserSetting;
-}
+import { IUserSettingDropdown } from './USER_SETTINGS'
+import { IUserSettingInputProps } from './types'
 
 export const UserSettingInput = ({ user, setting }: IUserSettingInputProps) => {
     const { onUpdateUserSettings } = React.useContext(UserSettingsContext)
