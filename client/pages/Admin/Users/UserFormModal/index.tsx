@@ -6,9 +6,10 @@ import { Modal } from 'office-ui-fabric-react/lib/Modal'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
-import { omit, find } from 'underscore'
+import { find, omit } from 'underscore'
 import validator from 'validator'
-import { IUserFormModalProps, ADD_USER, UPDATE_USER } from './types'
+import ADD_OR_UPDATE_USER, { IAddOrUpdateUserVariables } from './ADD_OR_UPDATE_USER'
+import { IUserFormModalProps } from './types'
 import styles from './UserFormModal.module.scss'
 
 /**
@@ -16,23 +17,31 @@ import styles from './UserFormModal.module.scss'
  */
 export const UserFormModal = (props: IUserFormModalProps) => {
     const { t } = useTranslation('common')
-    const [user, setUser] = React.useState<IUser>(props.user || {
+    const [model, setModel] = React.useState<IUser>(props.user || {
         id: '',
         fullName: '',
         role: find(props.roles, r => r.name === 'User'),
     })
-    const [updateUser] = useMutation(UPDATE_USER)
-    const [addUser] = useMutation(ADD_USER)
+    const [addOrUpdateUser] = useMutation<any, IAddOrUpdateUserVariables>(ADD_OR_UPDATE_USER)
 
+    /**
+     * On save user
+     */
     const onSave = async () => {
-        const _user = omit({ ...user, role: user.role.name }, '__typename')
-        if (props.user) await updateUser({ variables: { user: _user } })
-        else await addUser({ variables: { user: _user } })
+        await addOrUpdateUser({
+            variables: {
+                user: omit({ ...model, role: model.role.name }, '__typename'),
+                update: !!props.user,
+            }
+        })
         props.modal.onDismiss()
     }
 
+    /**
+     * Checks if form is valid
+     */
     const isFormValid = () => {
-        return !validator.isEmpty(user.id) && validator.isUUID(user.id) && !validator.isEmpty(user.fullName)
+        return !validator.isEmpty(model.id) && validator.isUUID(model.id) && !validator.isEmpty(model.fullName)
     }
 
     return (
@@ -48,16 +57,16 @@ export const UserFormModal = (props: IUserFormModalProps) => {
                     label='ID'
                     placeholder='00000000-0000-0000-0000-000000000000'
                     description={t('userIdDescription')}
-                    value={user.id}
+                    value={model.id}
                     required={!props.user}
-                    onChange={(_, id) => setUser({ ...user, id })} />
+                    onChange={(_, id) => setModel({ ...model, id })} />
             </div>
             <div className={styles.inputContainer} hidden={!!props.user}>
                 <TextField
                     label={t('nameLabel')}
-                    value={user.fullName}
+                    value={model.fullName}
                     required={!props.user}
-                    onChange={(_, fullName) => setUser({ ...user, fullName })} />
+                    onChange={(_, fullName) => setModel({ ...model, fullName })} />
             </div>
             <div className={styles.inputContainer}>
                 <Dropdown
@@ -67,8 +76,8 @@ export const UserFormModal = (props: IUserFormModalProps) => {
                         text: role.name,
                         data: role,
                     }))}
-                    defaultSelectedKey={user.role ? user.role.name : 'User'}
-                    onChange={(_, { data: role }) => setUser({ ...user, role })} />
+                    defaultSelectedKey={model.role ? model.role.name : 'User'}
+                    onChange={(_, { data: role }) => setModel({ ...model, role })} />
             </div>
             <PrimaryButton
                 className={styles.saveBtn}

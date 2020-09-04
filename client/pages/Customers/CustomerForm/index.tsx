@@ -6,21 +6,32 @@ import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import * as React from 'react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import format from 'string-format'
+import { format } from 'office-ui-fabric-react/lib/Utilities'
 import styles from './CreateCustomerForm.module.scss'
-import CREATE_CUSTOMER from './CREATE_CUSTOMER'
-import { ICustomerFormProps,ICustomerFormModel,ICustomerFormValidation } from './types'
+import CREATE_OR_UPDATE_CUSTOMER, { ICreateOrUpdateCustomerVariables, ICustomerInput } from './CREATE_OR_UPDATE_CUSTOMER'
+import { ICustomerFormValidation } from './types'
+import { pick } from 'underscore'
+
+const initialModel: ICustomerInput = {
+    key: '',
+    name: '',
+    description: '',
+    icon: 'Page',
+}
 
 /**
  * @category Customers
  */
-export const CustomerForm = ({ initialModel = { key: '', name: '', description: '', icon: 'Page' } }: ICustomerFormProps) => {
+export const CustomerForm = () => {
     const { t } = useTranslation(['customers', 'common'])
     const [validation, setValidation] = useState<ICustomerFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useState<{ text: string; type: MessageBarType }>(null)
-    const [model, setModel] = useState<ICustomerFormModel>(initialModel)
-    const [addCustomer, { loading }] = useMutation(CREATE_CUSTOMER)
+    const [model, setModel] = useState<ICustomerInput>(initialModel)
+    const [createOrUpdateCustomer, { loading }] = useMutation<any, ICreateOrUpdateCustomerVariables>(CREATE_OR_UPDATE_CUSTOMER)
 
+    /**
+     * On validate form
+     */
     const validateForm = (): ICustomerFormValidation => {
         const errors: { [key: string]: string } = {}
         if (model.name.length < 2) errors.name = t('nameFormValidationText')
@@ -28,6 +39,9 @@ export const CustomerForm = ({ initialModel = { key: '', name: '', description: 
         return { errors, invalid: Object.keys(errors).length > 0 }
     }
 
+    /**
+     * On form submit
+     */
     const onFormSubmit = async () => {
         const _validation = validateForm()
         if (_validation.invalid) {
@@ -35,7 +49,12 @@ export const CustomerForm = ({ initialModel = { key: '', name: '', description: 
             return
         }
         setValidation({ errors: {}, invalid: false })
-        const { data: { result } } = await addCustomer({ variables: { customer: model } })
+        const { data: { result } } = await createOrUpdateCustomer({
+            variables: {
+                customer: pick(model, ...Object.keys(initialModel) as any) as ICustomerInput,
+                update: false,
+            }
+        })
         if (result.success) {
             setMessage({ text: format(t('createSuccess'), model.name), type: MessageBarType.success })
         } else {

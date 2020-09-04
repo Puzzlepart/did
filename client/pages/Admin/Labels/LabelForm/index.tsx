@@ -10,7 +10,7 @@ import SketchPicker from 'react-color/lib/components/sketch/Sketch'
 import { useTranslation } from 'react-i18next'
 import { omit } from 'underscore'
 import validator from 'validator'
-import { ADD_LABEL, UPDATE_LABEL } from '../types'
+import ADD_OR_UPDATE_LABEL from './ADD_OR_UPDATE_LABEL'
 import styles from './LabelForm.module.scss'
 import { ILabelFormProps } from './types'
 
@@ -19,53 +19,60 @@ import { ILabelFormProps } from './types'
  */
 export const LabelForm = (props: ILabelFormProps) => {
     const { t } = useTranslation(['common', 'admin'])
-    const [label, setLabel] = React.useState<IEntityLabel>(props.label || {
+    const [model, setModel] = React.useState<IEntityLabel>(props.label || {
         name: '',
         description: '',
         color: '#F8E71C',
     })
     const [colorPickerVisible, setColorPickerVisible] = React.useState<boolean>(false)
-    const [addLabel] = useMutation(ADD_LABEL)
-    const [updateLabel] = useMutation(UPDATE_LABEL)
+    const [addOrUpdateLabel] = useMutation(ADD_OR_UPDATE_LABEL)
 
+    /**
+     * On save label
+     */
     const onSave = async () => {
-        if (props.label) await updateLabel({ variables: { label: omit(label, '__typename') } })
-        else await addLabel({ variables: { label: omit(label, '__typename') } })
-        props.onSave(label)
+        await addOrUpdateLabel({
+            variables: {
+                label: omit(model, '__typename'),
+                update: !!props.label,
+            }
+        })
+        props.onSave(model)
     }
 
-    const isFormValid = (): boolean => !validator.isEmpty(label.name) && !validator.isEmpty(label.color)
+    /**
+     * Checks if form is valid
+     */
+    const isFormValid = (): boolean => !validator.isEmpty(model.name) && !validator.isEmpty(model.color)
 
     return (
         <Modal
             {...props}
             containerClassName={styles.root}
             isOpen={true}>
-            <div className={styles.title}>{
-                props.label
-                    ? t('editLabel', { ns: 'admin' })
-                    : t('addNewLabel', { ns: 'admin' })
-            }</div>
-
+            <div className={styles.title}>
+                {t(!!props.label ? 'editLabel' : 'addNewLabel', { ns: 'admin' })}
+            </div>
             <TextField
                 spellCheck={false}
+                maxLength={18}
                 label={t('nameLabel')}
-                value={label.name}
+                value={model.name}
                 required={true}
-                onChange={(_, name) => setLabel({ ...label, name })} />
+                onChange={(_, name) => setModel({ ...model, name })} />
 
             <TextField
                 spellCheck={false}
                 label={t('descriptionLabel')}
-                value={label.description}
+                value={model.description}
                 multiline={true}
-                onChange={(_, description) => setLabel({ ...label, description })} />
+                onChange={(_, description) => setModel({ ...model, description })} />
 
             <TextField
                 spellCheck={false}
                 label={t('iconLabel')}
-                value={label.icon}
-                onChange={(_, icon) => setLabel({ ...label, icon })} />
+                value={model.icon}
+                onChange={(_, icon) => setModel({ ...model, icon })} />
 
             <Label>{t('colorLabel')}</Label>
             <DefaultButton
@@ -78,13 +85,11 @@ export const LabelForm = (props: ILabelFormProps) => {
                 onClick={() => setColorPickerVisible(!colorPickerVisible)} />
             {colorPickerVisible && (
                 <SketchPicker
-                    color={label.color}
-                    onChange={({ hex }) => setLabel({ ...label, color: hex })} />
+                    color={model.color}
+                    onChange={({ hex }) => setModel({ ...model, color: hex })} />
             )}
-
             <Label>{t('previewText')}</Label>
-            <EntityLabel label={label} size='medium' />
-
+            <EntityLabel label={model} size='medium' />
             <PrimaryButton
                 className={styles.saveBtn}
                 text={t('save', { ns: 'common' })}

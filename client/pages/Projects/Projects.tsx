@@ -12,9 +12,10 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { contains, find } from 'underscore'
+import GET_PROJECTS from './GET_PROJECTS'
 import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
-import { GET_PROJECTS, IGetProjectsData, IProjectsParams } from './types'
+import { IGetProjectsData, IProjectsParams } from './types'
 
 /**
  * @category Projects
@@ -25,7 +26,12 @@ export const Projects = () => {
     const { user } = useContext(AppContext)
     const params = useParams<IProjectsParams>()
     const [selected, setSelected] = useState<IProject>(null)
-    const { loading, error, data } = useQuery<IGetProjectsData>(GET_PROJECTS, { variables: { sortBy: 'name' }, fetchPolicy: 'cache-first' })
+    const { loading, error, data } = useQuery<IGetProjectsData>(
+        GET_PROJECTS,
+        {
+            variables: { sortBy: 'name' },
+            fetchPolicy: 'cache-first'
+        })
 
     const outlookCategories = value<IOutlookCategory[]>(data, 'outlookCategories', [])
 

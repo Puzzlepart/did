@@ -7,7 +7,8 @@ import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { generateColumn as col } from 'utils/generateColumn'
 import { ILabelFormProps, LabelForm } from './LabelForm'
-import { DELETE_LABEL, GET_LABELS } from './types'
+import GET_LABELS from './GET_LABELS'
+import DELETE_LABEL from './DELETE_LABEL'
 
 /**
  * @category Admin
@@ -38,9 +39,7 @@ export const Labels = () => {
                         onClick={() => setForm({ label })} />
                     <DefaultButton
                         text={t('delete', { ns: 'common' })}
-                        onClick={() => {
-                            deleteLabel({ variables: { id: label.id } }).then(refetch)
-                        }} />
+                        onClick={() => deleteLabel({ variables: { name: label.name } }).then(refetch)} />
                 </>
             )),
     ]
@@ -66,9 +65,7 @@ export const Labels = () => {
             {form && (
                 <LabelForm
                     {...form}
-                    onSave={() => {
-                        refetch().then(() => setForm(null))
-                    }}
+                    onSave={() => refetch().then(() => setForm(null))}
                     onDismiss={() => setForm(null)} />)
             }
         </>

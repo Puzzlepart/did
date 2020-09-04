@@ -7,6 +7,11 @@
   border-radius: 3px;
   transition: opacity 0.2s linear;
 
+  &.sizeXSmall {
+    padding: 2px 6px;
+    font-size: 0.7em;
+  }
+
   &.sizeMedium {
     padding: 6px 10px;
     font-size: 1.0em;

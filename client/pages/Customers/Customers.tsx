@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import { AppContext } from 'AppContext'
 import { manageCustomers } from 'config/security/permissions'
-import { value as value } from 'helpers'
+import { value } from 'helpers'
 import { ICustomer } from 'interfaces'
 import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
@@ -13,8 +13,8 @@ import { useHistory, useParams } from 'react-router-dom'
 import { contains, find } from 'underscore'
 import { CustomerDetails } from './CustomerDetails'
 import { CustomerList } from './CustomerList'
-import GET_CUSTOMERS, { IGetCustomersData } from './GET_CUSTOMERS'
-import { ICustomersParams } from './types'
+import GET_CUSTOMERS from './GET_CUSTOMERS'
+import { ICustomersParams, IGetCustomersData } from './types'
 
 /**
  * @category Customers
@@ -25,7 +25,12 @@ export const Customers = () => {
     const { user } = useContext(AppContext)
     const params = useParams<ICustomersParams>()
     const [selected, setSelected] = useState<ICustomer>(null)
-    const { loading, error, data } = useQuery<IGetCustomersData>(GET_CUSTOMERS, { fetchPolicy: 'cache-first' })
+    const { loading, error, data } = useQuery<IGetCustomersData>(
+        GET_CUSTOMERS,
+        {
+            variables: { sortBy: 'name' },
+            fetchPolicy: 'cache-first'
+        })
 
     const customers = value<ICustomer[]>(data, 'customers', [])
 

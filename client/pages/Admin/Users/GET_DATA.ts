@@ -10,13 +10,11 @@ query {
     id
     fullName
     role {
-      id
       name
       permissions
     }
   }
   roles {
-    id
     name
     permissions
   }

@@ -25,7 +25,7 @@ export const LabelColumn = ({ row }) => {
                             <EntityLabel
                                 key={idx}
                                 label={label}
-                                size='small' />
+                                size='xsmall' />
                         ))}
                     </div>
                 )}

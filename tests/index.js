@@ -1,12 +1,13 @@
 const assert = require('assert')
-const { first } = require('underscore')
-const EventMatching = require('../middleware/graphql/resolvers/timesheet.matching')
-const { data: { projects } } = require('./data/projects.json')
-const { data: { customers } } = require('./data/customers.json')
+const { first, any } = require('underscore')
+const EventMatching = require('../api/graphql/resolvers/timesheet.matching')
+const projects = require('./data/projects.json')
+const customers = require('./data/customers.json')
+const labels = require('./data/labels.json')
 
 describe('Event matching', () => {
     let testEvent = {}
-    let eventMatching = new EventMatching(projects,customers, [])
+    let eventMatching = new EventMatching(projects, customers, labels)
 
     beforeEach(() => {
         testEvent = {
@@ -46,14 +47,19 @@ describe('Event matching', () => {
             assert.strictEqual(event.customer.name, 'Employee Absence')
         })
 
-        it('IAM ILL in category should take presedence bfore IAM VAC in subject', () => {
+        it('IAM ILL in category should take presedence before IAM VAC in subject', () => {
             testEvent.body = 'Hello this is an event /IAM VAC/'
             testEvent.categories.push('IAM ILL')
             const event = first(eventMatching.match([testEvent]))
             assert.strictEqual(event.project.id, 'IAM ILL')
         })
-    })
 
+        it('"AK ASSISTCH: ASSIST-3063" in subject should match to AK ASSISTCH', () => {
+            testEvent.body = 'AK ASSISTCH: ASSIST-3063'
+            const event = first(eventMatching.match([testEvent]))
+            assert.strictEqual(event.project.id, 'AK ASSISTCH')
+        })
+    })
 
     describe('Matching suggestions', () => {
         it('{4SUBSEA FLEXSHARZ} should suggest {4SUBSEA FLEXSHARE}', () => {
@@ -90,6 +96,21 @@ describe('Event matching', () => {
             testEvent.body = 'Hello this is an event 4SUBSEA ABC'
             const event = first(eventMatching.match([testEvent]))
             assert.strictEqual(event.customer, undefined)
+        })
+    })
+
+    describe('Matching event labels', () => {
+        it('{overtid-40} in categories should add matching label', () => {
+            testEvent.categories.push('overtid-40')
+            const event = first(eventMatching.match([testEvent]))
+            assert.strictEqual(any(event.labels, lbl => lbl.name === 'overtid-40'), true)
+        })
+
+
+        it('{OVERTID-40} in categories should not add any label', () => {
+            testEvent.categories.push('OVERTID-40')
+            const event = first(eventMatching.match([testEvent]))
+            assert.strictEqual(any(event.labels, lbl => lbl.name === 'OVERTID-40'), false)
         })
     })
 })

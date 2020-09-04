@@ -12,12 +12,12 @@ export const deleteCustomers = '8b39db3d'
 
 export default (t: TFunction): IPermission[] => [       
     {
-        id: 'e18a7c45',
+        id: accessCustomers,
         key: 'accessCustomers',
         name: t('accessCustomers', { ns: 'permissions' })
     }, 
     {
-        id: '289a64ab',
+        id: accessProjects,
         key: 'accessProjects',
         name: t('accessProjects', { ns: 'permissions' })
     },
@@ -27,28 +27,28 @@ export default (t: TFunction): IPermission[] => [
         name: t('accessAdmin', { ns: 'permissions' })
     },
     {
-        id: 'a031c42f',
+        id: accessReports,
         key: 'accessReports',
         name: t('accessReports', { ns: 'permissions' })
     },
     {
-        id: 'ef4032fb',
+        id: manageProjects,
         key: 'manageProjects',
         name: t('manageProjects', { ns: 'permissions' })
     },
     {
-        id: 'c5439319',
+        id: deleteProjects,
         key: 'deleteProjects',
         name: t('deleteProjects', { ns: 'permissions' })
     },
     {
-        id: '09909241',
+        id: manageCustomers,
         key: 'manageCustomers',
         name: t('manageCustomers', { ns: 'permissions' })
     },
     {
-        id: '8b39db3d',
+        id: deleteCustomers,
         key: 'deleteCustomers',
         name: t('deleteCustomers', { ns: 'permissions' })
-    }
+    },
 ]
