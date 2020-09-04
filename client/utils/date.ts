@@ -86,7 +86,7 @@ export default new class DateUtils {
      * @param {moment.Moment} end End
      * @param {string} dayFormat Date format
      */
-    getDays(start: moment.Moment, end: moment.Moment, dayFormat: string): string[] {
+    getDaysBetween(start: moment.Moment, end: moment.Moment, dayFormat: string): string[] {
         const days = []
         for (let i = 0; i <= (end.weekday() - start.weekday()); i++) {
             days.push(capitalize(start.clone().add(i, 'days').locale(this._momentLocale).format(dayFormat)));

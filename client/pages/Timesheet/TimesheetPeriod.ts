@@ -201,15 +201,20 @@ export class TimesheetPeriod {
     public get data() {
         return {
             id: this.id,
-            startDateTime: this._startDateTime.toISOString(),
-            endDateTime: this._endDateTime.toISOString(),
+            startDateTime: this._startDateTime.toISOString(true),
+            endDateTime: this._endDateTime.toISOString(true),
             matchedEvents: this.matchedEvents,
         }
     }
-
+    
+    /**
+     * Get week days
+     * 
+     * @param {string} dayFormat Day format
+     */
     public weekdays(dayFormat = 'dddd DD'): string[] {
         if (!this._startDateTime) return []
-        return dateUtils.getDays(
+        return dateUtils.getDaysBetween(
             this._startDateTime,
             this._endDateTime,
             dayFormat
