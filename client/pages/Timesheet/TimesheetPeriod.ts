@@ -3,7 +3,7 @@ import { dateAdd, IPnPClientStore, ITypedHash, PnPClientStorage } from '@pnp/com
 import { TFunction } from 'i18next'
 import { IProject } from 'interfaces/IProject'
 import { ITimeEntry } from 'interfaces/ITimeEntry'
-import { omit } from 'underscore'
+import { omit, filter } from 'underscore'
 import { capitalize } from 'underscore.string'
 import dateUtils, { moment } from 'utils/date'
 import { ITimesheetParams } from './types'
@@ -103,7 +103,8 @@ export class TimesheetPeriod {
     * Get aggregated errors from the events in the period
     */
     public get errors(): Error[] {
-        return this.events ? this.events.filter(event => event.error).map(event => event.error) : []
+        if (!this.events) return []
+        return filter(this.events, event => !!event.error).map(event => event.error)
     }
 
     /**
@@ -117,7 +118,7 @@ export class TimesheetPeriod {
     * Get matched duration for the events in the period
     */
     public get matchedDuration(): number {
-        return this.events.filter(event => !!event.project).reduce((sum, event) => sum += event.duration, 0)
+        return filter(this.events, event => !!event.project).reduce((sum, event) => sum += event.duration, 0)
     }
 
     /*
@@ -183,13 +184,11 @@ export class TimesheetPeriod {
      * Get matched events with properties id, projectId and manualMatch
      */
     private get matchedEvents() {
-        const events = [...this.events]
-            .filter(event => !!event.project)
-            .map(event => ({
-                id: event.id,
-                projectId: event.project.id,
-                manualMatch: event.manualMatch,
-            }))
+        const events = filter([...this.events], event => !!event.project).map(event => ({
+            id: event.id,
+            projectId: event.project.id,
+            manualMatch: event.manualMatch,
+        }))
         return events
     }
 
