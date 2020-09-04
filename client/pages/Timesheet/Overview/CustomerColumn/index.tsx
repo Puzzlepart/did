@@ -8,7 +8,7 @@ import { Icon } from 'office-ui-fabric-react/lib/Icon'
  * @category Timesheet
  */
 const CustomerColumn = ({ event }: ICustomerColumnProps): JSX.Element => {
-    if (!event.customer) return null
+    if (!event.customer || !event.project) return null
     return (
         <div className={styles.root}>
             <div className={styles.iconContainer}>
