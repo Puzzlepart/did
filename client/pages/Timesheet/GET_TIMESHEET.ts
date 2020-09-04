@@ -30,6 +30,7 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!, $lo
         customer {
           key
           name
+          icon
           inactive
         }                
         labels {
@@ -54,6 +55,7 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!, $lo
       customer {
         key
         name
+        icon
         inactive
       }
       labels {

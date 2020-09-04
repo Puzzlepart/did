@@ -3,7 +3,6 @@
 
     .container {
         max-width: 1440px;
-        padding: 0 10px 0 10px;
         box-sizing: border-box;
         margin: auto;
         margin-top: 20px;
@@ -34,6 +33,12 @@
     @media (min-width: 1200px) {
         .container {
             max-width: 1140px;
+        }
+    }
+
+    @media (min-width: 1440px) {
+        .container {
+            max-width: 1330px;
         }
     }
 }

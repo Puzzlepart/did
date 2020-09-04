@@ -11,6 +11,7 @@ import { StatusBar } from '../StatusBar'
 import styles from './Overview.module.scss'
 import ProjectColumn from './ProjectColumn'
 import { IOverviewProps } from './types'
+import CustomerColumn from './CustomerColumn'
 
 /**
  * @category Timesheet
@@ -19,7 +20,7 @@ export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
     const { t } = useTranslation('common')
     const { loading, selectedPeriod } = React.useContext(TimesheetContext)
     const className = [styles.root]
-    if(isMobile) className.push(styles.mobile)
+    if (isMobile) className.push(styles.mobile)
     return (
         <div className={className.join(' ')}>
             <StatusBar />
@@ -39,9 +40,15 @@ export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
                 }}
                 additionalColumns={[
                     col(
+                        'customer',
+                        t('customer'),
+                        { minWidth: 150, maxWidth: 200, isMultiline: true },
+                        (event: ITimeEntry) => <CustomerColumn event={event} />,
+                    ),
+                    col(
                         'project',
                         t('project'),
-                        { minWidth: 350, maxWidth: 350 },
+                        { minWidth: 150, maxWidth: 300, isMultiline: true },
                         (event: ITimeEntry) => <ProjectColumn event={event} />
                     ),
                 ]} />

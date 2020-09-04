@@ -37,7 +37,7 @@ function getSizing(props: IEventListProps, fieldName: string, defMinWidth: numbe
  * 
  * @ignore
  */
-export const Title = (props: IEventListProps, name: string, fieldName = 'title'): IColumn => col(
+export const titleColumn = (props: IEventListProps, name: string, fieldName = 'title'): IColumn => col(
     fieldName,
     name,
     { ...getSizing(props, fieldName, 320, 400), isMultiline: true },
@@ -69,7 +69,7 @@ export const Title = (props: IEventListProps, name: string, fieldName = 'title')
  * 
  * @ignore
  */
-export const Time = (props: IEventListProps, name: string, fieldName = 'time'): IColumn => col(
+export const timeColumn = (props: IEventListProps, name: string, fieldName = 'time'): IColumn => col(
     fieldName,
     name,
     { ...getSizing(props, fieldName, 90, 90) },
@@ -101,7 +101,7 @@ export const Time = (props: IEventListProps, name: string, fieldName = 'time'): 
  * 
  * @ignore
  */
-export const Duration = (props: IEventListProps, name: string, fieldName = 'duration'): IColumn => col(
+export const durationColumn = (props: IEventListProps, name: string, fieldName = 'duration'): IColumn => col(
     fieldName,
     name,
     { ...getSizing(props, fieldName, 75, 75) },

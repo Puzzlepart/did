@@ -63,12 +63,12 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
             closeDelay={TooltipDelay.long}
             calloutProps={{ gapSpace: 0 }}>
             <div className={className}>
+                <div className={styles.iconContainer}>
+                    <Icon iconName={event.project.icon} />
+                </div>
                 <div className={styles.content}>
-                    <div>
-                        <a className={styles.projectLink} href={`/projects/search/${event.project.id}`}>{event.project.name}</a>
-                        <div className={styles.subText}>
-                            <span>for </span><a href={`/customers/search/${event.customer.key}`}><span>{event.customer.name}</span></a>
-                        </div>
+                    <div className={styles.link}>
+                        <a href={`/projects/search/${event.project.id}`}>{event.project.name}</a>
                     </div>
                     {!isEmpty(event.project.labels) && <Icon iconName='Tag' className={styles.labelIcon} />}
                     {(event.manualMatch && !selectedPeriod.confirmed) && (

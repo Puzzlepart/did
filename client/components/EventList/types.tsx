@@ -42,4 +42,9 @@ export interface IEventListProps extends React.HTMLProps<HTMLDivElement> {
      * Column widths
      */
     columnWidths?: ITypedHash<number>;
+
+    /**
+     * Resizable columns
+     */
+    resizableColumns?: boolean;
 }
