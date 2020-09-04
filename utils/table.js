@@ -3,7 +3,7 @@ const { omit, contains } = require('underscore')
 const { decapitalize, capitalize, isBlank } = require('underscore.string')
 const { reduceEachLeadingCommentRange } = require('typescript')
 
-class TableUtil {
+class AzTableUtilities {
     constructor(tableService) {
         this.tableService = tableService
     }
@@ -297,4 +297,4 @@ class TableUtil {
     }
 }
 
-module.exports = TableUtil
+module.exports = AzTableUtilities

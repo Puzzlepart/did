@@ -1,6 +1,6 @@
 const { pick } = require('underscore')
-const TableUtil = require('../../../utils/table')
-const { executeBatch, createAzBatch } = new TableUtil()
+const AzTableUtilities = require('../../../utils/table')
+const { executeBatch, createAzBatch } = new AzTableUtilities()
 
 const typeDef = `  
   type Customer {

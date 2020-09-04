@@ -1,4 +1,4 @@
-const TableUtil = require('../utils/table')
+const AzTableUtilities = require('../utils/table')
 const { getDurationHours, getWeek, getMonthIndex, getYear, toArray } = require('../utils')
 const arraySort = require('array-sort')
 const { omit, pick } = require('underscore')
@@ -8,7 +8,7 @@ const uuidv4 = require('uuid').v4
 
 class StorageService {
     constructor(subscription) {
-        this.tableUtil = new TableUtil(createTableService(subscription.connectionString))
+        this.tableUtil = new AzTableUtilities(createTableService(subscription.connectionString))
     }
 
     /**

@@ -1,11 +1,11 @@
 const { first } = require('underscore')
-const TableUtil = require('../utils/table')
+const AzTableUtilities = require('../utils/table')
 const { createTableService } = require('azure-storage')
 
 class SubscriptionService {
   constructor() {
     this.tableService = createTableService(process.env.AZURE_STORAGE_CONNECTION_STRING)
-    this.tableUtil = new TableUtil(this.tableService)
+    this.tableUtil = new AzTableUtilities(this.tableService)
   }
   /**
    * Get the subscription for the specified tenant id 
