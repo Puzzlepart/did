@@ -4,8 +4,11 @@ interface CssExports {
   'actions': string;
   'buttonContainer': string;
   'description': string;
-  'name': string;
+  'header': string;
+  'iconContainer': string;
   'root': string;
+  'text': string;
+  'title': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

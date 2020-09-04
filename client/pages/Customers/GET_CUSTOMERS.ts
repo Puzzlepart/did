@@ -10,9 +10,9 @@ export default gql`
             key
             name
             description
+            icon
             webLink
             externalSystemURL
-            icon
             inactive
         }
     }`
