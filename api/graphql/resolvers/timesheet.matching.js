@@ -36,16 +36,15 @@ class EventMatching {
      * @param {*} soft Soft search - don't require [], () or {}
      */
     searchString(input, soft) {
-        let regex = /[\(\{\[]((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>[A-Za-z0-9]{2,}?))[\)\]\}]/gmi
-        if (soft) regex = /((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>[A-Za-z0-9]{2,}))/gmi
+        let regex = /[\(\{\[]((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<key>[A-Za-z0-9]{2,}?))[\)\]\}]/gmi
+        if (soft) regex = /((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<key>[A-Za-z0-9]{2,}))/gmi
         let matches
         let match
         while ((match = regex.exec(input)) != null) {
             matches = matches || []
             matches.push({
-                key: `${match.groups.customerKey} ${match.groups.projectKey}`,
-                customerKey: match.groups.customerKey,
-                projectKey: match.groups.projectKey,
+                ...match.groups,
+                id: `${match.groups.customerKey} ${match.groups.key}`,
             })
         }
         return matches
@@ -90,14 +89,14 @@ class EventMatching {
                 let match = matches[i]
                 event.customer = find(this.customers, c => match.customerKey === c.key)
                 if (event.customer) {
-                    event.project = find(this.projects, p => p.id === match.key)
-                    projectKey = match.projectKey
+                    event.project = find(this.projects, p => p.id === match.id)
+                    projectKey = match.key
                 }
                 if (event.project) break
             }
         } else {
             event.project = find(this.projects, p => {
-                return !!find(this.searchString(content, true), m => m.key === p.id)
+                return !!find(this.searchString(content, true), m => m.id === p.id)
             })
             if (event.project) event.customer = find(this.customers, c => c.key === event.project.customerKey)
         }

@@ -47,7 +47,7 @@ describe('Event matching', () => {
             assert.strictEqual(event.customer.name, 'Employee Absence')
         })
 
-        it('IAM ILL in category should take presedence bfore IAM VAC in subject', () => {
+        it('IAM ILL in category should take presedence before IAM VAC in subject', () => {
             testEvent.body = 'Hello this is an event /IAM VAC/'
             testEvent.categories.push('IAM ILL')
             const event = first(eventMatching.match([testEvent]))
