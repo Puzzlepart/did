@@ -141,3 +141,4 @@ client/**/*js.map
 # Documentation
 doc/
 .env copy
+.DS_Store

@@ -4,6 +4,7 @@ interface CssExports {
   'root': string;
   'sizeLarge': string;
   'sizeMedium': string;
+  'sizeXSmall': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

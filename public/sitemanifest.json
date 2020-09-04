@@ -1,6 +1,6 @@
 {
-    "name": "DID365",
-    "short_name": "DID 365: The Calendar is the Timesheet",
+    "name": "Did",
+    "short_name": "Did: The Calendar is the Timesheet",
     "display": "standalone",
     "description": "Timetracking made easy",
     "icons": [

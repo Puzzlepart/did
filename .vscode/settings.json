@@ -4,7 +4,6 @@
     "node_modules": true,
     "lib": true,
     "client": false,
-    "config": false,
     "public": false,
     "middleware": false,
     "utils": false,

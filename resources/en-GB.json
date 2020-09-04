@@ -67,6 +67,7 @@
     "users": "Users",
     "summary": "Summary",
     "labels": "Labels",
+    "apiTokens": "API tokens",
     "filterLabels": "Filter labels...",
     "rolesPermissions": "Roles and permissions",
     "addNewUser": "Add new",
@@ -78,7 +79,12 @@
     "roleNameLabel": "Rolename",
     "noTimeEntriesText": "There are no recorded hours for the selected year.",
     "editRole": "Edit role",
-    "permissonsLabel": "Permissions"
+    "permissonsLabel": "Permissions",
+    "generateTokenLabel": "Generate API token",
+    "tokenNamePlaceholder": "Enter token name",
+    "tokenGeneratedText": "Your key has been generated and will only be visible for 10 seconds. You can only see it once. Take good care of it!",
+    "tokenErrorText": "An error occurred generating your key. Please try again later.",
+    "tokenDeletedText": "API key `{0}` was succesfully deleted."
   },
   "reports": {
     "generatingReportLabel": "Generating report",
@@ -108,6 +114,7 @@
     "descriptionLabel": "Description",
     "iconLabel": "Icon",
     "colorLabel": "Color",
+    "createdLabel": "Created",
     "closeColorPickerText": "Close color picker",
     "openColorPickerText": "Click to pick color",
     "previewText": "Preview",

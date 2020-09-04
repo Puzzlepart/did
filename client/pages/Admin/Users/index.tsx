@@ -2,14 +2,13 @@
 import { useQuery } from '@apollo/react-hooks'
 import List from 'components/List'
 import { value as value } from 'helpers'
+import { IUser } from 'interfaces/IUser'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
-import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { generateColumn as col } from 'utils/generateColumn'
 import { GET_DATA } from './GET_DATA'
 import { IUserFormModalProps, UserFormModal } from './UserFormModal'
-import { IUser } from 'interfaces/IUser'
 
 /**
  * @category Admin

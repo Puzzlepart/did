@@ -1,6 +1,9 @@
 const az = require('azure-storage')
+const { omit, contains } = require('underscore')
+const { decapitalize, capitalize, isBlank } = require('underscore.string')
+const { reduceEachLeadingCommentRange } = require('typescript')
 
-class TableUtil {
+class AzTableUtilities {
     constructor(tableService) {
         this.tableService = tableService
     }
@@ -13,24 +16,21 @@ class TableUtil {
      * @param {*} result Result
      * @param {*} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
      */
-    parseEntity(entity, columnMap) {
-        columnMap = columnMap || {}
-        let parsed = Object.keys(entity)
-            .reduce((obj, key) => {
-                const newKey = key.charAt(0).toLowerCase() + key.slice(1)
-                const value = entity[key]._
-                if (columnMap[key]) {
-                    obj[columnMap[key]] = value
-                    return obj
-                }
-                switch (entity[key].$) {
-                    case 'Edm.DateTime': obj[newKey] = value.toISOString()
-                        break
-                    default: obj[newKey] = value
-                }
+    parseAzEntity(entity, columnMap = {}) {
+        return Object.keys(entity).reduce((obj, key) => {
+            const { _, $ } = entity[key]
+            if (_ === undefined || _ === null) return obj;
+            if (columnMap[key]) {
+                obj[columnMap[key]] = _
                 return obj
-            }, {})
-        return parsed
+            }
+            switch ($) {
+                case 'Edm.DateTime': obj[decapitalize(key)] = _.toISOString()
+                    break
+                default: obj[decapitalize(key)] = _
+            }
+            return obj
+        }, {})
     }
 
     /**
@@ -41,16 +41,15 @@ class TableUtil {
      * @param {*} result Result
      * @param {*} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
      */
-    parseEntities({ entries, continuationToken }, columnMap) {
-        columnMap = columnMap || {}
-        entries = entries.map(ent => this.parseEntity(ent, columnMap))
+    parseAzEntities({ entries, continuationToken }, columnMap) {
+        entries = entries.map(ent => this.parseAzEntity(ent, columnMap))
         return { entries, continuationToken }
     }
 
     /**
      * entityGenerator from azure-storage TableUtilities
      */
-    entGen() {
+    azEntGen() {
         return {
             string: az.TableUtilities.entityGenerator.String,
             int: az.TableUtilities.entityGenerator.Int32,
@@ -84,14 +83,14 @@ class TableUtil {
      * @param dateString The date string to convert
      */
     convertDate(dateString) {
-        if (dateString) return this.entGen().datetime(new Date(dateString))._
+        if (dateString) return this.azEntGen().datetime(new Date(dateString))._
         return null
     }
 
     /**
      * Create table batch
      */
-    createBatch() {
+    createAzBatch() {
         return new az.TableBatch()
     }
 
@@ -102,12 +101,12 @@ class TableUtil {
      * @param {*} select Columns to retrieve
      * @param {*} filters Filters
      */
-    createQuery(top, select, filters) {
+    createAzQuery(top, select, filters) {
         let query = new az.TableQuery().top(top)
         if (top) query = query.top(top)
         if (select) query = query.select(select)
         if (filters) {
-            const combined = this.combineFilters(filters)
+            const combined = this.combineAzFilters(filters)
             if (combined) query = query.where(combined)
         }
         return query
@@ -118,7 +117,7 @@ class TableUtil {
      * 
      * @param filters Filter array
      */
-    combineFilters(filters) {
+    combineAzFilters(filters) {
         const { combine, and } = this.query()
         return filters.reduce((combined, [col, value, type, comp]) => {
             if (value) {
@@ -137,7 +136,7 @@ class TableUtil {
      * @param {*} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
      * @param {*} continuationToken Continuation token
      */
-    queryTable(table, query, columnMap, continuationToken) {
+    queryAzTable(table, query, columnMap, continuationToken) {
         return new Promise((resolve, reject) => {
             this.tableService.queryEntities(
                 table,
@@ -146,7 +145,7 @@ class TableUtil {
                 (error, result) => {
                     if (!error) {
                         return columnMap
-                            ? resolve(this.parseEntities(result, columnMap))
+                            ? resolve(this.parseAzEntities(result, columnMap))
                             : resolve(result)
                     }
                     else reject(error)
@@ -161,16 +160,55 @@ class TableUtil {
      * @param {*} query Table query
      * @param {*} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
      */
-    async queryTableAll(table, query, columnMap) {
+    async queryAzTableAll(table, query, columnMap) {
         let token = null
-        let { entries, continuationToken } = await this.queryTable(table, query, columnMap, token)
+        let { entries, continuationToken } = await this.queryAzTable(table, query, columnMap, token)
         token = continuationToken
         while (token != null) {
-            let result = await this.queryTable(table, query, columnMap, token)
+            let result = await this.queryAzTable(table, query, columnMap, token)
             entries.push(...result.entries)
             token = result.continuationToken
         }
         return entries
+    }
+
+
+    /**
+     * Converts a JSON object to an Azure Table Storage entity
+     * 
+     * @param {*} rowKey Row key
+     * @param {*} values Values
+     * @param {*} partitionKey Partition key
+     * @param {*} dateFields Date fields
+     */
+    convertToAzEntity(rowKey, values, partitionKey = 'Default', dateFields = []) {
+        const { string, datetime, double, int, boolean } = this.azEntGen()
+        const entity = Object.keys(values)
+            .filter(key => !isBlank(values[key]))
+            .reduce((obj, key) => {
+                let value
+                switch (typeof values[key]) {
+                    case 'boolean': value = boolean(values[key])
+                        break
+                    case 'number': {
+                        if (values[key] % 1 === 0) value = int(values[key])
+                        else value = double(values[key])
+                    }
+                        break
+                    default: {
+                        const isDate = contains(dateFields, key)
+                        if (isDate) value = datetime(new Date(values[key]))
+                        else value = string(values[key].trim())
+                    }
+                        break
+                }
+                obj[capitalize(key)] = value
+                return obj
+            }, {
+                PartitionKey: string(partitionKey),
+                RowKey: string(rowKey),
+            })
+        return omit(entity, ({ _ }) => isBlank(_))
     }
 
     /**
@@ -180,7 +218,7 @@ class TableUtil {
      * @param {*} partitionKey Partition key
      * @param {*} rowKey Row key
      */
-    retrieveEntity(table, partitionKey, rowKey) {
+    retrieveAzEntity(table, partitionKey, rowKey) {
         return new Promise((resolve, reject) => {
             this.tableService.retrieveEntity(table, partitionKey, rowKey, (error, result) => {
                 if (error) reject(error)
@@ -195,7 +233,7 @@ class TableUtil {
      * @param {*} table Table name
      * @param {*} entity Entity
      */
-    addEntity(table, entity) {
+    addAzEntity(table, entity) {
         return new Promise((resolve, reject) => {
             this.tableService.insertEntity(table, entity, (error, result) => {
                 if (error) reject(error)
@@ -259,4 +297,4 @@ class TableUtil {
     }
 }
 
-module.exports = TableUtil
+module.exports = AzTableUtilities

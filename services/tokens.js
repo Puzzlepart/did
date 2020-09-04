@@ -11,8 +11,8 @@ const simpleoauth2 = require('simple-oauth2').create({
     }
 })
 
-module.exports = {
-    refreshAccessToken: async function (req) {
+class TokenService {
+    async refreshAccessToken(req) {
         var storedToken = simpleoauth2.accessToken.create(req.user.oauthToken)
         if (storedToken) {
             try {
@@ -28,3 +28,5 @@ module.exports = {
         }
     }
 }
+
+module.exports = new TokenService()

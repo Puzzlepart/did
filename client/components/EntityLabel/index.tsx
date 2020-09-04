@@ -3,7 +3,7 @@ import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { isBlank } from 'underscore.string'
 import styles from './EntityLabel.module.scss'
-import { IEntityLabelProps } from './IEntityLabelProps'
+import { IEntityLabelProps } from './types'
 
 /**
  * @category EntityLabel
@@ -13,6 +13,7 @@ export const EntityLabel = ({ size, label }: IEntityLabelProps) => {
     const className = [styles.root]
     // eslint-disable-next-line default-case
     switch (size) {
+        case 'xsmall': className.push(styles.sizeXSmall); break
         case 'medium': className.push(styles.sizeMedium); break
         case 'large': className.push(styles.sizeLarge); break
     }

@@ -11,7 +11,6 @@ export const GET_CURRENT_USER = gql`
       email
       fullName
       role {
-        id
         name
         permissions
       }

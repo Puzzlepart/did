@@ -16,11 +16,13 @@ import { SummaryView } from './SummaryView'
 import styles from './Timesheet.module.scss'
 import { ITimesheetContext, ITimesheetParams, ITimesheetPeriod, TimesheetContext, TimesheetPeriod, TimesheetScope, TimesheetView } from './types'
 import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD'
+import { AppContext } from 'AppContext'
 
 /**
  * @category Timesheet
  */
 export const Timesheet = () => {
+    const context = React.useContext(AppContext)
     const { t } = useTranslation(['timesheet', 'common'])
     const history = useHistory()
     const params = useParams<ITimesheetParams>()
@@ -34,8 +36,9 @@ export const Timesheet = () => {
         variables: {
             ...state.scope.dateStrings,
             dateFormat: 'dddd DD',
+            locale: context.user.userLanguage,
         },
-        fetchPolicy: 'cache-and-network',
+        fetchPolicy: 'network-only',
     })
 
     useEffect(() => { dispatch({ type: 'DATA_UPDATED', payload: { query, t } }) }, [query])

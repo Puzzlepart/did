@@ -1,6 +1,7 @@
 bin
 lib
 middleware
+api
 public
 routes
 services

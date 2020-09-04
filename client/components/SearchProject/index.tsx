@@ -1,10 +1,10 @@
 
 import { useQuery } from '@apollo/react-hooks'
 import { IProject } from 'interfaces/IProject'
-import { GET_PROJECTS } from 'pages/Projects/types'
 import * as React from 'react'
 import { Autocomplete, ISuggestionItem } from '../Autocomplete'
 import { ISearchProjectProps } from './types'
+import GET_PROJECTS from 'pages/Projects/GET_PROJECTS'
 
 /**
  * @category SearchProject
@@ -26,7 +26,7 @@ export const SearchProject = (props: ISearchProjectProps) => {
         <Autocomplete<IProject>
             {...props}
             disabled={loading}
-            items={searchData}  
+            items={searchData}
             width={props.width}
             placeholder={props.placeholder}
             onClear={() => props.onSelected(null)}

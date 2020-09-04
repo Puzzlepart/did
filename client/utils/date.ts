@@ -1,6 +1,6 @@
 import { TFunction } from 'i18next';
 import moment from 'moment';
-import format from 'string-format';
+import { format } from 'office-ui-fabric-react/lib/Utilities'
 import { capitalize } from 'underscore.string';
 require('twix');
 

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { Projects } from './Projects'
-export { GET_PROJECTS, ProjectList } from './Projects'
+export { ProjectList } from './Projects'
 
 /**
  * @ignore

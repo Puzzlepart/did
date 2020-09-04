@@ -4,19 +4,26 @@ import { value as value } from 'helpers'
 import { IProject } from 'interfaces/IProject'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
-import { GET_PROJECTS, ProjectList } from 'pages/Projects'
+import { ProjectList } from 'pages/Projects'
+import GET_PROJECTS from 'pages/Projects/GET_PROJECTS'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './CustomerDetails.module.scss'
-import { ICustomerDetailsProps } from './ICustomerDetailsProps'
-
+import { ICustomerDetailsProps } from './types'
 
 /**
  * @category Customers
  */
 export const CustomerDetails = (props: ICustomerDetailsProps) => {
     const { t } = useTranslation(['customers', 'common', 'projects'])
-    const { loading, error, data } = useQuery(GET_PROJECTS, { variables: { customerKey: value<string>(props, 'customer.key', '') } })
+    const { loading, error, data } = useQuery(
+        GET_PROJECTS,
+        {
+            variables: {
+                sortBy: 'name',
+                customerKey: value<string>(props, 'customer.key', '')
+            }
+        })
 
     return (
         <div className={styles.root}>
