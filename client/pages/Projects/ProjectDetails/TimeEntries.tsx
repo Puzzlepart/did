@@ -10,7 +10,7 @@ import { isEmpty } from 'underscore'
 
 export const TimeEntries = () => {
     const { t } = useTranslation(['projects', 'common'])
-    const {error,loading,timeentries} = useContext(ProjectDetailsContext)
+    const { error, loading, timeentries } = useContext(ProjectDetailsContext)
     return (
         <>
             {error && <UserMessage type={MessageBarType.error} text={t('timeEntriesErrorText')} />}

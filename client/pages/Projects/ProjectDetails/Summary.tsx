@@ -6,10 +6,10 @@ import { getSummary } from './utils'
 
 export const Summary = () => {
     const { t } = useTranslation('common')
-    const context = useContext(ProjectDetailsContext)
-    const summary = useMemo(() => getSummary(context.timeentries, t), [context.timeentries])
+    const { timeentries } = useContext(ProjectDetailsContext)
+    const summary = useMemo(() => getSummary(timeentries, t), [timeentries])
     return (
-        <div className={styles.summary}>
+        <div className={styles.summary} hidden={timeentries.length === 0}>
             <ul>
                 {summary.map(({ label, value }, idx) => (
                     <li key={idx}>
