@@ -17,7 +17,10 @@ const EventList = (props: IEventListProps): JSX.Element => {
         col.Time(props, t('timeLabel')),
         col.Duration(props, t('durationLabel')),
         ...props.additionalColumns
-    ]
+    ].map(col => ({
+        ...col,
+        isResizable: props.resizableColumns,
+    }))
 
     return (
         <div className={styles.root}>
