@@ -1,9 +1,6 @@
-const { find, filter, contains } = require('underscore')
+const { first, find, filter, contains } = require('underscore')
 const { findBestMatch } = require('string-similarity')
 const value = require('get-value')
-
-const CATEGORY_REGEX = /((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>[A-Za-z0-9]{2,}))/gmi
-const CONTENT_REGEX = /[\(\{\[]((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<projectKey>[A-Za-z0-9]{2,}?))[\)\]\}]/gmi
 
 class EventMatching {
     constructor(projects, customers, labels) {
@@ -35,37 +32,38 @@ class EventMatching {
     /**
      * Find project match in title/subject/categories
      * 
-     * @param {*} regex 
-     * @param {*} input 
+     * @param {*} input Input string
+     * @param {*} soft Soft search - don't require [], () or {}
      */
-    searchString(regex, input) {
+    searchString(input, soft) {
+        let regex = /[\(\{\[]((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<key>[A-Za-z0-9]{2,}?))[\)\]\}]/gmi
+        if (soft) regex = /((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<key>[A-Za-z0-9]{2,}))/gmi
         let matches
         let match
         while ((match = regex.exec(input)) != null) {
             matches = matches || []
             matches.push({
-                key: `${match.groups.customerKey} ${match.groups.projectKey}`,
-                customerKey: match.groups.customerKey,
-                projectKey: match.groups.projectKey,
+                ...match.groups,
+                id: `${match.groups.customerKey} ${match.groups.key}`,
             })
         }
         return matches
     }
 
     /**
-     * Find project match in title/subject/categories
+     * Find project match in title/body/categories
      * 
-     * @param {*} content 
-     * @param {*} categories 
+     * @param {*} content Content (title/body/categories)
+     * @param {*} categories Categories
      */
     findProjectMatches(content, categories) {
-        let matches = this.searchString(CATEGORY_REGEX, categories)
+        let matches = this.searchString(categories, true)
         if (matches) return matches
-        return this.searchString(CONTENT_REGEX, content)
+        return this.searchString(content)
     }
 
     /**
-     * Find labels
+     * Find label matches in categories
      * 
      * @param {*} categories 
      */
@@ -75,6 +73,9 @@ class EventMatching {
 
     /**
      * Checks for project match in event
+     * 
+     * 1. Checks category/title/description for tokens
+     * 2. Checks title/description for key without any brackets/parantheses
      * 
      * @param {*} event 
      */
@@ -88,16 +89,16 @@ class EventMatching {
                 let match = matches[i]
                 event.customer = find(this.customers, c => match.customerKey === c.key)
                 if (event.customer) {
-                    event.project = find(this.projects, p => p.id === match.key)
-                    projectKey = match.projectKey
+                    event.project = find(this.projects, p => p.id === match.id)
+                    projectKey = match.key
                 }
                 if (event.project) break
             }
         } else {
-            event.project = find(this.projects, p => content.indexOf(p.id) !== -1)
-            if (event.project) {
-                event.customer = find(this.customers, c => c.key === event.project.customerKey)
-            }
+            event.project = find(this.projects, p => {
+                return !!find(this.searchString(content, true), m => m.id === p.id)
+            })
+            if (event.project) event.customer = find(this.customers, c => c.key === event.project.customerKey)
         }
 
         if (event.customer && !event.project) event.suggestedProject = this.findProjectSuggestion(

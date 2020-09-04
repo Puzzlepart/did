@@ -1,5 +1,5 @@
 const assert = require('assert')
-const { first,any } = require('underscore')
+const { first, any } = require('underscore')
 const EventMatching = require('../api/graphql/resolvers/timesheet.matching')
 const projects = require('./data/projects.json')
 const customers = require('./data/customers.json')
@@ -47,11 +47,17 @@ describe('Event matching', () => {
             assert.strictEqual(event.customer.name, 'Employee Absence')
         })
 
-        it('IAM ILL in category should take presedence bfore IAM VAC in subject', () => {
+        it('IAM ILL in category should take presedence before IAM VAC in subject', () => {
             testEvent.body = 'Hello this is an event /IAM VAC/'
             testEvent.categories.push('IAM ILL')
             const event = first(eventMatching.match([testEvent]))
             assert.strictEqual(event.project.id, 'IAM ILL')
+        })
+
+        it('"AK ASSISTCH: ASSIST-3063" in subject should match to AK ASSISTCH', () => {
+            testEvent.body = 'AK ASSISTCH: ASSIST-3063'
+            const event = first(eventMatching.match([testEvent]))
+            assert.strictEqual(event.project.id, 'AK ASSISTCH')
         })
     })
 
