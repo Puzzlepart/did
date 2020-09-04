@@ -25,8 +25,7 @@ export const StatusBar = () => {
 
     return (
         <div className={styles.root}>
-            <Shimmer isDataLoaded={!loading} />
-            <Shimmer isDataLoaded={!loading} />
+            <Shimmer styles={{ shimmerWrapper: { height: 65 } }} isDataLoaded={!loading} />
             {!loading && (
                 <div className={styles.container}>
                     <UserMessage
