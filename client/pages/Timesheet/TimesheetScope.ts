@@ -39,7 +39,7 @@ export class TimesheetScope {
     /**
      *  Get the from and to date for the scope as string
      */
-    public get dateStrings() {
+    public get dateStrings(): { startDateTime: string; endDateTime: string } {
         return {
             startDateTime: dateUtils.toString(this._startDateTime),
             endDateTime: dateUtils.toString(this._endDateTime),
@@ -49,7 +49,7 @@ export class TimesheetScope {
     /**
      * Get the from and to date for the scope as JS dates
      */
-    public get date() {
+    public get date(): { startDateTime: Date; endDateTime: Date } {
         return {
             startDateTime: this._startDateTime.toDate(),
             endDateTime: this._endDateTime.toDate(),
@@ -82,15 +82,15 @@ export class TimesheetScope {
      * 
      * @param {number} index Index
      */
-    public getDay(index: number) {
+    public getDay(index: number): moment.Moment {
         return this._startDateTime.clone().add(index, 'days' as moment.DurationInputArg2)
     }
 
-    public get isCurrentWeek() {
+    public get isCurrentWeek(): boolean {
         return this._startDateTime.week() === moment().week()
     }
 
-    public get timespan() {
+    public get timespan(): string {
         return dateUtils.getTimespanString(this._startDateTime, this._endDateTime)
     }
 }
