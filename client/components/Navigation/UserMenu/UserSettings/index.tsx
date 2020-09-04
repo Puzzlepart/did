@@ -19,7 +19,13 @@ export const UserSettings = (props: React.HTMLProps<HTMLDivElement>) => {
     const [addOrUpdateUser] = useMutation(ADD_OR_UPDATE_USER)
 
     const onUpdateUserSettings = async (key: string, value: string | boolean) => {
-        await addOrUpdateUser({ variables: { user: { id: user.id, [key]: value } } }).then(() => location.reload())
+        await addOrUpdateUser({
+            variables: {
+                user: { id: user.id, [key]: value },
+                update: true,
+            }
+        })        
+        location.reload()
     }
 
     return (
