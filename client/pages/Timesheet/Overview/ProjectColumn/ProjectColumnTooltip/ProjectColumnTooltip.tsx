@@ -21,7 +21,7 @@ export const ProjectColumnTooltip = ({ project }: IProjectColumnTooltipProps): J
                     {project.labels.map((label, idx) => <EntityLabel key={idx} label={label} />)}
                 </div>
             )}
-            <div className={styles.tag}><span>{project.key}</span></div>
+            <div className={styles.tag}><span>{project.id}</span></div>
         </div>
     )
 }
