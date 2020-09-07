@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
-import { BaseFilter, FilterPanel, IFilter, ResourceFilter, UserMessage } from 'components'
+import { BaseFilter, FilterPanel, IFilter, ResourceFilter, UserMessage, ProjectFilter, CustomerFilter } from 'components'
 import List from 'components/List'
 import { value as value } from 'helpers'
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
@@ -20,6 +20,8 @@ export const Reports = () => {
     const { t } = useTranslation(['common', 'reports'])
     const filters: BaseFilter[] = [
         new ResourceFilter('resourceName', t('employeeLabel')),
+        new CustomerFilter('customer.name', t('customer')),
+        new ProjectFilter('project.name', t('project')),
     ]
     const [filterPanelOpen, setFilterPanelOpen] = useState<boolean>(undefined)
     const [query, setQuery] = useState<IReportsQuery>()

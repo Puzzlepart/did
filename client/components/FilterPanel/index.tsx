@@ -11,9 +11,7 @@ import { IFilterPanelProps } from './IFilterPanelProps'
 export const FilterPanel = (props: IFilterPanelProps) => {
     const [filters, setFilters] = useState<IFilter[]>(props.filters.map(f => f.initialize(props.entries)))
 
-    useEffect(() => {
-        setFilters(props.filters.map(f => f.initialize(props.entries)))
-    }, [props.entries])
+    useEffect(() => setFilters(props.filters.map(f => f.initialize(props.entries))), [props.entries])
 
     /**
      * On filter updated

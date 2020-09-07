@@ -4,6 +4,7 @@ interface CssExports {
   'item': string;
   'name': string;
   'root': string;
+  'searchBox': string;
 }
 export const cssExports: CssExports;
 export default cssExports;
