@@ -87,8 +87,7 @@
     "tokenDeletedText": "Nøkkelen `{0}` ble slettet."
   },
   "reports": {
-    "generatingReportLabel": "Genererer rapport",
-    "generatingReportDescription": "For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene...",
+    "generatingReportLabel": "Genererer rapport. For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene...",
     "noEntriesText": "Det er ingen bekreftede tidsoppføringer på dette tidspunktet.",
     "selectReportText": "Velg en rapport i menyen over.",
     "selectReportLabel": "Velg rapport"

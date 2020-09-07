@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { BaseFilter, CustomerFilter, FilterPanel, IFilter, ProjectFilter, ResourceFilter, UserMessage } from 'components'
 import List from 'components/List'
 import { value as value } from 'helpers'
-import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
+import { Spinner } from 'office-ui-fabric-react/lib/Spinner'
 import * as React from 'react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -110,10 +110,10 @@ export const Reports = () => {
                             onRender: () => {
                                 if (!loading) return null
                                 return (
-                                    <ProgressIndicator
-                                        className={styles.progress}
-                                        label={t('generatingReportLabel', { ns: 'reports' })}
-                                        description={t('generatingReportDescription', { ns: 'reports' })} />
+                                    <Spinner
+                                        className={styles.spinner}
+                                        labelPosition='right'
+                                        label={t('generatingReportLabel', { ns: 'reports' })} />
                                 )
                             }
                         }
