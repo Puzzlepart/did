@@ -34,7 +34,6 @@ export const Reports = () => {
 
     const timeentries = data?.timeentries || []
 
-
     /**
      * On export to Excel
      */
