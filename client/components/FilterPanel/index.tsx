@@ -1,5 +1,5 @@
 import { Panel } from 'office-ui-fabric-react/lib/Panel'
-import * as React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { FilterItem } from './FilterItem'
 import { IFilter, IFilterItem } from './Filters'
@@ -10,6 +10,10 @@ import { IFilterPanelProps } from './IFilterPanelProps'
  */
 export const FilterPanel = (props: IFilterPanelProps) => {
     const [filters, setFilters] = useState<IFilter[]>(props.filters.map(f => f.initialize(props.entries)))
+
+    useEffect(() => {
+        setFilters(props.filters.map(f => f.initialize(props.entries)))
+    }, [props.entries])
 
     /**
      * On filter updated

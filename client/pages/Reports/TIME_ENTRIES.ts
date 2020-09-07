@@ -4,8 +4,16 @@ import gql from 'graphql-tag'
  * @ignore
  */
 export default gql`
-    query {
-         timeentries {
+    query(
+        $weekNumber: Int,
+        $monthNumber: Int,
+        $year: Int
+    ) {
+         timeentries(
+             weekNumber: $weekNumber,
+             monthNumber: $monthNumber,
+             year: $year,
+        ) {
             title
             duration
             startDateTime

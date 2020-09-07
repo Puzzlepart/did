@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next'
 import { exportExcel } from 'utils/exportExcel'
 import columns from './columns'
 import TIME_ENTRIES from './TIME_ENTRIES'
+import styles from './Reports.module.scss'
 
 /**
  * @category Reports
@@ -16,14 +17,18 @@ import TIME_ENTRIES from './TIME_ENTRIES'
 export const Reports = () => {
     const { t } = useTranslation(['common', 'reports'])
     const filters: BaseFilter[] = [
-        new WeekFilter('weekNumber', t('weekNumberLabel')),
-        new MonthFilter('monthNumber', t('monthLabel')),
-        new YearFilter('year', t('yearLabel')),
         new ResourceFilter('resourceName', t('employeeLabel')),
     ]
     const [filterPanelOpen, setFilterPanelOpen] = useState<boolean>(undefined)
+    const [variables, setVariables] = useState({})
     const [subset, setSubset] = useState<any[]>(undefined)
-    const { loading, error, data } = useQuery<{ timeentries: any[] }>(TIME_ENTRIES, { fetchPolicy: 'cache-first' })
+    const { loading, error, data } = useQuery(
+        TIME_ENTRIES,
+        {
+            skip: Object.keys(variables).length === 0,
+            fetchPolicy: 'cache-first',
+            variables,
+        })
 
     const timeentries = data ? data.timeentries : []
 
@@ -51,22 +56,52 @@ export const Reports = () => {
         setSubset(_entries)
     }
 
-
-    if (loading) return (
-        <ProgressIndicator
-            label={t('generatingReportLabel', { ns: 'reports' })}
-            description={t('generatingReportDescription', { ns: 'reports' })} />
-    )
-
     return (
-        <div>
+        <div className={styles.root}>
             <List
-                hidden={timeentries.length === 0 && !loading}
                 items={subset || timeentries}
                 columns={columns(t)}
                 enableShimmer={loading}
                 commandBar={{
                     items: [
+                        {
+
+                            id: 'PREVIOUS_MONTH',
+                            key: 'PREVIOUS_MONTH',
+                            text: t('previousMonth'),
+                            iconProps: { iconName: 'Previous' },
+                            onClick: () => setVariables({ monthNumber: 8, year: 2020 })
+                        },
+                        {
+
+                            id: 'CURRENT_MONTH',
+                            key: 'CURRENT_MONTH',
+                            text: t('currentMonth'),
+                            iconProps: { iconName: 'Calendar' },
+                            onClick: () => setVariables({ monthNumber: 9, year: 2020 })
+                        },
+                        {
+                            id: 'CURRENT_YEAR',
+                            key: 'CURRENT_YEAR',
+                            text: t('currentYear'),
+                            iconProps: { iconName: 'CalendarReply' },
+                            onClick: () => setVariables({ year: 2020 })
+                        },
+                        {
+                            id: 'PROGRESS_INDICATOR',
+                            key: 'PROGRESS_INDICATOR',
+                            onRender: () => {
+                                if (!loading) return null
+                                return (
+                                    <ProgressIndicator
+                                    className={styles.progress}
+                                        label={t('generatingReportLabel', { ns: 'reports' })}
+                                        description={t('generatingReportDescription', { ns: 'reports' })} />
+                                )
+                            }
+                        }
+                    ],
+                    farItems: [
                         {
                             id: 'EXPORT_TO_EXCEL',
                             key: 'EXPORT_TO_EXCEL',
@@ -75,19 +110,22 @@ export const Reports = () => {
                             iconProps: { iconName: 'ExcelDocument' },
                             disabled: loading || !!error,
                         },
-                    ],
-                    farItems: [
                         {
                             key: 'OPEN_FILTER_PANEL',
                             iconProps: { iconName: 'Filter' },
                             iconOnly: true,
                             onClick: () => setFilterPanelOpen(true),
+                            disabled: loading || Object.keys(variables).length === 0
+
                         }
                     ]
                 }} />
             <UserMessage
-                hidden={timeentries.length > 0 || loading}
+                hidden={timeentries.length > 0 || loading || Object.keys(variables).length === 0}
                 text={t('noEntriesText', { ns: 'reports' })} />
+            <UserMessage
+                hidden={Object.keys(variables).length > 0}
+                text={t('selectReportText', { ns: 'reports' })} />
             <FilterPanel
                 isOpen={filterPanelOpen}
                 filters={filters}
