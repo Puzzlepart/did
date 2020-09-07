@@ -31,6 +31,7 @@ const typeDef = `
         projectId: String, 
         resourceId: String, 
         weekNumber: Int, 
+        monthNumber: Int, 
         year: Int, 
         currentUser: Boolean
     ): [TimeEntry!]
