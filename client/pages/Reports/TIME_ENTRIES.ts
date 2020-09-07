@@ -1,5 +1,11 @@
 import gql from 'graphql-tag'
 
+export interface ITimeEntriesVariables {
+    weekNumber?: number;
+    monthNumber?: number;
+    year?: number;
+}
+
 /**
  * @ignore
  */

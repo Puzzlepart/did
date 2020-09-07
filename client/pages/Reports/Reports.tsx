@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
-import { BaseFilter, FilterPanel, IFilter, MonthFilter, ResourceFilter, UserMessage, WeekFilter, YearFilter } from 'components'
+import { BaseFilter, FilterPanel, IFilter, ResourceFilter, UserMessage } from 'components'
 import List from 'components/List'
 import { value as value } from 'helpers'
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
@@ -8,8 +8,10 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { exportExcel } from 'utils/exportExcel'
 import columns from './columns'
-import TIME_ENTRIES from './TIME_ENTRIES'
 import styles from './Reports.module.scss'
+import TIME_ENTRIES, { ITimeEntriesVariables } from './TIME_ENTRIES'
+import { IReportsQuery } from './types'
+import DateUtils from 'utils/date'
 
 /**
  * @category Reports
@@ -20,19 +22,22 @@ export const Reports = () => {
         new ResourceFilter('resourceName', t('employeeLabel')),
     ]
     const [filterPanelOpen, setFilterPanelOpen] = useState<boolean>(undefined)
-    const [variables, setVariables] = useState({})
+    const [query, setQuery] = useState<IReportsQuery>()
     const [subset, setSubset] = useState<any[]>(undefined)
-    const { loading, error, data } = useQuery(
+    const { loading, error, data } = useQuery<any, ITimeEntriesVariables>(
         TIME_ENTRIES,
         {
-            skip: Object.keys(variables).length === 0,
+            skip: !query,
             fetchPolicy: 'cache-first',
-            variables,
+            variables: query && query.variables,
         })
 
-    const timeentries = data ? data.timeentries : []
+    const timeentries = data?.timeentries || []
 
 
+    /**
+     * On export to Excel
+     */
     const onExportExcel = () => exportExcel(
         subset || timeentries,
         {
@@ -42,7 +47,7 @@ export const Reports = () => {
     )
 
     /**
-     * On filterr updated in FilterPanel
+     * On filter updated in FilterPanel
      * 
      * @param {IFilter[]} filters 
      */
@@ -56,6 +61,28 @@ export const Reports = () => {
         setSubset(_entries)
     }
 
+    const queries: IReportsQuery[] = [
+        {
+            key: 'PREVIOUS_MONTH',
+            name: t('previousMonth'),
+            iconName: 'CalendarDay',
+            variables: { monthNumber: DateUtils.getMonthIndex() - 1, year: DateUtils.getYear() }
+        },
+        {
+
+            key: 'CURRENT_MONTH',
+            name: t('currentMonth'),
+            iconName: 'Calendar',
+            variables: { monthNumber: DateUtils.getMonthIndex() , year: DateUtils.getYear() }
+        },
+        {
+            key: 'CURRENT_YEAR',
+            name: t('currentYear'),
+            iconName: 'CalendarReply',
+            variables: { year: DateUtils.getYear() }
+        }
+    ]
+
     return (
         <div className={styles.root}>
             <List
@@ -64,37 +91,19 @@ export const Reports = () => {
                 enableShimmer={loading}
                 commandBar={{
                     items: [
+                        ...queries.map(query => ({
+                            key: query.key,
+                            text: query.name,
+                            iconProps: { iconName: query.iconName },
+                            onClick: () => setQuery(query),
+                        })),
                         {
-
-                            id: 'PREVIOUS_MONTH',
-                            key: 'PREVIOUS_MONTH',
-                            text: t('previousMonth'),
-                            iconProps: { iconName: 'Previous' },
-                            onClick: () => setVariables({ monthNumber: 8, year: 2020 })
-                        },
-                        {
-
-                            id: 'CURRENT_MONTH',
-                            key: 'CURRENT_MONTH',
-                            text: t('currentMonth'),
-                            iconProps: { iconName: 'Calendar' },
-                            onClick: () => setVariables({ monthNumber: 9, year: 2020 })
-                        },
-                        {
-                            id: 'CURRENT_YEAR',
-                            key: 'CURRENT_YEAR',
-                            text: t('currentYear'),
-                            iconProps: { iconName: 'CalendarReply' },
-                            onClick: () => setVariables({ year: 2020 })
-                        },
-                        {
-                            id: 'PROGRESS_INDICATOR',
                             key: 'PROGRESS_INDICATOR',
                             onRender: () => {
                                 if (!loading) return null
                                 return (
                                     <ProgressIndicator
-                                    className={styles.progress}
+                                        className={styles.progress}
                                         label={t('generatingReportLabel', { ns: 'reports' })}
                                         description={t('generatingReportDescription', { ns: 'reports' })} />
                                 )
@@ -103,7 +112,6 @@ export const Reports = () => {
                     ],
                     farItems: [
                         {
-                            id: 'EXPORT_TO_EXCEL',
                             key: 'EXPORT_TO_EXCEL',
                             text: t('exportCurrentView'),
                             onClick: onExportExcel,
@@ -115,16 +123,15 @@ export const Reports = () => {
                             iconProps: { iconName: 'Filter' },
                             iconOnly: true,
                             onClick: () => setFilterPanelOpen(true),
-                            disabled: loading || Object.keys(variables).length === 0
-
+                            disabled: loading || !query,
                         }
                     ]
                 }} />
             <UserMessage
-                hidden={timeentries.length > 0 || loading || Object.keys(variables).length === 0}
+                hidden={timeentries.length > 0 || loading || !query}
                 text={t('noEntriesText', { ns: 'reports' })} />
             <UserMessage
-                hidden={Object.keys(variables).length > 0}
+                hidden={!!query}
                 text={t('selectReportText', { ns: 'reports' })} />
             <FilterPanel
                 isOpen={filterPanelOpen}

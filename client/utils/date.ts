@@ -1,13 +1,13 @@
-import { TFunction } from 'i18next';
-import moment from 'moment';
+import { TFunction } from 'i18next'
+import moment from 'moment'
 import { format } from 'office-ui-fabric-react/lib/Utilities'
-import { capitalize } from 'underscore.string';
-require('twix');
+import { capitalize } from 'underscore.string'
+require('twix')
 
-export { moment };
+export { moment }
 
 export default new class DateUtils {
-    private _momentLocale: string;
+    private _momentLocale: string
 
     /**
      * Setup DateUtils class
@@ -15,8 +15,8 @@ export default new class DateUtils {
      * @param {string} locale Locale
      */
     public setup(locale: string) {
-        this._momentLocale = locale;
-        moment.locale(this._momentLocale);
+        this._momentLocale = locale
+        moment.locale(this._momentLocale)
     }
 
     /**
@@ -25,7 +25,7 @@ export default new class DateUtils {
      * @param {string} date Date string 
      */
     toMoment(date: string) {
-        const m = moment(date);
+        const m = moment(date)
         return m.add(m.toDate().getTimezoneOffset(), 'minutes')
     }
 
@@ -54,8 +54,8 @@ export default new class DateUtils {
      * @param {string} dateFormat Date format
      */
     formatDate(date: string, dateFormat: string): string {
-        const m = moment.utc(date);
-        return m.add(-m.toDate().getTimezoneOffset(), 'minutes').format(dateFormat);
+        const m = moment.utc(date)
+        return m.add(-m.toDate().getTimezoneOffset(), 'minutes').format(dateFormat)
     }
 
 
@@ -65,8 +65,8 @@ export default new class DateUtils {
      * @param {string | Date | moment.Moment} date Date string
      */
     startOfWeek(date?: string | Date | moment.Moment): moment.Moment {
-        const m = moment.utc(date);
-        return m.add(-m.toDate().getTimezoneOffset(), 'minutes').startOf('isoWeek');
+        const m = moment.utc(date)
+        return m.add(-m.toDate().getTimezoneOffset(), 'minutes').startOf('isoWeek')
     }
 
     /**
@@ -75,8 +75,8 @@ export default new class DateUtils {
      * @param {string | Date} date Date string
      */
     endOfWeek(date?: string | Date | moment.Moment): moment.Moment {
-        const m = moment.utc(date);
-        return m.add(-m.toDate().getTimezoneOffset(), 'minutes').endOf('isoWeek');
+        const m = moment.utc(date)
+        return m.add(-m.toDate().getTimezoneOffset(), 'minutes').endOf('isoWeek')
     }
 
     /**
@@ -89,9 +89,9 @@ export default new class DateUtils {
     getDays(start: moment.Moment, end: moment.Moment, dayFormat: string): string[] {
         const days = []
         for (let i = 0; i <= (end.weekday() - start.weekday()); i++) {
-            days.push(capitalize(start.clone().add(i, 'days').locale(this._momentLocale).format(dayFormat)));
+            days.push(capitalize(start.clone().add(i, 'days').locale(this._momentLocale).format(dayFormat)))
         }
-        return days;
+        return days
     }
 
 
@@ -101,7 +101,7 @@ export default new class DateUtils {
      * @param {number} monthNumber Month number
      */
     getMonthName(monthNumber: number): string {
-        return moment().locale(this._momentLocale).month(monthNumber).format('MMMM');
+        return moment().locale(this._momentLocale).month(monthNumber).format('MMMM')
     }
 
     /**
@@ -112,14 +112,14 @@ export default new class DateUtils {
      * @param {object} options Options
      */
     getTimespanString(start: moment.Moment, end: moment.Moment, options: object = { monthFormat: 'MMMM', yearFormat: 'YYYY', hideYear: false, implicitYear: false }): string {
-        return start.locale(this._momentLocale)['twix'](end.locale(this._momentLocale), { allDay: true }).format(options).toLowerCase();
+        return start.locale(this._momentLocale)['twix'](end.locale(this._momentLocale), { allDay: true }).format(options).toLowerCase()
     }
 
     /**
      * Get month names 
     */
     getMonthNames(): string[] {
-        return Array.apply(0, Array(12)).map((_: any, i: number) => capitalize(moment().month(i).format('MMMM')));
+        return Array.apply(0, Array(12)).map((_: any, i: number) => capitalize(moment().month(i).format('MMMM')))
     }
 
     /**
@@ -128,6 +128,20 @@ export default new class DateUtils {
      * @param {moment.Moment} date Moment date
      */
     toString(date: moment.Moment) {
-        return date.toISOString().replace('Z', '');
+        return date.toISOString().replace('Z', '')
+    }
+
+    /**
+     * Get month index
+     */
+    getMonthIndex(): number {
+        return moment().month() + 1
+    }
+
+    /**
+     * Get year
+     */
+    getYear(): number {
+        return moment().year()
     }
 }
