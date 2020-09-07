@@ -1,17 +1,17 @@
 import { useQuery } from '@apollo/react-hooks'
-import { BaseFilter, FilterPanel, IFilter, ResourceFilter, UserMessage, ProjectFilter, CustomerFilter } from 'components'
+import { BaseFilter, CustomerFilter, FilterPanel, IFilter, ProjectFilter, ResourceFilter, UserMessage } from 'components'
 import List from 'components/List'
 import { value as value } from 'helpers'
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
 import * as React from 'react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import DateUtils from 'utils/date'
 import { exportExcel } from 'utils/exportExcel'
 import columns from './columns'
 import styles from './Reports.module.scss'
 import TIME_ENTRIES, { ITimeEntriesVariables } from './TIME_ENTRIES'
 import { IReportsQuery } from './types'
-import DateUtils from 'utils/date'
 
 /**
  * @category Reports
@@ -74,7 +74,7 @@ export const Reports = () => {
             key: 'CURRENT_MONTH',
             name: t('currentMonth'),
             iconName: 'Calendar',
-            variables: { monthNumber: DateUtils.getMonthIndex() , year: DateUtils.getYear() }
+            variables: { monthNumber: DateUtils.getMonthIndex(), year: DateUtils.getYear() }
         },
         {
             key: 'CURRENT_YEAR',
@@ -92,12 +92,19 @@ export const Reports = () => {
                 enableShimmer={loading}
                 commandBar={{
                     items: [
-                        ...queries.map(query => ({
-                            key: query.key,
-                            text: query.name,
-                            iconProps: { iconName: query.iconName },
-                            onClick: () => setQuery(query),
-                        })),
+                        {
+                            key: 'SELECT_QUERY',
+                            text: t('selectReportLabel', { ns: 'reports' }),
+                            iconProps: { iconName: 'ReportDocument' },
+                            subMenuProps: {
+                                items: queries.map(query => ({
+                                    key: query.key,
+                                    text: query.name,
+                                    iconProps: { iconName: query.iconName },
+                                    onClick: () => setQuery(query),
+                                })),
+                            }
+                        },
                         {
                             key: 'PROGRESS_INDICATOR',
                             onRender: () => {
@@ -117,14 +124,14 @@ export const Reports = () => {
                             text: t('exportCurrentView'),
                             onClick: onExportExcel,
                             iconProps: { iconName: 'ExcelDocument' },
-                            disabled: loading || !!error,
+                            disabled: loading || !!error || !query,
                         },
                         {
                             key: 'OPEN_FILTER_PANEL',
                             iconProps: { iconName: 'Filter' },
                             iconOnly: true,
                             onClick: () => setFilterPanelOpen(true),
-                            disabled: loading || !query,
+                            disabled: loading || !!error || !query,
                         }
                     ]
                 }} />
@@ -133,6 +140,7 @@ export const Reports = () => {
                 text={t('noEntriesText', { ns: 'reports' })} />
             <UserMessage
                 hidden={!!query}
+                iconName='ReportDocument'
                 text={t('selectReportText', { ns: 'reports' })} />
             <FilterPanel
                 isOpen={filterPanelOpen}

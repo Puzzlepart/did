@@ -90,7 +90,8 @@
     "generatingReportLabel": "Generating report",
     "generatingReportDescription": "To give you the freshest results, we're generating a report from the latest data...",
     "noEntriesText": "There's no confirmed time entries at this time.",
-    "selectReportText": "Select a report from the menu above. Last month, this month, or this year."
+    "selectReportText": "Select a report from the menu above.",
+    "selectReportLabel": "Select report"
   },
   "common": {
     "previousMonth": "Last month",

@@ -90,7 +90,8 @@
     "generatingReportLabel": "Genererer rapport",
     "generatingReportDescription": "For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene...",
     "noEntriesText": "Det er ingen bekreftede tidsoppføringer på dette tidspunktet.",
-    "selectReportText": "Velg en rapport i menyen over. Forrige måned, denne måneden eller dette året."
+    "selectReportText": "Velg en rapport i menyen over.",
+    "selectReportLabel": "Velg rapport"
   },
   "common": {
     "previousMonth": "Forrige måned",
