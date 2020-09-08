@@ -64,18 +64,24 @@ module.exports = {
      * Get start of month
      * 
      * @param {*} date Date
+     * @param {*} toIso Convert to ISO
      */
-    startOfMonth: (date) => {
-        return moment(date).startOf('month')
+    startOfMonth: (date, toIso) => {
+        let d = moment(date).startOf('month')
+        if (toIso) return d.toISOString(false)
+        return d
     },
 
     /**
      * Get end of month
      * 
      * @param {*} date Date
+     * @param {*} toIso Convert to ISO
      */
-    endOfMonth: (date) => {
-        return moment(date).endOf('month')
+    endOfMonth: (date, toIso) => {
+        let d = moment(date).endOf('month')
+        if (toIso) return d.toISOString(false)
+        return d
     },
 
     /**
@@ -103,8 +109,8 @@ module.exports = {
      * @param {*} dateFormat Date format
      * @param {*} locale Locale
      */
-    formatDate: (date, dateFormat, locale) => {
-        return moment(date).locale(locale).tz('Europe/Oslo').format(dateFormat)
+    formatDate: (date, dateFormat, locale, timeZone = 'Europe/Oslo') => {
+        return moment(date).locale(locale).tz(timeZone).format(dateFormat)
     },
 
     /**
