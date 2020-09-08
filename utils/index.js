@@ -103,8 +103,8 @@ module.exports = {
      * @param {*} dateFormat Date format
      * @param {*} locale Locale
      */
-    formatDate: (date, dateFormat, locale) => {
-        return moment(date).locale(locale).tz('Europe/Oslo').format(dateFormat)
+    formatDate: (date, dateFormat, locale, timeZone = 'Europe/Oslo') => {
+        return moment(date).locale(locale).tz(timeZone).format(dateFormat)
     },
 
     /**
