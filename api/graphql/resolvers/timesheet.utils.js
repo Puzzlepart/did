@@ -19,7 +19,7 @@ function getPeriods(startDateTime, endDateTime, locale) {
         month: utils.formatDate(startDateTime, 'MMMM', locale),
         startDateTime,
         endDateTime: isSplit
-            ? utils.endOfMonth(startDateTime).toISOString()
+            ? utils.endOfMonth(startDateTime).toISOString(false)
             : endDateTime,
     }]
 
@@ -28,7 +28,7 @@ function getPeriods(startDateTime, endDateTime, locale) {
             id: utils.getPeriod(endDateTime),
             week,
             month: utils.formatDate(endDateTime, 'MMMM', locale),
-            startDateTime: utils.startOfMonth(endDateTime).toISOString(),
+            startDateTime: utils.startOfMonth(endDateTime).toISOString(false),
             endDateTime: endDateTime,
         })
     }

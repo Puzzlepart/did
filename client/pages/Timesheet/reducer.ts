@@ -77,11 +77,8 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
             }
             break
         case 'MOVE_SCOPE':
-            if (typeof action.payload === 'string') {
-                newState.scope = new TimesheetScope(action.payload)
-            } else {
-                newState.scope = state.scope.add(action.payload)
-            }
+            if (typeof action.payload === 'string') newState.scope = new TimesheetScope(action.payload)
+            else newState.scope = state.scope.add(action.payload)
             break
 
         case 'CHANGE_PERIOD': {
