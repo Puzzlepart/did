@@ -1,14 +1,13 @@
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import { EntityLabel, List } from 'components'
-import { value } from 'helpers'
 import { IEntityLabel } from 'interfaces/IEntityLabel'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
-import * as React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { generateColumn as col } from 'utils/generateColumn'
-import { ILabelFormProps, LabelForm } from './LabelForm'
-import GET_LABELS from './GET_LABELS'
 import DELETE_LABEL from './DELETE_LABEL'
+import GET_LABELS from './GET_LABELS'
+import { ILabelFormProps, LabelForm } from './LabelForm'
 
 /**
  * @category Admin
@@ -17,7 +16,7 @@ export const Labels = () => {
     const { t } = useTranslation(['admin', 'common'])
     const { data, refetch } = useQuery(GET_LABELS, { fetchPolicy: 'cache-and-network' })
     const [deleteLabel] = useMutation(DELETE_LABEL)
-    const [form, setForm] = React.useState<ILabelFormProps>(null)
+    const [form, setForm] = useState<ILabelFormProps>()
 
     const columns = [
         col(
@@ -44,12 +43,12 @@ export const Labels = () => {
             )),
     ]
 
-    React.useEffect(() => { refetch() }, [form])
+    useEffect(() => { refetch() }, [form])
 
     return (
         <>
             <List
-                items={value(data, 'labels', [])}
+                items={data?.labels || []}
                 columns={columns}
                 commandBar={{
                     items: [
