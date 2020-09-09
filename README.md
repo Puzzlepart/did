@@ -2,8 +2,7 @@
 
 _The Calendar is The Timesheet in The Cloud_  
 
-
-## Roadmap
+### Roadmap
 
 | Milestone                                                     | Release date  |  Version
 |---------------------------------------------------------------|------------------------------------------------------------------------------------|-----------------|
@@ -15,12 +14,15 @@ _The Calendar is The Timesheet in The Cloud_
 | [Oxygen](https://github.com/Puzzlepart/did365/milestone/8) | N/A | 0.9.0
 | [Fluor](https://github.com/Puzzlepart/did365/milestone/9) | N/A | 1.0.0
 
-## Environments
+### Environments
 
 | Environment | URL                                                          | Branch | CI                                                           |
 | ----------- | ------------------------------------------------------------ | ------ | ------------------------------------------------------------ |
-| Production  | [https://did365.puzzlepart.com/](https://did365.puzzlepart.com) | master | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/did365/vstscd) |
-| Development | [https://didapp-dev.azurewebsites.net](https://didapp-dev.azurewebsites.net) | dev    | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/vstscd) |
+| Production  | [https://did.puzzlepart.com/](https://did.puzzlepart.com)    | master | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/vstscd) |
+| Development | [https://didapp-dev.azurewebsites.net](https://didapp-dev.azurewebsites.net) | dev    | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/slots/dev/vstscd) |
 
+### Maintainers
 
-_Maintained by [@damsleth](https://github.com/damsleth), [@olemp](https://github.com/olemp) and [@okms](https://github.com/okms)_
+:bear: ​[@damsleth](https://github.com/damsleth)
+:slot_machine: [@olemp](https://github.com/olemp)
+:telescope: [@okms](https://github.com/okms) 
