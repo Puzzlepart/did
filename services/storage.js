@@ -158,12 +158,10 @@ class StorageService {
      * @param update Update the existing project
      */
     async createOrUpdateProject(project, createdBy, update) {
-        const id = [project.customerKey, project.key].join(' ')
         const entity = this.tableUtil.convertToAzEntity(
             project.key,
             {
                 ...project,
-                id,
                 labels: project.labels && project.labels.join('|'),
                 createdBy,
             },

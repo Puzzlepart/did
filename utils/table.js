@@ -30,7 +30,7 @@ class AzTableUtilities {
                 default: obj[decapitalize(key)] = _
             }
             return obj
-        }, {})
+        }, { id:`${entity.PartitionKey._} ${entity.RowKey._}` })
     }
 
     /**
