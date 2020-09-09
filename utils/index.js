@@ -61,7 +61,7 @@ module.exports = {
     },
 
     /**
-     * Get start of month
+     * Get start of month as string
      * 
      * @param {*} date Date
      */
@@ -71,11 +71,11 @@ module.exports = {
     },
 
     /**
-     * Get end of month
+     * Get end of month as string
      * 
      * @param {*} date Date
      */
-    endOfMonth: (date,) => {
+    endOfMonth: (date) => {
         let d = moment(date).endOf('month')
         return d.toISOString().replace('Z', '')
     },

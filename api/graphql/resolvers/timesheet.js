@@ -78,7 +78,7 @@ async function timesheet(_obj, variables, ctx) {
         variables.locale
     )
 
-    log('Found %s periods: %s', periods.length, JSON.stringify(periods.map(p => pick(p, 'id', 'startDateTime', 'endDateTime'))))
+    log('Found %s periods: %j', periods.length, periods.map(p => pick(p, 'id', 'startDateTime', 'endDateTime')))
 
     let [
         projects,

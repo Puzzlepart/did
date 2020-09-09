@@ -27,7 +27,7 @@ function getPeriods(startDateTime, endDateTime, locale) {
             week,
             month: utils.formatDate(endDateTime, 'MMMM', locale),
             startDateTime: utils.startOfMonth(endDateTime),
-            endDateTime: endDateTime,
+            endDateTime,
         })
     }
 
