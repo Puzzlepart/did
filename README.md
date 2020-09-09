@@ -24,5 +24,7 @@ _The Calendar is The Timesheet in The Cloud_
 ### Maintainers
 
 :bear: ​[@damsleth](https://github.com/damsleth)
+
 :slot_machine: [@olemp](https://github.com/olemp)
+
 :telescope: [@okms](https://github.com/okms) 
