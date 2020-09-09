@@ -64,24 +64,20 @@ module.exports = {
      * Get start of month
      * 
      * @param {*} date Date
-     * @param {*} toIso Convert to ISO
      */
-    startOfMonth: (date, toIso) => {
+    startOfMonth: (date) => {
         let d = moment(date).startOf('month')
-        if (toIso) return d.toISOString().replace('Z', '')
-        return d
+        return d.toISOString().replace('Z', '')
     },
 
     /**
      * Get end of month
      * 
      * @param {*} date Date
-     * @param {*} toIso Convert to ISO
      */
-    endOfMonth: (date, toIso) => {
+    endOfMonth: (date,) => {
         let d = moment(date).endOf('month')
-        if (toIso) return d.toISOString().replace('Z', '')
-        return d
+        return d.toISOString().replace('Z', '')
     },
 
     /**
