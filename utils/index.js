@@ -68,7 +68,7 @@ module.exports = {
      */
     startOfMonth: (date, toIso) => {
         let d = moment(date).startOf('month')
-        if (toIso) return d.toISOString(false)
+        if (toIso) return d.toISOString().replace('Z', '')
         return d
     },
 
@@ -80,7 +80,7 @@ module.exports = {
      */
     endOfMonth: (date, toIso) => {
         let d = moment(date).endOf('month')
-        if (toIso) return d.toISOString(false)
+        if (toIso) return d.toISOString().replace('Z', '')
         return d
     },
 
