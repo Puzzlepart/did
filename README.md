@@ -22,7 +22,6 @@ _The Calendar is The Timesheet in The Cloud_
 | Development | [https://didapp-dev.azurewebsites.net](https://didapp-dev.azurewebsites.net) | dev    | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/slots/dev/vstscd) |
 
 ### Maintainers
-
 - [@damsleth](https://github.com/damsleth)
 - [@olemp](https://github.com/olemp)
 - [@okms](https://github.com/okms) 
