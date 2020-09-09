@@ -28,7 +28,7 @@ async function roles(_obj, _variables, ctx) {
 
 async function addOrUpdateRole(_obj, variables, ctx) {
     try {
-        await ctx.services.storage.addRole(variables.role, variables.update)
+        await ctx.services.storage.addOrUpdateRole(variables.role, variables.update)
         return { success: true, error: null }
     } catch (error) {
         return { success: false, error: pick(error, 'name', 'message', 'code', 'statusCode') }
