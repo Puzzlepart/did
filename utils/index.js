@@ -61,27 +61,23 @@ module.exports = {
     },
 
     /**
-     * Get start of month
+     * Get start of month as string
      * 
      * @param {*} date Date
-     * @param {*} toIso Convert to ISO
      */
-    startOfMonth: (date, toIso) => {
+    startOfMonth: (date) => {
         let d = moment(date).startOf('month')
-        if (toIso) return d.toISOString(false)
-        return d
+        return d.toISOString().replace('Z', '')
     },
 
     /**
-     * Get end of month
+     * Get end of month as string
      * 
      * @param {*} date Date
-     * @param {*} toIso Convert to ISO
      */
-    endOfMonth: (date, toIso) => {
+    endOfMonth: (date) => {
         let d = moment(date).endOf('month')
-        if (toIso) return d.toISOString(false)
-        return d
+        return d.toISOString().replace('Z', '')
     },
 
     /**
