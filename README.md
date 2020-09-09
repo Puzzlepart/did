@@ -1,9 +1,9 @@
 # did
-_-The Calendar is The Timesheet in The Cloud!_  
+
+_The Calendar is The Timesheet in The Cloud_  
 
 
 ## Roadmap
-
 
 | Milestone                                                     | Release date  |  Version
 |---------------------------------------------------------------|------------------------------------------------------------------------------------|-----------------|
@@ -17,10 +17,10 @@ _-The Calendar is The Timesheet in The Cloud!_
 
 ## Environments
 
-| Environment  | URL                                                                                | Branch  |  CI      |
-|--------------|------------------------------------------------------------------------------------|---------|----------|
-| Production   |[https://did365.puzzlepart.com/](https://did365.puzzlepart.com)                     | master  | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/did365/vstscd)      |
-| Development  | [https://did.puzzlepart.com/](https://did.puzzlepart.com/)     | dev     | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/vstscd)     |
+| Environment | URL                                                          | Branch | CI                                                           |
+| ----------- | ------------------------------------------------------------ | ------ | ------------------------------------------------------------ |
+| Production  | [https://did365.puzzlepart.com/](https://did365.puzzlepart.com) | master | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/did365/vstscd) |
+| Development | [https://didapp-dev.azurewebsites.net](https://didapp-dev.azurewebsites.net) | dev    | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/vstscd) |
 
 
 _Maintained by [@damsleth](https://github.com/damsleth), [@olemp](https://github.com/olemp) and [@okms](https://github.com/okms)_
