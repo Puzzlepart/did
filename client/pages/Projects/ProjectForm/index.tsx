@@ -6,11 +6,12 @@ import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { format } from 'office-ui-fabric-react/lib/Utilities'
-import { pick } from 'underscore'
+import { pick, first } from 'underscore'
 import styles from './CreateProjectForm.module.scss'
 import CREATE_OR_UPDATE_PROJECT, { ICreateOrUpdateProjectVariables, IProjectInput } from './CREATE_OR_UPDATE_PROJECT'
 import { IProjectFormProps, IProjectFormValidation } from './types'
 import { Toggle } from 'office-ui-fabric-react'
+import { getIcons } from 'common/icons'
 
 const initialModel: IProjectInput = {
     key: '',
@@ -18,7 +19,7 @@ const initialModel: IProjectInput = {
     customerKey: '',
     description: '',
     inactive: false,
-    icon: 'Page',
+    icon: first(getIcons(1)),
     labels: [],
 }
 
@@ -85,7 +86,7 @@ export const ProjectForm = (props: IProjectFormProps) => {
                 hidden={editMode}
                 label={t('customer', { ns: 'common' })}
                 required={true}
-                className={styles.inputElement}
+                className={styles.inputField}
                 placeholder={t('searchPlaceholder')}
                 onSelected={customer => setModel({
                     ...model,
@@ -93,7 +94,7 @@ export const ProjectForm = (props: IProjectFormProps) => {
                 })} />
             <TextField
                 disabled={editMode}
-                className={styles.inputElement}
+                className={styles.inputField}
                 label={t('keyFieldLabel', { ns: 'common' })}
                 title={t('keyFieldDescription')}
                 description={t('keyFieldDescription')}
@@ -102,25 +103,27 @@ export const ProjectForm = (props: IProjectFormProps) => {
                 onChange={(_event, key) => setModel({ ...model, key })}
                 value={model.key} />
             <TextField
-                className={styles.inputElement}
+                className={styles.inputField}
                 label={t('nameFieldLabel', { ns: 'common' })}
                 required={true}
                 errorMessage={validation.errors.name}
                 onChange={(_event, name) => setModel({ ...model, name })}
                 value={model.name} />
             <TextField
-                className={styles.inputElement}
+                className={styles.inputField}
                 label={t('descriptionFieldLabel', { ns: 'common' })}
                 multiline={true}
                 errorMessage={validation.errors.description}
                 onChange={(_event, description) => setModel({ ...model, description })}
                 value={model.description} />
             <IconPicker
-                className={styles.iconPicker}
-                options={undefined}
-                defaultSelectedKey={model.icon}
-                onChange={(_event, opt) => setModel({ ...model, icon: opt.key as string })} />
-            <div className={styles.inputElement}>
+                className={styles.inputField}
+                defaultSelected={model.icon}
+                label={t('iconLabel', { ns: 'common' })}
+                placeholder={t('iconSearchPlaceholder', { ns: 'common' })}
+                width={300}
+                onSelected={icon => setModel({ ...model, icon })} />
+            <div className={styles.inputField} hidden={!editMode}>
                 <Toggle
                     label={t('inactiveFieldLabel', { ns: 'common' })}
                     defaultChecked={model.inactive}
@@ -128,13 +131,13 @@ export const ProjectForm = (props: IProjectFormProps) => {
                 <span className={styles.inputDescription}>{t('inactiveFieldDescription')}</span>
             </div>
             <LabelPicker
-                className={styles.inputElement}
+                className={styles.inputField}
                 label={t('labels', { ns: 'admin' })}
                 searchLabelText={t('filterLabels', { ns: 'admin' })}
                 defaultSelectedKeys={props.edit ? props.edit.labels.map(lbl => lbl.name) : []}
                 onChange={labels => setModel({ ...model, labels: labels.map(lbl => lbl.name) })} />
             <PrimaryButton
-                className={styles.inputElement}
+                className={styles.inputField}
                 text={t(editMode ? 'save' : 'add', { ns: 'common' })}
                 onClick={onFormSubmit}
                 disabled={loading || !!message} />

@@ -1721,6 +1721,7 @@ const ICONS = [
  * 
  * @param {number} n Number of icons
  */
-export function getIcons(n: number) {
-    return ICONS.sort(() => 0.5 - Math.random()).slice(0, n)
+export function getIcons(n?: number) {
+    if (n) return ICONS.sort(() => 0.5 - Math.random()).slice(0, n)
+    return ICONS.sort()
 }

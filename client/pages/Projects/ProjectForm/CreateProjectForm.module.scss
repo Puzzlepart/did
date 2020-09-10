@@ -1,7 +1,7 @@
 .root {
   max-width: 450px;
 
-  .inputElement {
+  .inputField {
     margin: 14px 0 0 0;
     width: 100%;
     border-radius: 3px;
@@ -10,11 +10,5 @@
       color: rgb(96, 94, 92);
       font-size: 10px;
     }
-  }
-
-  .iconPicker {
-    margin: 14px 0 0 0;
-    width: 100%;
-    max-width: 300px;
   }
 }

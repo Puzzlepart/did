@@ -53,6 +53,7 @@ let config = {
     },
     resolve: {
         alias: {
+            common: path.resolve(src, 'common'),
             interfaces: path.resolve(src, 'interfaces'),
             utils: path.resolve(src, 'utils'),
             helpers: path.resolve(src, 'helpers'),

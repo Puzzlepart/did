@@ -40,8 +40,8 @@ export const Projects = () => {
     })), [data])
 
     useEffect(() => {
-        const _selected = find(projects, p => p.id === params.key.toUpperCase())
-        setSelected(_selected)
+        const _selected = find(projects, p => p.id === (params.key || '').toUpperCase())
+        if (_selected) setSelected(_selected)
     }, [params.key, projects])
 
     function onPivotClick({ props: { itemKey } }: PivotItem) {

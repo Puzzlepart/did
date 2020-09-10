@@ -1,22 +1,23 @@
 import { useMutation } from '@apollo/react-hooks'
+import { getIcons } from 'common/icons'
 import { IconPicker, UserMessage } from 'components'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
+import { format } from 'office-ui-fabric-react/lib/Utilities'
 import * as React from 'react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { format } from 'office-ui-fabric-react/lib/Utilities'
+import { first, pick } from 'underscore'
 import styles from './CreateCustomerForm.module.scss'
 import CREATE_OR_UPDATE_CUSTOMER, { ICreateOrUpdateCustomerVariables, ICustomerInput } from './CREATE_OR_UPDATE_CUSTOMER'
 import { ICustomerFormValidation } from './types'
-import { pick } from 'underscore'
 
 const initialModel: ICustomerInput = {
     key: '',
     name: '',
     description: '',
-    icon: 'Page',
+    icon: first(getIcons(1)),
 }
 
 /**
@@ -90,10 +91,12 @@ export const CustomerForm = () => {
                 onChange={(_event, description) => setModel({ ...model, description })}
                 value={model.description} />
             <IconPicker
-                className={styles.iconPicker}
-                defaultSelectedKey={model.icon}
-                options={undefined}
-                onChange={(_event, opt) => setModel({ ...model, icon: opt.key as string })} />
+                className={styles.inputField}
+                defaultSelected={model.icon}
+                label={t('iconLabel', { ns: 'common' })}
+                placeholder={t('iconSearchPlaceholder', { ns: 'common' })}
+                width={300}
+                onSelected={icon => setModel({ ...model, icon })} />
             <PrimaryButton
                 styles={{ root: { marginTop: 16 } }}
                 text={t('add', { ns: 'common' })}

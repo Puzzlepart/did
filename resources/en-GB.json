@@ -146,6 +146,7 @@
     "hoursShortFormat": "{0}h",
     "minutesShortFormat": "{0}min",
     "editLabel": "Rediger",
+    "iconSearchPlaceholder":"Search in icons...",
     "inactiveFieldLabel": "Inactive",
     "calendarStrings": {
       "months": [

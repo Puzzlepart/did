@@ -90,7 +90,7 @@ export const Actions = (props: IProjectDetailsProps) => {
                     edit={props.project}
                     onSubmitted={() => {
                         setShowEditPanel(false)
-                        setTimeout(refetch, 1000)
+                        refetch()
                     }} />
             </Panel>
         </div>
