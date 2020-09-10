@@ -1,7 +1,7 @@
 import { Autocomplete } from 'components/Autocomplete'
 import { Label } from 'office-ui-fabric-react/lib/Label'
 import React, { useMemo } from 'react'
-import { find } from 'underscore'
+import { find, omit } from 'underscore'
 import { humanize } from 'underscore.string'
 import { getIcons } from '../../common/icons'
 import { IIconPickerProps } from './types'
@@ -22,7 +22,7 @@ export const IconPicker = (props: IIconPickerProps) => {
         <div className={props.className} hidden={props.hidden}>
             <Label>{props.label}</Label>
             <Autocomplete
-                {...props}
+                {...omit(props, 'className')}
                 defaultSelectedItem={props.defaultSelected && find(items, i => i.key === props.defaultSelected)}
                 disabled={false}
                 items={items}
