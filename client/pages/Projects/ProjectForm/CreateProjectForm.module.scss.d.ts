@@ -2,6 +2,7 @@
 // Please do not change this file!
 interface CssExports {
   'iconPicker': string;
+  'inputDescription': string;
   'inputElement': string;
   'root': string;
 }

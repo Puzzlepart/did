@@ -10,12 +10,14 @@ import { pick } from 'underscore'
 import styles from './CreateProjectForm.module.scss'
 import CREATE_OR_UPDATE_PROJECT, { ICreateOrUpdateProjectVariables, IProjectInput } from './CREATE_OR_UPDATE_PROJECT'
 import { IProjectFormProps, IProjectFormValidation } from './types'
+import { Toggle } from 'office-ui-fabric-react'
 
 const initialModel: IProjectInput = {
     key: '',
     name: '',
     customerKey: '',
     description: '',
+    inactive: false,
     icon: 'Page',
     labels: [],
 }
@@ -87,23 +89,23 @@ export const ProjectForm = (props: IProjectFormProps) => {
             <TextField
                 disabled={isEdit}
                 className={styles.inputElement}
-                label={t('keyLabel', { ns: 'common' })}
-                description={t('keyDescription')}
-                title={t('keyDescription')}
+                label={t('keyFieldLabel', { ns: 'common' })}
+                title={t('keyFieldDescription')}
+                description={t('keyFieldDescription')}
                 required={true}
                 errorMessage={validation.errors.key}
                 onChange={(_event, key) => setModel({ ...model, key })}
                 value={model.key} />
             <TextField
                 className={styles.inputElement}
-                label={t('nameLabel', { ns: 'common' })}
+                label={t('nameFieldLabel', { ns: 'common' })}
                 required={true}
                 errorMessage={validation.errors.name}
                 onChange={(_event, name) => setModel({ ...model, name })}
                 value={model.name} />
             <TextField
                 className={styles.inputElement}
-                label={t('descriptionLabel', { ns: 'common' })}
+                label={t('descriptionFieldLabel', { ns: 'common' })}
                 multiline={true}
                 errorMessage={validation.errors.description}
                 onChange={(_event, description) => setModel({ ...model, description })}
@@ -113,6 +115,14 @@ export const ProjectForm = (props: IProjectFormProps) => {
                 options={undefined}
                 defaultSelectedKey={model.icon}
                 onChange={(_event, opt) => setModel({ ...model, icon: opt.key as string })} />
+            <div
+                className={styles.inputElement}>
+                <Toggle
+                    label={t('inactiveFieldLabel', { ns: 'common' })}
+                    defaultChecked={model.inactive}
+                    onChanged={inactive => setModel({ ...model, inactive })} />
+                <span className={styles.inputDescription}>{t('inactiveFieldDescription')}</span>
+            </div>
             <LabelPicker
                 className={styles.inputElement}
                 label={t('labels', { ns: 'admin' })}

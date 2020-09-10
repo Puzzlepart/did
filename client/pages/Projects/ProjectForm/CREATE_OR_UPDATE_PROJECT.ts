@@ -6,6 +6,7 @@ export interface IProjectInput {
     name: string;
     customerKey: string;
     description: string;
+    inactive?: boolean;
     icon: string;
     labels: any[];
 }
