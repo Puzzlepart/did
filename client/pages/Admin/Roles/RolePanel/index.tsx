@@ -4,9 +4,9 @@ import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { Panel } from 'office-ui-fabric-react/lib/Panel'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import { Toggle } from 'office-ui-fabric-react/lib/Toggle'
-import React, { useMemo, useState } from 'react'
+import * as React from 'react'
 import { useTranslation } from 'react-i18next'
-import { contains, isEmpty, omit, isEqual } from 'underscore'
+import { contains, isEmpty, omit } from 'underscore'
 import styles from './RolePanel.module.scss'
 import { IRolePanelProps } from './types'
 import ADD_OR_UPDATE_ROLE from './ADD_OR_UPDATE_ROLE'
@@ -17,9 +17,8 @@ import ADD_OR_UPDATE_ROLE from './ADD_OR_UPDATE_ROLE'
 export const RolePanel = (props: IRolePanelProps) => {
     const { t } = useTranslation('admin')
     const [addOrUpdateRole] = useMutation(ADD_OR_UPDATE_ROLE)
-    const [role, setRole] = useState(props.edit || { permissions: [] })
-    const permissions = useMemo(() => securityConfig.permissions(t), [])
-    const saveDisabled = useMemo(() => (!props.edit && isEmpty(role.name)) || isEqual(role.permissions, props.edit?.permissions), [props.edit, role])
+    const [role, setRole] = React.useState(props.edit || { permissions: [] })
+    const permissions = React.useMemo(() => securityConfig.permissions(t), [])
 
     /**
      * On toggle permission
@@ -51,7 +50,6 @@ export const RolePanel = (props: IRolePanelProps) => {
     return (
         <Panel
             className={styles.root}
-            customWidth={'440px'}
             isOpen={true}
             title={props.title}
             onDismiss={props.onDismiss}>
@@ -70,7 +68,6 @@ export const RolePanel = (props: IRolePanelProps) => {
                         <div key={key} className={styles.permissionItem}>
                             <Toggle
                                 label={name}
-                                inlineLabel={true}
                                 defaultChecked={contains(role.permissions, id)}
                                 onChange={(_event, checked) => togglePermission(id, checked)} />
                         </div>
@@ -80,7 +77,7 @@ export const RolePanel = (props: IRolePanelProps) => {
                     className={styles.saveBtn}
                     text={t('save', { ns: 'common' })}
                     onClick={onSave}
-                    disabled={saveDisabled} />
+                    disabled={!props.edit && isEmpty(role.name)} />
             </div>
         </Panel>
     )

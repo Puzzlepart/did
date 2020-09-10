@@ -1,10 +1,9 @@
-const { first, filter, find, pick, contains } = require('underscore')
+const { first, filter, find, pick,contains } = require('underscore')
 const { formatDate, getMonthIndex, getWeek } = require('../../../utils')
 const EventMatching = require('./timesheet.matching')
 const { connectEntities } = require('./project.utils')
 const { getPeriods } = require('./timesheet.utils')
 const value = require('get-value')
-const log = require('debug')('api/graphql/resolvers/timesheet')
 
 const typeDef = `  
  type Event {
@@ -70,15 +69,11 @@ const typeDef = `
 async function timesheet(_obj, variables, ctx) {
     if (!ctx.services.graph) return { success: false, error: null }
 
-    log('Quering timesheet from %s to %s', variables.startDateTime, variables.endDateTime)
-
     let periods = getPeriods(
         variables.startDateTime,
         variables.endDateTime,
         variables.locale
     )
-
-    log('Found %s periods: %j', periods.length, periods.map(p => pick(p, 'id', 'startDateTime', 'endDateTime')))
 
     let [
         projects,
