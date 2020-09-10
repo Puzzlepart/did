@@ -15,7 +15,7 @@ import { contains, find } from 'underscore'
 import GET_PROJECTS from './GET_PROJECTS'
 import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
-import { IGetProjectsData, IProjectsParams } from './types'
+import { IProjectsParams } from './types'
 
 /**
  * @category Projects
@@ -26,16 +26,16 @@ export const Projects = () => {
     const { user } = useContext(AppContext)
     const params = useParams<IProjectsParams>()
     const [selected, setSelected] = useState<IProject>(null)
-    const { loading, error, data } = useQuery<IGetProjectsData>(
+    const { loading, error, data } = useQuery<{ projects: any[]; outlookCategories: any[] }>(
         GET_PROJECTS,
         {
             variables: { sortBy: 'name' },
-            fetchPolicy: 'cache-first'
+            fetchPolicy: 'cache-and-network'
         })
 
-    const outlookCategories = value<IOutlookCategory[]>(data, 'outlookCategories', [])
+    const outlookCategories = data?.outlookCategories || []
 
-    const projects = value<IProject[]>(data, 'projects', []).map(p => ({
+    const projects = (data?.projects || []).map(p => ({
         ...p, outlookCategory: find(outlookCategories, c => c.displayName === p.id),
     }))
 
