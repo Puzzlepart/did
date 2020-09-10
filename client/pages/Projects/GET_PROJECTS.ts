@@ -19,7 +19,6 @@ export default gql`
                 name
             }
             labels {
-                id
                 name
                 description
                 color
