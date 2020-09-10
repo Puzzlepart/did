@@ -5,7 +5,7 @@ import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { Label } from 'office-ui-fabric-react/lib/Label'
 import { Modal } from 'office-ui-fabric-react/lib/Modal'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
-import * as React from 'react'
+import React, { useState } from 'react'
 import SketchPicker from 'react-color/lib/components/sketch/Sketch'
 import { useTranslation } from 'react-i18next'
 import { omit } from 'underscore'
@@ -19,12 +19,12 @@ import { ILabelFormProps } from './types'
  */
 export const LabelForm = (props: ILabelFormProps) => {
     const { t } = useTranslation(['common', 'admin'])
-    const [model, setModel] = React.useState<IEntityLabel>(props.label || {
+    const [model, setModel] = useState<IEntityLabel>(props.label || {
         name: '',
         description: '',
         color: '#F8E71C',
     })
-    const [colorPickerVisible, setColorPickerVisible] = React.useState<boolean>(false)
+    const [colorPickerVisible, setColorPickerVisible] = useState<boolean>(false)
     const [addOrUpdateLabel] = useMutation(ADD_OR_UPDATE_LABEL)
 
     /**
