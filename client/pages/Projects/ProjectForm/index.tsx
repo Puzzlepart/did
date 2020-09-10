@@ -26,6 +26,7 @@ const initialModel: IProjectInput = {
  * @category Projects
  */
 export const ProjectForm = (props: IProjectFormProps) => {
+    console.log('ProjectForm', props)
     const isEdit = !!props.edit
     const { t } = useTranslation(['projects', 'common'])
     const [validation, setValidation] = useState<IProjectFormValidation>({ errors: {}, invalid: true })
@@ -115,8 +116,7 @@ export const ProjectForm = (props: IProjectFormProps) => {
                 options={undefined}
                 defaultSelectedKey={model.icon}
                 onChange={(_event, opt) => setModel({ ...model, icon: opt.key as string })} />
-            <div
-                className={styles.inputElement}>
+            <div className={styles.inputElement}>
                 <Toggle
                     label={t('inactiveFieldLabel', { ns: 'common' })}
                     defaultChecked={model.inactive}
