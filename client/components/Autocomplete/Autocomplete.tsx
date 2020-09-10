@@ -130,7 +130,7 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
             id={`s_${item.key}`}
             className={this.props.classNames.suggestion}
             onClick={() => this.handleClick(item)}>
-            <div className={this.props.classNames.suggestionIcon}>
+            <div className={this.props.classNames.suggestionIcon} hidden={!this.props.showIcons}>
               <Icon iconName={item.iconName} />
             </div>
             <div className={this.props.classNames.suggestionValue}>{item.displayValue}</div>

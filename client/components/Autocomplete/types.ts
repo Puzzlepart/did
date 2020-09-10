@@ -14,6 +14,7 @@ export interface IAutocompleteProps extends ISearchBoxProps {
   searchCallback?: (item: string) => void;
   noSuggestionsText?: string;
   classNames?: IAutocompleteClassNames;
+  showIcons?: boolean;
 }
 
 export interface IAutocompleteState {
