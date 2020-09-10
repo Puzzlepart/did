@@ -57,7 +57,7 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                         <EntityLabel
                             key={idx}
                             label={label}
-                            size='small' />
+                            size='medium' />
                     ))}
                 </div>
                 <UserMessage
