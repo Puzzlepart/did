@@ -145,6 +145,7 @@
     "hoursShortFormat": "{0}t",
     "minutesShortFormat": "{0}min",
     "editLabel": "Rediger",
+    "iconSearchPlaceholder": "Søk i ikoner...",
     "calendarStrings": {
       "months": [
         "Januar",

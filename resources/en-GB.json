@@ -145,6 +145,7 @@
     "hoursShortFormat": "{0}h",
     "minutesShortFormat": "{0}min",
     "editLabel": "Rediger",
+    "iconSearchPlaceholder":"Search in icons...",
     "calendarStrings": {
       "months": [
         "January",

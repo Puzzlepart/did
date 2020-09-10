@@ -91,9 +91,10 @@ export const CustomerForm = () => {
                 value={model.description} />
             <IconPicker
                 className={styles.iconPicker}
-                defaultSelectedKey={model.icon}
-                options={undefined}
-                onChange={(_event, opt) => setModel({ ...model, icon: opt.key as string })} />
+                label={t('iconLabel', { ns: 'common' })}
+                placeholder={t('iconSearchPlaceholder', { ns: 'common' })}
+                width={300}
+                onSelected={icon => setModel({ ...model, icon })} />
             <PrimaryButton
                 styles={{ root: { marginTop: 16 } }}
                 text={t('add', { ns: 'common' })}
