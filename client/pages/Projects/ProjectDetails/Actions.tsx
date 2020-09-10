@@ -13,7 +13,8 @@ import { ProjectForm } from '../ProjectForm'
 import columns from './columns'
 import { CREATE_OUTLOOK_CATEGORY } from './CREATE_OUTLOOK_CATEGORY'
 import styles from './ProjectDetails.module.scss'
-import { IProjectDetailsProps, ProjectDetailsContext } from './types'
+import { ProjectDetailsContext } from './ProjectDetailsContext'
+import { IProjectDetailsProps } from './types'
 
 export const Actions = ({project}: IProjectDetailsProps) => {
     const { user } = React.useContext(AppContext)
