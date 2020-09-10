@@ -117,6 +117,7 @@ export const ProjectForm = (props: IProjectFormProps) => {
                 value={model.description} />
             <IconPicker
                 className={styles.inputElement}
+                
                 defaultSelected={model.icon}
                 label={t('iconLabel', { ns: 'common' })}
                 placeholder={t('iconSearchPlaceholder', { ns: 'common' })}
