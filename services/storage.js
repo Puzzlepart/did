@@ -304,10 +304,11 @@ class StorageService {
     async deleteUserTimeEntries(periodId, resourceId) {
         const { string } = this.tableUtil.azEntGen()
         const timeEntries = await this.getTimeEntries({ resourceId, periodId })
+        if (timeEntries.length === 0) return;
         const batch = this.tableUtil.createAzBatch()
-        timeEntries.forEach(e => batch.deleteEntity({
+        timeEntries.forEach(entry => batch.deleteEntity({
             PartitionKey: string(resourceId),
-            RowKey: string(e.id)
+            RowKey: string(entry.id)
         }))
         await this.tableUtil.executeBatch('TimeEntries', batch)
     }
