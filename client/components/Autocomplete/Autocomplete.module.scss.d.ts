@@ -4,6 +4,8 @@ interface CssExports {
   'callout': string;
   'suggestion': string;
   'suggestionContainer': string;
+  'suggestionIcon': string;
+  'suggestionValue': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

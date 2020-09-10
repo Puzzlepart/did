@@ -1,5 +1,6 @@
 import { Callout } from 'office-ui-fabric-react/lib/Callout'
 import { FocusZone, FocusZoneDirection } from 'office-ui-fabric-react/lib/FocusZone'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { List } from 'office-ui-fabric-react/lib/List'
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox'
 import * as React from 'react'
@@ -22,7 +23,9 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
     classNames: {
       suggestionsCallout: styles.callout,
       suggestionContainer: styles.suggestionContainer,
-      suggestion: styles.suggestion
+      suggestion: styles.suggestion,
+      suggestionValue: styles.suggestionValue,
+      suggestionIcon: styles.suggestionIcon,
     }
   };
   private _containerElement = React.createRef<HTMLDivElement>();
@@ -37,7 +40,11 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
 
   private handleClick = (item: ISuggestionItem<T>) => {
     this.props.onSelected(item)
-    this.setState({ searchText: item.displayValue, isSuggestionDisabled: false })
+    this.setState({
+      selectedItem: item,
+      searchText: item.displayValue,
+      isSuggestionDisabled: false,
+    })
   }
 
   public render() {
@@ -45,6 +52,7 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
   }
 
   private renderSearch = () => {
+    const iconName = this.state.searchText ? this.state.selectedItem?.iconName || 'Search' : 'Search'
     return (
       <div
         ref={this._containerElement}
@@ -52,6 +60,7 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
         onKeyDown={this.onKeyDown}>
         <SearchBox
           id='SuggestionSearchBox'
+          iconProps={{ iconName }}
           value={this.state.searchText}
           className={this.props.className}
           placeholder={this.props.placeholder}
@@ -109,7 +118,7 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
     )
   }
 
-  private onRenderCell = (item: any) => {
+  private onRenderCell = (item: ISuggestionItem<any>) => {
     if (item.key !== -1) {
       return (
         <div
@@ -121,7 +130,10 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
             id={`s_${item.key}`}
             className={this.props.classNames.suggestion}
             onClick={() => this.handleClick(item)}>
-            <div>{item.displayValue}</div>
+            <div className={this.props.classNames.suggestionIcon}>
+              <Icon iconName={item.iconName} />
+            </div>
+            <div className={this.props.classNames.suggestionValue}>{item.displayValue}</div>
           </div>
         </div>
       )

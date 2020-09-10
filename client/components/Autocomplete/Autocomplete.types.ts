@@ -4,6 +4,8 @@ export interface IAutocompleteClassNames {
   suggestionsCallout?: string;
   suggestionContainer?: string;
   suggestion?: string;
+  suggestionValue?: string;
+  suggestionIcon?: string;
 }
 
 export interface IAutocompleteProps extends ISearchBoxProps {
@@ -17,6 +19,7 @@ export interface IAutocompleteProps extends ISearchBoxProps {
 export interface IAutocompleteState {
   isSuggestionDisabled: boolean;
   searchText: string;
+  selectedItem?: ISuggestionItem;
 }
 
 export interface ISuggestionItem<T = any> {
