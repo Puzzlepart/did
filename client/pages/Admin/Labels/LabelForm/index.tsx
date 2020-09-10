@@ -13,6 +13,7 @@ import validator from 'validator'
 import ADD_OR_UPDATE_LABEL from './ADD_OR_UPDATE_LABEL'
 import styles from './LabelForm.module.scss'
 import { ILabelFormProps } from './types'
+import { IconPicker } from 'components/IconPicker'
 
 /**
  * @category LabelForm
@@ -53,7 +54,7 @@ export const LabelForm = (props: ILabelFormProps) => {
             headerText={t(!!props.label ? 'editLabel' : 'addNewLabel', { ns: 'admin' })}
             isOpen={true}>
             <TextField
-                className={styles.inputElement}
+                className={styles.inputField}
                 spellCheck={false}
                 maxLength={18}
                 label={t('nameFieldLabel')}
@@ -61,19 +62,20 @@ export const LabelForm = (props: ILabelFormProps) => {
                 required={true}
                 onChange={(_, name) => setModel({ ...model, name })} />
             <TextField
-                className={styles.inputElement}
+                className={styles.inputField}
                 spellCheck={false}
                 label={t('descriptionFieldLabel')}
                 value={model.description}
                 multiline={true}
                 onChange={(_, description) => setModel({ ...model, description })} />
-            <TextField
-                className={styles.inputElement}
-                spellCheck={false}
+            <IconPicker
+                className={styles.inputField}
+                defaultSelected={model.icon}
                 label={t('iconLabel')}
-                value={model.icon}
-                onChange={(_, icon) => setModel({ ...model, icon })} />
-            <div className={styles.inputElement}>
+                placeholder={t('iconSearchPlaceholder')}
+                width={300}
+                onSelected={icon => setModel({ ...model, icon })} />
+            <div className={styles.inputField}>
                 <Label>{t('colorLabel')}</Label>
                 <DefaultButton
                     text={
@@ -89,7 +91,7 @@ export const LabelForm = (props: ILabelFormProps) => {
                         onChange={({ hex }) => setModel({ ...model, color: hex })} />
                 )}
             </div>
-            <div className={styles.inputElement}>
+            <div className={styles.inputField}>
                 <Label>{t('previewText')}</Label>
                 <EntityLabel label={model} size='medium' />
             </div>

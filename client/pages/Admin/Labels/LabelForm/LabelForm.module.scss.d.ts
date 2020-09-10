@@ -2,7 +2,7 @@
 // Please do not change this file!
 interface CssExports {
   'colorPicker': string;
-  'inputElement': string;
+  'inputField': string;
   'root': string;
   'saveBtn': string;
 }
