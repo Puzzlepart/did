@@ -1,6 +1,6 @@
 import { Autocomplete } from 'components/Autocomplete'
 import { Label } from 'office-ui-fabric-react/lib/Label'
-import * as React from 'react'
+import React, { useMemo } from 'react'
 import { humanize } from 'underscore.string'
 import { getIcons } from '../../common/icons'
 import { IIconPickerProps } from './types'
@@ -9,7 +9,7 @@ import { IIconPickerProps } from './types'
  * @category IconPicker
  */
 export const IconPicker = (props: IIconPickerProps) => {
-    const items = React.useMemo(() => getIcons().map(key => ({
+    const items = useMemo(() => getIcons().map(key => ({
         key,
         displayValue: humanize(key),
         searchValue: [key, humanize(key)].join(' '),
@@ -24,6 +24,7 @@ export const IconPicker = (props: IIconPickerProps) => {
                 {...props}
                 disabled={false}
                 items={items}
+                showIcons={true}
                 width={props.width}
                 placeholder={props.placeholder}
                 onClear={() => props.onSelected(null)}

@@ -90,7 +90,7 @@ export const CustomerForm = () => {
                 onChange={(_event, description) => setModel({ ...model, description })}
                 value={model.description} />
             <IconPicker
-                className={styles.iconPicker}
+                className={styles.inputField}
                 label={t('iconLabel', { ns: 'common' })}
                 placeholder={t('iconSearchPlaceholder', { ns: 'common' })}
                 width={300}
