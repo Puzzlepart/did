@@ -2,6 +2,7 @@ const { pick } = require('underscore')
 
 const typeDef = `   
     type Label  {
+        id: String
         name: String!
         description: String
         color: String!
@@ -9,6 +10,7 @@ const typeDef = `
     }
     
     input LabelInput  {
+        id: String
         name: String!
         description: String
         color: String!
