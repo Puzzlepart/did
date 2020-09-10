@@ -69,22 +69,22 @@ export const CustomerForm = () => {
             {message && <UserMessage containerStyle={{ marginTop: 12, marginBottom: 12, width: 450 }} text={message.text} type={message.type} />}
             <TextField
                 className={styles.inputField}
-                label={t('keyLabel', { ns: 'common' })}
-                description={t('keyDescription')}
+                label={t('keyFieldLabel', { ns: 'common' })}
+                description={t('keyFieldDescription')}
                 required={true}
                 errorMessage={validation.errors.key}
                 onChange={(_event, key) => setModel({ ...model, key })}
                 value={model.key} />
             <TextField
                 className={styles.inputField}
-                label={t('nameLabel', { ns: 'common' })}
+                label={t('nameFieldLabel', { ns: 'common' })}
                 required={true}
                 errorMessage={validation.errors.name}
                 onChange={(_event, name) => setModel({ ...model, name })}
                 value={model.name} />
             <TextField
                 className={styles.inputField}
-                label={t('descriptionLabel', { ns: 'common' })}
+                label={t('descriptionFieldLabel', { ns: 'common' })}
                 multiline={true}
                 errorMessage={validation.errors.description}
                 onChange={(_event, description) => setModel({ ...model, description })}

@@ -63,7 +63,7 @@ export const UserFormModal = (props: IUserFormModalProps) => {
             </div>
             <div className={styles.inputContainer} hidden={!!props.user}>
                 <TextField
-                    label={t('nameLabel')}
+                    label={t('nameFieldLabel')}
                     value={model.fullName}
                     required={!props.user}
                     onChange={(_, fullName) => setModel({ ...model, fullName })} />

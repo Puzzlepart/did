@@ -97,7 +97,7 @@ export const ApiTokens = () => {
                     {
                         key: 'name',
                         fieldName: 'name',
-                        name: t('nameLabel', { ns: 'common' }),
+                        name: t('nameFieldLabel', { ns: 'common' }),
                         minWidth: 100,
                         maxWidth: 250,
                     },

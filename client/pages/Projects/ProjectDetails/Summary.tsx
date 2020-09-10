@@ -1,7 +1,7 @@
 import React, { useContext, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './ProjectDetails.module.scss'
-import { ProjectDetailsContext } from './types'
+import { ProjectDetailsContext } from './ProjectDetailsContext'
 import { getSummary } from './utils'
 
 export const Summary = () => {
