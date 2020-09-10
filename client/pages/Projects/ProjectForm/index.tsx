@@ -109,11 +109,12 @@ export const ProjectForm = (props: IProjectFormProps) => {
                 onChange={(_event, description) => setModel({ ...model, description })}
                 value={model.description} />
             <IconPicker
-                className={styles.iconPicker}
+                className={styles.inputElement}
+                defaultSelected={model.icon}
                 label={t('iconLabel', { ns: 'common' })}
                 placeholder={t('iconSearchPlaceholder', { ns: 'common' })}
                 width={300}
-                onSelected={icon => setModel({ ...model, icon})} />
+                onSelected={icon => setModel({ ...model, icon })} />
             <LabelPicker
                 className={styles.inputElement}
                 label={t('labels', { ns: 'admin' })}

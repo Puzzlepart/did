@@ -91,6 +91,7 @@ export const CustomerForm = () => {
                 value={model.description} />
             <IconPicker
                 className={styles.inputField}
+                defaultSelected={model.icon}
                 label={t('iconLabel', { ns: 'common' })}
                 placeholder={t('iconSearchPlaceholder', { ns: 'common' })}
                 width={300}

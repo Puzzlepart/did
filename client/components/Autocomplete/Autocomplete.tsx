@@ -34,7 +34,8 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
     super(props)
     this.state = {
       isSuggestionDisabled: false,
-      searchText: '',
+      searchText: props.defaultSelectedItem?.displayValue || '',
+      selectedItem: props.defaultSelectedItem,
     }
   }
 
@@ -119,25 +120,7 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
   }
 
   private onRenderCell = (item: ISuggestionItem<any>) => {
-    if (item.key !== -1) {
-      return (
-        <div
-          id={`sc_${item.key}`}
-          data-is-focusable={true}
-          className={this.props.classNames.suggestionContainer}
-          onKeyDown={(ev: React.KeyboardEvent<HTMLElement>) => this.handleListItemKeyDown(ev, item)}>
-          <div
-            id={`s_${item.key}`}
-            className={this.props.classNames.suggestion}
-            onClick={() => this.handleClick(item)}>
-            <div className={this.props.classNames.suggestionIcon} hidden={!this.props.showIcons}>
-              <Icon iconName={item.iconName} />
-            </div>
-            <div className={this.props.classNames.suggestionValue}>{item.displayValue}</div>
-          </div>
-        </div>
-      )
-    } else {
+    if (item.key === -1) {
       return (
         <div
           key={item.key}
@@ -146,6 +129,24 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
         </div>
       )
     }
+
+    return (
+      <div
+        id={`sc_${item.key}`}
+        data-is-focusable={true}
+        className={this.props.classNames.suggestionContainer}
+        onKeyDown={(ev: React.KeyboardEvent<HTMLElement>) => this.handleListItemKeyDown(ev, item)}>
+        <div
+          id={`s_${item.key}`}
+          className={this.props.classNames.suggestion}
+          onClick={() => this.handleClick(item)}>
+          <div className={this.props.classNames.suggestionIcon} hidden={!this.props.showIcons}>
+            <Icon iconName={item.iconName} />
+          </div>
+          <div className={this.props.classNames.suggestionValue}>{item.displayValue}</div>
+        </div>
+      </div>
+    )
   }
 
   private showSuggestionCallOut() {

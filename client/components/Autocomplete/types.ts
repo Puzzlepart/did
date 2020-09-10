@@ -13,6 +13,7 @@ export interface IAutocompleteProps extends ISearchBoxProps {
   onSelected: (item: ISuggestionItem) => void;
   searchCallback?: (item: string) => void;
   noSuggestionsText?: string;
+  defaultSelectedItem?: ISuggestionItem;
   classNames?: IAutocompleteClassNames;
   showIcons?: boolean;
 }
