@@ -22,11 +22,11 @@ import { IProjectColumnProps } from './types'
  * @param {string} code Error code
  * @param {TFunction} t Translate function 
  */
-function getErrorMessage(code: string, t: TFunction) {
+function getErrorMessage(code: string, t: TFunction): [string, MessageBarType] {
     // eslint-disable-next-line default-case
     switch (code) {
-        case 'PROJECT_INACTIVE': return t('projectInactiveErrorText')
-        case 'CUSTOMER_INACTIVE': return t('customerInactiveErrorText')
+        case 'PROJECT_INACTIVE': return [t('projectInactiveErrorText'), MessageBarType.error]
+        case 'CUSTOMER_INACTIVE': return [t('customerInactiveErrorText'), MessageBarType.error]
     }
 }
 
@@ -40,14 +40,14 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
     if (isMobile) className += ` ${styles.mobile}`
     if (!event.project) {
         if (event.error) {
+            const [text, type] = getErrorMessage(event.error.code, t)
             return (
                 <div className={className}>
                     <UserMessage
                         containerStyle={{ marginTop: 10 }}
                         isMultiline={false}
-                        type={MessageBarType.severeWarning}
-                        iconName='Warning'
-                        text={getErrorMessage(event.error.code, t)} />
+                        type={type}
+                        text={text} />
                 </div>
             )
         }
