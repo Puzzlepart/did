@@ -34,7 +34,6 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!, $lo
           inactive
         }                
         labels {
-          id
           name
           description
           color
@@ -59,7 +58,6 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!, $lo
         inactive
       }
       labels {
-        id
         name
         description
         color

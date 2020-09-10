@@ -3,9 +3,9 @@ import { EntityLabel } from 'components/EntityLabel'
 import { IEntityLabel } from 'interfaces/IEntityLabel'
 import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { Label } from 'office-ui-fabric-react/lib/Label'
-import { Modal } from 'office-ui-fabric-react/lib/Modal'
+import { Panel, PanelType } from 'office-ui-fabric-react/lib/Panel'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
-import * as React from 'react'
+import React, { useState } from 'react'
 import SketchPicker from 'react-color/lib/components/sketch/Sketch'
 import { useTranslation } from 'react-i18next'
 import { omit } from 'underscore'
@@ -19,12 +19,12 @@ import { ILabelFormProps } from './types'
  */
 export const LabelForm = (props: ILabelFormProps) => {
     const { t } = useTranslation(['common', 'admin'])
-    const [model, setModel] = React.useState<IEntityLabel>(props.label || {
+    const [model, setModel] = useState<IEntityLabel>(props.label || {
         name: '',
         description: '',
         color: '#F8E71C',
     })
-    const [colorPickerVisible, setColorPickerVisible] = React.useState<boolean>(false)
+    const [colorPickerVisible, setColorPickerVisible] = useState<boolean>(false)
     const [addOrUpdateLabel] = useMutation(ADD_OR_UPDATE_LABEL)
 
     /**
@@ -46,58 +46,61 @@ export const LabelForm = (props: ILabelFormProps) => {
     const isFormValid = (): boolean => !validator.isEmpty(model.name) && !validator.isEmpty(model.color)
 
     return (
-        <Modal
+        <Panel
             {...props}
-            containerClassName={styles.root}
+            type={PanelType.smallFixedFar}
+            className={styles.root}
+            headerText={t(!!props.label ? 'editLabel' : 'addNewLabel', { ns: 'admin' })}
             isOpen={true}>
-            <div className={styles.title}>
-                {t(!!props.label ? 'editLabel' : 'addNewLabel', { ns: 'admin' })}
-            </div>
             <TextField
+                className={styles.inputElement}
                 spellCheck={false}
                 maxLength={18}
                 label={t('nameLabel')}
                 value={model.name}
                 required={true}
                 onChange={(_, name) => setModel({ ...model, name })} />
-
             <TextField
+                className={styles.inputElement}
                 spellCheck={false}
                 label={t('descriptionLabel')}
                 value={model.description}
                 multiline={true}
                 onChange={(_, description) => setModel({ ...model, description })} />
-
             <TextField
+                className={styles.inputElement}
                 spellCheck={false}
                 label={t('iconLabel')}
                 value={model.icon}
                 onChange={(_, icon) => setModel({ ...model, icon })} />
-
-            <Label>{t('colorLabel')}</Label>
-            <DefaultButton
-                text={
-                    colorPickerVisible
-                        ? t('closeColorPickerText')
-                        : t('openColorPickerText')
-                }
-                iconProps={{ iconName: colorPickerVisible ? 'ChromeClose' : 'Color' }}
-                onClick={() => setColorPickerVisible(!colorPickerVisible)} />
-            {colorPickerVisible && (
-                <SketchPicker
-                    color={model.color}
-                    onChange={({ hex }) => setModel({ ...model, color: hex })} />
-            )}
-            <Label>{t('previewText')}</Label>
-            <EntityLabel label={model} size='medium' />
+            <div className={styles.inputElement}>
+                <Label>{t('colorLabel')}</Label>
+                <DefaultButton
+                    text={
+                        colorPickerVisible
+                            ? t('closeColorPickerText')
+                            : t('openColorPickerText')
+                    }
+                    iconProps={{ iconName: colorPickerVisible ? 'ChromeClose' : 'Color' }}
+                    onClick={() => setColorPickerVisible(!colorPickerVisible)} />
+                {colorPickerVisible && (
+                    <SketchPicker
+                        color={model.color}
+                        onChange={({ hex }) => setModel({ ...model, color: hex })} />
+                )}
+            </div>
+            <div className={styles.inputElement}>
+                <Label>{t('previewText')}</Label>
+                <EntityLabel label={model} size='medium' />
+            </div>
             <PrimaryButton
                 className={styles.saveBtn}
                 text={t('save', { ns: 'common' })}
                 disabled={!isFormValid()}
                 onClick={onSave} />
-        </Modal>
+        </Panel>
     )
 }
 
-export { ILabelFormProps }
+export * from './types'
 

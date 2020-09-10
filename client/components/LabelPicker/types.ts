@@ -18,7 +18,6 @@ export interface ILabelPickerProps {
 export const GET_LABELS = gql`
     query {
         labels {
-            id
             name
             description
             color
