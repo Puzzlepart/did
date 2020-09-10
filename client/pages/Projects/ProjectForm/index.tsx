@@ -6,11 +6,12 @@ import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { format } from 'office-ui-fabric-react/lib/Utilities'
-import { pick } from 'underscore'
+import { pick, first } from 'underscore'
 import styles from './CreateProjectForm.module.scss'
 import CREATE_OR_UPDATE_PROJECT, { ICreateOrUpdateProjectVariables, IProjectInput } from './CREATE_OR_UPDATE_PROJECT'
 import { IProjectFormProps, IProjectFormValidation } from './types'
 import { Toggle } from 'office-ui-fabric-react'
+import { getIcons } from 'common/icons'
 
 const initialModel: IProjectInput = {
     key: '',
@@ -18,7 +19,7 @@ const initialModel: IProjectInput = {
     customerKey: '',
     description: '',
     inactive: false,
-    icon: 'Page',
+    icon: first(getIcons(1)),
     labels: [],
 }
 
@@ -116,7 +117,7 @@ export const ProjectForm = (props: IProjectFormProps) => {
                 onChange={(_event, description) => setModel({ ...model, description })}
                 value={model.description} />
             <IconPicker
-                className={styles.inputField}                
+                className={styles.inputField}
                 defaultSelected={model.icon}
                 label={t('iconLabel', { ns: 'common' })}
                 placeholder={t('iconSearchPlaceholder', { ns: 'common' })}

@@ -3,7 +3,7 @@ import { Label } from 'office-ui-fabric-react/lib/Label'
 import React, { useMemo } from 'react'
 import { find, omit } from 'underscore'
 import { humanize } from 'underscore.string'
-import { getIcons } from '../../common/icons'
+import { getIcons } from 'common/icons'
 import { IIconPickerProps } from './types'
 
 /**
