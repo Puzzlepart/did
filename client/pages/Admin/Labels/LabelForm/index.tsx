@@ -3,7 +3,7 @@ import { EntityLabel } from 'components/EntityLabel'
 import { IEntityLabel } from 'interfaces/IEntityLabel'
 import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { Label } from 'office-ui-fabric-react/lib/Label'
-import { Modal } from 'office-ui-fabric-react/lib/Modal'
+import { Panel, PanelType } from 'office-ui-fabric-react/lib/Panel'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import React, { useState } from 'react'
 import SketchPicker from 'react-color/lib/components/sketch/Sketch'
@@ -46,34 +46,33 @@ export const LabelForm = (props: ILabelFormProps) => {
     const isFormValid = (): boolean => !validator.isEmpty(model.name) && !validator.isEmpty(model.color)
 
     return (
-        <Modal
+        <Panel
             {...props}
-            containerClassName={styles.root}
+            type={PanelType.smallFixedFar}
+            className={styles.root}
+            headerText={t(!!props.label ? 'editLabel' : 'addNewLabel', { ns: 'admin' })}
             isOpen={true}>
-            <div className={styles.title}>
-                {t(!!props.label ? 'editLabel' : 'addNewLabel', { ns: 'admin' })}
-            </div>
             <TextField
+                className={styles.inputElement}
                 spellCheck={false}
                 maxLength={18}
                 label={t('nameLabel')}
                 value={model.name}
                 required={true}
                 onChange={(_, name) => setModel({ ...model, name })} />
-
             <TextField
+                className={styles.inputElement}
                 spellCheck={false}
                 label={t('descriptionLabel')}
                 value={model.description}
                 multiline={true}
                 onChange={(_, description) => setModel({ ...model, description })} />
-
             <TextField
+                className={styles.inputElement}
                 spellCheck={false}
                 label={t('iconLabel')}
                 value={model.icon}
                 onChange={(_, icon) => setModel({ ...model, icon })} />
-
             <Label>{t('colorLabel')}</Label>
             <DefaultButton
                 text={
@@ -95,9 +94,9 @@ export const LabelForm = (props: ILabelFormProps) => {
                 text={t('save', { ns: 'common' })}
                 disabled={!isFormValid()}
                 onClick={onSave} />
-        </Modal>
+        </Panel>
     )
 }
 
-export { ILabelFormProps }
+export * from './types'
 

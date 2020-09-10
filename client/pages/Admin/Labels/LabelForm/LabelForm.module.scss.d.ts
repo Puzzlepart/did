@@ -2,9 +2,9 @@
 // Please do not change this file!
 interface CssExports {
   'colorPicker': string;
+  'inputElement': string;
   'root': string;
   'saveBtn': string;
-  'title': string;
 }
 export const cssExports: CssExports;
 export default cssExports;
