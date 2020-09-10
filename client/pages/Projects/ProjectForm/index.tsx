@@ -123,7 +123,7 @@ export const ProjectForm = (props: IProjectFormProps) => {
                 placeholder={t('iconSearchPlaceholder', { ns: 'common' })}
                 width={300}
                 onSelected={icon => setModel({ ...model, icon })} />
-            <div className={styles.inputField}>
+            <div className={styles.inputField} hidden={!editMode}>
                 <Toggle
                     label={t('inactiveFieldLabel', { ns: 'common' })}
                     defaultChecked={model.inactive}
