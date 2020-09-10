@@ -26,8 +26,7 @@ const initialModel: IProjectInput = {
  * @category Projects
  */
 export const ProjectForm = (props: IProjectFormProps) => {
-    console.log('ProjectForm', props)
-    const isEdit = !!props.edit
+    const editMode = !!props.edit
     const { t } = useTranslation(['projects', 'common'])
     const [validation, setValidation] = useState<IProjectFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useMessage()
@@ -61,13 +60,18 @@ export const ProjectForm = (props: IProjectFormProps) => {
         const { data: { result } } = await createOrUpdateProject({
             variables: {
                 project: pick(model, ...Object.keys(initialModel) as any) as IProjectInput,
-                update: isEdit,
+                update: editMode,
             }
         })
-        if (result.success) setMessage({ text: format(t('createSuccess'), model.name), type: MessageBarType.success })
+        if (result.success) {
+            if (editMode) {
+                if (props.onSubmitted) setTimeout(props.onSubmitted, 1000)
+            } else {
+                setMessage({ text: format(t('createSuccess'), model.name), type: MessageBarType.success })
+                setModel(initialModel)
+            }
+        }
         else setMessage({ text: result.error.message, type: MessageBarType.error })
-        setModel(initialModel)
-        props.onSubmitted && props.onSubmitted()
     }
 
     return (
@@ -78,7 +82,7 @@ export const ProjectForm = (props: IProjectFormProps) => {
                     containerStyle={{ marginTop: 12, marginBottom: 12, width: 450 }} />
             )}
             <SearchCustomer
-                hidden={isEdit}
+                hidden={editMode}
                 label={t('customer', { ns: 'common' })}
                 required={true}
                 className={styles.inputElement}
@@ -88,7 +92,7 @@ export const ProjectForm = (props: IProjectFormProps) => {
                     customerKey: customer && customer.key,
                 })} />
             <TextField
-                disabled={isEdit}
+                disabled={editMode}
                 className={styles.inputElement}
                 label={t('keyFieldLabel', { ns: 'common' })}
                 title={t('keyFieldDescription')}
@@ -131,7 +135,7 @@ export const ProjectForm = (props: IProjectFormProps) => {
                 onChange={labels => setModel({ ...model, labels: labels.map(lbl => lbl.name) })} />
             <PrimaryButton
                 className={styles.inputElement}
-                text={t(isEdit ? 'save' : 'add', { ns: 'common' })}
+                text={t(editMode ? 'save' : 'add', { ns: 'common' })}
                 onClick={onFormSubmit}
                 disabled={loading || !!message} />
         </div>
