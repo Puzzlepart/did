@@ -73,22 +73,26 @@ export const LabelForm = (props: ILabelFormProps) => {
                 label={t('iconLabel')}
                 value={model.icon}
                 onChange={(_, icon) => setModel({ ...model, icon })} />
-            <Label>{t('colorLabel')}</Label>
-            <DefaultButton
-                text={
-                    colorPickerVisible
-                        ? t('closeColorPickerText')
-                        : t('openColorPickerText')
-                }
-                iconProps={{ iconName: colorPickerVisible ? 'ChromeClose' : 'Color' }}
-                onClick={() => setColorPickerVisible(!colorPickerVisible)} />
-            {colorPickerVisible && (
-                <SketchPicker
-                    color={model.color}
-                    onChange={({ hex }) => setModel({ ...model, color: hex })} />
-            )}
-            <Label>{t('previewText')}</Label>
-            <EntityLabel label={model} size='medium' />
+            <div className={styles.inputElement}>
+                <Label>{t('colorLabel')}</Label>
+                <DefaultButton
+                    text={
+                        colorPickerVisible
+                            ? t('closeColorPickerText')
+                            : t('openColorPickerText')
+                    }
+                    iconProps={{ iconName: colorPickerVisible ? 'ChromeClose' : 'Color' }}
+                    onClick={() => setColorPickerVisible(!colorPickerVisible)} />
+                {colorPickerVisible && (
+                    <SketchPicker
+                        color={model.color}
+                        onChange={({ hex }) => setModel({ ...model, color: hex })} />
+                )}
+            </div>
+            <div className={styles.inputElement}>
+                <Label>{t('previewText')}</Label>
+                <EntityLabel label={model} size='medium' />
+            </div>
             <PrimaryButton
                 className={styles.saveBtn}
                 text={t('save', { ns: 'common' })}
