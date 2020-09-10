@@ -4,9 +4,9 @@ import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { generateColumn as col } from 'utils/generateColumn'
-import { ProjectDetailsContext } from './types'
 import { isEmpty } from 'underscore'
+import { generateColumn as col } from 'utils/generateColumn'
+import { ProjectDetailsContext } from './ProjectDetailsContext'
 
 export const TimeEntries = () => {
     const { t } = useTranslation(['projects', 'common'])

@@ -27,10 +27,10 @@ export const columns = (t: TFunction): IColumn[] => ([
             return <Icon iconName={customer.icon || 'Page'} styles={{ root: { fontSize: 16 } }} />
         },
     ),
-    col('key', t('keyLabel'), { maxWidth: 120 }),
+    col('key', t('keyFieldLabel'), { maxWidth: 120 }),
     col(
         'name',
-        t('nameLabel'),
+        t('nameFieldLabel'),
         { maxWidth: 300 },
         (customer: ICustomer) => <Link to={`/customers/${customer.key}`}>{customer.name}</Link>
     ),

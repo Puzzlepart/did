@@ -10,13 +10,16 @@ import { useTranslation } from 'react-i18next'
 import { contains, isEmpty } from 'underscore'
 import * as excel from 'utils/exportExcel'
 import { ProjectForm } from '../ProjectForm'
+import { ProjectsContext } from '../ProjectsContext'
 import columns from './columns'
 import { CREATE_OUTLOOK_CATEGORY } from './CREATE_OUTLOOK_CATEGORY'
 import styles from './ProjectDetails.module.scss'
-import { IProjectDetailsProps, ProjectDetailsContext } from './types'
+import { ProjectDetailsContext } from './ProjectDetailsContext'
+import { IProjectDetailsProps } from './types'
 
-export const Actions = ({project}: IProjectDetailsProps) => {
-    const { user } = React.useContext(AppContext)
+export const Actions = (props: IProjectDetailsProps) => {
+    const { refetch } = useContext(ProjectsContext)
+    const { user } = useContext(AppContext)
     const { t } = useTranslation(['projects', 'common'])
     const [showEditPanel, setShowEditPanel] = useState(false)
     const context = useContext(ProjectDetailsContext)
@@ -54,33 +57,25 @@ export const Actions = ({project}: IProjectDetailsProps) => {
 
     return (
         <div className={styles.actions}>
-            <div
-                className={styles.buttonContainer}
-                hidden={!contains(user.role.permissions, manageProjects)}>
+            <div className={styles.actionItem} hidden={!contains(user.role.permissions, manageProjects)}>
                 <DefaultButton
                     text={t('editLabel')}
                     iconProps={{ iconName: 'PageEdit' }}
                     onClick={() => setShowEditPanel(true)} />
             </div>
-            <div
-                className={styles.buttonContainer}
-                hidden={isEmpty(context.timeentries)}>
+            <div className={styles.actionItem} hidden={isEmpty(context.timeentries)}>
                 <DefaultButton
                     text={t('exportTimeEntriesLabel')}
                     iconProps={{ iconName: 'ExcelDocument' }}
                     onClick={onExportExcel} />
             </div>
-            <div
-                className={styles.buttonContainer}
-                hidden={!context.project.webLink}>
+            <div className={styles.actionItem} hidden={!context.project.webLink}>
                 <DefaultButton
                     text={t('workspaceLabel')}
                     onClick={() => window.location.replace(context.project.webLink)}
                     iconProps={{ iconName: 'WorkforceManagement' }} />
             </div>
-            <div
-                className={styles.buttonContainer}
-                hidden={!!context.project.outlookCategory}>
+            <div className={styles.actionItem} hidden={!!context.project.outlookCategory}>
                 <DefaultButton
                     text={t('createOutlookCategoryLabel')}
                     iconProps={{ iconName: 'OutlookLogoInverse' }}
@@ -88,9 +83,15 @@ export const Actions = ({project}: IProjectDetailsProps) => {
             </div>
             <Panel
                 isOpen={showEditPanel}
-                headerText={project.name}
+                headerText={props.project.name}
                 onDismiss={() => setShowEditPanel(false)}>
-                <ProjectForm edit={project} onSubmitted={() => setShowEditPanel(false)} />
+                <ProjectForm
+                    key={props.project.id}
+                    edit={props.project}
+                    onSubmitted={() => {
+                        setShowEditPanel(false)
+                        setTimeout(refetch, 1000)
+                    }} />
             </Panel>
         </div>
     )

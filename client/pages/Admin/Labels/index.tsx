@@ -22,11 +22,11 @@ export const Labels = () => {
     const columns = [
         col(
             'name',
-            t('nameLabel', { ns: 'common' }),
+            t('nameFieldLabel', { ns: 'common' }),
             { maxWidth: 180 },
             (label: IEntityLabel) => <EntityLabel label={label} />,
         ),
-        col('description', t('descriptionLabel', { ns: 'common' })),
+        col('description', t('descriptionFieldLabel', { ns: 'common' })),
         col(
             'edit_delete',
             '',

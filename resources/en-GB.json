@@ -46,11 +46,12 @@
     "myProjectsText": "My projects",
     "myProjectsSearchPlaceholder": "Search my projects...",
     "exportTimeEntriesLabel": "Export time entries to Excel",
-    "keyDescription": "A unique identifier for the project. Keep it short, maximum 8 characters.",
+    "keyFieldDescription": "A unique identifier for the project. Keep it short, maximum 8 characters.",
     "nameFormValidationText": "Name should be at least 2 characters long.",
     "keyFormValidationText": "Project key should be between 2 and 8 characters long, and all uppercase.",
     "createSuccess": "The project **{0}** was succesfully created.",
-    "editLabel": "Edit project"
+    "editLabel": "Edit project",
+    "inactiveFieldDescription": "Mark the project as inactive. Hours for the project can no longer be confirmed."
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",
@@ -58,7 +59,7 @@
     "deleteConfirmationText": "The customer {0} and connected projects was deleted.",
     "webLinkText": "Website",
     "externalSystemUrlText": "External LOB system",
-    "keyDescription": "A unique identifier for the customer. Keep it short, maximum 8 characters.",
+    "keyFieldDescription": "A unique identifier for the customer. Keep it short, maximum 8 characters.",
     "nameFormValidationText": "Name should be at least 2 characters long.",
     "keyFormValidationText": "Customer key should be between 3 and 8 characters long, and all uppercase.",
     "createSuccess": "The customer **{0}** was succesfully created."
@@ -113,9 +114,9 @@
     "toggleInactiveText": "Show inactive",
     "settings": "Settings",
     "language": "Language",
-    "keyLabel": "Key",
-    "nameLabel": "Name",
-    "descriptionLabel": "Description",
+    "keyFieldLabel": "Key",
+    "nameFieldLabel": "Name",
+    "descriptionFieldLabel": "Description",
     "iconLabel": "Icon",
     "colorLabel": "Color",
     "createdLabel": "Created",
@@ -146,6 +147,7 @@
     "minutesShortFormat": "{0}min",
     "editLabel": "Rediger",
     "iconSearchPlaceholder":"Search in icons...",
+    "inactiveFieldLabel": "Inactive",
     "calendarStrings": {
       "months": [
         "January",

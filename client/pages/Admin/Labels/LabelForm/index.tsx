@@ -56,14 +56,14 @@ export const LabelForm = (props: ILabelFormProps) => {
                 className={styles.inputElement}
                 spellCheck={false}
                 maxLength={18}
-                label={t('nameLabel')}
+                label={t('nameFieldLabel')}
                 value={model.name}
                 required={true}
                 onChange={(_, name) => setModel({ ...model, name })} />
             <TextField
                 className={styles.inputElement}
                 spellCheck={false}
-                label={t('descriptionLabel')}
+                label={t('descriptionFieldLabel')}
                 value={model.description}
                 multiline={true}
                 onChange={(_, description) => setModel({ ...model, description })} />

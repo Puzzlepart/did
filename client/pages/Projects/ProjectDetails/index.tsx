@@ -10,7 +10,8 @@ import styles from './ProjectDetails.module.scss'
 import PROJECT_TIME_ENTRIES from './PROJECT_TIME_ENTRIES'
 import { Summary } from './Summary'
 import { TimeEntries } from './TimeEntries'
-import { IProjectDetailsProps, ProjectDetailsContext } from './types'
+import { IProjectDetailsProps } from './types'
+import { ProjectDetailsContext } from './ProjectDetailsContext'
 
 /**
  * @category Projects
