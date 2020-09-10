@@ -1,4 +1,5 @@
 import { UserMessage } from 'components/UserMessage'
+import { TFunction } from 'i18next'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { TooltipDelay, TooltipHost } from 'office-ui-fabric-react/lib/Tooltip'
@@ -14,6 +15,20 @@ import { MatchEventPanel } from './MatchEventPanel'
 import styles from './ProjectColumn.module.scss'
 import { ProjectColumnTooltip } from './ProjectColumnTooltip/ProjectColumnTooltip'
 import { IProjectColumnProps } from './types'
+
+/**
+ * Get error message
+ * 
+ * @param {string} code Error code
+ * @param {TFunction} t Translate function 
+ */
+function getErrorMessage(code: string, t: TFunction) {
+    // eslint-disable-next-line default-case
+    switch (code) {
+        case 'PROJECT_INACTIVE': return t('projectInactiveErrorText')
+        case 'CUSTOMER_INACTIVE': return t('customerInactiveErrorText')
+    }
+}
 
 /**
  * @category Timesheet
@@ -32,7 +47,7 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
                         isMultiline={false}
                         type={MessageBarType.severeWarning}
                         iconName='Warning'
-                        text={`${t('eventErrorPrefix')} ${event.error.message}`} />
+                        text={getErrorMessage(event.error.code, t)} />
                 </div>
             )
         }

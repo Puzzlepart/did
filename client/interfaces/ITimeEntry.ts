@@ -22,6 +22,6 @@ export interface ITimeEntry {
     day: string;
     manualMatch?: boolean;
     isIgnored?: boolean;
-    error?: Error;
+    error?: { code: string };
     labels?: IEntityLabel[];
 }

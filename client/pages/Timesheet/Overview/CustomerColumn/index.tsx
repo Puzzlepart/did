@@ -14,7 +14,6 @@ const CustomerColumn = ({ event }: ICustomerColumnProps): JSX.Element => {
             <div className={styles.iconContainer}>
                 <Icon iconName={event.customer.icon || 'Page'} />
             </div>
-
             <div className={styles.content}>
                 <a href={`/customers/search/${event.customer.key}`}>{event.customer.name}</a>
             </div>
