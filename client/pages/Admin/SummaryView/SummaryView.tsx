@@ -14,7 +14,7 @@ import { createRows } from './createRows'
 import { reducer } from './SummaryViewReducer'
 import { getScopes } from './SummaryViewScope'
 import { getTypes } from './SummaryViewType'
-import TIME_ENTRIES from './TIME_ENTRIES'
+import TIME_ENTRIES, { ITimeEntriesVariables } from './TIME_ENTRIES'
 import { ISummaryViewContext } from './types'
 
 /**
@@ -31,9 +31,13 @@ export const SummaryView = (): JSX.Element => {
         scope: first(scopes),
         type: first(types),
     })
-    const { data, loading } = useQuery<{ timeentries: any[] }>(TIME_ENTRIES, {
+    const { data, loading } = useQuery<any, ITimeEntriesVariables>(TIME_ENTRIES, {
         fetchPolicy: 'cache-first',
-        variables: { year: state.year, minMonthNumber: dateUtils.getMonthIndex() - state.range },
+        variables: {
+            year: state.year,
+            minMonthNumber: dateUtils.getMonthIndex() - state.range + 1,
+            maxMonthNumber: dateUtils.getMonthIndex(),
+        },
     })
 
     useEffect(() => { dispatch({ type: 'DATA_UPDATED', payload: data }) }, [data])
@@ -44,8 +48,7 @@ export const SummaryView = (): JSX.Element => {
         scopes,
         types,
     }), [state])
-
-    const periods = useMemo(() => createPeriods(2), [])
+    const periods = useMemo(() => createPeriods(0), [])
     const columns = useMemo(() => createColumns(state, t), [state])
     const items = useMemo(() => createRows(state, columns, t), [state])
 

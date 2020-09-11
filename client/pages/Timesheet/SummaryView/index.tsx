@@ -14,6 +14,7 @@ import { TimesheetContext } from '../'
 import { TimesheetScope } from '../TimesheetScope'
 import styles from './SummaryView.module.scss'
 import { isMobile } from 'react-device-detect'
+import { ILabelColumnProps } from 'components/LabelColumn/types'
 
 /**
  * Creates columns from scope
@@ -44,7 +45,7 @@ function createColumns(scope: TimesheetScope) {
             maxWidth: 350,
             isMultiline: true,
             isResizable: true,
-            onRender: (row: any) => <LabelColumn row={row} />,
+            onRender: (row: ILabelColumnProps) => <LabelColumn {...row} />,
         },
         ...columns,
         {
