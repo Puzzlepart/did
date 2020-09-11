@@ -10,7 +10,7 @@ import { IEntityLabel } from 'interfaces'
  */
 export const LabelColumn = ({ row }) => {
     if (row.label) return <div style={{ fontWeight: 500 }}>{row.label}</div>
-
+    if (!row.project) return null
     return (
         <div className={styles.root}>
             <div className={styles.iconContainer}>
