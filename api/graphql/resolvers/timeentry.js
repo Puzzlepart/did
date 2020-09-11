@@ -13,6 +13,8 @@ const typeDef = `
         projectId: String
         weekNumber: Int
         monthNumber: Int
+        minMonthNumber: Int
+        maxMonthNumber: Int
         year: Int
         resourceName: String
         webUrl: String
