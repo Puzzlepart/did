@@ -19,6 +19,7 @@ export const commandBar = (
             {
                 ...context.scope,
                 key: 'VIEW_SCOPE',
+                disabled: context.loading,
                 subMenuProps: {
                     items: context.scopes.map(scope => ({
                         ...scope,
@@ -32,6 +33,7 @@ export const commandBar = (
             {
                 ...context.type,
                 key: 'VIEW_TYPE',
+                disabled: context.loading,
                 subMenuProps: {
                     items: context.types.map(type => ({
                         ...type,
@@ -54,6 +56,7 @@ export const commandBar = (
                                 alignSelf: 'center',
                             }
                         }}
+                        disabled={context.loading}
                         min={3}
                         max={6}
                         onChange={value => context.dispatch({ type: 'CHANGE_RANGE', payload: value })} />
@@ -74,6 +77,7 @@ export const commandBar = (
                 key: 'EXPORT_TO_EXCEL',
                 text: t('exportCurrentView'),
                 iconProps: { iconName: 'ExcelDocument' },
+                disabled: context.loading,
                 onClick: () => {
                     excelUtils.exportExcel(
                         items,
