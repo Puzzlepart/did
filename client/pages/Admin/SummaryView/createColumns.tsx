@@ -6,7 +6,7 @@ import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import * as React from 'react'
 import { unique } from 'underscore'
 import { generateColumn as col } from 'utils/generateColumn'
-import { ISummaryViewState } from './types'
+import { ISummaryViewRow, ISummaryViewState } from './types'
 
 export function createColumns({ scope, range, timeentries }: ISummaryViewState, t: TFunction): IColumn[] {
     const data = unique(
@@ -40,7 +40,7 @@ export function createColumns({ scope, range, timeentries }: ISummaryViewState, 
                 isMultiline: true,
                 isResizable: true,
             },
-            (row: any) => <LabelColumn row={row} />
+            (row: ISummaryViewRow) => <LabelColumn {...row} />
         ),
         ...columns,
         col(

@@ -72,7 +72,9 @@ class AzTableUtilities {
             combine: az.TableQuery.combineFilters,
             equal: az.TableUtilities.QueryComparisons.EQUAL,
             greaterThan: az.TableUtilities.QueryComparisons.GREATER_THAN,
+            greaterThanOrEqual: az.TableUtilities.QueryComparisons.GREATER_THAN_OR_EQUAL,
             lessThan: az.TableUtilities.QueryComparisons.LESS_THAN,
+            lessThanOrEqual: az.TableUtilities.QueryComparisons.LESS_THAN_OR_EQUAL,
             and: az.TableUtilities.TableOperators.AND
         }
     }

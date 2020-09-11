@@ -32,6 +32,8 @@ const typeDef = `
         resourceId: String, 
         weekNumber: Int, 
         monthNumber: Int, 
+        minMonthNumber: Int,
+        maxMonthNumber: Int,
         year: Int, 
         currentUser: Boolean
     ): [TimeEntry!]

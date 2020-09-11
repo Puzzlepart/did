@@ -3,10 +3,10 @@ import { useQuery } from '@apollo/react-hooks'
 import { UserMessage } from 'components'
 import List from 'components/List'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
-import * as React from 'react'
+import React, { useEffect, useMemo, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { first, isEmpty } from 'underscore'
-import { moment } from 'utils/date'
+import dateUtils, { moment } from 'utils/date'
 import { commandBar } from './commandBar'
 import { createColumns } from './createColumns'
 import { createPeriods } from './createPeriods'
@@ -14,7 +14,7 @@ import { createRows } from './createRows'
 import { reducer } from './SummaryViewReducer'
 import { getScopes } from './SummaryViewScope'
 import { getTypes } from './SummaryViewType'
-import TIME_ENTRIES from './TIME_ENTRIES'
+import TIME_ENTRIES, { ITimeEntriesVariables } from './TIME_ENTRIES'
 import { ISummaryViewContext } from './types'
 
 /**
@@ -24,31 +24,33 @@ export const SummaryView = (): JSX.Element => {
     const { t } = useTranslation(['common', 'admin'])
     const scopes = getScopes(t)
     const types = getTypes(t)
-
-    const [state, dispatch] = React.useReducer(reducer, {
+    const [state, dispatch] = useReducer(reducer, {
         year: moment().year(),
         timeentries: [],
         range: 3,
         scope: first(scopes),
         type: first(types),
     })
-    const { data, loading } = useQuery<{ timeentries: any[] }>(TIME_ENTRIES, {
+    const { data, loading } = useQuery<any, ITimeEntriesVariables>(TIME_ENTRIES, {
         fetchPolicy: 'cache-first',
-        variables: { year: state.year },
+        variables: {
+            year: state.year,
+            minMonthNumber: dateUtils.getMonthIndex() - state.range + 1,
+            maxMonthNumber: dateUtils.getMonthIndex(),
+        },
     })
 
-    React.useEffect(() => { dispatch({ type: 'DATA_UPDATED', payload: data }) }, [data])
+    useEffect(() => { dispatch({ type: 'DATA_UPDATED', payload: data }) }, [data])
 
-    const contextValue: ISummaryViewContext = React.useMemo(() => ({
+    const contextValue: ISummaryViewContext = useMemo(() => ({
         ...state,
         dispatch,
         scopes,
         types,
     }), [state])
-
-    const periods = React.useMemo(() => createPeriods(2), [])
-    const columns = React.useMemo(() => createColumns(state, t), [state])
-    const items = React.useMemo(() => createRows(state, columns, t), [state])
+    const periods = useMemo(() => createPeriods(0), [])
+    const columns = useMemo(() => createColumns(state, t), [state])
+    const items = useMemo(() => createRows(state, columns, t), [state])
 
     return (
         <Pivot

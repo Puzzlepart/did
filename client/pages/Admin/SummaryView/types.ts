@@ -1,3 +1,4 @@
+import { ILabelColumnProps } from 'components/LabelColumn/types'
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
 import { SummaryViewAction } from './SummaryViewReducer'
 
@@ -20,4 +21,8 @@ export interface ISummaryViewContext extends ISummaryViewState {
     dispatch?: React.Dispatch<SummaryViewAction>;
     scopes: ISummaryViewScope[];
     types: ISummaryViewType[];
+}
+
+export interface ISummaryViewRow extends ILabelColumnProps {
+    sum: number;
 }
