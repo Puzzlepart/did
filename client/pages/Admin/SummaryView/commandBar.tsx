@@ -1,13 +1,15 @@
 import { TFunction } from 'i18next'
-import { IColumn } from 'office-ui-fabric-react'
+import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
+import { Spinner } from 'office-ui-fabric-react/lib/Spinner'
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
 import { Slider } from 'office-ui-fabric-react/lib/Slider'
 import React from 'react'
 import * as excelUtils from 'utils/exportExcel'
 import { ISummaryViewContext } from './types'
+import styles from './SummaryView.module.scss'
 
 export const commandBar = (
-    { scope, scopes, types, type, dispatch }: ISummaryViewContext,
+    context: ISummaryViewContext,
     items: any[],
     columns: IColumn[],
     t: TFunction,
@@ -15,28 +17,30 @@ export const commandBar = (
     return {
         items: [
             {
-                ...scope,
+                ...context.scope,
                 key: 'VIEW_SCOPE',
                 subMenuProps: {
-                    items: scopes.map(s => ({
-                        ...s,
+                    items: context.scopes.map(scope => ({
+                        ...scope,
                         canCheck: true,
-                        checked: scope.key === s.key,
-                        onClick: () => dispatch({ type: 'CHANGE_SCOPE', payload: s })
+                        checked: context.scope.key === scope.key,
+                        onClick: () => context.dispatch({ type: 'CHANGE_SCOPE', payload: scope })
                     })),
                 },
+                className: styles.viewScopeSelector
             },
             {
-                ...type,
+                ...context.type,
                 key: 'VIEW_TYPE',
                 subMenuProps: {
-                    items: types.map(t => ({
-                        ...t,
+                    items: context.types.map(type => ({
+                        ...type,
                         canCheck: true,
-                        checked: type.key === t.key,
-                        onClick: () => dispatch({ type: 'CHANGE_TYPE', payload: t })
+                        checked: context.type.key === type.key,
+                        onClick: () => context.dispatch({ type: 'CHANGE_TYPE', payload: type })
                     })),
-                }
+                },
+                className: styles.viewTypeSelector
             },
             {
                 key: 'RANGE',
@@ -51,10 +55,19 @@ export const commandBar = (
                             }
                         }}
                         min={3}
-                        max={12}
-                        onChange={value => dispatch({ type: 'CHANGE_RANGE', payload: value })} />
+                        max={6}
+                        onChange={value => context.dispatch({ type: 'CHANGE_RANGE', payload: value })} />
                 ),
             },
+            {
+                key: 'LOADING',
+                name: '',
+                onRender: () => context.loading && (
+                    <Spinner
+                        label={t('summaryLoadingText', { ns: 'admin' })}
+                        labelPosition='right' />
+                )
+            }
         ] as IContextualMenuItem[],
         farItems: [
             {

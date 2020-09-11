@@ -132,6 +132,13 @@ export default new class DateUtils {
     }
 
     /**
+     * Get week number
+     */
+    getWeek(): number {
+        return moment().week()
+    }
+
+    /**
      * Get month index
      */
     getMonthIndex(): number {

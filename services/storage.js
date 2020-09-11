@@ -233,6 +233,8 @@ class StorageService {
             ['ProjectId', filterValues.projectId, q.string, q.equal],
             ['PartitionKey', filterValues.resourceId, q.string, q.equal],
             ['WeekNumber', filterValues.weekNumber, q.int, q.equal],
+            ['WeekNumber', filterValues.minWeekNumber, q.int, q.greaterThanOrEqual],
+            ['WeekNumber', filterValues.maxWeekNumber, q.int, q.lessThanOrEqual],
             ['MonthNumber', filterValues.monthNumber, q.int, q.equal],
             ['MonthNumber', filterValues.minMonthNumber, q.int, q.greaterThanOrEqual],
             ['MonthNumber', filterValues.maxMonthNumber, q.int, q.lessThanOrEqual],            

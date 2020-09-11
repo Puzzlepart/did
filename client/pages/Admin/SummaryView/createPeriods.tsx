@@ -4,9 +4,9 @@ import { moment } from 'utils/date'
 /**
  * Create periods
  *
- * @param {number} range Range
+ * @param {number} range Range (default to 0)
  */
-export function createPeriods(range: number): IPivotItemProps[] {
+export function createPeriods(range = 0): IPivotItemProps[] {
     const periods = []
     for (let i = range; i >= 0; i--) {
         const key = (moment().year() - i).toString()

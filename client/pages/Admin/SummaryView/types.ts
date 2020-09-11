@@ -1,6 +1,12 @@
 import { ILabelColumnProps } from 'components/LabelColumn/types'
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
 import { SummaryViewAction } from './SummaryViewReducer'
+import { ITimeEntriesVariables } from './TIME_ENTRIES'
+
+export interface ISummaryViewProps {
+    defaultYear: number;
+    defaultRange: number;
+}
 
 export interface ISummaryViewState {
     year: number;
@@ -8,6 +14,7 @@ export interface ISummaryViewState {
     range: number;
     scope: ISummaryViewScope;
     type: ISummaryViewType;
+    variables?: ITimeEntriesVariables;
 }
 
 export interface ISummaryViewScope extends IContextualMenuItem {
@@ -21,6 +28,7 @@ export interface ISummaryViewContext extends ISummaryViewState {
     dispatch?: React.Dispatch<SummaryViewAction>;
     scopes: ISummaryViewScope[];
     types: ISummaryViewType[];
+    loading?: boolean;
 }
 
 export interface ISummaryViewRow extends ILabelColumnProps {
