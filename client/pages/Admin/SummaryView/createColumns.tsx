@@ -1,16 +1,17 @@
 import { DurationColumn } from 'components/DurationColumn'
 import { LabelColumn } from 'components/LabelColumn'
-import { value } from 'helpers'
 import { TFunction } from 'i18next'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import * as React from 'react'
 import { unique } from 'underscore'
+import { capitalize } from 'underscore.string'
+import { moment } from 'utils/date'
 import { generateColumn as col } from 'utils/generateColumn'
 import { ISummaryViewRow, ISummaryViewState } from './types'
 
-export function createColumns({ scope, range, timeentries }: ISummaryViewState, t: TFunction): IColumn[] {
+export function createColumns({  range, timeentries }: ISummaryViewState, t: TFunction): IColumn[] {
     const data = unique(
-        timeentries.map(e => value(e, scope.fieldName, null)), m => m
+        timeentries.map(e => e.monthNumber), m => m
     ).sort((a, b) => a - b)
 
     const onRender = (row: any, _index: number, col: IColumn) => (
@@ -20,7 +21,7 @@ export function createColumns({ scope, range, timeentries }: ISummaryViewState, 
     let columns = data.map(key => ({
         key: key,
         fieldName: key,
-        name: scope.getColumnHeader(key),
+        name: capitalize(moment().month(key - 1).format('MMMM')),
         minWidth: 70,
         maxWidth: 70,
         onRender,

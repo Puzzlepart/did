@@ -31,8 +31,6 @@ const typeDef = `
         projectId: String, 
         resourceId: String, 
         weekNumber: Int, 
-        minWeekNumber: Int,
-        maxWeekNumber: Int,
         monthNumber: Int, 
         minMonthNumber: Int,
         maxMonthNumber: Int,

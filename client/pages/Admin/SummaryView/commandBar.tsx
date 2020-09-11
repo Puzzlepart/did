@@ -1,12 +1,13 @@
 import { TFunction } from 'i18next'
-import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
-import { Spinner } from 'office-ui-fabric-react/lib/Spinner'
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
+import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import { Slider } from 'office-ui-fabric-react/lib/Slider'
+import { Spinner } from 'office-ui-fabric-react/lib/Spinner'
 import React from 'react'
+import dateUtils from 'utils/date'
 import * as excelUtils from 'utils/exportExcel'
-import { ISummaryViewContext } from './types'
 import styles from './SummaryView.module.scss'
+import { ISummaryViewContext } from './types'
 
 export const commandBar = (
     context: ISummaryViewContext,
@@ -16,20 +17,6 @@ export const commandBar = (
 ) => {
     return {
         items: [
-            {
-                ...context.scope,
-                key: 'VIEW_SCOPE',
-                disabled: context.loading,
-                subMenuProps: {
-                    items: context.scopes.map(scope => ({
-                        ...scope,
-                        canCheck: true,
-                        checked: context.scope.key === scope.key,
-                        onClick: () => context.dispatch({ type: 'CHANGE_SCOPE', payload: scope })
-                    })),
-                },
-                className: styles.viewScopeSelector
-            },
             {
                 ...context.type,
                 key: 'VIEW_TYPE',
@@ -54,16 +41,16 @@ export const commandBar = (
                                 width: 300,
                                 marginLeft: 10,
                                 alignSelf: 'center',
-                            }
+                            },
                         }}
                         disabled={context.loading}
                         min={3}
-                        max={6}
+                        max={dateUtils.getMonthIndex()}
                         onChange={value => context.dispatch({ type: 'CHANGE_RANGE', payload: value })} />
                 ),
             },
             {
-                key: 'LOADING',
+                key: 'LOADING_SPINNER',
                 name: '',
                 onRender: () => context.loading && (
                     <Spinner

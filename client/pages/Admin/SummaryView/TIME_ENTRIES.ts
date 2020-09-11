@@ -5,26 +5,14 @@ export interface ITimeEntriesVariables {
     year: number;
     minMonthNumber?: number;
     maxMonthNumber?: number;
-    minWeekNumber?: number;
-    maxWeekNumber?: number;
 }
 
 /**
  * @ignore
  */
 export default gql`
-    query(
-        $year: Int!, 
-        $minMonthNumber: Int, 
-        $maxMonthNumber: Int, 
-        $minWeekNumber: Int, 
-        $maxWeekNumber: Int) {
-        timeentries(
-            year: $year, 
-            minMonthNumber: $minMonthNumber, 
-            maxMonthNumber: $maxMonthNumber, 
-            minWeekNumber: $minWeekNumber, 
-            maxWeekNumber: $maxWeekNumber) {
+    query($year: Int!, $minMonthNumber: Int, $maxMonthNumber: Int) {
+        timeentries(year: $year, minMonthNumber: $minMonthNumber, maxMonthNumber: $maxMonthNumber) {
             duration
             weekNumber
             year

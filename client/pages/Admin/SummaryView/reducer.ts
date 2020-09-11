@@ -1,10 +1,8 @@
-import { ISummaryViewScope, ISummaryViewState, ISummaryViewType } from './types'
-import dateUtils from 'utils/date'
+import { moment } from 'utils/date'
+import { ISummaryViewState, ISummaryViewType } from './types'
 
 export type SummaryViewAction =
     { type: 'DATA_UPDATED'; payload: { timeentries: any[] } }
-    |
-    { type: 'CHANGE_SCOPE'; payload: ISummaryViewScope }
     |
     { type: 'CHANGE_TYPE'; payload: ISummaryViewType }
     |
@@ -18,11 +16,6 @@ export const reducer = (state: ISummaryViewState, action: SummaryViewAction): IS
     switch (action.type) {
         case 'DATA_UPDATED': {
             if (action.payload) newState.timeentries = action.payload.timeentries
-        }
-            break
-
-        case 'CHANGE_SCOPE': {
-            newState.scope = action.payload
         }
             break
 
@@ -43,25 +36,6 @@ export const reducer = (state: ISummaryViewState, action: SummaryViewAction): IS
 
         default: throw new Error()
     }
-
-    // eslint-disable-next-line default-case
-    switch (newState.scope.key) {
-        case 'month': {
-            newState.variables = {
-                year: state.year,
-                minMonthNumber: dateUtils.getMonthIndex() - state.range + 1,
-                maxMonthNumber: dateUtils.getMonthIndex(),
-            }
-        }
-            break
-        case 'week': {
-            newState.variables = {
-                year: state.year,
-                minWeekNumber: dateUtils.getWeek() - state.range + 1,
-                maxWeekNumber: dateUtils.getWeek(),
-            }
-        }
-            break
-    }
+    if(newState.year !== moment().year()) newState.maxMonth = 12
     return newState
 }

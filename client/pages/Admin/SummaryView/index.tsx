@@ -12,35 +12,30 @@ import { createColumns } from './createColumns'
 import { createPeriods } from './createPeriods'
 import { createRows } from './createRows'
 import styles from './SummaryView.module.scss'
-import { reducer } from './SummaryViewReducer'
-import { getScopes } from './SummaryViewScope'
-import { getTypes } from './SummaryViewType'
+import { reducer } from './reducer'
 import TIME_ENTRIES, { ITimeEntriesVariables } from './TIME_ENTRIES'
-import { ISummaryViewContext, ISummaryViewProps } from './types'
+import { getViewTypes, ISummaryViewContext, ISummaryViewProps } from './types'
 
 /**
  * @category Admin
  */
 export const SummaryView = (props: ISummaryViewProps): JSX.Element => {
     const { t } = useTranslation(['common', 'admin'])
-    const scopes = getScopes(t)
-    const types = getTypes(t)
+    const types = getViewTypes(t)
     const [state, dispatch] = useReducer(reducer, {
         year: props.defaultYear,
+        maxMonth: dateUtils.getMonthIndex(),
         timeentries: [],
         range: props.defaultRange,
-        scope: first(scopes),
         type: first(types),
-        variables: {
-            year: props.defaultYear,
-            minMonthNumber: dateUtils.getMonthIndex() - props.defaultRange + 1,
-            maxMonthNumber: dateUtils.getMonthIndex(),
-        }
     })
     const { data, loading } = useQuery<any, ITimeEntriesVariables>(TIME_ENTRIES, {
         fetchPolicy: 'cache-first',
-        skip: !state.variables,
-        variables: state.variables,
+        variables: {
+            year: state.year,
+            minMonthNumber: (state.maxMonth - state.range) + 1,
+            maxMonthNumber: state.maxMonth,
+        }
     })
 
     useEffect(() => { dispatch({ type: 'DATA_UPDATED', payload: data }) }, [data])
@@ -48,13 +43,12 @@ export const SummaryView = (props: ISummaryViewProps): JSX.Element => {
     const contextValue: ISummaryViewContext = useMemo(() => ({
         ...state,
         dispatch,
-        scopes,
         types,
         loading,
-    }), [state])
-    const periods = useMemo(() => createPeriods(), [])
+    }), [state, loading])
+    const periods = useMemo(() => createPeriods(1), [])
     const columns = useMemo(() => createColumns(state, t), [state])
-    const items = useMemo(() => createRows(state, columns, t), [state])
+    const rows = useMemo(() => createRows(state, columns, t), [state])
 
     return (
         <Pivot
@@ -65,13 +59,13 @@ export const SummaryView = (props: ISummaryViewProps): JSX.Element => {
             {periods.map(itemProps => (
                 <PivotItem key={itemProps.itemKey} {...itemProps}>
                     <List
-                        hidden={!loading && isEmpty(items)}
+                        hidden={!loading && isEmpty(rows)}
                         enableShimmer={loading}
                         columns={columns}
-                        items={items}
-                        commandBar={commandBar(contextValue, items, columns, t)} />
+                        items={rows}
+                        commandBar={commandBar(contextValue, rows, columns, t)} />
                     <UserMessage
-                        hidden={!isEmpty(items) || loading}
+                        hidden={!isEmpty(rows) || loading}
                         text={t('noTimeEntriesText', { ns: 'admin' })} />
                 </PivotItem>
             ))}

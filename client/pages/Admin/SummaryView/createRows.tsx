@@ -4,7 +4,7 @@ import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import { first, unique } from 'underscore'
 import { ISummaryViewRow, ISummaryViewState } from './types'
 
-export const createRows = ({ timeentries, scope, type }: ISummaryViewState, columns: IColumn[], t: TFunction): ISummaryViewRow[] => {
+export const createRows = ({ timeentries, type }: ISummaryViewState, columns: IColumn[], t: TFunction): ISummaryViewRow[] => {
     const uniqueRowValues = sortAlphabetically(
         unique(timeentries.map(e => value(e, type.fieldName, null)), r => r)
     )
@@ -13,7 +13,7 @@ export const createRows = ({ timeentries, scope, type }: ISummaryViewState, colu
         const rowEntries = timeentries.filter(e => value(e, type.fieldName, null) === label)
         return _columns.reduce((obj, col) => {
             const sum = [...rowEntries]
-                .filter(e => value(e, scope.fieldName, null) === col.fieldName)
+                .filter(e => e.monthNumber === col.fieldName)
                 .reduce((sum, { duration }) => sum + duration, 0)
             switch (type.key) {
                 case 'project': {
@@ -30,7 +30,7 @@ export const createRows = ({ timeentries, scope, type }: ISummaryViewState, colu
     })
     const totalRow: ISummaryViewRow = _columns.reduce((obj, col) => {
         const sum = [...timeentries]
-            .filter(e => value(e, scope.fieldName, null) === col.fieldName)
+            .filter(e => e.monthNumber === col.fieldName)
             .reduce((sum, { duration }) => sum + duration, 0)
         obj[col.fieldName] = sum
         obj.sum += sum
