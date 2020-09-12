@@ -10,7 +10,7 @@
     "public": "public"
   },
   "scripts": {
-    "watch": "concurrently \"webpack\" \"npm run watchServer\"",
+    "watch": "concurrently \"webpack\" \"npm run watchServer\" \"node tasks/open.js\"",
     "start": "node ./bin/www",
     "watchServer": "nodemon --ignore client --ignore public --ignore lib ./bin/www",
     "packageClient": "webpack",
@@ -127,6 +127,7 @@
     "eslint-plugin-react": "7.19.0",
     "mocha": "7.1.2",
     "nodemon": "2.0.3",
+    "open": "7.2.1",
     "typedoc": "0.17.6",
     "typedoc-neo-theme": "1.0.8",
     "typedoc-plugin-external-module-name": "3.1.0"
