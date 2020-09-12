@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import { HotkeyModal } from 'components'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
-import React, { useEffect, useMemo, useReducer } from 'react'
+import React, { useContext, useEffect, useMemo, useReducer } from 'react'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
@@ -22,7 +22,7 @@ import { AppContext } from 'AppContext'
  * @category Timesheet
  */
 export const Timesheet = () => {
-    const context = React.useContext(AppContext)
+    const context = useContext(AppContext)
     const { t } = useTranslation(['timesheet', 'common'])
     const history = useHistory()
     const params = useParams<ITimesheetParams>()
