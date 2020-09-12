@@ -52,7 +52,8 @@ export const commandBar = (
                             },
                         }}
                         disabled={context.loading}
-                        min={3}
+                        value={context.range}
+                        min={2}
                         max={dateUtils.getMonthIndex()}
                         onChange={value => context.dispatch({ type: 'CHANGE_RANGE', payload: value })} />
                 ),

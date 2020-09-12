@@ -1,4 +1,4 @@
-import { moment } from 'utils/date'
+import dateUtils, { moment } from 'utils/date'
 import { ISummaryViewState, ISummaryViewType } from './types'
 
 export type SummaryViewAction =
@@ -37,5 +37,6 @@ export const reducer = (state: ISummaryViewState, action: SummaryViewAction): IS
         default: throw new Error()
     }
     if(newState.year !== moment().year()) newState.maxMonth = 12
+    else newState.maxMonth = dateUtils.getMonthIndex()
     return newState
 }
