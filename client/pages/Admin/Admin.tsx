@@ -19,7 +19,6 @@ export const Admin = () => {
     const history = useHistory()
     const { view } = useParams<{ view: string }>()
 
-
     function onPivotClick({ props }: PivotItem) {
         history.push(`/admin/${props.itemKey}`)
     }
