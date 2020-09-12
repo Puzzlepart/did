@@ -7,11 +7,19 @@ import React from 'react'
 import dateUtils from 'utils/date'
 import * as excelUtils from 'utils/exportExcel'
 import styles from './SummaryView.module.scss'
-import { ISummaryViewContext } from './types'
+import { ISummaryViewContext, ISummaryViewRow } from './types'
 
+/**
+ * Command bar items
+ * 
+ * @param {ISummaryViewContext} context Summary view context
+ * @param {ISummaryViewRow[]} rows Rows
+ * @param {IColumn[]} columns Columns
+ * @param {TFunction} t Translate function
+ */
 export const commandBar = (
     context: ISummaryViewContext,
-    items: any[],
+    rows: ISummaryViewRow[],
     columns: IColumn[],
     t: TFunction,
 ) => {
@@ -67,7 +75,7 @@ export const commandBar = (
                 disabled: context.loading,
                 onClick: () => {
                     excelUtils.exportExcel(
-                        items,
+                        rows,
                         {
                             columns,
                             fileName: `Summary-${new Date().toDateString().split(' ').join('-')}.xlsx`,
