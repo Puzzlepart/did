@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 
-
 export interface ITimeEntriesVariables {
     year: number;
     minMonthNumber?: number;
