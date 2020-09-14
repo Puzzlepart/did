@@ -1,6 +1,5 @@
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import { EntityLabel, List } from 'components'
-import { value } from 'helpers'
 import { IEntityLabel } from 'interfaces/IEntityLabel'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import React, { useEffect, useState } from 'react'

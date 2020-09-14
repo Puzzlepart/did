@@ -6,9 +6,10 @@ import { useHistory, useParams } from 'react-router-dom'
 import styles from './Admin.module.scss'
 import { Labels } from './Labels'
 import { Roles } from './Roles'
-import AdminSummaryView from './SummaryView'
+import { SummaryView } from './SummaryView'
 import { Users } from './Users'
 import { ApiTokens } from './ApiTokens'
+import { moment } from 'utils/date'
 
 /**
  * @category Admin
@@ -17,7 +18,6 @@ export const Admin = () => {
     const { t } = useTranslation('admin')
     const history = useHistory()
     const { view } = useParams<{ view: string }>()
-
 
     function onPivotClick({ props }: PivotItem) {
         history.push(`/admin/${props.itemKey}`)
@@ -40,7 +40,9 @@ export const Admin = () => {
                     itemKey='summary'
                     headerText={t('summary')}
                     itemIcon='CalendarWeek'>
-                    <AdminSummaryView />
+                    <SummaryView
+                        defaultYear={moment().year()}
+                        defaultRange={3} />
                 </PivotItem>
                 <PivotItem
                     className={styles.tab}
