@@ -85,7 +85,8 @@
     "tokenNamePlaceholder": "Fyll inn navn",
     "tokenGeneratedText": "Nøkkelen din er generert og vil kun være synlig i 10 sekunder. Du kan bare se det en gang. Ta godt vare på den!",
     "tokenErrorText": "Det skjedde en feil under generering av nøkkel. Prøv igjen senere.",
-    "tokenDeletedText": "Nøkkelen `{0}` ble slettet."
+    "tokenDeletedText": "Nøkkelen `{0}` ble slettet.",
+    "summaryLoadingText": "Laster tidsoppføringer og lager oppsummering..."
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport. For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene...",

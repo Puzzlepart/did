@@ -8,6 +8,7 @@ services
 utils
 views
 tests
+tasks
 app.js
 webpack.config.js
 client/**/*.d.ts

@@ -1,42 +1,43 @@
 import { TFunction } from 'i18next'
-import { IColumn } from 'office-ui-fabric-react'
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
+import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import { Slider } from 'office-ui-fabric-react/lib/Slider'
+import { Spinner } from 'office-ui-fabric-react/lib/Spinner'
 import React from 'react'
+import dateUtils from 'utils/date'
 import * as excelUtils from 'utils/exportExcel'
-import { ISummaryViewContext } from './types'
+import styles from './SummaryView.module.scss'
+import { ISummaryViewContext, ISummaryViewRow } from './types'
 
+/**
+ * Command bar items
+ * 
+ * @param {ISummaryViewContext} context Summary view context
+ * @param {ISummaryViewRow[]} rows Rows
+ * @param {IColumn[]} columns Columns
+ * @param {TFunction} t Translate function
+ */
 export const commandBar = (
-    { scope, scopes, types, type, dispatch }: ISummaryViewContext,
-    items: any[],
+    context: ISummaryViewContext,
+    rows: ISummaryViewRow[],
     columns: IColumn[],
     t: TFunction,
 ) => {
     return {
         items: [
             {
-                ...scope,
-                key: 'VIEW_SCOPE',
+                ...context.type,
+                key: 'VIEW_TYPE',
+                disabled: context.loading,
                 subMenuProps: {
-                    items: scopes.map(s => ({
-                        ...s,
+                    items: context.types.map(type => ({
+                        ...type,
                         canCheck: true,
-                        checked: scope.key === s.key,
-                        onClick: () => dispatch({ type: 'CHANGE_SCOPE', payload: s })
+                        checked: context.type.key === type.key,
+                        onClick: () => context.dispatch({ type: 'CHANGE_TYPE', payload: type })
                     })),
                 },
-            },
-            {
-                ...type,
-                key: 'VIEW_TYPE',
-                subMenuProps: {
-                    items: types.map(t => ({
-                        ...t,
-                        canCheck: true,
-                        checked: type.key === t.key,
-                        onClick: () => dispatch({ type: 'CHANGE_TYPE', payload: t })
-                    })),
-                }
+                className: styles.viewTypeSelector
             },
             {
                 key: 'RANGE',
@@ -48,22 +49,34 @@ export const commandBar = (
                                 width: 300,
                                 marginLeft: 10,
                                 alignSelf: 'center',
-                            }
+                            },
                         }}
-                        min={3}
-                        max={12}
-                        onChange={value => dispatch({ type: 'CHANGE_RANGE', payload: value })} />
+                        disabled={context.loading}
+                        value={context.range}
+                        min={2}
+                        max={dateUtils.getMonthIndex()}
+                        onChange={value => context.dispatch({ type: 'CHANGE_RANGE', payload: value })} />
                 ),
             },
+            {
+                key: 'LOADING_SPINNER',
+                name: '',
+                onRender: () => context.loading && (
+                    <Spinner
+                        label={t('summaryLoadingText', { ns: 'admin' })}
+                        labelPosition='right' />
+                )
+            }
         ] as IContextualMenuItem[],
         farItems: [
             {
                 key: 'EXPORT_TO_EXCEL',
                 text: t('exportCurrentView'),
                 iconProps: { iconName: 'ExcelDocument' },
+                disabled: context.loading,
                 onClick: () => {
                     excelUtils.exportExcel(
-                        items,
+                        rows,
                         {
                             columns,
                             fileName: `Summary-${new Date().toDateString().split(' ').join('-')}.xlsx`,
