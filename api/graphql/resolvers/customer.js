@@ -13,6 +13,7 @@ const typeDef = `
     inactive: Boolean
   } 
 
+  # Input object for Customer
   input CustomerInput {
     key: String
     name: String
