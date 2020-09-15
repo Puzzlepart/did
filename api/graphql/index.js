@@ -70,7 +70,7 @@ const getSchema = () => {
 module.exports = new ApolloServer({
   schema: getSchema(),
   rootValue: global,
-  graphiql: false,
+  playground: false,
   context: async ({ req }) => ({
     services: {
       graph: req.user.id && new GraphService(req),

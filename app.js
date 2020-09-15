@@ -91,7 +91,6 @@ class App {
         server.applyMiddleware({
             app: this._,
             path: '/graphql',
-            cors: false
         })
     }
 
