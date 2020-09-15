@@ -32,11 +32,11 @@ const Query = `
   }
 
   type Query {
-    _empty: String
+    _: String
   }
 
   type Mutation {
-    _empty: String
+    _: String
   }
 `
 
