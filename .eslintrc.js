@@ -1,62 +1,60 @@
 module.exports = {
-    parser: '@typescript-eslint/parser',  // Specifies the ESLint parser
-    extends: [
-        'prettier',
-        'plugin:react/recommended',  // Uses the recommended rules from @eslint-plugin-react
-        'plugin:@typescript-eslint/recommended',  // Uses the recommended rules from @typescript-eslint/eslint-plugin
-    ],
-    plugins: [
-        'prettier'
-    ],
-    parserOptions: {
-        ecmaVersion: 2018,  // Allows for the parsing of modern ECMAScript features
-        sourceType: 'module',  // Allows for the use of imports
-        ecmaFeatures: {
-            jsx: true,  // Allows for the parsing of JSX
-        },
+  parser: '@typescript-eslint/parser', // Specifies the ESLint parser
+  extends: [
+    'prettier',
+    'plugin:react/recommended', // Uses the recommended rules from @eslint-plugin-react
+    'plugin:@typescript-eslint/recommended', // Uses the recommended rules from @typescript-eslint/eslint-plugin
+  ],
+  plugins: ['prettier'],
+  parserOptions: {
+    ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
+    sourceType: 'module', // Allows for the use of imports
+    ecmaFeatures: {
+      jsx: true, // Allows for the parsing of JSX
     },
-    rules: {
-        /**
-         * 0 = off, 1 = warn, 2 = error
-         */
+  },
+  rules: {
+    /**
+     * 0 = off, 1 = warn, 2 = error
+     */
 
-        "@typescript-eslint/interface-name-prefix": 0,
+    '@typescript-eslint/interface-name-prefix': 0,
 
-        "@typescript-eslint/no-explicit-any": 0,
+    '@typescript-eslint/no-explicit-any': 0,
 
-        "@typescript-eslint/member-delimiter-style": 0,
+    '@typescript-eslint/member-delimiter-style': 0,
 
-        "react/prop-types": 0,
+    'react/prop-types': 0,
 
-        "no-inferrable-types": 0,
+    'no-inferrable-types': 0,
 
-        "@typescript-eslint/explicit-function-return-type": 0,
+    '@typescript-eslint/explicit-function-return-type': 0,
 
-        "react/display-name": 0,
+    'react/display-name': 0,
 
-        "no-compare-neg-zero": 1,
+    'no-compare-neg-zero': 1,
 
-        "no-console": 2,
+    'no-console': 2,
 
-        "default-case": 2,
+    'default-case': 2,
 
-        "eqeqeq": 1,
+    eqeqeq: 1,
 
-        "max-classes-per-file": 1,
+    'max-classes-per-file': 1,
 
-        "jsx-quotes": ["error", "prefer-single"],
+    'jsx-quotes': ['error', 'prefer-single'],
 
-        "quotes": ["error", "single"],
+    quotes: ['error', 'single'],
 
-        "yoda": 2,
+    yoda: 2,
 
-        "require-await": 1,
+    'require-await': 1,
 
-        "semi": ["error", "never", {}]
+    semi: ['error', 'never', {}],
+  },
+  settings: {
+    react: {
+      version: 'detect', // Tells eslint-plugin-react to automatically detect the version of React to use
     },
-    settings: {
-        react: {
-            version: 'detect',  // Tells eslint-plugin-react to automatically detect the version of React to use
-        },
-    },
-};
+  },
+}

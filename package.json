@@ -10,11 +10,13 @@
     "public": "public"
   },
   "scripts": {
-    "watch": "concurrently \"webpack\" \"npm run watchServer\" \"node tasks/open.js\"",
+    "watch": "concurrently \"webpack\" \"npm run watch:server\" \"node tasks/open.js\"",
     "start": "node ./bin/www",
-    "watchServer": "nodemon --ignore client --ignore public --ignore lib ./bin/www",
-    "packageClient": "webpack",
-    "lint": "eslint --ext .ts,.tsx ./client --color --fix && prettier --config .prettierrc 'client/**/*.ts' --write",
+    "watch:server": "nodemon --ignore client --ignore public --ignore lib ./bin/www",
+    "package:client": "webpack",
+    "lint:client": "eslint --ext .ts,.tsx ./client --color --fix && npm run prettier:client",
+    "prettier:client": "prettier --config .prettierrc 'client/**/*.ts' --write",
+    "prettier:server": "prettier --config .prettierrc './**/*.js' --write",
     "makeDoc": "rimraf ./doc && typedoc --options typedoc.json && graphdoc",
     "debug": "nodemon --inspect ./bin/www",
     "tests": "mocha tests --exit"

@@ -1,4 +1,4 @@
-global.fetch = require("node-fetch")
+global.fetch = require('node-fetch')
 const TokenService = require('./tokens')
 const log = require('debug')('services/graph')
 const Event = require('./graph.event')
@@ -18,10 +18,13 @@ class GraphService {
    */
   removeIgnoredEvents(events) {
     let ignoreRegex = /[(\[\{]IGNORE[)\]\}]/gi
-    return events.filter(evt => {
+    return events.filter((evt) => {
       let categories = evt.categories.join(' ').toLowerCase()
       let content = [evt.title, evt.body, categories].join(' ').toLowerCase()
-      return content.match(ignoreRegex) == null && categories.indexOf('ignore') === -1
+      return (
+        content.match(ignoreRegex) == null &&
+        categories.indexOf('ignore') === -1
+      )
     })
   }
 
@@ -32,14 +35,14 @@ class GraphService {
     const client = require('@microsoft/microsoft-graph-client').Client.init({
       authProvider: (done) => {
         done(null, this.oauthToken.access_token)
-      }
+      },
     })
     return client
   }
 
   /**
    * Create Outlook category
-   * 
+   *
    * @param category Category
    */
   async createOutlookCategory(category) {
@@ -93,27 +96,34 @@ class GraphService {
    */
   async getEvents(startDateTime, endDateTime) {
     try {
-      log('Querying Graph /me/calendar/calendarView: %s', JSON.stringify({
-        startDateTime,
-        endDateTime
-      }))
+      log(
+        'Querying Graph /me/calendar/calendarView: %s',
+        JSON.stringify({
+          startDateTime,
+          endDateTime,
+        })
+      )
       const { value } = await this.getClient()
         .api('/me/calendar/calendarView')
         .query({
           startDateTime,
-          endDateTime
+          endDateTime,
         })
-        .select('id,subject,body,start,end,lastModifiedDateTime,categories,webLink,isOrganizer')
-        .filter(`sensitivity ne 'private' and isallday eq false and iscancelled eq false`)
+        .select(
+          'id,subject,body,start,end,lastModifiedDateTime,categories,webLink,isOrganizer'
+        )
+        .filter(
+          `sensitivity ne 'private' and isallday eq false and iscancelled eq false`
+        )
         .orderby('start/dateTime asc')
         .top(500)
         .get()
       log('Retrieved %s events from /me/calendar/calendarView', value.length)
       let events = value
-        .filter(evt => evt.subject)
-        .map(evt => new Event(evt))
+        .filter((evt) => evt.subject)
+        .map((evt) => new Event(evt))
       events = this.removeIgnoredEvents(events)
-      events = events.filter(evt => evt.duration <= 24)
+      events = events.filter((evt) => evt.duration <= 24)
       return events
     } catch (error) {
       switch (error.statusCode) {

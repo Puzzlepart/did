@@ -11,14 +11,14 @@ const { resolvers: addApiTokenResolvers } = require('./apiToken')
 const { merge } = require('lodash')
 
 module.exports = merge(
-    customerResolvers,
-    projectResolvers,
-    timeentryResolvers,
-    labelResolvers,
-    outlookCategoryResolvers,
-    userResolvers,
-    roleResolvers,
-    addApiTokenResolvers,
-    timesheetResolvers,
-    notificationResolvers,
+  customerResolvers,
+  projectResolvers,
+  timeentryResolvers,
+  labelResolvers,
+  outlookCategoryResolvers,
+  userResolvers,
+  roleResolvers,
+  addApiTokenResolvers,
+  timesheetResolvers,
+  notificationResolvers
 )
