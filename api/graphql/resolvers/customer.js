@@ -2,7 +2,10 @@ const { pick } = require('underscore')
 const AzTableUtilities = require('../../../utils/table')
 const { executeBatch, createAzBatch } = new AzTableUtilities()
 
-const typeDef = `  
+const typeDef = ` 
+  """
+  A type that describes a Customer
+  """
   type Customer {
     key: String
     name: String
@@ -13,7 +16,9 @@ const typeDef = `
     inactive: Boolean
   } 
 
-  # Input object for Customer
+  """
+  Input object for Customer
+  """
   input CustomerInput {
     key: String
     name: String
