@@ -59,28 +59,10 @@ class App {
      * Setup authentication
      */
     setupAuth() {
+        this._.use(bearerToken());
         this._.use(passport.initialize())
         this._.use(passport.session())
         this._.use('/auth', require('./routes/auth'))
-    }
-
-    /**
-     * Check API authentication
-     * 
-     * @param {*} req 
-     * @param {*} res 
-     * @param {*} next 
-     */
-    async checkApiAuth(req, res, next) {
-        const isAuthenticated = !!req.user || req.isAuthenticated()
-        if (!isAuthenticated) {
-            if (req.token) {
-                const sub = await SubscriptionService.findSubscriptionWithToken(req.token)
-                if (!sub) res.status(401).send('You don\'t have access to this resource.')
-                else req.user = { subscription: sub }
-            } else res.redirect('/')
-        }
-        next()
     }
 
     /**

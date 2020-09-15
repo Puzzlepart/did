@@ -74,17 +74,22 @@ module.exports = new ApolloServer({
   rootValue: global,
   playground: false,
   context: async ({ req }) => {
+    let subscription = req.user && req.user.subscription
+    if (!!req.token) {
+      subscription = await SubscriptionService.findSubscriptionWithToken(req.token)
+      if (!subscription) throw new Error('You don\'t have access to this resource.')
+    } else if (!req.user) throw new Error()
     let services = {
-      storage: new StorageService(req.user.subscription),
+      storage: new StorageService(subscription),
       subscription: SubscriptionService,
     }
-    if(req.user.id) services.graph = new GraphService(req)
+    if (!!req.user) services.graph = new GraphService(req)
     return ({
       services,
       user: req.user,
     })
   },
-  engine: {    
+  engine: {
     reportSchema: true,
     variant: 'current'
   },
