@@ -1,4 +1,4 @@
-const graphql = require('express-graphql')
+const { ApolloServer } = require('apollo-server-express');
 const { makeExecutableSchema } = require('graphql-tools')
 const { typeDef: Customer } = require('./resolvers/customer')
 const { typeDef: Project } = require('./resolvers/project')
@@ -67,17 +67,16 @@ const getSchema = () => {
   })
 }
 
-module.exports = graphql(req => ({
+module.exports = new ApolloServer({
   schema: getSchema(),
   rootValue: global,
-  graphiql: process.env.GRAPHIQL_ENABLED == '1',
-  pretty: req.app.get('env') === 'development',
-  context: {
+  graphiql: false,
+  context: async ({ req }) => ({
     services: {
       graph: req.user.id && new GraphService(req),
       storage: new StorageService(req.user.subscription),
       subscription: SubscriptionService,
     },
     user: req.user,
-  },
-}))
+  }),
+})

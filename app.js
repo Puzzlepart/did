@@ -5,6 +5,8 @@ const express = require('express')
 const favicon = require('express-favicon')
 const path = require('path')
 const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
+const cors = require('cors')
 const logger = require('morgan')
 const passport = require('./middleware/passport')
 const serveGzipped = require('./middleware/gzip')
@@ -20,6 +22,7 @@ class App {
         this._.use(express.json())
         this._.use(express.urlencoded({ extended: false }))
         this._.use(cookieParser())
+        this._.use(bodyParser.json())
         this.setupSession();
         this.setupViewEngine();
         this.setupAssets();
@@ -84,12 +87,12 @@ class App {
      * Setup graphql
      */
     setupGraphQL() {
-        this._.use(
-            '/graphql',
-            bearerToken(),
-            this.checkApiAuth,
-            require('./api/graphql')
-        )
+        const server = require('./api/graphql')
+        server.applyMiddleware({
+            app: this._,
+            path: '/graphql',
+            cors: false
+        })
     }
 
     /**
