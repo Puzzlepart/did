@@ -2,7 +2,7 @@ const { find, pick } = require('underscore')
 const jwt = require('jsonwebtoken')
 const { gql } = require('apollo-server-express')
 
-const typeDef = gql`  
+const typeDef = gql`
     """
     A type that describes a ApiToken
     """
@@ -12,6 +12,9 @@ const typeDef = gql`
     } 
 
     extend type Query {
+        """
+        Get all API tokens for the subscription
+        """
         getApiTokens: [ApiToken!]!
     }  
 

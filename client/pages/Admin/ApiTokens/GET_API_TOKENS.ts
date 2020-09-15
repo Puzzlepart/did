@@ -4,10 +4,10 @@ import gql from 'graphql-tag'
  * @ignore
  */
 export default gql`
-    query { 
-        tokens: getApiTokens { 
-            name
-            timestamp
-         }
+  query {
+    tokens: getApiTokens {
+      name
+      timestamp
     }
+  }
 `

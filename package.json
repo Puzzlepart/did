@@ -14,7 +14,7 @@
     "start": "node ./bin/www",
     "watchServer": "nodemon --ignore client --ignore public --ignore lib ./bin/www",
     "packageClient": "webpack",
-    "lint": "eslint --ext .ts,.tsx ./client --color --fix",
+    "lint": "eslint --ext .ts,.tsx ./client --color --fix && prettier --config .prettierrc 'client/**/*.ts' --write",
     "makeDoc": "rimraf ./doc && typedoc --options typedoc.json && graphdoc",
     "debug": "nodemon --inspect ./bin/www",
     "tests": "mocha tests --exit"
@@ -124,10 +124,13 @@
     "@typescript-eslint/parser": "2.30.0",
     "assert": "2.0.0",
     "eslint": "6.8.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "7.19.0",
     "mocha": "7.1.2",
     "nodemon": "2.0.3",
     "open": "7.2.1",
+    "prettier": "^2.1.1",
     "typedoc": "0.17.6",
     "typedoc-neo-theme": "1.0.8",
     "typedoc-plugin-external-module-name": "3.1.0"

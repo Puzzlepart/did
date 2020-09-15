@@ -3,41 +3,41 @@ const AzTableUtilities = require('../../../utils/table')
 const { executeBatch, createAzBatch } = new AzTableUtilities()
 const { gql } = require('apollo-server-express')
 
-const typeDef = gql` 
-  """
-  A type that describes a Customer
-  """
-  type Customer {
-    key: String
-    name: String
-    description: String
-    webLink: String
-    externalSystemURL: String
-    icon: String
-    inactive: Boolean
-  } 
+const typeDef = gql`
+    """
+    A type that describes a Customer
+    """
+    type Customer {
+        key: String
+        name: String
+        description: String
+        webLink: String
+        externalSystemURL: String
+        icon: String
+        inactive: Boolean
+    } 
 
-  """
-  Input object for Customer used in Mutation createOrUpdateCustomer
-  """
-  input CustomerInput {
-    key: String
-    name: String
-    description: String
-    webLink: String
-    externalSystemURL: String
-    icon: String
-    inactive: Boolean
-  }
-  
-  extend type Query {
-    customers(sortBy: String): [Customer!]!
-  }  
+    """
+    Input object for Customer used in Mutation createOrUpdateCustomer
+    """
+    input CustomerInput {
+        key: String
+        name: String
+        description: String
+        webLink: String
+        externalSystemURL: String
+        icon: String
+        inactive: Boolean
+    }
 
-  extend type Mutation {	
-    createOrUpdateCustomer(customer: CustomerInput!, update: Boolean): BaseResult   
-    deleteCustomer(key: String!): BaseResult
-  }
+    extend type Query {
+        customers(sortBy: String): [Customer!]!
+    }  
+
+    extend type Mutation {	
+        createOrUpdateCustomer(customer: CustomerInput!, update: Boolean): BaseResult   
+        deleteCustomer(key: String!): BaseResult
+    }
 `
 
 

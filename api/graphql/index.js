@@ -1,4 +1,4 @@
-const { ApolloServer } = require('apollo-server-express');
+const { ApolloServer, gql } = require('apollo-server-express');
 const { makeExecutableSchema } = require('graphql-tools')
 const { typeDef: Customer } = require('./resolvers/customer')
 const { typeDef: Project } = require('./resolvers/project')
@@ -13,7 +13,10 @@ const { typeDef: ApiToken } = require('./resolvers/apiToken')
 const { StorageService, GraphService, SubscriptionService } = require('../../services')
 const { filter } = require('underscore')
 
-const Query = `
+const Query = gql`
+  """
+  A type that describes a Error
+  """
   type Error {
     name: String
     message: String
@@ -21,20 +24,37 @@ const Query = `
     statusCode: String
   }
 
+  """
+  A type that describes a EventError
+  """
   type EventError {
     code: String
   }
   
+  """
+  Result for Mutations
+  """
   type BaseResult {
     success: Boolean
     error: Error
     data: String
   }
 
+  """
+  The Query type is a special type that defines the entry point of every 
+  GraphQL query. Otherwise, the Query type is the same as any other 
+  GraphQL object type, and its fields work exactly the same way.
+  """
   type Query {
     _: String
   }
 
+  """
+  The Mutation type is a special type that is used to modify server-side data. 
+  Just like in queries, if the mutation field returns an object type, 
+  you can ask for nested fields. It can also contain multiple fields. 
+  However, unlike queries, mutation fields run in series, one after the other.
+  """
   type Mutation {
     _: String
   }
@@ -94,7 +114,7 @@ module.exports = new ApolloServer({
   engine: {
     reportSchema: true,
     variant: 'current',
-    generateClientInfo: ({context}) => {
+    generateClientInfo: ({ context }) => {
       return {
         clientName: context.user && context.user.subscription.name
       };

@@ -1,8 +1,12 @@
 module.exports = {
     parser: '@typescript-eslint/parser',  // Specifies the ESLint parser
     extends: [
+        'prettier',
         'plugin:react/recommended',  // Uses the recommended rules from @eslint-plugin-react
         'plugin:@typescript-eslint/recommended',  // Uses the recommended rules from @typescript-eslint/eslint-plugin
+    ],
+    plugins: [
+        'prettier'
     ],
     parserOptions: {
         ecmaVersion: 2018,  // Allows for the parsing of modern ECMAScript features
@@ -19,6 +23,8 @@ module.exports = {
         "@typescript-eslint/interface-name-prefix": 0,
 
         "@typescript-eslint/no-explicit-any": 0,
+
+        "@typescript-eslint/member-delimiter-style": 0,
 
         "react/prop-types": 0,
 
