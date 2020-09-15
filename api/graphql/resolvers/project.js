@@ -1,7 +1,11 @@
 const { pick } = require('underscore')
 const { connectEntities } = require('./project.utils')
+const { gql } = require('apollo-server-express')
 
-const typeDef = `  
+const typeDef = gql`  
+  """
+  A type that describes a Project
+  """
   type Project {
     id: String
     key: String

@@ -1,6 +1,10 @@
 const { pick } = require('underscore')
+const { gql } = require('apollo-server-express')
 
-const typeDef = `  
+const typeDef = gql`  
+    """
+    A type that describes a OutlookCategory
+    """
     type OutlookCategory {
         id: String
         key: String

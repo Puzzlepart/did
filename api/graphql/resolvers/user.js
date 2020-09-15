@@ -1,10 +1,17 @@
 const { pick, find, filter } = require('underscore')
+const { gql } = require('apollo-server-express')
 
-const typeDef = `  
+const typeDef = gql`  
+    """
+    A type that describes a Subscription
+    """
     type Subscription {
         name: String!
     }
 
+    """
+    A type that describes a User
+    """
     type User {
         id: String
         role: Role

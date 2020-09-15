@@ -1,6 +1,10 @@
 const { find, first } = require('underscore')
+const { gql } = require('apollo-server-express')
 
-const typeDef = `   
+const typeDef = gql`   
+    """
+    A type that describes a TimeEntry
+    """
     type TimeEntry {
         id: String
         key: String

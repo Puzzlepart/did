@@ -1,8 +1,9 @@
 const { pick } = require('underscore')
 const AzTableUtilities = require('../../../utils/table')
 const { executeBatch, createAzBatch } = new AzTableUtilities()
+const { gql } = require('apollo-server-express')
 
-const typeDef = ` 
+const typeDef = gql` 
   """
   A type that describes a Customer
   """
@@ -17,7 +18,7 @@ const typeDef = `
   } 
 
   """
-  Input object for Customer
+  Input object for Customer used in Mutation createOrUpdateCustomer
   """
   input CustomerInput {
     key: String

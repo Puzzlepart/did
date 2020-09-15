@@ -5,61 +5,68 @@ const { connectEntities } = require('./project.utils')
 const { getPeriods } = require('./timesheet.utils')
 const value = require('get-value')
 const log = require('debug')('api/graphql/resolvers/timesheet')
+const { gql } = require('apollo-server-express')
 
-const typeDef = `  
- type Event {
-	id: String
-	title: String
-	body: String
-	isOrganizer: Boolean
-	startDateTime: String
-	endDateTime: String
-	date: String
-	duration: Float
-	project: Project
-	customer: Customer
-	projectKey: String
-	customerKey: String
-	suggestedProject: Project
-	webLink: String
-	lastModifiedDateTime: String
-    labels: [Label]
-	error: EventError
-  }
+const typeDef = gql`  
+    """
+    A type that describes a TimeEntry
+    """
+    type Event {
+        id: String
+        title: String
+        body: String
+        isOrganizer: Boolean
+        startDateTime: String
+        endDateTime: String
+        date: String
+        duration: Float
+        project: Project
+        customer: Customer
+        projectKey: String
+        customerKey: String
+        suggestedProject: Project
+        webLink: String
+        lastModifiedDateTime: String
+        labels: [Label]
+        error: EventError
+    }
 
-  type TimesheetPeriod {
-	id: String!
-	week: Int!
-	month: String!
-	startDateTime: String!
-	endDateTime: String!
-	events: [Event!]!
-    matchedEvents: [Event!]!
-    confirmed: Boolean
-	confirmedDuration: Float!
-  }
+    """
+    A type that describes a TimesheetPeriod
+    """
+    type TimesheetPeriod {
+        id: String!
+        week: Int!
+        month: String!
+        startDateTime: String!
+        endDateTime: String!
+        events: [Event!]!
+        matchedEvents: [Event!]!
+        confirmed: Boolean
+        confirmedDuration: Float!
+    }
 
-  input EventInput {
-    id: String!
-    projectId: String!
-    manualMatch: Boolean
-  }
+    input EventInput {
+        id: String!
+        projectId: String!
+        manualMatch: Boolean
+    }
 
-  input TimesheetPeriodInput {
-	id: String!
-	startDateTime: String!
-    endDateTime: String!
-    matchedEvents: [EventInput]
-  }
-  
-  extend type Query {
-    timesheet(startDateTime: String!, endDateTime: String!, dateFormat: String!, locale: String!): [TimesheetPeriod]!
-  } 
+    input TimesheetPeriodInput {
+        id: String!
+        startDateTime: String!
+        endDateTime: String!
+        matchedEvents: [EventInput]
+    }
+    
+    extend type Query {
+        timesheet(startDateTime: String!, endDateTime: String!, dateFormat: String!, locale: String!): [TimesheetPeriod]!
+    } 
 
-  extend type Mutation {
-    confirmPeriod(entries: [TimeEntryInput!], period: TimesheetPeriodInput!): BaseResult!
-	unconfirmPeriod(period: TimesheetPeriodInput!): BaseResult!
-  }
+    extend type Mutation {
+        confirmPeriod(entries: [TimeEntryInput!], period: TimesheetPeriodInput!): BaseResult!
+        unconfirmPeriod(period: TimesheetPeriodInput!): BaseResult!
+    }
 `
 
 /**

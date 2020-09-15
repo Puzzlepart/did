@@ -1,6 +1,10 @@
 const unconfirmed_periods = require('./notification.unconfirmed-periods')
+const { gql } = require('apollo-server-express')
 
-const typeDef = `  
+const typeDef = gql`    
+  """
+  A type that describes a Notification
+  """
   type Notification {
     id: String
     type: Int!

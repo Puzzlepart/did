@@ -1,7 +1,11 @@
 const { find, pick } = require('underscore')
 const jwt = require('jsonwebtoken')
+const { gql } = require('apollo-server-express')
 
-const typeDef = `  
+const typeDef = gql`  
+    """
+    A type that describes a ApiToken
+    """
     type ApiToken {
         name: String
         timestamp: String
