@@ -93,6 +93,11 @@ module.exports = new ApolloServer({
   context: getContext,
   engine: {
     reportSchema: true,
-    variant: 'current'
+    variant: 'current',
+    generateClientInfo: ({context}) => {
+      return {
+        clientName: context.user && context.user.subscription.name
+      };
+    }
   },
 })
