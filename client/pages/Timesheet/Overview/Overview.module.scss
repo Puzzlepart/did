@@ -1,3 +1,6 @@
+$lightgray_background: #fafafc;
+$gray_background: #f1f1f1;
+
 .root {
     .container {
         width: auto;
@@ -31,4 +34,64 @@
             overflow-x: hidden;
         }
     }
+
+
+  [class*="ms-DetailsHeader-cellName"],
+  [class*="ms-GroupHeader-title"] {
+    font-weight: normal;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+  }
+
+  [class*="ms-DetailsRow-cell"] {
+    background: transparent;
+    font-size: 1.2em;
+    align-self: center;
+    padding: 0px 12px;
+
+    span,
+    a {
+      font-size: 1em;
+    }
+  }
+
+  [class*="ms-List-page"] {
+    background: transparent;
+
+    [class*="ms-GroupedList-group"] {
+      margin-top: 1.5em;
+      padding-bottom: 1em;
+      background: $lightgray_background;
+
+      [class*="ms-GroupHeader"] {
+        border-bottom: 0px;
+        &:hover {
+          background: $lightgray_background;
+        }
+      }
+
+      [class*="ms-List-cell"] {
+        min-height: 0;
+        [class*="ms-DetailsRow"] {
+          min-height: 45px;
+          border: none;
+          background: transparent;
+
+          &:hover {
+            background: $lightgray_background;
+          }
+          [class*="ms-DetailsRow-cell"] {
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+
+            span,
+            a {
+              vertical-align: middle;
+            }
+          }
+        }
+      }
+    }
+  }
 }

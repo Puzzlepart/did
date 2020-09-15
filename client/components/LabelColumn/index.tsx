@@ -33,6 +33,6 @@ export const LabelColumn = ({ label, project, customer }: ILabelColumnProps) => 
             </div>
         )
     }
-    else if (label) return <div style={{ fontWeight: 500 }}>{label}</div>
+    else if (label) return <div style={{ fontWeight: 600 }}>{label}</div>
     return null
 }

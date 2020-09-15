@@ -9,17 +9,17 @@ import { IDurationColumnProps } from './IDurationColumnProps'
  */
 export const DurationColumn = ({ row, column }: IDurationColumnProps) => {
     const { t } = useTranslation('common')
-    const style = { ...value<any>(column, 'data.style', {}) }
+    const style: React.CSSProperties = { ...value<any>(column, 'data.style', {}) }
 
-    if (row.label === t('sumLabel')) style.fontWeight = 500
+    if (row.label === t('sumLabel') || column.fieldName === 'sum') style.fontWeight = 600
 
-    const colValue = row[column.fieldName]
+    const duration = row[column.fieldName]
         ? Number.parseFloat(row[column.fieldName]).toFixed(2)
         : null
 
     return (
         <div style={style}>
-            {colValue}
+            {duration}
         </div>
     )
 }
