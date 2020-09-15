@@ -102,7 +102,7 @@ export class TimesheetPeriod {
     /*
     * Get aggregated errors from the events in the period
     */
-    public get errors(): Error[] {
+    public get errors(): any[] {
         if (!this.events) return []
         return filter(this.events, event => !!event.error).map(event => event.error)
     }

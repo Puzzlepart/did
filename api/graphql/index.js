@@ -22,7 +22,7 @@ const Query = `
   }
 
   type EventError {
-    message: String!
+    code: String
   }
   
   type BaseResult {
