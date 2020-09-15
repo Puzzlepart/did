@@ -31,6 +31,9 @@ const typeDef = gql`
     }
 
     extend type Query {
+        """
+        Get all API tokens for the subscription
+        """
         customers(sortBy: String): [Customer!]!
     }  
 

@@ -15,16 +15,24 @@ const typeDef = gql`
         """
         Get all API tokens for the subscription
         """
-        getApiTokens: [ApiToken!]!
+        apiTokens: [ApiToken!]!
     }  
 
     extend type Mutation {
+        """
+        Add API token with the specified name
+        """
         addApiToken(name: String!): String
+
+
+        """
+        Delete the API token with the specified name
+        """
         deleteApiToken(name: String): BaseResult
     }
 `
 
-async function getApiTokens(_obj, variables, ctx) {
+async function apiTokens(_obj, variables, ctx) {
     const tokens = await ctx.services.subscription.getApiTokens(ctx.user.tenantId)
     return tokens
 }
@@ -48,7 +56,7 @@ async function deleteApiToken(_obj, variables, ctx) {
 
 module.exports = {
     resolvers: {
-        Query: { getApiTokens },
+        Query: { apiTokens },
         Mutation: { addApiToken, deleteApiToken }
     },
     typeDef
