@@ -67,16 +67,25 @@ const getSchema = () => {
   })
 }
 
+const schema = getSchema()
+
 module.exports = new ApolloServer({
-  schema: getSchema(),
+  schema,
   rootValue: global,
   playground: false,
-  context: async ({ req }) => ({
-    services: {
-      graph: req.user.id && new GraphService(req),
+  context: async ({ req }) => {
+    let services = {
       storage: new StorageService(req.user.subscription),
       subscription: SubscriptionService,
-    },
-    user: req.user,
-  }),
+    }
+    if(req.user.id) services.graph = new GraphService(req)
+    return ({
+      services,
+      user: req.user,
+    })
+  },
+  engine: {    
+    reportSchema: true,
+    variant: 'current'
+  },
 })
