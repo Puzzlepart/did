@@ -46,6 +46,9 @@ const Query = gql`
   GraphQL object type, and its fields work exactly the same way.
   """
   type Query {
+    """
+    Query cannot be initialized empty
+    """
     _: String
   }
 
@@ -56,6 +59,9 @@ const Query = gql`
   However, unlike queries, mutation fields run in series, one after the other.
   """
   type Mutation {
+    """
+    Mutation cannot be initialized empty
+    """
     _: String
   }
 `
