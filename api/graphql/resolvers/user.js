@@ -20,7 +20,10 @@ const typeDef = gql`
         userLanguage: String
         sub: Subscription
     }
-    
+
+    """
+    Input object for User used in Mutation addOrUpdateUser
+    """
     input UserInput  {
         id: String!
         fullName: String
@@ -28,12 +31,22 @@ const typeDef = gql`
         userLanguage: String
     }
     
-    extend type Query {    
+    extend type Query {           
+        """
+        Get all users
+        """
         users: [User!]!
+
+        """
+        Get the currently logged in user
+        """
         currentUser: User!
     }  
 
     extend type Mutation {
+        """
+        Add or update user
+        """
         addOrUpdateUser(user: UserInput!, update: Boolean): BaseResult!
     }
 `

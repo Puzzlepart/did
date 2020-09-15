@@ -24,7 +24,6 @@ const typeDef = gql`
         """
         addApiToken(name: String!): String
 
-
         """
         Delete the API token with the specified name
         """
