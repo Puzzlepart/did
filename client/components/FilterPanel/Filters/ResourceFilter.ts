@@ -17,9 +17,9 @@ export class ResourceFilter extends BaseFilter {
    */
   public initialize(entries: any[]): IFilter {
     const resources = _.unique(
-      entries.map((e) => value(e, this.fieldName, null))
+      entries.map(e => value(e, this.fieldName, null))
     ).sort()
-    const items = resources.map((resource) => ({
+    const items = resources.map(resource => ({
       key: resource,
       value: resource,
     }))

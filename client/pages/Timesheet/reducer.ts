@@ -55,12 +55,12 @@ export default (
         }
         if (data) {
           newState.periods = data.timesheet.map(
-            (period) => new TimesheetPeriod(period)
+            period => new TimesheetPeriod(period)
           )
           newState.selectedPeriod =
             find(
               newState.periods,
-              (p) => p.id === value(state, 'selectedPeriod.id', null)
+              p => p.id === value(state, 'selectedPeriod.id', null)
             ) || first(newState.periods)
         }
       }
@@ -104,7 +104,7 @@ export default (
       {
         const { eventId, project } = action.payload
         newState.selectedPeriod.setManualMatch(eventId, project)
-        newState.periods = newState.periods.map((p) =>
+        newState.periods = newState.periods.map(p =>
           p.id === newState.selectedPeriod.id ? newState.selectedPeriod : p
         )
       }
@@ -113,7 +113,7 @@ export default (
     case 'CLEAR_MANUAL_MATCH':
       {
         newState.selectedPeriod.clearManualMatch(action.payload)
-        newState.periods = newState.periods.map((p) =>
+        newState.periods = newState.periods.map(p =>
           p.id === newState.selectedPeriod.id ? newState.selectedPeriod : p
         )
       }
@@ -122,7 +122,7 @@ export default (
     case 'IGNORE_EVENT':
       {
         newState.selectedPeriod.ignoreEvent(action.payload)
-        newState.periods = newState.periods.map((p) =>
+        newState.periods = newState.periods.map(p =>
           p.id === newState.selectedPeriod.id ? newState.selectedPeriod : p
         )
       }
@@ -131,7 +131,7 @@ export default (
     case 'CLEAR_IGNORES':
       {
         newState.selectedPeriod.clearIgnoredEvents()
-        newState.periods = newState.periods.map((p) =>
+        newState.periods = newState.periods.map(p =>
           p.id === newState.selectedPeriod.id ? newState.selectedPeriod : p
         )
       }

@@ -98,10 +98,10 @@ export class TimesheetPeriod {
     if (this._period) {
       return [...this._period.events]
         .filter(
-          (event) =>
+          event =>
             !event.isIgnored && this.ignoredEvents.indexOf(event.id) === -1
         )
-        .map((event) => this._checkManualMatch(event))
+        .map(event => this._checkManualMatch(event))
     }
     return []
   }
@@ -111,9 +111,7 @@ export class TimesheetPeriod {
    */
   public get errors(): any[] {
     if (!this.events) return []
-    return filter(this.events, (event) => !!event.error).map(
-      (event) => event.error
-    )
+    return filter(this.events, event => !!event.error).map(event => event.error)
   }
 
   /**
@@ -127,7 +125,7 @@ export class TimesheetPeriod {
    * Get matched duration for the events in the period
    */
   public get matchedDuration(): number {
-    return filter(this.events, (event) => !!event.project).reduce(
+    return filter(this.events, event => !!event.project).reduce(
       (sum, event) => (sum += event.duration),
       0
     )
@@ -200,8 +198,8 @@ export class TimesheetPeriod {
    * Get matched events with properties id, projectId and manualMatch
    */
   private get matchedEvents() {
-    const events = filter([...this.events], (event) => !!event.project).map(
-      (event) => ({
+    const events = filter([...this.events], event => !!event.project).map(
+      event => ({
         id: event.id,
         projectId: event.project.id,
         manualMatch: event.manualMatch,
@@ -235,7 +233,7 @@ export class TimesheetPeriod {
   public get path() {
     return this.id
       .split('_')
-      .filter((p) => p)
+      .filter(p => p)
       .join('/')
   }
 }

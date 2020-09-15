@@ -18,13 +18,13 @@ export function generateListGroups(
 ): [IGroup[], any[]] {
   const itemsSort = { props: [props.fieldName], opts: { reverse: false } }
   items = arraySort([...items], itemsSort.props, itemsSort.opts)
-  const groupNames = items.map((g) =>
+  const groupNames = items.map(g =>
     value<string>(g, props.fieldName, props.emptyGroupName)
   )
   const uniqueGroupNames =
     props.groupNames || unique(groupNames).sort((a, b) => (a > b ? 1 : -1))
   const groups = uniqueGroupNames.map((name, idx) => {
-    const itemsInGroup = items.filter((item) => {
+    const itemsInGroup = items.filter(item => {
       const itemValue = value<string>(
         item,
         props.fieldName,
@@ -37,7 +37,7 @@ export function generateListGroups(
       key: idx.toString(),
       name: `${name} ${total}`,
       startIndex: groupNames
-        .map((g) => g.toLowerCase())
+        .map(g => g.toLowerCase())
         .indexOf(name.toLowerCase(), 0),
       count: itemsInGroup.length,
       isShowingAll: itemsInGroup.length === items.length,

@@ -17,9 +17,9 @@ export class ProjectFilter extends BaseFilter {
    */
   public initialize(entries: any[]): IFilter {
     const projects = _.unique(
-      entries.map((e) => value(e, this.fieldName, null))
+      entries.map(e => value(e, this.fieldName, null))
     ).sort()
-    const items = projects.map((resource) => ({
+    const items = projects.map(resource => ({
       key: resource,
       value: resource,
     }))

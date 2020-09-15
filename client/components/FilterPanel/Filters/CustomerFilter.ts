@@ -17,9 +17,9 @@ export class CustomerFilter extends BaseFilter {
    */
   public initialize(entries: any[]): IFilter {
     const customers = _.unique(
-      entries.map((e) => value(e, this.fieldName, null))
+      entries.map(e => value(e, this.fieldName, null))
     ).sort()
-    const items = customers.map((resource) => ({
+    const items = customers.map(resource => ({
       key: resource,
       value: resource,
     }))

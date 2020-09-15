@@ -17,9 +17,9 @@ export class WeekFilter extends BaseFilter {
    */
   public initialize(entries: any[]): IFilter {
     const weeks = _.unique(
-      entries.map((e) => value(e, this.fieldName, null))
+      entries.map(e => value(e, this.fieldName, null))
     ).sort((a, b) => a - b)
-    const items = weeks.map((week) => ({
+    const items = weeks.map(week => ({
       key: week,
       value: week,
     }))

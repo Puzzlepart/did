@@ -15,7 +15,7 @@ export function getSummary(timeentries: any[], t: TFunction) {
       value: getSum(
         filter(
           timeentries,
-          (entry) => entry.monthNumber === new Date().getMonth() + 1
+          entry => entry.monthNumber === new Date().getMonth() + 1
         ),
         'duration'
       ),
@@ -25,7 +25,7 @@ export function getSummary(timeentries: any[], t: TFunction) {
       value: getSum(
         filter(
           timeentries,
-          (entry) => entry.monthNumber === new Date().getMonth()
+          entry => entry.monthNumber === new Date().getMonth()
         ),
         'duration'
       ),
@@ -33,7 +33,7 @@ export function getSummary(timeentries: any[], t: TFunction) {
     {
       label: t('hoursCurrentYear'),
       value: getSum(
-        filter(timeentries, (entry) => entry.year === new Date().getFullYear()),
+        filter(timeentries, entry => entry.year === new Date().getFullYear()),
         'duration'
       ),
     },

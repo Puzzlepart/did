@@ -16,14 +16,14 @@ export default (state: IListState, action: Action): IListState => {
   switch (action.type) {
     case 'PROPS_UPDATED':
       newState.origItems = action.payload.items
-      newState.items = newState.origItems.filter((i) =>
+      newState.items = newState.origItems.filter(i =>
         searchObject(i, newState.searchTerm)
       )
       break
 
     case 'search':
       newState.searchTerm = action.payload
-      newState.items = newState.origItems.filter((i) =>
+      newState.items = newState.origItems.filter(i =>
         searchObject(i, newState.searchTerm)
       )
       break

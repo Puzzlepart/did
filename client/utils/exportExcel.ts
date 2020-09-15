@@ -38,8 +38,8 @@ export async function exportExcel(
 
   if (!options.columns) {
     options.columns = Object.keys(items[0])
-      .filter((f) => (options.skip || []).indexOf(f) === -1)
-      .map((fieldName) => ({
+      .filter(f => (options.skip || []).indexOf(f) === -1)
+      .map(fieldName => ({
         key: fieldName,
         fieldName,
         name: humanize(fieldName),
@@ -51,9 +51,9 @@ export async function exportExcel(
     {
       name: 'Sheet 1',
       data: [
-        options.columns.map((c) => c.name),
-        ...items.map((item) =>
-          options.columns.map((col) => {
+        options.columns.map(c => c.name),
+        ...items.map(item =>
+          options.columns.map(col => {
             const fieldValue = value<string>(item, col.fieldName)
             switch (value<ExcelColumnType>(col, 'data.excelColFormat', null)) {
               case 'date':
@@ -70,7 +70,7 @@ export async function exportExcel(
     },
   ]
   const workBook = xlsx.utils.book_new()
-  sheets.forEach((s) => {
+  sheets.forEach(s => {
     const sheet = xlsx.utils.aoa_to_sheet(s.data)
     xlsx.utils.book_append_sheet(workBook, sheet, s.name)
   })
