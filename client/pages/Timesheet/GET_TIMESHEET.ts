@@ -64,7 +64,7 @@ query ($startDateTime: String!, $endDateTime: String!, $dateFormat: String!, $lo
         icon
       }
       error {
-        message
+        code
       }
     }
     confirmed
