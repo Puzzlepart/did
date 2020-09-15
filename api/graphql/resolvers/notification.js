@@ -28,9 +28,6 @@ const typeDef = gql`
   }  
 `
 
-/**
- * Get notifications
- */
 async function notifications(_obj, variables, ctx) {
   if (!ctx.user.id) return { success: false, error: null }
 
