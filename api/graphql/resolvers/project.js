@@ -20,6 +20,9 @@ const typeDef = gql`
     labels: [Label]
   }
 
+  """
+  Input object for Project used in Mutation createOrUpdateProject
+  """
   input ProjectInput {
     key: String
     name: String
@@ -33,10 +36,16 @@ const typeDef = gql`
   }
   
   extend type Query {
+    """
+    Get projects
+    """
     projects(customerKey: String, sortBy: String): [Project!]!
   }  
 
   extend type Mutation {
+    """
+    Create or update project
+    """
     createOrUpdateProject(project: ProjectInput!, update: Boolean): BaseResult
   }
 `

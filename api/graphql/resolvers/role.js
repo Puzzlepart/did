@@ -9,7 +9,10 @@ const typeDef = gql`
         name: String!
         permissions: [String]!
     }
-      
+
+    """
+    Input object for Role used in Mutation addOrUpdateRole
+    """
     input RoleInput  {
         id: String
         name: String!
@@ -17,10 +20,16 @@ const typeDef = gql`
     }
 
     extend type Query {
+        """
+        Get roles
+        """
         roles: [Role!]!
     }  
 
     extend type Mutation {
+        """
+        Add or update role
+        """
         addOrUpdateRole(role: RoleInput!, update: Boolean): BaseResult
     }
 `

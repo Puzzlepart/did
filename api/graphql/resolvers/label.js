@@ -11,7 +11,10 @@ const typeDef = gql`
         color: String!
         icon: String
     }
-    
+
+    """
+    Input object for Label used in Mutation addOrUpdateLabel
+    """
     input LabelInput  {
         name: String!
         description: String
@@ -20,11 +23,21 @@ const typeDef = gql`
     }
 
     extend type Query {
+        """
+        Get labels
+        """
         labels: [Label!]!
     }  
 
     extend type Mutation {	
+        """
+        Add or update label
+        """
         addOrUpdateLabel(label: LabelInput!, update: Boolean): BaseResult    
+         
+        """
+        Delete label
+        """
         deleteLabel(name: String!): BaseResult
     }
 `

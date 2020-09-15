@@ -13,11 +13,17 @@ const typeDef = gql`
     moreLink: String
   }
 
+  """
+  Input object for Notification template used in Query notifications
+  """
   input NotificationTemplates {
     unconfirmedPeriods: String!
   }
   
   extend type Query {
+    """
+    Get notifications
+    """
     notifications(templates: NotificationTemplates!): [Notification!]!
   }  
 `

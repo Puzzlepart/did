@@ -38,7 +38,14 @@ const typeDef = gql`
     }  
 
     extend type Mutation {	
+        """
+        Create or update customer
+        """
         createOrUpdateCustomer(customer: CustomerInput!, update: Boolean): BaseResult   
+        
+        """
+        Delete customer
+        """
         deleteCustomer(key: String!): BaseResult
     }
 `

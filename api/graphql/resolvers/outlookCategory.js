@@ -12,16 +12,25 @@ const typeDef = gql`
         color: String
     }
 
+    """
+    Input object for OutlookCategory used in Mutation createOutlookCategory
+    """
     input OutlookCategoryInput {	
         displayName: String
         color: String
     }
 
     extend type Query {
+        """
+        Get Outlook categories
+        """
         outlookCategories: [OutlookCategory!]!
     }  
 
     extend type Mutation {
+        """
+        Create Outlook category
+        """
         createOutlookCategory(category: OutlookCategoryInput!): BaseResult!
     }
 `

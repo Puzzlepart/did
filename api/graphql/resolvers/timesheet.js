@@ -46,12 +46,27 @@ const typeDef = gql`
         confirmedDuration: Float!
     }
 
+    """
+    Input object for Event used in Mutation confirmPeriod
+    """
     input EventInput {
         id: String!
         projectId: String!
         manualMatch: Boolean
     }
 
+    """
+    Input object for TimeEntry used in Mutation confirmPeriod
+    """
+    input TimeEntryInput {
+        id: String!
+        projectId: String!
+        manualMatch: Boolean
+    }
+
+    """
+    Input object for TimesheetPeriod used in Mutation unconfirmPeriod
+    """
     input TimesheetPeriodInput {
         id: String!
         startDateTime: String!
@@ -60,20 +75,25 @@ const typeDef = gql`
     }
     
     extend type Query {
+        """
+        Get timesheet for startDateTime - endDateTime
+        """
         timesheet(startDateTime: String!, endDateTime: String!, dateFormat: String!, locale: String!): [TimesheetPeriod]!
     } 
 
     extend type Mutation {
+        """
+        Adds matched time entries for the specified period and an entry for the confirmed period
+        """
         confirmPeriod(entries: [TimeEntryInput!], period: TimesheetPeriodInput!): BaseResult!
+
+        """
+        Deletes time entries for the specified period and the entry for the confirmed period
+        """
         unconfirmPeriod(period: TimesheetPeriodInput!): BaseResult!
     }
 `
 
-/**
- * Query: Get timesheet
- * 
- * Returns an array of periods (week_month_year)
- */
 async function timesheet(_obj, variables, ctx) {
     if (!ctx.services.graph) return { success: false, error: null }
 
@@ -140,11 +160,6 @@ async function timesheet(_obj, variables, ctx) {
     return periods
 }
 
-/**
- * Mutation: Confirm period
- * 
- * Adds matched time entries for the specified period and an entry for the confirmed period
- */
 async function confirmPeriod(_obj, variables, ctx) {
     try {
         let hours = 0;
@@ -175,11 +190,6 @@ async function confirmPeriod(_obj, variables, ctx) {
     }
 }
 
-/**
- * Mutation: Unconfirm period
- * 
- * Deletes time entries for the specified period and the entry for the confirmed period
- */
 async function unconfirmPeriod(_obj, variables, ctx) {
     try {
         await ctx.services.storage.deleteUserTimeEntries(variables.period.id, ctx.user.id)
