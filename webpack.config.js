@@ -5,8 +5,7 @@ const pkg = require('./package.json')
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const RemovePlugin = require('remove-files-webpack-plugin')
-const LiveReloadPlugin = require('webpack-livereload-plugin');
+const LiveReloadPlugin = require('webpack-livereload-plugin')
 
 
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production'
@@ -71,20 +70,13 @@ let config = {
             template: path.resolve(__dirname, 'views/index_template.hbs'),
             filename: path.resolve(__dirname, 'views/index.hbs'),
             inject: true,
-        }),
-        new RemovePlugin({
-            before: {
-                include: [
-                    './public/js'
-                ]
-            }
         })
     ],
 }
 
 switch (mode) {
     case 'development': {
-        config.stats = 'errors-only'
+        config.stats = 'minimal'
         config.watch = true
         config.watchOptions = { aggregateTimeout: 200 }
         config.plugins.push(new LiveReloadPlugin())

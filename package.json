@@ -99,7 +99,6 @@
     "react-router-dom": "5.1.2",
     "recharts": "1.8.5",
     "regenerator-runtime": "0.13.5",
-    "remove-files-webpack-plugin": "1.4.2",
     "sass-loader": "8.0.2",
     "scriptjs": "2.5.9",
     "simple-oauth2": "2.4.0",
