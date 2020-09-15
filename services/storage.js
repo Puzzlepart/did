@@ -234,6 +234,8 @@ class StorageService {
             ['PartitionKey', filterValues.resourceId, q.string, q.equal],
             ['WeekNumber', filterValues.weekNumber, q.int, q.equal],
             ['MonthNumber', filterValues.monthNumber, q.int, q.equal],
+            ['MonthNumber', filterValues.minMonthNumber, q.int, q.greaterThanOrEqual],
+            ['MonthNumber', filterValues.maxMonthNumber, q.int, q.lessThanOrEqual],            
             ['Year', filterValues.year, q.int, q.equal],
             ['StartDateTime', this.tableUtil.convertDate(filterValues.startDateTime), q.date, q.greaterThan],
             ['EndDateTime', this.tableUtil.convertDate(filterValues.endDateTime), q.date, q.lessThan],
@@ -304,10 +306,11 @@ class StorageService {
     async deleteUserTimeEntries(periodId, resourceId) {
         const { string } = this.tableUtil.azEntGen()
         const timeEntries = await this.getTimeEntries({ resourceId, periodId })
+        if (timeEntries.length === 0) return;
         const batch = this.tableUtil.createAzBatch()
-        timeEntries.forEach(e => batch.deleteEntity({
+        timeEntries.forEach(entry => batch.deleteEntity({
             PartitionKey: string(resourceId),
-            RowKey: string(e.id)
+            RowKey: string(entry.id)
         }))
         await this.tableUtil.executeBatch('TimeEntries', batch)
     }
