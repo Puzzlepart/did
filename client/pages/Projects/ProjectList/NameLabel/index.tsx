@@ -1,5 +1,5 @@
+import { ProjectLink } from 'components/ProjectLink'
 import React from 'react'
-import { Link } from 'react-router-dom'
 import styles from './NameLabel.module.scss'
 import { INameLabelProps } from './types'
 
@@ -7,7 +7,7 @@ export const NameLabel = ({ project,  renderLink }: INameLabelProps) => {
     return (
         <div className={styles.root}>
             {renderLink
-                ? <Link to={`/projects/search/${project.id}`}>{project.name}</Link>
+                ? <ProjectLink project={project} />
                 : (
                     <div>
                         <span>{project.name}</span>

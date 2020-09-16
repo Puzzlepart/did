@@ -1,12 +1,12 @@
+import { CustomerLink } from 'components/CustomerLink'
 import List from 'components/List'
 import { TFunction } from 'i18next'
 import { ICustomer } from 'interfaces/ICustomer'
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
-import  React,{useEffect,useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
 import { generateColumn as col } from 'utils/generateColumn'
 import { ICustomerListProps } from './ICustomerListProps'
 
@@ -32,7 +32,7 @@ export const columns = (t: TFunction): IColumn[] => ([
         'name',
         t('nameFieldLabel'),
         { maxWidth: 300 },
-        (customer: ICustomer) => <Link to={`/customers/${customer.key}`}>{customer.name}</Link>
+        (customer: ICustomer) => <CustomerLink customer={customer} />
     ),
 ])
 
