@@ -23,7 +23,7 @@ Folder/File | Description
 
 * Check out the dev branch
 * Run `pnpm install`
-* Make a copy of `.env.sample` and rename it `.env`
+* Make a copy of `sample.env` and rename it `.env`
 * Set neccessary parameters in your new `.env` file (see `Set up .env` below)
 * Install the [Azure App Service extension for vscode](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice)
 * Create an Azure app registration, or ask one of the [maintainers](#maintainers) for access to an existing one
@@ -37,7 +37,7 @@ graphdoc -e http://localhost:9001/graphql -o ./public/graphdoc -x "Authorization
 ```
 
 ## Set up .env ##
-You've copied `.env.sample` into `.env`.
+You've copied `sample.env` into `.env`.
 
 Now you need to set the following properties/parameters:
 
