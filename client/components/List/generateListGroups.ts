@@ -16,7 +16,7 @@ export function generateListGroups(items: any[], props: IListGroups): [IGroup[],
   const itemsSort = { props: [props.fieldName], opts: { reverse: false } }
   items = arraySort([...items], itemsSort.props, itemsSort.opts)
   const groupNames = items.map(g => value<string>(g, props.fieldName, props.emptyGroupName).toString())
-  const uniqueGroupNames = props.groupNames || unique(groupNames).sort((a, b) => a > b ? 1 : -1)
+  const uniqueGroupNames = props.groupNames || unique(groupNames).sort((a, b) => (a > b ? 1 : -1))
   const groups = uniqueGroupNames.map((name, idx) => {
     const itemsInGroup = items.filter(item => {
       const itemValue = `${value<string>(item, props.fieldName, props.emptyGroupName)}`

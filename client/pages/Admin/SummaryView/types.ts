@@ -6,26 +6,26 @@ import { TFunction } from 'i18next'
 
 /**
  * Get view types
- * 
+ *
  * @param {TFunction} t Translate function
  */
-export const getViewTypes = (t: TFunction): ISummaryViewType[] => ([
-    {
-        key: 'resource',
-        fieldName: 'resourceName',
-        name: t('employeeLabel'),
-    },
-    {
-        key: 'project',
-        fieldName: 'project.name',
-        name: t('project'),
-    },
-    {
-        key: 'customer',
-        fieldName: 'customer.name',
-        name: t('customer'),
-    }
-])
+export const getViewTypes = (t: TFunction): ISummaryViewType[] => [
+  {
+    key: 'resource',
+    fieldName: 'resourceName',
+    name: t('employeeLabel'),
+  },
+  {
+    key: 'project',
+    fieldName: 'project.name',
+    name: t('project'),
+  },
+  {
+    key: 'customer',
+    fieldName: 'customer.name',
+    name: t('customer'),
+  },
+]
 
 export interface ISummaryViewProps {
   defaultYear: number
