@@ -1,17 +1,19 @@
 import { useQuery } from '@apollo/react-hooks'
 import { BaseFilter, CustomerFilter, FilterPanel, IFilter, ProjectFilter, ResourceFilter, UserMessage } from 'components'
 import List from 'components/List'
+import { IListGroups } from 'components/List/types'
 import { value as value } from 'helpers'
 import { Spinner } from 'office-ui-fabric-react/lib/Spinner'
 import * as React from 'react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import DateUtils from 'utils/date'
 import { exportExcel } from 'utils/exportExcel'
 import columns from './columns'
 import styles from './Reports.module.scss'
 import TIME_ENTRIES, { ITimeEntriesVariables } from './TIME_ENTRIES'
-import { IReportsQuery } from './types'
+import { IReportsQuery, getGroupByOptions, getQueries } from './types'
+import { pick } from 'underscore'
+import { IContextualMenuItem } from 'office-ui-fabric-react'
 
 /**
  * @category Reports
@@ -25,6 +27,10 @@ export const Reports = () => {
     ]
     const [filterPanelOpen, setFilterPanelOpen] = useState<boolean>(undefined)
     const [query, setQuery] = useState<IReportsQuery>()
+    const [groupBy, setGroupBy] = useState<IListGroups>({
+        fieldName: '.',
+        emptyGroupName: t('all'),
+    })
     const [subset, setSubset] = useState<any[]>(undefined)
     const { loading, error, data } = useQuery<any, ITimeEntriesVariables>(
         TIME_ENTRIES,
@@ -62,47 +68,45 @@ export const Reports = () => {
         setSubset(_entries)
     }
 
-    const queries: IReportsQuery[] = [
-        {
-            key: 'PREVIOUS_MONTH',
-            name: t('previousMonth'),
-            iconName: 'CalendarDay',
-            variables: { monthNumber: DateUtils.getMonthIndex() - 1, year: DateUtils.getYear() }
-        },
-        {
-
-            key: 'CURRENT_MONTH',
-            name: t('currentMonth'),
-            iconName: 'Calendar',
-            variables: { monthNumber: DateUtils.getMonthIndex(), year: DateUtils.getYear() }
-        },
-        {
-            key: 'CURRENT_YEAR',
-            name: t('currentYear'),
-            iconName: 'CalendarReply',
-            variables: { year: DateUtils.getYear() }
-        }
-    ]
+    const queries = getQueries(t)
+    const groupByOptions = getGroupByOptions(t)
 
     return (
         <div className={styles.root}>
             <List
                 items={subset || timeentries}
+                groups={{
+                    ...groupBy,
+                    totalFunc: items => `(${items.reduce((sum, item) => sum + item.duration, 0)} timer)`,
+                }}
                 columns={columns(t)}
                 enableShimmer={loading}
                 commandBar={{
                     items: [
                         {
                             key: 'SELECT_QUERY',
-                            text: t('selectReportLabel', { ns: 'reports' }),
-                            iconProps: { iconName: 'ReportDocument' },
+                            text: query?.text || t('selectReportLabel', { ns: 'reports' }),
+                            iconProps: { iconName: query?.iconName || 'ReportDocument' },
                             subMenuProps: {
                                 items: queries.map(query => ({
-                                    key: query.key,
-                                    text: query.name,
+                                    ...pick(query, 'key', 'text'),
                                     iconProps: { iconName: query.iconName },
                                     onClick: () => setQuery(query),
                                 })),
+                            }
+                        },
+                        {
+                            key: 'GROUP_BY',
+                            text: t('groupBy'),
+                            iconProps: { iconName: 'GroupList' },
+                            disabled: !query || loading,
+                            subMenuProps: {
+                                items: groupByOptions.map(opt => ({
+                                    ...pick(opt, 'key', 'text'),
+                                    canCheck: true,
+                                    checked: groupBy.fieldName === opt.props.fieldName,
+                                    onClick: () => setGroupBy(opt.props),
+                                } as IContextualMenuItem)),
                             }
                         },
                         {
