@@ -52,11 +52,7 @@ const typeDef = gql`
 
 async function createOrUpdateProject(_obj, variables, ctx) {
   try {
-    await ctx.services.storage.createOrUpdateProject(
-      variables.project,
-      ctx.user.id,
-      variables.update
-    )
+    await ctx.services.storage.createOrUpdateProject(variables.project, ctx.user.id, variables.update)
     return { success: true, error: null }
   } catch (error) {
     return {

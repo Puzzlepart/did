@@ -10,11 +10,7 @@ const { typeDef: Label } = require('./resolvers/label')
 const { typeDef: Role } = require('./resolvers/role')
 const { typeDef: Notification } = require('./resolvers/notification')
 const { typeDef: ApiToken } = require('./resolvers/apiToken')
-const {
-  StorageService,
-  GraphService,
-  SubscriptionService,
-} = require('../../services')
+const { StorageService, GraphService, SubscriptionService } = require('../../services')
 const { filter } = require('underscore')
 
 const Query = gql`
@@ -102,11 +98,8 @@ const schema = getSchema()
 const getContext = async ({ req }) => {
   let subscription = req.user && req.user.subscription
   if (!!req.token) {
-    subscription = await SubscriptionService.findSubscriptionWithToken(
-      req.token
-    )
-    if (!subscription)
-      throw new Error("You don't have access to this resource.")
+    subscription = await SubscriptionService.findSubscriptionWithToken(req.token)
+    if (!subscription) throw new Error("You don't have access to this resource.")
   } else if (!req.user) throw new Error()
   let services = {
     storage: new StorageService(subscription),

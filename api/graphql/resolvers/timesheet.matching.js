@@ -18,17 +18,12 @@ class EventMatching {
    */
   findProjectSuggestion(customer, projectKey) {
     try {
-      const customerProjects = this.projects.filter(
-        (p) => p.customerKey === customer.key
-      )
-      const projectKeys = customerProjects.map((p) => p.id.split(' ')[1])
+      const customerProjects = this.projects.filter(p => p.customerKey === customer.key)
+      const projectKeys = customerProjects.map(p => p.id.split(' ')[1])
       const sm = findBestMatch(projectKey, projectKeys)
-      const target =
-        sm.bestMatch && sm.bestMatch.rating > 0 ? sm.bestMatch.target : null
+      const target = sm.bestMatch && sm.bestMatch.rating > 0 ? sm.bestMatch.target : null
       if (!target) return null
-      const suggestion = customerProjects.filter(
-        (p) => p.id.split(' ')[1] === target.toUpperCase()
-      )[0]
+      const suggestion = customerProjects.filter(p => p.id.split(' ')[1] === target.toUpperCase())[0]
       return suggestion
     } catch (error) {
       return null
@@ -43,8 +38,7 @@ class EventMatching {
    */
   searchString(input, soft) {
     let regex = /[\(\{\[]((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<key>[A-Za-z0-9]{2,}?))[\)\]\}]/gim
-    if (soft)
-      regex = /((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<key>[A-Za-z0-9]{2,}))/gim
+    if (soft) regex = /((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<key>[A-Za-z0-9]{2,}))/gim
     let matches
     let match
     while ((match = regex.exec(input)) != null) {
@@ -75,7 +69,7 @@ class EventMatching {
    * @param {*} categories
    */
   findLabels(categories) {
-    return filter(this.labels, (lbl) => contains(categories, lbl.name))
+    return filter(this.labels, lbl => contains(categories, lbl.name))
   }
 
   /**
@@ -94,32 +88,22 @@ class EventMatching {
     if (matches) {
       for (let i = 0; i < matches.length; i++) {
         let match = matches[i]
-        event.customer = find(
-          this.customers,
-          (c) => match.customerKey === c.key
-        )
+        event.customer = find(this.customers, c => match.customerKey === c.key)
         if (event.customer) {
-          event.project = find(this.projects, (p) => p.id === match.id)
+          event.project = find(this.projects, p => p.id === match.id)
           projectKey = match.key
         }
         if (event.project) break
       }
     } else {
-      event.project = find(this.projects, (p) => {
-        return !!find(this.searchString(content, true), (m) => m.id === p.id)
+      event.project = find(this.projects, p => {
+        return !!find(this.searchString(content, true), m => m.id === p.id)
       })
-      if (event.project)
-        event.customer = find(
-          this.customers,
-          (c) => c.key === event.project.customerKey
-        )
+      if (event.project) event.customer = find(this.customers, c => c.key === event.project.customerKey)
     }
 
     if (event.customer && !event.project)
-      event.suggestedProject = this.findProjectSuggestion(
-        event.customer,
-        projectKey
-      )
+      event.suggestedProject = this.findProjectSuggestion(event.customer, projectKey)
 
     event.labels = this.findLabels(event.categories)
 
@@ -141,7 +125,7 @@ class EventMatching {
    * @param {*} events
    */
   match(events) {
-    return events.map((event) => this.matchEvent(event))
+    return events.map(event => this.matchEvent(event))
   }
 }
 

@@ -104,7 +104,7 @@ describe('Event matching', () => {
       testEvent.categories.push('overtid-40')
       const event = first(eventMatching.match([testEvent]))
       assert.strictEqual(
-        any(event.labels, (lbl) => lbl.name === 'overtid-40'),
+        any(event.labels, lbl => lbl.name === 'overtid-40'),
         true
       )
     })
@@ -113,7 +113,7 @@ describe('Event matching', () => {
       testEvent.categories.push('OVERTID-40')
       const event = first(eventMatching.match([testEvent]))
       assert.strictEqual(
-        any(event.labels, (lbl) => lbl.name === 'OVERTID-40'),
+        any(event.labels, lbl => lbl.name === 'OVERTID-40'),
         false
       )
     })

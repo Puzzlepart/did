@@ -52,16 +52,13 @@ const typeDef = gql`
 `
 
 async function users(_obj, _variables, ctx) {
-  let [users, roles] = await Promise.all([
-    ctx.services.storage.getUsers(),
-    ctx.services.storage.getRoles(),
-  ])
+  let [users, roles] = await Promise.all([ctx.services.storage.getUsers(), ctx.services.storage.getRoles()])
   users = filter(
-    users.map((user) => ({
+    users.map(user => ({
       ...user,
-      role: find(roles, (role) => role.name === user.role),
+      role: find(roles, role => role.name === user.role),
     })),
-    (user) => !!user.role
+    user => !!user.role
   )
   return users
 }
@@ -77,7 +74,7 @@ async function currentUser(_obj, _variables, ctx) {
       ...user,
       email: ctx.user.profile.email,
       sub,
-      role: find(roles, (role) => role.name === user.role),
+      role: find(roles, role => role.name === user.role),
     }
   } catch (error) {}
 }

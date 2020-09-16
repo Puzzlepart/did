@@ -1,11 +1,5 @@
 const AzTableUtilities = require('../utils/table')
-const {
-  getDurationHours,
-  getWeek,
-  getMonthIndex,
-  getYear,
-  toArray,
-} = require('../utils')
+const { getDurationHours, getWeek, getMonthIndex, getYear, toArray } = require('../utils')
 const arraySort = require('array-sort')
 const { omit, pick } = require('underscore')
 const { isBlank } = require('underscore.string')
@@ -14,9 +8,7 @@ const uuidv4 = require('uuid').v4
 
 class StorageService {
   constructor(subscription) {
-    this.tableUtil = new AzTableUtilities(
-      createTableService(subscription.connectionString)
-    )
+    this.tableUtil = new AzTableUtilities(createTableService(subscription.connectionString))
   }
 
   /**
@@ -43,8 +35,7 @@ class StorageService {
       ...omit(label, 'name'),
       createdBy,
     })
-    if (update)
-      result = await this.tableUtil.updateEntity('Labels', entity, true)
+    if (update) result = await this.tableUtil.updateEntity('Labels', entity, true)
     else result = await this.tableUtil.addAzEntity('Labels', entity)
     return result
   }
@@ -90,16 +81,12 @@ class StorageService {
    */
   async createOrUpdateCustomer(customer, createdBy, update) {
     const { string } = this.tableUtil.azEntGen()
-    const entity = this.tableUtil.convertToAzEntity(
-      customer.key.toUpperCase(),
-      {
-        ...omit(customer, 'key'),
-        createdBy,
-      }
-    )
+    const entity = this.tableUtil.convertToAzEntity(customer.key.toUpperCase(), {
+      ...omit(customer, 'key'),
+      createdBy,
+    })
     let result
-    if (update)
-      result = await this.tableUtil.updateEntity('Customers', entity, true)
+    if (update) result = await this.tableUtil.updateEntity('Customers', entity, true)
     else result = await this.tableUtil.addAzEntity('Customers', entity)
     return result
   }
@@ -140,11 +127,7 @@ class StorageService {
         PartitionKey: 'customerKey',
       }
     }
-    let { entries } = await this.tableUtil.queryAzTable(
-      'Projects',
-      query,
-      columnMap
-    )
+    let { entries } = await this.tableUtil.queryAzTable('Projects', query, columnMap)
     if (options.sortBy) entries = arraySort(entries, options.sortBy)
     return entries
   }
@@ -169,8 +152,7 @@ class StorageService {
       project.customerKey
     )
     let result
-    if (update)
-      result = await this.tableUtil.updateEntity('Projects', entity, true)
+    if (update) result = await this.tableUtil.updateEntity('Projects', entity, true)
     else result = await this.tableUtil.addAzEntity('Projects', entity)
     return result
   }
@@ -193,11 +175,7 @@ class StorageService {
    */
   async getUser(userId) {
     try {
-      const entry = await this.tableUtil.retrieveAzEntity(
-        'Users',
-        'Default',
-        userId
-      )
+      const entry = await this.tableUtil.retrieveAzEntity('Users', 'Default', userId)
       return this.tableUtil.parseAzEntity(entry, { RowKey: 'id' })
     } catch (error) {
       return null
@@ -214,8 +192,7 @@ class StorageService {
     const { string } = this.tableUtil.azEntGen()
     const entity = this.tableUtil.convertToAzEntity(user.id, omit(user, 'id'))
     let result
-    if (update)
-      result = await this.tableUtil.updateEntity('Users', entity, true)
+    if (update) result = await this.tableUtil.updateEntity('Users', entity, true)
     else result = await this.tableUtil.addAzEntity('Users', entity)
     return result
   }
@@ -237,31 +214,17 @@ class StorageService {
       ['MonthNumber', filterValues.minMonthNumber, q.int, q.greaterThanOrEqual],
       ['MonthNumber', filterValues.maxMonthNumber, q.int, q.lessThanOrEqual],
       ['Year', filterValues.year, q.int, q.equal],
-      [
-        'StartDateTime',
-        this.tableUtil.convertDate(filterValues.startDateTime),
-        q.date,
-        q.greaterThan,
-      ],
-      [
-        'EndDateTime',
-        this.tableUtil.convertDate(filterValues.endDateTime),
-        q.date,
-        q.lessThan,
-      ],
+      ['StartDateTime', this.tableUtil.convertDate(filterValues.startDateTime), q.date, q.greaterThan],
+      ['EndDateTime', this.tableUtil.convertDate(filterValues.endDateTime), q.date, q.lessThan],
     ]
     const query = this.tableUtil.createAzQuery(1000, undefined, filter)
     let result = await this.tableUtil.queryAzTableAll('TimeEntries', query, {
       PartitionKey: 'resourceId',
       RowKey: 'id',
     })
-    result = result
-      .slice()
-      .sort(({ startDateTime: a }, { startDateTime: b }) => {
-        return options.sortAsc
-          ? new Date(a) - new Date(b)
-          : new Date(b) - new Date(a)
-      })
+    result = result.slice().sort(({ startDateTime: a }, { startDateTime: b }) => {
+      return options.sortAsc ? new Date(a) - new Date(b) : new Date(b) - new Date(a)
+    })
     return result
   }
 
@@ -300,7 +263,7 @@ class StorageService {
       return entity
     })
     const batch = this.tableUtil.createAzBatch()
-    entities.forEach((entity) => batch.insertEntity(entity))
+    entities.forEach(entity => batch.insertEntity(entity))
     await this.tableUtil.executeBatch('TimeEntries', batch)
     return totalDuration
   }
@@ -316,7 +279,7 @@ class StorageService {
     const timeEntries = await this.getTimeEntries({ resourceId, periodId })
     if (timeEntries.length === 0) return
     const batch = this.tableUtil.createAzBatch()
-    timeEntries.forEach((entry) =>
+    timeEntries.forEach(entry =>
       batch.deleteEntity({
         PartitionKey: string(resourceId),
         RowKey: string(entry.id),
@@ -336,14 +299,10 @@ class StorageService {
         ['Year', year, q.int, q.equal],
       ]
       const query = this.tableUtil.createAzQuery(1000, undefined, filter)
-      let result = await this.tableUtil.queryAzTableAll(
-        'ConfirmedPeriods',
-        query,
-        {
-          PartitionKey: 'resourceId',
-          RowKey: 'periodId',
-        }
-      )
+      let result = await this.tableUtil.queryAzTableAll('ConfirmedPeriods', query, {
+        PartitionKey: 'resourceId',
+        RowKey: 'periodId',
+      })
       return result
     } catch (error) {
       return null
@@ -358,11 +317,7 @@ class StorageService {
    */
   async getConfirmedPeriod(resourceId, periodId) {
     try {
-      const entry = await this.tableUtil.retrieveAzEntity(
-        'ConfirmedPeriods',
-        resourceId,
-        periodId
-      )
+      const entry = await this.tableUtil.retrieveAzEntity('ConfirmedPeriods', resourceId, periodId)
       return this.tableUtil.parseAzEntity(entry)
     } catch (error) {
       return null
@@ -418,7 +373,7 @@ class StorageService {
       let { entries } = await this.tableUtil.queryAzTable('Roles', query, {
         RowKey: 'name',
       })
-      entries = entries.map((entry) => ({
+      entries = entries.map(entry => ({
         ...entry,
         permissions: toArray(entry.permissions, '|'),
       }))
@@ -440,8 +395,7 @@ class StorageService {
       permissions: role.permissions.join('|'),
     })
     let result
-    if (update)
-      result = await this.tableUtil.updateEntity('Roles', entity, true)
+    if (update) result = await this.tableUtil.updateEntity('Roles', entity, true)
     else result = await this.tableUtil.addAzEntity('Roles', entity)
     return result
   }

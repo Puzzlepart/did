@@ -19,7 +19,7 @@ router.post('/callback', (req, res, next) => {
 })
 
 router.get('/signout', (req, res) => {
-  req.session.destroy((_err) => {
+  req.session.destroy(_err => {
     req.logout()
     res.redirect('/')
   })

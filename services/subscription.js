@@ -4,9 +4,7 @@ const { createTableService } = require('azure-storage')
 
 class SubscriptionService {
   constructor() {
-    this.tableService = createTableService(
-      process.env.AZURE_STORAGE_CONNECTION_STRING
-    )
+    this.tableService = createTableService(process.env.AZURE_STORAGE_CONNECTION_STRING)
     this.tableUtil = new AzTableUtilities(this.tableService)
   }
   /**
@@ -18,13 +16,8 @@ class SubscriptionService {
    */
   async getSubscription(tenantId) {
     try {
-      const query = this.tableUtil
-        .createAzQuery(1)
-        .where('RowKey eq ?', tenantId)
-      var { entries } = await this.tableUtil.queryAzTable(
-        'Subscriptions',
-        query
-      )
+      const query = this.tableUtil.createAzQuery(1).where('RowKey eq ?', tenantId)
+      var { entries } = await this.tableUtil.queryAzTable('Subscriptions', query)
       return this.tableUtil.parseAzEntity(first(entries))
     } catch (error) {
       return null
@@ -95,9 +88,7 @@ class SubscriptionService {
    */
   async getApiTokens(tenantId) {
     try {
-      const query = this.tableUtil
-        .createAzQuery(100)
-        .where('PartitionKey eq ?', tenantId)
+      const query = this.tableUtil.createAzQuery(100).where('PartitionKey eq ?', tenantId)
       const result = await this.tableUtil.queryAzTable('ApiTokens', query)
       return this.tableUtil.parseAzEntities(result, { RowKey: 'name' }).entries
     } catch (error) {

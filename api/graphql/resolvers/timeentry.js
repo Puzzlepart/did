@@ -48,12 +48,10 @@ async function timeentries(_obj, variables, ctx) {
     ctx.services.storage.getCustomers(),
     ctx.services.storage.getTimeEntries(variables),
   ])
-  let entries = timeentries.map((entry) => ({
+  let entries = timeentries.map(entry => ({
     ...entry,
-    project: entry.projectId && find(projects, (p) => p.id === entry.projectId),
-    customer:
-      entry.projectId &&
-      find(customers, (c) => c.key === first(entry.projectId.split(' '))),
+    project: entry.projectId && find(projects, p => p.id === entry.projectId),
+    customer: entry.projectId && find(customers, c => c.key === first(entry.projectId.split(' '))),
   }))
   return entries
 }

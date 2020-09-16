@@ -43,20 +43,13 @@ async function addApiToken(_obj, variables, ctx) {
     },
     process.env.API_TOKEN_SECRET
   )
-  const entry = await ctx.services.subscription.addApiToken(
-    variables.name,
-    ctx.user.tenantId,
-    token
-  )
+  const entry = await ctx.services.subscription.addApiToken(variables.name, ctx.user.tenantId, token)
   return entry ? token : null
 }
 
 async function deleteApiToken(_obj, variables, ctx) {
   try {
-    await ctx.services.subscription.deleteApiToken(
-      variables.name,
-      ctx.user.tenantId
-    )
+    await ctx.services.subscription.deleteApiToken(variables.name, ctx.user.tenantId)
     return { success: true, error: null }
   } catch (error) {
     return {

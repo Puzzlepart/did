@@ -49,11 +49,7 @@ async function labels(_obj, _variables, ctx) {
 
 async function addOrUpdateLabel(_obj, variables, ctx) {
   try {
-    await ctx.services.storage.addOrUpdateLabel(
-      variables.label,
-      ctx.user.id,
-      variables.update
-    )
+    await ctx.services.storage.addOrUpdateLabel(variables.label, ctx.user.id, variables.update)
     return { success: true, error: null }
   } catch (error) {
     return {

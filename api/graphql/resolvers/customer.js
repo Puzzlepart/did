@@ -41,10 +41,7 @@ const typeDef = gql`
     """
     Create or update customer
     """
-    createOrUpdateCustomer(
-      customer: CustomerInput!
-      update: Boolean
-    ): BaseResult
+    createOrUpdateCustomer(customer: CustomerInput!, update: Boolean): BaseResult
 
     """
     Delete customer
@@ -59,11 +56,7 @@ async function customers(_obj, variables, ctx) {
 
 async function createOrUpdateCustomer(_obj, variables, ctx) {
   try {
-    await ctx.services.storage.createOrUpdateCustomer(
-      variables.customer,
-      ctx.user.id,
-      variables.update
-    )
+    await ctx.services.storage.createOrUpdateCustomer(variables.customer, ctx.user.id, variables.update)
     return { success: true, error: null }
   } catch (error) {
     return {

@@ -17,11 +17,7 @@ class App {
   constructor() {
     this._ = express()
     this._.use(require('./middleware/helmet'))
-    this._.use(
-      favicon(
-        path.join(__dirname, pkg.config.public, 'images/favicon/favicon.ico')
-      )
-    )
+    this._.use(favicon(path.join(__dirname, pkg.config.public, 'images/favicon/favicon.ico')))
     this._.use(logger('dev'))
     this._.use(express.json())
     this._.use(express.urlencoded({ extended: false }))
@@ -84,10 +80,7 @@ class App {
    * Setup routes
    */
   setupRoutes() {
-    this._.use(
-      '/graphdoc',
-      express.static(path.join(__dirname, 'public/graphdoc'))
-    )
+    this._.use('/graphdoc', express.static(path.join(__dirname, 'public/graphdoc')))
     this._.use('*', require('./routes/index'))
   }
 

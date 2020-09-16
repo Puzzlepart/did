@@ -44,7 +44,7 @@ class AzTableUtilities {
    * @param {*} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
    */
   parseAzEntities({ entries, continuationToken }, columnMap) {
-    entries = entries.map((ent) => this.parseAzEntity(ent, columnMap))
+    entries = entries.map(ent => this.parseAzEntity(ent, columnMap))
     return { entries, continuationToken }
   }
 
@@ -74,8 +74,7 @@ class AzTableUtilities {
       combine: az.TableQuery.combineFilters,
       equal: az.TableUtilities.QueryComparisons.EQUAL,
       greaterThan: az.TableUtilities.QueryComparisons.GREATER_THAN,
-      greaterThanOrEqual:
-        az.TableUtilities.QueryComparisons.GREATER_THAN_OR_EQUAL,
+      greaterThanOrEqual: az.TableUtilities.QueryComparisons.GREATER_THAN_OR_EQUAL,
       lessThan: az.TableUtilities.QueryComparisons.LESS_THAN,
       lessThanOrEqual: az.TableUtilities.QueryComparisons.LESS_THAN_OR_EQUAL,
       and: az.TableUtilities.TableOperators.AND,
@@ -143,18 +142,11 @@ class AzTableUtilities {
    */
   queryAzTable(table, query, columnMap, continuationToken) {
     return new Promise((resolve, reject) => {
-      this.tableService.queryEntities(
-        table,
-        query,
-        continuationToken,
-        (error, result) => {
-          if (!error) {
-            return columnMap
-              ? resolve(this.parseAzEntities(result, columnMap))
-              : resolve(result)
-          } else reject(error)
-        }
-      )
+      this.tableService.queryEntities(table, query, continuationToken, (error, result) => {
+        if (!error) {
+          return columnMap ? resolve(this.parseAzEntities(result, columnMap)) : resolve(result)
+        } else reject(error)
+      })
     })
   }
 
@@ -167,12 +159,7 @@ class AzTableUtilities {
    */
   async queryAzTableAll(table, query, columnMap) {
     let token = null
-    let { entries, continuationToken } = await this.queryAzTable(
-      table,
-      query,
-      columnMap,
-      token
-    )
+    let { entries, continuationToken } = await this.queryAzTable(table, query, columnMap, token)
     token = continuationToken
     while (token != null) {
       let result = await this.queryAzTable(table, query, columnMap, token)
@@ -193,7 +180,7 @@ class AzTableUtilities {
   convertToAzEntity(rowKey, values, partitionKey = 'Default', dateFields = []) {
     const { string, datetime, double, int, boolean } = this.azEntGen()
     const entity = Object.keys(values)
-      .filter((key) => !isBlank(values[key]))
+      .filter(key => !isBlank(values[key]))
       .reduce(
         (obj, key) => {
           let value
@@ -235,15 +222,10 @@ class AzTableUtilities {
    */
   retrieveAzEntity(table, partitionKey, rowKey) {
     return new Promise((resolve, reject) => {
-      this.tableService.retrieveEntity(
-        table,
-        partitionKey,
-        rowKey,
-        (error, result) => {
-          if (error) reject(error)
-          else return resolve(result)
-        }
-      )
+      this.tableService.retrieveEntity(table, partitionKey, rowKey, (error, result) => {
+        if (error) reject(error)
+        else return resolve(result)
+      })
     })
   }
 
@@ -272,25 +254,15 @@ class AzTableUtilities {
   updateEntity(table, entity, merge) {
     return new Promise((resolve, reject) => {
       if (merge) {
-        this.tableService.insertOrMergeEntity(
-          table,
-          entity,
-          undefined,
-          (error, result) => {
-            if (error) reject(error)
-            else resolve(result)
-          }
-        )
+        this.tableService.insertOrMergeEntity(table, entity, undefined, (error, result) => {
+          if (error) reject(error)
+          else resolve(result)
+        })
       } else {
-        this.tableService.insertOrReplaceEntity(
-          table,
-          entity,
-          undefined,
-          (error, result) => {
-            if (error) reject(error)
-            else resolve(result)
-          }
-        )
+        this.tableService.insertOrReplaceEntity(table, entity, undefined, (error, result) => {
+          if (error) reject(error)
+          else resolve(result)
+        })
       }
     })
   }
@@ -303,15 +275,10 @@ class AzTableUtilities {
    */
   deleteEntity(table, entity) {
     return new Promise((resolve, reject) => {
-      this.tableService.deleteEntity(
-        table,
-        entity,
-        undefined,
-        (error, result) => {
-          if (error) reject(error)
-          else resolve(result)
-        }
-      )
+      this.tableService.deleteEntity(table, entity, undefined, (error, result) => {
+        if (error) reject(error)
+        else resolve(result)
+      })
     })
   }
 

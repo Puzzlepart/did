@@ -7,8 +7,7 @@ const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const LiveReloadPlugin = require('webpack-livereload-plugin')
 
-const mode =
-  process.env.NODE_ENV === 'development' ? 'development' : 'production'
+const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production'
 
 let config = {
   mode,

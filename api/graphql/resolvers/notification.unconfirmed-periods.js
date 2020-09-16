@@ -1,13 +1,5 @@
 const utils = require('../../../utils')
-const {
-  unique,
-  difference,
-  filter,
-  find,
-  first,
-  last,
-  union,
-} = require('underscore')
+const { unique, difference, filter, find, first, last, union } = require('underscore')
 const format = require('string-format')
 const { getPeriods } = require('./timesheet.utils')
 
@@ -17,13 +9,7 @@ module.exports = async function ({ template, ctx }) {
   const unconfirmedPeriods = []
 
   for (let i = 5; i > 0; i--) {
-    periods.push(
-      ...getPeriods(
-        utils.startOfWeek(currentWeek - i),
-        utils.endOfWeek(currentWeek - i),
-        ctx.user.locale
-      )
-    )
+    periods.push(...getPeriods(utils.startOfWeek(currentWeek - i), utils.endOfWeek(currentWeek - i), ctx.user.locale))
   }
 
   var confirmedPeriods = await ctx.services.storage.getConfirmedPeriods({
@@ -31,13 +17,13 @@ module.exports = async function ({ template, ctx }) {
     year: utils.getYear(),
   })
 
-  periods.forEach((period) => {
-    if (!find(confirmedPeriods, (cp) => cp.periodId === period.id)) {
+  periods.forEach(period => {
+    if (!find(confirmedPeriods, cp => cp.periodId === period.id)) {
       unconfirmedPeriods.push(period)
     }
   })
 
-  return unconfirmedPeriods.map((period) => ({
+  return unconfirmedPeriods.map(period => ({
     id: `unconfirmed_period_${period.id}`,
     type: 0,
     severity: 2,

@@ -78,22 +78,14 @@ const typeDef = gql`
     """
     Get timesheet for startDateTime - endDateTime
     """
-    timesheet(
-      startDateTime: String!
-      endDateTime: String!
-      dateFormat: String!
-      locale: String!
-    ): [TimesheetPeriod]!
+    timesheet(startDateTime: String!, endDateTime: String!, dateFormat: String!, locale: String!): [TimesheetPeriod]!
   }
 
   extend type Mutation {
     """
     Adds matched time entries for the specified period and an entry for the confirmed period
     """
-    confirmPeriod(
-      entries: [TimeEntryInput!]
-      period: TimesheetPeriodInput!
-    ): BaseResult!
+    confirmPeriod(entries: [TimeEntryInput!], period: TimesheetPeriodInput!): BaseResult!
 
     """
     Deletes time entries for the specified period and the entry for the confirmed period
@@ -105,22 +97,14 @@ const typeDef = gql`
 async function timesheet(_obj, variables, ctx) {
   if (!ctx.services.graph) return { success: false, error: null }
 
-  log(
-    'Quering timesheet from %s to %s',
-    variables.startDateTime,
-    variables.endDateTime
-  )
+  log('Quering timesheet from %s to %s', variables.startDateTime, variables.endDateTime)
 
-  let periods = getPeriods(
-    variables.startDateTime,
-    variables.endDateTime,
-    variables.locale
-  )
+  let periods = getPeriods(variables.startDateTime, variables.endDateTime, variables.locale)
 
   log(
     'Found %s periods: %j',
     periods.length,
-    periods.map((p) => pick(p, 'id', 'startDateTime', 'endDateTime'))
+    periods.map(p => pick(p, 'id', 'startDateTime', 'endDateTime'))
   )
 
   let [projects, customers, timeentries, labels] = await Promise.all([
@@ -143,18 +127,15 @@ async function timesheet(_obj, variables, ctx) {
 
   for (let i = 0; i < periods.length; i++) {
     let period = periods[i]
-    let confirmed = await ctx.services.storage.getConfirmedPeriod(
-      ctx.user.id,
-      period.id
-    )
+    let confirmed = await ctx.services.storage.getConfirmedPeriod(ctx.user.id, period.id)
     if (confirmed) {
-      period.events = timeentries.map((entry) => {
+      period.events = timeentries.map(entry => {
         const customerKey = first(entry.projectId.split(' '))
         return {
           ...entry,
-          project: find(projects, (p) => p.id === entry.projectId),
-          customer: find(customers, (c) => c.key === customerKey),
-          labels: filter(labels, (lbl) => {
+          project: find(projects, p => p.id === entry.projectId),
+          customer: find(customers, c => c.key === customerKey),
+          labels: filter(labels, lbl => {
             const str = value(entry, 'labels', { default: '' })
             return str.indexOf(lbl.name) !== -1
           }),
@@ -164,21 +145,14 @@ async function timesheet(_obj, variables, ctx) {
       period.confirmed = true
       period.confirmedDuration = confirmed.hours
     } else {
-      period.events = await ctx.services.graph.getEvents(
-        period.startDateTime,
-        period.endDateTime
-      )
+      period.events = await ctx.services.graph.getEvents(period.startDateTime, period.endDateTime)
       period.events = eventMatching.match(period.events)
-      period.matchedEvents = period.events.filter((evt) => evt.project)
+      period.matchedEvents = period.events.filter(evt => evt.project)
       period.confirmedDuration = 0
     }
-    period.events = period.events.map((evt) => ({
+    period.events = period.events.map(evt => ({
       ...evt,
-      date: formatDate(
-        evt.startDateTime,
-        variables.dateFormat,
-        variables.locale
-      ),
+      date: formatDate(evt.startDateTime, variables.dateFormat, variables.locale),
     }))
   }
   return periods
@@ -189,20 +163,15 @@ async function confirmPeriod(_obj, variables, ctx) {
     let hours = 0
     if (variables.period.matchedEvents.length > 0) {
       const [events, labels] = await Promise.all([
-        ctx.services.graph.getEvents(
-          variables.period.startDateTime,
-          variables.period.endDateTime
-        ),
+        ctx.services.graph.getEvents(variables.period.startDateTime, variables.period.endDateTime),
         ctx.services.storage.getLabels(),
       ])
 
       let timeentries = variables.period.matchedEvents
-        .map((entry) => {
-          const event = find(events, (e) => e.id === entry.id)
+        .map(entry => {
+          const event = find(events, e => e.id === entry.id)
           if (!event) return
-          const _labels = filter(labels, (lbl) =>
-            contains(event.categories, lbl.name)
-          ).map((lbl) => lbl.name)
+          const _labels = filter(labels, lbl => contains(event.categories, lbl.name)).map(lbl => lbl.name)
           return {
             user: ctx.user,
             entry,
@@ -210,18 +179,11 @@ async function confirmPeriod(_obj, variables, ctx) {
             labels: _labels,
           }
         })
-        .filter((entry) => entry)
+        .filter(entry => entry)
 
-      hours = await ctx.services.storage.addTimeEntries(
-        variables.period.id,
-        timeentries
-      )
+      hours = await ctx.services.storage.addTimeEntries(variables.period.id, timeentries)
     }
-    await ctx.services.storage.addConfirmedPeriod(
-      variables.period.id,
-      ctx.user.id,
-      hours
-    )
+    await ctx.services.storage.addConfirmedPeriod(variables.period.id, ctx.user.id, hours)
     return { success: true, error: null }
   } catch (error) {
     return {
@@ -233,14 +195,8 @@ async function confirmPeriod(_obj, variables, ctx) {
 
 async function unconfirmPeriod(_obj, variables, ctx) {
   try {
-    await ctx.services.storage.deleteUserTimeEntries(
-      variables.period.id,
-      ctx.user.id
-    )
-    await ctx.services.storage.removeConfirmedPeriod(
-      variables.period.id,
-      ctx.user.id
-    )
+    await ctx.services.storage.deleteUserTimeEntries(variables.period.id, ctx.user.id)
+    await ctx.services.storage.removeConfirmedPeriod(variables.period.id, ctx.user.id)
     return { success: true, error: null }
   } catch (error) {
     return {

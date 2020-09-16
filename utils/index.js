@@ -8,9 +8,7 @@ module.exports = {
    * @param {*} endDateTime End time
    */
   getDurationMinutes: (startDateTime, endDateTime) => {
-    return moment
-      .duration(moment(endDateTime).diff(moment(startDateTime)))
-      .asMinutes()
+    return moment.duration(moment(endDateTime).diff(moment(startDateTime))).asMinutes()
   },
 
   /**
@@ -20,9 +18,7 @@ module.exports = {
    * @param {*} endDateTime End time
    */
   getDurationHours: (startDateTime, endDateTime) => {
-    return moment
-      .duration(moment(endDateTime).diff(moment(startDateTime)))
-      .asHours()
+    return moment.duration(moment(endDateTime).diff(moment(startDateTime))).asHours()
   },
 
   /**
@@ -30,7 +26,7 @@ module.exports = {
    *
    * @param {*} date Date
    */
-  getPeriod: (date) => {
+  getPeriod: date => {
     let d = moment(date)
     return [d.isoWeek(), d.month() + 1, d.year()].join('_')
   },
@@ -40,7 +36,7 @@ module.exports = {
    *
    * @param {*} date Date
    */
-  getWeek: (date) => {
+  getWeek: date => {
     return moment(date).isoWeek()
   },
 
@@ -49,7 +45,7 @@ module.exports = {
    *
    * @param {*} date Date
    */
-  getYear: (date) => {
+  getYear: date => {
     return moment(date).year()
   },
 
@@ -60,7 +56,7 @@ module.exports = {
    *
    * @param {*} date Date
    */
-  getMonthIndex: (date) => {
+  getMonthIndex: date => {
     return moment(date).month() + 1
   },
 
@@ -69,7 +65,7 @@ module.exports = {
    *
    * @param {*} date Date
    */
-  startOfMonth: (date) => {
+  startOfMonth: date => {
     let d = moment(date).startOf('month')
     return d.toISOString().replace('Z', '')
   },
@@ -79,7 +75,7 @@ module.exports = {
    *
    * @param {*} date Date
    */
-  endOfMonth: (date) => {
+  endOfMonth: date => {
     let d = moment(date).endOf('month')
     return d.toISOString().replace('Z', '')
   },
@@ -89,7 +85,7 @@ module.exports = {
    *
    * @param {*} week Week number
    */
-  startOfWeek: (week) => {
+  startOfWeek: week => {
     return moment().week(week).startOf('isoWeek')
   },
 
@@ -98,7 +94,7 @@ module.exports = {
    *
    * @param {*} week Week number
    */
-  endOfWeek: (week) => {
+  endOfWeek: week => {
     return moment().week(week).endOf('isoWeek')
   },
 
@@ -120,6 +116,6 @@ module.exports = {
    * @param {*} separator String separator
    */
   toArray: (str, separator) => {
-    return (str || '').split(separator).filter((p) => p)
+    return (str || '').split(separator).filter(p => p)
   },
 }
