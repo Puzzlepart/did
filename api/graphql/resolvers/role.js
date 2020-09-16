@@ -3,12 +3,14 @@ const { pick } = require('underscore')
 const typeDef = `   
     type Role  {
         name: String!
+        icon: String!
         permissions: [String]!
     }
       
     input RoleInput  {
         id: String
         name: String!
+        icon: String!
         permissions: [String]!
     }
 

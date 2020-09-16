@@ -8,20 +8,26 @@ const typeDef = `
     type User {
         id: String
         role: Role
-        fullName: String
+        displayName: String
         email: String
         userLanguage: String
         sub: Subscription
     }
+
+    type ADUser {
+        id: String
+        displayName: String
+    }
     
     input UserInput  {
         id: String!
-        fullName: String
+        displayName: String
         role: String
         userLanguage: String
     }
     
     extend type Query {    
+        adUsers: [ADUser!]!
         users: [User!]!
         currentUser: User!
     }  
@@ -30,6 +36,11 @@ const typeDef = `
         addOrUpdateUser(user: UserInput!, update: Boolean): BaseResult!
     }
 `
+
+async function adUsers(_obj, _variables, ctx) {
+    let users =  await ctx.services.graph.getUsers()
+    return users
+}
 
 async function users(_obj, _variables, ctx) {
     let [users, roles] = await Promise.all([
@@ -72,7 +83,7 @@ async function addOrUpdateUser(_obj, variables, ctx) {
 
 module.exports = {
     resolvers: {
-        Query: { users, currentUser },
+        Query: { adUsers, users, currentUser },
         Mutation: { addOrUpdateUser }
     },
     typeDef
