@@ -6,6 +6,7 @@ import { IModalProps } from 'office-ui-fabric-react/lib/Modal'
  */
 export interface IUserFormModalProps {
     title?: string;
+    users?: any[];
     user?: IUser;
     roles?: IRole[];
     modal?: IModalProps;

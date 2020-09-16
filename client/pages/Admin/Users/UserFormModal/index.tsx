@@ -1,10 +1,10 @@
 import { useMutation } from '@apollo/react-hooks'
+import { Autocomplete } from 'components'
 import { IUser } from 'interfaces'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
-import { Dropdown } from 'office-ui-fabric-react/lib/Dropdown'
+import { ChoiceGroup } from 'office-ui-fabric-react/lib/ChoiceGroup'
 import { Modal } from 'office-ui-fabric-react/lib/Modal'
-import { TextField } from 'office-ui-fabric-react/lib/TextField'
-import * as React from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { find, omit } from 'underscore'
 import validator from 'validator'
@@ -17,9 +17,9 @@ import styles from './UserFormModal.module.scss'
  */
 export const UserFormModal = (props: IUserFormModalProps) => {
     const { t } = useTranslation('common')
-    const [model, setModel] = React.useState<IUser>(props.user || {
+    const [model, setModel] = useState<IUser>(props.user || {
         id: '',
-        fullName: '',
+        displayName: '',
         role: find(props.roles, r => r.name === 'User'),
     })
     const [addOrUpdateUser] = useMutation<any, IAddOrUpdateUserVariables>(ADD_OR_UPDATE_USER)
@@ -41,7 +41,7 @@ export const UserFormModal = (props: IUserFormModalProps) => {
      * Checks if form is valid
      */
     const isFormValid = () => {
-        return !validator.isEmpty(model.id) && validator.isUUID(model.id) && !validator.isEmpty(model.fullName)
+        return !validator.isEmpty(model?.id) && validator.isUUID(model?.id) && !validator.isEmpty(model?.displayName)
     }
 
     return (
@@ -53,31 +53,29 @@ export const UserFormModal = (props: IUserFormModalProps) => {
                 {props.title}
             </div>
             <div className={styles.inputContainer} hidden={!!props.user}>
-                <TextField
-                    label='ID'
-                    placeholder='00000000-0000-0000-0000-000000000000'
-                    description={t('userIdDescription')}
-                    value={model.id}
-                    required={!props.user}
-                    onChange={(_, id) => setModel({ ...model, id })} />
-            </div>
-            <div className={styles.inputContainer} hidden={!!props.user}>
-                <TextField
-                    label={t('nameFieldLabel')}
-                    value={model.fullName}
-                    required={!props.user}
-                    onChange={(_, fullName) => setModel({ ...model, fullName })} />
+                <Autocomplete
+                    placeholder={t('searchPlaceholder')}
+                    items={props.users.map(u => ({
+                        key: u.id,
+                        displayValue: u.displayName,
+                        searchValue: u.displayName,
+                    }))}
+                    onSelected={item => setModel({
+                        ...model,
+                        id: item?.key as string,
+                        displayName: item?.displayValue,
+                    })}
+                    onClear={() => setModel({ ...model, id: '', displayName: '' })} />
             </div>
             <div className={styles.inputContainer}>
-                <Dropdown
-                    label={t('roleLabel')}
+                <ChoiceGroup
                     options={props.roles.map(role => ({
                         key: role.name,
                         text: role.name,
                         data: role,
+                        iconProps: { iconName: role.icon }
                     }))}
-                    defaultSelectedKey={model.role ? model.role.name : 'User'}
-                    onChange={(_, { data: role }) => setModel({ ...model, role })} />
+                    defaultSelectedKey={model.role ? model.role.name : 'User'} />
             </div>
             <PrimaryButton
                 className={styles.saveBtn}

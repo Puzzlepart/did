@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 export interface IUserInput {
     id: string;
-    fullName: string;
+    displayName: string;
     role: string;
 }
 
