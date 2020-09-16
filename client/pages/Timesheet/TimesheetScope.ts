@@ -27,10 +27,7 @@ export class TimesheetScope {
         const startIsValid = !isNaN(Date.parse(value))
         if (startIsValid) start = moment(value)
       } else {
-        start = moment()
-          .year(parseInt(value.year))
-          .week(parseInt(value.week))
-          .startOf('isoWeek')
+        start = moment().year(parseInt(value.year)).week(parseInt(value.week)).startOf('isoWeek')
       }
     }
     this._set(start)
@@ -83,9 +80,7 @@ export class TimesheetScope {
    * @param {number} index Index
    */
   public getDay(index: number): moment.Moment {
-    return this._startDateTime
-      .clone()
-      .add(index, 'days' as moment.DurationInputArg2)
+    return this._startDateTime.clone().add(index, 'days' as moment.DurationInputArg2)
   }
 
   public get isCurrentWeek(): boolean {

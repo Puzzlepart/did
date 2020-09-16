@@ -25,10 +25,7 @@ export type ExcelColumnType = 'date' | null
  *
  * @category Utility
  */
-export async function exportExcel(
-  items: any[],
-  options: IExcelExportOptions
-): Promise<void> {
+export async function exportExcel(items: any[], options: IExcelExportOptions): Promise<void> {
   await loadScripts([
     'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.5/xlsx.full.min.js',

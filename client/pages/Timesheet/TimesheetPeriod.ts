@@ -1,10 +1,5 @@
 /* eslint-disable prefer-const */
-import {
-  dateAdd,
-  IPnPClientStore,
-  ITypedHash,
-  PnPClientStorage,
-} from '@pnp/common'
+import { dateAdd, IPnPClientStore, ITypedHash, PnPClientStorage } from '@pnp/common'
 import { TFunction } from 'i18next'
 import { IProject } from 'interfaces/IProject'
 import { ITimeEntry } from 'interfaces/ITimeEntry'
@@ -54,10 +49,8 @@ export class TimesheetPeriod {
     this.confirmed = _period.confirmed
     this._uiMatchedEventsStorageKey = `did365_ui_matched_events_${this.id}`
     this._uiIgnoredEventsStorageKey = `did365_ui_ignored_events_${this.id}`
-    this.ignoredEvents =
-      this._localStorage.get(this._uiIgnoredEventsStorageKey) || []
-    this._manualMatches =
-      this._localStorage.get(this._uiMatchedEventsStorageKey) || {}
+    this.ignoredEvents = this._localStorage.get(this._uiIgnoredEventsStorageKey) || []
+    this._manualMatches = this._localStorage.get(this._uiMatchedEventsStorageKey) || {}
   }
 
   /**
@@ -97,10 +90,7 @@ export class TimesheetPeriod {
   public get events(): ITimeEntry[] {
     if (this._period) {
       return [...this._period.events]
-        .filter(
-          event =>
-            !event.isIgnored && this.ignoredEvents.indexOf(event.id) === -1
-        )
+        .filter(event => !event.isIgnored && this.ignoredEvents.indexOf(event.id) === -1)
         .map(event => this._checkManualMatch(event))
     }
     return []
@@ -125,10 +115,7 @@ export class TimesheetPeriod {
    * Get matched duration for the events in the period
    */
   public get matchedDuration(): number {
-    return filter(this.events, event => !!event.project).reduce(
-      (sum, event) => (sum += event.duration),
-      0
-    )
+    return filter(this.events, event => !!event.project).reduce((sum, event) => (sum += event.duration), 0)
   }
 
   /*
@@ -147,11 +134,7 @@ export class TimesheetPeriod {
   public setManualMatch(eventId: string, project: IProject) {
     let matches = this._manualMatches
     matches[eventId] = project
-    this._localStorage.put(
-      this._uiMatchedEventsStorageKey,
-      matches,
-      dateAdd(new Date(), 'month', 1)
-    )
+    this._localStorage.put(this._uiMatchedEventsStorageKey, matches, dateAdd(new Date(), 'month', 1))
   }
 
   /**
@@ -161,11 +144,7 @@ export class TimesheetPeriod {
    */
   public clearManualMatch(eventId: string) {
     this._manualMatches = omit(this._manualMatches, eventId)
-    this._localStorage.put(
-      this._uiMatchedEventsStorageKey,
-      this._manualMatches,
-      dateAdd(new Date(), 'month', 1)
-    )
+    this._localStorage.put(this._uiMatchedEventsStorageKey, this._manualMatches, dateAdd(new Date(), 'month', 1))
   }
 
   /**
@@ -175,11 +154,7 @@ export class TimesheetPeriod {
    */
   public ignoreEvent(eventId: string) {
     this.ignoredEvents = [...this.ignoredEvents, eventId]
-    this._localStorage.put(
-      this._uiIgnoredEventsStorageKey,
-      this.ignoredEvents,
-      dateAdd(new Date(), 'month', 1)
-    )
+    this._localStorage.put(this._uiIgnoredEventsStorageKey, this.ignoredEvents, dateAdd(new Date(), 'month', 1))
   }
 
   /**
@@ -187,24 +162,18 @@ export class TimesheetPeriod {
    */
   public clearIgnoredEvents() {
     this.ignoredEvents = []
-    this._localStorage.put(
-      this._uiIgnoredEventsStorageKey,
-      this.ignoredEvents,
-      dateAdd(new Date(), 'month', 1)
-    )
+    this._localStorage.put(this._uiIgnoredEventsStorageKey, this.ignoredEvents, dateAdd(new Date(), 'month', 1))
   }
 
   /**
    * Get matched events with properties id, projectId and manualMatch
    */
   private get matchedEvents() {
-    const events = filter([...this.events], event => !!event.project).map(
-      event => ({
-        id: event.id,
-        projectId: event.project.id,
-        manualMatch: event.manualMatch,
-      })
-    )
+    const events = filter([...this.events], event => !!event.project).map(event => ({
+      id: event.id,
+      projectId: event.project.id,
+      manualMatch: event.manualMatch,
+    }))
     return events
   }
 

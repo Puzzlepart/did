@@ -39,10 +39,7 @@ export type TimesheetAction =
  * @param {ITimesheetState} state State
  * @param {IAction} action Action
  */
-export default (
-  state: ITimesheetState,
-  action: TimesheetAction
-): ITimesheetState => {
+export default (state: ITimesheetState, action: TimesheetAction): ITimesheetState => {
   const t = value<TFunction>(action, 'payload.t')
   const newState = { ...state }
   switch (action.type) {
@@ -54,14 +51,9 @@ export default (
           description: t('loadingEventsDescription'),
         }
         if (data) {
-          newState.periods = data.timesheet.map(
-            period => new TimesheetPeriod(period)
-          )
+          newState.periods = data.timesheet.map(period => new TimesheetPeriod(period))
           newState.selectedPeriod =
-            find(
-              newState.periods,
-              p => p.id === value(state, 'selectedPeriod.id', null)
-            ) || first(newState.periods)
+            find(newState.periods, p => p.id === value(state, 'selectedPeriod.id', null)) || first(newState.periods)
         }
       }
       break
@@ -80,17 +72,13 @@ export default (
       }
       break
     case 'MOVE_SCOPE':
-      if (typeof action.payload === 'string')
-        newState.scope = new TimesheetScope(action.payload)
+      if (typeof action.payload === 'string') newState.scope = new TimesheetScope(action.payload)
       else newState.scope = state.scope.add(action.payload)
       break
 
     case 'CHANGE_PERIOD':
       {
-        newState.selectedPeriod = find(
-          newState.periods,
-          (p: TimesheetPeriod) => p.id === action.payload
-        )
+        newState.selectedPeriod = find(newState.periods, (p: TimesheetPeriod) => p.id === action.payload)
       }
       break
 

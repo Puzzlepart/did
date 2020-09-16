@@ -1,9 +1,7 @@
 import { searchObject } from 'utils'
 import { IListProps, IListState } from './types'
 
-type Action =
-  | { type: 'PROPS_UPDATED'; payload: IListProps }
-  | { type: 'search'; payload: string }
+type Action = { type: 'PROPS_UPDATED'; payload: IListProps } | { type: 'search'; payload: string }
 
 /**
  * Reducer for Timesheet
@@ -16,16 +14,12 @@ export default (state: IListState, action: Action): IListState => {
   switch (action.type) {
     case 'PROPS_UPDATED':
       newState.origItems = action.payload.items
-      newState.items = newState.origItems.filter(i =>
-        searchObject(i, newState.searchTerm)
-      )
+      newState.items = newState.origItems.filter(i => searchObject(i, newState.searchTerm))
       break
 
     case 'search':
       newState.searchTerm = action.payload
-      newState.items = newState.origItems.filter(i =>
-        searchObject(i, newState.searchTerm)
-      )
+      newState.items = newState.origItems.filter(i => searchObject(i, newState.searchTerm))
       break
     default:
       throw new Error()

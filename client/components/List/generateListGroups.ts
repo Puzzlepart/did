@@ -12,33 +12,21 @@ import { IListGroups } from './types'
  *
  * @category List
  */
-export function generateListGroups(
-  items: any[],
-  props: IListGroups
-): [IGroup[], any[]] {
+export function generateListGroups(items: any[], props: IListGroups): [IGroup[], any[]] {
   const itemsSort = { props: [props.fieldName], opts: { reverse: false } }
   items = arraySort([...items], itemsSort.props, itemsSort.opts)
-  const groupNames = items.map(g =>
-    value<string>(g, props.fieldName, props.emptyGroupName)
-  )
-  const uniqueGroupNames =
-    props.groupNames || unique(groupNames).sort((a, b) => (a > b ? 1 : -1))
+  const groupNames = items.map(g => value<string>(g, props.fieldName, props.emptyGroupName))
+  const uniqueGroupNames = props.groupNames || unique(groupNames).sort((a, b) => (a > b ? 1 : -1))
   const groups = uniqueGroupNames.map((name, idx) => {
     const itemsInGroup = items.filter(item => {
-      const itemValue = value<string>(
-        item,
-        props.fieldName,
-        props.emptyGroupName
-      )
+      const itemValue = value<string>(item, props.fieldName, props.emptyGroupName)
       return itemValue.toLowerCase() === name.toLowerCase()
     })
     const total = props.totalFunc ? props.totalFunc(itemsInGroup) : ''
     const group: IGroup = {
       key: idx.toString(),
       name: `${name} ${total}`,
-      startIndex: groupNames
-        .map(g => g.toLowerCase())
-        .indexOf(name.toLowerCase(), 0),
+      startIndex: groupNames.map(g => g.toLowerCase()).indexOf(name.toLowerCase(), 0),
       count: itemsInGroup.length,
       isShowingAll: itemsInGroup.length === items.length,
       isDropEnabled: false,

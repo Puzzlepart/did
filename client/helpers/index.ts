@@ -26,11 +26,7 @@ export function stringToArrayBuffer(str: string): ArrayBuffer {
  * @category Helper
  */
 // eslint-disable-next-line @typescript-eslint/no-inferrable-types
-export function currencyDisplay(
-  num: number,
-  currency = 'NOK',
-  minimumFractionDigits = 0
-): string {
+export function currencyDisplay(num: number, currency = 'NOK', minimumFractionDigits = 0): string {
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency,

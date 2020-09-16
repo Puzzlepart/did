@@ -36,12 +36,8 @@ export default new (class DateUtils {
    * @param {TFunction} t Translate function
    */
   getDurationDisplay(duration: number, t?: TFunction): string {
-    const hrsShortFormat = t
-      ? t('hoursShortFormat', { ns: 'common', defaultValue: undefined })
-      : '{0}h'
-    const minShortFormat = t
-      ? t('minutesShortFormat', { ns: 'common', defaultValue: undefined })
-      : '{0}min'
+    const hrsShortFormat = t ? t('hoursShortFormat', { ns: 'common', defaultValue: undefined }) : '{0}h'
+    const minShortFormat = t ? t('minutesShortFormat', { ns: 'common', defaultValue: undefined }) : '{0}min'
     const hrs = Math.floor(duration)
     const mins = parseInt(((duration % 1) * 60).toFixed(0))
     const hrsStr = format(hrsShortFormat, hrs)
@@ -89,22 +85,10 @@ export default new (class DateUtils {
    * @param {moment.Moment} end End
    * @param {string} dayFormat Date format
    */
-  getDays(
-    start: moment.Moment,
-    end: moment.Moment,
-    dayFormat: string
-  ): string[] {
+  getDays(start: moment.Moment, end: moment.Moment, dayFormat: string): string[] {
     const days = []
     for (let i = 0; i <= end.weekday() - start.weekday(); i++) {
-      days.push(
-        capitalize(
-          start
-            .clone()
-            .add(i, 'days')
-            .locale(this._momentLocale)
-            .format(dayFormat)
-        )
-      )
+      days.push(capitalize(start.clone().add(i, 'days').locale(this._momentLocale).format(dayFormat)))
     }
     return days
   }
@@ -146,9 +130,7 @@ export default new (class DateUtils {
    * Get month names
    */
   getMonthNames(): string[] {
-    return Array.apply(0, Array(12)).map((_: any, i: number) =>
-      capitalize(moment().month(i).format('MMMM'))
-    )
+    return Array.apply(0, Array(12)).map((_: any, i: number) => capitalize(moment().month(i).format('MMMM')))
   }
 
   /**

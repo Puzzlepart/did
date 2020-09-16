@@ -16,9 +16,7 @@ export class YearFilter extends BaseFilter {
    * @param {any[]} entries Entries
    */
   public initialize(entries: any[]): IFilter {
-    const years = _.unique(
-      entries.map(e => value(e, this.fieldName, null))
-    ).sort()
+    const years = _.unique(entries.map(e => value(e, this.fieldName, null))).sort()
     const items = years.map(year => ({
       key: year,
       value: year,

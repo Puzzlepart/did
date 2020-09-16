@@ -7,10 +7,7 @@ export type SummaryViewAction =
   | { type: 'CHANGE_RANGE'; payload: number }
   | { type: 'CHANGE_YEAR'; payload: number }
 
-export const reducer = (
-  state: ISummaryViewState,
-  action: SummaryViewAction
-): ISummaryViewState => {
+export const reducer = (state: ISummaryViewState, action: SummaryViewAction): ISummaryViewState => {
   const newState: ISummaryViewState = { ...state }
   switch (action.type) {
     case 'DATA_UPDATED':

@@ -11,11 +11,7 @@ export interface ITimeEntriesVariables {
  */
 export default gql`
   query($weekNumber: Int, $monthNumber: Int, $year: Int) {
-    timeentries(
-      weekNumber: $weekNumber
-      monthNumber: $monthNumber
-      year: $year
-    ) {
+    timeentries(weekNumber: $weekNumber, monthNumber: $monthNumber, year: $year) {
       title
       duration
       startDateTime

@@ -10,9 +10,5 @@ import { value } from 'helpers'
  * @category Utility
  */
 export function getSum(items: any[], property: string): number {
-  return reduce(
-    items,
-    (memo, item) => (memo += value<number>(item, property, 0)),
-    0
-  )
+  return reduce(items, (memo, item) => (memo += value<number>(item, property, 0)), 0)
 }

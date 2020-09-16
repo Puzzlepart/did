@@ -4,10 +4,7 @@ import * as React from 'react'
 /**
  * Used to show a temporarily message
  */
-export function useMessage(): [
-  IUserMessageProps,
-  (message: IUserMessageProps, duration?: number) => void
-] {
+export function useMessage(): [IUserMessageProps, (message: IUserMessageProps, duration?: number) => void] {
   const [state, setState] = React.useState<IUserMessageProps>(null)
 
   /**

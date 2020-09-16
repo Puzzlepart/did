@@ -2,10 +2,7 @@ import { TFunction } from 'i18next'
 import { GlobalHotKeysProps } from 'react-hotkeys'
 import { ITimesheetContext } from './TimesheetContext'
 
-export default (
-  context: ITimesheetContext,
-  t: TFunction
-): GlobalHotKeysProps => ({
+export default (context: ITimesheetContext, t: TFunction): GlobalHotKeysProps => ({
   keyMap: {
     GO_TO_CURRENT_WEEK: {
       name: t('goToCurrentWeek'),
