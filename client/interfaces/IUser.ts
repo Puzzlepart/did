@@ -6,7 +6,7 @@ import { IRole } from './IRole'
  */
 export interface IUser {
     id?: string;
-    fullName?: string;
+    displayName?: string;
     email?: string;
     role?: IRole;
     sub?: ISubscription;
