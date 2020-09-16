@@ -96,6 +96,9 @@
     "selectReportLabel": "Velg rapport"
   },
   "common": {
+    "groupBy": "Grupper etter",
+    "all": "Alle",
+    "none": "Ingen",
     "previousMonth": "Forrige måned",
     "currentMonth": "Denne måneden",
     "currentYear": "Dette året",

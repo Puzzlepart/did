@@ -96,6 +96,9 @@
     "selectReportLabel": "Select report"
   },
   "common": {
+    "groupBy": "Group by",
+    "all": "All",
+    "none": "None",
     "previousMonth": "Last month",
     "currentMonth": "This month",
     "currentYear": "This year",
