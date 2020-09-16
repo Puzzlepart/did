@@ -38,6 +38,32 @@ class GraphService {
   }
 
   /**
+   * Get users
+   */
+  async getUsers() {
+    try {
+      log('Querying Graph /users')
+      const { value } = await this.getClient()
+        .api('/users')
+        .select('id', 'displayName', 'userType', 'mail')
+        .top(999)
+        .get()
+      return value
+    } catch (error) {
+      console.log(error.message)
+      switch (error.statusCode) {
+        case 401: {
+          this.oauthToken = await TokenService.refreshAccessToken(this.req)
+          return this.getUsers()
+        }
+        default: {
+          throw new Error()
+        }
+      }
+    }
+  }
+
+  /**
    * Create Outlook category
    * 
    * @param category Category
