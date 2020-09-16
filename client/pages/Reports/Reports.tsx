@@ -14,6 +14,7 @@ import TIME_ENTRIES, { ITimeEntriesVariables } from './TIME_ENTRIES'
 import { IReportsQuery, getGroupByOptions, getQueries } from './types'
 import { pick } from 'underscore'
 import { IContextualMenuItem } from 'office-ui-fabric-react'
+import { format } from 'office-ui-fabric-react/lib/Utilities'
 
 /**
  * @category Reports
@@ -77,7 +78,10 @@ export const Reports = () => {
                 items={subset || timeentries}
                 groups={{
                     ...groupBy,
-                    totalFunc: items => `(${items.reduce((sum, item) => sum + item.duration, 0)} timer)`,
+                    totalFunc: items => {
+                        const totalDuration = (items.reduce((sum, item) => sum + item.duration, 0) as number).toFixed(0)
+                        return format(t('headerTotalDuration'), totalDuration)
+                    },
                 }}
                 columns={columns(t)}
                 enableShimmer={loading}
@@ -109,18 +113,6 @@ export const Reports = () => {
                                 } as IContextualMenuItem)),
                             }
                         },
-                        {
-                            key: 'PROGRESS_INDICATOR',
-                            onRender: () => {
-                                if (!loading) return null
-                                return (
-                                    <Spinner
-                                        className={styles.spinner}
-                                        labelPosition='right'
-                                        label={t('generatingReportLabel', { ns: 'reports' })} />
-                                )
-                            }
-                        }
                     ],
                     farItems: [
                         {
@@ -139,6 +131,12 @@ export const Reports = () => {
                         }
                     ]
                 }} />
+            {loading && (
+                <Spinner
+                    className={styles.spinner}
+                    labelPosition='right'
+                    label={t('generatingReportLabel', { ns: 'reports' })} />
+            )}
             <UserMessage
                 hidden={timeentries.length > 0 || loading || !query}
                 text={t('noEntriesText', { ns: 'reports' })} />

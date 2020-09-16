@@ -77,5 +77,13 @@ export const getGroupByOptions = (t: TFunction): IGroupByOption[] => ([
             fieldName: 'project.name',
             emptyGroupName: '',
         }
+    },
+    {
+        key: 'weekNumber',
+        text: t('weekNumberLabel'),
+        props: {
+            fieldName: 'weekNumber',
+            emptyGroupName: ' '
+        }
     }
 ])
