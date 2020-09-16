@@ -21,6 +21,8 @@ export const selectQuery = (selectedQuery: IReportsQuery, setQuery: React.Dispat
             items: queries.map(query => ({
                 ...pick(query, 'key', 'text'),
                 iconProps: { iconName: query.iconName },
+                canCheck: true,
+                checked: selectedQuery?.key === query.key,
                 onClick: () => setQuery(query),
             })),
         }
