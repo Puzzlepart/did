@@ -14,6 +14,7 @@ export const Navigation = () => {
     const { user } = React.useContext(AppContext)
     let className = styles.root
     if (isMobile) className += ` ${styles.mobile}`
+    console.log({ className, isMobile })
     return (
         <nav className={className}>
             <div className={styles.container}>

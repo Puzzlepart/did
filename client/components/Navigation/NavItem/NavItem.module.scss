@@ -1,5 +1,4 @@
 .root {
-  display: flex;
   align-items: center;
   height: 100%;
   margin: 0 8px;
@@ -28,13 +27,19 @@
 .root.mobile {
   .link {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 
     .navText {
-      display: none;
+      display: flex;
+      font-size: 0.5em;
+      margin: 4px 0 0 0;
     }
 
     .navIcon {
       display: flex;
+      justify-content: center;
       color: #f1f1f1;
       font-size: 18px;
       -webkit-font-smoothing: subpixel-antialiased;

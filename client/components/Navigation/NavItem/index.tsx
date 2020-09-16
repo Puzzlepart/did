@@ -13,7 +13,7 @@ export const NavItem = (props: INavItemProps) => {
     let className = styles.root
     if (isMobile) className += ` ${styles.mobile}`
     return (
-        <li className={className}>
+        <li className={className} style={{display: props.hidden ? 'none' : 'flex'}}>
             <NavLink
                 to={props.to}
                 className={styles.link}
