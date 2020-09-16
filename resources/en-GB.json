@@ -96,6 +96,10 @@
     "selectReportLabel": "Select report"
   },
   "common": {
+    "headerTotalDuration": " ({0}hrs)",
+    "groupBy": "Group by",
+    "all": "All",
+    "none": "None",
     "previousMonth": "Last month",
     "currentMonth": "This month",
     "currentYear": "This year",

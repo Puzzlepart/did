@@ -1,14 +1,16 @@
 import { useQuery } from '@apollo/react-hooks'
 import { BaseFilter, CustomerFilter, FilterPanel, IFilter, ProjectFilter, ResourceFilter, UserMessage } from 'components'
 import List from 'components/List'
+import { IListGroups } from 'components/List/types'
 import { value as value } from 'helpers'
 import { Spinner } from 'office-ui-fabric-react/lib/Spinner'
+import { format } from 'office-ui-fabric-react/lib/Utilities'
 import * as React from 'react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import DateUtils from 'utils/date'
 import { exportExcel } from 'utils/exportExcel'
 import columns from './columns'
+import { exportToExcel, openFilterPanel, selectGroupBy, selectQuery } from './commands'
 import styles from './Reports.module.scss'
 import TIME_ENTRIES, { ITimeEntriesVariables } from './TIME_ENTRIES'
 import { IReportsQuery } from './types'
@@ -25,8 +27,12 @@ export const Reports = () => {
     ]
     const [filterPanelOpen, setFilterPanelOpen] = useState<boolean>(undefined)
     const [query, setQuery] = useState<IReportsQuery>()
+    const [groupBy, setGroupBy] = useState<IListGroups>({
+        fieldName: '.',
+        emptyGroupName: t('all'),
+    })
     const [subset, setSubset] = useState<any[]>(undefined)
-    const { loading, error, data } = useQuery<any, ITimeEntriesVariables>(
+    const { loading, data } = useQuery<any, ITimeEntriesVariables>(
         TIME_ENTRIES,
         {
             skip: !query,
@@ -62,79 +68,35 @@ export const Reports = () => {
         setSubset(_entries)
     }
 
-    const queries: IReportsQuery[] = [
-        {
-            key: 'PREVIOUS_MONTH',
-            name: t('previousMonth'),
-            iconName: 'CalendarDay',
-            variables: { monthNumber: DateUtils.getMonthIndex() - 1, year: DateUtils.getYear() }
-        },
-        {
-
-            key: 'CURRENT_MONTH',
-            name: t('currentMonth'),
-            iconName: 'Calendar',
-            variables: { monthNumber: DateUtils.getMonthIndex(), year: DateUtils.getYear() }
-        },
-        {
-            key: 'CURRENT_YEAR',
-            name: t('currentYear'),
-            iconName: 'CalendarReply',
-            variables: { year: DateUtils.getYear() }
-        }
-    ]
-
     return (
         <div className={styles.root}>
             <List
                 items={subset || timeentries}
+                groups={{
+                    ...groupBy,
+                    totalFunc: items => {
+                        const totalDuration = (items.reduce((sum, item) => sum + item.duration, 0) as number).toFixed(0)
+                        return format(t('headerTotalDuration'), totalDuration)
+                    },
+                }}
                 columns={columns(t)}
                 enableShimmer={loading}
                 commandBar={{
                     items: [
-                        {
-                            key: 'SELECT_QUERY',
-                            text: t('selectReportLabel', { ns: 'reports' }),
-                            iconProps: { iconName: 'ReportDocument' },
-                            subMenuProps: {
-                                items: queries.map(query => ({
-                                    key: query.key,
-                                    text: query.name,
-                                    iconProps: { iconName: query.iconName },
-                                    onClick: () => setQuery(query),
-                                })),
-                            }
-                        },
-                        {
-                            key: 'PROGRESS_INDICATOR',
-                            onRender: () => {
-                                if (!loading) return null
-                                return (
-                                    <Spinner
-                                        className={styles.spinner}
-                                        labelPosition='right'
-                                        label={t('generatingReportLabel', { ns: 'reports' })} />
-                                )
-                            }
-                        }
-                    ],
+                        selectQuery(query, setQuery, t),
+                        (query && !loading) && selectGroupBy(groupBy, setGroupBy, t),
+                    ].filter(i => i),
                     farItems: [
-                        {
-                            key: 'EXPORT_TO_EXCEL',
-                            text: t('exportCurrentView'),
-                            onClick: onExportExcel,
-                            iconProps: { iconName: 'ExcelDocument' },
-                            disabled: loading || !!error || !query,
-                        },
-                        {
-                            key: 'OPEN_FILTER_PANEL',
-                            iconProps: { iconName: 'Filter' },
-                            iconOnly: true,
-                            onClick: () => setFilterPanelOpen(true),
-                            disabled: loading || !!error || !query,
-                        }
-                    ]
+                        (query && !loading) && exportToExcel(onExportExcel, t),
+                        (query && !loading)  && openFilterPanel(setFilterPanelOpen)
+                    ].filter(i => i)
                 }} />
+            {loading && (
+                <Spinner
+                    className={styles.spinner}
+                    labelPosition='right'
+                    label={t('generatingReportLabel', { ns: 'reports' })} />
+            )}
             <UserMessage
                 hidden={timeentries.length > 0 || loading || !query}
                 text={t('noEntriesText', { ns: 'reports' })} />
