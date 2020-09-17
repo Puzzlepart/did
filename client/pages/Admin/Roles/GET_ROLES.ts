@@ -11,4 +11,5 @@ export const GET_ROLES = gql`
             permissions
         }
     }
+  }
 `

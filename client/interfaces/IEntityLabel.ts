@@ -1,6 +1,6 @@
 export interface IEntityLabel {
-    name: string;
-    description: string;
-    color: string;
-    icon?: string;
+  name: string
+  description: string
+  color: string
+  icon?: string
 }

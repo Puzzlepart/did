@@ -1,4 +1,4 @@
-global.fetch = require("node-fetch")
+global.fetch = require('node-fetch')
 const TokenService = require('./tokens')
 const log = require('debug')('services/graph')
 const Event = require('./graph.event')
@@ -30,9 +30,9 @@ class GraphService {
    */
   getClient() {
     const client = require('@microsoft/microsoft-graph-client').Client.init({
-      authProvider: (done) => {
+      authProvider: done => {
         done(null, this.oauthToken.access_token)
-      }
+      },
     })
     return client
   }
@@ -65,15 +65,13 @@ class GraphService {
 
   /**
    * Create Outlook category
-   * 
+   *
    * @param category Category
    */
   async createOutlookCategory(category) {
     try {
       log('Querying Graph /me/outlook/masterCategories')
-      const res = await this.getClient()
-        .api('/me/outlook/masterCategories')
-        .post(JSON.stringify(category))
+      const res = await this.getClient().api('/me/outlook/masterCategories').post(JSON.stringify(category))
       return res
     } catch (error) {
       switch (error.statusCode) {
@@ -94,9 +92,7 @@ class GraphService {
   async getOutlookCategories() {
     try {
       log('Querying Graph /me/outlook/masterCategories')
-      const { value } = await this.getClient()
-        .api('/me/outlook/masterCategories')
-        .get()
+      const { value } = await this.getClient().api('/me/outlook/masterCategories').get()
       return value
     } catch (error) {
       switch (error.statusCode) {
@@ -119,15 +115,18 @@ class GraphService {
    */
   async getEvents(startDateTime, endDateTime) {
     try {
-      log('Querying Graph /me/calendar/calendarView: %s', JSON.stringify({
-        startDateTime,
-        endDateTime
-      }))
+      log(
+        'Querying Graph /me/calendar/calendarView: %s',
+        JSON.stringify({
+          startDateTime,
+          endDateTime,
+        })
+      )
       const { value } = await this.getClient()
         .api('/me/calendar/calendarView')
         .query({
           startDateTime,
-          endDateTime
+          endDateTime,
         })
         .select('id,subject,body,start,end,lastModifiedDateTime,categories,webLink,isOrganizer')
         .filter(`sensitivity ne 'private' and isallday eq false and iscancelled eq false`)
@@ -135,9 +134,7 @@ class GraphService {
         .top(500)
         .get()
       log('Retrieved %s events from /me/calendar/calendarView', value.length)
-      let events = value
-        .filter(evt => evt.subject)
-        .map(evt => new Event(evt))
+      let events = value.filter(evt => evt.subject).map(evt => new Event(evt))
       events = this.removeIgnoredEvents(events)
       events = events.filter(evt => evt.duration <= 24)
       return events

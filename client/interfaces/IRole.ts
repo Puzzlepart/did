@@ -1,5 +1,5 @@
 export interface IRole {
-    name?: string;
-    icon?: string;
-    permissions?: string[];
+  name?: string
+  icon?: string
+  permissions?: string[]
 }
