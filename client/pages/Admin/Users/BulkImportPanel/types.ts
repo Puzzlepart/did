@@ -3,7 +3,7 @@ import { IPanelProps } from 'office-ui-fabric-react/lib/Panel'
 /**
  * @category Admin
  */
-export interface IImportPanelProps extends IPanelProps {
+export interface IBulkImportPanelProps extends IPanelProps {
   /**
    * On import users
    */

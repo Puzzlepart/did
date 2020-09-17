@@ -57,11 +57,11 @@ export const UserForm = (props: IUserFormProps) => {
                             key: u.id,
                             displayValue: u.displayName,
                             searchValue: u.displayName,
+                            data: u,
                         }))}
                         onSelected={item => setModel({
                             ...model,
-                            id: item?.key as string,
-                            displayName: item?.displayValue,
+                            ...item.data,
                         })}
                         onClear={() => setModel({ ...model, id: '', displayName: '' })} />
                 </div>

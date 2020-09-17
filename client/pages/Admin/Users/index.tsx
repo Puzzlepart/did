@@ -10,7 +10,7 @@ import { filter, find, omit } from 'underscore'
 import BULK_ADD_USERS from './BULK_ADD_USERS'
 import { columns } from './columns'
 import { GET_DATA } from './GET_DATA'
-import { IImportPanelProps, ImportPanel } from './ImportPanel'
+import { IBulkImportPanelProps, BulkImportPanel } from './BulkImportPanel'
 import { IUserFormProps, UserForm } from './UserForm'
 import { IUsersContext, UsersContext } from './UsersContext'
 
@@ -20,7 +20,7 @@ import { IUsersContext, UsersContext } from './UsersContext'
 export const Users = () => {
     const { t } = useTranslation(['common', 'admin'])
     const [userForm, setUserForm] = useState<IUserFormProps>(null)
-    const [importPanel, setImportPanel] = useState<IImportPanelProps>(null)
+    const [bulkImportPanel, setBulkImportPanel] = useState<IBulkImportPanelProps>(null)
     const [progressProps, setProgressProps] = useState<ISpinnerProps>(null)
     const { data, refetch, loading, called } = useQuery(GET_DATA, { fetchPolicy: 'cache-and-network' })
     const [bulkAddUsers] = useMutation(BULK_ADD_USERS)
@@ -46,9 +46,9 @@ export const Users = () => {
      * 
      * @param {any[]} users Users to import
      */
-    const onImport = async (users: any[]) => {
-        setImportPanel(null)
-        setProgressProps({ label: format(t('importingUsersText'), users.length), labelPosition: 'right' })
+    const onBulkImport = async (users: any[]) => {
+        setBulkImportPanel(null)
+        setProgressProps({ label: format(t('bulkImportingUsersLabel'), users.length), labelPosition: 'right' })
         await bulkAddUsers({ variables: { users: users.map(u => omit(u, '__typename')) } })
         setProgressProps(null)
         refetch()
@@ -73,7 +73,7 @@ export const Users = () => {
                             key: 'BULK_IMPORT_USERS',
                             name: t('bulkImportUsersLabel', { ns: 'admin' }),
                             iconProps: { iconName: 'CloudImportExport' },
-                            onClick: () => setImportPanel({ headerText: t('bulkImportUsersLabel', { ns: 'admin' }) }),
+                            onClick: () => setBulkImportPanel({ isOpen: true }),
                         },
                         {
                             key: 'SPINNER',
@@ -90,11 +90,11 @@ export const Users = () => {
                         setUserForm(null)
                         !event && refetch()
                     }} />)}
-            {importPanel && (
-                <ImportPanel
-                    {...importPanel}
-                    onImport={onImport}
-                    onDismiss={() => setImportPanel(null)} />
+            {bulkImportPanel && (
+                <BulkImportPanel
+                    {...bulkImportPanel}
+                    onImport={onBulkImport}
+                    onDismiss={() => setBulkImportPanel(null)} />
             )}
         </UsersContext.Provider>
     )

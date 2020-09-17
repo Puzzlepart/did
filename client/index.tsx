@@ -13,17 +13,20 @@ import { IAppContext } from './AppContext'
 import { client, GET_CURRENT_USER } from './graphql'
 import './i18n'
 import './_global.scss'
+import { supportedLanguages } from '../resources'
 
 initializeIcons()
 
 client.query<{ currentUser: any }>({ query: GET_CURRENT_USER }).then(({ data }) => {
     const container = document.getElementById('app')
     const context: IAppContext = { user: data?.currentUser }
-    context.user.preferredLanguage = context.user.preferredLanguage || 'en-GB'
-    context.hasPermission = (permissionId: string) => contains(context.user.role?.permissions, permissionId)
+    let { preferredLanguage } = context.user
+    preferredLanguage = contains(supportedLanguages, preferredLanguage) ? preferredLanguage : 'en-GB'
+    context.user.preferredLanguage = preferredLanguage
+    context.hasPermission = (permissionId: string) => contains(context.user?.role?.permissions, permissionId)
 
-    DateUtils.setup(context.user.preferredLanguage)
-    i18n.changeLanguage(context.user.preferredLanguage)
+    DateUtils.setup(preferredLanguage)
+    i18n.changeLanguage(preferredLanguage)
 
     ReactDom.render((
         <ApolloProvider client={client}>

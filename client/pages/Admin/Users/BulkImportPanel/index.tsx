@@ -7,26 +7,26 @@ import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { pick } from 'underscore'
 import { UsersContext } from '../UsersContext'
-import styles from './ImportPanel.module.scss'
-import { IImportPanelProps } from './types'
+import styles from './BulkImportPanel.module.scss'
+import { IBulkImportPanelProps } from './types'
 
 /**
  * @category Admin
  */
-export const ImportPanel = (props: IImportPanelProps) => {
+export const BulkImportPanel = (props: IBulkImportPanelProps) => {
     const { adUsers } = useContext(UsersContext)
     const { t } = useTranslation('common')
     const [selectedUsers, setSelectedUsers] = useState([])
 
     return (
         <Panel
-            {...pick(props, 'onDismiss', 'headerText')}
+            {...pick(props, 'onDismiss', 'isOpen')}
+            headerText={t('bulkImportUsersLabel', { ns: 'admin' })}
             type={PanelType.medium}
-            className={styles.root}
-            isOpen={true}>
+            className={styles.root}>
             <div className={styles.container}>
                 <PrimaryButton
-                    text={format(t('importUsersLabel', { ns: 'admin' }), selectedUsers.length)}
+                    text={format(t('bulkImportUsersLabel', { ns: 'admin' }), selectedUsers.length)}
                     disabled={selectedUsers.length === 0}
                     onClick={() => props.onImport(selectedUsers)} />
                 <List
@@ -40,7 +40,7 @@ export const ImportPanel = (props: IImportPanelProps) => {
                         {
                             key: 'displayName',
                             fieldName: 'displayName',
-                            name: t('nameFieldLabel'),
+                            name: t('displayNameLabel'),
                             minWidth: 100,
                         }
                     ]} />

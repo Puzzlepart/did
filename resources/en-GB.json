@@ -87,8 +87,8 @@
     "tokenErrorText": "An error occurred generating your key. Please try again later.",
     "tokenDeletedText": "API key `{0}` was succesfully deleted.",
     "summaryLoadingText": "Loading time entries and creating summary...",
-    "importUsersLabel": "Import {0} users",
-    "importingUsersText": "Importing {0} users. Please wait..",
+    "bulkImportUsersLabel": "Import {0} users",
+    "bulkImportingUsersLabel": "Importing {0} users. Please wait..",
     "bulkImportUsersLabel": "Bulk-import users"
   },
   "reports": {
