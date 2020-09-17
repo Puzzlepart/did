@@ -9,6 +9,7 @@ import { generateColumn as col } from 'utils/generateColumn'
 import { IRolePanelProps, RolePanel } from './RolePanel'
 import { GET_ROLES } from './GET_ROLES'
 import { PermissionList } from 'components/PermissionList'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 
 /**
  * @category Admin
@@ -18,6 +19,12 @@ export const Roles = () => {
     const { data, loading, refetch } = useQuery(GET_ROLES)
     const [panel, setPanel] = React.useState<IRolePanelProps>(null)
     const columns = [
+        col(
+            'icon',
+            '',
+            { maxWidth: 30 },
+            (role: IRole) => <Icon styles={{ root: { fontSize: 33 } }} iconName={role.icon} />
+        ),
         col(
             'name',
             t('roleLabel', { ns: 'common' }),

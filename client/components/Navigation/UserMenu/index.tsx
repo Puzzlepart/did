@@ -27,7 +27,7 @@ export const UserMenu = () => {
                     onDismiss={() => setMenuTarget(null)}
                     gapSpace={-8}>
                     <FadeIn className={styles.menu}>
-                        <div className={`${styles.menuItem} ${styles.userName}`}>{user.fullName}</div>
+                        <div className={`${styles.menuItem} ${styles.userName}`}>{user.displayName}</div>
                         <div className={styles.menuItem}>{user.email}</div>
                         <div className={styles.menuItem}>{user.role.name} ({user.sub.name})</div>
                         <div className={styles.divider}></div>
