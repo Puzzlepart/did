@@ -108,7 +108,7 @@ echo "[3/3] PACKAGING JS"
 echo ""
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
-  eval $NPM_CMD run packageClient
+  eval $NPM_CMD run package:client
   exitWithMessageOnError "Packaging of client failed"
   cd - > /dev/null
 fi

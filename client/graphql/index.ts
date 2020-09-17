@@ -6,19 +6,19 @@ import { HttpLink } from 'apollo-link-http'
  * @ignore
  */
 export interface IError {
-  name: string;
-  message: string;
-  code: string;
-  statusCode: string;
+  name: string
+  message: string
+  code: string
+  statusCode: string
 }
 
 /**
  * @ignore
  */
 export interface IBaseResult {
-  success: boolean;
-  error: IError;
-  data: string;
+  success: boolean
+  error: IError
+  data: string
 }
 
 /**
@@ -32,4 +32,3 @@ export const client = new ApolloClient({
 
 export { GET_CURRENT_USER } from './GET_CURRENT_USER'
 export { FetchPolicy }
-
