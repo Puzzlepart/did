@@ -109,8 +109,7 @@ async function currentUser(_obj, _variables, ctx) {
     ])
     return {
       ...user,
-      mail: ctx.user.profile.mail,
-      subscription: ctx.user.subscription,
+      ...ctx.user,
       role: find(roles, role => role.name === user.role),
     }
   } catch (error) {}
