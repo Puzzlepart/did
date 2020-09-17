@@ -15,5 +15,3 @@ export * from './SearchProject'
 export * from './UserMessage'
 export * from './PermissionList'
 export * from './LabelPicker'
-
-

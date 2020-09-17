@@ -24,6 +24,6 @@ jobs:
           npm install --no-progress --loglevel silent --no-shrinkwrap --no-fund
       - name: Package client JS
         run: |
-          npm run packageClient
+          npm run package:client
         env:
           NODE_ENV: production

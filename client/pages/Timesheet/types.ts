@@ -5,29 +5,27 @@ import { TimesheetScope } from './TimesheetScope'
 /**
  * @category Timesheet
  */
-export type TimesheetView = 'overview' | 'summary' | 'allocation';
+export type TimesheetView = 'overview' | 'summary' | 'allocation'
 
 /**
  * @category Timesheet
  */
 export interface ITimesheetState {
-    periods: TimesheetPeriod[];
-    selectedPeriod: TimesheetPeriod;
-    selectedView: TimesheetView;
-    scope: TimesheetScope;
-    loading?: IProgressIndicatorProps;
-    showHotkeysModal?: boolean;
+  periods: TimesheetPeriod[]
+  selectedPeriod: TimesheetPeriod
+  selectedView: TimesheetView
+  scope: TimesheetScope
+  loading?: IProgressIndicatorProps
+  showHotkeysModal?: boolean
 }
 
 export interface ITimesheetParams {
-    view: TimesheetView;
-    week: string;
-    month: string;
-    year: string;
+  view: TimesheetView
+  week: string
+  month: string
+  year: string
 }
-
 
 export * from './TimesheetContext'
 export * from './TimesheetPeriod'
 export * from './TimesheetScope'
-
