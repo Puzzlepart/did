@@ -7,14 +7,16 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { columns } from './columns'
 import { GET_DATA } from './GET_DATA'
-import { IUserFormModalProps, UserForm } from './UserForm'
+import { IUserFormProps, UserForm } from './UserForm'
+import { ImportPanel, IImportPanelProps } from './ImportPanel'
 
 /**
  * @category Admin
  */
 export const Users = () => {
     const { t } = useTranslation(['common', 'admin'])
-    const [userForm, setUserForm] = useState<IUserFormModalProps>(null)
+    const [userForm, setUserForm] = useState<IUserFormProps>(null)
+    const [importPanel, setImportPanel] = useState<IImportPanelProps>(null)
     const { data, refetch, loading, called } = useQuery(GET_DATA, { fetchPolicy: 'cache-and-network' })
 
     /**
@@ -23,7 +25,7 @@ export const Users = () => {
      * @param {IUser} user User to edit
      */
     const onEdit = (user: IUser) => setUserForm({
-        title: user.displayName,
+        headerText: user.displayName,
         user,
         roles: data?.roles || []
     })
@@ -41,7 +43,7 @@ export const Users = () => {
                             name: t('addNewUser', { ns: 'admin' }),
                             iconProps: { iconName: 'AddFriend' },
                             onClick: () => setUserForm({
-                                title: t('addNewUser', { ns: 'admin' }),
+                                headerText: t('addNewUser', { ns: 'admin' }),
                                 roles: value(data, 'roles', []),
                             }),
                         },
@@ -49,10 +51,7 @@ export const Users = () => {
                             key: 'IMPORT_USERS',
                             name: 'Importer',
                             iconProps: { iconName: 'CloudImportExport' },
-                            onClick: () => setUserForm({
-                                title: t('addNewUser', { ns: 'admin' }),
-                                roles: value(data, 'roles', []),
-                            }),
+                            onClick: () => setImportPanel({ headerText: 'Importer brukere' }),
                         },
                     ],
                     farItems: []
@@ -61,12 +60,16 @@ export const Users = () => {
                 <UserForm
                     {...userForm}
                     users={data?.adUsers || []}
-                    panel={{
-                        onDismiss: event => {
-                            setUserForm(null)
-                            !event && refetch()
-                        }
+                    onDismiss={event => {
+                        setUserForm(null)
+                        !event && refetch()
                     }} />)}
+            {importPanel && (
+                <ImportPanel
+                    {...importPanel}
+                    users={data?.adUsers}
+                    onDismiss={() => setImportPanel(null)} />
+            )}
         </>
     )
 }

@@ -6,7 +6,7 @@ import { ChoiceGroup } from 'office-ui-fabric-react/lib/ChoiceGroup'
 import { Panel } from 'office-ui-fabric-react/lib/Panel'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { find, omit } from 'underscore'
+import { find, omit, pick } from 'underscore'
 import validator from 'validator'
 import ADD_OR_UPDATE_USER, { IAddOrUpdateUserVariables } from './ADD_OR_UPDATE_USER'
 import { IUserFormProps } from './types'
@@ -34,7 +34,7 @@ export const UserForm = (props: IUserFormProps) => {
                 update: !!props.user,
             }
         })
-        props.panel.onDismiss()
+        props.onDismiss()
     }
 
     /**
@@ -46,9 +46,8 @@ export const UserForm = (props: IUserFormProps) => {
 
     return (
         <Panel
-            {...props.panel}
+            {...pick(props, 'onDismiss', 'headerText')}
             className={styles.root}
-            headerText={props.title}
             isOpen={true}>
             <div className={styles.inputContainer} hidden={!!props.user}>
                 <Autocomplete
@@ -84,5 +83,5 @@ export const UserForm = (props: IUserFormProps) => {
     )
 }
 
-export { IUserFormProps as IUserFormModalProps }
+export * from './types'
 
