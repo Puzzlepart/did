@@ -1,13 +1,13 @@
+import { CustomerLink } from 'components/CustomerLink'
 import { EntityLabel } from 'components/EntityLabel'
 import { TFunction } from 'i18next'
 import { IProject } from 'interfaces'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import * as React from 'react'
-import { Link } from 'react-router-dom'
 import { generateColumn as col } from 'utils/generateColumn'
-import { IProjectListProps } from './types'
 import { NameLabel } from './NameLabel'
+import { IProjectListProps } from './types'
 
 /**
  * Generate column definitions based on parameters specified
@@ -51,7 +51,7 @@ export default (props: IProjectListProps, t: TFunction): IColumn[] => ([
         { maxWidth: 220 },
         (project: IProject) => {
             if (!project.customer) return null
-            return <Link to={`/customers/${project.customer.key}`}>{project.customer.name}</Link>
+            return <CustomerLink customer={project.customer} />
         }
     ),
     col(
