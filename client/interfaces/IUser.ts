@@ -10,5 +10,5 @@ export interface IUser {
   email?: string
   role?: IRole
   sub?: ISubscription
-  userLanguage?: 'en-GB' | 'nb'
+  preferredLanguage?: 'en-GB' | 'nb'
 }

@@ -14,7 +14,7 @@ export const GET_CURRENT_USER = gql`
         icon
         permissions
       }
-      userLanguage
+      preferredLanguage
       sub {
         name
       }

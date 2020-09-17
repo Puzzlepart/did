@@ -8,6 +8,12 @@ export const GET_DATA = gql`
     adUsers {
       id
       displayName
+      givenName
+      surname
+      jobTitle
+      mobilePhone
+      mail
+      preferredLanguage
     }
     users {
       id

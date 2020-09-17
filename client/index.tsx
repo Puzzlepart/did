@@ -18,10 +18,10 @@ initializeIcons()
 client.query<{ currentUser: any }>({ query: GET_CURRENT_USER }).then(({ data }) => {
     const container = document.getElementById('app')
     const context: IAppContext = { user: data.currentUser }
-    context.user.userLanguage = context.user.userLanguage || 'en-GB'
+    context.user.preferredLanguage = context.user.preferredLanguage || 'en-GB'
     
-    DateUtils.setup(context.user.userLanguage)
-    i18n.changeLanguage(context.user.userLanguage)
+    DateUtils.setup(context.user.preferredLanguage)
+    i18n.changeLanguage(context.user.preferredLanguage)
 
     ReactDom.render((
         <ApolloProvider client={client}>
