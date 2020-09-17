@@ -226,7 +226,9 @@
     "manageProjects": "Manage projects",
     "deleteProjects": "Delete projects",
     "manageCustomers": "Manage customers",
-    "deleteCustomers": "Delete customers"
+    "deleteCustomers": "Delete customers",
+    "manageUsers": "Manage users",
+    "manageRoles": "Manage roles"
   },
   "notifications": {
     "moreLinkText": "Read more here",

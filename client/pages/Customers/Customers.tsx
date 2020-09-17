@@ -10,7 +10,7 @@ import { CustomerForm } from 'pages/Customers/CustomerForm'
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
-import { contains, find } from 'underscore'
+import { find } from 'underscore'
 import { CustomerDetails } from './CustomerDetails'
 import { CustomerList } from './CustomerList'
 import GET_CUSTOMERS from './GET_CUSTOMERS'
@@ -21,8 +21,8 @@ import { ICustomersParams, IGetCustomersData } from './types'
  */
 export const Customers = () => {
     const { t } = useTranslation(['common', 'ADMINS'])
+    const { hasPermission } = useContext(AppContext)
     const history = useHistory()
-    const { user } = useContext(AppContext)
     const params = useParams<ICustomersParams>()
     const [selected, setSelected] = useState<ICustomer>(null)
     const { loading, error, data } = useQuery<IGetCustomersData>(
@@ -80,7 +80,7 @@ export const Customers = () => {
                         </>
                     )}
             </PivotItem>
-            {contains(user.role.permissions, manageCustomers) && (
+            {hasPermission(manageCustomers) && (
                 <PivotItem
                     itemID='new'
                     itemKey='new'

@@ -9,6 +9,8 @@ export const manageProjects = 'ef4032fb'
 export const deleteProjects = 'c5439319'
 export const manageCustomers = '09909241'
 export const deleteCustomers = '8b39db3d'
+export const manageUsers = '15e40e99'
+export const manageRoles = 'cd52a735'
 
 export default (t: TFunction): IPermission[] => [
   {
@@ -50,5 +52,15 @@ export default (t: TFunction): IPermission[] => [
     id: deleteCustomers,
     key: 'deleteCustomers',
     name: t('deleteCustomers', { ns: 'permissions' }),
+  },
+  {
+    id: manageUsers,
+    key: 'manageUsers',
+    name: t('manageUsers', { ns: 'permissions' }),
+  },
+  {
+    id: manageRoles,
+    key: 'manageRoles',
+    name: t('manageRoles', { ns: 'permissions' }),
   },
 ]

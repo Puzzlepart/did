@@ -7,7 +7,7 @@ import { Panel } from 'office-ui-fabric-react'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { contains, isEmpty } from 'underscore'
+import { isEmpty } from 'underscore'
 import * as excel from 'utils/exportExcel'
 import { ProjectForm } from '../ProjectForm'
 import { ProjectsContext } from '../ProjectsContext'
@@ -19,7 +19,7 @@ import { IProjectDetailsProps } from './types'
 
 export const Actions = (props: IProjectDetailsProps) => {
     const { refetch } = useContext(ProjectsContext)
-    const { user } = useContext(AppContext)
+    const { hasPermission } = useContext(AppContext)
     const { t } = useTranslation(['projects', 'common'])
     const [showEditPanel, setShowEditPanel] = useState(false)
     const context = useContext(ProjectDetailsContext)
@@ -57,7 +57,7 @@ export const Actions = (props: IProjectDetailsProps) => {
 
     return (
         <div className={styles.actions}>
-            <div className={styles.actionItem} hidden={!contains(user.role.permissions, manageProjects)}>
+            <div className={styles.actionItem} hidden={!hasPermission(manageProjects)}>
                 <DefaultButton
                     text={t('editLabel')}
                     iconProps={{ iconName: 'PageEdit' }}

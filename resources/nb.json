@@ -226,7 +226,9 @@
     "manageProjects": "Administrere prosjekter",
     "deleteProjects": "Slette prosjekter",
     "manageCustomers": "Administrere kunder",
-    "deleteCustomers": "Slette kunder"
+    "deleteCustomers": "Slette kunder",    
+    "manageUsers": "Administrere brukere",
+    "manageRoles": "Administere roller"
   },
   "notifications": {
     "moreLinkText": "Les mer her",
