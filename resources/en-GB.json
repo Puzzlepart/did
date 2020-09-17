@@ -61,8 +61,8 @@
     "webLinkText": "Website",
     "externalSystemUrlText": "External LOB system",
     "keyFieldDescription": "A unique identifier for the customer. Keep it short, maximum 8 characters.",
-    "nameFormValidationText": "Name should be at least 2 characters long.",
-    "keyFormValidationText": "Customer key should be between 3 and 8 characters long, and all uppercase.",
+    "nameFormValidationText": "Name should be at least {0} characters long.",
+    "keyFormValidationText": "Customer key should be between {0} and {1} characters long, and all uppercase.",
     "createSuccess": "The customer **{0}** was succesfully created."
   },
   "admin": {
