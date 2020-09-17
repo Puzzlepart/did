@@ -4,10 +4,11 @@ import { IUser } from 'interfaces'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { ChoiceGroup } from 'office-ui-fabric-react/lib/ChoiceGroup'
 import { Panel } from 'office-ui-fabric-react/lib/Panel'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { find, omit, pick } from 'underscore'
 import validator from 'validator'
+import { UsersContext } from '../UsersContext'
 import ADD_OR_UPDATE_USER, { IAddOrUpdateUserVariables } from './ADD_OR_UPDATE_USER'
 import { IUserFormProps } from './types'
 import styles from './UserFormModal.module.scss'
@@ -16,11 +17,12 @@ import styles from './UserFormModal.module.scss'
  * @category Admin
  */
 export const UserForm = (props: IUserFormProps) => {
+    const { adUsers, roles } = useContext(UsersContext)
     const { t } = useTranslation('common')
     const [model, setModel] = useState<IUser>(props.user || {
         id: '',
         displayName: '',
-        role: find(props.roles, r => r.name === 'User'),
+        role: find(roles, r => r.name === 'User'),
     })
     const [addOrUpdateUser] = useMutation<any, IAddOrUpdateUserVariables>(ADD_OR_UPDATE_USER)
 
@@ -53,7 +55,7 @@ export const UserForm = (props: IUserFormProps) => {
                 <div className={styles.inputContainer}>
                     <Autocomplete
                         placeholder={t('searchPlaceholder')}
-                        items={props.adUsers.map(u => ({
+                        items={adUsers.map(u => ({
                             key: u.id,
                             displayValue: u.displayName,
                             searchValue: u.displayName,
@@ -68,7 +70,7 @@ export const UserForm = (props: IUserFormProps) => {
             )}
             <div className={styles.inputContainer}>
                 <ChoiceGroup
-                    options={props.roles.map(role => ({
+                    options={roles.map(role => ({
                         key: role.name,
                         text: role.name,
                         data: role,
@@ -82,7 +84,7 @@ export const UserForm = (props: IUserFormProps) => {
                 disabled={!isFormValid()}
                 onClick={onSave} />
         </Panel>
-    )    
+    )
 }
 
 export * from './types'

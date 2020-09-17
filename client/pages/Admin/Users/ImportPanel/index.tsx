@@ -2,9 +2,10 @@ import { List } from 'components'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { CheckboxVisibility, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { Panel, PanelType } from 'office-ui-fabric-react/lib/Panel'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { pick } from 'underscore'
+import { UsersContext } from '../UsersContext'
 import styles from './ImportPanel.module.scss'
 import { IImportPanelProps } from './types'
 
@@ -12,6 +13,7 @@ import { IImportPanelProps } from './types'
  * @category Admin
  */
 export const ImportPanel = (props: IImportPanelProps) => {
+    const { adUsers } = useContext(UsersContext)
     const { t } = useTranslation('common')
     const [selectedUsers, setSelectedUsers] = useState([])
 
@@ -27,7 +29,7 @@ export const ImportPanel = (props: IImportPanelProps) => {
                     disabled={selectedUsers.length === 0} 
                     onClick={() => props.onImport(selectedUsers)}/>
                 <List
-                    items={props.adUsers}
+                    items={adUsers}
                     selection={{
                         mode: SelectionMode.multiple,
                         onChanged: selected => setSelectedUsers(selected)

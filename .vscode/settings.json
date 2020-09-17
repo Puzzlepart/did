@@ -16,5 +16,6 @@
     "client/**/*js": true,
     "client/**/*js.map": true
   },
-  "javascript.validate.enable": false
+  "javascript.validate.enable": false,
+  "debug.node.autoAttach": "on"
 }
