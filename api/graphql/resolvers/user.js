@@ -6,6 +6,7 @@ const typeDef = gql`
   A type that describes a Subscription
   """
   type Subscription {
+    id: String!
     name: String!
   }
 
@@ -14,11 +15,15 @@ const typeDef = gql`
   """
   type User {
     id: String
+    displayName: String
+    givenName: String
+    surname: String
+    jobTitle: String
+    mobilePhone: String
+    mail: String
+    preferredLanguage: String
+    subscription: Subscription
     role: Role
-    fullName: String
-    email: String
-    userLanguage: String
-    sub: Subscription
   }
 
   """
@@ -26,12 +31,22 @@ const typeDef = gql`
   """
   input UserInput {
     id: String!
-    fullName: String
+    displayName: String
+    givenName: String
+    surname: String
+    jobTitle: String
+    mobilePhone: String
+    mail: String
+    preferredLanguage: String
     role: String
-    userLanguage: String
   }
 
   extend type Query {
+    """
+    Get all users from Active Directory
+    """
+    adUsers: [User!]!
+
     """
     Get all users
     """
@@ -48,8 +63,18 @@ const typeDef = gql`
     Add or update user
     """
     addOrUpdateUser(user: UserInput!, update: Boolean): BaseResult!
+
+    """
+    Bulk add users
+    """
+    bulkAddUsers(users: [UserInput]!): BaseResult!
   }
 `
+
+async function adUsers(_obj, _variables, ctx) {
+  let users = await ctx.services.graph.getUsers()
+  return users
+}
 
 async function users(_obj, _variables, ctx) {
   let [users, roles] = await Promise.all([ctx.services.storage.getUsers(), ctx.services.storage.getRoles()])
@@ -65,18 +90,16 @@ async function users(_obj, _variables, ctx) {
 
 async function currentUser(_obj, _variables, ctx) {
   try {
-    const [user, sub, roles] = await Promise.all([
+    const [user, roles] = await Promise.all([
       ctx.services.storage.getUser(ctx.user.id),
-      ctx.services.subscription.getSubscription(ctx.user.tenantId),
       ctx.services.storage.getRoles(),
     ])
     return {
+      ...ctx.user,
       ...user,
-      email: ctx.user.profile.email,
-      sub,
       role: find(roles, role => role.name === user.role),
     }
-  } catch (error) {}
+  } catch (error) { }
 }
 
 async function addOrUpdateUser(_obj, variables, ctx) {
@@ -91,10 +114,22 @@ async function addOrUpdateUser(_obj, variables, ctx) {
   }
 }
 
+async function bulkAddUsers(_obj, variables, ctx) {
+  try {
+    await ctx.services.storage.bulkAddUsers(variables.users)
+    return { success: true, error: null }
+  } catch (error) {
+    return {
+      success: false,
+      error: pick(error, 'name', 'message', 'code', 'statusCode'),
+    }
+  }
+}
+
 module.exports = {
   resolvers: {
-    Query: { users, currentUser },
-    Mutation: { addOrUpdateUser },
+    Query: { adUsers, users, currentUser },
+    Mutation: { bulkAddUsers, addOrUpdateUser },
   },
   typeDef,
 }

@@ -38,6 +38,33 @@ class GraphService {
   }
 
   /**
+   * Get users
+   */
+  async getUsers() {
+    try {
+      log('Querying Graph /users')
+      const { value } = await this.getClient()
+        .api('/users')
+        .filter("userType eq 'Member'")
+        .select('id', 'givenName', 'surname', 'jobTitle', 'displayName', 'mobilePhone', 'mail', 'preferredLanguage')
+        .top(999)
+        .get()
+      return value
+    } catch (error) {
+      console.log(error.message)
+      switch (error.statusCode) {
+        case 401: {
+          this.oauthToken = await TokenService.refreshAccessToken(this.req)
+          return this.getUsers()
+        }
+        default: {
+          throw new Error()
+        }
+      }
+    }
+  }
+
+  /**
    * Create Outlook category
    *
    * @param category Category
@@ -98,10 +125,7 @@ class GraphService {
       )
       const { value } = await this.getClient()
         .api('/me/calendar/calendarView')
-        .query({
-          startDateTime,
-          endDateTime,
-        })
+        .query({ startDateTime, endDateTime })
         .select('id,subject,body,start,end,lastModifiedDateTime,categories,webLink,isOrganizer')
         .filter(`sensitivity ne 'private' and isallday eq false and iscancelled eq false`)
         .orderby('start/dateTime asc')

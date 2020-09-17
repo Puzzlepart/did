@@ -7,6 +7,7 @@ const typeDef = gql`
   """
   type Role {
     name: String!
+    icon: String!
     permissions: [String]!
   }
 
@@ -14,8 +15,8 @@ const typeDef = gql`
   Input object for Role used in Mutation addOrUpdateRole
   """
   input RoleInput {
-    id: String
     name: String!
+    icon: String!
     permissions: [String]!
   }
 

@@ -7,7 +7,7 @@ import { UserSettingInput } from './UserSettingInput'
 import styles from './UserSettings.module.scss'
 import { UserSettingsContext } from './UserSettingsContext'
 import { USER_SETTINGS } from './USER_SETTINGS'
-import ADD_OR_UPDATE_USER from 'pages/Admin/Users/UserFormModal/ADD_OR_UPDATE_USER'
+import ADD_OR_UPDATE_USER from 'pages/Admin/Users/UserForm/ADD_OR_UPDATE_USER'
 
 /**
  * @category UserSettings

@@ -32,24 +32,24 @@ const typeDef = gql`
 `
 
 async function apiTokens(_obj, variables, ctx) {
-  const tokens = await ctx.services.subscription.getApiTokens(ctx.user.tenantId)
+  const tokens = await ctx.services.subscription.getApiTokens(ctx.user.subscription.id)
   return tokens
 }
 
 async function addApiToken(_obj, variables, ctx) {
   let token = jwt.sign(
     {
-      data: pick(ctx.user, 'id', 'tenantId'),
+      data: pick(ctx.user, 'id'),
     },
     process.env.API_TOKEN_SECRET
   )
-  const entry = await ctx.services.subscription.addApiToken(variables.name, ctx.user.tenantId, token)
+  const entry = await ctx.services.subscription.addApiToken(variables.name, ctx.user.subscription.id, token)
   return entry ? token : null
 }
 
 async function deleteApiToken(_obj, variables, ctx) {
   try {
-    await ctx.services.subscription.deleteApiToken(variables.name, ctx.user.tenantId)
+    await ctx.services.subscription.deleteApiToken(variables.name, ctx.user.subscription.id)
     return { success: true, error: null }
   } catch (error) {
     return {

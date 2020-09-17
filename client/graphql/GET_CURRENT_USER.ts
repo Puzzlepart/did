@@ -7,14 +7,15 @@ export const GET_CURRENT_USER = gql`
   {
     currentUser {
       id
-      email
-      fullName
+      mail
+      displayName
       role {
         name
+        icon
         permissions
       }
-      userLanguage
-      sub {
+      preferredLanguage
+      subscription {
         name
       }
     }

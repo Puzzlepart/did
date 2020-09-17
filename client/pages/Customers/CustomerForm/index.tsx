@@ -35,8 +35,8 @@ export const CustomerForm = () => {
      */
     const validateForm = (): ICustomerFormValidation => {
         const errors: { [key: string]: string } = {}
-        if (model.name.length < 2) errors.name = t('nameFormValidationText')
-        if (!(/(^[A-ZÆØÅ0-9]{3,8}$)/gm).test(model.key)) errors.key = t('keyFormValidationText')
+        if (model.name.length < 2) errors.name = format(t('nameFormValidationText'), 2)
+        if (!(/(^[A-ZÆØÅ0-9]{3,8}$)/gm).test(model.key)) errors.key = format(t('keyFormValidationText'), 3, 8)
         return { errors, invalid: Object.keys(errors).length > 0 }
     }
 

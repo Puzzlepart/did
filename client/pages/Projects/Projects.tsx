@@ -10,7 +10,7 @@ import { ProjectForm } from 'pages/Projects/ProjectForm'
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
-import { contains, find } from 'underscore'
+import { find } from 'underscore'
 import GET_PROJECTS from './GET_PROJECTS'
 import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
@@ -22,8 +22,8 @@ import { IProjectsParams } from './types'
  */
 export const Projects = () => {
     const { t } = useTranslation(['projects', 'common'])
+    const { hasPermission } = useContext(AppContext)
     const history = useHistory()
-    const { user } = useContext(AppContext)
     const params = useParams<IProjectsParams>()
     const [selected, setSelected] = useState<IProject>(null)
     const { loading, error, data, refetch } = useQuery<{ projects: any[]; outlookCategories: any[] }>(
@@ -114,7 +114,7 @@ export const Projects = () => {
                             </>
                         )}
                 </PivotItem>
-                {contains(user.role.permissions, manageProjects) && (
+                {hasPermission(manageProjects) && (
                     <PivotItem
                         itemID='new'
                         itemKey='new'

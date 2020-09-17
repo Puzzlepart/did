@@ -36,7 +36,7 @@ export const Timesheet = () => {
         variables: {
             ...state.scope.dateStrings,
             dateFormat: 'dddd DD',
-            locale: context.user.userLanguage,
+            locale: context.user.preferredLanguage,
         },
         fetchPolicy: 'network-only',
     })

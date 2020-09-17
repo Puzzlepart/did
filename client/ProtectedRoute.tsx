@@ -1,6 +1,5 @@
-import * as React from 'react'
+import React, { useContext } from 'react'
 import { Redirect, Route, RouteProps } from 'react-router-dom'
-import { contains } from 'underscore'
 import { AppContext } from './AppContext'
 
 export interface IProtectedRouteProps extends RouteProps {
@@ -11,8 +10,8 @@ export interface IProtectedRouteProps extends RouteProps {
 }
 
 export const ProtectedRoute = ({ path, exact, permission, children }: IProtectedRouteProps) => {
-    const { user } = React.useContext(AppContext)
-    const redirect = !!permission && !contains(user.role.permissions, permission)
+    const { hasPermission } = useContext(AppContext)
+    const redirect = !!permission && !hasPermission(permission)
     return (
         <Route exact={exact} path={path}>
             {redirect
