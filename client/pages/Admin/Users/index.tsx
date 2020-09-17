@@ -1,53 +1,54 @@
 
 import { useQuery } from '@apollo/react-hooks'
 import List from 'components/List'
-import { value as value } from 'helpers'
+import { value } from 'helpers'
 import { IUser } from 'interfaces/IUser'
-import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
-import * as React from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { generateColumn as col } from 'utils/generateColumn'
+import { columns } from './columns'
 import { GET_DATA } from './GET_DATA'
-import { IUserFormModalProps, UserFormModal } from './UserFormModal'
+import { IUserFormModalProps, UserForm } from './UserForm'
 
 /**
  * @category Admin
  */
 export const Users = () => {
     const { t } = useTranslation(['common', 'admin'])
-    const [userForm, setUserForm] = React.useState<IUserFormModalProps>(null)
+    const [userForm, setUserForm] = useState<IUserFormModalProps>(null)
     const { data, refetch, loading, called } = useQuery(GET_DATA, { fetchPolicy: 'cache-and-network' })
-    const columns = [
-        col('displayName', t('nameFieldLabel'), { maxWidth: 180 }),
-        col(
-            'role',
-            t('roleLabel'),
-            {},
-            (user: IUser) => user.role.name,
-        ),
-        col('edit', '', {}, (user: any) => (
-            <DefaultButton
-                text={t('editUser', { ns: 'admin' })}
-                onClick={() => setUserForm({
-                    title: user.displayName,
-                    user,
-                    roles: value(data, 'roles', [])
-                })} />
-        ))
-    ]
+
+    /**
+     * On edit user
+     * 
+     * @param {IUser} user User to edit
+     */
+    const onEdit = (user: IUser) => setUserForm({
+        title: user.displayName,
+        user,
+        roles: data?.roles || []
+    })
 
     return (
         <>
             <List
                 enableShimmer={loading && !called}
-                items={value(data, 'users', [])}
-                columns={columns}
+                items={data?.users || []}
+                columns={columns(onEdit, t)}
                 commandBar={{
                     items: [
                         {
-                            key: 'addNewUser',
+                            key: 'ADD_NEW_USER',
                             name: t('addNewUser', { ns: 'admin' }),
                             iconProps: { iconName: 'AddFriend' },
+                            onClick: () => setUserForm({
+                                title: t('addNewUser', { ns: 'admin' }),
+                                roles: value(data, 'roles', []),
+                            }),
+                        },
+                        {
+                            key: 'IMPORT_USERS',
+                            name: 'Importer',
+                            iconProps: { iconName: 'CloudImportExport' },
                             onClick: () => setUserForm({
                                 title: t('addNewUser', { ns: 'admin' }),
                                 roles: value(data, 'roles', []),
@@ -57,10 +58,10 @@ export const Users = () => {
                     farItems: []
                 }} />
             {userForm && (
-                <UserFormModal
+                <UserForm
                     {...userForm}
                     users={data?.adUsers || []}
-                    modal={{
+                    panel={{
                         onDismiss: event => {
                             setUserForm(null)
                             !event && refetch()

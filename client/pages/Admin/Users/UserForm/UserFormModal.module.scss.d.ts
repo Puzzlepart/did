@@ -4,7 +4,6 @@ interface CssExports {
   'inputContainer': string;
   'root': string;
   'saveBtn': string;
-  'title': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

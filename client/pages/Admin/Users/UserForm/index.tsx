@@ -3,19 +3,19 @@ import { Autocomplete } from 'components'
 import { IUser } from 'interfaces'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { ChoiceGroup } from 'office-ui-fabric-react/lib/ChoiceGroup'
-import { Modal } from 'office-ui-fabric-react/lib/Modal'
+import { Panel } from 'office-ui-fabric-react/lib/Panel'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { find, omit } from 'underscore'
 import validator from 'validator'
 import ADD_OR_UPDATE_USER, { IAddOrUpdateUserVariables } from './ADD_OR_UPDATE_USER'
-import { IUserFormModalProps } from './types'
+import { IUserFormProps } from './types'
 import styles from './UserFormModal.module.scss'
 
 /**
  * @category Admin
  */
-export const UserFormModal = (props: IUserFormModalProps) => {
+export const UserForm = (props: IUserFormProps) => {
     const { t } = useTranslation('common')
     const [model, setModel] = useState<IUser>(props.user || {
         id: '',
@@ -34,7 +34,7 @@ export const UserFormModal = (props: IUserFormModalProps) => {
                 update: !!props.user,
             }
         })
-        props.modal.onDismiss()
+        props.panel.onDismiss()
     }
 
     /**
@@ -45,13 +45,11 @@ export const UserFormModal = (props: IUserFormModalProps) => {
     }
 
     return (
-        <Modal
-            {...props.modal}
-            containerClassName={styles.root}
+        <Panel
+            {...props.panel}
+            className={styles.root}
+            headerText={props.title}
             isOpen={true}>
-            <div className={styles.title} hidden={!props.title}>
-                {props.title}
-            </div>
             <div className={styles.inputContainer} hidden={!!props.user}>
                 <Autocomplete
                     placeholder={t('searchPlaceholder')}
@@ -82,9 +80,9 @@ export const UserFormModal = (props: IUserFormModalProps) => {
                 text={t('save')}
                 disabled={!isFormValid()}
                 onClick={onSave} />
-        </Modal>
+        </Panel>
     )
 }
 
-export { IUserFormModalProps }
+export { IUserFormProps as IUserFormModalProps }
 

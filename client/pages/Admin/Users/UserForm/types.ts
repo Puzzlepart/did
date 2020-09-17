@@ -1,13 +1,13 @@
 import { IRole, IUser } from 'interfaces'
-import { IModalProps } from 'office-ui-fabric-react/lib/Modal'
+import { IPanelProps } from 'office-ui-fabric-react/lib/Panel'
 
 /**
  * @category Admin
  */
-export interface IUserFormModalProps {
+export interface IUserFormProps {
   title?: string
   users?: any[]
   user?: IUser
   roles?: IRole[]
-  modal?: IModalProps
+  panel?: IPanelProps
 }

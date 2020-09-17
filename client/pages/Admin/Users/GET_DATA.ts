@@ -14,6 +14,7 @@ export const GET_DATA = gql`
       displayName
       role {
         name
+        icon
         permissions
       }
     }
