@@ -25,6 +25,8 @@ export const selectQuery = (
       items: queries.map(query => ({
         ...pick(query, 'key', 'text'),
         iconProps: { iconName: query.iconName },
+        canCheck: true,
+        checked: selectedQuery?.key === query.key,
         onClick: () => setQuery(query),
       })),
     },

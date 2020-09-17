@@ -1,7 +1,8 @@
+import { CustomerLink } from 'components/CustomerLink'
+import { ProjectLink } from 'components/ProjectLink'
 import { TFunction } from 'i18next'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import React from 'react'
-import { Link } from 'react-router-dom'
 import dateUtils from 'utils/date'
 import { ExcelColumnType } from 'utils/exportExcel'
 
@@ -18,14 +19,14 @@ const columns = (t: TFunction): IColumn[] => ([
         fieldName: 'project.name',
         name: t('project'),
         minWidth: 100,
-        onRender: ({ project }) => <Link to={`/projects/search/${project.id}`}>{project.name}</Link>
+        onRender: ({ project }) => <ProjectLink project={project} />
     },
     {
         key: 'customer',
         fieldName: 'customer.name',
         name: t('customer'),
         minWidth: 100,
-        onRender: ({ customer }) => <Link to={`/customers/search/${customer.key}`}>{customer.name}</Link>,
+        onRender: ({ customer }) => <CustomerLink customer={customer} />,
     },
     {
         key: 'duration',
