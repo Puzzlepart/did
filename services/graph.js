@@ -45,6 +45,7 @@ class GraphService {
       log('Querying Graph /users')
       const { value } = await this.getClient()
         .api('/users')
+      .filter('userType eq \'Member\'')
         .select('id', 'displayName', 'userType', 'mail')
         .top(999)
         .get()
