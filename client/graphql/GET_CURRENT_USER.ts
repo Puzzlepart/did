@@ -7,7 +7,7 @@ export const GET_CURRENT_USER = gql`
   {
     currentUser {
       id
-      email
+      mail
       displayName
       role {
         name
@@ -15,7 +15,7 @@ export const GET_CURRENT_USER = gql`
         permissions
       }
       preferredLanguage
-      sub {
+      subscription {
         name
       }
     }
