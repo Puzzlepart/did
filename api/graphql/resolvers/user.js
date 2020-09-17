@@ -61,6 +61,11 @@ const typeDef = gql`
     Add or update user
     """
     addOrUpdateUser(user: UserInput!, update: Boolean): BaseResult!
+
+    """
+    Bulk add users
+    """
+    bulkAddUsers(users: [UserInput]!): BaseResult!
   }
 `
 
@@ -94,7 +99,7 @@ async function currentUser(_obj, _variables, ctx) {
       sub,
       role: find(roles, role => role.name === user.role),
     }
-  } catch (error) {}
+  } catch (error) { }
 }
 
 async function addOrUpdateUser(_obj, variables, ctx) {
@@ -109,10 +114,22 @@ async function addOrUpdateUser(_obj, variables, ctx) {
   }
 }
 
+async function bulkAddUsers(_obj, variables, ctx) {
+  try {
+    await ctx.services.storage.bulkAddUsers(variables.users)
+    return { success: true, error: null }
+  } catch (error) {
+    return {
+      success: false,
+      error: pick(error, 'name', 'message', 'code', 'statusCode'),
+    }
+  }
+}
+
 module.exports = {
   resolvers: {
     Query: { adUsers, users, currentUser },
-    Mutation: { addOrUpdateUser },
+    Mutation: { bulkAddUsers, addOrUpdateUser },
   },
   typeDef,
 }

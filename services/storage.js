@@ -165,13 +165,13 @@ class StorageService {
     const { entries } = await this.tableUtil.queryAzTable('Users', query, {
       RowKey: 'id',
     })
-    return entries
+    return arraySort(entries, 'displayName')
   }
 
   /**
    * Get user from table Users
    *
-   * @param userId The user ID
+   * @param {*} userId The user ID
    */
   async getUser(userId) {
     try {
@@ -185,8 +185,8 @@ class StorageService {
   /**
    * Add or update user in table Users
    *
-   * @param user The user data
-   * @param update Update the existing user
+   * @param {*} user The user data
+   * @param {*} update Update the existing user
    */
   async addOrUpdateUser(user, update) {
     const { string } = this.tableUtil.azEntGen()
@@ -198,10 +198,31 @@ class StorageService {
   }
 
   /**
+   * Bulk add users
+   * 
+   * @param {*} users Users to add
+   */
+  async bulkAddUsers(users) {
+    const entities = users.map(user => {
+      const entity = this.tableUtil.convertToAzEntity(
+        user.id,
+        {
+          ...omit(user, 'id'),
+          role: 'User'
+        }
+      )
+      return entity
+    })
+    const batch = this.tableUtil.createAzBatch()
+    entities.forEach(entity => batch.insertEntity(entity))
+    await this.tableUtil.executeBatch('Users', batch)
+  }
+
+  /**
    * Get entries from table TimeEntries
    *
-   * @param filterValues Filtervalues
-   * @param options Options
+   * @param {*} filterValues Filtervalues
+   * @param {*} options Options
    */
   async getTimeEntries(filterValues, options = {}) {
     const q = this.tableUtil.query()
