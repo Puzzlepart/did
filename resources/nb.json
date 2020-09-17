@@ -228,7 +228,7 @@
     "manageCustomers": "Administrere kunder",
     "deleteCustomers": "Slette kunder",    
     "manageUsers": "Administrere brukere",
-    "manageRoles": "Administere roller"
+    "manageRolesPermissions": "Administere roller og tilganger"
   },
   "notifications": {
     "moreLinkText": "Les mer her",

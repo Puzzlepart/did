@@ -228,7 +228,7 @@
     "manageCustomers": "Manage customers",
     "deleteCustomers": "Delete customers",
     "manageUsers": "Manage users",
-    "manageRoles": "Manage roles"
+    "manageRolesPermissions": "Manage roles and permissions"
   },
   "notifications": {
     "moreLinkText": "Read more here",
