@@ -2,6 +2,7 @@ import { List } from 'components'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { CheckboxVisibility, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { Panel, PanelType } from 'office-ui-fabric-react/lib/Panel'
+import { format } from 'office-ui-fabric-react/lib/Utilities'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { pick } from 'underscore'
@@ -25,9 +26,9 @@ export const ImportPanel = (props: IImportPanelProps) => {
             isOpen={true}>
             <div className={styles.container}>
                 <PrimaryButton
-                    text={`Importer ${selectedUsers.length} brukere`}
-                    disabled={selectedUsers.length === 0} 
-                    onClick={() => props.onImport(selectedUsers)}/>
+                    text={format(t('importUsersLabel', { ns: 'admin' }), selectedUsers.length)}
+                    disabled={selectedUsers.length === 0}
+                    onClick={() => props.onImport(selectedUsers)} />
                 <List
                     items={adUsers}
                     selection={{
