@@ -32,7 +32,6 @@ export const columns = (onEdit: (user: IUser) => void, t: TFunction): IColumn[] 
         t('mailLabel'),
         { maxWidth: 180 }
     ),
-    
     col(
         'role.name',
         t('roleLabel'),

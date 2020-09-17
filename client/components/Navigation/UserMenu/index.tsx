@@ -29,7 +29,7 @@ export const UserMenu = () => {
                     <FadeIn className={styles.menu}>
                         <div className={`${styles.menuItem} ${styles.userName}`}>{user.displayName}</div>
                         <div className={styles.menuItem}>{user.email}</div>
-                        <div className={styles.menuItem}>{user.role.name} ({user.sub.name})</div>
+                        <div className={styles.menuItem}>{user.role.name} ({user.subscription?.name})</div>
                         <div className={styles.divider}></div>
                         <UserSettings className={styles.menuItem} />
                         <div className={styles.divider}></div>
