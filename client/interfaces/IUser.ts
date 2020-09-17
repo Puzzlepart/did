@@ -7,8 +7,12 @@ import { IRole } from './IRole'
 export interface IUser {
   id?: string
   displayName?: string
+  givenName?: string
+  surname?: string
+  jobTitle?: string
+  mobilePhone?: string
   mail?: string
-  role?: IRole
+  preferredLanguage?: string
   subscription?: ISubscription
-  preferredLanguage?: 'en-GB' | 'nb'
+  role?: IRole
 }

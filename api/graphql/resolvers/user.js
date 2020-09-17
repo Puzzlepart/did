@@ -19,24 +19,11 @@ const typeDef = gql`
     givenName: String
     surname: String
     jobTitle: String
+    mobilePhone: String
     mail: String
     preferredLanguage: String
     subscription: Subscription
     role: Role
-  }
-
-  """
-  A type that describes a ADUser
-  """
-  type ADUser {
-    id: String
-    displayName: String
-    givenName: String
-    surname: String
-    jobTitle: String
-    mobilePhone: String
-    mail: String
-    preferredLanguage: String
   }
 
   """
@@ -58,7 +45,7 @@ const typeDef = gql`
     """
     Get all users from Active Directory
     """
-    adUsers: [ADUser!]!
+    adUsers: [User!]!
 
     """
     Get all users
@@ -112,7 +99,7 @@ async function currentUser(_obj, _variables, ctx) {
       ...user,
       role: find(roles, role => role.name === user.role),
     }
-  } catch (error) {}
+  } catch (error) { }
 }
 
 async function addOrUpdateUser(_obj, variables, ctx) {
