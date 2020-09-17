@@ -9,9 +9,30 @@ import { generateColumn as col } from 'utils/generateColumn'
 export const columns = (onEdit: (user: IUser) => void, t: TFunction): IColumn[] => ([
     col(
         'displayName',
-        t('nameFieldLabel'),
+        t('displayNameLabel'),
         { maxWidth: 180 }
     ),
+    col(
+        'surname',
+        t('surnameLabel'),
+        { maxWidth: 180 }
+    ),
+    col(
+        'givenName',
+        t('givenNameLabel'),
+        { maxWidth: 180 }
+    ),
+    col(
+        'jobTitle',
+        t('jobTitleLabel'),
+        { maxWidth: 180 }
+    ),
+    col(
+        'mail',
+        t('mailLabel'),
+        { maxWidth: 180 }
+    ),
+    
     col(
         'role.name',
         t('roleLabel'),

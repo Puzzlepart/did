@@ -18,6 +18,10 @@ export const GET_DATA = gql`
     users {
       id
       displayName
+      givenName
+      surname
+      jobTitle
+      mail
       role {
         name
         icon
