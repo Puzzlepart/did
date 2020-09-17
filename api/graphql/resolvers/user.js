@@ -6,6 +6,7 @@ const typeDef = gql`
   A type that describes a Subscription
   """
   type Subscription {
+    id: String!
     name: String!
   }
 
@@ -14,11 +15,14 @@ const typeDef = gql`
   """
   type User {
     id: String
-    role: Role
     displayName: String
-    email: String
+    givenName: String
+    surname: String
+    jobTitle: String
+    mail: String
     preferredLanguage: String
-    sub: Subscription
+    subscription: Subscription
+    role: Role
   }
 
   """
@@ -105,8 +109,8 @@ async function currentUser(_obj, _variables, ctx) {
     ])
     return {
       ...user,
-      email: ctx.user.profile.email,
-      sub: ctx.subscription,
+      mail: ctx.user.profile.mail,
+      subscription: ctx.user.subscription,
       role: find(roles, role => role.name === user.role),
     }
   } catch (error) { }
