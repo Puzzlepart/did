@@ -3,13 +3,13 @@ const { unique, difference, filter, find, first, last, union } = require('unders
 const format = require('string-format')
 const { getPeriods } = require('./timesheet.utils')
 
-module.exports = async function ({ template, ctx }) {
+module.exports = async function ({ template, ctx, locale }) {
   const currentWeek = utils.getWeek()
   const periods = []
   const unconfirmedPeriods = []
 
   for (let i = 5; i > 0; i--) {
-    periods.push(...getPeriods(utils.startOfWeek(currentWeek - i), utils.endOfWeek(currentWeek - i), ctx.user.locale))
+    periods.push(...getPeriods(utils.startOfWeek(currentWeek - i), utils.endOfWeek(currentWeek - i), locale))
   }
 
   var confirmedPeriods = await ctx.services.storage.getConfirmedPeriods({

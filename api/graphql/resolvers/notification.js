@@ -24,7 +24,7 @@ const typeDef = gql`
     """
     Get notifications
     """
-    notifications(templates: NotificationTemplates!): [Notification!]!
+    notifications(templates: NotificationTemplates!, locale: String!): [Notification!]!
   }
 `
 
@@ -35,6 +35,7 @@ async function notifications(_obj, variables, ctx) {
     unconfirmed_periods({
       template: variables.templates.unconfirmedPeriods,
       ctx,
+      locale: variables.locale,
     }),
   ])
   return notifications
