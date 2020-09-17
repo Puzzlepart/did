@@ -22,8 +22,7 @@ async function onVerifySignin(_iss, _sub, profile, _accessToken, _refreshToken, 
   }
   user = {
     id: profile.oid,
-    tenantId: profile._json.tid,
-    locale: user.userLanguage,
+    locale: user.preferredLanguage,
     profile: pick(profile, 'displayName', 'email'),
     subscription,
     oauthToken: params,
