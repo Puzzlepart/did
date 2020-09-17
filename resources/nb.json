@@ -73,7 +73,6 @@
     "filterLabels": "Filtrer merkelapper...",
     "rolesPermissions": "Roller og tilganger",
     "addNewUser": "Legg til ny",
-    "editUser": "Rediger",
     "defaultLabelTitle": "Ny merkelapp",
     "addNewLabel": "Opprett ny merkelapp",
     "editLabel": "Rediger merkelapp",
@@ -88,7 +87,8 @@
     "tokenErrorText": "Det skjedde en feil under generering av nøkkel. Prøv igjen senere.",
     "tokenDeletedText": "Nøkkelen `{0}` ble slettet.",
     "summaryLoadingText": "Laster tidsoppføringer og lager oppsummering...",
-    "importingUsersText": "Importerer {0} brukere. Vennligst vent.."
+    "importingUsersText": "Importerer {0} brukere. Vennligst vent..",
+    "bulkImportUsersLabel": "Importer i bulk"
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport. For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene...",

@@ -1,7 +1,7 @@
 import { List } from 'components'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { CheckboxVisibility, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
-import { Panel } from 'office-ui-fabric-react/lib/Panel'
+import { Panel, PanelType } from 'office-ui-fabric-react/lib/Panel'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { pick } from 'underscore'
@@ -18,6 +18,7 @@ export const ImportPanel = (props: IImportPanelProps) => {
     return (
         <Panel
             {...pick(props, 'onDismiss', 'headerText')}
+            type={PanelType.medium}
             className={styles.root}
             isOpen={true}>
             <div className={styles.container}>

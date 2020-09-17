@@ -73,7 +73,6 @@
     "filterLabels": "Filter labels...",
     "rolesPermissions": "Roles and permissions",
     "addNewUser": "Add new",
-    "editUser": "Edit",
     "defaultLabelTitle": "My new label",
     "addNewLabel": "Add new label",
     "editLabel": "Edit label",
@@ -88,7 +87,8 @@
     "tokenErrorText": "An error occurred generating your key. Please try again later.",
     "tokenDeletedText": "API key `{0}` was succesfully deleted.",
     "summaryLoadingText": "Loading time entries and creating summary...",
-    "importingUsersText": "Importing {0} users. Please wait.."
+    "importingUsersText": "Importing {0} users. Please wait..",
+    "bulkImportUsersLabel": "Bulk-import users"
   },
   "reports": {
     "generatingReportLabel": "Generating report. To give you the freshest results, we're generating a report from the latest data...",

@@ -48,7 +48,7 @@ const List = (props: IListProps) => {
                 <SearchBox
                     {...props.searchBox}
                     styles={{ field: { fontSize: '10pt', letterSpacing: '1px' }, root: { width: 400, maxWidth: 400 } }}
-                    onChange={(_, newValue) => delay(400).then(() => dispatch({ type: 'search', payload: newValue }))} />
+                    onChange={(_, newValue) => delay(400).then(() => dispatch({ type: 'SEARCH', payload: newValue }))} />
             ),
         })
         const commandBarItems = [searchBox, ...props.commandBar.items].filter(c => c)

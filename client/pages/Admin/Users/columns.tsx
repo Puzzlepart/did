@@ -26,12 +26,12 @@ export const columns = (onEdit: (user: IUser) => void, t: TFunction): IColumn[] 
         }
     ),
     col(
-        'edit_user',
+        'actions',
         '',
         {},
         (user: IUser) => (
             <DefaultButton
-                text={t('editUser', { ns: 'admin' })}
+                text={t('editLabel')}
                 onClick={() => onEdit(user)} />
         ))
 ])
