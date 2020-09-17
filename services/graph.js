@@ -45,8 +45,17 @@ class GraphService {
       log('Querying Graph /users')
       const { value } = await this.getClient()
         .api('/users')
-      .filter('userType eq \'Member\'')
-        .select('id', 'displayName', 'userType', 'mail')
+        .filter('userType eq \'Member\'')
+        .select(
+          'id',
+          'givenName',
+          'surname',
+          'jobTitle',
+          'displayName',
+          'mobilePhone',
+          'mail',
+          'preferredLanguage'
+        )
         .top(999)
         .get()
       return value
@@ -125,10 +134,7 @@ class GraphService {
       )
       const { value } = await this.getClient()
         .api('/me/calendar/calendarView')
-        .query({
-          startDateTime,
-          endDateTime,
-        })
+        .query({ startDateTime, endDateTime })
         .select('id,subject,body,start,end,lastModifiedDateTime,categories,webLink,isOrganizer')
         .filter(`sensitivity ne 'private' and isallday eq false and iscancelled eq false`)
         .orderby('start/dateTime asc')
