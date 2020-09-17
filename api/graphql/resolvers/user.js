@@ -108,8 +108,8 @@ async function currentUser(_obj, _variables, ctx) {
       ctx.services.storage.getRoles(),
     ])
     return {
-      ...user,
       ...ctx.user,
+      ...user,
       role: find(roles, role => role.name === user.role),
     }
   } catch (error) {}

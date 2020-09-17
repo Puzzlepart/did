@@ -6,7 +6,7 @@ import { ISpinnerProps, Spinner } from 'office-ui-fabric-react/lib/Spinner'
 import { format } from 'office-ui-fabric-react/lib/Utilities'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { filter, find, omit } from 'underscore'
+import { filter, find, isEmpty, omit } from 'underscore'
 import BULK_ADD_USERS from './BULK_ADD_USERS'
 import { columns } from './columns'
 import { GET_DATA } from './GET_DATA'
@@ -30,6 +30,7 @@ export const Users = () => {
         adUsers: data?.adUsers || [],
     }), [data])
     ctxValue.adUsers = filter(ctxValue.adUsers, x => !find(ctxValue.users, y => y.id === x.id))
+
 
     /**
      * On edit user
@@ -67,12 +68,14 @@ export const Users = () => {
                             key: 'ADD_NEW_USER',
                             name: t('addNewUser', { ns: 'admin' }),
                             iconProps: { iconName: 'AddFriend' },
+                            disabled: isEmpty(ctxValue.adUsers),                            
                             onClick: () => setUserForm({ headerText: t('addNewUser', { ns: 'admin' }) }),
                         },
                         {
                             key: 'BULK_IMPORT_USERS',
                             name: t('bulkImportUsersLabel', { ns: 'admin' }),
                             iconProps: { iconName: 'CloudImportExport' },
+                            disabled: isEmpty(ctxValue.adUsers),      
                             onClick: () => setBulkImportPanel({ isOpen: true }),
                         },
                         {
