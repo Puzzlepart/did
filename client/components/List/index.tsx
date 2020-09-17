@@ -6,6 +6,7 @@ import { ShimmeredDetailsList } from 'office-ui-fabric-react/lib/ShimmeredDetail
 import React, { useReducer } from 'react'
 import { useEffect } from 'react'
 import { delay } from 'utils'
+import { first } from 'underscore'
 import { withDefaultProps } from 'with-default-props'
 import { generateListGroups } from './generateListGroups'
 import { ListHeader } from './ListHeader'
@@ -27,8 +28,15 @@ const List = (props: IListProps) => {
 
     selection = props.selection && new Selection({
         onSelectionChanged: () => {
-            const [selected] = selection.getSelection()
-            props.selection.onChanged(selected)
+            const _selection = selection.getSelection()
+            // eslint-disable-next-line default-case
+            switch (props.selection?.mode) {
+                case SelectionMode.single: props.selection.onChanged(first(_selection))
+                    break
+                case SelectionMode.multiple: props.selection.onChanged(_selection)
+                    break
+            }
+
         }
     })
 
@@ -80,7 +88,7 @@ const List = (props: IListProps) => {
                         onRenderHeader: onRenderGroupHeader,
                     }}
                     onRenderDetailsHeader={onRenderListHeader}
-                    checkboxVisibility={CheckboxVisibility.hidden} />
+                    checkboxVisibility={props.checkboxVisibility || CheckboxVisibility.hidden} />
             </ScrollablePaneWrapper>
         </div>
     )
