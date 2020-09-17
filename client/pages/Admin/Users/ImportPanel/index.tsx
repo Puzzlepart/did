@@ -27,7 +27,7 @@ export const ImportPanel = (props: IImportPanelProps) => {
                     disabled={selectedUsers.length === 0} 
                     onClick={() => props.onImport(selectedUsers)}/>
                 <List
-                    items={props.users}
+                    items={props.adUsers}
                     selection={{
                         mode: SelectionMode.multiple,
                         onChanged: selected => setSelectedUsers(selected)

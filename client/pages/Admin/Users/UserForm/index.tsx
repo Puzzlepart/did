@@ -49,21 +49,23 @@ export const UserForm = (props: IUserFormProps) => {
             {...pick(props, 'onDismiss', 'headerText')}
             className={styles.root}
             isOpen={true}>
-            <div className={styles.inputContainer} hidden={!!props.user}>
-                <Autocomplete
-                    placeholder={t('searchPlaceholder')}
-                    items={props.users.map(u => ({
-                        key: u.id,
-                        displayValue: u.displayName,
-                        searchValue: u.displayName,
-                    }))}
-                    onSelected={item => setModel({
-                        ...model,
-                        id: item?.key as string,
-                        displayName: item?.displayValue,
-                    })}
-                    onClear={() => setModel({ ...model, id: '', displayName: '' })} />
-            </div>
+            {!props.user && (
+                <div className={styles.inputContainer}>
+                    <Autocomplete
+                        placeholder={t('searchPlaceholder')}
+                        items={props.adUsers.map(u => ({
+                            key: u.id,
+                            displayValue: u.displayName,
+                            searchValue: u.displayName,
+                        }))}
+                        onSelected={item => setModel({
+                            ...model,
+                            id: item?.key as string,
+                            displayName: item?.displayValue,
+                        })}
+                        onClear={() => setModel({ ...model, id: '', displayName: '' })} />
+                </div>
+            )}
             <div className={styles.inputContainer}>
                 <ChoiceGroup
                     options={props.roles.map(role => ({

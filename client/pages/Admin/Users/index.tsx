@@ -72,7 +72,7 @@ export const Users = () => {
                             iconProps: { iconName: 'AddFriend' },
                             onClick: () => setUserForm({
                                 headerText: t('addNewUser', { ns: 'admin' }),
-                                users: unregisteredUsers,
+                                adUsers: unregisteredUsers,
                                 roles: value(data, 'roles', []),
                             }),
                         },
@@ -81,7 +81,7 @@ export const Users = () => {
                             name: t('bulkImportUsersLabel', { ns: 'admin' }),
                             iconProps: { iconName: 'CloudImportExport' },
                             onClick: () => setImportPanel({
-                                users: unregisteredUsers,
+                                adUsers: unregisteredUsers,
                                 headerText: t('bulkImportUsersLabel', { ns: 'admin' })
                             }),
                         },
