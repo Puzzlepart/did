@@ -1,15 +1,14 @@
 import { useQuery } from '@apollo/react-hooks'
 import { List } from 'components'
-import { value } from 'helpers'
+import { PermissionList } from 'components/PermissionList'
 import { IRole } from 'interfaces'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
-import * as React from 'react'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { generateColumn as col } from 'utils/generateColumn'
-import { IRolePanelProps, RolePanel } from './RolePanel'
 import { GET_ROLES } from './GET_ROLES'
-import { PermissionList } from 'components/PermissionList'
-import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import { IRolePanelProps, RolePanel } from './RolePanel'
 
 /**
  * @category Admin
@@ -17,18 +16,20 @@ import { Icon } from 'office-ui-fabric-react/lib/Icon'
 export const Roles = () => {
     const { t } = useTranslation(['admin', 'common'])
     const { data, loading, refetch } = useQuery(GET_ROLES)
-    const [panel, setPanel] = React.useState<IRolePanelProps>(null)
+    const [panel, setPanel] = useState<IRolePanelProps>(null)
     const columns = [
         col(
-            'icon',
-            '',
-            { maxWidth: 30 },
-            (role: IRole) => <Icon styles={{ root: { fontSize: 33 } }} iconName={role.icon} />
-        ),
-        col(
             'name',
-            t('roleLabel', { ns: 'common' }),
+            '',
             { maxWidth: 140 },
+            (role: IRole) => {
+                return (
+                    <div>
+                        <Icon styles={{ root: { fontSize: 33 } }} iconName={role.icon} />
+                        <div>{role.name}</div>
+                    </div>
+                )
+            }
         ),
         col(
             'permissions',
@@ -47,7 +48,7 @@ export const Roles = () => {
                         text={t('editRole')}
                         onClick={() => setPanel({
                             title: t('editRole'),
-                            edit: role,
+                            model: role,
                         })} />
                 </>
             )),
@@ -57,7 +58,7 @@ export const Roles = () => {
         <>
             <List
                 enableShimmer={loading}
-                items={value(data, 'roles', [])}
+                items={data?.roles || []}
                 columns={columns}
                 commandBar={{
                     items: [
