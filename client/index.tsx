@@ -17,7 +17,7 @@ initializeIcons()
 
 client.query<{ currentUser: any }>({ query: GET_CURRENT_USER }).then(({ data }) => {
     const container = document.getElementById('app')
-    const context: IAppContext = { user: data.currentUser }
+    const context: IAppContext = { user: data?.currentUser }
     context.user.preferredLanguage = context.user.preferredLanguage || 'en-GB'
     
     DateUtils.setup(context.user.preferredLanguage)

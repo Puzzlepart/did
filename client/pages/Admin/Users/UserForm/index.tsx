@@ -42,9 +42,7 @@ export const UserForm = (props: IUserFormProps) => {
     /**
      * Checks if form is valid
      */
-    const isFormValid = () => {
-        return !validator.isEmpty(model?.id) && validator.isUUID(model?.id) && !validator.isEmpty(model?.displayName)
-    }
+    const isFormValid = () => !validator.isEmpty(model?.id) && validator.isUUID(model?.id) && !validator.isEmpty(model?.displayName)
 
     return (
         <Panel
@@ -76,6 +74,7 @@ export const UserForm = (props: IUserFormProps) => {
                         data: role,
                         iconProps: { iconName: role.icon }
                     }))}
+                    onChange={(_event, opt) => setModel({ ...model, role: opt['data'] })}
                     defaultSelectedKey={model.role ? model.role.name : 'User'} />
             </div>
             <PrimaryButton
