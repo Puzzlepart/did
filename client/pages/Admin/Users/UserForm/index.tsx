@@ -82,8 +82,7 @@ export const UserForm = (props: IUserFormProps) => {
                 disabled={!isFormValid()}
                 onClick={onSave} />
         </Panel>
-    )
-    
+    )    
 }
 
 export * from './types'

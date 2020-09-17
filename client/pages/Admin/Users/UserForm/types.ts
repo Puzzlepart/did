@@ -14,10 +14,9 @@ export interface IUserFormProps extends IPanelProps {
    * Available roles
    */
   roles?: IRole[]
-  
+
   /**
    * Active Directory users
    */
   adUsers?: any[]
-
 }

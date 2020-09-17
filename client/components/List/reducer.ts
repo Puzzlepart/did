@@ -1,10 +1,7 @@
 import { searchObject } from 'utils'
 import { IListProps, IListState } from './types'
 
-type Action =
-  { type: 'PROPS_UPDATED'; payload: IListProps }
-  |
-  { type: 'SEARCH'; payload: string }
+type Action = { type: 'PROPS_UPDATED'; payload: IListProps } | { type: 'SEARCH'; payload: string }
 
 /**
  * Reducer for Timesheet

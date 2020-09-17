@@ -3,7 +3,7 @@ import { IPanelProps } from 'office-ui-fabric-react/lib/Panel'
 /**
  * @category Admin
  */
-export interface IImportPanelProps extends IPanelProps {  
+export interface IImportPanelProps extends IPanelProps {
   /**
    * Active Directory users
    */
@@ -12,5 +12,5 @@ export interface IImportPanelProps extends IPanelProps {
   /**
    * On import users
    */
-  onImport?: (adUsers: any[]) => void;
+  onImport?: (adUsers: any[]) => void
 }
