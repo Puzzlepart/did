@@ -393,6 +393,7 @@ class StorageService {
     const { string } = this.tableUtil.azEntGen()
     const entity = this.tableUtil.convertToAzEntity(role.name, {
       permissions: role.permissions.join('|'),
+      icon: role.icon,
     })
     let result
     if (update) result = await this.tableUtil.updateEntity('Roles', entity, true)
