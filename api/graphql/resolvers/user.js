@@ -17,7 +17,7 @@ const typeDef = gql`
     role: Role
     displayName: String
     email: String
-    userLanguage: String
+    preferredLanguage: String
     sub: Subscription
   }
 
@@ -27,6 +27,12 @@ const typeDef = gql`
   type ADUser {
     id: String
     displayName: String
+    givenName: String
+    surname: String
+    jobTitle: String
+    mobilePhone: String
+    mail: String
+    preferredLanguage: String
   }
 
   """
@@ -35,8 +41,13 @@ const typeDef = gql`
   input UserInput {
     id: String!
     displayName: String
+    givenName: String
+    surname: String
+    jobTitle: String
+    mobilePhone: String
+    mail: String
+    preferredLanguage: String
     role: String
-    userLanguage: String
   }
 
   extend type Query {
@@ -88,15 +99,14 @@ async function users(_obj, _variables, ctx) {
 
 async function currentUser(_obj, _variables, ctx) {
   try {
-    const [user, sub, roles] = await Promise.all([
+    const [user, roles] = await Promise.all([
       ctx.services.storage.getUser(ctx.user.id),
-      ctx.services.subscription.getSubscription(ctx.user.tenantId),
       ctx.services.storage.getRoles(),
     ])
     return {
       ...user,
       email: ctx.user.profile.email,
-      sub,
+      sub: ctx.subscription,
       role: find(roles, role => role.name === user.role),
     }
   } catch (error) { }
