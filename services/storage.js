@@ -199,18 +199,15 @@ class StorageService {
 
   /**
    * Bulk add users
-   * 
+   *
    * @param {*} users Users to add
    */
   async bulkAddUsers(users) {
     const entities = users.map(user => {
-      const entity = this.tableUtil.convertToAzEntity(
-        user.id,
-        {
-          ...omit(user, 'id'),
-          role: 'User'
-        }
-      )
+      const entity = this.tableUtil.convertToAzEntity(user.id, {
+        ...omit(user, 'id'),
+        role: 'User',
+      })
       return entity
     })
     const batch = this.tableUtil.createAzBatch()
