@@ -113,7 +113,7 @@ async function currentUser(_obj, _variables, ctx) {
       subscription: ctx.user.subscription,
       role: find(roles, role => role.name === user.role),
     }
-  } catch (error) { }
+  } catch (error) {}
 }
 
 async function addOrUpdateUser(_obj, variables, ctx) {
