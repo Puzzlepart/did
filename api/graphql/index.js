@@ -108,7 +108,7 @@ const getContext = async ({ req }) => {
   if (!!req.user) services.graph = new GraphService(req)
   return {
     services,
-    user: req.user,
+    user: req.user || {},
   }
 }
 
