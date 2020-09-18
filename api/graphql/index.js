@@ -12,6 +12,7 @@ const { typeDef: Notification } = require('./resolvers/notification')
 const { typeDef: ApiToken } = require('./resolvers/apiToken')
 const { StorageService, GraphService, SubscriptionService } = require('../../services')
 const { filter } = require('underscore')
+const value = require('get-value')
 
 const Query = gql`
   """
@@ -109,6 +110,7 @@ const getContext = async ({ req }) => {
   return {
     services,
     user: req.user || {},
+    subscription,
   }
 }
 
@@ -122,7 +124,7 @@ module.exports = new ApolloServer({
     variant: 'current',
     generateClientInfo: ({ context }) => {
       return {
-        clientName: context.user && context.user.subscription.name,
+        clientName: value(context, 'subscription.name', { default: '' }),
       }
     },
   },
