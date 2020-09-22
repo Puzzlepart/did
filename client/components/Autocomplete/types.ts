@@ -16,6 +16,9 @@ export interface IAutocompleteProps extends ISearchBoxProps {
   defaultSelectedItem?: ISuggestionItem
   classNames?: IAutocompleteClassNames
   showIcons?: boolean
+  label?: string;
+  description?: string;
+  errorMessage?: string;
 }
 
 export interface IAutocompleteState {

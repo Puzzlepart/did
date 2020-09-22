@@ -1,6 +1,7 @@
 import { Callout } from 'office-ui-fabric-react/lib/Callout'
 import { FocusZone, FocusZoneDirection } from 'office-ui-fabric-react/lib/FocusZone'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import { Label } from 'office-ui-fabric-react/lib/Label'
 import { List } from 'office-ui-fabric-react/lib/List'
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox'
 import * as React from 'react'
@@ -57,13 +58,14 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
     return (
       <div
         ref={this._containerElement}
+        className={`${styles.root} ${this.props.className}`}
         style={{ width: this.props.width }}
         onKeyDown={this.onKeyDown}>
+        {this.props.label && <Label>{this.props.label}</Label>}
         <SearchBox
           id='SuggestionSearchBox'
           iconProps={{ iconName }}
           value={this.state.searchText}
-          className={this.props.className}
           placeholder={this.props.placeholder}
           disabled={this.props.disabled}
           onSearch={this.onSearch}
@@ -78,6 +80,14 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
           }}
         />
         {this.renderSuggestions()}
+        <span>
+          <span hidden={!this.props.description} className={styles.description}>{this.props.description}</span>
+          <div hidden={!this.props.errorMessage} role='alert'>
+            <p className={styles.errorMessage}>
+              <span>{this.props.errorMessage}</span>
+            </p>
+          </div>
+        </span>
       </div>
     )
   }
