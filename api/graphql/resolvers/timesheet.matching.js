@@ -37,8 +37,8 @@ class EventMatching {
    * @param {*} soft Soft search - don't require [], () or {}
    */
   searchString(input, soft) {
-    let regex = /[\(\{\[]((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<key>[A-Za-z0-9]{2,}?))[\)\]\}]/gim
-    if (soft) regex = /((?<customerKey>[A-Za-z0-9]{2,}?)\s(?<key>[A-Za-z0-9]{2,}))/gim
+    let regex = /[\(\{\[]((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<key>[\wæøåÆØÅ]{2,}?))[\)\]\}]/gim
+    if (soft) regex = /((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<key>[\wæøåÆØÅ]{2,}))/gim
     let matches
     let match
     while ((match = regex.exec(input)) != null) {
