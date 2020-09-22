@@ -261,13 +261,14 @@ class StorageService {
       const year = getYear(event.startDateTime)
       const duration = getDurationHours(event.startDateTime, event.endDateTime)
       totalDuration += duration
+      console.log(user)
       const entity = this.tableUtil.convertToAzEntity(
         entry.id,
         {
           ...pick(entry, 'projectId', 'manualMatch'),
           ...pick(event, 'title', 'startDateTime', 'endDateTime', 'webLink'),
           description: event.body,
-          resourceName: user.profile.displayName,
+          resourceName: user.displayName,
           duration,
           year,
           weekNumber,
