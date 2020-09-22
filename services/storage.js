@@ -261,7 +261,6 @@ class StorageService {
       const year = getYear(event.startDateTime)
       const duration = getDurationHours(event.startDateTime, event.endDateTime)
       totalDuration += duration
-      console.log(user)
       const entity = this.tableUtil.convertToAzEntity(
         entry.id,
         {
