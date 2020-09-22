@@ -42,7 +42,7 @@ export const ProjectForm = (props: IProjectFormProps) => {
      */
     const validateForm = (): IProjectFormValidation => {
         const errors: { [key: string]: string } = {}
-        if (!model.customerKey) errors.customerKey = ''
+        if (!model.customerKey) errors.customerKey =t('customerFormValidationText')
         if (model.name.length < 2) errors.name = format(t('nameFormValidationText'), 2)
         if (!(/(^[A-ZÆØÅ0-9]{2,8}$)/gm).test(model.key)) errors.key = format(t('keyFormValidationText'), 2, 8)
         return { errors, invalid: Object.keys(errors).length > 0 }
@@ -88,6 +88,7 @@ export const ProjectForm = (props: IProjectFormProps) => {
                 required={true}
                 className={styles.inputField}
                 placeholder={t('searchPlaceholder')}
+                errorMessage={validation.errors.customerKey}
                 onSelected={customer => setModel({
                     ...model,
                     customerKey: customer && customer.key,

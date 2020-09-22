@@ -47,7 +47,8 @@
     "myProjectsText": "Mine prosjekter",
     "myProjectsSearchPlaceholder": "Søk i mine prosjekter...",
     "exportTimeEntriesLabel": "Eksporter timeoppføringer til Excel",
-    "keyFieldDescription": "En unik identifikator for prosjektet. Holdt det kort, maks 8 tegn.",
+    "keyFieldDescription": "En unik identifikator for prosjektet. Hold det kort, maks 8 tegn. Kun A-Z, 0-9.",
+    "customerFormValidationText": "Du må velge en kunde for prosjektet.",
     "nameFormValidationText": "Prosjektnavnet må være minst {0} tegn langt.",
     "keyFormValidationText": "Prosjektnøkkelen må være mellom {0} og {1} tegn lang, og bare store bokstaver.",
     "createSuccess": "Prosjektet **{0}** ble opprettet.",
@@ -60,7 +61,7 @@
     "deleteConfirmationText": "Slettet kunde {0} og tilhørende prosjekter.",
     "webLinkText": "Webside",
     "externalSystemUrlText": "Eksternt business-system",
-    "keyFieldDescription": "En unik identifikator for kunden. Holdt det kort, maks 8 tegn.",
+    "keyFieldDescription": "En unik identifikator for kunden. Holdt det kort, maks 8 tegn. Kun A-Z, 0-9.",
     "nameFormValidationText": "Kundenavnet må være minst 2 tegn langt.",
     "keyFormValidationText": "Kundenøkkelen må være mellom 3 og 8 tegn lang, og bare store bokstaver.",
     "createSuccess": "Kunden **{0}** ble opprettet."

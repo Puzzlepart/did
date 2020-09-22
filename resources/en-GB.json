@@ -47,7 +47,8 @@
     "myProjectsText": "My projects",
     "myProjectsSearchPlaceholder": "Search my projects...",
     "exportTimeEntriesLabel": "Export time entries to Excel",
-    "keyFieldDescription": "A unique identifier for the project. Keep it short, maximum 8 characters.",
+    "customerFormValidationText": "You need to select a customer.",
+    "keyFieldDescription": "A unique identifier for the project. Keep it short, maximum 8 characters. Only A-Z, 0-9.",
     "nameFormValidationText": "Name should be at least 2 characters long.",
     "keyFormValidationText": "Project key should be between 2 and 8 characters long, and all uppercase.",
     "createSuccess": "The project **{0}** was succesfully created.",
@@ -60,7 +61,7 @@
     "deleteConfirmationText": "The customer {0} and connected projects was deleted.",
     "webLinkText": "Website",
     "externalSystemUrlText": "External LOB system",
-    "keyFieldDescription": "A unique identifier for the customer. Keep it short, maximum 8 characters.",
+    "keyFieldDescription": "A unique identifier for the customer. Keep it short, maximum 8 characters. Only A-Z, 0-9.",
     "nameFormValidationText": "Name should be at least {0} characters long.",
     "keyFormValidationText": "Customer key should be between {0} and {1} characters long, and all uppercase.",
     "createSuccess": "The customer **{0}** was succesfully created."
