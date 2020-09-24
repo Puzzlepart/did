@@ -89,6 +89,7 @@ async function users(_obj, _variables, ctx) {
 }
 
 async function currentUser(_obj, _variables, ctx) {
+  if(!ctx.user) return null
   try {
     const [user, roles] = await Promise.all([
       ctx.services.storage.getUser(ctx.user.id),
@@ -99,7 +100,9 @@ async function currentUser(_obj, _variables, ctx) {
       ...user,
       role: find(roles, role => role.name === user.role),
     }
-  } catch (error) { }
+  } catch (error) {
+    return null
+  }
 }
 
 async function addOrUpdateUser(_obj, variables, ctx) {
