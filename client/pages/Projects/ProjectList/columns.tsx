@@ -26,7 +26,7 @@ export default (props: IProjectListProps, t: TFunction): IColumn[] => ([
             if (project.inactive) {
                 return (
                     <Icon
-                        title={t('inactiveText')}
+                        title={t('projects.inactiveText')}
                         iconName='Warning'
                         styles={{ root: { fontSize: 16, color: '#ffbf00' } }} />
                 )
@@ -36,18 +36,18 @@ export default (props: IProjectListProps, t: TFunction): IColumn[] => ([
     ),
     col(
         'id',
-        t('keyFieldLabel'),
+        t('common.keyFieldLabel'),
         { maxWidth: 120 },
     ),
     col(
         'name',
-        t('nameFieldLabel'),
+        t('common.nameFieldLabel'),
         { maxWidth: 220 },
         (project: IProject) => <NameLabel project={project} renderLink={props.renderLink} />,
     ),
     col(
         'customer',
-        t('customer'),
+        t('common.customer'),
         { maxWidth: 220 },
         (project: IProject) => {
             if (!project.customer) return null

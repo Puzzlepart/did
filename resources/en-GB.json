@@ -88,8 +88,7 @@
     "tokenDeletedText": "API key `{0}` was succesfully deleted.",
     "summaryLoadingText": "Loading time entries and creating summary...",
     "bulkImportUsersLabel": "Import {0} users",
-    "bulkImportingUsersLabel": "Importing {0} users. Please wait..",
-    "bulkImportUsersLabel": "Bulk-import users"
+    "bulkImportingUsersLabel": "Importing {0} users. Please wait.."
   },
   "reports": {
     "generatingReportLabel": "Generating report. To give you the freshest results, we're generating a report from the latest data...",

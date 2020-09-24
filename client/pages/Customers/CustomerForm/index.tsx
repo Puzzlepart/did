@@ -24,7 +24,7 @@ const initialModel: ICustomerInput = {
  * @category Customers
  */
 export const CustomerForm = () => {
-    const { t } = useTranslation(['customers', 'common'])
+    const { t } = useTranslation()
     const [validation, setValidation] = useState<ICustomerFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useState<{ text: string; type: MessageBarType }>(null)
     const [model, setModel] = useState<ICustomerInput>(initialModel)
@@ -35,8 +35,8 @@ export const CustomerForm = () => {
      */
     const validateForm = (): ICustomerFormValidation => {
         const errors: { [key: string]: string } = {}
-        if (model.name.length < 2) errors.name = format(t('nameFormValidationText'), 2)
-        if (!(/(^[A-ZÆØÅ0-9]{3,8}$)/gm).test(model.key)) errors.key = format(t('keyFormValidationText'), 3, 8)
+        if (model.name.length < 2) errors.name = format(t('customers.nameFormValidationText'), 2)
+        if (!(/(^[A-ZÆØÅ0-9]{3,8}$)/gm).test(model.key)) errors.key = format(t('customers.keyFormValidationText'), 3, 8)
         return { errors, invalid: Object.keys(errors).length > 0 }
     }
 
@@ -57,7 +57,7 @@ export const CustomerForm = () => {
             }
         })
         if (result.success) {
-            setMessage({ text: format(t('createSuccess'), model.name), type: MessageBarType.success })
+            setMessage({ text: format(t('customers.createSuccess'), model.name), type: MessageBarType.success })
         } else {
             setMessage({ text: result.error.message, type: MessageBarType.error })
         }
@@ -70,22 +70,22 @@ export const CustomerForm = () => {
             {message && <UserMessage containerStyle={{ marginTop: 12, marginBottom: 12, width: 450 }} text={message.text} type={message.type} />}
             <TextField
                 className={styles.inputField}
-                label={t('keyFieldLabel')}
-                description={t('keyFieldDescription')}
+                label={t('common.keyFieldLabel')}
+                description={t('customers.keyFieldDescription')}
                 required={true}
                 errorMessage={validation.errors.key}
                 onChange={(_event, key) => setModel({ ...model, key })}
                 value={model.key} />
             <TextField
                 className={styles.inputField}
-                label={t('nameFieldLabel')}
+                label={t('common.nameFieldLabel')}
                 required={true}
                 errorMessage={validation.errors.name}
                 onChange={(_event, name) => setModel({ ...model, name })}
                 value={model.name} />
             <TextField
                 className={styles.inputField}
-                label={t('descriptionFieldLabel')}
+                label={t('common.descriptionFieldLabel')}
                 multiline={true}
                 errorMessage={validation.errors.description}
                 onChange={(_event, description) => setModel({ ...model, description })}
@@ -93,13 +93,13 @@ export const CustomerForm = () => {
             <IconPicker
                 className={styles.inputField}
                 defaultSelected={model.icon}
-                label={t('iconLabel')}
-                placeholder={t('iconSearchPlaceholder')}
+                label={t('common.iconLabel')}
+                placeholder={t('common.iconSearchPlaceholder')}
                 width={300}
                 onSelected={icon => setModel({ ...model, icon })} />
             <PrimaryButton
                 styles={{ root: { marginTop: 16 } }}
-                text={t('add')}
+                text={t('common.add')}
                 iconProps={{ iconName: 'CirclePlus' }}
                 onClick={onFormSubmit}
                 disabled={loading || !!message} />

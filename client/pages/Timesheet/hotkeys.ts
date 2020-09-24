@@ -5,22 +5,22 @@ import { ITimesheetContext } from './TimesheetContext'
 export default (context: ITimesheetContext, t: TFunction): GlobalHotKeysProps => ({
   keyMap: {
     GO_TO_CURRENT_WEEK: {
-      name: t('goToCurrentWeek'),
+      name: t('timesheet.goToCurrentWeek'),
       sequence: 'SHIFT+DOWN',
       action: 'keydown',
     },
     PREV_WEEK: {
-      name: t('goToPrevWeek'),
+      name: t('timesheet.goToPrevWeek'),
       sequence: 'SHIFT+LEFT',
       action: 'keydown',
     },
     NEXT_WEEK: {
-      name: t('goToNextWeek'),
+      name: t('timesheet.goToNextWeek'),
       sequence: 'SHIFT+RIGHT',
       action: 'keydown',
     },
     SHOW_SHORTCUTS: {
-      name: t('showShortcutsText'),
+      name: t('common.showShortcutsText'),
       sequence: 'SHIFT+I',
       action: 'keydown',
     },

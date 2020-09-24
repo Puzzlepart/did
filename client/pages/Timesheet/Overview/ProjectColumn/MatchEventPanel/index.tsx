@@ -16,7 +16,7 @@ import { MobileView, BrowserView } from 'react-device-detect'
  * @category Timesheet
 */
 export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
-    const { t } = useTranslation(['timesheet', 'common'])
+    const { t } = useTranslation()
     const { dispatch } = React.useContext<ITimesheetContext>(TimesheetContext)
     const [showPanel, setShowPanel] = React.useState<boolean>(false)
 
@@ -29,7 +29,7 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
         <>
             <BrowserView renderWithFragment={true}>
                 <MessageBarButton
-                    text={t('resolveProjectButtonLabel')}
+                    text={t('timesheet.resolveProjectButtonLabel')}
                     iconProps={{ iconName: 'ReviewResponseSolid' }}
                     onClick={() => setShowPanel(true)} />
             </BrowserView>
@@ -46,14 +46,14 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
                 <div className={styles.title}>{event.title}</div>
                 <UserMessage
                     iconName='OutlookLogo'
-                    text={format(t('matchOutlookInfoText'), event.webLink)} />
+                    text={format(t('timesheet.matchOutlookInfoText'), event.webLink)} />
 
                 <UserMessage
                     hidden={!event.suggestedProject}
                     containerStyle={{ marginTop: 10 }}
                     iconName='Lightbulb' >
                     <p>
-                        <span>{t('didYouMeanText')}</span>
+                        <span>{t('timesheet.didYouMeanText')}</span>
                         <a href='#' onClick={() => onResolve(event.suggestedProject)}>
                             {value(event, 'suggestedProject.id', '')}
                         </a>?
@@ -63,13 +63,13 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
                 <UserMessage
                     hidden={!event.customer || !!event.suggestedProject}
                     containerStyle={{ marginTop: 10 }}
-                    text={format(t('eventNotFullyMatchedText'), value(event, 'customer.name', ''))} />
+                    text={format(t('timesheet.eventNotFullyMatchedText'), value(event, 'customer.name', ''))} />
 
                 <SearchProject
                     width='100%'
                     className={styles.searchProject}
                     onSelected={project => onResolve(project)}
-                    placeholder={t('searchPlaceholder')} />
+                    placeholder={t('common.searchPlaceholder')} />
             </Panel>
         </>
     )

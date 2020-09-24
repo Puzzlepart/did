@@ -21,7 +21,7 @@ import { IProjectsParams } from './types'
  * @category Projects
  */
 export const Projects = () => {
-    const { t } = useTranslation(['projects', 'common'])
+    const { t } = useTranslation()
     const { hasPermission } = useContext(AppContext)
     const history = useHistory()
     const params = useParams<IProjectsParams>()
@@ -58,16 +58,16 @@ export const Projects = () => {
                 <PivotItem
                     itemID='search'
                     itemKey='search'
-                    headerText={t('search')}
+                    headerText={t('common.search')}
                     itemIcon='FabricFolderSearch'>
                     {error
-                        ? <UserMessage type={MessageBarType.error} text={t('genericErrorText')} />
+                        ? <UserMessage type={MessageBarType.error} text={t('common.genericErrorText')} />
                         : (
                             <>
                                 <ProjectList
                                     enableShimmer={loading}
                                     items={projects}
-                                    searchBox={{ placeholder: t('searchPlaceholder') }}
+                                    searchBox={{ placeholder: t('common.searchPlaceholder') }}
                                     selection={{
                                         mode: SelectionMode.single,
                                         onChanged: selected => {
@@ -87,22 +87,22 @@ export const Projects = () => {
                 <PivotItem
                     itemID='my'
                     itemKey='my'
-                    headerText={t('myProjectsText')}
+                    headerText={t('projects.myProjectsText')}
                     itemIcon='FabricUserFolder'>
                     {error
                         ? <UserMessage
                             type={MessageBarType.error}
-                            text={t('genericErrorText')} />
+                            text={t('common.genericErrorText')} />
                         : (
                             <>
                                 <UserMessage
                                     containerStyle={{ marginBottom: 12 }}
                                     iconName='OutlookLogoInverse'
-                                    text={t('outlookCategoryInfoText')} />
+                                    text={t('projects.outlookCategoryInfoText')} />
                                 <ProjectList
                                     enableShimmer={loading}
                                     items={projects.filter(p => !!p.outlookCategory)}
-                                    searchBox={{ placeholder: t('myProjectsSearchPlaceholder') }}
+                                    searchBox={{ placeholder: t('projects.myProjectsSearchPlaceholder') }}
                                     selection={{
                                         mode: SelectionMode.single,
                                         onChanged: selected => setSelected(selected),
@@ -118,7 +118,7 @@ export const Projects = () => {
                     <PivotItem
                         itemID='new'
                         itemKey='new'
-                        headerText={t('createNewText')}
+                        headerText={t('common.createNewText')}
                         itemIcon='AddTo'>
                         <ProjectForm />
                     </PivotItem>

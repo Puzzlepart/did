@@ -52,7 +52,7 @@ export const UserForm = (props: IUserFormProps) => {
             {!props.user && (
                 <div className={styles.inputContainer}>
                     <Autocomplete
-                        placeholder={t('searchPlaceholder')}
+                        placeholder={t('common.searchPlaceholder')}
                         items={adUsers.map(u => ({
                             key: u.id,
                             displayValue: u.displayName,
