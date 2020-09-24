@@ -4,8 +4,10 @@ interface CssExports {
   'divider': string;
   'header': string;
   'icon': string;
+  'mail': string;
   'menu': string;
   'menuItem': string;
+  'role': string;
   'root': string;
   'userName': string;
 }

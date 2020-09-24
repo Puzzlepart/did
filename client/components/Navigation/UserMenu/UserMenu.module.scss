@@ -19,7 +19,7 @@
 
 .menu {
     border-radius: 3px;
-    padding: 15px 0;
+    padding-top: 15px;
     height: auto;
     width: auto;
     z-index: 100;
@@ -32,7 +32,7 @@
     .divider {
         display: block;
         height: 0;
-        margin: 8px 0;
+        margin: 0;
         border-top: 1px solid #e1e4e8;
     }
 
@@ -40,19 +40,28 @@
         vertical-align: sub;
         font-size: 17px;
         margin-right: 5px;
-        color:#cf5f00;
+        color: #cf5f00;
     }
 
     .menuItem {
         display: block;
         color: #24292e;
         font-size: 12px;
-        padding: 4px 8px 4px 16px;
+        padding: 12px 8px 12px 16px;
         letter-spacing: 0.02rem;
         font-weight: 400;
 
         &.userName {
             font-weight: 600;
+            padding: 0px 8px 0px 16px;
+
+            .role {
+                font-weight: normal;
+            }
+        }
+
+        &.mail {
+            padding: 2px 8px 8px 16px;
         }
     }
 
@@ -60,7 +69,8 @@
         color: inherit;
         text-decoration: none;
 
-        &:hover, &:hover .icon {
+        &:hover,
+        &:hover .icon {
             color: #fff;
             text-decoration: none;
             background-color: #cf5f00;
