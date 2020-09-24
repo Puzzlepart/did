@@ -1,6 +1,6 @@
 import { AppContext } from 'AppContext'
 import { Callout, Target } from 'office-ui-fabric-react/lib/Callout'
-import * as React from 'react'
+import React, { useContext, useState } from 'react'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
 import styles from './UserMenu.module.scss'
@@ -9,8 +9,8 @@ import { Icon } from 'office-ui-fabric-react/lib/Icon'
 
 export const UserMenu = () => {
     const { t } = useTranslation('common')
-    const { user } = React.useContext(AppContext)
-    const [menuTarget, setMenuTarget] = React.useState<Target>(null)
+    const { user } = useContext(AppContext)
+    const [menuTarget, setMenuTarget] = useState<Target>(null)
 
     return (
         <>
@@ -30,7 +30,7 @@ export const UserMenu = () => {
                         <div className={`${styles.menuItem} ${styles.userName}`}>{user.displayName}</div>
                         <div className={styles.menuItem}>{user.mail}</div>
                         <div className={styles.menuItem}>
-                            <span>{user.role.name}</span>
+                            <span>{user.role?.name}</span>
                         </div>
                         <div className={styles.divider}></div>
                         <div className={styles.menuItem}>

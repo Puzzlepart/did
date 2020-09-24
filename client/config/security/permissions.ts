@@ -1,6 +1,7 @@
 import { TFunction } from 'i18next'
 import { IPermission } from 'interfaces/IPermission'
 
+export const accessTimesheet = 'f5a82c37'
 export const accessCustomers = 'e18a7c45'
 export const accessProjects = '289a64ab'
 export const accessAdmin = '2653c3aa'
@@ -13,6 +14,11 @@ export const manageUsers = '15e40e99'
 export const manageRolesPermissions = 'cd52a735'
 
 export default (t: TFunction): IPermission[] => [
+  {
+    id: accessTimesheet,
+    key: 'accessTimesheet',
+    name: t('accessTimesheet', { ns: 'permissions' }),
+  },
   {
     id: accessCustomers,
     key: 'accessCustomers',

@@ -6,7 +6,7 @@ import styles from './Navigation.module.scss'
 import { NavItem } from './NavItem'
 import { UserMenu } from './UserMenu'
 import { isMobile } from 'react-device-detect'
-import { accessAdmin, accessReports, accessCustomers, accessProjects } from 'config/security/permissions'
+import * as permissions from 'config/security/permissions'
 import { UserNotifications } from './UserNotifications'
 
 export const Navigation = () => {
@@ -22,27 +22,28 @@ export const Navigation = () => {
                     <NavItem
                         text={t('timesheet')}
                         iconName='TimeSheet'
-                        to='/timesheet' />
+                        to='/timesheet' 
+                        permission={permissions.accessTimesheet} />
                     <NavItem
                         text={t('customers')}
                         iconName='People'
                         to='/customers'
-                        permission={accessCustomers} />
+                        permission={permissions.accessCustomers} />
                     <NavItem
                         text={t('projects')}
                         iconName='ProjectCollection'
                         to='/projects'
-                        permission={accessProjects} />
+                        permission={permissions.accessProjects} />
                     <NavItem
                         text={t('reports')}
                         iconName='ReportDocument'
                         to='/reports'
-                        permission={accessReports} />
+                        permission={permissions.accessReports} />
                     <NavItem
                         text={t('admin')}
                         iconName='Settings'
                         to='/admin'
-                        permission={accessAdmin} />
+                        permission={permissions.accessAdmin} />
                 </ul>
                 <ul className={styles.navRight}>
                     <UserNotifications />
