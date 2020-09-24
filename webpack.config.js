@@ -80,11 +80,16 @@ let config = {
 switch (mode) {
   case 'development':
     {
-      config.stats = 'minimal'
+      config.stats = 'normal'
       config.watch = true
       config.watchOptions = { aggregateTimeout: 200 }
       config.plugins.push(new LiveReloadPlugin())
-      config.plugins.push(new WebpackBuildNotifierPlugin({ sound: 'growl' }))
+      config.plugins.push(new WebpackBuildNotifierPlugin({
+        logo: path.join(__dirname, '/public/images/favicon/mstile-150x150.png'),
+        sound: 'growl',
+        suppressSuccess: true,
+        showDuration: true
+      }))
     }
     break
   case 'production':
