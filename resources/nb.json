@@ -88,7 +88,7 @@
     "tokenDeletedText": "Nøkkelen `{0}` ble slettet.",
     "summaryLoadingText": "Laster tidsoppføringer og lager oppsummering...",
     "bulkImportUsersLabel": "Importer {0} brukere",
-    "bulkImportingUsersLabel": "Importerer {0} brukere. Vennligst vent..",
+    "bulkImportingUsersLabel": "Importerer {0} brukere. Vennligst vent.."
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport. For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene...",
