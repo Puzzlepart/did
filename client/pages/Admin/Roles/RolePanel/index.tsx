@@ -66,8 +66,8 @@ export const RolePanel = (props: IRolePanelProps) => {
                     required={true}
                     onChange={(_event, name) => setModel({ ...model, name })} />
                 <IconPicker
-                    label={t('common.iconLabel')}
-                    placeholder={t('common.iconSearchPlaceholder')}
+                    label={t('iconLabel')}
+                    placeholder={t('iconSearchPlaceholder')}
                     defaultSelected={model.icon}
                     onSelected={icon => setModel({ ...model, icon })}
                     className={styles.inputField} />
@@ -85,7 +85,7 @@ export const RolePanel = (props: IRolePanelProps) => {
                 </div>
                 <PrimaryButton
                     className={styles.saveBtn}
-                    text={t('common.save')}
+                    text={t('save')}
                     onClick={onSave}
                     disabled={saveDisabled} />
             </div>

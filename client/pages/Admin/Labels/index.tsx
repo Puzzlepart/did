@@ -21,11 +21,11 @@ export const Labels = () => {
     const columns = [
         col(
             'name',
-            t('common.nameFieldLabel'),
+            t('nameFieldLabel'),
             { maxWidth: 180 },
             (label: IEntityLabel) => <EntityLabel label={label} />,
         ),
-        col('description', t('common.descriptionFieldLabel')),
+        col('description', t('descriptionFieldLabel')),
         col(
             'edit_delete',
             '',
@@ -34,10 +34,10 @@ export const Labels = () => {
                 <>
                     <DefaultButton
                         styles={{ root: { marginRight: 4 } }}
-                        text={t('common.editLabel')}
+                        text={t('editLabel')}
                         onClick={() => setForm({ label })} />
                     <DefaultButton
-                        text={t('common.delete')}
+                        text={t('delete')}
                         onClick={() => deleteLabel({ variables: { name: label.name } }).then(refetch)} />
                 </>
             )),
@@ -54,7 +54,7 @@ export const Labels = () => {
                     items: [
                         {
                             key: 'NEW_LABEL',
-                            name: t('common.addNewLabel'),
+                            name: t('addNewLabel'),
                             iconProps: { iconName: 'Add' },
                             onClick: () => setForm({})
                         }

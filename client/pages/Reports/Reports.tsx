@@ -21,15 +21,15 @@ import { IReportsQuery } from './types'
 export const Reports = () => {
     const { t } = useTranslation()
     const filters: BaseFilter[] = [
-        new ResourceFilter('resourceName', t('common.employeeLabel')),
-        new CustomerFilter('customer.name', t('common.customer')),
-        new ProjectFilter('project.name', t('common.project')),
+        new ResourceFilter('resourceName', t('employeeLabel')),
+        new CustomerFilter('customer.name', t('customer')),
+        new ProjectFilter('project.name', t('project')),
     ]
     const [filterPanelOpen, setFilterPanelOpen] = useState<boolean>(undefined)
     const [query, setQuery] = useState<IReportsQuery>()
     const [groupBy, setGroupBy] = useState<IListGroups>({
         fieldName: '.',
-        emptyGroupName: t('common.all'),
+        emptyGroupName: t('all'),
     })
     const [subset, setSubset] = useState<any[]>(undefined)
     const { loading, data } = useQuery<any, ITimeEntriesVariables>(
@@ -76,7 +76,7 @@ export const Reports = () => {
                     ...groupBy,
                     totalFunc: items => {
                         const totalDuration = (items.reduce((sum, item) => sum + item.duration, 0) as number).toFixed(0)
-                        return format(t('common.headerTotalDuration'), totalDuration)
+                        return format(t('headerTotalDuration'), totalDuration)
                     },
                 }}
                 columns={columns(t)}

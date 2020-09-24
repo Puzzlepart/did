@@ -40,7 +40,7 @@ export const BulkImportPanel = (props: IBulkImportPanelProps) => {
                         {
                             key: 'displayName',
                             fieldName: 'displayName',
-                            name: t('common.displayNameLabel'),
+                            name: t('displayNameLabel'),
                             minWidth: 100,
                         }
                     ]} />

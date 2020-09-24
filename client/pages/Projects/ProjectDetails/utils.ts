@@ -11,21 +11,21 @@ import { TFunction } from 'i18next'
 export function getSummary(timeentries: any[], t: TFunction) {
   return [
     {
-      label: t('common.hoursCurrentMonth'),
+      label: t('hoursCurrentMonth'),
       value: getSum(
         filter(timeentries, entry => entry.monthNumber === new Date().getMonth() + 1),
         'duration'
       ),
     },
     {
-      label: t('common.hoursPrevMonth'),
+      label: t('hoursPrevMonth'),
       value: getSum(
         filter(timeentries, entry => entry.monthNumber === new Date().getMonth()),
         'duration'
       ),
     },
     {
-      label: t('common.hoursCurrentYear'),
+      label: t('hoursCurrentYear'),
       value: getSum(
         filter(timeentries, entry => entry.year === new Date().getFullYear()),
         'duration'

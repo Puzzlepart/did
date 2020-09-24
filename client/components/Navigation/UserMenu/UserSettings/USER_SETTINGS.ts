@@ -17,7 +17,7 @@ export const USER_SETTINGS = (t: TFunction) =>
   new Set<IUserSetting>([
     {
       key: 'preferredLanguage',
-      label: t('common.preferredLanguageLabel'),
+      label: t('preferredLanguageLabel'),
       type: 'dropdown',
       options: [
         {

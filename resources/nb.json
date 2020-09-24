@@ -87,7 +87,7 @@
     "tokenErrorText": "Det skjedde en feil under generering av nøkkel. Prøv igjen senere.",
     "tokenDeletedText": "Nøkkelen `{0}` ble slettet.",
     "summaryLoadingText": "Laster tidsoppføringer og lager oppsummering...",
-    "bulkImportUsersLabel": "Importer {0} brukere",
+    "bulkImportUsersLabel": "Importer i bulk",
     "bulkImportingUsersLabel": "Importerer {0} brukere. Vennligst vent.."
   },
   "reports": {

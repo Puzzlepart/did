@@ -13,17 +13,17 @@ export const getViewTypes = (t: TFunction): ISummaryViewType[] => [
   {
     key: 'resource',
     fieldName: 'resourceName',
-    name: t('common.employeeLabel'),
+    name: t('employeeLabel'),
   },
   {
     key: 'project',
     fieldName: 'project.name',
-    name: t('common.project'),
+    name: t('project'),
   },
   {
     key: 'customer',
     fieldName: 'customer.name',
-    name: t('common.customer'),
+    name: t('customer'),
   },
 ]
 

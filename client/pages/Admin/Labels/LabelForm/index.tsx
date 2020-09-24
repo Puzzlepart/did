@@ -57,31 +57,31 @@ export const LabelForm = (props: ILabelFormProps) => {
                 className={styles.inputField}
                 spellCheck={false}
                 maxLength={18}
-                label={t('common.nameFieldLabel')}
+                label={t('nameFieldLabel')}
                 value={model.name}
                 required={true}
                 onChange={(_, name) => setModel({ ...model, name })} />
             <TextField
                 className={styles.inputField}
                 spellCheck={false}
-                label={t('common.descriptionFieldLabel')}
+                label={t('descriptionFieldLabel')}
                 value={model.description}
                 multiline={true}
                 onChange={(_, description) => setModel({ ...model, description })} />
             <IconPicker
                 className={styles.inputField}
                 defaultSelected={model.icon}
-                label={t('common.iconLabel')}
-                placeholder={t('common.iconSearchPlaceholder')}
+                label={t('iconLabel')}
+                placeholder={t('iconSearchPlaceholder')}
                 width={300}
                 onSelected={icon => setModel({ ...model, icon })} />
             <div className={styles.inputField}>
-                <Label>{t('common.colorLabel')}</Label>
+                <Label>{t('colorLabel')}</Label>
                 <DefaultButton
                     text={
                         colorPickerVisible
-                            ? t('common.closeColorPickerText')
-                            : t('common.openColorPickerText')
+                            ? t('closeColorPickerText')
+                            : t('openColorPickerText')
                     }
                     iconProps={{ iconName: colorPickerVisible ? 'ChromeClose' : 'Color' }}
                     onClick={() => setColorPickerVisible(!colorPickerVisible)} />
@@ -92,12 +92,12 @@ export const LabelForm = (props: ILabelFormProps) => {
                 )}
             </div>
             <div className={styles.inputField}>
-                <Label>{t('common.previewText')}</Label>
+                <Label>{t('previewText')}</Label>
                 <EntityLabel label={model} size='medium' />
             </div>
             <PrimaryButton
                 className={styles.saveBtn}
-                text={t('common.save')}
+                text={t('save')}
                 disabled={!isFormValid()}
                 onClick={onSave} />
         </Panel>

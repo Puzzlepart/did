@@ -52,7 +52,7 @@ export const UserForm = (props: IUserFormProps) => {
             {!props.user && (
                 <div className={styles.inputContainer}>
                     <Autocomplete
-                        placeholder={t('common.searchPlaceholder')}
+                        placeholder={t('searchPlaceholder')}
                         items={adUsers.map(u => ({
                             key: u.id,
                             displayValue: u.displayName,
@@ -79,7 +79,7 @@ export const UserForm = (props: IUserFormProps) => {
             </div>
             <PrimaryButton
                 className={styles.saveBtn}
-                text={t('common.save')}
+                text={t('save')}
                 disabled={!isFormValid()}
                 onClick={onSave} />
         </Panel>

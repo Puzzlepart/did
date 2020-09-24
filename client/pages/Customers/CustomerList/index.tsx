@@ -32,10 +32,10 @@ export const columns = (t: TFunction): IColumn[] => ([
             return <Icon iconName={customer.icon || 'Page'} styles={{ root: { fontSize: 16 } }} />
         },
     ),
-    col('key', t('common.keyFieldLabel'), { maxWidth: 120 }),
+    col('key', t('keyFieldLabel'), { maxWidth: 120 }),
     col(
         'name',
-        t('common.nameFieldLabel'),
+        t('nameFieldLabel'),
         { maxWidth: 300 },
         (customer: ICustomer) => <CustomerLink customer={customer} />
     ),
@@ -73,7 +73,7 @@ export const CustomerList = (props: ICustomerListProps) => {
                         onRender: () => (
                             <Checkbox
                                 styles={{ root: { margin: '6px 0 0 8px' } }}
-                                label={t('common.toggleInactiveText')}
+                                label={t('toggleInactiveText')}
                                 onChange={onToggleInactive} />
                         ),
                     }

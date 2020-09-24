@@ -9,7 +9,18 @@ i18n.use(initReactI18next).init({
   interpolation: {
     escapeValue: false,
   },
-  ns: Object.keys(resources['en-GB']),
+  defaultNS: 'common',
+  ns: [
+    'timesheet',
+    'projects',
+    'customers',
+    'admin',
+    'reports',
+    'common',
+    'navigation',
+    'permissions',
+    'notifications'
+  ],
   nsSeparator: '.',
   keySeparator: ':',
 })

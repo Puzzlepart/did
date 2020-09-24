@@ -62,12 +62,12 @@ export const CustomerDetails = (props: ICustomerDetailsProps) => {
             )}
             <div className={styles.description}>{props.customer.description}</div>
             <div>
-                {error && <MessageBar messageBarType={MessageBarType.error}>{t('common.genericErrorText')}</MessageBar>}
+                {error && <MessageBar messageBarType={MessageBarType.error}>{t('genericErrorText')}</MessageBar>}
                 {!error && (
                     <ProjectList
                         items={value<IProject[]>(data, 'projects', [])}
                         enableShimmer={loading}
-                        searchBox={{ placeholder: t('common.searchPlaceholder') }}
+                        searchBox={{ placeholder: t('searchPlaceholder') }}
                         renderLink={true}
                         height={300} />
                 )}

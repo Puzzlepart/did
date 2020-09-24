@@ -58,16 +58,16 @@ export const Projects = () => {
                 <PivotItem
                     itemID='search'
                     itemKey='search'
-                    headerText={t('common.search')}
+                    headerText={t('search')}
                     itemIcon='FabricFolderSearch'>
                     {error
-                        ? <UserMessage type={MessageBarType.error} text={t('common.genericErrorText')} />
+                        ? <UserMessage type={MessageBarType.error} text={t('genericErrorText')} />
                         : (
                             <>
                                 <ProjectList
                                     enableShimmer={loading}
                                     items={projects}
-                                    searchBox={{ placeholder: t('common.searchPlaceholder') }}
+                                    searchBox={{ placeholder: t('searchPlaceholder') }}
                                     selection={{
                                         mode: SelectionMode.single,
                                         onChanged: selected => {
@@ -92,7 +92,7 @@ export const Projects = () => {
                     {error
                         ? <UserMessage
                             type={MessageBarType.error}
-                            text={t('common.genericErrorText')} />
+                            text={t('genericErrorText')} />
                         : (
                             <>
                                 <UserMessage
@@ -118,7 +118,7 @@ export const Projects = () => {
                     <PivotItem
                         itemID='new'
                         itemKey='new'
-                        headerText={t('common.createNewText')}
+                        headerText={t('createNewText')}
                         itemIcon='AddTo'>
                         <ProjectForm />
                     </PivotItem>

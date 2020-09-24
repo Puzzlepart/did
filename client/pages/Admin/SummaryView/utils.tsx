@@ -54,7 +54,7 @@ export function createColumns(state: ISummaryViewState, t: TFunction): IColumn[]
         ...columns,
         col(
             'sum',
-            t('common.sumLabel'),
+            t('sumLabel'),
             {
                 minWidth: 50,
                 maxWidth: 50,
@@ -104,7 +104,7 @@ export const createRows = (state: ISummaryViewState, columns: IColumn[], t: TFun
         obj[col.fieldName] = sum
         obj.sum += sum
         return obj
-    }, { label: t('common.sumLabel'), sum: 0 })
+    }, { label: t('sumLabel'), sum: 0 })
 
     rows.push(totalRow)
 

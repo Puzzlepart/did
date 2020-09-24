@@ -33,7 +33,7 @@ export const SearchCustomer = (props: ISearchCustomerProps) => {
                 disabled={loading}
                 items={searchData}
                 width={450}
-                placeholder={t('common.searchPlaceholder')}
+                placeholder={t('searchPlaceholder')}
                 onClear={() => props.onSelected(null)}
                 onSelected={item => props.onSelected(item.data)} />
         </div>

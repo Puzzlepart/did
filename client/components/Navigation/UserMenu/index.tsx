@@ -28,7 +28,7 @@ export const UserMenu = () => {
                         onDismiss={() => setMenuTarget(null)}
                         gapSpace={-8}>
                         <FadeIn className={`${styles.menu} ${styles.loggedout}`}>
-                            <a href='/auth/signin' className={styles.menuItem}><Icon iconName={'signin'} className={styles.icon} />{t('common.signInText')}</a>
+                            <a href='/auth/signin' className={styles.menuItem}><Icon iconName={'signin'} className={styles.icon} />{t('signInText')}</a>
                         </FadeIn>
                     </Callout>
                 )}
@@ -61,7 +61,7 @@ export const UserMenu = () => {
                         <UserSettings className={styles.menuItem} />
                         <div className={styles.divider}></div>
                         <a href='/auth/signout' className={styles.menuItem}>
-                            <Icon iconName='SignOut' className={styles.icon} />{t('common.signOutText')}
+                            <Icon iconName='SignOut' className={styles.icon} />{t('signOutText')}
                         </a>
                     </FadeIn>
                 </Callout>

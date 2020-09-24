@@ -84,10 +84,10 @@ export const ProjectForm = (props: IProjectFormProps) => {
             )}
             <SearchCustomer
                 hidden={editMode}
-                label={t('common.customer')}
+                label={t('customer')}
                 required={true}
                 className={styles.inputField}
-                placeholder={t('common.searchPlaceholder')}
+                placeholder={t('searchPlaceholder')}
                 onSelected={customer => setModel({
                     ...model,
                     customerKey: customer && customer.key,
@@ -95,7 +95,7 @@ export const ProjectForm = (props: IProjectFormProps) => {
             <TextField
                 disabled={editMode}
                 className={styles.inputField}
-                label={t('common.keyFieldLabel')}
+                label={t('keyFieldLabel')}
                 title={t('projects.keyFieldDescription')}
                 description={t('projects.keyFieldDescription')}
                 required={true}
@@ -104,14 +104,14 @@ export const ProjectForm = (props: IProjectFormProps) => {
                 value={model.key} />
             <TextField
                 className={styles.inputField}
-                label={t('common.nameFieldLabel')}
+                label={t('nameFieldLabel')}
                 required={true}
                 errorMessage={validation.errors.name}
                 onChange={(_event, name) => setModel({ ...model, name })}
                 value={model.name} />
             <TextField
                 className={styles.inputField}
-                label={t('common.descriptionFieldLabel')}
+                label={t('descriptionFieldLabel')}
                 multiline={true}
                 errorMessage={validation.errors.description}
                 onChange={(_event, description) => setModel({ ...model, description })}
@@ -119,13 +119,13 @@ export const ProjectForm = (props: IProjectFormProps) => {
             <IconPicker
                 className={styles.inputField}
                 defaultSelected={model.icon}
-                label={t('common.iconLabel')}
-                placeholder={t('common.iconSearchPlaceholder')}
+                label={t('iconLabel')}
+                placeholder={t('iconSearchPlaceholder')}
                 width={300}
                 onSelected={icon => setModel({ ...model, icon })} />
             <div className={styles.inputField} hidden={!editMode}>
                 <Toggle
-                    label={t('common.inactiveFieldLabel')}
+                    label={t('inactiveFieldLabel')}
                     defaultChecked={model.inactive}
                     onChanged={inactive => setModel({ ...model, inactive })} />
                 <span className={styles.inputDescription}>{t('projects.inactiveFieldDescription')}</span>
@@ -138,7 +138,7 @@ export const ProjectForm = (props: IProjectFormProps) => {
                 onChange={labels => setModel({ ...model, labels: labels.map(lbl => lbl.name) })} />
             <PrimaryButton
                 className={styles.inputField}
-                text={editMode ? t('common.save') : t('common.add')}
+                text={editMode ? t('save') : t('add')}
                 onClick={onFormSubmit}
                 disabled={loading || !!message} />
         </div>

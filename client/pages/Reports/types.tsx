@@ -20,20 +20,20 @@ export interface IGroupByOption extends IContextualMenuItem {
 export const getQueries = (t: TFunction): IReportsQuery[] => ([
     {
         key: 'PREVIOUS_MONTH',
-        text: t('common.previousMonth'),
+        text: t('previousMonth'),
         iconName: 'CalendarDay',
         variables: { monthNumber: dateUtils.getMonthIndex() - 1, year: dateUtils.getYear() }
     },
     {
 
         key: 'CURRENT_MONTH',
-        text: t('common.currentMonth'),
+        text: t('currentMonth'),
         iconName: 'Calendar',
         variables: { monthNumber: dateUtils.getMonthIndex(), year: dateUtils.getYear() }
     },
     {
         key: 'CURRENT_YEAR',
-        text: t('common.currentYear'),
+        text: t('currentYear'),
         iconName: 'CalendarReply',
         variables: { year: dateUtils.getYear() }
     }
@@ -48,15 +48,15 @@ export const getQueries = (t: TFunction): IReportsQuery[] => ([
 export const getGroupByOptions = (t: TFunction): IGroupByOption[] => ([
     {
         key: 'none',
-        text: t('common.none'),
+        text: t('none'),
         props: {
             fieldName: '.',
-            emptyGroupName: t('common.all'),
+            emptyGroupName: t('all'),
         }
     },
     {
         key: 'resourceName',
-        text: t('common.employeeLabel'),
+        text: t('employeeLabel'),
         props: {
             fieldName: 'resourceName',
             emptyGroupName: '',
@@ -64,7 +64,7 @@ export const getGroupByOptions = (t: TFunction): IGroupByOption[] => ([
     },
     {
         key: 'customer',
-        text: t('common.customer'),
+        text: t('customer'),
         props: {
             fieldName: 'customer.name',
             emptyGroupName: '',
@@ -72,7 +72,7 @@ export const getGroupByOptions = (t: TFunction): IGroupByOption[] => ([
     },
     {
         key: 'project',
-        text: t('common.project'),
+        text: t('project'),
         props: {
             fieldName: 'project.name',
             emptyGroupName: '',
@@ -80,7 +80,7 @@ export const getGroupByOptions = (t: TFunction): IGroupByOption[] => ([
     },
     {
         key: 'weekNumber',
-        text: t('common.weekNumberLabel'),
+        text: t('weekNumberLabel'),
         props: {
             fieldName: 'weekNumber',
             emptyGroupName: ' '

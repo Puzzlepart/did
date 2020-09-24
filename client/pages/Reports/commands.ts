@@ -48,7 +48,7 @@ export const selectGroupBy = (
   const groupByOptions = getGroupByOptions(t)
   return {
     key: 'SELECT_GROUP_BY',
-    text: t('common.groupBy'),
+    text: t('groupBy'),
     iconProps: { iconName: 'GroupList' },
     subMenuProps: {
       items: groupByOptions.map(
@@ -73,7 +73,7 @@ export const selectGroupBy = (
 export const exportToExcel = (onClick: () => void, t: TFunction) => {
   return {
     key: 'EXPORT_TO_EXCEL',
-    text: t('common.exportCurrentView'),
+    text: t('exportCurrentView'),
     onClick,
     iconProps: { iconName: 'ExcelDocument' },
   }

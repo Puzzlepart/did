@@ -22,7 +22,7 @@ export const TimeEntries = () => {
                     additionalColumns={[
                         col(
                             'resourceName',
-                            t('common.employeeLabel')
+                            t('employeeLabel')
                         )]}
                     dateFormat='MMM Do YYYY HH:mm'
                     columnWidths={{ time: 250 }} />
