@@ -28,7 +28,7 @@ export const UserMenu = () => {
                         onDismiss={() => setMenuTarget(null)}
                         gapSpace={-8}>
                         <FadeIn className={styles.menu}>
-                            <a href='/auth/signin' className={styles.menuItem}>{t('logInText')}</a>
+                        <a href='/auth/signin' className={styles.menuItem}><Icon iconName={'signin'} className={styles.icon} />{t('logInText')}</a>
                         </FadeIn>
                     </Callout>
                 )}
