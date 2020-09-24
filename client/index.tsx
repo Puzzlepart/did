@@ -8,25 +8,36 @@ import * as ReactDom from 'react-dom'
 import 'regenerator-runtime/runtime.js'
 import { contains } from 'underscore'
 import DateUtils from 'utils/date'
+import { supportedLanguages } from '../resources'
 import { App } from './App'
 import { IAppContext } from './AppContext'
 import { client, GET_CURRENT_USER } from './graphql'
 import './i18n'
 import './_global.scss'
-import { supportedLanguages } from '../resources'
 
 initializeIcons()
 
-client.query<{ currentUser: any }>({ query: GET_CURRENT_USER }).then(({ data }) => {
-    const container = document.getElementById('app')
+/**
+ * Get app context
+ */
+const getContext = async (): Promise<IAppContext> => {
+    const { data } = await client.query<{ currentUser: any }>({ query: GET_CURRENT_USER })
+    if (!data.currentUser) {
+        const guestContext = { user: { preferredLanguage: 'en-GB' }, hasPermission: () => false }
+        return guestContext
+    }
     const context: IAppContext = { user: data?.currentUser }
     let { preferredLanguage } = context.user
     preferredLanguage = contains(supportedLanguages, preferredLanguage) ? preferredLanguage : 'en-GB'
     context.user.preferredLanguage = preferredLanguage
     context.hasPermission = (permissionId: string) => contains(context.user?.role?.permissions, permissionId)
+    return context
+}
 
-    DateUtils.setup(preferredLanguage)
-    i18n.changeLanguage(preferredLanguage)
+getContext().then(context => {
+    const container = document.getElementById('app')
+    DateUtils.setup(context.user.preferredLanguage)
+    i18n.changeLanguage(context.user.preferredLanguage)
 
     ReactDom.render((
         <ApolloProvider client={client}>
