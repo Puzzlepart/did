@@ -12,6 +12,30 @@ export const UserMenu = () => {
     const { user } = useContext(AppContext)
     const [menuTarget, setMenuTarget] = useState<Target>(null)
 
+    if (!user.subscription) {
+        return (
+            <>
+                <div
+                    className={styles.root}
+                    onClick={event => setMenuTarget(event.currentTarget)}>‍
+                    <Icon iconName={'PlayerSettings'} className={styles.icon} />
+                </div>
+
+                {menuTarget && (
+                    <Callout
+                        hidden={!menuTarget}
+                        target={menuTarget}
+                        onDismiss={() => setMenuTarget(null)}
+                        gapSpace={-8}>
+                        <FadeIn className={styles.menu}>
+                            <a href='/auth/signin' className={styles.menuItem}>{t('logInText')}</a>
+                        </FadeIn>
+                    </Callout>
+                )}
+            </>
+        )
+    }
+
     return (
         <>
             <div

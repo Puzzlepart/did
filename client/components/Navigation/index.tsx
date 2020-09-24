@@ -46,7 +46,7 @@ export const Navigation = () => {
                         permission={permissions.accessAdmin} />
                 </ul>
                 <ul className={styles.navRight}>
-                    <UserNotifications />
+                    {!!user.subscription && <UserNotifications />}
                     <UserMenu />
                 </ul>
             </div>
