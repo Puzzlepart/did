@@ -96,21 +96,25 @@ const getSchema = () => {
 
 const schema = getSchema()
 
-const getContext = async ({ req }) => {
-  let subscription = req.user && req.user.subscription
-  if (!!req.token) {
-    subscription = await SubscriptionService.findSubscriptionWithToken(req.token)
-    if (!subscription) throw new Error("You don't have access to this resource.")
-  } else if (!req.user) throw new Error()
-  let services = {
-    storage: new StorageService(subscription),
-    subscription: SubscriptionService,
-  }
-  if (!!req.user) services.graph = new GraphService(req)
-  return {
-    services,
-    user: req.user || {},
-    subscription,
+const createContext = async ({ req }) => {
+  try {
+    let subscription = req.user && req.user.subscription
+    if (!!req.token) {
+      subscription = await SubscriptionService.findSubscriptionWithToken(req.token)
+      if (!subscription) throw new Error("You don't have access to this resource.")
+    } else if (!req.user) throw new Error()
+    let services = {
+      storage: new StorageService(subscription),
+      subscription: SubscriptionService,
+    }
+    if (!!req.user) services.graph = new GraphService(req)
+    return {
+      services,
+      user: req.user || {},
+      subscription,
+    }
+  } catch (e) {
+    return {}
   }
 }
 
@@ -118,7 +122,7 @@ module.exports = new ApolloServer({
   schema,
   rootValue: global,
   playground: false,
-  context: getContext,
+  context: createContext,
   engine: {
     reportSchema: true,
     variant: 'current',
