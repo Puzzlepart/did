@@ -7,7 +7,7 @@ const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const LiveReloadPlugin = require('webpack-livereload-plugin')
-const WebpackBuildNotifierPlugin = require('webpack-build-notifier');
+const WebpackBuildNotifierPlugin = require('webpack-build-notifier')
 
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production'
 
@@ -84,12 +84,14 @@ switch (mode) {
       config.watch = true
       config.watchOptions = { aggregateTimeout: 200 }
       config.plugins.push(new LiveReloadPlugin())
-      config.plugins.push(new WebpackBuildNotifierPlugin({
-        logo: path.join(__dirname, '/public/images/favicon/mstile-150x150.png'),
-        sound: 'growl',
-        suppressSuccess: true,
-        showDuration: true
-      }))
+      config.plugins.push(
+        new WebpackBuildNotifierPlugin({
+          logo: path.join(__dirname, '/public/images/favicon/mstile-150x150.png'),
+          sound: 'growl',
+          suppressSuccess: true,
+          showDuration: true,
+        })
+      )
     }
     break
   case 'production':
