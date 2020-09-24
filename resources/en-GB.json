@@ -143,6 +143,7 @@
     "employeeLabel": "Employee",
     "yearLabel": "Year",
     "roleLabel": "Role",
+    "logInText": "Sign in",
     "logOutText": "Sign out",
     "userIdDescription": "ID for the user in Azure Active Directory",
     "roleUser": "User",
