@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useContext } from 'react'
 import styles from './Home.module.scss'
 import { useTranslation } from 'react-i18next'
 import { AppContext } from 'AppContext'
@@ -8,7 +8,7 @@ import { DefaultButton } from 'office-ui-fabric-react'
  * @ignore
  */
 export default () => {
-    const { user } = React.useContext(AppContext)
+    const { user } = useContext(AppContext)
     const { t } = useTranslation()
     return (
         <div className={styles.root}>
@@ -19,7 +19,7 @@ export default () => {
                 hidden={!!user.subscription}
                 href='/auth/signin'
                 text={t('common.signInText')}
-                iconProps={{ iconName: 'signin' }} />
+                iconProps={{ iconName: 'SignIn' }} />
         </div>
     )
 }
