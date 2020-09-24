@@ -18,8 +18,7 @@ export default () => {
                 className={styles.signinbutton}
                 hidden={!!user.subscription}
                 href='/auth/signin'
-                text={t('common.signInText')}
-                iconProps={{ iconName: 'SignIn' }} />
+                text={t('common.signInText')}/>
         </div>
     )
 }
