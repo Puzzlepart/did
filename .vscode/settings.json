@@ -14,7 +14,8 @@
     "server.js": true,
     "client/**/*.d.ts": true,
     "client/**/*js": true,
-    "client/**/*js.map": true
+    "client/**/*js.map": true,
+    "resources": true
   },
   "javascript.validate.enable": false,
   "debug.node.autoAttach": "on",

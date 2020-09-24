@@ -29,6 +29,9 @@ Folder/File | Description
 * Create an Azure app registration, or ask one of the [maintainers](#maintainers) for access to an existing one
 * Run `npm run-script watch` to watch both `server` and `client` changes concurrently  
 
+## Resource management with i18n ###
+* Install vscode extension `antfu.i18n-ally`
+
 # Documentation #
 Generate graphql schema documentation using `@2fd/graphdoc`:
 
