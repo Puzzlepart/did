@@ -13,7 +13,7 @@ export default () => {
     return (
         <div className={styles.root}>
             <div className={styles.logo}>did</div>
-            <p className={styles.motto}>The Calendar is the Timesheet</p>
+            <p className={styles.motto}>{t('common.motto')}</p>
             <div hidden={!!user.subscription}>
                 <DefaultButton
                     className={styles.signinbutton}
