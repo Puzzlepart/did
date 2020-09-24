@@ -7,8 +7,7 @@ import { Admin, Customers, Home, Projects, Reports, Timesheet } from './pages'
 import { ProtectedRoute as Route } from './ProtectedRoute'
 import * as permissions from 'config/security/permissions'
 
-
-const App = (context: IAppContext): JSX.Element => {
+export const App = (context: IAppContext): JSX.Element => {
     return (
         <AppContext.Provider value={context}>
             <Router>
@@ -51,6 +50,3 @@ const App = (context: IAppContext): JSX.Element => {
         </AppContext.Provider >
     )
 }
-
-export { App }
-
