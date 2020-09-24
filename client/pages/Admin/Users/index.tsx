@@ -49,7 +49,7 @@ export const Users = () => {
      */
     const onBulkImport = async (users: any[]) => {
         setBulkImportPanel(null)
-        setProgressProps({ label: format(t('admin.bulkImportingUsersLabel'), users.length), labelPosition: 'right' })
+        setProgressProps({ label: t('admin.bulkImportingUsersLabel', { count: users.length }), labelPosition: 'right' })
         await bulkAddUsers({ variables: { users: users.map(u => omit(u, '__typename')) } })
         setProgressProps(null)
         refetch()
@@ -68,14 +68,14 @@ export const Users = () => {
                             key: 'ADD_NEW_USER',
                             name: t('admin.addNewUser'),
                             iconProps: { iconName: 'AddFriend' },
-                            disabled: isEmpty(ctxValue.adUsers),                            
+                            disabled: isEmpty(ctxValue.adUsers),
                             onClick: () => setUserForm({ headerText: t('admin.addNewUser') }),
                         },
                         {
                             key: 'BULK_IMPORT_USERS',
                             name: t('admin.bulkImportUsersLabel'),
                             iconProps: { iconName: 'CloudImportExport' },
-                            disabled: isEmpty(ctxValue.adUsers),      
+                            disabled: isEmpty(ctxValue.adUsers),
                             onClick: () => setBulkImportPanel({ isOpen: true }),
                         },
                         {
