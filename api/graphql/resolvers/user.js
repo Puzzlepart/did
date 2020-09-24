@@ -89,7 +89,7 @@ async function users(_obj, _variables, ctx) {
 }
 
 async function currentUser(_obj, _variables, ctx) {
-  if(!ctx.user) return null
+  if (!ctx.user) return null
   try {
     const [user, roles] = await Promise.all([
       ctx.services.storage.getUser(ctx.user.id),
