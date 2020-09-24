@@ -1,17 +1,16 @@
 import { useMutation } from '@apollo/react-hooks'
+import { getIcons } from 'common/icons'
 import { IconPicker, LabelPicker, SearchCustomer, useMessage, UserMessage } from 'components'
+import { Toggle } from 'office-ui-fabric-react'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { format } from 'office-ui-fabric-react/lib/Utilities'
-import { pick, first } from 'underscore'
+import { first, pick } from 'underscore'
 import styles from './CreateProjectForm.module.scss'
 import CREATE_OR_UPDATE_PROJECT, { ICreateOrUpdateProjectVariables, IProjectInput } from './CREATE_OR_UPDATE_PROJECT'
 import { IProjectFormProps, IProjectFormValidation } from './types'
-import { Toggle } from 'office-ui-fabric-react'
-import { getIcons } from 'common/icons'
 
 const initialModel: IProjectInput = {
     key: '',
@@ -26,13 +25,13 @@ const initialModel: IProjectInput = {
 /**
  * @category Projects
  */
-export const ProjectForm = (props: IProjectFormProps) => {
-    const editMode = !!props.edit
+export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFormProps) => {
+    const editMode = !!edit
     const { t } = useTranslation()
     const [validation, setValidation] = useState<IProjectFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useMessage()
-    const [model, setModel] = useState<IProjectInput>(props.edit
-        ? { ...props.edit, labels: props.edit.labels.map(lbl => lbl.name) }
+    const [model, setModel] = useState<IProjectInput>(edit
+        ? { ...edit, labels: edit.labels.map(lbl => lbl.name) }
         : initialModel
     )
     const [createOrUpdateProject, { loading }] = useMutation<any, ICreateOrUpdateProjectVariables>(CREATE_OR_UPDATE_PROJECT)
@@ -41,10 +40,11 @@ export const ProjectForm = (props: IProjectFormProps) => {
      * On validate form
      */
     const validateForm = (): IProjectFormValidation => {
+        const [nameMinLength] = nameLength
         const errors: { [key: string]: string } = {}
         if (!model.customerKey) errors.customerKey = ''
-        if (model.name.length < 2) errors.name = format(t('projects.nameFormValidationText'), 2)
-        if (!(/(^[A-ZÆØÅ0-9]{2,8}$)/gm).test(model.key)) errors.key = format(t('projects.keyFormValidationText'), 2, 8)
+        if (model.name.length < nameMinLength) errors.name = t('projects.nameFormValidationText', { nameMinLength })
+        if (!(/(^[A-ZÆØÅ0-9]{2,8}$)/gm).test(model.key)) errors.key = t('projects.keyFormValidationText', { keyMinLength: 2, keyMaxLength: 8 })
         return { errors, invalid: Object.keys(errors).length > 0 }
     }
 
@@ -66,9 +66,9 @@ export const ProjectForm = (props: IProjectFormProps) => {
         })
         if (result.success) {
             if (editMode) {
-                if (props.onSubmitted) setTimeout(props.onSubmitted, 1000)
+                if (onSubmitted) setTimeout(onSubmitted, 1000)
             } else {
-                setMessage({ text: format(t('projects.createSuccess'), model.name), type: MessageBarType.success })
+                setMessage({ text: t('projects.createSuccess', { name: model.name }), type: MessageBarType.success })
                 setModel(initialModel)
             }
         }
@@ -134,7 +134,7 @@ export const ProjectForm = (props: IProjectFormProps) => {
                 className={styles.inputField}
                 label={t('admin.labels')}
                 searchLabelText={t('admin.filterLabels')}
-                defaultSelectedKeys={props.edit ? props.edit.labels.map(lbl => lbl.name) : []}
+                defaultSelectedKeys={editMode ? edit.labels.map(lbl => lbl.name) : []}
                 onChange={labels => setModel({ ...model, labels: labels.map(lbl => lbl.name) })} />
             <PrimaryButton
                 className={styles.inputField}

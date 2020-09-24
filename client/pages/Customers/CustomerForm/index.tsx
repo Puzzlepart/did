@@ -4,14 +4,13 @@ import { IconPicker, UserMessage } from 'components'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
-import { format } from 'office-ui-fabric-react/lib/Utilities'
 import * as React from 'react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { first, pick } from 'underscore'
 import styles from './CreateCustomerForm.module.scss'
 import CREATE_OR_UPDATE_CUSTOMER, { ICreateOrUpdateCustomerVariables, ICustomerInput } from './CREATE_OR_UPDATE_CUSTOMER'
-import { ICustomerFormValidation } from './types'
+import { ICustomerFormProps, ICustomerFormValidation } from './types'
 
 const initialModel: ICustomerInput = {
     key: '',
@@ -23,7 +22,7 @@ const initialModel: ICustomerInput = {
 /**
  * @category Customers
  */
-export const CustomerForm = () => {
+export const CustomerForm = ({ nameLength = [2] }: ICustomerFormProps) => {
     const { t } = useTranslation()
     const [validation, setValidation] = useState<ICustomerFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useState<{ text: string; type: MessageBarType }>(null)
@@ -34,9 +33,10 @@ export const CustomerForm = () => {
      * On validate form
      */
     const validateForm = (): ICustomerFormValidation => {
+        const [nameMinLength] = nameLength
         const errors: { [key: string]: string } = {}
-        if (model.name.length < 2) errors.name = format(t('customers.nameFormValidationText'), 2)
-        if (!(/(^[A-ZÆØÅ0-9]{3,8}$)/gm).test(model.key)) errors.key = format(t('customers.keyFormValidationText'), 3, 8)
+        if (model.name.length < nameMinLength) errors.name = t('customers.nameFormValidationText', { nameMinLength })
+        if (!(/(^[A-ZÆØÅ0-9]{3,8}$)/gm).test(model.key)) errors.key = t('customers.keyFormValidationText', { keyMinLength: 3, keyMaxLength: 8 })
         return { errors, invalid: Object.keys(errors).length > 0 }
     }
 
@@ -57,7 +57,7 @@ export const CustomerForm = () => {
             }
         })
         if (result.success) {
-            setMessage({ text: format(t('customers.createSuccess'), model.name), type: MessageBarType.success })
+            setMessage({ text: t('customers.createSuccess', { name: model.name }), type: MessageBarType.success })
         } else {
             setMessage({ text: result.error.message, type: MessageBarType.error })
         }

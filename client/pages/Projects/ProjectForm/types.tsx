@@ -2,6 +2,11 @@ import { IProject } from 'interfaces'
 
 export interface IProjectFormProps {
     /**
+     * Name length [min, max]
+     */
+    nameLength?: number[];
+
+    /**
      * Project to edit
      */
     edit?: IProject;

@@ -7,3 +7,10 @@ export interface ICustomerFormValidation {
     };
     invalid: boolean;
 }
+
+export interface ICustomerFormProps {
+    /**
+     * Name length [min, max]
+     */
+    nameLength?: number[];
+}
