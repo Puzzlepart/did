@@ -11,7 +11,7 @@ import styles from './ActionBar.module.scss'
  * @category Timesheet
  */
 export const ActionBar = () => {
-    const { t } = useTranslation()
+    const { t } = useTranslation()    
     const context = useContext(TimesheetContext)
     const items = [
         goToCurrentWeek(context, t),
