@@ -19,7 +19,7 @@ export const selectQuery = (
   const queries = getQueries(t)
   return {
     key: 'SELECT_QUERY',
-    text: selectedQuery?.text || t('selectReportLabel'),
+    text: selectedQuery?.text || t('reports.selectReportLabel'),
     iconProps: { iconName: selectedQuery?.iconName || 'ReportDocument' },
     subMenuProps: {
       items: queries.map(query => ({
@@ -48,7 +48,7 @@ export const selectGroupBy = (
   const groupByOptions = getGroupByOptions(t)
   return {
     key: 'SELECT_GROUP_BY',
-    text: t('groupBy'),
+    text: t('common.groupBy'),
     iconProps: { iconName: 'GroupList' },
     subMenuProps: {
       items: groupByOptions.map(
@@ -73,7 +73,7 @@ export const selectGroupBy = (
 export const exportToExcel = (onClick: () => void, t: TFunction) => {
   return {
     key: 'EXPORT_TO_EXCEL',
-    text: t('exportCurrentView'),
+    text: t('common.exportCurrentView'),
     onClick,
     iconProps: { iconName: 'ExcelDocument' },
   }

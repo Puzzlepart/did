@@ -107,7 +107,7 @@ function generateTotalRow(events: any[], columns: IColumn[], label: string) {
 export const SummaryView = () => {
     const { t } = useTranslation()
     if (isMobile) {
-        return <MessageBar styles={{ root: { marginTop: 8 } }}>{t('deviceViewNotSupported')}</MessageBar>
+        return <MessageBar styles={{ root: { marginTop: 8 } }}>{t('common.deviceViewNotSupported')}</MessageBar>
     } else {
         const context = useContext(TimesheetContext)
         const columns = createColumns(context.scope)
@@ -116,7 +116,7 @@ export const SummaryView = () => {
 
         const items = [
             ...generateRows(events, columns),
-            generateTotalRow(events, columns, t('sumLabel')),
+            generateTotalRow(events, columns, t('common.sumLabel')),
         ]
 
         return (

@@ -61,8 +61,8 @@
     "webLinkText": "Webside",
     "externalSystemUrlText": "Eksternt business-system",
     "keyFieldDescription": "En unik identifikator for kunden. Holdt det kort, maks 8 tegn.",
-    "nameFormValidationText": "Kundenavnet må være minst 2 tegn langt.",
-    "keyFormValidationText": "Kundenøkkelen må være mellom 3 og 8 tegn lang, og bare store bokstaver.",
+    "nameFormValidationText": "Kundenavnet må være minst {0} tegn langt.",
+    "keyFormValidationText": "Kundenøkkelen må være mellom {0} og {1} tegn lang, og bare store bokstaver.",
     "createSuccess": "Kunden **{0}** ble opprettet."
   },
   "admin": {
@@ -127,7 +127,7 @@
     "surnameLabel": "Etternavn",
     "givenNameLabel": "Fornavn",
     "jobTitleLabel": "Jobbtittel",
-    "mailLabel":"E-post",
+    "mailLabel": "E-post",
     "descriptionFieldLabel": "Beskrivelse",
     "iconLabel": "Ikon",
     "colorLabel": "Farge",
@@ -198,7 +198,15 @@
         "Fredag",
         "Lørdag"
       ],
-      "shortDays": ["S", "M", "T", "O", "T", "F", "S"],
+      "shortDays": [
+        "S",
+        "M",
+        "T",
+        "O",
+        "T",
+        "F",
+        "S"
+      ],
       "goToToday": "Gå til dagens dato",
       "weekNumberFormatString": "Ukenummer {0}",
       "prevMonthAriaLabel": "Forrige måned",
@@ -208,7 +216,8 @@
       "prevYearRangeAriaLabel": "Forrige årsintervall",
       "nextYearRangeAriaLabel": "Neste årsintervall",
       "closeButtonAriaLabel": "Lukk"
-    }
+    },
+    "preferredLanguageLabel": "Foretrukket språk"
   },
   "navigation": {
     "timesheet": "Timeliste",
@@ -226,7 +235,7 @@
     "manageProjects": "Administrere prosjekter",
     "deleteProjects": "Slette prosjekter",
     "manageCustomers": "Administrere kunder",
-    "deleteCustomers": "Slette kunder",    
+    "deleteCustomers": "Slette kunder",
     "manageUsers": "Administrere brukere",
     "manageRolesPermissions": "Administere roller og tilganger"
   },

@@ -33,7 +33,7 @@ export const Admin = () => {
                     <PivotItem
                         className={styles.tab}
                         itemKey='users'
-                        headerText={t('users')}
+                        headerText={t('admin.users')}
                         itemIcon='FabricUserFolder'>
                         <Users />
                     </PivotItem>
@@ -41,7 +41,7 @@ export const Admin = () => {
                 <PivotItem
                     className={styles.tab}
                     itemKey='summary'
-                    headerText={t('summary')}
+                    headerText={t('admin.summary')}
                     itemIcon='CalendarWeek'>
                     <SummaryView
                         defaultYear={moment().year()}
@@ -50,7 +50,7 @@ export const Admin = () => {
                 <PivotItem
                     className={styles.tab}
                     itemKey='labels'
-                    headerText={t('labels')}
+                    headerText={t('admin.labels')}
                     itemIcon='Label'>
                     <Labels />
                 </PivotItem>
@@ -58,7 +58,7 @@ export const Admin = () => {
                     <PivotItem
                         className={styles.tab}
                         itemKey='rolesPermissions'
-                        headerText={t('rolesPermissions')}
+                        headerText={t('admin.rolesPermissions')}
                         itemIcon='SecurityGroup'>
                         <Roles />
                     </PivotItem>
@@ -66,7 +66,7 @@ export const Admin = () => {
                 <PivotItem
                     className={styles.tab}
                     itemKey='apiTokens'
-                    headerText={t('apiTokens')}
+                    headerText={t('admin.apiTokens')}
                     itemIcon='AzureAPIManagement'>
                     <ApiTokens />
                 </PivotItem>

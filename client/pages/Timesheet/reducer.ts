@@ -47,8 +47,8 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
       {
         const { loading, data } = action.payload.query
         newState.loading = loading && {
-          label: t('loadingEventsLabel'),
-          description: t('loadingEventsDescription'),
+          label: t('timesheet.loadingEventsLabel'),
+          description: t('timesheet.loadingEventsDescription'),
         }
         if (data) {
           newState.periods = data.timesheet.map(period => new TimesheetPeriod(period))
@@ -60,15 +60,15 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
 
     case 'CONFIRMING_PERIOD':
       newState.loading = {
-        label: t('confirmingPeriodLabel'),
-        description: t('confirmingPeriodDescription'),
+        label: t('timesheet.confirmingPeriodLabel'),
+        description: t('timesheet.confirmingPeriodDescription'),
       }
       break
 
     case 'UNCONFIRMING_PERIOD':
       newState.loading = {
-        label: t('unconfirmingPeriodLabel'),
-        description: t('unconfirmingPeriodDescription'),
+        label: t('timesheet.unconfirmingPeriodLabel'),
+        description: t('timesheet.unconfirmingPeriodDescription'),
       }
       break
     case 'MOVE_SCOPE':

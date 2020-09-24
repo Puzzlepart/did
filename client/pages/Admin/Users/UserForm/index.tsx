@@ -79,7 +79,7 @@ export const UserForm = (props: IUserFormProps) => {
             </div>
             <PrimaryButton
                 className={styles.saveBtn}
-                text={t('save')}
+                text={t('common.save')}
                 disabled={!isFormValid()}
                 onClick={onSave} />
         </Panel>

@@ -48,8 +48,8 @@
     "myProjectsSearchPlaceholder": "Search my projects...",
     "exportTimeEntriesLabel": "Export time entries to Excel",
     "keyFieldDescription": "A unique identifier for the project. Keep it short, maximum 8 characters.",
-    "nameFormValidationText": "Name should be at least 2 characters long.",
-    "keyFormValidationText": "Project key should be between 2 and 8 characters long, and all uppercase.",
+    "nameFormValidationText": "Name should be at least {0} characters long.",
+    "keyFormValidationText": "Project key should be between {0} and {1} characters long, and all uppercase.",
     "createSuccess": "The project **{0}** was succesfully created.",
     "editLabel": "Edit project",
     "inactiveFieldDescription": "Mark the project as inactive. Hours for the project can no longer be confirmed."
@@ -127,7 +127,7 @@
     "surnameLabel": "Surname",
     "givenNameLabel": "Given name",
     "jobTitleLabel": "Job title",
-    "mailLabel":"Mail",
+    "mailLabel": "Mail",
     "descriptionFieldLabel": "Description",
     "iconLabel": "Icon",
     "colorLabel": "Color",
@@ -158,7 +158,7 @@
     "hoursShortFormat": "{0}h",
     "minutesShortFormat": "{0}min",
     "editLabel": "Rediger",
-    "iconSearchPlaceholder":"Search in icons...",
+    "iconSearchPlaceholder": "Search in icons...",
     "inactiveFieldLabel": "Inactive",
     "calendarStrings": {
       "months": [
@@ -198,7 +198,15 @@
         "Friday",
         "Saturday"
       ],
-      "shortDays": ["S", "M", "T", "W", "T", "F", "S"],
+      "shortDays": [
+        "S",
+        "M",
+        "T",
+        "W",
+        "T",
+        "F",
+        "S"
+      ],
       "goToToday": "Go to today",
       "weekNumberFormatString": "Week number {0}",
       "prevMonthAriaLabel": "Previous month",
@@ -208,7 +216,8 @@
       "prevYearRangeAriaLabel": "Previous year range",
       "nextYearRangeAriaLabel": "Next year range",
       "closeButtonAriaLabel": "Close"
-    }
+    },
+    "preferredLanguageLabel": "Preferred language"
   },
   "navigation": {
     "timesheet": "Timesheet",
