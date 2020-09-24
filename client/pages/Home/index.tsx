@@ -18,6 +18,7 @@ export default () => {
                 hidden={!!user.subscription}
                 text={t('common.signInText')}
                 iconProps={{ iconName: 'SignIn' }} />
+                
         </div>
     )
 }
