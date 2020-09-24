@@ -17,5 +17,7 @@
     "client/**/*js.map": true
   },
   "javascript.validate.enable": false,
-  "debug.node.autoAttach": "on"
+  "debug.node.autoAttach": "on",
+  "i18n-ally.localesPaths": "./resources",
+  "i18n-ally.keystyle": "nested"
 }
