@@ -4,6 +4,7 @@ interface CssExports {
   'divider': string;
   'header': string;
   'icon': string;
+  'loggedout': string;
   'mail': string;
   'menu': string;
   'menuItem': string;

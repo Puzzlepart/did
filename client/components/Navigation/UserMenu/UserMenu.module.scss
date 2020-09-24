@@ -25,6 +25,10 @@
     z-index: 100;
     overflow: hidden;
 
+    &.loggedout{
+        padding-top: 0;
+    }
+
     .header {
         font-size: 15px;
     }
