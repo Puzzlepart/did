@@ -15,11 +15,11 @@ export const UserMenu = () => {
     if (!user.subscription) {
         return (
             <>
-                <div
+                <a
                     className={styles.root}
                     onClick={event => setMenuTarget(event.currentTarget)}>‍
                     <Icon iconName={'PlayerSettings'} className={styles.icon} />
-                </div>
+                </a>
 
                 {menuTarget && (
                     <Callout
@@ -38,11 +38,11 @@ export const UserMenu = () => {
 
     return (
         <>
-            <div
+            <a
                 className={styles.root}
                 onClick={event => setMenuTarget(event.currentTarget)}>‍
                     <Icon iconName={'PlayerSettings'} className={styles.icon} />
-            </div>
+            </a>
 
             {menuTarget && (
                 <Callout

@@ -58,14 +58,14 @@ export const UserNotifications = () => {
 
     return (
         <>
-            <div hidden={loading} className={styles.root} onClick={() => setShowPanel(!showPanel)}>
+            <a hidden={loading} className={styles.root} onClick={() => setShowPanel(!showPanel)}>
                 <div className={styles.icon}>
                     <Icon iconName='Ringer' />
                 </div>
                 <div
                     hidden={notifications.size === 0}
                     className={styles.count}>{notifications.size}</div>
-            </div>
+            </a>
             <NotificationsPanel
                 isOpen={showPanel}
                 notifications={notifications}

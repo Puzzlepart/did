@@ -8,12 +8,14 @@
 
     &:hover {
         background-color: #787878;
+        text-decoration: none;
     }
 
     .icon {
         color: #fff;
         font-size: 18px;
         -webkit-font-smoothing: antialiased;
+        text-decoration: none;
     }
 }
 
@@ -25,8 +27,13 @@
     z-index: 100;
     overflow: hidden;
 
-    &.loggedout{
+    &.loggedout {
         padding-top: 0;
+        width:200px;
+
+        .divider {
+            margin: 10px 0;
+        }
     }
 
     .header {
