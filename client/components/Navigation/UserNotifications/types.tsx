@@ -105,10 +105,10 @@ export class NotificationModel {
     public getMoreLinkText(t: TFunction): string {
         switch (this.type) {
             case NotificationType.WEEK_NOT_CONFIRMED: {
-                return t('goToPeriodText')
+                return t('notifications.goToPeriodText')
             }
 
-            default: return t('moreLinkText')
+            default: return t('notifications.moreLinkText')
         }
 
     }
