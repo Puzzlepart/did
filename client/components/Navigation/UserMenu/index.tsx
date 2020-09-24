@@ -58,12 +58,12 @@ export const UserMenu = () => {
                         </div>
                         <div className={styles.divider}></div>
                         <div className={styles.menuItem}>
-                            <span>{user.subscription?.name}</span>
+                        <Icon iconName={'Home'} className={styles.icon} /><span>{user.subscription?.name}</span>
                         </div>
                         <div className={styles.divider}></div>
                         <UserSettings className={styles.menuItem} />
                         <div className={styles.divider}></div>
-                        <a href='/auth/signout' className={styles.menuItem}>{t('logOutText')}</a>
+                        <a href='/auth/signout' className={styles.menuItem}><Icon iconName={'SignOut'} className={styles.icon} />{t('logOutText')}</a>
                     </FadeIn>
                 </Callout>
             )}

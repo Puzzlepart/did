@@ -8,6 +8,7 @@ import styles from './UserSettings.module.scss'
 import { UserSettingsContext } from './UserSettingsContext'
 import { USER_SETTINGS } from './USER_SETTINGS'
 import ADD_OR_UPDATE_USER from 'pages/Admin/Users/UserForm/ADD_OR_UPDATE_USER'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 
 /**
  * @category UserSettings
@@ -32,7 +33,7 @@ export const UserSettings = (props: React.HTMLProps<HTMLDivElement>) => {
         <UserSettingsContext.Provider value={{ onUpdateUserSettings }}>
             <div className={styles.root}>
                 <a href='#' className={props.className} onClick={() => toggle(true)}>
-                    <span>{t('settings')}</span>
+                <Icon iconName={'Settings'} className={styles.icon} /><span>{t('settings')}</span>
                     <Panel
                         className={styles.panel}
                         headerText={t('settings')}
