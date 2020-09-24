@@ -71,7 +71,7 @@ export const CustomerForm = ({ nameLength = [2] }: ICustomerFormProps) => {
             <TextField
                 className={styles.inputField}
                 label={t('common.keyFieldLabel')}
-                description={t('customers.keyFieldDescription')}
+                description={t('customers.keyFieldDescription', { keyMaxLength: 8 })}
                 required={true}
                 errorMessage={validation.errors.key}
                 onChange={(_event, key) => setModel({ ...model, key })}

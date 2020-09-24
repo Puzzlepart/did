@@ -47,7 +47,7 @@
     "myProjectsText": "My projects",
     "myProjectsSearchPlaceholder": "Search my projects...",
     "exportTimeEntriesLabel": "Export time entries to Excel",
-    "keyFieldDescription": "A unique identifier for the project. Keep it short, maximum 8 characters.",
+    "keyFieldDescription": "A unique identifier for the project. Keep it short, maximum {{keyMaxLength}} characters.",
     "nameFormValidationText": "Name should be at least {{nameMinLength}} characters long.",
     "keyFormValidationText": "Project key should be between {{keyMinLength}} and {{keyMaxLength}} characters long, and all uppercase.",
     "createSuccess": "The project **{{name}}** was succesfully created.",
@@ -58,7 +58,7 @@
     "inactiveText": "This customer has been marked as inactive.",
     "webLinkText": "Website",
     "externalSystemUrlText": "External LOB system",
-    "keyFieldDescription": "A unique identifier for the customer. Keep it short, maximum 8 characters.",
+    "keyFieldDescription": "A unique identifier for the customer. Keep it short, maximum {{keyMaxLength}} characters.",
     "nameFormValidationText": "Name should be at least {{nameMinLength}} characters long.",
     "keyFormValidationText": "Customer key should be between {{keyMinLength}} and {{keyMaxLength}} characters long, and all uppercase.",
     "createSuccess": "The customer **{{name}}** was succesfully created."

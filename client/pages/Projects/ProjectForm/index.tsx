@@ -96,8 +96,7 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
                 disabled={editMode}
                 className={styles.inputField}
                 label={t('common.keyFieldLabel')}
-                title={t('projects.keyFieldDescription')}
-                description={t('projects.keyFieldDescription')}
+                description={t('projects.keyFieldDescription', { keyMaxLength: 8 })}
                 required={true}
                 errorMessage={validation.errors.key}
                 onChange={(_event, key) => setModel({ ...model, key })}
