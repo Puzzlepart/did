@@ -89,7 +89,6 @@
     "summaryLoadingText": "Laster tidsoppføringer og lager oppsummering...",
     "bulkImportUsersLabel": "Importer {0} brukere",
     "bulkImportingUsersLabel": "Importerer {0} brukere. Vennligst vent..",
-    "bulkImportUsersLabel": "Importer i bulk"
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport. For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene...",
@@ -219,6 +218,7 @@
     "admin": "Administrasjon"
   },
   "permissions": {
+    "accessTimesheet": "Tilgang til timeliste",
     "accessCustomers": "Tilgang til kunder",
     "accessProjects": "Tilgang til prosjekter",
     "accessAdmin": "Tilgang til administrasjon",

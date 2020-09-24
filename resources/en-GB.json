@@ -219,8 +219,9 @@
     "admin": "Admin"
   },
   "permissions": {
-    "accessCustomers": "Access to kunder",
-    "accessProjects": "Access to projects",
+    "accessTimesheet": "Access to Timesheet",
+    "accessCustomers": "Access to Customers",
+    "accessProjects": "Access to Projects",
     "accessAdmin": "Access to Admin",
     "accessReports": "Access to Reports",
     "manageProjects": "Manage projects",
