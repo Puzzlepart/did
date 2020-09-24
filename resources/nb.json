@@ -144,7 +144,6 @@
     "roleLabel": "Rolle",
     "logInText": "Logg inn",
     "logOutText": "Logg ut",
-    "userIdDescription": "ID for brukeren i Azure Active Directory",
     "roleUser": "Bruker",
     "roleAdmin": "Administrator",
     "save": "Lagre",
