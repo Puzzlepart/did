@@ -63,7 +63,7 @@ export const UserMenu = () => {
                         <div className={styles.divider}></div>
                         <UserSettings className={styles.menuItem} />
                         <div className={styles.divider}></div>
-                        <a href='/auth/signout' className={styles.menuItem}><Icon iconName={'SignOut'} className={styles.icon} />{t('logOutText')}</a>
+                        <a href='/auth/signout' className={styles.menuItem}><Icon iconName={'SignOut'} className={styles.icon} />{t('common.signOutText')}</a>
                     </FadeIn>
                 </Callout>
             )}
