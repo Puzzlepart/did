@@ -35,7 +35,6 @@ const getContext = async (): Promise<IAppContext> => {
 }
 
 getContext().then(context => {
-    console.log(process.env, 'hello world')
     const container = document.getElementById('app')
     DateUtils.setup(context.user.preferredLanguage)
     i18n.changeLanguage(context.user.preferredLanguage)
