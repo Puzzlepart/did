@@ -17,7 +17,7 @@ import CustomerColumn from './CustomerColumn'
  * @category Timesheet
  */
 export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
-    const { t } = useTranslation('common')
+    const { t } = useTranslation()
     const { loading, selectedPeriod } = React.useContext(TimesheetContext)
     const className = [styles.root]
     if (isMobile) className.push(styles.mobile)
@@ -41,13 +41,13 @@ export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
                 additionalColumns={[
                     col(
                         'customer',
-                        t('customer'),
+                        t('common.customer'),
                         { minWidth: 150, maxWidth: 200, isMultiline: true },
                         (event: ITimeEntry) => <CustomerColumn event={event} />,
                     ),
                     col(
                         'project',
-                        t('project'),
+                        t('common.project'),
                         { minWidth: 150, maxWidth: 300, isMultiline: true },
                         (event: ITimeEntry) => <ProjectColumn event={event} />
                     ),

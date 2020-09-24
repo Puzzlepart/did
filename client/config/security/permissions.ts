@@ -17,56 +17,56 @@ export default (t: TFunction): IPermission[] => [
   {
     id: accessTimesheet,
     key: 'accessTimesheet',
-    name: t('accessTimesheet', { ns: 'permissions' }),
+    name: t('permissions.accessTimesheet'),
   },
   {
     id: accessCustomers,
     key: 'accessCustomers',
-    name: t('accessCustomers', { ns: 'permissions' }),
+    name: t('permissions.accessCustomers'),
   },
   {
     id: accessProjects,
     key: 'accessProjects',
-    name: t('accessProjects', { ns: 'permissions' }),
+    name: t('permissions.accessProjects'),
   },
   {
     id: accessAdmin,
     key: 'accessAdmin',
-    name: t('accessAdmin', { ns: 'permissions' }),
+    name: t('permissions.accessAdmin'),
   },
   {
     id: accessReports,
     key: 'accessReports',
-    name: t('accessReports', { ns: 'permissions' }),
+    name: t('permissions.accessReports'),
   },
   {
     id: manageProjects,
     key: 'manageProjects',
-    name: t('manageProjects', { ns: 'permissions' }),
+    name: t('permissions.manageProjects'),
   },
   {
     id: deleteProjects,
     key: 'deleteProjects',
-    name: t('deleteProjects', { ns: 'permissions' }),
+    name: t('permissions.deleteProjects'),
   },
   {
     id: manageCustomers,
     key: 'manageCustomers',
-    name: t('manageCustomers', { ns: 'permissions' }),
+    name: t('permissions.manageCustomers'),
   },
   {
     id: deleteCustomers,
     key: 'deleteCustomers',
-    name: t('deleteCustomers', { ns: 'permissions' }),
+    name: t('permissions.deleteCustomers'),
   },
   {
     id: manageUsers,
     key: 'manageUsers',
-    name: t('manageUsers', { ns: 'permissions' }),
+    name: t('permissions.manageUsers'),
   },
   {
     id: manageRolesPermissions,
     key: 'manageRolesPermissions',
-    name: t('manageRolesPermissions', { ns: 'permissions' }),
+    name: t('permissions.manageRolesPermissions'),
   },
 ]

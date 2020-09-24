@@ -105,7 +105,7 @@ function generateTotalRow(events: any[], columns: IColumn[], label: string) {
  * @description Generates a summary view of events
  */
 export const SummaryView = () => {
-    const { t } = useTranslation('common')
+    const { t } = useTranslation()
     if (isMobile) {
         return <MessageBar styles={{ root: { marginTop: 8 } }}>{t('deviceViewNotSupported')}</MessageBar>
     } else {

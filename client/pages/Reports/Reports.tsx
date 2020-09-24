@@ -95,15 +95,15 @@ export const Reports = () => {
                 <Spinner
                     className={styles.spinner}
                     labelPosition='right'
-                    label={t('generatingReportLabel', { ns: 'reports' })} />
+                    label={t('generatingReportLabel')} />
             )}
             <UserMessage
                 hidden={timeentries.length > 0 || loading || !query}
-                text={t('noEntriesText', { ns: 'reports' })} />
+                text={t('noEntriesText')} />
             <UserMessage
                 hidden={!!query}
                 iconName='ReportDocument'
-                text={t('selectReportText', { ns: 'reports' })} />
+                text={t('selectReportText')} />
             <FilterPanel
                 isOpen={filterPanelOpen}
                 filters={filters}

@@ -19,7 +19,7 @@ export const selectQuery = (
   const queries = getQueries(t)
   return {
     key: 'SELECT_QUERY',
-    text: selectedQuery?.text || t('selectReportLabel', { ns: 'reports' }),
+    text: selectedQuery?.text || t('selectReportLabel'),
     iconProps: { iconName: selectedQuery?.iconName || 'ReportDocument' },
     subMenuProps: {
       items: queries.map(query => ({

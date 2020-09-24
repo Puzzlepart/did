@@ -19,7 +19,7 @@ import { IconPicker } from 'components/IconPicker'
  * @category LabelForm
  */
 export const LabelForm = (props: ILabelFormProps) => {
-    const { t } = useTranslation(['common', 'admin'])
+    const { t } = useTranslation()
     const [model, setModel] = useState<IEntityLabel>(props.label || {
         name: '',
         description: '',
@@ -51,37 +51,37 @@ export const LabelForm = (props: ILabelFormProps) => {
             {...props}
             type={PanelType.smallFixedFar}
             className={styles.root}
-            headerText={t(!!props.label ? 'editLabel' : 'addNewLabel', { ns: 'admin' })}
+            headerText={!!props.label ? t('admin.editLabel') : t('admin.addNewLabel')}
             isOpen={true}>
             <TextField
                 className={styles.inputField}
                 spellCheck={false}
                 maxLength={18}
-                label={t('nameFieldLabel')}
+                label={t('common.nameFieldLabel')}
                 value={model.name}
                 required={true}
                 onChange={(_, name) => setModel({ ...model, name })} />
             <TextField
                 className={styles.inputField}
                 spellCheck={false}
-                label={t('descriptionFieldLabel')}
+                label={t('common.descriptionFieldLabel')}
                 value={model.description}
                 multiline={true}
                 onChange={(_, description) => setModel({ ...model, description })} />
             <IconPicker
                 className={styles.inputField}
                 defaultSelected={model.icon}
-                label={t('iconLabel')}
-                placeholder={t('iconSearchPlaceholder')}
+                label={t('common.iconLabel')}
+                placeholder={t('common.iconSearchPlaceholder')}
                 width={300}
                 onSelected={icon => setModel({ ...model, icon })} />
             <div className={styles.inputField}>
-                <Label>{t('colorLabel')}</Label>
+                <Label>{t('common.colorLabel')}</Label>
                 <DefaultButton
                     text={
                         colorPickerVisible
-                            ? t('closeColorPickerText')
-                            : t('openColorPickerText')
+                            ? t('common.closeColorPickerText')
+                            : t('common.openColorPickerText')
                     }
                     iconProps={{ iconName: colorPickerVisible ? 'ChromeClose' : 'Color' }}
                     onClick={() => setColorPickerVisible(!colorPickerVisible)} />
@@ -92,12 +92,12 @@ export const LabelForm = (props: ILabelFormProps) => {
                 )}
             </div>
             <div className={styles.inputField}>
-                <Label>{t('previewText')}</Label>
+                <Label>{t('common.previewText')}</Label>
                 <EntityLabel label={model} size='medium' />
             </div>
             <PrimaryButton
                 className={styles.saveBtn}
-                text={t('save', { ns: 'common' })}
+                text={t('common.save')}
                 disabled={!isFormValid()}
                 onClick={onSave} />
         </Panel>

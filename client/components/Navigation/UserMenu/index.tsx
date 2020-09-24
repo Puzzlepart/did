@@ -8,7 +8,7 @@ import { UserSettings } from './UserSettings'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 
 export const UserMenu = () => {
-    const { t } = useTranslation('common')
+    const { t } = useTranslation()
     const { user } = useContext(AppContext)
     const [menuTarget, setMenuTarget] = useState<Target>(null)
 
