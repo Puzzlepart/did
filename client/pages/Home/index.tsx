@@ -12,7 +12,7 @@ export default () => {
     return (
         <div className={styles.root}>
             <div className={styles.logo}>did</div>
-            <p className={styles.motto}>The Calendar is the Timesheet</p>
+            <p className={styles.motto}>Your calendar is the timesheet</p>
             {!user.subscription && (<a className={styles.signinbutton} href='/auth/signin'>{t('common.signInText')}</a>)}
         </div>
     )
