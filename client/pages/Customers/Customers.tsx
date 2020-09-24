@@ -20,7 +20,7 @@ import { ICustomersParams, IGetCustomersData } from './types'
  * @category Customers
  */
 export const Customers = () => {
-    const { t } = useTranslation(['common', 'ADMINS'])
+    const { t } = useTranslation()
     const { hasPermission } = useContext(AppContext)
     const history = useHistory()
     const params = useParams<ICustomersParams>()

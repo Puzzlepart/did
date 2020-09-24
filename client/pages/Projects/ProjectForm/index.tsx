@@ -28,7 +28,7 @@ const initialModel: IProjectInput = {
  */
 export const ProjectForm = (props: IProjectFormProps) => {
     const editMode = !!props.edit
-    const { t } = useTranslation(['projects', 'common'])
+    const { t } = useTranslation()
     const [validation, setValidation] = useState<IProjectFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useMessage()
     const [model, setModel] = useState<IProjectInput>(props.edit
@@ -43,8 +43,8 @@ export const ProjectForm = (props: IProjectFormProps) => {
     const validateForm = (): IProjectFormValidation => {
         const errors: { [key: string]: string } = {}
         if (!model.customerKey) errors.customerKey = ''
-        if (model.name.length < 2) errors.name = format(t('nameFormValidationText'), 2)
-        if (!(/(^[A-ZÆØÅ0-9]{2,8}$)/gm).test(model.key)) errors.key = format(t('keyFormValidationText'), 2, 8)
+        if (model.name.length < 2) errors.name = format(t('projects.nameFormValidationText'), 2)
+        if (!(/(^[A-ZÆØÅ0-9]{2,8}$)/gm).test(model.key)) errors.key = format(t('projects.keyFormValidationText'), 2, 8)
         return { errors, invalid: Object.keys(errors).length > 0 }
     }
 
@@ -68,7 +68,7 @@ export const ProjectForm = (props: IProjectFormProps) => {
             if (editMode) {
                 if (props.onSubmitted) setTimeout(props.onSubmitted, 1000)
             } else {
-                setMessage({ text: format(t('createSuccess'), model.name), type: MessageBarType.success })
+                setMessage({ text: format(t('projects.createSuccess'), model.name), type: MessageBarType.success })
                 setModel(initialModel)
             }
         }

@@ -16,7 +16,7 @@ import { ICustomerDetailsProps } from './types'
  * @category Customers
  */
 export const CustomerDetails = (props: ICustomerDetailsProps) => {
-    const { t } = useTranslation(['customers', 'common', 'projects'])
+    const { t } = useTranslation()
     const { loading, error, data } = useQuery(
         GET_PROJECTS,
         {
@@ -40,7 +40,7 @@ export const CustomerDetails = (props: ICustomerDetailsProps) => {
                         className={styles.buttonContainer}
                         hidden={loading || !!error || !props.customer.webLink}>
                         <DefaultButton
-                            text={t('webLinkText')}
+                            text={t('customers.webLinkText')}
                             href={props.customer.webLink}
                             iconProps={{ iconName: 'WorkforceManagement' }} />
                     </div>
@@ -48,7 +48,7 @@ export const CustomerDetails = (props: ICustomerDetailsProps) => {
                         className={styles.buttonContainer}
                         hidden={loading || !!error || !props.customer.externalSystemURL} >
                         <DefaultButton
-                            text={t('externalSystemUrlText')}
+                            text={t('customers.externalSystemUrlText')}
                             href={props.customer.externalSystemURL}
                             iconProps={{ iconName: 'WorkforceManagement' }} />
                     </div>
@@ -56,13 +56,13 @@ export const CustomerDetails = (props: ICustomerDetailsProps) => {
             </div>
             {props.customer.inactive && (
                 <UserMessage
-                    text={t('inactiveText')}
+                    text={t('customers.inactiveText')}
                     iconName='Warning'
                     type={MessageBarType.warning} />
             )}
             <div className={styles.description}>{props.customer.description}</div>
             <div>
-                {error && <MessageBar messageBarType={MessageBarType.error}>{t('genericErrorText')}</MessageBar>}
+                {error && <MessageBar messageBarType={MessageBarType.error}>{t('common.genericErrorText')}</MessageBar>}
                 {!error && (
                     <ProjectList
                         items={value<IProject[]>(data, 'projects', [])}
