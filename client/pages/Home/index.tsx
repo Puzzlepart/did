@@ -2,6 +2,7 @@ import * as React from 'react'
 import styles from './Home.module.scss'
 import { useTranslation } from 'react-i18next'
 import { AppContext } from 'AppContext'
+import { DefaultButton } from 'office-ui-fabric-react'
 
 /**
  * @ignore
@@ -13,7 +14,10 @@ export default () => {
         <div className={styles.root}>
             <div className={styles.logo}>did</div>
             <p className={styles.motto}>The Calendar is the Timesheet</p>
-            {!user.subscription && (<a className={styles.signinbutton} href='/auth/signin'>{t('common.signInText')}</a>)}
+            <DefaultButton
+                hidden={!!user.subscription}
+                text={t('common.signInText')}
+                iconProps={{ iconName: 'SignIn' }} />
         </div>
     )
 }
