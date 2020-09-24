@@ -8,7 +8,7 @@ import { AppContext } from 'AppContext'
  */
 export default () => {
     const { user } = React.useContext(AppContext)
-    const { t } = useTranslation('common')
+    const { t } = useTranslation()
     return (
         <div className={styles.root}>
             <div className={styles.logo}>did</div>

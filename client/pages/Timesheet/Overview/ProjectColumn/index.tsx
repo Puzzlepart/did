@@ -34,7 +34,7 @@ function getErrorMessage(code: string, t: TFunction): [string, MessageBarType] {
  * @category Timesheet
  */
 const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
-    const { t } = useTranslation('timesheet')
+    const { t } = useTranslation()
     const { dispatch, selectedPeriod } = React.useContext(TimesheetContext)
     let className = styles.root
     if (isMobile) className += ` ${styles.mobile}`

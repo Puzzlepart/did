@@ -64,7 +64,7 @@ export const AllocationView = (): JSX.Element => {
                             <YAxis />
                             <Tooltip wrapperStyle={{ fontSize: 12 }} />
                             <Legend wrapperStyle={{ fontSize: 12 }} />
-                            <Bar dataKey='hours' name={t('hours', { ns: 'common' }) as string} fill='#cf6000' />
+                            <Bar dataKey='hours' name={t('hours') as string} fill='#cf6000' />
                         </BarChart>
                     </div>
                 )

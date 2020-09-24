@@ -5,7 +5,7 @@ import { ProjectDetailsContext } from './ProjectDetailsContext'
 import { getSummary } from './utils'
 
 export const Summary = () => {
-    const { t } = useTranslation('common')
+    const { t } = useTranslation()
     const { timeentries } = useContext(ProjectDetailsContext)
     const summary = useMemo(() => getSummary(timeentries, t), [timeentries])
     return (

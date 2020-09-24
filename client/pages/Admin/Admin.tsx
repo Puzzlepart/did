@@ -17,7 +17,7 @@ import { Users } from './Users'
  * @category Admin
  */
 export const Admin = () => {
-    const { t } = useTranslation('admin')
+    const { t } = useTranslation()
     const { hasPermission } = useContext(AppContext)
     const history = useHistory()
     const { view } = useParams<{ view: string }>()

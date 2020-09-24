@@ -17,7 +17,7 @@ const STORAGE_KEY = 'did365_dismissed_notifications'
  * @category UserNotifications
  */
 export const UserNotifications = () => {
-    const { t } = useTranslation('notifications')
+    const { t } = useTranslation()
     const { user } = useContext(AppContext)
     const [showPanel, setShowPanel] = useState(false)
     const [notifications, setNotifications] = useState<Set<NotificationModel>>(new Set())
@@ -25,7 +25,7 @@ export const UserNotifications = () => {
         GET_NOTIFICATIONS,
         {
             variables: {
-                templates: t('templates', { returnObjects: true }),
+                templates: t('notifications.templates', { returnObjects: true }),
                 locale: user.preferredLanguage,
             },
             skip: notifications.size > 0,

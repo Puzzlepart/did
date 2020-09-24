@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next'
  * @category FilterPanel
  */
 export const FilterItem = (props: IFilterItemProps) => {
-    const { t } = useTranslation('common')
+    const { t } = useTranslation()
     const selectedKeys = props.filter.selected.map(f => f.key)
     const [searchTerm, onSearch] = useState<string>('')
 

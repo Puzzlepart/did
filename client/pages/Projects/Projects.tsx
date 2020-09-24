@@ -58,7 +58,7 @@ export const Projects = () => {
                 <PivotItem
                     itemID='search'
                     itemKey='search'
-                    headerText={t('search', { ns: 'common' })}
+                    headerText={t('search')}
                     itemIcon='FabricFolderSearch'>
                     {error
                         ? <UserMessage type={MessageBarType.error} text={t('genericErrorText')} />
@@ -92,7 +92,7 @@ export const Projects = () => {
                     {error
                         ? <UserMessage
                             type={MessageBarType.error}
-                            text={t('genericErrorText', { ns: 'common' })} />
+                            text={t('genericErrorText')} />
                         : (
                             <>
                                 <UserMessage
@@ -118,7 +118,7 @@ export const Projects = () => {
                     <PivotItem
                         itemID='new'
                         itemKey='new'
-                        headerText={t('createNewText', { ns: 'common' })}
+                        headerText={t('createNewText')}
                         itemIcon='AddTo'>
                         <ProjectForm />
                     </PivotItem>

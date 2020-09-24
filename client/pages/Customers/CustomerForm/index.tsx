@@ -70,7 +70,7 @@ export const CustomerForm = () => {
             {message && <UserMessage containerStyle={{ marginTop: 12, marginBottom: 12, width: 450 }} text={message.text} type={message.type} />}
             <TextField
                 className={styles.inputField}
-                label={t('keyFieldLabel', { ns: 'common' })}
+                label={t('keyFieldLabel')}
                 description={t('keyFieldDescription')}
                 required={true}
                 errorMessage={validation.errors.key}
@@ -78,14 +78,14 @@ export const CustomerForm = () => {
                 value={model.key} />
             <TextField
                 className={styles.inputField}
-                label={t('nameFieldLabel', { ns: 'common' })}
+                label={t('nameFieldLabel')}
                 required={true}
                 errorMessage={validation.errors.name}
                 onChange={(_event, name) => setModel({ ...model, name })}
                 value={model.name} />
             <TextField
                 className={styles.inputField}
-                label={t('descriptionFieldLabel', { ns: 'common' })}
+                label={t('descriptionFieldLabel')}
                 multiline={true}
                 errorMessage={validation.errors.description}
                 onChange={(_event, description) => setModel({ ...model, description })}
@@ -93,13 +93,13 @@ export const CustomerForm = () => {
             <IconPicker
                 className={styles.inputField}
                 defaultSelected={model.icon}
-                label={t('iconLabel', { ns: 'common' })}
-                placeholder={t('iconSearchPlaceholder', { ns: 'common' })}
+                label={t('iconLabel')}
+                placeholder={t('iconSearchPlaceholder')}
                 width={300}
                 onSelected={icon => setModel({ ...model, icon })} />
             <PrimaryButton
                 styles={{ root: { marginTop: 16 } }}
-                text={t('add', { ns: 'common' })}
+                text={t('add')}
                 iconProps={{ iconName: 'CirclePlus' }}
                 onClick={onFormSubmit}
                 disabled={loading || !!message} />

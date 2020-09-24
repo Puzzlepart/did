@@ -12,7 +12,7 @@ export interface IDurationDisplayProps extends React.HTMLProps<HTMLDivElement> {
  * @ignore
  */
 export const DurationDisplay = ({ displayFormat, duration, style }: IDurationDisplayProps): JSX.Element => {
-    const { t } = useTranslation('common')
+    const { t } = useTranslation()
     let displayValue = DateUtils.getDurationDisplay(duration, t)
     if (displayFormat) displayValue = format(displayFormat, displayValue)
     return <span style={style}>{displayValue}</span>

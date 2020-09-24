@@ -6,7 +6,7 @@ i18n
   .init({
     resources: require('../resources').default,
     fallbackLng: 'nb',
-    debug: false,
+    debug: process.env.NODE_ENV === 'development',
     interpolation: {
       escapeValue: false,
     },

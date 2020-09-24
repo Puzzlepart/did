@@ -36,18 +36,18 @@ export default (props: IProjectListProps, t: TFunction): IColumn[] => ([
     ),
     col(
         'id',
-        t('keyFieldLabel', { ns: 'common' }),
+        t('keyFieldLabel'),
         { maxWidth: 120 },
     ),
     col(
         'name',
-        t('nameFieldLabel', { ns: 'common' }),
+        t('nameFieldLabel'),
         { maxWidth: 220 },
         (project: IProject) => <NameLabel project={project} renderLink={props.renderLink} />,
     ),
     col(
         'customer',
-        t('customer', { ns: 'common' }),
+        t('customer'),
         { maxWidth: 220 },
         (project: IProject) => {
             if (!project.customer) return null

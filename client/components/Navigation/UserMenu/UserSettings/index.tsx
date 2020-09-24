@@ -14,7 +14,7 @@ import { Icon } from 'office-ui-fabric-react/lib/Icon'
  * @category UserSettings
  */
 export const UserSettings = (props: React.HTMLProps<HTMLDivElement>) => {
-    const { t } = useTranslation('common')
+    const { t } = useTranslation()
     const { user } = React.useContext(AppContext)
     const [isOpen, toggle] = React.useState<boolean>(false)
     const [addOrUpdateUser] = useMutation(ADD_OR_UPDATE_USER)

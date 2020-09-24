@@ -9,7 +9,7 @@ import { IEntityLabelProps } from './types'
  * @category EntityLabel
  */
 export const EntityLabel = ({ size, label }: IEntityLabelProps) => {
-    const { t } = useTranslation('admin')
+    const { t } = useTranslation()
     const className = [styles.root]
     // eslint-disable-next-line default-case
     switch (size) {
@@ -24,7 +24,7 @@ export const EntityLabel = ({ size, label }: IEntityLabelProps) => {
             style={{ backgroundColor: label.color }}
             title={label.description}>
             {label.icon && <Icon iconName={label.icon} style={{ marginRight: 4 }} />}
-            <span>{isBlank(label.name) ? t('defaultLabelTitle') : label.name}</span>
+            <span>{isBlank(label.name) ? t('admin.defaultLabelTitle') : label.name}</span>
         </div>
     )
 }
