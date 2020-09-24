@@ -11,6 +11,13 @@ const WebpackBuildNotifierPlugin = require('webpack-build-notifier')
 
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production'
 
+console.log(
+  process.env.WEBPACK_NOTIFICATIONS_SUPPRESSSUCCESS === 'true',
+  process.env.WEBPACK_NOTIFICATIONS_SHOWDURATION === 'true',
+  process.env.WEBPACK_NOTIFICATIONS_SOUND,
+
+)
+
 let config = {
   mode,
   entry: { [pkg.name]: './client' },
@@ -87,11 +94,11 @@ switch (mode) {
       config.plugins.push(
         new WebpackBuildNotifierPlugin({
           logo: path.join(__dirname, '/public/images/favicon/mstile-150x150.png'),
-          sound: 'growl',
-          suppressSuccess: true,
-          showDuration: true,
+          sound: process.env.WEBPACK_NOTIFICATIONS_SOUND || false,
+          suppressSuccess: process.env.WEBPACK_NOTIFICATIONS_SUPPRESSSUCCESS === 'true',
+          showDuration: process.env.WEBPACK_NOTIFICATIONS_SHOWDURATION === 'true',
         })
-      )
+      ) 
     }
     break
   case 'production':
