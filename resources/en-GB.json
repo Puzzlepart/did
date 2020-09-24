@@ -56,8 +56,6 @@
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",
-    "deleteButtonLabel": "Delete customer",
-    "deleteConfirmationText": "The customer {0} and connected projects was deleted.",
     "webLinkText": "Website",
     "externalSystemUrlText": "External LOB system",
     "keyFieldDescription": "A unique identifier for the customer. Keep it short, maximum 8 characters.",

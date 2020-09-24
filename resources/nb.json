@@ -56,8 +56,6 @@
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",
-    "deleteButtonLabel": "Slett kunde",
-    "deleteConfirmationText": "Slettet kunde {0} og tilhørende prosjekter.",
     "webLinkText": "Webside",
     "externalSystemUrlText": "Eksternt business-system",
     "keyFieldDescription": "En unik identifikator for kunden. Holdt det kort, maks 8 tegn.",
