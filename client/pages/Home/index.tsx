@@ -15,7 +15,9 @@ export default () => {
             <div className={styles.logo}>did</div>
             <p className={styles.motto}>The Calendar is the Timesheet</p>
             <DefaultButton
+                className={styles.signinbutton}
                 hidden={!!user.subscription}
+                href='/auth/signin'
                 text={t('common.signInText')}
                 iconProps={{ iconName: 'SignIn' }} />
         </div>
