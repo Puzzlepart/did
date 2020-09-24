@@ -20,7 +20,7 @@ export default (context: ITimesheetContext, t: TFunction): GlobalHotKeysProps =>
       action: 'keydown',
     },
     SHOW_SHORTCUTS: {
-      name: t('showShortcutsText'),
+      name: t('common.showShortcutsText'),
       sequence: 'SHIFT+I',
       action: 'keydown',
     },

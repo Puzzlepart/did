@@ -60,7 +60,7 @@ export class TimesheetPeriod {
    * @param {TFunction} t Translate function
    */
   public getName(includeMonth: boolean, t: TFunction) {
-    let name = `${t('weekLabel')} ${this._period.week}`
+    let name = `${t('common.weekLabel')} ${this._period.week}`
     if (includeMonth) name += ` (${this._month})`
     return name
   }

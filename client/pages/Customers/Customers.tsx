@@ -54,16 +54,16 @@ export const Customers = () => {
             <PivotItem
                 itemID='search'
                 itemKey='search'
-                headerText={t('search')}
+                headerText={t('common.search')}
                 itemIcon='FabricFolderSearch'>
                 {error
-                    ? <MessageBar messageBarType={MessageBarType.error}>{t('genericErrorText')}</MessageBar>
+                    ? <MessageBar messageBarType={MessageBarType.error}>{t('common.genericErrorText')}</MessageBar>
                     : (
                         <>
                             <CustomerList
                                 enableShimmer={loading}
                                 items={customers}
-                                searchBox={{ placeholder: t('searchPlaceholder') }}
+                                searchBox={{ placeholder: t('common.searchPlaceholder') }}
                                 selection={{
                                     mode: SelectionMode.single,
                                     onChanged: selected => {
@@ -84,7 +84,7 @@ export const Customers = () => {
                 <PivotItem
                     itemID='new'
                     itemKey='new'
-                    headerText={t('createNewText')}
+                    headerText={t('common.createNewText')}
                     itemIcon='AddTo'>
                     <CustomerForm />
                 </PivotItem>

@@ -11,33 +11,33 @@ const columns = (t: TFunction): IColumn[] => ([
     {
         key: 'title',
         fieldName: 'title',
-        name: t('titleLabel'),
+        name: t('common.titleLabel'),
         minWidth: 100,
     },
     {
         key: 'project',
         fieldName: 'project.name',
-        name: t('project'),
+        name: t('common.project'),
         minWidth: 100,
         onRender: ({ project }) => <ProjectLink project={project} />
     },
     {
         key: 'customer',
         fieldName: 'customer.name',
-        name: t('customer'),
+        name: t('common.customer'),
         minWidth: 100,
         onRender: ({ customer }) => <CustomerLink customer={customer} />,
     },
     {
         key: 'duration',
         fieldName: 'duration',
-        name: t('durationLabel'),
+        name: t('common.durationLabel'),
         minWidth: 100,
     },
     {
         key: 'startDateTime',
         fieldName: 'startDateTime',
-        name: t('startTimeLabel'),
+        name: t('common.startTimeLabel'),
         minWidth: 100,
         data: { excelColFormat: 'date' as ExcelColumnType },
         onRender: ({ startDateTime }) => dateUtils.formatDate(startDateTime, 'MMM DD, YYYY kk:mm')
@@ -45,7 +45,7 @@ const columns = (t: TFunction): IColumn[] => ([
     {
         key: 'endDateTime',
         fieldName: 'endDateTime',
-        name: t('endTimeLabel'),
+        name: t('common.endTimeLabel'),
         minWidth: 100,
         data: { excelColFormat: 'date' as ExcelColumnType },
         onRender: ({ endDateTime }) => dateUtils.formatDate(endDateTime, 'MMM DD, YYYY kk:mm')
@@ -53,26 +53,26 @@ const columns = (t: TFunction): IColumn[] => ([
     {
         key: 'weekNumber',
         fieldName: 'weekNumber',
-        name: t('weekLabel'),
+        name: t('common.weekLabel'),
         minWidth: 100,
     },
     {
         key: 'monthNumber',
         fieldName: 'monthNumber',
-        name: t('monthLabel'),
+        name: t('common.monthLabel'),
         minWidth: 100,
         onRender: ({ monthNumber }) => dateUtils.getMonthNames()[monthNumber - 1]
     },
     {
         key: 'year',
         fieldName: 'year',
-        name: t('yearLabel'),
+        name: t('common.yearLabel'),
         minWidth: 100,
     },
     {
         key: 'resourceName',
         fieldName: 'resourceName',
-        name: t('employeeLabel'),
+        name: t('common.employeeLabel'),
         minWidth: 100,
     },
 ])

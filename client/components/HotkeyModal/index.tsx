@@ -17,7 +17,7 @@ export const HotkeyModal = (props: IHotkeyModal) => {
             onDismiss={props.onDismiss}
             containerClassName={styles.root}>
             <div className={styles.container}>
-                <div className={styles.title}>{t('weekLabel')}</div>
+                <div className={styles.title}>{t('common.weekLabel')}</div>
                 <FadeIn>
                     {Object.keys(props.keyMap).map(key => {
                         const { name, sequence } = props.keyMap[key] as any

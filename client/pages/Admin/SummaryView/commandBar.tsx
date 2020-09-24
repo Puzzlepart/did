@@ -71,7 +71,7 @@ export const commandBar = (
         farItems: [
             {
                 key: 'EXPORT_TO_EXCEL',
-                text: t('exportCurrentView'),
+                text: t('common.exportCurrentView'),
                 iconProps: { iconName: 'ExcelDocument' },
                 disabled: context.loading,
                 onClick: () => {

@@ -33,10 +33,10 @@ export const UserSettings = (props: React.HTMLProps<HTMLDivElement>) => {
         <UserSettingsContext.Provider value={{ onUpdateUserSettings }}>
             <div className={styles.root}>
                 <a href='#' className={props.className} onClick={() => toggle(true)}>
-                <Icon iconName='Settings' className={styles.icon} /><span>{t('settings')}</span>
+                <Icon iconName='Settings' className={styles.icon} /><span>{t('common.settings')}</span>
                     <Panel
                         className={styles.panel}
-                        headerText={t('settings')}
+                        headerText={t('common.settings')}
                         isOpen={isOpen}
                         onDismiss={() => toggle(false)}
                         isLightDismiss={true}>

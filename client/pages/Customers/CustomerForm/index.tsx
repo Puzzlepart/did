@@ -70,7 +70,7 @@ export const CustomerForm = () => {
             {message && <UserMessage containerStyle={{ marginTop: 12, marginBottom: 12, width: 450 }} text={message.text} type={message.type} />}
             <TextField
                 className={styles.inputField}
-                label={t('keyFieldLabel')}
+                label={t('common.keyFieldLabel')}
                 description={t('customers.keyFieldDescription')}
                 required={true}
                 errorMessage={validation.errors.key}
@@ -78,14 +78,14 @@ export const CustomerForm = () => {
                 value={model.key} />
             <TextField
                 className={styles.inputField}
-                label={t('nameFieldLabel')}
+                label={t('common.nameFieldLabel')}
                 required={true}
                 errorMessage={validation.errors.name}
                 onChange={(_event, name) => setModel({ ...model, name })}
                 value={model.name} />
             <TextField
                 className={styles.inputField}
-                label={t('descriptionFieldLabel')}
+                label={t('common.descriptionFieldLabel')}
                 multiline={true}
                 errorMessage={validation.errors.description}
                 onChange={(_event, description) => setModel({ ...model, description })}
@@ -93,13 +93,13 @@ export const CustomerForm = () => {
             <IconPicker
                 className={styles.inputField}
                 defaultSelected={model.icon}
-                label={t('iconLabel')}
-                placeholder={t('iconSearchPlaceholder')}
+                label={t('common.iconLabel')}
+                placeholder={t('common.iconSearchPlaceholder')}
                 width={300}
                 onSelected={icon => setModel({ ...model, icon })} />
             <PrimaryButton
                 styles={{ root: { marginTop: 16 } }}
-                text={t('add')}
+                text={t('common.add')}
                 iconProps={{ iconName: 'CirclePlus' }}
                 onClick={onFormSubmit}
                 disabled={loading || !!message} />

@@ -97,14 +97,14 @@ export const ApiTokens = () => {
                     {
                         key: 'name',
                         fieldName: 'name',
-                        name: t('nameFieldLabel'),
+                        name: t('common.nameFieldLabel'),
                         minWidth: 100,
                         maxWidth: 250,
                     },
                     {
                         key: 'timestamp',
                         fieldName: 'timestamp',
-                        name: t('createdLabel'),
+                        name: t('common.createdLabel'),
                         minWidth: 100,
                         onRender: (item) => dateUtils.formatDate(item.timestamp, 'LLL')
                     },
@@ -116,7 +116,7 @@ export const ApiTokens = () => {
                         onRender: (item) => {
                             return (
                                 <DefaultButton
-                                    text={t('delete')}
+                                    text={t('common.delete')}
                                     iconProps={{ iconName: 'RecycleBin' }}
                                     onClick={() => onDeleteApiToken(item)} />
                             )

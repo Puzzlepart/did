@@ -59,7 +59,7 @@ export const Actions = (props: IProjectDetailsProps) => {
         <div className={styles.actions}>
             <div className={styles.actionItem} hidden={!hasPermission(manageProjects)}>
                 <DefaultButton
-                    text={t('editLabel')}
+                    text={t('common.editLabel')}
                     iconProps={{ iconName: 'PageEdit' }}
                     onClick={() => setShowEditPanel(true)} />
             </div>

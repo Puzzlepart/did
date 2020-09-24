@@ -57,7 +57,7 @@ export const LabelPicker = (props: ILabelPickerProps) => {
                 </span>
             </Label>
             {selectedLabels.map(lbl => <EntityLabel key={lbl.name} label={lbl} />)}
-            <span className={styles.noneSelected} hidden={selectedLabels.length > 0}>{t('noneSelectedMessage')}</span>
+            <span className={styles.noneSelected} hidden={selectedLabels.length > 0}>{t('common.noneSelectedMessage')}</span>
             <SelectCallout
                 target={toggleRef}
                 hidden={!showCallout}

@@ -18,7 +18,7 @@ export default () => {
                 <DefaultButton
                     className={styles.signinbutton}
                     href='/auth/signin'
-                    text={t('signInText')} />
+                    text={t('common.signInText')} />
             </div>
         </div>
     )
