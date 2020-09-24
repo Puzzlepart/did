@@ -55,7 +55,7 @@ const typeDef = gql`
     """
     Get the currently logged in user
     """
-    currentUser: User!
+    currentUser: User
   }
 
   extend type Mutation {
