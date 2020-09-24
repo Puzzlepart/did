@@ -2,10 +2,12 @@ require('dotenv').config()
 const path = require('path')
 const src = path.resolve(__dirname, 'client/')
 const pkg = require('./package.json')
+const webpack = require('webpack')
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const LiveReloadPlugin = require('webpack-livereload-plugin')
+const WebpackBuildNotifierPlugin = require('webpack-build-notifier');
 
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production'
 
@@ -65,6 +67,7 @@ let config = {
     extensions: ['.ts', '.tsx', '.js', '.css', '.scss'],
   },
   plugins: [
+    new webpack.EnvironmentPlugin({ NODE_ENV: process.env }),
     new MomentLocalesPlugin({ localesToKeep: ['en-gb', 'nb'] }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'views/index_template.hbs'),
@@ -81,6 +84,7 @@ switch (mode) {
       config.watch = true
       config.watchOptions = { aggregateTimeout: 200 }
       config.plugins.push(new LiveReloadPlugin())
+      config.plugins.push(new WebpackBuildNotifierPlugin({ sound: 'growl' }))
     }
     break
   case 'production':
