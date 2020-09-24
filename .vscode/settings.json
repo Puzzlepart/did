@@ -20,6 +20,6 @@
   "debug.node.autoAttach": "on",
   "i18n-ally.localesPaths": "./resources",
   "i18n-ally.keystyle": "nested",
-  "i18n-ally.sourceLanguage": "nb",
+  "i18n-ally.sourceLanguage": "en-GB",
   "i18n-ally.displayLanguage": "en-GB"
 }
