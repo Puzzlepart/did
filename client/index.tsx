@@ -21,17 +21,20 @@ initializeIcons()
  * Get app context
  */
 const getContext = async (): Promise<IAppContext> => {
-    const { data } = await client.query<{ currentUser: any }>({ query: GET_CURRENT_USER })
-    if (!data.currentUser) {
-        const guestContext = { user: { preferredLanguage: 'en-GB' }, hasPermission: () => false }
-        return guestContext
+    const context: IAppContext = {}
+    try {
+        const { data } = await client.query({ query: GET_CURRENT_USER })
+        context.user = data?.currentUser
+        let { preferredLanguage } = context.user
+        preferredLanguage = contains(supportedLanguages, preferredLanguage) ? preferredLanguage : 'en-GB'
+        context.user.preferredLanguage = preferredLanguage
+        context.hasPermission = (permissionId: string) => contains(context.user?.role?.permissions, permissionId)
+        return context
+    } catch (error) {
+        context.user = { preferredLanguage: 'en-GB' }
+        context.hasPermission = () => false
+        return context
     }
-    const context: IAppContext = { user: data?.currentUser }
-    let { preferredLanguage } = context.user
-    preferredLanguage = contains(supportedLanguages, preferredLanguage) ? preferredLanguage : 'en-GB'
-    context.user.preferredLanguage = preferredLanguage
-    context.hasPermission = (permissionId: string) => contains(context.user?.role?.permissions, permissionId)
-    return context
 }
 
 getContext().then(context => {

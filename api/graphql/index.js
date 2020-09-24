@@ -11,7 +11,7 @@ const { typeDef: Role } = require('./resolvers/role')
 const { typeDef: Notification } = require('./resolvers/notification')
 const { typeDef: ApiToken } = require('./resolvers/apiToken')
 const { StorageService, GraphService, SubscriptionService } = require('../../services')
-const { filter } = require('underscore')
+const { filter, pick } = require('underscore')
 const value = require('get-value')
 
 const Query = gql`
@@ -114,7 +114,7 @@ const createContext = async ({ req }) => {
       subscription,
     }
   } catch (e) {
-    return {}
+    return new Error()
   }
 }
 
@@ -132,4 +132,5 @@ module.exports = new ApolloServer({
       }
     },
   },
+  formatError: error => pick(error, 'message'),
 })
