@@ -62,7 +62,7 @@ export const ApiTokens = () => {
         await deleteApiToken({ variables: { name: token.name } })
         setMessage({
             type: MessageBarType.info,
-            text: format(t('admin.tokenDeletedText'), token.name),
+            text: t('admin.tokenDeletedText', { name: token.name }),
         })
         setName(null)
         setKey(null)
