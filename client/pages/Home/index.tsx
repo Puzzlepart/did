@@ -14,11 +14,12 @@ export default () => {
         <div className={styles.root}>
             <div className={styles.logo}>did</div>
             <p className={styles.motto}>The Calendar is the Timesheet</p>
-            <DefaultButton
-                className={styles.signinbutton}
-                hidden={!!user.subscription}
-                href='/auth/signin'
-                text={t('common.signInText')}/>
+            <div hidden={!!user.subscription}>
+                <DefaultButton
+                    className={styles.signinbutton}
+                    href='/auth/signin'
+                    text={t('common.signInText')} />
+            </div>
         </div>
     )
 }
