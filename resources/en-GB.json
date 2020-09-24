@@ -142,7 +142,7 @@
     "employeeLabel": "Employee",
     "yearLabel": "Year",
     "roleLabel": "Role",
-    "logInText": "Sign in",
+    "signInText": "Sign in",
     "signOutText": "Sign out",
     "roleUser": "User",
     "roleAdmin": "Administrator",

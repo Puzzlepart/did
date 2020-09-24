@@ -142,7 +142,7 @@
     "employeeLabel": "Ansatt",
     "yearLabel": "År",
     "roleLabel": "Rolle",
-    "logInText": "Logg inn",
+    "signInText": "Logg inn",
     "signOutText": "Logg ut",
     "roleUser": "Bruker",
     "roleAdmin": "Administrator",
