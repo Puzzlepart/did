@@ -5,7 +5,7 @@ import resources from '../resources'
 i18n.use(initReactI18next).init({
   resources,
   fallbackLng: 'nb',
-  debug: process.env.NODE_ENV === 'development',
+  debug: false,
   interpolation: {
     escapeValue: false,
   },
