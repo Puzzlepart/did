@@ -11,10 +11,10 @@ import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { find } from 'underscore'
+import { ProjectsContext } from './context'
 import GET_PROJECTS from './GET_PROJECTS'
 import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
-import { ProjectsContext } from './ProjectsContext'
 import { IProjectsParams } from './types'
 
 /**

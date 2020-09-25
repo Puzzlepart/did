@@ -12,11 +12,12 @@ const passport = require('./middleware/passport')
 const serveGzipped = require('./middleware/gzip')
 const SubscriptionService = require('./services/subscription')
 const bearerToken = require('express-bearer-token')
+const helmet = require('helmet')
 
 class App {
   constructor() {
     this._ = express()
-    this._.use(require('./middleware/helmet'))
+    this._.use(helmet())
     this._.use(favicon(path.join(__dirname, pkg.config.public, 'images/favicon/favicon.ico')))
     this._.use(logger('dev'))
     this._.use(express.json())

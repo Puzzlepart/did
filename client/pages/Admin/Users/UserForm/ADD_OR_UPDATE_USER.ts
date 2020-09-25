@@ -1,13 +1,7 @@
 import gql from 'graphql-tag'
 
-export interface IUserInput {
-  id: string
-  displayName: string
-  role: string
-}
-
 export interface IAddOrUpdateUserVariables {
-  user: IUserInput
+  user: any
   update?: boolean
 }
 
