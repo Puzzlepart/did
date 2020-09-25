@@ -11,13 +11,6 @@ const WebpackBuildNotifierPlugin = require('webpack-build-notifier')
 
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production'
 
-console.log(
-  process.env.WEBPACK_NOTIFICATIONS_SUPPRESSSUCCESS === 'true',
-  process.env.WEBPACK_NOTIFICATIONS_SHOWDURATION === 'true',
-  process.env.WEBPACK_NOTIFICATIONS_SOUND,
-
-)
-
 let config = {
   mode,
   entry: { [pkg.name]: './client' },
