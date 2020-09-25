@@ -12,7 +12,7 @@ export const goToCurrentWeek = ({ scope, dispatch }: ITimesheetContext, t: TFunc
     iconProps: { iconName: 'RenewalCurrent', ...ACTIONBAR_ICON_PROPS },
     onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: new Date().toISOString() }),
     disabled: scope.isCurrentWeek,
-    title: t('goToCurrentWeek'),
+    title: t('timesheet.goToCurrentWeek'),
 })
 
 export const goToPrevWeek = ({ dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
@@ -20,7 +20,7 @@ export const goToPrevWeek = ({ dispatch }: ITimesheetContext, t: TFunction): ICo
     iconOnly: true,
     iconProps: { iconName: 'Back', ...ACTIONBAR_ICON_PROPS },
     onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: { amount: -1, unit: 'week' } }),
-    title: t('goToPrevWeek')
+    title: t('timesheet.goToPrevWeek')
 })
 
 export const goToNextWeek = ({ dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
@@ -28,7 +28,7 @@ export const goToNextWeek = ({ dispatch }: ITimesheetContext, t: TFunction): ICo
     iconOnly: true,
     iconProps: { iconName: 'Forward', ...ACTIONBAR_ICON_PROPS },
     onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: { amount: 1, unit: 'week' } }),
-    title: t('goToNextWeek'),
+    title: t('timesheet.goToNextWeek'),
 })
 
 export const CHANGE_PERIOD = ({ periods, loading, selectedPeriod, dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem[] => {
@@ -65,12 +65,12 @@ export const CONFIRM_ACTIONS = (context: ITimesheetContext, t: TFunction): ICont
             disabled={!!context.loading}
             iconProps={{ iconName: 'Cancel' }}
             onClick={context.onUnconfirmPeriod}
-            text={t('unconfirmHoursText')}
+            text={t('timesheet.unconfirmHoursText')}
             styles={{ root: { height: 44, marginLeft: 4 } }} />
         : <PrimaryButton
             disabled={!!context.loading || context.selectedPeriod.unmatchedDuration > 0}
             iconProps={{ iconName: 'CheckMark' }}
             onClick={context.onConfirmPeriod}
-            text={t('confirmHoursText')}
+            text={t('timesheet.confirmHoursText')}
             styles={{ root: { height: 44, marginLeft: 4 } }} />
 })

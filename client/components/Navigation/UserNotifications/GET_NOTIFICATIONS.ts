@@ -12,8 +12,8 @@ export interface IGetNotifications {
  * @ignore
  */
 export interface IGetNotificationsVariables {
-  templates: ITypedHash<string>;
-  locale: string;
+  templates: ITypedHash<string>
+  locale: string
 }
 
 /**

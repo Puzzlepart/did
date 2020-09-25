@@ -8,33 +8,33 @@ import { generateColumn as col } from 'utils/generateColumn'
 export const columns = (onEdit: (user: IUser) => void, t: TFunction): IColumn[] => ([
     col(
         'role.name',
-        t('roleLabel'),
+        t('common.roleLabel'),
         { maxWidth: 100 },
         ({ role }: IUser) => role.name,
     ),
     col(
         'displayName',
-        t('displayNameLabel'),
+        t('common.displayNameLabel'),
         { maxWidth: 180 }
     ),
     col(
         'surname',
-        t('surnameLabel'),
+        t('common.surnameLabel'),
         { maxWidth: 160 }
     ),
     col(
         'givenName',
-        t('givenNameLabel'),
+        t('common.givenNameLabel'),
         { maxWidth: 160 }
     ),
     col(
         'jobTitle',
-        t('jobTitleLabel'),
+        t('common.jobTitleLabel'),
         { maxWidth: 140 }
     ),
     col(
         'mail',
-        t('mailLabel'),
+        t('common.mailLabel'),
         { maxWidth: 180 }
     ),
     col(
@@ -43,7 +43,7 @@ export const columns = (onEdit: (user: IUser) => void, t: TFunction): IColumn[] 
         {},
         (user: IUser) => (
             <DefaultButton
-                text={t('editLabel')}
+                text={t('common.editLabel')}
                 onClick={() => onEdit(user)} />
         ))
 ])

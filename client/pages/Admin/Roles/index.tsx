@@ -14,7 +14,8 @@ import { IRolePanelProps, RolePanel } from './RolePanel'
  * @category Admin
  */
 export const Roles = () => {
-    const { t } = useTranslation(['admin', 'common'])
+    const { t } = useTranslation()
+    
     const { data, loading, refetch } = useQuery(GET_ROLES)
     const [panel, setPanel] = useState<IRolePanelProps>(null)
     const columns = [
@@ -33,7 +34,7 @@ export const Roles = () => {
         ),
         col(
             'permissions',
-            t('permissonsLabel'),
+            t('admin.permissonsLabel'),
             { minWidth: 200, isMultiline: true },
             (role: IRole) => <PermissionList permissionIds={role.permissions} />
         ),
@@ -45,9 +46,9 @@ export const Roles = () => {
                 <>
                     <DefaultButton
                         styles={{ root: { marginRight: 4 } }}
-                        text={t('editRole')}
+                        text={t('admin.editRole')}
                         onClick={() => setPanel({
-                            title: t('editRole'),
+                            title: t('admin.editRole'),
                             model: role,
                         })} />
                 </>
@@ -64,10 +65,10 @@ export const Roles = () => {
                     items: [
                         {
                             key: 'addNewRole',
-                            name: t('addNewRole'),
+                            name: t('admin.addNewRole'),
                             iconProps: { iconName: 'AddFriend' },
                             onClick: () => setPanel({
-                                title: t('addNewRole'),
+                                title: t('admin.addNewRole'),
                             }),
                         },
                     ],

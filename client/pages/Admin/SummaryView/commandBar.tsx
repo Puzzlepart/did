@@ -63,7 +63,7 @@ export const commandBar = (
                 name: '',
                 onRender: () => context.loading && (
                     <Spinner
-                        label={t('summaryLoadingText', { ns: 'admin' })}
+                        label={t('admin.summaryLoadingText')}
                         labelPosition='right' />
                 )
             }
@@ -71,7 +71,7 @@ export const commandBar = (
         farItems: [
             {
                 key: 'EXPORT_TO_EXCEL',
-                text: t('exportCurrentView'),
+                text: t('common.exportCurrentView'),
                 iconProps: { iconName: 'ExcelDocument' },
                 disabled: context.loading,
                 onClick: () => {

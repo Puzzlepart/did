@@ -5,10 +5,9 @@ import styles from './App.module.scss'
 import { AppContext, IAppContext } from './AppContext'
 import { Admin, Customers, Home, Projects, Reports, Timesheet } from './pages'
 import { ProtectedRoute as Route } from './ProtectedRoute'
-import { accessReports, accessAdmin, accessCustomers, accessProjects } from 'config/security/permissions'
+import * as permissions from 'config/security/permissions'
 
-
-const App = (context: IAppContext): JSX.Element => {
+export const App = (context: IAppContext): JSX.Element => {
     return (
         <AppContext.Provider value={context}>
             <Router>
@@ -16,27 +15,29 @@ const App = (context: IAppContext): JSX.Element => {
                     <Navigation />
                     <div className={styles.container}>
                         <Switch>
-                            <Route path='/timesheet'>
+                            <Route
+                                path='/timesheet'
+                                permission={permissions.accessTimesheet}>
                                 <Timesheet />
                             </Route>
                             <Route
                                 path='/customers'
-                                permission={accessCustomers}>
+                                permission={permissions.accessCustomers}>
                                 <Customers />
                             </Route>
                             <Route
                                 path='/projects'
-                                permission={accessProjects}>
+                                permission={permissions.accessProjects}>
                                 <Projects />
                             </Route>
                             <Route
                                 path='/reports'
-                                permission={accessReports}>
+                                permission={permissions.accessReports}>
                                 <Reports />
                             </Route>
                             <Route
                                 path='/admin'
-                                permission={accessAdmin}>
+                                permission={permissions.accessAdmin}>
                                 <Admin />
                             </Route>
                             <Route path='/'>
@@ -49,6 +50,3 @@ const App = (context: IAppContext): JSX.Element => {
         </AppContext.Provider >
     )
 }
-
-export { App }
-

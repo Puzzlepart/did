@@ -15,18 +15,18 @@ import { IBulkImportPanelProps } from './types'
  */
 export const BulkImportPanel = (props: IBulkImportPanelProps) => {
     const { adUsers } = useContext(UsersContext)
-    const { t } = useTranslation('common')
+    const { t } = useTranslation()
     const [selectedUsers, setSelectedUsers] = useState([])
 
     return (
         <Panel
             {...pick(props, 'onDismiss', 'isOpen')}
-            headerText={t('bulkImportUsersLabel', { ns: 'admin' })}
+            headerText={t('admin.bulkImportUsersLabel')}
             type={PanelType.medium}
             className={styles.root}>
             <div className={styles.container}>
                 <PrimaryButton
-                    text={format(t('bulkImportUsersLabel', { ns: 'admin' }), selectedUsers.length)}
+                    text={format(t('admin.bulkImportUsersLabel'), selectedUsers.length)}
                     disabled={selectedUsers.length === 0}
                     onClick={() => props.onImport(selectedUsers)} />
                 <List
@@ -40,7 +40,7 @@ export const BulkImportPanel = (props: IBulkImportPanelProps) => {
                         {
                             key: 'displayName',
                             fieldName: 'displayName',
-                            name: t('displayNameLabel'),
+                            name: t('common.displayNameLabel'),
                             minWidth: 100,
                         }
                     ]} />

@@ -47,23 +47,21 @@
     "myProjectsText": "My projects",
     "myProjectsSearchPlaceholder": "Search my projects...",
     "exportTimeEntriesLabel": "Export time entries to Excel",
-    "keyFieldDescription": "A unique identifier for the project. Keep it short, maximum 8 characters.",
-    "nameFormValidationText": "Name should be at least 2 characters long.",
-    "keyFormValidationText": "Project key should be between 2 and 8 characters long, and all uppercase.",
-    "createSuccess": "The project **{0}** was succesfully created.",
+    "keyFieldDescription": "A unique identifier for the project. Keep it short, maximum {{keyMaxLength}} characters.",
+    "nameFormValidationText": "Name should be at least {{nameMinLength}} characters long.",
+    "keyFormValidationText": "Project key should be between {{keyMinLength}} and {{keyMaxLength}} characters long, and all uppercase.",
+    "createSuccess": "The project **{{name}}** was succesfully created.",
     "editLabel": "Edit project",
     "inactiveFieldDescription": "Mark the project as inactive. Hours for the project can no longer be confirmed."
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",
-    "deleteButtonLabel": "Delete customer",
-    "deleteConfirmationText": "The customer {0} and connected projects was deleted.",
     "webLinkText": "Website",
     "externalSystemUrlText": "External LOB system",
-    "keyFieldDescription": "A unique identifier for the customer. Keep it short, maximum 8 characters.",
-    "nameFormValidationText": "Name should be at least {0} characters long.",
-    "keyFormValidationText": "Customer key should be between {0} and {1} characters long, and all uppercase.",
-    "createSuccess": "The customer **{0}** was succesfully created."
+    "keyFieldDescription": "A unique identifier for the customer. Keep it short, maximum {{keyMaxLength}} characters.",
+    "nameFormValidationText": "Name should be at least {{nameMinLength}} characters long.",
+    "keyFormValidationText": "Customer key should be between {{keyMinLength}} and {{keyMaxLength}} characters long, and all uppercase.",
+    "createSuccess": "The customer **{{name}}** was succesfully created."
   },
   "admin": {
     "users": "Users",
@@ -85,11 +83,10 @@
     "tokenNamePlaceholder": "Enter token name",
     "tokenGeneratedText": "Your key has been generated and will only be visible for 10 seconds. You can only see it once. Take good care of it!",
     "tokenErrorText": "An error occurred generating your key. Please try again later.",
-    "tokenDeletedText": "API key `{0}` was succesfully deleted.",
+    "tokenDeletedText": "API key **{{name}}** was succesfully deleted.",
     "summaryLoadingText": "Loading time entries and creating summary...",
-    "bulkImportUsersLabel": "Import {0} users",
-    "bulkImportingUsersLabel": "Importing {0} users. Please wait..",
-    "bulkImportUsersLabel": "Bulk-import users"
+    "bulkImportUsersLabel": "Bulk import",
+    "bulkImportingUsersLabel": "Importing {{count}} users. Please wait.."
   },
   "reports": {
     "generatingReportLabel": "Generating report. To give you the freshest results, we're generating a report from the latest data...",
@@ -128,7 +125,7 @@
     "surnameLabel": "Surname",
     "givenNameLabel": "Given name",
     "jobTitleLabel": "Job title",
-    "mailLabel":"Mail",
+    "mailLabel": "Mail",
     "descriptionFieldLabel": "Description",
     "iconLabel": "Icon",
     "colorLabel": "Color",
@@ -138,13 +135,14 @@
     "previewText": "Preview",
     "exportCurrentView": "Export current view",
     "monthLabel": "Month",
+    "motto": "the calendar is your timesheet",
     "weekNumberLabel": "Week number",
     "weekLabel": "Week",
     "employeeLabel": "Employee",
     "yearLabel": "Year",
     "roleLabel": "Role",
-    "logOutText": "Sign out",
-    "userIdDescription": "ID for the user in Azure Active Directory",
+    "signInText": "Log in",
+    "signOutText": "Sign out",
     "roleUser": "User",
     "roleAdmin": "Administrator",
     "save": "Save",
@@ -159,7 +157,7 @@
     "hoursShortFormat": "{0}h",
     "minutesShortFormat": "{0}min",
     "editLabel": "Rediger",
-    "iconSearchPlaceholder":"Search in icons...",
+    "iconSearchPlaceholder": "Search in icons...",
     "inactiveFieldLabel": "Inactive",
     "calendarStrings": {
       "months": [
@@ -199,7 +197,15 @@
         "Friday",
         "Saturday"
       ],
-      "shortDays": ["S", "M", "T", "W", "T", "F", "S"],
+      "shortDays": [
+        "S",
+        "M",
+        "T",
+        "W",
+        "T",
+        "F",
+        "S"
+      ],
       "goToToday": "Go to today",
       "weekNumberFormatString": "Week number {0}",
       "prevMonthAriaLabel": "Previous month",
@@ -209,7 +215,8 @@
       "prevYearRangeAriaLabel": "Previous year range",
       "nextYearRangeAriaLabel": "Next year range",
       "closeButtonAriaLabel": "Close"
-    }
+    },
+    "preferredLanguageLabel": "Preferred language"
   },
   "navigation": {
     "timesheet": "Timesheet",
@@ -219,8 +226,9 @@
     "admin": "Admin"
   },
   "permissions": {
-    "accessCustomers": "Access to kunder",
-    "accessProjects": "Access to projects",
+    "accessTimesheet": "Access to Timesheet",
+    "accessCustomers": "Access to Customers",
+    "accessProjects": "Access to Projects",
     "accessAdmin": "Access to Admin",
     "accessReports": "Access to Reports",
     "manageProjects": "Manage projects",

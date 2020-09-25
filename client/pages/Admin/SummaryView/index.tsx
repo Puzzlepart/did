@@ -18,7 +18,7 @@ import { getViewTypes, ISummaryViewContext, ISummaryViewProps } from './types'
  * @category Admin
  */
 export const SummaryView = (props: ISummaryViewProps): JSX.Element => {
-    const { t } = useTranslation(['common', 'admin'])
+    const { t } = useTranslation()
     const types = getViewTypes(t)
     const [state, dispatch] = useReducer(reducer, {
         year: props.defaultYear,
@@ -64,7 +64,7 @@ export const SummaryView = (props: ISummaryViewProps): JSX.Element => {
                         commandBar={commandBar(contextValue, rows, columns, t)} />
                     <UserMessage
                         hidden={!isEmpty(rows) || loading}
-                        text={t('noTimeEntriesText', { ns: 'admin' })} />
+                        text={t('admin.noTimeEntriesText')} />
                 </PivotItem>
             ))}
         </Pivot>

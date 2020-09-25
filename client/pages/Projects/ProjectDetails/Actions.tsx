@@ -20,7 +20,7 @@ import { IProjectDetailsProps } from './types'
 export const Actions = (props: IProjectDetailsProps) => {
     const { refetch } = useContext(ProjectsContext)
     const { hasPermission } = useContext(AppContext)
-    const { t } = useTranslation(['projects', 'common'])
+    const { t } = useTranslation()
     const [showEditPanel, setShowEditPanel] = useState(false)
     const context = useContext(ProjectDetailsContext)
     const [createOutlookCategory] = useMutation<{ result: IBaseResult }, { category: IOutlookCategory }>(CREATE_OUTLOOK_CATEGORY)
@@ -59,25 +59,25 @@ export const Actions = (props: IProjectDetailsProps) => {
         <div className={styles.actions}>
             <div className={styles.actionItem} hidden={!hasPermission(manageProjects)}>
                 <DefaultButton
-                    text={t('editLabel')}
+                    text={t('common.editLabel')}
                     iconProps={{ iconName: 'PageEdit' }}
                     onClick={() => setShowEditPanel(true)} />
             </div>
             <div className={styles.actionItem} hidden={isEmpty(context.timeentries)}>
                 <DefaultButton
-                    text={t('exportTimeEntriesLabel')}
+                    text={t('projects.exportTimeEntriesLabel')}
                     iconProps={{ iconName: 'ExcelDocument' }}
                     onClick={onExportExcel} />
             </div>
             <div className={styles.actionItem} hidden={!context.project.webLink}>
                 <DefaultButton
-                    text={t('workspaceLabel')}
+                    text={t('projects.workspaceLabel')}
                     onClick={() => window.location.replace(context.project.webLink)}
                     iconProps={{ iconName: 'WorkforceManagement' }} />
             </div>
             <div className={styles.actionItem} hidden={!!context.project.outlookCategory}>
                 <DefaultButton
-                    text={t('createOutlookCategoryLabel')}
+                    text={t('projects.createOutlookCategoryLabel')}
                     iconProps={{ iconName: 'OutlookLogoInverse' }}
                     onClick={() => onCreateCategory()} />
             </div>

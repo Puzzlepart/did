@@ -17,7 +17,7 @@ import { IRolePanelProps } from './types'
  * @category Admin
  */
 export const RolePanel = (props: IRolePanelProps) => {
-    const { t } = useTranslation('admin')
+    const { t } = useTranslation()
     const [addOrUpdateRole] = useMutation(ADD_OR_UPDATE_ROLE)
     const [model, setModel] = useState(props.model || { name: '', permissions: [], icon: first(getIcons(1)) })
     const permissions = useMemo(() => securityConfig.permissions(t), [])
@@ -60,18 +60,18 @@ export const RolePanel = (props: IRolePanelProps) => {
             <div className={styles.container}>
                 <TextField
                     className={styles.inputField}
-                    label={t('roleNameLabel')}
+                    label={t('admin.roleNameLabel')}
                     defaultValue={props.model ? props.model.name : ''}
                     disabled={!!props.model}
                     required={true}
                     onChange={(_event, name) => setModel({ ...model, name })} />
                 <IconPicker
-                    label={t('iconLabel', { ns: 'common' })}
-                    placeholder={t('iconSearchPlaceholder', { ns: 'common' })}
+                    label={t('common.iconLabel')}
+                    placeholder={t('common.iconSearchPlaceholder')}
                     defaultSelected={model.icon}
                     onSelected={icon => setModel({ ...model, icon })}
                     className={styles.inputField} />
-                <div className={styles.subHeader}>{t('permissonsLabel')}</div>
+                <div className={styles.subHeader}>{t('admin.permissonsLabel')}</div>
                 <div className={styles.permissions}>
                     {permissions.map(({ key, id, name }) => (
                         <div key={key} className={styles.permissionItem}>
@@ -85,7 +85,7 @@ export const RolePanel = (props: IRolePanelProps) => {
                 </div>
                 <PrimaryButton
                     className={styles.saveBtn}
-                    text={t('save', { ns: 'common' })}
+                    text={t('common.save')}
                     onClick={onSave}
                     disabled={saveDisabled} />
             </div>

@@ -4,6 +4,7 @@ interface CssExports {
   'logo': string;
   'motto': string;
   'root': string;
+  'signinbutton': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

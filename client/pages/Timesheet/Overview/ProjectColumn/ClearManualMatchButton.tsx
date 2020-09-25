@@ -8,7 +8,7 @@ import { IClearManualMatchButtonProps } from './types'
  * @category Timesheet
  */
 export const ClearManualMatchButton = ({ onClick }: IClearManualMatchButtonProps): JSX.Element => {
-    const { t } = useTranslation('timesheet')
+    const { t } = useTranslation()
     return (
         <div
             className={styles.clearButton}

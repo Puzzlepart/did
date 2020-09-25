@@ -17,7 +17,7 @@ import { ProjectDetailsContext } from './ProjectDetailsContext'
  * @category Projects
  */
 export const ProjectDetails = (props: IProjectDetailsProps) => {
-    const { t } = useTranslation(['projects', 'common'])
+    const { t } = useTranslation()
     const [project, setProject] = useState({ ...props.project })
     const { loading, error, data } = useQuery<{ timeentries: any[] }>(PROJECT_TIME_ENTRIES, { variables: { projectId: props.project.id } })
     const timeentries = data ? data.timeentries : []
@@ -48,7 +48,7 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                 {project.inactive && (
                     <UserMessage
                         hidden={!project.inactive}
-                        text={t('inactiveText')}
+                        text={t('projects.inactiveText')}
                         iconName='Warning'
                         type={MessageBarType.warning} />
                 )}
@@ -64,7 +64,7 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                 <UserMessage
                     hidden={!project.outlookCategory}
                     containerStyle={{ margin: '15px 0 15px 0' }}
-                    text={t('categoryOutlookText')}
+                    text={t('projects.categoryOutlookText')}
                     iconName='OutlookLogoInverse' />
                 <Summary />
                 <TimeEntries />

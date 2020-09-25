@@ -1,17 +1,16 @@
 import { useMutation } from '@apollo/react-hooks'
+import { getIcons } from 'common/icons'
 import { IconPicker, LabelPicker, SearchCustomer, useMessage, UserMessage } from 'components'
+import { Toggle } from 'office-ui-fabric-react'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { format } from 'office-ui-fabric-react/lib/Utilities'
-import { pick, first } from 'underscore'
+import { first, pick } from 'underscore'
 import styles from './CreateProjectForm.module.scss'
 import CREATE_OR_UPDATE_PROJECT, { ICreateOrUpdateProjectVariables, IProjectInput } from './CREATE_OR_UPDATE_PROJECT'
 import { IProjectFormProps, IProjectFormValidation } from './types'
-import { Toggle } from 'office-ui-fabric-react'
-import { getIcons } from 'common/icons'
 
 const initialModel: IProjectInput = {
     key: '',
@@ -26,13 +25,13 @@ const initialModel: IProjectInput = {
 /**
  * @category Projects
  */
-export const ProjectForm = (props: IProjectFormProps) => {
-    const editMode = !!props.edit
-    const { t } = useTranslation(['projects', 'common'])
+export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFormProps) => {
+    const editMode = !!edit
+    const { t } = useTranslation()
     const [validation, setValidation] = useState<IProjectFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useMessage()
-    const [model, setModel] = useState<IProjectInput>(props.edit
-        ? { ...props.edit, labels: props.edit.labels.map(lbl => lbl.name) }
+    const [model, setModel] = useState<IProjectInput>(edit
+        ? { ...edit, labels: edit.labels.map(lbl => lbl.name) }
         : initialModel
     )
     const [createOrUpdateProject, { loading }] = useMutation<any, ICreateOrUpdateProjectVariables>(CREATE_OR_UPDATE_PROJECT)
@@ -41,10 +40,11 @@ export const ProjectForm = (props: IProjectFormProps) => {
      * On validate form
      */
     const validateForm = (): IProjectFormValidation => {
+        const [nameMinLength] = nameLength
         const errors: { [key: string]: string } = {}
         if (!model.customerKey) errors.customerKey = ''
-        if (model.name.length < 2) errors.name = format(t('nameFormValidationText'), 2)
-        if (!(/(^[A-ZÆØÅ0-9]{2,8}$)/gm).test(model.key)) errors.key = format(t('keyFormValidationText'), 2, 8)
+        if (model.name.length < nameMinLength) errors.name = t('projects.nameFormValidationText', { nameMinLength })
+        if (!(/(^[A-ZÆØÅ0-9]{2,8}$)/gm).test(model.key)) errors.key = t('projects.keyFormValidationText', { keyMinLength: 2, keyMaxLength: 8 })
         return { errors, invalid: Object.keys(errors).length > 0 }
     }
 
@@ -66,9 +66,9 @@ export const ProjectForm = (props: IProjectFormProps) => {
         })
         if (result.success) {
             if (editMode) {
-                if (props.onSubmitted) setTimeout(props.onSubmitted, 1000)
+                if (onSubmitted) setTimeout(onSubmitted, 1000)
             } else {
-                setMessage({ text: format(t('createSuccess'), model.name), type: MessageBarType.success })
+                setMessage({ text: t('projects.createSuccess', { name: model.name }), type: MessageBarType.success })
                 setModel(initialModel)
             }
         }
@@ -84,10 +84,10 @@ export const ProjectForm = (props: IProjectFormProps) => {
             )}
             <SearchCustomer
                 hidden={editMode}
-                label={t('customer', { ns: 'common' })}
+                label={t('common.customer')}
                 required={true}
                 className={styles.inputField}
-                placeholder={t('searchPlaceholder')}
+                placeholder={t('common.searchPlaceholder')}
                 onSelected={customer => setModel({
                     ...model,
                     customerKey: customer && customer.key,
@@ -95,23 +95,22 @@ export const ProjectForm = (props: IProjectFormProps) => {
             <TextField
                 disabled={editMode}
                 className={styles.inputField}
-                label={t('keyFieldLabel', { ns: 'common' })}
-                title={t('keyFieldDescription')}
-                description={t('keyFieldDescription')}
+                label={t('common.keyFieldLabel')}
+                description={t('projects.keyFieldDescription', { keyMaxLength: 8 })}
                 required={true}
                 errorMessage={validation.errors.key}
                 onChange={(_event, key) => setModel({ ...model, key })}
                 value={model.key} />
             <TextField
                 className={styles.inputField}
-                label={t('nameFieldLabel', { ns: 'common' })}
+                label={t('common.nameFieldLabel')}
                 required={true}
                 errorMessage={validation.errors.name}
                 onChange={(_event, name) => setModel({ ...model, name })}
                 value={model.name} />
             <TextField
                 className={styles.inputField}
-                label={t('descriptionFieldLabel', { ns: 'common' })}
+                label={t('common.descriptionFieldLabel')}
                 multiline={true}
                 errorMessage={validation.errors.description}
                 onChange={(_event, description) => setModel({ ...model, description })}
@@ -119,26 +118,26 @@ export const ProjectForm = (props: IProjectFormProps) => {
             <IconPicker
                 className={styles.inputField}
                 defaultSelected={model.icon}
-                label={t('iconLabel', { ns: 'common' })}
-                placeholder={t('iconSearchPlaceholder', { ns: 'common' })}
+                label={t('common.iconLabel')}
+                placeholder={t('common.iconSearchPlaceholder')}
                 width={300}
                 onSelected={icon => setModel({ ...model, icon })} />
             <div className={styles.inputField} hidden={!editMode}>
                 <Toggle
-                    label={t('inactiveFieldLabel', { ns: 'common' })}
+                    label={t('common.inactiveFieldLabel')}
                     defaultChecked={model.inactive}
                     onChanged={inactive => setModel({ ...model, inactive })} />
-                <span className={styles.inputDescription}>{t('inactiveFieldDescription')}</span>
+                <span className={styles.inputDescription}>{t('projects.inactiveFieldDescription')}</span>
             </div>
             <LabelPicker
                 className={styles.inputField}
-                label={t('labels', { ns: 'admin' })}
-                searchLabelText={t('filterLabels', { ns: 'admin' })}
-                defaultSelectedKeys={props.edit ? props.edit.labels.map(lbl => lbl.name) : []}
+                label={t('admin.labels')}
+                searchLabelText={t('admin.filterLabels')}
+                defaultSelectedKeys={editMode ? edit.labels.map(lbl => lbl.name) : []}
                 onChange={labels => setModel({ ...model, labels: labels.map(lbl => lbl.name) })} />
             <PrimaryButton
                 className={styles.inputField}
-                text={t(editMode ? 'save' : 'add', { ns: 'common' })}
+                text={editMode ? t('common.save') : t('common.add')}
                 onClick={onFormSubmit}
                 disabled={loading || !!message} />
         </div>

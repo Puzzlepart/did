@@ -18,7 +18,7 @@ import styles from './UserFormModal.module.scss'
  */
 export const UserForm = (props: IUserFormProps) => {
     const { adUsers, roles } = useContext(UsersContext)
-    const { t } = useTranslation('common')
+    const { t } = useTranslation()
     const [model, setModel] = useState<IUser>(props.user || {
         id: '',
         displayName: '',
@@ -52,7 +52,7 @@ export const UserForm = (props: IUserFormProps) => {
             {!props.user && (
                 <div className={styles.inputContainer}>
                     <Autocomplete
-                        placeholder={t('searchPlaceholder')}
+                        placeholder={t('common.searchPlaceholder')}
                         items={adUsers.map(u => ({
                             key: u.id,
                             displayValue: u.displayName,
@@ -79,7 +79,7 @@ export const UserForm = (props: IUserFormProps) => {
             </div>
             <PrimaryButton
                 className={styles.saveBtn}
-                text={t('save')}
+                text={t('common.save')}
                 disabled={!isFormValid()}
                 onClick={onSave} />
         </Panel>

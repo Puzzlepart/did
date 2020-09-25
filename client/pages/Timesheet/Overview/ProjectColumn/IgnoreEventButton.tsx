@@ -10,7 +10,7 @@ import { MobileView, BrowserView } from 'react-device-detect'
  * @category Timesheet
  */
 export const IgnoreEventButton = ({ event }: IIgnoreEventButton): JSX.Element => {
-    const { t } = useTranslation('timesheet')
+    const { t } = useTranslation()
     const { dispatch } = React.useContext(TimesheetContext)
 
     const onClick = () => dispatch({

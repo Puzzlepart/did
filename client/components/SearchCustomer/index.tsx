@@ -12,7 +12,7 @@ import { Label } from 'office-ui-fabric-react/lib/Label'
  * @category SearchCustomer
  */
 export const SearchCustomer = (props: ISearchCustomerProps) => {
-    const { t } = useTranslation('common')
+    const { t } = useTranslation()
     const { loading, data } = useQuery<{ customers: ICustomer[] }>(GET_CUSTOMERS, {
         variables: { sortBy: 'name' },
         fetchPolicy: 'cache-first',
@@ -33,7 +33,7 @@ export const SearchCustomer = (props: ISearchCustomerProps) => {
                 disabled={loading}
                 items={searchData}
                 width={450}
-                placeholder={t('searchPlaceholder')}
+                placeholder={t('common.searchPlaceholder')}
                 onClear={() => props.onSelected(null)}
                 onSelected={item => props.onSelected(item.data)} />
         </div>

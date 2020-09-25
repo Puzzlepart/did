@@ -1,6 +1,6 @@
 import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar'
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu'
-import * as React from 'react'
+import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TimesheetContext } from '../'
 import { CHANGE_PERIOD, CONFIRM_ACTIONS, goToCurrentWeek, goToNextWeek, goToPrevWeek } from './items'
@@ -11,8 +11,8 @@ import styles from './ActionBar.module.scss'
  * @category Timesheet
  */
 export const ActionBar = () => {
-    const { t } = useTranslation(['timesheet', 'common'])
-    const context = React.useContext(TimesheetContext)
+    const { t } = useTranslation()    
+    const context = useContext(TimesheetContext)
     const items = [
         goToCurrentWeek(context, t),
         goToPrevWeek(context, t),

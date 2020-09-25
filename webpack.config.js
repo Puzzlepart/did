@@ -2,12 +2,21 @@ require('dotenv').config()
 const path = require('path')
 const src = path.resolve(__dirname, 'client/')
 const pkg = require('./package.json')
+const webpack = require('webpack')
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const LiveReloadPlugin = require('webpack-livereload-plugin')
+const WebpackBuildNotifierPlugin = require('webpack-build-notifier')
 
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production'
+
+console.log(
+  process.env.WEBPACK_NOTIFICATIONS_SUPPRESSSUCCESS === 'true',
+  process.env.WEBPACK_NOTIFICATIONS_SHOWDURATION === 'true',
+  process.env.WEBPACK_NOTIFICATIONS_SOUND,
+
+)
 
 let config = {
   mode,
@@ -65,6 +74,7 @@ let config = {
     extensions: ['.ts', '.tsx', '.js', '.css', '.scss'],
   },
   plugins: [
+    new webpack.EnvironmentPlugin({ NODE_ENV: process.env }),
     new MomentLocalesPlugin({ localesToKeep: ['en-gb', 'nb'] }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'views/index_template.hbs'),
@@ -77,10 +87,18 @@ let config = {
 switch (mode) {
   case 'development':
     {
-      config.stats = 'minimal'
+      config.stats = 'normal'
       config.watch = true
       config.watchOptions = { aggregateTimeout: 200 }
       config.plugins.push(new LiveReloadPlugin())
+      config.plugins.push(
+        new WebpackBuildNotifierPlugin({
+          logo: path.join(__dirname, '/public/images/favicon/mstile-150x150.png'),
+          sound: process.env.WEBPACK_NOTIFICATIONS_SOUND || false,
+          suppressSuccess: process.env.WEBPACK_NOTIFICATIONS_SUPPRESSSUCCESS === 'true',
+          showDuration: process.env.WEBPACK_NOTIFICATIONS_SHOWDURATION === 'true',
+        })
+      ) 
     }
     break
   case 'production':

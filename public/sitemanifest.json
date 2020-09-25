@@ -1,6 +1,6 @@
 {
-    "name": "Did",
-    "short_name": "Did: The Calendar is the Timesheet",
+    "name": "did",
+    "short_name": "did",
     "display": "standalone",
     "description": "Timetracking made easy",
     "icons": [

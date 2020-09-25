@@ -13,7 +13,7 @@ import { ILabelFormProps, LabelForm } from './LabelForm'
  * @category Admin
  */
 export const Labels = () => {
-    const { t } = useTranslation(['admin', 'common'])
+    const { t } = useTranslation()
     const { data, refetch } = useQuery(GET_LABELS, { fetchPolicy: 'cache-and-network' })
     const [deleteLabel] = useMutation(DELETE_LABEL)
     const [form, setForm] = useState<ILabelFormProps>(null)
@@ -21,11 +21,11 @@ export const Labels = () => {
     const columns = [
         col(
             'name',
-            t('nameFieldLabel', { ns: 'common' }),
+            t('common.nameFieldLabel'),
             { maxWidth: 180 },
             (label: IEntityLabel) => <EntityLabel label={label} />,
         ),
-        col('description', t('descriptionFieldLabel', { ns: 'common' })),
+        col('description', t('common.descriptionFieldLabel')),
         col(
             'edit_delete',
             '',
@@ -34,10 +34,10 @@ export const Labels = () => {
                 <>
                     <DefaultButton
                         styles={{ root: { marginRight: 4 } }}
-                        text={t('editLabel', { ns: 'common' })}
+                        text={t('common.editLabel')}
                         onClick={() => setForm({ label })} />
                     <DefaultButton
-                        text={t('delete', { ns: 'common' })}
+                        text={t('common.delete')}
                         onClick={() => deleteLabel({ variables: { name: label.name } }).then(refetch)} />
                 </>
             )),
@@ -54,7 +54,7 @@ export const Labels = () => {
                     items: [
                         {
                             key: 'NEW_LABEL',
-                            name: t('addNewLabel'),
+                            name: t('common.addNewLabel'),
                             iconProps: { iconName: 'Add' },
                             onClick: () => setForm({})
                         }

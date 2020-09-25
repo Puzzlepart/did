@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next'
  * @category UserNotifications
  */
 export const UserNotificationActions = ({ model }: IUserNotificationProps) => {
-    const { t } = useTranslation('notifications')
+    const { t } = useTranslation()
     if (!model.moreLink) return null
     return <Link href={model.moreLink}>{model.getMoreLinkText(t)}</Link>
 }

@@ -23,7 +23,7 @@ import { AppContext } from 'AppContext'
  */
 export const Timesheet = () => {
     const context = useContext(AppContext)
-    const { t } = useTranslation(['timesheet', 'common'])
+    const { t } = useTranslation()
     const history = useHistory()
     const params = useParams<ITimesheetParams>()
     const [state, dispatch] = useReducer(reducer, {
@@ -84,19 +84,19 @@ export const Timesheet = () => {
                         })}>
                         <PivotItem
                             itemKey='overview'
-                            headerText={t('overviewHeaderText')}
+                            headerText={t('timesheet.overviewHeaderText')}
                             itemIcon='CalendarWeek'>
                             <Overview dayFormat='dddd DD' timeFormat='HH:mm' />
                         </PivotItem>
                         <PivotItem
                             itemKey='summary'
-                            headerText={t('summaryHeaderText')}
+                            headerText={t('timesheet.summaryHeaderText')}
                             itemIcon='List'>
                             <SummaryView />
                         </PivotItem>
                         <PivotItem
                             itemKey='allocation'
-                            headerText={t('allocationHeaderText')}
+                            headerText={t('timesheet.allocationHeaderText')}
                             itemIcon='ReportDocument'>
                             <AllocationView />
                         </PivotItem>
