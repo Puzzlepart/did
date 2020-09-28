@@ -197,6 +197,13 @@ export class TimesheetPeriod {
   }
 
   /**
+   * Returns true if period starts after current date
+   */
+  public isForecast(): boolean {
+    return this._startDateTime.isAfter()
+  }
+
+  /**
    * Returns path for period
    */
   public get path() {

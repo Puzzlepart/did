@@ -7,15 +7,14 @@ import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { ActionBar } from './ActionBar'
 import { AllocationView } from './AllocationView'
-import CONFIRM_PERIOD from './CONFIRM_PERIOD'
-import GET_TIMESHEET from './GET_TIMESHEET'
+import { CONFIRM_PERIOD, UNCONFIRM_PERIOD } from './mutations'
+import { GET_TIMESHEET } from './queries'
 import hotkeys from './hotkeys'
 import { Overview } from './Overview'
 import reducer from './reducer'
 import { SummaryView } from './SummaryView'
 import styles from './Timesheet.module.scss'
 import { ITimesheetContext, ITimesheetParams, ITimesheetPeriod, TimesheetContext, TimesheetPeriod, TimesheetScope, TimesheetView } from './types'
-import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD'
 import { AppContext } from 'AppContext'
 
 /**
@@ -47,25 +46,25 @@ export const Timesheet = () => {
 
     const [[confirmPeriod], [unconfirmPeriod]] = [
         useMutation<{ entries: any[]; startDateTime: string; endDateTime: string }>(CONFIRM_PERIOD),
-        useMutation<{ startDateTime: string; endDateTime: string }>(UNCONFIRM_PERIOD)
+        useMutation<{ startDateTime: string; endDateTime: string }>(UNCONFIRM_PERIOD),
     ]
 
-    const onConfirmPeriod = () => {
-        dispatch({ type: 'CONFIRMING_PERIOD', payload: { t } })
+    const onSubmitPeriod = () => {
+        dispatch({ type: 'SUBMITTING_PERIOD', payload: { t } })
         const variables = { period: state.selectedPeriod.data }
         confirmPeriod({ variables }).then(query.refetch)
     }
 
-    const onUnconfirmPeriod = () => {
-        dispatch({ type: 'UNCONFIRMING_PERIOD', payload: { t } })
+    const onUnsubmitPeriod = () => {
+        dispatch({ type: 'UNSUBMITTING_PERIOD', payload: { t } })
         const variables = { period: state.selectedPeriod.data }
         unconfirmPeriod({ variables }).then(query.refetch)
     }
 
     const ctx: ITimesheetContext = useMemo(() => ({
         ...state,
-        onConfirmPeriod,
-        onUnconfirmPeriod,
+        onSubmitPeriod,
+        onUnsubmitPeriod,
         dispatch,
     }), [state])
 

@@ -5,7 +5,7 @@ import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Bar, BarChart, Legend, Tooltip, XAxis, YAxis } from 'recharts'
 import _ from 'underscore'
-import { TimesheetContext } from '../TimesheetContext'
+import { TimesheetContext } from '../context'
 import styles from './AllocationView.module.scss'
 
 /**

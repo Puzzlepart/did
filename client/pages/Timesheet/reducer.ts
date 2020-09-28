@@ -23,8 +23,8 @@ export type TimesheetAction =
       }
     }
   | { type: 'MOVE_SCOPE'; payload: ITimesheetScopeOptions | string }
-  | { type: 'CONFIRMING_PERIOD'; payload: { t: TFunction } }
-  | { type: 'UNCONFIRMING_PERIOD'; payload: { t: TFunction } }
+  | { type: 'SUBMITTING_PERIOD'; payload: { t: TFunction } }
+  | { type: 'UNSUBMITTING_PERIOD'; payload: { t: TFunction } }
   | { type: 'CHANGE_PERIOD'; payload: string }
   | { type: 'CHANGE_VIEW'; payload: TimesheetView }
   | { type: 'MANUAL_MATCH'; payload: { eventId: string; project: IProject } }
@@ -58,14 +58,14 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
       }
       break
 
-    case 'CONFIRMING_PERIOD':
+    case 'SUBMITTING_PERIOD':
       newState.loading = {
         label: t('timesheet.confirmingPeriodLabel'),
         description: t('timesheet.confirmingPeriodDescription'),
       }
       break
 
-    case 'UNCONFIRMING_PERIOD':
+    case 'UNSUBMITTING_PERIOD':
       newState.loading = {
         label: t('timesheet.unconfirmingPeriodLabel'),
         description: t('timesheet.unconfirmingPeriodDescription'),

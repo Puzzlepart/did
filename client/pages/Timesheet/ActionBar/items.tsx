@@ -2,12 +2,12 @@ import { TFunction } from 'i18next'
 import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
 import * as React from 'react'
-import { ITimesheetContext } from '../TimesheetContext'
+import { ITimesheetContext } from '../context'
 import styles from './ActionBar.module.scss'
 import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS'
 
-export const goToCurrentWeek = ({ scope, dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
-    key: 'goToCurrentWeek',
+export const GO_TO_CURRENT_WEEK = ({ scope, dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
+    key: 'GO_TO_CURRENT_WEEK',
     iconOnly: true,
     iconProps: { iconName: 'RenewalCurrent', ...ACTIONBAR_ICON_PROPS },
     onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: new Date().toISOString() }),
@@ -15,16 +15,16 @@ export const goToCurrentWeek = ({ scope, dispatch }: ITimesheetContext, t: TFunc
     title: t('timesheet.goToCurrentWeek'),
 })
 
-export const goToPrevWeek = ({ dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
-    key: 'goToPrevWeek',
+export const GO_TO_PREV_WEEK = ({ dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
+    key: 'GO_TO_PREV_WEEK',
     iconOnly: true,
     iconProps: { iconName: 'Back', ...ACTIONBAR_ICON_PROPS },
     onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: { amount: -1, unit: 'week' } }),
     title: t('timesheet.goToPrevWeek')
 })
 
-export const goToNextWeek = ({ dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
-    key: 'goToNextWeek',
+export const GO_TO_NEXT_WEEK = ({ dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
+    key: 'GO_TO_NEXT_WEEK',
     iconOnly: true,
     iconProps: { iconName: 'Forward', ...ACTIONBAR_ICON_PROPS },
     onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: { amount: 1, unit: 'week' } }),
@@ -60,17 +60,28 @@ export const CHANGE_PERIOD = ({ periods, loading, selectedPeriod, dispatch }: IT
 
 export const CONFIRM_ACTIONS = (context: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
     key: 'CONFIRM_HOURS',
-    onRender: () => context.selectedPeriod.confirmed
-        ? <DefaultButton
-            disabled={!!context.loading}
-            iconProps={{ iconName: 'Cancel' }}
-            onClick={context.onUnconfirmPeriod}
-            text={t('timesheet.unconfirmHoursText')}
-            styles={{ root: { height: 44, marginLeft: 4 } }} />
-        : <PrimaryButton
-            disabled={!!context.loading || context.selectedPeriod.unmatchedDuration > 0}
-            iconProps={{ iconName: 'CheckMark' }}
-            onClick={context.onConfirmPeriod}
-            text={t('timesheet.confirmHoursText')}
-            styles={{ root: { height: 44, marginLeft: 4 } }} />
+    onRender: () => {
+        if (context.selectedPeriod.confirmed) {
+            return (
+                <DefaultButton
+                    disabled={!!context.loading}
+                    iconProps={{ iconName: 'Cancel' }}
+                    onClick={context.onUnsubmitPeriod}
+                    text={context.selectedPeriod.isForecast
+                        ? t('timesheet.unforecastHoursText')
+                        : t('timesheet.unconfirmHoursText')}
+                    styles={{ root: { height: 44, marginLeft: 4 } }} />
+            )
+        }
+        return (
+            <PrimaryButton
+                disabled={!!context.loading || context.selectedPeriod.unmatchedDuration > 0}
+                iconProps={{ iconName: 'CheckMark' }}
+                onClick={context.onSubmitPeriod}
+                text={context.selectedPeriod.isForecast
+                    ? t('timesheet.forecastHoursText')
+                    : t('timesheet.confirmHoursText')}
+                styles={{ root: { height: 44, marginLeft: 4 } }} />
+        )
+    }
 })

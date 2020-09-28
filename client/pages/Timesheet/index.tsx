@@ -22,5 +22,5 @@ const _ = () => {
 
 export default _
 
-export * from './TimesheetContext'
+export * from './context'
 

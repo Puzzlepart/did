@@ -55,6 +55,3 @@ export const UNFORECAST_PERIOD = gql`
     }
   }
 `
-
-
-
