@@ -5,7 +5,7 @@
   "engines": {
     "node": ">=10.14.1",
     "npm": ">=6.5.0"
-  },
+  },x
   "config": {
     "public": "public"
   },

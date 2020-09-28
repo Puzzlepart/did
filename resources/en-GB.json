@@ -32,7 +32,9 @@
     "clearProjectMatchTooltipText": "Clear match",
     "matchOutlookInfoText": "**Please note:** You should try your best to match<a href='{0}' target='_blank'>the event in Outlook</a>, but in some cases it might be neccessary to manually match.",
     "didYouMeanText": "Did you mean",
-    "eventNotFullyMatchedText": "Event not matched. We found a matching customer **{0}**, but not a project with the specified key."
+    "eventNotFullyMatchedText": "Event not matched. We found a matching customer **{0}**, but not a project with the specified key.",
+    "customerInactiveErrorText": "The customer is no longer active. Edit the event in Outlook.",
+    "projectInactiveErrorText": "The project is no longer active. Edit the event in Outlook."
   },
   "projects": {
     "inactiveText": "This project has been marked as inactive.",
@@ -174,38 +176,9 @@
         "November",
         "December"
       ],
-      "shortMonths": [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec"
-      ],
-      "days": [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ],
-      "shortDays": [
-        "S",
-        "M",
-        "T",
-        "W",
-        "T",
-        "F",
-        "S"
-      ],
+      "shortMonths": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      "days": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "shortDays": ["S", "M", "T", "W", "T", "F", "S"],
       "goToToday": "Go to today",
       "weekNumberFormatString": "Week number {0}",
       "prevMonthAriaLabel": "Previous month",

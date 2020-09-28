@@ -1,22 +1,15 @@
 require('dotenv').config()
+const tryRequire = require('try-require')
 const path = require('path')
 const src = path.resolve(__dirname, 'client/')
 const pkg = require('./package.json')
-const webpack = require('webpack')
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const LiveReloadPlugin = require('webpack-livereload-plugin')
-const WebpackBuildNotifierPlugin = require('webpack-build-notifier')
+const LiveReloadPlugin = tryRequire('webpack-livereload-plugin')
+const WebpackBuildNotifierPlugin = tryRequire('webpack-build-notifier')
 
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production'
-
-console.log(
-  process.env.WEBPACK_NOTIFICATIONS_SUPPRESSSUCCESS === 'true',
-  process.env.WEBPACK_NOTIFICATIONS_SHOWDURATION === 'true',
-  process.env.WEBPACK_NOTIFICATIONS_SOUND,
-
-)
 
 let config = {
   mode,
@@ -74,7 +67,6 @@ let config = {
     extensions: ['.ts', '.tsx', '.js', '.css', '.scss'],
   },
   plugins: [
-    new webpack.EnvironmentPlugin({ NODE_ENV: process.env }),
     new MomentLocalesPlugin({ localesToKeep: ['en-gb', 'nb'] }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'views/index_template.hbs'),
