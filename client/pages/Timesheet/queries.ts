@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 /**
  * @ignore
  */
-export default gql`
+export const GET_TIMESHEET = gql`
   query($startDateTime: String!, $endDateTime: String!, $dateFormat: String!, $locale: String!) {
     timesheet(startDateTime: $startDateTime, endDateTime: $endDateTime, dateFormat: $dateFormat, locale: $locale) {
       id
