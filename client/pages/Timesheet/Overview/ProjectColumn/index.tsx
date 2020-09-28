@@ -58,7 +58,7 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
                     isMultiline={false}
                     type={MessageBarType.warning}
                     iconName='TagUnknown'
-                    text={t('noProjectMatchFoundText')}
+                    text={t('timesheet.noProjectMatchFoundText')}
                     actions={
                         <div>
                             <MatchEventPanel event={event} />

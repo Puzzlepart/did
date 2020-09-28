@@ -22,7 +22,7 @@ export const IgnoreEventButton = ({ event }: IIgnoreEventButton): JSX.Element =>
         <>
             <BrowserView renderWithFragment={true}>
                 <MessageBarButton
-                    text={t('ignoreEventButtonLabel')}
+                    text={t('timesheet.ignoreEventButtonLabel')}
                     iconProps={{ iconName: 'Blocked2' }}
                     onClick={onClick} />
             </BrowserView>
