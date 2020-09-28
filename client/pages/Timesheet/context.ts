@@ -3,8 +3,8 @@ import { TimesheetAction } from './reducer'
 import { ITimesheetState } from './types'
 
 export interface ITimesheetContext extends ITimesheetState {
-  onConfirmPeriod: () => void
-  onUnconfirmPeriod: () => void
+  onSubmitPeriod: () => void
+  onUnsubmitPeriod: () => void
   dispatch?: React.Dispatch<TimesheetAction>
 }
 
