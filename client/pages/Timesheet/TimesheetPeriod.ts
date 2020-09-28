@@ -14,8 +14,10 @@ export interface ITimesheetPeriod {
   month: string
   startDateTime: string
   endDateTime: string
-  confirmed: boolean
+  isConfirmed: boolean
   events: ITimeEntry[]
+  isForecasted: boolean;
+  isForecast: boolean;
 }
 
 export interface ITimesheetPeriodMatchedEvent {
@@ -29,7 +31,6 @@ export interface ITimesheetPeriodData {
   startDateTime: string;
   endDateTime: string;
   matchedEvents: ITimesheetPeriodMatchedEvent[];
-  forecast: boolean;
 }
 
 /**
@@ -37,7 +38,9 @@ export interface ITimesheetPeriodData {
  */
 export class TimesheetPeriod {
   public id: string
-  public confirmed?: boolean
+  public isConfirmed?: boolean
+  public isForecasted?: boolean
+  public isForecast?: boolean;
   public ignoredEvents: string[] = []
   private _manualMatches: ITypedHash<any> = {}
   private _month?: string
@@ -60,7 +63,9 @@ export class TimesheetPeriod {
     this._month = capitalize(_period.month)
     this._startDateTime = moment(_period.startDateTime)
     this._endDateTime = moment(_period.endDateTime)
-    this.confirmed = _period.confirmed
+    this.isConfirmed = _period.isConfirmed
+    this.isForecasted = _period.isForecasted
+    this.isForecast = _period.isForecast
     this._uiMatchedEventsStorageKey = `did365_ui_matched_events_${this.id}`
     this._uiIgnoredEventsStorageKey = `did365_ui_ignored_events_${this.id}`
     this.ignoredEvents = this._localStorage.get(this._uiIgnoredEventsStorageKey) || []
@@ -202,20 +207,12 @@ export class TimesheetPeriod {
       startDateTime: this._startDateTime.toISOString(),
       endDateTime: this._endDateTime.toISOString(),
       matchedEvents: this.matchedEvents,
-      forecast: this.isForecast(),
     }
   }
 
   public weekdays(dayFormat = 'dddd DD'): string[] {
     if (!this._startDateTime) return []
     return dateUtils.getDays(this._startDateTime, this._endDateTime, dayFormat)
-  }
-
-  /**
-   * Returns true if period starts after current date
-   */
-  public isForecast(): boolean {
-    return this._startDateTime.isAfter()
   }
 
   /**
@@ -226,5 +223,9 @@ export class TimesheetPeriod {
       .split('_')
       .filter(p => p)
       .join('/')
+  }
+
+  public get isLocked() {
+    return this.isConfirmed || this.isForecasted
   }
 }

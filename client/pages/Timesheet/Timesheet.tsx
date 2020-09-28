@@ -14,7 +14,15 @@ import { Overview } from './Overview'
 import reducer from './reducer'
 import { SummaryView } from './SummaryView'
 import styles from './Timesheet.module.scss'
-import { ITimesheetContext, ITimesheetParams, ITimesheetPeriod, TimesheetContext, TimesheetPeriod, TimesheetScope, TimesheetView } from './types'
+import {
+    ITimesheetContext,
+    ITimesheetParams,
+    ITimesheetPeriod,
+    TimesheetContext,
+    TimesheetPeriod,
+    TimesheetScope,
+    TimesheetView
+} from './types'
 import { AppContext } from 'AppContext'
 
 /**
@@ -45,8 +53,8 @@ export const Timesheet = () => {
     useEffect(() => { history.push(`/timesheet/${state.selectedView}/${state.selectedPeriod.path}`) }, [state.selectedView, state.selectedPeriod])
 
     const [[submitPeriod], [unsubmitPeriod]] = [
-        useMutation<{ entries: any[]; startDateTime: string; endDateTime: string }>(SUBMIT_PERIOD),
-        useMutation<{ startDateTime: string; endDateTime: string }>(UNSUBMIT_PERIOD),
+        useMutation(SUBMIT_PERIOD),
+        useMutation(UNSUBMIT_PERIOD),
     ]
 
     const onSubmitPeriod = async () => {

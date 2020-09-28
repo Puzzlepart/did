@@ -34,7 +34,8 @@
     "didYouMeanText": "Mente du",
     "eventNotFullyMatchedText": "Hendelse kunne ikke matches. Vi fant matchende kunde **{0}**, men ikke noe prosjekt med den spesifiserte nøkkelen.",
     "unforecastHoursText": "Fjern prognose",
-    "forecastHoursText": "Lagre prognose"
+    "forecastHoursText": "Lagre prognose",
+    "periodForecastedText": "Perioden er prognostisert med {0}. \nKlikk **Fjern prognose** hvis du vil gjøre noen justeringer."
   },
   "projects": {
     "inactiveText": "Dette prosjektet er markert som inaktivt.",

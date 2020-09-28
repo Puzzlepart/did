@@ -36,7 +36,8 @@
     "customerInactiveErrorText": "The customer is no longer active. Edit the event in Outlook.",
     "projectInactiveErrorText": "The project is no longer active. Edit the event in Outlook.",
     "forecastHoursText": "Forecast hours",
-    "unforecastHoursText": "Remove forecast"
+    "unforecastHoursText": "Remove forecast",
+    "periodForecastedText": "The period is forecasted with {0}. Click **Remove forecast** if you want to do some adjustments."
   },
   "projects": {
     "inactiveText": "This project has been marked as inactive.",

@@ -30,30 +30,36 @@ export const StatusBar = () => {
                 <div className={styles.container}>
                     <UserMessage
                         {...defaultProps}
-                        hidden={selectedPeriod.confirmed}
+                        hidden={selectedPeriod.isLocked}
                         text={format(t('timesheet.periodHoursSummaryText'), DateUtils.getDurationDisplay(selectedPeriod.totalDuration, t))}
                         iconName='ReminderTime' />
                     <UserMessage
                         {...defaultProps}
-                        hidden={selectedPeriod.unmatchedDuration === 0 || selectedPeriod.confirmed}
+                        hidden={selectedPeriod.unmatchedDuration === 0 || selectedPeriod.isConfirmed}
                         text={format(t('timesheet.hoursNotMatchedText'), DateUtils.getDurationDisplay(selectedPeriod.unmatchedDuration, t))}
                         type={MessageBarType.warning}
                         iconName='BufferTimeBoth' />
                     <UserMessage
                         {...defaultProps}
-                        hidden={selectedPeriod.unmatchedDuration > 0 || selectedPeriod.confirmed}
+                        hidden={selectedPeriod.unmatchedDuration > 0 || selectedPeriod.isLocked}
                         text={t('timesheet.allHoursMatchedText')}
                         type={MessageBarType.success}
                         iconName='BufferTimeBoth' />
                     <UserMessage
                         {...defaultProps}
-                        hidden={!selectedPeriod.confirmed}
+                        hidden={!selectedPeriod.isConfirmed}
                         text={format(t('timesheet.periodConfirmedText'), DateUtils.getDurationDisplay(selectedPeriod.matchedDuration, t))}
                         type={MessageBarType.success}
                         iconName='CheckMark' />
+                        <UserMessage
+                            {...defaultProps}
+                            hidden={!selectedPeriod.isForecasted}
+                            text={format(t('timesheet.periodForecastedText'), DateUtils.getDurationDisplay(selectedPeriod.matchedDuration, t))}
+                            type={MessageBarType.success}
+                            iconName='CheckMark' />
                     <UserMessage
                         {...defaultProps}
-                        hidden={selectedPeriod.ignoredEvents.length === 0 || selectedPeriod.confirmed}
+                        hidden={selectedPeriod.ignoredEvents.length === 0 || selectedPeriod.isLocked}
                         iconName='DependencyRemove'>
                         <p>
                             <span>{format(t('timesheet.ignoredEventsText'), selectedPeriod.ignoredEvents.length)}</span>
