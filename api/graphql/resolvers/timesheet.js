@@ -56,15 +56,6 @@ const typeDef = gql`
   }
 
   """
-  Input object for TimeEntry used in Mutation submitPeriod
-  """
-  input TimeEntryInput {
-    id: String!
-    projectId: String!
-    manualMatch: Boolean
-  }
-
-  """
   Input object for TimesheetPeriod used in Mutation unsubmitPeriod
   """
   input TimesheetPeriodInput {
@@ -72,6 +63,7 @@ const typeDef = gql`
     startDateTime: String!
     endDateTime: String!
     matchedEvents: [EventInput]
+    forecast: Boolean
   }
 
   extend type Query {
@@ -85,12 +77,12 @@ const typeDef = gql`
     """
     Adds matched time entries for the specified period and an entry for the confirmed period
     """
-    submitPeriod(entries: [TimeEntryInput!], period: TimesheetPeriodInput!, forecast: Boolean): BaseResult!
+    submitPeriod(period: TimesheetPeriodInput!): BaseResult!
 
     """
     Deletes time entries for the specified period and the entry for the confirmed period
     """
-    unsubmitPeriod(period: TimesheetPeriodInput!, forecast: Boolean): BaseResult!
+    unsubmitPeriod(period: TimesheetPeriodInput!): BaseResult!
   }
 `
 
@@ -180,10 +172,13 @@ async function submitPeriod(_obj, variables, ctx) {
           }
         })
         .filter(entry => entry)
-
-      hours = await ctx.services.storage.addTimeEntries(variables.period.id, timeentries)
+      hours = await ctx.services.storage.addTimeEntries(variables.period.id, timeentries, variables.period.forecast)
     }
-    await ctx.services.storage.addConfirmedPeriod(variables.period.id, ctx.user.id, hours)
+    if(variables.period.forecast) {
+      await ctx.services.storage.addForecastedPeriod(variables.period.id, ctx.user.id, hours)
+    } else {
+      await ctx.services.storage.addConfirmedPeriod(variables.period.id, ctx.user.id, hours)
+    }
     return { success: true, error: null }
   } catch (error) {
     return {

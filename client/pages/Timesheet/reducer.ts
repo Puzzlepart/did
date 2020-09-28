@@ -13,15 +13,15 @@ import {
 
 export type TimesheetAction =
   | {
-      type: 'DATA_UPDATED'
-      payload: {
-        query: {
-          data: { timesheet: ITimesheetPeriod[] }
-          loading: boolean
-        }
-        t: TFunction
+    type: 'DATA_UPDATED'
+    payload: {
+      query: {
+        data: { timesheet: ITimesheetPeriod[] }
+        loading: boolean
       }
+      t: TFunction
     }
+  }
   | { type: 'MOVE_SCOPE'; payload: ITimesheetScopeOptions | string }
   | { type: 'SUBMITTING_PERIOD'; payload: { t: TFunction } }
   | { type: 'UNSUBMITTING_PERIOD'; payload: { t: TFunction } }
@@ -46,14 +46,15 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
     case 'DATA_UPDATED':
       {
         const { loading, data } = action.payload.query
-        newState.loading = loading && {
+        newState.loading = loading ? {
           label: t('timesheet.loadingEventsLabel'),
           description: t('timesheet.loadingEventsDescription'),
-        }
+        } : null
         if (data) {
           newState.periods = data.timesheet.map(period => new TimesheetPeriod(period))
           newState.selectedPeriod =
-            find(newState.periods, p => p.id === value(state, 'selectedPeriod.id', null)) || first(newState.periods)
+            find(newState.periods, p => p.id === value(state, 'selectedPeriod.id', null))
+            || first(newState.periods)
         }
       }
       break

@@ -1,7 +1,7 @@
 import EventList from 'components/EventList'
 import { ITimeEntry } from 'interfaces/ITimeEntry'
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
-import * as React from 'react'
+import React,{useContext} from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import DateUtils from 'utils/date'
@@ -18,7 +18,7 @@ import CustomerColumn from './CustomerColumn'
  */
 export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
     const { t } = useTranslation()
-    const { loading, selectedPeriod } = React.useContext(TimesheetContext)
+    const { loading, selectedPeriod } = useContext(TimesheetContext)
     const className = [styles.root]
     if (isMobile) className.push(styles.mobile)
     return (

@@ -40,7 +40,7 @@ export const Timesheet = () => {
         fetchPolicy: 'network-only',
     })
 
-    useEffect(() => { dispatch({ type: 'DATA_UPDATED', payload: { query, t } }) }, [query])
+    useEffect(() => dispatch({ type: 'DATA_UPDATED', payload: { query, t } }), [query])
 
     useEffect(() => { history.push(`/timesheet/${state.selectedView}/${state.selectedPeriod.path}`) }, [state.selectedView, state.selectedPeriod])
 
@@ -49,10 +49,11 @@ export const Timesheet = () => {
         useMutation<{ startDateTime: string; endDateTime: string }>(UNSUBMIT_PERIOD),
     ]
 
-    const onSubmitPeriod = () => {
+    const onSubmitPeriod = async () => {
         dispatch({ type: 'SUBMITTING_PERIOD', payload: { t } })
         const variables = { period: state.selectedPeriod.data }
-        submitPeriod({ variables }).then(query.refetch)
+        await submitPeriod({ variables })
+        query.refetch()
     }
 
     const onUnsubmitPeriod = () => {

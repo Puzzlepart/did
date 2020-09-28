@@ -4,8 +4,8 @@ import gql from 'graphql-tag'
  * @ignore
  */
 export const SUBMIT_PERIOD = gql`
-  mutation($entries: [TimeEntryInput!], $period: TimesheetPeriodInput!) {
-    result: submitPeriod(entries: $entries, period: $period) {
+  mutation($period: TimesheetPeriodInput!) {
+    result: submitPeriod(period: $period) {
       success
       error {
         message

@@ -251,8 +251,9 @@ class StorageService {
    *
    * @param periodId Period ID
    * @param timeentries Collection of time entries
+   * @param forecast Forecast
    */
-  async addTimeEntries(periodId, timeentries) {
+  async addTimeEntries(periodId, timeentries, forecast) {
     let totalDuration = 0
     const { string, datetime, double, int, boolean } = this.tableUtil.azEntGen()
     const entities = timeentries.map(({ entry, event, user, labels }) => {
@@ -282,7 +283,8 @@ class StorageService {
     })
     const batch = this.tableUtil.createAzBatch()
     entities.forEach(entity => batch.insertEntity(entity))
-    await this.tableUtil.executeBatch('TimeEntries', batch)
+    const tableName = forecast ? 'ForecastedTimeEntries' : 'TimeEntries'
+    await this.tableUtil.executeBatch(tableName, batch)
     return totalDuration
   }
 
@@ -353,6 +355,27 @@ class StorageService {
     const [week, month, year] = periodId.split('_')
     const { string, double, int } = this.tableUtil.azEntGen()
     const entity = await this.tableUtil.addAzEntity('ConfirmedPeriods', {
+      PartitionKey: string(resourceId),
+      RowKey: string(periodId),
+      WeekNumber: int(week),
+      MonthNumber: int(month),
+      Year: int(year),
+      Hours: double(hours),
+    })
+    return entity
+  }
+
+  /**
+   * Add entry for the period to table ForecastedPeriods
+   *
+   * @param periodId The period ID
+   * @param resourceId ID of the resource
+   * @param hours Total hours for the train
+   */
+  async addForecastedPeriod(periodId, resourceId, hours) {
+    const [week, month, year] = periodId.split('_')
+    const { string, double, int } = this.tableUtil.azEntGen()
+    const entity = await this.tableUtil.addAzEntity('ForecastedPeriods', {
       PartitionKey: string(resourceId),
       RowKey: string(periodId),
       WeekNumber: int(week),
