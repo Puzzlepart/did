@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { ActionBar } from './ActionBar'
 import { AllocationView } from './AllocationView'
-import { CONFIRM_PERIOD, UNCONFIRM_PERIOD } from './mutations'
+import { SUBMIT_PERIOD, UNSUBMIT_PERIOD } from './mutations'
 import { GET_TIMESHEET } from './queries'
 import hotkeys from './hotkeys'
 import { Overview } from './Overview'
@@ -45,8 +45,8 @@ export const Timesheet = () => {
     useEffect(() => { history.push(`/timesheet/${state.selectedView}/${state.selectedPeriod.path}`) }, [state.selectedView, state.selectedPeriod])
 
     const [[submitPeriod], [unsubmitPeriod]] = [
-        useMutation<{ entries: any[]; startDateTime: string; endDateTime: string }>(CONFIRM_PERIOD),
-        useMutation<{ startDateTime: string; endDateTime: string }>(UNCONFIRM_PERIOD),
+        useMutation<{ entries: any[]; startDateTime: string; endDateTime: string }>(SUBMIT_PERIOD),
+        useMutation<{ startDateTime: string; endDateTime: string }>(UNSUBMIT_PERIOD),
     ]
 
     const onSubmitPeriod = () => {

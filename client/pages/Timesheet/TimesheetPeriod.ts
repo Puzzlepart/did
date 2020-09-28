@@ -18,6 +18,20 @@ export interface ITimesheetPeriod {
   events: ITimeEntry[]
 }
 
+export interface ITimesheetPeriodMatchedEvent {
+  id: string;
+  projectId: string;
+  manualMatch: boolean;
+}
+
+export interface ITimesheetPeriodData {
+  id: string;
+  startDateTime: string;
+  endDateTime: string;
+  matchedEvents: ITimesheetPeriodMatchedEvent[];
+  forecast: boolean;
+}
+
 /**
  * @category Timesheet
  */
@@ -168,26 +182,27 @@ export class TimesheetPeriod {
   /**
    * Get matched events with properties id, projectId and manualMatch
    */
-  private get matchedEvents() {
+  private get matchedEvents(): ITimesheetPeriodMatchedEvent[] {
     const events = filter([...this.events], event => !!event.project).map(event => ({
       id: event.id,
       projectId: event.project.id,
       manualMatch: event.manualMatch,
-    }))
+    } as ITimesheetPeriodMatchedEvent))
     return events
   }
 
   /**
    * Get data for the period
    *
-   * Returns the id, startDateTime, endDateTime and matchedEvents
+   * Returns the id, startDateTime, endDateTime, matchedEvents and forecast
    */
-  public get data() {
+  public get data(): ITimesheetPeriodData {
     return {
       id: this.id,
       startDateTime: this._startDateTime.toISOString(),
       endDateTime: this._endDateTime.toISOString(),
       matchedEvents: this.matchedEvents,
+      forecast: this.isForecast(),
     }
   }
 

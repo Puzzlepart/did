@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 /**
  * @ignore
  */
-export const CONFIRM_PERIOD = gql`
+export const SUBMIT_PERIOD = gql`
   mutation($entries: [TimeEntryInput!], $period: TimesheetPeriodInput!) {
     result: submitPeriod(entries: $entries, period: $period) {
       success
@@ -17,7 +17,7 @@ export const CONFIRM_PERIOD = gql`
 /**
  * @ignore
  */
-export const UNCONFIRM_PERIOD = gql`
+export const UNSUBMIT_PERIOD = gql`
   mutation($period: TimesheetPeriodInput!) {
     result: unsubmitPeriod(period: $period) {
       success
