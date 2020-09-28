@@ -219,9 +219,10 @@ class StorageService {
    * Get entries from table TimeEntries
    *
    * @param {*} filterValues Filtervalues
+   * @param {*} forecast Forecast
    * @param {*} options Options
    */
-  async getTimeEntries(filterValues, options = {}) {
+  async getTimeEntries(filterValues, forecast, options = {}) {
     const q = this.tableUtil.query()
     const filter = [
       ['PeriodId', filterValues.periodId, q.string, q.equal],
@@ -236,7 +237,8 @@ class StorageService {
       ['EndDateTime', this.tableUtil.convertDate(filterValues.endDateTime), q.date, q.lessThan],
     ]
     const query = this.tableUtil.createAzQuery(1000, undefined, filter)
-    let result = await this.tableUtil.queryAzTableAll('TimeEntries', query, {
+    const tableName = forecast ? 'ForecastedTimeEntries' : 'TimeEntries'
+    let result = await this.tableUtil.queryAzTableAll(tableName, query, {
       PartitionKey: 'resourceId',
       RowKey: 'id',
     })
@@ -247,7 +249,7 @@ class StorageService {
   }
 
   /**
-   * Delete entries to table TimeEntries
+   * Delete time entries
    *
    * @param periodId Period ID
    * @param timeentries Collection of time entries
@@ -338,6 +340,21 @@ class StorageService {
   async getConfirmedPeriod(resourceId, periodId) {
     try {
       const entry = await this.tableUtil.retrieveAzEntity('ConfirmedPeriods', resourceId, periodId)
+      return this.tableUtil.parseAzEntity(entry)
+    } catch (error) {
+      return null
+    }
+  }
+
+  /**
+   * Get entry for the period from table ForecastedPeriods
+   *
+   * @param resourceId ID of the resource
+   * @param periodId The period
+   */
+  async getForecastedPeriod(resourceId, periodId) {
+    try {
+      const entry = await this.tableUtil.retrieveAzEntity('ForecastedPeriods', resourceId, periodId)
       return this.tableUtil.parseAzEntity(entry)
     } catch (error) {
       return null

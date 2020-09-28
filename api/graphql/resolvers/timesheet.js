@@ -2,7 +2,7 @@ const { first, filter, find, pick, contains } = require('underscore')
 const { formatDate, getMonthIndex, getWeek } = require('../../../utils')
 const EventMatching = require('./timesheet.matching')
 const { connectEntities } = require('./project.utils')
-const { getPeriods } = require('./timesheet.utils')
+const { getPeriods, connectTimeEntries } = require('./timesheet.utils')
 const value = require('get-value')
 const log = require('debug')('api/graphql/resolvers/timesheet')
 const { gql } = require('apollo-server-express')
@@ -42,8 +42,11 @@ const typeDef = gql`
     endDateTime: String!
     events: [Event!]!
     matchedEvents: [Event!]!
-    confirmed: Boolean
+    isConfirmed: Boolean
+    isForecasted: Boolean
+    isForecast: Boolean
     confirmedDuration: Float!
+    forecastedDuration: Float!
   }
 
   """
@@ -119,28 +122,38 @@ async function timesheet(_obj, variables, ctx) {
 
   for (let i = 0; i < periods.length; i++) {
     let period = periods[i]
+    period.confirmedDuration = 0
+    period.forecastedDuration = 0
     let confirmed = await ctx.services.storage.getConfirmedPeriod(ctx.user.id, period.id)
     if (confirmed) {
-      period.events = timeentries.map(entry => {
-        const customerKey = first(entry.projectId.split(' '))
-        return {
-          ...entry,
-          project: find(projects, p => p.id === entry.projectId),
-          customer: find(customers, c => c.key === customerKey),
-          labels: filter(labels, lbl => {
-            const str = value(entry, 'labels', { default: '' })
-            return str.indexOf(lbl.name) !== -1
-          }),
-        }
-      })
+      period.events = connectTimeEntries(timeentries, projects, customers, labels)
       period.matchedEvents = period.events
-      period.confirmed = true
+      period.isConfirmed = true
       period.confirmedDuration = confirmed.hours
     } else {
-      period.events = await ctx.services.graph.getEvents(period.startDateTime, period.endDateTime)
-      period.events = eventMatching.match(period.events)
+      console.log(period.isForecast)
+      if (period.isForecast) {
+        let forecasted = await ctx.services.storage.getForecastedPeriod(ctx.user.id, period.id)
+        period.isForecasted = !!forecasted
+        if (period.isForecasted) {
+          let timeentries = await ctx.services.storage.getTimeEntries(
+            {
+              resourceId: ctx.user.id,
+              startDateTime: variables.startDateTime,
+              endDateTime: variables.endDateTime,
+            },
+            true,
+            { sortAsc: true }
+          )
+          period.events = connectTimeEntries(timeentries, projects, customers, labels)
+          period.forecastedDuration = forecasted.hours
+        }
+      }
+      if (!period.events) {
+        period.events = await ctx.services.graph.getEvents(period.startDateTime, period.endDateTime)
+        period.events = eventMatching.match(period.events)
+      }
       period.matchedEvents = period.events.filter(evt => evt.project)
-      period.confirmedDuration = 0
     }
     period.events = period.events.map(evt => ({
       ...evt,
@@ -174,7 +187,7 @@ async function submitPeriod(_obj, variables, ctx) {
         .filter(entry => entry)
       hours = await ctx.services.storage.addTimeEntries(variables.period.id, timeentries, variables.period.forecast)
     }
-    if(variables.period.forecast) {
+    if (variables.period.forecast) {
       await ctx.services.storage.addForecastedPeriod(variables.period.id, ctx.user.id, hours)
     } else {
       await ctx.services.storage.addConfirmedPeriod(variables.period.id, ctx.user.id, hours)

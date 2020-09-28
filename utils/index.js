@@ -110,6 +110,15 @@ module.exports = {
   },
 
   /**
+   * Is after today
+   *
+   * @param {*} date Date
+   */
+  isAfterToday: (date) => {
+    return moment(date).isAfter(moment())
+  },
+
+  /**
    * Converts a string to an array
    *
    * @param {*} str String
