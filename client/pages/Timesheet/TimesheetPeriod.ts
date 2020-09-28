@@ -9,14 +9,49 @@ import dateUtils, { moment } from 'utils/date'
 import { ITimesheetParams } from './types'
 
 export interface ITimesheetPeriod {
+  /**
+   * ID of the period {week}_{month}_{year}
+   */
   id: string
+
+  /**
+   * Week num,ber
+   */
   week: number
+
+  /**
+   * Month string
+   */
   month: string
+
+  /**
+   * Start date time in ISO format
+   */
   startDateTime: string
+
+  /**
+   * End date time in ISO format
+   */
   endDateTime: string
+
+  /**
+   * Is the period confirmed
+   */
   isConfirmed: boolean
+
+  /**
+   * Events in the period
+   */
   events: ITimeEntry[]
+
+  /**
+   * Is there an active forecast for the period
+   */
   isForecasted: boolean;
+
+  /**
+   * Is the period in the future
+   */
   isForecast: boolean;
 }
 
@@ -31,6 +66,7 @@ export interface ITimesheetPeriodData {
   startDateTime: string;
   endDateTime: string;
   matchedEvents: ITimesheetPeriodMatchedEvent[];
+  isForecast: boolean;
 }
 
 /**
@@ -207,6 +243,7 @@ export class TimesheetPeriod {
       startDateTime: this._startDateTime.toISOString(),
       endDateTime: this._endDateTime.toISOString(),
       matchedEvents: this.matchedEvents,
+      isForecast: this.isForecast,
     }
   }
 

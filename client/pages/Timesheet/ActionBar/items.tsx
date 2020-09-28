@@ -61,15 +61,14 @@ export const CHANGE_PERIOD = ({ periods, loading, selectedPeriod, dispatch }: IT
 export const CONFIRM_ACTIONS = (context: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
     key: 'CONFIRM_HOURS',
     onRender: () => {
-        const { selectedPeriod } = context
-        if (selectedPeriod.isForecast && selectedPeriod.isForecasted
-            || !selectedPeriod.isForecast && selectedPeriod.isConfirmed) {
+        const { isForecast, isForecasted, isConfirmed, unmatchedDuration } = context.selectedPeriod
+        if (isForecast && isForecasted || !isForecast && isConfirmed) {
             return (
                 <DefaultButton
                     disabled={!!context.loading}
                     iconProps={{ iconName: 'Cancel' }}
                     onClick={context.onUnsubmitPeriod}
-                    text={selectedPeriod.isForecast
+                    text={isForecast
                         ? t('timesheet.unforecastHoursText')
                         : t('timesheet.unconfirmHoursText')}
                     styles={{ root: { height: 44, marginLeft: 4 } }} />
@@ -77,10 +76,10 @@ export const CONFIRM_ACTIONS = (context: ITimesheetContext, t: TFunction): ICont
         }
         return (
             <PrimaryButton
-                disabled={!!context.loading || selectedPeriod.unmatchedDuration > 0}
-                iconProps={{ iconName: 'CheckMark' }}
+                disabled={!!context.loading || unmatchedDuration > 0}
+                iconProps={{ iconName: isForecast ? 'BufferTimeBefore' : 'CheckMark' }}
                 onClick={context.onSubmitPeriod}
-                text={selectedPeriod.isForecast
+                text={isForecast
                     ? t('timesheet.forecastHoursText')
                     : t('timesheet.confirmHoursText')}
                 styles={{ root: { height: 44, marginLeft: 4 } }} />

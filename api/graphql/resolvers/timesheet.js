@@ -66,7 +66,7 @@ const typeDef = gql`
     startDateTime: String!
     endDateTime: String!
     matchedEvents: [EventInput]
-    forecast: Boolean
+    isForecast: Boolean
   }
 
   extend type Query {
@@ -131,7 +131,6 @@ async function timesheet(_obj, variables, ctx) {
       period.isConfirmed = true
       period.confirmedDuration = confirmed.hours
     } else {
-      console.log(period.isForecast)
       if (period.isForecast) {
         let forecasted = await ctx.services.storage.getForecastedPeriod(ctx.user.id, period.id)
         period.isForecasted = !!forecasted
@@ -185,11 +184,13 @@ async function submitPeriod(_obj, variables, ctx) {
           }
         })
         .filter(entry => entry)
-      hours = await ctx.services.storage.addTimeEntries(variables.period.id, timeentries, variables.period.forecast)
+      hours = await ctx.services.storage.addTimeEntries(variables.period.id, timeentries, variables.period.isForecast)
     }
-    if (variables.period.forecast) {
+    if (variables.period.isForecast) {
+      log('Saving forecast period for %s for user %s', variables.period.id,  ctx.user.id)
       await ctx.services.storage.addForecastedPeriod(variables.period.id, ctx.user.id, hours)
     } else {
+      log('Saving confirmed period for %s for user %s', variables.period.id,  ctx.user.id)
       await ctx.services.storage.addConfirmedPeriod(variables.period.id, ctx.user.id, hours)
     }
     return { success: true, error: null }
