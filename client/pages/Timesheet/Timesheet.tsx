@@ -44,7 +44,7 @@ export const Timesheet = () => {
 
     useEffect(() => { history.push(`/timesheet/${state.selectedView}/${state.selectedPeriod.path}`) }, [state.selectedView, state.selectedPeriod])
 
-    const [[confirmPeriod], [unconfirmPeriod]] = [
+    const [[submitPeriod], [unsubmitPeriod]] = [
         useMutation<{ entries: any[]; startDateTime: string; endDateTime: string }>(CONFIRM_PERIOD),
         useMutation<{ startDateTime: string; endDateTime: string }>(UNCONFIRM_PERIOD),
     ]
@@ -52,13 +52,13 @@ export const Timesheet = () => {
     const onSubmitPeriod = () => {
         dispatch({ type: 'SUBMITTING_PERIOD', payload: { t } })
         const variables = { period: state.selectedPeriod.data }
-        confirmPeriod({ variables }).then(query.refetch)
+        submitPeriod({ variables }).then(query.refetch)
     }
 
     const onUnsubmitPeriod = () => {
         dispatch({ type: 'UNSUBMITTING_PERIOD', payload: { t } })
         const variables = { period: state.selectedPeriod.data }
-        unconfirmPeriod({ variables }).then(query.refetch)
+        unsubmitPeriod({ variables }).then(query.refetch)
     }
 
     const ctx: ITimesheetContext = useMemo(() => ({

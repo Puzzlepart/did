@@ -47,7 +47,7 @@ const typeDef = gql`
   }
 
   """
-  Input object for Event used in Mutation confirmPeriod
+  Input object for Event used in Mutation submitPeriod
   """
   input EventInput {
     id: String!
@@ -56,7 +56,7 @@ const typeDef = gql`
   }
 
   """
-  Input object for TimeEntry used in Mutation confirmPeriod
+  Input object for TimeEntry used in Mutation submitPeriod
   """
   input TimeEntryInput {
     id: String!
@@ -65,7 +65,7 @@ const typeDef = gql`
   }
 
   """
-  Input object for TimesheetPeriod used in Mutation unconfirmPeriod
+  Input object for TimesheetPeriod used in Mutation unsubmitPeriod
   """
   input TimesheetPeriodInput {
     id: String!
@@ -85,12 +85,12 @@ const typeDef = gql`
     """
     Adds matched time entries for the specified period and an entry for the confirmed period
     """
-    confirmPeriod(entries: [TimeEntryInput!], period: TimesheetPeriodInput!): BaseResult!
+    submitPeriod(entries: [TimeEntryInput!], period: TimesheetPeriodInput!, forecast: Boolean): BaseResult!
 
     """
     Deletes time entries for the specified period and the entry for the confirmed period
     """
-    unconfirmPeriod(period: TimesheetPeriodInput!): BaseResult!
+    unsubmitPeriod(period: TimesheetPeriodInput!, forecast: Boolean): BaseResult!
   }
 `
 
@@ -158,7 +158,7 @@ async function timesheet(_obj, variables, ctx) {
   return periods
 }
 
-async function confirmPeriod(_obj, variables, ctx) {
+async function submitPeriod(_obj, variables, ctx) {
   try {
     let hours = 0
     if (variables.period.matchedEvents.length > 0) {
@@ -193,7 +193,7 @@ async function confirmPeriod(_obj, variables, ctx) {
   }
 }
 
-async function unconfirmPeriod(_obj, variables, ctx) {
+async function unsubmitPeriod(_obj, variables, ctx) {
   try {
     await ctx.services.storage.deleteUserTimeEntries(variables.period.id, ctx.user.id)
     await ctx.services.storage.removeConfirmedPeriod(variables.period.id, ctx.user.id)
@@ -209,7 +209,7 @@ async function unconfirmPeriod(_obj, variables, ctx) {
 module.exports = {
   resolvers: {
     Query: { timesheet },
-    Mutation: { confirmPeriod, unconfirmPeriod },
+    Mutation: { submitPeriod, unsubmitPeriod },
   },
   typeDef,
 }
