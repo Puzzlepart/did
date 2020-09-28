@@ -66,7 +66,9 @@ export const GET_TIMESHEET = gql`
           code
         }
       }
-      confirmed
+      isConfirmed
+      isForecasted
+      isForecast
     }
   }
 `
