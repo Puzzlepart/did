@@ -25,8 +25,8 @@ import { IProjectColumnProps } from './types'
 function getErrorMessage(code: string, t: TFunction): [string, MessageBarType] {
     // eslint-disable-next-line default-case
     switch (code) {
-        case 'PROJECT_INACTIVE': return [t('projectInactiveErrorText'), MessageBarType.error]
-        case 'CUSTOMER_INACTIVE': return [t('customerInactiveErrorText'), MessageBarType.error]
+        case 'PROJECT_INACTIVE': return [t('timesheet.projectInactiveErrorText'), MessageBarType.error]
+        case 'CUSTOMER_INACTIVE': return [t('timesheet.customerInactiveErrorText'), MessageBarType.error]
     }
 }
 
@@ -58,7 +58,7 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
                     isMultiline={false}
                     type={MessageBarType.warning}
                     iconName='TagUnknown'
-                    text={t('noProjectMatchFoundText')}
+                    text={t('timesheet.noProjectMatchFoundText')}
                     actions={
                         <div>
                             <MatchEventPanel event={event} />

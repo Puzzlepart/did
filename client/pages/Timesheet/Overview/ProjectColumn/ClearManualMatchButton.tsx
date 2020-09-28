@@ -12,7 +12,7 @@ export const ClearManualMatchButton = ({ onClick }: IClearManualMatchButtonProps
     return (
         <div
             className={styles.clearButton}
-            title={t('clearProjectMatchTooltipText')}>
+            title={t('timesheet.clearProjectMatchTooltipText')}>
             <span onClick={onClick} style={{ cursor: 'pointer' }}>
                 <Icon iconName='Cancel' styles={{ root: { fontSize: 14 } }} />
             </span>
