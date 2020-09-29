@@ -126,6 +126,7 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
             <TextField
                 className={styles.inputField}
                 label={t('common.nameFieldLabel')}
+                description={t('projects.nameFieldDescription')}
                 required={true}
                 errorMessage={validation.errors.name}
                 onChange={(_event, name) => setModel({ ...model, name })}
@@ -133,17 +134,11 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
             <TextField
                 className={styles.inputField}
                 label={t('common.descriptionFieldLabel')}
+                description={t('projects.descriptionFieldDescription')}
                 multiline={true}
                 errorMessage={validation.errors.description}
                 onChange={(_event, description) => setModel({ ...model, description })}
                 value={model.description} />
-            <div className={styles.inputField} hidden={editMode}>
-                <Toggle
-                    label={t('projects.createOutlookCategoryFieldLabel')}
-                    checked={model.createOutlookCategory}
-                    onChanged={createOutlookCategory => setModel({ ...model, createOutlookCategory })} />
-                <span hidden={isBlank(id)} className={styles.inputDescription}>{t('projects.createOutlookCategoryFieldDescription', { id })}</span>
-            </div>
             <IconPicker
                 className={styles.inputField}
                 defaultSelected={model.icon}
@@ -164,6 +159,13 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
                 searchLabelText={t('admin.filterLabels')}
                 defaultSelectedKeys={editMode ? edit.labels.map(lbl => lbl.name) : []}
                 onChange={labels => setModel({ ...model, labels: labels.map(lbl => lbl.name) })} />
+            <div className={styles.inputField} hidden={editMode}>
+                <Toggle
+                    label={t('projects.createOutlookCategoryFieldLabel')}
+                    checked={model.createOutlookCategory}
+                    onChanged={createOutlookCategory => setModel({ ...model, createOutlookCategory })} />
+                <span className={styles.inputDescription}>{t('projects.createOutlookCategoryFieldDescription', { id })}</span>
+            </div>
             <PrimaryButton
                 className={styles.inputField}
                 text={editMode ? t('common.save') : t('common.add')}

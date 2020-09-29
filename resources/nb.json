@@ -55,10 +55,12 @@
     "inactiveFieldDescription": "Marker prosjektet som inaktivt. Det kan ikke lenger bekreftes timer for prosjektet.",
     "idPreviewText": "Du tagger dine kalenderoppføringer i Outlook med **{{id}}**",
     "createOutlookCategoryFieldLabel": "Opprett kategori automatisk i Outlook",
-    "createOutlookCategoryFieldDescription": "Opprett kategori {{id}} i Outlook.",
+    "createOutlookCategoryFieldDescription": "Opprett kategori {{id}} i Outlook. Dette gjør det lettere å assosiere dine kalenderoppføringer i Outlook med riktig prosjekt og kunde.",
     "keyFieldLabel": "Prosjektnøkkel",
     "createNewText": "Opprett nytt",
-    "customerFormValidationText": "Du må velge en kunde."
+    "customerFormValidationText": "Du må velge en kunde.",
+    "nameFieldDescription": "Navnet på prosjektet. \nDette vil være synlig i timelisten din og i prosjektoversikten.",
+    "descriptionFieldDescription": "Beskriv prosjektet i mer detalj."
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",

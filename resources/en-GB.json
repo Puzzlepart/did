@@ -57,11 +57,13 @@
     "inactiveFieldDescription": "Mark the project as inactive. Hours for the project can no longer be confirmed.",
     "idPreviewText": "\nYou tag your calendar entries in Outlook with **{{id}}**.",
     "createOutlookCategoryFieldLabel": "Automatically create category in Outlook",
-    "createOutlookCategoryFieldDescription": "Create category {{id}} in Outlook.",
+    "createOutlookCategoryFieldDescription": "Create category {{id}} in Outlook. \nThis makes it easier to associate your Outlook events with the right project and customer.",
     "keyFieldLabel": "Project key",
     "unknownErrorText": "An unknown",
     "createNewText": "Create new",
-    "customerFormValidationText": "You must select a customer."
+    "customerFormValidationText": "You must select a customer.",
+    "nameFieldDescription": "The name of the project. This will be visible in your Timesheet, and in the project overview.",
+    "descriptionFieldDescription": "Describe the project in more detail."
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",

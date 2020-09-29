@@ -27,3 +27,29 @@ reviews:
             suggestion: ''
             type: comment
             time: '2020-09-29T14:05:24.894Z'
+  projects.descriptionFieldDescription:
+    locales:
+      nb:
+        comments:
+          - user:
+              name: Ole Martin Pettersen
+              email: olemp@puzzlepart.com
+            id: niO-dw3o8lCUu-6enMQRj
+            comment: Any suggestions?
+            suggestion: ''
+            type: comment
+            time: '2020-09-29T14:57:46.301Z'
+  projects.nameFieldDescription:
+    locales:
+      nb:
+        comments:
+          - user:
+              name: Ole Martin Pettersen
+              email: olemp@puzzlepart.com
+            id: kzbktEL-mh2AEfUEztgu_
+            comment: >-
+              Any suggestions? Want some info description to tell the user to
+              pick a good name.
+            suggestion: ''
+            type: comment
+            time: '2020-09-29T14:58:16.336Z'
