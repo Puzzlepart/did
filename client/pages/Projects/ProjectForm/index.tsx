@@ -55,6 +55,12 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
         return { errors, invalid: Object.keys(errors).length > 0 }
     }
 
+    const projectId = useMemo(() => {
+        return validateForm(false).invalid
+            ? ''
+            : [model.customerKey, model.key].join(' ').toUpperCase()
+    }, [model.customerKey, model.key])
+
     /**
      * On form submit
      */
@@ -75,28 +81,19 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
             if (editMode) {
                 if (onSubmitted) setTimeout(onSubmitted, 1000)
             } else {
-                setMessage({ text: t('projects.createSuccess', model), type: MessageBarType.success })
+                setMessage({ text: t('projects.createSuccess', { projectId, name: model.name }), type: MessageBarType.success })
                 setModel(initialModel)
             }
         }
-        else setMessage({ text: result.error.message, type: MessageBarType.error })
+        else setMessage({ text: result.error?.message, type: MessageBarType.error })
     }
-
-    /**
-     * Project ID
-     */
-    const id = useMemo(() => {
-        return validateForm(false).invalid
-            ? ''
-            : [model.customerKey, model.key].join(' ').toUpperCase()
-    }, [model.customerKey, model.key])
 
     return (
         <div className={styles.root}>
             {message && (
                 <UserMessage
                     {...message}
-                    containerStyle={{ marginTop: 12, marginBottom: 12, width: 450 }} />
+                    containerStyle={{ marginTop: 12, marginBottom: 12, width: 550 }} />
             )}
             <SearchCustomer
                 hidden={editMode}
@@ -121,8 +118,17 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
                 value={model.key} />
             <UserMessage
                 className={styles.idPreviewText}
-                hidden={isBlank(id)}
-                text={t('projects.idPreviewText', { id })} />
+                iconName='OutlookLogo'
+                text={isBlank(projectId)
+                    ? t('projects.idPreviewBlankText')
+                    : t('projects.idPreviewText', { projectId })} />
+            <div className={styles.inputField} hidden={editMode}>
+                <Toggle
+                    label={t('projects.createOutlookCategoryFieldLabel')}
+                    checked={model.createOutlookCategory}
+                    onChanged={createOutlookCategory => setModel({ ...model, createOutlookCategory })} />
+                <span className={styles.inputDescription}>{t('projects.createOutlookCategoryFieldDescription', { id: projectId })}</span>
+            </div>
             <TextField
                 className={styles.inputField}
                 label={t('common.nameFieldLabel')}
@@ -159,13 +165,6 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
                 searchLabelText={t('admin.filterLabels')}
                 defaultSelectedKeys={editMode ? edit.labels.map(lbl => lbl.name) : []}
                 onChange={labels => setModel({ ...model, labels: labels.map(lbl => lbl.name) })} />
-            <div className={styles.inputField} hidden={editMode}>
-                <Toggle
-                    label={t('projects.createOutlookCategoryFieldLabel')}
-                    checked={model.createOutlookCategory}
-                    onChanged={createOutlookCategory => setModel({ ...model, createOutlookCategory })} />
-                <span className={styles.inputDescription}>{t('projects.createOutlookCategoryFieldDescription', { id })}</span>
-            </div>
             <PrimaryButton
                 className={styles.inputField}
                 text={editMode ? t('common.save') : t('common.add')}

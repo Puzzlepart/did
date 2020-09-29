@@ -53,3 +53,5 @@ reviews:
             suggestion: ''
             type: comment
             time: '2020-09-29T14:58:16.336Z'
+  customers.createNewText:
+    description: Create new text for Customers

@@ -67,10 +67,10 @@ export const CustomerForm = ({ nameLength = [2] }: ICustomerFormProps) => {
 
     return (
         <div className={styles.root}>
-            {message && <UserMessage containerStyle={{ marginTop: 12, marginBottom: 12, width: 450 }} text={message.text} type={message.type} />}
+            {message && <UserMessage containerStyle={{ marginTop: 12, marginBottom: 12, width: 550 }} text={message.text} type={message.type} />}
             <TextField
                 className={styles.inputField}
-                label={t('common.keyFieldLabel')}
+                label={t('customers.keyFieldLabel')}
                 description={t('customers.keyFieldDescription', { keyMaxLength: 8 })}
                 required={true}
                 errorMessage={validation.errors.key}

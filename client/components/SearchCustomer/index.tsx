@@ -30,7 +30,7 @@ export const SearchCustomer = (props: ISearchCustomerProps) => {
                 {...props}
                 disabled={loading}
                 items={searchData}
-                width={450}
+                width={550}
                 placeholder={t('common.searchPlaceholder')}
                 onClear={() => props.onSelected(null)}
                 onSelected={item => props.onSelected(item.data)} />

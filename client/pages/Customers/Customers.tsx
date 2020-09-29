@@ -84,7 +84,7 @@ export const Customers = () => {
                 <PivotItem
                     itemID='new'
                     itemKey='new'
-                    headerText={t('common.createNewText')}
+                    headerText={t('customers.createNewText')}
                     itemIcon='AddTo'>
                     <CustomerForm />
                 </PivotItem>
