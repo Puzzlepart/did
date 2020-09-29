@@ -5,12 +5,14 @@ import { Toggle } from 'office-ui-fabric-react'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { first, pick } from 'underscore'
+import { isBlank } from 'underscore.string'
 import styles from './CreateProjectForm.module.scss'
 import CREATE_OR_UPDATE_PROJECT, { ICreateOrUpdateProjectVariables, IProjectInput } from './CREATE_OR_UPDATE_PROJECT'
 import { IProjectFormProps, IProjectFormValidation } from './types'
+
 
 const initialModel: IProjectInput = {
     key: '',
@@ -20,6 +22,7 @@ const initialModel: IProjectInput = {
     inactive: false,
     icon: first(getIcons(1)),
     labels: [],
+    createOutlookCategory: false,
 }
 
 /**
@@ -30,14 +33,17 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
     const { t } = useTranslation()
     const [validation, setValidation] = useState<IProjectFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useMessage()
-    const [model, setModel] = useState<IProjectInput>(edit
+    const [model, setModel] = useState<IProjectInput>(editMode
         ? { ...edit, labels: edit.labels.map(lbl => lbl.name) }
         : initialModel
     )
     const [createOrUpdateProject, { loading }] = useMutation<any, ICreateOrUpdateProjectVariables>(CREATE_OR_UPDATE_PROJECT)
+    const id = useMemo(() => [model.customerKey, model.key].join(' ').toUpperCase(), [model.customerKey, model.key])
 
     /**
      * On validate form
+     * 
+     * Checks if customerKey, key and name is valid
      */
     const validateForm = (): IProjectFormValidation => {
         const [nameMinLength] = nameLength
@@ -68,7 +74,8 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
             if (editMode) {
                 if (onSubmitted) setTimeout(onSubmitted, 1000)
             } else {
-                setMessage({ text: t('projects.createSuccess', { name: model.name }), type: MessageBarType.success })
+
+                setMessage({ text: t('projects.createSuccess', model), type: MessageBarType.success })
                 setModel(initialModel)
             }
         }
@@ -95,12 +102,16 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
             <TextField
                 disabled={editMode}
                 className={styles.inputField}
-                label={t('common.keyFieldLabel')}
+                label={t('projects.keyFieldLabel')}
                 description={t('projects.keyFieldDescription', { keyMaxLength: 8 })}
                 required={true}
                 errorMessage={validation.errors.key}
                 onChange={(_event, key) => setModel({ ...model, key })}
                 value={model.key} />
+            <UserMessage
+                className={styles.idPreviewText}
+                hidden={isBlank(id) || isBlank(model.key)}
+                text={t('projects.idPreviewText', { id })} />
             <TextField
                 className={styles.inputField}
                 label={t('common.nameFieldLabel')}
@@ -125,7 +136,7 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
             <div className={styles.inputField} hidden={!editMode}>
                 <Toggle
                     label={t('common.inactiveFieldLabel')}
-                    defaultChecked={model.inactive}
+                    checked={model.inactive}
                     onChanged={inactive => setModel({ ...model, inactive })} />
                 <span className={styles.inputDescription}>{t('projects.inactiveFieldDescription')}</span>
             </div>
@@ -135,6 +146,13 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
                 searchLabelText={t('admin.filterLabels')}
                 defaultSelectedKeys={editMode ? edit.labels.map(lbl => lbl.name) : []}
                 onChange={labels => setModel({ ...model, labels: labels.map(lbl => lbl.name) })} />
+            <div className={styles.inputField} hidden={editMode}>
+                <Toggle
+                    label={t('projects.createOutlookCategoryFieldLabel')}
+                    checked={model.createOutlookCategory}
+                    onChanged={createOutlookCategory => setModel({ ...model, createOutlookCategory })} />
+                <span className={styles.inputDescription}>{t('projects.createOutlookCategoryFieldDescription', { id })}</span>
+            </div>
             <PrimaryButton
                 className={styles.inputField}
                 text={editMode ? t('common.save') : t('common.add')}

@@ -8,6 +8,7 @@ export interface IProjectInput {
   inactive?: boolean
   icon: string
   labels: any[]
+  createOutlookCategory?: boolean
 }
 
 export interface ICreateOrUpdateProjectVariables {
