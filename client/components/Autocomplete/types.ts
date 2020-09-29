@@ -9,13 +9,16 @@ export interface IAutocompleteClassNames {
 }
 
 export interface IAutocompleteProps extends ISearchBoxProps {
-  items: ISuggestionItem[]
   onSelected: (item: ISuggestionItem) => void
+  items?: ISuggestionItem[]
   searchCallback?: (item: string) => void
   noSuggestionsText?: string
   defaultSelectedItem?: ISuggestionItem
   classNames?: IAutocompleteClassNames
   showIcons?: boolean
+  label?: string;
+  description?: string;
+  errorMessage?: string;
 }
 
 export interface IAutocompleteState {

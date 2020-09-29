@@ -105,6 +105,7 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
                 className={styles.inputField}
                 placeholder={t('common.searchPlaceholder')}
                 onClear={() => setModel({ ...model, customerKey: '' })}
+                errorMessage={validation.errors.customerKey}
                 onSelected={customer => setModel({
                     ...model,
                     customerKey: customer?.key,
