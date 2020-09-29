@@ -49,12 +49,17 @@
     "myProjectsText": "My projects",
     "myProjectsSearchPlaceholder": "Search my projects...",
     "exportTimeEntriesLabel": "Export time entries to Excel",
-    "keyFieldDescription": "A unique identifier for the project. Keep it short, maximum {{keyMaxLength}} characters.",
+    "keyFieldDescription": "A unique identifier for the project. Used together with the customer key to form the key used to tag events in Outlook. Keep it short, maximum {{keyMaxLength}} characters.",
     "nameFormValidationText": "Name should be at least {{nameMinLength}} characters long.",
     "keyFormValidationText": "Project key should be between {{keyMinLength}} and {{keyMaxLength}} characters long, and all uppercase.",
     "createSuccess": "The project **{{name}}** was succesfully created.",
     "editLabel": "Edit project",
-    "inactiveFieldDescription": "Mark the project as inactive. Hours for the project can no longer be confirmed."
+    "inactiveFieldDescription": "Mark the project as inactive. Hours for the project can no longer be confirmed.",
+    "idPreviewText": "\nYou tag your calendar entries in Outlook with **{{id}}**.",
+    "createOutlookCategoryFieldLabel": "Automatically create category in Outlook",
+    "createOutlookCategoryFieldDescription": "Create category {{id}} in Outlook",
+    "keyFieldLabel": "Project key",
+    "unknownErrorText": "An unknown"
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",
@@ -176,9 +181,38 @@
         "November",
         "December"
       ],
-      "shortMonths": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-      "days": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-      "shortDays": ["S", "M", "T", "W", "T", "F", "S"],
+      "shortMonths": [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+      ],
+      "days": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "shortDays": [
+        "S",
+        "M",
+        "T",
+        "W",
+        "T",
+        "F",
+        "S"
+      ],
       "goToToday": "Go to today",
       "weekNumberFormatString": "Week number {0}",
       "prevMonthAriaLabel": "Previous month",

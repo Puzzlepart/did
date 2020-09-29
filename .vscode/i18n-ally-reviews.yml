@@ -13,3 +13,17 @@ reviews:
             suggestion: ''
             type: approve
             time: '2020-09-28T08:08:31.690Z'
+  projects.idPreviewText:
+    locales:
+      en-GB:
+        comments:
+          - user:
+              name: Ole Martin Pettersen
+              email: olemp@puzzlepart.com
+            id: XA9dQJLtHmcH3L2u9WIrk
+            comment: >-
+              A little bit unsure about this translation. Thoughts @okms
+              @damsleth?
+            suggestion: ''
+            type: comment
+            time: '2020-09-29T14:05:24.894Z'
