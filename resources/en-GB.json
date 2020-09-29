@@ -49,7 +49,7 @@
     "myProjectsText": "My projects",
     "myProjectsSearchPlaceholder": "Search my projects...",
     "exportTimeEntriesLabel": "Export time entries to Excel",
-    "keyFieldDescription": "A unique identifier for the project. Used together with the customer key to form the key used to tag events in Outlook. Keep it short, maximum {{keyMaxLength}} characters.",
+    "keyFieldDescription": "A unique identifier for the project. Used together with the customer key to form the key used to tag events in Outlook. Keep it short, maximum {{keyMaxLength}} characters. Only capital letters are allowed.",
     "nameFormValidationText": "Name should be at least {{nameMinLength}} characters long.",
     "keyFormValidationText": "Project key should be between {{keyMinLength}} and {{keyMaxLength}} characters long, and all uppercase.",
     "createSuccess": "The project **{{name}}** was succesfully created.",
@@ -57,9 +57,11 @@
     "inactiveFieldDescription": "Mark the project as inactive. Hours for the project can no longer be confirmed.",
     "idPreviewText": "\nYou tag your calendar entries in Outlook with **{{id}}**.",
     "createOutlookCategoryFieldLabel": "Automatically create category in Outlook",
-    "createOutlookCategoryFieldDescription": "Create category {{id}} in Outlook",
+    "createOutlookCategoryFieldDescription": "Create category {{id}} in Outlook.",
     "keyFieldLabel": "Project key",
-    "unknownErrorText": "An unknown"
+    "unknownErrorText": "An unknown",
+    "createNewText": "Create new",
+    "customerFormValidationText": "You must select a customer."
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",

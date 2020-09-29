@@ -118,7 +118,7 @@ export const Projects = () => {
                     <PivotItem
                         itemID='new'
                         itemKey='new'
-                        headerText={t('common.createNewText')}
+                        headerText={t('projects.createNewText')}
                         itemIcon='AddTo'>
                         <ProjectForm />
                     </PivotItem>
