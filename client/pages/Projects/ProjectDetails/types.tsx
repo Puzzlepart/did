@@ -1,4 +1,4 @@
-import { IProject } from 'interfaces'
+import { IProject } from 'types'
 
 /**
  * @category Projects

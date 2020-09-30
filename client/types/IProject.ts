@@ -1,4 +1,4 @@
-import { ICustomer, IOutlookCategory } from './'
+import { ICustomer, IOutlookCategory } from '.'
 import { IEntityLabel } from './IEntityLabel'
 
 /**

@@ -1,7 +1,7 @@
 
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import List from 'components/List'
-import { IUser } from 'interfaces/IUser'
+import { IUser } from 'types/IUser'
 import { ISpinnerProps, Spinner } from 'office-ui-fabric-react/lib/Spinner'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -11,7 +11,7 @@ import BULK_ADD_USERS from './BULK_ADD_USERS'
 import { columns } from './columns'
 import { GET_DATA } from './GET_DATA'
 import { IUserFormProps, UserForm } from './UserForm'
-import { IUsersContext, UsersContext } from './UsersContext'
+import { IUsersContext, UsersContext } from './context'
 
 /**
  * @category Admin

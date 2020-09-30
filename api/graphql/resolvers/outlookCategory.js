@@ -12,14 +12,6 @@ const typeDef = gql`
     color: String
   }
 
-  """
-  Input object for OutlookCategory used in Mutation createOutlookCategory
-  """
-  input OutlookCategoryInput {
-    displayName: String
-    color: String
-  }
-
   extend type Query {
     """
     Get Outlook categories
@@ -31,7 +23,7 @@ const typeDef = gql`
     """
     Create Outlook category
     """
-    createOutlookCategory(category: OutlookCategoryInput!): BaseResult!
+    createOutlookCategory(category: String!): BaseResult!
   }
 `
 
@@ -42,8 +34,8 @@ async function outlookCategories(_obj, _variables, ctx) {
 
 async function createOutlookCategory(_obj, variables, ctx) {
   try {
-    const category = await ctx.services.msgraph.createOutlookCategory(variables.category)
-    return { data: JSON.stringify(category), success: true, error: null }
+    const category = await ctx.services.graph.createOutlookCategory(variables.category)
+    return { success: true, error: null }
   } catch (error) {
     return {
       success: false,

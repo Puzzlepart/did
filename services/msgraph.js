@@ -55,8 +55,13 @@ class MSGraphService {
    */
   async createOutlookCategory(category) {
     try {
-      log('Querying Graph /me/outlook/masterCategories')
-      const res = await this.getClient().api('/me/outlook/masterCategories').post(JSON.stringify(category))
+      const colorIdx = category.split('').map(c => c.charCodeAt(0)).reduce((a, b) => a + b) % 24
+      const content = JSON.stringify({
+        displayName: category,
+        color: `preset${colorIdx}`
+      })
+      log('POST Graph /me/outlook/masterCategories: %s', content)
+      const res = await this.getClient().api('/me/outlook/masterCategories').post(content)
       return res
     } catch (error) {
       switch (error.statusCode) {

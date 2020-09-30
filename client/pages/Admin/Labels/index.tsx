@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import { EntityLabel, List } from 'components'
-import { IEntityLabel } from 'interfaces/IEntityLabel'
+import { IEntityLabel } from 'types/IEntityLabel'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -53,8 +53,8 @@ export const Labels = () => {
                 commandBar={{
                     items: [
                         {
-                            key: 'NEW_LABEL',
-                            name: t('common.addNewLabel'),
+                            key: 'ADD_NEW_LABEL',
+                            name: t('admin.addNewLabel'),
                             iconProps: { iconName: 'Add' },
                             onClick: () => setForm({})
                         }
