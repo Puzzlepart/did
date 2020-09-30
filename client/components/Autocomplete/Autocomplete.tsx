@@ -40,7 +40,7 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
     }
   }
 
-  private handleClick = (item: ISuggestionItem<T>) => {
+  private onClick = (item: ISuggestionItem<T>) => {
     this.props.onSelected(item)
     this.setState({
       selectedItem: item,
@@ -50,10 +50,6 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
   }
 
   public render() {
-    return this.renderSearch()
-  }
-
-  private renderSearch = () => {
     const iconName = this.state.searchText ? this.state.selectedItem?.iconName || 'Search' : 'Search'
     return (
       <div
@@ -63,7 +59,6 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
         onKeyDown={this.onKeyDown}>
         {this.props.label && <Label>{this.props.label}</Label>}
         <SearchBox
-          id='SuggestionSearchBox'
           iconProps={{ iconName }}
           value={this.state.searchText}
           placeholder={this.props.placeholder}
@@ -149,7 +144,7 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
         <div
           id={`s_${item.key}`}
           className={this.props.classNames.suggestion}
-          onClick={() => this.handleClick(item)}>
+          onClick={() => this.onClick(item)}>
           <div className={this.props.classNames.suggestionIcon} hidden={!this.props.showIcons}>
             <Icon iconName={item.iconName} />
           </div>
@@ -184,7 +179,7 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
     const keyCode = ev.which
     switch (keyCode) {
       case KeyCodes.enter:
-        this.handleClick(item)
+        this.onClick(item)
         break
       default: return
     }
