@@ -10,7 +10,7 @@ import { IFormValidation } from 'types'
 import { isBlank } from 'underscore.string'
 import styles from './CreateProjectForm.module.scss'
 import CREATE_OR_UPDATE_PROJECT, { ICreateOrUpdateProjectVariables } from './CREATE_OR_UPDATE_PROJECT'
-import { IProjectFormProps,  ProjectModel } from './types'
+import { IProjectFormProps, ProjectModel } from './types'
 
 /**
  * @category Projects
@@ -110,6 +110,7 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
                 onChange={(_event, value) => updateModel('key', value.toUpperCase())}
                 value={model.key} />
             <UserMessage
+                hidden={editMode}
                 className={styles.idPreviewText}
                 iconName='OutlookLogo'
                 text={isBlank(projectId)
@@ -144,7 +145,7 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
                 label={t('common.iconLabel')}
                 placeholder={t('common.iconSearchPlaceholder')}
                 width={300}
-                onSelected={value =>updateModel('icon', value)} />
+                onSelected={value => updateModel('icon', value)} />
             <div className={styles.inputField} hidden={!editMode}>
                 <Toggle
                     label={t('common.inactiveFieldLabel')}
@@ -163,6 +164,7 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
                 text={editMode ? t('common.save') : t('common.add')}
                 onClick={onFormSubmit}
                 disabled={loading || !!message} />
+
         </div>
     )
 }
