@@ -72,12 +72,15 @@ const typeDef = gql`
 `
 
 async function adUsers(_obj, _variables, ctx) {
-  let users = await ctx.services.graph.getUsers()
+  let users = await ctx.services.msgraph.getUsers()
   return users
 }
 
 async function users(_obj, _variables, ctx) {
-  let [users, roles] = await Promise.all([ctx.services.storage.getUsers(), ctx.services.storage.getRoles()])
+  let [users, roles] = await Promise.all([
+    ctx.services.storage.getUsers(),
+    ctx.services.storage.getRoles()
+  ])
   users = filter(
     users.map(user => ({
       ...user,

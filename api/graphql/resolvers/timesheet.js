@@ -95,7 +95,7 @@ const typeDef = gql`
 `
 
 async function timesheet(_obj, variables, ctx) {
-  if (!ctx.services.graph) return { success: false, error: null }
+  if (!ctx.services.msgraph) return { success: false, error: null }
 
   log('Quering timesheet from %s to %s', variables.startDateTime, variables.endDateTime)
 
@@ -145,7 +145,7 @@ async function timesheet(_obj, variables, ctx) {
       period.confirmed = true
       period.confirmedDuration = confirmed.hours
     } else {
-      period.events = await ctx.services.graph.getEvents(period.startDateTime, period.endDateTime)
+      period.events = await ctx.services.msgraph.getEvents(period.startDateTime, period.endDateTime)
       period.events = eventMatching.match(period.events)
       period.matchedEvents = period.events.filter(evt => evt.project)
       period.confirmedDuration = 0
@@ -163,7 +163,7 @@ async function confirmPeriod(_obj, variables, ctx) {
     let hours = 0
     if (variables.period.matchedEvents.length > 0) {
       const [events, labels] = await Promise.all([
-        ctx.services.graph.getEvents(variables.period.startDateTime, variables.period.endDateTime),
+        ctx.services.msgraph.getEvents(variables.period.startDateTime, variables.period.endDateTime),
         ctx.services.storage.getLabels(),
       ])
 
