@@ -16,7 +16,7 @@ Please describe your pull request.
 3. ...
 
 ### Related issues
-_Use e.g. ´Closes #1000´ to link issue 100 to the PR. Remove section if no related issues._
+Use e.g. ´Closes #1000´ to link issue 100 to the PR. Remove section if no related issues.
 
 ### Related PRs
 _Remove section if not._
