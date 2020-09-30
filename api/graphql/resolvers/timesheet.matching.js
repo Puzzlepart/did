@@ -38,6 +38,22 @@ class EventMatching {
   }
 
   /**
+   * Looks for ignore "tag" in event. 
+   * 
+   * @returns  Returns 'category' if ignore category is found
+   * Returns 'body' if ignore tag is found in body
+   * Otherwise returns nulll
+   * 
+   * @param {*} event 
+   */
+  findIgnore(event) {
+    if (contains(event.categories, 'IGNORE') || contains(event.categories, 'ignore')) return 'category'
+    let ignoreRegex = /[(\[\{]IGNORE[)\]\}]/gi
+    if ((event.body || '').match(ignoreRegex) !== null) return 'body'
+    return null
+  }
+
+  /**
    * Find project match in title/subject/categories
    *
    * @param {*} inputStr The String object or string literal on which to perform the search.
@@ -86,15 +102,19 @@ class EventMatching {
    * @param {*} event
    */
   matchEvent(event) {
+    let ignore = this.findIgnore(event)
+    if (ignore === 'category') {
+      event.systemIgnored = true
+      return event
+    }
     let categoriesStr = event.categories.join(' ').toUpperCase()
-    let inputStr = [
-      event.title,
-      event.body,
-      categoriesStr,
-    ].join(' ').toUpperCase()
+    let inputStr = [event.title, event.body, categoriesStr].join(' ').toUpperCase()
     let matches = this.findProjectMatches(inputStr, categoriesStr)
     let projectKey
     if (!isEmpty(matches)) {
+      /**
+       * Loops through all the matches from findProjectMatches
+       */
       let i = 0
       for (let i = 0; i < matches.length; i++) {
         let match = matches[i]
@@ -105,7 +125,12 @@ class EventMatching {
         }
         if (!!event.project) break
       }
-    } else {
+    }
+    else if (ignore === 'body') {
+      event.systemIgnored = true
+      return event
+    }
+    else {
       event.project = find(this.projects, p => !!find(this.searchString(inputStr, true), m => m.id === p.id))
       if (!!event.project) event.customer = find(this.customers, c => c.key === event.project.customerKey)
     }

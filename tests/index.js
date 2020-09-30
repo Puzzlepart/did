@@ -62,18 +62,6 @@ describe('Event matching', () => {
   })
 
   describe('Matching suggestions', () => {
-    it('{4SUBSEA FLEXSHARZ} should suggest {4SUBSEA FLEXSHARE}', () => {
-      testEvent.body = 'Hello this is an event [4SUBSEA FLEXSHARZ]'
-      const event = first(eventMatching.match([testEvent]))
-      assert.strictEqual(event.suggestedProject.id, '4SUBSEA FLEXSHARE')
-    })
-
-    it('{4SUBSEA FLEXSHARZE} should suggest {4SUBSEA FLEXSHARE}', () => {
-      testEvent.body = 'Hello this is an event [4SUBSEA FLEXSHARZE]'
-      const event = first(eventMatching.match([testEvent]))
-      assert.strictEqual(event.suggestedProject.id, '4SUBSEA FLEXSHARE')
-    })
-
     it('{IAM VAK} should suggest {IAM VAC}', () => {
       testEvent.categories.push('IAM VAK')
       const event = first(eventMatching.match([testEvent]))
@@ -96,6 +84,33 @@ describe('Event matching', () => {
       testEvent.body = 'Hello this is an event 4SUBSEA ABC'
       const event = first(eventMatching.match([testEvent]))
       assert.strictEqual(event.customer, undefined)
+    })
+  })
+
+  describe('System ignore', () => {
+    it('IGNORE (uppercase) in categories should set the event as ignored', () => {
+      testEvent.categories.push('IGNORE')
+      const event = first(eventMatching.match([testEvent]))
+      assert.strictEqual(event.systemIgnored, true)
+    })
+
+    it('ignore (lowercase) in categories should set the event as ignored', () => {
+      testEvent.categories.push('ignore')
+      const event = first(eventMatching.match([testEvent]))
+      assert.strictEqual(event.systemIgnored, true)
+    })
+
+    it('[ignore] (lowercase) in body should set the event as ignored', () => {
+      testEvent.body = 'This is the body of the event [ignore]'
+      const event = first(eventMatching.match([testEvent]))
+      assert.strictEqual(event.systemIgnored, true)
+    })
+
+    it('IAM VAC in categories takes presedence before [ignore] (lowercase) in body', () => {
+      testEvent.categories.push('IAM VAC')
+      testEvent.body = 'This is the body of the event [ignore]'
+      const event = first(eventMatching.match([testEvent]))
+      assert.notStrictEqual(event.systemIgnored, true)
     })
   })
 
