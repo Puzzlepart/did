@@ -54,12 +54,12 @@ class EventMatching {
   /**
    * Find project match in title/body/categories
    *
-   * @param {*} content Content (title/body/categories)
+   * @param {*} searchString Search string (title/body/categories)
    * @param {*} categories Categories
    */
-  findProjectMatches(content, categories) {
+  findProjectMatches(searchString, categories) {
     let matches = this.searchString(categories, true)
-    return matches || this.searchString(content)
+    return matches || this.searchString(searchString)
   }
 
   /**
@@ -81,34 +81,41 @@ class EventMatching {
    */
   matchEvent(event) {
     let categories = event.categories.join(' ').toUpperCase()
-    let content = [event.title, event.body, categories].join(' ').toUpperCase()
-    let matches = this.findProjectMatches(content, categories)
+    let searchString = [event.title, event.body, categories].join(' ').toUpperCase()
+    let matches = this.findProjectMatches(searchString, categories)
     let projectKey
     if (matches) {
+      let i = 0
       for (let i = 0; i < matches.length; i++) {
         let match = matches[i]
         event.customer = find(this.customers, c => match.customerKey === c.key)
-        if (event.customer) {
+        if (!!event.customer) {
           event.project = find(this.projects, p => p.id === match.id)
           projectKey = match.key
         }
-        if (event.project) break
+        if (!!event.project) break
       }
     } else {
       event.project = find(this.projects, p => {
-        return !!find(this.searchString(content, true), m => m.id === p.id)
+        return !!find(this.searchString(searchString, true), m => m.id === p.id)
       })
       if (event.project) event.customer = find(this.customers, c => c.key === event.project.customerKey)
     }
-
-    if (event.customer && !event.project)
-      event.suggestedProject = this.findProjectSuggestion(event.customer, projectKey)
+    if (!!event.customer && !event.project) event.suggestedProject = this.findProjectSuggestion(event.customer, projectKey)
 
     event.labels = this.findLabels(event.categories)
+    event = this.checkInactive(event)
+    return event
+  }
 
+  /**
+   * Check if project or customer is marked as inactive
+   *
+   * @param {*} event
+   */
+  checkInactive(event) {
     const inactiveProject = value(event, 'project.inactive')
     const inactiveCustomer = value(event, 'customer.inactive')
-
     if (event.project && (inactiveProject || inactiveCustomer)) {
       if (inactiveProject) event.error = { code: 'PROJECT_INACTIVE' }
       if (inactiveCustomer) event.error = { code: 'CUSTOMER_INACTIVE' }
