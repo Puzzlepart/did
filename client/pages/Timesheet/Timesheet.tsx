@@ -7,15 +7,13 @@ import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { ActionBar } from './ActionBar'
 import { AllocationView } from './AllocationView'
-import CONFIRM_PERIOD from './CONFIRM_PERIOD'
-import GET_TIMESHEET from './GET_TIMESHEET'
 import hotkeys from './hotkeys'
 import { Overview } from './Overview'
 import reducer from './reducer'
 import { SummaryView } from './SummaryView'
 import styles from './Timesheet.module.scss'
 import { ITimesheetContext, ITimesheetParams, ITimesheetPeriod, TimesheetContext, TimesheetPeriod, TimesheetScope, TimesheetView } from './types'
-import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD'
+import * as data from './data'
 import { AppContext } from 'AppContext'
 
 /**
@@ -32,7 +30,7 @@ export const Timesheet = () => {
         scope: new TimesheetScope(params),
         selectedView: params.view || 'overview'
     })
-    const query = useQuery<{ timesheet: ITimesheetPeriod[] }>(GET_TIMESHEET, {
+    const query = useQuery<{ timesheet: ITimesheetPeriod[] }>(data.TIMESHEET, {
         variables: {
             ...state.scope.dateStrings,
             dateFormat: 'dddd DD',
@@ -46,8 +44,8 @@ export const Timesheet = () => {
     useEffect(() => { history.push(`/timesheet/${state.selectedView}/${state.selectedPeriod.path}`) }, [state.selectedView, state.selectedPeriod])
 
     const [[confirmPeriod], [unconfirmPeriod]] = [
-        useMutation<{ entries: any[]; startDateTime: string; endDateTime: string }>(CONFIRM_PERIOD),
-        useMutation<{ startDateTime: string; endDateTime: string }>(UNCONFIRM_PERIOD)
+        useMutation<{ entries: any[]; startDateTime: string; endDateTime: string }>(data.CONFIRM_PERIOD),
+        useMutation<{ startDateTime: string; endDateTime: string }>(data.UNCONFIRM_PERIOD)
     ]
 
     const onConfirmPeriod = () => {

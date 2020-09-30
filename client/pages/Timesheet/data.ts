@@ -1,9 +1,29 @@
 import gql from 'graphql-tag'
 
-/**
- * @ignore
- */
-export default gql`
+
+export const UNCONFIRM_PERIOD = gql`
+  mutation($period: TimesheetPeriodInput!) {
+    result: unconfirmPeriod(period: $period) {
+      success
+      error {
+        message
+      }
+    }
+  }
+`
+
+export const CONFIRM_PERIOD = gql`
+  mutation($entries: [TimeEntryInput!], $period: TimesheetPeriodInput!) {
+    result: confirmPeriod(entries: $entries, period: $period) {
+      success
+      error {
+        message
+      }
+    }
+  }
+`
+
+export const TIMESHEET = gql`
   query($startDateTime: String!, $endDateTime: String!, $dateFormat: String!, $locale: String!) {
     timesheet(startDateTime: $startDateTime, endDateTime: $endDateTime, dateFormat: $dateFormat, locale: $locale) {
       id
