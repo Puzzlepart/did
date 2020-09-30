@@ -11,7 +11,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run tests"
+      "pre-commit": "npm run tests && npm run lint:client"
     }
   },
   "scripts": {
