@@ -5,6 +5,12 @@ import * as React from 'react'
 import { ITimesheetContext } from '../TimesheetContext'
 import styles from './ActionBar.module.scss'
 import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS'
+import { WeekPicker } from './WeekPicker'
+
+export const WEEK_PICKER = (): IContextualMenuItem => ({
+    key: 'WEEK_PICKER',
+    onRender: () => <WeekPicker />,
+})
 
 export const GO_TO_CURRENT_WEEK = ({ scope, dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
     key: 'GO_TO_CURRENT_WEEK',
