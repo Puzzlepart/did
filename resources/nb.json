@@ -30,9 +30,9 @@
     "resolveProjectButtonLabel": "Søk prosjekt",
     "ignoreEventButtonLabel": "Ignorer",
     "clearProjectMatchTooltipText": "Fjern match",
-    "matchOutlookInfoText": "**Tips:** Prøv å sørge for at <a href='{0}' target='_blank'>Outlook-avtalen</a> matches automatisk. I noen tilfeller kan det dog være nødvendig å matche manuelt.",
+    "matchOutlookInfoText": "**Tips:** Prøv å sørge for at <a href='{{webLink}}' target='_blank'>Outlook-avtalen</a> matches automatisk. I noen tilfeller kan det dog være nødvendig å matche manuelt.",
     "didYouMeanText": "Mente du",
-    "eventNotFullyMatchedText": "Hendelse kunne ikke matches. Vi fant matchende kunde **{0}**, men ikke noe prosjekt med den spesifiserte nøkkelen."
+    "eventNotFullyMatchedText": "Hendelse kunne ikke matches. Vi fant matchende kunde **{{name}}**, men ikke noe prosjekt med den spesifiserte nøkkelen."
   },
   "projects": {
     "inactiveText": "Dette prosjektet er markert som inaktivt.",

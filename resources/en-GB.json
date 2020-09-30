@@ -30,9 +30,9 @@
     "resolveProjectButtonLabel": "Resolve",
     "ignoreEventButtonLabel": "Ignore",
     "clearProjectMatchTooltipText": "Clear match",
-    "matchOutlookInfoText": "**Please note:** You should try your best to match<a href='{0}' target='_blank'>the event in Outlook</a>, but in some cases it might be neccessary to manually match.",
+    "matchOutlookInfoText": "**Please note:** You should try your best to match<a href='{(webLink}}' target='_blank'>the event in Outlook</a>, but in some cases it might be neccessary to manually match.",
     "didYouMeanText": "Did you mean",
-    "eventNotFullyMatchedText": "Event not matched. We found a matching customer **{0}**, but not a project with the specified key.",
+    "eventNotFullyMatchedText": "Event not matched. We found a matching customer **{{name}}**, but not a project with the specified key.",
     "customerInactiveErrorText": "The customer is no longer active. Edit the event in Outlook.",
     "projectInactiveErrorText": "The project is no longer active. Edit the event in Outlook."
   },

@@ -4,7 +4,6 @@ import { IProject } from 'interfaces/IProject'
 import { MessageBarButton } from 'office-ui-fabric-react/lib/Button'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { Panel } from 'office-ui-fabric-react/lib/Panel'
-import { format } from 'office-ui-fabric-react/lib/Utilities'
 import { ITimesheetContext, TimesheetContext } from 'pages/Timesheet/context'
 import React, { useContext, useState } from 'react'
 import { BrowserView, MobileView } from 'react-device-detect'
@@ -46,7 +45,7 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
                 <div className={styles.title}>{event.title}</div>
                 <UserMessage
                     iconName='OutlookLogo'
-                    text={format(t('timesheet.matchOutlookInfoText'), event.webLink)} />
+                    text={t('timesheet.matchOutlookInfoText', event)} />
 
                 <UserMessage
                     hidden={!event.suggestedProject}
@@ -63,7 +62,7 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
                 <UserMessage
                     hidden={!event.customer || !!event.suggestedProject}
                     containerStyle={{ marginTop: 10 }}
-                    text={format(t('timesheet.eventNotFullyMatchedText'), value(event, 'customer.name', ''))} />
+                    text={t('timesheet.eventNotFullyMatchedText', { name: value(event, 'customer.name', '') })} />
 
                 <SearchProject
                     width='100%'

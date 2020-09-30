@@ -1,3 +1,4 @@
+import { ProjectLink } from 'components/ProjectLink'
 import { UserMessage } from 'components/UserMessage'
 import { TFunction } from 'i18next'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
@@ -40,7 +41,7 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
     if (isMobile) className += ` ${styles.mobile}`
     if (event.isSystemIgnored) {
         return null
-        
+
     }
     if (!event.project) {
         if (event.error) {
@@ -75,9 +76,7 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
 
     return (
         <TooltipHost
-            tooltipProps={{
-                onRenderContent: () => <ProjectColumnTooltip project={event.project} />,
-            }}
+            tooltipProps={{ onRenderContent: () => <ProjectColumnTooltip project={event.project} /> }}
             delay={TooltipDelay.long}
             closeDelay={TooltipDelay.long}
             calloutProps={{ gapSpace: 0 }}>
@@ -87,7 +86,7 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
                 </div>
                 <div className={styles.content}>
                     <div className={styles.link}>
-                        <a href={`/projects/search/${event.project.id}`}>{event.project.name}</a>
+                        <ProjectLink project={event.project} />
                     </div>
                     {!isEmpty(event.project.labels) && <Icon iconName='Tag' className={styles.labelIcon} />}
                     {(event.manualMatch && !selectedPeriod.confirmed) && (

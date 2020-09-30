@@ -1,28 +1,28 @@
 import { IProject, ITimeEntry } from 'interfaces'
 
 /**
- * @category EventList
+ * @category Timesheet
  */
 export interface IClearManualMatchButtonProps extends React.HTMLProps<HTMLDivElement> {
     onClick: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
 }
 
 /**
- * @category EventList
+ * @category Timesheet
  */
-export interface IIgnoreEventButton {
+export interface IIgnoreEventButtonProps {
     event: ITimeEntry;
 }
 
 /**
- * @category EventList
+ * @category Timesheet
  */
 export interface IProjectColumnTooltipProps {
     project: IProject;
 }
 
 /**
- * @category EventList
+ * @category Timesheet
  */
 export interface IProjectColumnProps {
     event: ITimeEntry;

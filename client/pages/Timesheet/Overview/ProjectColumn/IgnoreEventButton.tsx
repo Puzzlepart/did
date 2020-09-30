@@ -1,6 +1,6 @@
-import * as React from 'react'
+import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { IIgnoreEventButton } from './types'
+import {  IIgnoreEventButtonProps } from './types'
 import { TimesheetContext } from '../../types'
 import { MessageBarButton } from 'office-ui-fabric-react/lib/Button'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
@@ -9,9 +9,9 @@ import { MobileView, BrowserView } from 'react-device-detect'
 /**
  * @category Timesheet
  */
-export const IgnoreEventButton = ({ event }: IIgnoreEventButton): JSX.Element => {
+export const IgnoreEventButton = ({ event }: IIgnoreEventButtonProps): JSX.Element => {
     const { t } = useTranslation()
-    const { dispatch } = React.useContext(TimesheetContext)
+    const { dispatch } = useContext(TimesheetContext)
 
     const onClick = () => dispatch({
         type: 'IGNORE_EVENT',
