@@ -1,4 +1,6 @@
+import { getIcons } from 'common/icons'
 import { IProject } from 'types'
+import { first } from 'underscore'
 
 export interface IProjectFormProps {
     /**
@@ -23,7 +25,7 @@ export class ProjectModel {
     public customerKey = ''
     public description = ''
     public inactive = false
-    public icon = ''
+    public icon = first(getIcons(1))
     public labels: string[] = []
     public createOutlookCategory = false
 
@@ -36,7 +38,7 @@ export class ProjectModel {
             this.inactive = project.inactive
             this.icon = project.icon
             this.labels = project.labels.map(label => label.name)
-        }
+        } 
     }
 
     public clone(): ProjectModel {
