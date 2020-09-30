@@ -9,6 +9,12 @@
   "config": {
     "public": "public"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run tests && npm run lint:client",
+      "pre-push": "npm run tests && npm run lint:client"
+    }
+  },
   "scripts": {
     "watch": "concurrently \"webpack\" \"npm run watch:server\" \"node tasks/open.js\"",
     "start": "node ./bin/www",
