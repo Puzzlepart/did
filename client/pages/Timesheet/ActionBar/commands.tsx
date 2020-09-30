@@ -6,8 +6,8 @@ import { ITimesheetContext } from '../TimesheetContext'
 import styles from './ActionBar.module.scss'
 import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS'
 
-export const goToCurrentWeek = ({ scope, dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
-    key: 'goToCurrentWeek',
+export const GO_TO_CURRENT_WEEK = ({ scope, dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
+    key: 'GO_TO_CURRENT_WEEK',
     iconOnly: true,
     iconProps: { iconName: 'RenewalCurrent', ...ACTIONBAR_ICON_PROPS },
     onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: new Date().toISOString() }),
@@ -15,16 +15,16 @@ export const goToCurrentWeek = ({ scope, dispatch }: ITimesheetContext, t: TFunc
     title: t('timesheet.goToCurrentWeek'),
 })
 
-export const goToPrevWeek = ({ dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
-    key: 'goToPrevWeek',
+export const GO_TO_PREV_WEEK = ({ dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
+    key: 'GO_TO_PREV_WEEK',
     iconOnly: true,
     iconProps: { iconName: 'Back', ...ACTIONBAR_ICON_PROPS },
     onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: { amount: -1, unit: 'week' } }),
     title: t('timesheet.goToPrevWeek')
 })
 
-export const goToNextWeek = ({ dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
-    key: 'goToNextWeek',
+export const GO_TO_NEXT_WEEK = ({ dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
+    key: 'GO_TO_NEXT_WEEK',
     iconOnly: true,
     iconProps: { iconName: 'Forward', ...ACTIONBAR_ICON_PROPS },
     onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: { amount: 1, unit: 'week' } }),

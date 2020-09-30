@@ -3,7 +3,7 @@ import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMen
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TimesheetContext } from '../'
-import { CHANGE_PERIOD, CONFIRM_ACTIONS, goToCurrentWeek, goToNextWeek, goToPrevWeek } from './commands'
+import { CHANGE_PERIOD, CONFIRM_ACTIONS, GO_TO_CURRENT_WEEK, GO_TO_NEXT_WEEK, GO_TO_PREV_WEEK } from './commands'
 import { WeekPicker } from './WeekPicker'
 import styles from './ActionBar.module.scss'
 
@@ -14,9 +14,9 @@ export const ActionBar = () => {
     const { t } = useTranslation()    
     const context = useContext(TimesheetContext)
     const items = [
-        goToCurrentWeek(context, t),
-        goToPrevWeek(context, t),
-        goToNextWeek(context, t),
+        GO_TO_CURRENT_WEEK(context, t),
+        GO_TO_PREV_WEEK(context, t),
+        GO_TO_NEXT_WEEK(context, t),
         {
             key: 'WEEK_PICKER',
             itemType: ContextualMenuItemType.Normal,
