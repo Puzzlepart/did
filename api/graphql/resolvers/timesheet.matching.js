@@ -1,4 +1,4 @@
-const { first, find, filter, contains } = require('underscore')
+const { first, find, filter, contains,isEmpty } = require('underscore')
 const { findBestMatch } = require('string-similarity')
 const value = require('get-value')
 const { EVENT_ERROR } = require('./timesheet.utils')
@@ -33,16 +33,15 @@ class EventMatching {
   /**
    * Find project match in title/subject/categories
    *
-   * @param {*} input Input string
+   * @param {*} inputStr Input string
    * @param {*} soft Soft search - don't require [], () or {}
    */
-  searchString(input, soft) {
+  searchString(inputStr, soft) {
     let regex = /[\(\{\[]((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<key>[\wæøåÆØÅ]{2,}?))[\)\]\}]/gim
     if (soft) regex = /((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<key>[\wæøåÆØÅ]{2,}))/gim
-    let matches
+    let matches = []
     let match
-    while ((match = regex.exec(input)) != null) {
-      matches = matches || []
+    while ((match = regex.exec(inputStr)) != null) {
       matches.push({
         ...match.groups,
         id: `${match.groups.customerKey} ${match.groups.key}`,
@@ -84,7 +83,7 @@ class EventMatching {
     let searchString = [event.title, event.body, categories].join(' ').toUpperCase()
     let matches = this.findProjectMatches(searchString, categories)
     let projectKey
-    if (matches) {
+    if (!isEmpty(matches)) {
       let i = 0
       for (let i = 0; i < matches.length; i++) {
         let match = matches[i]
