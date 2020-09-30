@@ -13,7 +13,7 @@ import reducer from './reducer'
 import { SummaryView } from './SummaryView'
 import styles from './Timesheet.module.scss'
 import { ITimesheetContext, ITimesheetParams, ITimesheetPeriod, TimesheetContext, TimesheetPeriod, TimesheetScope, TimesheetView } from './types'
-import * as data from './data'
+import graphql from './graphql'
 import { AppContext } from 'AppContext'
 
 /**
@@ -30,7 +30,7 @@ export const Timesheet = () => {
         scope: new TimesheetScope(params),
         selectedView: params.view || 'overview'
     })
-    const query = useQuery<{ timesheet: ITimesheetPeriod[] }>(data.TIMESHEET, {
+    const query = useQuery<{ timesheet: ITimesheetPeriod[] }>(graphql.query.timesheet, {
         variables: {
             ...state.scope.dateStrings,
             dateFormat: 'dddd DD',
@@ -44,8 +44,8 @@ export const Timesheet = () => {
     useEffect(() => { history.push(`/timesheet/${state.selectedView}/${state.selectedPeriod.path}`) }, [state.selectedView, state.selectedPeriod])
 
     const [[confirmPeriod], [unconfirmPeriod]] = [
-        useMutation<{ entries: any[]; startDateTime: string; endDateTime: string }>(data.CONFIRM_PERIOD),
-        useMutation<{ startDateTime: string; endDateTime: string }>(data.UNCONFIRM_PERIOD)
+        useMutation(graphql.mutation.confirmPeriod),
+        useMutation(graphql.mutation.unconfirmPeriod)
     ]
 
     const onConfirmPeriod = () => {
