@@ -1,9 +1,9 @@
 global.fetch = require('node-fetch')
 const TokenService = require('./tokens')
-const log = require('debug')('services/graph')
-const Event = require('./graph.event')
+const log = require('debug')('services/msgraph')
+const Event = require('./msgraph.event')
 
-class GraphService {
+class MSGraphService {
   constructor(req) {
     this.req = req
     this.oauthToken = this.req.user.oauthToken
@@ -137,4 +137,4 @@ class GraphService {
   }
 }
 
-module.exports = GraphService
+module.exports = MSGraphService

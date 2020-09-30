@@ -10,7 +10,7 @@ const { typeDef: Label } = require('./resolvers/label')
 const { typeDef: Role } = require('./resolvers/role')
 const { typeDef: Notification } = require('./resolvers/notification')
 const { typeDef: ApiToken } = require('./resolvers/apiToken')
-const { StorageService, GraphService, SubscriptionService } = require('../../services')
+const { StorageService, MSGraphService, SubscriptionService } = require('../../services')
 const { filter, pick } = require('underscore')
 const value = require('get-value')
 
@@ -107,7 +107,7 @@ const createContext = async ({ req }) => {
       storage: new StorageService(subscription),
       subscription: SubscriptionService,
     }
-    if (!!req.user) services.graph = new GraphService(req)
+    if (!!req.user) services.graph = new MSGraphService(req)
     return {
       services,
       user: req.user || {},

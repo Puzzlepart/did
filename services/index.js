@@ -1,11 +1,11 @@
 const StorageService = require('./storage')
-const GraphService = require('./graph')
+const MSGraphService = require('./msgraph')
 const SubscriptionService = require('./subscription')
 const TokenService = require('./tokens')
 
 module.exports = {
   StorageService,
-  GraphService,
+  MSGraphService,
   SubscriptionService,
   TokenService,
 }
