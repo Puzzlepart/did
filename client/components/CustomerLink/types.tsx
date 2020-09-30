@@ -1,4 +1,4 @@
-import { ICustomer } from 'interfaces/ICustomer'
+import { ICustomer } from 'types/ICustomer'
 
 export interface ICustomerLinkProps {
     customer: ICustomer;

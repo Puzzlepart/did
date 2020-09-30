@@ -1,5 +1,5 @@
 import { TFunction } from 'i18next'
-import { IUser } from 'interfaces'
+import { IUser } from 'types'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import React from 'react'

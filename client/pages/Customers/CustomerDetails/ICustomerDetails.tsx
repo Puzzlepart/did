@@ -1,4 +1,4 @@
-import { ICustomer } from 'interfaces'
+import { ICustomer } from 'types'
 
 /**
  * @category Customers

@@ -1,6 +1,6 @@
 
 import { useQuery } from '@apollo/react-hooks'
-import { ICustomer } from 'interfaces'
+import { ICustomer } from 'types'
 import GET_CUSTOMERS from 'pages/Customers/GET_CUSTOMERS'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'

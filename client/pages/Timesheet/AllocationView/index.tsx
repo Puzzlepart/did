@@ -1,6 +1,6 @@
 
 import { value as value } from 'helpers'
-import { ITimeEntry } from 'interfaces/ITimeEntry'
+import { ITimeEntry } from 'types/ITimeEntry'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Bar, BarChart, Legend, Tooltip, XAxis, YAxis } from 'recharts'

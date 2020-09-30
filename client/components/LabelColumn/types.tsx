@@ -1,4 +1,4 @@
-import { ICustomer, IProject } from 'interfaces'
+import { ICustomer, IProject } from 'types'
 
 
 export interface ILabelColumnProps {
