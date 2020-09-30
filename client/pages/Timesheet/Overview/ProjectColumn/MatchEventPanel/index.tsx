@@ -17,7 +17,10 @@ import { IMatchEventPanelProps } from './types'
 export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
     const { t } = useTranslation()
     const { dispatch } = useContext<ITimesheetContext>(TimesheetContext)
-    const [showPanel, setShowPanel] = useState(false)
+    const [isPanelVisible, setPanelVisibility] = useState(false)
+
+    const hidePanel = () => setPanelVisibility(false)
+    const showPanel = () => setPanelVisibility(true)
 
     /**
      * On manual match. Dispatches action type MANUAL_MATCH
@@ -25,7 +28,7 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
      * @param {IProject} project Project to match the event to
      */
     const onManualMatch = (project: IProject) => {
-        setShowPanel(false)
+        hidePanel()
         dispatch({ type: 'MANUAL_MATCH', payload: { eventId: event.id, project } })
     }
 
@@ -37,20 +40,20 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
                         text={t('timesheet.resolveProjectButtonLabel')}
                         title={t('timesheet.resolveProjectButtonLabel')}
                         iconProps={{ iconName: 'ReviewResponseSolid' }}
-                        onClick={() => setShowPanel(true)} />
+                        onClick={showPanel} />
                 </BrowserView>
                 <MobileView renderWithFragment={true}>
                     <Icon
                         className={styles.icon}
                         iconName='ReviewResponseSolid'
-                        onClick={() => setShowPanel(true)} />
+                        onClick={showPanel} />
                     <span className={styles.text}>{t('timesheet.resolveProjectButtonLabel')}</span>
                 </MobileView>
             </span>
             <Panel
-                isOpen={showPanel}
+                isOpen={isPanelVisible}
                 headerText={t('timesheet.matchEventPanelHeaderText')}
-                onDismiss={() => setShowPanel(false)}>
+                onDismiss={hidePanel}>
                 <div className={styles.subText}>{event.title}</div>
                 <UserMessage
                     iconName='OutlookLogo'

@@ -3,6 +3,7 @@
 interface CssExports {
   'clearButton': string;
   'content': string;
+  'eventActions': string;
   'iconContainer': string;
   'labelIcon': string;
   'link': string;

@@ -65,7 +65,7 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
                     iconName='TagUnknown'
                     text={t('timesheet.noProjectMatchFoundText')}
                     actions={
-                        <div>
+                        <div className={styles.eventActions}>
                             <MatchEventPanel event={event} />
                             <IgnoreEventButton event={event} />
                         </div>
