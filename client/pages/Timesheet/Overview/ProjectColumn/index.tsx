@@ -60,7 +60,7 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
             <div className={className}>
                 <UserMessage
                     containerStyle={{ marginTop: 10 }}
-                    isMultiline={false}
+                    isMultiline={true}
                     type={MessageBarType.warning}
                     iconName='TagUnknown'
                     text={t('timesheet.noProjectMatchFoundText')}

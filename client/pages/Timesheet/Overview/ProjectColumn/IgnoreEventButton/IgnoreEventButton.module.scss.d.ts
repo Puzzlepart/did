@@ -3,10 +3,7 @@
 interface CssExports {
   'icon': string;
   'root': string;
-  'searchProject': string;
-  'subText': string;
   'text': string;
-  'togglePanel': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

@@ -34,7 +34,8 @@
     "didYouMeanText": "Did you mean",
     "eventNotFullyMatchedText": "Event not matched. We found a matching customer **{{name}}**, but not a project with the specified key.",
     "customerInactiveErrorText": "The customer is no longer active. Edit the event in Outlook.",
-    "projectInactiveErrorText": "The project is no longer active. Edit the event in Outlook."
+    "projectInactiveErrorText": "The project is no longer active. Edit the event in Outlook.",
+    "matchEventPanelHeaderText": "Resolve event"
   },
   "projects": {
     "inactiveText": "This project has been marked as inactive.",

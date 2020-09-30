@@ -17,32 +17,41 @@ import { IMatchEventPanelProps } from './types'
 export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
     const { t } = useTranslation()
     const { dispatch } = useContext<ITimesheetContext>(TimesheetContext)
-    const [showPanel, setShowPanel] = useState<boolean>(false)
+    const [showPanel, setShowPanel] = useState(false)
 
-    const onResolve = (project: IProject) => {
+    /**
+     * On manual match. Dispatches action type MANUAL_MATCH
+     * 
+     * @param {IProject} project Project to match the event to
+     */
+    const onManualMatch = (project: IProject) => {
         setShowPanel(false)
         dispatch({ type: 'MANUAL_MATCH', payload: { eventId: event.id, project } })
     }
 
     return (
-        <>
-            <BrowserView renderWithFragment={true}>
-                <MessageBarButton
-                    text={t('timesheet.resolveProjectButtonLabel')}
-                    iconProps={{ iconName: 'ReviewResponseSolid' }}
-                    onClick={() => setShowPanel(true)} />
-            </BrowserView>
-            <MobileView renderWithFragment={true}>
-                <Icon
-                    styles={{ root: { fontSize: 18 } }}
-                    iconName='ReviewResponseSolid'
-                    onClick={() => setShowPanel(true)} />
-            </MobileView>
+        <span className={styles.root}>
+            <span className={styles.togglePanel}>
+                <BrowserView renderWithFragment={true}>
+                    <MessageBarButton
+                        text={t('timesheet.resolveProjectButtonLabel')}
+                        title={t('timesheet.resolveProjectButtonLabel')}
+                        iconProps={{ iconName: 'ReviewResponseSolid' }}
+                        onClick={() => setShowPanel(true)} />
+                </BrowserView>
+                <MobileView renderWithFragment={true}>
+                    <Icon
+                        className={styles.icon}
+                        iconName='ReviewResponseSolid'
+                        onClick={() => setShowPanel(true)} />
+                    <span className={styles.text}>{t('timesheet.resolveProjectButtonLabel')}</span>
+                </MobileView>
+            </span>
             <Panel
-                className={styles.root}
                 isOpen={showPanel}
+                headerText={t('timesheet.matchEventPanelHeaderText')}
                 onDismiss={() => setShowPanel(false)}>
-                <div className={styles.title}>{event.title}</div>
+                <div className={styles.subText}>{event.title}</div>
                 <UserMessage
                     iconName='OutlookLogo'
                     text={t('timesheet.matchOutlookInfoText', event)} />
@@ -53,7 +62,7 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
                     iconName='Lightbulb' >
                     <p>
                         <span>{t('timesheet.didYouMeanText')}</span>
-                        <a href='#' onClick={() => onResolve(event.suggestedProject)}>
+                        <a href='#' onClick={() => onManualMatch(event.suggestedProject)}>
                             {value(event, 'suggestedProject.id', '')}
                         </a>?
                     </p>
@@ -67,9 +76,9 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
                 <SearchProject
                     width='100%'
                     className={styles.searchProject}
-                    onSelected={project => onResolve(project)}
+                    onSelected={project => onManualMatch(project)}
                     placeholder={t('common.searchPlaceholder')} />
             </Panel>
-        </>
+        </span>
     )
 }

@@ -1,9 +1,24 @@
 .root {
-  .title {
-    font-size: 1.6em;
-    margin: 0 0 12px 0;
+  .togglePanel {
+    margin: 0 8px 0 0;
+    cursor: pointer;
+    .icon {
+      margin: 0;
+      vertical-align: middle;
+    }
+    .text {
+      margin: 0 0 0 3px;
+      font-size: 0.9em;
+      vertical-align: middle;
+    }
   }
-  .searchProject {
-    margin: 10px 0 0 0;
-  }
+}
+
+.subText {
+  font-size: 1em;
+  margin: 0 0 20px 0;
+}
+
+.searchProject {
+  margin: 15px 0 0 0;
 }
