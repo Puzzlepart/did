@@ -103,18 +103,13 @@ class EventMatching {
    */
   matchEvent(event) {
     let ignore = this.findIgnore(event)
-    if (ignore === 'category') {
-      event.systemIgnored = true
-      return event
-    }
+    if (ignore === 'category') return { ...event, systemIgnored: true }
     let categoriesStr = event.categories.join(' ').toUpperCase()
     let inputStr = [event.title, event.body, categoriesStr].join(' ').toUpperCase()
     let matches = this.findProjectMatches(inputStr, categoriesStr)
     let projectKey
     if (!isEmpty(matches)) {
-      /**
-       * Loops through all the matches from findProjectMatches
-       */
+      // Loops through all the matches from findProjectMatches
       let i = 0
       for (let i = 0; i < matches.length; i++) {
         let match = matches[i]
@@ -126,10 +121,7 @@ class EventMatching {
         if (!!event.project) break
       }
     }
-    else if (ignore === 'body') {
-      event.systemIgnored = true
-      return event
-    }
+    else if (ignore === 'body') return { ...event, systemIgnored: true }
     else {
       event.project = find(this.projects, p => !!find(this.searchString(inputStr, true), m => m.id === p.id))
       if (!!event.project) event.customer = find(this.customers, c => c.key === event.project.customerKey)

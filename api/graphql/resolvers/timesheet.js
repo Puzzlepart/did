@@ -28,6 +28,7 @@ const typeDef = gql`
     webLink: String
     lastModifiedDateTime: String
     labels: [Label]
+    systemIgnored: Boolean
     error: EventError
   }
 

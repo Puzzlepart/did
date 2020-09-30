@@ -106,6 +106,13 @@ describe('Event matching', () => {
       assert.strictEqual(event.systemIgnored, true)
     })
 
+    it('[ignore] (lowercase) in body should set the event as ignored even with an event category', () => {
+      testEvent.categories.push('IAM VAC')
+      testEvent.categories.push('ignore')
+      const event = first(eventMatching.match([testEvent]))
+      assert.strictEqual(event.systemIgnored, true)
+    })
+
     it('IAM VAC in categories takes presedence before [ignore] (lowercase) in body', () => {
       testEvent.categories.push('IAM VAC')
       testEvent.body = 'This is the body of the event [ignore]'
