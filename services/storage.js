@@ -148,11 +148,13 @@ class StorageService {
       {
         ...project,
         id,
-        labels: project.labels && project.labels.join('|'),
+        labels: !!project.labels ? project.labels.join('|') : '',
         createdBy,
       },
-      project.customerKey
+      project.customerKey,
+      { removeBlanks: false }
     )
+    console.log(entity)
     let result
     if (update) result = await this.tableUtil.updateEntity('Projects', entity, true)
     else result = await this.tableUtil.addAzEntity('Projects', entity)
@@ -278,7 +280,10 @@ class StorageService {
           labels: labels.join('|'),
         },
         user.id,
-        ['startDateTime', 'endDateTime']
+        { 
+          removeBlanks:true,
+          dateFields: ['startDateTime', 'endDateTime'] 
+        }
       )
       return entity
     })
