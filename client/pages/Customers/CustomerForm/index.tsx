@@ -7,10 +7,11 @@ import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import * as React from 'react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { IFormValidation } from 'types/IFormValidation'
 import { first, pick } from 'underscore'
 import styles from './CreateCustomerForm.module.scss'
 import CREATE_OR_UPDATE_CUSTOMER, { ICreateOrUpdateCustomerVariables, ICustomerInput } from './CREATE_OR_UPDATE_CUSTOMER'
-import { ICustomerFormProps, ICustomerFormValidation } from './types'
+import { ICustomerFormProps } from './types'
 
 const initialModel: ICustomerInput = {
     key: '',
@@ -24,7 +25,7 @@ const initialModel: ICustomerInput = {
  */
 export const CustomerForm = ({ nameLength = [2] }: ICustomerFormProps) => {
     const { t } = useTranslation()
-    const [validation, setValidation] = useState<ICustomerFormValidation>({ errors: {}, invalid: true })
+    const [validation, setValidation] = useState<IFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useState<{ text: string; type: MessageBarType }>(null)
     const [model, setModel] = useState<ICustomerInput>(initialModel)
     const [createOrUpdateCustomer, { loading }] = useMutation<any, ICreateOrUpdateCustomerVariables>(CREATE_OR_UPDATE_CUSTOMER)
@@ -32,7 +33,7 @@ export const CustomerForm = ({ nameLength = [2] }: ICustomerFormProps) => {
     /**
      * On validate form
      */
-    const validateForm = (): ICustomerFormValidation => {
+    const validateForm = (): IFormValidation => {
         const [nameMinLength] = nameLength
         const errors: { [key: string]: string } = {}
         if (model.name.length < nameMinLength) errors.name = t('customers.nameFormValidationText', { nameMinLength })

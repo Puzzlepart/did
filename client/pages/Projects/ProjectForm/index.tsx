@@ -6,10 +6,11 @@ import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { IFormValidation } from 'types'
 import { isBlank } from 'underscore.string'
 import styles from './CreateProjectForm.module.scss'
 import CREATE_OR_UPDATE_PROJECT, { ICreateOrUpdateProjectVariables } from './CREATE_OR_UPDATE_PROJECT'
-import { IProjectFormProps, IProjectFormValidation, ProjectModel } from './types'
+import { IProjectFormProps,  ProjectModel } from './types'
 
 /**
  * @category Projects
@@ -17,7 +18,7 @@ import { IProjectFormProps, IProjectFormValidation, ProjectModel } from './types
 export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFormProps) => {
     const editMode = !!edit
     const { t } = useTranslation()
-    const [validation, setValidation] = useState<IProjectFormValidation>({ errors: {}, invalid: true })
+    const [validation, setValidation] = useState<IFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useMessage()
     const [model, setModel] = useState<ProjectModel>(new ProjectModel(edit))
     const [createOrUpdateProject, { loading }] = useMutation<any, ICreateOrUpdateProjectVariables>(CREATE_OR_UPDATE_PROJECT)
@@ -41,7 +42,7 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
      * 
      * @param {boolean} checkName Check name property (defaults to true)
      */
-    const validateForm = (checkName = true): IProjectFormValidation => {
+    const validateForm = (checkName = true): IFormValidation => {
         const [nameMinLength] = nameLength
         const errors: { [key: string]: string } = {}
         if (!model.customerKey) errors.customerKey = t('projects.customerFormValidationText')

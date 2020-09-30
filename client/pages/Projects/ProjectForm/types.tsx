@@ -43,13 +43,3 @@ export class ProjectModel {
         return Object.assign(Object.create(Object.getPrototypeOf(this)), this)
     }
 }
-
-/**
- * @category Projects
- */
-export interface IProjectFormValidation {
-    errors: {
-        [key: string]: string;
-    };
-    invalid: boolean;
-}
