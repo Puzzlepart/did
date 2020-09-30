@@ -10,22 +10,6 @@ class GraphService {
   }
 
   /**
-   * Renoves ignored events from the collection
-   *
-   * Checks (case-insensitive) if title, body or categories contains (IGNORE), {IGNORE} or [IGNORE] or if there's a category ignore
-   *
-   * @param {*} events
-   */
-  removeIgnoredEvents(events) {
-    let ignoreRegex = /[(\[\{]IGNORE[)\]\}]/gi
-    return events.filter(evt => {
-      let categories = evt.categories.join(' ').toLowerCase()
-      let content = [evt.title, evt.body, categories].join(' ').toLowerCase()
-      return content.match(ignoreRegex) == null && categories.indexOf('ignore') === -1
-    })
-  }
-
-  /**
    * Gets a Microsoft Graph Client using the auth token from the class
    */
   getClient() {
@@ -113,14 +97,16 @@ class GraphService {
    *
    * @param startDateTime Start date time in ISO format
    * @param endDateTime End date time in ISO format
+   * @param maxDurationHours Max duration hours (defaults to 24)
    */
-  async getEvents(startDateTime, endDateTime) {
+  async getEvents(startDateTime, endDateTime, maxDurationHours = 24) {
     try {
       log(
         'Querying Graph /me/calendar/calendarView: %s',
         JSON.stringify({
           startDateTime,
           endDateTime,
+          maxDurationHours
         })
       )
       const { value } = await this.getClient()
@@ -132,9 +118,10 @@ class GraphService {
         .top(500)
         .get()
       log('Retrieved %s events from /me/calendar/calendarView', value.length)
-      let events = value.filter(evt => evt.subject).map(evt => new Event(evt))
-      events = this.removeIgnoredEvents(events)
-      events = events.filter(evt => evt.duration <= 24)
+      const events = value
+        .filter(evt => evt.subject)
+        .map(evt => new Event(evt))
+        .filter(evt => evt.duration <= maxDurationHours)
       return events
     } catch (error) {
       switch (error.statusCode) {
