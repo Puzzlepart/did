@@ -1,13 +1,17 @@
 const assert = require('assert')
 const { first, any } = require('underscore')
 const EventMatching = require('../api/graphql/resolvers/timesheet.matching')
-const projects = require('./data/projects.json')
-const customers = require('./data/customers.json')
-const labels = require('./data/labels.json')
+const delay = require('delay')
+const ensureTestData = require('./ensureTestData')
 
-describe('Event matching', () => {
+describe('Event matching', async () => {
   let testEvent = {}
-  let eventMatching = new EventMatching(projects, customers, labels)
+  let eventMatching
+
+  before(async () => {
+    const [projects, customers, labels] = await ensureTestData()
+    eventMatching = new EventMatching(projects, customers, labels)
+  })
 
   beforeEach(() => {
     testEvent = {
@@ -77,7 +81,7 @@ describe('Event matching', () => {
     it('4SUBSEA ABC in category should yield no project but a match against 4SUBSEA', () => {
       testEvent.categories.push('4SUBSEA ABC')
       const event = first(eventMatching.match([testEvent]))
-      assert.strictEqual(event.customer.id, '4SUBSEA')
+      assert.strictEqual(event.customer.key, '4SUBSEA')
     })
 
     it('4SUBSEA ABC in body should yield no project and no match against customer 4SUBSEA', () => {
@@ -122,21 +126,12 @@ describe('Event matching', () => {
   })
 
   describe('Matching event labels', () => {
-    it('{overtid-40} in categories should add matching label', () => {
-      testEvent.categories.push('overtid-40')
+    it('{crayon-timereg} in categories should add matching label', () => {
+      testEvent.categories.push('crayon-timereg')
       const event = first(eventMatching.match([testEvent]))
       assert.strictEqual(
-        any(event.labels, lbl => lbl.name === 'overtid-40'),
+        any(event.labels, lbl => lbl.name === 'crayon-timereg'),
         true
-      )
-    })
-
-    it('{OVERTID-40} in categories should not add any label', () => {
-      testEvent.categories.push('OVERTID-40')
-      const event = first(eventMatching.match([testEvent]))
-      assert.strictEqual(
-        any(event.labels, lbl => lbl.name === 'OVERTID-40'),
-        false
       )
     })
   })
