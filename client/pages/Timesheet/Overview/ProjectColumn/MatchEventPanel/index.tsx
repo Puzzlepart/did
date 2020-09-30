@@ -34,31 +34,17 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
 
     return (
         <span className={styles.root}>
-            <span className={styles.togglePanel}>
-                <BrowserView renderWithFragment={true}>
-                    <MessageBarButton
-                        text={t('timesheet.resolveProjectButtonLabel')}
-                        title={t('timesheet.resolveProjectButtonLabel')}
-                        iconProps={{ iconName: 'ReviewResponseSolid' }}
-                        onClick={showPanel} />
-                </BrowserView>
-                <MobileView renderWithFragment={true}>
-                    <Icon
-                        className={styles.icon}
-                        iconName='ReviewResponseSolid'
-                        onClick={showPanel} />
-                    <span className={styles.text}>{t('timesheet.resolveProjectButtonLabel')}</span>
-                </MobileView>
-            </span>
+            <MessageBarButton
+                text={t('timesheet.resolveProjectButtonLabel')}
+                title={t('timesheet.resolveProjectButtonLabel')}
+                iconProps={{ iconName: 'ReviewResponseSolid' }}
+                onClick={showPanel} />
             <Panel
                 isOpen={isPanelVisible}
                 headerText={t('timesheet.matchEventPanelHeaderText')}
                 onDismiss={hidePanel}>
                 <div className={styles.subText}>{event.title}</div>
-                <UserMessage
-                    iconName='OutlookLogo'
-                    text={t('timesheet.matchOutlookInfoText', event)} />
-
+                <UserMessage iconName='OutlookLogo' text={t('timesheet.matchOutlookInfoText', event)} />
                 <UserMessage
                     hidden={!event.suggestedProject}
                     containerStyle={{ marginTop: 10 }}
