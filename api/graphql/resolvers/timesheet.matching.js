@@ -11,7 +11,7 @@ class EventMatching {
   }
 
   /**
-   * Find project suggestions using string-similarity findBestMatch
+   * Find project suggestions using findBestMatch from string-similarity
    *
    * @param {*} customer
    * @param {*} projectKey
@@ -59,8 +59,7 @@ class EventMatching {
    */
   findProjectMatches(content, categories) {
     let matches = this.searchString(categories, true)
-    if (matches) return matches
-    return this.searchString(content)
+    return matches || this.searchString(content)
   }
 
   /**
