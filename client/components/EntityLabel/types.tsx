@@ -1,4 +1,4 @@
-import { IEntityLabel } from 'interfaces/IEntityLabel'
+import { IEntityLabel } from 'types/IEntityLabel'
 
 export interface IEntityLabelProps {
     label: IEntityLabel;

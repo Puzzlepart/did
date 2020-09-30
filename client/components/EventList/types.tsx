@@ -1,6 +1,6 @@
 import { ITypedHash } from '@pnp/common'
 import { IListGroups } from 'components/List/types'
-import { ITimeEntry } from 'interfaces/ITimeEntry'
+import { ITimeEntry } from 'types/ITimeEntry'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 
 /**

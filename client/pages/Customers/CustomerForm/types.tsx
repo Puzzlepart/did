@@ -1,12 +1,5 @@
-/**
- * @category Customers
- */
-export interface ICustomerFormValidation {
-    errors: {
-        [key: string]: string;
-    };
-    invalid: boolean;
-}
+import { getIcons } from 'common/icons'
+import { first } from 'underscore'
 
 export interface ICustomerFormProps {
     /**
@@ -14,3 +7,10 @@ export interface ICustomerFormProps {
      */
     nameLength?: number[];
 }
+
+export class CustomerModel {
+    public key = ''
+    public name = ''
+    public description = ''
+    public icon = first(getIcons(1))
+  }

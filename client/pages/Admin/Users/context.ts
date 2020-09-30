@@ -1,4 +1,4 @@
-import { IRole, IUser } from 'interfaces'
+import { IRole, IUser } from 'types'
 import { createContext } from 'react'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface

@@ -2,6 +2,11 @@
 // Please do not change this file!
 interface CssExports {
   'callout': string;
+  'css-1': string;
+  'css-14': string;
+  'description': string;
+  'errorMessage': string;
+  'root': string;
   'suggestion': string;
   'suggestionContainer': string;
   'suggestionIcon': string;

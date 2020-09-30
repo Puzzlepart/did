@@ -1,4 +1,4 @@
-import { IProject, ITimeEntry } from 'interfaces'
+import { IProject, ITimeEntry } from 'types'
 
 /**
  * @category EventList

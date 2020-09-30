@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import { List } from 'components'
 import { PermissionList } from 'components/PermissionList'
-import { IRole } from 'interfaces'
+import { IRole } from 'types'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import React, { useState } from 'react'

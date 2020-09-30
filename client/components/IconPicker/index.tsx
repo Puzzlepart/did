@@ -10,17 +10,16 @@ import { IIconPickerProps } from './types'
  * @category IconPicker
  */
 export const IconPicker = (props: IIconPickerProps) => {
-    const items = useMemo(() => getIcons().map(key => ({
-        key,
-        displayValue: humanize(key),
-        searchValue: [key, humanize(key)].join(' '),
-        iconName: key,
-        data: key,
+    const items = useMemo(() => getIcons().map(iconName => ({
+        key: iconName,
+        displayValue: humanize(iconName),
+        searchValue: [iconName, humanize(iconName)].join(' '),
+        iconName: iconName,
+        data: iconName,
     })), [])
 
     return (
         <div className={props.className} hidden={props.hidden}>
-            <Label>{props.label}</Label>
             <Autocomplete
                 {...omit(props, 'className')}
                 defaultSelectedItem={props.defaultSelected && find(items, i => i.key === props.defaultSelected)}

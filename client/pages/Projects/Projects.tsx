@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { AppContext } from 'AppContext'
 import { UserMessage } from 'components/UserMessage'
 import { manageProjects } from 'config/security/permissions'
-import { IProject } from 'interfaces'
+import { IProject } from 'types'
 import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
@@ -118,7 +118,7 @@ export const Projects = () => {
                     <PivotItem
                         itemID='new'
                         itemKey='new'
-                        headerText={t('common.createNewText')}
+                        headerText={t('projects.createNewText')}
                         itemIcon='AddTo'>
                         <ProjectForm />
                     </PivotItem>

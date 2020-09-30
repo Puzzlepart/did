@@ -1,7 +1,7 @@
 import { CustomerLink } from 'components/CustomerLink'
 import { EntityLabel } from 'components/EntityLabel'
 import { TFunction } from 'i18next'
-import { IProject } from 'interfaces'
+import { IProject } from 'types'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import * as React from 'react'

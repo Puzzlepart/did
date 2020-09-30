@@ -1,14 +1,8 @@
 import gql from 'graphql-tag'
-
-export interface ICustomerInput {
-  key?: string
-  name?: string
-  description?: string
-  icon?: string
-}
+import { CustomerModel } from './types'
 
 export interface ICreateOrUpdateCustomerVariables {
-  customer: ICustomerInput
+  customer: CustomerModel
   update?: boolean
 }
 

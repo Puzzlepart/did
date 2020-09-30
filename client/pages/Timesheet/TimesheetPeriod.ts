@@ -1,8 +1,8 @@
 /* eslint-disable prefer-const */
 import { dateAdd, IPnPClientStore, ITypedHash, PnPClientStorage } from '@pnp/common'
 import { TFunction } from 'i18next'
-import { IProject } from 'interfaces/IProject'
-import { ITimeEntry } from 'interfaces/ITimeEntry'
+import { IProject } from 'types/IProject'
+import { ITimeEntry } from 'types/ITimeEntry'
 import { omit, filter } from 'underscore'
 import { capitalize } from 'underscore.string'
 import dateUtils, { moment } from 'utils/date'

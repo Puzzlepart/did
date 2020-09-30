@@ -1,4 +1,4 @@
-import { IProject } from 'interfaces/IProject'
+import { IProject } from 'types/IProject'
 import { ISearchBoxProps } from 'office-ui-fabric-react/lib/SearchBox'
 
 /**

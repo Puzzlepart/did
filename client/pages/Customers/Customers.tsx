@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { AppContext } from 'AppContext'
 import { manageCustomers } from 'config/security/permissions'
 import { value } from 'helpers'
-import { ICustomer } from 'interfaces'
+import { ICustomer } from 'types'
 import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
@@ -84,7 +84,7 @@ export const Customers = () => {
                 <PivotItem
                     itemID='new'
                     itemKey='new'
-                    headerText={t('common.createNewText')}
+                    headerText={t('customers.createNewText')}
                     itemIcon='AddTo'>
                     <CustomerForm />
                 </PivotItem>

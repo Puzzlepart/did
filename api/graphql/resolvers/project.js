@@ -33,6 +33,7 @@ const typeDef = gql`
     customerKey: String
     inactive: Boolean
     labels: [String]
+    createOutlookCategory: Boolean
   }
 
   extend type Query {
@@ -52,7 +53,10 @@ const typeDef = gql`
 
 async function createOrUpdateProject(_obj, variables, ctx) {
   try {
-    await ctx.services.storage.createOrUpdateProject(variables.project, ctx.user.id, variables.update)
+    const id = await ctx.services.storage.createOrUpdateProject(variables.project, ctx.user.id, variables.update)
+    if (variables.project.createOutlookCategory) {
+      await ctx.services.graph.createOutlookCategory(id)
+    }
     return { success: true, error: null }
   } catch (error) {
     return {

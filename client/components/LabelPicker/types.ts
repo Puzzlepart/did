@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { IEntityLabel } from 'interfaces'
+import { IEntityLabel } from 'types'
 
 /**
  * @category LabelPicker

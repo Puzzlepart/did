@@ -1,6 +1,6 @@
 import { value } from 'helpers'
 import { TFunction } from 'i18next'
-import { IProject } from 'interfaces'
+import { IProject } from 'types'
 import { find, first } from 'underscore'
 import {
   ITimesheetPeriod,

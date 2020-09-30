@@ -1,6 +1,6 @@
 import { SearchProject, UserMessage } from 'components'
 import { value as value } from 'helpers'
-import { IProject } from 'interfaces/IProject'
+import { IProject } from 'types/IProject'
 import { MessageBarButton } from 'office-ui-fabric-react/lib/Button'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { Panel } from 'office-ui-fabric-react/lib/Panel'

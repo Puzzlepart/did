@@ -1,5 +1,5 @@
 import { TFunction } from 'i18next'
-import { IPermission } from 'interfaces/IPermission'
+import { IPermission } from 'types/IPermission'
 
 export const accessTimesheet = 'f5a82c37'
 export const accessCustomers = 'e18a7c45'

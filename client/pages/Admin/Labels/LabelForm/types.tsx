@@ -1,4 +1,4 @@
-import { IEntityLabel } from 'interfaces/IEntityLabel'
+import { IEntityLabel } from 'types/IEntityLabel'
 import { IPanelProps } from 'office-ui-fabric-react/lib/Panel'
 
 /**

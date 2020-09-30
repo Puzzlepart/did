@@ -2,7 +2,6 @@ import { useMutation } from '@apollo/react-hooks'
 import { AppContext } from 'AppContext'
 import { manageProjects } from 'config/security/permissions'
 import { IBaseResult } from 'graphql'
-import { IOutlookCategory } from 'interfaces'
 import { Panel } from 'office-ui-fabric-react'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import React, { useContext, useState } from 'react'
@@ -23,7 +22,7 @@ export const Actions = (props: IProjectDetailsProps) => {
     const { t } = useTranslation()
     const [showEditPanel, setShowEditPanel] = useState(false)
     const context = useContext(ProjectDetailsContext)
-    const [createOutlookCategory] = useMutation<{ result: IBaseResult }, { category: IOutlookCategory }>(CREATE_OUTLOOK_CATEGORY)
+    const [createOutlookCategory] = useMutation<{ result: IBaseResult }, { category: string }>(CREATE_OUTLOOK_CATEGORY)
 
     /**
      * On export to Excel
@@ -43,9 +42,8 @@ export const Actions = (props: IProjectDetailsProps) => {
      * On create category in Outlook
      */
     async function onCreateCategory() {
-        const colorIdx = context.project.id.split('').map(c => c.charCodeAt(0)).reduce((a, b) => a + b) % 24
         const { data: { result } } = await createOutlookCategory({
-            variables: { category: { displayName: context.project.id.toString(), color: `preset${colorIdx}` } }
+            variables: { category: context.project.id } 
         })
         if (result.success) {
             context.setProject({
@@ -96,3 +94,4 @@ export const Actions = (props: IProjectDetailsProps) => {
         </div>
     )
 }
+

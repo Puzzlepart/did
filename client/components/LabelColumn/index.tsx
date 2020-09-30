@@ -3,7 +3,7 @@ import * as React from 'react'
 import { isEmpty } from 'underscore'
 import styles from './LabelColumn.module.scss'
 import { EntityLabel } from 'components/EntityLabel'
-import { IEntityLabel } from 'interfaces'
+import { IEntityLabel } from 'types'
 import { ILabelColumnProps } from './types'
 
 /**

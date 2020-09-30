@@ -2,7 +2,7 @@
 import { DurationColumn } from 'components/DurationColumn'
 import { LabelColumn } from 'components/LabelColumn'
 import List from 'components/List'
-import { IProject } from 'interfaces'
+import { IProject } from 'types'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar'
 import React,{useContext} from 'react'

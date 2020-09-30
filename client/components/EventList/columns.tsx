@@ -1,6 +1,6 @@
 
 import * as helpers from 'helpers'
-import { ITimeEntry } from 'interfaces'
+import { ITimeEntry } from 'types'
 import * as React from 'react'
 import dateUtils from 'utils/date'
 import { generateColumn as col } from 'utils/generateColumn'

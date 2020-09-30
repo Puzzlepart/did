@@ -6,7 +6,7 @@ import { format } from 'office-ui-fabric-react/lib/Utilities'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { pick } from 'underscore'
-import { UsersContext } from '../UsersContext'
+import { UsersContext } from '../context'
 import styles from './BulkImportPanel.module.scss'
 import { IBulkImportPanelProps } from './types'
 

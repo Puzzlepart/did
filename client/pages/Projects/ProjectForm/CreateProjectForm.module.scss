@@ -1,5 +1,5 @@
 .root {
-  max-width: 450px;
+  max-width: 550px;
 
   .inputField {
     margin: 14px 0 0 0;
@@ -10,5 +10,9 @@
       color: rgb(96, 94, 92);
       font-size: 10px;
     }
+  }
+
+  .idPreviewText {
+    margin: 14px 0 0 0;
   }
 }

@@ -1,7 +1,7 @@
 import { CustomerLink } from 'components/CustomerLink'
 import List from 'components/List'
 import { TFunction } from 'i18next'
-import { ICustomer } from 'interfaces/ICustomer'
+import { ICustomer } from 'types/ICustomer'
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
