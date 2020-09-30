@@ -3,7 +3,7 @@ import { TFunction } from 'i18next'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { TooltipDelay, TooltipHost } from 'office-ui-fabric-react/lib/Tooltip'
-import * as React from 'react'
+import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
@@ -35,9 +35,13 @@ function getErrorMessage(code: string, t: TFunction): [string, MessageBarType] {
  */
 const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
     const { t } = useTranslation()
-    const { dispatch, selectedPeriod } = React.useContext(TimesheetContext)
+    const { dispatch, selectedPeriod } = useContext(TimesheetContext)
     let className = styles.root
     if (isMobile) className += ` ${styles.mobile}`
+    if (event.isSystemIgnored) {
+        return null
+        
+    }
     if (!event.project) {
         if (event.error) {
             const [text, type] = getErrorMessage(event.error.code, t)

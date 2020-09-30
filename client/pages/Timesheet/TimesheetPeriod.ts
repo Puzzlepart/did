@@ -90,7 +90,7 @@ export class TimesheetPeriod {
   public get events(): ITimeEntry[] {
     if (this._period) {
       return [...this._period.events]
-        .filter(event => !event.isIgnored && this.ignoredEvents.indexOf(event.id) === -1)
+        .filter(event => !event.isSystemIgnored && this.ignoredEvents.indexOf(event.id) === -1)
         .map(event => this._checkManualMatch(event))
     }
     return []

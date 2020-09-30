@@ -1,11 +1,11 @@
 import { SearchProject, UserMessage } from 'components'
-import { value as value } from 'helpers'
+import { value } from 'helpers'
 import { IProject } from 'interfaces/IProject'
 import { MessageBarButton } from 'office-ui-fabric-react/lib/Button'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { Panel } from 'office-ui-fabric-react/lib/Panel'
 import { ITimesheetContext, TimesheetContext } from 'pages/Timesheet/TimesheetContext'
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { format } from 'office-ui-fabric-react/lib/Utilities'
 import styles from './MatchEventPanel.module.scss'
@@ -17,8 +17,8 @@ import { MobileView, BrowserView } from 'react-device-detect'
 */
 export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
     const { t } = useTranslation()
-    const { dispatch } = React.useContext<ITimesheetContext>(TimesheetContext)
-    const [showPanel, setShowPanel] = React.useState<boolean>(false)
+    const { dispatch } = useContext<ITimesheetContext>(TimesheetContext)
+    const [showPanel, setShowPanel] = useState<boolean>(false)
 
     const onResolve = (project: IProject) => {
         setShowPanel(false)

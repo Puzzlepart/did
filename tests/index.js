@@ -91,33 +91,33 @@ describe('Event matching', () => {
     it('IGNORE (uppercase) in categories should set the event as ignored', () => {
       testEvent.categories.push('IGNORE')
       const event = first(eventMatching.match([testEvent]))
-      assert.strictEqual(event.systemIgnored, true)
+      assert.strictEqual(event.isSystemIgnored, true)
     })
 
     it('ignore (lowercase) in categories should set the event as ignored', () => {
       testEvent.categories.push('ignore')
       const event = first(eventMatching.match([testEvent]))
-      assert.strictEqual(event.systemIgnored, true)
+      assert.strictEqual(event.isSystemIgnored, true)
     })
 
     it('[ignore] (lowercase) in body should set the event as ignored', () => {
       testEvent.body = 'This is the body of the event [ignore]'
       const event = first(eventMatching.match([testEvent]))
-      assert.strictEqual(event.systemIgnored, true)
+      assert.strictEqual(event.isSystemIgnored, true)
     })
 
     it('[ignore] (lowercase) in body should set the event as ignored even with an event category', () => {
       testEvent.categories.push('IAM VAC')
       testEvent.categories.push('ignore')
       const event = first(eventMatching.match([testEvent]))
-      assert.strictEqual(event.systemIgnored, true)
+      assert.strictEqual(event.isSystemIgnored, true)
     })
 
     it('IAM VAC in categories takes presedence before [ignore] (lowercase) in body', () => {
       testEvent.categories.push('IAM VAC')
       testEvent.body = 'This is the body of the event [ignore]'
       const event = first(eventMatching.match([testEvent]))
-      assert.notStrictEqual(event.systemIgnored, true)
+      assert.notStrictEqual(event.isSystemIgnored, true)
     })
   })
 
