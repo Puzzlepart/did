@@ -1,7 +1,6 @@
 import gql from 'graphql-tag'
 import { ProjectModel } from './types'
 
-
 export interface ICreateOrUpdateProjectVariables {
   project: ProjectModel
   update?: boolean

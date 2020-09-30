@@ -163,7 +163,6 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
                 text={editMode ? t('common.save') : t('common.add')}
                 onClick={onFormSubmit}
                 disabled={loading || !!message} />
-            {JSON.stringify(model)}
         </div>
     )
 }
