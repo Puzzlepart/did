@@ -1,10 +1,10 @@
 require('dotenv').config()
 const fs = require('fs')
 const path = require('path')
-const StorageService = require('../services/storage')
+const AzStorageService = require('../services/azstorage')
 const log = require('debug')('tests/ensureTestData')
 
-let storage = new StorageService({
+let azstorage = new AzStorageService({
   connectionString: process.env.TESTS_AZURE_STORAGE_CONNECTION_STRING
 })
 
@@ -20,9 +20,9 @@ module.exports = () => new Promise((resolve, reject) => {
     } catch (error) {
       log('testData.json missing. Querying Azure Table Storage...')
       Promise.all([
-        storage.getProjects(),
-        storage.getCustomers(),
-        storage.getLabels()
+        azstorage.getProjects(),
+        azstorage.getCustomers(),
+        azstorage.getLabels()
       ]).then(value => {
         fs.writeFile(
           path.resolve(__dirname, 'testData.json'),

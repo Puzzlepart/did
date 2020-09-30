@@ -109,9 +109,9 @@ async function timesheet(_obj, variables, ctx) {
   )
 
   let [projects, customers, timeentries, labels] = await Promise.all([
-    ctx.services.storage.getProjects(),
-    ctx.services.storage.getCustomers(),
-    ctx.services.storage.getTimeEntries(
+    ctx.services.azstorage.getProjects(),
+    ctx.services.azstorage.getCustomers(),
+    ctx.services.azstorage.getTimeEntries(
       {
         resourceId: ctx.user.id,
         startDateTime: variables.startDateTime,
@@ -119,7 +119,7 @@ async function timesheet(_obj, variables, ctx) {
       },
       { sortAsc: true }
     ),
-    ctx.services.storage.getLabels(),
+    ctx.services.azstorage.getLabels(),
   ])
 
   projects = connectEntities(projects, customers, labels)
@@ -128,7 +128,7 @@ async function timesheet(_obj, variables, ctx) {
 
   for (let i = 0; i < periods.length; i++) {
     let period = periods[i]
-    let confirmed = await ctx.services.storage.getConfirmedPeriod(ctx.user.id, period.id)
+    let confirmed = await ctx.services.azstorage.getConfirmedPeriod(ctx.user.id, period.id)
     if (confirmed) {
       period.events = timeentries.map(entry => {
         const customerKey = first(entry.projectId.split(' '))
@@ -165,7 +165,7 @@ async function confirmPeriod(_obj, variables, ctx) {
     if (variables.period.matchedEvents.length > 0) {
       const [events, labels] = await Promise.all([
         ctx.services.msgraph.getEvents(variables.period.startDateTime, variables.period.endDateTime),
-        ctx.services.storage.getLabels(),
+        ctx.services.azstorage.getLabels(),
       ])
 
       let timeentries = variables.period.matchedEvents
@@ -182,9 +182,9 @@ async function confirmPeriod(_obj, variables, ctx) {
         })
         .filter(entry => entry)
 
-      hours = await ctx.services.storage.addTimeEntries(variables.period.id, timeentries)
+      hours = await ctx.services.azstorage.addTimeEntries(variables.period.id, timeentries)
     }
-    await ctx.services.storage.addConfirmedPeriod(variables.period.id, ctx.user.id, hours)
+    await ctx.services.azstorage.addConfirmedPeriod(variables.period.id, ctx.user.id, hours)
     return { success: true, error: null }
   } catch (error) {
     return {
@@ -196,8 +196,8 @@ async function confirmPeriod(_obj, variables, ctx) {
 
 async function unconfirmPeriod(_obj, variables, ctx) {
   try {
-    await ctx.services.storage.deleteUserTimeEntries(variables.period.id, ctx.user.id)
-    await ctx.services.storage.removeConfirmedPeriod(variables.period.id, ctx.user.id)
+    await ctx.services.azstorage.deleteUserTimeEntries(variables.period.id, ctx.user.id)
+    await ctx.services.azstorage.removeConfirmedPeriod(variables.period.id, ctx.user.id)
     return { success: true, error: null }
   } catch (error) {
     return {

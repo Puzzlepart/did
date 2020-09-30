@@ -1,10 +1,10 @@
-const StorageService = require('./storage')
+const AzStorageService = require('./azstorage')
 const MSGraphService = require('./msgraph')
 const SubscriptionService = require('./subscription')
 const TokenService = require('./tokens')
 
 module.exports = {
-  StorageService,
+  AzStorageService,
   MSGraphService,
   SubscriptionService,
   TokenService,

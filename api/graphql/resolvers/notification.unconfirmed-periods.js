@@ -12,7 +12,7 @@ module.exports = async function ({ template, ctx, locale }) {
     periods.push(...getPeriods(utils.startOfWeek(currentWeek - i), utils.endOfWeek(currentWeek - i), locale))
   }
 
-  var confirmedPeriods = await ctx.services.storage.getConfirmedPeriods({
+  var confirmedPeriods = await ctx.services.azstorage.getConfirmedPeriods({
     resourceId: ctx.user.id,
     year: utils.getYear(),
   })
