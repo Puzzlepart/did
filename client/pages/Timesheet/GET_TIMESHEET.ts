@@ -62,6 +62,7 @@ export default gql`
           color
           icon
         }
+        systemIgnored
         error {
           code
         }
