@@ -154,7 +154,6 @@ class StorageService {
       project.customerKey,
       { removeBlanks: false }
     )
-    console.log(entity)
     let result
     if (update) result = await this.tableUtil.updateEntity('Projects', entity, true)
     else result = await this.tableUtil.addAzEntity('Projects', entity)
