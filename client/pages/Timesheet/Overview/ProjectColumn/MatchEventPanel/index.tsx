@@ -4,13 +4,13 @@ import { IProject } from 'interfaces/IProject'
 import { MessageBarButton } from 'office-ui-fabric-react/lib/Button'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { Panel } from 'office-ui-fabric-react/lib/Panel'
-import { ITimesheetContext, TimesheetContext } from 'pages/Timesheet/TimesheetContext'
-import React, { useContext, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { format } from 'office-ui-fabric-react/lib/Utilities'
+import { ITimesheetContext, TimesheetContext } from 'pages/Timesheet/context'
+import React, { useContext, useState } from 'react'
+import { BrowserView, MobileView } from 'react-device-detect'
+import { useTranslation } from 'react-i18next'
 import styles from './MatchEventPanel.module.scss'
 import { IMatchEventPanelProps } from './types'
-import { MobileView, BrowserView } from 'react-device-detect'
 
 /**
  * @category Timesheet
