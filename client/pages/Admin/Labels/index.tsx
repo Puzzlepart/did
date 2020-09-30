@@ -53,8 +53,8 @@ export const Labels = () => {
                 commandBar={{
                     items: [
                         {
-                            key: 'NEW_LABEL',
-                            name: t('common.addNewLabel'),
+                            key: 'ADD_NEW_LABEL',
+                            name: t('admin.addNewLabel'),
                             iconProps: { iconName: 'Add' },
                             onClick: () => setForm({})
                         }
