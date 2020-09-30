@@ -4,6 +4,13 @@ const value = require('get-value')
 const { EVENT_ERROR } = require('./timesheet.utils')
 
 class EventMatching {
+  /**
+   * Constructs a new EventMatching class
+   * 
+   * @param {*} projects Projects
+   * @param {*} customers Customers
+   * @param {*} labels Labels
+   */
   constructor(projects, customers, labels) {
     this.projects = projects
     this.customers = customers
@@ -13,8 +20,8 @@ class EventMatching {
   /**
    * Find project suggestions using findBestMatch from string-similarity
    *
-   * @param {*} customer
-   * @param {*} projectKey
+   * @param {*} customer Customer
+   * @param {*} projectKey Project key
    */
   findProjectSuggestion(customer, projectKey) {
     try {
@@ -79,13 +86,13 @@ class EventMatching {
    * @param {*} event
    */
   matchEvent(event) {
-    let categories = event.categories.join(' ').toUpperCase()
+    let categoriesStr = event.categories.join(' ').toUpperCase()
     let inputStr = [
       event.title,
       event.body,
-      categories,
+      categoriesStr,
     ].join(' ').toUpperCase()
-    let matches = this.findProjectMatches(inputStr, categories)
+    let matches = this.findProjectMatches(inputStr, categoriesStr)
     let projectKey
     if (!isEmpty(matches)) {
       let i = 0
