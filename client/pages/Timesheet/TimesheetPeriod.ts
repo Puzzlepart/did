@@ -34,7 +34,7 @@ export interface ITimesheetPeriod {
    */
   endDateTime: string
 
-   /**
+  /**
    * Period confirmed
    */
   confirmed: boolean
@@ -88,12 +88,12 @@ export class TimesheetPeriod {
    * Local storage
    */
   private _localStorage: IPnPClientStore = new PnPClientStorage().local
-  
+
   /**
    * Storage key for events matched in UI
    */
   private _uiMatchedEventsStorageKey: string
-  
+
   /**
    * Storage key for events ignored in UI
    */
