@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from '@apollo/react-hooks'
+import { AppContext } from 'AppContext'
 import { HotkeyModal } from 'components'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import React, { useContext, useEffect, useMemo, useReducer } from 'react'
@@ -7,14 +8,21 @@ import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { ActionBar } from './ActionBar'
 import { AllocationView } from './AllocationView'
+import graphql from './graphql'
 import hotkeys from './hotkeys'
 import { Overview } from './Overview'
 import reducer from './reducer'
 import { SummaryView } from './SummaryView'
 import styles from './Timesheet.module.scss'
-import { ITimesheetContext, ITimesheetParams, ITimesheetPeriod, TimesheetContext, TimesheetPeriod, TimesheetScope, TimesheetView } from './types'
-import graphql from './graphql'
-import { AppContext } from 'AppContext'
+import {
+    ITimesheetContext,
+    ITimesheetParams,
+    ITimesheetPeriod,
+    TimesheetContext,
+    TimesheetPeriod,
+    TimesheetScope,
+    TimesheetView,
+} from './types'
 
 /**
  * @category Timesheet
