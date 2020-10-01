@@ -12,6 +12,28 @@ export interface IGroupByOption extends IContextualMenuItem {
     props: IListGroups;
 }
 
+export interface IReportsState {
+    /**
+     * Filter panel open
+     */
+    isFiltersOpen?: boolean;
+
+    /**
+     * Query
+     */
+    query?: IReportsQuery;
+
+    /**
+     * Group by
+     */
+    groupBy?: IListGroups;
+
+    /**
+     * Subset
+     */
+    subset?: any[];
+}
+
 /**
  * Get queries
  * 
