@@ -94,12 +94,21 @@ export default new (class DateUtils {
   }
 
   /**
-   * Get month name
+   * Get month name for the speicifed month index
+   * 
+   * Under 0: Subtracts {monthIndex} months from current month
+   * 0: Returns current month name
+   * Over 0: Returns the actual month with the speified index
+   * 
    *
-   * @param {number} monthNumber Month number
+   * @param {number} monthIndex Month number
+   * @param {string} format Format
    */
-  getMonthName(monthNumber: number): string {
-    return moment().locale(this._momentLocale).month(monthNumber).format('MMMM')
+  getMonthName(monthIndex?: number, format = 'MMMM'): string {
+    let m = moment().locale(this._momentLocale)
+    if (monthIndex < 0) return m.add(monthIndex, 'month').format(format)
+    else if (monthIndex === 0) return m.format(format)
+    return m.month(monthIndex).format(format)
   }
 
   /**
@@ -121,7 +130,7 @@ export default new (class DateUtils {
   ): string {
     return start
       .locale(this._momentLocale)
-      ['twix'](end.locale(this._momentLocale), { allDay: true })
+    ['twix'](end.locale(this._momentLocale), { allDay: true })
       .format(options)
       .toLowerCase()
   }

@@ -4,7 +4,7 @@ import dateUtils from 'utils/date'
 import { TFunction } from 'i18next'
 import { IContextualMenuItem } from 'office-ui-fabric-react'
 
-export interface IReportsQuery  extends IContextualMenuItem {
+export interface IReportsQuery extends IContextualMenuItem {
     variables: ITimeEntriesVariables;
 }
 
@@ -41,23 +41,29 @@ export interface IReportsState {
  */
 export const getQueries = (t: TFunction): IReportsQuery[] => ([
     {
-        key: 'PREVIOUS_MONTH',
-        text: t('common.previousMonth'),
+        key: 'lastMonth',
+        text: dateUtils.getMonthName(-1),
         iconName: 'CalendarDay',
         variables: { monthNumber: dateUtils.getMonthIndex() - 1, year: dateUtils.getYear() }
     },
     {
 
-        key: 'CURRENT_MONTH',
-        text: t('common.currentMonth'),
+        key: 'currentMonth',
+        text: dateUtils.getMonthName(0),
         iconName: 'Calendar',
         variables: { monthNumber: dateUtils.getMonthIndex(), year: dateUtils.getYear() }
     },
     {
-        key: 'CURRENT_YEAR',
+        key: 'currentYear',
         text: t('common.currentYear'),
         iconName: 'CalendarReply',
         variables: { year: dateUtils.getYear() }
+    },
+    {
+        key: 'forecast',
+        text: t('reports.forecast'),
+        iconName: 'TimeSheet',
+        variables: { forecast: true }
     }
 ])
 
@@ -109,3 +115,7 @@ export const getGroupByOptions = (t: TFunction): IGroupByOption[] => ([
         }
     }
 ])
+
+export interface IReportsParams {
+    query: string;
+}

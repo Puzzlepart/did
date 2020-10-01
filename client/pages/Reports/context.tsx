@@ -9,6 +9,11 @@ export interface IReportsContext extends IReportsState {
     loading: boolean;
 
     /**
+     * Time entries
+     */
+    timeentries: any[];
+
+    /**
      * Set state
      */
     setState: (state: IReportsState) => void;

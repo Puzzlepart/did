@@ -94,16 +94,17 @@
   "reports": {
     "generatingReportLabel": "Genererer rapport. For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene...",
     "noEntriesText": "Det er ingen bekreftede tidsoppføringer på dette tidspunktet.",
-    "selectReportText": "Velg en rapport i menyen over.",
-    "selectReportLabel": "Velg rapport"
+    "selectReportText": "Velg en rapport fra fanene ovenfor. \nVær oppmerksom på at noen rapporter kan ta flere minutter å laste inn.",
+    "selectReportLabel": "Velg rapport",
+    "forecast": "Prognose"
   },
   "common": {
     "headerTotalDuration": " ({0}t)",
     "groupBy": "Grupper etter",
     "all": "Alle",
     "none": "Ingen",
-    "previousMonth": "Forrige måned",
-    "currentMonth": "Denne måneden",
+    "previousMonth": "Forrige måned ({{monthName}})",
+    "currentMonth": "Denne måneden ({{monthName}})",
     "currentYear": "Dette året",
     "noneSelectedMessage": "Ingen valgt enda",
     "hoursCurrentMonth": "Timer denne måneden",

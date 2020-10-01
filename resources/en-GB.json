@@ -96,16 +96,17 @@
   "reports": {
     "generatingReportLabel": "Generating report. To give you the freshest results, we're generating a report from the latest data...",
     "noEntriesText": "There's no confirmed time entries at this time.",
-    "selectReportText": "Select a report from the menu above.",
-    "selectReportLabel": "Select report"
+    "selectReportText": "Select a report from the tabs above. Be aware that some reports can take several minutes to load.",
+    "selectReportLabel": "Select report",
+    "forecast": "Forecast"
   },
   "common": {
     "headerTotalDuration": " ({0}hrs)",
     "groupBy": "Group by",
     "all": "All",
     "none": "None",
-    "previousMonth": "Last month",
-    "currentMonth": "This month",
+    "previousMonth": "Last month ({{monthName}})",
+    "currentMonth": "This month ({{monthName}})",
     "currentYear": "This year",
     "noneSelectedMessage": "None selected yet",
     "hoursCurrentMonth": "Hours this month",

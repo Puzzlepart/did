@@ -1,27 +1,27 @@
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
 import { pick } from 'underscore'
 import { IReportsContext } from './context'
-import { getGroupByOptions, getQueries } from './types'
+import { getGroupByOptions } from './types'
 
-/**
- * Select query command
- *
- * @param {IReportsContext} context Reports context
- */
-const selectQueryCmd = (context: IReportsContext) => ({
-  key: 'SELECT_QUERY',
-  text: context.query?.text || context.t('reports.selectReportLabel'),
-  iconProps: { iconName: context.query?.iconName || 'ReportDocument' },
-  subMenuProps: {
-    items: getQueries(context.t).map(query => ({
-      ...pick(query, 'key', 'text'),
-      iconProps: { iconName: query.iconName },
-      canCheck: true,
-      checked: context.query?.key === query.key,
-      onClick: () => context.setState({ query }),
-    })),
-  },
-})
+// /**
+//  * Select query command
+//  *
+//  * @param {IReportsContext} context Reports context
+//  */
+// const selectQueryCmd = (context: IReportsContext) => ({
+//   key: 'SELECT_QUERY',
+//   text: context.query?.text || context.t('reports.selectReportLabel'),
+//   iconProps: { iconName: context.query?.iconName || 'ReportDocument' },
+//   subMenuProps: {
+//     items: getQueries(context.t).map(query => ({
+//       ...pick(query, 'key', 'text'),
+//       iconProps: { iconName: query.iconName },
+//       canCheck: true,
+//       checked: context.query?.key === query.key,
+//       onClick: () => context.setState({ query }),
+//     })),
+//   },
+// })
 
 /**
  * Select group by command
@@ -76,7 +76,6 @@ const openFilterPanel = (context: IReportsContext) => (!!context.query && !conte
  */
 export default (context: IReportsContext) => ({
   items: [
-    selectQueryCmd(context),
     selectGroupByCmd(context),
   ].filter(i => i),
   farItems: [

@@ -9,6 +9,9 @@ const _ = () => {
     const match = useRouteMatch()
     return (
         <Switch>
+            <Route path={`${match.path}/:query`}>
+                <Reports />
+            </Route>
             <Route path={match.path}>
                 <Reports />
             </Route>

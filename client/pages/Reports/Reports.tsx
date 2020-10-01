@@ -1,31 +1,38 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import { useQuery } from '@apollo/react-hooks'
 import { BaseFilter, CustomerFilter, FilterPanel, IFilter, ProjectFilter, ResourceFilter, UserMessage } from 'components'
 import List from 'components/List'
 import { value } from 'helpers'
-import { Pivot } from 'office-ui-fabric-react/lib/Pivot'
+import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import { Spinner } from 'office-ui-fabric-react/lib/Spinner'
 import { format } from 'office-ui-fabric-react/lib/Utilities'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useHistory, useParams } from 'react-router-dom'
+import { find, filter } from 'underscore'
 import { exportExcel } from 'utils/exportExcel'
 import columns from './columns'
 import commandBar from './commandBar'
 import { IReportsContext } from './context'
 import styles from './Reports.module.scss'
 import TIME_ENTRIES, { ITimeEntriesVariables } from './TIME_ENTRIES'
-import { IReportsState } from './types'
+import { getQueries, IReportsParams, IReportsState } from './types'
 
 /**
  * @category Reports
  */
 export const Reports = () => {
     const { t } = useTranslation()
+    const history = useHistory()
+    const params = useParams<IReportsParams>()
     const filters: BaseFilter[] = [
         new ResourceFilter('resourceName', t('common.employeeLabel')),
         new CustomerFilter('customer.name', t('common.customer')),
         new ProjectFilter('project.name', t('common.project')),
     ]
+    const queries = getQueries(t)
     const [state, setState] = useState<IReportsState>({
+        query: find(queries, q => q.key === params.query),
         groupBy: {
             fieldName: '.',
             emptyGroupName: t('common.all'),
@@ -39,13 +46,20 @@ export const Reports = () => {
             variables: state.query?.variables,
         })
 
-    const timeentries = data?.timeentries || []
+    const context: IReportsContext = useMemo(() => ({
+        ...state,
+        timeentries: data?.timeentries || [],
+        loading,
+        setState: (_state) => setState({ ...state, ..._state }),
+        onExportExcel,
+        t,
+    }), [loading, state])
 
     /**
      * On export to Excel
      */
     const onExportExcel = () => exportExcel(
-        state.subset || timeentries,
+        state.subset || context.timeentries,
         {
             columns: columns(t),
             fileName: `TimeEntries-${new Date().toDateString().split(' ').join('-')}.xlsx`,
@@ -58,58 +72,75 @@ export const Reports = () => {
      * @param {IFilter[]} filters 
      */
     const onFilterUpdated = (filters: IFilter[]) => {
-        const subset = timeentries.filter(entry => {
-            return filters.filter(f => {
+        const subset = filter(context.timeentries, entry => {
+            return filter(filters, f => {
                 const selectedKeys = f.selected.map(s => s.key)
                 return selectedKeys.indexOf(value(entry, f.key, '')) !== -1
             }).length === filters.length
         })
-        setState({ ...state, subset })
+        context.setState({ subset })
     }
 
-    const ctx: IReportsContext = useMemo(() => ({
-        ...state,
-        loading,
-        setState: (_state) => setState({ ...state, ..._state }),
-        onExportExcel,
-        t,
-    }), [loading, state])
+    /**
+     * On change query
+     * 
+     * @param {string} key Query key 
+     */
+    const onChangeQuery = (key: string) => {
+        const query = find(queries, q => q.key === key)
+        context.setState({ query })
+        history.push(`/reports/${key}`)
+    }
 
     return (
         <div className={styles.root}>
-            <Pivot>
-                {}
-                <List
-                    items={state.subset || timeentries}
-                    groups={{
-                        ...state.groupBy,
-                        totalFunc: items => {
-                            const totalDuration = (items.reduce((sum, item) => sum + item.duration, 0) as number).toFixed(0)
-                            return format(t('common.headerTotalDuration'), totalDuration)
-                        },
-                    }}
-                    columns={columns(t)}
-                    enableShimmer={loading}
-                    commandBar={commandBar(ctx)} />
-                {loading && (
-                    <Spinner
-                        className={styles.spinner}
-                        labelPosition='right'
-                        label={t('reports.generatingReportLabel')} />
-                )}
-                <UserMessage
-                    hidden={timeentries.length > 0 || loading || !state.query}
-                    text={t('reports.noEntriesText')} />
-                <UserMessage
-                    hidden={!!state.query}
-                    iconName='ReportDocument'
-                    text={t('reports.selectReportText')} />
-                <FilterPanel
-                    isOpen={state.isFiltersOpen}
-                    filters={filters}
-                    entries={timeentries}
-                    onDismiss={() => setState({ ...state, isFiltersOpen: false })}
-                    onFilterUpdated={onFilterUpdated} />
+            <Pivot
+                defaultSelectedKey={params.query || 'default'}
+                onLinkClick={item => onChangeQuery(item.props.itemKey)}>
+                {queries.map(query => (
+                    <PivotItem
+                        key={query.key}
+                        itemKey={query.key}
+                        headerText={query.text}
+                        itemIcon={query.iconName}>
+                        <div className={styles.container}>
+                            <List
+                                items={state.subset || context.timeentries}
+                                groups={{
+                                    ...state.groupBy,
+                                    totalFunc: items => {
+                                        const totalDuration = (items.reduce((sum, item) => sum + item.duration, 0) as number).toFixed(0)
+                                        return format(t('common.headerTotalDuration'), totalDuration)
+                                    },
+                                }}
+                                columns={columns(t)}
+                                enableShimmer={loading}
+                                commandBar={commandBar(context)} />
+                            {loading && (
+                                <Spinner
+                                    className={styles.spinner}
+                                    labelPosition='right'
+                                    label={t('reports.generatingReportLabel')} />
+                            )}
+                            <UserMessage
+                                hidden={context.timeentries.length > 0 || loading || !state.query}
+                                text={t('reports.noEntriesText')} />
+                            <FilterPanel
+                                isOpen={state.isFiltersOpen}
+                                filters={filters}
+                                entries={context.timeentries}
+                                onDismiss={() => context.setState({ isFiltersOpen: false })}
+                                onFilterUpdated={onFilterUpdated} />
+                        </div>
+                    </PivotItem>
+                ))}
+                <PivotItem
+                    itemKey='default'
+                    headerButtonProps={{ disabled: true }}>
+                    <div className={styles.container}>
+                        <UserMessage iconName='ReportDocument' text={t('reports.selectReportText')} />
+                    </div>
+                </PivotItem>
             </Pivot>
         </div>
     )
