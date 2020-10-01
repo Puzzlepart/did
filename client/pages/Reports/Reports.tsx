@@ -9,7 +9,7 @@ import { format } from 'office-ui-fabric-react/lib/Utilities'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
-import { find, filter } from 'underscore'
+import { find, filter, isEmpty } from 'underscore'
 import { exportExcel } from 'utils/exportExcel'
 import columns from './columns'
 import commandBar from './commandBar'
@@ -123,7 +123,7 @@ export const Reports = () => {
                                     label={t('reports.generatingReportLabel')} />
                             )}
                             <UserMessage
-                                hidden={context.timeentries.length > 0 || loading || !state.query}
+                                hidden={!isEmpty(context.timeentries) || loading || !state.query}
                                 text={t('reports.noEntriesText')} />
                             <FilterPanel
                                 isOpen={state.isFiltersOpen}
@@ -137,9 +137,9 @@ export const Reports = () => {
                 <PivotItem
                     itemKey='default'
                     headerButtonProps={{ disabled: true }}>
-                    <div className={styles.container}>
-                        <UserMessage iconName='ReportDocument' text={t('reports.selectReportText')} />
-                    </div>
+                    <UserMessage
+                        className={styles.container}
+                        iconName='ReportDocument' text={t('reports.selectReportText')} />
                 </PivotItem>
             </Pivot>
         </div>

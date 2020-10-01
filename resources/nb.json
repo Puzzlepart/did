@@ -93,8 +93,8 @@
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport. For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene...",
-    "noEntriesText": "Det er ingen bekreftede tidsoppføringer på dette tidspunktet.",
-    "selectReportText": "Velg en rapport fra fanene ovenfor. \nVær oppmerksom på at noen rapporter kan ta flere minutter å laste inn.",
+    "noEntriesText": "Det er ingen tidsoppføringer for dette tidspunktet.",
+    "selectReportText": "Velg en rapport over. \nVær oppmerksom på at noen rapporter kan ta flere minutter å laste inn.",
     "selectReportLabel": "Velg rapport",
     "forecast": "Prognose"
   },
