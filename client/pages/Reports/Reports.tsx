@@ -46,25 +46,22 @@ export const Reports = () => {
             variables: state.query?.variables,
         })
 
-    const context: IReportsContext = useMemo(() => ({
-        ...state,
-        timeentries: data?.timeentries || [],
-        loading,
-        setState: (_state) => setState({ ...state, ..._state }),
-        onExportExcel,
-        t,
-    }), [loading, state])
-
     /**
      * On export to Excel
      */
-    const onExportExcel = () => exportExcel(
-        state.subset || context.timeentries,
-        {
-            columns: columns(t),
-            fileName: `TimeEntries-${new Date().toDateString().split(' ').join('-')}.xlsx`,
-        }
-    )
+    const onExportExcel = () => {
+        const fileName = format(
+            state.query.exportFileName,
+            new Date().toDateString().split(' ').join('-')
+        )
+        exportExcel(
+            state.subset || context.timeentries,
+            {
+                columns: columns(t),
+                fileName,
+            }
+        )
+    }
 
     /**
      * On filter updated in FilterPanel
@@ -91,6 +88,17 @@ export const Reports = () => {
         context.setState({ query })
         history.push(`/reports/${key}`)
     }
+
+
+
+    const context: IReportsContext = useMemo(() => ({
+        ...state,
+        timeentries: data?.timeentries || [],
+        loading,
+        setState: (_state) => setState({ ...state, ..._state }),
+        onExportExcel,
+        t,
+    }), [loading, state])
 
     return (
         <div className={styles.root}>

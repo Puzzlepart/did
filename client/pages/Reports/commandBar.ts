@@ -53,7 +53,7 @@ const selectGroupByCmd = (context: IReportsContext) => (!!context.query && !cont
 const exportToExcelCmd = (context: IReportsContext) => (!!context.query && !context.loading) && ({
   key: 'EXPORT_TO_EXCEL',
   text: context.t('common.exportCurrentView'),
-  onClick: context.onExportExcel,
+  onClick: () => context.onExportExcel(),
   iconProps: { iconName: 'ExcelDocument' },
 })
 

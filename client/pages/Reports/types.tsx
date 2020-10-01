@@ -5,7 +5,15 @@ import { TFunction } from 'i18next'
 import { IContextualMenuItem } from 'office-ui-fabric-react'
 
 export interface IReportsQuery extends IContextualMenuItem {
+    /**
+     * Variables used for graphl query
+     */
     variables: ITimeEntriesVariables;
+
+    /**
+     * Export file name
+     */
+    exportFileName: string;
 }
 
 export interface IGroupByOption extends IContextualMenuItem {
@@ -44,26 +52,30 @@ export const getQueries = (t: TFunction): IReportsQuery[] => ([
         key: 'lastMonth',
         text: dateUtils.getMonthName(-1),
         iconName: 'CalendarDay',
-        variables: { monthNumber: dateUtils.getMonthIndex() - 1, year: dateUtils.getYear() }
+        variables: { monthNumber: dateUtils.getMonthIndex() - 1, year: dateUtils.getYear() },
+        exportFileName: `TimeEntries-${dateUtils.getMonthName(-1)}-{0}.xlsx`,
     },
     {
 
         key: 'currentMonth',
         text: dateUtils.getMonthName(0),
         iconName: 'Calendar',
-        variables: { monthNumber: dateUtils.getMonthIndex(), year: dateUtils.getYear() }
+        variables: { monthNumber: dateUtils.getMonthIndex(), year: dateUtils.getYear() },
+        exportFileName: `TimeEntries-${dateUtils.getMonthName(0)}-{0}.xlsx`,
     },
     {
         key: 'currentYear',
         text: t('common.currentYear'),
         iconName: 'CalendarReply',
-        variables: { year: dateUtils.getYear() }
+        variables: { year: dateUtils.getYear() },
+        exportFileName: `TimeEntries-${dateUtils.getYear()}-{0}.xlsx`,
     },
     {
         key: 'forecast',
         text: t('reports.forecast'),
         iconName: 'TimeSheet',
-        variables: { forecast: true }
+        variables: { forecast: true },
+        exportFileName: 'Forecast-{0}.xlsx',
     }
 ])
 
