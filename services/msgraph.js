@@ -1,5 +1,6 @@
 global.fetch = require('node-fetch')
 const TokenService = require('./tokens')
+const utils = require('../utils')
 const log = require('debug')('services/msgraph')
 const Event = require('./msgraph.event')
 
@@ -55,7 +56,7 @@ class MSGraphService {
    */
   async createOutlookCategory(category) {
     try {
-      const colorIdx = category.split('').map(c => c.charCodeAt(0)).reduce((a, b) => a + b) % 24
+      const colorIdx = utils.generateInt(category, 24)
       const content = JSON.stringify({
         displayName: category,
         color: `preset${colorIdx}`
