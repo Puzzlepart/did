@@ -33,6 +33,7 @@
     "@types/get-value": "3.0.1",
     "@types/react": "16.9.34",
     "@types/react-dom": "16.9.6",
+    "@types/react-fade-in": "0.1.0",
     "@types/react-router-dom": "5.1.5",
     "@types/recharts": "1.8.10",
     "@types/scriptjs": "0.0.2",

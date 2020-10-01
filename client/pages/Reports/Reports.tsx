@@ -104,23 +104,28 @@ export const Reports = () => {
                         headerText={query.text}
                         itemIcon={query.iconName}>
                         <div className={styles.container}>
-                            <List
-                                items={state.subset || context.timeentries}
-                                groups={{
-                                    ...state.groupBy,
-                                    totalFunc: items => {
-                                        const totalDuration = (items.reduce((sum, item) => sum + item.duration, 0) as number).toFixed(0)
-                                        return format(t('common.headerTotalDuration'), totalDuration)
-                                    },
-                                }}
-                                columns={columns(t)}
-                                enableShimmer={loading}
-                                commandBar={commandBar(context)} />
                             {loading && (
                                 <Spinner
                                     className={styles.spinner}
                                     labelPosition='right'
                                     label={t('reports.generatingReportLabel')} />
+                            )}
+                            {!loading && (
+                                <List
+                                    fadeIn={{
+                                        transitionDuration: 500,
+                                        delay: 200,
+                                    }}
+                                    items={state.subset || context.timeentries}
+                                    groups={{
+                                        ...state.groupBy,
+                                        totalFunc: items => {
+                                            const totalDuration = (items.reduce((sum, item) => sum + item.duration, 0) as number).toFixed(0)
+                                            return format(t('common.headerTotalDuration'), totalDuration)
+                                        },
+                                    }}
+                                    columns={columns(t)}
+                                    commandBar={commandBar(context)} />
                             )}
                             <UserMessage
                                 hidden={!isEmpty(context.timeentries) || loading || !state.query}
