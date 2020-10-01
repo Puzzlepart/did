@@ -5,6 +5,7 @@ const { omit, pick } = require('underscore')
 const { isBlank } = require('underscore.string')
 const { createTableService } = require('azure-storage')
 const uuidv4 = require('uuid').v4
+const log = require('debug')('services/storage')
 
 class StorageService {
   constructor(subscription) {
@@ -219,8 +220,8 @@ class StorageService {
    * Get entries from table TimeEntries
    *
    * @param {*} filterValues Filtervalues
-   * @param {*} forecast Forecast
-   * @param {*} options Options
+   * @param {*} forecast Forecast (queries table ForecastedTimeEntries)
+   * @param {*} options Options ({ sortAsc })
    */
   async getTimeEntries(filterValues, forecast, options = {}) {
     const q = this.tableUtil.query()
@@ -242,6 +243,7 @@ class StorageService {
       PartitionKey: 'resourceId',
       RowKey: 'id',
     })
+    log('Queried %d time entries from %s', result.length, tableName)
     result = result.slice().sort(({ startDateTime: a }, { startDateTime: b }) => {
       return options.sortAsc ? new Date(a) - new Date(b) : new Date(b) - new Date(a)
     })

@@ -37,6 +37,7 @@ const typeDef = gql`
       maxMonthNumber: Int
       year: Int
       currentUser: Boolean
+      forecast: Boolean
     ): [TimeEntry!]
   }
 `
@@ -46,7 +47,7 @@ async function timeentries(_obj, variables, ctx) {
   let [projects, customers, timeentries] = await Promise.all([
     ctx.services.storage.getProjects(),
     ctx.services.storage.getCustomers(),
-    ctx.services.storage.getTimeEntries(variables),
+    ctx.services.storage.getTimeEntries(variables, variables.forecast),
   ])
   let entries = timeentries.map(entry => ({
     ...entry,

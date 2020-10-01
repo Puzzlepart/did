@@ -2,11 +2,54 @@ global.fetch = require('node-fetch')
 const TokenService = require('./tokens')
 const log = require('debug')('services/graph')
 const Event = require('./graph.event')
+const { first } = require('underscore')
+const { performance, PerformanceObserver } = require('perf_hooks');
+const appInsights = require("applicationinsights");
 
 class GraphService {
-  constructor(req) {
+  /**
+   * Constructs a new GraphService
+   */
+  constructor() {
+    appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY)
+    this.observer = new PerformanceObserver((list) => {
+      const { name, duration } = first(list.getEntries())
+      appInsights.defaultClient.trackMetric({
+        name,
+        value: duration,
+      });
+    });
+    this.observer.observe({ entryTypes: ['measure'], buffered: true });
+  }
+
+  /**
+   * Initializes the Grap service
+   * 
+   * @param {*} req Request 
+   */
+  init(req) {
     this.req = req
     this.oauthToken = this.req.user.oauthToken
+    return this
+  }
+
+  /**
+   * Starts a performance mark
+   * 
+   * @param {*} measure 
+   */
+  startMark(measure) {
+    performance.mark(`${measure}-init`)
+  }
+
+  /**
+   * Ends a performance mark
+   * 
+   * @param {*} measure 
+   */
+  endMark(measure) {
+    performance.mark(`${measure}-end`)
+    performance.measure(`GraphService.${measure}`, `${measure}-init`, `${measure}-end`)
   }
 
   /**
@@ -42,13 +85,14 @@ class GraphService {
    */
   async getUsers() {
     try {
-      log('Querying Graph /users')
+      this.startMark('getUsers')
       const { value } = await this.getClient()
         .api('/users')
         .filter("userType eq 'Member'")
         .select('id', 'givenName', 'surname', 'jobTitle', 'displayName', 'mobilePhone', 'mail', 'preferredLanguage')
         .top(999)
         .get()
+      this.endMark('getUsers')
       return value
     } catch (error) {
       console.log(error.message)
@@ -71,8 +115,9 @@ class GraphService {
    */
   async createOutlookCategory(category) {
     try {
-      log('Querying Graph /me/outlook/masterCategories')
+      this.startMark('createOutlookCategory')
       const res = await this.getClient().api('/me/outlook/masterCategories').post(JSON.stringify(category))
+      this.endMark('createOutlookCategory')
       return res
     } catch (error) {
       switch (error.statusCode) {
@@ -92,8 +137,10 @@ class GraphService {
    */
   async getOutlookCategories() {
     try {
+      this.startMark('getOutlookCategories')
       log('Querying Graph /me/outlook/masterCategories')
       const { value } = await this.getClient().api('/me/outlook/masterCategories').get()
+      this.endMark('getOutlookCategories')
       return value
     } catch (error) {
       switch (error.statusCode) {
@@ -116,6 +163,7 @@ class GraphService {
    */
   async getEvents(startDateTime, endDateTime) {
     try {
+      this.startMark('getEvents')
       log(
         'Querying Graph /me/calendar/calendarView: %s',
         JSON.stringify({
@@ -131,10 +179,11 @@ class GraphService {
         .orderby('start/dateTime asc')
         .top(500)
         .get()
-      log('Retrieved %s events from /me/calendar/calendarView', value.length)
       let events = value.filter(evt => evt.subject).map(evt => new Event(evt))
       events = this.removeIgnoredEvents(events)
       events = events.filter(evt => evt.duration <= 24)
+      log('Retrieved %s events from /me/calendar/calendarView', value.length)
+      this.endMark('getEvents')
       return events
     } catch (error) {
       switch (error.statusCode) {
@@ -150,4 +199,4 @@ class GraphService {
   }
 }
 
-module.exports = GraphService
+module.exports = new GraphService()

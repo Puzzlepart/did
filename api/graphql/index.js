@@ -107,7 +107,7 @@ const createContext = async ({ req }) => {
       storage: new StorageService(subscription),
       subscription: SubscriptionService,
     }
-    if (!!req.user) services.graph = new GraphService(req)
+    if (!!req.user) services.graph = GraphService.init(req)
     return {
       services,
       user: req.user || {},
