@@ -13,9 +13,7 @@ import ADD_OR_UPDATE_ROLE from './ADD_OR_UPDATE_ROLE'
 import styles from './RolePanel.module.scss'
 import { IRolePanelProps } from './types'
 
-/**
- * @category Admin
- */
+
 export const RolePanel = (props: IRolePanelProps) => {
     const { t } = useTranslation()
     const [addOrUpdateRole] = useMutation(ADD_OR_UPDATE_ROLE)

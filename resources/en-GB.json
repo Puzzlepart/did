@@ -113,7 +113,7 @@
     "forecast": "Forecast"
   },
   "common": {
-    "headerTotalDuration": " ({0}hrs)",
+    "headerTotalDuration": " ({{duration}})",
     "groupBy": "Group by",
     "all": "All",
     "none": "None",

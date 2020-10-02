@@ -13,9 +13,6 @@ import { Roles } from './Roles'
 import { SummaryView } from './SummaryView'
 import { Users } from './Users'
 
-/**
- * @category Admin
- */
 export const Admin = () => {
     const { t } = useTranslation()
     const { hasPermission } = useContext(AppContext)

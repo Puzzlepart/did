@@ -112,7 +112,7 @@
     "forecast": "Prognose"
   },
   "common": {
-    "headerTotalDuration": " ({0}t)",
+    "headerTotalDuration": " ({{duration}})",
     "groupBy": "Grupper etter",
     "all": "Alle",
     "none": "Ingen",

@@ -15,9 +15,7 @@ import styles from './ApiTokens.module.scss'
 import DELETE_API_TOKEN from './DELETE_API_TOKEN'
 import GET_API_TOKENS from './GET_API_TOKENS'
 
-/**
- * @category Admin
- */
+
 export const ApiTokens = () => {
     const { t } = useTranslation()
     const [key, setKey] = useState(null)

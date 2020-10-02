@@ -17,6 +17,7 @@ import { IReportsContext } from './context'
 import styles from './Reports.module.scss'
 import TIME_ENTRIES, { ITimeEntriesVariables } from './TIME_ENTRIES'
 import { getQueries, IReportsParams, IReportsState } from './types'
+import dateUtils from 'utils/date'
 
 /**
  * @category Reports
@@ -128,8 +129,8 @@ export const Reports = () => {
                                     groups={{
                                         ...state.groupBy,
                                         totalFunc: items => {
-                                            const totalDuration = (items.reduce((sum, item) => sum + item.duration, 0) as number).toFixed(0)
-                                            return format(t('common.headerTotalDuration'), totalDuration)
+                                            const durationHrs = (items.reduce((sum, item) => sum + item.duration, 0) as number)
+                                            return t('common.headerTotalDuration', { duration: dateUtils.getDurationString(durationHrs, t) })
                                         },
                                     }}
                                     columns={columns(t)}

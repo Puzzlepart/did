@@ -35,7 +35,7 @@ export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
                     groupNames: selectedPeriod.weekdays(dayFormat),
                     totalFunc: (items: ITimeEntry[]) => {
                         const duration = items.reduce((sum, i) => sum + i.duration, 0)
-                        return ` (${DateUtils.getDurationDisplay(duration, t)})`
+                        return ` (${DateUtils.getDurationString(duration, t)})`
                     },
                 }}
                 additionalColumns={[

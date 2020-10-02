@@ -31,12 +31,12 @@ export const StatusBar = () => {
                     <UserMessage
                         {...defaultProps}
                         hidden={selectedPeriod.isLocked}
-                        text={format(t('timesheet.periodHoursSummaryText'), DateUtils.getDurationDisplay(selectedPeriod.totalDuration, t))}
+                        text={format(t('timesheet.periodHoursSummaryText'), DateUtils.getDurationString(selectedPeriod.totalDuration, t))}
                         iconName='ReminderTime' />
                     <UserMessage
                         {...defaultProps}
                         hidden={selectedPeriod.unmatchedDuration === 0 || selectedPeriod.isConfirmed}
-                        text={format(t('timesheet.hoursNotMatchedText'), DateUtils.getDurationDisplay(selectedPeriod.unmatchedDuration, t))}
+                        text={format(t('timesheet.hoursNotMatchedText'), DateUtils.getDurationString(selectedPeriod.unmatchedDuration, t))}
                         type={MessageBarType.warning}
                         iconName='BufferTimeBoth' />
                     <UserMessage
@@ -48,13 +48,13 @@ export const StatusBar = () => {
                     <UserMessage
                         {...defaultProps}
                         hidden={!selectedPeriod.isConfirmed}
-                        text={format(t('timesheet.periodConfirmedText'), DateUtils.getDurationDisplay(selectedPeriod.matchedDuration, t))}
+                        text={format(t('timesheet.periodConfirmedText'), DateUtils.getDurationString(selectedPeriod.matchedDuration, t))}
                         type={MessageBarType.success}
                         iconName='CheckMark' />
                     <UserMessage
                         {...defaultProps}
                         hidden={!selectedPeriod.isForecasted}
-                        text={format(t('timesheet.periodForecastedText'), DateUtils.getDurationDisplay(selectedPeriod.matchedDuration, t))}
+                        text={format(t('timesheet.periodForecastedText'), DateUtils.getDurationString(selectedPeriod.matchedDuration, t))}
                         type={MessageBarType.success}
                         iconName='CheckMark' />
                     <UserMessage

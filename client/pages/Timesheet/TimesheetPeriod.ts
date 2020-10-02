@@ -47,26 +47,26 @@ export interface ITimesheetPeriod {
   /**
    * Is there an active forecast for the period
    */
-  isForecasted: boolean;
+  isForecasted: boolean
 
   /**
    * Is the period in the future
    */
-  isForecast: boolean;
+  isForecast: boolean
 }
 
 export interface ITimesheetPeriodMatchedEvent {
-  id: string;
-  projectId: string;
-  manualMatch: boolean;
+  id: string
+  projectId: string
+  manualMatch: boolean
 }
 
 export interface ITimesheetPeriodData {
-  id: string;
-  startDateTime: string;
-  endDateTime: string;
-  matchedEvents: ITimesheetPeriodMatchedEvent[];
-  isForecast: boolean;
+  id: string
+  startDateTime: string
+  endDateTime: string
+  matchedEvents: ITimesheetPeriodMatchedEvent[]
+  isForecast: boolean
 }
 
 /**
@@ -76,7 +76,7 @@ export class TimesheetPeriod {
   public id: string
   public isConfirmed?: boolean
   public isForecasted?: boolean
-  public isForecast?: boolean;
+  public isForecast?: boolean
   public ignoredEvents: string[] = []
   private _manualMatches: ITypedHash<any> = {}
   private _month?: string
@@ -224,11 +224,14 @@ export class TimesheetPeriod {
    * Get matched events with properties id, projectId and manualMatch
    */
   private get matchedEvents(): ITimesheetPeriodMatchedEvent[] {
-    const events = filter([...this.events], event => !!event.project).map(event => ({
-      id: event.id,
-      projectId: event.project.id,
-      manualMatch: event.manualMatch,
-    } as ITimesheetPeriodMatchedEvent))
+    const events = filter([...this.events], event => !!event.project).map(
+      event =>
+        ({
+          id: event.id,
+          projectId: event.project.id,
+          manualMatch: event.manualMatch,
+        } as ITimesheetPeriodMatchedEvent)
+    )
     return events
   }
 

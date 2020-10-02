@@ -30,12 +30,12 @@ export default new (class DateUtils {
   }
 
   /**
-   * Get duration display
+   * Get duration string
    *
    * @param {number} durationHrs Duration in hours
    * @param {TFunction} t Translate function
    */
-  getDurationDisplay(durationHrs: number, t: TFunction): string {
+  getDurationString(durationHrs: number, t: TFunction): string {
     const hrsShortFormat = t('common.hoursShortFormat')
     const minShortFormat = t('common.minutesShortFormat')
     const hrs = Math.floor(durationHrs)
@@ -95,13 +95,13 @@ export default new (class DateUtils {
 
   /**
    * Get month name for the speicifed month index
-   * 
+   *
    * Under 0: Subtracts {monthIndex} months from current month
-   * 
+   *
    * 0: Returns current month name
-   * 
+   *
    * Over 0: Returns the actual month with the speified index
-   * 
+   *
    *
    * @param {number} monthIndex Month number
    * @param {string} format Format
@@ -120,15 +120,19 @@ export default new (class DateUtils {
    * @param {moment.Moment} end End
    * @param {object} options Options
    */
-  getTimespanString(start: moment.Moment, end: moment.Moment, options: object = {
-    monthFormat: 'MMMM',
-    yearFormat: 'YYYY',
-    hideYear: false,
-    implicitYear: false,
-  }): string {
+  getTimespanString(
+    start: moment.Moment,
+    end: moment.Moment,
+    options: object = {
+      monthFormat: 'MMMM',
+      yearFormat: 'YYYY',
+      hideYear: false,
+      implicitYear: false,
+    }
+  ): string {
     return start
       .locale(this._momentLocale)
-    ['twix'](end.locale(this._momentLocale), { allDay: true })
+      ['twix'](end.locale(this._momentLocale), { allDay: true })
       .format(options)
       .toLowerCase()
   }
@@ -146,7 +150,7 @@ export default new (class DateUtils {
    * Get a string representation of the moment date instance
    *
    * @param {moment.Moment} date Moment date
-   * 
+   *
    * @returns {string} Returns a ISO representation of the date without the Z
    */
   toString(date: moment.Moment): string {
@@ -162,11 +166,11 @@ export default new (class DateUtils {
 
   /**
    * Get month index
-   * 
+   *
    * 1: January
-   *  
+   *
    * 2: February
-   * 
+   *
    * etc.
    */
   getMonthIndex(): number {

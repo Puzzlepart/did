@@ -4,7 +4,7 @@ export interface ITimeEntriesVariables {
   weekNumber?: number
   monthNumber?: number
   year?: number
-  forecast?: boolean;
+  forecast?: boolean
 }
 
 /**
