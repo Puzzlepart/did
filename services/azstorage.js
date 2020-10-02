@@ -8,7 +8,7 @@ const uuidv4 = require('uuid').v4
 const log = require('debug')('services/storage')
 
 class AzStorageService {
-  
+
   constructor(subscription) {
     this.tableUtil = new AzTableUtilities(createTableService(subscription.connectionString))
     this.tables = {
@@ -319,7 +319,7 @@ class AzStorageService {
    */
   async deleteTimeEntries(periodId, resourceId, forecast) {
     const { string } = this.tableUtil.azEntGen()
-    const timeEntries = await this.getTimeEntries({ resourceId, periodId, forecast })
+    const timeEntries = await this.getTimeEntries({ resourceId, periodId }, forecast)
     if (timeEntries.length === 0) return
     const batch = this.tableUtil.createAzBatch()
     timeEntries.forEach(entry =>

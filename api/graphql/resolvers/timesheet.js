@@ -188,10 +188,10 @@ async function submitPeriod(_obj, variables, ctx) {
       hours = await ctx.services.azstorage.addTimeEntries(variables.period.id, timeentries, variables.period.isForecast)
     }
     if (variables.period.isForecast) {
-      log('Saving forecast period for %s for user %s', variables.period.id, ctx.user.id)
+      log('(submitPeriod) Saving forecast period for %s for user %s', variables.period.id, ctx.user.id)
       await ctx.services.azstorage.addForecastedPeriod(variables.period.id, ctx.user.id, hours)
     } else {
-      log('Saving confirmed period for %s for user %s', variables.period.id, ctx.user.id)
+      log('(submitPeriod) Saving confirmed period for %s for user %s', variables.period.id, ctx.user.id)
       await ctx.services.azstorage.addConfirmedPeriod(variables.period.id, ctx.user.id, hours)
     }
     return { success: true, error: null }
@@ -205,12 +205,14 @@ async function submitPeriod(_obj, variables, ctx) {
 
 async function unsubmitPeriod(_obj, variables, ctx) {
   try {
-    const { id, isForecast } = variables.period
-    await ctx.services.azstorage.deleteTimeEntries(id, ctx.user.id, isForecast)
-    if (isForecast) {
-      await ctx.services.azstorage.removeForecastedPeriod(id, ctx.user.id)
+    if (variables.period.isForecast) {
+      log('(submitPeriod) Removed forecasted time entries and period for %s for user %s', variables.period.id, ctx.user.id)
+      await ctx.services.azstorage.deleteTimeEntries(variables.period.id, ctx.user.id, true)
+      await ctx.services.azstorage.removeForecastedPeriod(variables.period.id, ctx.user.id)
     } else {
-      await ctx.services.azstorage.removeConfirmedPeriod(id, ctx.user.id)
+      log('(submitPeriod) Removed confirmed time entries and period for %s for user %s', variables.period.id, ctx.user.id)
+      await ctx.services.azstorage.deleteTimeEntries(variables.period.id, ctx.user.id, false)
+      await ctx.services.azstorage.removeConfirmedPeriod(variables.period.id, ctx.user.id)
     }
     return { success: true, error: null }
   } catch (error) {
