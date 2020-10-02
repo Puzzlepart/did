@@ -98,7 +98,7 @@
     "editLabel": "Edit label",
     "addNewRole": "Add new role",
     "roleNameLabel": "Rolename",
-    "noTimeEntriesText": "There are no recorded hours for the selected year.",
+    "noTimeEntriesText": "\nThere are no confirmed hours for the selected months in the selected year.",
     "editRole": "Edit role",
     "permissonsLabel": "Permissions",
     "generateTokenLabel": "Generate API token",

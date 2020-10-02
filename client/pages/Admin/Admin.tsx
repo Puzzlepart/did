@@ -41,8 +41,9 @@ export const Admin = () => {
                     headerText={t('admin.summary')}
                     itemIcon='CalendarWeek'>
                     <SummaryView
-                        defaultYear={moment().year()}
-                        defaultRange={3} />
+                        defaultSelectedYear={moment().year()}
+                        defaultSelectedScope='weekNumber'
+                        defaultRange={2} />
                 </PivotItem>
                 <PivotItem
                     className={styles.tab}

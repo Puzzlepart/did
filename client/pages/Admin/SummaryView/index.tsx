@@ -12,59 +12,73 @@ import { createColumns, createRows, createPeriods } from './utils'
 import styles from './SummaryView.module.scss'
 import { reducer } from './reducer'
 import TIME_ENTRIES, { ITimeEntriesVariables } from './TIME_ENTRIES'
-import { getViewTypes, ISummaryViewContext, ISummaryViewProps } from './types'
+import { getScopes, getViewTypes, ISummaryViewProps, ISummaryViewScope } from './types'
+import { ISummaryViewContext } from './context'
 
 
 export const SummaryView = (props: ISummaryViewProps): JSX.Element => {
     const { t } = useTranslation()
     const types = getViewTypes(t)
+    const scopes = getScopes(t)
     const [state, dispatch] = useReducer(reducer, {
-        year: props.defaultYear,
-        maxMonth: dateUtils.getMonthIndex(),
+        year: props.defaultSelectedYear,
+        endMonthIndex: dateUtils.getMonthIndex(),
         timeentries: [],
         range: props.defaultRange,
         type: first(types),
+        scope: first(scopes),
     })
     const { data, loading } = useQuery<any, ITimeEntriesVariables>(TIME_ENTRIES, {
         fetchPolicy: 'cache-first',
         variables: {
             year: state.year,
-            minMonthNumber: (state.maxMonth - state.range) + 1,
-            maxMonthNumber: state.maxMonth,
+            startMonthIndex: (state.endMonthIndex - state.range) + 1,
+            endMonthIndex: state.endMonthIndex,
         }
     })
 
     useEffect(() => { dispatch({ type: 'DATA_UPDATED', payload: data }) }, [data])
 
-    const contextValue: ISummaryViewContext = useMemo(() => ({
+    const columns = useMemo(() => createColumns(state, t), [state])
+    const context: ISummaryViewContext = useMemo(() => ({
         ...state,
         dispatch,
         types,
         loading,
+        t,
+        periods: createPeriods(1),
+        scopes,
+        columns,
+        rows: createRows(state, columns, t),
     }), [state, loading])
-    const periods = useMemo(() => createPeriods(1), [])
-    const columns = useMemo(() => createColumns(state, t), [state])
-    const rows = useMemo(() => createRows(state, columns, t), [state])
 
     return (
-        <Pivot
-            className={styles.root}
-            defaultSelectedKey={props.defaultYear.toString()}
-            onLinkClick={item => dispatch({ type: 'CHANGE_YEAR', payload: parseInt(item.props.itemKey) })}
-            styles={{ itemContainer: { paddingTop: 10 } }}>
-            {periods.map(itemProps => (
-                <PivotItem key={itemProps.itemKey} {...itemProps}>
-                    <List
-                        hidden={!loading && isEmpty(rows)}
-                        enableShimmer={loading}
-                        columns={columns}
-                        items={rows}
-                        commandBar={commandBar(contextValue, rows, columns, t)} />
-                    <UserMessage
-                        hidden={!isEmpty(rows) || loading}
-                        text={t('admin.noTimeEntriesText')} />
-                </PivotItem>
-            ))}
-        </Pivot>
+        <div className={styles.root}>
+            <Pivot
+                defaultSelectedKey={props.defaultSelectedYear.toString()}
+                onLinkClick={item => dispatch({ type: 'CHANGE_YEAR', payload: parseInt(item.props.itemKey) })}>
+                {context.periods.map(period => (
+                    <PivotItem key={period.itemKey} {...period}>
+                        <Pivot onLinkClick={item => dispatch({ type: 'CHANGE_SCOPE', payload: item.props as ISummaryViewScope })}>
+                            {context.scopes.map(scope => (
+                                <PivotItem key={scope.itemKey} {...scope}>
+                                    <div className={styles.container}>
+                                        <List
+                                            hidden={!loading && isEmpty(context.rows)}
+                                            enableShimmer={loading}
+                                            columns={columns}
+                                            items={context.rows}
+                                            commandBar={commandBar(context)} />
+                                        <UserMessage
+                                            hidden={!isEmpty(context.rows) || loading}
+                                            text={t('admin.noTimeEntriesText')} />
+                                    </div>
+                                </PivotItem>
+                            ))}
+                        </Pivot>
+                    </PivotItem>
+                ))}
+            </Pivot>
+        </div>
     )
 }
