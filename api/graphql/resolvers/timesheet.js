@@ -93,15 +93,7 @@ const typeDef = gql`
 async function timesheet(_obj, variables, ctx) {
   if (!ctx.services.msgraph) return { success: false, error: null }
 
-  log('Quering timesheet from %s to %s', variables.startDateTime, variables.endDateTime)
-
   let periods = getPeriods(variables.startDateTime, variables.endDateTime, variables.locale)
-
-  log(
-    'Found %s periods: %j',
-    periods.length,
-    periods.map(p => pick(p, 'id', 'startDateTime', 'endDateTime'))
-  )
 
   let [projects, customers, timeentries, labels] = await Promise.all([
     ctx.services.azstorage.getProjects(),
@@ -127,7 +119,6 @@ async function timesheet(_obj, variables, ctx) {
     period.forecastedDuration = 0
     let confirmed = await ctx.services.azstorage.getConfirmedPeriod(ctx.user.id, period.id)
     if (confirmed) {
-      log('(timesheet) Found  %d confirmed entries for user %s', timeentries.length, ctx.user.id)
       period.events = connectTimeEntries(timeentries, projects, customers, labels)
       period.matchedEvents = period.events
       period.isConfirmed = true
@@ -188,10 +179,8 @@ async function submitPeriod(_obj, variables, ctx) {
       hours = await ctx.services.azstorage.addTimeEntries(variables.period.id, timeentries, variables.period.isForecast)
     }
     if (variables.period.isForecast) {
-      log('(submitPeriod) Saving forecast period for %s for user %s', variables.period.id, ctx.user.id)
       await ctx.services.azstorage.addForecastedPeriod(variables.period.id, ctx.user.id, hours)
     } else {
-      log('(submitPeriod) Saving confirmed period for %s for user %s', variables.period.id, ctx.user.id)
       await ctx.services.azstorage.addConfirmedPeriod(variables.period.id, ctx.user.id, hours)
     }
     return { success: true, error: null }
@@ -206,11 +195,9 @@ async function submitPeriod(_obj, variables, ctx) {
 async function unsubmitPeriod(_obj, variables, ctx) {
   try {
     if (variables.period.isForecast) {
-      log('(submitPeriod) Removed forecasted time entries and period for %s for user %s', variables.period.id, ctx.user.id)
       await ctx.services.azstorage.deleteTimeEntries(variables.period.id, ctx.user.id, true)
       await ctx.services.azstorage.removeForecastedPeriod(variables.period.id, ctx.user.id)
     } else {
-      log('(submitPeriod) Removed confirmed time entries and period for %s for user %s', variables.period.id, ctx.user.id)
       await ctx.services.azstorage.deleteTimeEntries(variables.period.id, ctx.user.id, false)
       await ctx.services.azstorage.removeConfirmedPeriod(variables.period.id, ctx.user.id)
     }
