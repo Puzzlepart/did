@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 import { DurationColumn } from 'components/DurationColumn'
 import { LabelColumn } from 'components/LabelColumn'
 import { sortAlphabetically, value } from 'helpers'
@@ -6,7 +7,6 @@ import { IPivotItemProps } from 'office-ui-fabric-react'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import * as React from 'react'
 import { first, unique } from 'underscore'
-import { capitalize } from 'underscore.string'
 import { moment } from 'utils/date'
 import { generateColumn as col } from 'utils/generateColumn'
 import { ISummaryViewRow, ISummaryViewState } from './types'
@@ -18,26 +18,21 @@ import { ISummaryViewRow, ISummaryViewState } from './types'
  * @param {TFunction} t Translate function
  */
 export function createColumns(state: ISummaryViewState, t: TFunction): IColumn[] {
-    const data = unique(
-        state.timeentries.map(e => e.monthNumber), m => m
-    ).sort((a, b) => a - b)
+    let uniqueColumnValues: any[] = unique(state.timeentries.map(e => value(e, state.scope.fieldName)), m => m)
+    uniqueColumnValues = uniqueColumnValues.sort((a: number, b: number) => a - b)
 
     const onRender = (row: any, _index: number, col: IColumn) => (
         <DurationColumn row={row} column={col} />
     )
 
-    let columns = data.map(key => ({
+    const columns = uniqueColumnValues.map(key => ({
         key: key,
         fieldName: key,
-        name: capitalize(moment().month(key - 1).format('MMMM')),
+        name: state.scope.getColumnHeader(key),
         minWidth: 70,
         maxWidth: 70,
         onRender,
     }))
-
-    if (state.range < columns.length) {
-        columns = columns.splice(data.length - state.range)
-    }
 
     return [
         col(
@@ -82,7 +77,7 @@ export const createRows = (state: ISummaryViewState, columns: IColumn[], t: TFun
         const rowEntries = state.timeentries.filter(e => value(e, state.type.fieldName, null) === label)
         return _columns.reduce((obj, col) => {
             const sum = [...rowEntries]
-                .filter(e => e.monthNumber === col.fieldName)
+                .filter(e => value(e, state.scope.fieldName) === col.fieldName)
                 .reduce((sum, { duration }) => sum + duration, 0)
             switch (state.type.key) {
                 case 'project': {
@@ -97,16 +92,16 @@ export const createRows = (state: ISummaryViewState, columns: IColumn[], t: TFun
             return obj
         }, { sum: 0 } as ISummaryViewRow)
     })
-    const totalRow: ISummaryViewRow = _columns.reduce((obj, col) => {
-        const sum = [...state.timeentries]
-            .filter(e => e.monthNumber === col.fieldName)
-            .reduce((sum, { duration }) => sum + duration, 0)
-        obj[col.fieldName] = sum
-        obj.sum += sum
-        return obj
-    }, { label: t('common.sumLabel'), sum: 0 })
-
-    rows.push(totalRow)
+    rows.push(
+        _columns.reduce((obj, col) => {
+            const sum = [...state.timeentries]
+                .filter(e => value(e, state.scope.fieldName) === col.fieldName)
+                .reduce((sum, { duration }) => sum + duration, 0)
+            obj[col.fieldName] = sum
+            obj.sum += sum
+            return obj
+        }, { label: t('common.sumLabel'), sum: 0 })
+    )
 
     return rows
 }
@@ -117,11 +112,15 @@ export const createRows = (state: ISummaryViewState, columns: IColumn[], t: TFun
  *
  * @param {number} range Range (default: 0)
  */
-export function createPeriods(range = 0): IPivotItemProps[] {
+export function createPeriods(range: number = 0): IPivotItemProps[] {
     const periods = []
     for (let i = range; i >= 0; i--) {
         const key = (moment().year() - i).toString()
-        periods.push({ key, itemKey: key, headerText: key })
+        periods.push({
+            key,
+            itemKey: key,
+            headerText: key,
+        })
     }
     return periods
 }

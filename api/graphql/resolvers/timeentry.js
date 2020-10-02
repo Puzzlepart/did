@@ -35,8 +35,8 @@ const typeDef = gql`
       resourceId: String
       weekNumber: Int
       monthNumber: Int
-      minMonthNumber: Int
-      maxMonthNumber: Int
+      startMonthIndex: Int
+      endMonthIndex: Int
       year: Int
       currentUser: Boolean
       forecast: Boolean
