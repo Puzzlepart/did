@@ -133,10 +133,10 @@ async function timesheet(_obj, variables, ctx) {
       period.confirmedDuration = confirmed.hours
     } else {
       if (period.isForecast) {
-        let forecasted = await ctx.services.storage.getForecastedPeriod(ctx.user.id, period.id)
+        let forecasted = await ctx.services.azstorage.getForecastedPeriod(ctx.user.id, period.id)
         period.isForecasted = !!forecasted
         if (period.isForecasted) {
-          let timeentries = await ctx.services.storage.getTimeEntries(
+          let timeentries = await ctx.services.azstorage.getTimeEntries(
             {
               resourceId: ctx.user.id,
               startDateTime: variables.startDateTime,
@@ -150,7 +150,7 @@ async function timesheet(_obj, variables, ctx) {
         }
       }
       if (!period.events) {
-        period.events = await ctx.services.graph.getEvents(period.startDateTime, period.endDateTime)
+        period.events = await ctx.services.msgraph.getEvents(period.startDateTime, period.endDateTime)
       }
       period.events = eventMatching.match(period.events)
       period.matchedEvents = period.events.filter(evt => evt.project)

@@ -34,7 +34,7 @@ async function outlookCategories(_obj, _variables, ctx) {
 
 async function createOutlookCategory(_obj, variables, ctx) {
   try {
-    const category = await ctx.services.graph.createOutlookCategory(variables.category)
+    const category = await ctx.services.msgraph.createOutlookCategory(variables.category)
     return { success: true, error: null }
   } catch (error) {
     return {

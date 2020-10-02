@@ -303,7 +303,7 @@ export class TimesheetPeriod {
 
   /**
    * Get weekdays in the specified format
-   * 
+   *
    * @param {string} dayFormat Day format
    */
   public weekdays(dayFormat = 'dddd DD'): string[] {
