@@ -51,12 +51,12 @@ export const StatusBar = () => {
                         text={format(t('timesheet.periodConfirmedText'), DateUtils.getDurationDisplay(selectedPeriod.matchedDuration, t))}
                         type={MessageBarType.success}
                         iconName='CheckMark' />
-                        <UserMessage
-                            {...defaultProps}
-                            hidden={!selectedPeriod.isForecasted}
-                            text={format(t('timesheet.periodForecastedText'), DateUtils.getDurationDisplay(selectedPeriod.matchedDuration, t))}
-                            type={MessageBarType.success}
-                            iconName='CheckMark' />
+                    <UserMessage
+                        {...defaultProps}
+                        hidden={!selectedPeriod.isForecasted}
+                        text={format(t('timesheet.periodForecastedText'), DateUtils.getDurationDisplay(selectedPeriod.matchedDuration, t))}
+                        type={MessageBarType.success}
+                        iconName='CheckMark' />
                     <UserMessage
                         {...defaultProps}
                         hidden={selectedPeriod.ignoredEvents.length === 0 || selectedPeriod.isLocked}

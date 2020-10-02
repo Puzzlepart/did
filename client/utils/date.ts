@@ -32,14 +32,14 @@ export default new (class DateUtils {
   /**
    * Get duration display
    *
-   * @param {number} duration Duration
+   * @param {number} durationHrs Duration in hours
    * @param {TFunction} t Translate function
    */
-  getDurationDisplay(duration: number, t?: TFunction): string {
-    const hrsShortFormat = t ? t('common.hoursShortFormat') : '{0}h'
-    const minShortFormat = t ? t('common.minutesShortFormat') : '{0}min'
-    const hrs = Math.floor(duration)
-    const mins = parseInt(((duration % 1) * 60).toFixed(0))
+  getDurationDisplay(durationHrs: number, t: TFunction): string {
+    const hrsShortFormat = t('common.hoursShortFormat')
+    const minShortFormat = t('common.minutesShortFormat')
+    const hrs = Math.floor(durationHrs)
+    const mins = parseInt(((durationHrs % 1) * 60).toFixed(0))
     const hrsStr = format(hrsShortFormat, hrs)
     const minStr = format(minShortFormat, mins)
     if (mins === 0) return hrsStr
@@ -48,7 +48,7 @@ export default new (class DateUtils {
   }
 
   /**
-   * Format date
+   * Format date with the specified date format
    *
    * @param {string} date Date string
    * @param {string} dateFormat Date format
@@ -97,14 +97,16 @@ export default new (class DateUtils {
    * Get month name for the speicifed month index
    * 
    * Under 0: Subtracts {monthIndex} months from current month
+   * 
    * 0: Returns current month name
+   * 
    * Over 0: Returns the actual month with the speified index
    * 
    *
    * @param {number} monthIndex Month number
    * @param {string} format Format
    */
-  getMonthName(monthIndex?: number, format = 'MMMM'): string {
+  getMonthName(monthIndex?: number, format: string = 'MMMM'): string {
     let m = moment().locale(this._momentLocale)
     if (monthIndex < 0) return m.add(monthIndex, 'month').format(format)
     else if (monthIndex === 0) return m.format(format)
@@ -118,16 +120,12 @@ export default new (class DateUtils {
    * @param {moment.Moment} end End
    * @param {object} options Options
    */
-  getTimespanString(
-    start: moment.Moment,
-    end: moment.Moment,
-    options: object = {
-      monthFormat: 'MMMM',
-      yearFormat: 'YYYY',
-      hideYear: false,
-      implicitYear: false,
-    }
-  ): string {
+  getTimespanString(start: moment.Moment, end: moment.Moment, options: object = {
+    monthFormat: 'MMMM',
+    yearFormat: 'YYYY',
+    hideYear: false,
+    implicitYear: false,
+  }): string {
     return start
       .locale(this._momentLocale)
     ['twix'](end.locale(this._momentLocale), { allDay: true })
@@ -136,18 +134,22 @@ export default new (class DateUtils {
   }
 
   /**
-   * Get month names
+   * Get month names 0-11
    */
   getMonthNames(): string[] {
-    return Array.apply(0, Array(12)).map((_: any, i: number) => capitalize(moment().month(i).format('MMMM')))
+    return Array.apply(0, Array(12)).map((_: any, i: number) => {
+      return capitalize(moment().month(i).format('MMMM'))
+    })
   }
 
   /**
    * Get a string representation of the moment date instance
    *
    * @param {moment.Moment} date Moment date
+   * 
+   * @returns {string} Returns a ISO representation of the date without the Z
    */
-  toString(date: moment.Moment) {
+  toString(date: moment.Moment): string {
     return date.toISOString().replace('Z', '')
   }
 
@@ -160,6 +162,12 @@ export default new (class DateUtils {
 
   /**
    * Get month index
+   * 
+   * 1: January
+   *  
+   * 2: February
+   * 
+   * etc.
    */
   getMonthIndex(): number {
     return moment().month() + 1
