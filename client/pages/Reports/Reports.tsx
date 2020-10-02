@@ -96,6 +96,8 @@ export const Reports = () => {
         t,
     }), [loading, state])
 
+    const items = state.subset || context.timeentries
+
     return (
         <div className={styles.root}>
             <Pivot
@@ -114,13 +116,13 @@ export const Reports = () => {
                                     labelPosition='right'
                                     label={t('reports.generatingReportLabel')} />
                             )}
-                            {!loading && (
+                            {(!loading && !isEmpty(context.timeentries)) && (
                                 <List
                                     fadeIn={{
                                         transitionDuration: 500,
                                         delay: 200,
                                     }}
-                                    items={state.subset || context.timeentries}
+                                    items={items}
                                     groups={{
                                         ...state.groupBy,
                                         totalFunc: items => {

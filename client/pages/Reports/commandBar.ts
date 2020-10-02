@@ -36,7 +36,7 @@ const exportToExcelCmd = (context: IReportsContext) =>
   !!context.query &&
   !context.loading && {
     key: 'EXPORT_TO_EXCEL',
-    text: context.t('common.exportCurrentView'),
+    text: context.t('reports.exportToExcel'),
     onClick: () => context.onExportExcel(),
     iconProps: { iconName: 'ExcelDocument' },
   }

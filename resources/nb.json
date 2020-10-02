@@ -114,7 +114,8 @@
     "noEntriesText": "Det er ingen tidsoppføringer for dette tidspunktet.",
     "selectReportText": "Velg en rapport over. \nVær oppmerksom på at noen rapporter kan ta flere minutter å laste inn.",
     "selectReportLabel": "Velg rapport",
-    "forecast": "Prognose"
+    "forecast": "Prognose",
+    "exportToExcel": "Eksporter til Excel"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",

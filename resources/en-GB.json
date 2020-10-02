@@ -115,7 +115,8 @@
     "noEntriesText": "There's no time entries at this time.",
     "selectReportText": "Select a report above. Be aware that some reports can take several minutes to load.",
     "selectReportLabel": "Select report",
-    "forecast": "Forecast"
+    "forecast": "Forecast",
+    "exportToExcel": "Export to Excel"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",
