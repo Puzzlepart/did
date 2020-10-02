@@ -65,29 +65,52 @@ export const CHANGE_PERIOD = ({ periods, loading, selectedPeriod, dispatch }: IT
 }
 
 export const CONFIRM_ACTIONS = (context: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
-    key: 'CONFIRM_HOURS',
+    key: 'CONFIRM_ACTIONS',
     onRender: () => {
-        const { isForecast, isForecasted, isConfirmed, unmatchedDuration } = context.selectedPeriod
-        if (isForecast && isForecasted || !isForecast && isConfirmed) {
+        if (context.selectedPeriod.isForecast) return null
+        if (context.selectedPeriod.isConfirmed) {
             return (
                 <DefaultButton
                     disabled={!!context.loading}
                     iconProps={{ iconName: 'Cancel' }}
                     onClick={context.onUnsubmitPeriod}
-                    text={isForecast
-                        ? t('timesheet.unforecastHoursText')
-                        : t('timesheet.unconfirmHoursText')}
+                    text={t('timesheet.unconfirmHoursText')}
                     styles={{ root: { height: 44, marginLeft: 4 } }} />
             )
         }
         return (
             <PrimaryButton
-                disabled={!!context.loading || unmatchedDuration > 0}
-                iconProps={{ iconName: isForecast ? 'BufferTimeBefore' : 'CheckMark' }}
+                disabled={!!context.loading || context.selectedPeriod.unmatchedDuration > 0}
+                iconProps={{ iconName: 'CheckMark' }}
                 onClick={context.onSubmitPeriod}
-                text={isForecast
-                    ? t('timesheet.forecastHoursText')
-                    : t('timesheet.confirmHoursText')}
+                text={t('timesheet.confirmHoursText')}
+                styles={{ root: { height: 44, marginLeft: 4 } }} />
+        )
+    }
+})
+
+
+
+export const FORECAST_ACTIONS = (context: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
+    key: 'FORECAST_ACTIONS',
+    onRender: () => {
+        if (!context.selectedPeriod.isForecast) return null
+        if (context.selectedPeriod.isForecasted) {
+            return (
+                <DefaultButton
+                    disabled={!!context.loading}
+                    iconProps={{ iconName: 'Cancel' }}
+                    onClick={context.onUnsubmitPeriod}
+                    text={t('timesheet.unforecastHoursText')}
+                    styles={{ root: { height: 44, marginLeft: 4 } }} />
+            )
+        }
+        return (
+            <PrimaryButton
+                disabled={!!context.loading}
+                iconProps={{ iconName: 'BufferTimeBefore' }}
+                onClick={context.onSubmitPeriod}
+                text={t('timesheet.forecastHoursText')}
                 styles={{ root: { height: 44, marginLeft: 4 } }} />
         )
     }

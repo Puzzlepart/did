@@ -15,7 +15,10 @@ export const ActionBar = () => {
         commands.WEEK_PICKER(),
         ...commands.CHANGE_PERIOD(context, t),
     ]
-    const farItems = [commands.CONFIRM_ACTIONS(context, t)]
+    const farItems = [
+        commands.CONFIRM_ACTIONS(context, t),
+        commands.FORECAST_ACTIONS(context, t)
+    ]
 
     return (
         <CommandBar
