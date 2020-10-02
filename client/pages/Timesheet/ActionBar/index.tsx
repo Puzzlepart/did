@@ -12,8 +12,8 @@ export const ActionBar = () => {
         commands.GO_TO_CURRENT_WEEK(context, t),
         commands.GO_TO_PREV_WEEK(context, t),
         commands.GO_TO_NEXT_WEEK(context, t),
-        commands.WEEK_PICKER(),
-        ...commands.CHANGE_PERIOD(context, t),
+        commands.WEEK_PICKER(context, t),
+        ...commands.SELECT_PERIOD(context, t),
     ]
     const farItems = [
         commands.CONFIRM_ACTIONS(context, t),

@@ -12,8 +12,8 @@ const unsubmitPeriod = gql`
 `
 
 const submitPeriod = gql`
-  mutation($entries: [TimeEntryInput!], $period: TimesheetPeriodInput!) {
-    result: submitPeriod(entries: $entries, period: $period) {
+  mutation($period: TimesheetPeriodInput!) {
+    result: submitPeriod(period: $period) {
       success
       error {
         message
