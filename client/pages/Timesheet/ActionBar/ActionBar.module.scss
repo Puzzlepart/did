@@ -12,6 +12,10 @@
     outline: none;
     color: rgb(50, 49, 48);
     font-weight: normal;
+
+    &[class*='is-disabled'] {
+      opacity: 0.4;
+    }
   }
 
   .unconfirmButton {

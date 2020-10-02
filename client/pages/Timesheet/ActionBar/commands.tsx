@@ -79,9 +79,9 @@ export const CONFIRM_ACTIONS = (context: ITimesheetContext, t: TFunction): ICont
                     styles={buttonStyles} />
             )
         }
-        if(context.selectedPeriod.unmatchedDuration > 0) return null
         return (
             <PrimaryButton
+                disabled={context.selectedPeriod.unmatchedDuration > 0}
                 iconProps={{ iconName: 'CheckMark' }}
                 onClick={context.onSubmitPeriod}
                 text={t('timesheet.confirmHoursText')}
