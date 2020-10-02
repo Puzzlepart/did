@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable prefer-const */
 import { dateAdd, IPnPClientStore, ITypedHash, PnPClientStorage } from '@pnp/common'
 import { TFunction } from 'i18next'
@@ -306,7 +307,7 @@ export class TimesheetPeriod {
    *
    * @param {string} dayFormat Day format
    */
-  public weekdays(dayFormat = 'dddd DD'): string[] {
+  public weekdays(dayFormat: string = 'dddd DD'): string[] {
     if (!this._startDateTime) return []
     return dateUtils.getDays(this._startDateTime, this._endDateTime, dayFormat)
   }
@@ -319,6 +320,13 @@ export class TimesheetPeriod {
       .split('_')
       .filter(p => p)
       .join('/')
+  }
+
+  /**
+   * Period is complete meaning all events are matched
+   */
+  public get isComplete(): boolean {
+    return this.unmatchedDuration === 0
   }
 
   /**

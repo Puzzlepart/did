@@ -31,7 +31,7 @@ export const StatusBar = () => {
             iconName: 'ReminderTime'
         },
         {
-            hidden: selectedPeriod.unmatchedDuration === 0 || selectedPeriod.isConfirmed || selectedPeriod.isForecast,
+            hidden: selectedPeriod.isComplete || selectedPeriod.isConfirmed || selectedPeriod.isForecast,
             text: t(
                 'timesheet.hoursNotMatchedText',
                 { hours: dateUtils.getDurationString(selectedPeriod.unmatchedDuration, t) }
@@ -40,7 +40,7 @@ export const StatusBar = () => {
             iconName: 'BufferTimeBoth'
         },
         {
-            hidden: selectedPeriod.unmatchedDuration > 0 || selectedPeriod.isLocked,
+            hidden: !selectedPeriod.isComplete || selectedPeriod.isLocked,
             text: t('timesheet.allHoursMatchedText'),
             type: MessageBarType.success,
             iconName: 'BufferTimeBoth'
