@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
 export interface ITimeEntriesVariables {
-  startDateTime?: string;
-  endDateTime?: string;
+  startDateTime?: string
+  endDateTime?: string
   weekNumber?: number
   monthNumber?: number
   year?: number
@@ -11,21 +11,21 @@ export interface ITimeEntriesVariables {
 
 export default gql`
   query(
-    $startDateTime: String,
-    $endDateTime: String,
-    $weekNumber: Int, 
-    $monthNumber: Int, 
-    $year: Int, 
+    $startDateTime: String
+    $endDateTime: String
+    $weekNumber: Int
+    $monthNumber: Int
+    $year: Int
     $forecast: Boolean
-    ) {
+  ) {
     timeentries(
-      startDateTime: $startDateTime,
-      endDateTime: $endDateTime,
-      weekNumber: $weekNumber, 
-      monthNumber: $monthNumber, 
-      year: $year, 
+      startDateTime: $startDateTime
+      endDateTime: $endDateTime
+      weekNumber: $weekNumber
+      monthNumber: $monthNumber
+      year: $year
       forecast: $forecast
-      ) {
+    ) {
       title
       duration
       startDateTime
