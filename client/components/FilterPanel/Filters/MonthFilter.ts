@@ -3,7 +3,6 @@ import { unique, contains, indexOf } from 'underscore'
 import dateUtils from 'utils/date'
 import { BaseFilter, IFilter } from './BaseFilter'
 
-
 export class MonthFilter extends BaseFilter {
   constructor(public fieldName: string, public name: string) {
     super(fieldName)

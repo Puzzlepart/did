@@ -180,7 +180,7 @@ class AzTableUtilities {
   convertToAzEntity(rowKey, values, partitionKey = 'Default', options = { removeBlanks: true }) {
     const { string, datetime, double, int, boolean } = this.azEntGen()
     const entity = Object.keys(values)
-      .filter(key => options.removeBlanks ? !isBlank(values[key]) : true)
+      .filter(key => (options.removeBlanks ? !isBlank(values[key]) : true))
       .reduce(
         (obj, key) => {
           let value
@@ -210,7 +210,7 @@ class AzTableUtilities {
           RowKey: string(rowKey),
         }
       )
-    return omit(entity, ({ _ }) => options.removeBlanks ? isBlank(_) : false)
+    return omit(entity, ({ _ }) => (options.removeBlanks ? isBlank(_) : false))
   }
 
   /**

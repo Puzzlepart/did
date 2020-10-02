@@ -139,7 +139,7 @@ class StorageService {
    * @param project Project data
    * @param createdBy Created by ID
    * @param update Update the existing project
-   * 
+   *
    * @returns The id of the crated project
    */
   async createOrUpdateProject(project, createdBy, update) {
@@ -284,9 +284,9 @@ class StorageService {
           labels: labels.join('|'),
         },
         user.id,
-        { 
-          removeBlanks:true,
-          dateFields: ['startDateTime', 'endDateTime'] 
+        {
+          removeBlanks: true,
+          dateFields: ['startDateTime', 'endDateTime'],
         }
       )
       return entity

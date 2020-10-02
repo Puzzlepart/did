@@ -2,9 +2,7 @@ import { IProgressIndicatorProps } from 'office-ui-fabric-react/lib/ProgressIndi
 import { TimesheetPeriod } from './TimesheetPeriod'
 import { TimesheetScope } from './TimesheetScope'
 
-
 export type TimesheetView = 'overview' | 'summary' | 'allocation'
-
 
 export interface ITimesheetState {
   periods: TimesheetPeriod[]

@@ -2,7 +2,6 @@ import { ICustomer } from './ICustomer'
 import { IProject } from './IProject'
 import { IEntityLabel } from './IEntityLabel'
 
-
 export interface ITimeEntry {
   id: string
   key: string

@@ -1,7 +1,6 @@
 import { ICustomer, IOutlookCategory } from '.'
 import { IEntityLabel } from './IEntityLabel'
 
-
 export interface IProject {
   id?: string
   key: string

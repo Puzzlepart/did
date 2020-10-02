@@ -2,7 +2,7 @@ import { ICommandBarProps } from 'office-ui-fabric-react/lib/CommandBar'
 import { CheckboxVisibility, IColumn, IDetailsGroupRenderProps, IDetailsHeaderProps, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { ISearchBoxProps } from 'office-ui-fabric-react/lib/SearchBox'
 import { IRenderFunction } from 'office-ui-fabric-react/lib/Utilities'
-import {FadeInProps} from 'react-fade-in'
+import { FadeInProps } from 'react-fade-in'
 
 export interface IListProps<T = any> {
     items: T[];

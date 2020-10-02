@@ -3,8 +3,8 @@ const TokenService = require('./tokens')
 const log = require('debug')('services/graph')
 const Event = require('./graph.event')
 const { first } = require('underscore')
-const { performance, PerformanceObserver } = require('perf_hooks');
-const appInsights = require("applicationinsights");
+const { performance, PerformanceObserver } = require('perf_hooks')
+const appInsights = require('applicationinsights')
 
 class GraphService {
   /**
@@ -12,20 +12,20 @@ class GraphService {
    */
   constructor() {
     appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY)
-    this.observer = new PerformanceObserver((list) => {
+    this.observer = new PerformanceObserver(list => {
       const { name, duration } = first(list.getEntries())
       appInsights.defaultClient.trackMetric({
         name,
         value: duration,
-      });
-    });
-    this.observer.observe({ entryTypes: ['measure'], buffered: true });
+      })
+    })
+    this.observer.observe({ entryTypes: ['measure'], buffered: true })
   }
 
   /**
    * Initializes the Grap service
-   * 
-   * @param {*} req Request 
+   *
+   * @param {*} req Request
    */
   init(req) {
     this.req = req
@@ -35,8 +35,8 @@ class GraphService {
 
   /**
    * Starts a performance mark
-   * 
-   * @param {*} measure 
+   *
+   * @param {*} measure
    */
   startMark(measure) {
     performance.mark(`${measure}-init`)
@@ -44,8 +44,8 @@ class GraphService {
 
   /**
    * Ends a performance mark
-   * 
-   * @param {*} measure 
+   *
+   * @param {*} measure
    */
   endMark(measure) {
     performance.mark(`${measure}-end`)
@@ -116,10 +116,14 @@ class GraphService {
   async createOutlookCategory(category) {
     try {
       this.startMark('createOutlookCategory')
-      const colorIdx = category.split('').map(c => c.charCodeAt(0)).reduce((a, b) => a + b) % 24
+      const colorIdx =
+        category
+          .split('')
+          .map(c => c.charCodeAt(0))
+          .reduce((a, b) => a + b) % 24
       const content = JSON.stringify({
         displayName: category,
-        color: `preset${colorIdx}`
+        color: `preset${colorIdx}`,
       })
       const client = this.getClient()
       const res = await client.api('/me/outlook/masterCategories').post(content)

@@ -187,10 +187,10 @@ async function submitPeriod(_obj, variables, ctx) {
       hours = await ctx.services.storage.addTimeEntries(variables.period.id, timeentries, variables.period.isForecast)
     }
     if (variables.period.isForecast) {
-      log('Saving forecast period for %s for user %s', variables.period.id,  ctx.user.id)
+      log('Saving forecast period for %s for user %s', variables.period.id, ctx.user.id)
       await ctx.services.storage.addForecastedPeriod(variables.period.id, ctx.user.id, hours)
     } else {
-      log('Saving confirmed period for %s for user %s', variables.period.id,  ctx.user.id)
+      log('Saving confirmed period for %s for user %s', variables.period.id, ctx.user.id)
       await ctx.services.storage.addConfirmedPeriod(variables.period.id, ctx.user.id, hours)
     }
     return { success: true, error: null }

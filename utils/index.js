@@ -114,7 +114,7 @@ module.exports = {
    *
    * @param {*} date Date
    */
-  isAfterToday: (date) => {
+  isAfterToday: date => {
     return moment(date).isAfter(moment())
   },
 

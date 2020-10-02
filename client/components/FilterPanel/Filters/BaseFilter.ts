@@ -1,9 +1,7 @@
-
 export interface IFilterItem {
   key: string | number
   value: string
 }
-
 
 export interface IFilter {
   key: string
@@ -11,7 +9,6 @@ export interface IFilter {
   items: IFilterItem[]
   selected: IFilterItem[]
 }
-
 
 export abstract class BaseFilter {
   public name: string

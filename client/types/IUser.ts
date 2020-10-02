@@ -1,7 +1,6 @@
 import { ISubscription } from './ISubscription'
 import { IRole } from './IRole'
 
-
 export interface IUser {
   id?: string
   displayName?: string
