@@ -15,10 +15,9 @@ import { exportExcel } from 'utils/exportExcel'
 import columns from './columns'
 import commandBar from './commandBar'
 import { IReportsContext } from './context'
+import { ITimeEntriesVariables, TIME_ENTRIES } from './graphql'
 import styles from './Reports.module.scss'
-import TIME_ENTRIES, { ITimeEntriesVariables } from './TIME_ENTRIES'
 import { getQueries, IReportsParams, IReportsState } from './types'
-
 
 export const Reports = () => {
     const { t } = useTranslation()

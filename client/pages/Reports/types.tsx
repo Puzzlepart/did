@@ -1,5 +1,5 @@
 import { IListGroups } from 'components/List/types'
-import { ITimeEntriesVariables } from './TIME_ENTRIES'
+import { ITimeEntriesVariables } from './graphql'
 import dateUtils from 'utils/date'
 import { TFunction } from 'i18next'
 import { IContextualMenuItem } from 'office-ui-fabric-react'
@@ -32,12 +32,12 @@ export interface IReportsState {
     query?: IReportsQuery;
 
     /**
-     * Group by
+     * Group by properties
      */
     groupBy?: IListGroups;
 
     /**
-     * Subset
+     * Filtered subset
      */
     subset?: any[];
 }

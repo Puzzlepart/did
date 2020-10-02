@@ -9,7 +9,7 @@ export interface ITimeEntriesVariables {
   forecast?: boolean
 }
 
-export default gql`
+export const TIME_ENTRIES = gql`
   query(
     $startDateTime: String
     $endDateTime: String
