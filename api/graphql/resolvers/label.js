@@ -43,13 +43,13 @@ const typeDef = gql`
 `
 
 async function labels(_obj, _variables, ctx) {
-  let labels = await ctx.services.storage.getLabels()
+  let labels = await ctx.services.azstorage.getLabels()
   return labels
 }
 
 async function addOrUpdateLabel(_obj, variables, ctx) {
   try {
-    await ctx.services.storage.addOrUpdateLabel(variables.label, ctx.user.id, variables.update)
+    await ctx.services.azstorage.addOrUpdateLabel(variables.label, ctx.user.id, variables.update)
     return { success: true, error: null }
   } catch (error) {
     return {
@@ -61,7 +61,7 @@ async function addOrUpdateLabel(_obj, variables, ctx) {
 
 async function updateLabel(_obj, variables, ctx) {
   try {
-    await ctx.services.storage.updateLabel(variables.label)
+    await ctx.services.azstorage.updateLabel(variables.label)
     return { success: true, error: null }
   } catch (error) {
     return {
@@ -73,7 +73,7 @@ async function updateLabel(_obj, variables, ctx) {
 
 async function deleteLabel(_obj, variables, ctx) {
   try {
-    await ctx.services.storage.deleteLabel(variables.name)
+    await ctx.services.azstorage.deleteLabel(variables.name)
     return { success: true, error: null }
   } catch (error) {
     return {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 
 import { UserMessage } from 'components/UserMessage'
 import { IUserMessageProps } from 'components/UserMessage/IUserMessageProps'
@@ -5,8 +6,7 @@ import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { Shimmer } from 'office-ui-fabric-react/lib/Shimmer'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
-import { format } from 'office-ui-fabric-react/lib/Utilities'
-import DateUtils from 'utils/date'
+import dateUtils from 'utils/date'
 import { TimesheetContext } from '../'
 import styles from './StatusBar.module.scss'
 
@@ -15,7 +15,7 @@ export const StatusBar = () => {
     const { t } = useTranslation()
     const { loading, periods, selectedPeriod, dispatch } = React.useContext(TimesheetContext)
 
-    const defaultProps: IUserMessageProps = {
+    const defaultMessageProps: IUserMessageProps = {
         className: styles.message,
         fixedCenter: 65,
         containerStyle: { padding: '0 4px 0 4px' },
@@ -27,52 +27,46 @@ export const StatusBar = () => {
             {!loading && (
                 <div className={styles.container}>
                     <UserMessage
-                        {...defaultProps}
-                        hidden={selectedPeriod.isLocked}
-                        text={format(t('timesheet.periodHoursSummaryText'), DateUtils.getDurationString(selectedPeriod.totalDuration, t))}
+                        {...defaultMessageProps}
+                        hidden={selectedPeriod.isConfirmed}
+                        text={t('timesheet.periodHoursSummaryText', { hours: dateUtils.getDurationString(selectedPeriod.totalDuration, t) })}
                         iconName='ReminderTime' />
                     <UserMessage
-                        {...defaultProps}
+                        {...defaultMessageProps}
                         hidden={selectedPeriod.unmatchedDuration === 0 || selectedPeriod.isConfirmed}
-                        text={format(t('timesheet.hoursNotMatchedText'), DateUtils.getDurationString(selectedPeriod.unmatchedDuration, t))}
+                        text={t('timesheet.hoursNotMatchedText', { hours: dateUtils.getDurationString(selectedPeriod.unmatchedDuration, t) })}
                         type={MessageBarType.warning}
                         iconName='BufferTimeBoth' />
                     <UserMessage
-                        {...defaultProps}
-                        hidden={selectedPeriod.unmatchedDuration > 0 || selectedPeriod.isLocked}
+                        {...defaultMessageProps}
+                        hidden={selectedPeriod.unmatchedDuration > 0 || selectedPeriod.isConfirmed}
                         text={t('timesheet.allHoursMatchedText')}
                         type={MessageBarType.success}
                         iconName='BufferTimeBoth' />
                     <UserMessage
-                        {...defaultProps}
+                        {...defaultMessageProps}
                         hidden={!selectedPeriod.isConfirmed}
-                        text={format(t('timesheet.periodConfirmedText'), DateUtils.getDurationString(selectedPeriod.matchedDuration, t))}
+                        text={t('timesheet.periodConfirmedText', { hours: dateUtils.getDurationString(selectedPeriod.matchedDuration, t) })}
                         type={MessageBarType.success}
                         iconName='CheckMark' />
                     <UserMessage
-                        {...defaultProps}
-                        hidden={!selectedPeriod.isForecasted}
-                        text={format(t('timesheet.periodForecastedText'), DateUtils.getDurationString(selectedPeriod.matchedDuration, t))}
-                        type={MessageBarType.success}
-                        iconName='CheckMark' />
-                    <UserMessage
-                        {...defaultProps}
-                        hidden={selectedPeriod.ignoredEvents.length === 0 || selectedPeriod.isLocked}
+                        {...defaultMessageProps}
+                        hidden={selectedPeriod.ignoredEvents.length === 0 || selectedPeriod.isConfirmed}
                         iconName='DependencyRemove'>
                         <p>
-                            <span>{format(t('timesheet.ignoredEventsText'), selectedPeriod.ignoredEvents.length)}</span>
+                            <span>{t('timesheet.ignoredEventsText', { ignored_count: selectedPeriod.ignoredEvents.length })}</span>
                             <a href='#' onClick={() => dispatch({ type: 'CLEAR_IGNORES' })}>{t('timesheet.undoIgnoreText')}</a>
                         </p>
                     </UserMessage>
                     <UserMessage
-                        {...defaultProps}
+                        {...defaultMessageProps}
                         hidden={selectedPeriod.errors.length === 0}
                         type={MessageBarType.severeWarning}
                         iconName='ErrorBadge'>
-                        <p>{t('timesheet.unresolvedErrorText', { count: selectedPeriod.errors.length })}</p>
+                        <p>{t('timesheet.unresolvedErrorText', { error_count: selectedPeriod.errors.length })}</p>
                     </UserMessage>
                     <UserMessage
-                        {...defaultProps}
+                        {...defaultMessageProps}
                         hidden={periods.length < 2}
                         iconName='SplitObject'>
                         <p>{t('timesheet.splitWeekInfoText')}</p>

@@ -1,9 +1,10 @@
+import { ProjectLink } from 'components/ProjectLink'
 import { UserMessage } from 'components/UserMessage'
 import { TFunction } from 'i18next'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { TooltipDelay, TooltipHost } from 'office-ui-fabric-react/lib/Tooltip'
-import * as React from 'react'
+import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
@@ -33,9 +34,13 @@ function getErrorMessage(code: string, t: TFunction): [string, MessageBarType] {
 
 const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
     const { t } = useTranslation()
-    const { dispatch, selectedPeriod } = React.useContext(TimesheetContext)
+    const { dispatch, selectedPeriod } = useContext(TimesheetContext)
     let className = styles.root
     if (isMobile) className += ` ${styles.mobile}`
+    if (event.isSystemIgnored) {
+        return null
+
+    }
     if (!event.project) {
         if (event.error) {
             const [text, type] = getErrorMessage(event.error.code, t)
@@ -53,12 +58,12 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
             <div className={className}>
                 <UserMessage
                     containerStyle={{ marginTop: 10 }}
-                    isMultiline={false}
+                    isMultiline={true}
                     type={MessageBarType.warning}
                     iconName='TagUnknown'
                     text={t('timesheet.noProjectMatchFoundText')}
                     actions={
-                        <div>
+                        <div className={styles.eventActions}>
                             <MatchEventPanel event={event} />
                             <IgnoreEventButton event={event} />
                         </div>
@@ -69,9 +74,7 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
 
     return (
         <TooltipHost
-            tooltipProps={{
-                onRenderContent: () => <ProjectColumnTooltip project={event.project} />,
-            }}
+            tooltipProps={{ onRenderContent: () => <ProjectColumnTooltip project={event.project} /> }}
             delay={TooltipDelay.long}
             closeDelay={TooltipDelay.long}
             calloutProps={{ gapSpace: 0 }}>
@@ -81,7 +84,7 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
                 </div>
                 <div className={styles.content}>
                     <div className={styles.link}>
-                        <a href={`/projects/search/${event.project.id}`}>{event.project.name}</a>
+                        <ProjectLink project={event.project} />
                     </div>
                     {!isEmpty(event.project.labels) && <Icon iconName='Tag' className={styles.labelIcon} />}
                     {(event.manualMatch && !selectedPeriod.isConfirmed) && (

@@ -1,33 +1,11 @@
 global.fetch = require('node-fetch')
 const TokenService = require('./tokens')
-const log = require('debug')('services/graph')
-const Event = require('./graph.event')
-const { first } = require('underscore')
-const { performance, PerformanceObserver } = require('perf_hooks')
-const appInsights = require('applicationinsights')
+const utils = require('../utils')
+const log = require('debug')('services/msgraph')
+const Event = require('./msgraph.event')
 
-class GraphService {
-  /**
-   * Constructs a new GraphService
-   */
-  constructor() {
-    appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY)
-    this.observer = new PerformanceObserver(list => {
-      const { name, duration } = first(list.getEntries())
-      appInsights.defaultClient.trackMetric({
-        name,
-        value: duration,
-      })
-    })
-    this.observer.observe({ entryTypes: ['measure'], buffered: true })
-  }
-
-  /**
-   * Initializes the Grap service
-   *
-   * @param {*} req Request
-   */
-  init(req) {
+class MSGraphService {
+  constructor(req) {
     this.req = req
     this.oauthToken = this.req.user.oauthToken
     return this
@@ -50,22 +28,6 @@ class GraphService {
   endMark(measure) {
     performance.mark(`${measure}-end`)
     performance.measure(`GraphService.${measure}`, `${measure}-init`, `${measure}-end`)
-  }
-
-  /**
-   * Renoves ignored events from the collection
-   *
-   * Checks (case-insensitive) if title, body or categories contains (IGNORE), {IGNORE} or [IGNORE] or if there's a category ignore
-   *
-   * @param {*} events
-   */
-  removeIgnoredEvents(events) {
-    let ignoreRegex = /[(\[\{]IGNORE[)\]\}]/gi
-    return events.filter(evt => {
-      let categories = evt.categories.join(' ').toLowerCase()
-      let content = [evt.title, evt.body, categories].join(' ').toLowerCase()
-      return content.match(ignoreRegex) == null && categories.indexOf('ignore') === -1
-    })
   }
 
   /**
@@ -116,11 +78,7 @@ class GraphService {
   async createOutlookCategory(category) {
     try {
       this.startMark('createOutlookCategory')
-      const colorIdx =
-        category
-          .split('')
-          .map(c => c.charCodeAt(0))
-          .reduce((a, b) => a + b) % 24
+      const colorIdx = utils.generateInt(category, 24)
       const content = JSON.stringify({
         displayName: category,
         color: `preset${colorIdx}`,
@@ -170,8 +128,9 @@ class GraphService {
    *
    * @param startDateTime Start date time in ISO format
    * @param endDateTime End date time in ISO format
+   * @param maxDurationHours Max duration hours (defaults to 24)
    */
-  async getEvents(startDateTime, endDateTime) {
+  async getEvents(startDateTime, endDateTime, maxDurationHours = 24) {
     try {
       this.startMark('getEvents')
       log(
@@ -179,6 +138,7 @@ class GraphService {
         JSON.stringify({
           startDateTime,
           endDateTime,
+          maxDurationHours
         })
       )
       const { value } = await this.getClient()
@@ -190,9 +150,7 @@ class GraphService {
         .top(500)
         .get()
       let events = value.filter(evt => evt.subject).map(evt => new Event(evt))
-      events = this.removeIgnoredEvents(events)
-      events = events.filter(evt => evt.duration <= 24)
-      log('Retrieved %s events from /me/calendar/calendarView', value.length)
+      events = events.filter(evt => evt.duration <= maxDurationHours)
       this.endMark('getEvents')
       return events
     } catch (error) {
@@ -209,4 +167,4 @@ class GraphService {
   }
 }
 
-module.exports = new GraphService()
+module.exports = new MSGraphService()

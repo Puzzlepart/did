@@ -72,12 +72,15 @@ const typeDef = gql`
 `
 
 async function adUsers(_obj, _variables, ctx) {
-  let users = await ctx.services.graph.getUsers()
+  let users = await ctx.services.msgraph.getUsers()
   return users
 }
 
 async function users(_obj, _variables, ctx) {
-  let [users, roles] = await Promise.all([ctx.services.storage.getUsers(), ctx.services.storage.getRoles()])
+  let [users, roles] = await Promise.all([
+    ctx.services.azstorage.getUsers(),
+    ctx.services.azstorage.getRoles()
+  ])
   users = filter(
     users.map(user => ({
       ...user,
@@ -92,8 +95,8 @@ async function currentUser(_obj, _variables, ctx) {
   if (!ctx.user) return null
   try {
     const [user, roles] = await Promise.all([
-      ctx.services.storage.getUser(ctx.user.id),
-      ctx.services.storage.getRoles(),
+      ctx.services.azstorage.getUser(ctx.user.id),
+      ctx.services.azstorage.getRoles(),
     ])
     return {
       ...ctx.user,
@@ -107,7 +110,7 @@ async function currentUser(_obj, _variables, ctx) {
 
 async function addOrUpdateUser(_obj, variables, ctx) {
   try {
-    await ctx.services.storage.addOrUpdateUser(variables.user, variables.update)
+    await ctx.services.azstorage.addOrUpdateUser(variables.user, variables.update)
     return { success: true, error: null }
   } catch (error) {
     return {
@@ -119,7 +122,7 @@ async function addOrUpdateUser(_obj, variables, ctx) {
 
 async function bulkAddUsers(_obj, variables, ctx) {
   try {
-    await ctx.services.storage.bulkAddUsers(variables.users)
+    await ctx.services.azstorage.bulkAddUsers(variables.users)
     return { success: true, error: null }
   } catch (error) {
     return {

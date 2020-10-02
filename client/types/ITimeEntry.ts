@@ -18,7 +18,7 @@ export interface ITimeEntry {
   endDateTime: string
   day: string
   manualMatch?: boolean
-  isIgnored?: boolean
+  isSystemIgnored?: boolean
   error?: { code: string }
   labels?: IEntityLabel[]
 }

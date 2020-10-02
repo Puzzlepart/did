@@ -1,9 +1,28 @@
 import gql from 'graphql-tag'
 
-/**
- * @ignore
- */
-export const GET_TIMESHEET = gql`
+const unsubmitPeriod = gql`
+  mutation($period: TimesheetPeriodInput!) {
+    result: unsubmitPeriod(period: $period) {
+      success
+      error {
+        message
+      }
+    }
+  }
+`
+
+const submitPeriod = gql`
+  mutation($entries: [TimeEntryInput!], $period: TimesheetPeriodInput!) {
+    result: submitPeriod(entries: $entries, period: $period) {
+      success
+      error {
+        message
+      }
+    }
+  }
+`
+
+const timesheet = gql`
   query($startDateTime: String!, $endDateTime: String!, $dateFormat: String!, $locale: String!) {
     timesheet(startDateTime: $startDateTime, endDateTime: $endDateTime, dateFormat: $dateFormat, locale: $locale) {
       id
@@ -62,6 +81,7 @@ export const GET_TIMESHEET = gql`
           color
           icon
         }
+        isSystemIgnored
         error {
           code
         }
@@ -72,3 +92,8 @@ export const GET_TIMESHEET = gql`
     }
   }
 `
+
+export default {
+  query: { timesheet },
+  mutation: { confirmPeriod: submitPeriod, unconfirmPeriod: unsubmitPeriod },
+}

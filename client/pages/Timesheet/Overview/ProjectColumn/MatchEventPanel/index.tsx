@@ -1,56 +1,52 @@
 import { SearchProject, UserMessage } from 'components'
-import { value as value } from 'helpers'
+import { value } from 'helpers'
 import { MessageBarButton } from 'office-ui-fabric-react/lib/Button'
-import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { Panel } from 'office-ui-fabric-react/lib/Panel'
 import { ITimesheetContext, TimesheetContext } from 'pages/Timesheet/context'
-import React from 'react'
-import { BrowserView, MobileView } from 'react-device-detect'
+import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IProject } from 'types/IProject'
-import { pick } from 'underscore'
 import styles from './MatchEventPanel.module.scss'
 import { IMatchEventPanelProps } from './types'
 
 export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
     const { t } = useTranslation()
-    const { dispatch } = React.useContext<ITimesheetContext>(TimesheetContext)
-    const [showPanel, setShowPanel] = React.useState<boolean>(false)
+    const { dispatch } = useContext<ITimesheetContext>(TimesheetContext)
+    const [isPanelVisible, setPanelVisibility] = useState(false)
 
-    const onResolve = (project: IProject) => {
-        setShowPanel(false)
+    const hidePanel = () => setPanelVisibility(false)
+    const showPanel = () => setPanelVisibility(true)
+
+    /**
+     * On manual match. Dispatches action type MANUAL_MATCH
+     * 
+     * @param {IProject} project Project to match the event to
+     */
+    const onManualMatch = (project: IProject) => {
+        hidePanel()
         dispatch({ type: 'MANUAL_MATCH', payload: { eventId: event.id, project } })
     }
 
     return (
-        <>
-            <BrowserView renderWithFragment={true}>
-                <MessageBarButton
-                    text={t('timesheet.resolveProjectButtonLabel')}
-                    iconProps={{ iconName: 'ReviewResponseSolid' }}
-                    onClick={() => setShowPanel(true)} />
-            </BrowserView>
-            <MobileView renderWithFragment={true}>
-                <Icon
-                    styles={{ root: { fontSize: 18 } }}
-                    iconName='ReviewResponseSolid'
-                    onClick={() => setShowPanel(true)} />
-            </MobileView>
+        <span className={styles.root}>
+            <MessageBarButton
+                text={t('timesheet.resolveProjectButtonLabel')}
+                title={t('timesheet.resolveProjectButtonLabel')}
+                iconProps={{ iconName: 'ReviewResponseSolid' }}
+                onClick={showPanel} />
             <Panel
-                className={styles.root}
-                isOpen={showPanel}
-                onDismiss={() => setShowPanel(false)}>
-                <div className={styles.title}>{event.title}</div>
-                <UserMessage
-                    iconName='OutlookLogo'
-                    text={t('timesheet.matchOutlookInfoText', pick(event, 'webLink'))} />
+                isOpen={isPanelVisible}
+                headerText={t('timesheet.matchEventPanelHeaderText')}
+                onDismiss={hidePanel}>
+                <div className={styles.subText}>{event.title}</div>
+                <UserMessage iconName='OutlookLogo' text={t('timesheet.matchOutlookInfoText', event)} />
                 <UserMessage
                     hidden={!event.suggestedProject}
                     containerStyle={{ marginTop: 10 }}
                     iconName='Lightbulb' >
                     <p>
                         <span>{t('timesheet.didYouMeanText')}</span>
-                        <a href='#' onClick={() => onResolve(event.suggestedProject)}>
+                        <a href='#' onClick={() => onManualMatch(event.suggestedProject)}>
                             {value(event, 'suggestedProject.id', '')}
                         </a>?
                     </p>
@@ -62,9 +58,9 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
                 <SearchProject
                     width='100%'
                     className={styles.searchProject}
-                    onSelected={project => onResolve(project)}
+                    onSelected={project => onManualMatch(project)}
                     placeholder={t('common.searchPlaceholder')} />
             </Panel>
-        </>
+        </span>
     )
 }

@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from '@apollo/react-hooks'
+import { AppContext } from 'AppContext'
 import { HotkeyModal } from 'components'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import React, { useContext, useEffect, useMemo, useReducer } from 'react'
@@ -7,8 +8,7 @@ import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { ActionBar } from './ActionBar'
 import { AllocationView } from './AllocationView'
-import { SUBMIT_PERIOD, UNSUBMIT_PERIOD } from './mutations'
-import { GET_TIMESHEET } from './queries'
+import graphql from './graphql'
 import hotkeys from './hotkeys'
 import { Overview } from './Overview'
 import reducer from './reducer'
@@ -23,8 +23,6 @@ import {
     TimesheetScope,
     TimesheetView
 } from './types'
-import { AppContext } from 'AppContext'
-
 
 export const Timesheet = () => {
     const context = useContext(AppContext)
@@ -37,7 +35,7 @@ export const Timesheet = () => {
         scope: new TimesheetScope(params),
         selectedView: params.view || 'overview'
     })
-    const query = useQuery<{ timesheet: ITimesheetPeriod[] }>(GET_TIMESHEET, {
+    const query = useQuery<{ timesheet: ITimesheetPeriod[] }>(graphql.query.timesheet, {
         variables: {
             ...state.scope.dateStrings,
             dateFormat: 'dddd DD',
@@ -51,8 +49,8 @@ export const Timesheet = () => {
     useEffect(() => { history.push(`/timesheet/${state.selectedView}/${state.selectedPeriod.path}`) }, [state.selectedView, state.selectedPeriod])
 
     const [[submitPeriod], [unsubmitPeriod]] = [
-        useMutation(SUBMIT_PERIOD),
-        useMutation(UNSUBMIT_PERIOD),
+        useMutation(graphql.mutation.confirmPeriod),
+        useMutation(graphql.mutation.unconfirmPeriod),
     ]
 
     const onSubmitPeriod = async () => {

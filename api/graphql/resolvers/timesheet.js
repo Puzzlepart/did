@@ -28,6 +28,7 @@ const typeDef = gql`
     webLink: String
     lastModifiedDateTime: String
     labels: [Label]
+    isSystemIgnored: Boolean
     error: EventError
   }
 
@@ -90,7 +91,7 @@ const typeDef = gql`
 `
 
 async function timesheet(_obj, variables, ctx) {
-  if (!ctx.services.graph) return { success: false, error: null }
+  if (!ctx.services.msgraph) return { success: false, error: null }
 
   log('Quering timesheet from %s to %s', variables.startDateTime, variables.endDateTime)
 
@@ -103,9 +104,9 @@ async function timesheet(_obj, variables, ctx) {
   )
 
   let [projects, customers, timeentries, labels] = await Promise.all([
-    ctx.services.storage.getProjects(),
-    ctx.services.storage.getCustomers(),
-    ctx.services.storage.getTimeEntries(
+    ctx.services.azstorage.getProjects(),
+    ctx.services.azstorage.getCustomers(),
+    ctx.services.azstorage.getTimeEntries(
       {
         resourceId: ctx.user.id,
         startDateTime: variables.startDateTime,
@@ -113,7 +114,7 @@ async function timesheet(_obj, variables, ctx) {
       },
       { sortAsc: true }
     ),
-    ctx.services.storage.getLabels(),
+    ctx.services.azstorage.getLabels(),
   ])
 
   projects = connectEntities(projects, customers, labels)
@@ -124,7 +125,7 @@ async function timesheet(_obj, variables, ctx) {
     let period = periods[i]
     period.confirmedDuration = 0
     period.forecastedDuration = 0
-    let confirmed = await ctx.services.storage.getConfirmedPeriod(ctx.user.id, period.id)
+    let confirmed = await ctx.services.azstorage.getConfirmedPeriod(ctx.user.id, period.id)
     if (confirmed) {
       period.events = connectTimeEntries(timeentries, projects, customers, labels)
       period.matchedEvents = period.events
@@ -150,8 +151,8 @@ async function timesheet(_obj, variables, ctx) {
       }
       if (!period.events) {
         period.events = await ctx.services.graph.getEvents(period.startDateTime, period.endDateTime)
-        period.events = eventMatching.match(period.events)
       }
+      period.events = eventMatching.match(period.events)
       period.matchedEvents = period.events.filter(evt => evt.project)
     }
     period.events = period.events.map(evt => ({
@@ -167,8 +168,8 @@ async function submitPeriod(_obj, variables, ctx) {
     let hours = 0
     if (variables.period.matchedEvents.length > 0) {
       const [events, labels] = await Promise.all([
-        ctx.services.graph.getEvents(variables.period.startDateTime, variables.period.endDateTime),
-        ctx.services.storage.getLabels(),
+        ctx.services.msgraph.getEvents(variables.period.startDateTime, variables.period.endDateTime),
+        ctx.services.azstorage.getLabels(),
       ])
 
       let timeentries = variables.period.matchedEvents
@@ -184,14 +185,14 @@ async function submitPeriod(_obj, variables, ctx) {
           }
         })
         .filter(entry => entry)
-      hours = await ctx.services.storage.addTimeEntries(variables.period.id, timeentries, variables.period.isForecast)
+      hours = await ctx.services.azstorage.addTimeEntries(variables.period.id, timeentries, variables.period.isForecast)
     }
     if (variables.period.isForecast) {
       log('Saving forecast period for %s for user %s', variables.period.id, ctx.user.id)
-      await ctx.services.storage.addForecastedPeriod(variables.period.id, ctx.user.id, hours)
+      await ctx.services.azstorage.addForecastedPeriod(variables.period.id, ctx.user.id, hours)
     } else {
       log('Saving confirmed period for %s for user %s', variables.period.id, ctx.user.id)
-      await ctx.services.storage.addConfirmedPeriod(variables.period.id, ctx.user.id, hours)
+      await ctx.services.azstorage.addConfirmedPeriod(variables.period.id, ctx.user.id, hours)
     }
     return { success: true, error: null }
   } catch (error) {
@@ -204,8 +205,8 @@ async function submitPeriod(_obj, variables, ctx) {
 
 async function unsubmitPeriod(_obj, variables, ctx) {
   try {
-    await ctx.services.storage.deleteUserTimeEntries(variables.period.id, ctx.user.id)
-    await ctx.services.storage.removeConfirmedPeriod(variables.period.id, ctx.user.id)
+    await ctx.services.azstorage.deleteUserTimeEntries(variables.period.id, ctx.user.id)
+    await ctx.services.azstorage.removeConfirmedPeriod(variables.period.id, ctx.user.id)
     return { success: true, error: null }
   } catch (error) {
     return {

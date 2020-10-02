@@ -7,7 +7,7 @@ const { createTableService } = require('azure-storage')
 const uuidv4 = require('uuid').v4
 const log = require('debug')('services/storage')
 
-class StorageService {
+class AzStorageService {
   constructor(subscription) {
     this.tableUtil = new AzTableUtilities(createTableService(subscription.connectionString))
   }
@@ -468,4 +468,4 @@ class StorageService {
   }
 }
 
-module.exports = StorageService
+module.exports = AzStorageService

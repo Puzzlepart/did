@@ -10,12 +10,12 @@ import { ITimesheetParams } from './types'
 
 export interface ITimesheetPeriod {
   /**
-   * ID of the period {week}_{month}_{year}
+   * Identifier for the period week_month_year
    */
   id: string
 
   /**
-   * Week num,ber
+   * Week number
    */
   week: number
 
@@ -25,22 +25,22 @@ export interface ITimesheetPeriod {
   month: string
 
   /**
-   * Start date time in ISO format
+   * Start date time ISO string
    */
   startDateTime: string
 
   /**
-   * End date time in ISO format
+   * End date time ISO string
    */
   endDateTime: string
 
   /**
-   * Is the period confirmed
+   * Period confirmed
    */
   isConfirmed: boolean
 
   /**
-   * Events in the period
+   * Events
    */
   events: ITimeEntry[]
 
@@ -70,17 +70,64 @@ export interface ITimesheetPeriodData {
 }
 
 export class TimesheetPeriod {
+  /**
+   * Identifier for the period week_month_year
+   */
   public id: string
+
+  /**
+   * Period confirmed
+   */
   public isConfirmed?: boolean
-  public isForecasted?: boolean
-  public isForecast?: boolean
-  public ignoredEvents: string[] = []
-  private _manualMatches: ITypedHash<any> = {}
+
+  /**
+   * Is there an active forecast for the period
+   */
+  public isForecasted: boolean
+
+  /**
+   * Is the period in the future
+   */
+  public isForecast: boolean
+
+  /**
+   * Events ignored in UI
+   */
+  private _uiIgnoredEvents: string[] = []
+
+  /**
+   * Events matched in UI
+   */
+  private _uiMatchedEvents: ITypedHash<any> = {}
+
+  /**
+   * Month string
+   */
   private _month?: string
+
+  /**
+   * Start date time moment object
+   */
   private _startDateTime?: moment.Moment
+
+  /**
+   * End date time moment object
+   */
   private _endDateTime?: moment.Moment
+
+  /**
+   * Local storage
+   */
   private _localStorage: IPnPClientStore = new PnPClientStorage().local
+
+  /**
+   * Storage key for events matched in UI
+   */
   private _uiMatchedEventsStorageKey: string
+
+  /**
+   * Storage key for events ignored in UI
+   */
   private _uiIgnoredEventsStorageKey: string
 
   /**
@@ -101,8 +148,8 @@ export class TimesheetPeriod {
     this.isForecast = _period.isForecast
     this._uiMatchedEventsStorageKey = `did365_ui_matched_events_${this.id}`
     this._uiIgnoredEventsStorageKey = `did365_ui_ignored_events_${this.id}`
-    this.ignoredEvents = this._localStorage.get(this._uiIgnoredEventsStorageKey) || []
-    this._manualMatches = this._localStorage.get(this._uiMatchedEventsStorageKey) || {}
+    this._uiIgnoredEvents = this._localStorage.get(this._uiIgnoredEventsStorageKey) || []
+    this._uiMatchedEvents = this._localStorage.get(this._uiMatchedEventsStorageKey) || {}
   }
 
   /**
@@ -123,7 +170,7 @@ export class TimesheetPeriod {
    * @param {ITimeEntry} event Event
    */
   private _checkManualMatch(event: ITimeEntry) {
-    let manualMatch = this._manualMatches[event.id]
+    let manualMatch = this._uiMatchedEvents[event.id]
     if (event.manualMatch && !manualMatch) {
       event.manualMatch = false
       event.project = event.customer = null
@@ -142,10 +189,17 @@ export class TimesheetPeriod {
   public get events(): ITimeEntry[] {
     if (this._period) {
       return [...this._period.events]
-        .filter(event => !event.isIgnored && this.ignoredEvents.indexOf(event.id) === -1)
+        .filter(event => !event.isSystemIgnored && this._uiIgnoredEvents.indexOf(event.id) === -1)
         .map(event => this._checkManualMatch(event))
     }
     return []
+  }
+
+  /**
+   * Get ignored events
+   */
+  public get ignoredEvents() {
+    return this._uiIgnoredEvents
   }
 
   /*
@@ -184,7 +238,7 @@ export class TimesheetPeriod {
    * @param {IProject} project Project
    */
   public setManualMatch(eventId: string, project: IProject) {
-    let matches = this._manualMatches
+    let matches = this._uiMatchedEvents
     matches[eventId] = project
     this._localStorage.put(this._uiMatchedEventsStorageKey, matches, dateAdd(new Date(), 'month', 1))
   }
@@ -195,8 +249,8 @@ export class TimesheetPeriod {
    * @param {string} eventId Event id
    */
   public clearManualMatch(eventId: string) {
-    this._manualMatches = omit(this._manualMatches, eventId)
-    this._localStorage.put(this._uiMatchedEventsStorageKey, this._manualMatches, dateAdd(new Date(), 'month', 1))
+    this._uiMatchedEvents = omit(this._uiMatchedEvents, eventId)
+    this._localStorage.put(this._uiMatchedEventsStorageKey, this._uiMatchedEvents, dateAdd(new Date(), 'month', 1))
   }
 
   /**
@@ -205,16 +259,16 @@ export class TimesheetPeriod {
    * @param {string} eventId Event id
    */
   public ignoreEvent(eventId: string) {
-    this.ignoredEvents = [...this.ignoredEvents, eventId]
-    this._localStorage.put(this._uiIgnoredEventsStorageKey, this.ignoredEvents, dateAdd(new Date(), 'month', 1))
+    this._uiIgnoredEvents = [...this._uiIgnoredEvents, eventId]
+    this._localStorage.put(this._uiIgnoredEventsStorageKey, this._uiIgnoredEvents, dateAdd(new Date(), 'month', 1))
   }
 
   /**
    * Clear ignored events from browser storage
    */
   public clearIgnoredEvents() {
-    this.ignoredEvents = []
-    this._localStorage.put(this._uiIgnoredEventsStorageKey, this.ignoredEvents, dateAdd(new Date(), 'month', 1))
+    this._uiIgnoredEvents = []
+    this._localStorage.put(this._uiIgnoredEventsStorageKey, this._uiIgnoredEvents, dateAdd(new Date(), 'month', 1))
   }
 
   /**
