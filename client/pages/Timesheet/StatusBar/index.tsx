@@ -63,7 +63,7 @@ export const StatusBar = () => {
                         hidden={selectedPeriod.errors.length === 0}
                         type={MessageBarType.severeWarning}
                         iconName='ErrorBadge'>
-                        <p>{t('timesheet.unresolvedErrorText', { error_count: selectedPeriod.errors.length })}</p>
+                        <p>{t('timesheet.unresolvedErrorText', { count: selectedPeriod.errors.length })}</p>
                     </UserMessage>
                     <UserMessage
                         {...defaultMessageProps}

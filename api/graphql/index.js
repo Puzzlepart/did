@@ -107,7 +107,7 @@ const createContext = async ({ req }) => {
       azstorage: new AzStorageService(subscription),
       subscription: SubscriptionService,
     }
-    if (!!req.user) services.msgraph = new MSGraphService(req)
+    if (!!req.user) services.msgraph =  MSGraphService.init(req)
     return {
       services,
       user: req.user || {},

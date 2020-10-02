@@ -301,6 +301,11 @@ export class TimesheetPeriod {
     }
   }
 
+  /**
+   * Get weekdays in the specified format
+   * 
+   * @param {string} dayFormat Day format
+   */
   public weekdays(dayFormat = 'dddd DD'): string[] {
     if (!this._startDateTime) return []
     return dateUtils.getDays(this._startDateTime, this._endDateTime, dayFormat)
@@ -316,6 +321,9 @@ export class TimesheetPeriod {
       .join('/')
   }
 
+  /**
+   * Period is locked when it's either confirmed or forecasted
+   */
   public get isLocked() {
     return this.isConfirmed || this.isForecasted
   }

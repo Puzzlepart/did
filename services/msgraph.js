@@ -3,13 +3,36 @@ const TokenService = require('./tokens')
 const utils = require('../utils')
 const log = require('debug')('services/msgraph')
 const Event = require('./msgraph.event')
+const { first } = require('underscore')
+const { performance, PerformanceObserver } = require('perf_hooks');
+const appInsights = require("applicationinsights");
 
 class MSGraphService {
-  constructor(req) {
-    this.req = req
-    this.oauthToken = this.req.user.oauthToken
-    return this
-  }
+   /**
+   * Constructs a new MSGraphService
+   */
+  constructor() {
+    appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY)
+    this.observer = new PerformanceObserver(list => {
+      const { name, duration } = first(list.getEntries())
+      appInsights.defaultClient.trackMetric({
+        name,
+        value: duration,
+      })
+    })
+    this.observer.observe({ entryTypes: ['measure'], buffered: true })
+  } 
+  
+  /**
+  * Initializes the MS Graph Service
+  * 
+  * @param {*} req Request 
+  */
+ init(req) {
+   this.req = req
+   this.oauthToken = this.req.user.oauthToken
+   return this
+ }
 
   /**
    * Starts a performance mark
