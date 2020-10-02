@@ -1,8 +1,5 @@
 import gql from 'graphql-tag'
 
-/**
- * @ignore
- */
 export default gql`
   query($customerKey: String, $sortBy: String) {
     projects(customerKey: $customerKey, sortBy: $sortBy) {

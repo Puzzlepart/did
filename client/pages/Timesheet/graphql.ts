@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
-const unconfirmPeriod = gql`
+const unsubmitPeriod = gql`
   mutation($period: TimesheetPeriodInput!) {
-    result: unconfirmPeriod(period: $period) {
+    result: unsubmitPeriod(period: $period) {
       success
       error {
         message
@@ -11,9 +11,9 @@ const unconfirmPeriod = gql`
   }
 `
 
-const confirmPeriod = gql`
-  mutation($entries: [TimeEntryInput!], $period: TimesheetPeriodInput!) {
-    result: confirmPeriod(entries: $entries, period: $period) {
+const submitPeriod = gql`
+  mutation($period: TimesheetPeriodInput!) {
+    result: submitPeriod(period: $period) {
       success
       error {
         message
@@ -86,12 +86,14 @@ const timesheet = gql`
           code
         }
       }
-      confirmed
+      isConfirmed
+      isForecasted
+      isForecast
     }
   }
 `
 
 export default {
   query: { timesheet },
-  mutation: { confirmPeriod, unconfirmPeriod },
+  mutation: { confirmPeriod: submitPeriod, unconfirmPeriod: unsubmitPeriod },
 }

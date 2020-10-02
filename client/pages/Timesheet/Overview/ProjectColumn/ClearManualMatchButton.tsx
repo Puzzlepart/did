@@ -4,9 +4,7 @@ import { useTranslation } from 'react-i18next'
 import styles from './ProjectColumn.module.scss'
 import { IClearManualMatchButtonProps } from './types'
 
-/**
- * @category Timesheet
- */
+
 export const ClearManualMatchButton = ({ onClick }: IClearManualMatchButtonProps): JSX.Element => {
     const { t } = useTranslation()
     return (

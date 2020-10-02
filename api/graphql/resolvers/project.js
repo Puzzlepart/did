@@ -55,7 +55,7 @@ async function createOrUpdateProject(_obj, variables, ctx) {
   try {
     const id = await ctx.services.azstorage.createOrUpdateProject(variables.project, ctx.user.id, variables.update)
     if (variables.project.createOutlookCategory) {
-      await ctx.services.graph.createOutlookCategory(id)
+      await ctx.services.msgraph.createOutlookCategory(id)
     }
     return { success: true, error: null }
   } catch (error) {

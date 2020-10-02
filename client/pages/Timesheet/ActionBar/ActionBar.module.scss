@@ -5,4 +5,25 @@
     line-height: 44px;
     padding: 0 8px 0 8px;
   }
+
+  .confirmButton {
+    background: rgb(223, 246, 221);
+    border: none;
+    outline: none;
+    color: rgb(50, 49, 48);
+    font-weight: normal;
+  }
+
+  .unconfirmButton {
+    background: rgb(253, 231, 233);
+    border: none;
+    outline: none;
+    color: rgb(50, 49, 48);
+    font-weight: normal;
+  }
+
+  .selectPeriodButton {
+    border: none;
+    outline: none;
+  }
 }

@@ -6,9 +6,6 @@ export interface ICreateOrUpdateProjectVariables {
   update?: boolean
 }
 
-/**
- * @ignore
- */
 export default gql`
   mutation($project: ProjectInput!, $update: Boolean) {
     result: createOrUpdateProject(project: $project, update: $update) {

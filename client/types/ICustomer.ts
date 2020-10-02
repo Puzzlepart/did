@@ -1,6 +1,3 @@
-/**
- * @category Common
- */
 export interface ICustomer {
   key: string
   name: string

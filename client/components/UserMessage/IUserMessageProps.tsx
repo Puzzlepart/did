@@ -1,8 +1,5 @@
 import { IMessageBarProps, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 
-/**
- * @category UserMessage
- */
 export interface IUserMessageProps extends IMessageBarProps {
     /**
      * Text to show in the message

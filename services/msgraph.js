@@ -3,11 +3,54 @@ const TokenService = require('./tokens')
 const utils = require('../utils')
 const log = require('debug')('services/msgraph')
 const Event = require('./msgraph.event')
+const { first } = require('underscore')
+const { performance, PerformanceObserver } = require('perf_hooks');
+const appInsights = require("applicationinsights");
 
 class MSGraphService {
-  constructor(req) {
-    this.req = req
-    this.oauthToken = this.req.user.oauthToken
+   /**
+   * Constructs a new MSGraphService
+   */
+  constructor() {
+    appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY)
+    this.observer = new PerformanceObserver(list => {
+      const { name, duration } = first(list.getEntries())
+      appInsights.defaultClient.trackMetric({
+        name,
+        value: duration,
+      })
+    })
+    this.observer.observe({ entryTypes: ['measure'], buffered: true })
+  } 
+  
+  /**
+  * Initializes the MS Graph Service
+  * 
+  * @param {*} req Request 
+  */
+ init(req) {
+   this.req = req
+   this.oauthToken = this.req.user.oauthToken
+   return this
+ }
+
+  /**
+   * Starts a performance mark
+   *
+   * @param {*} measure
+   */
+  startMark(measure) {
+    performance.mark(`${measure}-init`)
+  }
+
+  /**
+   * Ends a performance mark
+   *
+   * @param {*} measure
+   */
+  endMark(measure) {
+    performance.mark(`${measure}-end`)
+    performance.measure(`GraphService.${measure}`, `${measure}-init`, `${measure}-end`)
   }
 
   /**
@@ -27,13 +70,14 @@ class MSGraphService {
    */
   async getUsers() {
     try {
-      log('Querying Graph /users')
+      this.startMark('getUsers')
       const { value } = await this.getClient()
         .api('/users')
         .filter("userType eq 'Member'")
         .select('id', 'givenName', 'surname', 'jobTitle', 'displayName', 'mobilePhone', 'mail', 'preferredLanguage')
         .top(999)
         .get()
+      this.endMark('getUsers')
       return value
     } catch (error) {
       console.log(error.message)
@@ -56,13 +100,15 @@ class MSGraphService {
    */
   async createOutlookCategory(category) {
     try {
+      this.startMark('createOutlookCategory')
       const colorIdx = utils.generateInt(category, 24)
       const content = JSON.stringify({
         displayName: category,
-        color: `preset${colorIdx}`
+        color: `preset${colorIdx}`,
       })
-      log('POST Graph /me/outlook/masterCategories: %s', content)
-      const res = await this.getClient().api('/me/outlook/masterCategories').post(content)
+      const client = this.getClient()
+      const res = await client.api('/me/outlook/masterCategories').post(content)
+      this.endMark('createOutlookCategory')
       return res
     } catch (error) {
       switch (error.statusCode) {
@@ -82,8 +128,10 @@ class MSGraphService {
    */
   async getOutlookCategories() {
     try {
+      this.startMark('getOutlookCategories')
       log('Querying Graph /me/outlook/masterCategories')
       const { value } = await this.getClient().api('/me/outlook/masterCategories').get()
+      this.endMark('getOutlookCategories')
       return value
     } catch (error) {
       switch (error.statusCode) {
@@ -107,6 +155,7 @@ class MSGraphService {
    */
   async getEvents(startDateTime, endDateTime, maxDurationHours = 24) {
     try {
+      this.startMark('getEvents')
       log(
         'Querying Graph /me/calendar/calendarView: %s',
         JSON.stringify({
@@ -123,11 +172,9 @@ class MSGraphService {
         .orderby('start/dateTime asc')
         .top(500)
         .get()
-      log('Retrieved %s events from /me/calendar/calendarView', value.length)
-      const events = value
-        .filter(evt => evt.subject)
-        .map(evt => new Event(evt))
-        .filter(evt => evt.duration <= maxDurationHours)
+      let events = value.filter(evt => evt.subject).map(evt => new Event(evt))
+      events = events.filter(evt => evt.duration <= maxDurationHours)
+      this.endMark('getEvents')
       return events
     } catch (error) {
       switch (error.statusCode) {
@@ -143,4 +190,4 @@ class MSGraphService {
   }
 }
 
-module.exports = MSGraphService
+module.exports = new MSGraphService()

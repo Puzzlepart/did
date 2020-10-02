@@ -5,9 +5,7 @@ import { isEmpty } from 'underscore'
 import { IProjectColumnTooltipProps } from '../types'
 import styles from './ProjectColumnTooltip.module.scss'
 
-/**
- * @category Timesheet
- */
+
 export const ProjectColumnTooltip = ({ project }: IProjectColumnTooltipProps): JSX.Element => {
     return (
         <div className={styles.root}>

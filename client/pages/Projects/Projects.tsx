@@ -17,9 +17,7 @@ import ProjectList from './ProjectList'
 import { ProjectsContext } from './ProjectsContext'
 import { IProjectsParams } from './types'
 
-/**
- * @category Projects
- */
+
 export const Projects = () => {
     const { t } = useTranslation()
     const { hasPermission } = useContext(AppContext)

@@ -9,9 +9,6 @@ import { IProject } from 'types/IProject'
 import styles from './MatchEventPanel.module.scss'
 import { IMatchEventPanelProps } from './types'
 
-/**
- * @category Timesheet
-*/
 export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
     const { t } = useTranslation()
     const { dispatch } = useContext<ITimesheetContext>(TimesheetContext)
@@ -54,12 +51,10 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
                         </a>?
                     </p>
                 </UserMessage>
-
                 <UserMessage
                     hidden={!event.customer || !!event.suggestedProject}
                     containerStyle={{ marginTop: 10 }}
                     text={t('timesheet.eventNotFullyMatchedText', { name: value(event, 'customer.name', '') })} />
-
                 <SearchProject
                     width='100%'
                     className={styles.searchProject}

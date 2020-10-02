@@ -5,6 +5,7 @@ interface CssExports {
   'name': string;
   'root': string;
   'searchBox': string;
+  'showAllLink': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

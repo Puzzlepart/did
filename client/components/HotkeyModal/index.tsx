@@ -6,9 +6,6 @@ import { useTranslation } from 'react-i18next'
 import styles from './HotkeyModal.module.scss'
 export type IHotkeyModal = GlobalHotKeysProps & IModalProps;
 
-/**
- * @category HotkeyModal
- */
 export const HotkeyModal = (props: IHotkeyModal) => {
     const { t } = useTranslation()
     return (

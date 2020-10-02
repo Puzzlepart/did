@@ -10,9 +10,7 @@ import { generateColumn as col } from 'utils/generateColumn'
 import { GET_ROLES } from './GET_ROLES'
 import { IRolePanelProps, RolePanel } from './RolePanel'
 
-/**
- * @category Admin
- */
+
 export const Roles = () => {
     const { t } = useTranslation()
     

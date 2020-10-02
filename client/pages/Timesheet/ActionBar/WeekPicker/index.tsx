@@ -1,20 +1,18 @@
 import { Calendar, DateRangeType, DayOfWeek } from 'office-ui-fabric-react/lib/Calendar'
 import { Callout, DirectionalHint } from 'office-ui-fabric-react/lib/Callout'
+import { IContextualMenuItem, ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu'
 import { FocusTrapZone } from 'office-ui-fabric-react/lib/FocusTrapZone'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import { TimesheetContext } from 'pages/Timesheet'
-import * as React from 'react'
+import  React,{useContext} from 'react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ACTIONBAR_ICON_PROPS } from '../ACTIONBAR_ICON_PROPS'
 import styles from './WeekPicker.module.scss'
 
-/**
- * @category Timesheet
- */
 export const WeekPicker = () => {
     const { t } = useTranslation()
-    const { scope, dispatch } = React.useContext(TimesheetContext)
+    const { scope, dispatch } = useContext(TimesheetContext)
     const [calendar, setCalendar] = useState(null)
 
     return (
@@ -67,3 +65,9 @@ export const WeekPicker = () => {
         </>
     )
 }
+
+export default {
+    key: 'WEEK_PICKER',
+    itemType: ContextualMenuItemType.Normal,
+    onRender: () => <WeekPicker />,
+} as IContextualMenuItem

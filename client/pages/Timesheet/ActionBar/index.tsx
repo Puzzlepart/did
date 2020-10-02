@@ -3,22 +3,22 @@ import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TimesheetContext } from '../'
 import styles from './ActionBar.module.scss'
-import { CHANGE_PERIOD, CONFIRM_ACTIONS, GO_TO_CURRENT_WEEK, GO_TO_NEXT_WEEK, GO_TO_PREV_WEEK, WEEK_PICKER } from './commands'
+import * as commands from './commands'
 
-/**
- * @category Timesheet
- */
 export const ActionBar = () => {
     const { t } = useTranslation()
     const context = useContext(TimesheetContext)
     const items = [
-        GO_TO_CURRENT_WEEK(context, t),
-        GO_TO_PREV_WEEK(context, t),
-        GO_TO_NEXT_WEEK(context, t),
-        WEEK_PICKER(),
-        ...CHANGE_PERIOD(context, t),
+        commands.GO_TO_CURRENT_WEEK(context, t),
+        commands.GO_TO_PREV_WEEK(context, t),
+        commands.GO_TO_NEXT_WEEK(context, t),
+        commands.WEEK_PICKER(context, t),
+        ...commands.SELECT_PERIOD(context, t),
     ]
-    const farItems = [CONFIRM_ACTIONS(context, t)]
+    const farItems = [
+        commands.CONFIRM_ACTIONS(context, t),
+        commands.FORECAST_ACTIONS(context, t)
+    ]
 
     return (
         <CommandBar

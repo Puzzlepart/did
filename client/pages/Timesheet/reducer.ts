@@ -23,8 +23,8 @@ export type TimesheetAction =
       }
     }
   | { type: 'MOVE_SCOPE'; payload: ITimesheetScopeOptions | string }
-  | { type: 'CONFIRMING_PERIOD'; payload: { t: TFunction } }
-  | { type: 'UNCONFIRMING_PERIOD'; payload: { t: TFunction } }
+  | { type: 'SUBMITTING_PERIOD'; payload: { t: TFunction } }
+  | { type: 'UNSUBMITTING_PERIOD'; payload: { t: TFunction } }
   | { type: 'CHANGE_PERIOD'; payload: string }
   | { type: 'CHANGE_VIEW'; payload: TimesheetView }
   | { type: 'MANUAL_MATCH'; payload: { eventId: string; project: IProject } }
@@ -46,10 +46,12 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
     case 'DATA_UPDATED':
       {
         const { loading, data } = action.payload.query
-        newState.loading = loading && {
-          label: t('timesheet.loadingEventsLabel'),
-          description: t('timesheet.loadingEventsDescription'),
-        }
+        newState.loading = loading
+          ? {
+              label: t('timesheet.loadingEventsLabel'),
+              description: t('timesheet.loadingEventsDescription'),
+            }
+          : null
         if (data) {
           newState.periods = data.timesheet.map(period => new TimesheetPeriod(period))
           newState.selectedPeriod =
@@ -58,17 +60,25 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
       }
       break
 
-    case 'CONFIRMING_PERIOD':
+    case 'SUBMITTING_PERIOD':
       newState.loading = {
-        label: t('timesheet.confirmingPeriodLabel'),
-        description: t('timesheet.confirmingPeriodDescription'),
+        label: state.selectedPeriod.isForecast
+          ? t('timesheet.forecastingPeriodLabel')
+          : t('timesheet.confirmingPeriodLabel'),
+        description: state.selectedPeriod.isForecast
+          ? t('timesheet.forecastingPeriodDescription')
+          : t('timesheet.confirmingPeriodDescription'),
       }
       break
 
-    case 'UNCONFIRMING_PERIOD':
+    case 'UNSUBMITTING_PERIOD':
       newState.loading = {
-        label: t('timesheet.unconfirmingPeriodLabel'),
-        description: t('timesheet.unconfirmingPeriodDescription'),
+        label: state.selectedPeriod.isForecast
+          ? t('timesheet.unforecastingPeriodLabel')
+          : t('timesheet.unconfirmingPeriodLabel'),
+        description: state.selectedPeriod.isForecast
+          ? t('timesheet.unforecastingPeriodDescription')
+          : t('timesheet.unconfirmingPeriodDescription'),
       }
       break
     case 'MOVE_SCOPE':

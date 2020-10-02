@@ -1,7 +1,7 @@
 import EventList from 'components/EventList'
 import { ITimeEntry } from 'types/ITimeEntry'
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
-import * as React from 'react'
+import React,{useContext} from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import dateUtils from 'utils/date'
@@ -13,12 +13,10 @@ import ProjectColumn from './ProjectColumn'
 import { IOverviewProps } from './types'
 import CustomerColumn from './CustomerColumn'
 
-/**
- * @category Timesheet
- */
+
 export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
     const { t } = useTranslation()
-    const { loading, selectedPeriod } = React.useContext(TimesheetContext)
+    const { loading, selectedPeriod } = useContext(TimesheetContext)
     const className = [styles.root]
     if (isMobile) className.push(styles.mobile)
     return (
@@ -35,7 +33,7 @@ export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
                     groupNames: selectedPeriod.weekdays(dayFormat),
                     totalFunc: (items: ITimeEntry[]) => {
                         const duration = items.reduce((sum, i) => sum + i.duration, 0)
-                        return ` (${dateUtils.getDurationDisplay(duration, t)})`
+                        return ` (${dateUtils.getDurationString(duration, t)})`
                     },
                 }}
                 additionalColumns={[

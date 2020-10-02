@@ -2,9 +2,7 @@ import * as React from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { Timesheet } from './Timesheet'
 
-/**
- * @ignore
- */
+
 const _ = () => {
     const match = useRouteMatch()
     return (
@@ -18,7 +16,6 @@ const _ = () => {
         </Switch>
     )
 }
-
 
 export default _
 

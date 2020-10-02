@@ -2,7 +2,7 @@ const { first, filter, find, pick, contains } = require('underscore')
 const { formatDate, getMonthIndex, getWeek } = require('../../../utils')
 const EventMatching = require('./timesheet.matching')
 const { connectEntities } = require('./project.utils')
-const { getPeriods } = require('./timesheet.utils')
+const { getPeriods, connectTimeEntries } = require('./timesheet.utils')
 const value = require('get-value')
 const log = require('debug')('api/graphql/resolvers/timesheet')
 const { gql } = require('apollo-server-express')
@@ -43,12 +43,15 @@ const typeDef = gql`
     endDateTime: String!
     events: [Event!]!
     matchedEvents: [Event!]!
-    confirmed: Boolean
+    isConfirmed: Boolean
+    isForecasted: Boolean
+    isForecast: Boolean
     confirmedDuration: Float!
+    forecastedDuration: Float!
   }
 
   """
-  Input object for Event used in Mutation confirmPeriod
+  Input object for Event used in Mutation submitPeriod
   """
   input EventInput {
     id: String!
@@ -57,22 +60,14 @@ const typeDef = gql`
   }
 
   """
-  Input object for TimeEntry used in Mutation confirmPeriod
-  """
-  input TimeEntryInput {
-    id: String!
-    projectId: String!
-    manualMatch: Boolean
-  }
-
-  """
-  Input object for TimesheetPeriod used in Mutation unconfirmPeriod
+  Input object for TimesheetPeriod used in Mutation unsubmitPeriod
   """
   input TimesheetPeriodInput {
     id: String!
     startDateTime: String!
     endDateTime: String!
     matchedEvents: [EventInput]
+    isForecast: Boolean
   }
 
   extend type Query {
@@ -86,12 +81,12 @@ const typeDef = gql`
     """
     Adds matched time entries for the specified period and an entry for the confirmed period
     """
-    confirmPeriod(entries: [TimeEntryInput!], period: TimesheetPeriodInput!): BaseResult!
+    submitPeriod(period: TimesheetPeriodInput!): BaseResult!
 
     """
     Deletes time entries for the specified period and the entry for the confirmed period
     """
-    unconfirmPeriod(period: TimesheetPeriodInput!): BaseResult!
+    unsubmitPeriod(period: TimesheetPeriodInput!): BaseResult!
   }
 `
 
@@ -128,28 +123,37 @@ async function timesheet(_obj, variables, ctx) {
 
   for (let i = 0; i < periods.length; i++) {
     let period = periods[i]
+    period.confirmedDuration = 0
+    period.forecastedDuration = 0
     let confirmed = await ctx.services.azstorage.getConfirmedPeriod(ctx.user.id, period.id)
     if (confirmed) {
-      period.events = timeentries.map(entry => {
-        const customerKey = first(entry.projectId.split(' '))
-        return {
-          ...entry,
-          project: find(projects, p => p.id === entry.projectId),
-          customer: find(customers, c => c.key === customerKey),
-          labels: filter(labels, lbl => {
-            const str = value(entry, 'labels', { default: '' })
-            return str.indexOf(lbl.name) !== -1
-          }),
-        }
-      })
+      period.events = connectTimeEntries(timeentries, projects, customers, labels)
       period.matchedEvents = period.events
-      period.confirmed = true
+      period.isConfirmed = true
       period.confirmedDuration = confirmed.hours
     } else {
-      period.events = await ctx.services.msgraph.getEvents(period.startDateTime, period.endDateTime)
-      period.events = eventMatching.match(period.events)
+      if (period.isForecast) {
+        let forecasted = await ctx.services.azstorage.getForecastedPeriod(ctx.user.id, period.id)
+        period.isForecasted = !!forecasted
+        if (period.isForecasted) {
+          let timeentries = await ctx.services.azstorage.getTimeEntries(
+            {
+              resourceId: ctx.user.id,
+              startDateTime: variables.startDateTime,
+              endDateTime: variables.endDateTime,
+            },
+            true,
+            { sortAsc: true }
+          )
+          period.events = connectTimeEntries(timeentries, projects, customers, labels)
+          period.forecastedDuration = forecasted.hours
+        }
+      }
+      if (!period.events) {
+        period.events = await ctx.services.msgraph.getEvents(period.startDateTime, period.endDateTime)
+        period.events = eventMatching.match(period.events)
+      }
       period.matchedEvents = period.events.filter(evt => evt.project)
-      period.confirmedDuration = 0
     }
     period.events = period.events.map(evt => ({
       ...evt,
@@ -159,7 +163,7 @@ async function timesheet(_obj, variables, ctx) {
   return periods
 }
 
-async function confirmPeriod(_obj, variables, ctx) {
+async function submitPeriod(_obj, variables, ctx) {
   try {
     let hours = 0
     if (variables.period.matchedEvents.length > 0) {
@@ -181,10 +185,15 @@ async function confirmPeriod(_obj, variables, ctx) {
           }
         })
         .filter(entry => entry)
-
-      hours = await ctx.services.azstorage.addTimeEntries(variables.period.id, timeentries)
+      hours = await ctx.services.azstorage.addTimeEntries(variables.period.id, timeentries, variables.period.isForecast)
     }
-    await ctx.services.azstorage.addConfirmedPeriod(variables.period.id, ctx.user.id, hours)
+    if (variables.period.isForecast) {
+      log('(submitPeriod) Saving forecast period for %s for user %s', variables.period.id, ctx.user.id)
+      await ctx.services.azstorage.addForecastedPeriod(variables.period.id, ctx.user.id, hours)
+    } else {
+      log('(submitPeriod) Saving confirmed period for %s for user %s', variables.period.id, ctx.user.id)
+      await ctx.services.azstorage.addConfirmedPeriod(variables.period.id, ctx.user.id, hours)
+    }
     return { success: true, error: null }
   } catch (error) {
     return {
@@ -194,10 +203,17 @@ async function confirmPeriod(_obj, variables, ctx) {
   }
 }
 
-async function unconfirmPeriod(_obj, variables, ctx) {
+async function unsubmitPeriod(_obj, variables, ctx) {
   try {
-    await ctx.services.azstorage.deleteUserTimeEntries(variables.period.id, ctx.user.id)
-    await ctx.services.azstorage.removeConfirmedPeriod(variables.period.id, ctx.user.id)
+    if (variables.period.isForecast) {
+      log('(submitPeriod) Removed forecasted time entries and period for %s for user %s', variables.period.id, ctx.user.id)
+      await ctx.services.azstorage.deleteTimeEntries(variables.period.id, ctx.user.id, true)
+      await ctx.services.azstorage.removeForecastedPeriod(variables.period.id, ctx.user.id)
+    } else {
+      log('(submitPeriod) Removed confirmed time entries and period for %s for user %s', variables.period.id, ctx.user.id)
+      await ctx.services.azstorage.deleteTimeEntries(variables.period.id, ctx.user.id, false)
+      await ctx.services.azstorage.removeConfirmedPeriod(variables.period.id, ctx.user.id)
+    }
     return { success: true, error: null }
   } catch (error) {
     return {
@@ -210,7 +226,7 @@ async function unconfirmPeriod(_obj, variables, ctx) {
 module.exports = {
   resolvers: {
     Query: { timesheet },
-    Mutation: { confirmPeriod, unconfirmPeriod },
+    Mutation: { submitPeriod, unsubmitPeriod },
   },
   typeDef,
 }

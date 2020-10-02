@@ -4,9 +4,6 @@ import { humanize } from 'underscore.string'
 import { loadScripts } from './loadScripts'
 import { moment } from 'utils/date'
 
-/**
- * @ignore
- */
 export interface IExcelExportOptions {
   fileName: string
   columns?: IColumn[]

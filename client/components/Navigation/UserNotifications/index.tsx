@@ -13,9 +13,6 @@ import styles from './UserNotifications.module.scss'
 const BROWSER_STORAGE: IPnPClientStore = new PnPClientStorage().session
 const STORAGE_KEY = 'did365_dismissed_notifications'
 
-/**
- * @category UserNotifications
- */
 export const UserNotifications = () => {
     const { t } = useTranslation()
     const { user } = useContext(AppContext)

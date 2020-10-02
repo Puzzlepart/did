@@ -6,7 +6,6 @@ import React from 'react'
 import dateUtils from 'utils/date'
 import { ExcelColumnType } from 'utils/exportExcel'
 
-
 const columns = (t: TFunction): IColumn[] => ([
     {
         key: 'title',

@@ -16,13 +16,13 @@
     "goToCurrentWeek": "Gå til inneværende uke",
     "goToPrevWeek": "Gå til forrige uke",
     "goToNextWeek": "Gå til neste uke",
-    "periodHoursSummaryText": "Du har totalt **{{hours}}** denne perioden",
+    "periodHoursSummaryText": "Du har totalt ** {{timer}} ** denne perioden.",
     "hoursNotMatchedText": "Du har **{{hours}}** som ikke er koblet mot et prosjekt. Alle avtaler må være matchet før du kan bekrefte timene dine.",
     "allHoursMatchedText": "Alle timene dine er matchet. Er du klar til å bekrefte uken din?",
     "periodConfirmedText": "Perioden er bekreftet med {{hours}}. Klikk **Angre bekreft timer** dersom du vil gjøre noen justeringer.",
     "ignoredEventsText": "Du har {{ignored_count}} ignorerte hendelse(r).",
     "undoIgnoreText": "Trykk for å angre",
-    "unresolvedErrorText": "Du har {{error_count}} uløste feil. Du må løse disse før du kan bekrefte timene dine.",
+    "unresolvedErrorText": "Du har {{count}} uløste feil. Du må løse disse før du kan bekrefte timene dine.",
     "splitWeekInfoText": "Valgt uke strekker seg over to måneder. Naviger mellom periodene ved å bruke knappene over.",
     "projectInactiveErrorText": "Prosjektet er ikke lenger aktivt. Rediger hendelsen i Outlook.",
     "customerInactiveErrorText": "Kunden er ikke lenger aktiv. Rediger hendelsen i Outlook.",
@@ -33,9 +33,16 @@
     "matchOutlookInfoText": "**Tips:** Prøv å sørge for at <a href='{{webLink}}' target='_blank'>Outlook-avtalen</a> matches automatisk. I noen tilfeller kan det dog være nødvendig å matche manuelt.",
     "didYouMeanText": "Mente du",
     "eventNotFullyMatchedText": "Hendelse kunne ikke matches. Vi fant matchende kunde **{{name}}**, men ikke noe prosjekt med den spesifiserte nøkkelen.",
+    "unforecastHoursText": "Fjern prognose",
+    "forecastHoursText": "Lagre prognose",
+    "periodForecastedText": "Perioden er prognostisert med {{hours}}. \nKlikk **Fjern prognose** hvis du vil gjøre noen justeringer.",
     "matchEventPanelHeaderText": "Løs hendelsen",
     "customerInactiveError": "Kunden er ikke lenger aktiv. Løs hendelsen i Outlook.",
-    "projectInactiveError": "Prosjektet er ikke lenger aktivt. Løs hendelsen i Outlook."
+    "projectInactiveError": "Prosjektet er ikke lenger aktivt. Løs hendelsen i Outlook.",
+    "unforecastingPeriodDescription": "Vent et lite øyeblikk...",
+    "unforecastingPeriodLabel": "Fjerner prognose",
+    "forecastingPeriodLabel": "Lagrer prognose",
+    "forecastingPeriodDescription": "Vent et lite øyeblikk..."
   },
   "projects": {
     "inactiveText": "Dette prosjektet er markert som inaktivt.",
@@ -104,17 +111,19 @@
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport. For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene...",
-    "noEntriesText": "Det er ingen bekreftede tidsoppføringer på dette tidspunktet.",
-    "selectReportText": "Velg en rapport i menyen over.",
-    "selectReportLabel": "Velg rapport"
+    "noEntriesText": "Det er ingen tidsoppføringer for dette tidspunktet.",
+    "selectReportText": "Velg en rapport over. \nVær oppmerksom på at noen rapporter kan ta flere minutter å laste inn.",
+    "selectReportLabel": "Velg rapport",
+    "forecast": "Prognose",
+    "exportToExcel": "Eksporter til Excel"
   },
   "common": {
-    "headerTotalDuration": " ({0}t)",
+    "headerTotalDuration": " ({{duration}})",
     "groupBy": "Grupper etter",
     "all": "Alle",
     "none": "Ingen",
-    "previousMonth": "Forrige måned",
-    "currentMonth": "Denne måneden",
+    "previousMonth": "Forrige måned ({{monthName}})",
+    "currentMonth": "Denne måneden ({{monthName}})",
     "currentYear": "Dette året",
     "noneSelectedMessage": "Ingen valgt enda",
     "hoursCurrentMonth": "Timer denne måneden",
@@ -230,7 +239,8 @@
       "nextYearRangeAriaLabel": "Neste årsintervall",
       "closeButtonAriaLabel": "Lukk"
     },
-    "preferredLanguageLabel": "Foretrukket språk"
+    "preferredLanguageLabel": "Foretrukket språk",
+    "showAllFiltersText": "Vis alle ({{count}})"
   },
   "navigation": {
     "timesheet": "Timeliste",

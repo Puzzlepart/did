@@ -1,5 +1,5 @@
 import { ITimeEntry } from 'types'
 
-export interface IMatchEventPanelProps {
+export interface IIgnoreEventButtonProps {
     event: ITimeEntry;
 }

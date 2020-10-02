@@ -16,13 +16,13 @@
     "goToCurrentWeek": "Go to current week",
     "goToPrevWeek": "Go to previous week",
     "goToNextWeek": "Go to next week",
-    "periodHoursSummaryText": "You have a total of **{{hours}}** this period",
+    "periodHoursSummaryText": "You have a total of **{{hours}}** this period.",
     "hoursNotMatchedText": "You have **{{hours}}** that are not matched. All events must be matched before you can confirm your hours.",
     "allHoursMatchedText": "All your hours are matched. Are you ready to confirm the period?",
     "periodConfirmedText": "The period is confirmed with {{hours}}. Click **Unconfirm hours** if you want to do some adjustments.",
     "ignoredEventsText": "You have {{ignored_count}} ignored event(s).",
     "undoIgnoreText": "Click to undo",
-    "unresolvedErrorText": "You have {{error_count}} unresolved errors. You need to resolve them before confirming the hours",
+    "unresolvedErrorText": "You have {{count}} unresolved errors. You need to resolve them before confirming the hours",
     "splitWeekInfoText": "Selected week spans two months. Navigate between the first and second period using the command bar above.",
     "projectInactiveError": "Project is no longer active. Please resolve the event in Outlook.",
     "customerInactiveError": "Customer is no longer active. Please resolve the event in Outlook.",
@@ -30,12 +30,19 @@
     "resolveProjectButtonLabel": "Resolve",
     "ignoreEventButtonLabel": "Ignore",
     "clearProjectMatchTooltipText": "Clear match",
-    "matchOutlookInfoText": "**Please note:** You should try your best to match<a href='{(webLink}}' target='_blank'>the event in Outlook</a>, but in some cases it might be neccessary to manually match.",
+    "matchOutlookInfoText": "**Please note:** You should try your best to match<a href='{{webLink}}' target='_blank'>the event in Outlook</a>, but in some cases it might be neccessary to manually match.",
     "didYouMeanText": "Did you mean",
     "eventNotFullyMatchedText": "Event not matched. We found a matching customer **{{name}}**, but not a project with the specified key.",
     "customerInactiveErrorText": "The customer is no longer active. Edit the event in Outlook.",
     "projectInactiveErrorText": "The project is no longer active. Edit the event in Outlook.",
-    "matchEventPanelHeaderText": "Resolve event"
+    "forecastHoursText": "Forecast hours",
+    "unforecastHoursText": "Remove forecast",
+    "periodForecastedText": "The period is forecasted with {{hours}}. Click **Remove forecast** if you want to do some adjustments.",
+    "matchEventPanelHeaderText": "Resolve event",
+    "unforecastingPeriodDescription": "Hang on a minute...",
+    "unforecastingPeriodLabel": "Removing forecast",
+    "forecastingPeriodLabel": "Forecasting period",
+    "forecastingPeriodDescription": "Hang on a minute..."
   },
   "projects": {
     "inactiveText": "This project has been marked as inactive.",
@@ -105,17 +112,19 @@
   },
   "reports": {
     "generatingReportLabel": "Generating report. To give you the freshest results, we're generating a report from the latest data...",
-    "noEntriesText": "There's no confirmed time entries at this time.",
-    "selectReportText": "Select a report from the menu above.",
-    "selectReportLabel": "Select report"
+    "noEntriesText": "There's no time entries at this time.",
+    "selectReportText": "Select a report above. Be aware that some reports can take several minutes to load.",
+    "selectReportLabel": "Select report",
+    "forecast": "Forecast",
+    "exportToExcel": "Export to Excel"
   },
   "common": {
-    "headerTotalDuration": " ({0}hrs)",
+    "headerTotalDuration": " ({{duration}})",
     "groupBy": "Group by",
     "all": "All",
     "none": "None",
-    "previousMonth": "Last month",
-    "currentMonth": "This month",
+    "previousMonth": "Last month ({{monthName}})",
+    "currentMonth": "This month ({{monthName}})",
     "currentYear": "This year",
     "noneSelectedMessage": "None selected yet",
     "hoursCurrentMonth": "Hours this month",
@@ -231,7 +240,8 @@
       "nextYearRangeAriaLabel": "Next year range",
       "closeButtonAriaLabel": "Close"
     },
-    "preferredLanguageLabel": "Preferred language"
+    "preferredLanguageLabel": "Preferred language",
+    "showAllFiltersText": "Show all ({{count}})"
   },
   "navigation": {
     "timesheet": "Timesheet",

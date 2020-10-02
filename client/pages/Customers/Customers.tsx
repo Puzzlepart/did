@@ -16,9 +16,7 @@ import { CustomerList } from './CustomerList'
 import GET_CUSTOMERS from './GET_CUSTOMERS'
 import { ICustomersParams, IGetCustomersData } from './types'
 
-/**
- * @category Customers
- */
+
 export const Customers = () => {
     const { t } = useTranslation()
     const { hasPermission } = useContext(AppContext)

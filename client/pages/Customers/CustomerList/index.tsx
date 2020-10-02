@@ -41,9 +41,7 @@ export const columns = (t: TFunction): IColumn[] => ([
     ),
 ])
 
-/**
- * @category Customers
- */
+
 export const CustomerList = (props: ICustomerListProps) => {
     const { t } = useTranslation()
     const [items, setItems] = useState([...props.items])

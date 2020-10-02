@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { IIgnoreEventButtonProps } from '../types'
+import { IIgnoreEventButtonProps } from './types'
 import { TimesheetContext } from '../../../types'
 import { MessageBarButton } from 'office-ui-fabric-react/lib/Button'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'

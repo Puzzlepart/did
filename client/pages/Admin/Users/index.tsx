@@ -13,9 +13,7 @@ import { GET_DATA } from './GET_DATA'
 import { IUserFormProps, UserForm } from './UserForm'
 import { IUsersContext, UsersContext } from './context'
 
-/**
- * @category Admin
- */
+
 export const Users = () => {
     const { t } = useTranslation()
     const [userForm, setUserForm] = useState<IUserFormProps>(null)

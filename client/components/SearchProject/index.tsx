@@ -6,9 +6,6 @@ import { Autocomplete, ISuggestionItem } from '../Autocomplete'
 import { ISearchProjectProps } from './types'
 import GET_PROJECTS from 'pages/Projects/GET_PROJECTS'
 
-/**
- * @category SearchProject
- */
 export const SearchProject = (props: ISearchProjectProps) => {
     const { loading, data } = useQuery<{ projects: IProject[] }>(GET_PROJECTS, {
         variables: { sortBy: 'name' },

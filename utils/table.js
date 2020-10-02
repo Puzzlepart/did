@@ -180,7 +180,7 @@ class AzTableUtilities {
   convertToAzEntity(rowKey, values, partitionKey = 'Default', options = { removeBlanks: true }) {
     const { string, datetime, double, int, boolean } = this.azEntGen()
     const entity = Object.keys(values)
-      .filter(key => options.removeBlanks ? !isBlank(values[key]) : true)
+      .filter(key => (options.removeBlanks ? !isBlank(values[key]) : true))
       .reduce(
         (obj, key) => {
           let value
@@ -210,7 +210,7 @@ class AzTableUtilities {
           RowKey: string(rowKey),
         }
       )
-    return omit(entity, ({ _ }) => options.removeBlanks ? isBlank(_) : false)
+    return omit(entity, ({ _ }) => (options.removeBlanks ? isBlank(_) : false))
   }
 
   /**
@@ -251,7 +251,7 @@ class AzTableUtilities {
    * @param {*} entity Entity
    * @param {*} merge If the entity should be inserted using insertOrMergeEntity
    */
-  updateEntity(table, entity, merge) {
+  updateAzEntity(table, entity, merge) {
     return new Promise((resolve, reject) => {
       if (merge) {
         this.tableService.insertOrMergeEntity(table, entity, undefined, (error, result) => {

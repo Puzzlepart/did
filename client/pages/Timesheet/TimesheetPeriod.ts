@@ -37,17 +37,38 @@ export interface ITimesheetPeriod {
   /**
    * Period confirmed
    */
-  confirmed: boolean
+  isConfirmed: boolean
 
   /**
    * Events
    */
   events: ITimeEntry[]
+
+  /**
+   * Is there an active forecast for the period
+   */
+  isForecasted: boolean
+
+  /**
+   * Is the period in the future
+   */
+  isForecast: boolean
 }
 
-/**
- * @category Timesheet
- */
+export interface ITimesheetPeriodMatchedEvent {
+  id: string
+  projectId: string
+  manualMatch: boolean
+}
+
+export interface ITimesheetPeriodData {
+  id: string
+  startDateTime: string
+  endDateTime: string
+  matchedEvents: ITimesheetPeriodMatchedEvent[]
+  isForecast: boolean
+}
+
 export class TimesheetPeriod {
   /**
    * Identifier for the period week_month_year
@@ -57,7 +78,17 @@ export class TimesheetPeriod {
   /**
    * Period confirmed
    */
-  public confirmed?: boolean
+  public isConfirmed?: boolean
+
+  /**
+   * Is there an active forecast for the period
+   */
+  public isForecasted: boolean
+
+  /**
+   * Is the period in the future and available for forecasting
+   */
+  public isForecast: boolean
 
   /**
    * Events ignored in UI
@@ -112,7 +143,9 @@ export class TimesheetPeriod {
     this._month = capitalize(_period.month)
     this._startDateTime = moment(_period.startDateTime)
     this._endDateTime = moment(_period.endDateTime)
-    this.confirmed = _period.confirmed
+    this.isConfirmed = _period.isConfirmed
+    this.isForecasted = _period.isForecasted
+    this.isForecast = _period.isForecast
     this._uiMatchedEventsStorageKey = `did365_ui_matched_events_${this.id}`
     this._uiIgnoredEventsStorageKey = `did365_ui_ignored_events_${this.id}`
     this._uiIgnoredEvents = this._localStorage.get(this._uiIgnoredEventsStorageKey) || []
@@ -191,7 +224,7 @@ export class TimesheetPeriod {
     return filter(this.events, event => !!event.project).reduce((sum, event) => (sum += event.duration), 0)
   }
 
-  /*
+  /**
    * Get unmatched duration for the events in the period
    */
   public get unmatchedDuration(): number {
@@ -241,29 +274,38 @@ export class TimesheetPeriod {
   /**
    * Get matched events with properties id, projectId and manualMatch
    */
-  private get matchedEvents() {
-    const events = filter([...this.events], event => !!event.project).map(event => ({
-      id: event.id,
-      projectId: event.project.id,
-      manualMatch: event.manualMatch,
-    }))
+  private get matchedEvents(): ITimesheetPeriodMatchedEvent[] {
+    const events = filter([...this.events], event => !!event.project).map(
+      event =>
+        ({
+          id: event.id,
+          projectId: event.project.id,
+          manualMatch: event.manualMatch,
+        } as ITimesheetPeriodMatchedEvent)
+    )
     return events
   }
 
   /**
    * Get data for the period
    *
-   * Returns the id, startDateTime, endDateTime and matchedEvents
+   * Returns the id, startDateTime, endDateTime, matchedEvents and forecast
    */
-  public get data() {
+  public get data(): ITimesheetPeriodData {
     return {
       id: this.id,
       startDateTime: this._startDateTime.toISOString(),
       endDateTime: this._endDateTime.toISOString(),
       matchedEvents: this.matchedEvents,
+      isForecast: this.isForecast,
     }
   }
 
+  /**
+   * Get weekdays in the specified format
+   *
+   * @param {string} dayFormat Day format
+   */
   public weekdays(dayFormat = 'dddd DD'): string[] {
     if (!this._startDateTime) return []
     return dateUtils.getDays(this._startDateTime, this._endDateTime, dayFormat)
@@ -277,5 +319,12 @@ export class TimesheetPeriod {
       .split('_')
       .filter(p => p)
       .join('/')
+  }
+
+  /**
+   * Period is locked when it's either confirmed or forecasted
+   */
+  public get isLocked() {
+    return this.isConfirmed || this.isForecasted
   }
 }

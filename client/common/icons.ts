@@ -1,6 +1,3 @@
-/**
- * @ignore
- */
 const ICONS = [
   'GlobalNavButton',
   'InternetSharing',

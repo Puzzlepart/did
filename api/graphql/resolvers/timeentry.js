@@ -29,6 +29,8 @@ const typeDef = gql`
     Get time entries
     """
     timeentries(
+      startDateTime: String
+      endDateTime: String
       projectId: String
       resourceId: String
       weekNumber: Int
@@ -37,6 +39,7 @@ const typeDef = gql`
       maxMonthNumber: Int
       year: Int
       currentUser: Boolean
+      forecast: Boolean
     ): [TimeEntry!]
   }
 `
@@ -46,7 +49,7 @@ async function timeentries(_obj, variables, ctx) {
   let [projects, customers, timeentries] = await Promise.all([
     ctx.services.azstorage.getProjects(),
     ctx.services.azstorage.getCustomers(),
-    ctx.services.azstorage.getTimeEntries(variables),
+    ctx.services.azstorage.getTimeEntries(variables, variables.forecast),
   ])
   let entries = timeentries.map(entry => ({
     ...entry,

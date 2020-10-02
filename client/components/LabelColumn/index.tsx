@@ -6,9 +6,6 @@ import { EntityLabel } from 'components/EntityLabel'
 import { IEntityLabel } from 'types'
 import { ILabelColumnProps } from './types'
 
-/**
- * @category LabelColumn
- */
 export const LabelColumn = ({ label, project, customer }: ILabelColumnProps) => {
     if (project) {
         return (

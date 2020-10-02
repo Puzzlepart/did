@@ -4,9 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { AppContext } from 'AppContext'
 import { DefaultButton } from 'office-ui-fabric-react'
 
-/**
- * @ignore
- */
+
 export default () => {
     const { user } = useContext(AppContext)
     const { t } = useTranslation()

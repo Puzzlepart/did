@@ -12,8 +12,11 @@ import { generateListGroups } from './generateListGroups'
 import { ListHeader } from './ListHeader'
 import reducer from './reducer'
 import { IListProps } from './types'
+import FadeIn from 'react-fade-in'
 
 /**
+ * List component using DetailsList from office-ui-fabric-react
+ * 
  * @category List
  */
 const List = (props: IListProps) => {
@@ -70,33 +73,42 @@ const List = (props: IListProps) => {
 
     return (
         <div style={{ marginBottom: 25 }} hidden={props.hidden}>
-            <ScrollablePaneWrapper condition={!!props.height} height={props.height}>
-                <ShimmeredDetailsList
-                    getKey={(_item, index) => `list_item_${index}`}
-                    setKey={'list'}
-                    enableShimmer={props.enableShimmer}
-                    isPlaceholderData={props.enableShimmer}
-                    selection={selection}
-                    columns={props.columns}
-                    items={items}
-                    groups={groups}
-                    selectionMode={props.selection ? props.selection.mode : SelectionMode.none}
-                    constrainMode={ConstrainMode.horizontalConstrained}
-                    layoutMode={DetailsListLayoutMode.justified}
-                    groupProps={{
-                        ...props.groupProps,
-                        onRenderHeader: onRenderGroupHeader,
-                    }}
-                    onRenderDetailsHeader={onRenderListHeader}
-                    checkboxVisibility={props.checkboxVisibility || CheckboxVisibility.hidden} />
-            </ScrollablePaneWrapper>
+            <FadeIn {...props.fadeIn}>
+                <ScrollablePaneWrapper condition={!!props.height} height={props.height}>
+                    <ShimmeredDetailsList
+                        getKey={(_item, index) => `list_item_${index}`}
+                        setKey={'list'}
+                        enableShimmer={props.enableShimmer}
+                        isPlaceholderData={props.enableShimmer}
+                        selection={selection}
+                        columns={props.columns}
+                        items={items}
+                        groups={groups}
+                        selectionMode={props.selection ? props.selection.mode : SelectionMode.none}
+                        constrainMode={ConstrainMode.horizontalConstrained}
+                        layoutMode={DetailsListLayoutMode.justified}
+                        groupProps={{
+                            ...props.groupProps,
+                            onRenderHeader: onRenderGroupHeader,
+                        }}
+                        onRenderDetailsHeader={onRenderListHeader}
+                        checkboxVisibility={props.checkboxVisibility || CheckboxVisibility.hidden} />
+                </ScrollablePaneWrapper>
+            </FadeIn>
         </div>
     )
 }
 
 export default withDefaultProps(List, {
-    commandBar: { items: [], farItems: [] }
-})
+    fadeIn: {
+        delay: 0,
+        transitionDuration: 0,
+    },
+    commandBar: {
+        items: [],
+        farItems: [],
+    }
+} as IListProps)
 
 export { SelectionMode, IColumn }
 

@@ -14,9 +14,7 @@ import { reducer } from './reducer'
 import TIME_ENTRIES, { ITimeEntriesVariables } from './TIME_ENTRIES'
 import { getViewTypes, ISummaryViewContext, ISummaryViewProps } from './types'
 
-/**
- * @category Admin
- */
+
 export const SummaryView = (props: ISummaryViewProps): JSX.Element => {
     const { t } = useTranslation()
     const types = getViewTypes(t)

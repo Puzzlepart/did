@@ -6,9 +6,6 @@ import { withDefaultProps } from 'with-default-props'
 import columns from './columns'
 import { IProjectListProps } from './types'
 
-/**
- * @category ProjectList
- */
 const ProjectList = (props: IProjectListProps) => {
     const { t } = useTranslation()
     const [items, setItems] = useState([...props.items])

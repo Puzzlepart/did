@@ -5,9 +5,6 @@ import { isBlank } from 'underscore.string'
 import styles from './EntityLabel.module.scss'
 import { IEntityLabelProps } from './types'
 
-/**
- * @category EntityLabel
- */
 export const EntityLabel = ({ size, label }: IEntityLabelProps) => {
     const { t } = useTranslation()
     const className = [styles.root]

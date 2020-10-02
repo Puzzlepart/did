@@ -13,9 +13,7 @@ import { TimeEntries } from './TimeEntries'
 import { IProjectDetailsProps } from './types'
 import { ProjectDetailsContext } from './ProjectDetailsContext'
 
-/**
- * @category Projects
- */
+
 export const ProjectDetails = (props: IProjectDetailsProps) => {
     const { t } = useTranslation()
     const [project, setProject] = useState({ ...props.project })

@@ -90,7 +90,7 @@ switch (mode) {
           suppressSuccess: process.env.WEBPACK_NOTIFICATIONS_SUPPRESSSUCCESS === 'true',
           showDuration: process.env.WEBPACK_NOTIFICATIONS_SHOWDURATION === 'true',
         })
-      ) 
+      )
     }
     break
   case 'production':

@@ -21,12 +21,9 @@ import {
     TimesheetContext,
     TimesheetPeriod,
     TimesheetScope,
-    TimesheetView,
+    TimesheetView
 } from './types'
 
-/**
- * @category Timesheet
- */
 export const Timesheet = () => {
     const context = useContext(AppContext)
     const { t } = useTranslation()
@@ -47,31 +44,32 @@ export const Timesheet = () => {
         fetchPolicy: 'network-only',
     })
 
-    useEffect(() => { dispatch({ type: 'DATA_UPDATED', payload: { query, t } }) }, [query])
+    useEffect(() => dispatch({ type: 'DATA_UPDATED', payload: { query, t } }), [query])
 
     useEffect(() => { history.push(`/timesheet/${state.selectedView}/${state.selectedPeriod.path}`) }, [state.selectedView, state.selectedPeriod])
 
-    const [[confirmPeriod], [unconfirmPeriod]] = [
+    const [[submitPeriod], [unsubmitPeriod]] = [
         useMutation(graphql.mutation.confirmPeriod),
-        useMutation(graphql.mutation.unconfirmPeriod)
+        useMutation(graphql.mutation.unconfirmPeriod),
     ]
 
-    const onConfirmPeriod = () => {
-        dispatch({ type: 'CONFIRMING_PERIOD', payload: { t } })
+    const onSubmitPeriod = async () => {
+        dispatch({ type: 'SUBMITTING_PERIOD', payload: { t } })
         const variables = { period: state.selectedPeriod.data }
-        confirmPeriod({ variables }).then(query.refetch)
+        await submitPeriod({ variables })
+        query.refetch()
     }
 
-    const onUnconfirmPeriod = () => {
-        dispatch({ type: 'UNCONFIRMING_PERIOD', payload: { t } })
+    const onUnsubmitPeriod = () => {
+        dispatch({ type: 'UNSUBMITTING_PERIOD', payload: { t } })
         const variables = { period: state.selectedPeriod.data }
-        unconfirmPeriod({ variables }).then(query.refetch)
+        unsubmitPeriod({ variables }).then(query.refetch)
     }
 
     const ctx: ITimesheetContext = useMemo(() => ({
         ...state,
-        onConfirmPeriod,
-        onUnconfirmPeriod,
+        onSubmitPeriod,
+        onUnsubmitPeriod,
         dispatch,
     }), [state])
 

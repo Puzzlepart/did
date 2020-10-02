@@ -15,9 +15,6 @@ import styles from './LabelForm.module.scss'
 import { ILabelFormProps } from './types'
 import { IconPicker } from 'components/IconPicker'
 
-/**
- * @category LabelForm
- */
 export const LabelForm = (props: ILabelFormProps) => {
     const { t } = useTranslation()
     const [model, setModel] = useState<IEntityLabel>(props.label || {

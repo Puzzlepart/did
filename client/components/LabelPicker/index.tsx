@@ -10,9 +10,6 @@ import { SelectCallout } from './SelectCallout'
 import { omit } from 'underscore'
 import { useTranslation } from 'react-i18next'
 
-/**
- * @category LabelPicker
- */
 export const LabelPicker = (props: ILabelPickerProps) => {
     const { t } = useTranslation()
     const { data } = useQuery(GET_LABELS, { fetchPolicy: 'cache-and-network' })

@@ -9,9 +9,7 @@ import DELETE_LABEL from './DELETE_LABEL'
 import GET_LABELS from './GET_LABELS'
 import { ILabelFormProps, LabelForm } from './LabelForm'
 
-/**
- * @category Admin
- */
+
 export const Labels = () => {
     const { t } = useTranslation()
     const { data, refetch } = useQuery(GET_LABELS, { fetchPolicy: 'cache-and-network' })
