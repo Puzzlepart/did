@@ -205,8 +205,13 @@ async function submitPeriod(_obj, variables, ctx) {
 
 async function unsubmitPeriod(_obj, variables, ctx) {
   try {
-    await ctx.services.azstorage.deleteUserTimeEntries(variables.period.id, ctx.user.id)
-    await ctx.services.azstorage.removeConfirmedPeriod(variables.period.id, ctx.user.id)
+    const { id, isForecast } = variables.period
+    await ctx.services.azstorage.deleteTimeEntries(id, ctx.user.id, isForecast)
+    if (isForecast) {
+      await ctx.services.azstorage.removeForecastedPeriod(id, ctx.user.id)
+    } else {
+      await ctx.services.azstorage.removeConfirmedPeriod(id, ctx.user.id)
+    }
     return { success: true, error: null }
   } catch (error) {
     return {

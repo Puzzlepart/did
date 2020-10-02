@@ -251,7 +251,7 @@ class AzTableUtilities {
    * @param {*} entity Entity
    * @param {*} merge If the entity should be inserted using insertOrMergeEntity
    */
-  updateEntity(table, entity, merge) {
+  updateAzEntity(table, entity, merge) {
     return new Promise((resolve, reject) => {
       if (merge) {
         this.tableService.insertOrMergeEntity(table, entity, undefined, (error, result) => {
