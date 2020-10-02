@@ -1,28 +1,18 @@
-
 import gql from 'graphql-tag'
-
-export interface ICustomerInput {
-    key?: string;
-    name?: string;
-    description?: string;
-    icon?: string;
-}
+import { CustomerModel } from './types'
 
 export interface ICreateOrUpdateCustomerVariables {
-    customer: ICustomerInput;
-    update?: boolean;
+  customer: CustomerModel
+  update?: boolean
 }
 
-/**
- * @ignore
- */
 export default gql`
-    mutation($customer: CustomerInput!, $update: Boolean) { 
-        result: createOrUpdateCustomer(customer: $customer, update: $update) {
-            success
-            error {
-                message
-            }
-        }
+  mutation($customer: CustomerInput!, $update: Boolean) {
+    result: createOrUpdateCustomer(customer: $customer, update: $update) {
+      success
+      error {
+        message
+      }
     }
+  }
 `

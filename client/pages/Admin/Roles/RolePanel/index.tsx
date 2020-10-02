@@ -1,4 +1,6 @@
 import { useMutation } from '@apollo/react-hooks'
+import { getIcons } from 'common/icons'
+import { IconPicker } from 'components/IconPicker'
 import * as securityConfig from 'config/security'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { Panel } from 'office-ui-fabric-react/lib/Panel'
@@ -6,20 +8,18 @@ import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import { Toggle } from 'office-ui-fabric-react/lib/Toggle'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { contains, isEmpty, omit, isEqual } from 'underscore'
+import { contains, first, isEmpty, isEqual, omit } from 'underscore'
+import ADD_OR_UPDATE_ROLE from './ADD_OR_UPDATE_ROLE'
 import styles from './RolePanel.module.scss'
 import { IRolePanelProps } from './types'
-import ADD_OR_UPDATE_ROLE from './ADD_OR_UPDATE_ROLE'
 
-/**
- * @category Admin
- */
+
 export const RolePanel = (props: IRolePanelProps) => {
-    const { t } = useTranslation('admin')
+    const { t } = useTranslation()
     const [addOrUpdateRole] = useMutation(ADD_OR_UPDATE_ROLE)
-    const [role, setRole] = useState(props.edit || { permissions: [] })
+    const [model, setModel] = useState(props.model || { name: '', permissions: [], icon: first(getIcons(1)) })
     const permissions = useMemo(() => securityConfig.permissions(t), [])
-    const saveDisabled = useMemo(() => (!props.edit && isEmpty(role.name)) || isEqual(role.permissions, props.edit?.permissions), [props.edit, role])
+    const saveDisabled = useMemo(() => (!props.model && isEmpty(model.name)) || isEqual(model.permissions, props.model?.permissions), [props.model, model])
 
     /**
      * On toggle permission
@@ -28,11 +28,11 @@ export const RolePanel = (props: IRolePanelProps) => {
      * @param {boolean} checked Is checked
      */
     function togglePermission(permissionId: string, checked: boolean) {
-        const rolePermissions = [...role.permissions]
+        const rolePermissions = [...model.permissions]
         const index = rolePermissions.indexOf(permissionId)
         if (checked && index === -1) rolePermissions.push(permissionId)
         else rolePermissions.splice(index, 1)
-        setRole({ ...role, permissions: rolePermissions })
+        setModel({ ...model, permissions: rolePermissions })
     }
 
     /**
@@ -41,11 +41,11 @@ export const RolePanel = (props: IRolePanelProps) => {
     async function onSave() {
         await addOrUpdateRole({
             variables: {
-                role: omit(role, '__typename'),
-                update: !!props.edit
+                role: omit(model, '__typename'),
+                update: !!props.model
             }
         })
-        props.onSave(role)
+        props.onSave(model)
     }
 
     return (
@@ -56,29 +56,34 @@ export const RolePanel = (props: IRolePanelProps) => {
             title={props.title}
             onDismiss={props.onDismiss}>
             <div className={styles.container}>
-                <div className={styles.inputField}>
-                    <TextField
-                        label={t('roleNameLabel')}
-                        defaultValue={props.edit ? props.edit.name : ''}
-                        disabled={!!props.edit}
-                        required={true}
-                        onChange={(_event, name) => setRole({ ...role, name })} />
-                </div>
-                <div className={styles.subHeader}>{t('permissonsLabel')}</div>
+                <TextField
+                    className={styles.inputField}
+                    label={t('admin.roleNameLabel')}
+                    defaultValue={props.model ? props.model.name : ''}
+                    disabled={!!props.model}
+                    required={true}
+                    onChange={(_event, name) => setModel({ ...model, name })} />
+                <IconPicker
+                    label={t('common.iconLabel')}
+                    placeholder={t('common.iconSearchPlaceholder')}
+                    defaultSelected={model.icon}
+                    onSelected={icon => setModel({ ...model, icon })}
+                    className={styles.inputField} />
+                <div className={styles.subHeader}>{t('admin.permissonsLabel')}</div>
                 <div className={styles.permissions}>
                     {permissions.map(({ key, id, name }) => (
                         <div key={key} className={styles.permissionItem}>
                             <Toggle
                                 label={name}
                                 inlineLabel={true}
-                                defaultChecked={contains(role.permissions, id)}
+                                defaultChecked={contains(model.permissions, id)}
                                 onChange={(_event, checked) => togglePermission(id, checked)} />
                         </div>
                     ))}
                 </div>
                 <PrimaryButton
                     className={styles.saveBtn}
-                    text={t('save', { ns: 'common' })}
+                    text={t('common.save')}
                     onClick={onSave}
                     disabled={saveDisabled} />
             </div>

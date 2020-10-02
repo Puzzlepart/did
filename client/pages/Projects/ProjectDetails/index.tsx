@@ -5,18 +5,17 @@ import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Actions } from './Actions'
+import { Actions } from './actions'
 import styles from './ProjectDetails.module.scss'
 import PROJECT_TIME_ENTRIES from './PROJECT_TIME_ENTRIES'
 import { Summary } from './Summary'
 import { TimeEntries } from './TimeEntries'
-import { IProjectDetailsProps, ProjectDetailsContext } from './types'
+import { IProjectDetailsProps } from './types'
+import { ProjectDetailsContext } from './ProjectDetailsContext'
 
-/**
- * @category Projects
- */
+
 export const ProjectDetails = (props: IProjectDetailsProps) => {
-    const { t } = useTranslation(['projects', 'common'])
+    const { t } = useTranslation()
     const [project, setProject] = useState({ ...props.project })
     const { loading, error, data } = useQuery<{ timeentries: any[] }>(PROJECT_TIME_ENTRIES, { variables: { projectId: props.project.id } })
     const timeentries = data ? data.timeentries : []
@@ -47,7 +46,7 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                 {project.inactive && (
                     <UserMessage
                         hidden={!project.inactive}
-                        text={t('inactiveText')}
+                        text={t('projects.inactiveText')}
                         iconName='Warning'
                         type={MessageBarType.warning} />
                 )}
@@ -57,13 +56,13 @@ export const ProjectDetails = (props: IProjectDetailsProps) => {
                         <EntityLabel
                             key={idx}
                             label={label}
-                            size='small' />
+                            size='medium' />
                     ))}
                 </div>
                 <UserMessage
                     hidden={!project.outlookCategory}
                     containerStyle={{ margin: '15px 0 15px 0' }}
-                    text={t('categoryOutlookText')}
+                    text={t('projects.categoryOutlookText')}
                     iconName='OutlookLogoInverse' />
                 <Summary />
                 <TimeEntries />

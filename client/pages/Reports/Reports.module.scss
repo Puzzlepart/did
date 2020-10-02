@@ -1,5 +1,9 @@
 .root {
-  .spinner {
-    padding: 0 0 0 20px;
+  .container {
+    margin: 8px 0 0 0;
+
+    .spinner {
+      margin: 10px;
+    }
   }
 }

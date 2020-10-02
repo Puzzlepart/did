@@ -1,71 +1,78 @@
-import { TFunction } from 'i18next'
-import { IColumn } from 'office-ui-fabric-react'
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
+import { Label } from 'office-ui-fabric-react/lib/Label'
 import { Slider } from 'office-ui-fabric-react/lib/Slider'
+import { Spinner } from 'office-ui-fabric-react/lib/Spinner'
 import React from 'react'
+import dateUtils from 'utils/date'
 import * as excelUtils from 'utils/exportExcel'
-import { ISummaryViewContext } from './types'
+import styles from './SummaryView.module.scss'
+import { ISummaryViewContext } from './context'
 
-export const commandBar = (
-    { scope, scopes, types, type, dispatch }: ISummaryViewContext,
-    items: any[],
-    columns: IColumn[],
-    t: TFunction,
-) => {
+/**
+ * Command bar items
+ * 
+ * @param {ISummaryViewContext} context Summary view context
+ */
+export const commandBar = (context: ISummaryViewContext) => {
     return {
         items: [
             {
-                ...scope,
-                key: 'VIEW_SCOPE',
+                ...context.type,
+                key: 'VIEW_TYPE',
+                disabled: context.loading,
                 subMenuProps: {
-                    items: scopes.map(s => ({
-                        ...s,
+                    items: context.types.map(type => ({
+                        ...type,
                         canCheck: true,
-                        checked: scope.key === s.key,
-                        onClick: () => dispatch({ type: 'CHANGE_SCOPE', payload: s })
+                        checked: context.type.key === type.key,
+                        onClick: () => context.dispatch({ type: 'CHANGE_TYPE', payload: type })
                     })),
                 },
-            },
-            {
-                ...type,
-                key: 'VIEW_TYPE',
-                subMenuProps: {
-                    items: types.map(t => ({
-                        ...t,
-                        canCheck: true,
-                        checked: type.key === t.key,
-                        onClick: () => dispatch({ type: 'CHANGE_TYPE', payload: t })
-                    })),
-                }
+                className: styles.viewTypeSelector
             },
             {
                 key: 'RANGE',
                 name: '',
                 onRender: () => (
-                    <Slider
-                        styles={{
-                            root: {
-                                width: 300,
-                                marginLeft: 10,
-                                alignSelf: 'center',
-                            }
-                        }}
-                        min={3}
-                        max={12}
-                        onChange={value => dispatch({ type: 'CHANGE_RANGE', payload: value })} />
+                    <>
+                        <Label styles={{ root: { marginLeft: 20, alignSelf: 'center' } }}>Antal måneder</Label>
+                        <Slider
+                            styles={{
+                                root: {
+                                    width: 300,
+                                    marginLeft: 10,
+                                    alignSelf: 'center',
+                                },
+                            }}
+                            disabled={context.loading}
+                            value={context.range}
+                            min={2}
+                            max={dateUtils.getMonthIndex()}
+                            onChange={value => context.dispatch({ type: 'CHANGE_RANGE', payload: value })} />
+                    </>
                 ),
             },
+            {
+                key: 'LOADING_SPINNER',
+                name: '',
+                onRender: () => context.loading && (
+                    <Spinner
+                        label={context.t('admin.summaryLoadingText')}
+                        labelPosition='right' />
+                )
+            }
         ] as IContextualMenuItem[],
         farItems: [
             {
                 key: 'EXPORT_TO_EXCEL',
-                text: t('exportCurrentView'),
+                text: context.t('common.exportCurrentView'),
                 iconProps: { iconName: 'ExcelDocument' },
+                disabled: context.loading,
                 onClick: () => {
                     excelUtils.exportExcel(
-                        items,
+                        context.rows,
                         {
-                            columns,
+                            columns: context.columns,
                             fileName: `Summary-${new Date().toDateString().split(' ').join('-')}.xlsx`,
                         })
                 },

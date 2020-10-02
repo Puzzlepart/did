@@ -7,13 +7,11 @@ import { UserSettingInput } from './UserSettingInput'
 import styles from './UserSettings.module.scss'
 import { UserSettingsContext } from './UserSettingsContext'
 import { USER_SETTINGS } from './USER_SETTINGS'
-import ADD_OR_UPDATE_USER from 'pages/Admin/Users/UserFormModal/ADD_OR_UPDATE_USER'
+import ADD_OR_UPDATE_USER from 'pages/Admin/Users/UserForm/ADD_OR_UPDATE_USER'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 
-/**
- * @category UserSettings
- */
 export const UserSettings = (props: React.HTMLProps<HTMLDivElement>) => {
-    const { t } = useTranslation('common')
+    const { t } = useTranslation()
     const { user } = React.useContext(AppContext)
     const [isOpen, toggle] = React.useState<boolean>(false)
     const [addOrUpdateUser] = useMutation(ADD_OR_UPDATE_USER)
@@ -32,10 +30,10 @@ export const UserSettings = (props: React.HTMLProps<HTMLDivElement>) => {
         <UserSettingsContext.Provider value={{ onUpdateUserSettings }}>
             <div className={styles.root}>
                 <a href='#' className={props.className} onClick={() => toggle(true)}>
-                    <span>{t('settings')}</span>
+                <Icon iconName='Settings' className={styles.icon} /><span>{t('common.settings')}</span>
                     <Panel
                         className={styles.panel}
-                        headerText={t('settings')}
+                        headerText={t('common.settings')}
                         isOpen={isOpen}
                         onDismiss={() => toggle(false)}
                         isLightDismiss={true}>

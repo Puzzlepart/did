@@ -1,6 +1,10 @@
 const unconfirmed_periods = require('./notification.unconfirmed-periods')
+const { gql } = require('apollo-server-express')
 
-const typeDef = `  
+const typeDef = gql`
+  """
+  A type that describes a Notification
+  """
   type Notification {
     id: String
     type: Int!
@@ -9,18 +13,21 @@ const typeDef = `
     moreLink: String
   }
 
+  """
+  Input object for Notification template used in Query notifications
+  """
   input NotificationTemplates {
     unconfirmedPeriods: String!
   }
-  
+
   extend type Query {
-    notifications(templates: NotificationTemplates!): [Notification!]!
-  }  
+    """
+    Get notifications
+    """
+    notifications(templates: NotificationTemplates!, locale: String!): [Notification!]!
+  }
 `
 
-/**
- * Get notifications
- */
 async function notifications(_obj, variables, ctx) {
   if (!ctx.user.id) return { success: false, error: null }
 
@@ -28,17 +35,16 @@ async function notifications(_obj, variables, ctx) {
     unconfirmed_periods({
       template: variables.templates.unconfirmedPeriods,
       ctx,
+      locale: variables.locale,
     }),
   ])
   return notifications
 }
 
-
-
 module.exports = {
   resolvers: {
     Query: { notifications },
-    Mutation: {}
+    Mutation: {},
   },
-  typeDef
+  typeDef,
 }

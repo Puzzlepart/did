@@ -6,21 +6,18 @@ import { UserNotification } from '../UserNotification'
 import { INotificationsPanelProps } from './types'
 import styles from './UserNotificationsPanel.module.scss'
 
-/**
- * @category UserNotifications
- */
 export const NotificationsPanel = (props: INotificationsPanelProps) => {
-    const { t } = useTranslation('notifications')
+    const { t } = useTranslation()
     return (
         <Panel
             isOpen={props.isOpen}
             className={styles.root}
-            headerText={t('headerText')}
+            headerText={t('notifications.headerText')}
             onDismiss={props.onDismiss}
             isLightDismiss={true}>
             <div className={styles.body}>
                 <div hidden={props.notifications.size > 0}>
-                    <UserMessage text={t('emptyText')} />
+                    <UserMessage text={t('notifications.emptyText')} />
                 </div>
                 <div hidden={props.notifications.size === 0}>
                     {[...props.notifications].map((n, idx) => (

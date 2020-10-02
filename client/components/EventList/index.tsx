@@ -7,15 +7,12 @@ import { titleColumn, timeColumn, durationColumn } from './columns'
 import styles from './EventList.module.scss'
 import { IEventListProps } from './types'
 
-/**
- * @category EventList
- */
 const EventList = (props: IEventListProps): JSX.Element => {
-    const { t } = useTranslation('common')
+    const { t } = useTranslation()
     const columns = [
-        titleColumn(props, t('titleLabel')),
-        timeColumn(props, t('timeLabel')),
-        durationColumn(props, t('durationLabel')),
+        titleColumn(props, t('common.titleLabel')),
+        timeColumn(props, t('common.timeLabel')),
+        durationColumn(props, t('common.durationLabel')),
         ...props.additionalColumns
     ].map(col => ({
         ...col,

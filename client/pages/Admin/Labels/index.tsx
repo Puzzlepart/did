@@ -1,32 +1,29 @@
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import { EntityLabel, List } from 'components'
-import { value } from 'helpers'
-import { IEntityLabel } from 'interfaces/IEntityLabel'
+import { IEntityLabel } from 'types/IEntityLabel'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
-import * as React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { generateColumn as col } from 'utils/generateColumn'
-import { ILabelFormProps, LabelForm } from './LabelForm'
-import GET_LABELS from './GET_LABELS'
 import DELETE_LABEL from './DELETE_LABEL'
+import GET_LABELS from './GET_LABELS'
+import { ILabelFormProps, LabelForm } from './LabelForm'
 
-/**
- * @category Admin
- */
+
 export const Labels = () => {
-    const { t } = useTranslation(['admin', 'common'])
+    const { t } = useTranslation()
     const { data, refetch } = useQuery(GET_LABELS, { fetchPolicy: 'cache-and-network' })
     const [deleteLabel] = useMutation(DELETE_LABEL)
-    const [form, setForm] = React.useState<ILabelFormProps>(null)
+    const [form, setForm] = useState<ILabelFormProps>(null)
 
     const columns = [
         col(
             'name',
-            t('nameLabel', { ns: 'common' }),
+            t('common.nameFieldLabel'),
             { maxWidth: 180 },
             (label: IEntityLabel) => <EntityLabel label={label} />,
         ),
-        col('description', t('descriptionLabel', { ns: 'common' })),
+        col('description', t('common.descriptionFieldLabel')),
         col(
             'edit_delete',
             '',
@@ -35,27 +32,27 @@ export const Labels = () => {
                 <>
                     <DefaultButton
                         styles={{ root: { marginRight: 4 } }}
-                        text={t('editLabel', { ns: 'common' })}
+                        text={t('common.editLabel')}
                         onClick={() => setForm({ label })} />
                     <DefaultButton
-                        text={t('delete', { ns: 'common' })}
+                        text={t('common.delete')}
                         onClick={() => deleteLabel({ variables: { name: label.name } }).then(refetch)} />
                 </>
             )),
     ]
 
-    React.useEffect(() => { refetch() }, [form])
+    useEffect(() => { refetch() }, [form])
 
     return (
         <>
             <List
-                items={value(data, 'labels', [])}
+                items={data?.labels || []}
                 columns={columns}
                 commandBar={{
                     items: [
                         {
-                            key: 'NEW_LABEL',
-                            name: t('addNewLabel'),
+                            key: 'ADD_NEW_LABEL',
+                            name: t('admin.addNewLabel'),
                             iconProps: { iconName: 'Add' },
                             onClick: () => setForm({})
                         }

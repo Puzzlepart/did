@@ -1,76 +1,66 @@
 import { SearchProject, UserMessage } from 'components'
-import { value as value } from 'helpers'
-import { IProject } from 'interfaces/IProject'
+import { value } from 'helpers'
 import { MessageBarButton } from 'office-ui-fabric-react/lib/Button'
-import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { Panel } from 'office-ui-fabric-react/lib/Panel'
-import { ITimesheetContext, TimesheetContext } from 'pages/Timesheet/TimesheetContext'
-import React from 'react'
+import { ITimesheetContext, TimesheetContext } from 'pages/Timesheet/context'
+import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { format } from 'office-ui-fabric-react/lib/Utilities'
+import { IProject } from 'types/IProject'
 import styles from './MatchEventPanel.module.scss'
 import { IMatchEventPanelProps } from './types'
-import { MobileView, BrowserView } from 'react-device-detect'
 
-/**
- * @category Timesheet
-*/
 export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
-    const { t } = useTranslation(['timesheet', 'common'])
-    const { dispatch } = React.useContext<ITimesheetContext>(TimesheetContext)
-    const [showPanel, setShowPanel] = React.useState<boolean>(false)
+    const { t } = useTranslation()
+    const { dispatch } = useContext<ITimesheetContext>(TimesheetContext)
+    const [isPanelVisible, setPanelVisibility] = useState(false)
 
-    const onResolve = (project: IProject) => {
-        setShowPanel(false)
+    const hidePanel = () => setPanelVisibility(false)
+    const showPanel = () => setPanelVisibility(true)
+
+    /**
+     * On manual match. Dispatches action type MANUAL_MATCH
+     * 
+     * @param {IProject} project Project to match the event to
+     */
+    const onManualMatch = (project: IProject) => {
+        hidePanel()
         dispatch({ type: 'MANUAL_MATCH', payload: { eventId: event.id, project } })
     }
 
     return (
-        <>
-            <BrowserView renderWithFragment={true}>
-                <MessageBarButton
-                    text={t('resolveProjectButtonLabel')}
-                    iconProps={{ iconName: 'ReviewResponseSolid' }}
-                    onClick={() => setShowPanel(true)} />
-            </BrowserView>
-            <MobileView renderWithFragment={true}>
-                <Icon
-                    styles={{ root: { fontSize: 18 } }}
-                    iconName='ReviewResponseSolid'
-                    onClick={() => setShowPanel(true)} />
-            </MobileView>
+        <span className={styles.root}>
+            <MessageBarButton
+                text={t('timesheet.resolveProjectButtonLabel')}
+                title={t('timesheet.resolveProjectButtonLabel')}
+                iconProps={{ iconName: 'ReviewResponseSolid' }}
+                onClick={showPanel} />
             <Panel
-                className={styles.root}
-                isOpen={showPanel}
-                onDismiss={() => setShowPanel(false)}>
-                <div className={styles.title}>{event.title}</div>
-                <UserMessage
-                    iconName='OutlookLogo'
-                    text={format(t('matchOutlookInfoText'), event.webLink)} />
-
+                isOpen={isPanelVisible}
+                headerText={t('timesheet.matchEventPanelHeaderText')}
+                onDismiss={hidePanel}>
+                <div className={styles.subText}>{event.title}</div>
+                <UserMessage iconName='OutlookLogo' text={t('timesheet.matchOutlookInfoText', event)} />
                 <UserMessage
                     hidden={!event.suggestedProject}
                     containerStyle={{ marginTop: 10 }}
                     iconName='Lightbulb' >
                     <p>
-                        <span>{t('didYouMeanText')}</span>
-                        <a href='#' onClick={() => onResolve(event.suggestedProject)}>
+                        <span>{t('timesheet.didYouMeanText')}</span>
+                        <a href='#' onClick={() => onManualMatch(event.suggestedProject)}>
                             {value(event, 'suggestedProject.id', '')}
                         </a>?
                     </p>
                 </UserMessage>
-
                 <UserMessage
                     hidden={!event.customer || !!event.suggestedProject}
                     containerStyle={{ marginTop: 10 }}
-                    text={format(t('eventNotFullyMatchedText'), value(event, 'customer.name', ''))} />
-
+                    text={t('timesheet.eventNotFullyMatchedText', { name: value(event, 'customer.name', '') })} />
                 <SearchProject
                     width='100%'
                     className={styles.searchProject}
-                    onSelected={project => onResolve(project)}
-                    placeholder={t('searchPlaceholder', { ns: 'common' })} />
+                    onSelected={project => onManualMatch(project)}
+                    placeholder={t('common.searchPlaceholder')} />
             </Panel>
-        </>
+        </span>
     )
 }

@@ -6,18 +6,15 @@ import { useTranslation } from 'react-i18next'
 import styles from './HotkeyModal.module.scss'
 export type IHotkeyModal = GlobalHotKeysProps & IModalProps;
 
-/**
- * @category HotkeyModal
- */
 export const HotkeyModal = (props: IHotkeyModal) => {
-    const { t } = useTranslation('common')
+    const { t } = useTranslation()
     return (
         <Modal
             isOpen={props.isOpen}
             onDismiss={props.onDismiss}
             containerClassName={styles.root}>
             <div className={styles.container}>
-                <div className={styles.title}>{t('shortcuts')}</div>
+                <div className={styles.title}>{t('common.weekLabel')}</div>
                 <FadeIn>
                     {Object.keys(props.keyMap).map(key => {
                         const { name, sequence } = props.keyMap[key] as any

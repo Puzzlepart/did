@@ -1,29 +1,29 @@
 import { useQuery } from '@apollo/react-hooks'
 import { dateAdd, IPnPClientStore, PnPClientStorage } from '@pnp/common'
+import { AppContext } from 'AppContext'
 import { value } from 'helpers'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
-import * as React from 'react'
-import styles from './UserNotifications.module.scss'
-import GET_NOTIFICATIONS, { IGetNotifications } from './GET_NOTIFICATIONS'
-import { NotificationModel } from './types'
-import { NotificationsPanel } from './NotificationsPanel'
+import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import GET_NOTIFICATIONS, { IGetNotifications, IGetNotificationsVariables } from './GET_NOTIFICATIONS'
+import { NotificationsPanel } from './NotificationsPanel'
+import { NotificationModel } from './types'
+import styles from './UserNotifications.module.scss'
 
 const BROWSER_STORAGE: IPnPClientStore = new PnPClientStorage().session
 const STORAGE_KEY = 'did365_dismissed_notifications'
 
-/**
- * @category UserNotifications
- */
 export const UserNotifications = () => {
-    const { t } = useTranslation('notifications')
-    const [showPanel, setShowPanel] = React.useState(false)
-    const [notifications, setNotifications] = React.useState<Set<NotificationModel>>(new Set())
-    const { loading, data } = useQuery<IGetNotifications>(
+    const { t } = useTranslation()
+    const { user } = useContext(AppContext)
+    const [showPanel, setShowPanel] = useState(false)
+    const [notifications, setNotifications] = useState<Set<NotificationModel>>(new Set())
+    const { loading, data } = useQuery<IGetNotifications, IGetNotificationsVariables>(
         GET_NOTIFICATIONS,
         {
             variables: {
-                templates: t('templates', { returnObjects: true })
+                templates: t('notifications.templates', { returnObjects: true }),
+                locale: user.preferredLanguage,
             },
             skip: notifications.size > 0,
             fetchPolicy: 'cache-and-network',
@@ -55,14 +55,14 @@ export const UserNotifications = () => {
 
     return (
         <>
-            <div hidden={loading} className={styles.root} onClick={() => setShowPanel(!showPanel)}>
+            <a hidden={loading} className={styles.root} onClick={() => setShowPanel(!showPanel)}>
                 <div className={styles.icon}>
                     <Icon iconName='Ringer' />
                 </div>
                 <div
                     hidden={notifications.size === 0}
                     className={styles.count}>{notifications.size}</div>
-            </div>
+            </a>
             <NotificationsPanel
                 isOpen={showPanel}
                 notifications={notifications}

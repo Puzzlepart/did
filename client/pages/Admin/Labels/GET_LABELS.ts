@@ -1,16 +1,12 @@
 import gql from 'graphql-tag'
 
-/**
- * @ignore
- */
 export default gql`
-    query {
-        labels {
-            id
-            name
-            description
-            color
-            icon
-        }
+  query {
+    labels {
+      name
+      description
+      color
+      icon
     }
+  }
 `

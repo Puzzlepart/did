@@ -1,53 +1,52 @@
 import { AppContext } from 'AppContext'
-import * as React from 'react'
+import React,{useContext} from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import styles from './Navigation.module.scss'
 import { NavItem } from './NavItem'
 import { UserMenu } from './UserMenu'
 import { isMobile } from 'react-device-detect'
-import { accessAdmin, accessReports, accessCustomers, accessProjects } from 'config/security/permissions'
+import * as permissions from 'config/security/permissions'
 import { UserNotifications } from './UserNotifications'
 
 export const Navigation = () => {
-    const { t } = useTranslation('navigation')
-    const { user } = React.useContext(AppContext)
+    const { t } = useTranslation()
+    const { user } = useContext(AppContext)
     let className = styles.root
     if (isMobile) className += ` ${styles.mobile}`
     return (
         <nav className={className}>
             <div className={styles.container}>
-                <Link to='/' className={styles.logo} title='Did - The Calendar is the Timesheet'>
-                    did
-                </Link>
+                <Link to='/' className={styles.logo} title='did - The Calendar is the Timesheet'>did</Link>
                 <ul className={styles.nav} hidden={!user}>
                     <NavItem
-                        text={t('timesheet')}
+                        text={t('navigation.timesheet')}
                         iconName='TimeSheet'
-                        to='/timesheet' />
+                        to='/timesheet' 
+                        permission={permissions.accessTimesheet} />
                     <NavItem
-                        text={t('customers')}
+                        text={t('navigation.customers')}
                         iconName='People'
                         to='/customers'
-                        permission={accessCustomers} />
+                        permission={permissions.accessCustomers} />
                     <NavItem
-                        text={t('projects')}
+                        text={t('navigation.projects')}
                         iconName='ProjectCollection'
                         to='/projects'
-                        permission={accessProjects} />
+                        permission={permissions.accessProjects} />
                     <NavItem
-                        text={t('reports')}
+                        text={t('navigation.reports')}
                         iconName='ReportDocument'
                         to='/reports'
-                        permission={accessReports} />
+                        permission={permissions.accessReports} />
                     <NavItem
-                        text={t('admin')}
+                        text={t('navigation.admin')}
                         iconName='Settings'
                         to='/admin'
-                        permission={accessAdmin} />
+                        permission={permissions.accessAdmin} />
                 </ul>
                 <ul className={styles.navRight}>
-                    <UserNotifications />
+                    {!!user.subscription && <UserNotifications />}
                     <UserMenu />
                 </ul>
             </div>

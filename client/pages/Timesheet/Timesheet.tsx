@@ -1,29 +1,32 @@
 import { useMutation, useQuery } from '@apollo/react-hooks'
+import { AppContext } from 'AppContext'
 import { HotkeyModal } from 'components'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
-import React, { useEffect, useMemo, useReducer } from 'react'
+import React, { useContext, useEffect, useMemo, useReducer } from 'react'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { ActionBar } from './ActionBar'
 import { AllocationView } from './AllocationView'
-import CONFIRM_PERIOD from './CONFIRM_PERIOD'
-import GET_TIMESHEET from './GET_TIMESHEET'
+import graphql from './graphql'
 import hotkeys from './hotkeys'
 import { Overview } from './Overview'
 import reducer from './reducer'
 import { SummaryView } from './SummaryView'
 import styles from './Timesheet.module.scss'
-import { ITimesheetContext, ITimesheetParams, ITimesheetPeriod, TimesheetContext, TimesheetPeriod, TimesheetScope, TimesheetView } from './types'
-import UNCONFIRM_PERIOD from './UNCONFIRM_PERIOD'
-import { AppContext } from 'AppContext'
+import {
+    ITimesheetContext,
+    ITimesheetParams,
+    ITimesheetPeriod,
+    TimesheetContext,
+    TimesheetPeriod,
+    TimesheetScope,
+    TimesheetView
+} from './types'
 
-/**
- * @category Timesheet
- */
 export const Timesheet = () => {
-    const context = React.useContext(AppContext)
-    const { t } = useTranslation(['timesheet', 'common'])
+    const context = useContext(AppContext)
+    const { t } = useTranslation()
     const history = useHistory()
     const params = useParams<ITimesheetParams>()
     const [state, dispatch] = useReducer(reducer, {
@@ -32,40 +35,41 @@ export const Timesheet = () => {
         scope: new TimesheetScope(params),
         selectedView: params.view || 'overview'
     })
-    const query = useQuery<{ timesheet: ITimesheetPeriod[] }>(GET_TIMESHEET, {
+    const query = useQuery<{ timesheet: ITimesheetPeriod[] }>(graphql.query.timesheet, {
         variables: {
             ...state.scope.dateStrings,
             dateFormat: 'dddd DD',
-            locale: context.user.userLanguage,
+            locale: context.user.preferredLanguage,
         },
         fetchPolicy: 'network-only',
     })
 
-    useEffect(() => { dispatch({ type: 'DATA_UPDATED', payload: { query, t } }) }, [query])
+    useEffect(() => dispatch({ type: 'DATA_UPDATED', payload: { query, t } }), [query])
 
     useEffect(() => { history.push(`/timesheet/${state.selectedView}/${state.selectedPeriod.path}`) }, [state.selectedView, state.selectedPeriod])
 
-    const [[confirmPeriod], [unconfirmPeriod]] = [
-        useMutation<{ entries: any[]; startDateTime: string; endDateTime: string }>(CONFIRM_PERIOD),
-        useMutation<{ startDateTime: string; endDateTime: string }>(UNCONFIRM_PERIOD)
+    const [[submitPeriod], [unsubmitPeriod]] = [
+        useMutation(graphql.mutation.confirmPeriod),
+        useMutation(graphql.mutation.unconfirmPeriod),
     ]
 
-    const onConfirmPeriod = () => {
-        dispatch({ type: 'CONFIRMING_PERIOD', payload: { t } })
+    const onSubmitPeriod = async () => {
+        dispatch({ type: 'SUBMITTING_PERIOD', payload: { t } })
         const variables = { period: state.selectedPeriod.data }
-        confirmPeriod({ variables }).then(query.refetch)
+        await submitPeriod({ variables })
+        query.refetch()
     }
 
-    const onUnconfirmPeriod = () => {
-        dispatch({ type: 'UNCONFIRMING_PERIOD', payload: { t } })
+    const onUnsubmitPeriod = () => {
+        dispatch({ type: 'UNSUBMITTING_PERIOD', payload: { t } })
         const variables = { period: state.selectedPeriod.data }
-        unconfirmPeriod({ variables }).then(query.refetch)
+        unsubmitPeriod({ variables }).then(query.refetch)
     }
 
     const ctx: ITimesheetContext = useMemo(() => ({
         ...state,
-        onConfirmPeriod,
-        onUnconfirmPeriod,
+        onSubmitPeriod,
+        onUnsubmitPeriod,
         dispatch,
     }), [state])
 
@@ -84,19 +88,19 @@ export const Timesheet = () => {
                         })}>
                         <PivotItem
                             itemKey='overview'
-                            headerText={t('overviewHeaderText')}
+                            headerText={t('timesheet.overviewHeaderText')}
                             itemIcon='CalendarWeek'>
                             <Overview dayFormat='dddd DD' timeFormat='HH:mm' />
                         </PivotItem>
                         <PivotItem
                             itemKey='summary'
-                            headerText={t('summaryHeaderText')}
+                            headerText={t('timesheet.summaryHeaderText')}
                             itemIcon='List'>
                             <SummaryView />
                         </PivotItem>
                         <PivotItem
                             itemKey='allocation'
-                            headerText={t('allocationHeaderText')}
+                            headerText={t('timesheet.allocationHeaderText')}
                             itemIcon='ReportDocument'>
                             <AllocationView />
                         </PivotItem>

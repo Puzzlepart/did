@@ -1,3 +1,2 @@
 export * from './Autocomplete'
-export * from './Autocomplete.types'
-
+export * from './types'

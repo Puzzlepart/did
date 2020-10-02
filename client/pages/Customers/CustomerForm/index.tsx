@@ -6,36 +6,28 @@ import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import * as React from 'react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { format } from 'office-ui-fabric-react/lib/Utilities'
+import { IFormValidation } from 'types/IFormValidation'
 import styles from './CreateCustomerForm.module.scss'
-import CREATE_OR_UPDATE_CUSTOMER, { ICreateOrUpdateCustomerVariables, ICustomerInput } from './CREATE_OR_UPDATE_CUSTOMER'
-import { ICustomerFormValidation } from './types'
-import { pick } from 'underscore'
+import CREATE_OR_UPDATE_CUSTOMER, { ICreateOrUpdateCustomerVariables } from './CREATE_OR_UPDATE_CUSTOMER'
+import { CustomerModel, ICustomerFormProps } from './types'
 
-const initialModel: ICustomerInput = {
-    key: '',
-    name: '',
-    description: '',
-    icon: 'Page',
-}
 
-/**
- * @category Customers
- */
-export const CustomerForm = () => {
-    const { t } = useTranslation(['customers', 'common'])
-    const [validation, setValidation] = useState<ICustomerFormValidation>({ errors: {}, invalid: true })
+
+export const CustomerForm = ({ nameLength = [2] }: ICustomerFormProps) => {
+    const { t } = useTranslation()
+    const [validation, setValidation] = useState<IFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useState<{ text: string; type: MessageBarType }>(null)
-    const [model, setModel] = useState<ICustomerInput>(initialModel)
+    const [model, setModel] = useState<CustomerModel>(new CustomerModel())
     const [createOrUpdateCustomer, { loading }] = useMutation<any, ICreateOrUpdateCustomerVariables>(CREATE_OR_UPDATE_CUSTOMER)
 
     /**
      * On validate form
      */
-    const validateForm = (): ICustomerFormValidation => {
+    const validateForm = (): IFormValidation => {
+        const [nameMinLength] = nameLength
         const errors: { [key: string]: string } = {}
-        if (model.name.length < 2) errors.name = t('nameFormValidationText')
-        if (!(/(^[A-ZÆØÅ0-9]{3,8}$)/gm).test(model.key)) errors.key = t('keyFormValidationText')
+        if (model.name.length < nameMinLength) errors.name = t('customers.nameFormValidationText', { nameMinLength })
+        if (!(/(^[A-ZÆØÅ0-9]{3,8}$)/gm).test(model.key)) errors.key = t('customers.keyFormValidationText', { keyMinLength: 3, keyMaxLength: 8 })
         return { errors, invalid: Object.keys(errors).length > 0 }
     }
 
@@ -51,52 +43,54 @@ export const CustomerForm = () => {
         setValidation({ errors: {}, invalid: false })
         const { data: { result } } = await createOrUpdateCustomer({
             variables: {
-                customer: pick(model, ...Object.keys(initialModel) as any) as ICustomerInput,
+                customer: model,
                 update: false,
             }
         })
         if (result.success) {
-            setMessage({ text: format(t('createSuccess'), model.name), type: MessageBarType.success })
+            setMessage({ text: t('customers.createSuccess', { name: model.name }), type: MessageBarType.success })
         } else {
             setMessage({ text: result.error.message, type: MessageBarType.error })
         }
-        setModel(initialModel)
+        setModel(new CustomerModel())
         window.setTimeout(() => setMessage(null), 5000)
     }
 
     return (
         <div className={styles.root}>
-            {message && <UserMessage containerStyle={{ marginTop: 12, marginBottom: 12, width: 450 }} text={message.text} type={message.type} />}
+            {message && <UserMessage containerStyle={{ marginTop: 12, marginBottom: 12, width: 550 }} text={message.text} type={message.type} />}
             <TextField
                 className={styles.inputField}
-                label={t('keyLabel', { ns: 'common' })}
-                description={t('keyDescription')}
+                label={t('customers.keyFieldLabel')}
+                description={t('customers.keyFieldDescription', { keyMaxLength: 8 })}
                 required={true}
                 errorMessage={validation.errors.key}
                 onChange={(_event, key) => setModel({ ...model, key })}
                 value={model.key} />
             <TextField
                 className={styles.inputField}
-                label={t('nameLabel', { ns: 'common' })}
+                label={t('common.nameFieldLabel')}
                 required={true}
                 errorMessage={validation.errors.name}
                 onChange={(_event, name) => setModel({ ...model, name })}
                 value={model.name} />
             <TextField
                 className={styles.inputField}
-                label={t('descriptionLabel', { ns: 'common' })}
+                label={t('common.descriptionFieldLabel')}
                 multiline={true}
                 errorMessage={validation.errors.description}
                 onChange={(_event, description) => setModel({ ...model, description })}
                 value={model.description} />
             <IconPicker
-                className={styles.iconPicker}
-                defaultSelectedKey={model.icon}
-                options={undefined}
-                onChange={(_event, opt) => setModel({ ...model, icon: opt.key as string })} />
+                className={styles.inputField}
+                defaultSelected={model.icon}
+                label={t('common.iconLabel')}
+                placeholder={t('common.iconSearchPlaceholder')}
+                width={300}
+                onSelected={icon => setModel({ ...model, icon })} />
             <PrimaryButton
                 styles={{ root: { marginTop: 16 } }}
-                text={t('add', { ns: 'common' })}
+                text={t('common.add')}
                 iconProps={{ iconName: 'CirclePlus' }}
                 onClick={onFormSubmit}
                 disabled={loading || !!message} />

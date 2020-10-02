@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { AppContext } from 'AppContext'
 import { manageCustomers } from 'config/security/permissions'
 import { value } from 'helpers'
-import { ICustomer } from 'interfaces'
+import { ICustomer } from 'types'
 import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
@@ -10,19 +10,17 @@ import { CustomerForm } from 'pages/Customers/CustomerForm'
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
-import { contains, find } from 'underscore'
+import { find } from 'underscore'
 import { CustomerDetails } from './CustomerDetails'
 import { CustomerList } from './CustomerList'
 import GET_CUSTOMERS from './GET_CUSTOMERS'
 import { ICustomersParams, IGetCustomersData } from './types'
 
-/**
- * @category Customers
- */
+
 export const Customers = () => {
-    const { t } = useTranslation(['common', 'ADMINS'])
+    const { t } = useTranslation()
+    const { hasPermission } = useContext(AppContext)
     const history = useHistory()
-    const { user } = useContext(AppContext)
     const params = useParams<ICustomersParams>()
     const [selected, setSelected] = useState<ICustomer>(null)
     const { loading, error, data } = useQuery<IGetCustomersData>(
@@ -54,16 +52,16 @@ export const Customers = () => {
             <PivotItem
                 itemID='search'
                 itemKey='search'
-                headerText={t('search')}
+                headerText={t('common.search')}
                 itemIcon='FabricFolderSearch'>
                 {error
-                    ? <MessageBar messageBarType={MessageBarType.error}>{t('genericErrorText')}</MessageBar>
+                    ? <MessageBar messageBarType={MessageBarType.error}>{t('common.genericErrorText')}</MessageBar>
                     : (
                         <>
                             <CustomerList
                                 enableShimmer={loading}
                                 items={customers}
-                                searchBox={{ placeholder: t('searchPlaceholder') }}
+                                searchBox={{ placeholder: t('common.searchPlaceholder') }}
                                 selection={{
                                     mode: SelectionMode.single,
                                     onChanged: selected => {
@@ -80,11 +78,11 @@ export const Customers = () => {
                         </>
                     )}
             </PivotItem>
-            {contains(user.role.permissions, manageCustomers) && (
+            {hasPermission(manageCustomers) && (
                 <PivotItem
                     itemID='new'
                     itemKey='new'
-                    headerText={t('createNewText')}
+                    headerText={t('customers.createNewText')}
                     itemIcon='AddTo'>
                     <CustomerForm />
                 </PivotItem>

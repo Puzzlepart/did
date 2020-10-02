@@ -2,10 +2,10 @@
 import { DurationColumn } from 'components/DurationColumn'
 import { LabelColumn } from 'components/LabelColumn'
 import List from 'components/List'
-import { IProject } from 'interfaces'
+import { IProject } from 'types'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar'
-import * as React from 'react'
+import React,{useContext} from 'react'
 import { useTranslation } from 'react-i18next'
 import { unique } from 'underscore'
 import { capitalize } from 'underscore.string'
@@ -14,6 +14,7 @@ import { TimesheetContext } from '../'
 import { TimesheetScope } from '../TimesheetScope'
 import styles from './SummaryView.module.scss'
 import { isMobile } from 'react-device-detect'
+import { ILabelColumnProps } from 'components/LabelColumn/types'
 
 /**
  * Creates columns from scope
@@ -44,7 +45,7 @@ function createColumns(scope: TimesheetScope) {
             maxWidth: 350,
             isMultiline: true,
             isResizable: true,
-            onRender: (row: any) => <LabelColumn row={row} />,
+            onRender: (row: ILabelColumnProps) => <LabelColumn {...row} />,
         },
         ...columns,
         {
@@ -61,7 +62,7 @@ function createColumns(scope: TimesheetScope) {
 }
 
 /**
- * Generate rows
+ * Generate rows from events and columns
  * 
  * @param {any[]} events Events
  * @param {IColumn[]} columns Columns
@@ -104,18 +105,18 @@ function generateTotalRow(events: any[], columns: IColumn[], label: string) {
  * @description Generates a summary view of events
  */
 export const SummaryView = () => {
-    const { t } = useTranslation('common')
+    const { t } = useTranslation()
     if (isMobile) {
-        return <MessageBar styles={{ root: { marginTop: 8 } }}>{t('deviceViewNotSupported')}</MessageBar>
+        return <MessageBar styles={{ root: { marginTop: 8 } }}>{t('common.deviceViewNotSupported')}</MessageBar>
     } else {
-        const context = React.useContext(TimesheetContext)
+        const context = useContext(TimesheetContext)
         const columns = createColumns(context.scope)
 
-        const events = context.selectedPeriod.events.filter(e => e.project)
+        const events = context.selectedPeriod.events.filter(e => !!e.project)
 
         const items = [
             ...generateRows(events, columns),
-            generateTotalRow(events, columns, t('sumLabel')),
+            generateTotalRow(events, columns, t('common.sumLabel')),
         ]
 
         return (

@@ -98,7 +98,7 @@ echo "[2/3] INSTALLING NPM PACKAGES"
 echo ""
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
-  eval $NPM_CMD install --production --loglevel=error --no-progress --no-shrinkwrap --no-fund   
+  eval $NPM_CMD install --production --loglevel=error --no-progress --no-shrinkwrap --no-fund --no-audit
   exitWithMessageOnError "Installation of npm packages failed"
   cd - > /dev/null
 fi
@@ -108,7 +108,7 @@ echo "[3/3] PACKAGING JS"
 echo ""
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
-  eval $NPM_CMD run packageClient
+  eval $NPM_CMD run package:client
   exitWithMessageOnError "Packaging of client failed"
   cd - > /dev/null
 fi

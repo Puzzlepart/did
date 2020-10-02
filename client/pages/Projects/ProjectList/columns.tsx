@@ -1,13 +1,13 @@
+import { CustomerLink } from 'components/CustomerLink'
 import { EntityLabel } from 'components/EntityLabel'
 import { TFunction } from 'i18next'
-import { IProject } from 'interfaces'
+import { IProject } from 'types'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import * as React from 'react'
-import { Link } from 'react-router-dom'
 import { generateColumn as col } from 'utils/generateColumn'
-import { IProjectListProps } from './types'
 import { NameLabel } from './NameLabel'
+import { IProjectListProps } from './types'
 
 /**
  * Generate column definitions based on parameters specified
@@ -26,7 +26,7 @@ export default (props: IProjectListProps, t: TFunction): IColumn[] => ([
             if (project.inactive) {
                 return (
                     <Icon
-                        title={t('inactiveText')}
+                        title={t('projects.inactiveText')}
                         iconName='Warning'
                         styles={{ root: { fontSize: 16, color: '#ffbf00' } }} />
                 )
@@ -36,22 +36,22 @@ export default (props: IProjectListProps, t: TFunction): IColumn[] => ([
     ),
     col(
         'id',
-        t('keyLabel', { ns: 'common' }),
+        t('common.keyFieldLabel'),
         { maxWidth: 120 },
     ),
     col(
         'name',
-        t('nameLabel', { ns: 'common' }),
+        t('common.nameFieldLabel'),
         { maxWidth: 220 },
         (project: IProject) => <NameLabel project={project} renderLink={props.renderLink} />,
     ),
     col(
         'customer',
-        t('customer', { ns: 'common' }),
+        t('common.customer'),
         { maxWidth: 220 },
         (project: IProject) => {
             if (!project.customer) return null
-            return <Link to={`/customers/${project.customer.key}`}>{project.customer.name}</Link>
+            return <CustomerLink customer={project.customer} />
         }
     ),
     col(

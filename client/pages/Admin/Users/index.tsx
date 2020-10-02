@@ -1,70 +1,101 @@
 
-import { useQuery } from '@apollo/react-hooks'
+import { useMutation, useQuery } from '@apollo/react-hooks'
 import List from 'components/List'
-import { value as value } from 'helpers'
-import { IUser } from 'interfaces/IUser'
-import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
-import * as React from 'react'
+import { IUser } from 'types/IUser'
+import { ISpinnerProps, Spinner } from 'office-ui-fabric-react/lib/Spinner'
+import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { generateColumn as col } from 'utils/generateColumn'
+import { filter, find, isEmpty, omit } from 'underscore'
+import { BulkImportPanel, IBulkImportPanelProps } from './BulkImportPanel'
+import BULK_ADD_USERS from './BULK_ADD_USERS'
+import { columns } from './columns'
 import { GET_DATA } from './GET_DATA'
-import { IUserFormModalProps, UserFormModal } from './UserFormModal'
+import { IUserFormProps, UserForm } from './UserForm'
+import { IUsersContext, UsersContext } from './context'
 
-/**
- * @category Admin
- */
+
 export const Users = () => {
-    const { t } = useTranslation(['common', 'admin'])
-    const [userForm, setUserForm] = React.useState<IUserFormModalProps>(null)
+    const { t } = useTranslation()
+    const [userForm, setUserForm] = useState<IUserFormProps>(null)
+    const [bulkImportPanel, setBulkImportPanel] = useState<IBulkImportPanelProps>(null)
+    const [progressProps, setProgressProps] = useState<ISpinnerProps>(null)
     const { data, refetch, loading, called } = useQuery(GET_DATA, { fetchPolicy: 'cache-and-network' })
-    const columns = [
-        col('fullName', t('nameLabel'), { maxWidth: 180 }),
-        col(
-            'role',
-            t('roleLabel'),
-            {},
-            (user: IUser) => user.role.name,
-        ),
-        col('edit', '', {}, (user: any) => (
-            <DefaultButton
-                text={t('editUser', { ns: 'admin' })}
-                onClick={() => setUserForm({
-                    title: user.fullName,
-                    user,
-                    roles: value(data, 'roles', [])
-                })} />
-        ))
-    ]
+    const [bulkAddUsers] = useMutation(BULK_ADD_USERS)
+    const ctxValue: IUsersContext = useMemo(() => ({
+        roles: data?.roles || [],
+        users: data?.users || [],
+        adUsers: data?.adUsers || [],
+    }), [data])
+    ctxValue.adUsers = filter(ctxValue.adUsers, x => !find(ctxValue.users, y => y.id === x.id))
+
+
+    /**
+     * On edit user
+     * 
+     * @param {IUser} user User to edit
+     */
+    const onEdit = (user: IUser) => setUserForm({
+        headerText: user.displayName,
+        user,
+    })
+
+    /**
+     * On import users
+     * 
+     * @param {any[]} users Users to import
+     */
+    const onBulkImport = async (users: any[]) => {
+        setBulkImportPanel(null)
+        setProgressProps({ label: t('admin.bulkImportingUsersLabel', { count: users.length }), labelPosition: 'right' })
+        await bulkAddUsers({ variables: { users: users.map(u => omit(u, '__typename')) } })
+        setProgressProps(null)
+        refetch()
+    }
+
 
     return (
-        <>
+        <UsersContext.Provider value={ctxValue}>
             <List
                 enableShimmer={loading && !called}
-                items={value(data, 'users', [])}
-                columns={columns}
+                items={ctxValue.users}
+                columns={columns(onEdit, t)}
                 commandBar={{
                     items: [
                         {
-                            key: 'addNewUser',
-                            name: t('addNewUser', { ns: 'admin' }),
+                            key: 'ADD_NEW_USER',
+                            name: t('admin.addNewUser'),
                             iconProps: { iconName: 'AddFriend' },
-                            onClick: () => setUserForm({
-                                title: t('addNewUser', { ns: 'admin' }),
-                                roles: value(data, 'roles', []),
-                            }),
+                            disabled: isEmpty(ctxValue.adUsers),
+                            onClick: () => setUserForm({ headerText: t('admin.addNewUser') }),
                         },
+                        {
+                            key: 'BULK_IMPORT_USERS',
+                            name: t('admin.bulkImportUsersLabel'),
+                            iconProps: { iconName: 'CloudImportExport' },
+                            disabled: isEmpty(ctxValue.adUsers),
+                            onClick: () => setBulkImportPanel({ isOpen: true }),
+                        },
+                        {
+                            key: 'SPINNER',
+                            name: '',
+                            onRender: () => progressProps && <Spinner styles={{ root: { marginLeft: 15 } }} {...progressProps} />
+                        }
                     ],
                     farItems: []
                 }} />
             {userForm && (
-                <UserFormModal
+                <UserForm
                     {...userForm}
-                    modal={{
-                        onDismiss: event => {
-                            setUserForm(null)
-                            !event && refetch()
-                        }
+                    onDismiss={event => {
+                        setUserForm(null)
+                        !event && refetch()
                     }} />)}
-        </>
+            {bulkImportPanel && (
+                <BulkImportPanel
+                    {...bulkImportPanel}
+                    onImport={onBulkImport}
+                    onDismiss={() => setBulkImportPanel(null)} />
+            )}
+        </UsersContext.Provider>
     )
 }

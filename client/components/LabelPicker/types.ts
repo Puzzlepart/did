@@ -1,28 +1,21 @@
 import gql from 'graphql-tag'
-import { IEntityLabel } from 'interfaces'
+import { IEntityLabel } from 'types'
 
-/**
- * @category LabelPicker
- */
 export interface ILabelPickerProps {
-    className?: string;
-    label: string;
-    searchLabelText: string;
-    defaultSelectedKeys?: string[];
-    onChange: (labels: IEntityLabel[]) => void;
+  className?: string
+  label: string
+  searchLabelText: string
+  defaultSelectedKeys?: string[]
+  onChange: (labels: IEntityLabel[]) => void
 }
 
-/**
- * @ignore
- */
 export const GET_LABELS = gql`
-    query {
-        labels {
-            id
-            name
-            description
-            color
-            icon
-        }
+  query {
+    labels {
+      name
+      description
+      color
+      icon
     }
+  }
 `

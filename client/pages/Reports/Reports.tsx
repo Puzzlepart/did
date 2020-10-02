@@ -1,51 +1,65 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import { useQuery } from '@apollo/react-hooks'
 import { BaseFilter, CustomerFilter, FilterPanel, IFilter, ProjectFilter, ResourceFilter, UserMessage } from 'components'
 import List from 'components/List'
-import { value as value } from 'helpers'
+import { value } from 'helpers'
+import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import { Spinner } from 'office-ui-fabric-react/lib/Spinner'
-import * as React from 'react'
-import { useState } from 'react'
+import { format } from 'office-ui-fabric-react/lib/Utilities'
+import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import DateUtils from 'utils/date'
+import { useHistory, useParams } from 'react-router-dom'
+import { filter, find, isEmpty } from 'underscore'
+import dateUtils from 'utils/date'
 import { exportExcel } from 'utils/exportExcel'
 import columns from './columns'
+import commandBar from './commandBar'
+import { IReportsContext } from './context'
+import {  TIME_ENTRIES } from './graphql'
 import styles from './Reports.module.scss'
-import TIME_ENTRIES, { ITimeEntriesVariables } from './TIME_ENTRIES'
-import { IReportsQuery } from './types'
+import { getQueries, IReportsParams, IReportsState, ITimeEntriesVariables } from './types'
 
-/**
- * @category Reports
- */
 export const Reports = () => {
-    const { t } = useTranslation(['common', 'reports'])
+    const { t } = useTranslation()
+    const history = useHistory()
+    const params = useParams<IReportsParams>()
     const filters: BaseFilter[] = [
-        new ResourceFilter('resourceName', t('employeeLabel')),
-        new CustomerFilter('customer.name', t('customer')),
-        new ProjectFilter('project.name', t('project')),
+        new ResourceFilter('resourceName', t('common.employeeLabel')),
+        new CustomerFilter('customer.name', t('common.customer')),
+        new ProjectFilter('project.name', t('common.project')),
     ]
-    const [filterPanelOpen, setFilterPanelOpen] = useState<boolean>(undefined)
-    const [query, setQuery] = useState<IReportsQuery>()
-    const [subset, setSubset] = useState<any[]>(undefined)
-    const { loading, error, data } = useQuery<any, ITimeEntriesVariables>(
+    const queries = getQueries(t)
+    const [state, setState] = useState<IReportsState>({
+        query: find(queries, q => q.key === params.query),
+        groupBy: {
+            fieldName: '.',
+            emptyGroupName: t('common.all'),
+        }
+    })
+    const { loading, data } = useQuery<any, ITimeEntriesVariables>(
         TIME_ENTRIES,
         {
-            skip: !query,
+            skip: !state.query,
             fetchPolicy: 'cache-first',
-            variables: query && query.variables,
+            variables: state.query?.variables,
         })
-
-    const timeentries = data?.timeentries || []
 
     /**
      * On export to Excel
      */
-    const onExportExcel = () => exportExcel(
-        subset || timeentries,
-        {
-            columns: columns(t),
-            fileName: `TimeEntries-${new Date().toDateString().split(' ').join('-')}.xlsx`,
-        }
-    )
+    const onExportExcel = () => {
+        const fileName = format(
+            state.query.exportFileName,
+            new Date().toDateString().split(' ').join('-')
+        )
+        exportExcel(
+            state.subset || context.timeentries,
+            {
+                columns: columns(t),
+                fileName,
+            }
+        )
+    }
 
     /**
      * On filter updated in FilterPanel
@@ -53,101 +67,93 @@ export const Reports = () => {
      * @param {IFilter[]} filters 
      */
     const onFilterUpdated = (filters: IFilter[]) => {
-        const _entries = timeentries.filter(entry => {
-            return filters.filter(f => {
+        const subset = filter(context.timeentries, entry => {
+            return filter(filters, f => {
                 const selectedKeys = f.selected.map(s => s.key)
                 return selectedKeys.indexOf(value(entry, f.key, '')) !== -1
             }).length === filters.length
         })
-        setSubset(_entries)
+        context.setState({ subset })
     }
 
-    const queries: IReportsQuery[] = [
-        {
-            key: 'PREVIOUS_MONTH',
-            name: t('previousMonth'),
-            iconName: 'CalendarDay',
-            variables: { monthNumber: DateUtils.getMonthIndex() - 1, year: DateUtils.getYear() }
-        },
-        {
+    /**
+     * On change query
+     * 
+     * @param {string} key Query key 
+     */
+    const onChangeQuery = (key: string) => {
+        const query = find(queries, q => q.key === key)
+        context.setState({ query })
+        history.push(`/reports/${key}`)
+    }
 
-            key: 'CURRENT_MONTH',
-            name: t('currentMonth'),
-            iconName: 'Calendar',
-            variables: { monthNumber: DateUtils.getMonthIndex(), year: DateUtils.getYear() }
-        },
-        {
-            key: 'CURRENT_YEAR',
-            name: t('currentYear'),
-            iconName: 'CalendarReply',
-            variables: { year: DateUtils.getYear() }
-        }
-    ]
+    const context: IReportsContext = useMemo(() => ({
+        ...state,
+        timeentries: data?.timeentries || [],
+        loading,
+        setState: (_state) => setState({ ...state, ..._state }),
+        onExportExcel,
+        t,
+    }), [loading, state])
+
+    const items = state.subset || context.timeentries
 
     return (
         <div className={styles.root}>
-            <List
-                items={subset || timeentries}
-                columns={columns(t)}
-                enableShimmer={loading}
-                commandBar={{
-                    items: [
-                        {
-                            key: 'SELECT_QUERY',
-                            text: t('selectReportLabel', { ns: 'reports' }),
-                            iconProps: { iconName: 'ReportDocument' },
-                            subMenuProps: {
-                                items: queries.map(query => ({
-                                    key: query.key,
-                                    text: query.name,
-                                    iconProps: { iconName: query.iconName },
-                                    onClick: () => setQuery(query),
-                                })),
-                            }
-                        },
-                        {
-                            key: 'PROGRESS_INDICATOR',
-                            onRender: () => {
-                                if (!loading) return null
-                                return (
-                                    <Spinner
-                                        className={styles.spinner}
-                                        labelPosition='right'
-                                        label={t('generatingReportLabel', { ns: 'reports' })} />
-                                )
-                            }
-                        }
-                    ],
-                    farItems: [
-                        {
-                            key: 'EXPORT_TO_EXCEL',
-                            text: t('exportCurrentView'),
-                            onClick: onExportExcel,
-                            iconProps: { iconName: 'ExcelDocument' },
-                            disabled: loading || !!error || !query,
-                        },
-                        {
-                            key: 'OPEN_FILTER_PANEL',
-                            iconProps: { iconName: 'Filter' },
-                            iconOnly: true,
-                            onClick: () => setFilterPanelOpen(true),
-                            disabled: loading || !!error || !query,
-                        }
-                    ]
-                }} />
-            <UserMessage
-                hidden={timeentries.length > 0 || loading || !query}
-                text={t('noEntriesText', { ns: 'reports' })} />
-            <UserMessage
-                hidden={!!query}
-                iconName='ReportDocument'
-                text={t('selectReportText', { ns: 'reports' })} />
-            <FilterPanel
-                isOpen={filterPanelOpen}
-                filters={filters}
-                entries={timeentries}
-                onDismiss={() => setFilterPanelOpen(false)}
-                onFilterUpdated={onFilterUpdated} />
+            <Pivot
+                defaultSelectedKey={params.query || 'default'}
+                onLinkClick={item => onChangeQuery(item.props.itemKey)}>
+                {queries.map(query => (
+                    <PivotItem
+                        key={query.key}
+                        itemKey={query.key}
+                        headerText={query.text}
+                        itemIcon={query.iconName}>
+                        <div className={styles.container}>
+                            {loading && (
+                                <Spinner
+                                    className={styles.spinner}
+                                    labelPosition='right'
+                                    label={t('reports.generatingReportLabel')} />
+                            )}
+                            {(!loading && !isEmpty(context.timeentries)) && (
+                                <List
+                                    fadeIn={{
+                                        transitionDuration: 500,
+                                        delay: 200,
+                                    }}
+                                    items={items}
+                                    groups={{
+                                        ...state.groupBy,
+                                        totalFunc: items => {
+                                            const durationHrs = (items.reduce((sum, item) => sum + item.duration, 0) as number)
+                                            return t('common.headerTotalDuration', { duration: dateUtils.getDurationString(durationHrs, t) })
+                                        },
+                                    }}
+                                    columns={columns(t)}
+                                    commandBar={commandBar(context)} />
+                            )}
+                            <UserMessage
+                                hidden={!isEmpty(context.timeentries) || loading || !state.query}
+                                text={t('reports.noEntriesText')} />
+                            <FilterPanel
+                                isOpen={state.isFiltersOpen}
+                                filters={filters}
+                                items={context.timeentries}
+                                onDismiss={() => context.setState({ isFiltersOpen: false })}
+                                onFilterUpdated={onFilterUpdated}
+                                shortListCount={10} />
+                        </div>
+                    </PivotItem>
+                ))}
+                <PivotItem
+                    itemKey='default'
+                    headerButtonProps={{ disabled: true }}>
+                    <UserMessage
+                        className={styles.container}
+                        iconName='ReportDocument' text={t('reports.selectReportText')} />
+                </PivotItem>
+            </Pivot>
         </div>
     )
 }

@@ -2,28 +2,19 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient, FetchPolicy } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
 
-/**
- * @ignore
- */
 export interface IError {
-  name: string;
-  message: string;
-  code: string;
-  statusCode: string;
+  name: string
+  message: string
+  code: string
+  statusCode: string
 }
 
-/**
- * @ignore
- */
 export interface IBaseResult {
-  success: boolean;
-  error: IError;
-  data: string;
+  success: boolean
+  error: IError
+  data: string
 }
 
-/**
- * @ignore
- */
 export const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: new HttpLink({ uri: `${document.location.origin}/graphql` }),
@@ -32,4 +23,3 @@ export const client = new ApolloClient({
 
 export { GET_CURRENT_USER } from './GET_CURRENT_USER'
 export { FetchPolicy }
-

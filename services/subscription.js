@@ -8,25 +8,25 @@ class SubscriptionService {
     this.tableUtil = new AzTableUtilities(this.tableService)
   }
   /**
-   * Get the subscription for the specified tenant id 
-   * 
+   * Get the subscription for the specified tenant id
+   *
    * Returns null if there's no active subscription
-   * 
-   * @param tenantId Tenant ID
+   *
+   * @param subscriptionId Subscription ID
    */
-  async getSubscription(tenantId) {
+  async getSubscription(subscriptionId) {
     try {
-      const query = this.tableUtil.createAzQuery(1).where('RowKey eq ?', tenantId)
+      const query = this.tableUtil.createAzQuery(1).where('RowKey eq ?', subscriptionId)
       var { entries } = await this.tableUtil.queryAzTable('Subscriptions', query)
-      return this.tableUtil.parseAzEntity(first(entries))
+      return this.tableUtil.parseAzEntity(first(entries), { RowKey: 'id' })
     } catch (error) {
-      return null;
+      return null
     }
   }
 
   /**
    * Find subscription for the specified token
-   * 
+   *
    * @param token Request token
    */
   async findSubscriptionWithToken(token) {
@@ -37,68 +37,62 @@ class SubscriptionService {
       if (tokenEntry) return this.getSubscription(tokenEntry.partitionKey)
       return null
     } catch (error) {
-      return null;
+      return null
     }
   }
 
   /**
    * Add token for the user subscription
-   * 
+   *
    * @param name Token name
-   * @param tenantId Tenant id
+   * @param subscriptionId Subscription id
    * @param token Request token
    */
-  async addApiToken(name, tenantId, token) {
+  async addApiToken(name, subscriptionId, token) {
     try {
       const { string } = this.tableUtil.azEntGen()
-      const entity = await this.tableUtil.addAzEntity(
-        'ApiTokens',
-        {
-          PartitionKey: string(tenantId),
-          RowKey: string(name),
-          Token: string(token)
-        }
-      )
+      const entity = await this.tableUtil.addAzEntity('ApiTokens', {
+        PartitionKey: string(subscriptionId),
+        RowKey: string(name),
+        Token: string(token),
+      })
       return entity
     } catch (error) {
-      return null;
+      return null
     }
   }
 
   /**
    * Remove token for the user subscription
-   * 
+   *
    * @param name Token name
-   * @param tenantId Tenant id
+   * @param subscriptionId Subscription id
    */
-  async deleteApiToken(name, tenantId) {
+  async deleteApiToken(name, subscriptionId) {
     try {
       const { string } = this.tableUtil.azEntGen()
-      const result = await this.tableUtil.deleteEntity(
-        'ApiTokens',
-        {
-          PartitionKey: string(tenantId),
-          RowKey: string(name),
-        }
-      )
+      const result = await this.tableUtil.deleteEntity('ApiTokens', {
+        PartitionKey: string(subscriptionId),
+        RowKey: string(name),
+      })
       return result
     } catch (error) {
-      return null;
+      return null
     }
   }
 
   /**
    * Get tokens for the user subscription
-   * 
-   * @param tenantId Tenant id
+   *
+   * @param subscriptionId Subscription id
    */
-  async getApiTokens(tenantId) {
+  async getApiTokens(subscriptionId) {
     try {
-      const query = this.tableUtil.createAzQuery(100).where('PartitionKey eq ?', tenantId)
+      const query = this.tableUtil.createAzQuery(100).where('PartitionKey eq ?', subscriptionId)
       const result = await this.tableUtil.queryAzTable('ApiTokens', query)
       return this.tableUtil.parseAzEntities(result, { RowKey: 'name' }).entries
     } catch (error) {
-      return null;
+      return null
     }
   }
 }

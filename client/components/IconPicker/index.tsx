@@ -1,50 +1,31 @@
-import { Dropdown, IDropdownOption, IDropdownProps } from 'office-ui-fabric-react/lib/Dropdown'
-import { Icon } from 'office-ui-fabric-react/lib/Icon'
-import * as React from 'react'
-import { useTranslation } from 'react-i18next'
+import { getIcons } from 'common/icons'
+import { Autocomplete } from 'components/Autocomplete'
+import React, { useMemo } from 'react'
+import { find, omit } from 'underscore'
 import { humanize } from 'underscore.string'
-import { getIcons } from '../../common/icons'
+import { IIconPickerProps } from './types'
 
-
-/**
- * @category IconPicker
- */
-export const IconPicker = (props: IDropdownProps) => {
-    const { t } = useTranslation('common')
-
-    function onRenderOption(option: IDropdownOption): JSX.Element {
-        return (
-            <div>
-                <Icon style={{ marginRight: 8 }} iconName={option.key as string} aria-hidden='true' title={option.text} />
-                <span>{option.text}</span>
-            </div>
-        )
-    };
-
-    function onRenderTitle([option]: IDropdownOption[]): JSX.Element {
-        return (
-            <div>
-                <Icon style={{ marginRight: 8 }} iconName={option.key as string} aria-hidden='true' title={option.text} />
-                <span>{option.text}</span>
-            </div>
-        )
-    };
-
-    const options = React.useMemo(() => [
-        props.defaultSelectedKey && props.defaultSelectedKey.toString(),
-        ...getIcons(200)
-    ].filter(k => k).map(key => ({ key, text: humanize(key) })), [props.defaultSelectedKey])
+export const IconPicker = (props: IIconPickerProps) => {
+    const items = useMemo(() => getIcons().map(iconName => ({
+        key: iconName,
+        displayValue: humanize(iconName),
+        searchValue: [iconName, humanize(iconName)].join(' '),
+        iconName: iconName,
+        data: iconName,
+    })), [])
 
     return (
-        <Dropdown
-            className={props.className}
-            styles={props.styles}
-            label={t('iconLabel')}
-            title={t('iconLabel')}
-            options={options}
-            defaultSelectedKey={props.defaultSelectedKey}
-            onChange={props.onChange}
-            onRenderTitle={onRenderTitle}
-            onRenderOption={onRenderOption} />
+        <div className={props.className} hidden={props.hidden}>
+            <Autocomplete
+                {...omit(props, 'className')}
+                defaultSelectedItem={props.defaultSelected && find(items, i => i.key === props.defaultSelected)}
+                disabled={false}
+                items={items}
+                showIcons={true}
+                width={props.width}
+                placeholder={props.placeholder}
+                onClear={() => props.onSelected(null)}
+                onSelected={item => props.onSelected(item.data)} />
+        </div>
     )
 }

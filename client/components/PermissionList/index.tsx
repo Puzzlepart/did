@@ -5,9 +5,6 @@ import * as securityConfig from 'config/security'
 import { useTranslation } from 'react-i18next'
 import { contains } from 'underscore'
 
-/**
- * @category PermissionList
- */
 export const PermissionList = ({ permissionIds }: IPermissionListProps) => {
     const { t } = useTranslation()
     const permissions = React.useMemo(() => {

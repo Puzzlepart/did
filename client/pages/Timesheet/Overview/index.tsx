@@ -1,10 +1,10 @@
 import EventList from 'components/EventList'
-import { ITimeEntry } from 'interfaces/ITimeEntry'
+import { ITimeEntry } from 'types/ITimeEntry'
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
-import * as React from 'react'
+import React,{useContext} from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import DateUtils from 'utils/date'
+import dateUtils from 'utils/date'
 import { generateColumn as col } from 'utils/generateColumn'
 import { TimesheetContext } from '../'
 import { StatusBar } from '../StatusBar'
@@ -13,12 +13,10 @@ import ProjectColumn from './ProjectColumn'
 import { IOverviewProps } from './types'
 import CustomerColumn from './CustomerColumn'
 
-/**
- * @category Timesheet
- */
+
 export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
-    const { t } = useTranslation('common')
-    const { loading, selectedPeriod } = React.useContext(TimesheetContext)
+    const { t } = useTranslation()
+    const { loading, selectedPeriod } = useContext(TimesheetContext)
     const className = [styles.root]
     if (isMobile) className.push(styles.mobile)
     return (
@@ -35,19 +33,19 @@ export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
                     groupNames: selectedPeriod.weekdays(dayFormat),
                     totalFunc: (items: ITimeEntry[]) => {
                         const duration = items.reduce((sum, i) => sum + i.duration, 0)
-                        return ` (${DateUtils.getDurationDisplay(duration, t)})`
+                        return ` (${dateUtils.getDurationString(duration, t)})`
                     },
                 }}
                 additionalColumns={[
                     col(
                         'customer',
-                        t('customer'),
+                        t('common.customer'),
                         { minWidth: 150, maxWidth: 200, isMultiline: true },
                         (event: ITimeEntry) => <CustomerColumn event={event} />,
                     ),
                     col(
                         'project',
-                        t('project'),
+                        t('common.project'),
                         { minWidth: 150, maxWidth: 300, isMultiline: true },
                         (event: ITimeEntry) => <ProjectColumn event={event} />
                     ),

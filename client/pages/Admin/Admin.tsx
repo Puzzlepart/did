@@ -1,65 +1,70 @@
 
+import { AppContext } from 'AppContext'
+import { manageUsers } from 'config/security/permissions'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
-import * as React from 'react'
+import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
+import { moment } from 'utils/date'
 import styles from './Admin.module.scss'
+import { ApiTokens } from './ApiTokens'
 import { Labels } from './Labels'
 import { Roles } from './Roles'
-import AdminSummaryView from './SummaryView'
+import { SummaryView } from './SummaryView'
 import { Users } from './Users'
-import { ApiTokens } from './ApiTokens'
 
-/**
- * @category Admin
- */
 export const Admin = () => {
-    const { t } = useTranslation('admin')
+    const { t } = useTranslation()
+    const { hasPermission } = useContext(AppContext)
     const history = useHistory()
     const { view } = useParams<{ view: string }>()
 
-
-    function onPivotClick({ props }: PivotItem) {
-        history.push(`/admin/${props.itemKey}`)
-    }
+    const onPivotClick = ({ props }: PivotItem) => history.push(`/admin/${props.itemKey}`)
 
     return (
         <div className={styles.root}>
             <Pivot
                 selectedKey={view || 'users'}
                 onLinkClick={onPivotClick}>
-                <PivotItem
-                    className={styles.tab}
-                    itemKey='users'
-                    headerText={t('users')}
-                    itemIcon='FabricUserFolder'>
-                    <Users />
-                </PivotItem>
+                {hasPermission(manageUsers) && (
+                    <PivotItem
+                        className={styles.tab}
+                        itemKey='users'
+                        headerText={t('admin.users')}
+                        itemIcon='FabricUserFolder'>
+                        <Users />
+                    </PivotItem>
+                )}
                 <PivotItem
                     className={styles.tab}
                     itemKey='summary'
-                    headerText={t('summary')}
+                    headerText={t('admin.summary')}
                     itemIcon='CalendarWeek'>
-                    <AdminSummaryView />
+                    <SummaryView
+                        defaultSelectedYear={moment().year()}
+                        defaultSelectedScope='weekNumber'
+                        defaultRange={2} />
                 </PivotItem>
                 <PivotItem
                     className={styles.tab}
                     itemKey='labels'
-                    headerText={t('labels')}
+                    headerText={t('admin.labels')}
                     itemIcon='Label'>
                     <Labels />
                 </PivotItem>
-                <PivotItem
-                    className={styles.tab}
-                    itemKey='rolesPermissions'
-                    headerText={t('rolesPermissions')}
-                    itemIcon='SecurityGroup'>
-                    <Roles />
-                </PivotItem>
+                {hasPermission(manageUsers) && (
+                    <PivotItem
+                        className={styles.tab}
+                        itemKey='rolesPermissions'
+                        headerText={t('admin.rolesPermissions')}
+                        itemIcon='SecurityGroup'>
+                        <Roles />
+                    </PivotItem>
+                )}
                 <PivotItem
                     className={styles.tab}
                     itemKey='apiTokens'
-                    headerText={t('apiTokens')}
+                    headerText={t('admin.apiTokens')}
                     itemIcon='AzureAPIManagement'>
                     <ApiTokens />
                 </PivotItem>

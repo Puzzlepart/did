@@ -5,7 +5,6 @@ import delay from 'delay'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
-import { format } from 'office-ui-fabric-react/lib/Utilities'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isBlank } from 'underscore.string'
@@ -15,11 +14,9 @@ import styles from './ApiTokens.module.scss'
 import DELETE_API_TOKEN from './DELETE_API_TOKEN'
 import GET_API_TOKENS from './GET_API_TOKENS'
 
-/**
- * @category Admin
- */
+
 export const ApiTokens = () => {
-    const { t } = useTranslation('admin')
+    const { t } = useTranslation()
     const [key, setKey] = useState(null)
     const [name, setName] = useState(null)
     const [message, setMessage] = useState(null)
@@ -36,7 +33,7 @@ export const ApiTokens = () => {
             setKey(data.key)
             setMessage({
                 type: MessageBarType.success,
-                children: t('tokenGeneratedText'),
+                children: t('admin.tokenGeneratedText'),
             })
             setName(null)
             refetch()
@@ -44,7 +41,7 @@ export const ApiTokens = () => {
         } else {
             setMessage({
                 type: MessageBarType.error,
-                text: t('tokenErrorText'),
+                text: t('admin.tokenErrorText'),
             })
             setName(null)
             await delay(5000)
@@ -62,7 +59,7 @@ export const ApiTokens = () => {
         await deleteApiToken({ variables: { name: token.name } })
         setMessage({
             type: MessageBarType.info,
-            text: format(t('tokenDeletedText'), token.name),
+            text: t('admin.tokenDeletedText', { name: token.name }),
         })
         setName(null)
         setKey(null)
@@ -73,11 +70,11 @@ export const ApiTokens = () => {
         <div className={styles.root}>
             <div className={styles.form}>
                 <TextField
-                    placeholder={t('tokenNamePlaceholder')}
+                    placeholder={t('admin.tokenNamePlaceholder')}
                     value={name}
                     onChange={(_event, value) => setName(value)} />
                 <DefaultButton
-                    text={t('generateTokenLabel')}
+                    text={t('admin.generateTokenLabel')}
                     onClick={onAddApiToken}
                     disabled={loading || !!key || isBlank(name)} />
             </div>
@@ -97,14 +94,14 @@ export const ApiTokens = () => {
                     {
                         key: 'name',
                         fieldName: 'name',
-                        name: t('nameLabel', { ns: 'common' }),
+                        name: t('common.nameFieldLabel'),
                         minWidth: 100,
                         maxWidth: 250,
                     },
                     {
                         key: 'timestamp',
                         fieldName: 'timestamp',
-                        name: t('createdLabel', { ns: 'common' }),
+                        name: t('common.createdLabel'),
                         minWidth: 100,
                         onRender: (item) => dateUtils.formatDate(item.timestamp, 'LLL')
                     },
@@ -116,7 +113,7 @@ export const ApiTokens = () => {
                         onRender: (item) => {
                             return (
                                 <DefaultButton
-                                    text={t('delete', { ns: 'common' })}
+                                    text={t('common.delete')}
                                     iconProps={{ iconName: 'RecycleBin' }}
                                     onClick={() => onDeleteApiToken(item)} />
                             )

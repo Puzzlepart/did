@@ -1,14 +1,10 @@
-import { ICustomer } from 'interfaces/ICustomer'
+import { ICustomer } from 'types/ICustomer'
 
-/**
- * @ignore
- */
 export interface IGetCustomersData {
-    customers: ICustomer[];
+  customers: ICustomer[]
 }
 
 export interface ICustomersParams {
-    key: string;
-    view: string;
+  key: string
+  view: string
 }
-

@@ -6,13 +6,12 @@ import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox'
 import { contains, isBlank } from 'underscore.string'
 import { useTranslation } from 'react-i18next'
 
-/**
- * @category FilterPanel
- */
+
 export const FilterItem = (props: IFilterItemProps) => {
-    const { t } = useTranslation('common')
+    const { t } = useTranslation()
     const selectedKeys = props.filter.selected.map(f => f.key)
     const [searchTerm, onSearch] = useState<string>('')
+    const [showCount, setShowCount] = useState(props.shortListCount)
 
     const items = useMemo(() => {
         return props.filter.items.filter(item => isBlank(searchTerm) ? true : contains(item.value.toLowerCase(), searchTerm.toLowerCase()))
@@ -23,10 +22,10 @@ export const FilterItem = (props: IFilterItemProps) => {
             <div className={styles.name}>{props.filter.name}</div>
             <div className={styles.searchBox} hidden={props.filter.items.length < 10}>
                 <SearchBox
-                    placeholder={t('searchPlaceholder')}
+                    placeholder={t('common.searchPlaceholder')}
                     onChange={(_event, value) => onSearch(value)} />
             </div>
-            {items.map(item => (
+            {[...items].slice(0, showCount).map(item => (
                 <div key={item.key} className={styles.item}>
                     <Checkbox
                         label={item.value}
@@ -34,6 +33,10 @@ export const FilterItem = (props: IFilterItemProps) => {
                         onChange={(_, checked) => props.onFilterUpdated(props.filter, item, checked)} />
                 </div>
             ))}
+            <div
+                className={styles.showAllLink}
+                hidden={items.length < 10 || showCount === props.filter.items.length}
+                onClick={() => setShowCount(props.filter.items.length)}>{t('common.showAllFiltersText', { count: props.filter.items.length })}</div>
         </div >
     )
 }

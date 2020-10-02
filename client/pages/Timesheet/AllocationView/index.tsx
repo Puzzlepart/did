@@ -1,11 +1,11 @@
 
 import { value as value } from 'helpers'
-import { ITimeEntry } from 'interfaces/ITimeEntry'
+import { ITimeEntry } from 'types/ITimeEntry'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Bar, BarChart, Legend, Tooltip, XAxis, YAxis } from 'recharts'
 import _ from 'underscore'
-import { TimesheetContext } from '../TimesheetContext'
+import { TimesheetContext } from '../context'
 import styles from './AllocationView.module.scss'
 
 /**
@@ -35,7 +35,7 @@ export const GetAllocation = (entries: ITimeEntry[], exp: string): Array<{ name:
  * @category Timesheet
  */
 export const AllocationView = (): JSX.Element => {
-    const { t } = useTranslation(['timesheet', 'common'])
+    const { t } = useTranslation()
     const { selectedPeriod } = React.useContext(TimesheetContext)
     const [dimensions, setDimensions] = React.useState({ width: 0, height: 0 })
     const ref = React.useRef<HTMLDivElement>()
@@ -43,8 +43,8 @@ export const AllocationView = (): JSX.Element => {
     React.useLayoutEffect(() => setDimensions({ width: ref.current.clientWidth, height: 400 }), [])
 
     const charts = {
-        'project.name': t('projectChartTitle'),
-        'customer.name': t('customerChartTitle'),
+        'project.name': t('timesheet.projectChartTitle'),
+        'customer.name': t('timesheet.customerChartTitle'),
     }
 
     return (
@@ -64,7 +64,7 @@ export const AllocationView = (): JSX.Element => {
                             <YAxis />
                             <Tooltip wrapperStyle={{ fontSize: 12 }} />
                             <Legend wrapperStyle={{ fontSize: 12 }} />
-                            <Bar dataKey='hours' name={t('hours', { ns: 'common' }) as string} fill='#cf6000' />
+                            <Bar dataKey='hours' name={t('common.hours') as string} fill='#cf6000' />
                         </BarChart>
                     </div>
                 )

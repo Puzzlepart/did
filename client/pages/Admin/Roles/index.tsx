@@ -1,31 +1,38 @@
 import { useQuery } from '@apollo/react-hooks'
 import { List } from 'components'
-import { value } from 'helpers'
-import { IRole } from 'interfaces'
+import { PermissionList } from 'components/PermissionList'
+import { IRole } from 'types'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
-import * as React from 'react'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { generateColumn as col } from 'utils/generateColumn'
-import { IRolePanelProps, RolePanel } from './RolePanel'
 import { GET_ROLES } from './GET_ROLES'
-import { PermissionList } from 'components/PermissionList'
+import { IRolePanelProps, RolePanel } from './RolePanel'
 
-/**
- * @category Admin
- */
+
 export const Roles = () => {
-    const { t } = useTranslation(['admin', 'common'])
+    const { t } = useTranslation()
+    
     const { data, loading, refetch } = useQuery(GET_ROLES)
-    const [panel, setPanel] = React.useState<IRolePanelProps>(null)
+    const [panel, setPanel] = useState<IRolePanelProps>(null)
     const columns = [
         col(
             'name',
-            t('roleLabel', { ns: 'common' }),
+            '',
             { maxWidth: 140 },
+            (role: IRole) => {
+                return (
+                    <div>
+                        <Icon styles={{ root: { fontSize: 33 } }} iconName={role.icon} />
+                        <div>{role.name}</div>
+                    </div>
+                )
+            }
         ),
         col(
             'permissions',
-            t('permissonsLabel'),
+            t('admin.permissonsLabel'),
             { minWidth: 200, isMultiline: true },
             (role: IRole) => <PermissionList permissionIds={role.permissions} />
         ),
@@ -37,10 +44,10 @@ export const Roles = () => {
                 <>
                     <DefaultButton
                         styles={{ root: { marginRight: 4 } }}
-                        text={t('editRole')}
+                        text={t('admin.editRole')}
                         onClick={() => setPanel({
-                            title: t('editRole'),
-                            edit: role,
+                            title: t('admin.editRole'),
+                            model: role,
                         })} />
                 </>
             )),
@@ -50,16 +57,16 @@ export const Roles = () => {
         <>
             <List
                 enableShimmer={loading}
-                items={value(data, 'roles', [])}
+                items={data?.roles || []}
                 columns={columns}
                 commandBar={{
                     items: [
                         {
                             key: 'addNewRole',
-                            name: t('addNewRole'),
+                            name: t('admin.addNewRole'),
                             iconProps: { iconName: 'AddFriend' },
                             onClick: () => setPanel({
-                                title: t('addNewRole'),
+                                title: t('admin.addNewRole'),
                             }),
                         },
                     ],

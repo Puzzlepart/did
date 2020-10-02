@@ -210,11 +210,6 @@
                 NotificationTemplates
             </a>
         </li>
-        <li  title="OutlookCategoryInput">
-            <a href="outlookcategoryinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
-                OutlookCategoryInput
-            </a>
-        </li>
         <li  title="ProjectInput">
             <a href="projectinput.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
                 ProjectInput
@@ -277,7 +272,8 @@
     <div class="container">
         <p class="slds-text-title--caps slds-text-color--weak">OBJECT</p>
         <h1 class="slds-text-heading--large">User</h1>
-        <div class="slds-text-body--regular"></div>
+        <div class="slds-text-body--regular"><p>A type that describes a User</p>
+</div>
     </div>
 </section>
 <section>
@@ -288,7 +284,7 @@
             </a>
             GraphQL Schema definition
         </h2>
-        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">User</span> {</li><li></li><li><span class="tab"><span class="meta">id</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="meta">role</span>: <a class="support type" href="role.doc.html">Role</a> </span></li><li></li><li><span class="tab"><span class="meta">fullName</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="meta">email</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="meta">userLanguage</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="meta">sub</span>: <a class="support type" href="subscription.doc.html">Subscription</a> </span></li><li>}</li></ul></code>
+        <code class="highlight"><ul class="code" style="padding-left:42px"><li><span class="keyword operator ts">type</span> <span class="identifier">User</span> {</li><li></li><li><span class="tab"><span class="meta">id</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="meta">displayName</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="meta">givenName</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="meta">surname</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="meta">jobTitle</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="meta">mobilePhone</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="meta">mail</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="meta">preferredLanguage</span>: <a class="support type" href="string.doc.html">String</a> </span></li><li></li><li><span class="tab"><span class="meta">subscription</span>: <a class="support type" href="subscription.doc.html">Subscription</a> </span></li><li></li><li><span class="tab"><span class="meta">role</span>: <a class="support type" href="role.doc.html">Role</a> </span></li><li>}</li></ul></code>
     </div>
 </section>
 <section>
@@ -299,7 +295,11 @@
             </a>
             Require by
         </h2>
-        <ul class="require-by"><li><a href="query.doc.html" title="Query - ">Query<em></em></a><li></ul>
+        <ul class="require-by"><li><a href="query.doc.html" title="Query - The Query type is a special type that defines the entry point of every
+GraphQL query. Otherwise, the Query type is the same as any other
+GraphQL object type, and its fields work exactly the same way.">Query<em>The Query type is a special type that defines the entry point of every
+GraphQL query. Otherwise, the Query type is the same as any other
+GraphQL object type, and its fields work exactly the same way.</em></a><li></ul>
     </div>
 </section>
 <footer>

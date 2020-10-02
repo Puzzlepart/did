@@ -6,13 +6,17 @@ import { ShimmeredDetailsList } from 'office-ui-fabric-react/lib/ShimmeredDetail
 import React, { useReducer } from 'react'
 import { useEffect } from 'react'
 import { delay } from 'utils'
+import { first } from 'underscore'
 import { withDefaultProps } from 'with-default-props'
 import { generateListGroups } from './generateListGroups'
 import { ListHeader } from './ListHeader'
 import reducer from './reducer'
 import { IListProps } from './types'
+import FadeIn from 'react-fade-in'
 
 /**
+ * List component using DetailsList from office-ui-fabric-react
+ * 
  * @category List
  */
 const List = (props: IListProps) => {
@@ -27,8 +31,15 @@ const List = (props: IListProps) => {
 
     selection = props.selection && new Selection({
         onSelectionChanged: () => {
-            const [selected] = selection.getSelection()
-            props.selection.onChanged(selected)
+            const _selection = selection.getSelection()
+            // eslint-disable-next-line default-case
+            switch (props.selection?.mode) {
+                case SelectionMode.single: props.selection.onChanged(first(_selection))
+                    break
+                case SelectionMode.multiple: props.selection.onChanged(_selection)
+                    break
+            }
+
         }
     })
 
@@ -40,7 +51,7 @@ const List = (props: IListProps) => {
                 <SearchBox
                     {...props.searchBox}
                     styles={{ field: { fontSize: '10pt', letterSpacing: '1px' }, root: { width: 400, maxWidth: 400 } }}
-                    onChange={(_, newValue) => delay(400).then(() => dispatch({ type: 'search', payload: newValue }))} />
+                    onChange={(_, newValue) => delay(400).then(() => dispatch({ type: 'SEARCH', payload: newValue }))} />
             ),
         })
         const commandBarItems = [searchBox, ...props.commandBar.items].filter(c => c)
@@ -62,33 +73,42 @@ const List = (props: IListProps) => {
 
     return (
         <div style={{ marginBottom: 25 }} hidden={props.hidden}>
-            <ScrollablePaneWrapper condition={!!props.height} height={props.height}>
-                <ShimmeredDetailsList
-                    getKey={(_item, index) => `list_item_${index}`}
-                    setKey={'list'}
-                    enableShimmer={props.enableShimmer}
-                    isPlaceholderData={props.enableShimmer}
-                    selection={selection}
-                    columns={props.columns}
-                    items={items}
-                    groups={groups}
-                    selectionMode={props.selection ? props.selection.mode : SelectionMode.none}
-                    constrainMode={ConstrainMode.horizontalConstrained}
-                    layoutMode={DetailsListLayoutMode.justified}
-                    groupProps={{
-                        ...props.groupProps,
-                        onRenderHeader: onRenderGroupHeader,
-                    }}
-                    onRenderDetailsHeader={onRenderListHeader}
-                    checkboxVisibility={CheckboxVisibility.hidden} />
-            </ScrollablePaneWrapper>
+            <FadeIn {...props.fadeIn}>
+                <ScrollablePaneWrapper condition={!!props.height} height={props.height}>
+                    <ShimmeredDetailsList
+                        getKey={(_item, index) => `list_item_${index}`}
+                        setKey={'list'}
+                        enableShimmer={props.enableShimmer}
+                        isPlaceholderData={props.enableShimmer}
+                        selection={selection}
+                        columns={props.columns}
+                        items={items}
+                        groups={groups}
+                        selectionMode={props.selection ? props.selection.mode : SelectionMode.none}
+                        constrainMode={ConstrainMode.horizontalConstrained}
+                        layoutMode={DetailsListLayoutMode.justified}
+                        groupProps={{
+                            ...props.groupProps,
+                            onRenderHeader: onRenderGroupHeader,
+                        }}
+                        onRenderDetailsHeader={onRenderListHeader}
+                        checkboxVisibility={props.checkboxVisibility || CheckboxVisibility.hidden} />
+                </ScrollablePaneWrapper>
+            </FadeIn>
         </div>
     )
 }
 
 export default withDefaultProps(List, {
-    commandBar: { items: [], farItems: [] }
-})
+    fadeIn: {
+        delay: 0,
+        transitionDuration: 0,
+    },
+    commandBar: {
+        items: [],
+        farItems: [],
+    }
+} as IListProps)
 
 export { SelectionMode, IColumn }
 

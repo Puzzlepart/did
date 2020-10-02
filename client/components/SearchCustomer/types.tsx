@@ -1,10 +1,6 @@
-import { ICustomer } from 'interfaces/ICustomer'
-import { ISearchBoxProps } from 'office-ui-fabric-react/lib/SearchBox'
+import { IAutocompleteProps } from 'components/Autocomplete'
 
-/**
- * @category Projects
- */
-export interface ISearchCustomerProps extends ISearchBoxProps {
+export interface ISearchCustomerProps extends IAutocompleteProps {
     label?: string;
-    onSelected: (customer: ICustomer) => void;
+    onSelected: (customer: any) => void;
 }

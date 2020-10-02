@@ -5,16 +5,13 @@ import { EntityLabel } from 'components/EntityLabel'
 import styles from './LabelPicker.module.scss'
 import { useQuery } from '@apollo/react-hooks'
 import { GET_LABELS, ILabelPickerProps } from './types'
-import { IEntityLabel } from 'interfaces'
+import { IEntityLabel } from 'types'
 import { SelectCallout } from './SelectCallout'
 import { omit } from 'underscore'
 import { useTranslation } from 'react-i18next'
 
-/**
- * @category LabelPicker
- */
 export const LabelPicker = (props: ILabelPickerProps) => {
-    const { t } = useTranslation('common')
+    const { t } = useTranslation()
     const { data } = useQuery(GET_LABELS, { fetchPolicy: 'cache-and-network' })
     const toggleRef = useRef()
     const [labels, setLabels] = useState<IEntityLabel[]>([])
@@ -57,7 +54,7 @@ export const LabelPicker = (props: ILabelPickerProps) => {
                 </span>
             </Label>
             {selectedLabels.map(lbl => <EntityLabel key={lbl.name} label={lbl} />)}
-            <span className={styles.noneSelected} hidden={selectedLabels.length > 0}>{t('noneSelectedMessage')}</span>
+            <span className={styles.noneSelected} hidden={selectedLabels.length > 0}>{t('common.noneSelectedMessage')}</span>
             <SelectCallout
                 target={toggleRef}
                 hidden={!showCallout}

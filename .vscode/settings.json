@@ -14,7 +14,14 @@
     "server.js": true,
     "client/**/*.d.ts": true,
     "client/**/*js": true,
-    "client/**/*js.map": true
+    "client/**/*js.map": true,
+    "public/graphdoc": true,
+    "public/js": true
   },
-  "javascript.validate.enable": false
+  "javascript.validate.enable": false,
+  "debug.node.autoAttach": "on",
+  "i18n-ally.localesPaths": "./resources",
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.sourceLanguage": "en-GB",
+  "i18n-ally.displayLanguage": "en-GB"
 }
