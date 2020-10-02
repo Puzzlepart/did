@@ -7,9 +7,6 @@ import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox'
 import { IEntityLabel } from 'types'
 import { ISelectCalloutProps } from './types'
 
-/**
- * @category SelectCallout
- */
 export const SelectCallout = (props: ISelectCalloutProps) => {
     const [labels, setLabels] = useState<IEntityLabel[]>(props.labels)
 

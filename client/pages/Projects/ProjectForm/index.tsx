@@ -12,9 +12,7 @@ import styles from './CreateProjectForm.module.scss'
 import CREATE_OR_UPDATE_PROJECT, { ICreateOrUpdateProjectVariables } from './CREATE_OR_UPDATE_PROJECT'
 import { IProjectFormProps, ProjectModel } from './types'
 
-/**
- * @category Projects
- */
+
 export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFormProps) => {
     const editMode = !!edit
     const { t } = useTranslation()

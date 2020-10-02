@@ -12,9 +12,7 @@ import CREATE_OR_UPDATE_CUSTOMER, { ICreateOrUpdateCustomerVariables } from './C
 import { CustomerModel, ICustomerFormProps } from './types'
 
 
-/**
- * @category Customers
- */
+
 export const CustomerForm = ({ nameLength = [2] }: ICustomerFormProps) => {
     const { t } = useTranslation()
     const [validation, setValidation] = useState<IFormValidation>({ errors: {}, invalid: true })

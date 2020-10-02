@@ -13,9 +13,7 @@ import ProjectColumn from './ProjectColumn'
 import { IOverviewProps } from './types'
 import CustomerColumn from './CustomerColumn'
 
-/**
- * @category Timesheet
- */
+
 export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
     const { t } = useTranslation()
     const { loading, selectedPeriod } = useContext(TimesheetContext)

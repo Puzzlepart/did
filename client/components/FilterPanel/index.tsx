@@ -5,9 +5,7 @@ import { FilterItem } from './FilterItem'
 import { IFilter, IFilterItem } from './Filters'
 import { IFilterPanelProps } from './IFilterPanelProps'
 
-/**
- * @category FilterPanel
- */
+
 export const FilterPanel = (props: IFilterPanelProps) => {
     const [filters, setFilters] = useState<IFilter[]>(props.filters.map(f => f.initialize(props.entries)))
 

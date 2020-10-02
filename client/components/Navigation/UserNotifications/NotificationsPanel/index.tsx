@@ -6,9 +6,6 @@ import { UserNotification } from '../UserNotification'
 import { INotificationsPanelProps } from './types'
 import styles from './UserNotificationsPanel.module.scss'
 
-/**
- * @category UserNotifications
- */
 export const NotificationsPanel = (props: INotificationsPanelProps) => {
     const { t } = useTranslation()
     return (

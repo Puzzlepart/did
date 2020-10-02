@@ -19,9 +19,7 @@ import TIME_ENTRIES, { ITimeEntriesVariables } from './TIME_ENTRIES'
 import { getQueries, IReportsParams, IReportsState } from './types'
 import dateUtils from 'utils/date'
 
-/**
- * @category Reports
- */
+
 export const Reports = () => {
     const { t } = useTranslation()
     const history = useHistory()

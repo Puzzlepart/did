@@ -1,14 +1,10 @@
+import { getIcons } from 'common/icons'
 import { Autocomplete } from 'components/Autocomplete'
-import { Label } from 'office-ui-fabric-react/lib/Label'
 import React, { useMemo } from 'react'
 import { find, omit } from 'underscore'
 import { humanize } from 'underscore.string'
-import { getIcons } from 'common/icons'
 import { IIconPickerProps } from './types'
 
-/**
- * @category IconPicker
- */
 export const IconPicker = (props: IIconPickerProps) => {
     const items = useMemo(() => getIcons().map(iconName => ({
         key: iconName,

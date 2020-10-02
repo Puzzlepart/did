@@ -6,9 +6,7 @@ import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox'
 import { contains, isBlank } from 'underscore.string'
 import { useTranslation } from 'react-i18next'
 
-/**
- * @category FilterPanel
- */
+
 export const FilterItem = (props: IFilterItemProps) => {
     const { t } = useTranslation()
     const selectedKeys = props.filter.selected.map(f => f.key)

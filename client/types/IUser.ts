@@ -1,9 +1,7 @@
 import { ISubscription } from './ISubscription'
 import { IRole } from './IRole'
 
-/**
- * @category Common
- */
+
 export interface IUser {
   id?: string
   displayName?: string

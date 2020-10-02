@@ -7,9 +7,6 @@ import { useTranslation } from 'react-i18next'
 import { Autocomplete, ISuggestionItem } from '../Autocomplete'
 import { ISearchCustomerProps } from './types'
 
-/**
- * @category SearchCustomer
- */
 export const SearchCustomer = (props: ISearchCustomerProps) => {
     const { t } = useTranslation()
     const { loading, data } = useQuery<{ customers: ICustomer[] }>(GET_CUSTOMERS, {

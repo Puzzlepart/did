@@ -10,9 +10,7 @@ import DateUtils from 'utils/date'
 import { TimesheetContext } from '../'
 import styles from './StatusBar.module.scss'
 
-/**
- * @category Timesheet
- */
+
 export const StatusBar = () => {
     const { t } = useTranslation()
     const { loading, periods, selectedPeriod, dispatch } = React.useContext(TimesheetContext)
@@ -71,7 +69,7 @@ export const StatusBar = () => {
                         hidden={selectedPeriod.errors.length === 0}
                         type={MessageBarType.severeWarning}
                         iconName='ErrorBadge'>
-                        <p>{format(t('timesheet.unresolvedErrorText'), selectedPeriod.errors.length)}</p>
+                        <p>{t('timesheet.unresolvedErrorText', { count: selectedPeriod.errors.length })}</p>
                     </UserMessage>
                     <UserMessage
                         {...defaultProps}

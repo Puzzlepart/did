@@ -10,9 +10,7 @@ import { useTranslation } from 'react-i18next'
 import { ACTIONBAR_ICON_PROPS } from '../ACTIONBAR_ICON_PROPS'
 import styles from './WeekPicker.module.scss'
 
-/**
- * @category Timesheet
- */
+
 export const WeekPicker = () => {
     const { t } = useTranslation()
     const { scope, dispatch } = React.useContext(TimesheetContext)

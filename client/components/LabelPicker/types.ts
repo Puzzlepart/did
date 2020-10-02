@@ -1,9 +1,6 @@
 import gql from 'graphql-tag'
 import { IEntityLabel } from 'types'
 
-/**
- * @category LabelPicker
- */
 export interface ILabelPickerProps {
   className?: string
   label: string
@@ -12,9 +9,6 @@ export interface ILabelPickerProps {
   onChange: (labels: IEntityLabel[]) => void
 }
 
-/**
- * @ignore
- */
 export const GET_LABELS = gql`
   query {
     labels {

@@ -2,9 +2,7 @@ import { value } from 'helpers'
 import _ from 'underscore'
 import { BaseFilter, IFilter } from './BaseFilter'
 
-/**
- * @category FilterPanel
- */
+
 export class ProjectFilter extends BaseFilter {
   constructor(public fieldName: string, public name: string) {
     super(fieldName)

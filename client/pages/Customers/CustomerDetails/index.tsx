@@ -12,9 +12,7 @@ import { useTranslation } from 'react-i18next'
 import styles from './CustomerDetails.module.scss'
 import { ICustomerDetailsProps } from './types'
 
-/**
- * @category Customers
- */
+
 export const CustomerDetails = (props: ICustomerDetailsProps) => {
     const { t } = useTranslation()
     const { loading, error, data } = useQuery(

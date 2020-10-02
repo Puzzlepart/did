@@ -6,9 +6,7 @@ import { MessageBarButton } from 'office-ui-fabric-react/lib/Button'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { MobileView, BrowserView } from 'react-device-detect'
 
-/**
- * @category Timesheet
- */
+
 export const IgnoreEventButton = ({ event }: IIgnoreEventButton): JSX.Element => {
     const { t } = useTranslation()
     const { dispatch } = React.useContext(TimesheetContext)

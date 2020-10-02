@@ -25,9 +25,7 @@ import {
 } from './types'
 import { AppContext } from 'AppContext'
 
-/**
- * @category Timesheet
- */
+
 export const Timesheet = () => {
     const context = useContext(AppContext)
     const { t } = useTranslation()

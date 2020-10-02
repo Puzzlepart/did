@@ -1,9 +1,6 @@
 import { IMessageBarProps, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { TFunction } from 'i18next'
 
-/**
- * @category UserNotifications
- */
 export interface INotification {
     id: string;
     type: number;
@@ -12,27 +9,18 @@ export interface INotification {
     moreLink: string;
 }
 
-/**
- * @category UserNotifications
- */
 export enum NotificationType {
     WEEK_NOT_CONFIRMED,
     SERVICE_ANNOUNCEMENT,
     FEATURE_ANNOUNCEMENT,
 }
 
-/**
- * @category UserNotifications
- */
 export enum NotificationSeverity {
     LOW,
     MEDIUM,
     HIGH,
 }
 
-/**
- * @category UserNotifications
- */
 export class NotificationModel {
     public id: string;
     public type: NotificationType;

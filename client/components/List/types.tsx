@@ -4,9 +4,6 @@ import { ISearchBoxProps } from 'office-ui-fabric-react/lib/SearchBox'
 import { IRenderFunction } from 'office-ui-fabric-react/lib/Utilities'
 import {FadeInProps} from 'react-fade-in'
 
-/**
- * @category List
- */
 export interface IListProps<T = any> {
     items: T[];
     columns?: IColumn[];
@@ -23,27 +20,18 @@ export interface IListProps<T = any> {
     fadeIn?: FadeInProps;
 }
 
-/**
- * @category List
- */
 export interface IListState {
     searchTerm?: string;
     origItems?: any[];
     items?: any[];
 }
 
-/**
- * @category List
- */
 export interface IListSelection {
     mode: SelectionMode;
     defaultSelectedKey?: string;
     onChanged: (selected: any) => void;
 }
 
-/**
- * @category List
- */
 export interface IListGroups {
     fieldName: string;
     groupNames?: string[];

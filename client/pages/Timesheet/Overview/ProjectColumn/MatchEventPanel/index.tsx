@@ -1,20 +1,17 @@
 import { SearchProject, UserMessage } from 'components'
 import { value as value } from 'helpers'
-import { IProject } from 'types/IProject'
 import { MessageBarButton } from 'office-ui-fabric-react/lib/Button'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { Panel } from 'office-ui-fabric-react/lib/Panel'
 import { ITimesheetContext, TimesheetContext } from 'pages/Timesheet/context'
 import React from 'react'
+import { BrowserView, MobileView } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import { format } from 'office-ui-fabric-react/lib/Utilities'
+import { IProject } from 'types/IProject'
+import { pick } from 'underscore'
 import styles from './MatchEventPanel.module.scss'
 import { IMatchEventPanelProps } from './types'
-import { MobileView, BrowserView } from 'react-device-detect'
 
-/**
- * @category Timesheet
-*/
 export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
     const { t } = useTranslation()
     const { dispatch } = React.useContext<ITimesheetContext>(TimesheetContext)
@@ -46,8 +43,7 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
                 <div className={styles.title}>{event.title}</div>
                 <UserMessage
                     iconName='OutlookLogo'
-                    text={format(t('timesheet.matchOutlookInfoText'), event.webLink)} />
-
+                    text={t('timesheet.matchOutlookInfoText', pick(event, 'webLink'))} />
                 <UserMessage
                     hidden={!event.suggestedProject}
                     containerStyle={{ marginTop: 10 }}
@@ -59,12 +55,10 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
                         </a>?
                     </p>
                 </UserMessage>
-
                 <UserMessage
                     hidden={!event.customer || !!event.suggestedProject}
                     containerStyle={{ marginTop: 10 }}
-                    text={format(t('timesheet.eventNotFullyMatchedText'), value(event, 'customer.name', ''))} />
-
+                    text={t('timesheet.eventNotFullyMatchedText', { name: value(event, 'customer.name', '') })} />
                 <SearchProject
                     width='100%'
                     className={styles.searchProject}

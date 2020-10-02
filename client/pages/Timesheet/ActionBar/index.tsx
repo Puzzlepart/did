@@ -7,9 +7,7 @@ import * as commands from './items'
 import WeekPicker from './WeekPicker'
 import styles from './ActionBar.module.scss'
 
-/**
- * @category Timesheet
- */
+
 export const ActionBar = () => {
     const { t } = useTranslation()
     const context = useContext(TimesheetContext)

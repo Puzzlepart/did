@@ -2,9 +2,7 @@ import { ICustomer } from './ICustomer'
 import { IProject } from './IProject'
 import { IEntityLabel } from './IEntityLabel'
 
-/**
- * @category Common
- */
+
 export interface ITimeEntry {
   id: string
   key: string

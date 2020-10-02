@@ -69,9 +69,7 @@ export interface ITimesheetPeriodData {
   isForecast: boolean
 }
 
-/**
- * @category Timesheet
- */
+
 export class TimesheetPeriod {
   public id: string
   public isConfirmed?: boolean

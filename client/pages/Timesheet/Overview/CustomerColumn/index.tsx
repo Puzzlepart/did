@@ -4,9 +4,7 @@ import styles from './CustomerColumn.module.scss'
 import { ICustomerColumnProps } from './types'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 
-/**
- * @category Timesheet
- */
+
 const CustomerColumn = ({ event }: ICustomerColumnProps): JSX.Element => {
     if (!event.customer || !event.project) return null
     return (
