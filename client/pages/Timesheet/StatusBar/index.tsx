@@ -31,7 +31,7 @@ export const StatusBar = () => {
             iconName: 'ReminderTime'
         },
         {
-            hidden: selectedPeriod.unmatchedDuration === 0 || selectedPeriod.isConfirmed,
+            hidden: selectedPeriod.unmatchedDuration === 0 || selectedPeriod.isConfirmed || selectedPeriod.isForecast,
             text: t(
                 'timesheet.hoursNotMatchedText',
                 { hours: dateUtils.getDurationString(selectedPeriod.unmatchedDuration, t) }

@@ -86,7 +86,7 @@ export class TimesheetPeriod {
   public isForecasted: boolean
 
   /**
-   * Is the period in the future
+   * Is the period in the future and available for forecasting
    */
   public isForecast: boolean
 
@@ -224,7 +224,7 @@ export class TimesheetPeriod {
     return filter(this.events, event => !!event.project).reduce((sum, event) => (sum += event.duration), 0)
   }
 
-  /*
+  /**
    * Get unmatched duration for the events in the period
    */
   public get unmatchedDuration(): number {
