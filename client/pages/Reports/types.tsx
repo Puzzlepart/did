@@ -1,8 +1,17 @@
 import { IListGroups } from 'components/List/types'
-import { ITimeEntriesVariables } from './graphql'
-import dateUtils from 'utils/date'
 import { TFunction } from 'i18next'
 import { IContextualMenuItem } from 'office-ui-fabric-react'
+import dateUtils from 'utils/date'
+
+export interface ITimeEntriesVariables {
+    startDateTime?: string
+    endDateTime?: string
+    weekNumber?: number
+    monthNumber?: number
+    year?: number
+    forecast?: boolean
+    sortAsc?: boolean
+  }
 
 export interface IReportsQuery extends IContextualMenuItem {
     /**
@@ -74,7 +83,11 @@ export const getQueries = (t: TFunction): IReportsQuery[] => ([
         key: 'forecast',
         text: t('reports.forecast'),
         iconName: 'TimeSheet',
-        variables: { forecast: true, startDateTime: new Date().toISOString() },
+        variables: {
+            sortAsc: true,
+            forecast: true,
+            startDateTime: new Date().toISOString(),
+        },
         exportFileName: 'Forecast-{0}.xlsx',
     }
 ])

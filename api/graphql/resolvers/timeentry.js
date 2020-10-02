@@ -1,4 +1,4 @@
-const { find, first } = require('underscore')
+const { find, first, pick, omit } = require('underscore')
 const { gql } = require('apollo-server-express')
 
 const typeDef = gql`
@@ -40,6 +40,7 @@ const typeDef = gql`
       year: Int
       currentUser: Boolean
       forecast: Boolean
+      sortAsc: Boolean
     ): [TimeEntry!]
   }
 `
@@ -49,7 +50,7 @@ async function timeentries(_obj, variables, ctx) {
   let [projects, customers, timeentries] = await Promise.all([
     ctx.services.azstorage.getProjects(),
     ctx.services.azstorage.getCustomers(),
-    ctx.services.azstorage.getTimeEntries(variables, { forecast: variables.forecast }),
+    ctx.services.azstorage.getTimeEntries(omit(variables, 'sortAsc', 'forecast'), pick(variables, 'sortAsc', 'forecast')),
   ])
   let entries = timeentries.map(entry => ({
     ...entry,
