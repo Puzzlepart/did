@@ -1,14 +1,5 @@
 import gql from 'graphql-tag'
 
-export interface ITimeEntriesVariables {
-  startDateTime?: string
-  endDateTime?: string
-  weekNumber?: number
-  monthNumber?: number
-  year?: number
-  forecast?: boolean
-}
-
 export const TIME_ENTRIES = gql`
   query(
     $startDateTime: String
@@ -17,6 +8,7 @@ export const TIME_ENTRIES = gql`
     $monthNumber: Int
     $year: Int
     $forecast: Boolean
+    $sortAsc: Boolean
   ) {
     timeentries(
       startDateTime: $startDateTime
@@ -25,6 +17,7 @@ export const TIME_ENTRIES = gql`
       monthNumber: $monthNumber
       year: $year
       forecast: $forecast
+      sortAsc: $sortAsc
     ) {
       title
       duration
