@@ -151,8 +151,8 @@ async function timesheet(_obj, variables, ctx) {
       }
       if (!period.events) {
         period.events = await ctx.services.msgraph.getEvents(period.startDateTime, period.endDateTime)
+        period.events = eventMatching.match(period.events)
       }
-      period.events = eventMatching.match(period.events)
       period.matchedEvents = period.events.filter(evt => evt.project)
     }
     period.events = period.events.map(evt => ({

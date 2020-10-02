@@ -16,7 +16,7 @@
     "goToCurrentWeek": "Go to current week",
     "goToPrevWeek": "Go to previous week",
     "goToNextWeek": "Go to next week",
-    "periodHoursSummaryText": "You have a total of **{{hours}}** this period",
+    "periodHoursSummaryText": "You have a total of **{{hours}}** this period.",
     "hoursNotMatchedText": "You have **{{hours}}** that are not matched. All events must be matched before you can confirm your hours.",
     "allHoursMatchedText": "All your hours are matched. Are you ready to confirm the period?",
     "periodConfirmedText": "The period is confirmed with {{hours}}. Click **Unconfirm hours** if you want to do some adjustments.",
@@ -37,7 +37,7 @@
     "projectInactiveErrorText": "The project is no longer active. Edit the event in Outlook.",
     "forecastHoursText": "Forecast hours",
     "unforecastHoursText": "Remove forecast",
-    "periodForecastedText": "The period is forecasted with {0}. Click **Remove forecast** if you want to do some adjustments.",
+    "periodForecastedText": "The period is forecasted with {{hours}}. Click **Remove forecast** if you want to do some adjustments.",
     "matchEventPanelHeaderText": "Resolve event"
   },
   "projects": {

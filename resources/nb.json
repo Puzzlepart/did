@@ -16,7 +16,7 @@
     "goToCurrentWeek": "Gå til inneværende uke",
     "goToPrevWeek": "Gå til forrige uke",
     "goToNextWeek": "Gå til neste uke",
-    "periodHoursSummaryText": "Du har totalt **{{hours}}** denne perioden",
+    "periodHoursSummaryText": "Du har totalt ** {{timer}} ** denne perioden.",
     "hoursNotMatchedText": "Du har **{{hours}}** som ikke er koblet mot et prosjekt. Alle avtaler må være matchet før du kan bekrefte timene dine.",
     "allHoursMatchedText": "Alle timene dine er matchet. Er du klar til å bekrefte uken din?",
     "periodConfirmedText": "Perioden er bekreftet med {{hours}}. Klikk **Angre bekreft timer** dersom du vil gjøre noen justeringer.",
@@ -35,7 +35,7 @@
     "eventNotFullyMatchedText": "Hendelse kunne ikke matches. Vi fant matchende kunde **{{name}}**, men ikke noe prosjekt med den spesifiserte nøkkelen.",
     "unforecastHoursText": "Fjern prognose",
     "forecastHoursText": "Lagre prognose",
-    "periodForecastedText": "Perioden er prognostisert med {0}. \nKlikk **Fjern prognose** hvis du vil gjøre noen justeringer.",
+    "periodForecastedText": "Perioden er prognostisert med {{hours}}. \nKlikk **Fjern prognose** hvis du vil gjøre noen justeringer.",
     "matchEventPanelHeaderText": "Løs hendelsen",
     "customerInactiveError": "Kunden er ikke lenger aktiv. Løs hendelsen i Outlook.",
     "projectInactiveError": "Prosjektet er ikke lenger aktivt. Løs hendelsen i Outlook."
