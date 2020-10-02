@@ -87,12 +87,9 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
                         <ProjectLink project={event.project} />
                     </div>
                     {!isEmpty(event.project.labels) && <Icon iconName='Tag' className={styles.labelIcon} />}
-                    {(event.manualMatch && !selectedPeriod.isConfirmed) && (
+                    {(event.manualMatch && !selectedPeriod.isLocked) && (
                         <ClearManualMatchButton
-                            onClick={() => dispatch({
-                                type: 'CLEAR_MANUAL_MATCH',
-                                payload: event.id,
-                            })}
+                            onClick={() => dispatch({ type: 'CLEAR_MANUAL_MATCH', payload: event.id })}
                             className={styles.clearButton} />
                     )}
                 </div>
