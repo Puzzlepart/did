@@ -3,9 +3,7 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { Projects } from './Projects'
 export { ProjectList } from './Projects'
 
-/**
- * @ignore
- */
+
 const _ = () => {
     const match = useRouteMatch()
     return (

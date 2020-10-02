@@ -6,9 +6,7 @@ export interface ITimeEntriesVariables {
   maxMonthNumber?: number
 }
 
-/**
- * @ignore
- */
+
 export default gql`
   query($year: Int!, $minMonthNumber: Int, $maxMonthNumber: Int) {
     timeentries(year: $year, minMonthNumber: $minMonthNumber, maxMonthNumber: $maxMonthNumber) {

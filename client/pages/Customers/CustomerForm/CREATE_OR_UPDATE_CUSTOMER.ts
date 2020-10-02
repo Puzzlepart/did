@@ -6,9 +6,7 @@ export interface ICreateOrUpdateCustomerVariables {
   update?: boolean
 }
 
-/**
- * @ignore
- */
+
 export default gql`
   mutation($customer: CustomerInput!, $update: Boolean) {
     result: createOrUpdateCustomer(customer: $customer, update: $update) {

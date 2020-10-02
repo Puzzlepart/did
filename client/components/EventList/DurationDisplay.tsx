@@ -8,9 +8,7 @@ export interface IDurationDisplayProps extends React.HTMLProps<HTMLDivElement> {
     duration: number;
 }
 
-/**
- * @ignore
- */
+
 export const DurationDisplay = ({ displayFormat, duration, style }: IDurationDisplayProps): JSX.Element => {
     const { t } = useTranslation()
     let displayValue = dateUtils.getDurationString(duration, t)

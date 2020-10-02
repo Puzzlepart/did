@@ -2,9 +2,7 @@ import * as chalk from 'chalk'
 import * as log from 'loglevel'
 import * as prefix from 'loglevel-plugin-prefix'
 
-/**
- * @ignore
- */
+
 const colors = {
   TRACE: chalk.magenta,
   DEBUG: chalk.cyan,

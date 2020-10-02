@@ -11,9 +11,7 @@ export interface IAddOrUpdateUserVariables {
   update?: boolean
 }
 
-/**
- * @ignore
- */
+
 export default gql`
   mutation($user: UserInput!, $update: Boolean) {
     addOrUpdateUser(user: $user, update: $update) {
