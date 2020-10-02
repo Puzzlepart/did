@@ -139,6 +139,8 @@ class StorageService {
    * @param project Project data
    * @param createdBy Created by ID
    * @param update Update the existing project
+   * 
+   * @returns The id of the crated project
    */
   async createOrUpdateProject(project, createdBy, update) {
     const id = [project.customerKey, project.key].join(' ')
@@ -147,15 +149,16 @@ class StorageService {
       {
         ...project,
         id,
-        labels: project.labels && project.labels.join('|'),
+        labels: !!project.labels ? project.labels.join('|') : '',
         createdBy,
       },
-      project.customerKey
+      project.customerKey,
+      { removeBlanks: false }
     )
     let result
     if (update) result = await this.tableUtil.updateEntity('Projects', entity, true)
     else result = await this.tableUtil.addAzEntity('Projects', entity)
-    return result
+    return id
   }
 
   /**
@@ -281,7 +284,10 @@ class StorageService {
           labels: labels.join('|'),
         },
         user.id,
-        ['startDateTime', 'endDateTime']
+        { 
+          removeBlanks:true,
+          dateFields: ['startDateTime', 'endDateTime'] 
+        }
       )
       return entity
     })

@@ -1,6 +1,6 @@
 
 import { useQuery } from '@apollo/react-hooks'
-import { IProject } from 'interfaces/IProject'
+import { IProject } from 'types/IProject'
 import * as React from 'react'
 import { Autocomplete, ISuggestionItem } from '../Autocomplete'
 import { ISearchProjectProps } from './types'

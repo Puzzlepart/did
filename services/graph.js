@@ -116,7 +116,13 @@ class GraphService {
   async createOutlookCategory(category) {
     try {
       this.startMark('createOutlookCategory')
-      const res = await this.getClient().api('/me/outlook/masterCategories').post(JSON.stringify(category))
+      const colorIdx = category.split('').map(c => c.charCodeAt(0)).reduce((a, b) => a + b) % 24
+      const content = JSON.stringify({
+        displayName: category,
+        color: `preset${colorIdx}`
+      })
+      const client = this.getClient()
+      const res = await client.api('/me/outlook/masterCategories').post(content)
       this.endMark('createOutlookCategory')
       return res
     } catch (error) {

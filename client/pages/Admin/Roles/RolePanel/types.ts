@@ -1,4 +1,4 @@
-import { IRole } from 'interfaces/IRole'
+import { IRole } from 'types/IRole'
 import { IPanelProps } from 'office-ui-fabric-react/lib/Panel'
 
 export interface IRolePanelProps extends IPanelProps {

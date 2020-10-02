@@ -1,17 +1,8 @@
 import gql from 'graphql-tag'
-
-export interface IProjectInput {
-  key: string
-  name: string
-  customerKey: string
-  description: string
-  inactive?: boolean
-  icon: string
-  labels: any[]
-}
+import { ProjectModel } from './types'
 
 export interface ICreateOrUpdateProjectVariables {
-  project: IProjectInput
+  project: ProjectModel
   update?: boolean
 }
 

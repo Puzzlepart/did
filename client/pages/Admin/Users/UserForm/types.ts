@@ -1,4 +1,4 @@
-import { IUser } from 'interfaces'
+import { IUser } from 'types'
 import { IPanelProps } from 'office-ui-fabric-react/lib/Panel'
 
 /**

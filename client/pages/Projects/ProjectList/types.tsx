@@ -1,5 +1,5 @@
 import { IListProps } from 'components/List/types'
-import { IProject } from 'interfaces/IProject'
+import { IProject } from 'types/IProject'
 
 /**
  * @category ProjectList
