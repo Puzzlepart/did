@@ -7,7 +7,6 @@ export interface ITimeEntriesVariables {
   forecast?: boolean
 }
 
-
 export default gql`
   query($weekNumber: Int, $monthNumber: Int, $year: Int, $forecast: Boolean) {
     timeentries(weekNumber: $weekNumber, monthNumber: $monthNumber, year: $year, forecast: $forecast) {

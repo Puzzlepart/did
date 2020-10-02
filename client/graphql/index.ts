@@ -2,7 +2,6 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient, FetchPolicy } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
 
-
 export interface IError {
   name: string
   message: string
@@ -10,13 +9,11 @@ export interface IError {
   statusCode: string
 }
 
-
 export interface IBaseResult {
   success: boolean
   error: IError
   data: string
 }
-
 
 export const client = new ApolloClient({
   cache: new InMemoryCache(),

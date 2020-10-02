@@ -1,4 +1,3 @@
-
 const ICONS = [
   'GlobalNavButton',
   'InternetSharing',

@@ -1,6 +1,5 @@
 import { ICustomer } from 'types/ICustomer'
 
-
 export interface IGetCustomersData {
   customers: ICustomer[]
 }

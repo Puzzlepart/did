@@ -38,7 +38,11 @@
     "forecastHoursText": "Forecast hours",
     "unforecastHoursText": "Remove forecast",
     "periodForecastedText": "The period is forecasted with {{hours}}. Click **Remove forecast** if you want to do some adjustments.",
-    "matchEventPanelHeaderText": "Resolve event"
+    "matchEventPanelHeaderText": "Resolve event",
+    "unforecastingPeriodDescription": "Hang on a minute...",
+    "unforecastingPeriodLabel": "Removing forecast",
+    "forecastingPeriodLabel": "Forecasting period",
+    "forecastingPeriodDescription": "Hang on a minute..."
   },
   "projects": {
     "inactiveText": "This project has been marked as inactive.",
