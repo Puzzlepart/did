@@ -127,6 +127,7 @@ async function timesheet(_obj, variables, ctx) {
     period.forecastedDuration = 0
     let confirmed = await ctx.services.azstorage.getConfirmedPeriod(ctx.user.id, period.id)
     if (confirmed) {
+      log('(timesheet) Found  %d confirmed entries for user %s', timeentries.length, ctx.user.id)
       period.events = connectTimeEntries(timeentries, projects, customers, labels)
       period.matchedEvents = period.events
       period.isConfirmed = true
@@ -142,8 +143,7 @@ async function timesheet(_obj, variables, ctx) {
               startDateTime: variables.startDateTime,
               endDateTime: variables.endDateTime,
             },
-            true,
-            { sortAsc: true }
+            { sortAsc: true, forecast: true }
           )
           period.events = connectTimeEntries(timeentries, projects, customers, labels)
           period.forecastedDuration = forecasted.hours

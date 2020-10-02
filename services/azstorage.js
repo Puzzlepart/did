@@ -8,7 +8,6 @@ const uuidv4 = require('uuid').v4
 const log = require('debug')('services/storage')
 
 class AzStorageService {
-
   constructor(subscription) {
     this.tableUtil = new AzTableUtilities(createTableService(subscription.connectionString))
     this.tables = {
@@ -29,18 +28,16 @@ class AzStorageService {
    */
   async getLabels() {
     const query = this.tableUtil.createAzQuery(1000, undefined)
-    const { entries } = await this.tableUtil.queryAzTable(this.tables.labels, query, {
-      RowKey: 'name',
-    })
+    const { entries } = await this.tableUtil.queryAzTable(this.tables.labels, query, { RowKey: 'name' })
     return entries
   }
 
   /**
    * Create label in table Labels
    *
-   * @param label Label data
-   * @param createdBy Created by ID
-   * @param update Update the existing label
+   * @param {*} label Label data
+   * @param {*} createdBy Created by ID
+   * @param {*} update Update the existing label
    */
   async addOrUpdateLabel(label, createdBy, update) {
     const { string } = this.tableUtil.azEntGen()
@@ -56,7 +53,7 @@ class AzStorageService {
   /**
    * Delete label from table Labels
    *
-   * @param name Label name
+   * @param {*} name Label name
    */
   async deleteLabel(name) {
     const { string } = this.tableUtil.azEntGen()
@@ -74,7 +71,7 @@ class AzStorageService {
   /**
    * Get customers from table Customers
    *
-   * @param options Options
+   * @param {*} options Options
    */
   async getCustomers(options = {}) {
     const query = this.tableUtil.createAzQuery(1000)
@@ -88,9 +85,9 @@ class AzStorageService {
   /**
    * Create or update customer in table Customers
    *
-   * @param customer Customer
-   * @param createdBy Created by ID
-   * @param update Update the existing customer
+   * @param {*} customer Customer
+   * @param {*} createdBy Created by ID
+   * @param {*} update Update the existing customer
    */
   async createOrUpdateCustomer(customer, createdBy, update) {
     const { string } = this.tableUtil.azEntGen()
@@ -107,7 +104,7 @@ class AzStorageService {
   /**
    * Delete customer from table storage 
    *
-   * @param key Customer key
+   * @param {*} key Customer key
    */
   async deleteCustomer(key) {
     const { string } = this.tableUtil.azEntGen()
@@ -125,8 +122,8 @@ class AzStorageService {
   /**
    * Get projects from table storage
    *
-   * @param customerKey Customer key
-   * @param options Options
+   * @param {*} customerKey Customer key
+   * @param {*} options Options
    */
   async getProjects(customerKey, options = {}) {
     const q = this.tableUtil.query()
@@ -148,9 +145,9 @@ class AzStorageService {
   /**
    * Create or update project in table storage
    *
-   * @param project Project data
-   * @param createdBy Created by ID
-   * @param update Update the existing project
+   * @param {*} project Project data
+   * @param {*} createdBy Created by ID
+   * @param {*} update Update the existing project
    *
    * @returns The id of the crated project
    */
@@ -235,10 +232,9 @@ class AzStorageService {
    * Get time entries from table storage
    *
    * @param {*} filterValues Filtervalues
-   * @param {*} forecast Forecast 
-   * @param {*} options Options ({ sortAsc })
+   * @param {*} options Options ({ sortAsc, forecast })
    */
-  async getTimeEntries(filterValues, forecast, options = {}) {
+  async getTimeEntries(filterValues, options = {}) {
     const q = this.tableUtil.query()
     const filter = [
       ['PeriodId', filterValues.periodId, q.string, q.equal],
@@ -253,7 +249,7 @@ class AzStorageService {
       ['EndDateTime', this.tableUtil.convertDate(filterValues.endDateTime), q.date, q.lessThan],
     ]
     const query = this.tableUtil.createAzQuery(1000, undefined, filter)
-    const tableName = forecast ? this.tables.forecastedTimeEntries : this.tables.timeEntries
+    const tableName = options.forecast ? this.tables.forecastedTimeEntries : this.tables.timeEntries
     let result = await this.tableUtil.queryAzTableAll(tableName, query, {
       PartitionKey: 'resourceId',
       RowKey: 'id',
@@ -315,11 +311,11 @@ class AzStorageService {
    *
    * @param {*} periodId Period ID
    * @param {*} resourceId Resource ID
-   * @param {*} forecast Forecast (using table ForecastedTimeEntries if specified)
+   * @param {*} forecast Forecast (using separate table if specified)
    */
   async deleteTimeEntries(periodId, resourceId, forecast) {
     const { string } = this.tableUtil.azEntGen()
-    const timeEntries = await this.getTimeEntries({ resourceId, periodId }, forecast)
+    const timeEntries = await this.getTimeEntries({ resourceId, periodId }, { forecast })
     if (timeEntries.length === 0) return
     const batch = this.tableUtil.createAzBatch()
     timeEntries.forEach(entry =>
@@ -358,8 +354,8 @@ class AzStorageService {
   /**
    * Get entry for the period from table storage
    *
-   * @param resourceId ID of the resource
-   * @param periodId The period
+   * @param {*} resourceId ID of the resource
+   * @param {*} periodId The period
    */
   async getConfirmedPeriod(resourceId, periodId) {
     try {
@@ -373,8 +369,8 @@ class AzStorageService {
   /**
    * Get entry for the period from table storage
    *
-   * @param resourceId ID of the resource
-   * @param periodId The period
+   * @param {*} resourceId ID of the resource
+   * @param {*} periodId The period
    */
   async getForecastedPeriod(resourceId, periodId) {
     try {
@@ -386,11 +382,11 @@ class AzStorageService {
   }
 
   /**
-   * Add entry for the period to table storage
+   * Add entry for the confirmed period to table storage
    *
-   * @param periodId The period ID
-   * @param resourceId ID of the resource
-   * @param hours Total hours for the train
+   * @param {*} periodId The period ID
+   * @param {*} resourceId ID of the resource
+   * @param {*} hours Total hours for the train
    */
   async addConfirmedPeriod(periodId, resourceId, hours) {
     const [week, month, year] = periodId.split('_')
@@ -407,11 +403,11 @@ class AzStorageService {
   }
 
   /**
-   * Add entry for the period to table storage
+   * Add entry for the forecasted period to table storage
    *
-   * @param periodId The period ID
-   * @param resourceId ID of the resource
-   * @param hours Total hours for the train
+   * @param {*} periodId The period ID
+   * @param {*} resourceId ID of the resource
+   * @param {*} hours Total hours for the train
    */
   async addForecastedPeriod(periodId, resourceId, hours) {
     const [week, month, year] = periodId.split('_')
@@ -430,8 +426,8 @@ class AzStorageService {
   /**
    * Removed the entry for the period in table storage
    *
-   * @param periodId The period ID
-   * @param resourceId ID of the resource
+   * @param {*} periodId The period ID
+   * @param {*} resourceId ID of the resource
    */
   async removeConfirmedPeriod(periodId, resourceId) {
     const { string } = this.tableUtil.azEntGen()
@@ -449,8 +445,8 @@ class AzStorageService {
   /**
    * Removed the entry for the period in table storage
    *
-   * @param periodId The period ID
-   * @param resourceId ID of the resource
+   * @param {*} periodId The period ID
+   * @param {*} resourceId ID of the resource
    */
   async removeForecastedPeriod(periodId, resourceId) {
     const { string } = this.tableUtil.azEntGen()
@@ -487,8 +483,8 @@ class AzStorageService {
   /**
    * Add role to table storage
    *
-   * @param role The role data
-   * @param update Update the existing role
+   * @param {*} role The role data
+   * @param {*} update Update the existing role
    */
   async addOrUpdateRole(role, update) {
     const { string } = this.tableUtil.azEntGen()

@@ -49,7 +49,7 @@ async function timeentries(_obj, variables, ctx) {
   let [projects, customers, timeentries] = await Promise.all([
     ctx.services.azstorage.getProjects(),
     ctx.services.azstorage.getCustomers(),
-    ctx.services.azstorage.getTimeEntries(variables, variables.forecast),
+    ctx.services.azstorage.getTimeEntries(variables, { forecast: variables.forecast }),
   ])
   let entries = timeentries.map(entry => ({
     ...entry,
