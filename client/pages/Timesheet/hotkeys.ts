@@ -1,6 +1,6 @@
 import { TFunction } from 'i18next'
 import { GlobalHotKeysProps } from 'react-hotkeys'
-import { ITimesheetContext } from './TimesheetContext'
+import { ITimesheetContext } from './context'
 
 export default (context: ITimesheetContext, t: TFunction): GlobalHotKeysProps => ({
   keyMap: {

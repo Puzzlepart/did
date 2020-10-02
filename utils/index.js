@@ -118,4 +118,14 @@ module.exports = {
   toArray: (str, separator) => {
     return (str || '').split(separator).filter(p => p)
   },
+
+  /**
+   * Generate int
+   * 
+   * @param {*} str String
+   * @param {*} mod Modulator
+   */
+  generateInt(str, mod) {
+    return str.split('').map(c => c.charCodeAt(0)).reduce((a, b) => a + b) % mod
+  }
 }

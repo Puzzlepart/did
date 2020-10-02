@@ -26,6 +26,6 @@ export interface ITimesheetParams {
   year: string
 }
 
-export * from './TimesheetContext'
+export * from './context'
 export * from './TimesheetPeriod'
 export * from './TimesheetScope'

@@ -28,7 +28,7 @@ const typeDef = gql`
 `
 
 async function outlookCategories(_obj, _variables, ctx) {
-  let categories = await ctx.services.graph.getOutlookCategories()
+  let categories = await ctx.services.msgraph.getOutlookCategories()
   return categories.map(c => ({ ...c, key: c.id }))
 }
 

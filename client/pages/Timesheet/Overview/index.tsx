@@ -4,7 +4,7 @@ import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
 import * as React from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import DateUtils from 'utils/date'
+import dateUtils from 'utils/date'
 import { generateColumn as col } from 'utils/generateColumn'
 import { TimesheetContext } from '../'
 import { StatusBar } from '../StatusBar'
@@ -35,7 +35,7 @@ export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
                     groupNames: selectedPeriod.weekdays(dayFormat),
                     totalFunc: (items: ITimeEntry[]) => {
                         const duration = items.reduce((sum, i) => sum + i.duration, 0)
-                        return ` (${DateUtils.getDurationDisplay(duration, t)})`
+                        return ` (${dateUtils.getDurationDisplay(duration, t)})`
                     },
                 }}
                 additionalColumns={[

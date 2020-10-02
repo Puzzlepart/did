@@ -51,12 +51,12 @@ const typeDef = gql`
 `
 
 async function customers(_obj, variables, ctx) {
-  return await ctx.services.storage.getCustomers({ sortBy: variables.sortBy })
+  return await ctx.services.azstorage.getCustomers({ sortBy: variables.sortBy })
 }
 
 async function createOrUpdateCustomer(_obj, variables, ctx) {
   try {
-    await ctx.services.storage.createOrUpdateCustomer(variables.customer, ctx.user.id, variables.update)
+    await ctx.services.azstorage.createOrUpdateCustomer(variables.customer, ctx.user.id, variables.update)
     return { success: true, error: null }
   } catch (error) {
     return {
@@ -68,7 +68,7 @@ async function createOrUpdateCustomer(_obj, variables, ctx) {
 
 async function deleteCustomer(_obj, variables, ctx) {
   try {
-    let projects = await ctx.services.storage.getProjects(variables.key, {
+    let projects = await ctx.services.azstorage.getProjects(variables.key, {
       noParse: true,
     })
     if (projects.length > 0) {
@@ -78,7 +78,7 @@ async function deleteCustomer(_obj, variables, ctx) {
       }, createAzBatch())
       await executeBatch('Projects', batch)
     }
-    await ctx.services.storage.deleteCustomer(variables.key)
+    await ctx.services.azstorage.deleteCustomer(variables.key)
     return { success: true, error: null }
   } catch (error) {
     return {

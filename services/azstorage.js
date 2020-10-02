@@ -6,7 +6,7 @@ const { isBlank } = require('underscore.string')
 const { createTableService } = require('azure-storage')
 const uuidv4 = require('uuid').v4
 
-class StorageService {
+class AzStorageService {
   constructor(subscription) {
     this.tableUtil = new AzTableUtilities(createTableService(subscription.connectionString))
   }
@@ -426,4 +426,4 @@ class StorageService {
   }
 }
 
-module.exports = StorageService
+module.exports = AzStorageService

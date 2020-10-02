@@ -1,7 +1,7 @@
 import { ITimeEntry } from 'types'
 
 /**
- * @category EventList
+ * @category Timesheet
  */
 export interface IMatchEventPanelProps {
     event: ITimeEntry;

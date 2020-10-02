@@ -2,6 +2,7 @@ $lightgray_background: #fafafc;
 $gray_background: #f1f1f1;
 
 .root {
+  padding: 0 12px;
   [class*="ms-DetailsHeader-cellName"],
   [class*="ms-GroupHeader-title"] {
     font-weight: normal;

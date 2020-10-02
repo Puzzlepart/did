@@ -53,7 +53,7 @@ const typeDef = gql`
 
 async function createOrUpdateProject(_obj, variables, ctx) {
   try {
-    const id = await ctx.services.storage.createOrUpdateProject(variables.project, ctx.user.id, variables.update)
+    const id = await ctx.services.azstorage.createOrUpdateProject(variables.project, ctx.user.id, variables.update)
     if (variables.project.createOutlookCategory) {
       await ctx.services.graph.createOutlookCategory(id)
     }
@@ -68,11 +68,11 @@ async function createOrUpdateProject(_obj, variables, ctx) {
 
 async function projects(_obj, variables, ctx) {
   let [projects, customers, labels] = await Promise.all([
-    ctx.services.storage.getProjects(variables.customerKey, {
+    ctx.services.azstorage.getProjects(variables.customerKey, {
       sortBy: variables.sortBy,
     }),
-    ctx.services.storage.getCustomers(),
-    ctx.services.storage.getLabels(),
+    ctx.services.azstorage.getCustomers(),
+    ctx.services.azstorage.getLabels(),
   ])
   projects = connectEntities(projects, customers, labels)
   return projects

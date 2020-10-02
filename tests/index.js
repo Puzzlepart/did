@@ -1,13 +1,17 @@
 const assert = require('assert')
 const { first, any } = require('underscore')
 const EventMatching = require('../api/graphql/resolvers/timesheet.matching')
-const projects = require('./data/projects.json')
-const customers = require('./data/customers.json')
-const labels = require('./data/labels.json')
+const delay = require('delay')
+const ensureTestData = require('./ensureTestData')
 
-describe('Event matching', () => {
+describe('Event matching', async () => {
   let testEvent = {}
-  let eventMatching = new EventMatching(projects, customers, labels)
+  let eventMatching
+
+  before(async () => {
+    const [projects, customers, labels] = await ensureTestData()
+    eventMatching = new EventMatching(projects, customers, labels)
+  })
 
   beforeEach(() => {
     testEvent = {
@@ -62,18 +66,6 @@ describe('Event matching', () => {
   })
 
   describe('Matching suggestions', () => {
-    it('{4SUBSEA FLEXSHARZ} should suggest {4SUBSEA FLEXSHARE}', () => {
-      testEvent.body = 'Hello this is an event [4SUBSEA FLEXSHARZ]'
-      const event = first(eventMatching.match([testEvent]))
-      assert.strictEqual(event.suggestedProject.id, '4SUBSEA FLEXSHARE')
-    })
-
-    it('{4SUBSEA FLEXSHARZE} should suggest {4SUBSEA FLEXSHARE}', () => {
-      testEvent.body = 'Hello this is an event [4SUBSEA FLEXSHARZE]'
-      const event = first(eventMatching.match([testEvent]))
-      assert.strictEqual(event.suggestedProject.id, '4SUBSEA FLEXSHARE')
-    })
-
     it('{IAM VAK} should suggest {IAM VAC}', () => {
       testEvent.categories.push('IAM VAK')
       const event = first(eventMatching.match([testEvent]))
@@ -89,7 +81,7 @@ describe('Event matching', () => {
     it('4SUBSEA ABC in category should yield no project but a match against 4SUBSEA', () => {
       testEvent.categories.push('4SUBSEA ABC')
       const event = first(eventMatching.match([testEvent]))
-      assert.strictEqual(event.customer.id, '4SUBSEA')
+      assert.strictEqual(event.customer.key, '4SUBSEA')
     })
 
     it('4SUBSEA ABC in body should yield no project and no match against customer 4SUBSEA', () => {
@@ -99,22 +91,47 @@ describe('Event matching', () => {
     })
   })
 
-  describe('Matching event labels', () => {
-    it('{overtid-40} in categories should add matching label', () => {
-      testEvent.categories.push('overtid-40')
+  describe('System ignore', () => {
+    it('IGNORE (uppercase) in categories should set the event as ignored', () => {
+      testEvent.categories.push('IGNORE')
       const event = first(eventMatching.match([testEvent]))
-      assert.strictEqual(
-        any(event.labels, lbl => lbl.name === 'overtid-40'),
-        true
-      )
+      assert.strictEqual(event.isSystemIgnored, true)
     })
 
-    it('{OVERTID-40} in categories should not add any label', () => {
-      testEvent.categories.push('OVERTID-40')
+    it('ignore (lowercase) in categories should set the event as ignored', () => {
+      testEvent.categories.push('ignore')
+      const event = first(eventMatching.match([testEvent]))
+      assert.strictEqual(event.isSystemIgnored, true)
+    })
+
+    it('[ignore] (lowercase) in body should set the event as ignored', () => {
+      testEvent.body = 'This is the body of the event [ignore]'
+      const event = first(eventMatching.match([testEvent]))
+      assert.strictEqual(event.isSystemIgnored, true)
+    })
+
+    it('[ignore] (lowercase) in body should set the event as ignored even with an event category', () => {
+      testEvent.categories.push('IAM VAC')
+      testEvent.categories.push('ignore')
+      const event = first(eventMatching.match([testEvent]))
+      assert.strictEqual(event.isSystemIgnored, true)
+    })
+
+    it('IAM VAC in categories takes presedence before [ignore] (lowercase) in body', () => {
+      testEvent.categories.push('IAM VAC')
+      testEvent.body = 'This is the body of the event [ignore]'
+      const event = first(eventMatching.match([testEvent]))
+      assert.notStrictEqual(event.isSystemIgnored, true)
+    })
+  })
+
+  describe('Matching event labels', () => {
+    it('{crayon-timereg} in categories should add matching label', () => {
+      testEvent.categories.push('crayon-timereg')
       const event = first(eventMatching.match([testEvent]))
       assert.strictEqual(
-        any(event.labels, lbl => lbl.name === 'OVERTID-40'),
-        false
+        any(event.labels, lbl => lbl.name === 'crayon-timereg'),
+        true
       )
     })
   })

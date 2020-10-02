@@ -36,13 +36,13 @@ const typeDef = gql`
 `
 
 async function roles(_obj, _variables, ctx) {
-  let roles = await ctx.services.storage.getRoles()
+  let roles = await ctx.services.azstorage.getRoles()
   return roles
 }
 
 async function addOrUpdateRole(_obj, variables, ctx) {
   try {
-    await ctx.services.storage.addOrUpdateRole(variables.role, variables.update)
+    await ctx.services.azstorage.addOrUpdateRole(variables.role, variables.update)
     return { success: true, error: null }
   } catch (error) {
     return {

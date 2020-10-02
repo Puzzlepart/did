@@ -3,7 +3,7 @@
 interface CssExports {
   'root': string;
   'searchProject': string;
-  'title': string;
+  'subText': string;
 }
 export const cssExports: CssExports;
 export default cssExports;
