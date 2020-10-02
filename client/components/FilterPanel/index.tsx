@@ -3,13 +3,12 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { FilterItem } from './FilterItem'
 import { IFilter, IFilterItem } from './Filters'
-import { IFilterPanelProps } from './IFilterPanelProps'
+import { IFilterPanelProps } from './types'
 
 
 export const FilterPanel = (props: IFilterPanelProps) => {
-    const [filters, setFilters] = useState<IFilter[]>(props.filters.map(f => f.initialize(props.entries)))
-
-    useEffect(() => setFilters(props.filters.map(f => f.initialize(props.entries))), [props.entries])
+    const [filters, setFilters] = useState<IFilter[]>(props.filters.map(f => f.initialize(props.items)))
+    useEffect(() => setFilters(props.filters.map(f => f.initialize(props.items))), [props.items])
 
     /**
      * On filter updated
@@ -42,7 +41,8 @@ export const FilterPanel = (props: IFilterPanelProps) => {
                     <FilterItem
                         key={filter.key}
                         filter={filter}
-                        onFilterUpdated={onFilterUpdated} />
+                        onFilterUpdated={onFilterUpdated}
+                        shortListCount={props.shortListCount} />
                 ))}
         </Panel>
     )
@@ -50,3 +50,4 @@ export const FilterPanel = (props: IFilterPanelProps) => {
 
 export * from './FilterItem'
 export * from './Filters'
+export * from './types'

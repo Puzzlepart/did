@@ -139,9 +139,10 @@ export const Reports = () => {
                             <FilterPanel
                                 isOpen={state.isFiltersOpen}
                                 filters={filters}
-                                entries={context.timeentries}
+                                items={context.timeentries}
                                 onDismiss={() => context.setState({ isFiltersOpen: false })}
-                                onFilterUpdated={onFilterUpdated} />
+                                onFilterUpdated={onFilterUpdated}
+                                shortListCount={10} />
                         </div>
                     </PivotItem>
                 ))}

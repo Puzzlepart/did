@@ -240,7 +240,8 @@
       "nextYearRangeAriaLabel": "Next year range",
       "closeButtonAriaLabel": "Close"
     },
-    "preferredLanguageLabel": "Preferred language"
+    "preferredLanguageLabel": "Preferred language",
+    "showAllFiltersText": "Show all ({{count}})"
   },
   "navigation": {
     "timesheet": "Timesheet",

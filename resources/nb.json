@@ -239,7 +239,8 @@
       "nextYearRangeAriaLabel": "Neste årsintervall",
       "closeButtonAriaLabel": "Lukk"
     },
-    "preferredLanguageLabel": "Foretrukket språk"
+    "preferredLanguageLabel": "Foretrukket språk",
+    "showAllFiltersText": "Vis alle ({{count}})"
   },
   "navigation": {
     "timesheet": "Timeliste",

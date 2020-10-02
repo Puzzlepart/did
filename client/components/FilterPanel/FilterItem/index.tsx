@@ -11,6 +11,7 @@ export const FilterItem = (props: IFilterItemProps) => {
     const { t } = useTranslation()
     const selectedKeys = props.filter.selected.map(f => f.key)
     const [searchTerm, onSearch] = useState<string>('')
+    const [showCount, setShowCount] = useState(props.shortListCount)
 
     const items = useMemo(() => {
         return props.filter.items.filter(item => isBlank(searchTerm) ? true : contains(item.value.toLowerCase(), searchTerm.toLowerCase()))
@@ -24,7 +25,7 @@ export const FilterItem = (props: IFilterItemProps) => {
                     placeholder={t('common.searchPlaceholder')}
                     onChange={(_event, value) => onSearch(value)} />
             </div>
-            {items.map(item => (
+            {[...items].slice(0, showCount).map(item => (
                 <div key={item.key} className={styles.item}>
                     <Checkbox
                         label={item.value}
@@ -32,6 +33,10 @@ export const FilterItem = (props: IFilterItemProps) => {
                         onChange={(_, checked) => props.onFilterUpdated(props.filter, item, checked)} />
                 </div>
             ))}
+            <div
+                className={styles.showAllLink}
+                hidden={items.length < 10 || showCount === props.filter.items.length}
+                onClick={() => setShowCount(props.filter.items.length)}>{t('common.showAllFiltersText', { count: props.filter.items.length })}</div>
         </div >
     )
 }
