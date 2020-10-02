@@ -29,6 +29,8 @@ const typeDef = gql`
     Get time entries
     """
     timeentries(
+      startDateTime: String
+      endDateTime: String
       projectId: String
       resourceId: String
       weekNumber: Int

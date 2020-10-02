@@ -9,7 +9,8 @@ import { format } from 'office-ui-fabric-react/lib/Utilities'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
-import { find, filter, isEmpty } from 'underscore'
+import { filter, find, isEmpty } from 'underscore'
+import dateUtils from 'utils/date'
 import { exportExcel } from 'utils/exportExcel'
 import columns from './columns'
 import commandBar from './commandBar'
@@ -17,7 +18,6 @@ import { IReportsContext } from './context'
 import styles from './Reports.module.scss'
 import TIME_ENTRIES, { ITimeEntriesVariables } from './TIME_ENTRIES'
 import { getQueries, IReportsParams, IReportsState } from './types'
-import dateUtils from 'utils/date'
 
 
 export const Reports = () => {
@@ -87,8 +87,6 @@ export const Reports = () => {
         context.setState({ query })
         history.push(`/reports/${key}`)
     }
-
-
 
     const context: IReportsContext = useMemo(() => ({
         ...state,

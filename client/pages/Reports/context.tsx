@@ -14,7 +14,7 @@ export interface IReportsContext extends IReportsState {
     timeentries: any[];
 
     /**
-     * Set state
+     * Set state for the Reports component
      */
     setState: (state: IReportsState) => void;
 

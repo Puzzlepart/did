@@ -74,7 +74,7 @@ export const getQueries = (t: TFunction): IReportsQuery[] => ([
         key: 'forecast',
         text: t('reports.forecast'),
         iconName: 'TimeSheet',
-        variables: { forecast: true },
+        variables: { forecast: true, startDateTime: new Date().toISOString() },
         exportFileName: 'Forecast-{0}.xlsx',
     }
 ])

@@ -3,26 +3,6 @@ import { pick } from 'underscore'
 import { IReportsContext } from './context'
 import { getGroupByOptions } from './types'
 
-// /**
-//  * Select query command
-//  *
-//  * @param {IReportsContext} context Reports context
-//  */
-// const selectQueryCmd = (context: IReportsContext) => ({
-//   key: 'SELECT_QUERY',
-//   text: context.query?.text || context.t('reports.selectReportLabel'),
-//   iconProps: { iconName: context.query?.iconName || 'ReportDocument' },
-//   subMenuProps: {
-//     items: getQueries(context.t).map(query => ({
-//       ...pick(query, 'key', 'text'),
-//       iconProps: { iconName: query.iconName },
-//       canCheck: true,
-//       checked: context.query?.key === query.key,
-//       onClick: () => context.setState({ query }),
-//     })),
-//   },
-// })
-
 /**
  * Select group by command
  *
