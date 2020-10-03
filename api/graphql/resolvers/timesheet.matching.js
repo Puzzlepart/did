@@ -30,7 +30,7 @@ class EventMatching {
       const sm = findBestMatch(projectKey, projectKeys)
       const target = sm.bestMatch && sm.bestMatch.rating > 0 ? sm.bestMatch.target : null
       if (!target) return null
-      const suggestion = customerProjects.filter(p => p.id.split(' ')[1] === target.toUpperCase())[0]
+      const suggestion = first(customerProjects.filter(p => p.id.split(' ')[1] === target.toUpperCase()))
       return suggestion
     } catch (error) {
       return null
