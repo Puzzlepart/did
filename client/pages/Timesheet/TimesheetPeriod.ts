@@ -222,7 +222,7 @@ export class TimesheetPeriod {
    * Get matched duration for the events in the period
    */
   public get matchedDuration(): number {
-    return filter(this.events, event => !!event.project).reduce((sum, event) => (sum += event.duration), 0)
+    return filter(this.events, event => !!event.project).reduce((sum, event) => sum + event.duration, 0)
   }
 
   /**

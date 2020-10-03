@@ -80,7 +80,6 @@ class MSGraphService {
       this.endMark('getUsers')
       return value
     } catch (error) {
-      console.log(error.message)
       switch (error.statusCode) {
         case 401: {
           this.oauthToken = await TokenService.refreshAccessToken(this.req)
