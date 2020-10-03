@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
-/* eslint-disable prefer-const */
 import { dateAdd, IPnPClientStore, ITypedHash, PnPClientStorage } from '@pnp/common'
 import { TFunction } from 'i18next'
 import { IProject } from 'types/IProject'
@@ -171,7 +170,7 @@ export class TimesheetPeriod {
    * @param {ITimeEntry} event Event
    */
   private _checkManualMatch(event: ITimeEntry) {
-    let manualMatch = this._uiMatchedEvents[event.id]
+    const manualMatch = this._uiMatchedEvents[event.id]
     if (event.manualMatch && !manualMatch) {
       event.manualMatch = false
       event.project = event.customer = null
@@ -239,7 +238,7 @@ export class TimesheetPeriod {
    * @param {IProject} project Project
    */
   public setManualMatch(eventId: string, project: IProject) {
-    let matches = this._uiMatchedEvents
+    const matches = this._uiMatchedEvents
     matches[eventId] = project
     this._localStorage.put(this._uiMatchedEventsStorageKey, matches, dateAdd(new Date(), 'month', 1))
   }

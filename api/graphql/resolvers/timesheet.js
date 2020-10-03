@@ -115,8 +115,6 @@ async function timesheet(_obj, variables, ctx) {
 
   for (let i = 0; i < periods.length; i++) {
     let period = periods[i]
-    period.confirmedDuration = 0
-    period.forecastedDuration = 0
     let confirmed = await ctx.services.azstorage.getConfirmedPeriod(ctx.user.id, period.id)
     if (confirmed) {
       period.events = connectTimeEntries(
