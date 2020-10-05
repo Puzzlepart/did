@@ -1,44 +1,63 @@
 .root {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 
-    .logo {
-        letter-spacing: 0.2rem;
-        font-size: 4rem;
-        margin-top: 1rem;
-        padding: 0rem 0.9rem 0.2rem 1rem;
-        background-color: #252422;
-        color: #ffffff;
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
-            sans-serif, Apple Color Emoji, Segoe UI Emoji;
-        font-weight: 600;
-        -webkit-font-smoothing:subpixel-antialiased;
+  .logo {
+    letter-spacing: 0.2rem;
+    font-size: 4rem;
+    margin-top: 1rem;
+    padding: 0rem 0.9rem 0.2rem 1rem;
+    background-color: #252422;
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji,
+      Segoe UI Emoji;
+    font-weight: 600;
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
+
+  .motto {
+    font-size: 18px;
+    font-weight: 400;
+    color: #252422;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji,
+      Segoe UI Emoji;
+    margin: 2rem 5rem 4rem 5rem;
+    letter-spacing: 2px;
+  }
+
+  .error {
+    text-align: center;
+
+    .icon {
+      font-size: 48px;
+      display: block;
+      margin: 0 0 15px 0;
     }
 
-    .motto {
-        font-size: 18px;
-        font-weight: 400;
-        color: #252422;
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
-        margin: 2rem 5rem 4rem 5rem;
-        letter-spacing: 2px
+    .title {
+      font-size: 18px;
     }
 
-    .signinbutton {
-        font-size: 1rem;
-        text-decoration: none;
-        background-color: #cf5f0022;
-        padding: 8px 10vw 10px 10vw;
-        border-radius: 20px;
-        line-height: 1;
-        color: #cf5f00;
-        border: 1px solid #cf5f0088;
-        transition: all .2s;
-
-        &:hover {
-            background-color: #cf5f00;
-            color: #f1f1f1;
-        }
+    .text {
+      color: #444;
     }
+  }
+
+  .signinbutton {
+    font-size: 1rem;
+    text-decoration: none;
+    background-color: #cf5f0022;
+    padding: 8px 10vw 10px 10vw;
+    border-radius: 20px;
+    line-height: 1;
+    color: #cf5f00;
+    border: 1px solid #cf5f0088;
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: #cf5f00;
+      color: #f1f1f1;
+    }
+  }
 }
