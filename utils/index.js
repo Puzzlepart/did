@@ -114,7 +114,7 @@ module.exports = {
    * @param {*} str String
    * @param {*} separator String separator
    */
-  toArray: (str, separator) => {
+  toArray: (str, separator = '|') => {
     return (str || '').split(separator).filter(p => p)
   },
 

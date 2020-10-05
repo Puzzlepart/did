@@ -1,5 +1,5 @@
 const assert = require('assert')
-const { first, any } = require('underscore')
+const { first, any, isArray } = require('underscore')
 const EventMatching = require('../api/graphql/resolvers/timesheet.matching')
 const delay = require('delay')
 const ensureTestData = require('./ensureTestData')
@@ -159,6 +159,38 @@ describe('Utils', async () => {
       const end = new Date(2020, 10, 21, 13, 00).toISOString()
       const duration = utils.getDurationHours(start, end)
       assert.strictEqual(duration, 24)
+    })
+  })
+
+  describe('getPeriod', () => {
+    it('should return 24_6_2020 for 10th of June 2020', () => {
+      const date = new Date(2020, 5, 10).toISOString()
+      const period = utils.getPeriod(date)
+      assert.strictEqual(period, '24_6_2020')
+    })
+  })
+
+  describe('getWeek', () => {
+    it('should return 24 for 10th of June 2020', () => {
+      const date = new Date(2020, 5, 10).toISOString()
+      const week = utils.getWeek(date)
+      assert.strictEqual(week, 24)
+    })
+  })
+
+  describe('getMonthIndex', () => {
+    it('should return 6 for June', () => {
+      const date = new Date(2020, 5, 10).toISOString()
+      const monthIndex = utils.getMonthIndex(date)
+      assert.strictEqual(monthIndex, 6)
+    })
+  })
+
+  describe('toArray', () => {
+    it('should return an array', () => {
+      const array = utils.toArray('1|2|3|4|5')
+      assert.strictEqual(first(array), '1')
+      assert.strictEqual(isArray(array), true)
     })
   })
 })
