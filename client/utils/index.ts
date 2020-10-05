@@ -1,5 +1,5 @@
 export { default as date } from './date'
-export * from './delay'
+export * from './sleep'
 export * from './generateColumn'
 export * from './getHash'
 export * from './getSum'

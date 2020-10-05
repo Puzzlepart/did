@@ -2,27 +2,85 @@ import { ICommandBarProps } from 'office-ui-fabric-react/lib/CommandBar'
 import { CheckboxVisibility, IColumn, IDetailsGroupRenderProps, IDetailsHeaderProps, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { ISearchBoxProps } from 'office-ui-fabric-react/lib/SearchBox'
 import { IRenderFunction } from 'office-ui-fabric-react/lib/Utilities'
-import { FadeInProps } from 'react-fade-in'
 
-export interface IListProps<T = any> {
+export interface IListProps<T = any> extends React.HTMLProps<HTMLDivElement> {
+    /**
+     * Items 
+     */
     items: T[];
+
+    /**
+     * Columns
+     */
     columns?: IColumn[];
+
+    /**
+     * Enable shimmer (normally while loading)
+     */
     enableShimmer?: boolean;
+
+    /**
+     * Fixed height
+     */
     height?: number;
+
+    /**
+     * Search box props
+     */
     searchBox?: ISearchBoxProps;
+
+    /**
+     * Selection
+     */
     selection?: IListSelection;
+
+    /**
+     * Groups
+     */
     groups?: IListGroups;
-    hidden?: boolean;
+
+    /**
+     * Group props
+     */
     groupProps?: IDetailsGroupRenderProps;
+
+    /**
+     * On render details header
+     */
     onRenderDetailsHeader?: IRenderFunction<IDetailsHeaderProps>;
+
+    /**
+     * Command bar props
+     */
     commandBar?: ICommandBarProps;
+
+    /**
+     * Check box visibility
+     */
     checkboxVisibility?: CheckboxVisibility;
-    fadeIn?: FadeInProps;
+
+    /**
+     * Fade in props 
+     * 
+     * [delay, transitionDuration]
+     */
+    fadeIn?: [number, number];
 }
 
 export interface IListState {
+    /**
+     * Search term
+     */
     searchTerm?: string;
+
+    /**
+     * Original items
+     */
     origItems?: any[];
+
+    /**
+     * Current items
+     */
     items?: any[];
 }
 

@@ -1,13 +1,13 @@
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import { UserMessage } from 'components'
 import List from 'components/List'
-import delay from 'delay'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isBlank } from 'underscore.string'
+import { sleep } from 'utils'
 import dateUtils from 'utils/date'
 import ADD_API_TOKEN from './ADD_API_TOKEN'
 import styles from './ApiTokens.module.scss'
@@ -37,14 +37,14 @@ export const ApiTokens = () => {
             })
             setName(null)
             refetch()
-            await delay(10000)
+            await sleep(10)
         } else {
             setMessage({
                 type: MessageBarType.error,
                 text: t('admin.tokenErrorText'),
             })
             setName(null)
-            await delay(5000)
+            await sleep(5)
         }
         setKey(null)
         setMessage(null)
