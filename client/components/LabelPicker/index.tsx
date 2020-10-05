@@ -32,11 +32,11 @@ export const LabelPicker = (props: ILabelPickerProps) => {
     }
 
     useEffect(() => {
-        if (data && data.labels) {
+        if (data?.labels) {
             const _labels: IEntityLabel[] = data.labels.map((lbl: any) => omit(lbl, '__typename'))
             setLabels(_labels)
-            if(props.defaultSelectedKeys) {
-                const _selectedLabels = _labels.filter(lbl =>  props.defaultSelectedKeys.indexOf(lbl.name) !== -1) 
+            if (props.defaultSelectedKeys) {
+                const _selectedLabels = _labels.filter(lbl => props.defaultSelectedKeys.indexOf(lbl.name) !== -1)
                 setSelectedLabels(_selectedLabels)
             }
         }
