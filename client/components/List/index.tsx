@@ -12,11 +12,10 @@ import { ListHeader } from './ListHeader'
 import reducer from './reducer'
 import { IListProps } from './types'
 import { sleep } from 'utils'
+import styles from './List.module.scss'
 
 /**
  * List component using DetailsList from office-ui-fabric-react
- * 
- * @category List
  */
 const List = (props: IListProps) => {
     const [state, dispatch] = useReducer(reducer, {
@@ -43,15 +42,14 @@ const List = (props: IListProps) => {
     })
 
     const onRenderListHeader = (headerProps: IDetailsHeaderProps, defaultRender: (props: IDetailsHeaderProps) => JSX.Element) => {
-        if (props.onRenderDetailsHeader) return onRenderListHeader(headerProps, defaultRender)
+        if (!!props.onRenderDetailsHeader) return onRenderListHeader(headerProps, defaultRender)
         const searchBox = props.searchBox && ({
             key: 'SEARCH_BOX',
             onRender: () => (
                 <SearchBox
                     {...props.searchBox}
-                    styles={{ field: { fontSize: '10pt', letterSpacing: '1px' }, root: { width: 400, maxWidth: 400 } }}
-                    w
-                    onChange={(_, newValue) => sleep(0.4).then(() => dispatch({ type: 'SEARCH', payload: newValue }))} />
+                    className={styles.searchBox}
+                    onChange={(_event, newValue) => sleep(0.4).then(() => dispatch({ type: 'SEARCH', payload: newValue }))} />
             ),
         })
         const commandBarItems = [searchBox, ...props.commandBar.items].filter(c => c)
@@ -74,7 +72,7 @@ const List = (props: IListProps) => {
     const [delay, transitionDuration] = props.fadeIn
 
     return (
-        <div style={{ marginBottom: 25 }} hidden={props.hidden}>
+        <div className={styles.root} hidden={props.hidden}>
             <FadeIn delay={delay} transitionDuration={transitionDuration}>
                 <ScrollablePaneWrapper condition={!!props.height} height={props.height}>
                     <ShimmeredDetailsList
