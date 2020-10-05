@@ -70,16 +70,24 @@ const columns = (t: TFunction): IColumn[] => ([
         minWidth: 100,
     },
     {
+        key: 'resource.displayName',
+        fieldName: 'resource.displayName',
+        name: t('common.employeeLabel'),
+        minWidth: 100,
+    },
+    {
         key: 'resource.surname',
         fieldName: 'resource.surname',
         name: t('common.surnameLabel'),
         minWidth: 100,
+        data: { hidden: true },
     },
     {
         key: 'resource.givenName',
         fieldName: 'resource.givenName',
         name: t('common.givenNameLabel'),
         minWidth: 100,
+        data: { hidden: true },
     },
     {
         key: 'resource.mail',

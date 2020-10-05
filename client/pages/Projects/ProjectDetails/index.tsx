@@ -7,16 +7,19 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Actions } from './actions'
 import styles from './ProjectDetails.module.scss'
-import PROJECT_TIME_ENTRIES from './PROJECT_TIME_ENTRIES'
 import { Summary } from './Summary'
 import { TimeEntries } from './TimeEntries'
 import { IProjectDetailsProps } from './types'
 import { ProjectDetailsContext } from './ProjectDetailsContext'
+import graphql from '../graphql'
 
 export const ProjectDetails = (props: IProjectDetailsProps) => {
     const { t } = useTranslation()
     const [project, setProject] = useState({ ...props.project })
-    const { loading, error, data } = useQuery<{ timeentries: any[] }>(PROJECT_TIME_ENTRIES, { variables: { projectId: props.project.id } })
+    const { loading, error, data } = useQuery<{ timeentries: any[] }>(
+        graphql.query.timeentries,
+        { variables: { projectId: props.project.id } }
+    )
     const timeentries = data ? data.timeentries : []
 
     useEffect(() => setProject({ ...props.project }), [props.project])

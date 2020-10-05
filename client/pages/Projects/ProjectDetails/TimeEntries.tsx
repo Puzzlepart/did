@@ -20,26 +20,12 @@ export const TimeEntries = () => {
                     events={timeentries}
                     additionalColumns={[
                         {
-                            key: 'resource.surname',
-                            fieldName: 'resource.surname',
-                            name: t('common.surnameLabel'),
+                            key: 'resource.displayName',
+                            fieldName: 'resource.displayName',
+                            name: t('common.employeeLabel'),
                             minWidth: 100,
                             maxWidth: 150,
-                        },
-                        {
-                            key: 'resource.givenName',
-                            fieldName: 'resource.givenName',
-                            name: t('common.givenNameLabel'),
-                            minWidth: 100,
-                            maxWidth: 150,
-                        },
-                        {
-                            key: 'resource.mail',
-                            fieldName: 'resource.mail',
-                            name: t('common.mailLabel'),
-                            minWidth: 100,
-                            data: { hidden: true },
-                        },    
+                        }
                     ]}
                     dateFormat='MMM Do YYYY HH:mm'
                     columnWidths={{ time: 250 }} />
