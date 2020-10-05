@@ -132,6 +132,11 @@ export class TimesheetPeriod {
   private _uiIgnoredEventsStorageKey: string
 
   /**
+   * Default expire for storage
+   */
+  private _storageDefaultExpire: Date
+
+  /**
    * Creates a new instance of TimesheetPeriod
    *
    * @param {ITimesheetPeriod} _period Period
@@ -151,6 +156,7 @@ export class TimesheetPeriod {
     this._uiIgnoredEventsStorageKey = `did365_ui_ignored_events_${this.id}`
     this._uiIgnoredEvents = this._localStorage.get(this._uiIgnoredEventsStorageKey) || []
     this._uiMatchedEvents = this._localStorage.get(this._uiMatchedEventsStorageKey) || {}
+    this._storageDefaultExpire = dateAdd(new Date(), 'month', 2)
   }
 
   /**
@@ -198,8 +204,10 @@ export class TimesheetPeriod {
 
   /**
    * Get ignored events
+   * 
+   * @returns An array of event ids
    */
-  public get ignoredEvents() {
+  public get ignoredEvents(): string[] {
     return this._uiIgnoredEvents
   }
 
@@ -241,7 +249,7 @@ export class TimesheetPeriod {
   public setManualMatch(eventId: string, project: IProject) {
     const matches = this._uiMatchedEvents
     matches[eventId] = project
-    this._localStorage.put(this._uiMatchedEventsStorageKey, matches, dateAdd(new Date(), 'month', 1))
+    this._localStorage.put(this._uiMatchedEventsStorageKey, matches, this._storageDefaultExpire)
   }
 
   /**
@@ -251,7 +259,7 @@ export class TimesheetPeriod {
    */
   public clearManualMatch(eventId: string) {
     this._uiMatchedEvents = omit(this._uiMatchedEvents, eventId)
-    this._localStorage.put(this._uiMatchedEventsStorageKey, this._uiMatchedEvents, dateAdd(new Date(), 'month', 1))
+    this._localStorage.put(this._uiMatchedEventsStorageKey, this._uiMatchedEvents, this._storageDefaultExpire)
   }
 
   /**
@@ -261,7 +269,7 @@ export class TimesheetPeriod {
    */
   public ignoreEvent(eventId: string) {
     this._uiIgnoredEvents = [...this._uiIgnoredEvents, eventId]
-    this._localStorage.put(this._uiIgnoredEventsStorageKey, this._uiIgnoredEvents, dateAdd(new Date(), 'month', 1))
+    this._localStorage.put(this._uiIgnoredEventsStorageKey, this._uiIgnoredEvents, this._storageDefaultExpire)
   }
 
   /**
@@ -269,7 +277,7 @@ export class TimesheetPeriod {
    */
   public clearIgnoredEvents() {
     this._uiIgnoredEvents = []
-    this._localStorage.put(this._uiIgnoredEventsStorageKey, this._uiIgnoredEvents, dateAdd(new Date(), 'month', 1))
+    this._localStorage.put(this._uiIgnoredEventsStorageKey, this._uiIgnoredEvents, this._storageDefaultExpire)
   }
 
   /**
@@ -290,7 +298,12 @@ export class TimesheetPeriod {
   /**
    * Get data for the period
    *
-   * Returns the id, startDateTime, endDateTime, matchedEvents and forecast
+   * Returns properties 
+   * * id
+   * * startDateTime
+   * * endDateTime
+   * * matchedEvents
+   * * forecast
    */
   public get data(): ITimesheetPeriodData {
     if (!this.isLoaded) return null
@@ -314,9 +327,9 @@ export class TimesheetPeriod {
   }
 
   /**
-   * Returns path for period
+   * Returns URL path for the period
    */
-  public get path() {
+  public get path(): string {
     return this.id
       .split('_')
       .filter(p => p)
