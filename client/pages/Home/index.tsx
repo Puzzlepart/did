@@ -2,17 +2,24 @@ import React, { useContext } from 'react'
 import styles from './Home.module.scss'
 import { useTranslation } from 'react-i18next'
 import { AppContext } from 'AppContext'
-import { DefaultButton } from 'office-ui-fabric-react'
+import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import ReactMarkdown from 'react-markdown/with-html'
 
 
 export default () => {
-    const { user } = useContext(AppContext)
+    const { user, error } = useContext(AppContext)
     const { t } = useTranslation()
     return (
         <div className={styles.root}>
             <div className={styles.logo}>did</div>
             <p className={styles.motto}>{t('common.motto')}</p>
-            <div hidden={!!user.subscription}>
+            <div className={styles.error} hidden={!error.message}>
+                <Icon className={styles.icon} iconName='Sad' />
+                <strong className={styles.title}>{error.name}</strong>
+                <ReactMarkdown className={styles.text} source={error.message} escapeHtml={false} />
+            </div>
+            <div hidden={!!user.subscription || !!error?.message}>
                 <DefaultButton
                     className={styles.signinbutton}
                     href='/auth/signin'

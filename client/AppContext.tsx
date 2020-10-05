@@ -11,6 +11,11 @@ export interface IAppContext {
      * Checks if the currently logged in user has the specified permission
      */
     hasPermission?: (permissionId: string) => boolean;
+
+    /**
+     * Error
+     */
+    error?: Error;
 }
 
 export const AppContext = React.createContext<IAppContext>({})
