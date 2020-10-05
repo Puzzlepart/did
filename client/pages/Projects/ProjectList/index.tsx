@@ -9,12 +9,9 @@ import { IProjectListProps } from './types'
 const ProjectList = (props: IProjectListProps) => {
     const { t } = useTranslation()
     const [items, setItems] = useState([...props.items])
+    const [showInactive, setShowInactive] = useState(false)
 
-    const onToggleInactive = (checked?: boolean) => {
-        setItems([...props.items].filter(project => checked ? true : !project.inactive))
-    }
-
-    useEffect(() => setItems([...props.items].filter(p => !p.inactive)), [props.items])
+    useEffect(() => setItems([...props.items].filter(p => showInactive ? true : !p.inactive)), [props.items, showInactive])
 
     return (
         <List
@@ -30,8 +27,9 @@ const ProjectList = (props: IProjectListProps) => {
                         onRender: () => (
                             <Checkbox
                                 styles={{ root: { margin: '6px 0 0 8px' } }}
+                                checked={showInactive}
                                 label={t('common.toggleInactiveText')}
-                                onChange={(_event, checked) => onToggleInactive(checked)} />
+                                onChange={(_event, checked) => setShowInactive(checked)} />
                         ),
                     }
                 ],

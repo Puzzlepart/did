@@ -14,7 +14,7 @@ import { find } from 'underscore'
 import graphql from './graphql'
 import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
-import { ProjectsContext } from './ProjectsContext'
+import { IProjectsContext, ProjectsContext } from './context'
 import { IProjectsParams } from './types'
 
 export const Projects = () => {
@@ -29,17 +29,21 @@ export const Projects = () => {
             variables: { sortBy: 'name' },
             fetchPolicy: 'cache-and-network'
         })
-
-    const outlookCategories = useMemo(() => data?.outlookCategories || [], [data])
-
-    const projects = useMemo(() => (data?.projects || []).map(p => ({
-        ...p, outlookCategory: find(outlookCategories, c => c.displayName === p.id),
-    })), [data])
+        
+    const context: IProjectsContext = useMemo(() => ({
+        outlookCategories: data?.outlookCategories || [],
+        projects: (data?.projects || []).map(p => ({
+            ...p, 
+            outlookCategory: find(data?.outlookCategories || [], c => c.displayName === p.id),
+        })),
+        refetch,
+        setSelected,
+    }), [data])
 
     useEffect(() => {
-        const _selected = find(projects, p => p.id === (params.key || '').toUpperCase())
+        const _selected = find(context.projects, p => p.id === (params.key || '').toUpperCase())
         if (_selected) setSelected(_selected)
-    }, [params.key, projects])
+    }, [params.key, context.projects])
 
     function onPivotClick({ props: { itemKey } }: PivotItem) {
         setSelected(null)
@@ -47,7 +51,7 @@ export const Projects = () => {
     }
 
     return (
-        <ProjectsContext.Provider value={{ refetch }}>
+        <ProjectsContext.Provider value={context}>
             <Pivot
                 selectedKey={params.view || 'search'}
                 onLinkClick={onPivotClick}
@@ -57,59 +61,57 @@ export const Projects = () => {
                     itemKey='search'
                     headerText={t('common.search')}
                     itemIcon='FabricFolderSearch'>
-                    {error
-                        ? <UserMessage type={MessageBarType.error} text={t('common.genericErrorText')} />
-                        : (
-                            <>
-                                <ProjectList
-                                    enableShimmer={loading}
-                                    items={projects}
-                                    searchBox={{ placeholder: t('common.searchPlaceholder') }}
-                                    selection={{
-                                        mode: SelectionMode.single,
-                                        onChanged: selected => {
-                                            selected && history.push([
-                                                '/projects',
-                                                params.view || 'search',
-                                                selected.id
-                                            ].filter(p => p).join('/'))
-                                            setSelected(selected)
-                                        },
-                                    }}
-                                    height={selected && 400} />
-                                {selected && <ProjectDetails project={selected} />}
-                            </>
-                        )}
+                    <UserMessage hidden={!error} type={MessageBarType.error} text={t('common.genericErrorText')} />
+                    <div hidden={!!error}>
+                        <ProjectList
+                            enableShimmer={loading}
+                            items={context.projects}
+                            searchBox={{
+                                placeholder: t('common.searchPlaceholder'),
+                                onChange: () => setSelected(null)
+                            }}
+                            selection={{
+                                mode: SelectionMode.single,
+                                onChanged: selected => {
+                                    selected && history.push([
+                                        '/projects',
+                                        params.view || 'search',
+                                        selected.id
+                                    ].filter(p => p).join('/'))
+                                    setSelected(selected)
+                                },
+                            }}
+                            height={selected && 400} />
+                        {selected && <ProjectDetails project={selected} />}
+                    </div>
                 </PivotItem>
                 <PivotItem
                     itemID='my'
                     itemKey='my'
                     headerText={t('projects.myProjectsText')}
                     itemIcon='FabricUserFolder'>
-                    {error
-                        ? <UserMessage
-                            type={MessageBarType.error}
-                            text={t('common.genericErrorText')} />
-                        : (
-                            <>
-                                <UserMessage
-                                    containerStyle={{ marginBottom: 12 }}
-                                    iconName='OutlookLogoInverse'
-                                    text={t('projects.outlookCategoryInfoText')} />
-                                <ProjectList
-                                    enableShimmer={loading}
-                                    items={projects.filter(p => !!p.outlookCategory)}
-                                    searchBox={{ placeholder: t('projects.myProjectsSearchPlaceholder') }}
-                                    selection={{
-                                        mode: SelectionMode.single,
-                                        onChanged: selected => setSelected(selected),
-                                    }}
-                                    height={selected && 400}
-                                    groups={{ fieldName: 'customer.name' }}
-                                    hideColumns={['customer']} />
-                                {selected && <ProjectDetails project={selected} />}
-                            </>
-                        )}
+                    <UserMessage hidden={!error} type={MessageBarType.error} text={t('common.genericErrorText')} />
+                    <div hidden={!!error}>
+                        <UserMessage
+                            containerStyle={{ marginBottom: 12 }}
+                            iconName='OutlookLogoInverse'
+                            text={t('projects.outlookCategoryInfoText')} />
+                        <ProjectList
+                            enableShimmer={loading}
+                            items={context.projects.filter(p => !!p.outlookCategory)}
+                            searchBox={{
+                                placeholder: t('projects.myProjectsSearchPlaceholder'),
+                                onChange: () => setSelected(null)
+                            }}
+                            selection={{
+                                mode: SelectionMode.single,
+                                onChanged: selected => setSelected(selected),
+                            }}
+                            height={selected && 400}
+                            groups={{ fieldName: 'customer.name' }}
+                            hideColumns={['customer']} />
+                        {selected && <ProjectDetails project={selected} />}
+                    </div>
                 </PivotItem>
                 {hasPermission(manageProjects) && (
                     <PivotItem
