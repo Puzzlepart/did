@@ -115,15 +115,15 @@ async function timesheet(_obj, variables, ctx) {
   for (let i = 0; i < periods.length; i++) {
     let period = periods[i]
     let confirmed = await ctx.services.azstorage.getConfirmedPeriod(ctx.user.id, period.id)
-    if (confirmed) {
+    period.isConfirmed = !!confirmed
+    if (period.isConfirmed) {
       period.events = connectTimeEntries(
-        filter(timeentries, t => t.periodId === period.id),
+        filter(timeentries, entry => entry.periodId === period.id),
         projects,
         customers,
         labels,
       )
       period.matchedEvents = period.events
-      period.isConfirmed = true
       period.confirmedDuration = confirmed.hours
     } else {
       if (period.isForecast) {
