@@ -24,6 +24,8 @@ function getPeriods(startDateTime, endDateTime, locale) {
       startDateTime,
       endDateTime: isSplit ? utils.endOfMonth(startDateTime) : endDateTime,
       isForecast: utils.isAfterToday(startDateTime),
+      confirmedDuration: 0,
+      forecastedDuration: 0
     },
   ]
 
@@ -36,6 +38,8 @@ function getPeriods(startDateTime, endDateTime, locale) {
       startDateTime,
       endDateTime,
       isForecast: utils.isAfterToday(startDateTime),
+      confirmedDuration: 0,
+      forecastedDuration: 0
     })
   }
 
