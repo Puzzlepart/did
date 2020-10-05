@@ -5,7 +5,7 @@ const { connectEntities } = require('./project.utils')
 const { getPeriods, connectTimeEntries } = require('./timesheet.utils')
 const value = require('get-value')
 const log = require('debug')('api/graphql/resolvers/timesheet')
-const { gql } = require('apollo-server-express')
+const { gql, AuthenticationError, ApolloError } = require('apollo-server-express')
 
 const typeDef = gql`
   """
@@ -90,70 +90,73 @@ const typeDef = gql`
 `
 
 async function timesheet(_obj, variables, ctx) {
-  if (!ctx.services.msgraph) return { success: false, error: null }
+  if (!ctx.services.msgraph) throw new AuthenticationError()
+  try {
+    let periods = getPeriods(variables.startDateTime, variables.endDateTime, variables.locale)
 
-  let periods = getPeriods(variables.startDateTime, variables.endDateTime, variables.locale)
+    let [projects, customers, timeentries, labels] = await Promise.all([
+      ctx.services.azstorage.getProjects(),
+      ctx.services.azstorage.getCustomers(),
+      ctx.services.azstorage.getTimeEntries(
+        {
+          resourceId: ctx.user.id,
+          startDateTime: variables.startDateTime,
+          endDateTime: variables.endDateTime,
+        },
+        { sortAsc: true }
+      ),
+      ctx.services.azstorage.getLabels(),
+    ])
 
-  let [projects, customers, timeentries, labels] = await Promise.all([
-    ctx.services.azstorage.getProjects(),
-    ctx.services.azstorage.getCustomers(),
-    ctx.services.azstorage.getTimeEntries(
-      {
-        resourceId: ctx.user.id,
-        startDateTime: variables.startDateTime,
-        endDateTime: variables.endDateTime,
-      },
-      { sortAsc: true }
-    ),
-    ctx.services.azstorage.getLabels(),
-  ])
+    projects = connectEntities(projects, customers, labels)
 
-  projects = connectEntities(projects, customers, labels)
+    const eventMatching = new EventMatching(projects, customers, labels)
 
-  const eventMatching = new EventMatching(projects, customers, labels)
-
-  for (let i = 0; i < periods.length; i++) {
-    let period = periods[i]
-    let confirmed = await ctx.services.azstorage.getConfirmedPeriod(ctx.user.id, period.id)
-    period.isConfirmed = !!confirmed
-    if (period.isConfirmed) {
-      period.events = connectTimeEntries(
-        filter(timeentries, entry => entry.periodId === period.id),
-        projects,
-        customers,
-        labels,
-      )
-      period.matchedEvents = period.events
-      period.confirmedDuration = confirmed.hours
-    } else {
-      if (period.isForecast) {
-        let forecasted = await ctx.services.azstorage.getForecastedPeriod(ctx.user.id, period.id)
-        period.isForecasted = !!forecasted
-        if (period.isForecasted) {
-          let timeentries = await ctx.services.azstorage.getTimeEntries(
-            {
-              resourceId: ctx.user.id,
-              startDateTime: variables.startDateTime,
-              endDateTime: variables.endDateTime,
-            },
-            { sortAsc: true, forecast: true }
-          )
-          period.events = connectTimeEntries(timeentries, projects, customers, labels)
-          period.forecastedDuration = forecasted.hours
+    for (let i = 0; i < periods.length; i++) {
+      let period = periods[i]
+      let confirmed = await ctx.services.azstorage.getConfirmedPeriod(ctx.user.id, period.id)
+      period.isConfirmed = !!confirmed
+      if (period.isConfirmed) {
+        period.events = connectTimeEntries(
+          filter(timeentries, entry => entry.periodId === period.id),
+          projects,
+          customers,
+          labels,
+        )
+        period.matchedEvents = period.events
+        period.confirmedDuration = confirmed.hours
+      } else {
+        if (period.isForecast) {
+          let forecasted = await ctx.services.azstorage.getForecastedPeriod(ctx.user.id, period.id)
+          period.isForecasted = !!forecasted
+          if (period.isForecasted) {
+            let timeentries = await ctx.services.azstorage.getTimeEntries(
+              {
+                resourceId: ctx.user.id,
+                startDateTime: variables.startDateTime,
+                endDateTime: variables.endDateTime,
+              },
+              { sortAsc: true, forecast: true }
+            )
+            period.events = connectTimeEntries(timeentries, projects, customers, labels)
+            period.forecastedDuration = forecasted.hours
+          }
         }
+        if (!period.events) {
+          period.events = await ctx.services.msgraph.getEvents(period.startDateTime, period.endDateTime)
+          period.events = eventMatching.match(period.events)
+        }
+        period.matchedEvents = period.events.filter(evt => evt.project)
       }
-      if (!period.events) {
-        period.events = await ctx.services.msgraph.getEvents(period.startDateTime, period.endDateTime)
-        period.events = eventMatching.match(period.events)
-      }
-      period.matchedEvents = period.events.filter(evt => evt.project)
+      period.events = period.events.map(evt => ({
+        ...evt,
+        date: formatDate(evt.startDateTime, variables.dateFormat, variables.locale),
+      }))
     }
-    period.events = period.events.map(evt => ({
-      ...evt,
-      date: formatDate(evt.startDateTime, variables.dateFormat, variables.locale),
-    }))
+    return periods
+  } catch (error) {
+    throw new ApolloError(error.message, error.code, { statusCode: error.statusCode })
   }
-  return periods
 }
 
 async function submitPeriod(_obj, variables, ctx) {

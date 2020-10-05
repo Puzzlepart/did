@@ -1,20 +1,19 @@
 /* eslint-disable @typescript-eslint/camelcase */
 
 import { UserMessage } from 'components/UserMessage'
-import { IUserMessageProps } from 'components/UserMessage/IUserMessageProps'
+import { IUserMessageProps } from 'components/UserMessage/types'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { Shimmer } from 'office-ui-fabric-react/lib/Shimmer'
-import * as React from 'react'
+import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
 import dateUtils from 'utils/date'
-import { TimesheetContext } from '../'
+import { TimesheetContext } from '../..'
 import styles from './StatusBar.module.scss'
-import { IStatusBarProps } from './types'
 
-export const StatusBar = (props: IStatusBarProps) => {
+export const StatusBar = () => {
     const { t } = useTranslation()
-    const context = React.useContext(TimesheetContext)
+    const context = useContext(TimesheetContext)
 
     const defaultMessageProps: IUserMessageProps = {
         className: styles.message,
@@ -22,7 +21,7 @@ export const StatusBar = (props: IStatusBarProps) => {
         containerStyle: { padding: '0 4px 0 4px' },
     }
 
-    let messages: IUserMessageProps[] = [
+    const messages: IUserMessageProps[] = [
         {
             hidden: context.selectedPeriod.isLocked,
             text: t(
@@ -89,15 +88,8 @@ export const StatusBar = (props: IStatusBarProps) => {
         },
     ]
 
-    if (!!context.error) {
-        messages = [{
-            text: t('timesheet.errorMessageText'),
-            type: MessageBarType.error,
-        }]
-    }
-
     return (
-        <div className={styles.root} hidden={props.hidden}>
+        <div className={styles.root}>
             <Shimmer styles={{ shimmerWrapper: { height: 65 } }} isDataLoaded={!context.loading} />
             {!context.loading && (
                 <div className={styles.container}>

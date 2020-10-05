@@ -68,14 +68,17 @@ export const SELECT_PERIOD = ({ periods, loading, selectedPeriod, dispatch }: IT
 
 export const RELOAD_DATA = (context: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
     key: 'RELOAD_DATA',
-    onRender: () => (
-        <DefaultButton
-            iconProps={{ iconName: 'Refresh' }}
-            onClick={() => context.refetch()}
-            text={t('timesheet.reload')}
-            className={styles.reloadButton}
-            styles={buttonStyles} />
-    )
+    onRender: () => {
+        if (context.loading || !!context.error) return null
+        return (
+            <DefaultButton
+                iconProps={{ iconName: 'Refresh' }}
+                onClick={() => context.refetch()}
+                text={t('timesheet.reload')}
+                className={styles.reloadButton}
+                styles={buttonStyles} />
+        )
+    }
 })
 
 export const CONFIRM_ACTIONS = (context: ITimesheetContext, t: TFunction): IContextualMenuItem => ({

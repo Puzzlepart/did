@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { ActionBar } from './ActionBar'
 import { AllocationView } from './AllocationView'
+import { ErrorBar } from './ErrorBar'
 import graphql from './graphql'
 import hotkeys from './hotkeys'
 import { Overview } from './Overview'
@@ -42,15 +43,21 @@ export const Timesheet = () => {
             locale: app.user.preferredLanguage,
         },
         fetchPolicy: 'cache-and-network',
+        errorPolicy: 'all'
     })
 
-    useEffect(() => dispatch({ type: 'DATA_UPDATED', payload: { query, t } }), [query])
+    useEffect(() => dispatch({
+        type: 'DATA_UPDATED',
+        payload: { query, t }
+    }), [query])
 
-    useEffect(() => { history.push(`/timesheet/${state.selectedView}/${state.selectedPeriod.path}`) }, [state.selectedView, state.selectedPeriod])
+    useEffect(() => {
+        history.push(`/timesheet/${state.selectedView}/${state.selectedPeriod.path}`)
+    }, [state.selectedView, state.selectedPeriod])
 
     const [[submitPeriod], [unsubmitPeriod]] = [
-        useMutation(graphql.mutation.confirmPeriod),
-        useMutation(graphql.mutation.unconfirmPeriod),
+        useMutation(graphql.mutation.submitPeriod),
+        useMutation(graphql.mutation.unsubmitPeriod),
     ]
 
     const onSubmitPeriod = async () => {
@@ -71,7 +78,7 @@ export const Timesheet = () => {
         refetch: query.refetch,
         onSubmitPeriod,
         onUnsubmitPeriod,
-        dispatch,        
+        dispatch,
     }), [state])
 
     query.refetch
@@ -83,7 +90,9 @@ export const Timesheet = () => {
             <TimesheetContext.Provider value={context}>
                 <div className={styles.root}>
                     <ActionBar />
+                    <ErrorBar error={context.error} />
                     <Pivot
+                        hidden={!context.loading && !context.selectedPeriod.isLoaded}
                         defaultSelectedKey={state.selectedView}
                         onLinkClick={({ props }) => dispatch({
                             type: 'CHANGE_VIEW',

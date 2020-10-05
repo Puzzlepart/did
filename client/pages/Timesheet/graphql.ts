@@ -95,5 +95,5 @@ const timesheet = gql`
 
 export default {
   query: { timesheet },
-  mutation: { confirmPeriod: submitPeriod, unconfirmPeriod: unsubmitPeriod },
+  mutation: { submitPeriod, unsubmitPeriod },
 }
