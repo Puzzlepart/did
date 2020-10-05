@@ -3,6 +3,7 @@ const { first, any } = require('underscore')
 const EventMatching = require('../api/graphql/resolvers/timesheet.matching')
 const delay = require('delay')
 const ensureTestData = require('./ensureTestData')
+const utils = require('../utils')
 
 describe('Event matching', async () => {
   let testEvent = {}
@@ -133,6 +134,31 @@ describe('Event matching', async () => {
         any(event.labels, lbl => lbl.name === 'crayon-timereg'),
         true
       )
+    })
+  })
+})
+
+describe('Utils', async () => {
+  describe('getDurationHours', () => {
+    it('should return 0', () => {
+      const start = new Date().toISOString()
+      const end = new Date().toISOString()
+      const duration = utils.getDurationHours(start, end)
+      assert.strictEqual(duration, 0)
+    })
+
+    it('should return 3', () => {
+      const start = new Date(2020, 10, 20, 13, 00).toISOString()
+      const end = new Date(2020, 10, 20, 16, 00).toISOString()
+      const duration = utils.getDurationHours(start, end)
+      assert.strictEqual(duration, 3)
+    })
+
+    it('should return 24', () => {
+      const start = new Date(2020, 10, 20, 13, 00).toISOString()
+      const end = new Date(2020, 10, 21, 13, 00).toISOString()
+      const duration = utils.getDurationHours(start, end)
+      assert.strictEqual(duration, 24)
     })
   })
 })
