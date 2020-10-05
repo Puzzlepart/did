@@ -1,7 +1,7 @@
 
 import { value as value } from 'helpers'
 import { ITimeEntry } from 'types/ITimeEntry'
-import * as React from 'react'
+import React, { useLayoutEffect, useState, useContext, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Bar, BarChart, Legend, Tooltip, XAxis, YAxis } from 'recharts'
 import _ from 'underscore'
@@ -36,11 +36,11 @@ export const GetAllocation = (entries: ITimeEntry[], exp: string): Array<{ name:
  */
 export const AllocationView = (): JSX.Element => {
     const { t } = useTranslation()
-    const { selectedPeriod } = React.useContext(TimesheetContext)
-    const [dimensions, setDimensions] = React.useState({ width: 0, height: 0 })
-    const ref = React.useRef<HTMLDivElement>()
+    const { selectedPeriod } = useContext(TimesheetContext)
+    const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
+    const ref = useRef<HTMLDivElement>()
 
-    React.useLayoutEffect(() => setDimensions({ width: ref.current.clientWidth, height: 400 }), [])
+    useLayoutEffect(() => setDimensions({ width: ref.current.clientWidth, height: 400 }), [])
 
     const charts = {
         'project.name': t('timesheet.projectChartTitle'),

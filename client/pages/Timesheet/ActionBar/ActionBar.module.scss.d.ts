@@ -2,6 +2,7 @@
 // Please do not change this file!
 interface CssExports {
   'confirmButton': string;
+  'reloadButton': string;
   'root': string;
   'selectPeriodButton': string;
   'unconfirmButton': string;

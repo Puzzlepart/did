@@ -26,7 +26,6 @@ const typeDef = gql`
     customerKey: String
     suggestedProject: Project
     webLink: String
-    lastModifiedDateTime: String
     labels: [Label]
     isSystemIgnored: Boolean
     error: EventError
