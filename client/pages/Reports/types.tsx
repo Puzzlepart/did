@@ -108,10 +108,10 @@ export const getGroupByOptions = (t: TFunction): IGroupByOption[] => ([
         }
     },
     {
-        key: 'resourceName',
+        key: 'resource.displayName',
         text: t('common.employeeLabel'),
         props: {
-            fieldName: 'resourceName',
+            fieldName: 'resource.displayName',
             emptyGroupName: '',
         }
     },

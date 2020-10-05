@@ -13,7 +13,6 @@ export default gql`
       weekNumber
       year
       monthNumber
-      resourceName
       project {
         id
         name
@@ -22,6 +21,9 @@ export default gql`
       customer {
         key
         name
+      }
+      resource {
+        displayName
       }
     }
   }

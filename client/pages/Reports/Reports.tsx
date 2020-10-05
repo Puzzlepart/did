@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { useQuery } from '@apollo/react-hooks'
-import { BaseFilter, CustomerFilter, FilterPanel, IFilter, ProjectFilter, ResourceFilter, UserMessage } from 'components'
-import List from 'components/List'
+import { FilterPanel, IFilter, UserMessage, List } from 'components'
 import { value } from 'helpers'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import { Spinner } from 'office-ui-fabric-react/lib/Spinner'
@@ -15,7 +14,8 @@ import { exportExcel } from 'utils/exportExcel'
 import columns from './columns'
 import commandBar from './commandBar'
 import { IReportsContext } from './context'
-import {  TIME_ENTRIES } from './graphql'
+import { filters } from './filters'
+import { TIME_ENTRIES } from './graphql'
 import styles from './Reports.module.scss'
 import { getQueries, IReportsParams, IReportsState, ITimeEntriesVariables } from './types'
 
@@ -23,11 +23,6 @@ export const Reports = () => {
     const { t } = useTranslation()
     const history = useHistory()
     const params = useParams<IReportsParams>()
-    const filters: BaseFilter[] = [
-        new ResourceFilter('resourceName', t('common.employeeLabel')),
-        new CustomerFilter('customer.name', t('common.customer')),
-        new ProjectFilter('project.name', t('common.project')),
-    ]
     const queries = getQueries(t)
     const [state, setState] = useState<IReportsState>({
         query: find(queries, q => q.key === params.query),
@@ -118,10 +113,7 @@ export const Reports = () => {
                             )}
                             {(!loading && !isEmpty(context.timeentries)) && (
                                 <List
-                                    fadeIn={{
-                                        transitionDuration: 500,
-                                        delay: 200,
-                                    }}
+                                    fadeIn={[200, 500]}
                                     items={items}
                                     groups={{
                                         ...state.groupBy,
@@ -138,7 +130,7 @@ export const Reports = () => {
                                 text={t('reports.noEntriesText')} />
                             <FilterPanel
                                 isOpen={state.isFiltersOpen}
-                                filters={filters}
+                                filters={filters(t)}
                                 items={context.timeentries}
                                 onDismiss={() => context.setState({ isFiltersOpen: false })}
                                 onFilterUpdated={onFilterUpdated}

@@ -20,7 +20,7 @@ const EventList = (props: IEventListProps): JSX.Element => {
     }))
 
     return (
-        <div className={styles.root}>
+        <div className={styles.root} hidden={props.hidden}>
             <List
                 enableShimmer={props.enableShimmer}
                 columns={columns}

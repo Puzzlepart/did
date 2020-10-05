@@ -2,16 +2,6 @@ const moment = require('moment')
 
 module.exports = {
   /**
-   * Get duration between two times in minutes
-   *
-   * @param {*} startDateTime Start time
-   * @param {*} endDateTime End time
-   */
-  getDurationMinutes: (startDateTime, endDateTime) => {
-    return moment.duration(moment(endDateTime).diff(moment(startDateTime))).asMinutes()
-  },
-
-  /**
    * Get duration between two times in hours
    *
    * @param {*} startDateTime Start time
@@ -124,7 +114,7 @@ module.exports = {
    * @param {*} str String
    * @param {*} separator String separator
    */
-  toArray: (str, separator) => {
+  toArray: (str, separator = '|') => {
     return (str || '').split(separator).filter(p => p)
   },
 

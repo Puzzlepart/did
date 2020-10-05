@@ -2,15 +2,15 @@ global.fetch = require('node-fetch')
 const TokenService = require('./tokens')
 const utils = require('../utils')
 const log = require('debug')('services/msgraph')
-const Event = require('./msgraph.event')
+const MSGraphEvent = require('./msgraph.event')
 const { first } = require('underscore')
 const { performance, PerformanceObserver } = require('perf_hooks');
 const appInsights = require("applicationinsights");
 
 class MSGraphService {
-   /**
-   * Constructs a new MSGraphService
-   */
+  /**
+  * Constructs a new MSGraphService
+  */
   constructor() {
     appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY)
     this.observer = new PerformanceObserver(list => {
@@ -21,18 +21,18 @@ class MSGraphService {
       })
     })
     this.observer.observe({ entryTypes: ['measure'], buffered: true })
-  } 
-  
+  }
+
   /**
   * Initializes the MS Graph Service
   * 
   * @param {*} req Request 
   */
- init(req) {
-   this.req = req
-   this.oauthToken = this.req.user.oauthToken
-   return this
- }
+  init(req) {
+    this.req = req
+    this.oauthToken = this.req.user.oauthToken
+    return this
+  }
 
   /**
    * Starts a performance mark
@@ -166,12 +166,21 @@ class MSGraphService {
       const { value } = await this.getClient()
         .api('/me/calendar/calendarView')
         .query({ startDateTime, endDateTime })
-        .select('id,subject,body,start,end,lastModifiedDateTime,categories,webLink,isOrganizer')
+        .select([
+          'id',
+          'subject',
+          'body',
+          'start',
+          'end',
+          'categories',
+          'webLink',
+          'isOrganizer'
+        ])
         .filter(`sensitivity ne 'private' and isallday eq false and iscancelled eq false`)
         .orderby('start/dateTime asc')
         .top(500)
         .get()
-      let events = value.filter(evt => evt.subject).map(evt => new Event(evt))
+      let events = value.filter(evt => evt.subject).map(evt => new MSGraphEvent(evt))
       events = events.filter(evt => evt.duration <= maxDurationHours)
       this.endMark('getEvents')
       return events
@@ -182,7 +191,7 @@ class MSGraphService {
           return this.getEvents(startDateTime, endDateTime)
         }
         default: {
-          throw new Error()
+          throw error
         }
       }
     }

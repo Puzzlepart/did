@@ -25,7 +25,7 @@ import {
 } from './types'
 
 export const Timesheet = () => {
-    const context = useContext(AppContext)
+    const app = useContext(AppContext)
     const { t } = useTranslation()
     const history = useHistory()
     const params = useParams<ITimesheetParams>()
@@ -39,9 +39,9 @@ export const Timesheet = () => {
         variables: {
             ...state.scope.dateStrings,
             dateFormat: 'dddd DD',
-            locale: context.user.preferredLanguage,
+            locale: app.user.preferredLanguage,
         },
-        fetchPolicy: 'network-only',
+        fetchPolicy: 'cache-and-network',
     })
 
     useEffect(() => dispatch({ type: 'DATA_UPDATED', payload: { query, t } }), [query])
@@ -66,18 +66,21 @@ export const Timesheet = () => {
         unsubmitPeriod({ variables }).then(query.refetch)
     }
 
-    const ctx: ITimesheetContext = useMemo(() => ({
+    const context: ITimesheetContext = useMemo(() => ({
         ...state,
+        refetch: query.refetch,
         onSubmitPeriod,
         onUnsubmitPeriod,
-        dispatch,
+        dispatch,        
     }), [state])
 
-    const hotkeysProps = useMemo(() => hotkeys(ctx, t), [ctx])
+    query.refetch
+
+    const hotkeysProps = useMemo(() => hotkeys(context, t), [context])
 
     return (
         <GlobalHotKeys {...hotkeysProps}>
-            <TimesheetContext.Provider value={ctx}>
+            <TimesheetContext.Provider value={context}>
                 <div className={styles.root}>
                     <ActionBar />
                     <Pivot
@@ -89,19 +92,22 @@ export const Timesheet = () => {
                         <PivotItem
                             itemKey='overview'
                             headerText={t('timesheet.overviewHeaderText')}
-                            itemIcon='CalendarWeek'>
+                            itemIcon='CalendarWeek'
+                            headerButtonProps={{ disabled: !!context.error }}>
                             <Overview dayFormat='dddd DD' timeFormat='HH:mm' />
                         </PivotItem>
                         <PivotItem
                             itemKey='summary'
                             headerText={t('timesheet.summaryHeaderText')}
-                            itemIcon='List'>
+                            itemIcon='List'
+                            headerButtonProps={{ disabled: !!context.error }}>
                             <SummaryView />
                         </PivotItem>
                         <PivotItem
                             itemKey='allocation'
                             headerText={t('timesheet.allocationHeaderText')}
-                            itemIcon='ReportDocument'>
+                            itemIcon='ReportDocument'
+                            headerButtonProps={{ disabled: !!context.error }}>
                             <AllocationView />
                         </PivotItem>
                     </Pivot>

@@ -1,4 +1,4 @@
-import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar'
+import { CommandBar, ICommandBarProps } from 'office-ui-fabric-react/lib/CommandBar'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TimesheetContext } from '../'
@@ -8,24 +8,22 @@ import * as commands from './commands'
 export const ActionBar = () => {
     const { t } = useTranslation()
     const context = useContext(TimesheetContext)
-    const items = [
-        commands.GO_TO_CURRENT_WEEK(context, t),
-        commands.GO_TO_PREV_WEEK(context, t),
-        commands.GO_TO_NEXT_WEEK(context, t),
-        commands.WEEK_PICKER(context, t),
-        ...commands.SELECT_PERIOD(context, t),
-    ]
-    const farItems = [
-        commands.CONFIRM_ACTIONS(context, t),
-        commands.FORECAST_ACTIONS(context, t)
-    ]
+    const commandBarProps: ICommandBarProps = {
+        className: styles.root,
+        styles: { root: { padding: 0 } },
+        items: [
+            commands.GO_TO_CURRENT_WEEK(context, t),
+            commands.GO_TO_PREV_WEEK(context, t),
+            commands.GO_TO_NEXT_WEEK(context, t),
+            commands.WEEK_PICKER(context, t),
+            ...commands.SELECT_PERIOD(context, t),
+        ],
+        farItems: [
+            commands.RELOAD_DATA(context, t),
+            commands.CONFIRM_ACTIONS(context, t),
+            commands.FORECAST_ACTIONS(context, t)
+        ]
+    }
 
-    return (
-        <CommandBar
-            className={styles.root}
-            styles={{ root: { padding: 0 } }}
-            items={items}
-            farItems={farItems}
-        />
-    )
+    return <CommandBar {...commandBarProps} />
 }

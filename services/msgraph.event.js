@@ -1,7 +1,7 @@
 const stripHtml = require('string-strip-html')
 const utils = require('../utils')
 
-class Event {
+class MSGraphEvent {
   constructor(evt) {
     this.id = evt.id
     this.title = evt.subject
@@ -9,11 +9,10 @@ class Event {
     this.isOrganizer = evt.isOrganizer
     this.categories = evt.categories
     this.webLink = evt.webLink
-    this.lastModifiedDateTime = evt.lastModifiedDateTime
     this.startDateTime = evt.start.dateTime
     this.endDateTime = evt.end.dateTime
     this.duration = utils.getDurationHours(evt.start.dateTime, evt.end.dateTime)
   }
 }
 
-module.exports = Event
+module.exports = MSGraphEvent
