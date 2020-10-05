@@ -43,7 +43,7 @@
     "unforecastingPeriodLabel": "Fjerner prognose",
     "forecastingPeriodLabel": "Lagrer prognose",
     "forecastingPeriodDescription": "Vent et lite øyeblikk...",
-    "errorMessageText": "Det oppsto et problem med å hente timelisten. \nPrøv igjen senere..."
+    "errorMessageText": "Det oppsto et problem med å hente ut timelisten din. \nPrøv igjen senere..."
   },
   "projects": {
     "inactiveText": "Dette prosjektet er markert som inaktivt.",

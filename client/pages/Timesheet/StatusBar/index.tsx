@@ -22,7 +22,7 @@ export const StatusBar = (props: IStatusBarProps) => {
         containerStyle: { padding: '0 4px 0 4px' },
     }
 
-    const messages: IUserMessageProps[] = [
+    let messages: IUserMessageProps[] = [
         {
             hidden: context.selectedPeriod.isLocked,
             text: t(
@@ -88,6 +88,13 @@ export const StatusBar = (props: IStatusBarProps) => {
             iconName: 'SplitObject'
         },
     ]
+
+    if (!!context.error) {
+        messages = [{
+            text: t('timesheet.errorMessageText'),
+            type: MessageBarType.error,
+        }]
+    }
 
     return (
         <div className={styles.root} hidden={props.hidden}>
