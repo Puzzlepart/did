@@ -23,6 +23,7 @@ export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
             <StatusBar />
             {context.loading && <ProgressIndicator {...context.loading} />}
             <EventList
+                hidden={!!context.error}
                 enableShimmer={!!context.loading}
                 events={context.selectedPeriod.events}
                 showEmptyDays={true}

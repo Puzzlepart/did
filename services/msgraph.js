@@ -165,7 +165,7 @@ class MSGraphService {
         })
       )
       const { value } = await this.getClient()
-        .api('/me/calendar/calendarView')
+        .api('/me/calendar/calendarView2')
         .query({ startDateTime, endDateTime })
         .select('id,subject,body,start,end,lastModifiedDateTime,categories,webLink,isOrganizer')
         .filter(`sensitivity ne 'private' and isallday eq false and iscancelled eq false`)
