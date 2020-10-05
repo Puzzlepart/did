@@ -1,7 +1,6 @@
 const assert = require('assert')
 const { first, any } = require('underscore')
 const EventMatching = require('../api/graphql/resolvers/timesheet.matching')
-const delay = require('delay')
 const ensureTestData = require('./ensureTestData')
 
 describe('Event matching', async () => {

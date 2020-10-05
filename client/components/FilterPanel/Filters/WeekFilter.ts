@@ -3,7 +3,7 @@ import _ from 'underscore'
 import { BaseFilter, IFilter } from './BaseFilter'
 
 export class WeekFilter extends BaseFilter {
-  constructor(public fieldName: string, public name: string) {
+  constructor(fieldName: string, public name: string) {
     super(fieldName)
   }
 
