@@ -1,24 +1,15 @@
+import { QueryResult } from '@apollo/react-common'
 import { value } from 'helpers'
 import { TFunction } from 'i18next'
 import { IProject } from 'types'
 import { find, first } from 'underscore'
-import {
-  ITimesheetPeriod,
-  ITimesheetScopeOptions,
-  ITimesheetState,
-  TimesheetPeriod,
-  TimesheetScope,
-  TimesheetView,
-} from './types'
+import { ITimesheetScopeOptions, ITimesheetState, TimesheetPeriod, TimesheetScope, TimesheetView } from './types'
 
 export type TimesheetAction =
   | {
       type: 'DATA_UPDATED'
       payload: {
-        query: {
-          data: { timesheet: ITimesheetPeriod[] }
-          loading: boolean
-        }
+        query: QueryResult<any>
         t: TFunction
       }
     }
@@ -45,7 +36,7 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
   switch (action.type) {
     case 'DATA_UPDATED':
       {
-        const { loading, data } = action.payload.query
+        const { loading, data, error } = action.payload.query
         newState.loading = loading
           ? {
               label: t('timesheet.loadingEventsLabel'),
@@ -57,6 +48,7 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
           newState.selectedPeriod =
             find(newState.periods, p => p.id === value(state, 'selectedPeriod.id', null)) || first(newState.periods)
         }
+        newState.error = error
       }
       break
 

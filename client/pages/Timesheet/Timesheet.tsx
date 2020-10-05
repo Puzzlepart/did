@@ -41,7 +41,7 @@ export const Timesheet = () => {
             dateFormat: 'dddd DD',
             locale: context.user.preferredLanguage,
         },
-        fetchPolicy: 'network-only',
+        fetchPolicy: 'cache-and-network',
     })
 
     useEffect(() => dispatch({ type: 'DATA_UPDATED', payload: { query, t } }), [query])

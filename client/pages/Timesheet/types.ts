@@ -1,3 +1,4 @@
+import { ApolloError } from 'apollo-client'
 import { IProgressIndicatorProps } from 'office-ui-fabric-react/lib/ProgressIndicator'
 import { TimesheetPeriod } from './TimesheetPeriod'
 import { TimesheetScope } from './TimesheetScope'
@@ -10,6 +11,7 @@ export interface ITimesheetState {
   selectedView: TimesheetView
   scope: TimesheetScope
   loading?: IProgressIndicatorProps
+  error?: ApolloError
   showHotkeysModal?: boolean
 }
 

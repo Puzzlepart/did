@@ -1,7 +1,7 @@
 import EventList from 'components/EventList'
 import { ITimeEntry } from 'types/ITimeEntry'
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
-import React,{useContext} from 'react'
+import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import dateUtils from 'utils/date'
@@ -12,25 +12,28 @@ import styles from './Overview.module.scss'
 import ProjectColumn from './ProjectColumn'
 import { IOverviewProps } from './types'
 import CustomerColumn from './CustomerColumn'
-
+import { UserMessage } from 'components/UserMessage'
+import { MessageBarType } from 'office-ui-fabric-react'
 
 export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
     const { t } = useTranslation()
-    const { loading, selectedPeriod } = useContext(TimesheetContext)
+    const context = useContext(TimesheetContext)
     const className = [styles.root]
     if (isMobile) className.push(styles.mobile)
     return (
         <div className={className.join(' ')}>
-            <StatusBar />
-            {loading && <ProgressIndicator {...loading} />}
+            <StatusBar hidden={!!context.error} />
+            {context.loading && <ProgressIndicator {...context.loading} />}
+            {!!context.error && <UserMessage text={t('timesheet.errorMessageText')} type={MessageBarType.error} />}
             <EventList
-                enableShimmer={!!loading}
-                events={selectedPeriod.events}
+                hidden={!!context.error}
+                enableShimmer={!!context.loading}
+                events={context.selectedPeriod.events}
                 showEmptyDays={true}
                 dateFormat={timeFormat}
                 groups={{
                     fieldName: 'date',
-                    groupNames: selectedPeriod.weekdays(dayFormat),
+                    groupNames: context.selectedPeriod.weekdays(dayFormat),
                     totalFunc: (items: ITimeEntry[]) => {
                         const duration = items.reduce((sum, i) => sum + i.duration, 0)
                         return ` (${dateUtils.getDurationString(duration, t)})`

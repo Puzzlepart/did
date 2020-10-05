@@ -155,6 +155,9 @@ class MSGraphService {
    */
   async getEvents(startDateTime, endDateTime, maxDurationHours = 24) {
     try {
+      let err = new Error('test')
+      err.statusCode = 501
+      throw err
       this.startMark('getEvents')
       log(
         'Querying Graph /me/calendar/calendarView: %s',
