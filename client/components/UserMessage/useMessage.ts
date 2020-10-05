@@ -1,4 +1,4 @@
-import { IUserMessageProps } from './IUserMessageProps'
+import { IUserMessageProps } from './types'
 import * as React from 'react'
 
 /**

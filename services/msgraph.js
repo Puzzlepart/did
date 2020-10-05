@@ -4,8 +4,8 @@ const utils = require('../utils')
 const log = require('debug')('services/msgraph')
 const MSGraphEvent = require('./msgraph.event')
 const { first } = require('underscore')
-const { performance, PerformanceObserver } = require('perf_hooks');
-const appInsights = require("applicationinsights");
+const { performance, PerformanceObserver } = require('perf_hooks')
+const appInsights = require("applicationinsights")
 
 class MSGraphService {
   /**

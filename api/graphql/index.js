@@ -132,5 +132,4 @@ module.exports = new ApolloServer({
       }
     },
   },
-  formatError: error => pick(error, 'message'),
 })

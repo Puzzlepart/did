@@ -9,7 +9,6 @@ export const ActionBar = () => {
     const { t } = useTranslation()
     const context = useContext(TimesheetContext)
     const commandBarProps: ICommandBarProps = {
-        className: styles.root,
         styles: { root: { padding: 0 } },
         items: [
             commands.GO_TO_CURRENT_WEEK(context, t),
@@ -25,5 +24,9 @@ export const ActionBar = () => {
         ]
     }
 
-    return <CommandBar {...commandBarProps} />
+    return (
+        <div className={styles.root} hidden={!context.loading && !context.selectedPeriod.isLoaded}>
+            <CommandBar {...commandBarProps} />
+        </div>
+    )
 }

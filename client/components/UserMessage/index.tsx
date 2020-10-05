@@ -3,7 +3,7 @@ import { IMessageBarStyleProps, IMessageBarStyles, MessageBar } from 'office-ui-
 import { IStyleFunctionOrObject } from 'office-ui-fabric-react/lib/Utilities'
 import * as React from 'react'
 import ReactMarkdown from 'react-markdown/with-html'
-import { IUserMessageProps } from './IUserMessageProps'
+import { IUserMessageProps } from './types'
 import styles from './UserMessage.module.scss'
 
 /**
@@ -45,4 +45,5 @@ export const UserMessage = (props: IUserMessageProps) => {
 }
 
 export * from './useMessage'
+export * from './types'
 

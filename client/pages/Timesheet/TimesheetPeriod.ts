@@ -4,6 +4,7 @@ import { TFunction } from 'i18next'
 import { IProject } from 'types/IProject'
 import { ITimeEntry } from 'types/ITimeEntry'
 import { omit, filter } from 'underscore'
+import { isBlank } from 'underscore.string'
 import { capitalize } from 'underscore.string'
 import dateUtils, { moment } from 'utils/date'
 import { ITimesheetParams } from './types'
@@ -137,7 +138,7 @@ export class TimesheetPeriod {
    * @param {ITimesheetPeriod} params Params
    */
   constructor(private _period?: ITimesheetPeriod, params?: ITimesheetParams) {
-    if (params) this.id = [params.week, params.month, params.year].join('_')
+    if (params) this.id = [params.week, params.month, params.year].filter(p => p).join('_')
     if (!_period) return
     this.id = _period.id
     this._month = capitalize(_period.month)
@@ -292,6 +293,7 @@ export class TimesheetPeriod {
    * Returns the id, startDateTime, endDateTime, matchedEvents and forecast
    */
   public get data(): ITimesheetPeriodData {
+    if (!this.isLoaded) return null
     return {
       id: this.id,
       startDateTime: this._startDateTime.toISOString(),
@@ -333,5 +335,12 @@ export class TimesheetPeriod {
    */
   public get isLocked() {
     return this.isConfirmed || this.isForecasted
+  }
+
+  /**
+   * Period data is loaded
+   */
+  public get isLoaded() {
+    return !isBlank(this.id)
   }
 }
