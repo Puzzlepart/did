@@ -3,16 +3,15 @@ import { CheckboxVisibility, ConstrainMode, DetailsListLayoutMode, IColumn, IDet
 import { GroupHeader } from 'office-ui-fabric-react/lib/GroupedList'
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox'
 import { ShimmeredDetailsList } from 'office-ui-fabric-react/lib/ShimmeredDetailsList'
-import React, { useReducer } from 'react'
-import { useEffect } from 'react'
-import { delay } from 'utils'
+import React, { useEffect, useReducer } from 'react'
+import FadeIn from 'react-fade-in'
 import { first } from 'underscore'
 import { withDefaultProps } from 'with-default-props'
 import { generateListGroups } from './generateListGroups'
 import { ListHeader } from './ListHeader'
 import reducer from './reducer'
 import { IListProps } from './types'
-import FadeIn from 'react-fade-in'
+import { sleep } from 'utils'
 
 /**
  * List component using DetailsList from office-ui-fabric-react
@@ -51,7 +50,8 @@ const List = (props: IListProps) => {
                 <SearchBox
                     {...props.searchBox}
                     styles={{ field: { fontSize: '10pt', letterSpacing: '1px' }, root: { width: 400, maxWidth: 400 } }}
-                    onChange={(_, newValue) => delay(400).then(() => dispatch({ type: 'SEARCH', payload: newValue }))} />
+                    w
+                    onChange={(_, newValue) => sleep(0.4).then(() => dispatch({ type: 'SEARCH', payload: newValue }))} />
             ),
         })
         const commandBarItems = [searchBox, ...props.commandBar.items].filter(c => c)
@@ -71,9 +71,11 @@ const List = (props: IListProps) => {
     let items = [...state.items]
     if (props.groups) [groups, items] = generateListGroups(items, props.groups)
 
+    const [delay, transitionDuration] = props.fadeIn
+
     return (
         <div style={{ marginBottom: 25 }} hidden={props.hidden}>
-            <FadeIn {...props.fadeIn}>
+            <FadeIn delay={delay} transitionDuration={transitionDuration}>
                 <ScrollablePaneWrapper condition={!!props.height} height={props.height}>
                     <ShimmeredDetailsList
                         getKey={(_item, index) => `list_item_${index}`}
@@ -100,10 +102,7 @@ const List = (props: IListProps) => {
 }
 
 export default withDefaultProps(List, {
-    fadeIn: {
-        delay: 0,
-        transitionDuration: 0,
-    },
+    fadeIn: [0, 0],
     commandBar: {
         items: [],
         farItems: [],
