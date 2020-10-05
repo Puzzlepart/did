@@ -58,7 +58,6 @@ const columns = (t: TFunction): IColumn[] => ([
         fieldName: 'resource.mail',
         name: t('common.mailLabel'),
         minWidth: 100,
-        data: { hidden: true },
     }
 ])
 

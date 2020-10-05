@@ -35,7 +35,7 @@ export const getScopes = (t: TFunction): ISummaryViewScope[] => [
 export const getViewTypes = (t: TFunction): IContextualMenuItem[] => [
   {
     key: 'resource',
-    fieldName: 'resourceName',
+    fieldName: 'resource.displayName',
     name: t('common.employeeLabel'),
   },
   {
