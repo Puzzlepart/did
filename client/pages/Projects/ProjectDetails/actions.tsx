@@ -8,10 +8,10 @@ import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
 import * as excel from 'utils/exportExcel'
+import graphql from '../graphql'
 import { ProjectForm } from '../ProjectForm'
 import { ProjectsContext } from '../ProjectsContext'
 import columns from './columns'
-import { CREATE_OUTLOOK_CATEGORY } from './CREATE_OUTLOOK_CATEGORY'
 import styles from './ProjectDetails.module.scss'
 import { ProjectDetailsContext } from './ProjectDetailsContext'
 import { IProjectDetailsProps } from './types'
@@ -22,7 +22,7 @@ export const Actions = (props: IProjectDetailsProps) => {
     const { t } = useTranslation()
     const [showEditPanel, setShowEditPanel] = useState(false)
     const context = useContext(ProjectDetailsContext)
-    const [createOutlookCategory] = useMutation<{ result: IBaseResult }, { category: string }>(CREATE_OUTLOOK_CATEGORY)
+    const [createOutlookCategory] = useMutation<{ result: IBaseResult }, { category: string }>(graphql.mutation.createOutlookCategory)
 
     /**
      * On export to Excel
@@ -43,7 +43,7 @@ export const Actions = (props: IProjectDetailsProps) => {
      */
     async function onCreateCategory() {
         const { data: { result } } = await createOutlookCategory({
-            variables: { category: context.project.id } 
+            variables: { category: context.project.id }
         })
         if (result.success) {
             context.setProject({

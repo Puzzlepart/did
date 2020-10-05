@@ -5,7 +5,7 @@ import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox'
 import { ShimmeredDetailsList } from 'office-ui-fabric-react/lib/ShimmeredDetailsList'
 import React, { useEffect, useReducer } from 'react'
 import FadeIn from 'react-fade-in'
-import { first } from 'underscore'
+import { filter, first } from 'underscore'
 import { withDefaultProps } from 'with-default-props'
 import { generateListGroups } from './generateListGroups'
 import { ListHeader } from './ListHeader'
@@ -13,6 +13,7 @@ import reducer from './reducer'
 import { IListProps } from './types'
 import { sleep } from 'utils'
 import styles from './List.module.scss'
+import { value } from 'helpers'
 
 /**
  * List component using DetailsList from office-ui-fabric-react
@@ -81,7 +82,7 @@ const List = (props: IListProps) => {
                         enableShimmer={props.enableShimmer}
                         isPlaceholderData={props.enableShimmer}
                         selection={selection}
-                        columns={props.columns}
+                        columns={filter(props.columns, col => !col.data?.hidden)}
                         items={items}
                         groups={groups}
                         selectionMode={props.selection ? props.selection.mode : SelectionMode.none}
@@ -90,6 +91,10 @@ const List = (props: IListProps) => {
                         groupProps={{
                             ...props.groupProps,
                             onRenderHeader: onRenderGroupHeader,
+                        }}
+                        onRenderItemColumn={(item, index, column) => {
+                            if (!!column.onRender) return column.onRender(item, index, column)
+                            return value(item, column.fieldName)
                         }}
                         onRenderDetailsHeader={onRenderListHeader}
                         checkboxVisibility={props.checkboxVisibility || CheckboxVisibility.hidden} />

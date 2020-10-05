@@ -26,7 +26,6 @@ export const TIME_ENTRIES = gql`
       weekNumber
       monthNumber
       year
-      resourceName
       monthNumber
       customer {
         key
@@ -35,6 +34,12 @@ export const TIME_ENTRIES = gql`
       project {
         id
         name
+      }
+      resource {
+        givenName
+        surname
+        mail
+        displayName
       }
     }
   }

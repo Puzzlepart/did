@@ -283,7 +283,6 @@ class AzStorageService {
           ...pick(entry, 'projectId', 'manualMatch'),
           ...pick(event, 'title', 'startDateTime', 'endDateTime', 'webLink'),
           description: event.body,
-          resourceName: user.displayName,
           duration,
           year,
           weekNumber,

@@ -18,10 +18,10 @@ const typeDef = gql`
     weekNumber: Int
     monthNumber: Int
     year: Int
-    resourceName: String
     webUrl: String
     project: Project
     customer: Customer
+    resource: User
   }
 
   extend type Query {
@@ -47,16 +47,27 @@ const typeDef = gql`
 
 async function timeentries(_obj, variables, ctx) {
   if (variables.currentUser) resourceId = ctx.user.id
-  let [projects, customers, timeentries] = await Promise.all([
+  let [users,projects, customers, timeentries] = await Promise.all([
+    ctx.services.azstorage.getUsers(),
     ctx.services.azstorage.getProjects(),
     ctx.services.azstorage.getCustomers(),
     ctx.services.azstorage.getTimeEntries(omit(variables, 'sortAsc', 'forecast'), pick(variables, 'sortAsc', 'forecast')),
   ])
-  let entries = timeentries.map(entry => ({
-    ...entry,
-    project: entry.projectId && find(projects, p => p.id === entry.projectId),
-    customer: entry.projectId && find(customers, c => c.key === first(entry.projectId.split(' '))),
-  }))
+  let entries = timeentries.map(entry => {
+    let project
+    let customer
+    let resource = find(users, user => user.id === entry.resourceId)
+    if (!!entry.projectId) {
+      project = find(projects, p => p.id === entry.projectId)
+      customer = find(customers, c => c.key === first(entry.projectId.split(' ')))
+    }
+    return {
+      ...entry,
+      project,
+      customer,
+      resource
+    }
+  })
   return entries
 }
 

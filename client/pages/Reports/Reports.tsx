@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { useQuery } from '@apollo/react-hooks'
-import { FilterPanel, IFilter, UserMessage } from 'components'
-import List from 'components/List'
+import { FilterPanel, IFilter, UserMessage, List } from 'components'
 import { value } from 'helpers'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import { Spinner } from 'office-ui-fabric-react/lib/Spinner'
@@ -114,7 +113,7 @@ export const Reports = () => {
                             )}
                             {(!loading && !isEmpty(context.timeentries)) && (
                                 <List
-                                    fadeIn={[200,500]}
+                                    fadeIn={[200, 500]}
                                     items={items}
                                     groups={{
                                         ...state.groupBy,

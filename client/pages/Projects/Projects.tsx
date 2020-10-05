@@ -2,7 +2,6 @@ import { useQuery } from '@apollo/react-hooks'
 import { AppContext } from 'AppContext'
 import { UserMessage } from 'components/UserMessage'
 import { manageProjects } from 'config/security/permissions'
-import { IProject } from 'types'
 import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
@@ -10,13 +9,13 @@ import { ProjectForm } from 'pages/Projects/ProjectForm'
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
+import { IProject } from 'types'
 import { find } from 'underscore'
-import GET_PROJECTS from './GET_PROJECTS'
+import graphql from './graphql'
 import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
 import { ProjectsContext } from './ProjectsContext'
 import { IProjectsParams } from './types'
-
 
 export const Projects = () => {
     const { t } = useTranslation()
@@ -25,7 +24,7 @@ export const Projects = () => {
     const params = useParams<IProjectsParams>()
     const [selected, setSelected] = useState<IProject>(null)
     const { loading, error, data, refetch } = useQuery<{ projects: any[]; outlookCategories: any[] }>(
-        GET_PROJECTS,
+        graphql.query.projects,
         {
             variables: { sortBy: 'name' },
             fetchPolicy: 'cache-and-network'
@@ -126,5 +125,5 @@ export const Projects = () => {
     )
 }
 
-export { ProjectList, GET_PROJECTS }
+export { ProjectList, ProjectDetails, ProjectForm }
 
