@@ -183,7 +183,7 @@ class MSGraphService {
           return this.getEvents(startDateTime, endDateTime)
         }
         default: {
-          throw new Error()
+          throw err
         }
       }
     }

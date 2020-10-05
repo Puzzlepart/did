@@ -43,7 +43,8 @@
     "unforecastingPeriodLabel": "Removing forecast",
     "forecastingPeriodLabel": "Forecasting period",
     "forecastingPeriodDescription": "Hang on a minute...",
-    "errorMessageText": "There was a problem fetching your timesheet. Please try again later..."
+    "errorMessageText": "There was a problem fetching your timesheet. Please try again later...",
+    "reload": "Reload"
   },
   "projects": {
     "inactiveText": "This project has been marked as inactive.",
