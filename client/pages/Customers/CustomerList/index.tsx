@@ -45,18 +45,9 @@ export const columns = (t: TFunction): IColumn[] => ([
 export const CustomerList = (props: ICustomerListProps) => {
     const { t } = useTranslation()
     const [items, setItems] = useState([...props.items])
+    const [showInactive, setShowInactive] = useState(false)
 
-    /**
-     * On toggle inactive
-     * 
-     * @param {React.MouseEvent} _event Event
-     * @param {boolean} checked Is checked
-     */
-    const onToggleInactive = (_event: React.MouseEvent<HTMLElement, MouseEvent>, checked?: boolean) => {
-        setItems([...props.items].filter(customer => checked ? true : !customer.inactive))
-    }
-
-    useEffect(() => setItems([...props.items].filter(customer => !customer.inactive)), [props.items])
+    useEffect(() => setItems([...props.items].filter(p => showInactive ? true : !p.inactive)), [props.items, showInactive])
 
     return (
         <List
@@ -71,8 +62,9 @@ export const CustomerList = (props: ICustomerListProps) => {
                         onRender: () => (
                             <Checkbox
                                 styles={{ root: { margin: '6px 0 0 8px' } }}
+                                checked={showInactive}
                                 label={t('common.toggleInactiveText')}
-                                onChange={onToggleInactive} />
+                                onChange={(_event, checked) => setShowInactive(checked)} />
                         ),
                     }
                 ],

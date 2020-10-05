@@ -65,6 +65,11 @@ export interface IListProps<T = any> extends React.HTMLProps<HTMLDivElement> {
      * [delay, transitionDuration]
      */
     fadeIn?: [number, number];
+
+    /**
+     * Filters
+     */
+    filters?: { [key: string]: any }
 }
 
 export interface IListState {
