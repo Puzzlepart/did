@@ -10,7 +10,12 @@ export default gql`
       weekNumber
       monthNumber
       year
-      resourceName
+      resource {
+        givenName
+        surname
+        mail
+        displayName
+      }
     }
   }
 `

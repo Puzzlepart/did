@@ -5,7 +5,6 @@ import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
-import { generateColumn as col } from 'utils/generateColumn'
 import { ProjectDetailsContext } from './ProjectDetailsContext'
 
 export const TimeEntries = () => {
@@ -20,10 +19,28 @@ export const TimeEntries = () => {
                 <EventList
                     events={timeentries}
                     additionalColumns={[
-                        col(
-                            'resourceName',
-                            t('common.employeeLabel')
-                        )]}
+                        {
+                            key: 'resource.surname',
+                            fieldName: 'resource.surname',
+                            name: t('common.surnameLabel'),
+                            minWidth: 100,
+                            maxWidth: 150,
+                        },
+                        {
+                            key: 'resource.givenName',
+                            fieldName: 'resource.givenName',
+                            name: t('common.givenNameLabel'),
+                            minWidth: 100,
+                            maxWidth: 150,
+                        },
+                        {
+                            key: 'resource.mail',
+                            fieldName: 'resource.mail',
+                            name: t('common.mailLabel'),
+                            minWidth: 100,
+                            data: { hidden: true },
+                        },    
+                    ]}
                     dateFormat='MMM Do YYYY HH:mm'
                     columnWidths={{ time: 250 }} />
             )}
