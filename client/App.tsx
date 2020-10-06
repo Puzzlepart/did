@@ -6,8 +6,10 @@ import { AppContext, IAppContext } from './AppContext'
 import { Admin, Customers, Home, Projects, Reports, Timesheet } from './pages'
 import { ProtectedRoute as Route } from './ProtectedRoute'
 import * as permissions from 'config/security/permissions'
+import { isMobile } from 'react-device-detect'
 
 export const App = (context: IAppContext): JSX.Element => {
+    if (isMobile) styles.root += ` ${styles.mobile}`
     return (
         <AppContext.Provider value={context}>
             <Router>

@@ -26,14 +26,15 @@
 }
 
 .root.mobile {
+    margin:0;
+    width: 100%;
     .link {
         width: 100%;
         display: flex;
-        align-items: center;
         height: calc(100% - 2px);
-        .navText {
-            display: none;
-        }
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
 
         .navIcon {
             display: flex;
@@ -43,10 +44,18 @@
             -webkit-font-smoothing: subpixel-antialiased;
         }
 
+        .navText {
+            display:none;
+        }
+
         &.active {
             border-top: 2px solid #cf5f00;
             .navIcon {
                 color: #cf5f00;
+            }
+            .navText {
+                // display:flex;
+                font-size: 10px;
             }
         }
     }

@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import { AppContext } from 'AppContext'
-import { HotkeyModal } from 'components'
+import { HotkeyModal, MobileHeader } from 'components'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import React, { useContext, useEffect, useMemo, useReducer } from 'react'
 import { GlobalHotKeys } from 'react-hotkeys'
@@ -89,6 +89,7 @@ export const Timesheet = () => {
         <GlobalHotKeys {...hotkeysProps}>
             <TimesheetContext.Provider value={context}>
                 <div className={styles.root}>
+                <MobileHeader iconName='Timesheet' text={t('navigation.timesheet')} />
                     <ActionBar />
                     <ErrorBar error={context.error} />
                     <Pivot

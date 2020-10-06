@@ -204,7 +204,7 @@ export class TimesheetPeriod {
 
   /**
    * Get ignored events
-   * 
+   *
    * @returns An array of event ids
    */
   public get ignoredEvents(): string[] {
@@ -298,7 +298,7 @@ export class TimesheetPeriod {
   /**
    * Get data for the period
    *
-   * Returns properties 
+   * Returns properties
    * * id
    * * startDateTime
    * * endDateTime

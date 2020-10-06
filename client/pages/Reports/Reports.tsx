@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { useQuery } from '@apollo/react-hooks'
-import { FilterPanel, IFilter, UserMessage, List } from 'components'
+import { FilterPanel, IFilter, UserMessage, List, MobileHeader } from 'components'
 import { value } from 'helpers'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import { Spinner } from 'office-ui-fabric-react/lib/Spinner'
@@ -95,6 +95,7 @@ export const Reports = () => {
 
     return (
         <div className={styles.root}>
+            <MobileHeader iconName='ReportDocument' text={t('navigation.reports')} />
             <Pivot
                 defaultSelectedKey={params.query || 'default'}
                 onLinkClick={item => onChangeQuery(item.props.itemKey)}>
