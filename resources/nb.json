@@ -250,7 +250,7 @@
     "customers": "Kunder",
     "projects": "Prosjekter",
     "reports": "Rapporter",
-    "admin": "Administrasjon"
+    "admin": "Admin"
   },
   "permissions": {
     "accessTimesheet": "Tilgang til timeliste",
