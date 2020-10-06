@@ -1,4 +1,5 @@
 import { ScrollablePaneWrapper } from 'components/ScrollablePaneWrapper'
+import { value } from 'helpers'
 import { CheckboxVisibility, ConstrainMode, DetailsListLayoutMode, IColumn, IDetailsGroupDividerProps, IDetailsHeaderProps, Selection, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { GroupHeader } from 'office-ui-fabric-react/lib/GroupedList'
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox'
@@ -8,20 +9,18 @@ import FadeIn from 'react-fade-in'
 import { filter, first } from 'underscore'
 import { withDefaultProps } from 'with-default-props'
 import { generateListGroups } from './generateListGroups'
+import styles from './List.module.scss'
 import { ListHeader } from './ListHeader'
 import reducer from './reducer'
 import { IListProps } from './types'
-import { sleep } from 'utils'
-import styles from './List.module.scss'
-import { value } from 'helpers'
 
 /**
  * List component using DetailsList from office-ui-fabric-react
  */
 const List = (props: IListProps) => {
     const [state, dispatch] = useReducer(reducer, {
-        origItems: props.items,
-        items: props.items,
+        origItems: props.items || [],
+        items: props.items || [],
         searchTerm: null,
     })
     let selection = null
@@ -49,16 +48,22 @@ const List = (props: IListProps) => {
             onRender: () => (
                 <SearchBox
                     {...props.searchBox}
+                    value={state.searchTerm}
                     className={styles.searchBox}
-                    onChange={(_event, newValue) => sleep(0.4).then(() => dispatch({ type: 'SEARCH', payload: newValue }))} />
+                    onChange={(_event, newValue) => {
+                        if (props.searchBox.onChange) props.searchBox.onChange(_event, newValue)
+                        dispatch({ type: 'SEARCH', payload: newValue })
+                    }} />
             ),
         })
-        const commandBarItems = [searchBox, ...props.commandBar.items].filter(c => c)
         return (
             <ListHeader
                 headerProps={headerProps}
                 defaultRender={defaultRender}
-                commandBar={{ ...props.commandBar, items: commandBarItems }} />
+                commandBar={{
+                    ...props.commandBar,
+                    items: [searchBox, ...props.commandBar.items].filter(c => c),
+                }} />
         )
     }
 
