@@ -1,4 +1,3 @@
-import { TFunction } from 'i18next'
 import { DefaultButton, IButtonStyles, PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
 import * as React from 'react'
@@ -9,7 +8,7 @@ import { WeekPicker } from './WeekPicker'
 
 const buttonStyles: IButtonStyles = { root: { height: 44, marginLeft: 4 } }
 
-export const WEEK_PICKER = ({ selectedPeriod, periods }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
+export const WEEK_PICKER = ({ selectedPeriod, periods, t }: ITimesheetContext): IContextualMenuItem => ({
     key: 'WEEK_PICKER',
     onRender: () => (
         <>
@@ -23,7 +22,7 @@ export const WEEK_PICKER = ({ selectedPeriod, periods }: ITimesheetContext, t: T
     ),
 })
 
-export const GO_TO_CURRENT_WEEK = ({ scope, dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
+export const GO_TO_CURRENT_WEEK = ({ scope, dispatch, t }: ITimesheetContext): IContextualMenuItem => ({
     key: 'GO_TO_CURRENT_WEEK',
     iconOnly: true,
     iconProps: { iconName: 'RenewalCurrent', ...ACTIONBAR_ICON_PROPS },
@@ -32,7 +31,7 @@ export const GO_TO_CURRENT_WEEK = ({ scope, dispatch }: ITimesheetContext, t: TF
     title: t('timesheet.goToCurrentWeek'),
 })
 
-export const GO_TO_PREV_WEEK = ({ dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
+export const GO_TO_PREV_WEEK = ({ dispatch, t }: ITimesheetContext): IContextualMenuItem => ({
     key: 'GO_TO_PREV_WEEK',
     iconOnly: true,
     iconProps: { iconName: 'Back', ...ACTIONBAR_ICON_PROPS },
@@ -40,7 +39,7 @@ export const GO_TO_PREV_WEEK = ({ dispatch }: ITimesheetContext, t: TFunction): 
     title: t('timesheet.goToPrevWeek')
 })
 
-export const GO_TO_NEXT_WEEK = ({ dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
+export const GO_TO_NEXT_WEEK = ({ dispatch, t }: ITimesheetContext): IContextualMenuItem => ({
     key: 'GO_TO_NEXT_WEEK',
     iconOnly: true,
     iconProps: { iconName: 'Forward', ...ACTIONBAR_ICON_PROPS },
@@ -48,7 +47,7 @@ export const GO_TO_NEXT_WEEK = ({ dispatch }: ITimesheetContext, t: TFunction): 
     title: t('timesheet.goToNextWeek'),
 })
 
-export const SELECT_PERIOD = ({ periods, loading, selectedPeriod, dispatch }: ITimesheetContext, t: TFunction): IContextualMenuItem[] => {
+export const SELECT_PERIOD = ({ periods, loading, selectedPeriod, dispatch, t }: ITimesheetContext): IContextualMenuItem[] => {
     if (periods.length === 1) return []
     return periods.map((period, idx) => ({
         key: `SELECT_PERIOD_${idx}`,
@@ -65,23 +64,7 @@ export const SELECT_PERIOD = ({ periods, loading, selectedPeriod, dispatch }: IT
     }))
 }
 
-
-export const RELOAD_DATA = (context: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
-    key: 'RELOAD_DATA',
-    onRender: () => {
-        if (context.loading || !!context.error) return null
-        return (
-            <DefaultButton
-                iconProps={{ iconName: 'Refresh' }}
-                onClick={() => context.refetch()}
-                text={t('timesheet.reload')}
-                className={styles.reloadButton}
-                styles={buttonStyles} />
-        )
-    }
-})
-
-export const CONFIRM_ACTIONS = (context: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
+export const CONFIRM_ACTIONS = (context: ITimesheetContext): IContextualMenuItem => ({
     key: 'CONFIRM_ACTIONS',
     onRender: () => {
         if (context.selectedPeriod.isForecast || context.loading || !!context.error) return null
@@ -90,7 +73,7 @@ export const CONFIRM_ACTIONS = (context: ITimesheetContext, t: TFunction): ICont
                 <DefaultButton
                     iconProps={{ iconName: 'Cancel' }}
                     onClick={context.onUnsubmitPeriod}
-                    text={t('timesheet.unconfirmHoursText')}
+                    text={context.t('timesheet.unconfirmHoursText')}
                     className={styles.unconfirmButton}
                     styles={buttonStyles} />
             )
@@ -100,14 +83,14 @@ export const CONFIRM_ACTIONS = (context: ITimesheetContext, t: TFunction): ICont
                 disabled={!context.selectedPeriod.isComplete}
                 iconProps={{ iconName: 'CheckMark' }}
                 onClick={context.onSubmitPeriod}
-                text={t('timesheet.confirmHoursText')}
+                text={context.t('timesheet.confirmHoursText')}
                 className={styles.confirmButton}
                 styles={buttonStyles} />
         )
     }
 })
 
-export const FORECAST_ACTIONS = (context: ITimesheetContext, t: TFunction): IContextualMenuItem => ({
+export const FORECAST_ACTIONS = (context: ITimesheetContext): IContextualMenuItem => ({
     key: 'FORECAST_ACTIONS',
     onRender: () => {
         if (!context.selectedPeriod.isForecast || context.loading || !!context.error) return null
@@ -116,7 +99,7 @@ export const FORECAST_ACTIONS = (context: ITimesheetContext, t: TFunction): ICon
                 <DefaultButton
                     iconProps={{ iconName: 'Cancel' }}
                     onClick={context.onUnsubmitPeriod}
-                    text={t('timesheet.unforecastHoursText')}
+                    text={context.t('timesheet.unforecastHoursText')}
                     styles={buttonStyles} />
             )
         }
@@ -124,7 +107,7 @@ export const FORECAST_ACTIONS = (context: ITimesheetContext, t: TFunction): ICon
             <PrimaryButton
                 iconProps={{ iconName: 'BufferTimeBefore' }}
                 onClick={context.onSubmitPeriod}
-                text={t('timesheet.forecastHoursText')}
+                text={context.t('timesheet.forecastHoursText')}
                 styles={buttonStyles} />
         )
     }

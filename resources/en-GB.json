@@ -44,7 +44,6 @@
     "forecastingPeriodLabel": "Forecasting period",
     "forecastingPeriodDescription": "Hang on a minute...",
     "errorMessageText": "There was a problem fetching your timesheet. Please try again later...",
-    "reload": "Reload",
     "exchangeLicenseErrorMessageText": "Could not load timesheet. It seems you don't have an active Exchange Online license. Please contact your administrator."
   },
   "projects": {

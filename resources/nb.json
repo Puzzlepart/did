@@ -44,7 +44,6 @@
     "forecastingPeriodLabel": "Lagrer prognose",
     "forecastingPeriodDescription": "Vent et lite øyeblikk...",
     "errorMessageText": "Det oppsto et problem med å hente ut timelisten din. \nPrøv igjen senere...",
-    "reload": "Last inn på nytt",
     "exchangeLicenseErrorMessageText": "Kunne ikke laste inn timelisten. \nDet ser ut til at du ikke har en aktiv Exchange Online-lisens. \nKontakt administratoren din."
   },
   "projects": {

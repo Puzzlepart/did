@@ -79,6 +79,7 @@ export const Timesheet = () => {
         onSubmitPeriod,
         onUnsubmitPeriod,
         dispatch,
+        t,
     }), [state])
 
     query.refetch
