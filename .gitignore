@@ -143,3 +143,4 @@ doc/
 .env copy
 .DS_Store
 tests/*.json
+.localtunnel
