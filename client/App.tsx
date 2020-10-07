@@ -7,7 +7,7 @@ import { Admin, Customers, Home, Projects, Reports, Timesheet } from './pages'
 import { ProtectedRoute as Route } from './ProtectedRoute'
 import * as permissions from 'config/security/permissions'
 import { isMobile } from 'react-device-detect'
-import { MobileHeader } from 'components'
+import { MobileHeader } from 'components/MobileHeader'
 import { useTranslation } from 'react-i18next'
 
 export const App = (context: IAppContext): JSX.Element => {
