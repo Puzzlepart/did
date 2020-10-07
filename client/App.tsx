@@ -29,25 +29,25 @@ export const App = (context: IAppContext): JSX.Element => {
                             <Route
                                 path='/customers'
                                 permission={permissions.accessCustomers}>
-                                {isMobile && <MobileHeader iconName='People' text={t('navigation.customers')} />}
+                                {isMobile && <MobileHeader text={t('navigation.customers')} />}
                                 <Customers />
                             </Route>
                             <Route
                                 path='/projects'
                                 permission={permissions.accessProjects}>
-                                {isMobile && <MobileHeader iconName='ProjectCollection' text={t('navigation.projects')} />}
+                                {isMobile && <MobileHeader text={t('navigation.projects')} />}
                                 <Projects />
                             </Route>
                             <Route
                                 path='/reports'
                                 permission={permissions.accessReports}>
-                                {isMobile && <MobileHeader iconName='ReportDocument' text={t('navigation.reports')} />}
+                                {isMobile && <MobileHeader text={t('navigation.reports')} />}
                                 <Reports />
                             </Route>
                             <Route
                                 path='/admin'
                                 permission={permissions.accessAdmin}>
-                                {isMobile && <MobileHeader iconName='Settings' text={t('navigation.admin')} />}
+                                {isMobile && <MobileHeader text={t('navigation.admin')} />}
                                 <Admin />
                             </Route>
                             <Route path='/'>
