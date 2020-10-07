@@ -15,7 +15,7 @@
     }
   },
   "scripts": {
-    "watch": "concurrently \"webpack\" \"npm run watch:server\" \"node tasks/open.js\"",
+    "watch": "concurrently \"webpack\" \"npm run watch:server\" \"node tasks/open.js\" \"node tasks/localtunnel.js\"",
     "start": "node ./bin/www",
     "watch:server": "nodemon --ignore client --ignore public --ignore lib ./bin/www",
     "package:client": "webpack",
@@ -137,6 +137,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "7.19.0",
     "husky": "^4.3.0",
+    "localtunnel": "2.0.0",
     "mocha": "7.1.2",
     "nodemon": "2.0.3",
     "open": "7.2.1",
