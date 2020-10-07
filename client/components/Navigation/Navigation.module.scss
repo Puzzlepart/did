@@ -1,95 +1,97 @@
 .root {
-  width: 100%;
-  height: 55px;
-  padding: 0;
-  background: #252422;
+    width: 100%;
+    height: 55px;
+    padding: 0;
+    background: #252422;
 
-  .container {
-    max-width: 1440px;
-    margin: auto;
-    display: flex;
-    height: 100%;
+    .container {
+        max-width: 1440px;
+        margin: auto;
+        display: flex;
+        height: 100%;
 
-    @media (min-width: 576px) {
-      max-width: 540px;
+        @media (min-width: 576px) {
+            max-width: 540px;
+        }
+
+        @media (min-width: 992px) {
+            max-width: 960px;
+        }
+
+        @media (min-width: 1200px) {
+            max-width: 1140px;
+        }
+
+        @media (min-width: 1440px) {
+            max-width: 1330px;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            width: 500px;
+            padding-left: 8px;
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+                sans-serif, Apple Color Emoji, Segoe UI Emoji;
+        }
+
+        .navRight {
+            display: flex;
+            flex-grow: 1;
+            justify-content: flex-end;
+            padding: 0;
+            margin: 0;
+        }
+
+        .logo {
+            align-self: center;
+            text-shadow: 0px 1px 1px #4d4d4d;
+            letter-spacing: 0.15rem;
+            font-size: 18px;
+            color: #fff;
+            border: 1px solid #fff;
+            padding: 0.15rem 0.25rem 0.15rem 0.35rem;
+            font-weight: bold;
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+                sans-serif, Apple Color Emoji, Segoe UI Emoji;
+            text-decoration: none !important;
+
+            &:hover {
+                background-color: #cf5f00;
+                transition: background-color .2s ease-out;
+            }
+        }
     }
-
-    @media (min-width: 992px) {
-      max-width: 960px;
-    }
-
-    @media (min-width: 1200px) {
-      max-width: 1140px;
-    }
-
-    @media (min-width: 1440px) {
-      max-width: 1330px;
-    }
-
-    .nav {
-      display: flex;
-      flex-direction: row;
-      justify-content: start;
-      width: 500px;
-      padding-left: 8px;
-      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
-        sans-serif, Apple Color Emoji, Segoe UI Emoji;
-    }
-
-    .navRight {
-      display: flex;
-      flex-grow: 1;
-      justify-content: flex-end;
-      padding: 0;
-      margin: 0;
-    }
-
-    .logo {
-      align-self: center;
-      text-shadow: 0px 1px 1px #4d4d4d;
-      letter-spacing: 0.15rem;
-      font-size: 18px;
-      color: #fff;
-      border: 1px solid #fff;
-      padding: 0.15rem 0.25rem 0.15rem 0.35rem;
-      font-weight: bold;
-      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
-        sans-serif, Apple Color Emoji, Segoe UI Emoji;
-      text-decoration: none !important;
-
-      &:hover {
-        background-color: #cf5f00;
-        transition: background-color .2s ease-out;
-      }
-    }
-  }
 }
 
 .root.mobile {
-  position: fixed;
-  bottom: 0px;
-  width: 100%;
-  z-index: 100;
-  height: 60px;
-  padding-bottom:15px;
-  background-color: #363533;
+    backface-visibility: hidden;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    z-index: 100;
+    height: 60px;
+    padding-bottom: 20px;
+    border-top: 1px solid #cccccc;
+    background-color: #363533;
 
-  .container {
-    padding: 0;
-    
-    .nav {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-evenly;
-      width: 100%;
-      padding-left: 0;
-      height: 100%;
-      margin-top: 0;
-    }
+    .container {
+        padding: 0;
 
-    .logo {
-      align-self: center;
-      display: none;
+        .nav {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            width: 100%;
+            padding-left: 0;
+            height: 100%;
+            margin-top: 0;
+        }
+
+        .logo {
+            align-self: center;
+            display: none;
+        }
     }
-  }
 }

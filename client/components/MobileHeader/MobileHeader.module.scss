@@ -1,9 +1,9 @@
 .root {
     display: flex;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     align-items: center;
     justify-items: left;
-    padding: 10px 8px;
+    padding: 0px 8px 10px 8px;
 
     .headerIcon {
         display: flex;
@@ -13,6 +13,7 @@
     }
 
     .headerText {
+        color: #252422; // DEV
         display: flex;
         font-weight: 600;
         font-family: sans-serif;

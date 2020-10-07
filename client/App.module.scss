@@ -1,5 +1,6 @@
 .root {
     width: 100%;
+    -webkit-touch-callout: none;
 
     .container {
         max-width: 1440px;
@@ -44,7 +45,10 @@
 }
 
 .root.mobile {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+
     .container {
-        margin: 15px 5px 0 5px;
+        margin: 10px 5px 0 5px;
     }
 }
