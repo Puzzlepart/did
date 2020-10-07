@@ -1,0 +1,21 @@
+.root {
+    display: flex;
+    font-size: 1.5rem;
+    align-items: center;
+    justify-items: left;
+    padding: 10px 8px;
+
+    .headerIcon {
+        display: flex;
+        color: #cf5f00;
+        -webkit-font-smoothing: subpixel-antialiased;
+        margin-right: 10px;
+    }
+
+    .headerText {
+        display: flex;
+        font-weight: 600;
+        font-family: sans-serif;
+        -webkit-font-smoothing: subpixel-antialiased;
+    }
+}

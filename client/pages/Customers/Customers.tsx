@@ -87,6 +87,6 @@ export const Customers = () => {
                     <CustomerForm />
                 </PivotItem>
             )}
-        </Pivot >
+        </Pivot>
     )
 }

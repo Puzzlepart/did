@@ -71,21 +71,25 @@
   width: 100%;
   z-index: 100;
   height: 60px;
+  padding-bottom:15px;
   background-color: #363533;
 
   .container {
-    padding: 0 6%;
-
+    padding: 0;
+    
     .nav {
       display: flex;
       flex-direction: row;
       justify-content: space-evenly;
       width: 100%;
       padding-left: 0;
+      height: 100%;
+      margin-top: 0;
     }
 
     .logo {
       align-self: center;
+      display: none;
     }
   }
 }
