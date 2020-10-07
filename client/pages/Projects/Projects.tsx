@@ -16,6 +16,7 @@ import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
 import { IProjectsContext, ProjectsContext } from './context'
 import { IProjectsParams } from './types'
+import { MobileHeader } from 'components'
 
 export const Projects = () => {
     const { t } = useTranslation()
@@ -52,6 +53,7 @@ export const Projects = () => {
 
     return (
         <ProjectsContext.Provider value={context}>
+            <MobileHeader iconName='ProjectCollection' text={t('navigation.projects')} />
             <Pivot
                 selectedKey={params.view || 'search'}
                 onLinkClick={onPivotClick}
