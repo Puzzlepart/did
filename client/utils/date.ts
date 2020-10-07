@@ -108,9 +108,9 @@ export default new (class DateUtils {
      */
     getMonthName(monthIndex?: number, format: string = 'MMMM'): string {
         let m = moment().locale(this._momentLocale)
-        if (monthIndex < 0) return capitalize(m.add(monthIndex, 'month').format(format))
-        else if (monthIndex === 0) return capitalize(m.format(format))
-        return capitalize(m.month(monthIndex).format(format))
+        if (monthIndex < 0) return m.add(monthIndex, 'month').format(format)
+        else if (monthIndex === 0) return m.format(format)
+        return m.month(monthIndex).format(format)
     }
 
     /**

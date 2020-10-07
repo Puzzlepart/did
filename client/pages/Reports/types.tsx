@@ -2,6 +2,7 @@ import { IListGroups } from 'components/List/types'
 import { TFunction } from 'i18next'
 import { IContextualMenuItem } from 'office-ui-fabric-react'
 import dateUtils from 'utils/date'
+import { capitalize } from 'underscore.string'
 
 export interface ITimeEntriesVariables {
     startDateTime?: string
@@ -11,7 +12,7 @@ export interface ITimeEntriesVariables {
     year?: number
     forecast?: boolean
     sortAsc?: boolean
-  }
+}
 
 export interface IReportsQuery extends IContextualMenuItem {
     /**
@@ -59,7 +60,7 @@ export interface IReportsState {
 export const getQueries = (t: TFunction): IReportsQuery[] => ([
     {
         key: 'lastMonth',
-        text: dateUtils.getMonthName(-1),
+        text: capitalize(dateUtils.getMonthName(-1)),
         iconName: 'CalendarDay',
         variables: { monthNumber: dateUtils.getMonthIndex() - 1, year: dateUtils.getYear() },
         exportFileName: `TimeEntries-${dateUtils.getMonthName(-1)}-{0}.xlsx`,
@@ -67,7 +68,7 @@ export const getQueries = (t: TFunction): IReportsQuery[] => ([
     {
 
         key: 'currentMonth',
-        text: dateUtils.getMonthName(0),
+        text: capitalize(dateUtils.getMonthName(0)),
         iconName: 'Calendar',
         variables: { monthNumber: dateUtils.getMonthIndex(), year: dateUtils.getYear() },
         exportFileName: `TimeEntries-${dateUtils.getMonthName(0)}-{0}.xlsx`,
