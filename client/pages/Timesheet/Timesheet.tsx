@@ -90,7 +90,6 @@ export const Timesheet = () => {
         <GlobalHotKeys {...hotkeysProps}>
             <TimesheetContext.Provider value={context}>
                 <div className={styles.root}>
-                <MobileHeader iconName='Timesheet' text={t('navigation.timesheet')} />
                     <ActionBar />
                     <ErrorBar error={context.error} />
                     <Pivot

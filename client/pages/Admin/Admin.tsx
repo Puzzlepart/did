@@ -12,7 +12,6 @@ import { Labels } from './Labels'
 import { Roles } from './Roles'
 import { SummaryView } from './SummaryView'
 import { Users } from './Users'
-import { MobileHeader } from 'components'
 
 export const Admin = () => {
     const { t } = useTranslation()
@@ -24,7 +23,6 @@ export const Admin = () => {
 
     return (
         <div className={styles.root}>
-            <MobileHeader iconName='Settings' text={t('navigation.admin')} />
             <Pivot
                 selectedKey={view || 'users'}
                 onLinkClick={onPivotClick}>

@@ -15,7 +15,6 @@ import { CustomerDetails } from './CustomerDetails'
 import { CustomerList } from './CustomerList'
 import GET_CUSTOMERS from './GET_CUSTOMERS'
 import { ICustomersParams, IGetCustomersData } from './types'
-import { MobileHeader } from 'components'
 
 
 export const Customers = () => {
@@ -46,49 +45,48 @@ export const Customers = () => {
     }
 
     return (
-        <><MobileHeader iconName='People' text={t('navigation.customers')} />
-            <Pivot
-                selectedKey={params.view || 'search'}
-                onLinkClick={onPivotClick}
-                styles={{ itemContainer: { paddingTop: 10 } }}>
+        <Pivot
+            selectedKey={params.view || 'search'}
+            onLinkClick={onPivotClick}
+            styles={{ itemContainer: { paddingTop: 10 } }}>
+            <PivotItem
+                itemID='search'
+                itemKey='search'
+                headerText={t('common.search')}
+                itemIcon='FabricFolderSearch'>
+                {error
+                    ? <MessageBar messageBarType={MessageBarType.error}>{t('common.genericErrorText')}</MessageBar>
+                    : (
+                        <>
+                            <CustomerList
+                                enableShimmer={loading}
+                                items={customers}
+                                searchBox={{ placeholder: t('common.searchPlaceholder') }}
+                                selection={{
+                                    mode: SelectionMode.single,
+                                    onChanged: selected => {
+                                        selected && history.push([
+                                            '/customers',
+                                            params.view || 'search',
+                                            selected.key
+                                        ].filter(p => p).join('/'))
+                                        setSelected(selected)
+                                    }
+                                }}
+                                height={selected && 400} />
+                            {selected && <CustomerDetails customer={selected} />}
+                        </>
+                    )}
+            </PivotItem>
+            {hasPermission(manageCustomers) && (
                 <PivotItem
-                    itemID='search'
-                    itemKey='search'
-                    headerText={t('common.search')}
-                    itemIcon='FabricFolderSearch'>
-                    {error
-                        ? <MessageBar messageBarType={MessageBarType.error}>{t('common.genericErrorText')}</MessageBar>
-                        : (
-                            <>
-                                <CustomerList
-                                    enableShimmer={loading}
-                                    items={customers}
-                                    searchBox={{ placeholder: t('common.searchPlaceholder') }}
-                                    selection={{
-                                        mode: SelectionMode.single,
-                                        onChanged: selected => {
-                                            selected && history.push([
-                                                '/customers',
-                                                params.view || 'search',
-                                                selected.key
-                                            ].filter(p => p).join('/'))
-                                            setSelected(selected)
-                                        }
-                                    }}
-                                    height={selected && 400} />
-                                {selected && <CustomerDetails customer={selected} />}
-                            </>
-                        )}
+                    itemID='new'
+                    itemKey='new'
+                    headerText={t('customers.createNewText')}
+                    itemIcon='AddTo'>
+                    <CustomerForm />
                 </PivotItem>
-                {hasPermission(manageCustomers) && (
-                    <PivotItem
-                        itemID='new'
-                        itemKey='new'
-                        headerText={t('customers.createNewText')}
-                        itemIcon='AddTo'>
-                        <CustomerForm />
-                    </PivotItem>
-                )}
-            </Pivot></>
+            )}
+        </Pivot>
     )
 }

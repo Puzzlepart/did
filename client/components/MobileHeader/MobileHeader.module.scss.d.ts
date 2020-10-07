@@ -3,7 +3,6 @@
 interface CssExports {
   'headerIcon': string;
   'headerText': string;
-  'mobile': string;
   'root': string;
 }
 export const cssExports: CssExports;

@@ -1,13 +1,9 @@
 .root {
-    display: none;
-}
-
-.root.mobile {
     display: flex;
     font-size: 1.5rem;
     align-items: center;
     justify-items: left;
-    padding: 10px 8px ;
+    padding: 10px 8px;
 
     .headerIcon {
         display: flex;
@@ -18,10 +14,8 @@
 
     .headerText {
         display: flex;
-        font-weight: bolder;
         font-weight: 600;
         font-family: sans-serif;
         -webkit-font-smoothing: subpixel-antialiased;
     }
-
 }
