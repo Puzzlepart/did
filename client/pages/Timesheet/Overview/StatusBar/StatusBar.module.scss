@@ -1,15 +1,44 @@
 .root {
-  min-height: 40px;
-  margin: 10px 0 0 0;
+    min-height: 40px;
+    margin: 10px 0 0 0;
 
-  .container {
-    display: flex;
-    flex-direction: row;
-    .message {
-      flex-grow: 1;
-      flex-basis: 0;
-      justify-content: space-evenly;
-      margin-right: 8px;
+    .container {
+        display: flex;
+        flex-direction: row;
+
+        .message {
+            flex-grow: 1;
+            flex-basis: 0;
+            justify-content: space-evenly;
+            color: #323130;
+
+            strong em {
+                font-size: 1.2em;
+                font-weight: bold;
+                font-style: normal;
+            }
+
+            margin-right: 10px;
+
+            &:last-of-type() {
+                margin-right: 0;
+            }
+        }
     }
-  }
+}
+
+.root.mobile {
+    .container {
+        flex-direction: column;
+
+        .message {
+            margin-top: 10px;
+
+            strong {
+                font-size: 1.2em;
+            }
+
+            margin-right: 0;
+        }
+    }
 }

@@ -9,16 +9,17 @@ import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
 import dateUtils from 'utils/date'
 import { TimesheetContext } from '../..'
+import { isMobile } from 'react-device-detect'
 import styles from './StatusBar.module.scss'
 
 export const StatusBar = () => {
     const { t } = useTranslation()
+    if (isMobile) styles.root += ` ${styles.mobile}`
     const context = useContext(TimesheetContext)
 
     const defaultMessageProps: IUserMessageProps = {
         className: styles.message,
         fixedCenter: 65,
-        containerStyle: { padding: '0 4px 0 4px' },
     }
 
     const messages: IUserMessageProps[] = [
