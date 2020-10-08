@@ -110,7 +110,7 @@
     "regenerator-runtime": "0.13.5",
     "sass-loader": "8.0.2",
     "scriptjs": "2.5.9",
-    "simple-oauth2": "2.4.0",
+    "simple-oauth2": "4.1.0",
     "string-format": "2.0.0",
     "string-similarity": "4.0.1",
     "string-strip-html": "4.3.20",
