@@ -1,5 +1,5 @@
 const log = require('debug')('services/tokens')
-const simpleoauth2 = require('simple-oauth2').create({
+const config = {
   client: {
     id: process.env.OAUTH_APP_ID,
     secret: process.env.OAUTH_APP_PASSWORD,
@@ -9,7 +9,8 @@ const simpleoauth2 = require('simple-oauth2').create({
     authorizePath: process.env.OAUTH_AUTHORIZE_ENDPOINT,
     tokenPath: process.env.OAUTH_TOKEN_ENDPOINT,
   },
-})
+}
+const { ClientCredentials, ResourceOwnerPassword, AuthorizationCode } = require('simple-oauth2');
 
 class TokenService {
   async refreshAccessToken(req) {
