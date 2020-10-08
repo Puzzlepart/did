@@ -153,48 +153,50 @@ class MSGraphService {
    * @param maxDurationHours Max duration hours (defaults to 24)
    */
   async getEvents(startDateTime, endDateTime, maxDurationHours = 24) {
-    try {
-      this.startMark('getEvents')
-      log(
-        'Querying Graph /me/calendar/calendarView: %s',
-        JSON.stringify({
-          startDateTime,
-          endDateTime,
-          maxDurationHours
-        })
-      )
-      const { value } = await this.getClient()
-        .api('/me/calendar/calendarView')
-        .query({ startDateTime, endDateTime })
-        .select([
-          'id',
-          'subject',
-          'body',
-          'start',
-          'end',
-          'categories',
-          'webLink',
-          'isOrganizer'
-        ])
-        .filter(`sensitivity ne 'private' and isallday eq false and iscancelled eq false`)
-        .orderby('start/dateTime asc')
-        .top(500)
-        .get()
-      let events = value.filter(evt => evt.subject).map(evt => new MSGraphEvent(evt))
-      events = events.filter(evt => evt.duration <= maxDurationHours)
-      this.endMark('getEvents')
-      return events
-    } catch (error) {
-      switch (error.statusCode) {
-        case 401: {
-          this.oauthToken = await TokenService.refreshAccessToken(this.req)
-          return this.getEvents(startDateTime, endDateTime)
-        }
-        default: {
-          throw error
-        }
-      }
-    }
+    this.oauthToken = await TokenService.refreshAccessToken(this.req)
+    console.log(this.oauthToken)
+    // try {
+    //   this.startMark('getEvents')
+    //   log(
+    //     'Querying Graph /me/calendar/calendarView: %s',
+    //     JSON.stringify({
+    //       startDateTime,
+    //       endDateTime,
+    //       maxDurationHours
+    //     })
+    //   )
+    //   const { value } = await this.getClient()
+    //     .api('/me/calendar/calendarView')
+    //     .query({ startDateTime, endDateTime })
+    //     .select([
+    //       'id',
+    //       'subject',
+    //       'body',
+    //       'start',
+    //       'end',
+    //       'categories',
+    //       'webLink',
+    //       'isOrganizer'
+    //     ])
+    //     .filter(`sensitivity ne 'private' and isallday eq false and iscancelled eq false`)
+    //     .orderby('start/dateTime asc')
+    //     .top(500)
+    //     .get()
+    //   let events = value.filter(evt => evt.subject).map(evt => new MSGraphEvent(evt))
+    //   events = events.filter(evt => evt.duration <= maxDurationHours)
+    //   this.endMark('getEvents')
+    //   return events
+    // } catch (error) {
+    //   switch (error.statusCode) {
+    //     case 401: {
+    //       this.oauthToken = await TokenService.refreshAccessToken(this.req)
+    //       return this.getEvents(startDateTime, endDateTime)
+    //     }
+    //     default: {
+    //       throw error
+    //     }
+    //   }
+    // }
   }
 }
 
