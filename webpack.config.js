@@ -87,7 +87,7 @@ switch (mode) {
       config.plugins.push(
         new WebpackBuildNotifierPlugin({
           logo: path.join(__dirname, '/public/images/favicon/mstile-150x150.png'),
-          sound: env('WEBPACK_NOTIFICATIONS_SOUND', false)
+          sound: env('WEBPACK_NOTIFICATIONS_SOUND', false),
           suppressSuccess: env('WEBPACK_NOTIFICATIONS_SUPPRESSSUCCESS') === 'true',
           showDuration: env('WEBPACK_NOTIFICATIONS_SHOWDURATION') === 'true',
         })
