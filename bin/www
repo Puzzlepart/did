@@ -31,6 +31,7 @@ function onError(error) {
       throw error
   }
 }
+
 function onListening() {
-  console.log('\x1b[32m', `[Server listening on port ${port}]`)
+  log('\x1b[32m', `[Server listening on port ${port}]`)
 }
