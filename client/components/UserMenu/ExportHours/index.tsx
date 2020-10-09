@@ -1,18 +1,24 @@
 import { useId } from '@uifabric/react-hooks'
-import { client } from '../../../graphql'
 import { ChoiceGroup } from 'office-ui-fabric-react'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { Panel } from 'office-ui-fabric-react/lib/Panel'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import {query} from './graphql'
-import styles from '../UserMenu.module.scss'
+import { first } from 'underscore'
+import { capitalize } from 'underscore.string'
+import dateUtils from 'utils/date'
 import { exportExcel } from 'utils/exportExcel'
+import { client } from '../../../graphql'
 import columns from '../columns'
+import styles from '../UserMenu.module.scss'
+import { query } from './graphql'
+import { getExportTypes, IExportType } from './types'
 
 export const ExportHours: React.FunctionComponent<{}> = () => {
     const { t } = useTranslation()
+    const exportTypes = getExportTypes(t)
+    const [exportType, setExportType] = useState(first(exportTypes))
     const [panelOpen, setPanelOpen] = useState(false)
     const toggleId = useId('toggle-panel')
 
@@ -32,11 +38,7 @@ export const ExportHours: React.FunctionComponent<{}> = () => {
     const onExport = async () => {
         const { data } = await client.query({
             query: query.timeentries,
-            variables: {
-                year: 2020,
-                startMonthIndex: 9,
-                endMonthIndex: 9,
-            }
+            variables: exportType.variables,
         })
         await exportExcel(
             data.timeentries,
@@ -64,21 +66,9 @@ export const ExportHours: React.FunctionComponent<{}> = () => {
                 onDismiss={togglePanel}
                 isLightDismiss={true}>
                 <ChoiceGroup
-                    defaultSelectedKey='lastMonth'
-                    options={[
-                        {
-                            key: 'lastMonth',
-                            text: 'Forrige måned (september)'
-                        },
-                        {
-                            key: 'currentMonth',
-                            text: 'Inneværende måned (oktober)'
-                        },
-                        {
-                            key: 'forecast',
-                            text: 'Hittil i år (2020)'
-                        }
-                    ]} />
+                    defaultSelectedKey={exportType.key}
+                    onChange={(_eve, option: IExportType) => setExportType(option)}
+                    options={getExportTypes(t)} />
                 <DefaultButton
                     text={t('common.export')}
                     styles={{ root: { marginTop: 15 } }}

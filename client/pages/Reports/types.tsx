@@ -1,24 +1,15 @@
 import { IListGroups } from 'components/List/types'
 import { TFunction } from 'i18next'
 import { IContextualMenuItem } from 'office-ui-fabric-react'
-import dateUtils from 'utils/date'
+import { ITimeEntriesQueryVariables } from 'types/graphql'
 import { capitalize } from 'underscore.string'
-
-export interface ITimeEntriesVariables {
-    startDateTime?: string
-    endDateTime?: string
-    weekNumber?: number
-    monthNumber?: number
-    year?: number
-    forecast?: boolean
-    sortAsc?: boolean
-}
+import dateUtils from 'utils/date'
 
 export interface IReportsQuery extends IContextualMenuItem {
     /**
      * Variables used for graphl query
      */
-    variables: ITimeEntriesVariables;
+    variables: ITimeEntriesQueryVariables;
 
     /**
      * Export file name
