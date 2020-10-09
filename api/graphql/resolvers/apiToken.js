@@ -1,7 +1,7 @@
 const { find, pick } = require('underscore')
 const jwt = require('jsonwebtoken')
 const { gql } = require('apollo-server-express')
-const env = require('../../../utils/env')
+const env = require('!env')
 
 const typeDef = gql`
   """

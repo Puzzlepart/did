@@ -1,6 +1,6 @@
 const app = require('../app')
 const http = require('http')
-const env = require('../utils/env')
+const env = require('!env')
 const port = env('PORT', '8080')
 const log = require('debug')('server')
 app._.set('port', port)

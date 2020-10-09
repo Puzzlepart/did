@@ -1,4 +1,4 @@
-const utils = require('../../../utils')
+const utils = require('!utils')
 const { first, find, filter } = require('underscore')
 const { contains } = require('underscore.string')
 const value = require('get-value')

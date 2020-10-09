@@ -1,5 +1,5 @@
-const AzTableUtilities = require('../utils/table')
-const { getDurationHours, getWeek, getMonthIndex, getYear, toArray } = require('../utils')
+const AzTableUtilities = require('!utils/table')
+const { getDurationHours, getWeek, getMonthIndex, getYear, toArray } = require('!utils')
 const arraySort = require('array-sort')
 const { omit, pick } = require('underscore')
 const { isBlank } = require('underscore.string')

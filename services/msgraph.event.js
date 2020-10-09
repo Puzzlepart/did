@@ -1,5 +1,5 @@
 const stripHtml = require('string-strip-html')
-const utils = require('../utils')
+const utils = require('!utils')
 
 class MSGraphEvent {
   constructor(evt) {

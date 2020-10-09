@@ -1,5 +1,5 @@
 const log = require('debug')('services/tokens')
-const env = require('../utils/env')
+const env = require('!env')
 const simpleoauth2 = require('simple-oauth2').create({
   client: {
     id: env('OAUTH_APP_ID'),

@@ -1,7 +1,7 @@
 require('dotenv').config()
 const tryRequire = require('try-require')
 const path = require('path')
-const env = require('./utils/env')
+const env = require('!env')
 const src = path.resolve(__dirname, 'client/')
 const pkg = require('./package.json')
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin')

@@ -1,5 +1,5 @@
 const { first, filter, find, pick, contains } = require('underscore')
-const { formatDate, getMonthIndex, getWeek } = require('../../../utils')
+const { formatDate, getMonthIndex, getWeek } = require('!utils')
 const EventMatching = require('./timesheet.matching')
 const { connectEntities } = require('./project.utils')
 const { getPeriods, connectTimeEntries } = require('./timesheet.utils')

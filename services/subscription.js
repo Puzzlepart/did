@@ -1,6 +1,6 @@
 const { first } = require('underscore')
-const AzTableUtilities = require('../utils/table')
-const env = require('../utils/env')
+const AzTableUtilities = require('!utils/table')
+const env = require('!env')
 const { createTableService } = require('azure-storage')
 
 class SubscriptionService {

@@ -1,4 +1,4 @@
-const utils = require('../../../utils')
+const utils = require('!utils')
 const { unique, difference, filter, find, first, last, union } = require('underscore')
 const format = require('string-format')
 const { getPeriods } = require('./timesheet.utils')

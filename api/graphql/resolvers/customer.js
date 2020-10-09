@@ -1,5 +1,5 @@
 const { pick } = require('underscore')
-const AzTableUtilities = require('../../../utils/table')
+const AzTableUtilities = require('!utils/table')
 const { executeBatch, createAzBatch } = new AzTableUtilities()
 const { gql } = require('apollo-server-express')
 
