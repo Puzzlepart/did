@@ -1,36 +1,36 @@
 export interface ITimeEntriesQueryVariables {
-    /**
-     * Start date time
-     */
-    startDateTime?: string
+  /**
+   * Start date time
+   */
+  startDateTime?: string
 
-    /**
-     * End date time
-     */
-    endDateTime?: string
+  /**
+   * End date time
+   */
+  endDateTime?: string
 
-    /**
-     * Week number
-     */
-    weekNumber?: number
+  /**
+   * Week number
+   */
+  weekNumber?: number
 
-    /**
-     * Month number
-     */
-    monthNumber?: number
+  /**
+   * Month number
+   */
+  monthNumber?: number
 
-    /**
-     * Year
-     */
-    year?: number
+  /**
+   * Year
+   */
+  year?: number
 
-    /**
-     * Get forecast
-     */
-    forecast?: boolean
+  /**
+   * Get forecast
+   */
+  forecast?: boolean
 
-    /**
-     * Sort ascending
-     */
-    sortAsc?: boolean
+  /**
+   * Sort ascending
+   */
+  sortAsc?: boolean
 }

@@ -6,8 +6,6 @@ import { Panel } from 'office-ui-fabric-react/lib/Panel'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { first } from 'underscore'
-import { capitalize } from 'underscore.string'
-import dateUtils from 'utils/date'
 import { exportExcel } from 'utils/exportExcel'
 import { client } from '../../../graphql'
 import columns from '../columns'
@@ -44,7 +42,7 @@ export const ExportHours: React.FunctionComponent<{}> = () => {
             data.timeentries,
             {
                 columns: columns(t),
-                fileName: 'Test.xlsx',
+                fileName: exportType.exportFileName,
             }
         )
         setPanelOpen(false)
