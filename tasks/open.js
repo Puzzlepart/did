@@ -1,7 +1,7 @@
 require('dotenv').config()
 const fs = require('fs')
 const open = require('open')
-const env = require('!env')
+const env = require('../utils/env')
 
 setTimeout(() => {
   let localtunnel = fs.readFileSync('.localtunnel', 'utf-8')

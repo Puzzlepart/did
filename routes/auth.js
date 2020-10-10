@@ -1,6 +1,6 @@
 const express = require('express')
 const passport = require('passport')
-const env = require('!env')
+const env = require('../utils/env')
 const router = express.Router()
 
 router.get('/signin', (req, res, next) => {

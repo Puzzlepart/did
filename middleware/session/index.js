@@ -1,6 +1,6 @@
 const session = require('express-session')
 const connectAzureTables = require('connect-azuretables')(session)
-const env = require('!env')
+const env = require('../../utils/env')
 
 const store = connectAzureTables.create({
   table: 'Sessions',

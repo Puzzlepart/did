@@ -2,7 +2,7 @@ const fs = require('fs')
 const passport = require('passport')
 const OIDCStrategy = require('passport-azure-ad').OIDCStrategy
 const { USER_NOT_ENROLLED } = require('./errors')
-const env = require('!env')
+const env = require('../../utils/env')
 
 passport.serializeUser((user, done) => done(null, user))
 passport.deserializeUser(async (user, done) => done(null, user))

@@ -1,5 +1,6 @@
 const log = require('debug')('middleware/passport/onVerifySignin')
-const {SubscriptionService,AzStorageService} = require('!services')
+const SubscriptionService = require('../../services/subscription')
+const AzStorageService = require('../../services/azstorage')
 const { pick } = require('underscore')
 const { NO_OID_FOUND, TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } = require('./errors')
 

@@ -10,7 +10,7 @@ const { typeDef: Label } = require('./resolvers/label')
 const { typeDef: Role } = require('./resolvers/role')
 const { typeDef: Notification } = require('./resolvers/notification')
 const { typeDef: ApiToken } = require('./resolvers/apiToken')
-const { MSGraphService, AzStorageService, SubscriptionService } = require('!services')
+const { MSGraphService, AzStorageService, SubscriptionService } = require('../../services')
 const { filter, pick } = require('underscore')
 const value = require('get-value')
 
