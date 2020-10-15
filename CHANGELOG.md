@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 0.7.0 - 15.10.2020
 ### Added
+- Did now supports forecasting #355
 - Better mobile navigation with descriptive labels #539,#588
 - We now have custom error pages #502
 - Better error messages #579
