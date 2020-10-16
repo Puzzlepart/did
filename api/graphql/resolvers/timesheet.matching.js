@@ -47,9 +47,9 @@ class EventMatching {
    * @param {*} event 
    */
   findIgnore(event) {
-    if (contains(event.categories, 'IGNORE') || contains(event.categories, 'ignore')) return 'category'
-    let ignoreRegex = /[(\[\{]IGNORE[)\]\}]/gi
-    if ((event.body || '').match(ignoreRegex) !== null) return 'body'
+    let ignoreCategory = find(event.categories, c => c.toLowerCase() === 'ignore');
+    if (!!ignoreCategory) return 'category'
+    if ((event.body || '').match(/[(\[\{]IGNORE[)\]\}]/gi) !== null) return 'body'
     return null
   }
 

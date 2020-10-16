@@ -124,6 +124,12 @@ describe('Event matching', async () => {
       const event = first(eventMatching.match([testEvent]))
       notStrictEqual(event.isSystemIgnored, true)
     })
+
+    it('IGNORE (uppercase) in title should set the event as ignored', () => {
+      testEvent.title = 'Please IGNORE this event'
+      const event = first(eventMatching.match([testEvent]))
+      strictEqual(event.isSystemIgnored, true)
+    })
   })
 
   describe('Matching event labels', () => {
