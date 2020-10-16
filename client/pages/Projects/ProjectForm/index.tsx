@@ -19,7 +19,7 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
     const [validation, setValidation] = useState<IFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useMessage()
     const [model, setModel] = useState<ProjectModel>(new ProjectModel(edit))
-    const [createOrUpdateProject, { loading }] = useMutation<any, any>(graphql.mutation.createOutlookCategory)
+    const [createOrUpdateProject, { loading }] = useMutation<any, any>(graphql.mutation.createOrUpdateProject)
 
     /**
      * Update model
