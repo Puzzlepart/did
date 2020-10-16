@@ -7,8 +7,8 @@ const typeDef = gql`
   """
   type Role {
     name: String!
-    icon: String!
     permissions: [String]!
+    icon: String
   }
 
   """
