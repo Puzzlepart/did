@@ -8,16 +8,28 @@ export interface ITimesheetContext extends ITimesheetState {
   /**
    * On submit period
    *
-   * Confirms or forecasts the period
+   * Action depends on parameter forecast
+   *
+   * - If set to true: Forecast the period
+   *
+   * - If set to false: Confirms the period
+   *
+   * @param {boolean} forecast Forecast
    */
-  onSubmitPeriod: () => void
+  onSubmitPeriod: (forecast: boolean) => void
 
   /**
    * On unsubmit period
    *
-   * Unconfirms or removes forecast for period
+   * Action depends on parameter forecast
+   *
+   * - If set to true: Removes forecast for period
+   *
+   * - If set to false: Unconfirms the period
+   *
+   * @param {boolean} forecast Forecast
    */
-  onUnsubmitPeriod: () => void
+  onUnsubmitPeriod: (forecast: boolean) => void
 
   /**
    * Dispatch an action
