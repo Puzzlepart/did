@@ -16,8 +16,7 @@ export const ActionBar = () => {
             ...commands.SELECT_PERIOD(context),
         ],
         farItems: [
-            commands.CONFIRM_ACTIONS(context),
-            commands.FORECAST_ACTIONS(context)
+            commands.CONFIRM_FORECAST_ACTIONS(context),
         ]
     }
 

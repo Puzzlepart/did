@@ -1,6 +1,7 @@
 import { DefaultButton, IButtonStyles, PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
 import * as React from 'react'
+import { omit } from 'underscore'
 import { ITimesheetContext } from '../context'
 import styles from './ActionBar.module.scss'
 import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS'
@@ -64,10 +65,29 @@ export const SELECT_PERIOD = ({ periods, loading, selectedPeriod, dispatch, t }:
     }))
 }
 
-export const CONFIRM_ACTIONS = (context: ITimesheetContext): IContextualMenuItem => ({
-    key: 'CONFIRM_ACTIONS',
+export const CONFIRM_FORECAST_ACTIONS = (context: ITimesheetContext): IContextualMenuItem => ({
+    key: 'CONFIRM_FORECAST_ACTIONS',
     onRender: () => {
-        if (context.selectedPeriod.isForecast || context.loading || !!context.error) return null
+        if (context.loading || !!context.error) return null
+        const forecastButtonProps: any = {
+            key: 'forecast',
+            styles: buttonStyles,
+            iconProps: { iconName: 'BufferTimeBefore' },
+            onClick: context.onSubmitPeriod,
+            canCheck: true,
+            text: context.t('timesheet.forecastHoursText'),
+            secondaryText: context.t('timesheet.forecastHoursSecondaryText')
+        }
+        const confirmButtonProps: any = {
+            key: 'confirm',
+            className: styles.confirmButton,
+            styles: buttonStyles,
+            iconProps: { iconName: 'CheckMark' },
+            onClick: context.onSubmitPeriod,
+            canCheck: true,
+            text: context.t('timesheet.confirmHoursText'),
+            secondaryText: context.t('timesheet.confirmHoursSecondaryText')
+        }
         if (context.selectedPeriod.isConfirmed) {
             return (
                 <DefaultButton
@@ -78,37 +98,42 @@ export const CONFIRM_ACTIONS = (context: ITimesheetContext): IContextualMenuItem
                     styles={buttonStyles} />
             )
         }
-        return (
-            <PrimaryButton
-                disabled={!context.selectedPeriod.isComplete}
-                iconProps={{ iconName: 'CheckMark' }}
-                onClick={context.onSubmitPeriod}
-                text={context.t('timesheet.confirmHoursText')}
-                className={styles.confirmButton}
-                styles={buttonStyles} />
-        )
-    }
-})
-
-export const FORECAST_ACTIONS = (context: ITimesheetContext): IContextualMenuItem => ({
-    key: 'FORECAST_ACTIONS',
-    onRender: () => {
-        if (!context.selectedPeriod.isForecast || context.loading || !!context.error) return null
-        if (context.selectedPeriod.isForecasted) {
+        if (context.selectedPeriod.isForecast) {
+            if (context.selectedPeriod.isForecasted) {
+                return (
+                    <DefaultButton
+                        iconProps={{ iconName: 'Cancel' }}
+                        onClick={context.onUnsubmitPeriod}
+                        text={context.t('timesheet.unforecastHoursText')}
+                        styles={buttonStyles} />
+                )
+            }
             return (
-                <DefaultButton
-                    iconProps={{ iconName: 'Cancel' }}
-                    onClick={context.onUnsubmitPeriod}
-                    text={context.t('timesheet.unforecastHoursText')}
-                    styles={buttonStyles} />
+                <PrimaryButton
+                    {...forecastButtonProps}
+                    menuProps={{
+                        items: [
+                            {
+                                ...omit(forecastButtonProps, 'buttonStyles', 'iconProps'),
+                                checked: true,
+                            },
+                            omit(confirmButtonProps, 'buttonStyles', 'iconProps'),
+                        ]
+                    }} />
             )
         }
         return (
             <PrimaryButton
-                iconProps={{ iconName: 'BufferTimeBefore' }}
-                onClick={context.onSubmitPeriod}
-                text={context.t('timesheet.forecastHoursText')}
-                styles={buttonStyles} />
+                {...confirmButtonProps}
+                menuProps={{
+                    items: [
+                        {
+                            ...omit(confirmButtonProps,'buttonStyles', 'iconProps'),
+                            checked: true,
+                        },
+                        omit(forecastButtonProps, 'buttonStyles', 'iconProps'),
+                    ]
+                }} />
         )
     }
 })
