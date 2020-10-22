@@ -44,7 +44,10 @@ export const ExportHours: React.FunctionComponent<{}> = () => {
             data.timeentries,
             {
                 columns: columns(t),
-                fileName: format(exportType.exportFileName, ''),
+                fileName: format(
+                    exportType.exportFileName,
+                    new Date().toDateString().split(' ').join('-')
+                ),
             }
         )
         setPanelOpen(false)

@@ -135,7 +135,7 @@ export default new (class DateUtils {
   ): string {
     return start
       .locale(this._momentLocale)
-    ['twix'](end.locale(this._momentLocale), { allDay: true })
+      ['twix'](end.locale(this._momentLocale), { allDay: true })
       .format(options)
       .toLowerCase()
   }
