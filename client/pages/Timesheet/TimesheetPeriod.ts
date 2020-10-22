@@ -9,7 +9,6 @@ import { capitalize } from 'underscore.string'
 import dateUtils, { moment } from 'utils/date'
 import { ITimesheetParams } from './types'
 
-
 export interface ITimesheetPeriod {
   /**
    * Identifier for the period week_month_year
