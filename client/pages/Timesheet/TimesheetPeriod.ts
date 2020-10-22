@@ -103,13 +103,13 @@ export interface ITimesheetPeriodData {
 
 /**
  * Timesheet period. Divided by week, month and year.
- * 
+ *
  * E.g. a week which spans both February and March will generate two periods:
- * 
+ *
  * * w_2_y
  * * w_3_y
- * 
- * Where x is the week number and y is the year 
+ *
+ * Where x is the week number and y is the year
  */
 export class TimesheetPeriod {
   /**
