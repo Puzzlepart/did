@@ -172,33 +172,42 @@ async function timesheet(_obj, variables, ctx) {
  */
 async function submitPeriod(_obj, variables, ctx) {
   try {
-    let hours = 0
-    if (!isEmpty(variables.period.matchedEvents)) {
+    let { period, forecast } = { ...variables }
+    period.hours = 0
+    console.log(period)
+    if (!isEmpty(period.matchedEvents)) {
       const [events, labels] = await Promise.all([
-        ctx.services.msgraph.getEvents(variables.period.startDateTime, variables.period.endDateTime),
+        ctx.services.msgraph.getEvents(period.startDateTime, period.endDateTime),
         ctx.services.azstorage.getLabels(),
       ])
-      let timeentries = variables.period.matchedEvents
-        .map(entry => {
-          const event = find(events, e => e.id === entry.id)
-          if (!event) return
-          const _labels = filter(labels, lbl => contains(event.categories, lbl.name)).map(lbl => lbl.name)
-          return {
-            user: ctx.user,
-            entry,
-            event,
-            labels: _labels,
-          }
-        })
-        .filter(entry => entry)
-      hours = await ctx.services.azstorage.addTimeEntries(pick(variables.period, 'id'), timeentries, variables.forecast)
+      let timeentries = period.matchedEvents.reduce((arr, event) => {
+        const entry = {
+          ...pick(event, 'projectId', 'manualMatch'),
+          event: find(events, e => e.id === event.id),
+        }
+        if (!entry.event) return arr
+        entry.labels = filter(labels, lbl => contains(event.categories, lbl.name)).map(lbl => lbl.name)
+        return [...arr, entry]
+      }, [])
+      period.hours = await ctx.services.azstorage.addTimeEntries(
+        pick(period, 'id'),
+        ctx.user,
+        timeentries,
+        forecast
+      )
     }
-    if (variables.forecast) await ctx.services.azstorage.addForecastedPeriod(pick(variables.period, 'id'), ctx.user.id, hours)
-    else await ctx.services.azstorage.addConfirmedPeriod(
-      pick(variables.period, 'id', 'forecastedHours'),
-      ctx.user.id,
-      hours
-    )
+    if (forecast) {
+      await ctx.services.azstorage.addForecastedPeriod(
+        pick(period, 'id', 'hours'),
+        ctx.user.id
+      )
+    }
+    else {
+      await ctx.services.azstorage.addConfirmedPeriod(
+        pick(period, 'id', 'hours', 'forecastedHours'),
+        ctx.user.id
+      )
+    }
     return { success: true, error: null }
   } catch (error) {
     return {

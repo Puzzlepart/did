@@ -62,7 +62,7 @@ export const StatusBar = () => {
                 'timesheet.periodForecastedText',
                 { hours: dateUtils.getDurationString(context.selectedPeriod.matchedDuration, t) }
             ),
-            type: MessageBarType.success,
+            type: MessageBarType.info,
             iconName: 'BufferTimeBoth'
         },
         {

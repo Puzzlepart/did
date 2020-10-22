@@ -61,9 +61,9 @@ export const Timesheet = () => {
     ]
 
     const onSubmitPeriod = async (forecast: boolean) => {
-        dispatch({ type: 'SUBMITTING_PERIOD', payload: { t } })
-        const variables = { 
-            period: state.selectedPeriod.data,        
+        dispatch({ type: 'SUBMITTING_PERIOD', payload: { t, forecast } })
+        const variables = {
+            period: state.selectedPeriod.data,
             forecast
         }
         await submitPeriod({ variables })
@@ -71,10 +71,10 @@ export const Timesheet = () => {
     }
 
     const onUnsubmitPeriod = (forecast: boolean) => {
-        dispatch({ type: 'UNSUBMITTING_PERIOD', payload: { t } })
+        dispatch({ type: 'UNSUBMITTING_PERIOD', payload: { t, forecast } })
         const variables = {
-             period: state.selectedPeriod.data, 
-             forecast
+            period: state.selectedPeriod.data,
+            forecast
         }
         unsubmitPeriod({ variables }).then(query.refetch)
     }

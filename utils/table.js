@@ -1,5 +1,5 @@
 const az = require('azure-storage')
-const { omit, contains } = require('underscore')
+const { omit, contains, isNull } = require('underscore')
 const { decapitalize, capitalize, isBlank } = require('underscore.string')
 const { reduceEachLeadingCommentRange } = require('typescript')
 const get = require('get-value')
@@ -172,6 +172,12 @@ class AzTableUtilities {
 
   /**
    * Converts a JSON object to an Azure Table Storage entity
+   * 
+   * Does a best effort to get the correct type of the values
+   * 
+   * Can be some issues to differ between double and int
+   * 
+   * If unsure, specifiy typeMap in options
    *
    * @param {*} rowKey Row key
    * @param {*} values Values
@@ -181,34 +187,31 @@ class AzTableUtilities {
   convertToAzEntity(rowKey, values, partitionKey = 'Default', options = { removeBlanks: true, typeMap: {} }) {
     const { string, datetime, double, int, boolean } = this.azEntGen()
     const entity = Object.keys(values)
-      .filter(key => values[key] !== null)
+      .filter(key => !isNull(values[key]))
       .filter(key => (options.removeBlanks ? !isBlank(values[key]) : true))
-      .reduce(
-        (obj, key) => {
-          let value = values[key]
-          const typeMap = get(options, 'typeMap', { default: {} })
-          console.log(typeMap)
-          if (typeMap[key]) {
-            if (typeMap[key] === 'datetime') value = datetime(new Date(value))
-            else value = this.azEntGen()[typeMap[key]](value)
-          } else {
-            switch (typeof value) {
-              case 'boolean':
-                value = boolean(value)
-                break
-              case 'number':
-                {
-                  if (value % 1 === 0) value = int(value)
-                  else value = double(value)
-                }
-                break
-              default: value = string(value.trim())
-                break
+      .reduce((obj, key) => {
+        let value = values[key]
+        const type = get(options, `typeMap.${key}`, { default: typeof value })
+        switch (type) {
+          case 'datetime': value = datetime(new Date(value))
+            break
+          case 'boolean': value = boolean(value)
+            break;
+          case 'number':
+            {
+              if (value % 1 === 0) value = int(value)
+              else value = double(value)
             }
+            break
+          default: {
+            if (!!type) value = this.azEntGen()[type](value)
+            else value = string(value.trim())
           }
-          obj[capitalize(key)] = value
-          return obj
-        },
+            break
+        }
+        obj[capitalize(key)] = value
+        return obj
+      },
         {
           PartitionKey: string(partitionKey),
           RowKey: string(rowKey),
