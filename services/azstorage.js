@@ -397,7 +397,7 @@ class AzStorageService {
       MonthNumber: int(month),
       Year: int(year),
       Hours: double(hours),
-      ForecastedHours: double(forecastedDuration),
+      ForecastedHours: double(period.forecastedDuration),
     })
     return entity
   }
