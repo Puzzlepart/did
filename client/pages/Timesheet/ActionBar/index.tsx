@@ -9,14 +9,14 @@ export const ActionBar = () => {
     const commandBarProps: ICommandBarProps = {
         styles: { root: { padding: 0 } },
         items: [
-            commands.GO_TO_CURRENT_WEEK(context),
-            commands.GO_TO_PREV_WEEK(context),
-            commands.GO_TO_NEXT_WEEK(context),
-            commands.WEEK_PICKER(context),
-            ...commands.SELECT_PERIOD(context),
+            commands.GO_TO_CURRENT_WEEK_COMMAND(context),
+            commands.GO_TO_PREV_WEEK_COMMAND(context),
+            commands.GO_TO_NEXT_WEEK_COMMAND(context),
+            commands.WEEK_PICKER_COMMAND(context),
+            ...commands.SELECT_PERIOD_COMMANDS(context),
         ],
         farItems: [
-            commands.CONFIRM_FORECAST_ACTIONS(context),
+            commands.CONFIRM_FORECAST_COMMANDS(context),
         ]
     }
 
