@@ -281,7 +281,12 @@ export class TimesheetPeriod {
   }
 
   /**
-   * Get matched events with properties id, projectId and manualMatch
+   * Get matched events with properties
+   *
+   * @returns
+   * * {string} id
+   * * {string} projectId
+   * * {boolean} manualMatch
    */
   private get matchedEvents(): ITimesheetPeriodMatchedEvent[] {
     const events = filter([...this.events], event => !!event.project).map(
@@ -298,12 +303,12 @@ export class TimesheetPeriod {
   /**
    * Get data for the period
    *
-   * Returns properties
-   * * id
-   * * startDateTime
-   * * endDateTime
-   * * matchedEvents
-   * * forecast
+   * @returns
+   * * {string} id
+   * * {string} startDateTime
+   * * {string} endDateTime
+   * * {ITimesheetPeriodMatchedEvent[]} matchedEvents
+   * * {boolean} forecast
    */
   public get data(): ITimesheetPeriodData {
     if (!this.isLoaded) return null
@@ -338,6 +343,8 @@ export class TimesheetPeriod {
 
   /**
    * Period is complete meaning all events are matched
+   *
+   * @returns true if the unmatched duration (unmatchedDuration) is equal to zero (0)
    */
   public get isComplete(): boolean {
     return this.unmatchedDuration === 0
@@ -345,6 +352,8 @@ export class TimesheetPeriod {
 
   /**
    * Period is locked when it's either confirmed or forecasted
+   *
+   * @returns true if the period is either confirmed (isConfirmed) or forecasted (isForecasted)
    */
   public get isLocked() {
     return this.isConfirmed || this.isForecasted
@@ -352,8 +361,19 @@ export class TimesheetPeriod {
 
   /**
    * Period data is loaded
+   *
+   * @returns true if the period id is not blank
    */
   public get isLoaded() {
     return !isBlank(this.id)
+  }
+
+  /**
+   * Period is in the past
+   *
+   * @returns true if the period end date time is before today
+   */
+  public get isPast(): boolean {
+    return this._endDateTime && this._endDateTime.isBefore()
   }
 }
