@@ -45,7 +45,7 @@ const typeDef = gql`
     isForecasted: Boolean
     isForecast: Boolean
     confirmedDuration: Float!
-    forecastedDuration: Float!
+    forecastedHours: Float!
   }
 
   """
@@ -65,7 +65,7 @@ const typeDef = gql`
     startDateTime: String!
     endDateTime: String!
     matchedEvents: [EventInput]
-    forecastedDuration: Float
+    forecastedHours: Float
   }
 
   extend type Query {
@@ -125,7 +125,7 @@ async function timesheet(_obj, variables, ctx) {
         ctx.services.azstorage.getForecastedPeriod(ctx.user.id, period.id)
       ])
       period.isForecasted = !!forecasted
-      period.forecastedDuration = period.isForecasted && forecasted.hours
+      period.forecastedHours = period.isForecasted && forecasted.hours
       period.isConfirmed = !!confirmed
       period.confirmedDuration = period.isConfirmed && confirmed.hours
       if (period.isConfirmed) {
@@ -193,11 +193,11 @@ async function submitPeriod(_obj, variables, ctx) {
           }
         })
         .filter(entry => entry)
-      hours = await ctx.services.azstorage.addTimeEntries(variables.period.id, timeentries, variables.forecast)
+      hours = await ctx.services.azstorage.addTimeEntries(pick(variables.period, 'id'), timeentries, variables.forecast)
     }
-    if (variables.forecast) await ctx.services.azstorage.addForecastedPeriod(variables.period.id, ctx.user.id, hours)
+    if (variables.forecast) await ctx.services.azstorage.addForecastedPeriod(pick(variables.period, 'id'), ctx.user.id, hours)
     else await ctx.services.azstorage.addConfirmedPeriod(
-      pick(variables.period, 'id', 'forecastedDuration'),
+      pick(variables.period, 'id', 'forecastedHours'),
       ctx.user.id,
       hours
     )

@@ -1,7 +1,7 @@
 const utils = require('../../../utils')
 const { first, find, filter } = require('underscore')
 const { contains } = require('underscore.string')
-const value = require('get-value')
+const get = require('get-value')
 
 /**
  * Get periods between specified dates
@@ -24,8 +24,6 @@ function getPeriods(startDateTime, endDateTime, locale) {
       startDateTime,
       endDateTime: isSplit ? utils.endOfMonth(startDateTime) : endDateTime,
       isForecast: utils.isAfterToday(startDateTime),
-      confirmedDuration: 0,
-      forecastedDuration: 0
     },
   ]
 
@@ -38,8 +36,6 @@ function getPeriods(startDateTime, endDateTime, locale) {
       startDateTime,
       endDateTime,
       isForecast: utils.isAfterToday(startDateTime),
-      confirmedDuration: 0,
-      forecastedDuration: 0
     })
   }
 
@@ -62,7 +58,7 @@ function connectTimeEntries(timeentries, projects, customers, labels) {
       project: find(projects, p => p.id === entry.projectId),
       customer: find(customers, c => c.key === customerKey),
       labels: filter(labels, lbl => {
-        const val = value(entry, 'labels', { default: '' })
+        const val = get(entry, 'labels', { default: '' })
         return contains(val, lbl.name)
       }),
     }

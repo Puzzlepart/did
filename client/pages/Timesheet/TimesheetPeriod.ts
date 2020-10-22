@@ -56,9 +56,9 @@ export interface ITimesheetPeriod {
   isForecast: boolean
 
   /**
-   * Forecasted duration
+   * Forecasted hours
    */
-  forecastedDuration: number
+  forecastedHours: number
 }
 
 export interface ITimesheetPeriodMatchedEvent {
@@ -96,9 +96,9 @@ export interface ITimesheetPeriodData {
   matchedEvents: ITimesheetPeriodMatchedEvent[]
 
   /**
-   * Forecasted duration
+   * Forecasted hours
    */
-  forecastedDuration: number
+  forecastedHours: number
 }
 
 /**
@@ -133,9 +133,9 @@ export class TimesheetPeriod {
   public isForecast: boolean
 
   /**
-   * Forecasted duration
+   * Forecasted hours
    */
-  public forecastedDuration: number
+  public forecastedHours: number
 
   /**
    * Events ignored in UI
@@ -198,7 +198,7 @@ export class TimesheetPeriod {
     this.isConfirmed = _period.isConfirmed
     this.isForecasted = _period.isForecasted
     this.isForecast = _period.isForecast
-    this.forecastedDuration = _period.forecastedDuration
+    this.forecastedHours = _period.forecastedHours
     this._uiMatchedEventsStorageKey = `did365_ui_matched_events_${this.id}`
     this._uiIgnoredEventsStorageKey = `did365_ui_ignored_events_${this.id}`
     this._uiIgnoredEvents = this._localStorage.get(this._uiIgnoredEventsStorageKey) || []
@@ -356,7 +356,7 @@ export class TimesheetPeriod {
    * * {string} endDateTime
    * * {ITimesheetPeriodMatchedEvent[]} matchedEvents
    * * {boolean} forecast
-   * * {number} forecastedDuration
+   * * {number} forecastedHours
    */
   public get data(): ITimesheetPeriodData {
     if (!this.isLoaded) return null
@@ -365,7 +365,7 @@ export class TimesheetPeriod {
       startDateTime: this._startDateTime.toISOString(),
       endDateTime: this._endDateTime.toISOString(),
       matchedEvents: this.matchedEvents,
-      forecastedDuration: this.forecastedDuration,
+      forecastedHours: this.forecastedHours,
     }
   }
 
