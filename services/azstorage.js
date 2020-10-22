@@ -383,16 +383,17 @@ class AzStorageService {
   /**
    * Add entry for the confirmed period to table storage
    *
-   * @param {*} periodId The period ID
+   * @param {*} period Period: id, forecastedDuration
    * @param {*} resourceId ID of the resource
    * @param {*} hours Total hours for the train
    */
-  async addConfirmedPeriod(periodId, resourceId, hours) {
-    const [week, month, year] = periodId.split('_')
+  async addConfirmedPeriod(period, resourceId, hours) {
+    console.log(period)
+    const [week, month, year] = period.id.split('_')
     const { string, double, int } = this.tableUtil.azEntGen()
     const entity = await this.tableUtil.addAzEntity(this.tables.confirmedPeriods, {
       PartitionKey: string(resourceId),
-      RowKey: string(periodId),
+      RowKey: string(period.id),
       WeekNumber: int(week),
       MonthNumber: int(month),
       Year: int(year),

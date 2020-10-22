@@ -89,6 +89,7 @@ const timesheet = gql`
       isConfirmed
       isForecasted
       isForecast
+      forecastedDuration
     }
   }
 `

@@ -54,6 +54,11 @@ export interface ITimesheetPeriod {
    * Is the period in the future
    */
   isForecast: boolean
+
+  /**
+   * Forecasted duration
+   */
+  forecastedDuration: number
 }
 
 export interface ITimesheetPeriodMatchedEvent {
@@ -63,11 +68,34 @@ export interface ITimesheetPeriodMatchedEvent {
 }
 
 export interface ITimesheetPeriodData {
+  /**
+   * Identifier for the period week_month_year
+  */
   id: string
+
+  /**
+   * Start date time ISO string
+   */
   startDateTime: string
+
+  /**
+   * End date time ISO string
+   */
   endDateTime: string
+
+  /**
+   * Matched events
+   * 
+   * * {string} id
+   * * {string} projectId
+   * * {boolean} manualMatch
+   */
   matchedEvents: ITimesheetPeriodMatchedEvent[]
-  isForecast: boolean
+  
+  /**
+  * Forecasted duration
+  */
+ forecastedDuration: number
 }
 
 export class TimesheetPeriod {
@@ -90,6 +118,11 @@ export class TimesheetPeriod {
    * Is the period in the future and available for forecasting
    */
   public isForecast: boolean
+
+  /**
+   * Forecasted duration
+   */
+  public forecastedDuration: number
 
   /**
    * Events ignored in UI
@@ -152,6 +185,7 @@ export class TimesheetPeriod {
     this.isConfirmed = _period.isConfirmed
     this.isForecasted = _period.isForecasted
     this.isForecast = _period.isForecast
+    this.forecastedDuration = _period.forecastedDuration
     this._uiMatchedEventsStorageKey = `did365_ui_matched_events_${this.id}`
     this._uiIgnoredEventsStorageKey = `did365_ui_ignored_events_${this.id}`
     this._uiIgnoredEvents = this._localStorage.get(this._uiIgnoredEventsStorageKey) || []
@@ -309,6 +343,7 @@ export class TimesheetPeriod {
    * * {string} endDateTime
    * * {ITimesheetPeriodMatchedEvent[]} matchedEvents
    * * {boolean} forecast
+   * * {number} forecastedDuration
    */
   public get data(): ITimesheetPeriodData {
     if (!this.isLoaded) return null
@@ -317,7 +352,7 @@ export class TimesheetPeriod {
       startDateTime: this._startDateTime.toISOString(),
       endDateTime: this._endDateTime.toISOString(),
       matchedEvents: this.matchedEvents,
-      isForecast: this.isForecast,
+      forecastedDuration: this.forecastedDuration,
     }
   }
 
