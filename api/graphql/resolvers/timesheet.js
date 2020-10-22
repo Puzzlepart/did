@@ -44,7 +44,6 @@ const typeDef = gql`
     isConfirmed: Boolean
     isForecasted: Boolean
     isForecast: Boolean
-    confirmedDuration: Float!
     forecastedHours: Float!
   }
 
@@ -127,7 +126,6 @@ async function timesheet(_obj, variables, ctx) {
       period.isForecasted = !!forecasted
       period.forecastedHours = period.isForecasted && forecasted.hours
       period.isConfirmed = !!confirmed
-      period.confirmedDuration = period.isConfirmed && confirmed.hours
       if (period.isConfirmed) {
         period.events = connectTimeEntries(
           filter(timeentries, entry => entry.periodId === period.id),
