@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
 const unsubmitPeriod = gql`
-  mutation($period: TimesheetPeriodInput!) {
-    result: unsubmitPeriod(period: $period) {
+  mutation($period: TimesheetPeriodInput!, $forecast: Boolean!) {
+    result: unsubmitPeriod(period: $period, forecast: $forecast) {
       success
       error {
         message
@@ -12,8 +12,8 @@ const unsubmitPeriod = gql`
 `
 
 const submitPeriod = gql`
-  mutation($period: TimesheetPeriodInput!) {
-    result: submitPeriod(period: $period) {
+  mutation($period: TimesheetPeriodInput!, $forecast: Boolean!) {
+    result: submitPeriod(period: $period, forecast: $forecast) {
       success
       error {
         message
