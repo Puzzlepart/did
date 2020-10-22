@@ -394,6 +394,7 @@ class AzStorageService {
    * @returns void
    */
   async addConfirmedPeriod(period, resourceId, hours) {
+    
     const [
       weekNumber,
       monthNumber,
