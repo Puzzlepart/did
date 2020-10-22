@@ -105,12 +105,15 @@ export default new (class DateUtils {
    *
    * @param {number} monthIndex Month number
    * @param {string} format Format
+   * @param {boolean} captialize Capitalize
    */
-  getMonthName(monthIndex?: number, format: string = 'MMMM'): string {
+  getMonthName(monthIndex?: number, format: string = 'MMMM', captialize: boolean = false): string {
     let m = moment().locale(this._momentLocale)
-    if (monthIndex < 0) return m.add(monthIndex, 'month').format(format)
-    else if (monthIndex === 0) return m.format(format)
-    return m.month(monthIndex).format(format)
+    let name: string
+    if (monthIndex < 0) name = m.add(monthIndex, 'month').format(format)
+    else if (monthIndex === 0) name = m.format(format)
+    else name = m.month(monthIndex).format(format)
+    return captialize ? capitalize(name) : name
   }
 
   /**
@@ -132,7 +135,7 @@ export default new (class DateUtils {
   ): string {
     return start
       .locale(this._momentLocale)
-      ['twix'](end.locale(this._momentLocale), { allDay: true })
+    ['twix'](end.locale(this._momentLocale), { allDay: true })
       .format(options)
       .toLowerCase()
   }

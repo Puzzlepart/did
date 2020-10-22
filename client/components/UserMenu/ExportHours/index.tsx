@@ -1,5 +1,6 @@
 import { useId } from '@uifabric/react-hooks'
-import { ChoiceGroup } from 'office-ui-fabric-react'
+import { format } from 'office-ui-fabric-react/lib/Utilities'
+import { ChoiceGroup } from 'office-ui-fabric-react/lib/ChoiceGroup'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { Panel } from 'office-ui-fabric-react/lib/Panel'
@@ -12,6 +13,7 @@ import columns from '../columns'
 import styles from '../UserMenu.module.scss'
 import { query } from './graphql'
 import { getExportTypes, IExportType } from './types'
+import dateUtils from 'utils/date'
 
 export const ExportHours: React.FunctionComponent<{}> = () => {
     const { t } = useTranslation()
@@ -42,7 +44,7 @@ export const ExportHours: React.FunctionComponent<{}> = () => {
             data.timeentries,
             {
                 columns: columns(t),
-                fileName: exportType.exportFileName,
+                fileName: format(exportType.exportFileName, ''),
             }
         )
         setPanelOpen(false)

@@ -19,7 +19,7 @@ export interface ITimesheetParams {
   view: TimesheetView
   week: string
   month: string
-  year: string 
+  year: string
 }
 
 export * from './context'
