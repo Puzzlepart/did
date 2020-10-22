@@ -67,6 +67,9 @@ export interface ITimesheetPeriodMatchedEvent {
   manualMatch: boolean
 }
 
+/**
+ * Timesheet period data used when submitting/unsubmitting the period
+ */
 export interface ITimesheetPeriodData {
   /**
    * Identifier for the period week_month_year
@@ -98,6 +101,16 @@ export interface ITimesheetPeriodData {
   forecastedDuration: number
 }
 
+/**
+ * Timesheet period. Divided by week, month and year.
+ * 
+ * E.g. a week which spans both February and March will generate two periods:
+ * 
+ * * w_2_y
+ * * w_3_y
+ * 
+ * Where x is the week number and y is the year 
+ */
 export class TimesheetPeriod {
   /**
    * Identifier for the period week_month_year
