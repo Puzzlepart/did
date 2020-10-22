@@ -15,11 +15,105 @@ describe('Backend', () => {
       eventMatching = new EventMatching(projects, customers, labels)
     })
 
-    beforeEach(() => {
-      testEvent = {
-        title: 'Important meeting',
-        categories: [],
-      }
+    it('"AK ASSISTCH: ASSIST-3063" in subject should match to AK ASSISTCH', () => {
+      testEvent.body = 'AK ASSISTCH: ASSIST-3063'
+      const event = first(eventMatching.match([testEvent]))
+      strictEqual(event.project.id, 'AK ASSISTCH')
+    })
+  })
+
+  describe('Matching suggestions', () => {
+    it('{IAM VAK} should suggest {IAM VAC}', () => {
+      testEvent.categories.push('IAM VAK')
+      const event = first(eventMatching.match([testEvent]))
+      strictEqual(event.suggestedProject.id, 'IAM VAC')
+    })
+
+    it('{IAM TRAVELLING} in category should yield no project but a match against Employee Absence', () => {
+      testEvent.categories.push('{IAM WHAAT}')
+      const event = first(eventMatching.match([testEvent]))
+      strictEqual(event.customer.name, 'Employee Absence')
+    })
+
+    it('4SUBSEA ABC in category should yield no project but a match against 4SUBSEA', () => {
+      testEvent.categories.push('4SUBSEA ABC')
+      const event = first(eventMatching.match([testEvent]))
+      strictEqual(event.customer.key, '4SUBSEA')
+    })
+
+    it('4SUBSEA ABC in body should yield no project and no match against customer 4SUBSEA', () => {
+      testEvent.body = 'Hello this is an event 4SUBSEA ABC'
+      const event = first(eventMatching.match([testEvent]))
+      strictEqual(event.customer, undefined)
+    })
+  })
+
+  describe('System ignore', () => {
+    it('IGNORE (uppercase) in categories should set the event as ignored', () => {
+      testEvent.categories.push('IGNORE')
+      const event = first(eventMatching.match([testEvent]))
+      strictEqual(event.isSystemIgnored, true)
+    })
+
+    it('ignore (lowercase) in categories should set the event as ignored', () => {
+      testEvent.categories.push('ignore')
+      const event = first(eventMatching.match([testEvent]))
+      strictEqual(event.isSystemIgnored, true)
+    })
+
+    it('[ignore] (lowercase) in body should set the event as ignored', () => {
+      testEvent.body = 'This is the body of the event [ignore]'
+      const event = first(eventMatching.match([testEvent]))
+      strictEqual(event.isSystemIgnored, true)
+    })
+
+    it('[ignore] (lowercase) in body should set the event as ignored even with an event category', () => {
+      testEvent.categories.push('IAM VAC')
+      testEvent.categories.push('ignore')
+      const event = first(eventMatching.match([testEvent]))
+      strictEqual(event.isSystemIgnored, true)
+    })
+
+    it('IAM VAC in categories takes presedence before [ignore] (lowercase) in body', () => {
+      testEvent.categories.push('IAM VAC')
+      testEvent.body = 'This is the body of the event [ignore]'
+      const event = first(eventMatching.match([testEvent]))
+      notStrictEqual(event.isSystemIgnored, true)
+    })
+
+    it('IGNORE (uppercase) in title should set the event as ignored', () => {
+      testEvent.title = 'Please IGNORE this event'
+      const event = first(eventMatching.match([testEvent]))
+      strictEqual(event.isSystemIgnored, true)
+    })
+  })
+
+  describe('Matching event labels', () => {
+    it('{crayon-timereg} in categories should add matching label', () => {
+      testEvent.categories.push('crayon-timereg')
+      const event = first(eventMatching.match([testEvent]))
+      strictEqual(
+        any(event.labels, lbl => lbl.name === 'crayon-timereg'),
+        true
+      )
+    })
+  })
+})
+
+describe('Utils', async () => {
+  describe('getDurationHours', () => {
+    it('should return 0', () => {
+      const start = new Date().toISOString()
+      const end = new Date().toISOString()
+      const duration = utils.getDurationHours(start, end)
+      strictEqual(duration, 0)
+    })
+
+    it('should return 3', () => {
+      const start = new Date(2020, 10, 20, 13, 00).toISOString()
+      const end = new Date(2020, 10, 20, 16, 00).toISOString()
+      const duration = utils.getDurationHours(start, end)
+      strictEqual(duration, 3)
     })
 
     describe('Match against project', () => {

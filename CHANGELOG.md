@@ -4,7 +4,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.6.0 - Unreleased (12.06.2020)
+## 0.8.0 - 15.11.2020 (unreleased)
+
+## 0.7.0 - 15.10.2020
+### Added
+- Did now supports forecasting #355
+- Better mobile navigation with descriptive labels #539,#588
+- We now have custom error pages #502
+- Better error messages #579
+- Showing aggregated hours per group in Reports #541
+- Support for setting Projects to inactive in UI #524
+- Better log in/log out experience #485
+
+### Fixed
+- Fixed an issue with split weeks where the returned events and total hours were wrong #578
+- Missing week summary on Admin page #569 
+- Could not open week picker in Timesheet under certain conditions #558
+- Did now properly matches ÆØÅ in customer and project keys #550
+
+## 0.6.0 - 09.09.2020
+### Added
+- Rebrand to just "Did" #412
+- Improved reports landing page #505
+- Added customers as a separate column in the Timesheet overview #496
+- Show project ID (full key) in ProjectColumnTooltip #495
+- Enabling GraphQL to be called externally using authorization tokens #478
+- Show labels in the Summary view #461
+- Possibility of tagging projects with labels in UI #333
+- Deep linking for Projects #435
+
+### Fixed
+- Fixed soft match functionality (matching without (), [], {}) #489
+- Customer entries with leading/trailing spaces are un-matchable #426
 
 ## 0.5.0 - 22.5.2020
 

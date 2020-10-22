@@ -10,9 +10,9 @@ _The Calendar is The Timesheet in The Cloud_
 | [Beryllium](https://github.com/Puzzlepart/did365/milestone/4) | 22.05.2020 |  0.5.0
 | [Boron](https://github.com/Puzzlepart/did365/milestone/5) | 19.08.2020 | 0.6.0
 | [Carbon](https://github.com/Puzzlepart/did365/milestone/6) | 09.09.2020 | 0.7.0
-| [Nitrogen](https://github.com/Puzzlepart/did365/milestone/7) | 09.10.2020 | 0.8.0
-| [Oxygen](https://github.com/Puzzlepart/did365/milestone/8) | N/A | 0.9.0
-| [Fluor](https://github.com/Puzzlepart/did365/milestone/9) | N/A | 1.0.0
+| [Nitrogen](https://github.com/Puzzlepart/did365/milestone/7) | 15.10.2020 | 0.8.0
+| [Oxygen](https://github.com/Puzzlepart/did365/milestone/8) | 15.11.2020 | 0.9.0
+| [Fluor](https://github.com/Puzzlepart/did365/milestone/9) | 15.12.2020 | 1.0.0
 
 ### Environments
 
