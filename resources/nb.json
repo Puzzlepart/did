@@ -46,7 +46,9 @@
     "errorMessageText": "Det oppsto et problem med å hente ut timelisten din. \nPrøv igjen senere...",
     "exchangeLicenseErrorMessageText": "Kunne ikke laste inn timelisten. \nDet ser ut til at du ikke har en aktiv Exchange Online-lisens. \nKontakt administratoren din.",
     "forecastHoursSecondaryText": "Lag en prognose for uken",
-    "confirmHoursSecondaryText": "Bekreft gjeldende uke"
+    "confirmHoursSecondaryText": "Bekreft gjeldende uke",
+    "unforecastHoursSecondaryText": "Fjern prognosen for uken",
+    "unconfirmHoursSecondaryText": "Bekreft gjeldende uke"
   },
   "projects": {
     "inactiveText": "Dette prosjektet er markert som inaktivt.",
