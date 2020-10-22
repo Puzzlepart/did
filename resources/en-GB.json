@@ -37,7 +37,7 @@
     "projectInactiveErrorText": "The project is no longer active. Edit the event in Outlook.",
     "forecastHoursText": "Forecast hours",
     "unforecastHoursText": "Remove forecast",
-    "periodForecastedText": "The period is forecasted with {{hours}}. Click **Remove forecast** if you want to do some adjustments.",
+    "periodForecastedText": "The period is forecasted with {{hours}}. Click **Remove forecast** if you want to do some adjustments to the forecast.",
     "matchEventPanelHeaderText": "Resolve event",
     "unforecastingPeriodDescription": "Hang on a minute...",
     "unforecastingPeriodLabel": "Removing forecast",

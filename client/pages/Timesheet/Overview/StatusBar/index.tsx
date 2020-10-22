@@ -23,7 +23,7 @@ export const StatusBar = () => {
 
     const messages: IUserMessageProps[] = [
         {
-            hidden: context.selectedPeriod.isLocked,
+            hidden: context.selectedPeriod.isConfirmed,
             text: t(
                 'timesheet.periodHoursSummaryText',
                 { hours: dateUtils.getDurationString(context.selectedPeriod.totalDuration, t) }
@@ -40,7 +40,7 @@ export const StatusBar = () => {
             iconName: 'BufferTimeBoth'
         },
         {
-            hidden: !context.selectedPeriod.isComplete || context.selectedPeriod.isLocked,
+            hidden: !context.selectedPeriod.isComplete || context.selectedPeriod.isConfirmed,
             text: t('timesheet.allHoursMatchedText'),
             type: MessageBarType.success,
             iconName: 'BufferTimeBoth'
@@ -66,7 +66,7 @@ export const StatusBar = () => {
             iconName: 'BufferTimeBoth'
         },
         {
-            hidden: isEmpty(context.selectedPeriod.ignoredEvents) || context.selectedPeriod.isLocked,
+            hidden: isEmpty(context.selectedPeriod.ignoredEvents) || context.selectedPeriod.isConfirmed,
             iconName: 'DependencyRemove',
             children: (
                 <p>

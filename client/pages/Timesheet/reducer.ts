@@ -7,15 +7,15 @@ import { ITimesheetScopeOptions, ITimesheetState, TimesheetPeriod, TimesheetScop
 
 export type TimesheetAction =
   | {
-    type: 'DATA_UPDATED'
-    payload: {
-      query: QueryResult<any>
-      t: TFunction
+      type: 'DATA_UPDATED'
+      payload: {
+        query: QueryResult<any>
+        t: TFunction
+      }
     }
-  }
   | { type: 'MOVE_SCOPE'; payload: ITimesheetScopeOptions | string }
-  | { type: 'SUBMITTING_PERIOD'; payload: { t: TFunction, forecast: boolean } }
-  | { type: 'UNSUBMITTING_PERIOD'; payload: { t: TFunction, forecast: boolean } }
+  | { type: 'SUBMITTING_PERIOD'; payload: { t: TFunction; forecast: boolean } }
+  | { type: 'UNSUBMITTING_PERIOD'; payload: { t: TFunction; forecast: boolean } }
   | { type: 'CHANGE_PERIOD'; payload: string }
   | { type: 'CHANGE_VIEW'; payload: TimesheetView }
   | { type: 'MANUAL_MATCH'; payload: { eventId: string; project: IProject } }
@@ -39,9 +39,9 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
         const { loading, data, error } = action.payload.query
         newState.loading = loading
           ? {
-            label: t('timesheet.loadingEventsLabel'),
-            description: t('timesheet.loadingEventsDescription'),
-          }
+              label: t('timesheet.loadingEventsLabel'),
+              description: t('timesheet.loadingEventsDescription'),
+            }
           : null
         if (data) {
           newState.periods = data.timesheet.map(period => new TimesheetPeriod(period))
@@ -54,9 +54,7 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
 
     case 'SUBMITTING_PERIOD':
       newState.loading = {
-        label: action.payload.forecast
-          ? t('timesheet.forecastingPeriodLabel')
-          : t('timesheet.confirmingPeriodLabel'),
+        label: action.payload.forecast ? t('timesheet.forecastingPeriodLabel') : t('timesheet.confirmingPeriodLabel'),
         description: action.payload.forecast
           ? t('timesheet.forecastingPeriodDescription')
           : t('timesheet.confirmingPeriodDescription'),
