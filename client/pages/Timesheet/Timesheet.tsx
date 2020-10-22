@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import { AppContext } from 'AppContext'
-import { HotkeyModal, MobileHeader } from 'components'
+import { HotkeyModal } from 'components'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import React, { useContext, useEffect, useMemo, useReducer } from 'react'
 import { GlobalHotKeys } from 'react-hotkeys'
@@ -60,16 +60,22 @@ export const Timesheet = () => {
         useMutation(graphql.mutation.unsubmitPeriod),
     ]
 
-    const onSubmitPeriod = async () => {
+    const onSubmitPeriod = async (forecast: boolean) => {
         dispatch({ type: 'SUBMITTING_PERIOD', payload: { t } })
-        const variables = { period: state.selectedPeriod.data }
+        const variables = { 
+            period: state.selectedPeriod.data,        
+            forecast
+        }
         await submitPeriod({ variables })
         query.refetch()
     }
 
-    const onUnsubmitPeriod = () => {
+    const onUnsubmitPeriod = (forecast: boolean) => {
         dispatch({ type: 'UNSUBMITTING_PERIOD', payload: { t } })
-        const variables = { period: state.selectedPeriod.data }
+        const variables = {
+             period: state.selectedPeriod.data, 
+             forecast
+        }
         unsubmitPeriod({ variables }).then(query.refetch)
     }
 
