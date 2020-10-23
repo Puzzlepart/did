@@ -4,9 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.8.0 - 15.11.2020 (unreleased)
+## 0.9.0 - 15.11.2020 (unreleased)
 
-## 0.7.0 - 15.10.2020
+## 0.8.0 - 15.10.2020
 ### Added
 - Did now supports forecasting #355
 - Better mobile navigation with descriptive labels #539,#588
@@ -22,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Could not open week picker in Timesheet under certain conditions #558
 - Did now properly matches ÆØÅ in customer and project keys #550
 
-## 0.6.0 - 09.09.2020
+## 0.7.0 - 09.09.2020
 ### Added
 - Rebrand to just "Did" #412
 - Improved reports landing page #505
@@ -36,6 +36,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fixed soft match functionality (matching without (), [], {}) #489
 - Customer entries with leading/trailing spaces are un-matchable #426
+
+## 0.6.0 - N/A
+Need details.
 
 ## 0.5.0 - 22.5.2020
 

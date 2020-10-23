@@ -1,10 +1,11 @@
 const { first } = require('underscore')
 const AzTableUtilities = require('../utils/table')
+const env = require('../utils/env')
 const { createTableService } = require('azure-storage')
 
 class SubscriptionService {
   constructor() {
-    this.tableService = createTableService(process.env.AZURE_STORAGE_CONNECTION_STRING)
+    this.tableService = createTableService(env('AZURE_STORAGE_CONNECTION_STRING'))
     this.tableUtil = new AzTableUtilities(this.tableService)
   }
   /**

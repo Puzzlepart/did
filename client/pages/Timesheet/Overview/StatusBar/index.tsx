@@ -18,55 +18,60 @@ export const StatusBar = () => {
     const defaultMessageProps: IUserMessageProps = {
         className: styles.message,
         fixedCenter: 65,
-        containerStyle: { padding: '0 4px 0 4px' },
+        containerStyle: {},
     }
 
-    const messages: IUserMessageProps[] = [
-        {
+    const messages: IUserMessageProps[] = []
+
+    if (!context.selectedPeriod.isLocked) {
+        messages.push({
             hidden: context.selectedPeriod.isLocked,
             text: t(
                 'timesheet.periodHoursSummaryText',
                 { hours: dateUtils.getDurationString(context.selectedPeriod.totalDuration, t) }
             ),
             iconName: 'ReminderTime'
-        },
-        {
-            hidden: context.selectedPeriod.isComplete || context.selectedPeriod.isConfirmed || context.selectedPeriod.isForecast,
+        })
+    }
+    if (!context.selectedPeriod.isComplete && !context.selectedPeriod.isForecast) {
+        messages.push({
             text: t(
                 'timesheet.hoursNotMatchedText',
                 { hours: dateUtils.getDurationString(context.selectedPeriod.unmatchedDuration, t) }
             ),
             type: MessageBarType.warning,
             iconName: 'BufferTimeBoth'
-        },
-        {
-            hidden: !context.selectedPeriod.isComplete || context.selectedPeriod.isLocked,
+        })
+    }
+    if (context.selectedPeriod.isComplete && !context.selectedPeriod.isLocked) {
+        messages.push({
             text: t('timesheet.allHoursMatchedText'),
             type: MessageBarType.success,
             iconName: 'BufferTimeBoth'
-        },
-        {
-
-            hidden: !context.selectedPeriod.isConfirmed,
+        })
+    }
+    if (context.selectedPeriod.isConfirmed) {
+        messages.push({
             text: t(
                 'timesheet.periodConfirmedText',
                 { hours: dateUtils.getDurationString(context.selectedPeriod.matchedDuration, t) }
             ),
             type: MessageBarType.success,
             iconName: 'CheckMark'
-        },
-        {
-
-            hidden: !context.selectedPeriod.isForecasted,
+        })
+    }
+    if (context.selectedPeriod.isForecasted) {
+        messages.push({
             text: t(
                 'timesheet.periodForecastedText',
                 { hours: dateUtils.getDurationString(context.selectedPeriod.matchedDuration, t) }
             ),
             type: MessageBarType.success,
             iconName: 'BufferTimeBoth'
-        },
-        {
-            hidden: isEmpty(context.selectedPeriod.ignoredEvents) || context.selectedPeriod.isLocked,
+        })
+    }
+    if (!isEmpty(context.selectedPeriod.ignoredEvents) && !context.selectedPeriod.isLocked) {
+        messages.push({
             iconName: 'DependencyRemove',
             children: (
                 <p>
@@ -74,19 +79,21 @@ export const StatusBar = () => {
                     <a href='#' onClick={() => context.dispatch({ type: 'CLEAR_IGNORES' })}>{t('timesheet.undoIgnoreText')}</a>
                 </p>
             )
-        },
-        {
-            hidden: context.selectedPeriod.errors.length === 0,
+        })
+    }
+    if (!isEmpty(context.selectedPeriod.errors)) {
+        messages.push({
             type: MessageBarType.severeWarning,
             text: t('timesheet.unresolvedErrorText', { count: context.selectedPeriod.errors.length }),
             iconName: 'ErrorBadge'
-        },
-        {
-            hidden: context.periods.length < 2,
+        })
+    }
+    if (context.periods.length > 1) {
+        messages.push({
             text: t('timesheet.splitWeekInfoText'),
             iconName: 'SplitObject'
-        },
-    ]
+        })
+    }
 
     return (
         <div className={styles.root}>

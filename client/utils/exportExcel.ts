@@ -18,11 +18,9 @@ export type ExcelColumnType = 'date' | null
  * @param {any[]} items An array of items
  * @param {IExcelExportOptions} options Options
  *
- * @return Returns the generate blob
- *
- * @category Utility
+ * @return Returns the generated blob
  */
-export async function exportExcel(items: any[], options: IExcelExportOptions): Promise<void> {
+export async function exportExcel(items: any[], options: IExcelExportOptions): Promise<Blob> {
   await loadScripts([
     'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.5/xlsx.full.min.js',
@@ -73,4 +71,5 @@ export async function exportExcel(items: any[], options: IExcelExportOptions): P
     type: 'application/octet-stream',
   })
   ;(window as any).saveAs(blob, options.fileName)
+  return blob
 }
