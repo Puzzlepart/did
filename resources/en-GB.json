@@ -37,14 +37,18 @@
     "projectInactiveErrorText": "The project is no longer active. Edit the event in Outlook.",
     "forecastHoursText": "Forecast hours",
     "unforecastHoursText": "Remove forecast",
-    "periodForecastedText": "The period is forecasted with {{hours}}. Click **Remove forecast** if you want to do some adjustments.",
+    "periodForecastedText": "The period is forecasted with {{hours}}. Click **Remove forecast** if you want to do some adjustments to the forecast.",
     "matchEventPanelHeaderText": "Resolve event",
     "unforecastingPeriodDescription": "Hang on a minute...",
     "unforecastingPeriodLabel": "Removing forecast",
     "forecastingPeriodLabel": "Forecasting period",
     "forecastingPeriodDescription": "Hang on a minute...",
     "errorMessageText": "There was a problem fetching your timesheet. Please try again later...",
-    "exchangeLicenseErrorMessageText": "Could not load timesheet. It seems you don't have an active Exchange Online license. Please contact your administrator."
+    "exchangeLicenseErrorMessageText": "Could not load timesheet. It seems you don't have an active Exchange Online license. Please contact your administrator.",
+    "confirmHoursSecondaryText": "Confirm the current week",
+    "forecastHoursSecondaryText": "Create a forecast for the week",
+    "unconfirmHoursSecondaryText": "Unconfirm current week",
+    "unforecastHoursSecondaryText": "Remove forecast for the week"
   },
   "projects": {
     "inactiveText": "This project has been marked as inactive.",

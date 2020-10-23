@@ -227,7 +227,9 @@ describe('AzTableUtilities', async () => {
         'default',
         {
           removeBlanks: true,
-          dateFields: ['modified']
+          typeMap: {
+            modified: 'datetime',
+          }
         }
       )
       deepStrictEqual(entity.PartitionKey._, 'default')

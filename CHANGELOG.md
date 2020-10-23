@@ -5,11 +5,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## 0.9.0 - 15.11.2020 (unreleased)
+## Added
+- Changes to forecast/confirm actions #605
+
 
 ## 0.8.0 - 15.10.2020
 ### Added
 - Did now supports forecasting #355
-- Better mobile navigation with descriptive labels #539,#588
+- Better mobile navigation with descriptive labels #539, #588
 - We now have custom error pages #502
 - Better error messages #579
 - Showing aggregated hours per group in Reports #541

@@ -54,6 +54,11 @@ export interface ITimesheetPeriod {
    * Is the period in the future
    */
   isForecast: boolean
+
+  /**
+   * Forecasted hours
+   */
+  forecastedHours: number
 }
 
 export interface ITimesheetPeriodMatchedEvent {
@@ -62,14 +67,50 @@ export interface ITimesheetPeriodMatchedEvent {
   manualMatch: boolean
 }
 
+/**
+ * Timesheet period data used when submitting/unsubmitting the period
+ */
 export interface ITimesheetPeriodData {
+  /**
+   * Identifier for the period week_month_year
+   */
   id: string
+
+  /**
+   * Start date time ISO string
+   */
   startDateTime: string
+
+  /**
+   * End date time ISO string
+   */
   endDateTime: string
+
+  /**
+   * Matched events
+   *
+   * * {string} id
+   * * {string} projectId
+   * * {boolean} manualMatch
+   */
   matchedEvents: ITimesheetPeriodMatchedEvent[]
-  isForecast: boolean
+
+  /**
+   * Forecasted hours
+   */
+  forecastedHours: number
 }
 
+/**
+ * Timesheet period. Divided by week, month and year.
+ *
+ * E.g. a week which spans both February and March will generate two periods:
+ *
+ * * w_2_y
+ * * w_3_y
+ *
+ * Where x is the week number and y is the year
+ */
 export class TimesheetPeriod {
   /**
    * Identifier for the period week_month_year
@@ -90,6 +131,11 @@ export class TimesheetPeriod {
    * Is the period in the future and available for forecasting
    */
   public isForecast: boolean
+
+  /**
+   * Forecasted hours
+   */
+  public forecastedHours: number
 
   /**
    * Events ignored in UI
@@ -152,6 +198,7 @@ export class TimesheetPeriod {
     this.isConfirmed = _period.isConfirmed
     this.isForecasted = _period.isForecasted
     this.isForecast = _period.isForecast
+    this.forecastedHours = _period.forecastedHours
     this._uiMatchedEventsStorageKey = `did365_ui_matched_events_${this.id}`
     this._uiIgnoredEventsStorageKey = `did365_ui_ignored_events_${this.id}`
     this._uiIgnoredEvents = this._localStorage.get(this._uiIgnoredEventsStorageKey) || []
@@ -281,7 +328,12 @@ export class TimesheetPeriod {
   }
 
   /**
-   * Get matched events with properties id, projectId and manualMatch
+   * Get matched events with properties
+   *
+   * @returns
+   * * {string} id
+   * * {string} projectId
+   * * {boolean} manualMatch
    */
   private get matchedEvents(): ITimesheetPeriodMatchedEvent[] {
     const events = filter([...this.events], event => !!event.project).map(
@@ -298,12 +350,13 @@ export class TimesheetPeriod {
   /**
    * Get data for the period
    *
-   * Returns properties
-   * * id
-   * * startDateTime
-   * * endDateTime
-   * * matchedEvents
-   * * forecast
+   * @returns
+   * * {string} id
+   * * {string} startDateTime
+   * * {string} endDateTime
+   * * {ITimesheetPeriodMatchedEvent[]} matchedEvents
+   * * {boolean} forecast
+   * * {number} forecastedHours
    */
   public get data(): ITimesheetPeriodData {
     if (!this.isLoaded) return null
@@ -312,7 +365,7 @@ export class TimesheetPeriod {
       startDateTime: this._startDateTime.toISOString(),
       endDateTime: this._endDateTime.toISOString(),
       matchedEvents: this.matchedEvents,
-      isForecast: this.isForecast,
+      forecastedHours: this.forecastedHours,
     }
   }
 
@@ -338,6 +391,8 @@ export class TimesheetPeriod {
 
   /**
    * Period is complete meaning all events are matched
+   *
+   * @returns true if the unmatched duration (unmatchedDuration) is equal to zero (0)
    */
   public get isComplete(): boolean {
     return this.unmatchedDuration === 0
@@ -345,6 +400,8 @@ export class TimesheetPeriod {
 
   /**
    * Period is locked when it's either confirmed or forecasted
+   *
+   * @returns true if the period is either confirmed (isConfirmed) or forecasted (isForecasted)
    */
   public get isLocked() {
     return this.isConfirmed || this.isForecasted
@@ -352,8 +409,19 @@ export class TimesheetPeriod {
 
   /**
    * Period data is loaded
+   *
+   * @returns true if the period id is not blank
    */
   public get isLoaded() {
     return !isBlank(this.id)
+  }
+
+  /**
+   * Period is in the past
+   *
+   * @returns true if the period end date time is before today
+   */
+  public get isPast(): boolean {
+    return this._endDateTime && this._endDateTime.isBefore()
   }
 }
