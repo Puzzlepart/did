@@ -58,7 +58,7 @@ export interface IReportsState {
  * 
  * @param {TFunction} t Translate function
  */
-export const getQueries = (t: TFunction): IReportsQuery[] => {
+export function getQueries<T = IReportsQuery>(t: TFunction): T[] {
     const lastMonth = dateUtils.getMonthYear(dateUtils.subtractMonths())
     const currentMonth = dateUtils.getMonthYear()
     const currentYear = { year: dateUtils.getYear() }
@@ -69,7 +69,7 @@ export const getQueries = (t: TFunction): IReportsQuery[] => {
             iconName: 'CalendarDay',
             variables: lastMonth,
             exportFileName: `TimeEntries-${capitalize(lastMonth.monthName)}-{0}.xlsx`,
-        },
+        } as unknown as T,
         {
 
             key: 'CURRENT_MONTH',
@@ -77,14 +77,14 @@ export const getQueries = (t: TFunction): IReportsQuery[] => {
             iconName: 'Calendar',
             variables: currentMonth,
             exportFileName: `TimeEntries-${capitalize(currentMonth.monthName)}-{0}.xlsx`,
-        },
+        } as unknown as T,
         {
             key: 'CURRENT_YEAR',
             text: t('common.exportTypeCurrentYear', currentYear),
             iconName: 'CalendarReply',
             variables: currentYear,
             exportFileName: `TimeEntries-${currentYear.year}-{0}.xlsx`,
-        },
+        } as unknown as T,
         {
             key: 'FORECAST',
             text: t('reports.forecast'),
@@ -95,7 +95,7 @@ export const getQueries = (t: TFunction): IReportsQuery[] => {
                 startDateTime: new Date().toISOString(),
             },
             exportFileName: 'Forecast-{0}.xlsx',
-        }
+        } as unknown as T,
     ]
 }
 

@@ -17,6 +17,6 @@ export interface IExportType extends IChoiceGroupOption {
  * @param {TFunction} t Translate function
  */
 export const getExportTypes = (t: TFunction): IExportType[] => {
-  const queries = getQueries(t) as any[]
+  const queries = getQueries<IExportType>(t)
   return filter(queries, ({ key }) => key !== 'FORECAST')
 }
