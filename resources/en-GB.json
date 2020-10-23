@@ -247,7 +247,12 @@
       "closeButtonAriaLabel": "Close"
     },
     "preferredLanguageLabel": "Preferred language",
-    "showAllFiltersText": "Show all ({{count}})"
+    "showAllFiltersText": "Show all ({{count}})",
+    "exportMyHours": "Export my hours",
+    "export": "Export",
+    "exportTypeLastMonth": "Last month ({{monthName}})",
+    "exportTypeCurrentMonth": "Current month ({{monthName}})",
+    "exportTypeCurrentYear": "This year ({{year}})"
   },
   "navigation": {
     "timesheet": "Timesheet",
