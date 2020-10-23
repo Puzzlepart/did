@@ -14,8 +14,8 @@ const bearerToken = require('express-bearer-token')
 const { pick } = require('underscore')
 
 class App {
-  constructor() {
-    this._ = express()
+  constructor(app) {
+    this._ = app
     this._.use(require('./middleware/helmet'))
     this._.use(favicon(path.join(__dirname, pkg.config.public, 'images/favicon/favicon.ico')))
     this._.use(logger('dev'))
@@ -109,4 +109,4 @@ class App {
   }
 }
 
-module.exports = new App()
+module.exports = new App(express())
