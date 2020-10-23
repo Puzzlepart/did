@@ -1,6 +1,6 @@
 const { first, find, filter, contains, isEmpty } = require('underscore')
 const { findBestMatch } = require('string-similarity')
-const value = require('get-value')
+const get = require('get-value')
 const { EVENT_ERROR } = require('./timesheet.utils')
 
 class EventMatching {
@@ -139,8 +139,8 @@ class EventMatching {
    * @param {*} event
    */
   checkInactive(event) {
-    const inactiveProject = value(event, 'project.inactive')
-    const inactiveCustomer = value(event, 'customer.inactive')
+    const inactiveProject = get(event, 'project.inactive')
+    const inactiveCustomer = get(event, 'customer.inactive')
     if (event.project && (inactiveProject || inactiveCustomer)) {
       if (inactiveProject) event.error = { code: 'PROJECT_INACTIVE' }
       if (inactiveCustomer) event.error = { code: 'CUSTOMER_INACTIVE' }

@@ -1,7 +1,8 @@
 const az = require('azure-storage')
-const { omit, contains } = require('underscore')
+const { omit, contains, isNull } = require('underscore')
 const { decapitalize, capitalize, isBlank } = require('underscore.string')
 const { reduceEachLeadingCommentRange } = require('typescript')
+const get = require('get-value')
 
 class AzTableUtilities {
   constructor(tableService) {
@@ -171,41 +172,46 @@ class AzTableUtilities {
 
   /**
    * Converts a JSON object to an Azure Table Storage entity
+   * 
+   * Does a best effort to get the correct type of the values
+   * 
+   * Can be some issues to differ between double and int
+   * 
+   * If unsure, specifiy typeMap in options
    *
    * @param {*} rowKey Row key
    * @param {*} values Values
    * @param {*} partitionKey Partition key
-   * @param {*} options Options (removeBlanks defaults to true, dateFields has no default value)
+   * @param {*} options Options (removeBlanks defaults to true, typeMap defaults to empty object)
    */
-  convertToAzEntity(rowKey, values, partitionKey = 'Default', options = { removeBlanks: true }) {
+  convertToAzEntity(rowKey, values, partitionKey = 'Default', options = { removeBlanks: true, typeMap: {} }) {
     const { string, datetime, double, int, boolean } = this.azEntGen()
     const entity = Object.keys(values)
-      .filter(key => values[key] !== null)
+      .filter(key => !isNull(values[key]))
       .filter(key => (options.removeBlanks ? !isBlank(values[key]) : true))
-      .reduce(
-        (obj, key) => {
-          let value
-          switch (typeof values[key]) {
-            case 'boolean':
-              value = boolean(values[key])
-              break
-            case 'number':
-              {
-                if (values[key] % 1 === 0) value = int(values[key])
-                else value = double(values[key])
-              }
-              break
-            default:
-              {
-                const isDate = contains(options.dateFields || [], key)
-                if (isDate) value = datetime(new Date(values[key]))
-                else value = string(values[key].trim())
-              }
-              break
+      .reduce((obj, key) => {
+        let value = values[key]
+        const type = get(options, `typeMap.${key}`, { default: typeof value })
+        switch (type) {
+          case 'datetime': value = datetime(new Date(value))
+            break
+          case 'boolean': value = boolean(value)
+            break;
+          case 'number':
+            {
+              if (value % 1 === 0) value = int(value)
+              else value = double(value)
+            }
+            break
+          default: {
+            if (!!type) value = this.azEntGen()[type](value)
+            else value = string(value.trim())
           }
-          obj[capitalize(key)] = value
-          return obj
-        },
+            break
+        }
+        obj[capitalize(key)] = value
+        return obj
+      },
         {
           PartitionKey: string(partitionKey),
           RowKey: string(rowKey),

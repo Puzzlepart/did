@@ -1,4 +1,4 @@
-import getValue from 'get-value'
+import get from 'get-value'
 
 /**
  * Converts string to array buffer
@@ -45,7 +45,7 @@ export function currencyDisplay(num: number, currency: string = 'NOK', minimumFr
  * @category Helper
  */
 export function value<T>(obj: any, exp: string, defaultValue?: T): T {
-  return getValue(obj, exp, defaultValue && { default: defaultValue })
+  return get(obj, exp, defaultValue && { default: defaultValue })
 }
 
 /**

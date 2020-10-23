@@ -35,7 +35,7 @@
     "eventNotFullyMatchedText": "Hendelse kunne ikke matches. Vi fant matchende kunde **{{name}}**, men ikke noe prosjekt med den spesifiserte nøkkelen.",
     "unforecastHoursText": "Fjern prognose",
     "forecastHoursText": "Lagre prognose",
-    "periodForecastedText": "Perioden er prognostisert med {{hours}}. \nKlikk **Fjern prognose** hvis du vil gjøre noen justeringer.",
+    "periodForecastedText": "Perioden er prognostisert med {{hours}}. \nKlikk **Fjern prognose** dersom du vil gjøre noen justeringer på prognosen.",
     "matchEventPanelHeaderText": "Løs hendelsen",
     "customerInactiveError": "Kunden er ikke lenger aktiv. Løs hendelsen i Outlook.",
     "projectInactiveError": "Prosjektet er ikke lenger aktivt. Løs hendelsen i Outlook.",
@@ -44,7 +44,11 @@
     "forecastingPeriodLabel": "Lagrer prognose",
     "forecastingPeriodDescription": "Vent et lite øyeblikk...",
     "errorMessageText": "Det oppsto et problem med å hente ut timelisten din. \nPrøv igjen senere...",
-    "exchangeLicenseErrorMessageText": "Kunne ikke laste inn timelisten. \nDet ser ut til at du ikke har en aktiv Exchange Online-lisens. \nKontakt administratoren din."
+    "exchangeLicenseErrorMessageText": "Kunne ikke laste inn timelisten. \nDet ser ut til at du ikke har en aktiv Exchange Online-lisens. \nKontakt administratoren din.",
+    "forecastHoursSecondaryText": "Lag en prognose for uken",
+    "confirmHoursSecondaryText": "Bekreft gjeldende uke",
+    "unforecastHoursSecondaryText": "Fjern prognosen for uken",
+    "unconfirmHoursSecondaryText": "Bekreft gjeldende uke"
   },
   "projects": {
     "inactiveText": "Dette prosjektet er markert som inaktivt.",
