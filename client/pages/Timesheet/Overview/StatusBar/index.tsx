@@ -33,73 +33,78 @@ export const StatusBar = () => {
             iconName: 'ReminderTime'
         })
     }
-    messages.push({
-        hidden: context.selectedPeriod.isComplete || context.selectedPeriod.isConfirmed || context.selectedPeriod.isForecast,
-        text: t(
-            'timesheet.hoursNotMatchedText',
-            { hours: dateUtils.getDurationString(context.selectedPeriod.unmatchedDuration, t) }
-        ),
-        type: MessageBarType.warning,
-        iconName: 'BufferTimeBoth'
-    })
-    messages.push({
-        hidden: !context.selectedPeriod.isComplete || context.selectedPeriod.isLocked,
-        text: t('timesheet.allHoursMatchedText'),
-        type: MessageBarType.success,
-        iconName: 'BufferTimeBoth'
-    })
-    messages.push({
+    if (!context.selectedPeriod.isComplete && !context.selectedPeriod.isForecast) {
+        messages.push({
+            text: t(
+                'timesheet.hoursNotMatchedText',
+                { hours: dateUtils.getDurationString(context.selectedPeriod.unmatchedDuration, t) }
+            ),
+            type: MessageBarType.warning,
+            iconName: 'BufferTimeBoth'
+        })
+    }
+    if (context.selectedPeriod.isComplete && !context.selectedPeriod.isLocked) {
+        messages.push({
+            text: t('timesheet.allHoursMatchedText'),
+            type: MessageBarType.success,
+            iconName: 'BufferTimeBoth'
+        })
+    }
+    if (context.selectedPeriod.isConfirmed) {
+        messages.push({
+            text: t(
+                'timesheet.periodConfirmedText',
+                { hours: dateUtils.getDurationString(context.selectedPeriod.matchedDuration, t) }
+            ),
+            type: MessageBarType.success,
+            iconName: 'CheckMark'
+        })
+    }
+    if (context.selectedPeriod.isForecasted) {
+        messages.push({
+            text: t(
+                'timesheet.periodForecastedText',
+                { hours: dateUtils.getDurationString(context.selectedPeriod.matchedDuration, t) }
+            ),
+            type: MessageBarType.success,
+            iconName: 'BufferTimeBoth'
+        })
+    }
+    if (!isEmpty(context.selectedPeriod.ignoredEvents) && !context.selectedPeriod.isLocked) {
+        messages.push({
+            iconName: 'DependencyRemove',
+            children: (
+                <p>
+                    <span>{t('timesheet.ignoredEventsText', { ignored_count: context.selectedPeriod.ignoredEvents.length })}</span>
+                    <a href='#' onClick={() => context.dispatch({ type: 'CLEAR_IGNORES' })}>{t('timesheet.undoIgnoreText')}</a>
+                </p>
+            )
+        })
+    }
+    if (!isEmpty(context.selectedPeriod.errors)) {
+        messages.push({
+            type: MessageBarType.severeWarning,
+            text: t('timesheet.unresolvedErrorText', { count: context.selectedPeriod.errors.length }),
+            iconName: 'ErrorBadge'
+        })
+    }
+    if (context.periods.length > 1) {
+        messages.push({
+            text: t('timesheet.splitWeekInfoText'),
+            iconName: 'SplitObject'
+        })
+    }
 
-        hidden: !context.selectedPeriod.isConfirmed,
-        text: t(
-            'timesheet.periodConfirmedText',
-            { hours: dateUtils.getDurationString(context.selectedPeriod.matchedDuration, t) }
-        ),
-        type: MessageBarType.success,
-        iconName: 'CheckMark'
-    })
-    messages.push({
-
-        hidden: !context.selectedPeriod.isForecasted,
-        text: t(
-            'timesheet.periodForecastedText',
-            { hours: dateUtils.getDurationString(context.selectedPeriod.matchedDuration, t) }
-        ),
-        type: MessageBarType.success,
-        iconName: 'BufferTimeBoth'
-    })
-    messages.push({
-        hidden: isEmpty(context.selectedPeriod.ignoredEvents) || context.selectedPeriod.isLocked,
-        iconName: 'DependencyRemove',
-        children: (
-            <p>
-                <span>{t('timesheet.ignoredEventsText', { ignored_count: context.selectedPeriod.ignoredEvents.length })}</span>
-                <a href='#' onClick={() => context.dispatch({ type: 'CLEAR_IGNORES' })}>{t('timesheet.undoIgnoreText')}</a>
-            </p>
-        )
-    })
-    messages.push({
-        hidden: context.selectedPeriod.errors.length === 0,
-        type: MessageBarType.severeWarning,
-        text: t('timesheet.unresolvedErrorText', { count: context.selectedPeriod.errors.length }),
-        iconName: 'ErrorBadge'
-    })
-    messages.push({
-        hidden: context.periods.length < 2,
-        text: t('timesheet.splitWeekInfoText'),
-        iconName: 'SplitObject'
-    })
-
-return (
-    <div className={styles.root}>
-        <Shimmer styles={{ shimmerWrapper: { height: 65 } }} isDataLoaded={!context.loading} />
-        {!context.loading && (
-            <div className={styles.container}>
-                {messages.map((msg, id) => (
-                    <UserMessage key={id} {...defaultMessageProps} {...msg} />
-                ))}
-            </div>
-        )}
-    </div >
-)
+    return (
+        <div className={styles.root}>
+            <Shimmer styles={{ shimmerWrapper: { height: 65 } }} isDataLoaded={!context.loading} />
+            {!context.loading && (
+                <div className={styles.container}>
+                    {messages.map((msg, id) => (
+                        <UserMessage key={id} {...defaultMessageProps} {...msg} />
+                    ))}
+                </div>
+            )}
+        </div >
+    )
 }

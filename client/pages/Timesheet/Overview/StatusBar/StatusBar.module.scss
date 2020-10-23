@@ -8,7 +8,12 @@
     .message {
       flex-grow: 1;
       flex-basis: 0;
-      justify-content: space-evenly;
+      justify-content: space-between;
+      margin-right: 6px;
+
+      &:last-child {
+        margin: 0;
+      }
     }
   }
 }
