@@ -29,6 +29,7 @@ class App {
     this.setupGraphQL()
     this.setupRoutes()
     this.setupErrorHandling()
+    this._.disable('view cache')
   }
 
   /**
