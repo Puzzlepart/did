@@ -17,13 +17,13 @@ export const getExportTypes = (t: TFunction): IExportType[] => [
   {
     key: 'lastMonth',
     text: t('common.exportTypeLastMonth', { month: dateUtils.getMonthName(-1) }),
-    variables: { monthNumber: dateUtils.getMonthIndex() - 1, year: dateUtils.getYear() },
+    variables: dateUtils.getMonthYear(dateUtils.subtractMonths()),
     exportFileName: `TimeEntries-${dateUtils.getMonthName(-1, undefined, true)}-{0}.xlsx`,
   },
   {
     key: 'currentMonth',
     text: t('common.exportTypeCurrentMonth', { month: dateUtils.getMonthName(0) }),
-    variables: { monthNumber: dateUtils.getMonthIndex(), year: dateUtils.getYear() },
+    variables: dateUtils.getMonthYear(),
     exportFileName: `TimeEntries-${dateUtils.getMonthName(0, undefined, true)}-{0}.xlsx`,
   },
   {

@@ -53,7 +53,7 @@ export const getQueries = (t: TFunction): IReportsQuery[] => ([
         key: 'lastMonth',
         text: capitalize(dateUtils.getMonthName(-1)),
         iconName: 'CalendarDay',
-        variables: { monthNumber: dateUtils.getMonthIndex() - 1, year: dateUtils.getYear() },
+        variables: dateUtils.getMonthYear(dateUtils.subtractMonths()),
         exportFileName: `TimeEntries-${dateUtils.getMonthName(-1)}-{0}.xlsx`,
     },
     {
@@ -61,7 +61,7 @@ export const getQueries = (t: TFunction): IReportsQuery[] => ([
         key: 'currentMonth',
         text: capitalize(dateUtils.getMonthName(0)),
         iconName: 'Calendar',
-        variables: { monthNumber: dateUtils.getMonthIndex(), year: dateUtils.getYear() },
+        variables: dateUtils.getMonthYear(),
         exportFileName: `TimeEntries-${dateUtils.getMonthName(0)}-{0}.xlsx`,
     },
     {

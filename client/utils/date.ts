@@ -94,6 +94,40 @@ export default new (class DateUtils {
   }
 
   /**
+   * Add 1 month to current date
+   *
+   * @param {number} amount Defaults to 1
+   */
+  public addMonth(amount: number = 1) {
+    return moment().add(amount, 'month')
+  }
+
+  /**
+   * Subtract {amount} months from current date
+   *
+   * @param {number} amount Defaults to 1
+   */
+  public subtractMonths(amount: number = 1) {
+    return moment().subtract(amount, 'month')
+  }
+
+  /**
+   * Get month and year for the current date
+   *
+   * @param date Date
+   *
+   * @returns
+   * * {number} monthNumber
+   * * {number} year
+   */
+  public getMonthYear(date: moment.Moment = moment()) {
+    return {
+      monthNumber: date.month() + 1,
+      year: date.year(),
+    }
+  }
+
+  /**
    * Get month name for the speicifed month index
    *
    * Under 0: Subtracts {monthIndex} months from current month

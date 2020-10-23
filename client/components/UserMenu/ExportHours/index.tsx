@@ -1,9 +1,9 @@
 import { useId } from '@uifabric/react-hooks'
-import { format } from 'office-ui-fabric-react/lib/Utilities'
-import { ChoiceGroup } from 'office-ui-fabric-react/lib/ChoiceGroup'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
+import { ChoiceGroup } from 'office-ui-fabric-react/lib/ChoiceGroup'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { Panel } from 'office-ui-fabric-react/lib/Panel'
+import { format } from 'office-ui-fabric-react/lib/Utilities'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { first } from 'underscore'
@@ -13,7 +13,6 @@ import columns from '../columns'
 import styles from '../UserMenu.module.scss'
 import { query } from './graphql'
 import { getExportTypes, IExportType } from './types'
-import dateUtils from 'utils/date'
 
 export const ExportHours: React.FunctionComponent<{}> = () => {
     const { t } = useTranslation()
