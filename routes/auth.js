@@ -1,11 +1,12 @@
-var express = require('express')
-var passport = require('passport')
-var router = express.Router()
+const express = require('express')
+const passport = require('passport')
+const env = require('../utils/env')
+const router = express.Router()
 
 router.get('/signin', (req, res, next) => {
   passport.authenticate('azuread-openidconnect', {
     response: res,
-    prompt: process.env.OAUTH_SIGNIN_PROMPT,
+    prompt: env('OAUTH_SIGNIN_PROMPT'),
     failureRedirect: '/',
   })(req, res, next)
 })

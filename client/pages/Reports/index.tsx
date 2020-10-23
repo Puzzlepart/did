@@ -15,3 +15,5 @@ export default () => {
         </Switch>
     )
 }
+
+export * from './types'

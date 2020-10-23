@@ -1,6 +1,7 @@
 global.fetch = require('node-fetch')
 const TokenService = require('./tokens')
 const utils = require('../utils')
+const env = require('../utils/env')
 const log = require('debug')('services/msgraph')
 const MSGraphEvent = require('./msgraph.event')
 const { first } = require('underscore')
@@ -12,7 +13,7 @@ class MSGraphService {
   * Constructs a new MSGraphService
   */
   constructor() {
-    appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY)
+    appInsights.setup(env('APPINSIGHTS_INSTRUMENTATIONKEY'))
     this.observer = new PerformanceObserver(list => {
       const { name, duration } = first(list.getEntries())
       appInsights.defaultClient.trackMetric({

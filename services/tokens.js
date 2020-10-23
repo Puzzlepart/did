@@ -1,13 +1,14 @@
 const log = require('debug')('services/tokens')
+const env = require('../utils/env')
 const simpleoauth2 = require('simple-oauth2').create({
   client: {
-    id: process.env.OAUTH_APP_ID,
-    secret: process.env.OAUTH_APP_PASSWORD,
+    id: env('OAUTH_APP_ID'),
+    secret: env('OAUTH_APP_PASSWORD'),
   },
   auth: {
-    tokenHost: process.env.OAUTH_AUTHORITY,
-    authorizePath: process.env.OAUTH_AUTHORIZE_ENDPOINT,
-    tokenPath: process.env.OAUTH_TOKEN_ENDPOINT,
+    tokenHost: env('OAUTH_AUTHORITY'),
+    authorizePath: env('OAUTH_AUTHORIZE_ENDPOINT'),
+    tokenPath: env('OAUTH_TOKEN_ENDPOINT'),
   },
 })
 

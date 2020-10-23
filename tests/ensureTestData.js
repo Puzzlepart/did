@@ -1,15 +1,16 @@
 require('dotenv').config()
 const fs = require('fs')
 const path = require('path')
+const env = require('../utils/env')
 const AzStorageService = require('../services/azstorage')
 const log = require('debug')('tests/ensureTestData')
 
 let azstorage = new AzStorageService({
-  connectionString: process.env.TESTS_AZURE_STORAGE_CONNECTION_STRING
+  connectionString: env('TESTS_AZURE_STORAGE_CONNECTION_STRING')
 })
 
 module.exports = () => new Promise((resolve, reject) => {
-  if (!process.env.TESTS_AZURE_STORAGE_CONNECTION_STRING) {
+  if (!env('TESTS_AZURE_STORAGE_CONNECTION_STRING')) {
     log('Missing environment variable TESTS_AZURE_STORAGE_CONNECTION_STRING')
     reject()
   } else {

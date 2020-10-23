@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import styles from './Navigation.module.scss'
 import { NavItem } from './NavItem'
-import { UserMenu } from './UserMenu'
+import { UserMenu } from '../UserMenu'
 import { isMobile } from 'react-device-detect'
 import * as permissions from 'config/security/permissions'
-import { UserNotifications } from './UserNotifications'
+import { UserNotifications } from '../UserNotifications'
 
 export const Navigation = () => {
     const { t } = useTranslation()
