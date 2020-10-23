@@ -1,6 +1,7 @@
 const { find, pick } = require('underscore')
 const jwt = require('jsonwebtoken')
 const { gql } = require('apollo-server-express')
+const env = require('../../../utils/env')
 
 const typeDef = gql`
   """
@@ -41,7 +42,7 @@ async function addApiToken(_obj, variables, ctx) {
     {
       data: pick(ctx.user, 'id'),
     },
-    process.env.API_TOKEN_SECRET
+    env('API_TOKEN_SECRET')
   )
   const entry = await ctx.services.subscription.addApiToken(variables.name, ctx.user.subscription.id, token)
   return entry ? token : null

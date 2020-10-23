@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { useQuery } from '@apollo/react-hooks'
-import { FilterPanel, IFilter, UserMessage, List } from 'components'
+import { FilterPanel, IFilter, List, UserMessage } from 'components'
 import { value } from 'helpers'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import { Spinner } from 'office-ui-fabric-react/lib/Spinner'
@@ -8,6 +8,7 @@ import { format } from 'office-ui-fabric-react/lib/Utilities'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
+import { ITimeEntriesQueryVariables } from 'types/graphql'
 import { filter, find, isEmpty } from 'underscore'
 import dateUtils from 'utils/date'
 import { exportExcel } from 'utils/exportExcel'
@@ -17,7 +18,7 @@ import { IReportsContext } from './context'
 import { filters } from './filters'
 import { TIME_ENTRIES } from './graphql'
 import styles from './Reports.module.scss'
-import { getQueries, IReportsParams, IReportsState, ITimeEntriesVariables } from './types'
+import { getQueries, IReportsParams, IReportsState } from './types'
 
 export const Reports = () => {
     const { t } = useTranslation()
@@ -31,7 +32,7 @@ export const Reports = () => {
             emptyGroupName: t('common.all'),
         }
     })
-    const { loading, data } = useQuery<any, ITimeEntriesVariables>(
+    const { loading, data } = useQuery<any, ITimeEntriesQueryVariables>(
         TIME_ENTRIES,
         {
             skip: !state.query,

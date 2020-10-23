@@ -46,12 +46,18 @@ const typeDef = gql`
 `
 
 async function timeentries(_obj, variables, ctx) {
-  if (variables.currentUser) resourceId = ctx.user.id
-  let [users,projects, customers, timeentries] = await Promise.all([
+  if (variables.currentUser) {
+    delete variables.currentUser
+    variables.resourceId = ctx.user.id
+  }
+  let [users, projects, customers, timeentries] = await Promise.all([
     ctx.services.azstorage.getUsers(),
     ctx.services.azstorage.getProjects(),
     ctx.services.azstorage.getCustomers(),
-    ctx.services.azstorage.getTimeEntries(omit(variables, 'sortAsc', 'forecast'), pick(variables, 'sortAsc', 'forecast')),
+    ctx.services.azstorage.getTimeEntries(
+      omit(variables, 'sortAsc', 'forecast'),
+      pick(variables, 'sortAsc', 'forecast')
+    ),
   ])
   let entries = timeentries.map(entry => {
     let project
