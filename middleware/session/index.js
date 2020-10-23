@@ -4,7 +4,7 @@ const env = require('../../utils/env')
 const log = require('debug')('middleware/session')
 
 module.exports = session({
-  name: env('SESSION_NAME'),
+  name: env('SESSION_NAME', 'connect.sid'),
   store: connectAzureTables.create({
     table: 'Sessions',
     sessionTimeOut: parseInt(env('SESSION_TIMEOUT', '10080')),
@@ -15,7 +15,7 @@ module.exports = session({
   resave: false,
   saveUninitialized: false,
   rolling: true,
-  cookie: { secure: env('SESSION_SECURE') === '1' },
+  cookie: { secure: env('SESSION_SECURE', '0') === '1' },
   unset: 'destroy'
 })
 
