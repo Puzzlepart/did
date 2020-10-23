@@ -175,11 +175,12 @@ class AzTableUtilities {
    * @param {*} rowKey Row key
    * @param {*} values Values
    * @param {*} partitionKey Partition key
-   * @param {*} options Options
+   * @param {*} options Options (removeBlanks defaults to true, dateFields has no default value)
    */
   convertToAzEntity(rowKey, values, partitionKey = 'Default', options = { removeBlanks: true }) {
     const { string, datetime, double, int, boolean } = this.azEntGen()
     const entity = Object.keys(values)
+      .filter(key => values[key] !== null)
       .filter(key => (options.removeBlanks ? !isBlank(values[key]) : true))
       .reduce(
         (obj, key) => {

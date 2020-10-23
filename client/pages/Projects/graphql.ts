@@ -64,7 +64,7 @@ const createOutlookCategory = gql`
   }
 `
 
-export const createOrUpdateProject = gql`
+const createOrUpdateProject = gql`
   mutation($project: ProjectInput!, $update: Boolean) {
     result: createOrUpdateProject(project: $project, update: $update) {
       success
