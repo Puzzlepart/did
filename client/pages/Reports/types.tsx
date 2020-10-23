@@ -50,7 +50,7 @@ export interface IReportsState {
  */
 export const getQueries = (t: TFunction): IReportsQuery[] => ([
     {
-        key: 'lastMonth',
+        key: 'LAST_MONTH',
         text: capitalize(dateUtils.getMonthName(-1)),
         iconName: 'CalendarDay',
         variables: dateUtils.getMonthYear(dateUtils.subtractMonths()),
@@ -58,21 +58,21 @@ export const getQueries = (t: TFunction): IReportsQuery[] => ([
     },
     {
 
-        key: 'currentMonth',
+        key: 'CURRENT_MONTH',
         text: capitalize(dateUtils.getMonthName(0)),
         iconName: 'Calendar',
         variables: dateUtils.getMonthYear(),
         exportFileName: `TimeEntries-${dateUtils.getMonthName(0)}-{0}.xlsx`,
     },
     {
-        key: 'currentYear',
+        key: 'CURRENT_YEAR',
         text: t('common.currentYear'),
         iconName: 'CalendarReply',
         variables: { year: dateUtils.getYear() },
         exportFileName: `TimeEntries-${dateUtils.getYear()}-{0}.xlsx`,
     },
     {
-        key: 'forecast',
+        key: 'FORECAST',
         text: t('reports.forecast'),
         iconName: 'TimeSheet',
         variables: {

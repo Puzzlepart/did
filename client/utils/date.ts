@@ -142,11 +142,11 @@ export default new (class DateUtils {
    * @param {boolean} captialize Capitalize
    */
   getMonthName(monthIndex?: number, format: string = 'MMMM', captialize: boolean = false): string {
-    let m = moment().locale(this._momentLocale)
+    let date = moment().locale(this._momentLocale)
     let name: string
-    if (monthIndex < 0) name = m.add(monthIndex, 'month').format(format)
-    else if (monthIndex === 0) name = m.format(format)
-    else name = m.month(monthIndex).format(format)
+    if (monthIndex < 0) name = date.add(monthIndex, 'month').format(format)
+    else if (monthIndex === 0) name = date.format(format)
+    else name = date.month(monthIndex).format(format)
     return captialize ? capitalize(name) : name
   }
 
