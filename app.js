@@ -21,7 +21,6 @@ class App {
     this._.use(logger('dev'))
     this._.use(express.json())
     this._.use(express.urlencoded({ extended: false }))
-    this._.use(cookieParser())
     this._.use(bodyParser.json())
     this.setupSession()
     this.setupViewEngine()
