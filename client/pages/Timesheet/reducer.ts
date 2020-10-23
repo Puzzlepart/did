@@ -14,8 +14,8 @@ export type TimesheetAction =
       }
     }
   | { type: 'MOVE_SCOPE'; payload: ITimesheetScopeOptions | string }
-  | { type: 'SUBMITTING_PERIOD'; payload: { t: TFunction } }
-  | { type: 'UNSUBMITTING_PERIOD'; payload: { t: TFunction } }
+  | { type: 'SUBMITTING_PERIOD'; payload: { t: TFunction; forecast: boolean } }
+  | { type: 'UNSUBMITTING_PERIOD'; payload: { t: TFunction; forecast: boolean } }
   | { type: 'CHANGE_PERIOD'; payload: string }
   | { type: 'CHANGE_VIEW'; payload: TimesheetView }
   | { type: 'MANUAL_MATCH'; payload: { eventId: string; project: IProject } }
@@ -54,10 +54,8 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
 
     case 'SUBMITTING_PERIOD':
       newState.loading = {
-        label: state.selectedPeriod.isForecast
-          ? t('timesheet.forecastingPeriodLabel')
-          : t('timesheet.confirmingPeriodLabel'),
-        description: state.selectedPeriod.isForecast
+        label: action.payload.forecast ? t('timesheet.forecastingPeriodLabel') : t('timesheet.confirmingPeriodLabel'),
+        description: action.payload.forecast
           ? t('timesheet.forecastingPeriodDescription')
           : t('timesheet.confirmingPeriodDescription'),
       }
@@ -65,10 +63,10 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
 
     case 'UNSUBMITTING_PERIOD':
       newState.loading = {
-        label: state.selectedPeriod.isForecast
+        label: action.payload.forecast
           ? t('timesheet.unforecastingPeriodLabel')
           : t('timesheet.unconfirmingPeriodLabel'),
-        description: state.selectedPeriod.isForecast
+        description: action.payload.forecast
           ? t('timesheet.unforecastingPeriodDescription')
           : t('timesheet.unconfirmingPeriodDescription'),
       }

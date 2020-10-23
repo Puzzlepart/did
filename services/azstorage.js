@@ -1,7 +1,7 @@
 const AzTableUtilities = require('../utils/table')
 const { getDurationHours, getWeek, getMonthIndex, getYear, toArray } = require('../utils')
 const arraySort = require('array-sort')
-const { omit, pick } = require('underscore')
+const { omit, pick, isEqual } = require('underscore')
 const { isBlank } = require('underscore.string')
 const { createTableService } = require('azure-storage')
 const log = require('debug')('services/storage')
@@ -231,7 +231,7 @@ class AzStorageService {
    * Get time entries from table storage
    *
    * @param {*} filterValues Filtervalues
-   * @param {*} options Options ({ sortAsc, forecast })
+   * @param {*} options Options: sortAsc, forecast
    */
   async getTimeEntries(filterValues, options = {}) {
     const q = this.tableUtil.query()
@@ -263,36 +263,48 @@ class AzStorageService {
   /**
    * Add time entries
    *
-   * @param {*} periodId Period ID
+   * @param {*} period Period: id
+   * @param {*} user User: id
    * @param {*} timeentries Collection of time entries
    * @param {*} forecast Forecast
    */
-  async addTimeEntries(periodId, timeentries, forecast) {
+  async addTimeEntries(period, user, timeentries, forecast) {
     let totalDuration = 0
-    const { string, datetime, double, int, boolean } = this.tableUtil.azEntGen()
-    const entities = timeentries.map(({ entry, event, user, labels }) => {
-      const weekNumber = getWeek(event.startDateTime)
-      const monthNumber = getMonthIndex(event.startDateTime)
-      const year = getYear(event.startDateTime)
+    const entities = timeentries.map(({ projectId, manualMatch, event, labels }) => {
+      const [
+        weekNumber,
+        monthNumber,
+        year
+      ] = period.id.split('_').map(p => parseInt(p, 10))
       const duration = getDurationHours(event.startDateTime, event.endDateTime)
       totalDuration += duration
       const entity = this.tableUtil.convertToAzEntity(
-        entry.id,
+        event.id,
         {
-          ...pick(entry, 'projectId', 'manualMatch'),
-          ...pick(event, 'title', 'startDateTime', 'endDateTime', 'webLink'),
+          ...pick(
+            event,
+            'title',
+            'startDateTime',
+            'endDateTime',
+            'webLink'
+          ),
+          projectId,
+          manualMatch,
           description: event.body,
           duration,
           year,
           weekNumber,
           monthNumber,
-          periodId,
+          periodId: period.id,
           labels: labels.join('|'),
         },
         user.id,
         {
           removeBlanks: true,
-          dateFields: ['startDateTime', 'endDateTime'],
+          typeMap: {
+            startDateTime: 'datetime',
+            endDateTime: 'datetime'
+          },
         }
       )
       return entity
@@ -382,43 +394,66 @@ class AzStorageService {
   /**
    * Add entry for the confirmed period to table storage
    *
-   * @param {*} periodId The period ID
+   * @param {*} period Period: id, hours, forecastedHours
    * @param {*} resourceId ID of the resource
-   * @param {*} hours Total hours for the train
+   * 
+   * @returns void
    */
-  async addConfirmedPeriod(periodId, resourceId, hours) {
-    const [week, month, year] = periodId.split('_')
-    const { string, double, int } = this.tableUtil.azEntGen()
-    const entity = await this.tableUtil.addAzEntity(this.tables.confirmedPeriods, {
-      PartitionKey: string(resourceId),
-      RowKey: string(periodId),
-      WeekNumber: int(week),
-      MonthNumber: int(month),
-      Year: int(year),
-      Hours: double(hours),
-    })
-    return entity
+  async addConfirmedPeriod(period, resourceId) {
+    const [
+      weekNumber,
+      monthNumber,
+      year
+    ] = period.id.split('_').map(p => parseInt(p, 10))
+    const entity = this.tableUtil.convertToAzEntity(
+      period.id,
+      {
+        weekNumber,
+        monthNumber,
+        year,
+        hours: period.hours,
+        forecastedHours: period.forecastedHours
+      },
+      resourceId,
+      {
+        typeMap: {
+          forecastedHours: 'double',
+          hours: 'double'
+        }
+      })
+    await this.tableUtil.addAzEntity(this.tables.confirmedPeriods, entity)
   }
 
   /**
    * Add entry for the forecasted period to table storage
    *
-   * @param {*} periodId The period ID
+   * @param {*} period Period: id, hours
    * @param {*} resourceId ID of the resource
-   * @param {*} hours Total hours for the train
+   * 
+   * @returns void
    */
-  async addForecastedPeriod(periodId, resourceId, hours) {
-    const [week, month, year] = periodId.split('_')
-    const { string, double, int } = this.tableUtil.azEntGen()
-    const entity = await this.tableUtil.addAzEntity(this.tables.forecastedPeriods, {
-      PartitionKey: string(resourceId),
-      RowKey: string(periodId),
-      WeekNumber: int(week),
-      MonthNumber: int(month),
-      Year: int(year),
-      Hours: double(hours),
-    })
-    return entity
+  async addForecastedPeriod(period, resourceId) {
+    const [
+      weekNumber,
+      monthNumber,
+      year
+    ] = period.id.split('_').map(p => parseInt(p, 10))
+    const entity = this.tableUtil.convertToAzEntity(
+      period.id,
+      {
+        weekNumber,
+        monthNumber,
+        year,
+        hours: period.hours,
+      },
+      resourceId,
+      {
+        typeMap: {
+          hours: 'double'
+        }
+      })
+
+    await this.tableUtil.addAzEntity(this.tables.forecastedPeriods, entity)
   }
 
   /**
