@@ -135,22 +135,9 @@ async function timesheet(_obj, variables, ctx) {
         )
         period.matchedEvents = period.events
       } else {
-        if (period.isForecast && period.isForecasted) {
-          let timeentries = await ctx.services.azstorage.getTimeEntries(
-            {
-              resourceId: ctx.user.id,
-              startDateTime: variables.startDateTime,
-              endDateTime: variables.endDateTime,
-            },
-            { sortAsc: true, forecast: true }
-          )
-          period.events = connectTimeEntries(timeentries, projects, customers, labels)
-        }
-        if (!period.events) {
-          period.events = await ctx.services.msgraph.getEvents(period.startDateTime, period.endDateTime)
-          period.events = eventMatching.match(period.events)
-        }
-        period.matchedEvents = period.events.filter(evt => evt.project)
+        period.events = await ctx.services.msgraph.getEvents(period.startDateTime, period.endDateTime)
+        period.events = eventMatching.match(period.events)
+        period.matchedEvents = period.events.filter(evt => !!evt.project)
       }
       period.events = period.events.map(evt => ({
         ...evt,

@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
-
 import { UserMessage } from 'components/UserMessage'
 import { IUserMessageProps } from 'components/UserMessage/types'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
@@ -13,7 +11,12 @@ import styles from './StatusBar.module.scss'
 
 export const StatusBar = () => {
     const { t } = useTranslation()
-    const context = useContext(TimesheetContext)
+    const {
+        loading,
+        selectedPeriod,
+        periods,
+        dispatch
+    } = useContext(TimesheetContext)
 
     const defaultMessageProps: IUserMessageProps = {
         className: styles.message,
@@ -23,72 +26,71 @@ export const StatusBar = () => {
 
     const messages: IUserMessageProps[] = []
 
-    if (!context.selectedPeriod.isLocked) {
+    if (!selectedPeriod.isConfirmed) {
         messages.push({
-            hidden: context.selectedPeriod.isLocked,
             text: t(
                 'timesheet.periodHoursSummaryText',
-                { hours: dateUtils.getDurationString(context.selectedPeriod.totalDuration, t) }
+                { hours: dateUtils.getDurationString(selectedPeriod.totalDuration, t) }
             ),
             iconName: 'ReminderTime'
         })
     }
-    if (!context.selectedPeriod.isComplete && !context.selectedPeriod.isForecast) {
+    if (!selectedPeriod.isComplete && !selectedPeriod.isForecast) {
         messages.push({
             text: t(
                 'timesheet.hoursNotMatchedText',
-                { hours: dateUtils.getDurationString(context.selectedPeriod.unmatchedDuration, t) }
+                { hours: dateUtils.getDurationString(selectedPeriod.unmatchedDuration, t) }
             ),
             type: MessageBarType.warning,
             iconName: 'BufferTimeBoth'
         })
     }
-    if (context.selectedPeriod.isComplete && !context.selectedPeriod.isLocked) {
+    if (selectedPeriod.isComplete && !selectedPeriod.isLocked) {
         messages.push({
             text: t('timesheet.allHoursMatchedText'),
             type: MessageBarType.success,
             iconName: 'BufferTimeBoth'
         })
     }
-    if (context.selectedPeriod.isConfirmed) {
+    if (selectedPeriod.isConfirmed) {
         messages.push({
             text: t(
                 'timesheet.periodConfirmedText',
-                { hours: dateUtils.getDurationString(context.selectedPeriod.matchedDuration, t) }
+                { hours: dateUtils.getDurationString(selectedPeriod.matchedDuration, t) }
             ),
             type: MessageBarType.success,
             iconName: 'CheckMark'
         })
     }
-    if (context.selectedPeriod.isForecasted) {
+    if (selectedPeriod.isForecasted) {
         messages.push({
             text: t(
                 'timesheet.periodForecastedText',
-                { hours: dateUtils.getDurationString(context.selectedPeriod.matchedDuration, t) }
+                { hours: dateUtils.getDurationString(selectedPeriod.forecastedHours, t) }
             ),
             type: MessageBarType.info,
             iconName: 'BufferTimeBoth'
         })
     }
-    if (!isEmpty(context.selectedPeriod.ignoredEvents) && !context.selectedPeriod.isLocked) {
+    if (!isEmpty(selectedPeriod.ignoredEvents) && !selectedPeriod.isLocked) {
         messages.push({
             iconName: 'DependencyRemove',
             children: (
                 <p>
-                    <span>{t('timesheet.ignoredEventsText', { ignored_count: context.selectedPeriod.ignoredEvents.length })}</span>
-                    <a href='#' onClick={() => context.dispatch({ type: 'CLEAR_IGNORES' })}>{t('timesheet.undoIgnoreText')}</a>
+                    <span>{t('timesheet.ignoredEventsText', { ignoredEvents: selectedPeriod.ignoredEvents.length })}</span>
+                    <a href='#' onClick={() => dispatch({ type: 'CLEAR_IGNORES' })}>{t('timesheet.undoIgnoreText')}</a>
                 </p>
             )
         })
     }
-    if (!isEmpty(context.selectedPeriod.errors)) {
+    if (!isEmpty(selectedPeriod.errors)) {
         messages.push({
             type: MessageBarType.severeWarning,
-            text: t('timesheet.unresolvedErrorText', { count: context.selectedPeriod.errors.length }),
+            text: t('timesheet.unresolvedErrorText', { count: selectedPeriod.errors.length }),
             iconName: 'ErrorBadge'
         })
     }
-    if (context.periods.length > 1) {
+    if (periods.length > 1) {
         messages.push({
             text: t('timesheet.splitWeekInfoText'),
             iconName: 'SplitObject'
@@ -97,11 +99,13 @@ export const StatusBar = () => {
 
     return (
         <div className={styles.root}>
-            <Shimmer styles={{ shimmerWrapper: { height: 65 } }} isDataLoaded={!context.loading} />
-            {!context.loading && (
+            <Shimmer
+                styles={{ shimmerWrapper: { height: 65 } }}
+                isDataLoaded={!loading} />
+            {!loading && (
                 <div className={styles.container}>
-                    {messages.map((msg, id) => (
-                        <UserMessage key={id} {...defaultMessageProps} {...msg} />
+                    {messages.map((msg, key) => (
+                        <UserMessage key={key} {...defaultMessageProps} {...msg} />
                     ))}
                 </div>
             )}
