@@ -12,4 +12,5 @@ module.exports = session({
   resave: false,
   saveUninitialized: false,
   rolling: true,
+  cookie: { secure: true }
 })
