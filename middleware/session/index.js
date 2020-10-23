@@ -8,11 +8,11 @@ const store = connectAzureTables.create({
 })
 
 module.exports = session({
-  name: 'did.session',
+  name: env('SESSION_NAME'),
   store: store,
   secret: env('SESSION_SIGNING_KEY'),
   resave: false,
   saveUninitialized: false,
   rolling: true,
-  cookie: { secure: true }
+  cookie: { secure: env('SESSION_SECURE') === '1' }
 })
