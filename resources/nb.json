@@ -245,8 +245,8 @@
     "showAllFiltersText": "Vis alle ({{count}})",
     "exportMyHours": "Eksporter mine timer",
     "export": "Eksporter",
-    "exportTypeLastMonth": "Forrige måned ({{month}})",
-    "exportTypeCurrentMonth": "Inneværende måned ({{month}})",
+    "exportTypeLastMonth": "Forrige måned ({{monthName}})",
+    "exportTypeCurrentMonth": "Inneværende måned ({{monthName}})",
     "exportTypeCurrentYear": "Inneværende år ({{year}})"
   },
   "navigation": {

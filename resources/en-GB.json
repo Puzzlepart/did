@@ -246,8 +246,8 @@
     "showAllFiltersText": "Show all ({{count}})",
     "exportMyHours": "Export my hours",
     "export": "Export",
-    "exportTypeLastMonth": "Last month ({{month}})",
-    "exportTypeCurrentMonth": "Current month ({{month}})",
+    "exportTypeLastMonth": "Last month ({{monthName}})",
+    "exportTypeCurrentMonth": "Current month ({{monthName}})",
     "exportTypeCurrentYear": "This year ({{year}})"
   },
   "navigation": {

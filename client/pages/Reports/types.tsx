@@ -46,43 +46,58 @@ export interface IReportsState {
 /**
  * Get queries
  * 
+ * Collection of graphql queries
+ * 
+ * Consists of:
+ * 
+ * * key
+ * * text
+ * * iconName
+ * * variables
+ * * exportFilename
+ * 
  * @param {TFunction} t Translate function
  */
-export const getQueries = (t: TFunction): IReportsQuery[] => ([
-    {
-        key: 'LAST_MONTH',
-        text: capitalize(dateUtils.getMonthName(-1)),
-        iconName: 'CalendarDay',
-        variables: dateUtils.getMonthYear(dateUtils.subtractMonths()),
-        exportFileName: `TimeEntries-${dateUtils.getMonthName(-1)}-{0}.xlsx`,
-    },
-    {
-
-        key: 'CURRENT_MONTH',
-        text: capitalize(dateUtils.getMonthName(0)),
-        iconName: 'Calendar',
-        variables: dateUtils.getMonthYear(),
-        exportFileName: `TimeEntries-${dateUtils.getMonthName(0)}-{0}.xlsx`,
-    },
-    {
-        key: 'CURRENT_YEAR',
-        text: t('common.currentYear'),
-        iconName: 'CalendarReply',
-        variables: { year: dateUtils.getYear() },
-        exportFileName: `TimeEntries-${dateUtils.getYear()}-{0}.xlsx`,
-    },
-    {
-        key: 'FORECAST',
-        text: t('reports.forecast'),
-        iconName: 'TimeSheet',
-        variables: {
-            sortAsc: true,
-            forecast: true,
-            startDateTime: new Date().toISOString(),
+export const getQueries = (t: TFunction): IReportsQuery[] => {
+    const lastMonth = dateUtils.getMonthYear(dateUtils.subtractMonths())
+    const currentMonth = dateUtils.getMonthYear()
+    const currentYear = { year: dateUtils.getYear() }
+    return [
+        {
+            key: 'LAST_MONTH',
+            text: t('common.exportTypeLastMonth', lastMonth),
+            iconName: 'CalendarDay',
+            variables: lastMonth,
+            exportFileName: `TimeEntries-${capitalize(lastMonth.monthName)}-{0}.xlsx`,
         },
-        exportFileName: 'Forecast-{0}.xlsx',
-    }
-])
+        {
+
+            key: 'CURRENT_MONTH',
+            text: t('common.exportTypeCurrentMonth', currentMonth),
+            iconName: 'Calendar',
+            variables: currentMonth,
+            exportFileName: `TimeEntries-${capitalize(currentMonth.monthName)}-{0}.xlsx`,
+        },
+        {
+            key: 'CURRENT_YEAR',
+            text: t('common.exportTypeCurrentYear', currentYear),
+            iconName: 'CalendarReply',
+            variables: currentYear,
+            exportFileName: `TimeEntries-${currentYear.year}-{0}.xlsx`,
+        },
+        {
+            key: 'FORECAST',
+            text: t('reports.forecast'),
+            iconName: 'TimeSheet',
+            variables: {
+                sortAsc: true,
+                forecast: true,
+                startDateTime: new Date().toISOString(),
+            },
+            exportFileName: 'Forecast-{0}.xlsx',
+        }
+    ]
+}
 
 
 /**

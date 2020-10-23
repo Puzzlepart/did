@@ -117,11 +117,13 @@ export default new (class DateUtils {
    * @param date Date
    *
    * @returns
+   * * {string} monthName
    * * {number} monthNumber
    * * {number} year
    */
   public getMonthYear(date: moment.Moment = moment()) {
     return {
+      monthName: date.format('MMMM'),
       monthNumber: date.month() + 1,
       year: date.year(),
     }

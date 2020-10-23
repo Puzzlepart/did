@@ -73,8 +73,7 @@ export const ExportHours: React.FunctionComponent<{}> = () => {
                     options={getExportTypes(t)} />
                 <DefaultButton
                     text={t('common.export')}
-                    styles={{ root: { marginTop: 15 } }}
-                    iconProps={{ iconName: 'CloudImportExport' }}
+                    styles={{ root: { marginTop: 20, width: '100%' } }}
                     onClick={onExport} />
             </Panel>
         </>

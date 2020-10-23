@@ -1,7 +1,8 @@
 import { TFunction } from 'i18next'
 import { IChoiceGroupOption } from 'office-ui-fabric-react'
+import { getQueries } from 'pages/Reports'
 import { ITimeEntriesQueryVariables } from 'types/graphql'
-import dateUtils from 'utils/date'
+import { filter } from 'underscore'
 
 export interface IExportType extends IChoiceGroupOption {
   variables: ITimeEntriesQueryVariables
@@ -11,25 +12,11 @@ export interface IExportType extends IChoiceGroupOption {
 /**
  * Get export types
  *
+ * Get queries (getQueries) from pages/Reports, but omits forecast
+ *
  * @param {TFunction} t Translate function
  */
-export const getExportTypes = (t: TFunction): IExportType[] => [
-  {
-    key: 'LAST_MONTH',
-    text: t('common.exportTypeLastMonth', { month: dateUtils.getMonthName(-1) }),
-    variables: dateUtils.getMonthYear(dateUtils.subtractMonths()),
-    exportFileName: `TimeEntries-${dateUtils.getMonthName(-1, undefined, true)}-{0}.xlsx`,
-  },
-  {
-    key: 'CURRENT_MONTH',
-    text: t('common.exportTypeCurrentMonth', { month: dateUtils.getMonthName(0) }),
-    variables: dateUtils.getMonthYear(),
-    exportFileName: `TimeEntries-${dateUtils.getMonthName(0, undefined, true)}-{0}.xlsx`,
-  },
-  {
-    key: 'CURRENT_YEAR',
-    text: t('common.exportTypeCurrentYear', { year: dateUtils.getYear() }),
-    variables: { year: dateUtils.getYear() },
-    exportFileName: `TimeEntries-${dateUtils.getYear()}-{0}.xlsx`,
-  },
-]
+export const getExportTypes = (t: TFunction): IExportType[] => {
+  const queries = getQueries(t) as any[]
+  return filter(queries, ({ key }) => key !== 'FORECAST')
+}
