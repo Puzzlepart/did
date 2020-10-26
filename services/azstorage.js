@@ -4,7 +4,6 @@ const arraySort = require('array-sort')
 const { omit, pick, isEqual } = require('underscore')
 const { isBlank } = require('underscore.string')
 const { createTableService } = require('azure-storage')
-const uuidv4 = require('uuid').v4
 const log = require('debug')('services/storage')
 
 class AzStorageService {

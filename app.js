@@ -4,7 +4,6 @@ const createError = require('http-errors')
 const express = require('express')
 const favicon = require('express-favicon')
 const path = require('path')
-const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const logger = require('morgan')
@@ -15,14 +14,13 @@ const bearerToken = require('express-bearer-token')
 const { pick } = require('underscore')
 
 class App {
-  constructor() {
-    this._ = express()
+  constructor(app) {
+    this._ = app
     this._.use(require('./middleware/helmet'))
     this._.use(favicon(path.join(__dirname, pkg.config.public, 'images/favicon/favicon.ico')))
     this._.use(logger('dev'))
     this._.use(express.json())
     this._.use(express.urlencoded({ extended: false }))
-    this._.use(cookieParser())
     this._.use(bodyParser.json())
     this.setupSession()
     this.setupViewEngine()
@@ -31,6 +29,7 @@ class App {
     this.setupGraphQL()
     this.setupRoutes()
     this.setupErrorHandling()
+    this._.disable('view cache')
   }
 
   /**
@@ -110,4 +109,4 @@ class App {
   }
 }
 
-module.exports = new App()
+module.exports = new App(express())
