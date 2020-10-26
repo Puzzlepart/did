@@ -1,6 +1,14 @@
 const moment = require('moment')
+const stripHtml = require('string-strip-html')
 
 module.exports = {
+  /**
+   * Strip html from string using string-strip-html
+   *
+   * @param {*} str String
+   */
+  stripHtmlString: (str) => stripHtml(str),
+
   /**
    * Get duration between two times in hours
    *

@@ -1,11 +1,10 @@
-const stripHtml = require('string-strip-html')
 const utils = require('../utils')
 
 class MSGraphEvent {
   constructor(evt) {
     this.id = evt.id
     this.title = evt.subject
-    this.body = stripHtml(evt.body.content)
+    this.body = utils.stripHtmlString(evt.body.content)
     this.isOrganizer = evt.isOrganizer
     this.categories = evt.categories
     this.webLink = evt.webLink
