@@ -281,7 +281,7 @@
     "emptyText": "Du har ingen aktive varsler for øyeblikket.",
     "templates": {
       "unconfirmedPeriods": "Uke {0} ({1}) mangler bekreftelse.",
-      "forecast": "Manfgler prognose for uke {0} ({1})."
+      "forecast": "Mangler prognose for uke {0} ({1})."
     }
   }
 }
