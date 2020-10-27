@@ -251,7 +251,8 @@
     "export": "Eksporter",
     "exportTypeLastMonth": "Forrige måned ({{monthName}})",
     "exportTypeCurrentMonth": "Inneværende måned ({{monthName}})",
-    "exportTypeCurrentYear": "Inneværende år ({{year}})"
+    "exportTypeCurrentYear": "Inneværende år ({{year}})",
+    "subscription": "Abonnement"
   },
   "navigation": {
     "timesheet": "Timeliste",

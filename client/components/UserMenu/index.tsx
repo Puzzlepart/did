@@ -9,6 +9,7 @@ import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { Divider } from './Divider'
 import { ExportHours } from './ExportHours'
 import { isMobile } from 'react-device-detect'
+import { SubscriptionSettings } from './SubscriptionSettings'
 
 export const UserMenu = () => {
     const { t } = useTranslation()
@@ -39,10 +40,12 @@ export const UserMenu = () => {
                             {user.mail}
                         </div>
                         <Divider />
-                        <div className={styles.menuItem}>
+                        {/* <div className={styles.menuItem}>
                             <Icon iconName='Home' className={styles.icon} />
                             <span>{user.subscription?.name}</span>
-                        </div>
+                            <span className={styles.floatRight}><a href=''>Edit</a></span> */}
+                        <SubscriptionSettings className={styles.menuItem} />
+                        {/* </div> */}
                         <span hidden={isMobile}>
                             <Divider />
                             <ExportHours />

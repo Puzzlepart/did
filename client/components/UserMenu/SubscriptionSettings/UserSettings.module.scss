@@ -1,0 +1,18 @@
+.panel {
+  padding: 0;
+}
+
+.root {
+  &:hover .icon {
+    color: #ffffff;
+  }
+  .inputContainer {
+    margin: 5px 0 5px 0;
+  }
+  .icon {
+    vertical-align: sub;
+    font-size: 16px;
+    margin-right: 5px;
+    color: #cf5f00;
+  }
+}

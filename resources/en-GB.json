@@ -252,7 +252,8 @@
     "export": "Export",
     "exportTypeLastMonth": "Last month ({{monthName}})",
     "exportTypeCurrentMonth": "Current month ({{monthName}})",
-    "exportTypeCurrentYear": "This year ({{year}})"
+    "exportTypeCurrentYear": "This year ({{year}})",
+    "subscription": "Subscription"
   },
   "navigation": {
     "timesheet": "Timesheet",
