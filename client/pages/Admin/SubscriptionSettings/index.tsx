@@ -29,9 +29,11 @@ export const SubscriptionSettings = () => {
 
     return (
         <div className={styles.root}>
-            <TextField
-                label='Name'
-                defaultValue={user.subscription.name} />
+            <div className={styles.inputField}>
+                <TextField
+                    label='Name'
+                    defaultValue={user.subscription.name} />
+            </div>
             {Object.keys(SUBSCRIPTION_SETTINGS(t)).map((section, key) => (
                 <div key={key} className={styles.section}>
                     <div className={styles.title}>{section}</div>
