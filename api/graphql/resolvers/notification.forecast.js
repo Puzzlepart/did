@@ -20,9 +20,7 @@ module.exports = async function ({ template, ctx, locale }) {
   })
 
   periods.forEach(period => {
-    if (!find(forecastedPeriods, cp => cp.periodId === period.id)) {
-      unforecastedPeriods.push(period)
-    }
+    if (!find(forecastedPeriods, cp => cp.periodId === period.id)) unforecastedPeriods.push(period)
   })
 
   return unforecastedPeriods.map(period => ({

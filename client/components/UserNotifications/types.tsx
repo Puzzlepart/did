@@ -88,6 +88,9 @@ export class NotificationModel {
             case NotificationType.WEEK_NOT_CONFIRMED: {
                 return t('notifications.goToPeriodText')
             }
+            case NotificationType.MISSING_FORECAST: {
+                return t('notifications.goToPeriodText')
+            }
 
             default: return t('notifications.moreLinkText')
         }
