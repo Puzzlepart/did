@@ -1,15 +1,14 @@
 import { AppContext } from 'AppContext'
 import { Callout, Target } from 'office-ui-fabric-react/lib/Callout'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import React, { useContext, useState } from 'react'
+import { isMobile } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
-import styles from './UserMenu.module.scss'
-import { UserSettings } from './UserSettings'
-import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { Divider } from './Divider'
 import { ExportHours } from './ExportHours'
-import { isMobile } from 'react-device-detect'
-import { SubscriptionSettings } from './SubscriptionSettings'
+import styles from './UserMenu.module.scss'
+import { UserSettings } from './UserSettings'
 
 export const UserMenu = () => {
     const { t } = useTranslation()
@@ -40,12 +39,10 @@ export const UserMenu = () => {
                             {user.mail}
                         </div>
                         <Divider />
-                        {/* <div className={styles.menuItem}>
+                        <div className={styles.menuItem}>
                             <Icon iconName='Home' className={styles.icon} />
                             <span>{user.subscription?.name}</span>
-                            <span className={styles.floatRight}><a href=''>Edit</a></span> */}
-                        <SubscriptionSettings className={styles.menuItem} />
-                        {/* </div> */}
+                        </div>
                         <span hidden={isMobile}>
                             <Divider />
                             <ExportHours />
