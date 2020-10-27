@@ -362,6 +362,29 @@ class AzStorageService {
   }
 
   /**
+   * Get forecasted periods from table storage
+   * 
+   * @param {*} filterValues Filtervalues
+   */
+  async getForecastedPeriods(filterValues) {
+    try {
+      const q = this.tableUtil.query()
+      const filter = [
+        ['PartitionKey', filterValues.resourceId, q.string, q.equal],
+        ['Year', filterValues.year, q.int, q.equal],
+      ]
+      const query = this.tableUtil.createAzQuery(1000, undefined, filter)
+      let result = await this.tableUtil.queryAzTableAll(this.tables.forecastedPeriods, query, {
+        PartitionKey: 'resourceId',
+        RowKey: 'periodId',
+      })
+      return result
+    } catch (error) {
+      return null
+    }
+  }
+
+  /**
    * Get entry for the period from table storage
    *
    * @param {*} resourceId ID of the resource

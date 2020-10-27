@@ -18,7 +18,7 @@ class SubscriptionService {
   async getSubscription(subscriptionId) {
     try {
       const query = this.tableUtil.createAzQuery(1).where('RowKey eq ?', subscriptionId)
-      var { entries } = await this.tableUtil.queryAzTable('Subscriptions', query)
+      const { entries } = await this.tableUtil.queryAzTable('Subscriptions', query)
       return this.tableUtil.parseAzEntity(first(entries), { RowKey: 'id' })
     } catch (error) {
       return null
