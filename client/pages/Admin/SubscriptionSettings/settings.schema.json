@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "forecast": {
+      "title": "admin.forecast",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "notifications": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 8
+        }
+      }
+    }
+  }
+}

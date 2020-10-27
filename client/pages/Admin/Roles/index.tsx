@@ -12,8 +12,7 @@ import { IRolePanelProps, RolePanel } from './RolePanel'
 
 
 export const Roles = () => {
-    const { t } = useTranslation()
-    
+    const { t } = useTranslation()    
     const { data, loading, refetch } = useQuery(GET_ROLES)
     const [panel, setPanel] = useState<IRolePanelProps>(null)
     const columns = [

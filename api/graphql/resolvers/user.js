@@ -3,11 +3,20 @@ const { gql } = require('apollo-server-express')
 
 const typeDef = gql`
   """
+  A type that describes SubscriptionSettings
+  """
+  type SubscriptionSettings {
+    forecastEnabled: Boolean
+    forecastNotifications: Int
+  }
+
+  """
   A type that describes a Subscription
   """
   type Subscription {
     id: String!
     name: String!
+    settings: SubscriptionSettings
   }
 
   """
@@ -98,6 +107,7 @@ async function currentUser(_obj, _variables, ctx) {
       ctx.services.azstorage.getUser(ctx.user.id),
       ctx.services.azstorage.getRoles(),
     ])
+    console.log(ctx.user.subscription)
     return {
       ...ctx.user,
       ...user,

@@ -114,7 +114,13 @@
     "tokenDeletedText": "API key **{{name}}** was succesfully deleted.",
     "summaryLoadingText": "Loading time entries and creating summary...",
     "bulkImportUsersLabel": "Bulk import",
-    "bulkImportingUsersLabel": "Importing {{count}} users. Please wait.."
+    "bulkImportingUsersLabel": "Importing {{count}} users. Please wait..",
+    "subscriptionSettings": "Subscription Settings",
+    "forecastEnabledLabel": "Forecasting enabled",
+    "forecastNotificationsLabel": "Notifications",
+    "forecasting": "Forecasting",
+    "forecastEnabledDescription": "Enable/disable forecasting.",
+    "forecastNotificationsDescription": "How many weeks ahead should users forecast."
   },
   "reports": {
     "generatingReportLabel": "Generating report. To give you the freshest results, we're generating a report from the latest data...",

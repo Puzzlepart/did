@@ -113,7 +113,12 @@
     "tokenDeletedText": "Nøkkelen **{{name}}** ble slettet.",
     "summaryLoadingText": "Laster tidsoppføringer og lager oppsummering...",
     "bulkImportUsersLabel": "Importer i bulk",
-    "bulkImportingUsersLabel": "Importerer {{count}} brukere. Vennligst vent.."
+    "bulkImportingUsersLabel": "Importerer {{count}} brukere. Vennligst vent..",
+    "subscriptionSettings": "Abonnementsinnstillinger",
+    "forecastNotificationsLabel": "Varsler",
+    "forecasting": "Prognoser",
+    "forecastNotificationsDescription": "Hvor mange uker fremover skal brukerne registrere prognose for.",
+    "forecastEnabledDescription": "Aktiver/deaktiver prognoser."
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport. For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene...",

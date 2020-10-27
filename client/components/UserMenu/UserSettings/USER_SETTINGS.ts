@@ -22,7 +22,7 @@ export const USER_SETTINGS = (t: TFunction) =>
       options: [
         {
           key: 'en-GB',
-          text: '	English (United Kingdom)',
+          text: 'English (United Kingdom)',
         },
         {
           key: 'nb',

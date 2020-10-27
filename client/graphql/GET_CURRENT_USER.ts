@@ -14,6 +14,10 @@ export const GET_CURRENT_USER = gql`
       preferredLanguage
       subscription {
         name
+        settings {
+          forecastEnabled
+          forecastNotifications
+        }
       }
     }
   }
