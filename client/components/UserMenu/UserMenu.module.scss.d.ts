@@ -2,7 +2,6 @@
 // Please do not change this file!
 interface CssExports {
   'divider': string;
-  'floatRight': string;
   'header': string;
   'icon': string;
   'loggedout': string;

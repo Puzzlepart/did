@@ -1,138 +1,308 @@
-const moment = require('moment')
-const stripHtml = require('string-strip-html')
+const az = require('azure-storage')
+const { omit, contains, isNull } = require('underscore')
+const { decapitalize, capitalize, isBlank } = require('underscore.string')
+const { reduceEachLeadingCommentRange } = require('typescript')
+const get = require('get-value')
 
-module.exports = {
+class AzTableUtilities {
+  constructor(tableService) {
+    this.tableService = tableService
+  }
+
   /**
-   * Strip html from string using string-strip-html
+   * Parse an table storage entity
    *
-   * @param {*} str String
+   * In the azure table entity we'll find the value in _ and the type in $
+   *
+   * @param {*} result Result
+   * @param {*} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
    */
-  stripHtmlString: (str) => stripHtml(str),
+  parseAzEntity(entity, columnMap = {}) {
+    return Object.keys(entity).reduce((obj, key) => {
+      const { _, $ } = entity[key]
+      if (_ === undefined || _ === null) return obj
+      if (columnMap[key]) {
+        obj[columnMap[key]] = _
+        return obj
+      }
+      switch ($) {
+        case 'Edm.DateTime':
+          obj[decapitalize(key)] = _.toISOString()
+          break
+        default:
+          obj[decapitalize(key)] = _
+      }
+      return obj
+    }, {})
+  }
 
   /**
-   * Get duration between two times in hours
+   * Parse an array of Azure table storage entities
    *
-   * @param {*} startDateTime Start time
-   * @param {*} endDateTime End time
+   * Adds {RowKey} as 'id' and 'key, skips {PartitionKey}
+   *
+   * @param {*} result Result
+   * @param {*} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
    */
-  getDurationHours: (startDateTime, endDateTime) => {
-    return moment.duration(moment(endDateTime).diff(moment(startDateTime))).asHours()
-  },
+  parseAzEntities({ entries, continuationToken }, columnMap) {
+    entries = entries.map(ent => this.parseAzEntity(ent, columnMap))
+    return { entries, continuationToken }
+  }
 
   /**
-   * Get period id for the date
-   *
-   * @param {*} date Date
+   * entityGenerator from azure-storage TableUtilities
    */
-  getPeriod: date => {
-    let d = moment(date)
-    return [d.isoWeek(), d.month() + 1, d.year()].join('_')
-  },
+  azEntGen() {
+    return {
+      string: az.TableUtilities.entityGenerator.String,
+      int: az.TableUtilities.entityGenerator.Int32,
+      double: az.TableUtilities.entityGenerator.Double,
+      datetime: az.TableUtilities.entityGenerator.DateTime,
+      boolean: az.TableUtilities.entityGenerator.Boolean,
+    }
+  }
 
   /**
-   * Get week for the specified date
-   *
-   * @param {*} date Date
+   * Query
    */
-  getWeek: date => {
-    return moment(date).isoWeek()
-  },
+  query() {
+    return {
+      string: az.TableQuery.stringFilter,
+      boolean: az.TableQuery.booleanFilter,
+      date: az.TableQuery.dateFilter,
+      int: az.TableQuery.int32Filter,
+      double: az.TableQuery.doubleFilter,
+      combine: az.TableQuery.combineFilters,
+      equal: az.TableUtilities.QueryComparisons.EQUAL,
+      greaterThan: az.TableUtilities.QueryComparisons.GREATER_THAN,
+      greaterThanOrEqual: az.TableUtilities.QueryComparisons.GREATER_THAN_OR_EQUAL,
+      lessThan: az.TableUtilities.QueryComparisons.LESS_THAN,
+      lessThanOrEqual: az.TableUtilities.QueryComparisons.LESS_THAN_OR_EQUAL,
+      and: az.TableUtilities.TableOperators.AND,
+    }
+  }
 
   /**
-   * Get year for the specified date
+   * Converts the date string to azure table storage date format
    *
-   * @param {*} date Date
+   * @param dateString The date string to convert
    */
-  getYear: date => {
-    return moment(date).year()
-  },
+  convertDate(dateString) {
+    if (dateString) return this.azEntGen().datetime(new Date(dateString))._
+    return null
+  }
 
   /**
-   * Get month index for the specified date
-   *
-   * NOTE: Need to add +1 since moment.month is zero-indexed
-   *
-   * @param {*} date Date
+   * Create table batch
    */
-  getMonthIndex: date => {
-    return moment(date).month() + 1
-  },
+  createAzBatch() {
+    return new az.TableBatch()
+  }
 
   /**
-   * Get start of month as string
+   * Function that simplifes creating a new TableQuery from azure-storage
    *
-   * @param {*} date Date
+   * @param {*} top Number of items to retrieve
+   * @param {*} select Columns to retrieve
+   * @param {*} filters Filters
    */
-  startOfMonth: date => {
-    let d = moment(date).startOf('month')
-    return d.toISOString().replace('Z', '')
-  },
+  createAzQuery(top, select, filters) {
+    let query = new az.TableQuery().top(top)
+    if (top) query = query.top(top)
+    if (select) query = query.select(select)
+    if (filters) {
+      const combined = this.combineAzFilters(filters)
+      if (combined) query = query.where(combined)
+    }
+    return query
+  }
 
   /**
-   * Get end of month as string
+   * Combine an array of filters
    *
-   * @param {*} date Date
+   * @param filters Filter array
    */
-  endOfMonth: date => {
-    let d = moment(date).endOf('month')
-    return d.toISOString().replace('Z', '')
-  },
+  combineAzFilters(filters) {
+    const { combine, and } = this.query()
+    return filters.reduce((combined, [col, value, type, comp]) => {
+      if (value) {
+        let filter = type(col, comp, value)
+        combined = combined ? combine(combined, and, filter) : filter
+      }
+      return combined
+    }, null)
+  }
 
   /**
-   * Get start of week
+   * Queries a table using the specified query
    *
-   * @param {*} week Week number
+   * @param {*} table Table name
+   * @param {*} query Table query
+   * @param {*} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
+   * @param {*} continuationToken Continuation token
    */
-  startOfWeek: week => {
-    return moment().week(week).startOf('isoWeek')
-  },
+  queryAzTable(table, query, columnMap, continuationToken) {
+    return new Promise((resolve, reject) => {
+      this.tableService.queryEntities(table, query, continuationToken, (error, result) => {
+        if (!error) {
+          return columnMap ? resolve(this.parseAzEntities(result, columnMap)) : resolve(result)
+        } else reject(error)
+      })
+    })
+  }
 
   /**
-   * Get end of week
+   * Queries all entries in a table using the specified query
    *
-   * @param {*} week Week number
+   * @param {*} table Table name
+   * @param {*} query Table query
+   * @param {*} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
    */
-  endOfWeek: week => {
-    return moment().week(week).endOf('isoWeek')
-  },
+  async queryAzTableAll(table, query, columnMap) {
+    let token = null
+    let { entries, continuationToken } = await this.queryAzTable(table, query, columnMap, token)
+    token = continuationToken
+    while (token != null) {
+      let result = await this.queryAzTable(table, query, columnMap, token)
+      entries.push(...result.entries)
+      token = result.continuationToken
+    }
+    return entries
+  }
 
   /**
-   * Format date
-   *
-   * @param {*} date Date
-   * @param {*} dateFormat Date format
-   * @param {*} locale Locale
-   */
-  formatDate: (date, dateFormat, locale, timeZone = 'Europe/Oslo') => {
-    return moment(date).locale(locale).tz(timeZone).format(dateFormat)
-  },
-
-  /**
-   * Is after today
-   *
-   * @param {*} date Date
-   */
-  isAfterToday: date => {
-    return moment(date).isAfter(moment())
-  },
-
-  /**
-   * Converts a string to an array
-   *
-   * @param {*} str String
-   * @param {*} separator String separator
-   */
-  toArray: (str, separator = '|') => {
-    return (str || '').split(separator).filter(p => p)
-  },
-
-  /**
-   * Generate int
+   * Converts a JSON object to an Azure Table Storage entity
    * 
-   * @param {*} str String
-   * @param {*} mod Modulator
+   * Does a best effort to get the correct type of the values
+   * 
+   * Can be some issues to differ between double and int
+   * 
+   * If unsure, specifiy typeMap in options
+   *
+   * @param {*} rowKey Row key
+   * @param {*} values Values
+   * @param {*} partitionKey Partition key
+   * @param {*} options Options (removeBlanks defaults to true, typeMap defaults to empty object)
    */
-  generateInt(str, mod) {
-    return str.split('').map(c => c.charCodeAt(0)).reduce((a, b) => a + b) % mod
+  convertToAzEntity(rowKey, values, partitionKey = 'Default', options = { removeBlanks: true, typeMap: {} }) {
+    const { string, datetime, double, int, boolean } = this.azEntGen()
+    const entity = Object.keys(values)
+      .filter(key => !isNull(values[key]))
+      .filter(key => (options.removeBlanks ? !isBlank(values[key]) : true))
+      .reduce((obj, key) => {
+        let value = values[key]
+        const type = get(options, `typeMap.${key}`, { default: typeof value })
+        switch (type) {
+          case 'datetime': value = datetime(new Date(value))
+            break
+          case 'boolean': value = boolean(value)
+            break;
+          case 'number':
+            {
+              if (value % 1 === 0) value = int(value)
+              else value = double(value)
+            }
+            break
+          default: {
+            if (!!type) value = this.azEntGen()[type](value)
+            else value = string(value.trim())
+          }
+            break
+        }
+        obj[capitalize(key)] = value
+        return obj
+      },
+        {
+          PartitionKey: string(partitionKey),
+          RowKey: string(rowKey),
+        }
+      )
+    return omit(entity, ({ _ }) => (options.removeBlanks ? isBlank(_) : false))
+  }
+
+  /**
+   * Retrieves an entity
+   *
+   * @param {*} table Table name
+   * @param {*} partitionKey Partition key
+   * @param {*} rowKey Row key
+   */
+  retrieveAzEntity(table, partitionKey, rowKey) {
+    return new Promise((resolve, reject) => {
+      this.tableService.retrieveEntity(table, partitionKey, rowKey, (error, result) => {
+        if (error) reject(error)
+        else return resolve(result)
+      })
+    })
+  }
+
+  /**
+   * Adds an entity
+   *
+   * @param {*} table Table name
+   * @param {*} entity Entity
+   */
+  addAzEntity(table, entity) {
+    return new Promise((resolve, reject) => {
+      this.tableService.insertEntity(table, entity, (error, result) => {
+        if (error) reject(error)
+        else return resolve(result['.metadata'])
+      })
+    })
+  }
+
+  /**
+   * Updates the entity
+   *
+   * @param {*} table Table name
+   * @param {*} entity Entity
+   * @param {*} merge If the entity should be inserted using insertOrMergeEntity
+   */
+  updateAzEntity(table, entity, merge) {
+    return new Promise((resolve, reject) => {
+      if (merge) {
+        this.tableService.insertOrMergeEntity(table, entity, undefined, (error, result) => {
+          if (error) reject(error)
+          else resolve(result)
+        })
+      } else {
+        this.tableService.insertOrReplaceEntity(table, entity, undefined, (error, result) => {
+          if (error) reject(error)
+          else resolve(result)
+        })
+      }
+    })
+  }
+
+  /**
+   * Delete entity
+   *
+   * @param {*} table Table name
+   * @param {*} entity Entity
+   */
+  deleteEntity(table, entity) {
+    return new Promise((resolve, reject) => {
+      this.tableService.deleteEntity(table, entity, undefined, (error, result) => {
+        if (error) reject(error)
+        else resolve(result)
+      })
+    })
+  }
+
+  /**
+   * Executes a batch operation
+   *
+   * @param {*} table Table name
+   * @param {*} batch Table batch
+   */
+  executeBatch(table, batch) {
+    return new Promise((resolve, reject) => {
+      this.tableService.executeBatch(table, batch, (error, result) => {
+        if (error) reject(error)
+        else resolve(result)
+      })
+    })
   }
 }
+
+module.exports = AzTableUtilities
