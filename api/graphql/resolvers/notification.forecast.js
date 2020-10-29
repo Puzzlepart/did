@@ -4,6 +4,16 @@ const format = require('string-format')
 const { getPeriods } = require('./timesheet.utils')
 const get = require('get-value')
 
+/**
+ * Get notifications for missing forecasts
+ * 
+ * Checks subscription settings 
+ * 
+ * * forecast.enabled
+ * * forecast.notifications
+ * 
+ * @param {*} param0 {template, ctx, locale}
+ */
 module.exports = async function ({ template, ctx, locale }) {
   if (!get(ctx, 'user.subscription.settings.forecast.enabled', { default: false })) return []
   const currentWeek = utils.getWeek()
