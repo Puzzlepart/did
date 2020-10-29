@@ -9,11 +9,6 @@
   "config": {
     "public": "public"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint:client"
-    }
-  },
   "scripts": {
     "watch": "concurrently \"webpack\" \"npm run watch:server\" \"node tasks/open.js\" \"node tasks/localtunnel.js\"",
     "start": "node ./bin/www",
@@ -109,6 +104,7 @@
     "regenerator-runtime": "0.13.5",
     "sass-loader": "8.0.2",
     "scriptjs": "2.5.9",
+    "set-value": "^3.0.2",
     "simple-oauth2": "2.4.0",
     "string-format": "2.0.0",
     "string-similarity": "4.0.1",
@@ -134,7 +130,6 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "7.19.0",
-    "husky": "^4.3.0",
     "localtunnel": "2.0.0",
     "mocha": "7.1.2",
     "nodemon": "2.0.3",

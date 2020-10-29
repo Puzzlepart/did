@@ -1,4 +1,4 @@
-import { stringToArrayBuffer, value } from 'helpers'
+import { stringToArrayBuffer, get } from 'helpers'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import { humanize } from 'underscore.string'
 import { loadScripts } from './loadScripts'
@@ -46,8 +46,8 @@ export async function exportExcel(items: any[], options: IExcelExportOptions): P
         options.columns.map(c => c.name),
         ...items.map(item =>
           options.columns.map(col => {
-            const fieldValue = value<string>(item, col.fieldName)
-            switch (value<ExcelColumnType>(col, 'data.excelColFormat', null)) {
+            const fieldValue = get<string>(item, col.fieldName)
+            switch (get<ExcelColumnType>(col, 'data.excelColFormat', null)) {
               case 'date':
                 return {
                   v: moment(fieldValue).format('YYYY-MM-DD HH:mm'),

@@ -1,5 +1,5 @@
 import { QueryResult } from '@apollo/react-common'
-import { value } from 'helpers'
+import { get } from 'helpers'
 import { TFunction } from 'i18next'
 import { IProject } from 'types'
 import { find, first } from 'underscore'
@@ -31,7 +31,7 @@ export type TimesheetAction =
  * @param {IAction} action Action
  */
 export default (state: ITimesheetState, action: TimesheetAction): ITimesheetState => {
-  const t = value<TFunction>(action, 'payload.t')
+  const t = get<TFunction>(action, 'payload.t')
   const newState = { ...state }
   switch (action.type) {
     case 'DATA_UPDATED':
@@ -46,7 +46,7 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
         if (data) {
           newState.periods = data.timesheet.map(period => new TimesheetPeriod(period))
           newState.selectedPeriod =
-            find(newState.periods, p => p.id === value(state, 'selectedPeriod.id', null)) || first(newState.periods)
+            find(newState.periods, p => p.id === get(state, 'selectedPeriod.id', null)) || first(newState.periods)
         }
         newState.error = error
       }

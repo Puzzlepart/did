@@ -1,5 +1,5 @@
 import { ScrollablePaneWrapper } from 'components/ScrollablePaneWrapper'
-import { value } from 'helpers'
+import { get } from 'helpers'
 import { CheckboxVisibility, ConstrainMode, DetailsListLayoutMode, IColumn, IDetailsGroupDividerProps, IDetailsHeaderProps, Selection, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { GroupHeader } from 'office-ui-fabric-react/lib/GroupedList'
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox'
@@ -99,7 +99,7 @@ const List = (props: IListProps) => {
                         }}
                         onRenderItemColumn={(item, index, column) => {
                             if (!!column.onRender) return column.onRender(item, index, column)
-                            return value(item, column.fieldName)
+                            return get(item, column.fieldName)
                         }}
                         onRenderDetailsHeader={onRenderListHeader}
                         checkboxVisibility={props.checkboxVisibility || CheckboxVisibility.hidden} />

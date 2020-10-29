@@ -1,6 +1,6 @@
 const az = require('azure-storage')
 const { omit, contains, isNull } = require('underscore')
-const { decapitalize, capitalize, isBlank } = require('underscore.string')
+const { decapitalize, capitalize, isBlank,startsWith } = require('underscore.string')
 const { reduceEachLeadingCommentRange } = require('typescript')
 const get = require('get-value')
 
@@ -13,6 +13,8 @@ class AzTableUtilities {
    * Parse an table storage entity
    *
    * In the azure table entity we'll find the value in _ and the type in $
+   * 
+   * If the value starts with 'json:', we parse it as JSON
    *
    * @param {*} result Result
    * @param {*} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
@@ -30,7 +32,10 @@ class AzTableUtilities {
           obj[decapitalize(key)] = _.toISOString()
           break
         default:
-          obj[decapitalize(key)] = _
+          if(startsWith(_, 'json:')) {
+            obj[decapitalize(key)] = JSON.parse(_.split('json:')[1])
+          }
+          else obj[decapitalize(key)] = _
       }
       return obj
     }, {})

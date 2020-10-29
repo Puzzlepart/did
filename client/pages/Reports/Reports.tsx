@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { useQuery } from '@apollo/react-hooks'
 import { FilterPanel, IFilter, List, UserMessage } from 'components'
-import { value } from 'helpers'
+import { get } from 'helpers'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import { Spinner } from 'office-ui-fabric-react/lib/Spinner'
 import { format } from 'office-ui-fabric-react/lib/Utilities'
@@ -66,7 +66,7 @@ export const Reports = () => {
         const subset = filter(context.timeentries, entry => {
             return filter(filters, f => {
                 const selectedKeys = f.selected.map(s => s.key)
-                return selectedKeys.indexOf(value(entry, f.key, '')) !== -1
+                return selectedKeys.indexOf(get(entry, f.key, '')) !== -1
             }).length === filters.length
         })
         context.setState({ subset })

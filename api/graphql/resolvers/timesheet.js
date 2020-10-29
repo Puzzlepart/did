@@ -161,7 +161,6 @@ async function submitPeriod(_obj, variables, ctx) {
   try {
     let { period, forecast } = { ...variables }
     period.hours = 0
-    console.log(period)
     if (!isEmpty(period.matchedEvents)) {
       const [events, labels] = await Promise.all([
         ctx.services.msgraph.getEvents(period.startDateTime, period.endDateTime),

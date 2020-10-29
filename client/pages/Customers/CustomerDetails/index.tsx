@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import { UserMessage } from 'components/UserMessage'
-import { value as value } from 'helpers'
+import { get } from 'helpers'
 import { IProject } from 'types/IProject'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
@@ -20,7 +20,7 @@ export const CustomerDetails = (props: ICustomerDetailsProps) => {
         {
             variables: {
                 sortBy: 'name',
-                customerKey: value<string>(props, 'customer.key', '')
+                customerKey: get<string>(props, 'customer.key', '')
             }
         })
 
@@ -63,7 +63,7 @@ export const CustomerDetails = (props: ICustomerDetailsProps) => {
                 {error && <MessageBar messageBarType={MessageBarType.error}>{t('common.genericErrorText')}</MessageBar>}
                 {!error && (
                     <ProjectList
-                        items={value<IProject[]>(data, 'projects', [])}
+                        items={get<IProject[]>(data, 'projects', [])}
                         enableShimmer={loading}
                         searchBox={{ placeholder: t('common.searchPlaceholder') }}
                         renderLink={true}

@@ -24,8 +24,8 @@ import styles from './EventList.module.scss'
  */
 function getSizing(props: IEventListProps, fieldName: string, defMinWidth: number, defMaxWidth: number): { minWidth: number; maxWidth: number } {
     return {
-        minWidth: helpers.value(props, `columnWidths.${fieldName}`, defMinWidth),
-        maxWidth: helpers.value(props, `columnWidths.${fieldName}`, defMaxWidth),
+        minWidth: helpers.get(props, `columnWidths.${fieldName}`, defMinWidth),
+        maxWidth: helpers.get(props, `columnWidths.${fieldName}`, defMaxWidth),
     }
 }
 /**

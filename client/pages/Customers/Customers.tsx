@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import { AppContext } from 'AppContext'
 import { manageCustomers } from 'config/security/permissions'
-import { value } from 'helpers'
+import { get } from 'helpers'
 import { ICustomer } from 'types'
 import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
@@ -30,7 +30,7 @@ export const Customers = () => {
             fetchPolicy: 'cache-first'
         })
 
-    const customers = value<ICustomer[]>(data, 'customers', [])
+    const customers = get<ICustomer[]>(data, 'customers', [])
 
     useEffect(() => {
         if (!selected && params.key) {
