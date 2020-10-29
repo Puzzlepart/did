@@ -51,7 +51,7 @@ export function get<T = any>(obj: any, exp: string, defaultValue?: T): T {
  * @param {T} defaultValue Default value
  */
 export function set<T = any>(obj: any, exp: string, value?: T): T {
-  return set(obj, exp, value)
+  return setValue(obj, exp, value)
 }
 
 /**

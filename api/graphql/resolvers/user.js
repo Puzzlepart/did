@@ -114,7 +114,6 @@ async function currentUser(_obj, _variables, ctx) {
       ctx.services.azstorage.getUser(ctx.user.id),
       ctx.services.azstorage.getRoles(),
     ])
-    console.log(ctx.user.subscription)
     return {
       ...ctx.user,
       ...user,

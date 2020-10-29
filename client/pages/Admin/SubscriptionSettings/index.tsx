@@ -22,19 +22,16 @@ export const SubscriptionSettings = () => {
      * @param {any} value Value of setting
      */
     const onChange = (key: string, value: any) => {
-        const _settings = {...settings}
+        const _settings = { ...settings }
         set(_settings, key, value)
         setSettings(_settings)
     }
-    
-    // eslint-disable-next-line no-console
-    console.log(settings)
 
     return (
         <div className={styles.root}>
             <div className={styles.inputField}>
                 <TextField
-                    label='Name'
+                    label={t('common.nameLabel')}
                     defaultValue={user.subscription.name} />
             </div>
             {Object.keys(SUBSCRIPTION_SETTINGS(t)).map((section, key) => (
@@ -68,8 +65,8 @@ export const SubscriptionSettings = () => {
                             default: {
                                 return (
                                     <div className={styles.inputField} key={key}>
-                                        <TextField {...props as ITextFieldProps} 
-                                        onChange={(_event, value) => onChange(key, value)} />
+                                        <TextField {...props as ITextFieldProps}
+                                            onChange={(_event, value) => onChange(key, value)} />
                                     </div>
                                 )
                             }
@@ -77,7 +74,7 @@ export const SubscriptionSettings = () => {
                     })}
                 </div>
             ))}
-            <PrimaryButton className={styles.saveButton} text={'Save'} />
+            <PrimaryButton className={styles.saveButton} text={t('common.save')} />
         </div>
     )
 }

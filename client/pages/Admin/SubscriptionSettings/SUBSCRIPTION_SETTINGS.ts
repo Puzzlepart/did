@@ -3,10 +3,20 @@ import { ISliderProps } from 'office-ui-fabric-react/lib/Slider'
 import { ITextFieldProps } from 'office-ui-fabric-react/lib/TextField'
 import { IToggleProps } from 'office-ui-fabric-react/lib/Toggle'
 
+/**
+ * Interface for type bool
+ * 
+ * As IToggleProps have no description prop we need to extend the interface
+ */
 interface ISubscriptionSettingBool extends IToggleProps {
   description?: string
 }
 
+/**
+ * Interface for type number
+ * 
+ * As ISliderProps have no description prop we need to extend the interface
+ */
 interface ISubscriptionSettingNumber extends ISliderProps {
   description?: string
 }
@@ -28,6 +38,17 @@ export type SubscriptionSetting =
       props: ISubscriptionSettingNumber
     }
 
+/**
+ * Subscription settings
+ * 
+ * Consists of the following properties:
+ * 
+ * * key
+ * * type
+ * * props depending on type
+ * 
+ * @param {TFunction} t Translate function
+ */
 export const SUBSCRIPTION_SETTINGS = (t: TFunction): { [section: string]: SubscriptionSetting[] } => ({
   [t('admin.forecasting')]: [
     {
