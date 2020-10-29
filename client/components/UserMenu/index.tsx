@@ -1,14 +1,14 @@
 import { AppContext } from 'AppContext'
 import { Callout, Target } from 'office-ui-fabric-react/lib/Callout'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import React, { useContext, useState } from 'react'
+import { isMobile } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
-import styles from './UserMenu.module.scss'
-import { UserSettings } from './UserSettings'
-import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { Divider } from './Divider'
 import { ExportHours } from './ExportHours'
-import { isMobile } from 'react-device-detect'
+import styles from './UserMenu.module.scss'
+import { UserSettings } from './UserSettings'
 
 export const UserMenu = () => {
     const { t } = useTranslation()

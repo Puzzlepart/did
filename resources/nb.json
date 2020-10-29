@@ -256,7 +256,8 @@
     "export": "Eksporter",
     "exportTypeLastMonth": "Forrige måned ({{monthName}})",
     "exportTypeCurrentMonth": "Inneværende måned ({{monthName}})",
-    "exportTypeCurrentYear": "Inneværende år ({{year}})"
+    "exportTypeCurrentYear": "Inneværende år ({{year}})",
+    "subscription": "Abonnement"
   },
   "navigation": {
     "timesheet": "Timeliste",
@@ -284,7 +285,8 @@
     "headerText": "Varsler",
     "emptyText": "Du har ingen aktive varsler for øyeblikket.",
     "templates": {
-      "unconfirmedPeriods": "Uke {0} ({1}) mangler bekreftelse."
+      "unconfirmedPeriods": "Uke {0} ({1}) mangler bekreftelse.",
+      "forecast": "Uke {0} ({1}) mangler prognose."
     }
   }
 }

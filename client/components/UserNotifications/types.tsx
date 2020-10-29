@@ -11,6 +11,7 @@ export interface INotification {
 
 export enum NotificationType {
     WEEK_NOT_CONFIRMED,
+    MISSING_FORECAST,
     SERVICE_ANNOUNCEMENT,
     FEATURE_ANNOUNCEMENT,
 }
@@ -43,9 +44,9 @@ export class NotificationModel {
 
     private get _messageType(): MessageBarType {
         switch (this.type) {
-            case NotificationType.WEEK_NOT_CONFIRMED: {
-                return MessageBarType.warning
-            }
+            case NotificationType.WEEK_NOT_CONFIRMED: return MessageBarType.warning
+
+            case NotificationType.MISSING_FORECAST: return MessageBarType.info
 
             case NotificationType.SERVICE_ANNOUNCEMENT: {
                 if (this.severity === NotificationSeverity.HIGH) {
@@ -60,18 +61,10 @@ export class NotificationModel {
 
     private get _iconProps(): { iconName: string } {
         switch (this.type) {
-            case NotificationType.WEEK_NOT_CONFIRMED: {
-                return { iconName: 'CalendarWorkWeek' }
-            }
-                break
-            case NotificationType.SERVICE_ANNOUNCEMENT: {
-                return { iconName: 'Manufacturing' }
-            }
-                break
-            case NotificationType.FEATURE_ANNOUNCEMENT: {
-                return { iconName: 'BuildQueueNew' }
-            }
-                break
+            case NotificationType.WEEK_NOT_CONFIRMED: return { iconName: 'CalendarWorkWeek' }
+            case NotificationType.MISSING_FORECAST: return { iconName: 'BufferTimeBefore' }
+            case NotificationType.SERVICE_ANNOUNCEMENT: return { iconName: 'Manufacturing' }
+            case NotificationType.FEATURE_ANNOUNCEMENT: return { iconName: 'BuildQueueNew' }
             default: return undefined
         }
     }
@@ -93,6 +86,9 @@ export class NotificationModel {
     public getMoreLinkText(t: TFunction): string {
         switch (this.type) {
             case NotificationType.WEEK_NOT_CONFIRMED: {
+                return t('notifications.goToPeriodText')
+            }
+            case NotificationType.MISSING_FORECAST: {
                 return t('notifications.goToPeriodText')
             }
 

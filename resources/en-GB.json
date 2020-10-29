@@ -258,7 +258,8 @@
     "export": "Export",
     "exportTypeLastMonth": "Last month ({{monthName}})",
     "exportTypeCurrentMonth": "Current month ({{monthName}})",
-    "exportTypeCurrentYear": "This year ({{year}})"
+    "exportTypeCurrentYear": "This year ({{year}})",
+    "subscription": "Subscription"
   },
   "navigation": {
     "timesheet": "Timesheet",
@@ -286,7 +287,8 @@
     "headerText": "Notifications",
     "emptyText": "You have no active notifications at this time.",
     "templates": {
-      "unconfirmedPeriods": "Week {0} ({1}) has not been confirmed."
+      "unconfirmedPeriods": "Week {0} ({1}) has not been confirmed.",
+      "forecast": "Missing forecast for week {0} ({1}) ."
     }
   }
 }

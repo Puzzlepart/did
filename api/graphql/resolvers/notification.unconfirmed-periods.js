@@ -3,6 +3,11 @@ const { unique, difference, filter, find, first, last, union } = require('unders
 const format = require('string-format')
 const { getPeriods } = require('./timesheet.utils')
 
+/**
+ * Get notifications for unconfirmed periods
+ * 
+ * @param {*} param0 {template, ctx, locale}
+ */
 module.exports = async function ({ template, ctx, locale }) {
   const currentWeek = utils.getWeek()
   const periods = []
