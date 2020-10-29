@@ -15,8 +15,10 @@ export const GET_CURRENT_USER = gql`
       subscription {
         name
         settings {
-          forecastEnabled
-          forecastNotifications
+          forecast {
+            enabled
+            notifications
+          }
         }
       }
     }
