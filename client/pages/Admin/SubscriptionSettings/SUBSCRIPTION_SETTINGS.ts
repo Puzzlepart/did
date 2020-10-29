@@ -31,7 +31,7 @@ export type SubscriptionSetting =
 export const SUBSCRIPTION_SETTINGS = (t: TFunction): { [section: string]: SubscriptionSetting[] } => ({
   [t('admin.forecasting')]: [
     {
-      key: 'forecastEnabled',
+      key: 'forecast.enabled',
       type: 'bool',
       props: {
         label: t('admin.forecastEnabledLabel'),
@@ -39,7 +39,7 @@ export const SUBSCRIPTION_SETTINGS = (t: TFunction): { [section: string]: Subscr
       },
     },
     {
-      key: 'forecastNotifications',
+      key: 'forecast.notifications',
       type: 'number',
       props: {
         label: t('admin.forecastNotificationsLabel'),

@@ -1,6 +1,6 @@
 
 import { AppContext } from 'AppContext'
-import { value } from 'helpers'
+import { set, get } from 'helpers'
 import { PrimaryButton } from 'office-ui-fabric-react'
 import { ISliderProps, Slider } from 'office-ui-fabric-react/lib/Slider'
 import { ITextFieldProps, TextField } from 'office-ui-fabric-react/lib/TextField'
@@ -13,7 +13,7 @@ import { SUBSCRIPTION_SETTINGS } from './SUBSCRIPTION_SETTINGS'
 export const SubscriptionSettings = () => {
     const { user } = useContext(AppContext)
     const { t } = useTranslation()
-    const [settings, setSettings] = useState<Map<string, any>>(new Map(Object.entries(user.subscription.settings)) || new Map())
+    const [settings, setSettings] = useState(user.subscription.settings || {})
 
     /**
      * On settings changed
@@ -22,10 +22,13 @@ export const SubscriptionSettings = () => {
      * @param {any} value Value of setting
      */
     const onChange = (key: string, value: any) => {
-        const _settings = new Map(settings)
-        _settings.set(key, value)
+        const _settings = {...settings}
+        set(_settings, key, value)
         setSettings(_settings)
     }
+    
+    // eslint-disable-next-line no-console
+    console.log(settings)
 
     return (
         <div className={styles.root}>
@@ -44,7 +47,7 @@ export const SubscriptionSettings = () => {
                                     <div className={styles.inputField} key={key}>
                                         <Toggle
                                             {...props as IToggleProps}
-                                            defaultChecked={value(user.subscription.settings, key, false)}
+                                            defaultChecked={get(user.subscription.settings, key, false)}
                                             onChange={(_event, checked) => onChange(key, checked)} />
                                         <span className={styles.inputDescription}>{props.description}</span>
                                     </div>
@@ -56,7 +59,7 @@ export const SubscriptionSettings = () => {
                                         <div className={styles.inputField} key={key}>
                                             <Slider
                                                 {...props as ISliderProps}
-                                                defaultValue={value(user.subscription.settings, key, 1)}
+                                                defaultValue={get(user.subscription.settings, key, 1)}
                                                 onChange={value => onChange(key, value)} />
                                             <span className={styles.inputDescription}>{props.description}</span>
                                         </div>
@@ -65,7 +68,8 @@ export const SubscriptionSettings = () => {
                             default: {
                                 return (
                                     <div className={styles.inputField} key={key}>
-                                        <TextField {...props as ITextFieldProps} onChange={(_event, value) => onChange(key, value)} />
+                                        <TextField {...props as ITextFieldProps} 
+                                        onChange={(_event, value) => onChange(key, value)} />
                                     </div>
                                 )
                             }
