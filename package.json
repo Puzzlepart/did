@@ -9,11 +9,6 @@
   "config": {
     "public": "public"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint:client"
-    }
-  },
   "scripts": {
     "watch": "concurrently \"webpack\" \"npm run watch:server\" \"node tasks/open.js\" \"node tasks/localtunnel.js\"",
     "start": "node ./bin/www",
@@ -135,7 +130,6 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "7.19.0",
-    "husky": "^4.3.0",
     "localtunnel": "2.0.0",
     "mocha": "7.1.2",
     "nodemon": "2.0.3",
