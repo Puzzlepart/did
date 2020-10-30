@@ -25,7 +25,7 @@ const getContext = async (): Promise<IAppContext> => {
         error:  JSON.parse(document.getElementById('app').getAttribute('data-error') || '{}')
     }
     try {
-        const { data } = await client.query({ query: GET_CURRENT_USER })
+        const { data } = await client.query({ query: GET_CURRENT_USER, fetchPolicy: 'cache-first' })
         context.user = data?.currentUser
         let { preferredLanguage } = context.user
         preferredLanguage = contains(supportedLanguages, preferredLanguage) ? preferredLanguage : 'en-GB'
