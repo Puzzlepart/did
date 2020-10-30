@@ -160,8 +160,8 @@ class EventMatching {
    *
    * @param {*} events
    */
-  match(events) {
-    return events.map(event => this.matchEvent(event))
+  matchEvents(events) {
+    return events.map(this.matchEvent.bind(this))
   }
 }
 

@@ -115,7 +115,6 @@ async function timesheet(_obj, variables, ctx) {
 
     projects = connectEntities(projects, customers, labels)
 
-    const eventMatching = new EventMatching(projects, customers, labels)
 
     for (let i = 0; i < periods.length; i++) {
       let period = periods[i]
@@ -135,8 +134,9 @@ async function timesheet(_obj, variables, ctx) {
         )
         period.matchedEvents = period.events
       } else {
+        const eventMatching = new EventMatching(projects, customers, labels)
         period.events = await ctx.services.msgraph.getEvents(period.startDateTime, period.endDateTime)
-        period.events = eventMatching.match(period.events)
+        period.events = eventMatching.matchEvents(period.events)
         period.matchedEvents = period.events.filter(evt => !!evt.project)
       }
       period.events = period.events.map(evt => ({
