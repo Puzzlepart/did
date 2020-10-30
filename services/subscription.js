@@ -13,7 +13,7 @@ class SubscriptionService {
    *
    * Returns null if there's no active subscription
    *
-   * @param subscriptionId Subscription ID
+   * @param {*} subscriptionId Subscription ID
    */
   async getSubscription(subscriptionId) {
     try {
@@ -23,6 +23,18 @@ class SubscriptionService {
     } catch (error) {
       return null
     }
+  }
+
+  /**
+   * Update subscription
+   *
+   * @param {*} subscriptionId Subscription ID
+   * @param {*} settings Settings
+   */
+  async updateSubscription(subscriptionId, settings) {
+    const entity = this.tableUtil.convertToAzEntity(subscriptionId, { settings }, 'Default', { typeMap: { settings: 'json' } })
+    const result = await this.tableUtil.updateAzEntity('Subscriptions', entity, 'merge')
+    console.log(result)
   }
 
   /**

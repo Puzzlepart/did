@@ -44,7 +44,7 @@ class AzStorageService {
       ...omit(label, 'name'),
       createdBy,
     })
-    if (update) result = await this.tableUtil.updateAzEntity(this.tables.labels, entity, true)
+    if (update) result = await this.tableUtil.updateAzEntity(this.tables.labels, entity, 'merge')
     else result = await this.tableUtil.addAzEntity(this.tables.labels, entity)
     return result
   }
@@ -95,7 +95,7 @@ class AzStorageService {
       createdBy,
     })
     let result
-    if (update) result = await this.tableUtil.updateAzEntity(this.tables.customers, entity, true)
+    if (update) result = await this.tableUtil.updateAzEntity(this.tables.customers, entity, 'merge')
     else result = await this.tableUtil.addAzEntity(this.tables.customers, entity)
     return result
   }
@@ -164,7 +164,7 @@ class AzStorageService {
       { removeBlanks: false }
     )
     let result
-    if (update) result = await this.tableUtil.updateAzEntity(this.tables.projects, entity, true)
+    if (update) result = await this.tableUtil.updateAzEntity(this.tables.projects, entity, 'merge')
     else result = await this.tableUtil.addAzEntity(this.tables.projects, entity)
     return id
   }
@@ -204,7 +204,7 @@ class AzStorageService {
     const { string } = this.tableUtil.azEntGen()
     const entity = this.tableUtil.convertToAzEntity(user.id, omit(user, 'id'))
     let result
-    if (update) result = await this.tableUtil.updateAzEntity(this.tables.users, entity, true)
+    if (update) result = await this.tableUtil.updateAzEntity(this.tables.users, entity, 'merge')
     else result = await this.tableUtil.addAzEntity(this.tables.users, entity)
     return result
   }
@@ -549,7 +549,7 @@ class AzStorageService {
       icon: role.icon,
     })
     let result
-    if (update) result = await this.tableUtil.updateAzEntity(this.tables.roles, entity, true)
+    if (update) result = await this.tableUtil.updateAzEntity(this.tables.roles, entity, 'merge')
     else result = await this.tableUtil.addAzEntity(this.tables.roles, entity)
     return result
   }
