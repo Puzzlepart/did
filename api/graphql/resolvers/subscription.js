@@ -49,9 +49,16 @@ const typeDef = gql`
   }
 `
 
+/**
+ * Update subscription
+ * 
+ * @param {*} _obj {}
+ * @param {*} variables Variables: id, settings
+ * @param {*} ctx GraphQL context
+ */
 async function updateSubscription(_obj, variables, ctx) {
-  console.log(variables)
   try {
+    await ctx.services.subscription.updateSubscription(variables.id, variables.settings)
     return { success: true, error: null }
   } catch (error) {
     return {
