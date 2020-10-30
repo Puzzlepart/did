@@ -63,11 +63,25 @@ const typeDef = gql`
   }
 `
 
+/**
+ * Get AD users
+ * 
+ * @param {*} _obj {} 
+ * @param {*} _variables {}
+ * @param {*} ctx GraphQL context
+ */
 async function adUsers(_obj, _variables, ctx) {
   let users = await ctx.services.msgraph.getUsers()
   return users
 }
 
+/**
+ * Get users
+ * 
+ * @param {*} _obj {} 
+ * @param {*} _variables {}
+ * @param {*} ctx GraphQL context
+ */
 async function users(_obj, _variables, ctx) {
   let [users, roles] = await Promise.all([
     ctx.services.azstorage.getUsers(),
@@ -83,23 +97,39 @@ async function users(_obj, _variables, ctx) {
   return users
 }
 
+/**
+ * Get current user
+ * 
+ * @param {*} _obj {} 
+ * @param {*} _variables {}
+ * @param {*} ctx GraphQL context
+ */
 async function currentUser(_obj, _variables, ctx) {
   if (!ctx.user) return null
   try {
-    const [user, roles] = await Promise.all([
+    const [user, roles, subscription] = await Promise.all([
       ctx.services.azstorage.getUser(ctx.user.id),
       ctx.services.azstorage.getRoles(),
+      ctx.services.subscription.getSubscription(ctx.user.subscription.id),
     ])
     return {
       ...ctx.user,
       ...user,
       role: find(roles, role => role.name === user.role),
+      subscription,
     }
   } catch (error) {
     return null
   }
 }
 
+/**
+ * Add or update user
+ * 
+ * @param {*} _obj {} 
+ * @param {*} variables 
+ * @param {*} ctx GraphQL context
+ */
 async function addOrUpdateUser(_obj, variables, ctx) {
   try {
     await ctx.services.azstorage.addOrUpdateUser(variables.user, variables.update)
@@ -112,6 +142,13 @@ async function addOrUpdateUser(_obj, variables, ctx) {
   }
 }
 
+/**
+ * Bulk add users
+ * 
+ * @param {*} _obj {} 
+ * @param {*} variables 
+ * @param {*} ctx GraphQL context
+ */
 async function bulkAddUsers(_obj, variables, ctx) {
   try {
     await ctx.services.azstorage.bulkAddUsers(variables.users)
