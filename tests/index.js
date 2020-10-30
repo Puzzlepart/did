@@ -135,10 +135,6 @@ describe('Event matching', async () => {
       testEvent.categories.push('CONTOSO ABC')
       const event = first(eventMatching.matchEvents([testEvent]))
       strictEqual(event.customer.key, 'CONTOSO')
-      strictEqual(
-        any(event.labels, lbl => lbl.name === 'Overtime'),
-        true
-      )
     })
   })
 })
