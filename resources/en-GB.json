@@ -120,7 +120,8 @@
     "forecastNotificationsLabel": "Notifications",
     "forecasting": "Forecasting",
     "forecastEnabledDescription": "Enable/disable forecasting.",
-    "forecastNotificationsDescription": "How many weeks ahead should users forecast."
+    "forecastNotificationsDescription": "How many weeks ahead should users forecast.",
+    "subscriptionSettingsUpdateSuccess": "Subscription settings successfully updated."
   },
   "reports": {
     "generatingReportLabel": "Generating report. To give you the freshest results, we're generating a report from the latest data...",

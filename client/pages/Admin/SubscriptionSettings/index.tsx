@@ -1,16 +1,18 @@
 
 import { useMutation } from '@apollo/react-hooks/lib/useMutation'
 import { AppContext } from 'AppContext'
+import { useMessage, UserMessage } from 'components'
 import { get, set } from 'helpers'
-import { PrimaryButton } from 'office-ui-fabric-react'
+import { MessageBarType, PrimaryButton } from 'office-ui-fabric-react'
 import { ISliderProps, Slider } from 'office-ui-fabric-react/lib/Slider'
 import { ITextFieldProps, TextField } from 'office-ui-fabric-react/lib/TextField'
 import { IToggleProps, Toggle } from 'office-ui-fabric-react/lib/Toggle'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ISubscriptionSettings } from 'types'
-import { isEqual } from 'underscore'
+import { isEqual, omit } from 'underscore'
 import { deepCopy } from 'utils/deepCopy'
+import { omitDeep } from 'utils/omitDeep'
 import styles from './SubscriptionSettings.module.scss'
 import { SUBSCRIPTION_SETTINGS } from './SUBSCRIPTION_SETTINGS'
 import { UPDATE_SUBSCRIPTION } from './UPDATE_SUBSCRIPTION'
@@ -19,7 +21,9 @@ export const SubscriptionSettings = () => {
     const { user } = useContext(AppContext)
     const { t } = useTranslation()
     const [settings, setSettings] = useState<ISubscriptionSettings>(deepCopy(user.subscription.settings))
+    const [isSaved, setIsSaved] = useState(false)
     const [updateSubscription] = useMutation(UPDATE_SUBSCRIPTION)
+    const [message, setMessage] = useMessage()
 
     /**
      * On settings changed
@@ -34,11 +38,23 @@ export const SubscriptionSettings = () => {
     }
 
     const onSaveSettings = async () => {
-        await updateSubscription({ variables: { id: user.subscription.id, settings } })
+        await updateSubscription({
+            variables: {
+                id: user.subscription.id,
+                settings: omitDeep(settings, '__typename')
+            }
+        })
+        setMessage({ text: t('admin.subscriptionSettingsUpdateSuccess'), type: MessageBarType.success })
+        setIsSaved(true)
     }
 
     return (
         <div className={styles.root}>
+            {message && (
+                <UserMessage
+                    {...message}
+                    containerStyle={{ marginTop: 12, marginBottom: 12, width: 460 }} />
+            )}
             <div className={styles.inputField}>
                 <TextField
                     disabled
@@ -87,7 +103,7 @@ export const SubscriptionSettings = () => {
             ))}
             <PrimaryButton
                 className={styles.saveButton}
-                disabled={isEqual(user.subscription.settings, settings)}
+                disabled={isEqual(user.subscription.settings, settings) || isSaved}
                 onClick={onSaveSettings}
                 text={t('common.save')} />
         </div>
