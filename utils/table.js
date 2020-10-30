@@ -1,6 +1,6 @@
 const az = require('azure-storage')
 const { omit, contains, isNull } = require('underscore')
-const { decapitalize, capitalize, isBlank,startsWith } = require('underscore.string')
+const { decapitalize, capitalize, isBlank, startsWith } = require('underscore.string')
 const { reduceEachLeadingCommentRange } = require('typescript')
 const get = require('get-value')
 
@@ -32,7 +32,7 @@ class AzTableUtilities {
           obj[decapitalize(key)] = _.toISOString()
           break
         default:
-          if(startsWith(_, 'json:')) {
+          if (startsWith(_, 'json:')) {
             obj[decapitalize(key)] = JSON.parse(_.split('json:')[1])
           }
           else obj[decapitalize(key)] = _
@@ -198,6 +198,8 @@ class AzTableUtilities {
         let value = values[key]
         const type = get(options, `typeMap.${key}`, { default: typeof value })
         switch (type) {
+          case 'json': value = string(`json:${JSON.stringify(value)}`)
+            break
           case 'datetime': value = datetime(new Date(value))
             break
           case 'boolean': value = boolean(value)
@@ -261,20 +263,25 @@ class AzTableUtilities {
    *
    * @param {*} table Table name
    * @param {*} entity Entity
-   * @param {*} merge If the entity should be inserted using insertOrMergeEntity
+   * @param {*} type 'merge' or 'replace'
    */
-  updateAzEntity(table, entity, merge) {
+  updateAzEntity(table, entity, type = 'replace') {
     return new Promise((resolve, reject) => {
-      if (merge) {
-        this.tableService.insertOrMergeEntity(table, entity, undefined, (error, result) => {
-          if (error) reject(error)
-          else resolve(result)
-        })
-      } else {
-        this.tableService.insertOrReplaceEntity(table, entity, undefined, (error, result) => {
-          if (error) reject(error)
-          else resolve(result)
-        })
+      switch (type) {
+        case 'merge': {
+          this.tableService.insertOrMergeEntity(table, entity, undefined, (error, result) => {
+            if (error) reject(error)
+            else resolve(result)
+          })
+        }
+          break
+        case 'replace': {
+          this.tableService.insertOrReplaceEntity(table, entity, undefined, (error, result) => {
+            if (error) reject(error)
+            else resolve(result)
+          })
+        }
+          break
       }
     })
   }
