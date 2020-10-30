@@ -1,19 +1,25 @@
 
+import { useMutation } from '@apollo/react-hooks/lib/useMutation'
 import { AppContext } from 'AppContext'
-import { set, get } from 'helpers'
+import { get, set } from 'helpers'
 import { PrimaryButton } from 'office-ui-fabric-react'
 import { ISliderProps, Slider } from 'office-ui-fabric-react/lib/Slider'
 import { ITextFieldProps, TextField } from 'office-ui-fabric-react/lib/TextField'
 import { IToggleProps, Toggle } from 'office-ui-fabric-react/lib/Toggle'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { ISubscriptionSettings } from 'types'
+import { isEqual } from 'underscore'
+import { deepCopy } from 'utils/deepCopy'
 import styles from './SubscriptionSettings.module.scss'
 import { SUBSCRIPTION_SETTINGS } from './SUBSCRIPTION_SETTINGS'
+import { UPDATE_SUBSCRIPTION } from './UPDATE_SUBSCRIPTION'
 
 export const SubscriptionSettings = () => {
     const { user } = useContext(AppContext)
     const { t } = useTranslation()
-    const [settings, setSettings] = useState(user.subscription.settings || {})
+    const [settings, setSettings] = useState<ISubscriptionSettings>(deepCopy(user.subscription.settings))
+    const [updateSubscription] = useMutation(UPDATE_SUBSCRIPTION)
 
     /**
      * On settings changed
@@ -27,10 +33,15 @@ export const SubscriptionSettings = () => {
         setSettings(_settings)
     }
 
+    const onSaveSettings = async () => {
+        await updateSubscription({ variables: { id: user.subscription.id, settings } })
+    }
+
     return (
         <div className={styles.root}>
             <div className={styles.inputField}>
                 <TextField
+                    disabled
                     label={t('common.nameLabel')}
                     defaultValue={user.subscription.name} />
             </div>
@@ -74,7 +85,11 @@ export const SubscriptionSettings = () => {
                     })}
                 </div>
             ))}
-            <PrimaryButton className={styles.saveButton} text={t('common.save')} />
+            <PrimaryButton
+                className={styles.saveButton}
+                disabled={isEqual(user.subscription.settings, settings)}
+                onClick={onSaveSettings}
+                text={t('common.save')} />
         </div>
     )
 }

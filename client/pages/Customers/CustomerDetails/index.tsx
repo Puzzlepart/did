@@ -6,7 +6,7 @@ import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { ProjectList } from 'pages/Projects'
-import graphql from 'pages/Projects/graphql'
+import {GET_PROJECTS} from 'pages/Projects/graphql'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './CustomerDetails.module.scss'
@@ -16,7 +16,7 @@ import { ICustomerDetailsProps } from './types'
 export const CustomerDetails = (props: ICustomerDetailsProps) => {
     const { t } = useTranslation()
     const { loading, error, data } = useQuery(
-        graphql.query.projects,
+        GET_PROJECTS,
         {
             variables: {
                 sortBy: 'name',

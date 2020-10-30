@@ -10,6 +10,7 @@ const { typeDef: Label } = require('./resolvers/label')
 const { typeDef: Role } = require('./resolvers/role')
 const { typeDef: Notification } = require('./resolvers/notification')
 const { typeDef: ApiToken } = require('./resolvers/apiToken')
+const { typeDef: Subscription } = require('./resolvers/subscription')
 const { MSGraphService, AzStorageService, SubscriptionService } = require('../../services')
 const { filter, pick } = require('underscore')
 const get = require('get-value')
@@ -83,6 +84,7 @@ const getSchema = () => {
     ApiToken,
     Notification,
     Timesheet,
+    Subscription
   ]
   const resolvers = require('./resolvers')
   return makeExecutableSchema({

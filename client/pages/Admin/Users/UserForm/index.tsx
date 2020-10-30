@@ -13,7 +13,6 @@ import ADD_OR_UPDATE_USER, { IAddOrUpdateUserVariables } from './ADD_OR_UPDATE_U
 import { IUserFormProps } from './types'
 import styles from './UserFormModal.module.scss'
 
-
 export const UserForm = (props: IUserFormProps) => {
     const { adUsers, roles } = useContext(UsersContext)
     const { t } = useTranslation()

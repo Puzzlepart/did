@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-const projects = gql`
+export const GET_PROJECTS = gql`
   query($customerKey: String, $sortBy: String) {
     projects(customerKey: $customerKey, sortBy: $sortBy) {
       id
@@ -32,7 +32,7 @@ const projects = gql`
   }
 `
 
-const timeentries = gql`
+export const TIME_ENTRIES = gql`
   query($projectId: String) {
     timeentries(projectId: $projectId) {
       title
@@ -52,7 +52,7 @@ const timeentries = gql`
   }
 `
 
-const createOutlookCategory = gql`
+export const CREATE_OUTLOOK_CATEGORY = gql`
   mutation($category: String!) {
     result: createOutlookCategory(category: $category) {
       data
@@ -64,7 +64,7 @@ const createOutlookCategory = gql`
   }
 `
 
-const createOrUpdateProject = gql`
+export const CREATE_OR_UPDATE_PROJECT = gql`
   mutation($project: ProjectInput!, $update: Boolean) {
     result: createOrUpdateProject(project: $project, update: $update) {
       success
@@ -74,8 +74,3 @@ const createOrUpdateProject = gql`
     }
   }
 `
-
-export default {
-  query: { projects, timeentries },
-  mutation: { createOutlookCategory, createOrUpdateProject },
-}

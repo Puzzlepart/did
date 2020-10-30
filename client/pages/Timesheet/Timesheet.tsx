@@ -9,7 +9,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import { ActionBar } from './ActionBar'
 import { AllocationView } from './AllocationView'
 import { ErrorBar } from './ErrorBar'
-import graphql from './graphql'
+import { GET_TIMESHEET, SUBMIT_PERIOD, UNSUBMIT_PERIOD } from './graphql'
 import hotkeys from './hotkeys'
 import { Overview } from './Overview'
 import reducer from './reducer'
@@ -36,7 +36,7 @@ export const Timesheet = () => {
         scope: new TimesheetScope(params),
         selectedView: params.view || 'overview'
     })
-    const query = useQuery<{ timesheet: ITimesheetPeriod[] }>(graphql.query.timesheet, {
+    const query = useQuery<{ timesheet: ITimesheetPeriod[] }>(GET_TIMESHEET, {
         variables: {
             ...state.scope.dateStrings,
             dateFormat: 'dddd DD',
@@ -56,8 +56,8 @@ export const Timesheet = () => {
     }, [state.selectedView, state.selectedPeriod])
 
     const [[submitPeriod], [unsubmitPeriod]] = [
-        useMutation(graphql.mutation.submitPeriod),
-        useMutation(graphql.mutation.unsubmitPeriod),
+        useMutation(SUBMIT_PERIOD),
+        useMutation(UNSUBMIT_PERIOD),
     ]
 
     const onSubmitPeriod = async (forecast: boolean) => {

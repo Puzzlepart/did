@@ -3,30 +3,6 @@ const { gql } = require('apollo-server-express')
 
 const typeDef = gql`
   """
-  A type that describes SubscriptionForecastSettings
-  """
-  type SubscriptionForecastSettings {
-    enabled: Boolean
-    notifications: Int
-  }
-
-  """
-  A type that describes SubscriptionSettings
-  """
-  type SubscriptionSettings {
-    forecast: SubscriptionForecastSettings
-  }
-
-  """
-  A type that describes a Subscription
-  """
-  type Subscription {
-    id: String!
-    name: String!
-    settings: SubscriptionSettings
-  }
-
-  """
   A type that describes a User
   """
   type User {

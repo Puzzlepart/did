@@ -11,13 +11,13 @@ import { Summary } from './Summary'
 import { TimeEntries } from './TimeEntries'
 import { IProjectDetailsProps } from './types'
 import { ProjectDetailsContext } from './ProjectDetailsContext'
-import graphql from '../graphql'
+import {TIME_ENTRIES} from '../graphql'
 
 export const ProjectDetails = (props: IProjectDetailsProps) => {
     const { t } = useTranslation()
     const [project, setProject] = useState({ ...props.project })
     const { loading, error, data } = useQuery<{ timeentries: any[] }>(
-        graphql.query.timeentries,
+        TIME_ENTRIES,
         { variables: { projectId: props.project.id } }
     )
     const timeentries = data ? data.timeentries : []

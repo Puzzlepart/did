@@ -8,6 +8,7 @@ const { resolvers: labelResolvers } = require('./label')
 const { resolvers: roleResolvers } = require('./role')
 const { resolvers: notificationResolvers } = require('./notification')
 const { resolvers: addApiTokenResolvers } = require('./apiToken')
+const { resolvers: subscriptionResolvers } = require('./subscription')
 const { merge } = require('lodash')
 
 module.exports = merge(
@@ -20,5 +21,6 @@ module.exports = merge(
   roleResolvers,
   addApiTokenResolvers,
   timesheetResolvers,
-  notificationResolvers
+  notificationResolvers,
+  subscriptionResolvers
 )

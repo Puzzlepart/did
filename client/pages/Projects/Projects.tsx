@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { IProject } from 'types'
 import { find } from 'underscore'
-import graphql from './graphql'
+import { GET_PROJECTS } from './graphql'
 import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
 import { IProjectsContext, ProjectsContext } from './context'
@@ -24,7 +24,7 @@ export const Projects = () => {
     const params = useParams<IProjectsParams>()
     const [selected, setSelected] = useState<IProject>(null)
     const { loading, error, data, refetch } = useQuery<{ projects: any[]; outlookCategories: any[] }>(
-        graphql.query.projects,
+        GET_PROJECTS,
         {
             variables: { sortBy: 'name' },
             fetchPolicy: 'cache-and-network'
