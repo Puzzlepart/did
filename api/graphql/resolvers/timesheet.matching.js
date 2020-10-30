@@ -40,9 +40,10 @@ class EventMatching {
   /**
    * Looks for ignore "tag" in event. 
    * 
-   * @returns  Returns 'category' if ignore category is found
-   * Returns 'body' if ignore tag is found in body
-   * Otherwise returns nulll
+   * @returns 
+   * * Returns 'category' if ignore category is found
+   * * Returns 'body' if ignore tag is found in body
+   * * Otherwise returns nulll
    * 
    * @param {*} event 
    */
