@@ -127,11 +127,31 @@ describe('Event matching', async () => {
   })
 
   describe('Matching event labels', () => {
-    it('{crayon-timereg} in categories should add matching label', () => {
+    it('[crayon-timereg] in categories should add matching label', () => {
       testEvent.categories.push('crayon-timereg')
       const event = first(eventMatching.match([testEvent]))
       strictEqual(
         any(event.labels, lbl => lbl.name === 'crayon-timereg'),
+        true
+      )
+    })
+
+    it('[Overtime] in categories should add matching label', () => {
+      testEvent.categories.push('Overtime')
+      const event = first(eventMatching.match([testEvent]))
+      strictEqual(
+        any(event.labels, lbl => lbl.name === 'Overtime'),
+        true
+      )
+    })
+
+    it('[Overtime] and [4SUBSEA SHARE] in categories should add matching label', () => {
+      testEvent.categories.push('Overtime')
+      testEvent.categories.push('4SUBSEA SHARE')
+      const event = first(eventMatching.match([testEvent]))
+      strictEqual(event.project.key, 'SHARE')
+      strictEqual(
+        any(event.labels, lbl => lbl.name === 'Overtime'),
         true
       )
     })

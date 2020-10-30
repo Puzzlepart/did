@@ -103,31 +103,35 @@ class EventMatching {
    */
   matchEvent(event) {
     let ignore = this.findIgnore(event)
-    if (ignore === 'category') return { ...event, isSystemIgnored: true }
-    let categoriesStr = event.categories.join(' ').toUpperCase()
-    let inputStr = [event.title, event.body, categoriesStr].join(' ').toUpperCase()
-    let matches = this.findProjectMatches(inputStr, categoriesStr)
+    if (ignore === 'category') {
+      return { ...event, isSystemIgnored: true }
+    }
+    let categoriesStr = event.categories.join('|').toUpperCase()
+    let srchStr = [event.title, event.body, categoriesStr].join('|').toUpperCase()
+    let matches = this.findProjectMatches(srchStr, categoriesStr)
     let projectKey
     if (!isEmpty(matches)) {
-      // Loops through all the matches from findProjectMatches
       let i = 0
       for (let i = 0; i < matches.length; i++) {
-        let match = matches[i]
-        event.customer = find(this.customers, c => match.customerKey === c.key)
+        let { id, key, customerKey } = matches[i]
+        event.customer = find(this.customers, c => customerKey === c.key)
         if (!!event.customer) {
-          event.project = find(this.projects, p => p.id === match.id)
-          projectKey = match.key
+          event.project = find(this.projects, p => p.id === id)
+          projectKey = key
         }
         if (!!event.project) break
       }
     }
-    else if (ignore === 'body') return { ...event, isSystemIgnored: true }
+    else if (ignore === 'body') {
+      return { ...event, isSystemIgnored: true }
+    }
     else {
-      event.project = find(this.projects, p => !!find(this.searchString(inputStr, true), m => m.id === p.id))
+      event.project = find(this.projects, p => !!find(this.searchString(srchStr, true), m => m.id === p.id))
       if (!!event.project) event.customer = find(this.customers, c => c.key === event.project.customerKey)
     }
-    if (!!event.customer && !event.project) event.suggestedProject = this.findProjectSuggestion(event.customer, projectKey)
-
+    if (!!event.customer && !event.project) {
+      event.suggestedProject = this.findProjectSuggestion(event.customer, projectKey)
+    }
     event.labels = this.findLabels(event.categories)
     event = this.checkInactive(event)
     return event
