@@ -1,9 +1,9 @@
 const { deepStrictEqual, strictEqual, notStrictEqual } = require('assert')
 const { first, any, isArray } = require('underscore')
-const EventMatching = require('../api/graphql/resolvers/timesheet.matching')
+const EventMatching = require('../server/api/graphql/resolvers/timesheet.matching')
 const ensureTestData = require('./ensureTestData')
-const utils = require('../utils')
-const AzTableUtilities = require('../utils/table')
+const utils = require('../server/utils')
+const AzTableUtilities = require('../server/utils/table')
 
 describe('Event matching', async () => {
   let testEvent = {}
@@ -22,71 +22,65 @@ describe('Event matching', async () => {
   })
 
   describe('Match against project', () => {
-    it('IAM VAC in category should match against customer Employee Absence', () => {
-      testEvent.categories.push('IAM VAC')
+    it('ABS VAC in category should match against customer Employee Absence', () => {
+      testEvent.categories.push('ABS VAC')
       const event = first(eventMatching.matchEvents([testEvent]))
       strictEqual(event.customer.name, 'Employee Absence')
     })
 
-    it('[IAM VAC] in subject should match against customer Employee Absence', () => {
-      testEvent.title = '[IAM VAC]'
+    it('[ABS VAC] in subject should match against customer Employee Absence', () => {
+      testEvent.title = '[ABS VAC]'
       const event = first(eventMatching.matchEvents([testEvent]))
       strictEqual(event.customer.name, 'Employee Absence')
     })
 
-    it('[IAM VAC] in body should match against customer Employee Absence', () => {
-      testEvent.body = 'Hello this is an event [IAM VAC]'
+    it('[ABS VAC] in body should match against customer Employee Absence', () => {
+      testEvent.body = 'Hello this is an event [ABS VAC]'
       const event = first(eventMatching.matchEvents([testEvent]))
       strictEqual(event.customer.name, 'Employee Absence')
     })
 
-    it('{IAM VAC} in body should match against customer Employee Absence', () => {
-      testEvent.body = 'Hello this is an event {IAM VAC}'
+    it('{ABS VAC} in body should match against customer Employee Absence', () => {
+      testEvent.body = 'Hello this is an event {ABS VAC}'
       const event = first(eventMatching.matchEvents([testEvent]))
       strictEqual(event.customer.name, 'Employee Absence')
     })
 
-    it('/IAM VAC/ in body should match against customer Employee Absence', () => {
-      testEvent.body = 'Hello this is an event /IAM VAC/'
+    it('/ABS VAC/ in body should match against customer Employee Absence', () => {
+      testEvent.body = 'Hello this is an event /ABS VAC/'
       const event = first(eventMatching.matchEvents([testEvent]))
       strictEqual(event.customer.name, 'Employee Absence')
     })
 
-    it('IAM ILL in category should take presedence before IAM VAC in subject', () => {
-      testEvent.body = 'Hello this is an event /IAM VAC/'
-      testEvent.categories.push('IAM ILL')
+    it('ABS ILL in category should take presedence before ABS VAC in subject', () => {
+      testEvent.body = 'Hello this is an event /ABS VAC/'
+      testEvent.categories.push('ABS ILL')
       const event = first(eventMatching.matchEvents([testEvent]))
-      strictEqual(event.project.id, 'IAM ILL')
-    })
-
-    it('"AK ASSISTCH: ASSIST-3063" in subject should match to AK ASSISTCH', () => {
-      testEvent.body = 'AK ASSISTCH: ASSIST-3063'
-      const event = first(eventMatching.matchEvents([testEvent]))
-      strictEqual(event.project.id, 'AK ASSISTCH')
+      strictEqual(event.project.id, 'ABS ILL')
     })
   })
 
   describe('Matching suggestions', () => {
-    it('{IAM VAK} should suggest {IAM VAC}', () => {
-      testEvent.categories.push('IAM VAK')
+    it('{ABS VAK} should suggest {ABS VAC}', () => {
+      testEvent.categories.push('ABS VAK')
       const event = first(eventMatching.matchEvents([testEvent]))
-      strictEqual(event.suggestedProject.id, 'IAM VAC')
+      strictEqual(event.suggestedProject.id, 'ABS VAC')
     })
 
-    it('{IAM TRAVELLING} in category should yield no project but a match against Employee Absence', () => {
-      testEvent.categories.push('{IAM WHAAT}')
+    it('{ABS TRAVEL} in category should yield no project but a match against Employee Absence', () => {
+      testEvent.categories.push('{ABS TRAVEL}')
       const event = first(eventMatching.matchEvents([testEvent]))
       strictEqual(event.customer.name, 'Employee Absence')
     })
 
-    it('4SUBSEA ABC in category should yield no project but a match against 4SUBSEA', () => {
-      testEvent.categories.push('4SUBSEA ABC')
+    it('CONTOSO ABC in category should yield no project but a match against CONTOSO', () => {
+      testEvent.categories.push('CONTOSO ABC')
       const event = first(eventMatching.matchEvents([testEvent]))
-      strictEqual(event.customer.key, '4SUBSEA')
+      strictEqual(event.customer.key, 'CONTOSO')
     })
 
-    it('4SUBSEA ABC in body should yield no project and no match against customer 4SUBSEA', () => {
-      testEvent.body = 'Hello this is an event 4SUBSEA ABC'
+    it('CONTOSO ABC in body should yield no project and no match against customer CONTOSO', () => {
+      testEvent.body = 'Hello this is an event CONTOSO ABC'
       const event = first(eventMatching.matchEvents([testEvent]))
       strictEqual(event.customer, undefined)
     })
@@ -112,14 +106,14 @@ describe('Event matching', async () => {
     })
 
     it('[ignore] (lowercase) in body should set the event as ignored even with an event category', () => {
-      testEvent.categories.push('IAM VAC')
+      testEvent.categories.push('ABS VAC')
       testEvent.categories.push('ignore')
       const event = first(eventMatching.matchEvents([testEvent]))
       strictEqual(event.isSystemIgnored, true)
     })
 
-    it('IAM VAC in categories takes presedence before [ignore] (lowercase) in body', () => {
-      testEvent.categories.push('IAM VAC')
+    it('ABS VAC in categories takes presedence before [ignore] (lowercase) in body', () => {
+      testEvent.categories.push('ABS VAC')
       testEvent.body = 'This is the body of the event [ignore]'
       const event = first(eventMatching.matchEvents([testEvent]))
       notStrictEqual(event.isSystemIgnored, true)
@@ -127,11 +121,11 @@ describe('Event matching', async () => {
   })
 
   describe('Matching event labels', () => {
-    it('[crayon-timereg] in categories should add matching label', () => {
-      testEvent.categories.push('crayon-timereg')
+    it('overtime-40 in categories should add matching label', () => {
+      testEvent.categories.push('overtime-40')
       const event = first(eventMatching.matchEvents([testEvent]))
       strictEqual(
-        any(event.labels, lbl => lbl.name === 'crayon-timereg'),
+        any(event.labels, lbl => lbl.name === 'overtime-40'),
         true
       )
     })

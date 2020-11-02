@@ -1,12 +1,13 @@
 require('dotenv').config()
 const tryRequire = require('try-require')
 const path = require('path')
-const env = require('./utils/env')
+const env = require('./server/utils/env')
 const src = path.resolve(__dirname, 'client/')
 const pkg = require('./package.json')
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const LiveReloadPlugin = tryRequire('webpack-livereload-plugin')
 const WebpackBuildNotifierPlugin = tryRequire('webpack-build-notifier')
 
@@ -16,7 +17,7 @@ let config = {
   mode,
   entry: { [pkg.name]: './client' },
   output: {
-    path: path.resolve(__dirname, pkg.config.public, 'js'),
+    path: path.resolve(__dirname, 'server/public/js'),
     filename: '[name].[hash].js',
     publicPath: '/js',
   },
@@ -66,12 +67,13 @@ let config = {
       AppContext: path.resolve(src, 'AppContext'),
     },
     extensions: ['.ts', '.tsx', '.js', '.css', '.scss'],
+    plugins: [new TsconfigPathsPlugin({ configFile: './client/tsconfig.json' })]
   },
   plugins: [
     new MomentLocalesPlugin({ localesToKeep: ['en-gb', 'nb'] }),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'views/index_template.hbs'),
-      filename: path.resolve(__dirname, 'views/index.hbs'),
+      template: path.resolve(__dirname, 'server/views/index_template.hbs'),
+      filename: path.resolve(__dirname, 'server/views/index.hbs'),
       inject: true,
     }),
   ],
@@ -86,7 +88,7 @@ switch (mode) {
       config.plugins.push(new LiveReloadPlugin())
       config.plugins.push(
         new WebpackBuildNotifierPlugin({
-          logo: path.join(__dirname, '/public/images/favicon/mstile-150x150.png'),
+          logo: path.join(__dirname, '/server/public/images/favicon/mstile-150x150.png'),
           sound: env('WEBPACK_NOTIFICATIONS_SOUND', false),
           suppressSuccess: env('WEBPACK_NOTIFICATIONS_SUPPRESSSUCCESS') === 'true',
           showDuration: env('WEBPACK_NOTIFICATIONS_SHOWDURATION') === 'true',

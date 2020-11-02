@@ -1,8 +1,8 @@
 require('dotenv').config()
 const fs = require('fs')
 const path = require('path')
-const env = require('../utils/env')
-const AzStorageService = require('../services/azstorage')
+const env = require('../server/utils/env')
+const AzStorageService = require('../server/services/azstorage')
 const log = require('debug')('tests/ensureTestData')
 
 let azstorage = new AzStorageService({

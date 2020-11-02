@@ -1,6 +1,6 @@
 require('dotenv').config()
 const fs = require('fs')
-const env = require('../utils/env')
+const env = require('../server/utils/env')
 const localtunnel = require('localtunnel')
 const log = require('debug')('tasks/localtunnel')
 
