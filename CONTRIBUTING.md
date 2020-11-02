@@ -3,23 +3,31 @@
 ## Structure
 
 Folder/File | Description
---- | --- | 
+--- | --- 
 `/client` | Client TypeScript source using e.g. [React](https://reactjs.org/) and [Apollo Client](https://www.apollographql.com/docs/react/)`.
-`/client/components` | React components
-`/public` | Public assets, static files hosted under "/"
-`/public/css` | CSS files
-`/public/js` | JS files (hidden from `vscode`, the react bundle ends up here)
-`/routes` | [Express](https://expressjs.com/) routes using [HBS](https://handlebarsjs.com/) views
-`/api` | Server side APIs
-`/api/graphql` | [GraphQL](https://github.com/graphql/graphql-js/) implementation
-`/api/graphql/resolvers` | GraphQL resolvers, queries and mutations
-`/middleware` | Server side Express middleware functions
-`/middleware/passport` | [Passport](http://www.passportjs.org/) authentication middleware
-`/services` | Services ([MS Graph](https://developer.microsoft.com/en-us/graph) and [Azure Table Storage](https://azure.microsoft.com/en-us/services/storage/tables/))
-`/utils` | Utilities
-`/views` | Express HBS views
-`app.js` | Express app
-`server.js` | [Node.js](http://nodejs.org/) server  
+`/client/common` | Common elements like icons etc 
+`/client/components` | React components reusable throughout the solution 
+`/client/config` | Conifguration 
+`client/graphql` | Graphql implementation for the client using `apollo-client` 
+`client/helpers` | Helper functions 
+`client/pages` | Main pages of the solution 
+`client/types` | Types, models and interfaces 
+`client/utils` | Utility functions 
+`client/index.tsx` | Main entry point for the app 
+`/server/public` | Public assets, static files hosted under "/"
+`/server/public/css` | CSS files
+`/server/public/js` | JS files (hidden from `vscode`, the react bundle ends up here)
+`/server/routes` | [Express](https://expressjs.com/) routes using [HBS](https://handlebarsjs.com/) views
+`/server/api` | Server side APIs
+`/server/api/graphql` | [GraphQL](https://github.com/graphql/graphql-js/) implementation
+`/server/api/graphql/resolvers` | GraphQL resolvers, queries and mutations
+`/server/middleware` | Server side Express middleware functions
+`/server/middleware/passport` | [Passport](http://www.passportjs.org/) authentication middleware
+`/server/services` | Services ([MS Graph](https://developer.microsoft.com/en-us/graph) and [Azure Table Storage](https://azure.microsoft.com/en-us/services/storage/tables/))
+`/server/utils` | Utilities
+`/server/views` | Express HBS views
+`server/app.js` | Express app
+`server/index.js` | [Node.js](http://nodejs.org/) server  
 
 ## Development
 
@@ -38,6 +46,8 @@ Folder/File | Description
 ### Mocha tests
 
 `npm run tests` will run our mocha tests for the event matching. It will automatically fetch customers, projects and labels from Azure Table Storage if environment `TESTS_AZURE_STORAGE_CONNECTION_STRING` is set.
+
+`TESTS_AZURE_STORAGE_CONNECTION_STRING` should be set to the connection string for [didtestdata](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourcegroups/pzl-did/providers/Microsoft.Storage/storageAccounts/didtestdata/overview).
 
 ## GraphQL Documentation
 

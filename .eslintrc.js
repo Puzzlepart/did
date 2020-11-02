@@ -1,4 +1,8 @@
 module.exports = {
+  env: {
+    'browser': true,
+    'node': true
+  },
   parser: '@typescript-eslint/parser', // Specifies the ESLint parser
   extends: [
     'prettier',
@@ -13,6 +17,14 @@ module.exports = {
       jsx: true, // Allows for the parsing of JSX
     },
   },
+  overrides: [
+    {
+      files: ['server/**/*.js'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off'
+      }
+    }
+  ],
   rules: {
     /**
      * 0 = off, 1 = warn, 2 = error

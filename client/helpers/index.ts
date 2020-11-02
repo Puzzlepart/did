@@ -1,5 +1,4 @@
 import getValue from 'get-value'
-import setValue from 'set-value'
 
 /**
  * Converts string to array buffer
