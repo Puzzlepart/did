@@ -282,7 +282,7 @@
     "emptyText": "You have no active notifications at this time.",
     "templates": {
       "unconfirmedPeriods": "Week {0} ({1}) has not been confirmed.",
-      "forecast": "Missing forecast for week {0} ({1}) ."
+      "forecast": "Missing forecast for week {0} ({1})."
     }
   }
 }
