@@ -118,6 +118,7 @@ echo "[4/4] BUILD SERVER"
 echo ""
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
+  rm -rf "$DEPLOYMENT_TARGET/server-dist"
   eval $NPM_CMD run build:server
   exitWithMessageOnError "Server build failed"
   cd - > /dev/null
