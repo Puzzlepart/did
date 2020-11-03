@@ -2,6 +2,8 @@
 
 _The Calendar is The Timesheet in The Cloud_  
 
+_**Next release in [Oxygen](https://github.com/Puzzlepart/did365/milestone/8)&nbsp;&nbsp;🤸‍♂️**_ 
+
 ### Roadmap
 
 | Milestone                                                    | Release date | Version                                                      |
@@ -24,7 +26,7 @@ _The Calendar is The Timesheet in The Cloud_
 ### Maintainers
 
 - 🐮&nbsp;&nbsp;[@damsleth](https://github.com/damsleth)
-- 🤸‍♂️ &nbsp;&nbsp;[@olemp](https://github.com/olemp)
+- 🤸‍♂️&nbsp;&nbsp;[@olemp](https://github.com/olemp)
 - 👨‍🎤&nbsp;&nbsp;[@okms](https://github.com/okms) 
 
 _Want to contribute? ❤️ &nbsp;&nbsp;Take a look [here](./CONTRIBUTING.md) and create a PR!_
