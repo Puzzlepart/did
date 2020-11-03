@@ -60,5 +60,3 @@ export class ProjectResolver {
     }
   }
 }
-
-export * from './project.types'

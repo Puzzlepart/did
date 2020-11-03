@@ -60,5 +60,3 @@ export class ApiTokenResolver {
     }
   }
 }
-
-export * from './apiToken.types'

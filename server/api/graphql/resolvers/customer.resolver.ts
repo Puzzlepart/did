@@ -76,5 +76,3 @@ export class CustomerResolver {
     }
   }
 }
-
-export * from './customer.types'

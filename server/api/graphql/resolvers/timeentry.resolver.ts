@@ -30,23 +30,19 @@ export class TimeEntryResolver {
       ctx.services.azstorage.getCustomers(),
       ctx.services.azstorage.getTimeEntries(query, { sortAsc, forecast })
     ])
-    const entries = timeentries.map((entry) => {
-      let project: any
-      let customer: any
+    return timeentries.reduce((arr, entry) => {
       const resource = find(users, (user) => user.id === entry.resourceId)
-      if (!!entry.projectId) {
-        project = find(projects, (p) => p.id === entry.projectId)
-        customer = find(customers, (c) => c.key === first(entry.projectId.split(' ')))
-      }
-      return {
+      if (!entry.projectId) return arr
+      const project = find(projects, (p) => p.id === entry.projectId)
+      const customer = find(customers, (c) => c.key === first(entry.projectId.split(' ')))
+      if (!project || !customer) return arr
+      arr.push({
         ...entry,
         project,
         customer,
         resource
-      }
-    })
-    return entries
+      })
+      return arr
+    }, [])
   }
 }
-
-export * from './timeentry.types'

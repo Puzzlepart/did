@@ -166,5 +166,3 @@ export class TimesheetResolver {
     }
   }
 }
-
-export * from './timeentry.types'

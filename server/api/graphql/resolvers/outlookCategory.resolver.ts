@@ -39,5 +39,3 @@ export class OutlookCategoryResolver {
     }
   }
 }
-
-export * from './outlookCategory.types'

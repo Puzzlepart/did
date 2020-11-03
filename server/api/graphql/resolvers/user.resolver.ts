@@ -108,5 +108,3 @@ export class UserResolver {
     }
   }
 }
-
-export * from './user.types'

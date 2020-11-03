@@ -39,5 +39,3 @@ export class NotificationResolver {
     return [].concat.apply([], notifications)
   }
 }
-
-export * from './notification.types'

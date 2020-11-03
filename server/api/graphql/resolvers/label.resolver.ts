@@ -63,5 +63,3 @@ export class LabelResolver {
     }
   }
 }
-
-export * from './label.types'

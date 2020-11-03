@@ -42,5 +42,3 @@ export class RoleResolver {
     }
   }
 }
-
-export * from './role.types'
