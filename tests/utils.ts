@@ -81,6 +81,21 @@ describe('AzTableUtilities', async () => {
             const json = tableUtils.parseAzEntity(item)
             deepStrictEqual(Object.keys(json), ['title', 'modified'])
         })
+
+        it('should parse settings as JSON', () => {
+            const item = {
+                Title: {
+                    $: 'Edm.String',
+                    _: 'Hello world'
+                },
+                Settings: {
+                    $: 'Edm.String',
+                    _: 'json:{"enabled":true}'
+                }
+            }
+            const json = tableUtils.parseAzEntity(item)
+            strictEqual(json.settings.enabled, true)
+        })
     })
 
     describe('convertToAzEntity', () => {
