@@ -43,6 +43,7 @@ export default async (app: express.Application): Promise<void> => {
       context: createContext,
       engine: {
         reportSchema: true,
+        graphVariant: 'current',
         generateClientInfo: ({ context }) => {
           return {
             clientName: get(context, 'subscription.name', { default: '' }),

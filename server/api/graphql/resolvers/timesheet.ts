@@ -90,7 +90,7 @@ export class TimesheetResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Mutation(() => BaseResult)
+  @Mutation(() => BaseResult, { description: 'Submit period' })
   async submitPeriod(
     @Arg('period', () => TimesheetPeriodInput) period: TimesheetPeriodInput,
     @Arg('forecast', { nullable: true }) forecast: boolean,

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import moment from 'moment'
 import stripHtml from 'string-strip-html'
 
@@ -6,7 +7,7 @@ import stripHtml from 'string-strip-html'
  *
  * @param {string} str String
  */
-export const stripHtmlString = (str: string) => stripHtml(str)
+export const stripHtmlString = (str: string): string => stripHtml(str).result
 
 /**
  * Get duration between two times in hours
@@ -14,7 +15,7 @@ export const stripHtmlString = (str: string) => stripHtml(str)
  * @param {string} startDateTime Start time
  * @param {string} endDateTime End time
  */
-export const getDurationHours = (startDateTime: string, endDateTime: string) => {
+export const getDurationHours = (startDateTime: string, endDateTime: string): number => {
   return moment.duration(moment(endDateTime).diff(moment(startDateTime))).asHours()
 }
 

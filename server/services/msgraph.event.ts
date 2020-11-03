@@ -11,6 +11,7 @@ export default class MSGraphEvent {
   public endDateTime: any
   public duration: any
 
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   constructor(evt: any) {
     this.id = evt.id
     this.title = evt.subject
