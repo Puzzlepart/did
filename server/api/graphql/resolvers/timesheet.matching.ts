@@ -104,7 +104,7 @@ class EventMatching {
    * 1. Checks category/title/description for tokens
    * 2. Checks title/description for key without any brackets/parantheses
    *
-   * @param {EventObject} event
+   * @param {EventObject} event Event
    */
   private _matchEvent(event: EventObject) {
     const ignore = this._findIgnore(event)
@@ -142,9 +142,9 @@ class EventMatching {
   /**
    * Check if project or customer is marked as inactive
    *
-   * @param {*} event
+   * @param {EventObject} event
    */
-  private _checkInactive(event: any) {
+  private _checkInactive(event: EventObject) {
     const inactiveProject = get(event, 'project.inactive')
     const inactiveCustomer = get(event, 'customer.inactive')
     if (event.project && (inactiveProject || inactiveCustomer)) {
@@ -161,7 +161,7 @@ class EventMatching {
    *
    * @param {*} events
    */
-  public matchEvents(events: any) {
+  public matchEvents(events: EventObject[]): EventObject[] {
     return events.map(this._matchEvent.bind(this))
   }
 }
