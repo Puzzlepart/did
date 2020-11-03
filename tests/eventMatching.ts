@@ -16,7 +16,7 @@ describe(header('Event matching'), async () => {
   beforeEach(() => {
     testEvent = {
       title: 'Important meeting',
-      categories: [],
+      categories: []
     }
   })
 
@@ -124,7 +124,7 @@ describe(header('Event matching'), async () => {
       testEvent.categories.push('overtime-40')
       const event = first(eventMatching.matchEvents([testEvent]))
       strictEqual(
-        any(event.labels, lbl => lbl.name === 'overtime-40'),
+        any(event.labels, (lbl) => lbl.name === 'overtime-40'),
         true
       )
     })

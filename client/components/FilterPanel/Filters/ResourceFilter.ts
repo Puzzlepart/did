@@ -13,16 +13,16 @@ export class ResourceFilter extends BaseFilter {
    * @param {any[]} entries Entries
    */
   public initialize(entries: any[]): IFilter {
-    const resources = _.unique(entries.map(e => getValue(e, this.fieldName, null))).sort()
-    const items = resources.map(resource => ({
+    const resources = _.unique(entries.map((e) => getValue(e, this.fieldName, null))).sort()
+    const items = resources.map((resource) => ({
       key: resource,
-      value: resource,
+      value: resource
     }))
     return {
       key: this.fieldName,
       name: this.name,
       items,
-      selected: [],
+      selected: []
     }
   }
 }

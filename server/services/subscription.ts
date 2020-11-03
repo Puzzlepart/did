@@ -58,7 +58,7 @@ class SubscriptionService {
       const entity = await this.tableUtil.addAzEntity('ApiTokens', {
         PartitionKey: string(subscriptionId),
         RowKey: string(name),
-        Token: string(token),
+        Token: string(token)
       })
       return entity
     } catch (error) {
@@ -77,7 +77,7 @@ class SubscriptionService {
       const { string } = this.tableUtil.azEntGen()
       const result = await this.tableUtil.deleteEntity('ApiTokens', {
         PartitionKey: string(subscriptionId),
-        RowKey: string(name),
+        RowKey: string(name)
       })
       return result
     } catch (error) {

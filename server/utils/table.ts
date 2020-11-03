@@ -55,7 +55,7 @@ class AzTableUtilities {
     { entries, continuationToken }: azurestorage.TableService.QueryEntitiesResult<any>,
     columnMap: Record<string, string>
   ) {
-    entries = entries.map(ent => this.parseAzEntity(ent, columnMap))
+    entries = entries.map((ent) => this.parseAzEntity(ent, columnMap))
     return { entries, continuationToken }
   }
 
@@ -68,7 +68,7 @@ class AzTableUtilities {
       int: azurestorage.TableUtilities.entityGenerator.Int32,
       double: azurestorage.TableUtilities.entityGenerator.Double,
       datetime: azurestorage.TableUtilities.entityGenerator.DateTime,
-      boolean: azurestorage.TableUtilities.entityGenerator.Boolean,
+      boolean: azurestorage.TableUtilities.entityGenerator.Boolean
     }
   }
 
@@ -88,7 +88,7 @@ class AzTableUtilities {
       greaterThanOrEqual: azurestorage.TableUtilities.QueryComparisons.GREATER_THAN_OR_EQUAL,
       lessThan: azurestorage.TableUtilities.QueryComparisons.LESS_THAN,
       lessThanOrEqual: azurestorage.TableUtilities.QueryComparisons.LESS_THAN_OR_EQUAL,
-      and: azurestorage.TableUtilities.TableOperators.AND,
+      and: azurestorage.TableUtilities.TableOperators.AND
     }
   }
 
@@ -210,8 +210,8 @@ class AzTableUtilities {
   ): Record<string, azurestorage.TableUtilities.entityGenerator.EntityProperty<any>> {
     const { string, datetime, double, int, boolean } = this.azEntGen()
     const entityDescriptor = Object.keys(values)
-      .filter(key => !isNull(values[key]))
-      .filter(key => (options.removeBlanks ? !isBlank(values[key]) : true))
+      .filter((key) => !isNull(values[key]))
+      .filter((key) => (options.removeBlanks ? !isBlank(values[key]) : true))
       .reduce(
         (obj, key) => {
           let value: any = values[key]
@@ -243,7 +243,7 @@ class AzTableUtilities {
         },
         {
           PartitionKey: string(partitionKey),
-          RowKey: string(rowKey),
+          RowKey: string(rowKey)
         }
       )
     return omit(entityDescriptor, (prop: azurestorage.TableUtilities.entityGenerator.EntityProperty<any>) =>

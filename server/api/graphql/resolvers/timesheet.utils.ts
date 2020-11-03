@@ -28,8 +28,8 @@ export function getPeriods(
       month: utils.formatDate(startDateTime, 'MMMM', locale),
       startDateTime,
       endDateTime: isSplit ? utils.endOfMonth(startDateTime) : endDateTime,
-      isForecast: utils.isAfterToday(startDateTime),
-    },
+      isForecast: utils.isAfterToday(startDateTime)
+    }
   ]
 
   if (isSplit) {
@@ -40,7 +40,7 @@ export function getPeriods(
       month: utils.formatDate(endDateTime, 'MMMM', locale),
       startDateTime,
       endDateTime,
-      isForecast: utils.isAfterToday(startDateTime),
+      isForecast: utils.isAfterToday(startDateTime)
     })
   }
 
@@ -56,16 +56,16 @@ export function getPeriods(
  * @param {any[]} labels Labels
  */
 export function connectTimeEntries(timeentries: any[], projects: any[], customers: any[], labels: any[]) {
-  return timeentries.map(entry => {
+  return timeentries.map((entry) => {
     const customerKey = first(entry.projectId.split(' '))
     return {
       ...entry,
-      project: find(projects, p => p.id === entry.projectId),
-      customer: find(customers, c => c.key === customerKey),
-      labels: filter(labels, lbl => {
+      project: find(projects, (p) => p.id === entry.projectId),
+      customer: find(customers, (c) => c.key === customerKey),
+      labels: filter(labels, (lbl) => {
         const val = get(entry, 'labels', { default: '' })
         return contains(val, lbl.name)
-      }),
+      })
     }
   })
 }

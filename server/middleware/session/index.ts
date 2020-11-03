@@ -11,12 +11,12 @@ export default session({
     table: 'Sessions',
     sessionTimeOut: parseInt(env('SESSION_TIMEOUT', '10080')),
     logger: log,
-    errorLogger: log,
+    errorLogger: log
   }),
   secret: env('SESSION_SIGNING_KEY'),
   resave: false,
   saveUninitialized: false,
   rolling: true,
   cookie: { secure: env('SESSION_SECURE', '0') === '1' },
-  unset: 'destroy',
+  unset: 'destroy'
 })

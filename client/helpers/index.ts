@@ -26,7 +26,7 @@ export function currencyDisplay(num: number, currency: string = 'NOK', minimumFr
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency,
-    minimumFractionDigits,
+    minimumFractionDigits
   })
   return formatter.format(num)
 }

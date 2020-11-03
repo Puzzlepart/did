@@ -27,13 +27,13 @@ export class NotificationResolver {
       unconfirmedPeriods({
         template: templates.unconfirmedPeriods,
         ctx,
-        locale,
+        locale
       }),
       forecast({
         template: templates.forecast,
         ctx,
-        locale,
-      }),
+        locale
+      })
     ])
     // eslint-disable-next-line prefer-spread
     return [].concat.apply([], notifications)

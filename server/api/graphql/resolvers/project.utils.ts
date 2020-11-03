@@ -11,13 +11,13 @@ import { Customer, Project, LabelObject } from '../types'
  */
 export function connectEntities(projects: Project[], customers: Customer[], labels: LabelObject[]): Project[] {
   return projects
-    .map(project => ({
+    .map((project) => ({
       ...project,
-      customer: find(customers, c => c.key === project.customerKey),
-      labels: filter(labels, lbl => {
+      customer: find(customers, (c) => c.key === project.customerKey),
+      labels: filter(labels, (lbl) => {
         const str = get(project, 'labels', { default: '' })
         return str.indexOf(lbl.name) !== -1
-      }),
+      })
     }))
-    .filter(p => p.customer)
+    .filter((p) => p.customer)
 }

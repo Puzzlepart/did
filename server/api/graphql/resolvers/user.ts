@@ -19,12 +19,12 @@ export class UserResolver {
     try {
       const [user, roles] = await Promise.all([
         ctx.services.azstorage.getUser(ctx.user.id),
-        ctx.services.azstorage.getRoles(),
+        ctx.services.azstorage.getRoles()
       ])
       return {
         ...ctx.user,
         ...user,
-        role: find(roles, role => role.name === user.role),
+        role: find(roles, (role) => role.name === user.role)
       }
     } catch (error) {
       return null
@@ -54,11 +54,11 @@ export class UserResolver {
     // eslint-disable-next-line prefer-const
     let [users, roles] = await Promise.all([ctx.services.azstorage.getUsers(), ctx.services.azstorage.getRoles()])
     users = filter(
-      users.map(user => ({
+      users.map((user) => ({
         ...user,
-        role: find(roles, role => role.name === user.role),
+        role: find(roles, (role) => role.name === user.role)
       })),
-      user => !!user.role
+      (user) => !!user.role
     )
     return users
   }
@@ -83,7 +83,7 @@ export class UserResolver {
     } catch (error) {
       return {
         success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode'),
+        error: pick(error, 'name', 'message', 'code', 'statusCode')
       }
     }
   }
@@ -103,7 +103,7 @@ export class UserResolver {
     } catch (error) {
       return {
         success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode'),
+        error: pick(error, 'name', 'message', 'code', 'statusCode')
       }
     }
   }

@@ -23,10 +23,10 @@ export class ProjectResolver {
     // eslint-disable-next-line prefer-const
     let [projects, customers, labels] = await Promise.all([
       ctx.services.azstorage.getProjects(customerKey, {
-        sortBy,
+        sortBy
       }),
       ctx.services.azstorage.getCustomers(),
-      ctx.services.azstorage.getLabels(),
+      ctx.services.azstorage.getLabels()
     ])
     projects = connectEntities(projects, customers, labels)
     return projects
@@ -55,7 +55,7 @@ export class ProjectResolver {
     } catch (error) {
       return {
         success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode'),
+        error: pick(error, 'name', 'message', 'code', 'statusCode')
       }
     }
   }

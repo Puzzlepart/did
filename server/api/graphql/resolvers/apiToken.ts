@@ -32,7 +32,7 @@ export class ApiTokenResolver {
   async addApiToken(@Arg('name') name: string, @Ctx() ctx: Context): Promise<string> {
     const token = jwt.sign(
       {
-        data: pick(ctx.user, 'id'),
+        data: pick(ctx.user, 'id')
       },
       env('API_TOKEN_SECRET')
     )
@@ -55,7 +55,7 @@ export class ApiTokenResolver {
     } catch (error) {
       return {
         success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode'),
+        error: pick(error, 'name', 'message', 'code', 'statusCode')
       }
     }
   }

@@ -37,7 +37,7 @@ export class RoleResolver {
     } catch (error) {
       return {
         success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode'),
+        error: pick(error, 'name', 'message', 'code', 'statusCode')
       }
     }
   }

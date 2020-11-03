@@ -26,18 +26,18 @@ export default async function ({ template, ctx, locale }) {
 
   const forecastedPeriods = (await ctx.services.azstorage.getForecastedPeriods({
     resourceId: ctx.user.id,
-    year: utils.getYear(),
+    year: utils.getYear()
   })) as any[]
 
-  periods.forEach(period => {
-    if (!find(forecastedPeriods, cp => cp.periodId === period.id)) unforecastedPeriods.push(period)
+  periods.forEach((period) => {
+    if (!find(forecastedPeriods, (cp) => cp.periodId === period.id)) unforecastedPeriods.push(period)
   })
 
-  return unforecastedPeriods.map(period => ({
+  return unforecastedPeriods.map((period) => ({
     id: `forecast_${period.id}`,
     type: 1,
     severity: 2,
     text: format(template, period.week, period.month),
-    moreLink: ['', 'timesheet/overview', ...period.id.split('_')].join('/'),
+    moreLink: ['', 'timesheet/overview', ...period.id.split('_')].join('/')
   }))
 }

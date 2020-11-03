@@ -122,7 +122,7 @@ export const isAfterToday = (date: any) => {
  * @param {*} separator String separator
  */
 export const toArray = (str: string, separator: any = '|') => {
-  return (str || '').split(separator).filter(p => p)
+  return (str || '').split(separator).filter((p) => p)
 }
 
 /**
@@ -135,7 +135,7 @@ export const generateInt = (str: string, mod: number) => {
   return (
     str
       .split('')
-      .map(c => c.charCodeAt(0))
+      .map((c) => c.charCodeAt(0))
       .reduce((a, b) => a + b) % mod
   )
 }

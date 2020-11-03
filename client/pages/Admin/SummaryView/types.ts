@@ -16,15 +16,15 @@ export const getScopes = (t: TFunction): ISummaryViewScope[] => [
     fieldName: 'weekNumber',
     headerText: t('common.weekLabel'),
     itemIcon: 'CalendarWorkWeek',
-    getColumnHeader: (idx: number) => `${t('common.weekLabel')} ${idx}`,
+    getColumnHeader: (idx: number) => `${t('common.weekLabel')} ${idx}`
   },
   {
     itemKey: 'month',
     fieldName: 'monthNumber',
     headerText: t('common.monthLabel'),
     itemIcon: 'Calendar',
-    getColumnHeader: (idx: number) => dateUtils.getMonthName(idx),
-  },
+    getColumnHeader: (idx: number) => dateUtils.getMonthName(idx)
+  }
 ]
 
 /**
@@ -36,18 +36,18 @@ export const getViewTypes = (t: TFunction): IContextualMenuItem[] => [
   {
     key: 'resource',
     fieldName: 'resource.displayName',
-    name: t('common.employeeLabel'),
+    name: t('common.employeeLabel')
   },
   {
     key: 'project',
     fieldName: 'project.name',
-    name: t('common.project'),
+    name: t('common.project')
   },
   {
     key: 'customer',
     fieldName: 'customer.name',
-    name: t('common.customer'),
-  },
+    name: t('common.customer')
+  }
 ]
 
 export interface ISummaryViewScope extends IPivotItemProps {

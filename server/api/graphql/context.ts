@@ -25,12 +25,12 @@ export const createContext = async ({ req }): Promise<Context> => {
     const services = {
       azstorage: new AzStorageService(subscription),
       subscription: new SubscriptionService(),
-      msgraph: !!req.user && new MSGraphService().init(req),
+      msgraph: !!req.user && new MSGraphService().init(req)
     }
     return {
       services,
       user: req.user || {},
-      subscription,
+      subscription
     }
   } catch (error) {
     throw error

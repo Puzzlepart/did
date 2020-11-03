@@ -8,7 +8,7 @@ import * as $script from 'scriptjs'
  * @category Utility
  */
 export function loadScripts(src: string[]): Promise<void> {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     $script(src, 'src')
     $script.ready('src', resolve)
   })

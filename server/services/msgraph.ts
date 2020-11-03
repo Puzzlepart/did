@@ -22,11 +22,11 @@ class MSGraphService {
    */
   constructor() {
     appInsights.setup(env('APPINSIGHTS_INSTRUMENTATIONKEY'))
-    this.observer = new PerformanceObserver(list => {
+    this.observer = new PerformanceObserver((list) => {
       const { name, duration } = first(list.getEntries())
       appInsights.defaultClient.trackMetric({
         name,
-        value: duration,
+        value: duration
       })
     })
     this.observer.observe({ entryTypes: ['measure'], buffered: true })
@@ -69,7 +69,7 @@ class MSGraphService {
     const client = MSGraphClient.init({
       authProvider: (done: (arg0: any, arg1: any) => void) => {
         done(null, this.oauthToken.access_token)
-      },
+      }
     })
     return client
   }
@@ -113,7 +113,7 @@ class MSGraphService {
       const colorIdx = utils.generateInt(category, 24)
       const content = JSON.stringify({
         displayName: category,
-        color: `preset${colorIdx}`,
+        color: `preset${colorIdx}`
       })
       const client = this.getClient()
       const res = await client.api('/me/outlook/masterCategories').post(content)
@@ -170,7 +170,7 @@ class MSGraphService {
         JSON.stringify({
           startDateTime,
           endDateTime,
-          maxDurationHours,
+          maxDurationHours
         })
       )
       const { value } = await this.getClient()

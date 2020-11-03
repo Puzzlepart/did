@@ -41,7 +41,7 @@ export class CustomerResolver {
     } catch (error) {
       return {
         success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode'),
+        error: pick(error, 'name', 'message', 'code', 'statusCode')
       }
     }
   }
@@ -57,7 +57,7 @@ export class CustomerResolver {
   async deleteCustomer(@Arg('key') key: string, @Ctx() ctx: Context) {
     try {
       const projects = await ctx.services.azstorage.getProjects(key, {
-        noParse: true,
+        noParse: true
       })
       if (projects.length > 0) {
         const batch = projects.reduce((b, entity) => {
@@ -71,7 +71,7 @@ export class CustomerResolver {
     } catch (error) {
       return {
         success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode'),
+        error: pick(error, 'name', 'message', 'code', 'statusCode')
       }
     }
   }

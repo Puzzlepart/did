@@ -70,12 +70,12 @@ describe(header('AzTableUtilities'), async () => {
       const item = {
         Title: {
           $: 'Edm.String',
-          _: 'Hello world',
+          _: 'Hello world'
         },
         Modified: {
           $: 'Edm.DateTime',
-          _: new Date('2020-10-05T10:36:21.019Z'),
-        },
+          _: new Date('2020-10-05T10:36:21.019Z')
+        }
       }
       const json = tableUtils.parseAzEntity(item)
       deepStrictEqual(Object.keys(json), ['title', 'modified'])
@@ -85,12 +85,12 @@ describe(header('AzTableUtilities'), async () => {
       const item = {
         Title: {
           $: 'Edm.String',
-          _: 'Hello world',
+          _: 'Hello world'
         },
         Settings: {
           $: 'Edm.String',
-          _: 'json:{"enabled":true}',
-        },
+          _: 'json:{"enabled":true}'
+        }
       }
       const json = tableUtils.parseAzEntity(item)
       strictEqual(json.settings.enabled, true)
@@ -101,13 +101,13 @@ describe(header('AzTableUtilities'), async () => {
     it('should convert to AZ entity', () => {
       const values = {
         title: 'Hello world',
-        modified: '2020-10-05T10:36:21.019Z',
+        modified: '2020-10-05T10:36:21.019Z'
       }
       const entity = tableUtils.convertToAzEntity('78d15b30-499a-4d2f-96a5-a9644c57e741', values, 'default', {
         removeBlanks: true,
         typeMap: {
-          modified: 'datetime',
-        },
+          modified: 'datetime'
+        }
       })
       deepStrictEqual(entity.PartitionKey._, 'default')
       deepStrictEqual(entity.RowKey._, '78d15b30-499a-4d2f-96a5-a9644c57e741')
@@ -118,14 +118,14 @@ describe(header('AzTableUtilities'), async () => {
       const values = {
         title: 'Hello world',
         modified: '2020-10-05T10:36:21.019Z',
-        settings: { enabled: true },
+        settings: { enabled: true }
       }
       const entity = tableUtils.convertToAzEntity('78d15b30-499a-4d2f-96a5-a9644c57e741', values, 'default', {
         removeBlanks: true,
         typeMap: {
           modified: 'datetime',
-          settings: 'json',
-        },
+          settings: 'json'
+        }
       })
       strictEqual(startsWith(entity.Settings._, 'json:'), true)
     })

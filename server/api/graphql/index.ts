@@ -24,11 +24,11 @@ const getSchema = async () => {
       resolvers.TimeEntryResolver,
       resolvers.LabelResolver,
       resolvers.TimesheetResolver,
-      resolvers.UserResolver,
+      resolvers.UserResolver
     ],
     emitSchemaFile: true,
     validate: false,
-    authChecker,
+    authChecker
   })
   return schema
 }
@@ -46,10 +46,10 @@ export default async (app: express.Application): Promise<void> => {
         graphVariant: 'current',
         generateClientInfo: ({ context }) => {
           return {
-            clientName: get(context, 'subscription.name', { default: '' }),
+            clientName: get(context, 'subscription.name', { default: '' })
           }
-        },
-      },
+        }
+      }
     })
     server.applyMiddleware({ app, path: '/graphql' })
   } catch (error) {

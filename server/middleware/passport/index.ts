@@ -34,7 +34,7 @@ const strategy = () => {
       clientSecret: env('OAUTH_APP_PASSWORD'),
       validateIssuer: false,
       passReqToCallback: false,
-      scope: env('OAUTH_SCOPES').split(' '),
+      scope: env('OAUTH_SCOPES').split(' ')
     },
     onVerifySignin
   )

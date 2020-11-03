@@ -38,11 +38,11 @@ export class TimesheetResolver {
           {
             resourceId: ctx.user.id,
             startDateTime: query.startDateTime,
-            endDateTime: query.endDateTime,
+            endDateTime: query.endDateTime
           },
           { sortAsc: true }
         ),
-        ctx.services.azstorage.getLabels(),
+        ctx.services.azstorage.getLabels()
       ])
 
       projects = connectEntities(projects, customers, labels)
@@ -51,14 +51,14 @@ export class TimesheetResolver {
         const period = periods[i]
         const [confirmed, forecasted] = await Promise.all([
           ctx.services.azstorage.getConfirmedPeriod(ctx.user.id, period.id),
-          ctx.services.azstorage.getForecastedPeriod(ctx.user.id, period.id),
+          ctx.services.azstorage.getForecastedPeriod(ctx.user.id, period.id)
         ])
         period.isForecasted = !!forecasted
         period.forecastedHours = period.isForecasted && forecasted.hours
         period.isConfirmed = !!confirmed
         if (period.isConfirmed) {
           period.events = connectTimeEntries(
-            filter(timeentries, entry => entry.periodId === period.id),
+            filter(timeentries, (entry) => entry.periodId === period.id),
             projects,
             customers,
             labels
@@ -68,11 +68,11 @@ export class TimesheetResolver {
           const eventMatching = new EventMatching(projects, customers, labels)
           period.events = await ctx.services.msgraph.getEvents(period.startDateTime, period.endDateTime)
           period.events = eventMatching.matchEvents(period.events)
-          period.matchedEvents = period.events.filter(evt => !!evt.project)
+          period.matchedEvents = period.events.filter((evt) => !!evt.project)
         }
-        period.events = period.events.map(evt => ({
+        period.events = period.events.map((evt) => ({
           ...evt,
-          date: formatDate(evt.startDateTime, dateFormat, locale),
+          date: formatDate(evt.startDateTime, dateFormat, locale)
         }))
       }
       return periods
@@ -90,7 +90,7 @@ export class TimesheetResolver {
    */
   @Authorized()
   @Mutation(() => BaseResult, {
-    description: 'Adds matched time entries for the specified period and an entry for the confirmed period',
+    description: 'Adds matched time entries for the specified period and an entry for the confirmed period'
   })
   async submitPeriod(
     @Arg('period', () => TimesheetPeriodInput) period: TimesheetPeriodInput,
@@ -102,15 +102,15 @@ export class TimesheetResolver {
       if (!isEmpty(period.matchedEvents)) {
         const [events, labels] = await Promise.all([
           ctx.services.msgraph.getEvents(period.startDateTime, period.endDateTime),
-          ctx.services.azstorage.getLabels(),
+          ctx.services.azstorage.getLabels()
         ])
         const timeentries = period.matchedEvents.reduce((arr, me) => {
           const entry: any = {
             ...pick(me, 'projectId', 'manualMatch'),
-            event: find(events, e => e.id === me.id),
+            event: find(events, (e) => e.id === me.id)
           }
           if (!entry.event) return arr
-          entry.labels = filter(labels, lbl => contains(entry.event.categories, lbl.name)).map(lbl => lbl.name)
+          entry.labels = filter(labels, (lbl) => contains(entry.event.categories, lbl.name)).map((lbl) => lbl.name)
           return [...arr, entry]
         }, [])
         hours = await ctx.services.azstorage.addTimeEntries(ctx.user.id, period.id, timeentries, forecast)
@@ -124,7 +124,7 @@ export class TimesheetResolver {
     } catch (error) {
       return {
         success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode'),
+        error: pick(error, 'name', 'message', 'code', 'statusCode')
       }
     }
   }
@@ -138,7 +138,7 @@ export class TimesheetResolver {
    */
   @Authorized()
   @Mutation(() => BaseResult, {
-    description: 'Deletes time entries for the specified period and the entry for the confirmed period',
+    description: 'Deletes time entries for the specified period and the entry for the confirmed period'
   })
   async unsubmitPeriod(
     @Arg('period', () => TimesheetPeriodInput) period: TimesheetPeriodInput,
@@ -149,19 +149,19 @@ export class TimesheetResolver {
       if (forecast) {
         await Promise.all([
           ctx.services.azstorage.deleteTimeEntries(period.id, ctx.user.id, true),
-          ctx.services.azstorage.removeForecastedPeriod(period.id, ctx.user.id),
+          ctx.services.azstorage.removeForecastedPeriod(period.id, ctx.user.id)
         ])
       } else {
         await Promise.all([
           ctx.services.azstorage.deleteTimeEntries(period.id, ctx.user.id, false),
-          ctx.services.azstorage.removeConfirmedPeriod(period.id, ctx.user.id),
+          ctx.services.azstorage.removeConfirmedPeriod(period.id, ctx.user.id)
         ])
       }
       return { success: true, error: null }
     } catch (error) {
       return {
         success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode'),
+        error: pick(error, 'name', 'message', 'code', 'statusCode')
       }
     }
   }

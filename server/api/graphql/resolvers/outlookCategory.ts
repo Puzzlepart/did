@@ -16,7 +16,7 @@ export class OutlookCategoryResolver {
   @Query(() => [OutlookCategory], { description: 'Get Outlook categories' })
   async outlookCategories(@Ctx() ctx: Context) {
     const categories = await ctx.services.msgraph.getOutlookCategories()
-    return categories.map(c => ({ ...c, key: c.id }))
+    return categories.map((c) => ({ ...c, key: c.id }))
   }
 
   /**
@@ -34,7 +34,7 @@ export class OutlookCategoryResolver {
     } catch (error) {
       return {
         success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode'),
+        error: pick(error, 'name', 'message', 'code', 'statusCode')
       }
     }
   }

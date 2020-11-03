@@ -95,7 +95,7 @@ export class TimesheetPeriod {
    * @param {ITimesheetPeriod} params Params
    */
   constructor(private _period?: TimesheetPeriodObject, params?: ITimesheetParams) {
-    if (params) this.id = [params.week, params.month, params.year].filter(p => p).join('_')
+    if (params) this.id = [params.week, params.month, params.year].filter((p) => p).join('_')
     if (!_period) return
     this.id = _period.id
     this._month = capitalize(_period.month)
@@ -149,8 +149,8 @@ export class TimesheetPeriod {
   public get events(): EventObject[] {
     if (this._period) {
       return [...this._period.events]
-        .filter(event => !event.isSystemIgnored && this._uiIgnoredEvents.indexOf(event.id) === -1)
-        .map(event => this._checkManualMatch(event))
+        .filter((event) => !event.isSystemIgnored && this._uiIgnoredEvents.indexOf(event.id) === -1)
+        .map((event) => this._checkManualMatch(event))
     }
     return []
   }
@@ -169,7 +169,7 @@ export class TimesheetPeriod {
    */
   public get errors(): any[] {
     if (!this.events) return []
-    return filter(this.events, event => !!event.error).map(event => event.error)
+    return filter(this.events, (event) => !!event.error).map((event) => event.error)
   }
 
   /**
@@ -183,7 +183,7 @@ export class TimesheetPeriod {
    * Get matched duration for the events in the period
    */
   public get matchedDuration(): number {
-    return filter(this.events, event => !!event.project).reduce((sum, event) => sum + event.duration, 0)
+    return filter(this.events, (event) => !!event.project).reduce((sum, event) => sum + event.duration, 0)
   }
 
   /**
@@ -242,12 +242,12 @@ export class TimesheetPeriod {
    * * {boolean} manualMatch
    */
   private get matchedEvents(): EventInput[] {
-    const events = filter([...this.events], event => !!event.project).map(
-      event =>
+    const events = filter([...this.events], (event) => !!event.project).map(
+      (event) =>
         ({
           id: event.id,
           projectId: event.project.id,
-          manualMatch: event.manualMatch,
+          manualMatch: event.manualMatch
         } as EventInput)
     )
     return events
@@ -265,7 +265,7 @@ export class TimesheetPeriod {
       startDateTime: this._startDateTime.toISOString(),
       endDateTime: this._endDateTime.toISOString(),
       matchedEvents: this.matchedEvents,
-      forecastedHours: this.forecastedHours,
+      forecastedHours: this.forecastedHours
     }
   }
 
@@ -285,7 +285,7 @@ export class TimesheetPeriod {
   public get path(): string {
     return this.id
       .split('_')
-      .filter(p => p)
+      .filter((p) => p)
       .join('/')
   }
 
