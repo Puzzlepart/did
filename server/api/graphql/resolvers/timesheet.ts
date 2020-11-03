@@ -21,7 +21,7 @@ export class TimesheetResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Query(() => [TimesheetPeriodObject])
+  @Query(() => [TimesheetPeriodObject], { description: 'Get timesheet for startDateTime - endDateTime' })
   async timesheet(
     @Arg('query') query: TimesheetQuery,
     @Arg('locale') locale: string,
@@ -90,7 +90,7 @@ export class TimesheetResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Mutation(() => BaseResult, { description: 'Submit period' })
+  @Mutation(() => BaseResult, { description: 'Adds matched time entries for the specified period and an entry for the confirmed period' })
   async submitPeriod(
     @Arg('period', () => TimesheetPeriodInput) period: TimesheetPeriodInput,
     @Arg('forecast', { nullable: true }) forecast: boolean,
@@ -136,7 +136,7 @@ export class TimesheetResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Mutation(() => BaseResult)
+  @Mutation(() => BaseResult, { description: 'Deletes time entries for the specified period and the entry for the confirmed period' })
   async unsubmitPeriod(
     @Arg('period', () => TimesheetPeriodInput) period: TimesheetPeriodInput,
     @Arg('forecast', { nullable: true }) forecast: boolean,
