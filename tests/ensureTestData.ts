@@ -3,7 +3,8 @@ import fs from 'fs'
 import path from 'path'
 import env from '../server/utils/env'
 import AzStorageService from '../server/services/azstorage'
-const log = require('debug')('tests/ensureTestData')
+import createDebug from 'debug'
+const debug = createDebug('tests/ensureTestData')
 
 let azstorage = new AzStorageService({
   connectionString: env('TESTS_AZURE_STORAGE_CONNECTION_STRING')
@@ -11,15 +12,15 @@ let azstorage = new AzStorageService({
 
 export default () => new Promise<any>((resolve, reject) => {
   if (!env('TESTS_AZURE_STORAGE_CONNECTION_STRING')) {
-    log('Missing environment variable TESTS_AZURE_STORAGE_CONNECTION_STRING')
+    debug('Missing environment variable TESTS_AZURE_STORAGE_CONNECTION_STRING')
     reject()
   } else {
     try {
       const data = require('./testData.json')
-      log('testData.json found')
+      debug('testData.json found with %d projects, %s customers and %d labels', ...(data.map(v => v.length)))
       resolve(data)
     } catch (error) {
-      log('testData.json missing. Querying Azure Table Storage...')
+      debug('Querying Azure Table Storage for test data...')
       Promise.all([
         azstorage.getProjects(),
         azstorage.getCustomers(),
@@ -30,11 +31,11 @@ export default () => new Promise<any>((resolve, reject) => {
           JSON.stringify(value),
           null,
           () => {
-            log('Saving result to testData.json')
+            debug('Retrieved %d projects, %s customers and %d labels. Saving result to testData.json', ...(value.map(v => v.length)))
             resolve(value)
           })
       }).catch(error => {
-        log('An error occured querying Azure Table Storage...')
+        debug('An error occured querying Azure Table Storage...')
         reject(error)
       })
     }
