@@ -17,7 +17,7 @@ export class CustomerResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Query(() => [Customer])
+  @Query(() => [Customer], { description: 'Get customers' })
   async customers(@Arg('sortBy', { nullable: true }) sortBy: string, @Ctx() ctx: Context) {
     return await ctx.services.azstorage.getCustomers({ sortBy })
   }
@@ -30,7 +30,7 @@ export class CustomerResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Mutation(() => BaseResult)
+  @Mutation(() => BaseResult, { description: 'Create or update customer' })
   async createOrUpdateCustomer(
     @Arg('customer', () => CustomerInput) customer: CustomerInput,
     @Arg('update', { nullable: true }) update: boolean,
@@ -54,7 +54,7 @@ export class CustomerResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Mutation(() => BaseResult)
+  @Mutation(() => BaseResult, { description: 'Delete customer' })
   async deleteCustomer(@Arg('key') key: string, @Ctx() ctx: Context) {
     try {
       const projects = await ctx.services.azstorage.getProjects(key, {

@@ -14,7 +14,7 @@ export class UserResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Query(() => User)
+  @Query(() => User, { description: 'Get the currently logged in user' })
   async currentUser(@Ctx() ctx: Context) {
     if (!ctx.user) return null
     try {
@@ -38,7 +38,7 @@ export class UserResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Query(() => [User])
+  @Query(() => [User], { description: 'Get all users from Active Directory' })
   async adUsers(@Ctx() ctx: Context) {
     const users = await ctx.services.msgraph.getUsers()
     return users
@@ -50,7 +50,7 @@ export class UserResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Query(() => [User])
+  @Query(() => [User], { description: 'Get all users' })
   async users(@Ctx() ctx: Context) {
     // eslint-disable-next-line prefer-const
     let [users, roles] = await Promise.all([ctx.services.azstorage.getUsers(), ctx.services.azstorage.getRoles()])
@@ -72,7 +72,7 @@ export class UserResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Mutation(() => BaseResult)
+  @Mutation(() => BaseResult, { description: 'Add or update user' })
   async addOrUpdateUser(
     @Arg('user', () => UserInput) user: UserInput,
     @Arg('update', { nullable: true }) update: boolean,
@@ -96,7 +96,7 @@ export class UserResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Mutation(() => BaseResult)
+  @Mutation(() => BaseResult, { description: 'Bulk add users' })
   async bulkAddUsers(
     @Arg('users', () => [UserInput]) users: UserInput[],
     @Ctx() ctx: Context

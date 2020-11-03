@@ -15,7 +15,7 @@ export class ProjectResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Query(() => [Project])
+  @Query(() => [Project], { description: 'Get projects' })
   async projects(
     @Arg('customerKey', { nullable: true }) customerKey: string,
     @Arg('sortBy', { nullable: true }) sortBy: string,
@@ -41,7 +41,7 @@ export class ProjectResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Mutation(() => BaseResult)
+  @Mutation(() => BaseResult, { description: 'Create or update project' })
   async createOrUpdateProject(
     @Arg('project', () => ProjectInput) project: ProjectInput,
     @Arg('update', { nullable: true }) update: boolean,

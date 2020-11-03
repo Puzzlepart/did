@@ -15,20 +15,20 @@ export class ApiTokenResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Query(() => [ApiToken])
+  @Query(() => [ApiToken], { description: 'Get API tokens' })
   async apiTokens(@Ctx() ctx: Context): Promise<ApiToken[]> {
     const tokens = await ctx.services.subscription.getApiTokens(ctx.user.subscription.id)
     return tokens
   }
 
   /**
-   * Delete API tokens
+   * Add API token
    *
    * @param {string} name Name    *
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Mutation(() => String)
+  @Mutation(() => String, { description: 'Add API token' })
   async addApiToken(@Arg('name') name: string, @Ctx() ctx: Context): Promise<string> {
     const token = jwt.sign(
       {
@@ -41,13 +41,13 @@ export class ApiTokenResolver {
   }
 
   /**
-   * Delete API tokens
+   * Delete API token
    *
    * @param {string} name Name
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Mutation(() => BaseResult)
+  @Mutation(() => BaseResult, { description: 'Delete API tokens' })
   async deleteApiToken(@Arg('name') name: string, @Ctx() ctx: Context): Promise<BaseResult> {
     try {
       await ctx.services.subscription.deleteApiToken(name, ctx.user.subscription.id)

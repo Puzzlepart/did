@@ -14,7 +14,7 @@ export class LabelResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Query(() => [LabelObject])
+  @Query(() => [LabelObject], { description: 'Get labels' })
   async labels(@Ctx() ctx: Context) {
     return await ctx.services.azstorage.getLabels()
   }
@@ -27,7 +27,7 @@ export class LabelResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Mutation(() => BaseResult)
+  @Mutation(() => BaseResult, { description: 'Add or update label' })
   async addOrUpdateLabel(
     @Arg('label', () => LabelInput) label: LabelInput,
     @Arg('update', { nullable: true }) update: boolean,
@@ -51,7 +51,7 @@ export class LabelResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Mutation(() => BaseResult)
+  @Mutation(() => BaseResult, { description: 'Delete label' })
   async deleteLabel(@Arg('name') name: string, @Ctx() ctx: Context) {
     try {
       await ctx.services.azstorage.deleteLabel(name)

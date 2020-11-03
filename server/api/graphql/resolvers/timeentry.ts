@@ -16,7 +16,7 @@ export class TimeEntryResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Query(() => [TimeEntry])
+  @Query(() => [TimeEntry], { description: 'Get time entries matching the provided query' })
   async timeentries(
     @Arg('currentUser', { nullable: true }) currentUser: boolean,
     @Arg('sortAsc', { nullable: true }) sortAsc: boolean,

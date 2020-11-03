@@ -14,7 +14,7 @@ export class OutlookCategoryResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Query(() => [OutlookCategory])
+  @Query(() => [OutlookCategory], { description: 'Get Outlook categories' })
   async outlookCategories(@Ctx() ctx: Context) {
     const categories = await ctx.services.msgraph.getOutlookCategories()
     return categories.map(c => ({ ...c, key: c.id }))
@@ -27,7 +27,7 @@ export class OutlookCategoryResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Mutation(() => BaseResult)
+  @Mutation(() => BaseResult, { description: 'Create Outlook category' })
   async createOutlookCategory(@Arg('category') category: string, @Ctx() ctx: Context) {
     try {
       await ctx.services.msgraph.createOutlookCategory(category)

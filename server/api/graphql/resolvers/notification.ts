@@ -16,7 +16,7 @@ export class NotificationResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Query(() => [Notification])
+  @Query(() => [Notification], { description: 'Get notifications' })
   async notifications(
     @Arg('templates', () => NotificationTemplates) templates: NotificationTemplates,
     @Arg('locale') locale: string,

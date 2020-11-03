@@ -13,7 +13,7 @@ export class RoleResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Query(() => [Role])
+  @Query(() => [Role], { description: 'Get roles' })
   async roles(@Ctx() ctx: Context) {
     return await ctx.services.azstorage.getRoles()
   }
@@ -26,7 +26,7 @@ export class RoleResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Mutation(() => BaseResult)
+  @Mutation(() => BaseResult, { description: 'Add or update role' })
   async addOrUpdateRole(
     @Arg('role', () => RoleInput) role: RoleInput,
     @Arg('update', { nullable: true }) update: boolean,
