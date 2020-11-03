@@ -2,7 +2,7 @@
 
 _The Calendar is The Timesheet in The Cloud_  
 
-_**Next release in [Oxygen](https://github.com/Puzzlepart/did365/milestone/8)&nbsp;&nbsp;🤸‍♂️**_ 
+_**Next release is [Oxygen](https://github.com/Puzzlepart/did365/milestone/8)&nbsp;&nbsp;🤸‍♂️**_ 
 
 ### Roadmap
 
