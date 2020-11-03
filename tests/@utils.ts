@@ -5,3 +5,7 @@ export const header = (title: string) => {
 -----------------------------------------
 `
 }
+
+export const subHeader = (subTitle: string) => {
+  return `[${subTitle.toUpperCase()}]`
+}
