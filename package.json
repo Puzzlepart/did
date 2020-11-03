@@ -8,7 +8,7 @@
   },
   "scripts": {
     "watch": "concurrently \"webpack\" \"npm run watch:server\" \"node tasks/open.js\" \"node tasks/localtunnel.js\"",
-    "prestart": "rimraf /server-dist/public && npm run build:server && copyfiles -u 1 \"server/public/**/*\" server-dist",
+    "prestart": "npm run build:server && copyfiles -u 1 \"server/public/**/*\" server-dist",
     "start": "node ./server-dist/index.js",
     "watch:server": "nodemon",
     "package:client": "webpack",
@@ -119,10 +119,10 @@
     "validator": "13.0.0",
     "webpack": "4.44.1",
     "webpack-cli": "4.1.0",
-    "with-default-props": "0.2.1",
-    "rimraf": "3.0.2"
+    "with-default-props": "0.2.1"
   },
   "devDependencies": {
+    "rimraf": "3.0.2",
     "@types/passport-azure-ad": "^4.0.7",
     "@typescript-eslint/eslint-plugin": "4.6.1",
     "@typescript-eslint/parser": "4.6.1",
