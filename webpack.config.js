@@ -72,7 +72,7 @@ let config = {
     new MomentLocalesPlugin({ localesToKeep: ['en-gb', 'nb'] }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'server/views/index_template.hbs'),
-      filename: path.resolve(__dirname, 'server/views/index.hbs'),
+      filename: path.resolve(__dirname, 'server-dist/views/index.hbs'),
       inject: true,
     }),
   ],
