@@ -1,6 +1,6 @@
 import get from 'get-value'
 import { filter, find } from 'underscore'
-import { Customer, Project, LabelObject } from '../types'
+import { Customer, Project, LabelObject } from './types'
 
 /**
  * Connects projects, customers and labels

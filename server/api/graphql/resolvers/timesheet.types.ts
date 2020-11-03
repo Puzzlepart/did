@@ -1,9 +1,7 @@
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, Float, InputType, ObjectType } from 'type-graphql'
-import { EventError, Project } from '../types'
-import { Customer } from './customer.types'
-import { LabelObject } from './label.types'
+import { Customer, EventError, LabelObject, Project } from './types'
 
 @ObjectType({ description: 'A type that describes a Event' })
 export class EventObject {

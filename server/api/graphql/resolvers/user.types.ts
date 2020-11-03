@@ -1,7 +1,7 @@
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
-import { Role } from './role.types'
+import { Role } from './types'
 
 @ObjectType({ description: 'A type that describes a Subscription' })
 export class Subscription {

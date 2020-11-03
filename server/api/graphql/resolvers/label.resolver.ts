@@ -2,7 +2,7 @@ import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { pick } from 'underscore'
 import { Context } from '../context'
-import { BaseResult } from '../types'
+import { BaseResult } from './types'
 import { LabelObject, LabelInput } from './label.types'
 
 @Resolver(LabelObject)

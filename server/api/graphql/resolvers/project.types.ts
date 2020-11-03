@@ -1,9 +1,7 @@
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
-import { Customer } from './customer.types'
-import { LabelObject } from './label.types'
-import { OutlookCategory } from './outlookCategory.types'
+import { Customer, OutlookCategory, LabelObject } from './types'
 
 @ObjectType({ description: 'A type that describes a Project' })
 export class Project {
@@ -34,7 +32,7 @@ export class Project {
   @Field(() => Customer)
   customer?: Customer
 
-  @Field({ nullable: true, defaultValue: null })
+  @Field(()=> OutlookCategory, { nullable: true, defaultValue: null })
   outlookCategory?: OutlookCategory
 
   @Field({ nullable: true, defaultValue: false })

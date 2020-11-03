@@ -1,7 +1,7 @@
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { pick } from 'underscore'
 import { Context } from '../context'
-import { BaseResult, Project, ProjectInput } from '../types'
+import { BaseResult, Project, ProjectInput } from './types'
 import { connectEntities } from './project.utils'
 
 @Resolver(Project)

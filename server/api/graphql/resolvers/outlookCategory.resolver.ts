@@ -4,7 +4,7 @@ import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { pick } from 'underscore'
 import { Context } from '../context'
 import { OutlookCategory } from './outlookCategory.types'
-import { BaseResult } from '../types'
+import { BaseResult } from './types'
 
 @Resolver(OutlookCategory)
 export class OutlookCategoryResolver {

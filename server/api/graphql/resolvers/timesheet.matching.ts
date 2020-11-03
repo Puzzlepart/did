@@ -1,7 +1,7 @@
 import { first, find, filter, contains, isEmpty } from 'underscore'
 import { findBestMatch } from 'string-similarity'
 import get from 'get-value'
-import { Customer, EventObject, LabelObject, Project } from '../types'
+import { Customer, EventObject, LabelObject, Project } from './types'
 
 class EventMatching {
   public projects: Project[]

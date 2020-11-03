@@ -32,14 +32,14 @@ export class EventError {
   code: string
 }
 
-export * from '../resolvers/apiToken.types'
-export * from '../resolvers/customer.types'
-export * from '../resolvers/label.types'
-export * from '../resolvers/notification.types'
-export * from '../resolvers/timeentry.types'
-export * from '../resolvers/timesheet.types'
-export * from '../resolvers/project.types'
-export * from '../resolvers/outlookCategory.types'
-export * from '../resolvers/user.types'
-export * from '../resolvers/role.types'
+export * from './apiToken.types'
+export * from './customer.types'
+export * from './label.types'
+export * from './notification.types'
+export * from './timeentry.types'
+export * from './timesheet.types'
+export * from './project.types'
+export * from './outlookCategory.types'
+export * from './user.types'
+export * from './role.types'
 
