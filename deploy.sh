@@ -104,17 +104,7 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
 fi
 
 echo ""
-echo "[3/4] PACKAGING JS"
-echo ""
-if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
-  cd "$DEPLOYMENT_TARGET"
-  eval $NPM_CMD run package:client
-  exitWithMessageOnError "Packaging of client failed"
-  cd - > /dev/null
-fi
-
-echo ""
-echo "[4/4] BUILD SERVER"
+echo "[3/4] BUILD SERVER"
 echo ""
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
@@ -124,3 +114,12 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd - > /dev/null
 fi
 
+echo ""
+echo "[4/4] PACKAGING JS"
+echo ""
+if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
+  cd "$DEPLOYMENT_TARGET"
+  eval $NPM_CMD run package:client
+  exitWithMessageOnError "Packaging of client failed"
+  cd - > /dev/null
+fi
