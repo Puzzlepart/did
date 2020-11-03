@@ -3,6 +3,7 @@ import azurestorage from 'azure-storage'
 import { omit, isNull } from 'underscore'
 import { decapitalize, capitalize, isBlank, startsWith } from 'underscore.string'
 import get from 'get-value'
+import { json } from 'body-parser'
 
 class AzTableUtilities {
   public tableService: azurestorage.services.table.TableService
@@ -205,7 +206,7 @@ class AzTableUtilities {
     values: Record<string, any>,
     partitionKey = 'Default',
     options: { removeBlanks?: boolean; typeMap?: Record<string, string> } = { removeBlanks: true, typeMap: {} }
-  ) {
+  ): Record<string, azurestorage.TableUtilities.entityGenerator.EntityProperty<any>> {
     const { string, datetime, double, int, boolean } = this.azEntGen()
     const entityDescriptor = Object.keys(values)
       .filter(key => !isNull(values[key]))
@@ -215,6 +216,9 @@ class AzTableUtilities {
           let value: any = values[key]
           const type: string = get(options, `typeMap.${key}`, { default: typeof value })
           switch (type) {
+            case 'json':
+              value = string(`json:${JSON.stringify(value)}`)
+              break
             case 'datetime':
               value = datetime(new Date(value))
               break
