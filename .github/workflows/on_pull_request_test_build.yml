@@ -27,8 +27,8 @@ jobs:
           npm run package:client
         env:
           NODE_ENV: production
-    - name: Build server
-        run: |
-          npm run build:server
-        env:
-        NODE_ENV: production
+      - name: Build server
+          run: |
+            npm run build:server
+          env:
+          NODE_ENV: production
