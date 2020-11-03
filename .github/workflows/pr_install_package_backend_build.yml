@@ -1,4 +1,4 @@
-name: Front-end build
+name: Backend build
 on:
   pull_request:
     types: [assigned, opened, synchronize, reopened]
@@ -22,8 +22,8 @@ jobs:
       - name: Install npm packages
         run: |
           npm install --no-progress --loglevel silent --no-shrinkwrap --no-fund
-      - name: Package client JS
+      - name: Build server
         run: |
-          npm run package:client
+          npm run build:server
         env:
           NODE_ENV: production
