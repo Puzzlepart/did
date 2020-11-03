@@ -6,7 +6,6 @@ import 'reflect-metadata'
 import { buildSchema } from 'type-graphql'
 import { authChecker } from './authChecker'
 import { createContext } from './context'
-import * as resolvers from './resolvers'
 const debug = createDebug('api/graphql')
 
 /**
@@ -14,18 +13,7 @@ const debug = createDebug('api/graphql')
  */
 const getSchema = async () => {
   const schema = await buildSchema({
-    resolvers: [
-      resolvers.ApiTokenResolver,
-      resolvers.CustomerResolver,
-      resolvers.NotificationResolver,
-      resolvers.OutlookCategoryResolver,
-      resolvers.ProjectResolver,
-      resolvers.RoleResolver,
-      resolvers.TimeEntryResolver,
-      resolvers.LabelResolver,
-      resolvers.TimesheetResolver,
-      resolvers.UserResolver
-    ],
+    resolvers: [__dirname + '/resolvers/*.resolver.ts'],
     emitSchemaFile: true,
     validate: false,
     authChecker
