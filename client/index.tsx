@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/camelcase */
-import { ApolloProvider } from '@apollo/react-common'
+import { ApolloProvider } from '@apollo/client'
 import { initializeIcons } from '@uifabric/icons'
 import 'core-js/stable'
 import i18n from 'i18next'
@@ -22,11 +21,11 @@ initializeIcons()
  */
 const getContext = async (): Promise<IAppContext> => {
     const context: IAppContext = {
-        error:  JSON.parse(document.getElementById('app').getAttribute('data-error') || '{}')
+        error: JSON.parse(document.getElementById('app').getAttribute('data-error') || '{}')
     }
     try {
-        const { data } = await client.query({ query: GET_CURRENT_USER, fetchPolicy: 'cache-first' })
-        context.user = data?.currentUser
+        const { data } = await client.query({ query: GET_CURRENT_USER })
+        context.user = { ...data?.currentUser }
         let { preferredLanguage } = context.user
         preferredLanguage = contains(supportedLanguages, preferredLanguage) ? preferredLanguage : 'en-GB'
         context.user.preferredLanguage = preferredLanguage

@@ -1,6 +1,6 @@
-import { IProject } from 'types/IProject'
+import { Project } from 'types'
 import { ISearchBoxProps } from 'office-ui-fabric-react/lib/SearchBox'
 
 export interface ISearchProjectProps extends ISearchBoxProps {
-  onSelected: (project: IProject) => void
+  onSelected: (project: Project) => void
 }

@@ -1,7 +1,7 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { List } from 'components'
 import { PermissionList } from 'components/PermissionList'
-import { IRole } from 'types'
+import { Role } from 'types'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import React, { useState } from 'react'
@@ -20,7 +20,7 @@ export const Roles = () => {
             'name',
             '',
             { maxWidth: 140 },
-            (role: IRole) => {
+            (role: Role) => {
                 return (
                     <div>
                         <Icon styles={{ root: { fontSize: 33 } }} iconName={role.icon} />
@@ -33,13 +33,13 @@ export const Roles = () => {
             'permissions',
             t('admin.permissonsLabel'),
             { minWidth: 200, isMultiline: true },
-            (role: IRole) => <PermissionList permissionIds={role.permissions} />
+            (role: Role) => <PermissionList permissionIds={role.permissions} />
         ),
         col(
             'edit',
             '',
             { minWidth: 300, },
-            (role: IRole) => (
+            (role: Role) => (
                 <>
                     <DefaultButton
                         styles={{ root: { marginRight: 4 } }}

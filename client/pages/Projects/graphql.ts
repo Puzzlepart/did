@@ -33,8 +33,8 @@ export const GET_PROJECTS = gql`
 `
 
 export const TIME_ENTRIES = gql`
-  query($projectId: String) {
-    timeentries(projectId: $projectId) {
+  query($query: TimeEntriesQuery!) {
+    timeentries(query: $query) {
       title
       duration
       startDateTime
@@ -74,3 +74,4 @@ export const CREATE_OR_UPDATE_PROJECT = gql`
     }
   }
 `
+

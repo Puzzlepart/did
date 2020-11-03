@@ -3,7 +3,7 @@ import * as React from 'react'
 import { isEmpty } from 'underscore'
 import styles from './LabelColumn.module.scss'
 import { EntityLabel } from 'components/EntityLabel'
-import { IEntityLabel } from 'types'
+import { LabelObject } from 'types'
 import { ILabelColumnProps } from './types'
 
 export const LabelColumn = ({ label, project, customer }: ILabelColumnProps) => {
@@ -18,7 +18,7 @@ export const LabelColumn = ({ label, project, customer }: ILabelColumnProps) => 
                     <div className={styles.description}>for {customer.name}</div>
                     {!isEmpty(project.labels) && (
                         <div className={styles.labels}>
-                            {project.labels.map((label: IEntityLabel, idx: number) => (
+                            {project.labels.map((label: LabelObject, idx: number) => (
                                 <EntityLabel
                                     key={idx}
                                     label={label}

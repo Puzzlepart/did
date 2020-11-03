@@ -87,7 +87,7 @@ selectNodeVersion () {
 echo ""
 echo "[1/3] KUDU SYNC"
 echo ""
-"$KUDU_SYNC_CMD" -v 50 -f "$DEPLOYMENT_SOURCE" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" -i ".git;.hg;.deployment;deploy.sh;.github;.vscode;azcopy;doc;lib;node_modules;tests;.eslintignore;.eslintrc.js;.gitignore;CHANGELOG.md;CONTRIBUTING.md;README.md;typedoc.json"
+"$KUDU_SYNC_CMD" -v x -f "$DEPLOYMENT_SOURCE" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" -i ".git;.hg;.deployment;deploy.sh;.github;.vscode;azcopy;doc;lib;node_modules;tests;.eslintignore;.eslintrc.js;.gitignore;CHANGELOG.md;CONTRIBUTING.md;README.md;typedoc.json"
 exitWithMessageOnError "Kudu Sync failed"
 
 #2 Select node version

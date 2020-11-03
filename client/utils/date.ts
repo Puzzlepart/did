@@ -98,7 +98,7 @@ export default new (class DateUtils {
    *
    * @param {number} amount Defaults to 1
    */
-  public addMonth(amount: number = 1) {
+  public addMonth(amount = 1) {
     return moment().add(amount, 'month')
   }
 
@@ -107,7 +107,7 @@ export default new (class DateUtils {
    *
    * @param {number} amount Defaults to 1
    */
-  public subtractMonths(amount: number = 1) {
+  public subtractMonths(amount = 1) {
     return moment().subtract(amount, 'month')
   }
 
@@ -143,8 +143,8 @@ export default new (class DateUtils {
    * @param {string} format Format
    * @param {boolean} captialize Capitalize
    */
-  getMonthName(monthIndex?: number, format: string = 'MMMM', captialize: boolean = false): string {
-    let date = moment().locale(this._momentLocale)
+  getMonthName(monthIndex?: number, format = 'MMMM', captialize = false): string {
+    const date = moment().locale(this._momentLocale)
     let name: string
     if (monthIndex < 0) name = date.add(monthIndex, 'month').format(format)
     else if (monthIndex === 0) name = date.format(format)
@@ -162,7 +162,7 @@ export default new (class DateUtils {
   getTimespanString(
     start: moment.Moment,
     end: moment.Moment,
-    options: object = {
+    options: Record<string, any> = {
       monthFormat: 'MMMM',
       yearFormat: 'YYYY',
       hideYear: false,
@@ -171,7 +171,7 @@ export default new (class DateUtils {
   ): string {
     return start
       .locale(this._momentLocale)
-      ['twix'](end.locale(this._momentLocale), { allDay: true })
+    ['twix'](end.locale(this._momentLocale), { allDay: true })
       .format(options)
       .toLowerCase()
   }

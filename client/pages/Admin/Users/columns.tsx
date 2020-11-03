@@ -1,16 +1,16 @@
 import { TFunction } from 'i18next'
-import { IUser } from 'types'
+import { User } from 'types'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import React from 'react'
 import { generateColumn as col } from 'utils/generateColumn'
 
-export const columns = (onEdit: (user: IUser) => void, t: TFunction): IColumn[] => ([
+export const columns = (onEdit: (user: User) => void, t: TFunction): IColumn[] => ([
     col(
         'role.name',
         t('common.roleLabel'),
         { maxWidth: 100 },
-        ({ role }: IUser) => role.name,
+        ({ role }: User) => role.name,
     ),
     col(
         'displayName',
@@ -41,7 +41,7 @@ export const columns = (onEdit: (user: IUser) => void, t: TFunction): IColumn[] 
         'actions',
         '',
         {},
-        (user: IUser) => (
+        (user: User) => (
             <DefaultButton
                 text={t('common.editLabel')}
                 onClick={() => onEdit(user)} />

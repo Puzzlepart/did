@@ -1,7 +1,7 @@
 import { CustomerLink } from 'components/CustomerLink'
 import { EntityLabel } from 'components/EntityLabel'
 import { TFunction } from 'i18next'
-import { IProject } from 'types'
+import { Project } from 'types'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import * as React from 'react'
@@ -22,7 +22,7 @@ export default (props: IProjectListProps, t: TFunction): IColumn[] => ([
         'icon',
         '',
         { maxWidth: 35, minWidth: 35 },
-        (project: IProject) => {
+        (project: Project) => {
             if (project.inactive) {
                 return (
                     <Icon
@@ -43,13 +43,13 @@ export default (props: IProjectListProps, t: TFunction): IColumn[] => ([
         'name',
         t('common.nameFieldLabel'),
         { maxWidth: 220 },
-        (project: IProject) => <NameLabel project={project} renderLink={props.renderLink} />,
+        (project: Project) => <NameLabel project={project} renderLink={props.renderLink} />,
     ),
     col(
         'customer',
         t('common.customer'),
         { maxWidth: 220 },
-        (project: IProject) => {
+        (project: Project) => {
             if (!project.customer) return null
             return <CustomerLink customer={project.customer} />
         }
@@ -58,7 +58,7 @@ export default (props: IProjectListProps, t: TFunction): IColumn[] => ([
         'labels',
         '',
         {},
-        (project: IProject) => project.labels.map((label, idx) => (
+        (project: Project) => project.labels.map((label, idx) => (
             <EntityLabel key={idx} label={label} />
         )),
     ),

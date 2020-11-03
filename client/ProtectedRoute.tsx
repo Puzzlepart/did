@@ -9,7 +9,7 @@ export interface IProtectedRouteProps extends RouteProps {
     permission?: string;
 }
 
-export const ProtectedRoute = ({ path, exact, permission, children }: IProtectedRouteProps) => {
+export const ProtectedRoute: React.FunctionComponent<IProtectedRouteProps> = ({ path, exact, permission, children }: IProtectedRouteProps) => {
     const { hasPermission } = useContext(AppContext)
     const redirect = !!permission && !hasPermission(permission)
     return (

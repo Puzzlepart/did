@@ -4,11 +4,11 @@ import React, { useState, useEffect } from 'react'
 import styles from './SelectCallout.module.scss'
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox'
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox'
-import { IEntityLabel } from 'types'
+import { LabelObject } from 'types'
 import { ISelectCalloutProps } from './types'
 
 export const SelectCallout = (props: ISelectCalloutProps) => {
-    const [labels, setLabels] = useState<IEntityLabel[]>(props.labels)
+    const [labels, setLabels] = useState<LabelObject[]>(props.labels)
 
     useEffect(() => setLabels(props.labels), [props.labels])
 

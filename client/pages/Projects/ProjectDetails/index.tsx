@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { EntityLabel } from 'components/EntityLabel'
 import { UserMessage } from 'components/UserMessage'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
@@ -12,13 +12,18 @@ import { TimeEntries } from './TimeEntries'
 import { IProjectDetailsProps } from './types'
 import { ProjectDetailsContext } from './ProjectDetailsContext'
 import {TIME_ENTRIES} from '../graphql'
+import { TimeEntry } from '../../../../server/api/graphql/types'
 
-export const ProjectDetails = (props: IProjectDetailsProps) => {
+export const ProjectDetails: React.FunctionComponent<IProjectDetailsProps> = (props: IProjectDetailsProps) => {
     const { t } = useTranslation()
     const [project, setProject] = useState({ ...props.project })
-    const { loading, error, data } = useQuery<{ timeentries: any[] }>(
+    const { loading, error, data } = useQuery<{ timeentries: TimeEntry[] }>(
         TIME_ENTRIES,
-        { variables: { projectId: props.project.id } }
+        {
+            variables: {
+                query: {projectId: props.project.id}
+            }
+        }
     )
     const timeentries = data ? data.timeentries : []
 

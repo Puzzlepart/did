@@ -22,9 +22,9 @@ export const SUBMIT_PERIOD = gql`
   }
 `
 
-export const GET_TIMESHEET = gql`
-  query($startDateTime: String!, $endDateTime: String!, $dateFormat: String!, $locale: String!) {
-    timesheet(startDateTime: $startDateTime, endDateTime: $endDateTime, dateFormat: $dateFormat, locale: $locale) {
+export const TIMESHEET = gql`
+  query($query: TimesheetQuery!, $dateFormat: String!, $locale: String!) {
+    timesheet(query: $query, dateFormat: $dateFormat, locale: $locale) {
       id
       week
       month

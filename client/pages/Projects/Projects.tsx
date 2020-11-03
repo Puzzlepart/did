@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { AppContext } from 'AppContext'
 import { UserMessage } from 'components/UserMessage'
 import { manageProjects } from 'config/security/permissions'
@@ -9,21 +9,21 @@ import { ProjectForm } from 'pages/Projects/ProjectForm'
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
-import { IProject } from 'types'
+import { OutlookCategory, Project } from 'types'
 import { find } from 'underscore'
+import { IProjectsContext, ProjectsContext } from './context'
 import { GET_PROJECTS } from './graphql'
 import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
-import { IProjectsContext, ProjectsContext } from './context'
 import { IProjectsParams } from './types'
 
-export const Projects = () => {
+export const Projects: React.FunctionComponent = () => {
     const { t } = useTranslation()
     const { hasPermission } = useContext(AppContext)
     const history = useHistory()
     const params = useParams<IProjectsParams>()
-    const [selected, setSelected] = useState<IProject>(null)
-    const { loading, error, data, refetch } = useQuery<{ projects: any[]; outlookCategories: any[] }>(
+    const [selected, setSelected] = useState<Project>(null)
+    const { loading, error, data, refetch } = useQuery<{ projects: Project[]; outlookCategories: OutlookCategory[] }>(
         GET_PROJECTS,
         {
             variables: { sortBy: 'name' },

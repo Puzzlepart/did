@@ -1,16 +1,16 @@
-import { IRole } from 'types/IRole'
+import { Role } from 'types'
 import { IPanelProps } from 'office-ui-fabric-react/lib/Panel'
 
 export interface IRolePanelProps extends IPanelProps {
   /**
    * Role to edit
    */
-  model?: IRole
+  model?: Role
 
   /**
    * On save callback
    *
-   * @param {IRole} role The role that was updated or added
+   * @param {Role} role The role that was updated or added
    */
-  onSave?: (role: IRole) => void
+  onSave?: (role: Role) => void
 }

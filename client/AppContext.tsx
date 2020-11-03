@@ -1,11 +1,11 @@
-import { IUser } from 'types/IUser'
+import { User } from 'types'
 import * as React from 'react'
 
 export interface IAppContext {
     /**
      * The currently logged in user
      */
-    user?: IUser;
+    user?: User;
 
     /**
      * Checks if the currently logged in user has the specified permission

@@ -1,17 +1,16 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { UserMessage } from 'components/UserMessage'
-import { get } from 'helpers'
-import { IProject } from 'types/IProject'
+import { getValue } from 'helpers'
+import { Project } from 'types'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { ProjectList } from 'pages/Projects'
-import {GET_PROJECTS} from 'pages/Projects/graphql'
+import { GET_PROJECTS } from 'pages/Projects/graphql'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './CustomerDetails.module.scss'
 import { ICustomerDetailsProps } from './types'
-
 
 export const CustomerDetails = (props: ICustomerDetailsProps) => {
     const { t } = useTranslation()
@@ -20,7 +19,7 @@ export const CustomerDetails = (props: ICustomerDetailsProps) => {
         {
             variables: {
                 sortBy: 'name',
-                customerKey: get<string>(props, 'customer.key', '')
+                customerKey: getValue<string>(props, 'customer.key', '')
             }
         })
 
@@ -63,7 +62,7 @@ export const CustomerDetails = (props: ICustomerDetailsProps) => {
                 {error && <MessageBar messageBarType={MessageBarType.error}>{t('common.genericErrorText')}</MessageBar>}
                 {!error && (
                     <ProjectList
-                        items={get<IProject[]>(data, 'projects', [])}
+                        items={getValue<Project[]>(data, 'projects', [])}
                         enableShimmer={loading}
                         searchBox={{ placeholder: t('common.searchPlaceholder') }}
                         renderLink={true}

@@ -1,5 +1,5 @@
-import { ICustomer } from 'types/ICustomer'
+import { Customer } from 'types'
 
 export interface ICustomerLinkProps {
-    customer: ICustomer;
+    customer: Customer;
 }

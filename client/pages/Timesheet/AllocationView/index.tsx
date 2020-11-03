@@ -1,6 +1,6 @@
 
-import { get as get } from 'helpers'
-import { ITimeEntry } from 'types/ITimeEntry'
+import { getValue as getValue } from 'helpers'
+import { EventObject } from 'types'
 import React, { useLayoutEffect, useState, useContext, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Bar, BarChart, Legend, Tooltip, XAxis, YAxis } from 'recharts'
@@ -11,14 +11,14 @@ import styles from './AllocationView.module.scss'
 /**
  * Calculates durations based on exp
  * 
- * @param {ITimeEntry[]} entries Entries
+ * @param {EventObject[]} events Events
  * @param {string} exp Expression (what to calculate durations based on, e.g. customer.name)
  * 
  * @category Timesheet
  */
-export const GetAllocation = (entries: ITimeEntry[], exp: string): Array<{ name: string; hours: number }> => {
-    const items = entries.reduce((_items, entry) => {
-        const name = get(entry, exp, null)
+export const GetAllocation = (events: EventObject[], exp: string): Array<{ name: string; hours: number }> => {
+    const items = events.reduce((_items, entry) => {
+        const name = getValue(entry, exp, null)
         if (name) {
             const item = _.find(_items, i => i.name === name)
             if (item) item.hours += entry.duration

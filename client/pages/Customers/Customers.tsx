@@ -1,8 +1,8 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { AppContext } from 'AppContext'
 import { manageCustomers } from 'config/security/permissions'
-import { get } from 'helpers'
-import { ICustomer } from 'types'
+import { getValue } from 'helpers'
+import { Customer } from 'types'
 import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
@@ -14,23 +14,23 @@ import { find } from 'underscore'
 import { CustomerDetails } from './CustomerDetails'
 import { CustomerList } from './CustomerList'
 import GET_CUSTOMERS from './GET_CUSTOMERS'
-import { ICustomersParams, IGetCustomersData } from './types'
+import { ICustomersParams } from './types'
 
 
-export const Customers = () => {
+export const Customers: React.FunctionComponent = () => {
     const { t } = useTranslation()
     const { hasPermission } = useContext(AppContext)
     const history = useHistory()
     const params = useParams<ICustomersParams>()
-    const [selected, setSelected] = useState<ICustomer>(null)
-    const { loading, error, data } = useQuery<IGetCustomersData>(
+    const [selected, setSelected] = useState<Customer>(null)
+    const { loading, error, data } = useQuery(
         GET_CUSTOMERS,
         {
             variables: { sortBy: 'name' },
             fetchPolicy: 'cache-first'
         })
 
-    const customers = get<ICustomer[]>(data, 'customers', [])
+    const customers = getValue<Customer[]>(data, 'customers', [])
 
     useEffect(() => {
         if (!selected && params.key) {

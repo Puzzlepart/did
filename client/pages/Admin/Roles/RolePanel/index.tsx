@@ -1,4 +1,4 @@
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import { getIcons } from 'common/icons'
 import { IconPicker } from 'components/IconPicker'
 import * as securityConfig from 'config/security'

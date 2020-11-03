@@ -1,4 +1,4 @@
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import { AppContext } from 'AppContext'
 import { Panel } from 'office-ui-fabric-react/lib/Panel'
 import React, { useContext, useState } from 'react'

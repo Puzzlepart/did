@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@apollo/react-hooks'
+import { useMutation, useQuery } from '@apollo/client'
 import { AppContext } from 'AppContext'
 import { HotkeyModal } from 'components'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
@@ -9,23 +9,15 @@ import { useHistory, useParams } from 'react-router-dom'
 import { ActionBar } from './ActionBar'
 import { AllocationView } from './AllocationView'
 import { ErrorBar } from './ErrorBar'
-import { GET_TIMESHEET, SUBMIT_PERIOD, UNSUBMIT_PERIOD } from './graphql'
+import { SUBMIT_PERIOD, TIMESHEET, UNSUBMIT_PERIOD } from './graphql'
 import hotkeys from './hotkeys'
 import { Overview } from './Overview'
 import reducer from './reducer'
 import { SummaryView } from './SummaryView'
 import styles from './Timesheet.module.scss'
-import {
-    ITimesheetContext,
-    ITimesheetParams,
-    ITimesheetPeriod,
-    TimesheetContext,
-    TimesheetPeriod,
-    TimesheetScope,
-    TimesheetView
-} from './types'
+import { ITimesheetContext, ITimesheetParams, TimesheetContext, TimesheetPeriod, TimesheetScope, TimesheetView } from './types'
 
-export const Timesheet = () => {
+export const Timesheet: React.FunctionComponent = () => {
     const app = useContext(AppContext)
     const { t } = useTranslation()
     const history = useHistory()
@@ -36,9 +28,9 @@ export const Timesheet = () => {
         scope: new TimesheetScope(params),
         selectedView: params.view || 'overview'
     })
-    const query = useQuery<{ timesheet: ITimesheetPeriod[] }>(GET_TIMESHEET, {
+    const query = useQuery(TIMESHEET, {
         variables: {
-            ...state.scope.dateStrings,
+            query: state.scope.dateStrings,
             dateFormat: 'dddd DD',
             locale: app.user.preferredLanguage,
         },
@@ -76,7 +68,7 @@ export const Timesheet = () => {
             period: state.selectedPeriod.data,
             forecast
         }
-        unsubmitPeriod({ variables }).then(query.refetch)
+        unsubmitPeriod({ variables }).then(() => query.refetch())
     }
 
     const context: ITimesheetContext = useMemo(() => ({

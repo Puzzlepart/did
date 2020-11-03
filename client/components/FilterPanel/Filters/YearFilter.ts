@@ -1,4 +1,4 @@
-import { get } from 'helpers'
+import { getValue } from 'helpers'
 import _ from 'underscore'
 import { BaseFilter, IFilter } from './BaseFilter'
 
@@ -13,7 +13,7 @@ export class YearFilter extends BaseFilter {
    * @param {any[]} entries Entries
    */
   public initialize(entries: any[]): IFilter {
-    const years = _.unique(entries.map(e => get(e, this.fieldName, null))).sort()
+    const years = _.unique(entries.map(e => getValue(e, this.fieldName, null))).sort()
     const items = years.map(year => ({
       key: year,
       value: year,

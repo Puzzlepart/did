@@ -1,23 +1,35 @@
 require('dotenv').config()
 const tryRequire = require('try-require')
 const path = require('path')
-const env = require('./utils/env')
 const src = path.resolve(__dirname, 'client/')
 const pkg = require('./package.json')
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const LiveReloadPlugin = tryRequire('webpack-livereload-plugin')
 const WebpackBuildNotifierPlugin = tryRequire('webpack-build-notifier')
 
-const mode = env('NODE_ENV') === 'development' ? 'development' : 'production'
+const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production'
+const serverDist = mode === 'production' ? 'server-dist' : 'server'
+const filename = '[name].[hash].js'
+const hbsTemplate = path.resolve(__dirname, 'server/views/index_template.hbs')
+
+console.log('-----------------------------------')
+console.log('---------Compiling Did bundle------')
+console.log('-----------------------------------')
+console.log('MODE: %s', mode)
+console.log('SERVER DIST: %s', serverDist)
+console.log('FILENAME: %s', filename)
+console.log('HBS TEMPLATE: %s', hbsTemplate)
+console.log('-----------------------------------')
 
 let config = {
   mode,
   entry: { [pkg.name]: './client' },
   output: {
-    path: path.resolve(__dirname, pkg.config.public, 'js'),
-    filename: '[name].[hash].js',
+    path: path.resolve(__dirname, serverDist, 'public/js'),
+    filename,
     publicPath: '/js',
   },
   optimization: {
@@ -66,12 +78,13 @@ let config = {
       AppContext: path.resolve(src, 'AppContext'),
     },
     extensions: ['.ts', '.tsx', '.js', '.css', '.scss'],
+    plugins: [new TsconfigPathsPlugin({ configFile: './client/tsconfig.json' })]
   },
   plugins: [
     new MomentLocalesPlugin({ localesToKeep: ['en-gb', 'nb'] }),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'views/index_template.hbs'),
-      filename: path.resolve(__dirname, 'views/index.hbs'),
+      template: hbsTemplate,
+      filename: path.resolve(__dirname, serverDist, 'views/index.hbs'),
       inject: true,
     }),
   ],
@@ -86,10 +99,10 @@ switch (mode) {
       config.plugins.push(new LiveReloadPlugin())
       config.plugins.push(
         new WebpackBuildNotifierPlugin({
-          logo: path.join(__dirname, '/public/images/favicon/mstile-150x150.png'),
-          sound: env('WEBPACK_NOTIFICATIONS_SOUND', false),
-          suppressSuccess: env('WEBPACK_NOTIFICATIONS_SUPPRESSSUCCESS') === 'true',
-          showDuration: env('WEBPACK_NOTIFICATIONS_SHOWDURATION') === 'true',
+          logo: path.join(__dirname, '/server/public/images/favicon/mstile-150x150.png'),
+          sound: process.env.WEBPACK_NOTIFICATIONS_SOUND,
+          suppressSuccess: process.env.WEBPACK_NOTIFICATIONS_SUPPRESSSUCCESS === 'true',
+          showDuration: process.env.WEBPACK_NOTIFICATIONS_SHOWDURATION === 'true',
         })
       )
     }

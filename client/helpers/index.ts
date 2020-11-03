@@ -1,5 +1,4 @@
-import getValue from 'get-value'
-import setValue from 'set-value'
+import get from 'get-value'
 
 /**
  * Converts string to array buffer
@@ -39,8 +38,8 @@ export function currencyDisplay(num: number, currency: string = 'NOK', minimumFr
  * @param {string} exp Expression
  * @param {T} defaultValue Default value
  */
-export function get<T = any>(obj: any, exp: string, defaultValue?: T): T {
-  return getValue(obj, exp, defaultValue && { default: defaultValue })
+export function getValue<T = any>(obj: any, exp: string, defaultValue?: T): T {
+  return get(obj, exp, defaultValue && { default: defaultValue })
 }
 
 /**

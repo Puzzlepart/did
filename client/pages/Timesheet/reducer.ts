@@ -1,24 +1,24 @@
-import { QueryResult } from '@apollo/react-common'
-import { get } from 'helpers'
+import { QueryResult } from '@apollo/client'
+import { getValue } from 'helpers'
 import { TFunction } from 'i18next'
-import { IProject } from 'types'
+import { Project } from 'types'
 import { find, first } from 'underscore'
 import { ITimesheetScopeOptions, ITimesheetState, TimesheetPeriod, TimesheetScope, TimesheetView } from './types'
 
 export type TimesheetAction =
   | {
-      type: 'DATA_UPDATED'
-      payload: {
-        query: QueryResult<any>
-        t: TFunction
-      }
+    type: 'DATA_UPDATED'
+    payload: {
+      query: QueryResult<any>
+      t: TFunction
     }
+  }
   | { type: 'MOVE_SCOPE'; payload: ITimesheetScopeOptions | string }
   | { type: 'SUBMITTING_PERIOD'; payload: { t: TFunction; forecast: boolean } }
   | { type: 'UNSUBMITTING_PERIOD'; payload: { t: TFunction; forecast: boolean } }
   | { type: 'CHANGE_PERIOD'; payload: string }
   | { type: 'CHANGE_VIEW'; payload: TimesheetView }
-  | { type: 'MANUAL_MATCH'; payload: { eventId: string; project: IProject } }
+  | { type: 'MANUAL_MATCH'; payload: { eventId: string; project: Project } }
   | { type: 'CLEAR_MANUAL_MATCH'; payload: string }
   | { type: 'IGNORE_EVENT'; payload: string }
   | { type: 'CLEAR_IGNORES' }
@@ -31,7 +31,7 @@ export type TimesheetAction =
  * @param {IAction} action Action
  */
 export default (state: ITimesheetState, action: TimesheetAction): ITimesheetState => {
-  const t = get<TFunction>(action, 'payload.t')
+  const t = getValue<TFunction>(action, 'payload.t')
   const newState = { ...state }
   switch (action.type) {
     case 'DATA_UPDATED':
@@ -39,14 +39,14 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
         const { loading, data, error } = action.payload.query
         newState.loading = loading
           ? {
-              label: t('timesheet.loadingEventsLabel'),
-              description: t('timesheet.loadingEventsDescription'),
-            }
+            label: t('timesheet.loadingEventsLabel'),
+            description: t('timesheet.loadingEventsDescription'),
+          }
           : null
         if (data) {
           newState.periods = data.timesheet.map(period => new TimesheetPeriod(period))
           newState.selectedPeriod =
-            find(newState.periods, p => p.id === get(state, 'selectedPeriod.id', null)) || first(newState.periods)
+            find(newState.periods, p => p.id === getValue(state, 'selectedPeriod.id', null)) || first(newState.periods)
         }
         newState.error = error
       }
