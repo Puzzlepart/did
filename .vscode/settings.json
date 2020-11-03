@@ -17,7 +17,8 @@
     "client/**/*js.map": true,
     "server/**/*js": true,
     "server/**/*js.map": true,
-    "server/public/js": true
+    "server/public/js": true,
+    "server-dist": true
   },
   "javascript.validate.enable": false,
   "debug.node.autoAttach": "on",

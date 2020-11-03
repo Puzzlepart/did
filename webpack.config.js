@@ -11,13 +11,25 @@ const LiveReloadPlugin = tryRequire('webpack-livereload-plugin')
 const WebpackBuildNotifierPlugin = tryRequire('webpack-build-notifier')
 
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production'
+const serverDist = mode === 'production' ? 'server-dist' : 'server'
+const filename = '[name].[hash].js'
+const hbsTemplate = path.resolve(__dirname, 'server/views/index_template.hbs')
+
+console.log('-----------------------------------')
+console.log('---------Compiling Did bundle------')
+console.log('-----------------------------------')
+console.log('MODE: %s', mode)
+console.log('SERVER DIST: %s', serverDist)
+console.log('FILENAME: %s', filename)
+console.log('HBS TEMPLATE: %s', hbsTemplate)
+console.log('-----------------------------------')
 
 let config = {
   mode,
   entry: { [pkg.name]: './client' },
   output: {
-    path: path.resolve(__dirname, 'server-dist/public/js'),
-    filename: '[name].[hash].js',
+    path: path.resolve(__dirname, serverDist, 'public/js'),
+    filename,
     publicPath: '/js',
   },
   optimization: {
@@ -71,8 +83,8 @@ let config = {
   plugins: [
     new MomentLocalesPlugin({ localesToKeep: ['en-gb', 'nb'] }),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'server/views/index_template.hbs'),
-      filename: path.resolve(__dirname, 'server-dist/views/index.hbs'),
+      template: hbsTemplate,
+      filename: path.resolve(__dirname, serverDist, 'views/index.hbs'),
       inject: true,
     }),
   ],
