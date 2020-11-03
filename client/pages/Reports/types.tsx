@@ -87,7 +87,7 @@ export function getQueries<T = IReportsQuery>(t: TFunction): T[] {
             key: 'CURRENT_YEAR',
             text: t('common.exportTypeCurrentYear', currentYear),
             iconName: 'CalendarReply',
-            variables: currentYear,
+            variables: { query: currentYear },
             exportFileName: `TimeEntries-${currentYear.year}-{0}.xlsx`,
         } as unknown as T,
         {
