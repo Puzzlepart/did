@@ -8,7 +8,7 @@
   },
   "scripts": {
     "watch": "concurrently \"webpack\" \"npm run watch:server\" \"node tasks/open.js\" \"node tasks/localtunnel.js\"",
-    "prestart": "rimraf /server-dist && npm run build:server && copyfiles -u 1 \"server/public/**/*\" server-dist",
+    "prestart": "rimraf /server-dist/public && npm run build:server && copyfiles -u 1 \"server/public/**/*\" server-dist",
     "start": "node ./server-dist/index.js",
     "watch:server": "nodemon",
     "package:client": "webpack",
