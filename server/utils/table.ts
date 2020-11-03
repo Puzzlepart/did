@@ -326,7 +326,7 @@ class AzTableUtilities {
    */
   executeBatch(table: string, batch: azurestorage.TableBatch) {
     return new Promise((resolve, reject) => {
-      this.tableService.executeBatch2(table, batch, (error, result) => {
+      this.tableService.executeBatch(table, batch, (error, result) => {
         if (error) reject(error)
         else resolve(result)
       })
