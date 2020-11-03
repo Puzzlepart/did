@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import 'reflect-metadata'
+  import 'reflect-metadata'
 import { ObjectType, Field } from 'type-graphql'
 
 @ObjectType({ description: 'A type that describes a Error' })

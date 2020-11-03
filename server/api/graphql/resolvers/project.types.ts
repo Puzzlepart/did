@@ -3,7 +3,7 @@ import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import { Customer } from './customer.types'
 import { LabelObject } from './label.types'
-import { OutlookCategory } from './outlookCategory.resolver'
+import { OutlookCategory } from './outlookCategory.types'
 
 @ObjectType({ description: 'A type that describes a Project' })
 export class Project {
