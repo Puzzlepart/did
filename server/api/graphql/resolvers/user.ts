@@ -97,10 +97,7 @@ export class UserResolver {
    */
   @Authorized()
   @Mutation(() => BaseResult, { description: 'Bulk add users' })
-  async bulkAddUsers(
-    @Arg('users', () => [UserInput]) users: UserInput[],
-    @Ctx() ctx: Context
-  ): Promise<BaseResult> {
+  async bulkAddUsers(@Arg('users', () => [UserInput]) users: UserInput[], @Ctx() ctx: Context): Promise<BaseResult> {
     try {
       await ctx.services.azstorage.bulkAddUsers(users)
       return { success: true, error: null }

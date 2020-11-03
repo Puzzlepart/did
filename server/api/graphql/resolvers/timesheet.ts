@@ -90,7 +90,9 @@ export class TimesheetResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Mutation(() => BaseResult, { description: 'Adds matched time entries for the specified period and an entry for the confirmed period' })
+  @Mutation(() => BaseResult, {
+    description: 'Adds matched time entries for the specified period and an entry for the confirmed period',
+  })
   async submitPeriod(
     @Arg('period', () => TimesheetPeriodInput) period: TimesheetPeriodInput,
     @Arg('forecast', { nullable: true }) forecast: boolean,
@@ -136,7 +138,9 @@ export class TimesheetResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized()
-  @Mutation(() => BaseResult, { description: 'Deletes time entries for the specified period and the entry for the confirmed period' })
+  @Mutation(() => BaseResult, {
+    description: 'Deletes time entries for the specified period and the entry for the confirmed period',
+  })
   async unsubmitPeriod(
     @Arg('period', () => TimesheetPeriodInput) period: TimesheetPeriodInput,
     @Arg('forecast', { nullable: true }) forecast: boolean,

@@ -7,12 +7,12 @@ import { ITimesheetScopeOptions, ITimesheetState, TimesheetPeriod, TimesheetScop
 
 export type TimesheetAction =
   | {
-    type: 'DATA_UPDATED'
-    payload: {
-      query: QueryResult<any>
-      t: TFunction
+      type: 'DATA_UPDATED'
+      payload: {
+        query: QueryResult<any>
+        t: TFunction
+      }
     }
-  }
   | { type: 'MOVE_SCOPE'; payload: ITimesheetScopeOptions | string }
   | { type: 'SUBMITTING_PERIOD'; payload: { t: TFunction; forecast: boolean } }
   | { type: 'UNSUBMITTING_PERIOD'; payload: { t: TFunction; forecast: boolean } }
@@ -39,9 +39,9 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
         const { loading, data, error } = action.payload.query
         newState.loading = loading
           ? {
-            label: t('timesheet.loadingEventsLabel'),
-            description: t('timesheet.loadingEventsDescription'),
-          }
+              label: t('timesheet.loadingEventsLabel'),
+              description: t('timesheet.loadingEventsDescription'),
+            }
           : null
         if (data) {
           newState.periods = data.timesheet.map(period => new TimesheetPeriod(period))

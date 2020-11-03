@@ -1,5 +1,5 @@
 export const header = (title: string) => {
-return `
+  return `
 -----------------------------------------\n
 \tTESTS: ${title.toUpperCase()}\n
 -----------------------------------------

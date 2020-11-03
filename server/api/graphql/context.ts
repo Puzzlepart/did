@@ -1,16 +1,15 @@
-
 import { AuthenticationError } from 'apollo-server-express'
 import { MSGraphService, AzStorageService, SubscriptionService } from '../../services'
 import { Subscription, User } from './types'
 
 export class Context {
   public services?: {
-    msgraph?: MSGraphService;
-    azstorage?: AzStorageService;
-    subscription?: SubscriptionService;
-  };
-  public user?: User;
-  public subscription?: Subscription;
+    msgraph?: MSGraphService
+    azstorage?: AzStorageService
+    subscription?: SubscriptionService
+  }
+  public user?: User
+  public subscription?: Subscription
 }
 
 /**

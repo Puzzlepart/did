@@ -22,4 +22,3 @@ export const client = new ApolloClient({
 
 export { GET_CURRENT_USER } from './GET_CURRENT_USER'
 export { FetchPolicy }
-

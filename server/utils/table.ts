@@ -21,7 +21,10 @@ class AzTableUtilities {
    * @param {Record<string,azurestorage.TableUtilities.entityGenerator.EntityProperty<any>>} entityDescriptor Entity descriptor
    * @param {Record<string, string>} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
    */
-  parseAzEntity(entityDescriptor: Record<string, azurestorage.TableUtilities.entityGenerator.EntityProperty<any>>, columnMap: Record<string, string> = {}) {
+  parseAzEntity(
+    entityDescriptor: Record<string, azurestorage.TableUtilities.entityGenerator.EntityProperty<any>>,
+    columnMap: Record<string, string> = {}
+  ) {
     return Object.keys(entityDescriptor).reduce((obj: { [x: string]: any }, key: string) => {
       const { _, $ } = entityDescriptor[key]
       let value = _
@@ -287,7 +290,11 @@ class AzTableUtilities {
    * @param {any} entityDescriptor Entity descriptor
    * @param {boolean} merge If the entity should be inserted using insertOrMergeEntity
    */
-  updateAzEntity(table: string, entityDescriptor: any, merge: boolean): Promise<azurestorage.TableService.EntityMetadata> {
+  updateAzEntity(
+    table: string,
+    entityDescriptor: any,
+    merge: boolean
+  ): Promise<azurestorage.TableService.EntityMetadata> {
     return new Promise((resolve, reject) => {
       if (merge) {
         this.tableService.insertOrMergeEntity(table, entityDescriptor, undefined, (error, result) => {

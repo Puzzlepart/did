@@ -28,7 +28,7 @@ const getSchema = async () => {
     ],
     emitSchemaFile: true,
     validate: false,
-    authChecker
+    authChecker,
   })
   return schema
 }

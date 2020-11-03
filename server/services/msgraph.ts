@@ -10,6 +10,7 @@ import MSGraphEvent from './msgraph.event'
 import TokenService from './tokens'
 import get from 'get-value'
 import { Request } from 'express'
+import { Client as MSGraphClient } from '@microsoft/microsoft-graph-client'
 
 class MSGraphService {
   public observer: PerformanceObserver
@@ -36,7 +37,7 @@ class MSGraphService {
    *
    * @param {Request} req Request
    */
-  init(req: Request) {
+  init(req: Request): MSGraphService {
     this.request = req
     this.oauthToken = get(this.request, 'user.oauthToken')
     return this
@@ -47,7 +48,7 @@ class MSGraphService {
    *
    * @param {string} measure
    */
-  startMark(measure: string) {
+  startMark(measure: string): void {
     performance.mark(`${measure}-init`)
   }
 
@@ -56,7 +57,7 @@ class MSGraphService {
    *
    * @param {string} measure
    */
-  endMark(measure: string) {
+  endMark(measure: string): void {
     performance.mark(`${measure}-end`)
     performance.measure(`GraphService.${measure}`, `${measure}-init`, `${measure}-end`)
   }
@@ -64,8 +65,8 @@ class MSGraphService {
   /**
    * Gets a Microsoft Graph Client using the auth token from the class
    */
-  getClient() {
-    const client = require('@microsoft/microsoft-graph-client').Client.init({
+  getClient(): MSGraphClient {
+    const client = MSGraphClient.init({
       authProvider: (done: (arg0: any, arg1: any) => void) => {
         done(null, this.oauthToken.access_token)
       },
@@ -76,14 +77,14 @@ class MSGraphService {
   /**
    * Get users
    */
-  async getUsers() {
+  async getUsers(): Promise<any> {
     try {
       this.startMark('getUsers')
       const { value } = await this.getClient()
         .api('/users')
         // eslint-disable-next-line quotes
         .filter("userType eq 'Member'")
-        .select('id', 'givenName', 'surname', 'jobTitle', 'displayName', 'mobilePhone', 'mail', 'preferredLanguage')
+        .select(['id', 'givenName', 'surname', 'jobTitle', 'displayName', 'mobilePhone', 'mail', 'preferredLanguage'])
         .top(999)
         .get()
       this.endMark('getUsers')
@@ -106,7 +107,7 @@ class MSGraphService {
    *
    * @param {string} category Category
    */
-  async createOutlookCategory(category: string) {
+  async createOutlookCategory(category: string): Promise<any> {
     try {
       this.startMark('createOutlookCategory')
       const colorIdx = utils.generateInt(category, 24)

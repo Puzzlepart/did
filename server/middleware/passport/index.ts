@@ -1,7 +1,7 @@
 import fs from 'fs'
 import passport from 'passport'
 import onVerifySignin from './onVerifySignin'
-const OIDCStrategy = require('passport-azure-ad').OIDCStrategy
+import { OIDCStrategy } from 'passport-azure-ad'
 import env from '../../utils/env'
 
 passport.serializeUser((user, done) => done(null, user))

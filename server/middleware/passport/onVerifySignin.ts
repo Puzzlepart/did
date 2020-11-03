@@ -15,7 +15,15 @@ import { NO_OID_FOUND, TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } from './errors'
  * @param {any} oauthToken
  * @param  done
  */
-export default async function (_iss: any, _sub: any, profile: any, _accessToken: any, _refreshToken: any, oauthToken: any, done) {
+export default async function (
+  _iss: any,
+  _sub: any,
+  profile: any,
+  _accessToken: any,
+  _refreshToken: any,
+  oauthToken: any,
+  done
+) {
   try {
     if (!profile.oid) {
       debug('No oid found. Returning error NO_OID_FOUND.')

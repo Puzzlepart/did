@@ -1,4 +1,5 @@
 import env from '../utils/env'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const simpleoauth2 = require('simple-oauth2').create({
   client: {
     id: env('OAUTH_APP_ID'),

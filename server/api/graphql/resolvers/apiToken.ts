@@ -52,8 +52,7 @@ export class ApiTokenResolver {
     try {
       await ctx.services.subscription.deleteApiToken(name, ctx.user.subscription.id)
       return { success: true, error: null }
-    }
-    catch (error) {
+    } catch (error) {
       return {
         success: false,
         error: pick(error, 'name', 'message', 'code', 'statusCode'),
