@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import AzTableUtilities from '../utils/table'
 import { getDurationHours, toArray } from '../utils'
 import arraySort from 'array-sort'

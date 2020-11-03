@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import moment from 'moment'
 import stripHtml from 'string-strip-html'
 

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { ApolloError, AuthenticationError } from 'apollo-server-express'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { contains, filter, find, isEmpty, pick } from 'underscore'

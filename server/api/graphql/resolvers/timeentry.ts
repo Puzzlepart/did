@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Arg, Authorized, Ctx, Query, Resolver } from 'type-graphql'
 import { find, first } from 'underscore'
 import { Context } from '../context'
