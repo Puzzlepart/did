@@ -11,9 +11,9 @@ on:
       - 'client/**/.ts'
       - 'client/**/.json'
       - 'resources/**/.json'
-      - webpack.config.js
-      - package.json
-      - tsconfig.json
+      - 'webpack.config.js'
+      - 'package.json'
+      - 'tsconfig.json'
 jobs:
   build:
     runs-on: ubuntu-latest
