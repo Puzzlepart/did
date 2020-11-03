@@ -16,7 +16,7 @@ let config = {
   mode,
   entry: { [pkg.name]: './client' },
   output: {
-    path: path.resolve(__dirname, 'server/public/js'),
+    path: path.resolve(__dirname, 'server-dist/public/js'),
     filename: '[name].[hash].js',
     publicPath: '/js',
   },
