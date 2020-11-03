@@ -1,13 +1,13 @@
-const { deepStrictEqual, strictEqual, notStrictEqual } = require('assert')
-const { first, any, isArray } = require('underscore')
-const EventMatching = require('../server/api/graphql/resolvers/timesheet.matching')
-const ensureTestData = require('./ensureTestData')
-const utils = require('../server/utils')
-const AzTableUtilities = require('../server/utils/table')
+import { deepStrictEqual, strictEqual, notStrictEqual } from 'assert'
+import { first, any, isArray } from 'underscore'
+import EventMatching from '../server/api/graphql/resolvers/timesheet.matching'
+import ensureTestData from './ensureTestData'
+import * as utils from '../server/utils'
+import AzTableUtilities from '../server/utils/table'
 
 describe('Event matching', async () => {
-  let testEvent = {}
-  let eventMatching
+  let testEvent: any = {}
+  let eventMatching: EventMatching
 
   before(async () => {
     const [projects, customers, labels] = await ensureTestData()
@@ -149,15 +149,15 @@ describe('Utils', async () => {
     })
 
     it('should return 3', () => {
-      const start = new Date(2020, 10, 20, 13, 00).toISOString()
-      const end = new Date(2020, 10, 20, 16, 00).toISOString()
+      const start = new Date(2020, 10, 20, 13).toISOString()
+      const end = new Date(2020, 10, 20, 16).toISOString()
       const duration = utils.getDurationHours(start, end)
       strictEqual(duration, 3)
     })
 
     it('should return 24', () => {
-      const start = new Date(2020, 10, 20, 13, 00).toISOString()
-      const end = new Date(2020, 10, 21, 13, 00).toISOString()
+      const start = new Date(2020, 10, 20, 13).toISOString()
+      const end = new Date(2020, 10, 21, 13).toISOString()
       const duration = utils.getDurationHours(start, end)
       strictEqual(duration, 24)
     })
@@ -222,7 +222,7 @@ describe('AzTableUtilities', async () => {
         title: 'Hello world',
         modified: '2020-10-05T10:36:21.019Z',
       }
-      const entity = tableUtils.convertToAzEntity(
+      const entity: any = tableUtils.convertToAzEntity(
         '78d15b30-499a-4d2f-96a5-a9644c57e741',
         values,
         'default',
