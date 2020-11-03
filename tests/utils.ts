@@ -3,8 +3,9 @@ import { first, isArray } from 'underscore'
 import { startsWith } from 'underscore.string'
 import * as utils from '../server/utils'
 import AzTableUtilities from '../server/utils/table'
+import { header } from './@utils'
 
-describe('Utils', async () => {
+describe(header('utils'), async () => {
     describe('getDurationHours', () => {
         it('should return 0', () => {
             const start = new Date().toISOString()
@@ -61,9 +62,7 @@ describe('Utils', async () => {
     })
 })
 
-
-
-describe('AzTableUtilities', async () => {
+describe(header('AzTableUtilities'), async () => {
     const tableUtils = new AzTableUtilities(null)
 
     describe('parseAzEntity', () => {
