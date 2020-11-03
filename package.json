@@ -8,11 +8,10 @@
   },
   "scripts": {
     "watch": "concurrently \"webpack\" \"npm run watch:server\" \"node tasks/open.js\" \"node tasks/localtunnel.js\"",
-    "prestart": "npm run build:server && copyfiles -u 1 \"server/public/**/*\" server-dist",
     "start": "node ./server-dist/index.js",
     "watch:server": "nodemon",
     "package:client": "webpack",
-    "build:server": "tsc --project tsconfig.json",
+    "build:server": "tsc --project tsconfig.json && copyfiles -u 1 \"server/public/**/*\" server-dist",
     "lint": "eslint --ext .ts,.tsx ./client ./server --color --fix && npm run prettier",
     "prettier": "prettier --config .prettierrc '**/*.ts' --write --loglevel silent",
     "tests": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.ts'",
