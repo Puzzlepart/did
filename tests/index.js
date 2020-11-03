@@ -121,13 +121,20 @@ describe('Event matching', async () => {
   })
 
   describe('Matching event labels', () => {
-    it('overtime-40 in categories should add matching label', () => {
+    it('[overtime-40] in categories should add matching label', () => {
       testEvent.categories.push('overtime-40')
       const event = first(eventMatching.matchEvents([testEvent]))
       strictEqual(
         any(event.labels, lbl => lbl.name === 'overtime-40'),
         true
       )
+    })
+
+    it('[overtime-40] and [CONTOSO ABC] in categories should add matching label', () => {
+      testEvent.categories.push('overtime-40')
+      testEvent.categories.push('CONTOSO ABC')
+      const event = first(eventMatching.matchEvents([testEvent]))
+      strictEqual(event.customer.key, 'CONTOSO')
     })
   })
 })

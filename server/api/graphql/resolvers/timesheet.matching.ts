@@ -125,7 +125,8 @@ class EventMatching {
         }
         if (!!event.project) break
       }
-    } else if (ignore === 'body') {
+    }
+    else if (ignore === 'body') {
       return { ...event, isSystemIgnored: true }
     } else {
       event.project = find(this.projects, p => !!find(this._searchString(srchStr, true), m => m.id === p.id))
