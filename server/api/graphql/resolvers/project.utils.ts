@@ -1,14 +1,15 @@
-import { filter, find } from 'underscore'
 import get from 'get-value'
+import { filter, find } from 'underscore'
+import { Customer, Project, LabelObject } from '../types'
 
 /**
  * Connects projects, customers and labels
  *
- * @param {any[]} projects
- * @param {any[]} customers
- * @param {any[]} labels
+ * @param {Project[]} projects
+ * @param {Customer[]} customers
+ * @param {LabelObject[]} labels
  */
-export function connectEntities(projects: any[], customers: any[], labels: any[]) {
+export function connectEntities(projects: Project[], customers: Customer[], labels: LabelObject[]): Project[] {
   return projects
     .map(project => ({
       ...project,
