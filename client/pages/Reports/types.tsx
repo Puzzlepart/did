@@ -30,22 +30,22 @@ export interface IReportsState {
     /**
      * Filter panel open
      */
-    isFiltersOpen?: boolean;
+    readonly isFiltersOpen?: boolean;
 
     /**
      * Query
      */
-    query?: IReportsQuery;
+    readonly query?: IReportsQuery;
 
     /**
      * Group by properties
      */
-    groupBy?: IListGroups;
+    readonly groupBy?: IListGroups;
 
     /**
      * Filtered subset
      */
-    subset?: any[];
+    readonly subset?: any[];
 }
 
 /**
