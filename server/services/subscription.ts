@@ -18,7 +18,7 @@ class SubscriptionService {
    *
    * @param {string} subscriptionId Subscription ID
    */
-  async getSubscription(subscriptionId: string) {
+  async getSubscription<T = any>(subscriptionId: string): Promise<T> {
     try {
       const query = this.tableUtil.createAzQuery(1).where('RowKey eq ?', subscriptionId)
       const { entries } = await this.tableUtil.queryAzTable('Subscriptions', query, { RowKey: 'id' })
@@ -31,13 +31,12 @@ class SubscriptionService {
   /**
    * Update subscription
    *
-   * @param {*} subscriptionId Subscription ID
-   * @param {*} settings Settings
+   * @param {string} subscriptionId Subscription ID
+   * @param {T} settings Settings
    */
-  async updateSubscription(subscriptionId, settings) {
-    const entity = this.tableUtil.convertToAzEntity(subscriptionId, { settings }, 'Default', { typeMap: { settings: 'json' } })
-    const result = await this.tableUtil.updateAzEntity('Subscriptions', entity, 'merge')
-    console.log(result)
+  async updateSubscription<T = any>(subscriptionId: string, settings: T): Promise<azurestorage.TableService.EntityMetadata> {
+    const entityDescriptor = this.tableUtil.convertToAzEntity(subscriptionId, { settings }, 'Default', { typeMap: { settings: 'json' } })
+    return await this.tableUtil.updateAzEntity('Subscriptions', entityDescriptor, true)
   }
 
   /**
@@ -45,7 +44,7 @@ class SubscriptionService {
    *
    * @param {string} token Request token
    */
-  async findSubscriptionWithToken(token: string) {
+  async findSubscriptionWithToken<T = any>(token: string): Promise<T> {
     try {
       const query = this.tableUtil.createAzQuery(1).where('Token eq ?', token)
       const { entries } = await this.tableUtil.queryAzTable('ApiTokens', query)
@@ -64,15 +63,14 @@ class SubscriptionService {
    * @param {string} subscriptionId Subscription id
    * @param {string} token Request token
    */
-  async addApiToken(name: string, subscriptionId: string, token: string) {
+  async addApiToken(name: string, subscriptionId: string, token: string): Promise<azurestorage.TableService.EntityMetadata>  {
     try {
       const { string } = this.tableUtil.azEntGen()
-      const entity = await this.tableUtil.addAzEntity('ApiTokens', {
+      return await this.tableUtil.addAzEntity('ApiTokens', {
         PartitionKey: string(subscriptionId),
         RowKey: string(name),
         Token: string(token),
       })
-      return entity
     } catch (error) {
       return null
     }
@@ -84,14 +82,13 @@ class SubscriptionService {
    * @param {string} name Token name
    * @param {string} subscriptionId Subscription id
    */
-  async deleteApiToken(name: string, subscriptionId: string) {
+  async deleteApiToken(name: string, subscriptionId: string): Promise<void> {
     try {
       const { string } = this.tableUtil.azEntGen()
-      const result = await this.tableUtil.deleteEntity('ApiTokens', {
+      await this.tableUtil.deleteEntity('ApiTokens', {
         PartitionKey: string(subscriptionId),
         RowKey: string(name),
       })
-      return result
     } catch (error) {
       return null
     }
@@ -102,7 +99,7 @@ class SubscriptionService {
    *
    * @param {string} subscriptionId Subscription id
    */
-  async getApiTokens(subscriptionId: string) {
+  async getApiTokens<T = any>(subscriptionId: string): Promise<T[]> {
     try {
       const query = this.tableUtil.createAzQuery(100).where('PartitionKey eq ?', subscriptionId)
       const result = await this.tableUtil.queryAzTable('ApiTokens', query, { RowKey: 'name' })

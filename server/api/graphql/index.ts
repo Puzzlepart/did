@@ -21,12 +21,13 @@ const getSchema = async () => {
       resolvers.OutlookCategoryResolver,
       resolvers.ProjectResolver,
       resolvers.RoleResolver,
+      resolvers.SubscriptionResolver,
       resolvers.TimeEntryResolver,
       resolvers.LabelResolver,
       resolvers.TimesheetResolver,
       resolvers.UserResolver,
     ],
-    emitSchemaFile: true,
+    emitSchemaFile: false,
     validate: false,
     authChecker
   })

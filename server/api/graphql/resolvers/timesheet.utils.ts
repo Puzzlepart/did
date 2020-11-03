@@ -1,8 +1,9 @@
-import * as utils from '../../../utils'
-import { first, find, filter } from 'underscore'
-import { contains } from 'underscore.string'
 import get from 'get-value'
 import moment from 'moment'
+import { filter, find, first } from 'underscore'
+import { contains } from 'underscore.string'
+import * as utils from '../../../utils'
+import { Customer, LabelObject, Project, TimeEntry } from '../types'
 
 /**
  * Get periods between specified dates
@@ -50,13 +51,13 @@ export function getPeriods(
 /**
  * Connect time entries to projects, customers and labels
  *
- * @param {any[]} timeentries Time entries
- * @param {any[]} projects Projects
- * @param {any[]} customers Customers
- * @param {any[]} labels Labels
+ * @param {TimeEntry[]} timeEntries Time entries
+ * @param {Project[]} projects
+ * @param {Customer[]} customers
+ * @param {LabelObject[]} labels
  */
-export function connectTimeEntries(timeentries: any[], projects: any[], customers: any[], labels: any[]) {
-  return timeentries.map(entry => {
+export function connectTimeEntries(timeEntries: TimeEntry[], projects: Project[], customers: Customer[], labels: LabelObject[]): TimeEntry[] {
+  return timeEntries.map(entry => {
     const customerKey = first(entry.projectId.split(' '))
     return {
       ...entry,

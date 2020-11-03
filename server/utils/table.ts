@@ -309,7 +309,7 @@ class AzTableUtilities {
    * @param {*} table Table name
    * @param {*} entityDescriptor Entity desccriptor
    */
-  deleteEntity(table: string, entityDescriptor: any) {
+  deleteEntity(table: string, entityDescriptor: any): Promise<azurestorage.ServiceResponse> {
     return new Promise((resolve, reject) => {
       this.tableService.deleteEntity(table, entityDescriptor, undefined, (error, result) => {
         if (error) reject(error)
@@ -324,7 +324,7 @@ class AzTableUtilities {
    * @param {*} table Table name
    * @param {*} batch Table batch
    */
-  executeBatch(table: string, batch: azurestorage.TableBatch) {
+  executeBatch(table: string, batch: azurestorage.TableBatch):Promise<azurestorage.TableService.BatchResult[]>  {
     return new Promise((resolve, reject) => {
       this.tableService.executeBatch(table, batch, (error, result) => {
         if (error) reject(error)

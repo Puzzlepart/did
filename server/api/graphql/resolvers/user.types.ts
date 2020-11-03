@@ -2,15 +2,7 @@
 import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import { Role } from './role.types'
-
-@ObjectType({ description: 'A type that describes a Subscription' })
-export class Subscription {
-  @Field()
-  id: string
-
-  @Field()
-  name: string
-}
+import { Subscription } from './subscription.types'
 
 @ObjectType({ description: 'A type that describes a User' })
 export class User {
