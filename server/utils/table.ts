@@ -3,7 +3,6 @@ import azurestorage from 'azure-storage'
 import { omit, isNull } from 'underscore'
 import { decapitalize, capitalize, isBlank, startsWith } from 'underscore.string'
 import get from 'get-value'
-import { json } from 'body-parser'
 
 class AzTableUtilities {
   public tableService: azurestorage.services.table.TableService
@@ -19,10 +18,10 @@ class AzTableUtilities {
    *
    * If the value starts with 'json:', we parse it as JSON
    *
-   * @param {Object} result Result
+   * @param {Record<string,azurestorage.TableUtilities.entityGenerator.EntityProperty<any>>} entityDescriptor Entity descriptor
    * @param {Record<string, string>} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
    */
-  parseAzEntity(entityDescriptor: { [x: string]: { _: any; $: any } }, columnMap: Record<string, string> = {}) {
+  parseAzEntity(entityDescriptor: Record<string, azurestorage.TableUtilities.entityGenerator.EntityProperty<any>>, columnMap: Record<string, string> = {}) {
     return Object.keys(entityDescriptor).reduce((obj: { [x: string]: any }, key: string) => {
       const { _, $ } = entityDescriptor[key]
       let value = _
