@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-  import 'reflect-metadata'
+import 'reflect-metadata'
 import { ObjectType, Field } from 'type-graphql'
 
 @ObjectType({ description: 'A type that describes a Error' })
@@ -42,4 +42,3 @@ export * from './project.types'
 export * from './outlookCategory.types'
 export * from './user.types'
 export * from './role.types'
-

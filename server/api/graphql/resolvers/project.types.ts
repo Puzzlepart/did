@@ -32,7 +32,7 @@ export class Project {
   @Field(() => Customer)
   customer?: Customer
 
-  @Field(()=> OutlookCategory, { nullable: true, defaultValue: null })
+  @Field(() => OutlookCategory, { nullable: true, defaultValue: null })
   outlookCategory?: OutlookCategory
 
   @Field({ nullable: true, defaultValue: false })

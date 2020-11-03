@@ -35,7 +35,7 @@ const getSchema = async () => {
       ProjectResolver,
       OutlookCategoryResolver,
       UserResolver,
-      RoleResolver,
+      RoleResolver
     ],
     emitSchemaFile: true,
     validate: false,

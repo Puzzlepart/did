@@ -2,7 +2,7 @@ import fs from 'fs'
 
 /**
  * Serve gzipped
- * 
+ *
  * @param {string} contentType Content type
  */
 const serveGzipped = (contentType: string) => (req, res, next) => {
