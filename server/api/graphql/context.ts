@@ -32,7 +32,7 @@ export class Context {
   /**
    * Is authorized
    */
-  public isAuthorized: boolean
+  public isAuthorized?: boolean
 }
 
 /**
