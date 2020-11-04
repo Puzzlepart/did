@@ -18,7 +18,6 @@ import {
   RoleResolver,
   TimeEntryResolver,
   TimesheetResolver,
-
   UserResolver
 } from './resolvers'
 const debug = createDebug('api/graphql')
@@ -74,13 +73,13 @@ export default async (app: express.Application): Promise<void> => {
 
               // for developers curiosity purpose, here is the logging of current scoped container instances
               // we can make multiple parallel requests to see in console how this works
-              const instancesIds = ((Container as any).instances as ContainerInstance[]).map(instance => instance.id)
+              const instancesIds = ((Container as any).instances as ContainerInstance[]).map((instance) => instance.id)
               // eslint-disable-next-line no-console
               debug('Container instances left in memory: ', instancesIds)
-            },
-          }),
-        },
-      ] as ApolloServerPlugin[],
+            }
+          })
+        }
+      ] as ApolloServerPlugin[]
     })
     server.applyMiddleware({ app, path: '/graphql' })
   } catch (error) {
