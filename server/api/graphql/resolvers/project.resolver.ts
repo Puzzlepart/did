@@ -10,6 +10,14 @@ import { Service } from 'typedi'
 @Service()
 @Resolver(Project)
 export class ProjectResolver {
+  /**
+   * Constructor for ProjectResolver
+   *
+   * AzStorageService and MSGraphService is automatically injected using Container from typedi
+   *
+   * @param {AzStorageService} _azstorage AzStorageService
+   * @param {MSGraphService} _msgraph MSGraphService
+   */
   constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) {}
 
   /**
@@ -51,7 +59,7 @@ export class ProjectResolver {
     @Ctx() ctx: Context
   ) {
     try {
-      const id = await this._azstorage.createOrUpdateProject(project, ctx.user.id, update)
+      const id = await this._azstorage.createOrUpdateProject(project, ctx?.user?.id, update)
       if (project.createOutlookCategory) {
         await this._msgraph.createOutlookCategory(id)
       }

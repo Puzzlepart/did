@@ -1,17 +1,18 @@
 import { AuthenticationError } from 'apollo-server-express'
+import createDebug from 'debug'
+import get from 'get-value'
 import 'reflect-metadata'
 import { Container, ContainerInstance } from 'typedi'
 import { pick } from 'underscore'
 import { SubscriptionService } from '../services'
 import { Subscription, User } from './resolvers/types'
-import createDebug from 'debug'
 const debug = createDebug('api/graphql/context')
 
 export class Context {
   /**
    * Request ID
    */
-  public requestId?: number
+  public requestId?: string
 
   /**
    * User
@@ -27,34 +28,44 @@ export class Context {
    * Container instance
    */
   public container?: ContainerInstance
+
+  /**
+   * Is authorized
+   */
+  public isAuthorized?: boolean
 }
 
 /**
  * Create context
- * 
+ *
  * @param {any} request Express request
  */
 export const createContext = async (request: any): Promise<Context> => {
   try {
-    let subscription = request.user && request.user.subscription
+    let isAuthorized = false
+    let user = null
+    let subscription = get(request, 'user.subscription', { default: {} })
     if (!!request.token) {
       subscription = await new SubscriptionService().findSubscriptionWithToken(request.token)
       if (!subscription) throw new AuthenticationError(null)
-    }
-    const { user } = request
-    const requestId = user.id + Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)
-    const container = Container.of(requestId)
-    const context: Context = {
-      container,
-      subscription: pick(subscription, 'id', 'name'),
-      requestId,
-      user: {
-        ...pick(user, 'id'),
+      isAuthorized = true
+    } else {
+      isAuthorized = !!get(request, 'user')
+      user = {
+        ...pick(get(request, 'user', { default: {} }), 'id'),
         subscription: pick(subscription, 'id', 'name')
       }
     }
-    container.set({ id: 'USER_ID', transient: true, value: user.id })
-    container.set({ id: 'CONNECTION_STRING', transient: true, value: user.subscription.connectionString })
+    const requestId = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString()
+    const container = Container.of(requestId)
+    const context: Context = {
+      container,
+      subscription: pick(subscription, 'id', 'name', 'connectionString'),
+      requestId,
+      user,
+      isAuthorized
+    }
+    container.set({ id: 'CONTEXT', transient: true, value: context })
     container.set({ id: 'REQUEST', transient: true, value: request })
     debug(`Creating context for request ${requestId}`)
     return context

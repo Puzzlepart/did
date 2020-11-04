@@ -12,6 +12,13 @@ const { executeBatch, createAzBatch } = new AzTableUtilities()
 @Service()
 @Resolver(Customer)
 export class CustomerResolver {
+  /**
+   * Constructor for CustomerResolver
+   *
+   * AzStorageService is automatically injected using Container from typedi
+   *
+   * @param {AzStorageService} _azstorage AzStorageService
+   */
   constructor(private readonly _azstorage: AzStorageService) {}
 
   /**
@@ -40,7 +47,7 @@ export class CustomerResolver {
     @Ctx() ctx: Context
   ) {
     try {
-      await this._azstorage.createOrUpdateCustomer(customer, ctx.user.id, update)
+      await this._azstorage.createOrUpdateCustomer(customer, ctx?.user?.id, update)
       return { success: true, error: null }
     } catch (error) {
       return {

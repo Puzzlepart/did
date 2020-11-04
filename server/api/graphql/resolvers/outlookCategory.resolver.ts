@@ -3,19 +3,27 @@ import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { pick } from 'underscore'
-import { AzStorageService, MSGraphService } from '../../services'
+import { MSGraphService } from '../../services'
+import { IAuthOptions } from '../authChecker'
 import { OutlookCategory } from './outlookCategory.types'
 import { BaseResult } from './types'
 
 @Service()
 @Resolver(OutlookCategory)
 export class OutlookCategoryResolver {
-  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) {}
+  /**
+   * Constructor for OutlookCategoryResolver
+   *
+   * MSGraphService is automatically injected using Container from typedi
+   *
+   * @param {MSGraphService} _msgraph MSGraphService
+   */
+  constructor(private readonly _msgraph: MSGraphService) {}
 
   /**
    * Get Outlook categories
    */
-  @Authorized()
+  @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [OutlookCategory], { description: 'Get Outlook categories' })
   async outlookCategories() {
     const categories = await this._msgraph.getOutlookCategories()
@@ -27,7 +35,7 @@ export class OutlookCategoryResolver {
    *
    * @param {string} category Category
    */
-  @Authorized()
+  @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Create Outlook category' })
   async createOutlookCategory(@Arg('category') category: string) {
     try {

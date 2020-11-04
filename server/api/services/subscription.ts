@@ -5,7 +5,7 @@ import azurestorage from 'azure-storage'
 import 'reflect-metadata'
 import { Service } from 'typedi'
 
-@Service({ global: false })
+@Service({ global: true })
 class SubscriptionService {
   public tableService: azurestorage.services.table.TableService
   public tableUtil: AzTableUtilities
@@ -39,10 +39,9 @@ class SubscriptionService {
   async findSubscriptionWithToken(token: string) {
     try {
       const query = this.tableUtil.createAzQuery(1).where('Token eq ?', token)
-      const { entries } = await this.tableUtil.queryAzTable('ApiTokens', query)
-      const tokenEntry = this.tableUtil.parseAzEntity(first(entries))
-      if (tokenEntry) return this.getSubscription(tokenEntry.partitionKey)
-      return null
+      const { entries } = await this.tableUtil.queryAzTable('ApiTokens', query, { PartitionKey: 'subscriptionId' })
+      const { subscriptionId } = first(entries)
+      return this.getSubscription(subscriptionId)
     } catch (error) {
       return null
     }

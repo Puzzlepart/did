@@ -5,6 +5,7 @@ import { Service } from 'typedi'
 import { contains, filter, find, isEmpty, pick } from 'underscore'
 import { formatDate } from '../../../utils'
 import { AzStorageService, MSGraphService } from '../../services'
+import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
 import { connectEntities } from './project.utils'
 import EventMatching from './timesheet.matching'
@@ -15,6 +16,14 @@ import { BaseResult } from './types'
 @Service()
 @Resolver(TimesheetPeriodObject)
 export class TimesheetResolver {
+  /**
+   * Constructor for TimesheetResolver
+   *
+   * AzStorageService and MSGraphService is automatically injected using Container from typedi
+   *
+   * @param {AzStorageService} _azstorage AzStorageService
+   * @param {MSGraphService} _msgraph MSGraphService
+   */
   constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) {}
   /**
    * Get timesheet
@@ -24,7 +33,7 @@ export class TimesheetResolver {
    * @param {string} dateFormat Date format
    * @param {Context} ctx GraphQL context
    */
-  @Authorized()
+  @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [TimesheetPeriodObject], { description: 'Get timesheet for startDateTime - endDateTime' })
   async timesheet(
     @Arg('query') query: TimesheetQuery,
@@ -92,7 +101,7 @@ export class TimesheetResolver {
    * @param {boolean} forecast Forecast
    * @param {Context} ctx GraphQL context
    */
-  @Authorized()
+  @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, {
     description: 'Adds matched time entries for the specified period and an entry for the confirmed period'
   })
@@ -140,7 +149,7 @@ export class TimesheetResolver {
    * @param {boolean} forecast Forecast
    * @param {Context} ctx GraphQL context
    */
-  @Authorized()
+  @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, {
     description: 'Deletes time entries for the specified period and the entry for the confirmed period'
   })

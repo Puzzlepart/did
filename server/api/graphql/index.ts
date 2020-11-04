@@ -53,23 +53,20 @@ export default async (app: express.Application): Promise<void> => {
     const server = new ApolloServer({
       schema,
       rootValue: global,
-      playground: false,
       context: ({ req }) => createContext(req),
       engine: {
         reportSchema: true,
         graphVariant: 'current',
-        generateClientInfo: ({ context }) => {
-          return {
-            clientName: get(context, 'subscription.name', { default: '' })
-          }
-        }
+        generateClientInfo: ({ context }) => ({
+          clientName: get(context, 'subscription.name', { default: '' })
+        })
       },
       plugins: [
         {
           requestDidStart: () => ({
             willSendResponse(requestContext: GraphQLRequestContext<Context>) {
               debug(`Resetting container for request ${requestContext.context.requestId}`)
-              // remember to dispose the scoped container to prevent memory leaks
+              // Remember to dispose the scoped container to prevent memory leaks
               Container.reset(requestContext.context.requestId)
               const instancesIds = ((Container as any).instances as ContainerInstance[]).map((instance) => instance.id)
               debug('Container instances left in memory: ', instancesIds)

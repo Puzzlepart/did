@@ -80,6 +80,7 @@ export const StatusBar = () => {
                     <a href='#' onClick={() => dispatch({ type: 'CLEAR_IGNORES' })}>{t('timesheet.undoIgnoreText')}</a>
                 </p>
             ),
+            type: MessageBarType.warning,
             iconName: 'DependencyRemove',
         })
     }

@@ -10,6 +10,13 @@ import { BaseResult } from './types'
 @Service()
 @Resolver(LabelObject)
 export class LabelResolver {
+  /**
+   * Constructor for LabelResolver
+   *
+   * AzStorageService is automatically injected using Container from typedi
+   *
+   * @param {AzStorageService} _azstorage AzStorageService
+   */
   constructor(private readonly _azstorage: AzStorageService) {}
 
   /**
@@ -36,7 +43,7 @@ export class LabelResolver {
     @Ctx() ctx: Context
   ) {
     try {
-      await this._azstorage.addOrUpdateLabel(label, ctx.user.id, update)
+      await this._azstorage.addOrUpdateLabel(label, ctx?.user?.id, update)
       return { success: true, error: null }
     } catch (error) {
       return {
