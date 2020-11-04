@@ -2,7 +2,7 @@
 import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 
-@ObjectType({ description: 'A type that describes a Role' })
+@ObjectType({ description: 'A type that describes a Role', simpleResolvers: true })
 export class Role {
   @Field(() => ID)
   name?: string

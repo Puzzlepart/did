@@ -44,14 +44,14 @@ export const createContext = async (request: any): Promise<Context> => {
   try {
     let isAuthorized = false
     let user = null
-    let subscription = get(request, 'user.subscription', { default: {} })
+    let subscription = get(request, 'user.subscription')
     if (!!request.token) {
       subscription = await new SubscriptionService().findSubscriptionWithToken(request.token)
       if (!subscription) throw new AuthenticationError(null)
       isAuthorized = true
     } else {
       isAuthorized = !!get(request, 'user')
-      user = {
+      user = isAuthorized && {
         ...pick(get(request, 'user', { default: {} }), 'id'),
         subscription: pick(subscription, 'id', 'name')
       }

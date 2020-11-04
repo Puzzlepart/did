@@ -2,7 +2,7 @@
 import 'reflect-metadata'
 import { ObjectType, InputType, Field, ID } from 'type-graphql'
 
-@ObjectType({ description: 'A type that describes a Customer' })
+@ObjectType({ description: 'A type that describes a Customer', simpleResolvers: true })
 export class Customer {
   @Field(() => ID)
   key: string

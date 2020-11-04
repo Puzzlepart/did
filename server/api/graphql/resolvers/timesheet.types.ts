@@ -3,7 +3,7 @@ import 'reflect-metadata'
 import { Field, Float, ID, InputType, ObjectType } from 'type-graphql'
 import { Customer, EventError, LabelObject, Project } from './types'
 
-@ObjectType({ description: 'A type that describes a Event' })
+@ObjectType({ description: 'A type that describes a Event', simpleResolvers: true })
 export class EventObject {
   @Field(() => ID)
   id: string
@@ -80,7 +80,7 @@ export class EventInput {
   manualMatch: boolean
 }
 
-@ObjectType({ description: 'A type that describes a TimesheetPeriod' })
+@ObjectType({ description: 'A type that describes a TimesheetPeriod', simpleResolvers: true  })
 export class TimesheetPeriodObject {
   @Field()
   id: string

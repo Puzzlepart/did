@@ -2,7 +2,7 @@
 import 'reflect-metadata'
 import { Field, ID, ObjectType } from 'type-graphql'
 
-@ObjectType({ description: 'A type that describes a OutlookCategory' })
+@ObjectType({ description: 'A type that describes a OutlookCategory', simpleResolvers: true })
 export class OutlookCategory {
   @Field(() => ID)
   id: string
