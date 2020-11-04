@@ -54,7 +54,7 @@ export default async (app: express.Application): Promise<void> => {
       schema,
       rootValue: global,
       playground: false,
-      context: createContext,
+      context: ({ req }) => createContext(req),
       engine: {
         reportSchema: true,
         graphVariant: 'current',
@@ -68,13 +68,10 @@ export default async (app: express.Application): Promise<void> => {
         {
           requestDidStart: () => ({
             willSendResponse(requestContext: GraphQLRequestContext<Context>) {
+              debug(`Resetting container for request ${requestContext.context.requestId}`)
               // remember to dispose the scoped container to prevent memory leaks
               Container.reset(requestContext.context.requestId)
-
-              // for developers curiosity purpose, here is the logging of current scoped container instances
-              // we can make multiple parallel requests to see in console how this works
               const instancesIds = ((Container as any).instances as ContainerInstance[]).map((instance) => instance.id)
-              // eslint-disable-next-line no-console
               debug('Container instances left in memory: ', instancesIds)
             }
           })
