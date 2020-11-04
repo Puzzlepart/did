@@ -53,7 +53,9 @@ class OAuthService {
       }
     } catch (err) {
       debug(`Failed to refresh token: ${err.message}`)
-      throw new Error(`Failed to refresh token: ${err.message}`)
+      const error = new Error('Failed to refresh token')
+      error.stack = `Failed to refresh token using options ${JSON.stringify(options)}: ${err.message}`
+      throw error
     }
     this._request.user.oauthToken = accessToken.token
     return accessToken.token
