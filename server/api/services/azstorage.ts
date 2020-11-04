@@ -197,10 +197,10 @@ class AzStorageService {
    *
    * @param {string} userId The user ID
    */
-  async getUser(userId: string) {
+  async getUser(userId: string): Promise<Express.User> {
     try {
       const entry = await this.tableUtil.retrieveAzEntity(this.tables.users, 'Default', userId)
-      return this.tableUtil.parseAzEntity(entry, { RowKey: 'id' })
+      return this.tableUtil.parseAzEntity<Express.User>(entry, { RowKey: 'id' })
     } catch (error) {
       return null
     }

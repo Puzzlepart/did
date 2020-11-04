@@ -19,12 +19,14 @@ class AzTableUtilities {
    *
    * @param {Record<string,azurestorage.TableUtilities.entityGenerator.EntityProperty<any>>} entityDescriptor Entity descriptor
    * @param {Record<string, string>} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
+   * @param {string[]} skipColumns Columns to omit
    */
-  parseAzEntity(
+  parseAzEntity<T = any>(
     entityDescriptor: Record<string, azurestorage.TableUtilities.entityGenerator.EntityProperty<any>>,
-    columnMap: Record<string, string> = {}
-  ) {
-    return Object.keys(entityDescriptor).reduce((obj: { [x: string]: any }, key: string) => {
+    columnMap: Record<string, string> = {},
+    skipColumns: string[] = ['timestamp', 'partitionKey']
+  ): T {
+    const json = Object.keys(entityDescriptor).reduce((obj: { [x: string]: any }, key: string) => {
       const { _, $ } = entityDescriptor[key]
       let value = _
       if (_ === undefined || _ === null) return obj
@@ -41,6 +43,7 @@ class AzTableUtilities {
       }
       return { ...obj, [decapitalize(key)]: value }
     }, {})
+    return omit(json, skipColumns) as T
   }
 
   /**
