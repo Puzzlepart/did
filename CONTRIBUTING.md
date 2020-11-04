@@ -34,6 +34,8 @@ Folder/File | Description
 
 ## Development
 
+**NB: Did should be developed with node >=12.18.3**
+
 1. Check out the dev branch
 2. Run `npm install`
 3. Run `npm run-script create-env` to create your own `.env` file for local testing

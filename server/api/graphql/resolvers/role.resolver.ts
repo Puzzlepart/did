@@ -1,20 +1,23 @@
-import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
+import 'reflect-metadata'
+import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
+import { Service } from 'typedi'
 import { pick } from 'underscore'
-import { Context } from '../context'
-import { BaseResult } from './types'
+import { AzStorageService } from '../../services'
 import { Role, RoleInput } from './role.types'
+import { BaseResult } from './types'
 
+@Service()
 @Resolver(Role)
 export class RoleResolver {
+  constructor(private readonly _azstorage: AzStorageService) {}
+
   /**
    * Get roles
-   *
-   * @param {Context} ctx GraphQL context
    */
   @Authorized()
   @Query(() => [Role], { description: 'Get roles' })
-  async roles(@Ctx() ctx: Context) {
-    return await ctx.services.azstorage.getRoles()
+  async roles() {
+    return await this._azstorage.getRoles()
   }
 
   /**
@@ -22,17 +25,15 @@ export class RoleResolver {
    *
    * @param {RoleInput} role Role
    * @param {boolean} update Update
-   * @param {Context} ctx GraphQL context
    */
   @Authorized()
   @Mutation(() => BaseResult, { description: 'Add or update role' })
   async addOrUpdateRole(
     @Arg('role', () => RoleInput) role: RoleInput,
-    @Arg('update', { nullable: true }) update: boolean,
-    @Ctx() ctx: Context
+    @Arg('update', { nullable: true }) update: boolean
   ) {
     try {
-      await ctx.services.azstorage.addOrUpdateRole(role, update)
+      await this._azstorage.addOrUpdateRole(role, update)
       return { success: true, error: null }
     } catch (error) {
       return {

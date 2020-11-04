@@ -1,22 +1,24 @@
 import { ApolloServer } from 'apollo-server-express'
+import { GraphQLRequestContext, ApolloServerPlugin } from 'apollo-server-plugin-base'
 import createDebug from 'debug'
 import express from 'express'
 import get from 'get-value'
 import 'reflect-metadata'
-import { buildSchema } from 'type-graphql'
+import { buildSchema, ResolverData } from 'type-graphql'
+import Container, { ContainerInstance } from 'typedi'
 import { authChecker } from './authChecker'
-import { createContext } from './context'
+import { Context, createContext } from './context'
 import {
   ApiTokenResolver,
   CustomerResolver,
   LabelResolver,
   NotificationResolver,
+  OutlookCategoryResolver,
+  ProjectResolver,
+  RoleResolver,
   TimeEntryResolver,
   TimesheetResolver,
-  ProjectResolver,
-  OutlookCategoryResolver,
-  UserResolver,
-  RoleResolver
+  UserResolver
 } from './resolvers'
 const debug = createDebug('api/graphql')
 
@@ -37,6 +39,7 @@ const getSchema = async () => {
       UserResolver,
       RoleResolver
     ],
+    container: ({ context }: ResolverData<Context>) => context.container,
     emitSchemaFile: true,
     validate: false,
     authChecker
@@ -51,7 +54,7 @@ export default async (app: express.Application): Promise<void> => {
       schema,
       rootValue: global,
       playground: false,
-      context: createContext,
+      context: ({ req }) => createContext(req),
       engine: {
         reportSchema: true,
         graphVariant: 'current',
@@ -60,7 +63,20 @@ export default async (app: express.Application): Promise<void> => {
             clientName: get(context, 'subscription.name', { default: '' })
           }
         }
-      }
+      },
+      plugins: [
+        {
+          requestDidStart: () => ({
+            willSendResponse(requestContext: GraphQLRequestContext<Context>) {
+              debug(`Resetting container for request ${requestContext.context.requestId}`)
+              // remember to dispose the scoped container to prevent memory leaks
+              Container.reset(requestContext.context.requestId)
+              const instancesIds = ((Container as any).instances as ContainerInstance[]).map((instance) => instance.id)
+              debug('Container instances left in memory: ', instancesIds)
+            }
+          })
+        }
+      ] as ApolloServerPlugin[]
     })
     server.applyMiddleware({ app, path: '/graphql' })
   } catch (error) {

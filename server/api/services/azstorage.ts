@@ -1,9 +1,12 @@
-import AzTableUtilities from '../utils/table'
-import { getDurationHours, toArray } from '../utils'
+import 'reflect-metadata'
 import arraySort from 'array-sort'
-import { omit, pick } from 'underscore'
 import { createTableService } from 'azure-storage'
+import { Inject, Service } from 'typedi'
+import { omit, pick } from 'underscore'
+import { getDurationHours, toArray } from '../../utils'
+import AzTableUtilities from '../../utils/table'
 
+@Service({ global: false })
 class AzStorageService {
   public tableUtil: AzTableUtilities
   public tables: {
@@ -21,10 +24,10 @@ class AzStorageService {
   /**
    * Constructor
    *
-   * @param {any} subscription
+   * @param {string} connectionString Connection string
    */
-  constructor(subscription: any) {
-    this.tableUtil = new AzTableUtilities(createTableService(subscription.connectionString))
+  constructor(@Inject('CONNECTION_STRING') private readonly connectionString: string) {
+    this.tableUtil = new AzTableUtilities(createTableService(this.connectionString))
     this.tables = {
       timeEntries: 'TimeEntries',
       forecastedTimeEntries: 'ForecastedTimeEntries',

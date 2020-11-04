@@ -1,26 +1,25 @@
 global['fetch'] = require('node-fetch')
-import createDebug from 'debug'
-const debug = createDebug('services/msgraph')
-import * as appInsights from 'applicationinsights'
-import { performance, PerformanceObserver } from 'perf_hooks'
-import { first } from 'underscore'
-import * as utils from '../utils'
-import env from '../utils/env'
-import MSGraphEvent from './msgraph.event'
-import TokenService from './tokens'
-import get from 'get-value'
-import { Request } from 'express'
 import { Client as MSGraphClient } from '@microsoft/microsoft-graph-client'
+import * as appInsights from 'applicationinsights'
+import createDebug from 'debug'
+import { performance, PerformanceObserver } from 'perf_hooks'
+import 'reflect-metadata'
+import { Service } from 'typedi'
+import { first } from 'underscore'
+import * as utils from '../../utils'
+import env from '../../utils/env'
+import MSGraphEvent from './msgraph.event'
+import OAuthService from './oauth'
+const debug = createDebug('services/msgraph')
 
+@Service({ global: false })
 class MSGraphService {
   public observer: PerformanceObserver
-  public request: Request
-  public oauthToken: any
 
   /**
    * Constructs a new MSGraphService
    */
-  constructor() {
+  constructor(private _oauthService: OAuthService) {
     appInsights.setup(env('APPINSIGHTS_INSTRUMENTATIONKEY'))
     this.observer = new PerformanceObserver((list) => {
       const { name, duration } = first(list.getEntries())
@@ -30,17 +29,6 @@ class MSGraphService {
       })
     })
     this.observer.observe({ entryTypes: ['measure'], buffered: true })
-  }
-
-  /**
-   * Initializes the MS Graph Service
-   *
-   * @param {Request} req Request
-   */
-  init(req: Request): MSGraphService {
-    this.request = req
-    this.oauthToken = get(this.request, 'user.oauthToken')
-    return this
   }
 
   /**
@@ -65,10 +53,11 @@ class MSGraphService {
   /**
    * Gets a Microsoft Graph Client using the auth token from the class
    */
-  getClient(): MSGraphClient {
+  private async _getClient(): Promise<MSGraphClient> {
+    const { access_token } = await this._oauthService.getAccessToken()
     const client = MSGraphClient.init({
       authProvider: (done: (arg0: any, arg1: any) => void) => {
-        done(null, this.oauthToken.access_token)
+        done(null, access_token)
       }
     })
     return client
@@ -80,7 +69,8 @@ class MSGraphService {
   async getUsers(): Promise<any> {
     try {
       this.startMark('getUsers')
-      const { value } = await this.getClient()
+      const client = await this._getClient()
+      const { value } = await client
         .api('/users')
         // eslint-disable-next-line quotes
         .filter("userType eq 'Member'")
@@ -90,15 +80,7 @@ class MSGraphService {
       this.endMark('getUsers')
       return value
     } catch (error) {
-      switch (error.statusCode) {
-        case 401: {
-          this.oauthToken = await TokenService.refreshAccessToken(this.request)
-          return this.getUsers()
-        }
-        default: {
-          throw new Error()
-        }
-      }
+      throw new Error()
     }
   }
 
@@ -115,20 +97,12 @@ class MSGraphService {
         displayName: category,
         color: `preset${colorIdx}`
       })
-      const client = this.getClient()
+      const client = await this._getClient()
       const res = await client.api('/me/outlook/masterCategories').post(content)
       this.endMark('createOutlookCategory')
       return res
     } catch (error) {
-      switch (error.statusCode) {
-        case 401: {
-          this.oauthToken = await TokenService.refreshAccessToken(this.request)
-          return this.createOutlookCategory(category)
-        }
-        default: {
-          throw new Error()
-        }
-      }
+      throw new Error()
     }
   }
 
@@ -139,19 +113,12 @@ class MSGraphService {
     try {
       this.startMark('getOutlookCategories')
       debug('Querying Graph /me/outlook/masterCategories')
-      const { value } = await this.getClient().api('/me/outlook/masterCategories').get()
+      const client = await this._getClient()
+      const { value } = await client.api('/me/outlook/masterCategories').get()
       this.endMark('getOutlookCategories')
       return value
     } catch (error) {
-      switch (error.statusCode) {
-        case 401: {
-          this.oauthToken = await TokenService.refreshAccessToken(this.request)
-          return this.getOutlookCategories()
-        }
-        default: {
-          throw new Error()
-        }
-      }
+      throw new Error()
     }
   }
 
@@ -173,7 +140,8 @@ class MSGraphService {
           maxDurationHours
         })
       )
-      const { value } = await this.getClient()
+      const client = await this._getClient()
+      const { value } = await client
         .api('/me/calendar/calendarView')
         .query({ startDateTime, endDateTime })
         .select(['id', 'subject', 'body', 'start', 'end', 'categories', 'webLink', 'isOrganizer'])
@@ -187,15 +155,7 @@ class MSGraphService {
       this.endMark('getEvents')
       return events
     } catch (error) {
-      switch (error.statusCode) {
-        case 401: {
-          this.oauthToken = await TokenService.refreshAccessToken(this.request)
-          return this.getEvents(startDateTime, endDateTime)
-        }
-        default: {
-          throw error
-        }
-      }
+      throw error
     }
   }
 }

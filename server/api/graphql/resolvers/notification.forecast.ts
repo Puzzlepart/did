@@ -3,6 +3,8 @@ import format from 'string-format'
 import { getPeriods } from './timesheet.utils'
 import get from 'get-value'
 import { find } from 'underscore'
+import { Context } from '../context'
+import { AzStorageService } from 'server/api/services'
 
 /**
  * Get notifications for missing forecasts
@@ -12,9 +14,12 @@ import { find } from 'underscore'
  * * forecast.enabled
  * * forecast.notifications
  *
- * @param {*} param0 {template, ctx, locale}
+ * @param ctx
+ * @param azstorage
+ * @param template
+ * @param locale
  */
-export default async function ({ template, ctx, locale }) {
+export default async function (ctx: Context, azstorage: AzStorageService, template: string, locale: string) {
   if (!get(ctx, 'user.subscription.settings.forecast.enabled', { default: false })) return []
   const currentWeek = utils.getWeek()
   const periods = []
@@ -24,7 +29,7 @@ export default async function ({ template, ctx, locale }) {
     periods.push(...getPeriods(utils.startOfWeek(currentWeek + i), utils.endOfWeek(currentWeek + i), locale))
   }
 
-  const forecastedPeriods = (await ctx.services.azstorage.getForecastedPeriods({
+  const forecastedPeriods = (await azstorage.getForecastedPeriods({
     resourceId: ctx.user.id,
     year: utils.getYear()
   })) as any[]

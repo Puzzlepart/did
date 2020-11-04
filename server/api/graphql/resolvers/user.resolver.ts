@@ -1,12 +1,17 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
+import { Service } from 'typedi'
 import { filter, find, pick } from 'underscore'
+import { AzStorageService, MSGraphService } from '../../services'
 import { Context } from '../context'
 import { BaseResult } from './types'
 import { User, UserInput } from './user.types'
 
+@Service()
 @Resolver(User)
 export class UserResolver {
+  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) {}
+
   /**
    * Get current user
    *
@@ -15,12 +20,8 @@ export class UserResolver {
   @Authorized()
   @Query(() => User, { description: 'Get the currently logged in user' })
   async currentUser(@Ctx() ctx: Context) {
-    if (!ctx.user) return null
     try {
-      const [user, roles] = await Promise.all([
-        ctx.services.azstorage.getUser(ctx.user.id),
-        ctx.services.azstorage.getRoles()
-      ])
+      const [user, roles] = await Promise.all([this._azstorage.getUser(ctx.user.id), this._azstorage.getRoles()])
       return {
         ...ctx.user,
         ...user,
@@ -33,26 +34,21 @@ export class UserResolver {
 
   /**
    * Get AD users
-   *
-   * @param {Context} ctx GraphQL context
    */
   @Authorized()
   @Query(() => [User], { description: 'Get all users from Active Directory' })
-  async adUsers(@Ctx() ctx: Context) {
-    const users = await ctx.services.msgraph.getUsers()
-    return users
+  async adUsers() {
+    return await this._msgraph.getUsers()
   }
 
   /**
    * Get users
-   *
-   * @param {Context} ctx GraphQL context
    */
   @Authorized()
   @Query(() => [User], { description: 'Get all users' })
-  async users(@Ctx() ctx: Context) {
+  async users() {
     // eslint-disable-next-line prefer-const
-    let [users, roles] = await Promise.all([ctx.services.azstorage.getUsers(), ctx.services.azstorage.getRoles()])
+    let [users, roles] = await Promise.all([this._azstorage.getUsers(), this._azstorage.getRoles()])
     users = filter(
       users.map((user) => ({
         ...user,
@@ -68,17 +64,15 @@ export class UserResolver {
    *
    * @param {UserInput} user User
    * @param {boolean} update Update
-   * @param {Context} ctx GraphQL context
    */
   @Authorized()
   @Mutation(() => BaseResult, { description: 'Add or update user' })
   async addOrUpdateUser(
     @Arg('user', () => UserInput) user: UserInput,
-    @Arg('update', { nullable: true }) update: boolean,
-    @Ctx() ctx: Context
+    @Arg('update', { nullable: true }) update: boolean
   ): Promise<BaseResult> {
     try {
-      await ctx.services.azstorage.addOrUpdateUser(user, update)
+      await this._azstorage.addOrUpdateUser(user, update)
       return { success: true, error: null }
     } catch (error) {
       return {
@@ -92,13 +86,12 @@ export class UserResolver {
    * Bulk add users
    *
    * @param {UserInput[]} users Users
-   * @param {Context} ctx GraphQL context
    */
   @Authorized()
   @Mutation(() => BaseResult, { description: 'Bulk add users' })
-  async bulkAddUsers(@Arg('users', () => [UserInput]) users: UserInput[], @Ctx() ctx: Context): Promise<BaseResult> {
+  async bulkAddUsers(@Arg('users', () => [UserInput]) users: UserInput[]): Promise<BaseResult> {
     try {
-      await ctx.services.azstorage.bulkAddUsers(users)
+      await this._azstorage.bulkAddUsers(users)
       return { success: true, error: null }
     } catch (error) {
       return {
