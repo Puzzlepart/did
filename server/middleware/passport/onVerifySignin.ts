@@ -3,26 +3,28 @@ const debug = createDebug('middleware/passport/onVerifySignin')
 import SubscriptionService from '../../api/services/subscription'
 import AzStorageService from '../../api/services/azstorage'
 import { NO_OID_FOUND, TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } from './errors'
+import { IProfile } from 'passport-azure-ad/oidc-strategy'
+import { VerifyCallback } from 'passport-azure-ad'
 
 /**
  * On verify signin
  *
- * @param {any} _iss
- * @param {any} _sub
- * @param {any} profile
- * @param {any} _accessToken
- * @param {any} _refreshToken
+ * @param {string} _iss
+ * @param {string} _sub
+ * @param {IProfile} profile
+ * @param {string} _accessToken
+ * @param {string} _refreshToken
  * @param {any} oauthToken
- * @param {any} done
+ * @param {VerifyCallback} done
  */
-export default async function (
-  _iss: any,
-  _sub: any,
-  profile: any,
-  _accessToken: any,
-  _refreshToken: any,
+export  async function onVerifySignin(
+  _iss: string,
+  _sub: string,
+  profile: IProfile,
+  _accessToken: string,
+  _refreshToken: string,
   oauthToken: any,
-  done: any
+  done: VerifyCallback
 ) {
   try {
     if (!profile.oid) {
@@ -35,7 +37,7 @@ export default async function (
       return done(TENANT_NOT_ENROLLED, null)
     }
     debug('Subscription found for %s', profile._json.tid)
-    const user = await new AzStorageService(subscription.connectionString).getUser(profile.oid)
+    const user = await new AzStorageService({ subscription }).getUser(profile.oid)
     if (!user) {
       debug('User %s is not registered for %s', profile.oid, subscription.name)
       return done(USER_NOT_ENROLLED, null)

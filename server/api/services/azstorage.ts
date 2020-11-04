@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import arraySort from 'array-sort'
 import { createTableService } from 'azure-storage'
@@ -7,20 +8,24 @@ import { getDurationHours, toArray } from '../../utils'
 import AzTableUtilities from '../../utils/table'
 import { Context } from '../graphql/context'
 
+export class AzStorageServiceTables {
+  constructor(
+    public timeEntries: string = 'TimeEntries',
+    public forecastedTimeEntries: string = 'ForecastedTimeEntries',
+    public confirmedPeriods: string = 'ConfirmedPeriods',
+    public forecastedPeriods: string = 'ForecastedPeriods',
+    public projects: string = 'Projects',
+    public customers: string = 'Customers',
+    public roles: string = 'Roles',
+    public labels: string = 'Labels',
+    public users: string = 'Users',
+  ) { }
+}
+
 @Service({ global: false })
 class AzStorageService {
   public tableUtil: AzTableUtilities
-  public tables: {
-    timeEntries: string
-    forecastedTimeEntries: string
-    confirmedPeriods: string
-    forecastedPeriods: string
-    projects: string
-    customers: string
-    roles: string
-    labels: string
-    users: string
-  }
+  public tables: AzStorageServiceTables
 
   /**
    * Constructor
@@ -29,17 +34,7 @@ class AzStorageService {
    */
   constructor(@Inject('CONTEXT') private readonly context: Context) {
     this.tableUtil = new AzTableUtilities(createTableService(this.context.subscription.connectionString))
-    this.tables = {
-      timeEntries: 'TimeEntries',
-      forecastedTimeEntries: 'ForecastedTimeEntries',
-      confirmedPeriods: 'ConfirmedPeriods',
-      forecastedPeriods: 'ForecastedPeriods',
-      projects: 'Projects',
-      customers: 'Customers',
-      roles: 'Roles',
-      labels: 'Labels',
-      users: 'Users'
-    }
+    this.tables = new AzStorageServiceTables()
   }
 
   /**
