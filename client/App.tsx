@@ -10,7 +10,7 @@ import { isMobile } from 'react-device-detect'
 import { MobileHeader } from 'components/MobileHeader'
 import { useTranslation } from 'react-i18next'
 
-export const App = (context: IAppContext): JSX.Element => {
+export const App: React.FunctionComponent<IAppContext> = (context: IAppContext) => {
     const { t } = useTranslation()
     if (isMobile) styles.root += ` ${styles.mobile}`
     return (

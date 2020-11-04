@@ -1,7 +1,7 @@
 
-import { useMutation, useQuery } from '@apollo/react-hooks'
+import { useMutation, useQuery } from '@apollo/client'
 import List from 'components/List'
-import { IUser } from 'types/IUser'
+import { User } from 'types'
 import { ISpinnerProps, Spinner } from 'office-ui-fabric-react/lib/Spinner'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -9,7 +9,7 @@ import { filter, find, isEmpty, omit } from 'underscore'
 import { BulkImportPanel, IBulkImportPanelProps } from './BulkImportPanel'
 import BULK_ADD_USERS from './BULK_ADD_USERS'
 import { columns } from './columns'
-import { GET_DATA } from './GET_DATA'
+import { AD_USERS } from './AD_USERS'
 import { IUserFormProps, UserForm } from './UserForm'
 import { IUsersContext, UsersContext } from './context'
 
@@ -19,7 +19,7 @@ export const Users = () => {
     const [userForm, setUserForm] = useState<IUserFormProps>(null)
     const [bulkImportPanel, setBulkImportPanel] = useState<IBulkImportPanelProps>(null)
     const [progressProps, setProgressProps] = useState<ISpinnerProps>(null)
-    const { data, refetch, loading, called } = useQuery(GET_DATA, { fetchPolicy: 'cache-and-network' })
+    const { data, refetch, loading, called } = useQuery(AD_USERS, { fetchPolicy: 'cache-and-network' })
     const [bulkAddUsers] = useMutation(BULK_ADD_USERS)
     const ctxValue: IUsersContext = useMemo(() => ({
         roles: data?.roles || [],
@@ -32,9 +32,9 @@ export const Users = () => {
     /**
      * On edit user
      * 
-     * @param {IUser} user User to edit
+     * @param {User} user User to edit
      */
-    const onEdit = (user: IUser) => setUserForm({
+    const onEdit = (user: User) => setUserForm({
         headerText: user.displayName,
         user,
     })

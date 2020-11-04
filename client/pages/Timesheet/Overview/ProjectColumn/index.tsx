@@ -8,7 +8,6 @@ import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
-import { withDefaultProps } from 'with-default-props'
 import { TimesheetContext } from '../../context'
 import { ClearManualMatchButton } from './ClearManualMatchButton'
 import { IgnoreEventButton } from './IgnoreEventButton'
@@ -30,7 +29,6 @@ function getErrorMessage(code: string, t: TFunction): [string, MessageBarType] {
         case 'CUSTOMER_INACTIVE': return [t('timesheet.customerInactiveErrorText'), MessageBarType.error]
     }
 }
-
 
 const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
     const { t } = useTranslation()
@@ -98,4 +96,4 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
     )
 }
 
-export default withDefaultProps(ProjectColumn, {})
+export default ProjectColumn

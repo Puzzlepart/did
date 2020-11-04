@@ -1,7 +1,8 @@
 import { IListGroups } from 'components/List/types'
 import { TFunction } from 'i18next'
 import { IContextualMenuItem } from 'office-ui-fabric-react'
-import { ITimeEntriesQueryVariables } from 'types/graphql'
+import { TimeEntriesQuery } from 'types'
+import { omit } from 'underscore'
 import { capitalize } from 'underscore.string'
 import dateUtils from 'utils/date'
 
@@ -9,7 +10,11 @@ export interface IReportsQuery extends IContextualMenuItem {
     /**
      * Variables used for graphl query
      */
-    variables: ITimeEntriesQueryVariables;
+    variables: {
+        query: TimeEntriesQuery,
+        forecast?: boolean,
+        sortAsc?: boolean
+    }
 
     /**
      * Export file name
@@ -25,22 +30,22 @@ export interface IReportsState {
     /**
      * Filter panel open
      */
-    isFiltersOpen?: boolean;
+    readonly isFiltersOpen?: boolean;
 
     /**
      * Query
      */
-    query?: IReportsQuery;
+    readonly query?: IReportsQuery;
 
     /**
      * Group by properties
      */
-    groupBy?: IListGroups;
+    readonly groupBy?: IListGroups;
 
     /**
      * Filtered subset
      */
-    subset?: any[];
+    readonly subset?: any[];
 }
 
 /**
@@ -67,7 +72,7 @@ export function getQueries<T = IReportsQuery>(t: TFunction): T[] {
             key: 'LAST_MONTH',
             text: t('common.exportTypeLastMonth', lastMonth),
             iconName: 'CalendarDay',
-            variables: lastMonth,
+            variables: { query: omit(lastMonth, 'monthName') },
             exportFileName: `TimeEntries-${capitalize(lastMonth.monthName)}-{0}.xlsx`,
         } as unknown as T,
         {
@@ -75,14 +80,14 @@ export function getQueries<T = IReportsQuery>(t: TFunction): T[] {
             key: 'CURRENT_MONTH',
             text: t('common.exportTypeCurrentMonth', currentMonth),
             iconName: 'Calendar',
-            variables: currentMonth,
+            variables: { query: omit(currentMonth, 'monthName') },
             exportFileName: `TimeEntries-${capitalize(currentMonth.monthName)}-{0}.xlsx`,
         } as unknown as T,
         {
             key: 'CURRENT_YEAR',
             text: t('common.exportTypeCurrentYear', currentYear),
             iconName: 'CalendarReply',
-            variables: currentYear,
+            variables: { query: currentYear },
             exportFileName: `TimeEntries-${currentYear.year}-{0}.xlsx`,
         } as unknown as T,
         {
@@ -92,7 +97,9 @@ export function getQueries<T = IReportsQuery>(t: TFunction): T[] {
             variables: {
                 sortAsc: true,
                 forecast: true,
-                startDateTime: new Date().toISOString(),
+                query: {
+                    startDateTime: new Date().toISOString(),
+                }
             },
             exportFileName: 'Forecast-{0}.xlsx',
         } as unknown as T,

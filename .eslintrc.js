@@ -17,14 +17,6 @@ module.exports = {
       jsx: true, // Allows for the parsing of JSX
     },
   },
-  overrides: [
-    {
-      files: ['server/**/*.js'],
-      rules: {
-        '@typescript-eslint/no-var-requires': 'off'
-      }
-    }
-  ],
   rules: {
     /**
      * 0 = off, 1 = warn, 2 = error
@@ -36,11 +28,13 @@ module.exports = {
 
     '@typescript-eslint/member-delimiter-style': 0,
 
+    '@typescript-eslint/explicit-function-return-type': 0,
+
+    '@typescript-eslint/explicit-module-boundary-types': 0,
+
     'react/prop-types': 0,
 
     'no-inferrable-types': 0,
-
-    '@typescript-eslint/explicit-function-return-type': 0,
 
     'react/display-name': 0,
 

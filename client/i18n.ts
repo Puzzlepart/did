@@ -7,11 +7,11 @@ i18n.use(initReactI18next).init({
   fallbackLng: 'nb',
   debug: false,
   interpolation: {
-    escapeValue: false,
+    escapeValue: false
   },
   ns: Object.keys(resources['en-GB']),
   nsSeparator: '.',
-  keySeparator: ':',
+  keySeparator: ':'
 })
 
 export default i18n

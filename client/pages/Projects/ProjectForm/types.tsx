@@ -1,5 +1,5 @@
 import { getIcons } from 'common/icons'
-import { IProject } from 'types'
+import { Project } from 'types'
 import { first } from 'underscore'
 
 export interface IProjectFormProps {
@@ -11,7 +11,7 @@ export interface IProjectFormProps {
     /**
      * Project to edit
      */
-    edit?: IProject;
+    edit?: Project;
 
     /**
      * On submitted callback
@@ -29,7 +29,7 @@ export class ProjectModel {
     public labels: string[] = []
     public createOutlookCategory = false
 
-    constructor(project?: IProject) {
+    constructor(project?: Project) {
         if (!!project) {
             this.key = project.key
             this.name = project.name

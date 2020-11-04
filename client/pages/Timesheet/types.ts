@@ -1,4 +1,4 @@
-import { ApolloError } from 'apollo-client'
+import { ApolloError } from '@apollo/client'
 import { IProgressIndicatorProps } from 'office-ui-fabric-react/lib/ProgressIndicator'
 import { TimesheetPeriod } from './TimesheetPeriod'
 import { TimesheetScope } from './TimesheetScope'

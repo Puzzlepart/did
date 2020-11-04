@@ -1,4 +1,4 @@
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import { AppContext } from 'AppContext'
 import { manageProjects } from 'config/security/permissions'
 import { IBaseResult } from 'graphql'
@@ -8,7 +8,7 @@ import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
 import * as excel from 'utils/exportExcel'
-import graphql from '../graphql'
+import { CREATE_OUTLOOK_CATEGORY } from '../graphql'
 import { ProjectForm } from '../ProjectForm'
 import { ProjectsContext } from '../context'
 import columns from './columns'
@@ -22,7 +22,7 @@ export const Actions = (props: IProjectDetailsProps) => {
     const { t } = useTranslation()
     const [showEditPanel, setShowEditPanel] = useState(false)
     const context = useContext(ProjectDetailsContext)
-    const [createOutlookCategory] = useMutation<{ result: IBaseResult }, { category: string }>(graphql.mutation.createOutlookCategory)
+    const [createOutlookCategory] = useMutation<{ result: IBaseResult }, { category: string }>(CREATE_OUTLOOK_CATEGORY)
 
     /**
      * On export to Excel

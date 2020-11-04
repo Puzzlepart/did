@@ -85,16 +85,16 @@ selectNodeVersion () {
 }
 
 echo ""
-echo "[1/3] KUDU SYNC"
+echo "[1/4] KUDU SYNC"
 echo ""
-"$KUDU_SYNC_CMD" -v 50 -f "$DEPLOYMENT_SOURCE" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" -i ".git;.hg;.deployment;deploy.sh;.github;.vscode;azcopy;doc;lib;node_modules;tests;.eslintignore;.eslintrc.js;.gitignore;CHANGELOG.md;CONTRIBUTING.md;README.md;typedoc.json"
+"$KUDU_SYNC_CMD" -v x -f "$DEPLOYMENT_SOURCE" -t "$DEPLOYMENT_TARGET" -n "$NEXT_MANIFEST_PATH" -p "$PREVIOUS_MANIFEST_PATH" -i ".git;.hg;.deployment;deploy.sh;.github;.vscode;azcopy;doc;lib;node_modules;tests;.eslintignore;.eslintrc.js;.gitignore;CHANGELOG.md;CONTRIBUTING.md;README.md;typedoc.json"
 exitWithMessageOnError "Kudu Sync failed"
 
 #2 Select node version
 selectNodeVersion
 
 echo ""
-echo "[2/3] INSTALLING NPM PACKAGES"
+echo "[2/4] INSTALLING NPM PACKAGES"
 echo ""
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"
@@ -104,7 +104,18 @@ if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
 fi
 
 echo ""
-echo "[3/3] PACKAGING JS"
+echo "[3/4] BUILD SERVER"
+echo ""
+if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
+  cd "$DEPLOYMENT_TARGET"
+  rm -rf "$DEPLOYMENT_TARGET/server-dist"
+  eval $NPM_CMD run build:server
+  exitWithMessageOnError "Server build failed"
+  cd - > /dev/null
+fi
+
+echo ""
+echo "[4/4] PACKAGING JS"
 echo ""
 if [ -e "$DEPLOYMENT_TARGET/package.json" ]; then
   cd "$DEPLOYMENT_TARGET"

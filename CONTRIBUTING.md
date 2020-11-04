@@ -1,5 +1,8 @@
 # Contributing to Did
 
+
+_Contributios are very velcome! Here's some guidance to get started!_ :heart:
+
 ## Structure
 
 Folder/File | Description
@@ -8,7 +11,7 @@ Folder/File | Description
 `/client/common` | Common elements like icons etc 
 `/client/components` | React components reusable throughout the solution 
 `/client/config` | Conifguration 
-`client/graphql` | Graphql implementation for the client using `apollo-client` 
+`client/graphql` | Graphql implementation for the client using `@apollo/client` 
 `client/helpers` | Helper functions 
 `client/pages` | Main pages of the solution 
 `client/types` | Types, models and interfaces 
@@ -26,18 +29,18 @@ Folder/File | Description
 `/server/services` | Services ([MS Graph](https://developer.microsoft.com/en-us/graph) and [Azure Table Storage](https://azure.microsoft.com/en-us/services/storage/tables/))
 `/server/utils` | Utilities
 `/server/views` | Express HBS views
-`server/app.js` | Express app
-`server/index.js` | [Node.js](http://nodejs.org/) server  
+`server/app.ts` | Express app
+`server/index.ts` | [Node.js](http://nodejs.org/) server  
 
 ## Development
 
-* Check out the dev branch
-* Run `npm install`
-* Make a copy of `sample.env` and rename it `.env`
-* Set neccessary parameters in your new `.env` file (see `Set up .env` below)
-* Install the [Azure App Service extension for vscode](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice)
-* Create an Azure app registration, or ask one of the [maintainers](#maintainers) for access to an existing one
-* Run `npm run-script watch` to watch both `server` and `client` changes concurrently  
+1. Check out the dev branch
+2. Run `npm install`
+3. Run `npm run-script create-env` to create your own `.env` file for local testing
+4. Set neccessary parameters in your new `.env` file (see `Set up .env` below)
+5. Install the [Azure App Service extension for vscode](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice)
+6. Create an Azure app registration, or ask one of the [maintainers](#maintainers) for access to an existing one
+7. Run `npm run-script watch` to watch both `server` and `client` changes concurrently  
 
 ### Resource management with i18n
 
@@ -51,15 +54,11 @@ Folder/File | Description
 
 ## GraphQL Documentation
 
-Generate graphql schema documentation using `@2fd/graphdoc`:
-
-```shell
-graphdoc -e http://localhost:9001/graphql -o ./public/graphdoc -x "Authorization: Bearer {token}" --data '{"title": "Did GraphQL Documentation"}' --force
-```
+_We use https://studio.apollographql.com/ for GraphQL documentation._
 
 ## Set up .env ##
 
-You've copied `sample.env` into `.env`.
+You've copied `sample.env` into `.env`. Manually or using `npm run-script create-env`.
 
 Now you need to set the following properties/parameters:
 
@@ -82,9 +81,9 @@ The `/dev` branch also requires pull requests, and is set up with a CI/CD pipeli
 `/feature/*`-prefixed branches may or may not be included in future releases.
 
 You are encouraged to branch with either of the following prefixes  
-*  hotfix/
-*  bugfix/
-*  feature/
+*  **hotfix/**
+*  **bugfix/**
+*  **feature/**
 
 See also ["A successful Git branching model"](https://nvie.com/posts/a-successful-git-branching-model/)
 

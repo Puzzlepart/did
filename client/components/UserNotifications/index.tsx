@@ -1,7 +1,7 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { dateAdd, IPnPClientStore, PnPClientStorage } from '@pnp/common'
 import { AppContext } from 'AppContext'
-import { get } from 'helpers'
+import { getValue } from 'helpers'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -46,7 +46,7 @@ export const UserNotifications = () => {
 
     useEffect(() => {
         const _dismissedIds = new Set<string>(BROWSER_STORAGE.get(STORAGE_KEY) || [])
-        let _notifications = get(data, 'notifications', []).map(n => new NotificationModel(n))
+        let _notifications = getValue(data, 'notifications', []).map(n => new NotificationModel(n))
         _notifications = _notifications.filter(n => !_dismissedIds.has(n.id))
         if (_notifications.length > 0) {
             setNotifications(new Set(_notifications))

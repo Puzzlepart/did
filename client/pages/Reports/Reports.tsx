@@ -1,14 +1,13 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { FilterPanel, IFilter, List, UserMessage } from 'components'
-import { get } from 'helpers'
+import { getValue } from 'helpers'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import { Spinner } from 'office-ui-fabric-react/lib/Spinner'
 import { format } from 'office-ui-fabric-react/lib/Utilities'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
-import { ITimeEntriesQueryVariables } from 'types/graphql'
 import { filter, find, isEmpty } from 'underscore'
 import dateUtils from 'utils/date'
 import { exportExcel } from 'utils/exportExcel'
@@ -32,7 +31,7 @@ export const Reports = () => {
             emptyGroupName: t('common.all'),
         }
     })
-    const { loading, data } = useQuery<any, ITimeEntriesQueryVariables>(
+    const { loading, data } = useQuery(
         TIME_ENTRIES,
         {
             skip: !state.query,
@@ -66,7 +65,7 @@ export const Reports = () => {
         const subset = filter(context.timeentries, entry => {
             return filter(filters, f => {
                 const selectedKeys = f.selected.map(s => s.key)
-                return selectedKeys.indexOf(get(entry, f.key, '')) !== -1
+                return selectedKeys.indexOf(getValue(entry, f.key, '')) !== -1
             }).length === filters.length
         })
         context.setState({ subset })

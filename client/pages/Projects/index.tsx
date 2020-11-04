@@ -4,7 +4,7 @@ import { Projects } from './Projects'
 export { ProjectList } from './Projects'
 
 
-const _ = () => {
+const _ = (): React.ReactElement<Switch> => {
     const match = useRouteMatch()
     return (
         <Switch>

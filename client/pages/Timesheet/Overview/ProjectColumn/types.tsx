@@ -1,13 +1,13 @@
-import { IProject, ITimeEntry } from 'types'
+import { Project, EventObject } from 'types'
 
 export interface IClearManualMatchButtonProps extends React.HTMLProps<HTMLDivElement> {
     onClick: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
 }
 
 export interface IProjectColumnTooltipProps {
-    project: IProject;
+    project: Project;
 }
 
 export interface IProjectColumnProps {
-    event: ITimeEntry;
+    event: EventObject;
 }

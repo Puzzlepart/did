@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@apollo/react-hooks'
+import { useMutation, useQuery } from '@apollo/client'
 import { UserMessage } from 'components'
 import List from 'components/List'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'

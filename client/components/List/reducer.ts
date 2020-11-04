@@ -22,6 +22,6 @@ export default (state: IListState, action: Action): IListState => {
     default:
       throw new Error()
   }
-  newState.items = newState.origItems.filter(i => searchObject(i, newState.searchTerm))
+  newState.items = newState.origItems.filter((i) => searchObject(i, newState.searchTerm))
   return newState
 }

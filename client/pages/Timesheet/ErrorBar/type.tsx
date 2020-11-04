@@ -1,4 +1,4 @@
-import { ApolloError } from 'apollo-client'
+import { ApolloError } from '@apollo/client'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 

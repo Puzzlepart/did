@@ -1,6 +1,6 @@
-import { ICustomer } from 'types'
+import { Customer } from 'types'
 
 
 export interface ICustomerDetails {
-    customer: ICustomer;
+    customer: Customer;
 }

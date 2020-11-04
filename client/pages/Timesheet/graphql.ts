@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-const unsubmitPeriod = gql`
+export const UNSUBMIT_PERIOD = gql`
   mutation($period: TimesheetPeriodInput!, $forecast: Boolean!) {
     result: unsubmitPeriod(period: $period, forecast: $forecast) {
       success
@@ -11,7 +11,7 @@ const unsubmitPeriod = gql`
   }
 `
 
-const submitPeriod = gql`
+export const SUBMIT_PERIOD = gql`
   mutation($period: TimesheetPeriodInput!, $forecast: Boolean!) {
     result: submitPeriod(period: $period, forecast: $forecast) {
       success
@@ -22,9 +22,9 @@ const submitPeriod = gql`
   }
 `
 
-const timesheet = gql`
-  query($startDateTime: String!, $endDateTime: String!, $dateFormat: String!, $locale: String!) {
-    timesheet(startDateTime: $startDateTime, endDateTime: $endDateTime, dateFormat: $dateFormat, locale: $locale) {
+export const TIMESHEET = gql`
+  query($query: TimesheetQuery!, $dateFormat: String!, $locale: String!) {
+    timesheet(query: $query, dateFormat: $dateFormat, locale: $locale) {
       id
       week
       month
@@ -93,8 +93,3 @@ const timesheet = gql`
     }
   }
 `
-
-export default {
-  query: { timesheet },
-  mutation: { submitPeriod, unsubmitPeriod },
-}

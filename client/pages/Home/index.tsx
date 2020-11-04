@@ -7,7 +7,7 @@ import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import ReactMarkdown from 'react-markdown/with-html'
 
 
-export default () => {
+export default (): React.ReactElement<HTMLDivElement> => {
     const { user, error } = useContext(AppContext)
     const { t } = useTranslation()
     return (

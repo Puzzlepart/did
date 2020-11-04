@@ -1,12 +1,11 @@
-import { ApolloQueryResult } from 'apollo-client'
 import { createContext } from 'react'
-import { IProject } from 'types/IProject'
-
+import { Project } from 'types'
+import { ApolloQueryResult } from '@apollo/client'
 
 export interface IProjectsContext {
     outlookCategories: any[];
     projects: any[];
-    setSelected: React.Dispatch<React.SetStateAction<IProject>>;
+    setSelected: React.Dispatch<React.SetStateAction<Project>>;
     refetch(variables?: any): Promise<ApolloQueryResult<any>>;
 }
 

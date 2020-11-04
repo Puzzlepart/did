@@ -1,6 +1,6 @@
-import { IProject } from 'types'
+import { Project } from 'types'
 
 export interface INameLabelProps {
-    project: IProject;
+    project: Project;
     renderLink?: boolean;
 }

@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
 const timeentries = gql`
-  query($year: Int!, $monthNumber: Int) {
-    timeentries(year: $year, monthNumber: $monthNumber, currentUser: true) {
+  query($query: TimeEntriesQuery!) {
+    timeentries(query: $query, currentUser: true) {
       title
       duration
       weekNumber

@@ -1,6 +1,5 @@
-import { IProject } from 'types'
-
+import { Project } from 'types'
 
 export interface IProjectDetailsProps {
-    project: IProject;
+    project: Project;
 }

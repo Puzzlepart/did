@@ -7,41 +7,41 @@ export default (context: ITimesheetContext, t: TFunction): GlobalHotKeysProps =>
     GO_TO_CURRENT_WEEK: {
       name: t('timesheet.goToCurrentWeek'),
       sequence: 'SHIFT+DOWN',
-      action: 'keydown',
+      action: 'keydown'
     },
     PREV_WEEK: {
       name: t('timesheet.goToPrevWeek'),
       sequence: 'SHIFT+LEFT',
-      action: 'keydown',
+      action: 'keydown'
     },
     NEXT_WEEK: {
       name: t('timesheet.goToNextWeek'),
       sequence: 'SHIFT+RIGHT',
-      action: 'keydown',
+      action: 'keydown'
     },
     SHOW_SHORTCUTS: {
       name: t('common.showShortcutsText'),
       sequence: 'SHIFT+I',
-      action: 'keydown',
-    },
+      action: 'keydown'
+    }
   },
   handlers: {
     GO_TO_CURRENT_WEEK: () =>
       context.dispatch({
         type: 'MOVE_SCOPE',
-        payload: new Date().toISOString(),
+        payload: new Date().toISOString()
       }),
     PREV_WEEK: () =>
       context.dispatch({
         type: 'MOVE_SCOPE',
-        payload: { amount: -1, unit: 'week' },
+        payload: { amount: -1, unit: 'week' }
       }),
     NEXT_WEEK: () =>
       context.dispatch({
         type: 'MOVE_SCOPE',
-        payload: { amount: 1, unit: 'week' },
+        payload: { amount: 1, unit: 'week' }
       }),
-    SHOW_SHORTCUTS: () => context.dispatch({ type: 'TOGGLE_SHORTCUTS' }),
+    SHOW_SHORTCUTS: () => context.dispatch({ type: 'TOGGLE_SHORTCUTS' })
   },
-  allowChanges: false,
+  allowChanges: false
 })

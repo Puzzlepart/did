@@ -1,9 +1,9 @@
 import { ICalloutProps } from 'office-ui-fabric-react/lib/Callout'
-import { IEntityLabel } from 'types'
+import { LabelObject } from 'types'
 
 export interface ISelectCalloutProps extends ICalloutProps {
-    labels: IEntityLabel[];
+    labels: LabelObject[];
     searchLabelText: string;
     defaultSelectedKeys?: string[];
-    onToggleLabel: (label: IEntityLabel) => void;
+    onToggleLabel: (label: LabelObject) => void;
 }

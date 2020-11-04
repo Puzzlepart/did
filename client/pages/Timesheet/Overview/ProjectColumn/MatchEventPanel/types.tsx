@@ -1,5 +1,5 @@
-import { ITimeEntry } from 'types'
+import { EventObject } from 'types'
 
 export interface IMatchEventPanelProps {
-    event: ITimeEntry;
+    event: EventObject;
 }

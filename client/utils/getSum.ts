@@ -1,5 +1,5 @@
 import { reduce } from 'underscore'
-import { get } from 'helpers'
+import { getValue } from 'helpers'
 
 /**
  * Get sum for a property in the array using underscore reduce
@@ -10,5 +10,5 @@ import { get } from 'helpers'
  * @category Utility
  */
 export function getSum(items: any[], property: string): number {
-  return reduce(items, (memo, item) => (memo += get<number>(item, property, 0)), 0)
+  return reduce(items, (memo, item) => (memo += getValue<number>(item, property, 0)), 0)
 }

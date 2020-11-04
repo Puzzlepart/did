@@ -1,5 +1,5 @@
 
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { UserMessage } from 'components'
 import List from 'components/List'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
@@ -11,7 +11,7 @@ import { commandBar } from './commandBar'
 import { createColumns, createRows, createPeriods } from './utils'
 import styles from './SummaryView.module.scss'
 import { reducer } from './reducer'
-import TIME_ENTRIES, { ITimeEntriesVariables } from './TIME_ENTRIES'
+import TIME_ENTRIES from './TIME_ENTRIES'
 import { getScopes, getViewTypes, ISummaryViewProps, ISummaryViewScope } from './types'
 import { ISummaryViewContext } from './context'
 
@@ -28,12 +28,14 @@ export const SummaryView = (props: ISummaryViewProps): JSX.Element => {
         type: first(types),
         scope: first(scopes),
     })
-    const { data, loading } = useQuery<any, ITimeEntriesVariables>(TIME_ENTRIES, {
+    const { data, loading } = useQuery(TIME_ENTRIES, {
         fetchPolicy: 'cache-first',
         variables: {
-            year: state.year,
-            startMonthIndex: (state.endMonthIndex - state.range) + 1,
-            endMonthIndex: state.endMonthIndex,
+            query: {
+                year: state.year,
+                startMonthIndex: (state.endMonthIndex - state.range) + 1,
+                endMonthIndex: state.endMonthIndex,
+            }
         }
     })
 

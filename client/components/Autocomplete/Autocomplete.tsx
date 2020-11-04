@@ -9,12 +9,12 @@ import { IAutocompleteProps, IAutocompleteState, ISuggestionItem } from '.'
 import styles from './Autocomplete.module.scss'
 
 const KeyCodes = {
-  tab: 9 as 9,
-  enter: 13 as 13,
-  left: 37 as 37,
-  up: 38 as 38,
-  right: 39 as 39,
-  down: 40 as 40,
+  tab: 9 as const,
+  enter: 13 as const,
+  left: 37 as const,
+  up: 38 as const,
+  right: 39 as const,
+  down: 40 as const,
 }
 
 type ISearchSuggestionsProps = IAutocompleteProps;

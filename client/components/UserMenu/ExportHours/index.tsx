@@ -14,7 +14,7 @@ import styles from '../UserMenu.module.scss'
 import { query } from './graphql'
 import { getExportTypes, IExportType } from './types'
 
-export const ExportHours: React.FunctionComponent<{}> = () => {
+export const ExportHours: React.FunctionComponent = () => {
     const { t } = useTranslation()
     const exportTypes = getExportTypes(t)
     const [exportType, setExportType] = useState(first(exportTypes))

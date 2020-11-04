@@ -1,6 +1,6 @@
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import { EntityLabel } from 'components/EntityLabel'
-import { IEntityLabel } from 'types/IEntityLabel'
+import { LabelObject } from 'types'
 import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { Label } from 'office-ui-fabric-react/lib/Label'
 import { Panel, PanelType } from 'office-ui-fabric-react/lib/Panel'
@@ -17,7 +17,7 @@ import { IconPicker } from 'components/IconPicker'
 
 export const LabelForm = (props: ILabelFormProps) => {
     const { t } = useTranslation()
-    const [model, setModel] = useState<IEntityLabel>(props.label || {
+    const [model, setModel] = useState<LabelObject>(props.label || {
         name: '',
         description: '',
         color: '#F8E71C',

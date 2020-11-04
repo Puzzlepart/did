@@ -121,11 +121,14 @@ server/public/css
 server/views/index.hbs
 server/views/index.hbs.gz
 
+server/**/*.js
+server/**/*.js.map
+server-dist
+
 # Lock files
 pnpm-lock.yaml
 package-lock.json
 
-azcopy/
 client/**/*.d.ts
 client/**/*js
 client/**/*js.map
@@ -138,3 +141,4 @@ doc/
 .DS_Store
 tests/*.json
 .localtunnel
+schema.gql

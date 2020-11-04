@@ -1,4 +1,4 @@
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import { IconPicker, LabelPicker, SearchCustomer, useMessage, UserMessage } from 'components'
 import { Toggle } from 'office-ui-fabric-react'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
@@ -8,7 +8,7 @@ import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IFormValidation } from 'types'
 import { isBlank } from 'underscore.string'
-import graphql from '../graphql'
+import {CREATE_OR_UPDATE_PROJECT} from '../graphql'
 import styles from './CreateProjectForm.module.scss'
 import { IProjectFormProps, ProjectModel } from './types'
 
@@ -19,7 +19,7 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
     const [validation, setValidation] = useState<IFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useMessage()
     const [model, setModel] = useState<ProjectModel>(new ProjectModel(edit))
-    const [createOrUpdateProject, { loading }] = useMutation<any, any>(graphql.mutation.createOrUpdateProject)
+    const [createOrUpdateProject, { loading }] = useMutation(CREATE_OR_UPDATE_PROJECT)
 
     /**
      * Update model

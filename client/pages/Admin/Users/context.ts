@@ -1,4 +1,4 @@
-import { IRole, IUser } from 'types'
+import { Role, User } from 'types'
 import { createContext } from 'react'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -6,17 +6,17 @@ export interface IUsersContext {
   /**
    * Available roles
    */
-  roles: IRole[]
+  roles: Role[]
 
   /**
    * Registered users
    */
-  users: IUser[]
+  users: User[]
 
   /**
    * Active Directory users
    */
-  adUsers: IUser[]
+  adUsers: User[]
 }
 
 export const UsersContext = createContext<IUsersContext>(null)

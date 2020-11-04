@@ -2,7 +2,7 @@
 import { DurationColumn } from 'components/DurationColumn'
 import { LabelColumn } from 'components/LabelColumn'
 import List from 'components/List'
-import { IProject } from 'types'
+import { Project } from 'types'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar'
 import React,{useContext} from 'react'
@@ -68,7 +68,7 @@ function createColumns(scope: TimesheetScope) {
  * @param {IColumn[]} columns Columns
  */
 function generateRows(events: any[], columns: IColumn[]) {
-    const projects = unique(events.map(e => e.project), (p: IProject) => p.id)
+    const projects = unique(events.map(e => e.project), (p: Project) => p.id)
     return projects.map(project => {
         const projectEvents = events.filter(event => event.project.id === project.id)
         return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
