@@ -27,6 +27,6 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'didapp'
-        slot-name: 'simpleoauth2'
+        slot-name: 'dev'
         publish-profile: ${{ secrets.DIDAPP_DEV_PUBLISH_PROFILE }}
         package: .
