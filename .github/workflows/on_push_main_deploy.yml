@@ -3,7 +3,7 @@ name: Build and deploy to didapp
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build-and-deploy:
@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@master
-
+    
     - name: Select node version 12.8.3
       uses: actions/setup-node@v1
       with:
