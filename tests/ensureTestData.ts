@@ -14,7 +14,10 @@ let azstorage = new AzStorageService({
   }
 })
 
-export default () =>
+/**
+ * Ensure test data
+ */
+export const ensureTestData = () =>
   new Promise<any>((resolve, reject) => {
     if (!env('TESTS_AZURE_STORAGE_CONNECTION_STRING')) {
       debug('Missing environment variable TESTS_AZURE_STORAGE_CONNECTION_STRING')
