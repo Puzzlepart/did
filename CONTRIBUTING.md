@@ -1,7 +1,7 @@
 # Contributing to Did
 
 
-_Contributios arer very velcome! Here's some guidance to get started!_ :heart:
+_Contributios are very velcome! Here's some guidance to get started!_ :heart:
 
 ## Structure
 
