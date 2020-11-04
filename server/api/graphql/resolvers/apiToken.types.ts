@@ -1,10 +1,11 @@
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
-import { Field, ObjectType } from 'type-graphql'
+import { Field, ID, ObjectType } from 'type-graphql'
+import { simpleResolvers } from '../config'
 
-@ObjectType({ description: 'A type that describes a ApiToken' })
+@ObjectType({ description: 'A type that describes a ApiToken', simpleResolvers: simpleResolvers.ApiToken })
 export class ApiToken {
-  @Field({ nullable: true, defaultValue: null })
+  @Field(() => ID, { nullable: true, defaultValue: null })
   name: string
 
   @Field({ nullable: true, defaultValue: null })

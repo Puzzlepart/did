@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import azurestorage from 'azure-storage'
 import { omit, isNull } from 'underscore'
 import { decapitalize, capitalize, isBlank, startsWith } from 'underscore.string'
@@ -21,7 +20,10 @@ class AzTableUtilities {
    * @param {Record<string,azurestorage.TableUtilities.entityGenerator.EntityProperty<any>>} entityDescriptor Entity descriptor
    * @param {Record<string, string>} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
    */
-  parseAzEntity(entityDescriptor: Record<string, azurestorage.TableUtilities.entityGenerator.EntityProperty<any>>, columnMap: Record<string, string> = {}) {
+  parseAzEntity(
+    entityDescriptor: Record<string, azurestorage.TableUtilities.entityGenerator.EntityProperty<any>>,
+    columnMap: Record<string, string> = {}
+  ) {
     return Object.keys(entityDescriptor).reduce((obj: { [x: string]: any }, key: string) => {
       const { _, $ } = entityDescriptor[key]
       let value = _
@@ -53,7 +55,7 @@ class AzTableUtilities {
     { entries, continuationToken }: azurestorage.TableService.QueryEntitiesResult<any>,
     columnMap: Record<string, string>
   ) {
-    entries = entries.map(ent => this.parseAzEntity(ent, columnMap))
+    entries = entries.map((ent) => this.parseAzEntity(ent, columnMap))
     return { entries, continuationToken }
   }
 
@@ -66,7 +68,7 @@ class AzTableUtilities {
       int: azurestorage.TableUtilities.entityGenerator.Int32,
       double: azurestorage.TableUtilities.entityGenerator.Double,
       datetime: azurestorage.TableUtilities.entityGenerator.DateTime,
-      boolean: azurestorage.TableUtilities.entityGenerator.Boolean,
+      boolean: azurestorage.TableUtilities.entityGenerator.Boolean
     }
   }
 
@@ -86,7 +88,7 @@ class AzTableUtilities {
       greaterThanOrEqual: azurestorage.TableUtilities.QueryComparisons.GREATER_THAN_OR_EQUAL,
       lessThan: azurestorage.TableUtilities.QueryComparisons.LESS_THAN,
       lessThanOrEqual: azurestorage.TableUtilities.QueryComparisons.LESS_THAN_OR_EQUAL,
-      and: azurestorage.TableUtilities.TableOperators.AND,
+      and: azurestorage.TableUtilities.TableOperators.AND
     }
   }
 
@@ -150,7 +152,7 @@ class AzTableUtilities {
   queryAzTable(
     table: string,
     query: azurestorage.TableQuery,
-    columnMap: any = {},
+    columnMap?: any,
     continuationToken: azurestorage.TableService.TableContinuationToken = null
   ): Promise<azurestorage.TableService.QueryEntitiesResult<any>> {
     return new Promise<azurestorage.TableService.QueryEntitiesResult<any>>((resolve, reject) => {
@@ -208,8 +210,8 @@ class AzTableUtilities {
   ): Record<string, azurestorage.TableUtilities.entityGenerator.EntityProperty<any>> {
     const { string, datetime, double, int, boolean } = this.azEntGen()
     const entityDescriptor = Object.keys(values)
-      .filter(key => !isNull(values[key]))
-      .filter(key => (options.removeBlanks ? !isBlank(values[key]) : true))
+      .filter((key) => !isNull(values[key]))
+      .filter((key) => (options.removeBlanks ? !isBlank(values[key]) : true))
       .reduce(
         (obj, key) => {
           let value: any = values[key]
@@ -241,7 +243,7 @@ class AzTableUtilities {
         },
         {
           PartitionKey: string(partitionKey),
-          RowKey: string(rowKey),
+          RowKey: string(rowKey)
         }
       )
     return omit(entityDescriptor, (prop: azurestorage.TableUtilities.entityGenerator.EntityProperty<any>) =>
@@ -287,7 +289,11 @@ class AzTableUtilities {
    * @param {any} entityDescriptor Entity descriptor
    * @param {boolean} merge If the entity should be inserted using insertOrMergeEntity
    */
-  updateAzEntity(table: string, entityDescriptor: any, merge: boolean): Promise<azurestorage.TableService.EntityMetadata> {
+  updateAzEntity(
+    table: string,
+    entityDescriptor: any,
+    merge: boolean
+  ): Promise<azurestorage.TableService.EntityMetadata> {
     return new Promise((resolve, reject) => {
       if (merge) {
         this.tableService.insertOrMergeEntity(table, entityDescriptor, undefined, (error, result) => {
@@ -309,7 +315,7 @@ class AzTableUtilities {
    * @param {*} table Table name
    * @param {*} entityDescriptor Entity desccriptor
    */
-  deleteEntity(table: string, entityDescriptor: any): Promise<azurestorage.ServiceResponse> {
+  deleteEntity(table: string, entityDescriptor: any) {
     return new Promise((resolve, reject) => {
       this.tableService.deleteEntity(table, entityDescriptor, undefined, (error, result) => {
         if (error) reject(error)
@@ -324,7 +330,7 @@ class AzTableUtilities {
    * @param {*} table Table name
    * @param {*} batch Table batch
    */
-  executeBatch(table: string, batch: azurestorage.TableBatch):Promise<azurestorage.TableService.BatchResult[]>  {
+  executeBatch(table: string, batch: azurestorage.TableBatch) {
     return new Promise((resolve, reject) => {
       this.tableService.executeBatch(table, batch, (error, result) => {
         if (error) reject(error)

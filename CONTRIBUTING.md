@@ -1,7 +1,7 @@
 # Contributing to Did
 
 
-_Contributios arer very velcome! Here's some guidance to get started!_ :heart:
+_Contributios are very velcome! Here's some guidance to get started!_ :heart:
 
 ## Structure
 
@@ -34,6 +34,8 @@ Folder/File | Description
 
 ## Development
 
+**NB: Did should be developed with node >=12.18.3**
+
 1. Check out the dev branch
 2. Run `npm install`
 3. Run `npm run-script create-env` to create your own `.env` file for local testing
@@ -41,6 +43,10 @@ Folder/File | Description
 5. Install the [Azure App Service extension for vscode](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice)
 6. Create an Azure app registration, or ask one of the [maintainers](#maintainers) for access to an existing one
 7. Run `npm run-script watch` to watch both `server` and `client` changes concurrently  
+
+The following permissions are required by Azure App Registration:
+
+![image-20201104173614079](assets/image-20201104173614079.png)
 
 ### Resource management with i18n
 

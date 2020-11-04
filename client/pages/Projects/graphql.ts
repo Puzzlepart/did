@@ -74,4 +74,3 @@ export const CREATE_OR_UPDATE_PROJECT = gql`
     }
   }
 `
-

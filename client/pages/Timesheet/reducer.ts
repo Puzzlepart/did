@@ -39,14 +39,15 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
         const { loading, data, error } = action.payload.query
         newState.loading = loading
           ? {
-            label: t('timesheet.loadingEventsLabel'),
-            description: t('timesheet.loadingEventsDescription'),
-          }
+              label: t('timesheet.loadingEventsLabel'),
+              description: t('timesheet.loadingEventsDescription')
+            }
           : null
         if (data) {
-          newState.periods = data.timesheet.map(period => new TimesheetPeriod(period))
+          newState.periods = data.timesheet.map((period) => new TimesheetPeriod(period))
           newState.selectedPeriod =
-            find(newState.periods, p => p.id === getValue(state, 'selectedPeriod.id', null)) || first(newState.periods)
+            find(newState.periods, (p) => p.id === getValue(state, 'selectedPeriod.id', null)) ||
+            first(newState.periods)
         }
         newState.error = error
       }
@@ -57,7 +58,7 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
         label: action.payload.forecast ? t('timesheet.forecastingPeriodLabel') : t('timesheet.confirmingPeriodLabel'),
         description: action.payload.forecast
           ? t('timesheet.forecastingPeriodDescription')
-          : t('timesheet.confirmingPeriodDescription'),
+          : t('timesheet.confirmingPeriodDescription')
       }
       break
 
@@ -68,7 +69,7 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
           : t('timesheet.unconfirmingPeriodLabel'),
         description: action.payload.forecast
           ? t('timesheet.unforecastingPeriodDescription')
-          : t('timesheet.unconfirmingPeriodDescription'),
+          : t('timesheet.unconfirmingPeriodDescription')
       }
       break
     case 'MOVE_SCOPE':
@@ -92,7 +93,7 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
       {
         const { eventId, project } = action.payload
         newState.selectedPeriod.setManualMatch(eventId, project)
-        newState.periods = newState.periods.map(p =>
+        newState.periods = newState.periods.map((p) =>
           p.id === newState.selectedPeriod.id ? newState.selectedPeriod : p
         )
       }
@@ -101,7 +102,7 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
     case 'CLEAR_MANUAL_MATCH':
       {
         newState.selectedPeriod.clearManualMatch(action.payload)
-        newState.periods = newState.periods.map(p =>
+        newState.periods = newState.periods.map((p) =>
           p.id === newState.selectedPeriod.id ? newState.selectedPeriod : p
         )
       }
@@ -110,7 +111,7 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
     case 'IGNORE_EVENT':
       {
         newState.selectedPeriod.ignoreEvent(action.payload)
-        newState.periods = newState.periods.map(p =>
+        newState.periods = newState.periods.map((p) =>
           p.id === newState.selectedPeriod.id ? newState.selectedPeriod : p
         )
       }
@@ -119,7 +120,7 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
     case 'CLEAR_IGNORES':
       {
         newState.selectedPeriod.clearIgnoredEvents()
-        newState.periods = newState.periods.map(p =>
+        newState.periods = newState.periods.map((p) =>
           p.id === newState.selectedPeriod.id ? newState.selectedPeriod : p
         )
       }

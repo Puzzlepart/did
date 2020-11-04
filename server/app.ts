@@ -29,8 +29,8 @@ class App {
   }
 
   /**
-  * Setup app
-  */
+   * Setup app
+   */
   public async setup() {
     this.setupSession()
     this.setupViewEngine()

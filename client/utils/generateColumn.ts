@@ -8,14 +8,12 @@ import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
  * @param {Partial<IColumn>} props Additional props
  * @param {function} onRender On render function (optional)
  * @param {number} minWidth Min width (defaults to 100)
- *
- * @category Utility
  */
 export function generateColumn(
   fieldName: string,
   name = '',
   props: Partial<IColumn> = {},
-  onRender?: any,
+  onRender?: (item?: any, index?: number, column?: IColumn) => any,
   minWidth = 100
 ): IColumn {
   return {
@@ -25,6 +23,6 @@ export function generateColumn(
     minWidth,
     onRender,
     isResizable: true,
-    ...{ data: {}, ...props },
+    ...{ data: {}, ...props }
   } as IColumn
 }

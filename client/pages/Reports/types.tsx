@@ -30,22 +30,22 @@ export interface IReportsState {
     /**
      * Filter panel open
      */
-    isFiltersOpen?: boolean;
+    readonly isFiltersOpen?: boolean;
 
     /**
      * Query
      */
-    query?: IReportsQuery;
+    readonly query?: IReportsQuery;
 
     /**
      * Group by properties
      */
-    groupBy?: IListGroups;
+    readonly groupBy?: IListGroups;
 
     /**
      * Filtered subset
      */
-    subset?: any[];
+    readonly subset?: any[];
 }
 
 /**
@@ -87,7 +87,7 @@ export function getQueries<T = IReportsQuery>(t: TFunction): T[] {
             key: 'CURRENT_YEAR',
             text: t('common.exportTypeCurrentYear', currentYear),
             iconName: 'CalendarReply',
-            variables: currentYear,
+            variables: { query: currentYear },
             exportFileName: `TimeEntries-${currentYear.year}-{0}.xlsx`,
         } as unknown as T,
         {

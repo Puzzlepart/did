@@ -28,11 +28,13 @@ module.exports = {
 
     '@typescript-eslint/member-delimiter-style': 0,
 
+    '@typescript-eslint/explicit-function-return-type': 0,
+
+    '@typescript-eslint/explicit-module-boundary-types': 0,
+
     'react/prop-types': 0,
 
     'no-inferrable-types': 0,
-
-    '@typescript-eslint/explicit-function-return-type': 0,
 
     'react/display-name': 0,
 

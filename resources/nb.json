@@ -20,7 +20,7 @@
     "hoursNotMatchedText": "Du har **{{hours}}** som ikke er koblet mot et prosjekt. Alle avtaler må være matchet før du kan bekrefte timene dine.",
     "allHoursMatchedText": "Alle timene dine er matchet. Er du klar til å bekrefte uken din?",
     "periodConfirmedText": "Perioden er bekreftet med {{hours}}. Klikk **Angre bekreft timer** dersom du vil gjøre noen justeringer.",
-    "ignoredEventsText": "Du har {{ignoredEvents}} ignorerte hendelse(r).",
+    "ignoredEventsText": "Du har {{ignoredEvents}} manuelt ignorerte hendelse(r).",
     "undoIgnoreText": "Trykk for å angre",
     "unresolvedErrorText": "Du har {{count}} uløste feil. Du må løse disse før du kan bekrefte timene dine.",
     "splitWeekInfoText": "Valgt uke strekker seg over to måneder. Naviger mellom periodene ved å bruke knappene over.",

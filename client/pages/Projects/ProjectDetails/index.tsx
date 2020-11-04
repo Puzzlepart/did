@@ -5,14 +5,14 @@ import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { TimeEntry } from 'types'
+import { TIME_ENTRIES } from '../graphql'
 import { Actions } from './actions'
 import styles from './ProjectDetails.module.scss'
+import { ProjectDetailsContext } from './ProjectDetailsContext'
 import { Summary } from './Summary'
 import { TimeEntries } from './TimeEntries'
 import { IProjectDetailsProps } from './types'
-import { ProjectDetailsContext } from './ProjectDetailsContext'
-import {TIME_ENTRIES} from '../graphql'
-import { TimeEntry } from '../../../../server/api/graphql/types'
 
 export const ProjectDetails: React.FunctionComponent<IProjectDetailsProps> = (props: IProjectDetailsProps) => {
     const { t } = useTranslation()

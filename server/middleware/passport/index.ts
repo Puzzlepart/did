@@ -1,7 +1,7 @@
 import fs from 'fs'
 import passport from 'passport'
-import onVerifySignin from './onVerifySignin'
-const OIDCStrategy = require('passport-azure-ad').OIDCStrategy
+import { onVerifySignin } from './onVerifySignin'
+import { OIDCStrategy } from 'passport-azure-ad'
 import env from '../../utils/env'
 
 passport.serializeUser((user, done) => done(null, user))
@@ -25,16 +25,16 @@ const strategy = () => {
   const redirectUrl = getRedirectUrl()
   return new OIDCStrategy(
     {
-      identityMetadata: `${env('OAUTH_AUTHORITY')}${env('OAUTH_ID_METADATA')}`,
+      identityMetadata: 'https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration',
       clientID: env('OAUTH_APP_ID'),
-      responseType: env('OAUTH_RESPONSE_TYPE'),
-      responseMode: env('OAUTH_RESPONSE_MODE'),
+      responseType: 'code id_token',
+      responseMode: 'form_post',
       redirectUrl,
       allowHttpForRedirectUrl: true,
       clientSecret: env('OAUTH_APP_PASSWORD'),
       validateIssuer: false,
       passReqToCallback: false,
-      scope: env('OAUTH_SCOPES').split(' '),
+      scope: env('OAUTH_SCOPES').split(' ')
     },
     onVerifySignin
   )

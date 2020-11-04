@@ -1,10 +1,15 @@
-
 import { AuthChecker } from 'type-graphql'
-import { isEmpty } from 'underscore'
 import { Context } from './context'
 
+export interface IAuthOptions {
+  /**
+   * Requires user context and can cannot be called with an API token
+   */
+  userContext?: boolean
+}
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const authChecker: AuthChecker<any> = ({ context }: { context: Context }, roles) => {
-    if (isEmpty(roles)) return !!context.user
-    return true
+export const authChecker: AuthChecker<Context, IAuthOptions> = ({ context }: { context: Context }, [authOptions]) => {
+  if (!authOptions) return context.isAuthorized
+  if (authOptions.userContext) return !!context.user
 }

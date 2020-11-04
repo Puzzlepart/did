@@ -125,7 +125,7 @@ export default new (class DateUtils {
     return {
       monthName: date.format('MMMM'),
       monthNumber: date.month() + 1,
-      year: date.year(),
+      year: date.year()
     }
   }
 
@@ -166,7 +166,7 @@ export default new (class DateUtils {
       monthFormat: 'MMMM',
       yearFormat: 'YYYY',
       hideYear: false,
-      implicitYear: false,
+      implicitYear: false
     }
   ): string {
     return start

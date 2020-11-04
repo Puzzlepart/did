@@ -1,9 +1,10 @@
 import { notStrictEqual, strictEqual } from 'assert'
 import { any, first } from 'underscore'
 import EventMatching from '../server/api/graphql/resolvers/timesheet.matching'
-import ensureTestData from './ensureTestData'
+import { header, subHeader } from './@utils'
+import { ensureTestData } from './ensureTestData'
 
-describe('Event matching', async () => {
+describe(header('Event matching'), async () => {
   let testEvent: any = {}
   let eventMatching: EventMatching
 
@@ -15,11 +16,11 @@ describe('Event matching', async () => {
   beforeEach(() => {
     testEvent = {
       title: 'Important meeting',
-      categories: [],
+      categories: []
     }
   })
 
-  describe('Match against project', () => {
+  describe(subHeader('Match against project'), () => {
     it('ABS VAC in category should match against customer Employee Absence', () => {
       testEvent.categories.push('ABS VAC')
       const event = first(eventMatching.matchEvents([testEvent]))
@@ -58,7 +59,7 @@ describe('Event matching', async () => {
     })
   })
 
-  describe('Matching suggestions', () => {
+  describe(subHeader('Matching suggestions'), () => {
     it('{ABS VAK} should suggest {ABS VAC}', () => {
       testEvent.categories.push('ABS VAK')
       const event = first(eventMatching.matchEvents([testEvent]))
@@ -84,7 +85,7 @@ describe('Event matching', async () => {
     })
   })
 
-  describe('System ignore', () => {
+  describe(subHeader('System ignore'), () => {
     it('IGNORE (uppercase) in categories should set the event as ignored', () => {
       testEvent.categories.push('IGNORE')
       const event = first(eventMatching.matchEvents([testEvent]))
@@ -118,12 +119,12 @@ describe('Event matching', async () => {
     })
   })
 
-  describe('Matching event labels', () => {
+  describe(subHeader('Matching event labels'), () => {
     it('[overtime-40] in categories should add matching label', () => {
       testEvent.categories.push('overtime-40')
       const event = first(eventMatching.matchEvents([testEvent]))
       strictEqual(
-        any(event.labels, lbl => lbl.name === 'overtime-40'),
+        any(event.labels, (lbl) => lbl.name === 'overtime-40'),
         true
       )
     })

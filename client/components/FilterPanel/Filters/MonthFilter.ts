@@ -14,16 +14,16 @@ export class MonthFilter extends BaseFilter {
    * @param {any[]} entries Entries
    */
   public initialize(entries: any[]): IFilter {
-    const values = unique(entries.map(e => getValue(e, this.fieldName, null)))
+    const values = unique(entries.map((e) => getValue(e, this.fieldName, null)))
     const monthNames = dateUtils.getMonthNames()
     const items = monthNames
       .filter((_, idx) => contains(values, idx + 1))
-      .map(value => ({ key: indexOf(monthNames, value) + 1, value }))
+      .map((value) => ({ key: indexOf(monthNames, value) + 1, value }))
     return {
       key: this.fieldName,
       name: this.name,
       items,
-      selected: [],
+      selected: []
     }
   }
 }

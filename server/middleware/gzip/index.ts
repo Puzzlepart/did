@@ -1,6 +1,11 @@
 import fs from 'fs'
 
-const serveGzipped = contentType => (req, res, next) => {
+/**
+ * Serve gzipped
+ *
+ * @param {string} contentType Content type
+ */
+const serveGzipped = (contentType: string) => (req, res, next) => {
   // does browser support gzip? does the file exist?
   const acceptedEncodings = req.acceptsEncodings()
   if (acceptedEncodings.indexOf('gzip') === -1 || !fs.existsSync(`./public/${req.baseUrl}.gz`)) {

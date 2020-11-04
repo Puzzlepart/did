@@ -39,7 +39,7 @@ export class TimesheetScope {
   public get dateStrings(): { startDateTime: string; endDateTime: string } {
     return {
       startDateTime: dateUtils.toString(this._startDateTime),
-      endDateTime: dateUtils.toString(this._endDateTime),
+      endDateTime: dateUtils.toString(this._endDateTime)
     }
   }
 
@@ -49,7 +49,7 @@ export class TimesheetScope {
   public get date(): { startDateTime: Date; endDateTime: Date } {
     return {
       startDateTime: this._startDateTime.toDate(),
-      endDateTime: this._endDateTime.toDate(),
+      endDateTime: this._endDateTime.toDate()
     }
   }
 

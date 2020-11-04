@@ -9,7 +9,7 @@
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": ["es2018", "esnext.asynciterable"],
+    "lib": ["es2018", "esnext.asynciterable", "DOM"],
     "baseUrl": "./",
     "typeRoots": ["./node_modules/@types"],
     "types": ["express", "node", "mocha"],

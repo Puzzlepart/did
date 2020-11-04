@@ -1,7 +1,7 @@
 import { first, find, filter, contains, isEmpty } from 'underscore'
 import { findBestMatch } from 'string-similarity'
 import get from 'get-value'
-import { Customer, EventObject, LabelObject, Project } from '../types'
+import { Customer, EventObject, LabelObject, Project } from './types'
 
 class EventMatching {
   public projects: Project[]
@@ -29,12 +29,12 @@ class EventMatching {
    */
   private _findProjectSuggestion(customer: any, projectKey: any) {
     try {
-      const customerProjects = this.projects.filter(p => p.customerKey === customer.key)
-      const projectKeys = customerProjects.map(p => p.id.split(' ')[1])
+      const customerProjects = this.projects.filter((p) => p.customerKey === customer.key)
+      const projectKeys = customerProjects.map((p) => p.id.split(' ')[1])
       const sm = findBestMatch(projectKey, projectKeys)
       const target = sm.bestMatch && sm.bestMatch.rating > 0 ? sm.bestMatch.target : null
       if (!target) return null
-      const suggestion = first(customerProjects.filter(p => p.id.split(' ')[1] === target.toUpperCase()))
+      const suggestion = first(customerProjects.filter((p) => p.id.split(' ')[1] === target.toUpperCase()))
       return suggestion
     } catch (error) {
       return null
@@ -52,7 +52,7 @@ class EventMatching {
    * @param {EventObject} event
    */
   private _findIgnore(event: EventObject) {
-    const ignoreCategory = find(event.categories, c => c.toLowerCase() === 'ignore')
+    const ignoreCategory = find(event.categories, (c) => c.toLowerCase() === 'ignore')
     if (!!ignoreCategory) return 'category'
     if ((event.body || '').match(/[(\[\{]IGNORE[)\]\}]/gi) !== null) return 'body'
     return null
@@ -72,7 +72,7 @@ class EventMatching {
     while ((match = regex.exec(inputStr)) !== null) {
       matches.push({
         ...match.groups,
-        id: `${match.groups.customerKey} ${match.groups.key}`,
+        id: `${match.groups.customerKey} ${match.groups.key}`
       })
     }
     return matches
@@ -95,7 +95,7 @@ class EventMatching {
    * @param {string[]} categories
    */
   private _findLabels(categories: string[]) {
-    return filter(this.labels, lbl => contains(categories, lbl.name))
+    return filter(this.labels, (lbl) => contains(categories, lbl.name))
   }
 
   /**
@@ -118,19 +118,18 @@ class EventMatching {
     if (!isEmpty(matches)) {
       for (let i = 0; i < matches.length; i++) {
         const { id, key, customerKey } = matches[i]
-        event.customer = find(this.customers, c => customerKey === c.key)
+        event.customer = find(this.customers, (c) => customerKey === c.key)
         if (!!event.customer) {
-          event.project = find(this.projects, p => p.id === id)
+          event.project = find(this.projects, (p) => p.id === id)
           projectKey = key
         }
         if (!!event.project) break
       }
-    }
-    else if (ignore === 'body') {
+    } else if (ignore === 'body') {
       return { ...event, isSystemIgnored: true }
     } else {
-      event.project = find(this.projects, p => !!find(this._searchString(srchStr, true), m => m.id === p.id))
-      if (!!event.project) event.customer = find(this.customers, c => c.key === event.project.customerKey)
+      event.project = find(this.projects, (p) => !!find(this._searchString(srchStr, true), (m) => m.id === p.id))
+      if (!!event.project) event.customer = find(this.customers, (c) => c.key === event.project.customerKey)
     }
     if (!!event.customer && !event.project) {
       event.suggestedProject = this._findProjectSuggestion(event.customer, projectKey)
