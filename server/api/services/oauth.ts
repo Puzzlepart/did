@@ -33,11 +33,11 @@ class OAuthService {
    *
    * @param {IGetAccessTokenOptions} options Options
    */
-  public async getAccessToken(options: IGetAccessTokenOptions = {}): Promise<Token> {
+  public async getAccessToken(options: IGetAccessTokenOptions = { force: true }): Promise<Token> {
     let accessToken = this._client.createToken(this._request.user.oauthToken)
     try {
       if (accessToken.expired() || options.force) {
-        accessToken = await accessToken.refresh(pick(this._request.user.oauthToken, 'scope'))
+        accessToken = await accessToken.refresh(pick(accessToken.token, 'scope'))
         debug(`Successfully refreshed token expiring at ${accessToken.token.expires_at}.`)
       } else {
         debug(`Token expiring at ${accessToken.token.expires_at}.`)
