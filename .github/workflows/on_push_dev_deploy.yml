@@ -20,13 +20,25 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: npm install, build and package
+    - name: Cache node modules
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-node-modules
+      with:
+        path: node_modules
+        key: node_modules-${{ hashFiles('**/package.json') }}
+
+    - name: Install npm packages
+      if: steps.cache.outputs.cache-hit != 'true'
       run: |
-        npm install
+        npm install --no-progress --loglevel silent --no-shrinkwrap --no-fund
+
+    - name: npm build and package
+      run: |
         npm run package:client
         npm run build:server
 
-    - name: 'Deploy to Azure Web App'
+    - name: 'Deploy to didapp/dev'
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'didapp'
