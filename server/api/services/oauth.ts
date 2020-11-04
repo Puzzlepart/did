@@ -22,7 +22,7 @@ class OAuthService {
       },
       auth: {
         tokenHost: 'https://login.microsoftonline.com/common/',
-        authorizePath: 'oauth2/v2.0/authorize',
+        authorizePath: '/oauth2/v2.0/authorize',
         tokenPath: '/oauth2/v2.0/token'
       }
     })
