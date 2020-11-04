@@ -44,6 +44,10 @@ Folder/File | Description
 6. Create an Azure app registration, or ask one of the [maintainers](#maintainers) for access to an existing one
 7. Run `npm run-script watch` to watch both `server` and `client` changes concurrently  
 
+The following permissions are required by Azure App Registration:
+
+![image-20201104173614079](assets/image-20201104173614079.png)
+
 ### Resource management with i18n
 
 * Install vscode extension `antfu.i18n-ally`
