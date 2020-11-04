@@ -2,13 +2,11 @@ require('dotenv').config()
 import fs from 'fs'
 import path from 'path'
 import env from '../server/utils/env'
-import AzStorageService from '../server/services/azstorage'
+import AzStorageService from '../server/api/services/azstorage'
 import createDebug from 'debug'
 const debug = createDebug('tests/ensureTestData')
 
-let azstorage = new AzStorageService({
-  connectionString: env('TESTS_AZURE_STORAGE_CONNECTION_STRING')
-})
+let azstorage = new AzStorageService(env('TESTS_AZURE_STORAGE_CONNECTION_STRING'))
 
 export default () =>
   new Promise<any>((resolve, reject) => {
