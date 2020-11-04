@@ -74,13 +74,13 @@ export const StatusBar = () => {
     }
     if (!isEmpty(selectedPeriod.ignoredEvents) && !selectedPeriod.isConfirmed) {
         messages.push({
-            iconName: 'DependencyRemove',
             children: (
                 <p>
                     <span>{t('timesheet.ignoredEventsText', { ignoredEvents: selectedPeriod.ignoredEvents.length })}</span>
                     <a href='#' onClick={() => dispatch({ type: 'CLEAR_IGNORES' })}>{t('timesheet.undoIgnoreText')}</a>
                 </p>
-            )
+            ),
+            iconName: 'DependencyRemove',
         })
     }
     if (!isEmpty(selectedPeriod.errors)) {
