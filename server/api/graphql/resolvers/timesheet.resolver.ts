@@ -81,8 +81,6 @@ export class TimesheetResolver {
       }
       return periods
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error)
       throw new ApolloError(error.message, error.code, { statusCode: error.statusCode })
     }
   }
