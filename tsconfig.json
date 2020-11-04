@@ -11,7 +11,7 @@
     "experimentalDecorators": true,
     "lib": ["es2018", "esnext.asynciterable", "DOM"],
     "baseUrl": "./",
-    "typeRoots": ["./node_modules/@types", "./server"],
+    "typeRoots": ["./node_modules/@types", "./server/@custom-types"],
     "types": [
       "express",
       "node",
@@ -20,8 +20,7 @@
       "passport-azure-ad",
       "debug",
       "get-value",
-      "passport",
-      "@custom-types"
+      "passport"
     ],
     "outDir": "server-dist"
   },
