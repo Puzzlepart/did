@@ -6,6 +6,7 @@
     "node": ">=12.19.0",
     "npm": ">=6.5.0"
   },
+  
   "scripts": {
     "watch": "concurrently \"webpack\" \"npm run watch:server\" \"node tasks/open.js\" \"node tasks/localtunnel.js\"",
     "start": "node ./server-dist/index.js",
