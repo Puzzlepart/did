@@ -15,23 +15,37 @@ jobs:
       - uses: actions/checkout@v1
         with:
           ref: ${{ github.head_ref }}
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: node_modules-${{ hashFiles('**/package.json') }}
+
       - name: Install npm packages
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           npm install --no-progress --loglevel silent --no-shrinkwrap --no-fund
+
       - name: Package client JS
         run: |
           npm run package:client
         env:
           NODE_ENV: production
+
       - name: Build server
         run: |
           npm run build:server
         env:
           NODE_ENV: production
+
       - name: Tests
         run: |
           npm run tests
