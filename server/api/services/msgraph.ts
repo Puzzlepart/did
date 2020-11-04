@@ -54,7 +54,7 @@ class MSGraphService {
    * Gets a Microsoft Graph Client using the auth token from the class
    */
   private async _getClient(): Promise<MSGraphClient> {
-    const { access_token } = await this._oauthService.getAccessToken()
+    const { access_token } = await this._oauthService.getAccessToken({ tokenHost: 'https://login.microsoftonline.com/common/' })
     const client = MSGraphClient.init({
       authProvider: (done: (arg0: any, arg1: any) => void) => {
         done(null, access_token)

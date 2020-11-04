@@ -7,23 +7,31 @@ import env from '../../utils/env'
 const debug = createDebug('api/services/tokens')
 
 export interface IGetAccessTokenOptions {
+  tokenHost?: string
+  authorizePath?: string
+  tokenPath?: string
   force?: boolean
 }
 
 @Service({ global: false })
 class OAuthService {
-  private _client: AuthorizationCode
+  constructor(@Inject('REQUEST') private readonly _request: any) { }
 
-  constructor(@Inject('REQUEST') private readonly _request: any) {
-    this._client = new AuthorizationCode({
+  /**
+   * Get client
+   *
+   * @param {IGetAccessTokenOptions} options Options
+   */
+  private _getClient(options: IGetAccessTokenOptions): AuthorizationCode {
+    return new AuthorizationCode({
       client: {
         id: env('OAUTH_APP_ID'),
         secret: env('OAUTH_APP_PASSWORD')
       },
       auth: {
-        tokenHost: 'https://login.microsoftonline.com/common/',
-        authorizePath: 'oauth2/v2.0/authorize',
-        tokenPath: '/oauth2/v2.0/token'
+        tokenHost: options.tokenHost,
+        authorizePath: options.authorizePath || 'oauth2/v2.0/authorize',
+        tokenPath: options.tokenPath || '/oauth2/v2.0/token'
       }
     })
   }
@@ -33,8 +41,8 @@ class OAuthService {
    *
    * @param {IGetAccessTokenOptions} options Options
    */
-  public async getAccessToken(options: IGetAccessTokenOptions = { force: true }): Promise<Token> {
-    let accessToken = this._client.createToken(this._request.user.oauthToken)
+  public async getAccessToken(options: IGetAccessTokenOptions): Promise<Token> {
+    let accessToken = this._getClient(options).createToken(this._request.user.oauthToken)
     try {
       if (accessToken.expired() || options.force) {
         accessToken = await accessToken.refresh(pick(accessToken.token, 'scope'))
