@@ -3,7 +3,7 @@ name: Build and deploy to didapp/dev
 on:
   push:
     branches:
-      - feature/dev
+      - dev
 
 jobs:
   build-and-deploy:
@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
-    - name: Set up Node.js version
+    - name: Select node version 12.8.3
       uses: actions/setup-node@v1
       with:
         node-version: '12.18.3'
