@@ -50,9 +50,9 @@ class OAuthService {
       if (accessToken.expired() || options.force) {
         debug(`Token expired. Attempting to refresh... Options: ${JSON.stringify(options)}`)
         accessToken = await accessToken.refresh(pick(accessToken.token, 'scope'))
-        debug(`Successfully refreshed token expiring at ${accessToken.token.expires_at}.`)
+        debug(`Successfully refreshed token expiring ${accessToken.token.expires_at}.`)
       } else {
-        debug(`Token expiring at ${accessToken.token.expires_at}.`)
+        debug(`Token expiring ${accessToken.token.expires_at}.`)
       }
     } catch (err) {
       debug(`Failed to refresh token using options ${JSON.stringify(options)}: ${err.message}`)
