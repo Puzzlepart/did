@@ -142,3 +142,4 @@ doc/
 tests/*.json
 .localtunnel
 schema.gql
+docker.env
