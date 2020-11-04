@@ -44,6 +44,7 @@ export  async function onVerifySignin(
     }
     user.subscription = subscription
     user.tokenParams = tokenParams
+    console.log(JSON.stringify(user))
     return done(null, user)
   } catch (error) {
     debug(error)

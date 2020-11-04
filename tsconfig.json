@@ -21,7 +21,7 @@
       "debug",
       "get-value",
       "passport",
-      "custom-types"
+      "@custom-types"
     ],
     "outDir": "server-dist"
   },

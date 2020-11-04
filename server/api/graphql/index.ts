@@ -53,7 +53,7 @@ export default async (app: express.Application): Promise<void> => {
     const server = new ApolloServer({
       schema,
       rootValue: global,
-      context: ({ req }) => createContext(req),
+      context: ({ req: request }) => createContext(request),
       engine: {
         reportSchema: true,
         graphVariant: 'current',
