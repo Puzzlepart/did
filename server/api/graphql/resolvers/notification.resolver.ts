@@ -10,6 +10,13 @@ import { Service } from 'typedi'
 @Service()
 @Resolver(Notification)
 export class NotificationResolver {
+  /**
+   * Constructor for NotificationResolver
+   * 
+   * AzStorageService is automatically injected using Container from typedi
+   * 
+   * @param {AzStorageService} _azstorage AzStorageService
+   */
   constructor(private readonly _azstorage: AzStorageService) {}
 
   /**

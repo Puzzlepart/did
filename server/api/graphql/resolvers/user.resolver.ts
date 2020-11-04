@@ -10,6 +10,14 @@ import { User, UserInput } from './user.types'
 @Service()
 @Resolver(User)
 export class UserResolver {
+  /**
+   * Constructor for UserResolver
+   * 
+   * AzStorageService and MSGraphService is automatically injected using Container from typedi
+   * 
+   * @param {AzStorageService} _azstorage AzStorageService
+   * @param {MSGraphService} _msgraph MSGraphService
+   */
   constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) {}
 
   /**

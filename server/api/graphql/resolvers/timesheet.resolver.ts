@@ -15,6 +15,14 @@ import { BaseResult } from './types'
 @Service()
 @Resolver(TimesheetPeriodObject)
 export class TimesheetResolver {
+  /**
+   * Constructor for TimesheetResolver
+   * 
+   * AzStorageService and MSGraphService is automatically injected using Container from typedi
+   * 
+   * @param {AzStorageService} _azstorage AzStorageService
+   * @param {MSGraphService} _msgraph MSGraphService
+   */
   constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) {}
   /**
    * Get timesheet

@@ -9,6 +9,13 @@ import { TimeEntriesQuery, TimeEntry } from './timeentry.types'
 @Service()
 @Resolver(TimeEntry)
 export class TimeEntryResolver {
+  /**
+   * Constructor for TimeEntryResolver
+   * 
+   * AzStorageService is automatically injected using Container from typedi
+   * 
+   * @param {AzStorageService} _azstorage AzStorageService
+   */
   constructor(private readonly _azstorage: AzStorageService) {}
 
   /**

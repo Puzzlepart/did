@@ -10,6 +10,13 @@ import { BaseResult } from './types'
 @Service()
 @Resolver(LabelObject)
 export class LabelResolver {
+  /**
+   * Constructor for LabelResolver
+   * 
+   * AzStorageService is automatically injected using Container from typedi
+   * 
+   * @param {AzStorageService} _azstorage AzStorageService
+   */
   constructor(private readonly _azstorage: AzStorageService) {}
 
   /**

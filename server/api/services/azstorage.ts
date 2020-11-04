@@ -5,6 +5,7 @@ import { Inject, Service } from 'typedi'
 import { omit, pick } from 'underscore'
 import { getDurationHours, toArray } from '../../utils'
 import AzTableUtilities from '../../utils/table'
+import { Context } from '../graphql/context'
 
 @Service({ global: false })
 class AzStorageService {
@@ -26,8 +27,8 @@ class AzStorageService {
    *
    * @param {string} connectionString Connection string
    */
-  constructor(@Inject('CONNECTION_STRING') private readonly connectionString: string) {
-    this.tableUtil = new AzTableUtilities(createTableService(this.connectionString))
+  constructor(@Inject('CONTEXT') private readonly context: Context) {
+    this.tableUtil = new AzTableUtilities(createTableService(this.context.subscription.connectionString))
     this.tables = {
       timeEntries: 'TimeEntries',
       forecastedTimeEntries: 'ForecastedTimeEntries',

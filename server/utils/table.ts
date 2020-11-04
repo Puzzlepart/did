@@ -152,7 +152,7 @@ class AzTableUtilities {
   queryAzTable(
     table: string,
     query: azurestorage.TableQuery,
-    columnMap: any = {},
+    columnMap?: any,
     continuationToken: azurestorage.TableService.TableContinuationToken = null
   ): Promise<azurestorage.TableService.QueryEntitiesResult<any>> {
     return new Promise<azurestorage.TableService.QueryEntitiesResult<any>>((resolve, reject) => {

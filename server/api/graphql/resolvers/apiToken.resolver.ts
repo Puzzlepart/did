@@ -12,6 +12,13 @@ import { SubscriptionService } from '../../services'
 @Service()
 @Resolver(ApiToken)
 export class ApiTokenResolver {
+  /**
+   * Constructor for ApiTokenResolver
+   * 
+   * AzStorageService is automatically injected using Container from typedi
+   * 
+   * @param {SubscriptionService} _subscription SubscriptionService
+   */
   constructor(private readonly _subscription: SubscriptionService) {}
 
   /**

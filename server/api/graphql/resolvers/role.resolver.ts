@@ -9,6 +9,13 @@ import { BaseResult } from './types'
 @Service()
 @Resolver(Role)
 export class RoleResolver {
+  /**
+   * Constructor for RoleResolver
+   * 
+   * AzStorageService is automatically injected using Container from typedi
+   * 
+   * @param {AzStorageService} _azstorage AzStorageService
+   */
   constructor(private readonly _azstorage: AzStorageService) {}
 
   /**

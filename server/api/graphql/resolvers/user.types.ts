@@ -10,6 +10,11 @@ export class Subscription {
 
   @Field()
   name: string
+
+  /**
+   * Connection string for the subscription storage
+   */
+  connectionString?: string
 }
 
 @ObjectType({ description: 'A type that describes a User' })
