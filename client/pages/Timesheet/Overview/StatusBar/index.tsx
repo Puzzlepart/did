@@ -72,7 +72,7 @@ export const StatusBar = () => {
             iconName: 'BufferTimeBoth'
         })
     }
-    if (!isEmpty(selectedPeriod.ignoredEvents) && !selectedPeriod.isLocked) {
+    if (!isEmpty(selectedPeriod.ignoredEvents) && !selectedPeriod.isConfirmed) {
         messages.push({
             iconName: 'DependencyRemove',
             children: (

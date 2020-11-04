@@ -20,7 +20,7 @@
     "hoursNotMatchedText": "You have **{{hours}}** that are not matched. All events must be matched before you can confirm your hours.",
     "allHoursMatchedText": "All your hours are matched. Are you ready to confirm the period?",
     "periodConfirmedText": "The period is confirmed with {{hours}}. Click **Unconfirm hours** if you want to do some adjustments.",
-    "ignoredEventsText": "You have {{ignoredEvents}} ignored event(s).",
+    "ignoredEventsText": "You have {{ignoredEvents}} manually ignored event(s).",
     "undoIgnoreText": "Click to undo",
     "unresolvedErrorText": "You have {{count}} unresolved errors. You need to resolve them before confirming the hours",
     "splitWeekInfoText": "Selected week spans two months. Navigate between the first and second period using the command bar above.",
