@@ -9,26 +9,33 @@ import { first } from 'underscore'
 import * as utils from '../../utils'
 import env from '../../utils/env'
 import MSGraphEvent from './msgraph.event'
-import OAuthService from './oauth'
+import OAuthService, { AccessTokenOptions } from './oauth'
 const debug = createDebug('services/msgraph')
 
 @Service({ global: false })
 class MSGraphService {
-  public observer: PerformanceObserver
+  private _perf: PerformanceObserver
+  private _accessTokenOptions: AccessTokenOptions = {
+    clientId: env('OAUTH_APP_ID'),
+    clientSecret: env('OAUTH_APP_PASSWORD'),
+    tokenHost: 'https://login.microsoftonline.com/common/',
+    authorizePath: 'oauth2/v2.0/authorize',
+    tokenPath: 'oauth2/v2.0/token'
+  }
 
   /**
    * Constructs a new MSGraphService
    */
   constructor(private _oauthService: OAuthService) {
     appInsights.setup(env('APPINSIGHTS_INSTRUMENTATIONKEY'))
-    this.observer = new PerformanceObserver((list) => {
+    this._perf = new PerformanceObserver((list) => {
       const { name, duration } = first(list.getEntries())
       appInsights.defaultClient.trackMetric({
         name,
         value: duration
       })
     })
-    this.observer.observe({ entryTypes: ['measure'], buffered: true })
+    this._perf.observe({ entryTypes: ['measure'], buffered: true })
   }
 
   /**
@@ -54,7 +61,7 @@ class MSGraphService {
    * Gets a Microsoft Graph Client using the auth token from the class
    */
   private async _getClient(): Promise<MSGraphClient> {
-    const { access_token } = await this._oauthService.getAccessToken({ tokenHost: 'https://login.microsoftonline.com/common/' })
+    const { access_token } = await this._oauthService.getAccessToken(this._accessTokenOptions)
     const client = MSGraphClient.init({
       authProvider: (done: (arg0: any, arg1: any) => void) => {
         done(null, access_token)
