@@ -1,9 +1,10 @@
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, Float, ID, InputType, ObjectType } from 'type-graphql'
+import { simpleResolvers } from '../config'
 import { Customer, EventError, LabelObject, Project } from './types'
 
-@ObjectType({ description: 'A type that describes a Event', simpleResolvers: true })
+@ObjectType({ description: 'A type that describes a Event', simpleResolvers: simpleResolvers.EventObject })
 export class EventObject {
   @Field(() => ID)
   id: string
@@ -80,7 +81,7 @@ export class EventInput {
   manualMatch: boolean
 }
 
-@ObjectType({ description: 'A type that describes a TimesheetPeriod', simpleResolvers: true  })
+@ObjectType({ description: 'A type that describes a TimesheetPeriod', simpleResolvers: simpleResolvers.TimesheetPeriodObject  })
 export class TimesheetPeriodObject {
   @Field()
   id: string
