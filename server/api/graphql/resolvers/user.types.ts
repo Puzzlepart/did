@@ -3,7 +3,7 @@ import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import { Role } from './types'
 
-@ObjectType({ description: 'A type that describes a Subscription' })
+@ObjectType({ description: 'A type that describes a Subscription', simpleResolvers: true })
 export class Subscription {
   @Field()
   id: string
@@ -17,7 +17,7 @@ export class Subscription {
   connectionString?: string
 }
 
-@ObjectType({ description: 'A type that describes a User' })
+@ObjectType({ description: 'A type that describes a User', simpleResolvers: true })
 export class User {
   @Field(() => ID)
   id?: string

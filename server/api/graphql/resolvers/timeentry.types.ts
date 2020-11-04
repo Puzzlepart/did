@@ -3,7 +3,7 @@ import 'reflect-metadata'
 import { Field, Float, ID, InputType, ObjectType } from 'type-graphql'
 import { Project, Customer, User } from './types'
 
-@ObjectType({ description: 'A type that describes a TimeEntry' })
+@ObjectType({ description: 'A type that describes a TimeEntry', simpleResolvers: true })
 export class TimeEntry {
   @Field(() => ID)
   id: string
