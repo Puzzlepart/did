@@ -59,7 +59,7 @@ export class ProjectResolver {
     @Ctx() ctx: Context
   ) {
     try {
-      const id = await this._azstorage.createOrUpdateProject(project, ctx.user.id, update)
+      const id = await this._azstorage.createOrUpdateProject(project, ctx?.user?.id, update)
       if (project.createOutlookCategory) {
         await this._msgraph.createOutlookCategory(id)
       }

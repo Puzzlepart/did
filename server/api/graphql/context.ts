@@ -43,6 +43,7 @@ export class Context {
 export const createContext = async (request: any): Promise<Context> => {
   try {
     let isAuthorized = false
+    let user = null
     let subscription = get(request, 'user.subscription', { default: {} })
     if (!!request.token) {
       subscription = await new SubscriptionService().findSubscriptionWithToken(request.token)
@@ -50,6 +51,10 @@ export const createContext = async (request: any): Promise<Context> => {
       isAuthorized = true
     } else {
       isAuthorized = !!get(request, 'user')
+      user = {
+        ...pick(get(request, 'user', { default: {} }), 'id'),
+        subscription: pick(subscription, 'id', 'name')
+      }
     }
     const requestId = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString()
     const container = Container.of(requestId)
@@ -57,10 +62,7 @@ export const createContext = async (request: any): Promise<Context> => {
       container,
       subscription: pick(subscription, 'id', 'name', 'connectionString'),
       requestId,
-      user: {
-        ...pick(get(request, 'user', { default: {} }), 'id'),
-        subscription: pick(subscription, 'id', 'name')
-      },
+      user,
       isAuthorized
     }
     container.set({ id: 'CONTEXT', transient: true, value: context })

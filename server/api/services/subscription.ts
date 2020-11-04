@@ -5,7 +5,7 @@ import azurestorage from 'azure-storage'
 import 'reflect-metadata'
 import { Service } from 'typedi'
 
-@Service({ global: false })
+@Service({ global: true })
 class SubscriptionService {
   public tableService: azurestorage.services.table.TableService
   public tableUtil: AzTableUtilities

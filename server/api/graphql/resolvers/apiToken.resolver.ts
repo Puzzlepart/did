@@ -1,13 +1,14 @@
 import jwt from 'jsonwebtoken'
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
+import { Service } from 'typedi'
 import { pick } from 'underscore'
 import env from '../../../utils/env'
-import { Context } from '../context'
-import { BaseResult } from './types'
-import { ApiToken } from './apiToken.types'
-import { Service } from 'typedi'
 import { SubscriptionService } from '../../services'
+import { IAuthOptions } from '../authChecker'
+import { Context } from '../context'
+import { ApiToken } from './apiToken.types'
+import { BaseResult } from './types'
 
 @Service()
 @Resolver(ApiToken)
@@ -25,8 +26,8 @@ export class ApiTokenResolver {
    * Get API tokens
    *
    * @param {Context} ctx GraphQL context
-   */
-  @Authorized()
+   */  
+  @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [ApiToken], { description: 'Get API tokens' })
   async apiTokens(@Ctx() ctx: Context): Promise<ApiToken[]> {
     const tokens = await this._subscription.getApiTokens(ctx.user.subscription.id)
@@ -38,8 +39,8 @@ export class ApiTokenResolver {
    *
    * @param {string} name Name    *
    * @param {Context} ctx GraphQL context
-   */
-  @Authorized()
+   */  
+  @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => String, { description: 'Add API token' })
   async addApiToken(@Arg('name') name: string, @Ctx() ctx: Context): Promise<string> {
     const token = jwt.sign(
@@ -58,7 +59,7 @@ export class ApiTokenResolver {
    * @param {string} name Name
    * @param {Context} ctx GraphQL context
    */
-  @Authorized()
+  @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Delete API tokens' })
   async deleteApiToken(@Arg('name') name: string, @Ctx() ctx: Context): Promise<BaseResult> {
     try {

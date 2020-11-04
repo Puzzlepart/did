@@ -1,8 +1,8 @@
 import 'reflect-metadata'
-import { AzStorageService } from '../../services'
 import { Arg, Authorized, Ctx, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { find, first } from 'underscore'
+import { AzStorageService } from '../../services'
 import { Context } from '../context'
 import { TimeEntriesQuery, TimeEntry } from './timeentry.types'
 

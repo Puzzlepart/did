@@ -4,6 +4,7 @@ import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { pick } from 'underscore'
 import { MSGraphService } from '../../services'
+import { IAuthOptions } from '../authChecker'
 import { OutlookCategory } from './outlookCategory.types'
 import { BaseResult } from './types'
 
@@ -22,7 +23,7 @@ export class OutlookCategoryResolver {
   /**
    * Get Outlook categories
    */
-  @Authorized()
+  @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [OutlookCategory], { description: 'Get Outlook categories' })
   async outlookCategories() {
     const categories = await this._msgraph.getOutlookCategories()
@@ -34,7 +35,7 @@ export class OutlookCategoryResolver {
    *
    * @param {string} category Category
    */
-  @Authorized()
+  @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Create Outlook category' })
   async createOutlookCategory(@Arg('category') category: string) {
     try {

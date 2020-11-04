@@ -1,11 +1,13 @@
+/* eslint-disable prefer-spread */
 import 'reflect-metadata'
-import { AzStorageService } from '../../services'
 import { Arg, Authorized, Ctx, Query, Resolver } from 'type-graphql'
+import { Service } from 'typedi'
+import { AzStorageService } from '../../services'
+import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
 import forecast from './notification.forecast'
 import { Notification, NotificationTemplates } from './notification.types'
 import unconfirmedPeriods from './notification.unconfirmed-periods'
-import { Service } from 'typedi'
 
 @Service()
 @Resolver(Notification)
@@ -26,7 +28,7 @@ export class NotificationResolver {
    * @param {string} locale Locale
    * @param {Context} ctx GraphQL context
    */
-  @Authorized()
+  @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [Notification], { description: 'Get notifications' })
   async notifications(
     @Arg('templates', () => NotificationTemplates) templates: NotificationTemplates,
@@ -38,7 +40,6 @@ export class NotificationResolver {
       unconfirmedPeriods(ctx, this._azstorage, templates.unconfirmedPeriods, locale),
       forecast(ctx, this._azstorage, templates.forecast, locale)
     ])
-    // eslint-disable-next-line prefer-spread
     return [].concat.apply([], notifications)
   }
 }
