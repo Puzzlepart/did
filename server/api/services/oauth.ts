@@ -30,7 +30,7 @@ class OAuthService {
       },
       auth: {
         tokenHost: options.tokenHost,
-        authorizePath: options.authorizePath || 'oauth2/v2.0/authorize',
+        authorizePath: options.authorizePath || '/oauth2/v2.0/authorize',
         tokenPath: options.tokenPath || '/oauth2/v2.0/token'
       }
     })
