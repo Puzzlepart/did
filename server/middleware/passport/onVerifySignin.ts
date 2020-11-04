@@ -1,7 +1,7 @@
 import createDebug from 'debug'
 const debug = createDebug('middleware/passport/onVerifySignin')
-import SubscriptionService from '../../services/subscription'
-import AzStorageService from '../../services/azstorage'
+import SubscriptionService from '../../api/services/subscription'
+import AzStorageService from '../../api/services/azstorage'
 import { NO_OID_FOUND, TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } from './errors'
 
 /**

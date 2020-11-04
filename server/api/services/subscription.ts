@@ -1,6 +1,6 @@
 import { first } from 'underscore'
-import AzTableUtilities from '../utils/table'
-import env from '../utils/env'
+import AzTableUtilities from '../../utils/table'
+import env from '../../utils/env'
 import azurestorage from 'azure-storage'
 
 class SubscriptionService {
