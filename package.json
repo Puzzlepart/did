@@ -3,10 +3,9 @@
   "version": "0.8.1",
   "private": true,
   "engines": {
-    "node": ">=12.19.0",
+    "node": ">=12.18.3",
     "npm": ">=6.5.0"
   },
-  
   "scripts": {
     "watch": "concurrently \"webpack\" \"npm run watch:server\" \"node tasks/open.js\" \"node tasks/localtunnel.js\"",
     "start": "node ./server-dist/index.js",
