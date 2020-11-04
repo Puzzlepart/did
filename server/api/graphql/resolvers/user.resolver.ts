@@ -12,9 +12,9 @@ import { User, UserInput } from './user.types'
 export class UserResolver {
   /**
    * Constructor for UserResolver
-   * 
+   *
    * AzStorageService and MSGraphService is automatically injected using Container from typedi
-   * 
+   *
    * @param {AzStorageService} _azstorage AzStorageService
    * @param {MSGraphService} _msgraph MSGraphService
    */

@@ -15,9 +15,9 @@ import { BaseResult } from './types'
 export class ApiTokenResolver {
   /**
    * Constructor for ApiTokenResolver
-   * 
+   *
    * AzStorageService is automatically injected using Container from typedi
-   * 
+   *
    * @param {SubscriptionService} _subscription SubscriptionService
    */
   constructor(private readonly _subscription: SubscriptionService) {}
@@ -26,7 +26,7 @@ export class ApiTokenResolver {
    * Get API tokens
    *
    * @param {Context} ctx GraphQL context
-   */  
+   */
   @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [ApiToken], { description: 'Get API tokens' })
   async apiTokens(@Ctx() ctx: Context): Promise<ApiToken[]> {
@@ -39,7 +39,7 @@ export class ApiTokenResolver {
    *
    * @param {string} name Name    *
    * @param {Context} ctx GraphQL context
-   */  
+   */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => String, { description: 'Add API token' })
   async addApiToken(@Arg('name') name: string, @Ctx() ctx: Context): Promise<string> {

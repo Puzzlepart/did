@@ -7,7 +7,7 @@ import env from '../../utils/env'
 const debug = createDebug('api/services/tokens')
 
 export interface IGetAccessTokenOptions {
-  force?: boolean;
+  force?: boolean
 }
 
 @Service({ global: false })
@@ -30,7 +30,7 @@ class OAuthService {
 
   /**
    * Get access token
-   * 
+   *
    * @param {IGetAccessTokenOptions} options Options
    */
   public async getAccessToken(options: IGetAccessTokenOptions = {}): Promise<Token> {

@@ -13,9 +13,9 @@ import { BaseResult } from './types'
 export class OutlookCategoryResolver {
   /**
    * Constructor for OutlookCategoryResolver
-   * 
+   *
    * MSGraphService is automatically injected using Container from typedi
-   * 
+   *
    * @param {MSGraphService} _msgraph MSGraphService
    */
   constructor(private readonly _msgraph: MSGraphService) {}

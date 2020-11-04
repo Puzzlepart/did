@@ -14,9 +14,9 @@ const { executeBatch, createAzBatch } = new AzTableUtilities()
 export class CustomerResolver {
   /**
    * Constructor for CustomerResolver
-   * 
+   *
    * AzStorageService is automatically injected using Container from typedi
-   * 
+   *
    * @param {AzStorageService} _azstorage AzStorageService
    */
   constructor(private readonly _azstorage: AzStorageService) {}

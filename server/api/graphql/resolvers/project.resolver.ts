@@ -12,9 +12,9 @@ import { Service } from 'typedi'
 export class ProjectResolver {
   /**
    * Constructor for ProjectResolver
-   * 
+   *
    * AzStorageService and MSGraphService is automatically injected using Container from typedi
-   * 
+   *
    * @param {AzStorageService} _azstorage AzStorageService
    * @param {MSGraphService} _msgraph MSGraphService
    */

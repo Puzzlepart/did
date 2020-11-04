@@ -37,7 +37,7 @@ export class Context {
 
 /**
  * Create context
- * 
+ *
  * @param {any} request Express request
  */
 export const createContext = async (request: any): Promise<Context> => {

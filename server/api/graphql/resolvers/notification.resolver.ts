@@ -14,9 +14,9 @@ import unconfirmedPeriods from './notification.unconfirmed-periods'
 export class NotificationResolver {
   /**
    * Constructor for NotificationResolver
-   * 
+   *
    * AzStorageService is automatically injected using Container from typedi
-   * 
+   *
    * @param {AzStorageService} _azstorage AzStorageService
    */
   constructor(private readonly _azstorage: AzStorageService) {}
