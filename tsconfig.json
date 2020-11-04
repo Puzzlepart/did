@@ -11,8 +11,18 @@
     "experimentalDecorators": true,
     "lib": ["es2018", "esnext.asynciterable", "DOM"],
     "baseUrl": "./",
-    "typeRoots": ["./node_modules/@types"],
-    "types": ["express", "node", "mocha"],
+    "typeRoots": ["./node_modules/@types", "./server"],
+    "types": [
+      "express",
+      "node",
+      "mocha",
+      "express-session",
+      "passport-azure-ad",
+      "debug",
+      "get-value",
+      "passport",
+      "custom-types"
+    ],
     "outDir": "server-dist"
   },
   "include": ["server/**/*.ts"],

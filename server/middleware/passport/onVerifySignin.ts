@@ -14,7 +14,7 @@ import { VerifyCallback } from 'passport-azure-ad'
  * @param {IProfile} profile
  * @param {string} _accessToken
  * @param {string} _refreshToken
- * @param {any} oauthToken
+ * @param {any} tokenParams
  * @param {VerifyCallback} done
  */
 export  async function onVerifySignin(
@@ -23,7 +23,7 @@ export  async function onVerifySignin(
   profile: IProfile,
   _accessToken: string,
   _refreshToken: string,
-  oauthToken: any,
+  tokenParams: any,
   done: VerifyCallback
 ) {
   try {
@@ -37,13 +37,13 @@ export  async function onVerifySignin(
       return done(TENANT_NOT_ENROLLED, null)
     }
     debug('Subscription found for %s', profile._json.tid)
-    const user = await new AzStorageService({ subscription }).getUser(profile.oid)
+    const user: Express.User = await new AzStorageService({ subscription }).getUser(profile.oid)
     if (!user) {
       debug('User %s is not registered for %s', profile.oid, subscription.name)
       return done(USER_NOT_ENROLLED, null)
     }
     user.subscription = subscription
-    user.oauthToken = oauthToken
+    user.tokenParams = tokenParams
     return done(null, user)
   } catch (error) {
     debug(error)
