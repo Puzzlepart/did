@@ -1,10 +1,10 @@
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
-import { ObjectType, InputType, Field } from 'type-graphql'
+import { ObjectType, InputType, Field, ID } from 'type-graphql'
 
 @ObjectType({ description: 'A type that describes a Customer' })
 export class Customer {
-  @Field()
+  @Field(() => ID)
   key: string
 
   @Field()
