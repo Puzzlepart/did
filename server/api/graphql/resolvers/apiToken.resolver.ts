@@ -6,9 +6,14 @@ import env from '../../../utils/env'
 import { Context } from '../context'
 import { BaseResult } from './types'
 import { ApiToken } from './apiToken.types'
+import { Service } from 'typedi'
+import { SubscriptionService } from '../../services'
 
+@Service()
 @Resolver(ApiToken)
 export class ApiTokenResolver {
+  constructor(private readonly _subscription: SubscriptionService) {}
+
   /**
    * Get API tokens
    *
@@ -17,7 +22,7 @@ export class ApiTokenResolver {
   @Authorized()
   @Query(() => [ApiToken], { description: 'Get API tokens' })
   async apiTokens(@Ctx() ctx: Context): Promise<ApiToken[]> {
-    const tokens = await ctx.services.subscription.getApiTokens(ctx.user.subscription.id)
+    const tokens = await this._subscription.getApiTokens(ctx.user.subscription.id)
     return tokens
   }
 
@@ -36,7 +41,7 @@ export class ApiTokenResolver {
       },
       env('API_TOKEN_SECRET')
     )
-    const entry = await ctx.services.subscription.addApiToken(name, ctx.user.subscription.id, token)
+    const entry = await this._subscription.addApiToken(name, ctx.user.subscription.id, token)
     return entry ? token : null
   }
 
@@ -50,7 +55,7 @@ export class ApiTokenResolver {
   @Mutation(() => BaseResult, { description: 'Delete API tokens' })
   async deleteApiToken(@Arg('name') name: string, @Ctx() ctx: Context): Promise<BaseResult> {
     try {
-      await ctx.services.subscription.deleteApiToken(name, ctx.user.subscription.id)
+      await this._subscription.deleteApiToken(name, ctx.user.subscription.id)
       return { success: true, error: null }
     } catch (error) {
       return {

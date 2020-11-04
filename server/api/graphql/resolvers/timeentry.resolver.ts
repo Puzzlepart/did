@@ -1,10 +1,16 @@
+import 'reflect-metadata'
+import { AzStorageService } from '../../services'
 import { Arg, Authorized, Ctx, Query, Resolver } from 'type-graphql'
+import { Service } from 'typedi'
 import { find, first } from 'underscore'
 import { Context } from '../context'
 import { TimeEntriesQuery, TimeEntry } from './timeentry.types'
 
+@Service()
 @Resolver(TimeEntry)
 export class TimeEntryResolver {
+  constructor(private readonly _azstorage: AzStorageService) {}
+
   /**
    * Get time entries
    *
@@ -25,10 +31,10 @@ export class TimeEntryResolver {
   ) {
     if (currentUser) query.resourceId = ctx.user.id
     const [users, projects, customers, timeentries] = await Promise.all([
-      ctx.services.azstorage.getUsers(),
-      ctx.services.azstorage.getProjects(),
-      ctx.services.azstorage.getCustomers(),
-      ctx.services.azstorage.getTimeEntries(query, { sortAsc, forecast })
+      this._azstorage.getUsers(),
+      this._azstorage.getProjects(),
+      this._azstorage.getCustomers(),
+      this._azstorage.getTimeEntries(query, { sortAsc, forecast })
     ])
     return timeentries.reduce((arr, entry) => {
       const resource = find(users, (user) => user.id === entry.resourceId)

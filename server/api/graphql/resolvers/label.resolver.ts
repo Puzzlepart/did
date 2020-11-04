@@ -1,21 +1,24 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
+import { Service } from 'typedi'
 import { pick } from 'underscore'
+import { AzStorageService } from '../../services'
 import { Context } from '../context'
+import { LabelInput, LabelObject } from './label.types'
 import { BaseResult } from './types'
-import { LabelObject, LabelInput } from './label.types'
 
+@Service()
 @Resolver(LabelObject)
 export class LabelResolver {
+  constructor(private readonly _azstorage: AzStorageService) {}
+
   /**
    * Get labels
-   *
-   * @param {Context} ctx GraphQL context
    */
   @Authorized()
   @Query(() => [LabelObject], { description: 'Get labels' })
-  async labels(@Ctx() ctx: Context) {
-    return await ctx.services.azstorage.getLabels()
+  async labels() {
+    return await this._azstorage.getLabels()
   }
 
   /**
@@ -33,7 +36,7 @@ export class LabelResolver {
     @Ctx() ctx: Context
   ) {
     try {
-      await ctx.services.azstorage.addOrUpdateLabel(label, ctx.user.id, update)
+      await this._azstorage.addOrUpdateLabel(label, ctx.user.id, update)
       return { success: true, error: null }
     } catch (error) {
       return {
@@ -47,13 +50,12 @@ export class LabelResolver {
    * Delete label
    *
    * @param {string} name Name
-   * @param {Context} ctx GraphQL context
    */
   @Authorized()
   @Mutation(() => BaseResult, { description: 'Delete label' })
-  async deleteLabel(@Arg('name') name: string, @Ctx() ctx: Context) {
+  async deleteLabel(@Arg('name') name: string) {
     try {
-      await ctx.services.azstorage.deleteLabel(name)
+      await this._azstorage.deleteLabel(name)
       return { success: true, error: null }
     } catch (error) {
       return {

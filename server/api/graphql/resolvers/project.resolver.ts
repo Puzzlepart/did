@@ -1,32 +1,36 @@
+import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { pick } from 'underscore'
 import { Context } from '../context'
 import { BaseResult, Project, ProjectInput } from './types'
 import { connectEntities } from './project.utils'
+import { AzStorageService, MSGraphService } from '../../services'
+import { Service } from 'typedi'
 
+@Service()
 @Resolver(Project)
 export class ProjectResolver {
+  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) {}
+
   /**
    * Get projects
    *
    * @param {string} customerKey Customer key
    * @param {string} sortBy Sort by
-   * @param {Context} ctx GraphQL context
    */
   @Authorized()
   @Query(() => [Project], { description: 'Get projects' })
   async projects(
     @Arg('customerKey', { nullable: true }) customerKey: string,
-    @Arg('sortBy', { nullable: true }) sortBy: string,
-    @Ctx() ctx: Context
+    @Arg('sortBy', { nullable: true }) sortBy: string
   ) {
     // eslint-disable-next-line prefer-const
     let [projects, customers, labels] = await Promise.all([
-      ctx.services.azstorage.getProjects(customerKey, {
+      this._azstorage.getProjects(customerKey, {
         sortBy
       }),
-      ctx.services.azstorage.getCustomers(),
-      ctx.services.azstorage.getLabels()
+      this._azstorage.getCustomers(),
+      this._azstorage.getLabels()
     ])
     projects = connectEntities(projects, customers, labels)
     return projects
@@ -47,9 +51,9 @@ export class ProjectResolver {
     @Ctx() ctx: Context
   ) {
     try {
-      const id = await ctx.services.azstorage.createOrUpdateProject(project, ctx.user.id, update)
+      const id = await this._azstorage.createOrUpdateProject(project, ctx.user.id, update)
       if (project.createOutlookCategory) {
-        await ctx.services.msgraph.createOutlookCategory(id)
+        await this._msgraph.createOutlookCategory(id)
       }
       return { success: true, error: null }
     } catch (error) {

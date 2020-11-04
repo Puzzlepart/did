@@ -1,22 +1,24 @@
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
-import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
+import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
+import { Service } from 'typedi'
 import { pick } from 'underscore'
-import { Context } from '../context'
+import { AzStorageService, MSGraphService } from '../../services'
 import { OutlookCategory } from './outlookCategory.types'
 import { BaseResult } from './types'
 
+@Service()
 @Resolver(OutlookCategory)
 export class OutlookCategoryResolver {
+  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) {}
+
   /**
    * Get Outlook categories
-   *
-   * @param {Context} ctx GraphQL context
    */
   @Authorized()
   @Query(() => [OutlookCategory], { description: 'Get Outlook categories' })
-  async outlookCategories(@Ctx() ctx: Context) {
-    const categories = await ctx.services.msgraph.getOutlookCategories()
+  async outlookCategories() {
+    const categories = await this._msgraph.getOutlookCategories()
     return categories.map((c) => ({ ...c, key: c.id }))
   }
 
@@ -24,13 +26,12 @@ export class OutlookCategoryResolver {
    * Create Outlook category
    *
    * @param {string} category Category
-   * @param {Context} ctx GraphQL context
    */
   @Authorized()
   @Mutation(() => BaseResult, { description: 'Create Outlook category' })
-  async createOutlookCategory(@Arg('category') category: string, @Ctx() ctx: Context) {
+  async createOutlookCategory(@Arg('category') category: string) {
     try {
-      await ctx.services.msgraph.createOutlookCategory(category)
+      await this._msgraph.createOutlookCategory(category)
       return { success: true, error: null }
     } catch (error) {
       return {

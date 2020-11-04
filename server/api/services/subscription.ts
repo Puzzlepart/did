@@ -2,7 +2,10 @@ import { first } from 'underscore'
 import AzTableUtilities from '../../utils/table'
 import env from '../../utils/env'
 import azurestorage from 'azure-storage'
+import 'reflect-metadata'
+import { Service } from 'typedi'
 
+@Service({ global: false })
 class SubscriptionService {
   public tableService: azurestorage.services.table.TableService
   public tableUtil: AzTableUtilities

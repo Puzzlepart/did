@@ -13,7 +13,7 @@ import { NO_OID_FOUND, TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } from './errors'
  * @param {any} _accessToken
  * @param {any} _refreshToken
  * @param {any} oauthToken
- * @param  done
+ * @param {any} done
  */
 export default async function (
   _iss: any,
@@ -22,7 +22,7 @@ export default async function (
   _accessToken: any,
   _refreshToken: any,
   oauthToken: any,
-  done
+  done: any
 ) {
   try {
     if (!profile.oid) {
@@ -35,7 +35,7 @@ export default async function (
       return done(TENANT_NOT_ENROLLED, null)
     }
     debug('Subscription found for %s', profile._json.tid)
-    const user = await new AzStorageService(subscription).getUser(profile.oid)
+    const user = await new AzStorageService(subscription.connectionString).getUser(profile.oid)
     if (!user) {
       debug('User %s is not registered for %s', profile.oid, subscription.name)
       return done(USER_NOT_ENROLLED, null)

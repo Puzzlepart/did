@@ -1,24 +1,28 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
+import { Service } from 'typedi'
 import { pick } from 'underscore'
 import AzTableUtilities from '../../../utils/table'
+import { AzStorageService } from '../../services'
 import { Context } from '../context'
-import { BaseResult } from './types'
 import { Customer, CustomerInput } from './customer.types'
+import { BaseResult } from './types'
 const { executeBatch, createAzBatch } = new AzTableUtilities()
 
+@Service()
 @Resolver(Customer)
 export class CustomerResolver {
+  constructor(private readonly _azstorage: AzStorageService) {}
+
   /**
    * Get customers
    *
    * @param {string} sortBy Sort by
-   * @param {Context} ctx GraphQL context
-   */
+   **/
   @Authorized()
   @Query(() => [Customer], { description: 'Get customers' })
-  async customers(@Arg('sortBy', { nullable: true }) sortBy: string, @Ctx() ctx: Context) {
-    return await ctx.services.azstorage.getCustomers({ sortBy })
+  async customers(@Arg('sortBy', { nullable: true }) sortBy: string) {
+    return await this._azstorage.getCustomers({ sortBy })
   }
 
   /**
@@ -36,7 +40,7 @@ export class CustomerResolver {
     @Ctx() ctx: Context
   ) {
     try {
-      await ctx.services.azstorage.createOrUpdateCustomer(customer, ctx.user.id, update)
+      await this._azstorage.createOrUpdateCustomer(customer, ctx.user.id, update)
       return { success: true, error: null }
     } catch (error) {
       return {
@@ -50,13 +54,12 @@ export class CustomerResolver {
    * Delete customer
    *
    * @param {string} key Key
-   * @param {Context} ctx GraphQL context
    */
   @Authorized()
   @Mutation(() => BaseResult, { description: 'Delete customer' })
-  async deleteCustomer(@Arg('key') key: string, @Ctx() ctx: Context) {
+  async deleteCustomer(@Arg('key') key: string) {
     try {
-      const projects = await ctx.services.azstorage.getProjects(key, {
+      const projects = await this._azstorage.getProjects(key, {
         noParse: true
       })
       if (projects.length > 0) {
@@ -66,7 +69,7 @@ export class CustomerResolver {
         }, createAzBatch())
         await executeBatch('Projects', batch)
       }
-      await ctx.services.azstorage.deleteCustomer(key)
+      await this._azstorage.deleteCustomer(key)
       return { success: true, error: null }
     } catch (error) {
       return {

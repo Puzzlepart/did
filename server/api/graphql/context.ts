@@ -1,15 +1,30 @@
 import { AuthenticationError } from 'apollo-server-express'
-import { MSGraphService, AzStorageService, SubscriptionService } from '../../services'
+import 'reflect-metadata'
+import { Container, ContainerInstance } from 'typedi'
+import { pick } from 'underscore'
+import { SubscriptionService } from '../services'
 import { Subscription, User } from './resolvers/types'
 
 export class Context {
-  public services?: {
-    msgraph?: MSGraphService
-    azstorage?: AzStorageService
-    subscription?: SubscriptionService
-  }
+  /**
+   * Request ID
+   */
+  public requestId?: number
+
+  /**
+   * User
+   */
   public user?: User
+
+  /**
+   * Subscription
+   */
   public subscription?: Subscription
+
+  /**
+   * Container instance
+   */
+  public container?: ContainerInstance
 }
 
 /**
@@ -21,17 +36,34 @@ export const createContext = async ({ req }): Promise<Context> => {
     if (!!req.token) {
       subscription = await new SubscriptionService().findSubscriptionWithToken(req.token)
       if (!subscription) throw new AuthenticationError(null)
-    } else if (!req.user) return {}
-    const services = {
-      azstorage: new AzStorageService(subscription),
-      subscription: new SubscriptionService(),
-      msgraph: !!req.user && new MSGraphService().init(req)
     }
-    return {
-      services,
-      user: req.user || {},
-      subscription
+    const requestId = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)
+    const container = Container.of(requestId)
+    const context: Context = {
+      container,
+      subscription,
+      requestId,
+      user: {
+        ...pick(req.user, 'id'),
+        subscription: pick(subscription, 'id', 'name')
+      }
     }
+    container.set({
+      id: 'USER_ID',
+      transient: true,
+      value: req.user.id
+    })
+    container.set({
+      id: 'CONNECTION_STRING',
+      transient: true,
+      value: req.user.subscription.connectionString
+    })
+    container.set({
+      id: 'OAUTH_TOKEN',
+      transient: true,
+      value: req.user.oauthToken
+    })
+    return context
   } catch (error) {
     throw error
   }

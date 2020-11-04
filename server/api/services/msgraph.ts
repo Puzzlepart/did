@@ -1,26 +1,25 @@
 global['fetch'] = require('node-fetch')
-import createDebug from 'debug'
-const debug = createDebug('services/msgraph')
+import 'reflect-metadata'
+import { Client as MSGraphClient } from '@microsoft/microsoft-graph-client'
 import * as appInsights from 'applicationinsights'
+import createDebug from 'debug'
 import { performance, PerformanceObserver } from 'perf_hooks'
+import 'reflect-metadata'
+import { Inject, Service } from 'typedi'
 import { first } from 'underscore'
 import * as utils from '../../utils'
 import env from '../../utils/env'
 import MSGraphEvent from './msgraph.event'
-import TokenService from './tokens'
-import get from 'get-value'
-import { Request } from 'express'
-import { Client as MSGraphClient } from '@microsoft/microsoft-graph-client'
+const debug = createDebug('services/msgraph')
 
+@Service({ global: false })
 class MSGraphService {
   public observer: PerformanceObserver
-  public request: Request
-  public oauthToken: any
 
   /**
    * Constructs a new MSGraphService
    */
-  constructor() {
+  constructor(@Inject('OAUTH_TOKEN') private readonly oauthToken: any) {
     appInsights.setup(env('APPINSIGHTS_INSTRUMENTATIONKEY'))
     this.observer = new PerformanceObserver((list) => {
       const { name, duration } = first(list.getEntries())
@@ -30,17 +29,6 @@ class MSGraphService {
       })
     })
     this.observer.observe({ entryTypes: ['measure'], buffered: true })
-  }
-
-  /**
-   * Initializes the MS Graph Service
-   *
-   * @param {Request} req Request
-   */
-  init(req: Request): MSGraphService {
-    this.request = req
-    this.oauthToken = get(this.request, 'user.oauthToken')
-    return this
   }
 
   /**
@@ -90,15 +78,7 @@ class MSGraphService {
       this.endMark('getUsers')
       return value
     } catch (error) {
-      switch (error.statusCode) {
-        case 401: {
-          this.oauthToken = await TokenService.refreshAccessToken(this.request)
-          return this.getUsers()
-        }
-        default: {
-          throw new Error()
-        }
-      }
+      throw new Error()
     }
   }
 
@@ -120,15 +100,7 @@ class MSGraphService {
       this.endMark('createOutlookCategory')
       return res
     } catch (error) {
-      switch (error.statusCode) {
-        case 401: {
-          this.oauthToken = await TokenService.refreshAccessToken(this.request)
-          return this.createOutlookCategory(category)
-        }
-        default: {
-          throw new Error()
-        }
-      }
+      throw new Error()
     }
   }
 
@@ -143,15 +115,7 @@ class MSGraphService {
       this.endMark('getOutlookCategories')
       return value
     } catch (error) {
-      switch (error.statusCode) {
-        case 401: {
-          this.oauthToken = await TokenService.refreshAccessToken(this.request)
-          return this.getOutlookCategories()
-        }
-        default: {
-          throw new Error()
-        }
-      }
+      throw new Error()
     }
   }
 
@@ -187,15 +151,7 @@ class MSGraphService {
       this.endMark('getEvents')
       return events
     } catch (error) {
-      switch (error.statusCode) {
-        case 401: {
-          this.oauthToken = await TokenService.refreshAccessToken(this.request)
-          return this.getEvents(startDateTime, endDateTime)
-        }
-        default: {
-          throw error
-        }
-      }
+      throw error
     }
   }
 }
