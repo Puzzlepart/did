@@ -3,6 +3,7 @@ import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { filter, find, pick } from 'underscore'
 import { AzStorageService, MSGraphService } from '../../services'
+import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
 import { BaseResult } from './types'
 import { User, UserInput } from './user.types'
@@ -25,7 +26,7 @@ export class UserResolver {
    *
    * @param {Context} ctx GraphQL context
    */
-  @Authorized()
+  @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => User, { description: 'Get the currently logged in user' })
   async currentUser(@Ctx() ctx: Context) {
     try {
@@ -43,7 +44,7 @@ export class UserResolver {
   /**
    * Get AD users
    */
-  @Authorized()
+  @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [User], { description: 'Get all users from Active Directory' })
   async adUsers() {
     return await this._msgraph.getUsers()
@@ -95,7 +96,7 @@ export class UserResolver {
    *
    * @param {UserInput[]} users Users
    */
-  @Authorized()
+  @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Bulk add users' })
   async bulkAddUsers(@Arg('users', () => [UserInput]) users: UserInput[]): Promise<BaseResult> {
     try {
