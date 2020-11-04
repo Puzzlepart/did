@@ -1,11 +1,9 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-name: Build and deploy Node.js app to Azure Web App
+name: Build and deploy to didapp/dev
 
 on:
   push:
     branches:
-      - feature/typed-injection
+      - feature/dev
 
 jobs:
   build-and-deploy:
@@ -30,5 +28,5 @@ jobs:
       with:
         app-name: 'didapp'
         slot-name: 'simpleoauth2'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_23c4ec7e4558446aa4b806d4b6d7d8c6 }}
+        publish-profile: ${{ secrets.DIDAPP_DEV_PUBLISH_PROFILE }}
         package: .
