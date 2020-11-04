@@ -45,6 +45,7 @@ class OAuthService {
     let accessToken = this._getClient(options).createToken(this._request.user.oauthToken)
     try {
       if (accessToken.expired() || options.force) {
+        debug(`Token expired. Attempting to refresh... Options: ${JSON.stringify(options)}`)
         accessToken = await accessToken.refresh(pick(accessToken.token, 'scope'))
         debug(`Successfully refreshed token expiring at ${accessToken.token.expires_at}.`)
       } else {
