@@ -21,9 +21,9 @@ class OAuthService {
         secret: env('OAUTH_APP_PASSWORD')
       },
       auth: {
-        tokenHost: env('OAUTH_AUTHORITY'),
-        authorizePath: env('OAUTH_AUTHORIZE_ENDPOINT'),
-        tokenPath: env('OAUTH_TOKEN_ENDPOINT')
+        tokenHost: 'https://login.microsoftonline.com/common/',
+        authorizePath: 'oauth2/v2.0/authorize',
+        tokenPath: '/oauth2/v2.0/token'
       }
     })
   }
