@@ -2,12 +2,12 @@
 import $dayjs, { ConfigType } from 'dayjs'
 import 'dayjs/locale/en-gb'
 import 'dayjs/locale/nb'
-import duration from 'dayjs/plugin/duration'
-import isoWeek from 'dayjs/plugin/isoWeek'
-import localeData from 'dayjs/plugin/localeData'
-import objectSupport from 'dayjs/plugin/objectSupport'
-import utc from 'dayjs/plugin/utc'
-import weekOfYear from 'dayjs/plugin/weekOfYear'
+import durationPlugin from 'dayjs/plugin/duration'
+import isoWeekPlugin from 'dayjs/plugin/isoWeek'
+import localeDataPlugin from 'dayjs/plugin/localeData'
+import objectSupportPlugin from 'dayjs/plugin/objectSupport'
+import utcPlugin from 'dayjs/plugin/utc'
+import weekOfYearPlugin from 'dayjs/plugin/weekOfYear'
 import { TFunction } from 'i18next'
 import { capitalize } from 'underscore.string'
 import { DateObject } from './date.dateObject'
@@ -43,12 +43,12 @@ export class DateUtils {
    */
   public setup(locale: string) {
     $dayjs.locale(locale)
-    $dayjs.extend(weekOfYear)
-    $dayjs.extend(localeData)
-    $dayjs.extend(duration)
-    $dayjs.extend(objectSupport)
-    $dayjs.extend(utc)
-    $dayjs.extend(isoWeek)
+    $dayjs.extend(weekOfYearPlugin)
+    $dayjs.extend(localeDataPlugin)
+    $dayjs.extend(durationPlugin)
+    $dayjs.extend(objectSupportPlugin)
+    $dayjs.extend(utcPlugin)
+    $dayjs.extend(isoWeekPlugin)
   }
 
   /**
