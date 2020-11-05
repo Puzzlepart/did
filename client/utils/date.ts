@@ -148,7 +148,7 @@ export class DateUtils {
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getTimespanString(start: DateObject, end: DateObject): string {
-    return 'WORK_IN_PROGRESS'
+    return start.format()
   }
 
   /**

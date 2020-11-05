@@ -3,6 +3,7 @@ import { getValue } from 'helpers'
 import { TFunction } from 'i18next'
 import { Project } from 'types'
 import { find } from 'underscore'
+import { DateInput } from 'utils/date'
 import { ITimesheetState, TimesheetPeriod, TimesheetView } from './types'
 
 export type TimesheetAction =
@@ -13,7 +14,7 @@ export type TimesheetAction =
         t: TFunction
       }
     }
-  | { type: 'SET_SCOPE'; payload: unknown | string }
+  | { type: 'SET_SCOPE'; payload: DateInput }
   | { type: 'SUBMITTING_PERIOD'; payload: { t: TFunction; forecast: boolean } }
   | { type: 'UNSUBMITTING_PERIOD'; payload: { t: TFunction; forecast: boolean } }
   | { type: 'CHANGE_PERIOD'; payload: string }
@@ -32,7 +33,7 @@ export type TimesheetAction =
  */
 export default (state: ITimesheetState, action: TimesheetAction): ITimesheetState => {
   const t = getValue<TFunction>(action, 'payload.t')
-  const newState = { ...state }
+  const newState:ITimesheetState = { ...state }
   switch (action.type) {
     case 'DATA_UPDATED':
       {
@@ -73,9 +74,7 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
       }
       break
     case 'SET_SCOPE':
-      // TODO: Implement using new date utils class
-      // if (typeof action.payload === 'string') newState.scope = new TimesheetScope(action.payload)
-      // else newState.scope = state.scope.add(action.payload)
+      newState.scope = state.scope.set(action.payload)
       break
 
     case 'CHANGE_PERIOD':

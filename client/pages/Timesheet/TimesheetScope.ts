@@ -30,9 +30,10 @@ export class TimesheetScope {
    * 
    * @param {DateInput} start Start of scope
    */
-  public set(start: DateInput) {
+  public set(start: DateInput): TimesheetScope {
     this.startDateTime = dateUtils.createDate(start)
     this.endDateTime = dateUtils.createDate(this.startDateTime.endOfWeek)
+    return this
   }
 
   /**

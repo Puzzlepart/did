@@ -27,24 +27,24 @@ export const GO_TO_CURRENT_WEEK_COMMAND = ({ scope, dispatch, t }: ITimesheetCon
     key: 'GO_TO_CURRENT_WEEK_COMMAND',
     iconOnly: true,
     iconProps: { iconName: 'RenewalCurrent', ...ACTIONBAR_ICON_PROPS },
-    onClick: () => dispatch({ type: 'SET_SCOPE', payload: new Date().toISOString() }),
+    onClick: () => dispatch({ type: 'SET_SCOPE', payload: new Date() }),
     disabled: scope.isCurrentWeek,
     title: t('timesheet.goToCurrentWeek'),
 })
 
-export const GO_TO_PREV_WEEK_COMMAND = ({ dispatch, t }: ITimesheetContext): IContextualMenuItem => ({
+export const GO_TO_PREV_WEEK_COMMAND = ({ dispatch, scope, t }: ITimesheetContext): IContextualMenuItem => ({
     key: 'GO_TO_PREV_WEEK_COMMAND',
     iconOnly: true,
     iconProps: { iconName: 'Back', ...ACTIONBAR_ICON_PROPS },
-    onClick: () => dispatch({ type: 'SET_SCOPE', payload: { amount: -1, unit: 'week' } }),
+    onClick: () => dispatch({ type: 'SET_SCOPE', payload: scope.startDateTime._.subtract(1, 'week') }),
     title: t('timesheet.goToPrevWeek')
 })
 
-export const GO_TO_NEXT_WEEK_COMMAND = ({ dispatch, t }: ITimesheetContext): IContextualMenuItem => ({
+export const GO_TO_NEXT_WEEK_COMMAND = ({ dispatch, scope, t }: ITimesheetContext): IContextualMenuItem => ({
     key: 'GO_TO_NEXT_WEEK_COMMAND',
     iconOnly: true,
     iconProps: { iconName: 'Forward', ...ACTIONBAR_ICON_PROPS },
-    onClick: () => dispatch({ type: 'SET_SCOPE', payload: { amount: 1, unit: 'week' } }),
+    onClick: () => dispatch({ type: 'SET_SCOPE', payload: scope.startDateTime._.add(1, 'week') }),
     title: t('timesheet.goToNextWeek'),
 })
 
@@ -146,7 +146,7 @@ export const CONFIRM_FORECAST_COMMANDS = (context: ITimesheetContext): IContextu
                 commands.push({ ...commandProps.CONFIRM_PERIOD, disabled: true })
             }
         }
-        
+
         let menuProps: IContextualMenuProps = null
         if (commands.length > 1) {
             menuProps = {
