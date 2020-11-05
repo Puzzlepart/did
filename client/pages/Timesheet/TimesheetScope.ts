@@ -48,7 +48,7 @@ export class TimesheetScope {
    * @param {number} index Index
    */
   public getDay(index: number): DateObject {
-    return DateUtils.addDays(this.startDateTime, index)
+    return this.startDateTime.add(`${index}d`)
   }
 
   /**

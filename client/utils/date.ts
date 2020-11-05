@@ -19,6 +19,16 @@ interface IDateUtils {
    * Retrieved from Date.getTimezoneOffset()
    */
   tzOffset: number;
+
+  /**
+   * Default month format
+   */
+  monthFormat: string;
+
+  /**
+   * Use ISO week
+   */
+  isoWeek: boolean;
 }
 
 export type DateInput = ConfigType
@@ -65,7 +75,7 @@ export class DateUtils {
    * @param {number} hours Duration in hours
    * @param {TFunction} t Translate function
    */
-  getDurationString(hours: number, t: TFunction): string {
+  public getDurationString(hours: number, t: TFunction): string {
     const hrs = Math.floor(hours)
     const mins = parseInt(((hours % 1) * 60).toFixed(0))
     const hrsStr = t('common.hoursShortFormat', { hrs })
@@ -79,10 +89,10 @@ export class DateUtils {
    * Format date with the specified date format
    *
    * @param {DateInput} date Date
-   * @param {string} dateFormat Date format
+   * @param {string} template Date format
    */
-  formatDate(date: DateInput, dateFormat: string): string {
-    return this._fixTzOffset(date).format(dateFormat)
+  public formatDate(date: DateInput, template: string): string {
+    return this._fixTzOffset(date).format(template)
   }
 
   /**
@@ -90,8 +100,8 @@ export class DateUtils {
    *
    * @param {DateObject} date Date
    */
-  startOfWeek(date?: DateObject): DateObject {
-    return new DateObject(date.$.startOf('isoWeek'))
+  public startOfWeek(date?: DateObject): DateObject {
+    return new DateObject(date.$.startOf(this.$.isoWeek ? 'isoWeek' : 'w'))
   }
 
   /**
@@ -99,40 +109,26 @@ export class DateUtils {
    *
    * @param {DateObject} date Date
    */
-  endOfWeek(date?: DateObject): DateObject {
-    return new DateObject(date.$.endOf('isoWeek'))
+  public endOfWeek(date?: DateObject): DateObject {
+    return new DateObject(date.$.endOf(this.$.isoWeek ? 'isoWeek' : 'w'))
   }
 
   /**
-   * Get days between a start and end time in the specified format
+   * Get days between a start and end time in the specified template
    *
    * @param {DateInput} start Start
    * @param {DateInput} end End
-   * @param {string} format Date format
+   * @param {string} template Date template
    */
-  getDays(start: DateInput, end: DateInput, format: string = 'dddd DD'): string[] {
+  getDays(start: DateInput, end: DateInput, template: string = 'dddd DD'): string[] {
     const days = []
     let s = new DateObject(start)
     const e = new DateObject(end)
     while (s.isBeforeOrSame(e)) {
-      days.push(capitalize(s.format(format)))
+      days.push(capitalize(s.format(template)))
       s = s.add('1d')
     }
     return days
-  }
-
-  /**
-   * Get monthName, monthNumber and year for the current date
-   *
-   * @param {DateInput} date Optional date
-   */
-  public getMonthYear(date?: DateInput) {
-    const d = $dayjs(date)
-    return {
-      monthName: d.format('MMMM'),
-      monthNumber: d.month() + 1,
-      year: d.year()
-    }
   }
 
   /**
@@ -142,8 +138,8 @@ export class DateUtils {
    * @param {string} format Format
    * @param {boolean} captialize Capitalize
    */
-  getMonthName(monthIndex?: number): string {
-    return $dayjs().set('month', monthIndex).format('MMMM')
+  public getMonthName(monthIndex?: number): string {
+    return $dayjs().set('month', monthIndex).format(this.$.monthFormat)
   }
 
   /**
@@ -154,20 +150,20 @@ export class DateUtils {
    * @param {object} options Options
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getTimespanString(start: DateObject, end: DateObject): string {
+  public getTimespanString(start: DateObject, end: DateObject): string {
     const isSameMonth = start.isSameMonth(end)
     const isSameYear = start.isSameYear(end)
     const sFormat = ['DD']
-    if (!isSameMonth) sFormat.push('MMMM')
+    if (!isSameMonth) sFormat.push(this.$.monthFormat)
     if (!isSameYear) sFormat.push('YYYY')
-    const eFormat = ['DD', 'MMMM', 'YYYY']
+    const eFormat = ['DD', this.$.monthFormat, 'YYYY']
     return [start.format(sFormat.join(' ')), end.format(eFormat.join(' '))].join(' - ')
   }
 
   /**
    * Get month names in a year
    */
-  getMonthNames(): string[] {
+  public getMonthNames(): string[] {
     return $dayjs.months().map((m) => capitalize(m))
   }
 
@@ -185,7 +181,7 @@ export class DateUtils {
    *
    * @param {DateInput} date Optional date
    */
-  getWeek(date?: DateInput): number {
+  public getWeek(date?: DateInput): number {
     return $dayjs(date).week()
   }
 
@@ -196,7 +192,7 @@ export class DateUtils {
    *
    * @param {DateInput} date Optional date
    */
-  getMonthIndex(date?: DateInput): number {
+  public getMonthIndex(date?: DateInput): number {
     return $dayjs(date).month() + 1
   }
 
@@ -205,7 +201,7 @@ export class DateUtils {
    *
    * @param {DateInput} date Optional date
    */
-  getYear(date?: DateInput): number {
+  public getYear(date?: DateInput): number {
     return $dayjs(date).year()
   }
 
@@ -214,22 +210,15 @@ export class DateUtils {
    *
    * @param {DateObject} date Optional date
    */
-  isCurrentWeek(date?: DateObject): boolean {
+  public isCurrentWeek(date?: DateObject): boolean {
     return date.$.week() === $dayjs().week()
-  }
-
-  /**
-   * Add days
-   *
-   * @param {DateObject} date Date object
-   */
-  addDays(startDateTime: DateObject, index: number): DateObject {
-    throw new DateObject(startDateTime.$.add(index, 'day'))
   }
 }
 
 export default new DateUtils({
-  tzOffset: new Date().getTimezoneOffset()
+  tzOffset: new Date().getTimezoneOffset(),
+  monthFormat: 'MMMM',
+  isoWeek: true
 })
 
 export { DateObject }
