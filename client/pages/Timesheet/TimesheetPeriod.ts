@@ -70,6 +70,11 @@ export class TimesheetPeriod {
     // this._storageDefaultExpire = dateAdd(new Date(), 'month', 2)
   }
 
+  fromParams(params: ITimesheetParams): TimesheetPeriod {
+    this.id = [params.week, params.month, params.year].filter((p) => p).join('_')
+    return this
+  }
+
   /**
    * Get name of period
    *

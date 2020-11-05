@@ -42,7 +42,16 @@ export class TimesheetResolver {
     @Ctx() ctx: Context
   ) {
     try {
-      return []
+      return [
+        {
+          id: 0,
+          startDateTime: query.startDateTime,
+          endDateTime: query.endDateTime,
+          week: 0,
+          month: 0,
+          events: []
+        }
+      ]
       const periods = getPeriods(query.startDateTime, query.endDateTime, locale)
       // eslint-disable-next-line prefer-const
       let [projects, customers, timeentries, labels] = await Promise.all([

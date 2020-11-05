@@ -5,6 +5,7 @@ import 'dayjs/locale/nb'
 import duration from 'dayjs/plugin/duration'
 import localeData from 'dayjs/plugin/localeData'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
+import objectSupport from 'dayjs/plugin/objectSupport'
 import { TFunction } from 'i18next'
 import { capitalize } from 'underscore.string'
 import { DateObject } from './date.dateObject'
@@ -21,6 +22,7 @@ export class DateUtils {
     dayjs.extend(weekOfYear)
     dayjs.extend(localeData)
     dayjs.extend(duration)
+    dayjs.extend(objectSupport)
   }
 
   /**
@@ -64,7 +66,7 @@ export class DateUtils {
    * @param {DateInput} date Date
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  startOfWeek(date?: DateInput ): unknown {
+  startOfWeek(date?: DateInput): unknown {
     return dayjs(date).startOf('week')
   }
 
@@ -73,7 +75,7 @@ export class DateUtils {
    *
    * @param {DateInput} date Date
    */
-  endOfWeek(date?: DateInput ): dayjs.Dayjs {
+  endOfWeek(date?: DateInput): dayjs.Dayjs {
     return dayjs(date).endOf('week')
   }
 
@@ -119,7 +121,7 @@ export class DateUtils {
    *
    * @param {DateInput} date Optional date
    */
-  public getMonthYear(date?: DateInput ) {
+  public getMonthYear(date?: DateInput) {
     const d = dayjs(date)
     return {
       monthName: d.format('MMMM'),
@@ -163,7 +165,7 @@ export class DateUtils {
    *
    * @param {DateInput} date Optional date
    */
-  public toISOString(date?: DateInput ): string {
+  public toISOString(date?: DateInput): string {
     return dayjs(date).toISOString()
   }
 
@@ -172,7 +174,7 @@ export class DateUtils {
    *
    * @param {DateInput} date Optional date
    */
-  getWeek(date?: DateInput ): number {
+  getWeek(date?: DateInput): number {
     return dayjs(date).week()
   }
 
@@ -183,7 +185,7 @@ export class DateUtils {
    *
    * @param {DateInput} date Optional date
    */
-  getMonthIndex(date?: DateInput ): number {
+  getMonthIndex(date?: DateInput): number {
     return dayjs(date).month() + 1
   }
 
@@ -192,7 +194,7 @@ export class DateUtils {
    *
    * @param {DateInput} date Optional date
    */
-  getYear(date?: DateInput ): number {
+  getYear(date?: DateInput): number {
     return dayjs(date).year()
   }
 
@@ -201,15 +203,15 @@ export class DateUtils {
    *
    * @param {DateInput} date Optional date
    */
-  isCurrentWeek(date?: DateInput ): boolean {
+  isCurrentWeek(date?: DateInput): boolean {
     return dayjs(date).week() === dayjs().week()
   }
 
-   /**
-   * Add days
-   *
-   * @param {DateObject} date Date object
-   */
+  /**
+  * Add days
+  *
+  * @param {DateObject} date Date object
+  */
   addDays(startDateTime: DateObject, index: number): DateObject {
     throw new DateObject(startDateTime._.add(index, 'day'), this)
   }

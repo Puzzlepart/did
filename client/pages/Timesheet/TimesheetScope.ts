@@ -1,5 +1,6 @@
 import dateUtils, { DateInput } from 'utils/date'
 import { DateObject } from 'utils/date.dateObject'
+import { ITimesheetParams } from './types'
 
 /**
  * Handles a scope, the period of time between a startDateTime and endDateTime
@@ -11,8 +12,16 @@ export class TimesheetScope {
     public startDateTime?: DateObject,
     public endDateTime?: DateObject
   ) {
-    this.startDateTime = dateUtils.createDate('2020-11-02')
+    this.startDateTime = dateUtils.createDate('2020-05-08')
     this.endDateTime = dateUtils.createDate(this.startDateTime.endOfWeek)
+  }
+
+  /**
+   * TODO: Need to set @startDateTime and @endDateTime from @params
+   */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  fromParams(params: ITimesheetParams): TimesheetScope {
+    return this
   }
 
   /**

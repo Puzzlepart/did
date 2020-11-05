@@ -101,7 +101,7 @@ export class TimesheetPeriodObject {
   @Field()
   endDateTime: string
 
-  @Field()
+  @Field({ nullable: true })
   isConfirmed: boolean
 
   @Field(() => [EventObject])
