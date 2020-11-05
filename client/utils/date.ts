@@ -1,4 +1,4 @@
-import $dayjs, { ConfigType } from 'dayjs'
+import $dayjs, { ConfigType,PluginFunc } from 'dayjs'
 import 'dayjs/locale/en-gb'
 import 'dayjs/locale/nb'
 import durationPlugin from 'dayjs/plugin/duration'
@@ -42,12 +42,12 @@ export class DateUtils {
    */
   public setup(locale: string) {
     $dayjs.locale(locale)
-    $dayjs.extend(weekOfYearPlugin)
-    $dayjs.extend(localeDataPlugin)
-    $dayjs.extend(durationPlugin)
-    $dayjs.extend(objectSupportPlugin)
-    $dayjs.extend(utcPlugin)
-    $dayjs.extend(isoWeekPlugin)
+    $dayjs.extend<PluginFunc>(weekOfYearPlugin)
+    $dayjs.extend<PluginFunc>(localeDataPlugin)
+    $dayjs.extend<PluginFunc>(durationPlugin)
+    $dayjs.extend<PluginFunc>(objectSupportPlugin)
+    $dayjs.extend<PluginFunc>(utcPlugin)
+    $dayjs.extend<PluginFunc>(isoWeekPlugin)
   }
 
   /**
