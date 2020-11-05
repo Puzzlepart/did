@@ -1,4 +1,4 @@
-import * as utils from '../../../utils'
+import * as utils from '../../../utils/date'
 import format from 'string-format'
 import { getPeriods } from './timesheet.utils'
 import get from 'get-value'
