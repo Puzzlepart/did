@@ -2,6 +2,7 @@ import { TFunction } from 'i18next'
 import dayjs from 'dayjs'
 import 'dayjs/locale/en-gb'
 import 'dayjs/locale/nb'
+import weekOfYear from 'dayjs/plugin/weekOfYear'
 
 class DateUtils {
   /**
@@ -11,6 +12,7 @@ class DateUtils {
    */
   public setup(locale: 'en-gb' | 'nb') {
     dayjs.locale(locale)
+    dayjs.extend(weekOfYear)
   }
 
   /**
@@ -206,45 +208,38 @@ class DateUtils {
   }
 
   /**
-   * Get a string representation of the m2oment date instance
-   *
-   * @param {unknown} date Date
-   *
-   * @returns {string} Returns a ISO representation of the date without the Z
+   * Get a ISO string representation of the date
+   * 
+   * @param {dayjs.ConfigType} date Optional date
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  toString(date: unknown): string {
-    // TODO: fix
-    return null
-    // return date.toISOString().replace('Z', '')
+  toString(date?: dayjs.ConfigType): string {
+    return dayjs(date).toISOString()
   }
 
   /**
    * Get week number
+   * 
+   * @param {dayjs.ConfigType} date Optional date
    */
-  getWeek(): number {
-    // TODO: fix
-    return null
-    // return m2oment().week()
+  getWeek(date?: dayjs.ConfigType): number {
+    return dayjs(date).week()
   }
 
   /**
-   * Get month index
-   *
-   * 1: January
-   *
-   * 2: February
-   *
-   * etc.
+   * Get the month.
+   * 
+   * Months are zero indexed, so January is month 0.
+   * 
+   * @param {dayjs.ConfigType} date Optional date
    */
-  getMonthIndex(): number {
-    // TODO: fix
-    return null
-    // return m2oment().month() + 1
+  getMonthIndex(date?: dayjs.ConfigType): number {
+    return dayjs(date).month() + 1
   }
 
   /**
    * Get year
+   * 
+   * @param {dayjs.ConfigType} date Optional date
    */
   getYear(date?: dayjs.ConfigType): number {
     return dayjs(date).year()
