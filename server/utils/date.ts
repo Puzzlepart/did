@@ -1,4 +1,3 @@
-// import moment from 'moment' REMOVED
 import stripHtml from 'string-strip-html'
 
 // SERVER SIDE DATE UTILS USED:
@@ -34,7 +33,6 @@ export const stripHtmlString = (str: string): string => stripHtml(str).result
 export const getDurationHours = (startDateTime: string, endDateTime: string): any => {
     return null;
     // TODO Return duration hours as number
-    //   return moment.duration(moment(endDateTime).diff(moment(startDateTime))).asHours()
 }
 
 /**
@@ -63,18 +61,20 @@ export const getWeek = (date?: any) => {
  * @param {string} date Date
  */
 export const getYear = (date?: string) => {
-    return moment(date).year()
+    // TODO return year from specified date or current date
+    return null
 }
 
 /**
  * Get month index for the specified date
  *
- * NOTE: Need to add +1 since moment.month is zero-indexed
  *
  * @param {*} date Date
  */
 export const getMonthIndex = (date: any) => {
-    return moment(date).month() + 1
+    // TODO return month from specified date or current date
+    // NOTE - MUST BE 1-INDEXED
+    return null
 }
 
 /**
@@ -83,8 +83,9 @@ export const getMonthIndex = (date: any) => {
  * @param {*} date Date
  */
 export const startOfMonth = (date: any) => {
-    const d = moment(date).startOf('month')
-    return d.toISOString().replace('Z', '')
+    // TODO return date of start of month from specified date or current date
+    // toISOString minus Z
+    return null
 }
 
 /**
@@ -93,8 +94,9 @@ export const startOfMonth = (date: any) => {
  * @param {*} date Date
  */
 export const endOfMonth = (date: any) => {
-    const d = moment(date).endOf('month')
-    return d.toISOString().replace('Z', '')
+    // TODO return date of end of month from specified date or current date
+    // toISOString minus Z
+    return null
 }
 
 /**
@@ -103,7 +105,8 @@ export const endOfMonth = (date: any) => {
  * @param {*} week Week number
  */
 export const startOfWeek = (week: any) => {
-    return moment().week(week).startOf('isoWeek')
+    // TODO return date of start of week from specified date or current date
+    return null
 }
 
 /**
@@ -112,7 +115,8 @@ export const startOfWeek = (week: any) => {
  * @param {*} week Week number
  */
 export const endOfWeek = (week: any) => {
-    return moment().week(week).endOf('isoWeek')
+    // TODO return date of end of week from specified date or current date
+    return null
 }
 
 /**
@@ -123,7 +127,9 @@ export const endOfWeek = (week: any) => {
  * @param {*} locale Locale
  */
 export const formatDate = (date: any, dateFormat: any, locale: any, timeZone = 'Europe/Oslo') => {
-    return (moment(date) as any).locale(locale).tz(timeZone).format(dateFormat)
+    // TODO return correct date format as string
+    // remember locale and tz
+    return null
 }
 
 /**
@@ -132,5 +138,6 @@ export const formatDate = (date: any, dateFormat: any, locale: any, timeZone = '
  * @param {*} date Date
  */
 export const isAfterToday = (date: any) => {
-    return moment(date).isAfter(moment())
+    // return bool, whether the specified date is after now
+    return null
 }
