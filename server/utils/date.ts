@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import dateUtils from 'string-strip-html'
+import stringStripHtml from 'string-strip-html'
 
 // SERVER SIDE DATE UTILS USED:
 /**
@@ -23,7 +23,7 @@ import dateUtils from 'string-strip-html'
  *
  * @param {string} str String
  */
-export const stripHtmlString = (str: string): string => dateUtils(str).result
+export const stripHtmlString = (str: string): string => stringStripHtml(str).result
 
 /**
  * Get duration between two times in hours
