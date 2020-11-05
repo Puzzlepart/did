@@ -3,6 +3,7 @@ import { first, find, filter } from 'underscore'
 import { contains } from 'underscore.string'
 import get from 'get-value'
 import moment from 'moment'
+import { TimesheetPeriodObject } from './timesheet.types'
 
 /**
  * Get periods between specified dates
@@ -11,24 +12,22 @@ import moment from 'moment'
  * @param {string | moment.Moment} endDateTime End date time in ISO format
  * @param {string} locale User locale for moment formatting
  */
-export function getPeriods(
-  startDateTime: string | moment.Moment,
-  endDateTime: string | moment.Moment,
-  locale: string
-): any[] {
+export function getPeriods(startDateTime: string, endDateTime: string, locale: string): any[] {
   const week = utils.getWeek(startDateTime)
   const startMonthIdx = utils.getMonthIndex(startDateTime)
   const endMonthIdx = utils.getMonthIndex(endDateTime)
   const isSplit = endMonthIdx !== startMonthIdx
 
-  const periods = [
+  const periods: TimesheetPeriodObject[] = [
     {
       id: utils.getPeriod(startDateTime),
       week,
       month: utils.formatDate(startDateTime, 'MMMM', locale),
       startDateTime,
       endDateTime: isSplit ? utils.endOfMonth(startDateTime) : endDateTime,
-      isForecast: utils.isAfterToday(startDateTime)
+      isForecast: utils.isAfterToday(startDateTime),
+      isConfirmed: false,
+      isForecasted: false,
     }
   ]
 
@@ -40,7 +39,9 @@ export function getPeriods(
       month: utils.formatDate(endDateTime, 'MMMM', locale),
       startDateTime,
       endDateTime,
-      isForecast: utils.isAfterToday(startDateTime)
+      isForecast: utils.isAfterToday(startDateTime),
+      isConfirmed: false,
+      isForecasted: false,
     })
   }
 

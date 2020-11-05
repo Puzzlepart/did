@@ -1,8 +1,8 @@
 import { QueryResult } from '@apollo/client'
 import { getValue } from 'helpers'
 import { TFunction } from 'i18next'
-import { Project } from 'types'
-import { find } from 'underscore'
+import { Project, TimesheetPeriodObject } from 'types'
+import { find, first } from 'underscore'
 import { DateInput } from 'utils/date'
 import { ITimesheetState, TimesheetPeriod, TimesheetView } from './types'
 
@@ -10,7 +10,7 @@ export type TimesheetAction =
   | {
       type: 'DATA_UPDATED'
       payload: {
-        query: QueryResult<any>
+        query: QueryResult<{timesheet: TimesheetPeriodObject[]}>
         t: TFunction
       }
     }
@@ -45,10 +45,10 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
             }
           : null
         if (data) {
-          // newState.periods = data.timesheet.map((period) => new TimesheetPeriod(period))
-          // newState.selectedPeriod =
-          //   find(newState.periods, (p) => p.id === getValue(state, 'selectedPeriod.id', null)) ||
-          //   first(newState.periods)
+          newState.periods = data.timesheet.map((period) => new TimesheetPeriod().setup(period))
+          newState.selectedPeriod =
+             find(newState.periods, (p) => p.id === getValue(state, 'selectedPeriod.id', null)) ||
+            first(newState.periods)
         }
         newState.error = error
       }

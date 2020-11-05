@@ -112,7 +112,7 @@ export const SummaryView = () => {
         const context = useContext(TimesheetContext)
         const columns = createColumns(context.scope)
 
-        const events = context.selectedPeriod.events.filter(e => !!e.project)
+        const events = context.selectedPeriod.getEvents().filter(e => !!e.project)
 
         const items = [
             ...generateRows(events, columns),

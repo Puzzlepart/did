@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
-import { IPnPClientStore, ITypedHash, PnPClientStorage } from '@pnp/common'
+import { dateAdd, IPnPClientStore, ITypedHash, PnPClientStorage } from '@pnp/common'
 import { TFunction } from 'i18next'
 import { EventInput, EventObject, Project, TimesheetPeriodInput, TimesheetPeriodObject } from 'types'
 import { filter, omit } from 'underscore'
@@ -17,7 +17,9 @@ import { ITimesheetParams } from './types'
  * Where x is the week number and y is the year
  */
 export class TimesheetPeriod {
+  private _period?: TimesheetPeriodObject
   public id: string
+  public week: number
   public isConfirmed?: boolean
   public isForecasted: boolean
   public isForecast: boolean
@@ -25,18 +27,8 @@ export class TimesheetPeriod {
   private _uiIgnoredEvents: string[] = []
   private _uiMatchedEvents: ITypedHash<any> = {}
   private _month?: string
-  private _startDateTime?: unknown
-  private _endDateTime?: unknown
   private _localStorage: IPnPClientStore = new PnPClientStorage().local
-
-  /**
-   * Storage key for events matched in UI
-   */
   private _uiMatchedEventsStorageKey: string
-
-  /**
-   * Storage key for events ignored in UI
-   */
   private _uiIgnoredEventsStorageKey: string
 
   /**
@@ -44,34 +36,19 @@ export class TimesheetPeriod {
    */
   private _storageDefaultExpire: Date
 
-  /**
-   * Creates a new instance of TimesheetPeriod
-   *
-   * @param {TimesheetPeriodObject} _period Period
-   * @param {ITimesheetPeriod} params Params
-   */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  constructor(private _period?: TimesheetPeriodObject, params?: ITimesheetParams) {
-    this.id = '24_05_2020'
-    // if (params) this.id = [params.week, params.month, params.year].filter((p) => p).join('_')
-    // if (!_period) return
-    // this.id = _period.id
-    // this._month = capitalize(_period.month)
-    // this._startDateTime = _period.startDateTime
-    // this._endDateTime = _period.endDateTime
-    // this.isConfirmed = _period.isConfirmed
-    // this.isForecasted = _period.isForecasted
-    // this.isForecast = _period.isForecast
-    // this.forecastedHours = _period.forecastedHours
-    // this._uiMatchedEventsStorageKey = `did365_ui_matched_events_${this.id}`
-    // this._uiIgnoredEventsStorageKey = `did365_ui_ignored_events_${this.id}`
-    // this._uiIgnoredEvents = this._localStorage.get(this._uiIgnoredEventsStorageKey) || []
-    // this._uiMatchedEvents = this._localStorage.get(this._uiMatchedEventsStorageKey) || {}
-    // this._storageDefaultExpire = dateAdd(new Date(), 'month', 2)
+  setup(period?: TimesheetPeriodObject) {
+    Object.assign(this, period)
+    this._uiMatchedEventsStorageKey = `did365_ui_matched_events_${this.id}`
+    this._uiIgnoredEventsStorageKey = `did365_ui_ignored_events_${this.id}`
+    this._uiMatchedEvents = this._localStorage.get(this._uiMatchedEventsStorageKey) || {}
+    this._storageDefaultExpire = dateAdd(new Date(), 'month', 2)
+    // eslint-disable-next-line no-console
+    console.log(this)
+    return this
   }
 
   fromParams(params: ITimesheetParams): TimesheetPeriod {
-    this.id = [params.week, params.month, params.year].filter((p) => p).join('_')
+    this.id = params.week ? [params.week, params.month, params.year].filter((p) => p).join('_') : '19_5_2020'
     return this
   }
 
@@ -82,7 +59,7 @@ export class TimesheetPeriod {
    * @param {TFunction} t Translate function
    */
   public getName(includeMonth: boolean, t: TFunction) {
-    let name = `${t('common.weekLabel')} ${this._period.week}`
+    let name = `${t('common.weekLabel')} ${this.week}`
     if (includeMonth) name += ` (${this._month})`
     return name
   }
@@ -109,7 +86,7 @@ export class TimesheetPeriod {
   /**
    * Get events
    */
-  public get events(): EventObject[] {
+  public getEvents(): EventObject[] {
     if (this._period) {
       return [...this._period.events]
         .filter((event) => !event.isSystemIgnored && this._uiIgnoredEvents.indexOf(event.id) === -1)
@@ -120,8 +97,6 @@ export class TimesheetPeriod {
 
   /**
    * Get ignored events
-   *
-   * @returns An array of event ids
    */
   public get ignoredEvents(): string[] {
     return this._uiIgnoredEvents
@@ -131,22 +106,22 @@ export class TimesheetPeriod {
    * Get aggregated errors from the events in the period
    */
   public get errors(): any[] {
-    if (!this.events) return []
-    return filter(this.events, (event) => !!event.error).map((event) => event.error)
+    if (!this.getEvents) return []
+    return filter(this.getEvents(), (event) => !!event.error).map((event) => event.error)
   }
 
   /**
    * Get total duration of events in the period
    */
   public get totalDuration(): number {
-    return this.events.reduce((sum, event) => (sum += event.duration), 0)
+    return this.getEvents().reduce((sum, event) => (sum += event.duration), 0)
   }
 
   /*
    * Get matched duration for the events in the period
    */
   public get matchedDuration(): number {
-    return filter(this.events, (event) => !!event.project).reduce((sum, event) => sum + event.duration, 0)
+    return filter(this.getEvents(), (event) => !!event.project).reduce((sum, event) => sum + event.duration, 0)
   }
 
   /**
@@ -205,7 +180,7 @@ export class TimesheetPeriod {
    * * {boolean} manualMatch
    */
   private get matchedEvents(): EventInput[] {
-    const events = filter([...this.events], (event) => !!event.project).map(
+    const events = filter([...this.getEvents()], (event) => !!event.project).map(
       (event) =>
         ({
           id: event.id,

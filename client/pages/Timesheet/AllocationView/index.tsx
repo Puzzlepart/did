@@ -51,7 +51,7 @@ export const AllocationView = (): JSX.Element => {
         <div className={styles.root} ref={ref}>
             {Object.keys(charts).map(exp => {
                 const title = charts[exp]
-                const data = GetAllocation(selectedPeriod.events, exp)
+                const data = GetAllocation(selectedPeriod.getEvents(), exp)
                 return (
                     <div className={styles.chart} key={exp}>
                         <div className={styles.title}>{title}</div>

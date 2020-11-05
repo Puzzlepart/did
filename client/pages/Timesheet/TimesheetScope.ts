@@ -12,7 +12,7 @@ export class TimesheetScope {
     public startDateTime?: DateObject,
     public endDateTime?: DateObject
   ) {
-    this.startDateTime = dateUtils.createDate('2020-05-08')
+    this.startDateTime = dateUtils.createDate('2020-05-11')
     this.endDateTime = dateUtils.createDate(this.startDateTime.endOfWeek)
   }
 

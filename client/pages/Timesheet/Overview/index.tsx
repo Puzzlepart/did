@@ -25,7 +25,7 @@ export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
             <EventList
                 hidden={!!context.error}
                 enableShimmer={!!context.loading}
-                events={context.selectedPeriod.events}
+                events={context.selectedPeriod.getEvents()}
                 showEmptyDays={true}
                 dateFormat={timeFormat}
                 groups={{

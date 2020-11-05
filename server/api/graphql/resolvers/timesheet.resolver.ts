@@ -9,7 +9,7 @@ import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
 import { connectEntities } from './project.utils'
 import EventMatching from './timesheet.matching'
-import { TimesheetPeriodInput, TimesheetPeriodObject, TimesheetQuery } from './timesheet.types'
+import { TimesheetOptions, TimesheetPeriodInput, TimesheetPeriodObject, TimesheetQuery } from './timesheet.types'
 import { connectTimeEntries, getPeriods } from './timesheet.utils'
 import { BaseResult } from './types'
 
@@ -24,35 +24,33 @@ export class TimesheetResolver {
    * @param {AzStorageService} _azstorage AzStorageService
    * @param {MSGraphService} _msgraph MSGraphService
    */
-  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) {}
+  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) { }
   /**
    * Get timesheet
    *
    * @param {TimesheetQuery} query Query
-   * @param {string} locale Locale
-   * @param {string} dateFormat Date format
+   * @param {TimesheetOptions} options Options
    * @param {Context} ctx GraphQL context
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [TimesheetPeriodObject], { description: 'Get timesheet for startDateTime - endDateTime' })
-  async timesheet(
-    @Arg('query') query: TimesheetQuery,
-    @Arg('locale') locale: string,
-    @Arg('dateFormat') dateFormat: string,
-    @Ctx() ctx: Context
-  ) {
+  async timesheet(@Arg('query') query: TimesheetQuery, @Arg('options') options: TimesheetOptions, @Ctx() ctx: Context) {
     try {
       return [
         {
-          id: 0,
+          id: '19_5_2020',
           startDateTime: query.startDateTime,
           endDateTime: query.endDateTime,
           week: 0,
           month: 0,
-          events: []
+          events: [],
+          isConfirmed: false,
+          isForecasted: false,
+          isForecast: false,
+          forecastedHours: 0
         }
       ]
-      const periods = getPeriods(query.startDateTime, query.endDateTime, locale)
+      const periods = getPeriods(query.startDateTime, query.endDateTime, options.locale)
       // eslint-disable-next-line prefer-const
       let [projects, customers, timeentries, labels] = await Promise.all([
         this._azstorage.getProjects(),
@@ -95,7 +93,7 @@ export class TimesheetResolver {
         }
         period.events = period.events.map((evt) => ({
           ...evt,
-          date: formatDate(evt.startDateTime, dateFormat, locale)
+          date: formatDate(evt.startDateTime, options.dateFormat, options.locale)
         }))
       }
       return periods

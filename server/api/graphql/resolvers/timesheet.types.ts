@@ -105,7 +105,7 @@ export class TimesheetPeriodObject {
   isConfirmed: boolean
 
   @Field(() => [EventObject])
-  events: EventObject[]
+  events?: EventObject[]
 
   @Field({ nullable: true })
   isForecasted: boolean
@@ -114,7 +114,7 @@ export class TimesheetPeriodObject {
   isForecast: boolean
 
   @Field({ nullable: true })
-  forecastedHours: number
+  forecastedHours?: number
 }
 
 @InputType({ description: 'Input object for TimesheetPeriod used in Mutation unsubmitPeriod' })
@@ -142,4 +142,13 @@ export class TimesheetQuery {
 
   @Field()
   endDateTime: string
+}
+
+@InputType()
+export class TimesheetOptions {
+  @Field()
+  locale: string
+
+  @Field()
+  dateFormat: string
 }
