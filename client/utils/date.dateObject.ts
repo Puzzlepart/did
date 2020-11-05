@@ -1,4 +1,4 @@
-import $dayjs, { Dayjs } from 'dayjs'
+import $dayjs, { Dayjs, OpUnitType } from 'dayjs'
 import DateUtils, { DateInput } from './date'
 
 export class DateObject {
@@ -63,5 +63,37 @@ export class DateObject {
   */
   isSameYear(date: DateObject) {
     return this.$.isSame(date.$, 'year')
+  }
+
+  /**
+  * This indicates whether the Day.js object is the same or before as the other supplied date-time.
+  * 
+  * @param {DateObject} date Date
+  */
+  isBeforeOrSame(date: DateObject) {
+    return this.$.isBefore(date.$) || this.$.isSame(date.$)
+  }
+
+  /**
+   * Returns a cloned DateObjectobject with a specified amount of time added.
+   *
+   * E.g. 1d to add day, or 1m to add 1 month
+   * 
+   * @param {string} add Add
+   */
+  public add(add: string) {
+    const value = parseInt(add)
+    const [, unit] = add.split(value.toString())
+    return new DateObject(this.$.add(value, unit as OpUnitType))
+  }
+
+  /**
+  * This indicates the difference between two date-time in the specified unit.
+  * 
+  * @param {DateObject} date Date   * 
+  * @param {OpUnitType} unit Unit
+  */
+  diff(date: DateObject, unit: OpUnitType) {
+    return this.$.diff(date.$, unit)
   }
 }

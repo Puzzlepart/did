@@ -90,8 +90,7 @@ export class DateUtils {
    *
    * @param {DateInput} date Date
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  startOfWeek(date?: DateInput): unknown {
+  startOfWeek(date?: DateInput): Dayjs {
     return $dayjs(date).startOf('isoWeek')
   }
 
@@ -113,12 +112,11 @@ export class DateUtils {
    */
   getDays(start: DateInput, end: DateInput, format: string = 'dddd DD'): string[] {
     const days = []
-    let s = $dayjs(start)
-    const e = $dayjs(end)
-
-    while (s.isBefore(e) || s.isSame(e)) {
+    let s = new DateObject(start)
+    const e = new DateObject(end)
+    while (s.isBeforeOrSame(e)) {
       days.push(capitalize(s.format(format)))
-      s = s.add(1, 'day')
+      s = s.add('1d')
     }
     return days
   }
@@ -128,7 +126,7 @@ export class DateUtils {
    *
    * @param {number} value Defaults to 1
    */
-  public addMonth(value: number = 1): $dayjs.Dayjs {
+  public addMonth(value: number = 1): Dayjs {
     return $dayjs().add(value, 'month')
   }
 
@@ -137,7 +135,7 @@ export class DateUtils {
    *
    * @param {number} value Defaults to 1
    */
-  public subtractMonths(value: number = 1): $dayjs.Dayjs {
+  public subtractMonths(value: number = 1): Dayjs {
     return $dayjs().subtract(value, 'month')
   }
 
@@ -251,4 +249,5 @@ export class DateUtils {
 export default new DateUtils({
   tzOffset: new Date().getTimezoneOffset()
 })
+
 export { DateObject }

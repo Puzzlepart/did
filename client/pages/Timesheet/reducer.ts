@@ -14,7 +14,7 @@ export type TimesheetAction =
         t: TFunction
       }
     }
-  | { type: 'SET_SCOPE'; payload: DateInput }
+  | { type: 'SET_SCOPE'; payload?: DateInput }
   | { type: 'SUBMITTING_PERIOD'; payload: { t: TFunction; forecast: boolean } }
   | { type: 'UNSUBMITTING_PERIOD'; payload: { t: TFunction; forecast: boolean } }
   | { type: 'CHANGE_PERIOD'; payload: string }
@@ -74,7 +74,7 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
       }
       break
     case 'SET_SCOPE':
-      newState.scope = state.scope.set(action.payload)
+      newState.scope = state.scope.set(action.payload || new Date())
       break
 
     case 'CHANGE_PERIOD':

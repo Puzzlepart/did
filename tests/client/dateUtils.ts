@@ -128,21 +128,53 @@ describe(header('DateUtils'), async () => {
 
   describe('getTimespanString', () => {
     it('should return 11 - 16 May 2020', () => {
-      let a = new DateObject('2020-05-11', DateUtils)
-      let b = new DateObject('2020-05-16', DateUtils)
+      let a = new DateObject('2020-05-11')
+      let b = new DateObject('2020-05-16')
       deepStrictEqual(DateUtils.getTimespanString(a, b), '11 - 16 May 2020')
     })
 
     it('should return 16 May - 16 June 2020', () => {
-      let a = new DateObject('2020-05-16', DateUtils)
-      let b = new DateObject('2020-06-16', DateUtils)
+      let a = new DateObject('2020-05-16')
+      let b = new DateObject('2020-06-16')
       deepStrictEqual(DateUtils.getTimespanString(a, b), '16 May - 16 June 2020')
     })
 
     it('should return 16 May 2020 - 16 June 2021', () => {
-      let a = new DateObject('2020-05-16', DateUtils)
-      let b = new DateObject('2021-06-16', DateUtils)
+      let a = new DateObject('2020-05-16')
+      let b = new DateObject('2021-06-16')
       deepStrictEqual(DateUtils.getTimespanString(a, b), '16 May 2020 - 16 June 2021')
     })
+  })
+})
+
+describe('DateObject.add', () => {
+  it('should add 1 day', () => {
+    let a = new DateObject('2020-05-16')
+    const b = a.add('1d')
+    deepStrictEqual(b.diff(a, 'day') === 1, true)
+  })
+
+  it('should add 1 week', () => {
+    let a = new DateObject('2020-05-16')
+    const b = a.add('1w')
+    deepStrictEqual(b.diff(a, 'day') === 7, true)
+  })
+
+  it('should add 7 days', () => {
+    let a = new DateObject('2020-05-16')
+    const b = a.add('7d')
+    deepStrictEqual(b.diff(a, 'day') === 7, true)
+  })
+
+  it('should add 14 days', () => {
+    let a = new DateObject('2020-05-10')
+    const b = a.add('14d')
+    deepStrictEqual(b.diff(a, 'day') === 14, true)
+  })
+
+  it('should add 1 year', () => {
+    let a = new DateObject('2020-05-10')
+    const b = a.add('1y')
+    deepStrictEqual(b.diff(a, 'year') === 1, true)
   })
 })
