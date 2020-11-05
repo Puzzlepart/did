@@ -1,5 +1,5 @@
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
-import dateUtils, { moment } from 'utils/date'
+import dateUtils from 'utils/date'
 import { ISummaryViewScope, ISummaryViewState } from './types'
 
 export type SummaryViewAction =
@@ -45,7 +45,8 @@ export const reducer = (state: ISummaryViewState, action: SummaryViewAction): IS
     default:
       throw new Error()
   }
-  if (newState.year !== moment().year()) newState.endMonthIndex = 12
-  else newState.endMonthIndex = dateUtils.getMonthIndex()
+  // TODO: Use date util
+  // if (newState.year !== moment().year()) newState.endMonthIndex = 12
+  newState.endMonthIndex = dateUtils.getMonthIndex()
   return newState
 }
