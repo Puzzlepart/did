@@ -2,7 +2,6 @@ import { TFunction } from 'i18next'
 import moment from 'moment'
 import { format } from 'office-ui-fabric-react/lib/Utilities'
 import { capitalize } from 'underscore.string'
-require('twix')
 
 export default new (class DateUtils {
   private _momentLocale: string
