@@ -17,59 +17,16 @@ import { ITimesheetParams } from './types'
  * Where x is the week number and y is the year
  */
 export class TimesheetPeriod {
-  /**
-   * Identifier for the period week_month_year
-   */
   public id: string
-
-  /**
-   * Period confirmed
-   */
   public isConfirmed?: boolean
-
-  /**
-   * Is there an active forecast for the period
-   */
   public isForecasted: boolean
-
-  /**
-   * Is the period in the future and available for forecasting
-   */
   public isForecast: boolean
-
-  /**
-   * Forecasted hours
-   */
   public forecastedHours: number
-
-  /**
-   * Events ignored in UI
-   */
   private _uiIgnoredEvents: string[] = []
-
-  /**
-   * Events matched in UI
-   */
   private _uiMatchedEvents: ITypedHash<any> = {}
-
-  /**
-   * Month string
-   */
   private _month?: string
-
-  /**
-   * Start date time 
-   */
   private _startDateTime?: unknown
-
-  /**
-   * End date time
-   */
   private _endDateTime?: unknown
-
-  /**
-   * Local storage
-   */
   private _localStorage: IPnPClientStore = new PnPClientStorage().local
 
   /**
