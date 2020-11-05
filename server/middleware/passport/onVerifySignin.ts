@@ -44,8 +44,6 @@ export  async function onVerifySignin(
     }
     user.subscription = subscription
     user.tokenParams = tokenParams
-    // eslint-disable-next-line no-console
-    console.log(JSON.stringify(user))
     return done(null, user)
   } catch (error) {
     debug(error)
