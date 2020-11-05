@@ -1,4 +1,4 @@
-import * as utils from '../../../utils'
+import * as utils from '../../../utils/date'
 import { first, find, filter } from 'underscore'
 import { contains } from 'underscore.string'
 import get from 'get-value'
