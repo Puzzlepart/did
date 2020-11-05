@@ -27,5 +27,5 @@ jobs:
       with:
         app-name: 'didapp-docker-630'
         slot-name: 'production'
-        publish-profile: ${{ secrets.DIDAPP_DOCKER_PUBLISH_PROFILE }}
+        credentials: ${{ secrets.AZURE_CREDENTIALS }}
         images: '${{ secrets.DOCKER_USERNAME }}/did:latest'
