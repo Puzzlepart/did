@@ -18,12 +18,12 @@ jobs:
     - uses: azure/docker-login@v1
       with:
         login-server: https://index.docker.io/v1/
-        username: ${{ secrets.AzureAppService_ContainerUsername_78ed16261a494348858d9cba444787e6 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_1ff634b7593c45a5a45368aaeb64d6af }}
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
     - run: |
-        docker build . -t index.docker.io/${{ secrets.AzureAppService_ContainerUsername_78ed16261a494348858d9cba444787e6 }}/did:${{ github.sha }}
-        docker push index.docker.io/${{ secrets.AzureAppService_ContainerUsername_78ed16261a494348858d9cba444787e6 }}/did:${{ github.sha }}
+        docker build . -t index.docker.io/${{ secrets.DOCKER_USERNAME }}/did:${{ github.sha }}
+        docker push index.docker.io/${{ secrets.DOCKER_ACCESS_TOKEN }}/did:${{ github.sha }}
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
@@ -31,4 +31,4 @@ jobs:
         app-name: 'didapp-docker-630'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_8a11f7bedec54385bd1d609774b3ff03 }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_78ed16261a494348858d9cba444787e6 }}/did:${{ github.sha }}'
+        images: 'index.docker.io/${{ secrets.DOCKER_USERNAME }}/did:${{ github.sha }}'

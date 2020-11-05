@@ -1,6 +1,5 @@
 FROM node:12.18.3
 ENV NODE_ENV=production
-ENV PORT=9001
 
 # Copy source code
 COPY . /app
