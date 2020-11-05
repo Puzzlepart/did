@@ -14,6 +14,7 @@ import { client, GET_CURRENT_USER } from './graphql'
 import './i18n'
 import './_global.scss'
 
+
 initializeIcons()
 
 /**

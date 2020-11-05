@@ -1,17 +1,16 @@
 import { TFunction } from 'i18next'
-import { format } from 'office-ui-fabric-react/lib/Utilities'
+import dayjs from 'dayjs'
+import 'dayjs/locale/en-gb'
+import 'dayjs/locale/nb'
 
-export default new (class DateUtils {
+class DateUtils {
   /**
    * Setup DateUtils class
    *
    * @param {string} locale Locale
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public setup(locale: string) {
-    // TODO: Set up e.g. dayjs
-    // this.m2oment = locale
-    // m2oment.locale(this.m0mentLocale)
+  public setup(locale: 'en-gb' | 'nb') {
+    dayjs.locale(locale)
   }
 
   /**
@@ -33,16 +32,19 @@ export default new (class DateUtils {
    * @param {number} durationHrs Duration in hours
    * @param {TFunction} t Translate function
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getDurationString(durationHrs: number, t: TFunction): string {
-    const hrsShortFormat = t('common.hoursShortFormat')
-    const minShortFormat = t('common.minutesShortFormat')
-    const hrs = Math.floor(durationHrs)
-    const mins = parseInt(((durationHrs % 1) * 60).toFixed(0))
-    const hrsStr = format(hrsShortFormat, hrs)
-    const minStr = format(minShortFormat, mins)
-    if (mins === 0) return hrsStr
-    if (hrs === 0) return minStr
-    return `${hrsStr} ${minStr}`
+    // TODO: Fix
+    return null
+    // const hrsShortFormat = t('common.hoursShortFormat')
+    // const minShortFormat = t('common.minutesShortFormat')
+    // const hrs = Math.floor(durationHrs)
+    // const mins = parseInt(((durationHrs % 1) * 60).toFixed(0))
+    // const hrsStr = format(hrsShortFormat, hrs)
+    // const minStr = format(minShortFormat, mins)
+    // if (mins === 0) return hrsStr
+    // if (hrs === 0) return minStr
+    // return `${hrsStr} ${minStr}`
   }
 
   /**
@@ -244,9 +246,9 @@ export default new (class DateUtils {
   /**
    * Get year
    */
-  getYear(): number {
-    // TODO: fix
-    return null
-    // return m2oment().year()
+  getYear(date?: dayjs.ConfigType): number {
+    return dayjs(date).year()
   }
-})()
+}
+
+export default new DateUtils()
