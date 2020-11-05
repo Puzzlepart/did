@@ -1,4 +1,3 @@
-/* eslint-disable max-classes-per-file */
 import $dayjs, { ConfigType } from 'dayjs'
 import 'dayjs/locale/en-gb'
 import 'dayjs/locale/nb'
@@ -101,7 +100,7 @@ export class DateUtils {
    * @param {DateObject} date Date
    * @param {boolean} isoWeek Use ISO week
    */
-  public startOfWeek(date?: DateObject, isoWeek = this.$.isoWeek): DateObject {
+  public startOfWeek(date?: DateObject, isoWeek: boolean = this.$.isoWeek): DateObject {
     return new DateObject(date.$.startOf(isoWeek ? 'isoWeek' : 'w'))
   }
 
@@ -111,7 +110,7 @@ export class DateUtils {
    * @param {DateObject} date Date
    * @param {boolean} isoWeek Use ISO week
    */
-  public endOfWeek(date?: DateObject, isoWeek = this.$.isoWeek): DateObject {
+  public endOfWeek(date?: DateObject, isoWeek: boolean = this.$.isoWeek): DateObject {
     return new DateObject(date.$.endOf(isoWeek ? 'isoWeek' : 'w'))
   }
 
@@ -137,11 +136,10 @@ export class DateUtils {
    * Get month name for the speicifed month index
    *
    * @param {number} monthIndex Month index
-   * @param {string} format Format
-   * @param {boolean} captialize Capitalize
+   * @param {string} template Template
    */
-  public getMonthName(monthIndex?: number): string {
-    return $dayjs().set('month', monthIndex).format(this.$.monthFormat)
+  public getMonthName(monthIndex?: number, template: string = this.$.monthFormat): string {
+    return $dayjs().set('month', monthIndex).format(template)
   }
 
   /**
@@ -149,17 +147,18 @@ export class DateUtils {
    *
    * @param {DateObject} start Start
    * @param {DateObject} end End
-   * @param {object} options Options
+   * @param {string} monthFormat Month format
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public getTimespanString(start: DateObject, end: DateObject): string {
+  public getTimespanString(start: DateObject, end: DateObject, monthFormat: string = this.$.monthFormat): string {
     const isSameMonth = start.isSameMonth(end)
     const isSameYear = start.isSameYear(end)
     const sFormat = ['DD']
-    if (!isSameMonth) sFormat.push(this.$.monthFormat)
+    if (!isSameMonth) sFormat.push(monthFormat)
     if (!isSameYear) sFormat.push('YYYY')
-    const eFormat = ['DD', this.$.monthFormat, 'YYYY']
-    return [start.format(sFormat.join(' ')), end.format(eFormat.join(' '))].join(' - ')
+    return [
+      start.format(sFormat.join(' ')),
+      end.format(`DD ${monthFormat} YYYY`)
+    ].join(' - ')
   }
 
   /**
@@ -190,7 +189,7 @@ export class DateUtils {
   /**
    * Get the month.
    *
-   * Months are zero indexed, so January is month 0.
+   * Months are zero indexed, so January is month 0 and December is 11 (obviously).
    *
    * @param {DateInput} date Optional date
    */
@@ -199,7 +198,7 @@ export class DateUtils {
   }
 
   /**
-   * Get year
+   * Get the year
    *
    * @param {DateInput} date Optional date
    */
@@ -212,7 +211,7 @@ export class DateUtils {
    *
    * @param {DateObject} date Optional date
    */
-  public isCurrentWeek(date?: DateObject): boolean {
+  public isCurrentWeek(date: DateObject): boolean {
     return date.$.week() === $dayjs().week()
   }
 }
