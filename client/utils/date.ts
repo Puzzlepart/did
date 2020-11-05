@@ -99,18 +99,20 @@ export class DateUtils {
    * Get start of week
    *
    * @param {DateObject} date Date
+   * @param {boolean} isoWeek Use ISO week
    */
-  public startOfWeek(date?: DateObject): DateObject {
-    return new DateObject(date.$.startOf(this.$.isoWeek ? 'isoWeek' : 'w'))
+  public startOfWeek(date?: DateObject, isoWeek = this.$.isoWeek): DateObject {
+    return new DateObject(date.$.startOf(isoWeek ? 'isoWeek' : 'w'))
   }
 
   /**
    * Get end of week
    *
    * @param {DateObject} date Date
+   * @param {boolean} isoWeek Use ISO week
    */
-  public endOfWeek(date?: DateObject): DateObject {
-    return new DateObject(date.$.endOf(this.$.isoWeek ? 'isoWeek' : 'w'))
+  public endOfWeek(date?: DateObject, isoWeek = this.$.isoWeek): DateObject {
+    return new DateObject(date.$.endOf(isoWeek ? 'isoWeek' : 'w'))
   }
 
   /**
