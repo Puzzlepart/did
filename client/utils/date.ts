@@ -4,11 +4,12 @@ import 'dayjs/locale/en-gb'
 import 'dayjs/locale/nb'
 import localeData from 'dayjs/plugin/localeData'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
+import duration from 'dayjs/plugin/duration'
 import { capitalize } from 'underscore.string'
 
 class DateUtils {
   /**
-   * Setup DateUtils class
+   * Setup DateUtils class using @dayjs with @plugins
    *
    * @param {string} locale Locale
    */
@@ -16,80 +17,52 @@ class DateUtils {
     dayjs.locale(locale)
     dayjs.extend(weekOfYear)
     dayjs.extend(localeData)
-  }
-
-  /**
-   * Converts date string to m2oment, adding timezone offset
-   *
-   * @param {string} date Date string
-   */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  toM0ment(date: string) {
-    return null
-    // TODO: Fix
-    // const m = m2oment(date)
-    // return m.add(m.toDate().getTimezoneOffset(), 'minutes')
+    dayjs.extend(duration)
   }
 
   /**
    * Get duration string
    *
-   * @param {number} durationHrs Duration in hours
+   * @param {number} hours Duration in hours
    * @param {TFunction} t Translate function
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getDurationString(durationHrs: number, t: TFunction): string {
-    // TODO: Fix
-    return null
-    // const hrsShortFormat = t('common.hoursShortFormat')
-    // const minShortFormat = t('common.minutesShortFormat')
-    // const hrs = Math.floor(durationHrs)
-    // const mins = parseInt(((durationHrs % 1) * 60).toFixed(0))
-    // const hrsStr = format(hrsShortFormat, hrs)
-    // const minStr = format(minShortFormat, mins)
-    // if (mins === 0) return hrsStr
-    // if (hrs === 0) return minStr
-    // return `${hrsStr} ${minStr}`
+  getDurationString(hours: number, t: TFunction): string {
+    const hrs = Math.floor(hours)
+    const mins = parseInt(((hours % 1) * 60).toFixed(0))
+    const hrsStr = t('common.hoursShortFormat', { hrs })
+    const minsStr = t('common.minutesShortFormat', { mins })
+    if (mins === 0) return hrsStr
+    if (hrs === 0) return minsStr
+    return [hrsStr, minsStr].join(' ')
   }
 
   /**
    * Format date with the specified date format
    *
-   * @param {string} date Date string
+   * @param {dayjs.ConfigType} date Date
    * @param {string} dateFormat Date format
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  formatDate(date: string, dateFormat: string): string {
-    // TODO: Fix
-    return null
-    // const m = m2oment.utc(date)
-    // return m.add(-m.toDate().getTimezoneOffset(), 'minutes').format(dateFormat)
+  formatDate(date: dayjs.ConfigType, dateFormat: string): string {
+    return dayjs(date).format(dateFormat)
   }
 
   /**
    * Get start of week
    *
-   * @param {unknown} date Date string
+   * @param {dayjs.ConfigType} date Date
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  startOfWeek(date?: unknown): unknown {
-    // TODO: fix
-    return null
-    // const m = m2oment.utc(date)
-    // return m.add(-m.toDate().getTimezoneOffset(), 'minutes').startOf('isoWeek')
+  startOfWeek(date?: dayjs.ConfigType): unknown {
+    return dayjs(date).startOf('week')
   }
 
   /**
    * Get end of week
    *
-   * @param {string | Date} date Date string
+   * @param {dayjs.ConfigType} date Date
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  endOfWeek(date?: unknown): unknown {
-    // TODO: fix
-    return null
-    // const m = m2oment.utc(date)
-    // return m.add(-m.toDate().getTimezoneOffset(), 'minutes').endOf('isoWeek')
+  endOfWeek(date?: dayjs.ConfigType): dayjs.Dayjs {
+    return dayjs(date).endOf('week')
   }
 
   /**
@@ -99,7 +72,7 @@ class DateUtils {
    * @param {dayjs.ConfigType} end End
    * @param {string} format Date format
    */
-  getDays(start: dayjs.ConfigType, end: dayjs.ConfigType, format = 'dddd DD'): string[] {
+  getDays(start: dayjs.ConfigType, end: dayjs.ConfigType, format: string = 'dddd DD'): string[] {
     const days = []
     let s = dayjs(start)
     const e = dayjs(end)
