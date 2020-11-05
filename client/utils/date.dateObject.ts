@@ -2,10 +2,10 @@ import dayjs from 'dayjs'
 import { DateUtils, DateInput } from './date'
 
 export class DateObject {
-    public _: dayjs.Dayjs;
+    private _: dayjs.Dayjs;
     public jsDate: Date
     public endOfWeek: DateInput
-  public isCurrentWeek: boolean;
+    public isCurrentWeek: boolean;
 
     constructor(date: DateInput, dateUtils: DateUtils) {
         this._ = dayjs(date)

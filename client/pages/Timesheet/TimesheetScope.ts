@@ -73,6 +73,6 @@ export class TimesheetScope {
    * Used in WeekPicker
    */
   public get timespan(): string {
-    return dateUtils.getTimespanString(this.startDateTime._, this.endDateTime._)
+    return dateUtils.getTimespanString(this.startDateTime, this.endDateTime)
   }
 }

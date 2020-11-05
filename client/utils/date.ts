@@ -9,7 +9,6 @@ import { TFunction } from 'i18next'
 import { capitalize } from 'underscore.string'
 import { DateObject } from './date.dateObject'
 
-
 export type DateInput = dayjs.ConfigType
 export class DateUtils {
   /**
@@ -143,12 +142,12 @@ export class DateUtils {
   /**
    * Get timespan string
    *
-   * @param {DateInput} start Start
-   * @param {DateInput} end End
+   * @param {DateObject} start Start
+   * @param {DateObject} end End
    * @param {object} options Options
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getTimespanString(start: DateInput, end: DateInput): string {
+  getTimespanString(start: DateObject, end: DateObject): string {
     return 'WORK_IN_PROGRESS'
   }
 
