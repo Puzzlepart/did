@@ -19,8 +19,6 @@ import styles from './EventList.module.scss'
  * @param {string} fieldName Column field name
  * @param {number} defMinWidth Default min width
  * @param {number} defMaxWidth Default max width
- * 
- * @ignore
  */
 function getSizing(props: IEventListProps, fieldName: string, defMinWidth: number, defMaxWidth: number): { minWidth: number; maxWidth: number } {
     return {
@@ -34,10 +32,8 @@ function getSizing(props: IEventListProps, fieldName: string, defMinWidth: numbe
  * @param {IEventListProps} props Props
  * @param {string} name Name
  * @param {string} fieldName Field name
- * 
- * @ignore
  */
-export const titleColumn = (props: IEventListProps, name: string, fieldName = 'title'): IColumn => col(
+export const titleColumn = (props: IEventListProps, name: string, fieldName: string = 'title'): IColumn => col(
     fieldName,
     name,
     { ...getSizing(props, fieldName, 320, 400), isMultiline: true },
@@ -66,10 +62,8 @@ export const titleColumn = (props: IEventListProps, name: string, fieldName = 't
  * @param {IEventListProps} props Props
  * @param {string} name Name
  * @param {string} fieldName Field name
- * 
- * @ignore
  */
-export const timeColumn = (props: IEventListProps, name: string, fieldName = 'time'): IColumn => col(
+export const timeColumn = (props: IEventListProps, name: string, fieldName: string = 'time'): IColumn => col(
     fieldName,
     name,
     { ...getSizing(props, fieldName, 90, 90) },
@@ -98,10 +92,8 @@ export const timeColumn = (props: IEventListProps, name: string, fieldName = 'ti
  * @param {IEventListProps} props Props
  * @param {string} name Name
  * @param {string} fieldName Field name
- * 
- * @ignore
  */
-export const durationColumn = (props: IEventListProps, name: string, fieldName = 'duration'): IColumn => col(
+export const durationColumn = (props: IEventListProps, name: string, fieldName: string = 'duration'): IColumn => col(
     fieldName,
     name,
     { ...getSizing(props, fieldName, 75, 75) },
