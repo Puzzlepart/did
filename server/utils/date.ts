@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import stringStripHtml from 'string-strip-html'
-import dt, { ConfigType } from 'dayjs'
+import $dayjs, { ConfigType } from 'dayjs'
 import 'dayjs/locale/en-gb'
 import 'dayjs/locale/nb'
 
@@ -134,7 +134,7 @@ export const endOfWeek = (week: any) => {
  */
 export const formatDate = (date: ConfigType, template: string, locale: string) => {
   // TODO return correct date format as string
-  return dt(date).locale(locale).format(template)
+  return $dayjs(date).locale(locale).format(template)
 }
 
 /**

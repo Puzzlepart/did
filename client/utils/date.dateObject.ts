@@ -1,11 +1,11 @@
-import dt, { Dayjs } from 'dayjs'
+import $dayjs, { Dayjs } from 'dayjs'
 import { DateUtils, DateInput } from './date'
 
 export class DateObject {
   public $: Dayjs
 
   constructor(date: DateInput, private _dateUtils: DateUtils) {
-    this.$ = dt(date)
+    this.$ = $dayjs(date)
   }
 
   /**
