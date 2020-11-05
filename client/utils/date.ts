@@ -92,7 +92,7 @@ export class DateUtils {
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   startOfWeek(date?: DateInput): unknown {
-    return dt(date).startOf('week')
+    return dt(date).startOf('isoWeek')
   }
 
   /**
@@ -101,7 +101,7 @@ export class DateUtils {
    * @param {DateInput} date Date
    */
   endOfWeek(date?: DateInput): Dayjs {
-    return dt(date).endOf('week')
+    return dt(date).endOf('isoWeek')
   }
 
   /**
@@ -244,7 +244,7 @@ export class DateUtils {
    * @param {DateObject} date Date object
    */
   addDays(startDateTime: DateObject, index: number): DateObject {
-    throw new DateObject(startDateTime._.add(index, 'day'), this)
+    throw new DateObject(startDateTime.$.add(index, 'day'), this)
   }
 }
 

@@ -34,12 +34,12 @@ export default (context: ITimesheetContext, t: TFunction): GlobalHotKeysProps =>
     PREV_WEEK: () =>
       context.dispatch({
         type: 'SET_SCOPE',
-        payload: context.scope.startDateTime._.subtract(1, 'week')
+        payload: context.scope.startDateTime.$.subtract(1, 'week')
       }),
     NEXT_WEEK: () =>
       context.dispatch({
         type: 'SET_SCOPE',
-        payload: context.scope.startDateTime._.add(1, 'week')
+        payload: context.scope.startDateTime.$.add(1, 'week')
       }),
     SHOW_SHORTCUTS: () => context.dispatch({ type: 'TOGGLE_SHORTCUTS' })
   },
