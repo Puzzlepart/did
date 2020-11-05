@@ -17,13 +17,13 @@ export class TimesheetScope {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   constructor(value?: ITimesheetParams | string) {
     // TODO: Rewrite to use dateUtils
-    // let start = moment()
+    // let start = m2oment()
     // if (value) {
     //   if (typeof value === 'string') {
     //     const startIsValid = !isNaN(Date.parse(value))
-    //     if (startIsValid) start = moment(value)
+    //     if (startIsValid) start = m2oment(value)
     //   } else {
-    //     start = moment().year(parseInt(value.year)).week(parseInt(value.week)).startOf('isoWeek')
+    //     start = m2oment().year(parseInt(value.year)).week(parseInt(value.week)).startOf('isoWeek')
     //   }
     // }
     // this._set(start)
@@ -87,7 +87,7 @@ export class TimesheetScope {
   public getDay(index: number): any {
     // TODO: rewrite to use date util
     return null
-    // return this._startDateTime.clone().add(index, 'days' as moment.DurationInputArg2)
+    // return this._startDateTime.clone().add(index, 'days' as m2oment.DurationInputArg2)
   }
 
   public get isCurrentWeek(): boolean {
@@ -95,6 +95,11 @@ export class TimesheetScope {
     return false
   }
 
+  /**
+   * Get timespan string for the scope
+   * 
+   * Used in WeekPicker
+   */
   public get timespan(): string {
     // TODO: rewrite to use date util
     return null

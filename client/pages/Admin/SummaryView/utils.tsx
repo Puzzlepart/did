@@ -117,7 +117,7 @@ export function createPeriods(range: number = 0): IPivotItemProps[] {
     return []
     // const periods = []
     // for (let i = range; i >= 0; i--) {
-    //     const key = (moment().year() - i).toString()
+    //     const key = (m2oment().year() - i).toString()
     //     periods.push({
     //         key,
     //         itemKey: key,
