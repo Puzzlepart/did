@@ -46,7 +46,7 @@ export const reducer = (state: ISummaryViewState, action: SummaryViewAction): IS
       throw new Error()
   }
   // TODO: Use date util
-  // if (newState.year !== moment().year()) newState.endMonthIndex = 12
+  // if (newState.year !== m2oment().year()) newState.endMonthIndex = 12
   newState.endMonthIndex = dateUtils.getMonthIndex()
   return newState
 }
