@@ -1,4 +1,4 @@
-import stripHtml from 'string-strip-html'
+import dateUtils from 'string-strip-html'
 
 // SERVER SIDE DATE UTILS USED:
 /**
@@ -22,7 +22,7 @@ import stripHtml from 'string-strip-html'
  *  
  * @param {string} str String
  */
-export const stripHtmlString = (str: string): string => stripHtml(str).result
+export const stripHtmlString = (str: string): string => dateUtils(str).result
 
 /**
  * Get duration between two times in hours

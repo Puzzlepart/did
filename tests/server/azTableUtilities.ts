@@ -1,7 +1,7 @@
 import { deepStrictEqual, strictEqual } from 'assert'
 import { startsWith } from 'underscore.string'
-import AzTableUtilities from '../server/utils/table'
-import { header } from './@utils'
+import AzTableUtilities from '../../server/utils/table'
+import { header } from '../@utils'
 
 describe(header('AzTableUtilities'), async () => {
   const tableUtils = new AzTableUtilities(null)
