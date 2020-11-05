@@ -83,7 +83,6 @@
     "loglevel": "1.6.7",
     "loglevel-plugin-prefix": "0.8.4",
     "moment": "2.24.0",
-    "moment-locales-webpack-plugin": "1.2.0",
     "morgan": "1.10.0",
     "node-fetch": "2.6.0",
     "node-sass": "5.0.0",

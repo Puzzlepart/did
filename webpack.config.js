@@ -3,7 +3,6 @@ const tryRequire = require('try-require')
 const path = require('path')
 const src = path.resolve(__dirname, 'client/')
 const pkg = require('./package.json')
-const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
