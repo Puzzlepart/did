@@ -1,5 +1,5 @@
-import date from 'utils/date'
-import dateUtils, { DateObject } from 'utils/date'
+import dateUtils from 'utils/date'
+import { DateObject } from 'utils/date.dateObject'
 
 /**
  * Handles a scope, the period of time between a startDateTime and endDateTime
@@ -12,7 +12,7 @@ export class TimesheetScope {
     public endDateTime?: DateObject
   ) {
     this.startDateTime = dateUtils.createDate('2020-11-02')
-    this.endDateTime = dateUtils.createDate('2020-11-08')
+    this.endDateTime = dateUtils.createDate(this.startDateTime.endOfWeek)
   }
 
   /**
@@ -20,8 +20,8 @@ export class TimesheetScope {
    */
   public get dateStrings(): { startDateTime: string; endDateTime: string } {
     return {
-      startDateTime: this.startDateTime.toISOString(),
-      endDateTime: this.endDateTime.toISOString()
+      startDateTime: this.startDateTime.toString(),
+      endDateTime: this.endDateTime.toString()
     }
   }
 
@@ -64,7 +64,7 @@ export class TimesheetScope {
    * Is the scope the current week
    */
   public get isCurrentWeek(): boolean {
-    return dateUtils.isCurrentWeek(this.startDateTime)
+    return this.startDateTime.isCurrentWeek
   }
 
   /**
@@ -73,6 +73,6 @@ export class TimesheetScope {
    * Used in WeekPicker
    */
   public get timespan(): string {
-    return dateUtils.getTimespanString(this.startDateTime as any, this.endDateTime as any)
+    return dateUtils.getTimespanString(this.startDateTime._, this.endDateTime._)
   }
 }
