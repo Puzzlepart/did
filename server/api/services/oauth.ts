@@ -16,7 +16,7 @@ export interface AccessTokenOptions {
 
 @Service({ global: false })
 class OAuthService {
-  constructor(@Inject('REQUEST') private readonly _request: any) { }
+  constructor(@Inject('REQUEST') private readonly _request: Express.Request) { }
 
   /**
    * Get client
@@ -45,21 +45,21 @@ class OAuthService {
    * @param {AccessTokenOptions} options Options
    */
   public async getAccessToken(options: AccessTokenOptions): Promise<Token> {
-    let accessToken = this._getClient(options).createToken(this._request.user.oauthToken)
+    let accessToken = this._getClient(options).createToken(this._request.user.tokenParams)
     try {
       if (accessToken.expired() || options.force) {
         debug(`Token expired. Attempting to refresh... Options: ${JSON.stringify(options)}`)
         accessToken = await accessToken.refresh(pick(accessToken.token, 'scope'))
-        debug(`Successfully refreshed token expiring at ${accessToken.token.expires_at}.`)
+        debug(`Successfully refreshed token expiring ${accessToken.token.expires_at}.`)
       } else {
-        debug(`Token expiring at ${accessToken.token.expires_at}.`)
+        debug(`Token expiring ${accessToken.token.expires_at}.`)
       }
     } catch (err) {
       debug(`Failed to refresh token using options ${JSON.stringify(options)}: ${err.message}`)
       throw new Error(`Failed to refresh token using options ${JSON.stringify(options)}: ${err.message}`)
     }
     // Store access token on Express request
-    this._request.user.oauthToken = accessToken.token
+    this._request.user.tokenParams = accessToken.token
     return accessToken.token
   }
 }

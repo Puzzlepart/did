@@ -14,7 +14,6 @@ import styles from './ApiTokens.module.scss'
 import DELETE_API_TOKEN from './DELETE_API_TOKEN'
 import GET_API_TOKENS from './GET_API_TOKENS'
 
-
 export const ApiTokens = () => {
     const { t } = useTranslation()
     const [key, setKey] = useState(null)
@@ -65,6 +64,7 @@ export const ApiTokens = () => {
         setKey(null)
         refetch()
     }
+    
 
     return (
         <div className={styles.root}>
@@ -99,11 +99,11 @@ export const ApiTokens = () => {
                         maxWidth: 250,
                     },
                     {
-                        key: 'timestamp',
-                        fieldName: 'timestamp',
+                        key: 'created',
+                        fieldName: 'created',
                         name: t('common.createdLabel'),
                         minWidth: 100,
-                        onRender: (item) => dateUtils.formatDate(item.timestamp, 'LLL')
+                        onRender: (item) => dateUtils.formatDate(item.created, 'LLL')
                     },
                     {
                         key: 'actions',

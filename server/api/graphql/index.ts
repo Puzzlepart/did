@@ -42,7 +42,8 @@ const getSchema = async () => {
     container: ({ context }: ResolverData<Context>) => context.container,
     emitSchemaFile: true,
     validate: false,
-    authChecker
+    authChecker,
+    dateScalarMode: 'isoDate'
   })
   return schema
 }
@@ -53,7 +54,7 @@ export default async (app: express.Application): Promise<void> => {
     const server = new ApolloServer({
       schema,
       rootValue: global,
-      context: ({ req }) => createContext(req),
+      context: ({ req: request }) => createContext(request),
       engine: {
         reportSchema: true,
         graphVariant: 'current',

@@ -95,8 +95,11 @@ class SubscriptionService {
   async getApiTokens(subscriptionId: string) {
     try {
       const query = this.tableUtil.createAzQuery(100).where('PartitionKey eq ?', subscriptionId)
-      const result = await this.tableUtil.queryAzTable('ApiTokens', query, { RowKey: 'name' })
-      return result.entries
+      const { entries } = await this.tableUtil.queryAzTable('ApiTokens', query, {
+        RowKey: 'name',
+        Timestamp: 'created'
+      })
+      return entries
     } catch (error) {
       return null
     }

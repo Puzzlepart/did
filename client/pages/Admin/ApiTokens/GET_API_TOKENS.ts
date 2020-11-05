@@ -4,7 +4,7 @@ export default gql`
   query {
     tokens: apiTokens {
       name
-      timestamp
+      created
     }
   }
 `
