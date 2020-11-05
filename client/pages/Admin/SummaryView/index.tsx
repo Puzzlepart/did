@@ -15,7 +15,6 @@ import TIME_ENTRIES from './TIME_ENTRIES'
 import { getScopes, getViewTypes, ISummaryViewProps, ISummaryViewScope } from './types'
 import { ISummaryViewContext } from './context'
 
-
 export const SummaryView = (props: ISummaryViewProps): JSX.Element => {
     const { t } = useTranslation()
     const types = getViewTypes(t)

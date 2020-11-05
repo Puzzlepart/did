@@ -13,7 +13,7 @@ class DateUtils {
    *
    * @param {string} locale Locale
    */
-  public setup(locale: 'en-gb' | 'nb') {
+  public setup(locale: string) {
     dayjs.locale(locale)
     dayjs.extend(weekOfYear)
     dayjs.extend(localeData)
@@ -119,39 +119,24 @@ class DateUtils {
   /**
    * Get month name for the speicifed month index
    *
-   * Under 0: Subtracts {monthIndex} months from current month
-   *
-   * 0: Returns current month name
-   *
-   * Over 0: Returns the actual month with the speified index
-   *
-   *
-   * @param {number} monthIndex Month number
+   * @param {number} monthIndex Month index
    * @param {string} format Format
    * @param {boolean} captialize Capitalize
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getMonthName(monthIndex?: number, format = 'MMMM', captialize = false): string {
-    // TODO: fix
-    return null
-    // const date = m2oment().locale(this.m0mentLocale)
-    // let name: string
-    // if (monthIndex < 0) name = date.add(monthIndex, 'month').format(format)
-    // else if (monthIndex === 0) name = date.format(format)
-    // else name = date.month(monthIndex).format(format)
-    // return captialize ? capitalize(name) : name
+  getMonthName(monthIndex?: number): string {
+    return dayjs().set('month', monthIndex).format('MMMM')
   }
 
   /**
    * Get timespan string
    *
-   * @param {unknown} start Start
-   * @param {unknown} end End
+   * @param {dayjs.ConfigType} start Start
+   * @param {dayjs.ConfigType} end End
    * @param {object} options Options
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getTimespanString(start: unknown, end: unknown, options: Record<string, any> = { monthFormat: 'MMMM', yearFormat: 'YYYY', hideYear: false, }): string {
-    // TODO: fix
+  getTimespanString(start: dayjs.ConfigType, end: dayjs.ConfigType): string {
+    // eslint-disable-next-line no-console
+    console.log(start, end)
     return null
   }
 
