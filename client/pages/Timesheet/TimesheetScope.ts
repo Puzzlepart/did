@@ -1,4 +1,4 @@
-import dateUtils from 'utils/date'
+import dateUtils, { DateInput } from 'utils/date'
 import { DateObject } from 'utils/date.dateObject'
 
 /**
@@ -18,34 +18,21 @@ export class TimesheetScope {
   /**
   * Get the from and to date for the scope as ISO strings
    */
-  public get dateStrings(): { startDateTime: string; endDateTime: string } {
+  public get iso() {
     return {
-      startDateTime: this.startDateTime.toString(),
-      endDateTime: this.endDateTime.toString()
+      startDateTime: this.startDateTime.iso,
+      endDateTime: this.endDateTime.iso
     }
   }
 
   /**
    * Sets the scope
-   */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private _set(start: unknown) {
-    // this._startDateTime = dateUtils.startOfWeek(start)
-    // this._endDateTime = dateUtils.endOfWeek(start)
-  }
-
-  /**
-   * Add a unit of time to the scope
    * 
-    // TODO: rewrite to use date util
+   * @param {DateInput} start Start of scope
    */
-  public add(): unknown {
-    return null
-    // const start = this._startDateTime.clone()
-    // start.add(options.amount, options.unit)
-    // const n = new TimesheetScope()
-    // n._set(start)
-    // return n
+  public set(start: DateInput) {
+    this.startDateTime = dateUtils.createDate(start)
+    this.endDateTime = dateUtils.createDate(this.startDateTime.endOfWeek)
   }
 
   /**
@@ -53,11 +40,8 @@ export class TimesheetScope {
    *
    * @param {number} index Index
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public getDay(index: number): any {
-    // TODO: rewrite to use date util
-    return null
-    // return this._startDateTime.clone().add(index, 'days' as m2oment.DurationInputArg2)
+  public getDay(index: number): DateObject {
+    return dateUtils.addDays(this.startDateTime, index)
   }
 
   /**

@@ -49,7 +49,7 @@ export const WeekPicker = () => {
                     <FocusTrapZone isClickableOutsideFocusTrap={true}>
                         <Calendar
                             onSelectDate={date => {
-                                dispatch({ type: 'MOVE_SCOPE', payload: date.toISOString() })
+                                dispatch({ type: 'SET_SCOPE', payload: date.toISOString() })
                                 setCalendar(null)
                             }}
                             firstDayOfWeek={DayOfWeek.Monday}

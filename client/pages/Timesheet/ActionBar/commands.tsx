@@ -27,7 +27,7 @@ export const GO_TO_CURRENT_WEEK_COMMAND = ({ scope, dispatch, t }: ITimesheetCon
     key: 'GO_TO_CURRENT_WEEK_COMMAND',
     iconOnly: true,
     iconProps: { iconName: 'RenewalCurrent', ...ACTIONBAR_ICON_PROPS },
-    onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: new Date().toISOString() }),
+    onClick: () => dispatch({ type: 'SET_SCOPE', payload: new Date().toISOString() }),
     disabled: scope.isCurrentWeek,
     title: t('timesheet.goToCurrentWeek'),
 })
@@ -36,7 +36,7 @@ export const GO_TO_PREV_WEEK_COMMAND = ({ dispatch, t }: ITimesheetContext): ICo
     key: 'GO_TO_PREV_WEEK_COMMAND',
     iconOnly: true,
     iconProps: { iconName: 'Back', ...ACTIONBAR_ICON_PROPS },
-    onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: { amount: -1, unit: 'week' } }),
+    onClick: () => dispatch({ type: 'SET_SCOPE', payload: { amount: -1, unit: 'week' } }),
     title: t('timesheet.goToPrevWeek')
 })
 
@@ -44,7 +44,7 @@ export const GO_TO_NEXT_WEEK_COMMAND = ({ dispatch, t }: ITimesheetContext): ICo
     key: 'GO_TO_NEXT_WEEK_COMMAND',
     iconOnly: true,
     iconProps: { iconName: 'Forward', ...ACTIONBAR_ICON_PROPS },
-    onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: { amount: 1, unit: 'week' } }),
+    onClick: () => dispatch({ type: 'SET_SCOPE', payload: { amount: 1, unit: 'week' } }),
     title: t('timesheet.goToNextWeek'),
 })
 

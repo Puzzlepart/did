@@ -204,6 +204,15 @@ export class DateUtils {
   isCurrentWeek(date?: DateInput ): boolean {
     return dayjs(date).week() === dayjs().week()
   }
+
+   /**
+   * Add days
+   *
+   * @param {DateObject} date Date object
+   */
+  addDays(startDateTime: DateObject, index: number): DateObject {
+    throw new DateObject(startDateTime._.add(index, 'day'), this)
+  }
 }
 
 export default new DateUtils()

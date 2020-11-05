@@ -13,7 +13,7 @@ export type TimesheetAction =
         t: TFunction
       }
     }
-  | { type: 'MOVE_SCOPE'; payload: unknown | string }
+  | { type: 'SET_SCOPE'; payload: unknown | string }
   | { type: 'SUBMITTING_PERIOD'; payload: { t: TFunction; forecast: boolean } }
   | { type: 'UNSUBMITTING_PERIOD'; payload: { t: TFunction; forecast: boolean } }
   | { type: 'CHANGE_PERIOD'; payload: string }
@@ -72,7 +72,7 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
           : t('timesheet.unconfirmingPeriodDescription')
       }
       break
-    case 'MOVE_SCOPE':
+    case 'SET_SCOPE':
       // TODO: Implement using new date utils class
       // if (typeof action.payload === 'string') newState.scope = new TimesheetScope(action.payload)
       // else newState.scope = state.scope.add(action.payload)
