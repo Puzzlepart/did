@@ -24,7 +24,7 @@ export class TimesheetResolver {
    * @param {AzStorageService} _azstorage AzStorageService
    * @param {MSGraphService} _msgraph MSGraphService
    */
-  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) { }
+  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) {}
   /**
    * Get timesheet
    *
@@ -45,17 +45,16 @@ export class TimesheetResolver {
           month: 0,
           events: [
             {
-              'id': 'AQMkADNiMGIwZGFjLTA4NTEtNDM3MS04NjA2LTk4ZjJiMWQyYmFjYgBGAAAD97Nxo5AsdUeulbnmMHE0CAcAO0Mf2nkRBkq7ID7HL8mlEgAAAw8AAAA7Qx-aeREGSrsgPscvyaUSAAbmQLISAAAA',
-              'categories': [
-                'PMI DID365'
-              ],
-              'title': 'Datohåndtering i Did',
-              'body': '',
-              'startDateTime': '2020-05-16T15:00:00.0000000',
-              'endDateTime':  '2020-05-16T19:30:00.0000000',
-              'duration': 3,
+              id:
+                'AQMkADNiMGIwZGFjLTA4NTEtNDM3MS04NjA2LTk4ZjJiMWQyYmFjYgBGAAAD97Nxo5AsdUeulbnmMHE0CAcAO0Mf2nkRBkq7ID7HL8mlEgAAAw8AAAA7Qx-aeREGSrsgPscvyaUSAAbmQLISAAAA',
+              categories: ['PMI DID365'],
+              title: 'Datohåndtering i Did',
+              body: '',
+              startDateTime: '2020-05-16T15:00:00.0000000',
+              endDateTime: '2020-05-16T19:30:00.0000000',
+              duration: 3,
               date: formatDate('2020-05-16T15:00:00.0000000', options.dateFormat, options.locale)
-            },
+            }
           ],
           isConfirmed: false,
           isForecasted: false,

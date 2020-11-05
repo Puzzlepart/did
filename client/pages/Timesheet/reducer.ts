@@ -10,7 +10,7 @@ export type TimesheetAction =
   | {
       type: 'DATA_UPDATED'
       payload: {
-        query: QueryResult<{timesheet: TimesheetPeriodObject[]}>
+        query: QueryResult<{ timesheet: TimesheetPeriodObject[] }>
         t: TFunction
       }
     }
@@ -33,7 +33,7 @@ export type TimesheetAction =
  */
 export default (state: ITimesheetState, action: TimesheetAction): ITimesheetState => {
   const t = getValue<TFunction>(action, 'payload.t')
-  const newState:ITimesheetState = { ...state }
+  const newState: ITimesheetState = { ...state }
   switch (action.type) {
     case 'DATA_UPDATED':
       {
@@ -45,9 +45,9 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
             }
           : null
         if (data) {
-          newState.periods = data.timesheet.map((period) => new TimesheetPeriod().setup(period))
+          newState.periods = data.timesheet.map((period) => new TimesheetPeriod().initialize(period))
           newState.selectedPeriod =
-             find(newState.periods, (p) => p.id === getValue(state, 'selectedPeriod.id', null)) ||
+            find(newState.periods, (p) => p.id === getValue(state, 'selectedPeriod.id', null)) ||
             first(newState.periods)
         }
         newState.error = error

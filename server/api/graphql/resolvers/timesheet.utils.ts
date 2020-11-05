@@ -26,7 +26,7 @@ export function getPeriods(startDateTime: string, endDateTime: string, locale: s
       endDateTime: isSplit ? utils.endOfMonth(startDateTime) : endDateTime,
       isForecast: utils.isAfterToday(startDateTime),
       isConfirmed: false,
-      isForecasted: false,
+      isForecasted: false
     }
   ]
 
@@ -40,7 +40,7 @@ export function getPeriods(startDateTime: string, endDateTime: string, locale: s
       endDateTime,
       isForecast: utils.isAfterToday(startDateTime),
       isConfirmed: false,
-      isForecasted: false,
+      isForecasted: false
     })
   }
 

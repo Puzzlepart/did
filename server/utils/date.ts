@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import stringStripHtml from 'string-strip-html'
-import dayjs, {ConfigType} from 'dayjs'
+import dayjs, { ConfigType } from 'dayjs'
 import 'dayjs/locale/en-gb'
 import 'dayjs/locale/nb'
 
@@ -125,7 +125,7 @@ export const endOfWeek = (week: any) => {
 
 /**
  * Get the formatted date according to the string of tokens passed in.
- * 
+ *
  * To escape characters, wrap them in square brackets (e.g. [MM]).
  *
  * @param {ConfigType} date Date

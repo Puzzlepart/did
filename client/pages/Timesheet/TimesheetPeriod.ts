@@ -6,18 +6,10 @@ import { filter, omit } from 'underscore'
 import { isBlank } from 'underscore.string'
 import { ITimesheetParams } from './types'
 
-/**
- * Timesheet period. Divided by week, month and year.
- *
- * E.g. a week which spans both February and March will generate two periods:
- *
- * * w_2_y
- * * w_3_y
- *
- * Where x is the week number and y is the year
- */
 export class TimesheetPeriod {
   public id: string
+  private readonly startDateTime: string
+  private readonly endDateTime: string
   public readonly week: number
   public readonly isConfirmed?: boolean
   public readonly isForecasted: boolean
@@ -33,14 +25,14 @@ export class TimesheetPeriod {
   private _storageDefaultExpire: Date
 
   /**
-   * Sets up a new period instance
-   * 
+   * Initializes up a new period instance
+   *
    * @param {TimesheetPeriodObject} period Period
    */
-  setup(period?: TimesheetPeriodObject) {
+  initialize(period: TimesheetPeriodObject) {
     Object.assign(this, period)
-    this._uiMatchedEventsStorageKey = `did365_ui_matched_events_${this.id}`
-    this._uiIgnoredEventsStorageKey = `did365_ui_ignored_events_${this.id}`
+    this._uiMatchedEventsStorageKey = `did_ui_matched_events_${this.id}`
+    this._uiIgnoredEventsStorageKey = `did_ui_ignored_events_${this.id}`
     this._uiMatchedEvents = this._localStorage.get(this._uiMatchedEventsStorageKey) || {}
     this._storageDefaultExpire = dateAdd(new Date(), 'month', 2)
     return this
@@ -48,17 +40,11 @@ export class TimesheetPeriod {
 
   /**
    * Create a new period instance from params
-   * 
+   *
    * @param {ITimesheetParams} params Params
    */
   fromParams(params: ITimesheetParams): TimesheetPeriod {
-    this.id = params.week
-      ? [
-        params.week,
-        params.month,
-        params.year
-      ].filter((p) => p).join('_')
-      : '19_5_2020'
+    this.id = params.week ? [params.week, params.month, params.year].filter((p) => p).join('_') : '19_5_2020'
     return this
   }
 
@@ -180,11 +166,6 @@ export class TimesheetPeriod {
 
   /**
    * Get matched events with properties
-   *
-   * @returns
-   * * {string} id
-   * * {string} projectId
-   * * {boolean} manualMatch
    */
   private get matchedEvents(): EventInput[] {
     const events = filter([...this.getEvents()], (event) => !!event.project).map(
@@ -204,16 +185,13 @@ export class TimesheetPeriod {
    * @returns {TimesheetPeriodInput} Data for the period
    */
   public get data(): TimesheetPeriodInput {
-    // TODO: Rewrite
-    return null
-    // if (!this.isLoaded) return null
-    // return {
-    //   id: this.id,
-    //   startDateTime: this._startDateTime.toISOString(),
-    //   endDateTime: this._endDateTime.toISOString(),
-    //   matchedEvents: this.matchedEvents,
-    //   forecastedHours: this.forecastedHours
-    // }
+    return {
+      id: this.id,
+      startDateTime: this.startDateTime,
+      endDateTime: this.endDateTime,
+      forecastedHours: this.forecastedHours,
+      matchedEvents: this.matchedEvents
+    }
   }
 
   /**

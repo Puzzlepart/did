@@ -27,7 +27,7 @@ export class DateUtils {
 
   /**
    * Create date
-   * 
+   *
    * @param {DateInput} date Date
    */
   public createDate(date: DateInput): DateObject {
@@ -208,10 +208,10 @@ export class DateUtils {
   }
 
   /**
-  * Add days
-  *
-  * @param {DateObject} date Date object
-  */
+   * Add days
+   *
+   * @param {DateObject} date Date object
+   */
   addDays(startDateTime: DateObject, index: number): DateObject {
     throw new DateObject(startDateTime._.add(index, 'day'), this)
   }

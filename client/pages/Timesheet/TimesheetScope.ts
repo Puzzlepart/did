@@ -8,10 +8,7 @@ import { ITimesheetParams } from './types'
  * @category Timesheet
  */
 export class TimesheetScope {
-  constructor(
-    public startDateTime?: DateObject,
-    public endDateTime?: DateObject
-  ) {
+  constructor(public startDateTime?: DateObject, public endDateTime?: DateObject) {
     this.startDateTime = dateUtils.createDate('2020-05-11')
     this.endDateTime = dateUtils.createDate(this.startDateTime.endOfWeek)
   }
@@ -25,7 +22,7 @@ export class TimesheetScope {
   }
 
   /**
-  * Get the from and to date for the scope as ISO strings
+   * Get the from and to date for the scope as ISO strings
    */
   public get iso() {
     return {
@@ -36,7 +33,7 @@ export class TimesheetScope {
 
   /**
    * Sets the scope
-   * 
+   *
    * @param {DateInput} start Start of scope
    */
   public set(start: DateInput): TimesheetScope {
