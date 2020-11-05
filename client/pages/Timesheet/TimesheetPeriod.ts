@@ -17,38 +17,48 @@ import { ITimesheetParams } from './types'
  * Where x is the week number and y is the year
  */
 export class TimesheetPeriod {
-  private _period?: TimesheetPeriodObject
   public id: string
-  public week: number
-  public isConfirmed?: boolean
-  public isForecasted: boolean
-  public isForecast: boolean
-  public forecastedHours: number
+  public readonly week: number
+  public readonly isConfirmed?: boolean
+  public readonly isForecasted: boolean
+  public readonly isForecast: boolean
+  public readonly forecastedHours: number
+  private readonly month: string
+  private events: EventObject[] = []
   private _uiIgnoredEvents: string[] = []
   private _uiMatchedEvents: ITypedHash<any> = {}
-  private _month?: string
   private _localStorage: IPnPClientStore = new PnPClientStorage().local
   private _uiMatchedEventsStorageKey: string
   private _uiIgnoredEventsStorageKey: string
-
-  /**
-   * Default expire for storage
-   */
   private _storageDefaultExpire: Date
 
+  /**
+   * Sets up a new period instance
+   * 
+   * @param {TimesheetPeriodObject} period Period
+   */
   setup(period?: TimesheetPeriodObject) {
     Object.assign(this, period)
     this._uiMatchedEventsStorageKey = `did365_ui_matched_events_${this.id}`
     this._uiIgnoredEventsStorageKey = `did365_ui_ignored_events_${this.id}`
     this._uiMatchedEvents = this._localStorage.get(this._uiMatchedEventsStorageKey) || {}
     this._storageDefaultExpire = dateAdd(new Date(), 'month', 2)
-    // eslint-disable-next-line no-console
-    console.log(this)
     return this
   }
 
+  /**
+   * Create a new period instance from params
+   * 
+   * @param {ITimesheetParams} params Params
+   */
   fromParams(params: ITimesheetParams): TimesheetPeriod {
-    this.id = params.week ? [params.week, params.month, params.year].filter((p) => p).join('_') : '19_5_2020'
+    this.id = params.week
+      ? [
+        params.week,
+        params.month,
+        params.year
+      ].filter((p) => p).join('_')
+      : '19_5_2020'
     return this
   }
 
@@ -58,9 +68,9 @@ export class TimesheetPeriod {
    * @param {boolean} includeMonth Include month
    * @param {TFunction} t Translate function
    */
-  public getName(includeMonth: boolean, t: TFunction) {
+  public getName(t: TFunction, includeMonth?: boolean) {
     let name = `${t('common.weekLabel')} ${this.week}`
-    if (includeMonth) name += ` (${this._month})`
+    if (includeMonth) name += ` (${this.month})`
     return name
   }
 
@@ -87,12 +97,9 @@ export class TimesheetPeriod {
    * Get events
    */
   public getEvents(): EventObject[] {
-    if (this._period) {
-      return [...this._period.events]
-        .filter((event) => !event.isSystemIgnored && this._uiIgnoredEvents.indexOf(event.id) === -1)
-        .map((event) => this._checkManualMatch(event))
-    }
-    return []
+    return [...this.events]
+      .filter((event) => !event.isSystemIgnored && this._uiIgnoredEvents.indexOf(event.id) === -1)
+      .map((event) => this._checkManualMatch(event))
   }
 
   /**

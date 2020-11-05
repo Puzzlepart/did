@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import stringStripHtml from 'string-strip-html'
+import dayjs, {ConfigType} from 'dayjs'
+import 'dayjs/locale/en-gb'
+import 'dayjs/locale/nb'
 
 // SERVER SIDE DATE UTILS USED:
 /**
@@ -121,16 +124,17 @@ export const endOfWeek = (week: any) => {
 }
 
 /**
- * Format date
+ * Get the formatted date according to the string of tokens passed in.
+ * 
+ * To escape characters, wrap them in square brackets (e.g. [MM]).
  *
- * @param {*} date Date
- * @param {*} dateFormat Date format
- * @param {*} locale Locale
+ * @param {ConfigType} date Date
+ * @param {string} template Date format
+ * @param {string} locale Locale
  */
-export const formatDate = (date: any, dateFormat: any, locale: any, timeZone = 'Europe/Oslo') => {
+export const formatDate = (date: ConfigType, template: string, locale: string) => {
   // TODO return correct date format as string
-  // remember locale and tz
-  return null
+  return dayjs(date).locale(locale).format(template)
 }
 
 /**

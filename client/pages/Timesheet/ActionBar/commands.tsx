@@ -16,7 +16,7 @@ export const WEEK_PICKER_COMMAND = ({ selectedPeriod, periods, t }: ITimesheetCo
             <WeekPicker />
             {periods.length === 1 && (
                 <span className={styles.weekNumber}>
-                    {selectedPeriod.getName(false, t)}
+                    {selectedPeriod.getName(t)}
                 </span>
             )}
         </>
@@ -57,7 +57,7 @@ export const SELECT_PERIOD_COMMANDS = ({ periods, loading, selectedPeriod, dispa
                 hidden={!!loading}
                 iconProps={{ iconName: 'DateTime' }}
                 onClick={() => dispatch({ type: 'CHANGE_PERIOD', payload: period.id })}
-                text={period.getName(true, t)}
+                text={period.getName(t, true)}
                 styles={buttonStyles}
                 className={styles.selectPeriodButton}
                 checked={period.id === selectedPeriod.id} />

@@ -30,7 +30,7 @@ export class EventObject {
   @Field()
   endDateTime: string
 
-  @Field({ nullable: true })
+  @Field()
   date: string
 
   @Field(() => Float)

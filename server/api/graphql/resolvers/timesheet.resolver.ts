@@ -43,7 +43,20 @@ export class TimesheetResolver {
           endDateTime: query.endDateTime,
           week: 0,
           month: 0,
-          events: [],
+          events: [
+            {
+              'id': 'AQMkADNiMGIwZGFjLTA4NTEtNDM3MS04NjA2LTk4ZjJiMWQyYmFjYgBGAAAD97Nxo5AsdUeulbnmMHE0CAcAO0Mf2nkRBkq7ID7HL8mlEgAAAw8AAAA7Qx-aeREGSrsgPscvyaUSAAbmQLISAAAA',
+              'categories': [
+                'PMI DID365'
+              ],
+              'title': 'Datohåndtering i Did',
+              'body': '',
+              'startDateTime': '2020-05-16T15:00:00.0000000',
+              'endDateTime':  '2020-05-16T19:30:00.0000000',
+              'duration': 3,
+              date: formatDate('2020-05-16T15:00:00.0000000', options.dateFormat, options.locale)
+            },
+          ],
           isConfirmed: false,
           isForecasted: false,
           isForecast: false,
