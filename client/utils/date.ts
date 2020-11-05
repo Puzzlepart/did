@@ -2,7 +2,9 @@ import { TFunction } from 'i18next'
 import dayjs from 'dayjs'
 import 'dayjs/locale/en-gb'
 import 'dayjs/locale/nb'
+import localeData from 'dayjs/plugin/localeData'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
+import { capitalize } from 'underscore.string'
 
 class DateUtils {
   /**
@@ -13,6 +15,7 @@ class DateUtils {
   public setup(locale: 'en-gb' | 'nb') {
     dayjs.locale(locale)
     dayjs.extend(weekOfYear)
+    dayjs.extend(localeData)
   }
 
   /**
@@ -90,66 +93,54 @@ class DateUtils {
   }
 
   /**
-   * Get days between a start and end time
+   * Get days between a start and end time in the specified format
    *
-   * @param {unknown} start Start
-   * @param {unknown} end End
-   * @param {string} dayFormat Date format
+   * @param {dayjs.ConfigType} start Start
+   * @param {dayjs.ConfigType} end End
+   * @param {string} format Date format
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getDays(start: unknown, end: unknown, dayFormat: string): string[] {
-    // TODO: fix
-    return null
-    // const days = []
-    // for (let i = 0; i <= end.weekday() - start.weekday(); i++) {
-    //   days.push(capitalize(start.clone().add(i, 'days').locale(this.m0mentLocale).format(dayFormat)))
-    // }
-    // return days
+  getDays(start: dayjs.ConfigType, end: dayjs.ConfigType, format = 'dddd DD'): string[] {
+    const days = []
+    let s = dayjs(start)
+    const e = dayjs(end)
+
+    while (s.isBefore(e) || s.isSame(e)) {
+      days.push(capitalize(s.format(format)))
+      s = s.add(1, 'day')
+    }
+    return days
   }
 
   /**
-   * Add 1 month to current date
+   * Add {value} months from current date
    *
-   * @param {number} amount Defaults to 1
+   * @param {number} value Defaults to 1
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public addMonth(amount = 1) {
-    // TODO: fix
-    return null
-    // return m2oment().add(amount, 'month')
+  public addMonth(value: number = 1): dayjs.Dayjs {
+    return dayjs().add(value, 'month')
   }
 
   /**
-   * Subtract {amount} months from current date
+   * Subtract {value} months from current date
    *
-   * @param {number} amount Defaults to 1
+   * @param {number} value Defaults to 1
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public subtractMonths(amount = 1) {
-    // TODO: fix
-    return null
-    // return m2oment().subtract(amount, 'month')
+  public subtractMonths(value: number = 1): dayjs.Dayjs {
+    return dayjs().subtract(value, 'month')
   }
 
   /**
-   * Get month and year for the current date
-   *
-   * @param date Date
-   *
-   * @returns
-   * * {string} monthName
-   * * {number} monthNumber
-   * * {number} year
+   * Get monthName, monthNumber and year for the current date
+   * 
+   * @param {dayjs.ConfigType} date Optional date
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public getMonthYear(date: unknown = null) {
-    // TODO: fix
-    return null
-    // return {
-    //   monthName: date.format('MMMM'),
-    //   monthNumber: date.month() + 1,
-    //   year: date.year()
-    // }
+  public getMonthYear(date?: dayjs.ConfigType) {
+    const d = dayjs(date)
+    return {
+      monthName: d.format('MMMM'),
+      monthNumber: d.month() + 1,
+      year: d.year()
+    }
   }
 
   /**
@@ -189,22 +180,13 @@ class DateUtils {
   getTimespanString(start: unknown, end: unknown, options: Record<string, any> = { monthFormat: 'MMMM', yearFormat: 'YYYY', hideYear: false, }): string {
     // TODO: fix
     return null
-    // return start
-    //   .locale(this.m0mentLocale)
-    // ['twix'](end.locale(this.m0mentLocale), { allDay: true })
-    //   .format(options)
-    //   .toLowerCase()
   }
 
   /**
-   * Get month names 0-11
+   * Get month names in a year
    */
   getMonthNames(): string[] {
-    // TODO: fix
-    return null
-    // return Array.apply(0, Array(12)).map((_: any, i: number) => {
-    //   return capitalize(m2oment().month(i).format('MMMM'))
-    // })
+    return dayjs.months().map(m => capitalize(m))
   }
 
   /**
