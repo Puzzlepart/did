@@ -6,12 +6,19 @@ import duration from 'dayjs/plugin/duration'
 import localeData from 'dayjs/plugin/localeData'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
 import objectSupport from 'dayjs/plugin/objectSupport'
+import utc from 'dayjs/plugin/utc'
 import { TFunction } from 'i18next'
 import { capitalize } from 'underscore.string'
 import { DateObject } from './date.dateObject'
 
+interface IDateUtils {
+  tzOffset: number;
+}
+
 export type DateInput = dayjs.ConfigType
 export class DateUtils {
+  constructor(private $: IDateUtils) { }
+
   /**
    * Setup DateUtils class using @dayjs with @plugins
    *
@@ -23,6 +30,16 @@ export class DateUtils {
     dayjs.extend(localeData)
     dayjs.extend(duration)
     dayjs.extend(objectSupport)
+    dayjs.extend(utc)
+  }
+
+  /**
+   * Subtract timezone offset
+   *
+   * @param {DateInput} date Date
+   */
+  private _fixTzOffset(date: DateInput) {
+    return dayjs(date).subtract(this.$.tzOffset, 'minute')
   }
 
   /**
@@ -57,7 +74,7 @@ export class DateUtils {
    * @param {string} dateFormat Date format
    */
   formatDate(date: DateInput, dateFormat: string): string {
-    return dayjs(date).format(dateFormat)
+    return this._fixTzOffset(date).format(dateFormat)
   }
 
   /**
@@ -150,7 +167,13 @@ export class DateUtils {
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getTimespanString(start: DateObject, end: DateObject): string {
-    return start.format()
+    const isSameMonth = start.isSameMonth(end)
+    const isSameYear = start.isSameYear(end)
+    const sFormat = ['DD']
+    if(!isSameMonth) sFormat.push('MMMM')
+    if(!isSameYear) sFormat.push('YYYY')
+    const eFormat = ['DD', 'MMMM', 'YYYY']
+    return [start.format(sFormat.join(' ')), end.format(eFormat.join(' '))].join(' - ')
   }
 
   /**
@@ -161,7 +184,7 @@ export class DateUtils {
   }
 
   /**
-   * Get a ISO string representation of the date
+   * To format as an ISO 8601 string.
    *
    * @param {DateInput} date Optional date
    */
@@ -217,5 +240,7 @@ export class DateUtils {
   }
 }
 
-export default new DateUtils()
+export default new DateUtils({
+  tzOffset: new Date().getTimezoneOffset()
+})
 export { DateObject }

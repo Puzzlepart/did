@@ -1,6 +1,6 @@
 import { strictEqual, deepStrictEqual } from 'assert'
 import { header } from '../@utils'
-import dateUtils from '../../client/utils/date'
+import dateUtils, { DateObject } from '../../client/utils/date'
 import date from '../../client/utils/date'
 
 describe(header('dateUtils'), async () => {
@@ -123,6 +123,26 @@ describe(header('dateUtils'), async () => {
     it('should return days between 2020-02-17 -2020-02-17 in format dddd', () => {
       const days = dateUtils.getDays('2020-02-17', '2020-02-23', 'dddd')
       deepStrictEqual(days, ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'])
+    })
+  })
+
+  describe('getTimespanString', () => {
+    it('should return 11 - 16 May 2020', () => {
+      let a = new DateObject('2020-05-11', dateUtils)
+      let b = new DateObject('2020-05-16', dateUtils)
+      deepStrictEqual(dateUtils.getTimespanString(a, b), '11 - 16 May 2020')
+    })
+
+    it('should return 16 May - 16 June 2020', () => {
+      let a = new DateObject('2020-05-16', dateUtils)
+      let b = new DateObject('2020-06-16', dateUtils)
+      deepStrictEqual(dateUtils.getTimespanString(a, b), '16 May - 16 June 2020')
+    })
+
+    it('should return 16 May 2020 - 16 June 2021', () => {
+      let a = new DateObject('2020-05-16', dateUtils)
+      let b = new DateObject('2021-06-16', dateUtils)
+      deepStrictEqual(dateUtils.getTimespanString(a, b), '16 May 2020 - 16 June 2021')
     })
   })
 })

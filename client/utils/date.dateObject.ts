@@ -21,11 +21,32 @@ export class DateObject {
    *
    * @param {string} template Template
    */
-  public format(template?: string) {
+  public format(template?: string): string {
     return this._.format(template)
   }
 
-  public get iso() {
+  /**
+   * To format as an ISO 8601 string
+   */
+  public get iso(): string {
     return this._dateUtils.toISOString(this._)
+  }
+
+  /**
+   * This indicates whether the DateObject object is the same month the other supplied date-time.
+   * 
+   * @param {DateObject} date Date
+   */
+  isSameMonth(date: DateObject) {
+    return this._.isSame(date._, 'month')
+  }
+
+   /**
+   * This indicates whether the DateObject object is the same year the other supplied date-time.
+   * 
+   * @param {DateObject} date Date
+   */
+  isSameYear(date: DateObject) {
+    return this._.isSame(date._, 'year')
   }
 }
