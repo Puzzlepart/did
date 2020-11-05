@@ -2,7 +2,7 @@ import { QueryResult } from '@apollo/client'
 import { getValue } from 'helpers'
 import { TFunction } from 'i18next'
 import { Project } from 'types'
-import { find, first } from 'underscore'
+import { find } from 'underscore'
 import { ITimesheetState, TimesheetPeriod, TimesheetView } from './types'
 
 export type TimesheetAction =
@@ -44,10 +44,10 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
             }
           : null
         if (data) {
-          newState.periods = data.timesheet.map((period) => new TimesheetPeriod(period))
-          newState.selectedPeriod =
-            find(newState.periods, (p) => p.id === getValue(state, 'selectedPeriod.id', null)) ||
-            first(newState.periods)
+          // newState.periods = data.timesheet.map((period) => new TimesheetPeriod(period))
+          // newState.selectedPeriod =
+          //   find(newState.periods, (p) => p.id === getValue(state, 'selectedPeriod.id', null)) ||
+          //   first(newState.periods)
         }
         newState.error = error
       }

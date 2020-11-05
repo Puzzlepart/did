@@ -1,5 +1,4 @@
-import { ITimesheetParams } from './types'
-import dateUtils from 'utils/date'
+import dateUtils, { DateObject } from 'utils/date'
 
 /**
  * Handles a scope, the period of time between a startDateTime and endDateTime
@@ -7,48 +6,25 @@ import dateUtils from 'utils/date'
  * @category Timesheet
  */
 export class TimesheetScope {
-  private _startDateTime?: unknown
-  private _endDateTime?: unknown
-
   /**
    * Intializes a scope
-   *
-   * @param {ITimesheetParams | strin} value Init value
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  constructor(value?: ITimesheetParams | string) {
-    // TODO: Rewrite to use dateUtils
-    // let start = m2oment()
-    // if (value) {
-    //   if (typeof value === 'string') {
-    //     const startIsValid = !isNaN(Date.parse(value))
-    //     if (startIsValid) start = m2oment(value)
-    //   } else {
-    //     start = m2oment().year(parseInt(value.year)).week(parseInt(value.week)).startOf('isoWeek')
-    //   }
-    // }
-    // this._set(start)
+  constructor(
+    public startDateTime?: DateObject,
+    public endDateTime?: DateObject
+  ) {
+    this.startDateTime = dateUtils.createDate('2020-11-02')
+    this.endDateTime = dateUtils.createDate('2020-11-08')
   }
 
   /**
-   *  Get the from and to date for the scope as string
-   *
-   * Hardcoded to return 2020-11-02 - 2020-11-08
+  * Get the from and to date for the scope as ISO strings
    */
   public get dateStrings(): { startDateTime: string; endDateTime: string } {
-    // TODO: @hardcoded
     return {
-      startDateTime: dateUtils.toString('2020-11-02'),
-      endDateTime: dateUtils.toString('2020-11-08')
+      startDateTime: this.startDateTime.toISOString(),
+      endDateTime: this.endDateTime.toISOString()
     }
-  }
-
-  /**
-   * Get the from and to date for the scope as JS dates
-   */
-  public get date(): { startDateTime: Date; endDateTime: Date } {
-    // TODO: rewrite to use date util
-    return null
   }
 
   /**
@@ -62,12 +38,10 @@ export class TimesheetScope {
 
   /**
    * Add a unit of time to the scope
-   *
-   * @param {unknown} options Options
-   */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public add(options: unknown): unknown {
+   * 
     // TODO: rewrite to use date util
+   */
+  public add(): unknown {
     return null
     // const start = this._startDateTime.clone()
     // start.add(options.amount, options.unit)
@@ -99,8 +73,6 @@ export class TimesheetScope {
    * Used in WeekPicker
    */
   public get timespan(): string {
-    // TODO: rewrite to use date util
-    return null
-    // return dateUtils.getTimespanString(this._startDateTime, this._endDateTime)
+    return dateUtils.getTimespanString(this.startDateTime as any, this.endDateTime as any)
   }
 }

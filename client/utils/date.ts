@@ -7,6 +7,9 @@ import weekOfYear from 'dayjs/plugin/weekOfYear'
 import duration from 'dayjs/plugin/duration'
 import { capitalize } from 'underscore.string'
 
+export type DateInput = dayjs.ConfigType
+export type DateObject = dayjs.Dayjs
+
 class DateUtils {
   /**
    * Setup DateUtils class using @dayjs with @plugins
@@ -18,6 +21,15 @@ class DateUtils {
     dayjs.extend(weekOfYear)
     dayjs.extend(localeData)
     dayjs.extend(duration)
+  }
+
+  /**
+   * Create date
+   * 
+   * @param {DateInput} date Date
+   */
+  public createDate(date: DateInput): dayjs.Dayjs {
+    return dayjs(date)
   }
 
   /**
@@ -39,40 +51,40 @@ class DateUtils {
   /**
    * Format date with the specified date format
    *
-   * @param {dayjs.ConfigType} date Date
+   * @param {DateInput} date Date
    * @param {string} dateFormat Date format
    */
-  formatDate(date: dayjs.ConfigType, dateFormat: string): string {
+  formatDate(date: DateInput, dateFormat: string): string {
     return dayjs(date).format(dateFormat)
   }
 
   /**
    * Get start of week
    *
-   * @param {dayjs.ConfigType} date Date
+   * @param {DateInput} date Date
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  startOfWeek(date?: dayjs.ConfigType): unknown {
+  startOfWeek(date?: DateInput): unknown {
     return dayjs(date).startOf('week')
   }
 
   /**
    * Get end of week
    *
-   * @param {dayjs.ConfigType} date Date
+   * @param {DateInput} date Date
    */
-  endOfWeek(date?: dayjs.ConfigType): dayjs.Dayjs {
+  endOfWeek(date?: DateInput): dayjs.Dayjs {
     return dayjs(date).endOf('week')
   }
 
   /**
    * Get days between a start and end time in the specified format
    *
-   * @param {dayjs.ConfigType} start Start
-   * @param {dayjs.ConfigType} end End
+   * @param {DateInput} start Start
+   * @param {DateInput} end End
    * @param {string} format Date format
    */
-  getDays(start: dayjs.ConfigType, end: dayjs.ConfigType, format: string = 'dddd DD'): string[] {
+  getDays(start: DateInput, end: DateInput, format: string = 'dddd DD'): string[] {
     const days = []
     let s = dayjs(start)
     const e = dayjs(end)
@@ -105,9 +117,9 @@ class DateUtils {
   /**
    * Get monthName, monthNumber and year for the current date
    *
-   * @param {dayjs.ConfigType} date Optional date
+   * @param {DateInput} date Optional date
    */
-  public getMonthYear(date?: dayjs.ConfigType) {
+  public getMonthYear(date?: DateInput) {
     const d = dayjs(date)
     return {
       monthName: d.format('MMMM'),
@@ -130,14 +142,13 @@ class DateUtils {
   /**
    * Get timespan string
    *
-   * @param {dayjs.ConfigType} start Start
-   * @param {dayjs.ConfigType} end End
+   * @param {DateInput} start Start
+   * @param {DateInput} end End
    * @param {object} options Options
    */
-  getTimespanString(start: dayjs.ConfigType, end: dayjs.ConfigType): string {
-    // eslint-disable-next-line no-console
-    console.log(start, end)
-    return null
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  getTimespanString(start: DateInput, end: DateInput): string {
+    return 'WORK_IN_PROGRESS'
   }
 
   /**
@@ -150,18 +161,18 @@ class DateUtils {
   /**
    * Get a ISO string representation of the date
    *
-   * @param {dayjs.ConfigType} date Optional date
+   * @param {DateInput} date Optional date
    */
-  toString(date?: dayjs.ConfigType): string {
+  toString(date?: DateInput): string {
     return dayjs(date).toISOString()
   }
 
   /**
    * Get week number
    *
-   * @param {dayjs.ConfigType} date Optional date
+   * @param {DateInput} date Optional date
    */
-  getWeek(date?: dayjs.ConfigType): number {
+  getWeek(date?: DateInput): number {
     return dayjs(date).week()
   }
 
@@ -170,18 +181,18 @@ class DateUtils {
    *
    * Months are zero indexed, so January is month 0.
    *
-   * @param {dayjs.ConfigType} date Optional date
+   * @param {DateInput} date Optional date
    */
-  getMonthIndex(date?: dayjs.ConfigType): number {
+  getMonthIndex(date?: DateInput): number {
     return dayjs(date).month() + 1
   }
 
   /**
    * Get year
    *
-   * @param {dayjs.ConfigType} date Optional date
+   * @param {DateInput} date Optional date
    */
-  getYear(date?: dayjs.ConfigType): number {
+  getYear(date?: DateInput): number {
     return dayjs(date).year()
   }
 }

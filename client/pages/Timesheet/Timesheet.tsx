@@ -24,8 +24,8 @@ export const Timesheet: React.FunctionComponent = () => {
     const params = useParams<ITimesheetParams>()
     const [state, dispatch] = useReducer(reducer, {
         periods: [],
-        selectedPeriod: new TimesheetPeriod(undefined, params),
-        scope: new TimesheetScope(params),
+        selectedPeriod: new TimesheetPeriod(),
+        scope: new TimesheetScope(),
         selectedView: params.view || 'overview'
     })
     const query = useQuery(TIMESHEET, {

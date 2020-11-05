@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
-import { dateAdd, IPnPClientStore, ITypedHash, PnPClientStorage } from '@pnp/common'
+import { IPnPClientStore, ITypedHash, PnPClientStorage } from '@pnp/common'
 import { TFunction } from 'i18next'
 import { EventInput, EventObject, Project, TimesheetPeriodInput, TimesheetPeriodObject } from 'types'
 import { filter, omit } from 'underscore'
-import { capitalize, isBlank } from 'underscore.string'
+import { isBlank } from 'underscore.string'
 import { ITimesheetParams } from './types'
 
 /**
@@ -50,22 +50,24 @@ export class TimesheetPeriod {
    * @param {TimesheetPeriodObject} _period Period
    * @param {ITimesheetPeriod} params Params
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   constructor(private _period?: TimesheetPeriodObject, params?: ITimesheetParams) {
-    if (params) this.id = [params.week, params.month, params.year].filter((p) => p).join('_')
-    if (!_period) return
-    this.id = _period.id
-    this._month = capitalize(_period.month)
-    this._startDateTime = _period.startDateTime
-    this._endDateTime = _period.endDateTime
-    this.isConfirmed = _period.isConfirmed
-    this.isForecasted = _period.isForecasted
-    this.isForecast = _period.isForecast
-    this.forecastedHours = _period.forecastedHours
-    this._uiMatchedEventsStorageKey = `did365_ui_matched_events_${this.id}`
-    this._uiIgnoredEventsStorageKey = `did365_ui_ignored_events_${this.id}`
-    this._uiIgnoredEvents = this._localStorage.get(this._uiIgnoredEventsStorageKey) || []
-    this._uiMatchedEvents = this._localStorage.get(this._uiMatchedEventsStorageKey) || {}
-    this._storageDefaultExpire = dateAdd(new Date(), 'month', 2)
+    this.id = '24_05_2020'
+    // if (params) this.id = [params.week, params.month, params.year].filter((p) => p).join('_')
+    // if (!_period) return
+    // this.id = _period.id
+    // this._month = capitalize(_period.month)
+    // this._startDateTime = _period.startDateTime
+    // this._endDateTime = _period.endDateTime
+    // this.isConfirmed = _period.isConfirmed
+    // this.isForecasted = _period.isForecasted
+    // this.isForecast = _period.isForecast
+    // this.forecastedHours = _period.forecastedHours
+    // this._uiMatchedEventsStorageKey = `did365_ui_matched_events_${this.id}`
+    // this._uiIgnoredEventsStorageKey = `did365_ui_ignored_events_${this.id}`
+    // this._uiIgnoredEvents = this._localStorage.get(this._uiIgnoredEventsStorageKey) || []
+    // this._uiMatchedEvents = this._localStorage.get(this._uiMatchedEventsStorageKey) || {}
+    // this._storageDefaultExpire = dateAdd(new Date(), 'month', 2)
   }
 
   /**
