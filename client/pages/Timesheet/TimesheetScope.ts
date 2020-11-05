@@ -1,4 +1,5 @@
 import { ITimesheetParams } from './types'
+import dateUtils from 'utils/date'
 
 /**
  * Handles a scope, the period of time between a startDateTime and endDateTime
@@ -31,14 +32,15 @@ export class TimesheetScope {
 
   /**
    *  Get the from and to date for the scope as string
+   * 
+   * Hardcoded to return 2020-11-02 - 2020-11-08
    */
   public get dateStrings(): { startDateTime: string; endDateTime: string } {
-    // TODO: rewrite to use date util
-    return null
-    // return {
-    //   startDateTime: dateUtils.toString(this._startDateTime),
-    //   endDateTime: dateUtils.toString(this._endDateTime)
-    // }
+    // TODO: @hardcoded
+    return {
+      startDateTime: dateUtils.toString('2020-11-02'),
+      endDateTime: dateUtils.toString('2020-11-08')
+    }
   }
 
   /**
@@ -47,10 +49,6 @@ export class TimesheetScope {
   public get date(): { startDateTime: Date; endDateTime: Date } {
     // TODO: rewrite to use date util
     return null
-    // return {
-    //   startDateTime: this._startDateTime.toDate(),
-    //   endDateTime: this._endDateTime.toDate()
-    // }
   }
 
   /**
