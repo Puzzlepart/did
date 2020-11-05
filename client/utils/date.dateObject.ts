@@ -1,14 +1,14 @@
-import dayjs from 'dayjs'
+import dt, { Dayjs } from 'dayjs'
 import { DateUtils, DateInput } from './date'
 
 export class DateObject {
-  public _: dayjs.Dayjs
+  public _: Dayjs
   public jsDate: Date
   public endOfWeek: DateInput
   public isCurrentWeek: boolean
 
   constructor(date: DateInput, private _dateUtils: DateUtils) {
-    this._ = dayjs(date)
+    this._ = dt(date)
     this.jsDate = this._.toDate()
     this.endOfWeek = _dateUtils.endOfWeek(date)
     this.isCurrentWeek = _dateUtils.isCurrentWeek(date)
@@ -41,11 +41,11 @@ export class DateObject {
     return this._.isSame(date._, 'month')
   }
 
-   /**
-   * This indicates whether the DateObject object is the same year the other supplied date-time.
-   * 
-   * @param {DateObject} date Date
-   */
+  /**
+  * This indicates whether the DateObject object is the same year the other supplied date-time.
+  * 
+  * @param {DateObject} date Date
+  */
   isSameYear(date: DateObject) {
     return this._.isSame(date._, 'year')
   }
