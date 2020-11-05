@@ -42,7 +42,8 @@ const getSchema = async () => {
     container: ({ context }: ResolverData<Context>) => context.container,
     emitSchemaFile: true,
     validate: false,
-    authChecker
+    authChecker,
+    dateScalarMode: 'isoDate'
   })
   return schema
 }
