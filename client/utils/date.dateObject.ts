@@ -1,4 +1,5 @@
 import $dayjs, { Dayjs, OpUnitType } from 'dayjs'
+import { pick } from 'underscore'
 import DateUtils, { DateInput } from './date'
 
 export class DateObject {
@@ -19,14 +20,14 @@ export class DateObject {
    * Get end of week
    */
   public get endOfWeek() {
-    return DateUtils.endOfWeek(this.$)
+    return DateUtils.endOfWeek(this)
   }
 
   /**
    * Is current week
    */
   public get isCurrentWeek() {
-    return DateUtils.isCurrentWeek(this.$)
+    return DateUtils.isCurrentWeek(this)
   }
 
   /**
@@ -95,5 +96,20 @@ export class DateObject {
   */
   diff(date: DateObject, unit: OpUnitType) {
     return this.$.diff(date.$, unit)
+  }
+
+  /**
+   * Returns an object representation of the DateObject
+   * 
+   * @param {string[]} include Properties to include
+   */
+  toObject(...include: string[]) {
+    const obj = {
+      weekNumber: this.$.week(),
+      monthNumber: this.$.month(),
+      year: this.$.year(),
+      monthName: this.format('MMM')
+    }
+    return include ? pick(obj, ...include) : obj
   }
 }

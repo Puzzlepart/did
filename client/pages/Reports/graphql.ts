@@ -8,7 +8,6 @@ export const TIME_ENTRIES = gql`
       startDateTime
       endDateTime
       weekNumber
-      monthNumber
       year
       monthNumber
       customer {

@@ -1,13 +1,13 @@
 /* eslint-disable max-classes-per-file */
-import $dayjs, { ConfigType, Dayjs } from 'dayjs'
+import $dayjs, { ConfigType } from 'dayjs'
 import 'dayjs/locale/en-gb'
 import 'dayjs/locale/nb'
 import duration from 'dayjs/plugin/duration'
-import localeData from 'dayjs/plugin/localeData'
-import weekOfYear from 'dayjs/plugin/weekOfYear'
-import objectSupport from 'dayjs/plugin/objectSupport'
 import isoWeek from 'dayjs/plugin/isoWeek'
+import localeData from 'dayjs/plugin/localeData'
+import objectSupport from 'dayjs/plugin/objectSupport'
 import utc from 'dayjs/plugin/utc'
+import weekOfYear from 'dayjs/plugin/weekOfYear'
 import { TFunction } from 'i18next'
 import { capitalize } from 'underscore.string'
 import { DateObject } from './date.dateObject'
@@ -55,7 +55,7 @@ export class DateUtils {
    *
    * @param {DateInput} date Date
    */
-  public createDate(date: DateInput): DateObject {
+  public createDateObject(date: DateInput = new Date()): DateObject {
     return new DateObject(date)
   }
 
@@ -88,19 +88,19 @@ export class DateUtils {
   /**
    * Get start of week
    *
-   * @param {DateInput} date Date
+   * @param {DateObject} date Date
    */
-  startOfWeek(date?: DateInput): Dayjs {
-    return $dayjs(date).startOf('isoWeek')
+  startOfWeek(date?: DateObject): DateObject {
+    return new DateObject(date.$.startOf('isoWeek'))
   }
 
   /**
    * Get end of week
    *
-   * @param {DateInput} date Date
+   * @param {DateObject} date Date
    */
-  endOfWeek(date?: DateInput): Dayjs {
-    return $dayjs(date).endOf('isoWeek')
+  endOfWeek(date?: DateObject): DateObject {
+    return new DateObject(date.$.endOf('isoWeek'))
   }
 
   /**
@@ -119,24 +119,6 @@ export class DateUtils {
       s = s.add('1d')
     }
     return days
-  }
-
-  /**
-   * Add {value} months from current date
-   *
-   * @param {number} value Defaults to 1
-   */
-  public addMonth(value: number = 1): Dayjs {
-    return $dayjs().add(value, 'month')
-  }
-
-  /**
-   * Subtract {value} months from current date
-   *
-   * @param {number} value Defaults to 1
-   */
-  public subtractMonths(value: number = 1): Dayjs {
-    return $dayjs().subtract(value, 'month')
   }
 
   /**
@@ -230,10 +212,10 @@ export class DateUtils {
   /**
    * Is current week
    *
-   * @param {DateInput} date Optional date
+   * @param {DateObject} date Optional date
    */
-  isCurrentWeek(date?: DateInput): boolean {
-    return $dayjs(date).week() === $dayjs().week()
+  isCurrentWeek(date?: DateObject): boolean {
+    return date.$.week() === $dayjs().week()
   }
 
   /**

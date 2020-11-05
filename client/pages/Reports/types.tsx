@@ -64,9 +64,10 @@ export interface IReportsState {
  * @param {TFunction} t Translate function
  */
 export function getQueries<T = IReportsQuery>(t: TFunction): T[] {
-    const lastMonth = DateUtils.getMonthYear(DateUtils.subtractMonths())
-    const currentMonth = DateUtils.getMonthYear()
-    const currentYear = { year: DateUtils.getYear() }
+    const now = DateUtils.createDateObject()
+    const lastMonth = now.add('-1m').toObject()
+    const currentMonth = now.toObject()
+    const currentYear = now.toObject('year')
     return [
         {
             key: 'LAST_MONTH',

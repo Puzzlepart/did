@@ -9,8 +9,8 @@ import { ITimesheetParams } from './types'
  */
 export class TimesheetScope {
   constructor(public startDateTime?: DateObject, public endDateTime?: DateObject) {
-    this.startDateTime = DateUtils.createDate('2020-05-11')
-    this.endDateTime = DateUtils.createDate(this.startDateTime.endOfWeek)
+    this.startDateTime = DateUtils.createDateObject('2020-05-11')
+    this.endDateTime = this.startDateTime.endOfWeek
   }
 
   /**
@@ -37,8 +37,8 @@ export class TimesheetScope {
    * @param {DateInput} start Start of scope
    */
   public set(start: DateInput): TimesheetScope {
-    this.startDateTime = DateUtils.createDate(start)
-    this.endDateTime = DateUtils.createDate(this.startDateTime.endOfWeek)
+    this.startDateTime = DateUtils.createDateObject(start)
+    this.endDateTime = this.startDateTime.endOfWeek
     return this
   }
 
