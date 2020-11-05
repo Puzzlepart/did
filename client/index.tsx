@@ -6,13 +6,14 @@ import * as React from 'react'
 import * as ReactDom from 'react-dom'
 import 'regenerator-runtime/runtime.js'
 import { contains } from 'underscore'
-import dateUtils from 'utils/date'
+import DateUtils from 'utils/date'
 import { supportedLanguages } from '../resources'
 import { App } from './App'
 import { IAppContext } from './AppContext'
 import { client, GET_CURRENT_USER } from './graphql'
 import './i18n'
 import './_global.scss'
+
 
 initializeIcons()
 
@@ -40,12 +41,12 @@ const getContext = async (): Promise<IAppContext> => {
 
 getContext().then(context => {
     const container = document.getElementById('app')
-    dateUtils.setup(context.user.preferredLanguage)
+    DateUtils.setup(context.user.preferredLanguage)
     i18n.changeLanguage(context.user.preferredLanguage)
 
     ReactDom.render((
         <ApolloProvider client={client}>
-            <App {...context} />
+            <App {...context} /> 
         </ApolloProvider>
     ), container)
 })

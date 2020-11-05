@@ -4,7 +4,7 @@ import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { EventObject } from 'types'
-import dateUtils from 'utils/date'
+import DateUtils from 'utils/date'
 import { generateColumn as col } from 'utils/generateColumn'
 import { TimesheetContext } from '../'
 import { StatusBar } from './StatusBar'
@@ -25,7 +25,7 @@ export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
             <EventList
                 hidden={!!context.error}
                 enableShimmer={!!context.loading}
-                events={context.selectedPeriod.events}
+                events={context.selectedPeriod.getEvents()}
                 showEmptyDays={true}
                 dateFormat={timeFormat}
                 groups={{
@@ -33,7 +33,7 @@ export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
                     groupNames: context.selectedPeriod.weekdays(dayFormat),
                     totalFunc: (events: EventObject[]) => {
                         const duration = events.reduce((sum, i) => sum + i.duration, 0)
-                        return ` (${dateUtils.getDurationString(duration, t)})`
+                        return ` (${DateUtils.getDurationString(duration, t)})`
                     },
                 }}
                 additionalColumns={[

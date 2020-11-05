@@ -4,7 +4,7 @@ import { IContextualMenuItem } from 'office-ui-fabric-react'
 import { TimeEntriesQuery } from 'types'
 import { omit } from 'underscore'
 import { capitalize } from 'underscore.string'
-import dateUtils from 'utils/date'
+import DateUtils from 'utils/date'
 
 export interface IReportsQuery extends IContextualMenuItem {
     /**
@@ -64,9 +64,10 @@ export interface IReportsState {
  * @param {TFunction} t Translate function
  */
 export function getQueries<T = IReportsQuery>(t: TFunction): T[] {
-    const lastMonth = dateUtils.getMonthYear(dateUtils.subtractMonths())
-    const currentMonth = dateUtils.getMonthYear()
-    const currentYear = { year: dateUtils.getYear() }
+    const now = DateUtils.createDateObject()
+    const lastMonth = now.add('-1m').toObject()
+    const currentMonth = now.toObject()
+    const currentYear = now.toObject('year')
     return [
         {
             key: 'LAST_MONTH',

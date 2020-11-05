@@ -5,13 +5,13 @@ import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
-import { moment } from 'utils/date'
 import styles from './Admin.module.scss'
 import { ApiTokens } from './ApiTokens'
 import { Labels } from './Labels'
 import { Roles } from './Roles'
 import { SummaryView } from './SummaryView'
 import { Users } from './Users'
+import DateUtils from 'utils/date'
 
 export const Admin = () => {
     const { t } = useTranslation()
@@ -41,7 +41,7 @@ export const Admin = () => {
                     headerText={t('admin.summary')}
                     itemIcon='CalendarWeek'>
                     <SummaryView
-                        defaultSelectedYear={moment().year()}
+                        defaultSelectedYear={DateUtils.getYear()}
                         defaultSelectedScope='weekNumber'
                         defaultRange={2} />
                 </PivotItem>

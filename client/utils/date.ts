@@ -1,225 +1,225 @@
+import $dayjs, { ConfigType,PluginFunc } from 'dayjs'
+import 'dayjs/locale/en-gb'
+import 'dayjs/locale/nb'
+import durationPlugin from 'dayjs/plugin/duration'
+import isoWeekPlugin from 'dayjs/plugin/isoWeek'
+import localeDataPlugin from 'dayjs/plugin/localeData'
+import objectSupportPlugin from 'dayjs/plugin/objectSupport'
+import utcPlugin from 'dayjs/plugin/utc'
+import weekOfYearPlugin from 'dayjs/plugin/weekOfYear'
 import { TFunction } from 'i18next'
-import moment from 'moment'
-import { format } from 'office-ui-fabric-react/lib/Utilities'
 import { capitalize } from 'underscore.string'
-require('twix')
+import { DateObject } from './date.dateObject'
 
-export { moment }
-
-export default new (class DateUtils {
-  private _momentLocale: string
+interface IDateUtils {
+  /**
+   * Timezone offset
+   * 
+   * Retrieved from Date.getTimezoneOffset()
+   */
+  tzOffset: number;
 
   /**
-   * Setup DateUtils class
+   * Default month format
+   */
+  monthFormat: string;
+
+  /**
+   * Use ISO week
+   */
+  isoWeek: boolean;
+}
+
+export type DateInput = ConfigType
+
+export class DateUtils {
+  constructor(private $: IDateUtils) { }
+
+  /**
+   * Setup DateUtils class using @dayjs with @plugins
    *
    * @param {string} locale Locale
    */
   public setup(locale: string) {
-    this._momentLocale = locale
-    moment.locale(this._momentLocale)
+    $dayjs.locale(locale)
+    $dayjs.extend<PluginFunc>(weekOfYearPlugin)
+    $dayjs.extend<PluginFunc>(localeDataPlugin)
+    $dayjs.extend<PluginFunc>(durationPlugin)
+    $dayjs.extend<PluginFunc>(objectSupportPlugin)
+    $dayjs.extend<PluginFunc>(utcPlugin)
+    $dayjs.extend<PluginFunc>(isoWeekPlugin)
   }
 
   /**
-   * Converts date string to moment, adding timezone offset
+   * Subtract timezone offset
    *
-   * @param {string} date Date string
+   * @param {DateInput} date Date
    */
-  toMoment(date: string) {
-    const m = moment(date)
-    return m.add(m.toDate().getTimezoneOffset(), 'minutes')
+  private _fixTzOffset(date: DateInput) {
+    return $dayjs(date).subtract(this.$.tzOffset, 'minute')
+  }
+
+  /**
+   * Create date object
+   *
+   * @param {DateInput} date Date
+   */
+  public createDateObject(date: DateInput = new Date()): DateObject {
+    return new DateObject(date)
   }
 
   /**
    * Get duration string
    *
-   * @param {number} durationHrs Duration in hours
+   * @param {number} hours Duration in hours
    * @param {TFunction} t Translate function
    */
-  getDurationString(durationHrs: number, t: TFunction): string {
-    const hrsShortFormat = t('common.hoursShortFormat')
-    const minShortFormat = t('common.minutesShortFormat')
-    const hrs = Math.floor(durationHrs)
-    const mins = parseInt(((durationHrs % 1) * 60).toFixed(0))
-    const hrsStr = format(hrsShortFormat, hrs)
-    const minStr = format(minShortFormat, mins)
+  public getDurationString(hours: number, t: TFunction): string {
+    const hrs = Math.floor(hours)
+    const mins = parseInt(((hours % 1) * 60).toFixed(0))
+    const hrsStr = t('common.hoursShortFormat', { hrs })
+    const minsStr = t('common.minutesShortFormat', { mins })
     if (mins === 0) return hrsStr
-    if (hrs === 0) return minStr
-    return `${hrsStr} ${minStr}`
+    if (hrs === 0) return minsStr
+    return [hrsStr, minsStr].join(' ')
   }
 
   /**
    * Format date with the specified date format
    *
-   * @param {string} date Date string
-   * @param {string} dateFormat Date format
+   * @param {DateInput} date Date
+   * @param {string} template Date format
    */
-  formatDate(date: string, dateFormat: string): string {
-    const m = moment.utc(date)
-    return m.add(-m.toDate().getTimezoneOffset(), 'minutes').format(dateFormat)
+  public formatDate(date: DateInput, template: string): string {
+    return this._fixTzOffset(date).format(template)
   }
 
   /**
    * Get start of week
    *
-   * @param {string | Date | moment.Moment} date Date string
+   * @param {DateObject} date Date
+   * @param {boolean} isoWeek Use ISO week
    */
-  startOfWeek(date?: string | Date | moment.Moment): moment.Moment {
-    const m = moment.utc(date)
-    return m.add(-m.toDate().getTimezoneOffset(), 'minutes').startOf('isoWeek')
+  public startOfWeek(date?: DateObject, isoWeek: boolean = this.$.isoWeek): DateObject {
+    return new DateObject(date.$.startOf(isoWeek ? 'isoWeek' : 'w'))
   }
 
   /**
    * Get end of week
    *
-   * @param {string | Date} date Date string
+   * @param {DateObject} date Date
+   * @param {boolean} isoWeek Use ISO week
    */
-  endOfWeek(date?: string | Date | moment.Moment): moment.Moment {
-    const m = moment.utc(date)
-    return m.add(-m.toDate().getTimezoneOffset(), 'minutes').endOf('isoWeek')
+  public endOfWeek(date?: DateObject, isoWeek: boolean = this.$.isoWeek): DateObject {
+    return new DateObject(date.$.endOf(isoWeek ? 'isoWeek' : 'w'))
   }
 
   /**
-   * Get days between a start and end time
+   * Get days between a start and end time in the specified template
    *
-   * @param {moment.Moment} start Start
-   * @param {moment.Moment} end End
-   * @param {string} dayFormat Date format
+   * @param {DateInput} start Start
+   * @param {DateInput} end End
+   * @param {string} template Date template
    */
-  getDays(start: moment.Moment, end: moment.Moment, dayFormat: string): string[] {
+  getDays(start: DateInput, end: DateInput, template: string = 'dddd DD'): string[] {
     const days = []
-    for (let i = 0; i <= end.weekday() - start.weekday(); i++) {
-      days.push(capitalize(start.clone().add(i, 'days').locale(this._momentLocale).format(dayFormat)))
+    let s = new DateObject(start)
+    const e = new DateObject(end)
+    while (s.isBeforeOrSame(e)) {
+      days.push(capitalize(s.format(template)))
+      s = s.add('1d')
     }
     return days
   }
 
   /**
-   * Add 1 month to current date
-   *
-   * @param {number} amount Defaults to 1
-   */
-  public addMonth(amount = 1) {
-    return moment().add(amount, 'month')
-  }
-
-  /**
-   * Subtract {amount} months from current date
-   *
-   * @param {number} amount Defaults to 1
-   */
-  public subtractMonths(amount = 1) {
-    return moment().subtract(amount, 'month')
-  }
-
-  /**
-   * Get month and year for the current date
-   *
-   * @param date Date
-   *
-   * @returns
-   * * {string} monthName
-   * * {number} monthNumber
-   * * {number} year
-   */
-  public getMonthYear(date: moment.Moment = moment()) {
-    return {
-      monthName: date.format('MMMM'),
-      monthNumber: date.month() + 1,
-      year: date.year()
-    }
-  }
-
-  /**
    * Get month name for the speicifed month index
    *
-   * Under 0: Subtracts {monthIndex} months from current month
-   *
-   * 0: Returns current month name
-   *
-   * Over 0: Returns the actual month with the speified index
-   *
-   *
-   * @param {number} monthIndex Month number
-   * @param {string} format Format
-   * @param {boolean} captialize Capitalize
+   * @param {number} monthIndex Month index
+   * @param {string} template Template
    */
-  getMonthName(monthIndex?: number, format = 'MMMM', captialize = false): string {
-    const date = moment().locale(this._momentLocale)
-    let name: string
-    if (monthIndex < 0) name = date.add(monthIndex, 'month').format(format)
-    else if (monthIndex === 0) name = date.format(format)
-    else name = date.month(monthIndex).format(format)
-    return captialize ? capitalize(name) : name
+  public getMonthName(monthIndex?: number, template: string = this.$.monthFormat): string {
+    return $dayjs().set('month', monthIndex).format(template)
   }
 
   /**
    * Get timespan string
    *
-   * @param {moment.Moment} start Start
-   * @param {moment.Moment} end End
-   * @param {object} options Options
+   * @param {DateObject} start Start
+   * @param {DateObject} end End
+   * @param {string} monthFormat Month format
    */
-  getTimespanString(
-    start: moment.Moment,
-    end: moment.Moment,
-    options: Record<string, any> = {
-      monthFormat: 'MMMM',
-      yearFormat: 'YYYY',
-      hideYear: false,
-      implicitYear: false
-    }
-  ): string {
-    return start
-      .locale(this._momentLocale)
-      ['twix'](end.locale(this._momentLocale), { allDay: true })
-      .format(options)
-      .toLowerCase()
+  public getTimespanString(start: DateObject, end: DateObject, monthFormat: string = this.$.monthFormat): string {
+    const isSameMonth = start.isSameMonth(end)
+    const isSameYear = start.isSameYear(end)
+    const sFormat = ['DD']
+    if (!isSameMonth) sFormat.push(monthFormat)
+    if (!isSameYear) sFormat.push('YYYY')
+    return [
+      start.format(sFormat.join(' ')),
+      end.format(`DD ${monthFormat} YYYY`)
+    ].join(' - ')
   }
 
   /**
-   * Get month names 0-11
+   * Get month names in a year
    */
-  getMonthNames(): string[] {
-    return Array.apply(0, Array(12)).map((_: any, i: number) => {
-      return capitalize(moment().month(i).format('MMMM'))
-    })
+  public getMonthNames(): string[] {
+    return $dayjs.months().map((m) => capitalize(m))
   }
 
   /**
-   * Get a string representation of the moment date instance
+   * To format as an ISO 8601 string.
    *
-   * @param {moment.Moment} date Moment date
-   *
-   * @returns {string} Returns a ISO representation of the date without the Z
+   * @param {DateInput} date Optional date
    */
-  toString(date: moment.Moment): string {
-    return date.toISOString().replace('Z', '')
+  public toISOString(date?: DateInput): string {
+    return $dayjs(date).toISOString()
   }
 
   /**
    * Get week number
+   *
+   * @param {DateInput} date Optional date
    */
-  getWeek(): number {
-    return moment().week()
+  public getWeek(date?: DateInput): number {
+    return $dayjs(date).week()
   }
 
   /**
-   * Get month index
+   * Get the month.
    *
-   * 1: January
+   * Months are zero indexed, so January is month 0 and December is 11 (obviously).
    *
-   * 2: February
-   *
-   * etc.
+   * @param {DateInput} date Optional date
    */
-  getMonthIndex(): number {
-    return moment().month() + 1
+  public getMonthIndex(date?: DateInput): number {
+    return $dayjs(date).month() + 1
   }
 
   /**
-   * Get year
+   * Get the year
+   *
+   * @param {DateInput} date Optional date
    */
-  getYear(): number {
-    return moment().year()
+  public getYear(date?: DateInput): number {
+    return $dayjs(date).year()
   }
-})()
+
+  /**
+   * Is current week
+   *
+   * @param {DateObject} date Optional date
+   */
+  public isCurrentWeek(date: DateObject): boolean {
+    return date.$.week() === $dayjs().week()
+  }
+}
+
+export default new DateUtils({
+  tzOffset: new Date().getTimezoneOffset(),
+  monthFormat: 'MMMM',
+  isoWeek: true
+})
+
+export { DateObject }

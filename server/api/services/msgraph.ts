@@ -6,7 +6,6 @@ import { performance, PerformanceObserver } from 'perf_hooks'
 import 'reflect-metadata'
 import { Service } from 'typedi'
 import { first } from 'underscore'
-import * as utils from '../../utils'
 import env from '../../utils/env'
 import MSGraphEvent from './msgraph.event'
 import OAuthService, { AccessTokenOptions } from './oauth'
@@ -99,7 +98,12 @@ class MSGraphService {
   async createOutlookCategory(category: string): Promise<any> {
     try {
       this.startMark('createOutlookCategory')
-      const colorIdx = utils.generateInt(category, 24)
+      // returns a pseudorandom color index from 0 to 24 based on category name
+      const colorIdx =
+        category
+          .split('')
+          .map((c) => c.charCodeAt(0))
+          .reduce((a, b) => a + b) % 24
       const content = JSON.stringify({
         displayName: category,
         color: `preset${colorIdx}`

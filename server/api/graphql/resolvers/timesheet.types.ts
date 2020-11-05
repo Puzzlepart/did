@@ -30,7 +30,7 @@ export class EventObject {
   @Field()
   endDateTime: string
 
-  @Field({ nullable: true })
+  @Field()
   date: string
 
   @Field(() => Float)
@@ -81,7 +81,10 @@ export class EventInput {
   manualMatch: boolean
 }
 
-@ObjectType({ description: 'A type that describes a TimesheetPeriod', simpleResolvers: simpleResolvers.TimesheetPeriodObject  })
+@ObjectType({
+  description: 'A type that describes a TimesheetPeriod',
+  simpleResolvers: simpleResolvers.TimesheetPeriodObject
+})
 export class TimesheetPeriodObject {
   @Field()
   id: string
@@ -98,11 +101,11 @@ export class TimesheetPeriodObject {
   @Field()
   endDateTime: string
 
-  @Field()
+  @Field({ nullable: true })
   isConfirmed: boolean
 
   @Field(() => [EventObject])
-  events: EventObject[]
+  events?: EventObject[]
 
   @Field({ nullable: true })
   isForecasted: boolean
@@ -111,7 +114,7 @@ export class TimesheetPeriodObject {
   isForecast: boolean
 
   @Field({ nullable: true })
-  forecastedHours: number
+  forecastedHours?: number
 }
 
 @InputType({ description: 'Input object for TimesheetPeriod used in Mutation unsubmitPeriod' })
@@ -139,4 +142,13 @@ export class TimesheetQuery {
 
   @Field()
   endDateTime: string
+}
+
+@InputType()
+export class TimesheetOptions {
+  @Field()
+  locale: string
+
+  @Field()
+  dateFormat: string
 }

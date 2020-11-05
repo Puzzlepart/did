@@ -4,8 +4,8 @@ import arraySort from 'array-sort'
 import { createTableService } from 'azure-storage'
 import { Inject, Service } from 'typedi'
 import { omit, pick } from 'underscore'
-import { getDurationHours, toArray } from '../../utils'
-import AzTableUtilities from '../../utils/table'
+import { getDurationHours } from '../../utils/date'
+import AzTableUtilities, { toArray } from '../../utils/table'
 import { Context } from '../graphql/context'
 
 export class AzStorageServiceTables {
@@ -18,8 +18,8 @@ export class AzStorageServiceTables {
     public customers: string = 'Customers',
     public roles: string = 'Roles',
     public labels: string = 'Labels',
-    public users: string = 'Users',
-  ) { }
+    public users: string = 'Users'
+  ) {}
 }
 
 @Service({ global: false })

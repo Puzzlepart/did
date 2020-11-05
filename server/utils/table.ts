@@ -343,4 +343,14 @@ class AzTableUtilities {
   }
 }
 
+/**
+ * Converts a string to an array
+ *
+ * @param {*} str String
+ * @param {*} separator String separator
+ */
+export const toArray = (str: string, separator: any = '|') => {
+  return (str || '').split(separator).filter((p) => p)
+}
+
 export default AzTableUtilities

@@ -2,12 +2,11 @@
 import List from 'components/List'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
-import { withDefaultProps } from 'with-default-props'
-import { titleColumn, timeColumn, durationColumn } from './columns'
+import { durationColumn, timeColumn, titleColumn } from './columns'
 import styles from './EventList.module.scss'
 import { IEventListProps } from './types'
 
-const EventList = (props: IEventListProps): JSX.Element => {
+const EventList: React.FunctionComponent<IEventListProps> = (props: IEventListProps): JSX.Element => {
     const { t } = useTranslation()
     const columns = [
         titleColumn(props, t('common.titleLabel')),
@@ -31,12 +30,7 @@ const EventList = (props: IEventListProps): JSX.Element => {
     )
 }
 
-export default withDefaultProps(
-    EventList,
-    {
-        additionalColumns: [],
-    }
-)
+export default EventList
 
 
 export * from './types'

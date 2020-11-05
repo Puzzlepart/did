@@ -3,7 +3,6 @@ const tryRequire = require('try-require')
 const path = require('path')
 const src = path.resolve(__dirname, 'client/')
 const pkg = require('./package.json')
-const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
@@ -81,7 +80,6 @@ let config = {
     plugins: [new TsconfigPathsPlugin({ configFile: './client/tsconfig.json' })]
   },
   plugins: [
-    new MomentLocalesPlugin({ localesToKeep: ['en-gb', 'nb'] }),
     new HtmlWebpackPlugin({
       template: hbsTemplate,
       filename: path.resolve(__dirname, serverDist, 'views/index.hbs'),

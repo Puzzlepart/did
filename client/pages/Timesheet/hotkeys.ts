@@ -27,19 +27,16 @@ export default (context: ITimesheetContext, t: TFunction): GlobalHotKeysProps =>
   },
   handlers: {
     GO_TO_CURRENT_WEEK: () =>
-      context.dispatch({
-        type: 'MOVE_SCOPE',
-        payload: new Date().toISOString()
-      }),
+      context.dispatch({        type: 'SET_SCOPE'      }),
     PREV_WEEK: () =>
       context.dispatch({
-        type: 'MOVE_SCOPE',
-        payload: { amount: -1, unit: 'week' }
+        type: 'SET_SCOPE',
+        payload: context.scope.startDateTime.add('-1w').$
       }),
     NEXT_WEEK: () =>
       context.dispatch({
-        type: 'MOVE_SCOPE',
-        payload: { amount: 1, unit: 'week' }
+        type: 'SET_SCOPE',
+        payload: context.scope.startDateTime.add('1w').$
       }),
     SHOW_SHORTCUTS: () => context.dispatch({ type: 'TOGGLE_SHORTCUTS' })
   },

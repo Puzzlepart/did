@@ -5,7 +5,7 @@ import { Shimmer } from 'office-ui-fabric-react/lib/Shimmer'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
-import dateUtils from 'utils/date'
+import DateUtils from 'utils/date'
 import { TimesheetContext } from '../..'
 import styles from './StatusBar.module.scss'
 
@@ -30,7 +30,7 @@ export const StatusBar = () => {
         messages.push({
             text: t(
                 'timesheet.periodHoursSummaryText',
-                { hours: dateUtils.getDurationString(selectedPeriod.totalDuration, t) }
+                { hours: DateUtils.getDurationString(selectedPeriod.totalDuration, t) }
             ),
             iconName: 'ReminderTime'
         })
@@ -39,7 +39,7 @@ export const StatusBar = () => {
         messages.push({
             text: t(
                 'timesheet.hoursNotMatchedText',
-                { hours: dateUtils.getDurationString(selectedPeriod.unmatchedDuration, t) }
+                { hours: DateUtils.getDurationString(selectedPeriod.unmatchedDuration, t) }
             ),
             type: MessageBarType.warning,
             iconName: 'BufferTimeBoth'
@@ -56,7 +56,7 @@ export const StatusBar = () => {
         messages.push({
             text: t(
                 'timesheet.periodConfirmedText',
-                { hours: dateUtils.getDurationString(selectedPeriod.matchedDuration, t) }
+                { hours: DateUtils.getDurationString(selectedPeriod.matchedDuration, t) }
             ),
             type: MessageBarType.success,
             iconName: 'CheckMark'
@@ -66,7 +66,7 @@ export const StatusBar = () => {
         messages.push({
             text: t(
                 'timesheet.periodForecastedText',
-                { hours: dateUtils.getDurationString(selectedPeriod.forecastedHours, t) }
+                { hours: DateUtils.getDurationString(selectedPeriod.forecastedHours, t) }
             ),
             type: MessageBarType.info,
             iconName: 'BufferTimeBoth'

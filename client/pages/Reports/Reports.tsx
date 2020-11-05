@@ -9,7 +9,7 @@ import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { filter, find, isEmpty } from 'underscore'
-import dateUtils from 'utils/date'
+import DateUtils from 'utils/date'
 import { exportExcel } from 'utils/exportExcel'
 import columns from './columns'
 import commandBar from './commandBar'
@@ -119,7 +119,7 @@ export const Reports = () => {
                                         ...state.groupBy,
                                         totalFunc: items => {
                                             const durationHrs = (items.reduce((sum, item) => sum + item.duration, 0) as number)
-                                            return t('common.headerTotalDuration', { duration: dateUtils.getDurationString(durationHrs, t) })
+                                            return t('common.headerTotalDuration', { duration: DateUtils.getDurationString(durationHrs, t) })
                                         },
                                     }}
                                     columns={columns(t)}
