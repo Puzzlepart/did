@@ -1,5 +1,4 @@
 import { TFunction } from 'i18next'
-import moment from 'moment'
 import { format } from 'office-ui-fabric-react/lib/Utilities'
 import { capitalize } from 'underscore.string'
 
@@ -11,9 +10,11 @@ export default new (class DateUtils {
    *
    * @param {string} locale Locale
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public setup(locale: string) {
-    this._momentLocale = locale
-    moment.locale(this._momentLocale)
+    // TODO: Set up e.g. dayjs
+    // this._momentLocale = locale
+    // moment.locale(this._momentLocale)
   }
 
   /**
@@ -21,9 +22,12 @@ export default new (class DateUtils {
    *
    * @param {string} date Date string
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   toMoment(date: string) {
-    const m = moment(date)
-    return m.add(m.toDate().getTimezoneOffset(), 'minutes')
+    return null
+    // TODO: Fix
+    // const m = moment(date)
+    // return m.add(m.toDate().getTimezoneOffset(), 'minutes')
   }
 
   /**
@@ -50,19 +54,25 @@ export default new (class DateUtils {
    * @param {string} date Date string
    * @param {string} dateFormat Date format
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   formatDate(date: string, dateFormat: string): string {
-    const m = moment.utc(date)
-    return m.add(-m.toDate().getTimezoneOffset(), 'minutes').format(dateFormat)
+    // TODO: Fix
+    return null
+    // const m = moment.utc(date)
+    // return m.add(-m.toDate().getTimezoneOffset(), 'minutes').format(dateFormat)
   }
 
   /**
    * Get start of week
    *
-   * @param {string | Date | moment.Moment} date Date string
+   * @param {unknown} date Date string
    */
-  startOfWeek(date?: string | Date | moment.Moment): moment.Moment {
-    const m = moment.utc(date)
-    return m.add(-m.toDate().getTimezoneOffset(), 'minutes').startOf('isoWeek')
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  startOfWeek(date?: unknown): unknown {
+    // TODO: fix
+    return null
+    // const m = moment.utc(date)
+    // return m.add(-m.toDate().getTimezoneOffset(), 'minutes').startOf('isoWeek')
   }
 
   /**
@@ -70,24 +80,30 @@ export default new (class DateUtils {
    *
    * @param {string | Date} date Date string
    */
-  endOfWeek(date?: string | Date | moment.Moment): moment.Moment {
-    const m = moment.utc(date)
-    return m.add(-m.toDate().getTimezoneOffset(), 'minutes').endOf('isoWeek')
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  endOfWeek(date?: unknown): unknown {
+    // TODO: fix
+    return null
+    // const m = moment.utc(date)
+    // return m.add(-m.toDate().getTimezoneOffset(), 'minutes').endOf('isoWeek')
   }
 
   /**
    * Get days between a start and end time
    *
-   * @param {moment.Moment} start Start
-   * @param {moment.Moment} end End
+   * @param {unknown} start Start
+   * @param {unknown} end End
    * @param {string} dayFormat Date format
    */
-  getDays(start: moment.Moment, end: moment.Moment, dayFormat: string): string[] {
-    const days = []
-    for (let i = 0; i <= end.weekday() - start.weekday(); i++) {
-      days.push(capitalize(start.clone().add(i, 'days').locale(this._momentLocale).format(dayFormat)))
-    }
-    return days
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  getDays(start: unknown, end: unknown, dayFormat: string): string[] {
+    // TODO: fix
+    return null
+    // const days = []
+    // for (let i = 0; i <= end.weekday() - start.weekday(); i++) {
+    //   days.push(capitalize(start.clone().add(i, 'days').locale(this._momentLocale).format(dayFormat)))
+    // }
+    // return days
   }
 
   /**
@@ -95,8 +111,11 @@ export default new (class DateUtils {
    *
    * @param {number} amount Defaults to 1
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public addMonth(amount = 1) {
-    return moment().add(amount, 'month')
+    // TODO: fix
+    return null
+    // return moment().add(amount, 'month')
   }
 
   /**
@@ -104,8 +123,11 @@ export default new (class DateUtils {
    *
    * @param {number} amount Defaults to 1
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public subtractMonths(amount = 1) {
-    return moment().subtract(amount, 'month')
+    // TODO: fix
+    return null
+    // return moment().subtract(amount, 'month')
   }
 
   /**
@@ -118,12 +140,15 @@ export default new (class DateUtils {
    * * {number} monthNumber
    * * {number} year
    */
-  public getMonthYear(date: moment.Moment = moment()) {
-    return {
-      monthName: date.format('MMMM'),
-      monthNumber: date.month() + 1,
-      year: date.year()
-    }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public getMonthYear(date: unknown = null) {
+    // TODO: fix
+    return null
+    // return {
+    //   monthName: date.format('MMMM'),
+    //   monthNumber: date.month() + 1,
+    //   year: date.year()
+    // }
   }
 
   /**
@@ -140,64 +165,67 @@ export default new (class DateUtils {
    * @param {string} format Format
    * @param {boolean} captialize Capitalize
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getMonthName(monthIndex?: number, format = 'MMMM', captialize = false): string {
-    const date = moment().locale(this._momentLocale)
-    let name: string
-    if (monthIndex < 0) name = date.add(monthIndex, 'month').format(format)
-    else if (monthIndex === 0) name = date.format(format)
-    else name = date.month(monthIndex).format(format)
-    return captialize ? capitalize(name) : name
+    // TODO: fix
+    return null
+    // const date = moment().locale(this._momentLocale)
+    // let name: string
+    // if (monthIndex < 0) name = date.add(monthIndex, 'month').format(format)
+    // else if (monthIndex === 0) name = date.format(format)
+    // else name = date.month(monthIndex).format(format)
+    // return captialize ? capitalize(name) : name
   }
 
   /**
    * Get timespan string
    *
-   * @param {moment.Moment} start Start
-   * @param {moment.Moment} end End
+   * @param {unknown} start Start
+   * @param {unknown} end End
    * @param {object} options Options
    */
-  getTimespanString(
-    start: moment.Moment,
-    end: moment.Moment,
-    options: Record<string, any> = {
-      monthFormat: 'MMMM',
-      yearFormat: 'YYYY',
-      hideYear: false,
-      implicitYear: false
-    }
-  ): string {
-    return start
-      .locale(this._momentLocale)
-      ['twix'](end.locale(this._momentLocale), { allDay: true })
-      .format(options)
-      .toLowerCase()
+  getTimespanString(start: unknown, end: unknown, options: Record<string, any> = { monthFormat: 'MMMM', yearFormat: 'YYYY', hideYear: false, }): string {
+    // TODO: fix
+    return null
+    // return start
+    //   .locale(this._momentLocale)
+    // ['twix'](end.locale(this._momentLocale), { allDay: true })
+    //   .format(options)
+    //   .toLowerCase()
   }
 
   /**
    * Get month names 0-11
    */
   getMonthNames(): string[] {
-    return Array.apply(0, Array(12)).map((_: any, i: number) => {
-      return capitalize(moment().month(i).format('MMMM'))
-    })
+    // TODO: fix
+    return null
+    // return Array.apply(0, Array(12)).map((_: any, i: number) => {
+    //   return capitalize(moment().month(i).format('MMMM'))
+    // })
   }
 
   /**
    * Get a string representation of the moment date instance
    *
-   * @param {moment.Moment} date Moment date
+   * @param {unknown} date Moment date
    *
    * @returns {string} Returns a ISO representation of the date without the Z
    */
-  toString(date: moment.Moment): string {
-    return date.toISOString().replace('Z', '')
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  toString(date: unknown): string {
+    // TODO: fix
+    return null
+    // return date.toISOString().replace('Z', '')
   }
 
   /**
    * Get week number
    */
   getWeek(): number {
-    return moment().week()
+    // TODO: fix
+    return null
+    // return moment().week()
   }
 
   /**
@@ -210,13 +238,17 @@ export default new (class DateUtils {
    * etc.
    */
   getMonthIndex(): number {
-    return moment().month() + 1
+    // TODO: fix
+    return null
+    // return moment().month() + 1
   }
 
   /**
    * Get year
    */
   getYear(): number {
-    return moment().year()
+    // TODO: fix
+    return null
+    // return moment().year()
   }
 })()
