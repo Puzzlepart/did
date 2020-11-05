@@ -1,3 +1,4 @@
+import date from 'utils/date'
 import dateUtils, { DateObject } from 'utils/date'
 
 /**
@@ -6,9 +7,6 @@ import dateUtils, { DateObject } from 'utils/date'
  * @category Timesheet
  */
 export class TimesheetScope {
-  /**
-   * Intializes a scope
-   */
   constructor(
     public startDateTime?: DateObject,
     public endDateTime?: DateObject
@@ -62,9 +60,11 @@ export class TimesheetScope {
     // return this._startDateTime.clone().add(index, 'days' as m2oment.DurationInputArg2)
   }
 
+  /**
+   * Is the scope the current week
+   */
   public get isCurrentWeek(): boolean {
-    // TODO: rewrite to use date util
-    return false
+    return dateUtils.isCurrentWeek(this.startDateTime)
   }
 
   /**

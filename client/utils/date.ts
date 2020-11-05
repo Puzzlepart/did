@@ -195,6 +195,15 @@ class DateUtils {
   getYear(date?: DateInput): number {
     return dayjs(date).year()
   }
+
+  /**
+   * Is current week
+   *
+   * @param {DateInput} date Optional date
+   */
+  isCurrentWeek(date?: DateInput): boolean {
+    return dayjs(date).week() === dayjs().week()
+  }
 }
 
 export default new DateUtils()
