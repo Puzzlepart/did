@@ -19,8 +19,8 @@ jobs:
         password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
     - run: |
-        docker build . -t did:latest
-        docker push did:latest
+        docker build . -t ${{ secrets.DOCKER_USERNAME }}did:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/did:latest
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
@@ -28,4 +28,4 @@ jobs:
         app-name: 'didapp-docker-630'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_8a11f7bedec54385bd1d609774b3ff03 }}
-        images: 'did:latest'
+        images: '${{ secrets.DOCKER_USERNAME }}/did:latest'
