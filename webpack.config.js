@@ -80,7 +80,6 @@ let config = {
     plugins: [new TsconfigPathsPlugin({ configFile: './client/tsconfig.json' })]
   },
   plugins: [
-    new MomentLocalesPlugin({ localesToKeep: ['en-gb', 'nb'] }),
     new HtmlWebpackPlugin({
       template: hbsTemplate,
       filename: path.resolve(__dirname, serverDist, 'views/index.hbs'),
