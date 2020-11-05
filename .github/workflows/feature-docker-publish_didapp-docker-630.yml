@@ -1,6 +1,3 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
 name: Build and deploy container app to Azure Web App - didapp-docker-630
 
 on:
@@ -22,8 +19,8 @@ jobs:
         password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
     - run: |
-        docker build . -t index.docker.io/${{ secrets.DOCKER_USERNAME }}/did:${{ github.sha }}
-        docker push index.docker.io/${{ secrets.DOCKER_ACCESS_TOKEN }}/did:${{ github.sha }}
+        docker build . -t did:${{ github.sha }}
+        docker push did:${{ github.sha }}
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
@@ -31,4 +28,4 @@ jobs:
         app-name: 'didapp-docker-630'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_8a11f7bedec54385bd1d609774b3ff03 }}
-        images: 'index.docker.io/${{ secrets.DOCKER_USERNAME }}/did:${{ github.sha }}'
+        images: 'did:${{ github.sha }}'
