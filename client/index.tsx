@@ -8,7 +8,7 @@ import 'regenerator-runtime/runtime.js'
 import { contains } from 'underscore'
 import dateUtils from 'utils/date'
 import { supportedLanguages } from '../resources'
-import { App } from './App'
+// import { App } from './App'
 import { IAppContext } from './AppContext'
 import { client, GET_CURRENT_USER } from './graphql'
 import './i18n'
@@ -45,7 +45,8 @@ getContext().then(context => {
 
     ReactDom.render((
         <ApolloProvider client={client}>
-            <App {...context} />
+            We are currently removing moment
+            {/* <App {...context} /> */}
         </ApolloProvider>
     ), container)
 })

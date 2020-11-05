@@ -95,6 +95,11 @@ export class TimesheetScope {
     return false
   }
 
+  /**
+   * Get timespan string for the scope
+   * 
+   * Used in WeekPicker
+   */
   public get timespan(): string {
     // TODO: rewrite to use date util
     return null
