@@ -4,7 +4,6 @@ import { TFunction } from 'i18next'
 import { EventInput, EventObject, Project, TimesheetPeriodInput, TimesheetPeriodObject } from 'types'
 import { filter, omit } from 'underscore'
 import { capitalize, isBlank } from 'underscore.string'
-import dateUtils, { moment } from 'utils/date'
 import { ITimesheetParams } from './types'
 
 /**
@@ -59,14 +58,14 @@ export class TimesheetPeriod {
   private _month?: string
 
   /**
-   * Start date time moment object
+   * Start date time 
    */
-  private _startDateTime?: moment.Moment
+  private _startDateTime?: unknown
 
   /**
-   * End date time moment object
+   * End date time
    */
-  private _endDateTime?: moment.Moment
+  private _endDateTime?: unknown
 
   /**
    * Local storage
@@ -99,8 +98,8 @@ export class TimesheetPeriod {
     if (!_period) return
     this.id = _period.id
     this._month = capitalize(_period.month)
-    this._startDateTime = moment(_period.startDateTime)
-    this._endDateTime = moment(_period.endDateTime)
+    this._startDateTime = _period.startDateTime
+    this._endDateTime = _period.endDateTime
     this.isConfirmed = _period.isConfirmed
     this.isForecasted = _period.isForecasted
     this.isForecast = _period.isForecast
@@ -259,14 +258,16 @@ export class TimesheetPeriod {
    * @returns {TimesheetPeriodInput} Data for the period
    */
   public get data(): TimesheetPeriodInput {
-    if (!this.isLoaded) return null
-    return {
-      id: this.id,
-      startDateTime: this._startDateTime.toISOString(),
-      endDateTime: this._endDateTime.toISOString(),
-      matchedEvents: this.matchedEvents,
-      forecastedHours: this.forecastedHours
-    }
+    // TODO: Rewrite
+    return null
+    // if (!this.isLoaded) return null
+    // return {
+    //   id: this.id,
+    //   startDateTime: this._startDateTime.toISOString(),
+    //   endDateTime: this._endDateTime.toISOString(),
+    //   matchedEvents: this.matchedEvents,
+    //   forecastedHours: this.forecastedHours
+    // }
   }
 
   /**
@@ -274,9 +275,11 @@ export class TimesheetPeriod {
    *
    * @param {string} dayFormat Day format
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public weekdays(dayFormat: string = 'dddd DD'): string[] {
-    if (!this._startDateTime) return []
-    return dateUtils.getDays(this._startDateTime, this._endDateTime, dayFormat)
+    return null
+    // if (!this._startDateTime) return []
+    // return dateUtils.getDays(this._startDateTime, this._endDateTime, dayFormat)
   }
 
   /**
@@ -322,6 +325,8 @@ export class TimesheetPeriod {
    * @returns true if the period end date time is before today
    */
   public get isPast(): boolean {
-    return this._endDateTime && this._endDateTime.isBefore()
+    // TODO: Use date util
+    return false
+    // return this._endDateTime && this._endDateTime.isBefore()
   }
 }

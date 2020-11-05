@@ -69,6 +69,7 @@ export class TimesheetScope {
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public add(options: unknown): unknown {
+    // TODO: rewrite to use date util
     return null
     // const start = this._startDateTime.clone()
     // start.add(options.amount, options.unit)
