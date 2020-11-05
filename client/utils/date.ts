@@ -104,7 +104,7 @@ class DateUtils {
 
   /**
    * Get monthName, monthNumber and year for the current date
-   * 
+   *
    * @param {dayjs.ConfigType} date Optional date
    */
   public getMonthYear(date?: dayjs.ConfigType) {
@@ -144,12 +144,12 @@ class DateUtils {
    * Get month names in a year
    */
   getMonthNames(): string[] {
-    return dayjs.months().map(m => capitalize(m))
+    return dayjs.months().map((m) => capitalize(m))
   }
 
   /**
    * Get a ISO string representation of the date
-   * 
+   *
    * @param {dayjs.ConfigType} date Optional date
    */
   toString(date?: dayjs.ConfigType): string {
@@ -158,7 +158,7 @@ class DateUtils {
 
   /**
    * Get week number
-   * 
+   *
    * @param {dayjs.ConfigType} date Optional date
    */
   getWeek(date?: dayjs.ConfigType): number {
@@ -167,9 +167,9 @@ class DateUtils {
 
   /**
    * Get the month.
-   * 
+   *
    * Months are zero indexed, so January is month 0.
-   * 
+   *
    * @param {dayjs.ConfigType} date Optional date
    */
   getMonthIndex(date?: dayjs.ConfigType): number {
@@ -178,7 +178,7 @@ class DateUtils {
 
   /**
    * Get year
-   * 
+   *
    * @param {dayjs.ConfigType} date Optional date
    */
   getYear(date?: dayjs.ConfigType): number {

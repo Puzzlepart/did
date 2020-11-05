@@ -1,15 +1,15 @@
 import * as utils from '../../utils/date'
 
 export default class MSGraphEvent {
-  public id: string;
-  public title: string;
-  public body: string;
-  public isOrganizer: boolean;
-  public categories: string[];
-  public webLink: string;
-  public startDateTime: string;
-  public endDateTime: string;
-  public duration: number;
+  public id: string
+  public title: string
+  public body: string
+  public isOrganizer: boolean
+  public categories: string[]
+  public webLink: string
+  public startDateTime: string
+  public endDateTime: string
+  public duration: number
 
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   constructor(event: any) {

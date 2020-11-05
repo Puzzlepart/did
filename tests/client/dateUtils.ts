@@ -43,12 +43,18 @@ describe(header('dateUtils'), async () => {
       it('should return an array with 12 items', () => {
         strictEqual(dateUtils.getMonthNames().length, 12)
         deepStrictEqual(dateUtils.getMonthNames(), [
-          'January', 'February',
-          'March', 'April',
-          'May', 'June',
-          'July', 'August',
-          'September', 'October',
-          'November', 'December'
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'November',
+          'December'
         ])
       })
     })
@@ -61,12 +67,18 @@ describe(header('dateUtils'), async () => {
       it('should return an array with 12 items', () => {
         strictEqual(dateUtils.getMonthNames().length, 12)
         deepStrictEqual(dateUtils.getMonthNames(), [
-          'Januar', 'Februar',
-          'Mars', 'April',
-          'Mai', 'Juni',
-          'Juli', 'August',
-          'September', 'Oktober',
-          'November', 'Desember'
+          'Januar',
+          'Februar',
+          'Mars',
+          'April',
+          'Mai',
+          'Juni',
+          'Juli',
+          'August',
+          'September',
+          'Oktober',
+          'November',
+          'Desember'
         ])
       })
 
@@ -110,15 +122,7 @@ describe(header('dateUtils'), async () => {
 
     it('should return days between 2020-02-17 -2020-02-17 in format dddd', () => {
       const days = dateUtils.getDays('2020-02-17', '2020-02-23', 'dddd')
-      deepStrictEqual(days, [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday'
-      ])
+      deepStrictEqual(days, ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'])
     })
   })
 })

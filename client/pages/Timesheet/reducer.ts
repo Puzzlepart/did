@@ -3,7 +3,7 @@ import { getValue } from 'helpers'
 import { TFunction } from 'i18next'
 import { Project } from 'types'
 import { find, first } from 'underscore'
-import {  ITimesheetState, TimesheetPeriod, TimesheetView } from './types'
+import { ITimesheetState, TimesheetPeriod, TimesheetView } from './types'
 
 export type TimesheetAction =
   | {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import dateUtils from 'string-strip-html'
 
 // SERVER SIDE DATE UTILS USED:
@@ -12,14 +13,14 @@ import dateUtils from 'string-strip-html'
  * endOfMonth - last day of month based on date - string
  * startOfWeek - first day of week based on date - string
  * endOfWeek - last day of week based on date - string
- * 
+ *
  */
 
 /**
  * Strip html from string using string-strip-html
  * Used when fetching events from ms graph
  * Strips the html from event body
- *  
+ *
  * @param {string} str String
  */
 export const stripHtmlString = (str: string): string => dateUtils(str).result
@@ -31,8 +32,8 @@ export const stripHtmlString = (str: string): string => dateUtils(str).result
  * @param {string} endDateTime End time
  */
 export const getDurationHours = (startDateTime: string, endDateTime: string): any => {
-    return null;
-    // TODO Return duration hours as number
+  return null
+  // TODO Return duration hours as number
 }
 
 /**
@@ -41,8 +42,8 @@ export const getDurationHours = (startDateTime: string, endDateTime: string): an
  * @param {*} date Date
  */
 export const getPeriod = (date: any) => {
-    return null
-    // TODO RETURN weeknumber_monthnumber_yearnumber
+  return null
+  // TODO RETURN weeknumber_monthnumber_yearnumber
 }
 
 /**
@@ -51,8 +52,8 @@ export const getPeriod = (date: any) => {
  * @param {string } date Date
  */
 export const getWeek = (date?: any) => {
-    // TODO RETURN specified Date's week OR current date's week
-    return null
+  // TODO RETURN specified Date's week OR current date's week
+  return null
 }
 
 /**
@@ -61,8 +62,8 @@ export const getWeek = (date?: any) => {
  * @param {string} date Date
  */
 export const getYear = (date?: string) => {
-    // TODO return year from specified date or current date
-    return null
+  // TODO return year from specified date or current date
+  return null
 }
 
 /**
@@ -72,9 +73,9 @@ export const getYear = (date?: string) => {
  * @param {*} date Date
  */
 export const getMonthIndex = (date: any) => {
-    // TODO return month from specified date or current date
-    // NOTE - MUST BE 1-INDEXED
-    return null
+  // TODO return month from specified date or current date
+  // NOTE - MUST BE 1-INDEXED
+  return null
 }
 
 /**
@@ -83,9 +84,9 @@ export const getMonthIndex = (date: any) => {
  * @param {*} date Date
  */
 export const startOfMonth = (date: any) => {
-    // TODO return date of start of month from specified date or current date
-    // toISOString minus Z
-    return null
+  // TODO return date of start of month from specified date or current date
+  // toISOString minus Z
+  return null
 }
 
 /**
@@ -94,9 +95,9 @@ export const startOfMonth = (date: any) => {
  * @param {*} date Date
  */
 export const endOfMonth = (date: any) => {
-    // TODO return date of end of month from specified date or current date
-    // toISOString minus Z
-    return null
+  // TODO return date of end of month from specified date or current date
+  // toISOString minus Z
+  return null
 }
 
 /**
@@ -105,8 +106,8 @@ export const endOfMonth = (date: any) => {
  * @param {*} week Week number
  */
 export const startOfWeek = (week: any) => {
-    // TODO return date of start of week from specified date or current date
-    return null
+  // TODO return date of start of week from specified date or current date
+  return null
 }
 
 /**
@@ -115,8 +116,8 @@ export const startOfWeek = (week: any) => {
  * @param {*} week Week number
  */
 export const endOfWeek = (week: any) => {
-    // TODO return date of end of week from specified date or current date
-    return null
+  // TODO return date of end of week from specified date or current date
+  return null
 }
 
 /**
@@ -127,9 +128,9 @@ export const endOfWeek = (week: any) => {
  * @param {*} locale Locale
  */
 export const formatDate = (date: any, dateFormat: any, locale: any, timeZone = 'Europe/Oslo') => {
-    // TODO return correct date format as string
-    // remember locale and tz
-    return null
+  // TODO return correct date format as string
+  // remember locale and tz
+  return null
 }
 
 /**
@@ -138,6 +139,6 @@ export const formatDate = (date: any, dateFormat: any, locale: any, timeZone = '
  * @param {*} date Date
  */
 export const isAfterToday = (date: any) => {
-    // return bool, whether the specified date is after now
-    return null
+  // return bool, whether the specified date is after now
+  return null
 }

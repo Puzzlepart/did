@@ -32,7 +32,7 @@ export class TimesheetScope {
 
   /**
    *  Get the from and to date for the scope as string
-   * 
+   *
    * Hardcoded to return 2020-11-02 - 2020-11-08
    */
   public get dateStrings(): { startDateTime: string; endDateTime: string } {
@@ -95,7 +95,7 @@ export class TimesheetScope {
 
   /**
    * Get timespan string for the scope
-   * 
+   *
    * Used in WeekPicker
    */
   public get timespan(): string {
