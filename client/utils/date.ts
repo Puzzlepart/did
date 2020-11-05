@@ -4,8 +4,6 @@ import { format } from 'office-ui-fabric-react/lib/Utilities'
 import { capitalize } from 'underscore.string'
 require('twix')
 
-export { moment }
-
 export default new (class DateUtils {
   private _momentLocale: string
 
