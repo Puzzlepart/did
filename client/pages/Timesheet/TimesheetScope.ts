@@ -1,4 +1,4 @@
-import dateUtils, { DateInput } from 'utils/date'
+import DateUtils, { DateInput } from 'utils/date'
 import { DateObject } from 'utils/date.dateObject'
 import { ITimesheetParams } from './types'
 
@@ -9,8 +9,8 @@ import { ITimesheetParams } from './types'
  */
 export class TimesheetScope {
   constructor(public startDateTime?: DateObject, public endDateTime?: DateObject) {
-    this.startDateTime = dateUtils.createDate('2020-05-11')
-    this.endDateTime = dateUtils.createDate(this.startDateTime.endOfWeek)
+    this.startDateTime = DateUtils.createDate('2020-05-11')
+    this.endDateTime = DateUtils.createDate(this.startDateTime.endOfWeek)
   }
 
   /**
@@ -37,8 +37,8 @@ export class TimesheetScope {
    * @param {DateInput} start Start of scope
    */
   public set(start: DateInput): TimesheetScope {
-    this.startDateTime = dateUtils.createDate(start)
-    this.endDateTime = dateUtils.createDate(this.startDateTime.endOfWeek)
+    this.startDateTime = DateUtils.createDate(start)
+    this.endDateTime = DateUtils.createDate(this.startDateTime.endOfWeek)
     return this
   }
 
@@ -48,7 +48,7 @@ export class TimesheetScope {
    * @param {number} index Index
    */
   public getDay(index: number): DateObject {
-    return dateUtils.addDays(this.startDateTime, index)
+    return DateUtils.addDays(this.startDateTime, index)
   }
 
   /**
@@ -64,6 +64,6 @@ export class TimesheetScope {
    * Used in WeekPicker
    */
   public get timespan(): string {
-    return dateUtils.getTimespanString(this.startDateTime, this.endDateTime)
+    return DateUtils.getTimespanString(this.startDateTime, this.endDateTime)
   }
 }

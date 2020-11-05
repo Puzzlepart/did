@@ -1,10 +1,10 @@
 import $dayjs, { Dayjs } from 'dayjs'
-import { DateUtils, DateInput } from './date'
+import DateUtils, { DateInput } from './date'
 
 export class DateObject {
   public $: Dayjs
 
-  constructor(date: DateInput, private _dateUtils: DateUtils) {
+  constructor(date: DateInput) {
     this.$ = $dayjs(date)
   }
 
@@ -19,14 +19,14 @@ export class DateObject {
    * Get end of week
    */
   public get endOfWeek() {
-    return this._dateUtils.endOfWeek(this.$)
+    return DateUtils.endOfWeek(this.$)
   }
 
   /**
    * Is current week
    */
   public get isCurrentWeek() {
-    return this._dateUtils.isCurrentWeek(this.$)
+    return DateUtils.isCurrentWeek(this.$)
   }
 
   /**
@@ -44,7 +44,7 @@ export class DateObject {
    * To format as an ISO 8601 string
    */
   public get iso(): string {
-    return this._dateUtils.toISOString(this.$)
+    return DateUtils.toISOString(this.$)
   }
 
   /**

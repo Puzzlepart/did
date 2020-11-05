@@ -6,7 +6,7 @@ import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import React, { useEffect, useMemo, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { first, isEmpty } from 'underscore'
-import dateUtils from 'utils/date'
+import DateUtils from 'utils/date'
 import { commandBar } from './commandBar'
 import { createColumns, createRows, createPeriods } from './utils'
 import styles from './SummaryView.module.scss'
@@ -21,7 +21,7 @@ export const SummaryView = (props: ISummaryViewProps): JSX.Element => {
     const scopes = getScopes(t)
     const [state, dispatch] = useReducer(reducer, {
         year: props.defaultSelectedYear,
-        endMonthIndex: dateUtils.getMonthIndex(),
+        endMonthIndex: DateUtils.getMonthIndex(),
         timeentries: [],
         range: props.defaultRange,
         type: first(types),

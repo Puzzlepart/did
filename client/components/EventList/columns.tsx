@@ -2,7 +2,7 @@
 import * as helpers from 'helpers'
 import { EventObject, TimeEntry } from 'types'
 import * as React from 'react'
-import dateUtils from 'utils/date'
+import DateUtils from 'utils/date'
 import { generateColumn as col } from 'utils/generateColumn'
 import { IColumn } from '../List'
 import { DurationDisplay } from './DurationDisplay'
@@ -74,8 +74,8 @@ export const timeColumn = (props: IEventListProps, name: string, fieldName = 'ti
     name,
     { ...getSizing(props, fieldName, 90, 90) },
     (event: TimeEntry) => {
-        const startTime = dateUtils.formatDate(event.startDateTime, props.dateFormat)
-        const endTime = dateUtils.formatDate(event.endDateTime, props.dateFormat)
+        const startTime = DateUtils.formatDate(event.startDateTime, props.dateFormat)
+        const endTime = DateUtils.formatDate(event.endDateTime, props.dateFormat)
         return (
             <>
                 <span>

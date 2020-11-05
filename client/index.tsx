@@ -6,7 +6,7 @@ import * as React from 'react'
 import * as ReactDom from 'react-dom'
 import 'regenerator-runtime/runtime.js'
 import { contains } from 'underscore'
-import dateUtils from 'utils/date'
+import DateUtils from 'utils/date'
 import { supportedLanguages } from '../resources'
 import { App } from './App'
 import { IAppContext } from './AppContext'
@@ -41,7 +41,7 @@ const getContext = async (): Promise<IAppContext> => {
 
 getContext().then(context => {
     const container = document.getElementById('app')
-    dateUtils.setup(context.user.preferredLanguage)
+    DateUtils.setup(context.user.preferredLanguage)
     i18n.changeLanguage(context.user.preferredLanguage)
 
     ReactDom.render((

@@ -203,7 +203,7 @@ export class TimesheetPeriod {
   public weekdays(dayFormat: string = 'dddd DD'): string[] {
     return null
     // if (!this._startDateTime) return []
-    // return dateUtils.getDays(this._startDateTime, this._endDateTime, dayFormat)
+    // return DateUtils.getDays(this._startDateTime, this._endDateTime, dayFormat)
   }
 
   /**

@@ -3,7 +3,7 @@ import { Label } from 'office-ui-fabric-react/lib/Label'
 import { Slider } from 'office-ui-fabric-react/lib/Slider'
 import { Spinner } from 'office-ui-fabric-react/lib/Spinner'
 import React from 'react'
-import dateUtils from 'utils/date'
+import DateUtils from 'utils/date'
 import * as excelUtils from 'utils/exportExcel'
 import styles from './SummaryView.module.scss'
 import { ISummaryViewContext } from './context'
@@ -47,7 +47,7 @@ export const commandBar = (context: ISummaryViewContext) => {
                             disabled={context.loading}
                             value={context.range}
                             min={2}
-                            max={dateUtils.getMonthIndex()}
+                            max={DateUtils.getMonthIndex()}
                             onChange={value => context.dispatch({ type: 'CHANGE_RANGE', payload: value })} />
                     </>
                 ),

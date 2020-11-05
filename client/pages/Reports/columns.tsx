@@ -3,7 +3,7 @@ import { ProjectLink } from 'components/ProjectLink'
 import { TFunction } from 'i18next'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import React from 'react'
-import dateUtils from 'utils/date'
+import DateUtils from 'utils/date'
 import { ExcelColumnType } from 'utils/exportExcel'
 
 const columns = (t: TFunction): IColumn[] => ([
@@ -39,7 +39,7 @@ const columns = (t: TFunction): IColumn[] => ([
         name: t('common.startTimeLabel'),
         minWidth: 100,
         data: { excelColFormat: 'date' as ExcelColumnType },
-        onRender: ({ startDateTime }) => dateUtils.formatDate(startDateTime, 'MMM DD, YYYY kk:mm')
+        onRender: ({ startDateTime }) => DateUtils.formatDate(startDateTime, 'MMM DD, YYYY kk:mm')
     },
     {
         key: 'endDateTime',
@@ -47,7 +47,7 @@ const columns = (t: TFunction): IColumn[] => ([
         name: t('common.endTimeLabel'),
         minWidth: 100,
         data: { excelColFormat: 'date' as ExcelColumnType },
-        onRender: ({ endDateTime }) => dateUtils.formatDate(endDateTime, 'MMM DD, YYYY kk:mm')
+        onRender: ({ endDateTime }) => DateUtils.formatDate(endDateTime, 'MMM DD, YYYY kk:mm')
     },
     {
         key: 'weekNumber',
@@ -60,7 +60,7 @@ const columns = (t: TFunction): IColumn[] => ([
         fieldName: 'monthNumber',
         name: t('common.monthLabel'),
         minWidth: 100,
-        onRender: ({ monthNumber }) => dateUtils.getMonthNames()[monthNumber - 1]
+        onRender: ({ monthNumber }) => DateUtils.getMonthNames()[monthNumber - 1]
     },
     {
         key: 'year',

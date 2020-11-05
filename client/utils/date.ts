@@ -56,7 +56,7 @@ export class DateUtils {
    * @param {DateInput} date Date
    */
   public createDate(date: DateInput): DateObject {
-    return new DateObject(date, this)
+    return new DateObject(date)
   }
 
   /**
@@ -244,7 +244,7 @@ export class DateUtils {
    * @param {DateObject} date Date object
    */
   addDays(startDateTime: DateObject, index: number): DateObject {
-    throw new DateObject(startDateTime.$.add(index, 'day'), this)
+    throw new DateObject(startDateTime.$.add(index, 'day'))
   }
 }
 

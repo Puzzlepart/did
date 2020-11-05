@@ -9,7 +9,7 @@ import React,{useContext} from 'react'
 import { useTranslation } from 'react-i18next'
 import { unique } from 'underscore'
 import { capitalize } from 'underscore.string'
-import dateUtils from 'utils/date'
+import DateUtils from 'utils/date'
 import { TimesheetContext } from '../'
 import { TimesheetScope } from '../TimesheetScope'
 import styles from './SummaryView.module.scss'
@@ -73,7 +73,7 @@ function generateRows(events: EventObject[], columns: IColumn[]) {
         const projectEvents = events.filter(event => event.project.id === project.id)
         return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
             const sum = [...projectEvents]
-                .filter(event => dateUtils.formatDate(event.startDateTime, 'L') === col.fieldName)
+                .filter(event => DateUtils.formatDate(event.startDateTime, 'L') === col.fieldName)
                 .reduce((sum, event) => sum += event.duration, 0)
             obj[col.fieldName] = sum
             obj.sum += sum
@@ -92,7 +92,7 @@ function generateRows(events: EventObject[], columns: IColumn[]) {
 function generateTotalRow(events: any[], columns: IColumn[], label: string) {
     return [...columns].splice(1, columns.length - 2).reduce((obj, col) => {
         const sum = [...events]
-            .filter(event => dateUtils.formatDate(event.startDateTime, 'L') === col.fieldName)
+            .filter(event => DateUtils.formatDate(event.startDateTime, 'L') === col.fieldName)
             .reduce((sum, event) => sum += event.duration, 0)
         obj[col.fieldName] = sum
         obj.sum += sum

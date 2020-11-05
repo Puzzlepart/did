@@ -8,7 +8,7 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isBlank } from 'underscore.string'
 import { sleep } from 'utils'
-import dateUtils from 'utils/date'
+import DateUtils from 'utils/date'
 import ADD_API_TOKEN from './ADD_API_TOKEN'
 import styles from './ApiTokens.module.scss'
 import DELETE_API_TOKEN from './DELETE_API_TOKEN'
@@ -103,7 +103,7 @@ export const ApiTokens = () => {
                         fieldName: 'created',
                         name: t('common.createdLabel'),
                         minWidth: 100,
-                        onRender: (item) => dateUtils.formatDate(item.created, 'LLL')
+                        onRender: (item) => DateUtils.formatDate(item.created, 'LLL')
                     },
                     {
                         key: 'actions',
