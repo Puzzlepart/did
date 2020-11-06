@@ -7,6 +7,7 @@ import { IPivotItemProps } from 'office-ui-fabric-react'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import * as React from 'react'
 import { first, unique } from 'underscore'
+import DateUtils from 'utils/date'
 import { generateColumn as col } from 'utils/generateColumn'
 import { ISummaryViewRow, ISummaryViewState } from './types'
 
@@ -111,18 +112,12 @@ export const createRows = (state: ISummaryViewState, columns: IColumn[], t: TFun
  *
  * @param {number} range Range (default: 0)
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function createPeriods(range: number = 0): IPivotItemProps[] {
-    // TODO: Recreate with date utils
-    return []
-    // const periods = []
-    // for (let i = range; i >= 0; i--) {
-    //     const key = (m2oment().year() - i).toString()
-    //     periods.push({
-    //         key,
-    //         itemKey: key,
-    //         headerText: key,
-    //     })
-    // }
-    // return periods
+    // TODO: Does it compute?
+    const periods = []
+    for (let i = range; i >= 0; i--) {
+        const key = (DateUtils.getYear() - i).toString()
+        periods.push({ key, itemKey: key, headerText: key })
+    }
+    return periods
 }

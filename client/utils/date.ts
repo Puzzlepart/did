@@ -204,10 +204,20 @@ export class DateUtils {
   /**
    * Is current week
    *
-   * @param {DateObject} date Optional date
+   * @param {DateObject} date Date
    */
   public isCurrentWeek(date: DateObject): boolean {
     return date.$.week() === dayjs().week()
+  }
+
+  /**
+    * Is current year
+    *
+    * @param {DateObject} date Date
+    * @param {number} year Year
+    */
+  isCurrentYear(date: DateObject, year?: number) {
+    return (year || date.$.year()) === dayjs().year()
   }
 }
 

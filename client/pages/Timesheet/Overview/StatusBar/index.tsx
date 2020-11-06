@@ -45,7 +45,7 @@ export const StatusBar = () => {
             iconName: 'BufferTimeBoth'
         })
     }
-    if (selectedPeriod.isComplete && !selectedPeriod.isLocked) {
+    if (selectedPeriod.isComplete && !selectedPeriod.isConfirmed) {
         messages.push({
             text: t('timesheet.allHoursMatchedText'),
             type: MessageBarType.success,
