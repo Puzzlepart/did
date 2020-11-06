@@ -19,7 +19,7 @@ export class UserResolver {
    * @param {AzStorageService} _azstorage AzStorageService
    * @param {MSGraphService} _msgraph MSGraphService
    */
-  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) {}
+  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) { }
 
   /**
    * Get current user
@@ -30,11 +30,12 @@ export class UserResolver {
   @Query(() => User, { description: 'Get the currently logged in user' })
   async currentUser(@Ctx() ctx: Context) {
     try {
-      const [user, roles] = await Promise.all([this._azstorage.getUser(ctx.user.id), this._azstorage.getRoles()])
+      const user = await this._azstorage.getUser(ctx.userId)
+      const role = await this._azstorage.getRoleByName(user.role)
       return {
-        ...ctx.user,
         ...user,
-        role: find(roles, (role) => role.name === user.role)
+        subscription: pick(ctx.subscription, 'id', 'name'),
+        role
       }
     } catch (error) {
       return null
