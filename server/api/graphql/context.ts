@@ -5,7 +5,7 @@ import 'reflect-metadata'
 import { Container, ContainerInstance } from 'typedi'
 import { pick } from 'underscore'
 import { SubscriptionService } from '../services'
-import { Subscription, User } from './resolvers/types'
+import { Subscription } from './resolvers/types'
 const debug = createDebug('api/graphql/context')
 
 export class Context {
@@ -15,9 +15,9 @@ export class Context {
   public requestId?: string
 
   /**
-   * User
+   * 
    */
-  public user?: User
+  public userId?: string;
 
   /**
    * Subscription
@@ -51,10 +51,7 @@ export const createContext = async (request: any): Promise<Context> => {
       isAuthorized = true
     } else {
       isAuthorized = !!get(request, 'user')
-      user = isAuthorized && {
-        ...pick(get(request, 'user', { default: {} }), 'id'),
-        subscription: pick(subscription, 'id', 'name')
-      }
+      user = isAuthorized && { ...pick(get(request, 'user', { default: {} }), 'id') }
     }
     const requestId = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString()
     const container = Container.of(requestId)
@@ -62,7 +59,7 @@ export const createContext = async (request: any): Promise<Context> => {
       container,
       subscription: pick(subscription, 'id', 'name', 'connectionString'),
       requestId,
-      user,
+      userId: user.id,
       isAuthorized
     }
     container.set({ id: 'CONTEXT', transient: true, value: context })
