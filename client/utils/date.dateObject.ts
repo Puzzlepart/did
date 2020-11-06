@@ -1,4 +1,4 @@
-import $dayjs, { Dayjs, OpUnitType } from 'dayjs'
+import dayjs, { Dayjs, OpUnitType } from 'dayjs'
 import { pick } from 'underscore'
 import DateUtils, { DateInput } from './date'
 
@@ -10,7 +10,7 @@ export class DateObject {
   public $: Dayjs
 
   constructor(date: DateInput) {
-    this.$ = $dayjs(date)
+    this.$ = dayjs(date)
   }
 
   /**
