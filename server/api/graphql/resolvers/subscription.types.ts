@@ -41,6 +41,9 @@ export class Subscription {
   @Field()
   name: string
 
+  @Field(() => SubscriptionSettings)
+  settings?: SubscriptionSettings
+
   /**
    * Connection string for the subscription storage
    */
