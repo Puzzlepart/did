@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 export const GET_CONTEXT = gql`
   {
-   subscription {
+    subscription {
       id
       name
       settings {

@@ -1,7 +1,6 @@
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
-import { contains } from 'underscore'
 import { simpleResolvers } from '../config'
 import { Subscription } from './subscription.types'
 import { Role } from './types'

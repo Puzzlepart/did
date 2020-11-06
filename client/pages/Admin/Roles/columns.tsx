@@ -28,6 +28,11 @@ export const RoleColumns = (onEdit: (role: Role) => void, t: TFunction) => ([
         }
     ),
     col(
+        'description',
+        '',
+        { minWidth: 140 }
+    ),
+    col(
         'permissions',
         t('admin.permissonsLabel'),
         { minWidth: 200, isMultiline: true },

@@ -1,27 +1,26 @@
 import { TFunction } from 'i18next'
 
 export enum PERMISSION {
- ACCESS_TIMESHEET = 'f5a82c37',
- ACCESS_CUSTOMERS = 'e18a7c45',
- ACCESS_PROJECTS = '289a64ab',
- ACCESS_ADMIN = '2653c3aa',
- ACCESS_REPORTS = 'a031c42f',
- MANAGE_PROJECTS = 'ef4032fb',
- DELETE_PROJECTS = 'c5439319',
- MANAGE_CUSTOMERS = '09909241',
- DELETE_CUSTOMER = '8b39db3d',
- MANAGE_USERS = '15e40e99',
- MANAGE_ROLESPERMISSIONS = 'cd52a735',
- MANAGE_SUBSCRIPTION = '67ba6efc',
+  ACCESS_TIMESHEET = 'f5a82c37',
+  ACCESS_CUSTOMERS = 'e18a7c45',
+  ACCESS_PROJECTS = '289a64ab',
+  ACCESS_ADMIN = '2653c3aa',
+  ACCESS_REPORTS = 'a031c42f',
+  MANAGE_PROJECTS = 'ef4032fb',
+  DELETE_PROJECTS = 'c5439319',
+  MANAGE_CUSTOMERS = '09909241',
+  DELETE_CUSTOMER = '8b39db3d',
+  MANAGE_USERS = '15e40e99',
+  MANAGE_ROLESPERMISSIONS = 'cd52a735',
+  MANAGE_SUBSCRIPTION = '67ba6efc'
 }
 
 export interface IPermission {
   id: PERMISSION
   name: string
-  description?: string;
-  disabled?: boolean;
+  description?: string
+  disabled?: boolean
 }
-
 
 export default (t: TFunction): IPermission[] => [
   {
@@ -65,7 +64,7 @@ export default (t: TFunction): IPermission[] => [
     name: t('permissions.manageCustomers'),
     description: t('permissions.manageCustomersDescription')
   },
- 
+
   {
     id: PERMISSION.DELETE_CUSTOMER,
     name: t('permissions.deleteCustomers'),

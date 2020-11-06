@@ -1,14 +1,13 @@
 import { AppContext } from 'AppContext'
-import React,{useContext} from 'react'
+import { PERMISSION } from 'config/security/permissions'
+import React, { useContext } from 'react'
+import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
+import { UserMenu } from '../UserMenu'
+import { UserNotifications } from '../UserNotifications'
 import styles from './Navigation.module.scss'
 import { NavItem } from './NavItem'
-import { UserMenu } from '../UserMenu'
-import { isMobile } from 'react-device-detect'
-import * as permissions from 'config/security/permissions'
-import { UserNotifications } from '../UserNotifications'
-import { PERMISSION } from 'config/security/permissions'
 
 export const Navigation = () => {
     const { t } = useTranslation()
