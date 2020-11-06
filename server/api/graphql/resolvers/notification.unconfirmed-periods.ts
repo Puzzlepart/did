@@ -23,7 +23,7 @@ export default async function (ctx: Context, azstorage: AzStorageService, templa
   }
 
   const confirmedPeriods = (await azstorage.getConfirmedPeriods({
-    resourceId: ctx.user.id,
+    resourceId: ctx.userId,
     year: utils.getYear()
   })) as any[]
 

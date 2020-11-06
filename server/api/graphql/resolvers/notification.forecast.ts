@@ -30,7 +30,7 @@ export default async function (ctx: Context, azstorage: AzStorageService, templa
   }
 
   const forecastedPeriods = (await azstorage.getForecastedPeriods({
-    resourceId: ctx.user.id,
+    resourceId: ctx.userId,
     year: utils.getYear()
   })) as any[]
 

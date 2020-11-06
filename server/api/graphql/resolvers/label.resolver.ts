@@ -43,7 +43,7 @@ export class LabelResolver {
     @Ctx() ctx: Context
   ) {
     try {
-      await this._azstorage.addOrUpdateLabel(label, ctx?.user?.id, update)
+      await this._azstorage.addOrUpdateLabel(label, ctx.userId, update)
       return { success: true, error: null }
     } catch (error) {
       return {

@@ -20,7 +20,7 @@ export class ApiTokenResolver {
    *
    * @param {SubscriptionService} _subscription SubscriptionService
    */
-  constructor(private readonly _subscription: SubscriptionService) {}
+  constructor(private readonly _subscription: SubscriptionService) { }
 
   /**
    * Get API tokens
@@ -30,7 +30,7 @@ export class ApiTokenResolver {
   @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [ApiToken], { description: 'Get API tokens' })
   async apiTokens(@Ctx() ctx: Context): Promise<ApiToken[]> {
-    const tokens = await this._subscription.getApiTokens(ctx.user.subscription.id)
+    const tokens = await this._subscription.getApiTokens(ctx.subscription.id)
     return tokens
   }
 
@@ -45,11 +45,11 @@ export class ApiTokenResolver {
   async addApiToken(@Arg('name') name: string, @Ctx() ctx: Context): Promise<string> {
     const token = jwt.sign(
       {
-        data: pick(ctx.user, 'id')
+        data: { id: ctx.userId }
       },
       env('API_TOKEN_SECRET')
     )
-    const entry = await this._subscription.addApiToken(name, ctx.user.subscription.id, token)
+    const entry = await this._subscription.addApiToken(name, ctx.subscription.id, token)
     return entry ? token : null
   }
 
@@ -63,7 +63,7 @@ export class ApiTokenResolver {
   @Mutation(() => BaseResult, { description: 'Delete API tokens' })
   async deleteApiToken(@Arg('name') name: string, @Ctx() ctx: Context): Promise<BaseResult> {
     try {
-      await this._subscription.deleteApiToken(name, ctx.user.subscription.id)
+      await this._subscription.deleteApiToken(name, ctx.subscription.id)
       return { success: true, error: null }
     } catch (error) {
       return {

@@ -1,11 +1,11 @@
 /* eslint-disable max-classes-per-file */
-import 'reflect-metadata'
 import arraySort from 'array-sort'
 import { createTableService } from 'azure-storage'
+import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import { omit, pick } from 'underscore'
 import { getDurationHours } from '../../utils/date'
-import AzTableUtilities, { toArray } from '../../utils/table'
+import AzTableUtilities from '../../utils/table'
 import { Context } from '../graphql/context'
 import { Role } from '../graphql/resolvers/types'
 
@@ -43,7 +43,11 @@ class AzStorageService {
    */
   async getLabels() {
     const query = this.tableUtil.createAzQuery(1000)
-    const { entries } = await this.tableUtil.queryAzTable(this.tables.labels, query, { RowKey: 'name' })
+    const { entries } = await this.tableUtil.queryAzTable(this.tables.labels, query, {
+      columnMap: {
+        RowKey: 'name'
+      }
+    })
     return entries
   }
 
@@ -91,7 +95,9 @@ class AzStorageService {
   async getCustomers(options: { sortBy?: string } = {}) {
     const query = this.tableUtil.createAzQuery(1000)
     let { entries } = await this.tableUtil.queryAzTable(this.tables.customers, query, {
-      RowKey: 'key'
+      columnMap: {
+        RowKey: 'key'
+      }
     })
     if (options.sortBy) entries = arraySort(entries, options.sortBy)
     return entries
@@ -150,7 +156,7 @@ class AzStorageService {
         PartitionKey: 'customerKey'
       }
     }
-    let { entries } = await this.tableUtil.queryAzTable(this.tables.projects, query, columnMap)
+    let { entries } = await this.tableUtil.queryAzTable(this.tables.projects, query, { columnMap })
     if (options.sortBy) entries = arraySort(entries, options.sortBy)
     return entries
   }
@@ -188,7 +194,9 @@ class AzStorageService {
   async getUsers(): Promise<any[]> {
     const query = this.tableUtil.createAzQuery(1000)
     const { entries } = await this.tableUtil.queryAzTable(this.tables.users, query, {
-      RowKey: 'id'
+      columnMap: {
+        RowKey: 'id'
+      }
     })
     return arraySort(entries, 'displayName')
   }
@@ -516,13 +524,14 @@ class AzStorageService {
   async getRoles() {
     try {
       const query = this.tableUtil.createAzQuery(1000)
-      let { entries } = await this.tableUtil.queryAzTable(this.tables.roles, query, {
-        RowKey: 'name'
+      const { entries } = await this.tableUtil.queryAzTable<Role>(this.tables.roles, query, {
+        columnMap: {
+          RowKey: 'name'
+        },
+        typeMap: {
+          Permissions: 'Custom.ArrayPipe'
+        }
       })
-      entries = entries.map((entry) => ({
-        ...entry,
-        permissions: toArray(entry.permissions, '|')
-      }))
       return entries
     } catch (error) {
       return []

@@ -71,11 +71,11 @@ class AzTableUtilities {
    * @param {azurestorage.TableService.QueryEntitiesResult<any} result Result
    * @param {IParseAzEntityOptions} options Parse options
    */
-  parseAzEntities(
+  parseAzEntities<T = any>(
     { entries, continuationToken }: azurestorage.TableService.QueryEntitiesResult<any>,
     options: IParseAzEntityOptions
   ) {
-    entries = entries.map((ent) => this.parseAzEntity(ent, options))
+    entries = entries.map((ent) => this.parseAzEntity<T>(ent, options))
     return { entries, continuationToken }
   }
 
@@ -169,16 +169,16 @@ class AzTableUtilities {
    * @param {Object} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
    * @param {string} continuationToken Continuation token
    */
-  queryAzTable(
+  queryAzTable<T = any>(
     table: string,
     query: azurestorage.TableQuery,
-    columnMap?: any,
+    options?: IParseAzEntityOptions,
     continuationToken: azurestorage.TableService.TableContinuationToken = null
   ): Promise<azurestorage.TableService.QueryEntitiesResult<any>> {
     return new Promise<azurestorage.TableService.QueryEntitiesResult<any>>((resolve, reject) => {
       this.tableService.queryEntities(table, query, continuationToken, (error, result) => {
         if (!error) {
-          return columnMap ? resolve(this.parseAzEntities(result, columnMap)) : resolve(result)
+          return options ? resolve(this.parseAzEntities<T>(result, options)) : resolve(result)
         } else reject(error)
       })
     })
@@ -199,7 +199,7 @@ class AzTableUtilities {
       const result: azurestorage.TableService.QueryEntitiesResult<any> = await this.queryAzTable(
         table,
         query,
-        columnMap,
+        { columnMap },
         token
       )
       entries.push(...result.entries)
@@ -361,16 +361,6 @@ class AzTableUtilities {
       })
     })
   }
-}
-
-/**
- * Converts a string to an array
- *
- * @param {string} str String
- * @param {string} separator String separator
- */
-export const toArray = (str: string, separator: string = '|') => {
-  return (str || '').split(separator).filter((p) => p)
 }
 
 export default AzTableUtilities
