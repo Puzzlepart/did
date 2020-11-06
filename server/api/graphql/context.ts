@@ -11,6 +11,8 @@ const debug = createDebug('api/graphql/context')
 export class Context {
   /**
    * Request ID
+   *
+   * Generated per request using Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)
    */
   public requestId?: string
 
@@ -53,14 +55,14 @@ export const createContext = async (request: any): Promise<Context> => {
       isAuthorized = !!get(request, 'user')
       user = isAuthorized && {
         ...pick(get(request, 'user', { default: {} }), 'id'),
-        subscription: pick(subscription, 'id', 'name')
+        subscription: pick(subscription, 'id', 'name', 'settings')
       }
     }
     const requestId = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString()
     const container = Container.of(requestId)
     const context: Context = {
       container,
-      subscription: pick(subscription, 'id', 'name', 'connectionString'),
+      subscription,
       requestId,
       user,
       isAuthorized

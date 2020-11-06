@@ -21,10 +21,12 @@ initializeIcons()
  */
 const getContext = async (): Promise<IAppContext> => {
     const context: IAppContext = {
-        error: JSON.parse(document.getElementById('app').getAttribute('data-error') || '{}')
+        user: { preferredLanguage: 'en-GB' },
+        error: JSON.parse(document.getElementById('app').getAttribute('data-error') || '{}'),
+        hasPermission: () => false
     }
     try {
-        const { data } = await client.query({ query: GET_CURRENT_USER })
+        const { data } = await client.query({ query: GET_CURRENT_USER, fetchPolicy: 'cache-first' })
         context.user = { ...data?.currentUser }
         let { preferredLanguage } = context.user
         preferredLanguage = contains(supportedLanguages, preferredLanguage) ? preferredLanguage : 'en-GB'
@@ -32,8 +34,6 @@ const getContext = async (): Promise<IAppContext> => {
         context.hasPermission = (permissionId: string) => contains(context.user?.role?.permissions, permissionId)
         return context
     } catch (error) {
-        context.user = { preferredLanguage: 'en-GB' }
-        context.hasPermission = () => false
         return context
     }
 }

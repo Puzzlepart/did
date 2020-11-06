@@ -1,8 +1,9 @@
 import 'reflect-metadata'
-import { Arg, Authorized, Mutation, Resolver } from 'type-graphql'
+import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { pick } from 'underscore'
 import { SubscriptionService } from '../../services'
+import { Context } from '../context'
 import { Subscription, SubscriptionSettingsInput } from './subscription.types'
 import { BaseResult } from './types'
 
@@ -16,7 +17,21 @@ export class SubscriptionResolver {
    *
    * @param {SubscriptionService} _subscription SubscriptionService
    */
-  constructor(private readonly _subscription: SubscriptionService) { }
+  constructor(private readonly _subscription: SubscriptionService) {}
+
+  /**
+   * Get current subscription
+   */
+  @Authorized()
+  @Query(() => Subscription, { description: 'Get current subscription' })
+  async subscription(@Ctx() ctx: Context): Promise<Subscription> {
+    try {
+      return await this._subscription.getSubscription(ctx.subscription.id)
+    } catch (error) {
+      return null
+    }
+  }
+
   /**
    * Update subscription
    *
@@ -25,14 +40,17 @@ export class SubscriptionResolver {
    */
   @Authorized()
   @Mutation(() => BaseResult, { description: 'Update subscription' })
-  async updateSubscription(@Arg('id') id: string, @Arg('settings', () => SubscriptionSettingsInput) settings: SubscriptionSettingsInput): Promise<BaseResult> {
+  async updateSubscription(
+    @Arg('id') id: string,
+    @Arg('settings', () => SubscriptionSettingsInput) settings: SubscriptionSettingsInput
+  ): Promise<BaseResult> {
     try {
       await this._subscription.updateSubscription<SubscriptionSettingsInput>(id, settings)
       return { success: true, error: null }
     } catch (error) {
       return {
         success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode'),
+        error: pick(error, 'name', 'message', 'code', 'statusCode')
       }
     }
   }

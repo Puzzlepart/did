@@ -80,8 +80,6 @@ export const Timesheet: React.FunctionComponent = () => {
         t,
     }), [state])
 
-    query.refetch
-
     const hotkeysProps = useMemo(() => hotkeys(context, t), [context])
 
     return (

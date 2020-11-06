@@ -37,8 +37,13 @@ class SubscriptionService {
    * @param {string} subscriptionId Subscription ID
    * @param {T} settings Settings
    */
-  async updateSubscription<T = any>(subscriptionId: string, settings: T): Promise<azurestorage.TableService.EntityMetadata> {
-    const entityDescriptor = this.tableUtil.convertToAzEntity(subscriptionId, { settings }, 'Default', { typeMap: { settings: 'json' } })
+  async updateSubscription<T = any>(
+    subscriptionId: string,
+    settings: T
+  ): Promise<azurestorage.TableService.EntityMetadata> {
+    const entityDescriptor = this.tableUtil.convertToAzEntity(subscriptionId, { settings }, 'Default', {
+      typeMap: { settings: 'json' }
+    })
     return await this.tableUtil.updateAzEntity('Subscriptions', entityDescriptor, true)
   }
 
