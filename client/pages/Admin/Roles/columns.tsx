@@ -13,7 +13,7 @@ import styles from './Roles.module.scss'
  * @param {void} onEdit On edit callback
  * @param {TFunction} t Translate function
  */
-export const RoleColumns = (onEdit: (user: Role) => void, t: TFunction) => ([
+export const RoleColumns = (onEdit: (role: Role) => void, t: TFunction) => ([
     col(
         'name',
         '',
