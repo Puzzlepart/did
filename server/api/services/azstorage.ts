@@ -565,10 +565,19 @@ class AzStorageService {
    * @param {boolean} update Update the existing role
    */
   async addOrUpdateRole(role: any, update: boolean) {
-    const entity = this.tableUtil.convertToAzEntity(role.name, {
-      permissions: role.permissions.join('|'),
-      icon: role.icon
-    })
+    const entity = this.tableUtil.convertToAzEntity(
+      role.name,
+      {
+        permissions: role.permissions.join('|'),
+        icon: role.icon
+      },
+      'Default',
+      {
+        typeMap: {
+          
+        }
+      }
+    )
     let result
     if (update) result = await this.tableUtil.updateAzEntity(this.tables.roles, entity, true)
     else result = await this.tableUtil.addAzEntity(this.tables.roles, entity)

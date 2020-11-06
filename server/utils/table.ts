@@ -5,7 +5,7 @@ import get from 'get-value'
 
 interface IConvertToAzEntityOptions {
   removeBlanks?: boolean;
-  typeMap?: Record<string, string>
+  typeMap?: Record<string, 'json' | 'datetime' | 'boolean' | 'number' | 'double'>
 }
 
 export interface IParseAzEntityOptions {
