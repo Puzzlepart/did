@@ -260,7 +260,8 @@
     "exportTypeCurrentMonth": "Inneværende måned ({{monthName}})",
     "exportTypeCurrentYear": "Inneværende år ({{year}})",
     "subscription": "Abonnement",
-    "nameLabel": "Navn"
+    "nameLabel": "Navn",
+    "descriptionLabel": "Beskrivelse"
   },
   "navigation": {
     "timesheet": "Timeliste",

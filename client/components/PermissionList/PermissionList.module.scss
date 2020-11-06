@@ -3,11 +3,21 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+
     .item {
       margin: 0 0 15px 0;
-      width: 200px;
+      width: 185px;
       height: 50px;
+
+      &:hover {
+        font-weight: 600;
+        color: #cf5f00;
+        -webkit-transition: color 300ms linear, color 1s linear;
+        -moz-transition: color 300ms linear, color 1s linear;
+        -o-transition: color 300ms linear, color 1s linear;
+        -ms-transition: color 300ms linear, color 1s linear;
+        transition: color 300ms linear, color 1s linear;
+      }
     }
   }
 }

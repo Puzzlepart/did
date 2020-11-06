@@ -1,5 +1,17 @@
 .root {
   .nameColumn {
     padding: 15px;
+
+    .icon {
+      font-size: 34px;
+      &:hover {
+        color: #cf5f00;
+        -webkit-transition: color 300ms linear, color 1s linear;
+        -moz-transition: color 300ms linear, color 1s linear;
+        -o-transition: color 300ms linear, color 1s linear;
+        -ms-transition: color 300ms linear, color 1s linear;
+        transition: color 300ms linear, color 1s linear;
+      }
+    }
   }
 }

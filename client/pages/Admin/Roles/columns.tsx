@@ -17,20 +17,21 @@ export const RoleColumns = (onEdit: (role: Role) => void, t: TFunction) => ([
     col(
         'name',
         '',
-        { maxWidth: 140 },
+        { maxWidth: 80 },
         (role: Role) => {
             return (
                 <div className={styles.nameColumn}>
-                    <Icon styles={{ root: { fontSize: 33 } }} iconName={role.icon} />
+                    <Icon className={styles.icon} iconName={role.icon} />
                     <div>{role.name}</div>
                 </div>
             )
         }
+        
     ),
     col(
         'description',
-        '',
-        { minWidth: 140 }
+        t('common.descriptionLabel'),
+        { maxWidth: 240, isMultiline: true }
     ),
     col(
         'permissions',
@@ -45,7 +46,7 @@ export const RoleColumns = (onEdit: (role: Role) => void, t: TFunction) => ([
         (role: Role) => (
             <>
                 <DefaultButton
-                disabled={role.readOnly}
+                    disabled={role.readOnly}
                     text={t('admin.editRole')}
                     onClick={() => onEdit(role)} />
             </>

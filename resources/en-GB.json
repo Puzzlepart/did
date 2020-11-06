@@ -261,7 +261,8 @@
     "exportTypeCurrentMonth": "Current month ({{monthName}})",
     "exportTypeCurrentYear": "This year ({{year}})",
     "subscription": "Subscription",
-    "nameLabel": "Name"
+    "nameLabel": "Name",
+    "descriptionLabel": "Description"
   },
   "navigation": {
     "timesheet": "Timesheet",
