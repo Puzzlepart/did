@@ -113,7 +113,14 @@
     "tokenDeletedText": "Nøkkelen **{{name}}** ble slettet.",
     "summaryLoadingText": "Laster tidsoppføringer og lager oppsummering...",
     "bulkImportUsersLabel": "Importer i bulk",
-    "bulkImportingUsersLabel": "Importerer {{count}} brukere. Vennligst vent.."
+    "bulkImportingUsersLabel": "Importerer {{count}} brukere. Vennligst vent..",
+    "subscriptionSettingsUpdateSuccess": "Abonnementsinnstillingene er oppdatert.",
+    "forecasting": "Prognoser",
+    "forecastEnabledLabel": "Prognoser aktivert",
+    "forecastEnabledDescription": "Aktiver/deaktiver prognoser.",
+    "forecastNotificationsDescription": "Hvor mange uker fremover skal brukerne forutsi.",
+    "forecastNotificationsLabel": "Varsler",
+    "subscriptionSettings": "Abonnement"
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport. For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene...",
@@ -252,7 +259,8 @@
     "exportTypeLastMonth": "Forrige måned ({{monthName}})",
     "exportTypeCurrentMonth": "Inneværende måned ({{monthName}})",
     "exportTypeCurrentYear": "Inneværende år ({{year}})",
-    "subscription": "Abonnement"
+    "subscription": "Abonnement",
+    "nameLabel": "Navn"
   },
   "navigation": {
     "timesheet": "Timeliste",
