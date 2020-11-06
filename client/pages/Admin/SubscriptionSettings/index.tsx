@@ -4,7 +4,7 @@ import { useMessage, UserMessage } from 'components'
 import { setValue } from 'helpers'
 import { MessageBarType, PrimaryButton } from 'office-ui-fabric-react'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Subscription } from 'types'
 import { pick } from 'underscore'
@@ -24,10 +24,14 @@ export const SubscriptionSettings = () => {
     const [updateSubscription] = useMutation(UPDATE_SUBSCRIPTION)
     const [message, setMessage] = useMessage()
 
-
     useEffect(() => {
         if (data?.subscription) setSubscription(omitDeep(data.subscription, '__typename'))
     }, [data])
+
+    const sections = useMemo(() => {
+        return SUBSCRIPTION_SETTINGS(t)
+    }, [])
+
     const onSettingsChanged = (key: string, value: any) => {
         const _subscription = deepCopy(subscription)
         setValue(_subscription, `settings.${key}`, value)
@@ -58,13 +62,16 @@ export const SubscriptionSettings = () => {
                     value={subscription?.name} />
             </div>
             {subscription?.settings && (
-                Object.keys(SUBSCRIPTION_SETTINGS(t)).map((section, key) => (
-                    <SettingsSection
-                        key={key}
-                        section={section}
-                        settings={subscription?.settings}
-                        onSettingsChanged={onSettingsChanged} />
-                ))
+                sections.map((section) => {
+                    return (
+                        <SettingsSection
+                            key={section.key}
+                            name={section.name}
+                            fields={section.fields}
+                            settings={subscription.settings[section.key]}
+                            onSettingsChanged={onSettingsChanged} />
+                    )
+                })
             )}
             <PrimaryButton
                 className={styles.saveButton}

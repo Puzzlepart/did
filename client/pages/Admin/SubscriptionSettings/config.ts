@@ -1,7 +1,6 @@
 import { TFunction } from 'i18next'
-import { SubscriptionSettings } from '../../../../server/api/graphql/resolvers/types'
-import { SubscriptionSetting } from './types'
-
+import { SubscriptionForecastSettingsInput, SubscriptionSettings } from '../../../../server/api/graphql/resolvers/types'
+import { ISettingsSectionProps } from './SettingsSection/types'
 /**
  * Subscription settings
  *
@@ -15,10 +14,13 @@ import { SubscriptionSetting } from './types'
  *
  * @param {TFunction} t Translate function
  */
-export const SUBSCRIPTION_SETTINGS = (t: TFunction): { [section: string]: SubscriptionSetting[] } => ({
-  [t('admin.forecasting')]: [
+export const SUBSCRIPTION_SETTINGS = (t: TFunction): ISettingsSectionProps[] => ([
+{
+  key: 'forecast',
+  name:t('admin.forecasting'),
+  fields: [
     {
-      key: 'forecast.enabled',
+      key: 'enabled',
       type: 'bool',
       props: new Map<string, any>([
         ['label', t('admin.forecastEnabledLabel')],
@@ -26,7 +28,7 @@ export const SUBSCRIPTION_SETTINGS = (t: TFunction): { [section: string]: Subscr
       ])
     },
     {
-      key: 'forecast.notifications',
+      key: 'notifications',
       type: 'number',
       props: new Map([
         ['label', t('admin.forecastNotificationsLabel')],
@@ -36,7 +38,7 @@ export const SUBSCRIPTION_SETTINGS = (t: TFunction): { [section: string]: Subscr
         ['max', 8],
         ['step', 1]
       ]),
-      disabledIf: (settings: SubscriptionSettings) => !settings.forecast.enabled
+      disabledIf: (settings: SubscriptionForecastSettingsInput) => !settings.enabled
     }
   ]
-})
+}])

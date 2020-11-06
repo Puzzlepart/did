@@ -1,8 +1,10 @@
-import { SubscriptionSettingsInput } from 'types'
+import { SubscriptionSettingField } from '../types'
 
 export interface ISettingsSectionProps {
-    section: string;
-    settings: SubscriptionSettingsInput;
-    onSettingsChanged: (key: string, value: any) => void;
+    key: string;
+    name: string;
+    fields: SubscriptionSettingField[]
+    settings?: Record<string, any>;
+    onSettingsChanged?: (key: string, value: any) => void;
     defaultExpanded?: boolean;
 }

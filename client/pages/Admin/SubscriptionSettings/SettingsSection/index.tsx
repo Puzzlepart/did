@@ -7,26 +7,20 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { omit } from 'underscore'
 import styles from './SettingsSection.module.scss'
-import { SUBSCRIPTION_SETTINGS } from '../config'
 import { ISettingsSectionProps } from './types'
 import { Icon } from 'office-ui-fabric-react'
 
 export const SettingsSection: React.FunctionComponent<ISettingsSectionProps> = (props: ISettingsSectionProps) => {
     const { t } = useTranslation()
     const [isExpanded, toggle] = useState(props.defaultExpanded)
-    const fields = SUBSCRIPTION_SETTINGS(t)[props.section]
     return (
         <div className={styles.root}>
             <div className={styles.header} onClick={() => toggle(!isExpanded)}>
-                <div className={styles.title}>
-                    {props.section}
-                </div>
-                <div className={styles.chevron}>
-                    <Icon iconName={isExpanded ? 'ChevronDown' : 'ChevronUp'} />
-                </div>
+                <div className={styles.title}>{props.name}</div>
+                <Icon className={styles.chevron} iconName={isExpanded ? 'ChevronDown' : 'ChevronUp'} />
             </div>
             <div hidden={!isExpanded}>
-                {fields.map(((field) => {
+                {props.fields.map(((field) => {
                     field.props.set(
                         'disabled',
                         field.disabledIf && field.disabledIf(props.settings)
@@ -36,41 +30,24 @@ export const SettingsSection: React.FunctionComponent<ISettingsSectionProps> = (
                         field.hiddenIf && field.hiddenIf(props.settings)
                     )
                     const _ = Array.from(field.props).reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {} as any)
-                    let element = null
+                    let fieldElement: JSX.Element
                     switch (field.type) {
-                        case 'bool': {
-                            element = (
+                        case 'bool':
+                            fieldElement = (
                                 <Toggle
                                     {..._}
                                     key={field.key}
-                                    defaultChecked={getValue(props.settings, field.key, false)}
-                                    onChange={(_event, value) => props.onSettingsChanged(field.key, value)} />
+                                    defaultChecked={getValue(props.settings, field.key, false)} />
                             )
-                        }
                             break
                         case 'number':
-                            {
-                                element = (
-                                    <Slider
-                                        {..._}
-                                        key={field.key}
-                                        defaultValue={getValue(props.settings, field.key, 1)}
-                                        onChange={(value) => props.onSettingsChanged(field.key, value)} />
-                                )
-                            }
+                            fieldElement = <Slider {..._} defaultValue={getValue(props.settings, field.key, 1)} />
                             break
-                        default: {
-                            element = (
-                                <TextField
-                                    {...omit(_, 'descripton')}
-                                    key={field.key}
-                                    onChange={(_event, value) => props.onSettingsChanged(field.key, value)} />
-                            )
-                        }
+                        default: fieldElement = <TextField {...omit(_, 'descripton')} />
                     }
                     return (
                         <div className={styles.inputField} key={field.key}>
-                            {element}
+                            {fieldElement}
                             <span className={styles.inputDescription}>{_.description}</span>
                         </div>
                     )
