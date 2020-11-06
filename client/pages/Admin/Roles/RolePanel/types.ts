@@ -1,5 +1,5 @@
-import { Role } from 'types'
 import { IPanelProps } from 'office-ui-fabric-react/lib/Panel'
+import { Role } from 'types'
 
 export interface IRolePanelProps extends IPanelProps {
   /**
@@ -9,8 +9,6 @@ export interface IRolePanelProps extends IPanelProps {
 
   /**
    * On save callback
-   *
-   * @param {Role} role The role that was updated or added
    */
-  onSave?: (role: Role) => void
+  onSave?: () => void
 }
