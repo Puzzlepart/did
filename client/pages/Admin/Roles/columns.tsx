@@ -1,0 +1,48 @@
+import { PermissionList } from 'components/PermissionList'
+import { TFunction } from 'i18next'
+import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import React from 'react'
+import { Role } from 'types'
+import { generateColumn as col } from 'utils/generateColumn'
+import styles from './Roles.module.scss'
+
+/**
+ * Returns the columns for the Role list
+ * 
+ * @param {void} onEdit On edit callback
+ * @param {TFunction} t Translate function
+ */
+export const RoleColumns = (onEdit: (user: Role) => void, t: TFunction) => ([
+    col(
+        'name',
+        '',
+        { maxWidth: 140 },
+        (role: Role) => {
+            return (
+                <div className={styles.nameColumn}>
+                    <Icon styles={{ root: { fontSize: 33 } }} iconName={role.icon} />
+                    <div>{role.name}</div>
+                </div>
+            )
+        }
+    ),
+    col(
+        'permissions',
+        t('admin.permissonsLabel'),
+        { minWidth: 200, isMultiline: true },
+        (role: Role) => <PermissionList permissionIds={role.permissions} />
+    ),
+    col(
+        'edit',
+        null,
+        { minWidth: 300, },
+        (role: Role) => (
+            <>
+                <DefaultButton
+                    styles={{ root: { marginRight: 4 } }}
+                    text={t('admin.editRole')}
+                    onClick={() => onEdit(role)} />
+            </>
+        )),
+])
