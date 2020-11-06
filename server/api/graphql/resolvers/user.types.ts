@@ -2,21 +2,8 @@
 import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import { simpleResolvers } from '../config'
+import { Subscription } from './subscription.types'
 import { Role } from './types'
-
-@ObjectType({ description: 'A type that describes a Subscription', simpleResolvers: simpleResolvers.Subscription })
-export class Subscription {
-  @Field()
-  id: string
-
-  @Field()
-  name: string
-
-  /**
-   * Connection string for the subscription storage
-   */
-  connectionString?: string
-}
 
 @ObjectType({ description: 'A type that describes a User', simpleResolvers: simpleResolvers.User })
 export class User {
