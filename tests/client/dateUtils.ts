@@ -88,20 +88,17 @@ describe(header('DateUtils'), async () => {
     })
   })
 
-  describe('getMonthYear', () => {
+  describe('DateObject.toObject', () => {
     it('should return correct object for 2020-03-01', () => {
-      deepStrictEqual(DateUtils.getMonthYear('2020-03-01'), {
-        monthName: 'March',
+      deepStrictEqual(DateUtils.createDateObject('2020-03-01').toObject('monthNumber', 'year'), {
         monthNumber: 3,
         year: 2020
       })
     })
 
     it('should return correct object for 2020-04-01', () => {
-      deepStrictEqual(DateUtils.getMonthYear('2020-04-01'), {
-        monthName: 'April',
-        monthNumber: 4,
-        year: 2020
+      deepStrictEqual(DateUtils.createDateObject('2020-04-01').toObject('monthName'), {
+        monthName: 'April'
       })
     })
   })

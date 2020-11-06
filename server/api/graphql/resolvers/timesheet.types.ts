@@ -3,6 +3,7 @@ import 'reflect-metadata'
 import { Field, Float, ID, InputType, ObjectType } from 'type-graphql'
 import { simpleResolvers } from '../config'
 import { Customer, EventError, LabelObject, Project } from './types'
+import * as DateUtils from '../../../utils/date'
 
 @ObjectType({ description: 'A type that describes a Event', simpleResolvers: simpleResolvers.EventObject })
 export class EventObject {
@@ -115,6 +116,16 @@ export class TimesheetPeriodObject {
 
   @Field({ nullable: true })
   forecastedHours?: number
+
+  constructor(startDateTime: string, endDateTime: string, locale: string) {
+    this.startDateTime = startDateTime
+    this.endDateTime = endDateTime
+    this.week = DateUtils.getWeek()
+    this.month = DateUtils.formatDate(startDateTime, 'MMMM', locale),
+    this.isForecast = DateUtils.isAfterToday(startDateTime)
+    this.isForecasted = false
+    this.isConfirmed = false
+  }
 }
 
 @InputType({ description: 'Input object for TimesheetPeriod used in Mutation unsubmitPeriod' })

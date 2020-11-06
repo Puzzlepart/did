@@ -1,12 +1,16 @@
-import $dayjs, { Dayjs, OpUnitType } from 'dayjs'
+import dayjs, { Dayjs, OpUnitType } from 'dayjs'
 import { pick } from 'underscore'
 import DateUtils, { DateInput } from './date'
 
 export class DateObject {
+  /**
+   * Using $ as we don't really care if it's dayjs, Temporal or luxon. This class should be
+   * framework-agnostic, or maybe even framework-atheist
+   */
   public $: Dayjs
 
   constructor(date: DateInput) {
-    this.$ = $dayjs(date)
+    this.$ = dayjs(date)
   }
 
   /**
@@ -45,7 +49,7 @@ export class DateObject {
    * To format as an ISO 8601 string
    */
   public get iso(): string {
-    return DateUtils.toISOString(this.$)
+    return this.$.toISOString()
   }
 
   /**
@@ -76,7 +80,11 @@ export class DateObject {
   }
 
   /**
-   * Returns a cloned DateObjectobject with a specified amount of time added.
+   * Returns a cloned DateObject with a specified amount of time added
+   * 
+   * Currently only supporting int (whole numbers)
+   * 
+   * If we want to support e.g. 1.5h, we could look into using parseFloat insteaf of parseInt
    *
    * E.g. 1d to add day, or 1m to add 1 month
    * 
@@ -106,9 +114,9 @@ export class DateObject {
   toObject(...include: string[]) {
     const obj = {
       weekNumber: this.$.week(),
-      monthNumber: this.$.month(),
+      monthNumber: this.$.month() + 1,
       year: this.$.year(),
-      monthName: this.format('MMM')
+      monthName: this.format('MMMM')
     }
     return include ? pick(obj, ...include) : obj
   }
