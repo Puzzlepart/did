@@ -1,10 +1,4 @@
-import { SubscriptionSettings, SubscriptionSettingsInput } from 'types'
-
-export interface ISettingsSectionProps {
-    section: string;
-    settings: SubscriptionSettingsInput;
-    onSettingsChanged: (key: string, value: any) => void;
-}
+import { SubscriptionSettings } from 'types'
 
 export type SubscriptionSetting =
     | {

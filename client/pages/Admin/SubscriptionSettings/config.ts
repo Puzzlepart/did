@@ -9,7 +9,7 @@ import { SubscriptionSetting } from './types'
  *
  * * key
  * * type
- * * props depending on type
+ * * propsx
  * * optional disabledIf
  * * optional hiddenIf
  *

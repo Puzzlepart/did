@@ -13,7 +13,7 @@ import omitDeep from 'utils/omitDeep'
 import { GET_SUBSCRIPTION } from './GET_SUBSCRIPTION'
 import { SettingsSection } from './SettingsSection'
 import styles from './SubscriptionSettings.module.scss'
-import { SUBSCRIPTION_SETTINGS } from './SUBSCRIPTION_SETTINGS'
+import { SUBSCRIPTION_SETTINGS } from './config'
 import { UPDATE_SUBSCRIPTION } from './UPDATE_SUBSCRIPTION'
 
 export const SubscriptionSettings = () => {
@@ -48,7 +48,7 @@ export const SubscriptionSettings = () => {
                     containerStyle={{
                         marginTop: 12,
                         marginBottom: 12,
-                        width: 460
+                        width: 500
                     }} />
             )}
             <div className={styles.inputField}>
