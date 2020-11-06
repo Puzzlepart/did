@@ -52,17 +52,17 @@ export class User {
 }
 
 @InputType({ description: 'Input object for Role used in Mutation addOrUpdateUser/bulkAddUsers' })
-export class UserInput implements Partial<User> {
+export class UserInput {
   @Field()
   id?: string
 
-  @Field()
+  @Field({ nullable: true })
   displayName?: string
 
-  @Field()
+  @Field({ nullable: true })
   givenName?: string
 
-  @Field()
+  @Field({ nullable: true })
   surname?: string
 
   @Field({ nullable: true })
@@ -76,4 +76,7 @@ export class UserInput implements Partial<User> {
 
   @Field({ nullable: true })
   preferredLanguage?: string
+
+  @Field({ nullable: true })
+  role?: string
 }
