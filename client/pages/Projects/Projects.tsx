@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { AppContext } from 'AppContext'
 import { UserMessage } from 'components/UserMessage'
-import { manageProjects } from 'config/security/permissions'
+import { PERMISSION } from 'config/security/permissions'
 import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
@@ -113,7 +113,7 @@ export const Projects: React.FunctionComponent = () => {
                         {selected && <ProjectDetails project={selected} />}
                     </div>
                 </PivotItem>
-                {user.hasPermission(manageProjects) && (
+                {user.hasPermission(PERMISSION.MANAGE_PROJECTS) && (
                     <PivotItem
                         itemID='new'
                         itemKey='new'

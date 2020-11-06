@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { AppContext } from 'AppContext'
-import { manageProjects } from 'config/security/permissions'
+import { PERMISSION } from 'config/security/permissions'
 import { IBaseResult } from 'graphql'
 import { Panel } from 'office-ui-fabric-react'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
@@ -55,7 +55,7 @@ export const Actions = (props: IProjectDetailsProps) => {
 
     return (
         <div className={styles.actions}>
-            <div className={styles.actionItem} hidden={!user.hasPermission(manageProjects)}>
+            <div className={styles.actionItem} hidden={!user.hasPermission(PERMISSION.MANAGE_PROJECTS)}>
                 <DefaultButton
                     text={t('common.editLabel')}
                     iconProps={{ iconName: 'PageEdit' }}
