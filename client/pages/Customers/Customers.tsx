@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { AppContext } from 'AppContext'
-import { manageCustomers } from 'config/security/permissions'
+import { PERMISSION } from 'config/security/permissions'
 import { getValue } from 'helpers'
 import { Customer } from 'types'
 import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
@@ -78,7 +78,7 @@ export const Customers: React.FunctionComponent = () => {
                         </>
                     )}
             </PivotItem>
-            {user.hasPermission(manageCustomers) && (
+            {user.hasPermission(PERMISSION.MANAGE_CUSTOMERS) && (
                 <PivotItem
                     itemID='new'
                     itemKey='new'

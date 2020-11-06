@@ -8,6 +8,7 @@ import { UserMenu } from '../UserMenu'
 import { isMobile } from 'react-device-detect'
 import * as permissions from 'config/security/permissions'
 import { UserNotifications } from '../UserNotifications'
+import { PERMISSION } from 'config/security/permissions'
 
 export const Navigation = () => {
     const { t } = useTranslation()
@@ -23,27 +24,27 @@ export const Navigation = () => {
                         text={t('navigation.timesheet')}
                         iconName='TimeSheet'
                         to='/timesheet' 
-                        permissionId={permissions.accessTimesheet} />
+                        permission={PERMISSION.ACCESS_TIMESHEET} />
                     <NavItem
                         text={t('navigation.customers')}
                         iconName='People'
                         to='/customers'
-                        permissionId={permissions.accessCustomers} />
+                        permission={PERMISSION.ACCESS_CUSTOMERS} />
                     <NavItem
                         text={t('navigation.projects')}
                         iconName='ProjectCollection'
                         to='/projects'
-                        permissionId={permissions.accessProjects} />
+                        permission={PERMISSION.ACCESS_PROJECTS} />
                     <NavItem
                         text={t('navigation.reports')}
                         iconName='ReportDocument'
                         to='/reports'
-                        permissionId={permissions.accessReports} />
+                        permission={PERMISSION.ACCESS_REPORTS} />
                     <NavItem
                         text={t('navigation.admin')}
                         iconName='Settings'
                         to='/admin'
-                        permissionId={permissions.accessAdmin} />
+                        permission={PERMISSION.ACCESS_ADMIN} />
                 </ul>
                 <ul className={styles.navRight}>
                     {!!user.id && <UserNotifications />}
