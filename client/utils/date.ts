@@ -169,15 +169,6 @@ export class DateUtils {
   }
 
   /**
-   * To format as an ISO 8601 string.
-   *
-   * @param {DateInput} date Optional date
-   */
-  public toISOString(date?: DateInput): string {
-    return $dayjs(date).toISOString()
-  }
-
-  /**
    * Get week number
    *
    * @param {DateInput} date Optional date

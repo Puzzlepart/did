@@ -49,7 +49,7 @@ export class DateObject {
    * To format as an ISO 8601 string
    */
   public get iso(): string {
-    return DateUtils.toISOString(this.$)
+    return this.$.toISOString()
   }
 
   /**
