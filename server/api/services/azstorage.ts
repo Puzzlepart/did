@@ -7,6 +7,7 @@ import { omit, pick } from 'underscore'
 import { getDurationHours } from '../../utils/date'
 import AzTableUtilities, { toArray } from '../../utils/table'
 import { Context } from '../graphql/context'
+import { Role } from '../graphql/resolvers/types'
 
 export class AzStorageServiceTables {
   constructor(
@@ -19,7 +20,7 @@ export class AzStorageServiceTables {
     public roles: string = 'Roles',
     public labels: string = 'Labels',
     public users: string = 'Users'
-  ) {}
+  ) { }
 }
 
 @Service({ global: false })
@@ -199,8 +200,7 @@ class AzStorageService {
    */
   async getUser(userId: string): Promise<Express.User> {
     try {
-      const entry = await this.tableUtil.retrieveAzEntity(this.tables.users, 'Default', userId)
-      return this.tableUtil.parseAzEntity<Express.User>(entry, { RowKey: 'id' })
+      return await this.tableUtil.retrieveAzEntity<Express.User>(this.tables.users, userId, { columnMap: { RowKey: 'id' } })
     } catch (error) {
       return null
     }
@@ -255,8 +255,8 @@ class AzStorageService {
       ['MonthNumber', queryValues.startMonthIndex, q.int, q.greaterThanOrEqual],
       ['MonthNumber', queryValues.endMonthIndex, q.int, q.lessThanOrEqual],
       ['Year', queryValues.year, q.int, q.equal],
-      ['StartDateTime', this.tableUtil.convertDate(queryValues.startDateTime), q.date, q.greaterThan],
-      ['EndDateTime', this.tableUtil.convertDate(queryValues.endDateTime), q.date, q.lessThan]
+      ['StartDateTime', this.tableUtil.convertToAzDate(queryValues.startDateTime), q.date, q.greaterThan],
+      ['EndDateTime', this.tableUtil.convertToAzDate(queryValues.endDateTime), q.date, q.lessThan]
     ]
     const query = this.tableUtil.createAzQuery(1000, filter)
     const tableName = options.forecast ? this.tables.forecastedTimeEntries : this.tables.timeEntries
@@ -394,8 +394,7 @@ class AzStorageService {
    */
   async getConfirmedPeriod(resourceId: string, periodId: string) {
     try {
-      const entry = await this.tableUtil.retrieveAzEntity(this.tables.confirmedPeriods, resourceId, periodId)
-      return this.tableUtil.parseAzEntity(entry)
+      return await this.tableUtil.retrieveAzEntity(this.tables.confirmedPeriods, periodId, {}, resourceId)
     } catch (error) {
       return null
     }
@@ -409,8 +408,7 @@ class AzStorageService {
    */
   async getForecastedPeriod(resourceId: string, periodId: string) {
     try {
-      const entry = await this.tableUtil.retrieveAzEntity(this.tables.forecastedPeriods, resourceId, periodId)
-      return this.tableUtil.parseAzEntity(entry)
+      return await this.tableUtil.retrieveAzEntity(this.tables.forecastedPeriods, periodId, {}, resourceId)
     } catch (error) {
       return null
     }
@@ -526,6 +524,26 @@ class AzStorageService {
         permissions: toArray(entry.permissions, '|')
       }))
       return entries
+    } catch (error) {
+      return []
+    }
+  }
+
+  /**
+   * Get role by name from table storage
+   *
+   * @param {string} name The role name
+   */
+  async getRoleByName(name: string) {
+    try {
+      return await this.tableUtil.retrieveAzEntity<Role>(
+        this.tables.roles,
+        name,
+        {
+          columnMap: { RowKey: 'name' },
+          typeMap: { Permissions: 'Custom.ArrayPipe' }
+        }
+      )
     } catch (error) {
       return []
     }

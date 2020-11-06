@@ -36,6 +36,25 @@ describe(header('AzTableUtilities'), async () => {
       const json = tableUtils.parseAzEntity(item)
       strictEqual(json.settings.enabled, true)
     })
+
+    it('should parse as array', () => {
+      const item = {
+        Name: {
+          $: 'Edm.String',
+          _: 'Admin',
+        },
+        Icon: {
+          $: 'Edm.String',
+          _: 'Admin',
+        },
+        Permissions: {
+          $: 'Edm.String',
+          _: 'e18a7c45|289a64ab|2653c3aa|a031c42f|ef4032fb|c5439319|09909241|8b39db3d|15e40e99|cd52a735|f5a82c37'
+        }
+      }
+      const json = tableUtils.parseAzEntity(item, { typeMap: { Permissions: 'Custom.ArrayPipe' } })
+      strictEqual(json.permissions.length, 11)
+    })
   })
 
   describe('convertToAzEntity', () => {

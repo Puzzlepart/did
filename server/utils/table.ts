@@ -3,6 +3,17 @@ import { omit, isNull } from 'underscore'
 import { decapitalize, capitalize, isBlank, startsWith } from 'underscore.string'
 import get from 'get-value'
 
+interface IConvertToAzEntityOptions {
+  removeBlanks?: boolean;
+  typeMap?: Record<string, string>
+}
+
+export interface IParseAzEntityOptions {
+  typeMap?: Record<string, 'Custom.ArrayPipe'>
+  columnMap?: Record<string, string>
+  skipColumns?: string[]
+}
+
 class AzTableUtilities {
   public tableService: azurestorage.services.table.TableService
 
@@ -16,25 +27,31 @@ class AzTableUtilities {
    * In the azure table entity we'll find the value in _ and the type in $
    *
    * If the value starts with 'json:', we parse it as JSON
+   * 
+   * Supports the builtin types Edm.* and the following custom:
+   * 
+   * * Custom.ArrayPipe
    *
    * @param {Record<string,azurestorage.TableUtilities.entityGenerator.EntityProperty<any>>} entityDescriptor Entity descriptor
-   * @param {Record<string, string>} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
-   * @param {string[]} skipColumns Columns to omit
+   * @param {IParseAzEntityOptions} options Parse options
    */
   parseAzEntity<T = any>(
     entityDescriptor: Record<string, azurestorage.TableUtilities.entityGenerator.EntityProperty<any>>,
-    columnMap: Record<string, string> = {},
-    skipColumns: string[] = ['timestamp', 'partitionKey']
+    options: IParseAzEntityOptions = {}
   ): T {
-    const json = Object.keys(entityDescriptor).reduce((obj: { [x: string]: any }, key: string) => {
+    const parsedEntity = Object.keys(entityDescriptor).reduce((obj: Record<string, any>, key: string) => {
       const { _, $ } = entityDescriptor[key]
       let value = _
       if (_ === undefined || _ === null) return obj
-      if (columnMap[key]) {
-        obj[columnMap[key]] = _
+      if (get(options, `columnMap.${key}`)) {
+        obj[get(options, `columnMap.${key}`)] = _
         return obj
       }
-      switch ($) {
+      const type: string = get(options, `typeMap.${key}`, { default: $ })
+      switch (type) {
+        case 'Custom.ArrayPipe':
+          value = (value as string || '').split('|').filter((p) => p)
+          break
         case 'Edm.DateTime':
           value = value.toISOString()
           break
@@ -43,7 +60,7 @@ class AzTableUtilities {
       }
       return { ...obj, [decapitalize(key)]: value }
     }, {})
-    return omit(json, skipColumns) as T
+    return omit(parsedEntity, options.skipColumns || ['timestamp', 'partitionKey']) as T
   }
 
   /**
@@ -52,13 +69,13 @@ class AzTableUtilities {
    * Adds {RowKey} as 'id' and 'key, skips {PartitionKey}
    *
    * @param {azurestorage.TableService.QueryEntitiesResult<any} result Result
-   * @param {Record<string, string>} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
+   * @param {IParseAzEntityOptions} options Parse options
    */
   parseAzEntities(
     { entries, continuationToken }: azurestorage.TableService.QueryEntitiesResult<any>,
-    columnMap: Record<string, string>
+    options: IParseAzEntityOptions
   ) {
-    entries = entries.map((ent) => this.parseAzEntity(ent, columnMap))
+    entries = entries.map((ent) => this.parseAzEntity(ent, options))
     return { entries, continuationToken }
   }
 
@@ -100,7 +117,7 @@ class AzTableUtilities {
    *
    * @param {string | number | Date} dateString The date string to convert
    */
-  convertDate(dateString: string | number | Date) {
+  convertToAzDate(dateString: string | number | Date) {
     if (dateString) return this.azEntGen().datetime(new Date(dateString))._
     return null
   }
@@ -203,13 +220,13 @@ class AzTableUtilities {
    * @param {string} rowKey Row key
    * @param {Record} values Values
    * @param {string} partitionKey Partition key
-   * @param {*} options Options (removeBlanks defaults to true, typeMap defaults to empty object)
+   * @param {IConvertToAzEntityOptions} options Options (removeBlanks defaults to true, typeMap defaults to empty object)
    */
   convertToAzEntity(
     rowKey: string,
     values: Record<string, any>,
-    partitionKey = 'Default',
-    options: { removeBlanks?: boolean; typeMap?: Record<string, string> } = { removeBlanks: true, typeMap: {} }
+    partitionKey: string = 'Default',
+    options: IConvertToAzEntityOptions = { removeBlanks: true, typeMap: {} }
   ): Record<string, azurestorage.TableUtilities.entityGenerator.EntityProperty<any>> {
     const { string, datetime, double, int, boolean } = this.azEntGen()
     const entityDescriptor = Object.keys(values)
@@ -257,15 +274,18 @@ class AzTableUtilities {
   /**
    * Retrieves an entity by partion key and row key
    *
-   * @param {*} table Table name
-   * @param {*} partitionKey Partition key
-   * @param {*} rowKey Row key
+   * @param {string} table Table name
+   * @param {string} rowKey Row key
+   * @param {IParseAzEntityOptions} options Parse options
+   * @param {string} partitionKey Partition key (defaults to Default)
    */
-  retrieveAzEntity(table: string, partitionKey: string, rowKey: string): Promise<any> {
+  retrieveAzEntity<T = any>(table: string, rowKey: string, options: IParseAzEntityOptions, partitionKey: string = 'Default',): Promise<any> {
     return new Promise<any>((resolve, reject) => {
-      this.tableService.retrieveEntity(table, partitionKey, rowKey, (error, result) => {
+      this.tableService.retrieveEntity<any>(table, partitionKey, rowKey, (error, result) => {
         if (error) reject(error)
-        else return resolve(result)
+        else {
+          resolve(options ? this.parseAzEntity<T>(result, options) : result)
+        }
       })
     })
   }
@@ -274,7 +294,7 @@ class AzTableUtilities {
    * Adds an entity
    *
    * @param {string} table Table name
-   * @param {*} entityDescriptor Entity descriptor
+   * @param {any} entityDescriptor Entity descriptor
    */
   addAzEntity(table: string, entityDescriptor: any): Promise<azurestorage.TableService.EntityMetadata> {
     return new Promise((resolve, reject) => {
@@ -315,8 +335,8 @@ class AzTableUtilities {
   /**
    * Delete entity
    *
-   * @param {*} table Table name
-   * @param {*} entityDescriptor Entity desccriptor
+   * @param {string} table Table name
+   * @param {any} entityDescriptor Entity desccriptor
    */
   deleteEntity(table: string, entityDescriptor: any) {
     return new Promise((resolve, reject) => {
@@ -330,8 +350,8 @@ class AzTableUtilities {
   /**
    * Executes a batch operation
    *
-   * @param {*} table Table name
-   * @param {*} batch Table batch
+   * @param {string} table Table name
+   * @param {azurestorage.TableBatch} batch Table batch
    */
   executeBatch(table: string, batch: azurestorage.TableBatch) {
     return new Promise((resolve, reject) => {
@@ -346,10 +366,10 @@ class AzTableUtilities {
 /**
  * Converts a string to an array
  *
- * @param {*} str String
- * @param {*} separator String separator
+ * @param {string} str String
+ * @param {string} separator String separator
  */
-export const toArray = (str: string, separator: any = '|') => {
+export const toArray = (str: string, separator: string = '|') => {
   return (str || '').split(separator).filter((p) => p)
 }
 
