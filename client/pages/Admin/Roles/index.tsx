@@ -34,7 +34,6 @@ export const Roles = () => {
                         {
                             key: 'ADD_NEW_ROLE',
                             name: t('admin.addNewRole'),
-                            iconProps: { iconName: 'AddFriend' },
                             onClick: () => setPanel({ title: t('admin.addNewRole') }),
                         },
                     ],

@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { IconPicker } from 'components/IconPicker'
-import * as securityConfig from 'config/security'
+import * as security from 'config/security'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { Panel } from 'office-ui-fabric-react/lib/Panel'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
@@ -17,7 +17,7 @@ export const RolePanel: React.FunctionComponent<IRolePanelProps> = (props: IRole
     const { t } = useTranslation()
     const [addOrUpdateRole] = useMutation(ADD_OR_UPDATE_ROLE)
     const [model, setModel] = useState<RoleInput>({})
-    const permissions = useMemo(() => securityConfig.permissions(t), [])
+    const permissions = useMemo(() => security.permissions(t), [])
     const saveDisabled = useMemo(() => (
         isEmpty(model.name)
         ||
@@ -63,7 +63,6 @@ export const RolePanel: React.FunctionComponent<IRolePanelProps> = (props: IRole
             className={styles.root}
             customWidth={'440px'}
             isOpen={true}
-            title={props.title}
             onDismiss={props.onDismiss}>
             <div className={styles.container}>
                 <TextField
@@ -82,13 +81,19 @@ export const RolePanel: React.FunctionComponent<IRolePanelProps> = (props: IRole
                     className={styles.inputField} />
                 <div className={styles.subHeader}>{t('admin.permissonsLabel')}</div>
                 <div className={styles.permissions}>
-                    {permissions.map(({ key, id, name }) => (
-                        <div key={key} className={styles.permissionItem}>
+                    {permissions.map(({ id, name, description, disabled }) => (
+                        <div key={id} className={styles.permissionItem}>
                             <Toggle
                                 label={name}
+                                title={description}
                                 inlineLabel={true}
+                                disabled={disabled}
+                                styles={{ root: { margin: 0 } }}
                                 defaultChecked={contains(model.permissions, id)}
                                 onChange={(_event, checked) => togglePermission(id, checked)} />
+                            <div hidden={!description} className={styles.inputDescription}>
+                                <span>{description}</span>
+                            </div>
                         </div>
                     ))}
                 </div>
