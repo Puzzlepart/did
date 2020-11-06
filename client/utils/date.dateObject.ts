@@ -3,6 +3,10 @@ import { pick } from 'underscore'
 import DateUtils, { DateInput } from './date'
 
 export class DateObject {
+  /**
+   * Using $ as we don't really care if it's dayjs, Temporal or luxon. This class should be
+   * framework-agnostic, or maybe even framework-atheist
+   */
   public $: Dayjs
 
   constructor(date: DateInput) {
