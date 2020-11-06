@@ -1,6 +1,6 @@
 
 import { AppContext } from 'AppContext'
-import * as permissions from 'config/security/permissions'
+import { PERMISSION } from 'config/security/permissions'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -27,7 +27,7 @@ export const Admin = () => {
             <Pivot
                 selectedKey={view || 'users'}
                 onLinkClick={onPivotClick}>
-                {user.hasPermission(permissions.manageUsers) && (
+                {user.hasPermission(PERMISSION.MANAGE_USERS) && (
                     <PivotItem
                         className={styles.tab}
                         itemKey='users'
@@ -53,7 +53,7 @@ export const Admin = () => {
                     itemIcon='Label'>
                     <Labels />
                 </PivotItem>
-                {user.hasPermission(permissions.manageRolesPermissions) && (
+                {user.hasPermission(PERMISSION.MANAGE_ROLESPERMISSIONS) && (
                     <PivotItem
                         className={styles.tab}
                         itemKey='rolesPermissions'
@@ -62,7 +62,7 @@ export const Admin = () => {
                         <Roles />
                     </PivotItem>
                 )}
-                {user.hasPermission(permissions.manageSubscription) && (
+                {user.hasPermission(PERMISSION.MANAGE_SUBSCRIPTION) && (
                     <PivotItem
                         className={styles.tab}
                         itemKey='subscription'
