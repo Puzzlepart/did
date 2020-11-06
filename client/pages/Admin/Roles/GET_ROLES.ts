@@ -6,6 +6,7 @@ export const GET_ROLES = gql`
       name
       icon
       permissions
+      readOnly
     }
   }
 `

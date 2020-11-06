@@ -36,11 +36,11 @@ export const RoleColumns = (onEdit: (role: Role) => void, t: TFunction) => ([
     col(
         'edit',
         null,
-        { minWidth: 300, },
+        { maxWidth: 100, },
         (role: Role) => (
             <>
                 <DefaultButton
-                    styles={{ root: { marginRight: 4 } }}
+                disabled={role.readOnly}
                     text={t('admin.editRole')}
                     onClick={() => onEdit(role)} />
             </>

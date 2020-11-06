@@ -13,6 +13,9 @@ export class Role {
 
   @Field(() => [String])
   permissions?: string[]
+
+  @Field({ nullable: true })
+  readOnly: boolean
 }
 
 @InputType({ description: 'Input object for Role used in Mutation addOrUpdateRole' })

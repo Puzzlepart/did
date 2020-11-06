@@ -12,6 +12,7 @@ export const manageCustomers = '09909241'
 export const deleteCustomers = '8b39db3d'
 export const manageUsers = '15e40e99'
 export const manageRolesPermissions = 'cd52a735'
+export const manageSubscription = '67ba6efc'
 
 export default (t: TFunction): IPermission[] => [
   {

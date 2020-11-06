@@ -1,6 +1,6 @@
 
 import { AppContext } from 'AppContext'
-import { manageUsers } from 'config/security/permissions'
+import * as permissions from 'config/security/permissions'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -17,8 +17,8 @@ import { Users } from './Users'
 export const Admin = () => {
     const { t } = useTranslation()
     const { user } = useContext(AppContext)
-    const history = useHistory()
     const { view } = useParams<{ view: string }>()
+    const history = useHistory()
 
     const onPivotClick = ({ props }: PivotItem) => history.push(`/admin/${props.itemKey}`)
 
@@ -27,7 +27,7 @@ export const Admin = () => {
             <Pivot
                 selectedKey={view || 'users'}
                 onLinkClick={onPivotClick}>
-                {user.hasPermission(manageUsers) && (
+                {user.hasPermission(permissions.manageUsers) && (
                     <PivotItem
                         className={styles.tab}
                         itemKey='users'
@@ -53,7 +53,7 @@ export const Admin = () => {
                     itemIcon='Label'>
                     <Labels />
                 </PivotItem>
-                {user.hasPermission(manageUsers) && (
+                {user.hasPermission(permissions.manageRolesPermissions) && (
                     <PivotItem
                         className={styles.tab}
                         itemKey='rolesPermissions'
@@ -62,13 +62,15 @@ export const Admin = () => {
                         <Roles />
                     </PivotItem>
                 )}
-                <PivotItem
-                    className={styles.tab}
-                    itemKey='subscription'
-                    headerText={t('admin.subscriptionSettings')}
-                    itemIcon='Subscribe'>
-                    <SubscriptionSettings />
-                </PivotItem>
+                {user.hasPermission(permissions.manageSubscription) && (
+                    <PivotItem
+                        className={styles.tab}
+                        itemKey='subscription'
+                        headerText={t('admin.subscriptionSettings')}
+                        itemIcon='Subscribe'>
+                        <SubscriptionSettings />
+                    </PivotItem>
+                )}
                 <PivotItem
                     className={styles.tab}
                     itemKey='apiTokens'
