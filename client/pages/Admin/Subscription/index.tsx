@@ -1,36 +1,30 @@
 
-import { useMutation, useQuery } from '@apollo/client'
+import { useMutation } from '@apollo/client'
+import { AppContext } from 'AppContext'
 import { useMessage, UserMessage } from 'components'
 import { setValue } from 'helpers'
 import { MessageBarType, PrimaryButton } from 'office-ui-fabric-react'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useContext, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Subscription } from 'types'
 import { pick } from 'underscore'
 import deepCopy from 'utils/deepCopy'
 import omitDeep from 'utils/omitDeep'
-import { GET_SUBSCRIPTION } from './GET_SUBSCRIPTION'
+import { SUBSCRIPTION_SETTINGS } from './config'
 import { SettingsSection } from './SettingsSection'
 import styles from './SubscriptionSettings.module.scss'
-import { SUBSCRIPTION_SETTINGS } from './config'
 import { UPDATE_SUBSCRIPTION } from './UPDATE_SUBSCRIPTION'
 
 export const SubscriptionSettings = () => {
+    const context = useContext(AppContext)
     const { t } = useTranslation()
-    const [subscription, setSubscription] = useState<Subscription>()
+    const [subscription, setSubscription] = useState<Subscription>(omitDeep(deepCopy(context.subscription), '__typename'))
     const [isSaved, setIsSaved] = useState(false)
-    const { data } = useQuery(GET_SUBSCRIPTION, { skip: !!subscription })
     const [updateSubscription] = useMutation(UPDATE_SUBSCRIPTION)
     const [message, setMessage] = useMessage()
 
-    useEffect(() => {
-        if (data?.subscription) setSubscription(omitDeep(data.subscription, '__typename'))
-    }, [data])
-
-    const sections = useMemo(() => {
-        return SUBSCRIPTION_SETTINGS(t)
-    }, [])
+    const sections = useMemo(() => SUBSCRIPTION_SETTINGS(t), [t])
 
     const onSettingsChanged = (key: string, value: any) => {
         const _subscription = deepCopy(subscription)
@@ -65,10 +59,9 @@ export const SubscriptionSettings = () => {
                 sections.map((section) => {
                     return (
                         <SettingsSection
+                            {...section}
                             key={section.id}
-                            id={section.id}
-                            name={section.name}
-                            fields={section.fields}
+                            defaultExpanded={true}
                             settings={subscription.settings[section.id]}
                             onSettingsChanged={onSettingsChanged} />
                     )
