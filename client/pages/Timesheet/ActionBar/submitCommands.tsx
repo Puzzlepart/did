@@ -2,11 +2,11 @@ import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { IContextualMenuItem, IContextualMenuProps } from 'office-ui-fabric-react/lib/ContextualMenu'
 import * as React from 'react'
 import { first, omit } from 'underscore'
-import { User } from '../../../../server/api/graphql/resolvers/types'
+import { Subscription } from 'types'
 import { ITimesheetContext } from '../context'
 import styles from './ActionBar.module.scss'
 
-export default (context: ITimesheetContext, user: User): IContextualMenuItem => ({
+export default (context: ITimesheetContext, subscription: Subscription): IContextualMenuItem => ({
     key: 'SUBMIT_COMMANDS',
     onRender: () => {
         if (context.loading || !!context.error) return null
@@ -18,7 +18,7 @@ export default (context: ITimesheetContext, user: User): IContextualMenuItem => 
             isPast,
         } = context.selectedPeriod
         const commandProps = {
-            FORECAST_PERIOD: user.subscription.settings.forecast.enabled && {
+            FORECAST_PERIOD: subscription.settings.forecast.enabled && {
                 key: 'FORECAST_PERIOD',
                 styles: { root: { height: 44, marginLeft: 4 } },
                 iconProps: { iconName: 'BufferTimeBefore' },
@@ -27,7 +27,7 @@ export default (context: ITimesheetContext, user: User): IContextualMenuItem => 
                 text: context.t('timesheet.forecastHoursText'),
                 secondaryText: context.t('timesheet.forecastHoursSecondaryText'),
             },
-            UNFORECAST_PERIOD: user.subscription.settings.forecast.enabled && {
+            UNFORECAST_PERIOD: subscription.settings.forecast.enabled && {
                 key: 'UNFORECAST_PERIOD',
                 styles: { root: { height: 44, marginLeft: 4 } },
                 iconProps: { iconName: 'Cancel' },

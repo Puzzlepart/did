@@ -32,7 +32,7 @@ export const Timesheet: React.FunctionComponent = () => {
         variables: {
             query: state.scope.dateStrings,
             dateFormat: 'dddd DD',
-            locale: app.user.preferredLanguage,
+            locale: app.user.language,
         },
         fetchPolicy: 'cache-and-network',
         errorPolicy: 'all'

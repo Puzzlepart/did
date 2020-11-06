@@ -23,30 +23,30 @@ export const Navigation = () => {
                         text={t('navigation.timesheet')}
                         iconName='TimeSheet'
                         to='/timesheet' 
-                        permission={permissions.accessTimesheet} />
+                        permissionId={permissions.accessTimesheet} />
                     <NavItem
                         text={t('navigation.customers')}
                         iconName='People'
                         to='/customers'
-                        permission={permissions.accessCustomers} />
+                        permissionId={permissions.accessCustomers} />
                     <NavItem
                         text={t('navigation.projects')}
                         iconName='ProjectCollection'
                         to='/projects'
-                        permission={permissions.accessProjects} />
+                        permissionId={permissions.accessProjects} />
                     <NavItem
                         text={t('navigation.reports')}
                         iconName='ReportDocument'
                         to='/reports'
-                        permission={permissions.accessReports} />
+                        permissionId={permissions.accessReports} />
                     <NavItem
                         text={t('navigation.admin')}
                         iconName='Settings'
                         to='/admin'
-                        permission={permissions.accessAdmin} />
+                        permissionId={permissions.accessAdmin} />
                 </ul>
                 <ul className={styles.navRight}>
-                    {!!user.subscription && <UserNotifications />}
+                    {!!user.id && <UserNotifications />}
                     <UserMenu />
                 </ul>
             </div>

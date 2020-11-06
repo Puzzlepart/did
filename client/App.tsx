@@ -22,31 +22,31 @@ export const App: React.FunctionComponent<IAppContext> = (context: IAppContext) 
                         <Switch>
                             <Route
                                 path='/timesheet'
-                                permission={permissions.accessTimesheet}>
+                                permissionId={permissions.accessTimesheet}>
                                 {isMobile && <MobileHeader text={t('navigation.timesheet')} />}
                                 <Timesheet />
                             </Route>
                             <Route
                                 path='/customers'
-                                permission={permissions.accessCustomers}>
+                                permissionId={permissions.accessCustomers}>
                                 {isMobile && <MobileHeader text={t('navigation.customers')} />}
                                 <Customers />
                             </Route>
                             <Route
                                 path='/projects'
-                                permission={permissions.accessProjects}>
+                                permissionId={permissions.accessProjects}>
                                 {isMobile && <MobileHeader text={t('navigation.projects')} />}
                                 <Projects />
                             </Route>
                             <Route
                                 path='/reports'
-                                permission={permissions.accessReports}>
+                                permissionId={permissions.accessReports}>
                                 {isMobile && <MobileHeader text={t('navigation.reports')} />}
                                 <Reports />
                             </Route>
                             <Route
                                 path='/admin'
-                                permission={permissions.accessAdmin}>
+                                permissionId={permissions.accessAdmin}>
                                 {isMobile && <MobileHeader text={t('navigation.admin')} />}
                                 <Admin />
                             </Route>

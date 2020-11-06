@@ -6,12 +6,12 @@ export interface IProtectedRouteProps extends RouteProps {
     /**
      * Permission required for the route (optional)
      */
-    permission?: string;
+    permissionId?: string;
 }
 
-export const ProtectedRoute: React.FunctionComponent<IProtectedRouteProps> = ({ path, exact, permission, children }: IProtectedRouteProps) => {
-    const { hasPermission } = useContext(AppContext)
-    const redirect = !!permission && !hasPermission(permission)
+export const ProtectedRoute: React.FunctionComponent<IProtectedRouteProps> = ({ path, exact, permissionId, children }: IProtectedRouteProps) => {
+    const { user } = useContext(AppContext)
+    const redirect = !user.hasPermission(permissionId)
     return (
         <Route exact={exact} path={path}>
             {redirect

@@ -19,7 +19,7 @@ import { IProjectsParams } from './types'
 
 export const Projects: React.FunctionComponent = () => {
     const { t } = useTranslation()
-    const { hasPermission } = useContext(AppContext)
+    const { user } = useContext(AppContext)
     const history = useHistory()
     const params = useParams<IProjectsParams>()
     const [selected, setSelected] = useState<Project>(null)
@@ -113,7 +113,7 @@ export const Projects: React.FunctionComponent = () => {
                         {selected && <ProjectDetails project={selected} />}
                     </div>
                 </PivotItem>
-                {hasPermission(manageProjects) && (
+                {user.hasPermission(manageProjects) && (
                     <PivotItem
                         itemID='new'
                         itemKey='new'

@@ -16,7 +16,7 @@ import { Users } from './Users'
 
 export const Admin = () => {
     const { t } = useTranslation()
-    const { hasPermission } = useContext(AppContext)
+    const { user } = useContext(AppContext)
     const history = useHistory()
     const { view } = useParams<{ view: string }>()
 
@@ -27,7 +27,7 @@ export const Admin = () => {
             <Pivot
                 selectedKey={view || 'users'}
                 onLinkClick={onPivotClick}>
-                {hasPermission(manageUsers) && (
+                {user.hasPermission(manageUsers) && (
                     <PivotItem
                         className={styles.tab}
                         itemKey='users'
@@ -53,7 +53,7 @@ export const Admin = () => {
                     itemIcon='Label'>
                     <Labels />
                 </PivotItem>
-                {hasPermission(manageUsers) && (
+                {user.hasPermission(manageUsers) && (
                     <PivotItem
                         className={styles.tab}
                         itemKey='rolesPermissions'

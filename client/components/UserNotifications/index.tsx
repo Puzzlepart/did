@@ -23,7 +23,7 @@ export const UserNotifications = () => {
         {
             variables: {
                 templates: t('notifications.templates', { returnObjects: true }),
-                locale: user.preferredLanguage,
+                locale: user.language,
             },
             skip: notifications.size > 0,
             fetchPolicy: 'cache-and-network',

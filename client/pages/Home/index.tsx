@@ -8,7 +8,7 @@ import ReactMarkdown from 'react-markdown/with-html'
 
 
 export default (): React.ReactElement<HTMLDivElement> => {
-    const { user, error } = useContext(AppContext)
+    const { subscription, error } = useContext(AppContext)
     const { t } = useTranslation()
     return (
         <div className={styles.root}>
@@ -19,7 +19,7 @@ export default (): React.ReactElement<HTMLDivElement> => {
                 <strong className={styles.title}>{error.name}</strong>
                 <ReactMarkdown className={styles.text} source={error.message} escapeHtml={false} />
             </div>
-            <div hidden={!!user.subscription || !!error?.message}>
+            <div hidden={!!subscription || !!error?.message}>
                 <DefaultButton
                     className={styles.signinbutton}
                     href='/auth/signin'

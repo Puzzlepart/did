@@ -1,6 +1,7 @@
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
+import { contains } from 'underscore'
 import { simpleResolvers } from '../config'
 import { Subscription } from './subscription.types'
 import { Role } from './types'
@@ -36,6 +37,11 @@ export class User {
 
   @Field(() => Subscription)
   subscription?: Subscription
+
+  public create?(user: User): User {
+    Object.assign(this, user)
+    return this
+  }
 }
 
 @InputType({ description: 'Input object for Role used in Mutation addOrUpdateUser/bulkAddUsers' })

@@ -19,7 +19,7 @@ import { ICustomersParams } from './types'
 
 export const Customers: React.FunctionComponent = () => {
     const { t } = useTranslation()
-    const { hasPermission } = useContext(AppContext)
+    const { user } = useContext(AppContext)
     const history = useHistory()
     const params = useParams<ICustomersParams>()
     const [selected, setSelected] = useState<Customer>(null)
@@ -78,7 +78,7 @@ export const Customers: React.FunctionComponent = () => {
                         </>
                     )}
             </PivotItem>
-            {hasPermission(manageCustomers) && (
+            {user.hasPermission(manageCustomers) && (
                 <PivotItem
                     itemID='new'
                     itemKey='new'
