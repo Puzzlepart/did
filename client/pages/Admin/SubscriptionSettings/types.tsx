@@ -1,21 +1,21 @@
 export type SubscriptionSettingField =
     | {
         type: 'bool'
-        key: string
+        id: string
         props: Map<string, any>
         disabledIf?: (settings: any) => boolean
         hiddenIf?: (settings: any) => boolean
     }
     | {
         type: 'text'
-        key: string
+        id: string
         props: Map<string, any>
         disabledIf?: (settings: any) => boolean
         hiddenIf?: (settings: any) => boolean
     }
     | {
         type: 'number'
-        key: string
+        id: string
         props: Map<string, any>
         disabledIf?: (settings: any) => boolean
         hiddenIf?:(settings: any) => boolean

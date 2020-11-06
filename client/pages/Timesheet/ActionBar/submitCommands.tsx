@@ -2,10 +2,11 @@ import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { IContextualMenuItem, IContextualMenuProps } from 'office-ui-fabric-react/lib/ContextualMenu'
 import * as React from 'react'
 import { first, omit } from 'underscore'
+import { User } from '../../../../server/api/graphql/resolvers/types'
 import { ITimesheetContext } from '../context'
 import styles from './ActionBar.module.scss'
 
-export default (context: ITimesheetContext): IContextualMenuItem => ({
+export default (context: ITimesheetContext, user: User): IContextualMenuItem => ({
     key: 'SUBMIT_COMMANDS',
     onRender: () => {
         if (context.loading || !!context.error) return null
@@ -17,7 +18,7 @@ export default (context: ITimesheetContext): IContextualMenuItem => ({
             isPast,
         } = context.selectedPeriod
         const commandProps = {
-            FORECAST_PERIOD: {
+            FORECAST_PERIOD: user.subscription.settings.forecast.enabled && {
                 key: 'FORECAST_PERIOD',
                 styles: { root: { height: 44, marginLeft: 4 } },
                 iconProps: { iconName: 'BufferTimeBefore' },
@@ -26,7 +27,7 @@ export default (context: ITimesheetContext): IContextualMenuItem => ({
                 text: context.t('timesheet.forecastHoursText'),
                 secondaryText: context.t('timesheet.forecastHoursSecondaryText'),
             },
-            UNFORECAST_PERIOD: {
+            UNFORECAST_PERIOD: user.subscription.settings.forecast.enabled && {
                 key: 'UNFORECAST_PERIOD',
                 styles: { root: { height: 44, marginLeft: 4 } },
                 iconProps: { iconName: 'Cancel' },
@@ -57,7 +58,7 @@ export default (context: ITimesheetContext): IContextualMenuItem => ({
             }
         }
 
-        const commands = []
+        let commands = []
 
         if (isConfirmed) commands.push(commandProps.UNCONFIRM_PERIOD)
         else if (isForecast) {
@@ -86,6 +87,8 @@ export default (context: ITimesheetContext): IContextualMenuItem => ({
                 commands.push({ ...commandProps.CONFIRM_PERIOD, disabled: true })
             }
         }
+
+        commands = commands.filter(c => c)
 
         let menuProps: IContextualMenuProps = null
         if (commands.length > 1) {

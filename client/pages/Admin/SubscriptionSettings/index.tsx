@@ -65,10 +65,11 @@ export const SubscriptionSettings = () => {
                 sections.map((section) => {
                     return (
                         <SettingsSection
-                            key={section.key}
+                            key={section.id}
+                            id={section.id}
                             name={section.name}
                             fields={section.fields}
-                            settings={subscription.settings[section.key]}
+                            settings={subscription.settings[section.id]}
                             onSettingsChanged={onSettingsChanged} />
                     )
                 })

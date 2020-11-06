@@ -1,17 +1,15 @@
 
 import { getValue } from 'helpers'
+import { Icon } from 'office-ui-fabric-react'
 import { Slider } from 'office-ui-fabric-react/lib/Slider'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import { Toggle } from 'office-ui-fabric-react/lib/Toggle'
 import React, { useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { omit } from 'underscore'
 import styles from './SettingsSection.module.scss'
 import { ISettingsSectionProps } from './types'
-import { Icon } from 'office-ui-fabric-react'
 
 export const SettingsSection: React.FunctionComponent<ISettingsSectionProps> = (props: ISettingsSectionProps) => {
-    const { t } = useTranslation()
     const [isExpanded, toggle] = useState(props.defaultExpanded)
     return (
         <div className={styles.root}>
@@ -36,17 +34,26 @@ export const SettingsSection: React.FunctionComponent<ISettingsSectionProps> = (
                             fieldElement = (
                                 <Toggle
                                     {..._}
-                                    key={field.key}
-                                    defaultChecked={getValue(props.settings, field.key, false)} />
+                                    defaultChecked={getValue(props.settings, field.id, false)}
+                                    onChange={(_e, value) => props.onSettingsChanged(`${props.id}.${field.id}`, value)} />
                             )
                             break
                         case 'number':
-                            fieldElement = <Slider {..._} defaultValue={getValue(props.settings, field.key, 1)} />
+                            fieldElement = (
+                                <Slider
+                                    {..._}
+                                    defaultValue={getValue(props.settings, field.id, 1)}
+                                    onChange={(value) => props.onSettingsChanged(`${props.id}.${field.id}`, value)} />
+                            )
                             break
-                        default: fieldElement = <TextField {...omit(_, 'descripton')} />
+                        default: fieldElement = (
+                        <TextField 
+                        {...omit(_, 'descripton')} 
+                        onChange={(_e, value) => props.onSettingsChanged(`${props.id}.${field.id}`, value)} />
+                        )
                     }
                     return (
-                        <div className={styles.inputField} key={field.key}>
+                        <div className={styles.inputField} key={field.id}>
                             {fieldElement}
                             <span className={styles.inputDescription}>{_.description}</span>
                         </div>
