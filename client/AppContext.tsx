@@ -1,3 +1,4 @@
+import { PERMISSION } from 'config/security/permissions'
 import { createContext } from 'react'
 import { Role, Subscription, User } from 'types'
 import { contains } from 'underscore'
@@ -32,12 +33,11 @@ export class ContextUser {
     /**
      * Checks if the user has the specified permission
      * 
-     * @param {string} permissionId Permission ID
+     * @param {PERMISSION} permission Permission
      */
-    public hasPermission?(permissionId?: string) {
-        return true
-        if (!permissionId) return true
-        return contains(this.role?.permissions, permissionId)
+    public hasPermission?(permission?: PERMISSION): boolean {
+        if (!permission) return true
+        return contains(this.role?.permissions, permission)
     }
 }
 
