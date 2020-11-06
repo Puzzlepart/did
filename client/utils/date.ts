@@ -170,6 +170,8 @@ export class DateUtils {
 
   /**
    * Get week number
+   * 
+   * If no @date parameter is specified the current week is returned
    *
    * @param {DateInput} date Optional date
    */
@@ -190,6 +192,8 @@ export class DateUtils {
 
   /**
    * Get the year
+   * 
+   * If no @date parameter is specified the current year is returned
    *
    * @param {DateInput} date Optional date
    */
