@@ -10,6 +10,7 @@ import styles from './Admin.module.scss'
 import { ApiTokens } from './ApiTokens'
 import { Labels } from './Labels'
 import { Roles } from './Roles'
+import { SubscriptionSettings } from './SubscriptionSettings'
 import { SummaryView } from './SummaryView'
 import { Users } from './Users'
 
@@ -61,6 +62,13 @@ export const Admin = () => {
                         <Roles />
                     </PivotItem>
                 )}
+                <PivotItem
+                    className={styles.tab}
+                    itemKey='subscription'
+                    headerText={t('admin.subscriptionSettings')}
+                    itemIcon='Subscribe'>
+                    <SubscriptionSettings />
+                </PivotItem>
                 <PivotItem
                     className={styles.tab}
                     itemKey='apiTokens'
