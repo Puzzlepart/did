@@ -281,7 +281,18 @@
     "manageCustomers": "Manage customers",
     "deleteCustomers": "Delete customers",
     "manageUsers": "Manage users",
-    "manageRolesPermissions": "Manage roles and permissions"
+    "manageRolesPermissions": "Manage roles and permissions",
+    "deleteProjectsDescription": "Deletion of projects is currently not supported.",
+    "accessTimesheetDescription": "Access to Timesheet page",
+    "accessCustomersDescription": "Acces to Customers page where you can search in active and inactive customers.",
+    "accessProjectsDescription": "Acces to Projects page where you can search in active and inactive projects.",
+    "accessAdminDescription": "Acces to Projects page where you can search in active and inactive projects.",
+    "manageProjectsDescription": "Create new and edit existing projects.",
+    "accessReportsDescription": "Access to admin page where you administer users, roles, permissions, API tokens and labels.",
+    "manageCustomersDescription": " Create new and edit existing customers.",
+    "deleteCustomersDescription": "Deletion of customers is currently not supported.",
+    "manageUsersDescription": "Manage users on the admin page. Add new users, one by one or in bulk, and change role of existing users.",
+    "manageRolesPermissionsDescription": "Manage roles and permissions on the admin page. Create new roles and edit exisiting."
   },
   "notifications": {
     "moreLinkText": "Read more here",
