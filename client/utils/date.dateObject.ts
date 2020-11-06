@@ -106,9 +106,9 @@ export class DateObject {
   toObject(...include: string[]) {
     const obj = {
       weekNumber: this.$.week(),
-      monthNumber: this.$.month(),
+      monthNumber: this.$.month() + 1,
       year: this.$.year(),
-      monthName: this.format('MMM')
+      monthName: this.format('MMMM')
     }
     return include ? pick(obj, ...include) : obj
   }
