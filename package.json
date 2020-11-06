@@ -14,7 +14,7 @@
     "build:server": "tsc --project tsconfig.json && copyfiles -u 1 \"server/public/**/*\" server-dist",
     "lint": "eslint --ext .ts,.tsx ./client ./server --color --fix && npm run prettier",
     "prettier": "prettier --config .prettierrc '**/*.ts' --write --loglevel silent",
-    "tests": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.ts'",
+    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.ts'",
     "create-env": "node tasks/create-dot-env.js"
   },
   "dependencies": {
