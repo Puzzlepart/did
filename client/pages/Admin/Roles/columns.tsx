@@ -25,8 +25,7 @@ export const RoleColumns = (onEdit: (role: Role) => void, t: TFunction) => ([
                     <div>{role.name}</div>
                 </div>
             )
-        }
-        
+        }        
     ),
     col(
         'description',
