@@ -10,7 +10,7 @@ import styles from './Admin.module.scss'
 import { ApiTokens } from './ApiTokens'
 import { Labels } from './Labels'
 import { Roles } from './Roles'
-import { SubscriptionSettings } from './SubscriptionSettings'
+import { SubscriptionSettings } from './Subscription'
 import { SummaryView } from './SummaryView'
 import { Users } from './Users'
 
