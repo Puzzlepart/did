@@ -80,7 +80,11 @@ export class DateObject {
   }
 
   /**
-   * Returns a cloned DateObjectobject with a specified amount of time added.
+   * Returns a cloned DateObjectobject with a specified amount of time added
+   * 
+   * Currently only supporting int (whole numbers)
+   * 
+   * If we want to support e.g. 1.5h, we could look into using parseFloat insteaf of parseInt
    *
    * E.g. 1d to add day, or 1m to add 1 month
    * 
