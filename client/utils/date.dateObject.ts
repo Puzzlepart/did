@@ -80,7 +80,7 @@ export class DateObject {
   }
 
   /**
-   * Returns a cloned DateObjectobject with a specified amount of time added
+   * Returns a cloned DateObject with a specified amount of time added
    * 
    * Currently only supporting int (whole numbers)
    * 
