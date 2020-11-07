@@ -19,7 +19,7 @@ export const IconPicker = (props: IIconPickerProps) => {
             <Autocomplete
                 {...omit(props, 'className')}
                 defaultSelectedItem={props.defaultSelected && find(items, i => i.key === props.defaultSelected)}
-                disabled={false}
+                required={props.required}
                 items={items}
                 showIcons={true}
                 width={props.width}

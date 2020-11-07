@@ -4,7 +4,7 @@ import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import { simpleResolvers } from '../config'
 import { Customer, OutlookCategory, LabelObject } from './types'
 
-@ObjectType({ description: 'A type that describes a Project', simpleResolvers: simpleResolvers.Project  })
+@ObjectType({ description: 'A type that describes a Project', simpleResolvers: simpleResolvers.Project })
 export class Project {
   @Field(() => ID)
   id?: string

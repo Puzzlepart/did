@@ -1,6 +1,6 @@
 
 import { AppContext } from 'AppContext'
-import { manageUsers } from 'config/security/permissions'
+import { PERMISSION } from 'config/security/permissions'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -10,14 +10,15 @@ import styles from './Admin.module.scss'
 import { ApiTokens } from './ApiTokens'
 import { Labels } from './Labels'
 import { Roles } from './Roles'
+import { SubscriptionSettings } from './Subscription'
 import { SummaryView } from './SummaryView'
 import { Users } from './Users'
 
 export const Admin = () => {
     const { t } = useTranslation()
-    const { hasPermission } = useContext(AppContext)
-    const history = useHistory()
+    const { user } = useContext(AppContext)
     const { view } = useParams<{ view: string }>()
+    const history = useHistory()
 
     const onPivotClick = ({ props }: PivotItem) => history.push(`/admin/${props.itemKey}`)
 
@@ -26,7 +27,7 @@ export const Admin = () => {
             <Pivot
                 selectedKey={view || 'users'}
                 onLinkClick={onPivotClick}>
-                {hasPermission(manageUsers) && (
+                {user.hasPermission(PERMISSION.MANAGE_USERS) && (
                     <PivotItem
                         className={styles.tab}
                         itemKey='users'
@@ -52,13 +53,22 @@ export const Admin = () => {
                     itemIcon='Label'>
                     <Labels />
                 </PivotItem>
-                {hasPermission(manageUsers) && (
+                {user.hasPermission(PERMISSION.MANAGE_ROLESPERMISSIONS) && (
                     <PivotItem
                         className={styles.tab}
                         itemKey='rolesPermissions'
                         headerText={t('admin.rolesPermissions')}
                         itemIcon='SecurityGroup'>
                         <Roles />
+                    </PivotItem>
+                )}
+                {user.hasPermission(PERMISSION.MANAGE_SUBSCRIPTION) && (
+                    <PivotItem
+                        className={styles.tab}
+                        itemKey='subscription'
+                        headerText={t('admin.subscriptionSettings')}
+                        itemIcon='Subscribe'>
+                        <SubscriptionSettings />
                     </PivotItem>
                 )}
                 <PivotItem

@@ -6,6 +6,11 @@
       margin: 8px 0 8px 0;
     }
 
+    .inputDescription {
+      color: rgb(96, 94, 92);
+      font-size: 10px;
+    }
+
     .subHeader {
       font-size: 1.2em;
       margin: 12px 0 12px 0;
@@ -17,8 +22,10 @@
       justify-content: space-between;
       flex-wrap: wrap;
       overflow: hidden;
+
       .permissionItem {
         width: auto;
+        margin-bottom: 8px;
       }
     }
 

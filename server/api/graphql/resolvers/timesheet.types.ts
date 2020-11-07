@@ -81,7 +81,10 @@ export class EventInput {
   manualMatch: boolean
 }
 
-@ObjectType({ description: 'A type that describes a TimesheetPeriod', simpleResolvers: simpleResolvers.TimesheetPeriodObject  })
+@ObjectType({
+  description: 'A type that describes a TimesheetPeriod',
+  simpleResolvers: simpleResolvers.TimesheetPeriodObject
+})
 export class TimesheetPeriodObject {
   @Field()
   id: string

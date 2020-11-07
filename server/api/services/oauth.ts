@@ -6,8 +6,8 @@ import { pick } from 'underscore'
 const debug = createDebug('api/services/oauth')
 
 export interface AccessTokenOptions {
-  clientId: string;
-  clientSecret: string;
+  clientId: string
+  clientSecret: string
   tokenHost: string
   authorizePath: string
   tokenPath: string
@@ -16,7 +16,7 @@ export interface AccessTokenOptions {
 
 @Service({ global: false })
 class OAuthService {
-  constructor(@Inject('REQUEST') private readonly _request: Express.Request) { }
+  constructor(@Inject('REQUEST') private readonly _request: Express.Request) {}
 
   /**
    * Get client

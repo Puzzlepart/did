@@ -5,7 +5,7 @@ import styles from './App.module.scss'
 import { AppContext, IAppContext } from './AppContext'
 import { Admin, Customers, Home, Projects, Reports, Timesheet } from './pages'
 import { ProtectedRoute as Route } from './ProtectedRoute'
-import * as permissions from 'config/security/permissions'
+import {PERMISSION} from 'config/security/permissions'
 import { isMobile } from 'react-device-detect'
 import { MobileHeader } from 'components/MobileHeader'
 import { useTranslation } from 'react-i18next'
@@ -22,31 +22,31 @@ export const App: React.FunctionComponent<IAppContext> = (context: IAppContext) 
                         <Switch>
                             <Route
                                 path='/timesheet'
-                                permission={permissions.accessTimesheet}>
+                                permission={PERMISSION.ACCESS_TIMESHEET}>
                                 {isMobile && <MobileHeader text={t('navigation.timesheet')} />}
                                 <Timesheet />
                             </Route>
                             <Route
                                 path='/customers'
-                                permission={permissions.accessCustomers}>
+                                permission={PERMISSION.ACCESS_CUSTOMERS}>
                                 {isMobile && <MobileHeader text={t('navigation.customers')} />}
                                 <Customers />
                             </Route>
                             <Route
                                 path='/projects'
-                                permission={permissions.accessProjects}>
+                                permission={PERMISSION.ACCESS_PROJECTS}>
                                 {isMobile && <MobileHeader text={t('navigation.projects')} />}
                                 <Projects />
                             </Route>
                             <Route
                                 path='/reports'
-                                permission={permissions.accessReports}>
+                                permission={PERMISSION.ACCESS_REPORTS}>
                                 {isMobile && <MobileHeader text={t('navigation.reports')} />}
                                 <Reports />
                             </Route>
                             <Route
                                 path='/admin'
-                                permission={permissions.accessAdmin}>
+                                permission={PERMISSION.ACCESS_ADMIN}>
                                 {isMobile && <MobileHeader text={t('navigation.admin')} />}
                                 <Admin />
                             </Route>

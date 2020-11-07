@@ -1,14 +1,15 @@
 import { AppContext } from 'AppContext'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import * as React from 'react'
+import { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { NavLink } from 'react-router-dom'
 import styles from './NavItem.module.scss'
 import { INavItemProps } from './types'
 
 export const NavItem = (props: INavItemProps) => {
-    const { hasPermission } = React.useContext(AppContext)
-    if (props.permission && !hasPermission(props.permission)) return null
+    const { user } = useContext(AppContext)
+    if (!user.hasPermission(props.permission)) return null
     let className = styles.root
     if (isMobile) className += ` ${styles.mobile}`
     return (

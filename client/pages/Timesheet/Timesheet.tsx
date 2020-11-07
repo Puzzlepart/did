@@ -32,7 +32,7 @@ export const Timesheet: React.FunctionComponent = () => {
         variables: {
             query: state.scope.dateStrings,
             dateFormat: 'dddd DD',
-            locale: app.user.preferredLanguage,
+            locale: app.user.language,
         },
         fetchPolicy: 'cache-and-network',
         errorPolicy: 'all'
@@ -79,8 +79,6 @@ export const Timesheet: React.FunctionComponent = () => {
         dispatch,
         t,
     }), [state])
-
-    query.refetch
 
     const hotkeysProps = useMemo(() => hotkeys(context, t), [context])
 

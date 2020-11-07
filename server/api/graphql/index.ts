@@ -18,7 +18,8 @@ import {
   RoleResolver,
   TimeEntryResolver,
   TimesheetResolver,
-  UserResolver
+  UserResolver,
+  SubscriptionResolver
 } from './resolvers'
 const debug = createDebug('api/graphql')
 
@@ -37,7 +38,8 @@ const getSchema = async () => {
       ProjectResolver,
       OutlookCategoryResolver,
       UserResolver,
-      RoleResolver
+      RoleResolver,
+      SubscriptionResolver
     ],
     container: ({ context }: ResolverData<Context>) => context.container,
     emitSchemaFile: true,

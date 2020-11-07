@@ -295,7 +295,7 @@ class AzTableUtilities {
   updateAzEntity(
     table: string,
     entityDescriptor: any,
-    merge: boolean
+    merge?: boolean
   ): Promise<azurestorage.TableService.EntityMetadata> {
     return new Promise((resolve, reject) => {
       if (merge) {

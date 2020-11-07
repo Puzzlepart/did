@@ -17,7 +17,7 @@ import { VerifyCallback } from 'passport-azure-ad'
  * @param {any} tokenParams
  * @param {VerifyCallback} done
  */
-export  async function onVerifySignin(
+export async function onVerifySignin(
   _iss: string,
   _sub: string,
   profile: IProfile,

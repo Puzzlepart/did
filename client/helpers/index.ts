@@ -1,4 +1,5 @@
 import get from 'get-value'
+import set from 'set-value'
 
 /**
  * Converts string to array buffer
@@ -49,7 +50,7 @@ export function getValue<T = any>(obj: any, exp: string, defaultValue?: T): T {
  * @param {string} exp Expression
  * @param {T} defaultValue Default value
  */
-export function set<T = any>(obj: any, exp: string, value?: T): T {
+export function setValue<T = any>(obj: any, exp: string, value?: T): any {
   return set(obj, exp, value)
 }
 

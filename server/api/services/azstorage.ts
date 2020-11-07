@@ -18,8 +18,8 @@ export class AzStorageServiceTables {
     public customers: string = 'Customers',
     public roles: string = 'Roles',
     public labels: string = 'Labels',
-    public users: string = 'Users',
-  ) { }
+    public users: string = 'Users'
+  ) {}
 }
 
 @Service({ global: false })
