@@ -25,7 +25,7 @@ let config = {
           {
             loader: 'ts-loader',
             options: {
-              configFile: resolve(__dirname, '../tsconfig-client.json')
+              configFile: resolve(__dirname, '../client/tsconfig.json')
             },
           },
         ],
@@ -58,7 +58,7 @@ let config = {
         'pages',
         'types',
         'utils',
-      ].reduce((alias, a) => ({ ...alias, [`@${a}`]: resolve(__dirname, `../client/${a}`) }), {}),
+      ].reduce((alias, a) => ({ ...alias, [a]: resolve(__dirname, `../client/${a}`) }), {}),
     extensions: ['.ts', '.tsx', '.js', '.css', '.scss', '.gql'],
   }
 }
