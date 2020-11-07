@@ -8,10 +8,9 @@ import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IFormValidation } from 'types'
 import { isBlank } from 'underscore.string'
-import {CREATE_OR_UPDATE_PROJECT} from '../graphql'
+import $createOrUpdateProject from '../createOrUpdateProject.gql'
 import styles from './CreateProjectForm.module.scss'
 import { IProjectFormProps, ProjectModel } from './types'
-
 
 export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFormProps) => {
     const editMode = !!edit
@@ -19,7 +18,7 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
     const [validation, setValidation] = useState<IFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useMessage()
     const [model, setModel] = useState<ProjectModel>(new ProjectModel(edit))
-    const [createOrUpdateProject, { loading }] = useMutation(CREATE_OR_UPDATE_PROJECT)
+    const [createOrUpdateProject, { loading }] = useMutation($createOrUpdateProject)
 
     /**
      * Update model
