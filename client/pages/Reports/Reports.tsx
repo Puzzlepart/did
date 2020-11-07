@@ -15,7 +15,7 @@ import columns from './columns'
 import commandBar from './commandBar'
 import { IReportsContext } from './context'
 import { filters } from './filters'
-import { TIME_ENTRIES } from './graphql'
+import timeentriesQuery from './timeentries.gql'
 import styles from './Reports.module.scss'
 import { getQueries, IReportsParams, IReportsState } from './types'
 
@@ -32,7 +32,7 @@ export const Reports = () => {
         }
     })
     const { loading, data } = useQuery(
-        TIME_ENTRIES,
+        timeentriesQuery,
         {
             skip: !state.query,
             fetchPolicy: 'cache-first',
