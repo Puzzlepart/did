@@ -11,7 +11,7 @@ import { exportExcel } from 'utils/exportExcel'
 import { client } from '../../../graphql'
 import columns from '../columns'
 import styles from '../UserMenu.module.scss'
-import timeentriesQuery  from './timeentries.gql'
+import $timeentries  from './timeentries.gql'
 import { getExportTypes, IExportType } from './types'
 
 export const ExportHours: React.FunctionComponent = () => {
@@ -36,7 +36,7 @@ export const ExportHours: React.FunctionComponent = () => {
 
     const onExport = async () => {
         const { data } = await client.query({
-            query: timeentriesQuery,
+            query: $timeentries,
             variables: exportType.variables,
         })
         await exportExcel(

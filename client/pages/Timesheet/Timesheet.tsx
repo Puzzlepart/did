@@ -12,12 +12,12 @@ import { ErrorBar } from './ErrorBar'
 import hotkeys from './hotkeys'
 import { Overview } from './Overview'
 import reducer from './reducer'
-import submitPeriodMutation from './submitPeriod.gql'
+import $submitPeriod from './submitPeriod.gql'
 import { SummaryView } from './SummaryView'
-import timesheetQuery from './timesheet.gql'
+import $timesheet from './timesheet.gql'
 import styles from './Timesheet.module.scss'
 import { ITimesheetContext, ITimesheetParams, TimesheetContext, TimesheetPeriod, TimesheetScope, TimesheetView } from './types'
-import unsubmitPeriodMutation from './unsubmitPeriod.gql'
+import $unsubmitPeriod from './unsubmitPeriod.gql'
 
 export const Timesheet: React.FunctionComponent = () => {
     const app = useContext(AppContext)
@@ -30,7 +30,7 @@ export const Timesheet: React.FunctionComponent = () => {
         scope: new TimesheetScope(params),
         selectedView: params.view || 'overview'
     })
-    const query = useQuery(timesheetQuery, {
+    const query = useQuery($timesheet, {
         variables: {
             query: state.scope.dateStrings,
             dateFormat: 'dddd DD',
@@ -50,8 +50,8 @@ export const Timesheet: React.FunctionComponent = () => {
     }, [state.selectedView, state.selectedPeriod])
 
     const [[submitPeriod], [unsubmitPeriod]] = [
-        useMutation(submitPeriodMutation),
-        useMutation(unsubmitPeriodMutation),
+        useMutation($submitPeriod),
+        useMutation($unsubmitPeriod),
     ]
 
     const onSubmitPeriod = async (forecast: boolean) => {

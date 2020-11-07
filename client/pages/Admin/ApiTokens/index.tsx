@@ -11,8 +11,8 @@ import { sleep } from 'utils'
 import dateUtils from 'utils/date'
 import ADD_API_TOKEN from './ADD_API_TOKEN'
 import styles from './ApiTokens.module.scss'
-import DELETE_API_TOKEN from './DELETE_API_TOKEN'
-import GET_API_TOKENS from './GET_API_TOKENS'
+import $deleteApiToken from './deleteApiToken.gql'
+import $tokens from './tokens.gql'
 
 export const ApiTokens = () => {
     const { t } = useTranslation()
@@ -20,8 +20,8 @@ export const ApiTokens = () => {
     const [name, setName] = useState(null)
     const [message, setMessage] = useState(null)
     const [addApiToken, { loading }] = useMutation(ADD_API_TOKEN)
-    const [deleteApiToken] = useMutation(DELETE_API_TOKEN)
-    const { data, refetch } = useQuery(GET_API_TOKENS)
+    const [deleteApiToken] = useMutation($deleteApiToken)
+    const { data, refetch } = useQuery($tokens)
 
     /**
      * On add API token

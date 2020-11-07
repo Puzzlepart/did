@@ -7,13 +7,13 @@ import { useTranslation } from 'react-i18next'
 import { LabelObject } from 'types'
 import { omit } from 'underscore'
 import styles from './LabelPicker.module.scss'
-import labelsQuery from './labels.gql'
+import $labels from './labels.gql'
 import { SelectCallout } from './SelectCallout'
 import { ILabelPickerProps } from './types'
 
 export const LabelPicker: React.FunctionComponent<ILabelPickerProps> = (props: ILabelPickerProps) => {
     const { t } = useTranslation()
-    const { data } = useQuery(labelsQuery, { fetchPolicy: 'cache-and-network' })
+    const { data } = useQuery($labels, { fetchPolicy: 'cache-and-network' })
     const toggleRef = useRef()
     const [labels, setLabels] = useState<LabelObject[]>([])
     const [selectedLabels, setSelectedLabels] = useState<LabelObject[]>([])
