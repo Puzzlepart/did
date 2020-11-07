@@ -1,24 +1,24 @@
 
 import { useMutation, useQuery } from '@apollo/client'
 import List from 'components/List'
-import { User } from 'types'
 import { ISpinnerProps, Spinner } from 'office-ui-fabric-react/lib/Spinner'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { User } from 'types'
 import { filter, find, isEmpty, omit } from 'underscore'
-import { BulkImportPanel, IBulkImportPanelProps } from './BulkImportPanel'
 import $bulkImport from './bulkImport.gql'
+import { BulkImportPanel, IBulkImportPanelProps } from './BulkImportPanel'
 import { UserColumns as columns } from './columns'
-import $users from './users.gql'
-import { IUserFormProps, UserForm } from './UserForm'
 import { IUsersContext, UsersContext } from './context'
+import { IUserFormProps, UserForm } from './UserForm'
+import $users from './users.gql'
 
 export const Users = () => {
     const { t } = useTranslation()
     const [userForm, setUserForm] = useState<IUserFormProps>(null)
     const [bulkImportPanel, setBulkImportPanel] = useState<IBulkImportPanelProps>(null)
     const [progressProps, setProgressProps] = useState<ISpinnerProps>(null)
-    const { data, refetch, loading, called } = useQuery($users, { fetchPolicy: 'cache-and-network' })
+    const { data, refetch, loading } = useQuery($users, { fetchPolicy: 'cache-and-network' })
     const [bulkImport] = useMutation($bulkImport)
     const ctxValue: IUsersContext = useMemo(() => ({
         roles: data?.roles || [],
@@ -54,7 +54,7 @@ export const Users = () => {
     return (
         <UsersContext.Provider value={ctxValue}>
             <List
-                enableShimmer={loading && !called}
+                enableShimmer={loading}
                 items={ctxValue.users}
                 columns={columns(onEdit, t)}
                 commandBar={{

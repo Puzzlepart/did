@@ -120,7 +120,8 @@
     "forecastEnabledDescription": "Aktiver/deaktiver prognoser.",
     "forecastNotificationsDescription": "Hvor mange uker fremover skal brukerne forutsi.",
     "forecastNotificationsLabel": "Varsler",
-    "subscriptionSettings": "Abonnement"
+    "subscriptionSettings": "Abonnement",
+    "summaryRangeValueFormat": "Viser {{value}} måneder"
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport. For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene...",
