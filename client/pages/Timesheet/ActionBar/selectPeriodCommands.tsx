@@ -13,7 +13,7 @@ export default ({ periods, loading, selectedPeriod, dispatch, t }: ITimesheetCon
                 hidden={!!loading}
                 iconProps={{ iconName: 'DateTime' }}
                 onClick={() => dispatch({ type: 'CHANGE_PERIOD', payload: period.id })}
-                text={period.getName(true, t)}
+                text={period.getName(t, true)}
                 styles={{ root: { height: 44, marginLeft: 4 } }}
                 className={styles.selectPeriodButton}
                 checked={period.id === selectedPeriod.id} />

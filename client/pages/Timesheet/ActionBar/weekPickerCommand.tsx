@@ -11,7 +11,7 @@ export default ({ selectedPeriod, periods, t }: ITimesheetContext): IContextualM
             <WeekPicker />
             {periods.length === 1 && (
                 <span className={styles.weekNumber}>
-                    {selectedPeriod.getName(false, t)}
+                    {selectedPeriod.getName(t)}
                 </span>
             )}
         </>

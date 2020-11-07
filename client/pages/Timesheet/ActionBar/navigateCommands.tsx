@@ -6,24 +6,24 @@ const currentWeek = ({ scope, dispatch, t }: ITimesheetContext): IContextualMenu
     key: 'GO_TO_CURRENT_WEEK_COMMAND',
     iconOnly: true,
     iconProps: { iconName: 'RenewalCurrent', ...ACTIONBAR_ICON_PROPS },
-    onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: new Date().toISOString() }),
+    onClick: () => dispatch({ type: 'SET_SCOPE' }),
     disabled: scope.isCurrentWeek,
     title: t('timesheet.goToCurrentWeek'),
 })
 
-const prevWeek = ({ dispatch, t }: ITimesheetContext): IContextualMenuItem => ({
+const prevWeek = ({  scope, dispatch, t }: ITimesheetContext): IContextualMenuItem => ({
     key: 'GO_TO_PREV_WEEK_COMMAND',
     iconOnly: true,
     iconProps: { iconName: 'Back', ...ACTIONBAR_ICON_PROPS },
-    onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: { amount: -1, unit: 'week' } }),
+    onClick: () => dispatch({ type: 'SET_SCOPE', payload: scope.startDateTime.add('-1w').$    }),
     title: t('timesheet.goToPrevWeek')
 })
 
-const nextWeek = ({ dispatch, t }: ITimesheetContext): IContextualMenuItem => ({
+const nextWeek = ({ scope,dispatch, t }: ITimesheetContext): IContextualMenuItem => ({
     key: 'GO_TO_NEXT_WEEK_COMMAND',
     iconOnly: true,
     iconProps: { iconName: 'Forward', ...ACTIONBAR_ICON_PROPS },
-    onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: { amount: 1, unit: 'week' } }),
+    onClick: () => dispatch({ type: 'SET_SCOPE', payload:  scope.startDateTime.add('1w').$ }),
     title: t('timesheet.goToNextWeek'),
 })
 
