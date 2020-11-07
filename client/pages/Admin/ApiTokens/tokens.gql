@@ -1,0 +1,6 @@
+query {
+    tokens: apiTokens {
+      name
+      created
+    }
+  }

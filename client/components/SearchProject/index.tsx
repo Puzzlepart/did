@@ -1,13 +1,13 @@
 
 import { useQuery } from '@apollo/client'
-import { Project } from 'types'
 import * as React from 'react'
+import { Project } from 'types'
 import { Autocomplete, ISuggestionItem } from '../Autocomplete'
+import $projects from './projects.gql'
 import { ISearchProjectProps } from './types'
-import { GET_PROJECTS } from 'pages/Projects/graphql'
 
 export const SearchProject = (props: ISearchProjectProps) => {
-    const { loading, data } = useQuery<{ projects: Project[] }>(GET_PROJECTS, {
+    const { loading, data } = useQuery<{ projects: Project[] }>($projects, {
         variables: { sortBy: 'name' },
         fetchPolicy: 'cache-first'
     })

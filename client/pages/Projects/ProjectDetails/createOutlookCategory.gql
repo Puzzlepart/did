@@ -1,0 +1,10 @@
+
+  mutation($category: String!) {
+    result: createOutlookCategory(category: $category) {
+      data
+      success
+      error {
+        message
+      }
+    }
+  }

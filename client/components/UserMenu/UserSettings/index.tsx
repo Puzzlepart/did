@@ -7,7 +7,7 @@ import { UserSettingInput } from './UserSettingInput'
 import styles from './UserSettings.module.scss'
 import { UserSettingsContext } from './UserSettingsContext'
 import { USER_SETTINGS } from './USER_SETTINGS'
-import ADD_OR_UPDATE_USER from 'pages/Admin/Users/UserForm/ADD_OR_UPDATE_USER'
+import $addOrUpdateUser from 'pages/Admin/Users/UserForm/addOrUpdateUser.gql'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { useId } from '@uifabric/react-hooks'
 
@@ -15,7 +15,7 @@ export const UserSettings = (props: React.HTMLProps<HTMLDivElement>) => {
     const { t } = useTranslation()
     const { user } = useContext(AppContext)
     const [panelOpen, setPanelOpen] = useState(false)
-    const [addOrUpdateUser] = useMutation(ADD_OR_UPDATE_USER)
+    const [addOrUpdateUser] = useMutation($addOrUpdateUser)
     const toggleId = useId('toggle-panel')
 
     /**

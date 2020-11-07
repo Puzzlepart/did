@@ -1,0 +1,12 @@
+query($customerKey: String, $sortBy: String) {
+  projects(customerKey: $customerKey, sortBy: $sortBy) {
+    id
+    key
+    name
+    description
+    webLink
+    icon
+    externalSystemURL
+    inactive
+  }
+}

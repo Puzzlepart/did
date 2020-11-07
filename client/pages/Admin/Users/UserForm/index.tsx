@@ -9,10 +9,9 @@ import { User } from 'types'
 import { find, omit, pick } from 'underscore'
 import validator from 'validator'
 import { UsersContext } from '../context'
-import ADD_OR_UPDATE_USER from './ADD_OR_UPDATE_USER'
+import $addOrUpdateUser from './addOrUpdateUser.gql'
 import { IUserFormProps } from './types'
 import styles from './UserFormModal.module.scss'
-
 
 export const UserForm: React.FunctionComponent<IUserFormProps> = (props: IUserFormProps) => {
     const { adUsers, roles } = useContext(UsersContext)
@@ -23,7 +22,7 @@ export const UserForm: React.FunctionComponent<IUserFormProps> = (props: IUserFo
         displayName: '',
         role: find(roles, r => r.name === 'User'),
     })
-    const [addOrUpdateUser] = useMutation(ADD_OR_UPDATE_USER)
+    const [addOrUpdateUser] = useMutation($addOrUpdateUser)
 
     /**
      * On save user

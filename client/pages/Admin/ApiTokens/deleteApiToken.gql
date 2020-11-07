@@ -1,0 +1,8 @@
+mutation($name: String!) {
+  result: deleteApiToken(name: $name) {
+    success
+    error {
+      message
+    }
+  }
+}

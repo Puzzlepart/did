@@ -1,0 +1,8 @@
+mutation($id: String!, $settings: SubscriptionSettingsInput!) {
+  result: updateSubscription(id: $id, settings: $settings) {
+    success
+    error {
+      message
+    }
+  }
+}

@@ -8,7 +8,7 @@ import 'regenerator-runtime/runtime.js'
 import dateUtils from 'utils/date'
 import { App } from './App'
 import { ContextUser, IAppContext } from './AppContext'
-import { client, GET_CONTEXT } from './graphql'
+import { client,  $context } from './graphql'
 import './i18n'
 import './_global.scss'
 
@@ -22,7 +22,7 @@ const boostrap = async () => {
         const context: IAppContext = {}
         try {
             const { data } = await client.query<Partial<IAppContext>>({
-                query: GET_CONTEXT,
+                query: $context,
                 fetchPolicy: 'cache-first'
             })
             context.user = new ContextUser(data.user)

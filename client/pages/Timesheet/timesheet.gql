@@ -1,0 +1,69 @@
+query($query: TimesheetQuery!, $dateFormat: String!, $locale: String!) {
+  timesheet(query: $query, dateFormat: $dateFormat, locale: $locale) {
+    id
+    week
+    month
+    startDateTime
+    endDateTime
+    events {
+      id
+      title
+      isOrganizer
+      webLink
+      duration
+      startDateTime
+      endDateTime
+      date
+      project {
+        id
+        key
+        name
+        description
+        icon
+        customer {
+          key
+          name
+          icon
+          inactive
+        }
+        labels {
+          name
+          description
+          color
+          icon
+        }
+      }
+      suggestedProject {
+        id
+        key
+        name
+        description
+        customer {
+          key
+          name
+          inactive
+        }
+      }
+      customer {
+        key
+        name
+        icon
+        inactive
+      }
+      labels {
+        name
+        description
+        color
+        icon
+      }
+      isSystemIgnored
+      error {
+        code
+      }
+    }
+    isConfirmed
+    isForecasted
+    isForecast
+    forecastedHours
+  }
+}

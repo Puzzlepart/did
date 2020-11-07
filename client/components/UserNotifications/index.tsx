@@ -5,7 +5,7 @@ import { getValue } from 'helpers'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import GET_NOTIFICATIONS, { IGetNotifications, IGetNotificationsVariables } from './GET_NOTIFICATIONS'
+import notificationsQuery from './notifications.gql'
 import { NotificationsPanel } from './NotificationsPanel'
 import { NotificationModel } from './types'
 import styles from './UserNotifications.module.scss'
@@ -18,8 +18,8 @@ export const UserNotifications = () => {
     const { user } = useContext(AppContext)
     const [showPanel, setShowPanel] = useState(false)
     const [notifications, setNotifications] = useState<Set<NotificationModel>>(new Set())
-    const { loading, data } = useQuery<IGetNotifications, IGetNotificationsVariables>(
-        GET_NOTIFICATIONS,
+    const { loading, data } = useQuery(
+        notificationsQuery,
         {
             variables: {
                 templates: t('notifications.templates', { returnObjects: true }),

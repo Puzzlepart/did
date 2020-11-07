@@ -1,21 +1,21 @@
 import { useQuery } from '@apollo/client'
 import { UserMessage } from 'components/UserMessage'
 import { getValue } from 'helpers'
-import { Project } from 'types'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { ProjectList } from 'pages/Projects'
-import { GET_PROJECTS } from 'pages/Projects/graphql'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
+import { Project } from 'types'
 import styles from './CustomerDetails.module.scss'
+import $projects from './projects.gql'
 import { ICustomerDetailsProps } from './types'
 
 export const CustomerDetails = (props: ICustomerDetailsProps) => {
     const { t } = useTranslation()
     const { loading, error, data } = useQuery(
-        GET_PROJECTS,
+        $projects,
         {
             variables: {
                 sortBy: 'name',

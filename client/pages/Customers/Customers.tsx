@@ -13,7 +13,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import { find } from 'underscore'
 import { CustomerDetails } from './CustomerDetails'
 import { CustomerList } from './CustomerList'
-import GET_CUSTOMERS from './GET_CUSTOMERS'
+import $customers from './customers.gql'
 import { ICustomersParams } from './types'
 
 
@@ -24,7 +24,7 @@ export const Customers: React.FunctionComponent = () => {
     const params = useParams<ICustomersParams>()
     const [selected, setSelected] = useState<Customer>(null)
     const { loading, error, data } = useQuery(
-        GET_CUSTOMERS,
+        $customers,
         {
             variables: { sortBy: 'name' },
             fetchPolicy: 'cache-first'
