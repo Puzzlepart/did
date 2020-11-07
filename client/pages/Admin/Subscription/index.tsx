@@ -14,14 +14,14 @@ import omitDeep from 'utils/omitDeep'
 import { SUBSCRIPTION_SETTINGS } from './config'
 import { SettingsSection } from './SettingsSection'
 import styles from './SubscriptionSettings.module.scss'
-import { UPDATE_SUBSCRIPTION } from './UPDATE_SUBSCRIPTION'
+import $updateSubscription from './updateSubscription.gql'
 
 export const SubscriptionSettings = () => {
     const context = useContext(AppContext)
     const { t } = useTranslation()
     const [subscription, setSubscription] = useState<Subscription>(omitDeep(deepCopy(context.subscription), '__typename'))
     const [isSaved, setIsSaved] = useState(false)
-    const [updateSubscription] = useMutation(UPDATE_SUBSCRIPTION)
+    const [updateSubscription] = useMutation($updateSubscription)
     const [message, setMessage] = useMessage()
 
     const sections = useMemo(() => SUBSCRIPTION_SETTINGS(t), [t])
