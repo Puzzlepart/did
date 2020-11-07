@@ -4,10 +4,9 @@ import { IContextualMenuItem, ContextualMenuItemType } from 'office-ui-fabric-re
 import { FocusTrapZone } from 'office-ui-fabric-react/lib/FocusTrapZone'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import { TimesheetContext } from 'pages/Timesheet'
-import  React,{useContext} from 'react'
+import React, { useContext } from 'react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ACTIONBAR_ICON_PROPS } from '../ACTIONBAR_ICON_PROPS'
 import styles from './WeekPicker.module.scss'
 
 export const WeekPicker = () => {
@@ -34,7 +33,7 @@ export const WeekPicker = () => {
                     }}
                     readOnly
                     borderless
-                    iconProps={{ iconName: 'ChevronDown', ...ACTIONBAR_ICON_PROPS }} />
+                    iconProps={{ iconName: 'ChevronDown', className: styles.actionBarIcon }} />
             </div>
             {calendar && (
                 <Callout
