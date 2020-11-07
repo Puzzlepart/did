@@ -40,10 +40,7 @@ export const Timesheet: React.FunctionComponent = () => {
         errorPolicy: 'all'
     })
 
-    useEffect(() => dispatch({
-        type: 'DATA_UPDATED',
-        payload: { query, t }
-    }), [query])
+    useEffect(() => dispatch({ type: 'DATA_UPDATED', payload: { query, t } }), [query])
 
     useEffect(() => {
         history.push(`/timesheet/${state.selectedView}/${state.selectedPeriod.path}`)

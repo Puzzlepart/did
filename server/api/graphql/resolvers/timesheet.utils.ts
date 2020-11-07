@@ -25,9 +25,7 @@ export function getPeriods(startDateTime: string, endDateTime: string, locale: s
   ]
 
   if (isSplit) {
-    periods.push(
-      new TimesheetPeriodObject(DateUtils.getPeriod(endDateTime), endDateTime, locale)
-    )
+    periods.push(new TimesheetPeriodObject(DateUtils.getPeriod(endDateTime), endDateTime, locale))
   }
 
   return periods
@@ -41,7 +39,12 @@ export function getPeriods(startDateTime: string, endDateTime: string, locale: s
  * @param {Customer[]} customers Customers
  * @param {LabelObject[]} labels Labels
  */
-export function connectTimeEntries(timeEntries: TimeEntry[], projects: Project[], customers: Customer[], labels: LabelObject[]) {
+export function connectTimeEntries(
+  timeEntries: TimeEntry[],
+  projects: Project[],
+  customers: Customer[],
+  labels: LabelObject[]
+) {
   return timeEntries.map((e) => {
     const customerKey = first(e.projectId.split(' '))
     return {

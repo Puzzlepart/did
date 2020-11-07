@@ -121,8 +121,8 @@ export class TimesheetPeriodObject {
     this.startDateTime = startDateTime
     this.endDateTime = endDateTime
     this.week = DateUtils.getWeek()
-    this.month = DateUtils.formatDate(startDateTime, 'MMMM', locale),
-    this.isForecast = DateUtils.isAfterToday(startDateTime)
+    ;(this.month = DateUtils.formatDate(startDateTime, 'MMMM', locale)),
+      (this.isForecast = DateUtils.isAfterToday(startDateTime))
     this.isForecasted = false
     this.isConfirmed = false
   }

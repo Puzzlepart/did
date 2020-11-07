@@ -14,26 +14,26 @@ import { DateObject } from './date.dateObject'
 interface IDateUtils {
   /**
    * Timezone offset
-   * 
+   *
    * Retrieved from Date.getTimezoneOffset()
    */
-  tzOffset: number;
+  tzOffset: number
 
   /**
    * Default month format
    */
-  monthFormat: string;
+  monthFormat: string
 
   /**
    * Use ISO week
    */
-  isoWeek: boolean;
+  isoWeek: boolean
 }
 
 export type DateInput = ConfigType
 
 export class DateUtils {
-  constructor(private $: IDateUtils) { }
+  constructor(private $: IDateUtils) {}
 
   /**
    * Setup DateUtils class using @dayjs with @plugins
@@ -155,10 +155,7 @@ export class DateUtils {
     const sFormat = ['DD']
     if (!isSameMonth) sFormat.push(monthFormat)
     if (!isSameYear) sFormat.push('YYYY')
-    return [
-      start.format(sFormat.join(' ')),
-      end.format(`DD ${monthFormat} YYYY`)
-    ].join(' - ')
+    return [start.format(sFormat.join(' ')), end.format(`DD ${monthFormat} YYYY`)].join(' - ')
   }
 
   /**
@@ -170,7 +167,7 @@ export class DateUtils {
 
   /**
    * Get week number
-   * 
+   *
    * If no @date parameter is specified the current week is returned
    *
    * @param {DateInput} date Optional date
@@ -192,7 +189,7 @@ export class DateUtils {
 
   /**
    * Get the year
-   * 
+   *
    * If no @date parameter is specified the current year is returned
    *
    * @param {DateInput} date Optional date
@@ -211,11 +208,11 @@ export class DateUtils {
   }
 
   /**
-    * Is current year
-    *
-    * @param {DateObject} date Date
-    * @param {number} year Year
-    */
+   * Is current year
+   *
+   * @param {DateObject} date Date
+   * @param {number} year Year
+   */
   isCurrentYear(date: DateObject, year?: number) {
     return (year || date.$.year()) === dayjs().year()
   }

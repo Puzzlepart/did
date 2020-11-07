@@ -41,11 +41,11 @@ describe(header('AzTableUtilities'), async () => {
       const item = {
         Name: {
           $: 'Edm.String',
-          _: 'Admin',
+          _: 'Admin'
         },
         Icon: {
           $: 'Edm.String',
-          _: 'Admin',
+          _: 'Admin'
         },
         Permissions: {
           $: 'Edm.String',

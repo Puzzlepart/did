@@ -54,7 +54,7 @@ export class DateObject {
 
   /**
    * This indicates whether the DateObject object is the same month the other supplied date-time.
-   * 
+   *
    * @param {DateObject} date Date
    */
   isSameMonth(date: DateObject) {
@@ -62,32 +62,32 @@ export class DateObject {
   }
 
   /**
-  * This indicates whether the DateObject object is the same year the other supplied date-time.
-  * 
-  * @param {DateObject} date Date
-  */
+   * This indicates whether the DateObject object is the same year the other supplied date-time.
+   *
+   * @param {DateObject} date Date
+   */
   isSameYear(date: DateObject) {
     return this.$.isSame(date.$, 'year')
   }
 
   /**
-  * This indicates whether the Day.js object is the same or before as the other supplied date-time.
-  * 
-  * @param {DateObject} date Date
-  */
+   * This indicates whether the Day.js object is the same or before as the other supplied date-time.
+   *
+   * @param {DateObject} date Date
+   */
   isBeforeOrSame(date: DateObject) {
     return this.$.isBefore(date.$) || this.$.isSame(date.$)
   }
 
   /**
    * Returns a cloned DateObject with a specified amount of time added
-   * 
+   *
    * Currently only supporting int (whole numbers)
-   * 
+   *
    * If we want to support e.g. 1.5h, we could look into using parseFloat insteaf of parseInt
    *
    * E.g. 1d to add day, or 1m to add 1 month
-   * 
+   *
    * @param {string} add Add
    */
   public add(add: string) {
@@ -97,18 +97,18 @@ export class DateObject {
   }
 
   /**
-  * This indicates the difference between two date-time in the specified unit.
-  * 
-  * @param {DateObject} date Date   * 
-  * @param {OpUnitType} unit Unit
-  */
+   * This indicates the difference between two date-time in the specified unit.
+   *
+   * @param {DateObject} date Date   *
+   * @param {OpUnitType} unit Unit
+   */
   diff(date: DateObject, unit: OpUnitType) {
     return this.$.diff(date.$, unit)
   }
 
   /**
    * Returns an object representation of the DateObject
-   * 
+   *
    * @param {string[]} include Properties to include
    */
   toObject(...include: string[]) {

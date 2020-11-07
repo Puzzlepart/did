@@ -16,9 +16,9 @@ export class Context {
   public requestId?: string
 
   /**
-   * 
+   *
    */
-  public userId?: string;
+  public userId?: string
 
   /**
    * Subscription

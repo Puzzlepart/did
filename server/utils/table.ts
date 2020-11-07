@@ -4,7 +4,7 @@ import { decapitalize, capitalize, isBlank, startsWith } from 'underscore.string
 import get from 'get-value'
 
 interface IConvertToAzEntityOptions {
-  removeBlanks?: boolean;
+  removeBlanks?: boolean
   typeMap?: Record<string, 'json' | 'datetime' | 'boolean' | 'number' | 'double'>
 }
 
@@ -27,9 +27,9 @@ class AzTableUtilities {
    * In the azure table entity we'll find the value in _ and the type in $
    *
    * If the value starts with 'json:', we parse it as JSON
-   * 
+   *
    * Supports the builtin types Edm.* and the following custom:
-   * 
+   *
    * * Custom.ArrayPipe
    *
    * @param {Record<string,azurestorage.TableUtilities.entityGenerator.EntityProperty<any>>} entityDescriptor Entity descriptor
@@ -50,7 +50,7 @@ class AzTableUtilities {
       const type: string = get(options, `typeMap.${key}`, { default: $ })
       switch (type) {
         case 'Custom.ArrayPipe':
-          value = (value as string || '').split('|').filter((p) => p)
+          value = ((value as string) || '').split('|').filter((p) => p)
           break
         case 'Edm.DateTime':
           value = value.toISOString()
@@ -279,7 +279,12 @@ class AzTableUtilities {
    * @param {IParseAzEntityOptions} options Parse options
    * @param {string} partitionKey Partition key (defaults to Default)
    */
-  retrieveAzEntity<T = any>(table: string, rowKey: string, options: IParseAzEntityOptions, partitionKey: string = 'Default',): Promise<any> {
+  retrieveAzEntity<T = any>(
+    table: string,
+    rowKey: string,
+    options: IParseAzEntityOptions,
+    partitionKey: string = 'Default'
+  ): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       this.tableService.retrieveEntity<any>(table, partitionKey, rowKey, (error, result) => {
         if (error) reject(error)

@@ -208,7 +208,9 @@ class AzStorageService {
    */
   async getUser(userId: string): Promise<Express.User> {
     try {
-      return await this.tableUtil.retrieveAzEntity<Express.User>(this.tables.users, userId, { columnMap: { RowKey: 'id' } })
+      return await this.tableUtil.retrieveAzEntity<Express.User>(this.tables.users, userId, {
+        columnMap: { RowKey: 'id' }
+      })
     } catch (error) {
       return null
     }
@@ -545,14 +547,10 @@ class AzStorageService {
    */
   async getRoleByName(name: string) {
     try {
-      return await this.tableUtil.retrieveAzEntity<Role>(
-        this.tables.roles,
-        name,
-        {
-          columnMap: { RowKey: 'name' },
-          typeMap: { Permissions: 'Custom.ArrayPipe' }
-        }
-      )
+      return await this.tableUtil.retrieveAzEntity<Role>(this.tables.roles, name, {
+        columnMap: { RowKey: 'name' },
+        typeMap: { Permissions: 'Custom.ArrayPipe' }
+      })
     } catch (error) {
       return []
     }
@@ -573,9 +571,7 @@ class AzStorageService {
       },
       'Default',
       {
-        typeMap: {
-          
-        }
+        typeMap: {}
       }
     )
     let result

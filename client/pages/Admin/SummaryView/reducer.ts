@@ -46,7 +46,7 @@ export const reducer = (state: ISummaryViewState, action: SummaryViewAction): IS
       throw new Error()
   }
   // TODO:  Find a better way? Do we need this?
-  if(!DateUtils.isCurrentYear(undefined, state.year)) newState.endMonthIndex = 12
+  if (!DateUtils.isCurrentYear(undefined, state.year)) newState.endMonthIndex = 12
   newState.endMonthIndex = DateUtils.getMonthIndex()
   return newState
 }
