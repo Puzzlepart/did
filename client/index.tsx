@@ -12,33 +12,35 @@ import { client, GET_CONTEXT } from './graphql'
 import './i18n'
 import './_global.scss'
 
-initializeIcons()
+const boostrap = async () => {
+    initializeIcons()
 
-/**
- * Get app context
- */
-const getContext = async (): Promise<IAppContext> => {
-    const context: IAppContext = {
-        error: JSON.parse(document.getElementById('app').getAttribute('data-error') || '{}'),
+    /**
+     * Get app context
+     */
+    const getContext = async (): Promise<IAppContext> => {
+        const context: IAppContext = {}
+        try {
+            const { data } = await client.query<Partial<IAppContext>>({ query: GET_CONTEXT, fetchPolicy: 'cache-first' })
+            context.user = new ContextUser(data.user)
+            context.subscription = data?.subscription
+            return context
+        } catch (error) {
+            return context
+        }
     }
-    try {
-        const { data } = await client.query<Partial<IAppContext>>({ query: GET_CONTEXT, fetchPolicy: 'cache-first' })
-        context.user = new ContextUser(data.user)
-        context.subscription =  data?.subscription
-        return context
-    } catch (error) {
-        return context
-    }
-}
 
-getContext().then(context => {
+    const context = await getContext()
+    context.error =  JSON.parse(document.getElementById('app').getAttribute('data-error') || '{}')
     const container = document.getElementById('app')
-    dateUtils.setup(context.user.language)
-    i18n.changeLanguage(context.user.language)
+    dateUtils.setup(context.user?.language)
+    i18n.changeLanguage(context.user?.language)
 
     ReactDom.render((
         <ApolloProvider client={client}>
             <App {...context} />
         </ApolloProvider>
     ), container)
-})
+}
+
+boostrap()
