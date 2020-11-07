@@ -8,7 +8,6 @@ export interface IAuthOptions {
   userContext?: boolean
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const authChecker: AuthChecker<Context, IAuthOptions> = ({ context }: { context: Context }, [authOptions]) => {
   if (!authOptions) return context.isAuthorized
   if (authOptions.userContext) return !!context.userId
