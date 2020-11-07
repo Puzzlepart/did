@@ -10,11 +10,11 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const { merge } = require('webpack-merge')
 
 let config = merge(
-  require('./webpack.config.base.js'),
+  require('./@base.js'),
   {
     mode: 'development',
     output: {
-      path: path.resolve(__dirname, 'server/public/js'),
+      path: path.resolve(__dirname, '../server/public/js'),
       filename: '[name].[hash].js',
       publicPath: '/js',
     },
@@ -24,12 +24,12 @@ let config = merge(
     plugins: [
       new MomentLocalesPlugin({ localesToKeep: ['en-gb', 'nb'] }),
       new HtmlWebpackPlugin({
-        template: path.resolve(__dirname, 'server/views/@template.hbs'),
-        filename: path.resolve(__dirname, 'server/views/index.hbs'),
+        template: path.resolve(__dirname, '../server/views/@template.hbs'),
+        filename: path.resolve(__dirname, '../server/views/index.hbs'),
         inject: true,
       }),
       new WebpackBuildNotifierPlugin({
-        logo: path.join(__dirname, '/server/public/images/favicon/mstile-150x150.png'),
+        logo: path.join(__dirname, '../server/public/images/favicon/mstile-150x150.png'),
         sound: process.env.WEBPACK_NOTIFICATIONS_SOUND,
         suppressSuccess: process.env.WEBPACK_NOTIFICATIONS_SUPPRESSSUCCESS === 'true',
         showDuration: process.env.WEBPACK_NOTIFICATIONS_SHOWDURATION === 'true',

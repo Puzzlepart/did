@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-console */
 require('dotenv').config()
-const path = require('path')
+const { resolve } = require('path')
 
 let config = {
-  entry: path.resolve(__dirname, 'client/index.tsx'),
+  entry: resolve(__dirname, '../client/index.tsx'),
   optimization: {
     splitChunks: {
       chunks: 'all',
@@ -25,7 +25,7 @@ let config = {
           {
             loader: 'ts-loader',
             options: {
-              configFile: path.resolve(__dirname, 'tsconfig-client.json')
+              configFile: resolve(__dirname, '../tsconfig-client.json')
             },
           },
         ],
@@ -47,17 +47,18 @@ let config = {
     ],
   },
   resolve: {
-    alias: {
-      common: path.resolve(__dirname, 'client/common'),
-      types: path.resolve(__dirname, 'client/types'),
-      utils: path.resolve(__dirname, 'client/utils'),
-      helpers: path.resolve(__dirname, 'client/helpers'),
-      pages: path.resolve(__dirname, 'client/pages'),
-      components: path.resolve(__dirname, 'client/components'),
-      i18n: path.resolve(__dirname, 'client/i18n'),
-      config: path.resolve(__dirname, 'client/config'),
-      AppContext: path.resolve(__dirname, 'client/AppContext'),
-    },
+    alias:
+      [
+        'AppContext',
+        'common',
+        'components',
+        'config',
+        'graphql',
+        'helpers',
+        'pages',
+        'types',
+        'utils',
+      ].reduce((alias, a) => ({ ...alias, [`@${a}`]: resolve(__dirname, `../client/${a}`) }), {}),
     extensions: ['.ts', '.tsx', '.js', '.css', '.scss', '.gql'],
   }
 }

@@ -7,19 +7,19 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { merge } = require('webpack-merge')
 
 let config = merge(
-  require('./webpack.config.base.js'),
+  require('./@base.js'),
   {
     mode: 'production',
     output: {
-      path: path.resolve(__dirname, 'server-dist/public/js'),
+      path: path.resolve(__dirname, '../server-dist/public/js'),
       publicPath: '/js',
     },
     stats: 'errors-only',
     plugins: [
       new MomentLocalesPlugin({ localesToKeep: ['en-gb', 'nb'] }),
       new HtmlWebpackPlugin({
-        template: path.resolve(__dirname, 'server/views/@template.hbs'),
-        filename: path.resolve(__dirname, 'server-dist/views/index.hbs'),
+        template: path.resolve(__dirname, '../server/views/@template.hbs'),
+        filename: path.resolve(__dirname, '../server-dist/views/index.hbs'),
         inject: true,
       }),
       new CompressionPlugin()
