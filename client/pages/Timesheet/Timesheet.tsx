@@ -9,13 +9,15 @@ import { useHistory, useParams } from 'react-router-dom'
 import { ActionBar } from './ActionBar'
 import { AllocationView } from './AllocationView'
 import { ErrorBar } from './ErrorBar'
-import { SUBMIT_PERIOD, TIMESHEET, UNSUBMIT_PERIOD } from './graphql'
 import hotkeys from './hotkeys'
 import { Overview } from './Overview'
 import reducer from './reducer'
+import submitPeriodMutation from './submitPeriod.gql'
 import { SummaryView } from './SummaryView'
+import timesheetQuery from './timesheet.gql'
 import styles from './Timesheet.module.scss'
 import { ITimesheetContext, ITimesheetParams, TimesheetContext, TimesheetPeriod, TimesheetScope, TimesheetView } from './types'
+import unsubmitPeriodMutation from './unsubmitPeriod.gql'
 
 export const Timesheet: React.FunctionComponent = () => {
     const app = useContext(AppContext)
@@ -28,7 +30,7 @@ export const Timesheet: React.FunctionComponent = () => {
         scope: new TimesheetScope(params),
         selectedView: params.view || 'overview'
     })
-    const query = useQuery(TIMESHEET, {
+    const query = useQuery(timesheetQuery, {
         variables: {
             query: state.scope.dateStrings,
             dateFormat: 'dddd DD',
@@ -48,8 +50,8 @@ export const Timesheet: React.FunctionComponent = () => {
     }, [state.selectedView, state.selectedPeriod])
 
     const [[submitPeriod], [unsubmitPeriod]] = [
-        useMutation(SUBMIT_PERIOD),
-        useMutation(UNSUBMIT_PERIOD),
+        useMutation(submitPeriodMutation),
+        useMutation(unsubmitPeriodMutation),
     ]
 
     const onSubmitPeriod = async (forecast: boolean) => {
