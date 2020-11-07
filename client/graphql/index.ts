@@ -20,5 +20,5 @@ export const client = new ApolloClient({
   defaultOptions: { watchQuery: { fetchPolicy: 'cache-and-network' } }
 })
 
-export { GET_CONTEXT } from './GET_CONTEXT'
+export { default as $context } from './context.gql'
 export { FetchPolicy }

@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next'
 import { isBlank } from 'underscore.string'
 import { sleep } from 'utils'
 import dateUtils from 'utils/date'
-import ADD_API_TOKEN from './ADD_API_TOKEN'
+import $addApiToken from './addApiToken.gql'
 import styles from './ApiTokens.module.scss'
 import $deleteApiToken from './deleteApiToken.gql'
 import $tokens from './tokens.gql'
@@ -19,7 +19,7 @@ export const ApiTokens = () => {
     const [key, setKey] = useState(null)
     const [name, setName] = useState(null)
     const [message, setMessage] = useState(null)
-    const [addApiToken, { loading }] = useMutation(ADD_API_TOKEN)
+    const [addApiToken, { loading }] = useMutation($addApiToken)
     const [deleteApiToken] = useMutation($deleteApiToken)
     const { data, refetch } = useQuery($tokens)
 
