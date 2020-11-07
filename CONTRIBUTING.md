@@ -64,7 +64,7 @@ _We use https://studio.apollographql.com/ for GraphQL documentation._
 
 ## Set up .env ##
 
-You've copied `sample.env` into `.env`. Manually or using `npm run-script create-env`.
+You've copied `.env.sample` into `.env`. Manually or using `npm run-script create-env`.
 
 Now you need to set the following properties/parameters:
 
