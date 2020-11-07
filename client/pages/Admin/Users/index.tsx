@@ -8,11 +8,10 @@ import { useTranslation } from 'react-i18next'
 import { filter, find, isEmpty, omit } from 'underscore'
 import { BulkImportPanel, IBulkImportPanelProps } from './BulkImportPanel'
 import BULK_ADD_USERS from './BULK_ADD_USERS'
-import { columns } from './columns'
+import { UserColumns as columns } from './columns'
 import { AD_USERS } from './AD_USERS'
 import { IUserFormProps, UserForm } from './UserForm'
 import { IUsersContext, UsersContext } from './context'
-
 
 export const Users = () => {
     const { t } = useTranslation()
@@ -27,7 +26,6 @@ export const Users = () => {
         adUsers: data?.adUsers || [],
     }), [data])
     ctxValue.adUsers = filter(ctxValue.adUsers, x => !find(ctxValue.users, y => y.id === x.id))
-
 
     /**
      * On edit user
