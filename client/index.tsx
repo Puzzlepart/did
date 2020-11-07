@@ -20,12 +20,13 @@ initializeIcons()
  */
 const getContext = async (): Promise<IAppContext> => {
     const context: IAppContext = {
+        user: new ContextUser({ preferredLanguage: 'en-GB' }),
         error: JSON.parse(document.getElementById('app').getAttribute('data-error') || '{}'),
     }
     try {
         const { data } = await client.query<Partial<IAppContext>>({ query: GET_CONTEXT, fetchPolicy: 'cache-first' })
         context.user = new ContextUser(data.user)
-        context.subscription =  data?.subscription
+        context.subscription = data?.subscription
         return context
     } catch (error) {
         return context
@@ -39,7 +40,7 @@ getContext().then(context => {
 
     ReactDom.render((
         <ApolloProvider client={client}>
-            <App {...context} /> 
+            <App {...context} />
         </ApolloProvider>
     ), container)
 })
