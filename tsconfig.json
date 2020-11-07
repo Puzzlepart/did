@@ -10,7 +10,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": ["es2018", "esnext.asynciterable", "DOM"],
-    "baseUrl": ".",
+    "baseUrl": "./",
     "typeRoots": ["./node_modules/@types", "./server"],
     "types": [
       "express",
