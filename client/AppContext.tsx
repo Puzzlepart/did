@@ -12,12 +12,15 @@ export class ContextUser {
     private _preferredLanguage: string
 
     constructor(user?: User) {
-        if (!user) return
-        this.id = user.id
-        this.displayName = user.displayName
-        this.mail = user.mail
-        this.role = user.role
-        this._preferredLanguage = user.preferredLanguage
+        if (!user) {
+            this._preferredLanguage = 'en-GB'
+        } else {
+            this.id = user.id
+            this.displayName = user.displayName
+            this.mail = user.mail
+            this.role = user.role
+            this._preferredLanguage = user.preferredLanguage
+        }
     }
 
     /**

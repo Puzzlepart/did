@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 export const UNSUBMIT_PERIOD = gql`
   mutation($period: TimesheetPeriodInput!, $forecast: Boolean!) {

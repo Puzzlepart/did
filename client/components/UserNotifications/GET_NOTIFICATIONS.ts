@@ -1,5 +1,5 @@
 import { ITypedHash } from '@pnp/common'
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 import { INotification } from './types'
 
 export interface IGetNotifications {
