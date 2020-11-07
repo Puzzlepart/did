@@ -5,12 +5,12 @@ import { useTranslation } from 'react-i18next'
 import { LabelObject } from 'types'
 import { LabelColumns as columns } from './columns'
 import DELETE_LABEL from './DELETE_LABEL'
-import GET_LABELS from './GET_LABELS'
 import { ILabelFormProps, LabelForm } from './LabelForm'
+import labelsQuery from './labels.gql'
 
 export const Labels = () => {
     const { t } = useTranslation()
-    const { data, refetch } = useQuery(GET_LABELS, { fetchPolicy: 'cache-and-network' })
+    const { data, refetch } = useQuery(labelsQuery, { fetchPolicy: 'cache-and-network' })
     const [deleteLabel] = useMutation(DELETE_LABEL)
     const [form, setForm] = useState<ILabelFormProps>(null)
 
