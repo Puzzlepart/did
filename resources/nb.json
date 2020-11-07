@@ -113,7 +113,14 @@
     "tokenDeletedText": "Nøkkelen **{{name}}** ble slettet.",
     "summaryLoadingText": "Laster tidsoppføringer og lager oppsummering...",
     "bulkImportUsersLabel": "Importer i bulk",
-    "bulkImportingUsersLabel": "Importerer {{count}} brukere. Vennligst vent.."
+    "bulkImportingUsersLabel": "Importerer {{count}} brukere. Vennligst vent..",
+    "subscriptionSettingsUpdateSuccess": "Abonnementsinnstillingene er oppdatert.",
+    "forecasting": "Prognoser",
+    "forecastEnabledLabel": "Prognoser aktivert",
+    "forecastEnabledDescription": "Aktiver/deaktiver prognoser.",
+    "forecastNotificationsDescription": "Hvor mange uker fremover skal brukerne forutsi.",
+    "forecastNotificationsLabel": "Varsler",
+    "subscriptionSettings": "Abonnement"
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport. For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene...",
@@ -252,7 +259,9 @@
     "exportTypeLastMonth": "Forrige måned ({{monthName}})",
     "exportTypeCurrentMonth": "Inneværende måned ({{monthName}})",
     "exportTypeCurrentYear": "Inneværende år ({{year}})",
-    "subscription": "Abonnement"
+    "subscription": "Abonnement",
+    "nameLabel": "Navn",
+    "descriptionLabel": "Beskrivelse"
   },
   "navigation": {
     "timesheet": "Timeliste",
@@ -272,7 +281,18 @@
     "manageCustomers": "Administrere kunder",
     "deleteCustomers": "Slette kunder",
     "manageUsers": "Administrere brukere",
-    "manageRolesPermissions": "Administere roller og tilganger"
+    "manageRolesPermissions": "Administere roller og tilganger",
+    "deleteProjectsDescription": "Sletting av prosjekter støttes foreløpig ikke.",
+    "accessTimesheetDescription": "Tilgang til timelisten",
+    "accessCustomersDescription": "Tilgang til siden kunder der du kan søke i aktive og inaktive kunder.",
+    "accessProjectsDescription": "Tilgang til prosjekter-siden der du kan søke i aktive og inaktive prosjekter.",
+    "accessAdminDescription": "Tilgang til prosjekt-siden der du kan søke i aktive og inaktive prosjekter.",
+    "accessReportsDescription": "Tilgang til administratorside der du administrerer brukere, roller, tillatelser, API-nøkler og etiketter.",
+    "manageProjectsDescription": "Opprett nye og rediger eksisterende prosjekter.",
+    "manageCustomersDescription": "Opprett nye og rediger eksisterende kunder.",
+    "deleteCustomersDescription": "Sletting av kunder støttes foreløpig ikke.",
+    "manageUsersDescription": "Administrer brukere på administratorsiden. \nLegg til nye brukere, én etter én eller i bulk, og endre rolle for eksisterende brukere.",
+    "manageRolesPermissionsDescription": "Administrer roller og tillatelser på administratorsiden. \nLag nye roller og rediger eksisterende."
   },
   "notifications": {
     "moreLinkText": "Les mer her",

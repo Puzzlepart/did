@@ -57,7 +57,7 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
         className={`${styles.root} ${this.props.className}`}
         style={{ width: this.props.width }}
         onKeyDown={this.onKeyDown}>
-        {this.props.label && <Label>{this.props.label}</Label>}
+        {this.props.label && <Label required={this.props.required}>{this.props.label}</Label>}
         <SearchBox
           iconProps={{ iconName }}
           value={this.state.searchText}

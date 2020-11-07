@@ -18,28 +18,25 @@ import styles from './Timesheet.module.scss'
 import { ITimesheetContext, ITimesheetParams, TimesheetContext, TimesheetPeriod, TimesheetScope, TimesheetView } from './types'
 
 export const Timesheet: React.FunctionComponent = () => {
-    try {
-        const app = useContext(AppContext)
-        const { t } = useTranslation()
-        const history = useHistory()
-        const params = useParams<ITimesheetParams>()
-        const [state, dispatch] = useReducer(reducer, {
-            periods: [],
-            selectedPeriod: new TimesheetPeriod().fromParams(params),
-            scope: new TimesheetScope().fromParams(params),
-            selectedView: params.view || 'overview'
-        })
-        const query = useQuery(TIMESHEET, {
-            variables: {
-                query: state.scope.iso,
-                options: {
-                    dateFormat: 'dddd DD',
-                    locale: app.user.preferredLanguage,
-                }
-            },
-            fetchPolicy: 'cache-and-network',
-            errorPolicy: 'all'
-        })
+    const app = useContext(AppContext)
+    const { t } = useTranslation()
+    const history = useHistory()
+    const params = useParams<ITimesheetParams>()
+    const [state, dispatch] = useReducer(reducer, {
+        periods: [],
+        selectedPeriod: new TimesheetPeriod().fromParams(params),
+        scope: new TimesheetScope().fromParams(params),
+        selectedView: params.view || 'overview'
+    })
+    const query = useQuery(TIMESHEET, {
+        variables: {
+            query: state.scope.iso,
+            dateFormat: 'dddd DD',
+            locale: app.user.language,
+        },
+        fetchPolicy: 'cache-and-network',
+        errorPolicy: 'all'
+    })
 
         useEffect(() => dispatch({
             type: 'DATA_UPDATED',
@@ -128,9 +125,4 @@ export const Timesheet: React.FunctionComponent = () => {
                     onDismiss={() => dispatch({ type: 'TOGGLE_SHORTCUTS' })} />
             </GlobalHotKeys>
         )
-    } catch (error) {
-        // eslint-disable-next-line no-console
-        console.log(error)
-        return null
-    }
 }
