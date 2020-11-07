@@ -221,11 +221,11 @@ class AzStorageService {
   }
 
   /**
-   * Bulk add users to table storage
+   * Bulk imports users to table storage
    *
-   * @param {any[]} users Users to add
+   * @param {any[]} users Users to import
    */
-  async bulkAddUsers(users: any[]) {
+  async bulkImport(users: any[]) {
     const entities = users.map((user) => {
       const entity = this.tableUtil.convertToAzEntity(user.id, {
         ...omit(user, 'id'),

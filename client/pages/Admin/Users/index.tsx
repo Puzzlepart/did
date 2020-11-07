@@ -7,9 +7,9 @@ import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { filter, find, isEmpty, omit } from 'underscore'
 import { BulkImportPanel, IBulkImportPanelProps } from './BulkImportPanel'
-import BULK_ADD_USERS from './BULK_ADD_USERS'
+import $bulkImport from './bulkImport.gql'
 import { UserColumns as columns } from './columns'
-import { AD_USERS } from './AD_USERS'
+import $users from './users.gql'
 import { IUserFormProps, UserForm } from './UserForm'
 import { IUsersContext, UsersContext } from './context'
 
@@ -18,8 +18,8 @@ export const Users = () => {
     const [userForm, setUserForm] = useState<IUserFormProps>(null)
     const [bulkImportPanel, setBulkImportPanel] = useState<IBulkImportPanelProps>(null)
     const [progressProps, setProgressProps] = useState<ISpinnerProps>(null)
-    const { data, refetch, loading, called } = useQuery(AD_USERS, { fetchPolicy: 'cache-and-network' })
-    const [bulkAddUsers] = useMutation(BULK_ADD_USERS)
+    const { data, refetch, loading, called } = useQuery($users, { fetchPolicy: 'cache-and-network' })
+    const [bulkImport] = useMutation($bulkImport)
     const ctxValue: IUsersContext = useMemo(() => ({
         roles: data?.roles || [],
         users: data?.users || [],
@@ -45,7 +45,7 @@ export const Users = () => {
     const onBulkImport = async (users: any[]) => {
         setBulkImportPanel(null)
         setProgressProps({ label: t('admin.bulkImportingUsersLabel', { count: users.length }), labelPosition: 'right' })
-        await bulkAddUsers({ variables: { users: users.map(u => omit(u, '__typename')) } })
+        await bulkImport({ variables: { users: users.map(u => omit(u, '__typename')) } })
         setProgressProps(null)
         refetch()
     }
