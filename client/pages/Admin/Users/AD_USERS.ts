@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client'
+
 
 export const AD_USERS = gql`
   query {
