@@ -19,8 +19,7 @@ let config = merge(
       publicPath: '/js',
     },
     stats: 'normal',
-    watch: true,
-    watchOptions: { aggregateTimeout: 200 },
+    watchOptions: { aggregateTimeout: 1000 },
     plugins: [
       new MomentLocalesPlugin({ localesToKeep: ['en-gb', 'nb'] }),
       new HtmlWebpackPlugin({

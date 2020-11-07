@@ -7,11 +7,13 @@
     "npm": ">=6.5.0"
   },
   "scripts": {
-    "watch": "concurrently \"webpack -c ./webpack/development.js\" \"npm run watch:server\" \"node tasks/open.js\" \"node tasks/localtunnel.js\"",
+    "watch": "concurrently \"npm run watch:client\" \"npm run watch:server\" \"node tasks/open.js\" \"node tasks/localtunnel.js\"",
     "start": "node ./server-dist/index.js",
     "start:tsnode": "ts-node ./server/index.ts -T -P ./tsconfig.json",
     "watch:server": "nodemon",
+    "watch:client": "webpack -c ./webpack/development.js -w",
     "package:client": "webpack -c ./webpack/production.js",
+    "package:client:development": "webpack -c ./webpack/development.js",
     "build:server": "tsc --project ./tsconfig.json && copyfiles -u 1 \"server/public/**/*\" server-dist",
     "lint": "eslint --ext .ts,.tsx ./client ./server --color --fix && npm run prettier",
     "prettier": "prettier --config .prettierrc '**/*.ts' --write --loglevel silent",
@@ -71,7 +73,7 @@
     "express-favicon": "2.0.1",
     "express-session": "1.17.1",
     "get-value": "3.0.1",
-    "graphql": "15.3.0",
+    "graphql": "^15.3.0",
     "graphql-tag": "2.11.0",
     "hbs": "4.1.1",
     "helmet": "3.21.2",
@@ -123,6 +125,8 @@
     "with-default-props": "0.2.1"
   },
   "devDependencies": {
+    "@sindresorhus/tsconfig": "^0.7.0",
+    "@tsconfig/recommended": "^1.0.1",
     "@types/set-value": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "4.6.1",
     "@typescript-eslint/parser": "4.6.1",
