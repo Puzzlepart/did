@@ -7,11 +7,11 @@
     "npm": ">=6.5.0"
   },
   "scripts": {
-    "watch": "concurrently \"webpack -c webpack.config.development.js\" \"npm run watch:server\" \"node tasks/open.js\" \"node tasks/localtunnel.js\"",
+    "watch": "concurrently \"webpack -c ./webpack/development.js\" \"npm run watch:server\" \"node tasks/open.js\" \"node tasks/localtunnel.js\"",
     "start": "node ./server-dist/index.js",
     "start:tsnode": "ts-node ./server/index.ts -T -P ./tsconfig.json",
     "watch:server": "nodemon",
-    "package:client": "webpack -c webpack.config.production.js",
+    "package:client": "webpack -c ./webpack/production.js",
     "build:server": "tsc --project ./tsconfig.json && copyfiles -u 1 \"server/public/**/*\" server-dist",
     "lint": "eslint --ext .ts,.tsx ./client ./server --color --fix && npm run prettier",
     "prettier": "prettier --config .prettierrc '**/*.ts' --write --loglevel silent",
