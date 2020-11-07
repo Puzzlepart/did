@@ -16,11 +16,11 @@
     "strictNullChecks": false,
     "noUnusedLocals": false,
     "resolveJsonModule": true,
-    "typeRoots": ["../node_modules/@types"],
+    "typeRoots": ["./node_modules/@types"],
     "types": ["webpack-env"],
     "lib": ["es2015", "dom", "es2015.collection"],
-    "baseUrl": "./"
+    "baseUrl": ".",
   },
-  "include": ["**/*.ts", "**/*.tsx", "i18n/*.json", "**/*.gql"],
+  "include": ["client/**/*.ts", "client/**/*.tsx", "i18n/*.json", "client/**/*.gql"],
   "exclude": ["node_modules"]
 }
