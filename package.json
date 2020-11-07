@@ -53,6 +53,7 @@
     "@uifabric/react-hooks": "7.13.9",
     "apollo-server-express": "2.19.0",
     "applicationinsights": "1.8.7",
+    
     "array-sort": "1.0.0",
     "azure-storage": "2.10.3",
     "babel-loader": "8.1.0",
