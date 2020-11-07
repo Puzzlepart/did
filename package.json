@@ -72,7 +72,6 @@
     "express-session": "1.17.1",
     "get-value": "3.0.1",
     "graphql": "15.3.0",
-    "graphql-tag": "2.10.3",
     "hbs": "4.1.1",
     "helmet": "3.21.2",
     "html-webpack-plugin": "4.5.0",
