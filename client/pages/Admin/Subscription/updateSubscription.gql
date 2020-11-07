@@ -6,4 +6,3 @@ mutation($id: String!, $settings: SubscriptionSettingsInput!) {
     }
   }
 }
-a
