@@ -1,9 +1,9 @@
-import express from 'express'
+import express, { Request, Response, NextFunction } from 'express'
 import passport from 'passport'
 import env from '../utils/env'
 const router = express.Router()
 
-router.get('/signin', (request: express.Request, response: express.Response, next: express.NextFunction) => {
+router.get('/signin', (request: Request, response: Response, next: NextFunction) => {
   passport.authenticate('azuread-openidconnect', {
     response,
     prompt: env('OAUTH_SIGNIN_PROMPT'),
@@ -11,7 +11,7 @@ router.get('/signin', (request: express.Request, response: express.Response, nex
   } as any)(request, response, next)
 })
 
-router.post('/callback', (request: express.Request, response: express.Response, next: express.NextFunction) => {
+router.post('/callback', (request: Request, response: Response, next: NextFunction) => {
   passport.authenticate('azuread-openidconnect', {
     response,
     failureRedirect: '/',
@@ -19,7 +19,7 @@ router.post('/callback', (request: express.Request, response: express.Response, 
   } as any)(request, response, next)
 })
 
-router.get('/signout', (request: express.Request, response: express.Response) => {
+router.get('/signout', (request: Request, response: Response) => {
   request.session.destroy(() => {
     request.logOut()
     response.redirect('/')

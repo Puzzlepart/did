@@ -5,6 +5,7 @@ import 'reflect-metadata'
 import { Container, ContainerInstance } from 'typedi'
 import { SubscriptionService } from '../services'
 import { Subscription } from './resolvers/types'
+import {Request} from 'express'
 const debug = createDebug('api/graphql/context')
 
 export class Context {
@@ -39,9 +40,9 @@ export class Context {
 /**
  * Create context
  *
- * @param {Express.Request} request Express request
+ * @param {Request} request Express request
  */
-export const createContext = async (request: Express.Request): Promise<Context> => {
+export const createContext = async (request: Request): Promise<Context> => {
   try {
     let isAuthorized = false
     let user = null
