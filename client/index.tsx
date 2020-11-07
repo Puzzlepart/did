@@ -21,20 +21,24 @@ const boostrap = async () => {
     const getContext = async (): Promise<IAppContext> => {
         const context: IAppContext = {}
         try {
-            const { data } = await client.query<Partial<IAppContext>>({ query: GET_CONTEXT, fetchPolicy: 'cache-first' })
+            const { data } = await client.query<Partial<IAppContext>>({
+                query: GET_CONTEXT,
+                fetchPolicy: 'cache-first'
+            })
             context.user = new ContextUser(data.user)
             context.subscription = data?.subscription
             return context
         } catch (error) {
-            return context
+            // We return an "empty" user with preferred language en-GB (defaultlt)
+            return { user: new ContextUser() }
         }
     }
 
     const context = await getContext()
-    context.error =  JSON.parse(document.getElementById('app').getAttribute('data-error') || '{}')
+    context.error = JSON.parse(document.getElementById('app').getAttribute('data-error') || '{}')
     const container = document.getElementById('app')
-    dateUtils.setup(context.user?.language)
-    i18n.changeLanguage(context.user?.language)
+    dateUtils.setup(context.user.language)
+    i18n.changeLanguage(context.user.language)
 
     ReactDom.render((
         <ApolloProvider client={client}>
