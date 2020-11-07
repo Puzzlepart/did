@@ -4,7 +4,6 @@
     "node_modules": true,
     "lib": true,
     "server.js": true,
-    "client/**/*.d.ts": true,
     "client/**/*js": true,
     "client/**/*js.map": true,
     "server/**/*js": true,
