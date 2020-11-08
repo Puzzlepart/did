@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client'
 import { AppContext } from 'AppContext'
 import { PERMISSION } from 'config/security/permissions'
-import { Panel } from 'office-ui-fabric-react'
+import { Panel } from 'office-ui-fabric-react/lib/Panel'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'

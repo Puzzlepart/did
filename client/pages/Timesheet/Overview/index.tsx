@@ -19,7 +19,9 @@ export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
     const className = [styles.root]
     if (isMobile) className.push(styles.mobile)
     return (
-        <div className={className.join(' ')}>
+        <div 
+        key={`overview_${context.selectedPeriod.id}`}
+        className={className.join(' ')}>
             <StatusBar />
             {context.loading && <ProgressIndicator {...context.loading} />}
             <EventList

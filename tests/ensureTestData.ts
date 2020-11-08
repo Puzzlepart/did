@@ -1,6 +1,6 @@
-require('dotenv').config()
-import fs from 'fs'
-import path from 'path'
+require('dotenv-safe').config({ allowEmptyValues: true, example: process.env.CI ? '.env.ci' : '.env.sample' })
+import * as fs from 'fs'
+import * as path from 'path'
 import env from '../server/utils/env'
 import AzStorageService from '../server/api/services/azstorage'
 import createDebug from 'debug'
@@ -24,7 +24,7 @@ export const ensureTestData = () =>
       reject()
     } else {
       try {
-        const data = require('./testData.json')
+        const data: any[][] = require('./testData.json')
         debug('testData.json found with %d projects, %s customers and %d labels', ...data.map((v) => v.length))
         resolve(data)
       } catch (error) {

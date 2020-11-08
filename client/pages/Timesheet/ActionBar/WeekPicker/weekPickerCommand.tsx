@@ -1,8 +1,8 @@
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
 import * as React from 'react'
-import { ITimesheetContext } from '../context'
-import styles from './ActionBar.module.scss'
-import { WeekPicker } from './WeekPicker'
+import { WeekPicker } from '.'
+import { ITimesheetContext } from '../../context'
+import styles from './WeekPicker.module.scss'
 
 export default ({ selectedPeriod, periods, t }: ITimesheetContext): IContextualMenuItem => ({
     key: 'WEEK_PICKER_COMMAND',
@@ -10,9 +10,9 @@ export default ({ selectedPeriod, periods, t }: ITimesheetContext): IContextualM
         <>
             <WeekPicker />
             {periods.length === 1 && (
-                <span className={styles.weekNumber}>
-                    {selectedPeriod.getName(false, t)}
-                </span>
+             <span className={styles.weekNumber}>
+                {selectedPeriod.getName(false, t)}
+               </span>
             )}
         </>
     ),

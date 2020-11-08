@@ -1,6 +1,6 @@
 import { IListGroups } from 'components/List/types'
 import { TFunction } from 'i18next'
-import { IContextualMenuItem } from 'office-ui-fabric-react'
+import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
 import { TimeEntriesQuery } from 'types'
 import { omit } from 'underscore'
 import { capitalize } from 'underscore.string'

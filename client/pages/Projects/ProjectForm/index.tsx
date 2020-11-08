@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { IconPicker, LabelPicker, SearchCustomer, useMessage, UserMessage } from 'components'
-import { Toggle } from 'office-ui-fabric-react'
+import { Toggle } from 'office-ui-fabric-react/lib/Toggle'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'

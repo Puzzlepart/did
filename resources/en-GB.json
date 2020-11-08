@@ -9,8 +9,6 @@
     "overviewHeaderText": "Overview",
     "summaryHeaderText": "Summary",
     "allocationHeaderText": "Allocation",
-    "projectChartTitle": "Allocation per project",
-    "customerChartTitle": "Allocation per customer",
     "confirmHoursText": "Confirm hours",
     "unconfirmHoursText": "Unconfirm hours",
     "goToCurrentWeek": "Go to current week",
@@ -48,7 +46,14 @@
     "confirmHoursSecondaryText": "Confirm the current week",
     "forecastHoursSecondaryText": "Create a forecast for the week",
     "unconfirmHoursSecondaryText": "Unconfirm current week",
-    "unforecastHoursSecondaryText": "Remove forecast for the week"
+    "unforecastHoursSecondaryText": "Remove forecast for the week",
+    "allocation": {
+      "customerChartTitle": "Customers",
+      "projectChartTitle": "Projects",
+      "noDataText": "No data to show for the selected period.",
+      "customerChartDescription": "Shows allocation per customer for the period",
+      "projectChartDescription": "Shows allocation per project for the period"
+    }
   },
   "projects": {
     "inactiveText": "This project has been marked as inactive.",

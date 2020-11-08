@@ -37,6 +37,9 @@ jobs:
       run: |
         npm run package:client
         npm run build:server
+      env:
+        DEBUG: webpack*
+        NODE_ENV: production
 
     - name: 'Deploy to didapp/dev'
       uses: azure/webapps-deploy@v2

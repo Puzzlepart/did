@@ -25,6 +25,9 @@ jobs:
         npm install
         npm run package:client
         npm run build:server
+      env:
+        DEBUG: webpack*
+        NODE_ENV: production
 
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v2
