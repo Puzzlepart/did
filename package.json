@@ -66,7 +66,7 @@
     "css-modules-typescript-loader": "4.0.1",
     "dayjs": "1.9.5",
     "debug": "4.2.0",
-    "dotenv-safe": "8.2.0",
+    "dotenv": "8.2.0",
     "express": "4.17.1",
     "express-bearer-token": "2.4.0",
     "express-favicon": "2.0.1",
