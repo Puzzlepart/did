@@ -81,7 +81,7 @@ Now you need to set the required environment variables from this table:
 | DEBUG                                 | To debug the Node backend. E.g. `app*` to see all logs from app. See https://www.npmjs.com/package/debug. | No       |
 | TESTS_AZURE_STORAGE_CONNECTION_STRING | See **Mocha tests**.                                         | No       |
 | NO_BROWSER                            | Set to `1` if you don't want to automatically open Did in the browser when running `watch` task. | No       |
-|                                       |                                                              | No       |
+| OAUTH_SCOPES                          | Scopes for Microsoft Graph queries. See https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent. | No       |
 
 
 

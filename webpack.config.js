@@ -22,10 +22,10 @@ const SRC_PATH = resolve(__dirname, 'client/')
 
 /** PRINTING HEADER */
 debug('Compiling Did bundle')
-debug('[MODE]:\t\t%s', MODE.toUpperCase())
-debug('[SERVER DIST]:\t%s', SERVER_DIST.toUpperCase())
-debug('[FILENAME]:\t%s', BUNDLE_FILE_NAME)
-debug('[HBS TEMPLATE]:\t%s', HTML_PLUGIN_FILE_NAME)
+debug('[MODE]: %s', MODE.toUpperCase())
+debug('[SERVER DIST]: %s', SERVER_DIST.toUpperCase())
+debug('[FILENAME]: %s', BUNDLE_FILE_NAME)
+debug('[HBS TEMPLATE]: %s', HTML_PLUGIN_FILE_NAME)
 
 /** CONFIG */
 const config = {
