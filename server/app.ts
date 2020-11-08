@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv-safe').config({
   allowEmptyValues: true,
-  example: '.env.sample'
+  example: process.env.CI ? '.env.ci' : '.env.sample'
 })
 import createError from 'http-errors'
 import express from 'express'

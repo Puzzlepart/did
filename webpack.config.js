@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv-safe').config({
   allowEmptyValues: true,
-  example: '.env.sample'
+  example: process.env.CI ? '.env.ci' : '.env.sample'
 })
 const tryRequire = require('try-require')
 const { resolve } = require('path')
