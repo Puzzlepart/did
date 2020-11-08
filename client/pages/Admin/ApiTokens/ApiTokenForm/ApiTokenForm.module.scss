@@ -1,0 +1,17 @@
+.root {
+  .form {
+    display: flex;
+
+    > div {
+      margin-right: 12px;
+    }
+
+    .expiresField {
+      width: 150px;
+    }
+  }
+
+  .keyField {
+    margin: 10px 0 0 0;
+  }
+}
