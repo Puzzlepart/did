@@ -15,7 +15,7 @@ import $addApiToken from './addApiToken.gql'
 import styles from './ApiTokenForm.module.scss'
 import { IApiTokenFormProps } from './types'
 
-export const ApiTokenForm = ({ onAdded, onDismiss }: IApiTokenFormProps) => {
+export const ApiTokenForm = ({ isOpen, onAdded, onDismiss }: IApiTokenFormProps) => {
     const { t } = useTranslation()
     const [addApiToken] = useMutation($addApiToken)
     const [token, setToken] = useState<ApiTokenInput>({ permissions: [] })
@@ -25,7 +25,7 @@ export const ApiTokenForm = ({ onAdded, onDismiss }: IApiTokenFormProps) => {
         const { data } = await addApiToken({ variables: { token } })
         onAdded(data.apiKey)
     }
-    
+
     function togglePermission(permissionId: string, checked: boolean) {
         const permissions = [...token.permissions || []]
         const index = permissions.indexOf(permissionId)
@@ -38,7 +38,8 @@ export const ApiTokenForm = ({ onAdded, onDismiss }: IApiTokenFormProps) => {
         <Panel
             className={styles.root}
             headerText={t('admin.apiTokens.addNew')}
-            isOpen={true}
+            isOpen={isOpen}
+            isLightDismiss={true}
             onDismiss={onDismiss}>
             <div className={styles.inputContainer}>
                 <TextField
@@ -61,9 +62,9 @@ export const ApiTokenForm = ({ onAdded, onDismiss }: IApiTokenFormProps) => {
                             label={name}
                             title={description}
                             inlineLabel={true}
-                            styles={{ root: { margin: 0 } }} 
+                            styles={{ root: { margin: 0 } }}
                             defaultChecked={contains(token.permissions, id)}
-                            onChange={(_event, checked) => togglePermission(id, checked)}/>
+                            onChange={(_event, checked) => togglePermission(id, checked)} />
                         <div hidden={!description} className={styles.inputDescription}>
                             <span>{description}</span>
                         </div>

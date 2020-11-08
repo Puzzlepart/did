@@ -10,6 +10,7 @@ import { ApiToken } from 'types'
 import { isNull } from 'underscore'
 import { sleep } from 'utils'
 import { ApiTokenForm } from './ApiTokenForm'
+import { IApiTokenFormProps } from './ApiTokenForm/types'
 import styles from './ApiTokens.module.scss'
 import { ApiTokensColumns as columns } from './columns'
 import $deleteApiToken from './deleteApiToken.gql'
@@ -19,9 +20,9 @@ export const ApiTokens = () => {
     const { t } = useTranslation()
     const [message, setMessage] = useMessage()
     const [deleteApiToken] = useMutation($deleteApiToken)
-    const { data,refetch } = useQuery($tokens)
-    const [form, setForm] = useState(null)
+    const { data, refetch } = useQuery($tokens)
     const [apiKey, setApiKey] = useState(null)
+    const [form, setForm] = useState<IApiTokenFormProps>({ setMessage })
 
     /**
      * On delete API token
@@ -71,15 +72,15 @@ export const ApiTokens = () => {
                             key: 'ADD_NEW_TOKEN',
                             name: t('admin.apiTokens.addNew'),
                             iconProps: { iconName: 'Add' },
-                            onClick: () => setForm({})
+                            onClick: () => setForm({ isOpen:true })
                         }
                     ]
                 }} />
-            {form && (
+            {form.isOpen && (
                 <ApiTokenForm
-                    setMessage={setMessage}
+                    {...form}
                     onAdded={onKeyAdded}
-                    onDismiss={() => setForm(null)} />
+                    onDismiss={() => setForm({ isOpen: false })} />
             )}
         </div>
     )
