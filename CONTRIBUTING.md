@@ -64,21 +64,26 @@ _We use https://studio.apollographql.com/ for GraphQL documentation._
 
 ## Set up .env ##
 
-You've copied `.env.sample` into `.env`. Manually or using `npm run-script create-env`.
+You've copied `.env.sample` into `.env`, anually or using `npm run-script create-env`.
 
-Now you need to set the following properties/parameters:
+**NB:** `dotenv-safe` will throw an error if you haven't filled all environment variables.
 
-**OAUTH_APP_ID**
-ID of the AD application registration.
+Now you need to set the required environment variables from this table:
 
-**OAUTH_APP_PASSWORD**
-Password/key of the AD application registration.
+| Key                                   | Description                                                  | Required |
+| ------------------------------------- | ------------------------------------------------------------ | -------- |
+| OAUTH_APP_ID                          | ID of the AD application registration.                       | **Yes**  |
+| OAUTH_APP_PASSWORD                    | Password/key of the AD application registration.             | **Yes**  |
+| AZURE_STORAGE_CONNECTION_STRING       | Connection string for the Azure Table Storage                | **Yes**  |
+| SESSION_SIGNING_KEY                   | Just a random string to secure the sessions.                 | **Yes**  |
+| BUNDLE_ANALYZER_MODE                  | See https://www.npmjs.com/package/webpack-bundle-analyzer. Default is server. | No       |
+| *OPEN_DELA*Y                          | Delay in seconds for opening Did in browser when running `watch`. | No       |
+| DEBUG                                 | To debug the Node backend. E.g. `app*` to see all logs from app. See https://www.npmjs.com/package/debug. | No       |
+| TESTS_AZURE_STORAGE_CONNECTION_STRING | See **Mocha tests**.                                         | No       |
+| NO_BROWSER                            | Set to `1` if you don't want to automatically open Did in the browser when running `watch` task. | No       |
+|                                       |                                                              | No       |
 
-**AZURE_STORAGE_CONNECTION_STRING**
-Connection string for the Azure Table Storage
 
-**SESSION_SIGNING_KEY**
-Just a random string to secure the sessions.
 
 ## Branching / Deploying
 
