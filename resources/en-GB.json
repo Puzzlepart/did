@@ -100,7 +100,13 @@
     "users": "Users",
     "summary": "Summary",
     "labels": "Labels",
-    "apiTokens": "API tokens",
+    "apiTokens": {
+      "permissionsTitle": "Permissions",
+      "headerText": "API Tokens",
+      "tokenNamePlaceholder": "Enter token name",
+      "tokenExpiryPlaceholder": "Token expiry",
+      "addNew": "Generate API token"
+    },
     "filterLabels": "Filter labels...",
     "rolesPermissions": "Roles and permissions",
     "addNewUser": "Add new",
@@ -112,8 +118,6 @@
     "noTimeEntriesText": "\nThere are no confirmed hours for the selected months in the selected year.",
     "editRole": "Edit role",
     "permissonsLabel": "Permissions",
-    "generateTokenLabel": "Generate API token",
-    "tokenNamePlaceholder": "Enter token name",
     "tokenGeneratedText": "Your key has been generated and will only be visible for 10 seconds. You can only see it once. Take good care of it!",
     "tokenErrorText": "An error occurred generating your key. Please try again later.",
     "tokenDeletedText": "API key **{{name}}** was succesfully deleted.",
@@ -126,8 +130,7 @@
     "forecastNotificationsDescription": "How many weeks ahead should users forecast.",
     "forecastNotificationsLabel": "Notifications",
     "subscriptionSettings": "Subscription",
-    "summaryRangeValueFormat": "Showing {{value}} months",
-    "tokenExpiryPlaceholder": "Token expiry"
+    "summaryRangeValueFormat": "Showing {{value}} months"
   },
   "reports": {
     "generatingReportLabel": "Generating report. To give you the freshest results, we're generating a report from the latest data...",

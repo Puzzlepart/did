@@ -74,7 +74,7 @@ export const Admin = () => {
                 <PivotItem
                     className={styles.tab}
                     itemKey='apiTokens'
-                    headerText={t('admin.apiTokens')}
+                    headerText={t('admin.apiTokens.headerText')}
                     itemIcon='AzureAPIManagement'>
                     <ApiTokens />
                 </PivotItem>

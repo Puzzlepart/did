@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@apollo/client'
 import { useMessage, UserMessage } from 'components'
 import List from 'components/List'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
-import React from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ApiToken } from 'types'
 import { ApiTokenForm } from './ApiTokenForm'
@@ -15,7 +15,8 @@ export const ApiTokens = () => {
     const { t } = useTranslation()
     const [message, setMessage] = useMessage()
     const [deleteApiToken] = useMutation($deleteApiToken)
-    const { data, refetch } = useQuery($tokens)
+    const { data } = useQuery($tokens)
+    const [form, setForm] = useState(null)
 
     /**
      * On delete API token
@@ -23,24 +24,36 @@ export const ApiTokens = () => {
      * @param {ApiToken} token The token to dete 
      */
     async function onDeleteApiToken(token: ApiToken) {
-        // await deleteApiToken({ variables: { token } })
+        await deleteApiToken({ variables: { token } })
         setMessage({
             type: MessageBarType.info,
             text: t('admin.tokenDeletedText', token),
         })
-        // setName(null)
-        // setKey(null)
-        // refetch()
     }
 
 
     return (
         <div className={styles.root}>
-            <ApiTokenForm setMessage={setMessage} />
             {message && <UserMessage {...message} />}
             <List
                 columns={columns(onDeleteApiToken, t)}
-                items={data?.tokens || []} />
+                items={data?.tokens || []}
+                commandBar={{
+                    items: [
+                        {
+                            key: 'ADD_NEW_TOKEN',
+                            name: t('admin.apiTokens.addNew'),
+                            iconProps: { iconName: 'Add' },
+                            onClick: () => setForm({})
+                        }
+                    ],
+                    farItems: []
+                }} />
+                   {form && (
+              <ApiTokenForm 
+              setMessage={setMessage}
+              onDismiss={() => setForm(null)} />
+                   )}
         </div>
     )
 }

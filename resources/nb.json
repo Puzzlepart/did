@@ -99,7 +99,13 @@
     "users": "Brukere",
     "summary": "Sammendrag",
     "labels": "Merkelapper",
-    "apiTokens": "API-nøkler",
+    "apiTokens": {
+      "permissionsTitle": "Tillatelser",
+      "headerText": "API-nøkler",
+      "tokenExpiryPlaceholder": "Varighet for nøkkel",
+      "addNew": "Lag API-nøkkel",
+      "tokenNamePlaceholder": "Fyll inn navn"
+    },
     "filterLabels": "Filtrer merkelapper...",
     "rolesPermissions": "Roller og tilganger",
     "addNewUser": "Legg til ny",
@@ -111,8 +117,6 @@
     "noTimeEntriesText": "Det er ingen bekreftede timer for de valgte månedene i det valgte året.",
     "editRole": "Rediger rolle",
     "permissonsLabel": "Tilganger",
-    "generateTokenLabel": "Lag API-nøkkel",
-    "tokenNamePlaceholder": "Fyll inn navn",
     "tokenGeneratedText": "Nøkkelen din er generert og vil kun være synlig i 10 sekunder. Du kan bare se det en gang. Ta godt vare på den!",
     "tokenErrorText": "Det skjedde en feil under generering av nøkkel. Prøv igjen senere.",
     "tokenDeletedText": "Nøkkelen **{{name}}** ble slettet.",
@@ -125,8 +129,7 @@
     "forecastNotificationsDescription": "Hvor mange uker fremover skal brukerne forutsi.",
     "forecastNotificationsLabel": "Varsler",
     "subscriptionSettings": "Abonnement",
-    "summaryRangeValueFormat": "Viser {{value}} måneder",
-    "tokenExpiryPlaceholder": "Varighet for nøkkel"
+    "summaryRangeValueFormat": "Viser {{value}} måneder"
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport. For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene...",
