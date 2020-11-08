@@ -1,6 +1,9 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-var-requires */
-require('dotenv').config()
+require('dotenv-safe').config({
+  allowEmptyValues: true,
+  example: '.env.sample'
+})
 const tryRequire = require('try-require')
 const { resolve } = require('path')
 const { name, version } = require('./package.json')
