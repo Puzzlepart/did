@@ -8,10 +8,10 @@ import { AzStorageService } from '../../services'
 /**
  * Get notifications for unconfirmed periods
  *
- * @param ctx
- * @param azstorage
- * @param template
- * @param locale
+ * @param {Context} ctx Context
+ * @param {AzStorageService} azstorage Azure Table Storage service
+ * @param {string} template Template
+ * @param {string} locale Locale
  */
 export default async function (ctx: Context, azstorage: AzStorageService, template: string, locale: string) {
   const currentWeek = utils.getWeek()
