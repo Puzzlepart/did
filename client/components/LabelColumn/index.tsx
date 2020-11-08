@@ -6,19 +6,19 @@ import { EntityLabel } from 'components/EntityLabel'
 import { LabelObject } from 'types'
 import { ILabelColumnProps } from './types'
 
-export const LabelColumn = ({ label, project, customer }: ILabelColumnProps) => {
-    if (project) {
+export const LabelColumn = (props: ILabelColumnProps) => {
+    if (props.project) {
         return (
             <div className={styles.root}>
                 <div className={styles.iconContainer}>
-                    <Icon iconName={project.icon || 'Page'} styles={{ root: { fontSize: 18 } }} />
+                    <Icon iconName={props.project.icon || 'Page'} styles={{ root: { fontSize: 18 } }} />
                 </div>
                 <div className={styles.content}>
-                    <div className={styles.title}>{project.name}</div>
-                    <div className={styles.description}>for {customer.name}</div>
-                    {!isEmpty(project.labels) && (
+                    <div className={styles.title}>{props.project.name}</div>
+                    <div className={styles.description}>for {props.customer.name}</div>
+                    {!isEmpty(props.project.labels) && (
                         <div className={styles.labels}>
-                            {project.labels.map((label: LabelObject, idx: number) => (
+                            {props.project.labels.map((label: LabelObject, idx: number) => (
                                 <EntityLabel
                                     key={idx}
                                     label={label}
@@ -29,7 +29,10 @@ export const LabelColumn = ({ label, project, customer }: ILabelColumnProps) => 
                 </div>
             </div>
         )
+    } else if (props.label) {
+        return <div style={{ fontWeight: 500 }}>{props.label}</div>
     }
-    else if (label) return <div style={{ fontWeight: 500 }}>{label}</div>
     return null
 }
+
+export * from './types'

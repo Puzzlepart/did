@@ -66,7 +66,7 @@ export const SummaryView = (props: ISummaryViewProps): JSX.Element => {
                                     <div className={styles.container}>
                                         <List
                                             hidden={!loading && isEmpty(context.rows)}
-                                            enableShimmer={loading}
+                                            enableShimmer={loading}                       
                                             columns={columns}
                                             items={context.rows}
                                             commandBar={commandBar(context)} />

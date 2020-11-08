@@ -14,7 +14,7 @@ import { TimesheetContext } from '../'
 import { TimesheetScope } from '../TimesheetScope'
 import styles from './SummaryView.module.scss'
 import { isMobile } from 'react-device-detect'
-import { ILabelColumnProps } from 'components/LabelColumn/types'
+import { ILabelColumnProps } from 'components/LabelColumn'
 
 /**
  * Creates columns from scope
@@ -100,10 +100,6 @@ function generateTotalRow(events: any[], columns: IColumn[], label: string) {
     }, { label, sum: 0 })
 }
 
-/**
- * @component SummaryView
- * @description Generates a summary view of events
- */
 export const SummaryView = () => {
     const { t } = useTranslation()
     if (isMobile) {
@@ -111,7 +107,6 @@ export const SummaryView = () => {
     } else {
         const context = useContext(TimesheetContext)
         const columns = createColumns(context.scope)
-
         const events = context.selectedPeriod.events.filter(e => !!e.project)
 
         const items = [
@@ -123,7 +118,10 @@ export const SummaryView = () => {
             <div
                 key={`summary_${context.selectedPeriod.id}`}
                 className={styles.root}>
-                <List {...{ columns, items }} enableShimmer={context && !!context.loading} />
+                <List
+                    items={items}
+                    columns={columns}
+                    enableShimmer={!!context?.loading} />
             </div>
         )
     }
