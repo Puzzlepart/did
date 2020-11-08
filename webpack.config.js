@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv-safe').config({  allowEmptyValues: true,  example: process.env.CI ? '.env.ci' : '.env.sample'})
 const tryRequire = require('try-require')
@@ -11,6 +10,7 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const LiveReloadPlugin = tryRequire('webpack-livereload-plugin')
 const WebpackBuildNotifierPlugin = tryRequire('webpack-build-notifier')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const debug = require('debug')('webpack')
 
 /** CONSTANTS */
 const MODE = process.env.NODE_ENV === 'development' ? 'development' : 'production'
@@ -21,14 +21,11 @@ const HTML_PLUGIN_FILE_NAME = resolve(__dirname, 'server/views/@template.hbs')
 const SRC_PATH = resolve(__dirname, 'client/')
 
 /** PRINTING HEADER */
-console.log('-----------------------------------')
-console.log('------COMPILING DID BUNDLE---------')
-console.log('-----------------------------------')
-console.log('MODE:\t\t %s', MODE)
-console.log('SERVER DIST:\t %s', SERVER_DIST)
-console.log('FILENAME:\t\t %s', BUNDLE_FILE_NAME)
-console.log('HBS TEMPLATE:\t %s', HTML_PLUGIN_FILE_NAME)
-console.log('-----------------------------------')
+debug('Compiling Did bundle')
+debug('[MODE]:\t\t%s', MODE.toUpperCase())
+debug('[SERVER DIST]:\t%s', SERVER_DIST.toUpperCase())
+debug('[FILENAME]:\t%s', BUNDLE_FILE_NAME)
+debug('[HBS TEMPLATE]:\t%s', HTML_PLUGIN_FILE_NAME)
 
 /** CONFIG */
 const config = {
