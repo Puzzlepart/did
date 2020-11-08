@@ -1,7 +1,4 @@
-require('dotenv-safe').config({
-  allowEmptyValues: true,
-  example: process.env.CI ? '.env.ci' : '.env.sample'
-})
+require('dotenv-safe').config({ allowEmptyValues: true, example: process.env.CI ? '.env.ci' : '.env.sample' })
 import * as fs from 'fs'
 import * as path from 'path'
 import env from '../server/utils/env'
