@@ -18,6 +18,7 @@ export enum PERMISSION {
 export interface IPermission {
   id: PERMISSION
   name: string
+  api?: boolean;
   description?: string
   disabled?: boolean
 }
@@ -51,34 +52,40 @@ export default (t: TFunction): IPermission[] => [
   {
     id: PERMISSION.MANAGE_PROJECTS,
     name: t('permissions.manageProjects'),
-    description: t('permissions.manageProjectsDescription')
+    description: t('permissions.manageProjectsDescription'),
+    api: true
   },
   {
     id: PERMISSION.DELETE_PROJECTS,
     name: t('permissions.deleteProjects'),
     description: t('permissions.deleteProjectsDescription'),
-    disabled: true
+    disabled: true,
+    api: true
   },
   {
     id: PERMISSION.MANAGE_CUSTOMERS,
     name: t('permissions.manageCustomers'),
-    description: t('permissions.manageCustomersDescription')
+    description: t('permissions.manageCustomersDescription'),
+    api: true
   },
 
   {
     id: PERMISSION.DELETE_CUSTOMER,
     name: t('permissions.deleteCustomers'),
     description: t('permissions.deleteCustomersDescription'),
-    disabled: true
+    disabled: true,
+    api: true
   },
   {
     id: PERMISSION.MANAGE_USERS,
     name: t('permissions.manageUsers'),
-    description: t('permissions.manageUsersDescription')
+    description: t('permissions.manageUsersDescription'),
+    api: true
   },
   {
     id: PERMISSION.MANAGE_ROLESPERMISSIONS,
     name: t('permissions.manageRolesPermissions'),
-    description: t('permissions.manageRolesPermissionsDescription')
+    description: t('permissions.manageRolesPermissionsDescription'),
+    api: true
   }
 ]
