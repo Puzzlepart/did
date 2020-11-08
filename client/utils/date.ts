@@ -50,10 +50,10 @@ export default new (class DateUtils {
   /**
    * Format date with the specified date format
    *
-   * @param {string} date Date string
+   * @param {string | Date} date Date string
    * @param {string} dateFormat Date format
    */
-  formatDate(date: string, dateFormat: string): string {
+  formatDate(date: string | Date, dateFormat: string): string {
     const m = moment.utc(date)
     return m.add(-m.toDate().getTimezoneOffset(), 'minutes').format(dateFormat)
   }
