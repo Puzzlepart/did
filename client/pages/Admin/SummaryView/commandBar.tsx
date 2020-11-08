@@ -1,12 +1,11 @@
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
-import { Label } from 'office-ui-fabric-react/lib/Label'
 import { Slider } from 'office-ui-fabric-react/lib/Slider'
 import { Spinner } from 'office-ui-fabric-react/lib/Spinner'
 import React from 'react'
 import DateUtils from 'utils/date'
 import * as excelUtils from 'utils/exportExcel'
-import styles from './SummaryView.module.scss'
 import { ISummaryViewContext } from './context'
+import styles from './SummaryView.module.scss'
 
 /**
  * Command bar items
@@ -35,7 +34,6 @@ export const commandBar = (context: ISummaryViewContext) => {
                 name: '',
                 onRender: () => (
                     <>
-                        <Label styles={{ root: { marginLeft: 20, alignSelf: 'center' } }}>Antal måneder</Label>
                         <Slider
                             styles={{
                                 root: {
@@ -44,6 +42,7 @@ export const commandBar = (context: ISummaryViewContext) => {
                                     alignSelf: 'center',
                                 },
                             }}
+                            valueFormat={value => context.t('admin.summaryRangeValueFormat', { value })}
                             disabled={context.loading}
                             value={context.range}
                             min={2}

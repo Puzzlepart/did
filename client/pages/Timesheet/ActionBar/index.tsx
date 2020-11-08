@@ -6,7 +6,7 @@ import styles from './ActionBar.module.scss'
 import navigateCommands from './navigateCommands'
 import selectPeriodCommands from './selectPeriodCommands'
 import submitCommands from './submitCommands'
-import weekPickerCommand from './weekPickerCommand'
+import {weekPickerCommand} from './WeekPicker'
 
 export const ActionBar = () => {
     const { subscription } = useContext(AppContext)

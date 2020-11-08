@@ -1,16 +1,15 @@
 import { useMutation } from '@apollo/client'
 import { AppContext } from 'AppContext'
 import { PERMISSION } from 'config/security/permissions'
-import { IBaseResult } from 'graphql'
-import { Panel } from 'office-ui-fabric-react'
+import { Panel } from 'office-ui-fabric-react/lib/Panel'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
 import * as excel from 'utils/exportExcel'
-import { CREATE_OUTLOOK_CATEGORY } from '../graphql'
-import { ProjectForm } from '../ProjectForm'
 import { ProjectsContext } from '../context'
+import $createOutlookCategory from './createOutlookCategory.gql'
+import { ProjectForm } from '../ProjectForm'
 import columns from './columns'
 import styles from './ProjectDetails.module.scss'
 import { ProjectDetailsContext } from './ProjectDetailsContext'
@@ -22,7 +21,7 @@ export const Actions = (props: IProjectDetailsProps) => {
     const { t } = useTranslation()
     const [showEditPanel, setShowEditPanel] = useState(false)
     const context = useContext(ProjectDetailsContext)
-    const [createOutlookCategory] = useMutation<{ result: IBaseResult }, { category: string }>(CREATE_OUTLOOK_CATEGORY)
+    const [createOutlookCategory] = useMutation($createOutlookCategory)
 
     /**
      * On export to Excel

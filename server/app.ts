@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-require('dotenv').config()
+require('dotenv-safe').config({ allowEmptyValues: true, example: process.env.CI ? '.env.ci' : '.env.sample' })
 import createError from 'http-errors'
 import express from 'express'
 import favicon from 'express-favicon'

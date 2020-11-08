@@ -4,6 +4,7 @@ interface CssExports {
   'actionBarIcon': string;
   'callout': string;
   'root': string;
+  'weekNumber': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

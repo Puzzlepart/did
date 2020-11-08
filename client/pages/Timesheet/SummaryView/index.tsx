@@ -5,7 +5,7 @@ import List from 'components/List'
 import { EventObject, Project } from 'types'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar'
-import React,{useContext} from 'react'
+import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { unique } from 'underscore'
 import { capitalize } from 'underscore.string'
@@ -120,7 +120,9 @@ export const SummaryView = () => {
         ]
 
         return (
-            <div className={styles.root}>
+            <div
+                key={`summary_${context.selectedPeriod.id}`}
+                className={styles.root}>
                 <List {...{ columns, items }} enableShimmer={context && !!context.loading} />
             </div>
         )

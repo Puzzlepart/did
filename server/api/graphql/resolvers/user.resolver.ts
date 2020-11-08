@@ -93,15 +93,15 @@ export class UserResolver {
   }
 
   /**
-   * Bulk add users
+   * Bulk import users
    *
    * @param {UserInput[]} users Users
    */
   @Authorized<IAuthOptions>({ userContext: true })
-  @Mutation(() => BaseResult, { description: 'Bulk add users' })
-  async bulkAddUsers(@Arg('users', () => [UserInput]) users: UserInput[]): Promise<BaseResult> {
+  @Mutation(() => BaseResult, { description: 'Bulk import users' })
+  async bulkImport(@Arg('users', () => [UserInput]) users: UserInput[]): Promise<BaseResult> {
     try {
-      await this._azstorage.bulkAddUsers(users)
+      await this._azstorage.bulkImport(users)
       return { success: true, error: null }
     } catch (error) {
       return {

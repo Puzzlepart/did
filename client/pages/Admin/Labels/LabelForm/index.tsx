@@ -10,7 +10,7 @@ import SketchPicker from 'react-color/lib/components/sketch/Sketch'
 import { useTranslation } from 'react-i18next'
 import { omit } from 'underscore'
 import validator from 'validator'
-import ADD_OR_UPDATE_LABEL from './ADD_OR_UPDATE_LABEL'
+import $addOrUpdateLabel from './addOrUpdateLabel.gql'
 import styles from './LabelForm.module.scss'
 import { ILabelFormProps } from './types'
 import { IconPicker } from 'components/IconPicker'
@@ -23,7 +23,7 @@ export const LabelForm = (props: ILabelFormProps) => {
         color: '#F8E71C',
     })
     const [colorPickerVisible, setColorPickerVisible] = useState<boolean>(false)
-    const [addOrUpdateLabel] = useMutation(ADD_OR_UPDATE_LABEL)
+    const [addOrUpdateLabel] = useMutation($addOrUpdateLabel)
 
     /**
      * On save label

@@ -6,7 +6,6 @@ interface CssExports {
   'root': string;
   'selectPeriodButton': string;
   'unconfirmPeriodButton': string;
-  'weekNumber': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

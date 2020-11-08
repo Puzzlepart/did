@@ -9,13 +9,13 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { RoleInput } from 'types'
 import { contains, isEmpty, isEqual, omit } from 'underscore'
-import ADD_OR_UPDATE_ROLE from './ADD_OR_UPDATE_ROLE'
+import $addOrUpdateRole from './addOrUpdateRole.gql'
 import styles from './RolePanel.module.scss'
 import { IRolePanelProps } from './types'
 
 export const RolePanel: React.FunctionComponent<IRolePanelProps> = (props: IRolePanelProps) => {
     const { t } = useTranslation()
-    const [addOrUpdateRole] = useMutation(ADD_OR_UPDATE_ROLE)
+    const [addOrUpdateRole] = useMutation($addOrUpdateRole)
     const [model, setModel] = useState<RoleInput>({})
     const permissions = useMemo(() => security.permissions(t), [])
     const saveDisabled = useMemo(() => (

@@ -87,7 +87,7 @@ export class EventInput {
   simpleResolvers: simpleResolvers.TimesheetPeriodObject
 })
 export class TimesheetPeriodObject {
-  @Field()
+  @Field(() => ID)
   id: string
 
   @Field()

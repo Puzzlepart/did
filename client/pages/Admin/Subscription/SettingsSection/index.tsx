@@ -1,6 +1,6 @@
 
 import { getValue } from 'helpers'
-import { Icon } from 'office-ui-fabric-react'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { Slider } from 'office-ui-fabric-react/lib/Slider'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import { Toggle } from 'office-ui-fabric-react/lib/Toggle'

@@ -4,13 +4,13 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Role } from 'types'
 import { RoleColumns as columns } from './columns'
-import { GET_ROLES } from './GET_ROLES'
 import { IRolePanelProps, RolePanel } from './RolePanel'
+import $roles from './roles.gql'
 import styles from './Roles.module.scss'
 
 export const Roles = () => {
     const { t } = useTranslation()
-    const { data, loading, refetch } = useQuery(GET_ROLES)
+    const { data, loading, refetch } = useQuery($roles)
     const [panel, setPanel] = useState<IRolePanelProps>(null)
 
     /**

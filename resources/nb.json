@@ -9,8 +9,6 @@
     "overviewHeaderText": "Oversikt",
     "summaryHeaderText": "Sammendrag",
     "allocationHeaderText": "Allokering",
-    "projectChartTitle": "Allokering per prosjekt",
-    "customerChartTitle": "Allokering per kunde",
     "confirmHoursText": "Bekreft timer",
     "unconfirmHoursText": "Angre bekreft timer",
     "goToCurrentWeek": "Gå til inneværende uke",
@@ -48,7 +46,14 @@
     "forecastHoursSecondaryText": "Lag en prognose for uken",
     "confirmHoursSecondaryText": "Bekreft gjeldende uke",
     "unforecastHoursSecondaryText": "Fjern prognosen for uken",
-    "unconfirmHoursSecondaryText": "Bekreft gjeldende uke"
+    "unconfirmHoursSecondaryText": "Bekreft gjeldende uke",
+    "allocation": {
+      "customerChartTitle": "Kunder",
+      "projectChartTitle": "Prosjekter",
+      "noDataText": "Ingen data å vise for den valgte perioden.",
+      "customerChartDescription": "Viser allokering per kunde for perioden",
+      "projectChartDescription": "Viser allokering per prosjekt for perioden"
+    }
   },
   "projects": {
     "inactiveText": "Dette prosjektet er markert som inaktivt.",
@@ -120,7 +125,8 @@
     "forecastEnabledDescription": "Aktiver/deaktiver prognoser.",
     "forecastNotificationsDescription": "Hvor mange uker fremover skal brukerne forutsi.",
     "forecastNotificationsLabel": "Varsler",
-    "subscriptionSettings": "Abonnement"
+    "subscriptionSettings": "Abonnement",
+    "summaryRangeValueFormat": "Viser {{value}} måneder"
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport. For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene...",

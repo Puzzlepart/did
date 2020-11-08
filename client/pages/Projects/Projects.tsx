@@ -12,7 +12,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import { OutlookCategory, Project } from 'types'
 import { find } from 'underscore'
 import { IProjectsContext, ProjectsContext } from './context'
-import { GET_PROJECTS } from './graphql'
+import $projects from './projects.gql'
 import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
 import { IProjectsParams } from './types'
@@ -24,7 +24,7 @@ export const Projects: React.FunctionComponent = () => {
     const params = useParams<IProjectsParams>()
     const [selected, setSelected] = useState<Project>(null)
     const { loading, error, data, refetch } = useQuery<{ projects: Project[]; outlookCategories: OutlookCategory[] }>(
-        GET_PROJECTS,
+        $projects,
         {
             variables: { sortBy: 'name' },
             fetchPolicy: 'cache-and-network'

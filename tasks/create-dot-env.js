@@ -1,6 +1,6 @@
 require('dotenv').config()
 const fs = require('fs')
-const sample = './sample.env'
+const sample = './.env.sample'
 
 async function createDotEnv() {
     if (fs.existsSync(sample)) {

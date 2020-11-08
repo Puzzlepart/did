@@ -1,7 +1,7 @@
 import { ILabelColumnProps } from 'components/LabelColumn/types'
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
 import { TFunction } from 'i18next'
-import { IPivotItemProps } from 'office-ui-fabric-react'
+import { IPivotItemProps } from 'office-ui-fabric-react/lib/Pivot'
 import DateUtils from 'utils/date'
 import { TimeEntriesQuery } from 'types'
 
