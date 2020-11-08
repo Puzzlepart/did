@@ -66,8 +66,6 @@ _We use https://studio.apollographql.com/ for GraphQL documentation._
 
 You've copied `.env.sample` into `.env`, anually or using `npm run-script create-env`.
 
-**NB:** `dotenv-safe` will throw an error if you haven't filled all environment variables.
-
 Now you need to set the required environment variables from this table:
 
 | Key                                   | Description                                                  | Required |
