@@ -6,6 +6,11 @@ export interface IAuthOptions {
    * Requires user context and can cannot be called with an API token
    */
   userContext?: boolean
+
+  /**
+   * Permission required
+   */
+  permission?: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
