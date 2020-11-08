@@ -1,4 +1,4 @@
-# did [![version](https://img.shields.io/badge/version-0.8.1-green.svg)](https://semver.org)
+# did [![version](https://img.shields.io/badge/version-0.8.2-green.svg)](https://semver.org)
 
 _The Calendar is The Timesheet in The Cloud_  
 
@@ -14,7 +14,7 @@ _**Next release is [Oxygen](https://github.com/Puzzlepart/did365/milestone/8)&nb
 | [Carbon](https://github.com/Puzzlepart/did365/milestone/6)   | 09.09.2020   |  [![version](https://img.shields.io/badge/version-0.7.0-green.svg)](https://semver.org)                                                       |
 | [Nitrogen](https://github.com/Puzzlepart/did365/milestone/7) | 15.10.2020   |  [![version](https://img.shields.io/badge/version-0.8.0-green.svg)](https://semver.org)                                                        |
 | [Oxygen](https://github.com/Puzzlepart/did365/milestone/8)   | 15.12.2020   |    [![version](https://img.shields.io/badge/version-0.9.0-yellow.svg)](https://semver.org)                                                            |
-| [Fluor](https://github.com/Puzzlepart/did365/milestone/9)    | TBA   | [![version](https://img.shields.io/badge/version-1.0.0-red.svg)](https://semver.org) |
+| [Fluor](https://github.com/Puzzlepart/did365/milestone/9)    | Sometime in 2021   | [![version](https://img.shields.io/badge/version-1.0.0-red.svg)](https://semver.org) |
 
 ### Environments
 
