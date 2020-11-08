@@ -125,7 +125,8 @@
     "forecastNotificationsDescription": "Hvor mange uker fremover skal brukerne forutsi.",
     "forecastNotificationsLabel": "Varsler",
     "subscriptionSettings": "Abonnement",
-    "summaryRangeValueFormat": "Viser {{value}} måneder"
+    "summaryRangeValueFormat": "Viser {{value}} måneder",
+    "tokenExpiryPlaceholder": "Varighet for nøkkel"
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport. For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene...",
@@ -266,7 +267,8 @@
     "exportTypeCurrentYear": "Inneværende år ({{year}})",
     "subscription": "Abonnement",
     "nameLabel": "Navn",
-    "descriptionLabel": "Beskrivelse"
+    "descriptionLabel": "Beskrivelse",
+    "expiresLabel": "Utløper"
   },
   "navigation": {
     "timesheet": "Timeliste",
