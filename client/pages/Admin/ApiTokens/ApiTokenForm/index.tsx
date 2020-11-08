@@ -1,52 +1,37 @@
 import { useMutation } from '@apollo/client'
+import * as security from 'config/security'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import { Panel } from 'office-ui-fabric-react/lib/components/Panel'
 import { Dropdown } from 'office-ui-fabric-react/lib/Dropdown'
-import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
+import { Toggle } from 'office-ui-fabric-react/lib/Toggle'
 import React, { useMemo, useState } from 'react'
-import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
-import { isNull } from 'underscore'
+import { contains, isEmpty, isNull } from 'underscore'
 import { isBlank } from 'underscore.string'
-import { sleep } from 'utils'
 import { moment } from 'utils/date'
 import { ApiTokenInput } from '../../../../../server/api/graphql/resolvers/types'
 import $addApiToken from './addApiToken.gql'
 import styles from './ApiTokenForm.module.scss'
 import { IApiTokenFormProps } from './types'
-import * as security from 'config/security'
-import { Toggle } from 'office-ui-fabric-react/lib/Toggle'
 
-export const ApiTokenForm = ({ setMessage, onDismiss }: IApiTokenFormProps) => {
+export const ApiTokenForm = ({ onAdded, onDismiss }: IApiTokenFormProps) => {
     const { t } = useTranslation()
     const [addApiToken] = useMutation($addApiToken)
-    const [token, setToken] = useState<ApiTokenInput>({})
-    const [apiKey, setApiKey] = useState(null)
+    const [token, setToken] = useState<ApiTokenInput>({ permissions: [] })
     const permissions = useMemo(() => security.permissions(t).filter(p => p.api), [])
 
-    /**
-     * On add API token
-     */
     async function onAddApiToken() {
         const { data } = await addApiToken({ variables: { token } })
-        if (data.apiKey) {
-            setApiKey(data.apiKey)
-            setMessage({
-                type: MessageBarType.success,
-                children: t('admin.tokenGeneratedText'),
-            })
-            setToken({})
-            await sleep(10)
-        } else {
-            setMessage({
-                type: MessageBarType.error,
-                text: t('admin.tokenErrorText'),
-            })
-            setToken({})
-            await sleep(5)
-        }
-        setToken({})
+        onAdded(data.apiKey)
+    }
+    
+    function togglePermission(permissionId: string, checked: boolean) {
+        const permissions = [...token.permissions || []]
+        const index = permissions.indexOf(permissionId)
+        if (checked && index === -1) permissions.push(permissionId)
+        else permissions.splice(index, 1)
+        setToken({ ...token, permissions })
     }
 
     return (
@@ -76,7 +61,9 @@ export const ApiTokenForm = ({ setMessage, onDismiss }: IApiTokenFormProps) => {
                             label={name}
                             title={description}
                             inlineLabel={true}
-                            styles={{ root: { margin: 0 } }} />
+                            styles={{ root: { margin: 0 } }} 
+                            defaultChecked={contains(token.permissions, id)}
+                            onChange={(_event, checked) => togglePermission(id, checked)}/>
                         <div hidden={!description} className={styles.inputDescription}>
                             <span>{description}</span>
                         </div>
@@ -86,15 +73,7 @@ export const ApiTokenForm = ({ setMessage, onDismiss }: IApiTokenFormProps) => {
             <DefaultButton
                 text={t('common.save')}
                 onClick={onAddApiToken}
-                disabled={isBlank(token.name) || isNull(token.expires)} />
-            {!isNull(apiKey) && (
-                <FadeIn className={styles.keyField}>
-                    <TextField
-                        value={apiKey}
-                        multiline={true}
-                        disabled={true} />
-                </FadeIn>
-            )}
+                disabled={isBlank(token.name) || !token.expires || isEmpty(token.permissions)} />
         </Panel>
     )
 }

@@ -3,7 +3,6 @@
 interface CssExports {
   'inputContainer': string;
   'inputDescription': string;
-  'keyField': string;
   'permissionItem': string;
   'permissions': string;
   'root': string;

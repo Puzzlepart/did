@@ -59,6 +59,10 @@ class SubscriptionService {
       const { entries } = await this.tableUtil.queryAzTable('ApiTokens', query, {
         PartitionKey: 'subscriptionId',
       })
+      // eslint-disable-next-line no-console
+      console.log(entries)
+      // eslint-disable-next-line no-console
+      console.log('ApiKey eq ?', apiKey)
       const { subscriptionId } = first(entries)
       const subscription = await this.getSubscription(subscriptionId)
       const data = jwt.verify(apiKey, subscription.apiTokenSecret) as any
@@ -79,7 +83,8 @@ class SubscriptionService {
       const { string, datetime } = this.tableUtil.azEntGen()
       const apiKey = jwt.sign(
         {
-          permissions: ['15e40e99']
+          permissions: token.permissions,
+          expires: token.expires,
         },
         env('API_TOKEN_SECRET')
       )

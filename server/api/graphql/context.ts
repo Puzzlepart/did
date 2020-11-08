@@ -58,6 +58,8 @@ export const createContext = async (request: Express.Request): Promise<Context> 
     context.container = Container.of(context.requestId)
     context.container.set({ id: 'CONTEXT', transient: true, value: context })
     context.container.set({ id: 'REQUEST', transient: true, value: request })
+    // eslint-disable-next-line no-console
+    console.log(context.subscription, context.permissions)
     debug(`Creating context for request ${context.requestId}`)
     return context
   } catch (error) {

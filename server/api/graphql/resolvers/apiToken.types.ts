@@ -23,4 +23,7 @@ export class ApiTokenInput {
 
   @Field()
   expires?: string
+
+  @Field(() => [String])
+  permissions?: string[]
 }
