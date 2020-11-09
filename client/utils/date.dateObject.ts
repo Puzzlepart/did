@@ -46,13 +46,6 @@ export class DateObject {
   }
 
   /**
-   * To format as an ISO 8601 string
-   */
-  public get iso(): string {
-    return this.$.toISOString()
-  }
-
-  /**
    * This indicates whether the DateObject object is the same month the other supplied date-time.
    *
    * @param {DateObject} date Date
