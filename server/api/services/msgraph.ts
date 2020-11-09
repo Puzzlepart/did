@@ -135,20 +135,26 @@ class MSGraphService {
     }
   }
 
+
+  // TODO: STARTDATE SHOULD ALWAYS BE 00:00, ENDDATE SHOULD BE 23:59:59
   /**
    * Get events for the specified period using Microsoft Graph endpoint /me/calendar/calendarView
-   *
-   * @param {string} startDateTime Start date time in ISO format
-   * @param {string} endDateTime End date time in ISO format
+   * 
+   * @param {string} startDate Start date time in ISO format
+   * @param {string} endDate End date time in ISO format
    * @param {number} tzOffset TimezoneOffset on the client, 
    */
-  async getEvents(startDateTime: string, endDateTime: string, tzOffset: number): Promise<MSGraphEvent[]> {
+  async getEvents(startDate: string, endDate: string, tzOffset: number): Promise<MSGraphEvent[]> {
     try {
       this.startMark('getEvents')
       const query = ({
-        startDateTime: DateUtils.add(startDateTime, 'm', tzOffset),
-        endDateTime: DateUtils.add(endDateTime, 'm', tzOffset)
+        startDateTime: DateUtils.add(`${startDate}:00:00:00.000`, 'm', tzOffset),
+        endDateTime: DateUtils.add(`${endDate}:23:59:59.999`, 'm', tzOffset)
       })
+      debug(
+        'Querying Graph /me/calendar/calendarView: %s',
+        JSON.stringify({ query })
+      )
       const client = await this._getClient()
       const { value } = await client
         .api('/me/calendar/calendarView')
