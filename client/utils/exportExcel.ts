@@ -1,6 +1,7 @@
 import { stringToArrayBuffer, getValue } from 'helpers'
 import { IColumn } from 'office-ui-fabric'
 import { humanize } from 'underscore.string'
+import DateUtils from './date'
 import { loadScripts } from './loadScripts'
 
 export interface IExcelExportOptions {
@@ -49,9 +50,8 @@ export async function exportExcel(items: any[], options: IExcelExportOptions): P
             switch (getValue<ExcelColumnType>(col, 'data.excelColFormat', null)) {
               case 'date':
                 return {
-                  // TODO: Use  date util
-                  v: null,
-                  //v: //m2oment(fieldValue).format('YYYY-MM-DD HH:mm'),
+                  // TODO: Does it compute?
+                  v: DateUtils.createDateObject(fieldValue).format('YYYY-MM-DD HH:mm'),
                   t: 'd'
                 }
               default:
@@ -71,6 +71,6 @@ export async function exportExcel(items: any[], options: IExcelExportOptions): P
   const blob = new Blob([stringToArrayBuffer(wbout)], {
     type: 'application/octet-stream'
   })
-  ;(window as any).saveAs(blob, options.fileName)
+    ; (window as any).saveAs(blob, options.fileName)
   return blob
 }

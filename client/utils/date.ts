@@ -216,6 +216,16 @@ export class DateUtils {
   isCurrentYear(date: DateObject, year?: number) {
     return (year || date.$.year()) === dayjs().year()
   }
+
+  /**
+   * Is current year
+   *
+   * @param {DateInput} a Date a
+   * @param {DateInput} a Date b
+   */
+  isBefore(a: DateInput, b?: DateInput) {
+    return dayjs(a).isBefore(b)
+  }
 }
 
 export default new DateUtils({

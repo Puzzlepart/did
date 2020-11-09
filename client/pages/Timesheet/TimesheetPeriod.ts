@@ -4,6 +4,7 @@ import { TFunction } from 'i18next'
 import { EventInput, EventObject, Project, TimesheetPeriodInput, TimesheetPeriodObject } from 'types'
 import { filter, omit } from 'underscore'
 import { isBlank } from 'underscore.string'
+import DateUtils  from 'utils/date'
 import { ITimesheetParams } from './types'
 
 export class TimesheetPeriod {
@@ -236,8 +237,6 @@ export class TimesheetPeriod {
    * Period is in the past
    */
   public get isPast(): boolean {
-    // TODO: Use date util
-    return false
-    // return this._endDateTime && this._endDateTime.isBefore()
+    return DateUtils.isBefore(this.endDateTime)
   }
 }

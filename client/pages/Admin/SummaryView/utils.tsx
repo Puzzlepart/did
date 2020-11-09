@@ -112,7 +112,6 @@ export const createRows = (state: ISummaryViewState, columns: IColumn[], t: TFun
  * @param {number} range Range (default: 0)
  */
 export function createPeriods(range: number = 0): IPivotItemProps[] {
-    // TODO: Does it compute?
     const periods = []
     for (let i = range; i >= 0; i--) {
         const key = (DateUtils.getYear() - i).toString()
