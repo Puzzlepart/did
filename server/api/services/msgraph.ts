@@ -162,10 +162,10 @@ class MSGraphService {
         .filter("sensitivity ne 'private' and isallday eq false and iscancelled eq false")
         .orderby('start/dateTime asc')
         .top(500)
-        .get()
+        .get() as { value: any[] }
       const events = value
-        .filter((event: any) => !!event.subject)
-        .map((event: any) => new MSGraphEvent(event))
+        .filter((event) => !!event.subject)
+        .map((event) => new MSGraphEvent(event))
         .filter((event: MSGraphEvent) => event.duration <= 24)
       this.endMark('getEvents')
       return events
