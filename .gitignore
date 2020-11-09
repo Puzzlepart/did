@@ -47,6 +47,6 @@ client/**/*js.map
 doc/
 .env copy
 .DS_Store
-@tests/*.json
+.tests/*.json
 .localtunnel
 schema.gql

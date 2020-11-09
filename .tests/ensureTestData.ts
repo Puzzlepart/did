@@ -5,7 +5,7 @@ import * as path from 'path'
 import env from '../server/utils/env'
 import AzStorageService from '../server/api/services/azstorage'
 import createDebug from 'debug'
-const debug = createDebug('@tests/ensureTestData')
+const debug = createDebug('.tests/ensureTestData')
 
 const azstorage = new AzStorageService({
   subscription: {

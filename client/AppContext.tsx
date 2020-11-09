@@ -2,7 +2,7 @@ import { PERMISSION } from 'config/security/permissions'
 import { createContext } from 'react'
 import { Role, Subscription, User } from 'types'
 import { contains } from 'underscore'
-import { supportedLanguages } from '../@resources'
+import { supportedLanguages } from '../.resources'
 
 export class ContextUser {
     public id: string
