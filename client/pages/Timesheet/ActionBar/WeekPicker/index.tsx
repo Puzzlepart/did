@@ -12,6 +12,7 @@ import React, { useContext } from 'react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './WeekPicker.module.scss'
+import { DateObject } from 'utils/date'
 
 export const WeekPicker = () => {
   const { t } = useTranslation()
@@ -52,7 +53,7 @@ export const WeekPicker = () => {
           <FocusTrapZone isClickableOutsideFocusTrap={true}>
             <Calendar
               onSelectDate={(date) => {
-                dispatch({ type: 'SET_SCOPE', payload: date })
+                dispatch({ type: 'SET_SCOPE', payload: new DateObject(date).startOfWeek.$ })
                 setCalendar(null)
               }}
               firstDayOfWeek={DayOfWeek.Monday}
