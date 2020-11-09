@@ -24,7 +24,7 @@ export class TimesheetResolver {
    * @param {AzStorageService} _azstorage AzStorageService
    * @param {MSGraphService} _msgraph MSGraphService
    */
-  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) {}
+  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) { }
   /**
    * Get timesheet
    *
@@ -72,7 +72,7 @@ export class TimesheetResolver {
           )
         } else {
           const eventMatching = new EventMatching(projects, customers, labels)
-          const events = await this._msgraph.getEvents(period.startDate, period.endDate)
+          const events = await this._msgraph.getEvents(period.startDate, period.endDate, options.tzOffset)
           period.events = eventMatching.matchEvents(events)
         }
         period.events = period.events.map((evt) => ({
@@ -90,7 +90,7 @@ export class TimesheetResolver {
    * Submit period
    *
    * @param {TimesheetPeriodInput} period Period
-   * @param {boolean} forecast Forecast
+   * @param {TimesheetOptions} options Timesheet options (forecast, tzoffset etc)
    * @param {Context} ctx GraphQL context
    */
   @Authorized<IAuthOptions>({ userContext: true })
@@ -99,14 +99,14 @@ export class TimesheetResolver {
   })
   async submitPeriod(
     @Arg('period', () => TimesheetPeriodInput) period: TimesheetPeriodInput,
-    @Arg('forecast', { nullable: true }) forecast: boolean,
+    @Arg('options') options: TimesheetOptions,
     @Ctx() ctx: Context
   ): Promise<BaseResult> {
     try {
       let hours = 0
       if (!isEmpty(period.matchedEvents)) {
         const [events, labels] = await Promise.all([
-          this._msgraph.getEvents(period.startDate, period.endDate),
+          this._msgraph.getEvents(period.startDate, period.endDate, options.tzOffset),
           this._azstorage.getLabels()
         ])
         const timeentries = period.matchedEvents.reduce((arr, me) => {
@@ -119,9 +119,9 @@ export class TimesheetResolver {
           }
           return [...arr, entry]
         }, [])
-        hours = await this._azstorage.addTimeEntries(ctx.userId, period.id, timeentries, forecast)
+        hours = await this._azstorage.addTimeEntries(ctx.userId, period.id, timeentries, options.forecast)
       }
-      if (forecast) {
+      if (options.forecast) {
         await this._azstorage.addForecastedPeriod(ctx.userId, period.id, hours)
       } else {
         await this._azstorage.addConfirmedPeriod(ctx.userId, period.id, hours, period.forecastedHours)

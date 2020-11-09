@@ -6,6 +6,7 @@ import { performance, PerformanceObserver } from 'perf_hooks'
 import 'reflect-metadata'
 import { Service } from 'typedi'
 import { first } from 'underscore'
+import * as DateUtils from './../../utils/date'
 import env from '../../utils/env'
 import MSGraphEvent from './msgraph.event'
 import OAuthService, { AccessTokenOptions } from './oauth'
@@ -139,23 +140,19 @@ class MSGraphService {
    *
    * @param {string} startDateTime Start date time in ISO format
    * @param {string} endDateTime End date time in ISO format
-   * @param {number} maxDurationHours Max duration hours (defaults to 24)
+   * @param {number} tzOffset TimezoneOffset on the client, 
    */
-  async getEvents(startDateTime: string, endDateTime: string, maxDurationHours = 24): Promise<MSGraphEvent[]> {
+  async getEvents(startDateTime: string, endDateTime: string, tzOffset: number): Promise<MSGraphEvent[]> {
     try {
       this.startMark('getEvents')
-      debug(
-        'Querying Graph /me/calendar/calendarView: %s',
-        JSON.stringify({
-          startDateTime,
-          endDateTime,
-          maxDurationHours
-        })
-      )
+      const query = ({
+        startDateTime: DateUtils.add(startDateTime, 'm', tzOffset),
+        endDateTime: DateUtils.add(endDateTime, 'm', tzOffset)
+      })
       const client = await this._getClient()
       const { value } = await client
         .api('/me/calendar/calendarView')
-        .query({ startDateTime, endDateTime })
+        .query(query)
         .select(['id', 'subject', 'body', 'start', 'end', 'categories', 'webLink', 'isOrganizer'])
         // eslint-disable-next-line quotes
         .filter("sensitivity ne 'private' and isallday eq false and iscancelled eq false")
@@ -163,7 +160,7 @@ class MSGraphService {
         .top(500)
         .get()
       let events = value.filter((evt: { subject: any }) => evt.subject).map((evt: any) => new MSGraphEvent(evt))
-      events = events.filter((evt: { duration: number }) => evt.duration <= maxDurationHours)
+      events = events.filter((evt: { duration: number }) => evt.duration <= 24)
       this.endMark('getEvents')
       return events
     } catch (error) {

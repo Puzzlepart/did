@@ -35,7 +35,8 @@ export const Timesheet: React.FunctionComponent = () => {
       query: state.scope.query,
       options: {
         dateFormat: 'dddd DD',
-        locale: app.user.language
+        locale: app.user.language,
+        tzOffset: new Date().getTimezoneOffset()
       }
     },
     fetchPolicy: 'cache-and-network',
@@ -55,7 +56,7 @@ export const Timesheet: React.FunctionComponent = () => {
     dispatch({ type: 'SUBMITTING_PERIOD', payload: { t, forecast } })
     const variables = {
       period: state.selectedPeriod.data,
-      forecast
+      options: { forecast, tzOffset: new Date().getTimezoneOffset() }
     }
     await submitPeriod({ variables })
     query.refetch()

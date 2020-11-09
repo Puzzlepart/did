@@ -158,9 +158,15 @@ export class TimesheetQuery {
 
 @InputType()
 export class TimesheetOptions {
-  @Field()
+  @Field({ nullable: true })
   locale: string
 
-  @Field()
+  @Field({ nullable: true })
   dateFormat: string
+
+  @Field({ nullable: true })
+  tzOffset: number
+
+  @Field({ nullable: true })
+  forecast: boolean
 }
