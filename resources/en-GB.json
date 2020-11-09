@@ -117,7 +117,6 @@
     "tokenGeneratedText": "Your key has been generated and will only be visible for 10 seconds. You can only see it once. Take good care of it!",
     "tokenErrorText": "An error occurred generating your key. Please try again later.",
     "tokenDeletedText": "API key **{{name}}** was succesfully deleted.",
-    "summaryLoadingText": "Loading time entries and creating summary...",
     "bulkImportUsersLabel": "Bulk import",
     "bulkImportingUsersLabel": "Importing {{count}} users. Please wait..",
     "subscriptionSettingsUpdateSuccess": "Subscription settings successfully updated.",

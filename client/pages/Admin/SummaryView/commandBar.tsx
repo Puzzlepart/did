@@ -1,6 +1,5 @@
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
 import { Slider } from 'office-ui-fabric-react/lib/Slider'
-import { Spinner } from 'office-ui-fabric-react/lib/Spinner'
 import React from 'react'
 import DateUtils from 'utils/date'
 import * as excelUtils from 'utils/exportExcel'
@@ -35,13 +34,7 @@ export const commandBar = (context: ISummaryViewContext) => {
                 onRender: () => (
                     <>
                         <Slider
-                            styles={{
-                                root: {
-                                    width: 300,
-                                    marginLeft: 10,
-                                    alignSelf: 'center',
-                                },
-                            }}
+                            className={styles.rangeSlider}
                             valueFormat={value => context.t('admin.summaryRangeValueFormat', { value })}
                             disabled={context.loading}
                             value={context.range}
@@ -50,15 +43,6 @@ export const commandBar = (context: ISummaryViewContext) => {
                             onChange={value => context.dispatch({ type: 'CHANGE_RANGE', payload: value })} />
                     </>
                 ),
-            },
-            {
-                key: 'LOADING_SPINNER',
-                name: '',
-                onRender: () => context.loading && (
-                    <Spinner
-                        label={context.t('admin.summaryLoadingText')}
-                        labelPosition='right' />
-                )
             }
         ] as IContextualMenuItem[],
         farItems: [
