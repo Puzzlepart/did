@@ -23,8 +23,8 @@ export const stripHtmlString = (str: string): string => stringStripHtml(str).res
  * @param {ConfigType} startDateTime Start time
  * @param {ConfigType} endDateTime End time
  */
-export const getDurationHours = (startDateTime: ConfigType, endDateTime: ConfigType): any => {
-  return $dayjs(endDateTime).diff(startDateTime, 'hour')
+export const getDurationHours = (startDateTime: ConfigType, endDateTime: ConfigType): number => {
+  return $dayjs(endDateTime).diff(startDateTime, 'minute') / 60
 }
 
 /**
