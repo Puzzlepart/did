@@ -1,12 +1,13 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv').config()
 import * as fs from 'fs'
 import * as path from 'path'
 import env from '../server/utils/env'
 import AzStorageService from '../server/api/services/azstorage'
 import createDebug from 'debug'
-const debug = createDebug('tests/ensureTestData')
+const debug = createDebug('@tests/ensureTestData')
 
-let azstorage = new AzStorageService({
+const azstorage = new AzStorageService({
   subscription: {
     id: 'f3d3b506-8fa9-4e40-b1a0-b667dd9ca94b',
     name: 'TESTS_AZURE_STORAGE_CONNECTION_STRING',

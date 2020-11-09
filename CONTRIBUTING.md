@@ -54,7 +54,7 @@ The following permissions are required by Azure App Registration:
 
 ### Mocha tests
 
-`npm run tests` will run our mocha tests for the event matching. It will automatically fetch customers, projects and labels from Azure Table Storage if environment `TESTS_AZURE_STORAGE_CONNECTION_STRING` is set.
+`npm run tests` will run our mocha tests. It will automatically fetch customers, projects and labels from Azure Table Storage if environment `TESTS_AZURE_STORAGE_CONNECTION_STRING` is set.
 
 `TESTS_AZURE_STORAGE_CONNECTION_STRING` should be set to the connection string for [didtestdata](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourcegroups/pzl-did/providers/Microsoft.Storage/storageAccounts/didtestdata/overview).
 
