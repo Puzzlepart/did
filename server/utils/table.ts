@@ -193,7 +193,7 @@ class AzTableUtilities {
    */
   async queryAzTableAll(table: string, query: azurestorage.TableQuery, columnMap: Record<string, string>) {
     let token = null
-    const { entries, continuationToken } = await this.queryAzTable(table, query, columnMap, token)
+    const { entries, continuationToken } = await this.queryAzTable(table, query, { columnMap }, token)
     token = continuationToken
     while (token !== null) {
       const result: azurestorage.TableService.QueryEntitiesResult<any> = await this.queryAzTable(
