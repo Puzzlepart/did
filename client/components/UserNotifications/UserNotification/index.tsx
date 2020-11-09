@@ -1,5 +1,5 @@
-import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar'
-import { Link } from 'office-ui-fabric-react/lib/Link'
+import { MessageBar } from 'office-ui-fabric'
+import { Link } from 'office-ui-fabric'
 import * as React from 'react'
 import { IUserNotificationProps } from './types'
 import styles from './UserNotificationMessage.module.scss'

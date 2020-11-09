@@ -1,9 +1,9 @@
 
 import { getValue } from 'helpers'
-import { Icon } from 'office-ui-fabric-react/lib/Icon'
-import { Slider } from 'office-ui-fabric-react/lib/Slider'
-import { TextField } from 'office-ui-fabric-react/lib/TextField'
-import { Toggle } from 'office-ui-fabric-react/lib/Toggle'
+import { Icon } from 'office-ui-fabric'
+import { Slider } from 'office-ui-fabric'
+import { TextField } from 'office-ui-fabric'
+import { Toggle } from 'office-ui-fabric'
 import React, { useState } from 'react'
 import { omit } from 'underscore'
 import styles from './SettingsSection.module.scss'

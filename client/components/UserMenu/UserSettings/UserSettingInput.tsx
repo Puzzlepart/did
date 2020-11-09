@@ -1,5 +1,5 @@
-import { Dropdown } from 'office-ui-fabric-react/lib/Dropdown'
-import { Toggle } from 'office-ui-fabric-react/lib/Toggle'
+import { Dropdown } from 'office-ui-fabric'
+import { Toggle } from 'office-ui-fabric'
 import * as React from 'react'
 import styles from './UserSettings.module.scss'
 import { UserSettingsContext } from './UserSettingsContext'

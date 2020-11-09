@@ -1,4 +1,4 @@
-import { List,SearchBox, Label, Icon,FocusZone,FocusZoneDirection, Callout } from '@office-ui-fabric'
+import { List, SearchBox, Label, Icon, FocusZone, FocusZoneDirection, Callout } from 'office-ui-fabric'
 import * as React from 'react'
 import { IAutocompleteProps, IAutocompleteState, ISuggestionItem } from '.'
 import styles from './Autocomplete.module.scss'

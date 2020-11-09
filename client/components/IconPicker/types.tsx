@@ -1,4 +1,4 @@
-import { ISearchBoxProps } from 'office-ui-fabric-react/lib/SearchBox'
+import { ISearchBoxProps } from 'office-ui-fabric'
 
 export interface IIconPickerProps extends ISearchBoxProps {
     label?: string;

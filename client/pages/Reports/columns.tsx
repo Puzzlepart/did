@@ -1,7 +1,7 @@
 import { CustomerLink } from 'components/CustomerLink'
 import { ProjectLink } from 'components/ProjectLink'
 import { TFunction } from 'i18next'
-import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
+import { IColumn } from 'office-ui-fabric'
 import React from 'react'
 import DateUtils from 'utils/date'
 import { ExcelColumnType } from 'utils/exportExcel'

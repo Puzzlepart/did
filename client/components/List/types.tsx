@@ -1,7 +1,7 @@
-import { ICommandBarProps } from 'office-ui-fabric-react/lib/CommandBar'
-import { CheckboxVisibility, IColumn, IDetailsGroupRenderProps, IDetailsHeaderProps, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
-import { ISearchBoxProps } from 'office-ui-fabric-react/lib/SearchBox'
-import { IRenderFunction } from 'office-ui-fabric-react/lib/Utilities'
+import { ICommandBarProps } from 'office-ui-fabric'
+import { CheckboxVisibility, IColumn, IDetailsGroupRenderProps, IDetailsHeaderProps, SelectionMode } from 'office-ui-fabric'
+import { ISearchBoxProps } from 'office-ui-fabric'
+import { IRenderFunction } from 'office-ui-fabric'
 
 export interface IListProps<T = any> extends React.HTMLProps<HTMLDivElement> {
     /**

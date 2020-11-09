@@ -8,7 +8,7 @@ import { IColumn } from '../List'
 import { DurationDisplay } from './DurationDisplay'
 import { IEventListProps } from './types'
 import { MobileView, BrowserView } from 'react-device-detect'
-import { Link } from 'office-ui-fabric-react/lib/Link'
+import { Link } from 'office-ui-fabric'
 import { EntityLabel } from 'components/EntityLabel'
 import styles from './EventList.module.scss'
 

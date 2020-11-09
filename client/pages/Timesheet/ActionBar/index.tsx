@@ -1,5 +1,5 @@
 import { AppContext } from 'AppContext'
-import { CommandBar, ICommandBarProps } from 'office-ui-fabric-react/lib/CommandBar'
+import { CommandBar, ICommandBarProps } from 'office-ui-fabric'
 import React, { useContext } from 'react'
 import { TimesheetContext } from '../'
 import styles from './ActionBar.module.scss'

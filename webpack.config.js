@@ -84,7 +84,7 @@ const config = {
       i18n: resolve(SRC_PATH, 'i18n'),
       config: resolve(SRC_PATH, 'config'),
       AppContext: resolve(SRC_PATH, 'AppContext'),
-      '@office-ui-fabric': resolve(SRC_PATH, '_office-ui-fabric-proxy'),
+      'office-ui-fabric': resolve(SRC_PATH, 'office-ui-fabric'),
     },
     extensions: [
       '.ts',

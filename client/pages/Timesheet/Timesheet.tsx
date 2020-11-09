@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { AppContext } from 'AppContext'
 import { HotkeyModal } from 'components'
-import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
+import { Pivot, PivotItem } from 'office-ui-fabric'
 import React, { useContext, useEffect, useMemo, useReducer } from 'react'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { useTranslation } from 'react-i18next'

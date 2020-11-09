@@ -1,4 +1,4 @@
-import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
+import { IContextualMenuItem } from 'office-ui-fabric'
 import DateUtils from 'utils/date'
 import { ISummaryViewScope, ISummaryViewState } from './types'
 

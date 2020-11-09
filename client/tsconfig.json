@@ -19,10 +19,7 @@
     "typeRoots": ["../node_modules/@types"],
     "types": ["webpack-env"],
     "lib": ["es2015", "dom", "es2015.collection"],
-    "baseUrl": "./",
-    "paths": {
-      "@office-ui-fabric": ["./client/_office-ui-fabric-proxy"]
-    }
+    "baseUrl": "./"
   },
   "include": ["**/*.ts", "**/*.tsx", "i18n/*.json", "**/*.gql"],
   "exclude": ["node_modules"]

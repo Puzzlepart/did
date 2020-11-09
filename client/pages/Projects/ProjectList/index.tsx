@@ -1,5 +1,5 @@
 import List from 'components/List'
-import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox'
+import { Checkbox } from 'office-ui-fabric'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { withDefaultProps } from 'with-default-props'

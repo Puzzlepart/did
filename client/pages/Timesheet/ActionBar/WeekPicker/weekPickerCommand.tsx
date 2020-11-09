@@ -1,4 +1,4 @@
-import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
+import { IContextualMenuItem } from 'office-ui-fabric'
 import * as React from 'react'
 import { WeekPicker } from '.'
 import { ITimesheetContext } from '../../context'

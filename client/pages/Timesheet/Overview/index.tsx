@@ -1,5 +1,5 @@
 import EventList from 'components/EventList'
-import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
+import { ProgressIndicator } from 'office-ui-fabric'
 import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'

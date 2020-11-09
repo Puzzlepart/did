@@ -1,5 +1,5 @@
 import { stringToArrayBuffer, getValue } from 'helpers'
-import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
+import { IColumn } from 'office-ui-fabric'
 import { humanize } from 'underscore.string'
 import { loadScripts } from './loadScripts'
 

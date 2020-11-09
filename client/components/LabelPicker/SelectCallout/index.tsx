@@ -1,9 +1,9 @@
-import { Icon } from 'office-ui-fabric-react/lib/Icon'
-import { Callout } from 'office-ui-fabric-react/lib/Callout'
+import { Icon } from 'office-ui-fabric'
+import { Callout } from 'office-ui-fabric'
 import React, { useState, useEffect } from 'react'
 import styles from './SelectCallout.module.scss'
-import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox'
-import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox'
+import { SearchBox } from 'office-ui-fabric'
+import { Checkbox } from 'office-ui-fabric'
 import { LabelObject } from 'types'
 import { ISelectCalloutProps } from './types'
 

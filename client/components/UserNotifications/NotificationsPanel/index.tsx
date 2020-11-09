@@ -1,5 +1,5 @@
 import { UserMessage } from 'components/UserMessage'
-import { Panel } from 'office-ui-fabric-react/lib/Panel'
+import { Panel } from 'office-ui-fabric'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { UserNotification } from '../UserNotification'

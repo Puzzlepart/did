@@ -1,4 +1,4 @@
-import { IMessageBarProps, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
+import { IMessageBarProps, MessageBarType } from 'office-ui-fabric'
 import { TFunction } from 'i18next'
 
 export interface INotification {

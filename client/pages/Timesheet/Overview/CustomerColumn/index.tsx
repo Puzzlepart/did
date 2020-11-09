@@ -2,7 +2,7 @@ import * as React from 'react'
 import { withDefaultProps } from 'with-default-props'
 import styles from './CustomerColumn.module.scss'
 import { ICustomerColumnProps } from './types'
-import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import { Icon } from 'office-ui-fabric'
 
 
 const CustomerColumn = ({ event }: ICustomerColumnProps): JSX.Element => {

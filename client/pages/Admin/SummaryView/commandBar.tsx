@@ -1,5 +1,5 @@
-import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
-import { Slider } from 'office-ui-fabric-react/lib/Slider'
+import { IContextualMenuItem } from 'office-ui-fabric'
+import { Slider } from 'office-ui-fabric'
 import React from 'react'
 import DateUtils from 'utils/date'
 import * as excelUtils from 'utils/exportExcel'

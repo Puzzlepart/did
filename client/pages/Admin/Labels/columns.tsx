@@ -1,6 +1,6 @@
 import { EntityLabel } from 'components/EntityLabel'
 import { TFunction } from 'i18next'
-import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
+import { DefaultButton } from 'office-ui-fabric'
 import React from 'react'
 import { LabelObject } from 'types'
 import { generateColumn as col } from 'utils/generateColumn'

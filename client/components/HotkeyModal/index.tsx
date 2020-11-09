@@ -1,4 +1,4 @@
-import { IModalProps, Modal } from 'office-ui-fabric-react/lib/Modal'
+import { IModalProps, Modal } from 'office-ui-fabric'
 import * as React from 'react'
 import FadeIn from 'react-fade-in'
 import { GlobalHotKeysProps } from 'react-hotkeys'

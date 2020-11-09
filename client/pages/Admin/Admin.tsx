@@ -1,7 +1,7 @@
 
 import { AppContext } from 'AppContext'
 import { PERMISSION } from 'config/security/permissions'
-import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
+import { Pivot, PivotItem } from 'office-ui-fabric'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'

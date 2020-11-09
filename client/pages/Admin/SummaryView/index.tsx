@@ -2,7 +2,7 @@
 import { useQuery } from '@apollo/client'
 import { UserMessage } from 'components'
 import List from 'components/List'
-import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
+import { Pivot, PivotItem } from 'office-ui-fabric'
 import React, { useEffect, useMemo, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { first, isEmpty } from 'underscore'

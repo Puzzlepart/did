@@ -1,8 +1,8 @@
-import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox'
+import { Checkbox } from 'office-ui-fabric'
 import React, { useState, useMemo } from 'react'
 import styles from './FilterItem.module.scss'
 import { IFilterItemProps } from './types'
-import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox'
+import { SearchBox } from 'office-ui-fabric'
 import { contains, isBlank } from 'underscore.string'
 import { useTranslation } from 'react-i18next'
 

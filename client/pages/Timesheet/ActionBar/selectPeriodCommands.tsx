@@ -1,5 +1,5 @@
-import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
-import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
+import { DefaultButton } from 'office-ui-fabric'
+import { IContextualMenuItem } from 'office-ui-fabric'
 import * as React from 'react'
 import { ITimesheetContext } from '../context'
 import styles from './ActionBar.module.scss'
