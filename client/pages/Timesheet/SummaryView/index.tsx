@@ -118,7 +118,10 @@ export const SummaryView = () => {
 
     return (
       <div key={`summary_${context.selectedPeriod?.id}`} className={styles.root}>
-        <List items={items} columns={columns} enableShimmer={!!context?.loading} />
+        <List
+          items={items}
+          columns={columns}
+          enableShimmer={!!context?.loading} />
       </div>
     )
   }
