@@ -93,7 +93,7 @@ export const ApiTokens = () => {
             fieldName: 'created',
             name: t('common.createdLabel'),
             minWidth: 100,
-            onRender: (item) => DateUtils.formatDate(item.created, 'LLL')
+            onRender: (item) => DateUtils.formatDate(item.created, 'MMMM D, YYYY')
           },
           {
             key: 'actions',
