@@ -45,7 +45,12 @@ export const Timesheet: React.FunctionComponent = () => {
     useEffect(() => dispatch({ type: 'DATA_UPDATED', payload: { query, t } }), [query])
 
     useEffect(() => {
-        history.push(`/timesheet/${state.selectedView}/${state?.selectedPeriod?.path}`)
+        if (!state.selectedPeriod) return
+        history.push([
+            '/timesheet',
+            state.selectedView,
+            state.selectedPeriod.path
+        ].join('/'))
     }, [state.selectedView, state.selectedPeriod])
 
     const [[submitPeriod], [unsubmitPeriod]] = [
@@ -63,13 +68,14 @@ export const Timesheet: React.FunctionComponent = () => {
         query.refetch()
     }
 
-    const onUnsubmitPeriod = (forecast: boolean) => {
+    const onUnsubmitPeriod = async (forecast: boolean) => {
         dispatch({ type: 'UNSUBMITTING_PERIOD', payload: { t, forecast } })
         const variables = {
             period: state.selectedPeriod.data,
             forecast
         }
-        unsubmitPeriod({ variables }).then(() => query.refetch())
+        await unsubmitPeriod({ variables })
+        query.refetch()
     }
 
     const context: ITimesheetContext = useMemo(() => ({
