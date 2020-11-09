@@ -26,6 +26,7 @@ class MSGraphService {
    * Constructs a new MSGraphService
    */
   constructor(private _oauthService: OAuthService) {
+    if (!env('APPINSIGHTS_INSTRUMENTATIONKEY')) return
     appInsights.setup(env('APPINSIGHTS_INSTRUMENTATIONKEY'))
     this._perf = new PerformanceObserver((list) => {
       const { name, duration } = first(list.getEntries())
