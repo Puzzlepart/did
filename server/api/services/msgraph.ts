@@ -164,8 +164,9 @@ class MSGraphService {
         .top(500)
         .get()
       const events = value
-        .filter((event: any) => !!event.subject && event.duration <= 24)
+        .filter((event: any) => !!event.subject)
         .map((event: any) => new MSGraphEvent(event))
+        .filter((event: MSGraphEvent) => event.duration <= 24)
       this.endMark('getEvents')
       return events
     } catch (error) {
