@@ -1,5 +1,4 @@
-import DateUtils, { DateInput } from 'utils/date'
-import { DateObject } from 'utils/date.dateObject'
+import DateUtils, { DateInput, DateObject } from 'utils/date'
 import { TimesheetQuery } from '../../../server/api/graphql/resolvers/types'
 import { ITimesheetParams } from './types'
 
@@ -10,7 +9,7 @@ import { ITimesheetParams } from './types'
  */
 export class TimesheetScope {
   constructor(public startDate?: DateObject, public endDate?: DateObject) {
-    this.startDate = DateUtils.createDateObject()
+    this.startDate = new DateObject()
     this.endDate = this.startDate.endOfWeek
   }
 
@@ -38,7 +37,7 @@ export class TimesheetScope {
    * @param {DateInput} start Start of scope
    */
   public set(start: DateInput): TimesheetScope {
-    this.startDate = DateUtils.createDateObject(start)
+    this.startDate = new DateObject(start)
     this.endDate = this.startDate.endOfWeek
     return this
   }

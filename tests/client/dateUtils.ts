@@ -1,6 +1,6 @@
 import { strictEqual, deepStrictEqual } from 'assert'
 import { header } from '../@utils'
-import DateUtils, { DateObject, dayjs } from '../../client/utils/date'
+import DateUtils, { DateObject, $dayjs } from '../../client/utils/date'
 
 describe(header('DateUtils'), async () => {
   before(() => {
@@ -89,14 +89,14 @@ describe(header('DateUtils'), async () => {
 
   describe('DateObject.toObject', () => {
     it('should return correct object for 2020-03-01', () => {
-      deepStrictEqual(DateUtils.createDateObject('2020-03-01').toObject('monthNumber', 'year'), {
+      deepStrictEqual(new DateObject('2020-03-01').toObject('monthNumber', 'year'), {
         monthNumber: 3,
         year: 2020
       })
     })
 
     it('should return correct object for 2020-04-01', () => {
-      deepStrictEqual(DateUtils.createDateObject('2020-04-01').toObject('monthName'), {
+      deepStrictEqual(new DateObject('2020-04-01').toObject('monthName'), {
         monthName: 'April'
       })
     })

@@ -1,7 +1,7 @@
-import { stringToArrayBuffer, getValue } from 'helpers'
+import { getValue, stringToArrayBuffer } from 'helpers'
 import { IColumn } from 'office-ui-fabric'
 import { humanize } from 'underscore.string'
-import DateUtils from './date'
+import { DateObject } from './date'
 import { loadScripts } from './loadScripts'
 
 export interface IExcelExportOptions {
@@ -50,8 +50,7 @@ export async function exportExcel(items: any[], options: IExcelExportOptions): P
             switch (getValue<ExcelColumnType>(col, 'data.excelColFormat', null)) {
               case 'date':
                 return {
-                  // TODO: Does it compute?
-                  v: DateUtils.createDateObject(fieldValue).format('YYYY-MM-DD HH:mm'),
+                  v: new DateObject(fieldValue).format('YYYY-MM-DD HH:mm'),
                   t: 'd'
                 }
               default:
