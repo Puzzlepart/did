@@ -1,23 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import stringStripHtml from 'string-strip-html'
-import $dayjs, { ConfigType } from 'dayjs'
+import $dayjs, { ConfigType, PluginFunc } from 'dayjs'
+import weekOfYearPlugin from 'dayjs/plugin/weekOfYear'
+import isoWeekPlugin from 'dayjs/plugin/isoWeek'
 import 'dayjs/locale/en-gb'
 import 'dayjs/locale/nb'
-
-// SERVER SIDE DATE UTILS USED:
-/**
- * NAME --------- DESCRIPTION ----------------------- RETURNS
- * getDurationHours - duration in hours between two dates - number
- * getPeriod - 'weeknumber_monthnumber_yearnumber' for a given date - string
- * getWeek - week number based on date - string
- * getYear - year number based on date - string
- * getMonthIndex - month based on date, 1-indexed - string
- * startOfMonth - first day of month based on date - string
- * endOfMonth - last day of month based on date - string
- * startOfWeek - first day of week based on date - string
- * endOfWeek - last day of week based on date - string
- *
- */
+$dayjs.extend<PluginFunc>(weekOfYearPlugin)
+$dayjs.extend<PluginFunc>(isoWeekPlugin)
 
 /**
  * Strip html from string using string-strip-html
@@ -31,96 +20,84 @@ export const stripHtmlString = (str: string): string => stringStripHtml(str).res
 /**
  * Get duration between two times in hours
  *
- * @param {string} startDateTime Start time
- * @param {string} endDateTime End time
+ * @param {ConfigType} startDateTime Start time
+ * @param {ConfigType} endDateTime End time
  */
-export const getDurationHours = (startDateTime: string, endDateTime: string): any => {
-  return null
-  // TODO Return duration hours as number
+export const getDurationHours = (startDateTime: ConfigType, endDateTime: ConfigType): any => {
+  return $dayjs(startDateTime).diff(endDateTime, 'hour')
 }
 
 /**
  * Get period id for the date
  *
- * @param {*} date Date
+ * @param {ConfigType} dateTime Date time
  */
-export const getPeriod = (date: any) => {
-  return null
-  // TODO RETURN weeknumber_monthnumber_yearnumber
+export const getPeriod = (dateTime: ConfigType) : string => {
+  const date = $dayjs(dateTime)
+  return [date.week(), date.month() + 1, date.year()].join('_')
 }
 
 /**
  * Get week for the specified date
  *
- * @param {string } date Date
+ * @param {ConfigType} dateTime Date time
  */
-export const getWeek = (date?: any) => {
-  // TODO RETURN specified Date's week OR current date's week
-  return null
+export const getWeek = (dateTime?: ConfigType): number => {
+  return $dayjs(dateTime).week()
 }
 
 /**
  * Get year for the specified date
  *
- * @param {string} date Date
+ * @param {ConfigType} dateTime Date time
  */
-export const getYear = (date?: string) => {
-  // TODO return year from specified date or current date
-  return null
+export const getYear = (dateTime?: ConfigType): number => {
+  return $dayjs(dateTime).year()
 }
 
 /**
  * Get month index for the specified date
  *
- *
- * @param {*} date Date
+ * @param {ConfigType} dateTime Date time
  */
-export const getMonthIndex = (date: any) => {
-  // TODO return month from specified date or current date
-  // NOTE - MUST BE 1-INDEXED
-  return null
+export const getMonthIndex = (dateTime: ConfigType): number => {
+  return $dayjs(dateTime).month() + 1
 }
 
 /**
  * Get start of month as string
  *
- * @param {*} date Date
+ * @param {ConfigType} dateTime Date time
  */
-export const startOfMonth = (date: any) => {
-  // TODO return date of start of month from specified date or current date
-  // toISOString minus Z
-  return null
+export const startOfMonth = (dateTime?: ConfigType): string => {
+  return $dayjs(dateTime).startOf('month').toISOString()
 }
 
 /**
  * Get end of month as string
  *
- * @param {*} date Date
+ * @param {ConfigType} dateTime Date time
  */
-export const endOfMonth = (date: any) => {
-  // TODO return date of end of month from specified date or current date
-  // toISOString minus Z
-  return null
+export const endOfMonth = (dateTime: ConfigType): string => {
+  return $dayjs(dateTime).startOf('month').toISOString()
 }
 
 /**
  * Get start of week
  *
- * @param {*} week Week number
+ * @param {number} week Week number
  */
-export const startOfWeek = (week: any) => {
-  // TODO return date of start of week from specified date or current date
-  return null
+export const startOfWeek = (week: number): string => {
+  return $dayjs().week(week).startOf('isoWeek').toISOString()
 }
 
 /**
  * Get end of week
  *
- * @param {*} week Week number
+ * @param {number} week Week number
  */
-export const endOfWeek = (week: any) => {
-  // TODO return date of end of week from specified date or current date
-  return null
+export const endOfWeek = (week: number): string => {
+  return $dayjs().week(week).endOf('isoWeek').toISOString()
 }
 
 /**
@@ -128,21 +105,19 @@ export const endOfWeek = (week: any) => {
  *
  * To escape characters, wrap them in square brackets (e.g. [MM]).
  *
- * @param {ConfigType} date Date
+ * @param {ConfigType} dateTime Date
  * @param {string} template Date format
  * @param {string} locale Locale
  */
-export const formatDate = (date: ConfigType, template: string, locale: string) => {
-  // TODO return correct date format as string
-  return $dayjs(date).locale(locale).format(template)
+export const formatDate = (dateTime: ConfigType, template: string, locale: string) => {
+  return $dayjs(dateTime).locale(locale).format(template)
 }
 
 /**
  * Is after today
  *
- * @param {*} date Date
+ * @param {ConfigType} dateTime Date
  */
-export const isAfterToday = (date: any) => {
-  // return bool, whether the specified date is after now
-  return null
+export const isAfterToday = (dateTime: ConfigType) => {
+  return $dayjs(dateTime).isAfter($dayjs())
 }

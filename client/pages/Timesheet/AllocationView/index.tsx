@@ -65,7 +65,7 @@ export const AllocationView = (getData: (events: EventObject[], chart: IChartCon
                         <ResponsiveContainer width='100%' height={450}>
                             <BarChart
                                 className={styles.chart}
-                                data={[...getData(selectedPeriod.events, c)]}>
+                                data={[...getData(selectedPeriod.getEvents(), c)]}>
                                 <XAxis interval={0} dataKey='label' />
                                 <YAxis
                                     label={{
