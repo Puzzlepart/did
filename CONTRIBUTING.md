@@ -11,12 +11,12 @@ Folder/File | Description
 `/client/common` | Common elements like icons etc 
 `/client/components` | React components reusable throughout the solution 
 `/client/config` | Conifguration 
-`client/graphql` | Graphql implementation for the client using `@apollo/client` 
-`client/helpers` | Helper functions 
-`client/pages` | Main pages of the solution 
-`client/types` | Types, models and interfaces 
-`client/utils` | Utility functions 
-`client/index.tsx` | Main entry point for the app 
+`/client/graphql` | Graphql implementation for the client using `@apollo/client` 
+`/client/helpers` | Helper functions 
+`/client/pages` | Main pages of the solution 
+`/client/types` | Types, models and interfaces 
+`/client/utils` | Utility functions 
+`/client/index.tsx` | Main entry point for the app 
 `/server/public` | Public assets, static files hosted under "/"
 `/server/public/css` | CSS files
 `/server/public/js` | JS files (hidden from `vscode`, the react bundle ends up here)
@@ -29,8 +29,8 @@ Folder/File | Description
 `/server/services` | Services ([MS Graph](https://developer.microsoft.com/en-us/graph) and [Azure Table Storage](https://azure.microsoft.com/en-us/services/storage/tables/))
 `/server/utils` | Utilities
 `/server/views` | Express HBS views
-`server/app.ts` | Express app
-`server/index.ts` | [Node.js](http://nodejs.org/) server  
+`/server/app.ts` | Express app
+`/server/index.ts` | [Node.js](http://nodejs.org/) server  
 
 ## Development
 
@@ -46,7 +46,7 @@ Folder/File | Description
 
 The following permissions are required by Azure App Registration:
 
-![image-20201104173614079](assets/image-20201104173614079.png)
+![image-20201104173614079](@assets/image-20201104173614079.png)
 
 ### Resource management with i18n
 
