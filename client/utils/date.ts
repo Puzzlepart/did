@@ -234,4 +234,4 @@ export default new DateUtils({
   isoWeek: true
 })
 
-export { DateObject }
+export { DateObject, dayjs }
