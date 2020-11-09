@@ -14,52 +14,52 @@ export class EventObject {
   key: string
 
   @Field()
-  day: string
+  day?: string
 
   @Field()
-  title: string
+  title?: string
 
   @Field({ nullable: true })
-  body: string
+  body?: string
 
   @Field({ nullable: true })
-  isOrganizer: boolean
+  isOrganizer?: boolean
 
   @Field()
-  startDateTime: string
+  startDateTime?: string
 
   @Field()
-  endDateTime: string
+  endDateTime?: string
 
   @Field()
-  date: string
+  date?: string
 
   @Field(() => Float)
-  duration: number
+  duration?: number
 
   @Field(() => Project, { nullable: true })
   project: Project
 
   @Field(() => Project, { nullable: true })
-  suggestedProject: Project
+  suggestedProject?: Project
 
   @Field(() => Customer, { nullable: true })
-  customer: Customer
+  customer?: Customer
 
   @Field({ nullable: true })
-  projectKey: string
+  projectKey?: string
 
   @Field({ nullable: true })
-  customerKey: string
+  customerKey?: string
 
   @Field({ nullable: true })
-  webLink: string
+  webLink?: string
 
   @Field(() => [LabelObject], { nullable: true })
-  labels: LabelObject[]
+  labels?: LabelObject[]
 
   @Field(() => EventError, { nullable: true })
-  error: EventError
+  error?: EventError
 
   @Field({ nullable: true })
   manualMatch?: boolean
@@ -118,11 +118,12 @@ export class TimesheetPeriodObject {
   forecastedHours?: number
 
   constructor(startDateTime: string, endDateTime: string, locale: string) {
+    this.id = DateUtils.getPeriod(startDateTime)
     this.startDateTime = startDateTime
     this.endDateTime = endDateTime
     this.week = DateUtils.getWeek()
-    ;(this.month = DateUtils.formatDate(startDateTime, 'MMMM', locale)),
-      (this.isForecast = DateUtils.isAfterToday(startDateTime))
+    this.month = DateUtils.formatDate(startDateTime, 'MMMM', locale)
+    this.isForecast = DateUtils.isAfterToday(startDateTime)
     this.isForecasted = false
     this.isConfirmed = false
   }

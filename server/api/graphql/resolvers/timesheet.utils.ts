@@ -15,7 +15,7 @@ import { TimesheetPeriodObject } from './timesheet.types'
  * @param {string} endDateTime End date time in ISO format
  * @param {string} locale User locale
  */
-export function getPeriods(startDateTime: string, endDateTime: string, locale: string): any[] {
+export function getPeriods(startDateTime: string, endDateTime: string, locale: string): TimesheetPeriodObject[] {
   const startMonthIdx = DateUtils.getMonthIndex(startDateTime)
   const endMonthIdx = DateUtils.getMonthIndex(endDateTime)
   const isSplit = endMonthIdx !== startMonthIdx
