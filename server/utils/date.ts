@@ -81,7 +81,7 @@ export const startOfMonth = (dateTime: ConfigType, template: string): string => 
  * @param {string} template Template
  */
 export const endOfMonth = (dateTime: ConfigType, template: string): string => {
-  return $dayjs(dateTime).startOf('month').format(template)
+  return $dayjs(dateTime).endOf('month').format(template)
 }
 
 /**
