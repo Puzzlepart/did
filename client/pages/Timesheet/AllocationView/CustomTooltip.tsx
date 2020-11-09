@@ -5,7 +5,7 @@ import styles from './AllocationView.module.scss'
 import { ICustomTooltipProps } from './types'
 
 export const CustomTooltip: FunctionComponent<ICustomTooltipProps> = ({ item, chart }: ICustomTooltipProps) => {
-  const { data, value } = getValue<any>(item, 'payload.0.payload.data', {})
+  const { data, value } = getValue<any>(item, '0.payload', {})
   if (!data) return null
   return (
     <FadeIn className={styles.tooltip}>

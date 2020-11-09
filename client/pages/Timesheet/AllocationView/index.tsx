@@ -19,7 +19,7 @@ export const AllocationView = (
   const { t } = useTranslation()
   const { loading, selectedPeriod } = useContext(TimesheetContext)
 
-  if (!loading && selectedPeriod.totalDuration === 0) {
+  if (!loading && selectedPeriod?.totalDuration === 0) {
     return (
       <div className={styles.root}>
         <UserMessage text={t('timesheet.allocation.noDataText')} />
@@ -52,15 +52,15 @@ export const AllocationView = (
   ]
 
   return (
-    <div key={`allocation_${selectedPeriod.id}`} className={styles.root}>
+    <div key={`allocation_${selectedPeriod?.id}`} className={styles.root}>
       {charts.map((c) => {
-        const data = getData(selectedPeriod.getEvents(), c)
+        const data = getData(selectedPeriod?.getEvents() || [], c)
         return (
           <div key={c.key} className={styles.chartContainer}>
             <div className={styles.title}>{c.title}</div>
             <div className={styles.subTitle}>{c.subTitle}</div>
             <ResponsiveContainer width='100%' height={450}>
-              <BarChart className={styles.chart} data={[...getData(selectedPeriod.getEvents(), c)]}>
+              <BarChart className={styles.chart} data={[...data]}>
                 <XAxis interval={0} dataKey='label' />
                 <YAxis
                   label={{
