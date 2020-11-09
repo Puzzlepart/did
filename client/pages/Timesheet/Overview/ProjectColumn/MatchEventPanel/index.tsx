@@ -1,7 +1,6 @@
 import { SearchProject, UserMessage } from 'components'
 import { getValue } from 'helpers'
-import { MessageBarButton } from 'office-ui-fabric'
-import { Panel } from 'office-ui-fabric'
+import { MessageBarButton,Panel } from 'office-ui-fabric'
 import { ITimesheetContext, TimesheetContext } from 'pages/Timesheet/context'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'

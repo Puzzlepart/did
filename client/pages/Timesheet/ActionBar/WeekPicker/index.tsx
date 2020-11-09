@@ -1,7 +1,4 @@
-import { Calendar, DateRangeType, DayOfWeek } from 'office-ui-fabric'
-import { Callout, DirectionalHint } from 'office-ui-fabric'
-import { FocusTrapZone } from 'office-ui-fabric'
-import { TextField } from 'office-ui-fabric'
+import { Calendar, DateRangeType, DayOfWeek, Callout, DirectionalHint,FocusTrapZone,TextField } from 'office-ui-fabric'
 import { TimesheetContext } from 'pages/Timesheet'
 import React, { useContext } from 'react'
 import { useState } from 'react'

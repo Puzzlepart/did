@@ -1,5 +1,5 @@
 import { TFunction } from 'i18next'
-import { IContextualMenuItem } from 'office-ui-fabric-react'
+import { IContextualMenuItem } from 'office-ui-fabric'
 import { ITimesheetContext } from '../context'
 import styles from './ActionBar.module.scss'
 

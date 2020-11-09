@@ -5,7 +5,19 @@ export { Checkbox } from 'office-ui-fabric-react/lib/Checkbox'
 export { ChoiceGroup, IChoiceGroupOption } from 'office-ui-fabric-react/lib/ChoiceGroup'
 export { CommandBar, ICommandBarProps } from 'office-ui-fabric-react/lib/CommandBar'
 export { IContextualMenuItem, IContextualMenuProps } from 'office-ui-fabric-react/lib/ContextualMenu'
-export { CheckboxVisibility, ConstrainMode, DetailsList, DetailsListLayoutMode, IColumn, IDetailsGroupDividerProps, IDetailsGroupRenderProps, IDetailsHeaderProps, IGroup, Selection, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
+export {
+  CheckboxVisibility,
+  ConstrainMode,
+  DetailsList,
+  DetailsListLayoutMode,
+  IColumn,
+  IDetailsGroupDividerProps,
+  IDetailsGroupRenderProps,
+  IDetailsHeaderProps,
+  IGroup,
+  Selection,
+  SelectionMode
+} from 'office-ui-fabric-react/lib/DetailsList'
 export { Dropdown, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown'
 export { FocusTrapZone } from 'office-ui-fabric-react/lib/FocusTrapZone'
 export { FocusZone, FocusZoneDirection } from 'office-ui-fabric-react/lib/FocusZone'
@@ -14,7 +26,13 @@ export { Icon } from 'office-ui-fabric-react/lib/Icon'
 export { Label } from 'office-ui-fabric-react/lib/Label'
 export { Link } from 'office-ui-fabric-react/lib/Link'
 export { List } from 'office-ui-fabric-react/lib/List'
-export { IMessageBarProps, IMessageBarStyleProps, IMessageBarStyles, MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
+export {
+  IMessageBarProps,
+  IMessageBarStyleProps,
+  IMessageBarStyles,
+  MessageBar,
+  MessageBarType
+} from 'office-ui-fabric-react/lib/MessageBar'
 export { IModalProps, Modal } from 'office-ui-fabric-react/lib/Modal'
 export { IPanelProps, Panel, PanelType } from 'office-ui-fabric-react/lib/Panel'
 export { IPivotItemProps, Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'

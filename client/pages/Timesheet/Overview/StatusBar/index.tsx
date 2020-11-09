@@ -1,7 +1,6 @@
 import { UserMessage } from 'components/UserMessage'
 import { IUserMessageProps } from 'components/UserMessage/types'
-import { MessageBarType } from 'office-ui-fabric'
-import { Shimmer } from 'office-ui-fabric'
+import { Shimmer,MessageBarType } from 'office-ui-fabric'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'

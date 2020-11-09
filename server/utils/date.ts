@@ -32,7 +32,7 @@ export const getDurationHours = (startDateTime: ConfigType, endDateTime: ConfigT
  *
  * @param {ConfigType} dateTime Date time
  */
-export const getPeriod = (dateTime: ConfigType) : string => {
+export const getPeriod = (dateTime: ConfigType): string => {
   const date = $dayjs(dateTime)
   return [date.week(), date.month() + 1, date.year()].join('_')
 }

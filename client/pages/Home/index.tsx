@@ -2,8 +2,7 @@ import React, { useContext } from 'react'
 import styles from './Home.module.scss'
 import { useTranslation } from 'react-i18next'
 import { AppContext } from 'AppContext'
-import { DefaultButton } from 'office-ui-fabric'
-import { Icon } from 'office-ui-fabric'
+import { Icon,DefaultButton } from 'office-ui-fabric'
 import ReactMarkdown from 'react-markdown/with-html'
 
 

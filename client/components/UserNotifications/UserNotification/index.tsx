@@ -1,9 +1,8 @@
-import { MessageBar } from 'office-ui-fabric'
-import { Link } from 'office-ui-fabric'
+import { Link, MessageBar } from 'office-ui-fabric'
 import * as React from 'react'
+import { useTranslation } from 'react-i18next'
 import { IUserNotificationProps } from './types'
 import styles from './UserNotificationMessage.module.scss'
-import { useTranslation } from 'react-i18next'
 
 export const UserNotificationActions = ({ model }: IUserNotificationProps) => {
     const { t } = useTranslation()

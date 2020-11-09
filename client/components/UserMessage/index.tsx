@@ -1,6 +1,5 @@
 
-import { IMessageBarStyleProps, IMessageBarStyles, MessageBar } from 'office-ui-fabric'
-import { IStyleFunctionOrObject } from 'office-ui-fabric'
+import { IStyleFunctionOrObject,IMessageBarStyleProps, IMessageBarStyles, MessageBar } from 'office-ui-fabric'
 import React from 'react'
 import ReactMarkdown from 'react-markdown/with-html'
 import { IUserMessageProps } from './types'

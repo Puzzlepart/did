@@ -1,7 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { EntityLabel } from 'components/EntityLabel'
-import { Icon } from 'office-ui-fabric'
-import { Label } from 'office-ui-fabric'
+import { Label,Icon } from 'office-ui-fabric'
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject } from 'types'

@@ -1,7 +1,4 @@
-import { CommandBar, ICommandBarProps } from 'office-ui-fabric'
-import { IDetailsHeaderProps } from 'office-ui-fabric'
-import { Sticky, StickyPositionType } from 'office-ui-fabric'
-import { IRenderFunction } from 'office-ui-fabric'
+import { Sticky, StickyPositionType, IRenderFunction, IDetailsHeaderProps, CommandBar, ICommandBarProps } from 'office-ui-fabric'
 import * as React from 'react'
 
 export interface IListHeaderProps {

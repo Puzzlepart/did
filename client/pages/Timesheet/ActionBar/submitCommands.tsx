@@ -1,5 +1,4 @@
-import { PrimaryButton } from 'office-ui-fabric'
-import { IContextualMenuItem, IContextualMenuProps } from 'office-ui-fabric'
+import { IContextualMenuItem, IContextualMenuProps,PrimaryButton } from 'office-ui-fabric'
 import * as React from 'react'
 import { first, omit } from 'underscore'
 import { Subscription } from 'types'

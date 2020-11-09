@@ -1,6 +1,5 @@
 import { AppContext } from 'AppContext'
-import { Callout, Target } from 'office-ui-fabric'
-import { Icon } from 'office-ui-fabric'
+import { Callout, Target,Icon } from 'office-ui-fabric'
 import React, { useContext, useState } from 'react'
 import { isMobile } from 'react-device-detect'
 import FadeIn from 'react-fade-in'

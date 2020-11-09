@@ -1,9 +1,8 @@
 import { ILabelColumnProps } from 'components/LabelColumn/types'
-import { IContextualMenuItem } from 'office-ui-fabric'
 import { TFunction } from 'i18next'
-import { IPivotItemProps } from 'office-ui-fabric'
-import DateUtils from 'utils/date'
+import { IContextualMenuItem, IPivotItemProps } from 'office-ui-fabric'
 import { TimeEntriesQuery } from 'types'
+import DateUtils from 'utils/date'
 
 /**
  * Get scopes

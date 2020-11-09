@@ -1,7 +1,6 @@
 import EventList from 'components/EventList'
 import { UserMessage } from 'components/UserMessage'
-import { MessageBarType } from 'office-ui-fabric'
-import { ProgressIndicator } from 'office-ui-fabric'
+import { ProgressIndicator,MessageBarType } from 'office-ui-fabric'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'

@@ -1,19 +1,16 @@
 import { useMutation } from '@apollo/client'
 import { EntityLabel } from 'components/EntityLabel'
-import { LabelObject } from 'types'
-import { DefaultButton, PrimaryButton } from 'office-ui-fabric'
-import { Label } from 'office-ui-fabric'
-import { Panel, PanelType } from 'office-ui-fabric'
-import { TextField } from 'office-ui-fabric'
+import { IconPicker } from 'components/IconPicker'
+import { DefaultButton, Label, Panel, PanelType, PrimaryButton, TextField } from 'office-ui-fabric'
 import React, { useState } from 'react'
 import SketchPicker from 'react-color/lib/components/sketch/Sketch'
 import { useTranslation } from 'react-i18next'
+import { LabelObject } from 'types'
 import { omit } from 'underscore'
 import validator from 'validator'
 import $addOrUpdateLabel from './addOrUpdateLabel.gql'
 import styles from './LabelForm.module.scss'
 import { ILabelFormProps } from './types'
-import { IconPicker } from 'components/IconPicker'
 
 export const LabelForm = (props: ILabelFormProps) => {
     const { t } = useTranslation()

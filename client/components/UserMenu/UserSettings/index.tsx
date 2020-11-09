@@ -1,6 +1,5 @@
 import { useMutation } from '@apollo/client'
 import { AppContext } from 'AppContext'
-import { Panel } from 'office-ui-fabric'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { UserSettingInput } from './UserSettingInput'
@@ -8,7 +7,7 @@ import styles from './UserSettings.module.scss'
 import { UserSettingsContext } from './UserSettingsContext'
 import { USER_SETTINGS } from './USER_SETTINGS'
 import $addOrUpdateUser from 'pages/Admin/Users/UserForm/addOrUpdateUser.gql'
-import { Icon } from 'office-ui-fabric'
+import { Icon,Panel } from 'office-ui-fabric'
 import { useId } from '@uifabric/react-hooks'
 
 export const UserSettings = (props: React.HTMLProps<HTMLDivElement>) => {
