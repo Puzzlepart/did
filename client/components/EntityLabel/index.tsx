@@ -23,8 +23,8 @@ export const EntityLabel = ({ size, label }: IEntityLabelProps) => {
 
   return (
     <div className={className.join(' ')} style={{ backgroundColor: label.color }} title={label.description}>
-      {label.icon && <Icon iconName={label.icon} style={{ marginRight: 4 }} />}
-      <span>{isBlank(label.name) ? t('admin.defaultLabelTitle') : label.name}</span>
+      {label.icon && <Icon iconName={label.icon} className={styles.icon} />}
+      <span className={styles.text}>{isBlank(label.name) ? t('admin.defaultLabelTitle') : label.name}</span>
     </div>
   )
 }
