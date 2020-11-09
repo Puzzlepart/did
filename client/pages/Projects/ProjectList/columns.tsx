@@ -23,7 +23,7 @@ export default (props: IProjectListProps, t: TFunction): IColumn[] =>
         return (
           <Icon
             title={t('projects.inactiveText')}
-            iconName="Warning"
+            iconName='Warning'
             styles={{ root: { fontSize: 16, color: '#ffbf00' } }}
           />
         )

@@ -77,7 +77,7 @@ export const ApiTokens = () => {
           disabled={loading || !!key || isBlank(name)}
         />
       </div>
-      {message && <UserMessage className={styles.message} {...message} iconName="AzureAPIManagement" />}
+      {message && <UserMessage className={styles.message} {...message} iconName='AzureAPIManagement' />}
       <TextField className={styles.field} value={key} multiline={true} disabled={true} />
       <List
         columns={[

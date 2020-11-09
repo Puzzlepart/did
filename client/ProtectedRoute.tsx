@@ -20,7 +20,7 @@ export const ProtectedRoute: React.FunctionComponent<IProtectedRouteProps> = ({
   const redirect = !user.hasPermission(permission)
   return (
     <Route exact={exact} path={path}>
-      {redirect ? <Redirect to="/" /> : children}
+      {redirect ? <Redirect to='/' /> : children}
     </Route>
   )
 }

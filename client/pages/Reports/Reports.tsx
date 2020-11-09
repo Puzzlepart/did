@@ -95,7 +95,7 @@ export const Reports = () => {
           <PivotItem key={query.key} itemKey={query.key} headerText={query.text} itemIcon={query.iconName}>
             <div className={styles.container}>
               {loading && (
-                <Spinner className={styles.spinner} labelPosition="right" label={t('reports.generatingReportLabel')} />
+                <Spinner className={styles.spinner} labelPosition='right' label={t('reports.generatingReportLabel')} />
               )}
               {!loading && !isEmpty(context.timeentries) && (
                 <List
@@ -127,8 +127,8 @@ export const Reports = () => {
             </div>
           </PivotItem>
         ))}
-        <PivotItem itemKey="default" headerButtonProps={{ disabled: true }}>
-          <UserMessage className={styles.container} iconName="ReportDocument" text={t('reports.selectReportText')} />
+        <PivotItem itemKey='default' headerButtonProps={{ disabled: true }}>
+          <UserMessage className={styles.container} iconName='ReportDocument' text={t('reports.selectReportText')} />
         </PivotItem>
       </Pivot>
     </div>

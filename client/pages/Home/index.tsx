@@ -13,12 +13,12 @@ export default (): React.ReactElement<HTMLDivElement> => {
       <div className={styles.logo}>did</div>
       <p className={styles.motto}>{t('common.motto')}</p>
       <div className={styles.error} hidden={!error.message}>
-        <Icon className={styles.icon} iconName="Sad" />
+        <Icon className={styles.icon} iconName='Sad' />
         <strong className={styles.title}>{error.name}</strong>
         <ReactMarkdown className={styles.text} source={error.message} escapeHtml={false} />
       </div>
       <div hidden={!!subscription || !!error?.message}>
-        <DefaultButton className={styles.signinbutton} href="/auth/signin" text={t('common.signInText')} />
+        <DefaultButton className={styles.signinbutton} href='/auth/signin' text={t('common.signInText')} />
       </div>
     </div>
   )

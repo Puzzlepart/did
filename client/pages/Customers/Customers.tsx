@@ -44,7 +44,7 @@ export const Customers: React.FunctionComponent = () => {
       selectedKey={params.view || 'search'}
       onLinkClick={onPivotClick}
       styles={{ itemContainer: { paddingTop: 10 } }}>
-      <PivotItem itemID="search" itemKey="search" headerText={t('common.search')} itemIcon="FabricFolderSearch">
+      <PivotItem itemID='search' itemKey='search' headerText={t('common.search')} itemIcon='FabricFolderSearch'>
         {error ? (
           <MessageBar messageBarType={MessageBarType.error}>{t('common.genericErrorText')}</MessageBar>
         ) : (
@@ -68,7 +68,7 @@ export const Customers: React.FunctionComponent = () => {
         )}
       </PivotItem>
       {user.hasPermission(PERMISSION.MANAGE_CUSTOMERS) && (
-        <PivotItem itemID="new" itemKey="new" headerText={t('customers.createNewText')} itemIcon="AddTo">
+        <PivotItem itemID='new' itemKey='new' headerText={t('customers.createNewText')} itemIcon='AddTo'>
           <CustomerForm />
         </PivotItem>
       )}

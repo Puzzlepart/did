@@ -40,7 +40,7 @@ function getSizing(
 export const titleColumn = (props: IEventListProps, name: string, fieldName: string = 'title'): IColumn =>
   col(fieldName, name, { ...getSizing(props, fieldName, 320, 400), isMultiline: true }, (event: EventObject) => (
     <div className={styles.titleColumn}>
-      <Link href={event.webLink} target="_blank" title={event.title}>
+      <Link href={event.webLink} target='_blank' title={event.title}>
         <span>{event.title}</span>
       </Link>
       {event.labels && (
@@ -70,7 +70,7 @@ export const timeColumn = (props: IEventListProps, name: string, fieldName: stri
           {startTime} - {endTime}
         </span>
         <MobileView renderWithFragment={true}>
-          <DurationDisplay displayFormat="({0})" duration={event.duration} style={{ marginLeft: 4 }} />
+          <DurationDisplay displayFormat='({0})' duration={event.duration} style={{ marginLeft: 4 }} />
         </MobileView>
       </>
     )

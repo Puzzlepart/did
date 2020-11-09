@@ -87,7 +87,7 @@ export const LabelForm = (props: ILabelFormProps) => {
       </div>
       <div className={styles.inputField}>
         <Label>{t('common.previewText')}</Label>
-        <EntityLabel label={model} size="medium" />
+        <EntityLabel label={model} size='medium' />
       </div>
       <PrimaryButton className={styles.saveBtn} text={t('common.save')} disabled={!isFormValid()} onClick={onSave} />
     </Panel>

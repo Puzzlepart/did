@@ -100,23 +100,23 @@ export const Timesheet: React.FunctionComponent = () => {
               })
             }>
             <PivotItem
-              itemKey="overview"
+              itemKey='overview'
               headerText={t('timesheet.overviewHeaderText')}
-              itemIcon="CalendarWeek"
+              itemIcon='CalendarWeek'
               headerButtonProps={{ disabled: !!context.error }}>
-              <Overview dayFormat="dddd DD" timeFormat="HH:mm" />
+              <Overview dayFormat='dddd DD' timeFormat='HH:mm' />
             </PivotItem>
             <PivotItem
-              itemKey="summary"
+              itemKey='summary'
               headerText={t('timesheet.summaryHeaderText')}
-              itemIcon="List"
+              itemIcon='List'
               headerButtonProps={{ disabled: !!context.error }}>
               <SummaryView />
             </PivotItem>
             <PivotItem
-              itemKey="allocation"
+              itemKey='allocation'
               headerText={t('timesheet.allocationHeaderText')}
-              itemIcon="ReportDocument"
+              itemIcon='ReportDocument'
               headerButtonProps={{ disabled: !!context.error }}>
               <AllocationView />
             </PivotItem>

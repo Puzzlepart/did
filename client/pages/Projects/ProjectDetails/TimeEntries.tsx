@@ -26,7 +26,7 @@ export const TimeEntries = () => {
               maxWidth: 150
             }
           ]}
-          dateFormat="MMM Do YYYY HH:mm"
+          dateFormat='MMM Do YYYY HH:mm'
           columnWidths={{ time: 250 }}
         />
       )}

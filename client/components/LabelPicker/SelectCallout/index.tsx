@@ -41,7 +41,7 @@ export const SelectCallout = (props: ISelectCalloutProps) => {
               />
               <div>
                 <div>
-                  <Icon iconName="CircleFill" style={{ color: lbl.color, fontSize: 10 }} />
+                  <Icon iconName='CircleFill' style={{ color: lbl.color, fontSize: 10 }} />
                   <span style={{ paddingLeft: 5 }}>{lbl.name}</span>
                 </div>
                 <div>{lbl.description}</div>

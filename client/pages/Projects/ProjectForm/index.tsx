@@ -105,7 +105,7 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
       <UserMessage
         hidden={editMode}
         className={styles.idPreviewText}
-        iconName="OutlookLogo"
+        iconName='OutlookLogo'
         text={isBlank(projectId) ? t('projects.idPreviewBlankText') : t('projects.idPreviewText', { projectId })}
       />
       <div className={styles.inputField} hidden={editMode}>

@@ -32,7 +32,7 @@ export const UserMenu = () => {
             <div className={`${styles.menuItem} ${styles.mail}`}>{user.mail}</div>
             <Divider />
             <div className={styles.menuItem}>
-              <Icon iconName="Home" className={styles.icon} />
+              <Icon iconName='Home' className={styles.icon} />
               <span>{subscription.name}</span>
             </div>
             <span hidden={isMobile}>
@@ -42,8 +42,8 @@ export const UserMenu = () => {
             <Divider />
             <UserSettings className={styles.menuItem} />
             <Divider />
-            <a href="/auth/signout" className={styles.menuItem}>
-              <Icon iconName="SignOut" className={styles.icon} />
+            <a href='/auth/signout' className={styles.menuItem}>
+              <Icon iconName='SignOut' className={styles.icon} />
               {t('common.signOutText')}
             </a>
           </FadeIn>

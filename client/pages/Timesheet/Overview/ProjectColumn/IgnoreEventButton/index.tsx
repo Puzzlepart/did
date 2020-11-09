@@ -18,7 +18,7 @@ export const IgnoreEventButton = ({ event }: IIgnoreEventButtonProps): JSX.Eleme
         <MessageBarButton text={t('timesheet.ignoreEventButtonLabel')} iconProps={{ iconName: 'Blocked2' }} />
       </BrowserView>
       <MobileView renderWithFragment={true}>
-        <Icon className={styles.icon} iconName="Blocked2" />
+        <Icon className={styles.icon} iconName='Blocked2' />
         <span className={styles.text}>{t('timesheet.ignoreEventButtonLabel')}</span>
       </MobileView>
     </span>

@@ -20,27 +20,27 @@ export const App: React.FunctionComponent<IAppContext> = (context: IAppContext) 
           <Navigation />
           <div className={styles.container}>
             <Switch>
-              <Route path="/timesheet" permission={PERMISSION.ACCESS_TIMESHEET}>
+              <Route path='/timesheet' permission={PERMISSION.ACCESS_TIMESHEET}>
                 {isMobile && <MobileHeader text={t('navigation.timesheet')} />}
                 <Timesheet />
               </Route>
-              <Route path="/customers" permission={PERMISSION.ACCESS_CUSTOMERS}>
+              <Route path='/customers' permission={PERMISSION.ACCESS_CUSTOMERS}>
                 {isMobile && <MobileHeader text={t('navigation.customers')} />}
                 <Customers />
               </Route>
-              <Route path="/projects" permission={PERMISSION.ACCESS_PROJECTS}>
+              <Route path='/projects' permission={PERMISSION.ACCESS_PROJECTS}>
                 {isMobile && <MobileHeader text={t('navigation.projects')} />}
                 <Projects />
               </Route>
-              <Route path="/reports" permission={PERMISSION.ACCESS_REPORTS}>
+              <Route path='/reports' permission={PERMISSION.ACCESS_REPORTS}>
                 {isMobile && <MobileHeader text={t('navigation.reports')} />}
                 <Reports />
               </Route>
-              <Route path="/admin" permission={PERMISSION.ACCESS_ADMIN}>
+              <Route path='/admin' permission={PERMISSION.ACCESS_ADMIN}>
                 {isMobile && <MobileHeader text={t('navigation.admin')} />}
                 <Admin />
               </Route>
-              <Route path="/">
+              <Route path='/'>
                 <Home />
               </Route>
             </Switch>

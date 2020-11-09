@@ -46,8 +46,8 @@ export const ExportHours: React.FunctionComponent = () => {
 
   return (
     <>
-      <a href="#" id={toggleId} onClick={togglePanel} className={styles.menuItem}>
-        <Icon iconName="CloudImportExport" className={styles.icon} />
+      <a href='#' id={toggleId} onClick={togglePanel} className={styles.menuItem}>
+        <Icon iconName='CloudImportExport' className={styles.icon} />
         <span>{t('common.exportMyHours')}</span>
       </a>
       <Panel headerText={t('common.exportMyHours')} isOpen={panelOpen} onDismiss={togglePanel} isLightDismiss={true}>

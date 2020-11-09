@@ -59,9 +59,9 @@ export const AllocationView = (
           <div key={c.key} className={styles.chartContainer}>
             <div className={styles.title}>{c.title}</div>
             <div className={styles.subTitle}>{c.subTitle}</div>
-            <ResponsiveContainer width="100%" height={450}>
+            <ResponsiveContainer width='100%' height={450}>
               <BarChart className={styles.chart} data={[...getData(selectedPeriod.getEvents(), c)]}>
-                <XAxis interval={0} dataKey="label" />
+                <XAxis interval={0} dataKey='label' />
                 <YAxis
                   label={{
                     value: t('common.hours').toString(),
@@ -71,8 +71,8 @@ export const AllocationView = (
                 />
                 <Tooltip content={({ payload }) => <CustomTooltip item={payload} chart={c} />} />
                 <Bar
-                  dataKey="value"
-                  animationEasing="ease-in-out"
+                  dataKey='value'
+                  animationEasing='ease-in-out'
                   animationDuration={1200}
                   name={t('common.hours').toString()}>
                   {data.map((entry) => (

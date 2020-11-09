@@ -58,7 +58,7 @@ export const Projects: React.FunctionComponent = () => {
         selectedKey={params.view || 'search'}
         onLinkClick={onPivotClick}
         styles={{ itemContainer: { paddingTop: 10 } }}>
-        <PivotItem itemID="search" itemKey="search" headerText={t('common.search')} itemIcon="FabricFolderSearch">
+        <PivotItem itemID='search' itemKey='search' headerText={t('common.search')} itemIcon='FabricFolderSearch'>
           <UserMessage hidden={!error} type={MessageBarType.error} text={t('common.genericErrorText')} />
           <div hidden={!!error}>
             <ProjectList
@@ -81,12 +81,12 @@ export const Projects: React.FunctionComponent = () => {
             {selected && <ProjectDetails project={selected} />}
           </div>
         </PivotItem>
-        <PivotItem itemID="my" itemKey="my" headerText={t('projects.myProjectsText')} itemIcon="FabricUserFolder">
+        <PivotItem itemID='my' itemKey='my' headerText={t('projects.myProjectsText')} itemIcon='FabricUserFolder'>
           <UserMessage hidden={!error} type={MessageBarType.error} text={t('common.genericErrorText')} />
           <div hidden={!!error}>
             <UserMessage
               containerStyle={{ marginBottom: 12 }}
-              iconName="OutlookLogoInverse"
+              iconName='OutlookLogoInverse'
               text={t('projects.outlookCategoryInfoText')}
             />
             <ProjectList
@@ -108,7 +108,7 @@ export const Projects: React.FunctionComponent = () => {
           </div>
         </PivotItem>
         {user.hasPermission(PERMISSION.MANAGE_PROJECTS) && (
-          <PivotItem itemID="new" itemKey="new" headerText={t('projects.createNewText')} itemIcon="AddTo">
+          <PivotItem itemID='new' itemKey='new' headerText={t('projects.createNewText')} itemIcon='AddTo'>
             <ProjectForm />
           </PivotItem>
         )}

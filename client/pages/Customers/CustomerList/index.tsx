@@ -19,7 +19,7 @@ export const columns = (t: TFunction): IColumn[] => [
       return (
         <Icon
           title={t('customers.inactiveText')}
-          iconName="Warning"
+          iconName='Warning'
           styles={{ root: { fontSize: 16, color: '#ffbf00' } }}
         />
       )

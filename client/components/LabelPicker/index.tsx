@@ -47,7 +47,7 @@ export const LabelPicker: React.FunctionComponent<ILabelPickerProps> = (props: I
       <Label className={styles.label}>
         <span>{props.label}</span>
         <span className={styles.toggleIcon} onClick={() => setShowCallout(!showCallout)} ref={toggleRef}>
-          <Icon iconName="Settings" />
+          <Icon iconName='Settings' />
         </span>
       </Label>
       {selectedLabels.map((lbl) => (

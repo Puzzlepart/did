@@ -53,21 +53,21 @@ export const ProjectDetails: React.FunctionComponent<IProjectDetailsProps> = (pr
           <UserMessage
             hidden={!project.inactive}
             text={t('projects.inactiveText')}
-            iconName="Warning"
+            iconName='Warning'
             type={MessageBarType.warning}
           />
         )}
         <div className={styles.description}>{project.description}</div>
         <div className={styles.labels}>
           {project.labels.map((label, idx) => (
-            <EntityLabel key={idx} label={label} size="medium" />
+            <EntityLabel key={idx} label={label} size='medium' />
           ))}
         </div>
         <UserMessage
           hidden={!project.outlookCategory}
           containerStyle={{ margin: '15px 0 15px 0' }}
           text={t('projects.categoryOutlookText')}
-          iconName="OutlookLogoInverse"
+          iconName='OutlookLogoInverse'
         />
         <Summary />
         <TimeEntries />

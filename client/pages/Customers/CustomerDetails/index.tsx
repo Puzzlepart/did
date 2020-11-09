@@ -46,7 +46,7 @@ export const CustomerDetails = (props: ICustomerDetailsProps) => {
         </div>
       </div>
       {props.customer.inactive && (
-        <UserMessage text={t('customers.inactiveText')} iconName="Warning" type={MessageBarType.warning} />
+        <UserMessage text={t('customers.inactiveText')} iconName='Warning' type={MessageBarType.warning} />
       )}
       <div className={styles.description}>{props.customer.description}</div>
       <div>

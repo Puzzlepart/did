@@ -59,8 +59,8 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
           placeholder={this.props.placeholder}
           disabled={this.props.disabled}
           onSearch={this.onSearch}
-          autoComplete="off"
-          autoCorrect="off"
+          autoComplete='off'
+          autoCorrect='off'
           onClear={this.props.onClear}
           onChange={(_event, searchText) => {
             searchText.trim() !== '' ? this.showSuggestionCallOut() : this.hideSuggestionCallOut()
@@ -72,7 +72,7 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
           <span hidden={!this.props.description} className={styles.description}>
             {this.props.description}
           </span>
-          <div hidden={!this.props.errorMessage} role="alert">
+          <div hidden={!this.props.errorMessage} role='alert'>
             <p className={styles.errorMessage}>
               <span>{this.props.errorMessage}</span>
             </p>
@@ -91,7 +91,7 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
     if (!this._containerElement.current) return null
     return (
       <Callout
-        id="SuggestionContainer"
+        id='SuggestionContainer'
         className={this.props.classNames.suggestionsCallout}
         gapSpace={2}
         alignTargetEdge={true}
@@ -111,7 +111,7 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
     return (
       <FocusZone direction={FocusZoneDirection.vertical}>
         <List
-          id="SearchList"
+          id='SearchList'
           tabIndex={0}
           items={this.suggestedTagsFiltered(this.props.items)}
           onRenderCell={this.onRenderCell}

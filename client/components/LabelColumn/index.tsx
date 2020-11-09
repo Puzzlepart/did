@@ -19,7 +19,7 @@ export const LabelColumn = (props: ILabelColumnProps) => {
           {!isEmpty(props.project.labels) && (
             <div className={styles.labels}>
               {props.project.labels.map((label: LabelObject, idx: number) => (
-                <EntityLabel key={idx} label={label} size="xsmall" />
+                <EntityLabel key={idx} label={label} size='xsmall' />
               ))}
             </div>
           )}
