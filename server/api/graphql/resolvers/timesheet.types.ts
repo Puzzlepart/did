@@ -97,10 +97,10 @@ export class TimesheetPeriodObject {
   month: string
 
   @Field()
-  startDateTime: string
+  startDate: string
 
   @Field()
-  endDateTime: string
+  endDate: string
 
   @Field({ nullable: true })
   isConfirmed: boolean
@@ -117,13 +117,13 @@ export class TimesheetPeriodObject {
   @Field({ nullable: true })
   forecastedHours?: number
 
-  constructor(startDateTime: string, endDateTime: string, locale: string) {
-    this.id = DateUtils.getPeriod(startDateTime)
-    this.startDateTime = startDateTime
-    this.endDateTime = endDateTime
+  constructor(startDate: string, endDate: string, locale: string) {
+    this.id = DateUtils.getPeriod(startDate)
+    this.startDate = startDate
+    this.endDate = endDate
     this.week = DateUtils.getWeek()
-    this.month = DateUtils.formatDate(startDateTime, 'MMMM', locale)
-    this.isForecast = DateUtils.isAfterToday(startDateTime)
+    this.month = DateUtils.formatDate(startDate, 'MMMM', locale)
+    this.isForecast = DateUtils.isAfterToday(startDate)
     this.isForecasted = false
     this.isConfirmed = false
   }
@@ -135,10 +135,10 @@ export class TimesheetPeriodInput {
   id: string
 
   @Field()
-  startDateTime: string
+  startDate: string
 
   @Field()
-  endDateTime: string
+  endDate: string
 
   @Field(() => [EventInput])
   matchedEvents: EventInput[]
@@ -150,10 +150,10 @@ export class TimesheetPeriodInput {
 @InputType()
 export class TimesheetQuery {
   @Field()
-  startDateTime: string
+  startDate: string
 
   @Field()
-  endDateTime: string
+  endDate: string
 }
 
 @InputType()

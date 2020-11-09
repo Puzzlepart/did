@@ -8,13 +8,13 @@ import { ITimesheetParams } from './types'
  * @category Timesheet
  */
 export class TimesheetScope {
-  constructor(public startDateTime?: DateObject, public endDateTime?: DateObject) {
-    this.startDateTime = DateUtils.createDateObject('2020-05-11')
-    this.endDateTime = this.startDateTime.endOfWeek
+  constructor(public startDate?: DateObject, public endDate?: DateObject) {
+    this.startDate = DateUtils.createDateObject('2020-05-11')
+    this.endDate = this.startDate.endOfWeek
   }
 
   /**
-   * TODO: Need to set @startDateTime and @endDateTime from @params
+   * TODO: Need to set @startDate and @endDate from @params
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   fromParams(params: ITimesheetParams): TimesheetScope {
@@ -24,10 +24,10 @@ export class TimesheetScope {
   /**
    * Get the from and to date for the scope as ISO strings
    */
-  public get iso() {
+  public get query() {
     return {
-      startDateTime: this.startDateTime.iso,
-      endDateTime: this.endDateTime.iso
+      startDate: this.startDate.format('YYYY-MM-DD'),
+      endDate: this.endDate.format('YYYY-MM-DD')
     }
   }
 
@@ -37,8 +37,8 @@ export class TimesheetScope {
    * @param {DateInput} start Start of scope
    */
   public set(start: DateInput): TimesheetScope {
-    this.startDateTime = DateUtils.createDateObject(start)
-    this.endDateTime = this.startDateTime.endOfWeek
+    this.startDate = DateUtils.createDateObject(start)
+    this.endDate = this.startDate.endOfWeek
     return this
   }
 
@@ -48,14 +48,14 @@ export class TimesheetScope {
    * @param {number} index Index
    */
   public getDay(index: number): DateObject {
-    return this.startDateTime.add(`${index}d`)
+    return this.startDate.add(`${index}d`)
   }
 
   /**
    * Is the scope the current week
    */
   public get isCurrentWeek(): boolean {
-    return this.startDateTime.isCurrentWeek
+    return this.startDate.isCurrentWeek
   }
 
   /**
@@ -64,6 +64,6 @@ export class TimesheetScope {
    * Used in WeekPicker
    */
   public get timespan(): string {
-    return DateUtils.getTimespanString(this.startDateTime, this.endDateTime)
+    return DateUtils.getTimespanString(this.startDate, this.endDate)
   }
 }

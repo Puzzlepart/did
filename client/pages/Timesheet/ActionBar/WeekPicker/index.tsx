@@ -52,7 +52,7 @@ export const WeekPicker = () => {
                             showWeekNumbers={true}
                             dateRangeType={DateRangeType.Week}
                             autoNavigateOnSelection={true}
-                            value={scope.startDateTime.jsDate} />
+                            value={scope.startDate.jsDate} />
                     </FocusTrapZone>
                 </Callout>
             )}

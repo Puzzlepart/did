@@ -11,21 +11,21 @@ import { TimesheetPeriodObject } from './timesheet.types'
 /**
  * Get periods between specified dates
  *
- * @param {string} startDateTime Start date time in ISO format
- * @param {string} endDateTime End date time in ISO format
+ * @param {string} startDate Start date
+ * @param {string} endDate End date 
  * @param {string} locale User locale
  */
-export function getPeriods(startDateTime: string, endDateTime: string, locale: string): TimesheetPeriodObject[] {
-  const startMonthIdx = DateUtils.getMonthIndex(startDateTime)
-  const endMonthIdx = DateUtils.getMonthIndex(endDateTime)
+export function getPeriods(startDate: string, endDate: string, locale: string): TimesheetPeriodObject[] {
+  const startMonthIdx = DateUtils.getMonthIndex(startDate)
+  const endMonthIdx = DateUtils.getMonthIndex(endDate)
   const isSplit = endMonthIdx !== startMonthIdx
 
   const periods: TimesheetPeriodObject[] = [
-    new TimesheetPeriodObject(startDateTime, isSplit ? DateUtils.endOfMonth(startDateTime) : endDateTime, locale)
+    new TimesheetPeriodObject(startDate, isSplit ? DateUtils.endOfMonth(startDate) : endDate, locale)
   ]
 
   if (isSplit) {
-    periods.push(new TimesheetPeriodObject(DateUtils.getPeriod(endDateTime), endDateTime, locale))
+    periods.push(new TimesheetPeriodObject(DateUtils.getPeriod(endDate), endDate, locale))
   }
 
   return periods

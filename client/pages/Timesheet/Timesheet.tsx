@@ -32,7 +32,7 @@ export const Timesheet: React.FunctionComponent = () => {
     })
     const query = useQuery($timesheet, {
         variables: {
-            query: state.scope.iso,
+            query: state.scope.query,
             options: {
                 dateFormat: 'dddd DD',
                 locale: app.user.language,

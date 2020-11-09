@@ -33,10 +33,11 @@ export class TimesheetResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized<IAuthOptions>({ userContext: true })
-  @Query(() => [TimesheetPeriodObject], { description: 'Get timesheet for startDateTime - endDateTime' })
+  @Query(() => [TimesheetPeriodObject], { description: 'Get timesheet for startDate - endDate' })
   async timesheet(@Arg('query') query: TimesheetQuery, @Arg('options') options: TimesheetOptions, @Ctx() ctx: Context) {
     try {
-      const periods = getPeriods(query.startDateTime, query.endDateTime, options.locale)
+      const periods = getPeriods(query.startDate, query.endDate, options.locale)
+
       // eslint-disable-next-line prefer-const
       let [projects, customers, timeentries, labels] = await Promise.all([
         this._azstorage.getProjects(),
@@ -44,8 +45,8 @@ export class TimesheetResolver {
         this._azstorage.getTimeEntries(
           {
             resourceId: ctx.userId,
-            startDateTime: query.startDateTime,
-            endDateTime: query.endDateTime
+            startDateTime: query.startDate,
+            endDateTime: query.endDate
           },
           { sortAsc: true }
         ),
@@ -72,7 +73,7 @@ export class TimesheetResolver {
           )
         } else {
           const eventMatching = new EventMatching(projects, customers, labels)
-          const events = await this._msgraph.getEvents(period.startDateTime, period.endDateTime)
+          const events = await this._msgraph.getEvents(period.startDate, period.endDate)
           period.events = eventMatching.matchEvents(events)
         }
         period.events = period.events.map((evt) => ({
@@ -106,7 +107,7 @@ export class TimesheetResolver {
       let hours = 0
       if (!isEmpty(period.matchedEvents)) {
         const [events, labels] = await Promise.all([
-          this._msgraph.getEvents(period.startDateTime, period.endDateTime),
+          this._msgraph.getEvents(period.startDate, period.endDate),
           this._azstorage.getLabels()
         ])
         const timeentries = period.matchedEvents.reduce((arr, me) => {

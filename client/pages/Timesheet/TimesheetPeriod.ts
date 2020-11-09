@@ -9,8 +9,8 @@ import { ITimesheetParams } from './types'
 
 export class TimesheetPeriod {
   public id: string
-  private readonly startDateTime: string
-  private readonly endDateTime: string
+  private readonly startDate: string
+  private readonly endDate: string
   public readonly week: number
   public readonly isConfirmed?: boolean
   public readonly isForecasted: boolean
@@ -24,6 +24,7 @@ export class TimesheetPeriod {
   private _uiMatchedEventsStorageKey: string
   private _uiIgnoredEventsStorageKey: string
   private _storageDefaultExpire: Date
+  
 
   /**
    * Initializes up a new period instance
@@ -188,8 +189,8 @@ export class TimesheetPeriod {
   public get data(): TimesheetPeriodInput {
     return {
       id: this.id,
-      startDateTime: this.startDateTime,
-      endDateTime: this.endDateTime,
+      startDate: this.startDate,
+      endDate: this.endDate,
       forecastedHours: this.forecastedHours,
       matchedEvents: this.matchedEvents
     }
@@ -202,9 +203,8 @@ export class TimesheetPeriod {
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public weekdays(dayFormat: string = 'dddd DD'): string[] {
-    return null
-    // if (!this._startDateTime) return []
-    // return DateUtils.getDays(this._startDateTime, this._endDateTime, dayFormat)
+     if (!this.startDate) return []
+     return DateUtils.getDays(this.startDate, this.endDate, dayFormat)
   }
 
   /**
@@ -237,6 +237,6 @@ export class TimesheetPeriod {
    * Period is in the past
    */
   public get isPast(): boolean {
-    return DateUtils.isBefore(this.endDateTime)
+    return DateUtils.isBefore(this.endDate)
   }
 }
