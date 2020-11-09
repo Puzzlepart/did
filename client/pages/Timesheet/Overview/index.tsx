@@ -20,19 +20,19 @@ export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
     if (isMobile) className.push(styles.mobile)
     return (
         <div 
-        key={`overview_${context.selectedPeriod.id}`}
+        key={`overview_${context.selectedPeriod?.id}`}
         className={className.join(' ')}>
             <StatusBar />
             {context.loading && <ProgressIndicator {...context.loading} />}
             <EventList
                 hidden={!!context.error}
                 enableShimmer={!!context.loading}
-                events={context.selectedPeriod.getEvents()}
+                events={context.selectedPeriod?.getEvents()}
                 showEmptyDays={true}
                 dateFormat={timeFormat}
                 groups={{
                     fieldName: 'date',
-                    groupNames: context.selectedPeriod.weekdays(dayFormat),
+                    groupNames: context.selectedPeriod?.weekdays(dayFormat),
                     totalFunc: (events: EventObject[]) => {
                         const duration = events.reduce((sum, i) => sum + i.duration, 0)
                         return ` (${DateUtils.getDurationString(duration, t)})`

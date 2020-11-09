@@ -7,7 +7,7 @@ export type TimesheetView = 'overview' | 'summary' | 'allocation'
 
 export interface ITimesheetState {
   periods: TimesheetPeriod[]
-  selectedPeriod: TimesheetPeriod
+  selectedPeriod?: TimesheetPeriod
   selectedView: TimesheetView
   scope: TimesheetScope
   loading?: IProgressIndicatorProps

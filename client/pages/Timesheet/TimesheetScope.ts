@@ -10,7 +10,7 @@ import { ITimesheetParams } from './types'
  */
 export class TimesheetScope {
   constructor(public startDate?: DateObject, public endDate?: DateObject) {
-    this.startDate = DateUtils.createDateObject('2020-05-11')
+    this.startDate = DateUtils.createDateObject()
     this.endDate = this.startDate.endOfWeek
   }
 
@@ -62,7 +62,7 @@ export class TimesheetScope {
   /**
    * Get timespan string for the scope
    *
-   * Used in WeekPicker
+   * Used in @WeekPicker
    */
   public get timespan(): string {
     return DateUtils.getTimespanString(this.startDate, this.endDate)

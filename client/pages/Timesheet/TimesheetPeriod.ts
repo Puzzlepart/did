@@ -3,9 +3,7 @@ import { dateAdd, IPnPClientStore, ITypedHash, PnPClientStorage } from '@pnp/com
 import { TFunction } from 'i18next'
 import { EventInput, EventObject, Project, TimesheetPeriodInput, TimesheetPeriodObject } from 'types'
 import { filter, omit } from 'underscore'
-import { isBlank } from 'underscore.string'
 import DateUtils from 'utils/date'
-import { ITimesheetParams } from './types'
 
 export class TimesheetPeriod {
   public id: string
@@ -25,7 +23,6 @@ export class TimesheetPeriod {
   private _uiIgnoredEventsStorageKey: string
   private _storageDefaultExpire: Date
   
-
   /**
    * Initializes up a new period instance
    *
@@ -37,16 +34,6 @@ export class TimesheetPeriod {
     this._uiIgnoredEventsStorageKey = `did_ui_ignored_events_${this.id}`
     this._uiMatchedEvents = this._localStorage.get(this._uiMatchedEventsStorageKey) || {}
     this._storageDefaultExpire = dateAdd(new Date(), 'month', 2)
-    return this
-  }
-
-  /**
-   * Create a new period instance from params
-   *
-   * @param {ITimesheetParams} params Params
-   */
-  fromParams(params: ITimesheetParams): TimesheetPeriod {
-    this.id = params.week ? [params.week, params.month, params.year].filter((p) => p).join('_') : '19_5_2020'
     return this
   }
 
@@ -224,13 +211,6 @@ export class TimesheetPeriod {
    */
   public get isComplete(): boolean {
     return this.unmatchedDuration === 0
-  }
-
-  /**
-   * Period data is loaded
-   */
-  public get isLoaded() {
-    return !isBlank(this.id)
   }
 
   /**

@@ -16,7 +16,7 @@ import $submitPeriod from './submitPeriod.gql'
 import { SummaryView } from './SummaryView'
 import $timesheet from './timesheet.gql'
 import styles from './Timesheet.module.scss'
-import { ITimesheetContext, ITimesheetParams, TimesheetContext, TimesheetPeriod, TimesheetScope, TimesheetView } from './types'
+import { ITimesheetContext, ITimesheetParams, TimesheetContext, TimesheetScope, TimesheetView } from './types'
 import $unsubmitPeriod from './unsubmitPeriod.gql'
 
 export const Timesheet: React.FunctionComponent = () => {
@@ -26,7 +26,6 @@ export const Timesheet: React.FunctionComponent = () => {
     const params = useParams<ITimesheetParams>()
     const [state, dispatch] = useReducer(reducer, {
         periods: [],
-        selectedPeriod: new TimesheetPeriod().fromParams(params),
         scope: new TimesheetScope().fromParams(params),
         selectedView: params.view || 'overview'
     })
@@ -45,7 +44,7 @@ export const Timesheet: React.FunctionComponent = () => {
     useEffect(() => dispatch({ type: 'DATA_UPDATED', payload: { query, t } }), [query])
 
     useEffect(() => {
-        history.push(`/timesheet/${state.selectedView}/${state.selectedPeriod.path}`)
+        history.push(`/timesheet/${state.selectedView}/${state?.selectedPeriod?.path}`)
     }, [state.selectedView, state.selectedPeriod])
 
     const [[submitPeriod], [unsubmitPeriod]] = [
@@ -90,7 +89,6 @@ export const Timesheet: React.FunctionComponent = () => {
                     <ActionBar />
                     <ErrorBar error={context.error} />
                     <Pivot
-                        hidden={!context.loading && !context.selectedPeriod.isLoaded}
                         defaultSelectedKey={state.selectedView}
                         onLinkClick={({ props }) => dispatch({
                             type: 'CHANGE_VIEW',

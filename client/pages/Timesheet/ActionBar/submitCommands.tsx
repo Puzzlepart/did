@@ -8,7 +8,7 @@ import styles from './ActionBar.module.scss'
 export default (context: ITimesheetContext, subscription: Subscription): IContextualMenuItem => ({
     key: 'SUBMIT_COMMANDS',
     onRender: () => {
-        if (!!context.error) return null
+        if (!!context.error || !context.selectedPeriod) return null
         const {
             isComplete,
             isForecast,
