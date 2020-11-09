@@ -97,7 +97,7 @@ class MSGraphService {
    *
    * @param {string} category Category
    */
-  async createOutlookCategory(category: string): Promise<any> {
+  async createOutlookCategory(category: string): Promise<string> {
     try {
       this.startMark('createOutlookCategory')
       // returns a pseudorandom color index from 0 to 24 based on category name
@@ -111,9 +111,9 @@ class MSGraphService {
         color: `preset${colorIdx}`
       })
       const client = await this._getClient()
-      const res = await client.api('/me/outlook/masterCategories').post(content)
+      const { id } = await client.api('/me/outlook/masterCategories').post(content)
       this.endMark('createOutlookCategory')
-      return res
+      return id
     } catch (error) {
       throw new Error(`MSGraphService.createOutlookCategory: ${error.message}`)
     }
