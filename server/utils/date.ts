@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import stringStripHtml from 'string-strip-html'
-import $dayjs, { ConfigType, PluginFunc } from 'dayjs'
+import $dayjs, { ConfigType, OpUnitType, PluginFunc } from 'dayjs'
 import weekOfYearPlugin from 'dayjs/plugin/weekOfYear'
 import isoWeekPlugin from 'dayjs/plugin/isoWeek'
 import 'dayjs/locale/en-gb'
@@ -100,6 +100,18 @@ export const startOfWeek = (week: number): string => {
  */
 export const endOfWeek = (week: number): string => {
   return $dayjs().week(week).endOf('isoWeek').toISOString()
+}
+
+/**
+ * Adds an amount of unit of time to the specified date
+ *
+ * @param {ConfigType} dateTime Date time
+ * @param {OpUnitType} unit
+ * @param {number} amount
+ * @param {string} template Template
+ */
+export const add = (dateTime: ConfigType, unit: OpUnitType, amount: number): string => {
+  return $dayjs(dateTime).add(amount, unit).toISOString()
 }
 
 /**
