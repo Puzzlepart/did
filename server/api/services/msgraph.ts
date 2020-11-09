@@ -135,8 +135,6 @@ class MSGraphService {
     }
   }
 
-
-  // TODO: STARTDATE SHOULD ALWAYS BE 00:00, ENDDATE SHOULD BE 23:59:59
   /**
    * Get events for the specified period using Microsoft Graph endpoint /me/calendar/calendarView
    * 
