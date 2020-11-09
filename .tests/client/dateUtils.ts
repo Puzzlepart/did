@@ -134,7 +134,6 @@ describe(header('DateUtils'), () => {
     })
   })
 
-
   describe('getDays', () => {
     it('should return days between 2020-02-17 -2020-02-17 in default format dddd DD', () => {
       const days = DateUtils.getDays('2020-02-17', '2020-02-23')

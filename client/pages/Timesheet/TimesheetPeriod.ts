@@ -22,7 +22,7 @@ export class TimesheetPeriod {
   private _uiMatchedEventsStorageKey: string
   private _uiIgnoredEventsStorageKey: string
   private _storageDefaultExpire: Date
-  
+
   /**
    * Initializes up a new period instance
    *
@@ -190,8 +190,8 @@ export class TimesheetPeriod {
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public weekdays(dayFormat: string = 'dddd DD'): string[] {
-     if (!this.startDate) return []
-     return DateUtils.getDays(this.startDate, this.endDate, dayFormat)
+    if (!this.startDate) return []
+    return DateUtils.getDays(this.startDate, this.endDate, dayFormat)
   }
 
   /**

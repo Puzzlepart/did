@@ -9,21 +9,17 @@ import submitCommands from './submitCommands'
 import { weekPickerCommand } from './WeekPicker'
 
 export const ActionBar = () => {
-    const { subscription } = useContext(AppContext)
-    const context = useContext(TimesheetContext)
-    const commandBarProps: ICommandBarProps = ({
-        styles: { root: { padding: 0 } },
-        items: [
-            ...navigateCommands(context),
-            weekPickerCommand(context),
-            ...selectPeriodCommands(context),
-        ],
-        farItems: [submitCommands(context, subscription)]
-    })
+  const { subscription } = useContext(AppContext)
+  const context = useContext(TimesheetContext)
+  const commandBarProps: ICommandBarProps = {
+    styles: { root: { padding: 0 } },
+    items: [...navigateCommands(context), weekPickerCommand(context), ...selectPeriodCommands(context)],
+    farItems: [submitCommands(context, subscription)]
+  }
 
-    return (
-        <div className={styles.root}>
-            <CommandBar {...commandBarProps} />
-        </div>
-    )
+  return (
+    <div className={styles.root}>
+      <CommandBar {...commandBarProps} />
+    </div>
+  )
 }

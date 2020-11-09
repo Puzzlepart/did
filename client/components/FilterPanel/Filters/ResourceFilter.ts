@@ -1,5 +1,5 @@
 import { getValue } from 'helpers'
-import {unique} from 'underscore'
+import { unique } from 'underscore'
 import { BaseFilter, IFilter } from './BaseFilter'
 
 export class ResourceFilter extends BaseFilter {

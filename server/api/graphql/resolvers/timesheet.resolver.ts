@@ -24,7 +24,7 @@ export class TimesheetResolver {
    * @param {AzStorageService} _azstorage AzStorageService
    * @param {MSGraphService} _msgraph MSGraphService
    */
-  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) { }
+  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) {}
   /**
    * Get timesheet
    *
@@ -115,7 +115,7 @@ export class TimesheetResolver {
           const entry = {
             ...pick(me, 'projectId', 'manualMatch'),
             event: find(events, (e) => e.id === me.id),
-            labels: filter(labels, (lbl) => contains(entry.event.categories, lbl.name)).map((lbl) => lbl.name)
+            labels: filter(labels, (lbl) => contains(event.categories, lbl.name)).map((lbl) => lbl.name)
           }
           return [...arr, entry]
         }, [])

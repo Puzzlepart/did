@@ -9,10 +9,10 @@ const KeyCodes = {
   left: 37 as const,
   up: 38 as const,
   right: 39 as const,
-  down: 40 as const,
+  down: 40 as const
 }
 
-type ISearchSuggestionsProps = IAutocompleteProps;
+type ISearchSuggestionsProps = IAutocompleteProps
 
 export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsProps, IAutocompleteState> {
   public static defaultProps: Partial<ISearchSuggestionsProps> = {
@@ -21,17 +21,17 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
       suggestionContainer: styles.suggestionContainer,
       suggestion: styles.suggestion,
       suggestionValue: styles.suggestionValue,
-      suggestionIcon: styles.suggestionIcon,
+      suggestionIcon: styles.suggestionIcon
     }
-  };
-  private _containerElement = React.createRef<HTMLDivElement>();
+  }
+  private _containerElement = React.createRef<HTMLDivElement>()
 
   constructor(props: ISearchSuggestionsProps) {
     super(props)
     this.state = {
       isSuggestionDisabled: false,
       searchText: props.defaultSelectedItem?.displayValue || '',
-      selectedItem: props.defaultSelectedItem,
+      selectedItem: props.defaultSelectedItem
     }
   }
 
@@ -40,7 +40,7 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
     this.setState({
       selectedItem: item,
       searchText: item.displayValue,
-      isSuggestionDisabled: false,
+      isSuggestionDisabled: false
     })
   }
 
@@ -59,20 +59,20 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
           placeholder={this.props.placeholder}
           disabled={this.props.disabled}
           onSearch={this.onSearch}
-          autoComplete='off'
-          autoCorrect='off'
+          autoComplete="off"
+          autoCorrect="off"
           onClear={this.props.onClear}
           onChange={(_event, searchText) => {
-            searchText.trim() !== ''
-              ? this.showSuggestionCallOut()
-              : this.hideSuggestionCallOut()
+            searchText.trim() !== '' ? this.showSuggestionCallOut() : this.hideSuggestionCallOut()
             this.setState({ searchText })
           }}
         />
         {this.renderSuggestions()}
         <span>
-          <span hidden={!this.props.description} className={styles.description}>{this.props.description}</span>
-          <div hidden={!this.props.errorMessage} role='alert'>
+          <span hidden={!this.props.description} className={styles.description}>
+            {this.props.description}
+          </span>
+          <div hidden={!this.props.errorMessage} role="alert">
             <p className={styles.errorMessage}>
               <span>{this.props.errorMessage}</span>
             </p>
@@ -91,7 +91,7 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
     if (!this._containerElement.current) return null
     return (
       <Callout
-        id='SuggestionContainer'
+        id="SuggestionContainer"
         className={this.props.classNames.suggestionsCallout}
         gapSpace={2}
         alignTargetEdge={true}
@@ -103,7 +103,7 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
         directionalHint={5}
         isBeakVisible={false}>
         {this.renderSuggestionList()}
-      </Callout >
+      </Callout>
     )
   }
 
@@ -111,10 +111,11 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
     return (
       <FocusZone direction={FocusZoneDirection.vertical}>
         <List
-          id='SearchList'
+          id="SearchList"
           tabIndex={0}
           items={this.suggestedTagsFiltered(this.props.items)}
-          onRenderCell={this.onRenderCell} />
+          onRenderCell={this.onRenderCell}
+        />
       </FocusZone>
     )
   }
@@ -122,9 +123,7 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
   private onRenderCell = (item: ISuggestionItem<any>) => {
     if (item.key === -1) {
       return (
-        <div
-          key={item.key}
-          data-is-focusable={true}>
+        <div key={item.key} data-is-focusable={true}>
           {item.displayValue}
         </div>
       )
@@ -136,10 +135,7 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
         data-is-focusable={true}
         className={this.props.classNames.suggestionContainer}
         onKeyDown={(ev: React.KeyboardEvent<HTMLElement>) => this.handleListItemKeyDown(ev, item)}>
-        <div
-          id={`s_${item.key}`}
-          className={this.props.classNames.suggestion}
-          onClick={() => this.onClick(item)}>
+        <div id={`s_${item.key}`} className={this.props.classNames.suggestion} onClick={() => this.onClick(item)}>
           <div className={this.props.classNames.suggestionIcon} hidden={!this.props.showIcons}>
             <Icon iconName={item.iconName} />
           </div>
@@ -158,14 +154,18 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
   }
 
   private suggestedTagsFiltered = (list: ISuggestionItem<T>[]) => {
-    let suggestedTags = list.filter(tag => tag.searchValue.toLowerCase().includes(this.state.searchText.toLowerCase()))
+    let suggestedTags = list.filter((tag) =>
+      tag.searchValue.toLowerCase().includes(this.state.searchText.toLowerCase())
+    )
     suggestedTags = suggestedTags.sort((a, b) => a.searchValue.localeCompare(b.searchValue))
     if (suggestedTags.length === 0) {
-      suggestedTags = [{
-        key: -1,
-        displayValue: this.props.noSuggestionsText,
-        searchValue: '',
-      }]
+      suggestedTags = [
+        {
+          key: -1,
+          displayValue: this.props.noSuggestionsText,
+          searchValue: ''
+        }
+      ]
     }
     return suggestedTags
   }
@@ -176,9 +176,10 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
       case KeyCodes.enter:
         this.onClick(item)
         break
-      default: return
+      default:
+        return
     }
-  };
+  }
 
   protected onKeyDown = (ev: React.KeyboardEvent<HTMLElement>): void => {
     const keyCode = ev.which
@@ -187,7 +188,8 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
         const el: any = window.document.querySelector('#SearchList')
         el.focus()
         break
-      default: return
+      default:
+        return
     }
-  };
+  }
 }

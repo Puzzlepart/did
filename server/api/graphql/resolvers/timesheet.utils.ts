@@ -12,7 +12,7 @@ import { TimesheetPeriodObject } from './timesheet.types'
  * Get periods between specified dates
  *
  * @param {string} startDate Start date
- * @param {string} endDate End date 
+ * @param {string} endDate End date
  * @param {string} locale User locale
  */
 export function getPeriods(startDate: string, endDate: string, locale: string): TimesheetPeriodObject[] {

@@ -11,9 +11,9 @@ export class DateObject {
 
   /**
    * Constructs a new DateObject from a date input
-   * 
+   *
    * Sending no value for date will use the current date
-   * 
+   *
    * @param {DateInput} date Dat input
    */
   constructor(date?: DateInput) {

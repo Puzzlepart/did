@@ -14,7 +14,7 @@ export class TimesheetScope {
    * TODO: Need to set @startDate and @endDate from @params
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  fromParams(params: ITimesheetParams): TimesheetScope {    
+  fromParams(params: ITimesheetParams): TimesheetScope {
     this.startDate = new DateObject()
     this.endDate = this.startDate.endOfWeek
     return this
@@ -24,7 +24,7 @@ export class TimesheetScope {
    * Get TimesheetQuery for the scope
    */
   public get query(): TimesheetQuery {
-    if(!this.startDate) return null
+    if (!this.startDate) return null
     return {
       startDate: this.startDate.format('YYYY-MM-DD'),
       endDate: this.endDate.format('YYYY-MM-DD')

@@ -6,29 +6,30 @@ import styles from './ErrorBar.module.scss'
 import { IErrorBarProps } from './types'
 
 export const ErrorBar = ({ error }: IErrorBarProps) => {
-    if (!error) return null
-    const { t } = useTranslation()
-    let messageProps: IUserMessageProps
-    const code = error.graphQLErrors[0].extensions.code
-    switch (code) {
-        case 'ResourceNotFound': {
-            messageProps = {
-                text: t('timesheet.exchangeLicenseErrorMessageText'),
-                    type: MessageBarType.error,
-                    iconName: 'SearchCalendar'
-            }
+  if (!error) return null
+  const { t } = useTranslation()
+  let messageProps: IUserMessageProps
+  const code = error.graphQLErrors[0].extensions.code
+  switch (code) {
+    case 'ResourceNotFound':
+      {
+        messageProps = {
+          text: t('timesheet.exchangeLicenseErrorMessageText'),
+          type: MessageBarType.error,
+          iconName: 'SearchCalendar'
         }
-            break
-        default: {
-            messageProps = {
-                text: t('timesheet.errorMessageText'),
-                type: MessageBarType.error,
-            }
-        }
+      }
+      break
+    default: {
+      messageProps = {
+        text: t('timesheet.errorMessageText'),
+        type: MessageBarType.error
+      }
     }
-    return (
-        <div className={styles.root}>
-            <UserMessage {...messageProps} />
-        </div>
-    )
+  }
+  return (
+    <div className={styles.root}>
+      <UserMessage {...messageProps} />
+    </div>
+  )
 }
