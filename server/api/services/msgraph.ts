@@ -88,7 +88,7 @@ class MSGraphService {
       this.endMark('getUsers')
       return value
     } catch (error) {
-      throw new Error()
+      throw new Error(`MSGraphService.getUsers: ${error.message}`)
     }
   }
 
@@ -115,7 +115,7 @@ class MSGraphService {
       this.endMark('createOutlookCategory')
       return res
     } catch (error) {
-      throw new Error()
+      throw new Error(`MSGraphService.createOutlookCategory: ${error.message}`)
     }
   }
 
@@ -131,7 +131,7 @@ class MSGraphService {
       this.endMark('getOutlookCategories')
       return value
     } catch (error) {
-      throw new Error()
+      throw new Error(`MSGraphService.getOutlookCategories: ${error.message}`)
     }
   }
 
@@ -169,7 +169,7 @@ class MSGraphService {
       this.endMark('getEvents')
       return events
     } catch (error) {
-      throw error
+      throw new Error(`MSGraphService.getEvents: ${error.message}`)
     }
   }
 }
