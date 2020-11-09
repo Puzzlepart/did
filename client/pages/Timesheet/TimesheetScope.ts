@@ -1,5 +1,6 @@
 import DateUtils, { DateInput } from 'utils/date'
 import { DateObject } from 'utils/date.dateObject'
+import { TimesheetQuery } from '../../../server/api/graphql/resolvers/types'
 import { ITimesheetParams } from './types'
 
 /**
@@ -22,9 +23,9 @@ export class TimesheetScope {
   }
 
   /**
-   * Get the from and to date for the scope as ISO strings
+   * Get TimesheetQuery for the scope
    */
-  public get query() {
+  public get query(): TimesheetQuery {
     return {
       startDate: this.startDate.format('YYYY-MM-DD'),
       endDate: this.endDate.format('YYYY-MM-DD')
