@@ -111,12 +111,13 @@ export class TimesheetResolver {
           this._azstorage.getLabels()
         ])
         const timeentries = period.matchedEvents.reduce((arr, me) => {
-          const entry: any = {
+          const event = find(events, (e) => e.id === me.id)
+          if (!event) return arr
+          const entry = {
             ...pick(me, 'projectId', 'manualMatch'),
-            event: find(events, (e) => e.id === me.id)
+            event: find(events, (e) => e.id === me.id),
+            labels: filter(labels, (lbl) => contains(entry.event.categories, lbl.name)).map((lbl) => lbl.name)
           }
-          if (!entry.event) return arr
-          entry.labels = filter(labels, (lbl) => contains(entry.event.categories, lbl.name)).map((lbl) => lbl.name)
           return [...arr, entry]
         }, [])
         hours = await this._azstorage.addTimeEntries(ctx.userId, period.id, timeentries, forecast)
