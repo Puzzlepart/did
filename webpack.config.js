@@ -3,7 +3,6 @@ require('dotenv').config()
 const tryRequire = require('try-require')
 const { resolve } = require('path')
 const { name, version } = require('./package.json')
-const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
@@ -97,12 +96,6 @@ const config = {
     plugins: [new TsconfigPathsPlugin({ configFile: './client/tsconfig.json' })]
   },
   plugins: [
-    new MomentLocalesPlugin({
-      localesToKeep: [
-        'en-gb',
-        'nb'
-      ]
-    }),
     new HtmlWebpackPlugin({
       template: HTML_PLUGIN_FILE_NAME,
       filename: resolve(__dirname, SERVER_DIST, 'views/index.hbs'),
