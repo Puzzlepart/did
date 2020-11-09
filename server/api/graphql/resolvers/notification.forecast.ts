@@ -4,7 +4,7 @@ import { getPeriods } from './timesheet.utils'
 import get from 'get-value'
 import { find } from 'underscore'
 import { Context } from '../context'
-import { AzStorageService } from 'server/api/services'
+import { AzStorageService } from '../../services'
 
 /**
  * Get notifications for missing forecasts
@@ -30,7 +30,7 @@ export default async function (ctx: Context, azstorage: AzStorageService, templa
   }
 
   const forecastedPeriods = (await azstorage.getForecastedPeriods({
-    resourceId: ctx.user.id,
+    resourceId: ctx.userId,
     year: utils.getYear()
   })) as any[]
 

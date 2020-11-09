@@ -1,20 +1,21 @@
 {
   "name": "did",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "private": true,
   "engines": {
     "node": ">=12.18.3",
     "npm": ">=6.5.0"
   },
   "scripts": {
-    "watch": "concurrently \"webpack\" \"npm run watch:server\" \"node tasks/open.js\" \"node tasks/localtunnel.js\"",
+    "watch": "concurrently \"npm run watch:client\" \"npm run watch:server\" \"node tasks/open.js\" \"node tasks/localtunnel.js\"",
     "start": "node ./server-dist/index.js",
     "watch:server": "nodemon",
+    "watch:client": "webpack",
     "package:client": "webpack",
     "build:server": "tsc --project tsconfig.json && copyfiles -u 1 \"server/public/**/*\" server-dist",
     "lint": "eslint --ext .ts,.tsx ./client ./server --color --fix && npm run prettier",
     "prettier": "prettier --config .prettierrc '**/*.ts' --write --loglevel silent",
-    "tests": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.ts'",
+    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.ts'",
     "create-env": "node tasks/create-dot-env.js"
   },
   "dependencies": {
@@ -72,7 +73,7 @@
     "express-session": "1.17.1",
     "get-value": "3.0.1",
     "graphql": "15.3.0",
-    "graphql-tag": "2.10.3",
+    "graphql-tag": "2.11.0",
     "hbs": "4.1.1",
     "helmet": "3.21.2",
     "html-webpack-plugin": "4.5.0",
@@ -89,6 +90,7 @@
     "office-ui-fabric-react": "7.106.3",
     "passport": "0.4.1",
     "passport-azure-ad": "4.2.1",
+    "randomcolor": "^0.6.2",
     "react": "16.13.1",
     "react-color": "2.19.3",
     "react-device-detect": "1.14.0",
@@ -123,6 +125,8 @@
     "with-default-props": "0.2.1"
   },
   "devDependencies": {
+    "@types/randomcolor": "^0.5.5",
+    "@types/set-value": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "4.6.1",
     "@typescript-eslint/parser": "4.6.1",
     "assert": "2.0.0",
@@ -134,9 +138,8 @@
     "mocha": "7.1.2",
     "open": "7.2.1",
     "prettier": "^2.1.1",
-    "rimraf": "3.0.2",
-    "ts-node-dev": "1.0.0",
     "webpack-build-notifier": "2.1.0",
+    "webpack-bundle-analyzer": "4.1.0",
     "webpack-livereload-plugin": "2.3.0"
   },
   "resolutions": {

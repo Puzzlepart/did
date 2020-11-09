@@ -7,130 +7,123 @@ import { GlobalHotKeys } from 'react-hotkeys'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { ActionBar } from './ActionBar'
-import { AllocationView } from './AllocationView'
+import AllocationView from './AllocationView'
 import { ErrorBar } from './ErrorBar'
-import { SUBMIT_PERIOD, TIMESHEET, UNSUBMIT_PERIOD } from './graphql'
 import hotkeys from './hotkeys'
 import { Overview } from './Overview'
 import reducer from './reducer'
+import $submitPeriod from './submitPeriod.gql'
 import { SummaryView } from './SummaryView'
+import $timesheet from './timesheet.gql'
 import styles from './Timesheet.module.scss'
 import { ITimesheetContext, ITimesheetParams, TimesheetContext, TimesheetPeriod, TimesheetScope, TimesheetView } from './types'
+import $unsubmitPeriod from './unsubmitPeriod.gql'
 
 export const Timesheet: React.FunctionComponent = () => {
-    try {
-        const app = useContext(AppContext)
-        const { t } = useTranslation()
-        const history = useHistory()
-        const params = useParams<ITimesheetParams>()
-        const [state, dispatch] = useReducer(reducer, {
-            periods: [],
-            selectedPeriod: new TimesheetPeriod().fromParams(params),
-            scope: new TimesheetScope().fromParams(params),
-            selectedView: params.view || 'overview'
-        })
-        const query = useQuery(TIMESHEET, {
-            variables: {
-                query: state.scope.iso,
-                options: {
-                    dateFormat: 'dddd DD',
-                    locale: app.user.preferredLanguage,
-                }
-            },
-            fetchPolicy: 'cache-and-network',
-            errorPolicy: 'all'
-        })
-
-        useEffect(() => dispatch({
-            type: 'DATA_UPDATED',
-            payload: { query, t }
-        }), [query])
-
-        useEffect(() => {
-            history.push(`/timesheet/${state.selectedView}/${state.selectedPeriod.path}`)
-        }, [state.selectedView, state.selectedPeriod])
-
-        const [[submitPeriod], [unsubmitPeriod]] = [
-            useMutation(SUBMIT_PERIOD),
-            useMutation(UNSUBMIT_PERIOD),
-        ]
-
-        const onSubmitPeriod = async (forecast: boolean) => {
-            dispatch({ type: 'SUBMITTING_PERIOD', payload: { t, forecast } })
-            const variables = {
-                period: state.selectedPeriod.data,
-                forecast
+    const app = useContext(AppContext)
+    const { t } = useTranslation()
+    const history = useHistory()
+    const params = useParams<ITimesheetParams>()
+    const [state, dispatch] = useReducer(reducer, {
+        periods: [],
+        selectedPeriod: new TimesheetPeriod().fromParams(params),
+        scope: new TimesheetScope().fromParams(params),
+        selectedView: params.view || 'overview'
+    })
+    const query = useQuery($timesheet, {
+        variables: {
+            query: state.scope.iso,
+            options: {
+                dateFormat: 'dddd DD',
+                locale: app.user.language,
             }
-            await submitPeriod({ variables })
-            query.refetch()
+        },
+        fetchPolicy: 'cache-and-network',
+        errorPolicy: 'all'
+    })
+
+    useEffect(() => dispatch({ type: 'DATA_UPDATED', payload: { query, t } }), [query])
+
+    useEffect(() => {
+        history.push(`/timesheet/${state.selectedView}/${state.selectedPeriod.path}`)
+    }, [state.selectedView, state.selectedPeriod])
+
+    const [[submitPeriod], [unsubmitPeriod]] = [
+        useMutation($submitPeriod),
+        useMutation($unsubmitPeriod),
+    ]
+
+    const onSubmitPeriod = async (forecast: boolean) => {
+        dispatch({ type: 'SUBMITTING_PERIOD', payload: { t, forecast } })
+        const variables = {
+            period: state.selectedPeriod.data,
+            forecast
         }
-
-        const onUnsubmitPeriod = (forecast: boolean) => {
-            dispatch({ type: 'UNSUBMITTING_PERIOD', payload: { t, forecast } })
-            const variables = {
-                period: state.selectedPeriod.data,
-                forecast
-            }
-            unsubmitPeriod({ variables }).then(() => query.refetch())
-        }
-
-        const context: ITimesheetContext = useMemo(() => ({
-            ...state,
-            refetch: query.refetch,
-            onSubmitPeriod,
-            onUnsubmitPeriod,
-            dispatch,
-            t,
-        }), [state])
-
-        const hotkeysProps = useMemo(() => hotkeys(context, t), [context])
-
-        return (
-            <GlobalHotKeys {...hotkeysProps}>
-                <TimesheetContext.Provider value={context}>
-                    <div className={styles.root}>
-                        <ActionBar />
-                        <ErrorBar error={context.error} />
-                        <Pivot
-                            hidden={!context.loading && !context.selectedPeriod.isLoaded}
-                            defaultSelectedKey={state.selectedView}
-                            onLinkClick={({ props }) => dispatch({
-                                type: 'CHANGE_VIEW',
-                                payload: props.itemKey as TimesheetView
-                            })}>
-                            <PivotItem
-                                itemKey='overview'
-                                headerText={t('timesheet.overviewHeaderText')}
-                                itemIcon='CalendarWeek'
-                                headerButtonProps={{ disabled: !!context.error }}>
-                                <Overview dayFormat='dddd DD' timeFormat='HH:mm' />
-                            </PivotItem>
-                            <PivotItem
-                                itemKey='summary'
-                                headerText={t('timesheet.summaryHeaderText')}
-                                itemIcon='List'
-                                headerButtonProps={{ disabled: !!context.error }}>
-                                <SummaryView />
-                            </PivotItem>
-                            <PivotItem
-                                itemKey='allocation'
-                                headerText={t('timesheet.allocationHeaderText')}
-                                itemIcon='ReportDocument'
-                                headerButtonProps={{ disabled: !!context.error }}>
-                                <AllocationView />
-                            </PivotItem>
-                        </Pivot>
-                    </div>
-                </TimesheetContext.Provider>
-                <HotkeyModal
-                    {...hotkeysProps}
-                    isOpen={state.showHotkeysModal}
-                    onDismiss={() => dispatch({ type: 'TOGGLE_SHORTCUTS' })} />
-            </GlobalHotKeys>
-        )
-    } catch (error) {
-        // eslint-disable-next-line no-console
-        console.log(error)
-        return null
+        await submitPeriod({ variables })
+        query.refetch()
     }
+
+    const onUnsubmitPeriod = (forecast: boolean) => {
+        dispatch({ type: 'UNSUBMITTING_PERIOD', payload: { t, forecast } })
+        const variables = {
+            period: state.selectedPeriod.data,
+            forecast
+        }
+        unsubmitPeriod({ variables }).then(() => query.refetch())
+    }
+
+    const context: ITimesheetContext = useMemo(() => ({
+        ...state,
+        refetch: query.refetch,
+        onSubmitPeriod,
+        onUnsubmitPeriod,
+        dispatch,
+        t,
+    }), [state])
+
+    const hotkeysProps = useMemo(() => hotkeys(context, t), [context])
+
+    return (
+        <GlobalHotKeys {...hotkeysProps}>
+            <TimesheetContext.Provider value={context}>
+                <div className={styles.root}>
+                    <ActionBar />
+                    <ErrorBar error={context.error} />
+                    <Pivot
+                        hidden={!context.loading && !context.selectedPeriod.isLoaded}
+                        defaultSelectedKey={state.selectedView}
+                        onLinkClick={({ props }) => dispatch({
+                            type: 'CHANGE_VIEW',
+                            payload: props.itemKey as TimesheetView
+                        })}>
+                        <PivotItem
+                            itemKey='overview'
+                            headerText={t('timesheet.overviewHeaderText')}
+                            itemIcon='CalendarWeek'
+                            headerButtonProps={{ disabled: !!context.error }}>
+                            <Overview dayFormat='dddd DD' timeFormat='HH:mm' />
+                        </PivotItem>
+                        <PivotItem
+                            itemKey='summary'
+                            headerText={t('timesheet.summaryHeaderText')}
+                            itemIcon='List'
+                            headerButtonProps={{ disabled: !!context.error }}>
+                            <SummaryView />
+                        </PivotItem>
+                        <PivotItem
+                            itemKey='allocation'
+                            headerText={t('timesheet.allocationHeaderText')}
+                            itemIcon='ReportDocument'
+                            headerButtonProps={{ disabled: !!context.error }}>
+                            <AllocationView />
+                        </PivotItem>
+                    </Pivot>
+                </div>
+            </TimesheetContext.Provider>
+            <HotkeyModal
+                {...hotkeysProps}
+                isOpen={state.showHotkeysModal}
+                onDismiss={() => dispatch({ type: 'TOGGLE_SHORTCUTS' })} />
+        </GlobalHotKeys>
+    )
 }

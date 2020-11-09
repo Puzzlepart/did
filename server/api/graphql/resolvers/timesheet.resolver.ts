@@ -69,7 +69,7 @@ export class TimesheetResolver {
         this._azstorage.getCustomers(),
         this._azstorage.getTimeEntries(
           {
-            resourceId: ctx.user.id,
+            resourceId: ctx.userId,
             startDateTime: query.startDateTime,
             endDateTime: query.endDateTime
           },
@@ -83,8 +83,8 @@ export class TimesheetResolver {
       for (let i = 0; i < periods.length; i++) {
         const period = periods[i]
         const [confirmed, forecasted] = await Promise.all([
-          this._azstorage.getConfirmedPeriod(ctx.user.id, period.id),
-          this._azstorage.getForecastedPeriod(ctx.user.id, period.id)
+          this._azstorage.getConfirmedPeriod(ctx.userId, period.id),
+          this._azstorage.getForecastedPeriod(ctx.userId, period.id)
         ])
         period.isForecasted = !!forecasted
         period.forecastedHours = period.isForecasted && forecasted.hours
@@ -146,12 +146,12 @@ export class TimesheetResolver {
           entry.labels = filter(labels, (lbl) => contains(entry.event.categories, lbl.name)).map((lbl) => lbl.name)
           return [...arr, entry]
         }, [])
-        hours = await this._azstorage.addTimeEntries(ctx.user.id, period.id, timeentries, forecast)
+        hours = await this._azstorage.addTimeEntries(ctx.userId, period.id, timeentries, forecast)
       }
       if (forecast) {
-        await this._azstorage.addForecastedPeriod(ctx.user.id, period.id, hours)
+        await this._azstorage.addForecastedPeriod(ctx.userId, period.id, hours)
       } else {
-        await this._azstorage.addConfirmedPeriod(ctx.user.id, period.id, hours, period.forecastedHours)
+        await this._azstorage.addConfirmedPeriod(ctx.userId, period.id, hours, period.forecastedHours)
       }
       return { success: true, error: null }
     } catch (error) {
@@ -181,13 +181,13 @@ export class TimesheetResolver {
     try {
       if (forecast) {
         await Promise.all([
-          this._azstorage.deleteTimeEntries(period.id, ctx.user.id, true),
-          this._azstorage.removeForecastedPeriod(period.id, ctx.user.id)
+          this._azstorage.deleteTimeEntries(period.id, ctx.userId, true),
+          this._azstorage.removeForecastedPeriod(period.id, ctx.userId)
         ])
       } else {
         await Promise.all([
-          this._azstorage.deleteTimeEntries(period.id, ctx.user.id, false),
-          this._azstorage.removeConfirmedPeriod(period.id, ctx.user.id)
+          this._azstorage.deleteTimeEntries(period.id, ctx.userId, false),
+          this._azstorage.removeConfirmedPeriod(period.id, ctx.userId)
         ])
       }
       return { success: true, error: null }

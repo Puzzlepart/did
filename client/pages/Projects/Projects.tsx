@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { AppContext } from 'AppContext'
 import { UserMessage } from 'components/UserMessage'
-import { manageProjects } from 'config/security/permissions'
+import { PERMISSION } from 'config/security/permissions'
 import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
@@ -12,19 +12,19 @@ import { useHistory, useParams } from 'react-router-dom'
 import { OutlookCategory, Project } from 'types'
 import { find } from 'underscore'
 import { IProjectsContext, ProjectsContext } from './context'
-import { GET_PROJECTS } from './graphql'
+import $projects from './projects.gql'
 import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
 import { IProjectsParams } from './types'
 
 export const Projects: React.FunctionComponent = () => {
     const { t } = useTranslation()
-    const { hasPermission } = useContext(AppContext)
+    const { user } = useContext(AppContext)
     const history = useHistory()
     const params = useParams<IProjectsParams>()
     const [selected, setSelected] = useState<Project>(null)
     const { loading, error, data, refetch } = useQuery<{ projects: Project[]; outlookCategories: OutlookCategory[] }>(
-        GET_PROJECTS,
+        $projects,
         {
             variables: { sortBy: 'name' },
             fetchPolicy: 'cache-and-network'
@@ -113,7 +113,7 @@ export const Projects: React.FunctionComponent = () => {
                         {selected && <ProjectDetails project={selected} />}
                     </div>
                 </PivotItem>
-                {hasPermission(manageProjects) && (
+                {user.hasPermission(PERMISSION.MANAGE_PROJECTS) && (
                     <PivotItem
                         itemID='new'
                         itemKey='new'

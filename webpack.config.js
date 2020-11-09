@@ -1,34 +1,39 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv').config()
 const tryRequire = require('try-require')
-const path = require('path')
-const src = path.resolve(__dirname, 'client/')
-const pkg = require('./package.json')
+const { resolve } = require('path')
+const { name, version } = require('./package.json')
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const LiveReloadPlugin = tryRequire('webpack-livereload-plugin')
 const WebpackBuildNotifierPlugin = tryRequire('webpack-build-notifier')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const debug = require('debug')('webpack')
 
-const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production'
-const serverDist = mode === 'production' ? 'server-dist' : 'server'
-const filename = '[name].[hash].js'
-const hbsTemplate = path.resolve(__dirname, 'server/views/index_template.hbs')
+/** CONSTANTS */
+const MODE = process.env.NODE_ENV === 'development' ? 'development' : 'production'
+const IS_DEVELOPMENT = MODE === 'development'
+const SERVER_DIST = IS_DEVELOPMENT ? 'server' : 'server-dist'
+const BUNDLE_FILE_NAME = `[name].${version}.[hash].js`
+const HTML_PLUGIN_FILE_NAME = resolve(__dirname, 'server/views/@template.hbs')
+const SRC_PATH = resolve(__dirname, 'client/')
 
-console.log('-----------------------------------')
-console.log('---------Compiling Did bundle------')
-console.log('-----------------------------------')
-console.log('MODE: %s', mode)
-console.log('SERVER DIST: %s', serverDist)
-console.log('FILENAME: %s', filename)
-console.log('HBS TEMPLATE: %s', hbsTemplate)
-console.log('-----------------------------------')
+/** PRINTING HEADER */
+debug('Compiling Did bundle')
+debug('[MODE]: %s', MODE.toUpperCase())
+debug('[SERVER DIST]: %s', SERVER_DIST.toUpperCase())
+debug('[FILENAME]: %s', BUNDLE_FILE_NAME)
+debug('[HBS TEMPLATE]: %s', HTML_PLUGIN_FILE_NAME)
 
-let config = {
-  mode,
-  entry: { [pkg.name]: './client' },
+/** CONFIG */
+const config = {
+  mode: MODE,
+  entry: { [name]: './client' },
   output: {
-    path: path.resolve(__dirname, serverDist, 'public/js'),
-    filename,
+    path: resolve(__dirname, SERVER_DIST, 'public/js'),
+    filename: BUNDLE_FILE_NAME,
     publicPath: '/js',
   },
   optimization: {
@@ -58,59 +63,71 @@ let config = {
         use: [
           { loader: 'style-loader' },
           { loader: 'css-modules-typescript-loader' },
-          { loader: 'css-loader', options: { modules: true } },
+          { loader: 'css-loader', options: { modules: { auto: true } } },
           { loader: 'sass-loader' },
         ],
+      },
+      {
+        test: /\.(graphql|gql)$/,
+        exclude: /node_modules/,
+        loader: 'graphql-tag/loader'
       },
     ],
   },
   resolve: {
     alias: {
-      common: path.resolve(src, 'common'),
-      types: path.resolve(src, 'types'),
-      utils: path.resolve(src, 'utils'),
-      helpers: path.resolve(src, 'helpers'),
-      pages: path.resolve(src, 'pages'),
-      components: path.resolve(src, 'components'),
-      i18n: path.resolve(src, 'i18n'),
-      config: path.resolve(src, 'config'),
-      AppContext: path.resolve(src, 'AppContext'),
+      common: resolve(SRC_PATH, 'common'),
+      types: resolve(SRC_PATH, 'types'),
+      utils: resolve(SRC_PATH, 'utils'),
+      helpers: resolve(SRC_PATH, 'helpers'),
+      pages: resolve(SRC_PATH, 'pages'),
+      components: resolve(SRC_PATH, 'components'),
+      i18n: resolve(SRC_PATH, 'i18n'),
+      config: resolve(SRC_PATH, 'config'),
+      AppContext: resolve(SRC_PATH, 'AppContext'),
     },
-    extensions: ['.ts', '.tsx', '.js', '.css', '.scss'],
+    extensions: [
+      '.ts',
+      '.tsx',
+      '.js',
+      '.css',
+      '.scss',
+      '.gql'
+    ],
     plugins: [new TsconfigPathsPlugin({ configFile: './client/tsconfig.json' })]
   },
   plugins: [
+    new MomentLocalesPlugin({
+      localesToKeep: [
+        'en-gb',
+        'nb'
+      ]
+    }),
     new HtmlWebpackPlugin({
-      template: hbsTemplate,
-      filename: path.resolve(__dirname, serverDist, 'views/index.hbs'),
+      template: HTML_PLUGIN_FILE_NAME,
+      filename: resolve(__dirname, SERVER_DIST, 'views/index.hbs'),
       inject: true,
     }),
   ],
 }
 
-switch (mode) {
-  case 'development':
-    {
-      config.stats = 'normal'
-      config.watch = true
-      config.watchOptions = { aggregateTimeout: 200 }
-      config.plugins.push(new LiveReloadPlugin())
-      config.plugins.push(
-        new WebpackBuildNotifierPlugin({
-          logo: path.join(__dirname, '/server/public/images/favicon/mstile-150x150.png'),
-          sound: process.env.WEBPACK_NOTIFICATIONS_SOUND,
-          suppressSuccess: process.env.WEBPACK_NOTIFICATIONS_SUPPRESSSUCCESS === 'true',
-          showDuration: process.env.WEBPACK_NOTIFICATIONS_SHOWDURATION === 'true',
-        })
-      )
-    }
-    break
-  case 'production':
-    {
-      config.stats = 'errors-only'
-      config.plugins.push(new CompressionPlugin())
-    }
-    break
+if (IS_DEVELOPMENT) {
+  config.stats = 'normal'
+  config.watch = true
+  config.watchOptions = { aggregateTimeout: 250 }
+  config.plugins.push(
+    new LiveReloadPlugin(),
+    new WebpackBuildNotifierPlugin({
+      logo: resolve(__dirname, '/server/public/images/favicon/mstile-150x150.png'),
+      sound: process.env.WEBPACK_NOTIFICATIONS_SOUND,
+      suppressSuccess: process.env.WEBPACK_NOTIFICATIONS_SUPPRESSSUCCESS === 'true',
+      showDuration: process.env.WEBPACK_NOTIFICATIONS_SHOWDURATION === 'true',
+    }),
+    new BundleAnalyzerPlugin({ analyzerMode: process.env.BUNDLE_ANALYZER_MODE })
+  )
+} else {
+  config.stats = 'errors-only'
+  config.plugins.push(new CompressionPlugin())
 }
 
 module.exports = config

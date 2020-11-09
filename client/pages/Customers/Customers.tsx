@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { AppContext } from 'AppContext'
-import { manageCustomers } from 'config/security/permissions'
+import { PERMISSION } from 'config/security/permissions'
 import { getValue } from 'helpers'
 import { Customer } from 'types'
 import { SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
@@ -13,18 +13,18 @@ import { useHistory, useParams } from 'react-router-dom'
 import { find } from 'underscore'
 import { CustomerDetails } from './CustomerDetails'
 import { CustomerList } from './CustomerList'
-import GET_CUSTOMERS from './GET_CUSTOMERS'
+import $customers from './customers.gql'
 import { ICustomersParams } from './types'
 
 
 export const Customers: React.FunctionComponent = () => {
     const { t } = useTranslation()
-    const { hasPermission } = useContext(AppContext)
+    const { user } = useContext(AppContext)
     const history = useHistory()
     const params = useParams<ICustomersParams>()
     const [selected, setSelected] = useState<Customer>(null)
     const { loading, error, data } = useQuery(
-        GET_CUSTOMERS,
+        $customers,
         {
             variables: { sortBy: 'name' },
             fetchPolicy: 'cache-first'
@@ -78,7 +78,7 @@ export const Customers: React.FunctionComponent = () => {
                         </>
                     )}
             </PivotItem>
-            {hasPermission(manageCustomers) && (
+            {user.hasPermission(PERMISSION.MANAGE_CUSTOMERS) && (
                 <PivotItem
                     itemID='new'
                     itemKey='new'

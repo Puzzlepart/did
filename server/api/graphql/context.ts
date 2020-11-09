@@ -3,21 +3,22 @@ import createDebug from 'debug'
 import get from 'get-value'
 import 'reflect-metadata'
 import { Container, ContainerInstance } from 'typedi'
-import { pick } from 'underscore'
 import { SubscriptionService } from '../services'
-import { Subscription, User } from './resolvers/types'
+import { Subscription } from './resolvers/types'
 const debug = createDebug('api/graphql/context')
 
 export class Context {
   /**
    * Request ID
+   *
+   * Generated per request using Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)
    */
   public requestId?: string
 
   /**
-   * User
+   *
    */
-  public user?: User
+  public userId?: string
 
   /**
    * Subscription
@@ -38,9 +39,9 @@ export class Context {
 /**
  * Create context
  *
- * @param {any} request Express request
+ * @param {Express.Request} request Express request
  */
-export const createContext = async (request: any): Promise<Context> => {
+export const createContext = async (request: Express.Request): Promise<Context> => {
   try {
     let isAuthorized = false
     let user = null
@@ -51,18 +52,15 @@ export const createContext = async (request: any): Promise<Context> => {
       isAuthorized = true
     } else {
       isAuthorized = !!get(request, 'user')
-      user = isAuthorized && {
-        ...pick(get(request, 'user', { default: {} }), 'id'),
-        subscription: pick(subscription, 'id', 'name')
-      }
+      user = isAuthorized && { id: request.user.id }
     }
     const requestId = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString()
     const container = Container.of(requestId)
     const context: Context = {
       container,
-      subscription: pick(subscription, 'id', 'name', 'connectionString'),
+      subscription,
       requestId,
-      user,
+      userId: user.id,
       isAuthorized
     }
     container.set({ id: 'CONTEXT', transient: true, value: context })

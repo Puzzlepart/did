@@ -5,7 +5,13 @@ import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import React from 'react'
 import { generateColumn as col } from 'utils/generateColumn'
 
-export const columns = (onEdit: (user: User) => void, t: TFunction): IColumn[] => ([
+/**
+ * Returns the columns for the User list
+ * 
+ * @param {void} onEdit On edit callback
+ * @param {TFunction} t Translate function
+ */
+export const UserColumns = (onEdit: (user: User) => void, t: TFunction): IColumn[] => ([
     col(
         'role.name',
         t('common.roleLabel'),

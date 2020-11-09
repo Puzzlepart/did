@@ -38,6 +38,7 @@ jobs:
         run: |
           npm run package:client
         env:
+          DEBUG: webpack*
           NODE_ENV: production
 
       - name: Build server
@@ -48,7 +49,7 @@ jobs:
 
       - name: Tests
         run: |
-          npm run tests
+          npm test
         env:
           NODE_ENV: production
           TESTS_AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.TESTS_AZURE_STORAGE_CONNECTION_STRING }}

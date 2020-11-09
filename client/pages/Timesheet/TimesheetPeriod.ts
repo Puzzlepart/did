@@ -226,18 +226,7 @@ export class TimesheetPeriod {
   }
 
   /**
-   * Period is locked when it's either confirmed or forecasted
-   *
-   * @returns true if the period is either confirmed (isConfirmed) or forecasted (isForecasted)
-   */
-  public get isLocked() {
-    return this.isConfirmed || this.isForecasted
-  }
-
-  /**
    * Period data is loaded
-   *
-   * @returns true if the period id is not blank
    */
   public get isLoaded() {
     return !isBlank(this.id)
@@ -245,8 +234,6 @@ export class TimesheetPeriod {
 
   /**
    * Period is in the past
-   *
-   * @returns true if the period end date time is before today
    */
   public get isPast(): boolean {
     // TODO: Use date util

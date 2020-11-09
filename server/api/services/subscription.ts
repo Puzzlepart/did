@@ -24,11 +24,29 @@ class SubscriptionService {
   async getSubscription(subscriptionId: string) {
     try {
       const query = this.tableUtil.createAzQuery(1).where('RowKey eq ?', subscriptionId)
-      const { entries } = await this.tableUtil.queryAzTable('Subscriptions', query, { RowKey: 'id' })
+      const { entries } = await this.tableUtil.queryAzTable('Subscriptions', query, {
+        columnMap: { RowKey: 'id' }
+      })
       return first(entries)
     } catch (error) {
       return null
     }
+  }
+
+  /**
+   * Update subscription
+   *
+   * @param {string} subscriptionId Subscription ID
+   * @param {T} settings Settings
+   */
+  async updateSubscription<T = any>(
+    subscriptionId: string,
+    settings: T
+  ): Promise<azurestorage.TableService.EntityMetadata> {
+    const entityDescriptor = this.tableUtil.convertToAzEntity(subscriptionId, { settings }, 'Default', {
+      typeMap: { settings: 'json' }
+    })
+    return await this.tableUtil.updateAzEntity('Subscriptions', entityDescriptor, true)
   }
 
   /**
@@ -39,7 +57,11 @@ class SubscriptionService {
   async findSubscriptionWithToken(token: string) {
     try {
       const query = this.tableUtil.createAzQuery(1).where('Token eq ?', token)
-      const { entries } = await this.tableUtil.queryAzTable('ApiTokens', query, { PartitionKey: 'subscriptionId' })
+      const { entries } = await this.tableUtil.queryAzTable('ApiTokens', query, {
+        columnMap: {
+          PartitionKey: 'subscriptionId'
+        }
+      })
       const { subscriptionId } = first(entries)
       return this.getSubscription(subscriptionId)
     } catch (error) {
@@ -96,8 +118,10 @@ class SubscriptionService {
     try {
       const query = this.tableUtil.createAzQuery(100).where('PartitionKey eq ?', subscriptionId)
       const { entries } = await this.tableUtil.queryAzTable('ApiTokens', query, {
-        RowKey: 'name',
-        Timestamp: 'created'
+        columnMap: {
+          RowKey: 'name',
+          Timestamp: 'created'
+        }
       })
       return entries
     } catch (error) {

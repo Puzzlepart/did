@@ -1,12 +1,13 @@
 /* eslint-disable max-classes-per-file */
-import 'reflect-metadata'
 import arraySort from 'array-sort'
 import { createTableService } from 'azure-storage'
+import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import { omit, pick } from 'underscore'
 import { getDurationHours } from '../../utils/date'
-import AzTableUtilities, { toArray } from '../../utils/table'
+import AzTableUtilities from '../../utils/table'
 import { Context } from '../graphql/context'
+import { Role } from '../graphql/resolvers/types'
 
 export class AzStorageServiceTables {
   constructor(
@@ -42,7 +43,11 @@ class AzStorageService {
    */
   async getLabels() {
     const query = this.tableUtil.createAzQuery(1000)
-    const { entries } = await this.tableUtil.queryAzTable(this.tables.labels, query, { RowKey: 'name' })
+    const { entries } = await this.tableUtil.queryAzTable(this.tables.labels, query, {
+      columnMap: {
+        RowKey: 'name'
+      }
+    })
     return entries
   }
 
@@ -90,7 +95,9 @@ class AzStorageService {
   async getCustomers(options: { sortBy?: string } = {}) {
     const query = this.tableUtil.createAzQuery(1000)
     let { entries } = await this.tableUtil.queryAzTable(this.tables.customers, query, {
-      RowKey: 'key'
+      columnMap: {
+        RowKey: 'key'
+      }
     })
     if (options.sortBy) entries = arraySort(entries, options.sortBy)
     return entries
@@ -149,7 +156,7 @@ class AzStorageService {
         PartitionKey: 'customerKey'
       }
     }
-    let { entries } = await this.tableUtil.queryAzTable(this.tables.projects, query, columnMap)
+    let { entries } = await this.tableUtil.queryAzTable(this.tables.projects, query, { columnMap })
     if (options.sortBy) entries = arraySort(entries, options.sortBy)
     return entries
   }
@@ -187,7 +194,9 @@ class AzStorageService {
   async getUsers(): Promise<any[]> {
     const query = this.tableUtil.createAzQuery(1000)
     const { entries } = await this.tableUtil.queryAzTable(this.tables.users, query, {
-      RowKey: 'id'
+      columnMap: {
+        RowKey: 'id'
+      }
     })
     return arraySort(entries, 'displayName')
   }
@@ -199,8 +208,9 @@ class AzStorageService {
    */
   async getUser(userId: string): Promise<Express.User> {
     try {
-      const entry = await this.tableUtil.retrieveAzEntity(this.tables.users, 'Default', userId)
-      return this.tableUtil.parseAzEntity<Express.User>(entry, { RowKey: 'id' })
+      return await this.tableUtil.retrieveAzEntity<Express.User>(this.tables.users, userId, {
+        columnMap: { RowKey: 'id' }
+      })
     } catch (error) {
       return null
     }
@@ -221,11 +231,11 @@ class AzStorageService {
   }
 
   /**
-   * Bulk add users to table storage
+   * Bulk imports users to table storage
    *
-   * @param {any[]} users Users to add
+   * @param {any[]} users Users to import
    */
-  async bulkAddUsers(users: any[]) {
+  async bulkImport(users: any[]) {
     const entities = users.map((user) => {
       const entity = this.tableUtil.convertToAzEntity(user.id, {
         ...omit(user, 'id'),
@@ -255,8 +265,8 @@ class AzStorageService {
       ['MonthNumber', queryValues.startMonthIndex, q.int, q.greaterThanOrEqual],
       ['MonthNumber', queryValues.endMonthIndex, q.int, q.lessThanOrEqual],
       ['Year', queryValues.year, q.int, q.equal],
-      ['StartDateTime', this.tableUtil.convertDate(queryValues.startDateTime), q.date, q.greaterThan],
-      ['EndDateTime', this.tableUtil.convertDate(queryValues.endDateTime), q.date, q.lessThan]
+      ['StartDateTime', this.tableUtil.convertToAzDate(queryValues.startDateTime), q.date, q.greaterThan],
+      ['EndDateTime', this.tableUtil.convertToAzDate(queryValues.endDateTime), q.date, q.lessThan]
     ]
     const query = this.tableUtil.createAzQuery(1000, filter)
     const tableName = options.forecast ? this.tables.forecastedTimeEntries : this.tables.timeEntries
@@ -394,8 +404,7 @@ class AzStorageService {
    */
   async getConfirmedPeriod(resourceId: string, periodId: string) {
     try {
-      const entry = await this.tableUtil.retrieveAzEntity(this.tables.confirmedPeriods, resourceId, periodId)
-      return this.tableUtil.parseAzEntity(entry)
+      return await this.tableUtil.retrieveAzEntity(this.tables.confirmedPeriods, periodId, {}, resourceId)
     } catch (error) {
       return null
     }
@@ -409,8 +418,7 @@ class AzStorageService {
    */
   async getForecastedPeriod(resourceId: string, periodId: string) {
     try {
-      const entry = await this.tableUtil.retrieveAzEntity(this.tables.forecastedPeriods, resourceId, periodId)
-      return this.tableUtil.parseAzEntity(entry)
+      return await this.tableUtil.retrieveAzEntity(this.tables.forecastedPeriods, periodId, {}, resourceId)
     } catch (error) {
       return null
     }
@@ -518,14 +526,31 @@ class AzStorageService {
   async getRoles() {
     try {
       const query = this.tableUtil.createAzQuery(1000)
-      let { entries } = await this.tableUtil.queryAzTable(this.tables.roles, query, {
-        RowKey: 'name'
+      const { entries } = await this.tableUtil.queryAzTable<Role>(this.tables.roles, query, {
+        columnMap: {
+          RowKey: 'name'
+        },
+        typeMap: {
+          Permissions: 'Custom.ArrayPipe'
+        }
       })
-      entries = entries.map((entry) => ({
-        ...entry,
-        permissions: toArray(entry.permissions, '|')
-      }))
       return entries
+    } catch (error) {
+      return []
+    }
+  }
+
+  /**
+   * Get role by name from table storage
+   *
+   * @param {string} name The role name
+   */
+  async getRoleByName(name: string) {
+    try {
+      return await this.tableUtil.retrieveAzEntity<Role>(this.tables.roles, name, {
+        columnMap: { RowKey: 'name' },
+        typeMap: { Permissions: 'Custom.ArrayPipe' }
+      })
     } catch (error) {
       return []
     }
@@ -538,10 +563,17 @@ class AzStorageService {
    * @param {boolean} update Update the existing role
    */
   async addOrUpdateRole(role: any, update: boolean) {
-    const entity = this.tableUtil.convertToAzEntity(role.name, {
-      permissions: role.permissions.join('|'),
-      icon: role.icon
-    })
+    const entity = this.tableUtil.convertToAzEntity(
+      role.name,
+      {
+        permissions: role.permissions.join('|'),
+        icon: role.icon
+      },
+      'Default',
+      {
+        typeMap: {}
+      }
+    )
     let result
     if (update) result = await this.tableUtil.updateAzEntity(this.tables.roles, entity, true)
     else result = await this.tableUtil.addAzEntity(this.tables.roles, entity)

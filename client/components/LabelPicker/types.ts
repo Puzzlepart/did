@@ -1,4 +1,3 @@
-import gql from 'graphql-tag'
 import { LabelObject } from 'types'
 
 export interface ILabelPickerProps {
@@ -8,14 +7,3 @@ export interface ILabelPickerProps {
   defaultSelectedKeys?: string[]
   onChange: (labels: LabelObject[]) => void
 }
-
-export const GET_LABELS = gql`
-  query {
-    labels {
-      name
-      description
-      color
-      icon
-    }
-  }
-`

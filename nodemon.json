@@ -3,5 +3,6 @@
   "watch": ["server"],
   "ext": "ts,json",
   "exec": "ts-node ./server/index.ts -T",
-  "delay": 1000
+  "delay": 1000,
+  "colours": true
 }

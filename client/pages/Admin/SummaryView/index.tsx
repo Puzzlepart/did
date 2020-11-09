@@ -8,12 +8,12 @@ import { useTranslation } from 'react-i18next'
 import { first, isEmpty } from 'underscore'
 import DateUtils from 'utils/date'
 import { commandBar } from './commandBar'
-import { createColumns, createRows, createPeriods } from './utils'
-import styles from './SummaryView.module.scss'
-import { reducer } from './reducer'
-import TIME_ENTRIES from './TIME_ENTRIES'
-import { getScopes, getViewTypes, ISummaryViewProps, ISummaryViewScope } from './types'
 import { ISummaryViewContext } from './context'
+import { reducer } from './reducer'
+import styles from './SummaryView.module.scss'
+import $timeentries from './timeentries.gql'
+import { getScopes, getViewTypes, ISummaryViewProps, ISummaryViewScope } from './types'
+import { createColumns, createPeriods, createRows } from './utils'
 
 export const SummaryView = (props: ISummaryViewProps): JSX.Element => {
     const { t } = useTranslation()
@@ -27,7 +27,7 @@ export const SummaryView = (props: ISummaryViewProps): JSX.Element => {
         type: first(types),
         scope: first(scopes),
     })
-    const { data, loading } = useQuery(TIME_ENTRIES, {
+    const { data, loading } = useQuery($timeentries, {
         fetchPolicy: 'cache-first',
         variables: {
             query: {
@@ -66,7 +66,7 @@ export const SummaryView = (props: ISummaryViewProps): JSX.Element => {
                                     <div className={styles.container}>
                                         <List
                                             hidden={!loading && isEmpty(context.rows)}
-                                            enableShimmer={loading}
+                                            enableShimmer={loading}                       
                                             columns={columns}
                                             items={context.rows}
                                             commandBar={commandBar(context)} />

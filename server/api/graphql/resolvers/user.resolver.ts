@@ -30,11 +30,12 @@ export class UserResolver {
   @Query(() => User, { description: 'Get the currently logged in user' })
   async currentUser(@Ctx() ctx: Context) {
     try {
-      const [user, roles] = await Promise.all([this._azstorage.getUser(ctx.user.id), this._azstorage.getRoles()])
+      const user = await this._azstorage.getUser(ctx.userId)
+      const role = await this._azstorage.getRoleByName(user.role)
       return {
-        ...ctx.user,
         ...user,
-        role: find(roles, (role) => role.name === user.role)
+        subscription: pick(ctx.subscription, 'id', 'name'),
+        role
       }
     } catch (error) {
       return null
@@ -92,15 +93,15 @@ export class UserResolver {
   }
 
   /**
-   * Bulk add users
+   * Bulk import users
    *
    * @param {UserInput[]} users Users
    */
   @Authorized<IAuthOptions>({ userContext: true })
-  @Mutation(() => BaseResult, { description: 'Bulk add users' })
-  async bulkAddUsers(@Arg('users', () => [UserInput]) users: UserInput[]): Promise<BaseResult> {
+  @Mutation(() => BaseResult, { description: 'Bulk import users' })
+  async bulkImport(@Arg('users', () => [UserInput]) users: UserInput[]): Promise<BaseResult> {
     try {
-      await this._azstorage.bulkAddUsers(users)
+      await this._azstorage.bulkImport(users)
       return { success: true, error: null }
     } catch (error) {
       return {

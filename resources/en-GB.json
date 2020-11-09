@@ -9,8 +9,6 @@
     "overviewHeaderText": "Overview",
     "summaryHeaderText": "Summary",
     "allocationHeaderText": "Allocation",
-    "projectChartTitle": "Allocation per project",
-    "customerChartTitle": "Allocation per customer",
     "confirmHoursText": "Confirm hours",
     "unconfirmHoursText": "Unconfirm hours",
     "goToCurrentWeek": "Go to current week",
@@ -48,7 +46,14 @@
     "confirmHoursSecondaryText": "Confirm the current week",
     "forecastHoursSecondaryText": "Create a forecast for the week",
     "unconfirmHoursSecondaryText": "Unconfirm current week",
-    "unforecastHoursSecondaryText": "Remove forecast for the week"
+    "unforecastHoursSecondaryText": "Remove forecast for the week",
+    "allocation": {
+      "customerChartTitle": "Customers",
+      "projectChartTitle": "Projects",
+      "noDataText": "No data to show for the selected period.",
+      "customerChartDescription": "Shows allocation per customer for the period",
+      "projectChartDescription": "Shows allocation per project for the period"
+    }
   },
   "projects": {
     "inactiveText": "This project has been marked as inactive.",
@@ -112,9 +117,16 @@
     "tokenGeneratedText": "Your key has been generated and will only be visible for 10 seconds. You can only see it once. Take good care of it!",
     "tokenErrorText": "An error occurred generating your key. Please try again later.",
     "tokenDeletedText": "API key **{{name}}** was succesfully deleted.",
-    "summaryLoadingText": "Loading time entries and creating summary...",
     "bulkImportUsersLabel": "Bulk import",
-    "bulkImportingUsersLabel": "Importing {{count}} users. Please wait.."
+    "bulkImportingUsersLabel": "Importing {{count}} users. Please wait..",
+    "subscriptionSettingsUpdateSuccess": "Subscription settings successfully updated.",
+    "forecasting": "Forecasting",
+    "forecastEnabledLabel": "Forecasting enabled",
+    "forecastEnabledDescription": "Enable/disable forecasting.",
+    "forecastNotificationsDescription": "How many weeks ahead should users forecast.",
+    "forecastNotificationsLabel": "Notifications",
+    "subscriptionSettings": "Subscription",
+    "summaryRangeValueFormat": "Showing {{value}} months"
   },
   "reports": {
     "generatingReportLabel": "Generating report. To give you the freshest results, we're generating a report from the latest data...",
@@ -253,7 +265,9 @@
     "exportTypeLastMonth": "Last month ({{monthName}})",
     "exportTypeCurrentMonth": "Current month ({{monthName}})",
     "exportTypeCurrentYear": "This year ({{year}})",
-    "subscription": "Subscription"
+    "subscription": "Subscription",
+    "nameLabel": "Name",
+    "descriptionLabel": "Description"
   },
   "navigation": {
     "timesheet": "Timesheet",
@@ -273,7 +287,18 @@
     "manageCustomers": "Manage customers",
     "deleteCustomers": "Delete customers",
     "manageUsers": "Manage users",
-    "manageRolesPermissions": "Manage roles and permissions"
+    "manageRolesPermissions": "Manage roles and permissions",
+    "deleteProjectsDescription": "Deletion of projects is currently not supported.",
+    "accessTimesheetDescription": "Access to Timesheet page",
+    "accessCustomersDescription": "Acces to Customers page where you can search in active and inactive customers.",
+    "accessProjectsDescription": "Acces to Projects page where you can search in active and inactive projects.",
+    "accessAdminDescription": "Acces to Projects page where you can search in active and inactive projects.",
+    "manageProjectsDescription": "Create new and edit existing projects.",
+    "accessReportsDescription": "Access to admin page where you administer users, roles, permissions, API tokens and labels.",
+    "manageCustomersDescription": " Create new and edit existing customers.",
+    "deleteCustomersDescription": "Deletion of customers is currently not supported.",
+    "manageUsersDescription": "Manage users on the admin page. Add new users, one by one or in bulk, and change role of existing users.",
+    "manageRolesPermissionsDescription": "Manage roles and permissions on the admin page. Create new roles and edit exisiting."
   },
   "notifications": {
     "moreLinkText": "Read more here",

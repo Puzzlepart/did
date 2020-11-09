@@ -6,7 +6,7 @@ import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TimeEntry } from 'types'
-import { TIME_ENTRIES } from '../graphql'
+import $timeentries from '../timeentries.gql'
 import { Actions } from './actions'
 import styles from './ProjectDetails.module.scss'
 import { ProjectDetailsContext } from './ProjectDetailsContext'
@@ -18,7 +18,7 @@ export const ProjectDetails: React.FunctionComponent<IProjectDetailsProps> = (pr
     const { t } = useTranslation()
     const [project, setProject] = useState({ ...props.project })
     const { loading, error, data } = useQuery<{ timeentries: TimeEntry[] }>(
-        TIME_ENTRIES,
+        $timeentries,
         {
             variables: {
                 query: {projectId: props.project.id}

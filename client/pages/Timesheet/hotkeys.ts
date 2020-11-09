@@ -26,8 +26,7 @@ export default (context: ITimesheetContext, t: TFunction): GlobalHotKeysProps =>
     }
   },
   handlers: {
-    GO_TO_CURRENT_WEEK: () =>
-      context.dispatch({        type: 'SET_SCOPE'      }),
+    GO_TO_CURRENT_WEEK: () => context.dispatch({ type: 'SET_SCOPE' }),
     PREV_WEEK: () =>
       context.dispatch({
         type: 'SET_SCOPE',

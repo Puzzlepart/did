@@ -12,10 +12,10 @@ import { UserSettings } from './UserSettings'
 
 export const UserMenu = () => {
     const { t } = useTranslation()
-    const { user } = useContext(AppContext)
+    const { user, subscription } = useContext(AppContext)
     const [menuTarget, setMenuTarget] = useState<Target>(null)
 
-    if (!user.subscription) return null
+    if (!subscription) return null
 
     return (
         <>
@@ -41,7 +41,7 @@ export const UserMenu = () => {
                         <Divider />
                         <div className={styles.menuItem}>
                             <Icon iconName='Home' className={styles.icon} />
-                            <span>{user.subscription?.name}</span>
+                            <span>{subscription.name}</span>
                         </div>
                         <span hidden={isMobile}>
                             <Divider />

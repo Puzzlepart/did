@@ -3,7 +3,7 @@ import { find } from 'underscore'
 import format from 'string-format'
 import { getPeriods } from './timesheet.utils'
 import { Context } from '../context'
-import { AzStorageService } from 'server/api/services'
+import { AzStorageService } from '../../services'
 
 /**
  * Get notifications for unconfirmed periods
@@ -23,7 +23,7 @@ export default async function (ctx: Context, azstorage: AzStorageService, templa
   }
 
   const confirmedPeriods = (await azstorage.getConfirmedPeriods({
-    resourceId: ctx.user.id,
+    resourceId: ctx.userId,
     year: utils.getYear()
   })) as any[]
 
