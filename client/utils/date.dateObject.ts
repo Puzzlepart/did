@@ -35,6 +35,13 @@ export class DateObject {
   }
 
   /**
+   * Get start of week
+   */
+  public get startOfWeek() {
+    return DateUtils.startOfWeek(this)
+  }
+
+  /**
    * Is current week
    */
   public get isCurrentWeek() {
