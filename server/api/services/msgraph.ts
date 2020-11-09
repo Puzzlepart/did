@@ -140,8 +140,8 @@ class MSGraphService {
   /**
    * Get events for the specified period using Microsoft Graph endpoint /me/calendar/calendarView
    * 
-   * @param {string} startDate Start date time in ISO format
-   * @param {string} endDate End date time in ISO format
+   * @param {string} startDate Start date (YYYY-MM-DD)
+   * @param {string} endDate End date (YYYY-MM-DD)
    * @param {number} tzOffset TimezoneOffset on the client, 
    */
   async getEvents(startDate: string, endDate: string, tzOffset: number): Promise<MSGraphEvent[]> {

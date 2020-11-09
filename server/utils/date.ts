@@ -88,18 +88,20 @@ export const endOfMonth = (dateTime: ConfigType, template: string): string => {
  * Get start of week
  *
  * @param {number} week Week number
+ * @param {string} template Template (defaults to YYYY-MM-DD)
  */
-export const startOfWeek = (week: number): string => {
-  return $dayjs().week(week).startOf('isoWeek').toISOString()
+export const startOfWeek = (week: number, template: string = 'YYYY-MM-DD'): string => {
+  return $dayjs().week(week).startOf('isoWeek').format(template)
 }
 
 /**
  * Get end of week
  *
  * @param {number} week Week number
+ * @param {string} template Template (defaults to YYYY-MM-DD)
  */
-export const endOfWeek = (week: number): string => {
-  return $dayjs().week(week).endOf('isoWeek').toISOString()
+export const endOfWeek = (week: number, template: string = 'YYYY-MM-DD'): string => {
+  return $dayjs().week(week).endOf('isoWeek').format(template)
 }
 
 /**
@@ -123,7 +125,7 @@ export const add = (dateTime: ConfigType, unit: OpUnitType, amount: number): str
  * @param {string} template Date format
  * @param {string} locale Locale
  */
-export const formatDate = (dateTime: ConfigType, template: string, locale: string) => {
+export const formatDate = (dateTime: ConfigType, template: string, locale: string): string => {
   return $dayjs(dateTime).locale(locale).format(template)
 }
 
