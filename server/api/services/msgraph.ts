@@ -140,7 +140,7 @@ class MSGraphService {
    * 
    * @param {string} startDate Start date (YYYY-MM-DD)
    * @param {string} endDate End date (YYYY-MM-DD)
-   * @param {number} tzOffset TimezoneOffset on the client, 
+   * @param {number} tzOffset Timezone offset on the client
    */
   async getEvents(startDate: string, endDate: string, tzOffset: number): Promise<MSGraphEvent[]> {
     try {
@@ -163,8 +163,9 @@ class MSGraphService {
         .orderby('start/dateTime asc')
         .top(500)
         .get()
-      let events = value.filter((evt: { subject: any }) => evt.subject).map((evt: any) => new MSGraphEvent(evt))
-      events = events.filter((evt: { duration: number }) => evt.duration <= 24)
+      const events = value
+        .filter((event: any) => !!event.subject && event.duration <= 24)
+        .map((event: any) => new MSGraphEvent(event))
       this.endMark('getEvents')
       return events
     } catch (error) {
