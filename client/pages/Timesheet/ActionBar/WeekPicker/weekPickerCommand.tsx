@@ -6,14 +6,16 @@ import styles from './WeekPicker.module.scss'
 
 export default ({ selectedPeriod, periods, t }: ITimesheetContext): IContextualMenuItem => ({
     key: 'WEEK_PICKER_COMMAND',
-    onRender: () => (
-        <>
-            <WeekPicker />
-            {periods.length === 1 && (
-                <div className={styles.weekNumber}>
-                    {selectedPeriod.getName(t)}
-                </div>
-            )}
-        </>
-    ),
+    onRender: () => {
+        return (
+            <>
+                <WeekPicker />
+                {periods.length === 1 && (
+                    <div className={styles.weekNumber}>
+                        {selectedPeriod.getName(t)}
+                    </div>
+                )}
+            </>
+        )
+    }
 })

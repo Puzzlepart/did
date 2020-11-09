@@ -88,40 +88,40 @@ export class EventInput {
 })
 export class TimesheetPeriodObject {
   @Field(() => ID)
-  id: string
+  public id: string
 
   @Field()
-  week: number
+  public week: number
 
   @Field()
-  month: string
+  public month: string
 
   @Field()
-  startDate: string
+  public startDate: string
 
   @Field()
-  endDate: string
-
-  @Field({ nullable: true })
-  isConfirmed: boolean
+  public endDate: string
 
   @Field(() => [EventObject])
-  events?: EventObject[]
+  public events?: EventObject[]
 
   @Field({ nullable: true })
-  isForecasted: boolean
+  public isConfirmed: boolean = false
 
   @Field({ nullable: true })
-  isForecast: boolean
+  public isForecasted: boolean = false
 
   @Field({ nullable: true })
-  forecastedHours?: number
+  public isForecast: boolean
+
+  @Field({ nullable: true })
+  public forecastedHours?: number
 
   constructor(startDate: string, endDate: string, locale: string) {
     this.id = DateUtils.getPeriod(startDate)
     this.startDate = startDate
     this.endDate = endDate
-    this.week = DateUtils.getWeek()
+    this.week = DateUtils.getWeek(startDate)
     this.month = DateUtils.formatDate(startDate, 'MMMM', locale)
     this.isForecast = DateUtils.isAfterToday(startDate)
     this.isForecasted = false

@@ -20,7 +20,7 @@ export class AzStorageServiceTables {
     public roles: string = 'Roles',
     public labels: string = 'Labels',
     public users: string = 'Users'
-  ) {}
+  ) { }
 }
 
 @Service({ global: false })
@@ -255,31 +255,35 @@ class AzStorageService {
    * @param {any} options Options
    */
   async getTimeEntries(queryValues: any, options: any = {}) {
-    const q = this.tableUtil.query()
-    const filter = [
-      ['PeriodId', queryValues.periodId, q.string, q.equal],
-      ['ProjectId', queryValues.projectId, q.string, q.equal],
-      ['PartitionKey', queryValues.resourceId, q.string, q.equal],
-      ['WeekNumber', queryValues.weekNumber, q.int, q.equal],
-      ['MonthNumber', queryValues.monthNumber, q.int, q.equal],
-      ['MonthNumber', queryValues.startMonthIndex, q.int, q.greaterThanOrEqual],
-      ['MonthNumber', queryValues.endMonthIndex, q.int, q.lessThanOrEqual],
-      ['Year', queryValues.year, q.int, q.equal],
-      ['StartDateTime', this.tableUtil.convertToAzDate(queryValues.startDateTime), q.date, q.greaterThan],
-      ['EndDateTime', this.tableUtil.convertToAzDate(queryValues.endDateTime), q.date, q.lessThan]
-    ]
-    const query = this.tableUtil.createAzQuery(1000, filter)
-    const tableName = options.forecast ? this.tables.forecastedTimeEntries : this.tables.timeEntries
-    let result = await this.tableUtil.queryAzTableAll(tableName, query, {
-      PartitionKey: 'resourceId',
-      RowKey: 'id'
-    })
-    result = result.slice().sort(({ startDateTime: a }, { startDateTime: b }) => {
-      return options.sortAsc
-        ? new Date(a).getTime() - new Date(b).getTime()
-        : new Date(b).getTime() - new Date(a).getTime()
-    })
-    return result
+    try {
+      const q = this.tableUtil.query()
+      const filter = [
+        ['PeriodId', queryValues.periodId, q.string, q.equal],
+        ['ProjectId', queryValues.projectId, q.string, q.equal],
+        ['PartitionKey', queryValues.resourceId, q.string, q.equal],
+        ['WeekNumber', queryValues.weekNumber, q.int, q.equal],
+        ['MonthNumber', queryValues.monthNumber, q.int, q.equal],
+        ['MonthNumber', queryValues.startMonthIndex, q.int, q.greaterThanOrEqual],
+        ['MonthNumber', queryValues.endMonthIndex, q.int, q.lessThanOrEqual],
+        ['Year', queryValues.year, q.int, q.equal],
+        ['StartDateTime', this.tableUtil.convertToAzDate(queryValues.startDateTime), q.date, q.greaterThan],
+        ['EndDateTime', this.tableUtil.convertToAzDate(queryValues.endDateTime), q.date, q.lessThan]
+      ]
+      const query = this.tableUtil.createAzQuery(1000, filter)
+      const tableName = options.forecast ? this.tables.forecastedTimeEntries : this.tables.timeEntries
+      let result = await this.tableUtil.queryAzTableAll(tableName, query, {
+        PartitionKey: 'resourceId',
+        RowKey: 'id'
+      })
+      result = result.slice().sort(({ startDateTime: a }, { startDateTime: b }) => {
+        return options.sortAsc
+          ? new Date(a).getTime() - new Date(b).getTime()
+          : new Date(b).getTime() - new Date(a).getTime()
+      })
+      return result
+    } catch (error) {
+      throw error
+    }
   }
 
   /**

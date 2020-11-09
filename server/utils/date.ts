@@ -68,18 +68,20 @@ export const getMonthIndex = (dateTime: ConfigType): number => {
  * Get start of month as string
  *
  * @param {ConfigType} dateTime Date time
+ * @param {string} template Template
  */
-export const startOfMonth = (dateTime?: ConfigType): string => {
-  return $dayjs(dateTime).startOf('month').toISOString()
+export const startOfMonth = (dateTime: ConfigType, template: string): string => {
+  return $dayjs(dateTime).startOf('month').format(template)
 }
 
 /**
  * Get end of month as string
  *
  * @param {ConfigType} dateTime Date time
+ * @param {string} template Template
  */
-export const endOfMonth = (dateTime: ConfigType): string => {
-  return $dayjs(dateTime).startOf('month').toISOString()
+export const endOfMonth = (dateTime: ConfigType, template: string): string => {
+  return $dayjs(dateTime).startOf('month').format(template)
 }
 
 /**
@@ -120,4 +122,14 @@ export const formatDate = (dateTime: ConfigType, template: string, locale: strin
  */
 export const isAfterToday = (dateTime: ConfigType) => {
   return $dayjs(dateTime).isAfter($dayjs())
+}
+
+/**
+ * Is same month
+ *
+ * @param {ConfigType} a Date A
+ * @param {ConfigType} b Date B
+ */
+export const isSameMonth = (a: ConfigType, b: ConfigType) => {
+  return $dayjs(a).isSame($dayjs(b), 'month')
 }

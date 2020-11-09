@@ -31,6 +31,7 @@ export const Timesheet: React.FunctionComponent = () => {
     })
     const query = useQuery($timesheet, {
         variables: {
+            skip: !state.scope.query,
             query: state.scope.query,
             options: {
                 dateFormat: 'dddd DD',
