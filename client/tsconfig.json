@@ -16,6 +16,7 @@
     "strictNullChecks": false,
     "noUnusedLocals": true,
     "resolveJsonModule": true,
+    "pretty": true,
     "typeRoots": ["../node_modules/@types"],
     "baseUrl": "./"
   }

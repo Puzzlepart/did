@@ -71,6 +71,6 @@ export async function exportExcel(items: any[], options: IExcelExportOptions): P
   const blob = new Blob([stringToArrayBuffer(wbout)], {
     type: 'application/octet-stream'
   })
-    ; (window as any).saveAs(blob, options.fileName)
+  ;(window as any).saveAs(blob, options.fileName)
   return blob
 }

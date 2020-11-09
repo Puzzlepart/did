@@ -4,7 +4,7 @@ import { TFunction } from 'i18next'
 import { EventInput, EventObject, Project, TimesheetPeriodInput, TimesheetPeriodObject } from 'types'
 import { filter, omit } from 'underscore'
 import { isBlank } from 'underscore.string'
-import DateUtils  from 'utils/date'
+import DateUtils from 'utils/date'
 import { ITimesheetParams } from './types'
 
 export class TimesheetPeriod {
