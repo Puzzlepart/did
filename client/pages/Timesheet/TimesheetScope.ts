@@ -8,7 +8,18 @@ import { ITimesheetParams } from './types'
  * @category Timesheet
  */
 export class TimesheetScope {
-  constructor(public startDate?: DateObject, public endDate?: DateObject) {}
+  public startDate?: DateObject
+  public endDate?: DateObject
+
+  /**
+   * Constructs a new TimesheetScope
+   * 
+   * @param {DateInput} startDate Optional start date
+   */
+  constructor(startDate?: DateInput) {
+    this.startDate = new DateObject(startDate).startOfWeek
+    this.endDate = this.startDate.endOfWeek
+  }
 
   /**
    * Sets startDate/endDate from params
@@ -23,22 +34,24 @@ export class TimesheetScope {
 
   /**
    * Get TimesheetQuery for the scope
+   *
+   * @param {string} template Template
    */
-  public get query(): TimesheetQuery {
+  public query(template: string = 'YYYY-MM-DD'): TimesheetQuery {
     if (!this.startDate) return null
     return {
-      startDate: this.startDate.format('YYYY-MM-DD'),
-      endDate: this.endDate.format('YYYY-MM-DD')
+      startDate: this.startDate.format(template),
+      endDate: this.endDate.format(template)
     }
   }
 
   /**
    * Sets the scope
-   *
-   * @param {DateInput} start Start of scope
+   * 
+   * @param {string} add Add
    */
-  public set(start: DateInput): TimesheetScope {
-    this.startDate = new DateObject(start)
+  public set(add: string): TimesheetScope {
+    this.startDate = this.startDate.add(add)
     this.endDate = this.startDate.endOfWeek
     return this
   }
