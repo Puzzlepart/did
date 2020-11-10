@@ -1,7 +1,7 @@
 import { UserMessage } from 'components'
 import { getValue } from 'helpers'
 import color from 'randomcolor'
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { EventObject } from 'types'
@@ -12,11 +12,10 @@ import styles from './AllocationView.module.scss'
 import { CustomTooltip } from './CustomTooltip'
 import { IChartConfig, IChartItem } from './types'
 
-export const AllocationView = (
-  getData: (events: EventObject[], chart: IChartConfig) => IChartItem<any>[]
-) => (): JSX.Element => {
+export const AllocationView = (getData: (events: EventObject[], chart: IChartConfig, width: number) => IChartItem<any>[]) => (): JSX.Element => {
   const { t } = useTranslation()
   const { loading, selectedPeriod } = useContext(TimesheetContext)
+  const container = useRef<HTMLDivElement>()
 
   if (!loading && selectedPeriod?.totalDuration === 0) {
     return (
@@ -51,11 +50,13 @@ export const AllocationView = (
   ]
 
   return (
-    <div key={`allocation_${selectedPeriod?.id}`} className={styles.root}>
+    <div key={`allocation_${selectedPeriod?.id}`} className={styles.root} ref={container}>
       {charts.map((c) => {
-        const data = getData(selectedPeriod?.getEvents() || [], c)
+        const data = getData(selectedPeriod?.getEvents() || [], c, container?.current?.clientWidth)
         return (
-          <div key={c.key} className={styles.chartContainer}>
+          <div
+            key={c.key}
+            className={styles.chartContainer}>
             <div className={styles.title}>{c.title}</div>
             <div className={styles.subTitle}>{c.subTitle}</div>
             <ResponsiveContainer width='100%' height={450}>
@@ -92,7 +93,8 @@ export const AllocationView = (
   )
 }
 
-export default AllocationView((events: EventObject[], chart: IChartConfig) => {
+export default AllocationView((events: EventObject[], chart: IChartConfig, width: number) => {
+  if (!width) return []
   const items = events.reduce((_items, entry) => {
     const data = getValue(entry, chart.key, null)
     if (!data) return _items
@@ -104,7 +106,7 @@ export default AllocationView((events: EventObject[], chart: IChartConfig) => {
   }, [])
   return items.map((i) => ({
     ...i,
-    label: truncateString(i.data[chart.textKey], 15),
+    label: truncateString(i.data[chart.textKey], (width / (items.length || 1) / 6)),
     value: parseFloat(i.value.toFixed(1))
   }))
 })
