@@ -1,9 +1,6 @@
 {
   "files.exclude": {
-    "pnpm-lock.yaml": true,
     "node_modules": true,
-    "lib": true,
-    "server.js": true,
     "client/**/*js": true,
     "client/**/*js.map": true,
     "client/**/*d.ts": true,
@@ -14,7 +11,7 @@
     "server-dist": true
   },
   "javascript.validate.enable": false,
-  "i18n-ally.localesPaths": "./resources",
+  "i18n-ally.localesPaths": "./.resources",
   "i18n-ally.keystyle": "nested",
   "i18n-ally.sourceLanguage": "en-GB",
   "i18n-ally.displayLanguage": "en-GB",

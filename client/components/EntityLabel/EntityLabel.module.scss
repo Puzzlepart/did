@@ -21,4 +21,13 @@
     padding: 8px 12px;
     font-size: 1.2em;
   }
+
+  .icon {
+    vertical-align: middle;
+  }
+
+  .text {
+    vertical-align: unset !important;
+    margin-left: 4px;
+  }
 }

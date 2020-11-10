@@ -1,8 +1,8 @@
-import { stringToArrayBuffer, getValue } from 'helpers'
-import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
+import { getValue, stringToArrayBuffer } from 'helpers'
+import { IColumn } from 'office-ui-fabric'
 import { humanize } from 'underscore.string'
+import { DateObject } from './date'
 import { loadScripts } from './loadScripts'
-import { moment } from 'utils/date'
 
 export interface IExcelExportOptions {
   fileName: string
@@ -50,7 +50,7 @@ export async function exportExcel(items: any[], options: IExcelExportOptions): P
             switch (getValue<ExcelColumnType>(col, 'data.excelColFormat', null)) {
               case 'date':
                 return {
-                  v: moment(fieldValue).format('YYYY-MM-DD HH:mm'),
+                  v: new DateObject(fieldValue).format('YYYY-MM-DD HH:mm'),
                   t: 'd'
                 }
               default:

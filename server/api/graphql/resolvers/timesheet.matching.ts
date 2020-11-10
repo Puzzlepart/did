@@ -2,6 +2,7 @@ import { first, find, filter, contains, isEmpty } from 'underscore'
 import { findBestMatch } from 'string-similarity'
 import get from 'get-value'
 import { Customer, EventObject, LabelObject, Project } from './types'
+import MSGraphEvent from 'server/api/services/msgraph.event'
 
 class EventMatching {
   public projects: Project[]
@@ -161,7 +162,7 @@ class EventMatching {
    *
    * @param {*} events
    */
-  public matchEvents(events: EventObject[]): EventObject[] {
+  public matchEvents(events: MSGraphEvent[]): EventObject[] {
     return events.map(this._matchEvent.bind(this))
   }
 }

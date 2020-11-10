@@ -16,6 +16,7 @@
       "express",
       "node",
       "mocha",
+      "express-bearer-token",
       "express-session",
       "passport-azure-ad",
       "debug",

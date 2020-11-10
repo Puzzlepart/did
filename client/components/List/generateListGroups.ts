@@ -1,6 +1,6 @@
 import * as arraySort from 'array-sort'
 import { getValue } from 'helpers'
-import { IGroup } from 'office-ui-fabric-react/lib/DetailsList'
+import { IGroup } from 'office-ui-fabric'
 import { unique } from 'underscore'
 import { IListGroups } from './types'
 

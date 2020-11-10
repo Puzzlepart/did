@@ -49,7 +49,7 @@ jobs:
 
       - name: Tests
         run: |
-          npm run tests
+          npm test
         env:
           NODE_ENV: production
           TESTS_AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.TESTS_AZURE_STORAGE_CONNECTION_STRING }}

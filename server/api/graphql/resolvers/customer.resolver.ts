@@ -47,7 +47,7 @@ export class CustomerResolver {
     @Ctx() ctx: Context
   ) {
     try {
-      await this._azstorage.createOrUpdateCustomer(customer, ctx?.user?.id, update)
+      await this._azstorage.createOrUpdateCustomer(customer, ctx.userId, update)
       return { success: true, error: null }
     } catch (error) {
       return {

@@ -36,7 +36,7 @@ export class TimeEntryResolver {
     @Arg('query') query: TimeEntriesQuery,
     @Ctx() ctx: Context
   ) {
-    if (currentUser) query.resourceId = ctx.user.id
+    if (currentUser) query.resourceId = ctx.userId
     const [users, projects, customers, timeentries] = await Promise.all([
       this._azstorage.getUsers(),
       this._azstorage.getProjects(),

@@ -35,7 +35,7 @@ export class NotificationResolver {
     @Arg('locale') locale: string,
     @Ctx() ctx: Context
   ) {
-    if (!ctx.user.id) return { success: false, error: null }
+    if (!ctx.userId) return { success: false, error: null }
     const notifications = await Promise.all([
       unconfirmedPeriods(ctx, this._azstorage, templates.unconfirmedPeriods, locale),
       forecast(ctx, this._azstorage, templates.forecast, locale)

@@ -1,4 +1,4 @@
-import { IPanelProps } from 'office-ui-fabric-react/lib/Panel'
+import { IPanelProps } from 'office-ui-fabric'
 import { Role } from 'types'
 
 export interface IRolePanelProps extends IPanelProps {

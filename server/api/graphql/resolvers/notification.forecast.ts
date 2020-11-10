@@ -1,4 +1,4 @@
-import * as utils from '../../../utils'
+import * as utils from '../../../utils/date'
 import format from 'string-format'
 import { getPeriods } from './timesheet.utils'
 import get from 'get-value'
@@ -30,7 +30,7 @@ export default async function (ctx: Context, azstorage: AzStorageService, templa
   }
 
   const forecastedPeriods = (await azstorage.getForecastedPeriods({
-    resourceId: ctx.user.id,
+    resourceId: ctx.userId,
     year: utils.getYear()
   })) as any[]
 

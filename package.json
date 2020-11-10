@@ -7,16 +7,16 @@
     "npm": ">=6.5.0"
   },
   "scripts": {
-    "watch": "concurrently \"npm run watch:client\" \"npm run watch:server\" \"node tasks/open.js\" \"node tasks/localtunnel.js\"",
+    "watch": "concurrently \"npm run watch:client\" \"npm run watch:server\" \"node .tasks/open.js\" \"node .tasks/localtunnel.js\"",
     "start": "node ./server-dist/index.js",
     "watch:server": "nodemon",
     "watch:client": "webpack",
     "package:client": "webpack",
     "build:server": "tsc --project tsconfig.json && copyfiles -u 1 \"server/public/**/*\" server-dist",
     "lint": "eslint --ext .ts,.tsx ./client ./server --color --fix && npm run prettier",
-    "prettier": "prettier --config .prettierrc '**/*.ts' --write --loglevel silent",
-    "tests": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.ts'",
-    "create-env": "node tasks/create-dot-env.js"
+    "prettier": "prettier --config .prettierrc '**/*.ts*' --write --loglevel silent",
+    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register '.tests/**/*.ts'",
+    "create-env": "node .tasks/create-dot-env.js"
   },
   "dependencies": {
     "@apollo/client": "3.2.0",
@@ -64,6 +64,7 @@
     "core-js": "3.6.5",
     "css-loader": "3.5.3",
     "css-modules-typescript-loader": "4.0.1",
+    "dayjs": "1.9.5",
     "debug": "4.2.0",
     "dotenv": "8.2.0",
     "express": "4.17.1",
@@ -82,8 +83,6 @@
     "jsonwebtoken": "8.5.1",
     "loglevel": "1.6.7",
     "loglevel-plugin-prefix": "0.8.4",
-    "moment": "2.24.0",
-    "moment-locales-webpack-plugin": "1.2.0",
     "morgan": "1.10.0",
     "node-fetch": "2.6.0",
     "node-sass": "5.0.0",
@@ -115,7 +114,6 @@
     "ts-loader": "7.0.2",
     "ts-node": "9.0.0",
     "tsconfig-paths-webpack-plugin": "3.3.0",
-    "twix": "1.3.0",
     "type-graphql": "1.1.0",
     "typedi": "0.8.0",
     "typescript": "4.0.5",
@@ -146,5 +144,6 @@
   },
   "resolutions": {
     "@babel/preset-env": "7.8.0"
-  }
+  },
+  "sideEffects": false
 }

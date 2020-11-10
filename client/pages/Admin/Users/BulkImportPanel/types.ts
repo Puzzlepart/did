@@ -1,4 +1,4 @@
-import { IPanelProps } from 'office-ui-fabric-react/lib/Panel'
+import { IPanelProps } from 'office-ui-fabric'
 
 export interface IBulkImportPanelProps extends IPanelProps {
   /**

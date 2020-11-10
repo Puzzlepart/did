@@ -1,4 +1,3 @@
-
 import { useQuery } from '@apollo/client'
 import { Customer } from 'types'
 import $customers from 'pages/Customers/customers.gql'
@@ -8,29 +7,34 @@ import { Autocomplete, ISuggestionItem } from '../Autocomplete'
 import { ISearchCustomerProps } from './types'
 
 export const SearchCustomer = (props: ISearchCustomerProps) => {
-    const { t } = useTranslation()
-    const { loading, data } = useQuery<{ customers: Customer[] }>($customers, {
-        variables: { sortBy: 'name' },
-        fetchPolicy: 'cache-first',
-    })
+  const { t } = useTranslation()
+  const { loading, data } = useQuery<{ customers: Customer[] }>($customers, {
+    variables: { sortBy: 'name' },
+    fetchPolicy: 'cache-first'
+  })
 
-    const searchData: ISuggestionItem<Customer>[] = useMemo(() => (data?.customers || []).map(customer => ({
+  const searchData: ISuggestionItem<Customer>[] = useMemo(
+    () =>
+      (data?.customers || []).map((customer) => ({
         key: customer.key,
         displayValue: customer.name,
         searchValue: [customer.key, customer.name].join(' '),
-        data: customer,
-    })), [data])
+        data: customer
+      })),
+    [data]
+  )
 
-    return (
-        <div hidden={props.hidden}>
-            <Autocomplete
-                {...props}
-                disabled={loading}
-                items={searchData}
-                width={550}
-                placeholder={t('common.searchPlaceholder')}
-                onClear={() => props.onSelected(null)}
-                onSelected={item => props.onSelected(item.data)} />
-        </div>
-    )
+  return (
+    <div hidden={props.hidden}>
+      <Autocomplete
+        {...props}
+        disabled={loading}
+        items={searchData}
+        width={550}
+        placeholder={t('common.searchPlaceholder')}
+        onClear={() => props.onSelected(null)}
+        onSelected={(item) => props.onSelected(item.data)}
+      />
+    </div>
+  )
 }

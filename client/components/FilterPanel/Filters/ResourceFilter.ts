@@ -1,5 +1,5 @@
 import { getValue } from 'helpers'
-import _ from 'underscore'
+import { unique } from 'underscore'
 import { BaseFilter, IFilter } from './BaseFilter'
 
 export class ResourceFilter extends BaseFilter {
@@ -13,7 +13,7 @@ export class ResourceFilter extends BaseFilter {
    * @param {any[]} entries Entries
    */
   public initialize(entries: any[]): IFilter {
-    const resources = _.unique(entries.map((e) => getValue(e, this.fieldName, null))).sort()
+    const resources = unique(entries.map((e) => getValue(e, this.fieldName, null))).sort()
     const items = resources.map((resource) => ({
       key: resource,
       value: resource

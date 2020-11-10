@@ -6,19 +6,19 @@ import { useTranslation } from 'react-i18next'
 import { contains } from 'underscore'
 
 export const PermissionList = ({ permissionIds }: IPermissionListProps) => {
-    const { t } = useTranslation()
-    const permissions = React.useMemo(() => {
-        return securityConfig.permissions(t).filter(perm => contains(permissionIds, perm.id))
-    }, [permissionIds])
-    return (
-        <div className={styles.root}>
-            <div className={styles.container}>
-                {permissions.map(perm => (
-                    <div key={perm.id} className={styles.item} title={perm.description}>
-                        {perm.name}
-                    </div>
-                ))}
-            </div>
-        </div>
-    )
+  const { t } = useTranslation()
+  const permissions = React.useMemo(() => {
+    return securityConfig.permissions(t).filter((perm) => contains(permissionIds, perm.id))
+  }, [permissionIds])
+  return (
+    <div className={styles.root}>
+      <div className={styles.container}>
+        {permissions.map((perm) => (
+          <div key={perm.id} className={styles.item} title={perm.description}>
+            {perm.name}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
 }

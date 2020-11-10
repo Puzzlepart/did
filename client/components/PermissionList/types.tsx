@@ -1,3 +1,3 @@
 export interface IPermissionListProps {
-    permissionIds: string[];
+  permissionIds: string[]
 }

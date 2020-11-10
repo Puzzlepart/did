@@ -1,4 +1,4 @@
-import * as utils from '../../../utils'
+import * as utils from '../../../utils/date'
 import { find } from 'underscore'
 import format from 'string-format'
 import { getPeriods } from './timesheet.utils'
@@ -23,7 +23,7 @@ export default async function (ctx: Context, azstorage: AzStorageService, templa
   }
 
   const confirmedPeriods = (await azstorage.getConfirmedPeriods({
-    resourceId: ctx.user.id,
+    resourceId: ctx.userId,
     year: utils.getYear()
   })) as any[]
 

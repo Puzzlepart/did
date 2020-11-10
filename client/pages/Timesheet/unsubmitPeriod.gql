@@ -1,5 +1,5 @@
-mutation($period: TimesheetPeriodInput!, $forecast: Boolean!) {
-  result: unsubmitPeriod(period: $period, forecast: $forecast) {
+mutation($period: TimesheetPeriodInput!, $options: TimesheetOptions!) {
+  result: unsubmitPeriod(period: $period, options: $options) {
     success
     error {
       message

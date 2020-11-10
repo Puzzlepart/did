@@ -1,4 +1,4 @@
 export interface IOverviewProps {
-    dayFormat: string;
-    timeFormat: string;
+  dayFormat: string
+  timeFormat: string
 }
