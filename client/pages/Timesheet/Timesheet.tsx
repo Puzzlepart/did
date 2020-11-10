@@ -44,11 +44,17 @@ export const Timesheet: React.FunctionComponent = () => {
     errorPolicy: 'all'
   })
 
-  useEffect(() => dispatch({ type: 'DATA_UPDATED', payload: { query, t } }), [query])
+  useEffect(() => dispatch({ type: 'DATA_UPDATED', payload: { query, t, params } }), [query])
 
   useEffect(() => {
     if (!state.selectedPeriod) return
-    history.push(['/timesheet', state.selectedView, state.selectedPeriod.path].join('/'))
+    history.push(
+      [
+        '/timesheet',
+        state.selectedView,
+        state.selectedPeriod.path
+      ]
+        .join('/'))
   }, [state.selectedView, state.selectedPeriod])
 
   const [[submitPeriod], [unsubmitPeriod]] = [useMutation($submitPeriod), useMutation($unsubmitPeriod)]

@@ -4,14 +4,15 @@ import { TFunction } from 'i18next'
 import { Project, TimesheetPeriodObject } from 'types'
 import { find, first } from 'underscore'
 import { DateInput } from 'utils/date'
-import { ITimesheetState, TimesheetPeriod, TimesheetView } from './types'
+import { ITimesheetParams, ITimesheetState, TimesheetPeriod, TimesheetView } from './types'
 
 export type TimesheetAction =
   | {
       type: 'DATA_UPDATED'
       payload: {
         query: QueryResult<{ timesheet: TimesheetPeriodObject[] }>
-        t: TFunction
+        t: TFunction,
+        params: ITimesheetParams
       }
     }
   | { type: 'SET_SCOPE'; payload?: DateInput }
@@ -37,7 +38,8 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
   switch (action.type) {
     case 'DATA_UPDATED':
       {
-        const { loading, data, error } = action.payload.query
+        const {params, query } = action.payload
+        const { loading, data, error } = query
         newState.loading = loading
           ? {
               label: t('timesheet.loadingEventsLabel'),
@@ -45,9 +47,10 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
             }
           : null
         if (data) {
+          const selectedPeriodId = state.selectedPeriod?.id || [params.week,params.month, params.year].join('_')
           newState.periods = data.timesheet.map((period) => new TimesheetPeriod().initialize(period))
           newState.selectedPeriod =
-            find(newState.periods, (p) => p.id === getValue(state, 'selectedPeriod.id', null)) ||
+            find(newState.periods, (p) => p.id === selectedPeriodId) ||
             first(newState.periods)
         }
         newState.error = error
