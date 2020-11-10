@@ -13,7 +13,7 @@ export class TimesheetScope {
 
   /**
    * Constructs a new TimesheetScope
-   * 
+   *
    * @param {DateInput} startDate Optional start date
    */
   constructor(startDate?: DateInput) {
@@ -47,7 +47,7 @@ export class TimesheetScope {
 
   /**
    * Sets the scope
-   * 
+   *
    * @param {string} add Add
    */
   public set(add: string): TimesheetScope {

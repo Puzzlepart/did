@@ -1,10 +1,8 @@
 import {
   Calendar,
-
-
-  Callout, DateRangeType,
+  Callout,
+  DateRangeType,
   DayOfWeek,
-
   DirectionalHint,
   FocusTrapZone,
   TextField
