@@ -176,12 +176,12 @@ describe(header('DateUtils'), () => {
 
   describe('initialize dayjs from week and year', () => {
     it('should return 2020-03-02', () => {
-      const date = $dayjs().year(2020).week(10).format('YYYY-MM-DD')
+      const date = $dayjs().year(2020).week(10).startOf('isoWeek').format('YYYY-MM-DD')
       strictEqual(date, '2020-03-02')
     })
 
     it('should return 2020-04-27', () => {
-      const date = $dayjs().year(2020).week(18).format('YYYY-MM-DD')
+      const date = $dayjs().year(2020).week(18).startOf('isoWeek').format('YYYY-MM-DD')
       strictEqual(date, '2020-04-27')
     })
   })
