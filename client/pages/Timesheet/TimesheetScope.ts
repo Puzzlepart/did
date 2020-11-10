@@ -12,7 +12,7 @@ export class TimesheetScope {
 
   /**
    * Sets startDate/endDate from params
-   * 
+   *
    * @param {ITimesheetParams} params Params
    */
   fromParams(params: ITimesheetParams): TimesheetScope {

@@ -5,10 +5,10 @@ const { resolve } = require('path')
 const { name, version } = require('./package.json')
 const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
+const DefinePlugin = require('webpack').DefinePlugin
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const LiveReloadPlugin = tryRequire('webpack-livereload-plugin')
 const WebpackBuildNotifierPlugin = tryRequire('webpack-build-notifier')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const debug = require('debug')('webpack')
 
 /** CONSTANTS */
@@ -54,6 +54,9 @@ const config = {
           },
           {
             loader: 'ts-loader',
+            options: {
+              configFile: resolve(__dirname, 'client/tsconfig.json')
+            }
           },
         ],
       },
@@ -94,7 +97,6 @@ const config = {
       '.scss',
       '.gql'
     ],
-    plugins: [new TsconfigPathsPlugin({ configFile: './client/tsconfig.json' })]
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -102,6 +104,10 @@ const config = {
       filename: resolve(__dirname, SERVER_DIST, 'views/index.hbs'),
       inject: true,
     }),
+    new DefinePlugin({
+      'process.env.VERSION': JSON.stringify(version),
+      'process.env.LOG_LEVEL': JSON.stringify(process.env.CLIENT_LOG_LEVEL || 'SILENT')
+    })
   ],
 }
 

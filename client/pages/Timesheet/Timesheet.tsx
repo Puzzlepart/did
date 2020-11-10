@@ -30,31 +30,28 @@ export const Timesheet: React.FunctionComponent = () => {
     scope: new TimesheetScope().fromParams(params),
     selectedView: params.view || 'overview'
   })
-  const query = useQuery<{ timesheet: TimesheetPeriodObject[] }, { query: TimesheetQuery, options: TimesheetOptions }>($timesheet, {
-    skip: !state.scope.query,
-    variables: {
-      query: state.scope.query,
-      options: {
-        dateFormat: 'dddd DD',
-        locale: app.user.language,
-        tzOffset: new Date().getTimezoneOffset()
-      }
-    },
-    fetchPolicy: 'cache-and-network',
-    errorPolicy: 'all'
-  })
+  const query = useQuery<{ timesheet: TimesheetPeriodObject[] }, { query: TimesheetQuery; options: TimesheetOptions }>(
+    $timesheet,
+    {
+      skip: !state.scope.query,
+      variables: {
+        query: state.scope.query,
+        options: {
+          dateFormat: 'dddd DD',
+          locale: app.user.language,
+          tzOffset: new Date().getTimezoneOffset()
+        }
+      },
+      fetchPolicy: 'cache-and-network',
+      errorPolicy: 'all'
+    }
+  )
 
   useEffect(() => dispatch({ type: 'DATA_UPDATED', payload: { query, t, params } }), [query])
 
   useEffect(() => {
     if (!state.selectedPeriod) return
-    history.push(
-      [
-        '/timesheet',
-        state.selectedView,
-        state.selectedPeriod.path
-      ]
-        .join('/'))
+    history.push(['/timesheet', state.selectedView, state.selectedPeriod.path].join('/'))
   }, [state.selectedView, state.selectedPeriod])
 
   const [[submitPeriod], [unsubmitPeriod]] = [useMutation($submitPeriod), useMutation($unsubmitPeriod)]
