@@ -1,0 +1,9 @@
+
+  mutation($role: RoleInput!, $update: Boolean) {
+    addOrUpdateRole(role: $role, update: $update) {
+      success
+      error {
+        message
+      }
+    }
+  }

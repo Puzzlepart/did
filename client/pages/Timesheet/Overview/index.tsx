@@ -3,7 +3,7 @@ import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
 import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-import { ITimeEntry } from 'types/ITimeEntry'
+import { EventObject } from 'types'
 import dateUtils from 'utils/date'
 import { generateColumn as col } from 'utils/generateColumn'
 import { TimesheetContext } from '../'
@@ -19,7 +19,9 @@ export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
     const className = [styles.root]
     if (isMobile) className.push(styles.mobile)
     return (
-        <div className={className.join(' ')}>
+        <div 
+        key={`overview_${context.selectedPeriod.id}`}
+        className={className.join(' ')}>
             <StatusBar />
             {context.loading && <ProgressIndicator {...context.loading} />}
             <EventList
@@ -31,8 +33,8 @@ export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
                 groups={{
                     fieldName: 'date',
                     groupNames: context.selectedPeriod.weekdays(dayFormat),
-                    totalFunc: (items: ITimeEntry[]) => {
-                        const duration = items.reduce((sum, i) => sum + i.duration, 0)
+                    totalFunc: (events: EventObject[]) => {
+                        const duration = events.reduce((sum, i) => sum + i.duration, 0)
                         return ` (${dateUtils.getDurationString(duration, t)})`
                     },
                 }}
@@ -41,13 +43,13 @@ export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {
                         'customer',
                         t('common.customer'),
                         { minWidth: 150, maxWidth: 200, isMultiline: true },
-                        (event: ITimeEntry) => <CustomerColumn event={event} />,
+                        (event: EventObject) => <CustomerColumn event={event} />,
                     ),
                     col(
                         'project',
                         t('common.project'),
                         { minWidth: 150, maxWidth: 300, isMultiline: true },
-                        (event: ITimeEntry) => <ProjectColumn event={event} />
+                        (event: EventObject) => <ProjectColumn event={event} />
                     ),
                 ]} />
         </div>

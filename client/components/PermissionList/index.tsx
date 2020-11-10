@@ -14,7 +14,7 @@ export const PermissionList = ({ permissionIds }: IPermissionListProps) => {
         <div className={styles.root}>
             <div className={styles.container}>
                 {permissions.map(perm => (
-                    <div key={perm.key} className={styles.item}>
+                    <div key={perm.id} className={styles.item} title={perm.description}>
                         {perm.name}
                     </div>
                 ))}

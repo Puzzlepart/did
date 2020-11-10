@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 import { DurationColumn } from 'components/DurationColumn'
 import { LabelColumn } from 'components/LabelColumn'
-import { sortAlphabetically, value } from 'helpers'
+import { sortAlphabetically, getValue } from 'helpers'
 import { TFunction } from 'i18next'
-import { IPivotItemProps } from 'office-ui-fabric-react'
+import { IPivotItemProps } from 'office-ui-fabric-react/lib/Pivot'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import * as React from 'react'
 import { first, unique } from 'underscore'
@@ -18,7 +18,7 @@ import { ISummaryViewRow, ISummaryViewState } from './types'
  * @param {TFunction} t Translate function
  */
 export function createColumns(state: ISummaryViewState, t: TFunction): IColumn[] {
-    let uniqueColumnValues: any[] = unique(state.timeentries.map(e => value(e, state.scope.fieldName)), m => m)
+    let uniqueColumnValues: any[] = unique(state.timeentries.map(e => getValue(e, state.scope.fieldName)), m => m)
     uniqueColumnValues = uniqueColumnValues.sort((a: number, b: number) => a - b)
 
     const onRender = (row: any, _index: number, col: IColumn) => (
@@ -70,14 +70,14 @@ export function createColumns(state: ISummaryViewState, t: TFunction): IColumn[]
  */
 export const createRows = (state: ISummaryViewState, columns: IColumn[], t: TFunction): ISummaryViewRow[] => {
     const uniqueRowValues = sortAlphabetically(
-        unique(state.timeentries.map(e => value(e, state.type.fieldName, null)), r => r)
+        unique(state.timeentries.map(e => getValue(e, state.type.fieldName, null)), r => r)
     )
     const _columns = [...columns].splice(1, columns.length - 2)
     const rows: ISummaryViewRow[] = uniqueRowValues.map(label => {
-        const rowEntries = state.timeentries.filter(e => value(e, state.type.fieldName, null) === label)
+        const rowEntries = state.timeentries.filter(e => getValue(e, state.type.fieldName, null) === label)
         return _columns.reduce((obj, col) => {
             const sum = [...rowEntries]
-                .filter(e => value(e, state.scope.fieldName) === col.fieldName)
+                .filter(e => getValue(e, state.scope.fieldName) === col.fieldName)
                 .reduce((sum, { duration }) => sum + duration, 0)
             switch (state.type.key) {
                 case 'project': {
@@ -95,7 +95,7 @@ export const createRows = (state: ISummaryViewState, columns: IColumn[], t: TFun
     rows.push(
         _columns.reduce((obj, col) => {
             const sum = [...state.timeentries]
-                .filter(e => value(e, state.scope.fieldName) === col.fieldName)
+                .filter(e => getValue(e, state.scope.fieldName) === col.fieldName)
                 .reduce((sum, { duration }) => sum + duration, 0)
             obj[col.fieldName] = sum
             obj.sum += sum

@@ -1,18 +1,18 @@
 
-import { useQuery } from '@apollo/react-hooks'
-import { IProject } from 'types/IProject'
+import { useQuery } from '@apollo/client'
 import * as React from 'react'
+import { Project } from 'types'
 import { Autocomplete, ISuggestionItem } from '../Autocomplete'
+import $projects from './projects.gql'
 import { ISearchProjectProps } from './types'
-import graphql from 'pages/Projects/graphql'
 
 export const SearchProject = (props: ISearchProjectProps) => {
-    const { loading, data } = useQuery<{ projects: IProject[] }>(graphql.query.projects, {
+    const { loading, data } = useQuery<{ projects: Project[] }>($projects, {
         variables: { sortBy: 'name' },
         fetchPolicy: 'cache-first'
     })
 
-    const searchData: ISuggestionItem<IProject>[] = data ? data.projects.map(project => ({
+    const searchData: ISuggestionItem<Project>[] = data ? data.projects.map(project => ({
         key: project.id,
         displayValue: `${project.name} (${project.id})`,
         searchValue: [project.id, project.name, project.customerKey, project.customer.key].join(' '),
@@ -20,7 +20,7 @@ export const SearchProject = (props: ISearchProjectProps) => {
     })) : []
 
     return (
-        <Autocomplete<IProject>
+        <Autocomplete<Project>
             {...props}
             disabled={loading}
             items={searchData}

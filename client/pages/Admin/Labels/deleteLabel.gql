@@ -1,0 +1,8 @@
+mutation($name: String!) {
+  deleteLabel(name: $name) {
+    success
+    error {
+      message
+    }
+  }
+}

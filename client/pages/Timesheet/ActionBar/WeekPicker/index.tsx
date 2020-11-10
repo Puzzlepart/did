@@ -1,18 +1,16 @@
 import { Calendar, DateRangeType, DayOfWeek } from 'office-ui-fabric-react/lib/Calendar'
 import { Callout, DirectionalHint } from 'office-ui-fabric-react/lib/Callout'
-import { IContextualMenuItem, ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu'
 import { FocusTrapZone } from 'office-ui-fabric-react/lib/FocusTrapZone'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import { TimesheetContext } from 'pages/Timesheet'
-import  React,{useContext} from 'react'
-import { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ACTIONBAR_ICON_PROPS } from '../ACTIONBAR_ICON_PROPS'
 import styles from './WeekPicker.module.scss'
 
 export const WeekPicker = () => {
     const { t } = useTranslation()
-    const { scope, dispatch } = useContext(TimesheetContext)
+    const { loading, scope, dispatch } = useContext(TimesheetContext)
     const [calendar, setCalendar] = useState(null)
 
     return (
@@ -25,7 +23,7 @@ export const WeekPicker = () => {
                     styles={{
                         field: {
                             color: 'rgb(120, 120, 120)',
-                            cursor: 'pointer'
+                            cursor: !loading && 'pointer'
                         },
                         root: {
                             width: 280,
@@ -34,7 +32,7 @@ export const WeekPicker = () => {
                     }}
                     readOnly
                     borderless
-                    iconProps={{ iconName: 'ChevronDown', ...ACTIONBAR_ICON_PROPS }} />
+                    iconProps={{ iconName: !loading && 'ChevronDown', ...ACTIONBAR_ICON_PROPS }} />
             </div>
             {calendar && (
                 <Callout
@@ -66,8 +64,5 @@ export const WeekPicker = () => {
     )
 }
 
-export default {
-    key: 'WEEK_PICKER',
-    itemType: ContextualMenuItemType.Normal,
-    onRender: () => <WeekPicker />,
-} as IContextualMenuItem
+
+export {default as weekPickerCommand} from './weekPickerCommand'

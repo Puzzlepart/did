@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { useQuery } from '@apollo/react-hooks'
-import { FilterPanel, IFilter, UserMessage, List } from 'components'
-import { value } from 'helpers'
+import { useQuery } from '@apollo/client'
+import { FilterPanel, IFilter, List, UserMessage } from 'components'
+import { getValue } from 'helpers'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import { Spinner } from 'office-ui-fabric-react/lib/Spinner'
 import { format } from 'office-ui-fabric-react/lib/Utilities'
@@ -15,9 +15,9 @@ import columns from './columns'
 import commandBar from './commandBar'
 import { IReportsContext } from './context'
 import { filters } from './filters'
-import { TIME_ENTRIES } from './graphql'
+import $timeentries from './timeentries.gql'
 import styles from './Reports.module.scss'
-import { getQueries, IReportsParams, IReportsState, ITimeEntriesVariables } from './types'
+import { getQueries, IReportsParams, IReportsState } from './types'
 
 export const Reports = () => {
     const { t } = useTranslation()
@@ -31,8 +31,8 @@ export const Reports = () => {
             emptyGroupName: t('common.all'),
         }
     })
-    const { loading, data } = useQuery<any, ITimeEntriesVariables>(
-        TIME_ENTRIES,
+    const { loading, data } = useQuery(
+        $timeentries,
         {
             skip: !state.query,
             fetchPolicy: 'cache-first',
@@ -65,7 +65,7 @@ export const Reports = () => {
         const subset = filter(context.timeentries, entry => {
             return filter(filters, f => {
                 const selectedKeys = f.selected.map(s => s.key)
-                return selectedKeys.indexOf(value(entry, f.key, '')) !== -1
+                return selectedKeys.indexOf(getValue(entry, f.key, '')) !== -1
             }).length === filters.length
         })
         context.setState({ subset })

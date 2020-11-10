@@ -9,8 +9,6 @@
     "overviewHeaderText": "Overview",
     "summaryHeaderText": "Summary",
     "allocationHeaderText": "Allocation",
-    "projectChartTitle": "Allocation per project",
-    "customerChartTitle": "Allocation per customer",
     "confirmHoursText": "Confirm hours",
     "unconfirmHoursText": "Unconfirm hours",
     "goToCurrentWeek": "Go to current week",
@@ -37,14 +35,25 @@
     "projectInactiveErrorText": "The project is no longer active. Edit the event in Outlook.",
     "forecastHoursText": "Forecast hours",
     "unforecastHoursText": "Remove forecast",
-    "periodForecastedText": "The period is forecasted with {{hours}}. Click **Remove forecast** if you want to do some adjustments.",
+    "periodForecastedText": "The period is forecasted with {{hours}}.",
     "matchEventPanelHeaderText": "Resolve event",
     "unforecastingPeriodDescription": "Hang on a minute...",
     "unforecastingPeriodLabel": "Removing forecast",
     "forecastingPeriodLabel": "Forecasting period",
     "forecastingPeriodDescription": "Hang on a minute...",
     "errorMessageText": "There was a problem fetching your timesheet. Please try again later...",
-    "exchangeLicenseErrorMessageText": "Could not load timesheet. It seems you don't have an active Exchange Online license. Please contact your administrator."
+    "exchangeLicenseErrorMessageText": "Could not load timesheet. It seems you don't have an active Exchange Online license. Please contact your administrator.",
+    "confirmHoursSecondaryText": "Confirm the current week",
+    "forecastHoursSecondaryText": "Create a forecast for the week",
+    "unconfirmHoursSecondaryText": "Unconfirm current week",
+    "unforecastHoursSecondaryText": "Remove forecast for the week",
+    "allocation": {
+      "customerChartTitle": "Customers",
+      "projectChartTitle": "Projects",
+      "noDataText": "No data to show for the selected period.",
+      "customerChartDescription": "Shows allocation per customer for the period",
+      "projectChartDescription": "Shows allocation per project for the period"
+    }
   },
   "projects": {
     "inactiveText": "This project has been marked as inactive.",
@@ -108,9 +117,16 @@
     "tokenGeneratedText": "Your key has been generated and will only be visible for 10 seconds. You can only see it once. Take good care of it!",
     "tokenErrorText": "An error occurred generating your key. Please try again later.",
     "tokenDeletedText": "API key **{{name}}** was succesfully deleted.",
-    "summaryLoadingText": "Loading time entries and creating summary...",
     "bulkImportUsersLabel": "Bulk import",
-    "bulkImportingUsersLabel": "Importing {{count}} users. Please wait.."
+    "bulkImportingUsersLabel": "Importing {{count}} users. Please wait..",
+    "subscriptionSettingsUpdateSuccess": "Subscription settings successfully updated.",
+    "forecasting": "Forecasting",
+    "forecastEnabledLabel": "Forecasting enabled",
+    "forecastEnabledDescription": "Enable/disable forecasting.",
+    "forecastNotificationsDescription": "How many weeks ahead should users forecast.",
+    "forecastNotificationsLabel": "Notifications",
+    "subscriptionSettings": "Subscription",
+    "summaryRangeValueFormat": "Showing {{value}} months"
   },
   "reports": {
     "generatingReportLabel": "Generating report. To give you the freshest results, we're generating a report from the latest data...",
@@ -182,7 +198,7 @@
     "endTimeLabel": "End time",
     "hoursShortFormat": "{0}h",
     "minutesShortFormat": "{0}min",
-    "editLabel": "Rediger",
+    "editLabel": "Edit",
     "iconSearchPlaceholder": "Search in icons...",
     "inactiveFieldLabel": "Inactive",
     "calendarStrings": {
@@ -243,7 +259,15 @@
       "closeButtonAriaLabel": "Close"
     },
     "preferredLanguageLabel": "Preferred language",
-    "showAllFiltersText": "Show all ({{count}})"
+    "showAllFiltersText": "Show all ({{count}})",
+    "exportMyHours": "Export my hours",
+    "export": "Export",
+    "exportTypeLastMonth": "Last month ({{monthName}})",
+    "exportTypeCurrentMonth": "Current month ({{monthName}})",
+    "exportTypeCurrentYear": "This year ({{year}})",
+    "subscription": "Subscription",
+    "nameLabel": "Name",
+    "descriptionLabel": "Description"
   },
   "navigation": {
     "timesheet": "Timesheet",
@@ -263,7 +287,18 @@
     "manageCustomers": "Manage customers",
     "deleteCustomers": "Delete customers",
     "manageUsers": "Manage users",
-    "manageRolesPermissions": "Manage roles and permissions"
+    "manageRolesPermissions": "Manage roles and permissions",
+    "deleteProjectsDescription": "Deletion of projects is currently not supported.",
+    "accessTimesheetDescription": "Access to Timesheet page",
+    "accessCustomersDescription": "Acces to Customers page where you can search in active and inactive customers.",
+    "accessProjectsDescription": "Acces to Projects page where you can search in active and inactive projects.",
+    "accessAdminDescription": "Acces to Projects page where you can search in active and inactive projects.",
+    "manageProjectsDescription": "Create new and edit existing projects.",
+    "accessReportsDescription": "Access to admin page where you administer users, roles, permissions, API tokens and labels.",
+    "manageCustomersDescription": " Create new and edit existing customers.",
+    "deleteCustomersDescription": "Deletion of customers is currently not supported.",
+    "manageUsersDescription": "Manage users on the admin page. Add new users, one by one or in bulk, and change role of existing users.",
+    "manageRolesPermissionsDescription": "Manage roles and permissions on the admin page. Create new roles and edit exisiting."
   },
   "notifications": {
     "moreLinkText": "Read more here",
@@ -271,7 +306,8 @@
     "headerText": "Notifications",
     "emptyText": "You have no active notifications at this time.",
     "templates": {
-      "unconfirmedPeriods": "Week {0} ({1}) has not been confirmed."
+      "unconfirmedPeriods": "Week {0} ({1}) has not been confirmed.",
+      "forecast": "Missing forecast for week {0} ({1})."
     }
   }
 }

@@ -16,15 +16,15 @@ const selectGroupByCmd = (context: IReportsContext) =>
     iconProps: { iconName: 'GroupList' },
     subMenuProps: {
       items: getGroupByOptions(context.t).map(
-        opt =>
+        (opt) =>
           ({
             ...pick(opt, 'key', 'text'),
             canCheck: true,
             checked: context.groupBy.fieldName === opt.props.fieldName,
-            onClick: () => context.setState({ groupBy: opt.props }),
+            onClick: () => context.setState({ groupBy: opt.props })
           } as IContextualMenuItem)
-      ),
-    },
+      )
+    }
   }
 
 /**
@@ -38,7 +38,7 @@ const exportToExcelCmd = (context: IReportsContext) =>
     key: 'EXPORT_TO_EXCEL',
     text: context.t('reports.exportToExcel'),
     onClick: () => context.onExportExcel(),
-    iconProps: { iconName: 'ExcelDocument' },
+    iconProps: { iconName: 'ExcelDocument' }
   }
 
 /**
@@ -52,7 +52,7 @@ const openFilterPanel = (context: IReportsContext) =>
     key: 'OPEN_FILTER_PANEL',
     iconProps: { iconName: 'Filter' },
     iconOnly: true,
-    onClick: () => context.setState({ isFiltersOpen: true }),
+    onClick: () => context.setState({ isFiltersOpen: true })
   }
 
 /**
@@ -61,6 +61,6 @@ const openFilterPanel = (context: IReportsContext) =>
  * @param {IReportsContext} context Reports context
  */
 export default (context: IReportsContext) => ({
-  items: [selectGroupByCmd(context)].filter(i => i),
-  farItems: [exportToExcelCmd(context), openFilterPanel(context)].filter(i => i),
+  items: [selectGroupByCmd(context)].filter((i) => i),
+  farItems: [exportToExcelCmd(context), openFilterPanel(context)].filter((i) => i)
 })

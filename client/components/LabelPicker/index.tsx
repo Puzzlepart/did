@@ -1,24 +1,25 @@
-import { Label } from 'office-ui-fabric-react/lib/Label'
-import { Icon } from 'office-ui-fabric-react/lib/Icon'
-import React, { useRef, useState, useEffect } from 'react'
+import { useQuery } from '@apollo/client'
 import { EntityLabel } from 'components/EntityLabel'
-import styles from './LabelPicker.module.scss'
-import { useQuery } from '@apollo/react-hooks'
-import { GET_LABELS, ILabelPickerProps } from './types'
-import { IEntityLabel } from 'types'
-import { SelectCallout } from './SelectCallout'
-import { omit } from 'underscore'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import { Label } from 'office-ui-fabric-react/lib/Label'
+import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { LabelObject } from 'types'
+import { omit } from 'underscore'
+import styles from './LabelPicker.module.scss'
+import $labels from './labels.gql'
+import { SelectCallout } from './SelectCallout'
+import { ILabelPickerProps } from './types'
 
-export const LabelPicker = (props: ILabelPickerProps) => {
+export const LabelPicker: React.FunctionComponent<ILabelPickerProps> = (props: ILabelPickerProps) => {
     const { t } = useTranslation()
-    const { data } = useQuery(GET_LABELS, { fetchPolicy: 'cache-and-network' })
+    const { data } = useQuery($labels, { fetchPolicy: 'cache-and-network' })
     const toggleRef = useRef()
-    const [labels, setLabels] = useState<IEntityLabel[]>([])
-    const [selectedLabels, setSelectedLabels] = useState<IEntityLabel[]>([])
+    const [labels, setLabels] = useState<LabelObject[]>([])
+    const [selectedLabels, setSelectedLabels] = useState<LabelObject[]>([])
     const [showCallout, setShowCallout] = useState<boolean>(false)
 
-    function onToggleLabel(label: IEntityLabel) {
+    function onToggleLabel(label: LabelObject) {
         const _selectedLabels = [...selectedLabels]
         const index = _selectedLabels.indexOf(label)
         if (index === -1) {
@@ -33,7 +34,7 @@ export const LabelPicker = (props: ILabelPickerProps) => {
 
     useEffect(() => {
         if (data?.labels) {
-            const _labels: IEntityLabel[] = data.labels.map((lbl: any) => omit(lbl, '__typename'))
+            const _labels: LabelObject[] = data.labels.map((lbl: any) => omit(lbl, '__typename'))
             setLabels(_labels)
             if (props.defaultSelectedKeys) {
                 const _selectedLabels = _labels.filter(lbl => props.defaultSelectedKeys.indexOf(lbl.name) !== -1)

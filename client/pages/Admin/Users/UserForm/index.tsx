@@ -1,28 +1,28 @@
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import { Autocomplete } from 'components'
-import { IUser } from 'types'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { ChoiceGroup } from 'office-ui-fabric-react/lib/ChoiceGroup'
 import { Panel } from 'office-ui-fabric-react/lib/Panel'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { User } from 'types'
 import { find, omit, pick } from 'underscore'
 import validator from 'validator'
 import { UsersContext } from '../context'
-import ADD_OR_UPDATE_USER, { IAddOrUpdateUserVariables } from './ADD_OR_UPDATE_USER'
+import $addOrUpdateUser from './addOrUpdateUser.gql'
 import { IUserFormProps } from './types'
 import styles from './UserFormModal.module.scss'
 
-
-export const UserForm = (props: IUserFormProps) => {
+export const UserForm: React.FunctionComponent<IUserFormProps> = (props: IUserFormProps) => {
     const { adUsers, roles } = useContext(UsersContext)
     const { t } = useTranslation()
-    const [model, setModel] = useState<IUser>(props.user || {
+    
+    const [model, setModel] = useState<User>(props.user || {
         id: '',
         displayName: '',
         role: find(roles, r => r.name === 'User'),
     })
-    const [addOrUpdateUser] = useMutation<any, IAddOrUpdateUserVariables>(ADD_OR_UPDATE_USER)
+    const [addOrUpdateUser] = useMutation($addOrUpdateUser)
 
     /**
      * On save user

@@ -1,31 +1,25 @@
-import { useMutation, useQuery } from '@apollo/react-hooks'
+import { useMutation, useQuery } from '@apollo/client'
 import { AppContext } from 'AppContext'
-import { HotkeyModal, MobileHeader } from 'components'
+import { HotkeyModal } from 'components'
 import { Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
 import React, { useContext, useEffect, useMemo, useReducer } from 'react'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { ActionBar } from './ActionBar'
-import { AllocationView } from './AllocationView'
+import AllocationView from './AllocationView'
 import { ErrorBar } from './ErrorBar'
-import graphql from './graphql'
 import hotkeys from './hotkeys'
 import { Overview } from './Overview'
 import reducer from './reducer'
+import $submitPeriod from './submitPeriod.gql'
 import { SummaryView } from './SummaryView'
+import $timesheet from './timesheet.gql'
 import styles from './Timesheet.module.scss'
-import {
-    ITimesheetContext,
-    ITimesheetParams,
-    ITimesheetPeriod,
-    TimesheetContext,
-    TimesheetPeriod,
-    TimesheetScope,
-    TimesheetView
-} from './types'
+import { ITimesheetContext, ITimesheetParams, TimesheetContext, TimesheetPeriod, TimesheetScope, TimesheetView } from './types'
+import $unsubmitPeriod from './unsubmitPeriod.gql'
 
-export const Timesheet = () => {
+export const Timesheet: React.FunctionComponent = () => {
     const app = useContext(AppContext)
     const { t } = useTranslation()
     const history = useHistory()
@@ -36,11 +30,11 @@ export const Timesheet = () => {
         scope: new TimesheetScope(params),
         selectedView: params.view || 'overview'
     })
-    const query = useQuery<{ timesheet: ITimesheetPeriod[] }>(graphql.query.timesheet, {
+    const query = useQuery($timesheet, {
         variables: {
-            ...state.scope.dateStrings,
+            query: state.scope.dateStrings,
             dateFormat: 'dddd DD',
-            locale: app.user.preferredLanguage,
+            locale: app.user.language,
         },
         fetchPolicy: 'cache-and-network',
         errorPolicy: 'all'
@@ -56,21 +50,27 @@ export const Timesheet = () => {
     }, [state.selectedView, state.selectedPeriod])
 
     const [[submitPeriod], [unsubmitPeriod]] = [
-        useMutation(graphql.mutation.submitPeriod),
-        useMutation(graphql.mutation.unsubmitPeriod),
+        useMutation($submitPeriod),
+        useMutation($unsubmitPeriod),
     ]
 
-    const onSubmitPeriod = async () => {
-        dispatch({ type: 'SUBMITTING_PERIOD', payload: { t } })
-        const variables = { period: state.selectedPeriod.data }
+    const onSubmitPeriod = async (forecast: boolean) => {
+        dispatch({ type: 'SUBMITTING_PERIOD', payload: { t, forecast } })
+        const variables = {
+            period: state.selectedPeriod.data,
+            forecast
+        }
         await submitPeriod({ variables })
         query.refetch()
     }
 
-    const onUnsubmitPeriod = () => {
-        dispatch({ type: 'UNSUBMITTING_PERIOD', payload: { t } })
-        const variables = { period: state.selectedPeriod.data }
-        unsubmitPeriod({ variables }).then(query.refetch)
+    const onUnsubmitPeriod = (forecast: boolean) => {
+        dispatch({ type: 'UNSUBMITTING_PERIOD', payload: { t, forecast } })
+        const variables = {
+            period: state.selectedPeriod.data,
+            forecast
+        }
+        unsubmitPeriod({ variables }).then(() => query.refetch())
     }
 
     const context: ITimesheetContext = useMemo(() => ({
@@ -81,8 +81,6 @@ export const Timesheet = () => {
         dispatch,
         t,
     }), [state])
-
-    query.refetch
 
     const hotkeysProps = useMemo(() => hotkeys(context, t), [context])
 

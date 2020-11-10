@@ -94,6 +94,42 @@ export default new (class DateUtils {
   }
 
   /**
+   * Add 1 month to current date
+   *
+   * @param {number} amount Defaults to 1
+   */
+  public addMonth(amount = 1) {
+    return moment().add(amount, 'month')
+  }
+
+  /**
+   * Subtract {amount} months from current date
+   *
+   * @param {number} amount Defaults to 1
+   */
+  public subtractMonths(amount = 1) {
+    return moment().subtract(amount, 'month')
+  }
+
+  /**
+   * Get month and year for the current date
+   *
+   * @param date Date
+   *
+   * @returns
+   * * {string} monthName
+   * * {number} monthNumber
+   * * {number} year
+   */
+  public getMonthYear(date: moment.Moment = moment()) {
+    return {
+      monthName: date.format('MMMM'),
+      monthNumber: date.month() + 1,
+      year: date.year()
+    }
+  }
+
+  /**
    * Get month name for the speicifed month index
    *
    * Under 0: Subtracts {monthIndex} months from current month
@@ -105,12 +141,15 @@ export default new (class DateUtils {
    *
    * @param {number} monthIndex Month number
    * @param {string} format Format
+   * @param {boolean} captialize Capitalize
    */
-  getMonthName(monthIndex?: number, format: string = 'MMMM'): string {
-    let m = moment().locale(this._momentLocale)
-    if (monthIndex < 0) return m.add(monthIndex, 'month').format(format)
-    else if (monthIndex === 0) return m.format(format)
-    return m.month(monthIndex).format(format)
+  getMonthName(monthIndex?: number, format = 'MMMM', captialize = false): string {
+    const date = moment().locale(this._momentLocale)
+    let name: string
+    if (monthIndex < 0) name = date.add(monthIndex, 'month').format(format)
+    else if (monthIndex === 0) name = date.format(format)
+    else name = date.month(monthIndex).format(format)
+    return captialize ? capitalize(name) : name
   }
 
   /**
@@ -123,11 +162,11 @@ export default new (class DateUtils {
   getTimespanString(
     start: moment.Moment,
     end: moment.Moment,
-    options: object = {
+    options: Record<string, any> = {
       monthFormat: 'MMMM',
       yearFormat: 'YYYY',
       hideYear: false,
-      implicitYear: false,
+      implicitYear: false
     }
   ): string {
     return start

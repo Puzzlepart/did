@@ -1,73 +1,40 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { List } from 'components'
-import { PermissionList } from 'components/PermissionList'
-import { IRole } from 'types'
-import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
-import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { generateColumn as col } from 'utils/generateColumn'
-import { GET_ROLES } from './GET_ROLES'
+import { Role } from 'types'
+import { RoleColumns as columns } from './columns'
 import { IRolePanelProps, RolePanel } from './RolePanel'
-
+import $roles from './roles.gql'
+import styles from './Roles.module.scss'
 
 export const Roles = () => {
     const { t } = useTranslation()
-    
-    const { data, loading, refetch } = useQuery(GET_ROLES)
+    const { data, loading, refetch } = useQuery($roles)
     const [panel, setPanel] = useState<IRolePanelProps>(null)
-    const columns = [
-        col(
-            'name',
-            '',
-            { maxWidth: 140 },
-            (role: IRole) => {
-                return (
-                    <div>
-                        <Icon styles={{ root: { fontSize: 33 } }} iconName={role.icon} />
-                        <div>{role.name}</div>
-                    </div>
-                )
-            }
-        ),
-        col(
-            'permissions',
-            t('admin.permissonsLabel'),
-            { minWidth: 200, isMultiline: true },
-            (role: IRole) => <PermissionList permissionIds={role.permissions} />
-        ),
-        col(
-            'edit',
-            '',
-            { minWidth: 300, },
-            (role: IRole) => (
-                <>
-                    <DefaultButton
-                        styles={{ root: { marginRight: 4 } }}
-                        text={t('admin.editRole')}
-                        onClick={() => setPanel({
-                            title: t('admin.editRole'),
-                            model: role,
-                        })} />
-                </>
-            )),
-    ]
+
+    /**
+     * On edit role
+     * 
+     * @param {Role} role Role to edit
+     */
+    const onEdit = (role: Role) => setPanel({
+        title: t('admin.editRole'),
+        model: role,
+    })
 
     return (
-        <>
+        <div className={styles.root}>
             <List
                 enableShimmer={loading}
                 items={data?.roles || []}
-                columns={columns}
+                columns={columns(onEdit, t)}
                 commandBar={{
                     items: [
                         {
-                            key: 'addNewRole',
+                            key: 'ADD_NEW_ROLE',
                             name: t('admin.addNewRole'),
-                            iconProps: { iconName: 'AddFriend' },
-                            onClick: () => setPanel({
-                                title: t('admin.addNewRole'),
-                            }),
+                            onClick: () => setPanel({ title: t('admin.addNewRole') }),
                         },
                     ],
                     farItems: []
@@ -75,11 +42,9 @@ export const Roles = () => {
             {panel && (
                 <RolePanel
                     {...panel}
-                    onSave={() => {
-                        refetch().then(() => setPanel(null))
-                    }}
+                    onSave={() => refetch().then(() => setPanel(null))}
                     onDismiss={() => setPanel(null)} />
             )}
-        </>
+        </div>
     )
 }

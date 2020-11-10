@@ -1710,7 +1710,7 @@ const ICONS = [
   'AddReaction',
   'DecreaseIndentLegacy',
   'IncreaseIndentLegacy',
-  'SizeLegacy',
+  'SizeLegacy'
 ]
 
 /**

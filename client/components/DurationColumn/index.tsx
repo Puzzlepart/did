@@ -1,4 +1,4 @@
-import { value } from 'helpers'
+import { getValue } from 'helpers'
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { IDurationColumnProps } from './IDurationColumnProps'
@@ -9,7 +9,7 @@ import { IDurationColumnProps } from './IDurationColumnProps'
  */
 export const DurationColumn = ({ row, column }: IDurationColumnProps) => {
     const { t } = useTranslation()
-    const style = { ...value<any>(column, 'data.style', {}) }
+    const style = { ...getValue<any>(column, 'data.style', {}) }
 
     if (row.label === t('common.sumLabel')) style.fontWeight = 500
 

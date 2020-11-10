@@ -1,12 +1,10 @@
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
-import { Label } from 'office-ui-fabric-react/lib/Label'
 import { Slider } from 'office-ui-fabric-react/lib/Slider'
-import { Spinner } from 'office-ui-fabric-react/lib/Spinner'
 import React from 'react'
 import dateUtils from 'utils/date'
 import * as excelUtils from 'utils/exportExcel'
-import styles from './SummaryView.module.scss'
 import { ISummaryViewContext } from './context'
+import styles from './SummaryView.module.scss'
 
 /**
  * Command bar items
@@ -35,15 +33,9 @@ export const commandBar = (context: ISummaryViewContext) => {
                 name: '',
                 onRender: () => (
                     <>
-                        <Label styles={{ root: { marginLeft: 20, alignSelf: 'center' } }}>Antal måneder</Label>
                         <Slider
-                            styles={{
-                                root: {
-                                    width: 300,
-                                    marginLeft: 10,
-                                    alignSelf: 'center',
-                                },
-                            }}
+                            className={styles.rangeSlider}
+                            valueFormat={value => context.t('admin.summaryRangeValueFormat', { value })}
                             disabled={context.loading}
                             value={context.range}
                             min={2}
@@ -51,15 +43,6 @@ export const commandBar = (context: ISummaryViewContext) => {
                             onChange={value => context.dispatch({ type: 'CHANGE_RANGE', payload: value })} />
                     </>
                 ),
-            },
-            {
-                key: 'LOADING_SPINNER',
-                name: '',
-                onRender: () => context.loading && (
-                    <Spinner
-                        label={context.t('admin.summaryLoadingText')}
-                        labelPosition='right' />
-                )
             }
         ] as IContextualMenuItem[],
         farItems: [

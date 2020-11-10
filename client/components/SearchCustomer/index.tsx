@@ -1,7 +1,7 @@
 
-import { useQuery } from '@apollo/react-hooks'
-import { ICustomer } from 'types'
-import GET_CUSTOMERS from 'pages/Customers/GET_CUSTOMERS'
+import { useQuery } from '@apollo/client'
+import { Customer } from 'types'
+import $customers from 'pages/Customers/customers.gql'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Autocomplete, ISuggestionItem } from '../Autocomplete'
@@ -9,12 +9,12 @@ import { ISearchCustomerProps } from './types'
 
 export const SearchCustomer = (props: ISearchCustomerProps) => {
     const { t } = useTranslation()
-    const { loading, data } = useQuery<{ customers: ICustomer[] }>(GET_CUSTOMERS, {
+    const { loading, data } = useQuery<{ customers: Customer[] }>($customers, {
         variables: { sortBy: 'name' },
         fetchPolicy: 'cache-first',
     })
 
-    const searchData: ISuggestionItem<ICustomer>[] = useMemo(() => (data?.customers || []).map(customer => ({
+    const searchData: ISuggestionItem<Customer>[] = useMemo(() => (data?.customers || []).map(customer => ({
         key: customer.key,
         displayValue: customer.name,
         searchValue: [customer.key, customer.name].join(' '),

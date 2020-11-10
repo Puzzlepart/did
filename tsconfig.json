@@ -1,26 +1,30 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "module": "commonjs",
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "jsx": "react",
-    "declaration": false,
-    "sourceMap": false,
-    "experimentalDecorators": true,
-    "downlevelIteration": true,
+    "target": "es2018",
     "noImplicitAny": false,
-    "skipLibCheck": true,
-    "inlineSources": false,
-    "strictNullChecks": false,
-    "noUnusedLocals": false,
-    "resolveJsonModule": true,
-    "typeRoots": ["./node_modules/@types"],
-    "types": ["webpack-env"],
-    "lib": ["es2015", "dom", "es2015.collection"],
-    "baseUrl": "client"
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["es2018", "esnext.asynciterable", "DOM"],
+    "baseUrl": "./",
+    "typeRoots": ["./node_modules/@types", "./server"],
+    "types": [
+      "express",
+      "node",
+      "mocha",
+      "express-session",
+      "passport-azure-ad",
+      "debug",
+      "get-value",
+      "passport",
+      "@custom-types"
+    ],
+    "outDir": "server-dist"
   },
-  "include": ["client/**/*.ts", "client/**/*.tsx", "client/i18n/*.json"],
-  "exclude": ["node_modules", "lib"]
+  "include": ["server/**/*.ts"],
+  "exclude": ["node_modules"]
 }

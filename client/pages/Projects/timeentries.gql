@@ -1,0 +1,18 @@
+
+  query($query: TimeEntriesQuery!) {
+    timeentries(query: $query) {
+      title
+      duration
+      startDateTime
+      endDateTime
+      weekNumber
+      monthNumber
+      year
+      resource {
+        givenName
+        surname
+        mail
+        displayName
+      }
+    }
+  }

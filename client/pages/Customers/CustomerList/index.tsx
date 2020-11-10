@@ -1,7 +1,7 @@
 import { CustomerLink } from 'components/CustomerLink'
 import List from 'components/List'
 import { TFunction } from 'i18next'
-import { ICustomer } from 'types/ICustomer'
+import { Customer } from 'types'
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
@@ -20,7 +20,7 @@ export const columns = (t: TFunction): IColumn[] => ([
         'icon',
         '',
         { maxWidth: 35, minWidth: 35 },
-        (customer: ICustomer) => {
+        (customer: Customer) => {
             if (customer.inactive) {
                 return (
                     <Icon
@@ -37,7 +37,7 @@ export const columns = (t: TFunction): IColumn[] => ([
         'name',
         t('common.nameFieldLabel'),
         { maxWidth: 300 },
-        (customer: ICustomer) => <CustomerLink customer={customer} />
+        (customer: Customer) => <CustomerLink customer={customer} />
     ),
 ])
 

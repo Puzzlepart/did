@@ -1,0 +1,29 @@
+query($customerKey: String, $sortBy: String) {
+  projects(customerKey: $customerKey, sortBy: $sortBy) {
+    id
+    key
+    name
+    description
+    webLink
+    icon
+    externalSystemURL
+    customerKey
+    customer {
+      key
+      name
+    }
+    labels {
+      name
+      description
+      color
+      icon
+    }
+    inactive
+  }
+  outlookCategories {
+    id
+    key
+    displayName
+    color
+  }
+}

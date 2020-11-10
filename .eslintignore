@@ -1,14 +1,3 @@
-bin
-lib
-middleware
-api
-public
-routes
-services
-utils
-views
 tests
 tasks
-app.js
-webpack.config.js
 client/**/*.d.ts

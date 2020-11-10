@@ -1,0 +1,9 @@
+query($templates: NotificationTemplates!, $locale: String!) {
+  notifications(templates: $templates, locale: $locale) {
+    id
+    type
+    severity
+    text
+    moreLink
+  }
+}

@@ -1,4 +1,4 @@
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import { IconPicker, UserMessage } from 'components'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
@@ -8,17 +8,15 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IFormValidation } from 'types/IFormValidation'
 import styles from './CreateCustomerForm.module.scss'
-import CREATE_OR_UPDATE_CUSTOMER, { ICreateOrUpdateCustomerVariables } from './CREATE_OR_UPDATE_CUSTOMER'
+import $createOrUpdateCustomer from './createOrUpdateCustomer.gql'
 import { CustomerModel, ICustomerFormProps } from './types'
-
-
 
 export const CustomerForm = ({ nameLength = [2] }: ICustomerFormProps) => {
     const { t } = useTranslation()
     const [validation, setValidation] = useState<IFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useState<{ text: string; type: MessageBarType }>(null)
     const [model, setModel] = useState<CustomerModel>(new CustomerModel())
-    const [createOrUpdateCustomer, { loading }] = useMutation<any, ICreateOrUpdateCustomerVariables>(CREATE_OR_UPDATE_CUSTOMER)
+    const [createOrUpdateCustomer, { loading }] = useMutation($createOrUpdateCustomer)
 
     /**
      * On validate form

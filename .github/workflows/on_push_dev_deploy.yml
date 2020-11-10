@@ -1,0 +1,50 @@
+name: Build and deploy to didapp/dev
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.18.3]
+
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Select node version 12.8.3
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Cache node modules
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-node-modules
+      with:
+        path: node_modules
+        key: node_modules-${{ hashFiles('**/package.json') }}
+
+    - name: Install npm packages
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        npm install --no-progress --loglevel silent --no-shrinkwrap --no-fund
+
+    - name: npm build and package
+      run: |
+        npm run package:client
+        npm run build:server
+      env:
+        DEBUG: webpack*
+        NODE_ENV: production
+
+    - name: 'Deploy to didapp/dev'
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'didapp'
+        slot-name: 'dev'
+        publish-profile: ${{ secrets.DIDAPP_DEV_PUBLISH_PROFILE }}
+        package: .

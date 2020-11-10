@@ -1,11 +1,10 @@
-import getValue from 'get-value'
+import get from 'get-value'
+import set from 'set-value'
 
 /**
  * Converts string to array buffer
  *
  * @param {string} str String
- *
- * @category Helper
  */
 export function stringToArrayBuffer(str: string): ArrayBuffer {
   const buf = new ArrayBuffer(str.length)
@@ -22,38 +21,43 @@ export function stringToArrayBuffer(str: string): ArrayBuffer {
  * @param {number} num Number
  * @param {string} currency Currency
  * @param {number} minimumFractionDigits Minimum fraction digits
- *
- * @category Helper
  */
 // eslint-disable-next-line @typescript-eslint/no-inferrable-types
 export function currencyDisplay(num: number, currency: string = 'NOK', minimumFractionDigits: number = 0): string {
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency,
-    minimumFractionDigits,
+    minimumFractionDigits
   })
   return formatter.format(num)
 }
 
 /**
- * Get value from object typed
+ * Get value from object
  *
  * @param {any} obj Obj
  * @param {string} exp Expression
  * @param {T} defaultValue Default value
- *
- * @category Helper
  */
-export function value<T>(obj: any, exp: string, defaultValue?: T): T {
-  return getValue(obj, exp, defaultValue && { default: defaultValue })
+export function getValue<T = any>(obj: any, exp: string, defaultValue?: T): T {
+  return get(obj, exp, defaultValue && { default: defaultValue })
+}
+
+/**
+ * Set value in object
+ *
+ * @param {any} obj Obj
+ * @param {string} exp Expression
+ * @param {T} defaultValue Default value
+ */
+export function setValue<T = any>(obj: any, exp: string, value?: T): any {
+  return set(obj, exp, value)
 }
 
 /**
  * Sort alphabetically
  *
  * @param {string[]} strArray Array of strings to sort
- *
- * @category Helper
  */
 export function sortAlphabetically(strArray: string[]): string[] {
   return strArray.sort((a, b) => {

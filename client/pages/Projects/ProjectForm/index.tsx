@@ -1,6 +1,6 @@
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import { IconPicker, LabelPicker, SearchCustomer, useMessage, UserMessage } from 'components'
-import { Toggle } from 'office-ui-fabric-react'
+import { Toggle } from 'office-ui-fabric-react/lib/Toggle'
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import { TextField } from 'office-ui-fabric-react/lib/TextField'
@@ -8,10 +8,9 @@ import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IFormValidation } from 'types'
 import { isBlank } from 'underscore.string'
-import graphql from '../graphql'
+import $createOrUpdateProject from '../createOrUpdateProject.gql'
 import styles from './CreateProjectForm.module.scss'
 import { IProjectFormProps, ProjectModel } from './types'
-
 
 export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFormProps) => {
     const editMode = !!edit
@@ -19,7 +18,7 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
     const [validation, setValidation] = useState<IFormValidation>({ errors: {}, invalid: true })
     const [message, setMessage] = useMessage()
     const [model, setModel] = useState<ProjectModel>(new ProjectModel(edit))
-    const [createOrUpdateProject, { loading }] = useMutation<any, any>(graphql.mutation.createOutlookCategory)
+    const [createOrUpdateProject, { loading }] = useMutation($createOrUpdateProject)
 
     /**
      * Update model

@@ -1,26 +1,25 @@
 
-import { useMutation, useQuery } from '@apollo/react-hooks'
+import { useMutation, useQuery } from '@apollo/client'
 import List from 'components/List'
-import { IUser } from 'types/IUser'
 import { ISpinnerProps, Spinner } from 'office-ui-fabric-react/lib/Spinner'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { User } from 'types'
 import { filter, find, isEmpty, omit } from 'underscore'
+import $bulkImport from './bulkImport.gql'
 import { BulkImportPanel, IBulkImportPanelProps } from './BulkImportPanel'
-import BULK_ADD_USERS from './BULK_ADD_USERS'
-import { columns } from './columns'
-import { GET_DATA } from './GET_DATA'
-import { IUserFormProps, UserForm } from './UserForm'
+import { UserColumns as columns } from './columns'
 import { IUsersContext, UsersContext } from './context'
-
+import { IUserFormProps, UserForm } from './UserForm'
+import $users from './users.gql'
 
 export const Users = () => {
     const { t } = useTranslation()
     const [userForm, setUserForm] = useState<IUserFormProps>(null)
     const [bulkImportPanel, setBulkImportPanel] = useState<IBulkImportPanelProps>(null)
     const [progressProps, setProgressProps] = useState<ISpinnerProps>(null)
-    const { data, refetch, loading, called } = useQuery(GET_DATA, { fetchPolicy: 'cache-and-network' })
-    const [bulkAddUsers] = useMutation(BULK_ADD_USERS)
+    const { data, refetch, loading } = useQuery($users, { fetchPolicy: 'cache-and-network' })
+    const [bulkImport] = useMutation($bulkImport)
     const ctxValue: IUsersContext = useMemo(() => ({
         roles: data?.roles || [],
         users: data?.users || [],
@@ -28,13 +27,12 @@ export const Users = () => {
     }), [data])
     ctxValue.adUsers = filter(ctxValue.adUsers, x => !find(ctxValue.users, y => y.id === x.id))
 
-
     /**
      * On edit user
      * 
-     * @param {IUser} user User to edit
+     * @param {User} user User to edit
      */
-    const onEdit = (user: IUser) => setUserForm({
+    const onEdit = (user: User) => setUserForm({
         headerText: user.displayName,
         user,
     })
@@ -47,7 +45,7 @@ export const Users = () => {
     const onBulkImport = async (users: any[]) => {
         setBulkImportPanel(null)
         setProgressProps({ label: t('admin.bulkImportingUsersLabel', { count: users.length }), labelPosition: 'right' })
-        await bulkAddUsers({ variables: { users: users.map(u => omit(u, '__typename')) } })
+        await bulkImport({ variables: { users: users.map(u => omit(u, '__typename')) } })
         setProgressProps(null)
         refetch()
     }
@@ -56,7 +54,7 @@ export const Users = () => {
     return (
         <UsersContext.Provider value={ctxValue}>
             <List
-                enableShimmer={loading && !called}
+                enableShimmer={loading}
                 items={ctxValue.users}
                 columns={columns(onEdit, t)}
                 commandBar={{

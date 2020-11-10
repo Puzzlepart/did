@@ -1,6 +1,5 @@
-import { InMemoryCache } from 'apollo-cache-inmemory'
-import { ApolloClient, FetchPolicy } from 'apollo-client'
-import { HttpLink } from 'apollo-link-http'
+import { ApolloClient, FetchPolicy } from '@apollo/client'
+import { InMemoryCache } from '@apollo/client/cache'
 
 export interface IError {
   name: string
@@ -17,9 +16,9 @@ export interface IBaseResult {
 
 export const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: new HttpLink({ uri: `${document.location.origin}/graphql` }),
-  defaultOptions: { watchQuery: { fetchPolicy: 'cache-and-network' } },
+  uri: `${document.location.origin}/graphql`,
+  defaultOptions: { watchQuery: { fetchPolicy: 'cache-and-network' } }
 })
 
-export { GET_CURRENT_USER } from './GET_CURRENT_USER'
+export { default as $context } from './context.gql'
 export { FetchPolicy }
