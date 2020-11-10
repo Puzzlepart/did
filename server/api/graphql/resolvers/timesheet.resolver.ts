@@ -3,13 +3,13 @@ import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { contains, filter, find, isEmpty, pick } from 'underscore'
-import { formatDate } from '../../../utils'
+import { formatDate } from '../../../utils/date'
 import { AzStorageService, MSGraphService } from '../../services'
 import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
 import { connectEntities } from './project.utils'
 import EventMatching from './timesheet.matching'
-import { TimesheetPeriodInput, TimesheetPeriodObject, TimesheetQuery } from './timesheet.types'
+import { TimesheetOptions, TimesheetPeriodInput, TimesheetPeriodObject, TimesheetQuery } from './timesheet.types'
 import { connectTimeEntries, getPeriods } from './timesheet.utils'
 import { BaseResult } from './types'
 
@@ -25,33 +25,30 @@ export class TimesheetResolver {
    * @param {MSGraphService} _msgraph MSGraphService
    */
   constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) {}
+
   /**
    * Get timesheet
    *
+   * Query: @timesheet
+   *
    * @param {TimesheetQuery} query Query
-   * @param {string} locale Locale
-   * @param {string} dateFormat Date format
+   * @param {TimesheetOptions} options Options
    * @param {Context} ctx GraphQL context
    */
   @Authorized<IAuthOptions>({ userContext: true })
-  @Query(() => [TimesheetPeriodObject], { description: 'Get timesheet for startDateTime - endDateTime' })
-  async timesheet(
-    @Arg('query') query: TimesheetQuery,
-    @Arg('locale') locale: string,
-    @Arg('dateFormat') dateFormat: string,
-    @Ctx() ctx: Context
-  ) {
+  @Query(() => [TimesheetPeriodObject], { description: 'Get timesheet for startDate - endDate' })
+  async timesheet(@Arg('query') query: TimesheetQuery, @Arg('options') options: TimesheetOptions, @Ctx() ctx: Context) {
     try {
-      const periods = getPeriods(query.startDateTime, query.endDateTime, locale)
+      const periods = getPeriods(query.startDate, query.endDate, options.locale)
       // eslint-disable-next-line prefer-const
       let [projects, customers, timeentries, labels] = await Promise.all([
         this._azstorage.getProjects(),
         this._azstorage.getCustomers(),
         this._azstorage.getTimeEntries(
           {
-            resourceId: ctx.user.id,
-            startDateTime: query.startDateTime,
-            endDateTime: query.endDateTime
+            resourceId: ctx.userId,
+            startDateTime: query.startDate,
+            endDateTime: query.endDate
           },
           { sortAsc: true }
         ),
@@ -63,8 +60,8 @@ export class TimesheetResolver {
       for (let i = 0; i < periods.length; i++) {
         const period = periods[i]
         const [confirmed, forecasted] = await Promise.all([
-          this._azstorage.getConfirmedPeriod(ctx.user.id, period.id),
-          this._azstorage.getForecastedPeriod(ctx.user.id, period.id)
+          this._azstorage.getConfirmedPeriod(ctx.userId, period.id),
+          this._azstorage.getForecastedPeriod(ctx.userId, period.id)
         ])
         period.isForecasted = !!forecasted
         period.forecastedHours = period.isForecasted && forecasted.hours
@@ -76,16 +73,14 @@ export class TimesheetResolver {
             customers,
             labels
           )
-          period.matchedEvents = period.events
         } else {
           const eventMatching = new EventMatching(projects, customers, labels)
-          period.events = await this._msgraph.getEvents(period.startDateTime, period.endDateTime)
-          period.events = eventMatching.matchEvents(period.events)
-          period.matchedEvents = period.events.filter((evt) => !!evt.project)
+          const events = await this._msgraph.getEvents(period.startDate, period.endDate, options.tzOffset)
+          period.events = eventMatching.matchEvents(events)
         }
         period.events = period.events.map((evt) => ({
           ...evt,
-          date: formatDate(evt.startDateTime, dateFormat, locale)
+          date: formatDate(evt.startDateTime, options.dateFormat, options.locale)
         }))
       }
       return periods
@@ -97,8 +92,10 @@ export class TimesheetResolver {
   /**
    * Submit period
    *
+   * Mutation: @submitPeriod
+   *
    * @param {TimesheetPeriodInput} period Period
-   * @param {boolean} forecast Forecast
+   * @param {TimesheetOptions} options Timesheet options (forecast, tzoffset etc)
    * @param {Context} ctx GraphQL context
    */
   @Authorized<IAuthOptions>({ userContext: true })
@@ -107,31 +104,32 @@ export class TimesheetResolver {
   })
   async submitPeriod(
     @Arg('period', () => TimesheetPeriodInput) period: TimesheetPeriodInput,
-    @Arg('forecast', { nullable: true }) forecast: boolean,
+    @Arg('options') options: TimesheetOptions,
     @Ctx() ctx: Context
   ): Promise<BaseResult> {
     try {
       let hours = 0
       if (!isEmpty(period.matchedEvents)) {
         const [events, labels] = await Promise.all([
-          this._msgraph.getEvents(period.startDateTime, period.endDateTime),
+          this._msgraph.getEvents(period.startDate, period.endDate, options.tzOffset),
           this._azstorage.getLabels()
         ])
         const timeentries = period.matchedEvents.reduce((arr, me) => {
-          const entry: any = {
+          const event = find(events, (e) => e.id === me.id)
+          if (!event) return arr
+          const entry = {
             ...pick(me, 'projectId', 'manualMatch'),
-            event: find(events, (e) => e.id === me.id)
+            event: find(events, (e) => e.id === me.id),
+            labels: filter(labels, (lbl) => contains(event.categories, lbl.name)).map((lbl) => lbl.name)
           }
-          if (!entry.event) return arr
-          entry.labels = filter(labels, (lbl) => contains(entry.event.categories, lbl.name)).map((lbl) => lbl.name)
           return [...arr, entry]
         }, [])
-        hours = await this._azstorage.addTimeEntries(ctx.user.id, period.id, timeentries, forecast)
+        hours = await this._azstorage.addTimeEntries(ctx.userId, period.id, timeentries, options.forecast)
       }
-      if (forecast) {
-        await this._azstorage.addForecastedPeriod(ctx.user.id, period.id, hours)
+      if (options.forecast) {
+        await this._azstorage.addForecastedPeriod(ctx.userId, period.id, hours)
       } else {
-        await this._azstorage.addConfirmedPeriod(ctx.user.id, period.id, hours, period.forecastedHours)
+        await this._azstorage.addConfirmedPeriod(ctx.userId, period.id, hours, period.forecastedHours)
       }
       return { success: true, error: null }
     } catch (error) {
@@ -145,6 +143,8 @@ export class TimesheetResolver {
   /**
    * Unsubmit period
    *
+   * Mutation: @unsubmitPeriod
+   *
    * @param {TimesheetPeriodInput} period Period
    * @param {boolean} forecast Forecast
    * @param {Context} ctx GraphQL context
@@ -155,19 +155,19 @@ export class TimesheetResolver {
   })
   async unsubmitPeriod(
     @Arg('period', () => TimesheetPeriodInput) period: TimesheetPeriodInput,
-    @Arg('forecast', { nullable: true }) forecast: boolean,
+    @Arg('options') options: TimesheetOptions = {},
     @Ctx() ctx: Context
   ): Promise<BaseResult> {
     try {
-      if (forecast) {
+      if (options.forecast) {
         await Promise.all([
-          this._azstorage.deleteTimeEntries(period.id, ctx.user.id, true),
-          this._azstorage.removeForecastedPeriod(period.id, ctx.user.id)
+          this._azstorage.deleteTimeEntries(period.id, ctx.userId, true),
+          this._azstorage.removeForecastedPeriod(period.id, ctx.userId)
         ])
       } else {
         await Promise.all([
-          this._azstorage.deleteTimeEntries(period.id, ctx.user.id, false),
-          this._azstorage.removeConfirmedPeriod(period.id, ctx.user.id)
+          this._azstorage.deleteTimeEntries(period.id, ctx.userId, false),
+          this._azstorage.removeConfirmedPeriod(period.id, ctx.userId)
         ])
       }
       return { success: true, error: null }

@@ -1,5 +1,5 @@
 import { User } from 'types'
-import { IPanelProps } from 'office-ui-fabric-react/lib/Panel'
+import { IPanelProps } from 'office-ui-fabric'
 
 export interface IUserFormProps extends IPanelProps {
   /**

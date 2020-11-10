@@ -19,7 +19,7 @@ export class ApiTokenResolver {
    *
    * @param {SubscriptionService} _subscription SubscriptionService
    */
-  constructor(private readonly _subscription: SubscriptionService) { }
+  constructor(private readonly _subscription: SubscriptionService) {}
 
   /**
    * Get API tokens

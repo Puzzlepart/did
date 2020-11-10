@@ -4,7 +4,7 @@ import get from 'get-value'
 import 'reflect-metadata'
 import { Container, ContainerInstance } from 'typedi'
 import { SubscriptionService } from '../services'
-import { Subscription, User } from './resolvers/types'
+import { Subscription } from './resolvers/types'
 const debug = createDebug('api/graphql/context')
 
 export class Context {
@@ -16,9 +16,9 @@ export class Context {
   public requestId?: string
 
   /**
-   * User
+   *
    */
-  public user?: User
+  public userId?: string
 
   /**
    * Subscription
@@ -44,7 +44,7 @@ export class Context {
 export const createContext = async (request: Express.Request): Promise<Context> => {
   try {
     let context: Context = {}
-    context.user = null
+    context.userId = null
     context.subscription = get(request, 'user.subscription')
     context.permissions = []
     if (!!request.token) {
@@ -52,14 +52,12 @@ export const createContext = async (request: Express.Request): Promise<Context> 
       if (!token) throw new AuthenticationError('Token is invalid.')
       context = { ...context, ...token }
     } else {
-      context.user = !!context.permissions && { id: get(request, 'user.id') }
+      context.userId = !!context.permissions && get(request, 'user.id')
     }
     context.requestId = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString()
     context.container = Container.of(context.requestId)
     context.container.set({ id: 'CONTEXT', transient: true, value: context })
     context.container.set({ id: 'REQUEST', transient: true, value: request })
-    // eslint-disable-next-line no-console
-    console.log(context.subscription, context.permissions)
     debug(`Creating context for request ${context.requestId}`)
     return context
   } catch (error) {

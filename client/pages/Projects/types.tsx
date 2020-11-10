@@ -1,4 +1,4 @@
 export interface IProjectsParams {
-    key: string;
-    view: string;
+  key: string
+  view: string
 }

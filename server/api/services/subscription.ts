@@ -25,7 +25,9 @@ class SubscriptionService {
   async getSubscription(subscriptionId: string) {
     try {
       const query = this.tableUtil.createAzQuery(1).where('RowKey eq ?', subscriptionId)
-      const { entries } = await this.tableUtil.queryAzTable('Subscriptions', query, { RowKey: 'id' })
+      const { entries } = await this.tableUtil.queryAzTable('Subscriptions', query, {
+        columnMap: { RowKey: 'id' }
+      })
       return first(entries)
     } catch (error) {
       return null
@@ -57,12 +59,10 @@ class SubscriptionService {
     try {
       const query = this.tableUtil.createAzQuery(1).where('ApiKey eq ?', apiKey)
       const { entries } = await this.tableUtil.queryAzTable('ApiTokens', query, {
-        PartitionKey: 'subscriptionId',
+        columnMap: {
+          PartitionKey: 'subscriptionId'
+        }
       })
-      // eslint-disable-next-line no-console
-      console.log(entries)
-      // eslint-disable-next-line no-console
-      console.log('ApiKey eq ?', apiKey)
       const { subscriptionId } = first(entries)
       const subscription = await this.getSubscription(subscriptionId)
       const data = jwt.verify(apiKey, subscription.apiTokenSecret) as any
@@ -84,7 +84,7 @@ class SubscriptionService {
       const apiKey = jwt.sign(
         {
           permissions: token.permissions,
-          expires: token.expires,
+          expires: token.expires
         },
         env('API_TOKEN_SECRET')
       )
@@ -128,8 +128,10 @@ class SubscriptionService {
     try {
       const query = this.tableUtil.createAzQuery(100).where('PartitionKey eq ?', subscriptionId)
       const { entries } = await this.tableUtil.queryAzTable('ApiTokens', query, {
-        RowKey: 'name',
-        Timestamp: 'created'
+        columnMap: {
+          RowKey: 'name',
+          Timestamp: 'created'
+        }
       })
       return entries
     } catch (error) {

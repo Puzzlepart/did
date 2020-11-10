@@ -32,7 +32,7 @@ module.exports = {
 
     '@typescript-eslint/explicit-module-boundary-types': 0,
 
-    "@typescript-eslint/no-inferrable-types": 0,
+    '@typescript-eslint/no-inferrable-types': 0,
 
     'react/prop-types': 0,
 

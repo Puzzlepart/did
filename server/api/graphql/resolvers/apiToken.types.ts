@@ -15,7 +15,6 @@ export class ApiToken {
   expires: string
 }
 
-
 @InputType({ description: 'Input object for ApiToken used in mutation addApiToken' })
 export class ApiTokenInput {
   @Field(() => ID)

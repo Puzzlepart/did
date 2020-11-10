@@ -18,7 +18,7 @@ export enum PERMISSION {
 export interface IPermission {
   id: PERMISSION
   name: string
-  api?: boolean;
+  api?: boolean
   description?: string
   disabled?: boolean
 }

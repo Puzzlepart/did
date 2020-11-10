@@ -1,8 +1,8 @@
 import { notStrictEqual, strictEqual } from 'assert'
 import { any, first } from 'underscore'
-import EventMatching from '../server/api/graphql/resolvers/timesheet.matching'
-import { header, subHeader } from './@utils'
-import { ensureTestData } from './ensureTestData'
+import EventMatching from '../../server/api/graphql/resolvers/timesheet.matching'
+import { header, subHeader } from '../@utils'
+import { ensureTestData } from '../ensureTestData'
 
 describe(header('Event matching'), async () => {
   let testEvent: any = {}

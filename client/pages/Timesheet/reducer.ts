@@ -1,19 +1,21 @@
 import { QueryResult } from '@apollo/client'
 import { getValue } from 'helpers'
 import { TFunction } from 'i18next'
-import { Project } from 'types'
+import { Project, TimesheetPeriodObject } from 'types'
 import { find, first } from 'underscore'
-import { ITimesheetScopeOptions, ITimesheetState, TimesheetPeriod, TimesheetScope, TimesheetView } from './types'
+import { DateInput } from 'utils/date'
+import { ITimesheetParams, ITimesheetState, TimesheetPeriod, TimesheetView } from './types'
 
 export type TimesheetAction =
   | {
       type: 'DATA_UPDATED'
       payload: {
-        query: QueryResult<any>
+        query: QueryResult<{ timesheet: TimesheetPeriodObject[] }>
         t: TFunction
+        params: ITimesheetParams
       }
     }
-  | { type: 'MOVE_SCOPE'; payload: ITimesheetScopeOptions | string }
+  | { type: 'SET_SCOPE'; payload?: DateInput }
   | { type: 'SUBMITTING_PERIOD'; payload: { t: TFunction; forecast: boolean } }
   | { type: 'UNSUBMITTING_PERIOD'; payload: { t: TFunction; forecast: boolean } }
   | { type: 'CHANGE_PERIOD'; payload: string }
@@ -32,11 +34,12 @@ export type TimesheetAction =
  */
 export default (state: ITimesheetState, action: TimesheetAction): ITimesheetState => {
   const t = getValue<TFunction>(action, 'payload.t')
-  const newState = { ...state }
+  const newState: ITimesheetState = { ...state }
   switch (action.type) {
     case 'DATA_UPDATED':
       {
-        const { loading, data, error } = action.payload.query
+        const { params, query } = action.payload
+        const { loading, data, error } = query
         newState.loading = loading
           ? {
               label: t('timesheet.loadingEventsLabel'),
@@ -44,10 +47,9 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
             }
           : null
         if (data) {
-          newState.periods = data.timesheet.map((period) => new TimesheetPeriod(period))
-          newState.selectedPeriod =
-            find(newState.periods, (p) => p.id === getValue(state, 'selectedPeriod.id', null)) ||
-            first(newState.periods)
+          const selectedPeriodId = state.selectedPeriod?.id || [params.week, params.month, params.year].join('_')
+          newState.periods = data.timesheet.map((period) => new TimesheetPeriod().initialize(period))
+          newState.selectedPeriod = find(newState.periods, (p) => p.id === selectedPeriodId) || first(newState.periods)
         }
         newState.error = error
       }
@@ -72,9 +74,8 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
           : t('timesheet.unconfirmingPeriodDescription')
       }
       break
-    case 'MOVE_SCOPE':
-      if (typeof action.payload === 'string') newState.scope = new TimesheetScope(action.payload)
-      else newState.scope = state.scope.add(action.payload)
+    case 'SET_SCOPE':
+      newState.scope = state.scope.set(action.payload || new Date())
       break
 
     case 'CHANGE_PERIOD':

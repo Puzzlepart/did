@@ -10,11 +10,10 @@ export interface IAuthOptions {
   /**
    * Permission required
    */
-  permission?: string;
+  permission?: string
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const authChecker: AuthChecker<Context, IAuthOptions> = ({ context }: { context: Context }, [authOptions]) => {
   if (!authOptions) return !!context.permissions
-  if (authOptions.userContext) return !!context.user
+  if (authOptions.userContext) return !!context.userId
 }
