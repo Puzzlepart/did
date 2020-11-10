@@ -104,9 +104,10 @@ export default AllocationView((events: EventObject[], chart: IChartConfig, width
     else _items.push({ id: data[chart.idKey], chart, data, value })
     return _items
   }, [])
+  const truncateLength = (width / (items.length || 1) / 6)
   return items.map((i) => ({
     ...i,
-    label: truncateString(i.data[chart.textKey], (width / (items.length || 1) / 6)),
+    label: truncateString(i.data[chart.textKey], truncateLength),
     value: parseFloat(i.value.toFixed(1))
   }))
 })
