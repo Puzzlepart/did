@@ -11,7 +11,6 @@ import { App } from './App'
 import { ContextUser, IAppContext } from './AppContext'
 import { client, $context } from './graphql'
 import './i18n'
-import './_global.scss'
 
 /**
  * Bootstrapping the App

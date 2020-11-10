@@ -10,7 +10,6 @@ import { truncateString } from 'utils/truncateString'
 import { TimesheetContext } from '../context'
 import styles from './AllocationView.module.scss'
 import { CustomTooltip } from './CustomTooltip'
-import './Theme.scss'
 import { IChartConfig, IChartItem } from './types'
 
 export const AllocationView = (
