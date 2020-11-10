@@ -33,12 +33,10 @@ export class DateObject {
    * @param {ObjectInput} input Object input
    */
   public fromObject(input: ObjectInput): DateObject {
-    if (input.week && input.year) {
-      this.$ = dayjs()
-        .year(typeof input.year === 'string' ? parseInt(input.year) : input.year)
-        .week(typeof input.week === 'string' ? parseInt(input.week) : input.week)
-        .startOf('isoWeek')
-    }
+    this.$ = dayjs()
+      .year(typeof input.year === 'string' ? parseInt(input.year) : input.year)
+      .week(typeof input.week === 'string' ? parseInt(input.week) : input.week)
+      .startOf('isoWeek')
     return this
   }
 

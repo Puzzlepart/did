@@ -12,7 +12,9 @@ import styles from './AllocationView.module.scss'
 import { CustomTooltip } from './CustomTooltip'
 import { IChartConfig, IChartItem } from './types'
 
-export const AllocationView = (getData: (events: EventObject[], chart: IChartConfig, width: number) => IChartItem<any>[]) => (): JSX.Element => {
+export const AllocationView = (
+  getData: (events: EventObject[], chart: IChartConfig, width: number) => IChartItem<any>[]
+) => (): JSX.Element => {
   const { t } = useTranslation()
   const { loading, selectedPeriod } = useContext(TimesheetContext)
   const container = useRef<HTMLDivElement>()
@@ -54,9 +56,7 @@ export const AllocationView = (getData: (events: EventObject[], chart: IChartCon
       {charts.map((c) => {
         const data = getData(selectedPeriod?.getEvents() || [], c, container?.current?.clientWidth)
         return (
-          <div
-            key={c.key}
-            className={styles.chartContainer}>
+          <div key={c.key} className={styles.chartContainer}>
             <div className={styles.title}>{c.title}</div>
             <div className={styles.subTitle}>{c.subTitle}</div>
             <ResponsiveContainer width='100%' height={450}>
@@ -70,10 +70,7 @@ export const AllocationView = (getData: (events: EventObject[], chart: IChartCon
                   }}
                 />
                 <Tooltip content={({ payload }) => <CustomTooltip item={payload} chart={c} />} />
-                <Bar
-                  dataKey='value'
-                  animationEasing='ease-in-out'
-                  animationDuration={1200}>
+                <Bar dataKey='value' animationEasing='ease-in-out' animationDuration={1200}>
                   {data.map((entry) => (
                     <Cell
                       key={getValue(entry.data, c.idKey)}
@@ -104,7 +101,7 @@ export default AllocationView((events: EventObject[], chart: IChartConfig, width
     else _items.push({ id: data[chart.idKey], chart, data, value })
     return _items
   }, [])
-  const truncateLength = (width / (items.length || 1) / 6)
+  const truncateLength = width / (items.length || 1) / 6
   return items.map((i) => ({
     ...i,
     label: truncateString(i.data[chart.textKey], truncateLength),

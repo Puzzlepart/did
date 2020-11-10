@@ -1,18 +1,17 @@
 import {
   Calendar,
+  Callout,
   DateRangeType,
   DayOfWeek,
-  Callout,
   DirectionalHint,
   FocusTrapZone,
   TextField
 } from 'office-ui-fabric'
 import { TimesheetContext } from 'pages/Timesheet'
-import React, { useContext } from 'react'
-import { useState } from 'react'
+import { TimesheetScope } from 'pages/Timesheet/types'
+import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './WeekPicker.module.scss'
-import { DateObject } from 'utils/date'
 
 export const WeekPicker = () => {
   const { t } = useTranslation()
@@ -53,7 +52,7 @@ export const WeekPicker = () => {
           <FocusTrapZone isClickableOutsideFocusTrap={true}>
             <Calendar
               onSelectDate={(date) => {
-                dispatch({ type: 'SET_SCOPE', payload: new DateObject(date).startOfWeek.$ })
+                dispatch({ type: 'SET_SCOPE', scope: new TimesheetScope(date) })
                 setCalendar(null)
               }}
               firstDayOfWeek={DayOfWeek.Monday}
