@@ -1,8 +1,8 @@
 import { PERMISSION } from 'config/security/permissions'
+import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from 'i18n'
 import { createContext } from 'react'
 import { Role, Subscription, User } from 'types'
 import { contains } from 'underscore'
-import { supportedLanguages } from '../.resources'
 
 export class ContextUser {
   public id: string
@@ -13,7 +13,7 @@ export class ContextUser {
 
   constructor(user?: User) {
     if (!user) {
-      this._preferredLanguage = 'en-GB'
+      this._preferredLanguage = DEFAULT_LANGUAGE
     } else {
       this.id = user.id
       this.displayName = user.displayName
@@ -27,7 +27,7 @@ export class ContextUser {
    * User language
    */
   public get language() {
-    if (contains(supportedLanguages, this._preferredLanguage)) {
+    if (contains(SUPPORTED_LANGUAGES, this._preferredLanguage)) {
       return this._preferredLanguage
     }
     return 'en-GB'

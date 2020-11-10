@@ -11,7 +11,7 @@ export type TimesheetAction =
       type: 'DATA_UPDATED'
       payload: {
         query: QueryResult<{ timesheet: TimesheetPeriodObject[] }>
-        t: TFunction,
+        t: TFunction
         params: ITimesheetParams
       }
     }
@@ -38,7 +38,7 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
   switch (action.type) {
     case 'DATA_UPDATED':
       {
-        const {params, query } = action.payload
+        const { params, query } = action.payload
         const { loading, data, error } = query
         newState.loading = loading
           ? {
@@ -47,11 +47,9 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
             }
           : null
         if (data) {
-          const selectedPeriodId = state.selectedPeriod?.id || [params.week,params.month, params.year].join('_')
+          const selectedPeriodId = state.selectedPeriod?.id || [params.week, params.month, params.year].join('_')
           newState.periods = data.timesheet.map((period) => new TimesheetPeriod().initialize(period))
-          newState.selectedPeriod =
-            find(newState.periods, (p) => p.id === selectedPeriodId) ||
-            first(newState.periods)
+          newState.selectedPeriod = find(newState.periods, (p) => p.id === selectedPeriodId) || first(newState.periods)
         }
         newState.error = error
       }

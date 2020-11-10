@@ -5,6 +5,7 @@ import i18n from 'i18next'
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
 import 'regenerator-runtime/runtime.js'
+import { logger } from 'utils'
 import DateUtils from 'utils/date'
 import { App } from './App'
 import { ContextUser, IAppContext } from './AppContext'
@@ -46,6 +47,8 @@ const boostrap = async () => {
   const container = document.getElementById('app')
   DateUtils.setup(context.user.language)
   i18n.changeLanguage(context.user.language)
+
+  logger.info(`App initialized with language ${context.user.language}`)
 
   ReactDom.render(
     <ApolloProvider client={client}>

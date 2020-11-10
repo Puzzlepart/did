@@ -1,11 +1,10 @@
 import dayjs, { Dayjs, OpUnitType } from 'dayjs'
-import { pick } from 'underscore'
+import { isEmpty, pick } from 'underscore'
 import DateUtils, { DateInput } from './date'
 
-
 export type ObjectInput = {
-  week: number | string,
-  year: number | string,
+  week: number | string
+  year: number | string
 }
 
 export class DateObject {
@@ -28,9 +27,9 @@ export class DateObject {
 
   /**
    * Sets the DateObject date from an object consisting of week and year
-   * 
+   *
    * If @week and @year is not specified, today's date is used
-   * 
+   *
    * @param {ObjectInput} input Object input
    */
   public fromObject(input: ObjectInput): DateObject {
@@ -148,6 +147,6 @@ export class DateObject {
       year: this.$.year(),
       monthName: this.format('MMMM')
     }
-    return include ? pick(obj, ...include) : obj
+    return isEmpty(include) ? obj : pick(obj, ...include)
   }
 }
