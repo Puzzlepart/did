@@ -72,8 +72,7 @@ export const AllocationView = (
                 <Bar
                   dataKey='value'
                   animationEasing='ease-in-out'
-                  animationDuration={1200}
-                  name={t('common.hours').toString()}>
+                  animationDuration={1200}>
                   {data.map((entry) => (
                     <Cell
                       key={getValue(entry.data, c.idKey)}
