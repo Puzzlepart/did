@@ -6,6 +6,7 @@ import React, { useContext, useEffect, useMemo, useReducer } from 'react'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
+import { TimesheetOptions, TimesheetPeriodObject, TimesheetQuery } from '../../../server/api/graphql/resolvers/types'
 import { ActionBar } from './ActionBar'
 import AllocationView from './AllocationView'
 import { ErrorBar } from './ErrorBar'
@@ -29,9 +30,9 @@ export const Timesheet: React.FunctionComponent = () => {
     scope: new TimesheetScope().fromParams(params),
     selectedView: params.view || 'overview'
   })
-  const query = useQuery($timesheet, {
+  const query = useQuery<{ timesheet: TimesheetPeriodObject[] }, { query: TimesheetQuery, options: TimesheetOptions }>($timesheet, {
+    skip: !state.scope.query,
     variables: {
-      skip: !state.scope.query,
       query: state.scope.query,
       options: {
         dateFormat: 'dddd DD',
@@ -66,7 +67,7 @@ export const Timesheet: React.FunctionComponent = () => {
     dispatch({ type: 'UNSUBMITTING_PERIOD', payload: { t, forecast } })
     const variables = {
       period: state.selectedPeriod.data,
-      forecast
+      options: { forecast }
     }
     await unsubmitPeriod({ variables })
     query.refetch()
