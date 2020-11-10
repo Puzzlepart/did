@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Minor UI adjustments in Timesheet
 - Some fixes in matching engine #603
 
+## Removed
+- Dependency on moment.js removed, now using day.js instead
+
 ## 0.8.0 - 15.10.2020
 ### Added
 - Did now supports forecasting #355

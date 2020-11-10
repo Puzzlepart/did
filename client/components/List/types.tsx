@@ -1,103 +1,109 @@
-import { ICommandBarProps } from 'office-ui-fabric-react/lib/CommandBar'
-import { CheckboxVisibility, IColumn, IDetailsGroupRenderProps, IDetailsHeaderProps, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
-import { ISearchBoxProps } from 'office-ui-fabric-react/lib/SearchBox'
-import { IRenderFunction } from 'office-ui-fabric-react/lib/Utilities'
+import {
+  SelectionMode,
+  IColumn,
+  ISearchBoxProps,
+  IDetailsGroupRenderProps,
+  IRenderFunction,
+  IDetailsHeaderProps,
+  ICommandBarProps,
+  CheckboxVisibility
+} from 'office-ui-fabric'
 
 export interface IListProps<T = any> extends React.HTMLProps<HTMLDivElement> {
-    /**
-     * Items 
-     */
-    items: T[];
+  /**
+   * Items
+   */
+  items: T[]
 
-    /**
-     * Columns
-     */
-    columns?: IColumn[];
+  /**
+   * Columns
+   */
+  columns?: IColumn[]
 
-    /**
-     * Enable shimmer (normally while loading)
-     */
-    enableShimmer?: boolean;
+  /**
+   * Enable shimmer (normally while loading)
+   */
+  enableShimmer?: boolean
 
-    /**
-     * Fixed height
-     */
-    height?: number;
+  /**
+   * Fixed height
+   */
+  height?: number
 
-    /**
-     * Search box props
-     */
-    searchBox?: ISearchBoxProps;
+  /**
+   * Search box props
+   */
+  searchBox?: ISearchBoxProps
 
-    /**
-     * Selection
-     */
-    selection?: IListSelection;
+  /**
+   * Selection
+   */
+  selection?: IListSelection
 
-    /**
-     * Groups
-     */
-    groups?: IListGroups;
+  /**
+   * Groups
+   */
+  groups?: IListGroups
 
-    /**
-     * Group props
-     */
-    groupProps?: IDetailsGroupRenderProps;
+  /**
+   * Group props
+   */
+  groupProps?: IDetailsGroupRenderProps
 
-    /**
-     * On render details header
-     */
-    onRenderDetailsHeader?: IRenderFunction<IDetailsHeaderProps>;
+  /**
+   * On render details header
+   */
+  onRenderDetailsHeader?: IRenderFunction<IDetailsHeaderProps>
 
-    /**
-     * Command bar props
-     */
-    commandBar?: ICommandBarProps;
+  /**
+   * Command bar props
+   */
+  commandBar?: ICommandBarProps
 
-    /**
-     * Check box visibility
-     */
-    checkboxVisibility?: CheckboxVisibility;
+  /**
+   * Check box visibility
+   */
+  checkboxVisibility?: CheckboxVisibility
 
-    /**
-     * Fade in props 
-     * 
-     * [delay, transitionDuration]
-     */
-    fadeIn?: [number, number];
+  /**
+   * Fade in props
+   *
+   * [delay, transitionDuration]
+   */
+  fadeIn?: [number, number]
 
-    /**
-     * Filters
-     */
-    filters?: { [key: string]: any }
+  /**
+   * Filters
+   */
+  filters?: { [key: string]: any }
 }
 
 export interface IListState {
-    /**
-     * Search term
-     */
-    searchTerm?: string;
+  /**
+   * Search term
+   */
+  searchTerm?: string
 
-    /**
-     * Original items
-     */
-    origItems?: any[];
+  /**
+   * Original items
+   */
+  origItems?: any[]
 
-    /**
-     * Current items
-     */
-    items?: any[];
+  /**
+   * Current items
+   */
+  items?: any[]
 }
 
 export interface IListSelection {
-    mode: SelectionMode;
-    defaultSelectedKey?: string;
-    onChanged: (selected: any) => void;
+  mode: SelectionMode
+  defaultSelectedKey?: string
+  onChanged: (selected: any) => void
 }
 
 export interface IListGroups {
-    fieldName: string;
-    groupNames?: string[];
-    emptyGroupName?: string;
-    totalFunc?: (items: any[]) => string;
+  fieldName: string
+  groupNames?: string[]
+  emptyGroupName?: string
+  totalFunc?: (items: any[]) => string
 }

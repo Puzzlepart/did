@@ -9,42 +9,41 @@ import $roles from './roles.gql'
 import styles from './Roles.module.scss'
 
 export const Roles = () => {
-    const { t } = useTranslation()
-    const { data, loading, refetch } = useQuery($roles)
-    const [panel, setPanel] = useState<IRolePanelProps>(null)
+  const { t } = useTranslation()
+  const { data, loading, refetch } = useQuery($roles)
+  const [panel, setPanel] = useState<IRolePanelProps>(null)
 
-    /**
-     * On edit role
-     * 
-     * @param {Role} role Role to edit
-     */
-    const onEdit = (role: Role) => setPanel({
-        title: t('admin.editRole'),
-        model: role,
+  /**
+   * On edit role
+   *
+   * @param {Role} role Role to edit
+   */
+  const onEdit = (role: Role) =>
+    setPanel({
+      title: t('admin.editRole'),
+      model: role
     })
 
-    return (
-        <div className={styles.root}>
-            <List
-                enableShimmer={loading}
-                items={data?.roles || []}
-                columns={columns(onEdit, t)}
-                commandBar={{
-                    items: [
-                        {
-                            key: 'ADD_NEW_ROLE',
-                            name: t('admin.addNewRole'),
-                            onClick: () => setPanel({ title: t('admin.addNewRole') }),
-                        },
-                    ],
-                    farItems: []
-                }} />
-            {panel && (
-                <RolePanel
-                    {...panel}
-                    onSave={() => refetch().then(() => setPanel(null))}
-                    onDismiss={() => setPanel(null)} />
-            )}
-        </div>
-    )
+  return (
+    <div className={styles.root}>
+      <List
+        enableShimmer={loading}
+        items={data?.roles || []}
+        columns={columns(onEdit, t)}
+        commandBar={{
+          items: [
+            {
+              key: 'ADD_NEW_ROLE',
+              name: t('admin.addNewRole'),
+              onClick: () => setPanel({ title: t('admin.addNewRole') })
+            }
+          ],
+          farItems: []
+        }}
+      />
+      {panel && (
+        <RolePanel {...panel} onSave={() => refetch().then(() => setPanel(null))} onDismiss={() => setPanel(null)} />
+      )}
+    </div>
+  )
 }

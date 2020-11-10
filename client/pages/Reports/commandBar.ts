@@ -1,4 +1,4 @@
-import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
+import { IContextualMenuItem } from 'office-ui-fabric'
 import { pick } from 'underscore'
 import { IReportsContext } from './context'
 import { getGroupByOptions } from './types'
