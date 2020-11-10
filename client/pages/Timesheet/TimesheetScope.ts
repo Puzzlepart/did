@@ -11,11 +11,12 @@ export class TimesheetScope {
   constructor(public startDate?: DateObject, public endDate?: DateObject) {}
 
   /**
-   * TODO: Need to set @startDate and @endDate from @params
+   * Sets startDate/endDate from params
+   * 
+   * @param {ITimesheetParams} params Params
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   fromParams(params: ITimesheetParams): TimesheetScope {
-    this.startDate = new DateObject()
+    this.startDate = new DateObject().fromObject(params)
     this.endDate = this.startDate.endOfWeek
     return this
   }
