@@ -1,0 +1,8 @@
+mutation($project: ProjectInput!, $options: ProjectOptions!, $update: Boolean) {
+  result: createOrUpdateProject(project: $project, options: $options, update: $update) {
+    success
+    error {
+      message
+    }
+  }
+}

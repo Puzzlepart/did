@@ -27,7 +27,6 @@ export class ProjectModel {
   public inactive = false
   public icon = first(getIcons(1))
   public labels: string[] = []
-  public createOutlookCategory = false
 
   constructor(project?: Project) {
     if (!!project) {

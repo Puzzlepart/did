@@ -1,8 +1,0 @@
-mutation($project: ProjectInput!, $update: Boolean) {
-  result: createOrUpdateProject(project: $project, update: $update) {
-    success
-    error {
-      message
-    }
-  }
-}

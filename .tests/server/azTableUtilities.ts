@@ -1,4 +1,5 @@
 import { deepStrictEqual, strictEqual } from 'assert'
+import { contains } from 'underscore'
 import { startsWith } from 'underscore.string'
 import AzTableUtilities from '../../server/utils/table'
 import { header } from '../@utils'
@@ -9,6 +10,14 @@ describe(header('AzTableUtilities'), async () => {
   describe('parseAzEntity', () => {
     it('should return an object with title and modified', () => {
       const item = {
+        PartitionKey: {
+          $: 'Edm.String',
+          _: 'Default'
+        },
+        RowKey: {
+          $: 'Edm.String',
+          _: '001'
+        },
         Title: {
           $: 'Edm.String',
           _: 'Hello world'
@@ -19,11 +28,19 @@ describe(header('AzTableUtilities'), async () => {
         }
       }
       const json = tableUtils.parseAzEntity(item)
-      deepStrictEqual(Object.keys(json), ['title', 'modified'])
+      deepStrictEqual(contains(Object.keys(json), 'title') && contains(Object.keys(json), 'modified'), true)
     })
 
     it('should parse settings as JSON', () => {
       const item = {
+        PartitionKey: {
+          $: 'Edm.String',
+          _: 'Default'
+        },
+        RowKey: {
+          $: 'Edm.String',
+          _: '001'
+        },
         Title: {
           $: 'Edm.String',
           _: 'Hello world'
@@ -39,6 +56,14 @@ describe(header('AzTableUtilities'), async () => {
 
     it('should parse as array', () => {
       const item = {
+        PartitionKey: {
+          $: 'Edm.String',
+          _: 'Default'
+        },
+        RowKey: {
+          $: 'Edm.String',
+          _: '001'
+        },
         Name: {
           $: 'Edm.String',
           _: 'Admin'
