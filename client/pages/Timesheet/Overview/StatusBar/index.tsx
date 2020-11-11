@@ -69,7 +69,7 @@ export const StatusBar = () => {
       messages.push({
         children: (
           <p>
-            <span>{t('timesheet.ignoredEventsText', { ignoredEvents: selectedPeriod.ignoredEvents.length })}</span>
+            <span>{t('timesheet.ignoredEventsText', { ignored_count: selectedPeriod.ignoredEvents.length })}</span>
             <a href='#' onClick={() => dispatch({ type: 'CLEAR_IGNORES' })}>
               {t('timesheet.undoIgnoreText')}
             </a>
