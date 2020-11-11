@@ -137,6 +137,7 @@ const List = (props: IListProps) => {
 
 export default withDefaultProps(List, {
   fadeIn: [0, 0],
+  items: [],
   commandBar: {
     items: [],
     farItems: []

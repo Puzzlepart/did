@@ -8,5 +8,11 @@ query($customerKey: String, $sortBy: String) {
     icon
     externalSystemURL
     inactive
+    labels {
+      name
+      description
+      color
+      icon
+    }
   }
 }
