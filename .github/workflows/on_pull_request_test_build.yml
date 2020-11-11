@@ -34,6 +34,10 @@ jobs:
         run: |
           npm install --no-progress --loglevel silent --no-shrinkwrap --no-fund
 
+      - name: Lint
+        run: |
+          npm run lint
+
       - name: Package client JS
         run: |
           npm run package:client

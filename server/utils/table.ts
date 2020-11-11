@@ -1,4 +1,4 @@
-import azurestorage from 'azure-storage'
+import { default as azurestorage, TableUtilities, TableService, TableQuery } from 'azure-storage'
 import { omit, isNull } from 'underscore'
 import { decapitalize, capitalize, isBlank, startsWith } from 'underscore.string'
 import get from 'get-value'
@@ -13,6 +13,8 @@ export interface IParseAzEntityOptions {
   columnMap?: Record<string, string>
   skipColumns?: string[]
 }
+
+type EntityDescriptor = Record<string, TableUtilities.entityGenerator.EntityProperty<any>>
 
 class AzTableUtilities {
   public tableService: azurestorage.services.table.TableService
@@ -32,13 +34,10 @@ class AzTableUtilities {
    *
    * * Custom.ArrayPipe
    *
-   * @param {Record<string,azurestorage.TableUtilities.entityGenerator.EntityProperty<any>>} entityDescriptor Entity descriptor
+   * @param {EntityDescriptor} entityDescriptor Entity descriptor
    * @param {IParseAzEntityOptions} options Parse options
    */
-  parseAzEntity<T = any>(
-    entityDescriptor: Record<string, azurestorage.TableUtilities.entityGenerator.EntityProperty<any>>,
-    options: IParseAzEntityOptions = {}
-  ): T {
+  parseAzEntity<T = any>(entityDescriptor: EntityDescriptor, options: IParseAzEntityOptions = {}): T {
     const parsedEntity = Object.keys(entityDescriptor).reduce((obj: Record<string, any>, key: string) => {
       const { _, $ } = entityDescriptor[key]
       let value = _
@@ -60,6 +59,7 @@ class AzTableUtilities {
       }
       return { ...obj, [decapitalize(key)]: value }
     }, {})
+    if (!parsedEntity.id) parsedEntity.id = [entityDescriptor.PartitionKey._, entityDescriptor.RowKey._].join(' ')
     return omit(parsedEntity, options.skipColumns || ['timestamp', 'partitionKey']) as T
   }
 
@@ -68,11 +68,11 @@ class AzTableUtilities {
    *
    * Adds {RowKey} as 'id' and 'key, skips {PartitionKey}
    *
-   * @param {azurestorage.TableService.QueryEntitiesResult<any} result Result
+   * @param {TableService.QueryEntitiesResult<any>} result Result
    * @param {IParseAzEntityOptions} options Parse options
    */
   parseAzEntities<T = any>(
-    { entries, continuationToken }: azurestorage.TableService.QueryEntitiesResult<any>,
+    { entries, continuationToken }: TableService.QueryEntitiesResult<any>,
     options: IParseAzEntityOptions
   ) {
     entries = entries.map((ent) => this.parseAzEntity<T>(ent, options))
@@ -82,13 +82,13 @@ class AzTableUtilities {
   /**
    * entityGenerator from azure-storage TableUtilities
    */
-  azEntGen(): { [x: string]: (value: any) => azurestorage.TableUtilities.entityGenerator.EntityProperty<any> } {
+  azEntGen(): { [x: string]: (value: any) => TableUtilities.entityGenerator.EntityProperty<any> } {
     return {
-      string: azurestorage.TableUtilities.entityGenerator.String,
-      int: azurestorage.TableUtilities.entityGenerator.Int32,
-      double: azurestorage.TableUtilities.entityGenerator.Double,
-      datetime: azurestorage.TableUtilities.entityGenerator.DateTime,
-      boolean: azurestorage.TableUtilities.entityGenerator.Boolean
+      string: TableUtilities.entityGenerator.String,
+      int: TableUtilities.entityGenerator.Int32,
+      double: TableUtilities.entityGenerator.Double,
+      datetime: TableUtilities.entityGenerator.DateTime,
+      boolean: TableUtilities.entityGenerator.Boolean
     }
   }
 
@@ -97,18 +97,18 @@ class AzTableUtilities {
    */
   query() {
     return {
-      string: azurestorage.TableQuery.stringFilter,
-      boolean: azurestorage.TableQuery.booleanFilter,
-      date: azurestorage.TableQuery.dateFilter,
-      int: azurestorage.TableQuery.int32Filter,
-      double: azurestorage.TableQuery.doubleFilter,
-      combine: azurestorage.TableQuery.combineFilters,
-      equal: azurestorage.TableUtilities.QueryComparisons.EQUAL,
-      greaterThan: azurestorage.TableUtilities.QueryComparisons.GREATER_THAN,
-      greaterThanOrEqual: azurestorage.TableUtilities.QueryComparisons.GREATER_THAN_OR_EQUAL,
-      lessThan: azurestorage.TableUtilities.QueryComparisons.LESS_THAN,
-      lessThanOrEqual: azurestorage.TableUtilities.QueryComparisons.LESS_THAN_OR_EQUAL,
-      and: azurestorage.TableUtilities.TableOperators.AND
+      string: TableQuery.stringFilter,
+      boolean: TableQuery.booleanFilter,
+      date: TableQuery.dateFilter,
+      int: TableQuery.int32Filter,
+      double: TableQuery.doubleFilter,
+      combine: TableQuery.combineFilters,
+      equal: TableUtilities.QueryComparisons.EQUAL,
+      greaterThan: TableUtilities.QueryComparisons.GREATER_THAN,
+      greaterThanOrEqual: TableUtilities.QueryComparisons.GREATER_THAN_OR_EQUAL,
+      lessThan: TableUtilities.QueryComparisons.LESS_THAN,
+      lessThanOrEqual: TableUtilities.QueryComparisons.LESS_THAN_OR_EQUAL,
+      and: TableUtilities.TableOperators.AND
     }
   }
 
@@ -135,8 +135,8 @@ class AzTableUtilities {
    * @param {number} top Number of items to retrieve
    * @param {any[]} filters Filters
    */
-  createAzQuery(top: number, filters: any[] = null): azurestorage.TableQuery {
-    let query = new azurestorage.TableQuery().top(top)
+  createAzQuery(top: number, filters: any[] = null): TableQuery {
+    let query = new TableQuery().top(top)
     if (top) query = query.top(top)
     if (filters) {
       const combined = this.combineAzFilters(filters)
@@ -165,17 +165,17 @@ class AzTableUtilities {
    * Queries a table using the specified query
    *
    * @param {string} table Table name
-   * @param {azurestorage.TableQuery} query Table query
+   * @param {TableQuery} query Table query
    * @param {Object} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
    * @param {string} continuationToken Continuation token
    */
   queryAzTable<T = any>(
     table: string,
-    query: azurestorage.TableQuery,
+    query: TableQuery,
     options?: IParseAzEntityOptions,
-    continuationToken: azurestorage.TableService.TableContinuationToken = null
-  ): Promise<azurestorage.TableService.QueryEntitiesResult<any>> {
-    return new Promise<azurestorage.TableService.QueryEntitiesResult<any>>((resolve, reject) => {
+    continuationToken: TableService.TableContinuationToken = null
+  ): Promise<TableService.QueryEntitiesResult<any>> {
+    return new Promise<TableService.QueryEntitiesResult<any>>((resolve, reject) => {
       this.tableService.queryEntities(table, query, continuationToken, (error, result) => {
         if (!error) {
           return options ? resolve(this.parseAzEntities<T>(result, options)) : resolve(result)
@@ -188,15 +188,15 @@ class AzTableUtilities {
    * Queries all entries in a table using the specified query
    *
    * @param {string} table Table name
-   * @param {azurestorage.TableQuery} query Table query
+   * @param {TableQuery} query Table query
    * @param {Record<string, string>} columnMap Column mapping, e.g. for mapping RowKey and PartitionKey
    */
-  async queryAzTableAll(table: string, query: azurestorage.TableQuery, columnMap: Record<string, string>) {
+  async queryAzTableAll(table: string, query: TableQuery, columnMap: Record<string, string>) {
     let token = null
     const { entries, continuationToken } = await this.queryAzTable(table, query, { columnMap }, token)
     token = continuationToken
     while (token !== null) {
-      const result: azurestorage.TableService.QueryEntitiesResult<any> = await this.queryAzTable(
+      const result: TableService.QueryEntitiesResult<any> = await this.queryAzTable(
         table,
         query,
         { columnMap },
@@ -227,7 +227,7 @@ class AzTableUtilities {
     values: Record<string, any>,
     partitionKey: string = 'Default',
     options: IConvertToAzEntityOptions = { removeBlanks: true, typeMap: {} }
-  ): Record<string, azurestorage.TableUtilities.entityGenerator.EntityProperty<any>> {
+  ): EntityDescriptor {
     const { string, datetime, double, int, boolean } = this.azEntGen()
     const entityDescriptor = Object.keys(values)
       .filter((key) => !isNull(values[key]))
@@ -266,7 +266,7 @@ class AzTableUtilities {
           RowKey: string(rowKey)
         }
       )
-    return omit(entityDescriptor, (prop: azurestorage.TableUtilities.entityGenerator.EntityProperty<any>) =>
+    return omit(entityDescriptor, (prop: TableUtilities.entityGenerator.EntityProperty<any>) =>
       options.removeBlanks ? isBlank(prop._) : false
     )
   }
@@ -301,7 +301,7 @@ class AzTableUtilities {
    * @param {string} table Table name
    * @param {any} entityDescriptor Entity descriptor
    */
-  addAzEntity(table: string, entityDescriptor: any): Promise<azurestorage.TableService.EntityMetadata> {
+  addAzEntity(table: string, entityDescriptor: any): Promise<TableService.EntityMetadata> {
     return new Promise((resolve, reject) => {
       this.tableService.insertEntity(table, entityDescriptor, (error, result) => {
         if (error) reject(error)
@@ -321,7 +321,7 @@ class AzTableUtilities {
     table: string,
     entityDescriptor: any,
     merge?: boolean
-  ): Promise<azurestorage.TableService.EntityMetadata> {
+  ): Promise<TableService.EntityMetadata> {
     return new Promise((resolve, reject) => {
       if (merge) {
         this.tableService.insertOrMergeEntity(table, entityDescriptor, undefined, (error, result) => {
