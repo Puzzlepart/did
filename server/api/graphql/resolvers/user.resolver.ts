@@ -1,3 +1,4 @@
+import { ApolloError } from 'apollo-server-express'
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
@@ -38,7 +39,7 @@ export class UserResolver {
         role
       }
     } catch (error) {
-      return null
+      return new ApolloError(error.message)
     }
   }
 

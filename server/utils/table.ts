@@ -59,7 +59,7 @@ class AzTableUtilities {
       }
       return { ...obj, [decapitalize(key)]: value }
     }, {})
-    parsedEntity.id = [entityDescriptor.PartitionKey._, entityDescriptor.RowKey._].join(' ')
+    if (!parsedEntity.id) parsedEntity.id = [entityDescriptor.PartitionKey._, entityDescriptor.RowKey._].join(' ')
     return omit(parsedEntity, options.skipColumns || ['timestamp', 'partitionKey']) as T
   }
 
