@@ -24,11 +24,11 @@ export class TimesheetResolver {
    * @param {AzStorageService} _azstorage AzStorageService
    * @param {MSGraphService} _msgraph MSGraphService
    */
-  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) { }
+  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) {}
 
   /**
    * Get timesheet
-   * 
+   *
    * Query: @timesheet
    *
    * @param {TimesheetQuery} query Query
@@ -37,11 +37,7 @@ export class TimesheetResolver {
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [TimesheetPeriodObject], { description: 'Get timesheet for startDate - endDate' })
-  async timesheet(
-    @Arg('query') query: TimesheetQuery,
-    @Arg('options') options: TimesheetOptions,
-    @Ctx() ctx: Context
-  ) {
+  async timesheet(@Arg('query') query: TimesheetQuery, @Arg('options') options: TimesheetOptions, @Ctx() ctx: Context) {
     try {
       const periods = getPeriods(query.startDate, query.endDate, options.locale)
       // eslint-disable-next-line prefer-const
@@ -95,7 +91,7 @@ export class TimesheetResolver {
 
   /**
    * Submit period
-   * 
+   *
    * Mutation: @submitPeriod
    *
    * @param {TimesheetPeriodInput} period Period
@@ -146,7 +142,7 @@ export class TimesheetResolver {
 
   /**
    * Unsubmit period
-   * 
+   *
    * Mutation: @unsubmitPeriod
    *
    * @param {TimesheetPeriodInput} period Period

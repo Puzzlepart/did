@@ -3,7 +3,7 @@ import { getValue } from 'helpers'
 import { TFunction } from 'i18next'
 import { Project, TimesheetPeriodObject } from 'types'
 import { find, first } from 'underscore'
-import { DateInput } from 'utils/date'
+import { TimesheetScope } from './TimesheetScope'
 import { ITimesheetParams, ITimesheetState, TimesheetPeriod, TimesheetView } from './types'
 
 export type TimesheetAction =
@@ -11,11 +11,11 @@ export type TimesheetAction =
       type: 'DATA_UPDATED'
       payload: {
         query: QueryResult<{ timesheet: TimesheetPeriodObject[] }>
-        t: TFunction,
+        t: TFunction
         params: ITimesheetParams
       }
     }
-  | { type: 'SET_SCOPE'; payload?: DateInput }
+  | { type: 'SET_SCOPE'; scope?: TimesheetScope }
   | { type: 'SUBMITTING_PERIOD'; payload: { t: TFunction; forecast: boolean } }
   | { type: 'UNSUBMITTING_PERIOD'; payload: { t: TFunction; forecast: boolean } }
   | { type: 'CHANGE_PERIOD'; payload: string }
@@ -38,7 +38,7 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
   switch (action.type) {
     case 'DATA_UPDATED':
       {
-        const {params, query } = action.payload
+        const { params, query } = action.payload
         const { loading, data, error } = query
         newState.loading = loading
           ? {
@@ -47,11 +47,9 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
             }
           : null
         if (data) {
-          const selectedPeriodId = state.selectedPeriod?.id || [params.week,params.month, params.year].join('_')
+          const selectedPeriodId = state.selectedPeriod?.id || [params.week, params.month, params.year].join('_')
           newState.periods = data.timesheet.map((period) => new TimesheetPeriod().initialize(period))
-          newState.selectedPeriod =
-            find(newState.periods, (p) => p.id === selectedPeriodId) ||
-            first(newState.periods)
+          newState.selectedPeriod = find(newState.periods, (p) => p.id === selectedPeriodId) || first(newState.periods)
         }
         newState.error = error
       }
@@ -77,7 +75,7 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
       }
       break
     case 'SET_SCOPE':
-      newState.scope = state.scope.set(action.payload || new Date())
+      newState.scope = action.scope
       break
 
     case 'CHANGE_PERIOD':

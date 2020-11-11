@@ -137,7 +137,7 @@ class MSGraphService {
 
   /**
    * Get events for the specified period using Microsoft Graph endpoint /me/calendar/calendarView
-   * 
+   *
    * @param {string} startDate Start date (YYYY-MM-DD)
    * @param {string} endDate End date (YYYY-MM-DD)
    * @param {number} tzOffset Timezone offset on the client
@@ -145,16 +145,13 @@ class MSGraphService {
   async getEvents(startDate: string, endDate: string, tzOffset: number): Promise<MSGraphEvent[]> {
     try {
       this.startMark('getEvents')
-      const query = ({
+      const query = {
         startDateTime: DateUtils.add(`${startDate}:00:00:00.000`, 'm', tzOffset),
         endDateTime: DateUtils.add(`${endDate}:23:59:59.999`, 'm', tzOffset)
-      })
-      debug(
-        'Querying Graph /me/calendar/calendarView: %s',
-        JSON.stringify({ query })
-      )
+      }
+      debug('Querying Graph /me/calendar/calendarView: %s', JSON.stringify({ query }))
       const client = await this._getClient()
-      const { value } = await client
+      const { value } = (await client
         .api('/me/calendar/calendarView')
         .query(query)
         .select(['id', 'subject', 'body', 'start', 'end', 'categories', 'webLink', 'isOrganizer'])
@@ -162,7 +159,7 @@ class MSGraphService {
         .filter("sensitivity ne 'private' and isallday eq false and iscancelled eq false")
         .orderby('start/dateTime asc')
         .top(500)
-        .get() as { value: any[] }
+        .get()) as { value: any[] }
       const events = value
         .filter((event) => !!event.subject)
         .map((event) => new MSGraphEvent(event))

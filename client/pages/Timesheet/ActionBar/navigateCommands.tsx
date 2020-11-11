@@ -32,8 +32,7 @@ export default (context: ITimesheetContext) =>
         iconOnly: true,
         disabled: cmd.disabled(context),
         iconProps: { iconName: cmd.iconName, className: styles.actionBarIcon },
-        onClick: () =>
-          context.dispatch({ type: 'SET_SCOPE', payload: cmd.add && context.scope.startDate.add(cmd.add).$ }),
+        onClick: () => context.dispatch({ type: 'SET_SCOPE', scope: context.scope.set(cmd?.add) }),
         title: cmd.title(context.t)
       } as IContextualMenuItem)
   )

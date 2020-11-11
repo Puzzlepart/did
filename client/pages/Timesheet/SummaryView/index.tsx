@@ -117,17 +117,11 @@ export const SummaryView = () => {
     const context = useContext(TimesheetContext)
     const columns = createColumns(context.scope)
     const events = (context.selectedPeriod?.getEvents() || []).filter((e) => !!e.project)
-    const items = [
-      ...generateRows(events, columns),
-      generateTotalRow(events, columns, t('common.sumLabel'))
-    ]
+    const items = [...generateRows(events, columns), generateTotalRow(events, columns, t('common.sumLabel'))]
 
     return (
       <div key={`summary_${context.selectedPeriod?.id}`} className={styles.root}>
-        <List
-          items={items}
-          columns={columns}
-          enableShimmer={!!context?.loading} />
+        <List items={items} columns={columns} enableShimmer={!!context?.loading} />
       </div>
     )
   }

@@ -28,6 +28,12 @@
     }
 
     .chart {
+      [class*='recharts-cartesian-axis-tick-value'], [class*='recharts-label'] {
+        font-size: 12px;
+        margin-top: 8px;
+        max-width: 150px;
+      }
+
       .tooltip {
         background-color: #fff;
         max-width: 300px;

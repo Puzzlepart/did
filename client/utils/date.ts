@@ -33,7 +33,7 @@ interface IDateUtils {
 export type DateInput = ConfigType
 
 export class DateUtils {
-  constructor(private $: IDateUtils) { }
+  constructor(private $: IDateUtils) {}
 
   /**
    * Setup DateUtils class using @dayjs with @plugins

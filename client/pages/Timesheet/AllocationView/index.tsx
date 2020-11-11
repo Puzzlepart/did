@@ -1,7 +1,7 @@
 import { UserMessage } from 'components'
 import { getValue } from 'helpers'
 import color from 'randomcolor'
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { EventObject } from 'types'
@@ -10,14 +10,14 @@ import { truncateString } from 'utils/truncateString'
 import { TimesheetContext } from '../context'
 import styles from './AllocationView.module.scss'
 import { CustomTooltip } from './CustomTooltip'
-import './Theme.scss'
 import { IChartConfig, IChartItem } from './types'
 
 export const AllocationView = (
-  getData: (events: EventObject[], chart: IChartConfig) => IChartItem<any>[]
+  getData: (events: EventObject[], chart: IChartConfig, width: number) => IChartItem<any>[]
 ) => (): JSX.Element => {
   const { t } = useTranslation()
   const { loading, selectedPeriod } = useContext(TimesheetContext)
+  const container = useRef<HTMLDivElement>()
 
   if (!loading && selectedPeriod?.totalDuration === 0) {
     return (
@@ -52,9 +52,9 @@ export const AllocationView = (
   ]
 
   return (
-    <div key={`allocation_${selectedPeriod?.id}`} className={styles.root}>
+    <div key={`allocation_${selectedPeriod?.id}`} className={styles.root} ref={container}>
       {charts.map((c) => {
-        const data = getData(selectedPeriod?.getEvents() || [], c)
+        const data = getData(selectedPeriod?.getEvents() || [], c, container?.current?.clientWidth)
         return (
           <div key={c.key} className={styles.chartContainer}>
             <div className={styles.title}>{c.title}</div>
@@ -70,11 +70,7 @@ export const AllocationView = (
                   }}
                 />
                 <Tooltip content={({ payload }) => <CustomTooltip item={payload} chart={c} />} />
-                <Bar
-                  dataKey='value'
-                  animationEasing='ease-in-out'
-                  animationDuration={1200}
-                  name={t('common.hours').toString()}>
+                <Bar dataKey='value' animationEasing='ease-in-out' animationDuration={1200}>
                   {data.map((entry) => (
                     <Cell
                       key={getValue(entry.data, c.idKey)}
@@ -94,7 +90,8 @@ export const AllocationView = (
   )
 }
 
-export default AllocationView((events: EventObject[], chart: IChartConfig) => {
+export default AllocationView((events: EventObject[], chart: IChartConfig, width: number) => {
+  if (!width) return []
   const items = events.reduce((_items, entry) => {
     const data = getValue(entry, chart.key, null)
     if (!data) return _items
@@ -104,9 +101,10 @@ export default AllocationView((events: EventObject[], chart: IChartConfig) => {
     else _items.push({ id: data[chart.idKey], chart, data, value })
     return _items
   }, [])
+  const truncateLength = width / (items.length || 1) / 6
   return items.map((i) => ({
     ...i,
-    label: truncateString(i.data[chart.textKey], 15),
+    label: truncateString(i.data[chart.textKey], truncateLength),
     value: parseFloat(i.value.toFixed(1))
   }))
 })
