@@ -55,7 +55,7 @@ export class ProjectResolver {
   @Mutation(() => BaseResult, { description: 'Create or update project' })
   async createOrUpdateProject(
     @Arg('project', () => ProjectInput) project: ProjectInput,
-    @Arg('ProjectOptions', () => ProjectInput) options: ProjectOptions,
+    @Arg('options', () => ProjectOptions) options: ProjectOptions,
     @Arg('update', { nullable: true }) update: boolean,
     @Ctx() ctx: Context
   ) {
