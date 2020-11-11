@@ -6,3 +6,5 @@ export const filters = (t: TFunction): BaseFilter[] => [
   new CustomerFilter('customer.name', t('common.customer')),
   new ProjectFilter('project.name', t('common.project'))
 ]
+
+console.log(filters)
