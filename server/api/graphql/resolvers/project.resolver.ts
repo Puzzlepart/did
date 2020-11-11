@@ -31,7 +31,7 @@ export class ProjectResolver {
   async projects(
     @Arg('customerKey', { nullable: true }) customerKey: string,
     @Arg('sortBy', { nullable: true }) sortBy: string
-  ) {
+  ): Promise<Project[]> {
     // eslint-disable-next-line prefer-const
     let [projects, customers, labels] = await Promise.all([
       this._azstorage.getProjects(customerKey, {
@@ -58,7 +58,7 @@ export class ProjectResolver {
     @Arg('options', () => ProjectOptions) options: ProjectOptions,
     @Arg('update', { nullable: true }) update: boolean,
     @Ctx() ctx: Context
-  ) {
+  ): Promise<BaseResult> {
     try {
       const id = await this._azstorage.createOrUpdateProject(project, ctx.userId, update)
       if (options.createOutlookCategory) {

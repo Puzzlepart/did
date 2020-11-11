@@ -170,13 +170,11 @@ class AzStorageService {
    *
    * @returns The id of the crated project
    */
-  async createOrUpdateProject(project: any, createdBy: string, update: boolean) {
-    const id = [project.customerKey, project.key].join(' ')
+  async createOrUpdateProject(project: any, createdBy: string, update: boolean): Promise<string> {
     const entity = this.tableUtil.convertToAzEntity(
       project.key,
       {
         ...project,
-        id,
         labels: !!project.labels ? project.labels.join('|') : '',
         createdBy
       },
@@ -185,7 +183,7 @@ class AzStorageService {
     )
     if (update) await this.tableUtil.updateAzEntity(this.tables.projects, entity, true)
     else await this.tableUtil.addAzEntity(this.tables.projects, entity)
-    return id
+    return [project.customerKey, project.key].join(' ')
   }
 
   /**
