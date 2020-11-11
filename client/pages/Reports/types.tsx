@@ -55,7 +55,7 @@ export interface IReportsState {
  */
 export function getQueries<T = IReportsQuery>(t: TFunction): T[] {
   const now = new DateObject()
-  const lastMonth = now.add('-1m').toObject()
+  const lastMonth = now.add('-1month').toObject()
   const currentMonth = now.toObject()
   const currentYear = now.toObject('year')
   return [
