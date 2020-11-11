@@ -20,7 +20,7 @@ export class AzStorageServiceTables {
     public roles: string = 'Roles',
     public labels: string = 'Labels',
     public users: string = 'Users'
-  ) {}
+  ) { }
 }
 
 @Service({ global: false })
@@ -164,7 +164,7 @@ class AzStorageService {
   /**
    * Create or update project in table storage
    *
-   * @param {*} project Project data
+   * @param {any} project Project data
    * @param {string} createdBy Created by ID
    * @param {boolean} update Update the existing project
    *
@@ -174,8 +174,8 @@ class AzStorageService {
     const entity = this.tableUtil.convertToAzEntity(
       project.key,
       {
-        ...project,
-        labels: !!project.labels ? project.labels.join('|') : '',
+        ...omit(project, 'customerKey', 'key'),
+        labels: (project?.labels || []).join('|'),
         createdBy
       },
       project.customerKey,
