@@ -50,3 +50,6 @@ doc/
 .tests/*.json
 .localtunnel
 schema.gql
+
+# Public folder on root
+public
