@@ -6,16 +6,16 @@ import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox'
 import { contains, isBlank } from 'underscore.string'
 import { useTranslation } from 'react-i18next'
 
-
 export const FilterItem = (props: IFilterItemProps) => {
     const { t } = useTranslation()
     const selectedKeys = props.filter.selected.map(f => f.key)
     const [searchTerm, onSearch] = useState<string>('')
     const [showCount, setShowCount] = useState(props.shortListCount)
 
-    const items = useMemo(() => {
-        return props.filter.items.filter(item => isBlank(searchTerm) ? true : contains(item.value.toLowerCase(), searchTerm.toLowerCase()))
-    }, [searchTerm])
+    const items = useMemo(() => props.filter.items.filter(item => {
+        if (isBlank(searchTerm)) return true
+        return contains(item.value.toLowerCase(), searchTerm.toLowerCase())
+    }), [searchTerm])
 
     return (
         <div className={styles.root}>
