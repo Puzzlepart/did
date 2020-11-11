@@ -8,16 +8,18 @@ export class ProjectFilter extends BaseFilter {
   }
 
   /**
-   * Intialize the ResourceFilter
+   * Intialize the ProjectFilter
    *
    * @param {any[]} entries Entries
    */
   public initialize(entries: any[]): IFilter {
     const projects = _.unique(entries.map(e => value(e, this.fieldName, null))).sort()
-    const items = projects.map(resource => ({
-      key: resource,
-      value: resource,
-    }))
+    const items = projects
+      .filter(p => p)
+      .map(p => ({
+        key: p,
+        value: p,
+      }))
     return {
       key: this.fieldName,
       name: this.name,
