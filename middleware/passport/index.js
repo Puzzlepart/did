@@ -20,8 +20,6 @@ function getRedirectUrl() {
   return redirectUrl
 }
 
-console.log(process.env.LOCALTUNNEL_SUBDOMAIN)
-
 const strategy = new OIDCStrategy(
   {
     identityMetadata: `${process.env.OAUTH_AUTHORITY}${process.env.OAUTH_ID_METADATA}`,
