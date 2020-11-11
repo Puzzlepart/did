@@ -5,15 +5,41 @@
   .container {
     display: flex;
     flex-direction: row;
+
     .message {
       flex-grow: 1;
       flex-basis: 0;
-      justify-content: space-between;
-      margin-right: 6px;
+      justify-content: space-evenly;
+      color: #323130;
 
-      &:last-child {
-        margin: 0;
+      strong em {
+        font-size: 1.2em;
+        font-weight: bold;
+        font-style: normal;
       }
+
+      margin-right: 10px;
+
+      &:last-of-type() {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+.root.mobile {
+  .container {
+    flex-direction: column;
+
+    .message {
+      margin-top: 10px;
+
+      strong {
+        font-style: normal;
+        font-size: 1.2em;
+      }
+
+      margin-right: 0;
     }
   }
 }
