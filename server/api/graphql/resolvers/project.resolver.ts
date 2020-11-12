@@ -1,11 +1,11 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
-import { pick } from 'underscore'
-import { Context } from '../context'
-import { BaseResult, Project, ProjectInput } from './types'
-import { connectEntities } from './project.utils'
-import { AzStorageService, MSGraphService } from '../../services'
 import { Service } from 'typedi'
+import { pick } from 'underscore'
+import { AzStorageService, MSGraphService } from '../../services'
+import { Context } from '../context'
+import { connectEntities } from './project.utils'
+import { BaseResult, Project, ProjectInput, ProjectOptions } from './types'
 
 @Service()
 @Resolver(Project)
@@ -31,7 +31,7 @@ export class ProjectResolver {
   async projects(
     @Arg('customerKey', { nullable: true }) customerKey: string,
     @Arg('sortBy', { nullable: true }) sortBy: string
-  ) {
+  ): Promise<Project[]> {
     // eslint-disable-next-line prefer-const
     let [projects, customers, labels] = await Promise.all([
       this._azstorage.getProjects(customerKey, {
@@ -55,12 +55,13 @@ export class ProjectResolver {
   @Mutation(() => BaseResult, { description: 'Create or update project' })
   async createOrUpdateProject(
     @Arg('project', () => ProjectInput) project: ProjectInput,
+    @Arg('options', () => ProjectOptions) options: ProjectOptions,
     @Arg('update', { nullable: true }) update: boolean,
     @Ctx() ctx: Context
-  ) {
+  ): Promise<BaseResult> {
     try {
       const id = await this._azstorage.createOrUpdateProject(project, ctx.userId, update)
-      if (project.createOutlookCategory) {
+      if (options.createOutlookCategory) {
         await this._msgraph.createOutlookCategory(id)
       }
       return { success: true, error: null }

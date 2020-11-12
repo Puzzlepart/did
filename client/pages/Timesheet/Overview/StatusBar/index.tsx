@@ -6,10 +6,12 @@ import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
 import DateUtils from 'utils/date'
 import { TimesheetContext } from '../..'
+import { isMobile } from 'react-device-detect'
 import styles from './StatusBar.module.scss'
 
 export const StatusBar = () => {
   const { t } = useTranslation()
+  if (isMobile) styles.root += ` ${styles.mobile}`
   const { loading, selectedPeriod, periods, dispatch } = useContext(TimesheetContext)
 
   const defaultMessageProps: IUserMessageProps = {
@@ -67,7 +69,7 @@ export const StatusBar = () => {
       messages.push({
         children: (
           <p>
-            <span>{t('timesheet.ignoredEventsText', { ignoredEvents: selectedPeriod.ignoredEvents.length })}</span>
+            <span>{t('timesheet.ignoredEventsText', { ignored_count: selectedPeriod.ignoredEvents.length })}</span>
             <a href='#' onClick={() => dispatch({ type: 'CLEAR_IGNORES' })}>
               {t('timesheet.undoIgnoreText')}
             </a>

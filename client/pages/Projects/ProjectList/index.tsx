@@ -1,12 +1,13 @@
 import List from 'components/List'
 import { Checkbox } from 'office-ui-fabric'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
+import { contains } from 'underscore'
 import { withDefaultProps } from 'with-default-props'
 import columns from './columns'
 import { IProjectListProps } from './types'
 
-const ProjectList = (props: IProjectListProps) => {
+const ProjectList: FunctionComponent<IProjectListProps> = (props: IProjectListProps) => {
   const { t } = useTranslation()
   const [items, setItems] = useState([...props.items])
   const [showInactive, setShowInactive] = useState(false)
@@ -20,7 +21,7 @@ const ProjectList = (props: IProjectListProps) => {
     <List
       {...props}
       items={items}
-      columns={columns(props, t)}
+      columns={columns(props, t).filter(col => !contains(props.hideColumns, col.key))}
       groups={props.groups}
       selection={props.selection}
       commandBar={{
@@ -43,4 +44,4 @@ const ProjectList = (props: IProjectListProps) => {
   )
 }
 
-export default withDefaultProps(ProjectList, { hideColumns: [] })
+export default withDefaultProps(ProjectList, { items: [], hideColumns: [] })

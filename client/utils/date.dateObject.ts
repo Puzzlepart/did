@@ -1,5 +1,5 @@
 import dayjs, { Dayjs, OpUnitType } from 'dayjs'
-import { pick } from 'underscore'
+import { isEmpty, pick } from 'underscore'
 import DateUtils, { DateInput } from './date'
 
 export type ObjectInput = {
@@ -33,12 +33,10 @@ export class DateObject {
    * @param {ObjectInput} input Object input
    */
   public fromObject(input: ObjectInput): DateObject {
-    if (input.week && input.year) {
-      this.$ = dayjs()
-        .year(typeof input.year === 'string' ? parseInt(input.year) : input.year)
-        .week(typeof input.week === 'string' ? parseInt(input.week) : input.week)
-        .startOf('isoWeek')
-    }
+    this.$ = dayjs()
+      .year(typeof input.year === 'string' ? parseInt(input.year) : input.year)
+      .week(typeof input.week === 'string' ? parseInt(input.week) : input.week)
+      .startOf('isoWeek')
     return this
   }
 
@@ -147,6 +145,6 @@ export class DateObject {
       year: this.$.year(),
       monthName: this.format('MMMM')
     }
-    return include ? pick(obj, ...include) : obj
+    return isEmpty(include) ? obj : pick(obj, ...include)
   }
 }

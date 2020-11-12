@@ -6,6 +6,7 @@ import React, { useContext, useEffect, useMemo, useReducer } from 'react'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
+import { isEmpty } from 'underscore'
 import { TimesheetOptions, TimesheetPeriodObject, TimesheetQuery } from '../../../server/api/graphql/resolvers/types'
 import { ActionBar } from './ActionBar'
 import AllocationView from './AllocationView'
@@ -27,15 +28,15 @@ export const Timesheet: React.FunctionComponent = () => {
   const params = useParams<ITimesheetParams>()
   const [state, dispatch] = useReducer(reducer, {
     periods: [],
-    scope: new TimesheetScope().fromParams(params),
+    scope: isEmpty(Object.keys(params)) ? new TimesheetScope() : new TimesheetScope().fromParams(params),
     selectedView: params.view || 'overview'
   })
   const query = useQuery<{ timesheet: TimesheetPeriodObject[] }, { query: TimesheetQuery; options: TimesheetOptions }>(
     $timesheet,
     {
-      skip: !state.scope.query,
+      skip: !state.scope.query(),
       variables: {
-        query: state.scope.query,
+        query: state.scope.query(),
         options: {
           dateFormat: 'dddd DD',
           locale: app.user.language,

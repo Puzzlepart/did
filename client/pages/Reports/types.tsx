@@ -51,47 +51,37 @@ export interface IReportsState {
 /**
  * Get queries
  *
- * Collection of graphql queries
- *
- * Consists of:
- *
- * * key
- * * text
- * * iconName
- * * variables
- * * exportFilename
- *
  * @param {TFunction} t Translate function
  */
 export function getQueries<T = IReportsQuery>(t: TFunction): T[] {
   const now = new DateObject()
-  const lastMonth = now.add('-1m').toObject()
+  const lastMonth = now.add('-1month').toObject()
   const currentMonth = now.toObject()
   const currentYear = now.toObject('year')
   return [
     ({
-      key: 'LAST_MONTH',
+      key: 'lastMonth',
       text: t('common.exportTypeLastMonth', lastMonth),
       iconName: 'CalendarDay',
       variables: { query: omit(lastMonth, 'monthName') },
       exportFileName: `TimeEntries-${capitalize(lastMonth.monthName)}-{0}.xlsx`
     } as unknown) as T,
     ({
-      key: 'CURRENT_MONTH',
+      key: 'currentMonth',
       text: t('common.exportTypeCurrentMonth', currentMonth),
       iconName: 'Calendar',
       variables: { query: omit(currentMonth, 'monthName') },
       exportFileName: `TimeEntries-${capitalize(currentMonth.monthName)}-{0}.xlsx`
     } as unknown) as T,
     ({
-      key: 'CURRENT_YEAR',
+      key: 'currentYear',
       text: t('common.exportTypeCurrentYear', currentYear),
       iconName: 'CalendarReply',
       variables: { query: currentYear },
       exportFileName: `TimeEntries-${currentYear.year}-{0}.xlsx`
     } as unknown) as T,
     ({
-      key: 'FORECAST',
+      key: 'forecast',
       text: t('reports.forecast'),
       iconName: 'TimeSheet',
       variables: {
