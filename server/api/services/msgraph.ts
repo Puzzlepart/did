@@ -65,7 +65,7 @@ class MSGraphService {
    * Gets a Microsoft Graph Client using the auth token from the class
    */
   private async _getClient(): Promise<MSGraphClient> {
-    if(!this._access_token) {
+    if (!this._access_token) {
       this._access_token = (await this._oauthService.getAccessToken(this._accessTokenOptions)).access_token
     }
     const client = MSGraphClient.init({
@@ -78,16 +78,19 @@ class MSGraphService {
 
   /**
    * Get current user properties
+   *
+   * @param {string[]} properties Properties to retrieve
    */
-  async getCurrentUser(): Promise<any> {
+  async getCurrentUser(properties: string[]): Promise<any> {
     try {
       this.startMark('getCurrentUser')
+      debug('Querying Graph /me: %s', JSON.stringify({ select: properties }))
       const client = await this._getClient()
       const value = await client
         .api('/me')
         .select([
           'id',
-          ...env('USER_SYNC_PROPERTIES', '').split(',')
+          ...properties
         ])
         .get()
       this.endMark('getCurrentUser')

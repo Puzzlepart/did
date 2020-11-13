@@ -18,9 +18,9 @@ const AD_USER_SYNC_PROPERTIES_KEY = 'settings.adsync.adUserSyncProperties'
  * @param {string} access_token
  */
 async function synchronizeUserProfile(user: Express.User, subscription: any, access_token: string): Promise<void> {
-  const data = await new MSGraphService(null, access_token).getCurrentUser()
   const properties = get(subscription, AD_USER_SYNC_PROPERTIES_KEY, { default: [] })
   if (properties.length > 0) {
+    const data = await new MSGraphService(null, access_token).getCurrentUser(properties)
     const needSync = !isEqual(pick(user, ...properties), pick(data, ...properties))
     if (needSync) {
       debug('Synchronizing user profile properties %s from Azure AD.', properties.join(', '))
