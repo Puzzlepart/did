@@ -30,21 +30,12 @@ export const ApiTokensColumns = (onDeleteApiToken: (token: ApiToken) => void, t:
     key: 'expires',
     name: t('common.expiresLabel'),
     minWidth: 100,
-    maxWidth: 200,
-    onRender: (token: ApiToken) =>new DateObject(token.expires).format('MMMM D, YYYY')
+    onRender: (token: ApiToken) => new DateObject(token.expires).format('MMMM D, YYYY')
   },
   {
     key: 'actions',
     name: '',
     minWidth: 150,
-    onRender: (token: ApiToken) => {
-      return (
-        <DefaultButton
-          text={t('common.delete')}
-          iconProps={{ iconName: 'RecycleBin' }}
-          onClick={() => onDeleteApiToken(token)}
-        />
-      )
-    }
+    onRender: (token: ApiToken) => <DefaultButton text={t('common.delete')} onClick={() => onDeleteApiToken(token)} />
   }
 ]
