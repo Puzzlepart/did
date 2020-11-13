@@ -3,13 +3,13 @@ import { UserMessage } from 'components/UserMessage'
 import { getValue } from 'helpers'
 import { DefaultButton, Icon, MessageBar, MessageBarType } from 'office-ui-fabric'
 import { ProjectList } from 'pages/Projects'
-import * as React from 'react'
+import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './CustomerDetails.module.scss'
 import $projects from './projects.gql'
 import { ICustomerDetailsProps } from './types'
 
-export const CustomerDetails = (props: ICustomerDetailsProps) => {
+export const CustomerDetails: FunctionComponent<ICustomerDetailsProps> = (props: ICustomerDetailsProps) => {
   const { t } = useTranslation()
   const { loading, error, data } = useQuery($projects, {
     variables: {
