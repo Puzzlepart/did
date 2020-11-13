@@ -275,7 +275,8 @@
     "descriptionLabel": "Description",
     "officeLocationLabel": "Office Location",
     "departmentLabel": "Department",
-    "mobilePhoneLabel": "Mobile phone"
+    "mobilePhoneLabel": "Mobile phone",
+    "searchUserLabel": "Search in Azure Active Directory"
   },
   "navigation": {
     "timesheet": "Timesheet",

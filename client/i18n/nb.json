@@ -274,7 +274,8 @@
     "descriptionLabel": "Beskrivelse",
     "officeLocationLabel": "Kontorsted",
     "departmentLabel": "Avdeling",
-    "mobilePhoneLabel": "Mobiltelefon"
+    "mobilePhoneLabel": "Mobiltelefon",
+    "searchUserLabel": "Søk i Azure Active Directory"
   },
   "navigation": {
     "timesheet": "Timeliste",

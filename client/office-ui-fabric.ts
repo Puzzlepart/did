@@ -18,7 +18,7 @@ export {
   Selection,
   SelectionMode
 } from 'office-ui-fabric-react/lib/DetailsList'
-export { Dropdown, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown'
+export { Dropdown, IDropdownOption,IDropdownProps } from 'office-ui-fabric-react/lib/Dropdown'
 export { FocusTrapZone } from 'office-ui-fabric-react/lib/FocusTrapZone'
 export { FocusZone, FocusZoneDirection } from 'office-ui-fabric-react/lib/FocusZone'
 export { GroupHeader } from 'office-ui-fabric-react/lib/GroupedList'

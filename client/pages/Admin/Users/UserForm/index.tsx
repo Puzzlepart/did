@@ -1,24 +1,22 @@
 import { useMutation } from '@apollo/client'
 import { Autocomplete } from 'components'
-import { Panel, ChoiceGroup, PrimaryButton } from 'office-ui-fabric'
-import React, { useContext, useState } from 'react'
+import { Panel, PrimaryButton } from 'office-ui-fabric'
+import React, { FunctionComponent, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { User } from 'types'
 import { find, omit, pick } from 'underscore'
 import validator from 'validator'
 import { UsersContext } from '../context'
 import $addOrUpdateUser from './addOrUpdateUser.gql'
+import { RolePicker } from './RolePicker'
 import { IUserFormProps } from './types'
 import styles from './UserFormModal.module.scss'
 
-export const UserForm: React.FunctionComponent<IUserFormProps> = (props: IUserFormProps) => {
-  const { adUsers, roles } = useContext(UsersContext)
+export const UserForm: FunctionComponent<IUserFormProps> = (props: IUserFormProps) => {
   const { t } = useTranslation()
-
+  const { adUsers, roles } = useContext(UsersContext)
   const [model, setModel] = useState<User>(
-    props.user || {
-      role: find(roles, (r) => r.name === 'User')
-    }
+    props.user || { role: find(roles, (r) => r.name === 'User') }
   )
   const [addOrUpdateUser] = useMutation($addOrUpdateUser)
 
@@ -39,13 +37,14 @@ export const UserForm: React.FunctionComponent<IUserFormProps> = (props: IUserFo
    * Checks if form is valid
    */
   const isFormValid = () =>
-    !validator.isEmpty(model?.id) && validator.isUUID(model?.id) && !validator.isEmpty(model?.displayName)
+    !validator.isEmpty(model?.id || '') && validator.isUUID(model?.id || '') && !validator.isEmpty(model?.displayName || '')
 
   return (
     <Panel {...pick(props, 'onDismiss', 'headerText')} className={styles.root} isOpen={true}>
       {!props.user && (
         <div className={styles.inputContainer}>
           <Autocomplete
+            label={t('common.searchUserLabel')}
             placeholder={t('common.searchPlaceholder')}
             items={adUsers.map((u) => ({
               key: u.id,
@@ -63,18 +62,11 @@ export const UserForm: React.FunctionComponent<IUserFormProps> = (props: IUserFo
           />
         </div>
       )}
-      <div className={styles.inputContainer}>
-        <ChoiceGroup
-          options={roles.map((role) => ({
-            key: role.name,
-            text: role.name,
-            data: role,
-            iconProps: { iconName: role.icon }
-          }))}
-          onChange={(_event, opt) => setModel({ ...model, role: opt['data'] })}
-          defaultSelectedKey={model.role ? model.role.name : 'User'}
-        />
-      </div>
+      <RolePicker
+        className={styles.inputContainer}
+        roles={roles}
+        model={model}
+        onChanged={(role) => setModel({ ...model, role })} />
       <PrimaryButton className={styles.saveBtn} text={t('common.save')} disabled={!isFormValid()} onClick={onSave} />
     </Panel>
   )
