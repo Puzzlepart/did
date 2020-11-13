@@ -11,7 +11,7 @@ export default (context: ITimesheetContext, subscription: Subscription): IContex
     if (!!context.error || !context.selectedPeriod) return null
     const { isComplete, isForecast, isForecasted, isConfirmed, isPast } = context.selectedPeriod
     const commandProps = {
-      FORECAST_PERIOD: subscription.settings.forecast.enabled && {
+      FORECAST_PERIOD: subscription.settings?.forecast?.enabled && {
         key: 'FORECAST_PERIOD',
         styles: { root: { height: 44, marginLeft: 4 } },
         iconProps: { iconName: 'BufferTimeBefore' },
@@ -20,7 +20,7 @@ export default (context: ITimesheetContext, subscription: Subscription): IContex
         text: context.t('timesheet.forecastHoursText'),
         secondaryText: context.t('timesheet.forecastHoursSecondaryText')
       },
-      UNFORECAST_PERIOD: subscription.settings.forecast.enabled && {
+      UNFORECAST_PERIOD: subscription.settings?.forecast?.enabled && {
         key: 'UNFORECAST_PERIOD',
         styles: { root: { height: 44, marginLeft: 4 } },
         iconProps: { iconName: 'Cancel' },
