@@ -16,10 +16,29 @@ export enum PERMISSION {
 }
 
 export interface IPermission {
+  /**
+   * Permission ID
+   */
   id: PERMISSION
+
+  /**
+   * Name of the permission
+   */
   name: string
-  api?: boolean
+
+  /**
+   * Description of the permission
+   */
   description?: string
+
+  /**
+   * Callable from external API
+   */
+  api?: boolean
+
+  /**
+   * Disabled (not available)
+   */
   disabled?: boolean
 }
 

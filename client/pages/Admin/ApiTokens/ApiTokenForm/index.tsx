@@ -9,11 +9,11 @@ import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { contains, isEmpty } from 'underscore'
 import { isBlank } from 'underscore.string'
-import { moment } from 'utils/date'
-import { ApiTokenInput } from '../../../../../server/api/graphql/resolvers/types'
+import { ApiTokenInput } from 'types'
 import $addApiToken from './addApiToken.gql'
 import styles from './ApiTokenForm.module.scss'
 import { IApiTokenFormProps } from './types'
+import { DateObject } from 'utils/date'
 
 export const ApiTokenForm = ({ isOpen, onAdded, onDismiss }: IApiTokenFormProps) => {
   const { t } = useTranslation()
@@ -55,9 +55,7 @@ export const ApiTokenForm = ({ isOpen, onAdded, onDismiss }: IApiTokenFormProps)
           onChange={(_e, opt) =>
             setToken({
               ...token,
-              expires: moment()
-                .add(...opt.data)
-                .toISOString()
+              expires: new DateObject().add(opt.data).format()
             })
           }
           options={require('./expiryOptions.json')}

@@ -1,7 +1,7 @@
 [
     {
       "key": "1m",
-      "text": "1 month",
+      "text": "1month",
       "data": [
         1,
         "month"
@@ -9,7 +9,7 @@
     },
     {
       "key": "6m",
-      "text": "6 months",
+      "text": "6months",
       "data": [
         6,
         "month"
@@ -17,7 +17,7 @@
     },
     {
       "key": "1y",
-      "text": "1 year",
+      "text": "1year",
       "data": [
         1,
         "year"
