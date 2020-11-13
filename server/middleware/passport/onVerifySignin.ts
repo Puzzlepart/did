@@ -1,10 +1,31 @@
 import createDebug from 'debug'
 const debug = createDebug('middleware/passport/onVerifySignin')
-import SubscriptionService from '../../api/services/subscription'
-import AzStorageService from '../../api/services/azstorage'
+import { SubscriptionService, AzStorageService, MSGraphService } from '../../api/services'
 import { NO_OID_FOUND, TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } from './errors'
 import { IProfile } from 'passport-azure-ad/oidc-strategy'
 import { VerifyCallback } from 'passport-azure-ad'
+import env from '../../utils/env'
+import { isEqual, pick } from 'underscore'
+
+/**
+ * Synchronize user profile
+ *
+ * @param {Express.User} user
+ * @param {any} subscription
+ * @param {string} access_token
+ */
+async function synchronizeUserProfile(user:Express.User, subscription:any, access_token: string): Promise<void> {
+  const data = await new MSGraphService(null, access_token).getCurrentUser()
+  const properties = env('USER_SYNC_PROPERTIES', '').split(',')
+  const needSync = !isEqual(pick(user, ...properties), pick(data, ...properties))
+  if (needSync) {
+    debug('Synchronizing user profile properties %s from Azure AD', properties.join(', '))
+    await new AzStorageService({ subscription }).addOrUpdateUser(pick(data, 'id', ...properties), true)
+    debug('User profile properties synchronized from Azure AD')
+  } else {
+    debug('User profile properties are up to date!')
+  }
+}
 
 /**
  * On verify signin
@@ -17,7 +38,7 @@ import { VerifyCallback } from 'passport-azure-ad'
  * @param {any} tokenParams
  * @param {VerifyCallback} done
  */
-export async function onVerifySignin(
+export default async function onVerifySignin(
   _iss: string,
   _sub: string,
   profile: IProfile,
@@ -42,10 +63,12 @@ export async function onVerifySignin(
       debug('User %s is not registered for %s', profile.oid, subscription.name)
       return done(USER_NOT_ENROLLED, null)
     }
+    await synchronizeUserProfile(user, subscription, tokenParams.access_token)
     user.subscription = subscription
     user.tokenParams = tokenParams
     return done(null, user)
   } catch (error) {
     debug(error)
+    return done(error, null)
   }
 }

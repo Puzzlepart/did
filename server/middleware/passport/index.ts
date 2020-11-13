@@ -1,6 +1,6 @@
 import fs from 'fs'
 import passport from 'passport'
-import { onVerifySignin } from './onVerifySignin'
+import onVerifySignin from './onVerifySignin'
 import { OIDCStrategy } from 'passport-azure-ad'
 import env from '../../utils/env'
 
