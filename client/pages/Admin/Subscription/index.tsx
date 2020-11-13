@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client'
 import { AppContext } from 'AppContext'
 import { useMessage, UserMessage } from 'components'
-import { setValue } from 'helpers'
+import { getValue, setValue } from 'helpers'
 import { MessageBarType, PrimaryButton, TextField } from 'office-ui-fabric'
 import React, { useContext, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -21,11 +21,19 @@ export const SubscriptionSettings = () => {
   const [isSaved, setIsSaved] = useState(false)
   const [updateSubscription] = useMutation($updateSubscription)
   const [message, setMessage] = useMessage()
-
   const sections = useMemo(() => SUBSCRIPTION_SETTINGS(t), [t])
 
-  const onSettingsChanged = (key: string, value: any) => {
+  /**
+   * On settings changed
+   * 
+   * @param {string} key Setting key
+   * @param {any} value The actual value or a callback function returning the value
+   */
+  const onSettingsChanged = (key: string, value: boolean | string | ((value: any) => any)) => {
     const _subscription = deepCopy(subscription)
+    if (typeof value === 'function') {
+      value = value(getValue(_subscription, `settings.${key}`))
+    }
     setValue(_subscription, `settings.${key}`, value)
     setSubscription(_subscription)
   }

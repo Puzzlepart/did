@@ -1,7 +1,7 @@
 import { getValue } from 'helpers'
-import { Icon, Slider, TextField, Toggle } from 'office-ui-fabric'
+import { Icon, Slider, TextField, Toggle, Checkbox, Label } from 'office-ui-fabric'
 import React, { useState } from 'react'
-import { omit } from 'underscore'
+import { contains, omit } from 'underscore'
 import styles from './SettingsSection.module.scss'
 import { ISettingsSectionProps } from './types'
 
@@ -15,12 +15,13 @@ export const SettingsSection: React.FunctionComponent<ISettingsSectionProps> = (
       </div>
       <div hidden={!isExpanded}>
         {props.fields.map((field) => {
-          field.props.set('disabled', field.disabledIf && field.disabledIf(props.settings))
-          field.props.set('hidden', field.hiddenIf && field.hiddenIf(props.settings))
+          field.props.set('disabled', field.disabledIf && field.disabledIf(props.settings || {}))
+          field.props.set('hidden', field.hiddenIf && field.hiddenIf(props.settings || {}))
           const _ = Array.from(field.props).reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {} as any)
           let fieldElement: JSX.Element
           switch (field.type) {
-            case 'bool':
+            case 'bool': {
+              console.log(getValue(props.settings, field.id), props.settings, field.id)
               fieldElement = (
                 <Toggle
                   {..._}
@@ -28,6 +29,7 @@ export const SettingsSection: React.FunctionComponent<ISettingsSectionProps> = (
                   onChange={(_e, value) => props.onSettingsChanged(`${props.id}.${field.id}`, value)}
                 />
               )
+            }
               break
             case 'number':
               fieldElement = (
@@ -36,6 +38,28 @@ export const SettingsSection: React.FunctionComponent<ISettingsSectionProps> = (
                   defaultValue={getValue(props.settings, field.id, 1)}
                   onChange={(value) => props.onSettingsChanged(`${props.id}.${field.id}`, value)}
                 />
+              )
+              break
+            case 'checkbox':
+              fieldElement = (
+                <>
+                  <Label>{_.label}</Label>
+                  {Object.keys(field.options).map(key => (
+                    <Checkbox
+                      key={key}
+                      defaultChecked={contains(getValue(props.settings, field.id, []), key)}
+                      label={field.options[key]}
+                      onChange={(_e, checked) => {
+                        props.onSettingsChanged(`${props.id}.${field.id}`, (value: string[]) => {
+                          value = value || []
+                          if (checked) value.push(key)
+                          else value = value.splice(value.indexOf(key), 1)
+                          return value
+                        })
+                      }}
+                      styles={{ root: { marginBottom: 6 } }} />
+                  ))}
+                </>
               )
               break
             default:
@@ -47,7 +71,10 @@ export const SettingsSection: React.FunctionComponent<ISettingsSectionProps> = (
               )
           }
           return (
-            <div className={styles.inputField} key={field.id}>
+            <div
+              key={field.id}
+              className={styles.inputField}
+              hidden={_.hidden}>
               {fieldElement}
               <span className={styles.inputDescription}>{_.description}</span>
             </div>
