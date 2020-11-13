@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improvements to allocation view in Timesheet #644
 - Forecast notifications #613 (can be turned off in subscription settings #639)
 - Improved forecast/confirm actions #605
+- Automatic Azure Active Directory sync #661
+- Support for API tokens with scoped permissions #635
 
 ## Fixed
 - Minor UI adjustments in Timesheet
