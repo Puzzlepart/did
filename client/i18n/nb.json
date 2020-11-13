@@ -129,7 +129,12 @@
     "forecastNotificationsDescription": "Hvor mange uker fremover skal brukerne forutsi.",
     "forecastNotificationsLabel": "Varsler",
     "subscriptionSettings": "Abonnement",
-    "summaryRangeValueFormat": "Viser {{value}} måneder"
+    "summaryRangeValueFormat": "Viser {{value}} måneder",
+    "adsync": "Synkronisering med Azure Active Directory",
+    "adUserSyncEnabledLabel": "Synkroniser brukeregenskaper",
+    "adUserSyncEnabledDescription": "Synkroniser automatisk brukeregenskaper fra Azure Active Directory når brukeren logger på.",
+    "adUserSyncPropertiesLabel": "Egenskaper som skal synkroniseres",
+    "adUserSyncPropertiesDescription": "Velg hvilke egenskaper som skal synkroniseres automatisk fra Azure Active Directory."
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport. For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene...",
@@ -271,7 +276,11 @@
     "subscription": "Abonnement",
     "nameLabel": "Navn",
     "descriptionLabel": "Beskrivelse",
-    "expiresLabel": "Utløper"
+    "expiresLabel": "Utløper",
+    "officeLocationLabel": "Kontorsted",
+    "departmentLabel": "Avdeling",
+    "mobilePhoneLabel": "Mobiltelefon",
+    "searchUserLabel": "Søk i Azure Active Directory"
   },
   "navigation": {
     "timesheet": "Timeliste",

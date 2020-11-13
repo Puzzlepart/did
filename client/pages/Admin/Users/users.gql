@@ -1,5 +1,5 @@
 {
-  adUsers {
+  adUsers(options: { sortBy: "displayName" }) {
     id
     displayName
     givenName
@@ -9,7 +9,7 @@
     mail
     preferredLanguage
   }
-  users {
+  users(options: { sortBy: "displayName" }) {
     id
     displayName
     givenName
@@ -18,13 +18,17 @@
     mail
     role {
       name
+      description
       icon
       permissions
+      readOnly
     }
   }
   roles {
     name
+    description
     icon
     permissions
+    readOnly
   }
 }

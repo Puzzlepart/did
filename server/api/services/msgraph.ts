@@ -5,7 +5,7 @@ import createDebug from 'debug'
 import { performance, PerformanceObserver } from 'perf_hooks'
 import 'reflect-metadata'
 import { Service } from 'typedi'
-import { first } from 'underscore'
+import { first, sortBy } from 'underscore'
 import * as DateUtils from './../../utils/date'
 import env from '../../utils/env'
 import MSGraphEvent from './msgraph.event'
@@ -25,8 +25,11 @@ class MSGraphService {
 
   /**
    * Constructs a new MSGraphService
+   *
+   * @param {OAuthService} _oauthService OAuth service
+   * @param {string} access_token Access token
    */
-  constructor(private _oauthService: OAuthService) {
+  constructor(private _oauthService: OAuthService, private _access_token?: string) {
     if (!env('APPINSIGHTS_INSTRUMENTATIONKEY')) return
     appInsights.setup(env('APPINSIGHTS_INSTRUMENTATIONKEY'))
     this._perf = new PerformanceObserver((list) => {
@@ -62,23 +65,48 @@ class MSGraphService {
    * Gets a Microsoft Graph Client using the auth token from the class
    */
   private async _getClient(): Promise<MSGraphClient> {
-    const { access_token } = await this._oauthService.getAccessToken(this._accessTokenOptions)
+    if (!this._access_token) {
+      this._access_token = (await this._oauthService.getAccessToken(this._accessTokenOptions)).access_token
+    }
     const client = MSGraphClient.init({
       authProvider: (done: (arg0: any, arg1: any) => void) => {
-        done(null, access_token)
+        done(null, this._access_token)
       }
     })
     return client
   }
 
   /**
-   * Get users
+   * Get current user properties
+   *
+   * @param {string[]} properties Properties to retrieve
    */
-  async getUsers(): Promise<any> {
+  async getCurrentUser(properties: string[]): Promise<any> {
+    try {
+      this.startMark('getCurrentUser')
+      debug('Querying Graph /me: %s', JSON.stringify({ select: properties }))
+      const client = await this._getClient()
+      const value = await client
+        .api('/me')
+        .select(['id', ...properties])
+        .get()
+      this.endMark('getCurrentUser')
+      return value
+    } catch (error) {
+      throw new Error(`MSGraphService.getCurrentUser: ${error.message}`)
+    }
+  }
+
+  /**
+   * Get users
+   *
+   * @param {string} orderBy Order by
+   */
+  async getUsers(orderBy: string): Promise<any> {
     try {
       this.startMark('getUsers')
       const client = await this._getClient()
-      const { value } = await client
+      const { value: users } = await client
         .api('/users')
         // eslint-disable-next-line quotes
         .filter("userType eq 'Member'")
@@ -86,7 +114,7 @@ class MSGraphService {
         .top(999)
         .get()
       this.endMark('getUsers')
-      return value
+      return sortBy(users, orderBy)
     } catch (error) {
       throw new Error(`MSGraphService.getUsers: ${error.message}`)
     }

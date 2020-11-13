@@ -7,7 +7,7 @@ import { AzStorageService, MSGraphService } from '../../services'
 import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
 import { BaseResult } from './types'
-import { User, UserInput } from './user.types'
+import { User, UserInput, UserQueryOptions } from './user.types'
 
 @Service()
 @Resolver(User)
@@ -20,7 +20,7 @@ export class UserResolver {
    * @param {AzStorageService} _azstorage AzStorageService
    * @param {MSGraphService} _msgraph MSGraphService
    */
-  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) { }
+  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) {}
 
   /**
    * Get current user
@@ -45,21 +45,25 @@ export class UserResolver {
 
   /**
    * Get AD users
+   *
+   * @param {UserQueryOptions} options Options
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [User], { description: 'Get all users from Active Directory' })
-  async adUsers() {
-    return await this._msgraph.getUsers()
+  async adUsers(@Arg('options', () => UserQueryOptions) options: UserQueryOptions) {
+    return await this._msgraph.getUsers(options.sortBy)
   }
 
   /**
    * Get users
+   *
+   * @param {UserQueryOptions} options Options
    */
   @Authorized()
   @Query(() => [User], { description: 'Get all users' })
-  async users() {
+  async users(@Arg('options', () => UserQueryOptions) options: UserQueryOptions) {
     // eslint-disable-next-line prefer-const
-    let [users, roles] = await Promise.all([this._azstorage.getUsers(), this._azstorage.getRoles()])
+    let [users, roles] = await Promise.all([this._azstorage.getUsers(options.sortBy), this._azstorage.getRoles()])
     users = filter(
       users.map((user) => ({
         ...user,

@@ -2,7 +2,7 @@ import List from 'components/List'
 import { Checkbox } from 'office-ui-fabric'
 import React, { useEffect, useState, FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
-import { contains } from 'underscore'
+import { contains, filter, isEmpty } from 'underscore'
 import { withDefaultProps } from 'with-default-props'
 import columns from './columns'
 import { IProjectListProps } from './types'
@@ -21,7 +21,7 @@ const ProjectList: FunctionComponent<IProjectListProps> = (props: IProjectListPr
     <List
       {...props}
       items={items}
-      columns={columns(props, t).filter(col => !contains(props.hideColumns, col.key))}
+      columns={columns(props, t).filter((col) => !contains(props.hideColumns, col.key))}
       groups={props.groups}
       selection={props.selection}
       commandBar={{
@@ -30,6 +30,7 @@ const ProjectList: FunctionComponent<IProjectListProps> = (props: IProjectListPr
             key: 'TOGGLE_INACTIVE',
             onRender: () => (
               <Checkbox
+                disabled={isEmpty(filter(items, i => i.inactive))}
                 styles={{ root: { margin: '6px 0 0 8px' } }}
                 checked={showInactive}
                 label={t('common.toggleInactiveText')}

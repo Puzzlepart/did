@@ -130,7 +130,12 @@
     "forecastNotificationsDescription": "How many weeks ahead should users forecast.",
     "forecastNotificationsLabel": "Notifications",
     "subscriptionSettings": "Subscription",
-    "summaryRangeValueFormat": "Showing {{value}} months"
+    "summaryRangeValueFormat": "Showing {{value}} months",
+    "adsync": "Active Directory Sync",
+    "adUserSyncEnabledLabel": "Synchronize user properties",
+    "adUserSyncEnabledDescription": "Automatically synchronize user properties from Azure Active Directory when the user logs in.",
+    "adUserSyncPropertiesLabel": "Properties to synchronize",
+    "adUserSyncPropertiesDescription": "Choose which properties that should be automatically synchronized from Azure Active Directory."
   },
   "reports": {
     "generatingReportLabel": "Generating report. To give you the freshest results, we're generating a report from the latest data...",
@@ -272,7 +277,11 @@
     "subscription": "Subscription",
     "nameLabel": "Name",
     "descriptionLabel": "Description",
-    "expiresLabel": "Expires"
+    "expiresLabel": "Expires",
+    "officeLocationLabel": "Office Location",
+    "departmentLabel": "Department",
+    "mobilePhoneLabel": "Mobile phone",
+    "searchUserLabel": "Search in Azure Active Directory"
   },
   "navigation": {
     "timesheet": "Timesheet",
