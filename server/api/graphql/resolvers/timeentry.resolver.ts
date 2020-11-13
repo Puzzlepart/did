@@ -3,6 +3,7 @@ import { Arg, Authorized, Ctx, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { find, first } from 'underscore'
 import { AzStorageService } from '../../services'
+import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
 import { TimeEntriesQuery, TimeEntry } from './timeentry.types'
 
@@ -27,7 +28,7 @@ export class TimeEntryResolver {
    * @param {TimeEntriesQuery} query Query
    * @param {Context} ctx GraphQL context
    */
-  @Authorized()
+  @Authorized<IAuthOptions>()
   @Query(() => [TimeEntry], { description: 'Get time entries matching the provided query' })
   async timeentries(
     @Arg('currentUser', { nullable: true }) currentUser: boolean,

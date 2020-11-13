@@ -1,4 +1,5 @@
-import { AuthChecker } from 'type-graphql'
+import { AuthChecker, ResolverData } from 'type-graphql'
+import { contains } from 'underscore'
 import { Context } from './context'
 
 export interface IAuthOptions {
@@ -8,12 +9,14 @@ export interface IAuthOptions {
   userContext?: boolean
 
   /**
-   * Permission required
+   * Permission required for the resolver
    */
   permission?: string
 }
 
-export const authChecker: AuthChecker<Context, IAuthOptions> = ({ context }: { context: Context }, [authOptions]) => {
+
+export const authChecker: AuthChecker<Context, IAuthOptions> = ({ context }: ResolverData<Context>, [authOptions]) => {
   if (!authOptions) return !!context.permissions
   if (authOptions.userContext) return !!context.userId
+  if (authOptions.permission) return contains(context.permissions, authOptions.permission)
 }

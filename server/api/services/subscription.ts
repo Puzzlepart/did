@@ -67,7 +67,7 @@ class SubscriptionService {
       })
       const { subscriptionId } = first(entries)
       const subscription = await this.getSubscription(subscriptionId)
-      const data = jwt.verify(apiKey, subscription.apiTokenSecret) as any
+      const data = jwt.verify(apiKey, env('API_TOKEN_SECRET')) as any
       return { subscription, ...data }
     } catch (error) {
       return null

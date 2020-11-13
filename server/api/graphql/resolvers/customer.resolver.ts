@@ -4,6 +4,7 @@ import { Service } from 'typedi'
 import { pick } from 'underscore'
 import AzTableUtilities from '../../../utils/table'
 import { AzStorageService } from '../../services'
+import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
 import { Customer, CustomerInput } from './customer.types'
 import { BaseResult } from './types'
@@ -19,7 +20,7 @@ export class CustomerResolver {
    *
    * @param {AzStorageService} _azstorage AzStorageService
    */
-  constructor(private readonly _azstorage: AzStorageService) {}
+  constructor(private readonly _azstorage: AzStorageService) { }
 
   /**
    * Get customers
@@ -34,12 +35,14 @@ export class CustomerResolver {
 
   /**
    * Create or update customer
+   * 
+   * @permission MANAGE_CUSTOMERS (09909241)
    *
    * @param {CustomerInput} customer Customer
    * @param {boolean} update Update
    * @param {Context} ctx GraphQL context
    */
-  @Authorized()
+  @Authorized<IAuthOptions>({ permission: '09909241' })
   @Mutation(() => BaseResult, { description: 'Create or update customer' })
   async createOrUpdateCustomer(
     @Arg('customer', () => CustomerInput) customer: CustomerInput,
@@ -59,10 +62,12 @@ export class CustomerResolver {
 
   /**
    * Delete customer
+   * 
+   * @permission DELETE_CUSTOMER (8b39db3d)
    *
    * @param {string} key Key
    */
-  @Authorized()
+  @Authorized({ permission: '8b39db3d' })
   @Mutation(() => BaseResult, { description: 'Delete customer' })
   async deleteCustomer(@Arg('key') key: string) {
     try {
