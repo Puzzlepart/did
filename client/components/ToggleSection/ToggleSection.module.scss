@@ -1,0 +1,19 @@
+.root {
+  .header {
+    max-width: 500px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;  
+    margin: 10px 0 15px 0;
+    cursor: pointer;
+
+    .title {
+      font-size: 18px;
+      flex-grow: 1;
+    }
+    .chevron {
+      font-size: 18px;
+      margin: 10px 0 0 0;
+    }
+  }
+}

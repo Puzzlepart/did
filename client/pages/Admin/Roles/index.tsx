@@ -20,7 +20,7 @@ export const Roles = () => {
    */
   const onEdit = (role: Role) =>
     setPanel({
-      title: t('admin.editRole'),
+      headerText: t('admin.editRole'),
       model: role
     })
 
@@ -35,7 +35,7 @@ export const Roles = () => {
             {
               key: 'ADD_NEW_ROLE',
               name: t('admin.addNewRole'),
-              onClick: () => setPanel({ title: t('admin.addNewRole') })
+              onClick: () => setPanel({ headerText: t('admin.addNewRole') })
             }
           ],
           farItems: []

@@ -62,7 +62,9 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
       return
     }
     setValidation({ errors: {}, invalid: false })
-    const { data: { result } } = await createOrUpdateProject({
+    const {
+      data: { result }
+    } = await createOrUpdateProject({
       variables: {
         project,
         options,
@@ -73,7 +75,10 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
       if (editMode) {
         if (onSubmitted) setTimeout(onSubmitted, 1000)
       } else {
-        setMessage({ text: t('projects.createSuccess', { projectId, name: project.name }), type: MessageBarType.success })
+        setMessage({
+          text: t('projects.createSuccess', { projectId, name: project.name }),
+          type: MessageBarType.success
+        })
         setProject(new ProjectModel())
       }
     } else setMessage({ text: result.error?.message, type: MessageBarType.error })
@@ -112,7 +117,7 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
         <Toggle
           label={t('projects.createOutlookCategoryFieldLabel')}
           checked={options.createOutlookCategory}
-          onChanged={(value) => setOptions({...options, createOutlookCategory: value})}
+          onChanged={(value) => setOptions({ ...options, createOutlookCategory: value })}
         />
         <span className={styles.inputDescription}>
           {t('projects.createOutlookCategoryFieldDescription', { id: projectId })}

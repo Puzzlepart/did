@@ -76,7 +76,6 @@ export class ProjectInput {
   labels?: string[]
 }
 
-
 @InputType({ description: 'Input object for ProjectOptions used in Mutation createOrUpdateProject' })
 export class ProjectOptions {
   @Field({ nullable: true, defaultValue: false })

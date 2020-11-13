@@ -1,5 +1,5 @@
 import { ScrollablePane, ScrollbarVisibility } from 'office-ui-fabric'
-import * as React from 'react'
+import React from 'react'
 
 export const ScrollablePaneWrapper = ({ children, condition, height }) =>
   condition ? (

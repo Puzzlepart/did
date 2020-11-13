@@ -52,7 +52,12 @@ export const RolePanel: React.FunctionComponent<IRolePanelProps> = (props: IRole
   }
 
   return (
-    <Panel className={styles.root} customWidth={'440px'} isOpen={true} onDismiss={props.onDismiss}>
+    <Panel
+      className={styles.root}
+      headerText={props.headerText}
+      customWidth='440px'
+      isOpen={true}
+      onDismiss={props.onDismiss}>
       <div className={styles.container}>
         <TextField
           className={styles.inputField}

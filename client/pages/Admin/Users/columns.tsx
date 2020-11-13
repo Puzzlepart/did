@@ -1,5 +1,5 @@
 import { TFunction } from 'i18next'
-import { DefaultButton, IColumn } from 'office-ui-fabric'
+import { DefaultButton, IColumn, Icon } from 'office-ui-fabric'
 import React from 'react'
 import { User } from 'types'
 import { generateColumn as col } from 'utils/generateColumn'
@@ -11,7 +11,12 @@ import { generateColumn as col } from 'utils/generateColumn'
  * @param {TFunction} t Translate function
  */
 export const UserColumns = (onEdit: (user: User) => void, t: TFunction): IColumn[] => [
-  col('role.name', t('common.roleLabel'), { maxWidth: 100 }, ({ role }: User) => role.name),
+  col('role.name', t('common.roleLabel'), { maxWidth: 100 }, ({ role }: User) => (
+    <div title={role.description}>
+      <Icon style={{ marginRight: 8 }} iconName={role.icon} />
+      <span>{role.name}</span>
+    </div>
+  )),
   col('displayName', t('common.displayNameLabel'), { maxWidth: 180 }),
   col('surname', t('common.surnameLabel'), { maxWidth: 160 }),
   col('givenName', t('common.givenNameLabel'), { maxWidth: 160 }),

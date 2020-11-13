@@ -1,5 +1,5 @@
 import { default as azurestorage, TableUtilities, TableService, TableQuery } from 'azure-storage'
-import { omit, isNull } from 'underscore'
+import { omit, isNull, sortBy } from 'underscore'
 import { decapitalize, capitalize, isBlank, startsWith } from 'underscore.string'
 import get from 'get-value'
 
@@ -8,10 +8,11 @@ interface IConvertToAzEntityOptions {
   typeMap?: Record<string, 'json' | 'datetime' | 'boolean' | 'number' | 'double'>
 }
 
-export interface IParseAzEntityOptions {
+export interface IQueryAzTableOptions {
   typeMap?: Record<string, 'Custom.ArrayPipe'>
   columnMap?: Record<string, string>
   skipColumns?: string[]
+  orderBy?: string
 }
 
 type EntityDescriptor = Record<string, TableUtilities.entityGenerator.EntityProperty<any>>
@@ -35,9 +36,9 @@ class AzTableUtilities {
    * * Custom.ArrayPipe
    *
    * @param {EntityDescriptor} entityDescriptor Entity descriptor
-   * @param {IParseAzEntityOptions} options Parse options
+   * @param {IQueryAzTableOptions} options Parse options
    */
-  parseAzEntity<T = any>(entityDescriptor: EntityDescriptor, options: IParseAzEntityOptions = {}): T {
+  parseAzEntity<T = any>(entityDescriptor: EntityDescriptor, options: IQueryAzTableOptions = {}): T {
     const parsedEntity = Object.keys(entityDescriptor).reduce((obj: Record<string, any>, key: string) => {
       const { _, $ } = entityDescriptor[key]
       let value = _
@@ -69,11 +70,11 @@ class AzTableUtilities {
    * Adds {RowKey} as 'id' and 'key, skips {PartitionKey}
    *
    * @param {TableService.QueryEntitiesResult<any>} result Result
-   * @param {IParseAzEntityOptions} options Parse options
+   * @param {IQueryAzTableOptions} options Parse options
    */
   parseAzEntities<T = any>(
     { entries, continuationToken }: TableService.QueryEntitiesResult<any>,
-    options: IParseAzEntityOptions
+    options: IQueryAzTableOptions
   ) {
     entries = entries.map((ent) => this.parseAzEntity<T>(ent, options))
     return { entries, continuationToken }
@@ -172,13 +173,21 @@ class AzTableUtilities {
   queryAzTable<T = any>(
     table: string,
     query: TableQuery,
-    options?: IParseAzEntityOptions,
+    options?: IQueryAzTableOptions,
     continuationToken: TableService.TableContinuationToken = null
   ): Promise<TableService.QueryEntitiesResult<any>> {
     return new Promise<TableService.QueryEntitiesResult<any>>((resolve, reject) => {
       this.tableService.queryEntities(table, query, continuationToken, (error, result) => {
         if (!error) {
-          return options ? resolve(this.parseAzEntities<T>(result, options)) : resolve(result)
+          if (options) {
+            const _result = this.parseAzEntities<T>(result, options)
+            if (options.orderBy) {
+              _result.entries = sortBy(_result.entries, options.orderBy)
+            }
+            resolve(_result)
+          } else {
+            resolve(result)
+          }
         } else reject(error)
       })
     })
@@ -196,12 +205,7 @@ class AzTableUtilities {
     const { entries, continuationToken } = await this.queryAzTable(table, query, { columnMap }, token)
     token = continuationToken
     while (token !== null) {
-      const result: TableService.QueryEntitiesResult<any> = await this.queryAzTable(
-        table,
-        query,
-        { columnMap },
-        token
-      )
+      const result: TableService.QueryEntitiesResult<any> = await this.queryAzTable(table, query, { columnMap }, token)
       entries.push(...result.entries)
       token = result.continuationToken
     }
@@ -276,13 +280,13 @@ class AzTableUtilities {
    *
    * @param {string} table Table name
    * @param {string} rowKey Row key
-   * @param {IParseAzEntityOptions} options Parse options
+   * @param {IQueryAzTableOptions} options Parse options
    * @param {string} partitionKey Partition key (defaults to Default)
    */
   retrieveAzEntity<T = any>(
     table: string,
     rowKey: string,
-    options: IParseAzEntityOptions,
+    options: IQueryAzTableOptions,
     partitionKey: string = 'Default'
   ): Promise<any> {
     return new Promise<any>((resolve, reject) => {
@@ -317,11 +321,7 @@ class AzTableUtilities {
    * @param {any} entityDescriptor Entity descriptor
    * @param {boolean} merge If the entity should be inserted using insertOrMergeEntity
    */
-  updateAzEntity(
-    table: string,
-    entityDescriptor: any,
-    merge?: boolean
-  ): Promise<TableService.EntityMetadata> {
+  updateAzEntity(table: string, entityDescriptor: any, merge?: boolean): Promise<TableService.EntityMetadata> {
     return new Promise((resolve, reject) => {
       if (merge) {
         this.tableService.insertOrMergeEntity(table, entityDescriptor, undefined, (error, result) => {
