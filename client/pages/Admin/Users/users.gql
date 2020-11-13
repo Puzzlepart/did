@@ -18,8 +18,10 @@
     mail
     role {
       name
+      description
       icon
       permissions
+      readOnly
     }
   }
   roles {

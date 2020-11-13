@@ -23,10 +23,7 @@ export const RolePicker = (props: IRolePickerProps) => {
                 onRenderOption={(option: IDropdownOption) => {
                     return (
                         <div title={option.data.description}>
-                            <Icon
-                                style={{ marginRight: 8 }}
-                                iconName={option.data.icon}
-                                title={option.data.icon} />
+                            <Icon style={{ marginRight: 8 }} iconName={option.data.icon} />
                             <span>{option.text}</span>
                         </div>
                     )
