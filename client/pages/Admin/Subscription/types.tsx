@@ -1,33 +1,33 @@
+interface ISubscriptionSettingBase {
+  id: string
+  props: Map<string, any>
+  disabledIf?: (settings: any) => boolean
+  hiddenIf?: (settings: any) => boolean
+}
+
+export interface ISubscriptionSettingBool extends ISubscriptionSettingBase {
+  type: 'bool'
+}
+
+export interface ISubscriptionSettingText extends ISubscriptionSettingBase {
+  type: 'text'
+}
+
+export interface ISubscriptionSettingNumber  extends ISubscriptionSettingBase {
+  type: 'number'
+}
+
+export interface ISubscriptionSettingCheckbox  extends ISubscriptionSettingBase {
+  id: string
+  type: 'checkbox'
+  options: Record<string, string>
+}
+
 export type SubscriptionSettingField =
-  {
-    type: 'bool'
-    id: string
-    props: Map<string, any>
-    disabledIf?: (settings: any) => boolean
-    hiddenIf?: (settings: any) => boolean
-  }
+  ISubscriptionSettingBool
   |
-  {
-    type: 'text'
-    id: string
-    props: Map<string, any>
-    disabledIf?: (settings: any) => boolean
-    hiddenIf?: (settings: any) => boolean
-  }
+  ISubscriptionSettingText
   |
-  {
-    type: 'number'
-    id: string
-    props: Map<string, any>
-    disabledIf?: (settings: any) => boolean
-    hiddenIf?: (settings: any) => boolean
-  }
+  ISubscriptionSettingNumber
   |
-  {
-    type: 'checkbox'
-    id: string
-    options: Record<string, string>
-    props: Map<string, any>
-    disabledIf?: (settings: any) => boolean
-    hiddenIf?: (settings: any) => boolean
-  }
+  ISubscriptionSettingCheckbox

@@ -271,7 +271,10 @@
     "exportTypeCurrentYear": "Inneværende år ({{year}})",
     "subscription": "Abonnement",
     "nameLabel": "Navn",
-    "descriptionLabel": "Beskrivelse"
+    "descriptionLabel": "Beskrivelse",
+    "officeLocationLabel": "Kontorsted",
+    "departmentLabel": "Avdeling",
+    "mobilePhoneLabel": "Mobiltelefon"
   },
   "navigation": {
     "timesheet": "Timeliste",

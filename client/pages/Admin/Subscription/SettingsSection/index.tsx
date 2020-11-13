@@ -1,11 +1,14 @@
 import { getValue } from 'helpers'
-import { Icon, Slider, TextField, Toggle, Checkbox, Label } from 'office-ui-fabric'
-import React, { useState } from 'react'
-import { contains, omit } from 'underscore'
+import { Icon, Slider, TextField, Toggle } from 'office-ui-fabric'
+import React, { useContext, useState } from 'react'
+import { omit } from 'underscore'
+import { SubscriptionContext } from '../context'
+import { CheckboxField } from './CheckboxField'
 import styles from './SettingsSection.module.scss'
 import { ISettingsSectionProps } from './types'
 
 export const SettingsSection: React.FunctionComponent<ISettingsSectionProps> = (props: ISettingsSectionProps) => {
+  const { onSettingsChanged } = useContext(SubscriptionContext)
   const [isExpanded, toggle] = useState(props.defaultExpanded)
   return (
     <div className={styles.root}>
@@ -25,7 +28,7 @@ export const SettingsSection: React.FunctionComponent<ISettingsSectionProps> = (
                 <Toggle
                   {..._}
                   defaultChecked={getValue(props.settings, field.id, false)}
-                  onChange={(_e, value) => props.onSettingsChanged(`${props.id}.${field.id}`, value)}
+                  onChange={(_e, value) => onSettingsChanged(`${props.id}.${field.id}`, value)}
                 />
               )
               break
@@ -34,37 +37,20 @@ export const SettingsSection: React.FunctionComponent<ISettingsSectionProps> = (
                 <Slider
                   {..._}
                   defaultValue={getValue(props.settings, field.id, 1)}
-                  onChange={(value) => props.onSettingsChanged(`${props.id}.${field.id}`, value)}
+                  onChange={(value) => onSettingsChanged(`${props.id}.${field.id}`, value)}
                 />
               )
               break
             case 'checkbox':
               fieldElement = (
-                <>
-                  <Label>{_.label}</Label>
-                  {Object.keys(field.options).map(key => (
-                    <Checkbox
-                      key={key}
-                      defaultChecked={contains(getValue(props.settings, field.id, []), key)}
-                      label={field.options[key]}
-                      onChange={(_e, checked) => {
-                        props.onSettingsChanged(`${props.id}.${field.id}`, (value: string[]) => {
-                          value = value || []
-                          if (checked) value.push(key)
-                          else value = value.splice(value.indexOf(key), 1)
-                          return value
-                        })
-                      }}
-                      styles={{ root: { marginBottom: 6 } }} />
-                  ))}
-                </>
+                <CheckboxField {...field} settings={props.settings} />
               )
               break
             default:
               fieldElement = (
                 <TextField
                   {...omit(_, 'descripton')}
-                  onChange={(_e, value) => props.onSettingsChanged(`${props.id}.${field.id}`, value)}
+                  onChange={(_e, value) => onSettingsChanged(`${props.id}.${field.id}`, value)}
                 />
               )
           }

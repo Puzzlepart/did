@@ -10,6 +10,7 @@ import { pick } from 'underscore'
 import deepCopy from 'utils/deepCopy'
 import omitDeep from 'utils/omitDeep'
 import { SUBSCRIPTION_SETTINGS } from './config'
+import { SubscriptionContext } from './context'
 import { SettingsSection } from './SettingsSection'
 import styles from './SubscriptionSettings.module.scss'
 import $updateSubscription from './updateSubscription.gql'
@@ -45,38 +46,39 @@ export const SubscriptionSettings = () => {
   }
 
   return (
-    <div className={styles.root}>
-      {message && (
-        <UserMessage
-          {...message}
-          containerStyle={{
-            marginTop: 12,
-            marginBottom: 12,
-            width: 500
-          }}
+    <SubscriptionContext.Provider value={{ onSettingsChanged }}>
+      <div className={styles.root}>
+        {message && (
+          <UserMessage
+            {...message}
+            containerStyle={{
+              marginTop: 12,
+              marginBottom: 12,
+              width: 500
+            }}
+          />
+        )}
+        <div className={styles.inputField}>
+          <TextField disabled label={t('common.nameLabel')} value={subscription?.name} />
+        </div>
+        {subscription?.settings &&
+          sections.map((section) => {
+            return (
+              <SettingsSection
+                {...section}
+                key={section.id}
+                defaultExpanded={true}
+                settings={subscription.settings[section.id]}
+              />
+            )
+          })}
+        <PrimaryButton
+          className={styles.saveButton}
+          disabled={isSaved}
+          onClick={onSaveSettings}
+          text={t('common.save')}
         />
-      )}
-      <div className={styles.inputField}>
-        <TextField disabled label={t('common.nameLabel')} value={subscription?.name} />
       </div>
-      {subscription?.settings &&
-        sections.map((section) => {
-          return (
-            <SettingsSection
-              {...section}
-              key={section.id}
-              defaultExpanded={true}
-              settings={subscription.settings[section.id]}
-              onSettingsChanged={onSettingsChanged}
-            />
-          )
-        })}
-      <PrimaryButton
-        className={styles.saveButton}
-        disabled={isSaved}
-        onClick={onSaveSettings}
-        text={t('common.save')}
-      />
-    </div>
+    </SubscriptionContext.Provider>
   )
 }

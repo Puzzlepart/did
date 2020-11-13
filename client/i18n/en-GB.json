@@ -272,7 +272,10 @@
     "exportTypeCurrentYear": "This year ({{year}})",
     "subscription": "Subscription",
     "nameLabel": "Name",
-    "descriptionLabel": "Description"
+    "descriptionLabel": "Description",
+    "officeLocationLabel": "Office Location",
+    "departmentLabel": "Department",
+    "mobilePhoneLabel": "Mobile phone"
   },
   "navigation": {
     "timesheet": "Timesheet",
