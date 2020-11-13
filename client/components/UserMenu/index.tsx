@@ -42,9 +42,10 @@ export const UserMenu = () => {
             <Divider />
             <UserSettings className={styles.menuItem} />
             <Divider />
-            <a href='/auth/signout' className={styles.menuItem}>
+            <a href='/auth/signout' className={styles.menuItem} style={{ paddingBottom: 25 }}>
               <Icon iconName='SignOut' className={styles.icon} />
-              {t('common.signOutText')}
+              <span>{t('common.signOutText')}</span>
+              <span className={styles.version}>v{process.env.VERSION}</span>
             </a>
           </FadeIn>
         </Callout>

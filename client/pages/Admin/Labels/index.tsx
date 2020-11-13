@@ -15,7 +15,6 @@ export const Labels = () => {
   const [form, setForm] = useState<ILabelFormProps>(null)
 
   const onEdit = (label: LabelObject) => setForm({ label })
-
   const onDelete = (label: LabelObject) => deleteLabel({ variables: { name: label.name } }).then(refetch)
 
   useEffect(() => {

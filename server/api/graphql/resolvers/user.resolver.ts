@@ -27,9 +27,9 @@ export class UserResolver {
    *
    * @param {Context} ctx GraphQL context
    */
-  @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => User, { description: 'Get the currently logged in user' })
   async currentUser(@Ctx() ctx: Context) {
+    if(!ctx.userId) return null
     try {
       const user = await this._azstorage.getUser(ctx.userId)
       const role = await this._azstorage.getRoleByName(user.role)

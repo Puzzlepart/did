@@ -75,7 +75,7 @@ export class DateObject {
    *
    * @param {string} template Template
    */
-  public format(template?: string): string {
+  public format(template = 'YYYY-MM-DD'): string {
     return this.$.format(template)
   }
 

@@ -26,6 +26,6 @@
     ],
     "outDir": "server-dist"
   },
-  "include": ["server/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": ["./server/**/*.ts"],
+  "exclude": ["./node_modules"]
 }

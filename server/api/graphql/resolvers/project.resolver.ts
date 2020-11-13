@@ -3,6 +3,7 @@ import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { pick } from 'underscore'
 import { AzStorageService, MSGraphService } from '../../services'
+import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
 import { connectEntities } from './project.utils'
 import { BaseResult, Project, ProjectInput, ProjectOptions } from './types'
@@ -18,7 +19,7 @@ export class ProjectResolver {
    * @param {AzStorageService} _azstorage AzStorageService
    * @param {MSGraphService} _msgraph MSGraphService
    */
-  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) {}
+  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) { }
 
   /**
    * Get projects
@@ -26,7 +27,7 @@ export class ProjectResolver {
    * @param {string} customerKey Customer key
    * @param {string} sortBy Sort by
    */
-  @Authorized()
+  @Authorized<IAuthOptions>()
   @Query(() => [Project], { description: 'Get projects' })
   async projects(
     @Arg('customerKey', { nullable: true }) customerKey: string,
@@ -46,12 +47,14 @@ export class ProjectResolver {
 
   /**
    * Create or update project
+   * 
+   * @permission MANAGE_PROJECTS (ef4032fb)
    *
    * @param {ProjectInput} project Project
    * @param {boolean} update Update
    * @param {Context} ctx GraphQL context
    */
-  @Authorized()
+  @Authorized<IAuthOptions>({ permission: 'ef4032fb' })
   @Mutation(() => BaseResult, { description: 'Create or update project' })
   async createOrUpdateProject(
     @Arg('project', () => ProjectInput) project: ProjectInput,

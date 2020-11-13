@@ -1,13 +1,12 @@
-import jwt from 'jsonwebtoken'
+import { ApolloError } from 'apollo-server-express'
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { pick } from 'underscore'
-import env from '../../../utils/env'
 import { SubscriptionService } from '../../services'
 import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
-import { ApiToken } from './apiToken.types'
+import { ApiToken, ApiTokenInput } from './apiToken.types'
 import { BaseResult } from './types'
 
 @Service()
@@ -37,20 +36,17 @@ export class ApiTokenResolver {
   /**
    * Add API token
    *
-   * @param {string} name Name    *
+   * @param {ApiTokenInput} token Name    *
    * @param {Context} ctx GraphQL context
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => String, { description: 'Add API token' })
-  async addApiToken(@Arg('name') name: string, @Ctx() ctx: Context): Promise<string> {
-    const token = jwt.sign(
-      {
-        data: { id: ctx.userId }
-      },
-      env('API_TOKEN_SECRET')
-    )
-    const entry = await this._subscription.addApiToken(name, ctx.subscription.id, token)
-    return entry ? token : null
+  addApiToken(@Arg('token') token: ApiTokenInput, @Ctx() ctx: Context): Promise<string> {
+    try {
+      return this._subscription.addApiToken(token, ctx.subscription.id)
+    } catch (error) {
+      throw new ApolloError('Failed to create API token.')
+    }
   }
 
   /**
