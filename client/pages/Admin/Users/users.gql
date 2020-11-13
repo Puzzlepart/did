@@ -24,7 +24,9 @@
   }
   roles {
     name
+    description
     icon
     permissions
+    readOnly
   }
 }

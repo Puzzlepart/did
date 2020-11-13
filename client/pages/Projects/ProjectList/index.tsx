@@ -21,7 +21,7 @@ const ProjectList: FunctionComponent<IProjectListProps> = (props: IProjectListPr
     <List
       {...props}
       items={items}
-      columns={columns(props, t).filter(col => !contains(props.hideColumns, col.key))}
+      columns={columns(props, t).filter((col) => !contains(props.hideColumns, col.key))}
       groups={props.groups}
       selection={props.selection}
       commandBar={{

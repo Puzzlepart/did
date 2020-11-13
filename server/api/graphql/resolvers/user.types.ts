@@ -73,7 +73,6 @@ export class UserInput {
   role?: string
 }
 
-
 @InputType({ description: 'Input object for User query options' })
 export class UserQueryOptions {
   @Field({ nullable: true })

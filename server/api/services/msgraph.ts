@@ -25,7 +25,7 @@ class MSGraphService {
 
   /**
    * Constructs a new MSGraphService
-   * 
+   *
    * @param {OAuthService} _oauthService OAuth service
    * @param {string} access_token Access token
    */
@@ -88,10 +88,7 @@ class MSGraphService {
       const client = await this._getClient()
       const value = await client
         .api('/me')
-        .select([
-          'id',
-          ...properties
-        ])
+        .select(['id', ...properties])
         .get()
       this.endMark('getCurrentUser')
       return value

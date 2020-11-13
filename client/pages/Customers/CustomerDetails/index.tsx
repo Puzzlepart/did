@@ -57,7 +57,8 @@ export const CustomerDetails = (props: ICustomerDetailsProps) => {
             enableShimmer={loading}
             searchBox={{ placeholder: t('common.searchPlaceholder') }}
             renderLink={true}
-            height={300} />
+            height={300}
+          />
         )}
       </div>
     </div>

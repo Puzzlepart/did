@@ -13,21 +13,18 @@ export interface ISubscriptionSettingText extends ISubscriptionSettingBase {
   type: 'text'
 }
 
-export interface ISubscriptionSettingNumber  extends ISubscriptionSettingBase {
+export interface ISubscriptionSettingNumber extends ISubscriptionSettingBase {
   type: 'number'
 }
 
-export interface ISubscriptionSettingCheckbox  extends ISubscriptionSettingBase {
+export interface ISubscriptionSettingCheckbox extends ISubscriptionSettingBase {
   id: string
   type: 'checkbox'
   options: Record<string, string>
 }
 
 export type SubscriptionSettingField =
-  ISubscriptionSettingBool
-  |
-  ISubscriptionSettingText
-  |
-  ISubscriptionSettingNumber
-  |
-  ISubscriptionSettingCheckbox
+  | ISubscriptionSettingBool
+  | ISubscriptionSettingText
+  | ISubscriptionSettingNumber
+  | ISubscriptionSettingCheckbox

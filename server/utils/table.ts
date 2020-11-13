@@ -12,7 +12,7 @@ export interface IQueryAzTableOptions {
   typeMap?: Record<string, 'Custom.ArrayPipe'>
   columnMap?: Record<string, string>
   skipColumns?: string[]
-  orderBy?: string;
+  orderBy?: string
 }
 
 type EntityDescriptor = Record<string, TableUtilities.entityGenerator.EntityProperty<any>>
@@ -205,12 +205,7 @@ class AzTableUtilities {
     const { entries, continuationToken } = await this.queryAzTable(table, query, { columnMap }, token)
     token = continuationToken
     while (token !== null) {
-      const result: TableService.QueryEntitiesResult<any> = await this.queryAzTable(
-        table,
-        query,
-        { columnMap },
-        token
-      )
+      const result: TableService.QueryEntitiesResult<any> = await this.queryAzTable(table, query, { columnMap }, token)
       entries.push(...result.entries)
       token = result.continuationToken
     }
@@ -326,11 +321,7 @@ class AzTableUtilities {
    * @param {any} entityDescriptor Entity descriptor
    * @param {boolean} merge If the entity should be inserted using insertOrMergeEntity
    */
-  updateAzEntity(
-    table: string,
-    entityDescriptor: any,
-    merge?: boolean
-  ): Promise<TableService.EntityMetadata> {
+  updateAzEntity(table: string, entityDescriptor: any, merge?: boolean): Promise<TableService.EntityMetadata> {
     return new Promise((resolve, reject) => {
       if (merge) {
         this.tableService.insertOrMergeEntity(table, entityDescriptor, undefined, (error, result) => {

@@ -28,11 +28,11 @@ export const SUBSCRIPTION_SETTINGS = (t: TFunction): ISettingsSectionProps[] => 
           surname: t('common.surnameLabel'),
           jobTitle: t('common.jobTitleLabel'),
           displayName: t('common.displayNameLabel'),
-          mobilePhone:t('common.mobilePhoneLabel'),
+          mobilePhone: t('common.mobilePhoneLabel'),
           mail: t('common.mailLabel'),
           preferredLanguage: t('common.preferredLanguageLabel'),
           department: t('common.departmentLabel'),
-          officeLocation: t('common.officeLocationLabel'),
+          officeLocation: t('common.officeLocationLabel')
         },
         props: new Map<string, any>([
           ['label', t('admin.adUserSyncPropertiesLabel')],
@@ -70,4 +70,3 @@ export const SUBSCRIPTION_SETTINGS = (t: TFunction): ISettingsSectionProps[] => 
     ]
   }
 ]
-

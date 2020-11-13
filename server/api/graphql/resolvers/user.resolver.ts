@@ -2,7 +2,7 @@ import { ApolloError } from 'apollo-server-express'
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { filter, find, pick, sortBy } from 'underscore'
+import { filter, find, pick } from 'underscore'
 import { AzStorageService, MSGraphService } from '../../services'
 import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
@@ -20,7 +20,7 @@ export class UserResolver {
    * @param {AzStorageService} _azstorage AzStorageService
    * @param {MSGraphService} _msgraph MSGraphService
    */
-  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) { }
+  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) {}
 
   /**
    * Get current user
@@ -63,10 +63,7 @@ export class UserResolver {
   @Query(() => [User], { description: 'Get all users' })
   async users(@Arg('options', () => UserQueryOptions) options: UserQueryOptions) {
     // eslint-disable-next-line prefer-const
-    let [users, roles] = await Promise.all([
-      this._azstorage.getUsers(options.sortBy), 
-      this._azstorage.getRoles()
-    ])
+    let [users, roles] = await Promise.all([this._azstorage.getUsers(options.sortBy), this._azstorage.getRoles()])
     users = filter(
       users.map((user) => ({
         ...user,

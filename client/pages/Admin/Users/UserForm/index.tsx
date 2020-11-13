@@ -15,9 +15,7 @@ import styles from './UserFormModal.module.scss'
 export const UserForm: FunctionComponent<IUserFormProps> = (props: IUserFormProps) => {
   const { t } = useTranslation()
   const { adUsers, roles } = useContext(UsersContext)
-  const [model, setModel] = useState<User>(
-    props.user || { role: find(roles, (r) => r.name === 'User') }
-  )
+  const [model, setModel] = useState<User>(props.user || { role: find(roles, (r) => r.name === 'User') })
   const [addOrUpdateUser] = useMutation($addOrUpdateUser)
 
   /**
@@ -37,7 +35,9 @@ export const UserForm: FunctionComponent<IUserFormProps> = (props: IUserFormProp
    * Checks if form is valid
    */
   const isFormValid = () =>
-    !validator.isEmpty(model?.id || '') && validator.isUUID(model?.id || '') && !validator.isEmpty(model?.displayName || '')
+    !validator.isEmpty(model?.id || '') &&
+    validator.isUUID(model?.id || '') &&
+    !validator.isEmpty(model?.displayName || '')
 
   return (
     <Panel {...pick(props, 'onDismiss', 'headerText')} className={styles.root} isOpen={true}>
@@ -66,7 +66,8 @@ export const UserForm: FunctionComponent<IUserFormProps> = (props: IUserFormProp
         className={styles.inputContainer}
         roles={roles}
         model={model}
-        onChanged={(role) => setModel({ ...model, role })} />
+        onChanged={(role) => setModel({ ...model, role })}
+      />
       <PrimaryButton className={styles.saveBtn} text={t('common.save')} disabled={!isFormValid()} onClick={onSave} />
     </Panel>
   )

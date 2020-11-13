@@ -42,9 +42,7 @@ export const SettingsSection: React.FunctionComponent<ISettingsSectionProps> = (
               )
               break
             case 'checkbox':
-              fieldElement = (
-                <CheckboxField {...field} settings={props.settings} />
-              )
+              fieldElement = <CheckboxField {...field} settings={props.settings} />
               break
             default:
               fieldElement = (
@@ -55,10 +53,7 @@ export const SettingsSection: React.FunctionComponent<ISettingsSectionProps> = (
               )
           }
           return (
-            <div
-              key={field.id}
-              className={styles.inputField}
-              hidden={_.hidden}>
+            <div key={field.id} className={styles.inputField} hidden={_.hidden}>
               {fieldElement}
               <span className={styles.inputDescription}>{_.description}</span>
             </div>
