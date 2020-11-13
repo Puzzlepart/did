@@ -1,5 +1,5 @@
 import { TFunction } from 'i18next'
-import { SubscriptionADSyncSettingsInput, SubscriptionForecastSettingsInput } from 'types'
+import { SubscriptionSettings } from 'types'
 import { ISettingsSectionProps } from './SettingsSection/types'
 
 /**
@@ -38,7 +38,7 @@ export const SUBSCRIPTION_SETTINGS = (t: TFunction): ISettingsSectionProps[] => 
           ['label', t('admin.adUserSyncPropertiesLabel')],
           ['description', t('admin.adUserSyncPropertiesDescription')]
         ]),
-        hiddenIf: (settings: SubscriptionADSyncSettingsInput) => !settings.adUserSyncEnabled
+        hiddenIf: (settings: SubscriptionSettings) => !settings.adsync.adUserSyncEnabled
       }
     ]
   },
@@ -65,7 +65,7 @@ export const SUBSCRIPTION_SETTINGS = (t: TFunction): ISettingsSectionProps[] => 
           ['max', 8],
           ['step', 1]
         ]),
-        disabledIf: (settings: SubscriptionForecastSettingsInput) => !settings.enabled
+        disabledIf: (settings: SubscriptionSettings) => !settings.forecast.enabled
       }
     ]
   }

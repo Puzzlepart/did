@@ -46,7 +46,7 @@ export const SubscriptionSettings = () => {
   }
 
   return (
-    <SubscriptionContext.Provider value={{ onSettingsChanged }}>
+    <SubscriptionContext.Provider value={{ settings: subscription.settings, onSettingsChanged }}>
       <div className={styles.root}>
         {message && (
           <UserMessage
@@ -67,9 +67,7 @@ export const SubscriptionSettings = () => {
               <SettingsSection
                 {...section}
                 key={section.id}
-                defaultExpanded={true}
-                settings={subscription.settings[section.id]}
-              />
+                defaultExpanded={true} />
             )
           })}
         <PrimaryButton

@@ -9,10 +9,6 @@ export interface ISubscriptionSettingBool extends ISubscriptionSettingBase {
   type: 'bool'
 }
 
-export interface ISubscriptionSettingText extends ISubscriptionSettingBase {
-  type: 'text'
-}
-
 export interface ISubscriptionSettingNumber extends ISubscriptionSettingBase {
   type: 'number'
 }
@@ -25,6 +21,5 @@ export interface ISubscriptionSettingCheckbox extends ISubscriptionSettingBase {
 
 export type SubscriptionSettingField =
   | ISubscriptionSettingBool
-  | ISubscriptionSettingText
   | ISubscriptionSettingNumber
   | ISubscriptionSettingCheckbox
