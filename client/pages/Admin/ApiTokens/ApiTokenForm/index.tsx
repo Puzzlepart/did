@@ -36,7 +36,7 @@ export const ApiTokenForm = ({ isOpen, onAdded, onDismiss }: IApiTokenFormProps)
 
   const expiryOptions = {
     '1month': t('admin.apiTokens.oneMonth'),
-    '3month': t('admin.apiTokens.monthPlural'),
+    '3month': t('admin.apiTokens.monthPlural', { months: 3 }),
     '1year': t('admin.apiTokens.oneYear'),
     '30year': t('admin.apiTokens.neverExpiresText')
   }
