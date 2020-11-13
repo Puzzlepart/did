@@ -20,8 +20,7 @@ export const SettingsSection: React.FunctionComponent<ISettingsSectionProps> = (
           const _ = Array.from(field.props).reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {} as any)
           let fieldElement: JSX.Element
           switch (field.type) {
-            case 'bool': {
-              console.log(getValue(props.settings, field.id), props.settings, field.id)
+            case 'bool':
               fieldElement = (
                 <Toggle
                   {..._}
@@ -29,7 +28,6 @@ export const SettingsSection: React.FunctionComponent<ISettingsSectionProps> = (
                   onChange={(_e, value) => props.onSettingsChanged(`${props.id}.${field.id}`, value)}
                 />
               )
-            }
               break
             case 'number':
               fieldElement = (
