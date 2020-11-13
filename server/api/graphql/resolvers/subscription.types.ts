@@ -27,7 +27,7 @@ export class SubscriptionSettings {
   forecast?: SubscriptionForecastSettings
 
   @Field(() => SubscriptionADSyncSettings, { nullable: true })
-  adSync?: SubscriptionADSyncSettings
+  adsync?: SubscriptionADSyncSettings
 }
 
 @ObjectType({ description: 'A type that describes a Subscription', simpleResolvers: simpleResolvers.Subscription })
@@ -71,5 +71,5 @@ export class SubscriptionSettingsInput {
   forecast?: SubscriptionForecastSettingsInput
 
   @Field(() => SubscriptionADSyncSettingsInput, { nullable: true })
-  adSync?: SubscriptionADSyncSettingsInput
+  adsync?: SubscriptionADSyncSettingsInput
 }
