@@ -34,7 +34,7 @@ class AzStorageService {
    * @param {string} connectionString Connection string
    */
   constructor(@Inject('CONTEXT') private readonly context: Context) {
-    this.tableUtil = new AzTableUtilities(createTableService(this.context.subscription.connectionString))
+    this.tableUtil = new AzTableUtilities(createTableService(this.context?.subscription?.connectionString))
     this.tables = new AzStorageServiceTables()
   }
 

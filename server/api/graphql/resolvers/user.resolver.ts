@@ -27,7 +27,6 @@ export class UserResolver {
    *
    * @param {Context} ctx GraphQL context
    */
-  @Authorized<IAuthOptions>()
   @Query(() => User, { description: 'Get the currently logged in user' })
   async currentUser(@Ctx() ctx: Context) {
     if(!ctx.userId) return null
