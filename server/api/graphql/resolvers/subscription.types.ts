@@ -5,32 +5,32 @@ import { simpleResolvers } from '../config'
 
 @ObjectType({ description: 'A type that describes SubscriptionForecastSettings' })
 export class SubscriptionForecastSettings {
-  @Field()
-  enabled: boolean
+  @Field({ nullable: true })
+  enabled?: boolean
 
-  @Field()
-  notifications: number
+  @Field({ nullable: true })
+  notifications?: number
 }
 
 @ObjectType({ description: 'A type that describes SubscriptionSettings' })
 export class SubscriptionSettings {
-  @Field(() => SubscriptionForecastSettings)
-  forecast: SubscriptionForecastSettings
+  @Field(() => SubscriptionForecastSettings, { nullable: true })
+  forecast?: SubscriptionForecastSettings
 }
 
 @InputType({ description: 'A input that describes SubscriptionForecastSettings' })
 export class SubscriptionForecastSettingsInput {
-  @Field()
-  enabled: boolean
+  @Field({ nullable: true })
+  enabled?: boolean
 
-  @Field()
-  notifications: number
+  @Field({ nullable: true })
+  notifications?: number
 }
 
 @InputType({ description: 'A type that describes SubscriptionSettings' })
 export class SubscriptionSettingsInput {
-  @Field(() => SubscriptionForecastSettingsInput)
-  forecast: SubscriptionForecastSettingsInput
+  @Field(() => SubscriptionForecastSettingsInput, { nullable: true })
+  forecast?: SubscriptionForecastSettingsInput
 }
 
 @ObjectType({ description: 'A type that describes a Subscription', simpleResolvers: simpleResolvers.Subscription })
@@ -41,7 +41,7 @@ export class Subscription {
   @Field()
   name: string
 
-  @Field(() => SubscriptionSettings)
+  @Field(() => SubscriptionSettings, { nullable: true })
   settings?: SubscriptionSettings
 
   /**
