@@ -5,7 +5,7 @@ import createDebug from 'debug'
 import { performance, PerformanceObserver } from 'perf_hooks'
 import 'reflect-metadata'
 import { Service } from 'typedi'
-import { first } from 'underscore'
+import { first, sortBy } from 'underscore'
 import * as DateUtils from './../../utils/date'
 import env from '../../utils/env'
 import MSGraphEvent from './msgraph.event'
@@ -102,12 +102,14 @@ class MSGraphService {
 
   /**
    * Get users
+   *
+   * @param {string} orderBy Order by
    */
-  async getUsers(): Promise<any> {
+  async getUsers(orderBy: string): Promise<any> {
     try {
       this.startMark('getUsers')
       const client = await this._getClient()
-      const { value } = await client
+      const { value: users } = await client
         .api('/users')
         // eslint-disable-next-line quotes
         .filter("userType eq 'Member'")
@@ -115,7 +117,7 @@ class MSGraphService {
         .top(999)
         .get()
       this.endMark('getUsers')
-      return value
+      return sortBy(users, orderBy)
     } catch (error) {
       throw new Error(`MSGraphService.getUsers: ${error.message}`)
     }

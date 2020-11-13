@@ -72,3 +72,10 @@ export class UserInput {
   @Field({ nullable: true })
   role?: string
 }
+
+
+@InputType({ description: 'Input object for User query options' })
+export class UserQueryOptions {
+  @Field({ nullable: true })
+  sortBy?: string
+}

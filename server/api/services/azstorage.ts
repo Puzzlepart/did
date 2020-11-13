@@ -188,15 +188,16 @@ class AzStorageService {
 
   /**
    * Get users from table storage
+   *
+   * @param {string} orderBy Order by
    */
-  async getUsers(): Promise<any[]> {
+  async getUsers(orderBy?: string): Promise<any[]> {
     const query = this.tableUtil.createAzQuery(1000)
-    const { entries } = await this.tableUtil.queryAzTable(this.tables.users, query, {
-      columnMap: {
-        RowKey: 'id'
-      }
+    const { entries: users } = await this.tableUtil.queryAzTable(this.tables.users, query, {
+      columnMap: { RowKey: 'id' },
+      orderBy
     })
-    return arraySort(entries, 'displayName')
+    return users
   }
 
   /**

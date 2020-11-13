@@ -17,8 +17,6 @@ export const UserForm: React.FunctionComponent<IUserFormProps> = (props: IUserFo
 
   const [model, setModel] = useState<User>(
     props.user || {
-      id: '',
-      displayName: '',
       role: find(roles, (r) => r.name === 'User')
     }
   )
