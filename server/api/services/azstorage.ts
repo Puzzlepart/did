@@ -217,15 +217,17 @@ class AzStorageService {
   /**
    * Add or update user in table storage
    *
-   * @param {*} user The user data
+   * @param {Record<string, any>} user The user data
    * @param {boolean} update Update the existing user
    */
-  async addOrUpdateUser(user: any, update: boolean) {
-    const entity = this.tableUtil.convertToAzEntity(user.id, omit(user, 'id'))
-    let result
-    if (update) result = await this.tableUtil.updateAzEntity(this.tables.users, entity, true)
-    else result = await this.tableUtil.addAzEntity(this.tables.users, entity)
-    return result
+  async addOrUpdateUser(user: Record<string, any>, update: boolean): Promise<any> {
+    try {
+      const entity = this.tableUtil.convertToAzEntity(user.id, omit(user, 'id'))
+      if (update) await this.tableUtil.updateAzEntity(this.tables.users, entity, true)
+      else await this.tableUtil.addAzEntity(this.tables.users, entity)
+    } catch (error) {
+      throw error
+    }
   }
 
   /**
