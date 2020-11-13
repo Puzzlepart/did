@@ -3,7 +3,7 @@ import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import React from 'react'
 import { ApiToken } from 'types'
-import DateUtils from 'utils/date'
+import { DateObject } from 'utils/date'
 
 /**
  * Returns the columns for the ApiTokens list
@@ -24,13 +24,14 @@ export const ApiTokensColumns = (onDeleteApiToken: (token: ApiToken) => void, t:
     name: t('common.createdLabel'),
     minWidth: 100,
     maxWidth: 180,
-    onRender: (token: ApiToken) => DateUtils.formatDate(token.created, 'LLL')
+    onRender: (token: ApiToken) => new DateObject(token.created).format()
   },
   {
     key: 'expires',
     name: t('common.expiresLabel'),
     minWidth: 100,
-    onRender: (token: ApiToken) => DateUtils.formatDate(token.expires, 'LLL')
+    maxWidth: 200,
+    onRender: (token: ApiToken) =>new DateObject(token.expires).format()
   },
   {
     key: 'actions',

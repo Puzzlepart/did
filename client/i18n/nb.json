@@ -104,7 +104,11 @@
       "headerText": "API-nøkler",
       "tokenExpiryPlaceholder": "Varighet for nøkkel",
       "addNew": "Lag API-nøkkel",
-      "tokenNamePlaceholder": "Fyll inn navn"
+      "tokenNamePlaceholder": "Fyll inn navn",
+      "oneMonth": "En måned",
+      "monthPlural": "{{months}} måneder",
+      "oneYear": "1 år",
+      "neverExpiresText": "Utløper aldri"
     },
     "filterLabels": "Filtrer merkelapper...",
     "rolesPermissions": "Roller og tilganger",

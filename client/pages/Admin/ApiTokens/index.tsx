@@ -42,7 +42,7 @@ export const ApiTokens = () => {
    * @param {number} duration Seconds the API key should be visible to the user
    */
   async function onKeyAdded(generatedKey: string, duration: number = 10) {
-    setForm(null)
+    setForm({})
     setApiKey(generatedKey)
     if (generatedKey) {
       setMessage(
@@ -79,7 +79,13 @@ export const ApiTokens = () => {
           ]
         }}
       />
-      {form.isOpen && <ApiTokenForm {...form} onAdded={onKeyAdded} onDismiss={() => setForm({ isOpen: false })} />}
+      {form.isOpen && (
+        <ApiTokenForm
+          {...form}
+          onAdded={onKeyAdded}
+          onDismiss={() => setForm({ isOpen: false })}
+        />
+      )}
     </div>
   )
 }

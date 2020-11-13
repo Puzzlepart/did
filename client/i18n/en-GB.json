@@ -105,7 +105,11 @@
       "headerText": "API Tokens",
       "tokenNamePlaceholder": "Enter token name",
       "tokenExpiryPlaceholder": "Token expiry",
-      "addNew": "Generate API token"
+      "addNew": "Generate API token",
+      "oneMonth": "One month",
+      "monthPlural": "{{months}} months",
+      "oneYear": "1 year",
+      "neverExpiresText": "Never expires"
     },
     "filterLabels": "Filter labels...",
     "rolesPermissions": "Roles and permissions",

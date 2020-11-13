@@ -7,13 +7,13 @@ import { TextField } from 'office-ui-fabric-react/lib/TextField'
 import { Toggle } from 'office-ui-fabric-react/lib/Toggle'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { ApiTokenInput } from 'types'
 import { contains, isEmpty } from 'underscore'
 import { isBlank } from 'underscore.string'
-import { ApiTokenInput } from 'types'
+import { DateObject } from 'utils/date'
 import $addApiToken from './addApiToken.gql'
 import styles from './ApiTokenForm.module.scss'
 import { IApiTokenFormProps } from './types'
-import { DateObject } from 'utils/date'
 
 export const ApiTokenForm = ({ isOpen, onAdded, onDismiss }: IApiTokenFormProps) => {
   const { t } = useTranslation()
@@ -34,6 +34,13 @@ export const ApiTokenForm = ({ isOpen, onAdded, onDismiss }: IApiTokenFormProps)
     setToken({ ...token, permissions })
   }
 
+  const expiryOptions = {
+    '1month': t('admin.apiTokens.oneMonth'),
+    '3month': t('admin.apiTokens.monthPlural'),
+    '1year': t('admin.apiTokens.oneYear'),
+    '30year': t('admin.apiTokens.neverExpiresText')
+  }
+
   return (
     <Panel
       className={styles.root}
@@ -52,13 +59,17 @@ export const ApiTokenForm = ({ isOpen, onAdded, onDismiss }: IApiTokenFormProps)
         <Dropdown
           placeholder={t('admin.apiTokens.tokenExpiryPlaceholder')}
           required={true}
-          onChange={(_e, opt) =>
+          onChange={(_e, { data }) =>
             setToken({
               ...token,
-              expires: new DateObject().add(opt.data).format()
+              expires: new DateObject().add(data).format()
             })
           }
-          options={require('./expiryOptions.json')}
+          options={Object.keys(expiryOptions).map(key => ({
+            key,
+            data: key,
+            text: expiryOptions[key],
+          }))}
         />
       </div>
       <div className={styles.sectionTitle}>{t('admin.apiTokens.permissionsTitle')}</div>
