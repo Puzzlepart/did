@@ -1,4 +1,4 @@
-import { getValue, stringToArrayBuffer } from 'helpers'
+import { getValue } from 'helpers'
 import { IColumn } from 'office-ui-fabric'
 import { humanize } from 'underscore.string'
 import { DateObject } from './date'
@@ -11,6 +11,21 @@ export interface IExcelExportOptions {
 }
 
 export type ExcelColumnType = 'date' | null
+
+
+/**
+ * Converts string to array buffer
+ *
+ * @param {string} str String
+ */
+function stringToArrayBuffer(str: string): ArrayBuffer {
+  const buf = new ArrayBuffer(str.length)
+  const view = new Uint8Array(buf)
+  for (let i = 0; i !== str.length; ++i) {
+    view[i] = str.charCodeAt(i) & 0xff
+  }
+  return buf
+}
 
 /**
  * Export to Excel
@@ -67,9 +82,7 @@ export async function exportExcel(items: any[], options: IExcelExportOptions): P
     xlsx.utils.book_append_sheet(workBook, sheet, s.name)
   })
   const wbout = xlsx.write(workBook, { type: 'binary', bookType: 'xlsx' })
-  const blob = new Blob([stringToArrayBuffer(wbout)], {
-    type: 'application/octet-stream'
-  })
-  ;(window as any).saveAs(blob, options.fileName)
+  const blob = new Blob([stringToArrayBuffer(wbout)], { type: 'application/octet-stream' });
+  (window as any).saveAs(blob, options.fileName)
   return blob
 }
