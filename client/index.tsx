@@ -36,7 +36,7 @@ const boostrap = async () => {
       context.subscription = data?.subscription
       return context
     } catch (error) {
-      // We return an "empty" user with preferred language en-GB (defaultlt)
+      // We return an "empty" user with preferred language en-GB (default)
       return { user: new ContextUser() }
     }
   }
