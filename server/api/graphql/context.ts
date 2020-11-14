@@ -46,7 +46,7 @@ export const createContext = async (request: Express.Request): Promise<Context> 
     let context: Context = {}
     context.userId = null
     context.subscription = get(request, 'user.subscription')
-    context.permissions = []
+    context.permissions = get(request, 'user.role.permissions', { default: [] })
     if (!!request.token) {
       const token = await new SubscriptionService().getToken(request.token)
       if (!token) throw new AuthenticationError('Token is invalid.')
