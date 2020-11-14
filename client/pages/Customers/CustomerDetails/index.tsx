@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/client'
 import { UserMessage } from 'components/UserMessage'
-import { getValue } from 'helpers'
 import { DefaultButton, Icon, MessageBar, MessageBarType } from 'office-ui-fabric'
 import { ProjectList } from 'pages/Projects'
 import React, { FunctionComponent } from 'react'
@@ -14,7 +13,7 @@ export const CustomerDetails: FunctionComponent<ICustomerDetailsProps> = (props:
   const { loading, error, data } = useQuery($projects, {
     variables: {
       sortBy: 'name',
-      customerKey: getValue<string>(props, 'customer.key', '')
+      customerKey: props.customer?.key
     }
   })
 
@@ -32,14 +31,14 @@ export const CustomerDetails: FunctionComponent<ICustomerDetailsProps> = (props:
             <DefaultButton
               text={t('customers.webLinkText')}
               href={props.customer.webLink}
-              iconProps={{ iconName: 'WorkforceManagement' }}
+              iconProps={{ iconName: 'Website' }}
             />
           </div>
           <div className={styles.buttonContainer} hidden={loading || !!error || !props.customer.externalSystemURL}>
             <DefaultButton
               text={t('customers.externalSystemUrlText')}
               href={props.customer.externalSystemURL}
-              iconProps={{ iconName: 'WorkforceManagement' }}
+              iconProps={{ iconName: 'System' }}
             />
           </div>
         </div>

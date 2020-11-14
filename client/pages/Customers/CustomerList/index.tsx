@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { Customer } from 'types'
 import { filter, isEmpty } from 'underscore'
 import { generateColumn as col } from 'utils/generateColumn'
-import { ICustomerListProps } from './ICustomerListProps'
+import { ICustomerListProps } from './types'
 
 /**
  * Generate column definitions
