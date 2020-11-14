@@ -28,20 +28,22 @@
   }
 
   .error {
-    text-align: center;
+    width: 500px;
 
-    .icon {
-      font-size: 48px;
-      display: block;
-      margin: 0 0 15px 0;
+    [class*='ms-MessageBar-icon'] {
+      font-size: 25px;
     }
 
-    .title {
-      font-size: 18px;
+    h4, p{
+      margin: 5px 0 10px 15px;      
     }
 
-    .text {
-      color: #444;
+    h4 {
+      letter-spacing: 2px;
+    }
+
+    p {
+      letter-spacing: 1px;
     }
   }
 
