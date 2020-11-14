@@ -18,7 +18,7 @@ export class SubscriptionResolver {
    *
    * @param {SubscriptionService} _subscription SubscriptionService
    */
-  constructor(private readonly _subscription: SubscriptionService) { }
+  constructor(private readonly _subscription: SubscriptionService) {}
 
   /**
    * Get current subscription
@@ -35,7 +35,7 @@ export class SubscriptionResolver {
 
   /**
    * Update subscription
-   * 
+   *
    * @permission MANAGE_SUBSCRIPTION (67ba6efc)
    *
    * @param {string} id Subscription ID

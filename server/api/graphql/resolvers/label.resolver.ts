@@ -18,7 +18,7 @@ export class LabelResolver {
    *
    * @param {AzStorageService} _azstorage AzStorageService
    */
-  constructor(private readonly _azstorage: AzStorageService) { }
+  constructor(private readonly _azstorage: AzStorageService) {}
 
   /**
    * Get labels

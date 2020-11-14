@@ -1,3 +1,3 @@
 export interface IToggleSectionProps extends React.HTMLProps<HTMLDivElement> {
-    headerText: string
+  headerText: string
 }

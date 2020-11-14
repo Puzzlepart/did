@@ -14,7 +14,7 @@ declare namespace Express {
     mail?: string
     mobilePhone?: string
     preferredLanguage?: string
-    role?: string
+    role?: any
     surname?: string
     subscription?: UserSubscription
     tokenParams?: any

@@ -27,11 +27,7 @@ export const RoleColumns = (onEdit: (role: Role) => void, t: TFunction) => [
   )),
   col('edit', null, { maxWidth: 100 }, (role: Role) => (
     <>
-      <DefaultButton
-        disabled={role.readOnly}
-        text={t('common.editLabel')}
-        onClick={() =>
-          onEdit(role)} />
+      <DefaultButton disabled={role.readOnly} text={t('common.editLabel')} onClick={() => onEdit(role)} />
     </>
   ))
 ]

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { Admin } from './Admin'
 
-const _ = () => {
+export default () => {
   const match = useRouteMatch()
   return (
     <Switch>
@@ -18,5 +18,3 @@ const _ = () => {
     </Switch>
   )
 }
-
-export default _

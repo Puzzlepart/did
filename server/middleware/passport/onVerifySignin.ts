@@ -64,8 +64,9 @@ export default async function onVerifySignin(
       debug('No subscription found for %s', profile._json.tid)
       return done(TENANT_NOT_ENROLLED, null)
     }
+    const azstorage = new AzStorageService({ subscription })
     debug('Subscription found for %s', profile._json.tid)
-    const user: Express.User = await new AzStorageService({ subscription }).getUser(profile.oid)
+    const user: Express.User = await azstorage.getUser(profile.oid)
     if (!user) {
       debug('User %s is not registered for %s', profile.oid, subscription.name)
       return done(USER_NOT_ENROLLED, null)
@@ -73,6 +74,7 @@ export default async function onVerifySignin(
     if (get(subscription, AD_USER_SYNC_ENABLED_KEY, { default: false })) {
       await synchronizeUserProfile(user, subscription, tokenParams.access_token)
     }
+    user.role = await azstorage.getRoleByName(user.role)
     user.subscription = subscription
     user.tokenParams = tokenParams
     return done(null, user)

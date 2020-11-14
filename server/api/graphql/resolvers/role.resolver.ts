@@ -17,7 +17,7 @@ export class RoleResolver {
    *
    * @param {AzStorageService} _azstorage AzStorageService
    */
-  constructor(private readonly _azstorage: AzStorageService) { }
+  constructor(private readonly _azstorage: AzStorageService) {}
 
   /**
    * Get roles
@@ -30,7 +30,7 @@ export class RoleResolver {
 
   /**
    * Add or update role
-   * 
+   *
    * @permission MANAGE_ROLESPERMISSIONS (cd52a735)
    *
    * @param {RoleInput} role Role
