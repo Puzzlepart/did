@@ -1,22 +1,26 @@
-import express, { Request, Response, NextFunction } from 'express'
+import express, { NextFunction, Request, Response } from 'express'
 import passport from 'passport'
+import { SigninError } from 'server/middleware/passport/errors'
 import env from '../utils/env'
 const router = express.Router()
 
 router.get('/signin', (request: Request, response: Response, next: NextFunction) => {
   passport.authenticate('azuread-openidconnect', {
-    response,
     prompt: env('OAUTH_SIGNIN_PROMPT'),
     failureRedirect: '/'
-  } as any)(request, response, next)
+  })(request, response, next)
 })
 
 router.post('/callback', (request: Request, response: Response, next: NextFunction) => {
-  passport.authenticate('azuread-openidconnect', {
-    response,
-    failureRedirect: '/',
-    successRedirect: '/timesheet'
-  } as any)(request, response, next)
+  passport.authenticate('azuread-openidconnect', {}, (error: SigninError) => {
+    if (error) {
+      request.session.destroy(() => {
+        response.render('index', { error: error.toString() })
+      })
+    } else {
+      response.redirect('/timesheet')
+    }
+  })(request, response, next)
 })
 
 router.get('/signout', (request: Request, response: Response) => {
