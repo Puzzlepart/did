@@ -42,7 +42,6 @@ const boostrap = async () => {
   }
 
   const context = await getContext()
-  context.error = JSON.parse(document.getElementById('app').getAttribute('data-error') || '{}')
   const container = document.getElementById('app')
   DateUtils.setup(context.user.language)
   i18n.changeLanguage(context.user.language)

@@ -54,11 +54,6 @@ export interface IAppContext {
    * Subscription
    */
   subscription?: Subscription
-
-  /**
-   * Error
-   */
-  error?: any
 }
 
 export const AppContext = createContext<IAppContext>(null)
