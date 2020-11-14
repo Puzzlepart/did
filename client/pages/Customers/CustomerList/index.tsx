@@ -1,17 +1,16 @@
 import { CustomerLink } from 'components/CustomerLink'
 import List from 'components/List'
 import { TFunction } from 'i18next'
-import { Customer } from 'types'
-import { Checkbox, Icon, IColumn } from 'office-ui-fabric'
+import { Checkbox, IColumn, Icon } from 'office-ui-fabric'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Customer } from 'types'
+import { filter, isEmpty } from 'underscore'
 import { generateColumn as col } from 'utils/generateColumn'
 import { ICustomerListProps } from './ICustomerListProps'
 
 /**
  * Generate column definitions
- *
- * @category Customers
  */
 export const columns = (t: TFunction): IColumn[] => [
   col('icon', '', { maxWidth: 35, minWidth: 35 }, (customer: Customer) => {
@@ -55,6 +54,7 @@ export const CustomerList = (props: ICustomerListProps) => {
             onRender: () => (
               <Checkbox
                 styles={{ root: { margin: '6px 0 0 8px' } }}
+                disabled={isEmpty(filter(props.items, (i) => i.inactive))}
                 checked={showInactive}
                 label={t('common.toggleInactiveText')}
                 onChange={(_event, checked) => setShowInactive(checked)}
