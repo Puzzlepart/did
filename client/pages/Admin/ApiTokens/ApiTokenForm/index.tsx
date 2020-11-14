@@ -65,10 +65,10 @@ export const ApiTokenForm = ({ isOpen, onAdded, onDismiss }: IApiTokenFormProps)
               expires: new DateObject().add(data).format()
             })
           }
-          options={Object.keys(expiryOptions).map(key => ({
+          options={Object.keys(expiryOptions).map((key) => ({
             key,
             data: key,
-            text: expiryOptions[key],
+            text: expiryOptions[key]
           }))}
         />
       </div>

@@ -12,7 +12,6 @@ export interface IExcelExportOptions {
 
 export type ExcelColumnType = 'date' | null
 
-
 /**
  * Converts string to array buffer
  *
@@ -82,7 +81,7 @@ export async function exportExcel(items: any[], options: IExcelExportOptions): P
     xlsx.utils.book_append_sheet(workBook, sheet, s.name)
   })
   const wbout = xlsx.write(workBook, { type: 'binary', bookType: 'xlsx' })
-  const blob = new Blob([stringToArrayBuffer(wbout)], { type: 'application/octet-stream' });
-  (window as any).saveAs(blob, options.fileName)
+  const blob = new Blob([stringToArrayBuffer(wbout)], { type: 'application/octet-stream' })
+  ;(window as any).saveAs(blob, options.fileName)
   return blob
 }

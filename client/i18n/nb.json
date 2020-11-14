@@ -315,7 +315,9 @@
     "manageCustomersDescription": "Opprett nye og rediger eksisterende kunder.",
     "deleteCustomersDescription": "Sletting av kunder støttes foreløpig ikke.",
     "manageUsersDescription": "Administrer brukere på administratorsiden. \nLegg til nye brukere, én etter én eller i bulk, og endre rolle for eksisterende brukere.",
-    "manageRolesPermissionsDescription": "Administrer roller og tillatelser på administratorsiden. \nLag nye roller og rediger eksisterende."
+    "manageRolesPermissionsDescription": "Administrer roller og tillatelser på administratorsiden. \nLag nye roller og rediger eksisterende.",
+    "manageSubscription": "Administrer abonnementet",
+    "manageSubscriptionDescription": "Administrer abonnementsinnstillinger og faktureringsinformasjon."
   },
   "notifications": {
     "moreLinkText": "Les mer her",

@@ -316,7 +316,9 @@
     "manageCustomersDescription": " Create new and edit existing customers.",
     "deleteCustomersDescription": "Deletion of customers is currently not supported.",
     "manageUsersDescription": "Manage users on the admin page. Add new users, one by one or in bulk, and change role of existing users.",
-    "manageRolesPermissionsDescription": "Manage roles and permissions on the admin page. Create new roles and edit exisiting."
+    "manageRolesPermissionsDescription": "Manage roles and permissions on the admin page. Create new roles and edit exisiting.",
+    "manageSubscription": "Manage subscription",
+    "manageSubscriptionDescription": "Manage subscription settings and billing information."
   },
   "notifications": {
     "moreLinkText": "Read more here",

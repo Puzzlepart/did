@@ -20,7 +20,7 @@ export class CustomerResolver {
    *
    * @param {AzStorageService} _azstorage AzStorageService
    */
-  constructor(private readonly _azstorage: AzStorageService) { }
+  constructor(private readonly _azstorage: AzStorageService) {}
 
   /**
    * Get customers
@@ -35,7 +35,7 @@ export class CustomerResolver {
 
   /**
    * Create or update customer
-   * 
+   *
    * @permission MANAGE_CUSTOMERS (09909241)
    *
    * @param {CustomerInput} customer Customer
@@ -62,7 +62,7 @@ export class CustomerResolver {
 
   /**
    * Delete customer
-   * 
+   *
    * @permission DELETE_CUSTOMER (8b39db3d)
    *
    * @param {string} key Key

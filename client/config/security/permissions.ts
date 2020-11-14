@@ -106,5 +106,12 @@ export default (t: TFunction): IPermission[] => [
     name: t('permissions.manageRolesPermissions'),
     description: t('permissions.manageRolesPermissionsDescription'),
     api: true
+  },
+  {
+    id: PERMISSION.MANAGE_SUBSCRIPTION,
+    name: t('permissions.manageSubscription'),
+    description: t('permissions.manageSubscriptionDescription'),
+    api: false,
+    disabled: true
   }
 ]

@@ -10,10 +10,7 @@ import { ISettingsSectionProps } from './types'
 export const SettingsSection: React.FunctionComponent<ISettingsSectionProps> = (props: ISettingsSectionProps) => {
   const { settings, onSettingsChanged } = useContext(SubscriptionContext)
   return (
-    <ToggleSection
-      className={styles.root}
-      id={props.id}
-      headerText={props.name}>
+    <ToggleSection className={styles.root} id={props.id} headerText={props.name}>
       {props.fields.map((field) => {
         field.props.set('disabled', field.disabledIf && field.disabledIf(settings || {}))
         field.props.set('hidden', field.hiddenIf && field.hiddenIf(settings || {}))

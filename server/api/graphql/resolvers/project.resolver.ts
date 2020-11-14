@@ -19,7 +19,7 @@ export class ProjectResolver {
    * @param {AzStorageService} _azstorage AzStorageService
    * @param {MSGraphService} _msgraph MSGraphService
    */
-  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) { }
+  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) {}
 
   /**
    * Get projects
@@ -47,7 +47,7 @@ export class ProjectResolver {
 
   /**
    * Create or update project
-   * 
+   *
    * @permission MANAGE_PROJECTS (ef4032fb)
    *
    * @param {ProjectInput} project Project

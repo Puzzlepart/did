@@ -63,12 +63,7 @@ export const SubscriptionSettings = () => {
         </div>
         {subscription?.settings &&
           sections.map((section) => {
-            return (
-              <SettingsSection
-                {...section}
-                key={section.id}
-                defaultExpanded={true} />
-            )
+            return <SettingsSection {...section} key={section.id} defaultExpanded={true} />
           })}
         <PrimaryButton
           className={styles.saveButton}

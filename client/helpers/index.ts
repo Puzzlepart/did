@@ -1,7 +1,6 @@
 import get from 'get-value'
 import set from 'set-value'
 
-
 /**
  * Get value from object
  *

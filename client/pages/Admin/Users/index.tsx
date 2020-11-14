@@ -4,7 +4,7 @@ import { ISpinnerProps, Spinner } from 'office-ui-fabric'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { User } from 'types'
-import { filter, find, isEmpty, omit } from 'underscore'
+import { any, filter, isEmpty, omit } from 'underscore'
 import $bulkImport from './bulkImport.gql'
 import { BulkImportPanel, IBulkImportPanelProps } from './BulkImportPanel'
 import { UserColumns as columns } from './columns'
@@ -27,7 +27,7 @@ export const Users = () => {
     }),
     [data]
   )
-  ctxValue.adUsers = filter(ctxValue.adUsers, (x) => !find(ctxValue.users, (y) => y.id === x.id))
+  ctxValue.adUsers = filter(ctxValue.adUsers, (x) => !any(ctxValue.users, (y) => y.id === x.id))
 
   /**
    * On edit user
