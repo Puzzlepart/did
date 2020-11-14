@@ -1,7 +1,7 @@
 import createDebug from 'debug'
 const debug = createDebug('middleware/passport/onVerifySignin')
 import { SubscriptionService, AzStorageService, MSGraphService } from '../../api/services'
-import { NO_OID_FOUND, TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } from './errors'
+import { NO_OID_FOUND, SIGNIN_FAILED, TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } from './errors'
 import { IProfile } from 'passport-azure-ad/oidc-strategy'
 import { VerifyCallback } from 'passport-azure-ad'
 import { isEqual, pick } from 'underscore'
