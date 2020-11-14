@@ -71,15 +71,16 @@ export default async function onVerifySignin(
       debug('User %s is not registered for %s', profile.oid, subscription.name)
       return done(USER_NOT_ENROLLED, null)
     }
+    debug('User %s found in subscription %s', user.id, subscription.name)
     if (get(subscription, AD_USER_SYNC_ENABLED_KEY, { default: false })) {
       await synchronizeUserProfile(user, subscription, tokenParams.access_token)
     }
     user.role = await azstorage.getRoleByName(user.role)
     user.subscription = subscription
     user.tokenParams = tokenParams
+    debug('Sign in for %s succesfully verified', user.id)
     return done(null, user)
   } catch (error) {
-    debug(error)
     return done(error, null)
   }
 }

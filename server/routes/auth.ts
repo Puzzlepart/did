@@ -1,33 +1,40 @@
-import express, { NextFunction, Request, Response } from 'express'
+import createDebug from 'debug'
+import { NextFunction, Request, Response, Router } from 'express'
 import passport from 'passport'
-import { SigninError } from 'server/middleware/passport/errors'
+import { SigninError, SIGNIN_FAILED } from '../middleware/passport/errors'
 import env from '../utils/env'
-const router = express.Router()
+const debug = createDebug('server/routes/auth')
+const auth = Router()
 
-router.get('/signin', (request: Request, response: Response, next: NextFunction) => {
+auth.get('/signin', (request: Request, response: Response, next: NextFunction) => {
   passport.authenticate('azuread-openidconnect', {
     prompt: env('OAUTH_SIGNIN_PROMPT'),
     failureRedirect: '/'
   })(request, response, next)
 })
 
-router.post('/callback', (request: Request, response: Response, next: NextFunction) => {
-  passport.authenticate('azuread-openidconnect', {}, (error: SigninError) => {
+auth.post('/callback', (request: Request, response: Response, next: NextFunction) => {
+  passport.authenticate('azuread-openidconnect', (error: SigninError, user: Express.User) => {
     if (error) {
-      request.session.destroy(() => {
-        response.render('index', { error: error.toString() })
-      })
-    } else {
-      response.redirect('/timesheet')
+      debug('Sign in failed with error code %s', error.code)
+      return response.render('index', { error: error.toString() })
     }
+    if (!user) {
+      debug('Sign in failed with error code %s', SIGNIN_FAILED.code)
+      return response.render('index', { error: SIGNIN_FAILED.toString() })
+    }
+    request.logIn(user, (err) => {
+      if (err) return response.render('index', { error: JSON.stringify(err) })
+      return response.redirect('/timesheet')
+    })
   })(request, response, next)
 })
 
-router.get('/signout', (request: Request, response: Response) => {
+auth.get('/signout', (request: Request, response: Response) => {
   request.session.destroy(() => {
     request.logOut()
     response.redirect('/')
   })
 })
 
-export default router
+export default auth
