@@ -6,7 +6,6 @@ query($customerKey: String, $sortBy: String) {
     description
     webLink
     icon
-    externalSystemURL
     customerKey
     customer {
       key
