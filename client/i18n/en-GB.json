@@ -100,7 +100,17 @@
     "users": "Users",
     "summary": "Summary",
     "labels": "Labels",
-    "apiTokens": "API tokens",
+    "apiTokens": {
+      "permissionsTitle": "Permissions",
+      "headerText": "API Tokens",
+      "tokenNamePlaceholder": "Enter token name",
+      "tokenExpiryPlaceholder": "Token expiry",
+      "addNew": "Generate API token",
+      "oneMonth": "One month",
+      "monthPlural": "{{months}} months",
+      "oneYear": "1 year",
+      "neverExpiresText": "Never expires"
+    },
     "filterLabels": "Filter labels...",
     "rolesPermissions": "Roles and permissions",
     "addNewUser": "Add new",
@@ -112,9 +122,7 @@
     "noTimeEntriesText": "\nThere are no confirmed hours for the selected months in the selected year.",
     "editRole": "Edit role",
     "permissonsLabel": "Permissions",
-    "generateTokenLabel": "Generate API token",
-    "tokenNamePlaceholder": "Enter token name",
-    "tokenGeneratedText": "Your key has been generated and will only be visible for 10 seconds. You can only see it once. Take good care of it!",
+    "tokenGeneratedText": "Your key has been generated and will only be visible for {{duration}} seconds. You can only see it once. Take good care of it!",
     "tokenErrorText": "An error occurred generating your key. Please try again later.",
     "tokenDeletedText": "API key **{{name}}** was succesfully deleted.",
     "bulkImportUsersLabel": "Bulk import",
@@ -126,7 +134,12 @@
     "forecastNotificationsDescription": "How many weeks ahead should users forecast.",
     "forecastNotificationsLabel": "Notifications",
     "subscriptionSettings": "Subscription",
-    "summaryRangeValueFormat": "Showing {{value}} months"
+    "summaryRangeValueFormat": "Showing {{value}} months",
+    "adsync": "Active Directory Sync",
+    "adUserSyncEnabledLabel": "Synchronize user properties",
+    "adUserSyncEnabledDescription": "Automatically synchronize user properties from Azure Active Directory when the user logs in.",
+    "adUserSyncPropertiesLabel": "Properties to synchronize",
+    "adUserSyncPropertiesDescription": "Choose which properties that should be automatically synchronized from Azure Active Directory."
   },
   "reports": {
     "generatingReportLabel": "Generating report. To give you the freshest results, we're generating a report from the latest data...",
@@ -267,7 +280,12 @@
     "exportTypeCurrentYear": "This year ({{year}})",
     "subscription": "Subscription",
     "nameLabel": "Name",
-    "descriptionLabel": "Description"
+    "descriptionLabel": "Description",
+    "expiresLabel": "Expires",
+    "officeLocationLabel": "Office Location",
+    "departmentLabel": "Department",
+    "mobilePhoneLabel": "Mobile phone",
+    "searchUserLabel": "Search in Azure Active Directory"
   },
   "navigation": {
     "timesheet": "Timesheet",
@@ -298,7 +316,9 @@
     "manageCustomersDescription": " Create new and edit existing customers.",
     "deleteCustomersDescription": "Deletion of customers is currently not supported.",
     "manageUsersDescription": "Manage users on the admin page. Add new users, one by one or in bulk, and change role of existing users.",
-    "manageRolesPermissionsDescription": "Manage roles and permissions on the admin page. Create new roles and edit exisiting."
+    "manageRolesPermissionsDescription": "Manage roles and permissions on the admin page. Create new roles and edit exisiting.",
+    "manageSubscription": "Manage subscription",
+    "manageSubscriptionDescription": "Manage subscription settings and billing information."
   },
   "notifications": {
     "moreLinkText": "Read more here",

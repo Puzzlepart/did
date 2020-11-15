@@ -1,0 +1,3 @@
+mutation($token: ApiTokenInput!) {
+  apiKey: addApiToken(token: $token)
+}

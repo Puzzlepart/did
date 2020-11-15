@@ -4,6 +4,7 @@ import env from '../../utils/env'
 import azurestorage from 'azure-storage'
 import 'reflect-metadata'
 import { Service } from 'typedi'
+import jwt from 'jsonwebtoken'
 
 @Service({ global: true })
 class SubscriptionService {
@@ -24,10 +25,12 @@ class SubscriptionService {
   async getSubscription(subscriptionId: string) {
     try {
       const query = this.tableUtil.createAzQuery(1).where('RowKey eq ?', subscriptionId)
-      const { entries } = await this.tableUtil.queryAzTable('Subscriptions', query, {
+      const {
+        entries: [subscription]
+      } = await this.tableUtil.queryAzTable('Subscriptions', query, {
         columnMap: { RowKey: 'id' }
       })
-      return first(entries)
+      return subscription
     } catch (error) {
       return null
     }
@@ -50,20 +53,22 @@ class SubscriptionService {
   }
 
   /**
-   * Find subscription for the specified token
+   * Get token by apiKey
    *
-   * @param {string} token Request token
+   * @param {string} apiKey API key
    */
-  async findSubscriptionWithToken(token: string) {
+  async getToken(apiKey: string) {
     try {
-      const query = this.tableUtil.createAzQuery(1).where('Token eq ?', token)
+      const query = this.tableUtil.createAzQuery(1).where('ApiKey eq ?', apiKey)
       const { entries } = await this.tableUtil.queryAzTable('ApiTokens', query, {
         columnMap: {
           PartitionKey: 'subscriptionId'
         }
       })
       const { subscriptionId } = first(entries)
-      return this.getSubscription(subscriptionId)
+      const subscription = await this.getSubscription(subscriptionId)
+      const data = jwt.verify(apiKey, env('API_TOKEN_SECRET')) as any
+      return { subscription, ...data }
     } catch (error) {
       return null
     }
@@ -72,19 +77,26 @@ class SubscriptionService {
   /**
    * Add token for the user subscription
    *
-   * @param {string} {string} name Token name
+   * @param {any} name Token name
    * @param {string} subscriptionId Subscription id
-   * @param {string} token Request token
    */
-  async addApiToken(name: string, subscriptionId: string, token: string) {
+  async addApiToken(token: any, subscriptionId: string) {
     try {
-      const { string } = this.tableUtil.azEntGen()
-      const entity = await this.tableUtil.addAzEntity('ApiTokens', {
+      const { string, datetime } = this.tableUtil.azEntGen()
+      const apiKey = jwt.sign(
+        {
+          permissions: token.permissions,
+          expires: token.expires
+        },
+        env('API_TOKEN_SECRET')
+      )
+      await this.tableUtil.addAzEntity('ApiTokens', {
         PartitionKey: string(subscriptionId),
-        RowKey: string(name),
-        Token: string(token)
+        RowKey: string(token.name),
+        Expires: datetime(token.expires),
+        ApiKey: string(apiKey)
       })
-      return entity
+      return apiKey
     } catch (error) {
       return null
     }

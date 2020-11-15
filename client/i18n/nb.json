@@ -99,7 +99,17 @@
     "users": "Brukere",
     "summary": "Sammendrag",
     "labels": "Merkelapper",
-    "apiTokens": "API-nøkler",
+    "apiTokens": {
+      "permissionsTitle": "Tillatelser",
+      "headerText": "API-nøkler",
+      "tokenExpiryPlaceholder": "Varighet for nøkkel",
+      "addNew": "Lag API-nøkkel",
+      "tokenNamePlaceholder": "Fyll inn navn",
+      "oneMonth": "En måned",
+      "monthPlural": "{{months}} måneder",
+      "oneYear": "1 år",
+      "neverExpiresText": "Utløper aldri"
+    },
     "filterLabels": "Filtrer merkelapper...",
     "rolesPermissions": "Roller og tilganger",
     "addNewUser": "Legg til ny",
@@ -111,9 +121,7 @@
     "noTimeEntriesText": "Det er ingen bekreftede timer for de valgte månedene i det valgte året.",
     "editRole": "Rediger rolle",
     "permissonsLabel": "Tilganger",
-    "generateTokenLabel": "Lag API-nøkkel",
-    "tokenNamePlaceholder": "Fyll inn navn",
-    "tokenGeneratedText": "Nøkkelen din er generert og vil kun være synlig i 10 sekunder. Du kan bare se det en gang. Ta godt vare på den!",
+    "tokenGeneratedText": "Nøkkelen din er generert og vil kun være synlig i {{duration}} sekunder. Du kan bare se det en gang. Ta godt vare på den!",
     "tokenErrorText": "Det skjedde en feil under generering av nøkkel. Prøv igjen senere.",
     "tokenDeletedText": "Nøkkelen **{{name}}** ble slettet.",
     "bulkImportUsersLabel": "Importer i bulk",
@@ -125,7 +133,12 @@
     "forecastNotificationsDescription": "Hvor mange uker fremover skal brukerne forutsi.",
     "forecastNotificationsLabel": "Varsler",
     "subscriptionSettings": "Abonnement",
-    "summaryRangeValueFormat": "Viser {{value}} måneder"
+    "summaryRangeValueFormat": "Viser {{value}} måneder",
+    "adsync": "Synkronisering med Azure Active Directory",
+    "adUserSyncEnabledLabel": "Synkroniser brukeregenskaper",
+    "adUserSyncEnabledDescription": "Synkroniser automatisk brukeregenskaper fra Azure Active Directory når brukeren logger på.",
+    "adUserSyncPropertiesLabel": "Egenskaper som skal synkroniseres",
+    "adUserSyncPropertiesDescription": "Velg hvilke egenskaper som skal synkroniseres automatisk fra Azure Active Directory."
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport. For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene...",
@@ -266,7 +279,12 @@
     "exportTypeCurrentYear": "Inneværende år ({{year}})",
     "subscription": "Abonnement",
     "nameLabel": "Navn",
-    "descriptionLabel": "Beskrivelse"
+    "descriptionLabel": "Beskrivelse",
+    "expiresLabel": "Utløper",
+    "officeLocationLabel": "Kontorsted",
+    "departmentLabel": "Avdeling",
+    "mobilePhoneLabel": "Mobiltelefon",
+    "searchUserLabel": "Søk i Azure Active Directory"
   },
   "navigation": {
     "timesheet": "Timeliste",
@@ -297,7 +315,9 @@
     "manageCustomersDescription": "Opprett nye og rediger eksisterende kunder.",
     "deleteCustomersDescription": "Sletting av kunder støttes foreløpig ikke.",
     "manageUsersDescription": "Administrer brukere på administratorsiden. \nLegg til nye brukere, én etter én eller i bulk, og endre rolle for eksisterende brukere.",
-    "manageRolesPermissionsDescription": "Administrer roller og tillatelser på administratorsiden. \nLag nye roller og rediger eksisterende."
+    "manageRolesPermissionsDescription": "Administrer roller og tillatelser på administratorsiden. \nLag nye roller og rediger eksisterende.",
+    "manageSubscription": "Administrer abonnementet",
+    "manageSubscriptionDescription": "Administrer abonnementsinnstillinger og faktureringsinformasjon."
   },
   "notifications": {
     "moreLinkText": "Les mer her",

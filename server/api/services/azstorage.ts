@@ -20,7 +20,7 @@ export class AzStorageServiceTables {
     public roles: string = 'Roles',
     public labels: string = 'Labels',
     public users: string = 'Users'
-  ) { }
+  ) {}
 }
 
 @Service({ global: false })
@@ -34,7 +34,7 @@ class AzStorageService {
    * @param {string} connectionString Connection string
    */
   constructor(@Inject('CONTEXT') private readonly context: Context) {
-    this.tableUtil = new AzTableUtilities(createTableService(this.context.subscription.connectionString))
+    this.tableUtil = new AzTableUtilities(createTableService(this.context?.subscription?.connectionString))
     this.tables = new AzStorageServiceTables()
   }
 
@@ -188,15 +188,16 @@ class AzStorageService {
 
   /**
    * Get users from table storage
+   *
+   * @param {string} orderBy Order by
    */
-  async getUsers(): Promise<any[]> {
+  async getUsers(orderBy?: string): Promise<any[]> {
     const query = this.tableUtil.createAzQuery(1000)
-    const { entries } = await this.tableUtil.queryAzTable(this.tables.users, query, {
-      columnMap: {
-        RowKey: 'id'
-      }
+    const { entries: users } = await this.tableUtil.queryAzTable(this.tables.users, query, {
+      columnMap: { RowKey: 'id' },
+      orderBy
     })
-    return arraySort(entries, 'displayName')
+    return users
   }
 
   /**
@@ -217,15 +218,17 @@ class AzStorageService {
   /**
    * Add or update user in table storage
    *
-   * @param {*} user The user data
+   * @param {Record<string, any>} user The user data
    * @param {boolean} update Update the existing user
    */
-  async addOrUpdateUser(user: any, update: boolean) {
-    const entity = this.tableUtil.convertToAzEntity(user.id, omit(user, 'id'))
-    let result
-    if (update) result = await this.tableUtil.updateAzEntity(this.tables.users, entity, true)
-    else result = await this.tableUtil.addAzEntity(this.tables.users, entity)
-    return result
+  async addOrUpdateUser(user: Record<string, any>, update: boolean): Promise<any> {
+    try {
+      const entity = this.tableUtil.convertToAzEntity(user.id, omit(user, 'id'))
+      if (update) await this.tableUtil.updateAzEntity(this.tables.users, entity, true)
+      else await this.tableUtil.addAzEntity(this.tables.users, entity)
+    } catch (error) {
+      throw error
+    }
   }
 
   /**

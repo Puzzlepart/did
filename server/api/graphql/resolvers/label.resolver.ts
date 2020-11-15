@@ -3,6 +3,7 @@ import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { pick } from 'underscore'
 import { AzStorageService } from '../../services'
+import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
 import { LabelInput, LabelObject } from './label.types'
 import { BaseResult } from './types'
@@ -35,7 +36,7 @@ export class LabelResolver {
    * @param {boolean} update Update
    * @param {Context} ctx GraphQL context
    */
-  @Authorized()
+  @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Add or update label' })
   async addOrUpdateLabel(
     @Arg('label', () => LabelInput) label: LabelInput,
@@ -58,7 +59,7 @@ export class LabelResolver {
    *
    * @param {string} name Name
    */
-  @Authorized()
+  @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Delete label' })
   async deleteLabel(@Arg('name') name: string) {
     try {
