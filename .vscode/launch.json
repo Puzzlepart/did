@@ -10,16 +10,6 @@
       "runtimeArgs": ["-r", "ts-node/register"],
       "args": ["${workspaceRoot}/server/index.ts"],
       "outFiles": ["${workspaceRoot}/server/**/*.ts"]
-    },
-    {
-      "name": "Debug Node v.12.18.3",
-      "type": "node",
-      "runtimeVersion": "12.18.3",
-      "request": "launch",
-      "cwd": "${workspaceRoot}",
-      "runtimeArgs": ["-r", "ts-node/register"],
-      "args": ["${workspaceRoot}/server/index.ts"],
-      "outFiles": ["${workspaceRoot}/server/**/*.ts"]
     }
   ]
 }
