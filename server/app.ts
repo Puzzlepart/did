@@ -86,9 +86,7 @@ class App {
    */
   setupRoutes() {
     const index = express.Router()
-    index.get('/', (_req, res) => {
-      res.render('index')
-    })
+    index.get('/', (_req, res) => res.render('index'))
     this.instance.use('*', index)
   }
 
@@ -96,11 +94,8 @@ class App {
    * Setup error handling
    */
   setupErrorHandling() {
-    this.instance.use((_req, _res, next) => {
-      next(createError(404))
-    })
+    this.instance.use((_req, _res, next) => next(createError()))
     this.instance.use((error: any, _req: express.Request, res: express.Response) => {
-      res.status(error.status || 500)
       res.render('index', { error: JSON.stringify(pick(error, 'name', 'message', 'status')) })
     })
   }

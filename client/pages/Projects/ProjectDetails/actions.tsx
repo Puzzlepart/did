@@ -55,23 +55,20 @@ export const Actions = (props: IProjectDetailsProps) => {
       <div className={styles.actionItem} hidden={!user.hasPermission(PERMISSION.MANAGE_PROJECTS)}>
         <DefaultButton
           text={t('common.editLabel')}
-          iconProps={{ iconName: 'PageEdit' }}
-          onClick={() => setShowEditPanel(true)}
-        />
+          iconProps={{ iconName: 'Edit' }}
+          onClick={() => setShowEditPanel(true)} />
       </div>
       <div className={styles.actionItem} hidden={isEmpty(context.timeentries)}>
         <DefaultButton
           text={t('projects.exportTimeEntriesLabel')}
           iconProps={{ iconName: 'ExcelDocument' }}
-          onClick={onExportExcel}
-        />
+          onClick={onExportExcel} />
       </div>
       <div className={styles.actionItem} hidden={!context.project.webLink}>
         <DefaultButton
           text={t('projects.workspaceLabel')}
           onClick={() => window.location.replace(context.project.webLink)}
-          iconProps={{ iconName: 'WorkforceManagement' }}
-        />
+          iconProps={{ iconName: 'Website' }} />
       </div>
       <div className={styles.actionItem} hidden={!!context.project.outlookCategory}>
         <DefaultButton

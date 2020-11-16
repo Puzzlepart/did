@@ -30,7 +30,7 @@ const ProjectList: FunctionComponent<IProjectListProps> = (props: IProjectListPr
             key: 'TOGGLE_INACTIVE',
             onRender: () => (
               <Checkbox
-                disabled={isEmpty(filter(items, (i) => i.inactive))}
+                disabled={isEmpty(filter(props.items, (i) => i.inactive))}
                 styles={{ root: { margin: '6px 0 0 8px' } }}
                 checked={showInactive}
                 label={t('common.toggleInactiveText')}

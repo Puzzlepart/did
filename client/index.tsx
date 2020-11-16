@@ -36,13 +36,12 @@ const boostrap = async () => {
       context.subscription = data?.subscription
       return context
     } catch (error) {
-      // We return an "empty" user with preferred language en-GB (defaultlt)
+      // We return an "empty" user with preferred language en-GB (default)
       return { user: new ContextUser() }
     }
   }
 
   const context = await getContext()
-  context.error = JSON.parse(document.getElementById('app').getAttribute('data-error') || '{}')
   const container = document.getElementById('app')
   DateUtils.setup(context.user.language)
   i18n.changeLanguage(context.user.language)

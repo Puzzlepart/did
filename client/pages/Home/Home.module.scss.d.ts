@@ -2,13 +2,10 @@
 // Please do not change this file!
 interface CssExports {
   'error': string;
-  'icon': string;
   'logo': string;
   'motto': string;
   'root': string;
   'signinbutton': string;
-  'text': string;
-  'title': string;
 }
 export const cssExports: CssExports;
 export default cssExports;
