@@ -56,7 +56,7 @@ export const StatusBar = () => {
         iconName: 'CheckMark'
       })
     }
-    if (selectedPeriod.isForecasted) {
+    if (selectedPeriod.isForecasted && !selectedPeriod.isConfirmed) {
       messages.push({
         text: t('timesheet.periodForecastedText', {
           hours: DateUtils.getDurationString(selectedPeriod.forecastedHours, t)
