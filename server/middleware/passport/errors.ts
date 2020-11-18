@@ -1,10 +1,5 @@
 export class SigninError extends Error {
-  constructor(
-    public code: string,
-    public name: string, 
-    message: string, 
-    public icon?: string
-    ) {
+  constructor(public code: string, public name: string, message: string, public icon?: string) {
     super(message)
   }
 
@@ -22,7 +17,7 @@ export class SigninError extends Error {
 
 /**
  * Error for no user ID found
- * 
+ *
  * Markdown is supported
  */
 export const NO_OID_FOUND = new SigninError(
@@ -34,7 +29,7 @@ export const NO_OID_FOUND = new SigninError(
 
 /**
  * Error for no subscription found for the tenant ID
- * 
+ *
  * Markdown is supported
  */
 export const TENANT_NOT_ENROLLED = new SigninError(
@@ -46,7 +41,7 @@ export const TENANT_NOT_ENROLLED = new SigninError(
 
 /**
  * Error for user not found in subscription directory
- * 
+ *
  * Markdown is supported
  */
 export const USER_NOT_ENROLLED = new SigninError(
@@ -59,7 +54,7 @@ export const USER_NOT_ENROLLED = new SigninError(
 
 /**
  * Error for sign in failed, and we're not really sure why
- * 
+ *
  * Markdown is supported
  */
 export const SIGNIN_FAILED = new SigninError(

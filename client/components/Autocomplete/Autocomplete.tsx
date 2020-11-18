@@ -12,10 +12,8 @@ const KeyCodes = {
   down: 40 as const
 }
 
-type ISearchSuggestionsProps = IAutocompleteProps
-
-export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsProps, IAutocompleteState> {
-  public static defaultProps: Partial<ISearchSuggestionsProps> = {
+export class Autocomplete<T = any> extends React.Component<IAutocompleteProps<T>, IAutocompleteState> {
+  public static defaultProps: Partial<IAutocompleteProps> = {
     classNames: {
       suggestionsCallout: styles.callout,
       suggestionContainer: styles.suggestionContainer,
@@ -26,7 +24,7 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
   }
   private _containerElement = React.createRef<HTMLDivElement>()
 
-  constructor(props: ISearchSuggestionsProps) {
+  constructor(props: IAutocompleteProps) {
     super(props)
     this.state = {
       isSuggestionDisabled: false,

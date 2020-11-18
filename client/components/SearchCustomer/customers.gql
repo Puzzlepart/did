@@ -5,8 +5,5 @@ query {
     name
     description
     icon
-    webLink
-    externalSystemURL
-    inactive
   }
 }

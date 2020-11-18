@@ -49,7 +49,9 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
         <UserMessage
           hidden={!event.customer || !!event.suggestedProject}
           containerStyle={{ marginTop: 10 }}
-          text={t('timesheet.eventNotFullyMatchedText', { name: getValue(event, 'customer.name', '') })}
+          text={t('timesheet.eventNotFullyMatchedText', {
+            name: getValue(event, 'customer.name', '')
+          })}
         />
         <SearchProject
           width='100%'

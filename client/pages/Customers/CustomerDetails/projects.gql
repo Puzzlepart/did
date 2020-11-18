@@ -1,12 +1,8 @@
-query($customerKey: String, $sortBy: String) {
-  projects(customerKey: $customerKey, sortBy: $sortBy) {
+query($customerKey: String) {
+  projects(customerKey: $customerKey, sortBy: "name") {
     id
-    key
     name
-    description
-    webLink
     icon
-    externalSystemURL
     inactive
     labels {
       name

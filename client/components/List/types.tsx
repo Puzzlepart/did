@@ -13,7 +13,7 @@ export interface IListProps<T = any> extends React.HTMLProps<HTMLDivElement> {
   /**
    * Items
    */
-  items: T[]
+  items?: T[]
 
   /**
    * Columns

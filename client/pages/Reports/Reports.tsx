@@ -105,7 +105,9 @@ export const Reports = () => {
                     ...state.groupBy,
                     totalFunc: (items) => {
                       const durationHrs = items.reduce((sum, item) => sum + item.duration, 0) as number
-                      return t('common.headerTotalDuration', { duration: DateUtils.getDurationString(durationHrs, t) })
+                      return t('common.headerTotalDuration', {
+                        duration: DateUtils.getDurationString(durationHrs, t)
+                      })
                     }
                   }}
                   columns={columns(t)}

@@ -60,7 +60,7 @@ export const LabelPicker: React.FunctionComponent<ILabelPickerProps> = (props: I
         target={toggleRef}
         hidden={!showCallout}
         labels={labels}
-        searchLabelText={props.searchLabelText}
+        placeholder={props.placeholder}
         onToggleLabel={onToggleLabel}
         defaultSelectedKeys={props.defaultSelectedKeys}
         onDismiss={() => setShowCallout(false)}

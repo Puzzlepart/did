@@ -7,6 +7,9 @@ const _ = (): React.ReactElement<Switch> => {
   const match = useRouteMatch()
   return (
     <Switch>
+      <Route path={`${match.path}/:view/:key/:detailsTab`}>
+        <Projects />
+      </Route>
       <Route path={`${match.path}/:view/:key`}>
         <Projects />
       </Route>

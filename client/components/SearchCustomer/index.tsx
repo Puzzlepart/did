@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { Customer } from 'types'
-import $customers from 'pages/Customers/customers.gql'
+import $customers from './customers.gql'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Autocomplete, ISuggestionItem } from '../Autocomplete'
@@ -9,7 +9,6 @@ import { ISearchCustomerProps } from './types'
 export const SearchCustomer = (props: ISearchCustomerProps) => {
   const { t } = useTranslation()
   const { loading, data } = useQuery<{ customers: Customer[] }>($customers, {
-    variables: { sortBy: 'name' },
     fetchPolicy: 'cache-first'
   })
 
@@ -26,14 +25,14 @@ export const SearchCustomer = (props: ISearchCustomerProps) => {
 
   return (
     <div hidden={props.hidden}>
-      <Autocomplete
+      <Autocomplete<Customer>
         {...props}
         disabled={loading}
         items={searchData}
         width={550}
         placeholder={t('common.searchPlaceholder')}
         onClear={() => props.onSelected(null)}
-        onSelected={(item) => props.onSelected(item.data)}
+        onSelected={(item) => props.onSelected(item)}
       />
     </div>
   )

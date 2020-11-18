@@ -21,7 +21,6 @@ export const Customers: React.FunctionComponent = () => {
   const params = useParams<ICustomersParams>()
   const [selected, setSelected] = useState<Customer>(null)
   const { loading, error, data } = useQuery($customers, {
-    variables: { sortBy: 'name' },
     fetchPolicy: 'cache-first'
   })
 

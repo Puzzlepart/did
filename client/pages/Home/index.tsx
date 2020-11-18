@@ -19,10 +19,8 @@ export default (): React.ReactElement<HTMLDivElement> => {
           className={styles.error}
           type={MessageBarType.error}
           iconName={error.icon}
-          text={[
-            `#### ${error.name} ####`,
-            error.message
-          ].join('\n\n')} />
+          text={[`#### ${error.name} ####`, error.message].join('\n\n')}
+        />
       )}
       <div hidden={!!subscription || !!error}>
         <DefaultButton className={styles.signinbutton} href='/auth/signin' text={t('common.signInText')} />

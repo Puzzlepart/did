@@ -47,7 +47,10 @@ export const Users = () => {
    */
   const onBulkImport = async (users: any[]) => {
     setBulkImportPanel(null)
-    setProgressProps({ label: t('admin.bulkImportingUsersLabel', { count: users.length }), labelPosition: 'right' })
+    setProgressProps({
+      label: t('admin.bulkImportingUsersLabel', { count: users.length }),
+      labelPosition: 'right'
+    })
     await bulkImport({ variables: { users: users.map((u) => omit(u, '__typename')) } })
     setProgressProps(null)
     refetch()

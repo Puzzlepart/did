@@ -3,9 +3,15 @@ import 'reflect-metadata'
 import { ObjectType, InputType, Field, ID } from 'type-graphql'
 import { simpleResolvers } from '../config'
 
-@ObjectType({ description: 'A type that describes a Customer', simpleResolvers: simpleResolvers.Customer })
+@ObjectType({
+  description: 'A type that describes a Customer',
+  simpleResolvers: simpleResolvers.Customer
+})
 export class Customer {
   @Field(() => ID)
+  id?: string
+
+  @Field()
   key: string
 
   @Field()

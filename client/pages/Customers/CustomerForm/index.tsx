@@ -47,7 +47,10 @@ export const CustomerForm = ({ nameLength = [2] }: ICustomerFormProps) => {
       }
     })
     if (result.success) {
-      setMessage({ text: t('customers.createSuccess', { name: model.name }), type: MessageBarType.success })
+      setMessage({
+        text: t('customers.createSuccess', { name: model.name }),
+        type: MessageBarType.success
+      })
     } else {
       setMessage({ text: result.error.message, type: MessageBarType.error })
     }
