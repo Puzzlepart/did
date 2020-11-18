@@ -67,7 +67,7 @@
     "timeEntriesLoadingLabel": "Loading time entries",
     "myProjectsText": "My projects",
     "myProjectsSearchPlaceholder": "Search my projects...",
-    "exportTimeEntriesLabel": "Export time entries to Excel",
+    "exportTimeEntriesLabel": "Export to Excel",
     "keyFieldDescription": "A unique identifier for the project. Used together with the customer key to form the key used to tag events in Outlook. Keep it short, maximum {{keyMaxLength}} characters.",
     "nameFormValidationText": "Name should be at least {{nameMinLength}} characters long.",
     "keyFormValidationText": "Project key should be between {{keyMinLength}} and {{keyMaxLength}} characters long, and all uppercase.",
@@ -85,7 +85,8 @@
     "descriptionFieldDescription": "Describe the project in more detail.",
     "idPreviewBlankText": "You will use a combination of customer key and project key to tag your events in Outlook. You can automatically create a category in Outlook by checking _Automatically create category in Outlook_.",
     "informationHeaderText": "Information",
-    "timeEntriesHeaderText": "Time entries"
+    "timeEntriesHeaderText": "Time entries",
+    "noInformationAvailable": "No information available about this project."
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",

@@ -55,12 +55,6 @@ export const Actions: FunctionComponent<IProjectDetailsProps> = (props: IProject
           iconProps={{ iconName: 'Edit' }}
           onClick={() => setShowEditPanel(true)} />
       </div>
-      {/* <div className={styles.actionItem} hidden={isEmpty(context.timeentries)}>
-        <DefaultButton
-          text={t('projects.exportTimeEntriesLabel')}
-          iconProps={{ iconName: 'ExcelDocument' }}
-          onClick={onExportExcel} />
-      </div> */}
       <div className={styles.actionItem} hidden={!context.project.webLink}>
         <DefaultButton
           text={t('projects.workspaceLabel')}
