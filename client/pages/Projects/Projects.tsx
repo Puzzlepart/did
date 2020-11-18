@@ -18,7 +18,7 @@ import { IProjectsParams, ProjectsQueryResult, ProjectsView } from './types'
 
 /**
  * Initialize state
- * 
+ *
  * @param {IProjectsParams} params Params
  */
 const initState = (params: IProjectsParams) => ({

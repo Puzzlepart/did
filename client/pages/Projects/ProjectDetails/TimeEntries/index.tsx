@@ -24,7 +24,7 @@ export const TimeEntries: FunctionComponent = () => {
 
   return (
     <div className={styles.root}>
-      <Summary timeentries={timeentries} />
+      <Summary hidden={empty} timeentries={timeentries} />
       <div hidden={isEmpty(timeentries)}>
         <ActionButton
           text={t('projects.exportTimeEntriesLabel')}

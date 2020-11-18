@@ -14,7 +14,6 @@ export const CustomerDetails: FunctionComponent<ICustomerDetailsProps> = (
   const { t } = useTranslation()
   const { loading, error, data } = useQuery($projects, {
     variables: {
-      sortBy: 'name',
       customerKey: props.customer?.key
     }
   })
