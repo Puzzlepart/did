@@ -5,8 +5,8 @@ query {
     description
     webLink
     icon
-    customerKey
     customer {
+      id
       key
       name
     }

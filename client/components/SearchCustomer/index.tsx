@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { Customer } from 'types'
-import $customers from 'pages/Customers/customers.gql'
+import $customers from './customers.gql'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Autocomplete, ISuggestionItem } from '../Autocomplete'
@@ -9,7 +9,6 @@ import { ISearchCustomerProps } from './types'
 export const SearchCustomer = (props: ISearchCustomerProps) => {
   const { t } = useTranslation()
   const { loading, data } = useQuery<{ customers: Customer[] }>($customers, {
-    variables: { sortBy: 'name' },
     fetchPolicy: 'cache-first'
   })
 

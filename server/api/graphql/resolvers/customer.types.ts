@@ -9,6 +9,9 @@ import { simpleResolvers } from '../config'
 })
 export class Customer {
   @Field(() => ID)
+  id?: string
+
+  @Field()
   key: string
 
   @Field()

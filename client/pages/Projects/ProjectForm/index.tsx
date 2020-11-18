@@ -64,7 +64,6 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({ edit, onSubm
     }
   }
 
-
   return (
     <div className={styles.root}>
       {message && (

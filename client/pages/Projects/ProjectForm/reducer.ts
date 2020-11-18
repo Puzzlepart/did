@@ -1,4 +1,5 @@
 import { IFormValidation } from 'types'
+import { isEmpty } from 'underscore'
 import { IProjectFormState, ProjectModel } from './types'
 
 export type ProjectFormAction =
@@ -23,7 +24,12 @@ export type ProjectFormAction =
  * @param {IProjectFormState} state State
  */
 const setProjectId = (state: IProjectFormState) => {
-    state.projectId = state.validation.invalid ? '' : [state.model.customerKey, state.model.key].join(' ').toUpperCase()
+    const { customerKey, key } = state.model
+    if (!isEmpty(customerKey) && !isEmpty(key)) {
+        state.projectId = [customerKey, key].join(' ').toUpperCase()
+    } else {
+        state.projectId = ''
+    }
 }
 
 /**
@@ -38,13 +44,14 @@ export default (state: IProjectFormState, action: ProjectFormAction): IProjectFo
         case 'UPDATE_MODEL':
             {
                 const [key, value] = action.payload
-                state.model[key] = value
+                newState    .model[key] = value
             }
             break
 
         case 'RESET_FORM': {
-            state.model = new ProjectModel()
-            state.validation = { errors: {}, invalid: true }
+            newState.model = new ProjectModel()
+            newState.model.customerKey = state.model.customerKey
+            newState.validation = { errors: {}, invalid: true }
         }
             break
 
