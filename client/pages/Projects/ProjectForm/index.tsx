@@ -117,7 +117,7 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
         <Toggle
           label={t('projects.createOutlookCategoryFieldLabel')}
           checked={options.createOutlookCategory}
-          onChanged={(value) => setOptions({ ...options, createOutlookCategory: value })}
+          onChange={(_event,value) => setOptions({ ...options, createOutlookCategory: value })}
         />
         <span className={styles.inputDescription}>
           {t('projects.createOutlookCategoryFieldDescription', { id: projectId })}
@@ -153,7 +153,7 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
         <Toggle
           label={t('common.inactiveFieldLabel')}
           checked={project.inactive}
-          onChanged={(value) => updateProject('inactive', value)}
+          onChange={(_event,value) => updateProject('inactive', value)}
         />
         <span className={styles.inputDescription}>{t('projects.inactiveFieldDescription')}</span>
       </div>

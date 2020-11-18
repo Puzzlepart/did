@@ -13,7 +13,7 @@ import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
 import $projects from './projects.gql'
 import reducer from './reducer'
-import { IProjectsParams, ProjectsQueryResult } from './types'
+import { IProjectsParams, ProjectsQueryResult, ProjectsView } from './types'
 
 export const Projects: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -21,6 +21,7 @@ export const Projects: FunctionComponent = () => {
   const history = useHistory()
   const params = useParams<IProjectsParams>()
   const [state, dispatch] = useReducer(reducer, {
+    view: params.view,
     projects: [],
     outlookCategories: []
   })
@@ -50,16 +51,15 @@ export const Projects: FunctionComponent = () => {
     }
   }, [params.key, state.projects])
 
-  function onPivotClick({ props }: PivotItem) {
-    dispatch({ type: 'SET_SELECTED_PROJECT', project: null })
-    history.push(`/projects/${props.itemKey}`)
-  }
-
   return (
     <ProjectsContext.Provider value={context}>
       <Pivot
-        selectedKey={params.view || 'search'}
-        onLinkClick={onPivotClick}
+        selectedKey={state.view}
+        onLinkClick={(item) => dispatch({
+          type: 'CHANGE_VIEW',
+          view: item.props.itemKey as ProjectsView,
+          history
+        })}
         styles={{ itemContainer: { paddingTop: 10 } }}>
         <PivotItem itemID='search' itemKey='search' headerText={t('common.search')} itemIcon='FabricFolderSearch'>
           <UserMessage hidden={!query.error} type={MessageBarType.error} text={t('common.genericErrorText')} />

@@ -1,7 +1,8 @@
 import { QueryResult } from '@apollo/client'
 import { Project } from 'types'
 import { find } from 'underscore'
-import { IProjectsState, ProjectsQueryResult } from './types'
+import { IProjectsState, ProjectsQueryResult, ProjectsView } from './types'
+import {History} from 'history'
 
 export type ProjectsAction =
     {
@@ -12,6 +13,12 @@ export type ProjectsAction =
     {
         type: 'SET_SELECTED_PROJECT',
         project: Project
+    }
+    |
+    {
+        type: 'CHANGE_VIEW',
+        view: ProjectsView
+        history: History
     }
 
 /**
@@ -39,6 +46,13 @@ export default (state: IProjectsState, action: ProjectsAction): IProjectsState =
         case 'SET_SELECTED_PROJECT':
             {
                 newState.selected = action.project
+            }
+            break
+
+        case 'CHANGE_VIEW':
+            {
+                newState.view = action.view
+                newState.selected = null
             }
             break
 
