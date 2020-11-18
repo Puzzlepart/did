@@ -11,6 +11,7 @@ import { find } from 'underscore'
 import { IProjectsContext, ProjectsContext } from './context'
 import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
+import { IProjectListProps } from './ProjectList/types'
 import $projects from './projects.gql'
 import reducer from './reducer'
 import { IProjectsParams, ProjectsQueryResult, ProjectsView } from './types'
@@ -51,6 +52,21 @@ export const Projects: FunctionComponent = () => {
     }
   }, [params.key, state.projects])
 
+  const listProps = useMemo<IProjectListProps>(() => ({
+    enableShimmer: query.loading,
+    searchBox: {
+      placeholder: state.view === 'my' ? t('projects.myProjectsSearchPlaceholder') : t('common.searchPlaceholder'),
+      onChange: () => dispatch({ type: 'SET_SELECTED_PROJECT', project: null })
+    },
+    selection: {
+      mode: SelectionMode.single,
+      onChanged: (selected) => {
+        dispatch({ type: 'SET_SELECTED_PROJECT', project: selected })
+      }
+    },
+    height: state.selected && 400
+  }), [state])
+
   return (
     <ProjectsContext.Provider value={context}>
       <Pivot
@@ -63,52 +79,22 @@ export const Projects: FunctionComponent = () => {
         styles={{ itemContainer: { paddingTop: 10 } }}>
         <PivotItem itemID='search' itemKey='search' headerText={t('common.search')} itemIcon='FabricFolderSearch'>
           <UserMessage hidden={!query.error} type={MessageBarType.error} text={t('common.genericErrorText')} />
-          <div hidden={!!query.error}>
-            <ProjectList
-              enableShimmer={query.loading}
-              items={state.projects}
-              searchBox={{
-                placeholder: t('common.searchPlaceholder'),
-                onChange: () => dispatch({ type: 'SET_SELECTED_PROJECT', project: null })
-              }}
-              selection={{
-                mode: SelectionMode.single,
-                onChanged: (selected) => {
-                  selected &&
-                    history.push(['/projects', params.view || 'search', selected.id].filter((p) => p).join('/'))
-                  dispatch({ type: 'SET_SELECTED_PROJECT', project: selected })
-                }
-              }}
-              height={state.selected && 400}
-            />
-            {state.selected && <ProjectDetails />}
-          </div>
+          <ProjectList
+            {...listProps}
+            items={state.projects} />
+          {state.selected && <ProjectDetails />}
         </PivotItem>
         <PivotItem itemID='my' itemKey='my' headerText={t('projects.myProjectsText')} itemIcon='FabricUserFolder'>
           <UserMessage hidden={!query.error} type={MessageBarType.error} text={t('common.genericErrorText')} />
-          <div hidden={!!query.error}>
-            <UserMessage
-              containerStyle={{ marginBottom: 12 }}
-              iconName='OutlookLogoInverse'
-              text={t('projects.outlookCategoryInfoText')}
-            />
-            <ProjectList
-              enableShimmer={query.loading}
-              items={state.projects.filter((p) => !!p.outlookCategory)}
-              searchBox={{
-                placeholder: t('projects.myProjectsSearchPlaceholder'),
-                onChange: () => dispatch({ type: 'SET_SELECTED_PROJECT', project: null })
-              }}
-              selection={{
-                mode: SelectionMode.single,
-                onChanged: (selected) => dispatch({ type: 'SET_SELECTED_PROJECT', project: selected })
-              }}
-              height={state.selected && 400}
-              groups={{ fieldName: 'customer.name' }}
-              hideColumns={['customer']}
-            />
-            {state.selected && <ProjectDetails />}
-          </div>
+          <UserMessage
+            containerStyle={{ marginBottom: 12 }}
+            iconName='OutlookLogoInverse'
+            text={t('projects.outlookCategoryInfoText')}
+          />
+          <ProjectList
+            {...listProps}
+            items={state.projects.filter((p) => !!p.outlookCategory)} />
+          {state.selected && <ProjectDetails />}
         </PivotItem>
         {user.hasPermission(PERMISSION.MANAGE_PROJECTS) && (
           <PivotItem itemID='new' itemKey='new' headerText={t('projects.createNewText')} itemIcon='AddTo'>

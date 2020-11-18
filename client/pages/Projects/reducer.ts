@@ -53,6 +53,7 @@ export default (state: IProjectsState, action: ProjectsAction): IProjectsState =
             {
                 newState.view = action.view
                 newState.selected = null
+                action.history.push(`/projects/${action.view}`)
             }
             break
 
