@@ -6,22 +6,22 @@ import { IProjectsParams, IProjectsState, ProjectsQueryResult, ProjectsView } fr
 
 export type ProjectsAction =
   | {
-      type: 'DATA_UPDATED'
-      query: QueryResult<ProjectsQueryResult>
-      params: IProjectsParams
-    }
+    type: 'DATA_UPDATED'
+    query: QueryResult<ProjectsQueryResult>
+    params: IProjectsParams
+  }
   | {
-      type: 'SET_SELECTED_PROJECT'
-      project: Project
-    }
+    type: 'SET_SELECTED_PROJECT'
+    project: Project
+  }
   | {
-      type: 'CHANGE_VIEW'
-      view: ProjectsView
-    }
+    type: 'CHANGE_VIEW'
+    view: ProjectsView
+  }
   | {
-      type: 'CHANGE_DETAILS_TAB'
-      detailsTab: string
-    }
+    type: 'CHANGE_DETAILS_TAB'
+    detailsTab: string
+  }
 
 /**
  * Update history
@@ -31,9 +31,8 @@ export type ProjectsAction =
  * @param {number} delay Delay in ms
  */
 const updateHistory = (state: IProjectsState, history: History, delay = 500) => {
-  const path =
-    '/' + ['projects', state.view, state.selected?.id, state.detailsTab].filter((p) => p).join('/')
-
+  const paths = [state.view, state.selected?.id, state.detailsTab]
+  const path = `/${['projects', ...paths].filter((p) => p).join('/')}`.toLowerCase()
   setTimeout(() => history.push(path), delay)
 }
 
@@ -60,7 +59,7 @@ export default (history: History) => (
           }))
           newState.selected = find(
             newState.projects,
-            (p) => p.id === (action.params.key || action.params.view)
+            (p) => JSON.stringify(action.params).toLowerCase().indexOf(p.id.toLowerCase()) !== -1
           )
         }
       }

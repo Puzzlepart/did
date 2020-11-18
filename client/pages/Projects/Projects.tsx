@@ -7,6 +7,7 @@ import { ProjectForm } from 'pages/Projects/ProjectForm'
 import React, { FunctionComponent, useContext, useEffect, useMemo, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
+import { contains } from 'underscore'
 import { IProjectsContext, ProjectsContext } from './context'
 import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
@@ -15,17 +16,24 @@ import $projects from './projects.gql'
 import reducer from './reducer'
 import { IProjectsParams, ProjectsQueryResult, ProjectsView } from './types'
 
+/**
+ * Initialize state
+ * 
+ * @param {IProjectsParams} params Params
+ */
+const initState = (params: IProjectsParams) => ({
+  view: contains(['search', 'my', 'new'], params.view) ? params.view : 'search',
+  detailsTab: params.detailsTab,
+  projects: [],
+  outlookCategories: []
+})
+
 export const Projects: FunctionComponent = () => {
   const { t } = useTranslation()
   const { user } = useContext(AppContext)
   const history = useHistory()
   const params = useParams<IProjectsParams>()
-  const [state, dispatch] = useReducer(reducer(history), {
-    view: params.view,
-    detailsTab: params.detailsTab,
-    projects: [],
-    outlookCategories: []
-  })
+  const [state, dispatch] = useReducer(reducer(history), initState(params))
   const query = useQuery<ProjectsQueryResult>($projects, {
     variables: { sortBy: 'name' },
     fetchPolicy: 'cache-and-network'
