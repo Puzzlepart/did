@@ -2,26 +2,26 @@ import { useQuery } from '@apollo/client'
 import { AppContext } from 'AppContext'
 import { UserMessage } from 'components/UserMessage'
 import { PERMISSION } from 'config/security/permissions'
-import { Pivot, PivotItem, SelectionMode, MessageBarType } from 'office-ui-fabric'
+import { MessageBarType, Pivot, PivotItem, SelectionMode } from 'office-ui-fabric'
 import { ProjectForm } from 'pages/Projects/ProjectForm'
-import React, { useContext, useEffect, useMemo, useState } from 'react'
+import React, { FunctionComponent, useContext, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
-import { OutlookCategory, Project } from 'types'
+import { Project } from 'types'
 import { find } from 'underscore'
 import { IProjectsContext, ProjectsContext } from './context'
-import $projects from './projects.gql'
 import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
-import { IProjectsParams } from './types'
+import $projects from './projects.gql'
+import { IProjectsParams, ProjectsQueryResult } from './types'
 
-export const Projects: React.FunctionComponent = () => {
+export const Projects: FunctionComponent = () => {
   const { t } = useTranslation()
   const { user } = useContext(AppContext)
   const history = useHistory()
   const params = useParams<IProjectsParams>()
   const [selected, setSelected] = useState<Project>(null)
-  const { loading, error, data, refetch } = useQuery<{ projects: Project[]; outlookCategories: OutlookCategory[] }>(
+  const { loading, error, data, refetch } = useQuery<ProjectsQueryResult>(
     $projects,
     {
       variables: { sortBy: 'name' },
@@ -47,9 +47,9 @@ export const Projects: React.FunctionComponent = () => {
     if (_selected) setSelected(_selected)
   }, [params.key, context.projects])
 
-  function onPivotClick({ props: { itemKey } }: PivotItem) {
+  function onPivotClick({ props }: PivotItem) {
     setSelected(null)
-    history.push(`/projects/${itemKey}`)
+    history.push(`/projects/${props.itemKey}`)
   }
 
   return (
