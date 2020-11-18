@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
 import $timeentries from './timeentries.gql'
 import { ProjectDetailsContext } from '../context'
-import { Summary } from './Summary'
+import { Summary } from './summary'
 import styles from './TimeEntries.module.scss'
 
 export const TimeEntries: FunctionComponent = () => {
