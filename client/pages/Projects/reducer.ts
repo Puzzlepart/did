@@ -5,23 +5,23 @@ import { find } from 'underscore'
 import { IProjectsParams, IProjectsState, ProjectsQueryResult, ProjectsView } from './types'
 
 export type ProjectsAction =
+  {
+    type: 'DATA_UPDATED'
+    query: QueryResult<ProjectsQueryResult>
+    params: IProjectsParams
+  }
   | {
-      type: 'DATA_UPDATED'
-      query: QueryResult<ProjectsQueryResult>
-      params: IProjectsParams
-    }
+    type: 'SET_SELECTED_PROJECT'
+    project: Project
+  }
   | {
-      type: 'SET_SELECTED_PROJECT'
-      project: Project
-    }
+    type: 'CHANGE_VIEW'
+    view: ProjectsView
+  }
   | {
-      type: 'CHANGE_VIEW'
-      view: ProjectsView
-    }
-  | {
-      type: 'CHANGE_DETAILS_TAB'
-      detailsTab: string
-    }
+    type: 'CHANGE_DETAILS_TAB'
+    detailsTab: string
+  }
 
 /**
  * Update history

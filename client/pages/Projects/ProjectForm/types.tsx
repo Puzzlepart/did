@@ -1,13 +1,8 @@
 import { getIcons } from 'common/icons'
-import { Project } from 'types'
+import { IFormValidation, Project, ProjectOptions } from 'types'
 import { first } from 'underscore'
 
 export interface IProjectFormProps {
-  /**
-   * Name length [min, max]
-   */
-  nameLength?: number[]
-
   /**
    * Project to edit
    */
@@ -43,4 +38,12 @@ export class ProjectModel {
   public clone(): ProjectModel {
     return Object.assign(Object.create(Object.getPrototypeOf(this)), this)
   }
+}
+
+export interface IProjectFormState {
+  model: ProjectModel;
+  options: ProjectOptions;
+  editMode: boolean;
+  projectId?: string;
+  validation?: IFormValidation;
 }

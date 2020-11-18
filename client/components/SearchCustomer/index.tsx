@@ -26,14 +26,14 @@ export const SearchCustomer = (props: ISearchCustomerProps) => {
 
   return (
     <div hidden={props.hidden}>
-      <Autocomplete
+      <Autocomplete<Customer>
         {...props}
         disabled={loading}
         items={searchData}
         width={550}
         placeholder={t('common.searchPlaceholder')}
         onClear={() => props.onSelected(null)}
-        onSelected={(item) => props.onSelected(item.data)}
+        onSelected={(item) => props.onSelected(item)}
       />
     </div>
   )

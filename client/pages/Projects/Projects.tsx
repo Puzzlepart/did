@@ -14,14 +14,14 @@ import ProjectList from './ProjectList'
 import { IProjectListProps } from './ProjectList/types'
 import $projects from './projects.gql'
 import reducer from './reducer'
-import { IProjectsParams, ProjectsQueryResult, ProjectsView } from './types'
+import { IProjectsParams, IProjectsState, ProjectsQueryResult, ProjectsView } from './types'
 
 /**
  * Initialize state
  *
  * @param {IProjectsParams} params Params
  */
-const initState = (params: IProjectsParams) => ({
+const initState = (params: IProjectsParams): IProjectsState => ({
   view: contains(['search', 'my', 'new'], params.view) ? params.view : 'search',
   detailsTab: params.detailsTab,
   projects: [],
