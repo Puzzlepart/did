@@ -5,7 +5,7 @@ import { ActionButton, MessageBarType, ProgressIndicator } from 'office-ui-fabri
 import React, { FunctionComponent, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
-import { ProjectDetailsContext } from '../context'
+import { ProjectsContext } from '../../context'
 import { onExportExcel } from './exportToExcel'
 import { Summary } from './summary'
 import $timeentries from './timeentries.gql'
@@ -13,10 +13,10 @@ import styles from './TimeEntries.module.scss'
 
 export const TimeEntries: FunctionComponent = () => {
   const { t } = useTranslation()
-  const { project } = useContext(ProjectDetailsContext)
+  const { state } = useContext(ProjectsContext)
   const { loading, error, data } = useQuery($timeentries, {
     variables: {
-      query: { projectId: project.id }
+      query: { projectId: state.selected.id }
     }
   })
   const timeentries = data?.timeentries || []
@@ -29,7 +29,7 @@ export const TimeEntries: FunctionComponent = () => {
         <ActionButton
           text={t('projects.exportTimeEntriesLabel')}
           iconProps={{ iconName: 'ExcelDocument' }}
-          onClick={() => onExportExcel(project, timeentries, t)}
+          onClick={() => onExportExcel(state.selected, timeentries, t)}
         />
       </div>
       {error && <UserMessage type={MessageBarType.error} text={t('projects.timeEntriesErrorText')} />}

@@ -4,15 +4,15 @@ import { UserMessage } from 'components/UserMessage'
 import { PERMISSION } from 'config/security/permissions'
 import { MessageBarType, Pivot, PivotItem, SelectionMode } from 'office-ui-fabric'
 import { ProjectForm } from 'pages/Projects/ProjectForm'
-import React, { FunctionComponent, useContext, useEffect, useMemo, useState } from 'react'
+import React, { FunctionComponent, useContext, useEffect, useMemo, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
-import { Project } from 'types'
 import { find } from 'underscore'
 import { IProjectsContext, ProjectsContext } from './context'
 import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
 import $projects from './projects.gql'
+import reducer from './reducer'
 import { IProjectsParams, ProjectsQueryResult } from './types'
 
 export const Projects: FunctionComponent = () => {
@@ -20,7 +20,10 @@ export const Projects: FunctionComponent = () => {
   const { user } = useContext(AppContext)
   const history = useHistory()
   const params = useParams<IProjectsParams>()
-  const [selected, setSelected] = useState<Project>(null)
+  const [state, dispatch] = useReducer(reducer, {
+    projects: [],
+    outlookCategories: []
+  })
   const { loading, error, data, refetch } = useQuery<ProjectsQueryResult>(
     $projects,
     {
@@ -31,24 +34,22 @@ export const Projects: FunctionComponent = () => {
 
   const context: IProjectsContext = useMemo(
     () => ({
-      outlookCategories: data?.outlookCategories || [],
-      projects: (data?.projects || []).map((p) => ({
-        ...p,
-        outlookCategory: find(data?.outlookCategories || [], (c) => c.displayName === p.id)
-      })),
+      state,
+      dispatch,
       refetch,
-      setSelected
     }),
     [data]
   )
 
   useEffect(() => {
-    const _selected = find(context.projects, (p) => p.id === (params.key || '').toUpperCase())
-    if (_selected) setSelected(_selected)
-  }, [params.key, context.projects])
+    const _selected = find(state.projects, (p) => p.id === (params.key || '').toUpperCase())
+    if (_selected) {
+      dispatch({ type: 'SET_SELECTED_PROJECT', project: _selected })
+    }
+  }, [params.key, state.projects])
 
   function onPivotClick({ props }: PivotItem) {
-    setSelected(null)
+    dispatch({ type: 'SET_SELECTED_PROJECT', project: null })
     history.push(`/projects/${props.itemKey}`)
   }
 
@@ -63,22 +64,22 @@ export const Projects: FunctionComponent = () => {
           <div hidden={!!error}>
             <ProjectList
               enableShimmer={loading}
-              items={context.projects}
+              items={state.projects}
               searchBox={{
                 placeholder: t('common.searchPlaceholder'),
-                onChange: () => setSelected(null)
+                onChange: () => dispatch({ type: 'SET_SELECTED_PROJECT', project: null })
               }}
               selection={{
                 mode: SelectionMode.single,
                 onChanged: (selected) => {
                   selected &&
                     history.push(['/projects', params.view || 'search', selected.id].filter((p) => p).join('/'))
-                  setSelected(selected)
+                    dispatch({ type: 'SET_SELECTED_PROJECT', project: selected })
                 }
               }}
-              height={selected && 400}
+              height={state.selected && 400}
             />
-            {selected && <ProjectDetails project={selected} />}
+            {state.selected && <ProjectDetails />}
           </div>
         </PivotItem>
         <PivotItem itemID='my' itemKey='my' headerText={t('projects.myProjectsText')} itemIcon='FabricUserFolder'>
@@ -91,20 +92,20 @@ export const Projects: FunctionComponent = () => {
             />
             <ProjectList
               enableShimmer={loading}
-              items={context.projects.filter((p) => !!p.outlookCategory)}
+              items={state.projects.filter((p) => !!p.outlookCategory)}
               searchBox={{
                 placeholder: t('projects.myProjectsSearchPlaceholder'),
-                onChange: () => setSelected(null)
+                onChange: () => dispatch({ type: 'SET_SELECTED_PROJECT', project: null })
               }}
               selection={{
                 mode: SelectionMode.single,
-                onChanged: (selected) => setSelected(selected)
+                onChanged: (selected) => dispatch({ type: 'SET_SELECTED_PROJECT', project: selected })
               }}
-              height={selected && 400}
+              height={state.selected && 400}
               groups={{ fieldName: 'customer.name' }}
               hideColumns={['customer']}
             />
-            {selected && <ProjectDetails project={selected} />}
+            {state.selected && <ProjectDetails />}
           </div>
         </PivotItem>
         {user.hasPermission(PERMISSION.MANAGE_PROJECTS) && (

@@ -5,4 +5,10 @@ export interface IProjectsParams {
   view: string
 }
 
+export interface IProjectsState {
+  selected?: Project;
+  projects?: Project[];
+  outlookCategories?: OutlookCategory[]
+}
+
 export type ProjectsQueryResult = { projects: Project[]; outlookCategories: OutlookCategory[] }

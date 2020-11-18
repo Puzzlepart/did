@@ -6,17 +6,14 @@ import React, { FunctionComponent, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ProjectsContext } from '../../context'
 import { ProjectForm } from '../../ProjectForm'
-import { ProjectDetailsContext } from '../context'
 import $createOutlookCategory from './createOutlookCategory.gql'
 import styles from './Header.module.scss'
-import { IProjectDetailsProps } from '../types'
 
-export const Actions: FunctionComponent<IProjectDetailsProps> = (props: IProjectDetailsProps) => {
-  const { refetch } = useContext(ProjectsContext)
+export const Actions: FunctionComponent = () => {
+  const { refetch, state, dispatch } = useContext(ProjectsContext)
   const { user } = useContext(AppContext)
   const { t } = useTranslation()
   const [showEditPanel, setShowEditPanel] = useState(false)
-  const context = useContext(ProjectDetailsContext)
   const [createOutlookCategory] = useMutation($createOutlookCategory)
 
   /**
@@ -25,13 +22,14 @@ export const Actions: FunctionComponent<IProjectDetailsProps> = (props: IProject
   async function onCreateCategory() {
     const {
       data: { result }
-    } = await createOutlookCategory({
-      variables: { category: context.project.id }
-    })
+    } = await createOutlookCategory({ variables: { category: state.selected.id } })
     if (result.success) {
-      context.setProject({
-        ...context.project,
-        outlookCategory: JSON.parse(result.data)
+      dispatch({
+        type: 'SET_SELECTED_PROJECT',
+        project: {
+          ...state.selected,
+          outlookCategory: JSON.parse(result.data)
+        }
       })
     }
   }
@@ -45,24 +43,24 @@ export const Actions: FunctionComponent<IProjectDetailsProps> = (props: IProject
           onClick={() => setShowEditPanel(true)}
         />
       </div>
-      <div className={styles.actionItem} hidden={!context.project.webLink}>
+      <div className={styles.actionItem} hidden={!state.selected.webLink}>
         <DefaultButton
           text={t('projects.workspaceLabel')}
-          onClick={() => window.location.replace(context.project.webLink)}
+          onClick={() => window.location.replace(state.selected.webLink)}
           iconProps={{ iconName: 'Website' }}
         />
       </div>
-      <div className={styles.actionItem} hidden={!!context.project.outlookCategory}>
+      <div className={styles.actionItem} hidden={!!state.selected.outlookCategory}>
         <DefaultButton
           text={t('projects.createOutlookCategoryLabel')}
           iconProps={{ iconName: 'OutlookLogoInverse' }}
           onClick={() => onCreateCategory()}
         />
       </div>
-      <Panel isOpen={showEditPanel} headerText={props.project.name} onDismiss={() => setShowEditPanel(false)}>
+      <Panel isOpen={showEditPanel} headerText={state.selected.name} onDismiss={() => setShowEditPanel(false)}>
         <ProjectForm
-          key={props.project.id}
-          edit={props.project}
+          key={state.selected.id}
+          edit={state.selected}
           onSubmitted={() => {
             setShowEditPanel(false)
             refetch()
