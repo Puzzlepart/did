@@ -1,12 +1,11 @@
-import React, { useContext, useMemo } from 'react'
+import React, { FunctionComponent, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import styles from './ProjectDetails.module.scss'
-import { ProjectDetailsContext } from './ProjectDetailsContext'
-import { getSummary } from './utils'
+import { getSummary } from '../utils'
+import { ISummaryProps } from './types'
+import styles from './TimeEntries.module.scss'
 
-export const Summary = () => {
+export const Summary: FunctionComponent<ISummaryProps> = ({ timeentries }: ISummaryProps) => {
   const { t } = useTranslation()
-  const { timeentries } = useContext(ProjectDetailsContext)
   const summary = useMemo(() => getSummary(timeentries, t), [timeentries])
   return (
     <div className={styles.summary} hidden={timeentries.length === 0}>
