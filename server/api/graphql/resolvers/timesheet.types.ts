@@ -5,7 +5,10 @@ import { simpleResolvers } from '../config'
 import { Customer, EventError, LabelObject, Project } from './types'
 import * as DateUtils from '../../../utils/date'
 
-@ObjectType({ description: 'A type that describes a Event', simpleResolvers: simpleResolvers.EventObject })
+@ObjectType({
+  description: 'A type that describes a Event',
+  simpleResolvers: simpleResolvers.EventObject
+})
 export class EventObject {
   @Field(() => ID)
   id: string

@@ -22,7 +22,8 @@ export const CustomerForm = ({ nameLength = [2] }: ICustomerFormProps) => {
   const validateForm = (): IFormValidation => {
     const [nameMinLength] = nameLength
     const errors: { [key: string]: string } = {}
-    if (model.name.length < nameMinLength) errors.name = t('customers.nameFormValidationText', { nameMinLength })
+    if (model.name.length < nameMinLength)
+      errors.name = t('customers.nameFormValidationText', { nameMinLength })
     if (!/(^[A-ZÆØÅ0-9]{3,8}$)/gm.test(model.key))
       errors.key = t('customers.keyFormValidationText', { keyMinLength: 3, keyMaxLength: 8 })
     return { errors, invalid: Object.keys(errors).length > 0 }
@@ -47,7 +48,10 @@ export const CustomerForm = ({ nameLength = [2] }: ICustomerFormProps) => {
       }
     })
     if (result.success) {
-      setMessage({ text: t('customers.createSuccess', { name: model.name }), type: MessageBarType.success })
+      setMessage({
+        text: t('customers.createSuccess', { name: model.name }),
+        type: MessageBarType.success
+      })
     } else {
       setMessage({ text: result.error.message, type: MessageBarType.error })
     }

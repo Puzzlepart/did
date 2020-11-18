@@ -1,6 +1,5 @@
 import { OutlookCategory, Project } from 'types'
 
-
 export interface IProjectsParams {
   key: string
   view: ProjectsView
@@ -10,9 +9,10 @@ export interface IProjectsParams {
 export type ProjectsView = 'search' | 'my' | 'new'
 
 export interface IProjectsState {
-  view?: ProjectsView;
-  selected?: Project;
-  projects?: Project[];
+  view?: ProjectsView
+  detailsTab?: string
+  selected?: Project
+  projects?: Project[]
   outlookCategories?: OutlookCategory[]
 }
 

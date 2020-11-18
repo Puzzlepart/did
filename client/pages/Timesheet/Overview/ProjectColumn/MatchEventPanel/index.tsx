@@ -34,10 +34,16 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
         iconProps={{ iconName: 'ReviewResponseSolid' }}
         onClick={showPanel}
       />
-      <Panel isOpen={isPanelVisible} headerText={t('timesheet.matchEventPanelHeaderText')} onDismiss={hidePanel}>
+      <Panel
+        isOpen={isPanelVisible}
+        headerText={t('timesheet.matchEventPanelHeaderText')}
+        onDismiss={hidePanel}>
         <div className={styles.subText}>{event.title}</div>
         <UserMessage iconName='OutlookLogo' text={t('timesheet.matchOutlookInfoText', event)} />
-        <UserMessage hidden={!event.suggestedProject} containerStyle={{ marginTop: 10 }} iconName='Lightbulb'>
+        <UserMessage
+          hidden={!event.suggestedProject}
+          containerStyle={{ marginTop: 10 }}
+          iconName='Lightbulb'>
           <p>
             <span>{t('timesheet.didYouMeanText')}</span>
             <a href='#' onClick={() => onManualMatch(event.suggestedProject)}>
@@ -49,7 +55,9 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
         <UserMessage
           hidden={!event.customer || !!event.suggestedProject}
           containerStyle={{ marginTop: 10 }}
-          text={t('timesheet.eventNotFullyMatchedText', { name: getValue(event, 'customer.name', '') })}
+          text={t('timesheet.eventNotFullyMatchedText', {
+            name: getValue(event, 'customer.name', '')
+          })}
         />
         <SearchProject
           width='100%'

@@ -1,24 +1,41 @@
 import { QueryResult } from '@apollo/client'
+import { History } from 'history'
 import { Project } from 'types'
 import { find } from 'underscore'
-import { IProjectsState, ProjectsQueryResult, ProjectsView } from './types'
-import { History } from 'history'
+import { IProjectsParams, IProjectsState, ProjectsQueryResult, ProjectsView } from './types'
 
 export type ProjectsAction =
-    {
-        type: 'DATA_UPDATED'
-        query: QueryResult<ProjectsQueryResult>
+  | {
+      type: 'DATA_UPDATED'
+      query: QueryResult<ProjectsQueryResult>
+      params: IProjectsParams
     }
-    |
-    {
-        type: 'SET_SELECTED_PROJECT',
-        project: Project
+  | {
+      type: 'SET_SELECTED_PROJECT'
+      project: Project
     }
-    |
-    {
-        type: 'CHANGE_VIEW',
-        view: ProjectsView
+  | {
+      type: 'CHANGE_VIEW'
+      view: ProjectsView
     }
+  | {
+      type: 'CHANGE_DETAILS_TAB'
+      detailsTab: string
+    }
+
+/**
+ * Update history
+ *
+ * @param {IProjectsState} state State
+ * @param {History} history History
+ * @param {number} delay Delay in ms
+ */
+const updateHistory = (state: IProjectsState, history: History, delay = 500) => {
+  const path =
+    '/' + ['projects', state.view, state.selected?.id, state.detailsTab].filter((p) => p).join('/')
+
+  setTimeout(() => history.push(path), delay)
+}
 
 /**
  * Reducer for Projects
@@ -26,38 +43,51 @@ export type ProjectsAction =
  * @param {IProjectsState} state State
  * @param {ProjectsAction} action Action
  */
-export default (history: History) => (state: IProjectsState, action: ProjectsAction): IProjectsState => {
-    const newState: IProjectsState = { ...state }
-    switch (action.type) {
-        case 'DATA_UPDATED':
-            {
-                const { query } = action
-                if (query.data) {
-                    newState.outlookCategories = query.data.outlookCategories
-                    newState.projects = query.data.projects.map((p) => ({
-                        ...p,
-                        outlookCategory: find(newState.outlookCategories, (c) => c.displayName === p.id)
-                    }))
-                }
-            }
-            break
+export default (history: History) => (
+  state: IProjectsState,
+  action: ProjectsAction
+): IProjectsState => {
+  const newState: IProjectsState = { ...state }
+  switch (action.type) {
+    case 'DATA_UPDATED':
+      {
+        const { query } = action
+        if (query.data) {
+          newState.outlookCategories = query.data.outlookCategories
+          newState.projects = query.data.projects.map((p) => ({
+            ...p,
+            outlookCategory: find(newState.outlookCategories, (c) => c.displayName === p.id)
+          }))
+          newState.selected = find(
+            newState.projects,
+            (p) => p.id === (action.params.key || action.params.view)
+          )
+        }
+      }
+      break
 
-        case 'SET_SELECTED_PROJECT':
-            {
-                newState.selected = action.project
-            }
-            break
+    case 'SET_SELECTED_PROJECT':
+      {
+        newState.selected = action.project
+      }
+      break
 
-        case 'CHANGE_VIEW':
-            {
-                newState.view = action.view
-                newState.selected = null
-                // history.push(`/projects/${action.view}`)
-            }
-            break
+    case 'CHANGE_VIEW':
+      {
+        newState.view = action.view
+        newState.selected = null
+      }
+      break
 
-        default:
-            throw new Error()
-    }
-    return newState
+    case 'CHANGE_DETAILS_TAB':
+      {
+        newState.detailsTab = action.detailsTab
+      }
+      break
+
+    default:
+      throw new Error()
+  }
+  updateHistory(newState, history)
+  return newState
 }

@@ -3,7 +3,9 @@ import { IToggleSectionProps } from './types'
 import styles from './ToggleSection.module.scss'
 import { Icon } from 'office-ui-fabric'
 
-export const ToggleSection: FunctionComponent<IToggleSectionProps> = (props: IToggleSectionProps) => {
+export const ToggleSection: FunctionComponent<IToggleSectionProps> = (
+  props: IToggleSectionProps
+) => {
   const isExpandedStorageKey = useMemo(
     () => [ToggleSection.displayName, props.id, 'isExpanded'].join('_').toLowerCase(),
     [props.id]

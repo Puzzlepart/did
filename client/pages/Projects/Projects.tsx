@@ -7,7 +7,6 @@ import { ProjectForm } from 'pages/Projects/ProjectForm'
 import React, { FunctionComponent, useContext, useEffect, useMemo, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
-import { find } from 'underscore'
 import { IProjectsContext, ProjectsContext } from './context'
 import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
@@ -23,80 +22,95 @@ export const Projects: FunctionComponent = () => {
   const params = useParams<IProjectsParams>()
   const [state, dispatch] = useReducer(reducer(history), {
     view: params.view,
+    detailsTab: params.detailsTab,
     projects: [],
     outlookCategories: []
   })
-  const query = useQuery<ProjectsQueryResult>(
-    $projects,
-    {
-      variables: { sortBy: 'name' },
-      fetchPolicy: 'cache-and-network'
-    }
-  )
+  const query = useQuery<ProjectsQueryResult>($projects, {
+    variables: { sortBy: 'name' },
+    fetchPolicy: 'cache-and-network'
+  })
 
-  useEffect(() => dispatch({ type: 'DATA_UPDATED', query }), [query])
+  useEffect(() => dispatch({ type: 'DATA_UPDATED', query, params }), [query])
 
-  const context: IProjectsContext = useMemo(
+  const context = useMemo<IProjectsContext>(
     () => ({
       state,
       dispatch,
-      refetch: query.refetch,
+      refetch: query.refetch
     }),
     [state]
   )
 
-  useEffect(() => {
-    const _selected = find(state.projects, (p) => p.id === (params.key || '').toUpperCase())
-    if (_selected) {
-      dispatch({ type: 'SET_SELECTED_PROJECT', project: _selected })
-    }
-  }, [params.key, state.projects])
-
-  const listProps = useMemo<IProjectListProps>(() => ({
-    enableShimmer: query.loading,
-    searchBox: {
-      placeholder: state.view === 'my' ? t('projects.myProjectsSearchPlaceholder') : t('common.searchPlaceholder'),
-      onChange: () => dispatch({ type: 'SET_SELECTED_PROJECT', project: null })
-    },
-    selection: {
-      mode: SelectionMode.single,
-      onChanged: (selected) => {
-        dispatch({ type: 'SET_SELECTED_PROJECT', project: selected })
-      }
-    },
-    height: state.selected && 400
-  }), [state])
+  const listProps = useMemo<IProjectListProps>(
+    () => ({
+      enableShimmer: query.loading,
+      searchBox: {
+        placeholder:
+          state.view === 'my'
+            ? t('projects.myProjectsSearchPlaceholder')
+            : t('common.searchPlaceholder'),
+        onChange: () => dispatch({ type: 'SET_SELECTED_PROJECT', project: null })
+      },
+      selection: {
+        mode: SelectionMode.single,
+        onChanged: (selected) => {
+          dispatch({ type: 'SET_SELECTED_PROJECT', project: selected })
+        }
+      },
+      height: state.selected && 400
+    }),
+    [state]
+  )
 
   return (
     <ProjectsContext.Provider value={context}>
       <Pivot
         selectedKey={state.view}
-        onLinkClick={(item) => dispatch({
-          type: 'CHANGE_VIEW',
-          view: item.props.itemKey as ProjectsView,
-        })}
+        onLinkClick={(item) =>
+          dispatch({
+            type: 'CHANGE_VIEW',
+            view: item.props.itemKey as ProjectsView
+          })
+        }
         styles={{ itemContainer: { paddingTop: 10 } }}>
-        <PivotItem itemID='search' itemKey='search' headerText={t('common.search')} itemIcon='FabricFolderSearch'>
-          <UserMessage hidden={!query.error} type={MessageBarType.error} text={t('common.genericErrorText')} />
-          <ProjectList
-            {...listProps}
-            items={state.projects} />
+        <PivotItem
+          itemID='search'
+          itemKey='search'
+          headerText={t('common.search')}
+          itemIcon='FabricFolderSearch'>
+          <UserMessage
+            hidden={!query.error}
+            type={MessageBarType.error}
+            text={t('common.genericErrorText')}
+          />
+          <ProjectList {...listProps} items={state.projects} />
           {state.selected && <ProjectDetails />}
         </PivotItem>
-        <PivotItem itemID='my' itemKey='my' headerText={t('projects.myProjectsText')} itemIcon='FabricUserFolder'>
-          <UserMessage hidden={!query.error} type={MessageBarType.error} text={t('common.genericErrorText')} />
+        <PivotItem
+          itemID='my'
+          itemKey='my'
+          headerText={t('projects.myProjectsText')}
+          itemIcon='FabricUserFolder'>
+          <UserMessage
+            hidden={!query.error}
+            type={MessageBarType.error}
+            text={t('common.genericErrorText')}
+          />
           <UserMessage
             containerStyle={{ marginBottom: 12 }}
             iconName='OutlookLogoInverse'
             text={t('projects.outlookCategoryInfoText')}
           />
-          <ProjectList
-            {...listProps}
-            items={state.projects.filter((p) => !!p.outlookCategory)} />
+          <ProjectList {...listProps} items={state.projects.filter((p) => !!p.outlookCategory)} />
           {state.selected && <ProjectDetails />}
         </PivotItem>
         {user.hasPermission(PERMISSION.MANAGE_PROJECTS) && (
-          <PivotItem itemID='new' itemKey='new' headerText={t('projects.createNewText')} itemIcon='AddTo'>
+          <PivotItem
+            itemID='new'
+            itemKey='new'
+            headerText={t('projects.createNewText')}
+            itemIcon='AddTo'>
             <ProjectForm />
           </PivotItem>
         )}

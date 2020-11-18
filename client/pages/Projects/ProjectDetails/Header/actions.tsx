@@ -57,7 +57,10 @@ export const Actions: FunctionComponent = () => {
           onClick={() => onCreateCategory()}
         />
       </div>
-      <Panel isOpen={showEditPanel} headerText={state.selected.name} onDismiss={() => setShowEditPanel(false)}>
+      <Panel
+        isOpen={showEditPanel}
+        headerText={state.selected.name}
+        onDismiss={() => setShowEditPanel(false)}>
         <ProjectForm
           key={state.selected.id}
           edit={state.selected}

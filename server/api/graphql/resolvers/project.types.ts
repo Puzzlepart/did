@@ -4,7 +4,10 @@ import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import { simpleResolvers } from '../config'
 import { Customer, OutlookCategory, LabelObject } from './types'
 
-@ObjectType({ description: 'A type that describes a Project', simpleResolvers: simpleResolvers.Project })
+@ObjectType({
+  description: 'A type that describes a Project',
+  simpleResolvers: simpleResolvers.Project
+})
 export class Project {
   @Field(() => ID)
   id?: string
@@ -76,7 +79,9 @@ export class ProjectInput {
   labels?: string[]
 }
 
-@InputType({ description: 'Input object for ProjectOptions used in Mutation createOrUpdateProject' })
+@InputType({
+  description: 'Input object for ProjectOptions used in Mutation createOrUpdateProject'
+})
 export class ProjectOptions {
   @Field({ nullable: true, defaultValue: false })
   createOutlookCategory?: boolean

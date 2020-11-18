@@ -10,7 +10,9 @@ import $labels from './labels.gql'
 import { SelectCallout } from './SelectCallout'
 import { ILabelPickerProps } from './types'
 
-export const LabelPicker: React.FunctionComponent<ILabelPickerProps> = (props: ILabelPickerProps) => {
+export const LabelPicker: React.FunctionComponent<ILabelPickerProps> = (
+  props: ILabelPickerProps
+) => {
   const { t } = useTranslation()
   const { data } = useQuery($labels, { fetchPolicy: 'cache-and-network' })
   const toggleRef = useRef()
@@ -36,7 +38,9 @@ export const LabelPicker: React.FunctionComponent<ILabelPickerProps> = (props: I
       const _labels: LabelObject[] = data.labels.map((lbl: any) => omit(lbl, '__typename'))
       setLabels(_labels)
       if (props.defaultSelectedKeys) {
-        const _selectedLabels = _labels.filter((lbl) => props.defaultSelectedKeys.indexOf(lbl.name) !== -1)
+        const _selectedLabels = _labels.filter(
+          (lbl) => props.defaultSelectedKeys.indexOf(lbl.name) !== -1
+        )
         setSelectedLabels(_selectedLabels)
       }
     }
@@ -46,7 +50,10 @@ export const LabelPicker: React.FunctionComponent<ILabelPickerProps> = (props: I
     <div className={`${styles.root} ${props.className}`}>
       <Label className={styles.label}>
         <span>{props.label}</span>
-        <span className={styles.toggleIcon} onClick={() => setShowCallout(!showCallout)} ref={toggleRef}>
+        <span
+          className={styles.toggleIcon}
+          onClick={() => setShowCallout(!showCallout)}
+          ref={toggleRef}>
           <Icon iconName='Settings' />
         </span>
       </Label>

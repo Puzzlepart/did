@@ -1,4 +1,12 @@
-import { List, SearchBox, Label, Icon, FocusZone, FocusZoneDirection, Callout } from 'office-ui-fabric'
+import {
+  List,
+  SearchBox,
+  Label,
+  Icon,
+  FocusZone,
+  FocusZoneDirection,
+  Callout
+} from 'office-ui-fabric'
 import * as React from 'react'
 import { IAutocompleteProps, IAutocompleteState, ISuggestionItem } from '.'
 import styles from './Autocomplete.module.scss'
@@ -14,7 +22,10 @@ const KeyCodes = {
 
 type ISearchSuggestionsProps = IAutocompleteProps
 
-export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsProps, IAutocompleteState> {
+export class Autocomplete<T = any> extends React.Component<
+  ISearchSuggestionsProps,
+  IAutocompleteState
+> {
   public static defaultProps: Partial<ISearchSuggestionsProps> = {
     classNames: {
       suggestionsCallout: styles.callout,
@@ -45,7 +56,9 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
   }
 
   public render() {
-    const iconName = this.state.searchText ? this.state.selectedItem?.iconName || 'Search' : 'Search'
+    const iconName = this.state.searchText
+      ? this.state.selectedItem?.iconName || 'Search'
+      : 'Search'
     return (
       <div
         ref={this._containerElement}
@@ -135,7 +148,10 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
         data-is-focusable={true}
         className={this.props.classNames.suggestionContainer}
         onKeyDown={(ev: React.KeyboardEvent<HTMLElement>) => this.handleListItemKeyDown(ev, item)}>
-        <div id={`s_${item.key}`} className={this.props.classNames.suggestion} onClick={() => this.onClick(item)}>
+        <div
+          id={`s_${item.key}`}
+          className={this.props.classNames.suggestion}
+          onClick={() => this.onClick(item)}>
           <div className={this.props.classNames.suggestionIcon} hidden={!this.props.showIcons}>
             <Icon iconName={item.iconName} />
           </div>
@@ -170,7 +186,10 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
     return suggestedTags
   }
 
-  protected handleListItemKeyDown = (ev: React.KeyboardEvent<HTMLElement>, item: ISuggestionItem<T>): void => {
+  protected handleListItemKeyDown = (
+    ev: React.KeyboardEvent<HTMLElement>,
+    item: ISuggestionItem<T>
+  ): void => {
     const keyCode = ev.which
     switch (keyCode) {
       case KeyCodes.enter:

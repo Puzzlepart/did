@@ -30,7 +30,10 @@ export class SubscriptionSettings {
   adsync?: SubscriptionADSyncSettings
 }
 
-@ObjectType({ description: 'A type that describes a Subscription', simpleResolvers: simpleResolvers.Subscription })
+@ObjectType({
+  description: 'A type that describes a Subscription',
+  simpleResolvers: simpleResolvers.Subscription
+})
 export class Subscription {
   @Field()
   id: string

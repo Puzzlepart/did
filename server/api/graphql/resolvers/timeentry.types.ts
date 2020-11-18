@@ -4,7 +4,10 @@ import { Field, Float, ID, InputType, ObjectType } from 'type-graphql'
 import { simpleResolvers } from '../config'
 import { Project, Customer, User } from './types'
 
-@ObjectType({ description: 'A type that describes a TimeEntry', simpleResolvers: simpleResolvers.TimeEntry })
+@ObjectType({
+  description: 'A type that describes a TimeEntry',
+  simpleResolvers: simpleResolvers.TimeEntry
+})
 export class TimeEntry {
   @Field(() => ID)
   id: string

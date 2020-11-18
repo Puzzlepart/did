@@ -15,7 +15,9 @@ logger.setLevel(process.env.LOG_LEVEL as LogLevelDesc)
 
 prefix.apply(logger, {
   format(level, name, timestamp) {
-    return `${chalk.gray(`[${timestamp}]`)} ${colors[level.toUpperCase()](level)} ${chalk.green(`${name}:`)}`
+    return `${chalk.gray(`[${timestamp}]`)} ${colors[level.toUpperCase()](level)} ${chalk.green(
+      `${name}:`
+    )}`
   }
 })
 

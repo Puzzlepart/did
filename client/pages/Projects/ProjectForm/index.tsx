@@ -49,7 +49,9 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
   }
 
   const projectId = useMemo(() => {
-    return validateForm(false).invalid ? '' : [project.customerKey, project.key].join(' ').toUpperCase()
+    return validateForm(false).invalid
+      ? ''
+      : [project.customerKey, project.key].join(' ').toUpperCase()
   }, [project.customerKey, project.key])
 
   /**
@@ -86,7 +88,12 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
 
   return (
     <div className={styles.root}>
-      {message && <UserMessage {...message} containerStyle={{ marginTop: 12, marginBottom: 12, width: 550 }} />}
+      {message && (
+        <UserMessage
+          {...message}
+          containerStyle={{ marginTop: 12, marginBottom: 12, width: 550 }}
+        />
+      )}
       <SearchCustomer
         hidden={editMode}
         label={t('common.customer')}
@@ -111,13 +118,17 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
         hidden={editMode}
         className={styles.idPreviewText}
         iconName='OutlookLogo'
-        text={isBlank(projectId) ? t('projects.idPreviewBlankText') : t('projects.idPreviewText', { projectId })}
+        text={
+          isBlank(projectId)
+            ? t('projects.idPreviewBlankText')
+            : t('projects.idPreviewText', { projectId })
+        }
       />
       <div className={styles.inputField} hidden={editMode}>
         <Toggle
           label={t('projects.createOutlookCategoryFieldLabel')}
           checked={options.createOutlookCategory}
-          onChange={(_event,value) => setOptions({ ...options, createOutlookCategory: value })}
+          onChange={(_event, value) => setOptions({ ...options, createOutlookCategory: value })}
         />
         <span className={styles.inputDescription}>
           {t('projects.createOutlookCategoryFieldDescription', { id: projectId })}
@@ -153,7 +164,7 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
         <Toggle
           label={t('common.inactiveFieldLabel')}
           checked={project.inactive}
-          onChange={(_event,value) => updateProject('inactive', value)}
+          onChange={(_event, value) => updateProject('inactive', value)}
         />
         <span className={styles.inputDescription}>{t('projects.inactiveFieldDescription')}</span>
       </div>

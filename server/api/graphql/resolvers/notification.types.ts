@@ -3,7 +3,10 @@ import 'reflect-metadata'
 import { Field, ObjectType, InputType, ID } from 'type-graphql'
 import { simpleResolvers } from '../config'
 
-@ObjectType({ description: 'A type that describes a Notification', simpleResolvers: simpleResolvers.Notification })
+@ObjectType({
+  description: 'A type that describes a Notification',
+  simpleResolvers: simpleResolvers.Notification
+})
 export class Notification {
   @Field(() => ID)
   id: string
