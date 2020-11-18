@@ -21,7 +21,7 @@ export const Projects: FunctionComponent = () => {
   const { user } = useContext(AppContext)
   const history = useHistory()
   const params = useParams<IProjectsParams>()
-  const [state, dispatch] = useReducer(reducer, {
+  const [state, dispatch] = useReducer(reducer(history), {
     view: params.view,
     projects: [],
     outlookCategories: []
@@ -74,7 +74,6 @@ export const Projects: FunctionComponent = () => {
         onLinkClick={(item) => dispatch({
           type: 'CHANGE_VIEW',
           view: item.props.itemKey as ProjectsView,
-          history
         })}
         styles={{ itemContainer: { paddingTop: 10 } }}>
         <PivotItem itemID='search' itemKey='search' headerText={t('common.search')} itemIcon='FabricFolderSearch'>

@@ -160,7 +160,7 @@ export const ProjectForm = ({ edit, onSubmitted, nameLength = [2] }: IProjectFor
       <LabelPicker
         className={styles.inputField}
         label={t('admin.labels')}
-        searchLabelText={t('admin.filterLabels')}
+        placeholder={t('admin.filterLabels')}
         defaultSelectedKeys={editMode ? edit.labels.map((lbl) => lbl.name) : []}
         onChange={(labels) =>
           updateProject(

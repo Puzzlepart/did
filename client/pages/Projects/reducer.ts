@@ -2,7 +2,7 @@ import { QueryResult } from '@apollo/client'
 import { Project } from 'types'
 import { find } from 'underscore'
 import { IProjectsState, ProjectsQueryResult, ProjectsView } from './types'
-import {History} from 'history'
+import { History } from 'history'
 
 export type ProjectsAction =
     {
@@ -18,7 +18,6 @@ export type ProjectsAction =
     {
         type: 'CHANGE_VIEW',
         view: ProjectsView
-        history: History
     }
 
 /**
@@ -27,7 +26,7 @@ export type ProjectsAction =
  * @param {IProjectsState} state State
  * @param {ProjectsAction} action Action
  */
-export default (state: IProjectsState, action: ProjectsAction): IProjectsState => {
+export default (history: History) => (state: IProjectsState, action: ProjectsAction): IProjectsState => {
     const newState: IProjectsState = { ...state }
     switch (action.type) {
         case 'DATA_UPDATED':
@@ -53,7 +52,7 @@ export default (state: IProjectsState, action: ProjectsAction): IProjectsState =
             {
                 newState.view = action.view
                 newState.selected = null
-                action.history.push(`/projects/${action.view}`)
+                // history.push(`/projects/${action.view}`)
             }
             break
 

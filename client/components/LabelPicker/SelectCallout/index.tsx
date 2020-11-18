@@ -27,7 +27,7 @@ export const SelectCallout = (props: ISelectCalloutProps) => {
       target={props.target}>
       <SearchBox
         className={styles.searchBox}
-        labelText={props.searchLabelText}
+        placeholder={props.placeholder}
         onChange={(_evt, value) => onSearch(value)}
       />
       <ul>
