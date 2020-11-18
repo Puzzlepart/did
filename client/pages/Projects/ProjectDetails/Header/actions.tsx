@@ -19,17 +19,6 @@ export const Actions: FunctionComponent<IProjectDetailsProps> = (props: IProject
   const context = useContext(ProjectDetailsContext)
   const [createOutlookCategory] = useMutation($createOutlookCategory)
 
-  // /**
-  //  * On export to Excel
-  //  */
-  // async function onExportExcel() {
-  //   const key = context.project.id.replace(/\s+/g, '-').toUpperCase()
-  //   await excel.exportExcel(context.timeentries, {
-  //     columns: columns(t),
-  //     fileName: `TimeEntries-${key}-${new Date().toDateString().split(' ').join('-')}.xlsx`
-  //   })
-  // }
-
   /**
    * On create category in Outlook
    */

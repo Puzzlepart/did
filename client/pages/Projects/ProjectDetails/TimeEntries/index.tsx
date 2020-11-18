@@ -6,6 +6,7 @@ import React, { FunctionComponent, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
 import { ProjectDetailsContext } from '../context'
+import { onExportExcel } from './exportToExcel'
 import { Summary } from './summary'
 import $timeentries from './timeentries.gql'
 import styles from './TimeEntries.module.scss'
@@ -28,9 +29,8 @@ export const TimeEntries: FunctionComponent = () => {
         <ActionButton
           text={t('projects.exportTimeEntriesLabel')}
           iconProps={{ iconName: 'ExcelDocument' }}
-          frameBorder={null}
-          onClick={null} />
-      </div> 
+          onClick={() => onExportExcel(project, timeentries, t)} />
+      </div>
       {error && <UserMessage type={MessageBarType.error} text={t('projects.timeEntriesErrorText')} />}
       {empty && !loading && <UserMessage text={t('projects.noTimeEntriesText')} />}
       {loading && <ProgressIndicator label={t('projects.timeEntriesLoadingLabel')} />}
