@@ -20,10 +20,13 @@ const initState = (edit: Project): IProjectFormState => ({
   model: new ProjectModel(edit),
   options: { createOutlookCategory: false },
   editMode: !!edit,
-  validation: { errors: {}, invalid: true },
+  validation: { errors: {}, invalid: true }
 })
 
-export const ProjectForm: FunctionComponent<IProjectFormProps> = ({ edit, onSubmitted }: IProjectFormProps) => {
+export const ProjectForm: FunctionComponent<IProjectFormProps> = ({
+  edit,
+  onSubmitted
+}: IProjectFormProps) => {
   const { t } = useTranslation()
   const [message, setMessage] = useMessage()
   const [state, dispatch] = useReducer(reducer, initState(edit))
@@ -33,6 +36,7 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({ edit, onSubm
    */
   const onFormSubmit = async () => {
     const validation = validateForm({ ...state }, t)
+
     if (validation.invalid) {
       dispatch({ type: 'SET_VALIDATION', payload: { validation } })
       return
@@ -57,8 +61,7 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({ edit, onSubm
         })
         dispatch({ type: 'RESET_FORM' })
       }
-    }
-    else {
+    } else {
       setMessage({ text: data?.result.error?.message, type: MessageBarType.error })
     }
   }
@@ -77,15 +80,20 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({ edit, onSubm
         required={true}
         className={styles.inputField}
         placeholder={t('common.searchPlaceholder')}
-        onClear={() => dispatch({
-          type: 'UPDATE_MODEL',
-          payload: ['customerKey', '']
-        })}
+        onClear={() =>
+          dispatch({
+            type: 'UPDATE_MODEL',
+            payload: ['customerKey', '']
+          })
+        }
         errorMessage={state.validation.errors.customerKey}
-        onSelected={({ key }) => dispatch({
-          type: 'UPDATE_MODEL',
-          payload: ['customerKey', key]
-        })} />
+        onSelected={({ key }) =>
+          dispatch({
+            type: 'UPDATE_MODEL',
+            payload: ['customerKey', key]
+          })
+        }
+      />
       <TextField
         disabled={state.editMode}
         className={styles.inputField}
@@ -93,10 +101,12 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({ edit, onSubm
         description={t('projects.keyFieldDescription', { keyMaxLength: 8 })}
         required={true}
         errorMessage={state.validation.errors.key}
-        onChange={(_event, value) => dispatch({
-          type: 'UPDATE_MODEL',
-          payload: ['key', value.toUpperCase()]
-        })}
+        onChange={(_event, value) =>
+          dispatch({
+            type: 'UPDATE_MODEL',
+            payload: ['key', value.toUpperCase()]
+          })
+        }
         value={state.model.key}
       />
       <UserMessage
@@ -113,7 +123,7 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({ edit, onSubm
         <Toggle
           label={t('projects.createOutlookCategoryFieldLabel')}
           checked={state.options.createOutlookCategory}
-        // onChange={(_event, value) => setOptions({ ...options, createOutlookCategory: value })}
+          // onChange={(_event, value) => setOptions({ ...options, createOutlookCategory: value })}
         />
         <span className={styles.inputDescription}>
           {t('projects.createOutlookCategoryFieldDescription', { id: state.projectId })}
@@ -125,10 +135,12 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({ edit, onSubm
         description={t('projects.nameFieldDescription')}
         required={true}
         errorMessage={state.validation.errors.name}
-        onChange={(_event, value) => dispatch({
-          type: 'UPDATE_MODEL',
-          payload: ['name', value]
-        })}
+        onChange={(_event, value) =>
+          dispatch({
+            type: 'UPDATE_MODEL',
+            payload: ['name', value]
+          })
+        }
         value={state.model.name}
       />
       <TextField
@@ -137,10 +149,12 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({ edit, onSubm
         description={t('projects.descriptionFieldDescription')}
         multiline={true}
         errorMessage={state.validation.errors.description}
-        onChange={(_event, value) => dispatch({
-          type: 'UPDATE_MODEL',
-          payload: ['description', value]
-        })}
+        onChange={(_event, value) =>
+          dispatch({
+            type: 'UPDATE_MODEL',
+            payload: ['description', value]
+          })
+        }
         value={state.model.description}
       />
       <IconPicker
@@ -149,19 +163,23 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({ edit, onSubm
         label={t('common.iconLabel')}
         placeholder={t('common.iconSearchPlaceholder')}
         width={300}
-        onSelected={(value) => dispatch({
-          type: 'UPDATE_MODEL',
-          payload: ['icon', value]
-        })}
+        onSelected={(value) =>
+          dispatch({
+            type: 'UPDATE_MODEL',
+            payload: ['icon', value]
+          })
+        }
       />
       <div className={styles.inputField} hidden={!state.editMode}>
         <Toggle
           label={t('common.inactiveFieldLabel')}
           checked={state.model.inactive}
-          onChange={(_event, value) => dispatch({
-            type: 'UPDATE_MODEL',
-            payload: ['inactive', value]
-          })}
+          onChange={(_event, value) =>
+            dispatch({
+              type: 'UPDATE_MODEL',
+              payload: ['inactive', value]
+            })
+          }
         />
         <span className={styles.inputDescription}>{t('projects.inactiveFieldDescription')}</span>
       </div>
@@ -170,15 +188,19 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({ edit, onSubm
         label={t('admin.labels')}
         placeholder={t('admin.filterLabels')}
         defaultSelectedKeys={state.editMode ? edit.labels.map((lbl) => lbl.name) : []}
-        onChange={(labels) => dispatch({
-          type: 'UPDATE_MODEL',
-          payload: ['labels', labels.map((lbl) => lbl.name)]
-        })} />
+        onChange={(labels) =>
+          dispatch({
+            type: 'UPDATE_MODEL',
+            payload: ['labels', labels.map((lbl) => lbl.name)]
+          })
+        }
+      />
       <PrimaryButton
         className={styles.inputField}
         text={state.editMode ? t('common.save') : t('common.add')}
         onClick={onFormSubmit}
-        disabled={loading || !!message} />
+        disabled={loading || !!message}
+      />
     </div>
   )
 }

@@ -21,7 +21,7 @@ const KeyCodes = {
 }
 
 export class Autocomplete<T = any> extends React.Component<
-IAutocompleteProps<T>,
+  IAutocompleteProps<T>,
   IAutocompleteState
 > {
   public static defaultProps: Partial<IAutocompleteProps> = {

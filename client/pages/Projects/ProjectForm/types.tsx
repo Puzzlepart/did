@@ -41,9 +41,9 @@ export class ProjectModel {
 }
 
 export interface IProjectFormState {
-  model: ProjectModel;
-  options: ProjectOptions;
-  editMode: boolean;
-  projectId?: string;
-  validation?: IFormValidation;
+  model: ProjectModel
+  options: ProjectOptions
+  editMode: boolean
+  projectId?: string
+  validation?: IFormValidation
 }
