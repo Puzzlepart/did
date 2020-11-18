@@ -6,11 +6,10 @@ import { useTranslation } from 'react-i18next'
 import { Project } from 'types'
 import { isBlank } from 'underscore.string'
 import $createOrUpdateProject from './createOrUpdateProject.gql'
-import styles from './CreateProjectForm.module.scss'
+import styles from './ProjectForm.module.scss'
 import reducer from './reducer'
 import { IProjectFormProps, IProjectFormState, ProjectModel } from './types'
 import { validateForm } from './validateForm'
-
 
 /**
  * Initialize state
