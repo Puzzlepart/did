@@ -1,13 +1,4 @@
 .root {
-  display: flex;
-  flex-direction: column;
-
-  .description {
-    font-size: 14px;
-    margin: 12px 0 12px 0;
-  }
-
-  .labels {
-    margin: 0 0 15px 0;
-  }
+    display: flex;
+    flex-direction: column;
 }
