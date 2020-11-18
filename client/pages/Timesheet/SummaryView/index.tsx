@@ -20,9 +20,7 @@ import { ILabelColumnProps } from 'components/LabelColumn'
  * @param {TimesheetScope} scope Timesheet scope
  */
 function createColumns(scope: TimesheetScope) {
-  const onRender = (row: any, _index: number, col: IColumn) => (
-    <DurationColumn row={row} column={col} />
-  )
+  const onRender = (row: any, _index: number, col: IColumn) => <DurationColumn row={row} column={col} />
   const columns = Array.from(Array(7).keys()).map((i) => {
     const day = scope.getDay(i)
     return {
@@ -75,9 +73,7 @@ function generateRows(events: EventObject[], columns: IColumn[]) {
     return [...columns].splice(1, columns.length - 2).reduce(
       (obj, col) => {
         const sum = [...projectEvents]
-          .filter(
-            (event) => DateUtils.formatDate(event.startDateTime, 'YYYY-MM-DD') === col.fieldName
-          )
+          .filter((event) => DateUtils.formatDate(event.startDateTime, 'YYYY-MM-DD') === col.fieldName)
           .reduce((sum, event) => (sum += event.duration), 0)
         obj[col.fieldName] = sum
         obj.sum += sum
@@ -103,9 +99,7 @@ function generateTotalRow(events: any[], columns: IColumn[], label: string) {
   return [...columns].splice(1, columns.length - 2).reduce(
     (obj, col) => {
       const sum = [...events]
-        .filter(
-          (event) => DateUtils.formatDate(event.startDateTime, 'YYYY-MM-DD') === col.fieldName
-        )
+        .filter((event) => DateUtils.formatDate(event.startDateTime, 'YYYY-MM-DD') === col.fieldName)
         .reduce((sum, event) => (sum += event.duration), 0)
       obj[col.fieldName] = sum
       obj.sum += sum
@@ -118,19 +112,12 @@ function generateTotalRow(events: any[], columns: IColumn[], label: string) {
 export const SummaryView = () => {
   const { t } = useTranslation()
   if (isMobile) {
-    return (
-      <MessageBar styles={{ root: { marginTop: 8 } }}>
-        {t('common.deviceViewNotSupported')}
-      </MessageBar>
-    )
+    return <MessageBar styles={{ root: { marginTop: 8 } }}>{t('common.deviceViewNotSupported')}</MessageBar>
   } else {
     const context = useContext(TimesheetContext)
     const columns = createColumns(context.scope)
     const events = (context.selectedPeriod?.getEvents() || []).filter((e) => !!e.project)
-    const items = [
-      ...generateRows(events, columns),
-      generateTotalRow(events, columns, t('common.sumLabel'))
-    ]
+    const items = [...generateRows(events, columns), generateTotalRow(events, columns, t('common.sumLabel'))]
 
     return (
       <div key={`summary_${context.selectedPeriod?.id}`} className={styles.root}>

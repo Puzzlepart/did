@@ -16,10 +16,7 @@ export const RolePanel: React.FunctionComponent<IRolePanelProps> = (props: IRole
   const [model, setModel] = useState<RoleInput>({})
   const permissions = useMemo(() => security.permissions(t), [])
   const saveDisabled = useMemo(
-    () =>
-      isEmpty(model.name) ||
-      isEmpty(model.icon) ||
-      isEqual(model.permissions, props.model?.permissions),
+    () => isEmpty(model.name) || isEmpty(model.icon) || isEqual(model.permissions, props.model?.permissions),
     [props.model, model]
   )
 
@@ -97,12 +94,7 @@ export const RolePanel: React.FunctionComponent<IRolePanelProps> = (props: IRole
             </div>
           ))}
         </div>
-        <PrimaryButton
-          className={styles.saveBtn}
-          text={t('common.save')}
-          onClick={onSave}
-          disabled={saveDisabled}
-        />
+        <PrimaryButton className={styles.saveBtn} text={t('common.save')} onClick={onSave} disabled={saveDisabled} />
       </div>
     </Panel>
   )

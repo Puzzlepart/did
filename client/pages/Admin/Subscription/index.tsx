@@ -18,9 +18,7 @@ import $updateSubscription from './updateSubscription.gql'
 export const SubscriptionSettings = () => {
   const context = useContext(AppContext)
   const { t } = useTranslation()
-  const [subscription, setSubscription] = useState<Subscription>(
-    omitDeep(deepCopy(context.subscription), '__typename')
-  )
+  const [subscription, setSubscription] = useState<Subscription>(omitDeep(deepCopy(context.subscription), '__typename'))
   const [isSaved, setIsSaved] = useState(false)
   const [updateSubscription] = useMutation($updateSubscription)
   const [message, setMessage] = useMessage()

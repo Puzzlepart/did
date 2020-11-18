@@ -45,12 +45,7 @@ export const Navigation = () => {
             to='/reports'
             permission={PERMISSION.ACCESS_REPORTS}
           />
-          <NavItem
-            text={t('navigation.admin')}
-            iconName='Settings'
-            to='/admin'
-            permission={PERMISSION.ACCESS_ADMIN}
-          />
+          <NavItem text={t('navigation.admin')} iconName='Settings' to='/admin' permission={PERMISSION.ACCESS_ADMIN} />
         </ul>
         <ul className={styles.navRight}>
           {!!user.id && <UserNotifications />}

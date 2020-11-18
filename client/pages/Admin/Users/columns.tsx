@@ -22,7 +22,5 @@ export const UserColumns = (onEdit: (user: User) => void, t: TFunction): IColumn
   col('givenName', t('common.givenNameLabel'), { maxWidth: 160 }),
   col('jobTitle', t('common.jobTitleLabel'), { maxWidth: 140 }),
   col('mail', t('common.mailLabel'), { maxWidth: 180 }),
-  col('actions', '', {}, (user: User) => (
-    <DefaultButton text={t('common.editLabel')} onClick={() => onEdit(user)} />
-  ))
+  col('actions', '', {}, (user: User) => <DefaultButton text={t('common.editLabel')} onClick={() => onEdit(user)} />)
 ]

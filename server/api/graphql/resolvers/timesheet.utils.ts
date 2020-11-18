@@ -15,23 +15,13 @@ import { TimesheetPeriodObject } from './timesheet.types'
  * @param {string} endDate End date
  * @param {string} locale User locale
  */
-export function getPeriods(
-  startDate: string,
-  endDate: string,
-  locale: string
-): TimesheetPeriodObject[] {
+export function getPeriods(startDate: string, endDate: string, locale: string): TimesheetPeriodObject[] {
   const isSplit = !DateUtils.isSameMonth(startDate, endDate)
   const periods: TimesheetPeriodObject[] = [
-    new TimesheetPeriodObject(
-      startDate,
-      isSplit ? DateUtils.endOfMonth(startDate, 'YYYY-MM-DD') : endDate,
-      locale
-    )
+    new TimesheetPeriodObject(startDate, isSplit ? DateUtils.endOfMonth(startDate, 'YYYY-MM-DD') : endDate, locale)
   ]
   if (isSplit) {
-    periods.push(
-      new TimesheetPeriodObject(DateUtils.startOfMonth(endDate, 'YYYY-MM-DD'), endDate, locale)
-    )
+    periods.push(new TimesheetPeriodObject(DateUtils.startOfMonth(endDate, 'YYYY-MM-DD'), endDate, locale))
   }
 
   return periods

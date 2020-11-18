@@ -79,9 +79,7 @@ export const ApiTokens = () => {
           ]
         }}
       />
-      {form.isOpen && (
-        <ApiTokenForm {...form} onAdded={onKeyAdded} onDismiss={() => setForm({ isOpen: false })} />
-      )}
+      {form.isOpen && <ApiTokenForm {...form} onAdded={onKeyAdded} onDismiss={() => setForm({ isOpen: false })} />}
     </div>
   )
 }

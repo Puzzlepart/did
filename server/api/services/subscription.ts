@@ -46,14 +46,9 @@ class SubscriptionService {
     subscriptionId: string,
     settings: T
   ): Promise<azurestorage.TableService.EntityMetadata> {
-    const entityDescriptor = this.tableUtil.convertToAzEntity(
-      subscriptionId,
-      { settings },
-      'Default',
-      {
-        typeMap: { settings: 'json' }
-      }
-    )
+    const entityDescriptor = this.tableUtil.convertToAzEntity(subscriptionId, { settings }, 'Default', {
+      typeMap: { settings: 'json' }
+    })
     return await this.tableUtil.updateAzEntity('Subscriptions', entityDescriptor, true)
   }
 

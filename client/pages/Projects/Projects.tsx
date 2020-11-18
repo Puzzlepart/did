@@ -54,10 +54,7 @@ export const Projects: FunctionComponent = () => {
     () => ({
       enableShimmer: query.loading,
       searchBox: {
-        placeholder:
-          state.view === 'my'
-            ? t('projects.myProjectsSearchPlaceholder')
-            : t('common.searchPlaceholder'),
+        placeholder: state.view === 'my' ? t('projects.myProjectsSearchPlaceholder') : t('common.searchPlaceholder'),
         onChange: () => dispatch({ type: 'SET_SELECTED_PROJECT', project: null })
       },
       selection: {
@@ -82,29 +79,13 @@ export const Projects: FunctionComponent = () => {
           })
         }
         styles={{ itemContainer: { paddingTop: 10 } }}>
-        <PivotItem
-          itemID='search'
-          itemKey='search'
-          headerText={t('common.search')}
-          itemIcon='FabricFolderSearch'>
-          <UserMessage
-            hidden={!query.error}
-            type={MessageBarType.error}
-            text={t('common.genericErrorText')}
-          />
+        <PivotItem itemID='search' itemKey='search' headerText={t('common.search')} itemIcon='FabricFolderSearch'>
+          <UserMessage hidden={!query.error} type={MessageBarType.error} text={t('common.genericErrorText')} />
           <ProjectList {...listProps} items={state.projects} />
           {state.selected && <ProjectDetails />}
         </PivotItem>
-        <PivotItem
-          itemID='my'
-          itemKey='my'
-          headerText={t('projects.myProjectsText')}
-          itemIcon='FabricUserFolder'>
-          <UserMessage
-            hidden={!query.error}
-            type={MessageBarType.error}
-            text={t('common.genericErrorText')}
-          />
+        <PivotItem itemID='my' itemKey='my' headerText={t('projects.myProjectsText')} itemIcon='FabricUserFolder'>
+          <UserMessage hidden={!query.error} type={MessageBarType.error} text={t('common.genericErrorText')} />
           <UserMessage
             containerStyle={{ marginBottom: 12 }}
             iconName='OutlookLogoInverse'
@@ -114,11 +95,7 @@ export const Projects: FunctionComponent = () => {
           {state.selected && <ProjectDetails />}
         </PivotItem>
         {user.hasPermission(PERMISSION.MANAGE_PROJECTS) && (
-          <PivotItem
-            itemID='new'
-            itemKey='new'
-            headerText={t('projects.createNewText')}
-            itemIcon='AddTo'>
+          <PivotItem itemID='new' itemKey='new' headerText={t('projects.createNewText')} itemIcon='AddTo'>
             <ProjectForm />
           </PivotItem>
         )}

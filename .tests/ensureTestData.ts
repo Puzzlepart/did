@@ -26,27 +26,19 @@ export const ensureTestData = () =>
     } else {
       try {
         const data: any[][] = require('./testData.json')
-        debug(
-          'testData.json found with %d projects, %s customers and %d labels',
-          ...data.map((v) => v.length)
-        )
+        debug('testData.json found with %d projects, %s customers and %d labels', ...data.map((v) => v.length))
         resolve(data)
       } catch (error) {
         debug('Querying Azure Table Storage for test data...')
         Promise.all([azstorage.getProjects(), azstorage.getCustomers(), azstorage.getLabels()])
           .then((value) => {
-            fs.writeFile(
-              path.resolve(__dirname, 'testData.json'),
-              JSON.stringify(value),
-              null,
-              () => {
-                debug(
-                  'Retrieved %d projects, %s customers and %d labels. Saving result to testData.json',
-                  ...value.map((v) => v.length)
-                )
-                resolve(value)
-              }
-            )
+            fs.writeFile(path.resolve(__dirname, 'testData.json'), JSON.stringify(value), null, () => {
+              debug(
+                'Retrieved %d projects, %s customers and %d labels. Saving result to testData.json',
+                ...value.map((v) => v.length)
+              )
+              resolve(value)
+            })
           })
           .catch((error) => {
             debug('An error occured querying Azure Table Storage...')

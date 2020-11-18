@@ -42,10 +42,7 @@ const updateHistory = (state: IProjectsState, history: History, delay = 500) => 
  * @param {IProjectsState} state State
  * @param {ProjectsAction} action Action
  */
-export default (history: History) => (
-  state: IProjectsState,
-  action: ProjectsAction
-): IProjectsState => {
+export default (history: History) => (state: IProjectsState, action: ProjectsAction): IProjectsState => {
   const newState: IProjectsState = { ...state }
   switch (action.type) {
     case 'DATA_UPDATED':

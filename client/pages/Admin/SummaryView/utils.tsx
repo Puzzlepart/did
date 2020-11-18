@@ -23,9 +23,7 @@ export function createColumns(state: ISummaryViewState, t: TFunction): IColumn[]
   )
   uniqueColumnValues = uniqueColumnValues.sort((a: number, b: number) => a - b)
 
-  const onRender = (row: any, _index: number, col: IColumn) => (
-    <DurationColumn row={row} column={col} />
-  )
+  const onRender = (row: any, _index: number, col: IColumn) => <DurationColumn row={row} column={col} />
 
   const columns = uniqueColumnValues.map((key) => ({
     key: key,
@@ -70,11 +68,7 @@ export function createColumns(state: ISummaryViewState, t: TFunction): IColumn[]
  * @param {IColumn[]} columns Columns
  * @param {TFunction} t Translate function
  */
-export const createRows = (
-  state: ISummaryViewState,
-  columns: IColumn[],
-  t: TFunction
-): ISummaryViewRow[] => {
+export const createRows = (state: ISummaryViewState, columns: IColumn[], t: TFunction): ISummaryViewRow[] => {
   const uniqueRowValues = sortAlphabetically(
     unique(
       state.timeentries.map((e) => getValue(e, state.type.fieldName, null)),
@@ -83,9 +77,7 @@ export const createRows = (
   )
   const _columns = [...columns].splice(1, columns.length - 2)
   const rows: ISummaryViewRow[] = uniqueRowValues.map((label) => {
-    const rowEntries = state.timeentries.filter(
-      (e) => getValue(e, state.type.fieldName, null) === label
-    )
+    const rowEntries = state.timeentries.filter((e) => getValue(e, state.type.fieldName, null) === label)
     return _columns.reduce(
       (obj, col) => {
         const sum = [...rowEntries]

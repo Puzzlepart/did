@@ -9,12 +9,7 @@ import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
 import { connectEntities } from './project.utils'
 import EventMatching from './timesheet.matching'
-import {
-  TimesheetOptions,
-  TimesheetPeriodInput,
-  TimesheetPeriodObject,
-  TimesheetQuery
-} from './timesheet.types'
+import { TimesheetOptions, TimesheetPeriodInput, TimesheetPeriodObject, TimesheetQuery } from './timesheet.types'
 import { connectTimeEntries, getPeriods } from './timesheet.utils'
 import { BaseResult } from './types'
 
@@ -29,10 +24,7 @@ export class TimesheetResolver {
    * @param {AzStorageService} _azstorage AzStorageService
    * @param {MSGraphService} _msgraph MSGraphService
    */
-  constructor(
-    private readonly _azstorage: AzStorageService,
-    private readonly _msgraph: MSGraphService
-  ) {}
+  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) {}
 
   /**
    * Get timesheet
@@ -45,11 +37,7 @@ export class TimesheetResolver {
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [TimesheetPeriodObject], { description: 'Get timesheet for startDate - endDate' })
-  async timesheet(
-    @Arg('query') query: TimesheetQuery,
-    @Arg('options') options: TimesheetOptions,
-    @Ctx() ctx: Context
-  ) {
+  async timesheet(@Arg('query') query: TimesheetQuery, @Arg('options') options: TimesheetOptions, @Ctx() ctx: Context) {
     try {
       const periods = getPeriods(query.startDate, query.endDate, options.locale)
       // eslint-disable-next-line prefer-const
@@ -87,11 +75,7 @@ export class TimesheetResolver {
           )
         } else {
           const eventMatching = new EventMatching(projects, customers, labels)
-          const events = await this._msgraph.getEvents(
-            period.startDate,
-            period.endDate,
-            options.tzOffset
-          )
+          const events = await this._msgraph.getEvents(period.startDate, period.endDate, options.tzOffset)
           period.events = eventMatching.matchEvents(events)
         }
         period.events = period.events.map((evt) => ({
@@ -116,8 +100,7 @@ export class TimesheetResolver {
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, {
-    description:
-      'Adds matched time entries for the specified period and an entry for the confirmed period'
+    description: 'Adds matched time entries for the specified period and an entry for the confirmed period'
   })
   async submitPeriod(
     @Arg('period', () => TimesheetPeriodInput) period: TimesheetPeriodInput,
@@ -137,28 +120,16 @@ export class TimesheetResolver {
           const entry = {
             ...pick(me, 'projectId', 'manualMatch'),
             event: find(events, (e) => e.id === me.id),
-            labels: filter(labels, (lbl) => contains(event.categories, lbl.name)).map(
-              (lbl) => lbl.name
-            )
+            labels: filter(labels, (lbl) => contains(event.categories, lbl.name)).map((lbl) => lbl.name)
           }
           return [...arr, entry]
         }, [])
-        hours = await this._azstorage.addTimeEntries(
-          ctx.userId,
-          period.id,
-          timeentries,
-          options.forecast
-        )
+        hours = await this._azstorage.addTimeEntries(ctx.userId, period.id, timeentries, options.forecast)
       }
       if (options.forecast) {
         await this._azstorage.addForecastedPeriod(ctx.userId, period.id, hours)
       } else {
-        await this._azstorage.addConfirmedPeriod(
-          ctx.userId,
-          period.id,
-          hours,
-          period.forecastedHours
-        )
+        await this._azstorage.addConfirmedPeriod(ctx.userId, period.id, hours, period.forecastedHours)
       }
       return { success: true, error: null }
     } catch (error) {
@@ -180,8 +151,7 @@ export class TimesheetResolver {
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, {
-    description:
-      'Deletes time entries for the specified period and the entry for the confirmed period'
+    description: 'Deletes time entries for the specified period and the entry for the confirmed period'
   })
   async unsubmitPeriod(
     @Arg('period', () => TimesheetPeriodInput) period: TimesheetPeriodInput,

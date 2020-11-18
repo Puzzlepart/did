@@ -39,10 +39,7 @@ export const Reports = () => {
    * On export to Excel
    */
   const onExportExcel = () => {
-    const fileName = format(
-      state.query.exportFileName,
-      new Date().toDateString().split(' ').join('-')
-    )
+    const fileName = format(state.query.exportFileName, new Date().toDateString().split(' ').join('-'))
     exportExcel(state.subset || context.timeentries, {
       columns: columns(t),
       fileName
@@ -93,22 +90,12 @@ export const Reports = () => {
 
   return (
     <div className={styles.root}>
-      <Pivot
-        defaultSelectedKey={params.query || 'default'}
-        onLinkClick={(item) => onChangeQuery(item.props.itemKey)}>
+      <Pivot defaultSelectedKey={params.query || 'default'} onLinkClick={(item) => onChangeQuery(item.props.itemKey)}>
         {queries.map((query) => (
-          <PivotItem
-            key={query.key}
-            itemKey={query.key}
-            headerText={query.text}
-            itemIcon={query.iconName}>
+          <PivotItem key={query.key} itemKey={query.key} headerText={query.text} itemIcon={query.iconName}>
             <div className={styles.container}>
               {loading && (
-                <Spinner
-                  className={styles.spinner}
-                  labelPosition='right'
-                  label={t('reports.generatingReportLabel')}
-                />
+                <Spinner className={styles.spinner} labelPosition='right' label={t('reports.generatingReportLabel')} />
               )}
               {!loading && !isEmpty(context.timeentries) && (
                 <List
@@ -117,10 +104,7 @@ export const Reports = () => {
                   groups={{
                     ...state.groupBy,
                     totalFunc: (items) => {
-                      const durationHrs = items.reduce(
-                        (sum, item) => sum + item.duration,
-                        0
-                      ) as number
+                      const durationHrs = items.reduce((sum, item) => sum + item.duration, 0) as number
                       return t('common.headerTotalDuration', {
                         duration: DateUtils.getDurationString(durationHrs, t)
                       })
@@ -146,11 +130,7 @@ export const Reports = () => {
           </PivotItem>
         ))}
         <PivotItem itemKey='default' headerButtonProps={{ disabled: true }}>
-          <UserMessage
-            className={styles.container}
-            iconName='ReportDocument'
-            text={t('reports.selectReportText')}
-          />
+          <UserMessage className={styles.container} iconName='ReportDocument' text={t('reports.selectReportText')} />
         </PivotItem>
       </Pivot>
     </div>

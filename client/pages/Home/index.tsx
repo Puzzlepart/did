@@ -23,11 +23,7 @@ export default (): React.ReactElement<HTMLDivElement> => {
         />
       )}
       <div hidden={!!subscription || !!error}>
-        <DefaultButton
-          className={styles.signinbutton}
-          href='/auth/signin'
-          text={t('common.signInText')}
-        />
+        <DefaultButton className={styles.signinbutton} href='/auth/signin' text={t('common.signInText')} />
       </div>
     </div>
   )

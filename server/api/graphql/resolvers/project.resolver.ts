@@ -19,10 +19,7 @@ export class ProjectResolver {
    * @param {AzStorageService} _azstorage AzStorageService
    * @param {MSGraphService} _msgraph MSGraphService
    */
-  constructor(
-    private readonly _azstorage: AzStorageService,
-    private readonly _msgraph: MSGraphService
-  ) {}
+  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) {}
 
   /**
    * Get projects

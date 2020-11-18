@@ -5,9 +5,7 @@ import { durationColumn, timeColumn, titleColumn } from './columns'
 import styles from './EventList.module.scss'
 import { IEventListProps } from './types'
 
-const EventList: React.FunctionComponent<IEventListProps> = (
-  props: IEventListProps
-): JSX.Element => {
+const EventList: React.FunctionComponent<IEventListProps> = (props: IEventListProps): JSX.Element => {
   const { t } = useTranslation()
   const columns = [
     titleColumn(props, t('common.titleLabel')),

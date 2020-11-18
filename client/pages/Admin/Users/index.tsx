@@ -81,10 +81,7 @@ export const Users = () => {
             {
               key: 'SPINNER',
               name: '',
-              onRender: () =>
-                progressProps && (
-                  <Spinner styles={{ root: { marginLeft: 15 } }} {...progressProps} />
-                )
+              onRender: () => progressProps && <Spinner styles={{ root: { marginLeft: 15 } }} {...progressProps} />
             }
           ],
           farItems: []
@@ -100,11 +97,7 @@ export const Users = () => {
         />
       )}
       {bulkImportPanel && (
-        <BulkImportPanel
-          {...bulkImportPanel}
-          onImport={onBulkImport}
-          onDismiss={() => setBulkImportPanel(null)}
-        />
+        <BulkImportPanel {...bulkImportPanel} onImport={onBulkImport} onDismiss={() => setBulkImportPanel(null)} />
       )}
     </UsersContext.Provider>
   )

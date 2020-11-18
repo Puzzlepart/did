@@ -13,11 +13,7 @@ export const ActionBar = () => {
   const context = useContext(TimesheetContext)
   const commandBarProps: ICommandBarProps = {
     styles: { root: { padding: 0 } },
-    items: [
-      ...navigateCommands(context),
-      weekPickerCommand(context),
-      ...selectPeriodCommands(context)
-    ],
+    items: [...navigateCommands(context), weekPickerCommand(context), ...selectPeriodCommands(context)],
     farItems: [submitCommands(context, subscription)]
   }
 

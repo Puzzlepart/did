@@ -6,9 +6,7 @@ import { IFilter, IFilterItem } from './Filters'
 import { IFilterPanelProps } from './types'
 
 export const FilterPanel = (props: IFilterPanelProps) => {
-  const [filters, setFilters] = useState<IFilter[]>(
-    props.filters.map((f) => f.initialize(props.items))
-  )
+  const [filters, setFilters] = useState<IFilter[]>(props.filters.map((f) => f.initialize(props.items)))
   useEffect(() => setFilters(props.filters.map((f) => f.initialize(props.items))), [props.items])
 
   /**

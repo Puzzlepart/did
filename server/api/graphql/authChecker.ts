@@ -14,10 +14,7 @@ export interface IAuthOptions {
   permission?: string
 }
 
-export const authChecker: AuthChecker<Context, IAuthOptions> = (
-  { context }: ResolverData<Context>,
-  [authOptions]
-) => {
+export const authChecker: AuthChecker<Context, IAuthOptions> = ({ context }: ResolverData<Context>, [authOptions]) => {
   if (!authOptions) return !!context.permissions
   if (authOptions.userContext) return !!context.userId
   if (authOptions.permission) return contains(context.permissions, authOptions.permission)

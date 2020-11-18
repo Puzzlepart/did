@@ -13,20 +13,13 @@ import { AzStorageService } from '../../services'
  * @param {string} template Template
  * @param {string} locale Locale
  */
-export default async function (
-  ctx: Context,
-  azstorage: AzStorageService,
-  template: string,
-  locale: string
-) {
+export default async function (ctx: Context, azstorage: AzStorageService, template: string, locale: string) {
   const currentWeek = utils.getWeek()
   const periods = []
   const unconfirmedPeriods = []
 
   for (let i = 5; i > 0; i--) {
-    periods.push(
-      ...getPeriods(utils.startOfWeek(currentWeek - i), utils.endOfWeek(currentWeek - i), locale)
-    )
+    periods.push(...getPeriods(utils.startOfWeek(currentWeek - i), utils.endOfWeek(currentWeek - i), locale))
   }
 
   const confirmedPeriods = (await azstorage.getConfirmedPeriods({

@@ -1,11 +1,5 @@
 import { List } from 'components'
-import {
-  CheckboxVisibility,
-  SelectionMode,
-  PrimaryButton,
-  Panel,
-  PanelType
-} from 'office-ui-fabric'
+import { CheckboxVisibility, SelectionMode, PrimaryButton, Panel, PanelType } from 'office-ui-fabric'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { pick } from 'underscore'

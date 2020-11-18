@@ -61,15 +61,10 @@ export const SummaryView = (props: ISummaryViewProps): JSX.Element => {
     <div className={styles.root}>
       <Pivot
         defaultSelectedKey={props.defaultSelectedYear.toString()}
-        onLinkClick={(item) =>
-          dispatch({ type: 'CHANGE_YEAR', payload: parseInt(item.props.itemKey) })
-        }>
+        onLinkClick={(item) => dispatch({ type: 'CHANGE_YEAR', payload: parseInt(item.props.itemKey) })}>
         {context.periods.map((period) => (
           <PivotItem key={period.itemKey} {...period}>
-            <Pivot
-              onLinkClick={(item) =>
-                dispatch({ type: 'CHANGE_SCOPE', payload: item.props as ISummaryViewScope })
-              }>
+            <Pivot onLinkClick={(item) => dispatch({ type: 'CHANGE_SCOPE', payload: item.props as ISummaryViewScope })}>
               {context.scopes.map((scope) => (
                 <PivotItem key={scope.itemKey} {...scope}>
                   <div className={styles.container}>
@@ -80,10 +75,7 @@ export const SummaryView = (props: ISummaryViewProps): JSX.Element => {
                       items={context.rows}
                       commandBar={commandBar(context)}
                     />
-                    <UserMessage
-                      hidden={!isEmpty(context.rows) || loading}
-                      text={t('admin.noTimeEntriesText')}
-                    />
+                    <UserMessage hidden={!isEmpty(context.rows) || loading} text={t('admin.noTimeEntriesText')} />
                   </div>
                 </PivotItem>
               ))}

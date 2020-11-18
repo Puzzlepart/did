@@ -25,30 +25,14 @@ export const Admin = () => {
     <div className={styles.root}>
       <Pivot selectedKey={view || 'users'} onLinkClick={onPivotClick}>
         {user.hasPermission(PERMISSION.MANAGE_USERS) && (
-          <PivotItem
-            className={styles.tab}
-            itemKey='users'
-            headerText={t('admin.users')}
-            itemIcon='FabricUserFolder'>
+          <PivotItem className={styles.tab} itemKey='users' headerText={t('admin.users')} itemIcon='FabricUserFolder'>
             <Users />
           </PivotItem>
         )}
-        <PivotItem
-          className={styles.tab}
-          itemKey='summary'
-          headerText={t('admin.summary')}
-          itemIcon='CalendarWeek'>
-          <SummaryView
-            defaultSelectedYear={DateUtils.getYear()}
-            defaultSelectedScope='weekNumber'
-            defaultRange={2}
-          />
+        <PivotItem className={styles.tab} itemKey='summary' headerText={t('admin.summary')} itemIcon='CalendarWeek'>
+          <SummaryView defaultSelectedYear={DateUtils.getYear()} defaultSelectedScope='weekNumber' defaultRange={2} />
         </PivotItem>
-        <PivotItem
-          className={styles.tab}
-          itemKey='labels'
-          headerText={t('admin.labels')}
-          itemIcon='Label'>
+        <PivotItem className={styles.tab} itemKey='labels' headerText={t('admin.labels')} itemIcon='Label'>
           <Labels />
         </PivotItem>
         {user.hasPermission(PERMISSION.MANAGE_ROLESPERMISSIONS) && (

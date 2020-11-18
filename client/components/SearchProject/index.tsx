@@ -15,9 +15,7 @@ export const SearchProject = (props: ISearchProjectProps) => {
     ? data.projects.map((project) => ({
         key: project.id,
         displayValue: `${project.name} (${project.id})`,
-        searchValue: [project.id, project.name, project.customerKey, project.customer.key].join(
-          ' '
-        ),
+        searchValue: [project.id, project.name, project.customerKey, project.customer.key].join(' '),
         data: project
       }))
     : []

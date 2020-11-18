@@ -140,11 +140,7 @@ export class DateUtils {
    * @param {DateObject} end End
    * @param {string} monthFormat Month format
    */
-  public getTimespanString(
-    start: DateObject,
-    end: DateObject,
-    monthFormat: string = this.$.monthFormat
-  ): string {
+  public getTimespanString(start: DateObject, end: DateObject, monthFormat: string = this.$.monthFormat): string {
     const isSameMonth = start.isSameMonth(end)
     const isSameYear = start.isSameYear(end)
     const sFormat = ['DD']

@@ -21,10 +21,7 @@ export const FilterItem = (props: IFilterItemProps) => {
     <div className={styles.root}>
       <div className={styles.name}>{props.filter.name}</div>
       <div className={styles.searchBox} hidden={props.filter.items.length < 10}>
-        <SearchBox
-          placeholder={t('common.searchPlaceholder')}
-          onChange={(_event, value) => onSearch(value)}
-        />
+        <SearchBox placeholder={t('common.searchPlaceholder')} onChange={(_event, value) => onSearch(value)} />
       </div>
       {[...items].slice(0, showCount).map((item) => (
         <div key={item.key} className={styles.item}>

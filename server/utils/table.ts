@@ -38,36 +38,29 @@ class AzTableUtilities {
    * @param {EntityDescriptor} entityDescriptor Entity descriptor
    * @param {IQueryAzTableOptions} options Parse options
    */
-  parseAzEntity<T = any>(
-    entityDescriptor: EntityDescriptor,
-    options: IQueryAzTableOptions = {}
-  ): T {
-    const parsedEntity = Object.keys(entityDescriptor).reduce(
-      (obj: Record<string, any>, key: string) => {
-        const { _, $ } = entityDescriptor[key]
-        let value = _
-        if (_ === undefined || _ === null) return obj
-        if (get(options, `columnMap.${key}`)) {
-          obj[get(options, `columnMap.${key}`)] = _
-          return obj
-        }
-        const type: string = get(options, `typeMap.${key}`, { default: $ })
-        switch (type) {
-          case 'Custom.ArrayPipe':
-            value = ((value as string) || '').split('|').filter((p) => p)
-            break
-          case 'Edm.DateTime':
-            value = value.toISOString()
-            break
-          default:
-            if (startsWith(_, 'json:')) value = JSON.parse(value.split('json:')[1])
-        }
-        return { ...obj, [decapitalize(key)]: value }
-      },
-      {}
-    )
-    if (!parsedEntity.id)
-      parsedEntity.id = [entityDescriptor.PartitionKey._, entityDescriptor.RowKey._].join(' ')
+  parseAzEntity<T = any>(entityDescriptor: EntityDescriptor, options: IQueryAzTableOptions = {}): T {
+    const parsedEntity = Object.keys(entityDescriptor).reduce((obj: Record<string, any>, key: string) => {
+      const { _, $ } = entityDescriptor[key]
+      let value = _
+      if (_ === undefined || _ === null) return obj
+      if (get(options, `columnMap.${key}`)) {
+        obj[get(options, `columnMap.${key}`)] = _
+        return obj
+      }
+      const type: string = get(options, `typeMap.${key}`, { default: $ })
+      switch (type) {
+        case 'Custom.ArrayPipe':
+          value = ((value as string) || '').split('|').filter((p) => p)
+          break
+        case 'Edm.DateTime':
+          value = value.toISOString()
+          break
+        default:
+          if (startsWith(_, 'json:')) value = JSON.parse(value.split('json:')[1])
+      }
+      return { ...obj, [decapitalize(key)]: value }
+    }, {})
+    if (!parsedEntity.id) parsedEntity.id = [entityDescriptor.PartitionKey._, entityDescriptor.RowKey._].join(' ')
     return omit(parsedEntity, options.skipColumns || ['timestamp', 'partitionKey']) as T
   }
 
@@ -209,20 +202,10 @@ class AzTableUtilities {
    */
   async queryAzTableAll(table: string, query: TableQuery, columnMap: Record<string, string>) {
     let token = null
-    const { entries, continuationToken } = await this.queryAzTable(
-      table,
-      query,
-      { columnMap },
-      token
-    )
+    const { entries, continuationToken } = await this.queryAzTable(table, query, { columnMap }, token)
     token = continuationToken
     while (token !== null) {
-      const result: TableService.QueryEntitiesResult<any> = await this.queryAzTable(
-        table,
-        query,
-        { columnMap },
-        token
-      )
+      const result: TableService.QueryEntitiesResult<any> = await this.queryAzTable(table, query, { columnMap }, token)
       entries.push(...result.entries)
       token = result.continuationToken
     }
@@ -338,32 +321,18 @@ class AzTableUtilities {
    * @param {any} entityDescriptor Entity descriptor
    * @param {boolean} merge If the entity should be inserted using insertOrMergeEntity
    */
-  updateAzEntity(
-    table: string,
-    entityDescriptor: any,
-    merge?: boolean
-  ): Promise<TableService.EntityMetadata> {
+  updateAzEntity(table: string, entityDescriptor: any, merge?: boolean): Promise<TableService.EntityMetadata> {
     return new Promise((resolve, reject) => {
       if (merge) {
-        this.tableService.insertOrMergeEntity(
-          table,
-          entityDescriptor,
-          undefined,
-          (error, result) => {
-            if (error) reject(error)
-            else resolve(result)
-          }
-        )
+        this.tableService.insertOrMergeEntity(table, entityDescriptor, undefined, (error, result) => {
+          if (error) reject(error)
+          else resolve(result)
+        })
       } else {
-        this.tableService.insertOrReplaceEntity(
-          table,
-          entityDescriptor,
-          undefined,
-          (error, result) => {
-            if (error) reject(error)
-            else resolve(result)
-          }
-        )
+        this.tableService.insertOrReplaceEntity(table, entityDescriptor, undefined, (error, result) => {
+          if (error) reject(error)
+          else resolve(result)
+        })
       }
     })
   }

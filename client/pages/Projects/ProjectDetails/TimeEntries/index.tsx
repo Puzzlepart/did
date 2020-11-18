@@ -32,9 +32,7 @@ export const TimeEntries: FunctionComponent = () => {
           onClick={() => onExportExcel(state.selected, timeentries, t)}
         />
       </div>
-      {error && (
-        <UserMessage type={MessageBarType.error} text={t('projects.timeEntriesErrorText')} />
-      )}
+      {error && <UserMessage type={MessageBarType.error} text={t('projects.timeEntriesErrorText')} />}
       {empty && !loading && <UserMessage text={t('projects.noTimeEntriesText')} />}
       {loading && <ProgressIndicator label={t('projects.timeEntriesLoadingLabel')} />}
       {!empty && (

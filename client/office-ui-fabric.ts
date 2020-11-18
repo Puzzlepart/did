@@ -1,18 +1,10 @@
-export {
-  ActionButton,
-  DefaultButton,
-  MessageBarButton,
-  PrimaryButton
-} from 'office-ui-fabric-react/lib/Button'
+export { ActionButton, DefaultButton, MessageBarButton, PrimaryButton } from 'office-ui-fabric-react/lib/Button'
 export { Calendar, DateRangeType, DayOfWeek } from 'office-ui-fabric-react/lib/Calendar'
 export { Callout, DirectionalHint, ICalloutProps, Target } from 'office-ui-fabric-react/lib/Callout'
 export { Checkbox } from 'office-ui-fabric-react/lib/Checkbox'
 export { ChoiceGroup, IChoiceGroupOption } from 'office-ui-fabric-react/lib/ChoiceGroup'
 export { CommandBar, ICommandBarProps } from 'office-ui-fabric-react/lib/CommandBar'
-export {
-  IContextualMenuItem,
-  IContextualMenuProps
-} from 'office-ui-fabric-react/lib/ContextualMenu'
+export { IContextualMenuItem, IContextualMenuProps } from 'office-ui-fabric-react/lib/ContextualMenu'
 export {
   CheckboxVisibility,
   ConstrainMode,
@@ -44,10 +36,7 @@ export {
 export { IModalProps, Modal } from 'office-ui-fabric-react/lib/Modal'
 export { IPanelProps, Panel, PanelType } from 'office-ui-fabric-react/lib/Panel'
 export { IPivotItemProps, Pivot, PivotItem } from 'office-ui-fabric-react/lib/Pivot'
-export {
-  IProgressIndicatorProps,
-  ProgressIndicator
-} from 'office-ui-fabric-react/lib/ProgressIndicator'
+export { IProgressIndicatorProps, ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
 export { ScrollablePane, ScrollbarVisibility } from 'office-ui-fabric-react/lib/ScrollablePane'
 export { ISearchBoxProps, SearchBox } from 'office-ui-fabric-react/lib/SearchBox'
 export { Shimmer } from 'office-ui-fabric-react/lib/Shimmer'
@@ -58,8 +47,4 @@ export { Sticky, StickyPositionType } from 'office-ui-fabric-react/lib/Sticky'
 export { TextField } from 'office-ui-fabric-react/lib/TextField'
 export { Toggle } from 'office-ui-fabric-react/lib/Toggle'
 export { TooltipDelay, TooltipHost } from 'office-ui-fabric-react/lib/Tooltip'
-export {
-  format,
-  IRenderFunction,
-  IStyleFunctionOrObject
-} from 'office-ui-fabric-react/lib/Utilities'
+export { format, IRenderFunction, IStyleFunctionOrObject } from 'office-ui-fabric-react/lib/Utilities'

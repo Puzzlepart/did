@@ -11,10 +11,7 @@ import { DateObject } from 'utils/date'
  * @param {void} onEdit On edit callback
  * @param {TFunction} t Translate function
  */
-export const ApiTokensColumns = (
-  onDeleteApiToken: (token: ApiToken) => void,
-  t: TFunction
-): IColumn[] => [
+export const ApiTokensColumns = (onDeleteApiToken: (token: ApiToken) => void, t: TFunction): IColumn[] => [
   {
     key: 'name',
     fieldName: 'name',
@@ -39,8 +36,6 @@ export const ApiTokensColumns = (
     key: 'actions',
     name: '',
     minWidth: 150,
-    onRender: (token: ApiToken) => (
-      <DefaultButton text={t('common.delete')} onClick={() => onDeleteApiToken(token)} />
-    )
+    onRender: (token: ApiToken) => <DefaultButton text={t('common.delete')} onClick={() => onDeleteApiToken(token)} />
   }
 ]

@@ -56,9 +56,7 @@ class OAuthService {
       }
     } catch (err) {
       debug(`Failed to refresh token using options ${JSON.stringify(options)}: ${err.message}`)
-      throw new Error(
-        `Failed to refresh token using options ${JSON.stringify(options)}: ${err.message}`
-      )
+      throw new Error(`Failed to refresh token using options ${JSON.stringify(options)}: ${err.message}`)
     }
     // Store access token on Express request
     this._request.user.tokenParams = accessToken.token
