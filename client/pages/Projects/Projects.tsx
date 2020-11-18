@@ -67,10 +67,10 @@ export const Projects: FunctionComponent = () => {
     <ProjectsContext.Provider value={context}>
       <Pivot
         selectedKey={state.view}
-        onLinkClick={(item) =>
+        onLinkClick={({ props }) =>
           dispatch({
             type: 'CHANGE_VIEW',
-            view: item.props.itemKey as ProjectsView
+            view: props.itemKey as ProjectsView
           })
         }
         styles={{ itemContainer: { paddingTop: 10 } }}>
