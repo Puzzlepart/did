@@ -1,24 +1,27 @@
 import { TFunction } from 'i18next'
-import { IProjectFormState } from './types'
+import { IProjectFormValidationOptions, ProjectModel } from './types'
 
 /**
  * Validate form
  *
- * @param {IProjectFormState} state State
+ * @param {ProjectModel} model Model
  * @param {TFunction} t Translate function
+ * @param {IProjectFormValidationOptions} options Validation options
  */
-export const validateForm = (state: IProjectFormState, t: TFunction) => {
-  const nameMinLength = 2
+export const validateForm = (
+  model: ProjectModel,
+  t: TFunction,
+  options: IProjectFormValidationOptions
+) => {
   const errors: { [key: string]: string } = {}
-  if (!state.model.customerKey) {
+  if (!model.customerKey) {
     errors.customerKey = t('projects.customerFormValidationText')
   }
-  if (state.model.name.length < nameMinLength) {
-    errors.name = t('projects.nameFormValidationText', { nameMinLength })
+  if (model.name.length < options.nameMinLength) {
+    errors.name = t('projects.nameFormValidationText', options)
   }
-  if (!/(^[A-ZÆØÅ0-9]{2,8}$)/gm.test(state.model.key)) {
+  if (!/(^[A-ZÆØÅ0-9]{2,8}$)/gm.test(model.key)) {
     errors.key = t('projects.keyFormValidationText', { keyMinLength: 2, keyMaxLength: 8 })
   }
-  state.validation = { errors, invalid: Object.keys(errors).length > 0 }
-  return state.validation
+  return { errors, invalid: Object.keys(errors).length > 0 }
 }
