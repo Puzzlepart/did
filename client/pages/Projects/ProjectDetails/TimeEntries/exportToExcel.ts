@@ -5,16 +5,16 @@ import { Project } from 'types'
 
 /**
  * On export to Excel
- * 
+ *
  * @param {Project} project Project
- * @param {any[]} timeentries Time entries 
+ * @param {any[]} timeentries Time entries
  * @param {TFunction} t Translate function
  */
 export async function onExportExcel(project: Project, timeentries: any[], t: TFunction) {
-    const timestamp = new Date().toDateString().split(' ').join('-')
-    const fileName = `TimeEntries-${project.id.replace(/\s+/g, '-')}-${timestamp}.xlsx`
-    await exportExcel(timeentries, {
-        columns: columns(t),
-        fileName
-    })
+  const timestamp = new Date().toDateString().split(' ').join('-')
+  const fileName = `TimeEntries-${project.id.replace(/\s+/g, '-')}-${timestamp}.xlsx`
+  await exportExcel(timeentries, {
+    columns: columns(t),
+    fileName
+  })
 }

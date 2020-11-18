@@ -1,4 +1,3 @@
-
 export interface ISummaryProps {
-  timeentries: any[];
+  timeentries: any[]
 }

@@ -5,17 +5,17 @@ import { Actions } from './actions'
 import styles from './Header.module.scss'
 
 export const Header: FunctionComponent = () => {
-    const { project } = useContext(ProjectDetailsContext)
-    return (
-        <div className={styles.root}>
-            <div className={styles.icon}>
-                <Icon iconName={project.icon} />
-            </div>
-            <div className={styles.title}>
-                <div className={styles.text}>{project.name}</div>
-                <div className={styles.subText}>{project.customer.name}</div>
-            </div>
-            <Actions project={project} />
-        </div>
-    )
+  const { project } = useContext(ProjectDetailsContext)
+  return (
+    <div className={styles.root}>
+      <div className={styles.icon}>
+        <Icon iconName={project.icon} />
+      </div>
+      <div className={styles.title}>
+        <div className={styles.text}>{project.name}</div>
+        <div className={styles.subText}>{project.customer.name}</div>
+      </div>
+      <Actions project={project} />
+    </div>
+  )
 }

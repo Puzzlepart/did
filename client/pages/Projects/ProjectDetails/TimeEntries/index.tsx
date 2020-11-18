@@ -29,7 +29,8 @@ export const TimeEntries: FunctionComponent = () => {
         <ActionButton
           text={t('projects.exportTimeEntriesLabel')}
           iconProps={{ iconName: 'ExcelDocument' }}
-          onClick={() => onExportExcel(project, timeentries, t)} />
+          onClick={() => onExportExcel(project, timeentries, t)}
+        />
       </div>
       {error && <UserMessage type={MessageBarType.error} text={t('projects.timeEntriesErrorText')} />}
       {empty && !loading && <UserMessage text={t('projects.noTimeEntriesText')} />}

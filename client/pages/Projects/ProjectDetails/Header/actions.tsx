@@ -42,13 +42,15 @@ export const Actions: FunctionComponent<IProjectDetailsProps> = (props: IProject
         <DefaultButton
           text={t('common.editLabel')}
           iconProps={{ iconName: 'Edit' }}
-          onClick={() => setShowEditPanel(true)} />
+          onClick={() => setShowEditPanel(true)}
+        />
       </div>
       <div className={styles.actionItem} hidden={!context.project.webLink}>
         <DefaultButton
           text={t('projects.workspaceLabel')}
           onClick={() => window.location.replace(context.project.webLink)}
-          iconProps={{ iconName: 'Website' }} />
+          iconProps={{ iconName: 'Website' }}
+        />
       </div>
       <div className={styles.actionItem} hidden={!!context.project.outlookCategory}>
         <DefaultButton

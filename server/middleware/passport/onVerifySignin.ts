@@ -1,11 +1,11 @@
 import createDebug from 'debug'
-const debug = createDebug('middleware/passport/onVerifySignin')
-import { SubscriptionService, AzStorageService, MSGraphService } from '../../api/services'
-import { NO_OID_FOUND, SIGNIN_FAILED, TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } from './errors'
-import { IProfile } from 'passport-azure-ad/oidc-strategy'
-import { VerifyCallback } from 'passport-azure-ad'
-import { isEqual, pick } from 'underscore'
 import get from 'get-value'
+import { VerifyCallback } from 'passport-azure-ad'
+import { IProfile } from 'passport-azure-ad/oidc-strategy'
+import { isEqual, pick } from 'underscore'
+import { AzStorageService, MSGraphService, SubscriptionService } from '../../api/services'
+import { NO_OID_FOUND, TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } from './errors'
+const debug = createDebug('middleware/passport/onVerifySignin')
 
 const AD_USER_SYNC_ENABLED_KEY = 'settings.adsync.adUserSyncEnabled'
 const AD_USER_SYNC_PROPERTIES_KEY = 'settings.adsync.adUserSyncProperties'
