@@ -24,7 +24,7 @@ export const Projects: FunctionComponent = () => {
     projects: [],
     outlookCategories: []
   })
-  const { loading, error, data, refetch } = useQuery<ProjectsQueryResult>(
+  const query = useQuery<ProjectsQueryResult>(
     $projects,
     {
       variables: { sortBy: 'name' },
@@ -32,13 +32,15 @@ export const Projects: FunctionComponent = () => {
     }
   )
 
+  useEffect(() => dispatch({ type: 'DATA_UPDATED', query }), [query])
+
   const context: IProjectsContext = useMemo(
     () => ({
       state,
       dispatch,
-      refetch,
+      refetch: query.refetch,
     }),
-    [data]
+    [state]
   )
 
   useEffect(() => {
@@ -60,10 +62,10 @@ export const Projects: FunctionComponent = () => {
         onLinkClick={onPivotClick}
         styles={{ itemContainer: { paddingTop: 10 } }}>
         <PivotItem itemID='search' itemKey='search' headerText={t('common.search')} itemIcon='FabricFolderSearch'>
-          <UserMessage hidden={!error} type={MessageBarType.error} text={t('common.genericErrorText')} />
-          <div hidden={!!error}>
+          <UserMessage hidden={!query.error} type={MessageBarType.error} text={t('common.genericErrorText')} />
+          <div hidden={!!query.error}>
             <ProjectList
-              enableShimmer={loading}
+              enableShimmer={query.loading}
               items={state.projects}
               searchBox={{
                 placeholder: t('common.searchPlaceholder'),
@@ -74,7 +76,7 @@ export const Projects: FunctionComponent = () => {
                 onChanged: (selected) => {
                   selected &&
                     history.push(['/projects', params.view || 'search', selected.id].filter((p) => p).join('/'))
-                    dispatch({ type: 'SET_SELECTED_PROJECT', project: selected })
+                  dispatch({ type: 'SET_SELECTED_PROJECT', project: selected })
                 }
               }}
               height={state.selected && 400}
@@ -83,15 +85,15 @@ export const Projects: FunctionComponent = () => {
           </div>
         </PivotItem>
         <PivotItem itemID='my' itemKey='my' headerText={t('projects.myProjectsText')} itemIcon='FabricUserFolder'>
-          <UserMessage hidden={!error} type={MessageBarType.error} text={t('common.genericErrorText')} />
-          <div hidden={!!error}>
+          <UserMessage hidden={!query.error} type={MessageBarType.error} text={t('common.genericErrorText')} />
+          <div hidden={!!query.error}>
             <UserMessage
               containerStyle={{ marginBottom: 12 }}
               iconName='OutlookLogoInverse'
               text={t('projects.outlookCategoryInfoText')}
             />
             <ProjectList
-              enableShimmer={loading}
+              enableShimmer={query.loading}
               items={state.projects.filter((p) => !!p.outlookCategory)}
               searchBox={{
                 placeholder: t('projects.myProjectsSearchPlaceholder'),

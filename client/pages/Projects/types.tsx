@@ -3,6 +3,7 @@ import { OutlookCategory, Project } from 'types'
 export interface IProjectsParams {
   key: string
   view: string
+  detailsTab: string
 }
 
 export interface IProjectsState {
