@@ -175,7 +175,7 @@ export default class {
   /**
    * Match events
    *
-   * @param {*} events
+   * @param {MSGraphEvent[]} events
    */
   public matchEvents(events: MSGraphEvent[]): EventObject[] {
     return events.map(this._matchEvent.bind(this))
