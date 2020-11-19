@@ -7,14 +7,19 @@ import { CheckboxField } from './CheckboxField'
 import styles from './SettingsSection.module.scss'
 import { ISettingsSectionProps } from './types'
 
-export const SettingsSection: React.FunctionComponent<ISettingsSectionProps> = (props: ISettingsSectionProps) => {
+export const SettingsSection: React.FunctionComponent<ISettingsSectionProps> = (
+  props: ISettingsSectionProps
+) => {
   const { settings, onSettingsChanged } = useContext(SubscriptionContext)
   return (
     <ToggleSection className={styles.root} id={props.id} headerText={props.name}>
       {props.fields.map((field) => {
         field.props.set('disabled', field.disabledIf && field.disabledIf(settings || {}))
         field.props.set('hidden', field.hiddenIf && field.hiddenIf(settings || {}))
-        const _ = Array.from(field.props).reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {} as any)
+        const _ = Array.from(field.props).reduce(
+          (obj, [key, value]) => ({ ...obj, [key]: value }),
+          {} as any
+        )
         const key = `${props.id}.${field.id}`
         let fieldElement: JSX.Element
         // eslint-disable-next-line default-case

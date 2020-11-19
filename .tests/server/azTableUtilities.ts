@@ -28,7 +28,10 @@ describe(header('AzTableUtilities'), async () => {
         }
       }
       const json = tableUtils.parseAzEntity(item)
-      deepStrictEqual(contains(Object.keys(json), 'title') && contains(Object.keys(json), 'modified'), true)
+      deepStrictEqual(
+        contains(Object.keys(json), 'title') && contains(Object.keys(json), 'modified'),
+        true
+      )
     })
 
     it('should parse settings as JSON', () => {
@@ -74,7 +77,8 @@ describe(header('AzTableUtilities'), async () => {
         },
         Permissions: {
           $: 'Edm.String',
-          _: 'e18a7c45|289a64ab|2653c3aa|a031c42f|ef4032fb|c5439319|09909241|8b39db3d|15e40e99|cd52a735|f5a82c37'
+          _:
+            'e18a7c45|289a64ab|2653c3aa|a031c42f|ef4032fb|c5439319|09909241|8b39db3d|15e40e99|cd52a735|f5a82c37'
         }
       }
       const json = tableUtils.parseAzEntity(item, { typeMap: { Permissions: 'Custom.ArrayPipe' } })
@@ -88,12 +92,17 @@ describe(header('AzTableUtilities'), async () => {
         title: 'Hello world',
         modified: '2020-10-05T10:36:21.019Z'
       }
-      const entity = tableUtils.convertToAzEntity('78d15b30-499a-4d2f-96a5-a9644c57e741', values, 'default', {
-        removeBlanks: true,
-        typeMap: {
-          modified: 'datetime'
+      const entity = tableUtils.convertToAzEntity(
+        '78d15b30-499a-4d2f-96a5-a9644c57e741',
+        values,
+        'default',
+        {
+          removeBlanks: true,
+          typeMap: {
+            modified: 'datetime'
+          }
         }
-      })
+      )
       deepStrictEqual(entity.PartitionKey._, 'default')
       deepStrictEqual(entity.RowKey._, '78d15b30-499a-4d2f-96a5-a9644c57e741')
       deepStrictEqual(entity.Modified.$, 'Edm.DateTime')
@@ -105,13 +114,18 @@ describe(header('AzTableUtilities'), async () => {
         modified: '2020-10-05T10:36:21.019Z',
         settings: { enabled: true }
       }
-      const entity = tableUtils.convertToAzEntity('78d15b30-499a-4d2f-96a5-a9644c57e741', values, 'default', {
-        removeBlanks: true,
-        typeMap: {
-          modified: 'datetime',
-          settings: 'json'
+      const entity = tableUtils.convertToAzEntity(
+        '78d15b30-499a-4d2f-96a5-a9644c57e741',
+        values,
+        'default',
+        {
+          removeBlanks: true,
+          typeMap: {
+            modified: 'datetime',
+            settings: 'json'
+          }
         }
-      })
+      )
       strictEqual(startsWith(entity.Settings._, 'json:'), true)
     })
   })

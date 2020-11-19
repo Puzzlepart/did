@@ -9,7 +9,11 @@ import { Customer, Project, LabelObject } from './types'
  * @param {Customer[]} customers
  * @param {LabelObject[]} labels
  */
-export function connectEntities(projects: Project[], customers: Customer[], labels: LabelObject[]): Project[] {
+export function connectEntities(
+  projects: Project[],
+  customers: Customer[],
+  labels: LabelObject[]
+): Project[] {
   return projects
     .map((project) => ({
       ...project,

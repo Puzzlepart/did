@@ -12,7 +12,13 @@ export type RenderListHeaderParams = {
   dispatch?: Dispatch<any>
 }
 
-export const onRenderListHeader = ({ headerProps, defaultRender, props, state, dispatch }: RenderListHeaderParams) => {
+export const onRenderListHeader = ({
+  headerProps,
+  defaultRender,
+  props,
+  state,
+  dispatch
+}: RenderListHeaderParams) => {
   if (!!props.onRenderDetailsHeader) return onRenderListHeader({ headerProps, defaultRender })
   const searchBox = props.searchBox && {
     key: 'SEARCH_BOX',

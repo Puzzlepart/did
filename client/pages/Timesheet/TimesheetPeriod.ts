@@ -1,7 +1,13 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 import { IPnPClientStore, PnPClientStorage } from '@pnp/common'
 import { TFunction } from 'i18next'
-import { EventInput, EventObject, Project, TimesheetPeriodInput, TimesheetPeriodObject } from 'types'
+import {
+  EventInput,
+  EventObject,
+  Project,
+  TimesheetPeriodInput,
+  TimesheetPeriodObject
+} from 'types'
 import { filter, omit } from 'underscore'
 import DateUtils, { DateObject } from 'utils/date'
 
@@ -119,7 +125,10 @@ export class TimesheetPeriod {
    * Get matched duration for the events in the period
    */
   public get matchedDuration(): number {
-    return filter(this.getEvents(), (event) => !!event.project).reduce((sum, event) => sum + event.duration, 0)
+    return filter(this.getEvents(), (event) => !!event.project).reduce(
+      (sum, event) => sum + event.duration,
+      0
+    )
   }
 
   /**
@@ -148,7 +157,11 @@ export class TimesheetPeriod {
    */
   public clearManualMatch(eventId: string) {
     this._uiMatchedEvents = omit(this._uiMatchedEvents, eventId)
-    this._localStorage.put(this._uiMatchedEventsStorageKey, this._uiMatchedEvents, this._storageDefaultExpire)
+    this._localStorage.put(
+      this._uiMatchedEventsStorageKey,
+      this._uiMatchedEvents,
+      this._storageDefaultExpire
+    )
   }
 
   /**
@@ -158,7 +171,11 @@ export class TimesheetPeriod {
    */
   public ignoreEvent(eventId: string) {
     this._uiIgnoredEvents = [...this._uiIgnoredEvents, eventId]
-    this._localStorage.put(this._uiIgnoredEventsStorageKey, this._uiIgnoredEvents, this._storageDefaultExpire)
+    this._localStorage.put(
+      this._uiIgnoredEventsStorageKey,
+      this._uiIgnoredEvents,
+      this._storageDefaultExpire
+    )
   }
 
   /**
@@ -166,7 +183,11 @@ export class TimesheetPeriod {
    */
   public clearIgnoredEvents() {
     this._uiIgnoredEvents = []
-    this._localStorage.put(this._uiIgnoredEventsStorageKey, this._uiIgnoredEvents, this._storageDefaultExpire)
+    this._localStorage.put(
+      this._uiIgnoredEventsStorageKey,
+      this._uiIgnoredEvents,
+      this._storageDefaultExpire
+    )
   }
 
   /**

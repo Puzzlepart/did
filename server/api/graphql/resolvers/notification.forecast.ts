@@ -19,14 +19,25 @@ import { AzStorageService } from '../../services'
  * @param {string} template Template
  * @param {string} locale Locale
  */
-export default async function (ctx: Context, azstorage: AzStorageService, template: string, locale: string) {
+export default async function (
+  ctx: Context,
+  azstorage: AzStorageService,
+  template: string,
+  locale: string
+) {
   if (!get(ctx, 'subscription.settings.forecast.enabled', { default: false })) return []
   const currentWeek = utils.getWeek()
   const periods = []
   const unforecastedPeriods = []
 
-  for (let i = 1; i <= get(ctx, 'subscription.settings.forecast.notifications', { default: 2 }); i++) {
-    periods.push(...getPeriods(utils.startOfWeek(currentWeek + i), utils.endOfWeek(currentWeek + i), locale))
+  for (
+    let i = 1;
+    i <= get(ctx, 'subscription.settings.forecast.notifications', { default: 2 });
+    i++
+  ) {
+    periods.push(
+      ...getPeriods(utils.startOfWeek(currentWeek + i), utils.endOfWeek(currentWeek + i), locale)
+    )
   }
 
   const forecastedPeriods = await azstorage.getForecastedPeriods({
@@ -35,7 +46,8 @@ export default async function (ctx: Context, azstorage: AzStorageService, templa
   })
 
   periods.forEach((period) => {
-    if (!find(forecastedPeriods, (cp) => cp.periodId === period.id)) unforecastedPeriods.push(period)
+    if (!find(forecastedPeriods, (cp) => cp.periodId === period.id))
+      unforecastedPeriods.push(period)
   })
 
   return unforecastedPeriods.map((period) => ({

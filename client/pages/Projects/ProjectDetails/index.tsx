@@ -16,11 +16,19 @@ export const ProjectDetails: FunctionComponent = () => {
       <Header />
       <Pivot
         defaultSelectedKey={state.detailsTab}
-        onLinkClick={({ props }) => dispatch({ type: 'CHANGE_DETAILS_TAB', detailsTab: props.itemKey })}>
-        <PivotItem headerText={t('projects.informationHeaderText')} itemKey='information' itemIcon='Info'>
+        onLinkClick={({ props }) =>
+          dispatch({ type: 'CHANGE_DETAILS_TAB', detailsTab: props.itemKey })
+        }>
+        <PivotItem
+          headerText={t('projects.informationHeaderText')}
+          itemKey='information'
+          itemIcon='Info'>
           <Information />
         </PivotItem>
-        <PivotItem headerText={t('projects.timeEntriesHeaderText')} itemKey='timeentries' itemIcon='ReminderTime'>
+        <PivotItem
+          headerText={t('projects.timeEntriesHeaderText')}
+          itemKey='timeentries'
+          itemIcon='ReminderTime'>
           <TimeEntries />
         </PivotItem>
       </Pivot>

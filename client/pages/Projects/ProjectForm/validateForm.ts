@@ -8,7 +8,11 @@ import { IProjectFormValidationOptions, ProjectModel } from './types'
  * @param {TFunction} t Translate function
  * @param {IProjectFormValidationOptions} options Validation options
  */
-export const validateForm = (model: ProjectModel, t: TFunction, options: IProjectFormValidationOptions) => {
+export const validateForm = (
+  model: ProjectModel,
+  t: TFunction,
+  options: IProjectFormValidationOptions
+) => {
   const errors: { [key: string]: string } = {}
   if (!model.customerKey) {
     errors.customerKey = t('projects.customerFormValidationText')

@@ -35,7 +35,9 @@ class EventMatching {
       const { bestMatch } = findBestMatch(projectKey, projectKeys)
       if (!bestMatch || bestMatch.rating <= 0) return null
       const { target } = bestMatch
-      const suggestion = first(customerProjects.filter((p) => p.projectKey === target.toUpperCase()))
+      const suggestion = first(
+        customerProjects.filter((p) => p.projectKey === target.toUpperCase())
+      )
       return suggestion
     } catch (error) {
       return null
@@ -129,8 +131,12 @@ class EventMatching {
     } else if (ignore === 'body') {
       return { ...event, isSystemIgnored: true }
     } else {
-      event.project = find(this.projects, (p) => !!find(this._searchString(srchStr, true), (m) => m.id === p.id))
-      if (!!event.project) event.customer = find(this.customers, (c) => c.key === event.project.customerKey)
+      event.project = find(
+        this.projects,
+        (p) => !!find(this._searchString(srchStr, true), (m) => m.id === p.id)
+      )
+      if (!!event.project)
+        event.customer = find(this.customers, (c) => c.key === event.project.customerKey)
     }
     if (!!event.customer && !event.project) {
       event.suggestedProject = this._findProjectSuggestion(event.customer, projectKey)

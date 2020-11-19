@@ -24,7 +24,11 @@ export const UserMenu = () => {
       </a>
 
       {menuTarget && (
-        <Callout hidden={!menuTarget} target={menuTarget} onDismiss={() => setMenuTarget(null)} gapSpace={-8}>
+        <Callout
+          hidden={!menuTarget}
+          target={menuTarget}
+          onDismiss={() => setMenuTarget(null)}
+          gapSpace={-8}>
           <FadeIn className={styles.menu}>
             <div className={`${styles.menuItem} ${styles.userName}`}>
               {user.displayName} | <span className={styles.role}>{user.role?.name}</span>

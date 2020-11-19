@@ -23,10 +23,16 @@ const initState = (edit: Project): IProjectFormState => ({
   validation: { errors: {}, invalid: true }
 })
 
-export const ProjectForm: FunctionComponent<IProjectFormProps> = ({ edit, onSubmitted }: IProjectFormProps) => {
+export const ProjectForm: FunctionComponent<IProjectFormProps> = ({
+  edit,
+  onSubmitted
+}: IProjectFormProps) => {
   const { t } = useTranslation()
   const [message, setMessage] = useMessage()
-  const [{ model, validation, options, editMode, projectId }, dispatch] = useReducer(reducer, initState(edit))
+  const [{ model, validation, options, editMode, projectId }, dispatch] = useReducer(
+    reducer,
+    initState(edit)
+  )
   const [createOrUpdateProject, { loading }] = useMutation($createOrUpdateProject)
 
   /**
@@ -65,7 +71,12 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({ edit, onSubm
 
   return (
     <div className={styles.root}>
-      {message && <UserMessage {...message} containerStyle={{ marginTop: 12, marginBottom: 12, width: 550 }} />}
+      {message && (
+        <UserMessage
+          {...message}
+          containerStyle={{ marginTop: 12, marginBottom: 12, width: 550 }}
+        />
+      )}
       <SearchCustomer
         hidden={editMode}
         label={t('common.customer')}
@@ -105,7 +116,11 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({ edit, onSubm
         hidden={editMode}
         className={styles.idPreviewText}
         iconName='OutlookLogo'
-        text={isBlank(projectId) ? t('projects.idPreviewBlankText') : t('projects.idPreviewText', { projectId })}
+        text={
+          isBlank(projectId)
+            ? t('projects.idPreviewBlankText')
+            : t('projects.idPreviewText', { projectId })
+        }
       />
       <div className={styles.inputField} hidden={editMode}>
         <Toggle

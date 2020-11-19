@@ -13,7 +13,9 @@ export const DurationColumn = ({ row, column }: IDurationColumnProps) => {
 
   if (row.label === t('common.sumLabel')) style.fontWeight = 500
 
-  const colValue = row[column.fieldName] ? Number.parseFloat(row[column.fieldName]).toFixed(2) : null
+  const colValue = row[column.fieldName]
+    ? Number.parseFloat(row[column.fieldName]).toFixed(2)
+    : null
 
   return <div style={style}>{colValue}</div>
 }

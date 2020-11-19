@@ -72,7 +72,9 @@ export default async (app: express.Application): Promise<void> => {
               debug(`Resetting container for request ${requestContext.context.requestId}`)
               // Remember to dispose the scoped container to prevent memory leaks
               Container.reset(requestContext.context.requestId)
-              const instancesIds = ((Container as any).instances as ContainerInstance[]).map((instance) => instance.id)
+              const instancesIds = ((Container as any).instances as ContainerInstance[]).map(
+                (instance) => instance.id
+              )
               debug('Container instances left in memory: ', instancesIds)
             }
           })

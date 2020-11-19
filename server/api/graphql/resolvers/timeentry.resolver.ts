@@ -17,7 +17,7 @@ export class TimeEntryResolver {
    *
    * @param {AzStorageService} _azstorage AzStorageService
    */
-  constructor(private readonly _azstorage: AzStorageService) { }
+  constructor(private readonly _azstorage: AzStorageService) {}
 
   /**
    * Get time entries
