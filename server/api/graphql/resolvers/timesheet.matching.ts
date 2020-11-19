@@ -25,17 +25,17 @@ class EventMatching {
   /**
    * Find project suggestions using findBestMatch from string-similarity
    *
-   * @param {*} customer Customer
-   * @param {*} projectKey Project key
+   * @param {Customer} customer Customer
+   * @param {string} projectKey Project key
    */
-  private _findProjectSuggestion(customer: any, projectKey: any) {
+  private _findProjectSuggestion(customer: Customer, projectKey: string) {
     try {
       const customerProjects = this.projects.filter((p) => p.customerKey === customer.key)
-      const projectKeys = customerProjects.map((p) => p.id.split(' ')[1])
-      const sm = findBestMatch(projectKey, projectKeys)
-      const target = sm.bestMatch && sm.bestMatch.rating > 0 ? sm.bestMatch.target : null
-      if (!target) return null
-      const suggestion = first(customerProjects.filter((p) => p.id.split(' ')[1] === target.toUpperCase()))
+      const projectKeys = customerProjects.map((p) => p.projectKey)
+      const { bestMatch } = findBestMatch(projectKey, projectKeys)
+      if (!bestMatch || bestMatch.rating <= 0) return null
+      const { target } = bestMatch
+      const suggestion = first(customerProjects.filter((p) => p.projectKey === target.toUpperCase()))
       return suggestion
     } catch (error) {
       return null
@@ -65,15 +65,18 @@ class EventMatching {
    * @param {string} inputStr The String object or string literal on which to perform the search.
    * @param {boolean} soft Soft search - don't require [], () or {}
    */
-  private _searchString(inputStr: string, soft = false) {
-    let regex = /[\(\{\[]((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<key>[\wæøåÆØÅ]{2,}?))[\)\]\}]/gim
-    if (soft) regex = /((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<key>[\wæøåÆØÅ]{2,}))/gim
+  private _searchString(inputStr: string, soft: boolean = false) {
+    let regex = /[\(\{\[]((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<projectKey>[\wæøåÆØÅ]{2,}?))[\)\]\}]/gim
+    if (soft) regex = /((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<projectKey>[\wæøåÆØÅ]{2,}))/gim
     const matches = []
     let match: RegExpExecArray
     while ((match = regex.exec(inputStr)) !== null) {
       matches.push({
         ...match.groups,
-        id: `${match.groups.customerKey} ${match.groups.key}`
+        id: [
+          match.groups.customerKey,
+          match.groups.projectKey
+        ].join(' ')
       })
     }
     return matches
@@ -115,7 +118,7 @@ class EventMatching {
     const categoriesStr = event.categories.join('|').toUpperCase()
     const srchStr = [event.title, event.body, categoriesStr].join('|').toUpperCase()
     const matches = this._findProjectMatches(srchStr, categoriesStr)
-    let projectKey
+    let projectKey: string
     if (!isEmpty(matches)) {
       for (let i = 0; i < matches.length; i++) {
         const { id, key, customerKey } = matches[i]
