@@ -2,10 +2,8 @@ import { getValue } from 'helpers'
 import {
   CheckboxVisibility,
   ConstrainMode,
-  DetailsListLayoutMode, 
-  GroupHeader,
+  DetailsListLayoutMode,
   IColumn,
-  IDetailsGroupDividerProps,
   Selection,
   SelectionMode, ShimmeredDetailsList
 } from 'office-ui-fabric'
@@ -16,6 +14,7 @@ import { withDefaultProps } from 'with-default-props'
 import { ScrollablePaneWrapper } from '../ScrollablePaneWrapper'
 import { generateListGroups } from './generateListGroups'
 import styles from './List.module.scss'
+import { onRenderGroupHeader } from './onRenderGroupHeader'
 import { onRenderListHeader } from './onRenderListHeader'
 import reducer from './reducer'
 import { IListProps } from './types'
@@ -45,18 +44,6 @@ const List = (props: IListProps) => {
       }
     })
 
-  const onRenderGroupHeader = (headerProps: IDetailsGroupDividerProps) => {
-    return (
-      <GroupHeader
-        {...headerProps}
-        styles={{
-          title: { cursor: 'initial' },
-          expand: { cursor: 'pointer' },
-          headerCount: { display: 'none' }
-        }}></GroupHeader>
-    )
-  }
-
   let groups = null
   let items = [...state.items]
   if (props.groups) [groups, items] = generateListGroups(items, props.groups)
@@ -79,10 +66,7 @@ const List = (props: IListProps) => {
             selectionMode={props.selection ? props.selection.mode : SelectionMode.none}
             constrainMode={ConstrainMode.horizontalConstrained}
             layoutMode={DetailsListLayoutMode.justified}
-            groupProps={{
-              ...props.groupProps,
-              onRenderHeader: onRenderGroupHeader
-            }}
+            groupProps={{ ...props.groupProps, onRenderHeader: onRenderGroupHeader }}
             onRenderItemColumn={(item, index, column) => {
               if (!!column.onRender) return column.onRender(item, index, column)
               return getValue(item, column.fieldName)
