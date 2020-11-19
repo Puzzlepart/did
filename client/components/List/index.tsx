@@ -7,7 +7,7 @@ import {
   Selection,
   SelectionMode, ShimmeredDetailsList
 } from 'office-ui-fabric'
-import React, { useEffect, useReducer } from 'react'
+import React, { FunctionComponent, useEffect, useMemo, useReducer } from 'react'
 import FadeIn from 'react-fade-in'
 import { filter, first } from 'underscore'
 import { withDefaultProps } from 'with-default-props'
@@ -19,19 +19,18 @@ import { onRenderListHeader } from './onRenderListHeader'
 import reducer from './reducer'
 import { IListProps } from './types'
 
-const List = (props: IListProps) => {
+const List: FunctionComponent<IListProps> = (props: IListProps) => {
   const [state, dispatch] = useReducer(reducer, {
     origItems: props.items || [],
     items: props.items || [],
     searchTerm: null
   })
-  let selection = null
 
   useEffect(() => dispatch({ type: 'PROPS_UPDATED', payload: props }), [props.items])
 
-  selection =
-    props.selection &&
-    new Selection({
+  const selection = useMemo(() => {
+    if (!props.selection) return null
+    return new Selection({
       onSelectionChanged: () => {
         const _selection = selection.getSelection()
         // eslint-disable-next-line default-case
@@ -43,6 +42,7 @@ const List = (props: IListProps) => {
         }
       }
     })
+  }, [props.selection])
 
   let groups = null
   let items = [...state.items]
