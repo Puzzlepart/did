@@ -21,6 +21,7 @@ query($query: TimesheetQuery!, $options: TimesheetOptions!) {
         description
         icon
         customer {
+          id
           key
           name
           icon
