@@ -66,7 +66,9 @@ class MSGraphService {
    */
   private async _getClient(): Promise<MSGraphClient> {
     if (!this._access_token) {
-      this._access_token = (await this._oauthService.getAccessToken(this._accessTokenOptions)).access_token
+      this._access_token = (
+        await this._oauthService.getAccessToken(this._accessTokenOptions)
+      ).access_token
     }
     const client = MSGraphClient.init({
       authProvider: (done: (arg0: any, arg1: any) => void) => {
@@ -110,7 +112,16 @@ class MSGraphService {
         .api('/users')
         // eslint-disable-next-line quotes
         .filter("userType eq 'Member'")
-        .select(['id', 'givenName', 'surname', 'jobTitle', 'displayName', 'mobilePhone', 'mail', 'preferredLanguage'])
+        .select([
+          'id',
+          'givenName',
+          'surname',
+          'jobTitle',
+          'displayName',
+          'mobilePhone',
+          'mail',
+          'preferredLanguage'
+        ])
         .top(999)
         .get()
       this.endMark('getUsers')

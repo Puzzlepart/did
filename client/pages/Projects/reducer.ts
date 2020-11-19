@@ -30,7 +30,7 @@ export type ProjectsAction =
  * @param {History} history History
  * @param {number} delay Delay in ms
  */
-const updateHistory = (state: IProjectsState, history: History, delay = 500) => {
+const updateHistory = (state: IProjectsState, history: History, delay: number = 250) => {
   const paths = [state.view, state.selected?.id, state.detailsTab]
   const path = `/${['projects', ...paths].filter((p) => p).join('/')}`.toLowerCase()
   setTimeout(() => history.push(path), delay)
@@ -42,7 +42,10 @@ const updateHistory = (state: IProjectsState, history: History, delay = 500) => 
  * @param {IProjectsState} state State
  * @param {ProjectsAction} action Action
  */
-export default (history: History) => (state: IProjectsState, action: ProjectsAction): IProjectsState => {
+export default (history: History) => (
+  state: IProjectsState,
+  action: ProjectsAction
+): IProjectsState => {
   const newState: IProjectsState = { ...state }
   switch (action.type) {
     case 'DATA_UPDATED':

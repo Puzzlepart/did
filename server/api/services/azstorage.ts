@@ -8,6 +8,7 @@ import { getDurationHours } from '../../utils/date'
 import AzTableUtilities from '../../utils/table'
 import { Context } from '../graphql/context'
 import { Role } from '../graphql/resolvers/types'
+import { GetProjectsOptions } from './azstorage.types'
 
 export class AzStorageServiceTables {
   constructor(
@@ -34,7 +35,9 @@ class AzStorageService {
    * @param {string} connectionString Connection string
    */
   constructor(@Inject('CONTEXT') private readonly context: Context) {
-    this.tableUtil = new AzTableUtilities(createTableService(this.context?.subscription?.connectionString))
+    this.tableUtil = new AzTableUtilities(
+      createTableService(this.context?.subscription?.connectionString)
+    )
     this.tables = new AzStorageServiceTables()
   }
 
@@ -143,19 +146,12 @@ class AzStorageService {
    * Get projects from table storage
    *
    * @param {string} customerKey Customer key
-   * @param {any} options Options
+   * @param {GetProjectsOptions} options Options
    */
-  async getProjects(customerKey?: string, options: any = {}) {
-    const q = this.tableUtil.query()
-    const filter = [['PartitionKey', customerKey, q.string, q.equal]]
-    const query = this.tableUtil.createAzQuery(1000, filter)
-    let columnMap = {}
-    if (!options.noParse) {
-      columnMap = {
-        RowKey: 'key',
-        PartitionKey: 'customerKey'
-      }
-    }
+  async getProjects(customerKey?: string, options: GetProjectsOptions = {}) {
+    const { string, equal } = this.tableUtil.query()
+    const query = this.tableUtil.createAzQuery(1000, [['PartitionKey', customerKey, string, equal]])
+    const columnMap = options.noParse ? {} : { RowKey: 'projectKey', PartitionKey: 'customerKey' }
     let { entries } = await this.tableUtil.queryAzTable(this.tables.projects, query, { columnMap })
     if (options.sortBy) entries = arraySort(entries, options.sortBy)
     return entries
@@ -164,17 +160,21 @@ class AzStorageService {
   /**
    * Create or update project in table storage
    *
-   * @param {any} project Project data
+   * @param {Record<string, any>} project Project data
    * @param {string} createdBy Created by ID
    * @param {boolean} update Update the existing project
    *
    * @returns The id of the crated project
    */
-  async createOrUpdateProject(project: any, createdBy: string, update: boolean): Promise<string> {
+  async createOrUpdateProject(
+    project: Record<string, any>,
+    createdBy: string,
+    update: boolean
+  ): Promise<string> {
     const entity = this.tableUtil.convertToAzEntity(
-      project.key,
+      project.projectKey,
       {
-        ...omit(project, 'customerKey', 'key'),
+        ...omit(project, 'customerKey', 'projectKey'),
         labels: (project?.labels || []).join('|'),
         createdBy
       },
@@ -183,7 +183,7 @@ class AzStorageService {
     )
     if (update) await this.tableUtil.updateAzEntity(this.tables.projects, entity, true)
     else await this.tableUtil.addAzEntity(this.tables.projects, entity)
-    return [project.customerKey, project.key].join(' ')
+    return [project.customerKey, project.projectKey].join(' ')
   }
 
   /**
@@ -267,11 +267,18 @@ class AzStorageService {
         ['MonthNumber', queryValues.startMonthIndex, q.int, q.greaterThanOrEqual],
         ['MonthNumber', queryValues.endMonthIndex, q.int, q.lessThanOrEqual],
         ['Year', queryValues.year, q.int, q.equal],
-        ['StartDateTime', this.tableUtil.convertToAzDate(queryValues.startDateTime), q.date, q.greaterThan],
+        [
+          'StartDateTime',
+          this.tableUtil.convertToAzDate(queryValues.startDateTime),
+          q.date,
+          q.greaterThan
+        ],
         ['EndDateTime', this.tableUtil.convertToAzDate(queryValues.endDateTime), q.date, q.lessThan]
       ]
       const query = this.tableUtil.createAzQuery(1000, filter)
-      const tableName = options.forecast ? this.tables.forecastedTimeEntries : this.tables.timeEntries
+      const tableName = options.forecast
+        ? this.tables.forecastedTimeEntries
+        : this.tables.timeEntries
       let result = await this.tableUtil.queryAzTableAll(tableName, query, {
         PartitionKey: 'resourceId',
         RowKey: 'id'
@@ -295,7 +302,12 @@ class AzStorageService {
    * @param {any[]} timeentries Collection of time entries
    * @param {boolean} forecast Forecast
    */
-  async addTimeEntries(resourceId: string, periodId: string, timeentries: any[], forecast: boolean) {
+  async addTimeEntries(
+    resourceId: string,
+    periodId: string,
+    timeentries: any[],
+    forecast: boolean
+  ) {
     let totalDuration = 0
     const entities = timeentries.map(({ projectId, manualMatch, event, labels }) => {
       const [weekNumber, monthNumber, year] = periodId.split('_').map((p) => parseInt(p, 10))
@@ -409,7 +421,12 @@ class AzStorageService {
    */
   async getConfirmedPeriod(resourceId: string, periodId: string) {
     try {
-      return await this.tableUtil.retrieveAzEntity(this.tables.confirmedPeriods, periodId, {}, resourceId)
+      return await this.tableUtil.retrieveAzEntity(
+        this.tables.confirmedPeriods,
+        periodId,
+        {},
+        resourceId
+      )
     } catch (error) {
       return null
     }
@@ -423,7 +440,12 @@ class AzStorageService {
    */
   async getForecastedPeriod(resourceId: string, periodId: string) {
     try {
-      return await this.tableUtil.retrieveAzEntity(this.tables.forecastedPeriods, periodId, {}, resourceId)
+      return await this.tableUtil.retrieveAzEntity(
+        this.tables.forecastedPeriods,
+        periodId,
+        {},
+        resourceId
+      )
     } catch (error) {
       return null
     }
@@ -437,7 +459,12 @@ class AzStorageService {
    * @param {number} hours Hours
    * @param {number} forecastedHours Forecasted hours
    */
-  async addConfirmedPeriod(resourceId: string, periodId: string, hours: number, forecastedHours: number) {
+  async addConfirmedPeriod(
+    resourceId: string,
+    periodId: string,
+    hours: number,
+    forecastedHours: number
+  ) {
     const [weekNumber, monthNumber, year] = periodId.split('_').map((p) => parseInt(p, 10))
     const entity = this.tableUtil.convertToAzEntity(
       periodId,

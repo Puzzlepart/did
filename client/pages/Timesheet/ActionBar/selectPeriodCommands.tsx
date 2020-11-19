@@ -3,7 +3,12 @@ import * as React from 'react'
 import { ITimesheetContext } from '../context'
 import styles from './ActionBar.module.scss'
 
-export default ({ periods, selectedPeriod, dispatch, t }: ITimesheetContext): IContextualMenuItem[] => {
+export default ({
+  periods,
+  selectedPeriod,
+  dispatch,
+  t
+}: ITimesheetContext): IContextualMenuItem[] => {
   if (periods.length === 1) return []
   return periods.map((period, idx) => ({
     key: `SELECT_PERIOD_COMMANDS_${idx}`,

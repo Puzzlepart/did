@@ -50,7 +50,11 @@ export const ExportHours: React.FunctionComponent = () => {
         <Icon iconName='CloudImportExport' className={styles.icon} />
         <span>{t('common.exportMyHours')}</span>
       </a>
-      <Panel headerText={t('common.exportMyHours')} isOpen={panelOpen} onDismiss={togglePanel} isLightDismiss={true}>
+      <Panel
+        headerText={t('common.exportMyHours')}
+        isOpen={panelOpen}
+        onDismiss={togglePanel}
+        isLightDismiss={true}>
         <ChoiceGroup
           defaultSelectedKey={exportType.key}
           onChange={(_eve, option: IExportType) => setExportType(option)}

@@ -1,4 +1,9 @@
-import { BaseFilter, CustomerFilter, ProjectFilter, ResourceFilter } from 'components/FilterPanel/Filters'
+import {
+  BaseFilter,
+  CustomerFilter,
+  ProjectFilter,
+  ResourceFilter
+} from 'components/FilterPanel/Filters'
 import { TFunction } from 'i18next'
 
 export const filters = (t: TFunction): BaseFilter[] => [

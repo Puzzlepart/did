@@ -39,7 +39,8 @@ export const SUBSCRIPTION_SETTINGS = (t: TFunction): ISettingsSectionProps[] => 
           ['label', t('admin.adUserSyncPropertiesLabel')],
           ['description', t('admin.adUserSyncPropertiesDescription')]
         ]),
-        hiddenIf: (settings: SubscriptionSettings) => !getValue(settings, 'adsync.adUserSyncEnabled', false)
+        hiddenIf: (settings: SubscriptionSettings) =>
+          !getValue(settings, 'adsync.adUserSyncEnabled', false)
       }
     ]
   },
@@ -66,7 +67,8 @@ export const SUBSCRIPTION_SETTINGS = (t: TFunction): ISettingsSectionProps[] => 
           ['max', 8],
           ['step', 1]
         ]),
-        disabledIf: (settings: SubscriptionSettings) => !getValue(settings, 'forecast.enabled', false)
+        disabledIf: (settings: SubscriptionSettings) =>
+          !getValue(settings, 'forecast.enabled', false)
       }
     ]
   }

@@ -15,7 +15,8 @@ export const Labels = () => {
   const [form, setForm] = useState<ILabelFormProps>(null)
 
   const onEdit = (label: LabelObject) => setForm({ label })
-  const onDelete = (label: LabelObject) => deleteLabel({ variables: { name: label.name } }).then(refetch)
+  const onDelete = (label: LabelObject) =>
+    deleteLabel({ variables: { name: label.name } }).then(refetch)
 
   useEffect(() => {
     refetch()
@@ -39,7 +40,11 @@ export const Labels = () => {
         }}
       />
       {form && (
-        <LabelForm {...form} onSave={() => refetch().then(() => setForm(null))} onDismiss={() => setForm(null)} />
+        <LabelForm
+          {...form}
+          onSave={() => refetch().then(() => setForm(null))}
+          onDismiss={() => setForm(null)}
+        />
       )}
     </>
   )

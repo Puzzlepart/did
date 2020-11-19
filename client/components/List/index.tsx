@@ -1,44 +1,37 @@
-import { ScrollablePaneWrapper } from 'components/ScrollablePaneWrapper'
 import { getValue } from 'helpers'
 import {
-  GroupHeader,
-  SearchBox,
-  ShimmeredDetailsList,
   CheckboxVisibility,
   ConstrainMode,
   DetailsListLayoutMode,
   IColumn,
-  IDetailsGroupDividerProps,
-  IDetailsHeaderProps,
   Selection,
-  SelectionMode
+  SelectionMode,
+  ShimmeredDetailsList
 } from 'office-ui-fabric'
-import React, { useEffect, useReducer } from 'react'
+import React, { FunctionComponent, useEffect, useMemo, useReducer } from 'react'
 import FadeIn from 'react-fade-in'
 import { filter, first } from 'underscore'
 import { withDefaultProps } from 'with-default-props'
+import { ScrollablePaneWrapper } from '../ScrollablePaneWrapper'
 import { generateListGroups } from './generateListGroups'
 import styles from './List.module.scss'
-import { ListHeader } from './ListHeader'
+import { onRenderGroupHeader } from './onRenderGroupHeader'
+import { onRenderListHeader } from './onRenderListHeader'
 import reducer from './reducer'
 import { IListProps } from './types'
 
-/**
- * List component using DetailsList from office-ui-fabric-react
- */
-const List = (props: IListProps) => {
+const List: FunctionComponent<IListProps> = (props: IListProps) => {
   const [state, dispatch] = useReducer(reducer, {
     origItems: props.items || [],
     items: props.items || [],
     searchTerm: null
   })
-  let selection = null
 
   useEffect(() => dispatch({ type: 'PROPS_UPDATED', payload: props }), [props.items])
 
-  selection =
-    props.selection &&
-    new Selection({
+  const selection = useMemo(() => {
+    if (!props.selection) return null
+    return new Selection({
       onSelectionChanged: () => {
         const _selection = selection.getSelection()
         // eslint-disable-next-line default-case
@@ -52,49 +45,7 @@ const List = (props: IListProps) => {
         }
       }
     })
-
-  const onRenderListHeader = (
-    headerProps: IDetailsHeaderProps,
-    defaultRender: (props: IDetailsHeaderProps) => JSX.Element
-  ) => {
-    if (!!props.onRenderDetailsHeader) return onRenderListHeader(headerProps, defaultRender)
-    const searchBox = props.searchBox && {
-      key: 'SEARCH_BOX',
-      onRender: () => (
-        <SearchBox
-          {...props.searchBox}
-          value={state.searchTerm}
-          className={styles.searchBox}
-          onChange={(_event, newValue) => {
-            if (props.searchBox.onChange) props.searchBox.onChange(_event, newValue)
-            dispatch({ type: 'SEARCH', payload: newValue })
-          }}
-        />
-      )
-    }
-    return (
-      <ListHeader
-        headerProps={headerProps}
-        defaultRender={defaultRender}
-        commandBar={{
-          ...props.commandBar,
-          items: [searchBox, ...props.commandBar.items].filter((c) => c)
-        }}
-      />
-    )
-  }
-
-  const onRenderGroupHeader = (headerProps: IDetailsGroupDividerProps) => {
-    return (
-      <GroupHeader
-        {...headerProps}
-        styles={{
-          title: { cursor: 'initial' },
-          expand: { cursor: 'pointer' },
-          headerCount: { display: 'none' }
-        }}></GroupHeader>
-    )
-  }
+  }, [props.selection])
 
   let groups = null
   let items = [...state.items]
@@ -118,15 +69,20 @@ const List = (props: IListProps) => {
             selectionMode={props.selection ? props.selection.mode : SelectionMode.none}
             constrainMode={ConstrainMode.horizontalConstrained}
             layoutMode={DetailsListLayoutMode.justified}
-            groupProps={{
-              ...props.groupProps,
-              onRenderHeader: onRenderGroupHeader
-            }}
+            groupProps={{ ...props.groupProps, onRenderHeader: onRenderGroupHeader }}
             onRenderItemColumn={(item, index, column) => {
               if (!!column.onRender) return column.onRender(item, index, column)
               return getValue(item, column.fieldName)
             }}
-            onRenderDetailsHeader={onRenderListHeader}
+            onRenderDetailsHeader={(headerProps, defaultRender) =>
+              onRenderListHeader({
+                headerProps,
+                defaultRender,
+                props,
+                state,
+                dispatch
+              })
+            }
             checkboxVisibility={props.checkboxVisibility || CheckboxVisibility.hidden}
           />
         </ScrollablePaneWrapper>

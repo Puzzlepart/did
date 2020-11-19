@@ -16,11 +16,11 @@ query($query: TimesheetQuery!, $options: TimesheetOptions!) {
       date
       project {
         id
-        key
         name
         description
         icon
         customer {
+          id
           key
           name
           icon
@@ -35,14 +35,6 @@ query($query: TimesheetQuery!, $options: TimesheetOptions!) {
       }
       suggestedProject {
         id
-        key
-        name
-        description
-        customer {
-          key
-          name
-          inactive
-        }
       }
       customer {
         key

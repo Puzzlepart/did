@@ -78,7 +78,7 @@ export interface IListProps<T = any> extends React.HTMLProps<HTMLDivElement> {
   filters?: { [key: string]: any }
 }
 
-export interface IListState {
+export interface IListState<T = any> {
   /**
    * Search term
    */
@@ -87,12 +87,12 @@ export interface IListState {
   /**
    * Original items
    */
-  origItems?: any[]
+  origItems?: T[]
 
   /**
    * Current items
    */
-  items?: any[]
+  items?: T[]
 }
 
 export interface IListSelection {

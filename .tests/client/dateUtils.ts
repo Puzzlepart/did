@@ -150,7 +150,15 @@ describe(header('DateUtils'), () => {
 
     it('should return days between 2020-02-17 -2020-02-17 in format dddd', () => {
       const days = DateUtils.getDays('2020-02-17', '2020-02-23', 'dddd')
-      deepStrictEqual(days, ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'])
+      deepStrictEqual(days, [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday'
+      ])
     })
   })
 

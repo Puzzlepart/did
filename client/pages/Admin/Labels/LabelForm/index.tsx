@@ -40,7 +40,8 @@ export const LabelForm = (props: ILabelFormProps) => {
   /**
    * Checks if form is valid
    */
-  const isFormValid = (): boolean => !validator.isEmpty(model.name) && !validator.isEmpty(model.color)
+  const isFormValid = (): boolean =>
+    !validator.isEmpty(model.name) && !validator.isEmpty(model.color)
 
   return (
     <Panel
@@ -77,19 +78,29 @@ export const LabelForm = (props: ILabelFormProps) => {
       <div className={styles.inputField}>
         <Label>{t('common.colorLabel')}</Label>
         <DefaultButton
-          text={colorPickerVisible ? t('common.closeColorPickerText') : t('common.openColorPickerText')}
+          text={
+            colorPickerVisible ? t('common.closeColorPickerText') : t('common.openColorPickerText')
+          }
           iconProps={{ iconName: colorPickerVisible ? 'ChromeClose' : 'Color' }}
           onClick={() => setColorPickerVisible(!colorPickerVisible)}
         />
         {colorPickerVisible && (
-          <SketchPicker color={model.color} onChange={({ hex }) => setModel({ ...model, color: hex })} />
+          <SketchPicker
+            color={model.color}
+            onChange={({ hex }) => setModel({ ...model, color: hex })}
+          />
         )}
       </div>
       <div className={styles.inputField}>
         <Label>{t('common.previewText')}</Label>
         <EntityLabel label={model} size='medium' />
       </div>
-      <PrimaryButton className={styles.saveBtn} text={t('common.save')} disabled={!isFormValid()} onClick={onSave} />
+      <PrimaryButton
+        className={styles.saveBtn}
+        text={t('common.save')}
+        disabled={!isFormValid()}
+        onClick={onSave}
+      />
     </Panel>
   )
 }

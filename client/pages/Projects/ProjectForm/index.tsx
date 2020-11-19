@@ -23,10 +23,16 @@ const initState = (edit: Project): IProjectFormState => ({
   validation: { errors: {}, invalid: true }
 })
 
-export const ProjectForm: FunctionComponent<IProjectFormProps> = ({ edit, onSubmitted }: IProjectFormProps) => {
+export const ProjectForm: FunctionComponent<IProjectFormProps> = ({
+  edit,
+  onSubmitted
+}: IProjectFormProps) => {
   const { t } = useTranslation()
   const [message, setMessage] = useMessage()
-  const [{ model, validation, options, editMode, projectId }, dispatch] = useReducer(reducer, initState(edit))
+  const [{ model, validation, options, editMode, projectId }, dispatch] = useReducer(
+    reducer,
+    initState(edit)
+  )
   const [createOrUpdateProject, { loading }] = useMutation($createOrUpdateProject)
 
   /**
@@ -34,7 +40,6 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({ edit, onSubm
    */
   const onFormSubmit = async () => {
     const _validation = validateForm(model, t, { nameMinLength: 2 })
-
     if (_validation.invalid) {
       dispatch({ type: 'SET_VALIDATION', payload: { validation: _validation } })
       return
@@ -66,7 +71,12 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({ edit, onSubm
 
   return (
     <div className={styles.root}>
-      {message && <UserMessage {...message} containerStyle={{ marginTop: 12, marginBottom: 12, width: 550 }} />}
+      {message && (
+        <UserMessage
+          {...message}
+          containerStyle={{ marginTop: 12, marginBottom: 12, width: 550 }}
+        />
+      )}
       <SearchCustomer
         hidden={editMode}
         label={t('common.customer')}
@@ -93,20 +103,24 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({ edit, onSubm
         label={t('projects.keyFieldLabel')}
         description={t('projects.keyFieldDescription', { keyMaxLength: 8 })}
         required={true}
-        errorMessage={validation.errors.key}
+        errorMessage={validation.errors.projectKey}
         onChange={(_event, value) =>
           dispatch({
             type: 'UPDATE_MODEL',
-            payload: ['key', value.toUpperCase()]
+            payload: ['projectKey', value.toUpperCase()]
           })
         }
-        value={model.key}
+        value={model.projectKey}
       />
       <UserMessage
         hidden={editMode}
         className={styles.idPreviewText}
         iconName='OutlookLogo'
-        text={isBlank(projectId) ? t('projects.idPreviewBlankText') : t('projects.idPreviewText', { projectId })}
+        text={
+          isBlank(projectId)
+            ? t('projects.idPreviewBlankText')
+            : t('projects.idPreviewText', { projectId })
+        }
       />
       <div className={styles.inputField} hidden={editMode}>
         <Toggle

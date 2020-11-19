@@ -15,7 +15,9 @@ import styles from './UserFormModal.module.scss'
 export const UserForm: FunctionComponent<IUserFormProps> = (props: IUserFormProps) => {
   const { t } = useTranslation()
   const { adUsers, roles } = useContext(UsersContext)
-  const [model, setModel] = useState<User>(props.user || { role: find(roles, (r) => r.name === 'User') })
+  const [model, setModel] = useState<User>(
+    props.user || { role: find(roles, (r) => r.name === 'User') }
+  )
   const [addOrUpdateUser] = useMutation($addOrUpdateUser)
 
   /**
@@ -68,7 +70,12 @@ export const UserForm: FunctionComponent<IUserFormProps> = (props: IUserFormProp
         model={model}
         onChanged={(role) => setModel({ ...model, role })}
       />
-      <PrimaryButton className={styles.saveBtn} text={t('common.save')} disabled={!isFormValid()} onClick={onSave} />
+      <PrimaryButton
+        className={styles.saveBtn}
+        text={t('common.save')}
+        disabled={!isFormValid()}
+        onClick={onSave}
+      />
     </Panel>
   )
 }

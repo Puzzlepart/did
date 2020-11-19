@@ -13,9 +13,14 @@ export const IgnoreEventButton = ({ event }: IIgnoreEventButtonProps): JSX.Eleme
   const { t } = useTranslation()
   const { dispatch } = useContext(TimesheetContext)
   return (
-    <span className={styles.root} onClick={() => dispatch({ type: 'IGNORE_EVENT', payload: event.id })}>
+    <span
+      className={styles.root}
+      onClick={() => dispatch({ type: 'IGNORE_EVENT', payload: event.id })}>
       <BrowserView renderWithFragment={true}>
-        <MessageBarButton text={t('timesheet.ignoreEventButtonLabel')} iconProps={{ iconName: 'Blocked2' }} />
+        <MessageBarButton
+          text={t('timesheet.ignoreEventButtonLabel')}
+          iconProps={{ iconName: 'Blocked2' }}
+        />
       </BrowserView>
       <MobileView renderWithFragment={true}>
         <Icon className={styles.icon} iconName='Blocked2' />

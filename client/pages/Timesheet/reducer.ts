@@ -47,9 +47,13 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
             }
           : null
         if (data) {
-          const selectedPeriodId = state.selectedPeriod?.id || [params.week, params.month, params.year].join('_')
-          newState.periods = data.timesheet.map((period) => new TimesheetPeriod().initialize(period))
-          newState.selectedPeriod = find(newState.periods, (p) => p.id === selectedPeriodId) || first(newState.periods)
+          const selectedPeriodId =
+            state.selectedPeriod?.id || [params.week, params.month, params.year].join('_')
+          newState.periods = data.timesheet.map((period) =>
+            new TimesheetPeriod().initialize(period)
+          )
+          newState.selectedPeriod =
+            find(newState.periods, (p) => p.id === selectedPeriodId) || first(newState.periods)
         }
         newState.error = error
       }
@@ -57,7 +61,9 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
 
     case 'SUBMITTING_PERIOD':
       newState.loading = {
-        label: action.payload.forecast ? t('timesheet.forecastingPeriodLabel') : t('timesheet.confirmingPeriodLabel'),
+        label: action.payload.forecast
+          ? t('timesheet.forecastingPeriodLabel')
+          : t('timesheet.confirmingPeriodLabel'),
         description: action.payload.forecast
           ? t('timesheet.forecastingPeriodDescription')
           : t('timesheet.confirmingPeriodDescription')
@@ -80,7 +86,10 @@ export default (state: ITimesheetState, action: TimesheetAction): ITimesheetStat
 
     case 'CHANGE_PERIOD':
       {
-        newState.selectedPeriod = find(newState.periods, (p: TimesheetPeriod) => p.id === action.payload)
+        newState.selectedPeriod = find(
+          newState.periods,
+          (p: TimesheetPeriod) => p.id === action.payload
+        )
       }
       break
 

@@ -15,8 +15,8 @@ export interface IProjectFormProps {
 }
 
 export class ProjectModel {
-  public key = ''
   public name = ''
+  public projectKey = ''
   public customerKey = ''
   public description = ''
   public inactive = false
@@ -25,18 +25,14 @@ export class ProjectModel {
 
   constructor(project?: Project) {
     if (!!project) {
-      this.key = project.key
       this.name = project.name
+      this.projectKey = project.projectKey
       this.customerKey = project.customerKey
       this.description = project.description
       this.inactive = project.inactive
       this.icon = project.icon
       this.labels = project.labels.map((label) => label.name)
     }
-  }
-
-  public clone(): ProjectModel {
-    return Object.assign(Object.create(Object.getPrototypeOf(this)), this)
   }
 }
 

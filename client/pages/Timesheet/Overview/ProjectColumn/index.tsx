@@ -43,7 +43,12 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
       const [text, type] = getErrorMessage(event.error.code, t)
       return (
         <div className={className}>
-          <UserMessage containerStyle={{ marginTop: 10 }} isMultiline={false} type={type} text={text} />
+          <UserMessage
+            containerStyle={{ marginTop: 10 }}
+            isMultiline={false}
+            type={type}
+            text={text}
+          />
         </div>
       )
     }

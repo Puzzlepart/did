@@ -42,7 +42,11 @@ export const Roles = () => {
         }}
       />
       {panel && (
-        <RolePanel {...panel} onSave={() => refetch().then(() => setPanel(null))} onDismiss={() => setPanel(null)} />
+        <RolePanel
+          {...panel}
+          onSave={() => refetch().then(() => setPanel(null))}
+          onDismiss={() => setPanel(null)}
+        />
       )}
     </div>
   )
