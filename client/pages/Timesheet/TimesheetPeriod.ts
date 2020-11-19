@@ -79,7 +79,7 @@ export class TimesheetPeriod {
    * Get events
    */
   public getEvents(): EventObject[] {
-    return JSON.parse(JSON.stringify(this.events))
+    return [...this.events]
       .filter((event) => !event.isSystemIgnored && this._uiIgnoredEvents.indexOf(event.id) === -1)
       .map((event) => this._checkManualMatch(event))
   }
