@@ -50,12 +50,21 @@ export class TimesheetPeriod {
   }
 
   /**
-   * Check manual match
+   * Check manual match in localStorage
+   * 
+   * If it find a match project/customer and manualMatch is set for the 
+   * event
+   * 
+   * If the event has manualMatch set, but it cannot be found in localStorage
+   * project/customer is set to null for the event
    *
-   * @param {EventObject} event Event
+   * @param {EventObject} event Event object
+   * 
+   * @returns an extended event object
    */
-  private _checkManualMatch(event: EventObject) {
+  private _checkUiManualMatch(event: EventObject) {
     const manualMatch = this._uiMatchedEvents[event.id]
+
     if (!!manualMatch) {
       return {
         ...event,
@@ -81,7 +90,7 @@ export class TimesheetPeriod {
   public getEvents(): EventObject[] {
     return [...this.events]
       .filter((event) => !event.isSystemIgnored && this._uiIgnoredEvents.indexOf(event.id) === -1)
-      .map((event) => this._checkManualMatch(event))
+      .map((event) => this._checkUiManualMatch(event))
   }
 
   /**
