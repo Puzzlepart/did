@@ -1,26 +1,14 @@
-import { first, find, filter, contains, isEmpty } from 'underscore'
-import { findBestMatch } from 'string-similarity'
-import get from 'get-value'
-import { Customer, EventObject, LabelObject, Project } from './types'
 import MSGraphEvent from 'server/api/services/msgraph.event'
+import { findBestMatch } from 'string-similarity'
+import { contains, filter, find, first, isEmpty } from 'underscore'
+import { Customer, EventObject, LabelObject, Project } from './types'
 
-class EventMatching {
-  public projects: Project[]
-  public customers: Customer[]
-  public labels: LabelObject[]
-
-  /**
-   * Constructs a new EventMatching class
-   *
-   * @param {Project[]} projects Projects
-   * @param {Customer[]} customers Customers
-   * @param {LabelObject[]} labels Labels
-   */
-  constructor(projects: Project[], customers: Customer[], labels: LabelObject[]) {
-    this.projects = projects
-    this.customers = customers
-    this.labels = labels
-  }
+export default class {
+  constructor(
+    public projects: Project[],
+    public customers: Customer[],
+    public labels: LabelObject[]
+  ) {}
 
   /**
    * Find project suggestions using findBestMatch from string-similarity
@@ -65,17 +53,24 @@ class EventMatching {
    * Find project match in title/subject/categories
    *
    * @param {string} inputStr The String object or string literal on which to perform the search.
-   * @param {boolean} soft Soft search - don't require [], () or {}
+   * @param {boolean} strictMode Strict mode - require token
+   *
+   * @returns an array of matches found in the inputStr
    */
-  private _searchString(inputStr: string, soft: boolean = false) {
-    let regex = /[\(\{\[]((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<projectKey>[\wæøåÆØÅ]{2,}?))[\)\]\}]/gim
-    if (soft) regex = /((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<projectKey>[\wæøåÆØÅ]{2,}))/gim
+  private _searchString(
+    inputStr: string,
+    strictMode: boolean = true
+  ): Array<{ id: string; projectKey: string; customerKey: string }> {
+    let regex = /((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<projectKey>[\wæøåÆØÅ]{2,}))/gim
+    if (strictMode)
+      regex = /[\(\{\[]((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<projectKey>[\wæøåÆØÅ]{2,}?))[\)\]\}]/gim
     const matches = []
     let match: RegExpExecArray
     while ((match = regex.exec(inputStr)) !== null) {
+      const { projectKey, customerKey } = match.groups
       matches.push({
         ...match.groups,
-        id: [match.groups.customerKey, match.groups.projectKey].join(' ')
+        id: [customerKey, projectKey].join(' ')
       })
     }
     return matches
@@ -88,7 +83,7 @@ class EventMatching {
    * @param {string} categoriesStr Categories string
    */
   private _findProjectMatches(inputStr: string, categoriesStr: string) {
-    const matches = this._searchString(categoriesStr, true)
+    const matches = this._searchString(categoriesStr, false)
     return matches || this._searchString(inputStr)
   }
 
@@ -118,29 +113,43 @@ class EventMatching {
     const srchStr = [event.title, event.body, categoriesStr].join('|').toUpperCase()
     const matches = this._findProjectMatches(srchStr, categoriesStr)
     let projectKey: string
+
+    // We found token matches in srchStr or categoriesStr
+    // We look through the matches and check if they match against
+    // a project
     if (!isEmpty(matches)) {
       for (let i = 0; i < matches.length; i++) {
-        const { id, key, customerKey } = matches[i]
-        event.customer = find(this.customers, (c) => customerKey === c.key)
-        if (!!event.customer) {
-          event.project = find(this.projects, (p) => p.id === id)
-          projectKey = key
+        const match = matches[i]
+        event.customer = find(this.customers, (c) => match.customerKey === c.key)
+        if (event.customer) {
+          event.project = find(this.projects, (p) => p.id === match.id)
+          projectKey = match.projectKey
         }
-        if (!!event.project) break
+        if (event.project) break
       }
-    } else if (ignore === 'body') {
+    }
+
+    // We check if we found ignore tag in body
+    else if (ignore === 'body') {
       return { ...event, isSystemIgnored: true }
-    } else {
+    }
+
+    // We search the whole srchStr for match in non-strict mode
+    else {
       event.project = find(
         this.projects,
-        (p) => !!find(this._searchString(srchStr, true), (m) => m.id === p.id)
+        (p) => !!find(this._searchString(srchStr, false), (m) => m.id === p.id)
       )
-      if (!!event.project)
+      if (event.project) {
         event.customer = find(this.customers, (c) => c.key === event.project.customerKey)
+      }
     }
-    if (!!event.customer && !event.project) {
+
+    // We look for project suggestions in case of e.g. typo
+    if (event.customer && !event.project) {
       event.suggestedProject = this._findProjectSuggestion(event.customer, projectKey)
     }
+
     event.labels = this._findLabels(event.categories)
     event = this._checkInactive(event)
     return event
@@ -152,8 +161,8 @@ class EventMatching {
    * @param {EventObject} event
    */
   private _checkInactive(event: EventObject) {
-    const inactiveProject = get(event, 'project.inactive')
-    const inactiveCustomer = get(event, 'customer.inactive')
+    const inactiveProject = event?.project?.inactive
+    const inactiveCustomer = event?.customer?.inactive
     if (event.project && (inactiveProject || inactiveCustomer)) {
       if (inactiveProject) event.error = { code: 'PROJECT_INACTIVE' }
       if (inactiveCustomer) event.error = { code: 'CUSTOMER_INACTIVE' }
@@ -172,5 +181,3 @@ class EventMatching {
     return events.map(this._matchEvent.bind(this))
   }
 }
-
-export default EventMatching
