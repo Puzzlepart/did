@@ -158,17 +158,21 @@ class AzStorageService {
   /**
    * Create or update project in table storage
    *
-   * @param {any} project Project data
+   * @param {Record<string, any>} project Project data
    * @param {string} createdBy Created by ID
    * @param {boolean} update Update the existing project
    *
    * @returns The id of the crated project
    */
-  async createOrUpdateProject(project: any, createdBy: string, update: boolean): Promise<string> {
+  async createOrUpdateProject(project: Record<string, any>, createdBy: string, update: boolean): Promise<string> {
     const entity = this.tableUtil.convertToAzEntity(
-      project.key,
+      project.projectKey,
       {
-        ...omit(project, 'customerKey', 'key'),
+        ...omit(
+          project,
+          'customerKey',
+          'projectKey'
+        ),
         labels: (project?.labels || []).join('|'),
         createdBy
       },
@@ -177,7 +181,7 @@ class AzStorageService {
     )
     if (update) await this.tableUtil.updateAzEntity(this.tables.projects, entity, true)
     else await this.tableUtil.addAzEntity(this.tables.projects, entity)
-    return [project.customerKey, project.key].join(' ')
+    return [project.customerKey, project.projectKey].join(' ')
   }
 
   /**

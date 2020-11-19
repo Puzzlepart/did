@@ -1,5 +1,4 @@
 import { SearchProject, UserMessage } from 'components'
-import { getValue } from 'helpers'
 import { MessageBarButton, Panel } from 'office-ui-fabric'
 import { ITimesheetContext, TimesheetContext } from 'pages/Timesheet/context'
 import React, { useContext, useState } from 'react'
@@ -41,7 +40,7 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
           <p>
             <span>{t('timesheet.didYouMeanText')}</span>
             <a href='#' onClick={() => onManualMatch(event.suggestedProject)}>
-              {getValue(event, 'suggestedProject.id', '')}
+              {event.suggestedProject?.id}
             </a>
             ?
           </p>
@@ -50,7 +49,7 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
           hidden={!event.customer || !!event.suggestedProject}
           containerStyle={{ marginTop: 10 }}
           text={t('timesheet.eventNotFullyMatchedText', {
-            name: getValue(event, 'customer.name', '')
+            name: event.customer?.name
           })}
         />
         <SearchProject
