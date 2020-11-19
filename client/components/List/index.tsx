@@ -5,7 +5,8 @@ import {
   DetailsListLayoutMode,
   IColumn,
   Selection,
-  SelectionMode, ShimmeredDetailsList
+  SelectionMode,
+  ShimmeredDetailsList
 } from 'office-ui-fabric'
 import React, { FunctionComponent, useEffect, useMemo, useReducer } from 'react'
 import FadeIn from 'react-fade-in'
@@ -35,9 +36,11 @@ const List: FunctionComponent<IListProps> = (props: IListProps) => {
         const _selection = selection.getSelection()
         // eslint-disable-next-line default-case
         switch (props.selection?.mode) {
-          case SelectionMode.single: props.selection.onChanged(first(_selection))
+          case SelectionMode.single:
+            props.selection.onChanged(first(_selection))
             break
-          case SelectionMode.multiple: props.selection.onChanged(_selection)
+          case SelectionMode.multiple:
+            props.selection.onChanged(_selection)
             break
         }
       }
@@ -71,13 +74,15 @@ const List: FunctionComponent<IListProps> = (props: IListProps) => {
               if (!!column.onRender) return column.onRender(item, index, column)
               return getValue(item, column.fieldName)
             }}
-            onRenderDetailsHeader={(headerProps, defaultRender) => onRenderListHeader({
-              headerProps,
-              defaultRender,
-              props,
-              state,
-              dispatch
-            })}
+            onRenderDetailsHeader={(headerProps, defaultRender) =>
+              onRenderListHeader({
+                headerProps,
+                defaultRender,
+                props,
+                state,
+                dispatch
+              })
+            }
             checkboxVisibility={props.checkboxVisibility || CheckboxVisibility.hidden}
           />
         </ScrollablePaneWrapper>

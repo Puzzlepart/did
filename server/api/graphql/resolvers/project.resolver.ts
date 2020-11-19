@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { first, pick } from 'underscore'
+import { pick } from 'underscore'
 import { AzStorageService, MSGraphService } from '../../services'
 import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
@@ -19,7 +19,7 @@ export class ProjectResolver {
    * @param {AzStorageService} _azstorage AzStorageService
    * @param {MSGraphService} _msgraph MSGraphService
    */
-  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) { }
+  constructor(private readonly _azstorage: AzStorageService, private readonly _msgraph: MSGraphService) {}
 
   /**
    * Get projects

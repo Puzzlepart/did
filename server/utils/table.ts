@@ -40,25 +40,30 @@ class AzTableUtilities {
    */
   parseAzEntity<T = any>(entityDescriptor: EntityDescriptor, options: IQueryAzTableOptions = {}): T {
     const id = [entityDescriptor.PartitionKey._, entityDescriptor.RowKey._].join(' ')
-    const parsedEntity = Object.keys(entityDescriptor).reduce((obj: Record<string, any>, key: string) => {
-      const { _, $ } = entityDescriptor[key]
-      let value = _
-      if (_ === undefined || _ === null) return obj
-      if (get(options, `columnMap.${key}`)) {
-        obj[get(options, `columnMap.${key}`)] = _
-        return obj
-      }
-      const type: string = get(options, `typeMap.${key}`, { default: $ })
-      switch (type) {
-        case 'Custom.ArrayPipe': value = ((value as string) || '').split('|').filter((p) => p)
-          break
-        case 'Edm.DateTime': value = value.toISOString()
-          break
-        default:
-          if (startsWith(_, 'json:')) value = JSON.parse(value.split('json:')[1])
-      }
-      return { ...obj, [decapitalize(key)]: value }
-    }, { id, key: id })
+    const parsedEntity = Object.keys(entityDescriptor).reduce(
+      (obj: Record<string, any>, key: string) => {
+        const { _, $ } = entityDescriptor[key]
+        let value = _
+        if (_ === undefined || _ === null) return obj
+        if (get(options, `columnMap.${key}`)) {
+          obj[get(options, `columnMap.${key}`)] = _
+          return obj
+        }
+        const type: string = get(options, `typeMap.${key}`, { default: $ })
+        switch (type) {
+          case 'Custom.ArrayPipe':
+            value = ((value as string) || '').split('|').filter((p) => p)
+            break
+          case 'Edm.DateTime':
+            value = value.toISOString()
+            break
+          default:
+            if (startsWith(_, 'json:')) value = JSON.parse(value.split('json:')[1])
+        }
+        return { ...obj, [decapitalize(key)]: value }
+      },
+      { id, key: id }
+    )
     return omit(parsedEntity, options.skipColumns || ['timestamp', 'partitionKey']) as T
   }
 
@@ -239,11 +244,14 @@ class AzTableUtilities {
           let value: any = values[key]
           const type: string = get(options, `typeMap.${key}`, { default: typeof value })
           switch (type) {
-            case 'json': value = string(`json:${JSON.stringify(value)}`)
+            case 'json':
+              value = string(`json:${JSON.stringify(value)}`)
               break
-            case 'datetime': value = datetime(new Date(value))
+            case 'datetime':
+              value = datetime(new Date(value))
               break
-            case 'boolean': value = boolean(value)
+            case 'boolean':
+              value = boolean(value)
               break
             case 'number':
               {

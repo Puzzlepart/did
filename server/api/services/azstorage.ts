@@ -21,7 +21,7 @@ export class AzStorageServiceTables {
     public roles: string = 'Roles',
     public labels: string = 'Labels',
     public users: string = 'Users'
-  ) { }
+  ) {}
 }
 
 @Service({ global: false })
@@ -168,11 +168,7 @@ class AzStorageService {
     const entity = this.tableUtil.convertToAzEntity(
       project.projectKey,
       {
-        ...omit(
-          project,
-          'customerKey',
-          'projectKey'
-        ),
+        ...omit(project, 'customerKey', 'projectKey'),
         labels: (project?.labels || []).join('|'),
         createdBy
       },

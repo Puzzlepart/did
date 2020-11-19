@@ -34,10 +34,6 @@ export class ProjectModel {
       this.labels = project.labels.map((label) => label.name)
     }
   }
-
-  public clone(): ProjectModel {
-    return Object.assign(Object.create(Object.getPrototypeOf(this)), this)
-  }
 }
 
 export interface IProjectFormState {

@@ -97,10 +97,10 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({ edit, onSubm
         onChange={(_event, value) =>
           dispatch({
             type: 'UPDATE_MODEL',
-            payload: ['key', value.toUpperCase()]
+            payload: ['projectKey', value.toUpperCase()]
           })
         }
-        value={model.key}
+        value={model.projectKey}
       />
       <UserMessage
         hidden={editMode}

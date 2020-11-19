@@ -5,7 +5,7 @@ import { IProjectFormState, ProjectModel } from './types'
 export type ProjectFormAction =
   | {
       type: 'UPDATE_MODEL'
-      payload: [string, any]
+      payload: [keyof ProjectModel, any]
     }
   | {
       type: 'UPDATE_OPTIONS'
@@ -25,9 +25,9 @@ export type ProjectFormAction =
  * @param {IProjectFormState} state State
  */
 const setProjectId = (state: IProjectFormState) => {
-  const { customerKey, key } = state.model
-  if (!isEmpty(customerKey) && !isEmpty(key)) {
-    state.projectId = [customerKey, key].join(' ').toUpperCase()
+  const { customerKey, projectKey } = state.model
+  if (!isEmpty(customerKey) && !isEmpty(projectKey)) {
+    state.projectId = [customerKey, projectKey].join(' ').toUpperCase()
   } else {
     state.projectId = ''
   }
@@ -45,7 +45,7 @@ export default (state: IProjectFormState, action: ProjectFormAction): IProjectFo
     case 'UPDATE_MODEL':
       {
         const [key, value] = action.payload
-        newState.model[key] = value
+        newState.model[key as string] = value
       }
       break
 

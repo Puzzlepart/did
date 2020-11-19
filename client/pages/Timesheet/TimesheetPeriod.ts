@@ -51,15 +51,15 @@ export class TimesheetPeriod {
 
   /**
    * Check manual match in localStorage
-   * 
-   * If it find a match project/customer and manualMatch is set for the 
+   *
+   * If it find a match project/customer and manualMatch is set for the
    * event
-   * 
+   *
    * If the event has manualMatch set, but it cannot be found in localStorage
    * project/customer is set to null for the event
    *
    * @param {EventObject} event Event object
-   * 
+   *
    * @returns an extended event object
    */
   private _checkUiManualMatch(event: EventObject) {

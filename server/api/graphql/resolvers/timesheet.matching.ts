@@ -73,10 +73,7 @@ class EventMatching {
     while ((match = regex.exec(inputStr)) !== null) {
       matches.push({
         ...match.groups,
-        id: [
-          match.groups.customerKey,
-          match.groups.projectKey
-        ].join(' ')
+        id: [match.groups.customerKey, match.groups.projectKey].join(' ')
       })
     }
     return matches

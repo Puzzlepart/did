@@ -1,1 +1,1 @@
-export type GetProjectsOptions = { noParse?: boolean, sortBy?: string }
+export type GetProjectsOptions = { noParse?: boolean; sortBy?: string }
