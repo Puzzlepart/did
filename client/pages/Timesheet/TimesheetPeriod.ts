@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
-import { dateAdd, IPnPClientStore, ITypedHash, PnPClientStorage } from '@pnp/common'
+import { dateAdd, IPnPClientStore, PnPClientStorage } from '@pnp/common'
 import { TFunction } from 'i18next'
 import { EventInput, EventObject, Project, TimesheetPeriodInput, TimesheetPeriodObject } from 'types'
 import { filter, omit } from 'underscore'
@@ -17,7 +17,7 @@ export class TimesheetPeriod {
   private readonly month: string
   private events: EventObject[] = []
   private _uiIgnoredEvents: string[] = []
-  private _uiMatchedEvents: ITypedHash<any> = {}
+  private _uiMatchedEvents: Record<string, Project> = {}
   private _localStorage: IPnPClientStore = new PnPClientStorage().local
   private _uiMatchedEventsStorageKey: string
   private _uiIgnoredEventsStorageKey: string
