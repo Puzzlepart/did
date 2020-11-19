@@ -1,6 +1,7 @@
 query {
   projects(sortBy: "name") {
     id
+    key
     name
     description
     webLink

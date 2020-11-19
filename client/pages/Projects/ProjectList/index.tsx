@@ -45,4 +45,10 @@ const ProjectList: FunctionComponent<IProjectListProps> = (props: IProjectListPr
   )
 }
 
-export default withDefaultProps(ProjectList, { items: [], hideColumns: [] })
+export default withDefaultProps(
+  ProjectList,
+  {
+    items: [],
+    hideColumns: []
+  }
+)
