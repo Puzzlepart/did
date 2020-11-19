@@ -34,7 +34,6 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({ edit, onSubm
    */
   const onFormSubmit = async () => {
     const _validation = validateForm(model, t, { nameMinLength: 2 })
-
     if (_validation.invalid) {
       dispatch({ type: 'SET_VALIDATION', payload: { validation: _validation } })
       return
@@ -93,7 +92,7 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({ edit, onSubm
         label={t('projects.keyFieldLabel')}
         description={t('projects.keyFieldDescription', { keyMaxLength: 8 })}
         required={true}
-        errorMessage={validation.errors.key}
+        errorMessage={validation.errors.projectKey}
         onChange={(_event, value) =>
           dispatch({
             type: 'UPDATE_MODEL',
