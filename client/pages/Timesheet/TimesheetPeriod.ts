@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
-import { dateAdd, IPnPClientStore, ITypedHash, PnPClientStorage } from '@pnp/common'
+import { IPnPClientStore, PnPClientStorage } from '@pnp/common'
 import { TFunction } from 'i18next'
 import { EventInput, EventObject, Project, TimesheetPeriodInput, TimesheetPeriodObject } from 'types'
 import { filter, omit } from 'underscore'
-import DateUtils from 'utils/date'
+import DateUtils, { DateObject } from 'utils/date'
 
 export class TimesheetPeriod {
   public id: string
@@ -17,7 +17,7 @@ export class TimesheetPeriod {
   private readonly month: string
   private events: EventObject[] = []
   private _uiIgnoredEvents: string[] = []
-  private _uiMatchedEvents: ITypedHash<any> = {}
+  private _uiMatchedEvents: Record<string, Project> = {}
   private _localStorage: IPnPClientStore = new PnPClientStorage().local
   private _uiMatchedEventsStorageKey: string
   private _uiIgnoredEventsStorageKey: string
@@ -33,15 +33,15 @@ export class TimesheetPeriod {
     this._uiMatchedEventsStorageKey = `did_ui_matched_events_${this.id}`
     this._uiIgnoredEventsStorageKey = `did_ui_ignored_events_${this.id}`
     this._uiMatchedEvents = this._localStorage.get(this._uiMatchedEventsStorageKey) || {}
-    this._storageDefaultExpire = dateAdd(new Date(), 'month', 2)
+    this._storageDefaultExpire = new DateObject().add('2month').jsDate
     return this
   }
 
   /**
    * Get name of period
    *
-   * @param {boolean} includeMonth Include month
    * @param {TFunction} t Translate function
+   * @param {boolean} includeMonth Include month
    */
   public getName(t: TFunction, includeMonth?: boolean) {
     let name = `${t('common.weekLabel')} ${this.week}`
@@ -50,20 +50,36 @@ export class TimesheetPeriod {
   }
 
   /**
-   * Check manual match
+   * Check manual match in localStorage
+   * 
+   * If it find a match project/customer and manualMatch is set for the 
+   * event
+   * 
+   * If the event has manualMatch set, but it cannot be found in localStorage
+   * project/customer is set to null for the event
    *
-   * @param {EventObject} event Event
+   * @param {EventObject} event Event object
+   * 
+   * @returns an extended event object
    */
-  private _checkManualMatch(event: EventObject) {
+  private _checkUiManualMatch(event: EventObject) {
     const manualMatch = this._uiMatchedEvents[event.id]
-    if (event.manualMatch && !manualMatch) {
-      event.manualMatch = false
-      event.project = event.customer = null
-    }
+
     if (!!manualMatch) {
-      event.manualMatch = true
-      event.project = manualMatch
-      event.customer = manualMatch.customer
+      return {
+        ...event,
+        manualMatch: true,
+        project: manualMatch,
+        customer: manualMatch.customer
+      }
+    }
+    if (event.manualMatch && !manualMatch) {
+      return {
+        ...event,
+        manualMatch: false,
+        project: null,
+        customer: null
+      }
     }
     return event
   }
@@ -74,7 +90,7 @@ export class TimesheetPeriod {
   public getEvents(): EventObject[] {
     return [...this.events]
       .filter((event) => !event.isSystemIgnored && this._uiIgnoredEvents.indexOf(event.id) === -1)
-      .map((event) => this._checkManualMatch(event))
+      .map((event) => this._checkUiManualMatch(event))
   }
 
   /**
