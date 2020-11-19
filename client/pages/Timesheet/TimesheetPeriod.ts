@@ -56,14 +56,21 @@ export class TimesheetPeriod {
    */
   private _checkManualMatch(event: EventObject) {
     const manualMatch = this._uiMatchedEvents[event.id]
-    if (event.manualMatch && !manualMatch) {
-      event.manualMatch = false
-      event.project = event.customer = null
-    }
     if (!!manualMatch) {
-      event.manualMatch = true
-      event.project = manualMatch
-      event.customer = manualMatch.customer
+      return {
+        ...event,
+        manualMatch: true,
+        project: manualMatch,
+        customer: manualMatch.customer
+      }
+    }
+    if (event.manualMatch && !manualMatch) {
+      return {
+        ...event,
+        manualMatch: false,
+        project: null,
+        customer: null
+      }
     }
     return event
   }
@@ -72,7 +79,7 @@ export class TimesheetPeriod {
    * Get events
    */
   public getEvents(): EventObject[] {
-    return [...this.events]
+    return JSON.parse(JSON.stringify(this.events))
       .filter((event) => !event.isSystemIgnored && this._uiIgnoredEvents.indexOf(event.id) === -1)
       .map((event) => this._checkManualMatch(event))
   }
