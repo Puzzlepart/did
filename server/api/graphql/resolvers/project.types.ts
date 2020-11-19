@@ -16,6 +16,9 @@ export class Project {
   key: string
 
   @Field()
+  projectKey: string
+
+  @Field()
   customerKey: string
 
   @Field()
@@ -48,11 +51,8 @@ export class Project {
 
 @InputType({ description: 'Input object for Project used in Mutation createOrUpdateProject' })
 export class ProjectInput {
-  @Field({ nullable: true })
-  id: string
-
   @Field()
-  key: string
+  projectKey: string
 
   @Field()
   customerKey: string
