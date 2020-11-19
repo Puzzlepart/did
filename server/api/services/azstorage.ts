@@ -8,6 +8,7 @@ import { getDurationHours } from '../../utils/date'
 import AzTableUtilities from '../../utils/table'
 import { Context } from '../graphql/context'
 import { Role } from '../graphql/resolvers/types'
+import { GetProjectsOptions } from './azstorage.types'
 
 export class AzStorageServiceTables {
   constructor(
@@ -20,7 +21,7 @@ export class AzStorageServiceTables {
     public roles: string = 'Roles',
     public labels: string = 'Labels',
     public users: string = 'Users'
-  ) {}
+  ) { }
 }
 
 @Service({ global: false })
@@ -143,19 +144,12 @@ class AzStorageService {
    * Get projects from table storage
    *
    * @param {string} customerKey Customer key
-   * @param {any} options Options
+   * @param {GetProjectsOptions} options Options
    */
-  async getProjects(customerKey?: string, options: any = {}) {
-    const q = this.tableUtil.query()
-    const filter = [['PartitionKey', customerKey, q.string, q.equal]]
-    const query = this.tableUtil.createAzQuery(1000, filter)
-    let columnMap = {}
-    if (!options.noParse) {
-      columnMap = {
-        RowKey: 'key',
-        PartitionKey: 'customerKey'
-      }
-    }
+  async getProjects(customerKey?: string, options: GetProjectsOptions = {}) {
+    const { string, equal } = this.tableUtil.query()
+    const query = this.tableUtil.createAzQuery(1000, [['PartitionKey', customerKey, string, equal]])
+    const columnMap = options.noParse ? {} : { RowKey: 'projectKey', PartitionKey: 'customerKey' }
     let { entries } = await this.tableUtil.queryAzTable(this.tables.projects, query, { columnMap })
     if (options.sortBy) entries = arraySort(entries, options.sortBy)
     return entries
