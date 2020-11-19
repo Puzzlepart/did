@@ -17,7 +17,7 @@ export class TimeEntryResolver {
    *
    * @param {AzStorageService} _azstorage AzStorageService
    */
-  constructor(private readonly _azstorage: AzStorageService) {}
+  constructor(private readonly _azstorage: AzStorageService) { }
 
   /**
    * Get time entries
@@ -49,13 +49,14 @@ export class TimeEntryResolver {
       if (!entry.projectId) return arr
       const project = find(projects, (p) => p.id === entry.projectId)
       const customer = find(customers, (c) => c.key === first(entry.projectId.split(' ')))
-      if (!project || !customer) return arr
-      arr.push({
-        ...entry,
-        project,
-        customer,
-        resource
-      })
+      if (project && customer) {
+        arr.push({
+          ...entry,
+          project,
+          customer,
+          resource
+        })
+      }
       return arr
     }, [])
   }

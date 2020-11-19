@@ -7,11 +7,10 @@ import { ISearchProjectProps } from './types'
 
 export const SearchProject = (props: ISearchProjectProps) => {
   const { loading, data } = useQuery<{ projects: Project[] }>($projects, {
-    variables: { sortBy: 'name' },
     fetchPolicy: 'cache-first'
   })
 
-  const searchData: ISuggestionItem<Project>[] = data
+  const items: ISuggestionItem<Project>[] = data
     ? data.projects.map((project) => ({
         key: project.id,
         displayValue: `${project.name} (${project.id})`,
@@ -24,7 +23,7 @@ export const SearchProject = (props: ISearchProjectProps) => {
     <Autocomplete<Project>
       {...props}
       disabled={loading}
-      items={searchData}
+      items={items}
       width={props.width}
       placeholder={props.placeholder}
       onClear={() => props.onSelected(null)}
