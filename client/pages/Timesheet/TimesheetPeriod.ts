@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
-import { dateAdd, IPnPClientStore, PnPClientStorage } from '@pnp/common'
+import { IPnPClientStore, PnPClientStorage } from '@pnp/common'
 import { TFunction } from 'i18next'
 import { EventInput, EventObject, Project, TimesheetPeriodInput, TimesheetPeriodObject } from 'types'
 import { filter, omit } from 'underscore'
-import DateUtils from 'utils/date'
+import DateUtils, { DateObject } from 'utils/date'
 
 export class TimesheetPeriod {
   public id: string
@@ -33,7 +33,7 @@ export class TimesheetPeriod {
     this._uiMatchedEventsStorageKey = `did_ui_matched_events_${this.id}`
     this._uiIgnoredEventsStorageKey = `did_ui_ignored_events_${this.id}`
     this._uiMatchedEvents = this._localStorage.get(this._uiMatchedEventsStorageKey) || {}
-    this._storageDefaultExpire = dateAdd(new Date(), 'month', 2)
+    this._storageDefaultExpire = new DateObject().add('2month').jsDate
     return this
   }
 
