@@ -1,12 +1,13 @@
 import { TFunction } from 'i18next'
 import { IContextualMenuItem } from 'office-ui-fabric'
 import { ITimesheetContext } from '../context'
+import { TimesheetScope } from '../types'
 import styles from './ActionBar.module.scss'
 
 const navigateCommands = [
   {
     title: (t: TFunction) => t('timesheet.goToCurrentWeek'),
-    add: null,
+    date: new Date(),
     iconName: 'RenewalCurrent',
     disabled: (context: ITimesheetContext) => context.scope.isCurrentWeek || context.loading
   },
@@ -32,7 +33,11 @@ export default (context: ITimesheetContext) =>
         iconOnly: true,
         disabled: cmd.disabled(context),
         iconProps: { iconName: cmd.iconName, className: styles.actionBarIcon },
-        onClick: () => context.dispatch({ type: 'SET_SCOPE', scope: context.scope.set(cmd?.add) }),
+        onClick: () =>
+          context.dispatch({
+            type: 'SET_SCOPE',
+            scope: cmd.add ? context.scope.set(cmd?.add) : new TimesheetScope(cmd.date)
+          }),
         title: cmd.title(context.t)
       } as IContextualMenuItem)
   )
