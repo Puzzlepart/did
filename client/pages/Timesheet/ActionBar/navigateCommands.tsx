@@ -1,30 +1,43 @@
-import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
+import { TFunction } from 'i18next'
+import { IContextualMenuItem } from 'office-ui-fabric'
 import { ITimesheetContext } from '../context'
-import { ACTIONBAR_ICON_PROPS } from './ACTIONBAR_ICON_PROPS'
+import { TimesheetScope } from '../types'
+import styles from './ActionBar.module.scss'
 
-const currentWeek = ({ scope, dispatch, t }: ITimesheetContext): IContextualMenuItem => ({
-    key: 'GO_TO_CURRENT_WEEK_COMMAND',
-    iconOnly: true,
-    iconProps: { iconName: 'RenewalCurrent', ...ACTIONBAR_ICON_PROPS },
-    onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: new Date().toISOString() }),
-    disabled: scope.isCurrentWeek,
-    title: t('timesheet.goToCurrentWeek'),
-})
+const navigateCommands = [
+  {
+    title: (t: TFunction) => t('timesheet.goToCurrentWeek'),
+    date: new Date(),
+    iconName: 'RenewalCurrent',
+    disabled: (context: ITimesheetContext) => context.scope.isCurrentWeek || context.loading
+  },
+  {
+    title: (t: TFunction) => t('timesheet.goToPrevWeek'),
+    add: '-1w',
+    iconName: 'Back',
+    disabled: (context: ITimesheetContext) => context.loading
+  },
+  {
+    title: (t: TFunction) => t('timesheet.goToNextWeek'),
+    add: '1w',
+    iconName: 'Forward',
+    disabled: (context: ITimesheetContext) => context.loading
+  }
+]
 
-const prevWeek = ({ dispatch, t }: ITimesheetContext): IContextualMenuItem => ({
-    key: 'GO_TO_PREV_WEEK_COMMAND',
-    iconOnly: true,
-    iconProps: { iconName: 'Back', ...ACTIONBAR_ICON_PROPS },
-    onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: { amount: -1, unit: 'week' } }),
-    title: t('timesheet.goToPrevWeek')
-})
-
-const nextWeek = ({ dispatch, t }: ITimesheetContext): IContextualMenuItem => ({
-    key: 'GO_TO_NEXT_WEEK_COMMAND',
-    iconOnly: true,
-    iconProps: { iconName: 'Forward', ...ACTIONBAR_ICON_PROPS },
-    onClick: () => dispatch({ type: 'MOVE_SCOPE', payload: { amount: 1, unit: 'week' } }),
-    title: t('timesheet.goToNextWeek'),
-})
-
-export default (context: ITimesheetContext) => ([currentWeek, prevWeek, nextWeek]).map(cmd => cmd(context))
+export default (context: ITimesheetContext) =>
+  navigateCommands.map(
+    (cmd, key) =>
+      ({
+        key: `${key}`,
+        iconOnly: true,
+        disabled: cmd.disabled(context),
+        iconProps: { iconName: cmd.iconName, className: styles.actionBarIcon },
+        onClick: () =>
+          context.dispatch({
+            type: 'SET_SCOPE',
+            scope: cmd.add ? context.scope.set(cmd?.add) : new TimesheetScope(cmd.date)
+          }),
+        title: cmd.title(context.t)
+      } as IContextualMenuItem)
+  )

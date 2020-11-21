@@ -1,9 +1,8 @@
 import { ILabelColumnProps } from 'components/LabelColumn/types'
-import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
 import { TFunction } from 'i18next'
-import { IPivotItemProps } from 'office-ui-fabric-react'
-import dateUtils from 'utils/date'
+import { IContextualMenuItem, IPivotItemProps } from 'office-ui-fabric'
 import { TimeEntriesQuery } from 'types'
+import DateUtils from 'utils/date'
 
 /**
  * Get scopes
@@ -23,7 +22,7 @@ export const getScopes = (t: TFunction): ISummaryViewScope[] => [
     fieldName: 'monthNumber',
     headerText: t('common.monthLabel'),
     itemIcon: 'Calendar',
-    getColumnHeader: (idx: number) => dateUtils.getMonthName(idx)
+    getColumnHeader: (idx: number) => DateUtils.getMonthName(idx)
   }
 ]
 

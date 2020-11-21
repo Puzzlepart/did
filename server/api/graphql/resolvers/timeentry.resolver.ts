@@ -3,6 +3,7 @@ import { Arg, Authorized, Ctx, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { find, first } from 'underscore'
 import { AzStorageService } from '../../services'
+import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
 import { TimeEntriesQuery, TimeEntry } from './timeentry.types'
 
@@ -27,7 +28,7 @@ export class TimeEntryResolver {
    * @param {TimeEntriesQuery} query Query
    * @param {Context} ctx GraphQL context
    */
-  @Authorized()
+  @Authorized<IAuthOptions>()
   @Query(() => [TimeEntry], { description: 'Get time entries matching the provided query' })
   async timeentries(
     @Arg('currentUser', { nullable: true }) currentUser: boolean,
@@ -36,7 +37,7 @@ export class TimeEntryResolver {
     @Arg('query') query: TimeEntriesQuery,
     @Ctx() ctx: Context
   ) {
-    if (currentUser) query.resourceId = ctx.user.id
+    if (currentUser) query.resourceId = ctx.userId
     const [users, projects, customers, timeentries] = await Promise.all([
       this._azstorage.getUsers(),
       this._azstorage.getProjects(),
@@ -48,13 +49,14 @@ export class TimeEntryResolver {
       if (!entry.projectId) return arr
       const project = find(projects, (p) => p.id === entry.projectId)
       const customer = find(customers, (c) => c.key === first(entry.projectId.split(' ')))
-      if (!project || !customer) return arr
-      arr.push({
-        ...entry,
-        project,
-        customer,
-        resource
-      })
+      if (project && customer) {
+        arr.push({
+          ...entry,
+          project,
+          customer,
+          resource
+        })
+      }
       return arr
     }, [])
   }

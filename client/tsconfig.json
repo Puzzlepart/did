@@ -14,13 +14,10 @@
     "skipLibCheck": true,
     "inlineSources": false,
     "strictNullChecks": false,
-    "noUnusedLocals": false,
+    "noUnusedLocals": true,
     "resolveJsonModule": true,
+    "pretty": true,
     "typeRoots": ["../node_modules/@types"],
-    "types": ["webpack-env"],
-    "lib": ["es2015", "dom", "es2015.collection"],
     "baseUrl": "./"
-  },
-  "include": ["**/*.ts", "**/*.tsx", "i18n/*.json"],
-  "exclude": ["node_modules", "lib"]
+  }
 }

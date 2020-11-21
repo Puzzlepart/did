@@ -1,9 +1,12 @@
-import { Callout } from 'office-ui-fabric-react/lib/Callout'
-import { FocusZone, FocusZoneDirection } from 'office-ui-fabric-react/lib/FocusZone'
-import { Icon } from 'office-ui-fabric-react/lib/Icon'
-import { Label } from 'office-ui-fabric-react/lib/Label'
-import { List } from 'office-ui-fabric-react/lib/List'
-import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox'
+import {
+  List,
+  SearchBox,
+  Label,
+  Icon,
+  FocusZone,
+  FocusZoneDirection,
+  Callout
+} from 'office-ui-fabric'
 import * as React from 'react'
 import { IAutocompleteProps, IAutocompleteState, ISuggestionItem } from '.'
 import styles from './Autocomplete.module.scss'
@@ -14,29 +17,30 @@ const KeyCodes = {
   left: 37 as const,
   up: 38 as const,
   right: 39 as const,
-  down: 40 as const,
+  down: 40 as const
 }
 
-type ISearchSuggestionsProps = IAutocompleteProps;
-
-export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsProps, IAutocompleteState> {
-  public static defaultProps: Partial<ISearchSuggestionsProps> = {
+export class Autocomplete<T = any> extends React.Component<
+  IAutocompleteProps<T>,
+  IAutocompleteState
+> {
+  public static defaultProps: Partial<IAutocompleteProps> = {
     classNames: {
       suggestionsCallout: styles.callout,
       suggestionContainer: styles.suggestionContainer,
       suggestion: styles.suggestion,
       suggestionValue: styles.suggestionValue,
-      suggestionIcon: styles.suggestionIcon,
+      suggestionIcon: styles.suggestionIcon
     }
-  };
-  private _containerElement = React.createRef<HTMLDivElement>();
+  }
+  private _containerElement = React.createRef<HTMLDivElement>()
 
-  constructor(props: ISearchSuggestionsProps) {
+  constructor(props: IAutocompleteProps) {
     super(props)
     this.state = {
       isSuggestionDisabled: false,
       searchText: props.defaultSelectedItem?.displayValue || '',
-      selectedItem: props.defaultSelectedItem,
+      selectedItem: props.defaultSelectedItem
     }
   }
 
@@ -45,12 +49,14 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
     this.setState({
       selectedItem: item,
       searchText: item.displayValue,
-      isSuggestionDisabled: false,
+      isSuggestionDisabled: false
     })
   }
 
   public render() {
-    const iconName = this.state.searchText ? this.state.selectedItem?.iconName || 'Search' : 'Search'
+    const iconName = this.state.searchText
+      ? this.state.selectedItem?.iconName || 'Search'
+      : 'Search'
     return (
       <div
         ref={this._containerElement}
@@ -68,15 +74,15 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
           autoCorrect='off'
           onClear={this.props.onClear}
           onChange={(_event, searchText) => {
-            searchText.trim() !== ''
-              ? this.showSuggestionCallOut()
-              : this.hideSuggestionCallOut()
+            searchText.trim() !== '' ? this.showSuggestionCallOut() : this.hideSuggestionCallOut()
             this.setState({ searchText })
           }}
         />
         {this.renderSuggestions()}
         <span>
-          <span hidden={!this.props.description} className={styles.description}>{this.props.description}</span>
+          <span hidden={!this.props.description} className={styles.description}>
+            {this.props.description}
+          </span>
           <div hidden={!this.props.errorMessage} role='alert'>
             <p className={styles.errorMessage}>
               <span>{this.props.errorMessage}</span>
@@ -108,7 +114,7 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
         directionalHint={5}
         isBeakVisible={false}>
         {this.renderSuggestionList()}
-      </Callout >
+      </Callout>
     )
   }
 
@@ -119,7 +125,8 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
           id='SearchList'
           tabIndex={0}
           items={this.suggestedTagsFiltered(this.props.items)}
-          onRenderCell={this.onRenderCell} />
+          onRenderCell={this.onRenderCell}
+        />
       </FocusZone>
     )
   }
@@ -127,9 +134,7 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
   private onRenderCell = (item: ISuggestionItem<any>) => {
     if (item.key === -1) {
       return (
-        <div
-          key={item.key}
-          data-is-focusable={true}>
+        <div key={item.key} data-is-focusable={true}>
           {item.displayValue}
         </div>
       )
@@ -163,27 +168,35 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
   }
 
   private suggestedTagsFiltered = (list: ISuggestionItem<T>[]) => {
-    let suggestedTags = list.filter(tag => tag.searchValue.toLowerCase().includes(this.state.searchText.toLowerCase()))
+    let suggestedTags = list.filter((tag) =>
+      tag.searchValue.toLowerCase().includes(this.state.searchText.toLowerCase())
+    )
     suggestedTags = suggestedTags.sort((a, b) => a.searchValue.localeCompare(b.searchValue))
     if (suggestedTags.length === 0) {
-      suggestedTags = [{
-        key: -1,
-        displayValue: this.props.noSuggestionsText,
-        searchValue: '',
-      }]
+      suggestedTags = [
+        {
+          key: -1,
+          displayValue: this.props.noSuggestionsText,
+          searchValue: ''
+        }
+      ]
     }
     return suggestedTags
   }
 
-  protected handleListItemKeyDown = (ev: React.KeyboardEvent<HTMLElement>, item: ISuggestionItem<T>): void => {
+  protected handleListItemKeyDown = (
+    ev: React.KeyboardEvent<HTMLElement>,
+    item: ISuggestionItem<T>
+  ): void => {
     const keyCode = ev.which
     switch (keyCode) {
       case KeyCodes.enter:
         this.onClick(item)
         break
-      default: return
+      default:
+        return
     }
-  };
+  }
 
   protected onKeyDown = (ev: React.KeyboardEvent<HTMLElement>): void => {
     const keyCode = ev.which
@@ -192,7 +205,8 @@ export class Autocomplete<T = any> extends React.Component<ISearchSuggestionsPro
         const el: any = window.document.querySelector('#SearchList')
         el.focus()
         break
-      default: return
+      default:
+        return
     }
-  };
+  }
 }

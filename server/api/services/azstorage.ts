@@ -1,12 +1,14 @@
 /* eslint-disable max-classes-per-file */
-import 'reflect-metadata'
 import arraySort from 'array-sort'
 import { createTableService } from 'azure-storage'
+import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import { omit, pick } from 'underscore'
-import { getDurationHours, toArray } from '../../utils'
+import { getDurationHours } from '../../utils/date'
 import AzTableUtilities from '../../utils/table'
 import { Context } from '../graphql/context'
+import { Role } from '../graphql/resolvers/types'
+import { GetProjectsOptions } from './azstorage.types'
 
 export class AzStorageServiceTables {
   constructor(
@@ -33,7 +35,9 @@ class AzStorageService {
    * @param {string} connectionString Connection string
    */
   constructor(@Inject('CONTEXT') private readonly context: Context) {
-    this.tableUtil = new AzTableUtilities(createTableService(this.context.subscription.connectionString))
+    this.tableUtil = new AzTableUtilities(
+      createTableService(this.context?.subscription?.connectionString)
+    )
     this.tables = new AzStorageServiceTables()
   }
 
@@ -42,7 +46,11 @@ class AzStorageService {
    */
   async getLabels() {
     const query = this.tableUtil.createAzQuery(1000)
-    const { entries } = await this.tableUtil.queryAzTable(this.tables.labels, query, { RowKey: 'name' })
+    const { entries } = await this.tableUtil.queryAzTable(this.tables.labels, query, {
+      columnMap: {
+        RowKey: 'name'
+      }
+    })
     return entries
   }
 
@@ -90,7 +98,9 @@ class AzStorageService {
   async getCustomers(options: { sortBy?: string } = {}) {
     const query = this.tableUtil.createAzQuery(1000)
     let { entries } = await this.tableUtil.queryAzTable(this.tables.customers, query, {
-      RowKey: 'key'
+      columnMap: {
+        RowKey: 'key'
+      }
     })
     if (options.sortBy) entries = arraySort(entries, options.sortBy)
     return entries
@@ -136,20 +146,13 @@ class AzStorageService {
    * Get projects from table storage
    *
    * @param {string} customerKey Customer key
-   * @param {any} options Options
+   * @param {GetProjectsOptions} options Options
    */
-  async getProjects(customerKey?: string, options: any = {}) {
-    const q = this.tableUtil.query()
-    const filter = [['PartitionKey', customerKey, q.string, q.equal]]
-    const query = this.tableUtil.createAzQuery(1000, filter)
-    let columnMap = {}
-    if (!options.noParse) {
-      columnMap = {
-        RowKey: 'key',
-        PartitionKey: 'customerKey'
-      }
-    }
-    let { entries } = await this.tableUtil.queryAzTable(this.tables.projects, query, columnMap)
+  async getProjects(customerKey?: string, options: GetProjectsOptions = {}) {
+    const { string, equal } = this.tableUtil.query()
+    const query = this.tableUtil.createAzQuery(1000, [['PartitionKey', customerKey, string, equal]])
+    const columnMap = options.noParse ? {} : { RowKey: 'projectKey', PartitionKey: 'customerKey' }
+    let { entries } = await this.tableUtil.queryAzTable(this.tables.projects, query, { columnMap })
     if (options.sortBy) entries = arraySort(entries, options.sortBy)
     return entries
   }
@@ -157,20 +160,22 @@ class AzStorageService {
   /**
    * Create or update project in table storage
    *
-   * @param {*} project Project data
+   * @param {Record<string, any>} project Project data
    * @param {string} createdBy Created by ID
    * @param {boolean} update Update the existing project
    *
    * @returns The id of the crated project
    */
-  async createOrUpdateProject(project: any, createdBy: string, update: boolean) {
-    const id = [project.customerKey, project.key].join(' ')
+  async createOrUpdateProject(
+    project: Record<string, any>,
+    createdBy: string,
+    update: boolean
+  ): Promise<string> {
     const entity = this.tableUtil.convertToAzEntity(
-      project.key,
+      project.projectKey,
       {
-        ...project,
-        id,
-        labels: !!project.labels ? project.labels.join('|') : '',
+        ...omit(project, 'customerKey', 'projectKey'),
+        labels: (project?.labels || []).join('|'),
         createdBy
       },
       project.customerKey,
@@ -178,18 +183,21 @@ class AzStorageService {
     )
     if (update) await this.tableUtil.updateAzEntity(this.tables.projects, entity, true)
     else await this.tableUtil.addAzEntity(this.tables.projects, entity)
-    return id
+    return [project.customerKey, project.projectKey].join(' ')
   }
 
   /**
    * Get users from table storage
+   *
+   * @param {string} orderBy Order by
    */
-  async getUsers(): Promise<any[]> {
+  async getUsers(orderBy?: string): Promise<any[]> {
     const query = this.tableUtil.createAzQuery(1000)
-    const { entries } = await this.tableUtil.queryAzTable(this.tables.users, query, {
-      RowKey: 'id'
+    const { entries: users } = await this.tableUtil.queryAzTable(this.tables.users, query, {
+      columnMap: { RowKey: 'id' },
+      orderBy
     })
-    return arraySort(entries, 'displayName')
+    return users
   }
 
   /**
@@ -199,8 +207,9 @@ class AzStorageService {
    */
   async getUser(userId: string): Promise<Express.User> {
     try {
-      const entry = await this.tableUtil.retrieveAzEntity(this.tables.users, 'Default', userId)
-      return this.tableUtil.parseAzEntity<Express.User>(entry, { RowKey: 'id' })
+      return await this.tableUtil.retrieveAzEntity<Express.User>(this.tables.users, userId, {
+        columnMap: { RowKey: 'id' }
+      })
     } catch (error) {
       return null
     }
@@ -209,23 +218,25 @@ class AzStorageService {
   /**
    * Add or update user in table storage
    *
-   * @param {*} user The user data
+   * @param {Record<string, any>} user The user data
    * @param {boolean} update Update the existing user
    */
-  async addOrUpdateUser(user: any, update: boolean) {
-    const entity = this.tableUtil.convertToAzEntity(user.id, omit(user, 'id'))
-    let result
-    if (update) result = await this.tableUtil.updateAzEntity(this.tables.users, entity, true)
-    else result = await this.tableUtil.addAzEntity(this.tables.users, entity)
-    return result
+  async addOrUpdateUser(user: Record<string, any>, update: boolean): Promise<any> {
+    try {
+      const entity = this.tableUtil.convertToAzEntity(user.id, omit(user, 'id'))
+      if (update) await this.tableUtil.updateAzEntity(this.tables.users, entity, true)
+      else await this.tableUtil.addAzEntity(this.tables.users, entity)
+    } catch (error) {
+      throw error
+    }
   }
 
   /**
-   * Bulk add users to table storage
+   * Bulk imports users to table storage
    *
-   * @param {any[]} users Users to add
+   * @param {any[]} users Users to import
    */
-  async bulkAddUsers(users: any[]) {
+  async bulkImport(users: any[]) {
     const entities = users.map((user) => {
       const entity = this.tableUtil.convertToAzEntity(user.id, {
         ...omit(user, 'id'),
@@ -245,31 +256,42 @@ class AzStorageService {
    * @param {any} options Options
    */
   async getTimeEntries(queryValues: any, options: any = {}) {
-    const q = this.tableUtil.query()
-    const filter = [
-      ['PeriodId', queryValues.periodId, q.string, q.equal],
-      ['ProjectId', queryValues.projectId, q.string, q.equal],
-      ['PartitionKey', queryValues.resourceId, q.string, q.equal],
-      ['WeekNumber', queryValues.weekNumber, q.int, q.equal],
-      ['MonthNumber', queryValues.monthNumber, q.int, q.equal],
-      ['MonthNumber', queryValues.startMonthIndex, q.int, q.greaterThanOrEqual],
-      ['MonthNumber', queryValues.endMonthIndex, q.int, q.lessThanOrEqual],
-      ['Year', queryValues.year, q.int, q.equal],
-      ['StartDateTime', this.tableUtil.convertDate(queryValues.startDateTime), q.date, q.greaterThan],
-      ['EndDateTime', this.tableUtil.convertDate(queryValues.endDateTime), q.date, q.lessThan]
-    ]
-    const query = this.tableUtil.createAzQuery(1000, filter)
-    const tableName = options.forecast ? this.tables.forecastedTimeEntries : this.tables.timeEntries
-    let result = await this.tableUtil.queryAzTableAll(tableName, query, {
-      PartitionKey: 'resourceId',
-      RowKey: 'id'
-    })
-    result = result.slice().sort(({ startDateTime: a }, { startDateTime: b }) => {
-      return options.sortAsc
-        ? new Date(a).getTime() - new Date(b).getTime()
-        : new Date(b).getTime() - new Date(a).getTime()
-    })
-    return result
+    try {
+      const q = this.tableUtil.query()
+      const filter = [
+        ['PeriodId', queryValues.periodId, q.string, q.equal],
+        ['ProjectId', queryValues.projectId, q.string, q.equal],
+        ['PartitionKey', queryValues.resourceId, q.string, q.equal],
+        ['WeekNumber', queryValues.weekNumber, q.int, q.equal],
+        ['MonthNumber', queryValues.monthNumber, q.int, q.equal],
+        ['MonthNumber', queryValues.startMonthIndex, q.int, q.greaterThanOrEqual],
+        ['MonthNumber', queryValues.endMonthIndex, q.int, q.lessThanOrEqual],
+        ['Year', queryValues.year, q.int, q.equal],
+        [
+          'StartDateTime',
+          this.tableUtil.convertToAzDate(queryValues.startDateTime),
+          q.date,
+          q.greaterThan
+        ],
+        ['EndDateTime', this.tableUtil.convertToAzDate(queryValues.endDateTime), q.date, q.lessThan]
+      ]
+      const query = this.tableUtil.createAzQuery(1000, filter)
+      const tableName = options.forecast
+        ? this.tables.forecastedTimeEntries
+        : this.tables.timeEntries
+      let result = await this.tableUtil.queryAzTableAll(tableName, query, {
+        PartitionKey: 'resourceId',
+        RowKey: 'id'
+      })
+      result = result.slice().sort(({ startDateTime: a }, { startDateTime: b }) => {
+        return options.sortAsc
+          ? new Date(a).getTime() - new Date(b).getTime()
+          : new Date(b).getTime() - new Date(a).getTime()
+      })
+      return result
+    } catch (error) {
+      throw error
+    }
   }
 
   /**
@@ -280,7 +302,12 @@ class AzStorageService {
    * @param {any[]} timeentries Collection of time entries
    * @param {boolean} forecast Forecast
    */
-  async addTimeEntries(resourceId: string, periodId: string, timeentries: any[], forecast: boolean) {
+  async addTimeEntries(
+    resourceId: string,
+    periodId: string,
+    timeentries: any[],
+    forecast: boolean
+  ) {
     let totalDuration = 0
     const entities = timeentries.map(({ projectId, manualMatch, event, labels }) => {
       const [weekNumber, monthNumber, year] = periodId.split('_').map((p) => parseInt(p, 10))
@@ -394,8 +421,12 @@ class AzStorageService {
    */
   async getConfirmedPeriod(resourceId: string, periodId: string) {
     try {
-      const entry = await this.tableUtil.retrieveAzEntity(this.tables.confirmedPeriods, resourceId, periodId)
-      return this.tableUtil.parseAzEntity(entry)
+      return await this.tableUtil.retrieveAzEntity(
+        this.tables.confirmedPeriods,
+        periodId,
+        {},
+        resourceId
+      )
     } catch (error) {
       return null
     }
@@ -409,8 +440,12 @@ class AzStorageService {
    */
   async getForecastedPeriod(resourceId: string, periodId: string) {
     try {
-      const entry = await this.tableUtil.retrieveAzEntity(this.tables.forecastedPeriods, resourceId, periodId)
-      return this.tableUtil.parseAzEntity(entry)
+      return await this.tableUtil.retrieveAzEntity(
+        this.tables.forecastedPeriods,
+        periodId,
+        {},
+        resourceId
+      )
     } catch (error) {
       return null
     }
@@ -424,7 +459,12 @@ class AzStorageService {
    * @param {number} hours Hours
    * @param {number} forecastedHours Forecasted hours
    */
-  async addConfirmedPeriod(resourceId: string, periodId: string, hours: number, forecastedHours: number) {
+  async addConfirmedPeriod(
+    resourceId: string,
+    periodId: string,
+    hours: number,
+    forecastedHours: number
+  ) {
     const [weekNumber, monthNumber, year] = periodId.split('_').map((p) => parseInt(p, 10))
     const entity = this.tableUtil.convertToAzEntity(
       periodId,
@@ -518,14 +558,31 @@ class AzStorageService {
   async getRoles() {
     try {
       const query = this.tableUtil.createAzQuery(1000)
-      let { entries } = await this.tableUtil.queryAzTable(this.tables.roles, query, {
-        RowKey: 'name'
+      const { entries } = await this.tableUtil.queryAzTable<Role>(this.tables.roles, query, {
+        columnMap: {
+          RowKey: 'name'
+        },
+        typeMap: {
+          Permissions: 'Custom.ArrayPipe'
+        }
       })
-      entries = entries.map((entry) => ({
-        ...entry,
-        permissions: toArray(entry.permissions, '|')
-      }))
       return entries
+    } catch (error) {
+      return []
+    }
+  }
+
+  /**
+   * Get role by name from table storage
+   *
+   * @param {string} name The role name
+   */
+  async getRoleByName(name: string) {
+    try {
+      return await this.tableUtil.retrieveAzEntity<Role>(this.tables.roles, name, {
+        columnMap: { RowKey: 'name' },
+        typeMap: { Permissions: 'Custom.ArrayPipe' }
+      })
     } catch (error) {
       return []
     }
@@ -538,10 +595,17 @@ class AzStorageService {
    * @param {boolean} update Update the existing role
    */
   async addOrUpdateRole(role: any, update: boolean) {
-    const entity = this.tableUtil.convertToAzEntity(role.name, {
-      permissions: role.permissions.join('|'),
-      icon: role.icon
-    })
+    const entity = this.tableUtil.convertToAzEntity(
+      role.name,
+      {
+        permissions: role.permissions.join('|'),
+        icon: role.icon
+      },
+      'Default',
+      {
+        typeMap: {}
+      }
+    )
     let result
     if (update) result = await this.tableUtil.updateAzEntity(this.tables.roles, entity, true)
     else result = await this.tableUtil.addAzEntity(this.tables.roles, entity)

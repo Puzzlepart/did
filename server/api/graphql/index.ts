@@ -4,6 +4,7 @@ import createDebug from 'debug'
 import express from 'express'
 import get from 'get-value'
 import 'reflect-metadata'
+import env from '../../utils/env'
 import { buildSchema, ResolverData } from 'type-graphql'
 import Container, { ContainerInstance } from 'typedi'
 import { authChecker } from './authChecker'
@@ -58,7 +59,7 @@ export default async (app: express.Application): Promise<void> => {
       rootValue: global,
       context: ({ req: request }) => createContext(request),
       engine: {
-        reportSchema: true,
+        reportSchema: !!env('APOLLO_KEY'),
         graphVariant: 'current',
         generateClientInfo: ({ context }) => ({
           clientName: get(context, 'subscription.name', { default: '' })
@@ -71,7 +72,9 @@ export default async (app: express.Application): Promise<void> => {
               debug(`Resetting container for request ${requestContext.context.requestId}`)
               // Remember to dispose the scoped container to prevent memory leaks
               Container.reset(requestContext.context.requestId)
-              const instancesIds = ((Container as any).instances as ContainerInstance[]).map((instance) => instance.id)
+              const instancesIds = ((Container as any).instances as ContainerInstance[]).map(
+                (instance) => instance.id
+              )
               debug('Container instances left in memory: ', instancesIds)
             }
           })

@@ -1,5 +1,1 @@
-lib
-tests
-tasks
-webpack.config.js
 client/**/*.d.ts

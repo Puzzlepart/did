@@ -1,6 +1,6 @@
 import fs from 'fs'
 import passport from 'passport'
-import { onVerifySignin } from './onVerifySignin'
+import onVerifySignin from './onVerifySignin'
 import { OIDCStrategy } from 'passport-azure-ad'
 import env from '../../utils/env'
 
@@ -25,7 +25,8 @@ const strategy = () => {
   const redirectUrl = getRedirectUrl()
   return new OIDCStrategy(
     {
-      identityMetadata: 'https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration',
+      identityMetadata:
+        'https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration',
       clientID: env('OAUTH_APP_ID'),
       responseType: 'code id_token',
       responseMode: 'form_post',

@@ -11,12 +11,12 @@ Folder/File | Description
 `/client/common` | Common elements like icons etc 
 `/client/components` | React components reusable throughout the solution 
 `/client/config` | Conifguration 
-`client/graphql` | Graphql implementation for the client using `@apollo/client` 
-`client/helpers` | Helper functions 
-`client/pages` | Main pages of the solution 
-`client/types` | Types, models and interfaces 
-`client/utils` | Utility functions 
-`client/index.tsx` | Main entry point for the app 
+`/client/graphql` | Graphql implementation for the client using `@apollo/client` 
+`/client/helpers` | Helper functions 
+`/client/pages` | Main pages of the solution 
+`/client/types` | Types, models and interfaces 
+`/client/utils` | Utility functions 
+`/client/index.tsx` | Main entry point for the app 
 `/server/public` | Public assets, static files hosted under "/"
 `/server/public/css` | CSS files
 `/server/public/js` | JS files (hidden from `vscode`, the react bundle ends up here)
@@ -29,8 +29,8 @@ Folder/File | Description
 `/server/services` | Services ([MS Graph](https://developer.microsoft.com/en-us/graph) and [Azure Table Storage](https://azure.microsoft.com/en-us/services/storage/tables/))
 `/server/utils` | Utilities
 `/server/views` | Express HBS views
-`server/app.ts` | Express app
-`server/index.ts` | [Node.js](http://nodejs.org/) server  
+`/server/app.ts` | Express app
+`/server/index.ts` | [Node.js](http://nodejs.org/) server  
 
 ## Development
 
@@ -46,7 +46,7 @@ Folder/File | Description
 
 The following permissions are required by Azure App Registration:
 
-![image-20201104173614079](assets/image-20201104173614079.png)
+![image-20201104173614079](@assets/image-20201104173614079.png)
 
 ### Resource management with i18n
 
@@ -54,7 +54,7 @@ The following permissions are required by Azure App Registration:
 
 ### Mocha tests
 
-`npm run tests` will run our mocha tests for the event matching. It will automatically fetch customers, projects and labels from Azure Table Storage if environment `TESTS_AZURE_STORAGE_CONNECTION_STRING` is set.
+`npm run tests` will run our mocha tests. It will automatically fetch customers, projects and labels from Azure Table Storage if environment `TESTS_AZURE_STORAGE_CONNECTION_STRING` is set.
 
 `TESTS_AZURE_STORAGE_CONNECTION_STRING` should be set to the connection string for [didtestdata](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourcegroups/pzl-did/providers/Microsoft.Storage/storageAccounts/didtestdata/overview).
 
@@ -64,21 +64,24 @@ _We use https://studio.apollographql.com/ for GraphQL documentation._
 
 ## Set up .env ##
 
-You've copied `sample.env` into `.env`. Manually or using `npm run-script create-env`.
+You've copied `.env.sample` into `.env`, anually or using `npm run-script create-env`.
 
-Now you need to set the following properties/parameters:
+Now you need to set the required environment variables from this table:
 
-**OAUTH_APP_ID**
-ID of the AD application registration.
+| Key                                   | Description                                                  | Required |
+| ------------------------------------- | ------------------------------------------------------------ | -------- |
+| OAUTH_APP_ID                          | ID of the AD application registration.                       | **Yes**  |
+| OAUTH_APP_PASSWORD                    | Password/key of the AD application registration.             | **Yes**  |
+| AZURE_STORAGE_CONNECTION_STRING       | Connection string for the Azure Table Storage                | **Yes**  |
+| SESSION_SIGNING_KEY                   | Just a random string to secure the sessions.                 | **Yes**  |
+| BUNDLE_ANALYZER_MODE                  | See https://www.npmjs.com/package/webpack-bundle-analyzer. Default is server. | No       |
+| *OPEN_DELA*Y                          | Delay in seconds for opening Did in browser when running `watch`. | No       |
+| DEBUG                                 | To debug the Node backend. E.g. `app*` to see all logs from app. See https://www.npmjs.com/package/debug. | No       |
+| TESTS_AZURE_STORAGE_CONNECTION_STRING | See **Mocha tests**.                                         | No       |
+| NO_BROWSER                            | Set to `1` if you don't want to automatically open Did in the browser when running `watch` task. | No       |
+| OAUTH_SCOPES                          | Scopes for Microsoft Graph queries. See https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent. | No       |
 
-**OAUTH_APP_PASSWORD**
-Password/key of the AD application registration.
 
-**AZURE_STORAGE_CONNECTION_STRING**
-Connection string for the Azure Table Storage
-
-**SESSION_SIGNING_KEY**
-Just a random string to secure the sessions.
 
 ## Branching / Deploying
 

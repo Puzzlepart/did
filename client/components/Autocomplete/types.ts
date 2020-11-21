@@ -1,4 +1,4 @@
-import { ISearchBoxProps } from 'office-ui-fabric-react/lib/SearchBox'
+import { ISearchBoxProps } from 'office-ui-fabric'
 
 export interface IAutocompleteClassNames {
   suggestionsCallout?: string
@@ -8,12 +8,12 @@ export interface IAutocompleteClassNames {
   suggestionIcon?: string
 }
 
-export interface IAutocompleteProps extends ISearchBoxProps {
-  onSelected: (item: ISuggestionItem) => void
-  items?: ISuggestionItem[]
+export interface IAutocompleteProps<T = any> extends ISearchBoxProps {
+  onSelected: (item: ISuggestionItem<T>) => void
+  items?: ISuggestionItem<T>[]
   searchCallback?: (item: string) => void
   noSuggestionsText?: string
-  defaultSelectedItem?: ISuggestionItem
+  defaultSelectedItem?: ISuggestionItem<T>
   classNames?: IAutocompleteClassNames
   showIcons?: boolean
   label?: string

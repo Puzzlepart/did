@@ -3,9 +3,8 @@ import createDebug from 'debug'
 import get from 'get-value'
 import 'reflect-metadata'
 import { Container, ContainerInstance } from 'typedi'
-import { pick } from 'underscore'
 import { SubscriptionService } from '../services'
-import { Subscription, User } from './resolvers/types'
+import { Subscription } from './resolvers/types'
 const debug = createDebug('api/graphql/context')
 
 export class Context {
@@ -17,9 +16,9 @@ export class Context {
   public requestId?: string
 
   /**
-   * User
+   *
    */
-  public user?: User
+  public userId?: string
 
   /**
    * Subscription
@@ -32,44 +31,34 @@ export class Context {
   public container?: ContainerInstance
 
   /**
-   * Is authorized
+   * Permissions
    */
-  public isAuthorized?: boolean
+  public permissions?: string[]
 }
 
 /**
  * Create context
  *
- * @param {any} request Express request
+ * @param {Express.Request} request Express request
  */
-export const createContext = async (request: any): Promise<Context> => {
+export const createContext = async (request: Express.Request): Promise<Context> => {
   try {
-    let isAuthorized = false
-    let user = null
-    let subscription = get(request, 'user.subscription')
+    let context: Context = {}
+    context.userId = null
+    context.subscription = get(request, 'user.subscription')
+    context.permissions = get(request, 'user.role.permissions', { default: [] })
     if (!!request.token) {
-      subscription = await new SubscriptionService().findSubscriptionWithToken(request.token)
-      if (!subscription) throw new AuthenticationError(null)
-      isAuthorized = true
+      const token = await new SubscriptionService().getToken(request.token)
+      if (!token) throw new AuthenticationError('Token is invalid.')
+      context = { ...context, ...token }
     } else {
-      isAuthorized = !!get(request, 'user')
-      user = isAuthorized && {
-        ...pick(get(request, 'user', { default: {} }), 'id'),
-        subscription: pick(subscription, 'id', 'name', 'settings')
-      }
+      context.userId = !!context.permissions && get(request, 'user.id')
     }
-    const requestId = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString()
-    const container = Container.of(requestId)
-    const context: Context = {
-      container,
-      subscription,
-      requestId,
-      user,
-      isAuthorized
-    }
-    container.set({ id: 'CONTEXT', transient: true, value: context })
-    container.set({ id: 'REQUEST', transient: true, value: request })
-    debug(`Creating context for request ${requestId}`)
+    context.requestId = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString()
+    context.container = Container.of(context.requestId)
+    context.container.set({ id: 'CONTEXT', transient: true, value: context })
+    context.container.set({ id: 'REQUEST', transient: true, value: request })
+    debug(`Creating context for request ${context.requestId}`)
     return context
   } catch (error) {
     throw error

@@ -1,0 +1,10 @@
+query {
+  projects(sortBy: "name") {
+    id
+    name
+    customer {
+      id
+      name
+    }
+  }
+}

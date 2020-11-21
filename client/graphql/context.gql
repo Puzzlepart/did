@@ -1,0 +1,27 @@
+{
+  subscription {
+    id
+    name
+    settings {
+      forecast {
+        enabled
+        notifications
+      }
+      adsync {
+        adUserSyncEnabled
+        adUserSyncProperties
+      }
+    }
+  }
+  user: currentUser {
+    id
+    mail
+    displayName
+    role {
+      name
+      icon
+      permissions
+    }
+    preferredLanguage
+  }
+}

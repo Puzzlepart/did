@@ -3,8 +3,12 @@ import 'reflect-metadata'
 import { Field, Float, ID, InputType, ObjectType } from 'type-graphql'
 import { simpleResolvers } from '../config'
 import { Customer, EventError, LabelObject, Project } from './types'
+import * as DateUtils from '../../../utils/date'
 
-@ObjectType({ description: 'A type that describes a Event', simpleResolvers: simpleResolvers.EventObject })
+@ObjectType({
+  description: 'A type that describes a Event',
+  simpleResolvers: simpleResolvers.EventObject
+})
 export class EventObject {
   @Field(() => ID)
   id: string
@@ -13,52 +17,52 @@ export class EventObject {
   key: string
 
   @Field()
-  day: string
+  day?: string
 
   @Field()
-  title: string
+  title?: string
 
   @Field({ nullable: true })
-  body: string
+  body?: string
 
   @Field({ nullable: true })
-  isOrganizer: boolean
+  isOrganizer?: boolean
 
   @Field()
-  startDateTime: string
+  startDateTime?: string
 
   @Field()
-  endDateTime: string
+  endDateTime?: string
 
-  @Field({ nullable: true })
-  date: string
+  @Field()
+  date?: string
 
   @Field(() => Float)
-  duration: number
+  duration?: number
 
   @Field(() => Project, { nullable: true })
   project: Project
 
   @Field(() => Project, { nullable: true })
-  suggestedProject: Project
+  suggestedProject?: Project
 
   @Field(() => Customer, { nullable: true })
-  customer: Customer
+  customer?: Customer
 
   @Field({ nullable: true })
-  projectKey: string
+  projectKey?: string
 
   @Field({ nullable: true })
-  customerKey: string
+  customerKey?: string
 
   @Field({ nullable: true })
-  webLink: string
+  webLink?: string
 
   @Field(() => [LabelObject], { nullable: true })
-  labels: LabelObject[]
+  labels?: LabelObject[]
 
   @Field(() => EventError, { nullable: true })
-  error: EventError
+  error?: EventError
 
   @Field({ nullable: true })
   manualMatch?: boolean
@@ -86,35 +90,46 @@ export class EventInput {
   simpleResolvers: simpleResolvers.TimesheetPeriodObject
 })
 export class TimesheetPeriodObject {
-  @Field()
-  id: string
+  @Field(() => ID)
+  public id: string
 
   @Field()
-  week: number
+  public week: number
 
   @Field()
-  month: string
+  public month: string
 
   @Field()
-  startDateTime: string
+  public startDate: string
 
   @Field()
-  endDateTime: string
-
-  @Field()
-  isConfirmed: boolean
+  public endDate: string
 
   @Field(() => [EventObject])
-  events: EventObject[]
+  public events?: EventObject[]
 
   @Field({ nullable: true })
-  isForecasted: boolean
+  public isConfirmed: boolean = false
 
   @Field({ nullable: true })
-  isForecast: boolean
+  public isForecasted: boolean = false
 
   @Field({ nullable: true })
-  forecastedHours: number
+  public isForecast: boolean
+
+  @Field({ nullable: true })
+  public forecastedHours?: number
+
+  constructor(startDate: string, endDate: string, locale: string) {
+    this.id = DateUtils.getPeriod(startDate)
+    this.startDate = startDate
+    this.endDate = endDate
+    this.week = DateUtils.getWeek(startDate)
+    this.month = DateUtils.formatDate(startDate, 'MMMM', locale)
+    this.isForecast = DateUtils.isAfterToday(startDate)
+    this.isForecasted = false
+    this.isConfirmed = false
+  }
 }
 
 @InputType({ description: 'Input object for TimesheetPeriod used in Mutation unsubmitPeriod' })
@@ -123,10 +138,10 @@ export class TimesheetPeriodInput {
   id: string
 
   @Field()
-  startDateTime: string
+  startDate: string
 
   @Field()
-  endDateTime: string
+  endDate: string
 
   @Field(() => [EventInput])
   matchedEvents: EventInput[]
@@ -138,8 +153,23 @@ export class TimesheetPeriodInput {
 @InputType()
 export class TimesheetQuery {
   @Field()
-  startDateTime: string
+  startDate: string
 
   @Field()
-  endDateTime: string
+  endDate: string
+}
+
+@InputType()
+export class TimesheetOptions {
+  @Field({ nullable: true })
+  locale?: string
+
+  @Field({ nullable: true })
+  dateFormat?: string
+
+  @Field({ nullable: true })
+  tzOffset?: number
+
+  @Field({ nullable: true })
+  forecast?: boolean
 }

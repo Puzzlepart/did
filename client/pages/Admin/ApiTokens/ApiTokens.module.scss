@@ -1,17 +1,8 @@
 .root {
-  .form {
-    display: flex;
-
-    >div {
-      margin-right: 12px;
-    }
-  }
-
   .message {
     margin: 10px 0 0 0;
   }
-
-  .field {
+  .keyField {
     margin: 10px 0 0 0;
   }
 }

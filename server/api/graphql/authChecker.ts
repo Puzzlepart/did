@@ -1,4 +1,5 @@
-import { AuthChecker } from 'type-graphql'
+import { AuthChecker, ResolverData } from 'type-graphql'
+import { contains } from 'underscore'
 import { Context } from './context'
 
 export interface IAuthOptions {
@@ -6,10 +7,18 @@ export interface IAuthOptions {
    * Requires user context and can cannot be called with an API token
    */
   userContext?: boolean
+
+  /**
+   * Permission required for the resolver
+   */
+  permission?: string
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const authChecker: AuthChecker<Context, IAuthOptions> = ({ context }: { context: Context }, [authOptions]) => {
-  if (!authOptions) return context.isAuthorized
-  if (authOptions.userContext) return !!context.user
+export const authChecker: AuthChecker<Context, IAuthOptions> = (
+  { context }: ResolverData<Context>,
+  [authOptions]
+) => {
+  if (!authOptions) return !!context.permissions
+  if (authOptions.userContext) return !!context.userId
+  if (authOptions.permission) return contains(context.permissions, authOptions.permission)
 }

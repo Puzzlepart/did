@@ -34,10 +34,15 @@ jobs:
         run: |
           npm install --no-progress --loglevel silent --no-shrinkwrap --no-fund
 
+      - name: Lint
+        run: |
+          npm run lint
+
       - name: Package client JS
         run: |
           npm run package:client
         env:
+          DEBUG: webpack*
           NODE_ENV: production
 
       - name: Build server
@@ -48,7 +53,7 @@ jobs:
 
       - name: Tests
         run: |
-          npm run tests
+          npm test
         env:
           NODE_ENV: production
           TESTS_AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.TESTS_AZURE_STORAGE_CONNECTION_STRING }}

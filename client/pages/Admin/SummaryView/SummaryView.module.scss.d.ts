@@ -2,6 +2,7 @@
 // Please do not change this file!
 interface CssExports {
   'container': string;
+  'rangeSlider': string;
   'root': string;
   'viewTypeSelector': string;
 }

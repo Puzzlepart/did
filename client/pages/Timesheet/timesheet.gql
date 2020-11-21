@@ -1,0 +1,61 @@
+query($query: TimesheetQuery!, $options: TimesheetOptions!) {
+  timesheet(query: $query, options: $options) {
+    id
+    week
+    month
+    startDate
+    endDate
+    events {
+      id
+      title
+      isOrganizer
+      webLink
+      duration
+      startDateTime
+      endDateTime
+      date
+      project {
+        id
+        name
+        description
+        icon
+        customer {
+          id
+          key
+          name
+          icon
+          inactive
+        }
+        labels {
+          name
+          description
+          color
+          icon
+        }
+      }
+      suggestedProject {
+        id
+      }
+      customer {
+        key
+        name
+        icon
+        inactive
+      }
+      labels {
+        name
+        description
+        color
+        icon
+      }
+      isSystemIgnored
+      error {
+        code
+      }
+    }
+    isConfirmed
+    isForecasted
+    isForecast
+    forecastedHours
+  }
+}

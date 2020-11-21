@@ -1,0 +1,34 @@
+{
+  adUsers(options: { sortBy: "displayName" }) {
+    id
+    displayName
+    givenName
+    surname
+    jobTitle
+    mobilePhone
+    mail
+    preferredLanguage
+  }
+  users(options: { sortBy: "displayName" }) {
+    id
+    displayName
+    givenName
+    surname
+    jobTitle
+    mail
+    role {
+      name
+      description
+      icon
+      permissions
+      readOnly
+    }
+  }
+  roles {
+    name
+    description
+    icon
+    permissions
+    readOnly
+  }
+}

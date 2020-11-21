@@ -1,10 +1,45 @@
 import createDebug from 'debug'
-const debug = createDebug('middleware/passport/onVerifySignin')
-import SubscriptionService from '../../api/services/subscription'
-import AzStorageService from '../../api/services/azstorage'
-import { NO_OID_FOUND, TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } from './errors'
-import { IProfile } from 'passport-azure-ad/oidc-strategy'
+import get from 'get-value'
 import { VerifyCallback } from 'passport-azure-ad'
+import { IProfile } from 'passport-azure-ad/oidc-strategy'
+import { isEqual, pick } from 'underscore'
+import { AzStorageService, MSGraphService, SubscriptionService } from '../../api/services'
+import { NO_OID_FOUND, TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } from './errors'
+const debug = createDebug('middleware/passport/onVerifySignin')
+
+const AD_USER_SYNC_ENABLED_KEY = 'settings.adsync.adUserSyncEnabled'
+const AD_USER_SYNC_PROPERTIES_KEY = 'settings.adsync.adUserSyncProperties'
+
+/**
+ * Synchronize user profile
+ *
+ * @param {Express.User} user
+ * @param {any} subscription
+ * @param {string} access_token
+ */
+async function synchronizeUserProfile(
+  user: Express.User,
+  subscription: any,
+  access_token: string
+): Promise<void> {
+  const properties = get(subscription, AD_USER_SYNC_PROPERTIES_KEY, { default: [] })
+  if (properties.length > 0) {
+    const data = await new MSGraphService(null, access_token).getCurrentUser(properties)
+    const needSync = !isEqual(pick(user, ...properties), pick(data, ...properties))
+    if (needSync) {
+      debug('Synchronizing user profile properties %s from Azure AD.', properties.join(', '))
+      await new AzStorageService({ subscription }).addOrUpdateUser(
+        pick(data, 'id', ...properties),
+        true
+      )
+      debug('User profile properties synchronized from Azure AD.')
+    } else {
+      debug('User profile properties are up to date!')
+    }
+  } else {
+    debug('User profile synchronization is turned on, but no properties are selected.')
+  }
+}
 
 /**
  * On verify signin
@@ -17,7 +52,7 @@ import { VerifyCallback } from 'passport-azure-ad'
  * @param {any} tokenParams
  * @param {VerifyCallback} done
  */
-export async function onVerifySignin(
+export default async function onVerifySignin(
   _iss: string,
   _sub: string,
   profile: IProfile,
@@ -36,16 +71,23 @@ export async function onVerifySignin(
       debug('No subscription found for %s', profile._json.tid)
       return done(TENANT_NOT_ENROLLED, null)
     }
+    const azstorage = new AzStorageService({ subscription })
     debug('Subscription found for %s', profile._json.tid)
-    const user: Express.User = await new AzStorageService({ subscription }).getUser(profile.oid)
+    const user: Express.User = await azstorage.getUser(profile.oid)
     if (!user) {
       debug('User %s is not registered for %s', profile.oid, subscription.name)
       return done(USER_NOT_ENROLLED, null)
     }
+    debug('User %s found in subscription %s', user.id, subscription.name)
+    if (get(subscription, AD_USER_SYNC_ENABLED_KEY, { default: false })) {
+      await synchronizeUserProfile(user, subscription, tokenParams.access_token)
+    }
+    user.role = await azstorage.getRoleByName(user.role)
     user.subscription = subscription
     user.tokenParams = tokenParams
+    debug('Sign in for %s succesfully verified', user.id)
     return done(null, user)
   } catch (error) {
-    debug(error)
+    return done(error, null)
   }
 }

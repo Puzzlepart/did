@@ -1,0 +1,29 @@
+query {
+  projects(sortBy: "name") {
+    id
+    projectKey
+    customerKey
+    name
+    description
+    webLink
+    icon
+    customer {
+      id
+      key
+      name
+    }
+    labels {
+      name
+      description
+      color
+      icon
+    }
+    inactive
+  }
+  outlookCategories {
+    id
+    key
+    displayName
+    color
+  }
+}

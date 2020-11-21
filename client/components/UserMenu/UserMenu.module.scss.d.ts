@@ -11,6 +11,7 @@ interface CssExports {
   'role': string;
   'root': string;
   'userName': string;
+  'version': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

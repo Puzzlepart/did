@@ -1,29 +1,36 @@
-import * as utils from '../../../utils'
+import * as utils from '../../../utils/date'
 import { find } from 'underscore'
 import format from 'string-format'
 import { getPeriods } from './timesheet.utils'
 import { Context } from '../context'
-import { AzStorageService } from 'server/api/services'
+import { AzStorageService } from '../../services'
 
 /**
  * Get notifications for unconfirmed periods
  *
- * @param ctx
- * @param azstorage
- * @param template
- * @param locale
+ * @param {Context} ctx Context
+ * @param {AzStorageService} azstorage Azure Table Storage service
+ * @param {string} template Template
+ * @param {string} locale Locale
  */
-export default async function (ctx: Context, azstorage: AzStorageService, template: string, locale: string) {
+export default async function (
+  ctx: Context,
+  azstorage: AzStorageService,
+  template: string,
+  locale: string
+) {
   const currentWeek = utils.getWeek()
   const periods = []
   const unconfirmedPeriods = []
 
   for (let i = 5; i > 0; i--) {
-    periods.push(...getPeriods(utils.startOfWeek(currentWeek - i), utils.endOfWeek(currentWeek - i), locale))
+    periods.push(
+      ...getPeriods(utils.startOfWeek(currentWeek - i), utils.endOfWeek(currentWeek - i), locale)
+    )
   }
 
   const confirmedPeriods = (await azstorage.getConfirmedPeriods({
-    resourceId: ctx.user.id,
+    resourceId: ctx.userId,
     year: utils.getYear()
   })) as any[]
 

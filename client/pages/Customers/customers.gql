@@ -1,0 +1,12 @@
+query {
+  customers(sortBy: "name") {
+    id
+    key
+    name
+    description
+    icon
+    webLink
+    externalSystemURL
+    inactive
+  }
+}

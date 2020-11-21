@@ -1,12 +1,9 @@
 {
   "files.exclude": {
-    "pnpm-lock.yaml": true,
     "node_modules": true,
-    "lib": true,
-    "server.js": true,
-    "client/**/*.d.ts": true,
     "client/**/*js": true,
     "client/**/*js.map": true,
+    "client/**/*d.ts": true,
     "server/**/*js": true,
     "server/**/*js.map": true,
     "server/views/index.hbs": true,
@@ -14,9 +11,10 @@
     "server-dist": true
   },
   "javascript.validate.enable": false,
-  "debug.node.autoAttach": "on",
-  "i18n-ally.localesPaths": "./resources",
+  "i18n-ally.localesPaths": "./client/i18n",
   "i18n-ally.keystyle": "nested",
   "i18n-ally.sourceLanguage": "en-GB",
-  "i18n-ally.displayLanguage": "en-GB"
+  "i18n-ally.displayLanguage": "en-GB",
+  "typescript.tsserver.experimental.enableProjectDiagnostics": false,
+  "editor.folding": true
 }

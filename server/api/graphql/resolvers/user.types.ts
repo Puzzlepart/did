@@ -43,7 +43,7 @@ export class User {
   }
 }
 
-@InputType({ description: 'Input object for Role used in Mutation addOrUpdateUser/bulkAddUsers' })
+@InputType({ description: 'Input object for Role used in Mutation addOrUpdateUser/bulkImport' })
 export class UserInput {
   @Field()
   id?: string
@@ -71,4 +71,10 @@ export class UserInput {
 
   @Field({ nullable: true })
   role?: string
+}
+
+@InputType({ description: 'Input object for User query options' })
+export class UserQueryOptions {
+  @Field({ nullable: true })
+  sortBy?: string
 }

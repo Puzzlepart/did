@@ -1,0 +1,8 @@
+mutation($user: UserInput!, $update: Boolean) {
+  addOrUpdateUser(user: $user, update: $update) {
+    success
+    error {
+      message
+    }
+  }
+}

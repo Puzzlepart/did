@@ -26,6 +26,7 @@
   width: auto;
   z-index: 100;
   overflow: hidden;
+  position: relative;
 
   &.loggedout {
     padding-top: 0;
@@ -74,6 +75,10 @@
     &.mail {
       padding: 2px 8px 8px 16px;
     }
+
+    &.version {
+      color: #fff;
+    }
   }
 
   a.menuItem {
@@ -86,6 +91,17 @@
       text-decoration: none;
       background-color: #cf5f00;
       outline: none;
+    }
+  }
+
+  .version {
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+    font-size: 11px;
+
+    &:hover {
+      font-weight: bold;
     }
   }
 }

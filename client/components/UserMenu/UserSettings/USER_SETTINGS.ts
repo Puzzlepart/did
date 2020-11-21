@@ -1,5 +1,5 @@
 import { TFunction } from 'i18next'
-import { IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown'
+import { IDropdownOption } from 'office-ui-fabric'
 
 export interface IUserSetting {
   key: string
