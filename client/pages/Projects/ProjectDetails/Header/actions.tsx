@@ -28,7 +28,7 @@ export const Actions: FunctionComponent = () => {
         type: 'SET_SELECTED_PROJECT',
         project: {
           ...state.selected,
-          outlookCategory: JSON.parse(result.data)
+          outlookCategory: result.data
         }
       })
     }
