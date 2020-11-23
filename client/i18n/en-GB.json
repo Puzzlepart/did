@@ -86,7 +86,8 @@
     "idPreviewBlankText": "You will use a combination of customer key and project key to tag your events in Outlook. You can automatically create a category in Outlook by checking _Automatically create category in Outlook_.",
     "informationHeaderText": "Information",
     "timeEntriesHeaderText": "Time entries",
-    "noInformationAvailable": "No information available about this project."
+    "noInformationAvailable": "No information available about this project.",
+    "navigateText": "Go to project"
   },
   "customers": {
     "inactiveText": "This customer has been marked as inactive.",

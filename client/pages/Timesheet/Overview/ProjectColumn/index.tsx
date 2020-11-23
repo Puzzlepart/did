@@ -1,7 +1,6 @@
-import { ProjectLink } from 'components/ProjectLink'
-import { UserMessage } from 'components/UserMessage'
+import { ProjectLink, ProjectTooltip, UserMessage } from 'components'
 import { TFunction } from 'i18next'
-import { TooltipDelay, TooltipHost, MessageBarType, Icon } from 'office-ui-fabric'
+import { Icon, MessageBarType } from 'office-ui-fabric'
 import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
@@ -11,7 +10,6 @@ import { ClearManualMatchButton } from './ClearManualMatchButton'
 import { IgnoreEventButton } from './IgnoreEventButton'
 import { MatchEventPanel } from './MatchEventPanel'
 import styles from './ProjectColumn.module.scss'
-import { ProjectColumnTooltip } from './ProjectColumnTooltip/ProjectColumnTooltip'
 import { IProjectColumnProps } from './types'
 
 /**
@@ -21,12 +19,9 @@ import { IProjectColumnProps } from './types'
  * @param {TFunction} t Translate function
  */
 function getErrorMessage(code: string, t: TFunction): [string, MessageBarType] {
-  // eslint-disable-next-line default-case
   switch (code) {
-    case 'PROJECT_INACTIVE':
-      return [t('timesheet.projectInactiveErrorText'), MessageBarType.error]
-    case 'CUSTOMER_INACTIVE':
-      return [t('timesheet.customerInactiveErrorText'), MessageBarType.error]
+    case 'PROJECT_INACTIVE': return [t('timesheet.projectInactiveErrorText'), MessageBarType.error]
+    case 'CUSTOMER_INACTIVE': return [t('timesheet.customerInactiveErrorText'), MessageBarType.error]
   }
 }
 
@@ -72,11 +67,7 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
   }
 
   return (
-    <TooltipHost
-      tooltipProps={{ onRenderContent: () => <ProjectColumnTooltip project={event.project} /> }}
-      delay={TooltipDelay.long}
-      closeDelay={TooltipDelay.long}
-      calloutProps={{ gapSpace: 0 }}>
+    <ProjectTooltip project={event.project}>
       <div className={className}>
         <div className={styles.iconContainer}>
           <Icon iconName={event.project.icon} />
@@ -94,7 +85,7 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
           )}
         </div>
       </div>
-    </TooltipHost>
+    </ProjectTooltip>
   )
 }
 
