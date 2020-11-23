@@ -3,7 +3,6 @@ import React, { FunctionComponent } from 'react'
 import { ProjectTooltipContent } from './ProjectTooltipContent'
 import { IProjectTooltipProps } from './types'
 
-
 export const ProjectTooltip: FunctionComponent<IProjectTooltipProps> = (props: IProjectTooltipProps): JSX.Element => {
   return (
     <TooltipHost

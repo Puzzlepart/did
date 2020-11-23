@@ -1,4 +1,4 @@
-import { ILabelColumnProps } from 'components/LabelColumn/types'
+import { ILabelColumnProps } from 'pages/Admin/SummaryView/LabelColumn/types'
 import { TFunction } from 'i18next'
 import { IContextualMenuItem, IPivotItemProps } from 'office-ui-fabric'
 import { TimeEntriesQuery } from 'types'

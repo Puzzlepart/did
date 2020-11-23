@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-inferrable-types */
 import { DurationColumn } from 'components/DurationColumn'
-import { LabelColumn } from 'components/LabelColumn'
+import { LabelColumn } from './LabelColumn'
 import { sortAlphabetically, getValue } from 'helpers'
 import { TFunction } from 'i18next'
 import { IColumn, IPivotItemProps } from 'office-ui-fabric'
@@ -9,7 +8,6 @@ import { first, unique } from 'underscore'
 import DateUtils from 'utils/date'
 import { generateColumn as col } from 'utils/generateColumn'
 import { ISummaryViewRow, ISummaryViewState } from './types'
-
 /**
  * Create columns
  *

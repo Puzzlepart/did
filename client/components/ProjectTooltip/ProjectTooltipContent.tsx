@@ -1,12 +1,12 @@
 import { stringIsNullOrEmpty } from '@pnp/common'
-import { EntityLabel } from 'components/EntityLabel'
+import { EntityLabel } from 'components'
 import React, { FunctionComponent } from 'react'
 import { isEmpty } from 'underscore'
 import styles from './ProjectTooltip.module.scss'
 import { IProjectTooltipProps } from './types'
 
 export const ProjectTooltipContent: FunctionComponent<IProjectTooltipProps> = ({ project }: IProjectTooltipProps) => {
-  return (
+   return (
     <div className={styles.root}>
       <div className={styles.title}>
         <span>{project.name}</span>

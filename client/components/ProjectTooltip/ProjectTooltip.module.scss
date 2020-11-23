@@ -1,6 +1,7 @@
 .root {
   margin: 0;
-  min-width: 200px;
+  padding: 10px;
+  min-width: 250px;
 
   .title {
     font-size: 13pt;
@@ -22,7 +23,9 @@
   }
 
   .tag {
-    font-size: 9pt;
-    font-weight: 600;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: right;
+    color: #cf5f00;
   }
 }
