@@ -1,11 +1,11 @@
 import { stringIsNullOrEmpty } from '@pnp/common'
 import { EntityLabel } from 'components/EntityLabel'
-import * as React from 'react'
+import React, { FunctionComponent } from 'react'
 import { isEmpty } from 'underscore'
-import { IProjectColumnTooltipProps } from '../types'
-import styles from './ProjectColumnTooltip.module.scss'
+import styles from './ProjectTooltip.module.scss'
+import { IProjectTooltipProps } from './types'
 
-export const ProjectColumnTooltip = ({ project }: IProjectColumnTooltipProps): JSX.Element => {
+export const ProjectTooltipContent: FunctionComponent<IProjectTooltipProps> = ({ project }: IProjectTooltipProps) => {
   return (
     <div className={styles.root}>
       <div className={styles.title}>

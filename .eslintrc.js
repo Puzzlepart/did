@@ -59,6 +59,8 @@ module.exports = {
     'require-await': 1,
 
     semi: ['error', 'never', {}],
+
+    'default-case': 0
   },
   settings: {
     react: {

@@ -19,7 +19,7 @@ import { ILabelColumnProps } from 'components/LabelColumn'
  *
  * @param {TimesheetScope} scope Timesheet scope
  */
-function createColumns(scope: TimesheetScope) {
+function createColumns(scope: TimesheetScope): IColumn[] {
   const onRender = (row: any, _index: number, col: IColumn) => (
     <DurationColumn row={row} column={col} />
   )
@@ -43,7 +43,9 @@ function createColumns(scope: TimesheetScope) {
       maxWidth: 350,
       isMultiline: true,
       isResizable: true,
-      onRender: (row: ILabelColumnProps) => <LabelColumn {...row} />
+      onRender: (row: ILabelColumnProps) => (
+        <LabelColumn {...row} />
+      )
     },
     ...columns,
     {
