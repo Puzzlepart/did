@@ -1,10 +1,13 @@
-
-  mutation($category: String!) {
-    result: createOutlookCategory(category: $category) {
-      data
-      success
-      error {
-        message
-      }
+mutation($category: String!) {
+  result: createOutlookCategory(category: $category) {
+    data {
+      id
+      displayName
+      color
+    }
+    success
+    error {
+      message
     }
   }
+}
