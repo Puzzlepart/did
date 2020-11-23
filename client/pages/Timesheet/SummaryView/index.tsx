@@ -1,7 +1,5 @@
 import { DurationColumn } from 'components/DurationColumn'
-import { ILabelColumnProps, LabelColumn } from './LabelColumn'
 import List from 'components/List'
-import { ProjectTooltip } from 'components/ProjectTooltip'
 import { IColumn, MessageBar } from 'office-ui-fabric'
 import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
@@ -12,6 +10,7 @@ import { capitalize } from 'underscore.string'
 import DateUtils from 'utils/date'
 import { TimesheetContext } from '../'
 import { TimesheetScope } from '../TimesheetScope'
+import { ILabelColumnProps, LabelColumn } from './LabelColumn'
 import styles from './SummaryView.module.scss'
 
 /**
@@ -43,16 +42,9 @@ function createColumns(scope: TimesheetScope): IColumn[] {
       maxWidth: 350,
       isMultiline: true,
       isResizable: true,
-      onRender: (row: ILabelColumnProps) => {
-        if (row.project) {
-          return (
-            <ProjectTooltip project={row.project}>
-              <LabelColumn {...row} />
-            </ProjectTooltip>
-          )
-        }
-        return <LabelColumn {...row} />
-      }
+      onRender: (row: ILabelColumnProps) => (
+        <LabelColumn {...row} />
+      )
     },
     ...columns,
     {
