@@ -22,8 +22,8 @@ export const ProjectTooltipContent: FunctionComponent<IProjectTooltipProps> = ({
           </div>
         </div>
       </div>
-      <div hidden={stringIsNullOrEmpty(project.description)} className={styles.description}>
-        <p>{project.description}</p>
+      <div className={styles.description}>
+        <p hidden={stringIsNullOrEmpty(project.description)} >{project.description}</p>
       </div>
       {!isEmpty(project.labels) && (
         <div className={styles.labels}>
@@ -32,12 +32,16 @@ export const ProjectTooltipContent: FunctionComponent<IProjectTooltipProps> = ({
           ))}
         </div>
       )}
-      <ProjectLink
-       project={project}
-        text={t('projects.navigateText')} 
-        icon='NavigateForward' />
-      <div className={styles.tag}>
-        <span>{project.id}</span>
+      <div className={styles.footer}>
+        <div className={styles.link}>
+          <ProjectLink
+            project={project}
+            text={t('projects.navigateText')}
+            icon='NavigateForward' />
+        </div>
+        <div className={styles.tag}>
+          <span>{project.id}</span>
+        </div>
       </div>
     </div>
   )

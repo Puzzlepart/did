@@ -26,17 +26,27 @@
 
   .description {
     font-size: 8pt;
-    margin: 4px 0 10px 0;
+    margin: 8px 0 8px 0;
   }
 
   .labels {
     margin: 4px 0 10px 0;
   }
 
-  .tag {
-    font-size: 12px;
-    font-weight: bold;
-    text-align: right;
-    color: #cf5f00;
+  .footer {
+    display: flex;
+    flex-direction: row;
+    margin: 8px 0 0 0;
+
+    .link {
+      flex-grow: 1;
+    }
+
+    .tag {
+      font-size: 12px;
+      font-weight: bold;
+      text-align: right;
+      color: #cf5f00;
+    }
   }
 }

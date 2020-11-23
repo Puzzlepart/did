@@ -2,9 +2,11 @@
 // Please do not change this file!
 interface CssExports {
   'description': string;
+  'footer': string;
   'header': string;
   'iconContainer': string;
   'labels': string;
+  'link': string;
   'root': string;
   'subTitle': string;
   'tag': string;
