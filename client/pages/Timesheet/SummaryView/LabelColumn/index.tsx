@@ -11,7 +11,7 @@ export const LabelColumn = (props: ILabelColumnProps) => {
     return (
       <div className={styles.root}>
         <div className={styles.iconContainer}>
-          <Icon iconName={props.project.icon || 'Page'} styles={{ root: { fontSize: 18 } }} />
+          <Icon iconName={props.project.icon} styles={{ root: { fontSize: 18 } }} />
         </div>
         <div className={styles.content}>
           <div className={styles.title}>{props.project.name}</div>

@@ -1,18 +1,26 @@
 import { stringIsNullOrEmpty } from '@pnp/common'
-import { EntityLabel } from 'components'
+import { EntityLabel, ProjectLink } from 'components'
+import { Icon } from 'office-ui-fabric'
 import React, { FunctionComponent } from 'react'
+import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
 import styles from './ProjectTooltip.module.scss'
 import { IProjectTooltipProps } from './types'
 
 export const ProjectTooltipContent: FunctionComponent<IProjectTooltipProps> = ({ project }: IProjectTooltipProps) => {
-   return (
+  const { t } = useTranslation()
+  return (
     <div className={styles.root}>
-      <div className={styles.title}>
-        <span>{project.name}</span>
-      </div>
-      <div className={styles.subTitle}>
-        <span>for {project.customer.name}</span>
+      <div className={styles.header}>
+        <div className={styles.iconContainer}>
+          <Icon iconName={project.icon} styles={{ root: { fontSize: 24 } }} />
+        </div>
+        <div className={styles.title}>
+          <span>{project.name}</span>
+          <div className={styles.subTitle}>
+            <span>for {project.customer.name}</span>
+          </div>
+        </div>
       </div>
       <div hidden={stringIsNullOrEmpty(project.description)} className={styles.description}>
         <p>{project.description}</p>
@@ -24,6 +32,10 @@ export const ProjectTooltipContent: FunctionComponent<IProjectTooltipProps> = ({
           ))}
         </div>
       )}
+      <ProjectLink
+       project={project}
+        text={t('projects.navigateText')} 
+        icon='NavigateForward' />
       <div className={styles.tag}>
         <span>{project.id}</span>
       </div>
