@@ -1,25 +1,24 @@
 import { DurationColumn } from 'components/DurationColumn'
-import { LabelColumn } from 'components/LabelColumn'
 import List from 'components/List'
-import { EventObject, Project } from 'types'
-import { MessageBar, IColumn } from 'office-ui-fabric'
+import { IColumn, MessageBar } from 'office-ui-fabric'
 import React, { useContext } from 'react'
+import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
+import { EventObject, Project } from 'types'
 import { unique } from 'underscore'
 import { capitalize } from 'underscore.string'
 import DateUtils from 'utils/date'
 import { TimesheetContext } from '../'
 import { TimesheetScope } from '../TimesheetScope'
+import { ILabelColumnProps, LabelColumn } from './LabelColumn'
 import styles from './SummaryView.module.scss'
-import { isMobile } from 'react-device-detect'
-import { ILabelColumnProps } from 'components/LabelColumn'
 
 /**
  * Creates columns from scope
  *
  * @param {TimesheetScope} scope Timesheet scope
  */
-function createColumns(scope: TimesheetScope) {
+function createColumns(scope: TimesheetScope): IColumn[] {
   const onRender = (row: any, _index: number, col: IColumn) => (
     <DurationColumn row={row} column={col} />
   )
@@ -43,7 +42,9 @@ function createColumns(scope: TimesheetScope) {
       maxWidth: 350,
       isMultiline: true,
       isResizable: true,
-      onRender: (row: ILabelColumnProps) => <LabelColumn {...row} />
+      onRender: (row: ILabelColumnProps) => (
+        <LabelColumn {...row} />
+      )
     },
     ...columns,
     {

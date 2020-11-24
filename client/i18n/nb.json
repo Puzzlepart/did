@@ -85,7 +85,8 @@
     "idPreviewBlankText": "Du vil bruke en kombinasjon av kundenøkkel og prosjektnøkkel for å tagge kalenderoppføringene dine i Outlook. \nDu kan automatisk opprette en kategori i Outlook ved å huke av for _Opprett automatisk kategori i Outlook_.",
     "informationHeaderText": "Informasjon",
     "timeEntriesHeaderText": "Tidsoppføringer",
-    "noInformationAvailable": "Ingen informasjon tilgjengelig om dette prosjektet."
+    "noInformationAvailable": "Ingen informasjon tilgjengelig om dette prosjektet.",
+    "navigateText": "Gå til prosjektet"
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",

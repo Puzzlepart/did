@@ -5,8 +5,7 @@ import { Service } from 'typedi'
 import { pick } from 'underscore'
 import { MSGraphService } from '../../services'
 import { IAuthOptions } from '../authChecker'
-import { OutlookCategory } from './outlookCategory.types'
-import { BaseResult } from './types'
+import { CreateOutlookCategoryResult, OutlookCategory } from './outlookCategory.types'
 
 @Service()
 @Resolver(OutlookCategory)
@@ -18,7 +17,7 @@ export class OutlookCategoryResolver {
    *
    * @param {MSGraphService} _msgraph MSGraphService
    */
-  constructor(private readonly _msgraph: MSGraphService) {}
+  constructor(private readonly _msgraph: MSGraphService) { }
 
   /**
    * Get Outlook categories
@@ -36,11 +35,11 @@ export class OutlookCategoryResolver {
    * @param {string} category Category
    */
   @Authorized<IAuthOptions>({ userContext: true })
-  @Mutation(() => BaseResult, { description: 'Create Outlook category' })
+  @Mutation(() => CreateOutlookCategoryResult, { description: 'Create Outlook category' })
   async createOutlookCategory(@Arg('category') category: string) {
     try {
-      await this._msgraph.createOutlookCategory(category)
-      return { success: true, error: null }
+      const data = await this._msgraph.createOutlookCategory(category)
+      return { data, success: true, error: null }
     } catch (error) {
       return {
         success: false,
