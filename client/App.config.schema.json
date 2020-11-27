@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "title": "App configuration",
+  "default": {},
+  "examples": [
+      {
+          "PROJECT_KEY_MIN_LENGTH": 2
+      }
+  ],
+  "required": [
+      "PROJECT_KEY_MIN_LENGTH"
+  ],
+  "properties": {
+      "PROJECT_KEY_MIN_LENGTH": {
+          "$id": "#/properties/PROJECT_KEY_MIN_LENGTH",
+          "type": "integer",
+          "title": "Minimum length for project key",
+          "default": 2,
+          "examples": [
+              2
+          ]
+      }
+  }
+}
