@@ -19,10 +19,10 @@ export const validateForm = (
     errors.customerKey = t('projects.customerFormValidationText')
   }
   if (model.name.length < PROJECT_NAME_MIN_LENGTH) {
-    errors.name = t('projects.nameFormValidationText', {PROJECT_NAME_MIN_LENGTH})
+    errors.name = t('projects.nameFormValidationText', AppConfig)
   }
   if (!PROJECT_KEY_REGEX.test(model.projectKey)) {
-    errors.projectKey = t('projects.keyFormValidationText', { PROJECT_KEY_MIN_LENGTH, PROJECT_KEY_MAX_LENGTH })
+    errors.projectKey = t('projects.keyFormValidationText', AppConfig)
   }
   return { errors, invalid: Object.keys(errors).length > 0 }
 }
