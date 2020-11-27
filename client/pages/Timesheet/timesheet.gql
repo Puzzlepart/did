@@ -1,3 +1,5 @@
+#import "./timesheet.fragments.project.gql"
+
 query($query: TimesheetQuery!, $options: TimesheetOptions!) {
   timesheet(query: $query, options: $options) {
     id
@@ -14,27 +16,15 @@ query($query: TimesheetQuery!, $options: TimesheetOptions!) {
       startDateTime
       endDateTime
       date
+      isSystemIgnored
+      error {
+        code
+      }
       project {
-        id
-        name
-        description
-        icon
-        customer {
-          id
-          key
-          name
-          icon
-          inactive
-        }
-        labels {
-          name
-          description
-          color
-          icon
-        }
+        ...ProjectFragment
       }
       suggestedProject {
-        id
+        ...ProjectFragment
       }
       customer {
         key
@@ -47,10 +37,6 @@ query($query: TimesheetQuery!, $options: TimesheetOptions!) {
         description
         color
         icon
-      }
-      isSystemIgnored
-      error {
-        code
       }
     }
     isConfirmed
