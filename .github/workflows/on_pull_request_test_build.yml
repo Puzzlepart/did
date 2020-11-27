@@ -5,6 +5,9 @@ on:
     branches:
       - master
       - dev
+    paths:
+      - client/**
+      - server/**
 jobs:
   build:
     runs-on: ubuntu-latest
