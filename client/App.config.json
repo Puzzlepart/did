@@ -1,4 +1,6 @@
 {
   "$schema": "./App.config.schema.json",
-  "PROJECT_KEY_MIN_LENGTH": 2
+  "PROJECT_KEY_MIN_LENGTH": 2,
+  "PROJECT_KEY_MAX_LENGTH": 8,
+  "PROJECT_NAME_MIN_LENGTH": 2
 }

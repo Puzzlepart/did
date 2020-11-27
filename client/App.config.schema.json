@@ -3,22 +3,32 @@
   "title": "App configuration",
   "default": {},
   "examples": [
-      {
-          "PROJECT_KEY_MIN_LENGTH": 2
-      }
+    {
+      "PROJECT_KEY_MIN_LENGTH": 2
+    }
   ],
-  "required": [
-      "PROJECT_KEY_MIN_LENGTH"
-  ],
+  "required": ["PROJECT_KEY_MIN_LENGTH"],
   "properties": {
-      "PROJECT_KEY_MIN_LENGTH": {
-          "$id": "#/properties/PROJECT_KEY_MIN_LENGTH",
-          "type": "integer",
-          "title": "Minimum length for project key",
-          "default": 2,
-          "examples": [
-              2
-          ]
-      }
+    "PROJECT_KEY_MIN_LENGTH": {
+      "$id": "#/properties/PROJECT_KEY_MIN_LENGTH",
+      "type": "integer",
+      "title": "Minimum length for project key",
+      "default": 2,
+      "examples": [2]
+    },
+    "PROJECT_KEY_MAX_LENGTH": {
+      "$id": "#/properties/PROJECT_KEY_MAX_LENGTH",
+      "type": "integer",
+      "title": "Maximum length for project key",
+      "default": 8,
+      "examples": [8]
+    },
+    "PROJECT_NAME_MIN_LENGTH": {
+      "$id": "#/properties/PROJECT_NAME_MIN_LENGTH",
+      "type": "integer",
+      "title": "Minimum length for project name",
+      "default": 2,
+      "examples": [2]
+    }
   }
 }

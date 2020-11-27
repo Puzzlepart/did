@@ -3,25 +3,12 @@ import { IconPicker, LabelPicker, SearchCustomer, useMessage, UserMessage } from
 import { MessageBarType, PrimaryButton, TextField, Toggle } from 'office-ui-fabric'
 import React, { FunctionComponent, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Project } from 'types'
 import { isBlank } from 'underscore.string'
 import $createOrUpdateProject from './createOrUpdateProject.gql'
 import styles from './ProjectForm.module.scss'
-import reducer from './reducer'
-import { IProjectFormProps, IProjectFormState, ProjectModel } from './types'
+import reducer, { initState } from './reducer'
+import { IProjectFormProps } from './types'
 import { validateForm } from './validateForm'
-
-/**
- * Initialize state
- *
- * @param {Project} project Project
- */
-const initState = (edit: Project): IProjectFormState => ({
-  model: new ProjectModel(edit),
-  options: { createOutlookCategory: false },
-  editMode: !!edit,
-  validation: { errors: {}, invalid: true }
-})
 
 export const ProjectForm: FunctionComponent<IProjectFormProps> = ({
   edit,
@@ -39,7 +26,7 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({
    * On form submit
    */
   const onFormSubmit = async () => {
-    const _validation = validateForm(model, t, { nameMinLength: 2 })
+    const _validation = validateForm(model, t)
     if (_validation.invalid) {
       dispatch({ type: 'SET_VALIDATION', payload: { validation: _validation } })
       return
