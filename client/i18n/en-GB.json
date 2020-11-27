@@ -95,7 +95,7 @@
     "webLinkText": "Website",
     "externalSystemUrlText": "External LOB system",
     "keyFieldDescription": "A unique identifier for the customer. Keep it short, between {{CUSTOMER_KEY_MIN_LENGTH}} and {{CUSTOMER_KEY_MAX_LENGTH}} characters and only capital letters.",
-    "nameFormValidationText": "Name should be at least {{nameMinLength}} characters long.",
+    "nameFormValidationText": "Name should be at least {{CUSTOMER_NAME_MIN_LENGTH}} characters long.",
     "keyFormValidationText": "Customer key should be between {{CUSTOMER_KEY_MIN_LENGTH}} and {{CUSTOMER_KEY_MAX_LENGTH}} characters long, and all uppercase.",
     "createSuccess": "The customer **{{name}}** was succesfully created.",
     "createNewText": "Create new",

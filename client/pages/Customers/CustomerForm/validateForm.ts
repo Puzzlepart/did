@@ -22,6 +22,5 @@ export const validateForm = (
     if (!CUSTOMER_KEY_REGEX.test(model.key)) {
         errors.key = t('customers.keyFormValidationText', AppConfig)
     }
-    console.log(errors)
     return { errors, invalid: Object.keys(errors).length > 0 }
 }

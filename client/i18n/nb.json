@@ -94,7 +94,7 @@
     "webLinkText": "Webside",
     "externalSystemUrlText": "Eksternt business-system",
     "keyFieldDescription": "En unik identifikator for kunden. Holdt det kort, mellom {{CUSTOMER_KEY_MIN_LENGTH}} og {{CUSTOMER_KEY_MAX_LENGTH}} tegn og kun store bokstaver.",
-    "nameFormValidationText": "Kundenavnet må være minst {{nameMinLength}} tegn langt.",
+    "nameFormValidationText": "Kundenavnet må være minst {{CUSTOMER_NAME_MIN_LENGTH}} tegn langt.",
     "keyFormValidationText": "Kundenøkkelen må være mellom {{CUSTOMER_KEY_MIN_LENGTH}} og {{CUSTOMER_KEY_MAX_LENGTH}} tegn lang, og bare store bokstaver.",
     "createSuccess": "Kunden **{{name}}** ble opprettet.",
     "createNewText": "Opprett ny",
