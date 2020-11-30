@@ -181,12 +181,12 @@ class MSGraphService {
    * @param {string} endDate End date (YYYY-MM-DD)
    * @param {number} tzOffset Timezone offset on the client
    */
-  async getEvents(startDate: string, endDate: string, tzOffset: number): Promise<MSGraphEvent[]> {
+  async getEvents(startDate: string, endDate: string, tzOffset:  number): Promise<MSGraphEvent[]> {
     try {
       this.startMark('getEvents')
       const query = {
-        startDateTime: DateUtils.add(`${startDate}:00:00:00.000`, 'm', tzOffset),
-        endDateTime: DateUtils.add(`${endDate}:23:59:59.999`, 'm', tzOffset)
+        startDateTime: DateUtils.toISOString(`${startDate}:00:00:00.000`, tzOffset),
+        endDateTime: DateUtils.toISOString(`${endDate}:23:59:59.999`, tzOffset)
       }
       debug('Querying Graph /me/calendar/calendarView: %s', JSON.stringify({ query }))
       const client = await this._getClient()
