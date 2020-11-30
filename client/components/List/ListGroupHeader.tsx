@@ -1,10 +1,10 @@
 import { GroupHeader, IDetailsGroupDividerProps } from 'office-ui-fabric'
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 
-export const onRenderGroupHeader = (headerProps: IDetailsGroupDividerProps) => {
+export const ListGroupHeader: FunctionComponent<IDetailsGroupDividerProps> = (props: IDetailsGroupDividerProps) => {
   return (
     <GroupHeader
-      {...headerProps}
+      {...props}
       styles={{
         title: { cursor: 'initial' },
         expand: { cursor: 'pointer' },
