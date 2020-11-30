@@ -1,27 +1,15 @@
 import { useMutation } from '@apollo/client'
+import AppConfig from 'AppConfig'
 import { IconPicker, LabelPicker, SearchCustomer, useMessage, UserMessage } from 'components'
 import { MessageBarType, PrimaryButton, TextField, Toggle } from 'office-ui-fabric'
 import React, { FunctionComponent, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Project } from 'types'
 import { isBlank } from 'underscore.string'
 import $createOrUpdateProject from './createOrUpdateProject.gql'
 import styles from './ProjectForm.module.scss'
-import reducer from './reducer'
-import { IProjectFormProps, IProjectFormState, ProjectModel } from './types'
+import reducer, { initState } from './reducer'
+import { IProjectFormProps } from './types'
 import { validateForm } from './validateForm'
-
-/**
- * Initialize state
- *
- * @param {Project} project Project
- */
-const initState = (edit: Project): IProjectFormState => ({
-  model: new ProjectModel(edit),
-  options: { createOutlookCategory: false },
-  editMode: !!edit,
-  validation: { errors: {}, invalid: true }
-})
 
 export const ProjectForm: FunctionComponent<IProjectFormProps> = ({
   edit,
@@ -39,7 +27,7 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({
    * On form submit
    */
   const onFormSubmit = async () => {
-    const _validation = validateForm(model, t, { nameMinLength: 2 })
+    const _validation = validateForm(model, t)
     if (_validation.invalid) {
       dispatch({ type: 'SET_VALIDATION', payload: { validation: _validation } })
       return
@@ -101,7 +89,7 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({
         disabled={editMode}
         className={styles.inputField}
         label={t('projects.keyFieldLabel')}
-        description={t('projects.keyFieldDescription', { keyMaxLength: 8 })}
+        description={t('projects.keyFieldDescription', AppConfig)}
         required={true}
         errorMessage={validation.errors.projectKey}
         onChange={(_event, value) =>
@@ -140,7 +128,7 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({
       <TextField
         className={styles.inputField}
         label={t('common.nameFieldLabel')}
-        description={t('projects.nameFieldDescription')}
+        description={t('projects.nameFieldDescription', AppConfig)}
         required={true}
         errorMessage={validation.errors.name}
         onChange={(_event, value) =>
@@ -168,7 +156,8 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({
       <IconPicker
         className={styles.inputField}
         defaultSelected={model.icon}
-        label={t('common.iconLabel')}
+        label={t('common.iconFieldLabel')}
+        description={t('projects.iconFieldDescription')}
         placeholder={t('common.iconSearchPlaceholder')}
         width={300}
         onSelected={(value) =>

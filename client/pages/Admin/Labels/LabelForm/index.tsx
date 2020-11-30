@@ -70,7 +70,7 @@ export const LabelForm = (props: ILabelFormProps) => {
       <IconPicker
         className={styles.inputField}
         defaultSelected={model.icon}
-        label={t('common.iconLabel')}
+        label={t('common.iconFieldLabel')}
         placeholder={t('common.iconSearchPlaceholder')}
         width={300}
         onSelected={(icon) => setModel({ ...model, icon })}
