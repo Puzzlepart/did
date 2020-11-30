@@ -43,7 +43,3 @@ export interface IProjectFormState {
   projectId?: string
   validation?: IFormValidation
 }
-
-export interface IProjectFormValidationOptions {
-  nameMinLength?: number
-}
