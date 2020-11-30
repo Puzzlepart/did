@@ -1,15 +1,16 @@
 import { useMutation } from '@apollo/client'
 import { IconPicker, UserMessage } from 'components'
 import { MessageBarType, PrimaryButton, TextField } from 'office-ui-fabric'
-import * as React from 'react'
-import { useState } from 'react'
+import React, { FunctionComponent, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { IFormValidation } from 'types/IFormValidation'
 import styles from './CreateCustomerForm.module.scss'
 import $createOrUpdateCustomer from './createOrUpdateCustomer.gql'
-import { CustomerModel, ICustomerFormProps } from './types'
+import { CustomerModel } from './types'
+import { validateForm } from './validateForm'
+import AppConfig from 'AppConfig'
 
-export const CustomerForm = ({ nameLength = [2] }: ICustomerFormProps) => {
+export const CustomerForm: FunctionComponent = () => {
   const { t } = useTranslation()
   const [validation, setValidation] = useState<IFormValidation>({ errors: {}, invalid: true })
   const [message, setMessage] = useState<{ text: string; type: MessageBarType }>(null)
@@ -17,23 +18,10 @@ export const CustomerForm = ({ nameLength = [2] }: ICustomerFormProps) => {
   const [createOrUpdateCustomer, { loading }] = useMutation($createOrUpdateCustomer)
 
   /**
-   * On validate form
-   */
-  const validateForm = (): IFormValidation => {
-    const [nameMinLength] = nameLength
-    const errors: { [key: string]: string } = {}
-    if (model.name.length < nameMinLength)
-      errors.name = t('customers.nameFormValidationText', { nameMinLength })
-    if (!/(^[A-ZÆØÅ0-9]{3,8}$)/gm.test(model.key))
-      errors.key = t('customers.keyFormValidationText', { keyMinLength: 3, keyMaxLength: 8 })
-    return { errors, invalid: Object.keys(errors).length > 0 }
-  }
-
-  /**
    * On form submit
    */
   const onFormSubmit = async () => {
-    const _validation = validateForm()
+    const _validation = validateForm(model, t)
     if (_validation.invalid) {
       setValidation(_validation)
       return
@@ -71,7 +59,7 @@ export const CustomerForm = ({ nameLength = [2] }: ICustomerFormProps) => {
       <TextField
         className={styles.inputField}
         label={t('customers.keyFieldLabel')}
-        description={t('customers.keyFieldDescription', { keyMaxLength: 8 })}
+        description={t('customers.keyFieldDescription', AppConfig)}
         required={true}
         errorMessage={validation.errors.key}
         onChange={(_event, key) => setModel({ ...model, key })}
@@ -80,6 +68,7 @@ export const CustomerForm = ({ nameLength = [2] }: ICustomerFormProps) => {
       <TextField
         className={styles.inputField}
         label={t('common.nameFieldLabel')}
+        description={t('customers.nameFieldDescription', AppConfig)}
         required={true}
         errorMessage={validation.errors.name}
         onChange={(_event, name) => setModel({ ...model, name })}
@@ -96,7 +85,8 @@ export const CustomerForm = ({ nameLength = [2] }: ICustomerFormProps) => {
       <IconPicker
         className={styles.inputField}
         defaultSelected={model.icon}
-        label={t('common.iconLabel')}
+        label={t('common.iconFieldLabel')}
+        description={t('customers.iconFieldDescription')}
         placeholder={t('common.iconSearchPlaceholder')}
         width={300}
         onSelected={(icon) => setModel({ ...model, icon })}

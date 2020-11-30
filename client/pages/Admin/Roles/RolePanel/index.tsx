@@ -71,7 +71,7 @@ export const RolePanel: React.FunctionComponent<IRolePanelProps> = (props: IRole
           onChange={(_event, name) => setModel({ ...model, name })}
         />
         <IconPicker
-          label={t('common.iconLabel')}
+          label={t('common.iconFieldLabel')}
           required={true}
           placeholder={t('common.iconSearchPlaceholder')}
           defaultSelected={model.icon}
