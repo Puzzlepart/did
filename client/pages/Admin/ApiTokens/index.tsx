@@ -62,7 +62,7 @@ export const ApiTokens = () => {
       {message && <UserMessage {...message} />}
       {!isNull(apiKey) && (
         <FadeIn className={styles.keyField}>
-          <TextField value={apiKey} disabled={true} />
+          <TextField value={apiKey} readOnly={true} multiline={true} />
         </FadeIn>
       )}
       <List
