@@ -149,13 +149,23 @@ export const isSameMonth = (a: ConfigType, b: ConfigType) => {
 }
 
 /**
+ * Converts the date time to ISO format using the specified offset
+ * 
+ * @param {ConfigType} dateTime Date
+ * @param {number} tzOffset Offset in minutes
+ */
+export const toISOString = (dateTime: ConfigType, tzOffset: number) => {
+  return $dayjs(`${dateTime} ${getTimezone(tzOffset)}`).toISOString()
+}
+
+/**
  * Get timezone from offset
  * 
- * @param {number} offset Offset in minutes
+ * @param {number} tzOffset Offset in minutes
  */
-export const getTimezone = (offset: number) => {
+export const getTimezone = (tzOffset: number) => {
   function z(n: number) { return (n < 10 ? '0' : '') + n }
-  const sign = offset < 0 ? '+' : '-'
-  offset = Math.abs(offset)
-  return 'GMT ' + sign + z(offset / 60 | 0) + z(offset % 60)
+  const sign = tzOffset < 0 ? '+' : '-'
+  tzOffset = Math.abs(tzOffset)
+  return 'GMT ' + sign + z(tzOffset / 60 | 0) + z(tzOffset % 60)
 }
