@@ -147,3 +147,15 @@ export const isAfterToday = (dateTime: ConfigType) => {
 export const isSameMonth = (a: ConfigType, b: ConfigType) => {
   return $dayjs(a).isSame($dayjs(b), 'month')
 }
+
+/**
+ * Get timezone from offset
+ * 
+ * @param {number} offset Offset in minutes
+ */
+export const getTimezone = (offset: number) => {
+  function z(n: number) { return (n < 10 ? '0' : '') + n }
+  const sign = offset < 0 ? '+' : '-'
+  offset = Math.abs(offset)
+  return 'GMT ' + sign + z(offset / 60 | 0) + z(offset % 60)
+}
