@@ -160,6 +160,8 @@ export const toISOString = (dateTime: ConfigType, tzOffset: number) => {
 
 /**
  * Get timezone from offset
+ *
+ * See https://stackoverflow.com/questions/24500375/get-clients-gmt-offset-in-javascript 
  * 
  * @param {number} tzOffset Offset in minutes
  */
