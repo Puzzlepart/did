@@ -15,7 +15,7 @@ import { withDefaultProps } from 'with-default-props'
 import { ScrollablePaneWrapper } from '../ScrollablePaneWrapper'
 import { generateListGroups } from './generateListGroups'
 import styles from './List.module.scss'
-import { onRenderGroupHeader } from './onRenderGroupHeader'
+import { ListGroupHeader } from './ListGroupHeader'
 import { onRenderListHeader } from './onRenderListHeader'
 import reducer from './reducer'
 import { IListProps } from './types'
@@ -34,7 +34,6 @@ const List: FunctionComponent<IListProps> = (props: IListProps) => {
     return new Selection({
       onSelectionChanged: () => {
         const _selection = selection.getSelection()
-        // eslint-disable-next-line default-case
         switch (props.selection?.mode) {
           case SelectionMode.single:
             props.selection.onChanged(first(_selection))
@@ -69,7 +68,7 @@ const List: FunctionComponent<IListProps> = (props: IListProps) => {
             selectionMode={props.selection ? props.selection.mode : SelectionMode.none}
             constrainMode={ConstrainMode.horizontalConstrained}
             layoutMode={DetailsListLayoutMode.justified}
-            groupProps={{ ...props.groupProps, onRenderHeader: onRenderGroupHeader }}
+            groupProps={{ ...props.groupProps, onRenderHeader: ListGroupHeader }}
             onRenderItemColumn={(item, index, column) => {
               if (!!column.onRender) return column.onRender(item, index, column)
               return getValue(item, column.fieldName)
