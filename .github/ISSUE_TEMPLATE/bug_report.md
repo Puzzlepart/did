@@ -9,14 +9,14 @@ labels: bug
 <!-- On what page, or which component did the error occur. Provide url if applicable -->
 
 ### Browser ######
-Please check the boxes of the browser(s) used. If at all possible speficy version as well
-- [ ] Edge Chromium
-- [ ] Chrome
-- [ ] Edge
-- [ ] IE
-- [ ] Safari
-- [ ] Firefox
-- [ ] Other (please specify)
+Please check the boxes of the browser(s) used by using ⚫ . If at all possible speficy version as well
+- ⚪&nbsp;&nbsp;  Edge Chromium
+- ⚪&nbsp;&nbsp;  Chrome
+- ⚪&nbsp;&nbsp;  Edge
+- ⚪&nbsp;&nbsp;  IE
+- ⚪&nbsp;&nbsp;  Safari
+- ⚪&nbsp;&nbsp;  Firefox
+- ⚪&nbsp;&nbsp;  Other (please specify)
 
 ### Error details
 <!-- Tell us what happend. Screenshots helps!! -->
