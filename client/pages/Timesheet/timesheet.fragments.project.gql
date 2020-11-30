@@ -1,0 +1,19 @@
+fragment ProjectFragment on Project {
+  id
+  name
+  description
+  icon
+  customer {
+    id
+    key
+    name
+    icon
+    inactive
+  }
+  labels {
+    name
+    description
+    color
+    icon
+  }
+}
