@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved forecast/confirm actions #605
 - Automatic Azure Active Directory sync #661
 - Support for API tokens with scoped permissions #635
+- Export hours from user menu #589
+- Improved project tooltip/panel #678
 
 ## Fixed
 - Minor UI adjustments in Timesheet
