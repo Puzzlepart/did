@@ -113,16 +113,16 @@
         <div id="app" data-error='{{error}}'></div>
     </main>
     <script type="text/javascript">
-        if(document.location.hostname === "localhost") {
-            if(localStorage.length && !sessionStorage.debug){
+        if (document.location.hostname === "localhost") {
+            if (localStorage.length && !sessionStorage.debug) {
                 console.log("debugging - clearing cache")
                 localStorage.clear()
                 sessionStorage.clear()
-                sessionStorage.debug="TRUE"
+                sessionStorage.debug = "TRUE"
                 location.reload()
             }
         }
-</script>
+    </script>
 </body>
 
 </html>
