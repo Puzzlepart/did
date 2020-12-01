@@ -20,8 +20,8 @@
       "$id": "#/properties/PROJECT_KEY_MAX_LENGTH",
       "type": "integer",
       "title": "Maximum length for project key",
-      "default": 8,
-      "examples": [8]
+      "default": 12,
+      "examples": [12]
     },
     "PROJECT_NAME_MIN_LENGTH": {
       "$id": "#/properties/PROJECT_NAME_MIN_LENGTH",
@@ -41,8 +41,8 @@
       "$id": "#/properties/CUSTOMER_KEY_MAX_LENGTH",
       "type": "integer",
       "title": "Maximum length for customer key",
-      "default": 8,
-      "examples": [8]
+      "default": 12,
+      "examples": [12]
     },
     "CUSTOMER_NAME_MIN_LENGTH": {
       "$id": "#/properties/CUSTOMER_NAME_MIN_LENGTH",
