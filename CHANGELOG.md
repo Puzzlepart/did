@@ -14,10 +14,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for API tokens with scoped permissions #635
 - Export hours from user menu #589
 - Improved project tooltip/panel #678
+- Decreased Project and Customer keys min length to 2 #681
+- Increased Project and Customer keys max length to 12 #719
+- When debugging, local cache is automatically cleared on first run #715
 
 ## Fixed
 - Minor UI adjustments in Timesheet
 - Some fixes in matching engine #603
+- Issue with appointments occuring around midnight Sunday #703
+- Fixed lag in customer/project search #686
 
 ## Removed
 - Dependency on moment.js removed, now using day.js instead
