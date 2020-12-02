@@ -1,4 +1,13 @@
-import { CheckboxVisibility, IColumn, ICommandBarProps, IDetailsGroupRenderProps, IDetailsHeaderProps, IRenderFunction, ISearchBoxProps, SelectionMode } from 'office-ui-fabric'
+import {
+  CheckboxVisibility,
+  IColumn,
+  ICommandBarProps,
+  IDetailsGroupRenderProps,
+  IDetailsHeaderProps,
+  IRenderFunction,
+  ISearchBoxProps,
+  SelectionMode
+} from 'office-ui-fabric'
 
 export interface IListProps<T = any> extends React.HTMLProps<HTMLDivElement> {
   /**
