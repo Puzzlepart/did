@@ -95,6 +95,6 @@ const columns = (t: TFunction): IColumn[] => [
     minWidth: 100,
     data: { hidden: true }
   }
-]
+].map((col: IColumn) => ({ ...col, isResizable: true }))
 
 export default columns
