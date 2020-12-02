@@ -52,6 +52,18 @@ const List: FunctionComponent<IListProps> = (props: IListProps) => {
 
   const [delay, transitionDuration] = props.fadeIn
 
+  const columns = useMemo(() => {
+    let _columns = [...props.columns]
+    if (props.persistsColumnWidths) {
+      const columnWidths = props.persistsColumnWidths.get({})
+      _columns = _columns.map(column => {
+        column.minWidth = columnWidths[column.fieldName] || column.minWidth
+        return column
+      })
+    }
+    return filter(_columns, (col) => !col.data?.hidden)
+  }, [props.columns])
+
   return (
     <div className={styles.root} hidden={props.hidden}>
       <FadeIn delay={delay} transitionDuration={transitionDuration}>
@@ -62,7 +74,7 @@ const List: FunctionComponent<IListProps> = (props: IListProps) => {
             enableShimmer={props.enableShimmer}
             isPlaceholderData={props.enableShimmer}
             selection={selection}
-            columns={filter(props.columns, (col) => !col.data?.hidden)}
+            columns={columns}
             items={items}
             groups={groups}
             selectionMode={props.selection ? props.selection.mode : SelectionMode.none}
@@ -83,6 +95,11 @@ const List: FunctionComponent<IListProps> = (props: IListProps) => {
               })
             }
             checkboxVisibility={props.checkboxVisibility || CheckboxVisibility.hidden}
+            onColumnResize={(column, newWidth) => {
+              if (props.persistsColumnWidths) {
+                props.persistsColumnWidths.merge({ [column.fieldName]: newWidth })
+              }
+            }}
           />
         </ScrollablePaneWrapper>
       </FadeIn>
