@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
-import { IPnPClientStore, PnPClientStorage } from '@pnp/common'
 import { TFunction } from 'i18next'
 import {
   EventInput,
@@ -9,7 +8,8 @@ import {
   TimesheetPeriodObject
 } from 'types'
 import { filter, omit } from 'underscore'
-import DateUtils, { DateObject } from 'utils/date'
+import { BrowserStorage } from 'utils/browserStorage'
+import DateUtils from 'utils/date'
 
 export class TimesheetPeriod {
   public id: string
@@ -24,22 +24,19 @@ export class TimesheetPeriod {
   private events: EventObject[] = []
   private _uiIgnoredEvents: string[] = []
   private _uiMatchedEvents: Record<string, Project> = {}
-  private _localStorage: IPnPClientStore = new PnPClientStorage().local
-  private _uiMatchedEventsStorageKey: string
-  private _uiIgnoredEventsStorageKey: string
-  private _storageDefaultExpire: Date
+  private _uiMatchedEventsStorage: BrowserStorage<Record<string, Project>>
+  private _uiIgnoredEventsStorage: BrowserStorage<string[]>
 
   /**
-   * Initializes up a new period instance
+   * Initializes a new period instance
    *
    * @param {TimesheetPeriodObject} period Period
    */
   initialize(period: TimesheetPeriodObject) {
     Object.assign(this, period)
-    this._uiMatchedEventsStorageKey = `did_ui_matched_events_${this.id}`
-    this._uiIgnoredEventsStorageKey = `did_ui_ignored_events_${this.id}`
-    this._uiMatchedEvents = this._localStorage.get(this._uiMatchedEventsStorageKey) || {}
-    this._storageDefaultExpire = new DateObject().add('2month').jsDate
+    this._uiMatchedEventsStorage = new BrowserStorage(`ui_matched_events_${this.id}`, 'local')
+    this._uiIgnoredEventsStorage = new BrowserStorage(`ui_ignored_events_${this.id}`, 'local')
+    this._uiMatchedEvents = this._uiMatchedEventsStorage.get({})
     return this
   }
 
@@ -147,7 +144,7 @@ export class TimesheetPeriod {
   public setManualMatch(eventId: string, project: Project) {
     const matches = this._uiMatchedEvents
     matches[eventId] = project
-    this._localStorage.put(this._uiMatchedEventsStorageKey, matches, this._storageDefaultExpire)
+    this._uiMatchedEventsStorage.set(matches)
   }
 
   /**
@@ -157,11 +154,7 @@ export class TimesheetPeriod {
    */
   public clearManualMatch(eventId: string) {
     this._uiMatchedEvents = omit(this._uiMatchedEvents, eventId)
-    this._localStorage.put(
-      this._uiMatchedEventsStorageKey,
-      this._uiMatchedEvents,
-      this._storageDefaultExpire
-    )
+    this._uiMatchedEventsStorage.set(this._uiMatchedEvents)
   }
 
   /**
@@ -171,11 +164,7 @@ export class TimesheetPeriod {
    */
   public ignoreEvent(eventId: string) {
     this._uiIgnoredEvents = [...this._uiIgnoredEvents, eventId]
-    this._localStorage.put(
-      this._uiIgnoredEventsStorageKey,
-      this._uiIgnoredEvents,
-      this._storageDefaultExpire
-    )
+    this._uiIgnoredEventsStorage.set(this._uiIgnoredEvents)
   }
 
   /**
@@ -183,11 +172,7 @@ export class TimesheetPeriod {
    */
   public clearIgnoredEvents() {
     this._uiIgnoredEvents = []
-    this._localStorage.put(
-      this._uiIgnoredEventsStorageKey,
-      this._uiIgnoredEvents,
-      this._storageDefaultExpire
-    )
+    this._uiIgnoredEventsStorage.set(this._uiIgnoredEvents)
   }
 
   /**
