@@ -16,6 +16,7 @@ import { filters } from './filters'
 import $timeentries from './timeentries.gql'
 import styles from './Reports.module.scss'
 import { getQueries, IReportsParams, IReportsState } from './types'
+import { BrowserStorage } from 'utils/browserStorage'
 
 export const Reports = () => {
   const { t } = useTranslation()
@@ -128,6 +129,7 @@ export const Reports = () => {
                   }}
                   columns={columns(t)}
                   commandBar={commandBar(context)}
+                  persistsColumnWidths={new BrowserStorage('reports_column_widths', 'local')}
                 />
               )}
               <UserMessage
