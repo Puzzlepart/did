@@ -1,14 +1,4 @@
-import {
-  SelectionMode,
-  IColumn,
-  ISearchBoxProps,
-  IDetailsGroupRenderProps,
-  IRenderFunction,
-  IDetailsHeaderProps,
-  ICommandBarProps,
-  CheckboxVisibility
-} from 'office-ui-fabric'
-import { BrowserStorage } from 'utils/browserStorage'
+import { CheckboxVisibility, IColumn, ICommandBarProps, IDetailsGroupRenderProps, IDetailsHeaderProps, IRenderFunction, ISearchBoxProps, SelectionMode } from 'office-ui-fabric'
 
 export interface IListProps<T = any> extends React.HTMLProps<HTMLDivElement> {
   /**
@@ -77,11 +67,6 @@ export interface IListProps<T = any> extends React.HTMLProps<HTMLDivElement> {
    * Filters
    */
   filters?: { [key: string]: any }
-
-  /**
-   * Browser storage instance for persisting column widths
-   */
-  persistsColumnWidths?: BrowserStorage<Record<string,number>>
 }
 
 export interface IListState<T = any> {
