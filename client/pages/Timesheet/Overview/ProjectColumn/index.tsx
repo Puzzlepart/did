@@ -20,8 +20,10 @@ import { IProjectColumnProps } from './types'
  */
 function getErrorMessage(code: string, t: TFunction): [string, MessageBarType] {
   switch (code) {
-    case 'PROJECT_INACTIVE': return [t('timesheet.projectInactiveErrorText'), MessageBarType.error]
-    case 'CUSTOMER_INACTIVE': return [t('timesheet.customerInactiveErrorText'), MessageBarType.error]
+    case 'PROJECT_INACTIVE':
+      return [t('timesheet.projectInactiveErrorText'), MessageBarType.error]
+    case 'CUSTOMER_INACTIVE':
+      return [t('timesheet.customerInactiveErrorText'), MessageBarType.error]
   }
 }
 
