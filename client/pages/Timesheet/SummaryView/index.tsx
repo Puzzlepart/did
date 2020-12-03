@@ -1,5 +1,6 @@
 import { DurationColumn } from 'components/DurationColumn'
 import List from 'components/List'
+import { ProjectTooltip } from 'components/ProjectTooltip'
 import { IColumn, MessageBar } from 'office-ui-fabric'
 import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
@@ -42,9 +43,16 @@ function createColumns(scope: TimesheetScope): IColumn[] {
       maxWidth: 350,
       isMultiline: true,
       isResizable: true,
-      onRender: (row: ILabelColumnProps) => (
-        <LabelColumn {...row} />
-      )
+      onRender: (row: ILabelColumnProps) => {
+        if (row.project) {
+          return (
+            <ProjectTooltip project={row.project}>
+              <LabelColumn {...row} />
+            </ProjectTooltip>
+          )
+        }
+        return <LabelColumn {...row} />
+      }
     },
     ...columns,
     {
