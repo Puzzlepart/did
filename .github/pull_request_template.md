@@ -4,7 +4,8 @@
 - [ ] Check your code additions locally using `npm run watch`
 - [ ] Make sure strings/resources are added using our [resource files](https://github.com/Puzzlepart/did/tree/dev/.resources)
 - [ ] Make sure [CHANGELOG.md](https://github.com/Puzzlepart/did/blob/dev/CHANGELOG.md) is update if applicable
-
+- [ ] Make sure [Smoke tests](https://github.com/Puzzlepart/did/wiki/Smoke-tests) is update if applicable
+ 
 ### Review checklist
 - [ ] Tested locally
 

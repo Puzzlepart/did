@@ -63,14 +63,14 @@ export function getQueries<T = IReportsQuery>(t: TFunction): T[] {
       key: 'lastMonth',
       text: t('common.exportTypeLastMonth', lastMonth),
       iconName: 'CalendarDay',
-      variables: { query: omit(lastMonth, 'monthName') },
+      variables: { query: omit(lastMonth, 'monthName', 'weekNumber') },
       exportFileName: `TimeEntries-${capitalize(lastMonth.monthName)}-{0}.xlsx`
     } as unknown) as T,
     ({
       key: 'currentMonth',
       text: t('common.exportTypeCurrentMonth', currentMonth),
       iconName: 'Calendar',
-      variables: { query: omit(currentMonth, 'monthName') },
+      variables: { query: omit(currentMonth, 'monthName', 'weekNumber') },
       exportFileName: `TimeEntries-${capitalize(currentMonth.monthName)}-{0}.xlsx`
     } as unknown) as T,
     ({
