@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client'
 import { AppContext } from 'AppContext'
 import { PERMISSION } from 'config/security/permissions'
-import { DefaultButton, Panel } from 'office-ui-fabric'
+import { DefaultButton } from 'office-ui-fabric'
 import React, { FunctionComponent, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ProjectsContext } from '../../context'
@@ -56,19 +56,18 @@ export const Actions: FunctionComponent = () => {
           iconProps={{ iconName: 'Edit' }}
           onClick={() => setShowEditPanel(true)}
         />
-      <Panel
-        isOpen={showEditPanel}
-        headerText={state.selected.name}
-        onDismiss={() => setShowEditPanel(false)}>
         <ProjectForm
           key={state.selected.id}
           edit={state.selected}
-          onSubmitted={() => {
-            setShowEditPanel(false)
-            refetch()
+          panel={{
+            isOpen: showEditPanel,
+            headerText: state.selected.name,
+            onDismiss: () => {
+              setShowEditPanel(false)
+              refetch()
+            }
           }}
         />
-      </Panel>
       </div>
     </div>
   )
