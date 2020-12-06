@@ -1,15 +1,17 @@
 import { AppContext } from 'AppContext'
 import { PERMISSION } from 'config/security/permissions'
-import { DefaultButton } from 'office-ui-fabric'
+import { DefaultButton, Panel } from 'office-ui-fabric'
 import { CustomersContext } from 'pages/Customers/context'
-import React, { FunctionComponent, useContext } from 'react'
+import React, { FunctionComponent, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { CustomerForm } from '../../CustomerForm'
 import styles from './Header.module.scss'
 
 export const Actions: FunctionComponent = () => {
     const { t } = useTranslation()
     const { user } = useContext(AppContext)
     const { state, loading } = useContext(CustomersContext)
+    const [showEditPanel, setShowEditPanel] = useState(false)
     return (
 
         <div className={styles.actions}>
@@ -35,7 +37,14 @@ export const Actions: FunctionComponent = () => {
                 <DefaultButton
                     text={t('common.editLabel')}
                     iconProps={{ iconName: 'Edit' }}
+                    onClick={() => setShowEditPanel(true)}
                 />
+                <Panel
+                    isOpen={showEditPanel}
+                    headerText={state.selected.name}
+                    onDismiss={() => setShowEditPanel(false)}>
+                    <CustomerForm />
+                </Panel>
             </div>
         </div>
     )
