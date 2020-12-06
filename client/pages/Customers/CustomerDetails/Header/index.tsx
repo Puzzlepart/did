@@ -6,31 +6,31 @@ import styles from './Header.module.scss'
 
 export const Header: FunctionComponent = () => {
     const { t } = useTranslation()
-    const context = useContext(CustomersContext)
+    const { state, loading } = useContext(CustomersContext)
     return (
         <div className={styles.root}>
             <div className={styles.iconContainer}>
-                <Icon iconName={context.selected.icon || 'Page'} />
+                <Icon iconName={state.selected.icon || 'Page'} />
             </div>
             <div className={styles.title}>
-                <div className={styles.text}>{context.selected.name}</div>
+                <div className={styles.text}>{state.selected.name}</div>
             </div>
             <div className={styles.actions}>
                 <div
                     className={styles.buttonContainer}
-                    hidden={context.loading  || !context.selected.webLink}>
+                    hidden={loading || !state.selected.webLink}>
                     <DefaultButton
                         text={t('customers.webLinkText')}
-                        href={context.selected.webLink}
+                        href={state.selected.webLink}
                         iconProps={{ iconName: 'Website' }}
                     />
                 </div>
                 <div
                     className={styles.buttonContainer}
-                    hidden={context.loading  || !context.selected.externalSystemURL}>
+                    hidden={loading || !state.selected.externalSystemURL}>
                     <DefaultButton
                         text={t('customers.externalSystemUrlText')}
-                        href={context.selected.externalSystemURL}
+                        href={state.selected.externalSystemURL}
                         iconProps={{ iconName: 'System' }}
                     />
                 </div>

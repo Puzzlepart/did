@@ -1,90 +1,74 @@
 import { useQuery } from '@apollo/client'
 import { AppContext } from 'AppContext'
 import { PERMISSION } from 'config/security/permissions'
-import { getValue } from 'helpers'
-import { MessageBar, MessageBarType, Pivot, PivotItem, SelectionMode } from 'office-ui-fabric'
+import { MessageBar, MessageBarType, Pivot, PivotItem } from 'office-ui-fabric'
 import { CustomerForm } from 'pages/Customers/CustomerForm'
-import React, { FunctionComponent, useContext, useEffect, useState } from 'react'
+import React, { FunctionComponent, useContext, useEffect, useMemo, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
-import { Customer } from 'types'
-import { find } from 'underscore'
+import { CustomersContext, ICustomersContext } from './context'
 import { CustomerDetails } from './CustomerDetails'
 import { CustomerList } from './CustomerList'
 import $customers from './customers.gql'
-import { ICustomersParams } from './types'
+import reducer, { initState } from './reducer'
+import { CustomersView, ICustomersParams } from './types'
 
 export const Customers: FunctionComponent = () => {
   const { t } = useTranslation()
   const { user } = useContext(AppContext)
   const history = useHistory()
   const params = useParams<ICustomersParams>()
-  const [selected, setSelected] = useState<Customer>(null)
-  const { loading, error, data } = useQuery($customers, {
+  const [state, dispatch] = useReducer(reducer(history), initState(params))
+  const query = useQuery($customers, {
     fetchPolicy: 'cache-first'
   })
 
-  const customers = getValue<Customer[]>(data, 'customers', [])
+  useEffect(() => dispatch({ type: 'DATA_UPDATED', query, params }), [query])
 
-  useEffect(() => {
-    if (!selected && params.key) {
-      const _selected = find(customers, (p) => p.key === params.key)
-      setSelected(_selected)
-    }
-  }, [params.key, customers])
-
-  function onPivotClick({ props: { itemKey } }: PivotItem) {
-    setSelected(null)
-    history.push(`/customers/${itemKey}`)
-  }
+  const ctxValue: ICustomersContext = useMemo(() => ({
+    state,
+    dispatch,
+    refetch: query.refetch,
+    loading: query.loading
+  }), [state])
 
   return (
-    <Pivot
-      selectedKey={params.view || 'search'}
-      onLinkClick={onPivotClick}
-      styles={{ itemContainer: { paddingTop: 10 } }}>
-      <PivotItem
-        itemID='search'
-        itemKey='search'
-        headerText={t('common.search')}
-        itemIcon='FabricFolderSearch'>
-        {error ? (
-          <MessageBar messageBarType={MessageBarType.error}>
-            {t('common.genericErrorText')}
-          </MessageBar>
-        ) : (
-          <>
-            <CustomerList
-              enableShimmer={loading}
-              items={customers}
-              searchBox={{ placeholder: t('common.searchPlaceholder') }}
-              selection={{
-                mode: SelectionMode.single,
-                onChanged: (selected) => {
-                  selected &&
-                    history.push(
-                      ['/customers', params.view || 'search', selected.key]
-                        .filter((p) => p)
-                        .join('/')
-                    )
-                  setSelected(selected)
-                }
-              }}
-              height={selected && 400}
-            />
-            {selected && <CustomerDetails customer={selected} />}
-          </>
-        )}
-      </PivotItem>
-      {user.hasPermission(PERMISSION.MANAGE_CUSTOMERS) && (
+    <CustomersContext.Provider value={ctxValue}>
+      <Pivot
+        selectedKey={params.view || 'search'}
+        onLinkClick={({ props }) =>
+          dispatch({
+            type: 'CHANGE_VIEW',
+            view: props.itemKey as CustomersView
+          })
+        }
+        styles={{ itemContainer: { paddingTop: 10 } }}>
         <PivotItem
-          itemID='new'
-          itemKey='new'
-          headerText={t('customers.createNewText')}
-          itemIcon='AddTo'>
-          <CustomerForm />
+          itemID='search'
+          itemKey='search'
+          headerText={t('common.search')}
+          itemIcon='FabricFolderSearch'>
+          {query.error ? (
+            <MessageBar messageBarType={MessageBarType.error}>
+              {t('common.genericErrorText')}
+            </MessageBar>
+          ) : (
+              <>
+                <CustomerList />
+                {state.selected && <CustomerDetails />}
+              </>
+            )}
         </PivotItem>
-      )}
-    </Pivot>
+        {user.hasPermission(PERMISSION.MANAGE_CUSTOMERS) && (
+          <PivotItem
+            itemID='new'
+            itemKey='new'
+            headerText={t('customers.createNewText')}
+            itemIcon='AddTo'>
+            <CustomerForm />
+          </PivotItem>
+        )}
+      </Pivot>
+    </CustomersContext.Provider>
   )
 }

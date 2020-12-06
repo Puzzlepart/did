@@ -27,7 +27,7 @@ export type CustomersAction =
  * @param {number} delay Delay in ms
  */
 const updateHistory = (state: ICustomersState, history: History, delay: number = 250) => {
-  const paths = [state.view, state.selected?.id]
+  const paths = [state.view, state.selected?.key]
   const path = `/${['customers', ...paths].filter((p) => p).join('/')}`.toLowerCase()
   setTimeout(() => history.push(path), delay)
 }
@@ -58,10 +58,10 @@ export default (history: History) => (
       {
         const { query } = action
         if (query.data) {
-          newState.customers = query.data.projects
+          newState.customers = query.data.customers
           newState.selected = find(
             newState.customers,
-            (p) => JSON.stringify(action.params).toLowerCase().indexOf(p.id.toLowerCase()) !== -1
+            (c) => JSON.stringify(action.params).toLowerCase().indexOf(c.key.toLowerCase()) !== -1
           )
         }
       }
