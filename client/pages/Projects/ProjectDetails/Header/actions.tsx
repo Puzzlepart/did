@@ -36,13 +36,6 @@ export const Actions: FunctionComponent = () => {
 
   return (
     <div className={styles.actions}>
-      <div className={styles.actionItem} hidden={!user.hasPermission(PERMISSION.MANAGE_PROJECTS)}>
-        <DefaultButton
-          text={t('common.editLabel')}
-          iconProps={{ iconName: 'Edit' }}
-          onClick={() => setShowEditPanel(true)}
-        />
-      </div>
       <div className={styles.actionItem} hidden={!state.selected.webLink}>
         <DefaultButton
           text={t('projects.workspaceLabel')}
@@ -57,6 +50,12 @@ export const Actions: FunctionComponent = () => {
           onClick={() => onCreateCategory()}
         />
       </div>
+      <div className={styles.actionItem} hidden={!user.hasPermission(PERMISSION.MANAGE_PROJECTS)}>
+        <DefaultButton
+          text={t('common.editLabel')}
+          iconProps={{ iconName: 'Edit' }}
+          onClick={() => setShowEditPanel(true)}
+        />
       <Panel
         isOpen={showEditPanel}
         headerText={state.selected.name}
@@ -70,6 +69,7 @@ export const Actions: FunctionComponent = () => {
           }}
         />
       </Panel>
+      </div>
     </div>
   )
 }
