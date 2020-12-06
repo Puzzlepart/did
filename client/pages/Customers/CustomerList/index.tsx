@@ -12,10 +12,10 @@ export const CustomerList = () => {
   const [items, setItems] = useState([...state.customers])
   const [showInactive, setShowInactive] = useState(false)
 
-  useEffect(() => setItems([...state.customers].filter((p) => (showInactive ? true : !p.inactive))), [
-    state.customers,
-    showInactive
-  ])
+  useEffect(
+    () => setItems([...state.customers].filter((p) => (showInactive ? true : !p.inactive))),
+    [state.customers, showInactive]
+  )
 
   return (
     <List

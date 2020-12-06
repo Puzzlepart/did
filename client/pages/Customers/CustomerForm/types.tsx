@@ -10,10 +10,10 @@ export class CustomerModel {
   public icon: string
 
   constructor(customer?: Customer) {
-      this.key = customer?.key || ''
-      this.name = customer?.name || ''
-      this.description = customer?.description || ''
-      this.icon = customer?.icon|| first(getIcons(1))
+    this.key = customer?.key || ''
+    this.name = customer?.name || ''
+    this.description = customer?.description || ''
+    this.icon = customer?.icon || first(getIcons(1))
   }
 }
 

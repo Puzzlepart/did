@@ -25,12 +25,15 @@ export const Customers: FunctionComponent = () => {
 
   useEffect(() => dispatch({ type: 'DATA_UPDATED', query, params }), [query])
 
-  const ctxValue: ICustomersContext = useMemo(() => ({
-    state,
-    dispatch,
-    refetch: query.refetch,
-    loading: query.loading
-  }), [state])
+  const ctxValue: ICustomersContext = useMemo(
+    () => ({
+      state,
+      dispatch,
+      refetch: query.refetch,
+      loading: query.loading
+    }),
+    [state]
+  )
 
   return (
     <CustomersContext.Provider value={ctxValue}>
@@ -53,11 +56,11 @@ export const Customers: FunctionComponent = () => {
               {t('common.genericErrorText')}
             </MessageBar>
           ) : (
-              <>
-                <CustomerList />
-                {state.selected && <CustomerDetails />}
-              </>
-            )}
+            <>
+              <CustomerList />
+              {state.selected && <CustomerDetails />}
+            </>
+          )}
         </PivotItem>
         {user.hasPermission(PERMISSION.MANAGE_CUSTOMERS) && (
           <PivotItem

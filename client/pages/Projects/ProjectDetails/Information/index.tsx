@@ -26,7 +26,8 @@ export const Information: FunctionComponent = () => {
         <ReactMarkdown
           className={styles.description}
           source={state.selected.description}
-          escapeHtml={false} />
+          escapeHtml={false}
+        />
       )}
       <div className={styles.labels}>
         {state.selected.labels.map((label, idx) => (

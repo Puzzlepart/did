@@ -6,18 +6,18 @@ import { CustomersView, ICustomersParams, ICustomersState } from './types'
 
 export type CustomersAction =
   | {
-    type: 'DATA_UPDATED'
-    query: QueryResult<any>
-    params: ICustomersParams
-  }
+      type: 'DATA_UPDATED'
+      query: QueryResult<any>
+      params: ICustomersParams
+    }
   | {
-    type: 'SET_SELECTED_CUSTOMER'
-    customer: Customer
-  }
+      type: 'SET_SELECTED_CUSTOMER'
+      customer: Customer
+    }
   | {
-    type: 'CHANGE_VIEW'
-    view: any
-  }
+      type: 'CHANGE_VIEW'
+      view: any
+    }
 
 /**
  * Update history
@@ -39,7 +39,7 @@ const updateHistory = (state: ICustomersState, history: History, delay: number =
  */
 export const initState = (params: ICustomersParams): ICustomersState => ({
   view: (contains(['search', 'new'], params.view) ? params.view : 'search') as CustomersView,
-  customers: [],
+  customers: []
 })
 
 /**

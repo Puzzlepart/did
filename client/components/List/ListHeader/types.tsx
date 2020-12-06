@@ -2,10 +2,9 @@ import {
   IRenderFunction,
   IDetailsHeaderProps,
   ICommandBarProps,
-  ISearchBoxProps,
+  ISearchBoxProps
 } from 'office-ui-fabric'
 import { Dispatch } from 'react'
-
 
 export interface IListHeaderProps {
   headerProps: IDetailsHeaderProps

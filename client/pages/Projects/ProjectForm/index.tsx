@@ -15,10 +15,7 @@ import { validateForm } from './validateForm'
 export const ProjectForm: FunctionComponent<IProjectFormProps> = (props: IProjectFormProps) => {
   const { t } = useTranslation()
   const [message, setMessage] = useMessage()
-  const [state, dispatch] = useReducer(
-    reducer,
-    initState(props.edit)
-  )
+  const [state, dispatch] = useReducer(reducer, initState(props.edit))
   const [createOrUpdateProject, { loading }] = useMutation($createOrUpdateProject)
 
   /**
@@ -58,7 +55,7 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (props: IProjec
   return (
     <ConditionalWrapper
       condition={!!props.panel}
-      wrapper={children => <Panel {...props.panel}>{children}</Panel>}>
+      wrapper={(children) => <Panel {...props.panel}>{children}</Panel>}>
       <div className={styles.root}>
         {message && (
           <UserMessage

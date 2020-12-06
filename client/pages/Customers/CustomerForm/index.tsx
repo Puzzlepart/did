@@ -14,10 +14,7 @@ import { validateForm } from './validateForm'
 export const CustomerForm: FunctionComponent<ICustomerFormProps> = (props: ICustomerFormProps) => {
   const { t } = useTranslation()
   const [message, setMessage] = useMessage()
-  const [state, dispatch] = useReducer(
-    reducer,
-    initState(props.edit)
-  )
+  const [state, dispatch] = useReducer(reducer, initState(props.edit))
   const [createOrUpdateCustomer, { loading }] = useMutation($createOrUpdateCustomer)
 
   /**
@@ -53,7 +50,7 @@ export const CustomerForm: FunctionComponent<ICustomerFormProps> = (props: ICust
   return (
     <ConditionalWrapper
       condition={!!props.panel}
-      wrapper={children => <Panel {...props.panel}>{children}</Panel>}>
+      wrapper={(children) => <Panel {...props.panel}>{children}</Panel>}>
       <div className={styles.root}>
         {message && (
           <UserMessage
@@ -83,10 +80,12 @@ export const CustomerForm: FunctionComponent<ICustomerFormProps> = (props: ICust
           description={t('customers.nameFieldDescription', AppConfig)}
           required={true}
           errorMessage={state.validation.errors.name}
-          onChange={(_event, value) => dispatch({
-            type: 'UPDATE_MODEL',
-            payload: ['name', value]
-          })}
+          onChange={(_event, value) =>
+            dispatch({
+              type: 'UPDATE_MODEL',
+              payload: ['name', value]
+            })
+          }
           value={state.model.name}
         />
         <TextField
@@ -96,10 +95,12 @@ export const CustomerForm: FunctionComponent<ICustomerFormProps> = (props: ICust
           multiline={true}
           autoAdjustHeight={true}
           errorMessage={state.validation.errors.description}
-          onChange={(_event, value) => dispatch({
-            type: 'UPDATE_MODEL',
-            payload: ['description', value]
-          })}
+          onChange={(_event, value) =>
+            dispatch({
+              type: 'UPDATE_MODEL',
+              payload: ['description', value]
+            })
+          }
           value={state.model.description}
         />
         <IconPicker
@@ -109,10 +110,12 @@ export const CustomerForm: FunctionComponent<ICustomerFormProps> = (props: ICust
           description={t('customers.iconFieldDescription')}
           placeholder={t('common.iconSearchPlaceholder')}
           width={300}
-          onSelected={(value) => dispatch({
-            type: 'UPDATE_MODEL',
-            payload: ['icon', value]
-          })}
+          onSelected={(value) =>
+            dispatch({
+              type: 'UPDATE_MODEL',
+              payload: ['icon', value]
+            })
+          }
         />
         <PrimaryButton
           className={styles.inputField}

@@ -33,7 +33,8 @@ export const CustomerDetails: FunctionComponent = () => {
         <ReactMarkdown
           className={styles.description}
           source={state.selected.description}
-          escapeHtml={false} />
+          escapeHtml={false}
+        />
       )}
       <div>
         {error && (
