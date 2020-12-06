@@ -32,12 +32,12 @@ export const CustomerForm: FunctionComponent<IProjectFormProps> = (props: IProje
     const { data } = await createOrUpdateCustomer({
       variables: {
         customer: state.model,
-        update: false
+        update: state.editMode
       }
     })
     if (data?.result.success) {
-      if (state.editMode && props.onSubmitted) {
-        setTimeout(props.onSubmitted, 1000)
+      if (props.panel) {
+        setTimeout(props.panel.onDismiss, 1000)
       } else {
         setMessage({
           text: t('customers.createSuccess', { name: state.model.name }),
@@ -113,7 +113,7 @@ export const CustomerForm: FunctionComponent<IProjectFormProps> = (props: IProje
           })}
         />
         <PrimaryButton
-          styles={{ root: { marginTop: 16 } }}
+          className={styles.inputField}
           text={state.editMode ? t('common.save') : t('common.add')}
           onClick={onFormSubmit}
           disabled={loading || !!message}

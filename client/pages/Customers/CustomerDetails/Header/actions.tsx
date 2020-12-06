@@ -40,11 +40,13 @@ export const Actions: FunctionComponent = () => {
                 />
                 <CustomerForm
                     edit={state.selected}
-                    onSubmitted={refetch}
                     panel={{
                         isOpen: showEditPanel,
                         headerText: state.selected.name,
-                        onDismiss: () => setShowEditPanel(false)
+                        onDismiss: () => {
+                            setShowEditPanel(false)
+                            refetch()
+                        }
                     }} />
             </div>
         </div>
