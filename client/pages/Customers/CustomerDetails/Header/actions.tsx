@@ -1,6 +1,6 @@
 import { AppContext } from 'AppContext'
 import { PERMISSION } from 'config/security/permissions'
-import { DefaultButton, Panel } from 'office-ui-fabric'
+import { DefaultButton } from 'office-ui-fabric'
 import { CustomersContext } from 'pages/Customers/context'
 import React, { FunctionComponent, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -10,10 +10,9 @@ import styles from './Header.module.scss'
 export const Actions: FunctionComponent = () => {
     const { t } = useTranslation()
     const { user } = useContext(AppContext)
-    const { state, loading } = useContext(CustomersContext)
+    const { state, loading, refetch } = useContext(CustomersContext)
     const [showEditPanel, setShowEditPanel] = useState(false)
     return (
-
         <div className={styles.actions}>
             <div
                 className={styles.actionItem}
@@ -39,12 +38,14 @@ export const Actions: FunctionComponent = () => {
                     iconProps={{ iconName: 'Edit' }}
                     onClick={() => setShowEditPanel(true)}
                 />
-                <Panel
-                    isOpen={showEditPanel}
-                    headerText={state.selected.name}
-                    onDismiss={() => setShowEditPanel(false)}>
-                    <CustomerForm />
-                </Panel>
+                <CustomerForm
+                    edit={state.selected}
+                    onSubmitted={refetch}
+                    panel={{
+                        isOpen: showEditPanel,
+                        headerText: state.selected.name,
+                        onDismiss: () => setShowEditPanel(false)
+                    }} />
             </div>
         </div>
     )

@@ -17,7 +17,7 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({
 }: IProjectFormProps) => {
   const { t } = useTranslation()
   const [message, setMessage] = useMessage()
-  const [{ model, validation, options, editMode, projectId }, dispatch] = useReducer(
+  const [state, dispatch] = useReducer(
     reducer,
     initState(edit)
   )
@@ -27,26 +27,26 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({
    * On form submit
    */
   const onFormSubmit = async () => {
-    const _validation = validateForm(model, t)
+    const _validation = validateForm(state.model, t)
     if (_validation.invalid) {
       dispatch({ type: 'SET_VALIDATION', payload: { validation: _validation } })
       return
     }
     const { data } = await createOrUpdateProject({
       variables: {
-        project: model,
-        options: options,
-        update: editMode
+        project: state.model,
+        options: state.options,
+        update: state.editMode
       }
     })
     if (data?.result.success) {
-      if (editMode && onSubmitted) {
+      if (state.editMode && onSubmitted) {
         setTimeout(onSubmitted, 1000)
       } else {
         setMessage({
           text: t('projects.createSuccess', {
-            projectId: projectId,
-            name: model.name
+            projectId: state.projectId,
+            name: state.model.name
           }),
           type: MessageBarType.success
         })
@@ -66,7 +66,7 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({
         />
       )}
       <SearchCustomer
-        hidden={editMode}
+        hidden={state.editMode}
         label={t('common.customer')}
         required={true}
         className={styles.inputField}
@@ -77,7 +77,7 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({
             payload: ['customerKey', '']
           })
         }
-        errorMessage={validation.errors.customerKey}
+        errorMessage={state.validation.errors.customerKey}
         onSelected={({ key }) =>
           dispatch({
             type: 'UPDATE_MODEL',
@@ -86,34 +86,34 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({
         }
       />
       <TextField
-        disabled={editMode}
+        disabled={state.editMode}
         className={styles.inputField}
         label={t('projects.keyFieldLabel')}
         description={t('projects.keyFieldDescription', AppConfig)}
         required={true}
-        errorMessage={validation.errors.projectKey}
+        errorMessage={state.validation.errors.projectKey}
         onChange={(_event, value) =>
           dispatch({
             type: 'UPDATE_MODEL',
             payload: ['projectKey', value.toUpperCase()]
           })
         }
-        value={model.projectKey}
+        value={state.model.projectKey}
       />
       <UserMessage
-        hidden={editMode}
+        hidden={state.editMode}
         className={styles.idPreviewText}
         iconName='OutlookLogo'
         text={
-          isBlank(projectId)
+          isBlank(state.projectId)
             ? t('projects.idPreviewBlankText')
-            : t('projects.idPreviewText', { projectId })
+            : t('projects.idPreviewText', { id: state.projectId })
         }
       />
-      <div className={styles.inputField} hidden={editMode}>
+      <div className={styles.inputField} hidden={state.editMode}>
         <Toggle
           label={t('projects.createOutlookCategoryFieldLabel')}
-          checked={options.createOutlookCategory}
+          checked={state.options.createOutlookCategory}
           onChange={(_event, value) =>
             dispatch({
               type: 'UPDATE_OPTIONS',
@@ -122,7 +122,7 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({
           }
         />
         <span className={styles.inputDescription}>
-          {t('projects.createOutlookCategoryFieldDescription', { id: projectId })}
+          {t('projects.createOutlookCategoryFieldDescription', { id: state.projectId })}
         </span>
       </div>
       <TextField
@@ -130,32 +130,32 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({
         label={t('common.nameFieldLabel')}
         description={t('projects.nameFieldDescription', AppConfig)}
         required={true}
-        errorMessage={validation.errors.name}
+        errorMessage={state.validation.errors.name}
         onChange={(_event, value) =>
           dispatch({
             type: 'UPDATE_MODEL',
             payload: ['name', value]
           })
         }
-        value={model.name}
+        value={state.model.name}
       />
       <TextField
         className={styles.inputField}
         label={t('common.descriptionFieldLabel')}
         description={t('projects.descriptionFieldDescription')}
         multiline={true}
-        errorMessage={validation.errors.description}
+        errorMessage={state.validation.errors.description}
         onChange={(_event, value) =>
           dispatch({
             type: 'UPDATE_MODEL',
             payload: ['description', value]
           })
         }
-        value={model.description}
+        value={state.model.description}
       />
       <IconPicker
         className={styles.inputField}
-        defaultSelected={model.icon}
+        defaultSelected={state.model.icon}
         label={t('common.iconFieldLabel')}
         description={t('projects.iconFieldDescription')}
         placeholder={t('common.iconSearchPlaceholder')}
@@ -167,10 +167,10 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({
           })
         }
       />
-      <div className={styles.inputField} hidden={!editMode}>
+      <div className={styles.inputField} hidden={!state.editMode}>
         <Toggle
           label={t('common.inactiveFieldLabel')}
-          checked={model.inactive}
+          checked={state.model.inactive}
           onChange={(_event, value) =>
             dispatch({
               type: 'UPDATE_MODEL',
@@ -184,7 +184,7 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({
         className={styles.inputField}
         label={t('admin.labels')}
         placeholder={t('admin.filterLabels')}
-        defaultSelectedKeys={editMode ? edit.labels.map((lbl) => lbl.name) : []}
+        defaultSelectedKeys={state.editMode ? edit.labels.map((lbl) => lbl.name) : []}
         onChange={(labels) =>
           dispatch({
             type: 'UPDATE_MODEL',
@@ -194,7 +194,7 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({
       />
       <PrimaryButton
         className={styles.inputField}
-        text={editMode ? t('common.save') : t('common.add')}
+        text={state.editMode ? t('common.save') : t('common.add')}
         onClick={onFormSubmit}
         disabled={loading || !!message}
       />

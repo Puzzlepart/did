@@ -2,18 +2,6 @@ import { getIcons } from 'common/icons'
 import { IFormValidation, Project, ProjectOptions } from 'types'
 import { first } from 'underscore'
 
-export interface IProjectFormProps {
-  /**
-   * Project to edit
-   */
-  edit?: Project
-
-  /**
-   * On submitted callback
-   */
-  onSubmitted?: () => void
-}
-
 export class ProjectModel {
   public name = ''
   public projectKey = ''
@@ -34,6 +22,18 @@ export class ProjectModel {
       this.labels = project.labels.map((label) => label.name)
     }
   }
+}
+
+export interface IProjectFormProps {
+  /**
+   * Project to edit
+   */
+  edit?: Project
+
+  /**
+   * On submitted callback
+   */
+  onSubmitted?: () => void
 }
 
 export interface IProjectFormState {

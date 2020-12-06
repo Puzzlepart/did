@@ -1,7 +1,7 @@
 import { Icon } from 'office-ui-fabric'
 import { CustomersContext } from 'pages/Customers/context'
 import React, { FunctionComponent, useContext } from 'react'
-import { Actions } from './Actions'
+import { Actions } from './actions'
 import styles from './Header.module.scss'
 
 export const Header: FunctionComponent = () => {
