@@ -144,8 +144,9 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (props: IProjec
           className={styles.inputField}
           label={t('common.descriptionFieldLabel')}
           description={t('projects.descriptionFieldDescription')}
-          multiline={true}
           errorMessage={state.validation.errors.description}
+          multiline={true}
+          autoAdjustHeight={true}
           onChange={(_event, value) =>
             dispatch({
               type: 'UPDATE_MODEL',

@@ -92,7 +92,9 @@ export const CustomerForm: FunctionComponent<ICustomerFormProps> = (props: ICust
         <TextField
           className={styles.inputField}
           label={t('common.descriptionFieldLabel')}
+          description={t('customers.descriptionFieldDescription')}
           multiline={true}
+          autoAdjustHeight={true}
           errorMessage={state.validation.errors.description}
           onChange={(_event, value) => dispatch({
             type: 'UPDATE_MODEL',

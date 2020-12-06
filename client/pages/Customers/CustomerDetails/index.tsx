@@ -4,6 +4,7 @@ import { MessageBar, MessageBarType } from 'office-ui-fabric'
 import { ProjectList } from 'pages/Projects'
 import React, { FunctionComponent, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
+import ReactMarkdown from 'react-markdown/with-html'
 import { CustomersContext } from '../context'
 import styles from './CustomerDetails.module.scss'
 import { Header } from './Header'
@@ -28,7 +29,12 @@ export const CustomerDetails: FunctionComponent = () => {
           type={MessageBarType.warning}
         />
       )}
-      <div hidden={!state.selected.description} className={styles.description}>{state.selected.description}</div>
+      {state.selected.description && (
+        <ReactMarkdown
+          className={styles.description}
+          source={state.selected.description}
+          escapeHtml={false} />
+      )}
       <div>
         {error && (
           <MessageBar messageBarType={MessageBarType.error}>

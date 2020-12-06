@@ -81,7 +81,7 @@
     "createNewText": "Opprett nytt",
     "customerFormValidationText": "Du må velge en kunde.",
     "nameFieldDescription": "Navnet på prosjektet. \nDette vil være synlig i timelisten og i prosjektoversikten. \nMinimum {{PROJECT_NAME_MIN_LENGTH}} tegn.",
-    "descriptionFieldDescription": "Beskriv prosjektet i mer detalj.",
+    "descriptionFieldDescription": "Beskriv prosjektet mer detaljert. \nStøtter markdown.",
     "idPreviewBlankText": "Du vil bruke en kombinasjon av kundenøkkel og prosjektnøkkel for å tagge kalenderoppføringene dine i Outlook. \nDu kan automatisk opprette en kategori i Outlook ved å huke av for _Opprett automatisk kategori i Outlook_.",
     "informationHeaderText": "Informasjon",
     "timeEntriesHeaderText": "Tidsoppføringer",
@@ -100,7 +100,8 @@
     "createNewText": "Opprett ny",
     "keyFieldLabel": "Kundenøkkel",
     "iconFieldDescription": "Bruk et ikon for å gjøre kunden mer gjenkjennelig på timelisten og kundesiden. \nEt tilfeldig ikon vil bli valgt hvis du ikke velger en selv.",
-    "nameFieldDescription": "Navnet på kunden. Dette vil være synlig i timelisten din og i prosjektoversikten. Minimum {{CUSTOMER_NAME_MIN_LENGTH}} karakterer."
+    "nameFieldDescription": "Navnet på kunden. Dette vil være synlig i timelisten din og i prosjektoversikten. Minimum {{CUSTOMER_NAME_MIN_LENGTH}} karakterer.",
+    "descriptionFieldDescription": "En kort beskrivelse for kunden. \nStøtter markdown."
   },
   "admin": {
     "users": "Brukere",
