@@ -8,10 +8,10 @@ import { useTranslation } from 'react-i18next'
 import $createOrUpdateCustomer from './createOrUpdateCustomer.gql'
 import styles from './CustomerForm.module.scss'
 import reducer, { initState } from './reducer'
-import { IProjectFormProps } from './types'
+import { ICustomerFormProps } from './types'
 import { validateForm } from './validateForm'
 
-export const CustomerForm: FunctionComponent<IProjectFormProps> = (props: IProjectFormProps) => {
+export const CustomerForm: FunctionComponent<ICustomerFormProps> = (props: ICustomerFormProps) => {
   const { t } = useTranslation()
   const [message, setMessage] = useMessage()
   const [state, dispatch] = useReducer(

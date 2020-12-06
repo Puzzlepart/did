@@ -17,7 +17,7 @@ export class CustomerModel {
   }
 }
 
-export interface IProjectFormProps {
+export interface ICustomerFormProps {
   /**
    * Panel props
    */
@@ -27,11 +27,6 @@ export interface IProjectFormProps {
    * Customer to edit
    */
   edit?: Customer
-
-  /**
-   * On submitted callback
-   */
-  onSubmitted?: () => void
 }
 
 export interface ICustomerFormState {
