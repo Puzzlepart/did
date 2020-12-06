@@ -28,7 +28,7 @@ export const CustomerDetails: FunctionComponent = () => {
           type={MessageBarType.warning}
         />
       )}
-      <div className={styles.description}>{state.selected.description}</div>
+      <div hidden={!state.selected.description} className={styles.description}>{state.selected.description}</div>
       <div>
         {error && (
           <MessageBar messageBarType={MessageBarType.error}>
