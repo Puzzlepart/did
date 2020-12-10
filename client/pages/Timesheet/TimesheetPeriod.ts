@@ -37,6 +37,7 @@ export class TimesheetPeriod {
     this._uiMatchedEventsStorage = new BrowserStorage(`ui_matched_events_${this.id}`, 'local')
     this._uiIgnoredEventsStorage = new BrowserStorage(`ui_ignored_events_${this.id}`, 'local')
     this._uiMatchedEvents = this._uiMatchedEventsStorage.get({})
+    this._uiIgnoredEvents = this._uiIgnoredEventsStorage.get([])
     return this
   }
 
