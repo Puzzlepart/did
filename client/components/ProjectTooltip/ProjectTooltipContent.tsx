@@ -7,7 +7,9 @@ import { isEmpty } from 'underscore'
 import styles from './ProjectTooltip.module.scss'
 import { IProjectTooltipProps } from './types'
 
-export const ProjectTooltipContent: FunctionComponent<IProjectTooltipProps> = ({ project }: IProjectTooltipProps) => {
+export const ProjectTooltipContent: FunctionComponent<IProjectTooltipProps> = ({
+  project
+}: IProjectTooltipProps) => {
   const { t } = useTranslation()
   return (
     <div className={styles.root}>
@@ -23,7 +25,7 @@ export const ProjectTooltipContent: FunctionComponent<IProjectTooltipProps> = ({
         </div>
       </div>
       <div className={styles.description}>
-        <p hidden={stringIsNullOrEmpty(project.description)} >{project.description}</p>
+        <p hidden={stringIsNullOrEmpty(project.description)}>{project.description}</p>
       </div>
       {!isEmpty(project.labels) && (
         <div className={styles.labels}>
@@ -34,10 +36,7 @@ export const ProjectTooltipContent: FunctionComponent<IProjectTooltipProps> = ({
       )}
       <div className={styles.footer}>
         <div className={styles.link}>
-          <ProjectLink
-            project={project}
-            text={t('projects.navigateText')}
-            icon='NavigateForward' />
+          <ProjectLink project={project} text={t('projects.navigateText')} icon='NavigateForward' />
         </div>
         <div className={styles.tag}>
           <span>{project.id}</span>
