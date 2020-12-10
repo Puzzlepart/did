@@ -1,61 +1,41 @@
 import { useQuery } from '@apollo/client'
 import { UserMessage } from 'components/UserMessage'
-import { DefaultButton, Icon, MessageBar, MessageBarType } from 'office-ui-fabric'
+import { MessageBar, MessageBarType } from 'office-ui-fabric'
 import { ProjectList } from 'pages/Projects'
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
+import ReactMarkdown from 'react-markdown/with-html'
+import { CustomersContext } from '../context'
 import styles from './CustomerDetails.module.scss'
+import { Header } from './Header'
 import $projects from './projects.gql'
-import { ICustomerDetailsProps } from './types'
 
-export const CustomerDetails: FunctionComponent<ICustomerDetailsProps> = (
-  props: ICustomerDetailsProps
-) => {
+export const CustomerDetails: FunctionComponent = () => {
   const { t } = useTranslation()
+  const { state } = useContext(CustomersContext)
   const { loading, error, data } = useQuery($projects, {
     variables: {
-      customerKey: props.customer?.key
+      customerKey: state.selected?.key
     }
   })
 
   return (
     <div className={styles.root}>
-      <div className={styles.header}>
-        <div className={styles.iconContainer}>
-          <Icon iconName={props.customer.icon || 'Page'} />
-        </div>
-        <div className={styles.title}>
-          <div className={styles.text}>{props.customer.name}</div>
-        </div>
-        <div className={styles.actions}>
-          <div
-            className={styles.buttonContainer}
-            hidden={loading || !!error || !props.customer.webLink}>
-            <DefaultButton
-              text={t('customers.webLinkText')}
-              href={props.customer.webLink}
-              iconProps={{ iconName: 'Website' }}
-            />
-          </div>
-          <div
-            className={styles.buttonContainer}
-            hidden={loading || !!error || !props.customer.externalSystemURL}>
-            <DefaultButton
-              text={t('customers.externalSystemUrlText')}
-              href={props.customer.externalSystemURL}
-              iconProps={{ iconName: 'System' }}
-            />
-          </div>
-        </div>
-      </div>
-      {props.customer.inactive && (
+      <Header />
+      {state.selected.inactive && (
         <UserMessage
           text={t('customers.inactiveText')}
           iconName='Warning'
           type={MessageBarType.warning}
         />
       )}
-      <div className={styles.description}>{props.customer.description}</div>
+      {state.selected.description && (
+        <ReactMarkdown
+          className={styles.description}
+          source={state.selected.description}
+          escapeHtml={false}
+        />
+      )}
       <div>
         {error && (
           <MessageBar messageBarType={MessageBarType.error}>

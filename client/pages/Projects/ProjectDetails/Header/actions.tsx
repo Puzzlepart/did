@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client'
 import { AppContext } from 'AppContext'
 import { PERMISSION } from 'config/security/permissions'
-import { DefaultButton, Panel } from 'office-ui-fabric'
+import { DefaultButton } from 'office-ui-fabric'
 import React, { FunctionComponent, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ProjectsContext } from '../../context'
@@ -36,13 +36,6 @@ export const Actions: FunctionComponent = () => {
 
   return (
     <div className={styles.actions}>
-      <div className={styles.actionItem} hidden={!user.hasPermission(PERMISSION.MANAGE_PROJECTS)}>
-        <DefaultButton
-          text={t('common.editLabel')}
-          iconProps={{ iconName: 'Edit' }}
-          onClick={() => setShowEditPanel(true)}
-        />
-      </div>
       <div className={styles.actionItem} hidden={!state.selected.webLink}>
         <DefaultButton
           text={t('projects.workspaceLabel')}
@@ -57,19 +50,25 @@ export const Actions: FunctionComponent = () => {
           onClick={() => onCreateCategory()}
         />
       </div>
-      <Panel
-        isOpen={showEditPanel}
-        headerText={state.selected.name}
-        onDismiss={() => setShowEditPanel(false)}>
+      <div className={styles.actionItem} hidden={!user.hasPermission(PERMISSION.MANAGE_PROJECTS)}>
+        <DefaultButton
+          text={t('common.editLabel')}
+          iconProps={{ iconName: 'Edit' }}
+          onClick={() => setShowEditPanel(true)}
+        />
         <ProjectForm
           key={state.selected.id}
           edit={state.selected}
-          onSubmitted={() => {
-            setShowEditPanel(false)
-            refetch()
+          panel={{
+            isOpen: showEditPanel,
+            headerText: state.selected.name,
+            onDismiss: () => {
+              setShowEditPanel(false)
+              refetch()
+            }
           }}
         />
-      </Panel>
+      </div>
     </div>
   )
 }
