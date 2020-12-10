@@ -1,9 +1,4 @@
-import {
-  Sticky,
-  StickyPositionType,
-  CommandBar,
-  SearchBox
-} from 'office-ui-fabric'
+import { Sticky, StickyPositionType, CommandBar, SearchBox } from 'office-ui-fabric'
 import React, { FunctionComponent, useMemo, useRef } from 'react'
 import { IListHeaderProps } from './types'
 import styles from './ListHeader.module.scss'
@@ -31,16 +26,11 @@ export const ListHeader: FunctionComponent<IListHeaderProps> = (props: IListHead
     }
   }, [props.searchBox])
   return (
-    <Sticky
-      stickyPosition={StickyPositionType.Header}
-      isScrollSynced={true}>
+    <Sticky stickyPosition={StickyPositionType.Header} isScrollSynced={true}>
       <div className={styles.root}>
         <CommandBar
           {...props.commandBar}
-          items={[
-            searchBox,
-            ...props.commandBar.items
-          ].filter(i => i)}
+          items={[searchBox, ...props.commandBar.items].filter((i) => i)}
           hidden={props.commandBar.items.length === 0 && props.commandBar.farItems.length === 0}
           styles={{ root: { margin: 0, padding: 0 } }}
         />

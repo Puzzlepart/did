@@ -150,7 +150,7 @@ export const isSameMonth = (a: ConfigType, b: ConfigType) => {
 
 /**
  * Converts the date time to ISO format using the specified offset
- * 
+ *
  * @param {ConfigType} dateTime Date
  * @param {number} tzOffset Offset in minutes
  */
@@ -161,13 +161,15 @@ export const toISOString = (dateTime: ConfigType, tzOffset: number) => {
 /**
  * Get timezone from offset
  *
- * See https://stackoverflow.com/questions/24500375/get-clients-gmt-offset-in-javascript 
- * 
+ * See https://stackoverflow.com/questions/24500375/get-clients-gmt-offset-in-javascript
+ *
  * @param {number} tzOffset Offset in minutes
  */
 export const getTimezone = (tzOffset: number) => {
-  function z(n: number) { return (n < 10 ? '0' : '') + n }
+  function z(n: number) {
+    return (n < 10 ? '0' : '') + n
+  }
   const sign = tzOffset < 0 ? '+' : '-'
   tzOffset = Math.abs(tzOffset)
-  return 'GMT ' + sign + z(tzOffset / 60 | 0) + z(tzOffset % 60)
+  return 'GMT ' + sign + z((tzOffset / 60) | 0) + z(tzOffset % 60)
 }

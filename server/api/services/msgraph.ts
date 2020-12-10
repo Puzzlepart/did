@@ -181,7 +181,7 @@ class MSGraphService {
    * @param {string} endDate End date (YYYY-MM-DD)
    * @param {number} tzOffset Timezone offset on the client
    */
-  async getEvents(startDate: string, endDate: string, tzOffset:  number): Promise<MSGraphEvent[]> {
+  async getEvents(startDate: string, endDate: string, tzOffset: number): Promise<MSGraphEvent[]> {
     try {
       this.startMark('getEvents')
       const query = {

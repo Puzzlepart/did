@@ -11,7 +11,12 @@ export type RenderListHeaderParams = {
   dispatch?: Dispatch<any>
 }
 
-export const onRenderListHeader = ({ headerProps, defaultRender, props, dispatch }: RenderListHeaderParams) => {
+export const onRenderListHeader = ({
+  headerProps,
+  defaultRender,
+  props,
+  dispatch
+}: RenderListHeaderParams) => {
   if (!!props.onRenderDetailsHeader) return onRenderListHeader({ headerProps, defaultRender })
   return (
     <ListHeader

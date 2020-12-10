@@ -4,10 +4,17 @@
   "default": {},
   "examples": [
     {
-      "PROJECT_KEY_MIN_LENGTH": 2
+      "PROJECT_KEY_MIN_LENGTH": 2,
+      "PROJECT_KEY_MAX_LENGTH": 12,
+      "PROJECT_NAME_MIN_LENGTH": 2,
+      "CUSTOMER_KEY_MIN_LENGTH": 3,
+      "CUSTOMER_KEY_MAX_LENGTH": 12,
+      "CUSTOMER_NAME_MIN_LENGTH": 2,
+      "BROWSER_STORAGE_KEY_PREFIX": "did",
+      "BROWSER_STORAGE_DEFAULT_EXPIRE": "2month"
     }
   ],
-  "required": ["PROJECT_KEY_MIN_LENGTH"],
+  "required": [],
   "properties": {
     "PROJECT_KEY_MIN_LENGTH": {
       "$id": "#/properties/PROJECT_KEY_MIN_LENGTH",
@@ -50,6 +57,20 @@
       "title": "Minimum length for customer name",
       "default": 2,
       "examples": [2]
+    },
+    "BROWSER_STORAGE_KEY_PREFIX": {
+      "$id": "#/properties/BROWSER_STORAGE_KEY_PREFIX",
+      "type": "string",
+      "title": "Prefix for browser storage keys",
+      "default": "did",
+      "examples": ["did"]
+    },
+    "BROWSER_STORAGE_DEFAULT_EXPIRE": {
+      "$id": "#/properties/BROWSER_STORAGE_DEFAULT_EXPIRE",
+      "type": "string",
+      "title": "Default expire for browser storage",
+      "default": "2month",
+      "examples": ["2month"]
     }
   }
 }

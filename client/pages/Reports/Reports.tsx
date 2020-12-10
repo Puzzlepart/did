@@ -2,7 +2,7 @@
 import { useQuery } from '@apollo/client'
 import { FilterPanel, IFilter, List, UserMessage } from 'components'
 import { getValue } from 'helpers'
-import { Pivot, PivotItem, Spinner, format } from 'office-ui-fabric'
+import { format, Pivot, PivotItem, Spinner } from 'office-ui-fabric'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
@@ -13,8 +13,8 @@ import columns from './columns'
 import commandBar from './commandBar'
 import { IReportsContext } from './context'
 import { filters } from './filters'
-import $timeentries from './timeentries.gql'
 import styles from './Reports.module.scss'
+import $timeentries from './timeentries.gql'
 import { getQueries, IReportsParams, IReportsState } from './types'
 
 export const Reports = () => {

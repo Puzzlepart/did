@@ -17,7 +17,7 @@ export class OutlookCategoryResolver {
    *
    * @param {MSGraphService} _msgraph MSGraphService
    */
-  constructor(private readonly _msgraph: MSGraphService) { }
+  constructor(private readonly _msgraph: MSGraphService) {}
 
   /**
    * Get Outlook categories

@@ -27,10 +27,11 @@ export default (context: ITimesheetContext, t: TFunction): GlobalHotKeysProps =>
     }
   },
   handlers: {
-    GO_TO_CURRENT_WEEK: () => context.dispatch({
-      type: 'SET_SCOPE',
-      scope: new TimesheetScope(new Date())
-    }),
+    GO_TO_CURRENT_WEEK: () =>
+      context.dispatch({
+        type: 'SET_SCOPE',
+        scope: new TimesheetScope(new Date())
+      }),
     PREV_WEEK: () =>
       context.dispatch({
         type: 'SET_SCOPE',
