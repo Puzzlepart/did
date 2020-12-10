@@ -21,7 +21,6 @@ export const SubscriptionSettings = () => {
   const [subscription, setSubscription] = useState<Subscription>(
     omitDeep(deepCopy(context.subscription), '__typename')
   )
-  const [isSaved, setIsSaved] = useState(false)
   const [updateSubscription] = useMutation($updateSubscription)
   const [message, setMessage] = useMessage()
   const sections = useMemo(() => SUBSCRIPTION_SETTINGS(t), [t])
@@ -44,7 +43,6 @@ export const SubscriptionSettings = () => {
   const onSaveSettings = async () => {
     await updateSubscription({ variables: pick(subscription, 'id', 'settings') })
     setMessage({ text: t('admin.subscriptionSettingsUpdateSuccess'), type: MessageBarType.success })
-    setIsSaved(true)
   }
 
   return (
@@ -69,8 +67,8 @@ export const SubscriptionSettings = () => {
           })}
         <PrimaryButton
           className={styles.saveButton}
-          disabled={isSaved}
           onClick={onSaveSettings}
+          disabled={!!message}
           text={t('common.save')}
         />
       </div>
