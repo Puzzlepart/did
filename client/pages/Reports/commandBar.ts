@@ -1,7 +1,7 @@
 import { format, IContextualMenuItem } from 'office-ui-fabric'
 import { pick } from 'underscore'
 import { exportExcel } from 'utils/exportExcel'
-import columns from './columns'
+import getColumns from './columns'
 import { SET_GROUP_BY, TOGGLE_FILTER_PANEL } from './reducer'
 import { getGroupByOptions } from './types'
 
@@ -41,7 +41,7 @@ const exportToExcelCmd = ({ state, t }) =>
         new Date().toDateString().split(' ').join('-')
       )
       exportExcel(state.subset, {
-        columns: columns(t),
+        columns: getColumns({}, t),
         fileName
       })
     },

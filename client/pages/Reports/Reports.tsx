@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { isEmpty } from 'underscore'
 import DateUtils from 'utils/date'
-import columns from './columns'
+import getColumns from './columns'
 import commandBar from './commandBar'
 import { filters } from './filters'
 import { getQueries } from './queries'
@@ -40,6 +40,7 @@ export const Reports = () => {
     fetchPolicy: 'cache-first',
     variables: state.query?.variables
   })
+  const columns = useMemo(() => getColumns({ isResizable: true }, t), [])
 
   useLayoutEffect(() => dispatch(INIT()), [])
   useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query])
@@ -82,7 +83,7 @@ export const Reports = () => {
                       })
                     }
                   }}
-                  columns={columns(t)}
+                  columns={columns}
                   commandBar={commandBar({ state, dispatch, t })}
                 />
               )}
