@@ -69,17 +69,11 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (props: IProjec
           required={true}
           className={styles.inputField}
           placeholder={t('common.searchPlaceholder')}
-          onClear={() =>
-            dispatch({
-              type: 'UPDATE_MODEL',
-              payload: ['customerKey', '']
-            })
-          }
           errorMessage={state.validation.errors.customerKey}
-          onSelected={({ key }) =>
+          onSelected={(customer) =>
             dispatch({
               type: 'UPDATE_MODEL',
-              payload: ['customerKey', key]
+              payload: ['customerKey', customer?.key]
             })
           }
         />

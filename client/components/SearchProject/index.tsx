@@ -16,7 +16,7 @@ export const SearchProject = (props: ISearchProjectProps) => {
     secondaryText: project.id,
     searchValue: [project.id, project.name, project.customer.name].join(' '),
     data: project,
-    iconName: project.icon || 'Page'
+    iconName: project.icon
   }))
 
   return (

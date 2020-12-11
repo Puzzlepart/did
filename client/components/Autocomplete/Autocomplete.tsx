@@ -10,7 +10,7 @@ import React, { useLayoutEffect, useMemo, useReducer, useRef } from 'react'
 import { isEmpty } from 'underscore'
 import { IAutocompleteProps } from '.'
 import styles from './Autocomplete.module.scss'
-import createReducer, { DISMISS_CALLOUT, INIT, ON_KEY_DOWN, ON_SEARCH, SET_SELECTED_INDEX } from './reducer'
+import createReducer, { DISMISS_CALLOUT, INIT, ON_KEY_DOWN, ON_SEARCH, RESET, SET_SELECTED_INDEX } from './reducer'
 import { SuggestionItem } from './SuggestionItem'
 
 export function Autocomplete<T = any>(props: IAutocompleteProps<T>) {
@@ -43,7 +43,10 @@ export function Autocomplete<T = any>(props: IAutocompleteProps<T>) {
         disabled={props.disabled}
         autoComplete='off'
         autoCorrect='off'
-        onClear={props.onClear}
+        onClear={() => {
+          dispatch(RESET())
+          props.onClear()
+        }}
         onChange={(_event, searchTerm) => dispatch(ON_SEARCH({ searchTerm }))} />
       <div hidden={!props.description} className={styles.description}>
         {props.description}

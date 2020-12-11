@@ -1,7 +1,7 @@
 import { UserMessage } from 'components'
 import { getValue } from 'helpers'
 import color from 'randomcolor'
-import React, { useContext, useLayoutEffect, useMemo, useRef } from 'react'
+import React, { useContext, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { EventObject } from 'types'

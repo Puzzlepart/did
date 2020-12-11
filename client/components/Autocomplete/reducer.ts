@@ -3,6 +3,7 @@ import { KeyCodes } from 'office-ui-fabric'
 import { AutocompleteSelectCallback, IAutocompleteProps, IAutocompleteState, ISuggestionItem } from './types'
 
 export const INIT = createAction<{ props: IAutocompleteProps }>('INIT')
+export const RESET = createAction('RESET')
 export const ON_SEARCH = createAction<{ searchTerm: string }>('ON_SEARCH')
 export const ON_KEY_DOWN = createAction<{ key: number, onEnter: AutocompleteSelectCallback }>('ON_KEY_DOWN')
 export const SET_SELECTED_INDEX = createAction<{ index: number }>('SET_SELECTED_INDEX')
@@ -14,6 +15,10 @@ export default () =>
         {
             [INIT.type]: (state, { payload }: ReturnType<typeof INIT>) => {
                 state.items = payload.props.items
+                state.suggestions = []
+            },
+            [RESET.type]: (state) => {
+                state.value = null
                 state.suggestions = []
             },
 

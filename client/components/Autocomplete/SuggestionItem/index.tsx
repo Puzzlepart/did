@@ -13,7 +13,7 @@ export function SuggestionItem(props: ISuggestionItemProps) {
         )
     }
 
-    const classNames = [styles.root, props.item.isSelected && styles.isSelected] 
+    const classNames = [styles.root, props.item.isSelected && styles.isSelected]
 
     return (
         <div
@@ -25,7 +25,7 @@ export function SuggestionItem(props: ISuggestionItemProps) {
                     className={styles.icon}
                     style={props.itemIcons?.style}
                     hidden={!props.itemIcons}>
-                    <Icon iconName={props.item.iconName} />
+                    <Icon iconName={props.item.iconName || 'Page'} />
                 </div>
                 <div className={styles.content}>
                     <div className={styles.text}>{props.item.text}</div>
