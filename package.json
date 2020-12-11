@@ -94,6 +94,7 @@
     "randomcolor": "^0.6.2",
     "react": "16.13.1",
     "react-color": "2.19.3",
+    "react-copy-to-clipboard": "5.0.2",
     "react-device-detect": "1.14.0",
     "react-dom": "16.13.1",
     "react-fade-in": "1.1.1",
