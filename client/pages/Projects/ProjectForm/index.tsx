@@ -3,9 +3,10 @@ import AppConfig from 'AppConfig'
 import { IconPicker, LabelPicker, SearchCustomer, useMessage, UserMessage } from 'components'
 import { ConditionalWrapper } from 'components/ConditionalWrapper'
 import { MessageBarType, Panel, PrimaryButton, TextField, Toggle } from 'office-ui-fabric'
-import React, { FunctionComponent, useReducer } from 'react'
+import React, { FunctionComponent, useContext, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isBlank } from 'underscore.string'
+import { ProjectsContext } from '../context'
 import $createOrUpdateProject from './createOrUpdateProject.gql'
 import styles from './ProjectForm.module.scss'
 import reducer, { initState } from './reducer'
@@ -14,6 +15,7 @@ import { validateForm } from './validateForm'
 
 export const ProjectForm: FunctionComponent<IProjectFormProps> = (props: IProjectFormProps) => {
   const { t } = useTranslation()
+  const context = useContext(ProjectsContext)
   const [message, setMessage] = useMessage()
   const [state, dispatch] = useReducer(reducer, initState(props.edit))
   const [createOrUpdateProject, { loading }] = useMutation($createOrUpdateProject)
@@ -46,6 +48,7 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (props: IProjec
           type: MessageBarType.success
         })
         dispatch({ type: 'RESET_FORM' })
+        context.refetch()
       }
     } else {
       setMessage({ text: data?.result.error?.message, type: MessageBarType.error })
