@@ -11,7 +11,8 @@
       "CUSTOMER_KEY_MAX_LENGTH": 12,
       "CUSTOMER_NAME_MIN_LENGTH": 2,
       "BROWSER_STORAGE_KEY_PREFIX": "did",
-      "BROWSER_STORAGE_DEFAULT_EXPIRE": "2month"
+      "BROWSER_STORAGE_DEFAULT_EXPIRE": "2month",
+      "DEFAULT_USER_LANGUAGE": "en-GB"
     }
   ],
   "required": [],
@@ -71,6 +72,13 @@
       "title": "Default expire for browser storage",
       "default": "2month",
       "examples": ["2month"]
+    },
+    "DEFAULT_USER_LANGUAGE": {
+      "$id": "#/properties/DEFAULT_USER_LANGUAGE",
+      "type": "string",
+      "title": "Default user language",
+      "default": "en-GB",
+      "examples": ["en-GB"]
     }
   }
 }

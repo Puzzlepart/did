@@ -1,25 +1,26 @@
 ---
 name: Bug report
-about: Create a report to help us improve
+about: Create a report to help improve did
 labels: bug
 ---
 - [ ] I have searched for existing issues to avoid creating duplicates
 
-### What  ###
-<!-- On what page, or which component did the error occur. Provide url if applicable -->
+### What
+<!--
+On what page, or in which component did the error occur?
+Provide url if applicable, and a short description
+-->
 
-### Browser ######
-Please check the boxes of the browser(s) used by using ⚫ . If at all possible speficy version as well
-- ⚪&nbsp;&nbsp;  Edge Chromium
-- ⚪&nbsp;&nbsp;  Chrome
-- ⚪&nbsp;&nbsp;  Edge
-- ⚪&nbsp;&nbsp;  IE
-- ⚪&nbsp;&nbsp;  Safari
-- ⚪&nbsp;&nbsp;  Firefox
-- ⚪&nbsp;&nbsp;  Other (please specify)
+### Test case
+[Smoke test cases](https://github.com/Puzzlepart/did/wiki/Smoke-tests)
+<!-- 
+Which test case is this related to?
+e.g $4.2.6.2 - Generate API token
+Delete this section if not applicable
+-->
 
 ### Error details
-<!-- Tell us what happend. Screenshots helps!! -->
+<!-- Tell us what happend. Screenshots help a lot! -->
 
 ### Steps to Reproduce:
 <!-- Tell us the steps to reproduce the bug -->
@@ -28,4 +29,7 @@ Please check the boxes of the browser(s) used by using ⚫ . If at all possible 
 2.
 
 ### Workarounds
-<!-- delete if not applicable -->
+<!-- Delete if not applicable -->
+
+### Fix
+<!-- Delete if not applicable -->
