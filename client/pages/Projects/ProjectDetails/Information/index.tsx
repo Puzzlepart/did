@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
 import { ProjectsContext } from '../../context'
 import styles from './Information.module.scss'
+import ReactMarkdown from 'react-markdown/with-html'
 
 export const Information: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -21,7 +22,13 @@ export const Information: FunctionComponent = () => {
           type={MessageBarType.warning}
         />
       )}
-      <div className={styles.description}>{state.selected.description}</div>
+      {state.selected.description && (
+        <ReactMarkdown
+          className={styles.description}
+          source={state.selected.description}
+          escapeHtml={false}
+        />
+      )}
       <div className={styles.labels}>
         {state.selected.labels.map((label, idx) => (
           <EntityLabel key={idx} label={label} size='medium' />

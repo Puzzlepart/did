@@ -1,7 +1,8 @@
 import { useMutation } from '@apollo/client'
 import AppConfig from 'AppConfig'
 import { IconPicker, LabelPicker, SearchCustomer, useMessage, UserMessage } from 'components'
-import { MessageBarType, PrimaryButton, TextField, Toggle } from 'office-ui-fabric'
+import { ConditionalWrapper } from 'components/ConditionalWrapper'
+import { MessageBarType, Panel, PrimaryButton, TextField, Toggle } from 'office-ui-fabric'
 import React, { FunctionComponent, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isBlank } from 'underscore.string'
@@ -11,42 +12,36 @@ import reducer, { initState } from './reducer'
 import { IProjectFormProps } from './types'
 import { validateForm } from './validateForm'
 
-export const ProjectForm: FunctionComponent<IProjectFormProps> = ({
-  edit,
-  onSubmitted
-}: IProjectFormProps) => {
+export const ProjectForm: FunctionComponent<IProjectFormProps> = (props: IProjectFormProps) => {
   const { t } = useTranslation()
   const [message, setMessage] = useMessage()
-  const [{ model, validation, options, editMode, projectId }, dispatch] = useReducer(
-    reducer,
-    initState(edit)
-  )
+  const [state, dispatch] = useReducer(reducer, initState(props.edit))
   const [createOrUpdateProject, { loading }] = useMutation($createOrUpdateProject)
 
   /**
    * On form submit
    */
   const onFormSubmit = async () => {
-    const _validation = validateForm(model, t)
+    const _validation = validateForm(state.model, t)
     if (_validation.invalid) {
       dispatch({ type: 'SET_VALIDATION', payload: { validation: _validation } })
       return
     }
     const { data } = await createOrUpdateProject({
       variables: {
-        project: model,
-        options: options,
-        update: editMode
+        project: state.model,
+        options: state.options,
+        update: state.editMode
       }
     })
     if (data?.result.success) {
-      if (editMode && onSubmitted) {
-        setTimeout(onSubmitted, 1000)
+      if (props.panel) {
+        setTimeout(props.panel.onDismiss, 1000)
       } else {
         setMessage({
           text: t('projects.createSuccess', {
-            projectId: projectId,
-            name: model.name
+            projectId: state.projectId,
+            name: state.model.name
           }),
           type: MessageBarType.success
         })
@@ -58,146 +53,151 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = ({
   }
 
   return (
-    <div className={styles.root}>
-      {message && (
-        <UserMessage
-          {...message}
-          containerStyle={{ marginTop: 12, marginBottom: 12, width: 550 }}
-        />
-      )}
-      <SearchCustomer
-        hidden={editMode}
-        label={t('common.customer')}
-        required={true}
-        className={styles.inputField}
-        placeholder={t('common.searchPlaceholder')}
-        onClear={() =>
-          dispatch({
-            type: 'UPDATE_MODEL',
-            payload: ['customerKey', '']
-          })
-        }
-        errorMessage={validation.errors.customerKey}
-        onSelected={({ key }) =>
-          dispatch({
-            type: 'UPDATE_MODEL',
-            payload: ['customerKey', key]
-          })
-        }
-      />
-      <TextField
-        disabled={editMode}
-        className={styles.inputField}
-        label={t('projects.keyFieldLabel')}
-        description={t('projects.keyFieldDescription', AppConfig)}
-        required={true}
-        errorMessage={validation.errors.projectKey}
-        onChange={(_event, value) =>
-          dispatch({
-            type: 'UPDATE_MODEL',
-            payload: ['projectKey', value.toUpperCase()]
-          })
-        }
-        value={model.projectKey}
-      />
-      <UserMessage
-        hidden={editMode}
-        className={styles.idPreviewText}
-        iconName='OutlookLogo'
-        text={
-          isBlank(projectId)
-            ? t('projects.idPreviewBlankText')
-            : t('projects.idPreviewText', { projectId })
-        }
-      />
-      <div className={styles.inputField} hidden={editMode}>
-        <Toggle
-          label={t('projects.createOutlookCategoryFieldLabel')}
-          checked={options.createOutlookCategory}
-          onChange={(_event, value) =>
+    <ConditionalWrapper
+      condition={!!props.panel}
+      wrapper={(children) => <Panel {...props.panel}>{children}</Panel>}>
+      <div className={styles.root}>
+        {message && (
+          <UserMessage
+            {...message}
+            containerStyle={{ marginTop: 12, marginBottom: 12, width: 550 }}
+          />
+        )}
+        <SearchCustomer
+          hidden={state.editMode}
+          label={t('common.customer')}
+          required={true}
+          className={styles.inputField}
+          placeholder={t('common.searchPlaceholder')}
+          onClear={() =>
             dispatch({
-              type: 'UPDATE_OPTIONS',
-              payload: ['createOutlookCategory', value]
+              type: 'UPDATE_MODEL',
+              payload: ['customerKey', '']
+            })
+          }
+          errorMessage={state.validation.errors.customerKey}
+          onSelected={({ key }) =>
+            dispatch({
+              type: 'UPDATE_MODEL',
+              payload: ['customerKey', key]
             })
           }
         />
-        <span className={styles.inputDescription}>
-          {t('projects.createOutlookCategoryFieldDescription', { id: projectId })}
-        </span>
-      </div>
-      <TextField
-        className={styles.inputField}
-        label={t('common.nameFieldLabel')}
-        description={t('projects.nameFieldDescription', AppConfig)}
-        required={true}
-        errorMessage={validation.errors.name}
-        onChange={(_event, value) =>
-          dispatch({
-            type: 'UPDATE_MODEL',
-            payload: ['name', value]
-          })
-        }
-        value={model.name}
-      />
-      <TextField
-        className={styles.inputField}
-        label={t('common.descriptionFieldLabel')}
-        description={t('projects.descriptionFieldDescription')}
-        multiline={true}
-        errorMessage={validation.errors.description}
-        onChange={(_event, value) =>
-          dispatch({
-            type: 'UPDATE_MODEL',
-            payload: ['description', value]
-          })
-        }
-        value={model.description}
-      />
-      <IconPicker
-        className={styles.inputField}
-        defaultSelected={model.icon}
-        label={t('common.iconFieldLabel')}
-        description={t('projects.iconFieldDescription')}
-        placeholder={t('common.iconSearchPlaceholder')}
-        width={300}
-        onSelected={(value) =>
-          dispatch({
-            type: 'UPDATE_MODEL',
-            payload: ['icon', value]
-          })
-        }
-      />
-      <div className={styles.inputField} hidden={!editMode}>
-        <Toggle
-          label={t('common.inactiveFieldLabel')}
-          checked={model.inactive}
+        <TextField
+          disabled={state.editMode}
+          className={styles.inputField}
+          label={t('projects.keyFieldLabel')}
+          description={t('projects.keyFieldDescription', AppConfig)}
+          required={true}
+          errorMessage={state.validation.errors.projectKey}
           onChange={(_event, value) =>
             dispatch({
               type: 'UPDATE_MODEL',
-              payload: ['inactive', value]
+              payload: ['projectKey', value.toUpperCase()]
+            })
+          }
+          value={state.model.projectKey}
+        />
+        <UserMessage
+          hidden={state.editMode}
+          className={styles.idPreviewText}
+          iconName='OutlookLogo'
+          text={
+            isBlank(state.projectId)
+              ? t('projects.idPreviewBlankText')
+              : t('projects.idPreviewText', { id: state.projectId })
+          }
+        />
+        <div className={styles.inputField} hidden={state.editMode}>
+          <Toggle
+            label={t('projects.createOutlookCategoryFieldLabel')}
+            checked={state.options.createOutlookCategory}
+            onChange={(_event, value) =>
+              dispatch({
+                type: 'UPDATE_OPTIONS',
+                payload: ['createOutlookCategory', value]
+              })
+            }
+          />
+          <span className={styles.inputDescription}>
+            {t('projects.createOutlookCategoryFieldDescription', { id: state.projectId })}
+          </span>
+        </div>
+        <TextField
+          className={styles.inputField}
+          label={t('common.nameFieldLabel')}
+          description={t('projects.nameFieldDescription', AppConfig)}
+          required={true}
+          errorMessage={state.validation.errors.name}
+          onChange={(_event, value) =>
+            dispatch({
+              type: 'UPDATE_MODEL',
+              payload: ['name', value]
+            })
+          }
+          value={state.model.name}
+        />
+        <TextField
+          className={styles.inputField}
+          label={t('common.descriptionFieldLabel')}
+          description={t('projects.descriptionFieldDescription')}
+          errorMessage={state.validation.errors.description}
+          multiline={true}
+          autoAdjustHeight={true}
+          onChange={(_event, value) =>
+            dispatch({
+              type: 'UPDATE_MODEL',
+              payload: ['description', value]
+            })
+          }
+          value={state.model.description}
+        />
+        <IconPicker
+          className={styles.inputField}
+          defaultSelected={state.model.icon}
+          label={t('common.iconFieldLabel')}
+          description={t('projects.iconFieldDescription')}
+          placeholder={t('common.iconSearchPlaceholder')}
+          width={300}
+          onSelected={(value) =>
+            dispatch({
+              type: 'UPDATE_MODEL',
+              payload: ['icon', value]
             })
           }
         />
-        <span className={styles.inputDescription}>{t('projects.inactiveFieldDescription')}</span>
+        <div className={styles.inputField} hidden={!state.editMode}>
+          <Toggle
+            label={t('common.inactiveFieldLabel')}
+            checked={state.model.inactive}
+            onChange={(_event, value) =>
+              dispatch({
+                type: 'UPDATE_MODEL',
+                payload: ['inactive', value]
+              })
+            }
+          />
+          <span className={styles.inputDescription}>{t('projects.inactiveFieldDescription')}</span>
+        </div>
+        <LabelPicker
+          className={styles.inputField}
+          label={t('admin.labels')}
+          placeholder={t('admin.filterLabels')}
+          defaultSelectedKeys={state.editMode ? props.edit.labels.map((lbl) => lbl.name) : []}
+          onChange={(labels) =>
+            dispatch({
+              type: 'UPDATE_MODEL',
+              payload: ['labels', labels.map((lbl) => lbl.name)]
+            })
+          }
+        />
+        <PrimaryButton
+          className={styles.inputField}
+          text={state.editMode ? t('common.save') : t('common.add')}
+          onClick={onFormSubmit}
+          disabled={loading || !!message}
+        />
       </div>
-      <LabelPicker
-        className={styles.inputField}
-        label={t('admin.labels')}
-        placeholder={t('admin.filterLabels')}
-        defaultSelectedKeys={editMode ? edit.labels.map((lbl) => lbl.name) : []}
-        onChange={(labels) =>
-          dispatch({
-            type: 'UPDATE_MODEL',
-            payload: ['labels', labels.map((lbl) => lbl.name)]
-          })
-        }
-      />
-      <PrimaryButton
-        className={styles.inputField}
-        text={editMode ? t('common.save') : t('common.add')}
-        onClick={onFormSubmit}
-        disabled={loading || !!message}
-      />
-    </div>
+    </ConditionalWrapper>
   )
 }
