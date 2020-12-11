@@ -61,29 +61,29 @@ export class TimeEntry {
 @InputType()
 export class TimeEntriesQuery {
   @Field({ nullable: true })
-  startDateTime: string
+  startDateTime?: string
 
   @Field({ nullable: true })
-  endDateTime: string
+  endDateTime?: string
 
   @Field({ nullable: true })
-  projectId: string
+  projectId?: string
 
   @Field({ nullable: true })
-  resourceId: string
+  resourceId?: string
 
   @Field({ nullable: true })
-  weekNumber: number
+  weekNumber?: number
 
   @Field({ nullable: true })
-  monthNumber: number
+  monthNumber?: number
 
   @Field({ nullable: true })
-  startMonthIndex: number
+  startMonthIndex?: number
 
   @Field({ nullable: true })
-  endMonthIndex: number
+  endMonthIndex?: number
 
   @Field({ nullable: true })
-  year: number
+  year?: number
 }
