@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest new functionality 
+about: Suggest new did features
 labels: new feature
 ---
 - [ ] I have searched for existing issues to avoid creating duplicates
