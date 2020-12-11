@@ -9,7 +9,7 @@ import DateUtils from 'utils/date'
 import columns from './columns'
 import commandBar from './commandBar'
 import { filters } from './filters'
-import { getQueries } from './getQueries'
+import { getQueries } from './queries'
 import createReducer, {
   CHANGE_QUERY,
   DATA_UPDATED,

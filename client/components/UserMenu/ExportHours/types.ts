@@ -1,6 +1,6 @@
 import { TFunction } from 'i18next'
 import { IChoiceGroupOption } from 'office-ui-fabric'
-import { getQueries } from 'pages/Reports/getQueries'
+import { getQueries } from 'pages/Reports/queries'
 import { TimeEntriesQuery } from 'types'
 import { filter } from 'underscore'
 
