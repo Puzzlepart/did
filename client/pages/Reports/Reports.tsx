@@ -9,13 +9,14 @@ import { useHistory, useParams } from 'react-router-dom'
 import { filter, find, isEmpty } from 'underscore'
 import DateUtils from 'utils/date'
 import { exportExcel } from 'utils/exportExcel'
-import columns from './columns'
+import getColumns from './columns'
 import commandBar from './commandBar'
 import { IReportsContext } from './context'
 import { filters } from './filters'
+import { getQueries } from './queries'
 import styles from './Reports.module.scss'
 import $timeentries from './timeentries.gql'
-import { getQueries, IReportsParams, IReportsState } from './types'
+import { IReportsParams, IReportsState } from './types'
 
 export const Reports = () => {
   const { t } = useTranslation()
@@ -34,6 +35,7 @@ export const Reports = () => {
     fetchPolicy: 'cache-first',
     variables: state.query?.variables
   })
+  const columns = useMemo(() => getColumns({ isResizable: true }, t), [])
 
   /**
    * On export to Excel
@@ -44,7 +46,7 @@ export const Reports = () => {
       new Date().toDateString().split(' ').join('-')
     )
     exportExcel(state.subset || context.timeentries, {
-      columns: columns(t),
+      columns,
       fileName
     })
   }
@@ -126,7 +128,7 @@ export const Reports = () => {
                       })
                     }
                   }}
-                  columns={columns(t)}
+                  columns={columns}
                   commandBar={commandBar(context)}
                 />
               )}
