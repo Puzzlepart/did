@@ -72,7 +72,7 @@ export const CustomerForm: FunctionComponent<ICustomerFormProps> = (props: ICust
           onChange={(_event, value) =>
             dispatch({
               type: 'UPDATE_MODEL',
-              
+
               payload: ['key', value.toUpperCase()]
             })
           }
