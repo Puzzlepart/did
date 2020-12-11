@@ -15,7 +15,8 @@ import { IReportsContext } from './context'
 import { filters } from './filters'
 import styles from './Reports.module.scss'
 import $timeentries from './timeentries.gql'
-import { getQueries, IReportsParams, IReportsState } from './types'
+import { IReportsParams, IReportsState } from './types'
+import { getQueries } from './queries'
 
 export const Reports = () => {
   const { t } = useTranslation()
