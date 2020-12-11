@@ -2,6 +2,7 @@ import { useMutation } from '@apollo/client'
 import { AppContext } from 'AppContext'
 import { PERMISSION } from 'config/security/permissions'
 import { DefaultButton } from 'office-ui-fabric'
+import { SET_SELECTED_PROJECT } from 'pages/Projects/reducer'
 import React, { FunctionComponent, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ProjectsContext } from '../../context'
@@ -24,13 +25,12 @@ export const Actions: FunctionComponent = () => {
       data: { result }
     } = await createOutlookCategory({ variables: { category: state.selected.id } })
     if (result.success) {
-      dispatch({
-        type: 'SET_SELECTED_PROJECT',
-        project: {
+      dispatch(SET_SELECTED_PROJECT({
+         project: {
           ...state.selected,
           outlookCategory: result.data
         }
-      })
+      }))
     }
   }
 
@@ -62,9 +62,11 @@ export const Actions: FunctionComponent = () => {
           panel={{
             isOpen: showEditPanel,
             headerText: state.selected.name,
-            onDismiss: () => {
+            isLightDismiss: true,
+            onLightDismissClick: () => setShowEditPanel(false),
+            onDismiss: (event) => {
               setShowEditPanel(false)
-              refetch()
+              event === null && refetch()
             }
           }}
         />
