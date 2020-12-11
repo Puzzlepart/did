@@ -54,11 +54,10 @@ export const AllocationView = (
   return (
     <div key={`allocation_${selectedPeriod?.id}`} className={styles.root} ref={container}>
       {charts.map((c) => {
-        const data = useMemo(() => getData
-          (selectedPeriod?.getEvents() || [],
-            c,
-            container?.current?.clientWidth
-          ), [container?.current?.clientWidth, selectedPeriod])
+        const data = useMemo(
+          () => getData(selectedPeriod?.getEvents() || [], c, container?.current?.clientWidth),
+          [container?.current?.clientWidth, selectedPeriod]
+        )
         return (
           <div key={c.key} className={styles.chartContainer}>
             <div className={styles.title}>{c.title}</div>

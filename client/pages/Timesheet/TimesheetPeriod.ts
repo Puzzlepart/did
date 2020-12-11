@@ -90,11 +90,11 @@ export class TimesheetPeriod {
 
   /**
    * Get events
-   * 
+   *
    * @param {boolean} includeUnmatched Include unmatched events
    */
   public getEvents(includeUnmatched: boolean = true): EventObject[] {
-    return [...this.events || []]
+    return [...(this.events || [])]
       .filter((event) => {
         const isUiIgnored = this._uiIgnoredEvents.indexOf(event.id) !== -1
         const isMatched = !!event.project

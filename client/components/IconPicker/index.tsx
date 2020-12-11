@@ -19,10 +19,10 @@ export const IconPicker: FunctionComponent<IIconPickerProps> = (props: IIconPick
     []
   )
 
-  const defaultSelectedItem = useMemo(() =>
-    props.defaultSelected &&
-    find(items, (i) => i.key === props.defaultSelected)
-    , [props.defaultSelected])
+  const defaultSelectedItem = useMemo(
+    () => props.defaultSelected && find(items, (i) => i.key === props.defaultSelected),
+    [props.defaultSelected]
+  )
 
   return (
     <div className={`${styles.root} ${props.className}`} hidden={props.hidden}>

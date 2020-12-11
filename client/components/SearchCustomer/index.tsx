@@ -14,13 +14,16 @@ export const SearchCustomer = (props: ISearchCustomerProps) => {
 
   const searchData: ISuggestionItem<Customer>[] = useMemo(
     () =>
-      (data?.customers || []).map((customer) => ({
-        key: customer.key,
-        text: customer.name,
-        searchValue: [customer.key, customer.name].join(' '),
-        data: customer,
-        iconName: customer.icon || 'Page',
-      } as ISuggestionItem<Customer>)),
+      (data?.customers || []).map(
+        (customer) =>
+          ({
+            key: customer.key,
+            text: customer.name,
+            searchValue: [customer.key, customer.name].join(' '),
+            data: customer,
+            iconName: customer.icon || 'Page'
+          } as ISuggestionItem<Customer>)
+      ),
     [data]
   )
 
