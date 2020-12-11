@@ -96,6 +96,6 @@ const columns = (defaults: Partial<IColumn>, t: TFunction): IColumn[] =>
       minWidth: 100,
       data: { hidden: true }
     }
-  ].map((col: IColumn) => ({ ...col, ...defaults}))
+  ].map((col: IColumn) => ({ ...col, ...defaults }))
 
 export default columns
