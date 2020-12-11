@@ -3,8 +3,9 @@ import AppConfig from 'AppConfig'
 import { IconPicker, useMessage, UserMessage } from 'components'
 import { ConditionalWrapper } from 'components/ConditionalWrapper'
 import { MessageBarType, Panel, PrimaryButton, TextField } from 'office-ui-fabric'
-import React, { FunctionComponent, useReducer } from 'react'
+import React, { FunctionComponent, useContext, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
+import { CustomersContext } from '../context'
 import $createOrUpdateCustomer from './createOrUpdateCustomer.gql'
 import styles from './CustomerForm.module.scss'
 import reducer, { initState } from './reducer'
@@ -13,6 +14,7 @@ import { validateForm } from './validateForm'
 
 export const CustomerForm: FunctionComponent<ICustomerFormProps> = (props: ICustomerFormProps) => {
   const { t } = useTranslation()
+  const context = useContext(CustomersContext)
   const [message, setMessage] = useMessage()
   const [state, dispatch] = useReducer(reducer, initState(props.edit))
   const [createOrUpdateCustomer, { loading }] = useMutation($createOrUpdateCustomer)
@@ -41,6 +43,7 @@ export const CustomerForm: FunctionComponent<ICustomerFormProps> = (props: ICust
           type: MessageBarType.success
         })
         dispatch({ type: 'RESET_FORM' })
+        context.refetch()
       }
     } else {
       setMessage({ text: data?.result.error?.message, type: MessageBarType.error })
@@ -69,7 +72,8 @@ export const CustomerForm: FunctionComponent<ICustomerFormProps> = (props: ICust
           onChange={(_event, value) =>
             dispatch({
               type: 'UPDATE_MODEL',
-              payload: ['key', value]
+              
+              payload: ['key', value.toUpperCase()]
             })
           }
           value={state.model.key}
