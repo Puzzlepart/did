@@ -1,10 +1,12 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { KeyCodes } from 'office-ui-fabric'
-import { AutocompleteSelectCallback, IAutocompleteProps, IAutocompleteState } from './types'
+import { AutocompleteSelectCallback, IAutocompleteProps, IAutocompleteState, ISuggestionItem } from './types'
 
 export const INIT = createAction<{ props: IAutocompleteProps }>('INIT')
 export const ON_SEARCH = createAction<{ searchTerm: string }>('ON_SEARCH')
 export const ON_KEY_DOWN = createAction<{ key: number, onEnter: AutocompleteSelectCallback }>('ON_KEY_DOWN')
+export const SET_SELECTED_INDEX = createAction<{ index: number }>('SET_SELECTED_INDEX')
+export const DISMISS_CALLOUT = createAction<{ item: ISuggestionItem<any> }>('DISMISS_CALLOUT')
 
 export default () =>
     createReducer<IAutocompleteState>(
@@ -20,6 +22,7 @@ export default () =>
                 state.suggestions = state.items.filter((i) =>
                     i.searchValue.toLowerCase().includes(payload.searchTerm.toLowerCase())
                 )
+                state.value = payload.searchTerm
             },
 
             [ON_KEY_DOWN.type]: (state, { payload }: ReturnType<typeof ON_KEY_DOWN>) => {
@@ -31,9 +34,20 @@ export default () =>
                     case KeyCodes.enter: {
                         const item = state.suggestions[state.selectedIndex]
                         if (item) payload.onEnter(JSON.parse(JSON.stringify(item)))
+                        state.suggestions = []
+                        state.value = item.text
                     }
                         break
                 }
-            }
+            },
+
+            [SET_SELECTED_INDEX.type]: (state, { payload }: ReturnType<typeof SET_SELECTED_INDEX>) => {
+                state.selectedIndex = payload.index
+            },
+
+            [DISMISS_CALLOUT.type]: (state, { payload }: ReturnType<typeof DISMISS_CALLOUT>) => {
+                state.suggestions = []
+                state.value = payload?.item?.text
+            },
         }
     )

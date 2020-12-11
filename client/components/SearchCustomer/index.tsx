@@ -16,10 +16,11 @@ export const SearchCustomer = (props: ISearchCustomerProps) => {
     () =>
       (data?.customers || []).map((customer) => ({
         key: customer.key,
-        displayValue: customer.name,
+        text: customer.name,
         searchValue: [customer.key, customer.name].join(' '),
-        data: customer
-      })),
+        data: customer,
+        iconName: customer.icon || 'Page',
+      } as ISuggestionItem<Customer>)),
     [data]
   )
 
@@ -29,6 +30,12 @@ export const SearchCustomer = (props: ISearchCustomerProps) => {
         {...props}
         disabled={loading}
         items={searchData}
+        itemIcons={{
+          style: {
+            marginTop: 8,
+            fontSize: 14
+          }
+        }}
         width={550}
         placeholder={t('common.searchPlaceholder')}
         onClear={() => props.onSelected(null)}

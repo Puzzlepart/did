@@ -1,7 +1,9 @@
-export interface ISuggestionItem<T = any> {
-    key: string | number
-    displayValue: string
+import { IDropdownOption } from 'office-ui-fabric'
+import { AutocompleteItemIcons } from '../types'
+
+export interface ISuggestionItem<T = any> extends IDropdownOption {
     searchValue: string
+    secondaryText?: string
     iconName?: string
     type?: string
     tag?: any
@@ -9,6 +11,7 @@ export interface ISuggestionItem<T = any> {
     isSelected?: boolean
 }
 
-export interface ISuggestionItemProps {
+export interface ISuggestionItemProps extends React.HTMLProps<HTMLDivElement> {
     item: ISuggestionItem
+    itemIcons: AutocompleteItemIcons
 }

@@ -11,7 +11,7 @@ export const IconPicker: FunctionComponent<IIconPickerProps> = (props: IIconPick
     () =>
       getIcons().map((iconName) => ({
         key: iconName,
-        displayValue: humanize(iconName),
+        text: humanize(iconName),
         searchValue: [iconName, humanize(iconName)].join(' '),
         iconName: iconName,
         data: iconName
@@ -19,16 +19,19 @@ export const IconPicker: FunctionComponent<IIconPickerProps> = (props: IIconPick
     []
   )
 
+  const defaultSelectedItem = useMemo(() =>
+    props.defaultSelected &&
+    find(items, (i) => i.key === props.defaultSelected)
+    , [props.defaultSelected])
+
   return (
     <div className={`${styles.root} ${props.className}`} hidden={props.hidden}>
       <Autocomplete
         {...omit(props, 'className')}
-        defaultSelectedItem={
-          props.defaultSelected && find(items, (i) => i.key === props.defaultSelected)
-        }
+        defaultSelectedItem={defaultSelectedItem}
         required={props.required}
         items={items}
-        showIcons={true}
+        itemIcons={{ style: {} }}
         width={props.width}
         placeholder={props.placeholder}
         onClear={() => props.onSelected(null)}

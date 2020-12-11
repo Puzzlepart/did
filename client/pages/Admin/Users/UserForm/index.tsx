@@ -50,7 +50,7 @@ export const UserForm: FunctionComponent<IUserFormProps> = (props: IUserFormProp
             placeholder={t('common.searchPlaceholder')}
             items={adUsers.map((u) => ({
               key: u.id,
-              displayValue: u.displayName,
+              text: u.displayName,
               searchValue: u.displayName,
               data: u
             }))}
