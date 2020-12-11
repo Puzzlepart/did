@@ -6,7 +6,7 @@ import React from 'react'
 import DateUtils from 'utils/date'
 import { ExcelColumnType } from 'utils/exportExcel'
 
-const columns = (t: TFunction): IColumn[] =>
+const columns = (defaults: Partial<IColumn>, t: TFunction): IColumn[] =>
   [
     {
       key: 'title',
@@ -96,6 +96,6 @@ const columns = (t: TFunction): IColumn[] =>
       minWidth: 100,
       data: { hidden: true }
     }
-  ].map((col: IColumn) => ({ ...col, isResizable: true }))
+  ].map((col: IColumn) => ({ ...col, ...defaults}))
 
 export default columns
