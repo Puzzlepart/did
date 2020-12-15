@@ -140,7 +140,7 @@ export class DateObject {
    */
   toObject(...include: string[]) {
     const obj = {
-      weekNumber: this.$.week(),
+      weekNumber: this.$.isoWeek(),
       monthNumber: this.$.month() + 1,
       year: this.$.year(),
       monthName: this.format('MMMM')
