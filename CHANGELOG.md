@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Forecast notifications #613 (can be turned off in subscription settings #639)
 - Improved forecast/confirm actions #605
 - Automatic Azure Active Directory sync #661
-- Support for API tokens with scoped permissions #635
+- Support for API tokens with scoped permissions #635 
 - Export hours from user menu #589
 - Improved project tooltip/panel #678
 - When debugging, local cache is automatically cleared on first run #715
@@ -28,10 +28,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixes in matching engine #603
 - Issue with appointments occuring around midnight Sunday #703
 - Lag in customer/project search #686
-- Reports: current month and year in Reports included entries after today's date #738
-- Reports: filters would persist when switching reports #733
+- Reports: Current month and year in Reports included entries after today's date #738
+- Reports: Filters would persist when switching reports #733
+- Reports: Current month report bug #710
 - User settings: display language dropdown value would not change after switching language #740
 - Customers: Searching for newly created customers would return zero results #739
+- Fix for 'go to current week'-shortcut #707
 
 ### Changed
 - Decreased Project and Customer keys min length to 2 #681
