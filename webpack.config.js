@@ -6,9 +6,6 @@ const { name, version } = require('./package.json')
 const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const DefinePlugin = require('webpack').DefinePlugin
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const LiveReloadPlugin = tryRequire('webpack-livereload-plugin')
-const WebpackBuildNotifierPlugin = tryRequire('webpack-build-notifier')
 const debug = require('debug')('webpack')
 
 /** CONSTANTS */
@@ -16,7 +13,7 @@ const MODE = process.env.NODE_ENV === 'development' ? 'development' : 'productio
 const IS_DEVELOPMENT = MODE === 'development'
 const SERVER_DIST = IS_DEVELOPMENT ? 'server' : 'server-dist'
 const BUNDLE_FILE_NAME = `[name].${version}.[hash].js`
-const HTML_PLUGIN_FILE_NAME = IS_DEVELOPMENT ? resolve(__dirname, 'server/views/@template_dev.hbs') : resolve(__dirname, 'server/views/@template.hbs') 
+const HTML_PLUGIN_FILE_NAME = IS_DEVELOPMENT ? resolve(__dirname, 'server/views/@template_dev.hbs') : resolve(__dirname, 'server/views/@template.hbs')
 const SRC_PATH = resolve(__dirname, 'client/')
 
 /** PRINTING HEADER */
@@ -113,6 +110,9 @@ const config = {
 }
 
 if (IS_DEVELOPMENT) {
+  const { BundleAnalyzerPlugin } = tryRequire('webpack-bundle-analyzer')
+  const LiveReloadPlugin = tryRequire('webpack-livereload-plugin')
+  const WebpackBuildNotifierPlugin = tryRequire('webpack-build-notifier')
   config.stats = 'normal'
   config.watch = true
   config.watchOptions = { aggregateTimeout: 250 }
