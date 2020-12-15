@@ -9,17 +9,23 @@ import createReducer, {
   ON_KEY_DOWN,
   ON_SEARCH,
   RESET,
+  SET_SELECTED_INDEX
 } from './reducer'
 import { SuggestionItem } from './SuggestionItem'
 
 export function Autocomplete<T = any>(props: IAutocompleteProps<T>) {
   const reducer = useMemo(() => createReducer(), [])
-  const [state, dispatch] = useReducer(reducer, { selectedIndex: -1 })
+  const [state, dispatch] = useReducer(reducer, { selectedIndex: -1, suggestions: [] })
   const field = useRef<HTMLDivElement>()
 
   useLayoutEffect(() => dispatch(INIT({ props })), [props])
 
   const classNames = [styles.root, props.errorMessage && styles.hasError]
+
+  const suggestions = useMemo(() => state.suggestions.map((s, idx) => ({
+    ...s,
+    isSelected: idx === state.selectedIndex
+  })), [state.suggestions, state.selectedIndex])
 
   return (
     <div
@@ -74,18 +80,18 @@ export function Autocomplete<T = any>(props: IAutocompleteProps<T>) {
         <div>
           <FocusZone direction={FocusZoneDirection.vertical}>
             <List
-              key={state.selectedIndex}
               tabIndex={0}
-              items={state.suggestions}
+              items={suggestions}
               onRenderCell={(item, idx) => (
                 <SuggestionItem
                   key={item.key}
-                  item={{ ...item, isSelected: idx === state.selectedIndex }}
+                  item={item}
                   itemIcons={props.itemIcons}
                   onClick={() => {
                     dispatch(DISMISS_CALLOUT({ item }))
                     props.onSelected(item)
                   }}
+                  onMouseOver={() => dispatch(SET_SELECTED_INDEX({ index: idx }))}
                 />
               )}
             />

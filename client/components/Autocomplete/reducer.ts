@@ -13,6 +13,7 @@ export const ON_SEARCH = createAction<{ searchTerm: string }>('ON_SEARCH')
 export const ON_KEY_DOWN = createAction<{ key: number; onEnter: AutocompleteSelectCallback }>(
   'ON_KEY_DOWN'
 )
+export const SET_SELECTED_INDEX = createAction<{ index: number }>('SET_SELECTED_INDEX')
 export const DISMISS_CALLOUT = createAction<{ item: ISuggestionItem<any> }>('DISMISS_CALLOUT')
 
 export default () =>
@@ -53,6 +54,10 @@ export default () =>
             }
             break
         }
+      },
+
+      [SET_SELECTED_INDEX.type]: (state, { payload }: ReturnType<typeof SET_SELECTED_INDEX>) => {
+        state.selectedIndex = payload.index
       },
 
       [DISMISS_CALLOUT.type]: (state, { payload }: ReturnType<typeof DISMISS_CALLOUT>) => {
