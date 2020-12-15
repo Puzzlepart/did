@@ -13,7 +13,7 @@ export interface IAutocompleteProps<T = any> extends ISearchBoxProps {
   onSelected: AutocompleteSelectCallback<T>
   items?: ISuggestionItem<T>[]
   noSuggestionsText?: string
-  defaultSelectedItem?: ISuggestionItem<T>
+  defaultSelectedKey?: string
   errorMessage?: string
   maxHeight?: number
 }
