@@ -9,5 +9,8 @@ labels: enhancement
 <!-- Try to summarize the improvement suggestion -->
 
 ### Description
-<!-- Try to detail the improvement suggestion -->
+<!-- 
+Try to detail the improvement suggestion
+Screenshots, sketches and mockups help a lot!
+-->
 

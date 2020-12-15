@@ -1,3 +1,4 @@
+import AppConfig from 'AppConfig'
 import { TFunction } from 'i18next'
 import { IDropdownOption } from 'office-ui-fabric'
 
@@ -22,13 +23,13 @@ export const USER_SETTINGS = (t: TFunction) =>
       options: [
         {
           key: 'en-GB',
-          text: '	English (United Kingdom)'
+          text: 'English (United Kingdom)'
         },
         {
           key: 'nb',
           text: 'Norsk (bokmål)'
         }
       ],
-      defaultValue: 'en-GB'
+      defaultValue: AppConfig.DEFAULT_USER_LANGUAGE
     } as IUserSettingDropdown
   ])
