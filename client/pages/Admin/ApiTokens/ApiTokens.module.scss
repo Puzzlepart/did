@@ -2,7 +2,16 @@
   .message {
     margin: 10px 0 0 0;
   }
-  .keyField {
+
+  .apiKey {
     margin: 10px 0 0 0;
+
+    .text {
+      margin-right: 6px;
+    }
+
+    .copy {
+      cursor: pointer;
+    }
   }
 }

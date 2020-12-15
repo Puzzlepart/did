@@ -35,9 +35,8 @@ export const CustomerForm: FunctionComponent<ICustomerFormProps> = (props: ICust
       }
     })
     if (data?.result.success) {
-      if (props.panel) {
-        setTimeout(props.panel.onDismiss, 1000)
-      } else {
+      if (props.panel) setTimeout(() => props.panel.onDismiss(null), 1000)
+      else {
         setMessage({
           text: t('customers.createSuccess', { name: state.model.name }),
           type: MessageBarType.success
@@ -53,7 +52,11 @@ export const CustomerForm: FunctionComponent<ICustomerFormProps> = (props: ICust
   return (
     <ConditionalWrapper
       condition={!!props.panel}
-      wrapper={(children) => <Panel {...props.panel}>{children}</Panel>}>
+      wrapper={(children) => (
+        <Panel {...props.panel}>
+          {children}
+        </Panel>
+      )}>
       <div className={styles.root}>
         {message && (
           <UserMessage

@@ -13,7 +13,7 @@ import styles from './Roles.module.scss'
  * @param {TFunction} t Translate function
  */
 export const RoleColumns = (onEdit: (role: Role) => void, t: TFunction) => [
-  col('name', '', { maxWidth: 80 }, (role: Role) => {
+  col('name', '', { maxWidth: 100 }, (role: Role) => {
     return (
       <div className={styles.nameColumn}>
         <Icon className={styles.icon} iconName={role.icon} />

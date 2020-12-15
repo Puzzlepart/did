@@ -37,9 +37,8 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (props: IProjec
       }
     })
     if (data?.result.success) {
-      if (props.panel) {
-        setTimeout(props.panel.onDismiss, 1000)
-      } else {
+      if (props.panel) setTimeout(() => props.panel.onDismiss(null), 1000)
+      else {
         setMessage({
           text: t('projects.createSuccess', {
             projectId: state.projectId,
@@ -58,7 +57,11 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (props: IProjec
   return (
     <ConditionalWrapper
       condition={!!props.panel}
-      wrapper={(children) => <Panel {...props.panel}>{children}</Panel>}>
+      wrapper={(children) => (
+        <Panel {...props.panel}>
+          {children}
+        </Panel>
+      )}>
       <div className={styles.root}>
         {message && (
           <UserMessage
@@ -72,17 +75,11 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (props: IProjec
           required={true}
           className={styles.inputField}
           placeholder={t('common.searchPlaceholder')}
-          onClear={() =>
-            dispatch({
-              type: 'UPDATE_MODEL',
-              payload: ['customerKey', '']
-            })
-          }
           errorMessage={state.validation.errors.customerKey}
-          onSelected={({ key }) =>
+          onSelected={(customer) =>
             dispatch({
               type: 'UPDATE_MODEL',
-              payload: ['customerKey', key]
+              payload: ['customerKey', customer?.key]
             })
           }
         />

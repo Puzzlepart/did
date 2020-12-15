@@ -1,3 +1,4 @@
+import AppConfig from 'AppConfig'
 import { PERMISSION } from 'config/security/permissions'
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from 'i18n'
 import { createContext } from 'react'
@@ -9,17 +10,17 @@ export class ContextUser {
   public displayName: string
   public role: Role
   public mail: string
-  private _preferredLanguage: string
+  public preferredLanguage: string
 
   constructor(user?: User) {
     if (!user) {
-      this._preferredLanguage = DEFAULT_LANGUAGE
+      this.preferredLanguage = DEFAULT_LANGUAGE
     } else {
       this.id = user.id
       this.displayName = user.displayName
       this.mail = user.mail
       this.role = user.role
-      this._preferredLanguage = user.preferredLanguage
+      this.preferredLanguage = user.preferredLanguage
     }
   }
 
@@ -27,10 +28,10 @@ export class ContextUser {
    * User language
    */
   public get language() {
-    if (contains(SUPPORTED_LANGUAGES, this._preferredLanguage)) {
-      return this._preferredLanguage
+    if (contains(SUPPORTED_LANGUAGES, this.preferredLanguage)) {
+      return this.preferredLanguage
     }
-    return 'en-GB'
+    return AppConfig.DEFAULT_USER_LANGUAGE
   }
 
   /**

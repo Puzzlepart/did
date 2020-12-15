@@ -28,11 +28,14 @@ export const FilterPanel = (props: IFilterPanelProps) => {
       return f
     })
     setFilters(updatedFilters)
-    props.onFilterUpdated(updatedFilters.filter((filter) => filter.selected.length > 0))
+    props.onFiltersUpdated(updatedFilters.filter((filter) => filter.selected.length > 0))
   }
 
   return (
-    <Panel isOpen={props.isOpen} isLightDismiss={true} onDismiss={props.onDismiss}>
+    <Panel 
+    isOpen={props.isOpen} 
+    isLightDismiss={true} 
+    onDismiss={props.onDismiss}>
       {filters
         .filter((filter) => filter.items.length > 1)
         .map((filter) => (
