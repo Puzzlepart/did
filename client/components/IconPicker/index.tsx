@@ -1,10 +1,10 @@
 import { getIcons } from 'common/icons'
 import { Autocomplete } from 'components/Autocomplete'
 import React, { FunctionComponent, useMemo } from 'react'
-import { find, omit } from 'underscore'
+import { omit } from 'underscore'
 import { humanize } from 'underscore.string'
-import { IIconPickerProps } from './types'
 import styles from './IconPicker.module.scss'
+import { IIconPickerProps } from './types'
 
 export const IconPicker: FunctionComponent<IIconPickerProps> = (props: IIconPickerProps) => {
   const items = useMemo(
@@ -19,16 +19,11 @@ export const IconPicker: FunctionComponent<IIconPickerProps> = (props: IIconPick
     []
   )
 
-  const defaultSelectedItem = useMemo(
-    () => props.defaultSelected && find(items, (i) => i.key === props.defaultSelected),
-    [props.defaultSelected]
-  )
-
   return (
     <div className={`${styles.root} ${props.className}`} hidden={props.hidden}>
       <Autocomplete
         {...omit(props, 'className')}
-        defaultSelectedItem={defaultSelectedItem}
+        defaultSelectedKey={props.defaultSelected}
         required={props.required}
         items={items}
         itemIcons={{ style: {} }}
