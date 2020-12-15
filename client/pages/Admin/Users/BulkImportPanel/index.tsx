@@ -23,6 +23,7 @@ export const BulkImportPanel = (props: IBulkImportPanelProps) => {
       {...pick(props, 'onDismiss', 'isOpen')}
       headerText={t('admin.bulkImportUsersLabel')}
       type={PanelType.medium}
+      isLightDismiss={true}
       className={styles.root}>
       <div className={styles.container}>
         <PrimaryButton

@@ -49,6 +49,7 @@ export const LabelForm = (props: ILabelFormProps) => {
       type={PanelType.smallFixedFar}
       className={styles.root}
       headerText={!!props.label ? t('admin.editLabel') : t('admin.addNewLabel')}
+      isLightDismiss={true}
       isOpen={true}>
       <TextField
         className={styles.inputField}

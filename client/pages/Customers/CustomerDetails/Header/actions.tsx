@@ -40,9 +40,11 @@ export const Actions: FunctionComponent = () => {
           panel={{
             isOpen: showEditPanel,
             headerText: state.selected.name,
+            isLightDismiss: true,
+            onLightDismissClick: () => setShowEditPanel(false),
             onDismiss: () => {
               setShowEditPanel(false)
-              refetch()
+              event === null && refetch()
             }
           }}
         />

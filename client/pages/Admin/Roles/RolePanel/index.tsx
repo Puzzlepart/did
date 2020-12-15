@@ -60,6 +60,7 @@ export const RolePanel: React.FunctionComponent<IRolePanelProps> = (props: IRole
       headerText={props.headerText}
       customWidth='440px'
       isOpen={true}
+      isLightDismiss={true}
       onDismiss={props.onDismiss}>
       <div className={styles.container}>
         <TextField

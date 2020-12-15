@@ -35,9 +35,8 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (props: IProjec
       }
     })
     if (data?.result.success) {
-      if (props.panel) {
-        setTimeout(props.panel.onDismiss, 1000)
-      } else {
+      if (props.panel) setTimeout(() => props.panel.onDismiss(null), 1000)
+      else {
         setMessage({
           text: t('projects.createSuccess', {
             projectId: state.projectId,
@@ -55,7 +54,11 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (props: IProjec
   return (
     <ConditionalWrapper
       condition={!!props.panel}
-      wrapper={(children) => <Panel {...props.panel}>{children}</Panel>}>
+      wrapper={(children) => (
+        <Panel {...props.panel}>
+          {children}
+        </Panel>
+      )}>
       <div className={styles.root}>
         {message && (
           <UserMessage
