@@ -4,6 +4,12 @@ import { capitalize } from 'underscore.string'
 import { DateObject } from 'utils/date'
 import { IReportsQuery } from './types'
 
+/**
+ * Get last month query
+ * 
+ * @param {DateObject} now Current date and time
+ * @param {TFunction} t Translate function
+ */
 const lastMonthQuery = (now: DateObject, t: TFunction) => {
   const obj = now.add('-1month').toObject()
   return {
@@ -15,6 +21,12 @@ const lastMonthQuery = (now: DateObject, t: TFunction) => {
   } as IReportsQuery
 }
 
+/**
+ * Get current month query
+ * 
+ * @param {DateObject} now Current date and time
+ * @param {TFunction} t Translate function
+ */
 const currentMonthQuery = (now: DateObject, t: TFunction) => {
   const obj = now.toObject()
   return {
@@ -31,8 +43,14 @@ const currentMonthQuery = (now: DateObject, t: TFunction) => {
   } as IReportsQuery
 }
 
+/**
+ * Get current year query
+ * 
+ * @param {DateObject} now Current date and time
+ * @param {TFunction} t Translate function
+ */
 const currentYearQuery = (now: DateObject, t: TFunction) => {
-  const obj = now.toObject()
+  const obj = now.toObject('year')
   return {
     key: 'currentYear',
     text: t('common.exportTypeCurrentYear', obj),
@@ -47,6 +65,12 @@ const currentYearQuery = (now: DateObject, t: TFunction) => {
   } as IReportsQuery
 }
 
+/**
+ * Get forecast query
+ * 
+ * @param {DateObject} now Current date and time
+ * @param {TFunction} t Translate function
+ */
 const forecastQuery = (now: DateObject, t: TFunction) => {
   return {
     key: 'forecast',

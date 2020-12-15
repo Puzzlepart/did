@@ -28,7 +28,7 @@ export const FilterPanel = (props: IFilterPanelProps) => {
       return f
     })
     setFilters(updatedFilters)
-    props.onFilterUpdated(updatedFilters.filter((filter) => filter.selected.length > 0))
+    props.onFiltersUpdated(updatedFilters.filter((filter) => filter.selected.length > 0))
   }
 
   return (
