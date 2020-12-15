@@ -12,10 +12,8 @@ import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
 import { IProjectListProps } from './ProjectList/types'
 import $projects from './projects.gql'
-import createReducer, { DATA_UPDATED, initState, SET_SELECTED_PROJECT } from './reducer'
+import createReducer, { CHANGE_VIEW, DATA_UPDATED, initState, SET_SELECTED_PROJECT } from './reducer'
 import { IProjectsParams, ProjectsQueryResult, ProjectsView } from './types'
-
-
 
 export const Projects: FunctionComponent = () => {
   const { t } = useTranslation()
@@ -28,7 +26,7 @@ export const Projects: FunctionComponent = () => {
     variables: { sortBy: 'name' },
     fetchPolicy: 'cache-and-network'
   })
-  
+
   useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query])
   useLayoutEffect(() => {
     const paths = [state.view, state.selected?.id || params.key, state.detailsTab]
@@ -71,10 +69,7 @@ export const Projects: FunctionComponent = () => {
       <Pivot
         selectedKey={state.view}
         onLinkClick={({ props }) =>
-          dispatch({
-            type: 'CHANGE_VIEW',
-            view: props.itemKey as ProjectsView
-          })
+          dispatch(CHANGE_VIEW({ view: props.itemKey as ProjectsView }))
         }
         styles={{ itemContainer: { paddingTop: 10 } }}>
         <PivotItem
