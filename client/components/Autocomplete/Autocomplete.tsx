@@ -9,7 +9,6 @@ import createReducer, {
   ON_KEY_DOWN,
   ON_SEARCH,
   RESET,
-  SET_SELECTED_INDEX
 } from './reducer'
 import { SuggestionItem } from './SuggestionItem'
 
@@ -87,7 +86,6 @@ export function Autocomplete<T = any>(props: IAutocompleteProps<T>) {
                     dispatch(DISMISS_CALLOUT({ item }))
                     props.onSelected(item)
                   }}
-                  onMouseOver={() => dispatch(SET_SELECTED_INDEX({ index: idx }))}
                 />
               )}
             />
