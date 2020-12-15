@@ -1,7 +1,7 @@
 import { UserMessage } from 'components'
 import { getValue } from 'helpers'
 import color from 'randomcolor'
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { EventObject } from 'types'
@@ -54,7 +54,10 @@ export const AllocationView = (
   return (
     <div key={`allocation_${selectedPeriod?.id}`} className={styles.root} ref={container}>
       {charts.map((c) => {
-        const data = getData(selectedPeriod?.getEvents() || [], c, container?.current?.clientWidth)
+        const data = useMemo(
+          () => getData(selectedPeriod?.getEvents() || [], c, container?.current?.clientWidth),
+          [container?.current?.clientWidth, selectedPeriod]
+        )
         return (
           <div key={c.key} className={styles.chartContainer}>
             <div className={styles.title}>{c.title}</div>

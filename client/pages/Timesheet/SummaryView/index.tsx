@@ -135,7 +135,7 @@ export const SummaryView = () => {
   } else {
     const context = useContext(TimesheetContext)
     const columns = createColumns(context.scope)
-    const events = (context.selectedPeriod?.getEvents() || []).filter((e) => !!e.project)
+    const events = context.selectedPeriod?.getEvents(false) || []
     const items = [
       ...generateRows(events, columns),
       generateTotalRow(events, columns, t('common.sumLabel'))

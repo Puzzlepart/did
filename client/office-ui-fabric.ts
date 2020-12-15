@@ -61,5 +61,6 @@ export { TooltipDelay, TooltipHost } from 'office-ui-fabric-react/lib/Tooltip'
 export {
   format,
   IRenderFunction,
-  IStyleFunctionOrObject
+  IStyleFunctionOrObject,
+  KeyCodes
 } from 'office-ui-fabric-react/lib/Utilities'

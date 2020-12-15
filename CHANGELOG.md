@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.9.0 - 15.12.2020 (unreleased)
+## 0.9.0 - 15.12.2020
 ## Added
 - Changes to forecast/confirm actions #605
 - Improvements to allocation view in Timesheet #644
@@ -17,12 +17,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Decreased Project and Customer keys min length to 2 #681
 - Increased Project and Customer keys max length to 12 #719
 - When debugging, local cache is automatically cleared on first run #715
+- Improved project selector #671
+- Support for editing customers #672
+- Resizable columns in Reports #722
+- Added project tooltip to Summary view in Timesheet #677
 
 ## Fixed
 - Minor UI adjustments in Timesheet
 - Some fixes in matching engine #603
 - Issue with appointments occuring around midnight Sunday #703
 - Fixed lag in customer/project search #686
+- Fixed an issue where current month and year in Reports included entries after today's date #738
 
 ## Removed
 - Dependency on moment.js removed, now using day.js instead
