@@ -100,6 +100,20 @@ describe(header('DateUtils'), () => {
         monthName: 'April'
       })
     })
+
+    it('should return correct object for 2020-12-28', () => {
+      deepStrictEqual(new DateObject('2020-12-28').toObject('monthName', 'weekNumber'), {
+        monthName: 'December',
+        weekNumber: 53
+      })
+    })
+
+    it('should return correct object for 2020-01-01', () => {
+      deepStrictEqual(new DateObject('2021-01-01').toObject('monthName', 'weekNumber'), {
+        monthName: 'January',
+        weekNumber: 53
+      })
+    })
   })
 
   describe('DateObject.add', () => {
