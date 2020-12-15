@@ -9,6 +9,10 @@
 ### Review checklist
 - [ ] Tested locally
 
+### Review theme song
+_Remove section if you think this is stupid._
+🎵  [Artist - Song](https://open.spotify.com/track) 🎵 
+
 ### Description
 Please describe your pull request.
 

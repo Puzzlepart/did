@@ -130,7 +130,7 @@
     "noTimeEntriesText": "\nThere are no confirmed hours for the selected months in the selected year.",
     "editRole": "Edit role",
     "permissonsLabel": "Permissions",
-    "tokenGeneratedText": "Your key has been generated and will only be visible for {{duration}} seconds. You can only see it once. Take good care of it!",
+    "tokenGeneratedText": "Make sure to copy your new personal access token now. You won’t be able to see it again!",
     "tokenErrorText": "An error occurred generating your key. Please try again later.",
     "tokenDeletedText": "API key **{{name}}** was succesfully deleted.",
     "bulkImportUsersLabel": "Bulk import",
