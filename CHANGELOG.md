@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## 0.9.0 - 15.12.2020
-## Added
+### Added
 - Changes to forecast/confirm actions #605
 - Improvements to allocation view in Timesheet #644
 - Forecast notifications #613 (can be turned off in subscription settings #639)
@@ -14,22 +14,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for API tokens with scoped permissions #635
 - Export hours from user menu #589
 - Improved project tooltip/panel #678
-- Decreased Project and Customer keys min length to 2 #681
-- Increased Project and Customer keys max length to 12 #719
 - When debugging, local cache is automatically cleared on first run #715
 - Improved project selector #671
 - Support for editing customers #672
 - Resizable columns in Reports #722
 - Added project tooltip to Summary view in Timesheet #677
+- Side panels are now light dismissable #734
+- Project suggestions in timesheet matching now also works for event body #705
 
-## Fixed
+### Fixed
+- Timesheet: fixed issue where ignored events were not persisted #730
 - Minor UI adjustments in Timesheet
-- Some fixes in matching engine #603
+- Fixes in matching engine #603
 - Issue with appointments occuring around midnight Sunday #703
-- Fixed lag in customer/project search #686
-- Fixed an issue where current month and year in Reports included entries after today's date #738
+- Lag in customer/project search #686
+- Reports: current month and year in Reports included entries after today's date #738
+- Reports: filters would persist when switching reports #733
+- User settings: display language dropdown value would not change after switching language #740
+- Customers: Searching for newly created customers would return zero results #739
 
-## Removed
+### Changed
+- Decreased Project and Customer keys min length to 2 #681
+- Increased Project and Customer keys max length to 12 #719
+
+### Removed
 - Dependency on moment.js removed, now using day.js instead
 
 ## 0.8.0 - 15.10.2020
