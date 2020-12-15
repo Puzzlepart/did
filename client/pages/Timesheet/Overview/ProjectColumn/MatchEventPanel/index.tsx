@@ -35,6 +35,7 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
       />
       <Panel
         isOpen={isPanelVisible}
+        isLightDismiss={true}
         headerText={t('timesheet.matchEventPanelHeaderText')}
         onDismiss={hidePanel}>
         <div className={styles.subText}>{event.title}</div>
