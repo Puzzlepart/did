@@ -18,12 +18,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Increased Project and Customer keys max length to 12 #719
 - When debugging, local cache is automatically cleared on first run #715
 - Improved project selector #671
+- Support for editing customers #672
+- Resizable columns in Reports #722
+- Added project tooltip to Summary view in Timesheet #677
 
 ## Fixed
 - Minor UI adjustments in Timesheet
 - Some fixes in matching engine #603
 - Issue with appointments occuring around midnight Sunday #703
 - Fixed lag in customer/project search #686
+- Fixed an issue where current month and year in Reports included entries after today's date #738
 
 ## Removed
 - Dependency on moment.js removed, now using day.js instead
