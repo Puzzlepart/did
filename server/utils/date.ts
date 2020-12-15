@@ -34,7 +34,7 @@ export const getDurationHours = (startDateTime: ConfigType, endDateTime: ConfigT
  */
 export const getPeriod = (dateTime: ConfigType): string => {
   const date = $dayjs(dateTime)
-  return [date.week(), date.month() + 1, date.year()].join('_')
+  return [date.isoWeek(), date.month() + 1, date.year()].join('_')
 }
 
 /**
@@ -43,7 +43,7 @@ export const getPeriod = (dateTime: ConfigType): string => {
  * @param {ConfigType} dateTime Date time
  */
 export const getWeek = (dateTime?: ConfigType): number => {
-  return $dayjs(dateTime).week()
+  return $dayjs(dateTime).isoWeek()
 }
 
 /**

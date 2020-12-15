@@ -168,7 +168,7 @@ export class DateUtils {
    * @param {DateInput} date Optional date
    */
   public getWeek(date?: DateInput): number {
-    return $dayjs(date).week()
+    return $dayjs(date).isoWeek()
   }
 
   /**
@@ -199,7 +199,7 @@ export class DateUtils {
    * @param {DateObject} date Date
    */
   public isCurrentWeek(date: DateObject): boolean {
-    return date.$.week() === $dayjs().week()
+    return date.$.week() === $dayjs().isoWeek()
   }
 
   /**
