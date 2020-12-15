@@ -1,101 +1,58 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import { useQuery } from '@apollo/client'
-import { FilterPanel, IFilter, List, UserMessage } from 'components'
-import { getValue } from 'helpers'
-import { format, Pivot, PivotItem, Spinner } from 'office-ui-fabric'
-import React, { useMemo, useState } from 'react'
+import { FilterPanel, List, UserMessage } from 'components'
+import { Pivot, PivotItem, Spinner } from 'office-ui-fabric'
+import React, { useLayoutEffect, useMemo, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
-import { filter, find, isEmpty } from 'underscore'
+import { isEmpty } from 'underscore'
 import DateUtils from 'utils/date'
-import { exportExcel } from 'utils/exportExcel'
-import columns from './columns'
+import getColumns from './columns'
 import commandBar from './commandBar'
-import { IReportsContext } from './context'
 import { filters } from './filters'
+import { getQueries } from './queries'
+import createReducer, {
+  CHANGE_QUERY,
+  DATA_UPDATED,
+  FILTERS_UPDATED,
+  INIT,
+  TOGGLE_FILTER_PANEL
+} from './reducer'
 import styles from './Reports.module.scss'
 import $timeentries from './timeentries.gql'
-import { getQueries, IReportsParams, IReportsState } from './types'
+import { IReportsParams } from './types'
 
 export const Reports = () => {
   const { t } = useTranslation()
   const history = useHistory()
   const params = useParams<IReportsParams>()
   const queries = getQueries(t)
-  const [state, setState] = useState<IReportsState>({
-    query: find(queries, (q) => q.key === params.query),
+  const reducer = useMemo(() => createReducer({ params, queries }), [])
+  const [state, dispatch] = useReducer(reducer, {
+    loading: true,
+    timeentries: [],
     groupBy: {
       fieldName: '.',
       emptyGroupName: t('common.all')
     }
   })
-  const { loading, data } = useQuery($timeentries, {
+  const query = useQuery($timeentries, {
     skip: !state.query,
     fetchPolicy: 'cache-first',
     variables: state.query?.variables
   })
+  const columns = useMemo(() => getColumns({ isResizable: true }, t), [])
 
-  /**
-   * On export to Excel
-   */
-  const onExportExcel = () => {
-    const fileName = format(
-      state.query.exportFileName,
-      new Date().toDateString().split(' ').join('-')
-    )
-    exportExcel(state.subset || context.timeentries, {
-      columns: columns(t),
-      fileName
-    })
-  }
-
-  /**
-   * On filter updated in FilterPanel
-   *
-   * @param {IFilter[]} filters
-   */
-  const onFilterUpdated = (filters: IFilter[]) => {
-    const subset = filter(context.timeentries, (entry) => {
-      return (
-        filter(filters, (f) => {
-          const selectedKeys = f.selected.map((s) => s.key)
-          return selectedKeys.indexOf(getValue(entry, f.key, '')) !== -1
-        }).length === filters.length
-      )
-    })
-    context.setState({ subset })
-  }
-
-  /**
-   * On change query
-   *
-   * @param {string} key Query key
-   */
-  const onChangeQuery = (key: string) => {
-    const query = find(queries, (q) => q.key === key)
-    context.setState({ query })
-    history.push(`/reports/${key}`)
-  }
-
-  const context: IReportsContext = useMemo(
-    () => ({
-      ...state,
-      timeentries: data?.timeentries || [],
-      loading,
-      setState: (_state) => setState({ ...state, ..._state }),
-      onExportExcel,
-      t
-    }),
-    [loading, state]
-  )
-
-  const items = state.subset || context.timeentries
+  useLayoutEffect(() => dispatch(INIT()), [])
+  useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query])
+  useLayoutEffect(() => {
+    state.query?.key && history.push(`/reports/${state.query.key}`)
+  }, [state.query])
 
   return (
     <div className={styles.root}>
       <Pivot
         defaultSelectedKey={params.query || 'default'}
-        onLinkClick={(item) => onChangeQuery(item.props.itemKey)}>
+        onLinkClick={(item) => dispatch(CHANGE_QUERY({ key: item.props.itemKey }))}>
         {queries.map((query) => (
           <PivotItem
             key={query.key}
@@ -103,17 +60,17 @@ export const Reports = () => {
             headerText={query.text}
             itemIcon={query.iconName}>
             <div className={styles.container}>
-              {loading && (
+              {state.loading && (
                 <Spinner
                   className={styles.spinner}
                   labelPosition='right'
                   label={t('reports.generatingReportLabel')}
                 />
               )}
-              {!loading && !isEmpty(context.timeentries) && (
+              {!state.loading && !isEmpty(state.timeentries) && (
                 <List
                   fadeIn={[200, 500]}
-                  items={items}
+                  items={state.subset}
                   groups={{
                     ...state.groupBy,
                     totalFunc: (items) => {
@@ -126,20 +83,20 @@ export const Reports = () => {
                       })
                     }
                   }}
-                  columns={columns(t)}
-                  commandBar={commandBar(context)}
+                  columns={columns}
+                  commandBar={commandBar({ state, dispatch, t })}
                 />
               )}
               <UserMessage
-                hidden={!isEmpty(context.timeentries) || loading || !state.query}
+                hidden={!isEmpty(state.timeentries) || state.loading || !state.query}
                 text={t('reports.noEntriesText')}
               />
               <FilterPanel
                 isOpen={state.isFiltersOpen}
                 filters={filters(t)}
-                items={context.timeentries}
-                onDismiss={() => context.setState({ isFiltersOpen: false })}
-                onFilterUpdated={onFilterUpdated}
+                items={state.timeentries}
+                onDismiss={() => dispatch(TOGGLE_FILTER_PANEL())}
+                onFiltersUpdated={(filters) => dispatch(FILTERS_UPDATED({ filters }))}
                 shortListCount={10}
               />
             </div>
