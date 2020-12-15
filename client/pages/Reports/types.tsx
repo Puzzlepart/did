@@ -25,24 +25,34 @@ export interface IGroupByOption extends IContextualMenuItem {
 
 export interface IReportsState {
   /**
-   * Filter panel open
+   * Time entries
    */
-  readonly isFiltersOpen?: boolean
-
-  /**
-   * Query
-   */
-  readonly query?: IReportsQuery
-
-  /**
-   * Group by properties
-   */
-  readonly groupBy?: IListGroups
+  timeentries?: any[]
 
   /**
    * Filtered subset
    */
-  readonly subset?: any[]
+  subset?: any[]
+
+  /**
+   * Filter panel open
+   */
+  isFiltersOpen?: boolean
+
+  /**
+   * Query
+   */
+  query?: IReportsQuery
+
+  /**
+   * Group by properties
+   */
+  groupBy?: IListGroups
+
+  /**
+   * Loading
+   */
+  loading?: boolean
 }
 
 /**
