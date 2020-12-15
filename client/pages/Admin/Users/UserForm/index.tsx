@@ -42,7 +42,11 @@ export const UserForm: FunctionComponent<IUserFormProps> = (props: IUserFormProp
     !validator.isEmpty(model?.displayName || '')
 
   return (
-    <Panel {...pick(props, 'onDismiss', 'headerText')} className={styles.root} isOpen={true}>
+    <Panel 
+    {...pick(props, 'onDismiss', 'headerText')} 
+    className={styles.root} 
+    isOpen={true}
+    isLightDismiss={true}>
       {!props.user && (
         <div className={styles.inputContainer}>
           <Autocomplete
@@ -50,7 +54,7 @@ export const UserForm: FunctionComponent<IUserFormProps> = (props: IUserFormProp
             placeholder={t('common.searchPlaceholder')}
             items={adUsers.map((u) => ({
               key: u.id,
-              displayValue: u.displayName,
+              text: u.displayName,
               searchValue: u.displayName,
               data: u
             }))}

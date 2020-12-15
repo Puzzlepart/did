@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@apollo/client'
 import { AppContext } from 'AppContext'
 import { HotkeyModal } from 'components'
 import { Pivot, PivotItem } from 'office-ui-fabric'
-import React, { useContext, useEffect, useMemo, useReducer } from 'react'
+import React, { useContext, useLayoutEffect, useMemo, useReducer } from 'react'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
@@ -60,9 +60,9 @@ export const Timesheet: React.FunctionComponent = () => {
     errorPolicy: 'all'
   })
 
-  useEffect(() => dispatch({ type: 'DATA_UPDATED', payload: { query, t, params } }), [query])
+  useLayoutEffect(() => dispatch({ type: 'DATA_UPDATED', payload: { query, t, params } }), [query])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!state.selectedPeriod) return
     history.push(['/timesheet', state.selectedView, state.selectedPeriod.path].join('/'))
   }, [state.selectedView, state.selectedPeriod])
