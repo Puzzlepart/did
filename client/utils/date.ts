@@ -176,10 +176,13 @@ export class DateUtils {
     }
 
 
-    /*
+    /**
      * Get Iso Week number
-     * Handles a weakness in dayjs, where week 53 occuring in january of a year
-     * e.g. jan 1-3 2021, is returned as january 2022
+    * Handles a weakness in dayjs, where week 53 occuring in january of a year
+    * e.g. jan 1-3 2021, is returned as january 2022
+     * 
+     * @param {number} isoWeek Iso week number
+     * @param {number} year Year
      */
     getIsoWeek(isoWeek: number, year: number) {
         if (isoWeek === 53 && $dayjs().year(year - 1).isoWeeksInYear() === 53) return 0
