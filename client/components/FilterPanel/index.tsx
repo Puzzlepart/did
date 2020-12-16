@@ -32,10 +32,7 @@ export const FilterPanel = (props: IFilterPanelProps) => {
   }
 
   return (
-    <Panel 
-    isOpen={props.isOpen} 
-    isLightDismiss={true} 
-    onDismiss={props.onDismiss}>
+    <Panel isOpen={props.isOpen} isLightDismiss={true} onDismiss={props.onDismiss}>
       {filters
         .filter((filter) => filter.items.length > 1)
         .map((filter) => (

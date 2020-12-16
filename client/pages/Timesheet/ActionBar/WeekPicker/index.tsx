@@ -2,6 +2,7 @@ import {
   Calendar,
   Callout,
   DateRangeType,
+  FirstWeekOfYear,
   DayOfWeek,
   DirectionalHint,
   FocusTrapZone,
@@ -59,6 +60,7 @@ export const WeekPicker = () => {
               strings={t('common.calendarStrings', { returnObjects: true }) as any}
               showGoToToday={false}
               showWeekNumbers={true}
+              firstWeekOfYear={FirstWeekOfYear.FirstFourDayWeek}
               dateRangeType={DateRangeType.Week}
               autoNavigateOnSelection={true}
               value={scope.startDate.jsDate}

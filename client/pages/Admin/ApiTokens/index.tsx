@@ -45,8 +45,7 @@ export const ApiTokens = () => {
     if (generatedKey) {
       setMessage({ text: t('admin.tokenGeneratedText') }, 20000)
       setApiKey(generatedKey)
-    }
-    else setMessage({ type: MessageBarType.error, text: t('admin.tokenErrorText') })
+    } else setMessage({ type: MessageBarType.error, text: t('admin.tokenErrorText') })
     refetch()
   }
 
@@ -55,9 +54,7 @@ export const ApiTokens = () => {
       {message && <UserMessage {...message} />}
       {!isNull(apiKey) && (
         <FadeIn className={styles.apiKey}>
-          <UserMessage
-            type={MessageBarType.success}
-            iconName='Cloud'>
+          <UserMessage type={MessageBarType.success} iconName='Cloud'>
             <span className={styles.text}>{apiKey}</span>
             <span className={styles.copy}>
               <CopyToClipboard text={apiKey}>

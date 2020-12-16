@@ -24,7 +24,10 @@ export default () =>
       [INIT.type]: (state, { payload }: ReturnType<typeof INIT>) => {
         state.items = payload.props.items
         state.suggestions = []
-        state.selectedItem = find(state.items, item => item.key === payload.props.defaultSelectedKey)
+        state.selectedItem = find(
+          state.items,
+          (item) => item.key === payload.props.defaultSelectedKey
+        )
         state.value = state.selectedItem?.text
       },
       [RESET.type]: (state) => {

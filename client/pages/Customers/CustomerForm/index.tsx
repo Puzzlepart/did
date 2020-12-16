@@ -52,11 +52,7 @@ export const CustomerForm: FunctionComponent<ICustomerFormProps> = (props: ICust
   return (
     <ConditionalWrapper
       condition={!!props.panel}
-      wrapper={(children) => (
-        <Panel {...props.panel}>
-          {children}
-        </Panel>
-      )}>
+      wrapper={(children) => <Panel {...props.panel}>{children}</Panel>}>
       <div className={styles.root}>
         {message && (
           <UserMessage

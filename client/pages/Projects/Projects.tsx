@@ -12,7 +12,12 @@ import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
 import { IProjectListProps } from './ProjectList/types'
 import $projects from './projects.gql'
-import createReducer, { CHANGE_VIEW, DATA_UPDATED, initState, SET_SELECTED_PROJECT } from './reducer'
+import createReducer, {
+  CHANGE_VIEW,
+  DATA_UPDATED,
+  initState,
+  SET_SELECTED_PROJECT
+} from './reducer'
 import { IProjectsParams, ProjectsQueryResult, ProjectsView } from './types'
 
 export const Projects: FunctionComponent = () => {
@@ -68,9 +73,7 @@ export const Projects: FunctionComponent = () => {
     <ProjectsContext.Provider value={context}>
       <Pivot
         selectedKey={state.view}
-        onLinkClick={({ props }) =>
-          dispatch(CHANGE_VIEW({ view: props.itemKey as ProjectsView }))
-        }
+        onLinkClick={({ props }) => dispatch(CHANGE_VIEW({ view: props.itemKey as ProjectsView }))}
         styles={{ itemContainer: { paddingTop: 10 } }}>
         <PivotItem
           itemID='search'

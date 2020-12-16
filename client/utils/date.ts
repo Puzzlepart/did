@@ -7,6 +7,8 @@ import localeDataPlugin from 'dayjs/plugin/localeData'
 import objectSupportPlugin from 'dayjs/plugin/objectSupport'
 import utcPlugin from 'dayjs/plugin/utc'
 import weekOfYearPlugin from 'dayjs/plugin/weekOfYear'
+import isoWeeksInYear from 'dayjs/plugin/isoWeeksInYear'
+import isLeapYear from 'dayjs/plugin/isLeapYear'
 import { TFunction } from 'i18next'
 import { capitalize } from 'underscore.string'
 import { DateObject } from './date.dateObject'
@@ -48,6 +50,8 @@ export class DateUtils {
     $dayjs.extend<PluginFunc>(objectSupportPlugin)
     $dayjs.extend<PluginFunc>(utcPlugin)
     $dayjs.extend<PluginFunc>(isoWeekPlugin)
+    $dayjs.extend<PluginFunc>(isoWeeksInYear)
+    $dayjs.extend<PluginFunc>(isLeapYear)
   }
 
   /**
@@ -168,7 +172,26 @@ export class DateUtils {
    * @param {DateInput} date Optional date
    */
   public getWeek(date?: DateInput): number {
-    return $dayjs(date).week()
+    return $dayjs(date).isoWeek()
+  }
+
+  /**
+   * Get Iso Week number
+   * Handles a weakness in dayjs, where week 53 occuring in january of a year
+   * e.g. jan 1-3 2021, is returned as january 2022
+   *
+   * @param {number} isoWeek Iso week number
+   * @param {number} year Year
+   */
+  getIsoWeek(isoWeek: number, year: number) {
+    if (
+      isoWeek === 53 &&
+      $dayjs()
+        .year(year - 1)
+        .isoWeeksInYear() === 53
+    )
+      return 0
+    return isoWeek
   }
 
   /**
@@ -199,7 +222,7 @@ export class DateUtils {
    * @param {DateObject} date Date
    */
   public isCurrentWeek(date: DateObject): boolean {
-    return date.$.week() === $dayjs().week()
+    return date.$.week() === $dayjs().isoWeek()
   }
 
   /**

@@ -87,6 +87,18 @@ describe(header('DateUtils'), () => {
     })
   })
 
+  describe('DateObject.fromObject', () => {
+    it('should return correct date for week 1 2021', () => {
+      const d = new DateObject().fromObject({ week: 1, year: 2021 })
+      deepStrictEqual(d.toObject(), {
+        weekNumber: 1,
+        monthNumber: 1,
+        year: 2021,
+        monthName: 'January'
+      })
+    })
+  })
+
   describe('DateObject.toObject', () => {
     it('should return correct object for 2020-03-01', () => {
       deepStrictEqual(new DateObject('2020-03-01').toObject('monthNumber', 'year'), {
@@ -98,6 +110,20 @@ describe(header('DateUtils'), () => {
     it('should return correct object for 2020-04-01', () => {
       deepStrictEqual(new DateObject('2020-04-01').toObject('monthName'), {
         monthName: 'April'
+      })
+    })
+
+    it('should return correct object for 2020-12-28', () => {
+      deepStrictEqual(new DateObject('2020-12-28').toObject('monthName', 'weekNumber'), {
+        monthName: 'December',
+        weekNumber: 53
+      })
+    })
+
+    it('should return correct object for 2020-01-01', () => {
+      deepStrictEqual(new DateObject('2021-01-01').toObject('monthName', 'weekNumber'), {
+        monthName: 'January',
+        weekNumber: 53
       })
     })
   })
