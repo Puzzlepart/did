@@ -31,11 +31,13 @@ export class DateObject {
    * If @week and @year is not specified, today's date is used
    *
    * @param {ObjectInput} input Object input
+   * @param {any} startOf Optional start of (e.g. year or isoWeek)
    */
-  public fromObject(input: ObjectInput): DateObject {
+  public fromObject(input: ObjectInput, startOf: any = 'isoWeek'): DateObject {
     const year = typeof input.year === 'string' ? parseInt(input.year) : input.year
     const isoWeek = typeof input.week === 'string' ? parseInt(input.week) : input.week
-    this.$ = $dayjs().year(year).isoWeek(DateUtils.getIsoWeek(isoWeek, year)).startOf('isoWeek')
+    this.$ = $dayjs().year(year).isoWeek(DateUtils.getIsoWeek(isoWeek, year))
+    if (startOf) this.$ = this.$.startOf('isoWeek')
     return this
   }
 
