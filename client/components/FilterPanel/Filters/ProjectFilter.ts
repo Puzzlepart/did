@@ -8,7 +8,7 @@ export class ProjectFilter extends BaseFilter {
   }
 
   /**
-   * Intialize the ResourceFilter
+   * Intialize the ProjectFilter
    *
    * @param {any[]} entries Entries
    */
