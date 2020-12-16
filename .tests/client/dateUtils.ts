@@ -88,16 +88,6 @@ describe(header('DateUtils'), () => {
   })
 
   describe('DateObject.fromObject', () => {
-    it('should return correct date for week 53 2021', () => {
-      const d = new DateObject().fromObject({ week: 53, year: 2021 })
-      deepStrictEqual(d.toObject(), {
-        weekNumber: 53,
-        monthNumber: 1,
-        year: 2021,
-        monthName: 'January'
-      })
-    })
-
     it('should return correct date for week 1 2021', () => {
       const d = new DateObject().fromObject({ week: 1, year: 2021 })
       deepStrictEqual(d.toObject(), {
