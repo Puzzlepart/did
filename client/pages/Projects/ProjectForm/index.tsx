@@ -57,11 +57,7 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (props: IProjec
   return (
     <ConditionalWrapper
       condition={!!props.panel}
-      wrapper={(children) => (
-        <Panel {...props.panel}>
-          {children}
-        </Panel>
-      )}>
+      wrapper={(children) => <Panel {...props.panel}>{children}</Panel>}>
       <div className={styles.root}>
         {message && (
           <UserMessage

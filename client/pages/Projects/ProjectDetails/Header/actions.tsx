@@ -25,12 +25,14 @@ export const Actions: FunctionComponent = () => {
       data: { result }
     } = await createOutlookCategory({ variables: { category: state.selected.id } })
     if (result.success) {
-      dispatch(SET_SELECTED_PROJECT({
-         project: {
-          ...state.selected,
-          outlookCategory: result.data
-        }
-      }))
+      dispatch(
+        SET_SELECTED_PROJECT({
+          project: {
+            ...state.selected,
+            outlookCategory: result.data
+          }
+        })
+      )
     }
   }
 

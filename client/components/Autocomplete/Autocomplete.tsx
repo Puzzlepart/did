@@ -22,10 +22,14 @@ export function Autocomplete<T = any>(props: IAutocompleteProps<T>) {
 
   const classNames = [styles.root, props.errorMessage && styles.hasError]
 
-  const suggestions = useMemo(() => state.suggestions.map((s, idx) => ({
-    ...s,
-    isSelected: idx === state.selectedIndex
-  })), [state.suggestions, state.selectedIndex])
+  const suggestions = useMemo(
+    () =>
+      state.suggestions.map((s, idx) => ({
+        ...s,
+        isSelected: idx === state.selectedIndex
+      })),
+    [state.suggestions, state.selectedIndex]
+  )
 
   return (
     <div

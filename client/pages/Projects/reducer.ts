@@ -5,16 +5,18 @@ import { contains, find } from 'underscore'
 import { IProjectsParams, IProjectsState, ProjectsQueryResult, ProjectsView } from './types'
 import { createReducer, createAction } from '@reduxjs/toolkit'
 
-export const DATA_UPDATED = createAction<{ query: QueryResult<ProjectsQueryResult> }>('DATA_UPDATED')
+export const DATA_UPDATED = createAction<{ query: QueryResult<ProjectsQueryResult> }>(
+  'DATA_UPDATED'
+)
 export const SET_SELECTED_PROJECT = createAction<{ project: Project }>('SET_SELECTED_PROJECT')
 export const CHANGE_VIEW = createAction<{ view: ProjectsView }>('CHANGE_VIEW')
 export const CHANGE_DETAILS_TAB = createAction<{ detailsTab: string }>('CHANGE_DETAILS_TAB')
 
 /**
-* Initialize state
-*
-* @param {IProjectsParams} params Params
-*/
+ * Initialize state
+ *
+ * @param {IProjectsParams} params Params
+ */
 export const initState = (params: IProjectsParams): IProjectsState => ({
   view: contains(['search', 'my', 'new'], params.view) ? params.view : 'search',
   detailsTab: params.detailsTab,
@@ -57,5 +59,5 @@ export default ({ params }: ICreateReducerParams) =>
 
     [CHANGE_DETAILS_TAB.type]: (state, { payload }: ReturnType<typeof CHANGE_DETAILS_TAB>) => {
       state.detailsTab = payload.detailsTab
-    },
+    }
   })

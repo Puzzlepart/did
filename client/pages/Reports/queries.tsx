@@ -6,7 +6,7 @@ import { IReportsQuery } from './types'
 
 /**
  * Get last month query
- * 
+ *
  * @param {DateObject} now Current date and time
  * @param {TFunction} t Translate function
  */
@@ -23,7 +23,7 @@ const lastMonthQuery = (now: DateObject, t: TFunction) => {
 
 /**
  * Get current month query
- * 
+ *
  * @param {DateObject} now Current date and time
  * @param {TFunction} t Translate function
  */
@@ -45,7 +45,7 @@ const currentMonthQuery = (now: DateObject, t: TFunction) => {
 
 /**
  * Get current year query
- * 
+ *
  * @param {DateObject} now Current date and time
  * @param {TFunction} t Translate function
  */
@@ -67,7 +67,7 @@ const currentYearQuery = (now: DateObject, t: TFunction) => {
 
 /**
  * Get forecast query
- * 
+ *
  * @param {DateObject} now Current date and time
  * @param {TFunction} t Translate function
  */

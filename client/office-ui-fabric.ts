@@ -4,7 +4,12 @@ export {
   MessageBarButton,
   PrimaryButton
 } from 'office-ui-fabric-react/lib/Button'
-export { Calendar, DateRangeType, DayOfWeek, FirstWeekOfYear } from 'office-ui-fabric-react/lib/Calendar'
+export {
+  Calendar,
+  DateRangeType,
+  DayOfWeek,
+  FirstWeekOfYear
+} from 'office-ui-fabric-react/lib/Calendar'
 export { Callout, DirectionalHint, ICalloutProps, Target } from 'office-ui-fabric-react/lib/Callout'
 export { Checkbox } from 'office-ui-fabric-react/lib/Checkbox'
 export { ChoiceGroup, IChoiceGroupOption } from 'office-ui-fabric-react/lib/ChoiceGroup'
