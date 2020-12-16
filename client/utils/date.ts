@@ -7,6 +7,8 @@ import localeDataPlugin from 'dayjs/plugin/localeData'
 import objectSupportPlugin from 'dayjs/plugin/objectSupport'
 import utcPlugin from 'dayjs/plugin/utc'
 import weekOfYearPlugin from 'dayjs/plugin/weekOfYear'
+import isoWeeksInYear  from 'dayjs/plugin/isoWeeksInYear'
+import isLeapYear  from 'dayjs/plugin/isLeapYear'
 import { TFunction } from 'i18next'
 import { capitalize } from 'underscore.string'
 import { DateObject } from './date.dateObject'
@@ -33,7 +35,7 @@ interface IDateUtils {
 export type DateInput = ConfigType
 
 export class DateUtils {
-  constructor(private $: IDateUtils) {}
+  constructor(private $: IDateUtils) { }
 
   /**
    * Setup DateUtils class using @dayjs with @plugins
@@ -48,6 +50,8 @@ export class DateUtils {
     $dayjs.extend<PluginFunc>(objectSupportPlugin)
     $dayjs.extend<PluginFunc>(utcPlugin)
     $dayjs.extend<PluginFunc>(isoWeekPlugin)
+    $dayjs.extend<PluginFunc>(isoWeeksInYear)
+    $dayjs.extend<PluginFunc>(isLeapYear)
   }
 
   /**
