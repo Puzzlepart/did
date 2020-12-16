@@ -1,6 +1,6 @@
-import dayjs, { Dayjs, OpUnitType } from 'dayjs'
+import { Dayjs, OpUnitType } from 'dayjs'
 import { isEmpty, pick } from 'underscore'
-import DateUtils, { DateInput } from './date'
+import DateUtils, { $dayjs, DateInput } from './date'
 
 export type ObjectInput = {
   week: number | string
@@ -22,7 +22,7 @@ export class DateObject {
    * @param {DateInput} date Date input
    */
   constructor(date?: DateInput) {
-    this.$ = dayjs(date)
+    this.$ = $dayjs(date)
   }
 
   /**
@@ -35,7 +35,7 @@ export class DateObject {
   public fromObject(input: ObjectInput): DateObject {
     const year = typeof input.year === 'string' ? parseInt(input.year) : input.year
     const isoWeek = typeof input.week === 'string' ? parseInt(input.week) : input.week
-    this.$ = dayjs()
+    this.$ = $dayjs()
       .year(year)
       .isoWeek(isoWeek)
       .startOf('isoWeek')
