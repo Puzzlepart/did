@@ -297,46 +297,14 @@ class AzStorageService {
   /**
    * Add time entries
    *
-   * @param {string} resourceId ID of the resource
-   * @param {string} periodId Period ID
    * @param {any[]} timeentries Collection of time entries
    * @param {boolean} forecast Forecast
    */
-  async addTimeEntries(
-    resourceId: string,
-    periodId: string,
-    timeentries: AzTimeEntry[],
-    forecast: boolean
-  ) {
+  async addTimeEntries(timeentries: AzTimeEntry[], forecast: boolean) {
     let totalDuration = 0
-    const entities = timeentries.map(({ projectId, manualMatch, event, labels }) => {
-      const [weekNumber, monthNumber, year] = periodId.split('_').map((p) => parseInt(p, 10))
-      const duration = getDurationHours(event.startDateTime, event.endDateTime)
-      totalDuration += duration
-      const entity = this.tableUtil.convertToAzEntity(
-        `${periodId}_${event.id}`,
-        {
-          ...pick(event, 'title', 'startDateTime', 'endDateTime', 'webLink'),
-          description: event.body,
-          projectId,
-          manualMatch,
-          duration,
-          year,
-          weekNumber,
-          monthNumber,
-          periodId: periodId,
-          labels: labels.join('|')
-        },
-        resourceId,
-        {
-          removeBlanks: true,
-          typeMap: {
-            startDateTime: 'datetime',
-            endDateTime: 'datetime'
-          }
-        }
-      )
-      return entity
+    const entities = timeentries.map((t) => {
+      totalDuration += t.duration
+      return t.toEntity()
     })
     const batch = this.tableUtil.createAzBatch()
     entities.forEach((entity) => batch.insertEntity(entity, {}))
