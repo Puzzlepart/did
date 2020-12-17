@@ -107,6 +107,27 @@ describe(header('AzTableUtilities'), async () => {
       deepStrictEqual(entity.RowKey._, '78d15b30-499a-4d2f-96a5-a9644c57e741')
       deepStrictEqual(entity.Modified.$, 'Edm.DateTime')
     })
+    
+    it('should convert date correctly', () => {
+      const values = {
+        title: 'Event 1',
+        modified: '2020-12-17T12:30:00.0000000Z'
+      }
+      const entity = tableUtils.convertToAzEntity(
+        '78d15b30-499a-4d2f-96a5-a9644c57e741',
+        values,
+        'default',
+        {
+          removeBlanks: true,
+          typeMap: {
+            modified: 'datetime'
+          }
+        }
+      )
+      deepStrictEqual(entity.PartitionKey._, 'default')
+      deepStrictEqual(entity.Modified.$, 'Edm.DateTime')
+      deepStrictEqual(entity.Modified._.toISOString(), '2020-12-17T12:30:00.000Z')
+    })
 
     it('should convert JSON property to string', () => {
       const values = {
