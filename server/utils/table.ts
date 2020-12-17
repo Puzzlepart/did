@@ -398,4 +398,11 @@ class AzTableUtilities {
   }
 }
 
+const { convertToAzEntity } = new AzTableUtilities(null)
+
+export {
+  convertToAzEntity,
+  EntityDescriptor
+}
+
 export default AzTableUtilities
