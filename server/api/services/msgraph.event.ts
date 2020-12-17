@@ -1,4 +1,5 @@
-import * as utils from '../../utils/date'
+import { stripHtmlString } from '../../utils'
+import { getDurationHours } from '../../utils/date'
 
 export default class MSGraphEvent {
   public id: string
@@ -14,12 +15,12 @@ export default class MSGraphEvent {
   constructor(event: any) {
     this.id = event.id
     this.title = event.subject
-    this.body = utils.stripHtmlString(event.body.content)
+    this.body = stripHtmlString(event.body.content)
     this.isOrganizer = event.isOrganizer
     this.categories = event.categories
     this.webLink = event.webLink
     this.startDateTime = `${event.start.dateTime}Z`
     this.endDateTime = `${event.end.dateTime}Z`
-    this.duration = utils.getDurationHours(event.start.dateTime, event.end.dateTime)
+    this.duration = getDurationHours(event.start.dateTime, event.end.dateTime)
   }
 }

@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import stringStripHtml from 'string-strip-html'
 import $dayjs, { ConfigType, OpUnitType, PluginFunc } from 'dayjs'
 import weekOfYearPlugin from 'dayjs/plugin/weekOfYear'
 import isoWeekPlugin from 'dayjs/plugin/isoWeek'
@@ -7,15 +5,6 @@ import 'dayjs/locale/en-gb'
 import 'dayjs/locale/nb'
 $dayjs.extend<PluginFunc>(weekOfYearPlugin)
 $dayjs.extend<PluginFunc>(isoWeekPlugin)
-
-/**
- * Strip html from string using string-strip-html
- * Used when fetching events from ms graph
- * Strips the html from event body
- *
- * @param {string} str String
- */
-export const stripHtmlString = (str: string): string => stringStripHtml(str).result
 
 /**
  * Get duration between two times in hours
