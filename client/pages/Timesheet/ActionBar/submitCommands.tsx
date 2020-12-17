@@ -10,7 +10,7 @@ export default (context: ITimesheetContext, subscription: Subscription): IContex
   onRender: () => {
     if (!!context.error || !context.selectedPeriod) return null
     const { isComplete, isForecast, isForecasted, isConfirmed, isPast } = context.selectedPeriod
-    const commandProps = {
+    const cmd = {
       FORECAST_PERIOD: subscription.settings?.forecast?.enabled && {
         key: 'FORECAST_PERIOD',
         styles: { root: { height: 44, marginLeft: 4 } },
@@ -53,23 +53,23 @@ export default (context: ITimesheetContext, subscription: Subscription): IContex
 
     let commands = []
 
-    if (isConfirmed) commands.push(commandProps.UNCONFIRM_PERIOD)
+    if (isConfirmed) commands.push(cmd.UNCONFIRM_PERIOD)
     else if (isForecast) {
-      if (isComplete) commands.push(commandProps.CONFIRM_PERIOD)
-      commands.push(isForecasted ? commandProps.UNFORECAST_PERIOD : commandProps.FORECAST_PERIOD)
+      if (isComplete) commands.push(cmd.CONFIRM_PERIOD)
+      commands.push(isForecasted ? cmd.UNFORECAST_PERIOD : cmd.FORECAST_PERIOD)
     } else {
       if (isComplete) {
-        commands.push(commandProps.CONFIRM_PERIOD)
+        commands.push(cmd.CONFIRM_PERIOD)
         if (!isPast) {
-          if (isForecasted) commands.push(commandProps.UNFORECAST_PERIOD)
-          else commands.push(commandProps.FORECAST_PERIOD)
+          if (isForecasted) commands.push(cmd.UNFORECAST_PERIOD)
+          else commands.push(cmd.FORECAST_PERIOD)
         }
       } else {
         if (!isPast) {
-          if (isForecasted) commands.push(commandProps.UNFORECAST_PERIOD)
-          else commands.push(commandProps.FORECAST_PERIOD)
+          if (isForecasted) commands.push(cmd.UNFORECAST_PERIOD)
+          else commands.push(cmd.FORECAST_PERIOD)
         }
-        commands.push({ ...commandProps.CONFIRM_PERIOD, disabled: true })
+        commands.push({ ...cmd.CONFIRM_PERIOD, disabled: true })
       }
     }
 
