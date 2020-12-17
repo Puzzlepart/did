@@ -3,8 +3,7 @@ import arraySort from 'array-sort'
 import { createTableService } from 'azure-storage'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
-import { omit, pick } from 'underscore'
-import { getDurationHours } from '../../utils/date'
+import { omit } from 'underscore'
 import AzTableUtilities from '../../utils/table'
 import { Context } from '../graphql/context'
 import { Role } from '../graphql/resolvers/types'
@@ -582,3 +581,5 @@ class AzStorageService {
 }
 
 export default AzStorageService
+
+export * from './azstorage.types'

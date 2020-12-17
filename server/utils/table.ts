@@ -398,7 +398,9 @@ class AzTableUtilities {
   }
 }
 
-const { convertToAzEntity } = new AzTableUtilities(null)
+const _ = new AzTableUtilities(null)
+
+const convertToAzEntity = _.convertToAzEntity.bind(_)
 
 export { convertToAzEntity, EntityDescriptor }
 
