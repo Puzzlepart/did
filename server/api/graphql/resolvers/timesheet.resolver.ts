@@ -139,22 +139,10 @@ export class TimesheetResolver {
           const _labels = filter(labels, ({ name }) => contains(event.categories, name)).map(
             ({ name }) => name
           )
-          t.push(
-            new AzTimeEntry(
-              e.projectId,
-              e.manualMatch,
-              event,
-              _labels
-            )
-          )
+          t.push(new AzTimeEntry(ctx.userId, period.id, e.projectId, e.manualMatch, event, _labels))
           return t
         }, [])
-        hours = await this._azstorage.addTimeEntries(
-          ctx.userId,
-          period.id,
-          timeentries,
-          options.forecast
-        )
+        hours = await this._azstorage.addTimeEntries(timeentries, options.forecast)
       }
       if (options.forecast) {
         await this._azstorage.addForecastedPeriod(ctx.userId, period.id, hours)
