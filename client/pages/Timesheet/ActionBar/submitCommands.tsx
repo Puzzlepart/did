@@ -55,13 +55,8 @@ export default (context: ITimesheetContext, subscription: Subscription): IContex
 
     if (isConfirmed) commands.push(commandProps.UNCONFIRM_PERIOD)
     else if (isForecast) {
-      if (isForecasted) {
-        if (isComplete) commands.push(commandProps.CONFIRM_PERIOD)
-        commands.push(commandProps.UNFORECAST_PERIOD)
-      } else {
-        commands.push(commandProps.FORECAST_PERIOD)
-        commands.push(commandProps.CONFIRM_PERIOD)
-      }
+      if (isComplete) commands.push(commandProps.CONFIRM_PERIOD)
+      commands.push(isForecasted ? commandProps.UNFORECAST_PERIOD : commandProps.FORECAST_PERIOD)
     } else {
       if (isComplete) {
         commands.push(commandProps.CONFIRM_PERIOD)
