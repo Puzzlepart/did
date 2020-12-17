@@ -1,5 +1,6 @@
 import { ApolloError } from 'apollo-server-express'
 import 'reflect-metadata'
+import { AzTimeEntry } from 'server/api/services/azstorage.types'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { contains, filter, find, isEmpty, pick } from 'underscore'
@@ -126,22 +127,27 @@ export class TimesheetResolver {
   ): Promise<BaseResult> {
     try {
       let hours = 0
+      await this._azstorage.deleteTimeEntries(period.id, ctx.userId, options.forecast)
       if (!isEmpty(period.matchedEvents)) {
         const [events, labels] = await Promise.all([
           this._msgraph.getEvents(period.startDate, period.endDate, options.tzOffset),
           this._azstorage.getLabels()
         ])
-        const timeentries = period.matchedEvents.reduce((arr, e) => {
+        const timeentries: AzTimeEntry[] = period.matchedEvents.reduce((t, e) => {
           const event = find(events, ({ id }) => id === e.id)
-          if (!event) return arr
-          const entry = {
-            ...e,
-            event: find(events, ({ id }) => id === e.id),
-            labels: filter(labels, ({ name }) => contains(event.categories, name)).map(
-              ({ name }) => name
+          if (!event) return t
+          const _labels = filter(labels, ({ name }) => contains(event.categories, name)).map(
+            ({ name }) => name
+          )
+          t.push(
+            new AzTimeEntry(
+              e.projectId,
+              e.manualMatch,
+              event,
+              _labels
             )
-          }
-          return [...arr, entry]
+          )
+          return t
         }, [])
         hours = await this._azstorage.addTimeEntries(
           ctx.userId,
@@ -160,7 +166,7 @@ export class TimesheetResolver {
           period.forecastedHours
         )
       }
-      return { success: true, error: null }
+      return { success: true }
     } catch (error) {
       return {
         success: false,

@@ -8,7 +8,7 @@ import { getDurationHours } from '../../utils/date'
 import AzTableUtilities from '../../utils/table'
 import { Context } from '../graphql/context'
 import { Role } from '../graphql/resolvers/types'
-import { GetProjectsOptions } from './azstorage.types'
+import { AzTimeEntry, GetProjectsOptions } from './azstorage.types'
 
 export class AzStorageServiceTables {
   constructor(
@@ -21,7 +21,7 @@ export class AzStorageServiceTables {
     public roles: string = 'Roles',
     public labels: string = 'Labels',
     public users: string = 'Users'
-  ) { }
+  ) {}
 }
 
 @Service({ global: false })
@@ -305,7 +305,7 @@ class AzStorageService {
   async addTimeEntries(
     resourceId: string,
     periodId: string,
-    timeentries: any[],
+    timeentries: AzTimeEntry[],
     forecast: boolean
   ) {
     let totalDuration = 0
@@ -314,15 +314,9 @@ class AzStorageService {
       const duration = getDurationHours(event.startDateTime, event.endDateTime)
       totalDuration += duration
       const entity = this.tableUtil.convertToAzEntity(
-        `${periodId}#${event.id}`,
+        `${periodId}_${event.id}`,
         {
-          ...pick(
-            event,
-            'title',
-            'startDateTime',
-            'endDateTime',
-            'webLink'
-          ),
+          ...pick(event, 'title', 'startDateTime', 'endDateTime', 'webLink'),
           description: event.body,
           projectId,
           manualMatch,
