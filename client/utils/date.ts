@@ -55,15 +55,6 @@ export class DateUtils {
   }
 
   /**
-   * Subtract timezone offset
-   *
-   * @param {DateInput} date Date
-   */
-  private _fixTzOffset(date: DateInput) {
-    return $dayjs(date).subtract(this.$.tzOffset, 'minute')
-  }
-
-  /**
    * Get duration string
    *
    * @param {number} hours Duration in hours
@@ -86,7 +77,7 @@ export class DateUtils {
    * @param {string} template Date format
    */
   public formatDate(date: DateInput, template: string): string {
-    return this._fixTzOffset(date).format(template)
+    return $dayjs(date).format(template)
   }
 
   /**
