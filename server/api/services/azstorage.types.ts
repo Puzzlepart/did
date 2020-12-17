@@ -1,7 +1,22 @@
+/* eslint-disable max-classes-per-file */
 import { pick } from 'underscore'
 import { getDurationHours } from '../../utils/date'
 import { convertToAzEntity, EntityDescriptor } from '../../utils/table'
 import MSGraphEvent from './msgraph.event'
+
+export class AzStorageServiceTables {
+  constructor(
+    public timeEntries: string = 'TimeEntries',
+    public forecastedTimeEntries: string = 'ForecastedTimeEntries',
+    public confirmedPeriods: string = 'ConfirmedPeriods',
+    public forecastedPeriods: string = 'ForecastedPeriods',
+    public projects: string = 'Projects',
+    public customers: string = 'Customers',
+    public roles: string = 'Roles',
+    public labels: string = 'Labels',
+    public users: string = 'Users'
+  ) {}
+}
 
 export type GetProjectsOptions = { noParse?: boolean; sortBy?: string }
 

@@ -7,21 +7,7 @@ import { omit } from 'underscore'
 import AzTableUtilities from '../../utils/table'
 import { Context } from '../graphql/context'
 import { Role } from '../graphql/resolvers/types'
-import { AzTimeEntry, GetProjectsOptions } from './azstorage.types'
-
-export class AzStorageServiceTables {
-  constructor(
-    public timeEntries: string = 'TimeEntries',
-    public forecastedTimeEntries: string = 'ForecastedTimeEntries',
-    public confirmedPeriods: string = 'ConfirmedPeriods',
-    public forecastedPeriods: string = 'ForecastedPeriods',
-    public projects: string = 'Projects',
-    public customers: string = 'Customers',
-    public roles: string = 'Roles',
-    public labels: string = 'Labels',
-    public users: string = 'Users'
-  ) {}
-}
+import { AzStorageServiceTables, AzTimeEntry, GetProjectsOptions } from './azstorage.types'
 
 @Service({ global: false })
 class AzStorageService {
