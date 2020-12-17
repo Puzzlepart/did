@@ -1,10 +1,14 @@
 import $dayjs, { ConfigType, OpUnitType, PluginFunc } from 'dayjs'
 import weekOfYearPlugin from 'dayjs/plugin/weekOfYear'
 import isoWeekPlugin from 'dayjs/plugin/isoWeek'
+import timezonePlugin from 'dayjs/plugin/timezone'
+import utcPlugin from 'dayjs/plugin/utc'
 import 'dayjs/locale/en-gb'
 import 'dayjs/locale/nb'
 $dayjs.extend<PluginFunc>(weekOfYearPlugin)
 $dayjs.extend<PluginFunc>(isoWeekPlugin)
+$dayjs.extend<PluginFunc>(timezonePlugin)
+$dayjs.extend<PluginFunc>(utcPlugin)
 
 /**
  * Get duration between two times in hours
@@ -162,3 +166,5 @@ export const getTimezone = (tzOffset: number) => {
   tzOffset = Math.abs(tzOffset)
   return 'GMT ' + sign + z((tzOffset / 60) | 0) + z(tzOffset % 60)
 }
+
+export { $dayjs }

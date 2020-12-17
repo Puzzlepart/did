@@ -1,5 +1,6 @@
+import { template } from 'underscore'
 import { stripHtmlString } from '../../utils'
-import { getDurationHours } from '../../utils/date'
+import { getDurationHours, $dayjs } from '../../utils/date'
 
 export default class MSGraphEvent {
   public id: string
@@ -12,15 +13,21 @@ export default class MSGraphEvent {
   public endDateTime: string
   public duration: number
 
-  constructor(event: any) {
+  /**
+   * Constructs a new MSGraphEvent
+   * 
+   * @param {any} event Event data
+   * @param {string} template Date template
+   */
+  constructor(event: any, template = 'YYYY-MM-DD HH:mm:ss') {
     this.id = event.id
     this.title = event.subject
     this.body = stripHtmlString(event.body.content)
     this.isOrganizer = event.isOrganizer
     this.categories = event.categories
     this.webLink = event.webLink
-    this.startDateTime = `${event.start.dateTime}Z`
-    this.endDateTime = `${event.end.dateTime}Z`
+    this.startDateTime = $dayjs.tz($dayjs(event.start.dateTime).format(template), event.start.timeZone).toISOString()
+    this.endDateTime = $dayjs.tz($dayjs(event.end.dateTime).format(template), event.end.timeZone).toISOString()
     this.duration = getDurationHours(event.start.dateTime, event.end.dateTime)
   }
 }
