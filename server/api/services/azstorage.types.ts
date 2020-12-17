@@ -15,6 +15,14 @@ export class AzTimeEntry {
     public labels: string[]
   ) {}
 
+  /**
+   * Get period data
+   * 
+   * * periodId
+   * * weekNumber
+   * * monthNumber
+   * * year
+   */
   private get _period() {
     const [weekNumber, monthNumber, year] = this.periodId.split('_').map((p) => parseInt(p, 10))
     return {
@@ -25,10 +33,16 @@ export class AzTimeEntry {
     }
   }
 
+  /**
+   * Get duration in hours for the time entry using util getDurationHours
+   */
   public get duration(): number {
     return getDurationHours(this.event.startDateTime, this.event.endDateTime)
   }
 
+  /**
+   * Get entity descriptior
+   */
   public toEntity(): EntityDescriptor {
     return convertToAzEntity(
       `${this.periodId}_${this.event.id}`,
