@@ -11,7 +11,6 @@ export default class MSGraphEvent {
   public endDateTime: string
   public duration: number
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   constructor(event: any) {
     this.id = event.id
     this.title = event.subject
@@ -19,8 +18,8 @@ export default class MSGraphEvent {
     this.isOrganizer = event.isOrganizer
     this.categories = event.categories
     this.webLink = event.webLink
-    this.startDateTime = event.start.dateTime
-    this.endDateTime = event.end.dateTime
+    this.startDateTime = `${event.start.dateTime}Z`
+    this.endDateTime = `${event.end.dateTime}Z`
     this.duration = utils.getDurationHours(event.start.dateTime, event.end.dateTime)
   }
 }
