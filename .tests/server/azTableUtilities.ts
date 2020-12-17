@@ -107,7 +107,7 @@ describe(header('AzTableUtilities'), async () => {
       deepStrictEqual(entity.RowKey._, '78d15b30-499a-4d2f-96a5-a9644c57e741')
       deepStrictEqual(entity.Modified.$, 'Edm.DateTime')
     })
-    
+
     it('should convert date correctly', () => {
       const values = {
         title: 'Event 1',

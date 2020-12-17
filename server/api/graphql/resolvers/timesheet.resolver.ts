@@ -32,7 +32,7 @@ export class TimesheetResolver {
   constructor(
     private readonly _azstorage: AzStorageService,
     private readonly _msgraph: MSGraphService
-  ) { }
+  ) {}
 
   /**
    * Get timesheet
