@@ -32,7 +32,7 @@ export class TimesheetResolver {
   constructor(
     private readonly _azstorage: AzStorageService,
     private readonly _msgraph: MSGraphService
-  ) {}
+  ) { }
 
   /**
    * Get timesheet
@@ -131,14 +131,14 @@ export class TimesheetResolver {
           this._msgraph.getEvents(period.startDate, period.endDate, options.tzOffset),
           this._azstorage.getLabels()
         ])
-        const timeentries = period.matchedEvents.reduce((arr, me) => {
-          const event = find(events, (e) => e.id === me.id)
+        const timeentries = period.matchedEvents.reduce((arr, e) => {
+          const event = find(events, ({ id }) => id === e.id)
           if (!event) return arr
           const entry = {
-            ...pick(me, 'projectId', 'manualMatch'),
-            event: find(events, (e) => e.id === me.id),
-            labels: filter(labels, (lbl) => contains(event.categories, lbl.name)).map(
-              (lbl) => lbl.name
+            ...e,
+            event: find(events, ({ id }) => id === e.id),
+            labels: filter(labels, ({ name }) => contains(event.categories, name)).map(
+              ({ name }) => name
             )
           }
           return [...arr, entry]
