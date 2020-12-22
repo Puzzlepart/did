@@ -7,15 +7,15 @@ import styles from './ActionBar.module.scss'
 
 /**
  * Get shared submit item props
- * 
+ *
  * @param {string} key Key
- * @param {string} iconName Icon name 
+ * @param {string} iconName Icon name
  */
 const submitItemProps = (key: string, iconName: string): Partial<IContextualMenuItem> => ({
   key,
   styles: { root: { height: 44, marginLeft: 4 } },
   iconProps: { iconName },
-  canCheck: true,
+  canCheck: true
 })
 
 export default (context: ITimesheetContext, subscription: Subscription): IContextualMenuItem => ({
@@ -44,7 +44,7 @@ export default (context: ITimesheetContext, subscription: Subscription): IContex
         secondaryText: context.t('timesheet.confirmHoursSecondaryText')
       },
       UNCONFIRM_PERIOD: {
-        ...submitItemProps('UNCONFIRM_PERIOD','Cancel'),
+        ...submitItemProps('UNCONFIRM_PERIOD', 'Cancel'),
         className: styles.unconfirmPeriodButton,
         onClick: () => context.onUnsubmitPeriod(false),
         text: context.t('timesheet.unconfirmHoursText'),

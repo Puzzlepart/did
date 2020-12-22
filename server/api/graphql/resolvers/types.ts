@@ -23,7 +23,7 @@ export class BaseResult {
   success: boolean
 
   @Field(() => Error, { nullable: true })
-  error: Error
+  error?: Error
 }
 
 @ObjectType({ description: 'A type that describes a EventError' })
