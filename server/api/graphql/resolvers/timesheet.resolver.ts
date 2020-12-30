@@ -4,7 +4,7 @@ import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { contains, filter, find, isEmpty, pick } from 'underscore'
 import { formatDate } from '../../../utils/date'
-import { AzStorageService, MSGraphService } from '../../services'
+import { AzStorageService, AzTimeEntry, MSGraphService } from '../../services'
 import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
 import { connectEntities } from './project.utils'
@@ -126,29 +126,22 @@ export class TimesheetResolver {
   ): Promise<BaseResult> {
     try {
       let hours = 0
+      await this._azstorage.deleteTimeEntries(period.id, ctx.userId, options.forecast)
       if (!isEmpty(period.matchedEvents)) {
         const [events, labels] = await Promise.all([
           this._msgraph.getEvents(period.startDate, period.endDate, options.tzOffset),
           this._azstorage.getLabels()
         ])
-        const timeentries = period.matchedEvents.reduce((arr, me) => {
-          const event = find(events, (e) => e.id === me.id)
-          if (!event) return arr
-          const entry = {
-            ...pick(me, 'projectId', 'manualMatch'),
-            event: find(events, (e) => e.id === me.id),
-            labels: filter(labels, (lbl) => contains(event.categories, lbl.name)).map(
-              (lbl) => lbl.name
-            )
-          }
-          return [...arr, entry]
+        const timeentries: AzTimeEntry[] = period.matchedEvents.reduce((t, e) => {
+          const event = find(events, ({ id }) => id === e.id)
+          if (!event) return t
+          const _labels = filter(labels, ({ name }) => contains(event.categories, name)).map(
+            ({ name }) => name
+          )
+          t.push(new AzTimeEntry(ctx.userId, period.id, e.projectId, e.manualMatch, event, _labels))
+          return t
         }, [])
-        hours = await this._azstorage.addTimeEntries(
-          ctx.userId,
-          period.id,
-          timeentries,
-          options.forecast
-        )
+        hours = await this._azstorage.addTimeEntries(timeentries, options.forecast)
       }
       if (options.forecast) {
         await this._azstorage.addForecastedPeriod(ctx.userId, period.id, hours)
@@ -160,7 +153,7 @@ export class TimesheetResolver {
           period.forecastedHours
         )
       }
-      return { success: true, error: null }
+      return { success: true }
     } catch (error) {
       return {
         success: false,

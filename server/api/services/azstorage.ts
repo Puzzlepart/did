@@ -3,26 +3,11 @@ import arraySort from 'array-sort'
 import { createTableService } from 'azure-storage'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
-import { omit, pick } from 'underscore'
-import { getDurationHours } from '../../utils/date'
+import { omit } from 'underscore'
 import AzTableUtilities from '../../utils/table'
 import { Context } from '../graphql/context'
 import { Role } from '../graphql/resolvers/types'
-import { GetProjectsOptions } from './azstorage.types'
-
-export class AzStorageServiceTables {
-  constructor(
-    public timeEntries: string = 'TimeEntries',
-    public forecastedTimeEntries: string = 'ForecastedTimeEntries',
-    public confirmedPeriods: string = 'ConfirmedPeriods',
-    public forecastedPeriods: string = 'ForecastedPeriods',
-    public projects: string = 'Projects',
-    public customers: string = 'Customers',
-    public roles: string = 'Roles',
-    public labels: string = 'Labels',
-    public users: string = 'Users'
-  ) {}
-}
+import { AzStorageServiceTables, AzTimeEntry, GetProjectsOptions } from './azstorage.types'
 
 @Service({ global: false })
 class AzStorageService {
@@ -297,46 +282,14 @@ class AzStorageService {
   /**
    * Add time entries
    *
-   * @param {string} resourceId ID of the resource
-   * @param {string} periodId Period ID
    * @param {any[]} timeentries Collection of time entries
    * @param {boolean} forecast Forecast
    */
-  async addTimeEntries(
-    resourceId: string,
-    periodId: string,
-    timeentries: any[],
-    forecast: boolean
-  ) {
+  async addTimeEntries(timeentries: AzTimeEntry[], forecast: boolean) {
     let totalDuration = 0
-    const entities = timeentries.map(({ projectId, manualMatch, event, labels }) => {
-      const [weekNumber, monthNumber, year] = periodId.split('_').map((p) => parseInt(p, 10))
-      const duration = getDurationHours(event.startDateTime, event.endDateTime)
-      totalDuration += duration
-      const entity = this.tableUtil.convertToAzEntity(
-        event.id,
-        {
-          ...pick(event, 'title', 'startDateTime', 'endDateTime', 'webLink'),
-          projectId,
-          manualMatch,
-          description: event.body,
-          duration,
-          year,
-          weekNumber,
-          monthNumber,
-          periodId: periodId,
-          labels: labels.join('|')
-        },
-        resourceId,
-        {
-          removeBlanks: true,
-          typeMap: {
-            startDateTime: 'datetime',
-            endDateTime: 'datetime'
-          }
-        }
-      )
-      return entity
+    const entities = timeentries.map((t) => {
+      totalDuration += t.duration
+      return t.toEntity()
     })
     const batch = this.tableUtil.createAzBatch()
     entities.forEach((entity) => batch.insertEntity(entity, {}))
@@ -614,3 +567,5 @@ class AzStorageService {
 }
 
 export default AzStorageService
+
+export * from './azstorage.types'
