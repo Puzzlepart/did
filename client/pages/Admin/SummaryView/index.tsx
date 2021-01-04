@@ -14,14 +14,14 @@ import $timeentries from './timeentries.gql'
 import { getScopes, getViewTypes, ISummaryViewProps, ISummaryViewScope } from './types'
 import { createColumns, createPeriods, createRows } from './utils'
 
-export const SummaryView = (props: ISummaryViewProps): JSX.Element => {
+export const SummaryView = (): JSX.Element => {
   const { t } = useTranslation()
   const types = getViewTypes(t)
   const scopes = getScopes(t)
   const [state, dispatch] = useReducer(reducer, {
     endMonthIndex: DateUtils.getMonthIndex(),
     timeentries: [],
-    range: props.defaultRange,
+    range:null,
     type: first(types),
     scope: first(scopes)
   })
@@ -30,7 +30,7 @@ export const SummaryView = (props: ISummaryViewProps): JSX.Element => {
     variables: {
       query: {
         year: DateUtils.getYear(),
-        startMonthIndex: state.endMonthIndex - state.range + 1,
+        startMonthIndex: state.endMonthIndex - 3 + 1,
         endMonthIndex: state.endMonthIndex
       }
     }

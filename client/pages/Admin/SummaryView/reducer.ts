@@ -5,8 +5,8 @@ import { ISummaryViewScope, ISummaryViewState } from './types'
 export type SummaryViewAction =
   | { type: 'DATA_UPDATED'; payload: { timeentries: any[] } }
   | { type: 'CHANGE_TYPE'; payload: IContextualMenuItem }
-  | { type: 'CHANGE_RANGE'; payload: number }
   | { type: 'CHANGE_SCOPE'; payload: ISummaryViewScope }
+  | { type: 'SET_RANGE'; payload: { start?: Date, end?: Date } }
 
 export const reducer = (state: ISummaryViewState, action: SummaryViewAction): ISummaryViewState => {
   const newState: ISummaryViewState = { ...state }
@@ -23,9 +23,9 @@ export const reducer = (state: ISummaryViewState, action: SummaryViewAction): IS
       }
       break
 
-    case 'CHANGE_RANGE':
+    case 'SET_RANGE':
       {
-        newState.range = action.payload
+        newState.range = { ...newState.range, ...action.payload }
       }
       break
 

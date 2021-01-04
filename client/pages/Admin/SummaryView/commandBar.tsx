@@ -1,6 +1,5 @@
-import { IContextualMenuItem, Slider } from 'office-ui-fabric'
+import { IContextualMenuItem, DatePicker, DayOfWeek, FirstWeekOfYear } from 'office-ui-fabric'
 import React from 'react'
-import DateUtils from 'utils/date'
 import * as excelUtils from 'utils/exportExcel'
 import { ISummaryViewContext } from './context'
 import styles from './SummaryView.module.scss'
@@ -32,15 +31,28 @@ export const commandBar = (context: ISummaryViewContext) => {
         name: '',
         onRender: () => (
           <>
-            <Slider
-              className={styles.rangeSlider}
-              valueFormat={(value) => context.t('admin.summaryRangeValueFormat', { value })}
-              disabled={context.loading}
-              value={context.range}
-              min={2}
-              max={DateUtils.getMonthIndex()}
-              onChange={(value) => context.dispatch({ type: 'CHANGE_RANGE', payload: value })}
-            />
+            <DatePicker
+              borderless={true}
+              showWeekNumbers={true}
+              firstDayOfWeek={DayOfWeek.Monday}
+              strings={context.t('common.calendarStrings', { returnObjects: true }) as any}
+              firstWeekOfYear={FirstWeekOfYear.FirstFourDayWeek}
+              value={new Date('10.22.2020')}
+              onSelectDate={date => context.dispatch({
+                type: 'SET_RANGE',
+                payload: { start: date },
+              })} />
+            <DatePicker
+              borderless={true}
+              showWeekNumbers={true}
+              firstDayOfWeek={DayOfWeek.Monday}
+              strings={context.t('common.calendarStrings', { returnObjects: true }) as any}
+              firstWeekOfYear={FirstWeekOfYear.FirstFourDayWeek}
+              value={new Date()}
+              onSelectDate={date => context.dispatch({
+                type: 'SET_RANGE',
+                payload: { end: date },
+              })}/>
           </>
         )
       }

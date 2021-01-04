@@ -74,6 +74,11 @@ export interface ISummaryViewProps {
   defaultRange: number
 }
 
+export interface ISummaryViewRange {
+  from?: Date
+  to?: Date
+}
+
 export interface ISummaryViewState {
   /**
    * Selected scope
@@ -93,7 +98,7 @@ export interface ISummaryViewState {
   /**
    * Selected range
    */
-  range: number
+  range?: ISummaryViewRange
 
   /**
    * Selected view type
