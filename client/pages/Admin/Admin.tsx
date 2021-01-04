@@ -37,10 +37,7 @@ export const Admin = () => {
           itemKey='summary'
           headerText={t('admin.summary')}
           itemIcon='CalendarWeek'>
-          <SummaryView
-            defaultSelectedScope='weekNumber'
-            defaultRange={2}
-          />
+          <SummaryView />
         </PivotItem>
         <PivotItem
           className={styles.tab}

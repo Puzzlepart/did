@@ -61,19 +61,6 @@ export interface ISummaryViewScope extends IPivotItemProps {
   getColumnHeader: (idx: number) => string
 }
 
-export interface ISummaryViewProps {
-
-  /**
-   * Default selected scope
-   */
-  defaultSelectedScope: string
-
-  /**
-   * Default range
-   */
-  defaultRange: number
-}
-
 export interface ISummaryViewRange {
   from?: Date
   to?: Date

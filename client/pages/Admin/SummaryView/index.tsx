@@ -11,7 +11,7 @@ import { ISummaryViewContext } from './context'
 import { reducer } from './reducer'
 import styles from './SummaryView.module.scss'
 import $timeentries from './timeentries.gql'
-import { getScopes, getViewTypes, ISummaryViewProps, ISummaryViewScope } from './types'
+import { getScopes, getViewTypes, ISummaryViewScope } from './types'
 import { createColumns, createPeriods, createRows } from './utils'
 
 export const SummaryView = (): JSX.Element => {
