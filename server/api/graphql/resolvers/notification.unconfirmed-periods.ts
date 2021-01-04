@@ -30,10 +30,11 @@ export default async function (
     currentDate = currentDate.add('-1w')
   }
 
-  const confirmedPeriods = (await azstorage.getConfirmedPeriods({
+  const confirmedPeriods = await azstorage.getConfirmedPeriods({
     resourceId: ctx.userId,
-    year: DateUtils.getYear()
-  })) as any[]
+    minYear: currentDate.startOfWeek.toObject().year,
+    maxYear: DateUtils.getYear()
+  })
 
   periods.forEach((period) => {
     if (!find(confirmedPeriods, (cp) => cp.periodId === period.id)) {

@@ -15,7 +15,21 @@ export class AzStorageServiceTables {
     public roles: string = 'Roles',
     public labels: string = 'Labels',
     public users: string = 'Users'
-  ) {}
+  ) { }
+}
+
+export type ConfirmedPeriodsFilterValues = { 
+  resourceId: string;
+  year?: number;
+  minYear?: number;
+  maxYear?: number;
+}
+
+export type ForecastedPeriodsFilterValues = { 
+  resourceId: string;
+  year?: number;
+  minYear?: number;
+  maxYear?: number;
 }
 
 export type GetProjectsOptions = { noParse?: boolean; sortBy?: string }
@@ -28,7 +42,7 @@ export class AzTimeEntry {
     public manualMatch: boolean,
     public event: MSGraphEvent,
     public labels: string[]
-  ) {}
+  ) { }
 
   /**
    * Get period data

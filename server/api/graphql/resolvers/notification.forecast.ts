@@ -43,7 +43,8 @@ export default async function (
 
   const forecastedPeriods = await azstorage.getForecastedPeriods({
     resourceId: ctx.userId,
-    year: DateUtils.getYear()
+    minYear: DateUtils.getYear(),
+    maxYear: currentDate.endOfWeek.toObject().year
   })
 
   periods.forEach((period) => {
