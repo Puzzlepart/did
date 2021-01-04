@@ -1,4 +1,5 @@
 import { TooltipProps } from 'recharts'
+import { EventObject } from 'types'
 
 export interface IChartConfig {
   key: string
@@ -23,3 +24,5 @@ export interface ICustomTooltipProps {
   item: TooltipProps
   chart: IChartConfig
 }
+
+export type GetAllocationViewData = (events: EventObject[], chart: IChartConfig, width: number) => IChartItem<any>[]
