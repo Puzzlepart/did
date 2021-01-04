@@ -62,10 +62,6 @@ export interface ISummaryViewScope extends IPivotItemProps {
 }
 
 export interface ISummaryViewProps {
-  /**
-   * Default selected year
-   */
-  defaultSelectedYear: number
 
   /**
    * Default selected scope
@@ -79,11 +75,6 @@ export interface ISummaryViewProps {
 }
 
 export interface ISummaryViewState {
-  /**
-   * Selected year
-   */
-  year: number
-
   /**
    * Selected scope
    */

@@ -19,7 +19,6 @@ export const SummaryView = (props: ISummaryViewProps): JSX.Element => {
   const types = getViewTypes(t)
   const scopes = getScopes(t)
   const [state, dispatch] = useReducer(reducer, {
-    year: props.defaultSelectedYear,
     endMonthIndex: DateUtils.getMonthIndex(),
     timeentries: [],
     range: props.defaultRange,
@@ -30,7 +29,7 @@ export const SummaryView = (props: ISummaryViewProps): JSX.Element => {
     fetchPolicy: 'cache-first',
     variables: {
       query: {
-        year: state.year,
+        year: DateUtils.getYear(),
         startMonthIndex: state.endMonthIndex - state.range + 1,
         endMonthIndex: state.endMonthIndex
       }
@@ -60,34 +59,24 @@ export const SummaryView = (props: ISummaryViewProps): JSX.Element => {
   return (
     <div className={styles.root}>
       <Pivot
-        defaultSelectedKey={props.defaultSelectedYear.toString()}
         onLinkClick={(item) =>
-          dispatch({ type: 'CHANGE_YEAR', payload: parseInt(item.props.itemKey) })
+          dispatch({ type: 'CHANGE_SCOPE', payload: item.props as ISummaryViewScope })
         }>
-        {context.periods.map((period) => (
-          <PivotItem key={period.itemKey} {...period}>
-            <Pivot
-              onLinkClick={(item) =>
-                dispatch({ type: 'CHANGE_SCOPE', payload: item.props as ISummaryViewScope })
-              }>
-              {context.scopes.map((scope) => (
-                <PivotItem key={scope.itemKey} {...scope}>
-                  <div className={styles.container}>
-                    <List
-                      hidden={!loading && isEmpty(context.rows)}
-                      enableShimmer={loading}
-                      columns={columns}
-                      items={context.rows}
-                      commandBar={commandBar(context)}
-                    />
-                    <UserMessage
-                      hidden={!isEmpty(context.rows) || loading}
-                      text={t('admin.noTimeEntriesText')}
-                    />
-                  </div>
-                </PivotItem>
-              ))}
-            </Pivot>
+        {context.scopes.map((scope) => (
+          <PivotItem key={scope.itemKey} {...scope}>
+            <div className={styles.container}>
+              <List
+                hidden={!loading && isEmpty(context.rows)}
+                enableShimmer={loading}
+                columns={columns}
+                items={context.rows}
+                commandBar={commandBar(context)}
+              />
+              <UserMessage
+                hidden={!isEmpty(context.rows) || loading}
+                text={t('admin.noTimeEntriesText')}
+              />
+            </div>
           </PivotItem>
         ))}
       </Pivot>
