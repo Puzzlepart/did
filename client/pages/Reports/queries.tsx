@@ -44,6 +44,29 @@ const currentMonthQuery = (now: DateObject, t: TFunction) => {
 }
 
 /**
+ * Get last year query
+ *
+ * @param {DateObject} now Current date and time
+ * @param {TFunction} t Translate function
+ */
+const lastYearQuery = (now: DateObject, t: TFunction) => {
+  const { year } = now.toObject('year')
+  const obj = { year: year - 1 }
+  return {
+    key: 'lastYear',
+    text: t('common.exportTypeLastYear', obj),
+    iconName: 'Previous',
+    variables: {
+      query: {
+        ...obj,
+        endDateTime: now.$.toISOString()
+      }
+    },
+    exportFileName: `TimeEntries-${obj.year}-{0}.xlsx`
+  } as IReportsQuery
+}
+
+/**
  * Get current year query
  *
  * @param {DateObject} now Current date and time
@@ -94,7 +117,13 @@ const forecastQuery = (now: DateObject, t: TFunction) => {
  */
 export function getQueries<T = IReportsQuery>(t: TFunction): T[] {
   const now = new DateObject()
-  return [lastMonthQuery, currentMonthQuery, currentYearQuery, forecastQuery].map(
+  return [
+    lastMonthQuery,
+    currentMonthQuery,
+    lastYearQuery,
+    currentYearQuery,
+    forecastQuery
+  ].map(
     (q) => (q(now, t) as unknown) as T
   )
 }

@@ -293,7 +293,8 @@
     "officeLocationLabel": "Office Location",
     "departmentLabel": "Department",
     "mobilePhoneLabel": "Mobile phone",
-    "searchUserLabel": "Search in Azure Active Directory"
+    "searchUserLabel": "Search in Azure Active Directory",
+    "exportTypeLastYear": "Last year ({{year}})"
   },
   "navigation": {
     "timesheet": "Timesheet",
