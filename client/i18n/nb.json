@@ -292,7 +292,8 @@
     "officeLocationLabel": "Kontorsted",
     "departmentLabel": "Avdeling",
     "mobilePhoneLabel": "Mobiltelefon",
-    "searchUserLabel": "Søk i Azure Active Directory"
+    "searchUserLabel": "Søk i Azure Active Directory",
+    "exportTypeLastYear": "I fjor ({{year}})"
   },
   "navigation": {
     "timesheet": "Timeliste",
