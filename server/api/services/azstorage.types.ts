@@ -32,7 +32,7 @@ export class AzTimeEntry {
 
   /**
    * Get period data
-   * 
+   *
    * * periodId
    * * weekNumber
    * * monthNumber

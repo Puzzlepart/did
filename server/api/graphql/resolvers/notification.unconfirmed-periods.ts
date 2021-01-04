@@ -26,13 +26,7 @@ export default async function (
   for (let i = 0; i <= 5; i++) {
     const startOfWeek = currentDate.startOfWeek.format('YYYY-MM-DD')
     const endOfWeek = currentDate.endOfWeek.format('YYYY-MM-DD')
-    periods.push(
-      ...getPeriods(
-        startOfWeek,
-        endOfWeek,
-        locale
-      )
-    )
+    periods.push(...getPeriods(startOfWeek, endOfWeek, locale))
     currentDate = currentDate.add('-1w')
   }
 

@@ -32,7 +32,7 @@ export class TimesheetResolver {
   constructor(
     private readonly _azstorage: AzStorageService,
     private readonly _msgraph: MSGraphService
-  ) { }
+  ) {}
 
   /**
    * Get timesheet
@@ -51,11 +51,7 @@ export class TimesheetResolver {
     @Ctx() ctx: Context
   ) {
     try {
-      const periods = getPeriods(
-        query.startDate,
-        query.endDate,
-        options.locale
-      )
+      const periods = getPeriods(query.startDate, query.endDate, options.locale)
       // eslint-disable-next-line prefer-const
       let [projects, customers, timeentries, labels] = await Promise.all([
         this._azstorage.getProjects(),

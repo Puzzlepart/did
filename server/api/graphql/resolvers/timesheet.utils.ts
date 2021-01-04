@@ -30,7 +30,11 @@ export function getPeriods(
   ]
   if (isSplit) {
     periods.push(
-      new TimesheetPeriodObject(new DateObject(endDate).startOfMonth.format('YYYY-MM-DD'), endDate, locale)
+      new TimesheetPeriodObject(
+        new DateObject(endDate).startOfMonth.format('YYYY-MM-DD'),
+        endDate,
+        locale
+      )
     )
   }
 
