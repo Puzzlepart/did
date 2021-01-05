@@ -12,9 +12,7 @@ import styles from './AllocationView.module.scss'
 import { CustomTooltip } from './CustomTooltip'
 import { GetAllocationViewData, IChartConfig } from './types'
 
-export const AllocationView = (
-  getData: GetAllocationViewData
-) => (): JSX.Element => {
+export const AllocationView = (getData: GetAllocationViewData) => (): JSX.Element => {
   const { t } = useTranslation()
   const { loading, selectedPeriod } = useContext(TimesheetContext)
   const container = useRef<HTMLDivElement>()

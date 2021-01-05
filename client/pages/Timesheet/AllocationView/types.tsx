@@ -25,4 +25,8 @@ export interface ICustomTooltipProps {
   chart: IChartConfig
 }
 
-export type GetAllocationViewData = (events: EventObject[], chart: IChartConfig, width: number) => IChartItem<any>[]
+export type GetAllocationViewData = (
+  events: EventObject[],
+  chart: IChartConfig,
+  width: number
+) => IChartItem<any>[]

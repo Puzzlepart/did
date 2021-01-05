@@ -229,4 +229,22 @@ describe(header('DateUtils'), () => {
       strictEqual(date, '2020-04-27')
     })
   })
+
+  describe('getDurationHours', () => {
+    it('should return 2', () => {
+      const duration = DateUtils.getDurationHours(
+        '2021-01-04T07:00:00.000Z',
+        '2021-01-04T09:00:00.000Z'
+      )
+      deepStrictEqual(duration, 2)
+    })
+
+    it('should return 2.5', () => {
+      const duration = DateUtils.getDurationHours(
+        '2021-01-04T07:00:00.000Z',
+        '2021-01-04T09:30:00.000Z'
+      )
+      deepStrictEqual(duration, 2.5)
+    })
+  })
 })

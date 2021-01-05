@@ -7,7 +7,13 @@ import { omit } from 'underscore'
 import AzTableUtilities from '../../utils/table'
 import { Context } from '../graphql/context'
 import { Role } from '../graphql/resolvers/types'
-import { AzStorageServiceTables, AzTimeEntry, ConfirmedPeriodsFilterValues, ForecastedPeriodsFilterValues, GetProjectsOptions } from './azstorage.types'
+import {
+  AzStorageServiceTables,
+  AzTimeEntry,
+  ConfirmedPeriodsFilterValues,
+  ForecastedPeriodsFilterValues,
+  GetProjectsOptions
+} from './azstorage.types'
 
 @Service({ global: false })
 class AzStorageService {
@@ -332,7 +338,7 @@ class AzStorageService {
         ['PartitionKey', filterValues.resourceId, string, equal],
         ['Year', filterValues.year, int, equal],
         ['Year', filterValues.minYear, int, greaterThanOrEqual],
-        ['Year', filterValues.maxYear, int, lessThanOrEqual],
+        ['Year', filterValues.maxYear, int, lessThanOrEqual]
       ]
       const query = this.tableUtil.createAzQuery(1000, filter)
       const result = await this.tableUtil.queryAzTableAll(this.tables.confirmedPeriods, query, {
@@ -357,7 +363,7 @@ class AzStorageService {
         ['PartitionKey', filterValues.resourceId, q.string, q.equal],
         ['Year', filterValues.year, q.int, q.equal],
         ['Year', filterValues.minYear, q.int, q.greaterThanOrEqual],
-        ['Year', filterValues.maxYear, q.int, q.lessThanOrEqual],
+        ['Year', filterValues.maxYear, q.int, q.lessThanOrEqual]
       ]
       const query = this.tableUtil.createAzQuery(1000, filter)
       const result = await this.tableUtil.queryAzTableAll(this.tables.forecastedPeriods, query, {

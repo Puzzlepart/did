@@ -114,7 +114,7 @@ export class DateUtils {
    * @param {DateInput} end End
    * @param {string} template Date template
    */
-  getDays(start: DateInput, end: DateInput, template: string = 'dddd DD'): string[] {
+  public getDays(start: DateInput, end: DateInput, template: string = 'dddd DD'): string[] {
     const days = []
     let s = new DateObject(start)
     const e = new DateObject(end)
@@ -181,7 +181,7 @@ export class DateUtils {
    * @param {number} isoWeek Iso week number
    * @param {number} year Year
    */
-  getIsoWeek(isoWeek: number, year: number) {
+  public getIsoWeek(isoWeek: number, year: number) {
     if (
       isoWeek === 53 &&
       $dayjs()
@@ -229,7 +229,7 @@ export class DateUtils {
    * @param {DateObject} date Date
    * @param {number} year Year
    */
-  isCurrentYear(date: DateObject, year?: number) {
+  public isCurrentYear(date: DateObject, year?: number) {
     return (year || date.$.year()) === $dayjs().year()
   }
 
@@ -239,7 +239,7 @@ export class DateUtils {
    * @param {DateInput} a Date a
    * @param {DateInput} a Date b
    */
-  isBefore(a: DateInput, b?: DateInput) {
+  public isBefore(a: DateInput, b?: DateInput) {
     return $dayjs(a).isBefore(b)
   }
 
