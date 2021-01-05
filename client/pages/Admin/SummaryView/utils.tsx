@@ -1,12 +1,12 @@
 import { DurationColumn } from 'components/DurationColumn'
-import { LabelColumn } from './LabelColumn'
-import { sortAlphabetically, getValue } from 'helpers'
+import DateUtils from 'DateUtils'
+import { getValue, sortAlphabetically } from 'helpers'
 import { TFunction } from 'i18next'
 import { IColumn, IPivotItemProps } from 'office-ui-fabric'
-import * as React from 'react'
+import React from 'react'
 import { first, unique } from 'underscore'
-import DateUtils from 'DateUtils'
 import { generateColumn as col } from 'utils/generateColumn'
+import { LabelColumn } from './LabelColumn'
 import { ISummaryViewRow, ISummaryViewState } from './types'
 /**
  * Create columns
@@ -25,9 +25,9 @@ export function createColumns(state: ISummaryViewState, t: TFunction): IColumn[]
     <DurationColumn row={row} column={col} />
   )
 
-  const columns = uniqueColumnValues.map(({ year, value }) => ({
-    key: [year, value].join('_'),
-    fieldName: [year, value].join('_'),
+  const columns = uniqueColumnValues.map(({ value }) => ({
+    key: value,
+    fieldName: value,
     name: state.scope.getColumnHeader(value),
     minWidth: 70,
     maxWidth: 70,
@@ -81,22 +81,19 @@ export const createRows = (
   )
   const _columns = [...columns].splice(1, columns.length - 2)
   const rows: ISummaryViewRow[] = rowValues.map((label) => {
-    const rowEntries = state.timeentries.filter(
+    const entries = state.timeentries.filter(
       (e) => getValue(e, state.type.fieldName, null) === label
     )
     return _columns.reduce(
       (obj, col) => {
-        const sum = [...rowEntries]
-          .filter((e) => {
-            const value = [e.year, getValue(e, state.scope.fieldName)].join('_')
-            return value === col.fieldName
-          })
+        const sum = [...entries]
+          .filter((e) => getValue(e, state.scope.fieldName) === col.fieldName)
           .reduce((sum, { duration }) => sum + duration, 0)
         switch (state.type.key) {
           case 'project':
             {
-              obj.project = first(rowEntries)?.project
-              obj.customer = first(rowEntries)?.customer
+              obj.project = first(entries)?.project
+              obj.customer = first(entries)?.customer
             }
             break
           default:

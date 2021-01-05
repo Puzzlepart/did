@@ -21,7 +21,7 @@ export const SummaryView = (): JSX.Element => {
   const [state, dispatch] = useReducer(reducer, {
     timeentries: [],
     range: {
-      from: new DateObject().add('-2month').startOfWeek,
+      from: new DateObject().add('-8week').startOfWeek,
       to: new DateObject().endOfWeek
     },
     type: first(types),

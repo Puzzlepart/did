@@ -30,7 +30,7 @@ export const commandBar = (context: ISummaryViewContext) => {
       {
         ...context.type,
         key: 'VIEW_TYPE',
-        iconProps: { iconName: 'View' },
+        iconProps: { iconName: 'TimelineMatrixView' },
         disabled: context.loading,
         subMenuProps: {
           items: context.types.map((type) => ({
@@ -57,6 +57,8 @@ export const commandBar = (context: ISummaryViewContext) => {
                     {...datePickerProps(context.t)}
                     label={context.t('common.fromDateLabel')}
                     value={context.range.from.jsDate}
+                    minDate={context.range.to.add('-8week').startOfWeek.jsDate}
+                    maxDate={context.range.to.add('-2w').startOfWeek.jsDate}
                     onSelectDate={date => context.dispatch({
                       type: 'SET_RANGE',
                       payload: { from: new DateObject(date).startOfWeek },
@@ -71,7 +73,8 @@ export const commandBar = (context: ISummaryViewContext) => {
                   <DatePicker
                     {...datePickerProps(context.t)}
                     label={context.t('common.toDateLabel')}
-                    minDate={context.range.from.add('2w').startOfWeek.jsDate}
+                    minDate={context.range.from.add('2w').endOfWeek.jsDate}
+                    maxDate={context.range.from.add('8w').endOfWeek.jsDate}
                     value={context.range.to.jsDate}
                     onSelectDate={date => context.dispatch({
                       type: 'SET_RANGE',
