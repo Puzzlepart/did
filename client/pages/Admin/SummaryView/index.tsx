@@ -22,7 +22,7 @@ export const SummaryView = (): JSX.Element => {
     timeentries: [],
     range: {
       from: new DateObject().add('-2month').startOfWeek,
-      to: new DateObject()
+      to: new DateObject().endOfWeek
     },
     type: first(types),
     scope: first(scopes)
