@@ -9,7 +9,7 @@ import {
 } from 'types'
 import { filter, omit } from 'underscore'
 import { BrowserStorage } from 'utils/browserStorage'
-import DateUtils from 'utils/date'
+import DateUtils from 'DateUtils'
 
 export class TimesheetPeriod {
   public id: string

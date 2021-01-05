@@ -1,5 +1,5 @@
-import DateUtils, { DateInput, DateObject } from 'utils/date'
-import { TimesheetQuery } from '../../../server/api/graphql/resolvers/types'
+import DateUtils, { DateInput, DateObject } from 'DateUtils'
+import { TimesheetQuery } from 'types'
 import { ITimesheetParams } from './types'
 
 /**

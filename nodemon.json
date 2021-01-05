@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/nodemon.json",
-  "watch": ["server"],
+  "watch": ["server", "shared"],
   "ext": "ts,json",
   "exec": "ts-node ./server/index.ts -T",
   "delay": 1000,

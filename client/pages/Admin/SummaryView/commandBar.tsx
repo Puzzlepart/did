@@ -1,6 +1,6 @@
 import { IContextualMenuItem, Slider } from 'office-ui-fabric'
 import React from 'react'
-import DateUtils from 'utils/date'
+import DateUtils from 'DateUtils'
 import * as excelUtils from 'utils/exportExcel'
 import { ISummaryViewContext } from './context'
 import styles from './SummaryView.module.scss'

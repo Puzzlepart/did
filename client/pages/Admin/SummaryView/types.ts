@@ -2,7 +2,7 @@ import { ILabelColumnProps } from 'pages/Admin/SummaryView/LabelColumn/types'
 import { TFunction } from 'i18next'
 import { IContextualMenuItem, IPivotItemProps } from 'office-ui-fabric'
 import { TimeEntriesQuery } from 'types'
-import DateUtils from 'utils/date'
+import DateUtils from 'DateUtils'
 
 /**
  * Get scopes

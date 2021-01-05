@@ -1,5 +1,5 @@
 import { IPnPClientStore, PnPClientStorage } from '@pnp/common'
-import { DateObject } from './date'
+import { DateObject } from 'DateUtils'
 import AppConfig from 'AppConfig'
 
 export class BrowserStorage<T = any> {

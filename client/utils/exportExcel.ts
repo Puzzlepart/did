@@ -1,7 +1,7 @@
 import { getValue } from 'helpers'
 import { IColumn } from 'office-ui-fabric'
 import { humanize } from 'underscore.string'
-import { DateObject } from './date'
+import { DateObject } from 'DateUtils'
 import { loadScripts } from './loadScripts'
 
 export interface IExcelExportOptions {

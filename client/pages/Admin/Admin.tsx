@@ -11,7 +11,7 @@ import { Roles } from './Roles'
 import { SubscriptionSettings } from './Subscription'
 import { SummaryView } from './SummaryView'
 import { Users } from './Users'
-import DateUtils from 'utils/date'
+import DateUtils from 'DateUtils'
 
 export const Admin = () => {
   const { t } = useTranslation()

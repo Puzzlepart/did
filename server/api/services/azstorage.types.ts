@@ -1,6 +1,6 @@
 /* eslint-disable max-classes-per-file */
 import { pick } from 'underscore'
-import { getDurationHours } from '../../utils/date'
+import DateUtils from '../../../shared/utils/date'
 import { convertToAzEntity, EntityDescriptor } from '../../utils/table'
 import MSGraphEvent from './msgraph.event'
 
@@ -15,7 +15,21 @@ export class AzStorageServiceTables {
     public roles: string = 'Roles',
     public labels: string = 'Labels',
     public users: string = 'Users'
-  ) {}
+  ) { }
+}
+
+export type ConfirmedPeriodsFilterValues = { 
+  resourceId: string;
+  year?: number;
+  minYear?: number;
+  maxYear?: number;
+}
+
+export type ForecastedPeriodsFilterValues = { 
+  resourceId: string;
+  year?: number;
+  minYear?: number;
+  maxYear?: number;
 }
 
 export type GetProjectsOptions = { noParse?: boolean; sortBy?: string }
@@ -28,11 +42,11 @@ export class AzTimeEntry {
     public manualMatch: boolean,
     public event: MSGraphEvent,
     public labels: string[]
-  ) {}
+  ) { }
 
   /**
    * Get period data
-   * 
+   *
    * * periodId
    * * weekNumber
    * * monthNumber
@@ -52,7 +66,7 @@ export class AzTimeEntry {
    * Get duration in hours for the time entry using util getDurationHours
    */
   public get duration(): number {
-    return getDurationHours(this.event.startDateTime, this.event.endDateTime)
+    return DateUtils.getDurationHours(this.event.startDateTime, this.event.endDateTime)
   }
 
   /**

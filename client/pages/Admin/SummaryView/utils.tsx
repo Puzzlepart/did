@@ -5,7 +5,7 @@ import { TFunction } from 'i18next'
 import { IColumn, IPivotItemProps } from 'office-ui-fabric'
 import * as React from 'react'
 import { first, unique } from 'underscore'
-import DateUtils from 'utils/date'
+import DateUtils from 'DateUtils'
 import { generateColumn as col } from 'utils/generateColumn'
 import { ISummaryViewRow, ISummaryViewState } from './types'
 /**

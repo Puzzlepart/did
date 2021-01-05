@@ -1,7 +1,7 @@
 import get from 'get-value'
 import { filter, find, first } from 'underscore'
 import { contains } from 'underscore.string'
-import * as DateUtils from '../../../utils/date'
+import DateUtils, { DateObject } from '../../../../shared/utils/date'
 import { Customer } from './customer.types'
 import { LabelObject } from './label.types'
 import { Project } from './project.types'
@@ -24,13 +24,17 @@ export function getPeriods(
   const periods: TimesheetPeriodObject[] = [
     new TimesheetPeriodObject(
       startDate,
-      isSplit ? DateUtils.endOfMonth(startDate, 'YYYY-MM-DD') : endDate,
+      isSplit ? new DateObject(startDate).endOfMonth.format('YYYY-MM-DD') : endDate,
       locale
     )
   ]
   if (isSplit) {
     periods.push(
-      new TimesheetPeriodObject(DateUtils.startOfMonth(endDate, 'YYYY-MM-DD'), endDate, locale)
+      new TimesheetPeriodObject(
+        new DateObject(endDate).startOfMonth.format('YYYY-MM-DD'),
+        endDate,
+        locale
+      )
     )
   }
 

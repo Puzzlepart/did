@@ -1,6 +1,6 @@
 import { strictEqual, deepStrictEqual } from 'assert'
 import { header } from '../@utils'
-import DateUtils, { DateObject, $dayjs } from '../../client/utils/date'
+import DateUtils, { DateObject, $dayjs } from '../../shared/utils/date'
 
 describe(header('DateUtils'), () => {
   before(() => {

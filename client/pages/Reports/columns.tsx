@@ -3,7 +3,7 @@ import { ProjectLink } from 'components/ProjectLink'
 import { TFunction } from 'i18next'
 import { IColumn } from 'office-ui-fabric'
 import React from 'react'
-import DateUtils from 'utils/date'
+import DateUtils from 'DateUtils'
 import { ExcelColumnType } from 'utils/exportExcel'
 
 const columns = (defaults: Partial<IColumn>, t: TFunction): IColumn[] =>

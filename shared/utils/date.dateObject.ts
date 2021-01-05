@@ -63,6 +63,20 @@ export class DateObject {
   }
 
   /**
+   * Get end of month
+   */
+  public get endOfMonth() {
+    return DateUtils.endOfMonth(this)
+  }
+
+  /**
+   * Get start of month
+   */
+  public get startOfMonth() {
+    return DateUtils.startOfMonth(this)
+  }
+
+  /**
    * Is current week
    */
   public get isCurrentWeek() {
@@ -75,9 +89,10 @@ export class DateObject {
    * To escape characters, wrap them in square brackets (e.g. [MM]).
    *
    * @param {string} template Template
+   * @param {string} locale Locale
    */
-  public format(template: string = 'YYYY-MM-DD'): string {
-    return this.$.format(template)
+  public format(template: string = 'YYYY-MM-DD', locale?: string): string {
+    return DateUtils.formatDate(this.$, template, locale)
   }
 
   /**
@@ -96,6 +111,13 @@ export class DateObject {
    */
   isSameYear(date: DateObject) {
     return this.$.isSame(date.$, 'year')
+  }
+
+  /**
+   * Is after today
+   */
+  public isAfterToday() {
+    return DateUtils.isAfterToday(this.$)
   }
 
   /**
@@ -141,9 +163,9 @@ export class DateObject {
    */
   toObject(...include: string[]) {
     const obj = {
-      weekNumber: this.$.isoWeek(),
-      monthNumber: this.$.month() + 1,
-      year: this.$.year(),
+      weekNumber: DateUtils.getWeek(this.$),
+      monthNumber: DateUtils.getMonthIndex(this.$),
+      year: DateUtils.getYear(this.$),
       monthName: this.format('MMMM')
     }
     return isEmpty(include) ? obj : pick(obj, ...include)

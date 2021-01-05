@@ -1,16 +1,16 @@
 import EventList from 'components/EventList'
+import DateUtils from 'DateUtils'
 import { ProgressIndicator } from 'office-ui-fabric'
 import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { EventObject } from 'types'
-import DateUtils from 'utils/date'
 import { generateColumn as col } from 'utils/generateColumn'
 import { TimesheetContext } from '../'
-import { StatusBar } from './StatusBar'
 import CustomerColumn from './CustomerColumn'
 import styles from './Overview.module.scss'
 import ProjectColumn from './ProjectColumn'
+import { StatusBar } from './StatusBar'
 import { IOverviewProps } from './types'
 
 export const Overview = ({ dayFormat, timeFormat }: IOverviewProps) => {

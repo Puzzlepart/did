@@ -1,5 +1,5 @@
+import { $dayjs, default as DateUtils } from '../../../shared/utils/date'
 import { stripHtmlString } from '../../utils'
-import { $dayjs, getDurationHours } from '../../utils/date'
 
 export default class MSGraphEvent {
   public id: string
@@ -18,7 +18,7 @@ export default class MSGraphEvent {
    * @param {any} event Event data
    * @param {string} template Date template
    */
-  constructor(event: any, template = 'YYYY-MM-DD HH:mm:ss') {
+  constructor(event: any, template: string = 'YYYY-MM-DD HH:mm:ss') {
     this.id = event.id
     this.title = event.subject
     this.body = stripHtmlString(event.body.content)
@@ -31,6 +31,6 @@ export default class MSGraphEvent {
     this.endDateTime = $dayjs
       .tz($dayjs(event.end.dateTime).format(template), event.end.timeZone)
       .toISOString()
-    this.duration = getDurationHours(event.start.dateTime, event.end.dateTime)
+    this.duration = DateUtils.getDurationHours(event.start.dateTime, event.end.dateTime)
   }
 }
