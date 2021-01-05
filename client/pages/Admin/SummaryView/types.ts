@@ -1,8 +1,8 @@
-import { ILabelColumnProps } from 'pages/Admin/SummaryView/LabelColumn/types'
+import DateUtils, { DateObject } from 'DateUtils'
 import { TFunction } from 'i18next'
 import { IContextualMenuItem, IPivotItemProps } from 'office-ui-fabric'
+import { ILabelColumnProps } from 'pages/Admin/SummaryView/LabelColumn/types'
 import { TimeEntriesQuery } from 'types'
-import DateUtils from 'DateUtils'
 
 /**
  * Get scopes
@@ -62,8 +62,8 @@ export interface ISummaryViewScope extends IPivotItemProps {
 }
 
 export interface ISummaryViewRange {
-  from?: Date
-  to?: Date
+  from?: DateObject
+  to?: DateObject
 }
 
 export interface ISummaryViewState {
@@ -71,11 +71,6 @@ export interface ISummaryViewState {
    * Selected scope
    */
   scope: ISummaryViewScope
-
-  /**
-   * Max month number
-   */
-  endMonthIndex: number
 
   /**
    * Time entries

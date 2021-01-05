@@ -16,19 +16,19 @@ import { ISummaryViewRow, ISummaryViewState } from './types'
  */
 export function createColumns(state: ISummaryViewState, t: TFunction): IColumn[] {
   let uniqueColumnValues: any[] = unique(
-    state.timeentries.map((e) => getValue(e, state.scope.fieldName)),
-    (m) => m
+    state.timeentries.map((e) => ({ year: e.year, value: getValue(e, state.scope.fieldName) })),
+    ({ year, value }) => year && value
   )
-  uniqueColumnValues = uniqueColumnValues.sort((a: number, b: number) => a - b)
+  uniqueColumnValues = uniqueColumnValues.sort((a, b) => a.year - b.year || a.value - b.value)
 
   const onRender = (row: any, _index: number, col: IColumn) => (
     <DurationColumn row={row} column={col} />
   )
 
-  const columns = uniqueColumnValues.map((key) => ({
-    key: key,
-    fieldName: key,
-    name: state.scope.getColumnHeader(key),
+  const columns = uniqueColumnValues.map(({ year, value }) => ({
+    key: [year, value].join('_'),
+    fieldName: [year, value].join('_'),
+    name: state.scope.getColumnHeader(value),
     minWidth: 70,
     maxWidth: 70,
     onRender
@@ -73,21 +73,24 @@ export const createRows = (
   columns: IColumn[],
   t: TFunction
 ): ISummaryViewRow[] => {
-  const uniqueRowValues = sortAlphabetically(
+  const rowValues = sortAlphabetically(
     unique(
       state.timeentries.map((e) => getValue(e, state.type.fieldName, null)),
       (r) => r
     )
   )
   const _columns = [...columns].splice(1, columns.length - 2)
-  const rows: ISummaryViewRow[] = uniqueRowValues.map((label) => {
+  const rows: ISummaryViewRow[] = rowValues.map((label) => {
     const rowEntries = state.timeentries.filter(
       (e) => getValue(e, state.type.fieldName, null) === label
     )
     return _columns.reduce(
       (obj, col) => {
         const sum = [...rowEntries]
-          .filter((e) => getValue(e, state.scope.fieldName) === col.fieldName)
+          .filter((e) => {
+            const value = [e.year, getValue(e, state.scope.fieldName)].join('_')
+            return value === col.fieldName
+          })
           .reduce((sum, { duration }) => sum + duration, 0)
         switch (state.type.key) {
           case 'project':

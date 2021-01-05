@@ -1,7 +1,8 @@
-import { IContextualMenuItem, DatePicker, DayOfWeek, FirstWeekOfYear } from 'office-ui-fabric'
+import { IContextualMenuItem } from 'office-ui-fabric'
 import React from 'react'
 import * as excelUtils from 'utils/exportExcel'
 import { ISummaryViewContext } from './context'
+import { DateRangePicker } from './DateRangePicker'
 import styles from './SummaryView.module.scss'
 
 /**
@@ -27,34 +28,9 @@ export const commandBar = (context: ISummaryViewContext) => {
         className: styles.viewTypeSelector
       },
       {
-        key: 'RANGE',
+        key: 'DATE_RANGE',
         name: '',
-        onRender: () => (
-          <>
-            <DatePicker
-              borderless={true}
-              showWeekNumbers={true}
-              firstDayOfWeek={DayOfWeek.Monday}
-              strings={context.t('common.calendarStrings', { returnObjects: true }) as any}
-              firstWeekOfYear={FirstWeekOfYear.FirstFourDayWeek}
-              value={new Date('10.22.2020')}
-              onSelectDate={date => context.dispatch({
-                type: 'SET_RANGE',
-                payload: { start: date },
-              })} />
-            <DatePicker
-              borderless={true}
-              showWeekNumbers={true}
-              firstDayOfWeek={DayOfWeek.Monday}
-              strings={context.t('common.calendarStrings', { returnObjects: true }) as any}
-              firstWeekOfYear={FirstWeekOfYear.FirstFourDayWeek}
-              value={new Date()}
-              onSelectDate={date => context.dispatch({
-                type: 'SET_RANGE',
-                payload: { end: date },
-              })}/>
-          </>
-        )
+        onRender: () => <DateRangePicker />
       }
     ] as IContextualMenuItem[],
     farItems: [

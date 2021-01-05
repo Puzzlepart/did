@@ -8,8 +8,6 @@ import { DateObject } from 'DateUtils'
 
 export const DateRangePicker = (props: IDateRangePickerProps) => {
     const context = useContext(SummaryViewContext)
-    // eslint-disable-next-line no-console
-    console.log(context)
     return (
         <div className={styles.root}>
             <DatePicker
