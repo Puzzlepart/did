@@ -1,7 +1,7 @@
 import { UserMessage } from 'components'
 import { getValue } from 'helpers'
 import color from 'randomcolor'
-import React, { useContext, useMemo, useRef } from 'react'
+import React, { useContext, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { EventObject } from 'types'
@@ -10,18 +10,16 @@ import { truncateString } from 'utils/truncateString'
 import { TimesheetContext } from '../context'
 import styles from './AllocationView.module.scss'
 import { CustomTooltip } from './CustomTooltip'
-import { IChartConfig, IChartItem } from './types'
+import { GetAllocationViewData, IChartConfig } from './types'
 
-export const AllocationView = (
-  getData: (events: EventObject[], chart: IChartConfig, width: number) => IChartItem<any>[]
-) => (): JSX.Element => {
+export const AllocationView = (getData: GetAllocationViewData) => (): JSX.Element => {
   const { t } = useTranslation()
   const { loading, selectedPeriod } = useContext(TimesheetContext)
   const container = useRef<HTMLDivElement>()
 
   if (!loading && selectedPeriod?.totalDuration === 0) {
     return (
-      <div className={styles.root}>
+      <div className={styles.root} ref={container}>
         <UserMessage text={t('timesheet.allocation.noDataText')} />
       </div>
     )
@@ -54,10 +52,7 @@ export const AllocationView = (
   return (
     <div key={`allocation_${selectedPeriod?.id}`} className={styles.root} ref={container}>
       {charts.map((c) => {
-        const data = useMemo(
-          () => getData(selectedPeriod?.getEvents() || [], c, container?.current?.clientWidth),
-          [container?.current?.clientWidth, selectedPeriod]
-        )
+        const data = getData(selectedPeriod?.getEvents() || [], c, container?.current?.clientWidth)
         return (
           <div key={c.key} className={styles.chartContainer}>
             <div className={styles.title}>{c.title}</div>

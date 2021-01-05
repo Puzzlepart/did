@@ -7,7 +7,13 @@ import { omit } from 'underscore'
 import AzTableUtilities from '../../utils/table'
 import { Context } from '../graphql/context'
 import { Role } from '../graphql/resolvers/types'
-import { AzStorageServiceTables, AzTimeEntry, GetProjectsOptions } from './azstorage.types'
+import {
+  AzStorageServiceTables,
+  AzTimeEntry,
+  ConfirmedPeriodsFilterValues,
+  ForecastedPeriodsFilterValues,
+  GetProjectsOptions
+} from './azstorage.types'
 
 @Service({ global: false })
 class AzStorageService {
@@ -323,14 +329,16 @@ class AzStorageService {
   /**
    * Get confirmed periods from table storage
    *
-   * @param {any} filterValues Filtervalues
+   * @param {ConfirmedPeriodsFilterValues} filterValues Filtervalues
    */
-  async getConfirmedPeriods(filterValues: any) {
+  async getConfirmedPeriods(filterValues: ConfirmedPeriodsFilterValues) {
     try {
-      const q = this.tableUtil.query()
+      const { string, int, equal, greaterThanOrEqual, lessThanOrEqual } = this.tableUtil.query()
       const filter = [
-        ['PartitionKey', filterValues.resourceId, q.string, q.equal],
-        ['Year', filterValues.year, q.int, q.equal]
+        ['PartitionKey', filterValues.resourceId, string, equal],
+        ['Year', filterValues.year, int, equal],
+        ['Year', filterValues.minYear, int, greaterThanOrEqual],
+        ['Year', filterValues.maxYear, int, lessThanOrEqual]
       ]
       const query = this.tableUtil.createAzQuery(1000, filter)
       const result = await this.tableUtil.queryAzTableAll(this.tables.confirmedPeriods, query, {
@@ -346,14 +354,16 @@ class AzStorageService {
   /**
    * Get forecasted periods from table storage
    *
-   * @param {any} filterValues Filtervalues
+   * @param {ForecastedPeriodsFilterValues} filterValues Filtervalues
    */
-  async getForecastedPeriods(filterValues: any) {
+  async getForecastedPeriods(filterValues: ForecastedPeriodsFilterValues) {
     try {
       const q = this.tableUtil.query()
       const filter = [
         ['PartitionKey', filterValues.resourceId, q.string, q.equal],
-        ['Year', filterValues.year, q.int, q.equal]
+        ['Year', filterValues.year, q.int, q.equal],
+        ['Year', filterValues.minYear, q.int, q.greaterThanOrEqual],
+        ['Year', filterValues.maxYear, q.int, q.lessThanOrEqual]
       ]
       const query = this.tableUtil.createAzQuery(1000, filter)
       const result = await this.tableUtil.queryAzTableAll(this.tables.forecastedPeriods, query, {

@@ -1,7 +1,7 @@
 import { TFunction } from 'i18next'
 import { omit } from 'underscore'
 import { capitalize } from 'underscore.string'
-import { DateObject } from 'utils/date'
+import { DateObject } from 'DateUtils'
 import { IReportsQuery } from './types'
 
 /**
@@ -117,13 +117,7 @@ const forecastQuery = (now: DateObject, t: TFunction) => {
  */
 export function getQueries<T = IReportsQuery>(t: TFunction): T[] {
   const now = new DateObject()
-  return [
-    lastMonthQuery,
-    currentMonthQuery,
-    lastYearQuery,
-    currentYearQuery,
-    forecastQuery
-  ].map(
+  return [lastMonthQuery, currentMonthQuery, lastYearQuery, currentYearQuery, forecastQuery].map(
     (q) => (q(now, t) as unknown) as T
   )
 }

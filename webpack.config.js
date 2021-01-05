@@ -75,6 +75,7 @@ const config = {
   },
   resolve: {
     alias: {
+      'office-ui-fabric': resolve(SRC_PATH, 'office-ui-fabric'),
       common: resolve(SRC_PATH, 'common'),
       types: resolve(SRC_PATH, 'types'),
       utils: resolve(SRC_PATH, 'utils'),
@@ -85,7 +86,7 @@ const config = {
       config: resolve(SRC_PATH, 'config'),
       AppContext: resolve(SRC_PATH, 'AppContext'),
       AppConfig: resolve(SRC_PATH, 'App.config.json'),
-      'office-ui-fabric': resolve(SRC_PATH, 'office-ui-fabric'),
+      DateUtils: resolve(__dirname, 'shared/utils/date'),
     },
     extensions: [
       '.ts',

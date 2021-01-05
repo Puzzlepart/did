@@ -1,5 +1,5 @@
 import { IContextualMenuItem } from 'office-ui-fabric'
-import DateUtils from 'utils/date'
+import DateUtils from 'DateUtils'
 import { ISummaryViewScope, ISummaryViewState } from './types'
 
 export type SummaryViewAction =

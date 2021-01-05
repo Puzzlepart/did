@@ -1,6 +1,6 @@
 import { strictEqual, deepStrictEqual } from 'assert'
 import { header } from '../@utils'
-import DateUtils, { DateObject, $dayjs } from '../../client/utils/date'
+import DateUtils, { DateObject, $dayjs } from '../../shared/utils/date'
 
 describe(header('DateUtils'), () => {
   before(() => {
@@ -227,6 +227,24 @@ describe(header('DateUtils'), () => {
     it('should return 2020-04-27', () => {
       const date = $dayjs().year(2020).week(18).startOf('isoWeek').format('YYYY-MM-DD')
       strictEqual(date, '2020-04-27')
+    })
+  })
+
+  describe('getDurationHours', () => {
+    it('should return 2', () => {
+      const duration = DateUtils.getDurationHours(
+        '2021-01-04T07:00:00.000Z',
+        '2021-01-04T09:00:00.000Z'
+      )
+      deepStrictEqual(duration, 2)
+    })
+
+    it('should return 2.5', () => {
+      const duration = DateUtils.getDurationHours(
+        '2021-01-04T07:00:00.000Z',
+        '2021-01-04T09:30:00.000Z'
+      )
+      deepStrictEqual(duration, 2.5)
     })
   })
 })

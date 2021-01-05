@@ -1,4 +1,3 @@
-export { default as date } from './date'
 export * from './sleep'
 export * from './generateColumn'
 export * from './getHash'

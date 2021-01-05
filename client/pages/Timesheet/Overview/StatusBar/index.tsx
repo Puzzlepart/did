@@ -1,12 +1,12 @@
 import { UserMessage } from 'components/UserMessage'
 import { IUserMessageProps } from 'components/UserMessage/types'
-import { Shimmer, MessageBarType } from 'office-ui-fabric'
+import DateUtils from 'DateUtils'
+import { MessageBarType, Shimmer } from 'office-ui-fabric'
 import React, { useContext } from 'react'
+import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
-import DateUtils from 'utils/date'
 import { TimesheetContext } from '../..'
-import { isMobile } from 'react-device-detect'
 import styles from './StatusBar.module.scss'
 
 export const StatusBar = () => {

@@ -1,9 +1,9 @@
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, Float, ID, InputType, ObjectType } from 'type-graphql'
+import DateUtils from '../../../../shared/utils/date'
 import { simpleResolvers } from '../config'
 import { Customer, EventError, LabelObject, Project } from './types'
-import * as DateUtils from '../../../utils/date'
 
 @ObjectType({
   description: 'A type that describes a Event',
