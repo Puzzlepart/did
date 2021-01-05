@@ -63,7 +63,7 @@ export { Sticky, StickyPositionType } from 'office-ui-fabric-react/lib/Sticky'
 export { TextField } from 'office-ui-fabric-react/lib/TextField'
 export { Toggle } from 'office-ui-fabric-react/lib/Toggle'
 export { TooltipDelay, TooltipHost } from 'office-ui-fabric-react/lib/Tooltip'
-export { DatePicker } from 'office-ui-fabric-react/lib/DatePicker'
+export { DatePicker, IDatePickerProps } from 'office-ui-fabric-react/lib/DatePicker'
 export {
   format,
   IRenderFunction,

@@ -1,8 +1,8 @@
-import { IContextualMenuItem } from 'office-ui-fabric'
+import { DateObject } from 'DateUtils'
+import { DatePicker, DateRangeType, DayOfWeek, FirstWeekOfYear, IContextualMenuItem } from 'office-ui-fabric'
 import React from 'react'
 import * as excelUtils from 'utils/exportExcel'
 import { ISummaryViewContext } from './context'
-import { DateRangePicker } from './DateRangePicker'
 import styles from './SummaryView.module.scss'
 
 /**
@@ -29,8 +29,60 @@ export const commandBar = (context: ISummaryViewContext) => {
       },
       {
         key: 'DATE_RANGE',
-        name: '',
-        onRender: () => <DateRangePicker />
+        name: 'Range',
+        subMenuProps: {
+          items: [
+            {
+              key: 'DATE_RANGE_FROM',
+              onRender: () => (
+                <div style={{ padding: 10 }}>
+                  <DatePicker
+                    label='From'
+                    borderless={true}
+                    showWeekNumbers={true}
+                    showGoToToday={false}
+                    firstDayOfWeek={DayOfWeek.Monday}
+                    firstWeekOfYear={FirstWeekOfYear.FirstFourDayWeek}
+                    strings={context.t('common.calendarStrings', { returnObjects: true }) as any}
+                    calendarProps={{
+                      strings: context.t('common.calendarStrings', { returnObjects: true }) as any,
+                      dateRangeType: DateRangeType.Week
+                    }}
+                    value={context.range.from.jsDate}
+                    onSelectDate={date => context.dispatch({
+                      type: 'SET_RANGE',
+                      payload: { from: new DateObject(date) },
+                    })} />
+                </div>
+              )
+            },
+            {
+              key: 'DATE_RANGE_TO',
+              onRender: () => (
+                <div style={{ padding: 10 }}>
+                  <DatePicker
+                    label='To'
+                    borderless={true}
+                    showWeekNumbers={true}
+                    showGoToToday={false}
+                    firstDayOfWeek={DayOfWeek.Monday}
+                    firstWeekOfYear={FirstWeekOfYear.FirstFourDayWeek}
+                    strings={context.t('common.calendarStrings', { returnObjects: true }) as any}
+                    calendarProps={{
+                      strings: context.t('common.calendarStrings', { returnObjects: true }) as any,
+                      dateRangeType: DateRangeType.Week
+                    }}
+                    minDate={context.range.from.add('2w').startOfWeek.jsDate}
+                    value={context.range.to.jsDate}
+                    onSelectDate={date => context.dispatch({
+                      type: 'SET_RANGE',
+                      payload: { to: new DateObject(date) },
+                    })} />
+                </div>
+              )
+            }
+          ]
+        }
       }
     ] as IContextualMenuItem[],
     farItems: [
