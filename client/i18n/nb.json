@@ -293,7 +293,10 @@
     "departmentLabel": "Avdeling",
     "mobilePhoneLabel": "Mobiltelefon",
     "searchUserLabel": "Søk i Azure Active Directory",
-    "exportTypeLastYear": "I fjor ({{year}})"
+    "exportTypeLastYear": "I fjor ({{year}})",
+    "fromDateLabel": "Fra:",
+    "toDateLabel": "Til:",
+    "rangeLabel": "Tidsrom"
   },
   "navigation": {
     "timesheet": "Timeliste",

@@ -294,7 +294,10 @@
     "departmentLabel": "Department",
     "mobilePhoneLabel": "Mobile phone",
     "searchUserLabel": "Search in Azure Active Directory",
-    "exportTypeLastYear": "Last year ({{year}})"
+    "exportTypeLastYear": "Last year ({{year}})",
+    "fromDateLabel": "From:",
+    "toDateLabel": "To:",
+    "rangeLabel": "Range"
   },
   "navigation": {
     "timesheet": "Timesheet",

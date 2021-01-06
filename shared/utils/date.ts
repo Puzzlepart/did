@@ -249,7 +249,7 @@ export class DateUtils {
    * @param {ConfigType} startDateTime Start time
    * @param {ConfigType} endDateTime End time
    */
-  getDurationHours(startDateTime: ConfigType, endDateTime: ConfigType): number {
+  public getDurationHours(startDateTime: ConfigType, endDateTime: ConfigType): number {
     return $dayjs(endDateTime).diff(startDateTime, 'minute') / 60
   }
 
@@ -259,7 +259,7 @@ export class DateUtils {
    * @param {ConfigType} dateTime Date
    * @param {number} tzOffset Offset in minutes
    */
-  toISOString(dateTime: ConfigType, tzOffset: number) {
+  public toISOString(dateTime: ConfigType, tzOffset: number) {
     return $dayjs(`${dateTime} ${this.getTimezone(tzOffset)}`).toISOString()
   }
 
