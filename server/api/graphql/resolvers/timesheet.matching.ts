@@ -138,12 +138,15 @@ export default class {
     else {
       const softMatches = this._searchString(srchStr, false)
       event.project = find(this.projects, (p) => !!find(softMatches, (m) => m.id === p.id))
-      event.customer = find(this.customers, (c) => {
-        const match = find(softMatches, (m) => m.customerKey === c.key)
-        if (!match) return false
-        projectKey = match.projectKey
-        return true
-      })
+      if(event.project){
+        event.customer = find(this.customers, (c) => {
+          const match = find(softMatches, (m) => m.customerKey === c.key && m.projectKey === event.project.projectKey)
+          if (!match) return false
+          projectKey = match.projectKey
+          return true
+        })
+      }
+      
     }
 
     // We look for project suggestions in case of e.g. typo
