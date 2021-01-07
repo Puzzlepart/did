@@ -1,6 +1,13 @@
 import { DateObject, default as DateUtils } from 'DateUtils'
 import { TFunction } from 'i18next'
-import { DatePicker, DateRangeType, DayOfWeek, FirstWeekOfYear, IContextualMenuItem, IDatePickerProps } from 'office-ui-fabric'
+import {
+  DatePicker,
+  DateRangeType,
+  DayOfWeek,
+  FirstWeekOfYear,
+  IContextualMenuItem,
+  IDatePickerProps
+} from 'office-ui-fabric'
 import React from 'react'
 import * as excelUtils from 'utils/exportExcel'
 import { ISummaryViewContext } from './context'
@@ -59,10 +66,13 @@ export const commandBar = (context: ISummaryViewContext) => {
                     value={context.range.from.jsDate}
                     minDate={context.range.to.add('-8week').startOfWeek.jsDate}
                     maxDate={context.range.to.add('-2w').startOfWeek.jsDate}
-                    onSelectDate={date => context.dispatch({
-                      type: 'SET_RANGE',
-                      payload: { from: new DateObject(date).startOfWeek },
-                    })} />
+                    onSelectDate={(date) =>
+                      context.dispatch({
+                        type: 'SET_RANGE',
+                        payload: { from: new DateObject(date).startOfWeek }
+                      })
+                    }
+                  />
                 </div>
               )
             },
@@ -76,10 +86,13 @@ export const commandBar = (context: ISummaryViewContext) => {
                     minDate={context.range.from.add('2w').endOfWeek.jsDate}
                     maxDate={context.range.from.add('8w').endOfWeek.jsDate}
                     value={context.range.to.jsDate}
-                    onSelectDate={date => context.dispatch({
-                      type: 'SET_RANGE',
-                      payload: { to: new DateObject(date).endOfWeek },
-                    })} />
+                    onSelectDate={(date) =>
+                      context.dispatch({
+                        type: 'SET_RANGE',
+                        payload: { to: new DateObject(date).endOfWeek }
+                      })
+                    }
+                  />
                 </div>
               )
             }

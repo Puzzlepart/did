@@ -32,7 +32,7 @@ export const SummaryView = (): JSX.Element => {
     variables: {
       query: {
         startDateTime: state.range.from.format(),
-        endDateTime: state.range.to.format(),
+        endDateTime: state.range.to.format()
       }
     }
   })
