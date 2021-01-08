@@ -8,7 +8,7 @@ export default class {
     public projects: Project[],
     public customers: Customer[],
     public labels: LabelObject[]
-  ) {}
+  ) { }
 
   /**
    * Find project suggestions using findBestMatch from string-similarity
@@ -137,18 +137,8 @@ export default class {
     // We search the whole srchStr for match in non-strict/soft mode
     else {
       const softMatches = this._searchString(srchStr, false)
-      event.project = find(this.projects, (p) => !!find(softMatches, (m) => m.id === p.id))
-      if (event.project) {
-        event.customer = find(this.customers, (c) => {
-          const match = find(
-            softMatches,
-            (m) => m.customerKey === c.key && m.projectKey === event.project.projectKey
-          )
-          if (!match) return false
-          projectKey = match.projectKey
-          return true
-        })
-      }
+      event.project = find(this.projects, ({ id }) => !!find(softMatches, (m) => m.id === id))
+      event.customer = find(this.customers, ({ key }) => key === event.project?.customerKey)
     }
 
     // We look for project suggestions in case of e.g. typo

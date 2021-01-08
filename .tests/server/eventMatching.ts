@@ -63,6 +63,7 @@ describe(header('Event matching'), async () => {
     it('{ABS VAK} should suggest {ABS VAC}', () => {
       testEvent.categories.push('ABS VAK')
       const event = first(eventMatching.matchEvents([testEvent]))
+      console.log(event)
       strictEqual(event.suggestedProject.id, 'ABS VAC')
     })
 
