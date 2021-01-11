@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## UNRELEASED (0.9.1 - 0.10.0)
+### Added
+### Fixed
+- Fixed issue where sunday hours would not be counted when confirming a week #785
+### Changed
+- Consolidated Server and Client date utils #771
+### Removed
+
 ## 0.9.0 - 15.12.2020
 ### Added
 - Changes to forecast/confirm actions #605
@@ -23,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Project suggestions in timesheet matching now also works for event body #705
 
 ### Fixed
-- Timesheet: fixed issue where ignored events were not persisted #730
+- Fixed issue where ignored events were not persisted #730
 - Minor UI adjustments in Timesheet
 - Fixes in matching engine #603
 - Issue with appointments occuring around midnight Sunday #703
