@@ -2,6 +2,7 @@
 import arraySort from 'array-sort'
 import { createTableService } from 'azure-storage'
 import 'reflect-metadata'
+import { DateObject } from '../../../shared/utils/date'
 import { Inject, Service } from 'typedi'
 import { omit } from 'underscore'
 import AzTableUtilities from '../../utils/table'
@@ -264,7 +265,7 @@ class AzStorageService {
           q.date,
           q.greaterThan
         ],
-        ['EndDateTime', this.tableUtil.convertToAzDate(queryValues.endDateTime), q.date, q.lessThan]
+        ['EndDateTime', this.tableUtil.convertToAzDate(new DateObject(queryValues.endDateTime).add('1d').jsDate), q.date, q.lessThan]
       ]
       const query = this.tableUtil.createAzQuery(1000, filter)
       const tableName = options.forecast

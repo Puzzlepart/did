@@ -7,8 +7,7 @@
     "server/**/*js": true,
     "server/**/*js.map": true,
     "server/views/index.hbs": true,
-    "server/public/js": true,
-    "server-dist": true
+    "server/public/js": true
   },
   "javascript.validate.enable": false,
   "i18n-ally.localesPaths": "./client/i18n",
