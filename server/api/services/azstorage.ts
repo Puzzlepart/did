@@ -264,7 +264,7 @@ class AzStorageService {
           q.date,
           q.greaterThan
         ],
-        ['EndDateTime', this.tableUtil.convertToAzDate(queryValues.endDateTime), q.date, q.lessThan]
+        ['EndDateTime', this.tableUtil.convertToAzDate(queryValues.endDateTime), q.date, q.lessThanOrEqual]
       ]
       const query = this.tableUtil.createAzQuery(1000, filter)
       const tableName = options.forecast
