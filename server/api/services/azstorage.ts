@@ -2,7 +2,7 @@
 import arraySort from 'array-sort'
 import { createTableService } from 'azure-storage'
 import 'reflect-metadata'
-import { DateObject } from 'shared/utils/date'
+import { DateObject } from '../../../shared/utils/date'
 import { Inject, Service } from 'typedi'
 import { omit } from 'underscore'
 import AzTableUtilities from '../../utils/table'
