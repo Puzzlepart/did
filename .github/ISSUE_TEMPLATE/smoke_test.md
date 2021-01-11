@@ -30,7 +30,7 @@ You can see active smoke test issues [here](https://github.com/Puzzlepart/did/is
 - [ ] I have forecasted the current week **$1.2.7**
 - [ ] I have forecasted a week in the future **$1.2.8**
 - [ ] I have confirmed a week in the future **$1.2.9**
-- [ ] I have verified that the number of hours before and after confirming is equal **$1.2.19**
+- [ ] I have verified that the number of hours before and after confirming is equal **$1.2.10**
 
 # Projects $2
 
