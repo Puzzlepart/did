@@ -8,11 +8,11 @@
   },
   "scripts": {
     "watch": "concurrently \"npm run watch:client\" \"npm run watch:server\" \"node .tasks/open.js\" \"node .tasks/localtunnel.js\"",
-    "start": "node ./server-dist/index.js",
+    "start": "node ./dist/server/index.js",
     "watch:server": "nodemon",
     "watch:client": "webpack",
     "package:client": "webpack",
-    "build:server": "tsc --project tsconfig.json && copyfiles -u 1 \"server/public/**/*\" server-dist",
+    "build:server": "tsc --project tsconfig.json && copyfiles -u 1 \"server/public/**/*\" dist/server",
     "debug:server": "npm run-script build:server; npx ts-node ./server/index.ts -T --inspect --wait",
     "lint": "eslint --ext .ts,.tsx ./client ./server --color && npm run prettier",
     "lint:fix": "eslint --ext .ts,.tsx ./client ./server --color --fix && npm run prettier",

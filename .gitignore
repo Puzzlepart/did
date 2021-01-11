@@ -30,7 +30,7 @@ server/views/index.hbs.gz
 
 server/**/*.js
 server/**/*.js.map
-server-dist
+dist
 
 # Lock files
 pnpm-lock.yaml
