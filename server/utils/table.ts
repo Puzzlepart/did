@@ -122,10 +122,10 @@ class AzTableUtilities {
   /**
    * Converts the date string to azure table storage date format
    *
-   * @param {string | number | Date} dateString The date string to convert
+   * @param {string | number | Date} date The date string to convert
    */
-  convertToAzDate(dateString: string | number | Date) {
-    if (dateString) return this.azEntGen().datetime(new Date(dateString))._
+  convertToAzDate(date: string | number | Date) {
+    if (date) return this.azEntGen().datetime(new Date(date))._
     return null
   }
 

@@ -11,7 +11,7 @@ const debug = require('debug')('webpack')
 /** CONSTANTS */
 const MODE = process.env.NODE_ENV === 'development' ? 'development' : 'production'
 const IS_DEVELOPMENT = MODE === 'development'
-const SERVER_DIST = IS_DEVELOPMENT ? 'server' : 'server-dist'
+const SERVER_DIST = IS_DEVELOPMENT ? 'server' : 'dist'
 const BUNDLE_FILE_NAME = `[name].${version}.[hash].js`
 const HTML_PLUGIN_FILE_NAME = IS_DEVELOPMENT ? resolve(__dirname, 'server/views/@template_dev.hbs') : resolve(__dirname, 'server/views/@template.hbs')
 const SRC_PATH = resolve(__dirname, 'client/')

@@ -24,7 +24,7 @@
       "passport",
       "@custom-types"
     ],
-    "outDir": "server-dist"
+    "outDir": "dist"
   },
   "include": ["./server/**/*.ts"],
   "exclude": ["./node_modules"]
