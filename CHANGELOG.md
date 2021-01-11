@@ -6,10 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 0.10.0 - TBA
 ### Added
+
 ### Fixed
 - Fixed issue where sunday hours would not be counted when confirming a week #785
+
 ### Changed
 - Consolidated Server and Client date utils #771
+
 ### Removed
 
 ## 0.9.0 - 15.12.2020
