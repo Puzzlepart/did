@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.10.0 - TBA
+### Added
+- Support for split week, split year scenarios #753
+- Last Year option to reports #775
+
+### Fixed
+- Issue where sunday hours would not be displayed in the UI after confirming a week #785
+- Issue where moving an event from a confirmed week to an unconfirmed week would cause an error #766
+- Minor visual bug in unmatched hours #773
+- Issue where confirmed hours would be skewed forward one hour #760
+- Issue with navigating between tabs in Projects #749
+
+### Changed
+- Consolidated Server and Client date utils #771
+- Summary view now using datepicker instead of slider #777
+
 ## 0.9.0 - 15.12.2020
 ### Added
 - Changes to forecast/confirm actions #605
@@ -23,7 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Project suggestions in timesheet matching now also works for event body #705
 
 ### Fixed
-- Timesheet: fixed issue where ignored events were not persisted #730
+- Fixed issue where ignored events were not persisted #730
 - Minor UI adjustments in Timesheet
 - Fixes in matching engine #603
 - Issue with appointments occuring around midnight Sunday #703
