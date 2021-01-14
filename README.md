@@ -1,4 +1,4 @@
-# did [![version](https://img.shields.io/badge/version-0.9.2-green.svg)](https://semver.org)
+# did [![version](https://img.shields.io/badge/version-0.9.3-green.svg)](https://semver.org)
 
 ⏲️&nbsp;&nbsp;_the calendar is your timesheet_ &nbsp;⏲️
 
@@ -16,8 +16,8 @@ _**Next release is [Fluor](https://github.com/Puzzlepart/did365/milestone/9)&nbs
 | [🌱 &nbsp;6 - &nbsp;Carbon](https://github.com/Puzzlepart/did365/milestone/6)   | 09.09.2020   |  [![version](https://img.shields.io/badge/version-0.7.0-green.svg)](https://semver.org)                                                       |
 | [💨 &nbsp;7 - &nbsp;Nitrogen](https://github.com/Puzzlepart/did365/milestone/7) | 15.10.2020   |  [![version](https://img.shields.io/badge/version-0.8.0-green.svg)](https://semver.org)                                                        |
 | [🅾️ &nbsp;8 - &nbsp;Oxygen](https://github.com/Puzzlepart/did365/milestone/8)   | 15.12.2020   |    [![version](https://img.shields.io/badge/version-0.9.0-green.svg)](https://semver.org)                                                            |
-| [🦷 &nbsp;9 - &nbsp;Fluor](https://github.com/Puzzlepart/did365/milestone/9)    | 15.02.2021   | [![version](https://img.shields.io/badge/version-1.0.0-yellow.svg)](https://semver.org) |
-| [💡 &nbsp;10 - &nbsp;Neon](https://github.com/Puzzlepart/did365/milestone/10)    | Q1 2021   | [![version](https://img.shields.io/badge/version-1.1.0-red.svg)](https://semver.org) |
+| [🦷 &nbsp;9 - &nbsp;Fluor](https://github.com/Puzzlepart/did365/milestone/9)    | 15.02.2021   | [![version](https://img.shields.io/badge/version-0.10.0-yellow.svg)](https://semver.org) |
+| [💡 &nbsp;10 - &nbsp;Neon](https://github.com/Puzzlepart/did365/milestone/10)    | Q1 2021   | [![version](https://img.shields.io/badge/version-0.11.0-red.svg)](https://semver.org) |
 
 ### Environments
 
