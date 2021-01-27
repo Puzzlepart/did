@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Issue where confirmed hours would be skewed forward one hour #760
 - Issue with navigating between tabs in Projects #749
 - Issue with rogue customer matches in large event bodies #782
+- Issue with time entry queries in Reports #790
 
 ### Changed
 - Consolidated Server and Client date utils #771
