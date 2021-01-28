@@ -16,7 +16,7 @@ export default session({
   secret: env('SESSION_SIGNING_KEY'),
   resave: false,
   saveUninitialized: false,
-  rolling: true,
+  rolling: false,
   cookie: { secure: env('SESSION_SECURE', '0') === '1' },
   unset: 'destroy'
 })
