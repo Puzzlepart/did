@@ -8,7 +8,7 @@ export default class {
     public projects: Project[],
     public customers: Customer[],
     public labels: LabelObject[]
-  ) { }
+  ) {}
 
   /**
    * Find project suggestions using findBestMatch from string-similarity

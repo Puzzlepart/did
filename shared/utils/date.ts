@@ -59,7 +59,7 @@ export class DateUtils {
 
   /**
    * Get duration string
-   * 
+   *
    * Using solution from https://stackoverflow.com/questions/1458633/how-to-deal-with-floating-point-number-precision-in-javascript
    * to handle floating point number precision.
    *
