@@ -1,6 +1,6 @@
 /* eslint-disable max-classes-per-file */
 import arraySort from 'array-sort'
-import { createTableService } from 'azure-storage'
+import { createTableService, services } from 'azure-storage'
 import 'reflect-metadata'
 import { DateObject } from '../../../shared/utils/date'
 import { Inject, Service } from 'typedi'
@@ -53,12 +53,12 @@ class AzStorageService {
    * @param {string} createdBy Created by ID
    * @param {boolean} update Update the existing label
    */
-  async addOrUpdateLabel(label: any, createdBy: string, update: boolean) {
+  async addOrUpdateLabel(label: any, createdBy: string, update: boolean): Promise<services.table.TableService.EntityMetadata>  {
     const entity = this.tableUtil.convertToAzEntity(label.name, {
       ...omit(label, 'name'),
       createdBy
     })
-    let result: any
+    let result: services.table.TableService.EntityMetadata
     if (update) result = await this.tableUtil.updateAzEntity(this.tables.labels, entity, true)
     else result = await this.tableUtil.addAzEntity(this.tables.labels, entity)
     return result
@@ -105,12 +105,12 @@ class AzStorageService {
    * @param {string} createdBy Created by ID
    * @param {boolean} update Update the existing customer
    */
-  async createOrUpdateCustomer(customer: any, createdBy: string, update: boolean) {
+  async createOrUpdateCustomer(customer: any, createdBy: string, update: boolean): Promise<services.table.TableService.EntityMetadata> {
     const entity = this.tableUtil.convertToAzEntity(customer.key.toUpperCase(), {
       ...omit(customer, 'key'),
       createdBy
     })
-    let result
+    let result: services.table.TableService.EntityMetadata
     if (update) result = await this.tableUtil.updateAzEntity(this.tables.customers, entity, true)
     else result = await this.tableUtil.addAzEntity(this.tables.customers, entity)
     return result
@@ -182,9 +182,14 @@ class AzStorageService {
    * Get users from table storage
    *
    * @param {string} orderBy Order by
+   * @param {any} queryValues Query values
    */
-  async getUsers(orderBy?: string): Promise<any[]> {
-    const query = this.tableUtil.createAzQuery(1000)
+  async getUsers(orderBy?: string, queryValues: any = {}): Promise<any[]> {
+    const { string, equal } = this.tableUtil.query()
+    const filter = [
+      ['Role', queryValues?.role, string, equal],
+    ]
+    const query = this.tableUtil.createAzQuery(1000, filter)
     const { entries: users } = await this.tableUtil.queryAzTable(this.tables.users, query, {
       columnMap: { RowKey: 'id' },
       orderBy
@@ -558,7 +563,7 @@ class AzStorageService {
    * @param {any} role The role data
    * @param {boolean} update Update the existing role
    */
-  async addOrUpdateRole(role: any, update: boolean) {
+  async addOrUpdateRole(role: any, update: boolean): Promise<services.table.TableService.EntityMetadata> {
     const entity = this.tableUtil.convertToAzEntity(
       role.name,
       {
@@ -570,7 +575,7 @@ class AzStorageService {
         typeMap: {}
       }
     )
-    let result
+    let result: services.table.TableService.EntityMetadata
     if (update) result = await this.tableUtil.updateAzEntity(this.tables.roles, entity, true)
     else result = await this.tableUtil.addAzEntity(this.tables.roles, entity)
     return result
