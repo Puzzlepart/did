@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { pick } from 'underscore'
+import { isEmpty, pick } from 'underscore'
 import { AzStorageService } from '../../services'
 import { IAuthOptions } from '../authChecker'
 import { Role, RoleInput } from './role.types'
@@ -17,7 +17,7 @@ export class RoleResolver {
    *
    * @param {AzStorageService} _azstorage AzStorageService
    */
-  constructor(private readonly _azstorage: AzStorageService) {}
+  constructor(private readonly _azstorage: AzStorageService) { }
 
   /**
    * Get roles
