@@ -575,6 +575,24 @@ class AzStorageService {
     else result = await this.tableUtil.addAzEntity(this.tables.roles, entity)
     return result
   }
+
+  /**
+   * Delete role from table storage
+   *
+   * @param {string} key Role name
+   */
+  async deleteRole(name: string) {
+    const { string } = this.tableUtil.azEntGen()
+    try {
+      const result = await this.tableUtil.deleteEntity(this.tables.roles, {
+        PartitionKey: string('Default'),
+        RowKey: string(name)
+      })
+      return result
+    } catch (error) {
+      throw error
+    }
+  }
 }
 
 export default AzStorageService
