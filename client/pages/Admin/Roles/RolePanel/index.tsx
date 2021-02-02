@@ -124,11 +124,12 @@ export const RolePanel: FunctionComponent<IRolePanelProps> = (props: IRolePanelP
             <DefaultButton
               className={styles.deleteBtn}
               text={t('common.delete')}
+              iconProps={{ iconName: 'Delete' }}
               onClick={onDelete}
             />
           ) : (
-            <UserMessage text={t('admin.roleInUseMessage', { count: data?.users?.length })} />
-          )}
+              <UserMessage text={t('admin.roleInUseMessage', { count: data?.users?.length })} />
+            )}
           <PrimaryButton
             className={styles.saveBtn}
             text={t('common.save')}
