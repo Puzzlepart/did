@@ -84,4 +84,3 @@ export class UserQuery {
   @Field({ nullable: true })
   role?: string
 }
-

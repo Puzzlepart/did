@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { isEmpty, pick } from 'underscore'
+import { pick } from 'underscore'
 import { AzStorageService } from '../../services'
 import { IAuthOptions } from '../authChecker'
 import { Role, RoleInput } from './role.types'
@@ -17,7 +17,7 @@ export class RoleResolver {
    *
    * @param {AzStorageService} _azstorage AzStorageService
    */
-  constructor(private readonly _azstorage: AzStorageService) { }
+  constructor(private readonly _azstorage: AzStorageService) {}
 
   /**
    * Get roles
@@ -62,9 +62,7 @@ export class RoleResolver {
    */
   @Authorized<IAuthOptions>({ permission: 'cd52a735' })
   @Mutation(() => BaseResult, { description: 'Delete role' })
-  async deleteRole(
-    @Arg('name', () => String) name: string
-  ) {
+  async deleteRole(@Arg('name', () => String) name: string) {
     try {
       await this._azstorage.deleteRole(name)
       return { success: true, error: null }

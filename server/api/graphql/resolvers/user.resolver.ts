@@ -23,7 +23,7 @@ export class UserResolver {
   constructor(
     private readonly _azstorage: AzStorageService,
     private readonly _msgraph: MSGraphService
-  ) { }
+  ) {}
 
   /**
    * Get current user
@@ -67,7 +67,7 @@ export class UserResolver {
   @Query(() => [User], { description: 'Get users' })
   async users(
     @Arg('options', () => UserQueryOptions, { nullable: true }) options: UserQueryOptions,
-    @Arg('query', () => UserQuery, { nullable: true }) query: UserQuery,
+    @Arg('query', () => UserQuery, { nullable: true }) query: UserQuery
   ) {
     // eslint-disable-next-line prefer-const
     let [users, roles] = await Promise.all([

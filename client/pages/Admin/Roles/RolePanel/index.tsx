@@ -69,7 +69,7 @@ export const RolePanel: FunctionComponent<IRolePanelProps> = (props: IRolePanelP
   async function onDelete() {
     await deleteRole({
       variables: {
-        name: model.name,
+        name: model.name
       }
     })
     props.onSave()
@@ -120,23 +120,22 @@ export const RolePanel: FunctionComponent<IRolePanelProps> = (props: IRolePanelP
           ))}
         </div>
         <div className={styles.actions}>
-          {isEmpty(data?.users)
-            ? (
-              <DefaultButton
-                className={styles.deleteBtn}
-                text={t('common.delete')}
-                onClick={onDelete} />
-            )
-            : (
-              <UserMessage text={t('admin.roleInUseMessage', { count: data?.users?.length })} />
-            )}
+          {isEmpty(data?.users) ? (
+            <DefaultButton
+              className={styles.deleteBtn}
+              text={t('common.delete')}
+              onClick={onDelete}
+            />
+          ) : (
+            <UserMessage text={t('admin.roleInUseMessage', { count: data?.users?.length })} />
+          )}
           <PrimaryButton
             className={styles.saveBtn}
             text={t('common.save')}
             onClick={onSave}
             disabled={saveDisabled}
           />
-        </div>  
+        </div>
       </div>
     </Panel>
   )

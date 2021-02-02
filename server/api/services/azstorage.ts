@@ -53,7 +53,11 @@ class AzStorageService {
    * @param {string} createdBy Created by ID
    * @param {boolean} update Update the existing label
    */
-  async addOrUpdateLabel(label: any, createdBy: string, update: boolean): Promise<services.table.TableService.EntityMetadata>  {
+  async addOrUpdateLabel(
+    label: any,
+    createdBy: string,
+    update: boolean
+  ): Promise<services.table.TableService.EntityMetadata> {
     const entity = this.tableUtil.convertToAzEntity(label.name, {
       ...omit(label, 'name'),
       createdBy
@@ -105,7 +109,11 @@ class AzStorageService {
    * @param {string} createdBy Created by ID
    * @param {boolean} update Update the existing customer
    */
-  async createOrUpdateCustomer(customer: any, createdBy: string, update: boolean): Promise<services.table.TableService.EntityMetadata> {
+  async createOrUpdateCustomer(
+    customer: any,
+    createdBy: string,
+    update: boolean
+  ): Promise<services.table.TableService.EntityMetadata> {
     const entity = this.tableUtil.convertToAzEntity(customer.key.toUpperCase(), {
       ...omit(customer, 'key'),
       createdBy
@@ -186,9 +194,7 @@ class AzStorageService {
    */
   async getUsers(orderBy?: string, queryValues: any = {}): Promise<any[]> {
     const { string, equal } = this.tableUtil.query()
-    const filter = [
-      ['Role', queryValues?.role, string, equal],
-    ]
+    const filter = [['Role', queryValues?.role, string, equal]]
     const query = this.tableUtil.createAzQuery(1000, filter)
     const { entries: users } = await this.tableUtil.queryAzTable(this.tables.users, query, {
       columnMap: { RowKey: 'id' },
@@ -270,7 +276,12 @@ class AzStorageService {
           q.date,
           q.greaterThan
         ],
-        ['EndDateTime', this.tableUtil.convertToAzDate(new DateObject(queryValues.endDateTime).add('1d').jsDate), q.date, q.lessThan]
+        [
+          'EndDateTime',
+          this.tableUtil.convertToAzDate(new DateObject(queryValues.endDateTime).add('1d').jsDate),
+          q.date,
+          q.lessThan
+        ]
       ]
       const query = this.tableUtil.createAzQuery(1000, filter)
       const tableName = options.forecast
@@ -563,7 +574,10 @@ class AzStorageService {
    * @param {any} role The role data
    * @param {boolean} update Update the existing role
    */
-  async addOrUpdateRole(role: any, update: boolean): Promise<services.table.TableService.EntityMetadata> {
+  async addOrUpdateRole(
+    role: any,
+    update: boolean
+  ): Promise<services.table.TableService.EntityMetadata> {
     const entity = this.tableUtil.convertToAzEntity(
       role.name,
       {
