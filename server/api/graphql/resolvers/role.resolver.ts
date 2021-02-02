@@ -52,4 +52,27 @@ export class RoleResolver {
       }
     }
   }
+
+  /**
+   * Delete role
+   *
+   * @permission MANAGE_ROLESPERMISSIONS (cd52a735)
+   *
+   * @param {string} name Name
+   */
+  @Authorized<IAuthOptions>({ permission: 'cd52a735' })
+  @Mutation(() => BaseResult, { description: 'Delete role' })
+  async deleteRole(
+    @Arg('name', () => String) name: string
+  ) {
+    try {
+      await this._azstorage.deleteRole(name)
+      return { success: true, error: null }
+    } catch (error) {
+      return {
+        success: false,
+        error: pick(error, 'name', 'message', 'code', 'statusCode')
+      }
+    }
+  }
 }
