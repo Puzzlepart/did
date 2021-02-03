@@ -1,13 +1,15 @@
 {
   "files.exclude": {
     "node_modules": true,
-    "client/**/*js": true,
-    "client/**/*js.map": true,
-    "client/**/*d.ts": true,
-    "server/**/*js": true,
-    "server/**/*js.map": true,
+    "client/**/*.js": true,
+    "client/**/*.js.map": true,
+    "client/**/*.d.ts": true,
+    "server/**/*.js": true,
+    "server/**/*.js.map": true,
     "server/views/index.hbs": true,
-    "server/public/js": true
+    "server/public/js": true,
+    "dist": true,
+    ".assets": true
   },
   "javascript.validate.enable": false,
   "i18n-ally.localesPaths": "./client/i18n",

@@ -30,6 +30,13 @@ export function getSummary(timeentries: any[], t: TFunction) {
         filter(timeentries, (entry) => entry.year === new Date().getFullYear()),
         'duration'
       )
+    },
+    {
+      label: t('common.totalHours'),
+      value: getSum(
+        timeentries,
+        'duration'
+      )
     }
   ]
 }

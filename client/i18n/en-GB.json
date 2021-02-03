@@ -297,7 +297,8 @@
     "exportTypeLastYear": "Last year ({{year}})",
     "fromDateLabel": "From:",
     "toDateLabel": "To:",
-    "rangeLabel": "Range"
+    "rangeLabel": "Range",
+    "totalHours": "Hours total"
   },
   "navigation": {
     "timesheet": "Timesheet",
