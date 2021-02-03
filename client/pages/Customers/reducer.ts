@@ -5,9 +5,7 @@ import { Customer } from 'types'
 import { contains, find } from 'underscore'
 import { CustomersView, ICustomersParams, ICustomersState } from './types'
 
-export const DATA_UPDATED = createAction<{ query: QueryResult<any> }>(
-  'DATA_UPDATED'
-)
+export const DATA_UPDATED = createAction<{ query: QueryResult<any> }>('DATA_UPDATED')
 export const SET_SELECTED_CUSTOMER = createAction<{ customer: Customer }>('SET_SELECTED_CUSTOMER')
 export const CHANGE_VIEW = createAction<{ view: CustomersView }>('CHANGE_VIEW')
 
@@ -41,12 +39,15 @@ export default ({ params }: ICreateReducerParams) =>
       }
     },
 
-    [SET_SELECTED_CUSTOMER.type]: (state, { payload }: ReturnType<typeof SET_SELECTED_CUSTOMER>) => {
+    [SET_SELECTED_CUSTOMER.type]: (
+      state,
+      { payload }: ReturnType<typeof SET_SELECTED_CUSTOMER>
+    ) => {
       state.selected = payload.customer
     },
 
     [CHANGE_VIEW.type]: (state, { payload }: ReturnType<typeof CHANGE_VIEW>) => {
       state.view = payload.view
       state.selected = null
-    },
+    }
   })

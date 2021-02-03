@@ -40,9 +40,7 @@ export const Customers: FunctionComponent = () => {
     <CustomersContext.Provider value={ctxValue}>
       <Pivot
         selectedKey={params.view || 'search'}
-        onLinkClick={({ props }) =>
-          dispatch(CHANGE_VIEW({view: props.itemKey as CustomersView }))
-        }
+        onLinkClick={({ props }) => dispatch(CHANGE_VIEW({ view: props.itemKey as CustomersView }))}
         styles={{ itemContainer: { paddingTop: 10 } }}>
         <PivotItem
           itemID='search'
@@ -54,11 +52,11 @@ export const Customers: FunctionComponent = () => {
               {t('common.genericErrorText')}
             </MessageBar>
           ) : (
-              <>
-                <CustomerList />
-                {state.selected && <CustomerDetails />}
-              </>
-            )}
+            <>
+              <CustomerList />
+              {state.selected && <CustomerDetails />}
+            </>
+          )}
         </PivotItem>
         {user.hasPermission(PERMISSION.MANAGE_CUSTOMERS) && (
           <PivotItem
