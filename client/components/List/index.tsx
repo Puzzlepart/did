@@ -82,7 +82,7 @@ const List: FunctionComponent<IListProps> = (props: IListProps) => {
                 dispatch
               })
             }
-            checkboxVisibility={props.checkboxVisibility || CheckboxVisibility.hidden}
+            checkboxVisibility={props.checkboxVisibility ?? CheckboxVisibility.hidden}
           />
         </ScrollablePaneWrapper>
       </FadeIn>

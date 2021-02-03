@@ -1,6 +1,6 @@
 import List from 'components/List'
-import { Checkbox } from 'office-ui-fabric'
-import React, { useEffect, useState, FunctionComponent } from 'react'
+import { Checkbox, CheckboxVisibility, ContextualMenuItemType, SearchBox } from 'office-ui-fabric'
+import React, { FunctionComponent, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { contains, filter, isEmpty } from 'underscore'
 import { withDefaultProps } from 'with-default-props'
@@ -24,6 +24,7 @@ const ProjectList: FunctionComponent<IProjectListProps> = (props: IProjectListPr
       columns={columns(props, t).filter((col) => !contains(props.hideColumns, col.key))}
       groups={props.groups}
       selection={props.selection}
+      checkboxVisibility={CheckboxVisibility.always}
       commandBar={{
         items: [
           {
@@ -39,7 +40,55 @@ const ProjectList: FunctionComponent<IProjectListProps> = (props: IProjectListPr
             )
           }
         ],
-        farItems: []
+        farItems: [
+          {
+            key: 'LAasf',
+            name: 'Label',
+            subMenuProps: {
+              items: [
+                {
+                  key: '01',
+                  text: 'Apply labels',
+                  itemType: ContextualMenuItemType.Header
+                },
+                {
+                  key: '02',
+                  onRender: () => (
+                    <div style={{ padding: 8 }}>
+                      <SearchBox placeholder='Filter labels...' />
+                    </div>
+                  )
+                },
+                {
+                  key: '03',
+                  onRender: () => (
+                    <div style={{ padding: 8, display: 'flex' }}>
+                      <div style={{ marginTop: 2, width: 14, height: 14, borderRadius: 10, backgroundColor: 'rgb(238, 210, 243)' }}>
+
+                      </div>
+                      <div style={{ paddingLeft: 8 }}>
+                        Internal system
+                      </div>
+                    </div>
+                  )
+                },
+                {
+                  key: '04',
+                  onRender: () => (
+                    <div style={{ padding: 8, display: 'flex' }}>
+                      <div style={{ marginTop: 2, width: 14, height: 14, borderRadius: 10, backgroundColor: 'rgb(248, 231, 28)' }}>
+
+                      </div>
+                      <div style={{ paddingLeft: 8 }}>
+                        Crayon timereg
+                      </div>
+                    </div>
+                  )
+                }
+              ]
+            }
+          }
+        ]
       }}
     />
   )

@@ -59,9 +59,9 @@ export const Projects: FunctionComponent = () => {
         onChange: () => dispatch(SET_SELECTED_PROJECT({ project: null }))
       },
       selection: {
-        mode: SelectionMode.single,
+        mode: SelectionMode.multiple,
         onChanged: (selected) => {
-          dispatch(SET_SELECTED_PROJECT({ project: selected }))
+          // dispatch(SET_SELECTED_PROJECT({ project: selected }))
         }
       },
       height: state.selected && 400
