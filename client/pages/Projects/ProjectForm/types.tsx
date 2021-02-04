@@ -23,11 +23,15 @@ export class ProjectModel {
   }
 }
 
+interface IProjectFormPanelProps extends IPanelProps {
+  onSave: () => void
+}
+
 export interface IProjectFormProps {
   /**
-   * Panel props
+   * Panel props provided if the form is rendered within a panel
    */
-  panel?: IPanelProps
+  panel?: IProjectFormPanelProps
 
   /**
    * Project to edit
