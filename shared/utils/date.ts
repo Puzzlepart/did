@@ -70,7 +70,7 @@ export class DateUtils {
    */
   public getDurationString(hours: number, t: TFunction): string {
     const hoursPrecise = parseFloat(parseFloat(hours.toString()).toPrecision(5))
-    const minutes = ((hoursPrecise % 1) * 60)
+    const minutes = parseInt(((hoursPrecise % 1) * 60).toFixed())
     const hrsStr = t('common.hoursShortFormat', { hours: Math.floor(hoursPrecise) })
     const minsStr = t('common.minutesShortFormat', { minutes })
     if (minutes === 0) return hrsStr
