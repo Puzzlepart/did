@@ -1,5 +1,5 @@
 import { QueryResult } from '@apollo/client'
-import { createAction, createReducer } from '@reduxjs/toolkit'
+import { createAction, createReducer, current } from '@reduxjs/toolkit'
 import { IFilter } from 'components/FilterPanel'
 import { IListGroups } from 'components/List/types'
 import { getValue } from 'helpers'
@@ -41,8 +41,10 @@ export default ({ params, queries }: ICreateReducerParams) =>
       },
 
       [ADD_FILTER.type]: (state, { payload }: ReturnType<typeof ADD_FILTER>) => {
-        state.savedFilters.push({ name: payload.name, values: [] })
-        state.filter = { name: payload.name, values: [] }
+        const newFilter = { ...state.filter, name: payload.name }
+        state.savedFilters.push(newFilter)
+        localStorage.setItem('saved_filters', JSON.stringify(current(state).savedFilters))
+        state.filter = newFilter
       },
 
       [TOGGLE_FILTER_PANEL.type]: (state) => {

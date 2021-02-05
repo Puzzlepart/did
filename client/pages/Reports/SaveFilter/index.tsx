@@ -10,9 +10,10 @@ export const SaveFilter = ({ state, dispatch }: ISaveFilterProps) => {
     const [name, setName] = useState(null)
     const [inputVisible, setInputVisible] = useState(false)
     return (
-        <div className={styles.root} hidden={state.timeentries.length === state.subset.length}>
+        <div className={styles.root} hidden={state.timeentries.length === state.subset.length || !!state.filter?.name}>
             <div hidden={!inputVisible}>
                 <TextField
+                    value={name}
                     placeholder={t('reports.filterNamePlaceholder')}
                     onChange={(_, value) => setName(value)} />
             </div>
