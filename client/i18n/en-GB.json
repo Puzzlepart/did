@@ -155,7 +155,8 @@
     "selectReportText": "Select a report above. Be aware that some reports can take several minutes to load.",
     "selectReportLabel": "Select report",
     "forecast": "Forecast",
-    "exportToExcel": "Export to Excel"
+    "exportToExcel": "Export to Excel",
+    "savedFilters": "Saved filters"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",

@@ -154,7 +154,8 @@
     "selectReportText": "Velg en rapport over. \nVær oppmerksom på at noen rapporter kan ta flere minutter å laste inn.",
     "selectReportLabel": "Velg rapport",
     "forecast": "Prognose",
-    "exportToExcel": "Eksporter til Excel"
+    "exportToExcel": "Eksporter til Excel",
+    "savedFilters": "Lagrede filtre"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",
