@@ -4,7 +4,7 @@ import { IFilter } from 'components/FilterPanel'
 import { IListGroups } from 'components/List/types'
 import { getValue } from 'helpers'
 import { filter, find } from 'underscore'
-import { IReportsParams, IReportsQuery, IReportsState } from './types'
+import { IReportsParams, IReportsQuery, IReportsSavedFilter, IReportsState } from './types'
 
 export const INIT = createAction('INIT')
 export const TOGGLE_FILTER_PANEL = createAction('TOGGLE_FILTER_PANEL')
@@ -12,6 +12,8 @@ export const DATA_UPDATED = createAction<{ query: QueryResult }>('DATA_UPDATED')
 export const FILTERS_UPDATED = createAction<{ filters: IFilter[] }>('FILTERS_UPDATED')
 export const CHANGE_QUERY = createAction<{ key: string }>('FILTER_UPDATED')
 export const SET_GROUP_BY = createAction<{ groupBy: IListGroups }>('SET_GROUP_BY')
+export const SET_FILTER = createAction<{ filter: IReportsSavedFilter }>('SET_FILTER')
+
 interface ICreateReducerParams {
   params: IReportsParams
   queries: IReportsQuery[]
@@ -23,6 +25,17 @@ export default ({ params, queries }: ICreateReducerParams) =>
     {
       [INIT.type]: (state) => {
         state.query = find(queries, (q) => q.key === params.query) as any
+        state.savedFilters = JSON.parse(localStorage.saved_filters)
+      },
+
+      [SET_FILTER.type]: (state, { payload }: ReturnType<typeof SET_FILTER>) => {
+        state.subset = filter(state.timeentries, (entry) => {
+          return (
+            filter(Object.keys(payload.filter.values), (key) => {
+              return payload.filter.values[key].indexOf(getValue(entry, key, '')) !== -1
+            }).length === Object.keys(payload.filter.values).length
+          )
+        })
       },
 
       [TOGGLE_FILTER_PANEL.type]: (state) => {
@@ -36,6 +49,8 @@ export default ({ params, queries }: ICreateReducerParams) =>
       },
 
       [FILTERS_UPDATED.type]: (state, { payload }: ReturnType<typeof FILTERS_UPDATED>) => {
+        // eslint-disable-next-line no-console
+        console.log(payload.filters)
         state.subset = filter(state.timeentries, (entry) => {
           return (
             filter(payload.filters, (f) => {
