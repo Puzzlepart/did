@@ -6,16 +6,16 @@ export class ResourceFilter<T = any> extends BaseFilter<T> {
   /**
    * Constructor
    * 
-   * @param keyFieldName Field name for the key
-   * @param valueFieldName Field name for the value
-   * @param name Filter name
+   * @param {string} keyFieldName Field name for the item key
+   * @param {string} valueFieldName Field name for the item value
+   * @param {string} name Filter name
    */
   constructor(
     public keyFieldName: string,
     public valueFieldName: string,
     public name: string,
   ) {
-    super(valueFieldName)
+    super(keyFieldName)
   }
 
   /**
