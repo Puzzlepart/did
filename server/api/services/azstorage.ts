@@ -7,7 +7,7 @@ import { Inject, Service } from 'typedi'
 import { omit } from 'underscore'
 import AzTableUtilities from '../../utils/table'
 import { Context } from '../graphql/context'
-import { Role } from '../graphql/resolvers/types'
+import { Role, TimeEntriesQuery } from '../graphql/resolvers/types'
 import {
   AzStorageServiceTables,
   AzTimeEntry,
@@ -244,10 +244,10 @@ class AzStorageService {
   /**
    * Get time entries from table storage
    *
-   * @param {any} queryValues Query values
+   * @param {TimeEntriesQuery} queryValues Query values
    * @param {any} options Options
    */
-  async getTimeEntries(queryValues: any, options: any = {}) {
+  async getTimeEntries(queryValues: TimeEntriesQuery, options: any = {}) {
     try {
       const q = this.tableUtil.query()
       const filter = [
@@ -261,13 +261,13 @@ class AzStorageService {
         ['Year', queryValues.year, q.int, q.equal],
         [
           'StartDateTime',
-          this.tableUtil.convertToAzDate(queryValues.startDateTime),
+          queryValues.startDateTime && this.tableUtil.convertToAzDate(queryValues.startDateTime),
           q.date,
           q.greaterThan
         ],
         [
           'EndDateTime',
-          this.tableUtil.convertToAzDate(new DateObject(queryValues.endDateTime).add('1d').jsDate),
+          queryValues.endDateTime && this.tableUtil.convertToAzDate(new DateObject(queryValues.endDateTime).add('1d').jsDate),
           q.date,
           q.lessThan
         ]

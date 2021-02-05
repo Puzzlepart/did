@@ -37,7 +37,7 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (props: IProjec
       }
     })
     if (data?.result.success) {
-      if (props.panel) setTimeout(() => props.panel.onDismiss(null), 1000)
+      if (props.panel) setTimeout(() => props.panel.onSave(), 1000)
       else {
         setMessage({
           text: t('projects.createSuccess', {
