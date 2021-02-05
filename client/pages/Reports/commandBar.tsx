@@ -2,16 +2,16 @@ import { AnyAction } from '@reduxjs/toolkit'
 import { TFunction } from 'i18next'
 import {
   ContextualMenuItemType,
-  DefaultButton,
+
   format,
-  IContextualMenuItem,
-  TextField
+  IContextualMenuItem
 } from 'office-ui-fabric'
 import React from 'react'
 import { pick } from 'underscore'
 import { exportExcel } from 'utils/exportExcel'
 import getColumns from './columns'
-import { ADD_FILTER, SET_FILTER, SET_GROUP_BY, TOGGLE_FILTER_PANEL } from './reducer'
+import { SET_FILTER, SET_GROUP_BY, TOGGLE_FILTER_PANEL } from './reducer'
+import { SaveFilter } from './SaveFilter'
 import { getGroupByOptions, IReportsState } from './types'
 interface IReportsCommmandParams {
   state?: IReportsState
@@ -29,12 +29,12 @@ const selectGroupByCmd = ({ state, dispatch, t }: IReportsCommmandParams) => ({
   subMenuProps: {
     items: getGroupByOptions(t).map(
       (opt) =>
-        ({
-          ...pick(opt, 'key', 'text'),
-          canCheck: true,
-          checked: state.groupBy.fieldName === opt.props.fieldName,
-          onClick: () => dispatch(SET_GROUP_BY({ groupBy: opt.props }))
-        } as IContextualMenuItem)
+      ({
+        ...pick(opt, 'key', 'text'),
+        canCheck: true,
+        checked: state.groupBy.fieldName === opt.props.fieldName,
+        onClick: () => dispatch(SET_GROUP_BY({ groupBy: opt.props }))
+      } as IContextualMenuItem)
     )
   }
 })
@@ -78,28 +78,7 @@ const saveFilterCmd = ({ state, dispatch, t }: IReportsCommmandParams): IContext
     items: [
       {
         key: 'SAVE_FILTER',
-        onRender: () => (
-          <div style={{ padding: '8px 12px 8px 12px' }}>
-            <TextField
-              id='reports_saved_filer_name'
-              disabled={state.subset.length === state.timeentries.length || !!state.filter}
-              placeholder={t('reports.filterNamePlaceholder')}
-            />
-            <DefaultButton
-              style={{ marginTop: 4, width: '100%' }}
-              disabled={state.subset.length === state.timeentries.length || !!state.filter}
-              text={t('reports.saveFilterText')}
-              onClick={() => {
-                const input = document.getElementById(
-                  'reports_saved_filer_name'
-                ) as HTMLInputElement
-                const name = input.value
-                dispatch(ADD_FILTER({ name }))
-                input.value = null
-              }}
-            />
-          </div>
-        )
+        onRender: () => <SaveFilter dispatch={dispatch} />
       },
       {
         key: 'DIVIDER_O',
@@ -117,13 +96,13 @@ const saveFilterCmd = ({ state, dispatch, t }: IReportsCommmandParams): IContext
 })
 
 export default ({ state, dispatch, t }) => ({
-  items: !!state.query && !state.loading ? [selectGroupByCmd({ state, dispatch, t })] : [],
+  items: (!!state.query && !state.loading) ? [selectGroupByCmd({ state, dispatch, t })] : [],
   farItems:
-    !!state.query && !state.loading
+    (!!state.query && !state.loading)
       ? [
-          exportToExcelCmd({ state, t }),
-          openFilterPanelCmd({ dispatch }),
-          saveFilterCmd({ state, dispatch, t })
-        ]
+        exportToExcelCmd({ state, t }),
+        saveFilterCmd({ state, dispatch, t }),
+        openFilterPanelCmd({ dispatch }),
+      ]
       : []
 })

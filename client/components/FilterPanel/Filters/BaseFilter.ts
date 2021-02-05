@@ -10,10 +10,8 @@ export interface IFilter {
   selected: IFilterItem[]
 }
 
-export abstract class BaseFilter<T = any> {
+export abstract class BaseFilter<ItemType = any> {
   constructor(public fieldName: string, public name: string) {}
-
-  public abstract initialize(entries: T[]): IFilter
-
-  public abstract setDefaults(values: any): BaseFilter<T>
+  public abstract initialize(items: ItemType[]): IFilter
+  public abstract setDefaults(values: any): BaseFilter<ItemType>
 }
