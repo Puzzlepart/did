@@ -1,8 +1,9 @@
 import { useQuery } from '@apollo/client'
+import { AppContext } from 'AppContext'
 import { FilterPanel, List, UserMessage } from 'components'
 import DateUtils from 'DateUtils'
 import { Pivot, PivotItem, Spinner } from 'office-ui-fabric'
-import React, { useLayoutEffect, useMemo, useReducer } from 'react'
+import React, { useContext, useLayoutEffect, useMemo, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { isEmpty } from 'underscore'
@@ -25,10 +26,11 @@ import { IReportsParams } from './types'
 
 export const Reports = () => {
   const { t } = useTranslation()
+  const app = useContext(AppContext)
   const history = useHistory()
   const params = useParams<IReportsParams>()
   const queries = getQueries(t)
-  const reducer = useMemo(() => createReducer({ params, queries }), [])
+  const reducer = useMemo(() => createReducer({ params, queries, app }), [])
   const [state, dispatch] = useReducer(reducer, {
     loading: true,
     timeentries: [],

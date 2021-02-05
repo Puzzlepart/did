@@ -1,5 +1,6 @@
 import { QueryResult } from '@apollo/client'
 import { createAction, createReducer, current } from '@reduxjs/toolkit'
+import { IAppContext } from 'AppContext'
 import { IFilter } from 'components/FilterPanel'
 import { IListGroups } from 'components/List/types'
 import { getValue } from 'helpers'
@@ -19,15 +20,16 @@ export const REMOVE_SELECTED_FILTER = createAction('REMOVE_SELECTED_FILTER')
 interface ICreateReducerParams {
   params: IReportsParams
   queries: IReportsQuery[]
+  app: IAppContext
 }
 
-export default ({ params, queries }: ICreateReducerParams) =>
+export default ({ params, queries, app }: ICreateReducerParams) =>
   createReducer<IReportsState>(
     {},
     {
       [INIT.type]: (state) => {
         state.query = find(queries, (q) => q.key === params.query) as any
-        state.savedFilters = JSON.parse(localStorage.saved_filters || '[]')
+        state.savedFilters = app.user.configuration.reportFilters
       },
 
       [SET_FILTER.type]: (state, { payload }: ReturnType<typeof SET_FILTER>) => {

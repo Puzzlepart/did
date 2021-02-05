@@ -12,15 +12,29 @@ export class ContextUser {
   public mail: string
   public preferredLanguage: string
 
-  constructor(user?: User) {
-    if (!user) {
+  /**
+   * Constructor
+   * 
+   * @param {User} _user User object
+   */
+  constructor(private _user?: User) {
+    if (!_user) {
       this.preferredLanguage = DEFAULT_LANGUAGE
     } else {
-      this.id = user.id
-      this.displayName = user.displayName
-      this.mail = user.mail
-      this.role = user.role
-      this.preferredLanguage = user.preferredLanguage
+      this.id = _user.id
+      this.displayName = _user.displayName
+      this.mail = _user.mail
+      this.role = _user.role
+      this.preferredLanguage = _user.preferredLanguage
+    }
+  }
+
+  /**
+   * User configuration
+   */
+  public get configuration() {
+    return {
+      reportFilters: JSON.parse(this._user.reportFilters)
     }
   }
 

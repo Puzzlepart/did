@@ -1,14 +1,18 @@
+import { useMutation } from '@apollo/client'
+import { AppContext } from 'AppContext'
 import { DefaultButton, TextField } from 'office-ui-fabric'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ReportsContext } from '../context'
-import { ADD_FILTER } from '../reducer'
+import $addOrUpdateUserConfiguration from './addOrUpdateUserConfiguration.gql'
 import styles from './SaveFilterForm.module.scss'
 import { ISaveFilterFormProps } from './types'
 
 export const SaveFilterForm = (props: ISaveFilterFormProps) => {
     const { t } = useTranslation()
-    const { dispatch, state } = useContext(ReportsContext)
+    const { user } = useContext(AppContext)
+    const { state } = useContext(ReportsContext)
+    const [addOrUpdateUserConfiguration] = useMutation($addOrUpdateUserConfiguration)
     const [name, setName] = useState(null)
     const [inputVisible, setInputVisible] = useState(false)
     return (
@@ -26,9 +30,16 @@ export const SaveFilterForm = (props: ISaveFilterFormProps) => {
                 <div className={styles.saveBtn}>
                     <DefaultButton
                         text={t('reports.saveFilterText')}
-                        onClick={() => {
+                        onClick={async () => {
                             if (inputVisible) {
-                                dispatch(ADD_FILTER({ name }))
+                                await addOrUpdateUserConfiguration({
+                                    variables: {
+                                        userId: user.id,
+                                        configuration: {
+                                            reportFilters: JSON.stringify([])
+                                        }
+                                    }
+                                })
                                 setName(null)
                             } else {
                                 setInputVisible(true)

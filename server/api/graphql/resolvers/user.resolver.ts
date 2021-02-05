@@ -23,7 +23,7 @@ export class UserResolver {
   constructor(
     private readonly _azstorage: AzStorageService,
     private readonly _msgraph: MSGraphService
-  ) {}
+  ) { }
 
   /**
    * Get current user
@@ -116,7 +116,7 @@ export class UserResolver {
     @Arg('configuration', () => UserConfigurationInput) configuration: UserConfigurationInput
   ): Promise<BaseResult> {
     try {
-      await this._azstorage.addOrUpdateUserConfiguration(userId,configuration)
+      await this._azstorage.addOrUpdateUserConfiguration(userId, configuration)
       return { success: true, error: null }
     } catch (error) {
       return {
