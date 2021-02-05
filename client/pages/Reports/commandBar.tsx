@@ -13,19 +13,21 @@ import { SaveFilterForm } from './SaveFilterForm'
 import { getGroupByOptions } from './types'
 /**
  * Select group by command
+ * 
+ * @param {IReportsContext} context Context
  */
-const selectGroupByCmd = ({ state, dispatch, t }: IReportsContext) => ({
+const selectGroupByCmd = (context: IReportsContext) => ({
   key: 'SELECT_GROUP_BY',
-  text: t('common.groupBy'),
+  text: context.t('common.groupBy'),
   iconProps: { iconName: 'GroupList' },
   subMenuProps: {
-    items: getGroupByOptions(t).map(
+    items: getGroupByOptions(context.t).map(
       (opt) =>
       ({
         ...pick(opt, 'key', 'text'),
         canCheck: true,
-        checked: state.groupBy.fieldName === opt.props.fieldName,
-        onClick: () => dispatch(SET_GROUP_BY({ groupBy: opt.props }))
+        checked: context.state.groupBy.fieldName === opt.props.fieldName,
+        onClick: () => context.dispatch(SET_GROUP_BY({ groupBy: opt.props }))
       } as IContextualMenuItem)
     )
   }
@@ -33,17 +35,19 @@ const selectGroupByCmd = ({ state, dispatch, t }: IReportsContext) => ({
 
 /**
  * Export to Excel command
+ * 
+ * @param {IReportsContext} context Context
  */
-const exportToExcelCmd = ({ state, t }: IReportsContext) => ({
+const exportToExcelCmd = (context: IReportsContext) => ({
   key: 'EXPORT_TO_EXCEL',
-  text: t('reports.exportToExcel'),
+  text: context.t('reports.exportToExcel'),
   onClick: () => {
     const fileName = format(
-      state.query.exportFileName,
+      context.state.query.exportFileName,
       new Date().toDateString().split(' ').join('-')
     )
-    exportExcel(state.subset, {
-      columns: getColumns({}, t),
+    exportExcel(context.state.subset, {
+      columns: getColumns({}, context.t),
       fileName
     })
   },
@@ -52,20 +56,24 @@ const exportToExcelCmd = ({ state, t }: IReportsContext) => ({
 
 /**
  * Open filter panel command
+ * 
+ * @param {IReportsContext} context Context
  */
-const openFilterPanelCmd = ({ dispatch }: IReportsContext) => ({
+const openFilterPanelCmd = (context: IReportsContext) => ({
   key: 'OPEN_FILTER_PANEL',
   iconProps: { iconName: 'Filter' },
   iconOnly: true,
-  onClick: () => dispatch(TOGGLE_FILTER_PANEL())
+  onClick: () => context.dispatch(TOGGLE_FILTER_PANEL())
 })
 
 /**
  * Save filter  command
+ * 
+ * @param {IReportsContext} context Context
  */
-const saveFilterCmd = ({ state, dispatch, t }: IReportsContext): IContextualMenuItem => ({
+const saveFilterCmd = (context: IReportsContext): IContextualMenuItem => ({
   key: 'SAVED_FILTERS',
-  text: t('reports.savedFilters'),
+  text: context.t('reports.savedFilters'),
   subMenuProps: {
     items: [
       {
@@ -76,12 +84,12 @@ const saveFilterCmd = ({ state, dispatch, t }: IReportsContext): IContextualMenu
         key: 'DIVIDER_O',
         itemType: ContextualMenuItemType.Divider
       },
-      ...state.savedFilters.map((filter, idx) => ({
+      ...context.state.savedFilters.map((filter, idx) => ({
         key: idx.toString(),
         text: filter.name,
         canCheck: true,
-        checked: filter.name === state.filter?.name,
-        onClick: () => dispatch(SET_FILTER({ filter }))
+        checked: filter.name === context.state.filter?.name,
+        onClick: () => context.dispatch(SET_FILTER({ filter }))
       }))
     ]
   }
