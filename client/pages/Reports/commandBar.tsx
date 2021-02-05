@@ -1,6 +1,12 @@
 import { AnyAction } from '@reduxjs/toolkit'
 import { TFunction } from 'i18next'
-import { ContextualMenuItemType, DefaultButton, format, IContextualMenuItem, TextField } from 'office-ui-fabric'
+import {
+  ContextualMenuItemType,
+  DefaultButton,
+  format,
+  IContextualMenuItem,
+  TextField
+} from 'office-ui-fabric'
 import React from 'react'
 import { pick } from 'underscore'
 import { exportExcel } from 'utils/exportExcel'
@@ -23,12 +29,12 @@ const selectGroupByCmd = ({ state, dispatch, t }: IReportsCommmandParams) => ({
   subMenuProps: {
     items: getGroupByOptions(t).map(
       (opt) =>
-      ({
-        ...pick(opt, 'key', 'text'),
-        canCheck: true,
-        checked: state.groupBy.fieldName === opt.props.fieldName,
-        onClick: () => dispatch(SET_GROUP_BY({ groupBy: opt.props }))
-      } as IContextualMenuItem)
+        ({
+          ...pick(opt, 'key', 'text'),
+          canCheck: true,
+          checked: state.groupBy.fieldName === opt.props.fieldName,
+          onClick: () => dispatch(SET_GROUP_BY({ groupBy: opt.props }))
+        } as IContextualMenuItem)
     )
   }
 })
@@ -77,13 +83,16 @@ const saveFilterCmd = ({ state, dispatch, t }: IReportsCommmandParams): IContext
             <TextField
               id='reports_saved_filer_name'
               disabled={state.subset.length === state.timeentries.length || !!state.filter}
-              placeholder={t('reports.filterNamePlaceholder')} />
+              placeholder={t('reports.filterNamePlaceholder')}
+            />
             <DefaultButton
               style={{ marginTop: 4, width: '100%' }}
               disabled={state.subset.length === state.timeentries.length || !!state.filter}
               text={t('reports.saveFilterText')}
               onClick={() => {
-                const input = (document.getElementById('reports_saved_filer_name') as HTMLInputElement)
+                const input = document.getElementById(
+                  'reports_saved_filer_name'
+                ) as HTMLInputElement
                 const name = input.value
                 dispatch(ADD_FILTER({ name }))
                 input.value = null
@@ -108,14 +117,13 @@ const saveFilterCmd = ({ state, dispatch, t }: IReportsCommmandParams): IContext
 })
 
 export default ({ state, dispatch, t }) => ({
-  items: (!!state.query && !state.loading)
-    ? [selectGroupByCmd({ state, dispatch, t })]
-    : [],
-  farItems: (!!state.query && !state.loading)
-    ? [
-      exportToExcelCmd({ state, t }),
-      openFilterPanelCmd({ dispatch }),
-      saveFilterCmd({ state, dispatch, t })
-    ]
-    : []
+  items: !!state.query && !state.loading ? [selectGroupByCmd({ state, dispatch, t })] : [],
+  farItems:
+    !!state.query && !state.loading
+      ? [
+          exportToExcelCmd({ state, t }),
+          openFilterPanelCmd({ dispatch }),
+          saveFilterCmd({ state, dispatch, t })
+        ]
+      : []
 })

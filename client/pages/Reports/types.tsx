@@ -24,8 +24,8 @@ export interface IGroupByOption extends IContextualMenuItem {
 }
 
 export interface IReportsSavedFilter {
-  name: string;
-  values: { [key: string]: any };
+  name: string
+  values: { [key: string]: any }
 }
 
 export interface IReportsState {

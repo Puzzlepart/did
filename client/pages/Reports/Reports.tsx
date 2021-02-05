@@ -55,11 +55,7 @@ export const Reports = () => {
         defaultSelectedKey={params.query || 'default'}
         onLinkClick={(item) => dispatch(CHANGE_QUERY({ key: item.props.itemKey }))}>
         {queries.map(({ key, text, iconName }) => (
-          <PivotItem
-            key={key}
-            itemKey={key}
-            headerText={text}
-            itemIcon={iconName}>
+          <PivotItem key={key} itemKey={key} headerText={text} itemIcon={iconName}>
             <div className={styles.container}>
               {state.loading && (
                 <Spinner
@@ -75,10 +71,7 @@ export const Reports = () => {
                   groups={{
                     ...state.groupBy,
                     totalFunc: (items) => {
-                      const hrs = items.reduce(
-                        (sum, item) => sum + item.duration,
-                        0
-                      ) as number
+                      const hrs = items.reduce((sum, item) => sum + item.duration, 0) as number
                       return t('common.headerTotalDuration', {
                         duration: DateUtils.getDurationString(hrs, t)
                       })

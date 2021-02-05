@@ -9,9 +9,10 @@ export const FilterPanel = (props: IFilterPanelProps) => {
   const [filters, setFilters] = useState<IFilter[]>(
     props.filters.map((f) => f.initialize(props.items))
   )
-  useEffect(() =>
-    setFilters(props.filters.map((f) => f.initialize(props.items))),
-    [props.items, props.filters])
+  useEffect(() => setFilters(props.filters.map((f) => f.initialize(props.items))), [
+    props.items,
+    props.filters
+  ])
 
   /**
    * On filter updated
@@ -34,10 +35,7 @@ export const FilterPanel = (props: IFilterPanelProps) => {
   }
 
   return (
-    <Panel
-      isOpen={props.isOpen}
-      isLightDismiss={true}
-      onDismiss={props.onDismiss}>
+    <Panel isOpen={props.isOpen} isLightDismiss={true} onDismiss={props.onDismiss}>
       {filters
         .filter((filter) => filter.items.length > 1)
         .map((filter) => (
