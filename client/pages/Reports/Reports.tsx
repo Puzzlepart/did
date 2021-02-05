@@ -19,6 +19,7 @@ import createReducer, {
   TOGGLE_FILTER_PANEL
 } from './reducer'
 import styles from './Reports.module.scss'
+import { SaveFilter } from './SaveFilter'
 import $timeentries from './timeentries.gql'
 import { IReportsParams } from './types'
 
@@ -94,8 +95,9 @@ export const Reports = () => {
                   items={state.timeentries}
                   onDismiss={() => dispatch(TOGGLE_FILTER_PANEL())}
                   onFiltersUpdated={(filters) => dispatch(FILTERS_UPDATED({ filters }))}
-                  shortListCount={10}
-                />
+                  shortListCount={10}>
+                    <SaveFilter />
+                  </FilterPanel>
               </div>
             </PivotItem>
           ))}
