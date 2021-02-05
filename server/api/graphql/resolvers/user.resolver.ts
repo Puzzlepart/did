@@ -7,7 +7,7 @@ import { AzStorageService, MSGraphService } from '../../services'
 import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
 import { BaseResult } from './types'
-import { User, UserInput, UserQueryOptions } from './user.types'
+import { User, UserConfigurationInput, UserInput, UserQueryOptions } from './user.types'
 
 @Service()
 @Resolver(User)
@@ -94,6 +94,29 @@ export class UserResolver {
   ): Promise<BaseResult> {
     try {
       await this._azstorage.addOrUpdateUser(user, update)
+      return { success: true, error: null }
+    } catch (error) {
+      return {
+        success: false,
+        error: pick(error, 'name', 'message', 'code', 'statusCode')
+      }
+    }
+  }
+
+  /**
+   * Add or update user configuration
+   *
+   * @param {string} userId User ID
+   * @param {UserConfigurationInput} configuration Configuration
+   */
+  @Authorized()
+  @Mutation(() => BaseResult, { description: 'Add or update user configuration' })
+  async addOrUpdateUserConfiguration(
+    @Arg('userId', () => String) userId: string,
+    @Arg('configuration', () => UserConfigurationInput) configuration: UserConfigurationInput
+  ): Promise<BaseResult> {
+    try {
+      await this._azstorage.addOrUpdateUserConfiguration(userId,configuration)
       return { success: true, error: null }
     } catch (error) {
       return {

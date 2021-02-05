@@ -2,12 +2,12 @@
 import arraySort from 'array-sort'
 import { createTableService } from 'azure-storage'
 import 'reflect-metadata'
-import { DateObject } from '../../../shared/utils/date'
 import { Inject, Service } from 'typedi'
 import { omit } from 'underscore'
+import { DateObject } from '../../../shared/utils/date'
 import AzTableUtilities from '../../utils/table'
 import { Context } from '../graphql/context'
-import { Role, TimeEntriesQuery } from '../graphql/resolvers/types'
+import { Role, TimeEntriesQuery, UserConfigurationInput } from '../graphql/resolvers/types'
 import {
   AzStorageServiceTables,
   AzTimeEntry,
@@ -224,6 +224,32 @@ class AzStorageService {
   }
 
   /**
+   * Add or update user configuration in table storage
+   *
+   * @param {string} userId User id
+   * @param {UserConfigurationInput} configuration Configuration
+   */
+  async addOrUpdateUserConfiguration(userId: string, configuration: UserConfigurationInput): Promise<any> {
+    try {
+      const entity = this.tableUtil.convertToAzEntity(
+        userId,
+        {
+          ReportFilters: configuration.reportFilters
+        },
+        'Default',
+        {
+          typeMap: {
+            ReportFilters: 'json'
+          }
+        }
+      )
+      await this.tableUtil.updateAzEntity(this.tables.users, entity, true)
+    } catch (error) {
+      throw error
+    }
+  }
+
+  /**
    * Bulk imports users to table storage
    *
    * @param {any[]} users Users to import
@@ -268,9 +294,9 @@ class AzStorageService {
         [
           'EndDateTime',
           queryValues.endDateTime &&
-            this.tableUtil.convertToAzDate(
-              new DateObject(queryValues.endDateTime).add('1d').jsDate
-            ),
+          this.tableUtil.convertToAzDate(
+            new DateObject(queryValues.endDateTime).add('1d').jsDate
+          ),
           q.date,
           q.lessThan
         ]

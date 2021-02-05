@@ -78,3 +78,11 @@ export class UserQueryOptions {
   @Field({ nullable: true })
   sortBy?: string
 }
+
+
+@InputType({ description: 'Input object for User configuration' })
+export class UserConfigurationInput {
+  @Field({ nullable: true })
+  reportFilters?: string;
+}
+
