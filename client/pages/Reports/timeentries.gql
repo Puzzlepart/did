@@ -17,6 +17,7 @@ query($query: TimeEntriesQuery!, $forecast: Boolean, $sortAsc: Boolean) {
       name
     }
     resource {
+      id
       givenName
       surname
       mail
