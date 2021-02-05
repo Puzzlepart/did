@@ -8,7 +8,7 @@ import { ISummaryProps } from './types'
 
 export const Summary: FunctionComponent<ISummaryProps> = ({ timeentries }: ISummaryProps) => {
   const { t } = useTranslation()
-  const items =  getSummary(timeentries, t)
+  const items = getSummary(timeentries, t)
   return (
     <FadeIn className={styles.root}>
       {items.map(({ label, value }, idx) => (

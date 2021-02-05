@@ -33,10 +33,7 @@ export function getSummary(timeentries: any[], t: TFunction) {
     },
     {
       label: t('common.totalHours'),
-      value: getSum(
-        timeentries,
-        'duration'
-      )
+      value: getSum(timeentries, 'duration')
     }
   ]
 }
