@@ -1,12 +1,13 @@
 import { DefaultButton, TextField } from 'office-ui-fabric'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { ReportsContext } from '../context'
 import { ADD_FILTER } from '../reducer'
 import styles from './SaveFilter.module.scss'
-import { ISaveFilterProps } from './types'
 
-export const SaveFilter = ({ state, dispatch }: ISaveFilterProps) => {
+export const SaveFilter = () => {
     const { t } = useTranslation()
+    const { dispatch, state } = useContext(ReportsContext)
     const [name, setName] = useState(null)
     const [inputVisible, setInputVisible] = useState(false)
     return (

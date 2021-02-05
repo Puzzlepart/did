@@ -1,5 +1,3 @@
-import { AnyAction } from '@reduxjs/toolkit'
-import { TFunction } from 'i18next'
 import {
   ContextualMenuItemType,
 
@@ -10,20 +8,14 @@ import React from 'react'
 import { pick } from 'underscore'
 import { exportExcel } from 'utils/exportExcel'
 import getColumns from './columns'
+import { IReportsContext } from './context'
 import { SET_FILTER, SET_GROUP_BY, TOGGLE_FILTER_PANEL } from './reducer'
 import { SaveFilter } from './SaveFilter'
-import { getGroupByOptions, IReportsState } from './types'
-
-interface IReportsCommmandParams {
-  state?: IReportsState
-  dispatch?: React.Dispatch<AnyAction>
-  t?: TFunction
-}
-
+import { getGroupByOptions } from './types'
 /**
  * Select group by command
  */
-const selectGroupByCmd = ({ state, dispatch, t }: IReportsCommmandParams) => ({
+const selectGroupByCmd = ({ state, dispatch, t }: IReportsContext) => ({
   key: 'SELECT_GROUP_BY',
   text: t('common.groupBy'),
   iconProps: { iconName: 'GroupList' },
@@ -43,7 +35,7 @@ const selectGroupByCmd = ({ state, dispatch, t }: IReportsCommmandParams) => ({
 /**
  * Export to Excel command
  */
-const exportToExcelCmd = ({ state, t }: IReportsCommmandParams) => ({
+const exportToExcelCmd = ({ state, t }: IReportsContext) => ({
   key: 'EXPORT_TO_EXCEL',
   text: t('reports.exportToExcel'),
   onClick: () => {
@@ -62,7 +54,7 @@ const exportToExcelCmd = ({ state, t }: IReportsCommmandParams) => ({
 /**
  * Open filter panel command
  */
-const openFilterPanelCmd = ({ dispatch }: IReportsCommmandParams) => ({
+const openFilterPanelCmd = ({ dispatch }: IReportsContext) => ({
   key: 'OPEN_FILTER_PANEL',
   iconProps: { iconName: 'Filter' },
   iconOnly: true,
@@ -72,14 +64,14 @@ const openFilterPanelCmd = ({ dispatch }: IReportsCommmandParams) => ({
 /**
  * Save filter  command
  */
-const saveFilterCmd = ({ state, dispatch, t }: IReportsCommmandParams): IContextualMenuItem => ({
+const saveFilterCmd = ({ state, dispatch, t }: IReportsContext): IContextualMenuItem => ({
   key: 'SAVED_FILTERS',
   text: t('reports.savedFilters'),
   subMenuProps: {
     items: [
       {
         key: 'SAVE_FILTER',
-        onRender: () => <SaveFilter state={state} dispatch={dispatch} />
+        onRender: () => <SaveFilter />
       },
       {
         key: 'DIVIDER_O',
@@ -96,14 +88,14 @@ const saveFilterCmd = ({ state, dispatch, t }: IReportsCommmandParams): IContext
   }
 })
 
-export default ({ state, dispatch, t }) => ({
-  items: (!!state.query && !state.loading) ? [selectGroupByCmd({ state, dispatch, t })] : [],
+export default (context: IReportsContext) => ({
+  items: (!!context.state.query && !context.state.loading) ? [selectGroupByCmd(context)] : [],
   farItems:
-    (!!state.query && !state.loading)
+    (!!context.state.query && !context.state.loading)
       ? [
-        exportToExcelCmd({ state, t }),
-        saveFilterCmd({ state, dispatch, t }),
-        openFilterPanelCmd({ dispatch }),
+        exportToExcelCmd(context),
+        saveFilterCmd(context),
+        openFilterPanelCmd(context),
       ]
       : []
 })
