@@ -1,13 +1,10 @@
 .root {
-  padding: 8px 12px 8px 12px;
-
   .footer {
     display: flex;
     flex-direction: row;
     
     .saveBtn {
       margin: 4px 4px 0 0;
-      width: 100%;
     }
   }
 }

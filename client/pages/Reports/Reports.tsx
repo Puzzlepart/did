@@ -42,13 +42,20 @@ export const Reports = () => {
     fetchPolicy: 'cache-first',
     variables: state.query?.variables
   })
-  const columns = useMemo(() => getColumns({ isResizable: true }, t), [])
 
+  /**
+   * Layout effects
+   */
   useLayoutEffect(() => dispatch(INIT()), [])
   useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query])
   useLayoutEffect(() => {
     state.query?.key && history.push(`/reports/${state.query.key}`)
   }, [state.query])
+
+  /**
+   * Memorizing columns, context and filters
+   */
+  const columns = useMemo(() => getColumns({ isResizable: true }, t), [])
   const ctxValue = useMemo(() => ({ state, dispatch, t }), [state])
   const filters = useMemo(() => initFilters(state.filter, t), [state.filter])
 
