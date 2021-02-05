@@ -18,7 +18,7 @@ export class CustomerModel {
 }
 
 interface ICustomerFormPanelProps extends IPanelProps {
-  onSave: () => void;
+  onSave: () => void
 }
 
 export interface ICustomerFormProps {
