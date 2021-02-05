@@ -4,7 +4,7 @@ import {
   IContextualMenuItem
 } from 'office-ui-fabric'
 import React from 'react'
-import { pick } from 'underscore'
+import { isEmpty, pick } from 'underscore'
 import { exportExcel } from 'utils/exportExcel'
 import getColumns from './columns'
 import { IReportsContext } from './context'
@@ -113,8 +113,8 @@ export default (context: IReportsContext) => ({
     (!!context.state.query && !context.state.loading)
       ? [
         exportToExcelCmd(context),
-        saveFilterCmd(context),
+        !isEmpty(context.state.savedFilters) && saveFilterCmd(context),
         openFilterPanelCmd(context),
-      ]
+      ].filter(i => i)
       : []
 })

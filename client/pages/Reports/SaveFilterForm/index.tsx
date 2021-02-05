@@ -4,6 +4,7 @@ import { DefaultButton, TextField } from 'office-ui-fabric'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ReportsContext } from '../context'
+import { ADD_FILTER } from '../reducer'
 import $addOrUpdateUserConfiguration from './addOrUpdateUserConfiguration.gql'
 import styles from './SaveFilterForm.module.scss'
 import { ISaveFilterFormProps } from './types'
@@ -11,10 +12,41 @@ import { ISaveFilterFormProps } from './types'
 export const SaveFilterForm = (props: ISaveFilterFormProps) => {
     const { t } = useTranslation()
     const { user } = useContext(AppContext)
-    const { state } = useContext(ReportsContext)
+    const { state, dispatch } = useContext(ReportsContext)
     const [addOrUpdateUserConfiguration] = useMutation($addOrUpdateUserConfiguration)
     const [name, setName] = useState(null)
     const [inputVisible, setInputVisible] = useState(false)
+
+    /**
+     * On save filter
+     * 
+     * @note Stringifies the saved filters (including the new one) and sends it to the
+     * mutation addOrUpdateUserConfiguration. This could be done in the ContextUser
+     * class in the future.
+     * 
+     * @returns Promise<void>
+     */
+    async function onSave(): Promise<void> {
+        if (inputVisible) {
+            const reportFilters = JSON.stringify([
+                ...state.savedFilters,
+                { ...state.filter, name }
+            ])
+            await addOrUpdateUserConfiguration({
+                variables: {
+                    userId: user.id,
+                    configuration: {
+                        reportFilters
+                    }
+                }
+            })
+            dispatch(ADD_FILTER({ name }))
+            setName(null)
+        } else {
+            setInputVisible(true)
+        }
+    }
+
     return (
         <div
             className={styles.root}
@@ -30,22 +62,7 @@ export const SaveFilterForm = (props: ISaveFilterFormProps) => {
                 <div className={styles.saveBtn}>
                     <DefaultButton
                         text={t('reports.saveFilterText')}
-                        onClick={async () => {
-                            if (inputVisible) {
-                                await addOrUpdateUserConfiguration({
-                                    variables: {
-                                        userId: user.id,
-                                        configuration: {
-                                            reportFilters: JSON.stringify([])
-                                        }
-                                    }
-                                })
-                                setName(null)
-                            } else {
-                                setInputVisible(true)
-                            }
-                        }}
-                    />
+                        onClick={onSave} />
                 </div>
                 <div hidden={!inputVisible}>
                     <DefaultButton
