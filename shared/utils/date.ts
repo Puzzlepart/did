@@ -59,9 +59,9 @@ export class DateUtils {
 
   /**
    * Get duration string
-   * 
+   *
    * E.g. 15.75 => 15 hours 45 minutes
-   * 
+   *
    * Using solution from https://stackoverflow.com/questions/1458633/how-to-deal-with-floating-point-number-precision-in-javascript
    * to handle floating point number precision.
    *
@@ -77,7 +77,6 @@ export class DateUtils {
     if (hoursPrecise === 0) return minsStr
     return [hrsStr, minsStr].join(' ')
   }
-
 
   /**
    * Get the formatted date according to the string of tokens passed in.
