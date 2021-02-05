@@ -16,7 +16,8 @@ export { ChoiceGroup, IChoiceGroupOption } from 'office-ui-fabric-react/lib/Choi
 export { CommandBar, ICommandBarProps } from 'office-ui-fabric-react/lib/CommandBar'
 export {
   IContextualMenuItem,
-  IContextualMenuProps
+  IContextualMenuProps,
+  ContextualMenuItemType
 } from 'office-ui-fabric-react/lib/ContextualMenu'
 export {
   CheckboxVisibility,

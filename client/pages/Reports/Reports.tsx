@@ -1,14 +1,14 @@
 import { useQuery } from '@apollo/client'
 import { FilterPanel, List, UserMessage } from 'components'
+import DateUtils from 'DateUtils'
 import { Pivot, PivotItem, Spinner } from 'office-ui-fabric'
 import React, { useLayoutEffect, useMemo, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { isEmpty } from 'underscore'
-import DateUtils from 'DateUtils'
 import getColumns from './columns'
 import commandBar from './commandBar'
-import { filters } from './filters'
+import initFilters from './filters'
 import { getQueries } from './queries'
 import createReducer, {
   CHANGE_QUERY,
@@ -47,18 +47,19 @@ export const Reports = () => {
   useLayoutEffect(() => {
     state.query?.key && history.push(`/reports/${state.query.key}`)
   }, [state.query])
+  const filters = useMemo(() => initFilters(state.filter, t), [state.filter])
 
   return (
     <div className={styles.root}>
       <Pivot
         defaultSelectedKey={params.query || 'default'}
         onLinkClick={(item) => dispatch(CHANGE_QUERY({ key: item.props.itemKey }))}>
-        {queries.map((query) => (
+        {queries.map(({ key, text, iconName }) => (
           <PivotItem
-            key={query.key}
-            itemKey={query.key}
-            headerText={query.text}
-            itemIcon={query.iconName}>
+            key={key}
+            itemKey={key}
+            headerText={text}
+            itemIcon={iconName}>
             <div className={styles.container}>
               {state.loading && (
                 <Spinner
@@ -74,12 +75,12 @@ export const Reports = () => {
                   groups={{
                     ...state.groupBy,
                     totalFunc: (items) => {
-                      const durationHrs = items.reduce(
+                      const hrs = items.reduce(
                         (sum, item) => sum + item.duration,
                         0
                       ) as number
                       return t('common.headerTotalDuration', {
-                        duration: DateUtils.getDurationString(durationHrs, t)
+                        duration: DateUtils.getDurationString(hrs, t)
                       })
                     }
                   }}
@@ -93,7 +94,7 @@ export const Reports = () => {
               />
               <FilterPanel
                 isOpen={state.isFiltersOpen}
-                filters={filters(t)}
+                filters={filters}
                 items={state.timeentries}
                 onDismiss={() => dispatch(TOGGLE_FILTER_PANEL())}
                 onFiltersUpdated={(filters) => dispatch(FILTERS_UPDATED({ filters }))}

@@ -3,6 +3,8 @@ import { unique } from 'underscore'
 import { BaseFilter, IFilter } from './BaseFilter'
 
 export class ResourceFilter<T = any> extends BaseFilter<T> {
+  private _selectedKeys: string[]
+
   /**
    * Constructor
    * 
@@ -15,7 +17,7 @@ export class ResourceFilter<T = any> extends BaseFilter<T> {
     public valueFieldName: string,
     public name: string,
   ) {
-    super(keyFieldName)
+    super(keyFieldName, name)
   }
 
   /**
@@ -39,7 +41,12 @@ export class ResourceFilter<T = any> extends BaseFilter<T> {
       key: this.keyFieldName,
       name: this.name,
       items,
-      selected: []
+      selected: items.filter(i => this._selectedKeys.indexOf(i.key) !== -1)
     }
+  }
+
+  public setDefaults(values: any) {
+    this._selectedKeys = getValue(values, this.keyFieldName) ?? []
+    return this
   }
 }

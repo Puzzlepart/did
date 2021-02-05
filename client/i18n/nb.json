@@ -155,7 +155,9 @@
     "selectReportLabel": "Velg rapport",
     "forecast": "Prognose",
     "exportToExcel": "Eksporter til Excel",
-    "savedFilters": "Lagrede filtre"
+    "savedFilters": "Lagrede filtre",
+    "saveFilterText": "Lagre filter",
+    "filterNamePlaceholder": "Skriv inn filternavnet ..."
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",

@@ -5,7 +5,7 @@ import { BaseFilter, IFilter } from './BaseFilter'
 
 export class MonthFilter<T = any> extends BaseFilter<T> {
   constructor(fieldName: string, public name: string) {
-    super(fieldName)
+    super(fieldName, name)
   }
 
   /**
@@ -25,5 +25,10 @@ export class MonthFilter<T = any> extends BaseFilter<T> {
       items,
       selected: []
     }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public setDefaults(values: any) {
+    return this
   }
 }

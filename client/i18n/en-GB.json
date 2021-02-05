@@ -156,7 +156,9 @@
     "selectReportLabel": "Select report",
     "forecast": "Forecast",
     "exportToExcel": "Export to Excel",
-    "savedFilters": "Saved filters"
+    "savedFilters": "Saved filters",
+    "saveFilterText": "Save filter",
+    "filterNamePlaceholder": "Enter filter name..."
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",

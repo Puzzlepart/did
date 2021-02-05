@@ -11,9 +11,9 @@ export interface IFilter {
 }
 
 export abstract class BaseFilter<T = any> {
-  public name: string
-
-  constructor(public fieldName: string) { }
+  constructor(public fieldName: string, public name: string) { }
 
   public abstract initialize(entries: T[]): IFilter
+
+  public abstract setDefaults(values: any): BaseFilter<T>
 }

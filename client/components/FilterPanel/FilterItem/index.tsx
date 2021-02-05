@@ -11,6 +11,8 @@ export const FilterItem = (props: IFilterItemProps) => {
   const [searchTerm, onSearch] = useState<string>('')
   const [showCount, setShowCount] = useState(props.shortListCount)
 
+  console.log(selectedKeys)
+
   const items = useMemo(() => {
     return props.filter.items.filter((item) =>
       isBlank(searchTerm) ? true : contains(item.value.toLowerCase(), searchTerm.toLowerCase())

@@ -13,6 +13,7 @@ export const FILTERS_UPDATED = createAction<{ filters: IFilter[] }>('FILTERS_UPD
 export const CHANGE_QUERY = createAction<{ key: string }>('FILTER_UPDATED')
 export const SET_GROUP_BY = createAction<{ groupBy: IListGroups }>('SET_GROUP_BY')
 export const SET_FILTER = createAction<{ filter: IReportsSavedFilter }>('SET_FILTER')
+export const ADD_FILTER = createAction<{ name: string }>('ADD_FILTER')
 
 interface ICreateReducerParams {
   params: IReportsParams
@@ -25,10 +26,11 @@ export default ({ params, queries }: ICreateReducerParams) =>
     {
       [INIT.type]: (state) => {
         state.query = find(queries, (q) => q.key === params.query) as any
-        state.savedFilters = JSON.parse(localStorage.saved_filters)
+        state.savedFilters = JSON.parse(localStorage.saved_filters || '[]')
       },
 
       [SET_FILTER.type]: (state, { payload }: ReturnType<typeof SET_FILTER>) => {
+        state.filter = payload.filter
         state.subset = filter(state.timeentries, (entry) => {
           return (
             filter(Object.keys(payload.filter.values), (key) => {
@@ -36,6 +38,11 @@ export default ({ params, queries }: ICreateReducerParams) =>
             }).length === Object.keys(payload.filter.values).length
           )
         })
+      },
+
+      [ADD_FILTER.type]: (state, { payload }: ReturnType<typeof ADD_FILTER>) => {
+        state.savedFilters.push({ name: payload.name, values: [] })
+        state.filter = { name: payload.name, values: [] }
       },
 
       [TOGGLE_FILTER_PANEL.type]: (state) => {
@@ -49,8 +56,6 @@ export default ({ params, queries }: ICreateReducerParams) =>
       },
 
       [FILTERS_UPDATED.type]: (state, { payload }: ReturnType<typeof FILTERS_UPDATED>) => {
-        // eslint-disable-next-line no-console
-        console.log(payload.filters)
         state.subset = filter(state.timeentries, (entry) => {
           return (
             filter(payload.filters, (f) => {
@@ -59,6 +64,7 @@ export default ({ params, queries }: ICreateReducerParams) =>
             }).length === payload.filters.length
           )
         })
+        state.filter = null
       },
 
       [SET_GROUP_BY.type]: (state, { payload }: ReturnType<typeof SET_GROUP_BY>) => {

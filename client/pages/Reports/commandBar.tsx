@@ -1,12 +1,12 @@
 import { AnyAction } from '@reduxjs/toolkit'
 import { TFunction } from 'i18next'
-import { format, IContextualMenuItem } from 'office-ui-fabric'
+import { ContextualMenuItemType, DefaultButton, format, IContextualMenuItem, TextField } from 'office-ui-fabric'
+import React from 'react'
 import { pick } from 'underscore'
 import { exportExcel } from 'utils/exportExcel'
 import getColumns from './columns'
-import { SET_FILTER, SET_GROUP_BY, TOGGLE_FILTER_PANEL } from './reducer'
+import { ADD_FILTER, SET_FILTER, SET_GROUP_BY, TOGGLE_FILTER_PANEL } from './reducer'
 import { getGroupByOptions, IReportsState } from './types'
-
 interface IReportsCommmandParams {
   state?: IReportsState
   dispatch?: React.Dispatch<AnyAction>
@@ -67,13 +67,43 @@ const openFilterPanelCmd = ({ dispatch }: IReportsCommmandParams) => ({
  */
 const saveFilterCmd = ({ state, dispatch, t }: IReportsCommmandParams): IContextualMenuItem => ({
   key: 'SAVED_FILTERS',
-  name: t('reports.savedFilters'),
+  text: t('reports.savedFilters'),
   subMenuProps: {
-    items: state.savedFilters.map((filter, idx) => ({
-      key: idx.toString(),
-      text: filter.name,
-      onClick: () => dispatch(SET_FILTER({ filter }))
-    }))
+    items: [
+      {
+        key: 'SAVE_FILTER',
+        onRender: () => (
+          <div style={{ padding: '8px 12px 8px 12px' }}>
+            <TextField
+              id='reports_saved_filer_name'
+              disabled={state.subset.length === state.timeentries.length || !!state.filter}
+              placeholder={t('reports.filterNamePlaceholder')} />
+            <DefaultButton
+              style={{ marginTop: 4, width: '100%' }}
+              disabled={state.subset.length === state.timeentries.length || !!state.filter}
+              text={t('reports.saveFilterText')}
+              onClick={() => {
+                const input = (document.getElementById('reports_saved_filer_name') as HTMLInputElement)
+                const name = input.value
+                dispatch(ADD_FILTER({ name }))
+                input.value = null
+              }}
+            />
+          </div>
+        )
+      },
+      {
+        key: 'DIVIDER_O',
+        itemType: ContextualMenuItemType.Divider
+      },
+      ...state.savedFilters.map((filter, idx) => ({
+        key: idx.toString(),
+        text: filter.name,
+        canCheck: true,
+        checked: filter.name === state.filter?.name,
+        onClick: () => dispatch(SET_FILTER({ filter }))
+      }))
+    ]
   }
 })
 
