@@ -10,10 +10,10 @@ export interface IFilter {
   selected: IFilterItem[]
 }
 
-export abstract class BaseFilter {
+export abstract class BaseFilter<T = any> {
   public name: string
 
-  constructor(public fieldName: string) {}
+  constructor(public fieldName: string) { }
 
-  public abstract initialize(entries: any[]): IFilter
+  public abstract initialize(entries: T[]): IFilter
 }

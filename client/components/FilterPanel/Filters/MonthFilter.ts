@@ -3,7 +3,7 @@ import { unique, contains, indexOf } from 'underscore'
 import DateUtils from 'DateUtils'
 import { BaseFilter, IFilter } from './BaseFilter'
 
-export class MonthFilter extends BaseFilter {
+export class MonthFilter<T = any> extends BaseFilter<T> {
   constructor(fieldName: string, public name: string) {
     super(fieldName)
   }
@@ -11,9 +11,9 @@ export class MonthFilter extends BaseFilter {
   /**
    * Intialize the MonthFilter
    *
-   * @param {any[]} entries Entries
+   * @param {T[]} entries Entries
    */
-  public initialize(entries: any[]): IFilter {
+  public initialize(entries: T[]): IFilter {
     const values = unique(entries.map((e) => getValue(e, this.fieldName, null)))
     const monthNames = DateUtils.getMonthNames()
     const items = monthNames

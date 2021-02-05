@@ -2,7 +2,7 @@ import { getValue } from 'helpers'
 import _ from 'underscore'
 import { BaseFilter, IFilter } from './BaseFilter'
 
-export class WeekFilter extends BaseFilter {
+export class WeekFilter<T = any> extends BaseFilter<T> {
   constructor(fieldName: string, public name: string) {
     super(fieldName)
   }
@@ -10,9 +10,9 @@ export class WeekFilter extends BaseFilter {
   /**
    * Intialize the WeekFilter
    *
-   * @param {any[]} entries Entries
+   * @param {T[]} entries Entries
    */
-  public initialize(entries: any[]): IFilter {
+  public initialize(entries: T[]): IFilter {
     const weeks = _.unique(entries.map((e) => getValue(e, this.fieldName, null))).sort(
       (a, b) => a - b
     )

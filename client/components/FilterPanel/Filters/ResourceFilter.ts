@@ -2,17 +2,20 @@ import { getValue } from 'helpers'
 import { unique } from 'underscore'
 import { BaseFilter, IFilter } from './BaseFilter'
 
-export class ResourceFilter extends BaseFilter {
-  constructor(public fieldName: string, public name: string) {
+export class ResourceFilter<T = any> extends BaseFilter<T> {
+  constructor(
+    public fieldName: string,
+    public name: string
+  ) {
     super(fieldName)
   }
 
   /**
    * Intialize the ResourceFilter
    *
-   * @param {any[]} entries Entries
+   * @param {T[]} entries Entries
    */
-  public initialize(entries: any[]): IFilter {
+  public initialize(entries: T[]): IFilter {
     const resources = unique(entries.map((e) => getValue(e, this.fieldName, null))).sort()
     const items = resources.map((resource) => ({
       key: resource,
