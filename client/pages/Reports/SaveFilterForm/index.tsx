@@ -4,14 +4,18 @@ import { useTranslation } from 'react-i18next'
 import { ReportsContext } from '../context'
 import { ADD_FILTER } from '../reducer'
 import styles from './SaveFilterForm.module.scss'
+import { ISaveFilterFormProps } from './types'
 
-export const SaveFilterForm = () => {
+export const SaveFilterForm = (props: ISaveFilterFormProps) => {
     const { t } = useTranslation()
     const { dispatch, state } = useContext(ReportsContext)
     const [name, setName] = useState(null)
     const [inputVisible, setInputVisible] = useState(false)
     return (
-        <div className={styles.root} hidden={state.timeentries.length === state.subset.length || !!state.filter?.name}>
+        <div
+            className={styles.root}
+            style={props?.style}
+            hidden={!state.isFiltered || !!state.filter?.name}>
             <div hidden={!inputVisible}>
                 <TextField
                     value={name}

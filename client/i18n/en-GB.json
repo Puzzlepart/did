@@ -159,7 +159,8 @@
     "savedFilters": "Saved filters",
     "saveFilterText": "Save filter",
     "filterNamePlaceholder": "Enter filter name...",
-    "cancelSaveFilterText": "Cancel"
+    "cancelSaveFilterText": "Cancel",
+    "removeSelectedFilterText": "Remove selected filter"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",

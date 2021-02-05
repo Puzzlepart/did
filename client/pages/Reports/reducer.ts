@@ -14,6 +14,7 @@ export const CHANGE_QUERY = createAction<{ key: string }>('FILTER_UPDATED')
 export const SET_GROUP_BY = createAction<{ groupBy: IListGroups }>('SET_GROUP_BY')
 export const SET_FILTER = createAction<{ filter: IReportsSavedFilter }>('SET_FILTER')
 export const ADD_FILTER = createAction<{ name: string }>('ADD_FILTER')
+export const REMOVE_SELECTED_FILTER = createAction('REMOVE_SELECTED_FILTER')
 
 interface ICreateReducerParams {
   params: IReportsParams
@@ -47,6 +48,14 @@ export default ({ params, queries }: ICreateReducerParams) =>
         state.filter = newFilter
       },
 
+      [REMOVE_SELECTED_FILTER.type]: (state) => {
+        const index = current(state).savedFilters.indexOf(current(state).filter)
+        state.savedFilters.splice(index, 1)
+        localStorage.setItem('saved_filters', JSON.stringify(current(state).savedFilters))
+        state.filter = null
+        state.subset = state.timeentries
+      },
+
       [TOGGLE_FILTER_PANEL.type]: (state) => {
         state.isFiltersOpen = !state.isFiltersOpen
       },
@@ -72,6 +81,7 @@ export default ({ params, queries }: ICreateReducerParams) =>
             }).length === payload.filters.length
           )
         })
+        state.isFiltered = state.subset.length !== state.timeentries.length
       },
 
       [SET_GROUP_BY.type]: (state, { payload }: ReturnType<typeof SET_GROUP_BY>) => {

@@ -158,7 +158,8 @@
     "savedFilters": "Lagrede filtre",
     "saveFilterText": "Lagre filter",
     "filterNamePlaceholder": "Skriv inn filternavnet ...",
-    "cancelSaveFilterText": "Avbryt"
+    "cancelSaveFilterText": "Avbryt",
+    "removeSelectedFilterText": "Fjern valgt filter"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",

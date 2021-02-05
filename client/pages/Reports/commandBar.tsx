@@ -8,7 +8,7 @@ import { pick } from 'underscore'
 import { exportExcel } from 'utils/exportExcel'
 import getColumns from './columns'
 import { IReportsContext } from './context'
-import { SET_FILTER, SET_GROUP_BY, TOGGLE_FILTER_PANEL } from './reducer'
+import { REMOVE_SELECTED_FILTER, SET_FILTER, SET_GROUP_BY, TOGGLE_FILTER_PANEL } from './reducer'
 import { SaveFilterForm } from './SaveFilterForm'
 import { getGroupByOptions } from './types'
 /**
@@ -78,20 +78,32 @@ const saveFilterCmd = (context: IReportsContext): IContextualMenuItem => ({
     items: [
       {
         key: 'SAVE_FILTER',
-        onRender: () => <SaveFilterForm />
+        onRender: () => (
+          <SaveFilterForm style={{ padding: '12px 12px 6px 32px' }} />
+        )
       },
       {
         key: 'DIVIDER_O',
         itemType: ContextualMenuItemType.Divider
       },
+      context.state.filter?.name && {
+        key: 'REMOVE_SELECTED_FILTER',
+        text: context.t('reports.removeSelectedFilterText'),
+        iconProps: { iconName: 'RemoveFilter' },
+        onClick: () => context.dispatch(REMOVE_SELECTED_FILTER())
+      },
+      {
+        key: 'DIVIDER_1',
+        itemType: ContextualMenuItemType.Divider
+      },
       ...context.state.savedFilters.map((filter, idx) => ({
-        key: idx.toString(),
+        key: `SAVE_FILTER_${idx}`,
         text: filter.name,
         canCheck: true,
         checked: filter.name === context.state.filter?.name,
         onClick: () => context.dispatch(SET_FILTER({ filter }))
       }))
-    ]
+    ].filter(i => i)
   }
 })
 

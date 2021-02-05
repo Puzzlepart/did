@@ -60,6 +60,11 @@ export interface IReportsState {
   loading?: boolean
 
   /**
+   * Is filtered
+   */
+  isFiltered?: boolean
+
+  /**
    * Saved filters (stored in browser storage)
    */
   savedFilters?: IReportsSavedFilter[]
