@@ -3,9 +3,9 @@ import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ReportsContext } from '../context'
 import { ADD_FILTER } from '../reducer'
-import styles from './SaveFilter.module.scss'
+import styles from './SaveFilterForm.module.scss'
 
-export const SaveFilter = () => {
+export const SaveFilterForm = () => {
     const { t } = useTranslation()
     const { dispatch, state } = useContext(ReportsContext)
     const [name, setName] = useState(null)

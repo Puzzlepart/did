@@ -1,6 +1,5 @@
 import {
   ContextualMenuItemType,
-
   format,
   IContextualMenuItem
 } from 'office-ui-fabric'
@@ -10,7 +9,7 @@ import { exportExcel } from 'utils/exportExcel'
 import getColumns from './columns'
 import { IReportsContext } from './context'
 import { SET_FILTER, SET_GROUP_BY, TOGGLE_FILTER_PANEL } from './reducer'
-import { SaveFilter } from './SaveFilter'
+import { SaveFilterForm } from './SaveFilterForm'
 import { getGroupByOptions } from './types'
 /**
  * Select group by command
@@ -71,7 +70,7 @@ const saveFilterCmd = ({ state, dispatch, t }: IReportsContext): IContextualMenu
     items: [
       {
         key: 'SAVE_FILTER',
-        onRender: () => <SaveFilter />
+        onRender: () => <SaveFilterForm />
       },
       {
         key: 'DIVIDER_O',
