@@ -56,6 +56,12 @@ export default ({ params, queries }: ICreateReducerParams) =>
       },
 
       [FILTERS_UPDATED.type]: (state, { payload }: ReturnType<typeof FILTERS_UPDATED>) => {
+        state.filter = {
+          values: payload.filters.reduce((obj, f) => ({
+            ...obj,
+            [f.key]: f.selected.map(i => i.key)
+          }), {})
+        }
         state.subset = filter(state.timeentries, (entry) => {
           return (
             filter(payload.filters, (f) => {
@@ -64,7 +70,6 @@ export default ({ params, queries }: ICreateReducerParams) =>
             }).length === payload.filters.length
           )
         })
-        state.filter = null
       },
 
       [SET_GROUP_BY.type]: (state, { payload }: ReturnType<typeof SET_GROUP_BY>) => {

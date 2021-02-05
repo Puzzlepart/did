@@ -157,7 +157,8 @@
     "exportToExcel": "Eksporter til Excel",
     "savedFilters": "Lagrede filtre",
     "saveFilterText": "Lagre filter",
-    "filterNamePlaceholder": "Skriv inn filternavnet ..."
+    "filterNamePlaceholder": "Skriv inn filternavnet ...",
+    "cancelSaveFilterText": "Avbryt"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",

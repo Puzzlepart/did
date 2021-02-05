@@ -13,6 +13,7 @@ import getColumns from './columns'
 import { SET_FILTER, SET_GROUP_BY, TOGGLE_FILTER_PANEL } from './reducer'
 import { SaveFilter } from './SaveFilter'
 import { getGroupByOptions, IReportsState } from './types'
+
 interface IReportsCommmandParams {
   state?: IReportsState
   dispatch?: React.Dispatch<AnyAction>
@@ -78,7 +79,7 @@ const saveFilterCmd = ({ state, dispatch, t }: IReportsCommmandParams): IContext
     items: [
       {
         key: 'SAVE_FILTER',
-        onRender: () => <SaveFilter dispatch={dispatch} />
+        onRender: () => <SaveFilter state={state} dispatch={dispatch} />
       },
       {
         key: 'DIVIDER_O',

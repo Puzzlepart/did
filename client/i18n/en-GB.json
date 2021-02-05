@@ -158,7 +158,8 @@
     "exportToExcel": "Export to Excel",
     "savedFilters": "Saved filters",
     "saveFilterText": "Save filter",
-    "filterNamePlaceholder": "Enter filter name..."
+    "filterNamePlaceholder": "Enter filter name...",
+    "cancelSaveFilterText": "Cancel"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",
