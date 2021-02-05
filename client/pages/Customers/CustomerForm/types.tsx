@@ -17,11 +17,15 @@ export class CustomerModel {
   }
 }
 
+interface ICustomerFormPanelProps extends IPanelProps {
+  onSave: () => void;
+}
+
 export interface ICustomerFormProps {
   /**
-   * Panel props
+   * Panel props provided if the form is rendered within a panel
    */
-  panel?: IPanelProps
+  panel?: ICustomerFormPanelProps
 
   /**
    * Customer to edit
