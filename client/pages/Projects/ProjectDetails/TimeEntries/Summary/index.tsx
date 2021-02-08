@@ -2,7 +2,7 @@ import DateUtils from 'DateUtils'
 import React, { FunctionComponent } from 'react'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
-import { getSummary } from '../../utils'
+import { getSummary } from './getSummary'
 import styles from './Summary.module.scss'
 import { ISummaryProps } from './types'
 

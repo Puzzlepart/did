@@ -13,14 +13,17 @@ export function getSummary(timeentries: any[], t: TFunction) {
     {
       label: t('common.hoursCurrentMonth'),
       value: getSum(
-        filter(timeentries, (entry) => entry.monthNumber === new Date().getMonth() + 1),
+        filter(timeentries, (entry) => entry.monthNumber === new Date().getMonth() + 1
+          && entry.year === new Date().getFullYear()),
         'duration'
       )
     },
     {
       label: t('common.hoursPrevMonth'),
       value: getSum(
-        filter(timeentries, (entry) => entry.monthNumber === new Date().getMonth()),
+        filter(timeentries, (entry) =>
+          entry.monthNumber === new Date().getMonth()
+          && entry.year === new Date().getFullYear()),
         'duration'
       )
     },
