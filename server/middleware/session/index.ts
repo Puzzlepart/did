@@ -4,11 +4,16 @@ import session from 'express-session'
 import redis from 'redis'
 import env from '../../utils/env'
 const RedisStore = require('connect-redis')(session)
-const client = redis.createClient()
-
-client.on('error', (error) => {
-  console.error(error)
-})
+const client = redis.createClient(
+  6380,
+  env('REDIS_CACHE_HOSTNAME'),
+  {
+    auth_pass: env('REDIS_CACHE_KEY'),
+    tls: {
+      servername: env('REDIS_CACHE_HOSTNAME')
+    }
+  }
+)
 
 
 export default session({
