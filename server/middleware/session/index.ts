@@ -1,10 +1,9 @@
-/* eslint-disable no-console */
+
 /* eslint-disable @typescript-eslint/no-var-requires */
 import session from 'express-session'
 import { createClient as createRedisClient } from 'redis'
 import env from '../../utils/env'
-import ConnectRedis from 'connect-redis'
-const RedisStore = ConnectRedis(session)
+const RedisStore = require('connect-redis')(session)
 const client = createRedisClient(6380, env('REDIS_CACHE_HOSTNAME'), {
   auth_pass: env('REDIS_CACHE_KEY'),
   tls: {
