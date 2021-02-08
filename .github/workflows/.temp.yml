@@ -1,0 +1,41 @@
+name: Build and deploy to didapp/redis
+
+on:
+  push:
+    branches:
+      - feature/express-session-redis-812
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.18.3]
+
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Select node version 12.8.3
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install npm packages
+      run: |
+        npm install --no-progress --loglevel silent --no-shrinkwrap --no-fund
+
+    - name: npm build and package
+      run: |
+        npm run package:client
+        npm run build:server
+      env:
+        DEBUG: webpack*
+        NODE_ENV: production
+
+    - name: 'Deploy to didapp/redis'
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'didapp'
+        slot-name: 'redis'
+        publish-profile: ${{ secrets.DIDAPP_REDIS_PUBLISH_PROFILE }}
+        package: .
