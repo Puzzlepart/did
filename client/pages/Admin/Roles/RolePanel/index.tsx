@@ -1,27 +1,36 @@
-import { useMutation } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
+import { UserMessage } from 'components'
 import { IconPicker } from 'components/IconPicker'
 import * as security from 'config/security'
-import { Panel, PrimaryButton, TextField, Toggle } from 'office-ui-fabric'
-import React, { useEffect, useMemo, useState } from 'react'
+import { DefaultButton, Panel, PrimaryButton, TextField, Toggle } from 'office-ui-fabric'
+import React, { FunctionComponent, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { RoleInput } from 'types'
 import { contains, isEmpty, isEqual, omit } from 'underscore'
 import $addOrUpdateRole from './addOrUpdateRole.gql'
+import $deleteRole from './deleteRole.gql'
 import styles from './RolePanel.module.scss'
 import { IRolePanelProps } from './types'
+import $users from './users.gql'
 
-export const RolePanel: React.FunctionComponent<IRolePanelProps> = (props: IRolePanelProps) => {
+export const RolePanel: FunctionComponent<IRolePanelProps> = (props: IRolePanelProps) => {
   const { t } = useTranslation()
+  const { data } = useQuery($users, {
+    variables: {
+      query: {
+        role: props.model.name
+      }
+    },
+    fetchPolicy: 'cache-and-network'
+  })
   const [addOrUpdateRole] = useMutation($addOrUpdateRole)
+  const [deleteRole] = useMutation($deleteRole)
   const [model, setModel] = useState<RoleInput>({})
-  const permissions = useMemo(() => security.permissions(t), [])
-  const saveDisabled = useMemo(
-    () =>
-      isEmpty(model.name) ||
-      isEmpty(model.icon) ||
-      isEqual(model.permissions, props.model?.permissions),
-    [props.model, model]
-  )
+  const permissions = security.permissions(t)
+  const saveDisabled =
+    isEmpty(model.name) ||
+    isEmpty(model.icon) ||
+    isEqual(model.permissions, props.model?.permissions)
 
   useEffect(() => {
     if (props.model) setModel(props.model)
@@ -49,6 +58,18 @@ export const RolePanel: React.FunctionComponent<IRolePanelProps> = (props: IRole
       variables: {
         role: omit(model, '__typename'),
         update: !!props.model
+      }
+    })
+    props.onSave()
+  }
+
+  /**
+   * On delete role
+   */
+  async function onDelete() {
+    await deleteRole({
+      variables: {
+        name: model.name
       }
     })
     props.onSave()
@@ -98,12 +119,24 @@ export const RolePanel: React.FunctionComponent<IRolePanelProps> = (props: IRole
             </div>
           ))}
         </div>
-        <PrimaryButton
-          className={styles.saveBtn}
-          text={t('common.save')}
-          onClick={onSave}
-          disabled={saveDisabled}
-        />
+        <div className={styles.actions}>
+          {isEmpty(data?.users) ? (
+            <DefaultButton
+              className={styles.deleteBtn}
+              text={t('common.delete')}
+              iconProps={{ iconName: 'Delete' }}
+              onClick={onDelete}
+            />
+          ) : (
+              <UserMessage text={t('admin.roleInUseMessage', { count: data?.users?.length })} />
+            )}
+          <PrimaryButton
+            className={styles.saveBtn}
+            text={t('common.save')}
+            onClick={onSave}
+            disabled={saveDisabled}
+          />
+        </div>
       </div>
     </Panel>
   )

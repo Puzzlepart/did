@@ -7,7 +7,7 @@ import { AzStorageService, MSGraphService } from '../../services'
 import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
 import { BaseResult } from './types'
-import { User, UserConfigurationInput, UserInput, UserQueryOptions } from './user.types'
+import { User, UserConfigurationInput, UserInput, UserQuery, UserQueryOptions } from './user.types'
 
 @Service()
 @Resolver(User)
@@ -61,13 +61,17 @@ export class UserResolver {
    * Get users
    *
    * @param {UserQueryOptions} options Options
+   * @param {UserQuery} query Query
    */
   @Authorized()
-  @Query(() => [User], { description: 'Get all users' })
-  async users(@Arg('options', () => UserQueryOptions) options: UserQueryOptions) {
+  @Query(() => [User], { description: 'Get users' })
+  async users(
+    @Arg('options', () => UserQueryOptions, { nullable: true }) options: UserQueryOptions,
+    @Arg('query', () => UserQuery, { nullable: true }) query: UserQuery
+  ) {
     // eslint-disable-next-line prefer-const
     let [users, roles] = await Promise.all([
-      this._azstorage.getUsers(options.sortBy),
+      this._azstorage.getUsers(options?.sortBy, query),
       this._azstorage.getRoles()
     ])
     users = filter(

@@ -147,7 +147,8 @@
     "adUserSyncEnabledLabel": "Synchronize user properties",
     "adUserSyncEnabledDescription": "Automatically synchronize user properties from Azure Active Directory when the user logs in.",
     "adUserSyncPropertiesLabel": "Properties to synchronize",
-    "adUserSyncPropertiesDescription": "Choose which properties that should be automatically synchronized from Azure Active Directory."
+    "adUserSyncPropertiesDescription": "Choose which properties that should be automatically synchronized from Azure Active Directory.",
+    "roleInUseMessage": "This role is assigned to {{count}} users and cannot be deleted. "
   },
   "reports": {
     "generatingReportLabel": "Generating report. To give you the freshest results, we're generating a report from the latest data...",
@@ -302,7 +303,8 @@
     "exportTypeLastYear": "Last year ({{year}})",
     "fromDateLabel": "From:",
     "toDateLabel": "To:",
-    "rangeLabel": "Range"
+    "rangeLabel": "Range",
+    "totalHours": "Hours total"
   },
   "navigation": {
     "timesheet": "Timesheet",
