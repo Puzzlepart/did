@@ -32,10 +32,10 @@ jobs:
         DEBUG: webpack*
         NODE_ENV: production
 
-    - name: 'Deploy to didapp/dev'
+    - name: 'Deploy to didapp/redis'
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'didapp'
-        slot-name: 'dev'
-        publish-profile: ${{ secrets.DIDAPP_DEV_PUBLISH_PROFILE }}
+        slot-name: 'redis'
+        publish-profile: ${{ secrets.DIDAPP_REDIS_PUBLISH_PROFILE }}
         package: .
