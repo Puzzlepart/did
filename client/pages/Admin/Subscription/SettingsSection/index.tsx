@@ -1,13 +1,13 @@
 import { ToggleSection } from 'components/ToggleSection'
 import { getValue } from 'helpers'
 import { Slider, Toggle } from 'office-ui-fabric'
-import React, { useContext } from 'react'
+import React, { FunctionComponent, useContext } from 'react'
 import { SubscriptionContext } from '../context'
 import { CheckboxField } from './CheckboxField'
 import styles from './SettingsSection.module.scss'
 import { ISettingsSectionProps } from './types'
 
-export const SettingsSection: React.FunctionComponent<ISettingsSectionProps> = (
+export const SettingsSection: FunctionComponent<ISettingsSectionProps> = (
   props: ISettingsSectionProps
 ) => {
   const { settings, onSettingsChanged } = useContext(SubscriptionContext)

@@ -297,7 +297,8 @@
     "exportTypeLastYear": "I fjor ({{year}})",
     "fromDateLabel": "Fra:",
     "toDateLabel": "Til:",
-    "rangeLabel": "Tidsrom"
+    "rangeLabel": "Tidsrom",
+    "totalHours": "Timer totalt"
   },
   "navigation": {
     "timesheet": "Timeliste",

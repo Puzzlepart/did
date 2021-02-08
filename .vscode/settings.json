@@ -7,7 +7,9 @@
     "server/**/*.js": true,
     "server/**/*.js.map": true,
     "server/views/index.hbs": true,
-    "server/public/js": true
+    "server/public/js": true,
+    "dist": true,
+    ".assets": true
   },
   "typescript.autoClosingTags": false,
   "javascript.validate.enable": false,
