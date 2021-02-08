@@ -1,6 +1,6 @@
 import { useId } from '@uifabric/react-hooks'
-import { ChoiceGroup, DefaultButton, Icon, Panel, format } from 'office-ui-fabric'
-import React, { useState } from 'react'
+import { ChoiceGroup, DefaultButton, format, Icon, Panel } from 'office-ui-fabric'
+import React, { FunctionComponent, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { first } from 'underscore'
 import { exportExcel } from 'utils/exportExcel'
@@ -10,7 +10,7 @@ import styles from '../UserMenu.module.scss'
 import $timeentries from './timeentries.gql'
 import { getExportTypes, IExportType } from './types'
 
-export const ExportHours: React.FunctionComponent = () => {
+export const ExportHours: FunctionComponent = () => {
   const { t } = useTranslation()
   const exportTypes = getExportTypes(t)
   const [exportType, setExportType] = useState(first(exportTypes))

@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
 import { ProjectsContext } from '../../context'
 import { onExportExcel } from './exportToExcel'
-import { Summary } from './summary'
+import { Summary } from './Summary'
 import $timeentries from './timeentries.gql'
 import styles from './TimeEntries.module.scss'
 

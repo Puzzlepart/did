@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client'
 import { IconPicker } from 'components/IconPicker'
 import * as security from 'config/security'
 import { Panel, PrimaryButton, TextField, Toggle } from 'office-ui-fabric'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { FunctionComponent, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { RoleInput } from 'types'
 import { contains, isEmpty, isEqual, omit } from 'underscore'
@@ -10,7 +10,7 @@ import $addOrUpdateRole from './addOrUpdateRole.gql'
 import styles from './RolePanel.module.scss'
 import { IRolePanelProps } from './types'
 
-export const RolePanel: React.FunctionComponent<IRolePanelProps> = (props: IRolePanelProps) => {
+export const RolePanel: FunctionComponent<IRolePanelProps> = (props: IRolePanelProps) => {
   const { t } = useTranslation()
   const [addOrUpdateRole] = useMutation($addOrUpdateRole)
   const [model, setModel] = useState<RoleInput>({})

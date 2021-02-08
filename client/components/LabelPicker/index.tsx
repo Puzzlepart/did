@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { EntityLabel } from 'components/EntityLabel'
-import { Label, Icon } from 'office-ui-fabric'
-import React, { useEffect, useRef, useState } from 'react'
+import { Icon, Label } from 'office-ui-fabric'
+import React, { FunctionComponent, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject } from 'types'
 import { omit } from 'underscore'
@@ -10,9 +10,7 @@ import $labels from './labels.gql'
 import { SelectCallout } from './SelectCallout'
 import { ILabelPickerProps } from './types'
 
-export const LabelPicker: React.FunctionComponent<ILabelPickerProps> = (
-  props: ILabelPickerProps
-) => {
+export const LabelPicker: FunctionComponent<ILabelPickerProps> = (props: ILabelPickerProps) => {
   const { t } = useTranslation()
   const { data } = useQuery($labels, { fetchPolicy: 'cache-and-network' })
   const toggleRef = useRef()
