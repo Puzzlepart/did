@@ -1,0 +1,9 @@
+
+  mutation($name: String!) {
+    deleteRole(name: $name) {
+      success
+      error {
+        message
+      }
+    }
+  }
