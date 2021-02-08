@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Support for split week, split year scenarios #753
 - Last year option added to reports #775
+- Support for deleting role #692
 
 ### Fixed
 - Issue where sunday hours would not be displayed in the UI after confirming a week #785
