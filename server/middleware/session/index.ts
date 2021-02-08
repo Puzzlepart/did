@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import session from 'express-session'
-import redis from 'redis'
+import { createClient as createRedisClient } from 'redis'
 import env from '../../utils/env'
 const RedisStore = require('connect-redis')(session)
-const client = redis.createClient(
+const client = createRedisClient(
   6380,
   env('REDIS_CACHE_HOSTNAME'),
   {
@@ -18,8 +18,12 @@ const client = redis.createClient(
 
 export default session({
   name: env('SESSION_NAME', 'connect.sid'),
-  store: new RedisStore({ client }),
-  secret: 'keyboard cat',
+  store: new RedisStore({
+    client,
+    ttl: 1209600,
+  }),
+  cookie: { secure: false },
+  secret: env('SESSION_SIGNING_KEY'),
   resave: false,
   saveUninitialized: false,
   rolling: false
