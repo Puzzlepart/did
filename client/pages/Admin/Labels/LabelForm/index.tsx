@@ -58,6 +58,7 @@ export const LabelForm = (props: ILabelFormProps) => {
         label={t('common.nameFieldLabel')}
         value={model.name}
         required={true}
+        disabled={!!props.label}
         onChange={(_, name) => setModel({ ...model, name })}
       />
       <TextField
