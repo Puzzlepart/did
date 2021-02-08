@@ -61,6 +61,9 @@ export class TimeEntry {
 @InputType()
 export class TimeEntriesQuery {
   @Field({ nullable: true })
+  periodId?: string
+
+  @Field({ nullable: true })
   startDateTime?: string
 
   @Field({ nullable: true })
