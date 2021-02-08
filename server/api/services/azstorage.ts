@@ -278,7 +278,10 @@ class AzStorageService {
         ],
         [
           'EndDateTime',
-          queryValues.endDateTime && this.tableUtil.convertToAzDate(new DateObject(queryValues.endDateTime).add('1d').jsDate),
+          queryValues.endDateTime &&
+            this.tableUtil.convertToAzDate(
+              new DateObject(queryValues.endDateTime).add('1d').jsDate
+            ),
           q.date,
           q.lessThan
         ]

@@ -30,7 +30,7 @@ interface ICreateReducerParams {
 }
 
 /**
- * Create reducer for DynamicForms
+ * Create reducer for Projects
  */
 export default ({ params }: ICreateReducerParams) =>
   createReducer(initState(params), {

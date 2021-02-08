@@ -10,7 +10,7 @@ import { CustomersContext, ICustomersContext } from './context'
 import { CustomerDetails } from './CustomerDetails'
 import { CustomerList } from './CustomerList'
 import $customers from './customers.gql'
-import reducer, { initState } from './reducer'
+import createReducer, { CHANGE_VIEW, DATA_UPDATED, initState } from './reducer'
 import { CustomersView, ICustomersParams } from './types'
 
 export const Customers: FunctionComponent = () => {
@@ -18,12 +18,13 @@ export const Customers: FunctionComponent = () => {
   const { user } = useContext(AppContext)
   const history = useHistory()
   const params = useParams<ICustomersParams>()
-  const [state, dispatch] = useReducer(reducer(history), initState(params))
+  const reducer = useMemo(() => createReducer({ params, history }), [])
+  const [state, dispatch] = useReducer(reducer, initState(params))
   const query = useQuery($customers, {
     fetchPolicy: 'cache-first'
   })
 
-  useEffect(() => dispatch({ type: 'DATA_UPDATED', query, params }), [query])
+  useEffect(() => dispatch(DATA_UPDATED({ query })), [query])
 
   const ctxValue: ICustomersContext = useMemo(
     () => ({
@@ -39,12 +40,7 @@ export const Customers: FunctionComponent = () => {
     <CustomersContext.Provider value={ctxValue}>
       <Pivot
         selectedKey={params.view || 'search'}
-        onLinkClick={({ props }) =>
-          dispatch({
-            type: 'CHANGE_VIEW',
-            view: props.itemKey as CustomersView
-          })
-        }
+        onLinkClick={({ props }) => dispatch(CHANGE_VIEW({ view: props.itemKey as CustomersView }))}
         styles={{ itemContainer: { paddingTop: 10 } }}>
         <PivotItem
           itemID='search'
