@@ -128,6 +128,7 @@
     "with-default-props": "0.2.1"
   },
   "devDependencies": {
+    "@types/connect-redis": "0.0.16",
     "@types/randomcolor": "^0.5.5",
     "@types/redis": "^2.8.28",
     "@types/set-value": "^2.0.0",
