@@ -1,4 +1,3 @@
-
 /* eslint-disable @typescript-eslint/no-var-requires */
 import session from 'express-session'
 import env from '../../utils/env'
