@@ -39,12 +39,10 @@ package-lock.json
 client/**/*.d.ts
 client/**/*js
 client/**/*js.map
-!client/**/*scss.d.ts
-!client/declarations.d.ts
-!client/global.d.ts
 
 doc/
 .DS_Store
 .tests/*.json
 .localtunnel
 schema.gql
+client/components/List/List.module.scss.d.ts
