@@ -1,8 +1,6 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { find, first } from 'underscore'
-import { AzStorageService } from '../../services'
 import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
 import { TimeEntriesQuery, TimeEntry } from './timeentry.types'
@@ -12,12 +10,8 @@ import { TimeEntriesQuery, TimeEntry } from './timeentry.types'
 export class TimeEntryResolver {
   /**
    * Constructor for TimeEntryResolver
-   *
-   * AzStorageService is automatically injected using Container from typedi
-   *
-   * @param {AzStorageService} _azstorage AzStorageService
    */
-  constructor(private readonly _azstorage: AzStorageService) {}
+  constructor() {}
 
   /**
    * Get time entries
@@ -38,26 +32,27 @@ export class TimeEntryResolver {
     @Ctx() ctx: Context
   ) {
     if (currentUser) query.resourceId = ctx.userId
-    const [users, projects, customers, timeentries] = await Promise.all([
-      this._azstorage.getUsers(),
-      this._azstorage.getProjects(),
-      this._azstorage.getCustomers(),
-      this._azstorage.getTimeEntries(query, { sortAsc, forecast })
-    ])
-    return timeentries.reduce((arr, entry) => {
-      const resource = find(users, (user) => user.id === entry.resourceId)
-      if (!entry.projectId) return arr
-      const project = find(projects, (p) => p.id === entry.projectId)
-      const customer = find(customers, (c) => c.key === first(entry.projectId.split(' ')))
-      if (project && customer) {
-        arr.push({
-          ...entry,
-          project,
-          customer,
-          resource
-        })
-      }
-      return arr
-    }, [])
+    // const [users, projects, customers, timeentries] = await Promise.all([
+    //   this._azstorage.getUsers(),
+    //   this._azstorage.getProjects(),
+    //   this._azstorage.getCustomers(),
+    //   this._azstorage.getTimeEntries(query, { sortAsc, forecast })
+    // ])
+    // return timeentries.reduce((arr, entry) => {
+    //   const resource = find(users, (user) => user.id === entry.resourceId)
+    //   if (!entry.projectId) return arr
+    //   const project = find(projects, (p) => p.id === entry.projectId)
+    //   const customer = find(customers, (c) => c.key === first(entry.projectId.split(' ')))
+    //   if (project && customer) {
+    //     arr.push({
+    //       ...entry,
+    //       project,
+    //       customer,
+    //       resource
+    //     })
+    //   }
+    //   return arr
+    // }, [])
+    return await Promise.resolve([])
   }
 }
