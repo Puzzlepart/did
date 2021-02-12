@@ -47,11 +47,14 @@ export class Context {
  * @param {Express.Request} request Express request
  * @param {MongoClient} client Mongo client
  */
-export const createContext = async (request: Express.Request, client: MongoClient): Promise<Context> => {
+export const createContext = async (
+  request: Express.Request,
+  client: MongoClient
+): Promise<Context> => {
   try {
     const context: Context = {}
     context.client = client
-    context.userId =  !!context.permissions && get(request, 'user.id')
+    context.userId = !!context.permissions && get(request, 'user.id')
     context.subscription = get(request, 'user.subscription')
     context.permissions = get(request, 'user.role.permissions', { default: [] })
     // if (!!request.token) {

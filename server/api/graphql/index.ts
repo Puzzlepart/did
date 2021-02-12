@@ -52,13 +52,11 @@ const getSchema = async () => {
   return schema
 }
 
-
-
 export default async (app: express.Application): Promise<void> => {
   try {
     const client = await MongoClient.connect(env('MONGO_DB_CONNECTION_STRING'), {
       useNewUrlParser: true,
-      useUnifiedTopology: true,
+      useUnifiedTopology: true
     })
     const schema = await getSchema()
     const server = new ApolloServer({

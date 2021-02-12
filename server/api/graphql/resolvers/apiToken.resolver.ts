@@ -16,7 +16,7 @@ export class ApiTokenResolver {
   /**
    * Constructor for ApiTokenResolver
    */
-  constructor() { }
+  constructor() {}
 
   /**
    * Get API tokens

@@ -16,8 +16,8 @@ export class UserMongoService {
 
   /**
    * Get user by ID
-   * 
-   * @param {string} id User ID 
+   *
+   * @param {string} id User ID
    */
   public async getById(id: string) {
     try {

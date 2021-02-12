@@ -11,9 +11,7 @@ export class MongoService {
    *
    * @param {string} connectionString Connection string
    */
-  constructor(@Inject('CONTEXT') private readonly context: Context) {
-
-  }
+  constructor(@Inject('CONTEXT') private readonly context: Context) {}
 
   public get user(): UserMongoService {
     return new UserMongoService(this.context.client.db('test'))

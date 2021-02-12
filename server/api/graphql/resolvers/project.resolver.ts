@@ -12,12 +12,10 @@ import { BaseResult, Project, ProjectInput, ProjectOptions } from './types'
 export class ProjectResolver {
   /**
    * Constructor for ProjectResolver
-   * 
+   *
    * @param {MSGraphService} _msgraph MSGraphService
    */
-  constructor(
-    private readonly _msgraph: MSGraphService
-  ) {}
+  constructor(private readonly _msgraph: MSGraphService) {}
 
   /**
    * Get projects

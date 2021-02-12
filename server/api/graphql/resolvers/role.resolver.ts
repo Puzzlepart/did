@@ -14,7 +14,7 @@ export class RoleResolver {
   /**
    * Constructor for RoleResolver
    */
-  constructor() { }
+  constructor() {}
 
   /**
    * Get roles
@@ -61,7 +61,7 @@ export class RoleResolver {
    */
   @Authorized<IAuthOptions>({ permission: 'cd52a735' })
   @Mutation(() => BaseResult, { description: 'Delete role' })
-  async deleteRole(@Arg('name', () => String) name: string) { 
+  async deleteRole(@Arg('name', () => String) name: string) {
     return await Promise.resolve({ success: true, error: null })
     // try {
     //   await this._azstorage.deleteRole(name)

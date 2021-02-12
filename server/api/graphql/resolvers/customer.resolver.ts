@@ -15,7 +15,7 @@ export class CustomerResolver {
   /**
    * Constructor for CustomerResolver
    */
-  constructor() { }
+  constructor() {}
 
   /**
    * Get customers
