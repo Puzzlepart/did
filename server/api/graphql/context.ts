@@ -1,6 +1,7 @@
 import { AuthenticationError } from 'apollo-server-express'
 import createDebug from 'debug'
 import get from 'get-value'
+import { MongoClient } from 'mongodb'
 import 'reflect-metadata'
 import { Container, ContainerInstance } from 'typedi'
 import { SubscriptionService } from '../services'
@@ -34,16 +35,23 @@ export class Context {
    * Permissions
    */
   public permissions?: string[]
+
+  /**
+   * Mongo client
+   */
+  public client?: MongoClient
 }
 
 /**
  * Create context
  *
  * @param {Express.Request} request Express request
+ * @param {MongoClient} client Mongo client
  */
-export const createContext = async (request: Express.Request): Promise<Context> => {
+export const createContext = async (request: Express.Request, client: MongoClient): Promise<Context> => {
   try {
     let context: Context = {}
+    context.client = client
     context.userId = null
     context.subscription = get(request, 'user.subscription')
     context.permissions = get(request, 'user.role.permissions', { default: [] })
