@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { Context } from 'mocha'
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { pick } from 'underscore'
-import { MSGraphService } from '../../services'
-import { MongoService } from '../../services/mongo'
-import { IAuthOptions } from '../authChecker'
-import { Context } from '../context'
-import { BaseResult } from './types'
-import { User, UserInput, UserQuery, UserQueryOptions } from './user.types'
+import { MSGraphService } from '../../../services'
+import { MongoService } from '../../../services/mongo'
+import { IAuthOptions } from '../../authChecker'
+import { BaseResult } from '../types'
+import { User, UserInput, UserQuery, UserQueryOptions } from './types'
 
 @Service()
 @Resolver(User)
@@ -41,8 +41,8 @@ export class UserResolver {
    * @param {UserQueryOptions} options Options
    */
   @Query(() => [User], { description: 'Get all users from Active Directory' })
-  async adUsers(@Arg('options', () => UserQueryOptions) options: UserQueryOptions) {
-    return await Promise.resolve([])
+  adUsers(@Arg('options', () => UserQueryOptions) options: UserQueryOptions) {
+    return this._msgraph.getUsers(options?.sortBy)
   }
 
   /**
