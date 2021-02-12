@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
@@ -12,10 +13,8 @@ import { BaseResult, Project, ProjectInput, ProjectOptions } from '../types'
 export class ProjectResolver {
   /**
    * Constructor for ProjectResolver
-   *
-   * @param {MSGraphService} _msgraph MSGraphService
    */
-  constructor(private readonly _msgraph: MSGraphService) {}
+  constructor() {}
 
   /**
    * Get projects

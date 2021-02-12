@@ -3,11 +3,10 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { pick } from 'underscore'
 import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
-import { LabelInput, LabelObject } from './types'
 import { BaseResult } from '../types'
+import { LabelInput, LabelObject } from './types'
 
 @Service()
 @Resolver(LabelObject)

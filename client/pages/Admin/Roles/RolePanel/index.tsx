@@ -18,7 +18,7 @@ export const RolePanel: FunctionComponent<IRolePanelProps> = (props: IRolePanelP
   const { data } = useQuery($users, {
     variables: {
       query: {
-        role: props.model.name
+        role: props.model?.name
       }
     },
     fetchPolicy: 'cache-and-network'
