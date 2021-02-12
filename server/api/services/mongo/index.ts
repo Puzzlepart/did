@@ -11,7 +11,7 @@ export class MongoService {
   /**
    * Constructor
    *
-   * @param {string} connectionString Connection string
+   * @param {string} context Context
    */
   constructor(@Inject('CONTEXT') private readonly context: Context) {}
 
