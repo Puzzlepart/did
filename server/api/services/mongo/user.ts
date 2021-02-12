@@ -8,7 +8,7 @@ export class UserMongoService {
   /**
    * Constructor
    *
-   * @param {Mongo.Db} _client Client
+   * @param {Mongo.Db} db Mongo database
    */
   constructor(db: Mongo.Db) {
     this._collection = db.collection(this._collectionName)
@@ -22,6 +22,20 @@ export class UserMongoService {
   public async getById(id: string) {
     try {
       const result = await this._collection.findOne({ id })
+      return result
+    } catch (err) {
+      throw err
+    }
+  }
+
+  /**
+   * Add user
+   *
+   * @param {User} user User
+   */
+  public async addUser(user: User) {
+    try {
+      const result = await this._collection.insertOne(user)
       return result
     } catch (err) {
       throw err
