@@ -1,5 +1,6 @@
 import * as Mongo from 'mongodb'
 import { User } from 'server/api/graphql/resolvers/types'
+import { RoleMongoService } from './role'
 
 export class UserMongoService {
   private _collectionName = 'users'
@@ -8,10 +9,10 @@ export class UserMongoService {
   /**
    * Constructor
    *
-   * @param {Mongo.Db} db Mongo database
+   * @param {Mongo.Db} _db Mongo database
    */
-  constructor(db: Mongo.Db) {
-    this._collection = db.collection(this._collectionName)
+  constructor(private _db: Mongo.Db) {
+    this._collection = _db.collection(this._collectionName)
   }
 
   /**
@@ -21,8 +22,10 @@ export class UserMongoService {
    */
   public async getById(id: string) {
     try {
-      const result = await this._collection.findOne({ id })
-      return result
+      const user = await this._collection.findOne({ id })
+      if (!user.role) throw new Error()
+      user.role = await new RoleMongoService(this._db).getByName(user.role as string)
+      return user
     } catch (err) {
       throw err
     }
