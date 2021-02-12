@@ -16,7 +16,7 @@ export class RoleMongoService {
 
   /**
    * Get roles
-   * 
+   *
    * @param {Mongo.FilterQuery<Role>} query Query
    */
   public async getRoles(query?: Mongo.FilterQuery<Role>): Promise<Role[]> {

@@ -35,13 +35,10 @@ class App {
    * Setup app
    */
   public async setup() {
-    this._client = await MongoClient.connect(
-      env('MONGO_DB_CONNECTION_STRING'),
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-      }
-    )
+    this._client = await MongoClient.connect(env('MONGO_DB_CONNECTION_STRING'), {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    })
     this.setupSession()
     this.setupViewEngine()
     this.setupAssets()

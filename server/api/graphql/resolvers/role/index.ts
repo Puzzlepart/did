@@ -16,7 +16,7 @@ export class RoleResolver {
    *
    * @param {MongoService} _mongo Mongo service
    */
-  constructor(private readonly _mongo: MongoService) { }
+  constructor(private readonly _mongo: MongoService) {}
 
   /**
    * Get roles

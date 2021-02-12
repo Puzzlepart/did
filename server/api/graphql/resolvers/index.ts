@@ -9,4 +9,3 @@ export { SubscriptionResolver } from './subscription'
 export { TimeEntryResolver } from './timeentry'
 export { TimesheetResolver } from './timesheet'
 export { UserResolver } from './user'
-

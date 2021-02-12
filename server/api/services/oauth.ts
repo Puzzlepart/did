@@ -61,7 +61,7 @@ class OAuthService {
         `Failed to refresh token using options ${JSON.stringify(options)}: ${err.message}`
       )
     }
-    // TODO: Temp hack for 'Property 'tokenParams' does not exist on type 'User'.' 
+    // TODO: Temp hack for 'Property 'tokenParams' does not exist on type 'User'.'
     this._request.user['tokenParams'] = accessToken.token
     return accessToken.token
   }

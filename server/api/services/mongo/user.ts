@@ -20,7 +20,7 @@ export class UserMongoService {
 
   /**
    * Get users
-   * 
+   *
    * @param {Mongo.FilterQuery<User>} query Query
    */
   public async getUsers(query?: Mongo.FilterQuery<User>): Promise<User[]> {
@@ -29,9 +29,9 @@ export class UserMongoService {
         this._collection.find(query).toArray(),
         this._role.getRoles()
       ])
-      return users.map(user => ({
+      return users.map((user) => ({
         ...user,
-        role: find(roles, role => role.name === user.role)
+        role: find(roles, (role) => role.name === user.role)
       }))
     } catch (err) {
       throw err
