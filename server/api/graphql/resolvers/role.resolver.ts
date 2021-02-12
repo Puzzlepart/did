@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import 'reflect-metadata'
+import { MongoService } from '../..//services/mongo'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { pick } from 'underscore'
@@ -13,17 +14,18 @@ import { BaseResult } from './types'
 export class RoleResolver {
   /**
    * Constructor for RoleResolver
+   *
+   * @param {MongoService} _mongo Mongo service
    */
-  constructor() {}
+  constructor(private readonly _mongo: MongoService) { }
 
   /**
    * Get roles
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [Role], { description: 'Get roles' })
-  async roles() {
-    return await Promise.resolve([])
-    //return await this._azstorage.getRoles()
+  roles() {
+    return this._mongo.role.getRoles()
   }
 
   /**

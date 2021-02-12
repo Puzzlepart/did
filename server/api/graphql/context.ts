@@ -54,16 +54,10 @@ export const createContext = async (
   try {
     const context: Context = {}
     context.client = client
-    context.userId = !!context.permissions && get(request, 'user.id')
+    context.userId = request.user.id
     context.subscription = get(request, 'user.subscription')
     context.permissions = get(request, 'user.role.permissions', { default: [] })
-    // if (!!request.token) {
-    //   const token = await new SubscriptionService().getToken(request.token)
-    //   if (!token) throw new AuthenticationError('Token is invalid.')
-    //   context = { ...context, ...token }
-    // } else {
-    //   context.userId = !!context.permissions && get(request, 'user.id')
-    // }
+    // TODO: Support token authentication
     context.requestId = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString()
     context.container = Container.of(context.requestId)
     context.container.set({ id: 'CONTEXT', transient: true, value: context })

@@ -15,11 +15,25 @@ export class RoleMongoService {
   }
 
   /**
+   * Get roles
+   * 
+   * @param {Mongo.FilterQuery<Role>} query Query
+   */
+  public async getRoles(query?: Mongo.FilterQuery<Role>): Promise<Role[]> {
+    try {
+      const roles = await this._collection.find(query).toArray()
+      return roles
+    } catch (err) {
+      throw err
+    }
+  }
+
+  /**
    * Get Role by name
    *
    * @param {string} name Role name
    */
-  public async getByName(name: string) {
+  public async getByName(name: string): Promise<Role> {
     try {
       const role = await this._collection.findOne({ name })
       return role
