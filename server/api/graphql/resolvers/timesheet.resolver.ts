@@ -2,20 +2,16 @@ import { ApolloError } from 'apollo-server-express'
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { contains, filter, find, isEmpty, pick } from 'underscore'
-import DateUtils from '../../../../shared/utils/date'
-import { AzStorageService, AzTimeEntry, MSGraphService } from '../../services'
+import { pick } from 'underscore'
+import { MSGraphService } from '../../services'
 import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
-import { connectEntities } from './project.utils'
-import EventMatching from './timesheet.matching'
 import {
   TimesheetOptions,
   TimesheetPeriodInput,
   TimesheetPeriodObject,
   TimesheetQuery
 } from './timesheet.types'
-import { connectTimeEntries, getPeriods } from './timesheet.utils'
 import { BaseResult } from './types'
 
 @Service()
@@ -26,11 +22,9 @@ export class TimesheetResolver {
    *
    * AzStorageService and MSGraphService is automatically injected using Container from typedi
    *
-   * @param {AzStorageService} _azstorage AzStorageService
    * @param {MSGraphService} _msgraph MSGraphService
    */
   constructor(
-    private readonly _azstorage: AzStorageService,
     private readonly _msgraph: MSGraphService
   ) {}
 
@@ -51,55 +45,55 @@ export class TimesheetResolver {
     @Ctx() ctx: Context
   ) {
     try {
-      const periods = getPeriods(query.startDate, query.endDate, options.locale)
-      // eslint-disable-next-line prefer-const
-      let [projects, customers, timeentries, labels] = await Promise.all([
-        this._azstorage.getProjects(),
-        this._azstorage.getCustomers(),
-        this._azstorage.getTimeEntries(
-          {
-            resourceId: ctx.userId,
-            startDateTime: query.startDate,
-            endDateTime: query.endDate
-          },
-          { sortAsc: true }
-        ),
-        this._azstorage.getLabels()
-      ])
+      // const periods = getPeriods(query.startDate, query.endDate, options.locale)
+      // // eslint-disable-next-line prefer-const
+      // let [projects, customers, timeentries, labels] = await Promise.all([
+      //   this._azstorage.getProjects(),
+      //   this._azstorage.getCustomers(),
+      //   this._azstorage.getTimeEntries(
+      //     {
+      //       resourceId: ctx.userId,
+      //       startDateTime: query.startDate,
+      //       endDateTime: query.endDate
+      //     },
+      //     { sortAsc: true }
+      //   ),
+      //   this._azstorage.getLabels()
+      // ])
 
-      projects = connectEntities(projects, customers, labels)
+      // projects = connectEntities(projects, customers, labels)
 
-      for (let i = 0; i < periods.length; i++) {
-        const period = periods[i]
-        const [confirmed, forecasted] = await Promise.all([
-          this._azstorage.getConfirmedPeriod(ctx.userId, period.id),
-          this._azstorage.getForecastedPeriod(ctx.userId, period.id)
-        ])
-        period.isForecasted = !!forecasted
-        period.forecastedHours = period.isForecasted && forecasted.hours
-        period.isConfirmed = !!confirmed
-        if (period.isConfirmed) {
-          period.events = connectTimeEntries(
-            filter(timeentries, (entry) => entry.periodId === period.id),
-            projects,
-            customers,
-            labels
-          )
-        } else {
-          const eventMatching = new EventMatching(projects, customers, labels)
-          const events = await this._msgraph.getEvents(
-            period.startDate,
-            period.endDate,
-            options.tzOffset
-          )
-          period.events = eventMatching.matchEvents(events)
-        }
-        period.events = period.events.map((evt) => ({
-          ...evt,
-          date: DateUtils.formatDate(evt.startDateTime, options.dateFormat, options.locale)
-        }))
-      }
-      return periods
+      // for (let i = 0; i < periods.length; i++) {
+      //   const period = periods[i]
+      //   const [confirmed, forecasted] = await Promise.all([
+      //     this._azstorage.getConfirmedPeriod(ctx.userId, period.id),
+      //     this._azstorage.getForecastedPeriod(ctx.userId, period.id)
+      //   ])
+      //   period.isForecasted = !!forecasted
+      //   period.forecastedHours = period.isForecasted && forecasted.hours
+      //   period.isConfirmed = !!confirmed
+      //   if (period.isConfirmed) {
+      //     period.events = connectTimeEntries(
+      //       filter(timeentries, (entry) => entry.periodId === period.id),
+      //       projects,
+      //       customers,
+      //       labels
+      //     )
+      //   } else {
+      //     const eventMatching = new EventMatching(projects, customers, labels)
+      //     const events = await this._msgraph.getEvents(
+      //       period.startDate,
+      //       period.endDate,
+      //       options.tzOffset
+      //     )
+      //     period.events = eventMatching.matchEvents(events)
+      //   }
+      //   period.events = period.events.map((evt) => ({
+      //     ...evt,
+      //     date: DateUtils.formatDate(evt.startDateTime, options.dateFormat, options.locale)
+      //   }))
+      // }
+      return []
     } catch (error) {
       throw new ApolloError(error.message, error.code, { statusCode: error.statusCode })
     }
@@ -125,34 +119,34 @@ export class TimesheetResolver {
     @Ctx() ctx: Context
   ): Promise<BaseResult> {
     try {
-      let hours = 0
-      await this._azstorage.deleteTimeEntries(period.id, ctx.userId, options.forecast)
-      if (!isEmpty(period.matchedEvents)) {
-        const [events, labels] = await Promise.all([
-          this._msgraph.getEvents(period.startDate, period.endDate, options.tzOffset),
-          this._azstorage.getLabels()
-        ])
-        const timeentries: AzTimeEntry[] = period.matchedEvents.reduce((t, e) => {
-          const event = find(events, ({ id }) => id === e.id)
-          if (!event) return t
-          const _labels = filter(labels, ({ name }) => contains(event.categories, name)).map(
-            ({ name }) => name
-          )
-          t.push(new AzTimeEntry(ctx.userId, period.id, e.projectId, e.manualMatch, event, _labels))
-          return t
-        }, [])
-        hours = await this._azstorage.addTimeEntries(timeentries, options.forecast)
-      }
-      if (options.forecast) {
-        await this._azstorage.addForecastedPeriod(ctx.userId, period.id, hours)
-      } else {
-        await this._azstorage.addConfirmedPeriod(
-          ctx.userId,
-          period.id,
-          hours,
-          period.forecastedHours
-        )
-      }
+      // let hours = 0
+      // await this._azstorage.deleteTimeEntries(period.id, ctx.userId, options.forecast)
+      // if (!isEmpty(period.matchedEvents)) {
+      //   const [events, labels] = await Promise.all([
+      //     this._msgraph.getEvents(period.startDate, period.endDate, options.tzOffset),
+      //     this._azstorage.getLabels()
+      //   ])
+      //   const timeentries: AzTimeEntry[] = period.matchedEvents.reduce((t, e) => {
+      //     const event = find(events, ({ id }) => id === e.id)
+      //     if (!event) return t
+      //     const _labels = filter(labels, ({ name }) => contains(event.categories, name)).map(
+      //       ({ name }) => name
+      //     )
+      //     t.push(new AzTimeEntry(ctx.userId, period.id, e.projectId, e.manualMatch, event, _labels))
+      //     return t
+      //   }, [])
+      //   hours = await this._azstorage.addTimeEntries(timeentries, options.forecast)
+      // }
+      // if (options.forecast) {
+      //   await this._azstorage.addForecastedPeriod(ctx.userId, period.id, hours)
+      // } else {
+      //   await this._azstorage.addConfirmedPeriod(
+      //     ctx.userId,
+      //     period.id,
+      //     hours,
+      //     period.forecastedHours
+      //   )
+      // }
       return { success: true }
     } catch (error) {
       return {
@@ -182,17 +176,17 @@ export class TimesheetResolver {
     @Ctx() ctx: Context
   ): Promise<BaseResult> {
     try {
-      if (options.forecast) {
-        await Promise.all([
-          this._azstorage.deleteTimeEntries(period.id, ctx.userId, true),
-          this._azstorage.removeForecastedPeriod(period.id, ctx.userId)
-        ])
-      } else {
-        await Promise.all([
-          this._azstorage.deleteTimeEntries(period.id, ctx.userId, false),
-          this._azstorage.removeConfirmedPeriod(period.id, ctx.userId)
-        ])
-      }
+      // if (options.forecast) {
+      //   await Promise.all([
+      //     this._azstorage.deleteTimeEntries(period.id, ctx.userId, true),
+      //     this._azstorage.removeForecastedPeriod(period.id, ctx.userId)
+      //   ])
+      // } else {
+      //   await Promise.all([
+      //     this._azstorage.deleteTimeEntries(period.id, ctx.userId, false),
+      //     this._azstorage.removeConfirmedPeriod(period.id, ctx.userId)
+      //   ])
+      // }
       return { success: true, error: null }
     } catch (error) {
       return {
