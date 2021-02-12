@@ -16,6 +16,20 @@ export class UserMongoService {
   }
 
   /**
+   * Get users
+   * 
+   * @param {Mongo.FilterQuery<User>} query Query
+   */
+  public async getUsers(query?: Mongo.FilterQuery<User>): Promise<User[]> {
+    try {
+      const users = await this._collection.find(query).toArray()
+      return users
+    } catch (err) {
+      throw err
+    }
+  }
+
+  /**
    * Get user by ID
    *
    * @param {string} id User ID

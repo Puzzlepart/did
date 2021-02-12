@@ -53,11 +53,11 @@ export class UserResolver {
    */
   @Authorized()
   @Query(() => [User], { description: 'Get users' })
-  async users(
+  users(
     @Arg('options', () => UserQueryOptions, { nullable: true }) options: UserQueryOptions,
     @Arg('query', () => UserQuery, { nullable: true }) query: UserQuery
   ) {
-    return await Promise.resolve([])
+    return this._mongo.user.getUsers(query)
   }
 
   /**
