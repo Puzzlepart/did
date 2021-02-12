@@ -15,6 +15,20 @@ export class RoleMongoService {
   }
 
   /**
+   * Get Role by name
+   *
+   * @param {string} name Role name
+   */
+  public async getByName(name: string) {
+    try {
+      const role = await this._collection.findOne({ name })
+      return role
+    } catch (err) {
+      throw err
+    }
+  }
+
+  /**
    * Add role
    *
    * @param {Role} role Role
