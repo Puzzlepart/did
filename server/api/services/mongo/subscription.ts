@@ -1,5 +1,5 @@
 import * as Mongo from 'mongodb'
-import { Subscription } from 'server/api/graphql/resolvers/types'
+import { Subscription } from '../../graphql/resolvers/types'
 
 export class SubscriptionMongoService {
   private _collectionName = 'subscriptions'
