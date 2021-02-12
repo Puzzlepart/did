@@ -1,11 +1,10 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable require-await */
 import { ApolloError } from 'apollo-server-express'
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { pick } from 'underscore'
-import { MSGraphService } from '../../../services'
 import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
 import { BaseResult } from '../types'
@@ -21,12 +20,8 @@ import {
 export class TimesheetResolver {
   /**
    * Constructor for TimesheetResolver
-   *
-   * AzStorageService and MSGraphService is automatically injected using Container from typedi
-   *
-   * @param {MSGraphService} _msgraph MSGraphService
    */
-  constructor(private readonly _msgraph: MSGraphService) {}
+  constructor() {}
 
   /**
    * Get timesheet
@@ -45,9 +40,9 @@ export class TimesheetResolver {
     @Ctx() ctx: Context
   ) {
     try {
-      return []
+      return await Promise.resolve([])
     } catch (error) {
-      throw new ApolloError(error.message, error.code, { statusCode: error.statusCode })
+      throw error
     }
   }
 
@@ -71,7 +66,7 @@ export class TimesheetResolver {
     @Ctx() ctx: Context
   ): Promise<BaseResult> {
     try {
-      return { success: true }
+      return await Promise.resolve({ success: true })
     } catch (error) {
       return {
         success: false,
@@ -100,7 +95,7 @@ export class TimesheetResolver {
     @Ctx() ctx: Context
   ): Promise<BaseResult> {
     try {
-      return { success: true, error: null }
+      return await Promise.resolve({ success: true, error: null })
     } catch (error) {
       return {
         success: false,

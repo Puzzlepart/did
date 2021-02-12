@@ -54,7 +54,8 @@ export const createContext = async (
   try {
     const context: Context = {}
     context.client = client
-    context.userId = request.user.id
+    // TODO: Temp hack for 'Property 'id' does not exist on type 'User'.'
+    context.userId = request.user['id']
     context.subscription = get(request, 'user.subscription')
     context.permissions = get(request, 'user.role.permissions', { default: [] })
     // TODO: Support token authentication

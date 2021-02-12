@@ -45,7 +45,8 @@ class OAuthService {
    * @param {AccessTokenOptions} options Options
    */
   public async getAccessToken(options: AccessTokenOptions): Promise<Token> {
-    let accessToken = this._getClient(options).createToken(this._request.user.tokenParams)
+    // TODO: Temp hack for 'Property 'tokenParams' does not exist on type 'User'.'
+    let accessToken = this._getClient(options).createToken(this._request.user['tokenParams'])
     try {
       if (accessToken.expired() || options.force) {
         debug(`Token expired. Attempting to refresh... Options: ${JSON.stringify(options)}`)
@@ -60,8 +61,8 @@ class OAuthService {
         `Failed to refresh token using options ${JSON.stringify(options)}: ${err.message}`
       )
     }
-    // Store access token on Express request
-    this._request.user.tokenParams = accessToken.token
+    // TODO: Temp hack for 'Property 'tokenParams' does not exist on type 'User'.' 
+    this._request.user['tokenParams'] = accessToken.token
     return accessToken.token
   }
 }
