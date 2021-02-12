@@ -3,11 +3,11 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { MongoService } from '../../services/mongo'
-import { IAuthOptions } from '../authChecker'
-import { Context } from '../context'
-import { Subscription, SubscriptionSettingsInput } from './subscription.types'
-import { BaseResult } from './types'
+import { MongoService } from '../../../services/mongo'
+import { IAuthOptions } from '../../authChecker'
+import { Context } from '../../context'
+import { BaseResult } from '../types'
+import { Subscription, SubscriptionSettingsInput } from './types'
 
 @Service()
 @Resolver(Subscription)
