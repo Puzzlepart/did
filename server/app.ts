@@ -1,21 +1,24 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv').config()
-import createError from 'http-errors'
-import express from 'express'
-import favicon from 'express-favicon'
-import path from 'path'
 import bodyParser from 'body-parser'
-import logger from 'morgan'
-import passport from './middleware/passport'
-import serveGzipped from './middleware/gzip'
+import express from 'express'
 import bearerToken from 'express-bearer-token'
+import favicon from 'express-favicon'
+import createError from 'http-errors'
+import { MongoClient } from 'mongodb'
+import logger from 'morgan'
+import path from 'path'
 import { pick } from 'underscore'
-import authRoute from './routes/auth'
-import session from './middleware/session'
 import graphql from './api/graphql'
+import serveGzipped from './middleware/gzip'
+import passport from './middleware/passport'
+import session from './middleware/session'
+import authRoute from './routes/auth'
+import env from './utils/env'
 
 class App {
   public instance: express.Application
+  private _client: MongoClient
 
   constructor() {
     this.instance = express()
@@ -32,6 +35,13 @@ class App {
    * Setup app
    */
   public async setup() {
+    this._client = await MongoClient.connect(
+      env('MONGO_DB_CONNECTION_STRING'),
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+      }
+    )
     this.setupSession()
     this.setupViewEngine()
     this.setupAssets()
@@ -68,9 +78,10 @@ class App {
    * Setup authentication
    */
   setupAuth() {
+    const _passport = passport(this._client)
     this.instance.use(bearerToken())
-    this.instance.use(passport.initialize())
-    this.instance.use(passport.session())
+    this.instance.use(_passport.initialize())
+    this.instance.use(_passport.session())
     this.instance.use('/auth', authRoute)
   }
 
