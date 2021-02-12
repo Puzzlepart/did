@@ -89,7 +89,7 @@ class App {
    * Setup graphql
    */
   async setupGraphQL() {
-    await graphql(this.instance)
+    await graphql(this.instance, this._client)
   }
 
   /**
