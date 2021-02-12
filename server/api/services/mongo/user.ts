@@ -1,6 +1,4 @@
-/* eslint-disable max-classes-per-file */
 import * as Mongo from 'mongodb'
-import co from 'co'
 
 export class UserMongoService {
   private _collectionName = 'users'
@@ -15,12 +13,9 @@ export class UserMongoService {
   }
 
   public async getUserById(id: string) {
-    const collection = this._collection
     try {
-      return await co(function* () {
-        const result = yield collection.findOne({ id })
-        return result
-      })
+      const result = await this._collection.findOne({ id })
+      return result
     } catch (err) {
       throw err
     }
