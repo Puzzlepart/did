@@ -66,7 +66,7 @@ export class UserResolver {
   @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => User, { description: 'Get user by id' })
   public getUserById() {
-    return this._mongo.user.getUserById('0d2a7e56-1519-4225-b7e3-ee857fd014d2')
+    return this._mongo.user.getById('0d2a7e56-1519-4225-b7e3-ee857fd014d2')
   }
 
   /**

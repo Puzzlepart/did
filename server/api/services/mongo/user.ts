@@ -1,8 +1,10 @@
 import * as Mongo from 'mongodb'
+import { User } from 'server/api/graphql/resolvers/types'
 
 export class UserMongoService {
   private _collectionName = 'users'
-  private _collection: Mongo.Collection
+  private _collection: Mongo.Collection<User>
+
   /**
    * Constructor
    *
@@ -12,7 +14,12 @@ export class UserMongoService {
     this._collection = db.collection(this._collectionName)
   }
 
-  public async getUserById(id: string) {
+  /**
+   * Get user by ID
+   * 
+   * @param {string} id User ID 
+   */
+  public async getById(id: string) {
     try {
       const result = await this._collection.findOne({ id })
       return result
