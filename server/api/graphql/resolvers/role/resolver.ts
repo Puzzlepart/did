@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import 'reflect-metadata'
-import { MongoService } from '../..//services/mongo'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { pick } from 'underscore'
-import { IAuthOptions } from '../authChecker'
-import { Role, RoleInput } from './role.types'
-import { BaseResult } from './types'
+import { MongoService } from '../../../services/mongo'
+import { IAuthOptions } from '../../authChecker'
+import { BaseResult } from '../types'
+import { Role, RoleInput } from './types'
 
 @Service()
 @Resolver(Role)
