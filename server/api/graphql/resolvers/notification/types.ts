@@ -1,7 +1,7 @@
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, ObjectType, InputType, ID } from 'type-graphql'
-import { simpleResolvers } from '../config'
+import { simpleResolvers } from '../../config'
 
 @ObjectType({
   description: 'A type that describes a Notification',

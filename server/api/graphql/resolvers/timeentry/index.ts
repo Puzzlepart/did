@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { IAuthOptions } from '../authChecker'
-import { Context } from '../context'
-import { TimeEntriesQuery, TimeEntry } from './timeentry.types'
+import { IAuthOptions } from '../../authChecker'
+import { Context } from '../../context'
+import { TimeEntriesQuery, TimeEntry } from './types'
 
 @Service()
 @Resolver(TimeEntry)
@@ -32,28 +33,8 @@ export class TimeEntryResolver {
     @Arg('query') query: TimeEntriesQuery,
     @Ctx() ctx: Context
   ) {
-    if (currentUser) query.resourceId = ctx.userId
-    // const [users, projects, customers, timeentries] = await Promise.all([
-    //   this._azstorage.getUsers(),
-    //   this._azstorage.getProjects(),
-    //   this._azstorage.getCustomers(),
-    //   this._azstorage.getTimeEntries(query, { sortAsc, forecast })
-    // ])
-    // return timeentries.reduce((arr, entry) => {
-    //   const resource = find(users, (user) => user.id === entry.resourceId)
-    //   if (!entry.projectId) return arr
-    //   const project = find(projects, (p) => p.id === entry.projectId)
-    //   const customer = find(customers, (c) => c.key === first(entry.projectId.split(' ')))
-    //   if (project && customer) {
-    //     arr.push({
-    //       ...entry,
-    //       project,
-    //       customer,
-    //       resource
-    //     })
-    //   }
-    //   return arr
-    // }, [])
     return await Promise.resolve([])
   }
 }
+
+export * from './types'

@@ -2,10 +2,10 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { MSGraphService } from '../../services'
-import { IAuthOptions } from '../authChecker'
-import { Context } from '../context'
-import { BaseResult, Project, ProjectInput, ProjectOptions } from './types'
+import { MSGraphService } from '../../../services'
+import { IAuthOptions } from '../../authChecker'
+import { Context } from '../../context'
+import { BaseResult, Project, ProjectInput, ProjectOptions } from '../types'
 
 @Service()
 @Resolver(Project)
@@ -72,3 +72,5 @@ export class ProjectResolver {
     // }
   }
 }
+
+export * from './types'

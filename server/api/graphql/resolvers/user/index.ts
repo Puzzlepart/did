@@ -86,3 +86,5 @@ export class UserResolver {
     return await Promise.resolve({ success: true, error: null })
   }
 }
+
+export * from './types'

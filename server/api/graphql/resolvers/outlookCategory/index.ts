@@ -3,9 +3,9 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { MSGraphService } from '../../services'
-import { IAuthOptions } from '../authChecker'
-import { CreateOutlookCategoryResult, OutlookCategory } from './outlookCategory.types'
+import { MSGraphService } from '../../../services'
+import { IAuthOptions } from '../../authChecker'
+import { CreateOutlookCategoryResult, OutlookCategory } from './types'
 
 @Service()
 @Resolver(OutlookCategory)
@@ -36,14 +36,7 @@ export class OutlookCategoryResolver {
   @Mutation(() => CreateOutlookCategoryResult, { description: 'Create Outlook category' })
   async createOutlookCategory(@Arg('category') category: string) {
     return await Promise.resolve({ success: true, error: null })
-    // try {
-    //   const data = await this._msgraph.createOutlookCategory(category)
-    //   return { data, success: true, error: null }
-    // } catch (error) {
-    //   return {
-    //     success: false,
-    //     error: pick(error, 'name', 'message', 'code', 'statusCode')
-    //   }
-    // }
   }
 }
+
+export * from './types'

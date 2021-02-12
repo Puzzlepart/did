@@ -42,21 +42,10 @@ export class RoleResolver {
     @Arg('update', { nullable: true }) update: boolean
   ) {
     return await Promise.resolve({ success: true, error: null })
-    // try {
-    //   await this._azstorage.addOrUpdateRole(role, update)
-    //   return { success: true, error: null }
-    // } catch (error) {
-    //   return {
-    //     success: false,
-    //     error: pick(error, 'name', 'message', 'code', 'statusCode')
-    //   }
-    // }
   }
 
   /**
    * Delete role
-   *
-   * @permission MANAGE_ROLESPERMISSIONS (cd52a735)
    *
    * @param {string} name Name
    */
@@ -64,14 +53,7 @@ export class RoleResolver {
   @Mutation(() => BaseResult, { description: 'Delete role' })
   async deleteRole(@Arg('name', () => String) name: string) {
     return await Promise.resolve({ success: true, error: null })
-    // try {
-    //   await this._azstorage.deleteRole(name)
-    //   return { success: true, error: null }
-    // } catch (error) {
-    //   return {
-    //     success: false,
-    //     error: pick(error, 'name', 'message', 'code', 'statusCode')
-    //   }
-    // }
   }
 }
+
+export * from './types'

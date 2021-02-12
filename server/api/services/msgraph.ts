@@ -100,7 +100,7 @@ class MSGraphService {
   }
 
   /**
-   * Get users
+   * Get Azure Active Directory users
    *
    * @param {string} orderBy Order by
    */

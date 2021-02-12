@@ -1,7 +1,7 @@
 import MSGraphEvent from 'server/api/services/msgraph.event'
 import { findBestMatch } from 'string-similarity'
 import { contains, filter, find, first, isEmpty } from 'underscore'
-import { Customer, EventObject, LabelObject, Project } from './types'
+import { Customer, EventObject, LabelObject, Project } from '../types'
 
 export default class {
   constructor(

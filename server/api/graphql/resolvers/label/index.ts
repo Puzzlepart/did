@@ -4,10 +4,10 @@ import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { pick } from 'underscore'
-import { IAuthOptions } from '../authChecker'
-import { Context } from '../context'
-import { LabelInput, LabelObject } from './label.types'
-import { BaseResult } from './types'
+import { IAuthOptions } from '../../authChecker'
+import { Context } from '../../context'
+import { LabelInput, LabelObject } from './types'
+import { BaseResult } from '../types'
 
 @Service()
 @Resolver(LabelObject)
@@ -24,7 +24,6 @@ export class LabelResolver {
   @Query(() => [LabelObject], { description: 'Get labels' })
   async labels() {
     return await Promise.resolve([])
-    //return await this._azstorage.getLabels()
   }
 
   /**
@@ -42,15 +41,6 @@ export class LabelResolver {
     @Ctx() ctx: Context
   ) {
     return await Promise.resolve({ success: true, error: null })
-    // try {
-    //   await this._azstorage.addOrUpdateLabel(label, ctx.userId, update)
-    //   return { success: true, error: null }
-    // } catch (error) {
-    //   return {
-    //     success: false,
-    //     error: pick(error, 'name', 'message', 'code', 'statusCode')
-    //   }
-    // }
   }
 
   /**
@@ -62,14 +52,7 @@ export class LabelResolver {
   @Mutation(() => BaseResult, { description: 'Delete label' })
   async deleteLabel(@Arg('name') name: string) {
     return await Promise.resolve({ success: true, error: null })
-    // try {
-    //   await this._azstorage.deleteLabel(name)
-    //   return { success: true, error: null }
-    // } catch (error) {
-    //   return {
-    //     success: false,
-    //     error: pick(error, 'name', 'message', 'code', 'statusCode')
-    //   }
-    // }
   }
 }
+
+export * from './types'

@@ -3,11 +3,10 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { pick } from 'underscore'
-import { IAuthOptions } from '../authChecker'
-import { Context } from '../context'
-import { Customer, CustomerInput } from './customer.types'
-import { BaseResult } from './types'
+import { IAuthOptions } from '../../authChecker'
+import { Context } from '../../context'
+import { BaseResult } from '../types'
+import { Customer, CustomerInput } from './types'
 
 @Service()
 @Resolver(Customer)
@@ -25,8 +24,6 @@ export class CustomerResolver {
   @Authorized()
   @Query(() => [Customer], { description: 'Get customers' })
   async customers(@Arg('sortBy', { nullable: true }) sortBy: string) {
-    // return await this._azstorage.getCustomers({ sortBy })
-
     return await Promise.resolve([])
   }
 
@@ -46,15 +43,6 @@ export class CustomerResolver {
     @Arg('update', { nullable: true }) update: boolean,
     @Ctx() ctx: Context
   ) {
-    // try {
-    //   await this._azstorage.createOrUpdateCustomer(customer, ctx.userId, update)
-    //   return { success: true, error: null }
-    // } catch (error) {
-    //   return {
-    //     success: false,
-    //     error: pick(error, 'name', 'message', 'code', 'statusCode')
-    //   }
-    // }
     return await Promise.resolve({ success: true, error: null })
   }
 
@@ -69,25 +57,7 @@ export class CustomerResolver {
   @Mutation(() => BaseResult, { description: 'Delete customer' })
   async deleteCustomer(@Arg('key') key: string) {
     return await Promise.resolve({ success: true, error: null })
-    //   try {
-    //     const projects = await this._azstorage.getProjects(key, {
-    //       noParse: true
-    //     })
-    //     if (projects.length > 0) {
-    //       const batch = projects.reduce((b, entity) => {
-    //         b.deleteEntity(entity)
-    //         return b
-    //       }, createAzBatch())
-    //       await executeBatch('Projects', batch)
-    //     }
-    //     await this._azstorage.deleteCustomer(key)
-    //     return { success: true, error: null }
-    //   } catch (error) {
-    //     return {
-    //       success: false,
-    //       error: pick(error, 'name', 'message', 'code', 'statusCode')
-    //     }
-    //   }
-    // }
   }
 }
+
+export * from './types'

@@ -1,8 +1,8 @@
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, Float, ID, InputType, ObjectType } from 'type-graphql'
-import { simpleResolvers } from '../config'
-import { Project, Customer, User } from './types'
+import { simpleResolvers } from '../../config'
+import { Project, Customer, User } from '../types'
 
 @ObjectType({
   description: 'A type that describes a TimeEntry',

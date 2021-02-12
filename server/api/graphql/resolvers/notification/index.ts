@@ -4,11 +4,9 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { IAuthOptions } from '../authChecker'
-import { Context } from '../context'
-import forecast from './notification.forecast'
-import { Notification, NotificationTemplates } from './notification.types'
-import unconfirmedPeriods from './notification.unconfirmed-periods'
+import { IAuthOptions } from '../../authChecker'
+import { Context } from '../../context'
+import { Notification, NotificationTemplates } from './types'
 
 @Service()
 @Resolver(Notification)
@@ -33,10 +31,7 @@ export class NotificationResolver {
     @Ctx() ctx: Context
   ) {
     return await Promise.resolve([])
-    // const notifications = await Promise.all([
-    //   unconfirmedPeriods(ctx, this._azstorage, templates.unconfirmedPeriods, locale),
-    //   forecast(ctx, this._azstorage, templates.forecast, locale)
-    // ])
-    // return [].concat.apply([], notifications)
   }
 }
+
+export * from './types'
