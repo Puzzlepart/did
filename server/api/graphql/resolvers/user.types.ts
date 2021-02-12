@@ -32,7 +32,7 @@ export class User {
   preferredLanguage?: string
 
   @Field(() => Role)
-  role?: Role
+  role?: Role | string
 
   @Field(() => Subscription)
   subscription?: Subscription
