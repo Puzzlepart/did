@@ -1,26 +1,20 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { pick } from 'underscore'
-import AzTableUtilities from '../../../utils/table'
-import { AzStorageService } from '../../services'
 import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
 import { Customer, CustomerInput } from './customer.types'
 import { BaseResult } from './types'
-const { executeBatch, createAzBatch } = new AzTableUtilities()
 
 @Service()
 @Resolver(Customer)
 export class CustomerResolver {
   /**
    * Constructor for CustomerResolver
-   *
-   * AzStorageService is automatically injected using Container from typedi
-   *
-   * @param {AzStorageService} _azstorage AzStorageService
    */
-  constructor(private readonly _azstorage: AzStorageService) {}
+  constructor() { }
 
   /**
    * Get customers
@@ -30,7 +24,9 @@ export class CustomerResolver {
   @Authorized()
   @Query(() => [Customer], { description: 'Get customers' })
   async customers(@Arg('sortBy', { nullable: true }) sortBy: string) {
-    return await this._azstorage.getCustomers({ sortBy })
+    // return await this._azstorage.getCustomers({ sortBy })
+
+    return await Promise.resolve([])
   }
 
   /**
@@ -49,15 +45,16 @@ export class CustomerResolver {
     @Arg('update', { nullable: true }) update: boolean,
     @Ctx() ctx: Context
   ) {
-    try {
-      await this._azstorage.createOrUpdateCustomer(customer, ctx.userId, update)
-      return { success: true, error: null }
-    } catch (error) {
-      return {
-        success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode')
-      }
-    }
+    // try {
+    //   await this._azstorage.createOrUpdateCustomer(customer, ctx.userId, update)
+    //   return { success: true, error: null }
+    // } catch (error) {
+    //   return {
+    //     success: false,
+    //     error: pick(error, 'name', 'message', 'code', 'statusCode')
+    //   }
+    // }
+    return await Promise.resolve({ success: true, error: null })
   }
 
   /**
@@ -70,24 +67,25 @@ export class CustomerResolver {
   @Authorized({ permission: '8b39db3d' })
   @Mutation(() => BaseResult, { description: 'Delete customer' })
   async deleteCustomer(@Arg('key') key: string) {
-    try {
-      const projects = await this._azstorage.getProjects(key, {
-        noParse: true
-      })
-      if (projects.length > 0) {
-        const batch = projects.reduce((b, entity) => {
-          b.deleteEntity(entity)
-          return b
-        }, createAzBatch())
-        await executeBatch('Projects', batch)
-      }
-      await this._azstorage.deleteCustomer(key)
-      return { success: true, error: null }
-    } catch (error) {
-      return {
-        success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode')
-      }
-    }
+    return await Promise.resolve({ success: true, error: null })
+    //   try {
+    //     const projects = await this._azstorage.getProjects(key, {
+    //       noParse: true
+    //     })
+    //     if (projects.length > 0) {
+    //       const batch = projects.reduce((b, entity) => {
+    //         b.deleteEntity(entity)
+    //         return b
+    //       }, createAzBatch())
+    //       await executeBatch('Projects', batch)
+    //     }
+    //     await this._azstorage.deleteCustomer(key)
+    //     return { success: true, error: null }
+    //   } catch (error) {
+    //     return {
+    //       success: false,
+    //       error: pick(error, 'name', 'message', 'code', 'statusCode')
+    //     }
+    //   }
+    // }
   }
-}
