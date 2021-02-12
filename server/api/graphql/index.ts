@@ -22,6 +22,7 @@ import {
   UserResolver,
   SubscriptionResolver
 } from './resolvers'
+import { MongoClient } from 'mongodb'
 const debug = createDebug('api/graphql')
 
 /**
@@ -51,13 +52,19 @@ const getSchema = async () => {
   return schema
 }
 
+
+
 export default async (app: express.Application): Promise<void> => {
   try {
+    const client = await MongoClient.connect(env('MONGO_DB_CONNECTION_STRING'), {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
     const schema = await getSchema()
     const server = new ApolloServer({
       schema,
       rootValue: global,
-      context: ({ req: request }) => createContext(request),
+      context: ({ req }) => createContext(req, client),
       engine: {
         reportSchema: !!env('APOLLO_KEY'),
         graphVariant: 'current',

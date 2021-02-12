@@ -4,6 +4,7 @@ import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { filter, find, pick } from 'underscore'
 import { AzStorageService, MSGraphService } from '../../services'
+import { MongoService } from '../../services/mongo'
 import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
 import { BaseResult } from './types'
@@ -19,11 +20,14 @@ export class UserResolver {
    *
    * @param {AzStorageService} _azstorage AzStorageService
    * @param {MSGraphService} _msgraph MSGraphService
+   * @param {MongoService} _mongo     private readonly _mongo: MongoService
+
    */
   constructor(
     private readonly _azstorage: AzStorageService,
-    private readonly _msgraph: MSGraphService
-  ) {}
+    private readonly _msgraph: MSGraphService,
+    private readonly _mongo: MongoService
+  ) { }
 
   /**
    * Get current user
@@ -51,10 +55,18 @@ export class UserResolver {
    *
    * @param {UserQueryOptions} options Options
    */
-  @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [User], { description: 'Get all users from Active Directory' })
   async adUsers(@Arg('options', () => UserQueryOptions) options: UserQueryOptions) {
     return await this._msgraph.getUsers(options.sortBy)
+  }
+
+  /**
+   * Get user by id
+   */
+  @Authorized<IAuthOptions>({ userContext: true })
+  @Query(() => User, { description: 'Get user by id' })
+  public getUserById() {
+    return this._mongo.user.getUserById('0d2a7e56-1519-4225-b7e3-ee857fd014d2')
   }
 
   /**
