@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prefer-spread */
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { AzStorageService } from '../../services'
 import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
 import forecast from './notification.forecast'
@@ -14,12 +15,8 @@ import unconfirmedPeriods from './notification.unconfirmed-periods'
 export class NotificationResolver {
   /**
    * Constructor for NotificationResolver
-   *
-   * AzStorageService is automatically injected using Container from typedi
-   *
-   * @param {AzStorageService} _azstorage AzStorageService
    */
-  constructor(private readonly _azstorage: AzStorageService) {}
+  constructor() {}
 
   /**
    * Get notifications
@@ -35,10 +32,11 @@ export class NotificationResolver {
     @Arg('locale') locale: string,
     @Ctx() ctx: Context
   ) {
-    const notifications = await Promise.all([
-      unconfirmedPeriods(ctx, this._azstorage, templates.unconfirmedPeriods, locale),
-      forecast(ctx, this._azstorage, templates.forecast, locale)
-    ])
-    return [].concat.apply([], notifications)
+    return await Promise.resolve([])
+    // const notifications = await Promise.all([
+    //   unconfirmedPeriods(ctx, this._azstorage, templates.unconfirmedPeriods, locale),
+    //   forecast(ctx, this._azstorage, templates.forecast, locale)
+    // ])
+    // return [].concat.apply([], notifications)
   }
 }

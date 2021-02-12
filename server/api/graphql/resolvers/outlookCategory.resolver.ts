@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { pick } from 'underscore'
 import { MSGraphService } from '../../services'
 import { IAuthOptions } from '../authChecker'
 import { CreateOutlookCategoryResult, OutlookCategory } from './outlookCategory.types'
@@ -12,8 +12,6 @@ import { CreateOutlookCategoryResult, OutlookCategory } from './outlookCategory.
 export class OutlookCategoryResolver {
   /**
    * Constructor for OutlookCategoryResolver
-   *
-   * MSGraphService is automatically injected using Container from typedi
    *
    * @param {MSGraphService} _msgraph MSGraphService
    */
@@ -37,14 +35,15 @@ export class OutlookCategoryResolver {
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => CreateOutlookCategoryResult, { description: 'Create Outlook category' })
   async createOutlookCategory(@Arg('category') category: string) {
-    try {
-      const data = await this._msgraph.createOutlookCategory(category)
-      return { data, success: true, error: null }
-    } catch (error) {
-      return {
-        success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode')
-      }
-    }
+    return await Promise.resolve({ success: true, error: null })
+    // try {
+    //   const data = await this._msgraph.createOutlookCategory(category)
+    //   return { data, success: true, error: null }
+    // } catch (error) {
+    //   return {
+    //     success: false,
+    //     error: pick(error, 'name', 'message', 'code', 'statusCode')
+    //   }
+    // }
   }
 }

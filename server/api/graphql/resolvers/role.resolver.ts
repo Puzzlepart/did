@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-function */
 import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { pick } from 'underscore'
-import { AzStorageService } from '../../services'
 import { IAuthOptions } from '../authChecker'
 import { Role, RoleInput } from './role.types'
 import { BaseResult } from './types'
@@ -12,12 +13,8 @@ import { BaseResult } from './types'
 export class RoleResolver {
   /**
    * Constructor for RoleResolver
-   *
-   * AzStorageService is automatically injected using Container from typedi
-   *
-   * @param {AzStorageService} _azstorage AzStorageService
    */
-  constructor(private readonly _azstorage: AzStorageService) {}
+  constructor() { }
 
   /**
    * Get roles
@@ -25,7 +22,8 @@ export class RoleResolver {
   @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [Role], { description: 'Get roles' })
   async roles() {
-    return await this._azstorage.getRoles()
+    return await Promise.resolve([])
+    //return await this._azstorage.getRoles()
   }
 
   /**
@@ -42,15 +40,16 @@ export class RoleResolver {
     @Arg('role', () => RoleInput) role: RoleInput,
     @Arg('update', { nullable: true }) update: boolean
   ) {
-    try {
-      await this._azstorage.addOrUpdateRole(role, update)
-      return { success: true, error: null }
-    } catch (error) {
-      return {
-        success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode')
-      }
-    }
+    return await Promise.resolve({ success: true, error: null })
+    // try {
+    //   await this._azstorage.addOrUpdateRole(role, update)
+    //   return { success: true, error: null }
+    // } catch (error) {
+    //   return {
+    //     success: false,
+    //     error: pick(error, 'name', 'message', 'code', 'statusCode')
+    //   }
+    // }
   }
 
   /**
@@ -62,15 +61,16 @@ export class RoleResolver {
    */
   @Authorized<IAuthOptions>({ permission: 'cd52a735' })
   @Mutation(() => BaseResult, { description: 'Delete role' })
-  async deleteRole(@Arg('name', () => String) name: string) {
-    try {
-      await this._azstorage.deleteRole(name)
-      return { success: true, error: null }
-    } catch (error) {
-      return {
-        success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode')
-      }
-    }
+  async deleteRole(@Arg('name', () => String) name: string) { 
+    return await Promise.resolve({ success: true, error: null })
+    // try {
+    //   await this._azstorage.deleteRole(name)
+    //   return { success: true, error: null }
+    // } catch (error) {
+    //   return {
+    //     success: false,
+    //     error: pick(error, 'name', 'message', 'code', 'statusCode')
+    //   }
+    // }
   }
 }

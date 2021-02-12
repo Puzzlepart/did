@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-function */
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { pick } from 'underscore'
-import { AzStorageService } from '../../services'
 import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
 import { LabelInput, LabelObject } from './label.types'
@@ -13,12 +14,8 @@ import { BaseResult } from './types'
 export class LabelResolver {
   /**
    * Constructor for LabelResolver
-   *
-   * AzStorageService is automatically injected using Container from typedi
-   *
-   * @param {AzStorageService} _azstorage AzStorageService
    */
-  constructor(private readonly _azstorage: AzStorageService) {}
+  constructor() {}
 
   /**
    * Get labels
@@ -26,7 +23,8 @@ export class LabelResolver {
   @Authorized()
   @Query(() => [LabelObject], { description: 'Get labels' })
   async labels() {
-    return await this._azstorage.getLabels()
+    return await Promise.resolve([])
+    //return await this._azstorage.getLabels()
   }
 
   /**
@@ -43,15 +41,16 @@ export class LabelResolver {
     @Arg('update', { nullable: true }) update: boolean,
     @Ctx() ctx: Context
   ) {
-    try {
-      await this._azstorage.addOrUpdateLabel(label, ctx.userId, update)
-      return { success: true, error: null }
-    } catch (error) {
-      return {
-        success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode')
-      }
-    }
+    return await Promise.resolve({ success: true, error: null })
+    // try {
+    //   await this._azstorage.addOrUpdateLabel(label, ctx.userId, update)
+    //   return { success: true, error: null }
+    // } catch (error) {
+    //   return {
+    //     success: false,
+    //     error: pick(error, 'name', 'message', 'code', 'statusCode')
+    //   }
+    // }
   }
 
   /**
@@ -62,14 +61,15 @@ export class LabelResolver {
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Delete label' })
   async deleteLabel(@Arg('name') name: string) {
-    try {
-      await this._azstorage.deleteLabel(name)
-      return { success: true, error: null }
-    } catch (error) {
-      return {
-        success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode')
-      }
-    }
+    return await Promise.resolve({ success: true, error: null })
+    // try {
+    //   await this._azstorage.deleteLabel(name)
+    //   return { success: true, error: null }
+    // } catch (error) {
+    //   return {
+    //     success: false,
+    //     error: pick(error, 'name', 'message', 'code', 'statusCode')
+    //   }
+    // }
   }
 }

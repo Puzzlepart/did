@@ -1,9 +1,8 @@
-import { ApolloError } from 'apollo-server-express'
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { filter, find, pick } from 'underscore'
-import { AzStorageService, MSGraphService } from '../../services'
+import { MSGraphService } from '../../services'
 import { MongoService } from '../../services/mongo'
 import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
@@ -15,16 +14,11 @@ import { User, UserInput, UserQuery, UserQueryOptions } from './user.types'
 export class UserResolver {
   /**
    * Constructor for UserResolver
-   *
-   * AzStorageService and MSGraphService is automatically injected using Container from typedi
-   *
-   * @param {AzStorageService} _azstorage AzStorageService
-   * @param {MSGraphService} _msgraph MSGraphService
-   * @param {MongoService} _mongo     private readonly _mongo: MongoService
-
+   * 
+   * @param {MSGraphService} _msgraph MS Graph service
+   * @param {MongoService} _mongo Mongo service
    */
   constructor(
-    private readonly _azstorage: AzStorageService,
     private readonly _msgraph: MSGraphService,
     private readonly _mongo: MongoService
   ) { }
@@ -36,18 +30,19 @@ export class UserResolver {
    */
   @Query(() => User, { description: 'Get the currently logged in user' })
   async currentUser(@Ctx() ctx: Context) {
-    if (!ctx.userId) return null
-    try {
-      const user = await this._azstorage.getUser(ctx.userId)
-      const role = await this._azstorage.getRoleByName(user.role)
-      return {
-        ...user,
-        subscription: pick(ctx.subscription, 'id', 'name'),
-        role
-      }
-    } catch (error) {
-      return new ApolloError(error.message)
-    }
+    return await Promise.resolve(null)
+    // if (!ctx.userId) return null
+    // try {
+    //   const user = await this._azstorage.getUser(ctx.userId)
+    //   const role = await this._azstorage.getRoleByName(user.role)
+    //   return {
+    //     ...user,
+    //     subscription: pick(ctx.subscription, 'id', 'name'),
+    //     role
+    //   }
+    // } catch (error) {
+    //   return new ApolloError(error.message)
+    // }
   }
 
   /**
@@ -57,7 +52,8 @@ export class UserResolver {
    */
   @Query(() => [User], { description: 'Get all users from Active Directory' })
   async adUsers(@Arg('options', () => UserQueryOptions) options: UserQueryOptions) {
-    return await this._msgraph.getUsers(options.sortBy)
+    //return await this._msgraph.getUsers(options.sortBy)
+    return await Promise.resolve([])
   }
 
   /**
@@ -81,19 +77,20 @@ export class UserResolver {
     @Arg('options', () => UserQueryOptions, { nullable: true }) options: UserQueryOptions,
     @Arg('query', () => UserQuery, { nullable: true }) query: UserQuery
   ) {
+    return await Promise.resolve([])
     // eslint-disable-next-line prefer-const
-    let [users, roles] = await Promise.all([
-      this._azstorage.getUsers(options?.sortBy, query),
-      this._azstorage.getRoles()
-    ])
-    users = filter(
-      users.map((user) => ({
-        ...user,
-        role: find(roles, (role) => role.name === user.role)
-      })),
-      (user) => !!user.role
-    )
-    return users
+    // let [users, roles] = await Promise.all([
+    //   this._azstorage.getUsers(options?.sortBy, query),
+    //   this._azstorage.getRoles()
+    // ])
+    // users = filter(
+    //   users.map((user) => ({
+    //     ...user,
+    //     role: find(roles, (role) => role.name === user.role)
+    //   })),
+    //   (user) => !!user.role
+    // )
+    // return users
   }
 
   /**
@@ -108,15 +105,16 @@ export class UserResolver {
     @Arg('user', () => UserInput) user: UserInput,
     @Arg('update', { nullable: true }) update: boolean
   ): Promise<BaseResult> {
-    try {
-      await this._azstorage.addOrUpdateUser(user, update)
-      return { success: true, error: null }
-    } catch (error) {
-      return {
-        success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode')
-      }
-    }
+    return await Promise.resolve({ success: true, error: null })
+    // try {
+    //   await this._azstorage.addOrUpdateUser(user, update)
+    //   return { success: true, error: null }
+    // } catch (error) {
+    //   return {
+    //     success: false,
+    //     error: pick(error, 'name', 'message', 'code', 'statusCode')
+    //   }
+    // }
   }
 
   /**
@@ -127,14 +125,15 @@ export class UserResolver {
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Bulk import users' })
   async bulkImport(@Arg('users', () => [UserInput]) users: UserInput[]): Promise<BaseResult> {
-    try {
-      await this._azstorage.bulkImport(users)
-      return { success: true, error: null }
-    } catch (error) {
-      return {
-        success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode')
-      }
-    }
+    return await Promise.resolve({ success: true, error: null })
+    // try {
+    //   await this._azstorage.bulkImport(users)
+    //   return { success: true, error: null }
+    // } catch (error) {
+    //   return {
+    //     success: false,
+    //     error: pick(error, 'name', 'message', 'code', 'statusCode')
+    //   }
+    // }
   }
 }

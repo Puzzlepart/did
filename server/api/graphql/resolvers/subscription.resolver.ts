@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable require-await */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { pick } from 'underscore'
-import { SubscriptionService } from '../../services'
 import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
 import { Subscription, SubscriptionSettingsInput } from './subscription.types'
@@ -13,12 +15,8 @@ import { BaseResult } from './types'
 export class SubscriptionResolver {
   /**
    * Constructor for SubscriptionResolver
-   *
-   * SubscriptionService is automatically injected using Container from typedi
-   *
-   * @param {SubscriptionService} _subscription SubscriptionService
    */
-  constructor(private readonly _subscription: SubscriptionService) {}
+  constructor() {}
 
   /**
    * Get current subscription
@@ -26,11 +24,12 @@ export class SubscriptionResolver {
   @Authorized({ userContext: true })
   @Query(() => Subscription, { description: 'Get current subscription' })
   async subscription(@Ctx() ctx: Context): Promise<Subscription> {
-    try {
-      return await this._subscription.getSubscription(ctx.subscription.id)
-    } catch (error) {
-      return null
-    }
+    return await Promise.resolve(null)
+    // try {
+    //   return await this._subscription.getSubscription(ctx.subscription.id)
+    // } catch (error) {
+    //   return null
+    // }
   }
 
   /**
@@ -47,14 +46,15 @@ export class SubscriptionResolver {
     @Arg('id') id: string,
     @Arg('settings', () => SubscriptionSettingsInput) settings: SubscriptionSettingsInput
   ): Promise<BaseResult> {
-    try {
-      await this._subscription.updateSubscription<SubscriptionSettingsInput>(id, settings)
-      return { success: true, error: null }
-    } catch (error) {
-      return {
-        success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode')
-      }
-    }
+    return Promise.resolve({ success: true, error: null })
+    // try {
+    //   await this._subscription.updateSubscription<SubscriptionSettingsInput>(id, settings)
+    //   return { success: true, error: null }
+    // } catch (error) {
+    //   return {
+    //     success: false,
+    //     error: pick(error, 'name', 'message', 'code', 'statusCode')
+    //   }
+    // }
   }
 }

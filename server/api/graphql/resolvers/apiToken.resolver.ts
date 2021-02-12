@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { ApolloError } from 'apollo-server-express'
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { pick } from 'underscore'
-import { SubscriptionService } from '../../services'
 import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
 import { ApiToken, ApiTokenInput } from './apiToken.types'
@@ -14,12 +15,8 @@ import { BaseResult } from './types'
 export class ApiTokenResolver {
   /**
    * Constructor for ApiTokenResolver
-   *
-   * AzStorageService is automatically injected using Container from typedi
-   *
-   * @param {SubscriptionService} _subscription SubscriptionService
    */
-  constructor(private readonly _subscription: SubscriptionService) {}
+  constructor() { }
 
   /**
    * Get API tokens
@@ -29,8 +26,9 @@ export class ApiTokenResolver {
   @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [ApiToken], { description: 'Get API tokens' })
   async apiTokens(@Ctx() ctx: Context): Promise<ApiToken[]> {
-    const tokens = await this._subscription.getApiTokens(ctx.subscription.id)
-    return tokens
+    return await Promise.resolve([])
+    // const tokens = await this._subscription.getApiTokens(ctx.subscription.id)
+    // return tokens
   }
 
   /**
@@ -42,11 +40,12 @@ export class ApiTokenResolver {
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => String, { description: 'Add API token' })
   addApiToken(@Arg('token') token: ApiTokenInput, @Ctx() ctx: Context): Promise<string> {
-    try {
-      return this._subscription.addApiToken(token, ctx.subscription.id)
-    } catch (error) {
-      throw new ApolloError('Failed to create API token.')
-    }
+    return Promise.resolve(null)
+    // try {
+    //   return this._subscription.addApiToken(token, ctx.subscription.id)
+    // } catch (error) {
+    //   throw new ApolloError('Failed to create API token.')
+    // }
   }
 
   /**
@@ -58,14 +57,15 @@ export class ApiTokenResolver {
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Delete API tokens' })
   async deleteApiToken(@Arg('name') name: string, @Ctx() ctx: Context): Promise<BaseResult> {
-    try {
-      await this._subscription.deleteApiToken(name, ctx.subscription.id)
-      return { success: true, error: null }
-    } catch (error) {
-      return {
-        success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode')
-      }
-    }
+    return await Promise.resolve({ success: true, error: null })
+    // try {
+    //   await this._subscription.deleteApiToken(name, ctx.subscription.id)
+    //   return { success: true, error: null }
+    // } catch (error) {
+    //   return {
+    //     success: false,
+    //     error: pick(error, 'name', 'message', 'code', 'statusCode')
+    //   }
+    // }
   }
 }

@@ -1,11 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { pick } from 'underscore'
-import { AzStorageService, MSGraphService } from '../../services'
+import { MSGraphService } from '../../services'
 import { IAuthOptions } from '../authChecker'
 import { Context } from '../context'
-import { connectEntities } from './project.utils'
 import { BaseResult, Project, ProjectInput, ProjectOptions } from './types'
 
 @Service()
@@ -13,14 +12,10 @@ import { BaseResult, Project, ProjectInput, ProjectOptions } from './types'
 export class ProjectResolver {
   /**
    * Constructor for ProjectResolver
-   *
-   * AzStorageService and MSGraphService is automatically injected using Container from typedi
-   *
-   * @param {AzStorageService} _azstorage AzStorageService
+   * 
    * @param {MSGraphService} _msgraph MSGraphService
    */
   constructor(
-    private readonly _azstorage: AzStorageService,
     private readonly _msgraph: MSGraphService
   ) {}
 
@@ -36,14 +31,15 @@ export class ProjectResolver {
     @Arg('customerKey', { nullable: true }) customerKey: string,
     @Arg('sortBy', { nullable: true }) sortBy: string
   ): Promise<Project[]> {
+    return await Promise.resolve([])
     // eslint-disable-next-line prefer-const
-    let [projects, customers, labels] = await Promise.all([
-      this._azstorage.getProjects(customerKey, { sortBy }),
-      this._azstorage.getCustomers(),
-      this._azstorage.getLabels()
-    ])
-    projects = connectEntities(projects, customers, labels)
-    return projects
+    // let [projects, customers, labels] = await Promise.all([
+    //   this._azstorage.getProjects(customerKey, { sortBy }),
+    //   this._azstorage.getCustomers(),
+    //   this._azstorage.getLabels()
+    // ])
+    // projects = connectEntities(projects, customers, labels)
+    // return projects
   }
 
   /**
@@ -63,17 +59,18 @@ export class ProjectResolver {
     @Arg('update', { nullable: true }) update: boolean,
     @Ctx() ctx: Context
   ): Promise<BaseResult> {
-    try {
-      const id = await this._azstorage.createOrUpdateProject(project, ctx.userId, update)
-      if (options.createOutlookCategory) {
-        await this._msgraph.createOutlookCategory(id)
-      }
-      return { success: true, error: null }
-    } catch (error) {
-      return {
-        success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode')
-      }
-    }
+    return await Promise.resolve({ success: true, error: null })
+    // try {
+    //   const id = await this._azstorage.createOrUpdateProject(project, ctx.userId, update)
+    //   if (options.createOutlookCategory) {
+    //     await this._msgraph.createOutlookCategory(id)
+    //   }
+    //   return { success: true, error: null }
+    // } catch (error) {
+    //   return {
+    //     success: false,
+    //     error: pick(error, 'name', 'message', 'code', 'statusCode')
+    //   }
+    // }
   }
 }

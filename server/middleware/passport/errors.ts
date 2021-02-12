@@ -62,3 +62,9 @@ export const SIGNIN_FAILED = new SigninError(
   'An error occured',
   'Sorry, we were not able to sign you in right now, and we are not really sure why!<br/><br/> Hope you can forgive us at some point.'
 )
+
+export const TEMP_SIGNIN_ERROR = new SigninError(
+  'e0666582',
+  'Login disabled',
+  'Sorry, login is currently disabled.'
+)

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
