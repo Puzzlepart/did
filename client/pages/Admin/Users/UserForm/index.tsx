@@ -3,7 +3,7 @@ import { Autocomplete } from 'components'
 import { Panel, PrimaryButton } from 'office-ui-fabric'
 import React, { FunctionComponent, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { User } from 'types'
+import { Role, User } from 'types'
 import { find, omit, pick } from 'underscore'
 import validator from 'validator'
 import { UsersContext } from '../context'
@@ -26,7 +26,7 @@ export const UserForm: FunctionComponent<IUserFormProps> = (props: IUserFormProp
   const onSave = async () => {
     await addOrUpdateUser({
       variables: {
-        user: omit({ ...model, role: model.role.name }, '__typename'),
+        user: omit({ ...model, role: (model.role as Role).name }, '__typename'),
         update: !!props.user
       }
     })

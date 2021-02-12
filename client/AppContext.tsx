@@ -19,7 +19,7 @@ export class ContextUser {
       this.id = user.id
       this.displayName = user.displayName
       this.mail = user.mail
-      this.role = user.role
+      this.role = user.role as Role
       this.preferredLanguage = user.preferredLanguage
     }
   }
