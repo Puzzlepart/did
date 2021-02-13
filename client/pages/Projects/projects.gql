@@ -1,14 +1,13 @@
 query {
   projects(sortBy: "name") {
     id
-    projectKey
+    key
     customerKey
     name
     description
     webLink
     icon
     customer {
-      id
       key
       name
     }

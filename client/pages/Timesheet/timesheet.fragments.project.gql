@@ -4,7 +4,6 @@ fragment ProjectFragment on Project {
   description
   icon
   customer {
-    id
     key
     name
     icon
