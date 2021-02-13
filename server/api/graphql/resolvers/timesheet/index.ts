@@ -23,7 +23,7 @@ export class TimesheetResolver {
    *
    * @param {TimesheetService} _timesheet Timesheet service
    */
-  constructor(private readonly _timesheet: TimesheetService) {}
+  constructor(private readonly _timesheet: TimesheetService) { }
 
   /**
    * Get timesheet
@@ -42,7 +42,7 @@ export class TimesheetResolver {
     @Ctx() ctx: Context
   ) {
     try {
-      return await this._timesheet.getTimesheet({...query, ...options})
+      return await this._timesheet.getTimesheet({ ...query, ...options })
     } catch (error) {
       throw error
     }
@@ -50,8 +50,6 @@ export class TimesheetResolver {
 
   /**
    * Submit period
-   *
-   * Mutation: @submitPeriod
    *
    * @param {TimesheetPeriodInput} period Period
    * @param {TimesheetOptions} options Timesheet options (forecast, tzoffset etc)
@@ -64,11 +62,14 @@ export class TimesheetResolver {
   })
   async submitPeriod(
     @Arg('period', () => TimesheetPeriodInput) period: TimesheetPeriodInput,
-    @Arg('options') options: TimesheetOptions,
-    @Ctx() ctx: Context
+    @Arg('options') options: TimesheetOptions
   ): Promise<BaseResult> {
     try {
-      return await Promise.resolve({ success: true })
+      await this._timesheet.submitPeriod({ ...options, period })
+      return {
+        success: false,
+        error: null
+      }
     } catch (error) {
       return {
         success: false,
@@ -79,8 +80,6 @@ export class TimesheetResolver {
 
   /**
    * Unsubmit period
-   *
-   * Mutation: @unsubmitPeriod
    *
    * @param {TimesheetPeriodInput} period Period
    * @param {boolean} forecast Forecast
@@ -93,11 +92,14 @@ export class TimesheetResolver {
   })
   async unsubmitPeriod(
     @Arg('period', () => TimesheetPeriodInput) period: TimesheetPeriodInput,
-    @Arg('options') options: TimesheetOptions = {},
-    @Ctx() ctx: Context
+    @Arg('options') options: TimesheetOptions = {}
   ): Promise<BaseResult> {
     try {
-      return await Promise.resolve({ success: true, error: null })
+      await this._timesheet.unsubmitPeriod({ ...options, period })
+      return {
+        success: false,
+        error: null
+      }
     } catch (error) {
       return {
         success: false,

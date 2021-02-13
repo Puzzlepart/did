@@ -1,6 +1,7 @@
 
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
+import { find, pick } from 'underscore'
 import { MSGraphService } from '..'
 import { DateObject, default as DateUtils } from '../../../../shared/utils/date'
 import { Context } from '../../graphql/context'
@@ -22,8 +23,6 @@ export class TimesheetService {
         private _msgraph: MSGraphService
     ) {
         this._matching_engine = new MatchingEngine([], [], [])
-        // eslint-disable-next-line no-console
-        console.log(this.context.userId)
     }
 
     private _getPeriods(
@@ -56,18 +55,97 @@ export class TimesheetService {
      * Get timesheet
      */
     public async getTimesheet({ startDate, endDate, locale, dateFormat, tzOffset }: any): Promise<any[]> {
-        const periods = this._getPeriods(startDate, endDate, locale)
-        for (let i = 0; i < periods.length; i++) {
-            const events = await this._msgraph.getEvents(
-                startDate,
-                endDate,
-                tzOffset
-            )
-            periods[i].events = this._matching_engine.matchEvents(events).map(event => ({
-                ...event,
-                date: DateUtils.formatDate(event.startDateTime, dateFormat, locale)
-            }))
+        try {
+            const periods = this._getPeriods(startDate, endDate, locale)
+            for (let i = 0; i < periods.length; i++) {
+                const p = await this.context.client
+                    .db('test')
+                    .collection('confirmed_periods')
+                    .findOne({ id: periods[i].id, userId: this.context.userId })
+                if (p) {
+                    periods[i] = {
+                        ...p,
+                        isConfirmed: true,
+                        isForecasted: true,
+                        events: p.entries.map(event => {
+                            return {
+                                ...event,
+                                startDateTime: event.startDateTime.toISOString(),
+                                endDateTime: event.endDateTime.toISOString(),
+                                date: DateUtils.formatDate(event.startDateTime, dateFormat, locale)
+                            }
+                        })
+                    }
+                }
+                else {
+                    const events = await this._msgraph.getEvents(
+                        startDate,
+                        endDate,
+                        { tzOffset }
+                    )
+                    periods[i].events = this._matching_engine.matchEvents(events).map(event => ({
+                        ...event,
+                        date: DateUtils.formatDate(event.startDateTime, dateFormat, locale)
+                    }))
+                }
+            }
+            // eslint-disable-next-line no-console
+            console.log(JSON.stringify({ periods }))
+            return periods
+        } catch (error) {
+            throw error
         }
-        return periods
+    }
+
+    /**
+     * Submit period
+     */
+    public async submitPeriod({ period, tzOffset }: any) {
+        try {
+            const { matchedEvents } = period
+            // TODO: Decide if we want to fetch the events again, or let the client send the full event data
+            const events = await this._msgraph.getEvents(
+                period.startDate,
+                period.endDate,
+                { tzOffset, returnIsoDates: false }
+            )
+            const [week, month, year] = period.id.split('_').map((p) => parseInt(p, 10))
+            period = {
+                ...pick(period, 'id'),
+                startDate: new Date(period.startDate),
+                endDate: new Date(period.endDate),
+                userId: this.context.userId,
+                week,
+                month,
+                year,
+                forecastedHours: period.forecastedHours || 0,
+                entries: []
+            }
+            period.hours = matchedEvents.reduce((hours, m: any) => {
+                const event = find(events, ({ id }) => id === m.id)
+                if (!event) return null
+                period.entries.push({ ...m, ...event })
+                return hours + event.duration
+            }, 0)
+            return await this.context.client
+                .db('test')
+                .collection('confirmed_periods')
+                .insertOne(period)
+        } catch (error) {
+            // eslint-disable-next-line no-console
+            console.log(error)
+            throw error
+        }
+    }
+
+    /**
+     * Unsubmit period
+     */
+    public async unsubmitPeriod({ period }: any) {
+        return await this.context.client
+            .db('test')
+            .collection('confirmed_periods')
+            .deleteOne({ id: period.id, userId: this.context.userId })
+
     }
 }
