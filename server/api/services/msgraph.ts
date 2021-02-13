@@ -8,7 +8,7 @@ import { Service } from 'typedi'
 import { first, sortBy } from 'underscore'
 import env from '../../utils/env'
 import DateUtils from './../../../shared/utils/date'
-import MSGraphEvent from './msgraph.event'
+import MSGraphEvent, { MSGraphEventOptions } from './msgraph.types'
 import OAuthService, { AccessTokenOptions } from './oauth'
 const debug = createDebug('services/msgraph')
 
@@ -65,11 +65,9 @@ class MSGraphService {
    * Gets a Microsoft Graph Client using the auth token from the class
    */
   private async _getClient(): Promise<MSGraphClient> {
-    if (!this._access_token) {
-      this._access_token = (
-        await this._oauthService.getAccessToken(this._accessTokenOptions)
-      ).access_token
-    }
+    this._access_token = (
+      await this._oauthService.getAccessToken(this._accessTokenOptions)
+    ).access_token
     const client = MSGraphClient.init({
       authProvider: (done: (arg0: any, arg1: any) => void) => {
         done(null, this._access_token)
@@ -179,14 +177,14 @@ class MSGraphService {
    *
    * @param {string} startDate Start date (YYYY-MM-DD)
    * @param {string} endDate End date (YYYY-MM-DD)
-   * @param {number} tzOffset Timezone offset on the client
+   * @param {MSGraphEventOptions} options Options
    */
-  async getEvents(startDate: string, endDate: string, tzOffset: number): Promise<MSGraphEvent[]> {
+  async getEvents(startDate: string, endDate: string, options: MSGraphEventOptions): Promise<MSGraphEvent[]> {
     try {
       this.startMark('getEvents')
       const query = {
-        startDateTime: DateUtils.toISOString(`${startDate}:00:00:00.000`, tzOffset),
-        endDateTime: DateUtils.toISOString(`${endDate}:23:59:59.999`, tzOffset)
+        startDateTime: DateUtils.toISOString(`${startDate}:00:00:00.000`, options.tzOffset),
+        endDateTime: DateUtils.toISOString(`${endDate}:23:59:59.999`, options.tzOffset)
       }
       debug('Querying Graph /me/calendar/calendarView: %s', JSON.stringify({ query }))
       const client = await this._getClient()
@@ -201,7 +199,7 @@ class MSGraphService {
         .get()) as { value: any[] }
       const events = value
         .filter((event) => !!event.subject)
-        .map((event) => new MSGraphEvent(event))
+        .map((event) => new MSGraphEvent(event, options))
         .filter((event: MSGraphEvent) => event.duration <= 24)
       this.endMark('getEvents')
       return events
