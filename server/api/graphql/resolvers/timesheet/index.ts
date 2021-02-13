@@ -92,7 +92,7 @@ export class TimesheetResolver {
   })
   async unsubmitPeriod(
     @Arg('period', () => TimesheetPeriodInput) period: TimesheetPeriodInput,
-    @Arg('options') options: TimesheetOptions = {}
+    @Arg('options') options: TimesheetOptions
   ): Promise<BaseResult> {
     try {
       await this._timesheet.unsubmitPeriod({ ...options, period })

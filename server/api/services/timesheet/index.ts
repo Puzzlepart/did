@@ -6,6 +6,7 @@ import { DateObject, default as DateUtils } from '../../../../shared/utils/date'
 import { Context } from '../../graphql/context'
 import { TimesheetPeriodObject } from '../../graphql/resolvers/timesheet/types'
 import MatchingEngine from './matching'
+import { IGetTimesheetParams, ISubmitPeriodParams, IUnsubmitPeriodParams } from './types'
 
 @Service({ global: false })
 export class TimesheetService {
@@ -24,6 +25,13 @@ export class TimesheetService {
         this._matching_engine = new MatchingEngine([], [], [])
     }
 
+    /**
+     * Get periods between startDate and endDate
+     * 
+     * @param {string} startDate Start date
+     * @param {string} endDate End date
+     * @param {string} locale Locale
+     */
     private _getPeriods(startDate: string, endDate: string, locale: string): TimesheetPeriodObject[] {
         const isSplit = !DateUtils.isSameMonth(startDate, endDate)
         const periods: TimesheetPeriodObject[] = [
@@ -55,20 +63,23 @@ export class TimesheetService {
         locale,
         dateFormat,
         tzOffset
-    }: any): Promise<any[]> {
+    }: IGetTimesheetParams): Promise<any[]> {
         try {
             const periods = this._getPeriods(startDate, endDate, locale)
             for (let i = 0; i < periods.length; i++) {
-                const p = await this.context.client
+                const confirmed = await this.context.client
                     .db('test')
                     .collection('confirmed_periods')
-                    .findOne({ id: periods[i].id, userId: this.context.userId })
-                if (p) {
+                    .findOne({
+                        id: periods[i].id,
+                        userId: this.context.userId
+                    })
+                if (confirmed) {
                     periods[i] = {
-                        ...p,
+                        ...confirmed,
                         isConfirmed: true,
                         isForecasted: true,
-                        events: p.entries.map((event) => ({
+                        events: confirmed.entries.map((event) => ({
                             ...event,
                             date: DateUtils.formatDate(event.startDateTime, dateFormat, locale)
                         }))
@@ -95,7 +106,7 @@ export class TimesheetService {
     /**
      * Submit period
      */
-    public async submitPeriod({ period, tzOffset }: any) {
+    public async submitPeriod({ period, tzOffset }: ISubmitPeriodParams) {
         try {
             const { matchedEvents } = period
             // TODO: Decide if we want to fetch the events again, or let the client send the full event data
@@ -104,7 +115,7 @@ export class TimesheetService {
                 returnIsoDates: false
             })
             const [week, month, year] = period.id.split('_').map((p) => parseInt(p, 10))
-            period = {
+            const _period = {
                 ...pick(period, 'id'),
                 startDate: new Date(period.startDate),
                 endDate: new Date(period.endDate),
@@ -113,18 +124,17 @@ export class TimesheetService {
                 month,
                 year,
                 forecastedHours: period.forecastedHours || 0,
-                entries: []
+                entries: [],
+                hours: 0,
             }
-            period.hours = matchedEvents.reduce((hours, m: any) => {
+            _period.hours = matchedEvents.reduce((hours, m: any) => {
                 const event = find(events, ({ id }) => id === m.id)
                 if (!event) return null
-                period.entries.push({ ...m, ...event })
+                _period.entries.push({ ...m, ...event })
                 return hours + event.duration
             }, 0)
-            return await this.context.client.db('test').collection('confirmed_periods').insertOne(period)
+            return await this.context.client.db('test').collection('confirmed_periods').insertOne(_period)
         } catch (error) {
-            // eslint-disable-next-line no-console
-            console.log(error)
             throw error
         }
     }
@@ -132,7 +142,7 @@ export class TimesheetService {
     /**
      * Unsubmit period
      */
-    public async unsubmitPeriod({ period }: any) {
+    public async unsubmitPeriod({ period }: IUnsubmitPeriodParams) {
         return await this.context.client
             .db('test')
             .collection('confirmed_periods')
