@@ -1,6 +1,6 @@
 query($customerKey: String) {
   projects(customerKey: $customerKey, sortBy: "name") {
-    id
+    tag
     name
     icon
     inactive

@@ -30,7 +30,7 @@ export default (props: IProjectListProps, t: TFunction): IColumn[] =>
       }
       return <Icon iconName={project.icon || 'Page'} styles={{ root: { fontSize: 16 } }} />
     }),
-    col('id', t('common.keyFieldLabel'), { maxWidth: 120 }),
+    col('key', t('common.keyFieldLabel'), { maxWidth: 120 }),
     col('name', t('common.nameFieldLabel'), { maxWidth: 220 }, (project: Project) => (
       <NameLabel project={project} renderLink={props.renderLink} />
     )),

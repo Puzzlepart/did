@@ -13,7 +13,7 @@ query($query: TimeEntriesQuery!, $forecast: Boolean, $sortAsc: Boolean) {
       name
     }
     project {
-      id
+      tag
       name
     }
     resource {

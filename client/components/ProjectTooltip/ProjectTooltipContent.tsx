@@ -39,7 +39,7 @@ export const ProjectTooltipContent: FunctionComponent<IProjectTooltipProps> = ({
           <ProjectLink project={project} text={t('projects.navigateText')} icon='NavigateForward' />
         </div>
         <div className={styles.tag}>
-          <span>{project.id}</span>
+          <span>{project.tag}</span>
         </div>
       </div>
     </div>

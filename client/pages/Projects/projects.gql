@@ -1,6 +1,6 @@
 query {
   projects(sortBy: "name") {
-    id
+    tag
     key
     customerKey
     name

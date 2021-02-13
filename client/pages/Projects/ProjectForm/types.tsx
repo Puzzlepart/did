@@ -14,7 +14,7 @@ export class ProjectModel {
 
   constructor(project?: Project) {
     this.name = project?.name || ''
-    this.projectKey = project?.projectKey || ''
+    this.projectKey = project?.key || ''
     this.customerKey = project?.customerKey || ''
     this.description = project?.description || ''
     this.inactive = project?.inactive || false

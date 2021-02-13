@@ -8,7 +8,7 @@ query($query: TimeEntriesQuery!) {
     startDateTime
     endDateTime
     project {
-      id
+      tag
       name
       icon
     }

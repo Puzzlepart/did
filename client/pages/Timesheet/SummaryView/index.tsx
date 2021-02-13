@@ -77,10 +77,10 @@ function createColumns(scope: TimesheetScope): IColumn[] {
 function generateRows(events: EventObject[], columns: IColumn[]) {
   const projects = unique(
     events.map((e) => e.project),
-    (p: Project) => p.id
+    (p: Project) => p.tag
   )
   return projects.map((project) => {
-    const projectEvents = events.filter((event) => event.project.id === project.id)
+    const projectEvents = events.filter((event) => event.project.tag === project.tag)
     return [...columns].splice(1, columns.length - 2).reduce(
       (obj, col) => {
         const sum = [...projectEvents]

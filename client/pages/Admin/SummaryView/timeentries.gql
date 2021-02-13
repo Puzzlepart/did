@@ -5,7 +5,7 @@ query($query: TimeEntriesQuery!) {
     year
     monthNumber
     project {
-      id
+      tag
       name
       icon
     }

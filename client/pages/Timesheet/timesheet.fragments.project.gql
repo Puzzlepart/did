@@ -1,5 +1,5 @@
 fragment ProjectFragment on Project {
-  id
+  tag
   name
   description
   icon

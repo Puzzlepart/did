@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client'
 import { AppContext } from 'AppContext'
 import { PERMISSION } from 'config/security/permissions'
+import copy from 'fast-copy'
 import { DefaultButton } from 'office-ui-fabric'
 import { SET_SELECTED_PROJECT } from 'pages/Projects/reducer'
 import React, { FunctionComponent, useContext, useState } from 'react'
@@ -23,16 +24,11 @@ export const Actions: FunctionComponent = () => {
   async function onCreateCategory() {
     const {
       data: { result }
-    } = await createOutlookCategory({ variables: { category: state.selected.id } })
+    } = await createOutlookCategory({ variables: { category: state.selected.tag } })
     if (result.success) {
-      dispatch(
-        SET_SELECTED_PROJECT({
-          project: {
-            ...state.selected,
-            outlookCategory: result.data
-          }
-        })
-      )
+      const project = copy(state.selected)
+      project.outlookCategory = result.data
+      dispatch(SET_SELECTED_PROJECT({ project }))
     }
   }
 
@@ -59,7 +55,7 @@ export const Actions: FunctionComponent = () => {
           onClick={() => setShowEditPanel(true)}
         />
         <ProjectForm
-          key={state.selected.id}
+          key={state.selected.tag}
           edit={state.selected}
           panel={{
             isOpen: showEditPanel,
