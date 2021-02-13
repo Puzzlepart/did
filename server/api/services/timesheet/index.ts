@@ -57,6 +57,8 @@ export class TimesheetService {
 
     /**
      * Get timesheet
+     * 
+     * @param {IGetTimesheetParams} params Timesheet params
      */
     public async getTimesheet({
         startDate,
@@ -106,6 +108,8 @@ export class TimesheetService {
 
     /**
      * Submit period
+     * 
+     * @param {ISubmitPeriodParams} params Submit period params
      */
     public async submitPeriod({ period, tzOffset }: ISubmitPeriodParams) {
         try {
@@ -142,6 +146,8 @@ export class TimesheetService {
 
     /**
      * Unsubmit period
+     * 
+     * @param {IUnsubmitPeriodParams} params Unsubmit period params
      */
     public async unsubmitPeriod({ period }: IUnsubmitPeriodParams) {
         return await this.context.client
