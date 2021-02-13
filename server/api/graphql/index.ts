@@ -23,6 +23,7 @@ import {
   SubscriptionResolver
 } from './resolvers'
 import { MongoClient } from 'mongodb'
+import { GraphQLDateTime } from 'graphql-iso-date'
 const debug = createDebug('api/graphql')
 
 /**
@@ -47,7 +48,8 @@ const getSchema = async () => {
     emitSchemaFile: true,
     validate: false,
     authChecker,
-    dateScalarMode: 'isoDate'
+    dateScalarMode: 'isoDate',
+    scalarsMap: [{ type: Date, scalar: GraphQLDateTime }],
   })
   return schema
 }

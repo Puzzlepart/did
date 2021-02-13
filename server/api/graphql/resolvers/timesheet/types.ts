@@ -29,10 +29,10 @@ export class EventObject {
   isOrganizer?: boolean
 
   @Field()
-  startDateTime?: string
+  startDateTime?: Date
 
   @Field()
-  endDateTime?: string
+  endDateTime?: Date
 
   @Field()
   date?: string
@@ -99,11 +99,11 @@ export class TimesheetPeriodObject {
   @Field()
   public month: string
 
-  @Field()
-  public startDate: string
+  @Field(() => Date)
+  public startDate: Date | string
 
-  @Field()
-  public endDate: string
+  @Field(() => Date)
+  public endDate: Date | string
 
   @Field(() => [EventObject])
   public events?: EventObject[]
