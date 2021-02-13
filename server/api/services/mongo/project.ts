@@ -2,9 +2,9 @@ import * as Mongo from 'mongodb'
 import { CustomerMongoService } from './'
 import { Project } from '../../graphql/resolvers/types'
 import { find } from 'underscore'
-import { MongoDocumentServiceService } from './document'
+import { MongoDocumentService } from './document'
 
-export class ProjectMongoService extends MongoDocumentServiceService<Project> {
+export class ProjectMongoService extends MongoDocumentService<Project> {
   private _customer: CustomerMongoService
 
   constructor(db: Mongo.Db) {

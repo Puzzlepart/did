@@ -1,6 +1,6 @@
 import * as Mongo from 'mongodb'
 
-export class MongoDocumentServiceService<T> {
+export class MongoDocumentService<T> {
     public collection: Mongo.Collection<T>
     /**
      * Constructor

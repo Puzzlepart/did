@@ -1,8 +1,8 @@
 import * as Mongo from 'mongodb'
 import { Subscription } from '../../graphql/resolvers/types'
-import { MongoDocumentServiceService } from './document'
+import { MongoDocumentService } from './document'
 
-export class SubscriptionMongoService extends MongoDocumentServiceService<Subscription> {
+export class SubscriptionMongoService extends MongoDocumentService<Subscription> {
   constructor(db: Mongo.Db) {
     super(db, 'subscriptions')
   }

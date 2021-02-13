@@ -1,8 +1,8 @@
 import * as Mongo from 'mongodb'
 import { Role } from '../../graphql/resolvers/types'
-import { MongoDocumentServiceService } from './document'
+import { MongoDocumentService } from './document'
 
-export class RoleMongoService extends MongoDocumentServiceService<Role> {
+export class RoleMongoService extends MongoDocumentService<Role> {
   constructor(db: Mongo.Db) {
     super(db, 'roles')
   }
