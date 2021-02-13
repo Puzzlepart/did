@@ -6,14 +6,17 @@ import { Service } from 'typedi'
 import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
 import { BaseResult, Project, ProjectInput, ProjectOptions } from '../types'
+import { MongoService } from '../../../services/mongo'
 
 @Service()
 @Resolver(Project)
 export class ProjectResolver {
   /**
    * Constructor for ProjectResolver
+   * 
+   * @param {MongoService} _mongo Mongo service
    */
-  constructor() {}
+  constructor(private readonly _mongo: MongoService) { }
 
   /**
    * Get projects
@@ -23,19 +26,11 @@ export class ProjectResolver {
    */
   @Authorized<IAuthOptions>()
   @Query(() => [Project], { description: 'Get projects' })
-  async projects(
+  projects(
     @Arg('customerKey', { nullable: true }) customerKey: string,
     @Arg('sortBy', { nullable: true }) sortBy: string
   ): Promise<Project[]> {
-    return await Promise.resolve([])
-    // eslint-disable-next-line prefer-const
-    // let [projects, customers, labels] = await Promise.all([
-    //   this._azstorage.getProjects(customerKey, { sortBy }),
-    //   this._azstorage.getCustomers(),
-    //   this._azstorage.getLabels()
-    // ])
-    // projects = connectEntities(projects, customers, labels)
-    // return projects
+    return this._mongo.project.getProjects()
   }
 
   /**

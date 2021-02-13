@@ -10,43 +10,42 @@ import { Customer, LabelObject, OutlookCategory } from '../types'
 })
 export class Project {
   @Field(() => ID)
-  id?: string
+  public key: string
 
   @Field()
-  key: string
+  public customerKey: string
 
   @Field()
-  projectKey: string
+  public get tag(): string {
+    return `${this.customerKey} ${this.key}`
+  }
 
   @Field()
-  customerKey: string
-
-  @Field()
-  name: string
+  public name: string
 
   @Field({ nullable: true, defaultValue: '' })
-  description: string
+  public description: string
 
   @Field({ nullable: true, defaultValue: null })
-  icon: string
+  public icon: string
 
   @Field({ nullable: true, defaultValue: null })
-  webLink?: string
+  public webLink?: string
 
   @Field({ nullable: true, defaultValue: null })
-  externalSystemURL?: string
+  public externalSystemURL?: string
 
   @Field(() => Customer)
-  customer?: Customer
+  public customer?: Customer
 
   @Field(() => OutlookCategory, { nullable: true, defaultValue: null })
-  outlookCategory?: OutlookCategory
+  public outlookCategory?: OutlookCategory
 
   @Field({ nullable: true, defaultValue: false })
-  inactive?: boolean
+  public inactive?: boolean
 
   @Field(() => [LabelObject])
-  labels?: LabelObject[]
+  public labels?: LabelObject[]
 }
 
 @InputType({ description: 'Input object for Project used in Mutation createOrUpdateProject' })
