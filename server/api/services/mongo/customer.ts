@@ -1,17 +1,10 @@
 import * as Mongo from 'mongodb'
 import { Customer } from '../../graphql/resolvers/types'
+import { MongoDocumentServiceService } from './document'
 
-export class CustomerMongoService {
-  private _collectionName = 'customers'
-  private _collection: Mongo.Collection<Customer>
-
-  /**
-   * Constructor
-   *
-   * @param {Mongo.Db} db Mongo database
-   */
+export class CustomerMongoService extends MongoDocumentServiceService<Customer> {
   constructor(db: Mongo.Db) {
-    this._collection = db.collection(this._collectionName)
+    super(db, 'customers')
   }
 
   /**
@@ -21,7 +14,7 @@ export class CustomerMongoService {
    */
   public async getCustomers(query?: Mongo.FilterQuery<Customer>): Promise<Customer[]> {
     try {
-      const customers = await this._collection.find(query).toArray()
+      const customers = await this.find(query)
       return customers
     } catch (err) {
       throw err

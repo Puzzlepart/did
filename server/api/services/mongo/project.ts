@@ -2,19 +2,13 @@ import * as Mongo from 'mongodb'
 import { CustomerMongoService } from './'
 import { Project } from '../../graphql/resolvers/types'
 import { find } from 'underscore'
+import { MongoDocumentServiceService } from './document'
 
-export class ProjectMongoService {
-  private _collectionName = 'projects'
-  private _collection: Mongo.Collection<Project>
+export class ProjectMongoService extends MongoDocumentServiceService<Project> {
   private _customer: CustomerMongoService
-  /**
-   * Constructor
-   *
-   * @param {Mongo.Db} db Mongo database
-   */
+  
   constructor(db: Mongo.Db) {
-    this._collection = db.collection(this._collectionName)
-    this._customer = new CustomerMongoService(db)
+    super(db, 'projects')
   }
 
   /**
@@ -26,13 +20,13 @@ export class ProjectMongoService {
     try {
       // eslint-disable-next-line prefer-const
       let [projects, customers] = await Promise.all([
-        this._collection.find(query).toArray(),
+        this.find(query),
         this._customer.getCustomers()
       ])
       projects = projects
         .map(p => {
           p.customer = find(customers, c => c.key === p.customerKey) || null
-          // TODO: Set labels using LabelMongoServide
+          // TODO: Set labels using LabelMongoService
           p.labels = []
           return p
         })

@@ -1,17 +1,10 @@
 import * as Mongo from 'mongodb'
 import { Subscription } from '../../graphql/resolvers/types'
+import { MongoDocumentServiceService } from './document'
 
-export class SubscriptionMongoService {
-  private _collectionName = 'subscriptions'
-  private _collection: Mongo.Collection<Subscription>
-
-  /**
-   * Constructor
-   *
-   * @param {Mongo.Db} db Mongo database
-   */
+export class SubscriptionMongoService extends MongoDocumentServiceService<Subscription> {
   constructor(db: Mongo.Db) {
-    this._collection = db.collection(this._collectionName)
+    super(db, 'subscriptions')
   }
 
   /**
@@ -21,7 +14,7 @@ export class SubscriptionMongoService {
    */
   public async getById(id: string): Promise<Subscription> {
     try {
-      const result = await this._collection.findOne({ id })
+      const result = await this.collection.findOne({ id })
       return result
     } catch (err) {
       throw err
@@ -35,7 +28,7 @@ export class SubscriptionMongoService {
    */
   public async addSubscription(subscription: Subscription) {
     try {
-      const result = await this._collection.insertOne(subscription)
+      const result = await this.collection.insertOne(subscription)
       return result
     } catch (err) {
       throw err

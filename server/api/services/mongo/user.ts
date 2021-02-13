@@ -2,10 +2,9 @@ import * as Mongo from 'mongodb'
 import { find } from 'underscore'
 import { User } from '../../graphql/resolvers/types'
 import { RoleMongoService } from './'
+import { MongoDocumentServiceService } from './document'
 
-export class UserMongoService {
-  private _collectionName = 'users'
-  private _collection: Mongo.Collection<User>
+export class UserMongoService extends MongoDocumentServiceService<User>  {
   private _role: RoleMongoService
 
   /**
@@ -14,8 +13,7 @@ export class UserMongoService {
    * @param {Mongo.Db} db Mongo database
    */
   constructor(db: Mongo.Db) {
-    this._collection = db.collection(this._collectionName)
-    this._role = new RoleMongoService(db)
+    super(db, 'users')
   }
 
   /**
@@ -26,7 +24,7 @@ export class UserMongoService {
   public async getUsers(query?: Mongo.FilterQuery<User>): Promise<User[]> {
     try {
       const [users, roles] = await Promise.all([
-        this._collection.find(query).toArray(),
+        this.find(query),
         this._role.getRoles()
       ])
       return users.map((user) => ({
@@ -45,7 +43,7 @@ export class UserMongoService {
    */
   public async getById(id: string) {
     try {
-      const user = await this._collection.findOne({ id })
+      const user = await this.collection.findOne({ id })
       if (!user.role) throw new Error()
       user.role = await this._role.getByName(user.role as string)
       return user
@@ -61,7 +59,7 @@ export class UserMongoService {
    */
   public async addUser(user: User) {
     try {
-      const result = await this._collection.insertOne(user)
+      const result = await this.collection.insertOne(user)
       return result
     } catch (err) {
       throw err

@@ -1,17 +1,10 @@
 import * as Mongo from 'mongodb'
 import { Role } from '../../graphql/resolvers/types'
+import { MongoDocumentServiceService } from './document'
 
-export class RoleMongoService {
-  private _collectionName = 'roles'
-  private _collection: Mongo.Collection<Role>
-
-  /**
-   * Constructor
-   *
-   * @param {Mongo.Db} db Mongo database
-   */
+export class RoleMongoService extends MongoDocumentServiceService<Role> {
   constructor(db: Mongo.Db) {
-    this._collection = db.collection(this._collectionName)
+    super(db, 'roles')
   }
 
   /**
@@ -21,7 +14,7 @@ export class RoleMongoService {
    */
   public async getRoles(query?: Mongo.FilterQuery<Role>): Promise<Role[]> {
     try {
-      const roles = await this._collection.find(query).toArray()
+      const roles = await this.find(query)
       return roles
     } catch (err) {
       throw err
@@ -35,7 +28,7 @@ export class RoleMongoService {
    */
   public async getByName(name: string): Promise<Role> {
     try {
-      const role = await this._collection.findOne({ name })
+      const role = await this.collection.findOne({ name })
       return role
     } catch (err) {
       throw err
@@ -49,7 +42,7 @@ export class RoleMongoService {
    */
   public async addRole(role: Role) {
     try {
-      const result = await this._collection.insertOne(role)
+      const result = await this.collection.insertOne(role)
       return result
     } catch (err) {
       throw err
