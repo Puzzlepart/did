@@ -19,9 +19,6 @@ export class ProjectMongoService extends MongoDocumentService<Project> {
    */
   public async addProject(project: Project): Promise<void> {
     try {
-      // eslint-disable-next-line no-console
-      console.log(project)
-      return await Promise.resolve()
       await this.collection.insertOne(project)
     } catch (err) {
       throw err
