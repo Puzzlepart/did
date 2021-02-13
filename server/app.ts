@@ -94,10 +94,10 @@ class App {
    */
   setupRoutes() {
     const index = express.Router()
-    index.get('/', (req, res) =>{
+    index.get('/', (req, res) => {
       // eslint-disable-next-line no-console
       console.log(req.query)
-      return  res.render('index')
+      return res.render('index')
     })
     this.instance.use('*', index)
   }

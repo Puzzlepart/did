@@ -65,6 +65,8 @@ export class TimesheetService {
                 if (p) {
                     periods[i] = {
                         ...p,
+                        startDate: p.startDate.toISOString(),
+                        endDate: p.endDate.toISOString(),
                         isConfirmed: true,
                         isForecasted: true,
                         events: p.entries.map(event => {
@@ -89,8 +91,6 @@ export class TimesheetService {
                     }))
                 }
             }
-            // eslint-disable-next-line no-console
-            console.log(JSON.stringify({ periods }))
             return periods
         } catch (error) {
             throw error
