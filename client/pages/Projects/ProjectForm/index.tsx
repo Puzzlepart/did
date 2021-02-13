@@ -85,14 +85,14 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (props: IProjec
           label={t('projects.keyFieldLabel')}
           description={t('projects.keyFieldDescription', AppConfig)}
           required={true}
-          errorMessage={state.validation.errors.projectKey}
+          errorMessage={state.validation.errors.key}
           onChange={(_event, value) =>
             dispatch({
               type: 'UPDATE_MODEL',
-              payload: ['projectKey', value.toUpperCase()]
+              payload: ['key', value.toUpperCase()]
             })
           }
-          value={state.model.projectKey}
+          value={state.model.key}
         />
         <UserMessage
           hidden={state.editMode}

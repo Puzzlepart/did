@@ -19,12 +19,12 @@ export default class {
   private _findProjectSuggestion(customer: Customer, projectKey: string) {
     try {
       const customerProjects = this.projects.filter((p) => p.customerKey === customer.key)
-      const projectKeys = customerProjects.map((p) => p.projectKey)
+      const projectKeys = customerProjects.map((p) => p.key)
       const { bestMatch } = findBestMatch(projectKey, projectKeys)
       if (!bestMatch || bestMatch.rating <= 0) return null
       const { target } = bestMatch
       const suggestion = first(
-        customerProjects.filter((p) => p.projectKey === target.toUpperCase())
+        customerProjects.filter((p) => p.key === target.toUpperCase())
       )
       return suggestion
     } catch (error) {
@@ -60,17 +60,17 @@ export default class {
   private _searchString(
     inputStr: string,
     strictMode: boolean = true
-  ): Array<{ id: string; projectKey: string; customerKey: string }> {
-    let regex = /((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<projectKey>[\wæøåÆØÅ]{2,}))/gim
+  ): Array<{ tag: string; key: string; customerKey: string }> {
+    let regex = /((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<key>[\wæøåÆØÅ]{2,}))/gim
     if (strictMode)
-      regex = /[\(\{\[]((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<projectKey>[\wæøåÆØÅ]{2,}?))[\)\]\}]/gim
+      regex = /[\(\{\[]((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<key>[\wæøåÆØÅ]{2,}?))[\)\]\}]/gim
     const matches = []
     let match: RegExpExecArray
     while ((match = regex.exec(inputStr)) !== null) {
-      const { projectKey, customerKey } = match.groups
+      const { key, customerKey } = match.groups
       matches.push({
         ...match.groups,
-        id: [customerKey, projectKey].join(' ')
+        tag: [customerKey, key].join(' ')
       })
     }
     return matches
@@ -122,8 +122,8 @@ export default class {
         const match = matches[i]
         event.customer = find(this.customers, (c) => match.customerKey === c.key)
         if (event.customer) {
-          event.project = find(this.projects, (p) => p.id === match.id)
-          projectKey = match.projectKey
+          event.project = find(this.projects, (p) => p.tag === match.tag)
+          projectKey = match.key
         }
         if (event.project) break
       }
@@ -137,7 +137,7 @@ export default class {
     // We search the whole srchStr for match in non-strict/soft mode
     else {
       const softMatches = this._searchString(srchStr, false)
-      event.project = find(this.projects, ({ id }) => !!find(softMatches, (m) => m.id === id))
+      event.project = find(this.projects, ({ tag }) => !!find(softMatches, (m) => m.tag === tag))
       event.customer = find(this.customers, ({ key }) => key === event.project?.customerKey)
     }
 

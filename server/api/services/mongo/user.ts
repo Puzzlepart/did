@@ -14,6 +14,7 @@ export class UserMongoService extends MongoDocumentServiceService<User>  {
    */
   constructor(db: Mongo.Db) {
     super(db, 'users')
+    this._role = new RoleMongoService(db)
   }
 
   /**

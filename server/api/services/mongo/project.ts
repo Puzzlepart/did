@@ -6,9 +6,10 @@ import { MongoDocumentServiceService } from './document'
 
 export class ProjectMongoService extends MongoDocumentServiceService<Project> {
   private _customer: CustomerMongoService
-  
+
   constructor(db: Mongo.Db) {
     super(db, 'projects')
+    this._customer = new CustomerMongoService(db)
   }
 
   /**
@@ -18,12 +19,11 @@ export class ProjectMongoService extends MongoDocumentServiceService<Project> {
    */
   public async getProjects(query?: Mongo.FilterQuery<Project>): Promise<Project[]> {
     try {
-      // eslint-disable-next-line prefer-const
-      let [projects, customers] = await Promise.all([
+      const [projects, customers] = await Promise.all([
         this.find(query),
         this._customer.getCustomers()
       ])
-      projects = projects
+      return projects
         .map(p => {
           p.customer = find(customers, c => c.key === p.customerKey) || null
           // TODO: Set labels using LabelMongoService
@@ -31,7 +31,6 @@ export class ProjectMongoService extends MongoDocumentServiceService<Project> {
           return p
         })
         .filter(p => p.customer !== null)
-      return projects
     } catch (err) {
       throw err
     }

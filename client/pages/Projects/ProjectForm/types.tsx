@@ -5,7 +5,7 @@ import { first } from 'underscore'
 
 export class ProjectModel {
   public name: string
-  public projectKey: string
+  public key: string
   public customerKey: string
   public description: string
   public inactive: boolean
@@ -14,7 +14,7 @@ export class ProjectModel {
 
   constructor(project?: Project) {
     this.name = project?.name || ''
-    this.projectKey = project?.key || ''
+    this.key = project?.key || ''
     this.customerKey = project?.customerKey || ''
     this.description = project?.description || ''
     this.inactive = project?.inactive || false
