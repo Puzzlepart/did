@@ -6,6 +6,7 @@ import { RoleMongoService } from './role'
 import { SubscriptionMongoService } from './subscription'
 import { UserMongoService } from './user'
 import { ProjectMongoService } from './project'
+import { CustomerMongoService } from './customer'
 
 @Service({ global: false })
 export class MongoService {
@@ -27,11 +28,20 @@ export class MongoService {
   public get subscription(): SubscriptionMongoService {
     return new SubscriptionMongoService(this.context.client.db('test'))
   }
+
+  public get project(): ProjectMongoService {
+    return new ProjectMongoService(this.context.client.db('test'))
+  }
+
+  public get customer(): CustomerMongoService {
+    return new CustomerMongoService(this.context.client.db('test'))
+  }
 }
 
 export {
   UserMongoService,
   RoleMongoService,
   SubscriptionMongoService,
-  ProjectMongoService
+  ProjectMongoService,
+  CustomerMongoService,
 }
