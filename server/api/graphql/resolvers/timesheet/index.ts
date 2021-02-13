@@ -4,6 +4,7 @@ import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { pick } from 'underscore'
+import { TimesheetService } from '../../../services'
 import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
 import { BaseResult } from '../types'
@@ -19,8 +20,10 @@ import {
 export class TimesheetResolver {
   /**
    * Constructor for TimesheetResolver
+   *
+   * @param {TimesheetService} _timesheet Timesheet service
    */
-  constructor() {}
+  constructor(private readonly _timesheet: TimesheetService) {}
 
   /**
    * Get timesheet
@@ -39,7 +42,7 @@ export class TimesheetResolver {
     @Ctx() ctx: Context
   ) {
     try {
-      return await Promise.resolve([])
+      return await this._timesheet.getTimesheet({...query, ...options})
     } catch (error) {
       throw error
     }

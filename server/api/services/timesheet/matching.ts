@@ -1,7 +1,7 @@
 import { findBestMatch } from 'string-similarity'
 import { contains, filter, find, first, isEmpty } from 'underscore'
-import MSGraphEvent from '../../../services/msgraph.event'
-import { Customer, EventObject, LabelObject, Project } from '../types'
+import MSGraphEvent from '../msgraph.event'
+import { Customer, EventObject, LabelObject, Project } from '../../graphql/resolvers/types'
 
 export default class {
   constructor(

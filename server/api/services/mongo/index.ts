@@ -13,7 +13,7 @@ export class MongoService {
   /**
    * Constructor
    *
-   * @param {string} context Context
+   * @param {Context} context Context
    */
   constructor(@Inject('CONTEXT') private readonly context: Context) {}
 
