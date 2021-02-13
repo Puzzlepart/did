@@ -14,9 +14,6 @@ export class EventObject {
   id: string
 
   @Field()
-  key: string
-
-  @Field()
   day?: string
 
   @Field()
