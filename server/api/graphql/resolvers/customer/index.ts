@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
+import { MongoService } from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
 import { BaseResult } from '../types'
@@ -13,8 +13,10 @@ import { Customer, CustomerInput } from './types'
 export class CustomerResolver {
   /**
    * Constructor for CustomerResolver
+   * 
+   * @param {MongoService} _mongo Mongo service
    */
-  constructor() {}
+  constructor(private readonly _mongo: MongoService) { }
 
   /**
    * Get customers
@@ -23,14 +25,12 @@ export class CustomerResolver {
    **/
   @Authorized()
   @Query(() => [Customer], { description: 'Get customers' })
-  async customers(@Arg('sortBy', { nullable: true }) sortBy: string) {
-    return await Promise.resolve([])
+  customers(@Arg('sortBy', { nullable: true }) sortBy: string) {
+    return this._mongo.customer.getCustomers()
   }
 
   /**
    * Create or update customer
-   *
-   * @permission MANAGE_CUSTOMERS (09909241)
    *
    * @param {CustomerInput} customer Customer
    * @param {boolean} update Update
@@ -48,8 +48,6 @@ export class CustomerResolver {
 
   /**
    * Delete customer
-   *
-   * @permission DELETE_CUSTOMER (8b39db3d)
    *
    * @param {string} key Key
    */
