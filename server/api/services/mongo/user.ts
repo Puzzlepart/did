@@ -1,7 +1,7 @@
 import * as Mongo from 'mongodb'
 import { find } from 'underscore'
 import { User } from '../../graphql/resolvers/types'
-import { RoleMongoService } from './role'
+import { RoleMongoService } from './'
 
 export class UserMongoService {
   private _collectionName = 'users'
