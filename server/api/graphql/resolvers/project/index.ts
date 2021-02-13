@@ -50,19 +50,10 @@ export class ProjectResolver {
     @Arg('update', { nullable: true }) update: boolean,
     @Ctx() ctx: Context
   ): Promise<BaseResult> {
-    return await Promise.resolve({ success: true, error: null })
-    // try {
-    //   const id = await this._azstorage.createOrUpdateProject(project, ctx.userId, update)
-    //   if (options.createOutlookCategory) {
-    //     await this._msgraph.createOutlookCategory(id)
-    //   }
-    //   return { success: true, error: null }
-    // } catch (error) {
-    //   return {
-    //     success: false,
-    //     error: pick(error, 'name', 'message', 'code', 'statusCode')
-    //   }
-    // }
+    // TODO: Avoid using as any. project.addProject takes Project as param while project in this context is of type ProjectInput
+    // TODO: Handle creating of Outlook category (createOutlookCategory)
+    await this._mongo.project.addProject(project as any)
+    return { success: true, error: null }
   }
 }
 

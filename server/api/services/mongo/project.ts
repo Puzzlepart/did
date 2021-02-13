@@ -13,6 +13,22 @@ export class ProjectMongoService extends MongoDocumentService<Project> {
   }
 
   /**
+   * Add project
+   *
+   * @param {Project} project Project to add
+   */
+  public async addProject(project: Project): Promise<void> {
+    try {
+      // eslint-disable-next-line no-console
+      console.log(project)
+      return await Promise.resolve()
+      await this.collection.insertOne(project)
+    } catch (err) {
+      throw err
+    }
+  }
+
+  /**
    * Get projects
    *
    * @param {Mongo.FilterQuery<Project>} query Query
