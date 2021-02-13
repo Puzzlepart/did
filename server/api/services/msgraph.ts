@@ -179,7 +179,11 @@ class MSGraphService {
    * @param {string} endDate End date (YYYY-MM-DD)
    * @param {MSGraphEventOptions} options Options
    */
-  async getEvents(startDate: string, endDate: string, options: MSGraphEventOptions): Promise<MSGraphEvent[]> {
+  async getEvents(
+    startDate: string,
+    endDate: string,
+    options: MSGraphEventOptions
+  ): Promise<MSGraphEvent[]> {
     try {
       this.startMark('getEvents')
       const query = {

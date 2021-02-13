@@ -43,5 +43,5 @@ export {
   RoleMongoService,
   SubscriptionMongoService,
   ProjectMongoService,
-  CustomerMongoService,
+  CustomerMongoService
 }

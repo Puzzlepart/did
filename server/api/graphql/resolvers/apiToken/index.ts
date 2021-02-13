@@ -30,7 +30,7 @@ export class ApiTokenResolver {
   /**
    * Add API token
    *
-   * @param {ApiTokenInput} token Token    
+   * @param {ApiTokenInput} token Token
    * @param {Context} ctx GraphQL context
    */
   @Authorized<IAuthOptions>({ userContext: true })

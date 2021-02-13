@@ -14,13 +14,15 @@ auth.get('/signin', (request: Request, response: Response, next: NextFunction) =
 auth.post('/callback', (request: Request, response: Response, next: NextFunction) => {
   passport.authenticate('azuread-openidconnect', (error: Error, user: Express.User) => {
     if (error || !user) {
-      return response.redirect(url.format({
-        pathname: '/',
-        query: {
-          name: error.name,
-          message: error.message
-        }
-      }))
+      return response.redirect(
+        url.format({
+          pathname: '/',
+          query: {
+            name: error.name,
+            message: error.message
+          }
+        })
+      )
     }
     request.logIn(user, (err) => {
       if (err) return response.render('index', { error: JSON.stringify(err) })

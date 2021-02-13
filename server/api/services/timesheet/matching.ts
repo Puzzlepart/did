@@ -23,9 +23,7 @@ export default class {
       const { bestMatch } = findBestMatch(projectKey, projectKeys)
       if (!bestMatch || bestMatch.rating <= 0) return null
       const { target } = bestMatch
-      const suggestion = first(
-        customerProjects.filter((p) => p.key === target.toUpperCase())
-      )
+      const suggestion = first(customerProjects.filter((p) => p.key === target.toUpperCase()))
       return suggestion
     } catch (error) {
       return null

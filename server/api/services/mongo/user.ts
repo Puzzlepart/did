@@ -4,7 +4,7 @@ import { User } from '../../graphql/resolvers/types'
 import { RoleMongoService } from './'
 import { MongoDocumentService } from './document'
 
-export class UserMongoService extends MongoDocumentService<User>  {
+export class UserMongoService extends MongoDocumentService<User> {
   private _role: RoleMongoService
 
   /**
@@ -24,10 +24,7 @@ export class UserMongoService extends MongoDocumentService<User>  {
    */
   public async getUsers(query?: Mongo.FilterQuery<User>): Promise<User[]> {
     try {
-      const [users, roles] = await Promise.all([
-        this.find(query),
-        this._role.getRoles()
-      ])
+      const [users, roles] = await Promise.all([this.find(query), this._role.getRoles()])
       return users.map((user) => ({
         ...user,
         role: find(roles, (role) => role.name === user.role)

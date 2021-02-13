@@ -13,10 +13,10 @@ import { MongoService } from '../../../services/mongo'
 export class ProjectResolver {
   /**
    * Constructor for ProjectResolver
-   * 
+   *
    * @param {MongoService} _mongo Mongo service
    */
-  constructor(private readonly _mongo: MongoService) { }
+  constructor(private readonly _mongo: MongoService) {}
 
   /**
    * Get projects

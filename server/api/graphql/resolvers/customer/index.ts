@@ -13,10 +13,10 @@ import { Customer, CustomerInput } from './types'
 export class CustomerResolver {
   /**
    * Constructor for CustomerResolver
-   * 
+   *
    * @param {MongoService} _mongo Mongo service
    */
-  constructor(private readonly _mongo: MongoService) { }
+  constructor(private readonly _mongo: MongoService) {}
 
   /**
    * Get customers

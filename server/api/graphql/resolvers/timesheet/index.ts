@@ -23,7 +23,7 @@ export class TimesheetResolver {
    *
    * @param {TimesheetService} _timesheet Timesheet service
    */
-  constructor(private readonly _timesheet: TimesheetService) { }
+  constructor(private readonly _timesheet: TimesheetService) {}
 
   /**
    * Get timesheet

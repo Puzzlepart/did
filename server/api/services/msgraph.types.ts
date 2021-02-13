@@ -1,14 +1,15 @@
 import { $dayjs, default as DateUtils } from '../../../shared/utils/date'
 import { stripHtmlString } from '../../utils'
 
-export interface MSGraphEventOptions {  /**
-  * Timezone offset on the client
-  */
+export interface MSGraphEventOptions {
+  /**
+   * Timezone offset on the client
+   */
   tzOffset: number
 
   /**
    * Return ISO dates
-   * 
+   *
    * If false, JS date objects are returned
    */
   returnIsoDates?: boolean
@@ -38,10 +39,14 @@ export default class MSGraphEvent {
     this.isOrganizer = event.isOrganizer
     this.categories = event.categories
     this.webLink = event.webLink
-    const startDateTime = $dayjs
-      .tz($dayjs(event.start.dateTime).format('YYYY-MM-DD HH:mm:ss'), event.start.timeZone)
-    const endDateTime = $dayjs
-      .tz($dayjs(event.end.dateTime).format('YYYY-MM-DD HH:mm:ss'), event.end.timeZone)
+    const startDateTime = $dayjs.tz(
+      $dayjs(event.start.dateTime).format('YYYY-MM-DD HH:mm:ss'),
+      event.start.timeZone
+    )
+    const endDateTime = $dayjs.tz(
+      $dayjs(event.end.dateTime).format('YYYY-MM-DD HH:mm:ss'),
+      event.end.timeZone
+    )
     this.startDateTime = returnIsoDates ? startDateTime.toISOString() : startDateTime.toDate()
     this.endDateTime = returnIsoDates ? endDateTime.toISOString() : endDateTime.toDate()
     this.duration = DateUtils.getDurationHours(event.start.dateTime, event.end.dateTime)

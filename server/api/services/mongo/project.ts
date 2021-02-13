@@ -37,13 +37,13 @@ export class ProjectMongoService extends MongoDocumentService<Project> {
         this._customer.getCustomers()
       ])
       return projects
-        .map(p => {
-          p.customer = find(customers, c => c.key === p.customerKey) || null
+        .map((p) => {
+          p.customer = find(customers, (c) => c.key === p.customerKey) || null
           // TODO: Set labels using LabelMongoService
           p.labels = []
           return p
         })
-        .filter(p => p.customer !== null)
+        .filter((p) => p.customer !== null)
     } catch (err) {
       throw err
     }
