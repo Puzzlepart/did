@@ -7,6 +7,7 @@ import { SubscriptionMongoService } from './subscription'
 import { UserMongoService } from './user'
 import { ProjectMongoService } from './project'
 import { CustomerMongoService } from './customer'
+import { LabelMongoService } from './label'
 
 @Service({ global: false })
 export class MongoService {
@@ -35,6 +36,10 @@ export class MongoService {
 
   public get customer(): CustomerMongoService {
     return new CustomerMongoService(this.context.client.db('test'))
+  }
+
+  public get label(): LabelMongoService {
+    return new LabelMongoService(this.context.client.db('test'))
   }
 }
 

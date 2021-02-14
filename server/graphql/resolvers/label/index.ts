@@ -3,6 +3,7 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
+import { MongoService } from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
 import { BaseResult } from '../types'
@@ -13,16 +14,18 @@ import { LabelInput, LabelObject } from './types'
 export class LabelResolver {
   /**
    * Constructor for LabelResolver
+   *
+   * @param {MongoService} _mongo Mongo service
    */
-  constructor() {}
+  constructor(private readonly _mongo: MongoService) {}
 
   /**
    * Get labels
    */
   @Authorized()
   @Query(() => [LabelObject], { description: 'Get labels' })
-  async labels() {
-    return await Promise.resolve([])
+  labels() {
+    return this._mongo.label.getLabels()
   }
 
   /**
