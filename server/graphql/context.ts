@@ -5,7 +5,7 @@ import { MongoClient } from 'mongodb'
 import 'reflect-metadata'
 import { Container, ContainerInstance } from 'typedi'
 import { Subscription } from './resolvers/types'
-const debug = createDebug('api/graphql/context')
+const debug = createDebug('graphql/context')
 
 export class Context {
   /**

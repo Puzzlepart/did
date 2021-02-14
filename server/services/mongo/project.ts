@@ -1,5 +1,5 @@
 import * as Mongo from 'mongodb'
-import { CustomerMongoService } from './'
+import { CustomerMongoService } from '.'
 import { Project } from '../../graphql/resolvers/types'
 import { find } from 'underscore'
 import { MongoDocumentService } from './document'

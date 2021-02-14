@@ -1,7 +1,7 @@
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, Float, ID, InputType, ObjectType } from 'type-graphql'
-import DateUtils from '../../../../../shared/utils/date'
+import DateUtils from '../../../../shared/utils/date'
 import { simpleResolvers } from '../../config'
 import { Customer, EventError, LabelObject, Project } from '../types'
 

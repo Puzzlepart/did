@@ -11,7 +11,7 @@ import {
   TimesheetOptions,
   TimesheetPeriodObject,
   TimesheetQuery
-} from '../../../server/api/graphql/resolvers/types'
+} from '../../../server/graphql/resolvers/types'
 import { ActionBar } from './ActionBar'
 import AllocationView from './AllocationView'
 import { ErrorBar } from './ErrorBar'

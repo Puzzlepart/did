@@ -4,7 +4,7 @@ import createDebug from 'debug'
 import express from 'express'
 import get from 'get-value'
 import 'reflect-metadata'
-import env from '../../utils/env'
+import env from '../utils/env'
 import { buildSchema, ResolverData } from 'type-graphql'
 import Container, { ContainerInstance } from 'typedi'
 import { authChecker } from './authChecker'
@@ -24,7 +24,7 @@ import {
 } from './resolvers'
 import { MongoClient } from 'mongodb'
 import { GraphQLDateTime } from 'graphql-iso-date'
-const debug = createDebug('api/graphql')
+const debug = createDebug('graphql')
 
 /**
  * Get schema
@@ -49,7 +49,7 @@ const getSchema = async () => {
     validate: false,
     authChecker,
     dateScalarMode: 'isoDate',
-    scalarsMap: [{ type: Date, scalar: GraphQLDateTime }],
+    scalarsMap: [{ type: Date, scalar: GraphQLDateTime }]
   })
   return schema
 }

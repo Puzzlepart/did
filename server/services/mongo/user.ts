@@ -1,7 +1,7 @@
 import * as Mongo from 'mongodb'
 import { find } from 'underscore'
 import { User } from '../../graphql/resolvers/types'
-import { RoleMongoService } from './'
+import { RoleMongoService } from '.'
 import { MongoDocumentService } from './document'
 
 export class UserMongoService extends MongoDocumentService<User> {

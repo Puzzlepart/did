@@ -1,2 +1,2 @@
 export * from './IFormValidation'
-export * from '../../server/api/graphql/resolvers/types'
+export * from '../../server/graphql/resolvers/types'

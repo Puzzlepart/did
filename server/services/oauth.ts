@@ -3,7 +3,7 @@ import 'reflect-metadata'
 import { AuthorizationCode, Token } from 'simple-oauth2'
 import { Inject, Service } from 'typedi'
 import { pick } from 'underscore'
-const debug = createDebug('api/services/oauth')
+const debug = createDebug('services/oauth')
 
 export interface AccessTokenOptions {
   clientId: string

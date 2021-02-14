@@ -1,5 +1,5 @@
-import { $dayjs, default as DateUtils } from '../../../shared/utils/date'
-import { stripHtmlString } from '../../utils'
+import { $dayjs, default as DateUtils } from '../../shared/utils/date'
+import { stripHtmlString } from '../utils'
 
 export interface MSGraphEventOptions {
   /**
