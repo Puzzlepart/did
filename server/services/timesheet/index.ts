@@ -80,6 +80,8 @@ export class TimesheetService {
         if (confirmed) {
           periods[i] = {
             ...confirmed,
+            startDate: new Date(periods[i].startDate),
+            endDate: new Date(periods[i].endDate),
             isConfirmed: true,
             isForecasted: true,
             events: confirmed.entries.map((event) => ({
