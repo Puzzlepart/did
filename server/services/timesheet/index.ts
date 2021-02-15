@@ -1,29 +1,31 @@
+import { Db } from 'mongodb'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
-import { find, pick } from 'underscore'
+import { find } from 'underscore'
 import { MSGraphService } from '..'
 import { DateObject, default as DateUtils } from '../../../shared/utils/date'
 import { Context } from '../../graphql/context'
 import { TimesheetPeriodObject } from '../../graphql/resolvers/timesheet/types'
+import { MongoService } from '../mongo'
 import MatchingEngine from './matching'
-import { IGetTimesheetParams, ISubmitPeriodParams, IUnsubmitPeriodParams } from './types'
+import { IConnectEventsParams, IGetTimesheetParams, ISubmitPeriodParams, IUnsubmitPeriodParams } from './types'
 
 @Service({ global: false })
 export class TimesheetService {
-  private _matching_engine: MatchingEngine
-
+  private _db: Db
   /**
    * Constructor
    *
    * @param {Context} context Context
    * @param {MSGraphService} _msgraph MSGraphService
+   * @param {MongoService} _mongo MongoService
    */
   constructor(
     @Inject('CONTEXT') private readonly context: Context,
-    private _msgraph: MSGraphService
+    private readonly _msgraph: MSGraphService,
+    private readonly _mongo: MongoService
   ) {
-    // TODO: Send required parameters to MatchingEngine. Should not be initialized in constructor.
-    this._matching_engine = new MatchingEngine([], [], [])
+    this._db = this.context.client.db('test')
   }
 
   /**
@@ -60,47 +62,46 @@ export class TimesheetService {
    *
    * @param {IGetTimesheetParams} params Timesheet params
    */
-  public async getTimesheet({
-    startDate,
-    endDate,
-    locale,
-    dateFormat,
-    tzOffset
-  }: IGetTimesheetParams): Promise<any[]> {
+  public async getTimesheet(params: IGetTimesheetParams): Promise<any[]> {
     try {
-      const periods = this._getPeriods(startDate, endDate, locale)
+      const periods = this._getPeriods(params.startDate, params.endDate, params.locale)
+      const data = await this._mongo.project.getProjects()
       for (let i = 0; i < periods.length; i++) {
-        const confirmed = await this.context.client
-          .db('test')
+        const confirmed = await this._db
           .collection('confirmed_periods')
           .findOne({
             id: periods[i].id,
             userId: this.context.userId
           })
         if (confirmed) {
+          const entries = await this._db
+            .collection('time_entries')
+            .find({
+              periodId: periods[i].id,
+              userId: this.context.userId
+            })
+            .toArray()
           periods[i] = {
-            ...confirmed,
-            startDate: new Date(periods[i].startDate),
-            endDate: new Date(periods[i].endDate),
+            ...periods[i],
             isConfirmed: true,
             isForecasted: true,
-            events: confirmed.entries.map((event) => ({
-              ...event,
-              date: DateUtils.formatDate(event.startDateTime, dateFormat, locale)
-            }))
+            events: this._connectEvents({
+              ...params,
+              events: entries,
+              projects: data.projects,
+            })
           }
         } else {
-          const events = await this._msgraph.getEvents(startDate, endDate, {
-            tzOffset,
+          const engine = new MatchingEngine(data)
+          const events = await this._msgraph.getEvents(params.startDate, params.endDate, {
+            tzOffset: params.tzOffset,
             returnIsoDates: false
           })
           periods[i] = {
             ...periods[i],
-            startDate: new Date(startDate),
-            endDate: new Date(endDate),
-            events: this._matching_engine.matchEvents(events).map((event) => ({
-              ...event,
-              date: DateUtils.formatDate(event.startDateTime, dateFormat, locale)
+            events: engine.matchEvents(events).map(e => ({
+              ...e,
+              date: DateUtils.formatDate(e.startDateTime, params.dateFormat, params.locale)
             }))
           }
         }
@@ -112,6 +113,19 @@ export class TimesheetService {
   }
 
   /**
+   * Connect events to project and labels
+   *
+   * @param {IConnectEventsParams} params Connect events params
+   */
+  private _connectEvents({ events, projects, dateFormat, locale }: IConnectEventsParams) {
+    return events.map((event) => ({
+      ...event,
+      project: find(projects, (p) => p.tag === event.projectId),
+      date: DateUtils.formatDate(event.startDateTime, dateFormat, locale)
+    }))
+  }
+
+  /**
    * Submit period
    *
    * @param {ISubmitPeriodParams} params Submit period params
@@ -119,14 +133,16 @@ export class TimesheetService {
   public async submitPeriod({ period, tzOffset }: ISubmitPeriodParams) {
     try {
       const { matchedEvents } = period
-      // TODO: Decide if we want to fetch the events again, or let the client send the full event data
-      const events = await this._msgraph.getEvents(period.startDate, period.endDate, {
-        tzOffset,
-        returnIsoDates: false
-      })
+      const events = await this._msgraph.getEvents(
+        period.startDate,
+        period.endDate,
+        {
+          tzOffset,
+          returnIsoDates: false
+        })
       const [week, month, year] = period.id.split('_').map((p) => parseInt(p, 10))
       const _period = {
-        ...pick(period, 'id'),
+        id: period.id,
         startDate: new Date(period.startDate),
         endDate: new Date(period.endDate),
         userId: this.context.userId,
@@ -134,16 +150,22 @@ export class TimesheetService {
         month,
         year,
         forecastedHours: period.forecastedHours || 0,
-        entries: [],
         hours: 0
       }
+      const entries = []
       _period.hours = matchedEvents.reduce((hours, m: any) => {
         const event = find(events, ({ id }) => id === m.id)
         if (!event) return null
-        _period.entries.push({ ...m, ...event })
+        entries.push({
+          ...m,
+          ...event,
+          periodId: _period.id,
+          userId: this.context.userId
+        })
         return hours + event.duration
       }, 0)
-      return await this.context.client.db('test').collection('confirmed_periods').insertOne(_period)
+      await this._db.collection('time_entries').insertMany(entries)
+      return await this._db.collection('confirmed_periods').insertOne(_period)
     } catch (error) {
       throw error
     }
@@ -155,9 +177,19 @@ export class TimesheetService {
    * @param {IUnsubmitPeriodParams} params Unsubmit period params
    */
   public async unsubmitPeriod({ period }: IUnsubmitPeriodParams) {
-    return await this.context.client
-      .db('test')
-      .collection('confirmed_periods')
-      .deleteOne({ id: period.id, userId: this.context.userId })
+    return await Promise.all([
+      this._db
+        .collection('confirmed_periods')
+        .deleteOne({
+          id: period.id,
+          userId: this.context.userId
+        }),
+      this._db
+        .collection('time_entries')
+        .deleteMany({
+          periodId: period.id,
+          userId: this.context.userId
+        })
+    ])
   }
 }
