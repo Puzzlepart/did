@@ -28,6 +28,16 @@ export class Customer {
 
   @Field({ nullable: true, defaultValue: false })
   inactive?: boolean
+
+  /**
+   * Creates a Customer object from a CustomerInput object
+   * 
+   * @param {CustomerInput} input Input object
+   */
+  public fromInput(input: CustomerInput): Customer {
+    Object.assign(this, input)
+    return this
+  }
 }
 
 @InputType({ description: 'Input object for Customer used in Mutation createOrUpdateCustomer' })

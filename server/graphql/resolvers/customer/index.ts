@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import 'reflect-metadata'
-import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
+import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { MongoService } from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
-import { Context } from '../../context'
 import { BaseResult } from '../types'
 import { Customer, CustomerInput } from './types'
 
@@ -16,7 +15,7 @@ export class CustomerResolver {
    *
    * @param {MongoService} _mongo Mongo service
    */
-  constructor(private readonly _mongo: MongoService) {}
+  constructor(private readonly _mongo: MongoService) { }
 
   /**
    * Get customers
@@ -34,16 +33,17 @@ export class CustomerResolver {
    *
    * @param {CustomerInput} customer Customer
    * @param {boolean} update Update
-   * @param {Context} ctx GraphQL context
    */
   @Authorized<IAuthOptions>({ permission: '09909241' })
   @Mutation(() => BaseResult, { description: 'Create or update customer' })
   async createOrUpdateCustomer(
     @Arg('customer', () => CustomerInput) customer: CustomerInput,
-    @Arg('update', { nullable: true }) update: boolean,
-    @Ctx() ctx: Context
+    @Arg('update', { nullable: true }) update: boolean
   ) {
-    return await Promise.resolve({ success: true, error: null })
+    const c = new Customer().fromInput(customer)
+    if (update) await this._mongo.customer.updateCustomer(c)
+    else await this._mongo.customer.addCustomer(c)
+    return { success: true, error: null }
   }
 
   /**
@@ -53,8 +53,8 @@ export class CustomerResolver {
    */
   @Authorized({ permission: '8b39db3d' })
   @Mutation(() => BaseResult, { description: 'Delete customer' })
-  async deleteCustomer(@Arg('key') key: string) {
-    return await Promise.resolve({ success: true, error: null })
+  deleteCustomer(@Arg('key') key: string) {
+    return this._mongo.customer.deleteCustomer(key)
   }
 }
 
