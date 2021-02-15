@@ -3,10 +3,11 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
+import { MongoService } from '../../../services/mongo'
+import MSGraphService from '../../../services/msgraph'
 import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
 import { BaseResult, Project, ProjectInput, ProjectOptions } from '../types'
-import { MongoService } from '../../../services/mongo'
 
 @Service()
 @Resolver(Project)
@@ -15,8 +16,12 @@ export class ProjectResolver {
    * Constructor for ProjectResolver
    *
    * @param {MongoService} _mongo Mongo service
+   * @param {MSGraphService} _msgraph MSGraphService
    */
-  constructor(private readonly _mongo: MongoService) { }
+  constructor(
+    private readonly _mongo: MongoService,
+    private readonly _msgraph: MSGraphService
+  ) { }
 
   /**
    * Get projects
@@ -48,12 +53,14 @@ export class ProjectResolver {
   async createOrUpdateProject(
     @Arg('project', () => ProjectInput) project: ProjectInput,
     @Arg('options', () => ProjectOptions) options: ProjectOptions,
-    @Arg('update', { nullable: true }) update: boolean,
-    @Ctx() ctx: Context
+    @Arg('update', { nullable: true }) update: boolean
   ): Promise<BaseResult> {
-    // TODO: Avoid using as any. project.addProject takes Project as param while project in this context is of type ProjectInput
-    // TODO: Handle creating of Outlook category (createOutlookCategory)
-    await this._mongo.project.addProject(project as any)
+    const p = new Project().fromInput(project)
+    if (options.createOutlookCategory) {
+      await this._msgraph.createOutlookCategory(p.tag)
+    }
+    if (update) await this._mongo.project.updateProject(p)
+    else await this._mongo.project.addProject(p)
     return { success: true, error: null }
   }
 }

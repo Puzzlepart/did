@@ -1,7 +1,7 @@
 import * as Mongo from 'mongodb'
 import { CustomerMongoService } from '.'
 import { Customer, LabelObject as Label, Project } from '../../graphql/resolvers/types'
-import { filter, find } from 'underscore'
+import { filter, find, pick } from 'underscore'
 import { MongoDocumentService } from './document'
 import { LabelMongoService } from './label'
 
@@ -29,6 +29,22 @@ export class ProjectMongoService extends MongoDocumentService<Project> {
   public async addProject(project: Project): Promise<void> {
     try {
       await this.collection.insertOne(project)
+    } catch (err) {
+      throw err
+    }
+  }
+
+  /**
+   * Update project
+   *
+   * @param {Project} project Project to update
+   */
+  public async updateProject(project: Project): Promise<void> {
+    try {
+      await this.collection.updateOne(
+        pick(project, 'key', 'customerKey'),
+        { $set: project }
+      )
     } catch (err) {
       throw err
     }

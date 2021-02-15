@@ -46,6 +46,16 @@ export class Project {
 
   @Field(() => [Label])
   public labels?: Label[] | string[]
+
+  /**
+   * Creates a Project object from a ProjectInput object
+   * 
+   * @param {ProjectInput} input Input object
+   */
+  public fromInput(input: ProjectInput): Project {
+    Object.assign(this, input)
+    return this
+  }
 }
 
 @InputType({ description: 'Input object for Project used in Mutation createOrUpdateProject' })
