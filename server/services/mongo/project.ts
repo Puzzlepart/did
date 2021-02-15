@@ -1,9 +1,15 @@
 import * as Mongo from 'mongodb'
 import { CustomerMongoService } from '.'
 import { Customer, LabelObject as Label, Project } from '../../graphql/resolvers/types'
-import { find } from 'underscore'
+import { filter, find } from 'underscore'
 import { MongoDocumentService } from './document'
 import { LabelMongoService } from './label'
+
+export type ProjectsData = {
+  projects: Project[],
+  customers: Customer[],
+  labels: Label[]
+}
 
 export class ProjectMongoService extends MongoDocumentService<Project> {
   private _customer: CustomerMongoService
@@ -29,15 +35,13 @@ export class ProjectMongoService extends MongoDocumentService<Project> {
   }
 
   /**
-   * Get projects
+   * Get projects, customers and labels
+   * 
+   * Connects labels and customer to projects
    *
    * @param {Mongo.FilterQuery<Project>} query Query
    */
-  public async getProjects(query?: Mongo.FilterQuery<Project>): Promise<{
-    projects: Project[],
-    customers: Customer[],
-    labels: Label[]
-  }> {
+  public async getProjectsData(query?: Mongo.FilterQuery<Project>): Promise<ProjectsData> {
     try {
       const [
         projects,
@@ -45,14 +49,15 @@ export class ProjectMongoService extends MongoDocumentService<Project> {
         labels
       ] = await Promise.all([
         this.find(query),
-        this._customer.getCustomers(),
+        this._customer.getCustomers(query?.customerKey && { key: query.customerKey }),
         this._label.getLabels()
       ])
       const _projects = projects
         .map((p) => {
           p.customer = find(customers, (c) => c.key === p.customerKey) || null
-          // TODO: Set labels using LabelMongoService
-          p.labels = []
+          p.labels = filter(labels, ({ name }) => {
+            return !!find(p.labels, l => name === l)
+          })
           return p
         })
         .filter((p) => p.customer !== null)
