@@ -1,15 +1,18 @@
 import * as Mongo from 'mongodb'
 import { CustomerMongoService } from '.'
-import { Project } from '../../graphql/resolvers/types'
+import { Customer, LabelObject as Label, Project } from '../../graphql/resolvers/types'
 import { find } from 'underscore'
 import { MongoDocumentService } from './document'
+import { LabelMongoService } from './label'
 
 export class ProjectMongoService extends MongoDocumentService<Project> {
   private _customer: CustomerMongoService
+  private _label: LabelMongoService
 
   constructor(db: Mongo.Db) {
     super(db, 'projects')
     this._customer = new CustomerMongoService(db)
+    this._label = new LabelMongoService(db)
   }
 
   /**
@@ -30,13 +33,22 @@ export class ProjectMongoService extends MongoDocumentService<Project> {
    *
    * @param {Mongo.FilterQuery<Project>} query Query
    */
-  public async getProjects(query?: Mongo.FilterQuery<Project>): Promise<Project[]> {
+  public async getProjects(query?: Mongo.FilterQuery<Project>): Promise<{
+    projects: Project[],
+    customers: Customer[],
+    labels: Label[]
+  }> {
     try {
-      const [projects, customers] = await Promise.all([
+      const [
+        projects,
+        customers,
+        labels
+      ] = await Promise.all([
         this.find(query),
-        this._customer.getCustomers()
+        this._customer.getCustomers(),
+        this._label.getLabels()
       ])
-      return projects
+      const _projects = projects
         .map((p) => {
           p.customer = find(customers, (c) => c.key === p.customerKey) || null
           // TODO: Set labels using LabelMongoService
@@ -44,6 +56,7 @@ export class ProjectMongoService extends MongoDocumentService<Project> {
           return p
         })
         .filter((p) => p.customer !== null)
+      return { projects: _projects, customers, labels }
     } catch (err) {
       throw err
     }
