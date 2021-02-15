@@ -65,7 +65,7 @@ export class TimesheetService {
   public async getTimesheet(params: IGetTimesheetParams): Promise<any[]> {
     try {
       const periods = this._getPeriods(params.startDate, params.endDate, params.locale)
-      const data = await this._mongo.project.getProjects()
+      const data = await this._mongo.project.getProjectsData()
       for (let i = 0; i < periods.length; i++) {
         const confirmed = await this._db
           .collection('confirmed_periods')
