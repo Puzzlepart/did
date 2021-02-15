@@ -96,11 +96,11 @@ export class TimesheetPeriodObject {
   @Field()
   public month: string
 
-  @Field(() => Date)
-  public startDate: Date | string
+  @Field()
+  public startDate: string
 
-  @Field(() => Date)
-  public endDate: Date | string
+  @Field()
+  public endDate: string
 
   @Field(() => [EventObject])
   public events?: EventObject[]
