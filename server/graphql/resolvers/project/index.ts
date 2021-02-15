@@ -16,7 +16,7 @@ export class ProjectResolver {
    *
    * @param {MongoService} _mongo Mongo service
    */
-  constructor(private readonly _mongo: MongoService) {}
+  constructor(private readonly _mongo: MongoService) { }
 
   /**
    * Get projects
@@ -26,11 +26,12 @@ export class ProjectResolver {
    */
   @Authorized<IAuthOptions>()
   @Query(() => [Project], { description: 'Get projects' })
-  projects(
+  async projects(
     @Arg('customerKey', { nullable: true }) customerKey: string,
     @Arg('sortBy', { nullable: true }) sortBy: string
   ): Promise<Project[]> {
-    return this._mongo.project.getProjects()
+    const data = await this._mongo.project.getProjectsData(customerKey && { customerKey })
+    return data.projects
   }
 
   /**

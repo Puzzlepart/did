@@ -2,7 +2,7 @@
 import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import { simpleResolvers } from '../../config'
-import { Customer, LabelObject, OutlookCategory } from '../types'
+import { Customer, LabelObject as Label, OutlookCategory } from '../types'
 
 @ObjectType({
   description: 'A type that describes a Project',
@@ -44,8 +44,8 @@ export class Project {
   @Field({ nullable: true, defaultValue: false })
   public inactive?: boolean
 
-  @Field(() => [LabelObject])
-  public labels?: LabelObject[]
+  @Field(() => [Label])
+  public labels?: Label[] | string[]
 }
 
 @InputType({ description: 'Input object for Project used in Mutation createOrUpdateProject' })
