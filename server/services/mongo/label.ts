@@ -1,8 +1,8 @@
 import * as Mongo from 'mongodb'
-import { LabelObject } from '../../graphql/resolvers/types'
+import { LabelObject as Label } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './document'
 
-export class LabelMongoService extends MongoDocumentService<LabelObject> {
+export class LabelMongoService extends MongoDocumentService<Label> {
   constructor(db: Mongo.Db) {
     super(db, 'labels')
   }
@@ -10,9 +10,9 @@ export class LabelMongoService extends MongoDocumentService<LabelObject> {
   /**
    * Get labels
    *
-   * @param {Mongo.FilterQuery<LabelObject>} query Query
+   * @param {Mongo.FilterQuery<Label>} query Query
    */
-  public async getLabels(query?: Mongo.FilterQuery<LabelObject>): Promise<LabelObject[]> {
+  public async getLabels(query?: Mongo.FilterQuery<Label>): Promise<Label[]> {
     try {
       const labels = await this.find(query)
       return labels
@@ -24,9 +24,9 @@ export class LabelMongoService extends MongoDocumentService<LabelObject> {
   /**
    * Add label
    *
-   * @param {LabelObject} label Label
+   * @param {Label} label Label
    */
-  public async addLabel(label: LabelObject) {
+  public async addLabel(label: Label) {
     try {
       const result = await this.collection.insertOne(label)
       return result
