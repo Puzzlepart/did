@@ -5,6 +5,7 @@ import { ConditionalWrapper } from 'components/ConditionalWrapper'
 import { MessageBarType, Panel, PrimaryButton, TextField, Toggle } from 'office-ui-fabric'
 import React, { FunctionComponent, useContext, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
+import { LabelObject as Label } from 'types'
 import { isBlank } from 'underscore.string'
 import { ProjectsContext } from '../context'
 import $createOrUpdateProject from './createOrUpdateProject.gql'
@@ -179,7 +180,7 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (props: IProjec
           className={styles.inputField}
           label={t('admin.labels')}
           placeholder={t('admin.filterLabels')}
-          defaultSelectedKeys={state.editMode ? props.edit.labels.map((lbl) => lbl.name) : []}
+          defaultSelectedKeys={state.editMode ? (props.edit.labels as Label[]).map((lbl) => lbl.name) : []}
           onChange={(labels) =>
             dispatch({
               type: 'UPDATE_MODEL',
