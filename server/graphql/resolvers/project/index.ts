@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import 'reflect-metadata'
-import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
+import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { MongoService } from '../../../services/mongo'
 import MSGraphService from '../../../services/msgraph'
 import { IAuthOptions } from '../../authChecker'
-import { Context } from '../../context'
 import { BaseResult, Project, ProjectInput, ProjectOptions } from '../types'
 
 @Service()
@@ -42,11 +41,9 @@ export class ProjectResolver {
   /**
    * Create or update project
    *
-   * @permission MANAGE_PROJECTS (ef4032fb)
-   *
    * @param {ProjectInput} project Project
+   * @param {ProjectOptions} options Options
    * @param {boolean} update Update
-   * @param {Context} ctx GraphQL context
    */
   @Authorized<IAuthOptions>({ permission: 'ef4032fb' })
   @Mutation(() => BaseResult, { description: 'Create or update project' })
