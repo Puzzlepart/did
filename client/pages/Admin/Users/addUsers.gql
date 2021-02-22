@@ -1,5 +1,5 @@
 mutation($users: [UserInput!]!) {
-  bulkImport(users: $users) {
+  addUsers(users: $users) {
     success
     error {
       message

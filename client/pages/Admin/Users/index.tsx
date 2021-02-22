@@ -5,8 +5,8 @@ import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { User } from 'types'
 import { any, filter, isEmpty, omit } from 'underscore'
-import $bulkImport from './bulkImport.gql'
-import { BulkImportPanel, IBulkImportPanelProps } from './BulkImportPanel'
+import $addUsers from './addUsers.gql'
+import { AddMultiplePanel, IAddMultiplePanel } from './AddMultiplePanel'
 import { UserColumns as columns } from './columns'
 import { IUsersContext, UsersContext } from './context'
 import { IUserFormProps, UserForm } from './UserForm'
@@ -15,10 +15,10 @@ import $users from './users.gql'
 export const Users = () => {
   const { t } = useTranslation()
   const [userForm, setUserForm] = useState<IUserFormProps>(null)
-  const [bulkImportPanel, setBulkImportPanel] = useState<IBulkImportPanelProps>(null)
+  const [addMultiplePanel, setAddMultiplePanel] = useState<IAddMultiplePanel>(null)
   const [progressProps, setProgressProps] = useState<ISpinnerProps>(null)
   const { data, refetch, loading } = useQuery($users, { fetchPolicy: 'cache-and-network' })
-  const [bulkImport] = useMutation($bulkImport)
+  const [addUsers] = useMutation($addUsers)
   const ctxValue: IUsersContext = useMemo(
     () => ({
       roles: data?.roles || [],
@@ -41,17 +41,17 @@ export const Users = () => {
     })
 
   /**
-   * On import users
+   * On add users
    *
-   * @param {any[]} users Users to import
+   * @param {any[]} users Users to add
    */
-  const onBulkImport = async (users: any[]) => {
-    setBulkImportPanel(null)
+  const onAddUsers = async (users: any[]) => {
+    setAddMultiplePanel(null)
     setProgressProps({
       label: t('admin.bulkImportingUsersLabel', { count: users.length }),
       labelPosition: 'right'
     })
-    await bulkImport({ variables: { users: users.map((u) => omit(u, '__typename')) } })
+    await addUsers({ variables: { users: users.map((u) => omit(u, '__typename')) } })
     setProgressProps(null)
     refetch()
   }
@@ -76,7 +76,7 @@ export const Users = () => {
               name: t('admin.bulkImportUsersLabel'),
               iconProps: { iconName: 'CloudImportExport' },
               disabled: isEmpty(ctxValue.adUsers),
-              onClick: () => setBulkImportPanel({ isOpen: true })
+              onClick: () => setAddMultiplePanel({ isOpen: true })
             },
             {
               key: 'SPINNER',
@@ -99,11 +99,11 @@ export const Users = () => {
           }}
         />
       )}
-      {bulkImportPanel && (
-        <BulkImportPanel
-          {...bulkImportPanel}
-          onImport={onBulkImport}
-          onDismiss={() => setBulkImportPanel(null)}
+      {addMultiplePanel && (
+        <AddMultiplePanel
+          {...addMultiplePanel}
+          onAdd={onAddUsers}
+          onDismiss={() => setAddMultiplePanel(null)}
         />
       )}
     </UsersContext.Provider>

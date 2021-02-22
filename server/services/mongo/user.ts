@@ -1,5 +1,5 @@
 import { Db as MongoDatabase, FilterQuery } from 'mongodb'
-import { find } from 'underscore'
+import { find, pick } from 'underscore'
 import { RoleMongoService } from '.'
 import { User } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './document'
@@ -59,6 +59,33 @@ export class UserMongoService extends MongoDocumentService<User> {
     try {
       const result = await this.collection.insertOne(user)
       return result
+    } catch (err) {
+      throw err
+    }
+  }
+
+  /**
+   * Add users
+   *
+   * @param {User[]} users Users
+   */
+  public async addUsers(users: User[]) {
+    try {
+      const result = await this.collection.insertMany(users)
+      return result
+    } catch (err) {
+      throw err
+    }
+  }
+
+  /**
+   * Update customer
+   *
+   * @param {User} user User to update
+   */
+  public async updateUser(user: User): Promise<void> {
+    try {
+      await this.collection.updateOne(pick(user, 'id'), { $set: user })
     } catch (err) {
       throw err
     }

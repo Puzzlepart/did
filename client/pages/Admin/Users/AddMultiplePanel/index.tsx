@@ -10,10 +10,10 @@ import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { pick } from 'underscore'
 import { UsersContext } from '../context'
-import styles from './BulkImportPanel.module.scss'
-import { IBulkImportPanelProps } from './types'
+import styles from './AddMultiplePanel.module.scss'
+import { IAddMultiplePanel } from './types'
 
-export const BulkImportPanel = (props: IBulkImportPanelProps) => {
+export const AddMultiplePanel = (props: IAddMultiplePanel) => {
   const { adUsers } = useContext(UsersContext)
   const { t } = useTranslation()
   const [selectedUsers, setSelectedUsers] = useState([])
@@ -29,7 +29,7 @@ export const BulkImportPanel = (props: IBulkImportPanelProps) => {
         <PrimaryButton
           text={t('admin.bulkImportUsersLabel')}
           disabled={selectedUsers.length === 0}
-          onClick={() => props.onImport(selectedUsers)}
+          onClick={() => props.onAdd(selectedUsers)}
         />
         <List
           items={adUsers}

@@ -19,7 +19,7 @@ export class UserResolver {
    * @param {MSGraphService} _msgraph MS Graph service
    * @param {MongoService} _mongo Mongo service
    */
-  constructor(private readonly _msgraph: MSGraphService, private readonly _mongo: MongoService) {}
+  constructor(private readonly _msgraph: MSGraphService, private readonly _mongo: MongoService) { }
 
   /**
    * Get current user
@@ -72,18 +72,25 @@ export class UserResolver {
     @Arg('user', () => UserInput) user: UserInput,
     @Arg('update', { nullable: true }) update: boolean
   ): Promise<BaseResult> {
-    return await Promise.resolve({ success: true, error: null })
+    if (update) await this._mongo.user.updateUser(user)
+    else await this._mongo.user.addUser(user)
+    return { success: true, error: null }
   }
 
   /**
-   * Bulk import users
+   * Add users
    *
    * @param {UserInput[]} users Users
    */
   @Authorized<IAuthOptions>({ userContext: true })
-  @Mutation(() => BaseResult, { description: 'Bulk import users' })
-  async bulkImport(@Arg('users', () => [UserInput]) users: UserInput[]): Promise<BaseResult> {
-    return await Promise.resolve({ success: true, error: null })
+  @Mutation(() => BaseResult, { description: 'Add users' })
+  async addUsers(@Arg('users', () => [UserInput]) users: UserInput[]): Promise<BaseResult> {
+    users = users.map(user => ({
+      ...user,
+      role: 'User'
+    }))
+    await this._mongo.user.addUsers(users)
+    return { success: true, error: null }
   }
 }
 
