@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import 'reflect-metadata'
-import { Arg, Authorized, Ctx, Query, Resolver } from 'type-graphql'
+import { Arg, Authorized, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { find, first } from 'underscore'
 import { MongoService } from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
-import { Context } from '../../context'
 import { TimeEntriesQuery, TimeEntry } from './types'
 
 @Service()

@@ -38,7 +38,7 @@ export class LabelResolver {
   async addOrUpdateLabel(
     @Arg('label', () => LabelInput) label: LabelInput,
     @Arg('update', { nullable: true }) update: boolean
-  ) {
+  ): Promise<BaseResult> {
     if (update) await this._mongo.label.updateLabel(label)
     else await this._mongo.label.addLabel(label)
     return { success: true, error: null }
@@ -51,8 +51,9 @@ export class LabelResolver {
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Delete label' })
-  async deleteLabel(@Arg('name') name: string) {
-    return await this._mongo.label.deleteLabel(name)
+  async deleteLabel(@Arg('name') name: string): Promise<BaseResult> {
+      await this._mongo.label.deleteLabel(name)
+    return { success: true, error: null }
   }
 }
 
