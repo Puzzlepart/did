@@ -1,5 +1,5 @@
 {
-  adUsers(options: { sortBy: "displayName" }) {
+  activeDirectoryUsers(options: { sortBy: "displayName" }) {
     id
     displayName
     givenName

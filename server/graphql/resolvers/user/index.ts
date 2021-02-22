@@ -36,12 +36,12 @@ export class UserResolver {
   }
 
   /**
-   * Get AD users
+   * Get Active Directory users
    *
    * @param {UserQueryOptions} options Options
    */
   @Query(() => [User], { description: 'Get all users from Active Directory' })
-  adUsers(@Arg('options', () => UserQueryOptions) options: UserQueryOptions) {
+  activeDirectoryUsers(@Arg('options', () => UserQueryOptions) options: UserQueryOptions) {
     return this._msgraph.getUsers(options?.sortBy)
   }
 

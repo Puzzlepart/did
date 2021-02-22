@@ -14,7 +14,7 @@ import styles from './UserFormModal.module.scss'
 
 export const UserForm: FunctionComponent<IUserFormProps> = (props: IUserFormProps) => {
   const { t } = useTranslation()
-  const { adUsers, roles } = useContext(UsersContext)
+  const { activeDirectoryUsers, roles } = useContext(UsersContext)
   const [model, setModel] = useState<User>(
     props.user || { role: find(roles, (r) => r.name === 'User') }
   )
@@ -52,7 +52,7 @@ export const UserForm: FunctionComponent<IUserFormProps> = (props: IUserFormProp
           <Autocomplete
             label={t('common.searchUserLabel')}
             placeholder={t('common.searchPlaceholder')}
-            items={adUsers.map((u) => ({
+            items={activeDirectoryUsers.map((u) => ({
               key: u.id,
               text: u.displayName,
               searchValue: u.displayName,

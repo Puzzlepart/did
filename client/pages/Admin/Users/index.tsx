@@ -23,11 +23,14 @@ export const Users = () => {
     () => ({
       roles: data?.roles || [],
       users: data?.users || [],
-      adUsers: data?.adUsers || []
+      activeDirectoryUsers: data?.activeDirectoryUsers || []
     }),
     [data]
   )
-  ctxValue.adUsers = filter(ctxValue.adUsers, (x) => !any(ctxValue.users, (y) => y.id === x.id))
+  ctxValue.activeDirectoryUsers = filter(
+    ctxValue.activeDirectoryUsers,
+    (x) => !any(ctxValue.users, (y) => y.id === x.id)
+  )
 
   /**
    * On edit user
@@ -68,14 +71,14 @@ export const Users = () => {
               key: 'ADD_NEW_USER',
               name: t('admin.addNewUser'),
               iconProps: { iconName: 'AddFriend' },
-              disabled: isEmpty(ctxValue.adUsers),
+              disabled: isEmpty(ctxValue.activeDirectoryUsers),
               onClick: () => setUserForm({ headerText: t('admin.addNewUser') })
             },
             {
               key: 'BULK_IMPORT_USERS',
               name: t('admin.bulkImportUsersLabel'),
               iconProps: { iconName: 'CloudImportExport' },
-              disabled: isEmpty(ctxValue.adUsers),
+              disabled: isEmpty(ctxValue.activeDirectoryUsers),
               onClick: () => setAddMultiplePanel({ isOpen: true })
             },
             {
