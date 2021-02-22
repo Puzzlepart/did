@@ -51,7 +51,8 @@ export class ProjectMongoService extends MongoDocumentService<Project> {
    */
   public async updateProject(project: Project): Promise<void> {
     try {
-      await this.collection.updateOne(pick(project, 'key', 'customerKey'), { $set: project })
+      const filter: FilterQuery<Project> = pick(project, 'key', 'customerKey')
+      await this.collection.updateOne(filter, { $set: project })
     } catch (err) {
       throw err
     }
