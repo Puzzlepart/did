@@ -17,7 +17,7 @@ import {
   OutlookCategoryResolver,
   ProjectResolver,
   RoleResolver,
-  TimeEntryResolver,
+  ReportsResolver,
   TimesheetResolver,
   UserResolver,
   SubscriptionResolver
@@ -36,7 +36,7 @@ const getSchema = async () => {
       CustomerResolver,
       LabelResolver,
       NotificationResolver,
-      TimeEntryResolver,
+      ReportsResolver,
       TimesheetResolver,
       ProjectResolver,
       OutlookCategoryResolver,

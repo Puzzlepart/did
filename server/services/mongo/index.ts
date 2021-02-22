@@ -2,12 +2,13 @@
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import { Context } from '../../graphql/context'
+import { CustomerMongoService } from './customer'
+import { LabelMongoService } from './label'
+import { ProjectMongoService } from './project'
+import { ReportsMongoService } from './reports'
 import { RoleMongoService } from './role'
 import { SubscriptionMongoService } from './subscription'
 import { UserMongoService } from './user'
-import { ProjectMongoService } from './project'
-import { CustomerMongoService } from './customer'
-import { LabelMongoService } from './label'
 
 @Service({ global: false })
 export class MongoService {
@@ -40,6 +41,10 @@ export class MongoService {
 
   public get label(): LabelMongoService {
     return new LabelMongoService(this.context.client.db('test'))
+  }
+
+  public get reports(): ReportsMongoService {
+    return new ReportsMongoService(this.context.client.db('test'))
   }
 }
 

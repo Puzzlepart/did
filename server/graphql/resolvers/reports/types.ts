@@ -2,7 +2,7 @@
 import 'reflect-metadata'
 import { Field, Float, ID, InputType, ObjectType } from 'type-graphql'
 import { simpleResolvers } from '../../config'
-import { Project, Customer, User } from '../types'
+import { Customer, Project, User } from '../types'
 
 @ObjectType({
   description: 'A type that describes a TimeEntry',
@@ -22,10 +22,10 @@ export class TimeEntry {
   description: string
 
   @Field()
-  startDateTime: string
+  startDateTime: Date
 
   @Field()
-  endDateTime: string
+  endDateTime: Date
 
   @Field()
   webLink: string
@@ -36,25 +36,25 @@ export class TimeEntry {
   @Field()
   projectId: string
 
-  @Field()
+  @Field({ nullable: true })
   weekNumber: number
 
-  @Field()
+  @Field({ nullable: true })
   monthNumber: number
 
-  @Field()
+  @Field({ nullable: true })
   year: number
 
   @Field()
   webUrl: string
 
-  @Field(() => Project)
+  @Field(() => Project, { nullable: true })
   project: Project
 
-  @Field(() => Customer)
+  @Field(() => Customer, { nullable: true })
   customer: Customer
 
-  @Field(() => User)
+  @Field(() => User, { nullable: true })
   resource: User
 }
 
