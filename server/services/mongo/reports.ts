@@ -1,5 +1,5 @@
 import * as Mongo from 'mongodb'
-import { first, omit } from 'underscore'
+import { omit } from 'underscore'
 import { DateObject } from '../../../shared/utils/date.dateObject'
 import { TimeEntriesQuery, TimeEntry } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './document'
@@ -24,18 +24,22 @@ export class ReportsMongoService extends MongoDocumentService<TimeEntry> {
           q.month = d.add('-1m').toObject().month - 1
           q.year = d.add('-1m').toObject().year
         }
+          break
         case 'CURRENT_MONTH': {
           q.month = d.toObject().month
           q.year = d.toObject().year
         }
+          break
         case 'LAST_YEAR': {
           q.year = d.toObject().year - 1
         }
+          break
         case 'CURRENT_YEAR': {
           q.year = d.toObject().year
         }
+          break
       }
-      q = omit({ ...q, query }, 'preset')
+      q = omit({ ...q, ...query }, 'preset')
       const timeEntries = await this.find(q)
       const timeEntriesSorted = timeEntries.sort(({ startDateTime: a }, { startDateTime: b }) => {
         return sortAsc
