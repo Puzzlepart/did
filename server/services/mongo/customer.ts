@@ -28,10 +28,7 @@ export class CustomerMongoService extends MongoDocumentService<Customer> {
    */
   public async updateCustomer(customer: Customer): Promise<void> {
     try {
-      await this.collection.updateOne(
-        pick(customer, 'key'),
-        { $set: customer }
-      )
+      await this.collection.updateOne(pick(customer, 'key'), { $set: customer })
     } catch (err) {
       throw err
     }

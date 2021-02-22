@@ -17,10 +17,7 @@ export class ProjectResolver {
    * @param {MongoService} _mongo Mongo service
    * @param {MSGraphService} _msgraph MSGraphService
    */
-  constructor(
-    private readonly _mongo: MongoService,
-    private readonly _msgraph: MSGraphService
-  ) { }
+  constructor(private readonly _mongo: MongoService, private readonly _msgraph: MSGraphService) {}
 
   /**
    * Get projects

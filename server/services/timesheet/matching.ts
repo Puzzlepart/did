@@ -5,7 +5,7 @@ import { ProjectsData } from '../mongo/project'
 import MSGraphEvent from '../msgraph.types'
 
 export default class {
-  constructor(private _data:ProjectsData) { }
+  constructor(private _data: ProjectsData) {}
 
   /**
    * Find project suggestions using findBestMatch from string-similarity
@@ -135,7 +135,10 @@ export default class {
     // We search the whole srchStr for match in non-strict/soft mode
     else {
       const softMatches = this._searchString(srchStr, false)
-      event.project = find(this._data.projects, ({ tag }) => !!find(softMatches, (m) => m.tag === tag))
+      event.project = find(
+        this._data.projects,
+        ({ tag }) => !!find(softMatches, (m) => m.tag === tag)
+      )
       event.customer = find(this._data.customers, ({ key }) => key === event.project?.customerKey)
     }
 

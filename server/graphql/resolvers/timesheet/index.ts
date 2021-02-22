@@ -34,10 +34,7 @@ export class TimesheetResolver {
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [TimesheetPeriodObject], { description: 'Get timesheet for startDate - endDate' })
-  async timesheet(
-    @Arg('query') query: TimesheetQuery,
-    @Arg('options') options: TimesheetOptions
-  ) {
+  async timesheet(@Arg('query') query: TimesheetQuery, @Arg('options') options: TimesheetOptions) {
     try {
       return await this._timesheet.getTimesheet({ ...query, ...options })
     } catch (error) {

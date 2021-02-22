@@ -130,8 +130,8 @@ export const RolePanel: FunctionComponent<IRolePanelProps> = (props: IRolePanelP
                   onClick={onDelete}
                 />
               ) : (
-                  <UserMessage text={t('admin.roleInUseMessage', { count: data?.users?.length })} />
-                )}
+                <UserMessage text={t('admin.roleInUseMessage', { count: data?.users?.length })} />
+              )}
             </Fragment>
           )}
           <PrimaryButton

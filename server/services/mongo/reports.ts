@@ -20,23 +20,27 @@ export class ReportsMongoService extends MongoDocumentService<TimeEntry> {
       const d = new DateObject()
       let q: Mongo.FilterQuery<TimeEntry> = {}
       switch (query.preset) {
-        case 'LAST_MONTH': {
-          q.month = d.add('-1m').toObject().month - 1
-          q.year = d.add('-1m').toObject().year
-        }
+        case 'LAST_MONTH':
+          {
+            q.month = d.add('-1m').toObject().month - 1
+            q.year = d.add('-1m').toObject().year
+          }
           break
-        case 'CURRENT_MONTH': {
-          q.month = d.toObject().month
-          q.year = d.toObject().year
-        }
+        case 'CURRENT_MONTH':
+          {
+            q.month = d.toObject().month
+            q.year = d.toObject().year
+          }
           break
-        case 'LAST_YEAR': {
-          q.year = d.toObject().year - 1
-        }
+        case 'LAST_YEAR':
+          {
+            q.year = d.toObject().year - 1
+          }
           break
-        case 'CURRENT_YEAR': {
-          q.year = d.toObject().year
-        }
+        case 'CURRENT_YEAR':
+          {
+            q.year = d.toObject().year
+          }
           break
       }
       q = omit({ ...q, ...query }, 'preset')

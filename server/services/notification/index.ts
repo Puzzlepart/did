@@ -30,7 +30,7 @@ export class NotificationService {
 
   /**
    * Get periods
-   * 
+   *
    * @param {string} add Add
    * @param {number} count Count
    * @param {string} locale Locale
@@ -49,20 +49,18 @@ export class NotificationService {
 
   /**
    * Get unconfirmed periods notifications
-   * 
+   *
    * @param {string} template Notification template
    * @param {string} locale Locale
    */
   private async _unconfirmedPeriods(template: string, locale: string) {
-    const periods = this._getPeriods(
-      '-1w',
-      5,
-      locale
-    )
+    const periods = this._getPeriods('-1w', 5, locale)
 
-    const confirmedPeriods = await this._confirmed_periods.find({
-      userId: this.context.userId
-    }).toArray()
+    const confirmedPeriods = await this._confirmed_periods
+      .find({
+        userId: this.context.userId
+      })
+      .toArray()
 
     const nperiods: any[] = periods.reduce(($, period) => {
       if (!any(confirmedPeriods, ({ id }) => id === period.id)) {
@@ -71,15 +69,12 @@ export class NotificationService {
       return $
     }, [])
 
-    return nperiods.map((period) => new UnconfirmedPeriodNotification(
-      period,
-      template
-    ))
+    return nperiods.map((period) => new UnconfirmedPeriodNotification(period, template))
   }
 
   /**
    * Get forecast notifications
-   * 
+   *
    * @param {string} template Notification template
    * @param {string} locale Locale
    */
@@ -91,9 +86,11 @@ export class NotificationService {
       locale
     )
 
-    const forecastedPeriods = await this._forecasted_periods.find({
-      userId: this.context.userId
-    }).toArray()
+    const forecastedPeriods = await this._forecasted_periods
+      .find({
+        userId: this.context.userId
+      })
+      .toArray()
 
     const nperiods: any[] = periods.reduce(($, period) => {
       if (!any(forecastedPeriods, ({ id }) => id === period.id)) {
@@ -102,16 +99,13 @@ export class NotificationService {
       return $
     }, [])
 
-    return nperiods.map((period) => new ForecastNotification(
-      period,
-      template
-    ))
+    return nperiods.map((period) => new ForecastNotification(period, template))
   }
 
   public async getNotifications(templates: NotificationTemplates, locale: string) {
     const notifications = await Promise.all([
       this._unconfirmedPeriods(templates.unconfirmedPeriods, locale),
-      this._forecast(templates.forecast, locale),
+      this._forecast(templates.forecast, locale)
     ])
     // eslint-disable-next-line prefer-spread
     return [].concat.apply([], notifications)

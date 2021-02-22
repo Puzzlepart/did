@@ -15,7 +15,7 @@ export class OutlookCategoryResolver {
    *
    * @param {MSGraphService} _msgraph MSGraphService
    */
-  constructor(private readonly _msgraph: MSGraphService) { }
+  constructor(private readonly _msgraph: MSGraphService) {}
 
   /**
    * Get Outlook categories
@@ -34,7 +34,9 @@ export class OutlookCategoryResolver {
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => CreateOutlookCategoryResult, { description: 'Create Outlook category' })
-  async createOutlookCategory(@Arg('category') category: string): Promise<CreateOutlookCategoryResult> {
+  async createOutlookCategory(
+    @Arg('category') category: string
+  ): Promise<CreateOutlookCategoryResult> {
     const data = await this._msgraph.createOutlookCategory(category)
     return { success: true, data, error: null }
   }

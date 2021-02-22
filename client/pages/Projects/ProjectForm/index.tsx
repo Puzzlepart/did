@@ -180,7 +180,9 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (props: IProjec
           className={styles.inputField}
           label={t('admin.labels')}
           placeholder={t('admin.filterLabels')}
-          defaultSelectedKeys={state.editMode ? (props.edit.labels as Label[]).map((lbl) => lbl.name) : []}
+          defaultSelectedKeys={
+            state.editMode ? (props.edit.labels as Label[]).map((lbl) => lbl.name) : []
+          }
           onChange={(labels) =>
             dispatch({
               type: 'UPDATE_MODEL',

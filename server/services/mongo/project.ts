@@ -6,8 +6,8 @@ import { MongoDocumentService } from './document'
 import { LabelMongoService } from './label'
 
 export type ProjectsData = {
-  projects: Project[],
-  customers: Customer[],
+  projects: Project[]
+  customers: Customer[]
   labels: Label[]
 }
 
@@ -41,10 +41,7 @@ export class ProjectMongoService extends MongoDocumentService<Project> {
    */
   public async updateProject(project: Project): Promise<void> {
     try {
-      await this.collection.updateOne(
-        pick(project, 'key', 'customerKey'),
-        { $set: project }
-      )
+      await this.collection.updateOne(pick(project, 'key', 'customerKey'), { $set: project })
     } catch (err) {
       throw err
     }
@@ -52,7 +49,7 @@ export class ProjectMongoService extends MongoDocumentService<Project> {
 
   /**
    * Get projects, customers and labels
-   * 
+   *
    * Connects labels and customer to projects
    *
    * @param {Mongo.FilterQuery<Project>} query Query
@@ -61,11 +58,7 @@ export class ProjectMongoService extends MongoDocumentService<Project> {
     try {
       const cacheValue = await this.getFromCache<ProjectsData>('projects_data')
       if (cacheValue) return cacheValue
-      const [
-        projects,
-        customers,
-        labels
-      ] = await Promise.all([
+      const [projects, customers, labels] = await Promise.all([
         this.find(query),
         this._customer.getCustomers(query?.customerKey && { key: query.customerKey }),
         this._label.getLabels()
@@ -74,7 +67,7 @@ export class ProjectMongoService extends MongoDocumentService<Project> {
         .map((p) => {
           p.customer = find(customers, (c) => c.key === p.customerKey) || null
           p.labels = filter(labels, ({ name }) => {
-            return !!find(p.labels, l => name === l)
+            return !!find(p.labels, (l) => name === l)
           })
           return p
         })

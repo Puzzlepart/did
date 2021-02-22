@@ -8,7 +8,12 @@ import { Context } from '../../graphql/context'
 import { TimesheetPeriodObject } from '../../graphql/resolvers/timesheet/types'
 import { MongoService } from '../mongo'
 import MatchingEngine from './matching'
-import { IConnectEventsParams, IGetTimesheetParams, ISubmitPeriodParams, IUnsubmitPeriodParams } from './types'
+import {
+  IConnectEventsParams,
+  IGetTimesheetParams,
+  ISubmitPeriodParams,
+  IUnsubmitPeriodParams
+} from './types'
 
 @Service({ global: false })
 export class TimesheetService {
@@ -87,10 +92,11 @@ export class TimesheetService {
         periods[i].isForecasted = !!forecasted
         periods[i].forecastedHours = forecasted?.hours || 0
         if (confirmed) {
-          const entries = await this._time_entries.find({
-            periodId: periods[i].id,
-            userId: this.context.userId
-          })
+          const entries = await this._time_entries
+            .find({
+              periodId: periods[i].id,
+              userId: this.context.userId
+            })
             .toArray()
           periods[i] = {
             ...periods[i],
@@ -98,7 +104,7 @@ export class TimesheetService {
             events: this._connectEvents({
               ...params,
               events: entries,
-              projects: data.projects,
+              projects: data.projects
             })
           }
         } else {
@@ -109,7 +115,7 @@ export class TimesheetService {
           })
           periods[i] = {
             ...periods[i],
-            events: engine.matchEvents(events).map(e => ({
+            events: engine.matchEvents(events).map((e) => ({
               ...e,
               date: DateUtils.formatDate(e.startDateTime, params.dateFormat, params.locale)
             }))
@@ -130,7 +136,10 @@ export class TimesheetService {
   private _connectEvents({ events, projects, dateFormat, locale }: IConnectEventsParams) {
     return events.map((event) => ({
       ...event,
-      project: find(projects, ({ customerKey, key }) => [customerKey, key].join(' ') === event.projectId),
+      project: find(
+        projects,
+        ({ customerKey, key }) => [customerKey, key].join(' ') === event.projectId
+      ),
       date: DateUtils.formatDate(event.startDateTime, dateFormat, locale)
     }))
   }
@@ -143,13 +152,10 @@ export class TimesheetService {
   public async submitPeriod({ period, tzOffset, forecast }: ISubmitPeriodParams) {
     try {
       const { matchedEvents } = period
-      const events = await this._msgraph.getEvents(
-        period.startDate,
-        period.endDate,
-        {
-          tzOffset,
-          returnIsoDates: false
-        })
+      const events = await this._msgraph.getEvents(period.startDate, period.endDate, {
+        tzOffset,
+        returnIsoDates: false
+      })
       const [week, month, year] = period.id.split('_').map((p) => parseInt(p, 10))
       const _period: any = {
         id: period.id,
@@ -202,7 +208,7 @@ export class TimesheetService {
       period_collection.deleteOne({
         id: period.id,
         userId: this.context.userId
-      }),
+      })
     ])
   }
 }

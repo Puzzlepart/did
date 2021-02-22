@@ -1,4 +1,3 @@
-
 import 'reflect-metadata'
 import { NotificationService } from '../../../services/notification'
 import { Arg, Authorized, Query, Resolver } from 'type-graphql'
@@ -14,7 +13,7 @@ export class NotificationResolver {
    *
    * @param {NotificationService} _notification Notification service
    */
-  constructor(private readonly _notification: NotificationService) { }
+  constructor(private readonly _notification: NotificationService) {}
 
   /**
    * Get notifications

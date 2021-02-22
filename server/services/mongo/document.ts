@@ -26,7 +26,7 @@ export class MongoDocumentService<T> {
 
   /**
    * Get from cache by key
-   * 
+   *
    * @param {string} key Cache key
    */
   public getFromCache<T = any>(key: string): Promise<T> {
@@ -40,7 +40,7 @@ export class MongoDocumentService<T> {
 
   /**
    * Get from cache by key
-   * 
+   *
    * @param {string} key Cache key
    * @param {any} value Cache value
    * @param {number} seconds Cache seconds

@@ -31,7 +31,7 @@ export class Customer {
 
   /**
    * Creates a Customer object from a CustomerInput object
-   * 
+   *
    * @param {CustomerInput} input Input object
    */
   public fromInput(input: CustomerInput): Customer {

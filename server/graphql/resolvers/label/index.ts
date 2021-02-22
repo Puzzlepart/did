@@ -16,7 +16,7 @@ export class LabelResolver {
    *
    * @param {MongoService} _mongo Mongo service
    */
-  constructor(private readonly _mongo: MongoService) { }
+  constructor(private readonly _mongo: MongoService) {}
 
   /**
    * Get labels
@@ -52,7 +52,7 @@ export class LabelResolver {
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Delete label' })
   async deleteLabel(@Arg('name') name: string): Promise<BaseResult> {
-      await this._mongo.label.deleteLabel(name)
+    await this._mongo.label.deleteLabel(name)
     return { success: true, error: null }
   }
 }

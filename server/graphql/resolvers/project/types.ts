@@ -49,7 +49,7 @@ export class Project {
 
   /**
    * Constructs a new Project
-   * 
+   *
    * @param {any} data Data
    */
   constructor(data?: any) {
@@ -58,7 +58,7 @@ export class Project {
 
   /**
    * Creates a Project object from a ProjectInput object
-   * 
+   *
    * @param {ProjectInput} input Input object
    */
   public fromInput(input: ProjectInput): Project {

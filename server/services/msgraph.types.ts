@@ -54,7 +54,7 @@ export default class MSGraphEvent {
 }
 
 export interface MSGraphOutlookCategory {
-  id: string;
-  displayName: string;
-  color: string;
+  id: string
+  displayName: string
+  color: string
 }

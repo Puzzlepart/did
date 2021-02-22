@@ -43,10 +43,7 @@ export class LabelMongoService extends MongoDocumentService<Label> {
    */
   public async updateLabel(label: Label): Promise<void> {
     try {
-      await this.collection.updateOne(
-        pick(label, 'name'),
-        { $set: label }
-      )
+      await this.collection.updateOne(pick(label, 'name'), { $set: label })
     } catch (err) {
       throw err
     }
