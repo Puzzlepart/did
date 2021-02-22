@@ -1,11 +1,9 @@
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { ObjectType, InputType, Field, ID } from 'type-graphql'
-import { simpleResolvers } from '../../config'
-
 @ObjectType({
   description: 'A type that describes a Customer',
-  simpleResolvers: simpleResolvers.Customer
+  simpleResolvers: true
 })
 export class Customer {
   @Field(() => ID)

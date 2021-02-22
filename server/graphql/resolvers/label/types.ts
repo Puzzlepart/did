@@ -1,11 +1,10 @@
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { ObjectType, InputType, Field, ID } from 'type-graphql'
-import { simpleResolvers } from '../../config'
 
 @ObjectType({
   description: 'A type that describes a LabelObject',
-  simpleResolvers: simpleResolvers.LabelObject
+  simpleResolvers: true
 })
 export class LabelObject {
   @Field(() => ID)

@@ -2,12 +2,11 @@
 import 'reflect-metadata'
 import { Field, Float, ID, InputType, ObjectType } from 'type-graphql'
 import DateUtils from '../../../../shared/utils/date'
-import { simpleResolvers } from '../../config'
 import { Customer, EventError, LabelObject, Project } from '../types'
 
 @ObjectType({
   description: 'A type that describes a Event',
-  simpleResolvers: simpleResolvers.EventObject
+  simpleResolvers: true
 })
 export class EventObject {
   @Field(() => ID)
@@ -84,7 +83,7 @@ export class EventInput {
 
 @ObjectType({
   description: 'A type that describes a TimesheetPeriod',
-  simpleResolvers: simpleResolvers.TimesheetPeriodObject
+  simpleResolvers: true
 })
 export class TimesheetPeriodObject {
   @Field(() => ID)
