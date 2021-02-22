@@ -2,7 +2,7 @@ import get from 'get-value'
 import { Collection } from 'mongodb'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
-import { find } from 'underscore'
+import { any } from 'underscore'
 import { DateObject } from '../../../shared/utils/date'
 import { Context } from '../../graphql/context'
 import { NotificationTemplates } from '../../graphql/resolvers/types'
@@ -29,34 +29,49 @@ export class NotificationService {
   }
 
   /**
+   * Get periods
+   * 
+   * @param {string} add Add
+   * @param {number} count Count
+   * @param {string} locale Locale
+   */
+  private _getPeriods(add: string, count: number, locale: string) {
+    const periods = []
+    let d = new DateObject().add(add)
+    for (let i = 0; i <= count; i++) {
+      const startOfWeek = d.startOfWeek.format('YYYY-MM-DD')
+      const endOfWeek = d.endOfWeek.format('YYYY-MM-DD')
+      periods.push(...this._timesheet.getPeriods(startOfWeek, endOfWeek, locale))
+      d = d.add(add)
+    }
+    return periods
+  }
+
+  /**
    * Get unconfirmed periods notifications
    * 
    * @param {string} template Notification template
    * @param {string} locale Locale
    */
   private async _unconfirmedPeriods(template: string, locale: string) {
-    const periods = []
-    const unconfirmedPeriods = []
-    let currentDate = new DateObject().add('-1w')
-
-    for (let i = 0; i <= 5; i++) {
-      const startOfWeek = currentDate.startOfWeek.format('YYYY-MM-DD')
-      const endOfWeek = currentDate.endOfWeek.format('YYYY-MM-DD')
-      periods.push(...this._timesheet.getPeriods(startOfWeek, endOfWeek, locale))
-      currentDate = currentDate.add('-1w')
-    }
+    const periods = this._getPeriods(
+      '-1w',
+      5,
+      locale
+    )
 
     const confirmedPeriods = await this._confirmed_periods.find({
       userId: this.context.userId
     }).toArray()
 
-    periods.forEach((period) => {
-      if (!find(confirmedPeriods, ({ id }) => id === period.id)) {
-        unconfirmedPeriods.push(period)
+    const nperiods: any[] = periods.reduce(($, period) => {
+      if (!any(confirmedPeriods, ({ id }) => id === period.id)) {
+        $.push(period)
       }
-    })
+      return $
+    }, [])
 
-    return unconfirmedPeriods.map((period) => new UnconfirmedPeriodNotification(
+    return nperiods.map((period) => new UnconfirmedPeriodNotification(
       period,
       template
     ))
@@ -70,31 +85,26 @@ export class NotificationService {
    */
   private async _forecast(template: string, locale: string) {
     if (!get(this.context, 'subscription.settings.forecast.enabled', { default: false })) return []
-    const periods = []
-    const unforecastedPeriods = []
-    let currentDate = new DateObject().add('1w')
-
-    for (
-      let i = 0;
-      i < get(this.context, 'subscription.settings.forecast.notifications', { default: 2 });
-      i++
-    ) {
-      const startOfWeek = currentDate.startOfWeek.format('YYYY-MM-DD')
-      const endOfWeek = currentDate.endOfWeek.format('YYYY-MM-DD')
-      periods.push(...this._timesheet.getPeriods(startOfWeek, endOfWeek, locale))
-      currentDate = currentDate.add('1w')
-    }
+    const periods = this._getPeriods(
+      '1w',
+      get(this.context, 'subscription.settings.forecast.notifications', { default: 2 }) - 1,
+      locale
+    )
 
     const forecastedPeriods = await this._forecasted_periods.find({
       userId: this.context.userId
     }).toArray()
 
-    periods.forEach((period) => {
-      if (!find(forecastedPeriods, ({ id }) => id === period.id))
-        unforecastedPeriods.push(period)
-    })
+    const nperiods: any[] = periods.reduce(($, period) => {
+      if (!any(forecastedPeriods, ({ id }) => id === period.id)) {
+        $.push(period)
+      }
+      return $
+    }, [])
 
-    return unforecastedPeriods.map((period) => new ForecastNotification(
+    console.log(nperiods)
+
+    return nperiods.map((period) => new ForecastNotification(
       period,
       template
     ))
