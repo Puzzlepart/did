@@ -1,11 +1,9 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable prefer-spread */
+
 import 'reflect-metadata'
-import { Arg, Authorized, Ctx, Query, Resolver } from 'type-graphql'
+import { NotificationService } from '../../../services/notification'
+import { Arg, Authorized, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { IAuthOptions } from '../../authChecker'
-import { Context } from '../../context'
 import { Notification, NotificationTemplates } from './types'
 
 @Service()
@@ -13,24 +11,24 @@ import { Notification, NotificationTemplates } from './types'
 export class NotificationResolver {
   /**
    * Constructor for NotificationResolver
+   *
+   * @param {NotificationService} _notification Notification service
    */
-  constructor() {}
+  constructor(private readonly _notification: NotificationService) { }
 
   /**
    * Get notifications
    *
    * @param {NotificationTemplates} templates Templates
    * @param {string} locale Locale
-   * @param {Context} ctx GraphQL context
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [Notification], { description: 'Get notifications' })
-  async notifications(
+  notifications(
     @Arg('templates', () => NotificationTemplates) templates: NotificationTemplates,
-    @Arg('locale') locale: string,
-    @Ctx() ctx: Context
+    @Arg('locale') locale: string
   ) {
-    return await Promise.resolve([])
+    return this._notification.getNotifications(templates, locale)
   }
 }
 
