@@ -37,7 +37,7 @@ export class ReportsResolver {
     @Arg('query') query: TimeEntriesQuery
   ) {
     const [timeEntries, { projects, customers }, users] = await Promise.all([
-      this._mongo.reports.getTimeEntries({}),
+      this._mongo.reports.getTimeEntries(query),
       this._mongo.project.getProjectsData(),
       this._mongo.user.getUsers()
     ])

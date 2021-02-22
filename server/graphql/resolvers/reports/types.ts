@@ -64,32 +64,11 @@ export class TimeEntry {
 @InputType()
 export class TimeEntriesQuery {
   @Field({ nullable: true })
+  preset?: string
+
+  @Field({ nullable: true })
   periodId?: string
 
   @Field({ nullable: true })
-  startDateTime?: string
-
-  @Field({ nullable: true })
-  endDateTime?: string
-
-  @Field({ nullable: true })
-  projectId?: string
-
-  @Field({ nullable: true })
   resourceId?: string
-
-  @Field({ nullable: true })
-  weekNumber?: number
-
-  @Field({ nullable: true })
-  monthNumber?: number
-
-  @Field({ nullable: true })
-  startMonthIndex?: number
-
-  @Field({ nullable: true })
-  endMonthIndex?: number
-
-  @Field({ nullable: true })
-  year?: number
 }
