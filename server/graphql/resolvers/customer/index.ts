@@ -2,7 +2,7 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { MongoService } from '../../../services/mongo'
+import { MongoService } from 'services/mongo'
 import { IAuthOptions } from '../../authChecker'
 import { BaseResult } from '../types'
 import { Customer, CustomerInput } from './types'

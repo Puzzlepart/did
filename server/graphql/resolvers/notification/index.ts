@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import { NotificationService } from '../../../services/notification'
+import { NotificationService } from 'services/notification'
 import { Arg, Authorized, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { IAuthOptions } from '../../authChecker'

@@ -3,8 +3,8 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { MongoService } from '../../../services/mongo'
-import MSGraphService from '../../../services/msgraph'
+import { MongoService } from 'services/mongo'
+import MSGraphService from 'services/msgraph'
 import { IAuthOptions } from '../../authChecker'
 import { BaseResult, Project, ProjectInput, ProjectOptions } from '../types'
 

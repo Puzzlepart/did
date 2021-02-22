@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-empty-function */
 import 'reflect-metadata'
 import { Context } from '../../context'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { MongoService } from '../../../services/mongo'
+import { MongoService } from 'services/mongo'
 import { IAuthOptions } from '../../authChecker'
 import { BaseResult } from '../types'
 import { ApiToken, ApiTokenInput } from './types'

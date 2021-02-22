@@ -6,7 +6,7 @@ import { Db as MongoDatabase, MongoClient } from 'mongodb'
 import 'reflect-metadata'
 import { Container, ContainerInstance } from 'typedi'
 import { DateObject } from '../../shared/utils/date'
-import env from '../utils/env'
+import env from 'utils/env'
 import { Subscription } from './resolvers/types'
 const debug = createDebug('graphql/context')
 

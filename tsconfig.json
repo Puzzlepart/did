@@ -11,6 +11,11 @@
     "experimentalDecorators": true,
     "lib": ["es2018", "esnext.asynciterable", "DOM"],
     "baseUrl": "./",
+    "paths": {
+      "utils/*": ["server/utils/*"],
+      "services": ["server/services"],
+      "services/*": ["server/services/*"]
+    },
     "typeRoots": ["./node_modules/@types", "./server"],
     "types": [
       "express",

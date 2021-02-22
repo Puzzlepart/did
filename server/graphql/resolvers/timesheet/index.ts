@@ -4,7 +4,7 @@ import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { pick } from 'underscore'
-import { TimesheetService } from '../../../services'
+import { TimesheetService } from 'services'
 import { IAuthOptions } from '../../authChecker'
 import { BaseResult } from '../types'
 import {

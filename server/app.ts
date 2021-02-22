@@ -14,7 +14,7 @@ import serveGzipped from './middleware/gzip'
 import passport from './middleware/passport'
 import session from './middleware/session'
 import authRoute from './routes/auth'
-import env from './utils/env'
+import env from 'utils/env'
 
 class App {
   public instance: express.Application

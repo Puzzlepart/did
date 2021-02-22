@@ -3,7 +3,7 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { MSGraphService } from '../../../services'
+import { MSGraphService } from 'services'
 import { IAuthOptions } from '../../authChecker'
 import { CreateOutlookCategoryResult, OutlookCategory } from './types'
 

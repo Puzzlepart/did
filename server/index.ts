@@ -1,8 +1,13 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('app-module-path').addPath(__dirname)
 import app from './app'
 import * as http from 'http'
-import env from './utils/env'
+import env from 'utils/env'
 import createDebug from 'debug'
 const debug = createDebug('server')
+
+// eslint-disable-next-line no-console
+console.log(env('MONGO_DB_DB_NAME'))
 
 async function startServer(port: string) {
   await app.setup()

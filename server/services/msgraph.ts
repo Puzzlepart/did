@@ -7,7 +7,7 @@ import 'reflect-metadata'
 import { Service } from 'typedi'
 import { first, sortBy } from 'underscore'
 import DateUtils from '../../shared/utils/date'
-import env from '../utils/env'
+import env from 'utils/env'
 import MSGraphEvent, { MSGraphEventOptions, MSGraphOutlookCategory } from './msgraph.types'
 import OAuthService, { AccessTokenOptions } from './oauth'
 const debug = createDebug('services/msgraph')

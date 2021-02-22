@@ -8,7 +8,7 @@ import { MongoClient } from 'mongodb'
 import 'reflect-metadata'
 import { buildSchema, ResolverData } from 'type-graphql'
 import Container, { ContainerInstance } from 'typedi'
-import env from '../utils/env'
+import env from 'utils/env'
 import { authChecker } from './authChecker'
 import { Context, createContext } from './context'
 import {
