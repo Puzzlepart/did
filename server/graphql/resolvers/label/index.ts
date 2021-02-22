@@ -17,7 +17,7 @@ export class LabelResolver {
    *
    * @param {MongoService} _mongo Mongo service
    */
-  constructor(private readonly _mongo: MongoService) {}
+  constructor(private readonly _mongo: MongoService) { }
 
   /**
    * Get labels
@@ -33,16 +33,16 @@ export class LabelResolver {
    *
    * @param {LabelInput} label Label
    * @param {boolean} update Update
-   * @param {Context} ctx GraphQL context
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Add or update label' })
   async addOrUpdateLabel(
     @Arg('label', () => LabelInput) label: LabelInput,
-    @Arg('update', { nullable: true }) update: boolean,
-    @Ctx() ctx: Context
+    @Arg('update', { nullable: true }) update: boolean
   ) {
-    return await Promise.resolve({ success: true, error: null })
+    if (update) await this._mongo.label.updateLabel(label)
+    else await this._mongo.label.addLabel(label)
+    return { success: true, error: null }
   }
 
   /**
@@ -53,7 +53,7 @@ export class LabelResolver {
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Delete label' })
   async deleteLabel(@Arg('name') name: string) {
-    return await Promise.resolve({ success: true, error: null })
+    return await this._mongo.label.deleteLabel(name)
   }
 }
 
