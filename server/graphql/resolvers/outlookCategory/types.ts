@@ -13,7 +13,7 @@ export class OutlookCategory {
   id: string
 
   @Field()
-  key: string
+  key?: string
 
   @Field()
   displayName: string

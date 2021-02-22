@@ -6,9 +6,9 @@ import { performance, PerformanceObserver } from 'perf_hooks'
 import 'reflect-metadata'
 import { Service } from 'typedi'
 import { first, sortBy } from 'underscore'
-import env from '../utils/env'
 import DateUtils from '../../shared/utils/date'
-import MSGraphEvent, { MSGraphEventOptions } from './msgraph.types'
+import env from '../utils/env'
+import MSGraphEvent, { MSGraphEventOptions, MSGraphOutlookCategory } from './msgraph.types'
 import OAuthService, { AccessTokenOptions } from './oauth'
 const debug = createDebug('services/msgraph')
 
@@ -134,10 +134,9 @@ class MSGraphService {
    *
    * @param {string} category Category
    */
-  async createOutlookCategory(category: string): Promise<any> {
+  async createOutlookCategory(category: string): Promise<MSGraphOutlookCategory> {
     try {
       this.startMark('createOutlookCategory')
-      // returns a pseudorandom color index from 0 to 24 based on category name
       const colorIdx =
         category
           .split('')

@@ -52,3 +52,9 @@ export default class MSGraphEvent {
     this.duration = DateUtils.getDurationHours(event.start.dateTime, event.end.dateTime)
   }
 }
+
+export interface MSGraphOutlookCategory {
+  id: string;
+  displayName: string;
+  color: string;
+}

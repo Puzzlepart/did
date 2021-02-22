@@ -35,9 +35,9 @@ export class OutlookCategoryResolver {
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => CreateOutlookCategoryResult, { description: 'Create Outlook category' })
-  async createOutlookCategory(@Arg('category') category: string): Promise<BaseResult> {
-    await this._msgraph.createOutlookCategory(category)
-    return { success: true, error: null }
+  async createOutlookCategory(@Arg('category') category: string): Promise<CreateOutlookCategoryResult> {
+    const data = await this._msgraph.createOutlookCategory(category)
+    return { success: true, data, error: null }
   }
 }
 
