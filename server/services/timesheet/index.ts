@@ -1,4 +1,4 @@
-import { Db } from 'mongodb'
+import { Collection } from 'mongodb'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import { find } from 'underscore'
@@ -12,7 +12,10 @@ import { IConnectEventsParams, IGetTimesheetParams, ISubmitPeriodParams, IUnsubm
 
 @Service({ global: false })
 export class TimesheetService {
-  private _db: Db
+  private _confirmed_periods: Collection
+  private _forecasted_periods: Collection
+  private _time_entries: Collection
+  private _forecasted_time_entries: Collection
   /**
    * Constructor
    *
@@ -25,7 +28,11 @@ export class TimesheetService {
     private readonly _msgraph: MSGraphService,
     private readonly _mongo: MongoService
   ) {
-    this._db = this.context.client.db('test')
+    const db = this.context.client.db('test')
+    this._confirmed_periods = db.collection('confirmed_periods')
+    this._forecasted_periods = db.collection('forecasted_periods')
+    this._time_entries = db.collection('time_entries')
+    this._forecasted_time_entries = db.collection('forecasted_time_entries')
   }
 
   /**
@@ -67,24 +74,27 @@ export class TimesheetService {
       const periods = this.getPeriods(params.startDate, params.endDate, params.locale)
       const data = await this._mongo.project.getProjectsData()
       for (let i = 0; i < periods.length; i++) {
-        const confirmed = await this._db
-          .collection('confirmed_periods')
-          .findOne({
+        const [confirmed, forecasted] = await Promise.all([
+          this._confirmed_periods.findOne({
+            id: periods[i].id,
+            userId: this.context.userId
+          }),
+          this._forecasted_periods.findOne({
             id: periods[i].id,
             userId: this.context.userId
           })
+        ])
+        periods[i].isForecasted = !!forecasted
+        periods[i].forecastedHours = forecasted?.hours || 0
         if (confirmed) {
-          const entries = await this._db
-            .collection('time_entries')
-            .find({
-              periodId: periods[i].id,
-              userId: this.context.userId
-            })
+          const entries = await this._time_entries.find({
+            periodId: periods[i].id,
+            userId: this.context.userId
+          })
             .toArray()
           periods[i] = {
             ...periods[i],
             isConfirmed: true,
-            isForecasted: true,
             events: this._connectEvents({
               ...params,
               events: entries,
@@ -130,7 +140,7 @@ export class TimesheetService {
    *
    * @param {ISubmitPeriodParams} params Submit period params
    */
-  public async submitPeriod({ period, tzOffset }: ISubmitPeriodParams) {
+  public async submitPeriod({ period, tzOffset, forecast }: ISubmitPeriodParams) {
     try {
       const { matchedEvents } = period
       const events = await this._msgraph.getEvents(
@@ -141,7 +151,7 @@ export class TimesheetService {
           returnIsoDates: false
         })
       const [week, month, year] = period.id.split('_').map((p) => parseInt(p, 10))
-      const _period = {
+      const _period: any = {
         id: period.id,
         startDate: new Date(period.startDate),
         endDate: new Date(period.endDate),
@@ -149,9 +159,9 @@ export class TimesheetService {
         week,
         month,
         year,
-        forecastedHours: period.forecastedHours || 0,
         hours: 0
       }
+      if (!forecast) _period.forecastedHours = period.forecastedHours || 0
       const entries = []
       _period.hours = matchedEvents.reduce((hours, m: any) => {
         const event = find(events, ({ id }) => id === m.id)
@@ -167,8 +177,10 @@ export class TimesheetService {
         })
         return hours + event.duration
       }, 0)
-      await this._db.collection('time_entries').insertMany(entries)
-      return await this._db.collection('confirmed_periods').insertOne(_period)
+      const entry_colletion = forecast ? this._forecasted_time_entries : this._time_entries
+      const period_collection = forecast ? this._forecasted_periods : this._confirmed_periods
+      await entry_colletion.insertMany(entries)
+      return await period_collection.insertOne(_period)
     } catch (error) {
       throw error
     }
@@ -179,20 +191,18 @@ export class TimesheetService {
    *
    * @param {IUnsubmitPeriodParams} params Unsubmit period params
    */
-  public async unsubmitPeriod({ period }: IUnsubmitPeriodParams) {
+  public async unsubmitPeriod({ period, forecast }: IUnsubmitPeriodParams) {
+    const entry_colletion = forecast ? this._forecasted_time_entries : this._time_entries
+    const period_collection = forecast ? this._forecasted_periods : this._confirmed_periods
     return await Promise.all([
-      this._db
-        .collection('confirmed_periods')
-        .deleteOne({
-          id: period.id,
-          userId: this.context.userId
-        }),
-      this._db
-        .collection('time_entries')
-        .deleteMany({
-          periodId: period.id,
-          userId: this.context.userId
-        })
+      entry_colletion.deleteMany({
+        periodId: period.id,
+        userId: this.context.userId
+      }),
+      period_collection.deleteOne({
+        id: period.id,
+        userId: this.context.userId
+      }),
     ])
   }
 }
