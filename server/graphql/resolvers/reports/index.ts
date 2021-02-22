@@ -2,6 +2,7 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
+import { find, first } from 'underscore'
 import { MongoService } from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
@@ -29,13 +30,32 @@ export class ReportsResolver {
    */
   @Authorized<IAuthOptions>()
   @Query(() => [TimeEntry], { description: 'Get time entries matching the provided query' })
-  timeentries(
+  async timeentries(
     @Arg('currentUser', { nullable: true }) currentUser: boolean,
     @Arg('sortAsc', { nullable: true }) sortAsc: boolean,
     @Arg('forecast', { nullable: true }) forecast: boolean,
     @Arg('query') query: TimeEntriesQuery
   ) {
-    return this._mongo.reports.getTimeEntries({})
+    const [timeEntries, { projects, customers }, users] = await Promise.all([
+      this._mongo.reports.getTimeEntries({}),
+      this._mongo.project.getProjectsData(),
+      this._mongo.user.getUsers()
+    ])
+    return timeEntries.reduce(($, entry) => {
+      const resource = find(users, (user) => user.id === entry.userId)
+      if (!entry.projectId) return $
+      const project = find(projects, (p) => p.tag === entry.projectId)
+      const customer = find(customers, (c) => c.key === first(entry.projectId.split(' ')))
+      if (project && customer && resource) {
+        $.push({
+          ...entry,
+          project,
+          customer,
+          resource
+        })
+      }
+      return $
+    }, [])
   }
 }
 

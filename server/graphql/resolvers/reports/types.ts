@@ -36,6 +36,9 @@ export class TimeEntry {
   @Field()
   projectId: string
 
+  @Field()
+  userId: string
+
   @Field({ nullable: true })
   weekNumber: number
 
@@ -48,13 +51,13 @@ export class TimeEntry {
   @Field()
   webUrl: string
 
-  @Field(() => Project, { nullable: true })
+  @Field(() => Project)
   project: Project
 
-  @Field(() => Customer, { nullable: true })
+  @Field(() => Customer)
   customer: Customer
 
-  @Field(() => User, { nullable: true })
+  @Field(() => User)
   resource: User
 }
 
