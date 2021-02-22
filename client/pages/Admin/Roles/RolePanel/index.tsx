@@ -3,7 +3,7 @@ import { UserMessage } from 'components'
 import { IconPicker } from 'components/IconPicker'
 import * as security from 'config/security'
 import { DefaultButton, Panel, PrimaryButton, TextField, Toggle } from 'office-ui-fabric'
-import React, { FunctionComponent, useEffect, useState } from 'react'
+import React, { Fragment, FunctionComponent, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { RoleInput } from 'types'
 import { contains, isEmpty, isEqual, omit } from 'underscore'
@@ -120,15 +120,19 @@ export const RolePanel: FunctionComponent<IRolePanelProps> = (props: IRolePanelP
           ))}
         </div>
         <div className={styles.actions}>
-          {isEmpty(data?.users) ? (
-            <DefaultButton
-              className={styles.deleteBtn}
-              text={t('common.delete')}
-              iconProps={{ iconName: 'Delete' }}
-              onClick={onDelete}
-            />
-          ) : (
-            <UserMessage text={t('admin.roleInUseMessage', { count: data?.users?.length })} />
+          {props.model && (
+            <Fragment>
+              {isEmpty(data?.users) ? (
+                <DefaultButton
+                  className={styles.deleteBtn}
+                  text={t('common.delete')}
+                  iconProps={{ iconName: 'Delete' }}
+                  onClick={onDelete}
+                />
+              ) : (
+                  <UserMessage text={t('admin.roleInUseMessage', { count: data?.users?.length })} />
+                )}
+            </Fragment>
           )}
           <PrimaryButton
             className={styles.saveBtn}
