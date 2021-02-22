@@ -1,12 +1,14 @@
 import { ApolloServer } from 'apollo-server-express'
-import { GraphQLRequestContext, ApolloServerPlugin } from 'apollo-server-plugin-base'
+import { ApolloServerPlugin, GraphQLRequestContext } from 'apollo-server-plugin-base'
 import createDebug from 'debug'
 import express from 'express'
 import get from 'get-value'
+import { GraphQLDateTime } from 'graphql-iso-date'
+import { MongoClient } from 'mongodb'
 import 'reflect-metadata'
-import env from '../utils/env'
 import { buildSchema, ResolverData } from 'type-graphql'
 import Container, { ContainerInstance } from 'typedi'
+import env from '../utils/env'
 import { authChecker } from './authChecker'
 import { Context, createContext } from './context'
 import {
@@ -16,14 +18,12 @@ import {
   NotificationResolver,
   OutlookCategoryResolver,
   ProjectResolver,
-  RoleResolver,
   ReportsResolver,
+  RoleResolver,
+  SubscriptionResolver,
   TimesheetResolver,
-  UserResolver,
-  SubscriptionResolver
+  UserResolver
 } from './resolvers'
-import { MongoClient } from 'mongodb'
-import { GraphQLDateTime } from 'graphql-iso-date'
 const debug = createDebug('graphql')
 
 /**

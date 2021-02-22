@@ -57,9 +57,10 @@ export const createContext = async (
     context.subscription = get(request, 'user.subscription')
     if (request.token) {
       const token = await client.db('test').collection('api_tokens').findOne({
-        apiKey: request.token,
+        apiKey: request.token
       })
-      if (!token) throw new AuthenticationError('Failed to authenticate with the specified token  .')
+      if (!token)
+        throw new AuthenticationError('Failed to authenticate with the specified token  .')
       context.permissions = token.permissions
     } else {
       context.userId = get(request, 'user.id')
