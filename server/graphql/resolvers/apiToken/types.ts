@@ -11,21 +11,27 @@ export class ApiToken {
   @Field(() => ID, { nullable: true, defaultValue: null })
   name: string
 
-  @Field()
-  created: Date
+  @Field({ nullable: true, defaultValue: null })
+  apiKey?: string
 
   @Field()
-  expires: string
+  created?: Date
+
+  @Field()
+  expires: Date
+
+  @Field(() => [String], { nullable: true })
+  permissions: string[]
 }
 
 @InputType({ description: 'Input object for ApiToken used in mutation addApiToken' })
 export class ApiTokenInput {
   @Field(() => ID)
-  name?: string
+  name: string
 
   @Field()
-  expires?: string
+  expires: Date
 
   @Field(() => [String])
-  permissions?: string[]
+  permissions: string[]
 }

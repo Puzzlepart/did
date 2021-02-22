@@ -18,7 +18,11 @@ import { IApiTokenFormProps } from './types'
 export const ApiTokenForm = ({ isOpen, onAdded, onDismiss }: IApiTokenFormProps) => {
   const { t } = useTranslation()
   const [addApiToken] = useMutation($addApiToken)
-  const [token, setToken] = useState<ApiTokenInput>({ permissions: [] })
+  const [token, setToken] = useState<ApiTokenInput>({
+    name: '',
+    expires: null,
+    permissions: []
+  })
   const permissions = useMemo(() => security.permissions(t).filter((p) => p.api), [])
 
   async function onAddApiToken() {
@@ -34,7 +38,7 @@ export const ApiTokenForm = ({ isOpen, onAdded, onDismiss }: IApiTokenFormProps)
     setToken({ ...token, permissions })
   }
 
-  const expiryOptions = {
+  const EXPIRY_OPTIONS = {
     '1month': t('admin.apiTokens.oneMonth'),
     '3month': t('admin.apiTokens.monthPlural', { months: 3 }),
     '1year': t('admin.apiTokens.oneYear'),
@@ -62,13 +66,13 @@ export const ApiTokenForm = ({ isOpen, onAdded, onDismiss }: IApiTokenFormProps)
           onChange={(_e, { data }) =>
             setToken({
               ...token,
-              expires: new DateObject().add(data).format()
+              expires: new DateObject().add(data).jsDate
             })
           }
-          options={Object.keys(expiryOptions).map((key) => ({
+          options={Object.keys(EXPIRY_OPTIONS).map((key) => ({
             key,
             data: key,
-            text: expiryOptions[key]
+            text: EXPIRY_OPTIONS[key]
           }))}
         />
       </div>

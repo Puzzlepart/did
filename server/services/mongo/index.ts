@@ -2,6 +2,7 @@
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import { Context } from '../../graphql/context'
+import { ApiTokenMongoService } from './apitoken'
 import { CustomerMongoService } from './customer'
 import { LabelMongoService } from './label'
 import { ProjectMongoService } from './project'
@@ -46,6 +47,10 @@ export class MongoService {
   public get reports(): ReportsMongoService {
     return new ReportsMongoService(this.context.client.db('test'))
   }
+
+  public get apiToken(): ApiTokenMongoService {
+    return new ApiTokenMongoService(this.context.client.db('test'))
+  }
 }
 
 export {
@@ -53,5 +58,7 @@ export {
   RoleMongoService,
   SubscriptionMongoService,
   ProjectMongoService,
-  CustomerMongoService
+  CustomerMongoService,
+  ReportsMongoService,
+  ApiTokenMongoService
 }
