@@ -1,10 +1,10 @@
-import * as Mongo from 'mongodb'
+import { Db as MongoDatabase, FilterQuery } from 'mongodb'
 import { pick } from 'underscore'
 import { Customer } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './document'
 
 export class CustomerMongoService extends MongoDocumentService<Customer> {
-  constructor(db: Mongo.Db) {
+  constructor(db: MongoDatabase) {
     super(db, 'customers')
   }
 
@@ -50,9 +50,9 @@ export class CustomerMongoService extends MongoDocumentService<Customer> {
   /**
    * Get customers
    *
-   * @param {Mongo.FilterQuery<Customer>} query Query
+   * @param {FilterQuery<Customer>} query Query
    */
-  public async getCustomers(query?: Mongo.FilterQuery<Customer>): Promise<Customer[]> {
+  public async getCustomers(query?: FilterQuery<Customer>): Promise<Customer[]> {
     try {
       const customers = await this.find(query)
       return customers

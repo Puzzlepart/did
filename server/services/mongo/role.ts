@@ -1,19 +1,19 @@
-import * as Mongo from 'mongodb'
+import { Db as MongoDatabase, FilterQuery } from 'mongodb'
 import { pick } from 'underscore'
 import { Role } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './document'
 
 export class RoleMongoService extends MongoDocumentService<Role> {
-  constructor(db: Mongo.Db) {
+  constructor(db: MongoDatabase) {
     super(db, 'roles')
   }
 
   /**
    * Get roles
    *
-   * @param {Mongo.FilterQuery<Role>} query Query
+   * @param {FilterQuery<Role>} query Query
    */
-  public async getRoles(query?: Mongo.FilterQuery<Role>): Promise<Role[]> {
+  public async getRoles(query?: FilterQuery<Role>): Promise<Role[]> {
     try {
       const roles = await this.find(query)
       return roles

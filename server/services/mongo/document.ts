@@ -1,15 +1,15 @@
-import * as Mongo from 'mongodb'
+import { Collection, Db as MongoDatabase, FilterQuery } from 'mongodb'
 import Redis from '../../middleware/redis'
 
 export class MongoDocumentService<T> {
-  public collection: Mongo.Collection<T>
+  public collection: Collection<T>
   /**
    * Constructor
    *
-   * @param {Mongo.Db} db Mongo database
+   * @param {MongoDatabase} db Mongo database
    * @param {string} collectionName Colletion name
    */
-  constructor(db: Mongo.Db, public collectionName: string) {
+  constructor(db: MongoDatabase, public collectionName: string) {
     this.collection = db.collection(collectionName)
   }
 
@@ -18,9 +18,9 @@ export class MongoDocumentService<T> {
    *
    * @see — https ://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
    *
-   * @param {Mongo.FilterQuery<T>} query query
+   * @param {FilterQuery<T>} query query
    */
-  public find(query: Mongo.FilterQuery<T>) {
+  public find(query: FilterQuery<T>) {
     return this.collection.find(query).toArray()
   }
 

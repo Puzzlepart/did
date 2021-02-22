@@ -1,19 +1,25 @@
-import * as Mongo from 'mongodb'
+import {
+  Db as MongoDatabase,
+  DeleteWriteOpResultObject,
+  FilterQuery,
+  InsertOneWriteOpResult,
+  WithId
+} from 'mongodb'
 import { pick } from 'underscore'
 import { LabelObject as Label } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './document'
 
 export class LabelMongoService extends MongoDocumentService<Label> {
-  constructor(db: Mongo.Db) {
+  constructor(db: MongoDatabase) {
     super(db, 'labels')
   }
 
   /**
    * Get labels
    *
-   * @param {Mongo.FilterQuery<Label>} query Query
+   * @param {FilterQuery<Label>} query Query
    */
-  public async getLabels(query?: Mongo.FilterQuery<Label>): Promise<Label[]> {
+  public async getLabels(query?: FilterQuery<Label>): Promise<Label[]> {
     try {
       const labels = await this.find(query)
       return labels
@@ -27,7 +33,7 @@ export class LabelMongoService extends MongoDocumentService<Label> {
    *
    * @param {Label} label Label
    */
-  public async addLabel(label: Label): Promise<Mongo.InsertOneWriteOpResult<Mongo.WithId<Label>>> {
+  public async addLabel(label: Label): Promise<InsertOneWriteOpResult<WithId<Label>>> {
     try {
       const result = await this.collection.insertOne(label)
       return result
@@ -54,7 +60,7 @@ export class LabelMongoService extends MongoDocumentService<Label> {
    *
    * @param {string} name Name
    */
-  public async deleteLabel(name: string): Promise<Mongo.DeleteWriteOpResultObject> {
+  public async deleteLabel(name: string): Promise<DeleteWriteOpResultObject> {
     try {
       const result = await this.collection.deleteOne({ name })
       return result

@@ -1,11 +1,11 @@
-import * as Mongo from 'mongodb'
+import { Db as MongoDatabase, FilterQuery } from 'mongodb'
 import { omit } from 'underscore'
 import { DateObject } from '../../../shared/utils/date.dateObject'
 import { TimeEntriesQuery, TimeEntry } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './document'
 
 export class ReportsMongoService extends MongoDocumentService<TimeEntry> {
-  constructor(db: Mongo.Db) {
+  constructor(db: MongoDatabase) {
     super(db, 'time_entries')
   }
 
@@ -18,7 +18,7 @@ export class ReportsMongoService extends MongoDocumentService<TimeEntry> {
   public async getTimeEntries(query: TimeEntriesQuery, sortAsc: boolean): Promise<TimeEntry[]> {
     try {
       const d = new DateObject()
-      let q: Mongo.FilterQuery<TimeEntry> = {}
+      let q: FilterQuery<TimeEntry> = {}
       switch (query.preset) {
         case 'LAST_MONTH':
           {

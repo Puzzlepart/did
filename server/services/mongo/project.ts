@@ -1,4 +1,4 @@
-import * as Mongo from 'mongodb'
+import { Db as MongoDatabase, FilterQuery } from 'mongodb'
 import { filter, find, pick } from 'underscore'
 import { CustomerMongoService } from '.'
 import { Customer, LabelObject as Label, Project } from '../../graphql/resolvers/types'
@@ -15,7 +15,7 @@ export class ProjectMongoService extends MongoDocumentService<Project> {
   private _customer: CustomerMongoService
   private _label: LabelMongoService
 
-  constructor(db: Mongo.Db) {
+  constructor(db: MongoDatabase) {
     super(db, 'projects')
     this._customer = new CustomerMongoService(db)
     this._label = new LabelMongoService(db)
@@ -52,9 +52,9 @@ export class ProjectMongoService extends MongoDocumentService<Project> {
    *
    * Connects labels and customer to projects
    *
-   * @param {Mongo.FilterQuery<Project>} query Query
+   * @param {FilterQuery<Project>} query Query
    */
-  public async getProjectsData(query?: Mongo.FilterQuery<Project>): Promise<ProjectsData> {
+  public async getProjectsData(query?: FilterQuery<Project>): Promise<ProjectsData> {
     try {
       const cacheValue = await this.getFromCache<ProjectsData>('projects_data')
       if (cacheValue) return cacheValue

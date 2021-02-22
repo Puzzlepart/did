@@ -1,4 +1,4 @@
-import * as Mongo from 'mongodb'
+import { Db as MongoDatabase, FilterQuery } from 'mongodb'
 import env from '../../utils/env'
 import { ApiToken } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './document'
@@ -6,16 +6,16 @@ import { sign } from 'jsonwebtoken'
 import { omit } from 'underscore'
 
 export class ApiTokenMongoService extends MongoDocumentService<ApiToken> {
-  constructor(db: Mongo.Db) {
+  constructor(db: MongoDatabase) {
     super(db, 'api_tokens')
   }
 
   /**
    * Get tokens
    *
-   * @param {Mongo.FilterQuery<ApiToken>} query Query
+   * @param {FilterQuery<ApiToken>} query Query
    */
-  public async getTokens(query?: Mongo.FilterQuery<ApiToken>): Promise<ApiToken[]> {
+  public async getTokens(query?: FilterQuery<ApiToken>): Promise<ApiToken[]> {
     try {
       const tokens = await this.find(query)
       return tokens
@@ -37,7 +37,7 @@ export class ApiTokenMongoService extends MongoDocumentService<ApiToken> {
       const apiKey = sign(omit(token, 'created'), env('API_TOKEN_SECRET'))
       await this.collection.insertOne({
         ...token,
-        apiKey,
+        apiKey
       })
       return apiKey
     } catch (err) {

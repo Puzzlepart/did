@@ -2,7 +2,7 @@ import { AuthenticationError } from 'apollo-server-express'
 import createDebug from 'debug'
 import get from 'get-value'
 import { verify } from 'jsonwebtoken'
-import { Db, MongoClient } from 'mongodb'
+import { Db as MongoDatabase, MongoClient } from 'mongodb'
 import 'reflect-metadata'
 import { Container, ContainerInstance } from 'typedi'
 import { DateObject } from '../../shared/utils/date'
@@ -19,7 +19,7 @@ export class Context {
   public requestId?: string
 
   /**
-   *
+   * User ID
    */
   public userId?: string
 
@@ -46,7 +46,7 @@ export class Context {
   /**
    * Mongo database
    */
-  public db?: Db
+  public db?: MongoDatabase
 }
 
 /**
@@ -66,24 +66,9 @@ export const createContext = async (
     context.subscription = get(request, 'user.subscription')
     const apiKey = get(request, 'api_key')
     if (apiKey) {
-      const { expires, subscriptionId } = verify(apiKey, env('API_TOKEN_SECRET')) as any
-      const expired = new DateObject(expires).jsDate < new Date()
-      if (expired)
-        throw new AuthenticationError('The specified token is expired.')
-      const [token, subscription] = await Promise.all([
-        db.collection('api_tokens').findOne({
-          apiKey,
-          expires: {
-            $gte: new Date()
-          }
-        }),
-        db.collection('subscriptions').findOne({
-          id: subscriptionId
-        })
-      ])
-      if (!token || !subscription)
-        throw new AuthenticationError('Failed to authenticate with the specified token.')
-      context.permissions = token.permissions
+      const { permissions, subscription } = await handleTokenAuthentication(apiKey, db)
+      context.permissions = permissions
+      context.subscription = subscription
     } else {
       context.userId = get(request, 'user.id')
       context.permissions = get(request, 'user.role.permissions')
@@ -99,4 +84,30 @@ export const createContext = async (
   } catch (error) {
     throw error
   }
+}
+
+/**
+ * Handle token authentication
+ *
+ * @param {string} apiKey Api key
+ * @param {MongoDatabase} db Mongodb database
+ */
+const handleTokenAuthentication = async (apiKey: string, db: MongoDatabase) => {
+  const { expires, subscriptionId } = verify(apiKey, env('API_TOKEN_SECRET')) as any
+  const expired = new DateObject(expires).jsDate < new Date()
+  if (expired) throw new AuthenticationError('The specified token is expired.')
+  const [token, subscription] = await Promise.all([
+    db.collection('api_tokens').findOne({
+      apiKey,
+      expires: {
+        $gte: new Date()
+      }
+    }),
+    db.collection('subscriptions').findOne({
+      id: subscriptionId
+    })
+  ])
+  if (!token || !subscription)
+    throw new AuthenticationError('Failed to authenticate with the specified token.')
+  return { subscription, permissions: token.permissions }
 }
