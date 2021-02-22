@@ -76,7 +76,7 @@ class App {
    */
   setupAuth() {
     const _passport = passport(this._client)
-    this.instance.use(bearerToken())
+    this.instance.use(bearerToken({ reqKey: 'api_key' }))
     this.instance.use(_passport.initialize())
     this.instance.use(_passport.session())
     this.instance.use('/auth', authRoute)

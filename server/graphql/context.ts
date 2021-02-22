@@ -1,12 +1,13 @@
 import { AuthenticationError } from 'apollo-server-express'
 import createDebug from 'debug'
 import get from 'get-value'
+import { verify } from 'jsonwebtoken'
 import { MongoClient } from 'mongodb'
 import 'reflect-metadata'
 import { Container, ContainerInstance } from 'typedi'
+import { DateObject } from '../../shared/utils/date'
 import env from '../utils/env'
 import { Subscription } from './resolvers/types'
-import { verify } from 'jsonwebtoken'
 const debug = createDebug('graphql/context')
 
 export class Context {
@@ -58,18 +59,29 @@ export const createContext = async (
     const context: Context = {}
     context.client = client
     context.subscription = get(request, 'user.subscription')
-    const bearer_token = get(request, 'token')
-    if (bearer_token) {
-      const token = await db.collection('api_tokens').findOne({ apiKey: bearer_token })
-      if (!token)
+    const apiKey = get(request, 'api_key')
+    if (apiKey) {
+      const { expires, subscriptionId } = verify(apiKey, env('API_TOKEN_SECRET')) as any
+      const expired = new DateObject(expires).jsDate < new Date()
+      if (expired)
+        throw new AuthenticationError('The specified token is expired.')
+      const [token, subscription] = await Promise.all([
+        db.collection('api_tokens').findOne({
+          apiKey,
+          expires: {
+            $gte: new Date()
+          }
+        }),
+        db.collection('subscriptions').findOne({
+          id: subscriptionId
+        })
+      ])
+      if (!token || !subscription)
         throw new AuthenticationError('Failed to authenticate with the specified token.')
       context.permissions = token.permissions
-      context.subscription = await db.collection('subscriptions').findOne({
-        id: token.subscriptionId
-      })
     } else {
       context.userId = get(request, 'user.id')
-      context.permissions = get(request, 'user.role.permissions', { default: [] })
+      context.permissions = get(request, 'user.role.permissions')
     }
     context.requestId = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString()
     context.container = Container.of(context.requestId)
