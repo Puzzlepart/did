@@ -1,7 +1,7 @@
 import { Db as MongoDatabase, FilterQuery } from 'mongodb'
 import { pick } from 'underscore'
 import { Customer } from '../../graphql/resolvers/types'
-import { MongoDocumentService } from './document'
+import { MongoDocumentService } from './@document'
 
 export class CustomerMongoService extends MongoDocumentService<Customer> {
   constructor(db: MongoDatabase) {

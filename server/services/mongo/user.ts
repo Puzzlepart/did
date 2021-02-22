@@ -2,7 +2,7 @@ import { Db as MongoDatabase, FilterQuery } from 'mongodb'
 import { find, pick } from 'underscore'
 import { RoleMongoService } from '.'
 import { User } from '../../graphql/resolvers/types'
-import { MongoDocumentService } from './document'
+import { MongoDocumentService } from './@document'
 
 export class UserMongoService extends MongoDocumentService<User> {
   private _role: RoleMongoService

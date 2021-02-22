@@ -1,7 +1,7 @@
 import { Db as MongoDatabase, FilterQuery } from 'mongodb'
 import env from '../../utils/env'
 import { ApiToken } from '../../graphql/resolvers/types'
-import { MongoDocumentService } from './document'
+import { MongoDocumentService } from './@document'
 import { sign } from 'jsonwebtoken'
 import { omit } from 'underscore'
 
