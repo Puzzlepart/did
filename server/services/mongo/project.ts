@@ -2,7 +2,7 @@ import { Db as MongoDatabase, FilterQuery } from 'mongodb'
 import { filter, find, pick } from 'underscore'
 import { CustomerMongoService } from '.'
 import { Customer, LabelObject as Label, Project } from '../../graphql/resolvers/types'
-import { CacheService } from '../cache'
+import { CacheScope, CacheService } from '../cache'
 import { MongoDocumentService } from './@document'
 import { LabelMongoService } from './label'
 
