@@ -160,6 +160,9 @@ export class TimesheetService {
           ...m,
           ...event,
           periodId: _period.id,
+          week,
+          month,
+          year,
           userId: this.context.userId
         })
         return hours + event.duration
