@@ -88,6 +88,7 @@ export const createContext = async (
       context.userId = get(request, 'user.id')
       context.permissions = get(request, 'user.role.permissions')
     }
+    if (!context.subscription) throw new AuthenticationError('Failed to authenticate.')
     context.db = context.client.db(context.subscription.db)
     context.requestId = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString()
     context.container = Container.of(context.requestId)
