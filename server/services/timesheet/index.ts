@@ -1,7 +1,7 @@
 import { Collection } from 'mongodb'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
-import { find } from 'underscore'
+import { find, isEmpty } from 'underscore'
 import { MSGraphService } from '..'
 import { DateObject, default as DateUtils } from '../../../shared/utils/date'
 import { Context } from '../../graphql/context'
@@ -149,7 +149,7 @@ export class TimesheetService {
    *
    * @param {ISubmitPeriodParams} params Submit period params
    */
-  public async submitPeriod({ period, tzOffset, forecast }: ISubmitPeriodParams) {
+  public async submitPeriod({ period, tzOffset, forecast }: ISubmitPeriodParams): Promise<void> {
     try {
       const { matchedEvents } = period
       const events = await this._msgraph.getEvents(period.startDate, period.endDate, {
@@ -185,8 +185,8 @@ export class TimesheetService {
       }, 0)
       const entry_colletion = forecast ? this._forecasted_time_entries : this._time_entries
       const period_collection = forecast ? this._forecasted_periods : this._confirmed_periods
-      await entry_colletion.insertMany(entries)
-      return await period_collection.insertOne(_period)
+      if (!isEmpty(entries)) await entry_colletion.insertMany(entries)
+      await period_collection.insertOne(_period)
     } catch (error) {
       throw error
     }
@@ -197,10 +197,10 @@ export class TimesheetService {
    *
    * @param {IUnsubmitPeriodParams} params Unsubmit period params
    */
-  public async unsubmitPeriod({ period, forecast }: IUnsubmitPeriodParams) {
+  public async unsubmitPeriod({ period, forecast }: IUnsubmitPeriodParams): Promise<void> {
     const entry_colletion = forecast ? this._forecasted_time_entries : this._time_entries
     const period_collection = forecast ? this._forecasted_periods : this._confirmed_periods
-    return await Promise.all([
+    await Promise.all([
       entry_colletion.deleteMany({
         periodId: period.id,
         userId: this.context.userId
