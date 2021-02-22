@@ -102,8 +102,6 @@ export class NotificationService {
       return $
     }, [])
 
-    console.log(nperiods)
-
     return nperiods.map((period) => new ForecastNotification(
       period,
       template
