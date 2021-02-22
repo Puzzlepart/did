@@ -1,7 +1,7 @@
 import * as Mongo from 'mongodb'
+import { filter, find, pick } from 'underscore'
 import { CustomerMongoService } from '.'
 import { Customer, LabelObject as Label, Project } from '../../graphql/resolvers/types'
-import { filter, find, pick } from 'underscore'
 import { MongoDocumentService } from './document'
 import { LabelMongoService } from './label'
 
@@ -59,6 +59,8 @@ export class ProjectMongoService extends MongoDocumentService<Project> {
    */
   public async getProjectsData(query?: Mongo.FilterQuery<Project>): Promise<ProjectsData> {
     try {
+      const cacheValue = await this.getFromCache<ProjectsData>('projects_data')
+      if (cacheValue) return cacheValue
       const [
         projects,
         customers,
@@ -78,7 +80,9 @@ export class ProjectMongoService extends MongoDocumentService<Project> {
           return project
         })
         .filter((p) => p.customer !== null)
-      return { projects: _projects, customers, labels }
+      const data = { projects: _projects, customers, labels }
+      this.storeInCache('projects_data', data)
+      return data
     } catch (err) {
       throw err
     }
