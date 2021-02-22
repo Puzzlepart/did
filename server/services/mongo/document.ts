@@ -1,5 +1,4 @@
 import * as Mongo from 'mongodb'
-import { promisify } from 'util'
 import Redis from '../../middleware/redis'
 
 export class MongoDocumentService<T> {

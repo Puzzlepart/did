@@ -81,7 +81,7 @@ export class ProjectMongoService extends MongoDocumentService<Project> {
         })
         .filter((p) => p.customer !== null)
       const data = { projects: _projects, customers, labels }
-      this.storeInCache('projects_data', data)
+      await this.storeInCache('projects_data', data)
       return data
     } catch (err) {
       throw err
