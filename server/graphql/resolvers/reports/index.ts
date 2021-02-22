@@ -35,6 +35,8 @@ export class ReportsResolver {
     @Arg('forecast', { nullable: true }) forecast: boolean,
     @Arg('query') query: TimeEntriesQuery
   ) {
+    // eslint-disable-next-line no-console
+    console.log({ currentUser, sortAsc, forecast })
     const [timeEntries, { projects, customers }, users] = await Promise.all([
       this._mongo.reports.getTimeEntries(query),
       this._mongo.project.getProjectsData(),
