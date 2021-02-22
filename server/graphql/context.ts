@@ -1,4 +1,4 @@
-/* eslint-disable require-await */
+import { AuthenticationError } from 'apollo-server-express'
 import createDebug from 'debug'
 import get from 'get-value'
 import { MongoClient } from 'mongodb'
@@ -54,11 +54,17 @@ export const createContext = async (
   try {
     const context: Context = {}
     context.client = client
-    // TODO: Temp hack for 'Property 'id' does not exist on type 'User'.'
-    context.userId = get(request, 'user.id')
     context.subscription = get(request, 'user.subscription')
-    context.permissions = get(request, 'user.role.permissions', { default: [] })
-    // TODO: Support token authentication
+    if (request.token) {
+      const token = await client.db('test').collection('api_tokens').findOne({
+        apiKey: request.token,
+      })
+      if (!token) throw new AuthenticationError('Failed to authenticate with the specified token  .')
+      context.permissions = token.permissions
+    } else {
+      context.userId = get(request, 'user.id')
+      context.permissions = get(request, 'user.role.permissions', { default: [] })
+    }
     context.requestId = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString()
     context.container = Container.of(context.requestId)
     context.container.set({ id: 'CONTEXT', transient: true, value: context })
