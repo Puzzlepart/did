@@ -99,10 +99,8 @@ class MSGraphService {
 
   /**
    * Get Azure Active Directory users
-   *
-   * @param {string} orderBy Order by
    */
-  async getUsers(orderBy: string): Promise<any> {
+  async getUsers(): Promise<any> {
     try {
       this.startMark('getUsers')
       const client = await this._getClient()
@@ -123,7 +121,7 @@ class MSGraphService {
         .top(999)
         .get()
       this.endMark('getUsers')
-      return sortBy(users, orderBy)
+      return sortBy(users, 'displayName')
     } catch (error) {
       throw new Error(`MSGraphService.getUsers: ${error.message}`)
     }

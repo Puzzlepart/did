@@ -8,7 +8,7 @@ import { MongoService } from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
 import { BaseResult } from '../types'
-import { User, UserInput, UserQuery, UserQueryOptions } from './types'
+import { User, UserInput, UserQuery } from './types'
 
 @Service()
 @Resolver(User)
@@ -37,24 +37,20 @@ export class UserResolver {
 
   /**
    * Get Active Directory users
-   *
-   * @param {UserQueryOptions} options Options
    */
   @Query(() => [User], { description: 'Get all users from Active Directory' })
-  activeDirectoryUsers(@Arg('options', () => UserQueryOptions) options: UserQueryOptions) {
-    return this._msgraph.getUsers(options?.sortBy)
+  activeDirectoryUsers() {
+    return this._msgraph.getUsers()
   }
 
   /**
    * Get users
    *
-   * @param {UserQueryOptions} options Options
    * @param {UserQuery} query Query
    */
   @Authorized()
   @Query(() => [User], { description: 'Get users' })
   users(
-    @Arg('options', () => UserQueryOptions, { nullable: true }) options: UserQueryOptions,
     @Arg('query', () => UserQuery, { nullable: true }) query: UserQuery
   ) {
     return this._mongo.user.getUsers(query)

@@ -1,4 +1,4 @@
-import { Collection, Db as MongoDatabase, FilterQuery } from 'mongodb'
+import { Collection, Db as MongoDatabase, FilterQuery, SortOptionObject } from 'mongodb'
 import Redis from '../../middleware/redis'
 
 export class MongoDocumentService<T> {
@@ -18,10 +18,11 @@ export class MongoDocumentService<T> {
    *
    * @see — https ://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
    *
-   * @param {FilterQuery<T>} query query
+   * @param {FilterQuery<T>} query Query
+   * @param {Array<[string, number]> | SortOptionObject<T>} sort Sort
    */
-  public find(query: FilterQuery<T>) {
-    return this.collection.find(query).toArray()
+  public find(query: FilterQuery<T>, sort?: Array<[string, number]> | SortOptionObject<T>) {
+    return this.collection.find(query, { sort }).toArray()
   }
 
   /**
