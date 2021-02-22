@@ -55,7 +55,8 @@ export const createContext = async (
     const context: Context = {}
     context.client = client
     context.subscription = get(request, 'user.subscription')
-    if (request.token) {
+    const bearer_token = get(request, 'token')
+    if (bearer_token) {
       const token = await client.db('test').collection('api_tokens').findOne({
         apiKey: request.token
       })
