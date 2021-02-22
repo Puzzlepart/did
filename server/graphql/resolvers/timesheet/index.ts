@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import 'reflect-metadata'
-import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
+import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { pick } from 'underscore'
 import { TimesheetService } from '../../../services'
 import { IAuthOptions } from '../../authChecker'
-import { Context } from '../../context'
 import { BaseResult } from '../types'
 import {
   TimesheetOptions,
@@ -51,7 +50,6 @@ export class TimesheetResolver {
    *
    * @param {TimesheetPeriodInput} period Period
    * @param {TimesheetOptions} options Timesheet options (forecast, tzoffset etc)
-   * @param {Context} ctx GraphQL context
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, {
@@ -81,7 +79,6 @@ export class TimesheetResolver {
    *
    * @param {TimesheetPeriodInput} period Period
    * @param {boolean} forecast Forecast
-   * @param {Context} ctx GraphQL context
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, {
