@@ -21,35 +21,35 @@ export class MongoService {
   constructor(@Inject('CONTEXT') private readonly context: Context) {}
 
   public get user(): UserMongoService {
-    return new UserMongoService(this.context.client.db('test'))
+    return new UserMongoService(this.context.db)
   }
 
   public get role(): RoleMongoService {
-    return new RoleMongoService(this.context.client.db('test'))
+    return new RoleMongoService(this.context.db)
   }
 
   public get subscription(): SubscriptionMongoService {
-    return new SubscriptionMongoService(this.context.client.db('test'))
+    return new SubscriptionMongoService(this.context.db)
   }
 
   public get project(): ProjectMongoService {
-    return new ProjectMongoService(this.context.client.db('test'))
+    return new ProjectMongoService(this.context.db)
   }
 
   public get customer(): CustomerMongoService {
-    return new CustomerMongoService(this.context.client.db('test'))
+    return new CustomerMongoService(this.context.db)
   }
 
   public get label(): LabelMongoService {
-    return new LabelMongoService(this.context.client.db('test'))
+    return new LabelMongoService(this.context.db)
   }
 
   public get reports(): ReportsMongoService {
-    return new ReportsMongoService(this.context.client.db('test'))
+    return new ReportsMongoService(this.context.db)
   }
 
   public get apiToken(): ApiTokenMongoService {
-    return new ApiTokenMongoService(this.context.client.db('test'))
+    return new ApiTokenMongoService(this.context.db)
   }
 }
 

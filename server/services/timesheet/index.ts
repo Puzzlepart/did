@@ -33,11 +33,10 @@ export class TimesheetService {
     private readonly _msgraph: MSGraphService,
     private readonly _mongo: MongoService
   ) {
-    const db = this.context.client.db('test')
-    this._confirmed_periods = db.collection('confirmed_periods')
-    this._forecasted_periods = db.collection('forecasted_periods')
-    this._time_entries = db.collection('time_entries')
-    this._forecasted_time_entries = db.collection('forecasted_time_entries')
+    this._confirmed_periods = this.context.db.collection('confirmed_periods')
+    this._forecasted_periods = this.context.db.collection('forecasted_periods')
+    this._time_entries = this.context.db.collection('time_entries')
+    this._forecasted_time_entries = this.context.db.collection('forecasted_time_entries')
   }
 
   /**

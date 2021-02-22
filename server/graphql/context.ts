@@ -2,7 +2,7 @@ import { AuthenticationError } from 'apollo-server-express'
 import createDebug from 'debug'
 import get from 'get-value'
 import { verify } from 'jsonwebtoken'
-import { MongoClient } from 'mongodb'
+import { Db, MongoClient } from 'mongodb'
 import 'reflect-metadata'
 import { Container, ContainerInstance } from 'typedi'
 import { DateObject } from '../../shared/utils/date'
@@ -42,6 +42,11 @@ export class Context {
    * Mongo client
    */
   public client?: MongoClient
+
+  /**
+   * Mongo database
+   */
+  public db?: Db
 }
 
 /**
@@ -83,6 +88,7 @@ export const createContext = async (
       context.userId = get(request, 'user.id')
       context.permissions = get(request, 'user.role.permissions')
     }
+    context.db = context.client.db(context.subscription.db)
     context.requestId = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString()
     context.container = Container.of(context.requestId)
     context.container.set({ id: 'CONTEXT', transient: true, value: context })

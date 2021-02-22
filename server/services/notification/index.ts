@@ -23,9 +23,8 @@ export class NotificationService {
     @Inject('CONTEXT') private readonly context: Context,
     private readonly _timesheet: TimesheetService
   ) {
-    const db = this.context.client.db('test')
-    this._confirmed_periods = db.collection('confirmed_periods')
-    this._forecasted_periods = db.collection('forecasted_periods')
+    this._confirmed_periods = this.context.db.collection('confirmed_periods')
+    this._forecasted_periods = this.context.db.collection('forecasted_periods')
   }
 
   /**
