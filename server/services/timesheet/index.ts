@@ -93,7 +93,7 @@ export class TimesheetService {
           }
         } else {
           const engine = new MatchingEngine(data)
-          const events = await this._msgraph.getEvents(params.startDate, params.endDate, {
+          const events = await this._msgraph.getEvents(periods[i].startDate, periods[i].endDate, {
             tzOffset: params.tzOffset,
             returnIsoDates: false
           })
