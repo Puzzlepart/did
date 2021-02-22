@@ -58,7 +58,7 @@ export const createContext = async (
     const bearer_token = get(request, 'token')
     if (bearer_token) {
       const token = await client.db('test').collection('api_tokens').findOne({
-        apiKey: request.token
+        apiKey: bearer_token
       })
       if (!token)
         throw new AuthenticationError('Failed to authenticate with the specified token  .')
