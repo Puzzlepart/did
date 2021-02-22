@@ -72,12 +72,11 @@ export class ProjectMongoService extends MongoDocumentService<Project> {
       ])
       const _projects = projects
         .map((p) => {
-          const project = new Project(p)
-          project.customer = find(customers, (c) => c.key === project.customerKey) || null
-          project.labels = filter(labels, ({ name }) => {
-            return !!find(project.labels, l => name === l)
+          p.customer = find(customers, (c) => c.key === p.customerKey) || null
+          p.labels = filter(labels, ({ name }) => {
+            return !!find(p.labels, l => name === l)
           })
-          return project
+          return p
         })
         .filter((p) => p.customer !== null)
       const data = { projects: _projects, customers, labels }

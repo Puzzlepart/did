@@ -120,7 +120,7 @@ export class TimesheetService {
   private _connectEvents({ events, projects, dateFormat, locale }: IConnectEventsParams) {
     return events.map((event) => ({
       ...event,
-      project: find(projects, (p) => p.tag === event.projectId),
+      project: find(projects, ({ customerKey, key }) => [customerKey, key].join(' ') === event.projectId),
       date: DateUtils.formatDate(event.startDateTime, dateFormat, locale)
     }))
   }

@@ -67,8 +67,8 @@ export class TimeEntriesQuery {
   preset?: string
 
   @Field({ nullable: true })
-  periodId?: string
+  projectId?: string
 
   @Field({ nullable: true })
-  resourceId?: string
+  userId?: string
 }

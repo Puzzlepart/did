@@ -1,4 +1,5 @@
 import * as Mongo from 'mongodb'
+import { first, omit } from 'underscore'
 import { DateObject } from '../../../shared/utils/date.dateObject'
 import { TimeEntriesQuery, TimeEntry } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './document'
@@ -12,11 +13,12 @@ export class ReportsMongoService extends MongoDocumentService<TimeEntry> {
    * Get time entries
    *
    * @param {TimeEntriesQuery} query Query
+   * @param {boolean} sortAsc Sort ascending
    */
-  public async getTimeEntries(query: TimeEntriesQuery): Promise<TimeEntry[]> {
+  public async getTimeEntries(query: TimeEntriesQuery, sortAsc: boolean): Promise<TimeEntry[]> {
     try {
       const d = new DateObject()
-      const q: Mongo.FilterQuery<TimeEntry> = {}
+      let q: Mongo.FilterQuery<TimeEntry> = {}
       switch (query.preset) {
         case 'LAST_MONTH': {
           q.month = d.add('-1m').toObject().month - 1
@@ -33,8 +35,14 @@ export class ReportsMongoService extends MongoDocumentService<TimeEntry> {
           q.year = d.toObject().year
         }
       }
+      q = omit({ ...q, query }, 'preset')
       const timeEntries = await this.find(q)
-      return timeEntries
+      const timeEntriesSorted = timeEntries.sort(({ startDateTime: a }, { startDateTime: b }) => {
+        return sortAsc
+          ? new Date(a).getTime() - new Date(b).getTime()
+          : new Date(b).getTime() - new Date(a).getTime()
+      })
+      return timeEntriesSorted
     } catch (err) {
       throw err
     }
