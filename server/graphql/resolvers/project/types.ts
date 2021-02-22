@@ -48,6 +48,15 @@ export class Project {
   public labels?: Label[] | string[]
 
   /**
+   * Constructs a new Project
+   * 
+   * @param {any} data Data
+   */
+  constructor(data?: any) {
+    Object.assign(this, data || {})
+  }
+
+  /**
    * Creates a Project object from a ProjectInput object
    * 
    * @param {ProjectInput} input Input object
