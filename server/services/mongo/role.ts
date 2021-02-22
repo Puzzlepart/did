@@ -1,4 +1,5 @@
 import * as Mongo from 'mongodb'
+import { pick } from 'underscore'
 import { Role } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './document'
 
@@ -48,4 +49,34 @@ export class RoleMongoService extends MongoDocumentService<Role> {
       throw err
     }
   }
+
+  /**
+   * Update role
+   *
+   * @param {Role} role Role
+   */
+  public async updateRole(role: Role): Promise<void> {
+    try {
+      await this.collection.updateOne(
+        pick(role, 'name'),
+        { $set: role }
+      )
+    } catch (err) {
+      throw err
+    }
+  }
+
+  /**
+   * Delete role
+   *
+   * @param {string} name Role name
+   */
+  public async deleteRole(name: string): Promise<void> {
+    try {
+      await this.collection.deleteOne({ name })
+    } catch (err) {
+      throw err
+    }
+  }
+
 }

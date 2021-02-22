@@ -41,7 +41,9 @@ export class RoleResolver {
     @Arg('role', () => RoleInput) role: RoleInput,
     @Arg('update', { nullable: true }) update: boolean
   ) {
-    return await Promise.resolve({ success: true, error: null })
+    if (update) await this._mongo.role.updateRole(role)
+    else await this._mongo.role.addRole(role)
+    return { success: true, error: null }
   }
 
   /**
@@ -52,7 +54,8 @@ export class RoleResolver {
   @Authorized<IAuthOptions>({ permission: 'cd52a735' })
   @Mutation(() => BaseResult, { description: 'Delete role' })
   async deleteRole(@Arg('name', () => String) name: string) {
-    return await Promise.resolve({ success: true, error: null })
+    await this._mongo.role.deleteRole(name)
+    return { success: true, error: null }
   }
 }
 
