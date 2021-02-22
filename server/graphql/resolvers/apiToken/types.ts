@@ -10,9 +10,6 @@ export class ApiToken {
   @Field(() => ID, { nullable: true, defaultValue: null })
   name: string
 
-  @Field({ nullable: true, defaultValue: null })
-  apiKey?: string
-
   @Field()
   created?: Date
 
@@ -21,6 +18,9 @@ export class ApiToken {
 
   @Field(() => [String], { nullable: true })
   permissions: string[]
+
+  apiKey?: string
+  subscriptionId?: string
 }
 
 @InputType({ description: 'Input object for ApiToken used in mutation addApiToken' })

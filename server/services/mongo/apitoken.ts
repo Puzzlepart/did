@@ -3,6 +3,7 @@ import env from '../../utils/env'
 import { ApiToken } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './document'
 import { sign } from 'jsonwebtoken'
+import { omit } from 'underscore'
 
 export class ApiTokenMongoService extends MongoDocumentService<ApiToken> {
   constructor(db: Mongo.Db) {
@@ -27,20 +28,16 @@ export class ApiTokenMongoService extends MongoDocumentService<ApiToken> {
    * Add API token
    *
    * @param {ApiToken} token Token to add
+   * @param {string} subscriptionId Subscription id
    */
-  public async addToken(token: ApiToken): Promise<string> {
+  public async addToken(token: ApiToken, subscriptionId: string): Promise<string> {
     try {
-      const apiKey = sign(
-        {
-          permissions: token.permissions,
-          expires: token.expires
-        },
-        env('API_TOKEN_SECRET')
-      )
+      token.subscriptionId = subscriptionId
+      token.created = new Date()
+      const apiKey = sign(omit(token, 'created'), env('API_TOKEN_SECRET'))
       await this.collection.insertOne({
         ...token,
         apiKey,
-        created: new Date()
       })
       return apiKey
     } catch (err) {
@@ -52,10 +49,11 @@ export class ApiTokenMongoService extends MongoDocumentService<ApiToken> {
    * Delete token
    *
    * @param {string} name Token name
+   * @param {string} subscriptionId Subscription id
    */
-  public async deleteToken(name: string): Promise<void> {
+  public async deleteToken(name: string, subscriptionId: string): Promise<void> {
     try {
-      await this.collection.deleteOne({ name })
+      await this.collection.deleteOne({ name, subscriptionId })
     } catch (err) {
       throw err
     }

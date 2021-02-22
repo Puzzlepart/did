@@ -4,7 +4,9 @@ import get from 'get-value'
 import { MongoClient } from 'mongodb'
 import 'reflect-metadata'
 import { Container, ContainerInstance } from 'typedi'
+import env from '../utils/env'
 import { Subscription } from './resolvers/types'
+import { verify } from 'jsonwebtoken'
 const debug = createDebug('graphql/context')
 
 export class Context {
@@ -52,17 +54,19 @@ export const createContext = async (
   client: MongoClient
 ): Promise<Context> => {
   try {
+    const db = client.db(env('MONGO_DB_DB_NAME'))
     const context: Context = {}
     context.client = client
     context.subscription = get(request, 'user.subscription')
     const bearer_token = get(request, 'token')
     if (bearer_token) {
-      const token = await client.db('test').collection('api_tokens').findOne({
-        apiKey: bearer_token
-      })
+      const token = await db.collection('api_tokens').findOne({ apiKey: bearer_token })
       if (!token)
-        throw new AuthenticationError('Failed to authenticate with the specified token  .')
+        throw new AuthenticationError('Failed to authenticate with the specified token.')
       context.permissions = token.permissions
+      context.subscription = await db.collection('subscriptions').findOne({
+        id: token.subscriptionId
+      })
     } else {
       context.userId = get(request, 'user.id')
       context.permissions = get(request, 'user.role.permissions', { default: [] })

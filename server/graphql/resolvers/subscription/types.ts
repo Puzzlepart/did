@@ -44,9 +44,9 @@ export class Subscription {
   settings?: SubscriptionSettings
 
   /**
-   * Connection string for the subscription storage
+   * Database name
    */
-  connectionString?: string
+  db?: string
 }
 
 @InputType({ description: 'A input that describes Subscription forecast settings' })
