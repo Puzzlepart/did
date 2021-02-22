@@ -39,13 +39,13 @@ export class TimeEntry {
   @Field()
   userId: string
 
-  @Field({ nullable: true })
-  weekNumber: number
+  @Field()
+  week: number
 
-  @Field({ nullable: true })
-  monthNumber: number
+  @Field()
+  month: number
 
-  @Field({ nullable: true })
+  @Field()
   year: number
 
   @Field()

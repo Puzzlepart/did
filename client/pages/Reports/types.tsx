@@ -94,10 +94,10 @@ export const getGroupByOptions = (t: TFunction): IGroupByOption[] => [
     }
   },
   {
-    key: 'weekNumber',
+    key: 'week',
     text: t('common.weekNumberLabel'),
     props: {
-      fieldName: 'weekNumber',
+      fieldName: 'week',
       emptyGroupName: ' '
     }
   }

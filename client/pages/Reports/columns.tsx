@@ -51,17 +51,17 @@ const columns = (defaults: Partial<IColumn>, t: TFunction): IColumn[] =>
       onRender: ({ endDateTime }) => DateUtils.formatDate(endDateTime, 'MMM DD, YYYY HH:mm')
     },
     {
-      key: 'weekNumber',
-      fieldName: 'weekNumber',
+      key: 'week',
+      fieldName: 'week',
       name: t('common.weekLabel'),
       minWidth: 100
     },
     {
-      key: 'monthNumber',
-      fieldName: 'monthNumber',
+      key: 'month',
+      fieldName: 'month',
       name: t('common.monthLabel'),
       minWidth: 100,
-      onRender: ({ monthNumber }) => DateUtils.getMonthNames()[monthNumber - 1]
+      onRender: ({ month }) => DateUtils.getMonthNames()[month - 1]
     },
     {
       key: 'year',

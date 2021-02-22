@@ -3,9 +3,9 @@
     timeentries(query: $query) {
       title
       duration
+      week
       startDateTime
       endDateTime
-      weekNumber
       monthNumber
       year
       resource {

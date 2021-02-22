@@ -4,10 +4,9 @@ query($query: TimeEntriesQuery!, $forecast: Boolean, $sortAsc: Boolean) {
     duration
     startDateTime
     endDateTime
-    weekNumber
-    monthNumber
+    week
+    month
     year
-    monthNumber
     customer {
       key
       name

@@ -2,9 +2,9 @@ query($query: TimeEntriesQuery!) {
   timeentries(query: $query, currentUser: true) {
     title
     duration
-    weekNumber
+    week
+    month
     year
-    monthNumber
     startDateTime
     endDateTime
     project {

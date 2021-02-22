@@ -1,9 +1,9 @@
 query($query: TimeEntriesQuery!) {
   timeentries(query: $query) {
     duration
-    weekNumber
+    week
+    month
     year
-    monthNumber
     project {
       tag
       name
