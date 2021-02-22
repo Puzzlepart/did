@@ -2,6 +2,7 @@
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import { Context } from '../../graphql/context'
+import { CacheService } from '../cache'
 import { ApiTokenMongoService } from './apitoken'
 import { CustomerMongoService } from './customer'
 import { LabelMongoService } from './label'
@@ -17,8 +18,12 @@ export class MongoService {
    * Constructor
    *
    * @param {Context} context Context
+   * @param {CacheService} _cache Cache service
    */
-  constructor(@Inject('CONTEXT') private readonly context: Context) {}
+  constructor(
+    @Inject('CONTEXT') private readonly context: Context,
+    private readonly _cache?: CacheService
+  ) { }
 
   public get user(): UserMongoService {
     return new UserMongoService(this.context.db)
@@ -33,7 +38,7 @@ export class MongoService {
   }
 
   public get project(): ProjectMongoService {
-    return new ProjectMongoService(this.context.db)
+    return new ProjectMongoService(this.context.db, this._cache)
   }
 
   public get customer(): CustomerMongoService {

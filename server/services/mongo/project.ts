@@ -2,6 +2,7 @@ import { Db as MongoDatabase, FilterQuery } from 'mongodb'
 import { filter, find, pick } from 'underscore'
 import { CustomerMongoService } from '.'
 import { Customer, LabelObject as Label, Project } from '../../graphql/resolvers/types'
+import { CacheService } from '../cache'
 import { MongoDocumentService } from './@document'
 import { LabelMongoService } from './label'
 
@@ -11,14 +12,23 @@ export type ProjectsData = {
   labels: Label[]
 }
 
+
+
 export class ProjectMongoService extends MongoDocumentService<Project> {
   private _customer: CustomerMongoService
   private _label: LabelMongoService
 
-  constructor(db: MongoDatabase) {
+  /**
+   * Constructor for MongoDatabase
+   * 
+   * @param {MongoDatabase} db Mongo database
+   * @param {CacheService} _cache Cache service
+   */
+  constructor(db: MongoDatabase, private readonly _cache: CacheService) {
     super(db, 'projects')
     this._customer = new CustomerMongoService(db)
     this._label = new LabelMongoService(db)
+    this._cache.prefix = ProjectMongoService.name
   }
 
   /**
@@ -56,7 +66,7 @@ export class ProjectMongoService extends MongoDocumentService<Project> {
    */
   public async getProjectsData(query?: FilterQuery<Project>): Promise<ProjectsData> {
     try {
-      const cacheValue = await this.getFromCache<ProjectsData>('projects_data')
+      const cacheValue = await this._cache.get<ProjectsData>('getProjectsData')
       if (cacheValue) return cacheValue
       const [projects, customers, labels] = await Promise.all([
         this.find(query),
@@ -73,10 +83,11 @@ export class ProjectMongoService extends MongoDocumentService<Project> {
         })
         .filter((p) => p.customer !== null)
       const data = { projects: _projects, customers, labels }
-      await this.storeInCache('projects_data', data)
+      await this._cache.set('getProjectsData', data)
       return data
     } catch (err) {
       throw err
     }
   }
 }
+
