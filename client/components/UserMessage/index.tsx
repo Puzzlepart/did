@@ -1,10 +1,10 @@
 import {
-  IStyleFunctionOrObject,
   IMessageBarStyleProps,
   IMessageBarStyles,
+  IStyleFunctionOrObject,
   MessageBar
 } from 'office-ui-fabric'
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 import ReactMarkdown from 'react-markdown/with-html'
 import { IUserMessageProps } from './types'
 import styles from './UserMessage.module.scss'
@@ -14,9 +14,7 @@ import styles from './UserMessage.module.scss'
  *
  * @category UserMessage
  */
-export const UserMessage: React.FunctionComponent<IUserMessageProps> = (
-  props: IUserMessageProps
-) => {
+export const UserMessage: FunctionComponent<IUserMessageProps> = (props: IUserMessageProps) => {
   const _styles: IStyleFunctionOrObject<IMessageBarStyleProps, IMessageBarStyles> = {}
 
   if (props.fixedCenter) {
@@ -49,5 +47,5 @@ export const UserMessage: React.FunctionComponent<IUserMessageProps> = (
   )
 }
 
-export * from './useMessage'
 export * from './types'
+export * from './useMessage'

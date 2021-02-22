@@ -1,5 +1,5 @@
 import { PERMISSION } from 'config/security'
-import React, { useContext } from 'react'
+import React, { FunctionComponent, useContext } from 'react'
 import { Redirect, Route, RouteProps } from 'react-router-dom'
 import { AppContext } from './AppContext'
 
@@ -10,7 +10,7 @@ export interface IProtectedRouteProps extends RouteProps {
   permission?: PERMISSION
 }
 
-export const ProtectedRoute: React.FunctionComponent<IProtectedRouteProps> = ({
+export const ProtectedRoute: FunctionComponent<IProtectedRouteProps> = ({
   path,
   exact,
   permission,

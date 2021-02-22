@@ -66,9 +66,10 @@ export const Actions: FunctionComponent = () => {
             headerText: state.selected.name,
             isLightDismiss: true,
             onLightDismissClick: () => setShowEditPanel(false),
-            onDismiss: (event) => {
+            onDismiss: () => setShowEditPanel(false),
+            onSave: () => {
               setShowEditPanel(false)
-              event === null && refetch()
+              refetch()
             }
           }}
         />
