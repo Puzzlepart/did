@@ -12,6 +12,11 @@ export class ProjectModel {
   public icon: string
   public labels: string[]
 
+  /**
+   * Constructs a new ProjectModel from a Project object
+   * 
+   * @param {Project} project Project object
+   */
   constructor(project?: Project) {
     this.name = project?.name || ''
     this.key = project?.key || ''
@@ -19,7 +24,7 @@ export class ProjectModel {
     this.description = project?.description || ''
     this.inactive = project?.inactive || false
     this.icon = project?.icon || first(getIcons(1))
-    this.labels =( project?.labels as Label[]).map((label) => label.name)
+    this.labels = ((project?.labels || []) as Label[]).map((label) => label.name)
   }
 }
 
