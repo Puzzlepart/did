@@ -35,7 +35,7 @@ export class TimesheetService {
    * @param {string} endDate End date
    * @param {string} locale Locale
    */
-  private _getPeriods(startDate: string, endDate: string, locale: string): TimesheetPeriodObject[] {
+  public getPeriods(startDate: string, endDate: string, locale: string): TimesheetPeriodObject[] {
     const isSplit = !DateUtils.isSameMonth(startDate, endDate)
     const periods: TimesheetPeriodObject[] = [
       new TimesheetPeriodObject(
@@ -64,7 +64,7 @@ export class TimesheetService {
    */
   public async getTimesheet(params: IGetTimesheetParams): Promise<any[]> {
     try {
-      const periods = this._getPeriods(params.startDate, params.endDate, params.locale)
+      const periods = this.getPeriods(params.startDate, params.endDate, params.locale)
       const data = await this._mongo.project.getProjectsData()
       for (let i = 0; i < periods.length; i++) {
         const confirmed = await this._db
