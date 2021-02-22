@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import 'reflect-metadata'
-import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
+import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { MongoService } from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
-import { Context } from '../../context'
 import { BaseResult } from '../types'
 import { LabelInput, LabelObject } from './types'
 
