@@ -2,7 +2,7 @@ import { findBestMatch } from 'string-similarity'
 import { contains, filter, find, first, isEmpty } from 'underscore'
 import { Customer, EventObject } from '../../graphql/resolvers/types'
 import { ProjectsData } from '../mongo/project'
-import MSGraphEvent from '../msgraph.types'
+import MSGraphEvent from '../msgraph/types'
 
 export default class {
   constructor(private _data: ProjectsData) {}

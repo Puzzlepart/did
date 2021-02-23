@@ -6,10 +6,10 @@ import { performance, PerformanceObserver } from 'perf_hooks'
 import 'reflect-metadata'
 import { Service } from 'typedi'
 import { first, sortBy } from 'underscore'
-import DateUtils from '../../shared/utils/date'
-import env from '../utils/env'
-import MSGraphEvent, { MSGraphEventOptions, MSGraphOutlookCategory } from './msgraph.types'
-import OAuthService, { AccessTokenOptions } from './oauth'
+import DateUtils from '../../../shared/utils/date'
+import env from '../../utils/env'
+import OAuthService, { AccessTokenOptions } from '../oauth'
+import MSGraphEvent, { MSGraphEventOptions, MSGraphOutlookCategory } from './types'
 const debug = createDebug('services/msgraph')
 
 @Service({ global: false })
