@@ -3,7 +3,7 @@ import fs from 'fs'
 import { MongoClient } from 'mongodb'
 import passport from 'passport'
 import { IProfile, OIDCStrategy, VerifyCallback } from 'passport-azure-ad'
-import { MongoService, SubscriptionMongoService, UserService } from '../../services/mongo'
+import { MongoService, SubscriptionService, UserService } from '../../services/mongo'
 import env from '../../utils/env'
 
 export default (client: MongoClient) => {
@@ -74,7 +74,7 @@ export default (client: MongoClient) => {
         tokenParams: any,
         done: VerifyCallback
       ) => {
-        const subscription_service = new SubscriptionMongoService(
+        const subscription_service = new SubscriptionService(
           client.db(env('MONGO_DB_DB_NAME'))
         )
         subscription_service

@@ -1,11 +1,11 @@
 import { Db as MongoDatabase, FilterQuery } from 'mongodb'
 import { find, pick } from 'underscore'
-import { RoleMongoService } from '.'
+import { RoleService } from '.'
 import { User } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 
 export class UserService extends MongoDocumentService<User> {
-  private _role: RoleMongoService
+  private _role: RoleService
 
   /**
    * Constructor
@@ -14,7 +14,7 @@ export class UserService extends MongoDocumentService<User> {
    */
   constructor(db: MongoDatabase) {
     super(db, 'users')
-    this._role = new RoleMongoService(db)
+    this._role = new RoleService(db)
   }
 
   /**

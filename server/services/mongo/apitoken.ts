@@ -5,7 +5,7 @@ import { MongoDocumentService } from './@document'
 import { sign } from 'jsonwebtoken'
 import { omit } from 'underscore'
 
-export class ApiTokenMongoService extends MongoDocumentService<ApiToken> {
+export class ApiTokenService extends MongoDocumentService<ApiToken> {
   constructor(db: MongoDatabase) {
     super(db, 'api_tokens')
   }

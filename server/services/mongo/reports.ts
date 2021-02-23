@@ -4,7 +4,7 @@ import { DateObject } from '../../../shared/utils/date.dateObject'
 import { TimeEntriesQuery, TimeEntry } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 
-export class ReportsMongoService extends MongoDocumentService<TimeEntry> {
+export class ReportsService extends MongoDocumentService<TimeEntry> {
   constructor(db: MongoDatabase) {
     super(db, 'time_entries')
   }

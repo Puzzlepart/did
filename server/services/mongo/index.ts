@@ -3,13 +3,13 @@ import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import { Context } from '../../graphql/context'
 import { CacheService } from '../cache'
-import { ApiTokenMongoService } from './apitoken'
-import { CustomerMongoService } from './customer'
-import { LabelMongoService } from './label'
-import { ProjectMongoService } from './project'
-import { ReportsMongoService } from './reports'
-import { RoleMongoService } from './role'
-import { SubscriptionMongoService } from './subscription'
+import { ApiTokenService } from './apitoken'
+import { CustomerService } from './customer'
+import { LabelService } from './label'
+import { ProjectService } from './project'
+import { ReportsService } from './reports'
+import { RoleService } from './role'
+import { SubscriptionService } from './subscription'
 import { UserService } from './user'
 
 @Service({ global: false })
@@ -29,41 +29,41 @@ export class MongoService {
     return new UserService(this.context.db)
   }
 
-  public get role(): RoleMongoService {
-    return new RoleMongoService(this.context.db)
+  public get role(): RoleService {
+    return new RoleService(this.context.db)
   }
 
-  public get subscription(): SubscriptionMongoService {
-    return new SubscriptionMongoService(this.context.db)
+  public get subscription(): SubscriptionService {
+    return new SubscriptionService(this.context.db)
   }
 
-  public get project(): ProjectMongoService {
-    return new ProjectMongoService(this.context.db, this._cache)
+  public get project(): ProjectService {
+    return new ProjectService(this.context.db, this._cache)
   }
 
-  public get customer(): CustomerMongoService {
-    return new CustomerMongoService(this.context.db)
+  public get customer(): CustomerService {
+    return new CustomerService(this.context.db)
   }
 
-  public get label(): LabelMongoService {
-    return new LabelMongoService(this.context.db)
+  public get label(): LabelService {
+    return new LabelService(this.context.db)
   }
 
-  public get reports(): ReportsMongoService {
-    return new ReportsMongoService(this.context.db)
+  public get reports(): ReportsService {
+    return new ReportsService(this.context.db)
   }
 
-  public get apiToken(): ApiTokenMongoService {
-    return new ApiTokenMongoService(this.context.db)
+  public get apiToken(): ApiTokenService {
+    return new ApiTokenService(this.context.db)
   }
 }
 
 export {
   UserService,
-  RoleMongoService,
-  SubscriptionMongoService,
-  ProjectMongoService,
-  CustomerMongoService,
-  ReportsMongoService,
-  ApiTokenMongoService
+  RoleService,
+  SubscriptionService,
+  ProjectService,
+  CustomerService,
+  ReportsService,
+  ApiTokenService
 }

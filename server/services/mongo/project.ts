@@ -1,10 +1,10 @@
 import { Db as MongoDatabase, FilterQuery } from 'mongodb'
 import { filter, find, pick } from 'underscore'
-import { CustomerMongoService } from '.'
+import { CustomerService } from '.'
 import { Customer, LabelObject as Label, Project } from '../../graphql/resolvers/types'
 import { CacheService } from '../cache'
 import { MongoDocumentService } from './@document'
-import { LabelMongoService } from './label'
+import { LabelService } from './label'
 
 export type ProjectsData = {
   projects: Project[]
@@ -14,9 +14,9 @@ export type ProjectsData = {
 
 
 
-export class ProjectMongoService extends MongoDocumentService<Project> {
-  private _customer: CustomerMongoService
-  private _label: LabelMongoService
+export class ProjectService extends MongoDocumentService<Project> {
+  private _customer: CustomerService
+  private _label: LabelService
 
   /**
    * Constructor for MongoDatabase
@@ -26,9 +26,9 @@ export class ProjectMongoService extends MongoDocumentService<Project> {
    */
   constructor(db: MongoDatabase, private readonly _cache: CacheService) {
     super(db, 'projects')
-    this._customer = new CustomerMongoService(db)
-    this._label = new LabelMongoService(db)
-    this._cache.prefix = ProjectMongoService.name
+    this._customer = new CustomerService(db)
+    this._label = new LabelService(db)
+    this._cache.prefix = ProjectService.name
   }
 
   /**

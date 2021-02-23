@@ -9,7 +9,7 @@ import { pick } from 'underscore'
 import { LabelObject as Label } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 
-export class LabelMongoService extends MongoDocumentService<Label> {
+export class LabelService extends MongoDocumentService<Label> {
   constructor(db: MongoDatabase) {
     super(db, 'labels')
   }

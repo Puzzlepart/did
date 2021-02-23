@@ -3,7 +3,7 @@ import { pick } from 'underscore'
 import { Role } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 
-export class RoleMongoService extends MongoDocumentService<Role> {
+export class RoleService extends MongoDocumentService<Role> {
   constructor(db: MongoDatabase) {
     super(db, 'roles')
   }
