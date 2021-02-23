@@ -10,7 +10,7 @@ import { ProjectMongoService } from './project'
 import { ReportsMongoService } from './reports'
 import { RoleMongoService } from './role'
 import { SubscriptionMongoService } from './subscription'
-import { UserMongoService } from './user'
+import { UserService } from './user'
 
 @Service({ global: false })
 export class MongoService {
@@ -25,8 +25,8 @@ export class MongoService {
     private readonly _cache?: CacheService
   ) { }
 
-  public get user(): UserMongoService {
-    return new UserMongoService(this.context.db)
+  public get user(): UserService {
+    return new UserService(this.context.db)
   }
 
   public get role(): RoleMongoService {
@@ -59,7 +59,7 @@ export class MongoService {
 }
 
 export {
-  UserMongoService,
+  UserService,
   RoleMongoService,
   SubscriptionMongoService,
   ProjectMongoService,

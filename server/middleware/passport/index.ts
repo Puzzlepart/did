@@ -3,7 +3,7 @@ import fs from 'fs'
 import { MongoClient } from 'mongodb'
 import passport from 'passport'
 import { IProfile, OIDCStrategy, VerifyCallback } from 'passport-azure-ad'
-import { MongoService, SubscriptionMongoService, UserMongoService } from '../../services/mongo'
+import { MongoService, SubscriptionMongoService, UserService } from '../../services/mongo'
 import env from '../../utils/env'
 
 export default (client: MongoClient) => {
@@ -80,7 +80,7 @@ export default (client: MongoClient) => {
         subscription_service
           .getById(_json.tid)
           .then((s) => {
-            new UserMongoService(client.db(s.db))
+            new UserService(client.db(s.db))
               .getById(_json.oid)
               .then((u) => {
                 return done(null, {

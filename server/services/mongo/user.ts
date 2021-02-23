@@ -4,7 +4,7 @@ import { RoleMongoService } from '.'
 import { User } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 
-export class UserMongoService extends MongoDocumentService<User> {
+export class UserService extends MongoDocumentService<User> {
   private _role: RoleMongoService
 
   /**
