@@ -4,7 +4,7 @@ import { Service } from 'typedi'
 import { MongoService } from '../../../services/mongo'
 import MSGraphService from '../../../services/msgraph'
 import { IAuthOptions } from '../../authChecker'
-import { Project, ProjectInput, ProjectOptions } from '../types'
+import { CreateOrUpdateProjectResult, Project, ProjectInput, ProjectOptions } from '../types'
 
 @Service()
 @Resolver(Project)
@@ -39,19 +39,24 @@ export class ProjectResolver {
    * @param {boolean} update Update
    */
   @Authorized<IAuthOptions>({ permission: 'ef4032fb' })
-  @Mutation(() => Boolean, { description: 'Create or update project' })
+  @Mutation(() => CreateOrUpdateProjectResult, { description: 'Create or update project' })
   async createOrUpdateProject(
     @Arg('project', () => ProjectInput) project: ProjectInput,
     @Arg('options', () => ProjectOptions) options: ProjectOptions,
     @Arg('update', { nullable: true }) update: boolean
-  ): Promise<boolean> {
+  ): Promise<CreateOrUpdateProjectResult> {
     const p = new Project().fromInput(project)
     if (options.createOutlookCategory) {
       await this._msgraph.createOutlookCategory(p.tag)
     }
-    if (update) await this._mongo.project.updateProject(p)
-    else await this._mongo.project.addProject(p)
-    return true
+    if (update) {
+      const success = await this._mongo.project.updateProject(p)
+      return { success }
+    }
+    else {
+      const id = await this._mongo.project.addProject(p)
+      return { success: true, id }
+    }
   }
 }
 

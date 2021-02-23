@@ -103,3 +103,12 @@ export class ProjectOptions {
   @Field({ nullable: true, defaultValue: false })
   createOutlookCategory?: boolean
 }
+
+@ObjectType({ description: 'A type that describes a CreateOrUpdateProjectResult' })
+export class CreateOrUpdateProjectResult {
+  @Field({ nullable: true })
+  success: boolean
+
+  @Field({ nullable: true })
+  id?: string
+}

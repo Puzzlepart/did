@@ -25,7 +25,7 @@ export class UserService extends MongoDocumentService<User> {
   public async getUsers(query?: FilterQuery<User>): Promise<User[]> {
     try {
       const [users, roles] = await Promise.all([
-        this.find(query, {  displayName: 1 }),
+        this.find(query, { displayName: 1 }),
         this._role.getRoles()
       ])
       return users.map((user) => ({

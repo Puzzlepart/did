@@ -31,12 +31,15 @@ export class ProjectService extends MongoDocumentService<Project> {
 
   /**
    * Add project
+   * 
+   * Returns the ID of the added project
    *
    * @param {Project} project Project to add
    */
-  public async addProject(project: Project): Promise<void> {
+  public async addProject(project: Project): Promise<string> {
     try {
-      await this.collection.insertOne(project)
+      const { insertedId } = await this.collection.insertOne(project)
+      return insertedId.toHexString()
     } catch (err) {
       throw err
     }
@@ -44,13 +47,16 @@ export class ProjectService extends MongoDocumentService<Project> {
 
   /**
    * Update project
+   * 
+   * Returns true if the operation was successful
    *
    * @param {Project} project Project to update
    */
-  public async updateProject(project: Project): Promise<void> {
+  public async updateProject(project: Project): Promise<boolean> {
     try {
       const filter: FilterQuery<Project> = pick(project, 'key', 'customerKey')
-      await this.collection.updateOne(filter, { $set: project })
+      const { result } = await this.collection.updateOne(filter, { $set: project })
+      return result.ok === 1
     } catch (err) {
       throw err
     }
