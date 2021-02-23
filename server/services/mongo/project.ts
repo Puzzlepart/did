@@ -12,8 +12,6 @@ export type ProjectsData = {
   labels: Label[]
 }
 
-
-
 export class ProjectService extends MongoDocumentService<Project> {
   private _customer: CustomerService
   private _label: LabelService
@@ -59,7 +57,9 @@ export class ProjectService extends MongoDocumentService<Project> {
   }
 
   /**
-   * Get projects, customers and labels
+   * Get projects, customers and labels. 
+   * 
+   * Projects are sorted by the name property
    *
    * Connects labels and customer to projects
    *
@@ -67,10 +67,12 @@ export class ProjectService extends MongoDocumentService<Project> {
    */
   public async getProjectsData(query?: FilterQuery<Project>): Promise<ProjectsData> {
     try {
-      const cacheValue = await this._cache.get<ProjectsData>('getProjectsData')
+      let cacheKey = 'getProjectsData'
+      if (query.customerKey) cacheKey += `/${query.customerKey}`
+      const cacheValue = await this._cache.get<ProjectsData>(cacheKey)
       if (cacheValue) return cacheValue
       const [projects, customers, labels] = await Promise.all([
-        this.find(query),
+        this.find(query, { name: 1 }),
         this._customer.getCustomers(query?.customerKey && { key: query.customerKey }),
         this._label.getLabels()
       ])
@@ -84,7 +86,7 @@ export class ProjectService extends MongoDocumentService<Project> {
         })
         .filter((p) => p.customer !== null)
       const data = { projects: _projects, customers, labels }
-      await this._cache.set('getProjectsData', data, 120)
+      await this._cache.set(cacheKey, data, 120)
       return data
     } catch (err) {
       throw err
