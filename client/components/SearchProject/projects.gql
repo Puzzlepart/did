@@ -1,5 +1,5 @@
 query {
-  projects(sortBy: "name") {
+  projects {
     tag
     name
     icon

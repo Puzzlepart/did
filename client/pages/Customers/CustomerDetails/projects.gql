@@ -1,5 +1,5 @@
 query($customerKey: String) {
-  projects(customerKey: $customerKey, sortBy: "name") {
+  projects(customerKey: $customerKey) {
     tag
     key
     name
