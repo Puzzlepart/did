@@ -45,16 +45,16 @@ export class ProjectResolver {
     @Arg('options', () => ProjectOptions) options: ProjectOptions,
     @Arg('update', { nullable: true }) update: boolean
   ): Promise<CreateOrUpdateProjectResult> {
-    const p = new Project().fromInput(project)
-    if (options.createOutlookCategory) {
-      await this._msgraph.createOutlookCategory(p.tag)
-    }
+    const p = new Project(project)
     if (update) {
       const success = await this._mongo.project.updateProject(p)
       return { success }
     }
     else {
       const id = await this._mongo.project.addProject(p)
+      if (options.createOutlookCategory) {
+        await this._msgraph.createOutlookCategory(id)
+      }
       return { success: true, id }
     }
   }
