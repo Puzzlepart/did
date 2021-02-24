@@ -38,6 +38,7 @@ export class ProjectService extends MongoDocumentService<Project> {
    */
   public async addProject(project: Project): Promise<string> {
     try {
+      await this._cache.clear('getprojectsdata')
       const tag = [project.customerKey, project.key].join(' ')
       const { insertedId } = await this.collection.insertOne({
         _id: tag,
@@ -59,6 +60,7 @@ export class ProjectService extends MongoDocumentService<Project> {
    */
   public async updateProject(project: Project): Promise<boolean> {
     try {
+      await this._cache.clear('getprojectsdata')
       const filter: FilterQuery<Project> = pick(project, 'key', 'customerKey')
       const { result } = await this.collection.updateOne(filter, { $set: project })
       return result.ok === 1
@@ -78,7 +80,7 @@ export class ProjectService extends MongoDocumentService<Project> {
    */
   public async getProjectsData(query?: FilterQuery<Project>): Promise<ProjectsData> {
     try {
-      let cacheKey = 'getProjectsData'
+      let cacheKey = 'getprojectsdata'
       if (query?.customerKey) cacheKey += `/${query.customerKey}`
       const cacheValue = await this._cache.get<ProjectsData>(cacheKey)
       if (cacheValue) return cacheValue

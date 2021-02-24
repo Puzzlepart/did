@@ -19,7 +19,7 @@ export class CacheService {
      *
      * @param {Context} context Context
      */
-    constructor(@Inject('CONTEXT') private readonly context: Context) {}
+    constructor(@Inject('CONTEXT') private readonly context: Context) { }
 
     /**
      * Get cache key
@@ -37,7 +37,6 @@ export class CacheService {
         ]
             .join(':')
             .replace(/\-/g, '')
-            .toLowerCase()
     }
 
     /**
@@ -66,6 +65,23 @@ export class CacheService {
     public set(key: string, value: any, seconds: number = 60, scope: CacheScope = this.scope) {
         return new Promise((resolve) => {
             Redis.setex(this._getCacheKey(key, scope), seconds, JSON.stringify(value), resolve)
+        })
+    }
+
+    /**
+     * Clear cache for the specified key and scope
+     *
+     * @param {string} key Cache key
+     * @param {CacheScope} scope Cache scope
+     */
+    public clear(key: string, scope?: CacheScope) {
+        const pattern = `${this._getCacheKey(key, scope)}*`
+        return new Promise((resolve) => {
+            Redis.keys(pattern, (_err, keys) => {
+                Redis.del(keys, () => {
+                    resolve(null)
+                })
+            })
         })
     }
 }
