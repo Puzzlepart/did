@@ -9,15 +9,16 @@ import { Customer, LabelObject as Label, OutlookCategory } from '../types'
 })
 export class Project {
   @Field(() => ID)
+  public _id: string
+
+  @Field()
+  public tag?: string
+
+  @Field()
   public key: string
 
   @Field()
   public customerKey: string
-
-  @Field()
-  public get tag(): string {
-    return `${this.customerKey} ${this.key}`
-  }
 
   @Field()
   public name: string
@@ -53,16 +54,6 @@ export class Project {
    */
   constructor(data?: any) {
     Object.assign(this, data || {})
-  }
-
-  /**
-   * Creates a Project object from a ProjectInput object
-   *
-   * @param {ProjectInput} input Input object
-   */
-  public fromInput(input: ProjectInput): Project {
-    Object.assign(this, input)
-    return this
   }
 }
 
