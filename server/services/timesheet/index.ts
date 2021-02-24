@@ -137,7 +137,7 @@ export class TimesheetService {
       ...event,
       project: find(
         projects,
-        ({ customerKey, key }) => [customerKey, key].join(' ') === event.projectId
+        ({ _id }) => _id === event.projectId
       ),
       date: DateUtils.formatDate(event.startDateTime, dateFormat, locale)
     }))

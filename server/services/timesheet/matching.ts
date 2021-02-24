@@ -4,8 +4,10 @@ import { Customer, EventObject } from '../../graphql/resolvers/types'
 import { ProjectsData } from '../mongo/project'
 import MSGraphEvent from '../msgraph/types'
 
+type ProjectMatch = { id: string; key: string; customerKey: string }
+
 export default class {
-  constructor(private _data: ProjectsData) {}
+  constructor(private _data: ProjectsData) { }
 
   /**
    * Find project suggestions using findBestMatch from string-similarity
@@ -55,7 +57,7 @@ export default class {
   private _searchString(
     inputStr: string,
     strictMode: boolean = true
-  ): Array<{ tag: string; key: string; customerKey: string }> {
+  ): ProjectMatch[] {
     let regex = /((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<key>[\wæøåÆØÅ]{2,}))/gim
     if (strictMode)
       regex = /[\(\{\[]((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<key>[\wæøåÆØÅ]{2,}?))[\)\]\}]/gim
@@ -65,8 +67,8 @@ export default class {
       const { key, customerKey } = match.groups
       matches.push({
         ...match.groups,
-        tag: [customerKey, key].join(' ')
-      })
+        id: [customerKey, key].join(' ')
+      } as ProjectMatch)
     }
     return matches
   }
@@ -77,7 +79,7 @@ export default class {
    * @param {string} inputStr The String object or string literal on which to perform the search.
    * @param {string} categoriesStr Categories string
    */
-  private _findProjectMatches(inputStr: string, categoriesStr: string) {
+  private _findProjectMatches(inputStr: string, categoriesStr: string): ProjectMatch[] {
     const matches = this._searchString(categoriesStr, false)
     return matches || this._searchString(inputStr)
   }
@@ -117,10 +119,7 @@ export default class {
         const match = matches[i]
         event.customer = find(this._data.customers, (c) => match.customerKey === c.key)
         if (event.customer) {
-          event.project = find(this._data.projects, ({ key, customerKey }) => {
-            const tag = [customerKey, key].join(' ')
-            return tag === match.tag
-          })
+          event.project = find(this._data.projects, ({ _id }) => _id === match.id)
           projectKey = match.key
         }
         if (event.project) break
@@ -137,7 +136,7 @@ export default class {
       const softMatches = this._searchString(srchStr, false)
       event.project = find(
         this._data.projects,
-        ({ tag }) => !!find(softMatches, (m) => m.tag === tag)
+        ({ _id }) => !!find(softMatches, (m) => m.id === _id)
       )
       event.customer = find(this._data.customers, ({ key }) => key === event.project?.customerKey)
     }
