@@ -24,9 +24,7 @@ export class ProjectResolver {
    */
   @Authorized<IAuthOptions>()
   @Query(() => [Project], { description: 'Get projects' })
-  async projects(
-    @Arg('customerKey', { nullable: true }) customerKey: string
-  ): Promise<Project[]> {
+  async projects(@Arg('customerKey', { nullable: true }) customerKey: string): Promise<Project[]> {
     const { projects } = await this._mongo.project.getProjectsData(customerKey && { customerKey })
     return projects
   }
