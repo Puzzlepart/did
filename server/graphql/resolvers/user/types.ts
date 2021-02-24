@@ -9,6 +9,8 @@ import { Role } from '../types'
   simpleResolvers: true
 })
 export class User {
+ _id?: string
+
   @Field(() => ID)
   id?: string
 

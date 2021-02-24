@@ -1,5 +1,5 @@
 import { Db as MongoDatabase, FilterQuery } from 'mongodb'
-import { find, pick } from 'underscore'
+import { find, omit, pick } from 'underscore'
 import { RoleService } from '.'
 import { User } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
@@ -18,6 +18,15 @@ export class UserService extends MongoDocumentService<User> {
   }
 
   /**
+   * Replace id with _id
+   * 
+   * @param {User} user User 
+   */
+  private _replaceId<T>(user: User): T {
+    return { ...omit(user, 'id'), _id: user.id } as unknown as T
+  }
+
+  /**
    * Get users
    *
    * @param {FilterQuery<User>} query Query
@@ -30,6 +39,7 @@ export class UserService extends MongoDocumentService<User> {
       ])
       return users.map((user) => ({
         ...user,
+        id: user['_id'],
         role: find(roles, (role) => role.name === user.role)
       }))
     } catch (err) {
@@ -44,8 +54,9 @@ export class UserService extends MongoDocumentService<User> {
    */
   public async getById(id: string) {
     try {
-      const user = await this.collection.findOne({ id })
+      const user = await this.collection.findOne({ _id: id })
       if (!user.role) throw new Error()
+      user.id = user._id
       user.role = await this._role.getByName(user.role as string)
       return user
     } catch (err) {
@@ -60,7 +71,7 @@ export class UserService extends MongoDocumentService<User> {
    */
   public async addUser(user: User) {
     try {
-      const result = await this.collection.insertOne(user)
+      const result = await this.collection.insertOne(this._replaceId(user))
       return result
     } catch (err) {
       throw err
@@ -74,7 +85,9 @@ export class UserService extends MongoDocumentService<User> {
    */
   public async addUsers(users: User[]) {
     try {
-      const result = await this.collection.insertMany(users)
+      const result = await this.collection.insertMany(
+        users.map(u => this._replaceId(u))
+      )
       return result
     } catch (err) {
       throw err

@@ -18,8 +18,8 @@ auth.post('/callback', (request: Request, response: Response, next: NextFunction
         url.format({
           pathname: '/',
           query: {
-            name: error.name,
-            message: error.message
+            name: error?.name,
+            message: error?.message
           }
         })
       )
