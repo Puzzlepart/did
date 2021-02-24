@@ -15,6 +15,15 @@ export class LabelService extends MongoDocumentService<Label> {
   }
 
   /**
+   * Generate id for a label
+   *
+   * @param {Label} label Label
+   */
+  private _generateId(label: Label) {
+    return label.name.replace(/[^A-Z0-9]/ig, '').toLowerCase()
+  }
+
+  /**
    * Get labels
    *
    * @param {FilterQuery<Label>} query Query
@@ -35,7 +44,10 @@ export class LabelService extends MongoDocumentService<Label> {
    */
   public async addLabel(label: Label): Promise<InsertOneWriteOpResult<WithId<Label>>> {
     try {
-      const result = await this.collection.insertOne(label)
+      const result = await this.collection.insertOne({
+        _id: this._generateId(label),
+        ...label
+      })
       return result
     } catch (err) {
       throw err

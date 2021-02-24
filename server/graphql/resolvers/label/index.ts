@@ -6,10 +6,10 @@ import { Service } from 'typedi'
 import { MongoService } from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
 import { BaseResult } from '../types'
-import { LabelInput, LabelObject } from './types'
+import { LabelInput, LabelObject as Label } from './types'
 
 @Service()
-@Resolver(LabelObject)
+@Resolver(Label)
 export class LabelResolver {
   /**
    * Constructor for LabelResolver
@@ -22,7 +22,7 @@ export class LabelResolver {
    * Get labels
    */
   @Authorized()
-  @Query(() => [LabelObject], { description: 'Get labels' })
+  @Query(() => [Label], { description: 'Get labels' })
   labels() {
     return this._mongo.label.getLabels()
   }
@@ -33,14 +33,15 @@ export class LabelResolver {
    * @param {LabelInput} label Label
    * @param {boolean} update Update
    */
-  @Authorized<IAuthOptions>({ userContext: true })
+  // @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Add or update label' })
   async addOrUpdateLabel(
     @Arg('label', () => LabelInput) label: LabelInput,
     @Arg('update', { nullable: true }) update: boolean
   ): Promise<BaseResult> {
-    if (update) await this._mongo.label.updateLabel(label)
-    else await this._mongo.label.addLabel(label)
+    const l = new Label(label)
+    if (update) await this._mongo.label.updateLabel(l)
+    else await this._mongo.label.addLabel(l)
     return { success: true, error: null }
   }
 
