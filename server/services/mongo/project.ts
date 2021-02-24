@@ -38,8 +38,13 @@ export class ProjectService extends MongoDocumentService<Project> {
    */
   public async addProject(project: Project): Promise<string> {
     try {
-      const { insertedId } = await this.collection.insertOne(project)
-      return insertedId.toHexString()
+      const tag = [project.customerKey, project.key].join(' ')
+      const { insertedId } = await this.collection.insertOne({
+        _id: tag,
+        tag,
+        ...project
+      })
+      return insertedId
     } catch (err) {
       throw err
     }
