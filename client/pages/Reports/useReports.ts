@@ -20,7 +20,7 @@ import { IReportsParams } from './types'
  * * Using query with timeentries.gql
  * * Layout effect for updating URL when changing query
  * * Layout effects for initialiing state and updating state
- * when the query is reloaded
+ *   when the query is reloaded
  */
 export function useReports() {
   const { t } = useTranslation()
