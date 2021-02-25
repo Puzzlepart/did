@@ -11,7 +11,7 @@ import { ReportsContext } from '../context'
 import { ADD_FILTER } from '../reducer'
 import styles from './SaveFilterForm.module.scss'
 import { ISaveFilterFormProps } from './types'
-    
+
 const INITIAL_MODEL: IContextualMenuItem = {
     key: '',
     text: '',
@@ -36,18 +36,22 @@ export const SaveFilterForm = (props: ISaveFilterFormProps) => {
      */
     async function onSave(): Promise<void> {
         if (inputVisible) {
+            const _model = {
+                ...model,
+                key: model.text
+            }
             const variables = {
                 configuration: JSON.stringify({
                     reports: {
                         filters: [
                             ...state.savedFilters || [],
-                            { ...state.filter, ...model }
+                            { ...state.filter, ..._model }
                         ]
                     }
                 })
             }
             await updateUserConfiguration({ variables })
-            dispatch(ADD_FILTER({ model }))
+            dispatch(ADD_FILTER({ model: _model }))
             setModel(INITIAL_MODEL)
         } else {
             setInputVisible(true)
