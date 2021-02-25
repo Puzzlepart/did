@@ -7,12 +7,20 @@ import initFilters from './filters'
 import { getQueries } from './queries'
 import createReducer from './reducer'
 import { DATA_UPDATED, INIT } from './reducer/actions'
-
 import $timeentries from './timeentries.gql'
 import { IReportsParams } from './types'
 
 /**
  * Hook for Reports
+ * 
+ * * Get history using useHistiry
+ * * Get URL params using useParams
+ * * Get queries using getQueries
+ * * Using reducer from /reducer
+ * * Using query with timeentries.gql
+ * * Layout effect for updating URL when changing query
+ * * Layout effects for initialiing state and updating state
+ * when the query is reloaded
  */
 export function useReports() {
   const { t } = useTranslation()
