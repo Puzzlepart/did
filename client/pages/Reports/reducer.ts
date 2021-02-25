@@ -1,5 +1,5 @@
 import { QueryResult } from '@apollo/client'
-import { createAction, createReducer, current } from '@reduxjs/toolkit'
+import { createAction, createReducer } from '@reduxjs/toolkit'
 import { IAppContext } from 'AppContext'
 import { IFilter } from 'components/FilterPanel'
 import { IListGroups } from 'components/List/types'
@@ -23,13 +23,13 @@ interface ICreateReducerParams {
   app: IAppContext
 }
 
-export default ({ params, queries, app }: ICreateReducerParams) =>
+export default ({ params, queries }: ICreateReducerParams) =>
   createReducer<IReportsState>(
     {},
     {
       [INIT.type]: (state) => {
         state.query = find(queries, (q) => q.key === params.query) as any
-        state.savedFilters = app.user.configuration.reportFilters
+        // state.savedFilters = app.user.configuration.reportFilters
       },
 
       [SET_FILTER.type]: (state, { payload }: ReturnType<typeof SET_FILTER>) => {
@@ -43,19 +43,19 @@ export default ({ params, queries, app }: ICreateReducerParams) =>
         })
       },
 
-      [ADD_FILTER.type]: (state, { payload }: ReturnType<typeof ADD_FILTER>) => {
-        const newFilter = { ...state.filter, name: payload.name }
-        state.savedFilters.push(newFilter)
-        localStorage.setItem('saved_filters', JSON.stringify(current(state).savedFilters))
-        state.filter = newFilter
+      [ADD_FILTER.type]: () => {
+        // const newFilter = { ...state.filter, name: payload.name }
+        // state.savedFilters.push(newFilter)
+        // localStorage.setItem('saved_filters', JSON.stringify(current(state).savedFilters))
+        // state.filter = newFilter
       },
 
-      [REMOVE_SELECTED_FILTER.type]: (state) => {
-        const index = current(state).savedFilters.indexOf(current(state).filter)
-        state.savedFilters.splice(index, 1)
-        localStorage.setItem('saved_filters', JSON.stringify(current(state).savedFilters))
-        state.filter = null
-        state.subset = state.timeentries
+      [REMOVE_SELECTED_FILTER.type]: () => {
+        // const index = current(state).savedFilters.indexOf(current(state).filter)
+        // state.savedFilters.splice(index, 1)
+        // localStorage.setItem('saved_filters', JSON.stringify(current(state).savedFilters))
+        // state.filter = null
+        // state.subset = state.timeentries
       },
 
       [TOGGLE_FILTER_PANEL.type]: (state) => {
