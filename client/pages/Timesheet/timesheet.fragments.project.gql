@@ -1,10 +1,9 @@
 fragment ProjectFragment on Project {
-  id
+  tag
   name
   description
   icon
   customer {
-    id
     key
     name
     icon

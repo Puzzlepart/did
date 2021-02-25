@@ -11,10 +11,10 @@ export const SearchProject = (props: ISearchProjectProps) => {
   })
 
   const items: ISuggestionItem<Project>[] = (data?.projects || []).map((project) => ({
-    key: project.id,
+    key: project.tag,
     text: project.name,
-    secondaryText: project.id,
-    searchValue: [project.id, project.name, project.customer.name].join(' '),
+    secondaryText: project.tag,
+    searchValue: [project.tag, project.name, project.customer.name].join(' '),
     data: project,
     iconName: project.icon
   }))

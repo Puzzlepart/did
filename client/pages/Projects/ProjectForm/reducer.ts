@@ -25,9 +25,9 @@ export type ProjectFormAction =
  * @param {IProjectFormState} state State
  */
 const setProjectId = (state: IProjectFormState) => {
-  const { customerKey, projectKey } = state.model
-  if (!isEmpty(customerKey) && !isEmpty(projectKey)) {
-    state.projectId = [customerKey, projectKey].join(' ').toUpperCase()
+  const { customerKey, key } = state.model
+  if (!isEmpty(customerKey) && !isEmpty(key)) {
+    state.projectId = [customerKey, key].join(' ').toUpperCase()
   } else {
     state.projectId = ''
   }

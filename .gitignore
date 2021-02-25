@@ -40,8 +40,8 @@ client/**/*js
 client/**/*js.map
 
 doc/
+.ignore/
 .DS_Store
 .tests/*.json
 .localtunnel
 schema.gql
-client/components/List/List.module.scss.d.ts

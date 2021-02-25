@@ -151,7 +151,8 @@
     "roleInUseMessage": "This role is assigned to {{count}} users and cannot be deleted. "
   },
   "reports": {
-    "generatingReportLabel": "Generating report. To give you the freshest results, we're generating a report from the latest data...",
+    "generatingReportLabel": "Generating report",
+    "generatingReportDescription": "To give you the freshest results, we're generating a report from the latest data...",
     "noEntriesText": "There's no time entries at this time.",
     "selectReportText": "Select a report above. Be aware that some reports can take several minutes to load.",
     "selectReportLabel": "Select report",

@@ -35,7 +35,7 @@ export const Actions: FunctionComponent = () => {
           onClick={() => setShowEditPanel(true)}
         />
         <CustomerForm
-          key={state.selected.id}
+          key={state.selected.key}
           edit={state.selected}
           panel={{
             isOpen: showEditPanel,

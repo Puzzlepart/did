@@ -1,10 +1,10 @@
 query {
-  projects(sortBy: "name") {
-    id
+  projects {
+    tag
     name
     icon
     customer {
-      id
+      key
       name
       icon
     }

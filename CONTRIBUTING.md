@@ -21,9 +21,8 @@ Folder/File | Description
 `/server/public/css` | CSS files
 `/server/public/js` | JS files (hidden from `vscode`, the react bundle ends up here)
 `/server/routes` | [Express](https://expressjs.com/) routes using [HBS](https://handlebarsjs.com/) views
-`/server/api` | Server side APIs
-`/server/api/graphql` | [GraphQL](https://github.com/graphql/graphql-js/) implementation
-`/server/api/graphql/resolvers` | GraphQL resolvers, queries and mutations
+`/server/graphql` | [GraphQL](https://github.com/graphql/graphql-js/) implementation
+`/server/graphql/resolvers` | GraphQL resolvers, queries and mutations
 `/server/middleware` | Server side Express middleware functions
 `/server/middleware/passport` | [Passport](http://www.passportjs.org/) authentication middleware
 `/server/services` | Services ([MS Graph](https://developer.microsoft.com/en-us/graph) and [Azure Table Storage](https://azure.microsoft.com/en-us/services/storage/tables/))
@@ -51,12 +50,6 @@ The following permissions are required by Azure App Registration:
 ### Resource management with i18n
 
 * Install vscode extension `antfu.i18n-ally`
-
-### Mocha tests
-
-`npm run tests` will run our mocha tests. It will automatically fetch customers, projects and labels from Azure Table Storage if environment `TESTS_AZURE_STORAGE_CONNECTION_STRING` is set.
-
-`TESTS_AZURE_STORAGE_CONNECTION_STRING` should be set to the connection string for [didtestdata](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourcegroups/pzl-did/providers/Microsoft.Storage/storageAccounts/didtestdata/overview).
 
 ## GraphQL Documentation
 

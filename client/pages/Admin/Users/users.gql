@@ -1,5 +1,5 @@
 {
-  adUsers(options: { sortBy: "displayName" }) {
+  activeDirectoryUsers {
     id
     displayName
     givenName
@@ -9,7 +9,7 @@
     mail
     preferredLanguage
   }
-  users(options: { sortBy: "displayName" }) {
+  users {
     id
     displayName
     givenName

@@ -150,7 +150,8 @@
     "roleInUseMessage": "Denne rollen er tildelt {{count}} brukere og kan ikke slettes."
   },
   "reports": {
-    "generatingReportLabel": "Genererer rapport. For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene...",
+    "generatingReportLabel": "Genererer rapport",
+    "generatingReportDescription": "For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene ...",
     "noEntriesText": "Det er ingen tidsoppføringer for dette tidspunktet.",
     "selectReportText": "Velg en rapport over. \nVær oppmerksom på at noen rapporter kan ta flere minutter å laste inn.",
     "selectReportLabel": "Velg rapport",

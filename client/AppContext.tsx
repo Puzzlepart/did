@@ -17,24 +17,15 @@ export class ContextUser {
    * 
    * @param {User} _user User object
    */
-  constructor(private _user?: User) {
+  constructor(_user?: User) {
     if (!_user) {
       this.preferredLanguage = DEFAULT_LANGUAGE
     } else {
       this.id = _user.id
       this.displayName = _user.displayName
       this.mail = _user.mail
-      this.role = _user.role
+      this.role = _user.role as Role
       this.preferredLanguage = _user.preferredLanguage
-    }
-  }
-
-  /**
-   * User configuration
-   */
-  public get configuration() {
-    return {
-      reportFilters: JSON.parse(this._user.reportFilters)
     }
   }
 
