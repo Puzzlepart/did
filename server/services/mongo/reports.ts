@@ -94,7 +94,7 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
           }
           return $
         }, [])
-      await this._cache.set(cacheKey, report, 120)
+      await this._cache.set(cacheKey, report, 900)
       return report
     } catch (err) {
       throw err
