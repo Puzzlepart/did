@@ -13,6 +13,8 @@ auth.get('/signin', (request: Request, response: Response, next: NextFunction) =
 
 auth.post('/callback', (request: Request, response: Response, next: NextFunction) => {
   passport.authenticate('azuread-openidconnect', (error: Error, user: Express.User) => {
+    // eslint-disable-next-line no-console
+    console.log({ error, user })
     if (error || !user) {
       return response.redirect(
         url.format({

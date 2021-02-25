@@ -41,9 +41,6 @@ export class User {
   @Field(() => Subscription)
   subscription?: Subscription
 
-  @Field(() => String)
-  reportFilters?: string
-
   public create?(user: User): User {
     Object.assign(this, user)
     return this
@@ -84,12 +81,6 @@ export class UserInput {
 export class UserQueryOptions {
   @Field({ nullable: true })
   sortBy?: string
-}
-
-@InputType({ description: 'Input object for User configuration' })
-export class UserConfigurationInput {
-  @Field({ nullable: true })
-  reportFilters?: string;
 }
 
 @InputType({ description: 'Input object for User query' })
