@@ -18,7 +18,7 @@ export class MongoService {
    *
    * @param {Context} context Context
    */
-  constructor(@Inject('CONTEXT') private readonly context: Context) { }
+  constructor(@Inject('CONTEXT') private readonly context: Context) {}
 
   public get user(): UserService {
     return new UserService(this.context)

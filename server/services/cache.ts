@@ -14,8 +14,6 @@ export type CacheKey = string | string[]
 
 @Service({ global: false })
 export class CacheService {
-
-
   /**
    * Constructor
    *
@@ -27,12 +25,12 @@ export class CacheService {
     @Inject('CONTEXT') private readonly context: Context,
     public prefix?: string,
     public scope: CacheScope = CacheScope.SUBSCRIPTION
-  ) { }
+  ) {}
 
   /**
    * Get scoped cache key
-   * 
-   * Key can either be an string or  an array of string. 
+   *
+   * Key can either be an string or  an array of string.
    * If it's an array it will be filtered to remove empty/null
    * values and joined by :.
    *
@@ -40,7 +38,7 @@ export class CacheService {
    * @param {CacheScope} scope Cache scope
    */
   private _getScopedCacheKey(key: CacheKey, scope: CacheScope = this.scope) {
-    key = isArray(key) ? filter(key, k => !!k) : [key]
+    key = isArray(key) ? filter(key, (k) => !!k) : [key]
     return [
       this.prefix,
       ...key,

@@ -1,9 +1,4 @@
-import {
-  DeleteWriteOpResultObject,
-  FilterQuery,
-  InsertOneWriteOpResult,
-  WithId
-} from 'mongodb'
+import { DeleteWriteOpResultObject, FilterQuery, InsertOneWriteOpResult, WithId } from 'mongodb'
 import { pick } from 'underscore'
 import { Context } from '../../graphql/context'
 import { LabelObject as Label } from '../../graphql/resolvers/types'

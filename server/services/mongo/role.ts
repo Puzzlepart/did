@@ -9,7 +9,6 @@ export class RoleService extends MongoDocumentService<Role> {
     super(context, 'roles')
   }
 
-
   /**
    * Get roles
    *

@@ -7,12 +7,16 @@ export class MongoDocumentService<T> {
   public collection: Collection<T>
   /**
    * Constructor
-   * 
+   *
    * @param {Context} context Context
    * @param {string} collectionName Colletion name
    * @param {string} cachePrefix Cache prefix
    */
-  constructor(private readonly context: Context, public collectionName: string, public cachePrefix?: string) {
+  constructor(
+    private readonly context: Context,
+    public collectionName: string,
+    public cachePrefix?: string
+  ) {
     this.collection = context.db.collection(collectionName)
     if (cachePrefix) {
       this.cache = new CacheService(this.context, cachePrefix)

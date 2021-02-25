@@ -79,7 +79,7 @@ export class ProjectService extends MongoDocumentService<Project> {
    */
   public async getProjectsData(query?: FilterQuery<Project>): Promise<ProjectsData> {
     try {
-      const cacheKey:CacheKey = ['getprojectsdata', query?.customerKey.toString()]
+      const cacheKey: CacheKey = ['getprojectsdata', query?.customerKey.toString()]
       const cacheValue = await this.cache.get<ProjectsData>(cacheKey)
       if (cacheValue) return cacheValue
       const [projects, customers, labels] = await Promise.all([

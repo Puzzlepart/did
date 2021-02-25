@@ -31,12 +31,7 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
    */
   public async getReport(query: ReportsQuery, sortAsc: boolean): Promise<Report> {
     try {
-      const cacheKeys = [
-        'getreport',
-        query.preset,
-        query?.userId,
-        query?.projectId
-      ]
+      const cacheKeys = ['getreport', query.preset, query?.userId, query?.projectId]
       const cacheValue = await this.cache.get<Report>(cacheKeys)
       if (cacheValue) return cacheValue
       const d = new DateObject()
