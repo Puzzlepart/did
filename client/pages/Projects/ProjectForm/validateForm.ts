@@ -11,7 +11,7 @@ import { ProjectModel } from './types'
 export const validateForm = (model: ProjectModel, t: TFunction) => {
   const { PROJECT_KEY_MIN_LENGTH, PROJECT_KEY_MAX_LENGTH, PROJECT_NAME_MIN_LENGTH } = AppConfig
   const PROJECT_KEY_REGEX = new RegExp(
-    `(^[A-ZÆØÅ0-9]{${PROJECT_KEY_MIN_LENGTH},${PROJECT_KEY_MAX_LENGTH}}$)`,
+    `(^[A-ZÆØÅ0-9-]{${PROJECT_KEY_MIN_LENGTH},${PROJECT_KEY_MAX_LENGTH}}$)`,
     'gm'
   )
   const errors: { [key: string]: string } = {}
@@ -21,8 +21,8 @@ export const validateForm = (model: ProjectModel, t: TFunction) => {
   if (model.name.length < PROJECT_NAME_MIN_LENGTH) {
     errors.name = t('projects.nameFormValidationText', AppConfig)
   }
-  if (!PROJECT_KEY_REGEX.test(model.projectKey)) {
-    errors.projectKey = t('projects.keyFormValidationText', AppConfig)
+  if (!PROJECT_KEY_REGEX.test(model.key)) {
+    errors.key = t('projects.keyFormValidationText', AppConfig)
   }
   return { errors, invalid: Object.keys(errors).length > 0 }
 }

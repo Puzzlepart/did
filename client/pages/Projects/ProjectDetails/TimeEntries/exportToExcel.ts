@@ -12,7 +12,7 @@ import { Project } from 'types'
  */
 export async function onExportExcel(project: Project, timeentries: any[], t: TFunction) {
   const timestamp = new Date().toDateString().split(' ').join('-')
-  const fileName = `TimeEntries-${project.id.replace(/\s+/g, '-')}-${timestamp}.xlsx`
+  const fileName = `TimeEntries-${project.tag.replace(/\s+/g, '-')}-${timestamp}.xlsx`
   await exportExcel(timeentries, {
     columns: columns(t),
     fileName

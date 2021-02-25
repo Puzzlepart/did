@@ -5,6 +5,7 @@ import { ConditionalWrapper } from 'components/ConditionalWrapper'
 import { MessageBarType, Panel, PrimaryButton, TextField, Toggle } from 'office-ui-fabric'
 import React, { FunctionComponent, useContext, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
+import { LabelObject as Label } from 'types'
 import { isBlank } from 'underscore.string'
 import { ProjectsContext } from '../context'
 import $createOrUpdateProject from './createOrUpdateProject.gql'
@@ -85,14 +86,14 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (props: IProjec
           label={t('projects.keyFieldLabel')}
           description={t('projects.keyFieldDescription', AppConfig)}
           required={true}
-          errorMessage={state.validation.errors.projectKey}
+          errorMessage={state.validation.errors.key}
           onChange={(_event, value) =>
             dispatch({
               type: 'UPDATE_MODEL',
-              payload: ['projectKey', value.toUpperCase()]
+              payload: ['key', value.toUpperCase()]
             })
           }
-          value={state.model.projectKey}
+          value={state.model.key}
         />
         <UserMessage
           hidden={state.editMode}
@@ -179,7 +180,9 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (props: IProjec
           className={styles.inputField}
           label={t('admin.labels')}
           placeholder={t('admin.filterLabels')}
-          defaultSelectedKeys={state.editMode ? props.edit.labels.map((lbl) => lbl.name) : []}
+          defaultSelectedKeys={
+            state.editMode ? (props.edit.labels as Label[]).map((lbl) => lbl.name) : []
+          }
           onChange={(labels) =>
             dispatch({
               type: 'UPDATE_MODEL',

@@ -1,9 +1,10 @@
 import { QueryResult } from '@apollo/client'
+import { createAction, createReducer } from '@reduxjs/toolkit'
+import copy from 'fast-copy'
 import { History } from 'history'
 import { Project } from 'types'
 import { contains, find } from 'underscore'
 import { IProjectsParams, IProjectsState, ProjectsQueryResult, ProjectsView } from './types'
-import { createReducer, createAction } from '@reduxjs/toolkit'
 
 export const DATA_UPDATED = createAction<{ query: QueryResult<ProjectsQueryResult> }>(
   'DATA_UPDATED'
@@ -37,13 +38,14 @@ export default ({ params }: ICreateReducerParams) =>
     [DATA_UPDATED.type]: (state, { payload }: ReturnType<typeof DATA_UPDATED>) => {
       if (payload.query.data) {
         state.outlookCategories = payload.query.data.outlookCategories
-        state.projects = payload.query.data.projects.map((p) => ({
-          ...p,
-          outlookCategory: find(state.outlookCategories, (c) => c.displayName === p.id)
-        }))
+        state.projects = payload.query.data.projects.map((p) => {
+          const _p = copy(p)
+          _p.outlookCategory = find(state.outlookCategories, (c) => c.displayName === p.tag)
+          return _p
+        })
         state.selected = find(
           state.projects,
-          (p) => JSON.stringify(params).toLowerCase().indexOf(p.id.toLowerCase()) !== -1
+          (p) => JSON.stringify(params).toLowerCase().indexOf(p.tag.toLowerCase()) !== -1
         )
       }
     },

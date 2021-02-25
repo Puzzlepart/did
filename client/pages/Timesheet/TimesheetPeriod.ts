@@ -190,7 +190,7 @@ export class TimesheetPeriod {
       (event) =>
         ({
           id: event.id,
-          projectId: event.project.id,
+          projectId: event.project.tag,
           manualMatch: event.manualMatch
         } as EventInput)
     )

@@ -1,11 +1,11 @@
-query($query: TimeEntriesQuery!) {
+query($query: ReportsQuery!) {
   timeentries(query: $query) {
     duration
-    weekNumber
+    week
+    month
     year
-    monthNumber
     project {
-      id
+      tag
       name
       icon
     }

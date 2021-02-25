@@ -16,7 +16,7 @@ export interface IUsersContext {
   /**
    * Active Directory users
    */
-  adUsers: User[]
+  activeDirectoryUsers: User[]
 }
 
 export const UsersContext = createContext<IUsersContext>(null)

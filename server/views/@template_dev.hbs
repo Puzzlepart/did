@@ -110,19 +110,8 @@
 
 <body ontouchstart="" style="min-height: 100vh">
     <main role='main'>
-        <div id="app" data-error='{{error}}'></div>
+        <div id="app"></div>
     </main>
-    <script type="text/javascript">
-        if (document.location.hostname === "localhost") {
-            if (localStorage.length && !sessionStorage.debug) {
-                console.log("debugging - clearing cache")
-                localStorage.clear()
-                sessionStorage.clear()
-                sessionStorage.debug = "TRUE"
-                location.reload()
-            }
-        }
-    </script>
 </body>
 
 </html>

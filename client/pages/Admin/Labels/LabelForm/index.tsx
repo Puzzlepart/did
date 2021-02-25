@@ -5,7 +5,7 @@ import { DefaultButton, Label, Panel, PanelType, PrimaryButton, TextField } from
 import React, { useState } from 'react'
 import SketchPicker from 'react-color/lib/components/sketch/Sketch'
 import { useTranslation } from 'react-i18next'
-import { LabelObject } from 'types'
+import { LabelInput } from 'types'
 import { omit } from 'underscore'
 import validator from 'validator'
 import $addOrUpdateLabel from './addOrUpdateLabel.gql'
@@ -14,7 +14,7 @@ import { ILabelFormProps } from './types'
 
 export const LabelForm = (props: ILabelFormProps) => {
   const { t } = useTranslation()
-  const [model, setModel] = useState<LabelObject>(
+  const [model, setModel] = useState<LabelInput>(
     props.label || {
       name: '',
       description: '',

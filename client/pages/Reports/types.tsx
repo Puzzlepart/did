@@ -1,14 +1,14 @@
 import { IListGroups } from 'components/List/types'
 import { TFunction } from 'i18next'
 import { IContextualMenuItem } from 'office-ui-fabric'
-import { TimeEntriesQuery } from 'types'
+import { ReportsQuery } from 'types'
 
 export interface IReportsQuery extends IContextualMenuItem {
   /**
    * Variables used for graphl query
    */
   variables: {
-    query: TimeEntriesQuery
+    query: ReportsQuery
     forecast?: boolean
     sortAsc?: boolean
   }
@@ -94,10 +94,10 @@ export const getGroupByOptions = (t: TFunction): IGroupByOption[] => [
     }
   },
   {
-    key: 'weekNumber',
+    key: 'week',
     text: t('common.weekNumberLabel'),
     props: {
-      fieldName: 'weekNumber',
+      fieldName: 'week',
       emptyGroupName: ' '
     }
   }

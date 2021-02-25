@@ -1,7 +1,7 @@
 import { TFunction } from 'i18next'
 import { DefaultButton, IColumn, Icon } from 'office-ui-fabric'
 import React from 'react'
-import { User } from 'types'
+import { Role, User } from 'types'
 import { generateColumn as col } from 'utils/generateColumn'
 
 /**
@@ -12,9 +12,9 @@ import { generateColumn as col } from 'utils/generateColumn'
  */
 export const UserColumns = (onEdit: (user: User) => void, t: TFunction): IColumn[] => [
   col('role.name', t('common.roleLabel'), { maxWidth: 100 }, ({ role }: User) => (
-    <div title={role.description}>
-      <Icon style={{ marginRight: 8 }} iconName={role.icon} />
-      <span>{role.name}</span>
+    <div title={(role as Role).description}>
+      <Icon style={{ marginRight: 8 }} iconName={(role as Role).icon} />
+      <span>{(role as Role).name}</span>
     </div>
   )),
   col('displayName', t('common.displayNameLabel'), { maxWidth: 180 }),

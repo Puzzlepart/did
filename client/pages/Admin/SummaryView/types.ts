@@ -2,7 +2,7 @@ import DateUtils, { DateObject } from 'DateUtils'
 import { TFunction } from 'i18next'
 import { IContextualMenuItem, IPivotItemProps } from 'office-ui-fabric'
 import { ILabelColumnProps } from 'pages/Admin/SummaryView/LabelColumn/types'
-import { TimeEntriesQuery } from 'types'
+import { ReportsQuery } from 'types'
 
 /**
  * Get scopes
@@ -91,7 +91,7 @@ export interface ISummaryViewState {
    * Variables for timeentries query
    */
   variables?: {
-    query: TimeEntriesQuery
+    query: ReportsQuery
   }
 }
 

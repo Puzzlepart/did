@@ -16,7 +16,7 @@ export const TimeEntries: FunctionComponent = () => {
   const { state } = useContext(ProjectsContext)
   const { loading, error, data } = useQuery($timeentries, {
     variables: {
-      query: { projectId: state.selected.id }
+      query: { projectId: state.selected.tag }
     }
   })
   const timeentries = data?.timeentries || []

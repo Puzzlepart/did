@@ -34,7 +34,7 @@ export const Projects: FunctionComponent = () => {
 
   useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query])
   useLayoutEffect(() => {
-    const paths = [state.view, state.selected?.id || params.key, state.detailsTab]
+    const paths = [state.view, state.selected?.tag || params.key, state.detailsTab]
     const path = `/${['projects', ...paths].filter((p) => p).join('/')}`.toLowerCase()
     history.push(path)
   }, [state.view, state.selected, state.detailsTab])

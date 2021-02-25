@@ -1,9 +1,7 @@
-import createDebug from 'debug'
 import { NextFunction, Request, Response, Router } from 'express'
 import passport from 'passport'
-import { SigninError, SIGNIN_FAILED } from '../middleware/passport/errors'
 import env from '../utils/env'
-const debug = createDebug('server/routes/auth')
+import url from 'url'
 const auth = Router()
 
 auth.get('/signin', (request: Request, response: Response, next: NextFunction) => {
@@ -14,14 +12,17 @@ auth.get('/signin', (request: Request, response: Response, next: NextFunction) =
 })
 
 auth.post('/callback', (request: Request, response: Response, next: NextFunction) => {
-  passport.authenticate('azuread-openidconnect', (error: SigninError, user: Express.User) => {
-    if (error) {
-      debug('Sign in failed with error code %s', error.code)
-      return response.render('index', { error: error.toString() })
-    }
-    if (!user) {
-      debug('Sign in failed with error code %s', SIGNIN_FAILED.code)
-      return response.render('index', { error: SIGNIN_FAILED.toString() })
+  passport.authenticate('azuread-openidconnect', (error: Error, user: Express.User) => {
+    if (error || !user) {
+      return response.redirect(
+        url.format({
+          pathname: '/',
+          query: {
+            name: error?.name,
+            message: error?.message
+          }
+        })
+      )
     }
     request.logIn(user, (err) => {
       if (err) return response.render('index', { error: JSON.stringify(err) })

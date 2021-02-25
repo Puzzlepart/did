@@ -47,7 +47,7 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
           <p>
             <span>{t('timesheet.didYouMeanText')}</span>
             <a href='#' onClick={() => onManualMatch(event.suggestedProject)}>
-              {event.suggestedProject?.id}
+              {event.suggestedProject?.tag}
             </a>
             ?
           </p>
