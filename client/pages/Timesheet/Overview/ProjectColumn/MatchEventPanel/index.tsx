@@ -1,6 +1,7 @@
 import { SearchProject, UserMessage } from 'components'
 import { MessageBarButton, Panel } from 'office-ui-fabric'
 import { ITimesheetContext, TimesheetContext } from 'pages/Timesheet/context'
+import { MANUAL_MATCH } from 'pages/Timesheet/reducer/actions'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Project } from 'types'
@@ -22,7 +23,7 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
    */
   const onManualMatch = (project: Project) => {
     hidePanel()
-    dispatch({ type: 'MANUAL_MATCH', payload: { eventId: event.id, project } })
+    dispatch(MANUAL_MATCH({ eventId: event.id, project }))
   }
 
   return (

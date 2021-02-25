@@ -18,7 +18,7 @@ interface ITimesheetReducerParams {
   t: TFunction
 }
 
-const initState = ( url : ITimesheetParams) => ({
+const initState = (url: ITimesheetParams) => ({
   periods: [],
   scope: isEmpty(Object.keys(url))
     ? new TimesheetScope()
@@ -29,13 +29,12 @@ const initState = ( url : ITimesheetParams) => ({
 /**
  * Creating reducer for Timesheet using @reduxjs/toolkit
  */
-const createTimesheetReducer = ({url,t}: ITimesheetReducerParams) =>
+const createTimesheetReducer = ({ url, t }: ITimesheetReducerParams) =>
   createReducer<ITimesheetState>(
     initState(url),
     {
       [DATA_UPDATED.type]: (state, { payload }: ReturnType<typeof DATA_UPDATED>) => {
-        const { query } = payload
-        const { loading, data, error } = query
+        const { loading, data, error } = payload.query
         state.loading = loading
           ? {
             label: t('timesheet.loadingEventsLabel'),

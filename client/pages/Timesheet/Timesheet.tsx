@@ -5,6 +5,7 @@ import { ActionBar } from './ActionBar'
 import AllocationView from './AllocationView'
 import { ErrorBar } from './ErrorBar'
 import { Overview } from './Overview'
+import { CHANGE_VIEW, TOGGLE_SHORTCUTS } from './reducer/actions'
 import { SummaryView } from './SummaryView'
 import styles from './Timesheet.module.scss'
 import { TimesheetView } from './types'
@@ -28,10 +29,7 @@ export const Timesheet: FunctionComponent = () => {
         <Pivot
           defaultSelectedKey={state.selectedView}
           onLinkClick={({ props }) =>
-            dispatch({
-              type: 'CHANGE_VIEW',
-              payload: props.itemKey as TimesheetView
-            })
+            dispatch(CHANGE_VIEW({ view: props.itemKey as TimesheetView }))
           }>
           <PivotItem
             itemKey='overview'
@@ -59,7 +57,7 @@ export const Timesheet: FunctionComponent = () => {
       <HotkeyModal
         {...hotkeysProps}
         isOpen={state.showHotkeysModal}
-        onDismiss={() => dispatch({ type: 'TOGGLE_SHORTCUTS' })}
+        onDismiss={() => dispatch(TOGGLE_SHORTCUTS())}
       />
     </TimesheetContextProvider>
   )

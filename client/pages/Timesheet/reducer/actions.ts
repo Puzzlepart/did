@@ -1,15 +1,10 @@
 import { QueryResult } from '@apollo/client'
-import { TFunction } from 'i18next'
-import { Project, TimesheetPeriodObject } from 'types'
-import { TimesheetScope } from '../TimesheetScope'
-import { ITimesheetParams, TimesheetView } from '../types'
 import { createAction } from '@reduxjs/toolkit'
+import { Project } from 'types'
+import { TimesheetScope } from '../TimesheetScope'
+import { TimesheetView } from '../types'
 
-export const DATA_UPDATED = createAction<{
-    query: QueryResult<{ timesheet: TimesheetPeriodObject[] }>
-    t: TFunction
-    params: ITimesheetParams
-}>('DATA_UPDATED')
+export const DATA_UPDATED = createAction<{ query: QueryResult }>('DATA_UPDATED')
 export const SET_SCOPE = createAction<{ scope: TimesheetScope }>('SET_SCOPE')
 export const SUBMITTING_PERIOD = createAction<{ forecast: boolean }>('SUBMITTING_PERIOD')
 export const UNSUBMITTING_PERIOD = createAction<{ forecast: boolean }>('UNSUBMITTING_PERIOD')

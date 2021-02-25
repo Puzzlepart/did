@@ -1,6 +1,7 @@
 import { ProjectLink, ProjectTooltip, UserMessage } from 'components'
 import { TFunction } from 'i18next'
 import { Icon, MessageBarType } from 'office-ui-fabric'
+import { CLEAR_MANUAL_MATCH } from 'pages/Timesheet/reducer/actions'
 import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
@@ -81,7 +82,7 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
           {!isEmpty(event.project.labels) && <Icon iconName='Tag' className={styles.labelIcon} />}
           {event.manualMatch && !selectedPeriod.isConfirmed && (
             <ClearManualMatchButton
-              onClick={() => dispatch({ type: 'CLEAR_MANUAL_MATCH', payload: event.id })}
+              onClick={() => dispatch(CLEAR_MANUAL_MATCH({id: event.id}))}
               className={styles.clearButton}
             />
           )}

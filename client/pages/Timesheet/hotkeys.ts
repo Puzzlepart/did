@@ -1,9 +1,10 @@
 import { TFunction } from 'i18next'
 import { GlobalHotKeysProps } from 'react-hotkeys'
 import { ITimesheetContext } from './context'
+import { SET_SCOPE, TOGGLE_SHORTCUTS } from './reducer/actions'
 import { TimesheetScope } from './TimesheetScope'
 
-export default (context: ITimesheetContext, t: TFunction): GlobalHotKeysProps => ({
+export default ({ scope, dispatch }: ITimesheetContext, t: TFunction): GlobalHotKeysProps => ({
   keyMap: {
     GO_TO_CURRENT_WEEK: {
       name: t('timesheet.goToCurrentWeek'),
@@ -28,21 +29,12 @@ export default (context: ITimesheetContext, t: TFunction): GlobalHotKeysProps =>
   },
   handlers: {
     GO_TO_CURRENT_WEEK: () =>
-      context.dispatch({
-        type: 'SET_SCOPE',
-        scope: new TimesheetScope(new Date())
-      }),
+      dispatch(SET_SCOPE({ scope: new TimesheetScope(new Date()) })),
     PREV_WEEK: () =>
-      context.dispatch({
-        type: 'SET_SCOPE',
-        scope: context.scope.set('-1w')
-      }),
+      dispatch(SET_SCOPE({ scope: scope.set('-1w') })),
     NEXT_WEEK: () =>
-      context.dispatch({
-        type: 'SET_SCOPE',
-        scope: context.scope.set('1w')
-      }),
-    SHOW_SHORTCUTS: () => context.dispatch({ type: 'TOGGLE_SHORTCUTS' })
+      dispatch(SET_SCOPE({ scope: scope.set('1w') })),
+    SHOW_SHORTCUTS: () => dispatch(TOGGLE_SHORTCUTS())
   },
   allowChanges: false
 })

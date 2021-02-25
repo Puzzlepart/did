@@ -1,49 +1,38 @@
-import { useMutation, useQuery } from '@apollo/client'
-import { AppContext } from 'AppContext'
-import React, { useContext, useLayoutEffect, useMemo } from 'react'
+import { useMutation } from '@apollo/client'
+import React, { useLayoutEffect, useMemo } from 'react'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
-import {
-  TimesheetOptions,
-  TimesheetPeriodObject,
-  TimesheetQuery
-} from 'types'
 import hotkeys from './hotkeys'
 import { useTimesheetReducer } from './reducer'
+import { SUBMITTING_PERIOD, UNSUBMITTING_PERIOD } from './reducer/actions'
 import $submitPeriod from './submitPeriod.gql'
-import $timesheet from './timesheet.gql'
 import {
   ITimesheetContext,
   ITimesheetParams,
   TimesheetContext
 } from './types'
 import $unsubmitPeriod from './unsubmitPeriod.gql'
+import { useTimesheetQuery } from './useTimesheetQuery'
 
+/**
+ * Hook for Timesheet
+ * 
+ * * Get history using useHistiry
+ * * Get URL params using useParams
+ * * Using reducer from /reducer
+ * * Using useTimesheetQuery with timesheet.gql
+ * * Layout effects for initialiing state and updating state
+ *   when the query is reloaded
+ * * Returns TimesheetContextProvider with Timesheet context
+ */
 export function useTimesheet() {
-  const app = useContext(AppContext)
   const { t } = useTranslation()
   const history = useHistory()
   const url = useParams<ITimesheetParams>()
   const { state, dispatch } = useTimesheetReducer({ url, t })
-  const query = useQuery<
-    { timesheet: TimesheetPeriodObject[] },
-    { query: TimesheetQuery; options: TimesheetOptions }
-  >($timesheet, {
-    skip: !state.scope.query(),
-    variables: {
-      query: state.scope.query(),
-      options: {
-        dateFormat: 'dddd DD',
-        locale: app.user.language,
-        tzOffset: new Date().getTimezoneOffset()
-      }
-    },
-    fetchPolicy: 'cache-and-network',
-    errorPolicy: 'all'
-  })
 
-  useLayoutEffect(() => dispatch({ type: 'DATA_UPDATED', payload: { query, t, params: url } }), [query])
+  const { refetch } = useTimesheetQuery(state, dispatch)
 
   useLayoutEffect(() => {
     if (!state.selectedPeriod) return
@@ -56,29 +45,29 @@ export function useTimesheet() {
   ]
 
   const onSubmitPeriod = async (forecast: boolean) => {
-    dispatch({ type: 'SUBMITTING_PERIOD', payload: { t, forecast } })
+    dispatch(SUBMITTING_PERIOD({ forecast }))
     const variables = {
       period: state.selectedPeriod.data,
       options: { forecast, tzOffset: new Date().getTimezoneOffset() }
     }
     await submitPeriod({ variables })
-    query.refetch()
+    refetch()
   }
 
   const onUnsubmitPeriod = async (forecast: boolean) => {
-    dispatch({ type: 'UNSUBMITTING_PERIOD', payload: { t, forecast } })
+    dispatch(UNSUBMITTING_PERIOD({ forecast }))
     const variables = {
       period: state.selectedPeriod.data,
       options: { forecast }
     }
     await unsubmitPeriod({ variables })
-    query.refetch()
+    refetch()
   }
 
   const context: ITimesheetContext = useMemo(
     () => ({
       ...state,
-      refetch: query.refetch,
+      refetch: refetch,
       onSubmitPeriod,
       onUnsubmitPeriod,
       dispatch,
