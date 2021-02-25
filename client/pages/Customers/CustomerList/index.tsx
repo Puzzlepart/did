@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { filter, isEmpty } from 'underscore'
 import { CustomersContext } from '../context'
+import { SET_SELECTED_CUSTOMER } from '../reducer'
 import { columns } from './columns'
 
 export const CustomerList = () => {
@@ -22,7 +23,7 @@ export const CustomerList = () => {
       searchBox={{ placeholder: t('common.searchPlaceholder') }}
       selection={{
         mode: SelectionMode.single,
-        onChanged: (selected) => dispatch({ type: 'SET_SELECTED_CUSTOMER', customer: selected })
+        onChanged: (selected) => dispatch(SET_SELECTED_CUSTOMER({ customer: selected }))
       }}
       height={state.selected && 400}
       enableShimmer={loading}

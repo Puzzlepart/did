@@ -1,25 +1,30 @@
 import { getIcons } from 'common/icons'
 import { IPanelProps } from 'office-ui-fabric'
-import { IFormValidation, Project, ProjectOptions } from 'types'
+import { IFormValidation, LabelObject as Label, Project, ProjectOptions } from 'types'
 import { first } from 'underscore'
 
 export class ProjectModel {
   public name: string
-  public projectKey: string
+  public key: string
   public customerKey: string
   public description: string
   public inactive: boolean
   public icon: string
   public labels: string[]
 
+  /**
+   * Constructs a new ProjectModel from a Project object
+   *
+   * @param {Project} project Project object
+   */
   constructor(project?: Project) {
     this.name = project?.name || ''
-    this.projectKey = project?.projectKey || ''
+    this.key = project?.key || ''
     this.customerKey = project?.customerKey || ''
     this.description = project?.description || ''
     this.inactive = project?.inactive || false
     this.icon = project?.icon || first(getIcons(1))
-    this.labels = project?.labels.map((label) => label.name)
+    this.labels = ((project?.labels || []) as Label[]).map((label) => label.name)
   }
 }
 

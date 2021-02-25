@@ -1,8 +1,0 @@
-mutation($users: [UserInput!]!) {
-  bulkImport(users: $users) {
-    success
-    error {
-      message
-    }
-  }
-}

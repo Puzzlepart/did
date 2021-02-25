@@ -1,7 +1,6 @@
-import { TFunction } from 'i18next'
-import { omit } from 'underscore'
-import { capitalize } from 'underscore.string'
 import { DateObject } from 'DateUtils'
+import { TFunction } from 'i18next'
+import { capitalize } from 'underscore.string'
 import { IReportsQuery } from './types'
 
 /**
@@ -13,10 +12,10 @@ import { IReportsQuery } from './types'
 const lastMonthQuery = (now: DateObject, t: TFunction) => {
   const obj = now.add('-1month').toObject()
   return {
-    key: 'lastMonth',
+    key: 'last_month',
     text: t('common.exportTypeLastMonth', obj),
     iconName: 'CalendarDay',
-    variables: { query: omit(obj, 'monthName', 'weekNumber') },
+    variables: { query: { preset: 'LAST_MONTH' } },
     exportFileName: `TimeEntries-${capitalize(obj.monthName)}-{0}.xlsx`
   } as IReportsQuery
 }
@@ -30,13 +29,12 @@ const lastMonthQuery = (now: DateObject, t: TFunction) => {
 const currentMonthQuery = (now: DateObject, t: TFunction) => {
   const obj = now.toObject()
   return {
-    key: 'currentMonth',
+    key: 'current_month',
     text: t('common.exportTypeCurrentMonth', obj),
     iconName: 'Calendar',
     variables: {
       query: {
-        ...omit(obj, 'monthName', 'weekNumber'),
-        endDateTime: now.$.toISOString()
+        preset: 'CURRENT_MONTH'
       }
     },
     exportFileName: `TimeEntries-${capitalize(obj.monthName)}-{0}.xlsx`
@@ -53,13 +51,12 @@ const lastYearQuery = (now: DateObject, t: TFunction) => {
   const { year } = now.toObject('year')
   const obj = { year: year - 1 }
   return {
-    key: 'lastYear',
+    key: 'last_year',
     text: t('common.exportTypeLastYear', obj),
     iconName: 'Previous',
     variables: {
       query: {
-        ...obj,
-        endDateTime: now.$.toISOString()
+        preset: 'LAST_YEAR'
       }
     },
     exportFileName: `TimeEntries-${obj.year}-{0}.xlsx`
@@ -75,13 +72,12 @@ const lastYearQuery = (now: DateObject, t: TFunction) => {
 const currentYearQuery = (now: DateObject, t: TFunction) => {
   const obj = now.toObject('year')
   return {
-    key: 'currentYear',
+    key: 'current_year',
     text: t('common.exportTypeCurrentYear', obj),
     iconName: 'CalendarReply',
     variables: {
       query: {
-        ...obj,
-        endDateTime: now.$.toISOString()
+        preset: 'CURRENT_YEAR'
       }
     },
     exportFileName: `TimeEntries-${obj.year}-{0}.xlsx`
@@ -103,7 +99,7 @@ const forecastQuery = (now: DateObject, t: TFunction) => {
       sortAsc: true,
       forecast: true,
       query: {
-        startDateTime: now.$.toISOString()
+        preset: 'FORECAST'
       }
     },
     exportFileName: 'Forecast-{0}.xlsx'

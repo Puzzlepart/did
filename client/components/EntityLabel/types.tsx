@@ -1,6 +1,6 @@
-import { LabelObject } from 'types'
+import { LabelInput, LabelObject } from 'types'
 
 export interface IEntityLabelProps {
-  label: LabelObject
+  label: LabelObject | LabelInput
   size?: 'xsmall' | 'small' | 'medium' | 'large'
 }

@@ -146,15 +146,17 @@
     "adUserSyncEnabledLabel": "Synkroniser brukeregenskaper",
     "adUserSyncEnabledDescription": "Synkroniser automatisk brukeregenskaper fra Azure Active Directory når brukeren logger på.",
     "adUserSyncPropertiesLabel": "Egenskaper som skal synkroniseres",
-    "adUserSyncPropertiesDescription": "Velg hvilke egenskaper som skal synkroniseres automatisk fra Azure Active Directory."
+    "adUserSyncPropertiesDescription": "Velg hvilke egenskaper som skal synkroniseres automatisk fra Azure Active Directory.",
+    "roleInUseMessage": "Denne rollen er tildelt {{count}} brukere og kan ikke slettes."
   },
   "reports": {
-    "generatingReportLabel": "Genererer rapport. For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene...",
+    "generatingReportLabel": "Genererer rapport",
     "noEntriesText": "Det er ingen tidsoppføringer for dette tidspunktet.",
     "selectReportText": "Velg en rapport over. \nVær oppmerksom på at noen rapporter kan ta flere minutter å laste inn.",
     "selectReportLabel": "Velg rapport",
     "forecast": "Prognose",
-    "exportToExcel": "Eksporter til Excel"
+    "exportToExcel": "Eksporter til Excel",
+    "generatingReportDescription": "For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene ..."
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",
@@ -296,7 +298,8 @@
     "exportTypeLastYear": "I fjor ({{year}})",
     "fromDateLabel": "Fra:",
     "toDateLabel": "Til:",
-    "rangeLabel": "Tidsrom"
+    "rangeLabel": "Tidsrom",
+    "totalHours": "Timer totalt"
   },
   "navigation": {
     "timesheet": "Timeliste",

@@ -1,0 +1,25 @@
+.root {
+  margin: 0 0 20px 0;
+  padding: 0 4% 0 4%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .item {
+    padding: 4% 12% 4% 12%;
+    min-width: 150px;
+
+    .value {
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .label {
+      text-align: center;
+      color: #8b949e;
+      font-size: 13px;
+      letter-spacing: 2px;
+      margin: 5px 0 0 0;
+    }
+  }
+}

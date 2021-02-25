@@ -163,8 +163,8 @@ export class DateObject {
    */
   toObject(...include: string[]) {
     const obj = {
-      weekNumber: DateUtils.getWeek(this.$),
-      monthNumber: DateUtils.getMonthIndex(this.$),
+      week: DateUtils.getWeek(this.$),
+      month: DateUtils.getMonthIndex(this.$),
       year: DateUtils.getYear(this.$),
       monthName: this.format('MMMM')
     }

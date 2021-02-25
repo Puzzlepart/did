@@ -1,5 +1,5 @@
 import { Navigation } from 'components/Navigation'
-import * as React from 'react'
+import React, { FunctionComponent } from 'react'
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import styles from './App.module.scss'
 import { AppContext, IAppContext } from './AppContext'
@@ -10,7 +10,7 @@ import { isMobile } from 'react-device-detect'
 import { MobileHeader } from 'components/MobileHeader'
 import { useTranslation } from 'react-i18next'
 
-export const App: React.FunctionComponent<IAppContext> = (context: IAppContext) => {
+export const App: FunctionComponent<IAppContext> = (context: IAppContext) => {
   const { t } = useTranslation()
   if (isMobile) styles.root += ` ${styles.mobile}`
   return (

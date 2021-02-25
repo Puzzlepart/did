@@ -1,19 +1,18 @@
-query($query: TimeEntriesQuery!, $forecast: Boolean, $sortAsc: Boolean) {
-  timeentries(query: $query, forecast: $forecast, sortAsc: $sortAsc) {
+query($query: ReportsQuery!, $sortAsc: Boolean) {
+  timeentries(query: $query, sortAsc: $sortAsc) {
     title
     duration
     startDateTime
     endDateTime
-    weekNumber
-    monthNumber
+    week
+    month
     year
-    monthNumber
     customer {
       key
       name
     }
     project {
-      id
+      tag
       name
     }
     resource {

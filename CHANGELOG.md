@@ -7,7 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 0.10.0 - TBA
 ### Added
 - Support for split week, split year scenarios #753
-- Last Year option to reports #775
+- Last year option added to reports #775
+- Support for deleting role #692
 
 ### Fixed
 - Issue where sunday hours would not be displayed in the UI after confirming a week #785
@@ -17,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Issue with navigating between tabs in Projects #749
 - Issue with rogue customer matches in large event bodies #782
 - Issue with time entry queries in Reports #790
+- Issue with navigating to a customer from e.g. Timesheet #791
 
 ### Changed
 - Consolidated Server and Client date utils #771
