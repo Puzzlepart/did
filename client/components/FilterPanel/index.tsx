@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { FilterItem } from './FilterItem'
 import { IFilter, IFilterItem } from './Filters'
 import { IFilterPanelProps } from './types'
+import styles from './FilterPanel.module.scss'
 
 export const FilterPanel = (props: IFilterPanelProps) => {
   const [filters, setFilters] = useState<IFilter[]>(
@@ -36,7 +37,9 @@ export const FilterPanel = (props: IFilterPanelProps) => {
   return (
     <Panel
       isOpen={props.isOpen}
+      className={styles.root}
       headerText={props.headerText}
+      headerClassName={styles.header}
       isLightDismiss={true}
       onDismiss={props.onDismiss}>
       {props.children}
