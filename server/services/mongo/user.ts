@@ -5,7 +5,7 @@ import { RoleService } from '.'
 import { Context } from '../../graphql/context'
 import { User } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
-import merge from 'deepmerge'
+import set from 'set-value'
 
 export class UserService extends MongoDocumentService<User> {
   private _role: RoleService
@@ -114,10 +114,11 @@ export class UserService extends MongoDocumentService<User> {
     try {
       const filter = { _id: this.context.userId }
       const user = await this.collection.findOne(filter)
-      const mergedConfiguration = merge(
-        user.configuration,
-        JSON.parse(configuration)
-      )
+      const _configuration = JSON.parse(configuration)
+      const mergedConfiguration = Object.keys(_configuration).reduce((obj, key) => {
+        set(obj, key, _configuration[key])
+        return obj
+      }, user.configuration)
       await this.collection.updateOne(filter, { $set: { configuration: mergedConfiguration } })
     } catch (err) {
       throw err

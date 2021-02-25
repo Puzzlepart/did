@@ -1,9 +1,9 @@
-import { useQuery } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import { AppContext } from 'AppContext'
 import { FilterPanel, List, UserMessage } from 'components'
 import DateUtils from 'DateUtils'
 import { Icon, Pivot, PivotItem, ProgressIndicator } from 'office-ui-fabric'
-import React, { useContext, useLayoutEffect, useMemo, useReducer } from 'react'
+import React, { useContext, useEffect, useLayoutEffect, useMemo, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { isEmpty } from 'underscore'
@@ -23,6 +23,7 @@ import styles from './Reports.module.scss'
 import { SaveFilterForm } from './SaveFilterForm'
 import $timeentries from './timeentries.gql'
 import { IReportsParams } from './types'
+import $updateUserConfiguration from '../../graphql/updateUserConfiguration.gql'
 
 export const Reports = () => {
   const { t } = useTranslation()
@@ -39,15 +40,21 @@ export const Reports = () => {
       emptyGroupName: t('common.all')
     }
   })
+  const [updateUserConfiguration] = useMutation($updateUserConfiguration)
   const query = useQuery($timeentries, {
     skip: !state.query,
     fetchPolicy: 'cache-first',
     variables: state.query?.variables
   })
 
-  /**
-   * Layout effects
-   */
+  useEffect(() => {
+    const variables = {
+      configuration: JSON.stringify({
+        'reports.filters': state.savedFilters
+      })
+    }
+    updateUserConfiguration({ variables })
+  }, [state.savedFilters])
   useLayoutEffect(() => dispatch(INIT()), [])
   useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query])
   useLayoutEffect(() => {

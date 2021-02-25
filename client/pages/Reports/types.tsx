@@ -64,9 +64,9 @@ export interface IReportsState {
   isFiltered?: boolean
 
   /**
-   * Saved filters (stored in browser storage)
+   * Saved filters
    */
-  savedFilters?: IReportsSavedFilter[]
+  savedFilters?: { [key: string]: IReportsSavedFilter }
 
   /**
    * Active filter

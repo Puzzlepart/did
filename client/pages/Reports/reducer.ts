@@ -6,7 +6,7 @@ import { IListGroups } from 'components/List/types'
 import get from 'get-value'
 import { getValue } from 'helpers'
 import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
-import { filter, find } from 'underscore'
+import { filter, find, omit } from 'underscore'
 import { IReportsParams, IReportsQuery, IReportsSavedFilter, IReportsState } from './types'
 
 export const INIT = createAction('INIT')
@@ -43,7 +43,7 @@ export default ({ app, params, queries }: ICreateReducerParams) =>
     {
       [INIT.type]: (state) => {
         state.query = find(queries, (q) => q.key === params.query) as any
-        state.savedFilters = get(app.user.configuration, 'reports.filters', { default: [] })
+        state.savedFilters = get(app.user.configuration, 'reports.filters', { default: {} })
       },
 
       [SET_FILTER.type]: (state, { payload }: ReturnType<typeof SET_FILTER>) => {
@@ -55,22 +55,26 @@ export default ({ app, params, queries }: ICreateReducerParams) =>
             }).length === Object.keys(payload.filter.values).length
           )
         })
+        state.isFiltered = state.subset.length !== state.timeentries.length
       },
 
       [ADD_FILTER.type]: (state, { payload }: ReturnType<typeof ADD_FILTER>) => {
         const newFilter: any = {
-          ...state.filter,
+          ...current(state).filter,
           ...payload.model
         }
-        state.savedFilters.push(newFilter)
+        state.savedFilters = {
+          ...state.savedFilters,
+          [newFilter.key]: newFilter
+        }
         state.filter = newFilter
       },
 
       [REMOVE_SELECTED_FILTER.type]: (state) => {
-        const index = current(state).savedFilters.indexOf(current(state).filter)
-        state.savedFilters.splice(index, 1)
+        state.savedFilters = omit(state.savedFilters, state.filter.key)
         state.filter = null
         state.subset = state.timeentries
+        state.isFiltered = false
       },
 
       [TOGGLE_FILTER_PANEL.type]: (state) => {

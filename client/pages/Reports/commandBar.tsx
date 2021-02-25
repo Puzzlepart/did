@@ -84,9 +84,10 @@ const clearFiltersCmd = ({ state, dispatch }: IReportsContext) => ({
  * 
  * @param {IReportsContext} context Context
  */
-const saveFilterCmd = (context: IReportsContext): IContextualMenuItem => ({
+const saveFilterCmd = ({ state, dispatch, t }: IReportsContext): IContextualMenuItem => ({
   key: 'SAVED_FILTERS',
-  text: context.t('reports.savedFilters'),
+  text: state.filter?.text || t('reports.savedFilters'),
+  iconProps: state.filter?.iconProps || { iconName: 'ChromeRestore' },
   subMenuProps: {
     items: [
       {
@@ -99,22 +100,25 @@ const saveFilterCmd = (context: IReportsContext): IContextualMenuItem => ({
         key: 'DIVIDER_O',
         itemType: ContextualMenuItemType.Divider
       },
-      context.state.filter?.name && {
+      state.filter?.text && {
         key: 'REMOVE_SELECTED_FILTER',
-        text: context.t('reports.removeSelectedFilterText'),
+        text: t('reports.removeSelectedFilterText'),
         iconProps: { iconName: 'RemoveFilter' },
-        onClick: () => context.dispatch(REMOVE_SELECTED_FILTER())
+        onClick: () => dispatch(REMOVE_SELECTED_FILTER())
       },
       {
         key: 'DIVIDER_1',
         itemType: ContextualMenuItemType.Divider
       },
-      ...context.state.savedFilters.map((filter) => ({
-        ...omit(filter, 'values') as IContextualMenuItem,
-        canCheck: true,
-        checked: filter.text === context.state.filter?.text,
-        onClick: () => context.dispatch(SET_FILTER({ filter }))
-      }))
+      ...Object.keys(state.savedFilters).map((key) => {
+        const filter = state.savedFilters[key]
+        return {
+          ...omit(filter, 'values') as IContextualMenuItem,
+          canCheck: true,
+          checked: filter.text === state.filter?.text,
+          onClick: () => dispatch(SET_FILTER({ filter }))
+        }
+      })
     ].filter(i => i)
   }
 } as IContextualMenuItem)
