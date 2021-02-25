@@ -29,15 +29,17 @@ const navigateCommands = [
 export default (context: ITimesheetContext) =>
   navigateCommands.map(
     (cmd, key) =>
-    ({
-      key: `${key}`,
-      iconOnly: true,
-      disabled: cmd.disabled(context),
-      iconProps: { iconName: cmd.iconName, className: styles.actionBarIcon },
-      onClick: () =>
-        context.dispatch(SET_SCOPE({
-          scope: cmd.add ? context.scope.set(cmd?.add) : new TimesheetScope(cmd.date)
-        })),
-      title: cmd.title(context.t)
-    } as IContextualMenuItem)
+      ({
+        key: `${key}`,
+        iconOnly: true,
+        disabled: cmd.disabled(context),
+        iconProps: { iconName: cmd.iconName, className: styles.actionBarIcon },
+        onClick: () =>
+          context.dispatch(
+            SET_SCOPE({
+              scope: cmd.add ? context.scope.set(cmd?.add) : new TimesheetScope(cmd.date)
+            })
+          ),
+        title: cmd.title(context.t)
+      } as IContextualMenuItem)
   )

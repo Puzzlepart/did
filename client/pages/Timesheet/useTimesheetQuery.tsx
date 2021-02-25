@@ -8,7 +8,7 @@ import { ITimesheetState } from './types'
 
 /**
  * Use Timesheet query
- * 
+ *
  * @param {ITimesheetState} state State
  * @param {Dispatch<AnyAction>} dispatch Dispatch
  */

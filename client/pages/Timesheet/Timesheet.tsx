@@ -12,14 +12,7 @@ import { TimesheetView } from './types'
 import { useTimesheet } from './useTimesheet'
 
 export const Timesheet: FunctionComponent = () => {
-  const {
-    state,
-    dispatch,
-    context,
-    TimesheetContextProvider,
-    hotkeysProps,
-    t
-  } = useTimesheet()
+  const { state, dispatch, context, TimesheetContextProvider, hotkeysProps, t } = useTimesheet()
 
   return (
     <TimesheetContextProvider>

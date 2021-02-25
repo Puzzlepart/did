@@ -24,4 +24,3 @@ export interface ITimesheetParams {
 export * from './context'
 export * from './TimesheetPeriod'
 export * from './TimesheetScope'
-

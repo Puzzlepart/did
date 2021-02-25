@@ -7,17 +7,13 @@ import hotkeys from './hotkeys'
 import { useTimesheetReducer } from './reducer'
 import { SUBMITTING_PERIOD, UNSUBMITTING_PERIOD } from './reducer/actions'
 import $submitPeriod from './submitPeriod.gql'
-import {
-  ITimesheetContext,
-  ITimesheetParams,
-  TimesheetContext
-} from './types'
+import { ITimesheetContext, ITimesheetParams, TimesheetContext } from './types'
 import $unsubmitPeriod from './unsubmitPeriod.gql'
 import { useTimesheetQuery } from './useTimesheetQuery'
 
 /**
  * Hook for Timesheet
- * 
+ *
  * * Get history using useHistiry
  * * Get URL params using useParams
  * * Using reducer from /reducer
@@ -86,9 +82,7 @@ export function useTimesheet() {
     hotkeysProps,
     TimesheetContextProvider: ({ children }) => (
       <GlobalHotKeys {...hotkeysProps}>
-        <TimesheetContext.Provider value={context}>
-          {children}
-        </TimesheetContext.Provider>
+        <TimesheetContext.Provider value={context}>{children}</TimesheetContext.Provider>
       </GlobalHotKeys>
     ),
     t
