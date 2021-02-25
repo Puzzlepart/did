@@ -7,7 +7,7 @@ import MSGraphEvent from '../msgraph/types'
 type ProjectMatch = { id: string; key: string; customerKey: string }
 
 export default class {
-  constructor(private _data: ProjectsData) { }
+  constructor(private _data: ProjectsData) {}
 
   /**
    * Find project suggestions using findBestMatch from string-similarity
@@ -54,10 +54,7 @@ export default class {
    *
    * @returns an array of matches found in the inputStr
    */
-  private _searchString(
-    inputStr: string,
-    strictMode: boolean = true
-  ): ProjectMatch[] {
+  private _searchString(inputStr: string, strictMode: boolean = true): ProjectMatch[] {
     let regex = /((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<key>[\wæøåÆØÅ]{2,}))/gim
     if (strictMode)
       regex = /[\(\{\[]((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<key>[\wæøåÆØÅ]{2,}?))[\)\]\}]/gim

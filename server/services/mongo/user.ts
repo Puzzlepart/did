@@ -19,11 +19,11 @@ export class UserService extends MongoDocumentService<User> {
 
   /**
    * Replace id with _id
-   * 
-   * @param {User} user User 
+   *
+   * @param {User} user User
    */
   private _replaceId<T>(user: User): T {
-    return { ...omit(user, 'id'), _id: user.id } as unknown as T
+    return ({ ...omit(user, 'id'), _id: user.id } as unknown) as T
   }
 
   /**
@@ -85,9 +85,7 @@ export class UserService extends MongoDocumentService<User> {
    */
   public async addUsers(users: User[]) {
     try {
-      const result = await this.collection.insertMany(
-        users.map(u => this._replaceId(u))
-      )
+      const result = await this.collection.insertMany(users.map((u) => this._replaceId(u)))
       return result
     } catch (err) {
       throw err

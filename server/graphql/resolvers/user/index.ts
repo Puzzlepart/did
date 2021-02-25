@@ -19,7 +19,7 @@ export class UserResolver {
    * @param {MSGraphService} _msgraph MS Graph service
    * @param {MongoService} _mongo Mongo service
    */
-  constructor(private readonly _msgraph: MSGraphService, private readonly _mongo: MongoService) { }
+  constructor(private readonly _msgraph: MSGraphService, private readonly _mongo: MongoService) {}
 
   /**
    * Get current user
@@ -50,9 +50,7 @@ export class UserResolver {
    */
   @Authorized()
   @Query(() => [User], { description: 'Get users' })
-  users(
-    @Arg('query', () => UserQuery, { nullable: true }) query: UserQuery
-  ) {
+  users(@Arg('query', () => UserQuery, { nullable: true }) query: UserQuery) {
     return this._mongo.user.getUsers(query)
   }
 
@@ -81,7 +79,7 @@ export class UserResolver {
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Add users' })
   async addUsers(@Arg('users', () => [UserInput]) users: UserInput[]): Promise<BaseResult> {
-    users = users.map(user => ({
+    users = users.map((user) => ({
       ...user,
       role: 'User'
     }))

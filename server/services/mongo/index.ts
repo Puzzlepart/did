@@ -23,7 +23,7 @@ export class MongoService {
   constructor(
     @Inject('CONTEXT') private readonly context: Context,
     private readonly _cache?: CacheService
-  ) { }
+  ) {}
 
   public get user(): UserService {
     return new UserService(this.context.db)

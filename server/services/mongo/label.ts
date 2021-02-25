@@ -20,7 +20,7 @@ export class LabelService extends MongoDocumentService<Label> {
    * @param {Label} label Label
    */
   private _generateId(label: Label) {
-    return label.name.replace(/[^A-Z0-9]/ig, '').toLowerCase()
+    return label.name.replace(/[^A-Z0-9]/gi, '').toLowerCase()
   }
 
   /**

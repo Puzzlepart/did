@@ -135,10 +135,7 @@ export class TimesheetService {
   private _connectEvents({ events, projects, dateFormat, locale }: IConnectEventsParams) {
     return events.map((event) => ({
       ...event,
-      project: find(
-        projects,
-        ({ _id }) => _id === event.projectId
-      ),
+      project: find(projects, ({ _id }) => _id === event.projectId),
       date: DateUtils.formatDate(event.startDateTime, dateFormat, locale)
     }))
   }

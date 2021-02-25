@@ -43,7 +43,7 @@ export class ReportsResolver {
     return timeEntries.reduce(($, entry) => {
       const resource = find(users, (user) => user.id === entry.userId)
       if (!entry.projectId) return $
-      const project = find(projects, ({_id}) => {
+      const project = find(projects, ({ _id }) => {
         return _id === entry.projectId
       })
       const customer = find(customers, (c) => c.key === first(entry.projectId.split(' ')))

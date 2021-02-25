@@ -74,9 +74,7 @@ export default (client: MongoClient) => {
         tokenParams: any,
         done: VerifyCallback
       ) => {
-        const subscription_service = new SubscriptionService(
-          client.db(env('MONGO_DB_DB_NAME'))
-        )
+        const subscription_service = new SubscriptionService(client.db(env('MONGO_DB_DB_NAME')))
         subscription_service
           .getById(_json.tid)
           .then((s) => {

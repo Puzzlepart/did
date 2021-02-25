@@ -15,7 +15,7 @@ export class ProjectResolver {
    * @param {MongoService} _mongo Mongo service
    * @param {MSGraphService} _msgraph MSGraphService
    */
-  constructor(private readonly _mongo: MongoService, private readonly _msgraph: MSGraphService) { }
+  constructor(private readonly _mongo: MongoService, private readonly _msgraph: MSGraphService) {}
 
   /**
    * Get projects
@@ -47,8 +47,7 @@ export class ProjectResolver {
     if (update) {
       const success = await this._mongo.project.updateProject(p)
       return { success }
-    }
-    else {
+    } else {
       const id = await this._mongo.project.addProject(p)
       if (options.createOutlookCategory) {
         await this._msgraph.createOutlookCategory(id)

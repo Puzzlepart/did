@@ -18,7 +18,7 @@ export class ProjectService extends MongoDocumentService<Project> {
 
   /**
    * Constructor for MongoDatabase
-   * 
+   *
    * @param {MongoDatabase} db Mongo database
    * @param {CacheService} _cache Cache service
    */
@@ -31,7 +31,7 @@ export class ProjectService extends MongoDocumentService<Project> {
 
   /**
    * Add project
-   * 
+   *
    * Returns the ID of the added project
    *
    * @param {Project} project Project to add
@@ -53,7 +53,7 @@ export class ProjectService extends MongoDocumentService<Project> {
 
   /**
    * Update project
-   * 
+   *
    * Returns true if the operation was successful
    *
    * @param {Project} project Project to update
@@ -70,8 +70,8 @@ export class ProjectService extends MongoDocumentService<Project> {
   }
 
   /**
-   * Get projects, customers and labels. 
-   * 
+   * Get projects, customers and labels.
+   *
    * Projects are sorted by the name property
    *
    * Connects labels and customer to projects
@@ -106,4 +106,3 @@ export class ProjectService extends MongoDocumentService<Project> {
     }
   }
 }
-
