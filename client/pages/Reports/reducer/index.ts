@@ -1,11 +1,11 @@
 import { createReducer, current } from '@reduxjs/toolkit'
 import { IAppContext } from 'AppContext'
-import { INIT } from 'components/Autocomplete/reducer'
 import get from 'get-value'
 import { getValue } from 'helpers'
 import { filter, find, omit } from 'underscore'
 import { IReportsParams, IReportsQuery, IReportsState } from '../types'
 import {
+  INIT,
   ADD_FILTER,
   CHANGE_QUERY,
   CLEAR_FILTERS,
