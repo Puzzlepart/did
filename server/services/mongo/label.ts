@@ -1,17 +1,17 @@
 import {
-  Db as MongoDatabase,
   DeleteWriteOpResultObject,
   FilterQuery,
   InsertOneWriteOpResult,
   WithId
 } from 'mongodb'
 import { pick } from 'underscore'
+import { Context } from '../../graphql/context'
 import { LabelObject as Label } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 
 export class LabelService extends MongoDocumentService<Label> {
-  constructor(db: MongoDatabase) {
-    super(db, 'labels')
+  constructor(context: Context) {
+    super(context, 'labels')
   }
 
   /**

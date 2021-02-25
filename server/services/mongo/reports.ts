@@ -1,9 +1,9 @@
-import { Db as MongoDatabase, FilterQuery } from 'mongodb'
+import { FilterQuery } from 'mongodb'
 import { find, first, omit } from 'underscore'
 import { ProjectService, UserService } from '.'
 import { DateObject } from '../../../shared/utils/date.dateObject'
+import { Context } from '../../graphql/context'
 import { ReportsQuery, TimeEntry } from '../../graphql/resolvers/types'
-import { CacheScope, CacheService } from '../cache'
 import { MongoDocumentService } from './@document'
 
 type Report = TimeEntry[]
@@ -15,15 +15,12 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
   /**
    * Constructor for ReportsService
    *
-   * @param {MongoDatabase} db Mongo database
-   * @param {CacheService} _cache Cache service
+   * @param {Context} context Context
    */
-  constructor(db: MongoDatabase, private _cache: CacheService) {
-    super(db, 'time_entries')
-    this._project = new ProjectService(db, _cache)
-    this._user = new UserService(db)
-    this._cache.prefix = ReportsService.name
-    this._cache.scope = CacheScope.SUBSCRIPTION
+  constructor(context: Context) {
+    super(context, 'time_entries')
+    this._project = new ProjectService(context)
+    this._user = new UserService(context)
   }
 
   /**
@@ -34,10 +31,13 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
    */
   public async getReport(query: ReportsQuery, sortAsc: boolean): Promise<Report> {
     try {
-      let cacheKey = `getreports/${query.preset}`
-      if (query?.userId) cacheKey += `/${query.userId}`
-      if (query?.projectId) cacheKey += `/${query.projectId}`
-      const cacheValue = await this._cache.get<Report>(cacheKey)
+      const cacheKeys = [
+        'getreport',
+        query.preset,
+        query?.userId,
+        query?.projectId
+      ]
+      const cacheValue = await this.cache.get<Report>(cacheKeys)
       if (cacheValue) return cacheValue
       const d = new DateObject()
       let q: FilterQuery<TimeEntry> = {}
@@ -94,7 +94,7 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
           }
           return $
         }, [])
-      await this._cache.set(cacheKey, report, 900)
+      await this.cache.set(cacheKeys, report, 900)
       return report
     } catch (err) {
       throw err

@@ -74,11 +74,11 @@ export default (client: MongoClient) => {
         tokenParams: any,
         done: VerifyCallback
       ) => {
-        const subscription_service = new SubscriptionService(client.db(env('MONGO_DB_DB_NAME')))
+        const subscription_service = new SubscriptionService({ db: client.db(env('MONGO_DB_DB_NAME')) })
         subscription_service
           .getById(_json.tid)
           .then((s) => {
-            new UserService(client.db(s.db))
+            new UserService({ db: client.db(s.db) })
               .getById(_json.oid)
               .then((u) => {
                 return done(null, {

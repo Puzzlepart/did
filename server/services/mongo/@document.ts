@@ -1,15 +1,22 @@
-import { Collection, Db as MongoDatabase, FilterQuery, SortOptionObject } from 'mongodb'
+import { Collection, FilterQuery, SortOptionObject } from 'mongodb'
+import { Context } from '../../graphql/context'
+import { CacheService } from '../cache'
 
 export class MongoDocumentService<T> {
+  public cache: CacheService = null
   public collection: Collection<T>
   /**
    * Constructor
-   *
-   * @param {MongoDatabase} db Mongo database
+   * 
+   * @param {Context} context Context
    * @param {string} collectionName Colletion name
+   * @param {string} cachePrefix Cache prefix
    */
-  constructor(db: MongoDatabase, public collectionName: string) {
-    this.collection = db.collection(collectionName)
+  constructor(private readonly context: Context, public collectionName: string, public cachePrefix?: string) {
+    this.collection = context.db.collection(collectionName)
+    if (cachePrefix) {
+      this.cache = new CacheService(this.context, cachePrefix)
+    }
   }
 
   /**

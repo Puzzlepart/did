@@ -1,10 +1,10 @@
-import { Db as MongoDatabase } from 'mongodb'
+import { Context } from '../../graphql/context'
 import { Subscription } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 
 export class SubscriptionService extends MongoDocumentService<Subscription> {
-  constructor(db: MongoDatabase) {
-    super(db, 'subscriptions')
+  constructor(context: Context) {
+    super(context, 'subscriptions')
   }
 
   /**

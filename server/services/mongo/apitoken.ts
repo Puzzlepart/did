@@ -1,13 +1,14 @@
-import { Db as MongoDatabase, FilterQuery } from 'mongodb'
-import env from '../../utils/env'
-import { ApiToken } from '../../graphql/resolvers/types'
-import { MongoDocumentService } from './@document'
 import { sign } from 'jsonwebtoken'
+import { FilterQuery } from 'mongodb'
 import { omit } from 'underscore'
+import { Context } from '../../graphql/context'
+import { ApiToken } from '../../graphql/resolvers/types'
+import env from '../../utils/env'
+import { MongoDocumentService } from './@document'
 
 export class ApiTokenService extends MongoDocumentService<ApiToken> {
-  constructor(db: MongoDatabase) {
-    super(db, 'api_tokens')
+  constructor(context: Context) {
+    super(context, 'api_tokens')
   }
 
   /**

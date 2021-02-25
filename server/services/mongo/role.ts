@@ -1,12 +1,14 @@
-import { Db as MongoDatabase, FilterQuery } from 'mongodb'
+import { FilterQuery } from 'mongodb'
 import { pick } from 'underscore'
+import { Context } from '../../graphql/context'
 import { Role } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 
 export class RoleService extends MongoDocumentService<Role> {
-  constructor(db: MongoDatabase) {
-    super(db, 'roles')
+  constructor(context: Context) {
+    super(context, 'roles')
   }
+
 
   /**
    * Get roles
