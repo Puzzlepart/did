@@ -1,5 +1,5 @@
 
-  query($query: TimeEntriesQuery!) {
+  query($query: ReportsQuery!) {
     timeentries(query: $query) {
       title
       duration

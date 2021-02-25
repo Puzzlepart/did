@@ -50,7 +50,7 @@ export class MongoService {
   }
 
   public get reports(): ReportsService {
-    return new ReportsService(this.context.db)
+    return new ReportsService(this.context.db, this._cache)
   }
 
   public get apiToken(): ApiTokenService {

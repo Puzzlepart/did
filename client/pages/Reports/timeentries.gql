@@ -1,4 +1,4 @@
-query($query: TimeEntriesQuery!, $sortAsc: Boolean) {
+query($query: ReportsQuery!, $sortAsc: Boolean) {
   timeentries(query: $query, sortAsc: $sortAsc) {
     title
     duration

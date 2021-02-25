@@ -1,22 +1,44 @@
 import { Db as MongoDatabase, FilterQuery } from 'mongodb'
-import { omit } from 'underscore'
+import { find, first, omit } from 'underscore'
+import { ProjectService, UserService } from '.'
 import { DateObject } from '../../../shared/utils/date.dateObject'
-import { TimeEntriesQuery, TimeEntry } from '../../graphql/resolvers/types'
+import { ReportsQuery, TimeEntry } from '../../graphql/resolvers/types'
+import { CacheScope, CacheService } from '../cache'
 import { MongoDocumentService } from './@document'
 
+type Report = TimeEntry[]
+
 export class ReportsService extends MongoDocumentService<TimeEntry> {
-  constructor(db: MongoDatabase) {
+  private _project: ProjectService
+  private _user: UserService
+
+  /**
+   * Constructor for ReportsService
+   *
+   * @param {MongoDatabase} db Mongo database
+   * @param {CacheService} _cache Cache service
+   */
+  constructor(db: MongoDatabase, private _cache: CacheService) {
     super(db, 'time_entries')
+    this._project = new ProjectService(db, _cache)
+    this._user = new UserService(db)
+    this._cache.prefix = ReportsService.name
+    this._cache.scope = CacheScope.SUBSCRIPTION
   }
 
   /**
-   * Get time entries
+   * Get report
    *
-   * @param {TimeEntriesQuery} query Query
+   * @param {ReportsQuery} query Query
    * @param {boolean} sortAsc Sort ascending
    */
-  public async getTimeEntries(query: TimeEntriesQuery, sortAsc: boolean): Promise<TimeEntry[]> {
+  public async getReport(query: ReportsQuery, sortAsc: boolean): Promise<Report> {
     try {
+      let cacheKey = `getreports/${query.preset}`
+      if (query?.userId) cacheKey += `/${query.userId}`
+      if (query?.projectId) cacheKey += `/${query.projectId}`
+      const cacheValue = await this._cache.get<Report>(cacheKey)
+      if (cacheValue) return cacheValue
       const d = new DateObject()
       let q: FilterQuery<TimeEntry> = {}
       switch (query.preset) {
@@ -44,13 +66,36 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
           break
       }
       q = omit({ ...q, ...query }, 'preset')
-      const timeEntries = await this.find(q)
-      const timeEntriesSorted = timeEntries.sort(({ startDateTime: a }, { startDateTime: b }) => {
-        return sortAsc
-          ? new Date(a).getTime() - new Date(b).getTime()
-          : new Date(b).getTime() - new Date(a).getTime()
-      })
-      return timeEntriesSorted
+      const [timeEntries, { projects, customers }, users] = await Promise.all([
+        this.find(q),
+        this._project.getProjectsData(),
+        this._user.getUsers()
+      ])
+      const report: Report = timeEntries
+        .sort(({ startDateTime: a }, { startDateTime: b }) => {
+          return sortAsc
+            ? new Date(a).getTime() - new Date(b).getTime()
+            : new Date(b).getTime() - new Date(a).getTime()
+        })
+        .reduce(($, entry) => {
+          const resource = find(users, (user) => user.id === entry.userId)
+          if (!entry.projectId) return $
+          const project = find(projects, ({ _id }) => {
+            return _id === entry.projectId
+          })
+          const customer = find(customers, (c) => c.key === first(entry.projectId.split(' ')))
+          if (project && customer && resource) {
+            $.push({
+              ...entry,
+              project,
+              customer,
+              resource
+            })
+          }
+          return $
+        }, [])
+      await this._cache.set(cacheKey, report, 120)
+      return report
     } catch (err) {
       throw err
     }

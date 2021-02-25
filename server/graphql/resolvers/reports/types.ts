@@ -61,7 +61,7 @@ export class TimeEntry {
 }
 
 @InputType()
-export class TimeEntriesQuery {
+export class ReportsQuery {
   @Field({ nullable: true })
   preset?: string
 
