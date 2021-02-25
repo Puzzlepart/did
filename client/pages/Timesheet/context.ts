@@ -1,7 +1,7 @@
 import { ApolloQueryResult } from '@apollo/client'
+import { AnyAction } from '@reduxjs/toolkit'
 import { TFunction } from 'i18next'
-import { createContext } from 'react'
-import { TimesheetAction } from './reducer'
+import { createContext, Dispatch } from 'react'
 import { ITimesheetState } from './types'
 
 export interface ITimesheetContext extends ITimesheetState {
@@ -34,7 +34,7 @@ export interface ITimesheetContext extends ITimesheetState {
   /**
    * Dispatch an action
    */
-  dispatch?: React.Dispatch<TimesheetAction>
+  dispatch?: Dispatch<AnyAction>
 
   /**
    * Refetch data
