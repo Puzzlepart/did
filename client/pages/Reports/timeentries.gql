@@ -16,6 +16,7 @@ query($query: ReportsQuery!, $sortAsc: Boolean) {
       name
     }
     resource {
+      id
       givenName
       surname
       mail

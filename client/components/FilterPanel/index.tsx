@@ -1,15 +1,18 @@
 import { Panel } from 'office-ui-fabric'
-import React, { useEffect } from 'react'
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FilterItem } from './FilterItem'
 import { IFilter, IFilterItem } from './Filters'
 import { IFilterPanelProps } from './types'
+import styles from './FilterPanel.module.scss'
 
 export const FilterPanel = (props: IFilterPanelProps) => {
   const [filters, setFilters] = useState<IFilter[]>(
     props.filters.map((f) => f.initialize(props.items))
   )
-  useEffect(() => setFilters(props.filters.map((f) => f.initialize(props.items))), [props.items])
+  useEffect(() => setFilters(props.filters.map((f) => f.initialize(props.items))), [
+    props.items,
+    props.filters
+  ])
 
   /**
    * On filter updated
@@ -32,7 +35,14 @@ export const FilterPanel = (props: IFilterPanelProps) => {
   }
 
   return (
-    <Panel isOpen={props.isOpen} isLightDismiss={true} onDismiss={props.onDismiss}>
+    <Panel
+      isOpen={props.isOpen}
+      className={styles.root}
+      headerText={props.headerText}
+      headerClassName={styles.header}
+      isLightDismiss={true}
+      onDismiss={props.onDismiss}>
+      {props.children}
       {filters
         .filter((filter) => filter.items.length > 1)
         .map((filter) => (

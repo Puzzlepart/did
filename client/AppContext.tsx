@@ -11,16 +11,23 @@ export class ContextUser {
   public role: Role
   public mail: string
   public preferredLanguage: string
+  public configuration: { [key: string]: any }
 
-  constructor(user?: User) {
-    if (!user) {
+  /**
+   * Constructor
+   *
+   * @param {User} _user User object
+   */
+  constructor(_user?: User) {
+    if (!_user) {
       this.preferredLanguage = DEFAULT_LANGUAGE
     } else {
-      this.id = user.id
-      this.displayName = user.displayName
-      this.mail = user.mail
-      this.role = user.role as Role
-      this.preferredLanguage = user.preferredLanguage
+      this.id = _user.id
+      this.displayName = _user.displayName
+      this.mail = _user.mail
+      this.role = _user.role as Role
+      this.preferredLanguage = _user.preferredLanguage
+      this.configuration = JSON.parse(_user.configuration)
     }
   }
 

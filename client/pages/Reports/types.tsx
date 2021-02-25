@@ -23,6 +23,10 @@ export interface IGroupByOption extends IContextualMenuItem {
   props: IListGroups
 }
 
+export interface IReportsSavedFilter extends IContextualMenuItem {
+  values: { [key: string]: any }
+}
+
 export interface IReportsState {
   /**
    * Time entries
@@ -53,6 +57,21 @@ export interface IReportsState {
    * Loading
    */
   loading?: boolean
+
+  /**
+   * Is filtered
+   */
+  isFiltered?: boolean
+
+  /**
+   * Saved filters
+   */
+  savedFilters?: { [key: string]: IReportsSavedFilter }
+
+  /**
+   * Active filter
+   */
+  filter?: IReportsSavedFilter
 }
 
 /**

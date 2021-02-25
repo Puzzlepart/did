@@ -66,7 +66,7 @@ export interface IListProps<T = any> extends React.HTMLProps<HTMLDivElement> {
   checkboxVisibility?: CheckboxVisibility
 
   /**
-   * Fade in props
+   * Fade in properties used by the FadeIn component (react-fade-in)
    *
    * [delay, transitionDuration]
    */

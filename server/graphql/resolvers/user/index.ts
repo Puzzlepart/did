@@ -86,6 +86,18 @@ export class UserResolver {
     await this._mongo.user.addUsers(users)
     return { success: true, error: null }
   }
+
+  /**
+   * Update user configuration
+   *
+   * @param {string} configuration Configuration
+   */
+  @Authorized<IAuthOptions>({ userContext: true })
+  @Mutation(() => BaseResult, { description: 'Update user configuration' })
+  async updateUserConfiguration(@Arg('configuration') configuration: string): Promise<BaseResult> {
+    await this._mongo.user.updateCurrentUserConfiguration(configuration)
+    return { success: true }
+  }
 }
 
 export * from './types'
