@@ -161,7 +161,8 @@
     "saveFilterText": "Lagre filter",
     "filterNamePlaceholder": "Skriv inn filternavnet ...",
     "cancelSaveFilterText": "Avbryt",
-    "removeSelectedFilterText": "Fjern valgt filter"
+    "removeSelectedFilterText": "Fjern valgt filter",
+    "filterPanelHeaderText": "Filtre"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",
