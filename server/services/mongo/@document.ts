@@ -16,7 +16,7 @@ export class MongoDocumentService<T> {
    * @param {string} cachePrefix Cache prefix
    */
   constructor(
-    private readonly context: Context,
+    public readonly context: Context,
     public collectionName: string,
     public cachePrefix?: string
   ) {
