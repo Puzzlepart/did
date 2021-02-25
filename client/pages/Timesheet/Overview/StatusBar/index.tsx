@@ -2,6 +2,7 @@ import { UserMessage } from 'components/UserMessage'
 import { IUserMessageProps } from 'components/UserMessage/types'
 import DateUtils from 'DateUtils'
 import { MessageBarType, Shimmer } from 'office-ui-fabric'
+import { CLEAR_IGNORES } from 'pages/Timesheet/reducer/actions'
 import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
@@ -74,7 +75,7 @@ export const StatusBar = () => {
                 ignored_count: selectedPeriod.ignoredEvents.length
               })}
             </span>
-            <a href='#' onClick={() => dispatch({ type: 'CLEAR_IGNORES' })}>
+            <a href='#' onClick={() => dispatch(CLEAR_IGNORES())}>
               {t('timesheet.undoIgnoreText')}
             </a>
           </p>

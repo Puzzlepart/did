@@ -1,6 +1,7 @@
 import { DefaultButton, IContextualMenuItem } from 'office-ui-fabric'
 import * as React from 'react'
 import { ITimesheetContext } from '../context'
+import { CHANGE_PERIOD } from '../reducer/actions'
 import styles from './ActionBar.module.scss'
 
 export default ({
@@ -15,7 +16,7 @@ export default ({
     onRender: () => (
       <DefaultButton
         iconProps={{ iconName: 'DateTime' }}
-        onClick={() => dispatch({ type: 'CHANGE_PERIOD', payload: period.id })}
+        onClick={() => dispatch(CHANGE_PERIOD({ id: period.id }))}
         text={period.getName(t, true)}
         styles={{ root: { height: 44, marginLeft: 4, borderRadius: 15 } }}
         className={styles.selectPeriodButton}

@@ -1,6 +1,7 @@
 import { TFunction } from 'i18next'
 import { IContextualMenuItem } from 'office-ui-fabric'
 import { ITimesheetContext } from '../context'
+import { SET_SCOPE } from '../reducer/actions'
 import { TimesheetScope } from '../types'
 import styles from './ActionBar.module.scss'
 
@@ -34,10 +35,11 @@ export default (context: ITimesheetContext) =>
         disabled: cmd.disabled(context),
         iconProps: { iconName: cmd.iconName, className: styles.actionBarIcon },
         onClick: () =>
-          context.dispatch({
-            type: 'SET_SCOPE',
-            scope: cmd.add ? context.scope.set(cmd?.add) : new TimesheetScope(cmd.date)
-          }),
+          context.dispatch(
+            SET_SCOPE({
+              scope: cmd.add ? context.scope.set(cmd?.add) : new TimesheetScope(cmd.date)
+            })
+          ),
         title: cmd.title(context.t)
       } as IContextualMenuItem)
   )

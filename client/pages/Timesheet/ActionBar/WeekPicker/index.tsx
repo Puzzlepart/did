@@ -9,6 +9,7 @@ import {
   TextField
 } from 'office-ui-fabric'
 import { TimesheetContext } from 'pages/Timesheet'
+import { SET_SCOPE } from 'pages/Timesheet/reducer/actions'
 import { TimesheetScope } from 'pages/Timesheet/types'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -53,7 +54,7 @@ export const WeekPicker = () => {
           <FocusTrapZone isClickableOutsideFocusTrap={true}>
             <Calendar
               onSelectDate={(date) => {
-                dispatch({ type: 'SET_SCOPE', scope: new TimesheetScope(date) })
+                dispatch(SET_SCOPE({ scope: new TimesheetScope(date) }))
                 setCalendar(null)
               }}
               firstDayOfWeek={DayOfWeek.Monday}
