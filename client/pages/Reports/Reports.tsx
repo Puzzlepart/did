@@ -6,30 +6,27 @@ import { isEmpty } from 'underscore'
 import getColumns from './columns'
 import commandBar from './commandBar'
 import { ReportsContext } from './context'
-import initFilters from './filters'
 import {
   CHANGE_QUERY,
   FILTERS_UPDATED,
   TOGGLE_FILTER_PANEL
-} from './reducer'
+} from './reducer/actions'
 import styles from './Reports.module.scss'
 import { SaveFilterForm } from './SaveFilterForm'
 import { useReports } from './useReports'
 import { useUpdateUserConfiguration } from './useUpdateUserConfiguration'
 
 export const Reports = () => {
-  const { state, dispatch, params, queries, t } = useReports()
+  const { state, dispatch, params, queries, filters, t } = useReports()
   useUpdateUserConfiguration({
     'reports.filters': state.savedFilters
   })
-  // useLayoutEffect(() => history.push(`/reports/${state.query?.key || ''}`), [state.query])
 
-  const filters = useMemo(() => initFilters(state.filter, t), [state.filter])
-  const ctxValue = useMemo(() => ({ state, dispatch, t }), [state])
+  const context = useMemo(() => ({ state, dispatch, t }), [state])
 
   return (
     <div className={styles.root}>
-      <ReportsContext.Provider value={ctxValue}>
+      <ReportsContext.Provider value={context}>
         <Pivot
           defaultSelectedKey={params.query || 'default'}
           onLinkClick={(item) => dispatch(CHANGE_QUERY({ key: item.props.itemKey }))}>
@@ -58,7 +55,7 @@ export const Reports = () => {
                     }
                   }}
                   columns={getColumns({ isResizable: true }, t)}
-                  commandBar={commandBar(ctxValue)}
+                  commandBar={commandBar(context)}
                 />
                 <UserMessage
                   hidden={!isEmpty(state.timeentries) || state.loading || !state.query}

@@ -3,8 +3,11 @@ import { AppContext } from 'AppContext'
 import { useContext, useLayoutEffect, useMemo, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
+import initFilters from './filters'
 import { getQueries } from './queries'
-import createReducer, { DATA_UPDATED, INIT } from './reducer'
+import createReducer from './reducer'
+import { DATA_UPDATED, INIT } from './reducer/actions'
+
 import $timeentries from './timeentries.gql'
 import { IReportsParams } from './types'
 
@@ -34,12 +37,15 @@ export function useReports() {
     })
     useLayoutEffect(() => dispatch(INIT()), [])
     useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query])
+    useLayoutEffect(() => history.push(`/reports/${state.query?.key || ''}`), [state.query])
+    const filters = useMemo(() => initFilters(state.filter, t), [state.filter])
     return {
         state,
         dispatch,
         params,
         queries,
         history,
+        filters,
         t
     }
 }

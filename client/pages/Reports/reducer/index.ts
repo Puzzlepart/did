@@ -1,24 +1,11 @@
-import { QueryResult } from '@apollo/client'
-import { createAction, createReducer, current } from '@reduxjs/toolkit'
+import { createReducer, current } from '@reduxjs/toolkit'
 import { IAppContext } from 'AppContext'
-import { IFilter } from 'components/FilterPanel'
-import { IListGroups } from 'components/List/types'
+import { INIT } from 'components/Autocomplete/reducer'
 import get from 'get-value'
 import { getValue } from 'helpers'
-import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
 import { filter, find, omit } from 'underscore'
-import { IReportsParams, IReportsQuery, IReportsSavedFilter, IReportsState } from './types'
-
-export const INIT = createAction('INIT')
-export const TOGGLE_FILTER_PANEL = createAction('TOGGLE_FILTER_PANEL')
-export const DATA_UPDATED = createAction<{ query: QueryResult }>('DATA_UPDATED')
-export const FILTERS_UPDATED = createAction<{ filters: IFilter[] }>('FILTERS_UPDATED')
-export const CHANGE_QUERY = createAction<{ key: string }>('FILTER_UPDATED')
-export const SET_GROUP_BY = createAction<{ groupBy: IListGroups }>('SET_GROUP_BY')
-export const SET_FILTER = createAction<{ filter: IReportsSavedFilter }>('SET_FILTER')
-export const ADD_FILTER = createAction<{ model: IContextualMenuItem }>('ADD_FILTER')
-export const CLEAR_FILTERS = createAction('CLEAR_FILTERS')
-export const REMOVE_SELECTED_FILTER = createAction('REMOVE_SELECTED_FILTER')
+import { IReportsParams, IReportsQuery, IReportsState } from '../types'
+import { ADD_FILTER, CHANGE_QUERY, CLEAR_FILTERS, DATA_UPDATED, FILTERS_UPDATED, REMOVE_SELECTED_FILTER, SET_FILTER, SET_GROUP_BY, TOGGLE_FILTER_PANEL } from './actions'
 
 interface ICreateReducerParams {
   /**
@@ -37,6 +24,9 @@ interface ICreateReducerParams {
   app: IAppContext
 }
 
+/**
+ * Creating reducer for Reports using @reduxjs/toolkit
+ */
 export default ({ app, params, queries }: ICreateReducerParams) =>
   createReducer<IReportsState>(
     {},

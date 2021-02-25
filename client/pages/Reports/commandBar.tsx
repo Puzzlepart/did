@@ -8,7 +8,7 @@ import { isEmpty, omit, pick } from 'underscore'
 import { exportExcel } from 'utils/exportExcel'
 import getColumns from './columns'
 import { IReportsContext } from './context'
-import { CLEAR_FILTERS, REMOVE_SELECTED_FILTER, SET_FILTER, SET_GROUP_BY, TOGGLE_FILTER_PANEL } from './reducer'
+import { CLEAR_FILTERS, REMOVE_SELECTED_FILTER, SET_FILTER, SET_GROUP_BY, TOGGLE_FILTER_PANEL } from './reducer/actions'
 import { SaveFilterForm } from './SaveFilterForm'
 import { getGroupByOptions } from './types'
 /**

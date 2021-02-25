@@ -6,7 +6,7 @@ import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { first } from 'underscore'
 import { ReportsContext } from '../context'
-import { ADD_FILTER } from '../reducer'
+import { ADD_FILTER } from '../reducer/actions'
 import styles from './SaveFilterForm.module.scss'
 import { ISaveFilterFormProps } from './types'
 
