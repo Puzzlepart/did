@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@apollo/client'
 import { AppContext } from 'AppContext'
 import { HotkeyModal } from 'components'
 import { Pivot, PivotItem } from 'office-ui-fabric'
-import React, { useContext, useEffect, useMemo, useReducer } from 'react'
+import React, { FunctionComponent, useContext, useLayoutEffect, useMemo, useReducer } from 'react'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
@@ -11,7 +11,7 @@ import {
   TimesheetOptions,
   TimesheetPeriodObject,
   TimesheetQuery
-} from '../../../server/api/graphql/resolvers/types'
+} from '../../../server/graphql/resolvers/types'
 import { ActionBar } from './ActionBar'
 import AllocationView from './AllocationView'
 import { ErrorBar } from './ErrorBar'
@@ -31,7 +31,7 @@ import {
 } from './types'
 import $unsubmitPeriod from './unsubmitPeriod.gql'
 
-export const Timesheet: React.FunctionComponent = () => {
+export const Timesheet: FunctionComponent = () => {
   const app = useContext(AppContext)
   const { t } = useTranslation()
   const history = useHistory()
@@ -60,9 +60,9 @@ export const Timesheet: React.FunctionComponent = () => {
     errorPolicy: 'all'
   })
 
-  useEffect(() => dispatch({ type: 'DATA_UPDATED', payload: { query, t, params } }), [query])
+  useLayoutEffect(() => dispatch({ type: 'DATA_UPDATED', payload: { query, t, params } }), [query])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!state.selectedPeriod) return
     history.push(['/timesheet', state.selectedView, state.selectedPeriod.path].join('/'))
   }, [state.selectedView, state.selectedPeriod])

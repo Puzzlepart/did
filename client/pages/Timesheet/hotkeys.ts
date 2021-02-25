@@ -1,6 +1,7 @@
 import { TFunction } from 'i18next'
 import { GlobalHotKeysProps } from 'react-hotkeys'
 import { ITimesheetContext } from './context'
+import { TimesheetScope } from './TimesheetScope'
 
 export default (context: ITimesheetContext, t: TFunction): GlobalHotKeysProps => ({
   keyMap: {
@@ -26,7 +27,11 @@ export default (context: ITimesheetContext, t: TFunction): GlobalHotKeysProps =>
     }
   },
   handlers: {
-    GO_TO_CURRENT_WEEK: () => context.dispatch({ type: 'SET_SCOPE' }),
+    GO_TO_CURRENT_WEEK: () =>
+      context.dispatch({
+        type: 'SET_SCOPE',
+        scope: new TimesheetScope(new Date())
+      }),
     PREV_WEEK: () =>
       context.dispatch({
         type: 'SET_SCOPE',

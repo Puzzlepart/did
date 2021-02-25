@@ -1,6 +1,6 @@
 import { getValue } from 'helpers'
 import { unique, contains, indexOf } from 'underscore'
-import DateUtils from 'utils/date'
+import DateUtils from 'DateUtils'
 import { BaseFilter, IFilter } from './BaseFilter'
 
 export class MonthFilter extends BaseFilter {

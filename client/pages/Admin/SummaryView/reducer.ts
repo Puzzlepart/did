@@ -1,13 +1,11 @@
 import { IContextualMenuItem } from 'office-ui-fabric'
-import DateUtils from 'utils/date'
-import { ISummaryViewScope, ISummaryViewState } from './types'
+import { ISummaryViewRange, ISummaryViewScope, ISummaryViewState } from './types'
 
 export type SummaryViewAction =
   | { type: 'DATA_UPDATED'; payload: { timeentries: any[] } }
   | { type: 'CHANGE_TYPE'; payload: IContextualMenuItem }
-  | { type: 'CHANGE_RANGE'; payload: number }
-  | { type: 'CHANGE_YEAR'; payload: number }
   | { type: 'CHANGE_SCOPE'; payload: ISummaryViewScope }
+  | { type: 'SET_RANGE'; payload: ISummaryViewRange }
 
 export const reducer = (state: ISummaryViewState, action: SummaryViewAction): ISummaryViewState => {
   const newState: ISummaryViewState = { ...state }
@@ -24,15 +22,9 @@ export const reducer = (state: ISummaryViewState, action: SummaryViewAction): IS
       }
       break
 
-    case 'CHANGE_RANGE':
+    case 'SET_RANGE':
       {
-        newState.range = action.payload
-      }
-      break
-
-    case 'CHANGE_YEAR':
-      {
-        newState.year = action.payload
+        newState.range = { ...newState.range, ...action.payload }
       }
       break
 
@@ -45,7 +37,5 @@ export const reducer = (state: ISummaryViewState, action: SummaryViewAction): IS
     default:
       throw new Error()
   }
-  if (!DateUtils.isCurrentYear(undefined, state.year)) newState.endMonthIndex = 12
-  newState.endMonthIndex = DateUtils.getMonthIndex()
   return newState
 }

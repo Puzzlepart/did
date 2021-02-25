@@ -3,6 +3,8 @@ import { UserMessage } from 'components/UserMessage'
 import { MessageBarType } from 'office-ui-fabric'
 import React, { FunctionComponent, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
+import ReactMarkdown from 'react-markdown/with-html'
+import { LabelObject as Label } from 'types'
 import { isEmpty } from 'underscore'
 import { ProjectsContext } from '../../context'
 import styles from './Information.module.scss'
@@ -21,9 +23,15 @@ export const Information: FunctionComponent = () => {
           type={MessageBarType.warning}
         />
       )}
-      <div className={styles.description}>{state.selected.description}</div>
+      {state.selected.description && (
+        <ReactMarkdown
+          className={styles.description}
+          source={state.selected.description}
+          escapeHtml={false}
+        />
+      )}
       <div className={styles.labels}>
-        {state.selected.labels.map((label, idx) => (
+        {(state.selected.labels as Label[]).map((label, idx) => (
           <EntityLabel key={idx} label={label} size='medium' />
         ))}
       </div>

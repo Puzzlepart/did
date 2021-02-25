@@ -1,22 +1,25 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import session from 'express-session'
 import env from '../../utils/env'
-import createDebug from 'debug'
-const debug = createDebug('middleware/session')
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const connectAzureTables = require('connect-azuretables')(session)
+import redisClient from '../redis'
+const RedisStore = require('connect-redis')(session)
 
+/**
+ * Defines session configuration; we use Redis for the session store.
+ * "secret" will be used to create the session ID hash (the cookie id and the redis key value)
+ * "name" will show up as your cookie name in the browser
+ * "cookie" is provided by default; you can add it to add additional personalized options
+ * The "store" ttl is the expiration time for each Redis session ID, in seconds
+ */
 export default session({
   name: env('SESSION_NAME', 'connect.sid'),
-  store: connectAzureTables.create({
-    table: 'Sessions',
-    sessionTimeOut: parseInt(env('SESSION_TIMEOUT', '10080')),
-    logger: debug,
-    errorLogger: debug
+  store: new RedisStore({
+    client: redisClient,
+    ttl: 1209600
   }),
+  cookie: { secure: false },
   secret: env('SESSION_SIGNING_KEY'),
   resave: false,
   saveUninitialized: false,
-  rolling: true,
-  cookie: { secure: env('SESSION_SECURE', '0') === '1' },
-  unset: 'destroy'
+  rolling: false
 })

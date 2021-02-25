@@ -1,212 +1,107 @@
-import {
-  List,
-  SearchBox,
-  Label,
-  Icon,
-  FocusZone,
-  FocusZoneDirection,
-  Callout
-} from 'office-ui-fabric'
-import * as React from 'react'
-import { IAutocompleteProps, IAutocompleteState, ISuggestionItem } from '.'
+import { Callout, FocusZone, FocusZoneDirection, Label, List, SearchBox } from 'office-ui-fabric'
+import React, { useLayoutEffect, useMemo, useReducer, useRef } from 'react'
+import { isEmpty } from 'underscore'
+import { IAutocompleteProps } from '.'
 import styles from './Autocomplete.module.scss'
+import createReducer, {
+  DISMISS_CALLOUT,
+  INIT,
+  ON_KEY_DOWN,
+  ON_SEARCH,
+  RESET,
+  SET_SELECTED_INDEX
+} from './reducer'
+import { SuggestionItem } from './SuggestionItem'
 
-const KeyCodes = {
-  tab: 9 as const,
-  enter: 13 as const,
-  left: 37 as const,
-  up: 38 as const,
-  right: 39 as const,
-  down: 40 as const
-}
+export function Autocomplete<T = any>(props: IAutocompleteProps<T>) {
+  const reducer = useMemo(() => createReducer(), [])
+  const [state, dispatch] = useReducer(reducer, { selectedIndex: -1, suggestions: [] })
+  const field = useRef<HTMLDivElement>()
 
-export class Autocomplete<T = any> extends React.Component<
-  IAutocompleteProps<T>,
-  IAutocompleteState
-> {
-  public static defaultProps: Partial<IAutocompleteProps> = {
-    classNames: {
-      suggestionsCallout: styles.callout,
-      suggestionContainer: styles.suggestionContainer,
-      suggestion: styles.suggestion,
-      suggestionValue: styles.suggestionValue,
-      suggestionIcon: styles.suggestionIcon
-    }
-  }
-  private _containerElement = React.createRef<HTMLDivElement>()
+  useLayoutEffect(() => dispatch(INIT({ props })), [props])
 
-  constructor(props: IAutocompleteProps) {
-    super(props)
-    this.state = {
-      isSuggestionDisabled: false,
-      searchText: props.defaultSelectedItem?.displayValue || '',
-      selectedItem: props.defaultSelectedItem
-    }
-  }
+  const classNames = [styles.root, props.errorMessage && styles.hasError]
 
-  private onClick = (item: ISuggestionItem<T>) => {
-    this.props.onSelected(item)
-    this.setState({
-      selectedItem: item,
-      searchText: item.displayValue,
-      isSuggestionDisabled: false
-    })
-  }
+  const suggestions = useMemo(
+    () =>
+      state.suggestions.map((s, idx) => ({
+        ...s,
+        isSelected: idx === state.selectedIndex
+      })),
+    [state.suggestions, state.selectedIndex]
+  )
 
-  public render() {
-    const iconName = this.state.searchText
-      ? this.state.selectedItem?.iconName || 'Search'
-      : 'Search'
-    return (
-      <div
-        ref={this._containerElement}
-        className={`${styles.root} ${this.props.className}`}
-        style={{ width: this.props.width }}
-        onKeyDown={this.onKeyDown}>
-        {this.props.label && <Label required={this.props.required}>{this.props.label}</Label>}
+  return (
+    <div
+      className={classNames.join(' ')}
+      onKeyDown={(event) =>
+        dispatch(
+          ON_KEY_DOWN({
+            key: event.which,
+            onEnter: (item) => props.onSelected(item)
+          })
+        )
+      }>
+      {props.label && (
+        <Label disabled={props.disabled} required={props.required}>
+          {props.label}
+        </Label>
+      )}
+      <div ref={field}>
         <SearchBox
-          iconProps={{ iconName }}
-          value={this.state.searchText}
-          placeholder={this.props.placeholder}
-          disabled={this.props.disabled}
-          onSearch={this.onSearch}
+          className={styles.field}
+          value={state.value}
+          iconProps={{ iconName: state.selectedItem?.iconName || 'Search' }}
+          placeholder={props.placeholder}
+          disabled={props.disabled}
           autoComplete='off'
           autoCorrect='off'
-          onClear={this.props.onClear}
-          onChange={(_event, searchText) => {
-            searchText.trim() !== '' ? this.showSuggestionCallOut() : this.hideSuggestionCallOut()
-            this.setState({ searchText })
+          onClear={() => {
+            dispatch(RESET())
+            props.onClear()
           }}
+          onChange={(_event, searchTerm) => dispatch(ON_SEARCH({ searchTerm }))}
         />
-        {this.renderSuggestions()}
-        <span>
-          <span hidden={!this.props.description} className={styles.description}>
-            {this.props.description}
-          </span>
-          <div hidden={!this.props.errorMessage} role='alert'>
-            <p className={styles.errorMessage}>
-              <span>{this.props.errorMessage}</span>
-            </p>
-          </div>
-        </span>
       </div>
-    )
-  }
-
-  private onSearch(enteredEntityValue: string) {
-    if (!this.props.searchCallback) return
-    this.props.searchCallback(enteredEntityValue.trim())
-  }
-
-  private renderSuggestions = () => {
-    if (!this._containerElement.current) return null
-    return (
+      <div hidden={!props.description} className={styles.description}>
+        {props.description}
+      </div>
+      <div hidden={!props.errorMessage} role='alert'>
+        <p className={styles.errorMessage}>
+          <span>{props.errorMessage}</span>
+        </p>
+      </div>
       <Callout
-        id='SuggestionContainer'
-        className={this.props.classNames.suggestionsCallout}
         gapSpace={2}
         alignTargetEdge={true}
-        onDismiss={() => this.hideSuggestionCallOut()}
-        hidden={!this.state.isSuggestionDisabled}
-        calloutMaxHeight={300}
-        style={{ width: this._containerElement.current.clientWidth }}
-        target={this._containerElement.current}
+        hidden={isEmpty(state.suggestions)}
+        onDismiss={() => dispatch(DISMISS_CALLOUT({ item: null }))}
+        calloutMaxHeight={props.maxHeight || 450}
+        style={{ width: field.current?.clientWidth }}
+        target={field?.current}
         directionalHint={5}
         isBeakVisible={false}>
-        {this.renderSuggestionList()}
+        <div>
+          <FocusZone direction={FocusZoneDirection.vertical}>
+            <List
+              tabIndex={0}
+              items={suggestions}
+              onRenderCell={(item, idx) => (
+                <SuggestionItem
+                  key={item.key}
+                  item={item}
+                  itemIcons={props.itemIcons}
+                  onClick={() => {
+                    dispatch(DISMISS_CALLOUT({ item }))
+                    props.onSelected(item)
+                  }}
+                  onMouseOver={() => dispatch(SET_SELECTED_INDEX({ index: idx }))}
+                />
+              )}
+            />
+          </FocusZone>
+        </div>
       </Callout>
-    )
-  }
-
-  private renderSuggestionList = () => {
-    return (
-      <FocusZone direction={FocusZoneDirection.vertical}>
-        <List
-          id='SearchList'
-          tabIndex={0}
-          items={this.suggestedTagsFiltered(this.props.items)}
-          onRenderCell={this.onRenderCell}
-        />
-      </FocusZone>
-    )
-  }
-
-  private onRenderCell = (item: ISuggestionItem<any>) => {
-    if (item.key === -1) {
-      return (
-        <div key={item.key} data-is-focusable={true}>
-          {item.displayValue}
-        </div>
-      )
-    }
-
-    return (
-      <div
-        id={`sc_${item.key}`}
-        data-is-focusable={true}
-        className={this.props.classNames.suggestionContainer}
-        onKeyDown={(ev: React.KeyboardEvent<HTMLElement>) => this.handleListItemKeyDown(ev, item)}>
-        <div
-          id={`s_${item.key}`}
-          className={this.props.classNames.suggestion}
-          onClick={() => this.onClick(item)}>
-          <div className={this.props.classNames.suggestionIcon} hidden={!this.props.showIcons}>
-            <Icon iconName={item.iconName} />
-          </div>
-          <div className={this.props.classNames.suggestionValue}>{item.displayValue}</div>
-        </div>
-      </div>
-    )
-  }
-
-  private showSuggestionCallOut() {
-    this.setState({ isSuggestionDisabled: true })
-  }
-
-  private hideSuggestionCallOut() {
-    this.setState({ isSuggestionDisabled: false })
-  }
-
-  private suggestedTagsFiltered = (list: ISuggestionItem<T>[]) => {
-    let suggestedTags = list.filter((tag) =>
-      tag.searchValue.toLowerCase().includes(this.state.searchText.toLowerCase())
-    )
-    suggestedTags = suggestedTags.sort((a, b) => a.searchValue.localeCompare(b.searchValue))
-    if (suggestedTags.length === 0) {
-      suggestedTags = [
-        {
-          key: -1,
-          displayValue: this.props.noSuggestionsText,
-          searchValue: ''
-        }
-      ]
-    }
-    return suggestedTags
-  }
-
-  protected handleListItemKeyDown = (
-    ev: React.KeyboardEvent<HTMLElement>,
-    item: ISuggestionItem<T>
-  ): void => {
-    const keyCode = ev.which
-    switch (keyCode) {
-      case KeyCodes.enter:
-        this.onClick(item)
-        break
-      default:
-        return
-    }
-  }
-
-  protected onKeyDown = (ev: React.KeyboardEvent<HTMLElement>): void => {
-    const keyCode = ev.which
-    switch (keyCode) {
-      case KeyCodes.down:
-        const el: any = window.document.querySelector('#SearchList')
-        el.focus()
-        break
-      default:
-        return
-    }
-  }
+    </div>
+  )
 }

@@ -1,92 +1,65 @@
 import { QueryResult } from '@apollo/client'
+import { createAction, createReducer } from '@reduxjs/toolkit'
+import copy from 'fast-copy'
 import { History } from 'history'
 import { Project } from 'types'
-import { find } from 'underscore'
+import { contains, find } from 'underscore'
 import { IProjectsParams, IProjectsState, ProjectsQueryResult, ProjectsView } from './types'
 
-export type ProjectsAction =
-  | {
-      type: 'DATA_UPDATED'
-      query: QueryResult<ProjectsQueryResult>
-      params: IProjectsParams
-    }
-  | {
-      type: 'SET_SELECTED_PROJECT'
-      project: Project
-    }
-  | {
-      type: 'CHANGE_VIEW'
-      view: ProjectsView
-    }
-  | {
-      type: 'CHANGE_DETAILS_TAB'
-      detailsTab: string
-    }
+export const DATA_UPDATED = createAction<{ query: QueryResult<ProjectsQueryResult> }>(
+  'DATA_UPDATED'
+)
+export const SET_SELECTED_PROJECT = createAction<{ project: Project }>('SET_SELECTED_PROJECT')
+export const CHANGE_VIEW = createAction<{ view: ProjectsView }>('CHANGE_VIEW')
+export const CHANGE_DETAILS_TAB = createAction<{ detailsTab: string }>('CHANGE_DETAILS_TAB')
 
 /**
- * Update history
+ * Initialize state
  *
- * @param {IProjectsState} state State
- * @param {History} history History
- * @param {number} delay Delay in ms
+ * @param {IProjectsParams} params Params
  */
-const updateHistory = (state: IProjectsState, history: History, delay: number = 250) => {
-  const paths = [state.view, state.selected?.id, state.detailsTab]
-  const path = `/${['projects', ...paths].filter((p) => p).join('/')}`.toLowerCase()
-  setTimeout(() => history.push(path), delay)
+export const initState = (params: IProjectsParams): IProjectsState => ({
+  view: contains(['search', 'my', 'new'], params.view) ? params.view : 'search',
+  detailsTab: params.detailsTab,
+  projects: [],
+  outlookCategories: []
+})
+
+interface ICreateReducerParams {
+  params: IProjectsParams
+  history: History
 }
 
 /**
- * Reducer for Projects
- *
- * @param {IProjectsState} state State
- * @param {ProjectsAction} action Action
+ * Create reducer for Projects
  */
-export default (history: History) => (
-  state: IProjectsState,
-  action: ProjectsAction
-): IProjectsState => {
-  const newState: IProjectsState = { ...state }
-  switch (action.type) {
-    case 'DATA_UPDATED':
-      {
-        const { query } = action
-        if (query.data) {
-          newState.outlookCategories = query.data.outlookCategories
-          newState.projects = query.data.projects.map((p) => ({
-            ...p,
-            outlookCategory: find(newState.outlookCategories, (c) => c.displayName === p.id)
-          }))
-          newState.selected = find(
-            newState.projects,
-            (p) => JSON.stringify(action.params).toLowerCase().indexOf(p.id.toLowerCase()) !== -1
-          )
-        }
+export default ({ params }: ICreateReducerParams) =>
+  createReducer(initState(params), {
+    [DATA_UPDATED.type]: (state, { payload }: ReturnType<typeof DATA_UPDATED>) => {
+      if (payload.query.data) {
+        state.outlookCategories = payload.query.data.outlookCategories
+        state.projects = payload.query.data.projects.map((p) => {
+          const _p = copy(p)
+          _p.outlookCategory = find(state.outlookCategories, (c) => c.displayName === p.tag)
+          return _p
+        })
+        state.selected = find(
+          state.projects,
+          (p) => JSON.stringify(params).toLowerCase().indexOf(p.tag.toLowerCase()) !== -1
+        )
       }
-      break
+    },
 
-    case 'SET_SELECTED_PROJECT':
-      {
-        newState.selected = action.project
-      }
-      break
+    [SET_SELECTED_PROJECT.type]: (state, { payload }: ReturnType<typeof SET_SELECTED_PROJECT>) => {
+      state.selected = payload.project
+    },
 
-    case 'CHANGE_VIEW':
-      {
-        newState.view = action.view
-        newState.selected = null
-      }
-      break
+    [CHANGE_VIEW.type]: (state, { payload }: ReturnType<typeof CHANGE_VIEW>) => {
+      state.view = payload.view
+      state.selected = null
+    },
 
-    case 'CHANGE_DETAILS_TAB':
-      {
-        newState.detailsTab = action.detailsTab
-      }
-      break
-
-    default:
-      throw new Error()
-  }
-  updateHistory(newState, history)
-  return newState
-}
+    [CHANGE_DETAILS_TAB.type]: (state, { payload }: ReturnType<typeof CHANGE_DETAILS_TAB>) => {
+      state.detailsTab = payload.detailsTab
+    }
+  })

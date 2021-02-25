@@ -1,5 +1,7 @@
 import { DurationColumn } from 'components/DurationColumn'
 import List from 'components/List'
+import { ProjectTooltip } from 'components/ProjectTooltip'
+import DateUtils from 'DateUtils'
 import { IColumn, MessageBar } from 'office-ui-fabric'
 import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
@@ -7,7 +9,6 @@ import { useTranslation } from 'react-i18next'
 import { EventObject, Project } from 'types'
 import { unique } from 'underscore'
 import { capitalize } from 'underscore.string'
-import DateUtils from 'utils/date'
 import { TimesheetContext } from '../'
 import { TimesheetScope } from '../TimesheetScope'
 import { ILabelColumnProps, LabelColumn } from './LabelColumn'
@@ -42,9 +43,16 @@ function createColumns(scope: TimesheetScope): IColumn[] {
       maxWidth: 350,
       isMultiline: true,
       isResizable: true,
-      onRender: (row: ILabelColumnProps) => (
-        <LabelColumn {...row} />
-      )
+      onRender: (row: ILabelColumnProps) => {
+        if (row.project) {
+          return (
+            <ProjectTooltip project={row.project}>
+              <LabelColumn {...row} />
+            </ProjectTooltip>
+          )
+        }
+        return <LabelColumn {...row} />
+      }
     },
     ...columns,
     {
@@ -69,10 +77,10 @@ function createColumns(scope: TimesheetScope): IColumn[] {
 function generateRows(events: EventObject[], columns: IColumn[]) {
   const projects = unique(
     events.map((e) => e.project),
-    (p: Project) => p.id
+    (p: Project) => p.tag
   )
   return projects.map((project) => {
-    const projectEvents = events.filter((event) => event.project.id === project.id)
+    const projectEvents = events.filter((event) => event.project.tag === project.tag)
     return [...columns].splice(1, columns.length - 2).reduce(
       (obj, col) => {
         const sum = [...projectEvents]
@@ -127,7 +135,7 @@ export const SummaryView = () => {
   } else {
     const context = useContext(TimesheetContext)
     const columns = createColumns(context.scope)
-    const events = (context.selectedPeriod?.getEvents() || []).filter((e) => !!e.project)
+    const events = context.selectedPeriod?.getEvents(false) || []
     const items = [
       ...generateRows(events, columns),
       generateTotalRow(events, columns, t('common.sumLabel'))

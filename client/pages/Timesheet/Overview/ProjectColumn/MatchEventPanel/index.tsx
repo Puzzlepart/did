@@ -35,6 +35,7 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
       />
       <Panel
         isOpen={isPanelVisible}
+        isLightDismiss={true}
         headerText={t('timesheet.matchEventPanelHeaderText')}
         onDismiss={hidePanel}>
         <div className={styles.subText}>{event.title}</div>
@@ -46,7 +47,7 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
           <p>
             <span>{t('timesheet.didYouMeanText')}</span>
             <a href='#' onClick={() => onManualMatch(event.suggestedProject)}>
-              {event.suggestedProject?.id}
+              {event.suggestedProject?.tag}
             </a>
             ?
           </p>

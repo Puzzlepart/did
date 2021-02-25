@@ -3,7 +3,7 @@ import { Autocomplete } from 'components'
 import { Panel, PrimaryButton } from 'office-ui-fabric'
 import React, { FunctionComponent, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { User } from 'types'
+import { Role, User } from 'types'
 import { find, omit, pick } from 'underscore'
 import validator from 'validator'
 import { UsersContext } from '../context'
@@ -14,7 +14,7 @@ import styles from './UserFormModal.module.scss'
 
 export const UserForm: FunctionComponent<IUserFormProps> = (props: IUserFormProps) => {
   const { t } = useTranslation()
-  const { adUsers, roles } = useContext(UsersContext)
+  const { activeDirectoryUsers, roles } = useContext(UsersContext)
   const [model, setModel] = useState<User>(
     props.user || { role: find(roles, (r) => r.name === 'User') }
   )
@@ -26,7 +26,7 @@ export const UserForm: FunctionComponent<IUserFormProps> = (props: IUserFormProp
   const onSave = async () => {
     await addOrUpdateUser({
       variables: {
-        user: omit({ ...model, role: model.role.name }, '__typename'),
+        user: omit({ ...model, role: (model.role as Role).name }, '__typename'),
         update: !!props.user
       }
     })
@@ -42,15 +42,19 @@ export const UserForm: FunctionComponent<IUserFormProps> = (props: IUserFormProp
     !validator.isEmpty(model?.displayName || '')
 
   return (
-    <Panel {...pick(props, 'onDismiss', 'headerText')} className={styles.root} isOpen={true}>
+    <Panel
+      {...pick(props, 'onDismiss', 'headerText')}
+      className={styles.root}
+      isOpen={true}
+      isLightDismiss={true}>
       {!props.user && (
         <div className={styles.inputContainer}>
           <Autocomplete
             label={t('common.searchUserLabel')}
             placeholder={t('common.searchPlaceholder')}
-            items={adUsers.map((u) => ({
+            items={activeDirectoryUsers.map((u) => ({
               key: u.id,
-              displayValue: u.displayName,
+              text: u.displayName,
               searchValue: u.displayName,
               data: u
             }))}

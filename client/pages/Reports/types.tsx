@@ -1,17 +1,14 @@
 import { IListGroups } from 'components/List/types'
 import { TFunction } from 'i18next'
 import { IContextualMenuItem } from 'office-ui-fabric'
-import { TimeEntriesQuery } from 'types'
-import { omit } from 'underscore'
-import { capitalize } from 'underscore.string'
-import { DateObject } from 'utils/date'
+import { ReportsQuery } from 'types'
 
 export interface IReportsQuery extends IContextualMenuItem {
   /**
    * Variables used for graphl query
    */
   variables: {
-    query: TimeEntriesQuery
+    query: ReportsQuery
     forecast?: boolean
     sortAsc?: boolean
   }
@@ -28,72 +25,34 @@ export interface IGroupByOption extends IContextualMenuItem {
 
 export interface IReportsState {
   /**
-   * Filter panel open
+   * Time entries
    */
-  readonly isFiltersOpen?: boolean
-
-  /**
-   * Query
-   */
-  readonly query?: IReportsQuery
-
-  /**
-   * Group by properties
-   */
-  readonly groupBy?: IListGroups
+  timeentries?: any[]
 
   /**
    * Filtered subset
    */
-  readonly subset?: any[]
-}
+  subset?: any[]
 
-/**
- * Get queries
- *
- * @param {TFunction} t Translate function
- */
-export function getQueries<T = IReportsQuery>(t: TFunction): T[] {
-  const now = new DateObject()
-  const lastMonth = now.add('-1month').toObject()
-  const currentMonth = now.toObject()
-  const currentYear = now.toObject('year')
-  return [
-    ({
-      key: 'lastMonth',
-      text: t('common.exportTypeLastMonth', lastMonth),
-      iconName: 'CalendarDay',
-      variables: { query: omit(lastMonth, 'monthName') },
-      exportFileName: `TimeEntries-${capitalize(lastMonth.monthName)}-{0}.xlsx`
-    } as unknown) as T,
-    ({
-      key: 'currentMonth',
-      text: t('common.exportTypeCurrentMonth', currentMonth),
-      iconName: 'Calendar',
-      variables: { query: omit(currentMonth, 'monthName') },
-      exportFileName: `TimeEntries-${capitalize(currentMonth.monthName)}-{0}.xlsx`
-    } as unknown) as T,
-    ({
-      key: 'currentYear',
-      text: t('common.exportTypeCurrentYear', currentYear),
-      iconName: 'CalendarReply',
-      variables: { query: currentYear },
-      exportFileName: `TimeEntries-${currentYear.year}-{0}.xlsx`
-    } as unknown) as T,
-    ({
-      key: 'forecast',
-      text: t('reports.forecast'),
-      iconName: 'TimeSheet',
-      variables: {
-        sortAsc: true,
-        forecast: true,
-        query: {
-          startDateTime: new Date().toISOString()
-        }
-      },
-      exportFileName: 'Forecast-{0}.xlsx'
-    } as unknown) as T
-  ]
+  /**
+   * Filter panel open
+   */
+  isFiltersOpen?: boolean
+
+  /**
+   * Query
+   */
+  query?: IReportsQuery
+
+  /**
+   * Group by properties
+   */
+  groupBy?: IListGroups
+
+  /**
+   * Loading
+   */
+  loading?: boolean
 }
 
 /**
@@ -135,10 +94,10 @@ export const getGroupByOptions = (t: TFunction): IGroupByOption[] => [
     }
   },
   {
-    key: 'weekNumber',
+    key: 'week',
     text: t('common.weekNumberLabel'),
     props: {
-      fieldName: 'weekNumber',
+      fieldName: 'week',
       emptyGroupName: ' '
     }
   }

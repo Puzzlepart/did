@@ -4,7 +4,12 @@ export {
   MessageBarButton,
   PrimaryButton
 } from 'office-ui-fabric-react/lib/Button'
-export { Calendar, DateRangeType, DayOfWeek } from 'office-ui-fabric-react/lib/Calendar'
+export {
+  Calendar,
+  DateRangeType,
+  DayOfWeek,
+  FirstWeekOfYear
+} from 'office-ui-fabric-react/lib/Calendar'
 export { Callout, DirectionalHint, ICalloutProps, Target } from 'office-ui-fabric-react/lib/Callout'
 export { Checkbox } from 'office-ui-fabric-react/lib/Checkbox'
 export { ChoiceGroup, IChoiceGroupOption } from 'office-ui-fabric-react/lib/ChoiceGroup'
@@ -58,8 +63,10 @@ export { Sticky, StickyPositionType } from 'office-ui-fabric-react/lib/Sticky'
 export { TextField } from 'office-ui-fabric-react/lib/TextField'
 export { Toggle } from 'office-ui-fabric-react/lib/Toggle'
 export { TooltipDelay, TooltipHost } from 'office-ui-fabric-react/lib/Tooltip'
+export { DatePicker, IDatePickerProps } from 'office-ui-fabric-react/lib/DatePicker'
 export {
   format,
   IRenderFunction,
-  IStyleFunctionOrObject
+  IStyleFunctionOrObject,
+  KeyCodes
 } from 'office-ui-fabric-react/lib/Utilities'

@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client'
 import * as security from 'config/security'
+import { DateObject } from 'DateUtils'
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import { Panel } from 'office-ui-fabric-react/lib/components/Panel'
 import { Dropdown } from 'office-ui-fabric-react/lib/Dropdown'
@@ -10,7 +11,6 @@ import { useTranslation } from 'react-i18next'
 import { ApiTokenInput } from 'types'
 import { contains, isEmpty } from 'underscore'
 import { isBlank } from 'underscore.string'
-import { DateObject } from 'utils/date'
 import $addApiToken from './addApiToken.gql'
 import styles from './ApiTokenForm.module.scss'
 import { IApiTokenFormProps } from './types'
@@ -18,7 +18,11 @@ import { IApiTokenFormProps } from './types'
 export const ApiTokenForm = ({ isOpen, onAdded, onDismiss }: IApiTokenFormProps) => {
   const { t } = useTranslation()
   const [addApiToken] = useMutation($addApiToken)
-  const [token, setToken] = useState<ApiTokenInput>({ permissions: [] })
+  const [token, setToken] = useState<ApiTokenInput>({
+    name: '',
+    expires: null,
+    permissions: []
+  })
   const permissions = useMemo(() => security.permissions(t).filter((p) => p.api), [])
 
   async function onAddApiToken() {
@@ -34,7 +38,7 @@ export const ApiTokenForm = ({ isOpen, onAdded, onDismiss }: IApiTokenFormProps)
     setToken({ ...token, permissions })
   }
 
-  const expiryOptions = {
+  const EXPIRY_OPTIONS = {
     '1month': t('admin.apiTokens.oneMonth'),
     '3month': t('admin.apiTokens.monthPlural', { months: 3 }),
     '1year': t('admin.apiTokens.oneYear'),
@@ -62,13 +66,13 @@ export const ApiTokenForm = ({ isOpen, onAdded, onDismiss }: IApiTokenFormProps)
           onChange={(_e, { data }) =>
             setToken({
               ...token,
-              expires: new DateObject().add(data).format()
+              expires: new DateObject().add(data).jsDate
             })
           }
-          options={Object.keys(expiryOptions).map((key) => ({
+          options={Object.keys(EXPIRY_OPTIONS).map((key) => ({
             key,
             data: key,
-            text: expiryOptions[key]
+            text: EXPIRY_OPTIONS[key]
           }))}
         />
       </div>

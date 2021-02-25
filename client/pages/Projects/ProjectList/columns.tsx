@@ -1,9 +1,9 @@
 import { CustomerLink } from 'components/CustomerLink'
 import { EntityLabel } from 'components/EntityLabel'
 import { TFunction } from 'i18next'
-import { Project } from 'types'
 import { IColumn, Icon } from 'office-ui-fabric'
 import * as React from 'react'
+import { LabelObject as Label, Project } from 'types'
 import { generateColumn as col } from 'utils/generateColumn'
 import { NameLabel } from './NameLabel'
 import { IProjectListProps } from './types'
@@ -30,7 +30,7 @@ export default (props: IProjectListProps, t: TFunction): IColumn[] =>
       }
       return <Icon iconName={project.icon || 'Page'} styles={{ root: { fontSize: 16 } }} />
     }),
-    col('id', t('common.keyFieldLabel'), { maxWidth: 120 }),
+    col('key', t('common.keyFieldLabel'), { maxWidth: 120 }),
     col('name', t('common.nameFieldLabel'), { maxWidth: 220 }, (project: Project) => (
       <NameLabel project={project} renderLink={props.renderLink} />
     )),
@@ -39,6 +39,6 @@ export default (props: IProjectListProps, t: TFunction): IColumn[] =>
       return <CustomerLink customer={project.customer} />
     }),
     col('labels', '', {}, (project: Project) =>
-      project.labels.map((label, idx) => <EntityLabel key={idx} label={label} />)
+      (project.labels as Label[]).map((label, idx) => <EntityLabel key={idx} label={label} />)
     )
   ].filter((col) => props.hideColumns.indexOf(col.key) === -1)

@@ -1,7 +1,7 @@
 import * as helpers from 'helpers'
 import { EventObject, TimeEntry } from 'types'
 import * as React from 'react'
-import DateUtils from 'utils/date'
+import DateUtils from 'DateUtils'
 import { generateColumn as col } from 'utils/generateColumn'
 import { IColumn } from '../List'
 import { DurationDisplay } from './DurationDisplay'

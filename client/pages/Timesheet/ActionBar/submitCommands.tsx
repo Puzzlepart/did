@@ -5,47 +5,48 @@ import { Subscription } from 'types'
 import { ITimesheetContext } from '../context'
 import styles from './ActionBar.module.scss'
 
+/**
+ * Get shared submit item props
+ *
+ * @param {string} key Key
+ * @param {string} iconName Icon name
+ */
+const submitItemProps = (key: string, iconName: string): Partial<IContextualMenuItem> => ({
+  key,
+  styles: { root: { height: 44, marginLeft: 4 } },
+  iconProps: { iconName },
+  canCheck: true
+})
+
 export default (context: ITimesheetContext, subscription: Subscription): IContextualMenuItem => ({
   key: 'SUBMIT_COMMANDS',
   onRender: () => {
     if (!!context.error || !context.selectedPeriod) return null
     const { isComplete, isForecast, isForecasted, isConfirmed, isPast } = context.selectedPeriod
-    const commandProps = {
+    const cmd = {
       FORECAST_PERIOD: subscription.settings?.forecast?.enabled && {
-        key: 'FORECAST_PERIOD',
-        styles: { root: { height: 44, marginLeft: 4 } },
-        iconProps: { iconName: 'BufferTimeBefore' },
+        ...submitItemProps('FORECAST_PERIOD', 'BufferTimeBefore'),
         onClick: () => context.onSubmitPeriod(true),
-        canCheck: true,
         text: context.t('timesheet.forecastHoursText'),
         secondaryText: context.t('timesheet.forecastHoursSecondaryText')
       },
       UNFORECAST_PERIOD: subscription.settings?.forecast?.enabled && {
-        key: 'UNFORECAST_PERIOD',
-        styles: { root: { height: 44, marginLeft: 4 } },
-        iconProps: { iconName: 'Cancel' },
+        ...submitItemProps('UNFORECAST_PERIOD', 'Cancel'),
         onClick: () => context.onUnsubmitPeriod(true),
-        canCheck: true,
         text: context.t('timesheet.unforecastHoursText'),
         secondaryText: context.t('timesheet.unforecastHoursSecondaryText')
       },
       CONFIRM_PERIOD: {
-        key: 'CONFIRM_PERIOD',
+        ...submitItemProps('CONFIRM_PERIOD', 'CheckMark'),
         className: styles.confirmPeriodButton,
-        styles: { root: { height: 44, marginLeft: 4 } },
-        iconProps: { iconName: 'CheckMark' },
         onClick: () => context.onSubmitPeriod(false),
-        canCheck: true,
         text: context.t('timesheet.confirmHoursText'),
         secondaryText: context.t('timesheet.confirmHoursSecondaryText')
       },
       UNCONFIRM_PERIOD: {
-        key: 'UNCONFIRM_PERIOD',
+        ...submitItemProps('UNCONFIRM_PERIOD', 'Cancel'),
         className: styles.unconfirmPeriodButton,
-        styles: { root: { height: 44, marginLeft: 4 } },
-        iconProps: { iconName: 'Cancel' },
         onClick: () => context.onUnsubmitPeriod(false),
-        canCheck: true,
         text: context.t('timesheet.unconfirmHoursText'),
         secondaryText: context.t('timesheet.unconfirmHoursSecondaryText')
       }
@@ -53,28 +54,23 @@ export default (context: ITimesheetContext, subscription: Subscription): IContex
 
     let commands = []
 
-    if (isConfirmed) commands.push(commandProps.UNCONFIRM_PERIOD)
+    if (isConfirmed) commands.push(cmd.UNCONFIRM_PERIOD)
     else if (isForecast) {
-      if (isForecasted) {
-        if (isComplete) commands.push(commandProps.CONFIRM_PERIOD)
-        commands.push(commandProps.UNFORECAST_PERIOD)
-      } else {
-        commands.push(commandProps.FORECAST_PERIOD)
-        commands.push(commandProps.CONFIRM_PERIOD)
-      }
+      if (isComplete) commands.push(cmd.CONFIRM_PERIOD)
+      commands.push(isForecasted ? cmd.UNFORECAST_PERIOD : cmd.FORECAST_PERIOD)
     } else {
       if (isComplete) {
-        commands.push(commandProps.CONFIRM_PERIOD)
+        commands.push(cmd.CONFIRM_PERIOD)
         if (!isPast) {
-          if (isForecasted) commands.push(commandProps.UNFORECAST_PERIOD)
-          else commands.push(commandProps.FORECAST_PERIOD)
+          if (isForecasted) commands.push(cmd.UNFORECAST_PERIOD)
+          else commands.push(cmd.FORECAST_PERIOD)
         }
       } else {
         if (!isPast) {
-          if (isForecasted) commands.push(commandProps.UNFORECAST_PERIOD)
-          else commands.push(commandProps.FORECAST_PERIOD)
+          if (isForecasted) commands.push(cmd.UNFORECAST_PERIOD)
+          else commands.push(cmd.FORECAST_PERIOD)
         }
-        commands.push({ ...commandProps.CONFIRM_PERIOD, disabled: true })
+        commands.push({ ...cmd.CONFIRM_PERIOD, disabled: true })
       }
     }
 

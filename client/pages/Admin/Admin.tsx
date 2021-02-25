@@ -11,7 +11,6 @@ import { Roles } from './Roles'
 import { SubscriptionSettings } from './Subscription'
 import { SummaryView } from './SummaryView'
 import { Users } from './Users'
-import DateUtils from 'utils/date'
 
 export const Admin = () => {
   const { t } = useTranslation()
@@ -38,11 +37,7 @@ export const Admin = () => {
           itemKey='summary'
           headerText={t('admin.summary')}
           itemIcon='CalendarWeek'>
-          <SummaryView
-            defaultSelectedYear={DateUtils.getYear()}
-            defaultSelectedScope='weekNumber'
-            defaultRange={2}
-          />
+          <SummaryView />
         </PivotItem>
         <PivotItem
           className={styles.tab}

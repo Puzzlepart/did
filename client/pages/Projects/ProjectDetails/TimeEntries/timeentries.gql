@@ -1,11 +1,11 @@
 
-  query($query: TimeEntriesQuery!) {
+  query($query: ReportsQuery!) {
     timeentries(query: $query) {
       title
       duration
+      week
       startDateTime
       endDateTime
-      weekNumber
       monthNumber
       year
       resource {

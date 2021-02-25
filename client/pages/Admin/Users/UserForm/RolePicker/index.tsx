@@ -29,7 +29,7 @@ export const RolePicker = (props: IRolePickerProps) => {
           )
         }}
         onChange={(_e, { data }) => props.onChanged(data)}
-        defaultSelectedKey={props.model.role?.name || 'User'}
+        defaultSelectedKey={(props.model.role as Role)?.name || 'User'}
       />
     </div>
   )

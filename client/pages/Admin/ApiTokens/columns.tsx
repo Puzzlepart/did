@@ -3,7 +3,7 @@ import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 import React from 'react'
 import { ApiToken } from 'types'
-import { DateObject } from 'utils/date'
+import { DateObject } from 'DateUtils'
 
 /**
  * Returns the columns for the ApiTokens list

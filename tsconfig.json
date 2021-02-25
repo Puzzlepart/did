@@ -15,7 +15,6 @@
     "types": [
       "express",
       "node",
-      "mocha",
       "express-bearer-token",
       "express-session",
       "passport-azure-ad",
@@ -24,7 +23,7 @@
       "passport",
       "@custom-types"
     ],
-    "outDir": "server-dist"
+    "outDir": "dist"
   },
   "include": ["./server/**/*.ts"],
   "exclude": ["./node_modules"]

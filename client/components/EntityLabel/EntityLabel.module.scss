@@ -3,9 +3,9 @@
   padding: 4px 8px;
   margin: 0 4px 0 0;
   font-size: 0.8em;
-  font-weight: 600;
   border-radius: 3px;
   transition: opacity 0.2s linear;
+  font-weight: 600;
 
   &.sizeXSmall {
     padding: 2px 6px;
@@ -14,12 +14,14 @@
 
   &.sizeMedium {
     padding: 6px 10px;
-    font-size: 1.0em;
+    font-size: 0.85em;
+    font-weight: normal;
   }
 
   &.sizeLarge {
     padding: 8px 12px;
-    font-size: 1.2em;
+    font-size: 1.0em;
+    font-weight: normal;
   }
 
   .icon {
@@ -28,6 +30,6 @@
 
   .text {
     vertical-align: unset !important;
-    margin-left: 4px;
+    margin: 0 0 0 6px;
   }
 }

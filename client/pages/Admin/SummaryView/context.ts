@@ -1,5 +1,6 @@
 import { TFunction } from 'i18next'
-import { IColumn, IContextualMenuItem, IPivotItemProps } from 'office-ui-fabric'
+import { IColumn, IContextualMenuItem } from 'office-ui-fabric'
+import { createContext } from 'react'
 import { SummaryViewAction } from './reducer'
 import { ISummaryViewRow, ISummaryViewScope, ISummaryViewState } from './types'
 
@@ -25,11 +26,6 @@ export interface ISummaryViewContext extends ISummaryViewState {
   loading?: boolean
 
   /**
-   * Periods
-   */
-  periods: IPivotItemProps[]
-
-  /**
    * Scopes
    */
   scopes: ISummaryViewScope[]
@@ -44,3 +40,5 @@ export interface ISummaryViewContext extends ISummaryViewState {
    */
   rows: ISummaryViewRow[]
 }
+
+export const SummaryViewContext = createContext<ISummaryViewContext>(null)

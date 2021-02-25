@@ -1,12 +1,12 @@
 import { TFunction } from 'i18next'
 import { IChoiceGroupOption } from 'office-ui-fabric'
-import { getQueries } from 'pages/Reports'
-import { TimeEntriesQuery } from 'types'
+import { getQueries } from 'pages/Reports/queries'
+import { ReportsQuery } from 'types'
 import { filter } from 'underscore'
 
 export interface IExportType extends IChoiceGroupOption {
   variables: {
-    query: TimeEntriesQuery
+    query: ReportsQuery
   }
   exportFileName: string
 }

@@ -5,7 +5,7 @@ import { DefaultButton, Label, Panel, PanelType, PrimaryButton, TextField } from
 import React, { useState } from 'react'
 import SketchPicker from 'react-color/lib/components/sketch/Sketch'
 import { useTranslation } from 'react-i18next'
-import { LabelObject } from 'types'
+import { LabelInput } from 'types'
 import { omit } from 'underscore'
 import validator from 'validator'
 import $addOrUpdateLabel from './addOrUpdateLabel.gql'
@@ -14,7 +14,7 @@ import { ILabelFormProps } from './types'
 
 export const LabelForm = (props: ILabelFormProps) => {
   const { t } = useTranslation()
-  const [model, setModel] = useState<LabelObject>(
+  const [model, setModel] = useState<LabelInput>(
     props.label || {
       name: '',
       description: '',
@@ -49,6 +49,7 @@ export const LabelForm = (props: ILabelFormProps) => {
       type={PanelType.smallFixedFar}
       className={styles.root}
       headerText={!!props.label ? t('admin.editLabel') : t('admin.addNewLabel')}
+      isLightDismiss={true}
       isOpen={true}>
       <TextField
         className={styles.inputField}
@@ -57,6 +58,7 @@ export const LabelForm = (props: ILabelFormProps) => {
         label={t('common.nameFieldLabel')}
         value={model.name}
         required={true}
+        disabled={!!props.label}
         onChange={(_, name) => setModel({ ...model, name })}
       />
       <TextField
@@ -70,7 +72,7 @@ export const LabelForm = (props: ILabelFormProps) => {
       <IconPicker
         className={styles.inputField}
         defaultSelected={model.icon}
-        label={t('common.iconLabel')}
+        label={t('common.iconFieldLabel')}
         placeholder={t('common.iconSearchPlaceholder')}
         width={300}
         onSelected={(icon) => setModel({ ...model, icon })}

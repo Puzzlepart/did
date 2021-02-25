@@ -1,20 +1,20 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { useMessage, UserMessage } from 'components'
 import List from 'components/List'
-import { TextField } from 'office-ui-fabric-react/lib/components/TextField'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
 import React, { useState } from 'react'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
 import { ApiToken } from 'types'
 import { isNull } from 'underscore'
-import { sleep } from 'utils'
 import { ApiTokenForm } from './ApiTokenForm'
 import { IApiTokenFormProps } from './ApiTokenForm/types'
 import styles from './ApiTokens.module.scss'
 import { ApiTokensColumns as columns } from './columns'
 import $deleteApiToken from './deleteApiToken.gql'
 import $tokens from './tokens.gql'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { Icon } from 'office-ui-fabric'
 
 export const ApiTokens = () => {
   const { t } = useTranslation()
@@ -39,21 +39,13 @@ export const ApiTokens = () => {
    * On key added
    *
    * @param {string} generatedKey Generated API key
-   * @param {number} duration Seconds the API key should be visible to the user
    */
-  async function onKeyAdded(generatedKey: string, duration: number = 10) {
+  function onKeyAdded(generatedKey: string) {
     setForm({})
-    setApiKey(generatedKey)
     if (generatedKey) {
-      setMessage(
-        { type: MessageBarType.success, children: t('admin.tokenGeneratedText', { duration }) },
-        duration * 1000
-      )
-    } else {
-      setMessage({ type: MessageBarType.error, text: t('admin.tokenErrorText') })
-    }
-    await sleep(duration)
-    setApiKey(null)
+      setMessage({ text: t('admin.tokenGeneratedText') }, 20000)
+      setApiKey(generatedKey)
+    } else setMessage({ type: MessageBarType.error, text: t('admin.tokenErrorText') })
     refetch()
   }
 
@@ -61,8 +53,15 @@ export const ApiTokens = () => {
     <div className={styles.root}>
       {message && <UserMessage {...message} />}
       {!isNull(apiKey) && (
-        <FadeIn className={styles.keyField}>
-          <TextField value={apiKey} disabled={true} />
+        <FadeIn className={styles.apiKey}>
+          <UserMessage type={MessageBarType.success} iconName='Cloud'>
+            <span className={styles.text}>{apiKey}</span>
+            <span className={styles.copy}>
+              <CopyToClipboard text={apiKey}>
+                <Icon iconName='Copy' />
+              </CopyToClipboard>
+            </span>
+          </UserMessage>
         </FadeIn>
       )}
       <List

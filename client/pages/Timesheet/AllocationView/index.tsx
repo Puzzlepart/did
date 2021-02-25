@@ -10,18 +10,16 @@ import { truncateString } from 'utils/truncateString'
 import { TimesheetContext } from '../context'
 import styles from './AllocationView.module.scss'
 import { CustomTooltip } from './CustomTooltip'
-import { IChartConfig, IChartItem } from './types'
+import { GetAllocationViewData, IChartConfig } from './types'
 
-export const AllocationView = (
-  getData: (events: EventObject[], chart: IChartConfig, width: number) => IChartItem<any>[]
-) => (): JSX.Element => {
+export const AllocationView = (getData: GetAllocationViewData) => (): JSX.Element => {
   const { t } = useTranslation()
   const { loading, selectedPeriod } = useContext(TimesheetContext)
   const container = useRef<HTMLDivElement>()
 
   if (!loading && selectedPeriod?.totalDuration === 0) {
     return (
-      <div className={styles.root}>
+      <div className={styles.root} ref={container}>
         <UserMessage text={t('timesheet.allocation.noDataText')} />
       </div>
     )

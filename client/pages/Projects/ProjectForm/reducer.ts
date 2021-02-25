@@ -1,4 +1,4 @@
-import { IFormValidation, ProjectOptions } from 'types'
+import { IFormValidation, Project, ProjectOptions } from 'types'
 import { isEmpty } from 'underscore'
 import { IProjectFormState, ProjectModel } from './types'
 
@@ -25,13 +25,25 @@ export type ProjectFormAction =
  * @param {IProjectFormState} state State
  */
 const setProjectId = (state: IProjectFormState) => {
-  const { customerKey, projectKey } = state.model
-  if (!isEmpty(customerKey) && !isEmpty(projectKey)) {
-    state.projectId = [customerKey, projectKey].join(' ').toUpperCase()
+  const { customerKey, key } = state.model
+  if (!isEmpty(customerKey) && !isEmpty(key)) {
+    state.projectId = [customerKey, key].join(' ').toUpperCase()
   } else {
     state.projectId = ''
   }
 }
+
+/**
+ * Initialize state
+ *
+ * @param {Project} project Project
+ */
+export const initState = (edit: Project): IProjectFormState => ({
+  model: new ProjectModel(edit),
+  options: { createOutlookCategory: false },
+  editMode: !!edit,
+  validation: { errors: {}, invalid: true }
+})
 
 /**
  * Reducer for ProjectForm
