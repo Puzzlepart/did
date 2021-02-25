@@ -60,6 +60,7 @@ export const Reports = () => {
             key={query.key}
             itemKey={query.key}
             headerText={query.text}
+            headerButtonProps={{ disabled: state.loading }}
             itemIcon={query.iconName}>
             <div className={styles.container}>
               {state.loading && (
@@ -67,7 +68,7 @@ export const Reports = () => {
                   <Icon iconName='OEM' className={styles.icon} />
                   <ProgressIndicator
                     className={styles.indicator}
-                    label={t('reports.generatingReportLabel')} 
+                    label={t('reports.generatingReportLabel')}
                     description={t('reports.generatingReportDescription')} />
                 </div>
               )}
