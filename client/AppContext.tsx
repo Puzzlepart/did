@@ -11,6 +11,7 @@ export class ContextUser {
   public role: Role
   public mail: string
   public preferredLanguage: string
+  public configuration: { [key: string]: any }
 
   /**
    * Constructor
@@ -26,6 +27,7 @@ export class ContextUser {
       this.mail = _user.mail
       this.role = _user.role as Role
       this.preferredLanguage = _user.preferredLanguage
+      this.configuration = JSON.parse(_user.configuration)
     }
   }
 
