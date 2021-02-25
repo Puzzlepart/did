@@ -1,6 +1,5 @@
 import { Panel } from 'office-ui-fabric'
-import React, { useEffect } from 'react'
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FilterItem } from './FilterItem'
 import { IFilter, IFilterItem } from './Filters'
 import { IFilterPanelProps } from './types'
@@ -37,6 +36,7 @@ export const FilterPanel = (props: IFilterPanelProps) => {
   return (
     <Panel
       isOpen={props.isOpen}
+      headerText={props.headerText}
       isLightDismiss={true}
       onDismiss={props.onDismiss}>
       {props.children}
@@ -57,3 +57,4 @@ export const FilterPanel = (props: IFilterPanelProps) => {
 export * from './FilterItem'
 export * from './Filters'
 export * from './types'
+

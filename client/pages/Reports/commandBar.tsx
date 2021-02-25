@@ -4,11 +4,11 @@ import {
   IContextualMenuItem
 } from 'office-ui-fabric'
 import React from 'react'
-import { isEmpty, pick } from 'underscore'
+import { isEmpty, omit, pick } from 'underscore'
 import { exportExcel } from 'utils/exportExcel'
 import getColumns from './columns'
 import { IReportsContext } from './context'
-import { REMOVE_SELECTED_FILTER, SET_FILTER, SET_GROUP_BY, TOGGLE_FILTER_PANEL } from './reducer'
+import { CLEAR_FILTERS, REMOVE_SELECTED_FILTER, SET_FILTER, SET_GROUP_BY, TOGGLE_FILTER_PANEL } from './reducer'
 import { SaveFilterForm } from './SaveFilterForm'
 import { getGroupByOptions } from './types'
 /**
@@ -31,40 +31,53 @@ const selectGroupByCmd = (context: IReportsContext) => ({
       } as IContextualMenuItem)
     )
   }
-})
+} as IContextualMenuItem)
 
 /**
  * Export to Excel command
  * 
  * @param {IReportsContext} context Context
  */
-const exportToExcelCmd = (context: IReportsContext) => ({
+const exportToExcelCmd = ({ state, t }: IReportsContext) => ({
   key: 'EXPORT_TO_EXCEL',
-  text: context.t('reports.exportToExcel'),
+  text: t('reports.exportToExcel'),
   onClick: () => {
     const fileName = format(
-      context.state.query.exportFileName,
+      state.query.exportFileName,
       new Date().toDateString().split(' ').join('-')
     )
-    exportExcel(context.state.subset, {
-      columns: getColumns({}, context.t),
+    exportExcel(state.subset, {
+      columns: getColumns({}, t),
       fileName
     })
   },
   iconProps: { iconName: 'ExcelDocument' }
-})
+} as IContextualMenuItem)
 
 /**
  * Open filter panel command
  * 
  * @param {IReportsContext} context Context
  */
-const openFilterPanelCmd = (context: IReportsContext) => ({
+const openFilterPanelCmd = ({ dispatch }: IReportsContext) => ({
   key: 'OPEN_FILTER_PANEL',
   iconProps: { iconName: 'Filter' },
   iconOnly: true,
-  onClick: () => context.dispatch(TOGGLE_FILTER_PANEL())
-})
+  onClick: () => dispatch(TOGGLE_FILTER_PANEL())
+} as IContextualMenuItem)
+
+/**
+ * Clear filters
+ * 
+ * @param {IReportsContext} context Context
+ */
+const clearFiltersCmd = ({ state, dispatch }: IReportsContext) => ({
+  key: 'CLEAR_FILTERS',
+  iconProps: { iconName: 'ClearFilter' },
+  iconOnly: true,
+  disabled: !state.isFiltered,
+  onClick: () => dispatch(CLEAR_FILTERS())
+} as IContextualMenuItem)
 
 /**
  * Save filter  command
@@ -96,16 +109,15 @@ const saveFilterCmd = (context: IReportsContext): IContextualMenuItem => ({
         key: 'DIVIDER_1',
         itemType: ContextualMenuItemType.Divider
       },
-      ...context.state.savedFilters.map((filter, idx) => ({
-        key: `SAVE_FILTER_${idx}`,
-        text: filter.name,
+      ...context.state.savedFilters.map((filter) => ({
+        ...omit(filter, 'values') as IContextualMenuItem,
         canCheck: true,
-        checked: filter.name === context.state.filter?.name,
+        checked: filter.text === context.state.filter?.text,
         onClick: () => context.dispatch(SET_FILTER({ filter }))
       }))
     ].filter(i => i)
   }
-})
+} as IContextualMenuItem)
 
 export default (context: IReportsContext) => ({
   items: (!!context.state.query && !context.state.loading) ? [selectGroupByCmd(context)] : [],
@@ -115,6 +127,7 @@ export default (context: IReportsContext) => ({
         exportToExcelCmd(context),
         !isEmpty(context.state.savedFilters) && saveFilterCmd(context),
         openFilterPanelCmd(context),
+        clearFiltersCmd(context)
       ].filter(i => i)
       : []
 })
