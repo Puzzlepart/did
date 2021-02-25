@@ -5,7 +5,17 @@ import get from 'get-value'
 import { getValue } from 'helpers'
 import { filter, find, omit } from 'underscore'
 import { IReportsParams, IReportsQuery, IReportsState } from '../types'
-import { ADD_FILTER, CHANGE_QUERY, CLEAR_FILTERS, DATA_UPDATED, FILTERS_UPDATED, REMOVE_SELECTED_FILTER, SET_FILTER, SET_GROUP_BY, TOGGLE_FILTER_PANEL } from './actions'
+import {
+  ADD_FILTER,
+  CHANGE_QUERY,
+  CLEAR_FILTERS,
+  DATA_UPDATED,
+  FILTERS_UPDATED,
+  REMOVE_SELECTED_FILTER,
+  SET_FILTER,
+  SET_GROUP_BY,
+  TOGGLE_FILTER_PANEL
+} from './actions'
 
 interface ICreateReducerParams {
   /**
@@ -80,10 +90,13 @@ export default ({ app, params, queries }: ICreateReducerParams) =>
       [FILTERS_UPDATED.type]: (state, { payload }: ReturnType<typeof FILTERS_UPDATED>) => {
         state.filter = {
           key: null,
-          values: payload.filters.reduce((obj, f) => ({
-            ...obj,
-            [f.key]: f.selected.map(i => i.key)
-          }), {})
+          values: payload.filters.reduce(
+            (obj, f) => ({
+              ...obj,
+              [f.key]: f.selected.map((i) => i.key)
+            }),
+            {}
+          )
         }
         state.subset = filter(state.timeentries, (entry) => {
           return (

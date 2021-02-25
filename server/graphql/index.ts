@@ -49,9 +49,7 @@ const getSchema = async () => {
     validate: false,
     authChecker,
     dateScalarMode: 'isoDate',
-    scalarsMap: [
-      { type: Date, scalar: GraphQLDateTime }
-    ]
+    scalarsMap: [{ type: Date, scalar: GraphQLDateTime }]
   })
   return schema
 }

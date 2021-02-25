@@ -15,7 +15,7 @@ export class ContextUser {
 
   /**
    * Constructor
-   * 
+   *
    * @param {User} _user User object
    */
   constructor(_user?: User) {

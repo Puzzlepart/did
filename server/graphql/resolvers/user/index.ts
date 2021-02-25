@@ -19,7 +19,7 @@ export class UserResolver {
    * @param {MSGraphService} _msgraph MS Graph service
    * @param {MongoService} _mongo Mongo service
    */
-  constructor(private readonly _msgraph: MSGraphService, private readonly _mongo: MongoService) { }
+  constructor(private readonly _msgraph: MSGraphService, private readonly _mongo: MongoService) {}
 
   /**
    * Get current user

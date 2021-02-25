@@ -27,7 +27,7 @@ export class CacheService {
     @Inject('CONTEXT') private readonly context: Context,
     public prefix?: string,
     public scope: CacheScope = CacheScope.SUBSCRIPTION
-  ) { }
+  ) {}
 
   /**
    * Get scoped cache key
@@ -65,8 +65,7 @@ export class CacheService {
         if (err) {
           log(`Failed to retrieve cachedd value for key ${scopedCacheKey}.`)
           resolve(null)
-        }
-        else {
+        } else {
           log(`Retrieved cached value for key ${scopedCacheKey}.`)
           resolve(JSON.parse(reply) as T)
         }
@@ -86,20 +85,15 @@ export class CacheService {
     return new Promise((resolve) => {
       const scopedCacheKey = this._getScopedCacheKey(key, scope)
       log(`Setting value for key ${scopedCacheKey} with a expiration of ${seconds} seconds...`)
-      Redis.setex(
-        scopedCacheKey,
-        seconds,
-        JSON.stringify(value),
-        (err, reply) => {
-          if (err) {
-            log(`Failed to set value for key ${scopedCacheKey}.`)
-            resolve(err)
-          }
-          else {
-            log(`Value for key ${scopedCacheKey} set with a expiration of ${seconds} seconds.`)
-            resolve(reply)
-          }
-        })
+      Redis.setex(scopedCacheKey, seconds, JSON.stringify(value), (err, reply) => {
+        if (err) {
+          log(`Failed to set value for key ${scopedCacheKey}.`)
+          resolve(err)
+        } else {
+          log(`Value for key ${scopedCacheKey} set with a expiration of ${seconds} seconds.`)
+          resolve(reply)
+        }
+      })
     })
   }
 

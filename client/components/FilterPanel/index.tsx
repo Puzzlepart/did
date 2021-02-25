@@ -60,4 +60,3 @@ export const FilterPanel = (props: IFilterPanelProps) => {
 export * from './FilterItem'
 export * from './Filters'
 export * from './types'
-

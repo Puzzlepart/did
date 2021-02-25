@@ -8,7 +8,7 @@ export class MongoDocumentService<T> {
 
   /**
    * Constructs a new Mongo Document Service
-   * 
+   *
    * Specify cachePrefix to use an underlying CacheService
    *
    * @param {Context} context Context

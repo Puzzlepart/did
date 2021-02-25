@@ -6,11 +6,7 @@ import { isEmpty } from 'underscore'
 import getColumns from './columns'
 import commandBar from './commandBar'
 import { ReportsContext } from './context'
-import {
-  CHANGE_QUERY,
-  FILTERS_UPDATED,
-  TOGGLE_FILTER_PANEL
-} from './reducer/actions'
+import { CHANGE_QUERY, FILTERS_UPDATED, TOGGLE_FILTER_PANEL } from './reducer/actions'
 import styles from './Reports.module.scss'
 import { SaveFilterForm } from './SaveFilterForm'
 import { useReports } from './useReports'
@@ -39,7 +35,8 @@ export const Reports = () => {
                     <ProgressIndicator
                       className={styles.indicator}
                       label={t('reports.generatingReportLabel')}
-                      description={t('reports.generatingReportDescription')} />
+                      description={t('reports.generatingReportDescription')}
+                    />
                   </div>
                 )}
                 <List
