@@ -5,8 +5,11 @@ import { CacheService } from '../cache'
 export class MongoDocumentService<T> {
   public cache: CacheService = null
   public collection: Collection<T>
+
   /**
-   * Constructor
+   * Constructs a new Mongo Document Service
+   * 
+   * Specify cachePrefix to use an underlying CacheService
    *
    * @param {Context} context Context
    * @param {string} collectionName Colletion name

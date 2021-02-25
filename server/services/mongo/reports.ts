@@ -18,7 +18,7 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
    * @param {Context} context Context
    */
   constructor(context: Context) {
-    super(context, 'time_entries')
+    super(context, 'time_entries', ReportsService.name)
     this._project = new ProjectService(context)
     this._user = new UserService(context)
   }
