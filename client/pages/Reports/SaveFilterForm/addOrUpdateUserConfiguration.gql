@@ -1,8 +1,0 @@
-mutation($userId: String!, $configuration: UserConfigurationInput!) {
-  result: addOrUpdateUserConfiguration(userId: $userId, configuration: $configuration) {
-    success
-    error {
-      message
-    }
-  }
-}
