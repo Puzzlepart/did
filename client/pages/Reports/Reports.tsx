@@ -1,11 +1,13 @@
 import { useQuery } from '@apollo/client'
 import { FilterPanel, List, UserMessage } from 'components'
-import { Pivot, PivotItem, Spinner } from 'office-ui-fabric'
+import DateUtils from 'DateUtils'
+import { Pivot, PivotItem } from 'office-ui-fabric'
+import { Icon } from 'office-ui-fabric-react'
+import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
 import React, { useLayoutEffect, useMemo, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { isEmpty } from 'underscore'
-import DateUtils from 'DateUtils'
 import getColumns from './columns'
 import commandBar from './commandBar'
 import { filters } from './filters'
@@ -61,32 +63,32 @@ export const Reports = () => {
             itemIcon={query.iconName}>
             <div className={styles.container}>
               {state.loading && (
-                <Spinner
-                  className={styles.spinner}
-                  labelPosition='right'
-                  label={t('reports.generatingReportLabel')}
-                />
+                <div className={styles.progress}>
+                  <Icon iconName='OEM' className={styles.icon} />
+                  <ProgressIndicator
+                    className={styles.indicator}
+                    label={t('reports.generatingReportLabel')} 
+                    description={t('reports.generatingReportDescription')} />
+                </div>
               )}
-              {!state.loading && !isEmpty(state.timeentries) && (
-                <List
-                  fadeIn={[200, 500]}
-                  items={state.subset}
-                  groups={{
-                    ...state.groupBy,
-                    totalFunc: (items) => {
-                      const durationHrs = items.reduce(
-                        (sum, item) => sum + item.duration,
-                        0
-                      ) as number
-                      return t('common.headerTotalDuration', {
-                        duration: DateUtils.getDurationString(durationHrs, t)
-                      })
-                    }
-                  }}
-                  columns={columns}
-                  commandBar={commandBar({ state, dispatch, t })}
-                />
-              )}
+              <List
+                enableShimmer={state.loading}
+                items={state.subset}
+                groups={{
+                  ...state.groupBy,
+                  totalFunc: (items) => {
+                    const durationHrs = items.reduce(
+                      (sum, item) => sum + item.duration,
+                      0
+                    ) as number
+                    return t('common.headerTotalDuration', {
+                      duration: DateUtils.getDurationString(durationHrs, t)
+                    })
+                  }
+                }}
+                columns={columns}
+                commandBar={commandBar({ state, dispatch, t })}
+              />
               <UserMessage
                 hidden={!isEmpty(state.timeentries) || state.loading || !state.query}
                 text={t('reports.noEntriesText')}
