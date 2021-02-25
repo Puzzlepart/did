@@ -41,6 +41,9 @@ export class User {
   @Field(() => Subscription)
   subscription?: Subscription
 
+  @Field(() => String)
+  configuration?: any
+
   public create?(user: User): User {
     Object.assign(this, user)
     return this

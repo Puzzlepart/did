@@ -1,9 +1,11 @@
 import { QueryResult } from '@apollo/client'
-import { createAction, createReducer } from '@reduxjs/toolkit'
+import { createAction, createReducer, current } from '@reduxjs/toolkit'
 import { IAppContext } from 'AppContext'
 import { IFilter } from 'components/FilterPanel'
 import { IListGroups } from 'components/List/types'
+import get from 'get-value'
 import { getValue } from 'helpers'
+import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
 import { filter, find } from 'underscore'
 import { IReportsParams, IReportsQuery, IReportsSavedFilter, IReportsState } from './types'
 
@@ -14,26 +16,38 @@ export const FILTERS_UPDATED = createAction<{ filters: IFilter[] }>('FILTERS_UPD
 export const CHANGE_QUERY = createAction<{ key: string }>('FILTER_UPDATED')
 export const SET_GROUP_BY = createAction<{ groupBy: IListGroups }>('SET_GROUP_BY')
 export const SET_FILTER = createAction<{ filter: IReportsSavedFilter }>('SET_FILTER')
-export const ADD_FILTER = createAction<{ name: string }>('ADD_FILTER')
+export const ADD_FILTER = createAction<{ model: IContextualMenuItem }>('ADD_FILTER')
+export const CLEAR_FILTERS = createAction('CLEAR_FILTERS')
 export const REMOVE_SELECTED_FILTER = createAction('REMOVE_SELECTED_FILTER')
 
 interface ICreateReducerParams {
+  /**
+   * URL parameters
+   */
   params: IReportsParams
+
+  /**
+   * Queries
+   */
   queries: IReportsQuery[]
+
+  /**
+   * App context
+   */
   app: IAppContext
 }
 
-export default ({ params, queries }: ICreateReducerParams) =>
+export default ({ app, params, queries }: ICreateReducerParams) =>
   createReducer<IReportsState>(
     {},
     {
       [INIT.type]: (state) => {
         state.query = find(queries, (q) => q.key === params.query) as any
-        // state.savedFilters = app.user.configuration.reportFilters
+        state.savedFilters = get(app.user.configuration, 'reports.filters', { default: [] })
       },
 
       [SET_FILTER.type]: (state, { payload }: ReturnType<typeof SET_FILTER>) => {
-        state.filter = payload.filter
+        state.filter = payload.filter as any
         state.subset = filter(state.timeentries, (entry) => {
           return (
             filter(Object.keys(payload.filter.values), (key) => {
@@ -43,19 +57,20 @@ export default ({ params, queries }: ICreateReducerParams) =>
         })
       },
 
-      [ADD_FILTER.type]: () => {
-        // const newFilter = { ...state.filter, name: payload.name }
-        // state.savedFilters.push(newFilter)
-        // localStorage.setItem('saved_filters', JSON.stringify(current(state).savedFilters))
-        // state.filter = newFilter
+      [ADD_FILTER.type]: (state, { payload }: ReturnType<typeof ADD_FILTER>) => {
+        const newFilter: any = {
+          ...state.filter,
+          ...payload.model
+        }
+        state.savedFilters.push(newFilter)
+        state.filter = newFilter
       },
 
-      [REMOVE_SELECTED_FILTER.type]: () => {
-        // const index = current(state).savedFilters.indexOf(current(state).filter)
-        // state.savedFilters.splice(index, 1)
-        // localStorage.setItem('saved_filters', JSON.stringify(current(state).savedFilters))
-        // state.filter = null
-        // state.subset = state.timeentries
+      [REMOVE_SELECTED_FILTER.type]: (state) => {
+        const index = current(state).savedFilters.indexOf(current(state).filter)
+        state.savedFilters.splice(index, 1)
+        state.filter = null
+        state.subset = state.timeentries
       },
 
       [TOGGLE_FILTER_PANEL.type]: (state) => {
@@ -70,6 +85,7 @@ export default ({ params, queries }: ICreateReducerParams) =>
 
       [FILTERS_UPDATED.type]: (state, { payload }: ReturnType<typeof FILTERS_UPDATED>) => {
         state.filter = {
+          key: null,
           values: payload.filters.reduce((obj, f) => ({
             ...obj,
             [f.key]: f.selected.map(i => i.key)
@@ -93,6 +109,12 @@ export default ({ params, queries }: ICreateReducerParams) =>
       [CHANGE_QUERY.type]: (state, { payload }: ReturnType<typeof CHANGE_QUERY>) => {
         state.query = find(queries, (q) => q.key === payload.key) as any
         state.subset = null
+      },
+
+      [CLEAR_FILTERS.type]: (state) => {
+        state.filter = null
+        state.subset = state.timeentries
+        state.isFiltered = false
       }
     }
   )

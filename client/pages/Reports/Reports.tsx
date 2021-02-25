@@ -30,7 +30,7 @@ export const Reports = () => {
   const history = useHistory()
   const params = useParams<IReportsParams>()
   const queries = getQueries(t)
-  const reducer = useMemo(() => createReducer({ params, queries, app }), [])
+  const reducer = useMemo(() => createReducer({ app, params, queries }), [])
   const [state, dispatch] = useReducer(reducer, {
     loading: true,
     timeentries: [],
@@ -54,12 +54,9 @@ export const Reports = () => {
     state.query?.key && history.push(`/reports/${state.query.key}`)
   }, [state.query])
 
-  /**
-   * Memorizing columns, context and filters
-   */
   const columns = useMemo(() => getColumns({ isResizable: true }, t), [])
-  const ctxValue = useMemo(() => ({ state, dispatch, t }), [state])
   const filters = useMemo(() => initFilters(state.filter, t), [state.filter])
+  const ctxValue = useMemo(() => ({ state, dispatch, t }), [state])
 
   return (
     <div className={styles.root}>
@@ -100,6 +97,7 @@ export const Reports = () => {
                 />
                 <FilterPanel
                   isOpen={state.isFiltersOpen}
+                  headerText={t('reports.filterPanelHeaderText')}
                   filters={filters}
                   items={state.timeentries}
                   onDismiss={() => dispatch(TOGGLE_FILTER_PANEL())}
