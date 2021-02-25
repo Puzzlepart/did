@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { FilterQuery } from 'mongodb'
-import { find, omit, pick } from 'underscore'
+import { find, omit } from 'underscore'
 import { RoleService } from '.'
 import { Context } from '../../graphql/context'
 import { User } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
+import merge from 'deepmerge'
 
 export class UserService extends MongoDocumentService<User> {
   private _role: RoleService
@@ -36,7 +38,8 @@ export class UserService extends MongoDocumentService<User> {
       return users.map((user) => ({
         ...user,
         id: user['_id'],
-        role: find(roles, (role) => role.name === user.role)
+        role: find(roles, (role) => role.name === user.role),
+        configuration: JSON.stringify(user.configuration)
       }))
     } catch (err) {
       throw err
@@ -54,6 +57,7 @@ export class UserService extends MongoDocumentService<User> {
       if (!user.role) throw new Error()
       user.id = user._id
       user.role = await this._role.getByName(user.role as string)
+      user.configuration = JSON.stringify(user.configuration)
       return user
     } catch (err) {
       throw err
@@ -95,7 +99,26 @@ export class UserService extends MongoDocumentService<User> {
    */
   public async updateUser(user: User): Promise<void> {
     try {
-      await this.collection.updateOne(pick(user, 'id'), { $set: user })
+      await this.collection.updateOne({ _id: user.id }, { $set: user })
+    } catch (err) {
+      throw err
+    }
+  }
+
+  /**
+   * Update current user configuration
+   *
+   * @param {string} configuration Configuration
+   */
+  public async updateCurrentUserConfiguration(configuration: string) {
+    try {
+      const filter = { _id: this.context.userId }
+      const user = await this.collection.findOne(filter)
+      const mergedConfiguration = merge(
+        user.configuration,
+        JSON.parse(configuration)
+      )
+      await this.collection.updateOne(filter, { $set: { configuration: mergedConfiguration } })
     } catch (err) {
       throw err
     }
