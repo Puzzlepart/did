@@ -58,6 +58,7 @@ export function useTimesheet() {
         period: state.selectedPeriod.data,
         options: { forecast }
       }
+      
       await unsubmitPeriod({ variables })
       refetch()
     },
