@@ -36,7 +36,7 @@ export { Dropdown, IDropdownOption, IDropdownProps } from 'office-ui-fabric-reac
 export { FocusTrapZone } from 'office-ui-fabric-react/lib/FocusTrapZone'
 export { FocusZone, FocusZoneDirection } from 'office-ui-fabric-react/lib/FocusZone'
 export { GroupHeader } from 'office-ui-fabric-react/lib/GroupedList'
-export { Icon } from 'office-ui-fabric-react/lib/Icon'
+export { Icon, IIconProps } from 'office-ui-fabric-react/lib/Icon'
 export { Label } from 'office-ui-fabric-react/lib/Label'
 export { Link } from 'office-ui-fabric-react/lib/Link'
 export { List } from 'office-ui-fabric-react/lib/List'

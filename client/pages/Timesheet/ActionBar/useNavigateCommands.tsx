@@ -1,8 +1,9 @@
 import { TFunction } from 'i18next'
 import { IContextualMenuItem } from 'office-ui-fabric'
+import { useContext } from 'react'
 import { ITimesheetContext } from '../context'
 import { SET_SCOPE } from '../reducer/actions'
-import { TimesheetScope } from '../types'
+import { TimesheetContext, TimesheetScope } from '../types'
 import styles from './ActionBar.module.scss'
 
 const navigateCommands = [
@@ -25,9 +26,12 @@ const navigateCommands = [
     disabled: (context: ITimesheetContext) => context.loading
   }
 ]
-
-export default (context: ITimesheetContext) =>
-  navigateCommands.map(
+/**
+ * Use navigate commands
+ */
+export function useNavigateCommands(): IContextualMenuItem[] {
+  const context = useContext(TimesheetContext)
+  return navigateCommands.map(
     (cmd, key) =>
       ({
         key: `${key}`,
@@ -43,3 +47,4 @@ export default (context: ITimesheetContext) =>
         title: cmd.title(context.t)
       } as IContextualMenuItem)
   )
+}

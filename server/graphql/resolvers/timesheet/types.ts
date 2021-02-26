@@ -5,7 +5,7 @@ import DateUtils from '../../../../shared/utils/date'
 import { Customer, EventError, LabelObject, Project } from '../types'
 
 @ObjectType({
-  description: 'A type that describes a Event',
+  description: 'An Object type that describes a Event',
   simpleResolvers: true
 })
 export class EventObject {

@@ -1,5 +1,5 @@
+import { Progress } from 'components/Progress'
 import { IUserMessageProps, UserMessage } from 'components/UserMessage'
-import { Icon, ProgressIndicator } from 'office-ui-fabric-react'
 import React, { FunctionComponent, useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { TimesheetContext } from '../context'
@@ -19,14 +19,7 @@ export const StatusBar: FunctionComponent = () => {
   const messages = useMessages()
 
   if (loading) {
-    return (
-      <div className={styles.root}>
-        <div className={styles.progress}>
-          <Icon className={styles.icon} iconName='RecurringEvent' />
-          <ProgressIndicator className={styles.indicator} {...loading} />
-        </div>
-      </div>
-    )
+    return <Progress {...loading} />
   }
 
   return (

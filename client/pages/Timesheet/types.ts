@@ -1,4 +1,4 @@
-import { IProgressIndicatorProps } from 'office-ui-fabric'
+import { IProgressProps } from 'components/Progress/types'
 import { TimesheetPeriod } from './TimesheetPeriod'
 import { TimesheetScope } from './TimesheetScope'
 
@@ -9,7 +9,7 @@ export interface ITimesheetState {
   selectedPeriod?: TimesheetPeriod
   selectedView: TimesheetView
   scope: TimesheetScope
-  loading?: IProgressIndicatorProps
+  loading?: IProgressProps
   error?: any
   showHotkeysModal?: boolean
 }

@@ -13,7 +13,8 @@ import {
   MANUAL_MATCH,
   SET_SCOPE,
   SUBMITTING_PERIOD,
-  TOGGLE_SHORTCUTS
+  TOGGLE_SHORTCUTS,
+  UNSUBMITTING_PERIOD
 } from './actions'
 
 interface ITimesheetReducerParams {
@@ -44,7 +45,8 @@ const createTimesheetReducer = ({ url, t }: ITimesheetReducerParams) =>
       state.loading = loading
         ? {
             label: t('timesheet.loadingTimesheetLabel'),
-            description: t('timesheet.loadingTimesheetDescription')
+            description: t('timesheet.loadingTimesheetDescription'),
+            iconProps: { iconName: 'RecurringEvent' }
           }
         : null
       if (data) {
@@ -58,13 +60,34 @@ const createTimesheetReducer = ({ url, t }: ITimesheetReducerParams) =>
     },
 
     [SUBMITTING_PERIOD.type]: (state, { payload }: ReturnType<typeof SUBMITTING_PERIOD>) => {
-      state.loading = {
-        label: payload.forecast
-          ? t('timesheet.forecastingPeriodLabel')
-          : t('timesheet.confirmingPeriodLabel'),
-        description: payload.forecast
-          ? t('timesheet.forecastingPeriodDescription')
-          : t('timesheet.confirmingPeriodDescription')
+      if (payload.forecast) {
+        state.loading = {
+          label: t('timesheet.forecastingPeriodLabel'),
+          description: t('timesheet.forecastingPeriodDescription'),
+          iconProps: { iconName: 'PlanView' }
+        }
+      } else {
+        state.loading = {
+          label: t('timesheet.confirmingPeriodLabel'),
+          description: t('timesheet.confirmingPeriodDescription'),
+          iconProps: { iconName: 'CheckMark' }
+        }
+      }
+    },
+
+    [UNSUBMITTING_PERIOD.type]: (state, { payload }: ReturnType<typeof UNSUBMITTING_PERIOD>) => {
+      if (payload.forecast) {
+        state.loading = {
+          label: t('timesheet.unforecastingPeriodLabel'),
+          description: t('timesheet.unforecastingPeriodDescription'),
+          iconProps: { iconName: 'ClearFormattingEraser' }
+        }
+      } else {
+        state.loading = {
+          label: t('timesheet.unconfirmingPeriodLabel'),
+          description: t('timesheet.unconfirmingPeriodDescription'),
+          iconProps: { iconName: 'SkypeCircleArrow' }
+        }
       }
     },
 

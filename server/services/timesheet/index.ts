@@ -88,6 +88,8 @@ export class TimesheetService {
             userId: this.context.userId
           })
         ])
+        // eslint-disable-next-line no-console
+        console.log(confirmed, forecasted)
         periods[i].isForecasted = !!forecasted
         periods[i].forecastedHours = forecasted?.hours || 0
         if (confirmed) {
@@ -134,6 +136,7 @@ export class TimesheetService {
    */
   private _connectEvents({ events, projects, dateFormat, locale }: IConnectEventsParams) {
     return events.map((event) => ({
+      id: event._id,
       ...event,
       project: find(projects, ({ _id }) => _id === event.projectId),
       date: DateUtils.formatDate(event.startDateTime, dateFormat, locale)
