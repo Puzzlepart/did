@@ -50,7 +50,7 @@ export const AllocationView = (getData: GetAllocationViewData) => (): JSX.Elemen
   ]
 
   return (
-    <div key={`allocation_${selectedPeriod?.id}`} className={styles.root} ref={container}>
+    <div className={styles.root} ref={container}>
       {charts.map((c) => {
         const data = getData(selectedPeriod?.getEvents() || [], c, container?.current?.clientWidth)
         return (

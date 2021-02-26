@@ -1,10 +1,10 @@
 import { useMutation } from '@apollo/client'
-import React, { useLayoutEffect, useMemo } from 'react'
+import { useLayoutEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { useTimesheetReducer } from '../reducer'
 import { SUBMITTING_PERIOD, UNSUBMITTING_PERIOD } from '../reducer/actions'
-import { ITimesheetContext, ITimesheetParams, TimesheetContext } from '../types'
+import { ITimesheetContext, ITimesheetParams } from '../types'
 import $submitPeriod from './submitPeriod.gql'
 import $unsubmitPeriod from './unsubmitPeriod.gql'
 import { useTimesheetQuery } from './useTimesheetQuery'
@@ -75,11 +75,6 @@ export function useTimesheet() {
     context,
     onSubmitPeriod,
     onUnsubmitPeriod,
-    TimesheetContextProvider: ({ children }) => (
-      <TimesheetContext.Provider value={context}>
-        {children}
-      </TimesheetContext.Provider>
-    ),
     t
   }
 }
