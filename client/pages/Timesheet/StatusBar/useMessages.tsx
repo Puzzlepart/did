@@ -1,25 +1,15 @@
-import { UserMessage } from 'components/UserMessage'
 import { IUserMessageProps } from 'components/UserMessage/types'
 import DateUtils from 'DateUtils'
-import { MessageBarType, Shimmer } from 'office-ui-fabric'
+import { MessageBarType } from 'office-ui-fabric'
 import { CLEAR_IGNORES } from 'pages/Timesheet/reducer/actions'
 import React, { useContext } from 'react'
-import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
-import { TimesheetContext } from '../..'
-import styles from './StatusBar.module.scss'
+import { TimesheetContext } from '../context'
 
-export const StatusBar = () => {
+export function useMessages() {
   const { t } = useTranslation()
-  if (isMobile) styles.root += ` ${styles.mobile}`
-  const { loading, selectedPeriod, periods, dispatch } = useContext(TimesheetContext)
-
-  const defaultMessageProps: IUserMessageProps = {
-    className: styles.message,
-    fixedCenter: 65,
-    containerStyle: {}
-  }
+  const {  selectedPeriod, periods, dispatch } = useContext(TimesheetContext)
 
   const messages: IUserMessageProps[] = []
 
@@ -99,16 +89,5 @@ export const StatusBar = () => {
     }
   }
 
-  return (
-    <div className={styles.root}>
-      <Shimmer styles={{ shimmerWrapper: { height: 65 } }} isDataLoaded={!loading} />
-      {!loading && (
-        <div className={styles.container}>
-          {messages.map((msg, key) => (
-            <UserMessage key={key} {...defaultMessageProps} {...msg} />
-          ))}
-        </div>
-      )}
-    </div>
-  )
+  return messages
 }

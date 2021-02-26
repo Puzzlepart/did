@@ -1,11 +1,9 @@
 import AppConfig from 'AppConfig'
 import EventList from 'components/EventList'
-import { ProgressIndicator } from 'office-ui-fabric'
 import React, { FunctionComponent, useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { TimesheetContext } from '../'
 import styles from './Overview.module.scss'
-import { StatusBar } from './StatusBar'
 import { useAdditionalColumns } from './useAdditionalColumns'
 import { useGroups } from './useGroups'
 
@@ -18,8 +16,6 @@ export const Overview: FunctionComponent = () => {
 
   return (
     <div className={className.join(' ')}>
-      <StatusBar />
-      {loading && <ProgressIndicator {...loading} />}
       <EventList
         hidden={!!error}
         enableShimmer={!!loading}
