@@ -8,6 +8,7 @@ import hotkeys from './hotkeys'
  * @param {ITimesheetContext} context Context
  */
 export function useHotkeys(context: ITimesheetContext) {
-  const hotkeysProps = useMemo(() => hotkeys(context), [context])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const hotkeysProps = useMemo(() => hotkeys(context), [context.scope])
   return { hotkeysProps }
 }

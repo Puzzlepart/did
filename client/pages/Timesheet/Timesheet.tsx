@@ -34,7 +34,7 @@ export const Timesheet: FunctionComponent = () => {
               headerText={t('timesheet.overviewHeaderText')}
               itemIcon='CalendarWeek'
               headerButtonProps={{ disabled: !!context.error }}>
-              <Overview dayFormat='dddd DD' timeFormat='HH:mm' />
+              <Overview />
             </PivotItem>
             <PivotItem
               key='summary'

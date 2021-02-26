@@ -28,7 +28,8 @@ export function useTimesheetQuery(state: ITimesheetState, dispatch: Dispatch<Any
     errorPolicy: 'all'
   })
 
-  useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query, dispatch])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query])
 
   return { refetch: query.refetch }
 }

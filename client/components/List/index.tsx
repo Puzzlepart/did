@@ -27,7 +27,8 @@ const List: FunctionComponent<IListProps> = (props: IListProps) => {
     searchTerm: null
   })
 
-  useEffect(() => dispatch({ type: 'PROPS_UPDATED', payload: props }), [props])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => dispatch({ type: 'PROPS_UPDATED', payload: props }), [props.items])
 
   const selection = useMemo(() => {
     if (!props.selection) return null

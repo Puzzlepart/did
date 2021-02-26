@@ -120,7 +120,8 @@ const createTimesheetReducer = ({ url, t }: ITimesheetReducerParams) =>
  * @param {ITimesheetReducerParams} params Parameters
  */
 export function useTimesheetReducer(params: ITimesheetReducerParams) {
-  const reducer = useMemo(() => createTimesheetReducer(params), [params])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const reducer = useMemo(() => createTimesheetReducer(params), [])
   const [state, dispatch] = useReducer(reducer, initState(params.url))
   return { state, dispatch }
 }
