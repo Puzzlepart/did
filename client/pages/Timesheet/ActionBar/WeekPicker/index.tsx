@@ -73,4 +73,4 @@ export const WeekPicker = () => {
   )
 }
 
-export { default as weekPickerCommand } from './weekPickerCommand'
+export * from './useWeekPickerCommand'
