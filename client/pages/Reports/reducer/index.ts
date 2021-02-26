@@ -1,9 +1,8 @@
 import { createReducer, current } from '@reduxjs/toolkit'
-import { IAppContext } from 'AppContext'
 import get from 'get-value'
 import { getValue } from 'helpers'
 import { filter, find, omit } from 'underscore'
-import { IReportsParams, IReportsQuery, IReportsState } from '../types'
+import { IReportsState } from '../types'
 import {
   INIT,
   ADD_FILTER,
@@ -16,33 +15,17 @@ import {
   SET_GROUP_BY,
   TOGGLE_FILTER_PANEL
 } from './actions'
-
-interface ICreateReducerParams {
-  /**
-   * URL parameters
-   */
-  params: IReportsParams
-
-  /**
-   * Queries
-   */
-  queries: IReportsQuery[]
-
-  /**
-   * App context
-   */
-  app: IAppContext
-}
+import { IReportsReducerParams } from './types'
 
 /**
  * Creating reducer for Reports using @reduxjs/toolkit
  */
-export default ({ app, params, queries }: ICreateReducerParams) =>
+export default ({ app, url, queries }: IReportsReducerParams) =>
   createReducer<IReportsState>(
     {},
     {
       [INIT.type]: (state) => {
-        state.query = find(queries, (q) => q.key === params.query) as any
+        state.query = find(queries, (q) => q.key === url.query) as any
         state.savedFilters = get(app.user.configuration, 'reports.filters', { default: {} })
       },
 

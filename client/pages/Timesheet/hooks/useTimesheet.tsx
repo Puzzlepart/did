@@ -1,20 +1,18 @@
 import { useMutation } from '@apollo/client'
-import React, { useLayoutEffect, useMemo } from 'react'
-import { GlobalHotKeys } from 'react-hotkeys'
+import { useLayoutEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
-import hotkeys from './hotkeys'
-import { useTimesheetReducer } from './reducer'
-import { SUBMITTING_PERIOD, UNSUBMITTING_PERIOD } from './reducer/actions'
+import { useTimesheetReducer } from '../reducer'
+import { SUBMITTING_PERIOD, UNSUBMITTING_PERIOD } from '../reducer/actions'
+import { ITimesheetContext, ITimesheetParams } from '../types'
 import $submitPeriod from './submitPeriod.gql'
-import { ITimesheetContext, ITimesheetParams, TimesheetContext } from './types'
 import $unsubmitPeriod from './unsubmitPeriod.gql'
 import { useTimesheetQuery } from './useTimesheetQuery'
 
 /**
  * Hook for Timesheet
  *
- * * Get history using useHistiry
+ * * Get history using useHistory
  * * Get URL params using useParams
  * * Using reducer from /reducer
  * * Using useTimesheetQuery with timesheet.gql
@@ -71,20 +69,12 @@ export function useTimesheet() {
     }),
     [state]
   )
-  const hotkeysProps = useMemo(() => hotkeys(context, t), [context])
-
   return {
     state,
     dispatch,
     context,
     onSubmitPeriod,
     onUnsubmitPeriod,
-    hotkeysProps,
-    TimesheetContextProvider: ({ children }) => (
-      <GlobalHotKeys {...hotkeysProps}>
-        <TimesheetContext.Provider value={context}>{children}</TimesheetContext.Provider>
-      </GlobalHotKeys>
-    ),
     t
   }
 }

@@ -1,57 +1,65 @@
-import { HotkeyModal } from 'components'
+import { HotkeyModal } from 'components/HotkeyModal'
 import { Pivot, PivotItem } from 'office-ui-fabric'
 import React, { FunctionComponent } from 'react'
+import { GlobalHotKeys } from 'react-hotkeys'
 import { ActionBar } from './ActionBar'
 import AllocationView from './AllocationView'
 import { ErrorBar } from './ErrorBar'
+import { useHotkeys } from './hooks/useHotkeys'
+import { useTimesheet } from './hooks/useTimesheet'
 import { Overview } from './Overview'
 import { CHANGE_VIEW, TOGGLE_SHORTCUTS } from './reducer/actions'
 import { SummaryView } from './SummaryView'
 import styles from './Timesheet.module.scss'
-import { TimesheetView } from './types'
-import { useTimesheet } from './useTimesheet'
+import { TimesheetContext, TimesheetView } from './types'
 
 export const Timesheet: FunctionComponent = () => {
-  const { state, dispatch, context, TimesheetContextProvider, hotkeysProps, t } = useTimesheet()
+  const { state, dispatch, context, t } = useTimesheet()
+  const { hotkeysProps } = useHotkeys(context)
 
   return (
-    <TimesheetContextProvider>
-      <div className={styles.root}>
-        <ActionBar />
-        <ErrorBar error={context.error} />
-        <Pivot
-          defaultSelectedKey={state.selectedView}
-          onLinkClick={({ props }) =>
-            dispatch(CHANGE_VIEW({ view: props.itemKey as TimesheetView }))
-          }>
-          <PivotItem
-            itemKey='overview'
-            headerText={t('timesheet.overviewHeaderText')}
-            itemIcon='CalendarWeek'
-            headerButtonProps={{ disabled: !!context.error }}>
-            <Overview dayFormat='dddd DD' timeFormat='HH:mm' />
-          </PivotItem>
-          <PivotItem
-            itemKey='summary'
-            headerText={t('timesheet.summaryHeaderText')}
-            itemIcon='List'
-            headerButtonProps={{ disabled: !!context.error }}>
-            <SummaryView />
-          </PivotItem>
-          <PivotItem
-            itemKey='allocation'
-            headerText={t('timesheet.allocationHeaderText')}
-            itemIcon='ReportDocument'
-            headerButtonProps={{ disabled: !!context.error }}>
-            <AllocationView />
-          </PivotItem>
-        </Pivot>
-      </div>
-      <HotkeyModal
-        {...hotkeysProps}
-        isOpen={state.showHotkeysModal}
-        onDismiss={() => dispatch(TOGGLE_SHORTCUTS())}
-      />
-    </TimesheetContextProvider>
+    <TimesheetContext.Provider value={context}>
+      <GlobalHotKeys {...hotkeysProps}>
+        <div className={styles.root}>
+          <ActionBar />
+          <ErrorBar error={context.error} />
+          <Pivot
+            defaultSelectedKey={state.selectedView}
+            onLinkClick={({ props }) =>
+              dispatch(CHANGE_VIEW({ view: props.itemKey as TimesheetView }))
+            }>
+            <PivotItem
+              key='overview'
+              itemKey='overview'
+              headerText={t('timesheet.overviewHeaderText')}
+              itemIcon='CalendarWeek'
+              headerButtonProps={{ disabled: !!context.error }}>
+              <Overview dayFormat='dddd DD' timeFormat='HH:mm' />
+            </PivotItem>
+            <PivotItem
+              key='summary'
+              itemKey='summary'
+              headerText={t('timesheet.summaryHeaderText')}
+              itemIcon='List'
+              headerButtonProps={{ disabled: !!context.error }}>
+              <SummaryView />
+            </PivotItem>
+            <PivotItem
+              key='allocation'
+              itemKey='allocation'
+              headerText={t('timesheet.allocationHeaderText')}
+              itemIcon='ReportDocument'
+              headerButtonProps={{ disabled: !!context.error }}>
+              <AllocationView />
+            </PivotItem>
+          </Pivot>
+        </div>
+        <HotkeyModal
+          {...hotkeysProps}
+          isOpen={context.showHotkeysModal}
+          onDismiss={() => dispatch(TOGGLE_SHORTCUTS())}
+        />
+      </GlobalHotKeys>
+    </TimesheetContext.Provider>
   )
 }

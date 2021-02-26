@@ -17,7 +17,7 @@ export class SubscriptionResolver {
    *
    * @param {MongoService} _mongo Mongo service
    */
-  constructor(private readonly _mongo: MongoService) { }
+  constructor(private readonly _mongo: MongoService) {}
 
   /**
    * Get current subscription
@@ -30,7 +30,7 @@ export class SubscriptionResolver {
 
   /**
    * Update subscription
-   * 
+   *
    * @param {SubscriptionSettingsInput} settings Settings
    */
   @Authorized<IAuthOptions>({ permission: '67ba6efc' })
