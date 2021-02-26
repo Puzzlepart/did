@@ -4,7 +4,12 @@ import { Service } from 'typedi'
 import { TimesheetService } from '../../../services'
 import { IAuthOptions } from '../../authChecker'
 import { BaseResult } from '../types'
-import { TimesheetOptions, TimesheetPeriodInput, TimesheetPeriodObject, TimesheetQuery } from './types'
+import {
+  TimesheetOptions,
+  TimesheetPeriodInput,
+  TimesheetPeriodObject,
+  TimesheetQuery
+} from './types'
 
 @Service()
 @Resolver(TimesheetPeriodObject)

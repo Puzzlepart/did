@@ -70,14 +70,10 @@ export class TimesheetService {
           }
         } else {
           const engine = new MatchingEngine(data)
-          const events = await this._msgraph.getEvents(
-            periods[i].startDate,
-            periods[i].endDate,
-            {
-              tzOffset: params.tzOffset,
-              returnIsoDates: false
-            }
-          )
+          const events = await this._msgraph.getEvents(periods[i].startDate, periods[i].endDate, {
+            tzOffset: params.tzOffset,
+            returnIsoDates: false
+          })
           periods[i] = {
             ...periods[i],
             events: engine.matchEvents(events).map((e) => ({
@@ -100,14 +96,10 @@ export class TimesheetService {
    */
   public async submitPeriod(params: ISubmitPeriodParams): Promise<void> {
     try {
-      const events = await this._msgraph.getEvents(
-        params.period.startDate,
-        params.period.endDate,
-        {
-          tzOffset: params.tzOffset,
-          returnIsoDates: false
-        }
-      )
+      const events = await this._msgraph.getEvents(params.period.startDate, params.period.endDate, {
+        tzOffset: params.tzOffset,
+        returnIsoDates: false
+      })
       const period = {
         ...this._getPeriodData(params.period.id),
         startDate: new Date(params.period.startDate),
@@ -125,7 +117,7 @@ export class TimesheetService {
           ...event,
           _id: this._createUniqueEventId(period._id, event.id),
           ...omit(period, '_id'),
-          _periodId: period._id,
+          _periodId: period._id
         })
         return hours + event.duration
       }, 0)
@@ -161,11 +153,9 @@ export class TimesheetService {
     }
   }
 
-
-
   /**
    * Create unique ID consisting of period ID + event ID
-   * 
+   *
    * @param {string} periodId Period ID
    * @param {string} eventId Event ID
    */
@@ -175,20 +165,20 @@ export class TimesheetService {
 
   /**
    * Get period data from id
-   * 
+   *
    * * Generates an _id for Mongo DB
    * * Returns week, month, year and _userId
-   * 
+   *
    * @param {string} id Id
    */
   private _getPeriodData(id: string) {
     const [week, month, year] = id.split('_').map((p) => parseInt(p, 10))
     return {
       _id: `${id}${this.context.userId}`.replace(/[^a-zA-Z0-9]/g, ''),
+      _userId: this.context.userId,
       week,
       month,
       year,
-      _userId: this.context.userId,
     }
   }
 

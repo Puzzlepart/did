@@ -3,41 +3,40 @@ import { Field, ID, ObjectType } from 'type-graphql'
 import DateUtils from '../../../../../shared/utils/date'
 import { EventObject } from './EventObject'
 
-
 @ObjectType({
   description: 'A type that describes a TimesheetPeriod',
   simpleResolvers: true
 })
 export class TimesheetPeriodObject {
   @Field(() => ID)
-  public id: string;
+  public id: string
 
   @Field()
-  public week: number;
+  public week: number
 
   @Field()
-  public month: string;
+  public month: string
 
   @Field()
-  public startDate: string;
+  public startDate: string
 
   @Field()
-  public endDate: string;
+  public endDate: string
 
   @Field(() => [EventObject])
-  public events?: EventObject[];
+  public events?: EventObject[]
 
   @Field({ nullable: true })
-  public isConfirmed: boolean = false;
+  public isConfirmed: boolean = false
 
   @Field({ nullable: true })
-  public isForecasted: boolean = false;
+  public isForecasted: boolean = false
 
   @Field({ nullable: true })
-  public isForecast: boolean;
+  public isForecast: boolean
 
   @Field({ nullable: true })
-  public forecastedHours?: number;
+  public forecastedHours?: number
 
   constructor(startDate: string, endDate: string, locale: string) {
     this.id = DateUtils.getPeriod(startDate)
