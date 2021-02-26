@@ -1,10 +1,9 @@
-import { TFunction } from 'i18next'
 import { GlobalHotKeysProps } from 'react-hotkeys'
-import { ITimesheetContext } from './context'
-import { SET_SCOPE, TOGGLE_SHORTCUTS } from './reducer/actions'
-import { TimesheetScope } from './TimesheetScope'
+import { ITimesheetContext } from '../context'
+import { SET_SCOPE, TOGGLE_SHORTCUTS } from '../reducer/actions'
+import { TimesheetScope } from '../TimesheetScope'
 
-export default ({ scope, dispatch }: ITimesheetContext, t: TFunction): GlobalHotKeysProps => ({
+export default ({ scope, dispatch,t }: ITimesheetContext): GlobalHotKeysProps => ({
   keyMap: {
     GO_TO_CURRENT_WEEK: {
       name: t('timesheet.goToCurrentWeek'),

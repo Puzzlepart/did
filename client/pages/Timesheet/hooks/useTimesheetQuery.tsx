@@ -2,9 +2,9 @@ import { useQuery } from '@apollo/client'
 import { AnyAction } from '@reduxjs/toolkit'
 import { AppContext } from 'AppContext'
 import { Dispatch, useContext, useLayoutEffect } from 'react'
-import { DATA_UPDATED } from './reducer/actions'
+import { DATA_UPDATED } from '../reducer/actions'
+import { ITimesheetState } from '../types'
 import $timesheet from './timesheet.gql'
-import { ITimesheetState } from './types'
 
 /**
  * Use Timesheet query
