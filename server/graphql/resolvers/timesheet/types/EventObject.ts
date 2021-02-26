@@ -2,68 +2,67 @@ import 'reflect-metadata'
 import { Field, Float, ID, ObjectType } from 'type-graphql'
 import { Customer, EventError, LabelObject, Project } from '../../types'
 
-
 @ObjectType({
   description: 'An Object type that describes a Event',
   simpleResolvers: true
 })
 export class EventObject {
   @Field(() => ID)
-  id: string;
+  id: string
 
   @Field()
-  day?: string;
+  day?: string
 
   @Field()
-  title?: string;
+  title?: string
 
   @Field({ nullable: true })
-  body?: string;
+  body?: string
 
   @Field({ nullable: true })
-  isOrganizer?: boolean;
+  isOrganizer?: boolean
 
   @Field()
-  startDateTime?: Date;
+  startDateTime?: Date
 
   @Field()
-  endDateTime?: Date;
+  endDateTime?: Date
 
   @Field()
-  date?: string;
+  date?: string
 
   @Field(() => Float)
-  duration?: number;
+  duration?: number
 
   @Field(() => Project, { nullable: true })
-  project: Project;
+  project: Project
 
   @Field(() => Project, { nullable: true })
-  suggestedProject?: Project;
+  suggestedProject?: Project
 
   @Field(() => Customer, { nullable: true })
-  customer?: Customer;
+  customer?: Customer
 
   @Field({ nullable: true })
-  projectKey?: string;
+  projectKey?: string
 
   @Field({ nullable: true })
-  customerKey?: string;
+  customerKey?: string
 
   @Field({ nullable: true })
-  webLink?: string;
+  webLink?: string
 
   @Field(() => [LabelObject], { nullable: true })
-  labels?: LabelObject[];
+  labels?: LabelObject[]
 
   @Field(() => EventError, { nullable: true })
-  error?: EventError;
+  error?: EventError
 
   @Field({ nullable: true })
-  manualMatch?: boolean;
+  manualMatch?: boolean
 
   @Field({ nullable: true })
-  isSystemIgnored?: boolean;
+  isSystemIgnored?: boolean
 
-  categories?: string[];
+  categories?: string[]
 }

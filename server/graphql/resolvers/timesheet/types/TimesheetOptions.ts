@@ -1,18 +1,17 @@
 import 'reflect-metadata'
 import { Field, InputType } from 'type-graphql'
 
-
 @InputType()
 export class TimesheetOptions {
   @Field({ nullable: true })
-  locale: string;
+  locale: string
 
   @Field({ nullable: true })
-  dateFormat: string;
+  dateFormat: string
 
   @Field({ nullable: true })
-  tzOffset: number;
+  tzOffset: number
 
   @Field({ nullable: true })
-  forecast?: boolean;
+  forecast?: boolean
 }
