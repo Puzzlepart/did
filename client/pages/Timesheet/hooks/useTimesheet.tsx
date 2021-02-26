@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { useCallback, useLayoutEffect, useMemo } from 'react'
+import { useLayoutEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { useTimesheetReducer } from '../reducer'
@@ -31,38 +31,33 @@ export function useTimesheet() {
   useLayoutEffect(() => {
     if (!state.selectedPeriod) return
     history.push(['/timesheet', state.selectedView, state.selectedPeriod.path].join('/'))
-  }, [state.selectedView, state.selectedPeriod, history])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.selectedView, state.selectedPeriod])
 
   const [[submitPeriod], [unsubmitPeriod]] = [
     useMutation($submitPeriod),
     useMutation($unsubmitPeriod)
   ]
 
-  const onSubmitPeriod = useCallback(
-    () => async (forecast: boolean) => {
-      dispatch(SUBMITTING_PERIOD({ forecast }))
-      const variables = {
-        period: state.selectedPeriod.data,
-        options: { forecast, tzOffset: new Date().getTimezoneOffset() }
-      }
-      await submitPeriod({ variables })
-      refetch()
-    },
-    [dispatch, refetch, state.selectedPeriod.data, submitPeriod]
-  )
+  const onSubmitPeriod = async (forecast: boolean) => {
+    dispatch(SUBMITTING_PERIOD({ forecast }))
+    const variables = {
+      period: state.selectedPeriod.data,
+      options: { forecast, tzOffset: new Date().getTimezoneOffset() }
+    }
+    await submitPeriod({ variables })
+    refetch()
+  }
 
-  const onUnsubmitPeriod = useCallback(
-    () => async (forecast: boolean) => {
-      dispatch(UNSUBMITTING_PERIOD({ forecast }))
-      const variables = {
-        period: state.selectedPeriod.data,
-        options: { forecast }
-      }
-      await unsubmitPeriod({ variables })
-      refetch()
-    },
-    [dispatch, refetch, state.selectedPeriod.data, unsubmitPeriod]
-  )
+  const onUnsubmitPeriod = async (forecast: boolean) => {
+    dispatch(UNSUBMITTING_PERIOD({ forecast }))
+    const variables = {
+      period: state.selectedPeriod.data,
+      options: { forecast }
+    }
+    await unsubmitPeriod({ variables })
+    refetch()
+  }
 
   const context: ITimesheetContext = useMemo(
     () => ({
@@ -73,7 +68,8 @@ export function useTimesheet() {
       dispatch,
       t
     }),
-    [state, refetch, onSubmitPeriod, onUnsubmitPeriod, dispatch, t]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [state]
   )
   return {
     state,

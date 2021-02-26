@@ -31,6 +31,7 @@ export function useChartConfig(): IChartConfig[] {
         textKey: 'name'
       }
     ],
-    [t]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
   )
 }
