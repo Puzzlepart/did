@@ -1,6 +1,6 @@
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
-import { Field, InputType, ObjectType } from 'type-graphql'
+import { Field, ID, InputType, ObjectType } from 'type-graphql'
 
 @ObjectType({ description: 'A type that describes Subscription forecast settings' })
 export class SubscriptionForecastSettings {
@@ -34,7 +34,9 @@ export class SubscriptionSettings {
   simpleResolvers: true
 })
 export class Subscription {
-  @Field()
+  _id?: string
+
+  @Field(() => ID)
   id: string
 
   @Field()
