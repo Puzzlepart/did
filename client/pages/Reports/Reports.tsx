@@ -9,8 +9,8 @@ import { ReportsContext } from './context'
 import { CHANGE_QUERY, FILTERS_UPDATED, TOGGLE_FILTER_PANEL } from './reducer/actions'
 import styles from './Reports.module.scss'
 import { SaveFilterForm } from './SaveFilterForm'
-import { useReports } from './useReports'
-import { useUpdateUserConfiguration } from './useUpdateUserConfiguration'
+import { useReports } from './hooks/useReports'
+import { useUpdateUserConfiguration } from './hooks/useUpdateUserConfiguration'
 
 export const Reports = () => {
   const { state, dispatch, params, queries, filters, t } = useReports()

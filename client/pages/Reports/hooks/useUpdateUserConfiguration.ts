@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { useEffect } from 'react'
-import $updateUserConfiguration from '../../graphql/updateUserConfiguration.gql'
+import $updateUserConfiguration from '../../../graphql/updateUserConfiguration.gql'
 
 /**
  * Use update user configuration

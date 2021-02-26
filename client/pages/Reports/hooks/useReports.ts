@@ -3,12 +3,12 @@ import { AppContext } from 'AppContext'
 import { useContext, useLayoutEffect, useMemo, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
-import initFilters from './filters'
-import { getQueries } from './queries'
-import createReducer from './reducer'
-import { DATA_UPDATED, INIT } from './reducer/actions'
+import initFilters from '../filters'
+import { getQueries } from '../queries'
+import createReducer from '../reducer'
+import { DATA_UPDATED, INIT } from '../reducer/actions'
 import $timeentries from './timeentries.gql'
-import { IReportsParams } from './types'
+import { IReportsParams } from '../types'
 
 /**
  * Hook for Reports
