@@ -42,7 +42,6 @@ const boostrap = async () => {
   }
 
   const context = await getContext()
-  const container = document.getElementById('app')
   DateUtils.setup(context.user.language)
   i18n.changeLanguage(context.user.language)
 
@@ -52,7 +51,7 @@ const boostrap = async () => {
     <ApolloProvider client={client}>
       <App {...context} />
     </ApolloProvider>,
-    container
+    document.getElementById('app')
   )
 }
 

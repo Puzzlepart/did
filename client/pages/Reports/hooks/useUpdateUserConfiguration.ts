@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useMutation } from '@apollo/client'
 import { useEffect } from 'react'
 import $updateUserConfiguration from '../../../graphql/updateUserConfiguration.gql'
@@ -13,5 +14,5 @@ export function useUpdateUserConfiguration<T = any>(config: T) {
   useEffect(() => {
     const variables = { configuration: strValue }
     updateUserConfiguration({ variables })
-  }, [strValue, updateUserConfiguration, config])
+  }, [strValue])
 }
