@@ -1,29 +1,10 @@
-import { QueryResult } from '@apollo/client'
-import { createAction, createReducer } from '@reduxjs/toolkit'
+import { createReducer } from '@reduxjs/toolkit'
 import copy from 'fast-copy'
 import { History } from 'history'
-import { Project } from 'types'
-import { contains, find } from 'underscore'
-import { IProjectsParams, IProjectsState, ProjectsQueryResult, ProjectsView } from './types'
-
-export const DATA_UPDATED = createAction<{ query: QueryResult<ProjectsQueryResult> }>(
-  'DATA_UPDATED'
-)
-export const SET_SELECTED_PROJECT = createAction<{ project: Project }>('SET_SELECTED_PROJECT')
-export const CHANGE_VIEW = createAction<{ view: ProjectsView }>('CHANGE_VIEW')
-export const CHANGE_DETAILS_TAB = createAction<{ detailsTab: string }>('CHANGE_DETAILS_TAB')
-
-/**
- * Initialize state
- *
- * @param {IProjectsParams} params Params
- */
-export const initState = (params: IProjectsParams): IProjectsState => ({
-  view: contains(['search', 'my', 'new'], params.view) ? params.view : 'search',
-  detailsTab: params.detailsTab,
-  projects: [],
-  outlookCategories: []
-})
+import { find } from 'underscore'
+import { IProjectsParams } from '../types'
+import { SET_SELECTED_PROJECT, CHANGE_DETAILS_TAB, DATA_UPDATED, CHANGE_VIEW } from './actions'
+import { initState } from './initState'
 
 interface ICreateReducerParams {
   params: IProjectsParams
@@ -63,3 +44,5 @@ export default ({ params }: ICreateReducerParams) =>
       state.detailsTab = payload.detailsTab
     }
   })
+
+export * from './initState'

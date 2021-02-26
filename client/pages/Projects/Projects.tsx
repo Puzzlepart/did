@@ -12,12 +12,12 @@ import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
 import { IProjectListProps } from './ProjectList/types'
 import $projects from './projects.gql'
-import createReducer, {
+import createReducer, { initState } from './reducer'
+import {
   CHANGE_VIEW,
   DATA_UPDATED,
-  initState,
   SET_SELECTED_PROJECT
-} from './reducer'
+} from './reducer/actions'
 import { IProjectsParams, ProjectsQueryResult, ProjectsView } from './types'
 
 export const Projects: FunctionComponent = () => {
