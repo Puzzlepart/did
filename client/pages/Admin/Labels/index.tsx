@@ -20,7 +20,7 @@ export const Labels = () => {
 
   useEffect(() => {
     refetch()
-  }, [form])
+  }, [refetch, form])
 
   return (
     <>

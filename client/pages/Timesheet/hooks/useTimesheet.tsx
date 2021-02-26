@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { useLayoutEffect, useMemo } from 'react'
+import { useCallback, useLayoutEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { useTimesheetReducer } from '../reducer'
@@ -31,43 +31,49 @@ export function useTimesheet() {
   useLayoutEffect(() => {
     if (!state.selectedPeriod) return
     history.push(['/timesheet', state.selectedView, state.selectedPeriod.path].join('/'))
-  }, [state.selectedView, state.selectedPeriod])
+  }, [state.selectedView, state.selectedPeriod, history])
 
   const [[submitPeriod], [unsubmitPeriod]] = [
     useMutation($submitPeriod),
     useMutation($unsubmitPeriod)
   ]
 
-  const onSubmitPeriod = async (forecast: boolean) => {
-    dispatch(SUBMITTING_PERIOD({ forecast }))
-    const variables = {
-      period: state.selectedPeriod.data,
-      options: { forecast, tzOffset: new Date().getTimezoneOffset() }
-    }
-    await submitPeriod({ variables })
-    refetch()
-  }
+  const onSubmitPeriod = useCallback(
+    () => async (forecast: boolean) => {
+      dispatch(SUBMITTING_PERIOD({ forecast }))
+      const variables = {
+        period: state.selectedPeriod.data,
+        options: { forecast, tzOffset: new Date().getTimezoneOffset() }
+      }
+      await submitPeriod({ variables })
+      refetch()
+    },
+    [dispatch, refetch, state.selectedPeriod.data, submitPeriod]
+  )
 
-  const onUnsubmitPeriod = async (forecast: boolean) => {
-    dispatch(UNSUBMITTING_PERIOD({ forecast }))
-    const variables = {
-      period: state.selectedPeriod.data,
-      options: { forecast }
-    }
-    await unsubmitPeriod({ variables })
-    refetch()
-  }
+  const onUnsubmitPeriod = useCallback(
+    () => async (forecast: boolean) => {
+      dispatch(UNSUBMITTING_PERIOD({ forecast }))
+      const variables = {
+        period: state.selectedPeriod.data,
+        options: { forecast }
+      }
+      await unsubmitPeriod({ variables })
+      refetch()
+    },
+    [dispatch, refetch, state.selectedPeriod.data, unsubmitPeriod]
+  )
 
   const context: ITimesheetContext = useMemo(
     () => ({
       ...state,
-      refetch: refetch,
+      refetch,
       onSubmitPeriod,
       onUnsubmitPeriod,
       dispatch,
       t
     }),
-    [state]
+    [state, refetch, onSubmitPeriod, onUnsubmitPeriod, dispatch, t]
   )
   return {
     state,

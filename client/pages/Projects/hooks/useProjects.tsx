@@ -36,7 +36,7 @@ export function useProjects() {
       dispatch,
       refetch
     }),
-    [state]
+    [state, dispatch, refetch]
   )
 
   const { listProps } = useProjectList({ state, dispatch, loading, t })

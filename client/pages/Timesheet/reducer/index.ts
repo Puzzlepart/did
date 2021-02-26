@@ -120,7 +120,7 @@ const createTimesheetReducer = ({ url, t }: ITimesheetReducerParams) =>
  * @param {ITimesheetReducerParams} params Parameters
  */
 export function useTimesheetReducer(params: ITimesheetReducerParams) {
-  const reducer = useMemo(() => createTimesheetReducer(params), [])
+  const reducer = useMemo(() => createTimesheetReducer(params), [params])
   const [state, dispatch] = useReducer(reducer, initState(params.url))
   return { state, dispatch }
 }

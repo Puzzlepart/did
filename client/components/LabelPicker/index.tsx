@@ -42,7 +42,7 @@ export const LabelPicker: FunctionComponent<ILabelPickerProps> = (props: ILabelP
         setSelectedLabels(_selectedLabels)
       }
     }
-  }, [data])
+  }, [data, props.defaultSelectedKeys])
 
   return (
     <div className={`${styles.root} ${props.className}`}>

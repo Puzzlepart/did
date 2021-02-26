@@ -48,7 +48,7 @@ export const UserNotifications = () => {
     if (_notifications.length > 0) {
       setNotifications(new Set(_notifications))
     }
-  }, [loading])
+  }, [loading, data])
 
   return (
     <>

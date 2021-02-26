@@ -14,7 +14,7 @@ export function useReportsReducer(queries: IReportsQuery[]) {
   const { t } = useTranslation()
   const app = useContext(AppContext)
   const url = useParams<IReportsParams>()
-  const reducer = useMemo(() => createReducer({ app, url, queries }), [])
+  const reducer = useMemo(() => createReducer({ app, url, queries }), [app, queries, url])
   const [state, dispatch] = useReducer(reducer, {
     loading: true,
     timeentries: [],

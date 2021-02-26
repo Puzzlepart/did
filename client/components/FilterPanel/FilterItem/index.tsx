@@ -15,7 +15,7 @@ export const FilterItem = (props: IFilterItemProps) => {
     return props.filter.items.filter((item) =>
       isBlank(searchTerm) ? true : contains(item.value.toLowerCase(), searchTerm.toLowerCase())
     )
-  }, [searchTerm])
+  }, [searchTerm, props.filter.items])
 
   return (
     <div className={styles.root}>

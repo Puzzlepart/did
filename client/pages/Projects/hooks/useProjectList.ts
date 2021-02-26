@@ -25,7 +25,7 @@ export function useProjectList({ state, dispatch, loading, t }) {
       },
       height: state.selected && 400
     }),
-    [state]
+    [state, dispatch, loading, t]
   )
 
   return { listProps }
