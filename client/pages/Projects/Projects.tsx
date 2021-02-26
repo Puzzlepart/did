@@ -1,76 +1,26 @@
-import { useQuery } from '@apollo/client'
-import { AppContext } from 'AppContext'
 import { UserMessage } from 'components/UserMessage'
 import { PERMISSION } from 'config/security/permissions'
-import { MessageBarType, Pivot, PivotItem, SelectionMode } from 'office-ui-fabric'
+import { MessageBarType, Pivot, PivotItem } from 'office-ui-fabric'
 import { ProjectForm } from 'pages/Projects/ProjectForm'
-import React, { FunctionComponent, useContext, useLayoutEffect, useMemo, useReducer } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useHistory, useParams } from 'react-router-dom'
-import { IProjectsContext, ProjectsContext } from './context'
+import React, { FunctionComponent } from 'react'
 import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
-import { IProjectListProps } from './ProjectList/types'
-import $projects from './projects.gql'
-import createReducer, { initState } from './reducer'
-import {
-  CHANGE_VIEW,
-  DATA_UPDATED,
-  SET_SELECTED_PROJECT
-} from './reducer/actions'
-import { IProjectsParams, ProjectsQueryResult, ProjectsView } from './types'
+import { CHANGE_VIEW } from './reducer/actions'
+import { ProjectsView } from './types'
+import { useProjects } from './hooks/useProjects'
 
 export const Projects: FunctionComponent = () => {
-  const { t } = useTranslation()
-  const { user } = useContext(AppContext)
-  const history = useHistory()
-  const params = useParams<IProjectsParams>()
-  const reducer = useMemo(() => createReducer({ params, history }), [])
-  const [state, dispatch] = useReducer(reducer, initState(params))
-  const query = useQuery<ProjectsQueryResult>($projects, {
-    variables: { sortBy: 'name' },
-    fetchPolicy: 'cache-and-network'
-  })
-
-  useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query])
-  useLayoutEffect(() => {
-    const paths = [state.view, state.selected?.tag || params.key, state.detailsTab]
-    const path = `/${['projects', ...paths].filter((p) => p).join('/')}`.toLowerCase()
-    history.push(path)
-  }, [state.view, state.selected, state.detailsTab])
-
-  const context = useMemo<IProjectsContext>(
-    () => ({
-      state,
-      dispatch,
-      refetch: query.refetch
-    }),
-    [state]
-  )
-
-  const listProps = useMemo<IProjectListProps>(
-    () => ({
-      enableShimmer: query.loading,
-      searchBox: {
-        placeholder:
-          state.view === 'my'
-            ? t('projects.myProjectsSearchPlaceholder')
-            : t('common.searchPlaceholder'),
-        onChange: () => dispatch(SET_SELECTED_PROJECT({ project: null }))
-      },
-      selection: {
-        mode: SelectionMode.single,
-        onChanged: (selected) => {
-          dispatch(SET_SELECTED_PROJECT({ project: selected }))
-        }
-      },
-      height: state.selected && 400
-    }),
-    [state]
-  )
-
+  const {
+    state,
+    dispatch,
+    listProps,
+    user,
+    t,
+    ProjectsContextProvider
+  } = useProjects()
+  
   return (
-    <ProjectsContext.Provider value={context}>
+    <ProjectsContextProvider>
       <Pivot
         selectedKey={state.view}
         onLinkClick={({ props }) => dispatch(CHANGE_VIEW({ view: props.itemKey as ProjectsView }))}
@@ -81,7 +31,7 @@ export const Projects: FunctionComponent = () => {
           headerText={t('common.search')}
           itemIcon='FabricFolderSearch'>
           <UserMessage
-            hidden={!query.error}
+            hidden={!state.error}
             type={MessageBarType.error}
             text={t('common.genericErrorText')}
           />
@@ -94,7 +44,7 @@ export const Projects: FunctionComponent = () => {
           headerText={t('projects.myProjectsText')}
           itemIcon='FabricUserFolder'>
           <UserMessage
-            hidden={!query.error}
+            hidden={!state.error}
             type={MessageBarType.error}
             text={t('common.genericErrorText')}
           />
@@ -116,7 +66,7 @@ export const Projects: FunctionComponent = () => {
           </PivotItem>
         )}
       </Pivot>
-    </ProjectsContext.Provider>
+    </ProjectsContextProvider>
   )
 }
 

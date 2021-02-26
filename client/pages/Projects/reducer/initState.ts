@@ -2,13 +2,13 @@ import { contains } from 'underscore'
 import { IProjectsParams, IProjectsState } from '../types'
 
 /**
- * Initialize state
+ * Initialize state URL params
  *
- * @param {IProjectsParams} params Params
+ * @param {IProjectsParams} url Params
  */
-export const initState = (params: IProjectsParams): IProjectsState => ({
-    view: contains(['search', 'my', 'new'], params.view) ? params.view : 'search',
-    detailsTab: params.detailsTab,
+export const initState = (url: IProjectsParams): IProjectsState => ({
+    view: contains(['search', 'my', 'new'], url.view) ? url.view : 'search',
+    detailsTab: url.detailsTab,
     projects: [],
     outlookCategories: []
 })

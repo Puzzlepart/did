@@ -1,25 +1,19 @@
 import { createReducer } from '@reduxjs/toolkit'
 import copy from 'fast-copy'
-import { History } from 'history'
 import { find } from 'underscore'
-import { IProjectsParams } from '../types'
-import { SET_SELECTED_PROJECT, CHANGE_DETAILS_TAB, DATA_UPDATED, CHANGE_VIEW } from './actions'
+import { CHANGE_DETAILS_TAB, CHANGE_VIEW, DATA_UPDATED, SET_SELECTED_PROJECT } from './actions'
+import { IProjectsReducerParams } from './types'
 import { initState } from './initState'
-
-interface ICreateReducerParams {
-  params: IProjectsParams
-  history: History
-}
 
 /**
  * Create reducer for Projects
  */
-export default ({ params }: ICreateReducerParams) =>
+export default ({ url: params }: IProjectsReducerParams) =>
   createReducer(initState(params), {
     [DATA_UPDATED.type]: (state, { payload }: ReturnType<typeof DATA_UPDATED>) => {
-      if (payload.query.data) {
-        state.outlookCategories = payload.query.data.outlookCategories
-        state.projects = payload.query.data.projects.map((p) => {
+      if (payload.data) {
+        state.outlookCategories = payload.data.outlookCategories
+        state.projects = payload.data.projects.map((p) => {
           const _p = copy(p)
           _p.outlookCategory = find(state.outlookCategories, (c) => c.displayName === p.tag)
           return _p
@@ -29,6 +23,7 @@ export default ({ params }: ICreateReducerParams) =>
           (p) => JSON.stringify(params).toLowerCase().indexOf(p.tag.toLowerCase()) !== -1
         )
       }
+      state.error = payload.error
     },
 
     [SET_SELECTED_PROJECT.type]: (state, { payload }: ReturnType<typeof SET_SELECTED_PROJECT>) => {
@@ -46,3 +41,4 @@ export default ({ params }: ICreateReducerParams) =>
   })
 
 export * from './initState'
+export * from './useProjectsReducer'

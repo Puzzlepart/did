@@ -1,3 +1,4 @@
+import { ApolloError } from '@apollo/client'
 import { OutlookCategory, Project } from 'types'
 
 export interface IProjectsParams {
@@ -14,6 +15,5 @@ export interface IProjectsState {
   selected?: Project
   projects?: Project[]
   outlookCategories?: OutlookCategory[]
+  error?: ApolloError
 }
-
-export type ProjectsQueryResult = { projects: Project[]; outlookCategories: OutlookCategory[] }

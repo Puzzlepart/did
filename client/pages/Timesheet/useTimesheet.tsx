@@ -14,7 +14,7 @@ import { useTimesheetQuery } from './useTimesheetQuery'
 /**
  * Hook for Timesheet
  *
- * * Get history using useHistiry
+ * * Get history using useHistory
  * * Get URL params using useParams
  * * Using reducer from /reducer
  * * Using useTimesheetQuery with timesheet.gql

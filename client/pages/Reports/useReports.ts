@@ -13,7 +13,7 @@ import { IReportsParams } from './types'
 /**
  * Hook for Reports
  *
- * * Get history using useHistiry
+ * * Get history using useHistory
  * * Get URL params using useParams
  * * Get queries using getQueries
  * * Using reducer from /reducer
