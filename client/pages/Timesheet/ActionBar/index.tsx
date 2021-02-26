@@ -9,16 +9,12 @@ import { useWeekPickerCommand } from './WeekPicker'
 export const ActionBar = () => {
   const navigateCommands = useNavigateCommands()
   const submitCommands = useSubmitCommands()
-  const weekPickerCommand  = useWeekPickerCommand()
+  const weekPickerCommand = useWeekPickerCommand()
   const periodCommands = usePeriodCommands()
 
   const commandBarProps: ICommandBarProps = {
     styles: { root: { padding: 0 } },
-    items: [
-      ...navigateCommands,
-      weekPickerCommand,
-      ...periodCommands
-    ],
+    items: [...navigateCommands, weekPickerCommand, ...periodCommands],
     farItems: [submitCommands]
   }
 

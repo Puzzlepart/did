@@ -31,26 +31,26 @@ export function useSubmitCommands() {
       const { isComplete, isForecast, isForecasted, isConfirmed, isPast } = context.selectedPeriod
       const cmd: { [key: string]: IContextualMenuItem } = {
         FORECAST_PERIOD: subscription.settings?.forecast?.enabled && {
-          ...submitItemBaseProps('FORECAST_PERIOD', 'BufferTimeBefore') as IContextualMenuItem,
+          ...(submitItemBaseProps('FORECAST_PERIOD', 'BufferTimeBefore') as IContextualMenuItem),
           onClick: () => context.onSubmitPeriod(true),
           text: context.t('timesheet.forecastHoursText'),
           secondaryText: context.t('timesheet.forecastHoursSecondaryText')
         },
         UNFORECAST_PERIOD: subscription.settings?.forecast?.enabled && {
-          ...submitItemBaseProps('UNFORECAST_PERIOD', 'Cancel') as IContextualMenuItem,
+          ...(submitItemBaseProps('UNFORECAST_PERIOD', 'Cancel') as IContextualMenuItem),
           onClick: () => context.onUnsubmitPeriod(true),
           text: context.t('timesheet.unforecastHoursText'),
           secondaryText: context.t('timesheet.unforecastHoursSecondaryText')
         },
         CONFIRM_PERIOD: {
-          ...submitItemBaseProps('CONFIRM_PERIOD', 'CheckMark') as IContextualMenuItem,
+          ...(submitItemBaseProps('CONFIRM_PERIOD', 'CheckMark') as IContextualMenuItem),
           className: styles.confirmPeriodButton,
           onClick: () => context.onSubmitPeriod(false),
           text: context.t('timesheet.confirmHoursText'),
           secondaryText: context.t('timesheet.confirmHoursSecondaryText')
         },
         UNCONFIRM_PERIOD: {
-          ...submitItemBaseProps('UNCONFIRM_PERIOD', 'Cancel') as IContextualMenuItem,
+          ...(submitItemBaseProps('UNCONFIRM_PERIOD', 'Cancel') as IContextualMenuItem),
           className: styles.unconfirmPeriodButton,
           onClick: () => context.onUnsubmitPeriod(false),
           text: context.t('timesheet.unconfirmHoursText'),
@@ -86,7 +86,7 @@ export function useSubmitCommands() {
       if (commands.length > 1) {
         menuProps = {
           items: commands.map((cmd, idx) => ({
-            ...omit(cmd, 'buttonStyles', 'iconProps') as IContextualMenuItem,
+            ...(omit(cmd, 'buttonStyles', 'iconProps') as IContextualMenuItem),
             isChecked: idx === 0
           }))
         }
