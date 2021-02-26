@@ -7,9 +7,12 @@ import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
 import { TimesheetContext } from '../context'
 
+/**
+ * Use messages
+ */
 export function useMessages() {
   const { t } = useTranslation()
-  const {  selectedPeriod, periods, dispatch } = useContext(TimesheetContext)
+  const { selectedPeriod, periods, dispatch } = useContext(TimesheetContext)
 
   const messages: IUserMessageProps[] = []
 

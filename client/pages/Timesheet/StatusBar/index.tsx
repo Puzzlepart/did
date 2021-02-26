@@ -23,7 +23,7 @@ export const StatusBar: FunctionComponent = () => {
       <div className={styles.root}>
         <div className={styles.progress}>
           <Icon className={styles.icon} iconName='RecurringEvent' />
-          <ProgressIndicator className={styles.indicator}  {...loading} />
+          <ProgressIndicator className={styles.indicator} {...loading} />
         </div>
       </div>
     )
