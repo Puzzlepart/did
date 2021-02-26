@@ -3,7 +3,7 @@ import { ITimesheetContext } from '../context'
 import { SET_SCOPE, TOGGLE_SHORTCUTS } from '../reducer/actions'
 import { TimesheetScope } from '../TimesheetScope'
 
-export default ({ scope, dispatch,t }: ITimesheetContext): GlobalHotKeysProps => ({
+export default ({ scope, dispatch, t }: ITimesheetContext): GlobalHotKeysProps => ({
   keyMap: {
     GO_TO_CURRENT_WEEK: {
       name: t('timesheet.goToCurrentWeek'),

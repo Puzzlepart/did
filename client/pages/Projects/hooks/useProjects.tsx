@@ -21,32 +21,32 @@ import { useProjectsQuery } from './useProjectsQuery'
  * * Returns ProjectsContextProvider with Projects context
  */
 export function useProjects() {
-    const { t } = useTranslation()
-    const { user } = useContext(AppContext)
-    const history = useHistory()
-    const url = useParams<IProjectsParams>()
-    const { state, dispatch } = useProjectsReducer({ url, history })
-    const { refetch, loading } = useProjectsQuery(dispatch)
+  const { t } = useTranslation()
+  const { user } = useContext(AppContext)
+  const history = useHistory()
+  const url = useParams<IProjectsParams>()
+  const { state, dispatch } = useProjectsReducer({ url, history })
+  const { refetch, loading } = useProjectsQuery(dispatch)
 
-    useHistoryUpdater(state)
+  useHistoryUpdater(state)
 
-    const context = useMemo<IProjectsContext>(
-        () => ({
-            state,
-            dispatch,
-            refetch
-        }),
-        [state]
-    )
+  const context = useMemo<IProjectsContext>(
+    () => ({
+      state,
+      dispatch,
+      refetch
+    }),
+    [state]
+  )
 
-    const { listProps } = useProjectList({ state, dispatch, loading, t })
+  const { listProps } = useProjectList({ state, dispatch, loading, t })
 
-    return {
-        state,
-        dispatch,
-        listProps,
-        user,
-        t,
-        context
-    }
+  return {
+    state,
+    dispatch,
+    listProps,
+    user,
+    t,
+    context
+  }
 }

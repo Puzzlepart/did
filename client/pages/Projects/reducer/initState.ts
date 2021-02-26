@@ -7,8 +7,8 @@ import { IProjectsParams, IProjectsState } from '../types'
  * @param {IProjectsParams} url Params
  */
 export const initState = (url: IProjectsParams): IProjectsState => ({
-    view: contains(['search', 'my', 'new'], url.view) ? url.view : 'search',
-    detailsTab: url.detailsTab,
-    projects: [],
-    outlookCategories: []
+  view: contains(['search', 'my', 'new'], url.view) ? url.view : 'search',
+  detailsTab: url.detailsTab,
+  projects: [],
+  outlookCategories: []
 })

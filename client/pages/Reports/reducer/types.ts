@@ -5,15 +5,15 @@ export interface IReportsReducerParams {
   /**
    * URL parameters
    */
-  url: IReportsParams;
+  url: IReportsParams
 
   /**
    * Queries
    */
-  queries: IReportsQuery[];
+  queries: IReportsQuery[]
 
   /**
    * App context
    */
-  app: IAppContext;
+  app: IAppContext
 }

@@ -4,7 +4,7 @@ import hotkeys from './hotkeys'
 
 /**
  * Hook for hotkeys
- * 
+ *
  * @param {ITimesheetContext} context Context
  */
 export function useHotkeys(context: ITimesheetContext) {

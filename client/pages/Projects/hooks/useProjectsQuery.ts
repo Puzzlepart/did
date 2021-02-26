@@ -6,16 +6,16 @@ import $projects from './projects.gql'
 
 /**
  * Use Projects query
- * 
+ *
  * Uses useQuery from @apollo/client
- * 
- * @param {Dispatch<AnyAction>} dispatch Dispatch 
+ *
+ * @param {Dispatch<AnyAction>} dispatch Dispatch
  */
 export function useProjectsQuery(dispatch: Dispatch<AnyAction>) {
-    const { refetch, data, error, loading } = useQuery($projects, {
-        variables: { sortBy: 'name' },
-        fetchPolicy: 'cache-and-network'
-    })
-    useLayoutEffect(() => dispatch(DATA_UPDATED({ data, error, loading })), [data])
-    return { refetch, loading }
+  const { refetch, data, error, loading } = useQuery($projects, {
+    variables: { sortBy: 'name' },
+    fetchPolicy: 'cache-and-network'
+  })
+  useLayoutEffect(() => dispatch(DATA_UPDATED({ data, error, loading })), [data])
+  return { refetch, loading }
 }

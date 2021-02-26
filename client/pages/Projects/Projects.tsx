@@ -11,15 +11,8 @@ import { CHANGE_VIEW } from './reducer/actions'
 import { ProjectsView } from './types'
 
 export const Projects: FunctionComponent = () => {
-  const {
-    state,
-    dispatch,
-    listProps,
-    user,
-    t,
-    context
-  } = useProjects()
-  
+  const { state, dispatch, listProps, user, t, context } = useProjects()
+
   return (
     <ProjectsContext.Provider value={context}>
       <Pivot

@@ -26,7 +26,7 @@ export function useReports() {
   const params = useParams<IReportsParams>()
   const history = useHistory()
   const queries = getQueries(t)
-  const {state, dispatch} = useReportsReducer(queries)
+  const { state, dispatch } = useReportsReducer(queries)
   const query = useQuery($timeentries, {
     skip: !state.query,
     fetchPolicy: 'cache-first',
