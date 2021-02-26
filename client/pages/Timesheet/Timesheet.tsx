@@ -9,6 +9,7 @@ import { useHotkeys } from './hooks/useHotkeys'
 import { useTimesheet } from './hooks/useTimesheet'
 import { Overview } from './Overview'
 import { CHANGE_VIEW, TOGGLE_SHORTCUTS } from './reducer/actions'
+import { StatusBar } from './StatusBar'
 import { SummaryView } from './SummaryView'
 import styles from './Timesheet.module.scss'
 import { TimesheetContext, TimesheetView } from './types'
@@ -23,6 +24,7 @@ export const Timesheet: FunctionComponent = () => {
         <div className={styles.root}>
           <ActionBar />
           <ErrorBar error={context.error} />
+          <StatusBar />
           <Pivot
             defaultSelectedKey={state.selectedView}
             onLinkClick={({ props }) =>

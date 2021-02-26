@@ -1,6 +1,7 @@
 .root {
-  min-height: 40px;
-  margin: 10px 0 0 0;
+  min-height: 65px;
+  box-sizing: border-box;
+  margin: 10px 0 10px 0;
 
   .container {
     display: flex;
@@ -20,9 +21,25 @@
 
       margin-right: 10px;
 
-      &:last-of-type() {
+      &:last-child {
         margin-right: 0;
       }
+    }
+  }
+
+  .progress {
+    padding: 0 0 0 10px;
+    display: flex;
+    flex-direction: row;
+
+    .icon {
+      padding: 10px 0 0 0;
+      font-size: 42px;
+    }
+
+    .indicator {
+      margin: 0 0 0 18px;
+      flex-grow: 1;
     }
   }
 }

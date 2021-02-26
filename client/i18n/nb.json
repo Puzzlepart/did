@@ -1,7 +1,7 @@
 {
   "timesheet": {
-    "loadingEventsLabel": "Laster hendelser",
-    "loadingEventsDescription": "Vent et lite øyeblikk...",
+    "loadingTimesheetLabel": "Laster hendelser",
+    "loadingTimesheetDescription": "Vent et lite øyeblikk...",
     "confirmingPeriodLabel": "Bekrefter timene dine",
     "confirmingPeriodDescription": "Vent et lite øyeblikk...",
     "unconfirmingPeriodLabel": "Vi nullstiller timene dine",

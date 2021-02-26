@@ -43,8 +43,8 @@ const createTimesheetReducer = ({ url, t }: ITimesheetReducerParams) =>
       const { loading, data, error } = payload.query
       state.loading = loading
         ? {
-            label: t('timesheet.loadingEventsLabel'),
-            description: t('timesheet.loadingEventsDescription')
+            label: t('timesheet.loadingTimesheetLabel'),
+            description: t('timesheet.loadingTimesheetDescription')
           }
         : null
       if (data) {
