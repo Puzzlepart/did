@@ -113,7 +113,7 @@ export class TimesheetService {
         entries.push({
           ...m,
           ...event,
-          _id: this._createUniqueEventId(period._id, event.id),
+          _id: this._createUniqueEventId(event.id, event.startDateTime as Date),
           ...omit(period, '_id'),
           _periodId: period._id
         })
@@ -152,13 +152,13 @@ export class TimesheetService {
   }
 
   /**
-   * Create unique ID consisting of period ID + event ID
+   * Create unique ID consisting of event ID + event start date time
    *
-   * @param {string} periodId Period ID
    * @param {string} eventId Event ID
+   * @param {Date} startDateTime Start date time
    */
-  private _createUniqueEventId(periodId: string, eventId: string) {
-    return `${periodId}${eventId}`.replace(/[^a-zA-Z0-9]/g, '')
+  private _createUniqueEventId(eventId: string, startDateTime: Date) {
+    return `${eventId}${startDateTime.getTime()}`.replace(/[^a-zA-Z0-9]/g, '')
   }
 
   /**
