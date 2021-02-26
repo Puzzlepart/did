@@ -126,6 +126,7 @@ function generateTotalRow(events: any[], columns: IColumn[], label: string) {
 
 export const SummaryView = () => {
   const { t } = useTranslation()
+  const context = useContext(TimesheetContext)
   if (isMobile) {
     return (
       <MessageBar styles={{ root: { marginTop: 8 } }}>
@@ -133,7 +134,6 @@ export const SummaryView = () => {
       </MessageBar>
     )
   } else {
-    const context = useContext(TimesheetContext)
     const columns = createColumns(context.scope)
     const events = context.selectedPeriod?.getEvents(false) || []
     const items = [
