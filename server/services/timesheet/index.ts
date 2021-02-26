@@ -3,9 +3,9 @@ import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import { find, isEmpty, omit } from 'underscore'
 import { MSGraphService } from '..'
-import { DateObject, default as DateUtils } from '../../../shared/utils/date'
+import DateUtils, { DateObject } from '../../../shared/utils/date'
 import { Context } from '../../graphql/context'
-import { TimesheetPeriodObject } from '../../graphql/types'
+import { TimesheetPeriodObject } from '../../graphql/resolvers/types'
 import { MongoService } from '../mongo'
 import MatchingEngine from './matching'
 import {
@@ -34,10 +34,11 @@ export class TimesheetService {
     private readonly _msgraph: MSGraphService,
     private readonly _mongo: MongoService
   ) {
-    this._confirmed_periods = this.context.db.collection('confirmed_periods')
-    this._forecasted_periods = this.context.db.collection('forecasted_periods')
-    this._time_entries = this.context.db.collection('time_entries')
-    this._forecasted_time_entries = this.context.db.collection('forecasted_time_entries')
+    const { db } = this.context
+    this._confirmed_periods = db.collection('confirmed_periods')
+    this._forecasted_periods = db.collection('forecasted_periods')
+    this._time_entries = db.collection('time_entries')
+    this._forecasted_time_entries = db.collection('forecasted_time_entries')
   }
 
   /**
