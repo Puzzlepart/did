@@ -6,8 +6,6 @@ import { getValue } from 'helpers'
  *
  * @param {any[]} items Items
  * @param {string} property Property name
- *
- * @category Utility
  */
 export function getSum(items: any[], property: string): number {
   return reduce(items, (memo, item) => (memo += getValue<number>(item, property, 0)), 0)
