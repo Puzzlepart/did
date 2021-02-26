@@ -5,7 +5,7 @@ import { find, isEmpty, omit } from 'underscore'
 import { MSGraphService } from '..'
 import { DateObject, default as DateUtils } from '../../../shared/utils/date'
 import { Context } from '../../graphql/context'
-import { TimesheetPeriodObject } from '../../graphql/resolvers/timesheet/types/TimesheetPeriodObject'
+import { TimesheetPeriodObject } from '../../graphql/types'
 import { MongoService } from '../mongo'
 import MatchingEngine from './matching'
 import {
