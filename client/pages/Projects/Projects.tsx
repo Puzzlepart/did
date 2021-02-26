@@ -3,11 +3,12 @@ import { PERMISSION } from 'config/security/permissions'
 import { MessageBarType, Pivot, PivotItem } from 'office-ui-fabric'
 import { ProjectForm } from 'pages/Projects/ProjectForm'
 import React, { FunctionComponent } from 'react'
+import { ProjectsContext } from './context'
+import { useProjects } from './hooks/useProjects'
 import { ProjectDetails } from './ProjectDetails'
 import ProjectList from './ProjectList'
 import { CHANGE_VIEW } from './reducer/actions'
 import { ProjectsView } from './types'
-import { useProjects } from './hooks/useProjects'
 
 export const Projects: FunctionComponent = () => {
   const {
@@ -16,11 +17,11 @@ export const Projects: FunctionComponent = () => {
     listProps,
     user,
     t,
-    ProjectsContextProvider
+    context
   } = useProjects()
   
   return (
-    <ProjectsContextProvider>
+    <ProjectsContext.Provider value={context}>
       <Pivot
         selectedKey={state.view}
         onLinkClick={({ props }) => dispatch(CHANGE_VIEW({ view: props.itemKey as ProjectsView }))}
@@ -66,7 +67,7 @@ export const Projects: FunctionComponent = () => {
           </PivotItem>
         )}
       </Pivot>
-    </ProjectsContextProvider>
+    </ProjectsContext.Provider>
   )
 }
 

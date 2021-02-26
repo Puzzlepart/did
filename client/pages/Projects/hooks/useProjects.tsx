@@ -1,8 +1,8 @@
 import { AppContext } from 'AppContext'
-import React, { useContext, useMemo } from 'react'
+import { useContext, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
-import { IProjectsContext, ProjectsContext } from '../context'
+import { IProjectsContext } from '../context'
 import { useProjectsReducer } from '../reducer'
 import { IProjectsParams } from '../types'
 import { useHistoryUpdater } from './useHistoryUpdater'
@@ -47,10 +47,6 @@ export function useProjects() {
         listProps,
         user,
         t,
-        ProjectsContextProvider: ({ children }) => (
-            <ProjectsContext.Provider value={context}>
-                {children}
-            </ProjectsContext.Provider>
-        ),
+        context
     }
 }
