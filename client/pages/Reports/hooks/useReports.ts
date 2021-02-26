@@ -32,10 +32,10 @@ export function useReports() {
     fetchPolicy: 'cache-first',
     variables: state.query?.variables
   })
-  useLayoutEffect(() => dispatch(INIT()), [])
-  useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query])
-  useLayoutEffect(() => history.push(`/reports/${state.query?.key || ''}`), [state.query])
-  const filters = useMemo(() => initFilters(state.filter, t), [state.filter])
+  useLayoutEffect(() => dispatch(INIT()), [dispatch])
+  useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query, dispatch])
+  useLayoutEffect(() => history.push(`/reports/${state.query?.key || ''}`), [state.query, history])
+  const filters = useMemo(() => initFilters(state.filter, t), [state.filter, t])
   return {
     state,
     dispatch,

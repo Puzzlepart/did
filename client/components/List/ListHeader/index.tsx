@@ -24,7 +24,8 @@ export const ListHeader: FunctionComponent<IListHeaderProps> = (props: IListHead
         />
       )
     }
-  }, [props.searchBox])
+  }, [props])
+
   return (
     <Sticky stickyPosition={StickyPositionType.Header} isScrollSynced={true}>
       <div className={styles.root}>

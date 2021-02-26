@@ -6,8 +6,8 @@ import styles from './ErrorBar.module.scss'
 import { IErrorBarProps } from './types'
 
 export const ErrorBar = ({ error }: IErrorBarProps) => {
-  if (!error) return null
   const { t } = useTranslation()
+  if (!error) return null
   let messageProps: IUserMessageProps
   const code = error.graphQLErrors[0].extensions.code
   switch (code) {

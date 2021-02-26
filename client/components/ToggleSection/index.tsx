@@ -1,7 +1,7 @@
-import React, { FunctionComponent, useEffect, useMemo, useState } from 'react'
-import { IToggleSectionProps } from './types'
-import styles from './ToggleSection.module.scss'
 import { Icon } from 'office-ui-fabric'
+import React, { FunctionComponent, useEffect, useMemo, useState } from 'react'
+import styles from './ToggleSection.module.scss'
+import { IToggleSectionProps } from './types'
 
 export const ToggleSection: FunctionComponent<IToggleSectionProps> = (
   props: IToggleSectionProps
@@ -14,7 +14,7 @@ export const ToggleSection: FunctionComponent<IToggleSectionProps> = (
 
   useEffect(() => {
     sessionStorage.setItem(isExpandedStorageKey, JSON.stringify(isExpanded))
-  }, [isExpanded])
+  }, [isExpanded, isExpandedStorageKey])
 
   return (
     <div className={`${styles.root} ${props.className}`}>

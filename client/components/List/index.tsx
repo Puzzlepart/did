@@ -27,7 +27,7 @@ const List: FunctionComponent<IListProps> = (props: IListProps) => {
     searchTerm: null
   })
 
-  useEffect(() => dispatch({ type: 'PROPS_UPDATED', payload: props }), [props.items])
+  useEffect(() => dispatch({ type: 'PROPS_UPDATED', payload: props }), [props])
 
   const selection = useMemo(() => {
     if (!props.selection) return null

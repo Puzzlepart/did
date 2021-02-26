@@ -28,7 +28,7 @@ export function useTimesheetQuery(state: ITimesheetState, dispatch: Dispatch<Any
     errorPolicy: 'all'
   })
 
-  useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query])
+  useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query, dispatch])
 
   return { refetch: query.refetch }
 }

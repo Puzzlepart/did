@@ -8,7 +8,7 @@ import { IProjectsReducerParams } from './types'
  * @param {IProjectsReducerParams} params Params
  */
 export function useProjectsReducer(params: IProjectsReducerParams) {
-  const reducer = useMemo(() => createReducer(params), [])
+  const reducer = useMemo(() => createReducer(params), [params])
   const [state, dispatch] = useReducer(reducer, initState(params.url))
   return { state, dispatch }
 }

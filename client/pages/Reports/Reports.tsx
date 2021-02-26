@@ -1,7 +1,7 @@
 import { FilterPanel, List, UserMessage } from 'components'
 import DateUtils from 'DateUtils'
 import { Icon, Pivot, PivotItem, ProgressIndicator } from 'office-ui-fabric'
-import React, { useMemo } from 'react'
+import React, { FunctionComponent, useMemo } from 'react'
 import { isEmpty } from 'underscore'
 import getColumns from './columns'
 import commandBar from './commandBar'
@@ -12,13 +12,13 @@ import { SaveFilterForm } from './SaveFilterForm'
 import { useReports } from './hooks/useReports'
 import { useUpdateUserConfiguration } from './hooks/useUpdateUserConfiguration'
 
-export const Reports = () => {
+export const Reports: FunctionComponent = () => {
   const { state, dispatch, params, queries, filters, t } = useReports()
   useUpdateUserConfiguration({
     'reports.filters': state.savedFilters
   })
 
-  const context = useMemo(() => ({ state, dispatch, t }), [state])
+  const context = useMemo(() => ({ state, dispatch, t }), [state, dispatch, t])
 
   return (
     <div className={styles.root}>

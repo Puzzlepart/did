@@ -9,8 +9,9 @@ import $updateUserConfiguration from '../../../graphql/updateUserConfiguration.g
  */
 export function useUpdateUserConfiguration<T = any>(config: T) {
   const [updateUserConfiguration] = useMutation($updateUserConfiguration)
+  const strValue = JSON.stringify(config)
   useEffect(() => {
-    const variables = { configuration: JSON.stringify(config) }
+    const variables = { configuration: strValue }
     updateUserConfiguration({ variables })
-  }, [JSON.stringify(config)])
+  }, [strValue, updateUserConfiguration, config])
 }

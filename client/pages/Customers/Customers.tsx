@@ -18,6 +18,7 @@ export const Customers: FunctionComponent = () => {
   const { user } = useContext(AppContext)
   const history = useHistory()
   const params = useParams<ICustomersParams>()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const reducer = useMemo(() => createReducer({ params, history }), [])
   const [state, dispatch] = useReducer(reducer, initState(params))
   const query = useQuery($customers, {
@@ -33,7 +34,7 @@ export const Customers: FunctionComponent = () => {
       refetch: query.refetch,
       loading: query.loading
     }),
-    [state]
+    [state, dispatch, query.refetch, query.loading]
   )
 
   return (

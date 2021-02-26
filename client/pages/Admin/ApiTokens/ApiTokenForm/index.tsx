@@ -23,7 +23,7 @@ export const ApiTokenForm = ({ isOpen, onAdded, onDismiss }: IApiTokenFormProps)
     expires: null,
     permissions: []
   })
-  const permissions = useMemo(() => security.permissions(t).filter((p) => p.api), [])
+  const permissions = useMemo(() => security.permissions(t).filter((p) => p.api), [t])
 
   async function onAddApiToken() {
     const { data } = await addApiToken({ variables: { token } })
