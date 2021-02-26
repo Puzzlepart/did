@@ -17,7 +17,7 @@ export class SubscriptionResolver {
    *
    * @param {MongoService} _mongo Mongo service
    */
-  constructor(private readonly _mongo: MongoService) {}
+  constructor(private readonly _mongo: MongoService) { }
 
   /**
    * Get current subscription
@@ -30,20 +30,16 @@ export class SubscriptionResolver {
 
   /**
    * Update subscription
-   *
-   * @param {string} id Subscription ID
+   * 
    * @param {SubscriptionSettingsInput} settings Settings
    */
   @Authorized<IAuthOptions>({ permission: '67ba6efc' })
   @Mutation(() => BaseResult, { description: 'Update subscription' })
   async updateSubscription(
-    @Arg('id') id: string,
     @Arg('settings', () => SubscriptionSettingsInput) settings: SubscriptionSettingsInput
   ): Promise<BaseResult> {
-    return await Promise.resolve({
-      success: true,
-      error: null
-    })
+    await this._mongo.subscription.updateSubscription(settings)
+    return { success: true }
   }
 }
 
