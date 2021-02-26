@@ -1,20 +1,20 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 global['fetch'] = require('node-fetch')
 import { Client as MSGraphClient } from '@microsoft/microsoft-graph-client'
-import * as appInsights from 'applicationinsights'
-import createDebug from 'debug'
-import { performance, PerformanceObserver } from 'perf_hooks'
 import 'reflect-metadata'
-import { Service } from 'typedi'
-import { first, sortBy } from 'underscore'
+import { Inject, Service } from 'typedi'
+import { sortBy } from 'underscore'
 import DateUtils from '../../../shared/utils/date'
+import { Context } from '../../graphql/context'
 import env from '../../utils/env'
+import { CacheScope, CacheService } from '../cache'
 import OAuthService, { AccessTokenOptions } from '../oauth'
 import MSGraphEvent, { MSGraphEventOptions, MSGraphOutlookCategory } from './types'
-const debug = createDebug('services/msgraph')
+const debug = require('debug')('services/msgraph')
 
 @Service({ global: false })
 class MSGraphService {
-  private _perf: PerformanceObserver
+  private _cache: CacheService = null
   private _accessTokenOptions: AccessTokenOptions = {
     clientId: env('OAUTH_APP_ID'),
     clientSecret: env('OAUTH_APP_PASSWORD'),
@@ -28,37 +28,14 @@ class MSGraphService {
    *
    * @param {OAuthService} _oauthService OAuth service
    * @param {string} access_token Access token
+   * @param {Context} _context Context
    */
-  constructor(private _oauthService: OAuthService, private _access_token?: string) {
-    if (!env('APPINSIGHTS_INSTRUMENTATIONKEY')) return
-    appInsights.setup(env('APPINSIGHTS_INSTRUMENTATIONKEY'))
-    this._perf = new PerformanceObserver((list) => {
-      const { name, duration } = first(list.getEntries())
-      appInsights.defaultClient.trackMetric({
-        name,
-        value: duration
-      })
-    })
-    this._perf.observe({ entryTypes: ['measure'], buffered: true })
-  }
-
-  /**
-   * Starts a performance mark
-   *
-   * @param {string} measure
-   */
-  startMark(measure: string): void {
-    performance.mark(`${measure}-init`)
-  }
-
-  /**
-   * Ends a performance mark
-   *
-   * @param {string} measure
-   */
-  endMark(measure: string): void {
-    performance.mark(`${measure}-end`)
-    performance.measure(`GraphService.${measure}`, `${measure}-init`, `${measure}-end`)
+  constructor(
+    private readonly _oauthService: OAuthService,
+    private _access_token?: string,
+    @Inject('CONTEXT') readonly context?: Context,
+  ) {
+    this._cache = new CacheService(context, MSGraphService.name)
   }
 
   /**
@@ -77,34 +54,14 @@ class MSGraphService {
   }
 
   /**
-   * Get current user properties
-   *
-   * @param {string[]} properties Properties to retrieve
-   */
-  async getCurrentUser(properties: string[]): Promise<any> {
-    try {
-      this.startMark('getCurrentUser')
-      debug('Querying Graph /me: %s', JSON.stringify({ select: properties }))
-      const client = await this._getClient()
-      const value = await client
-        .api('/me')
-        .select(['id', ...properties])
-        .get()
-      this.endMark('getCurrentUser')
-      return value
-    } catch (error) {
-      throw new Error(`MSGraphService.getCurrentUser: ${error.message}`)
-    }
-  }
-
-  /**
    * Get Azure Active Directory users
    */
   async getUsers(): Promise<any> {
     try {
-      this.startMark('getUsers')
+      const cacheValue = await this._cache.get('users')
+      if (cacheValue) return cacheValue
       const client = await this._getClient()
-      const { value: users } = await client
+      const { value } = await client
         .api('/users')
         // eslint-disable-next-line quotes
         .filter("userType eq 'Member'")
@@ -120,8 +77,9 @@ class MSGraphService {
         ])
         .top(999)
         .get()
-      this.endMark('getUsers')
-      return sortBy(users, 'displayName')
+      const users = sortBy(value, 'displayName')
+      await this._cache.set('users', users, 1800)
+      return users
     } catch (error) {
       throw new Error(`MSGraphService.getUsers: ${error.message}`)
     }
@@ -134,7 +92,6 @@ class MSGraphService {
    */
   async createOutlookCategory(category: string): Promise<MSGraphOutlookCategory> {
     try {
-      this.startMark('createOutlookCategory')
       const colorIdx =
         category
           .split('')
@@ -146,7 +103,6 @@ class MSGraphService {
       })
       const client = await this._getClient()
       const result = await client.api('/me/outlook/masterCategories').post(content)
-      this.endMark('createOutlookCategory')
       return result
     } catch (error) {
       throw new Error(`MSGraphService.createOutlookCategory: ${error.message}`)
@@ -158,11 +114,12 @@ class MSGraphService {
    */
   async getOutlookCategories(): Promise<any[]> {
     try {
-      this.startMark('getOutlookCategories')
+      const cacheValue = await this._cache.get('outlookcategories', CacheScope.USER)
+      if (cacheValue) return cacheValue
       debug('Querying Graph /me/outlook/masterCategories')
       const client = await this._getClient()
       const { value } = await client.api('/me/outlook/masterCategories').get()
-      this.endMark('getOutlookCategories')
+      await this._cache.set('outlookcategories', value, 1800, CacheScope.USER)
       return value
     } catch (error) {
       throw new Error(`MSGraphService.getOutlookCategories: ${error.message}`)
@@ -182,7 +139,9 @@ class MSGraphService {
     options: MSGraphEventOptions
   ): Promise<MSGraphEvent[]> {
     try {
-      this.startMark('getEvents')
+      const cacheKeys = ['events', startDate, endDate]
+      const cacheValue = await this._cache.get(cacheKeys, CacheScope.USER)
+      if (cacheValue) return cacheValue
       const query = {
         startDateTime: DateUtils.toISOString(`${startDate}:00:00:00.000`, options.tzOffset),
         endDateTime: DateUtils.toISOString(`${endDate}:23:59:59.999`, options.tzOffset)
@@ -202,7 +161,7 @@ class MSGraphService {
         .filter((event) => !!event.subject)
         .map((event) => new MSGraphEvent(event, options))
         .filter((event: MSGraphEvent) => event.duration <= 24)
-      this.endMark('getEvents')
+      await this._cache.set(cacheKeys, events, 60, CacheScope.USER)
       return events
     } catch (error) {
       throw new Error(`MSGraphService.getEvents: ${error.message}`)
