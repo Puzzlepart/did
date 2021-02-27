@@ -17,7 +17,7 @@ export class LabelService extends MongoDocumentService<Label> {
   /**
    * Generate id for a label
    *
-   * @param {Label} label Label
+   * @param label - Label
    */
   private _generateId(label: Label) {
     return label.name.replace(/[^A-Z0-9]/gi, '').toLowerCase()
@@ -26,7 +26,7 @@ export class LabelService extends MongoDocumentService<Label> {
   /**
    * Get labels
    *
-   * @param {FilterQuery<Label>} query Query
+   * @param query - Query
    */
   public async getLabels(query?: FilterQuery<Label>): Promise<Label[]> {
     try {
@@ -40,7 +40,7 @@ export class LabelService extends MongoDocumentService<Label> {
   /**
    * Add label
    *
-   * @param {Label} label Label
+   * @param label - Label
    */
   public async addLabel(
     label: Label
@@ -59,7 +59,7 @@ export class LabelService extends MongoDocumentService<Label> {
   /**
    * Update label
    *
-   * @param {Label} label Label
+   * @param label - Label
    */
   public async updateLabel(label: Label): Promise<void> {
     try {
@@ -72,7 +72,7 @@ export class LabelService extends MongoDocumentService<Label> {
   /**
    * Delete label by name
    *
-   * @param {string} name Name
+   * @param name - Name
    */
   public async deleteLabel(name: string): Promise<DeleteWriteOpResultObject> {
     try {

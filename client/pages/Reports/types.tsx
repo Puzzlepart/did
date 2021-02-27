@@ -77,7 +77,7 @@ export interface IReportsState {
 /**
  * Get group by options
  *
- * @param {TFunction} t Translate function
+ * @param t - Translate function
  */
 export const getGroupByOptions = (t: TFunction): IGroupByOption[] => [
   {

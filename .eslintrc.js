@@ -9,7 +9,7 @@ module.exports = {
     'plugin:react/recommended', // Uses the recommended rules from @eslint-plugin-react
     'plugin:@typescript-eslint/recommended', // Uses the recommended rules from @typescript-eslint/eslint-plugin
   ],
-  plugins: ['prettier', 'react-hooks'],
+  plugins: ['prettier', 'react-hooks', 'eslint-plugin-tsdoc'],
   parserOptions: {
     ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
     sourceType: 'module', // Allows for the use of imports
@@ -62,8 +62,11 @@ module.exports = {
 
     'default-case': 0,
 
-    'react-hooks/rules-of-hooks': 'error', 
-    'react-hooks/exhaustive-deps': 'warn'
+    'react-hooks/rules-of-hooks': 'error',
+
+    'react-hooks/exhaustive-deps': 'warn',
+
+    'tsdoc/syntax': 'warn'
   },
   settings: {
     react: {

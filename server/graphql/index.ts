@@ -57,7 +57,13 @@ const getSchema = async () => {
   return schema
 }
 
-export default async (
+/**
+ * Set up GraphQL for the Express Application
+ *
+ * @param app - Express application
+ * @param client - Mongo client
+ */
+export const setupGraphQL = async (
   app: express.Application,
   client: MongoClient
 ): Promise<void> => {
@@ -97,4 +103,19 @@ export default async (
   } catch (error) {
     debug(error)
   }
+}
+
+export * from './resolvers/types'
+export {
+  ApiTokenResolver,
+  CustomerResolver,
+  LabelResolver,
+  NotificationResolver,
+  OutlookCategoryResolver,
+  ProjectResolver,
+  ReportsResolver,
+  RoleResolver,
+  SubscriptionResolver,
+  TimesheetResolver,
+  UserResolver
 }

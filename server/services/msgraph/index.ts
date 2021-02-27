@@ -2,10 +2,9 @@
 global['fetch'] = require('node-fetch')
 import { Client as MSGraphClient } from '@microsoft/microsoft-graph-client'
 import 'reflect-metadata'
-import { Inject, Service } from 'typedi'
+import { Service } from 'typedi'
 import { sortBy } from 'underscore'
 import DateUtils from '../../../shared/utils/date'
-import { Context } from '../../graphql/context'
 import env from '../../utils/env'
 import { CacheScope, CacheService } from '../cache'
 import OAuthService, { AccessTokenOptions } from '../oauth'
@@ -28,17 +27,13 @@ class MSGraphService {
   /**
    * Constructs a new MSGraphService
    *
-   * @param {OAuthService} _oauthService OAuth service
-   * @param {string} access_token Access token
-   * @param {Context} _context Context
+   * @param _oauthService - OAuth service
+   * @param access_token - Access token
    */
   constructor(
     private _oauthService: OAuthService,
-    private _access_token?: string,
-    @Inject('CONTEXT') readonly context?: Context
-  ) {
-    this._cache = new CacheService(context, MSGraphService.name)
-  }
+    private _access_token?: string
+  ) {}
 
   /**
    * Gets a Microsoft Graph Client using the auth token from the class
@@ -92,7 +87,7 @@ class MSGraphService {
   /**
    * Create Outlook category
    *
-   * @param {string} category Category
+   * @param category - Category
    */
   public async createOutlookCategory(
     category: string
@@ -140,9 +135,9 @@ class MSGraphService {
   /**
    * Get events for the specified period using Microsoft Graph endpoint /me/calendar/calendarView
    *
-   * @param {string} startDate Start date (YYYY-MM-DD)
-   * @param {string} endDate End date (YYYY-MM-DD)
-   * @param {MSGraphEventOptions} options Options
+   * @param startDate - Start date (YYYY-MM-DD)
+   * @param endDate - End date (YYYY-MM-DD)
+   * @param options - Options
    */
   public getEvents(
     startDate: string,

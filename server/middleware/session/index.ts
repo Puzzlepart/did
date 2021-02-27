@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import session from 'express-session'
 import env from '../../utils/env'
-import redisClient from '../redis'
+import { redisMiddlware } from '../redis'
 const RedisStore = require('connect-redis')(session)
 
 /**
@@ -11,10 +11,10 @@ const RedisStore = require('connect-redis')(session)
  * "cookie" is provided by default; you can add it to add additional personalized options
  * The "store" ttl is the expiration time for each Redis session ID, in seconds
  */
-export default session({
+export const redisSessionMiddleware = session({
   name: env('SESSION_NAME', 'connect.sid'),
   store: new RedisStore({
-    client: redisClient,
+    client: redisMiddlware,
     ttl: 1209600
   }),
   cookie: { secure: false },

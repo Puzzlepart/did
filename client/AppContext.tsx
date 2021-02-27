@@ -16,7 +16,7 @@ export class ContextUser {
   /**
    * Constructor
    *
-   * @param {User} _user User object
+   * @param _user - User object
    */
   constructor(_user?: User) {
     if (!_user) {
@@ -44,7 +44,7 @@ export class ContextUser {
   /**
    * Checks if the user has the specified permission
    *
-   * @param {PERMISSION} permission Permission
+   * @param permission - Permission
    */
   public hasPermission?(permission?: PERMISSION): boolean {
     if (!permission) return true

@@ -27,7 +27,7 @@ export const ApiTokens = () => {
   /**
    * On delete API token
    *
-   * @param {ApiToken} token The token to dete
+   * @param token - The token to dete
    */
   async function onDeleteApiToken(token: ApiToken) {
     await deleteApiToken({ variables: { name: token.name } })
@@ -41,7 +41,7 @@ export const ApiTokens = () => {
   /**
    * On key added
    *
-   * @param {string} generatedKey Generated API key
+   * @param generatedKey - Generated API key
    */
   function onKeyAdded(generatedKey: string) {
     setForm({})

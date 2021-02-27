@@ -21,7 +21,7 @@ class OAuthService {
   /**
    * Get client
    *
-   * @param {AccessTokenOptions} options Options
+   * @param options - Options
    */
   private _getClient(options: AccessTokenOptions): AuthorizationCode {
     const auth = {
@@ -42,7 +42,7 @@ class OAuthService {
   /**
    * Get access token
    *
-   * @param {AccessTokenOptions} options Options
+   * @param options - Options
    */
   public async getAccessToken(options: AccessTokenOptions): Promise<Token> {
     // TODO: Temp hack for 'Property 'tokenParams' does not exist on type 'User'.'

@@ -8,9 +8,9 @@ import { generateColumn as col } from 'utils/generateColumn'
 /**
  * Returns the columns for the Label list
  *
- * @param {void} onEdit On edit callback
- * @param {void} onDelete On delete callback
- * @param {TFunction} t Translate function
+ * @param onEdit - On edit callback
+ * @param onDelete - On delete callback
+ * @param t - Translate function
  */
 export const LabelColumns = (
   onEdit: (label: LabelObject) => void,

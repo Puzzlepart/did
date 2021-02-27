@@ -82,7 +82,7 @@ export class Project {
   /**
    * Constructs a new Project
    *
-   * @param {ProjectInput} input Input
+   * @param input - Input
    */
   constructor(input?: ProjectInput) {
     Object.assign(this, input || {})

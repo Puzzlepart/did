@@ -43,7 +43,7 @@ const initState = (url: ITimesheetParams) => ({
 })
 
 /**
- * Creating reducer for Timesheet using @reduxjs/toolkit
+ * Creating reducer for Timesheet using reduxjs/toolkit
  */
 const createTimesheetReducer = ({ url, t }: ITimesheetReducerParams) =>
   createReducer<ITimesheetState>(initState(url), {
@@ -177,7 +177,7 @@ const createTimesheetReducer = ({ url, t }: ITimesheetReducerParams) =>
 /**
  * Use Timesheet reducer
  *
- * @param {ITimesheetReducerParams} params Parameters
+ * @param params - Parameters
  */
 export function useTimesheetReducer(params: ITimesheetReducerParams) {
   // eslint-disable-next-line react-hooks/exhaustive-deps

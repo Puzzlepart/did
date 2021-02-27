@@ -6,7 +6,7 @@ import { ISettingsSectionProps } from './SettingsSection/types'
 /**
  * Subscription settings
  *
- * @param {TFunction} t Translate function
+ * @param t - Translate function
  */
 export const SUBSCRIPTION_SETTINGS = (
   t: TFunction

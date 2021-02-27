@@ -11,9 +11,9 @@ export class ResourceFilter<
   /**
    * Constructor
    *
-   * @param {string} keyFieldName Field name for the item key
-   * @param {string} valueFieldName Field name for the item value
-   * @param {string} name Filter name
+   * @param keyFieldName - Field name for the item key
+   * @param valueFieldName - Field name for the item value
+   * @param name - Filter name
    */
   constructor(
     public keyFieldName: string,
@@ -26,7 +26,7 @@ export class ResourceFilter<
   /**
    * Intialize the ResourceFilter
    *
-   * @param {ItemType[]} items Items
+   * @param items - Items
    */
   public initialize(items: ItemType[]): IFilter {
     const _items = unique(

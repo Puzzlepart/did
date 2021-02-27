@@ -11,15 +11,15 @@ export class NotificationResolver {
   /**
    * Constructor for NotificationResolver
    *
-   * @param {NotificationService} _notification Notification service
+   * @param _notification - Notification service
    */
   constructor(private readonly _notification: NotificationService) {}
 
   /**
    * Get notifications
    *
-   * @param {NotificationTemplates} templates Templates
-   * @param {string} locale Locale
+   * @param templates - Templates
+   * @param locale - Locale
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [Notification], { description: 'Get notifications' })

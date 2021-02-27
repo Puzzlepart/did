@@ -17,7 +17,8 @@
     "lint": "eslint --ext .ts,.tsx ./client ./server --color && npm run prettier",
     "lint:fix": "eslint --ext .ts,.tsx ./client ./server --color --fix && npm run prettier",
     "prettier": "prettier --config .prettierrc '**/*.ts*' --write --loglevel silent",
-    "create-env": "node .tasks/create-dot-env.js"
+    "create-env": "node .tasks/create-dot-env.js",
+    "typedoc:server": "typedoc ./server/**/*.ts ./server/*.ts --options ./server/typedoc.json"
   },
   "dependencies": {
     "@apollo/client": "3.2.0",
@@ -145,9 +146,12 @@
     "eslint-plugin-prettier": "3.3.1",
     "eslint-plugin-react": "7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-tsdoc": "0.2.11",
     "localtunnel": "2.0.1",
     "open": "7.2.1",
     "prettier": "2.2.1",
+    "typedoc": "^0.20.28",
+    "typedoc-plugin-markdown": "^3.5.0",
     "webpack-build-notifier": "2.1.0",
     "webpack-bundle-analyzer": "4.1.0",
     "webpack-livereload-plugin": "2.3.0"

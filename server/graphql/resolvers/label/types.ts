@@ -41,7 +41,7 @@ export class LabelObject {
   /**
    * Constructs a new Label
    *
-   * @param {LabelInput} input Input
+   * @param input - Input
    */
   constructor(input?: LabelInput) {
     Object.assign(this, input || {})

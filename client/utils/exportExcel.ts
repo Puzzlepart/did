@@ -15,7 +15,7 @@ export type ExcelColumnType = 'date' | null
 /**
  * Converts string to array buffer
  *
- * @param {string} str String
+ * @param str - String to convert
  */
 function stringToArrayBuffer(str: string): ArrayBuffer {
   const buf = new ArrayBuffer(str.length)
@@ -29,10 +29,10 @@ function stringToArrayBuffer(str: string): ArrayBuffer {
 /**
  * Export to Excel
  *
- * @param {any[]} items An array of items
- * @param {IExcelExportOptions} options Options
+ * @param items - An array of items
+ * @param options - Options
  *
- * @return Returns the generated blob
+ * @returns The generated blob
  */
 export async function exportExcel(
   items: any[],

@@ -20,7 +20,7 @@ export class ProjectModel {
   /**
    * Constructs a new ProjectModel from a Project object
    *
-   * @param {Project} project Project object
+   * @param project - Project object
    */
   constructor(project?: Project) {
     this.name = project?.name || ''

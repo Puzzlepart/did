@@ -17,8 +17,8 @@ export class ProjectResolver {
   /**
    * Constructor for ProjectResolver
    *
-   * @param {MongoService} _mongo Mongo service
-   * @param {MSGraphService} _msgraph MSGraphService
+   * @param _mongo - Mongo service
+   * @param _msgraph - MSGraphService
    */
   constructor(
     private readonly _mongo: MongoService,
@@ -28,7 +28,7 @@ export class ProjectResolver {
   /**
    * Get projects
    *
-   * @param {string} customerKey Customer key
+   * @param customerKey - Customer key
    */
   @Authorized<IAuthOptions>()
   @Query(() => [Project], { description: 'Get projects' })
@@ -44,9 +44,9 @@ export class ProjectResolver {
   /**
    * Create or update project
    *
-   * @param {ProjectInput} project Project
-   * @param {ProjectOptions} options Options
-   * @param {boolean} update Update
+   * @param project - Project
+   * @param options - Options
+   * @param update - Update
    */
   @Authorized<IAuthOptions>({ permission: 'ef4032fb' })
   @Mutation(() => CreateOrUpdateProjectResult, {

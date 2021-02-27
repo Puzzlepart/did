@@ -29,8 +29,8 @@ export default class MSGraphEvent {
   /**
    * Constructs a new MSGraphEvent
    *
-   * @param {any} event Event data
-   * @param {MSGraphEventOptions} options Options
+   * @param event - Event data
+   * @param options - Options
    */
   constructor(event: any, { returnIsoDates = true }: MSGraphEventOptions) {
     this.id = event.id

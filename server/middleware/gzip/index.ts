@@ -4,9 +4,9 @@ import express from 'express'
 /**
  * Serve gzipped
  *
- * @param {string} contentType Content type
+ * @param contentType - Content type
  */
-const serveGzipped = (contentType: string) => (
+export const serveGzippedMiddleware = (contentType: string) => (
   request: express.Request,
   response: express.Response,
   next: express.NextFunction
@@ -31,5 +31,3 @@ const serveGzipped = (contentType: string) => (
   // let express.static take care of the updated request
   next()
 }
-
-export default serveGzipped

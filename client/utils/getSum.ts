@@ -4,8 +4,8 @@ import { getValue } from 'helpers'
 /**
  * Get sum for a property in the array using underscore reduce
  *
- * @param {any[]} items Items
- * @param {string} property Property name
+ * @param items - Items
+ * @param property - Property name
  */
 export function getSum(items: any[], property: string): number {
   return reduce(

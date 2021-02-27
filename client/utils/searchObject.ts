@@ -2,8 +2,8 @@ import { isEmpty } from 'underscore'
 /**
  * Search object
  *
- * @param {string} item Item
- * @param {string} searchStr The string to search for
+ * @param item - Item
+ * @param searchStr - The string to search for
  */
 export function searchObject<T = any>(item: T, searchStr: string) {
   if (isEmpty(searchStr)) return true

@@ -11,8 +11,8 @@ import { ISummaryViewRow, ISummaryViewState } from './types'
 /**
  * Create columns
  *
- * @param {ISummaryViewState} state State of SummaryView component
- * @param {TFunction} t Translate function
+ * @param state - State of SummaryView component
+ * @param t - Translate function
  */
 export function createColumns(
   state: ISummaryViewState,
@@ -72,9 +72,9 @@ export function createColumns(
 /**
  * Create rows
  *
- * @param {ISummaryViewState} state State of SummaryView component
- * @param {IColumn[]} columns Columns
- * @param {TFunction} t Translate function
+ * @param state - State of SummaryView component
+ * @param columns - Columns
+ * @param t - Translate function
  */
 export const createRows = (
   state: ISummaryViewState,
@@ -134,7 +134,7 @@ export const createRows = (
 /**
  * Create periods
  *
- * @param {number} range Range (default: 0)
+ * @param range - Range (default: 0)
  */
 export function createPeriods(range: number = 0): IPivotItemProps[] {
   const periods = []

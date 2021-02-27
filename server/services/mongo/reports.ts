@@ -15,7 +15,7 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
   /**
    * Constructor for ReportsService
    *
-   * @param {Context} context Context
+   * @param context - Context
    */
   constructor(context: Context) {
     super(context, 'time_entries')
@@ -26,8 +26,8 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
   /**
    * Get report
    *
-   * @param {ReportsQuery} query Query
-   * @param {boolean} sortAsc Sort ascending
+   * @param query - Query
+   * @param sortAsc - Sort ascending
    */
   public async getReport(
     query: ReportsQuery,

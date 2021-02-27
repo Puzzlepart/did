@@ -11,10 +11,8 @@ import { IProjectListProps } from './types'
 /**
  * Generate column definitions based on parameters specified
  *
- * @param {IProjectListProps} props Props
- * @param {TFunction} t Translate function
- *
- * @category ProjectList
+ * @param props - Props
+ * @param t - Translate function
  */
 export default (props: IProjectListProps, t: TFunction): IColumn[] =>
   [

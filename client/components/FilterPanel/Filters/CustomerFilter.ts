@@ -15,7 +15,7 @@ export class CustomerFilter<
   /**
    * Intialize the CustomerFilter
    *
-   * @param {ItemType[]} items Items
+   * @param items - Items
    */
   public initialize(items: ItemType[]): IFilter {
     const customers = unique(

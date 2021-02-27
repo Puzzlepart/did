@@ -15,7 +15,7 @@ export class SubscriptionResolver {
   /**
    * Constructor for SubscriptionResolver
    *
-   * @param {MongoService} _mongo Mongo service
+   * @param _mongo - Mongo service
    */
   constructor(private readonly _mongo: MongoService) {}
 
@@ -34,7 +34,7 @@ export class SubscriptionResolver {
   /**
    * Update subscription
    *
-   * @param {SubscriptionSettingsInput} settings Settings
+   * @param settings - Settings
    */
   @Authorized<IAuthOptions>({ permission: '67ba6efc' })
   @Mutation(() => BaseResult, { description: 'Update subscription' })

@@ -3,10 +3,6 @@ import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 import { IDurationColumnProps } from './IDurationColumnProps'
 
-/**
- * @component DurationColumn
- * @category Timesheet
- */
 export const DurationColumn = ({ row, column }: IDurationColumnProps) => {
   const { t } = useTranslation()
   const style = { ...getValue<any>(column, 'data.style', {}) }

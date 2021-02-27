@@ -5,7 +5,7 @@ import { IProjectsParams, IProjectsState } from '../types'
 /**
  * Update history hook on state change
  *
- * @param {IProjectsState} state State
+ * @param state  -State
  */
 export function useHistoryUpdater(state: IProjectsState) {
   const history = useHistory()
