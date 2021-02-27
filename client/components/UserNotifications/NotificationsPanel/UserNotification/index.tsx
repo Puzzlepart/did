@@ -15,9 +15,7 @@ export const UserNotification = ({
       onDismiss={() => onDismiss(model)}
       className={styles.root}
       styles={{ actions: { flexDirection: 'row', paddingLeft: 28 } }}
-      actions={(
-        <Link href={model.moreLink}>{model.getMoreLinkText(t)}</Link>
-      )}>
+      actions={<Link href={model.moreLink}>{model.getMoreLinkText(t)}</Link>}>
       <span className={styles.text}>{model.text}</span>
     </MessageBar>
   )

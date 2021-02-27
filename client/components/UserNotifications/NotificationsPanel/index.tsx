@@ -7,7 +7,11 @@ import { INotificationsPanelProps } from './types'
 import { UserNotification } from './UserNotification'
 import styles from './UserNotificationsPanel.module.scss'
 
-export const NotificationsPanel = ({ isOpen, onDismiss, notifications }: INotificationsPanelProps) => {
+export const NotificationsPanel = ({
+  isOpen,
+  onDismiss,
+  notifications
+}: INotificationsPanelProps) => {
   const { t } = useTranslation()
   return (
     <Panel
@@ -22,10 +26,7 @@ export const NotificationsPanel = ({ isOpen, onDismiss, notifications }: INotifi
         </div>
         <div hidden={isEmpty(notifications)}>
           {...notifications.map((n, idx) => (
-            <UserNotification
-              key={idx}
-              model={n}
-            />
+            <UserNotification key={idx} model={n} />
           ))}
         </div>
       </div>

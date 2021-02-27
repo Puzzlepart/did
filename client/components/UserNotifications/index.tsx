@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import { Icon } from 'office-ui-fabric'
 import React, { FunctionComponent, useState } from 'react'
 import { isEmpty } from 'underscore'
@@ -9,13 +8,16 @@ import { useUserNotifications } from './useUserNotifications'
 
 export const UserNotifications: FunctionComponent = () => {
   const state = useState<IUserNotificationsState>({})
-  const { notifications, panelOpen, showPanel, dismissPanel } = useUserNotifications(state)
+  const {
+    notifications,
+    panelOpen,
+    showPanel,
+    dismissPanel
+  } = useUserNotifications(state)
 
   return (
-    <>
-      <a
-        className={styles.root}
-        onClick={showPanel}>
+    <div className={styles.root}>
+      <a onClick={showPanel}>
         <div className={styles.icon}>
           <Icon iconName='Ringer' />
         </div>
@@ -28,6 +30,6 @@ export const UserNotifications: FunctionComponent = () => {
         onDismiss={dismissPanel}
         notifications={notifications}
       />
-    </>
+    </div>
   )
 }
