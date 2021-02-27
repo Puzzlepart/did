@@ -2,7 +2,7 @@ import AppConfig from 'AppConfig'
 import { PERMISSION } from 'config/security/permissions'
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from 'i18n'
 import { createContext } from 'react'
-import { Role, Subscription, User } from 'types'
+import { Notification, Role, Subscription, User } from 'types'
 import { contains } from 'underscore'
 
 export class ContextUser {
@@ -62,6 +62,11 @@ export interface IAppContext {
    * Subscription
    */
   subscription?: Subscription
+
+  /**
+   * Notifications
+   */
+  notifications?: [Notification[], () => Promise<any>]
 }
 
 export const AppContext = createContext<IAppContext>(null)

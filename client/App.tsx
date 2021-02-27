@@ -1,20 +1,22 @@
+import { MobileHeader } from 'components/MobileHeader'
 import { Navigation } from 'components/Navigation'
+import { PERMISSION } from 'config/security/permissions'
+import { useNotifications } from './hooks'
 import React, { FunctionComponent } from 'react'
+import { isMobile } from 'react-device-detect'
+import { useTranslation } from 'react-i18next'
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import styles from './App.module.scss'
 import { AppContext, IAppContext } from './AppContext'
 import { Admin, Customers, Home, Projects, Reports, Timesheet } from './pages'
 import { ProtectedRoute as Route } from './ProtectedRoute'
-import { PERMISSION } from 'config/security/permissions'
-import { isMobile } from 'react-device-detect'
-import { MobileHeader } from 'components/MobileHeader'
-import { useTranslation } from 'react-i18next'
 
 export const App: FunctionComponent<IAppContext> = (context: IAppContext) => {
   const { t } = useTranslation()
   if (isMobile) styles.root += ` ${styles.mobile}`
+  const notifications = useNotifications(context.user)
   return (
-    <AppContext.Provider value={context}>
+    <AppContext.Provider value={{ ...context, notifications }}>
       <Router>
         <div className={styles.root}>
           <Navigation />

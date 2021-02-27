@@ -1,13 +1,6 @@
-import { IMessageBarProps, MessageBarType } from 'office-ui-fabric'
 import { TFunction } from 'i18next'
-
-export interface INotification {
-  id: string
-  type: number
-  severity: number
-  text: string
-  moreLink: string
-}
+import { IMessageBarProps, MessageBarType } from 'office-ui-fabric'
+import { Notification } from '../../../server/graphql/resolvers/types'
 
 export enum NotificationType {
   WEEK_NOT_CONFIRMED,
@@ -34,7 +27,7 @@ export class NotificationModel {
    *
    * @param msg - The message
    */
-  constructor(msg: INotification) {
+  constructor(msg: Notification) {
     this.id = msg.id
     this.type = msg.type
     this.severity = msg.severity
@@ -104,4 +97,8 @@ export class NotificationModel {
         return t('notifications.moreLinkText')
     }
   }
+}
+
+export interface IUserNotificationsState {
+  showPanel?: boolean
 }
