@@ -2,7 +2,6 @@
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, Float, ID, InputType, ObjectType } from 'type-graphql'
-import { string } from 'underscore'
 import { Customer, Project, User } from '../types'
 
 /**
