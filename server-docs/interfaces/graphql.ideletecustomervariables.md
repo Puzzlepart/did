@@ -18,4 +18,4 @@ Variables for mutation createOrUpdateCustomer
 
 • **key**: *string*
 
-Defined in: [server/graphql/resolvers/customer/types.ts:87](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/customer/types.ts#L87)
+Defined in: [server/graphql/resolvers/customer/types.ts:87](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L87)

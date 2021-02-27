@@ -19,7 +19,7 @@ Variables for query notifications
 
 • **locale**: *string*
 
-Defined in: [server/graphql/resolvers/notification/types.ts:47](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/notification/types.ts#L47)
+Defined in: [server/graphql/resolvers/notification/types.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/types.ts#L47)
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **templates**: [*INotificationTemplates*](graphql.inotificationtemplates.md)
 
-Defined in: [server/graphql/resolvers/notification/types.ts:48](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/notification/types.ts#L48)
+Defined in: [server/graphql/resolvers/notification/types.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/types.ts#L48)

@@ -28,4 +28,4 @@
 
 • `Optional` **createOutlookCategory**: *boolean*
 
-Defined in: [server/graphql/resolvers/project/types.ts:98](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/project/types.ts#L98)
+Defined in: [server/graphql/resolvers/project/types.ts:98](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/types.ts#L98)

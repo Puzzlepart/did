@@ -39,7 +39,7 @@ Name | Type |
 
 **Returns:** [*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)
 
-Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts:39](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts#L39)
+Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts#L39)
 
 ## Properties
 
@@ -47,7 +47,7 @@ Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts:3
 
 • **endDate**: *string*
 
-Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts:24](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts#L24)
+Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts#L24)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 • `Optional` **events**: [*EventObject*](graphql.eventobject.md)[]
 
-Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts:27](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts#L27)
+Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts#L27)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 • `Optional` **forecastedHours**: *number*
 
-Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts:39](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts#L39)
+Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts#L39)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 • **id**: *string*
 
-Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts:12](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts#L12)
+Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts:12](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts#L12)
 
 ___
 
@@ -79,7 +79,7 @@ ___
 
 • **isConfirmed**: *boolean*= false
 
-Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts:30](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts#L30)
+Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts:30](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts#L30)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 • **isForecast**: *boolean*
 
-Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts:36](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts#L36)
+Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts:36](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts#L36)
 
 ___
 
@@ -95,7 +95,7 @@ ___
 
 • **isForecasted**: *boolean*= false
 
-Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts:33](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts#L33)
+Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts:33](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts#L33)
 
 ___
 
@@ -103,7 +103,7 @@ ___
 
 • **month**: *string*
 
-Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts:18](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts#L18)
+Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts#L18)
 
 ___
 
@@ -111,7 +111,7 @@ ___
 
 • **startDate**: *string*
 
-Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts:21](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts#L21)
+Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts#L21)
 
 ___
 
@@ -119,4 +119,4 @@ ___
 
 • **week**: *number*
 
-Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts:15](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts#L15)
+Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodObject.ts#L15)

@@ -34,7 +34,7 @@ Name | Type | Description |
 
 **Returns:** [*LabelObject*](graphql.labelobject.md)
 
-Defined in: [server/graphql/resolvers/label/types.ts:39](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/label/types.ts#L39)
+Defined in: [server/graphql/resolvers/label/types.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/types.ts#L39)
 
 ## Properties
 
@@ -42,7 +42,7 @@ Defined in: [server/graphql/resolvers/label/types.ts:39](https://github.com/Puzz
 
 • **\_id**: *string*
 
-Defined in: [server/graphql/resolvers/label/types.ts:27](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/label/types.ts#L27)
+Defined in: [server/graphql/resolvers/label/types.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/types.ts#L27)
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 • **color**: *string*
 
-Defined in: [server/graphql/resolvers/label/types.ts:36](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/label/types.ts#L36)
+Defined in: [server/graphql/resolvers/label/types.ts:36](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/types.ts#L36)
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 • **description**: *string*
 
-Defined in: [server/graphql/resolvers/label/types.ts:33](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/label/types.ts#L33)
+Defined in: [server/graphql/resolvers/label/types.ts:33](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/types.ts#L33)
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 • `Optional` **icon**: *string*
 
-Defined in: [server/graphql/resolvers/label/types.ts:39](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/label/types.ts#L39)
+Defined in: [server/graphql/resolvers/label/types.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/types.ts#L39)
 
 ___
 
@@ -74,4 +74,4 @@ ___
 
 • **name**: *string*
 
-Defined in: [server/graphql/resolvers/label/types.ts:30](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/label/types.ts#L30)
+Defined in: [server/graphql/resolvers/label/types.ts:30](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/types.ts#L30)

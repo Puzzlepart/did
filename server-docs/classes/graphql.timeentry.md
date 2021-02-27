@@ -44,7 +44,7 @@
 
 • **customer**: [*Customer*](graphql.customer.md)
 
-Defined in: [server/graphql/resolvers/reports/types.ts:57](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/reports/types.ts#L57)
+Defined in: [server/graphql/resolvers/reports/types.ts:57](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L57)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 • **description**: *string*
 
-Defined in: [server/graphql/resolvers/reports/types.ts:21](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/reports/types.ts#L21)
+Defined in: [server/graphql/resolvers/reports/types.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L21)
 
 ___
 
@@ -60,7 +60,7 @@ ___
 
 • **duration**: *number*
 
-Defined in: [server/graphql/resolvers/reports/types.ts:33](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/reports/types.ts#L33)
+Defined in: [server/graphql/resolvers/reports/types.ts:33](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L33)
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 • **endDateTime**: Date
 
-Defined in: [server/graphql/resolvers/reports/types.ts:27](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/reports/types.ts#L27)
+Defined in: [server/graphql/resolvers/reports/types.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L27)
 
 ___
 
@@ -76,7 +76,7 @@ ___
 
 • **id**: *string*
 
-Defined in: [server/graphql/resolvers/reports/types.ts:12](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/reports/types.ts#L12)
+Defined in: [server/graphql/resolvers/reports/types.ts:12](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L12)
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 • **key**: *string*
 
-Defined in: [server/graphql/resolvers/reports/types.ts:15](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/reports/types.ts#L15)
+Defined in: [server/graphql/resolvers/reports/types.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L15)
 
 ___
 
@@ -92,7 +92,7 @@ ___
 
 • **month**: *number*
 
-Defined in: [server/graphql/resolvers/reports/types.ts:45](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/reports/types.ts#L45)
+Defined in: [server/graphql/resolvers/reports/types.ts:45](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L45)
 
 ___
 
@@ -100,7 +100,7 @@ ___
 
 • **project**: [*Project*](graphql.project.md)
 
-Defined in: [server/graphql/resolvers/reports/types.ts:54](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/reports/types.ts#L54)
+Defined in: [server/graphql/resolvers/reports/types.ts:54](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L54)
 
 ___
 
@@ -108,7 +108,7 @@ ___
 
 • **projectId**: *string*
 
-Defined in: [server/graphql/resolvers/reports/types.ts:36](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/reports/types.ts#L36)
+Defined in: [server/graphql/resolvers/reports/types.ts:36](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L36)
 
 ___
 
@@ -116,7 +116,7 @@ ___
 
 • **resource**: [*User*](graphql.user.md)
 
-Defined in: [server/graphql/resolvers/reports/types.ts:60](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/reports/types.ts#L60)
+Defined in: [server/graphql/resolvers/reports/types.ts:60](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L60)
 
 ___
 
@@ -124,7 +124,7 @@ ___
 
 • **startDateTime**: Date
 
-Defined in: [server/graphql/resolvers/reports/types.ts:24](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/reports/types.ts#L24)
+Defined in: [server/graphql/resolvers/reports/types.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L24)
 
 ___
 
@@ -132,7 +132,7 @@ ___
 
 • **title**: *string*
 
-Defined in: [server/graphql/resolvers/reports/types.ts:18](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/reports/types.ts#L18)
+Defined in: [server/graphql/resolvers/reports/types.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L18)
 
 ___
 
@@ -140,7 +140,7 @@ ___
 
 • **userId**: *string*
 
-Defined in: [server/graphql/resolvers/reports/types.ts:39](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/reports/types.ts#L39)
+Defined in: [server/graphql/resolvers/reports/types.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L39)
 
 ___
 
@@ -148,7 +148,7 @@ ___
 
 • **webLink**: *string*
 
-Defined in: [server/graphql/resolvers/reports/types.ts:30](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/reports/types.ts#L30)
+Defined in: [server/graphql/resolvers/reports/types.ts:30](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L30)
 
 ___
 
@@ -156,7 +156,7 @@ ___
 
 • **webUrl**: *string*
 
-Defined in: [server/graphql/resolvers/reports/types.ts:51](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/reports/types.ts#L51)
+Defined in: [server/graphql/resolvers/reports/types.ts:51](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L51)
 
 ___
 
@@ -164,7 +164,7 @@ ___
 
 • **week**: *number*
 
-Defined in: [server/graphql/resolvers/reports/types.ts:42](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/reports/types.ts#L42)
+Defined in: [server/graphql/resolvers/reports/types.ts:42](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L42)
 
 ___
 
@@ -172,4 +172,4 @@ ___
 
 • **year**: *number*
 
-Defined in: [server/graphql/resolvers/reports/types.ts:48](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/reports/types.ts#L48)
+Defined in: [server/graphql/resolvers/reports/types.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L48)

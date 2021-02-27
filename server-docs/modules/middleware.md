@@ -23,7 +23,7 @@
 
 Helmet configuration
 
-Defined in: [server/middleware/helmet/index.ts:6](https://github.com/Puzzlepart/did/blob/45604452/server/middleware/helmet/index.ts#L6)
+Defined in: [server/middleware/helmet/index.ts:6](https://github.com/Puzzlepart/did/blob/dev/server/middleware/helmet/index.ts#L6)
 
 ___
 
@@ -40,7 +40,7 @@ Redis client
 
 **`see`** https://github.com/Puzzlepart/did/issues/812
 
-Defined in: [server/middleware/redis/index.ts:14](https://github.com/Puzzlepart/did/blob/45604452/server/middleware/redis/index.ts#L14)
+Defined in: [server/middleware/redis/index.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/middleware/redis/index.ts#L14)
 
 ## Functions
 
@@ -58,7 +58,7 @@ Name | Type | Description |
 
 **Returns:** *PassportStatic*
 
-Defined in: [server/middleware/passport/index.ts:14](https://github.com/Puzzlepart/did/blob/45604452/server/middleware/passport/index.ts#L14)
+Defined in: [server/middleware/passport/index.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/middleware/passport/index.ts#L14)
 
 ___
 
@@ -82,7 +82,7 @@ Name | Type |
 
 **Returns:** *any*
 
-Defined in: [server/middleware/session/index.ts:14](https://github.com/Puzzlepart/did/blob/45604452/server/middleware/session/index.ts#L14)
+Defined in: [server/middleware/session/index.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/middleware/session/index.ts#L14)
 
 ___
 
@@ -100,4 +100,4 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [server/middleware/gzip/index.ts:9](https://github.com/Puzzlepart/did/blob/45604452/server/middleware/gzip/index.ts#L9)
+Defined in: [server/middleware/gzip/index.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/middleware/gzip/index.ts#L9)

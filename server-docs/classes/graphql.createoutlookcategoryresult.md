@@ -6,7 +6,7 @@
 
 ## Hierarchy
 
-* [*BaseResult*](graphql.baseresult.md)
+* *BaseResult*
 
   ↳ **CreateOutlookCategoryResult**
 
@@ -30,25 +30,21 @@
 
 **Returns:** [*CreateOutlookCategoryResult*](graphql.createoutlookcategoryresult.md)
 
-Inherited from: [BaseResult](graphql.baseresult.md)
-
 ## Properties
 
 ### data
 
 • **data**: [*OutlookCategory*](graphql.outlookcategory.md)
 
-Defined in: [server/graphql/resolvers/outlookCategory/types.ts:29](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/outlookCategory/types.ts#L29)
+Defined in: [server/graphql/resolvers/outlookCategory/types.ts:29](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/types.ts#L29)
 
 ___
 
 ### error
 
-• `Optional` **error**: [*Error*](graphql.error.md)
+• `Optional` **error**: *Error*
 
-Inherited from: [BaseResult](graphql.baseresult.md).[error](graphql.baseresult.md#error)
-
-Defined in: [server/graphql/resolvers/types.ts:26](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/types.ts#L26)
+Defined in: [server/graphql/resolvers/types.ts:37](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/types.ts#L37)
 
 ___
 
@@ -56,6 +52,4 @@ ___
 
 • **success**: *boolean*
 
-Inherited from: [BaseResult](graphql.baseresult.md).[success](graphql.baseresult.md#success)
-
-Defined in: [server/graphql/resolvers/types.ts:23](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/types.ts#L23)
+Defined in: [server/graphql/resolvers/types.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/types.ts#L34)

@@ -2,5 +2,7 @@
   "name": "did-server",
   "out": "server-docs",
   "readme": "none",
-  "excludeInternal": true
+  "excludeInternal": true,
+  "hideGenerator": true,
+  "gitRevision": "dev"
 }

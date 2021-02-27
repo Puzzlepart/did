@@ -9,14 +9,11 @@
 - [ApiToken](../classes/graphql.apitoken.md)
 - [ApiTokenInput](../classes/graphql.apitokeninput.md)
 - [ApiTokenResolver](../classes/graphql.apitokenresolver.md)
-- [BaseResult](../classes/graphql.baseresult.md)
 - [CreateOrUpdateProjectResult](../classes/graphql.createorupdateprojectresult.md)
 - [CreateOutlookCategoryResult](../classes/graphql.createoutlookcategoryresult.md)
 - [Customer](../classes/graphql.customer.md)
 - [CustomerInput](../classes/graphql.customerinput.md)
 - [CustomerResolver](../classes/graphql.customerresolver.md)
-- [Error](../classes/graphql.error.md)
-- [EventError](../classes/graphql.eventerror.md)
 - [EventInput](../classes/graphql.eventinput.md)
 - [EventObject](../classes/graphql.eventobject.md)
 - [LabelInput](../classes/graphql.labelinput.md)
@@ -85,4 +82,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/graphql/index.ts:66](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/index.ts#L66)
+Defined in: [server/graphql/index.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L66)

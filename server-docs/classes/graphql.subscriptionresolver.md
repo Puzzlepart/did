@@ -31,7 +31,7 @@ Name | Type | Description |
 
 **Returns:** [*SubscriptionResolver*](graphql.subscriptionresolver.md)
 
-Defined in: [server/graphql/resolvers/subscription/index.ts:14](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/subscription/index.ts#L14)
+Defined in: [server/graphql/resolvers/subscription/index.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/index.ts#L14)
 
 ## Methods
 
@@ -49,13 +49,13 @@ Name | Type |
 
 **Returns:** *Promise*<[*Subscription*](graphql.subscription.md)\>
 
-Defined in: [server/graphql/resolvers/subscription/index.ts:30](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/subscription/index.ts#L30)
+Defined in: [server/graphql/resolvers/subscription/index.ts:30](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/index.ts#L30)
 
 ___
 
 ### updateSubscription
 
-▸ **updateSubscription**(`settings`: [*SubscriptionSettingsInput*](graphql.subscriptionsettingsinput.md)): *Promise*<[*BaseResult*](graphql.baseresult.md)\>
+▸ **updateSubscription**(`settings`: [*SubscriptionSettingsInput*](graphql.subscriptionsettingsinput.md)): *Promise*<BaseResult\>
 
 Update subscription
 
@@ -65,6 +65,6 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `settings` | [*SubscriptionSettingsInput*](graphql.subscriptionsettingsinput.md) | Settings    |
 
-**Returns:** *Promise*<[*BaseResult*](graphql.baseresult.md)\>
+**Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/subscription/index.ts:41](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/subscription/index.ts#L41)
+Defined in: [server/graphql/resolvers/subscription/index.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/index.ts#L41)

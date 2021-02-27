@@ -18,4 +18,4 @@ Variables for query customers
 
 • **sortBy**: *string*
 
-Defined in: [server/graphql/resolvers/customer/types.ts:72](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/customer/types.ts#L72)
+Defined in: [server/graphql/resolvers/customer/types.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L72)

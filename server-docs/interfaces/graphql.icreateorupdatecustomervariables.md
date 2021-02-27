@@ -19,7 +19,7 @@ Variables for mutation createOrUpdateCustomer
 
 • **customer**: [*Customer*](../classes/graphql.customer.md)
 
-Defined in: [server/graphql/resolvers/customer/types.ts:79](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/customer/types.ts#L79)
+Defined in: [server/graphql/resolvers/customer/types.ts:79](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L79)
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 • **update**: *boolean*
 
-Defined in: [server/graphql/resolvers/customer/types.ts:80](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/customer/types.ts#L80)
+Defined in: [server/graphql/resolvers/customer/types.ts:80](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/types.ts#L80)

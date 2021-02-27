@@ -28,4 +28,4 @@
 
 • `Optional` **role**: *string*
 
-Defined in: [server/graphql/resolvers/user/types.ts:94](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/user/types.ts#L94)
+Defined in: [server/graphql/resolvers/user/types.ts:94](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L94)

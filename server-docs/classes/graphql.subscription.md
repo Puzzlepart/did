@@ -32,7 +32,7 @@
 
 • `Optional` **\_id**: *string*
 
-Defined in: [server/graphql/resolvers/subscription/types.ts:41](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/subscription/types.ts#L41)
+Defined in: [server/graphql/resolvers/subscription/types.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L41)
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 Database name
 
-Defined in: [server/graphql/resolvers/subscription/types.ts:55](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/subscription/types.ts#L55)
+Defined in: [server/graphql/resolvers/subscription/types.ts:55](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L55)
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 • **id**: *string*
 
-Defined in: [server/graphql/resolvers/subscription/types.ts:44](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/subscription/types.ts#L44)
+Defined in: [server/graphql/resolvers/subscription/types.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L44)
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 • **name**: *string*
 
-Defined in: [server/graphql/resolvers/subscription/types.ts:47](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/subscription/types.ts#L47)
+Defined in: [server/graphql/resolvers/subscription/types.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L47)
 
 ___
 
@@ -66,4 +66,4 @@ ___
 
 • `Optional` **settings**: [*SubscriptionSettings*](graphql.subscriptionsettings.md)
 
-Defined in: [server/graphql/resolvers/subscription/types.ts:50](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/subscription/types.ts#L50)
+Defined in: [server/graphql/resolvers/subscription/types.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L50)

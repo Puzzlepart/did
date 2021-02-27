@@ -32,7 +32,7 @@ Name | Type | Description |
 
 **Returns:** [*ApiTokenResolver*](graphql.apitokenresolver.md)
 
-Defined in: [server/graphql/resolvers/apiToken/index.ts:14](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/apiToken/index.ts#L14)
+Defined in: [server/graphql/resolvers/apiToken/index.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/index.ts#L14)
 
 ## Methods
 
@@ -51,7 +51,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<string\>
 
-Defined in: [server/graphql/resolvers/apiToken/index.ts:43](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/apiToken/index.ts#L43)
+Defined in: [server/graphql/resolvers/apiToken/index.ts:43](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/index.ts#L43)
 
 ___
 
@@ -69,13 +69,13 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
 
-Defined in: [server/graphql/resolvers/apiToken/index.ts:29](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/apiToken/index.ts#L29)
+Defined in: [server/graphql/resolvers/apiToken/index.ts:29](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/index.ts#L29)
 
 ___
 
 ### deleteApiToken
 
-▸ **deleteApiToken**(`name`: *string*, `ctx`: [*Context*](graphql_context.context.md)): *Promise*<[*BaseResult*](graphql.baseresult.md)\>
+▸ **deleteApiToken**(`name`: *string*, `ctx`: [*Context*](graphql_context.context.md)): *Promise*<BaseResult\>
 
 Delete API token
 
@@ -86,6 +86,6 @@ Name | Type | Description |
 `name` | *string* | Name   |
 `ctx` | [*Context*](graphql_context.context.md) | GraphQL context    |
 
-**Returns:** *Promise*<[*BaseResult*](graphql.baseresult.md)\>
+**Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/apiToken/index.ts:58](https://github.com/Puzzlepart/did/blob/45604452/server/graphql/resolvers/apiToken/index.ts#L58)
+Defined in: [server/graphql/resolvers/apiToken/index.ts:58](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/index.ts#L58)
