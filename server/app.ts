@@ -9,7 +9,7 @@ import { MongoClient } from 'mongodb'
 import logger from 'morgan'
 import path from 'path'
 import { pick } from 'underscore'
-import graphql from './graphql'
+import {setupGraphQL} from './graphql'
 import serveGzipped from './middleware/gzip'
 import passport from './middleware/passport'
 import session from './middleware/session'
@@ -91,7 +91,7 @@ class App {
    * Setup graphql
    */
   async setupGraphQL() {
-    await graphql(this.instance, this._client)
+    await setupGraphQL(this.instance, this._client)
   }
 
   /**

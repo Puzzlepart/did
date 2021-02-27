@@ -18,27 +18,25 @@
 - [TimesheetResolver](../classes/graphql.timesheetresolver.md)
 - [UserResolver](../classes/graphql.userresolver.md)
 
-### Properties
+### Functions
 
-- [default](graphql.md#default)
+- [setupGraphQL](graphql.md#setupgraphql)
 
-## Properties
+## Functions
 
-### default
+### setupGraphQL
 
-• **default**: (`app`: *Application*, `client`: *MongoClient*) => *Promise*<void\>
+▸ `Const`**setupGraphQL**(`app`: *Application*, `client`: *MongoClient*): *Promise*<void\>
 
-#### Type declaration:
-
-▸ (`app`: *Application*, `client`: *MongoClient*): *Promise*<void\>
+Set up GraphQL for the Express Application
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`app` | *Application* |
-`client` | *MongoClient* |
+Name | Type | Description |
+:------ | :------ | :------ |
+`app` | *Application* | Express application   |
+`client` | *MongoClient* | Mongo client    |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/graphql/index.ts:58](https://github.com/Puzzlepart/did/blob/dea0e5c1/server/graphql/index.ts#L58)
+Defined in: [server/graphql/index.ts:66](https://github.com/Puzzlepart/did/blob/aeee6e68/server/graphql/index.ts#L66)
