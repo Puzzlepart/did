@@ -1,4 +1,4 @@
-[did](../README.md) / [@custom-types](../modules/_custom_types.md) / [Express](../modules/_custom_types.express.md) / UserSubscription
+[did-server](../README.md) / [Modules](../modules.md) / [@custom-types](../modules/_custom_types.md) / [Express](../modules/_custom_types.express.md) / UserSubscription
 
 # Interface: UserSubscription
 
@@ -19,7 +19,7 @@
 
 • **connectionString**: *string*
 
-Defined in: [server/@custom-types/index.d.ts:4](https://github.com/Puzzlepart/did/blob/50d5d352/server/@custom-types/index.d.ts#L4)
+Defined in: [server/@custom-types/index.d.ts:4](https://github.com/Puzzlepart/did/blob/a33ee165/server/@custom-types/index.d.ts#L4)
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 • **id**: *string*
 
-Defined in: [server/@custom-types/index.d.ts:3](https://github.com/Puzzlepart/did/blob/50d5d352/server/@custom-types/index.d.ts#L3)
+Defined in: [server/@custom-types/index.d.ts:3](https://github.com/Puzzlepart/did/blob/a33ee165/server/@custom-types/index.d.ts#L3)
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 • **name**: *string*
 
-Defined in: [server/@custom-types/index.d.ts:5](https://github.com/Puzzlepart/did/blob/50d5d352/server/@custom-types/index.d.ts#L5)
+Defined in: [server/@custom-types/index.d.ts:5](https://github.com/Puzzlepart/did/blob/a33ee165/server/@custom-types/index.d.ts#L5)
 
 ___
 
@@ -43,4 +43,4 @@ ___
 
 • **settings**: *any*
 
-Defined in: [server/@custom-types/index.d.ts:6](https://github.com/Puzzlepart/did/blob/50d5d352/server/@custom-types/index.d.ts#L6)
+Defined in: [server/@custom-types/index.d.ts:6](https://github.com/Puzzlepart/did/blob/a33ee165/server/@custom-types/index.d.ts#L6)

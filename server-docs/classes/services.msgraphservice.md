@@ -1,4 +1,4 @@
-[did](../README.md) / [services](../modules/services.md) / MSGraphService
+[did-server](../README.md) / [Modules](../modules.md) / [services](../modules/services.md) / MSGraphService
 
 # Class: MSGraphService
 
@@ -43,7 +43,7 @@ Name | Type | Description |
 
 **Returns:** [*MSGraphService*](services.msgraphservice.md)
 
-Defined in: [server/services/msgraph/index.ts:27](https://github.com/Puzzlepart/did/blob/50d5d352/server/services/msgraph/index.ts#L27)
+Defined in: [server/services/msgraph/index.ts:27](https://github.com/Puzzlepart/did/blob/a33ee165/server/services/msgraph/index.ts#L27)
 
 ## Properties
 
@@ -51,7 +51,7 @@ Defined in: [server/services/msgraph/index.ts:27](https://github.com/Puzzlepart/
 
 • `Private` **\_accessTokenOptions**: [*AccessTokenOptions*](../interfaces/services_oauth.accesstokenoptions.md)
 
-Defined in: [server/services/msgraph/index.ts:21](https://github.com/Puzzlepart/did/blob/50d5d352/server/services/msgraph/index.ts#L21)
+Defined in: [server/services/msgraph/index.ts:21](https://github.com/Puzzlepart/did/blob/a33ee165/server/services/msgraph/index.ts#L21)
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 • `Private` **\_perf**: *PerformanceObserver*
 
-Defined in: [server/services/msgraph/index.ts:20](https://github.com/Puzzlepart/did/blob/50d5d352/server/services/msgraph/index.ts#L20)
+Defined in: [server/services/msgraph/index.ts:20](https://github.com/Puzzlepart/did/blob/a33ee165/server/services/msgraph/index.ts#L20)
 
 ## Methods
 
@@ -71,7 +71,7 @@ Gets a Microsoft Graph Client using the auth token from the class
 
 **Returns:** *Promise*<Client\>
 
-Defined in: [server/services/msgraph/index.ts:77](https://github.com/Puzzlepart/did/blob/50d5d352/server/services/msgraph/index.ts#L77)
+Defined in: [server/services/msgraph/index.ts:77](https://github.com/Puzzlepart/did/blob/a33ee165/server/services/msgraph/index.ts#L77)
 
 ___
 
@@ -89,7 +89,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<MSGraphOutlookCategory\>
 
-Defined in: [server/services/msgraph/index.ts:145](https://github.com/Puzzlepart/did/blob/50d5d352/server/services/msgraph/index.ts#L145)
+Defined in: [server/services/msgraph/index.ts:145](https://github.com/Puzzlepart/did/blob/a33ee165/server/services/msgraph/index.ts#L145)
 
 ___
 
@@ -107,7 +107,7 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [server/services/msgraph/index.ts:65](https://github.com/Puzzlepart/did/blob/50d5d352/server/services/msgraph/index.ts#L65)
+Defined in: [server/services/msgraph/index.ts:65](https://github.com/Puzzlepart/did/blob/a33ee165/server/services/msgraph/index.ts#L65)
 
 ___
 
@@ -125,7 +125,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [server/services/msgraph/index.ts:94](https://github.com/Puzzlepart/did/blob/50d5d352/server/services/msgraph/index.ts#L94)
+Defined in: [server/services/msgraph/index.ts:94](https://github.com/Puzzlepart/did/blob/a33ee165/server/services/msgraph/index.ts#L94)
 
 ___
 
@@ -145,7 +145,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<default[]\>
 
-Defined in: [server/services/msgraph/index.ts:193](https://github.com/Puzzlepart/did/blob/50d5d352/server/services/msgraph/index.ts#L193)
+Defined in: [server/services/msgraph/index.ts:193](https://github.com/Puzzlepart/did/blob/a33ee165/server/services/msgraph/index.ts#L193)
 
 ___
 
@@ -157,7 +157,7 @@ Get Outlook categories
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/msgraph/index.ts:173](https://github.com/Puzzlepart/did/blob/50d5d352/server/services/msgraph/index.ts#L173)
+Defined in: [server/services/msgraph/index.ts:173](https://github.com/Puzzlepart/did/blob/a33ee165/server/services/msgraph/index.ts#L173)
 
 ___
 
@@ -169,7 +169,7 @@ Get Azure Active Directory users
 
 **Returns:** *Promise*<any\>
 
-Defined in: [server/services/msgraph/index.ts:113](https://github.com/Puzzlepart/did/blob/50d5d352/server/services/msgraph/index.ts#L113)
+Defined in: [server/services/msgraph/index.ts:113](https://github.com/Puzzlepart/did/blob/a33ee165/server/services/msgraph/index.ts#L113)
 
 ___
 
@@ -187,4 +187,4 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: [server/services/msgraph/index.ts:56](https://github.com/Puzzlepart/did/blob/50d5d352/server/services/msgraph/index.ts#L56)
+Defined in: [server/services/msgraph/index.ts:56](https://github.com/Puzzlepart/did/blob/a33ee165/server/services/msgraph/index.ts#L56)

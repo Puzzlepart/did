@@ -1,4 +1,4 @@
-[did](../README.md) / [graphql/authChecker](../modules/graphql_authchecker.md) / IAuthOptions
+[did-server](../README.md) / [Modules](../modules.md) / [graphql/authChecker](../modules/graphql_authchecker.md) / IAuthOptions
 
 # Interface: IAuthOptions
 
@@ -19,7 +19,7 @@
 
 Permission required for the resolver
 
-Defined in: [server/graphql/authChecker.ts:14](https://github.com/Puzzlepart/did/blob/50d5d352/server/graphql/authChecker.ts#L14)
+Defined in: [server/graphql/authChecker.ts:14](https://github.com/Puzzlepart/did/blob/a33ee165/server/graphql/authChecker.ts#L14)
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 Requires user context and can cannot be called with an API token
 
-Defined in: [server/graphql/authChecker.ts:9](https://github.com/Puzzlepart/did/blob/50d5d352/server/graphql/authChecker.ts#L9)
+Defined in: [server/graphql/authChecker.ts:9](https://github.com/Puzzlepart/did/blob/a33ee165/server/graphql/authChecker.ts#L9)

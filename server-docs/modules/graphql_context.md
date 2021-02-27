@@ -1,4 +1,4 @@
-[did](../README.md) / graphql/context
+[did-server](../README.md) / [Modules](../modules.md) / graphql/context
 
 # Module: graphql/context
 
@@ -29,4 +29,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Context*](../classes/graphql_context.context.md)\>
 
-Defined in: [server/graphql/context.ts:58](https://github.com/Puzzlepart/did/blob/50d5d352/server/graphql/context.ts#L58)
+Defined in: [server/graphql/context.ts:58](https://github.com/Puzzlepart/did/blob/a33ee165/server/graphql/context.ts#L58)

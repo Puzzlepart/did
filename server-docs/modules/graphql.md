@@ -1,4 +1,4 @@
-[did](../README.md) / graphql
+[did-server](../README.md) / [Modules](../modules.md) / graphql
 
 # Module: graphql
 
@@ -41,4 +41,4 @@ Name | Type |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/graphql/index.ts:58](https://github.com/Puzzlepart/did/blob/50d5d352/server/graphql/index.ts#L58)
+Defined in: [server/graphql/index.ts:58](https://github.com/Puzzlepart/did/blob/a33ee165/server/graphql/index.ts#L58)

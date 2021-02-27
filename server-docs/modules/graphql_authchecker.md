@@ -1,4 +1,4 @@
-[did](../README.md) / graphql/authChecker
+[did-server](../README.md) / [Modules](../modules.md) / graphql/authChecker
 
 # Module: graphql/authChecker
 
@@ -27,4 +27,4 @@ Name | Type |
 
 **Returns:** *boolean* \| *Promise*<boolean\>
 
-Defined in: [server/graphql/authChecker.ts:17](https://github.com/Puzzlepart/did/blob/50d5d352/server/graphql/authChecker.ts#L17)
+Defined in: [server/graphql/authChecker.ts:17](https://github.com/Puzzlepart/did/blob/a33ee165/server/graphql/authChecker.ts#L17)

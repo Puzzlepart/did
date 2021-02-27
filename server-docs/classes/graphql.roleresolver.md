@@ -1,4 +1,4 @@
-[did](../README.md) / [graphql](../modules/graphql.md) / RoleResolver
+[did-server](../README.md) / [Modules](../modules.md) / [graphql](../modules/graphql.md) / RoleResolver
 
 # Class: RoleResolver
 
@@ -32,7 +32,7 @@ Name | Type | Description |
 
 **Returns:** [*RoleResolver*](graphql.roleresolver.md)
 
-Defined in: [server/graphql/resolvers/role/index.ts:13](https://github.com/Puzzlepart/did/blob/50d5d352/server/graphql/resolvers/role/index.ts#L13)
+Defined in: [server/graphql/resolvers/role/index.ts:13](https://github.com/Puzzlepart/did/blob/a33ee165/server/graphql/resolvers/role/index.ts#L13)
 
 ## Methods
 
@@ -53,7 +53,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<{ `error`: *any* = null; `success`: *boolean* = true }\>
 
-Defined in: [server/graphql/resolvers/role/index.ts:40](https://github.com/Puzzlepart/did/blob/50d5d352/server/graphql/resolvers/role/index.ts#L40)
+Defined in: [server/graphql/resolvers/role/index.ts:40](https://github.com/Puzzlepart/did/blob/a33ee165/server/graphql/resolvers/role/index.ts#L40)
 
 ___
 
@@ -71,7 +71,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<{ `error`: *any* = null; `success`: *boolean* = true }\>
 
-Defined in: [server/graphql/resolvers/role/index.ts:56](https://github.com/Puzzlepart/did/blob/50d5d352/server/graphql/resolvers/role/index.ts#L56)
+Defined in: [server/graphql/resolvers/role/index.ts:56](https://github.com/Puzzlepart/did/blob/a33ee165/server/graphql/resolvers/role/index.ts#L56)
 
 ___
 
@@ -83,4 +83,4 @@ Get roles
 
 **Returns:** *Promise*<Role[]\>
 
-Defined in: [server/graphql/resolvers/role/index.ts:26](https://github.com/Puzzlepart/did/blob/50d5d352/server/graphql/resolvers/role/index.ts#L26)
+Defined in: [server/graphql/resolvers/role/index.ts:26](https://github.com/Puzzlepart/did/blob/a33ee165/server/graphql/resolvers/role/index.ts#L26)

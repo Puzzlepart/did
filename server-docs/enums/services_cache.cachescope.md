@@ -1,4 +1,4 @@
-[did](../README.md) / [services/cache](../modules/services_cache.md) / CacheScope
+[did-server](../README.md) / [Modules](../modules.md) / [services/cache](../modules/services_cache.md) / CacheScope
 
 # Enumeration: CacheScope
 
@@ -17,7 +17,7 @@
 
 • **SUBSCRIPTION**: = 1
 
-Defined in: [server/services/cache.ts:12](https://github.com/Puzzlepart/did/blob/50d5d352/server/services/cache.ts#L12)
+Defined in: [server/services/cache.ts:12](https://github.com/Puzzlepart/did/blob/a33ee165/server/services/cache.ts#L12)
 
 ___
 
@@ -25,4 +25,4 @@ ___
 
 • **USER**: = 0
 
-Defined in: [server/services/cache.ts:11](https://github.com/Puzzlepart/did/blob/50d5d352/server/services/cache.ts#L11)
+Defined in: [server/services/cache.ts:11](https://github.com/Puzzlepart/did/blob/a33ee165/server/services/cache.ts#L11)

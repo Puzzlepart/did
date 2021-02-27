@@ -1,4 +1,4 @@
-[did](../README.md) / routes/auth
+[did-server](../README.md) / [Modules](../modules.md) / routes/auth
 
 # Module: routes/auth
 
@@ -14,4 +14,4 @@
 
 • `Const` **default**: *Router*
 
-Defined in: [server/routes/auth.ts:5](https://github.com/Puzzlepart/did/blob/50d5d352/server/routes/auth.ts#L5)
+Defined in: [server/routes/auth.ts:5](https://github.com/Puzzlepart/did/blob/a33ee165/server/routes/auth.ts#L5)

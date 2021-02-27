@@ -1,4 +1,4 @@
-[did](../README.md) / [graphql](../modules/graphql.md) / NotificationResolver
+[did-server](../README.md) / [Modules](../modules.md) / [graphql](../modules/graphql.md) / NotificationResolver
 
 # Class: NotificationResolver
 
@@ -30,7 +30,7 @@ Name | Type | Description |
 
 **Returns:** [*NotificationResolver*](graphql.notificationresolver.md)
 
-Defined in: [server/graphql/resolvers/notification/index.ts:10](https://github.com/Puzzlepart/did/blob/50d5d352/server/graphql/resolvers/notification/index.ts#L10)
+Defined in: [server/graphql/resolvers/notification/index.ts:10](https://github.com/Puzzlepart/did/blob/a33ee165/server/graphql/resolvers/notification/index.ts#L10)
 
 ## Methods
 
@@ -49,4 +49,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [server/graphql/resolvers/notification/index.ts:26](https://github.com/Puzzlepart/did/blob/50d5d352/server/graphql/resolvers/notification/index.ts#L26)
+Defined in: [server/graphql/resolvers/notification/index.ts:26](https://github.com/Puzzlepart/did/blob/a33ee165/server/graphql/resolvers/notification/index.ts#L26)
