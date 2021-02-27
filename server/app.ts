@@ -16,10 +16,23 @@ import session from './middleware/session'
 import authRoute from './routes/auth'
 import env from './utils/env'
 
+/**
+ * Did Express.js App
+ */
 export class App {
+  /**
+   * The express.Application instance
+   */
   public instance: express.Application
-  private _client: MongoClient
 
+  /**
+   * Mongo client
+   */
+  private _mongoClient: MongoClient
+
+  /**
+   * Bootstrapping the express application
+   */
   constructor() {
     this.instance = express()
     this.instance.use(require('./middleware/helmet').default)
@@ -37,7 +50,7 @@ export class App {
    * Setup app
    */
   public async setup() {
-    this._client = await MongoClient.connect(
+    this._mongoClient = await MongoClient.connect(
       env('MONGO_DB_CONNECTION_STRING'),
       {
         useNewUrlParser: true,
@@ -80,7 +93,7 @@ export class App {
    * Setup authentication
    */
   setupAuth() {
-    const _passport = passport(this._client)
+    const _passport = passport(this._mongoClient)
     this.instance.use(bearerToken({ reqKey: 'api_key' }))
     this.instance.use(_passport.initialize())
     this.instance.use(_passport.session())
@@ -91,7 +104,7 @@ export class App {
    * Setup graphql
    */
   async setupGraphQL() {
-    await setupGraphQL(this.instance, this._client)
+    await setupGraphQL(this.instance, this._mongoClient)
   }
 
   /**

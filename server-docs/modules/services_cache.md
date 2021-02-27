@@ -22,4 +22,4 @@
 
 Ƭ **CacheKey**: *string* \| *string*[]
 
-Defined in: [server/services/cache.ts:15](https://github.com/Puzzlepart/did/blob/f9e4ba75/server/services/cache.ts#L15)
+Defined in: [server/services/cache.ts:15](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/services/cache.ts#L15)
