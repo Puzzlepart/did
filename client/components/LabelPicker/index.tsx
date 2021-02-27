@@ -9,13 +9,9 @@ import { useLabelPicker } from './useLabelPicker'
 
 export const LabelPicker: FunctionComponent<ILabelPickerProps> = (props: ILabelPickerProps) => {
   const { t } = useTranslation()
-  const {
-    labels,
-    selectedLabels,
-    showCallout,
-    setShowCallout,
-    onToggleLabel
-  } = useLabelPicker(props)
+  const { labels, selectedLabels, showCallout, setShowCallout, onToggleLabel } = useLabelPicker(
+    props
+  )
   const toggleRef = useRef()
 
   return (
@@ -30,9 +26,9 @@ export const LabelPicker: FunctionComponent<ILabelPickerProps> = (props: ILabelP
         </span>
       </Label>
       <div className={styles.selectedLabels}>
-      {selectedLabels.map((lbl) => (
-        <EntityLabel key={lbl.name} label={lbl} />
-      ))}
+        {selectedLabels.map((lbl) => (
+          <EntityLabel key={lbl.name} label={lbl} />
+        ))}
       </div>
       <span className={styles.noneSelected} hidden={selectedLabels.length > 0}>
         {t('common.noneSelectedMessage')}

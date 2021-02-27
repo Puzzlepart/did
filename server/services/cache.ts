@@ -33,7 +33,7 @@ export class CacheService {
     @Inject('CONTEXT') private readonly context: Context,
     public prefix?: string,
     public scope: CacheScope = CacheScope.SUBSCRIPTION
-  ) { }
+  ) {}
 
   /**
    * Get scoped cache key
@@ -59,7 +59,7 @@ export class CacheService {
 
   /**
    * Get from cache by key
-   * 
+   *
    * @private
    *
    * @param {CacheOptions} options Cache options
@@ -82,7 +82,7 @@ export class CacheService {
 
   /**
    * Get from cache by key
-   * 
+   *
    * @private
    *
    * @param {CacheOptions} options Cache options
@@ -106,7 +106,7 @@ export class CacheService {
 
   /**
    * Clear cache for the specified key and scope
-   * 
+   *
    * @param {CacheOptions} options Cache options
    */
   public clear({ key, scope }: CacheOptions) {
@@ -121,11 +121,14 @@ export class CacheService {
   }
 
   /**
-   * 
+   *
    * @param {Promise<T>} func Promise function
    * @param {CacheOptions} options Cache options
    */
-  public async usingCache<T = any>(func: () => Promise<T>, { key, expiry = 60, scope }: CacheOptions) {
+  public async usingCache<T = any>(
+    func: () => Promise<T>,
+    { key, expiry = 60, scope }: CacheOptions
+  ) {
     const cachedValue: T = await this._get<T>({ key, scope })
     if (cachedValue) return cachedValue
     const value: T = await func()

@@ -78,24 +78,27 @@ export class ProjectService extends MongoDocumentService<Project> {
    */
   public getProjectsData(query?: FilterQuery<Project>): Promise<ProjectsData> {
     try {
-      return this.cache.usingCache<ProjectsData>(async () => {
-        const [projects, customers, labels] = await Promise.all([
-          this.find(query, { name: 1 }),
-          this._customer.getCustomers(query?.customerKey && { key: query.customerKey }),
-          this._label.getLabels()
-        ])
-        const _projects = projects
-          .map((p) => {
-            p.customer = find(customers, (c) => c.key === p.customerKey) || null
-            p.labels = filter(labels, ({ name }) => {
-              return !!find(p.labels, (l) => name === l)
+      return this.cache.usingCache<ProjectsData>(
+        async () => {
+          const [projects, customers, labels] = await Promise.all([
+            this.find(query, { name: 1 }),
+            this._customer.getCustomers(query?.customerKey && { key: query.customerKey }),
+            this._label.getLabels()
+          ])
+          const _projects = projects
+            .map((p) => {
+              p.customer = find(customers, (c) => c.key === p.customerKey) || null
+              p.labels = filter(labels, ({ name }) => {
+                return !!find(p.labels, (l) => name === l)
+              })
+              return p
             })
-            return p
-          })
-          .filter((p) => p.customer !== null)
-        const data = { projects: _projects, customers, labels }
-        return data
-      }, { key: ['getprojectsdata', query?.customerKey.toString()] })
+            .filter((p) => p.customer !== null)
+          const data = { projects: _projects, customers, labels }
+          return data
+        },
+        { key: ['getprojectsdata', query?.customerKey.toString()] }
+      )
     } catch (err) {
       throw err
     }

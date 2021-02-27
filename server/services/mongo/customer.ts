@@ -6,7 +6,7 @@ import { MongoDocumentService } from './@document'
 
 export class CustomerService extends MongoDocumentService<Customer> {
   constructor(context: Context) {
-    super(context, 'customers')
+    super(context, 'customers', CustomerService.name)
   }
 
   /**
@@ -16,6 +16,7 @@ export class CustomerService extends MongoDocumentService<Customer> {
    */
   public async addCustomer(customer: Customer): Promise<void> {
     try {
+      await this.cache.clear({ key: 'getcustomers' })
       await this.collection.insertOne(customer)
     } catch (err) {
       throw err
@@ -29,6 +30,7 @@ export class CustomerService extends MongoDocumentService<Customer> {
    */
   public async updateCustomer(customer: Customer): Promise<void> {
     try {
+      await this.cache.clear({ key: 'getcustomers' })
       await this.collection.updateOne(pick(customer, 'key'), { $set: customer })
     } catch (err) {
       throw err
@@ -42,6 +44,7 @@ export class CustomerService extends MongoDocumentService<Customer> {
    */
   public async deleteCustomer(key: string): Promise<void> {
     try {
+      await this.cache.clear({ key: 'getcustomers' })
       await this.collection.deleteOne({ key })
     } catch (err) {
       throw err
@@ -53,10 +56,15 @@ export class CustomerService extends MongoDocumentService<Customer> {
    *
    * @param {FilterQuery<Customer>} query Query
    */
-  public async getCustomers(query?: FilterQuery<Customer>): Promise<Customer[]> {
+  public getCustomers(query?: FilterQuery<Customer>): Promise<Customer[]> {
     try {
-      const customers = await this.find(query)
-      return customers
+      return this.cache.usingCache<Customer[]>(
+        async () => {
+          const customers = await this.find(query)
+          return customers
+        },
+        { key: 'getcustomers' }
+      )
     } catch (err) {
       throw err
     }
