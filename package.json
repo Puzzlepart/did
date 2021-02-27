@@ -18,7 +18,7 @@
     "lint:fix": "eslint --ext .ts,.tsx ./client ./server --color --fix && npm run prettier",
     "prettier": "prettier --config .prettierrc '**/*.ts*' --write --loglevel silent",
     "create-env": "node .tasks/create-dot-env.js",
-    "typedoc:server": "typedoc ./server/**/*.ts --options ./server/typedoc.json"
+    "typedoc:server": "typedoc ./server/**/*.ts ./server/*.ts --options ./server/typedoc.json"
   },
   "dependencies": {
     "@apollo/client": "3.2.0",

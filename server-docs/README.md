@@ -7,9 +7,11 @@ did-server
 ### Modules
 
 - [@custom-types](modules/_custom_types.md)
+- [app](modules/app.md)
 - [graphql](modules/graphql.md)
 - [graphql/authChecker](modules/graphql_authchecker.md)
 - [graphql/context](modules/graphql_context.md)
+- [index](modules/index.md)
 - [routes/auth](modules/routes_auth.md)
 - [services](modules/services.md)
 - [services/cache](modules/services_cache.md)
