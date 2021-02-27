@@ -25,13 +25,6 @@ class MSGraphService {
     tokenPath: 'oauth2/v2.0/token'
   }
 
-  /**
-   * Constructs a new MSGraphService
-   *
-   * @param _oauthService - OAuth service
-   * @param access_token - Access token
-   * @param context - Injected GraphQL context through typedi
-   */
   constructor(
     private _oauthService: OAuthService,
     private _access_token?: string,
