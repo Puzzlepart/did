@@ -1,5 +1,5 @@
 import { TFunction } from 'i18next'
-import { IMessageBarProps, MessageBarType } from 'office-ui-fabric'
+import { IMessageBarProps, MessageBarType } from 'office-ui-fabric-react'
 import { Notification } from '../../../server/graphql/resolvers/types'
 
 export enum NotificationType {

@@ -1,11 +1,13 @@
 import { useMutation } from '@apollo/client'
 import * as security from 'config/security'
 import { DateObject } from 'DateUtils'
-import { DefaultButton } from 'office-ui-fabric-react/lib/Button'
-import { Panel } from 'office-ui-fabric-react/lib/components/Panel'
-import { Dropdown } from 'office-ui-fabric-react/lib/Dropdown'
-import { TextField } from 'office-ui-fabric-react/lib/TextField'
-import { Toggle } from 'office-ui-fabric-react/lib/Toggle'
+import {
+  DefaultButton,
+  Dropdown,
+  Panel,
+  TextField,
+  Toggle
+} from 'office-ui-fabric-react'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ApiTokenInput } from 'types'

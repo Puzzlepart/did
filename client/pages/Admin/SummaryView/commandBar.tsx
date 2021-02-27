@@ -7,7 +7,7 @@ import {
   FirstWeekOfYear,
   IContextualMenuItem,
   IDatePickerProps
-} from 'office-ui-fabric'
+} from 'office-ui-fabric-react'
 import React from 'react'
 import * as excelUtils from 'utils/exportExcel'
 import { ISummaryViewContext } from './context'

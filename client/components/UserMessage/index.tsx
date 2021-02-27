@@ -3,7 +3,7 @@ import {
   IMessageBarStyles,
   IStyleFunctionOrObject,
   MessageBar
-} from 'office-ui-fabric'
+} from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
 import ReactMarkdown from 'react-markdown/with-html'
 import { IUserMessageProps } from './types'

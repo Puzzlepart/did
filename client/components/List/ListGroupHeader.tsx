@@ -1,4 +1,4 @@
-import { GroupHeader, IDetailsGroupDividerProps } from 'office-ui-fabric'
+import { GroupHeader, IDetailsGroupDividerProps } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
 
 export const ListGroupHeader: FunctionComponent<IDetailsGroupDividerProps> = (

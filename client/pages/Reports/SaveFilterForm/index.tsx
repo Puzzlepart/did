@@ -1,7 +1,10 @@
 import { getIcons } from 'common/icons'
 import { IconPicker } from 'components'
-import { DefaultButton, TextField } from 'office-ui-fabric'
-import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
+import {
+  DefaultButton,
+  IContextualMenuItem,
+  TextField
+} from 'office-ui-fabric-react'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { first } from 'underscore'

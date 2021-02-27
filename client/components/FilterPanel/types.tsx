@@ -1,4 +1,4 @@
-import { IPanelProps } from 'office-ui-fabric'
+import { IPanelProps } from 'office-ui-fabric-react'
 import { BaseFilter, IFilter } from './Filters'
 
 export interface IFilterPanelProps extends IPanelProps {

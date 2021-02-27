@@ -1,4 +1,4 @@
-import { IMessageBarProps, MessageBarType } from 'office-ui-fabric'
+import { IMessageBarProps, MessageBarType } from 'office-ui-fabric-react'
 
 export interface IUserMessageProps extends IMessageBarProps {
   /**

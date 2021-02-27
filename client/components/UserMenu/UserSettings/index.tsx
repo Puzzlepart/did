@@ -7,7 +7,7 @@ import styles from './UserSettings.module.scss'
 import { UserSettingsContext } from './context'
 import { USER_SETTINGS } from './USER_SETTINGS'
 import $addOrUpdateUser from 'pages/Admin/Users/UserForm/addOrUpdateUser.gql'
-import { Icon, Panel } from 'office-ui-fabric'
+import { Icon, Panel } from 'office-ui-fabric-react'
 import { useId } from '@uifabric/react-hooks'
 
 export const UserSettings = (props: React.HTMLProps<HTMLDivElement>) => {

@@ -1,5 +1,5 @@
 import { AppContext } from 'AppContext'
-import { Icon } from 'office-ui-fabric'
+import { Icon } from 'office-ui-fabric-react'
 import * as React from 'react'
 import { useContext } from 'react'
 import { isMobile } from 'react-device-detect'

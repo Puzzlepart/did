@@ -1,5 +1,5 @@
 import { getValue } from 'helpers'
-import { IColumn } from 'office-ui-fabric'
+import { IColumn } from 'office-ui-fabric-react'
 import { humanize } from 'underscore.string'
 import { DateObject } from 'DateUtils'
 import { loadScripts } from './loadScripts'

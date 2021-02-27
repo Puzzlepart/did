@@ -1,4 +1,4 @@
-import { ISearchBoxProps } from 'office-ui-fabric'
+import { ISearchBoxProps } from 'office-ui-fabric-react'
 import { ISuggestionItem } from './SuggestionItem/types'
 
 export type AutocompleteSelectCallback<T = any> = (

@@ -14,7 +14,7 @@ import {
   PrimaryButton,
   TextField,
   Toggle
-} from 'office-ui-fabric'
+} from 'office-ui-fabric-react'
 import React, { FunctionComponent, useContext, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject as Label } from 'types'

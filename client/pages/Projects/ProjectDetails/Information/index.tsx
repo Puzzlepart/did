@@ -1,6 +1,6 @@
 import { EntityLabel } from 'components/EntityLabel'
 import { UserMessage } from 'components/UserMessage'
-import { MessageBarType } from 'office-ui-fabric'
+import { MessageBarType } from 'office-ui-fabric-react'
 import React, { FunctionComponent, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import ReactMarkdown from 'react-markdown/with-html'

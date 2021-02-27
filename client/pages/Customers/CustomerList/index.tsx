@@ -1,5 +1,5 @@
 import List from 'components/List'
-import { Checkbox, SelectionMode } from 'office-ui-fabric'
+import { Checkbox, SelectionMode } from 'office-ui-fabric-react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { filter, isEmpty } from 'underscore'

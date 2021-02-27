@@ -2,7 +2,7 @@ import { QueryResult } from '@apollo/client'
 import { createAction } from '@reduxjs/toolkit'
 import { IFilter } from 'components/FilterPanel'
 import { IListGroups } from 'components/List/types'
-import { IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
+import { IContextualMenuItem } from 'office-ui-fabric-react'
 import { IReportsSavedFilter } from '../types'
 
 export const INIT = createAction('INIT')

@@ -5,7 +5,7 @@ import {
   ActionButton,
   MessageBarType,
   ProgressIndicator
-} from 'office-ui-fabric'
+} from 'office-ui-fabric-react'
 import React, { FunctionComponent, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'

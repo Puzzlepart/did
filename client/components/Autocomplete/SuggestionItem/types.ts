@@ -1,4 +1,4 @@
-import { IDropdownOption } from 'office-ui-fabric'
+import { IDropdownOption } from 'office-ui-fabric-react'
 import { AutocompleteItemIcons } from '../types'
 
 export interface ISuggestionItem<T = any> extends IDropdownOption {

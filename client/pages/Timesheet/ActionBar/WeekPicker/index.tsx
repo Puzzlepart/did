@@ -7,7 +7,7 @@ import {
   DirectionalHint,
   FocusTrapZone,
   TextField
-} from 'office-ui-fabric'
+} from 'office-ui-fabric-react'
 import { TimesheetContext } from 'pages/Timesheet'
 import { SET_SCOPE } from 'pages/Timesheet/reducer/actions'
 import { TimesheetScope } from 'pages/Timesheet/types'

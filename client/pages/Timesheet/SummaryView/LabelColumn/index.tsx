@@ -1,5 +1,5 @@
 import { EntityLabel } from 'components/EntityLabel'
-import { Icon } from 'office-ui-fabric'
+import { Icon } from 'office-ui-fabric-react'
 import * as React from 'react'
 import { LabelObject as Label } from 'types'
 import { isEmpty } from 'underscore'

@@ -1,4 +1,4 @@
-import { TooltipDelay, TooltipHost } from 'office-ui-fabric'
+import { TooltipDelay, TooltipHost } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
 import { ProjectTooltipContent } from './ProjectTooltipContent'
 import { IProjectTooltipProps } from './types'

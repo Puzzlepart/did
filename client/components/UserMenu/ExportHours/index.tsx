@@ -5,7 +5,7 @@ import {
   format,
   Icon,
   Panel
-} from 'office-ui-fabric'
+} from 'office-ui-fabric-react'
 import React, { FunctionComponent, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { first } from 'underscore'

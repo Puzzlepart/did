@@ -1,5 +1,5 @@
 import { TFunction } from 'i18next'
-import { IChoiceGroupOption } from 'office-ui-fabric'
+import { IChoiceGroupOption } from 'office-ui-fabric-react'
 import { getQueries } from 'pages/Reports/queries'
 import { ReportsQuery } from 'types'
 import { filter } from 'underscore'

@@ -1,4 +1,4 @@
-import { Checkbox, SearchBox } from 'office-ui-fabric'
+import { Checkbox, SearchBox } from 'office-ui-fabric-react'
 import React, { useState, useMemo } from 'react'
 import styles from './FilterItem.module.scss'
 import { IFilterItemProps } from './types'

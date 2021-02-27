@@ -1,6 +1,6 @@
 import { PermissionList } from 'components/PermissionList'
 import { TFunction } from 'i18next'
-import { Icon, DefaultButton } from 'office-ui-fabric'
+import { Icon, DefaultButton } from 'office-ui-fabric-react'
 import React from 'react'
 import { Role } from 'types'
 import { generateColumn as col } from 'utils/generateColumn'

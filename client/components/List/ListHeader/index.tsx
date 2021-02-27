@@ -3,7 +3,7 @@ import {
   StickyPositionType,
   CommandBar,
   SearchBox
-} from 'office-ui-fabric'
+} from 'office-ui-fabric-react'
 import React, { FunctionComponent, useMemo, useRef } from 'react'
 import { IListHeaderProps } from './types'
 import styles from './ListHeader.module.scss'

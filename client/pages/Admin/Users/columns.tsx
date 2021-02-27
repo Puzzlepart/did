@@ -1,5 +1,5 @@
 import { TFunction } from 'i18next'
-import { DefaultButton, IColumn, Icon } from 'office-ui-fabric'
+import { DefaultButton, IColumn, Icon } from 'office-ui-fabric-react'
 import React from 'react'
 import { Role, User } from 'types'
 import { generateColumn as col } from 'utils/generateColumn'

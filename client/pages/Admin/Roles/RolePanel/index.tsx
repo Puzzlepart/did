@@ -8,7 +8,7 @@ import {
   PrimaryButton,
   TextField,
   Toggle
-} from 'office-ui-fabric'
+} from 'office-ui-fabric-react'
 import React, { Fragment, FunctionComponent, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { RoleInput } from 'types'

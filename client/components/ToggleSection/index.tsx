@@ -1,4 +1,4 @@
-import { Icon } from 'office-ui-fabric'
+import { Icon } from 'office-ui-fabric-react'
 import React, { FunctionComponent, useEffect, useMemo, useState } from 'react'
 import styles from './ToggleSection.module.scss'
 import { IToggleSectionProps } from './types'

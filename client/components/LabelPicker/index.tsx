@@ -1,5 +1,5 @@
 import { EntityLabel } from 'components/EntityLabel'
-import { Icon, Label } from 'office-ui-fabric'
+import { Icon, Label } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './LabelPicker.module.scss'

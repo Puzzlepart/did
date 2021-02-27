@@ -1,4 +1,4 @@
-import { Panel } from 'office-ui-fabric'
+import { Panel } from 'office-ui-fabric-react'
 import React, { useEffect, useState } from 'react'
 import { FilterItem } from './FilterItem'
 import { IFilter, IFilterItem } from './Filters'

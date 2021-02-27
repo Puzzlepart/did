@@ -1,4 +1,4 @@
-import { Icon } from 'office-ui-fabric'
+import { Icon } from 'office-ui-fabric-react'
 import * as React from 'react'
 import styles from './MobileHeader.module.scss'
 import { IMobileHeaderProps } from './types'

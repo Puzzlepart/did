@@ -1,6 +1,6 @@
 import { IListGroups } from 'components/List/types'
 import { TFunction } from 'i18next'
-import { IContextualMenuItem } from 'office-ui-fabric'
+import { IContextualMenuItem } from 'office-ui-fabric-react'
 import { ReportsQuery } from 'types'
 
 export interface IReportsQuery extends IContextualMenuItem {

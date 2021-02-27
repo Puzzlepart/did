@@ -1,5 +1,5 @@
 import { TFunction } from 'i18next'
-import { IColumn, IContextualMenuItem } from 'office-ui-fabric'
+import { IColumn, IContextualMenuItem } from 'office-ui-fabric-react'
 import { createContext } from 'react'
 import { SummaryViewAction } from './reducer'
 import { ISummaryViewRow, ISummaryViewScope, ISummaryViewState } from './types'

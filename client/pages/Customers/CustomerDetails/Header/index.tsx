@@ -1,4 +1,4 @@
-import { Icon } from 'office-ui-fabric'
+import { Icon } from 'office-ui-fabric-react'
 import { CustomersContext } from 'pages/Customers/context'
 import React, { FunctionComponent, useContext } from 'react'
 import { Actions } from './actions'

@@ -2,7 +2,11 @@ import { useMutation } from '@apollo/client'
 import { AppContext } from 'AppContext'
 import { useMessage, UserMessage } from 'components'
 import { getValue, setValue } from 'helpers'
-import { MessageBarType, PrimaryButton, TextField } from 'office-ui-fabric'
+import {
+  MessageBarType,
+  PrimaryButton,
+  TextField
+} from 'office-ui-fabric-react'
 import React, { useContext, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Subscription } from 'types'

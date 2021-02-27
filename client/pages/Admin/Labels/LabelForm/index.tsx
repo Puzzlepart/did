@@ -8,7 +8,7 @@ import {
   PanelType,
   PrimaryButton,
   TextField
-} from 'office-ui-fabric'
+} from 'office-ui-fabric-react'
 import React, { useState } from 'react'
 import SketchPicker from 'react-color/lib/components/sketch/Sketch'
 import { useTranslation } from 'react-i18next'

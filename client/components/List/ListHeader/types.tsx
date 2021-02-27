@@ -3,7 +3,7 @@ import {
   IDetailsHeaderProps,
   ICommandBarProps,
   ISearchBoxProps
-} from 'office-ui-fabric'
+} from 'office-ui-fabric-react'
 import { Dispatch } from 'react'
 
 export interface IListHeaderProps {

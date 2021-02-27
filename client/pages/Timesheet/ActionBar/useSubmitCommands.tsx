@@ -3,7 +3,7 @@ import {
   IContextualMenuItem,
   IContextualMenuProps,
   PrimaryButton
-} from 'office-ui-fabric'
+} from 'office-ui-fabric-react'
 import React, { useContext } from 'react'
 import { first, omit } from 'underscore'
 import { TimesheetContext } from '../context'

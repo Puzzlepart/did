@@ -1,6 +1,6 @@
 import { AppContext } from 'AppContext'
 import { PERMISSION } from 'config/security/permissions'
-import { DefaultButton } from 'office-ui-fabric'
+import { DefaultButton } from 'office-ui-fabric-react'
 import { CustomersContext } from 'pages/Customers/context'
 import React, { FunctionComponent, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'

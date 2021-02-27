@@ -1,6 +1,6 @@
 import { IUserMessageProps } from 'components/UserMessage/types'
 import DateUtils from 'DateUtils'
-import { MessageBarType } from 'office-ui-fabric'
+import { MessageBarType } from 'office-ui-fabric-react'
 import { CLEAR_IGNORES } from 'pages/Timesheet/reducer/actions'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'

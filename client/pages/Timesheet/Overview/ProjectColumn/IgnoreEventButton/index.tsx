@@ -1,4 +1,4 @@
-import { Icon, MessageBarButton } from 'office-ui-fabric'
+import { Icon, MessageBarButton } from 'office-ui-fabric-react'
 import { IGNORE_EVENT } from 'pages/Timesheet/reducer/actions'
 import React, { useContext } from 'react'
 import { BrowserView, MobileView } from 'react-device-detect'

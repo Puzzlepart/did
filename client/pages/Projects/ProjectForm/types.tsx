@@ -1,5 +1,5 @@
 import { getIcons } from 'common/icons'
-import { IPanelProps } from 'office-ui-fabric'
+import { IPanelProps } from 'office-ui-fabric-react'
 import {
   IFormValidation,
   LabelObject as Label,

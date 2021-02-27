@@ -1,4 +1,4 @@
-import { IContextualMenuItem } from 'office-ui-fabric'
+import { IContextualMenuItem } from 'office-ui-fabric-react'
 import {
   ISummaryViewRange,
   ISummaryViewScope,

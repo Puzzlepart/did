@@ -1,4 +1,4 @@
-import { Pivot, PivotItem } from 'office-ui-fabric'
+import { Pivot, PivotItem } from 'office-ui-fabric-react'
 import React, { FunctionComponent, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ProjectsContext } from '../context'

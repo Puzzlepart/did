@@ -1,7 +1,7 @@
 import React, { HTMLProps, FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
 import DateUtils from 'DateUtils'
-import { format } from 'office-ui-fabric'
+import { format } from 'office-ui-fabric-react'
 
 export interface IDurationDisplayProps extends HTMLProps<HTMLDivElement> {
   displayFormat?: string

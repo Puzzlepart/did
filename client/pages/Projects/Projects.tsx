@@ -1,6 +1,6 @@
 import { UserMessage } from 'components/UserMessage'
 import { PERMISSION } from 'config/security/permissions'
-import { MessageBarType, Pivot, PivotItem } from 'office-ui-fabric'
+import { MessageBarType, Pivot, PivotItem } from 'office-ui-fabric-react'
 import { ProjectForm } from 'pages/Projects/ProjectForm'
 import React, { FunctionComponent } from 'react'
 import { ProjectsContext } from './context'

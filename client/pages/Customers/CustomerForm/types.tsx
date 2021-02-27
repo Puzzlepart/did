@@ -1,5 +1,5 @@
 import { getIcons } from 'common/icons'
-import { IPanelProps } from 'office-ui-fabric-react/lib/Panel'
+import { IPanelProps } from 'office-ui-fabric-react'
 import { Customer, IFormValidation } from 'types'
 import { first } from 'underscore'
 

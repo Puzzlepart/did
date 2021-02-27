@@ -1,5 +1,5 @@
 import { TFunction } from 'i18next'
-import { IContextualMenuItem } from 'office-ui-fabric'
+import { IContextualMenuItem } from 'office-ui-fabric-react'
 import { useContext } from 'react'
 import { ITimesheetContext } from '../context'
 import { SET_SCOPE } from '../reducer/actions'

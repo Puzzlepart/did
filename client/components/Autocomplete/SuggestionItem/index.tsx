@@ -1,4 +1,4 @@
-import { Icon } from 'office-ui-fabric'
+import { Icon } from 'office-ui-fabric-react'
 import React from 'react'
 import { omit } from 'underscore'
 import styles from './SuggestionItem.module.scss'

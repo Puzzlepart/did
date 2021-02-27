@@ -5,7 +5,7 @@ import {
   PrimaryButton,
   Panel,
   PanelType
-} from 'office-ui-fabric'
+} from 'office-ui-fabric-react'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { pick } from 'underscore'

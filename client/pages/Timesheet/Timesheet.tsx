@@ -1,5 +1,5 @@
 import { HotkeyModal } from 'components/HotkeyModal'
-import { Pivot, PivotItem } from 'office-ui-fabric'
+import { Pivot, PivotItem } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
 import { GlobalHotKeys } from 'react-hotkeys'
 import { ActionBar } from './ActionBar'

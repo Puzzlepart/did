@@ -75,7 +75,6 @@ const config = {
   },
   resolve: {
     alias: {
-      'office-ui-fabric': resolve(SRC_PATH, 'office-ui-fabric'),
       common: resolve(SRC_PATH, 'common'),
       types: resolve(SRC_PATH, 'types'),
       utils: resolve(SRC_PATH, 'utils'),

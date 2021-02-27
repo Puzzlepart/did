@@ -1,4 +1,4 @@
-import { Dropdown, Icon, IDropdownOption } from 'office-ui-fabric'
+import { Dropdown, Icon, IDropdownOption } from 'office-ui-fabric-react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Role, User } from 'types'

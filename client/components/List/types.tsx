@@ -7,7 +7,7 @@ import {
   IRenderFunction,
   ISearchBoxProps,
   SelectionMode
-} from 'office-ui-fabric'
+} from 'office-ui-fabric-react'
 
 export interface IListProps<T = any> extends React.HTMLProps<HTMLDivElement> {
   /**

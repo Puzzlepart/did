@@ -1,5 +1,5 @@
 import { UserNotificationsContext } from 'components/UserNotifications/context'
-import { Link, MessageBar } from 'office-ui-fabric'
+import { Link, MessageBar } from 'office-ui-fabric-react'
 import * as React from 'react'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'

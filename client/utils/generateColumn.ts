@@ -1,4 +1,4 @@
-import { IColumn } from 'office-ui-fabric'
+import { IColumn } from 'office-ui-fabric-react'
 
 /**
  * Generate a IColumn defintion

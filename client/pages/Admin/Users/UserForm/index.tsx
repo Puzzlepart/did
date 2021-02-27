@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { Autocomplete } from 'components'
-import { Panel, PrimaryButton } from 'office-ui-fabric'
+import { Panel, PrimaryButton } from 'office-ui-fabric-react'
 import React, { FunctionComponent, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Role, User } from 'types'

@@ -7,7 +7,7 @@ import {
   Selection,
   SelectionMode,
   ShimmeredDetailsList
-} from 'office-ui-fabric'
+} from 'office-ui-fabric-react'
 import React, { FunctionComponent, useEffect, useMemo, useReducer } from 'react'
 import FadeIn from 'react-fade-in'
 import { filter, first } from 'underscore'

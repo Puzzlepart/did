@@ -1,6 +1,11 @@
 import { AppContext } from 'AppContext'
 import { PERMISSION } from 'config/security/permissions'
-import { MessageBar, MessageBarType, Pivot, PivotItem } from 'office-ui-fabric'
+import {
+  MessageBar,
+  MessageBarType,
+  Pivot,
+  PivotItem
+} from 'office-ui-fabric-react'
 import { CustomerForm } from 'pages/Customers/CustomerForm'
 import React, { FunctionComponent, useContext } from 'react'
 import { useTranslation } from 'react-i18next'

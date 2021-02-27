@@ -1,4 +1,4 @@
-import { SelectionMode } from 'office-ui-fabric'
+import { SelectionMode } from 'office-ui-fabric-react'
 import { useMemo } from 'react'
 import { IProjectListProps } from '../ProjectList/types'
 import { SET_SELECTED_PROJECT } from '../reducer/actions'

@@ -1,5 +1,5 @@
 import { SearchProject, UserMessage } from 'components'
-import { MessageBarButton, Panel } from 'office-ui-fabric'
+import { MessageBarButton, Panel } from 'office-ui-fabric-react'
 import { ITimesheetContext, TimesheetContext } from 'pages/Timesheet/context'
 import { MANUAL_MATCH } from 'pages/Timesheet/reducer/actions'
 import React, { useContext, useState } from 'react'

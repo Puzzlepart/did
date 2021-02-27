@@ -1,4 +1,4 @@
-import { Icon } from 'office-ui-fabric'
+import { Icon } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
 import { isEmpty } from 'underscore'
 import { UserNotificationsContext } from './context'

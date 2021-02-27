@@ -1,6 +1,6 @@
 import { contains } from 'underscore'
 import { getValue } from 'helpers'
-import { Checkbox, Label } from 'office-ui-fabric'
+import { Checkbox, Label } from 'office-ui-fabric-react'
 import React, { useContext } from 'react'
 import { SubscriptionContext } from '../../context'
 import { ICheckboxFieldProps } from './types'

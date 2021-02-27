@@ -1,6 +1,6 @@
 import { AppContext } from 'AppContext'
 import { UserMessage } from 'components'
-import { DefaultButton, MessageBarType } from 'office-ui-fabric'
+import { DefaultButton, MessageBarType } from 'office-ui-fabric-react'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './Home.module.scss'

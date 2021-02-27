@@ -1,5 +1,5 @@
 import { TFunction } from 'i18next'
-import { IColumn } from 'office-ui-fabric'
+import { IColumn } from 'office-ui-fabric-react'
 import { ExcelColumnType } from 'utils/exportExcel'
 
 const columns = (t: TFunction): IColumn[] => [

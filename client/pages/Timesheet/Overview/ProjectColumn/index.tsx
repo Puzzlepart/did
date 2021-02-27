@@ -1,6 +1,6 @@
 import { ProjectLink, ProjectTooltip, UserMessage } from 'components'
 import { TFunction } from 'i18next'
-import { Icon, MessageBarType } from 'office-ui-fabric'
+import { Icon, MessageBarType } from 'office-ui-fabric-react'
 import { CLEAR_MANUAL_MATCH } from 'pages/Timesheet/reducer/actions'
 import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'

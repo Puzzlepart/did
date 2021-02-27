@@ -1,6 +1,6 @@
 import DateUtils, { DateObject } from 'DateUtils'
 import { TFunction } from 'i18next'
-import { IContextualMenuItem, IPivotItemProps } from 'office-ui-fabric'
+import { IContextualMenuItem, IPivotItemProps } from 'office-ui-fabric-react'
 import { ILabelColumnProps } from 'pages/Admin/SummaryView/LabelColumn/types'
 import { ReportsQuery } from 'types'
 

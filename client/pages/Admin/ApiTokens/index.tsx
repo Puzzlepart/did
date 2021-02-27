@@ -1,8 +1,9 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { useMessage, UserMessage } from 'components'
 import List from 'components/List'
-import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
+import { Icon, MessageBarType } from 'office-ui-fabric-react'
 import React, { useState } from 'react'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
 import { ApiToken } from 'types'
@@ -13,8 +14,6 @@ import styles from './ApiTokens.module.scss'
 import { ApiTokensColumns as columns } from './columns'
 import $deleteApiToken from './deleteApiToken.gql'
 import $tokens from './tokens.gql'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
-import { Icon } from 'office-ui-fabric'
 
 export const ApiTokens = () => {
   const { t } = useTranslation()

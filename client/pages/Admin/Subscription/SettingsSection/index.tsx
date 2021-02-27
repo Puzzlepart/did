@@ -1,6 +1,6 @@
 import { ToggleSection } from 'components/ToggleSection'
 import { getValue } from 'helpers'
-import { Slider, Toggle } from 'office-ui-fabric'
+import { Slider, Toggle } from 'office-ui-fabric-react'
 import React, { FunctionComponent, useContext } from 'react'
 import { SubscriptionContext } from '../context'
 import { CheckboxField } from './CheckboxField'

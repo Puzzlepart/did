@@ -1,6 +1,11 @@
 import { FilterPanel, List, UserMessage } from 'components'
 import DateUtils from 'DateUtils'
-import { Icon, Pivot, PivotItem, ProgressIndicator } from 'office-ui-fabric'
+import {
+  Icon,
+  Pivot,
+  PivotItem,
+  ProgressIndicator
+} from 'office-ui-fabric-react'
 import React, { FunctionComponent, useMemo } from 'react'
 import { isEmpty } from 'underscore'
 import getColumns from './columns'
