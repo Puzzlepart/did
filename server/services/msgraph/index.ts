@@ -144,7 +144,7 @@ class MSGraphService {
    * @param endDate - End date (YYYY-MM-DD)
    * @param options - Options
    */
-  public getEvents(
+  public async getEvents(
     startDate: string,
     endDate: string,
     options: MSGraphEventOptions
@@ -154,7 +154,7 @@ class MSGraphService {
         key: ['events', startDate, endDate],
         scope: CacheScope.USER
       }
-      return this._cache.usingCache(async () => {
+      const events = await this._cache.usingCache(async () => {
         const query = {
           startDateTime: DateUtils.toISOString(
             `${startDate}:00:00:00.000`,
@@ -186,12 +186,11 @@ class MSGraphService {
           .orderby('start/dateTime asc')
           .top(500)
           .get()) as { value: any[] }
-        const events = value
-          .filter((event) => !!event.subject)
-          .map((event) => new MSGraphEvent(event, options))
-          .filter((event: MSGraphEvent) => event.duration <= 24)
-        return events
+        return value.filter((event) => !!event.subject)
       }, cacheOptions)
+      return events
+        .map((event) => new MSGraphEvent(event, options))
+        .filter((event: MSGraphEvent) => event.duration <= 24)
     } catch (error) {
       throw new Error(`MSGraphService.getEvents: ${error.message}`)
     }
