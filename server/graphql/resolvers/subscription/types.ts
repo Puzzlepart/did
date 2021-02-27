@@ -2,7 +2,9 @@
 import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 
-@ObjectType({ description: 'A type that describes Subscription forecast settings' })
+@ObjectType({
+  description: 'A type that describes Subscription forecast settings'
+})
 export class SubscriptionForecastSettings {
   @Field({ nullable: true })
   enabled?: boolean
@@ -11,7 +13,9 @@ export class SubscriptionForecastSettings {
   notifications?: number
 }
 
-@ObjectType({ description: 'A type that describes Subscription AD sync settings' })
+@ObjectType({
+  description: 'A type that describes Subscription AD sync settings'
+})
 export class SubscriptionADSyncSettings {
   @Field({ nullable: true })
   adUserSyncEnabled?: boolean
@@ -51,7 +55,9 @@ export class Subscription {
   db?: string
 }
 
-@InputType({ description: 'A input that describes Subscription forecast settings' })
+@InputType({
+  description: 'A input that describes Subscription forecast settings'
+})
 export class SubscriptionForecastSettingsInput {
   @Field({ nullable: true })
   enabled?: boolean
@@ -60,7 +66,9 @@ export class SubscriptionForecastSettingsInput {
   notifications?: number
 }
 
-@InputType({ description: 'A input that describes Subscription AD sync settings' })
+@InputType({
+  description: 'A input that describes Subscription AD sync settings'
+})
 export class SubscriptionADSyncSettingsInput {
   @Field({ nullable: true })
   adUserSyncEnabled?: boolean

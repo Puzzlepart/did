@@ -59,7 +59,9 @@ export const SaveFilterForm = (props: ISaveFilterFormProps) => {
       <div hidden={!inputVisible}>
         <IconPicker
           defaultSelected={model.iconProps?.iconName}
-          onSelected={(iconName) => setModel({ ...model, iconProps: { iconName } })}
+          onSelected={(iconName) =>
+            setModel({ ...model, iconProps: { iconName } })
+          }
         />
       </div>
       <div className={styles.footer}>

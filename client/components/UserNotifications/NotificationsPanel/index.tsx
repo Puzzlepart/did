@@ -21,7 +21,11 @@ export const NotificationsPanel = (props: INotificationsPanelProps) => {
         </div>
         <div hidden={props.notifications.size === 0}>
           {[...props.notifications].map((n, idx) => (
-            <UserNotification key={idx} model={n} onDismiss={props.onDismissNotification} />
+            <UserNotification
+              key={idx}
+              model={n}
+              onDismiss={props.onDismissNotification}
+            />
           ))}
         </div>
       </div>

@@ -23,7 +23,10 @@ export class Notification {
   moreLink: string
 }
 
-@InputType({ description: 'Input object for Notification template used in Query notifications' })
+@InputType({
+  description:
+    'Input object for Notification template used in Query notifications'
+})
 export class NotificationTemplates {
   @Field()
   unconfirmedPeriods: string

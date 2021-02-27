@@ -3,7 +3,15 @@ import { getValue } from 'helpers'
 import color from 'randomcolor'
 import React, { FunctionComponent, useContext, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import {
+  Bar,
+  BarChart,
+  Cell,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis
+} from 'recharts'
 import { TimesheetContext } from '../context'
 import styles from './AllocationView.module.scss'
 import { CustomTooltip } from './CustomTooltip'
@@ -44,8 +52,15 @@ export const AllocationView: FunctionComponent = () => {
                     position: 'insideLeft'
                   }}
                 />
-                <Tooltip content={({ payload }) => <CustomTooltip item={payload} chart={c} />} />
-                <Bar dataKey='value' animationEasing='ease-in-out' animationDuration={1200}>
+                <Tooltip
+                  content={({ payload }) => (
+                    <CustomTooltip item={payload} chart={c} />
+                  )}
+                />
+                <Bar
+                  dataKey='value'
+                  animationEasing='ease-in-out'
+                  animationDuration={1200}>
                   {d.map((entry) => (
                     <Cell
                       key={getValue(entry.data, c.idKey)}

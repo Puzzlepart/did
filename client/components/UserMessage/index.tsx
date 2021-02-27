@@ -14,8 +14,13 @@ import styles from './UserMessage.module.scss'
  *
  * @category UserMessage
  */
-export const UserMessage: FunctionComponent<IUserMessageProps> = (props: IUserMessageProps) => {
-  const _styles: IStyleFunctionOrObject<IMessageBarStyleProps, IMessageBarStyles> = {}
+export const UserMessage: FunctionComponent<IUserMessageProps> = (
+  props: IUserMessageProps
+) => {
+  const _styles: IStyleFunctionOrObject<
+    IMessageBarStyleProps,
+    IMessageBarStyles
+  > = {}
 
   if (props.fixedCenter) {
     _styles.root = {

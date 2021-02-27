@@ -9,8 +9,11 @@ import { Context } from '../../graphql/context'
 import env from '../../utils/env'
 import { CacheScope, CacheService } from '../cache'
 import OAuthService, { AccessTokenOptions } from '../oauth'
-import MSGraphEvent, { MSGraphEventOptions, MSGraphOutlookCategory } from './types'
-const debug = require('debug')('services/msgraph')
+import MSGraphEvent, {
+  MSGraphEventOptions,
+  MSGraphOutlookCategory
+} from './types'
+const debug = createDebug('services/msgraph')
 
 @Service({ global: false })
 class MSGraphService {
@@ -31,11 +34,42 @@ class MSGraphService {
    * @param {Context} _context Context
    */
   constructor(
-    private readonly _oauthService: OAuthService,
-    private _access_token?: string,
-    @Inject('CONTEXT') readonly context?: Context,
+    private _oauthService: OAuthService,
+    private _access_token?: string
   ) {
-    this._cache = new CacheService(context, MSGraphService.name)
+    if (!env('APPINSIGHTS_INSTRUMENTATIONKEY')) return
+    appInsights.setup(env('APPINSIGHTS_INSTRUMENTATIONKEY'))
+    this._perf = new PerformanceObserver((list) => {
+      const { name, duration } = first(list.getEntries())
+      appInsights.defaultClient.trackMetric({
+        name,
+        value: duration
+      })
+    })
+    this._perf.observe({ entryTypes: ['measure'], buffered: true })
+  }
+
+  /**
+   * Starts a performance mark
+   *
+   * @param {string} measure
+   */
+  startMark(measure: string): void {
+    performance.mark(`${measure}-init`)
+  }
+
+  /**
+   * Ends a performance mark
+   *
+   * @param {string} measure
+   */
+  endMark(measure: string): void {
+    performance.mark(`${measure}-end`)
+    performance.measure(
+      `GraphService.${measure}`,
+      `${measure}-init`,
+      `${measure}-end`
+    )
   }
 
   /**
@@ -90,7 +124,9 @@ class MSGraphService {
    *
    * @param {string} category Category
    */
-  async createOutlookCategory(category: string): Promise<MSGraphOutlookCategory> {
+  async createOutlookCategory(
+    category: string
+  ): Promise<MSGraphOutlookCategory> {
     try {
       const colorIdx =
         category
@@ -102,7 +138,10 @@ class MSGraphService {
         color: `preset${colorIdx}`
       })
       const client = await this._getClient()
-      const result = await client.api('/me/outlook/masterCategories').post(content)
+      const result = await client
+        .api('/me/outlook/masterCategories')
+        .post(content)
+      this.endMark('createOutlookCategory')
       return result
     } catch (error) {
       throw new Error(`MSGraphService.createOutlookCategory: ${error.message}`)
@@ -143,17 +182,37 @@ class MSGraphService {
       const cacheValue = await this._cache.get(cacheKeys, CacheScope.USER)
       if (cacheValue) return cacheValue
       const query = {
-        startDateTime: DateUtils.toISOString(`${startDate}:00:00:00.000`, options.tzOffset),
-        endDateTime: DateUtils.toISOString(`${endDate}:23:59:59.999`, options.tzOffset)
+        startDateTime: DateUtils.toISOString(
+          `${startDate}:00:00:00.000`,
+          options.tzOffset
+        ),
+        endDateTime: DateUtils.toISOString(
+          `${endDate}:23:59:59.999`,
+          options.tzOffset
+        )
       }
-      debug('Querying Graph /me/calendar/calendarView: %s', JSON.stringify({ query }))
+      debug(
+        'Querying Graph /me/calendar/calendarView: %s',
+        JSON.stringify({ query })
+      )
       const client = await this._getClient()
       const { value } = (await client
         .api('/me/calendar/calendarView')
         .query(query)
-        .select(['id', 'subject', 'body', 'start', 'end', 'categories', 'webLink', 'isOrganizer'])
+        .select([
+          'id',
+          'subject',
+          'body',
+          'start',
+          'end',
+          'categories',
+          'webLink',
+          'isOrganizer'
+        ])
         // eslint-disable-next-line quotes
-        .filter("sensitivity ne 'private' and isallday eq false and iscancelled eq false")
+        .filter(
+          "sensitivity ne 'private' and isallday eq false and iscancelled eq false"
+        )
         .orderby('start/dateTime asc')
         .top(500)
         .get()) as { value: any[] }

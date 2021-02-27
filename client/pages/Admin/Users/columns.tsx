@@ -10,13 +10,21 @@ import { generateColumn as col } from 'utils/generateColumn'
  * @param {void} onEdit On edit callback
  * @param {TFunction} t Translate function
  */
-export const UserColumns = (onEdit: (user: User) => void, t: TFunction): IColumn[] => [
-  col('role.name', t('common.roleLabel'), { maxWidth: 100 }, ({ role }: User) => (
-    <div title={(role as Role).description}>
-      <Icon style={{ marginRight: 8 }} iconName={(role as Role).icon} />
-      <span>{(role as Role).name}</span>
-    </div>
-  )),
+export const UserColumns = (
+  onEdit: (user: User) => void,
+  t: TFunction
+): IColumn[] => [
+  col(
+    'role.name',
+    t('common.roleLabel'),
+    { maxWidth: 100 },
+    ({ role }: User) => (
+      <div title={(role as Role).description}>
+        <Icon style={{ marginRight: 8 }} iconName={(role as Role).icon} />
+        <span>{(role as Role).name}</span>
+      </div>
+    )
+  ),
   col('displayName', t('common.displayNameLabel'), { maxWidth: 180 }),
   col('surname', t('common.surnameLabel'), { maxWidth: 160 }),
   col('givenName', t('common.givenNameLabel'), { maxWidth: 160 }),

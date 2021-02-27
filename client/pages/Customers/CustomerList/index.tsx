@@ -1,29 +1,28 @@
 import List from 'components/List'
 import { Checkbox, SelectionMode } from 'office-ui-fabric'
-import React, { useContext, useEffect, useState } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { filter, isEmpty } from 'underscore'
-import { CustomersContext } from '../context'
-import { SET_SELECTED_CUSTOMER } from '../reducer'
 import { columns } from './columns'
+import { useCustomerList } from './useCustomerList'
 
 export const CustomerList = () => {
   const { t } = useTranslation()
-  const { dispatch, state, loading } = useContext(CustomersContext)
-  const [items, setItems] = useState([...state.customers])
-  const [showInactive, setShowInactive] = useState(false)
-
-  useEffect(
-    () => setItems([...state.customers].filter((p) => (showInactive ? true : !p.inactive))),
-    [state.customers, showInactive]
-  )
+  const {
+    state,
+    loading,
+    items,
+    showInactive,
+    setShowInactive,
+    setSelectedCustomer
+  } = useCustomerList()
 
   return (
     <List
       searchBox={{ placeholder: t('common.searchPlaceholder') }}
       selection={{
         mode: SelectionMode.single,
-        onChanged: (selected) => dispatch(SET_SELECTED_CUSTOMER({ customer: selected }))
+        onChanged: setSelectedCustomer
       }}
       height={state.selected && 400}
       enableShimmer={loading}

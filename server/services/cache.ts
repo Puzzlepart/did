@@ -14,6 +14,12 @@ export enum CacheScope {
 
 export type CacheKey = string | string[]
 
+type CacheOptions = {
+  key: CacheKey
+  expiry?: number
+  scope?: CacheScope
+}
+
 @Service({ global: false })
 export class CacheService {
   /**
@@ -44,7 +50,9 @@ export class CacheService {
     return [
       this.prefix,
       ...key,
-      scope === CacheScope.SUBSCRIPTION ? this.context.subscription.id : this.context.userId
+      scope === CacheScope.SUBSCRIPTION
+        ? this.context.subscription.id
+        : this.context.userId
     ]
       .join(':')
       .replace(/\-/g, '')
@@ -54,10 +62,11 @@ export class CacheService {
   /**
    * Get from cache by key
    *
-   * @param {CacheKey} key Cache key
-   * @param {CacheScope} scope Cache scope
+   * @private
+   *
+   * @param {CacheOptions} options Cache options
    */
-  public get<T = any>(key: CacheKey, scope: CacheScope = this.scope): Promise<T> {
+  private _get<T = any>({ key, scope }: CacheOptions): Promise<T> {
     return new Promise((resolve) => {
       const scopedCacheKey = this._getScopedCacheKey(key, scope)
       log(`Retrieving cached value for key ${scopedCacheKey}...`)
@@ -76,34 +85,42 @@ export class CacheService {
   /**
    * Get from cache by key
    *
-   * @param {CacheKey} key Cache key
+   * @private
+   *
+   * @param {CacheOptions} options Cache options
    * @param {any} value Cache value
-   * @param {number} seconds Cache seconds
-   * @param {CacheScope} scope Cache scope
    */
-  public set(key: CacheKey, value: any, seconds: number = 60, scope: CacheScope = this.scope) {
+  private _set<T = any>({ key, scope, expiry }: CacheOptions, value: T) {
     return new Promise((resolve) => {
       const scopedCacheKey = this._getScopedCacheKey(key, scope)
-      log(`Setting value for key ${scopedCacheKey} with a expiration of ${seconds} seconds...`)
-      Redis.setex(scopedCacheKey, seconds, JSON.stringify(value), (err, reply) => {
-        if (err) {
-          log(`Failed to set value for key ${scopedCacheKey}.`)
-          resolve(err)
-        } else {
-          log(`Value for key ${scopedCacheKey} set with a expiration of ${seconds} seconds.`)
-          resolve(reply)
+      log(
+        `Setting value for key ${scopedCacheKey} with a expiration of ${expiry} seconds...`
+      )
+      Redis.setex(
+        scopedCacheKey,
+        expiry,
+        JSON.stringify(value),
+        (err, reply) => {
+          if (err) {
+            log(`Failed to set value for key ${scopedCacheKey}.`)
+            resolve(err)
+          } else {
+            log(
+              `Value for key ${scopedCacheKey} set with a expiration of ${expiry} seconds.`
+            )
+            resolve(reply)
+          }
         }
-      })
+      )
     })
   }
 
   /**
    * Clear cache for the specified key and scope
    *
-   * @param {string} key Cache key
-   * @param {CacheScope} scope Cache scope
+   * @param {CacheOptions} options Cache options
    */
-  public clear(key: string, scope?: CacheScope) {
+  public clear({ key, scope }: CacheOptions) {
     const pattern = `${this._getScopedCacheKey(key, scope)}*`
     return new Promise((resolve) => {
       Redis.keys(pattern, (_err, keys) => {
@@ -112,5 +129,21 @@ export class CacheService {
         })
       })
     })
+  }
+
+  /**
+   *
+   * @param {Promise<T>} func Promise function
+   * @param {CacheOptions} options Cache options
+   */
+  public async usingCache<T = any>(
+    func: () => Promise<T>,
+    { key, expiry = 60, scope }: CacheOptions
+  ) {
+    const cachedValue: T = await this._get<T>({ key, scope })
+    if (cachedValue) return cachedValue
+    const value: T = await func()
+    await this._set({ key, scope, expiry }, value)
+    return value
   }
 }

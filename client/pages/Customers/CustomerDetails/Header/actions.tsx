@@ -14,21 +14,27 @@ export const Actions: FunctionComponent = () => {
   const [showEditPanel, setShowEditPanel] = useState(false)
   return (
     <div className={styles.actions}>
-      <div className={styles.actionItem} hidden={loading || !state.selected.webLink}>
+      <div
+        className={styles.actionItem}
+        hidden={loading || !state.selected.webLink}>
         <DefaultButton
           text={t('customers.webLinkText')}
           href={state.selected.webLink}
           iconProps={{ iconName: 'Website' }}
         />
       </div>
-      <div className={styles.actionItem} hidden={loading || !state.selected.externalSystemURL}>
+      <div
+        className={styles.actionItem}
+        hidden={loading || !state.selected.externalSystemURL}>
         <DefaultButton
           text={t('customers.externalSystemUrlText')}
           href={state.selected.externalSystemURL}
           iconProps={{ iconName: 'System' }}
         />
       </div>
-      <div className={styles.actionItem} hidden={!user.hasPermission(PERMISSION.MANAGE_CUSTOMERS)}>
+      <div
+        className={styles.actionItem}
+        hidden={!user.hasPermission(PERMISSION.MANAGE_CUSTOMERS)}>
         <DefaultButton
           text={t('common.editLabel')}
           iconProps={{ iconName: 'Edit' }}

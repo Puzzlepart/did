@@ -30,7 +30,9 @@ export function useTimesheet() {
 
   useLayoutEffect(() => {
     if (!state.selectedPeriod) return
-    history.push(['/timesheet', state.selectedView, state.selectedPeriod.path].join('/'))
+    history.push(
+      ['/timesheet', state.selectedView, state.selectedPeriod.path].join('/')
+    )
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.selectedView, state.selectedPeriod])
 

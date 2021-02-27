@@ -9,7 +9,11 @@ import { ProjectModel } from './types'
  * @param {TFunction} t Translate function
  */
 export const validateForm = (model: ProjectModel, t: TFunction) => {
-  const { PROJECT_KEY_MIN_LENGTH, PROJECT_KEY_MAX_LENGTH, PROJECT_NAME_MIN_LENGTH } = AppConfig
+  const {
+    PROJECT_KEY_MIN_LENGTH,
+    PROJECT_KEY_MAX_LENGTH,
+    PROJECT_NAME_MIN_LENGTH
+  } = AppConfig
   const PROJECT_KEY_REGEX = new RegExp(
     `(^[A-ZÆØÅ0-9-]{${PROJECT_KEY_MIN_LENGTH},${PROJECT_KEY_MAX_LENGTH}}$)`,
     'gm'

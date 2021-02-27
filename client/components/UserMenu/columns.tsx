@@ -39,7 +39,8 @@ const columns = (t: TFunction): IColumn[] => [
     name: t('common.startTimeLabel'),
     minWidth: 100,
     data: { excelColFormat: 'date' as ExcelColumnType },
-    onRender: ({ startDateTime }) => DateUtils.formatDate(startDateTime, 'MMM DD, YYYY kk:mm')
+    onRender: ({ startDateTime }) =>
+      DateUtils.formatDate(startDateTime, 'MMM DD, YYYY kk:mm')
   },
   {
     key: 'endDateTime',
@@ -47,7 +48,8 @@ const columns = (t: TFunction): IColumn[] => [
     name: t('common.endTimeLabel'),
     minWidth: 100,
     data: { excelColFormat: 'date' as ExcelColumnType },
-    onRender: ({ endDateTime }) => DateUtils.formatDate(endDateTime, 'MMM DD, YYYY kk:mm')
+    onRender: ({ endDateTime }) =>
+      DateUtils.formatDate(endDateTime, 'MMM DD, YYYY kk:mm')
   },
   {
     key: 'weekNumber',

@@ -2,7 +2,13 @@ import { useMutation, useQuery } from '@apollo/client'
 import { UserMessage } from 'components'
 import { IconPicker } from 'components/IconPicker'
 import * as security from 'config/security'
-import { DefaultButton, Panel, PrimaryButton, TextField, Toggle } from 'office-ui-fabric'
+import {
+  DefaultButton,
+  Panel,
+  PrimaryButton,
+  TextField,
+  Toggle
+} from 'office-ui-fabric'
 import React, { Fragment, FunctionComponent, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { RoleInput } from 'types'
@@ -13,7 +19,9 @@ import styles from './RolePanel.module.scss'
 import { IRolePanelProps } from './types'
 import $users from './users.gql'
 
-export const RolePanel: FunctionComponent<IRolePanelProps> = (props: IRolePanelProps) => {
+export const RolePanel: FunctionComponent<IRolePanelProps> = (
+  props: IRolePanelProps
+) => {
   const { t } = useTranslation()
   const { data } = useQuery($users, {
     variables: {
@@ -130,7 +138,11 @@ export const RolePanel: FunctionComponent<IRolePanelProps> = (props: IRolePanelP
                   onClick={onDelete}
                 />
               ) : (
-                <UserMessage text={t('admin.roleInUseMessage', { count: data?.users?.length })} />
+                <UserMessage
+                  text={t('admin.roleInUseMessage', {
+                    count: data?.users?.length
+                  })}
+                />
               )}
             </Fragment>
           )}

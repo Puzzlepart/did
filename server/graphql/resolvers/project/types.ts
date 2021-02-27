@@ -3,7 +3,9 @@ import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import { Customer, LabelObject as Label, OutlookCategory } from '../types'
 
-@InputType({ description: 'Input object for Project used in Mutation createOrUpdateProject' })
+@InputType({
+  description: 'Input object for Project used in Mutation createOrUpdateProject'
+})
 export class ProjectInput {
   @Field()
   key: string
@@ -88,14 +90,17 @@ export class Project {
 }
 
 @InputType({
-  description: 'Input object for ProjectOptions used in Mutation createOrUpdateProject'
+  description:
+    'Input object for ProjectOptions used in Mutation createOrUpdateProject'
 })
 export class ProjectOptions {
   @Field({ nullable: true, defaultValue: false })
   createOutlookCategory?: boolean
 }
 
-@ObjectType({ description: 'A type that describes a CreateOrUpdateProjectResult' })
+@ObjectType({
+  description: 'A type that describes a CreateOrUpdateProjectResult'
+})
 export class CreateOrUpdateProjectResult {
   @Field({ nullable: true })
   success: boolean

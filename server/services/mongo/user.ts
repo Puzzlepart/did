@@ -85,7 +85,9 @@ export class UserService extends MongoDocumentService<User> {
    */
   public async addUsers(users: User[]) {
     try {
-      const result = await this.collection.insertMany(users.map((u) => this._replaceId(u)))
+      const result = await this.collection.insertMany(
+        users.map((u) => this._replaceId(u))
+      )
       return result
     } catch (err) {
       throw err
@@ -115,11 +117,16 @@ export class UserService extends MongoDocumentService<User> {
       const filter = { _id: this.context.userId }
       const user = await this.collection.findOne(filter)
       const _configuration = JSON.parse(configuration)
-      const mergedConfiguration = Object.keys(_configuration).reduce((obj, key) => {
-        set(obj, key, _configuration[key])
-        return obj
-      }, user.configuration)
-      await this.collection.updateOne(filter, { $set: { configuration: mergedConfiguration } })
+      const mergedConfiguration = Object.keys(_configuration).reduce(
+        (obj, key) => {
+          set(obj, key, _configuration[key])
+          return obj
+        },
+        user.configuration
+      )
+      await this.collection.updateOne(filter, {
+        $set: { configuration: mergedConfiguration }
+      })
     } catch (err) {
       throw err
     }

@@ -2,7 +2,9 @@
 import 'reflect-metadata'
 import { ObjectType, InputType, Field, ID } from 'type-graphql'
 
-@InputType({ description: 'Input object for Label used in Mutation addOrUpdateLabel' })
+@InputType({
+  description: 'Input object for Label used in Mutation addOrUpdateLabel'
+})
 export class LabelInput {
   @Field()
   name: string

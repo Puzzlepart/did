@@ -1,4 +1,8 @@
-import { ContextualMenuItemType, format, IContextualMenuItem } from 'office-ui-fabric'
+import {
+  ContextualMenuItemType,
+  format,
+  IContextualMenuItem
+} from 'office-ui-fabric'
 import React from 'react'
 import { isEmpty, omit, pick } from 'underscore'
 import { exportExcel } from 'utils/exportExcel'
@@ -30,7 +34,8 @@ const selectGroupByCmd = (context: IReportsContext) =>
             ...pick(opt, 'key', 'text'),
             canCheck: true,
             checked: context.state.groupBy.fieldName === opt.props.fieldName,
-            onClick: () => context.dispatch(SET_GROUP_BY({ groupBy: opt.props }))
+            onClick: () =>
+              context.dispatch(SET_GROUP_BY({ groupBy: opt.props }))
           } as IContextualMenuItem)
       )
     }
@@ -90,7 +95,11 @@ const clearFiltersCmd = ({ state, dispatch }: IReportsContext) =>
  *
  * @param {IReportsContext} context Context
  */
-const saveFilterCmd = ({ state, dispatch, t }: IReportsContext): IContextualMenuItem =>
+const saveFilterCmd = ({
+  state,
+  dispatch,
+  t
+}: IReportsContext): IContextualMenuItem =>
   ({
     key: 'SAVED_FILTERS',
     text: state.filter?.text || t('reports.savedFilters'),
@@ -99,7 +108,9 @@ const saveFilterCmd = ({ state, dispatch, t }: IReportsContext): IContextualMenu
       items: [
         {
           key: 'SAVE_FILTER',
-          onRender: () => <SaveFilterForm style={{ padding: '12px 12px 6px 32px' }} />
+          onRender: () => (
+            <SaveFilterForm style={{ padding: '12px 12px 6px 32px' }} />
+          )
         },
         {
           key: 'DIVIDER_O',
@@ -129,7 +140,10 @@ const saveFilterCmd = ({ state, dispatch, t }: IReportsContext): IContextualMenu
   } as IContextualMenuItem)
 
 export default (context: IReportsContext) => ({
-  items: !!context.state.query && !context.state.loading ? [selectGroupByCmd(context)] : [],
+  items:
+    !!context.state.query && !context.state.loading
+      ? [selectGroupByCmd(context)]
+      : [],
   farItems:
     !!context.state.query && !context.state.loading
       ? [

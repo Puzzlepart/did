@@ -23,7 +23,9 @@ class App {
   constructor() {
     this.instance = express()
     this.instance.use(require('./middleware/helmet').default)
-    this.instance.use(favicon(path.join(__dirname, 'public/images/favicon/favicon.ico')))
+    this.instance.use(
+      favicon(path.join(__dirname, 'public/images/favicon/favicon.ico'))
+    )
     this.instance.use(logger('dev'))
     this.instance.use(express.json())
     this.instance.use(express.urlencoded({ extended: false }))
@@ -35,10 +37,13 @@ class App {
    * Setup app
    */
   public async setup() {
-    this._client = await MongoClient.connect(env('MONGO_DB_CONNECTION_STRING'), {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    })
+    this._client = await MongoClient.connect(
+      env('MONGO_DB_CONNECTION_STRING'),
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+      }
+    )
     this.setupSession()
     this.setupViewEngine()
     this.setupAssets()
@@ -105,9 +110,13 @@ class App {
    */
   setupErrorHandling() {
     this.instance.use((_req, _res, next) => next(createError()))
-    this.instance.use((error: any, _req: express.Request, res: express.Response) => {
-      res.render('index', { error: JSON.stringify(pick(error, 'name', 'message', 'status')) })
-    })
+    this.instance.use(
+      (error: any, _req: express.Request, res: express.Response) => {
+        res.render('index', {
+          error: JSON.stringify(pick(error, 'name', 'message', 'status'))
+        })
+      }
+    )
   }
 }
 

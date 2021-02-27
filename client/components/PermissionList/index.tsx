@@ -8,7 +8,9 @@ import { IPermissionListProps } from './types'
 export const PermissionList = ({ permissionIds }: IPermissionListProps) => {
   const { t } = useTranslation()
   const permissions = useMemo(() => {
-    return securityConfig.permissions(t).filter((perm) => contains(permissionIds, perm.id))
+    return securityConfig
+      .permissions(t)
+      .filter((perm) => contains(permissionIds, perm.id))
   }, [permissionIds, t])
   return (
     <div className={styles.root}>

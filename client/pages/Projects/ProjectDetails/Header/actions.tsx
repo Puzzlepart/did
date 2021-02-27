@@ -24,7 +24,9 @@ export const Actions: FunctionComponent = () => {
   async function onCreateCategory() {
     const {
       data: { result }
-    } = await createOutlookCategory({ variables: { category: state.selected.tag } })
+    } = await createOutlookCategory({
+      variables: { category: state.selected.tag }
+    })
     if (result.success) {
       const project = copy(state.selected)
       project.outlookCategory = result.data
@@ -41,14 +43,18 @@ export const Actions: FunctionComponent = () => {
           iconProps={{ iconName: 'Website' }}
         />
       </div>
-      <div className={styles.actionItem} hidden={!!state.selected.outlookCategory}>
+      <div
+        className={styles.actionItem}
+        hidden={!!state.selected.outlookCategory}>
         <DefaultButton
           text={t('projects.createOutlookCategoryLabel')}
           iconProps={{ iconName: 'OutlookLogoInverse' }}
           onClick={() => onCreateCategory()}
         />
       </div>
-      <div className={styles.actionItem} hidden={!user.hasPermission(PERMISSION.MANAGE_PROJECTS)}>
+      <div
+        className={styles.actionItem}
+        hidden={!user.hasPermission(PERMISSION.MANAGE_PROJECTS)}>
         <DefaultButton
           text={t('common.editLabel')}
           iconProps={{ iconName: 'Edit' }}

@@ -2,7 +2,10 @@ import { getValue } from 'helpers'
 import { contains, unique } from 'underscore'
 import { BaseFilter, IFilter } from './BaseFilter'
 
-export class ResourceFilter<ItemType = any, KeyType = any> extends BaseFilter<ItemType> {
+export class ResourceFilter<
+  ItemType = any,
+  KeyType = any
+> extends BaseFilter<ItemType> {
   private _selectedKeys: KeyType[]
 
   /**
@@ -12,7 +15,11 @@ export class ResourceFilter<ItemType = any, KeyType = any> extends BaseFilter<It
    * @param {string} valueFieldName Field name for the item value
    * @param {string} name Filter name
    */
-  constructor(public keyFieldName: string, public valueFieldName: string, public name: string) {
+  constructor(
+    public keyFieldName: string,
+    public valueFieldName: string,
+    public name: string
+  ) {
     super(keyFieldName, name)
   }
 

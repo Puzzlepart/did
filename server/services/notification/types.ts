@@ -13,7 +13,9 @@ class BaseNotification {
     template: string
   ) {
     this.text = format(template, period.week, period.month)
-    this.moreLink = ['', 'timesheet/overview', ...period.id.split('_')].join('/')
+    this.moreLink = ['', 'timesheet/overview', ...period.id.split('_')].join(
+      '/'
+    )
   }
 }
 

@@ -23,7 +23,9 @@ export class Role {
   readOnly?: boolean
 }
 
-@InputType({ description: 'Input object for Role used in Mutation addOrUpdateRole' })
+@InputType({
+  description: 'Input object for Role used in Mutation addOrUpdateRole'
+})
 export class RoleInput {
   @Field()
   name?: string

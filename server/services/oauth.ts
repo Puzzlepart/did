@@ -46,19 +46,35 @@ class OAuthService {
    */
   public async getAccessToken(options: AccessTokenOptions): Promise<Token> {
     // TODO: Temp hack for 'Property 'tokenParams' does not exist on type 'User'.'
-    let accessToken = this._getClient(options).createToken(this._request.user['tokenParams'])
+    let accessToken = this._getClient(options).createToken(
+      this._request.user['tokenParams']
+    )
     try {
       if (accessToken.expired() || options.force) {
-        debug(`Token expired. Attempting to refresh... Options: ${JSON.stringify(options)}`)
-        accessToken = await accessToken.refresh(pick(accessToken.token, 'scope'))
-        debug(`Successfully refreshed token expiring ${accessToken.token.expires_at}.`)
+        debug(
+          `Token expired. Attempting to refresh... Options: ${JSON.stringify(
+            options
+          )}`
+        )
+        accessToken = await accessToken.refresh(
+          pick(accessToken.token, 'scope')
+        )
+        debug(
+          `Successfully refreshed token expiring ${accessToken.token.expires_at}.`
+        )
       } else {
         debug(`Token expiring ${accessToken.token.expires_at}.`)
       }
     } catch (err) {
-      debug(`Failed to refresh token using options ${JSON.stringify(options)}: ${err.message}`)
+      debug(
+        `Failed to refresh token using options ${JSON.stringify(options)}: ${
+          err.message
+        }`
+      )
       throw new Error(
-        `Failed to refresh token using options ${JSON.stringify(options)}: ${err.message}`
+        `Failed to refresh token using options ${JSON.stringify(options)}: ${
+          err.message
+        }`
       )
     }
     // TODO: Temp hack for 'Property 'tokenParams' does not exist on type 'User'.'

@@ -27,7 +27,9 @@ export class ApiTokenResolver {
   @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [ApiToken], { description: 'Get API tokens' })
   apiTokens(@Ctx() ctx: Context): Promise<ApiToken[]> {
-    return this._mongo.apiToken.getTokens({ subscriptionId: ctx.subscription.id })
+    return this._mongo.apiToken.getTokens({
+      subscriptionId: ctx.subscription.id
+    })
   }
 
   /**
@@ -38,7 +40,10 @@ export class ApiTokenResolver {
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => String, { description: 'Add API token' })
-  addApiToken(@Arg('token') token: ApiTokenInput, @Ctx() ctx: Context): Promise<string> {
+  addApiToken(
+    @Arg('token') token: ApiTokenInput,
+    @Ctx() ctx: Context
+  ): Promise<string> {
     return this._mongo.apiToken.addToken(token, ctx.subscription.id)
   }
 
@@ -50,7 +55,10 @@ export class ApiTokenResolver {
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Delete API tokens' })
-  async deleteApiToken(@Arg('name') name: string, @Ctx() ctx: Context): Promise<BaseResult> {
+  async deleteApiToken(
+    @Arg('name') name: string,
+    @Ctx() ctx: Context
+  ): Promise<BaseResult> {
     await this._mongo.apiToken.deleteToken(name, ctx.subscription.id)
     return { success: true, error: null }
   }

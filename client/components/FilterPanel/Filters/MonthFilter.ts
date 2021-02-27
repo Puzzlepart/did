@@ -3,7 +3,10 @@ import { getValue } from 'helpers'
 import { contains, indexOf, unique } from 'underscore'
 import { BaseFilter, IFilter } from './BaseFilter'
 
-export class MonthFilter<ItemType = any, KeyType = any> extends BaseFilter<ItemType> {
+export class MonthFilter<
+  ItemType = any,
+  KeyType = any
+> extends BaseFilter<ItemType> {
   private _selectedKeys: KeyType[]
 
   constructor(fieldName: string, public name: string) {

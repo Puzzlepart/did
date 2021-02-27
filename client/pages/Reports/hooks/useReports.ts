@@ -34,7 +34,10 @@ export function useReports() {
   })
   useLayoutEffect(() => dispatch(INIT()), [dispatch])
   useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query, dispatch])
-  useLayoutEffect(() => history.push(`/reports/${state.query?.key || ''}`), [state.query, history])
+  useLayoutEffect(() => history.push(`/reports/${state.query?.key || ''}`), [
+    state.query,
+    history
+  ])
   const filters = useMemo(() => initFilters(state.filter, t), [state.filter, t])
   return {
     state,

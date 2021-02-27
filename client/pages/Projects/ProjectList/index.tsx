@@ -7,21 +7,28 @@ import { withDefaultProps } from 'with-default-props'
 import columns from './columns'
 import { IProjectListProps } from './types'
 
-const ProjectList: FunctionComponent<IProjectListProps> = (props: IProjectListProps) => {
+const ProjectList: FunctionComponent<IProjectListProps> = (
+  props: IProjectListProps
+) => {
   const { t } = useTranslation()
   const [items, setItems] = useState([...props.items])
   const [showInactive, setShowInactive] = useState(false)
 
-  useEffect(() => setItems([...props.items].filter((p) => (showInactive ? true : !p.inactive))), [
-    props.items,
-    showInactive
-  ])
+  useEffect(
+    () =>
+      setItems(
+        [...props.items].filter((p) => (showInactive ? true : !p.inactive))
+      ),
+    [props.items, showInactive]
+  )
 
   return (
     <List
       {...props}
       items={items}
-      columns={columns(props, t).filter((col) => !contains(props.hideColumns, col.key))}
+      columns={columns(props, t).filter(
+        (col) => !contains(props.hideColumns, col.key)
+      )}
       groups={props.groups}
       selection={props.selection}
       commandBar={{

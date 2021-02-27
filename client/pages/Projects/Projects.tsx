@@ -17,7 +17,9 @@ export const Projects: FunctionComponent = () => {
     <ProjectsContext.Provider value={context}>
       <Pivot
         selectedKey={state.view}
-        onLinkClick={({ props }) => dispatch(CHANGE_VIEW({ view: props.itemKey as ProjectsView }))}
+        onLinkClick={({ props }) =>
+          dispatch(CHANGE_VIEW({ view: props.itemKey as ProjectsView }))
+        }
         styles={{ itemContainer: { paddingTop: 10 } }}>
         <PivotItem
           itemID='search'
@@ -47,7 +49,10 @@ export const Projects: FunctionComponent = () => {
             iconName='OutlookLogoInverse'
             text={t('projects.outlookCategoryInfoText')}
           />
-          <ProjectList {...listProps} items={state.projects.filter((p) => !!p.outlookCategory)} />
+          <ProjectList
+            {...listProps}
+            items={state.projects.filter((p) => !!p.outlookCategory)}
+          />
           {state.selected && <ProjectDetails />}
         </PivotItem>
         {user.hasPermission(PERMISSION.MANAGE_PROJECTS) && (

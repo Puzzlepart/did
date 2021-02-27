@@ -28,7 +28,10 @@ export function useMessages() {
     if (!selectedPeriod.isComplete && !selectedPeriod.isForecast) {
       messages.push({
         text: t('timesheet.hoursNotMatchedText', {
-          hours: DateUtils.getDurationString(selectedPeriod.unmatchedDuration, t)
+          hours: DateUtils.getDurationString(
+            selectedPeriod.unmatchedDuration,
+            t
+          )
         }),
         type: MessageBarType.warning,
         iconName: 'BufferTimeBoth'
@@ -80,7 +83,9 @@ export function useMessages() {
     if (!isEmpty(selectedPeriod.errors)) {
       messages.push({
         type: MessageBarType.severeWarning,
-        text: t('timesheet.unresolvedErrorText', { count: selectedPeriod.errors.length }),
+        text: t('timesheet.unresolvedErrorText', {
+          count: selectedPeriod.errors.length
+        }),
         iconName: 'ErrorBadge'
       })
     }

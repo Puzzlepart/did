@@ -31,7 +31,10 @@ export class ApiTokenService extends MongoDocumentService<ApiToken> {
    * @param {ApiToken} token Token to add
    * @param {string} subscriptionId Subscription id
    */
-  public async addToken(token: ApiToken, subscriptionId: string): Promise<string> {
+  public async addToken(
+    token: ApiToken,
+    subscriptionId: string
+  ): Promise<string> {
     try {
       token.subscriptionId = subscriptionId
       token.created = new Date()
@@ -52,7 +55,10 @@ export class ApiTokenService extends MongoDocumentService<ApiToken> {
    * @param {string} name Token name
    * @param {string} subscriptionId Subscription id
    */
-  public async deleteToken(name: string, subscriptionId: string): Promise<void> {
+  public async deleteToken(
+    name: string,
+    subscriptionId: string
+  ): Promise<void> {
     try {
       await this.collection.deleteOne({ name, subscriptionId })
     } catch (err) {

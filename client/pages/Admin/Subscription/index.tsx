@@ -31,7 +31,10 @@ export const SubscriptionSettings = () => {
    * @param {string} key Setting key
    * @param {any} value The actual value or a callback function returning the value
    */
-  const onSettingsChanged = (key: string, value: boolean | string | ((value: any) => any)) => {
+  const onSettingsChanged = (
+    key: string,
+    value: boolean | string | ((value: any) => any)
+  ) => {
     const _subscription = deepCopy(subscription)
     if (typeof value === 'function') {
       value = value(getValue(_subscription, `settings.${key}`))
@@ -41,12 +44,18 @@ export const SubscriptionSettings = () => {
   }
 
   const onSaveSettings = async () => {
-    await updateSubscription({ variables: pick(subscription, 'id', 'settings') })
-    setMessage({ text: t('admin.subscriptionSettingsUpdateSuccess'), type: MessageBarType.success })
+    await updateSubscription({
+      variables: pick(subscription, 'id', 'settings')
+    })
+    setMessage({
+      text: t('admin.subscriptionSettingsUpdateSuccess'),
+      type: MessageBarType.success
+    })
   }
 
   return (
-    <SubscriptionContext.Provider value={{ settings: subscription.settings, onSettingsChanged }}>
+    <SubscriptionContext.Provider
+      value={{ settings: subscription.settings, onSettingsChanged }}>
       <div className={styles.root}>
         {message && (
           <UserMessage
@@ -59,11 +68,21 @@ export const SubscriptionSettings = () => {
           />
         )}
         <div className={styles.inputField}>
-          <TextField disabled label={t('common.nameLabel')} value={subscription?.name} />
+          <TextField
+            disabled
+            label={t('common.nameLabel')}
+            value={subscription?.name}
+          />
         </div>
         {subscription?.settings &&
           sections.map((section) => {
-            return <SettingsSection {...section} key={section.id} defaultExpanded={true} />
+            return (
+              <SettingsSection
+                {...section}
+                key={section.id}
+                defaultExpanded={true}
+              />
+            )
           })}
         <PrimaryButton
           className={styles.saveButton}

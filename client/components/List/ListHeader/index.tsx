@@ -1,9 +1,16 @@
-import { Sticky, StickyPositionType, CommandBar, SearchBox } from 'office-ui-fabric'
+import {
+  Sticky,
+  StickyPositionType,
+  CommandBar,
+  SearchBox
+} from 'office-ui-fabric'
 import React, { FunctionComponent, useMemo, useRef } from 'react'
 import { IListHeaderProps } from './types'
 import styles from './ListHeader.module.scss'
 
-export const ListHeader: FunctionComponent<IListHeaderProps> = (props: IListHeaderProps) => {
+export const ListHeader: FunctionComponent<IListHeaderProps> = (
+  props: IListHeaderProps
+) => {
   const timeout = useRef(null)
 
   const searchBox = useMemo(() => {
@@ -17,7 +24,8 @@ export const ListHeader: FunctionComponent<IListHeaderProps> = (props: IListHead
           onChange={(_event, newValue) => {
             clearTimeout(timeout.current)
             timeout.current = setTimeout(() => {
-              if (props.searchBox.onChange) props.searchBox.onChange(_event, newValue)
+              if (props.searchBox.onChange)
+                props.searchBox.onChange(_event, newValue)
               props.dispatch({ type: 'SEARCH', payload: newValue })
             }, 750)
           }}
@@ -32,7 +40,10 @@ export const ListHeader: FunctionComponent<IListHeaderProps> = (props: IListHead
         <CommandBar
           {...props.commandBar}
           items={[searchBox, ...props.commandBar.items].filter((i) => i)}
-          hidden={props.commandBar.items.length === 0 && props.commandBar.farItems.length === 0}
+          hidden={
+            props.commandBar.items.length === 0 &&
+            props.commandBar.farItems.length === 0
+          }
           styles={{ root: { margin: 0, padding: 0 } }}
         />
         {props.defaultRender(props.headerProps)}
