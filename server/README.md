@@ -1,3 +1,3 @@
+# did-server
 
-
-Test me hard
+See [documentation](../server-docs/README.md)
