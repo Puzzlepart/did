@@ -20,7 +20,7 @@
 
 ### constructor
 
-\+ **new LabelResolver**(`_mongo`: *MongoService*): [*LabelResolver*](graphql.labelresolver.md)
+\+ **new LabelResolver**(`_mongo`: [*MongoService*](services.mongoservice.md)): [*LabelResolver*](graphql.labelresolver.md)
 
 Constructor for LabelResolver
 
@@ -28,11 +28,11 @@ Constructor for LabelResolver
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`_mongo` | *MongoService* | Mongo service    |
+`_mongo` | [*MongoService*](services.mongoservice.md) | Mongo service    |
 
 **Returns:** [*LabelResolver*](graphql.labelresolver.md)
 
-Defined in: [server/graphql/resolvers/label/index.ts:13](https://github.com/Puzzlepart/did/blob/dfb8b3b9/server/graphql/resolvers/label/index.ts#L13)
+Defined in: [server/graphql/resolvers/label/index.ts:13](https://github.com/Puzzlepart/did/blob/049fedc8/server/graphql/resolvers/label/index.ts#L13)
 
 ## Methods
 
@@ -51,7 +51,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/label/index.ts:38](https://github.com/Puzzlepart/did/blob/dfb8b3b9/server/graphql/resolvers/label/index.ts#L38)
+Defined in: [server/graphql/resolvers/label/index.ts:38](https://github.com/Puzzlepart/did/blob/049fedc8/server/graphql/resolvers/label/index.ts#L38)
 
 ___
 
@@ -69,7 +69,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/label/index.ts:55](https://github.com/Puzzlepart/did/blob/dfb8b3b9/server/graphql/resolvers/label/index.ts#L55)
+Defined in: [server/graphql/resolvers/label/index.ts:55](https://github.com/Puzzlepart/did/blob/049fedc8/server/graphql/resolvers/label/index.ts#L55)
 
 ___
 
@@ -81,4 +81,4 @@ Get labels
 
 **Returns:** *Promise*<LabelObject[]\>
 
-Defined in: [server/graphql/resolvers/label/index.ts:26](https://github.com/Puzzlepart/did/blob/dfb8b3b9/server/graphql/resolvers/label/index.ts#L26)
+Defined in: [server/graphql/resolvers/label/index.ts:26](https://github.com/Puzzlepart/did/blob/049fedc8/server/graphql/resolvers/label/index.ts#L26)

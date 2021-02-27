@@ -20,7 +20,7 @@
 
 ### constructor
 
-\+ **new CustomerResolver**(`_mongo`: *MongoService*): [*CustomerResolver*](graphql.customerresolver.md)
+\+ **new CustomerResolver**(`_mongo`: [*MongoService*](services.mongoservice.md)): [*CustomerResolver*](graphql.customerresolver.md)
 
 Constructor for CustomerResolver
 
@@ -28,11 +28,11 @@ Constructor for CustomerResolver
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`_mongo` | *MongoService* | Mongo service    |
+`_mongo` | [*MongoService*](services.mongoservice.md) | Mongo service    |
 
 **Returns:** [*CustomerResolver*](graphql.customerresolver.md)
 
-Defined in: [server/graphql/resolvers/customer/index.ts:12](https://github.com/Puzzlepart/did/blob/dfb8b3b9/server/graphql/resolvers/customer/index.ts#L12)
+Defined in: [server/graphql/resolvers/customer/index.ts:12](https://github.com/Puzzlepart/did/blob/049fedc8/server/graphql/resolvers/customer/index.ts#L12)
 
 ## Methods
 
@@ -51,7 +51,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<{ `error`: *any* = null; `success`: *boolean* = true }\>
 
-Defined in: [server/graphql/resolvers/customer/index.ts:39](https://github.com/Puzzlepart/did/blob/dfb8b3b9/server/graphql/resolvers/customer/index.ts#L39)
+Defined in: [server/graphql/resolvers/customer/index.ts:39](https://github.com/Puzzlepart/did/blob/049fedc8/server/graphql/resolvers/customer/index.ts#L39)
 
 ___
 
@@ -69,7 +69,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Customer[]\>
 
-Defined in: [server/graphql/resolvers/customer/index.ts:27](https://github.com/Puzzlepart/did/blob/dfb8b3b9/server/graphql/resolvers/customer/index.ts#L27)
+Defined in: [server/graphql/resolvers/customer/index.ts:27](https://github.com/Puzzlepart/did/blob/049fedc8/server/graphql/resolvers/customer/index.ts#L27)
 
 ___
 
@@ -87,4 +87,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/graphql/resolvers/customer/index.ts:56](https://github.com/Puzzlepart/did/blob/dfb8b3b9/server/graphql/resolvers/customer/index.ts#L56)
+Defined in: [server/graphql/resolvers/customer/index.ts:56](https://github.com/Puzzlepart/did/blob/049fedc8/server/graphql/resolvers/customer/index.ts#L56)

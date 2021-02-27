@@ -19,7 +19,7 @@
 
 ### constructor
 
-\+ **new SubscriptionResolver**(`_mongo`: *MongoService*): [*SubscriptionResolver*](graphql.subscriptionresolver.md)
+\+ **new SubscriptionResolver**(`_mongo`: [*MongoService*](services.mongoservice.md)): [*SubscriptionResolver*](graphql.subscriptionresolver.md)
 
 Constructor for SubscriptionResolver
 
@@ -27,11 +27,11 @@ Constructor for SubscriptionResolver
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`_mongo` | *MongoService* | Mongo service    |
+`_mongo` | [*MongoService*](services.mongoservice.md) | Mongo service    |
 
 **Returns:** [*SubscriptionResolver*](graphql.subscriptionresolver.md)
 
-Defined in: [server/graphql/resolvers/subscription/index.ts:14](https://github.com/Puzzlepart/did/blob/dfb8b3b9/server/graphql/resolvers/subscription/index.ts#L14)
+Defined in: [server/graphql/resolvers/subscription/index.ts:14](https://github.com/Puzzlepart/did/blob/049fedc8/server/graphql/resolvers/subscription/index.ts#L14)
 
 ## Methods
 
@@ -49,7 +49,7 @@ Name | Type |
 
 **Returns:** *Promise*<Subscription\>
 
-Defined in: [server/graphql/resolvers/subscription/index.ts:30](https://github.com/Puzzlepart/did/blob/dfb8b3b9/server/graphql/resolvers/subscription/index.ts#L30)
+Defined in: [server/graphql/resolvers/subscription/index.ts:30](https://github.com/Puzzlepart/did/blob/049fedc8/server/graphql/resolvers/subscription/index.ts#L30)
 
 ___
 
@@ -67,4 +67,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/subscription/index.ts:41](https://github.com/Puzzlepart/did/blob/dfb8b3b9/server/graphql/resolvers/subscription/index.ts#L41)
+Defined in: [server/graphql/resolvers/subscription/index.ts:41](https://github.com/Puzzlepart/did/blob/049fedc8/server/graphql/resolvers/subscription/index.ts#L41)

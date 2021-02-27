@@ -18,7 +18,7 @@
 
 ### constructor
 
-\+ **new ReportsResolver**(`_mongo`: *MongoService*): [*ReportsResolver*](graphql.reportsresolver.md)
+\+ **new ReportsResolver**(`_mongo`: [*MongoService*](services.mongoservice.md)): [*ReportsResolver*](graphql.reportsresolver.md)
 
 Constructor for ReportsResolver
 
@@ -26,11 +26,11 @@ Constructor for ReportsResolver
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`_mongo` | *MongoService* | Mongo service    |
+`_mongo` | [*MongoService*](services.mongoservice.md) | Mongo service    |
 
 **Returns:** [*ReportsResolver*](graphql.reportsresolver.md)
 
-Defined in: [server/graphql/resolvers/reports/index.ts:12](https://github.com/Puzzlepart/did/blob/dfb8b3b9/server/graphql/resolvers/reports/index.ts#L12)
+Defined in: [server/graphql/resolvers/reports/index.ts:12](https://github.com/Puzzlepart/did/blob/049fedc8/server/graphql/resolvers/reports/index.ts#L12)
 
 ## Methods
 
@@ -51,4 +51,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/graphql/resolvers/reports/index.ts:32](https://github.com/Puzzlepart/did/blob/dfb8b3b9/server/graphql/resolvers/reports/index.ts#L32)
+Defined in: [server/graphql/resolvers/reports/index.ts:32](https://github.com/Puzzlepart/did/blob/049fedc8/server/graphql/resolvers/reports/index.ts#L32)

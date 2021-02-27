@@ -20,7 +20,7 @@
 
 ### constructor
 
-\+ **new ApiTokenResolver**(`_mongo`: *MongoService*): [*ApiTokenResolver*](graphql.apitokenresolver.md)
+\+ **new ApiTokenResolver**(`_mongo`: [*MongoService*](services.mongoservice.md)): [*ApiTokenResolver*](graphql.apitokenresolver.md)
 
 Constructor for ApiTokenResolver
 
@@ -28,11 +28,11 @@ Constructor for ApiTokenResolver
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`_mongo` | *MongoService* | Mongo service    |
+`_mongo` | [*MongoService*](services.mongoservice.md) | Mongo service    |
 
 **Returns:** [*ApiTokenResolver*](graphql.apitokenresolver.md)
 
-Defined in: [server/graphql/resolvers/apiToken/index.ts:14](https://github.com/Puzzlepart/did/blob/dfb8b3b9/server/graphql/resolvers/apiToken/index.ts#L14)
+Defined in: [server/graphql/resolvers/apiToken/index.ts:14](https://github.com/Puzzlepart/did/blob/049fedc8/server/graphql/resolvers/apiToken/index.ts#L14)
 
 ## Methods
 
@@ -51,7 +51,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<string\>
 
-Defined in: [server/graphql/resolvers/apiToken/index.ts:43](https://github.com/Puzzlepart/did/blob/dfb8b3b9/server/graphql/resolvers/apiToken/index.ts#L43)
+Defined in: [server/graphql/resolvers/apiToken/index.ts:43](https://github.com/Puzzlepart/did/blob/049fedc8/server/graphql/resolvers/apiToken/index.ts#L43)
 
 ___
 
@@ -69,7 +69,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<ApiToken[]\>
 
-Defined in: [server/graphql/resolvers/apiToken/index.ts:29](https://github.com/Puzzlepart/did/blob/dfb8b3b9/server/graphql/resolvers/apiToken/index.ts#L29)
+Defined in: [server/graphql/resolvers/apiToken/index.ts:29](https://github.com/Puzzlepart/did/blob/049fedc8/server/graphql/resolvers/apiToken/index.ts#L29)
 
 ___
 
@@ -88,4 +88,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/apiToken/index.ts:58](https://github.com/Puzzlepart/did/blob/dfb8b3b9/server/graphql/resolvers/apiToken/index.ts#L58)
+Defined in: [server/graphql/resolvers/apiToken/index.ts:58](https://github.com/Puzzlepart/did/blob/049fedc8/server/graphql/resolvers/apiToken/index.ts#L58)

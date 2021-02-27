@@ -11,6 +11,7 @@
 ### Classes
 
 - [MSGraphService](../classes/services.msgraphservice.md)
+- [MongoService](../classes/services.mongoservice.md)
 - [TimesheetService](../classes/services.timesheetservice.md)
 
 ## References

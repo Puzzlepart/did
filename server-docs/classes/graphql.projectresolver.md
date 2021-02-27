@@ -19,7 +19,7 @@
 
 ### constructor
 
-\+ **new ProjectResolver**(`_mongo`: *MongoService*, `_msgraph`: [*MSGraphService*](services.msgraphservice.md)): [*ProjectResolver*](graphql.projectresolver.md)
+\+ **new ProjectResolver**(`_mongo`: [*MongoService*](services.mongoservice.md), `_msgraph`: [*MSGraphService*](services.msgraphservice.md)): [*ProjectResolver*](graphql.projectresolver.md)
 
 Constructor for ProjectResolver
 
@@ -27,12 +27,12 @@ Constructor for ProjectResolver
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`_mongo` | *MongoService* | Mongo service   |
+`_mongo` | [*MongoService*](services.mongoservice.md) | Mongo service   |
 `_msgraph` | [*MSGraphService*](services.msgraphservice.md) | MSGraphService    |
 
 **Returns:** [*ProjectResolver*](graphql.projectresolver.md)
 
-Defined in: [server/graphql/resolvers/project/index.ts:16](https://github.com/Puzzlepart/did/blob/dfb8b3b9/server/graphql/resolvers/project/index.ts#L16)
+Defined in: [server/graphql/resolvers/project/index.ts:16](https://github.com/Puzzlepart/did/blob/049fedc8/server/graphql/resolvers/project/index.ts#L16)
 
 ## Methods
 
@@ -52,7 +52,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<CreateOrUpdateProjectResult\>
 
-Defined in: [server/graphql/resolvers/project/index.ts:55](https://github.com/Puzzlepart/did/blob/dfb8b3b9/server/graphql/resolvers/project/index.ts#L55)
+Defined in: [server/graphql/resolvers/project/index.ts:55](https://github.com/Puzzlepart/did/blob/049fedc8/server/graphql/resolvers/project/index.ts#L55)
 
 ___
 
@@ -70,4 +70,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Project[]\>
 
-Defined in: [server/graphql/resolvers/project/index.ts:35](https://github.com/Puzzlepart/did/blob/dfb8b3b9/server/graphql/resolvers/project/index.ts#L35)
+Defined in: [server/graphql/resolvers/project/index.ts:35](https://github.com/Puzzlepart/did/blob/049fedc8/server/graphql/resolvers/project/index.ts#L35)

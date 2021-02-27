@@ -20,7 +20,7 @@
 
 ### constructor
 
-\+ **new RoleResolver**(`_mongo`: *MongoService*): [*RoleResolver*](graphql.roleresolver.md)
+\+ **new RoleResolver**(`_mongo`: [*MongoService*](services.mongoservice.md)): [*RoleResolver*](graphql.roleresolver.md)
 
 Constructor for RoleResolver
 
@@ -28,11 +28,11 @@ Constructor for RoleResolver
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`_mongo` | *MongoService* | Mongo service    |
+`_mongo` | [*MongoService*](services.mongoservice.md) | Mongo service    |
 
 **Returns:** [*RoleResolver*](graphql.roleresolver.md)
 
-Defined in: [server/graphql/resolvers/role/index.ts:13](https://github.com/Puzzlepart/did/blob/dfb8b3b9/server/graphql/resolvers/role/index.ts#L13)
+Defined in: [server/graphql/resolvers/role/index.ts:13](https://github.com/Puzzlepart/did/blob/049fedc8/server/graphql/resolvers/role/index.ts#L13)
 
 ## Methods
 
@@ -51,7 +51,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<{ `error`: *any* = null; `success`: *boolean* = true }\>
 
-Defined in: [server/graphql/resolvers/role/index.ts:38](https://github.com/Puzzlepart/did/blob/dfb8b3b9/server/graphql/resolvers/role/index.ts#L38)
+Defined in: [server/graphql/resolvers/role/index.ts:38](https://github.com/Puzzlepart/did/blob/049fedc8/server/graphql/resolvers/role/index.ts#L38)
 
 ___
 
@@ -69,7 +69,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<{ `error`: *any* = null; `success`: *boolean* = true }\>
 
-Defined in: [server/graphql/resolvers/role/index.ts:54](https://github.com/Puzzlepart/did/blob/dfb8b3b9/server/graphql/resolvers/role/index.ts#L54)
+Defined in: [server/graphql/resolvers/role/index.ts:54](https://github.com/Puzzlepart/did/blob/049fedc8/server/graphql/resolvers/role/index.ts#L54)
 
 ___
 
@@ -81,4 +81,4 @@ Get roles
 
 **Returns:** *Promise*<Role[]\>
 
-Defined in: [server/graphql/resolvers/role/index.ts:26](https://github.com/Puzzlepart/did/blob/dfb8b3b9/server/graphql/resolvers/role/index.ts#L26)
+Defined in: [server/graphql/resolvers/role/index.ts:26](https://github.com/Puzzlepart/did/blob/049fedc8/server/graphql/resolvers/role/index.ts#L26)
