@@ -45,7 +45,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetService*](services.timesheetservice.md)
 
-Defined in: [server/services/timesheet/index.ts:23](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/timesheet/index.ts#L23)
+Defined in: [server/services/timesheet/index.ts:23](https://github.com/Puzzlepart/did/blob/efc2ef18/server/services/timesheet/index.ts#L23)
 
 ## Properties
 
@@ -53,7 +53,7 @@ Defined in: [server/services/timesheet/index.ts:23](https://github.com/Puzzlepar
 
 • `Private` **\_confirmed\_periods**: *Collection*<any\>
 
-Defined in: [server/services/timesheet/index.ts:20](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/timesheet/index.ts#L20)
+Defined in: [server/services/timesheet/index.ts:20](https://github.com/Puzzlepart/did/blob/efc2ef18/server/services/timesheet/index.ts#L20)
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 • `Private` **\_forecasted\_periods**: *Collection*<any\>
 
-Defined in: [server/services/timesheet/index.ts:21](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/timesheet/index.ts#L21)
+Defined in: [server/services/timesheet/index.ts:21](https://github.com/Puzzlepart/did/blob/efc2ef18/server/services/timesheet/index.ts#L21)
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 • `Private` **\_forecasted\_time\_entries**: *Collection*<any\>
 
-Defined in: [server/services/timesheet/index.ts:23](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/timesheet/index.ts#L23)
+Defined in: [server/services/timesheet/index.ts:23](https://github.com/Puzzlepart/did/blob/efc2ef18/server/services/timesheet/index.ts#L23)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 • `Private` **\_time\_entries**: *Collection*<any\>
 
-Defined in: [server/services/timesheet/index.ts:22](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/timesheet/index.ts#L22)
+Defined in: [server/services/timesheet/index.ts:22](https://github.com/Puzzlepart/did/blob/efc2ef18/server/services/timesheet/index.ts#L22)
 
 ## Methods
 
@@ -95,7 +95,7 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [server/services/timesheet/index.ts:254](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/timesheet/index.ts#L254)
+Defined in: [server/services/timesheet/index.ts:254](https://github.com/Puzzlepart/did/blob/efc2ef18/server/services/timesheet/index.ts#L254)
 
 ___
 
@@ -114,7 +114,7 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [server/services/timesheet/index.ts:191](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/timesheet/index.ts#L191)
+Defined in: [server/services/timesheet/index.ts:191](https://github.com/Puzzlepart/did/blob/efc2ef18/server/services/timesheet/index.ts#L191)
 
 ___
 
@@ -143,7 +143,7 @@ Name | Type |
 `week` | *number* |
 `year` | *number* |
 
-Defined in: [server/services/timesheet/index.ts:203](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/timesheet/index.ts#L203)
+Defined in: [server/services/timesheet/index.ts:203](https://github.com/Puzzlepart/did/blob/efc2ef18/server/services/timesheet/index.ts#L203)
 
 ___
 
@@ -163,7 +163,7 @@ Name | Type | Description |
 
 **Returns:** *TimesheetPeriodObject*[]
 
-Defined in: [server/services/timesheet/index.ts:221](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/timesheet/index.ts#L221)
+Defined in: [server/services/timesheet/index.ts:221](https://github.com/Puzzlepart/did/blob/efc2ef18/server/services/timesheet/index.ts#L221)
 
 ___
 
@@ -181,7 +181,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/timesheet/index.ts:49](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/timesheet/index.ts#L49)
+Defined in: [server/services/timesheet/index.ts:49](https://github.com/Puzzlepart/did/blob/efc2ef18/server/services/timesheet/index.ts#L49)
 
 ___
 
@@ -199,7 +199,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/timesheet/index.ts:109](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/timesheet/index.ts#L109)
+Defined in: [server/services/timesheet/index.ts:109](https://github.com/Puzzlepart/did/blob/efc2ef18/server/services/timesheet/index.ts#L109)
 
 ___
 
@@ -217,4 +217,4 @@ Name | Type |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/timesheet/index.ts:162](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/timesheet/index.ts#L162)
+Defined in: [server/services/timesheet/index.ts:162](https://github.com/Puzzlepart/did/blob/efc2ef18/server/services/timesheet/index.ts#L162)

@@ -38,7 +38,7 @@ Bootstrapping the express application
 
 **Returns:** [*App*](app.app-1.md)
 
-Defined in: [server/app.ts:31](https://github.com/Puzzlepart/did/blob/553eb42d/server/app.ts#L31)
+Defined in: [server/app.ts:31](https://github.com/Puzzlepart/did/blob/efc2ef18/server/app.ts#L31)
 
 ## Properties
 
@@ -48,7 +48,7 @@ Defined in: [server/app.ts:31](https://github.com/Puzzlepart/did/blob/553eb42d/s
 
 Mongo client
 
-Defined in: [server/app.ts:31](https://github.com/Puzzlepart/did/blob/553eb42d/server/app.ts#L31)
+Defined in: [server/app.ts:31](https://github.com/Puzzlepart/did/blob/efc2ef18/server/app.ts#L31)
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 The express.Application instance
 
-Defined in: [server/app.ts:26](https://github.com/Puzzlepart/did/blob/553eb42d/server/app.ts#L26)
+Defined in: [server/app.ts:26](https://github.com/Puzzlepart/did/blob/efc2ef18/server/app.ts#L26)
 
 ## Methods
 
@@ -79,7 +79,7 @@ Setup app
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/app.ts:61](https://github.com/Puzzlepart/did/blob/553eb42d/server/app.ts#L61)
+Defined in: [server/app.ts:61](https://github.com/Puzzlepart/did/blob/efc2ef18/server/app.ts#L61)
 
 ___
 
@@ -89,9 +89,12 @@ ___
 
 Setup static assets
 
+* Serving *.js gzipped
+* Serving our public folder
+
 **Returns:** *void*
 
-Defined in: [server/app.ts:96](https://github.com/Puzzlepart/did/blob/553eb42d/server/app.ts#L96)
+Defined in: [server/app.ts:99](https://github.com/Puzzlepart/did/blob/efc2ef18/server/app.ts#L99)
 
 ___
 
@@ -101,9 +104,13 @@ ___
 
 Setup authentication
 
+* Using passport for user login
+* Using express-bearer-token package to support external API calls
+* Setting up auth route at /auth
+
 **Returns:** *void*
 
-Defined in: [server/app.ts:104](https://github.com/Puzzlepart/did/blob/553eb42d/server/app.ts#L104)
+Defined in: [server/app.ts:111](https://github.com/Puzzlepart/did/blob/efc2ef18/server/app.ts#L111)
 
 ___
 
@@ -111,11 +118,11 @@ ___
 
 ▸ **setupErrorHandling**(): *void*
 
-Setup error handling
+Setup error handling using http-errors
 
 **Returns:** *void*
 
-Defined in: [server/app.ts:133](https://github.com/Puzzlepart/did/blob/553eb42d/server/app.ts#L133)
+Defined in: [server/app.ts:143](https://github.com/Puzzlepart/did/blob/efc2ef18/server/app.ts#L143)
 
 ___
 
@@ -127,7 +134,7 @@ Setup graphql
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/app.ts:115](https://github.com/Puzzlepart/did/blob/553eb42d/server/app.ts#L115)
+Defined in: [server/app.ts:122](https://github.com/Puzzlepart/did/blob/efc2ef18/server/app.ts#L122)
 
 ___
 
@@ -137,9 +144,12 @@ ___
 
 Setup routes
 
+* Setting up * to use our index route giving the React
+Router full control of the routing.
+
 **Returns:** *void*
 
-Defined in: [server/app.ts:122](https://github.com/Puzzlepart/did/blob/553eb42d/server/app.ts#L122)
+Defined in: [server/app.ts:132](https://github.com/Puzzlepart/did/blob/efc2ef18/server/app.ts#L132)
 
 ___
 
@@ -147,11 +157,11 @@ ___
 
 ▸ **setupSession**(): *void*
 
-Setup sessions
+Setup sessions using connect-redis
 
 **Returns:** *void*
 
-Defined in: [server/app.ts:81](https://github.com/Puzzlepart/did/blob/553eb42d/server/app.ts#L81)
+Defined in: [server/app.ts:81](https://github.com/Puzzlepart/did/blob/efc2ef18/server/app.ts#L81)
 
 ___
 
@@ -159,8 +169,8 @@ ___
 
 ▸ **setupViewEngine**(): *void*
 
-Setup view engine
+Setup hbs as view engine
 
 **Returns:** *void*
 
-Defined in: [server/app.ts:88](https://github.com/Puzzlepart/did/blob/553eb42d/server/app.ts#L88)
+Defined in: [server/app.ts:88](https://github.com/Puzzlepart/did/blob/efc2ef18/server/app.ts#L88)

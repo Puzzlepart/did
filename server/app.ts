@@ -76,14 +76,14 @@ export class App {
   }
 
   /**
-   * Setup sessions
+   * Setup sessions using connect-redis
    */
   setupSession() {
     this.instance.use(session)
   }
 
   /**
-   * Setup view engine
+   * Setup hbs as view engine
    */
   setupViewEngine() {
     this.instance.set('views', path.join(__dirname, 'views'))
@@ -92,6 +92,9 @@ export class App {
 
   /**
    * Setup static assets
+   * 
+   * * Serving *.js gzipped
+   * * Serving our public folder
    */
   setupAssets() {
     this.instance.use('/*.js', serveGzipped('text/javascript'))
@@ -100,6 +103,10 @@ export class App {
 
   /**
    * Setup authentication
+   * 
+   * * Using passport for user login
+   * * Using express-bearer-token package to support external API calls
+   * * Setting up auth route at /auth
    */
   setupAuth() {
     const _passport = passport(this._mongoClient)
@@ -118,6 +125,9 @@ export class App {
 
   /**
    * Setup routes
+   * 
+   * * Setting up * to use our index route giving the React
+   * Router full control of the routing.
    */
   setupRoutes() {
     const index = express.Router()
@@ -128,7 +138,7 @@ export class App {
   }
 
   /**
-   * Setup error handling
+   * Setup error handling using http-errors
    */
   setupErrorHandling() {
     this.instance.use((_req, _res, next) => next(createError()))

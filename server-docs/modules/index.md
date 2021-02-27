@@ -28,4 +28,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/index.ts:12](https://github.com/Puzzlepart/did/blob/553eb42d/server/index.ts#L12)
+Defined in: [server/index.ts:12](https://github.com/Puzzlepart/did/blob/efc2ef18/server/index.ts#L12)
