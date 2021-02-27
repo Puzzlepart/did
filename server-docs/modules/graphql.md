@@ -61,15 +61,38 @@
 
 ### Functions
 
+- [getSchema](graphql.md#getschema)
 - [setupGraphQL](graphql.md#setupgraphql)
 
 ## Functions
+
+### getSchema
+
+▸ `Const`**getSchema**(): *Promise*<GraphQLSchema\>
+
+Get schema using type-graphql
+
+* Setting up the schema to use Dependency injection (https://typegraphql.com/docs/dependency-injection.html)
+* Turns of validation
+* Sets auth checker
+* Registers GraphQLDateTime scalar type
+
+**`see`** https://typegraphql.com/
+
+**Returns:** *Promise*<GraphQLSchema\>
+
+Defined in: [server/graphql/index.ts:42](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L42)
+
+___
 
 ### setupGraphQL
 
 ▸ `Const`**setupGraphQL**(`app`: *Application*, `client`: *MongoClient*): *Promise*<void\>
 
 Set up GraphQL for the Express Application
+
+* Sets up reporting to Apollo Studio
+* Sets up plugin to reset the container for each request
 
 #### Parameters:
 
@@ -80,4 +103,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/graphql/index.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L66)
+Defined in: [server/graphql/index.ts:76](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L76)

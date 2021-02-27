@@ -30,9 +30,16 @@ import {
 const debug = createDebug('graphql')
 
 /**
- * Get schema
+ * Get schema using type-graphql
+ *
+ * * Setting up the schema to use Dependency injection (https://typegraphql.com/docs/dependency-injection.html)
+ * * Turns of validation
+ * * Sets auth checker
+ * * Registers GraphQLDateTime scalar type
+ *
+ * @see https://typegraphql.com/
  */
-const getSchema = async () => {
+export const getSchema = async () => {
   const schema = await buildSchema({
     resolvers: [
       ApiTokenResolver,
@@ -59,6 +66,9 @@ const getSchema = async () => {
 
 /**
  * Set up GraphQL for the Express Application
+ *
+ * * Sets up reporting to Apollo Studio
+ * * Sets up plugin to reset the container for each request
  *
  * @param app - Express application
  * @param client - Mongo client
