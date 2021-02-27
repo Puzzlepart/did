@@ -1,21 +1,21 @@
-/* eslint-disable quotes */
+/* eslint-disable @typescript-eslint/no-var-requires */
 global['fetch'] = require('node-fetch')
 import { Client as MSGraphClient } from '@microsoft/microsoft-graph-client'
-import createDebug from 'debug'
 import 'reflect-metadata'
 import { Service } from 'typedi'
 import { sortBy } from 'underscore'
 import DateUtils from '../../../shared/utils/date'
 import env from '../../utils/env'
+import { CacheScope, CacheService } from '../cache'
 import OAuthService, { AccessTokenOptions } from '../oauth'
 import MSGraphEvent, {
   MSGraphEventOptions,
   MSGraphOutlookCategory
 } from './types'
-const debug = createDebug('services/msgraph')
 
 @Service({ global: false })
 class MSGraphService {
+  private _cache: CacheService = null
   private _accessTokenOptions: AccessTokenOptions = {
     clientId: env('OAUTH_APP_ID'),
     clientSecret: env('OAUTH_APP_PASSWORD'),
@@ -51,47 +51,34 @@ class MSGraphService {
   }
 
   /**
-   * Get current user properties
-   *
-   * @param properties - Properties to retrieve
-   */
-  async getCurrentUser(properties: string[]): Promise<any> {
-    try {
-      debug('Querying Graph /me: %s', JSON.stringify({ select: properties }))
-      const client = await this._getClient()
-      const value = await client
-        .api('/me')
-        .select(['id', ...properties])
-        .get()
-      return value
-    } catch (error) {
-      throw new Error(`MSGraphService.getCurrentUser: ${error.message}`)
-    }
-  }
-
-  /**
    * Get Azure Active Directory users
    */
-  async getUsers(): Promise<any> {
+  public getUsers(): Promise<any> {
     try {
-      const client = await this._getClient()
-      const { value: users } = await client
-        .api('/users')
-        // eslint-disable-next-line quotes
-        .filter("userType eq 'Member'")
-        .select([
-          'id',
-          'givenName',
-          'surname',
-          'jobTitle',
-          'displayName',
-          'mobilePhone',
-          'mail',
-          'preferredLanguage'
-        ])
-        .top(999)
-        .get()
-      return sortBy(users, 'displayName')
+      return this._cache.usingCache(
+        async () => {
+          const client = await this._getClient()
+          const { value } = await client
+            .api('/users')
+            // eslint-disable-next-line quotes
+            .filter("userType eq 'Member'")
+            .select([
+              'id',
+              'givenName',
+              'surname',
+              'jobTitle',
+              'displayName',
+              'mobilePhone',
+              'mail',
+              'preferredLanguage'
+            ])
+            .top(999)
+            .get()
+          const users = sortBy(value, 'displayName')
+          return users
+        },
+        { key: 'getusers' }
+      )
     } catch (error) {
       throw new Error(`MSGraphService.getUsers: ${error.message}`)
     }
@@ -102,7 +89,7 @@ class MSGraphService {
    *
    * @param category - Category
    */
-  async createOutlookCategory(
+  public async createOutlookCategory(
     category: string
   ): Promise<MSGraphOutlookCategory> {
     try {
@@ -128,12 +115,18 @@ class MSGraphService {
   /**
    * Get Outlook categories
    */
-  async getOutlookCategories(): Promise<any[]> {
+  public getOutlookCategories(): Promise<any[]> {
     try {
-      debug('Querying Graph /me/outlook/masterCategories')
-      const client = await this._getClient()
-      const { value } = await client.api('/me/outlook/masterCategories').get()
-      return value
+      return this._cache.usingCache(
+        async () => {
+          const client = await this._getClient()
+          const { value } = await client
+            .api('/me/outlook/masterCategories')
+            .get()
+          return value
+        },
+        { key: 'getoutlookcategories', expiry: 1800, scope: CacheScope.USER }
+      )
     } catch (error) {
       throw new Error(`MSGraphService.getOutlookCategories: ${error.message}`)
     }
@@ -146,51 +139,54 @@ class MSGraphService {
    * @param endDate - End date (YYYY-MM-DD)
    * @param options - Options
    */
-  async getEvents(
+  public getEvents(
     startDate: string,
     endDate: string,
     options: MSGraphEventOptions
   ): Promise<MSGraphEvent[]> {
     try {
-      const query = {
-        startDateTime: DateUtils.toISOString(
-          `${startDate}:00:00:00.000`,
-          options.tzOffset
-        ),
-        endDateTime: DateUtils.toISOString(
-          `${endDate}:23:59:59.999`,
-          options.tzOffset
-        )
+      const cacheOptions = {
+        key: ['events', startDate, endDate],
+        scope: CacheScope.USER
       }
-      debug(
-        'Querying Graph /me/calendar/calendarView: %s',
-        JSON.stringify({ query })
-      )
-      const client = await this._getClient()
-      const { value } = (await client
-        .api('/me/calendar/calendarView')
-        .query(query)
-        .select([
-          'id',
-          'subject',
-          'body',
-          'start',
-          'end',
-          'categories',
-          'webLink',
-          'isOrganizer'
-        ])
-        .filter(
-          "sensitivity ne 'private' and isallday eq false and iscancelled eq false"
-        )
-        .orderby('start/dateTime asc')
-        .top(500)
-        .get()) as { value: any[] }
-      const events = value
-        .filter((event) => !!event.subject)
-        .map((event) => new MSGraphEvent(event, options))
-        .filter((event: MSGraphEvent) => event.duration <= 24)
-      return events
+      return this._cache.usingCache(async () => {
+        const query = {
+          startDateTime: DateUtils.toISOString(
+            `${startDate}:00:00:00.000`,
+            options.tzOffset
+          ),
+          endDateTime: DateUtils.toISOString(
+            `${endDate}:23:59:59.999`,
+            options.tzOffset
+          )
+        }
+        const client = await this._getClient()
+        const { value } = (await client
+          .api('/me/calendar/calendarView')
+          .query(query)
+          .select([
+            'id',
+            'subject',
+            'body',
+            'start',
+            'end',
+            'categories',
+            'webLink',
+            'isOrganizer'
+          ])
+          .filter(
+            // eslint-disable-next-line quotes
+            "sensitivity ne 'private' and isallday eq false and iscancelled eq false"
+          )
+          .orderby('start/dateTime asc')
+          .top(500)
+          .get()) as { value: any[] }
+        const events = value
+          .filter((event) => !!event.subject)
+          .map((event) => new MSGraphEvent(event, options))
+          .filter((event: MSGraphEvent) => event.duration <= 24)
+        return events
+      }, cacheOptions)
     } catch (error) {
       throw new Error(`MSGraphService.getEvents: ${error.message}`)
     }
