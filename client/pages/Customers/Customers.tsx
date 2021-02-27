@@ -27,16 +27,13 @@ export const Customers: FunctionComponent = () => {
           itemKey='search'
           headerText={t('common.search')}
           itemIcon='FabricFolderSearch'>
-          {state.error ? (
+          {state.error && (
             <MessageBar messageBarType={MessageBarType.error}>
               {t('common.genericErrorText')}
             </MessageBar>
-          ) : (
-            <>
-              <CustomerList />
-              {state.selected && <CustomerDetails />}
-            </>
           )}
+          <CustomerList />
+          {state.selected && <CustomerDetails />}
         </PivotItem>
         {user.hasPermission(PERMISSION.MANAGE_CUSTOMERS) && (
           <PivotItem

@@ -28,7 +28,7 @@ export default ({ params }: ICreateReducerParams) =>
       state.customers = payload.query.data?.customers || []
       state.selected = find(
         state.customers,
-        (c) => JSON.stringify(params).toLowerCase().indexOf(c.key.toLowerCase()) !== -1
+        (c) => [params.key, params.view].indexOf(c.key.toLowerCase()) !== -1
       )
     },
 
