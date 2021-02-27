@@ -10,6 +10,9 @@ import env from '../utils/env'
 import { Subscription } from './resolvers/types'
 const debug = createDebug('graphql/context')
 
+/**
+ * GraphQL context
+ */
 export class Context {
   /**
    * Request ID
@@ -41,7 +44,7 @@ export class Context {
   /**
    * Mongo client
    */
-  public client?: MongoClient
+  public mongoClient?: MongoClient
 
   /**
    * Mongo database
@@ -50,19 +53,33 @@ export class Context {
 }
 
 /**
- * Create context
+ * Generate unique ID for the request
+ */
+export function generateUniqueRequestId() {
+  return Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString()
+}
+
+/**
+ * Create GraphQL context
  *
- * @param request -  Express request
- * @param client - Mongo client
+ * * Sets the default mongodb instance on the context
+ * * Sets the user subscription on the context
+ * * Checks token auth using handleTokenAuthentication
+ * * Generates a random request ID using Math random
+ * * Sets CONTEXT and REQUEST on the container to enable
+ *   dependency injection in the resolvers.
+ *
+ * @param request - Express request
+ * @param mongoClient - Mongo client
  */
 export const createContext = async (
   request: Express.Request,
-  client: MongoClient
+  mongoClient: MongoClient
 ): Promise<Context> => {
   try {
-    const db = client.db(env('MONGO_DB_DB_NAME'))
+    const db = mongoClient.db(env('MONGO_DB_DB_NAME'))
     const context: Context = {}
-    context.client = client
+    context.mongoClient = mongoClient
     context.subscription = get(request, 'user.subscription')
     const apiKey = get(request, 'api_key')
     if (apiKey) {
@@ -78,10 +95,8 @@ export const createContext = async (
     }
     if (!context.subscription)
       throw new AuthenticationError('Failed to authenticate.')
-    context.db = context.client.db(context.subscription.db)
-    context.requestId = Math.floor(
-      Math.random() * Number.MAX_SAFE_INTEGER
-    ).toString()
+    context.db = context.mongoClient.db(context.subscription.db)
+    context.requestId = generateUniqueRequestId()
     context.container = Container.of(context.requestId)
     context.container.set({ id: 'CONTEXT', transient: true, value: context })
     context.container.set({ id: 'REQUEST', transient: true, value: request })

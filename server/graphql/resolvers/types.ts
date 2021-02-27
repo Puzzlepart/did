@@ -5,7 +5,7 @@ import { ObjectType, Field } from 'type-graphql'
 
 /**
  * Ignore from typedoc documentation
- * 
+ *
  * @ignore
  */
 @ObjectType({ description: 'A type that describes a Error' })
@@ -25,7 +25,7 @@ export class Error {
 
 /**
  * Ignore from typedoc documentation
- * 
+ *
  * @ignore
  */
 @ObjectType({ description: 'A type that describes a BaseResult' })
@@ -39,7 +39,7 @@ export class BaseResult {
 
 /**
  * Ignore from typedoc documentation
- * 
+ *
  * @ignore
  */
 @ObjectType({ description: 'A type that describes a EventError' })

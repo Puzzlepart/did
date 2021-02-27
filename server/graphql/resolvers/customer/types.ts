@@ -75,7 +75,7 @@ export class CustomerInput {
 
 /**
  * Variables for query customers
- * 
+ *
  * @ignore
  */
 export interface ICustomersQueryVariables {
@@ -84,7 +84,7 @@ export interface ICustomersQueryVariables {
 
 /**
  * Variables for mutation createOrUpdateCustomer
- * 
+ *
  * @ignore
  */
 export interface ICreateOrUpdateCustomerVariables {
@@ -94,7 +94,7 @@ export interface ICreateOrUpdateCustomerVariables {
 
 /**
  * Variables for mutation createOrUpdateCustomer
- * 
+ *
  * @ignore
  */
 export interface IDeleteCustomerVariables {

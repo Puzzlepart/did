@@ -67,7 +67,12 @@ export class TimeEntry {
 /**
  * Reports query preset
  */
-type ReportsQueryPreset = 'LAST_MONTH' | 'CURRENT_MONTH' | 'LAST_YEAR' | 'CURRENT_YEAR' | 'FORECAST'
+type ReportsQueryPreset =
+  | 'LAST_MONTH'
+  | 'CURRENT_MONTH'
+  | 'LAST_YEAR'
+  | 'CURRENT_YEAR'
+  | 'FORECAST'
 
 /**
  * @category InputType

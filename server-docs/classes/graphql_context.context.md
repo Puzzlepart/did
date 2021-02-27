@@ -4,6 +4,8 @@
 
 [graphql/context](../modules/graphql_context.md).Context
 
+GraphQL context
+
 ## Table of contents
 
 ### Constructors
@@ -12,9 +14,9 @@
 
 ### Properties
 
-- [client](graphql_context.context.md#client)
 - [container](graphql_context.context.md#container)
 - [db](graphql_context.context.md#db)
+- [mongoClient](graphql_context.context.md#mongoclient)
 - [permissions](graphql_context.context.md#permissions)
 - [requestId](graphql_context.context.md#requestid)
 - [subscription](graphql_context.context.md#subscription)
@@ -30,23 +32,13 @@
 
 ## Properties
 
-### client
-
-• `Optional` **client**: *MongoClient*
-
-Mongo client
-
-Defined in: [server/graphql/context.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L44)
-
-___
-
 ### container
 
 • `Optional` **container**: *ContainerInstance*
 
 Container instance
 
-Defined in: [server/graphql/context.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L34)
+Defined in: [server/graphql/context.ts:37](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L37)
 
 ___
 
@@ -56,7 +48,17 @@ ___
 
 Mongo database
 
-Defined in: [server/graphql/context.ts:49](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L49)
+Defined in: [server/graphql/context.ts:52](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L52)
+
+___
+
+### mongoClient
+
+• `Optional` **mongoClient**: *MongoClient*
+
+Mongo client
+
+Defined in: [server/graphql/context.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L47)
 
 ___
 
@@ -66,7 +68,7 @@ ___
 
 Permissions
 
-Defined in: [server/graphql/context.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L39)
+Defined in: [server/graphql/context.ts:42](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L42)
 
 ___
 
@@ -78,7 +80,7 @@ Request ID
 
 Generated per request using Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)
 
-Defined in: [server/graphql/context.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L19)
+Defined in: [server/graphql/context.ts:22](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L22)
 
 ___
 
@@ -88,7 +90,7 @@ ___
 
 Subscription
 
-Defined in: [server/graphql/context.ts:29](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L29)
+Defined in: [server/graphql/context.ts:32](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L32)
 
 ___
 
@@ -98,4 +100,4 @@ ___
 
 User ID
 
-Defined in: [server/graphql/context.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L24)
+Defined in: [server/graphql/context.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L27)

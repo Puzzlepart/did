@@ -52,7 +52,7 @@ export interface INotificationTemplates {
 
 /**
  * Variables for query notifications
- * 
+ *
  * @ignore
  */
 export interface INotificationsQueryVariables {

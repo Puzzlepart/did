@@ -32,7 +32,7 @@
 
 Reports query preset
 
-Defined in: [server/graphql/resolvers/reports/types.ts:82](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L82)
+Defined in: [server/graphql/resolvers/reports/types.ts:86](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L86)
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 ID of the project to filter on
 
-Defined in: [server/graphql/resolvers/reports/types.ts:88](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L88)
+Defined in: [server/graphql/resolvers/reports/types.ts:92](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L92)
 
 ___
 
@@ -52,4 +52,4 @@ ___
 
 ID of the user to filter on
 
-Defined in: [server/graphql/resolvers/reports/types.ts:94](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L94)
+Defined in: [server/graphql/resolvers/reports/types.ts:98](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L98)
