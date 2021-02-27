@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { AppContext } from 'AppContext'
-import { useContext, useState } from 'react'
+import { useContext, useDebugValue, useState } from 'react'
 import { useBrowserStorage } from './../../hooks'
 import { IUserNotificationsState, NotificationModel } from './types'
 
@@ -14,23 +14,29 @@ export const useUserNotifications = () => {
   const showPanel = () => dispatch({ ...state, showPanel: true })
   const dismissPanel = () => dispatch({ ...state, showPanel: false })
 
-  const { value, append, clear } = useBrowserStorage({
-    key: 'did_dismissed_notifications',
-    initialValue: []
-  })
+  const [dismissedIds, dismissNotification, clearDismissed] = useBrowserStorage<string[]>(
+    {
+      key: 'did_dismissed_notifications',
+      initialValue: []
+    }
+  )
+
+  useDebugValue({ dismissedIds })
 
   const notifications = notificationsQuery.notifications
     .map((n) => new NotificationModel(n))
-    .filter((n) => value.indexOf(n.id) === -1)
+    .filter((n) => dismissedIds.indexOf(n.id) === -1)
+
+  const dismissedCount =
+    notificationsQuery.notifications.length - notifications.length
 
   return {
     notifications,
-    dismissedCount:
-      notificationsQuery.notifications.length - notifications.length,
+    dismissedCount,
     panelOpen: state.showPanel,
     showPanel,
     dismissPanel,
-    dismissNotification: (id: string) => append(id),
-    clearDismissed: clear
+    dismissNotification,
+    clearDismissed
   }
 }

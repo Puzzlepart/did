@@ -8,7 +8,7 @@ export function useBrowserStorage<T = any>({
   key,
   initialValue,
   store = window.localStorage
-}) {
+}): [T, (value: any) => void, () => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
       const item = store.getItem(key)
@@ -42,5 +42,5 @@ export function useBrowserStorage<T = any>({
     } catch (error) {}
   }
 
-  return { value: storedValue, append, clear }
+  return [storedValue, append, clear]
 }

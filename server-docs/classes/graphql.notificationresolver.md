@@ -18,7 +18,7 @@
 
 ### constructor
 
-\+ **new NotificationResolver**(`_notification`: *NotificationService*): [*NotificationResolver*](graphql.notificationresolver.md)
+\+ **new NotificationResolver**(`_notification`: [*NotificationService*](services.notificationservice.md)): [*NotificationResolver*](graphql.notificationresolver.md)
 
 Constructor for NotificationResolver
 
@@ -26,7 +26,7 @@ Constructor for NotificationResolver
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`_notification` | *NotificationService* | Notification service    |
+`_notification` | [*NotificationService*](services.notificationservice.md) | Notification service    |
 
 **Returns:** [*NotificationResolver*](graphql.notificationresolver.md)
 

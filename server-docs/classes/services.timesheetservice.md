@@ -95,7 +95,7 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [server/services/timesheet/index.ts:254](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L254)
+Defined in: [server/services/timesheet/index.ts:260](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L260)
 
 ___
 
@@ -114,13 +114,13 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [server/services/timesheet/index.ts:191](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L191)
+Defined in: [server/services/timesheet/index.ts:192](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L192)
 
 ___
 
 ### \_getPeriodData
 
-▸ `Private`**_getPeriodData**(`id`: *string*): *object*
+▸ `Private`**_getPeriodData**(`id`: *string*, `userId`: *string*): *object*
 
 Get period data from id
 
@@ -131,7 +131,8 @@ Get period data from id
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`id` | *string* | Id    |
+`id` | *string* | Id   |
+`userId` | *string* | User ID    |
 
 **Returns:** *object*
 
@@ -143,13 +144,13 @@ Name | Type |
 `week` | *number* |
 `year` | *number* |
 
-Defined in: [server/services/timesheet/index.ts:203](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L203)
+Defined in: [server/services/timesheet/index.ts:205](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L205)
 
 ___
 
 ### getPeriods
 
-▸ **getPeriods**(`startDate`: *string*, `endDate`: *string*, `locale`: *string*): [*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]
+▸ **getPeriods**(`startDate`: *string*, `endDate`: *string*, `locale`: *string*, `userId`: *string*): [*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]
 
 Get periods between startDate and endDate
 
@@ -159,11 +160,12 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `startDate` | *string* | Start date   |
 `endDate` | *string* | End date   |
-`locale` | *string* | Locale    |
+`locale` | *string* | Locale   |
+`userId` | *string* | - |
 
 **Returns:** [*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]
 
-Defined in: [server/services/timesheet/index.ts:221](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L221)
+Defined in: [server/services/timesheet/index.ts:224](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L224)
 
 ___
 
@@ -199,7 +201,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/timesheet/index.ts:109](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L109)
+Defined in: [server/services/timesheet/index.ts:110](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L110)
 
 ___
 
@@ -217,4 +219,4 @@ Name | Type |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/timesheet/index.ts:162](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L162)
+Defined in: [server/services/timesheet/index.ts:163](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L163)

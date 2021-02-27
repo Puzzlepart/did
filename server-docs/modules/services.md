@@ -8,12 +8,18 @@
 
 - [TokenService](services.md#tokenservice)
 
+### Enumerations
+
+- [CacheScope](../enums/services.cachescope.md)
+
 ### Classes
 
 - [ApiTokenService](../classes/services.apitokenservice.md)
+- [CacheService](../classes/services.cacheservice.md)
 - [CustomerService](../classes/services.customerservice.md)
 - [MSGraphService](../classes/services.msgraphservice.md)
 - [MongoService](../classes/services.mongoservice.md)
+- [NotificationService](../classes/services.notificationservice.md)
 - [ProjectService](../classes/services.projectservice.md)
 - [ReportsService](../classes/services.reportsservice.md)
 - [RoleService](../classes/services.roleservice.md)
@@ -21,8 +27,20 @@
 - [TimesheetService](../classes/services.timesheetservice.md)
 - [UserService](../classes/services.userservice.md)
 
+### Type aliases
+
+- [CacheKey](services.md#cachekey)
+
 ## References
 
 ### TokenService
 
 Renames and exports: [default](../classes/services_oauth.default.md)
+
+## Type aliases
+
+### CacheKey
+
+Ƭ **CacheKey**: *string* \| *string*[]
+
+Defined in: [server/services/cache.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L15)
