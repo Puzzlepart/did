@@ -1,35 +1,27 @@
 import { Icon } from 'office-ui-fabric'
-import React, { FunctionComponent, useState } from 'react'
+import React, { FunctionComponent } from 'react'
 import { isEmpty } from 'underscore'
+import { UserNotificationsContext } from './context'
 import { NotificationsPanel } from './NotificationsPanel'
-import { IUserNotificationsState } from './types'
 import styles from './UserNotifications.module.scss'
 import { useUserNotifications } from './useUserNotifications'
 
 export const UserNotifications: FunctionComponent = () => {
-  const state = useState<IUserNotificationsState>({})
-  const {
-    notifications,
-    panelOpen,
-    showPanel,
-    dismissPanel
-  } = useUserNotifications(state)
+  const context = useUserNotifications()
 
   return (
-    <div className={styles.root}>
-      <a onClick={showPanel}>
-        <div className={styles.icon}>
-          <Icon iconName='Ringer' />
-        </div>
-        <div hidden={isEmpty(notifications)} className={styles.count}>
-          {notifications.length}
-        </div>
-      </a>
-      <NotificationsPanel
-        isOpen={panelOpen}
-        onDismiss={dismissPanel}
-        notifications={notifications}
-      />
-    </div>
+    <UserNotificationsContext.Provider value={context}>
+      <div className={styles.root} onClick={context.showPanel}>
+        <a>
+          <div className={styles.icon}>
+            <Icon iconName='Ringer' />
+          </div>
+          <div hidden={isEmpty(context.notifications)} className={styles.count}>
+            {context.notifications.length}
+          </div>
+        </a>
+        <NotificationsPanel />
+      </div>
+    </UserNotificationsContext.Provider>
   )
 }

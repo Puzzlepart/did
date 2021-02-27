@@ -345,10 +345,11 @@
     "moreLinkText": "Read more here",
     "goToPeriodText": "Go to period",
     "headerText": "Notifications",
-    "emptyText": "You have no active notifications at this time.",
+    "emptyText": "You have no active notifications at this time. You have dismissed {{dismissedCount}} active notifications.",
     "templates": {
       "unconfirmedPeriods": "Week {0} ({1}) has not been confirmed.",
       "forecast": "Missing forecast for week {0} ({1})."
-    }
+    },
+    "clearDismissedText": "Click to show dismissed notifications."
   }
 }
