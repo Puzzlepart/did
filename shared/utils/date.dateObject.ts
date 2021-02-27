@@ -90,8 +90,8 @@ export class DateObject {
    *
    * To escape characters, wrap them in square brackets (e.g. [MM]).
    *
-   * @param {string} template Template
-   * @param {string} locale Locale
+   * @param template Template
+   * @param locale Locale
    */
   public format(template: string = 'YYYY-MM-DD', locale?: string): string {
     return DateUtils.formatDate(this.$, template, locale)
@@ -140,7 +140,7 @@ export class DateObject {
    *
    * E.g. 1d to add day, or 1m to add 1 month
    *
-   * @param {string} add Add
+   * @param add Add
    */
   public add(add: string) {
     const value = parseInt(add)

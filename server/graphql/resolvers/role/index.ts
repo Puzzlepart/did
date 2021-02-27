@@ -14,7 +14,7 @@ export class RoleResolver {
   /**
    * Constructor for RoleResolver
    *
-   * @param {MongoService} _mongo Mongo service
+   * @param _mongo Mongo service
    */
   constructor(private readonly _mongo: MongoService) {}
 
@@ -49,7 +49,7 @@ export class RoleResolver {
   /**
    * Delete role
    *
-   * @param {string} name Name
+   * @param name Name
    */
   @Authorized<IAuthOptions>({ permission: 'cd52a735' })
   @Mutation(() => BaseResult, { description: 'Delete role' })

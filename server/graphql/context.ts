@@ -95,7 +95,7 @@ export const createContext = async (
 /**
  * Handle token authentication
  *
- * @param {string} apiKey Api key
+ * @param apiKey Api key
  * @param {MongoDatabase} db Mongodb database
  */
 const handleTokenAuthentication = async (apiKey: string, db: MongoDatabase) => {

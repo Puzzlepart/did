@@ -15,7 +15,7 @@ import styles from './EventList.module.scss'
  * Get sizing for column
  *
  * @param {IEventListProps} props Props
- * @param {string} fieldName Column field name
+ * @param fieldName Column field name
  * @param {number} defMinWidth Default min width
  * @param {number} defMaxWidth Default max width
  */
@@ -34,8 +34,8 @@ function getSizing(
  * Title column
  *
  * @param {IEventListProps} props Props
- * @param {string} name Name
- * @param {string} fieldName Field name
+ * @param name Name
+ * @param fieldName Field name
  */
 export const titleColumn = (
   props: IEventListProps,
@@ -66,8 +66,8 @@ export const titleColumn = (
  * Time column
  *
  * @param {IEventListProps} props Props
- * @param {string} name Name
- * @param {string} fieldName Field name
+ * @param name Name
+ * @param fieldName Field name
  */
 export const timeColumn = (
   props: IEventListProps,
@@ -105,8 +105,8 @@ export const timeColumn = (
  * Duration column
  *
  * @param {IEventListProps} props Props
- * @param {string} name Name
- * @param {string} fieldName Field name
+ * @param name Name
+ * @param fieldName Field name
  */
 export const durationColumn = (
   props: IEventListProps,

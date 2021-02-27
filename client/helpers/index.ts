@@ -5,7 +5,7 @@ import set from 'set-value'
  * Get value from object
  *
  * @param {any} obj Obj
- * @param {string} exp Expression
+ * @param exp Expression
  * @param {T} defaultValue Default value
  */
 export function getValue<T = any>(obj: any, exp: string, defaultValue?: T): T {
@@ -16,7 +16,7 @@ export function getValue<T = any>(obj: any, exp: string, defaultValue?: T): T {
  * Set value in object
  *
  * @param {any} obj Obj
- * @param {string} exp Expression
+ * @param exp Expression
  * @param {T} defaultValue Default value
  */
 export function setValue<T = any>(obj: any, exp: string, value?: T): any {

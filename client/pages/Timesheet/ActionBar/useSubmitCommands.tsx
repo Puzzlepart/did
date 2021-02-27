@@ -12,8 +12,8 @@ import styles from './ActionBar.module.scss'
 /**
  * Get base submit item props
  *
- * @param {string} key Key
- * @param {string} iconName Icon name
+ * @param key Key
+ * @param iconName Icon name
  */
 const submitItemBaseProps = (
   key: string,

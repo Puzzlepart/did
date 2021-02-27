@@ -26,7 +26,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
   /**
    * Get subscription by ID
    *
-   * @param {string} id Subscription ID
+   * @param id Subscription ID
    */
   public async getById(id: string): Promise<Subscription> {
     try {

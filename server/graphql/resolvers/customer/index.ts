@@ -13,14 +13,14 @@ export class CustomerResolver {
   /**
    * Constructor for CustomerResolver
    *
-   * @param {MongoService} _mongo Mongo service
+   * @param _mongo Mongo service
    */
   constructor(private readonly _mongo: MongoService) {}
 
   /**
    * Get customers
    *
-   * @param {string} sortBy Sort by
+   * @param sortBy Sort by
    **/
   @Authorized()
   @Query(() => [Customer], { description: 'Get customers' })
@@ -49,7 +49,7 @@ export class CustomerResolver {
   /**
    * Delete customer
    *
-   * @param {string} key Key
+   * @param key Key
    */
   @Authorized({ permission: '8b39db3d' })
   @Mutation(() => BaseResult, { description: 'Delete customer' })

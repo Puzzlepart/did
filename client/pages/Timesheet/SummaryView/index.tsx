@@ -110,7 +110,7 @@ function generateRows(events: EventObject[], columns: IColumn[]) {
  *
  * @param {any[]} events Events
  * @param {IColumn[]} columns Columns
- * @param {string} label Label
+ * @param label Label
  */
 function generateTotalRow(events: any[], columns: IColumn[], label: string) {
   return [...columns].splice(1, columns.length - 2).reduce(

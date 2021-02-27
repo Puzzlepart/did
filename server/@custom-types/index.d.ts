@@ -1,10 +1,10 @@
 /* eslint-disable tsdoc/syntax */
 /**
- * @private
+ *
  */
 declare namespace Express {
   /**
-   * @private
+   *
    */
   interface UserSubscription {
     id: string
@@ -14,7 +14,7 @@ declare namespace Express {
   }
 
   /**
-   * @private
+   *
    */
   interface User {
     id?: string

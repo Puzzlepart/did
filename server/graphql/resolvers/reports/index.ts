@@ -13,7 +13,7 @@ export class ReportsResolver {
   /**
    * Constructor for ReportsResolver
    *
-   * @param {MongoService} _mongo Mongo service
+   * @param _mongo Mongo service
    */
   constructor(private readonly _mongo: MongoService) {}
 

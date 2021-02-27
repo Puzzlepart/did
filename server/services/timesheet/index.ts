@@ -25,9 +25,9 @@ export class TimesheetService {
   /**
    * Constructor
    *
-   * @param {Context} context Context
-   * @param {MSGraphService} _msgraph MSGraphService
-   * @param {MongoService} _mongo MongoService
+   * @param context - Context
+   * @param _msgraph - MSGraphService
+   * @param _mongo - MongoService
    */
   constructor(
     @Inject('CONTEXT') private readonly context: Context,
@@ -44,7 +44,7 @@ export class TimesheetService {
   /**
    * Get timesheet
    *
-   * @param {IGetTimesheetParams} params Timesheet params
+   * @param params - Timesheet params
    */
   public async getTimesheet(params: IGetTimesheetParams): Promise<any[]> {
     try {
@@ -104,7 +104,7 @@ export class TimesheetService {
   /**
    * Submit period
    *
-   * @param {ISubmitPeriodParams} params Submit period params
+   * @param params - Submit period params
    */
   public async submitPeriod(params: ISubmitPeriodParams): Promise<void> {
     try {
@@ -157,7 +157,7 @@ export class TimesheetService {
   /**
    * Unsubmit period
    *
-   * @param {IUnsubmitPeriodParams} params Unsubmit period params
+   * @param params - Unsubmit period params
    */
   public async unsubmitPeriod({
     period,
@@ -185,8 +185,8 @@ export class TimesheetService {
   /**
    * Create unique ID consisting of event ID + event start date time
    *
-   * @param {string} eventId Event ID
-   * @param {Date} startDateTime Start date time
+   * @param eventId - Event ID
+   * @param startDateTime - Start date time
    */
   private _createUniqueEventId(eventId: string, startDateTime: Date) {
     return `${eventId}${startDateTime.getTime()}`.replace(/[^a-zA-Z0-9]/g, '')
@@ -198,7 +198,7 @@ export class TimesheetService {
    * * Generates an _id for Mongo DB
    * * Returns week, month, year and _userId
    *
-   * @param {string} id Id
+   * @param id - Id
    */
   private _getPeriodData(id: string) {
     const [week, month, year] = id.split('_').map((p) => parseInt(p, 10))
@@ -214,9 +214,9 @@ export class TimesheetService {
   /**
    * Get periods between startDate and endDate
    *
-   * @param {string} startDate Start date
-   * @param {string} endDate End date
-   * @param {string} locale Locale
+   * @param startDate - Start date
+   * @param endDate - End date
+   * @param locale - Locale
    */
   public getPeriods(
     startDate: string,
@@ -249,7 +249,7 @@ export class TimesheetService {
   /**
    * Connect events to projects
    *
-   * @param {IConnectEventsParams} params Connect events params
+   * @param params - Connect events params
    */
   private _connectEvents({
     events,

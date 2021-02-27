@@ -47,7 +47,7 @@ export const RolePanel: FunctionComponent<IRolePanelProps> = (
   /**
    * On toggle permission
    *
-   * @param {string} permissionId Permission ID
+   * @param permissionId Permission ID
    * @param {boolean} checked Is checked
    */
   function togglePermission(permissionId: string, checked: boolean) {

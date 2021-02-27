@@ -41,7 +41,7 @@ export const ApiTokens = () => {
   /**
    * On key added
    *
-   * @param {string} generatedKey Generated API key
+   * @param generatedKey Generated API key
    */
   function onKeyAdded(generatedKey: string) {
     setForm({})

@@ -23,7 +23,7 @@ export class ProjectService extends MongoDocumentService<Project> {
   /**
    * Constructor for MongoDatabase
    *
-   * @param {Context} context Context
+   * @param context Context
    */
   constructor(context: Context) {
     super(context, 'projects', ProjectService.name)

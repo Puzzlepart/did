@@ -40,7 +40,7 @@ export class CustomerService extends MongoDocumentService<Customer> {
   /**
    * Delete customer
    *
-   * @param {string} key Customer key
+   * @param key Customer key
    */
   public async deleteCustomer(key: string): Promise<void> {
     try {

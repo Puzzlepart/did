@@ -15,7 +15,7 @@ export class SubscriptionResolver {
   /**
    * Constructor for SubscriptionResolver
    *
-   * @param {MongoService} _mongo Mongo service
+   * @param _mongo Mongo service
    */
   constructor(private readonly _mongo: MongoService) {}
 

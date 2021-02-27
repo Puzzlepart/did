@@ -28,7 +28,7 @@ export const SubscriptionSettings = () => {
   /**
    * On settings changed
    *
-   * @param {string} key Setting key
+   * @param key Setting key
    * @param {any} value The actual value or a callback function returning the value
    */
   const onSettingsChanged = (

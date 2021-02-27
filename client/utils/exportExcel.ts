@@ -15,7 +15,7 @@ export type ExcelColumnType = 'date' | null
 /**
  * Converts string to array buffer
  *
- * @param {string} str String
+ * @param str String
  */
 function stringToArrayBuffer(str: string): ArrayBuffer {
   const buf = new ArrayBuffer(str.length)

@@ -17,8 +17,8 @@ export class ProjectResolver {
   /**
    * Constructor for ProjectResolver
    *
-   * @param {MongoService} _mongo Mongo service
-   * @param {MSGraphService} _msgraph MSGraphService
+   * @param _mongo Mongo service
+   * @param _msgraph MSGraphService
    */
   constructor(
     private readonly _mongo: MongoService,
@@ -28,7 +28,7 @@ export class ProjectResolver {
   /**
    * Get projects
    *
-   * @param {string} customerKey Customer key
+   * @param customerKey Customer key
    */
   @Authorized<IAuthOptions>()
   @Query(() => [Project], { description: 'Get projects' })

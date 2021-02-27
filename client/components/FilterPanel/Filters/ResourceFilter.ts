@@ -11,9 +11,9 @@ export class ResourceFilter<
   /**
    * Constructor
    *
-   * @param {string} keyFieldName Field name for the item key
-   * @param {string} valueFieldName Field name for the item value
-   * @param {string} name Filter name
+   * @param keyFieldName Field name for the item key
+   * @param valueFieldName Field name for the item value
+   * @param name Filter name
    */
   constructor(
     public keyFieldName: string,

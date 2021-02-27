@@ -51,7 +51,7 @@ export class DateUtils {
   /**
    * Setup DateUtils class using @dayjs with @plugins
    *
-   * @param {string} locale Locale
+   * @param locale Locale
    */
   public setup(locale: string) {
     $dayjs.locale(locale)
@@ -86,8 +86,8 @@ export class DateUtils {
    * To escape characters, wrap them in square brackets (e.g. [MM]).
    *
    * @param {ConfigType} dateTime Date
-   * @param {string} template Date format
-   * @param {string} locale Locale
+   * @param template Date format
+   * @param locale Locale
    */
   formatDate(dateTime: ConfigType, template: string, locale?: string): string {
     if (locale) return $dayjs(dateTime).locale(locale).format(template)
@@ -125,7 +125,7 @@ export class DateUtils {
    *
    * @param {DateInput} start Start
    * @param {DateInput} end End
-   * @param {string} template Date template
+   * @param template Date template
    */
   public getDays(
     start: DateInput,
@@ -146,7 +146,7 @@ export class DateUtils {
    * Get month name for the speicifed month index
    *
    * @param {number} monthIndex Month index
-   * @param {string} template Template
+   * @param template Template
    */
   public getMonthName(
     monthIndex?: number,
@@ -160,7 +160,7 @@ export class DateUtils {
    *
    * @param {DateObject} start Start
    * @param {DateObject} end End
-   * @param {string} monthFormat Month format
+   * @param monthFormat Month format
    */
   public getTimespanString(
     start: DateObject,

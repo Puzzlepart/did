@@ -3,8 +3,8 @@ import { IColumn } from 'office-ui-fabric'
 /**
  * Generate a IColumn defintion
  *
- * @param {string} fieldName Field name
- * @param {string} name Name
+ * @param fieldName Field name
+ * @param name Name
  * @param {Partial<IColumn>} props Additional props
  * @param {function} onRender On render function (optional)
  * @param {number} minWidth Min width (defaults to 100)

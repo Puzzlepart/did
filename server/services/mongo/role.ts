@@ -26,7 +26,7 @@ export class RoleService extends MongoDocumentService<Role> {
   /**
    * Get Role by name
    *
-   * @param {string} name Role name
+   * @param name Role name
    */
   public async getByName(name: string): Promise<Role> {
     try {
@@ -67,7 +67,7 @@ export class RoleService extends MongoDocumentService<Role> {
   /**
    * Delete role
    *
-   * @param {string} name Role name
+   * @param name Role name
    */
   public async deleteRole(name: string): Promise<void> {
     try {

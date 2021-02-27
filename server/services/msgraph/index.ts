@@ -30,7 +30,7 @@ class MSGraphService {
    * Constructs a new MSGraphService
    *
    * @param {OAuthService} _oauthService OAuth service
-   * @param {string} access_token Access token
+   * @param access_token Access token
    */
   constructor(
     private _oauthService: OAuthService,
@@ -51,7 +51,7 @@ class MSGraphService {
   /**
    * Starts a performance mark
    *
-   * @param {string} measure
+   * @param measure
    */
   startMark(measure: string): void {
     performance.mark(`${measure}-init`)
@@ -60,7 +60,7 @@ class MSGraphService {
   /**
    * Ends a performance mark
    *
-   * @param {string} measure
+   * @param measure
    */
   endMark(measure: string): void {
     performance.mark(`${measure}-end`)
@@ -140,7 +140,7 @@ class MSGraphService {
   /**
    * Create Outlook category
    *
-   * @param {string} category Category
+   * @param category Category
    */
   async createOutlookCategory(
     category: string
@@ -186,8 +186,8 @@ class MSGraphService {
   /**
    * Get events for the specified period using Microsoft Graph endpoint /me/calendar/calendarView
    *
-   * @param {string} startDate Start date (YYYY-MM-DD)
-   * @param {string} endDate End date (YYYY-MM-DD)
+   * @param startDate Start date (YYYY-MM-DD)
+   * @param endDate End date (YYYY-MM-DD)
    * @param {MSGraphEventOptions} options Options
    */
   async getEvents(

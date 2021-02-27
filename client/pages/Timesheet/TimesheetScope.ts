@@ -35,7 +35,7 @@ export class TimesheetScope {
   /**
    * Get TimesheetQuery for the scope
    *
-   * @param {string} template Template
+   * @param template Template
    */
   public query(template: string = 'YYYY-MM-DD'): TimesheetQuery {
     if (!this.startDate) return null
@@ -48,7 +48,7 @@ export class TimesheetScope {
   /**
    * Sets the scope and returns a cloned version of the TimesheetScope
    *
-   * @param {string} add Add
+   * @param add Add
    */
   public set(add: string): TimesheetScope {
     this.startDate = this.startDate.add(add)

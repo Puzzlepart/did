@@ -72,7 +72,7 @@ export class LabelService extends MongoDocumentService<Label> {
   /**
    * Delete label by name
    *
-   * @param {string} name Name
+   * @param name Name
    */
   public async deleteLabel(name: string): Promise<DeleteWriteOpResultObject> {
     try {

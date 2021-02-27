@@ -157,7 +157,7 @@ export class TimesheetPeriod {
   /**
    * Save manual match in browser storage
    *
-   * @param {string} eventId Event id
+   * @param eventId Event id
    * @param {Project} project Project
    */
   public setManualMatch(eventId: string, project: Project) {
@@ -169,7 +169,7 @@ export class TimesheetPeriod {
   /**
    * Clear manual match from local storage
    *
-   * @param {string} eventId Event id
+   * @param eventId Event id
    */
   public clearManualMatch(eventId: string) {
     this._uiMatchedEvents = omit(this._uiMatchedEvents, eventId)
@@ -179,7 +179,7 @@ export class TimesheetPeriod {
   /**
    * Store ignored event in browser storage
    *
-   * @param {string} eventId Event id
+   * @param eventId Event id
    */
   public ignoreEvent(eventId: string) {
     this._uiIgnoredEvents = [...this._uiIgnoredEvents, eventId]
@@ -230,7 +230,7 @@ export class TimesheetPeriod {
   /**
    * Get weekdays in the specified format
    *
-   * @param {string} dayFormat Day format
+   * @param dayFormat Day format
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public weekdays(dayFormat: string = 'dddd DD'): string[] {

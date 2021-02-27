@@ -19,7 +19,7 @@ export class NotificationResolver {
    * Get notifications
    *
    * @param {NotificationTemplates} templates Templates
-   * @param {string} locale Locale
+   * @param locale Locale
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [Notification], { description: 'Get notifications' })

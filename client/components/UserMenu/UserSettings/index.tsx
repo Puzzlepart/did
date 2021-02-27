@@ -35,8 +35,8 @@ export const UserSettings = (props: React.HTMLProps<HTMLDivElement>) => {
   /**
    * On update user settings
    *
-   * @param {string} key Key
-   * @param {string} value Value
+   * @param key Key
+   * @param value Value
    */
   const onUpdateUserSettings = async (key: string, value: string | boolean) => {
     await addOrUpdateUser({

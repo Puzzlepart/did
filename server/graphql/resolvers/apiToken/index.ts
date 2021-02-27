@@ -15,7 +15,7 @@ export class ApiTokenResolver {
   /**
    * Constructor for ApiTokenResolver
    *
-   * @param {MongoService} _mongo Mongo service
+   * @param _mongo Mongo service
    */
   constructor(private readonly _mongo: MongoService) {}
 
@@ -50,7 +50,7 @@ export class ApiTokenResolver {
   /**
    * Delete API token
    *
-   * @param {string} name Name
+   * @param name Name
    * @param {Context} ctx GraphQL context
    */
   @Authorized<IAuthOptions>({ userContext: true })

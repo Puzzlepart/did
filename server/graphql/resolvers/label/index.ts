@@ -14,7 +14,7 @@ export class LabelResolver {
   /**
    * Constructor for LabelResolver
    *
-   * @param {MongoService} _mongo Mongo service
+   * @param _mongo Mongo service
    */
   constructor(private readonly _mongo: MongoService) {}
 
@@ -48,7 +48,7 @@ export class LabelResolver {
   /**
    * Delete label
    *
-   * @param {string} name Name
+   * @param name Name
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Delete label' })

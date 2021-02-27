@@ -16,7 +16,7 @@ export class NotificationService {
   /**
    * Constructor
    *
-   * @param {Context} context Context
+   * @param context Context
    * @param {TimesheetService} _timesheet Timesheet service
    */
   constructor(
@@ -30,9 +30,9 @@ export class NotificationService {
   /**
    * Get periods
    *
-   * @param {string} add Add
+   * @param add Add
    * @param {number} count Count
-   * @param {string} locale Locale
+   * @param locale Locale
    */
   private _getPeriods(add: string, count: number, locale: string) {
     const periods = []
@@ -51,8 +51,8 @@ export class NotificationService {
   /**
    * Get unconfirmed periods notifications
    *
-   * @param {string} template Notification template
-   * @param {string} locale Locale
+   * @param template Notification template
+   * @param locale Locale
    */
   private async _unconfirmedPeriods(template: string, locale: string) {
     const periods = this._getPeriods('-1w', 5, locale)
@@ -78,8 +78,8 @@ export class NotificationService {
   /**
    * Get forecast notifications
    *
-   * @param {string} template Notification template
-   * @param {string} locale Locale
+   * @param template Notification template
+   * @param locale Locale
    */
   private async _forecast(template: string, locale: string) {
     if (

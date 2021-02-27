@@ -49,7 +49,7 @@ export class UserService extends MongoDocumentService<User> {
   /**
    * Get user by ID
    *
-   * @param {string} id User ID
+   * @param id User ID
    */
   public async getById(id: string) {
     try {
@@ -110,7 +110,7 @@ export class UserService extends MongoDocumentService<User> {
   /**
    * Update current user configuration
    *
-   * @param {string} configuration Configuration
+   * @param configuration Configuration
    */
   public async updateCurrentUserConfiguration(configuration: string) {
     try {

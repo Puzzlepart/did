@@ -13,7 +13,7 @@ export class OutlookCategoryResolver {
   /**
    * Constructor for OutlookCategoryResolver
    *
-   * @param {MSGraphService} _msgraph MSGraphService
+   * @param _msgraph MSGraphService
    */
   constructor(private readonly _msgraph: MSGraphService) {}
 
@@ -30,7 +30,7 @@ export class OutlookCategoryResolver {
   /**
    * Create Outlook category
    *
-   * @param {string} category Category
+   * @param category Category
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => CreateOutlookCategoryResult, {

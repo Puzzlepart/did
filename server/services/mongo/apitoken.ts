@@ -29,7 +29,7 @@ export class ApiTokenService extends MongoDocumentService<ApiToken> {
    * Add API token
    *
    * @param {ApiToken} token Token to add
-   * @param {string} subscriptionId Subscription id
+   * @param subscriptionId Subscription id
    */
   public async addToken(
     token: ApiToken,
@@ -52,8 +52,8 @@ export class ApiTokenService extends MongoDocumentService<ApiToken> {
   /**
    * Delete token
    *
-   * @param {string} name Token name
-   * @param {string} subscriptionId Subscription id
+   * @param name Token name
+   * @param subscriptionId Subscription id
    */
   public async deleteToken(
     name: string,

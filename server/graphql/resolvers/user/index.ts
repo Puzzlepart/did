@@ -16,8 +16,8 @@ export class UserResolver {
   /**
    * Constructor for UserResolver
    *
-   * @param {MSGraphService} _msgraph MS Graph service
-   * @param {MongoService} _mongo Mongo service
+   * @param _msgraph MS Graph service
+   * @param _mongo Mongo service
    */
   constructor(
     private readonly _msgraph: MSGraphService,
@@ -95,7 +95,7 @@ export class UserResolver {
   /**
    * Update user configuration
    *
-   * @param {string} configuration Configuration
+   * @param configuration Configuration
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Update user configuration' })
