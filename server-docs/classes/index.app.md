@@ -38,7 +38,7 @@ Bootstrapping the express application
 
 **Returns:** [*App*](app.app-1.md)
 
-Defined in: [server/app.ts:31](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/app.ts#L31)
+Defined in: [server/app.ts:31](https://github.com/Puzzlepart/did/blob/553eb42d/server/app.ts#L31)
 
 ## Properties
 
@@ -48,7 +48,7 @@ Defined in: [server/app.ts:31](https://github.com/Puzzlepart/did/blob/aeb1fcc9/s
 
 Mongo client
 
-Defined in: [server/app.ts:31](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/app.ts#L31)
+Defined in: [server/app.ts:31](https://github.com/Puzzlepart/did/blob/553eb42d/server/app.ts#L31)
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 The express.Application instance
 
-Defined in: [server/app.ts:26](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/app.ts#L26)
+Defined in: [server/app.ts:26](https://github.com/Puzzlepart/did/blob/553eb42d/server/app.ts#L26)
 
 ## Methods
 
@@ -68,9 +68,18 @@ Defined in: [server/app.ts:26](https://github.com/Puzzlepart/did/blob/aeb1fcc9/s
 
 Setup app
 
+* Connecting to our Mongo client
+* Setting up sessions
+* Setting up view engine
+* Setting up static assets
+* Setting up authentication
+* Setting up our GraphQL API
+* Setting up routes
+* Setting up error handling
+
 **Returns:** *Promise*<void\>
 
-Defined in: [server/app.ts:52](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/app.ts#L52)
+Defined in: [server/app.ts:61](https://github.com/Puzzlepart/did/blob/553eb42d/server/app.ts#L61)
 
 ___
 
@@ -82,7 +91,7 @@ Setup static assets
 
 **Returns:** *void*
 
-Defined in: [server/app.ts:87](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/app.ts#L87)
+Defined in: [server/app.ts:96](https://github.com/Puzzlepart/did/blob/553eb42d/server/app.ts#L96)
 
 ___
 
@@ -94,7 +103,7 @@ Setup authentication
 
 **Returns:** *void*
 
-Defined in: [server/app.ts:95](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/app.ts#L95)
+Defined in: [server/app.ts:104](https://github.com/Puzzlepart/did/blob/553eb42d/server/app.ts#L104)
 
 ___
 
@@ -106,7 +115,7 @@ Setup error handling
 
 **Returns:** *void*
 
-Defined in: [server/app.ts:124](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/app.ts#L124)
+Defined in: [server/app.ts:133](https://github.com/Puzzlepart/did/blob/553eb42d/server/app.ts#L133)
 
 ___
 
@@ -118,7 +127,7 @@ Setup graphql
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/app.ts:106](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/app.ts#L106)
+Defined in: [server/app.ts:115](https://github.com/Puzzlepart/did/blob/553eb42d/server/app.ts#L115)
 
 ___
 
@@ -130,7 +139,7 @@ Setup routes
 
 **Returns:** *void*
 
-Defined in: [server/app.ts:113](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/app.ts#L113)
+Defined in: [server/app.ts:122](https://github.com/Puzzlepart/did/blob/553eb42d/server/app.ts#L122)
 
 ___
 
@@ -142,7 +151,7 @@ Setup sessions
 
 **Returns:** *void*
 
-Defined in: [server/app.ts:72](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/app.ts#L72)
+Defined in: [server/app.ts:81](https://github.com/Puzzlepart/did/blob/553eb42d/server/app.ts#L81)
 
 ___
 
@@ -154,4 +163,4 @@ Setup view engine
 
 **Returns:** *void*
 
-Defined in: [server/app.ts:79](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/app.ts#L79)
+Defined in: [server/app.ts:88](https://github.com/Puzzlepart/did/blob/553eb42d/server/app.ts#L88)

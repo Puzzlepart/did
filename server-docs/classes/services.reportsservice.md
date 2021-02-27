@@ -47,7 +47,7 @@ Name | Type | Description |
 
 **Returns:** [*ReportsService*](services.reportsservice.md)
 
-Defined in: [server/services/mongo/reports.ts:13](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/services/mongo/reports.ts#L13)
+Defined in: [server/services/mongo/reports.ts:13](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/mongo/reports.ts#L13)
 
 ## Properties
 
@@ -55,7 +55,7 @@ Defined in: [server/services/mongo/reports.ts:13](https://github.com/Puzzlepart/
 
 • `Private` **\_project**: [*ProjectService*](services.projectservice.md)
 
-Defined in: [server/services/mongo/reports.ts:12](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/services/mongo/reports.ts#L12)
+Defined in: [server/services/mongo/reports.ts:12](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/mongo/reports.ts#L12)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 • `Private` **\_user**: [*UserService*](services.userservice.md)
 
-Defined in: [server/services/mongo/reports.ts:13](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/services/mongo/reports.ts#L13)
+Defined in: [server/services/mongo/reports.ts:13](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/mongo/reports.ts#L13)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 • **cache**: [*CacheService*](services_cache.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/services/mongo/@document.ts#L6)
+Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/mongo/@document.ts#L6)
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 • **collection**: *Collection*<TimeEntry\>
 
-Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/services/mongo/@document.ts#L7)
+Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/mongo/@document.ts#L7)
 
 ___
 
@@ -124,7 +124,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<TimeEntry[]\>
 
-Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/services/mongo/@document.ts#L37)
+Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/mongo/@document.ts#L37)
 
 ___
 
@@ -143,4 +143,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/mongo/reports.ts:32](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/services/mongo/reports.ts#L32)
+Defined in: [server/services/mongo/reports.ts:32](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/mongo/reports.ts#L32)

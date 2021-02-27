@@ -50,7 +50,7 @@ Name | Type |
 
 **Returns:** [*UserService*](services.userservice.md)
 
-Defined in: [server/services/mongo/user.ts:11](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/services/mongo/user.ts#L11)
+Defined in: [server/services/mongo/user.ts:11](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/mongo/user.ts#L11)
 
 ## Properties
 
@@ -58,7 +58,7 @@ Defined in: [server/services/mongo/user.ts:11](https://github.com/Puzzlepart/did
 
 • `Private` **\_role**: [*RoleService*](services.roleservice.md)
 
-Defined in: [server/services/mongo/user.ts:11](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/services/mongo/user.ts#L11)
+Defined in: [server/services/mongo/user.ts:11](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/mongo/user.ts#L11)
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 • **cache**: [*CacheService*](services_cache.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/services/mongo/@document.ts#L6)
+Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/mongo/@document.ts#L6)
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 • **collection**: *Collection*<User\>
 
-Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/services/mongo/@document.ts#L7)
+Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/mongo/@document.ts#L7)
 
 ___
 
@@ -119,7 +119,7 @@ Name | Type | Description |
 
 **Returns:** T
 
-Defined in: [server/services/mongo/user.ts:26](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/services/mongo/user.ts#L26)
+Defined in: [server/services/mongo/user.ts:26](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/mongo/user.ts#L26)
 
 ___
 
@@ -137,7 +137,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<User\>\>\>
 
-Defined in: [server/services/mongo/user.ts:75](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/services/mongo/user.ts#L75)
+Defined in: [server/services/mongo/user.ts:75](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/mongo/user.ts#L75)
 
 ___
 
@@ -155,7 +155,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertWriteOpResult<WithId<User\>\>\>
 
-Defined in: [server/services/mongo/user.ts:89](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/services/mongo/user.ts#L89)
+Defined in: [server/services/mongo/user.ts:89](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/mongo/user.ts#L89)
 
 ___
 
@@ -182,7 +182,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<User[]\>
 
-Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/services/mongo/@document.ts#L37)
+Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/mongo/@document.ts#L37)
 
 ___
 
@@ -200,7 +200,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<User\>
 
-Defined in: [server/services/mongo/user.ts:57](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/services/mongo/user.ts#L57)
+Defined in: [server/services/mongo/user.ts:57](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/mongo/user.ts#L57)
 
 ___
 
@@ -218,7 +218,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<User[]\>
 
-Defined in: [server/services/mongo/user.ts:35](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/services/mongo/user.ts#L35)
+Defined in: [server/services/mongo/user.ts:35](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/mongo/user.ts#L35)
 
 ___
 
@@ -239,7 +239,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/user.ts:121](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/services/mongo/user.ts#L121)
+Defined in: [server/services/mongo/user.ts:121](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/mongo/user.ts#L121)
 
 ___
 
@@ -257,4 +257,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/user.ts:105](https://github.com/Puzzlepart/did/blob/aeb1fcc9/server/services/mongo/user.ts#L105)
+Defined in: [server/services/mongo/user.ts:105](https://github.com/Puzzlepart/did/blob/553eb42d/server/services/mongo/user.ts#L105)

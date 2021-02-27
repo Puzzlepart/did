@@ -48,6 +48,15 @@ export class App {
 
   /**
    * Setup app
+   * 
+   * * Connecting to our Mongo client
+   * * Setting up sessions 
+   * * Setting up view engine
+   * * Setting up static assets
+   * * Setting up authentication
+   * * Setting up our GraphQL API
+   * * Setting up routes
+   * * Setting up error handling
    */
   public async setup() {
     this._mongoClient = await MongoClient.connect(
