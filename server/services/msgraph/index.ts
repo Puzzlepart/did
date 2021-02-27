@@ -2,7 +2,6 @@
 global['fetch'] = require('node-fetch')
 import { Client as MSGraphClient } from '@microsoft/microsoft-graph-client'
 import createDebug from 'debug'
-import { PerformanceObserver } from 'perf_hooks'
 import 'reflect-metadata'
 import { Service } from 'typedi'
 import { sortBy } from 'underscore'
@@ -17,7 +16,6 @@ const debug = createDebug('services/msgraph')
 
 @Service({ global: false })
 class MSGraphService {
-  private _perf: PerformanceObserver
   private _accessTokenOptions: AccessTokenOptions = {
     clientId: env('OAUTH_APP_ID'),
     clientSecret: env('OAUTH_APP_PASSWORD'),

@@ -12,7 +12,7 @@ import { pick } from 'underscore'
 import { setupGraphQL } from './graphql'
 import serveGzipped from './middleware/gzip'
 import passport from './middleware/passport'
-import session from './middleware/session'
+import { redisSession } from './middleware/session'
 import authRoute from './routes/auth'
 import env from './utils/env'
 
@@ -79,7 +79,7 @@ export class App {
    * Setup sessions using connect-redis
    */
   setupSession() {
-    this.instance.use(session)
+    this.instance.use(redisSession)
   }
 
   /**

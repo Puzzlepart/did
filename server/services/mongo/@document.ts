@@ -1,4 +1,4 @@
-import { Collection, FilterQuery, SortOptionObject } from 'mongodb'
+import { Collection, FilterQuery } from 'mongodb'
 import { Context } from '../../graphql/context'
 import { CacheService } from '../cache'
 
