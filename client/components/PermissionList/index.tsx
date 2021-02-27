@@ -1,11 +1,15 @@
+/* eslint-disable tsdoc/syntax */
 import * as securityConfig from 'config/security'
-import React, { useMemo } from 'react'
+import React, { FunctionComponent, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { contains } from 'underscore'
 import styles from './PermissionList.module.scss'
 import { IPermissionListProps } from './types'
 
-export const PermissionList = ({ permissionIds }: IPermissionListProps) => {
+/**
+ * @category Function Component
+ */
+export const PermissionList:FunctionComponent<IPermissionListProps> = ({ permissionIds }: IPermissionListProps) => {
   const { t } = useTranslation()
   const permissions = useMemo(() => {
     return securityConfig
@@ -24,3 +28,5 @@ export const PermissionList = ({ permissionIds }: IPermissionListProps) => {
     </div>
   )
 }
+
+export * from './types'

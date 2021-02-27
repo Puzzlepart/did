@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { getIcons } from 'common/icons'
 import { IconPicker } from 'components'
 import {
@@ -20,6 +21,9 @@ const INITIAL_MODEL: IContextualMenuItem = {
   iconProps: { iconName: first(getIcons(1)) }
 }
 
+/**
+ * @category Reports
+ */
 export const SaveFilterForm = (props: ISaveFilterFormProps) => {
   const { t } = useTranslation()
   const { state, dispatch } = useContext(ReportsContext)

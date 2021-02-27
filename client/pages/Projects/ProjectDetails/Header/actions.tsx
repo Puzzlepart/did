@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { useMutation } from '@apollo/client'
 import { AppContext } from 'AppContext'
 import { PERMISSION } from 'config/security/permissions'
@@ -11,6 +12,9 @@ import { SET_SELECTED_PROJECT } from '../../reducer/actions'
 import $createOutlookCategory from './createOutlookCategory.gql'
 import styles from './Header.module.scss'
 
+/**
+ * @category Projects
+ */
 export const Actions: FunctionComponent = () => {
   const { refetch, state, dispatch } = useContext(ProjectsContext)
   const { user } = useContext(AppContext)

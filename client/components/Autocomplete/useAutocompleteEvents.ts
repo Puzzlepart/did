@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import {
   DISMISS_CALLOUT,
   ON_KEY_DOWN,
@@ -8,6 +9,8 @@ import {
 
 /**
  * Use Autocomplete events
+ * 
+ * @category Autocomplete
  */
 export function useAutocompleteEvents({ dispatch, props }) {
   return {

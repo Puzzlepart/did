@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { AppContext } from 'AppContext'
 import { PERMISSION } from 'config/security/permissions'
 import { Pivot, PivotItem } from 'office-ui-fabric-react'
@@ -11,6 +12,9 @@ import { Roles } from './Roles'
 import { SummaryView } from './SummaryView'
 import { Users } from './Users'
 
+/**
+ * @category Function Component
+ */
 export const Admin = () => {
   const { t } = useTranslation()
   const { user } = useContext(AppContext)
@@ -66,3 +70,9 @@ export const Admin = () => {
     </div>
   )
 }
+
+export * from './ApiTokens'
+export * from './Labels'
+export * from './Roles'
+export * from './SummaryView'
+export * from './Users'

@@ -1,11 +1,15 @@
+/* eslint-disable tsdoc/syntax */
 import { Checkbox, SearchBox } from 'office-ui-fabric-react'
-import React, { useState, useMemo } from 'react'
+import React, { FunctionComponent, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { contains, isBlank } from 'underscore.string'
 import styles from './FilterItem.module.scss'
 import { IFilterItemProps } from './types'
-import { contains, isBlank } from 'underscore.string'
-import { useTranslation } from 'react-i18next'
 
-export const FilterItem = (props: IFilterItemProps) => {
+/**
+ * @category Function Component
+ */
+export const FilterItem: FunctionComponent<IFilterItemProps> = (props: IFilterItemProps) => {
   const { t } = useTranslation()
   const selectedKeys = props.filter.selected.map((f) => f.key)
   const [searchTerm, onSearch] = useState<string>('')

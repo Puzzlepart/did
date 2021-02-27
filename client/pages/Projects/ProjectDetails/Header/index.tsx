@@ -1,9 +1,13 @@
+/* eslint-disable tsdoc/syntax */
 import { Icon } from 'office-ui-fabric-react'
 import React, { FunctionComponent, useContext } from 'react'
 import { ProjectsContext } from '../../context'
 import { Actions } from './actions'
 import styles from './Header.module.scss'
 
+/**
+ * @category Projects
+ */
 export const Header: FunctionComponent = () => {
   const { state } = useContext(ProjectsContext)
   return (

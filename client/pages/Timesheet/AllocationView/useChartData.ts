@@ -2,8 +2,8 @@ import getValue from 'get-value'
 import { useContext, useMemo } from 'react'
 import { find } from 'underscore'
 import { truncateString } from 'utils/truncateString'
-import { TimesheetContext } from '..'
 import { EventObject } from '../../../../server/graphql/resolvers/types'
+import { TimesheetContext } from '../context'
 import { IChartConfig } from './types'
 
 function getDataForChart(

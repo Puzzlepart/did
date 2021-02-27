@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import React, { HTMLProps, FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
 import DateUtils from 'DateUtils'
@@ -8,6 +9,9 @@ export interface IDurationDisplayProps extends HTMLProps<HTMLDivElement> {
   duration: number
 }
 
+/**
+ * @category Function Component
+ */
 export const DurationDisplay: FunctionComponent<IDurationDisplayProps> = (
   props: IDurationDisplayProps
 ): JSX.Element => {

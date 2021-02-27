@@ -1,4 +1,4 @@
-import List from 'components/List'
+import { List } from 'components'
 import { Checkbox, SelectionMode } from 'office-ui-fabric-react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'

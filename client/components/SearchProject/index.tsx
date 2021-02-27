@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
 import * as React from 'react'
 import { Project } from 'types'
@@ -5,6 +6,9 @@ import { Autocomplete, ISuggestionItem } from '../Autocomplete'
 import $projects from './projects.gql'
 import { ISearchProjectProps } from './types'
 
+/**
+ * @category Function Component
+ */
 export const SearchProject = (props: ISearchProjectProps) => {
   const { loading, data } = useQuery<{ projects: Project[] }>($projects, {
     fetchPolicy: 'cache-first'
@@ -22,7 +26,7 @@ export const SearchProject = (props: ISearchProjectProps) => {
   )
 
   return (
-    <Autocomplete<Project>
+    <Autocomplete
       {...props}
       disabled={loading}
       items={items}

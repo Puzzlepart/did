@@ -1,7 +1,11 @@
+/* eslint-disable tsdoc/syntax */
 import { getValue } from 'helpers'
 import { contains, unique } from 'underscore'
 import { BaseFilter, IFilter } from './BaseFilter'
 
+/**
+ * @category FilterPanel
+ */
 export class ResourceFilter<
   ItemType = any,
   KeyType = any

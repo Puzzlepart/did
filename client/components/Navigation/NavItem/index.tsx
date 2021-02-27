@@ -1,13 +1,16 @@
+/* eslint-disable tsdoc/syntax */
 import { AppContext } from 'AppContext'
 import { Icon } from 'office-ui-fabric-react'
-import * as React from 'react'
-import { useContext } from 'react'
+import React, { FunctionComponent, useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { NavLink } from 'react-router-dom'
 import styles from './NavItem.module.scss'
 import { INavItemProps } from './types'
 
-export const NavItem = (props: INavItemProps) => {
+/**
+ * @category Navigation
+ */
+export const NavItem: FunctionComponent<INavItemProps> = (props: INavItemProps) => {
   const { user } = useContext(AppContext)
   if (!user.hasPermission(props.permission)) return null
   let className = styles.root
@@ -24,3 +27,5 @@ export const NavItem = (props: INavItemProps) => {
     </li>
   )
 }
+
+export * from './types'

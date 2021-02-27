@@ -1,6 +1,6 @@
 import { TFunction } from 'i18next'
 import { IChoiceGroupOption } from 'office-ui-fabric-react'
-import { getQueries } from 'pages/Reports/queries'
+import { getQueryPresets } from 'pages/Reports/queries'
 import { ReportsQuery } from 'types'
 import { filter } from 'underscore'
 
@@ -19,6 +19,6 @@ export interface IExportType extends IChoiceGroupOption {
  * @param t - Translate function
  */
 export const getExportTypes = (t: TFunction): IExportType[] => {
-  const queries = getQueries<IExportType>(t)
+  const queries = getQueryPresets<IExportType>(t)
   return filter(queries, ({ key }) => key !== 'FORECAST')
 }

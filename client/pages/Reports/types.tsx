@@ -1,8 +1,12 @@
+/* eslint-disable tsdoc/syntax */
 import { IListGroups } from 'components/List/types'
 import { TFunction } from 'i18next'
 import { IContextualMenuItem } from 'office-ui-fabric-react'
 import { ReportsQuery } from 'types'
 
+/**
+ * @category Reports
+ */
 export interface IReportsQuery extends IContextualMenuItem {
   /**
    * Variables used for graphl query
@@ -19,14 +23,23 @@ export interface IReportsQuery extends IContextualMenuItem {
   exportFileName: string
 }
 
+/**
+ * @ignore
+ */
 export interface IGroupByOption extends IContextualMenuItem {
   props: IListGroups
 }
 
+/**
+ * @category Reports
+ */
 export interface IReportsSavedFilter extends IContextualMenuItem {
   values: { [key: string]: any }
 }
 
+/**
+ * @category Reports
+ */
 export interface IReportsState {
   /**
    * Time entries
@@ -76,6 +89,8 @@ export interface IReportsState {
 
 /**
  * Get group by options
+ * 
+ * @ignore
  *
  * @param t - Translate function
  */
@@ -122,6 +137,9 @@ export const getGroupByOptions = (t: TFunction): IGroupByOption[] => [
   }
 ]
 
+/**
+ * @category Reports
+ */
 export interface IReportsParams {
   query: string
 }

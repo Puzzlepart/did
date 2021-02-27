@@ -1,15 +1,20 @@
+/* eslint-disable tsdoc/syntax */
+/**
+ * Main entry point for the App
+ * 
+ * @module .
+ */
 import { ApolloProvider } from '@apollo/client'
 import { initializeIcons } from '@uifabric/icons'
 import 'core-js/stable'
+import DateUtils from 'DateUtils'
 import i18n from 'i18next'
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
 import 'regenerator-runtime/runtime.js'
-import { logger } from 'utils'
-import DateUtils from 'DateUtils'
 import { App } from './App'
 import { ContextUser, IAppContext } from './AppContext'
-import { client, $context } from './graphql'
+import { $context, client } from './graphql'
 import './i18n'
 
 /**
@@ -19,7 +24,7 @@ import './i18n'
  * * Sets up i18n with the user language
  * * Sets up DateUtils with the user language
  */
-const boostrap = async () => {
+export const boostrap = async () => {
   initializeIcons()
 
   /**
@@ -45,8 +50,6 @@ const boostrap = async () => {
   DateUtils.setup(context.user.language)
   i18n.changeLanguage(context.user.language)
 
-  logger.info(`App initialized with language ${context.user.language}`)
-
   ReactDom.render(
     <ApolloProvider client={client}>
       <App {...context} />
@@ -56,3 +59,6 @@ const boostrap = async () => {
 }
 
 boostrap()
+
+export { App }
+

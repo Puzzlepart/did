@@ -1,14 +1,24 @@
+/* eslint-disable tsdoc/syntax */
 import { ApolloError } from '@apollo/client'
 import { OutlookCategory, Project } from 'types'
 
+/**
+ * @category Projects
+ */
 export interface IProjectsParams {
   key: string
   view: ProjectsView
   detailsTab: string
 }
 
+/**
+ * @ignore
+ */
 export type ProjectsView = 'search' | 'my' | 'new'
 
+/**
+ * @category Projects
+ */
 export interface IProjectsState {
   view?: ProjectsView
   detailsTab?: string

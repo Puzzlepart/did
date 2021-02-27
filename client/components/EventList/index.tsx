@@ -1,11 +1,15 @@
-import List from 'components/List'
+/* eslint-disable tsdoc/syntax */
+import { List } from 'components'
 import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { durationColumn, timeColumn, titleColumn } from './columns'
 import styles from './EventList.module.scss'
 import { IEventListProps } from './types'
 
-const EventList: FunctionComponent<IEventListProps> = (
+/**
+ * @category Function Component
+ */
+export const EventList: FunctionComponent<IEventListProps> = (
   props: IEventListProps
 ): JSX.Element => {
   const { t } = useTranslation()
@@ -31,7 +35,5 @@ const EventList: FunctionComponent<IEventListProps> = (
     </div>
   )
 }
-
-export default EventList
 
 export * from './types'

@@ -1,5 +1,9 @@
+/* eslint-disable tsdoc/syntax */
 import { IMessageBarProps, MessageBarType } from 'office-ui-fabric-react'
 
+/**
+ * @category UserMessage
+ */
 export interface IUserMessageProps extends IMessageBarProps {
   /**
    * Text to show in the message

@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { useMutation, useQuery } from '@apollo/client'
 import { List } from 'components'
 import React, { useEffect, useState } from 'react'
@@ -8,6 +9,9 @@ import $deleteLabel from './deleteLabel.gql'
 import { ILabelFormProps, LabelForm } from './LabelForm'
 import $labels from './labels.gql'
 
+/**
+ * @category Function Component
+ */
 export const Labels = () => {
   const { t } = useTranslation()
   const { data, refetch } = useQuery($labels, {

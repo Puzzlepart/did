@@ -1,7 +1,6 @@
 import { useMutation } from '@apollo/client'
 import AppConfig from 'AppConfig'
-import { IconPicker, useMessage, UserMessage } from 'components'
-import { ConditionalWrapper } from 'components/ConditionalWrapper'
+import { ConditionalWrapper, IconPicker, useMessage, UserMessage } from 'components'
 import {
   MessageBarType,
   Panel,

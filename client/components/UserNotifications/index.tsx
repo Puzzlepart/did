@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { Icon } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
 import { isEmpty } from 'underscore'
@@ -6,6 +7,9 @@ import { NotificationsPanel } from './NotificationsPanel'
 import styles from './UserNotifications.module.scss'
 import { useUserNotifications } from './useUserNotifications'
 
+/**
+ * @category Function Component
+ */
 export const UserNotifications: FunctionComponent = () => {
   const context = useUserNotifications()
 
@@ -25,3 +29,6 @@ export const UserNotifications: FunctionComponent = () => {
     </UserNotificationsContext.Provider>
   )
 }
+
+export * from './types'
+export * from './NotificationsPanel'

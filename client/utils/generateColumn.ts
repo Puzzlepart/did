@@ -6,8 +6,8 @@ import { IColumn } from 'office-ui-fabric-react'
  * @param fieldName - Field name
  * @param name -Name
  * @param props - Additional props
- * @param onRender - On render function (optional)
- * @param minWidth - Min width (defaults to 100)
+ * @param onRender - On render function
+ * @param minWidth - Min width
  */
 export function generateColumn(
   fieldName: string,

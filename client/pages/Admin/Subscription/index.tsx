@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { useMutation } from '@apollo/client'
 import { AppContext } from 'AppContext'
 import { useMessage, UserMessage } from 'components'
@@ -19,6 +20,9 @@ import { SettingsSection } from './SettingsSection'
 import styles from './SubscriptionSettings.module.scss'
 import $updateSubscription from './updateSubscription.gql'
 
+/**
+ * @category Function Component
+ */
 export const SubscriptionSettings = () => {
   const context = useContext(AppContext)
   const { t } = useTranslation()

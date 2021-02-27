@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
 import { Customer } from 'types'
 import $customers from './customers.gql'
@@ -6,6 +7,9 @@ import { useTranslation } from 'react-i18next'
 import { Autocomplete, ISuggestionItem } from '../Autocomplete'
 import { ISearchCustomerProps } from './types'
 
+/**
+ * @category Function Component
+ */
 export const SearchCustomer = (props: ISearchCustomerProps) => {
   const { t } = useTranslation()
   const { loading, data } = useQuery<{ customers: Customer[] }>($customers, {
@@ -29,7 +33,7 @@ export const SearchCustomer = (props: ISearchCustomerProps) => {
 
   return (
     <div hidden={props.hidden}>
-      <Autocomplete<Customer>
+      <Autocomplete
         {...props}
         disabled={loading}
         items={searchData}

@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { AppContext } from 'AppContext'
 import { PERMISSION } from 'config/security/permissions'
 import {
@@ -16,6 +17,9 @@ import { CHANGE_VIEW } from './reducer/actions'
 import { CustomersView } from './types'
 import { useCustomers } from './hooks/useCustomers'
 
+/**
+ * @category Function Component
+ */
 export const Customers: FunctionComponent = () => {
   const { t } = useTranslation()
   const { user } = useContext(AppContext)

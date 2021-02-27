@@ -1,7 +1,12 @@
+/* eslint-disable tsdoc/syntax */
+/**
+ * Reusable utility functions
+ * 
+ * @module Utils
+ */
 export * from './sleep'
 export * from './generateColumn'
-export * from './getHash'
 export * from './getSum'
 export * from './loadScripts'
-export { default as logger } from './log'
 export * from './searchObject'
+export * from './browserStorage'

@@ -1,6 +1,7 @@
+/* eslint-disable tsdoc/syntax */
 import { AppContext } from 'AppContext'
 import { PERMISSION } from 'config/security/permissions'
-import React, { useContext } from 'react'
+import React, { FunctionComponent, useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -9,7 +10,10 @@ import { UserNotifications } from '../UserNotifications'
 import styles from './Navigation.module.scss'
 import { NavItem } from './NavItem'
 
-export const Navigation = () => {
+/**
+ * @category Function Component
+ */
+export const Navigation: FunctionComponent = () => {
   const { t } = useTranslation()
   const { user } = useContext(AppContext)
   let className = styles.root
@@ -63,3 +67,5 @@ export const Navigation = () => {
     </nav>
   )
 }
+
+export * from './NavItem'

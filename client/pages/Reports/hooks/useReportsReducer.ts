@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { AppContext } from 'AppContext'
 import { useContext, useMemo, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -8,6 +9,8 @@ import createReducer from '../reducer'
 /**
  * Use Reports reducer
  *
+ * @category Reports Hooks
+ * 
  * @param queries - Queries
  */
 export function useReportsReducer(queries: IReportsQuery[]) {

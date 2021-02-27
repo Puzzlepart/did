@@ -2,17 +2,16 @@ import {
   Calendar,
   Callout,
   DateRangeType,
-  FirstWeekOfYear,
   DayOfWeek,
-  DirectionalHint,
+  DirectionalHint, 
+  FirstWeekOfYear,
   FocusTrapZone,
   TextField
 } from 'office-ui-fabric-react'
-import { TimesheetContext } from 'pages/Timesheet'
-import { SET_SCOPE } from 'pages/Timesheet/reducer/actions'
-import { TimesheetScope } from 'pages/Timesheet/types'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { SET_SCOPE } from '../../../Timesheet/reducer/actions'
+import { TimesheetContext, TimesheetScope } from '../../../Timesheet/types'
 import styles from './WeekPicker.module.scss'
 
 export const WeekPicker = () => {

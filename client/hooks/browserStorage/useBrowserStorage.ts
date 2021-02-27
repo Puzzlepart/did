@@ -1,8 +1,11 @@
+/* eslint-disable tsdoc/syntax */
 import { useState } from 'react'
 import { isArray } from 'underscore'
 
 /**
  * Browser storage hook
+ * 
+ * @category React Hook
  */
 export function useBrowserStorage<T = any>({
   key,

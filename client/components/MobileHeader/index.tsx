@@ -1,9 +1,13 @@
+/* eslint-disable tsdoc/syntax */
 import { Icon } from 'office-ui-fabric-react'
-import * as React from 'react'
+import React, { FunctionComponent } from 'react'
 import styles from './MobileHeader.module.scss'
 import { IMobileHeaderProps } from './types'
 
-export const MobileHeader = (props: IMobileHeaderProps) => {
+/**
+ * @category Function Component
+ */
+export const MobileHeader: FunctionComponent<IMobileHeaderProps> = (props: IMobileHeaderProps) => {
   return (
     <div className={styles.root}>
       <Icon iconName={props.iconName} className={styles.headerIcon} />
@@ -11,3 +15,5 @@ export const MobileHeader = (props: IMobileHeaderProps) => {
     </div>
   )
 }
+
+export * from './types'

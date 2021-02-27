@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { EntityLabel } from 'components/EntityLabel'
 import { Icon, Label } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
@@ -7,6 +8,9 @@ import { SelectCallout } from './SelectCallout'
 import { ILabelPickerProps } from './types'
 import { useLabelPicker } from './useLabelPicker'
 
+/**
+ * @category Function Component
+ */
 export const LabelPicker: FunctionComponent<ILabelPickerProps> = (
   props: ILabelPickerProps
 ) => {

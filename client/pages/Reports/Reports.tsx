@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { FilterPanel, List, UserMessage } from 'components'
 import DateUtils from 'DateUtils'
 import {
@@ -11,6 +12,7 @@ import { isEmpty } from 'underscore'
 import getColumns from './columns'
 import commandBar from './commandBar'
 import { ReportsContext } from './context'
+import { useReports, useUpdateUserConfiguration } from './hooks'
 import {
   CHANGE_QUERY,
   FILTERS_UPDATED,
@@ -18,9 +20,10 @@ import {
 } from './reducer/actions'
 import styles from './Reports.module.scss'
 import { SaveFilterForm } from './SaveFilterForm'
-import { useReports } from './hooks/useReports'
-import { useUpdateUserConfiguration } from './hooks/useUpdateUserConfiguration'
 
+/**
+ * @category Function Component
+ */
 export const Reports: FunctionComponent = () => {
   const { state, dispatch, params, queries, filters, t } = useReports()
   useUpdateUserConfiguration({

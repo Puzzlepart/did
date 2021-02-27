@@ -1,6 +1,7 @@
+/* eslint-disable tsdoc/syntax */
 import { AppContext } from 'AppContext'
-import { Callout, Target, Icon } from 'office-ui-fabric-react'
-import React, { useContext, useState } from 'react'
+import { Callout, Icon, Target } from 'office-ui-fabric-react'
+import React, { FunctionComponent, useContext, useState } from 'react'
 import { isMobile } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
@@ -9,7 +10,10 @@ import { ExportHours } from './ExportHours'
 import styles from './UserMenu.module.scss'
 import { UserSettings } from './UserSettings'
 
-export const UserMenu = () => {
+/**
+ * @category Function Component
+ */
+export const UserMenu: FunctionComponent = () => {
   const { t } = useTranslation()
   const { user, subscription } = useContext(AppContext)
   const [menuTarget, setMenuTarget] = useState<Target>(null)

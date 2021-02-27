@@ -1,17 +1,20 @@
-import List from 'components/List'
+/* eslint-disable tsdoc/syntax */
+import { List } from 'components'
 import { Checkbox } from 'office-ui-fabric-react'
-import React, { useEffect, useState, FunctionComponent } from 'react'
+import React, { FunctionComponent, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { contains, filter, isEmpty } from 'underscore'
-import { withDefaultProps } from 'with-default-props'
 import columns from './columns'
 import { IProjectListProps } from './types'
 
-const ProjectList: FunctionComponent<IProjectListProps> = (
+/**
+ * @category Projects
+ */
+export const ProjectList: FunctionComponent<IProjectListProps> = (
   props: IProjectListProps
 ) => {
   const { t } = useTranslation()
-  const [items, setItems] = useState([...props.items])
+  const [items, setItems] = useState([...props.items || []])
   const [showInactive, setShowInactive] = useState(false)
 
   useEffect(
@@ -27,7 +30,7 @@ const ProjectList: FunctionComponent<IProjectListProps> = (
       {...props}
       items={items}
       columns={columns(props, t).filter(
-        (col) => !contains(props.hideColumns, col.key)
+        (col) => !contains(props.hideColumns || [], col.key)
       )}
       groups={props.groups}
       selection={props.selection}
@@ -52,7 +55,4 @@ const ProjectList: FunctionComponent<IProjectListProps> = (
   )
 }
 
-export default withDefaultProps(ProjectList, {
-  items: [],
-  hideColumns: []
-})
+export * from './types'

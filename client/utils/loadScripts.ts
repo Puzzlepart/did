@@ -1,5 +1,5 @@
 /**
- * Load scripts
+ * Load scripts using document.createElement
  *
  * @param scriptSrc - Sources to load
  */

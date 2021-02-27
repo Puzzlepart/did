@@ -1,17 +1,27 @@
+/* eslint-disable tsdoc/syntax */
 import { useMutation, useQuery } from '@apollo/client'
-import List from 'components/List'
+import { List } from 'components'
 import { ISpinnerProps, Spinner } from 'office-ui-fabric-react'
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { User } from 'types'
 import { any, filter, isEmpty, omit } from 'underscore'
-import $addUsers from './addUsers.gql'
 import { AddMultiplePanel, IAddMultiplePanel } from './AddMultiplePanel'
+import $addUsers from './addUsers.gql'
 import { UserColumns as columns } from './columns'
 import { IUsersContext, UsersContext } from './context'
 import { IUserFormProps, UserForm } from './UserForm'
 import $users from './users.gql'
 
+/**
+ * Manage users
+ * 
+ * * See active users
+ * * Add new users
+ * * Edit users
+ * 
+ * @category Function Component
+ */
 export const Users = () => {
   const { t } = useTranslation()
   const [userForm, setUserForm] = useState<IUserFormProps>(null)

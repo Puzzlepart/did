@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import {
   BaseFilter,
   CustomerFilter,
@@ -9,6 +10,8 @@ import { IReportsSavedFilter } from './types'
 
 /**
  * Returns filter config for Reports
+ * 
+ * @ignore
  *
  * @param filter - The active filter
  * @param t - Translate function

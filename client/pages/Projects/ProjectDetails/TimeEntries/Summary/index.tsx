@@ -1,9 +1,13 @@
+/* eslint-disable tsdoc/syntax */
 import React, { FunctionComponent } from 'react'
 import FadeIn from 'react-fade-in'
 import styles from './Summary.module.scss'
 import { ISummaryProps } from './types'
 import { useSummary } from './useSummary'
 
+/**
+ * @category Projects
+ */
 export const Summary: FunctionComponent<ISummaryProps> = ({
   timeentries
 }: ISummaryProps) => {

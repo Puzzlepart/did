@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { Panel } from 'office-ui-fabric-react'
 import React, { useEffect, useState } from 'react'
 import { FilterItem } from './FilterItem'
@@ -5,6 +6,9 @@ import { IFilter, IFilterItem } from './Filters'
 import { IFilterPanelProps } from './types'
 import styles from './FilterPanel.module.scss'
 
+/**
+ * @category Function Component
+ */
 export const FilterPanel = (props: IFilterPanelProps) => {
   const [filters, setFilters] = useState<IFilter[]>(
     props.filters.map((f) => f.initialize(props.items))

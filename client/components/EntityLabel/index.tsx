@@ -1,11 +1,15 @@
+/* eslint-disable tsdoc/syntax */
 import { Icon } from 'office-ui-fabric-react'
-import * as React from 'react'
+import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isBlank } from 'underscore.string'
 import styles from './EntityLabel.module.scss'
 import { IEntityLabelProps } from './types'
 
-export const EntityLabel = ({ size, label }: IEntityLabelProps) => {
+/**
+ * @category Function Component
+ */
+export const EntityLabel: FunctionComponent<IEntityLabelProps> = ({ size, label }: IEntityLabelProps) => {
   const { t } = useTranslation()
   const className = [styles.root]
   // eslint-disable-next-line default-case
@@ -33,3 +37,5 @@ export const EntityLabel = ({ size, label }: IEntityLabelProps) => {
     </div>
   )
 }
+
+export * from './types'

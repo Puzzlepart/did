@@ -1,12 +1,18 @@
+/* eslint-disable tsdoc/syntax */
+// client/components/index.ts
+/**
+ * Reusable React Function components.
+ * 
+ * @module Components
+ */
 export * from './Autocomplete'
 export * from './DurationColumn'
 export * from './EntityLabel'
 export * from './EventList'
-export { default as EventList } from './EventList'
 export * from './FilterPanel'
 export * from './HotkeyModal'
 export * from './IconPicker'
-export { default as List } from './List'
+export * from './List'
 export * from './Navigation'
 export * from './ScrollablePaneWrapper'
 export * from './SearchCustomer'
@@ -18,3 +24,5 @@ export * from './CustomerLink'
 export * from './ProjectLink'
 export * from './MobileHeader'
 export * from './ProjectTooltip'
+export * from './ConditionalWrapper'
+export * from './EventList'

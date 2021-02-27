@@ -1,13 +1,14 @@
+/* eslint-disable tsdoc/syntax */
 import { useMutation } from '@apollo/client'
 import AppConfig from 'AppConfig'
 import {
+  ConditionalWrapper,
   IconPicker,
   LabelPicker,
   SearchCustomer,
   useMessage,
   UserMessage
 } from 'components'
-import { ConditionalWrapper } from 'components/ConditionalWrapper'
 import {
   MessageBarType,
   Panel,
@@ -26,6 +27,9 @@ import reducer, { initState } from './reducer'
 import { IProjectFormProps } from './types'
 import { validateForm } from './validateForm'
 
+/**
+ * @category Projects
+ */
 export const ProjectForm: FunctionComponent<IProjectFormProps> = (
   props: IProjectFormProps
 ) => {

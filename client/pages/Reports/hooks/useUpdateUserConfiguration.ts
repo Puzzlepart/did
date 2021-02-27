@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMutation } from '@apollo/client'
 import { useEffect } from 'react'
@@ -5,7 +6,9 @@ import $updateUserConfiguration from '../../../graphql/updateUserConfiguration.g
 
 /**
  * Use update user configuration
- *
+ * 
+ * @category Reports Hooks
+ * 
  * @param config - Configuration
  */
 export function useUpdateUserConfiguration<T = any>(config: T) {

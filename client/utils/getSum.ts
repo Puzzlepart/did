@@ -1,13 +1,15 @@
 import { reduce } from 'underscore'
 import { getValue } from 'helpers'
 
+type Item = { [key: string]: any }
+
 /**
- * Get sum for a property in the array using underscore reduce
+ * Get sum for a property in the array using _.reduce.
  *
  * @param items - Items
- * @param property - Property name
+ * @param property - Property key
  */
-export function getSum(items: any[], property: string): number {
+export function getSum(items: Item[], property: string): number {
   return reduce(
     items,
     (memo, item) => (memo += getValue<number>(item, property, 0)),

@@ -1,4 +1,6 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-inferrable-types */
+import DateUtils from 'DateUtils'
 import { TFunction } from 'i18next'
 import {
   EventInput,
@@ -8,9 +10,11 @@ import {
   TimesheetPeriodObject
 } from 'types'
 import { filter, omit } from 'underscore'
-import { BrowserStorage } from 'utils/browserStorage'
-import DateUtils from 'DateUtils'
+import { BrowserStorage } from 'utils'
 
+/**
+ * @category Timesheet
+ */
 export class TimesheetPeriod {
   public id: string
   private readonly startDate: string

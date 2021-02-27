@@ -1,6 +1,6 @@
+/* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
-import { UserMessage } from 'components'
-import List from 'components/List'
+import { UserMessage, List } from 'components'
 import { DateObject } from 'DateUtils'
 import { Pivot, PivotItem } from 'office-ui-fabric-react'
 import React, { useEffect, useMemo, useReducer } from 'react'
@@ -14,6 +14,9 @@ import $timeentries from './timeentries.gql'
 import { getScopes, getViewTypes, ISummaryViewScope } from './types'
 import { createColumns, createRows } from './utils'
 
+/**
+ * @category Function Component
+ */
 export const SummaryView = (): JSX.Element => {
   const { t } = useTranslation()
   const types = getViewTypes(t)

@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import {
   Callout,
   FocusZone,
@@ -6,14 +7,17 @@ import {
   List,
   SearchBox
 } from 'office-ui-fabric-react'
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 import { isEmpty } from 'underscore'
 import { IAutocompleteProps } from '.'
 import styles from './Autocomplete.module.scss'
 import { SuggestionItem } from './SuggestionItem'
 import { useAutocomplete } from './useAutocomplete'
 
-export function Autocomplete<T = any>(props: IAutocompleteProps<T>) {
+/**
+ * @category Function Component
+ */
+export const Autocomplete: FunctionComponent<IAutocompleteProps> =(props: IAutocompleteProps) =>{
   const {
     state,
     className,

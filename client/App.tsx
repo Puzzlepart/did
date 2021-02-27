@@ -1,3 +1,9 @@
+/* eslint-disable tsdoc/syntax */
+/**
+ * The App component
+ * 
+ * @module App
+ */
 import { MobileHeader } from 'components/MobileHeader'
 import { Navigation } from 'components/Navigation'
 import { PERMISSION } from 'config/security/permissions'
@@ -8,7 +14,7 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import styles from './App.module.scss'
 import { AppContext, IAppContext } from './AppContext'
 import { useNotificationsQuery } from './hooks'
-import { Admin, Customers, Home, Projects, Reports, Timesheet } from './pages'
+import { AdminPage, CustomersPage, Home, ProjectsPage, ReportsPage, TimesheetPage } from './pages'
 import { ProtectedRoute as Route } from './ProtectedRoute'
 
 export const App: FunctionComponent<IAppContext> = (context: IAppContext) => {
@@ -24,23 +30,23 @@ export const App: FunctionComponent<IAppContext> = (context: IAppContext) => {
             <Switch>
               <Route path='/timesheet' permission={PERMISSION.ACCESS_TIMESHEET}>
                 {isMobile && <MobileHeader text={t('navigation.timesheet')} />}
-                <Timesheet />
+                <TimesheetPage />
               </Route>
               <Route path='/customers' permission={PERMISSION.ACCESS_CUSTOMERS}>
                 {isMobile && <MobileHeader text={t('navigation.customers')} />}
-                <Customers />
+                <CustomersPage />
               </Route>
               <Route path='/projects' permission={PERMISSION.ACCESS_PROJECTS}>
                 {isMobile && <MobileHeader text={t('navigation.projects')} />}
-                <Projects />
+                <ProjectsPage />
               </Route>
               <Route path='/reports' permission={PERMISSION.ACCESS_REPORTS}>
                 {isMobile && <MobileHeader text={t('navigation.reports')} />}
-                <Reports />
+                <ReportsPage />
               </Route>
               <Route path='/admin' permission={PERMISSION.ACCESS_ADMIN}>
                 {isMobile && <MobileHeader text={t('navigation.admin')} />}
-                <Admin />
+                <AdminPage />
               </Route>
               <Route path='/'>
                 <Home />

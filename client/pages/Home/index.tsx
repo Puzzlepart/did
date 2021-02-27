@@ -1,11 +1,15 @@
+/* eslint-disable tsdoc/syntax */
 import { AppContext } from 'AppContext'
 import { UserMessage } from 'components'
 import { DefaultButton, MessageBarType } from 'office-ui-fabric-react'
-import React, { useContext } from 'react'
+import React, { FunctionComponent, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './Home.module.scss'
 
-export default (): React.ReactElement<HTMLDivElement> => {
+/**
+ * @category Function Component
+ */
+export const Home: FunctionComponent = () => {
   const { subscription } = useContext(AppContext)
   const { t } = useTranslation()
   const error = JSON.parse(

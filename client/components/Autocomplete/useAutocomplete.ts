@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { useLayoutEffect, useMemo, useReducer, useRef } from 'react'
 import styles from './Autocomplete.module.scss'
 import createReducer, { INIT } from './reducer'
@@ -5,7 +6,9 @@ import { IAutocompleteProps } from './types'
 import { useAutocompleteEvents } from './useAutocompleteEvents'
 
 /**
- * Hook for Autocomplee
+ * Hook for Autocomplete
+ * 
+ * @category Autocomplete
  *
  * @param props - Props
  */

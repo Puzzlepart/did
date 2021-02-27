@@ -1,6 +1,6 @@
+/* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
-import EventList from 'components/EventList'
-import { UserMessage } from 'components/UserMessage'
+import { EventList, UserMessage } from 'components'
 import {
   ActionButton,
   MessageBarType,
@@ -15,6 +15,9 @@ import { Summary } from './Summary'
 import $timeentries from './timeentries.gql'
 import styles from './TimeEntries.module.scss'
 
+/**
+ * @category Projects
+ */
 export const TimeEntries: FunctionComponent = () => {
   const { t } = useTranslation()
   const { state } = useContext(ProjectsContext)

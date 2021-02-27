@@ -1,7 +1,11 @@
+/* eslint-disable tsdoc/syntax */
 import { getValue } from 'helpers'
 import { unique, contains } from 'underscore'
 import { BaseFilter, IFilter } from './BaseFilter'
 
+/**
+ * @category FilterPanel
+ */
 export class WeekFilter<
   ItemType = any,
   KeyType = any

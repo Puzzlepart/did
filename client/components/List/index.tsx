@@ -1,9 +1,9 @@
+/* eslint-disable tsdoc/syntax */
 import { getValue } from 'helpers'
 import {
   CheckboxVisibility,
   ConstrainMode,
   DetailsListLayoutMode,
-  IColumn,
   Selection,
   SelectionMode,
   ShimmeredDetailsList
@@ -20,7 +20,7 @@ import { onRenderListHeader } from './onRenderListHeader'
 import reducer from './reducer'
 import { IListProps } from './types'
 
-const List: FunctionComponent<IListProps> = (props: IListProps) => {
+const _List: FunctionComponent<IListProps> = (props: IListProps) => {
   const [state, dispatch] = useReducer(reducer, {
     origItems: props.items || [],
     items: props.items || [],
@@ -100,7 +100,10 @@ const List: FunctionComponent<IListProps> = (props: IListProps) => {
   )
 }
 
-export default withDefaultProps(List, {
+/**
+ * @category Function Component
+ */
+export const List = withDefaultProps(_List, {
   fadeIn: [0, 0],
   items: [],
   commandBar: {
@@ -108,5 +111,3 @@ export default withDefaultProps(List, {
     farItems: []
   }
 } as IListProps)
-
-export { SelectionMode, IColumn }

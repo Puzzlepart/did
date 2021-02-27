@@ -1,8 +1,11 @@
+/* eslint-disable tsdoc/syntax */
 import { IUserMessageProps } from './types'
 import { useState } from 'react'
 
 /**
- * Used to show a temporarily message
+ * Hook used to show a temporarily message
+ *
+ * @category UserMessage
  */
 export function useMessage(): [
   IUserMessageProps,

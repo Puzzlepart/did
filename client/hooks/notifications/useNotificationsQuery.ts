@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
 import { ContextUser } from 'AppContext'
 import { useTranslation } from 'react-i18next'
@@ -6,6 +7,8 @@ import notificationsQuery from './notifications.gql'
 
 /**
  * Notificatins query hook
+ * 
+ * @category React Hook
  *
  * @param user - Context user
  */

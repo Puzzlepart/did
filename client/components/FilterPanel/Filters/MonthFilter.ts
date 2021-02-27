@@ -1,8 +1,12 @@
+/* eslint-disable tsdoc/syntax */
 import DateUtils from 'DateUtils'
 import { getValue } from 'helpers'
 import { contains, indexOf, unique } from 'underscore'
 import { BaseFilter, IFilter } from './BaseFilter'
 
+/**
+ * @category FilterPanel
+ */
 export class MonthFilter<
   ItemType = any,
   KeyType = any

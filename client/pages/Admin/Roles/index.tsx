@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
 import { List } from 'components'
 import React, { useState } from 'react'
@@ -8,6 +9,9 @@ import { IRolePanelProps, RolePanel } from './RolePanel'
 import $roles from './roles.gql'
 import styles from './Roles.module.scss'
 
+/**
+ * @category Function Component
+ */
 export const Roles = () => {
   const { t } = useTranslation()
   const { data, loading, refetch } = useQuery($roles)

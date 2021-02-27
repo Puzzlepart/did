@@ -1,9 +1,13 @@
+/* eslint-disable tsdoc/syntax */
 import React, { useState, useEffect } from 'react'
 import styles from './SelectCallout.module.scss'
 import { SearchBox, Checkbox, Callout, Icon } from 'office-ui-fabric-react'
 import { LabelObject } from 'types'
 import { ISelectCalloutProps } from './types'
 
+/**
+ * @category Function Component
+ */
 export const SelectCallout = (props: ISelectCalloutProps) => {
   const [labels, setLabels] = useState<LabelObject[]>(props.labels)
 

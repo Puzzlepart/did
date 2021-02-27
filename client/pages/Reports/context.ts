@@ -1,8 +1,12 @@
+/* eslint-disable tsdoc/syntax */
 import { AnyAction } from '@reduxjs/toolkit'
 import { TFunction } from 'i18next'
 import { createContext } from 'react'
 import { IReportsState } from './types'
 
+/**
+ * @category Reports
+ */
 export interface IReportsContext {
   /**
    * State
@@ -20,4 +24,7 @@ export interface IReportsContext {
   t: TFunction
 }
 
+/**
+ * @category Reports
+ */
 export const ReportsContext = createContext<IReportsContext>(null)

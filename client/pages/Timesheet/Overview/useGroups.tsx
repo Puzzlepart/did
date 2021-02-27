@@ -4,7 +4,7 @@ import DateUtils from 'DateUtils'
 import { useContext, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { EventObject } from 'types'
-import { TimesheetContext } from '../'
+import { TimesheetContext } from '../context'
 
 /**
  * Use groups

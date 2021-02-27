@@ -1,4 +1,5 @@
 import { isEmpty } from 'underscore'
+
 /**
  * Search object
  *

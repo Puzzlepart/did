@@ -1,8 +1,12 @@
+/* eslint-disable tsdoc/syntax */
 import * as React from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { Admin } from './Admin'
 
-export default () => {
+/**
+ * @ignore
+ */
+export const AdminPage = () => {
   const match = useRouteMatch()
   return (
     <Switch>
@@ -18,3 +22,5 @@ export default () => {
     </Switch>
   )
 }
+
+export * from './Admin'

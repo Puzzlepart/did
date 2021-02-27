@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { getIcons } from 'common/icons'
 import { IPanelProps } from 'office-ui-fabric-react'
 import {
@@ -8,6 +9,9 @@ import {
 } from 'types'
 import { first } from 'underscore'
 
+/**
+ * @category Projects
+ */
 export class ProjectModel {
   public name: string
   public key: string
@@ -35,10 +39,16 @@ export class ProjectModel {
   }
 }
 
+/**
+ * @category Projects
+ */
 interface IProjectFormPanelProps extends IPanelProps {
   onSave: () => void
 }
 
+/**
+ * @category Projects
+ */
 export interface IProjectFormProps {
   /**
    * Panel props provided if the form is rendered within a panel
@@ -51,6 +61,9 @@ export interface IProjectFormProps {
   edit?: Project
 }
 
+/**
+ * @category Projects
+ */
 export interface IProjectFormState {
   model: ProjectModel
   options: ProjectOptions

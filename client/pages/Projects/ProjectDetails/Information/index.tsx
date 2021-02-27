@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { EntityLabel } from 'components/EntityLabel'
 import { UserMessage } from 'components/UserMessage'
 import { MessageBarType } from 'office-ui-fabric-react'
@@ -9,6 +10,9 @@ import { isEmpty } from 'underscore'
 import { ProjectsContext } from '../../context'
 import styles from './Information.module.scss'
 
+/**
+ * @category Projects
+ */
 export const Information: FunctionComponent = () => {
   const { t } = useTranslation()
   const { state } = useContext(ProjectsContext)
