@@ -9,20 +9,36 @@ import { MongoClient } from 'mongodb'
 import logger from 'morgan'
 import path from 'path'
 import { pick } from 'underscore'
-import graphql from './graphql'
-import serveGzipped from './middleware/gzip'
-import passport from './middleware/passport'
-import session from './middleware/session'
+import { setupGraphQL } from './graphql'
+import {
+  redisSessionMiddleware,
+  serveGzippedMiddleware,
+  passportMiddleware,
+  helmetMiddleware
+} from './middleware'
 import authRoute from './routes/auth'
 import env from './utils/env'
 
-class App {
+/**
+ * Did Express.js App
+ */
+export class App {
+  /**
+   * The express.Application instance
+   */
   public instance: express.Application
-  private _client: MongoClient
 
+  /**
+   * Mongo client
+   */
+  private _mongoClient: MongoClient
+
+  /**
+   * Bootstrapping the express application
+   */
   constructor() {
     this.instance = express()
-    this.instance.use(require('./middleware/helmet').default)
+    this.instance.use(helmetMiddleware)
     this.instance.use(
       favicon(path.join(__dirname, 'public/images/favicon/favicon.ico'))
     )
@@ -35,9 +51,18 @@ class App {
 
   /**
    * Setup app
+   *
+   * * Connecting to our Mongo client
+   * * Setting up sessions
+   * * Setting up view engine
+   * * Setting up static assets
+   * * Setting up authentication
+   * * Setting up our GraphQL API
+   * * Setting up routes
+   * * Setting up error handling
    */
   public async setup() {
-    this._client = await MongoClient.connect(
+    this._mongoClient = await MongoClient.connect(
       env('MONGO_DB_CONNECTION_STRING'),
       {
         useNewUrlParser: true,
@@ -54,14 +79,14 @@ class App {
   }
 
   /**
-   * Setup sessions
+   * Setup sessions using connect-redis
    */
   setupSession() {
-    this.instance.use(session)
+    this.instance.use(redisSessionMiddleware)
   }
 
   /**
-   * Setup view engine
+   * Setup hbs as view engine
    */
   setupViewEngine() {
     this.instance.set('views', path.join(__dirname, 'views'))
@@ -70,17 +95,24 @@ class App {
 
   /**
    * Setup static assets
+   *
+   * * Serving *.js gzipped
+   * * Serving our public folder
    */
   setupAssets() {
-    this.instance.use('/*.js', serveGzipped('text/javascript'))
+    this.instance.use('/*.js', serveGzippedMiddleware('text/javascript'))
     this.instance.use(express.static(path.join(__dirname, 'public')))
   }
 
   /**
    * Setup authentication
+   *
+   * * Using passport for user login
+   * * Using express-bearer-token package to support external API calls
+   * * Setting up auth route at /auth
    */
   setupAuth() {
-    const _passport = passport(this._client)
+    const _passport = passportMiddleware(this._mongoClient)
     this.instance.use(bearerToken({ reqKey: 'api_key' }))
     this.instance.use(_passport.initialize())
     this.instance.use(_passport.session())
@@ -91,11 +123,14 @@ class App {
    * Setup graphql
    */
   async setupGraphQL() {
-    await graphql(this.instance, this._client)
+    await setupGraphQL(this.instance, this._mongoClient)
   }
 
   /**
    * Setup routes
+   *
+   * * Setting up * to use our index route giving the React
+   * Router full control of the routing.
    */
   setupRoutes() {
     const index = express.Router()
@@ -106,7 +141,7 @@ class App {
   }
 
   /**
-   * Setup error handling
+   * Setup error handling using http-errors
    */
   setupErrorHandling() {
     this.instance.use((_req, _res, next) => next(createError()))

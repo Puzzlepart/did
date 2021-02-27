@@ -7,7 +7,7 @@ import { CHANGE_VIEW, DATA_UPDATED, SET_SELECTED_CUSTOMER } from './actions'
 /**
  * Initialize state
  *
- * @param {ICustomersParams} params Params
+ * @param params - Params
  */
 export const initState = (params: ICustomersParams): ICustomersState => ({
   view: (contains(['search', 'new'], params.view)

@@ -52,8 +52,8 @@ export class Context {
 /**
  * Create context
  *
- * @param {Express.Request} request Express request
- * @param {MongoClient} client Mongo client
+ * @param request -  Express request
+ * @param client - Mongo client
  */
 export const createContext = async (
   request: Express.Request,
@@ -95,8 +95,8 @@ export const createContext = async (
 /**
  * Handle token authentication
  *
- * @param {string} apiKey Api key
- * @param {MongoDatabase} db Mongodb database
+ * @param apiKey -Api key
+ * @param db - Mongodb database
  */
 const handleTokenAuthentication = async (apiKey: string, db: MongoDatabase) => {
   const { expires, subscriptionId } = verify(

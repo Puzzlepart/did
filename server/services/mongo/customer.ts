@@ -12,7 +12,7 @@ export class CustomerService extends MongoDocumentService<Customer> {
   /**
    * Add customer
    *
-   * @param {Customer} customer Customer to add
+   * @param customer - Customer to add
    */
   public async addCustomer(customer: Customer): Promise<void> {
     try {
@@ -26,7 +26,7 @@ export class CustomerService extends MongoDocumentService<Customer> {
   /**
    * Update customer
    *
-   * @param {Customer} customer Customer to update
+   * @param customer - Customer to update
    */
   public async updateCustomer(customer: Customer): Promise<void> {
     try {
@@ -40,7 +40,7 @@ export class CustomerService extends MongoDocumentService<Customer> {
   /**
    * Delete customer
    *
-   * @param {string} key Customer key
+   * @param key - Customer key
    */
   public async deleteCustomer(key: string): Promise<void> {
     try {
@@ -54,7 +54,7 @@ export class CustomerService extends MongoDocumentService<Customer> {
   /**
    * Get customers
    *
-   * @param {FilterQuery<Customer>} query Query
+   * @param query - Query
    */
   public getCustomers(query?: FilterQuery<Customer>): Promise<Customer[]> {
     try {

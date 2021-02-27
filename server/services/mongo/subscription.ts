@@ -14,7 +14,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
   /**
    * Replace id with _id
    *
-   * @param {Subscription} subscription Subscription
+   * @param subscription - Subscription
    */
   private _replaceId<T>(subscription: Subscription): T {
     return ({
@@ -26,7 +26,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
   /**
    * Get subscription by ID
    *
-   * @param {string} id Subscription ID
+   * @param id - Subscription ID
    */
   public async getById(id: string): Promise<Subscription> {
     try {
@@ -43,7 +43,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
   /**
    * Add subscription
    *
-   * @param {Subscription} subscription Subscription
+   * @param subscription - Subscription
    */
   public async addSubscription(subscription: Subscription) {
     try {
@@ -59,7 +59,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
   /**
    * Update subscription
    *
-   * @param {SubscriptionSettings} settings Subscription settings
+   * @param settings - Subscription settings
    */
   public async updateSubscription(settings: SubscriptionSettings) {
     try {

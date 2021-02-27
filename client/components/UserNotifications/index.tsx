@@ -32,7 +32,7 @@ export const UserNotifications = () => {
   /**
    * On dismiss notification. Updates state and persists in browser storage.
    *
-   * @param {NotificationModel} notification Notification
+   * @param notification - Notification
    */
   const onDismissNotification = (notification: NotificationModel) => {
     const _notifications = new Set(notifications)

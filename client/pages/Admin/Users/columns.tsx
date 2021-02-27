@@ -7,8 +7,8 @@ import { generateColumn as col } from 'utils/generateColumn'
 /**
  * Returns the columns for the User list
  *
- * @param {void} onEdit On edit callback
- * @param {TFunction} t Translate function
+ * @param onEdit - On edit callback
+ * @param t - Translate function
  */
 export const UserColumns = (
   onEdit: (user: User) => void,

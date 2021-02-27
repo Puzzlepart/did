@@ -1,6 +1,9 @@
 import helmet from 'helmet'
 
-export default helmet({
+/**
+ * Helmet configuration
+ */
+export const helmetMiddleware = helmet({
   frameguard: {
     action: 'allow-from',
     domain: 'https://teams.microsoft.com'

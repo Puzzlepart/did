@@ -17,9 +17,9 @@ export const FilterPanel = (props: IFilterPanelProps) => {
   /**
    * On filter updated
    *
-   * @param {IFilter} filter
-   * @param {IFilterItem} item
-   * @param {boolean} checked
+   * @param filter - Filter
+   * @param item - Item
+   * @param checked - Checked
    */
   const onFilterUpdated = (
     filter: IFilter,

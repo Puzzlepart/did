@@ -39,7 +39,7 @@ export const Users = () => {
   /**
    * On edit user
    *
-   * @param {User} user User to edit
+   * @param user - User to edit
    */
   const onEdit = (user: User) =>
     setUserForm({
@@ -50,7 +50,7 @@ export const Users = () => {
   /**
    * On add users
    *
-   * @param {any[]} users Users to add
+   * @param users - Users to add
    */
   const onAddUsers = async (users: any[]) => {
     setAddMultiplePanel(null)

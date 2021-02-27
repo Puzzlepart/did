@@ -5,8 +5,8 @@ import { ProjectModel } from './types'
 /**
  * Validate form
  *
- * @param {ProjectModel} model Model
- * @param {TFunction} t Translate function
+ * @param model - Model
+ * @param t - Translate function
  */
 export const validateForm = (model: ProjectModel, t: TFunction) => {
   const {

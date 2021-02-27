@@ -16,7 +16,7 @@ export class MonthFilter<
   /**
    * Intialize the MonthFilter
    *
-   * @param {ItemType[]} items Items
+   * @param items - Items
    */
   public initialize(items: ItemType[]): IFilter {
     const values = unique(items.map((e) => getValue(e, this.fieldName, null)))

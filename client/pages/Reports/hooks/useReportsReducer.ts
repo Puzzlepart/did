@@ -8,7 +8,7 @@ import createReducer from '../reducer'
 /**
  * Use Reports reducer
  *
- * @param {IReportsQuery[]} queries Queries
+ * @param queries - Queries
  */
 export function useReportsReducer(queries: IReportsQuery[]) {
   const { t } = useTranslation()

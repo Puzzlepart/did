@@ -7,7 +7,7 @@ import { ReportsQuery } from 'types'
 /**
  * Get scopes
  *
- * @param {TFunction} t Translate function
+ * @param t - Translate function
  */
 export const getScopes = (t: TFunction): ISummaryViewScope[] => [
   {
@@ -29,7 +29,7 @@ export const getScopes = (t: TFunction): ISummaryViewScope[] => [
 /**
  * Get view types
  *
- * @param {TFunction} t Translate function
+ * @param t - Translate function
  */
 export const getViewTypes = (t: TFunction): IContextualMenuItem[] => [
   {

@@ -7,9 +7,9 @@ import $projects from './projects.gql'
 /**
  * Use Projects query
  *
- * Uses useQuery from @apollo/client
+ * Uses useQuery from apollo/client
  *
- * @param {Dispatch<AnyAction>} dispatch Dispatch
+ * @param dispatch - Dispatch
  */
 export function useProjectsQuery(dispatch: Dispatch<AnyAction>) {
   const { refetch, data, error, loading } = useQuery($projects, {

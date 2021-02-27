@@ -3,14 +3,15 @@ import fs from 'fs'
 import { MongoClient } from 'mongodb'
 import passport from 'passport'
 import { IProfile, OIDCStrategy, VerifyCallback } from 'passport-azure-ad'
-import {
-  MongoService,
-  SubscriptionService,
-  UserService
-} from '../../services/mongo'
+import { SubscriptionService, UserService } from '../../services/mongo'
 import env from '../../utils/env'
 
-export default (client: MongoClient) => {
+/**
+ * Setup passport to be used for authentication
+ *
+ * @param mongoClient - Mongo client
+ */
+export const passportMiddleware = (mongoClient: MongoClient) => {
   /**
    * In a typical web application, the credentials used to authenticate
    * a user will only be transmitted during the login request. If
@@ -79,12 +80,12 @@ export default (client: MongoClient) => {
         done: VerifyCallback
       ) => {
         const subscription_service = new SubscriptionService({
-          db: client.db(env('MONGO_DB_DB_NAME'))
+          db: mongoClient.db(env('MONGO_DB_DB_NAME'))
         })
         subscription_service
           .getById(_json.tid)
           .then((s) => {
-            new UserService({ db: client.db(s.db) })
+            new UserService({ db: mongoClient.db(s.db) })
               .getById(_json.oid)
               .then((u) => {
                 return done(null, {

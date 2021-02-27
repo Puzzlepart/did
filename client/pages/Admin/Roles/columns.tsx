@@ -9,8 +9,8 @@ import styles from './Roles.module.scss'
 /**
  * Returns the columns for the Role list
  *
- * @param {void} onEdit On edit callback
- * @param {TFunction} t Translate function
+ * @param onEdit - On edit callback
+ * @param t - Translate function
  */
 export const RoleColumns = (onEdit: (role: Role) => void, t: TFunction) => [
   col('name', '', { maxWidth: 100 }, (role: Role) => {

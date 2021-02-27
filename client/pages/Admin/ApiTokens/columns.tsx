@@ -8,8 +8,8 @@ import { DateObject } from 'DateUtils'
 /**
  * Returns the columns for the ApiTokens list
  *
- * @param {void} onEdit On edit callback
- * @param {TFunction} t Translate function
+ * @param onEdit - On edit callback
+ * @param t - Translate function
  */
 export const ApiTokensColumns = (
   onDeleteApiToken: (token: ApiToken) => void,

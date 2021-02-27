@@ -17,17 +17,15 @@ export class TimesheetResolver {
   /**
    * Constructor for TimesheetResolver
    *
-   * @param {TimesheetService} _timesheet Timesheet service
+   * @param _timesheet - Timesheet service
    */
   constructor(private readonly _timesheet: TimesheetService) {}
 
   /**
    * Get timesheet
    *
-   * Query: @timesheet
-   *
-   * @param {TimesheetQuery} query Query
-   * @param {TimesheetOptions} options Options
+   * @param query - Query
+   * @param options - Options
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [TimesheetPeriodObject], {
@@ -47,8 +45,8 @@ export class TimesheetResolver {
   /**
    * Submit period
    *
-   * @param {TimesheetPeriodInput} period Period
-   * @param {TimesheetOptions} options Timesheet options (forecast, tzoffset etc)
+   * @param period - Period
+   * @param options - Timesheet options (forecast, tzoffset etc)
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, {
@@ -76,8 +74,8 @@ export class TimesheetResolver {
   /**
    * Unsubmit period
    *
-   * @param {TimesheetPeriodInput} period Period
-   * @param {boolean} forecast Forecast
+   * @param period - Period
+   * @param forecast - Forecast
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, {

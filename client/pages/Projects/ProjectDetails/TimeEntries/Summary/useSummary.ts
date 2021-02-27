@@ -6,7 +6,7 @@ import { getSum } from 'utils/getSum'
 /**
  * Use summary hook
  *
- * @param {any[]} timeentries Time entries
+ * @param timeentries - Time entries
  */
 export function useSummary(timeentries: any[]) {
   const { t } = useTranslation()

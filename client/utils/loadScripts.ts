@@ -1,16 +1,16 @@
 /**
  * Load scripts
  *
- * @param {string[]} src Source to load
+ * @param scriptSrc - Sources to load
  */
-export function loadScripts(src: string[]): Promise<void> {
+export function loadScripts(scriptSrc: string[]): Promise<void> {
   return new Promise((resolve) => {
     Promise.all(
-      src.map(
+      scriptSrc.map(
         (s) =>
           new Promise((r) => {
             const script = document.createElement('script')
-            script.onload = () => r()
+            script.onload = () => r(true)
             script.src = s
             document.head.appendChild(script)
           })

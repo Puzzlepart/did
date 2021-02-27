@@ -20,7 +20,7 @@ import { getGroupByOptions } from './types'
 /**
  * Select group by command
  *
- * @param {IReportsContext} context Context
+ * @param context - Context
  */
 const selectGroupByCmd = (context: IReportsContext) =>
   ({
@@ -44,7 +44,7 @@ const selectGroupByCmd = (context: IReportsContext) =>
 /**
  * Export to Excel command
  *
- * @param {IReportsContext} context Context
+ * @param context - Context
  */
 const exportToExcelCmd = ({ state, t }: IReportsContext) =>
   ({
@@ -66,7 +66,7 @@ const exportToExcelCmd = ({ state, t }: IReportsContext) =>
 /**
  * Open filter panel command
  *
- * @param {IReportsContext} context Context
+ * @param context - Context
  */
 const openFilterPanelCmd = ({ dispatch }: IReportsContext) =>
   ({
@@ -79,7 +79,7 @@ const openFilterPanelCmd = ({ dispatch }: IReportsContext) =>
 /**
  * Clear filters
  *
- * @param {IReportsContext} context Context
+ * @param context - Context
  */
 const clearFiltersCmd = ({ state, dispatch }: IReportsContext) =>
   ({
@@ -93,7 +93,7 @@ const clearFiltersCmd = ({ state, dispatch }: IReportsContext) =>
 /**
  * Save filter  command
  *
- * @param {IReportsContext} context Context
+ * @param context - Context
  */
 const saveFilterCmd = ({
   state,

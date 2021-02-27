@@ -6,8 +6,8 @@ import AppConfig from 'AppConfig'
 /**
  * Validate form
  *
- * @param {CustomerModel} model Model
- * @param {TFunction} t Translate function
+ * @param model - Model
+ * @param t - Translate function
  */
 export const validateForm = (
   model: CustomerModel,

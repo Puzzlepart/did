@@ -14,7 +14,7 @@ export interface ITimesheetContext extends ITimesheetState {
    *
    * - If set to false: Confirms the period
    *
-   * @param {boolean} forecast Forecast
+   * @param forecast - Forecast
    */
   onSubmitPeriod: (forecast: boolean) => void
 
@@ -27,7 +27,7 @@ export interface ITimesheetContext extends ITimesheetState {
    *
    * - If set to false: Unconfirms the period
    *
-   * @param {boolean} forecast Forecast
+   * @param forecast - Forecast
    */
   onUnsubmitPeriod: (forecast: boolean) => void
 

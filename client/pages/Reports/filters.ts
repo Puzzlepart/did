@@ -10,8 +10,8 @@ import { IReportsSavedFilter } from './types'
 /**
  * Returns filter config for Reports
  *
- * @param {IReportsSavedFilter} filter The active filter
- * @param {TFunction} t Translate function
+ * @param filter - The active filter
+ * @param t - Translate function
  */
 export default (filter: IReportsSavedFilter, t: TFunction): BaseFilter[] => [
   new ResourceFilter(

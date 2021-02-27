@@ -16,18 +16,21 @@ export class UserService extends MongoDocumentService<User> {
   }
 
   /**
-   * Replace id with _id
+   * Replace id with _id for the User Object
    *
-   * @param {User} user User
+   * @remarks We want to store the user with _id in the mongodb collection, but
+   * use id when working with the user in our code.
+   *
+   * @param user - User
    */
   private _replaceId<T>(user: User): T {
     return ({ ...omit(user, 'id'), _id: user.id } as unknown) as T
   }
 
   /**
-   * Get users
+   * Get users by the specified query
    *
-   * @param {FilterQuery<User>} query Query
+   * @param query - Query
    */
   public async getUsers(query?: FilterQuery<User>): Promise<User[]> {
     try {
@@ -49,7 +52,7 @@ export class UserService extends MongoDocumentService<User> {
   /**
    * Get user by ID
    *
-   * @param {string} id User ID
+   * @param id - User ID
    */
   public async getById(id: string) {
     try {
@@ -65,9 +68,9 @@ export class UserService extends MongoDocumentService<User> {
   }
 
   /**
-   * Add user
+   * Add the specified user object
    *
-   * @param {User} user User
+   * @param user - User
    */
   public async addUser(user: User) {
     try {
@@ -81,7 +84,7 @@ export class UserService extends MongoDocumentService<User> {
   /**
    * Add users
    *
-   * @param {User[]} users Users
+   * @param users - Users
    */
   public async addUsers(users: User[]) {
     try {
@@ -95,9 +98,9 @@ export class UserService extends MongoDocumentService<User> {
   }
 
   /**
-   * Update customer
+   * Update the specified user
    *
-   * @param {User} user User to update
+   * @param user - User to update
    */
   public async updateUser(user: User): Promise<void> {
     try {
@@ -108,9 +111,12 @@ export class UserService extends MongoDocumentService<User> {
   }
 
   /**
-   * Update current user configuration
+   * Update configuration for the current user
    *
-   * @param {string} configuration Configuration
+   * @remarks For now we we're working with the configuration as a string,
+   * to avoid typing the whole configuration object.
+   *
+   * @param configuration - Configuration
    */
   public async updateCurrentUserConfiguration(configuration: string) {
     try {

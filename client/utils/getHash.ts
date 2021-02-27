@@ -1,9 +1,7 @@
 /**
  * Get hash
  *
- * @param {Object} options Options
- *
- * @category Utility
+ * @param options - Options
  */
 export function getHash(
   options: { parseInt?: boolean; fallback?: string } = {}
