@@ -16,7 +16,10 @@ export class UserService extends MongoDocumentService<User> {
   }
 
   /**
-   * Replace id with _id
+   * Replace id with _id for the User Object
+   * 
+   * @remarks We want to store the user with _id in the mongodb collection, but
+   * use id when working with the user in our code.
    *
    * @param user - User
    */
@@ -25,7 +28,7 @@ export class UserService extends MongoDocumentService<User> {
   }
 
   /**
-   * Get users
+   * Get users by the specified query
    *
    * @param query - Query
    */
@@ -65,7 +68,7 @@ export class UserService extends MongoDocumentService<User> {
   }
 
   /**
-   * Add user
+   * Add the specified user object
    *
    * @param user - User
    */
@@ -95,7 +98,7 @@ export class UserService extends MongoDocumentService<User> {
   }
 
   /**
-   * Update customer
+   * Update the specified user
    *
    * @param user - User to update
    */
@@ -108,7 +111,10 @@ export class UserService extends MongoDocumentService<User> {
   }
 
   /**
-   * Update current user configuration
+   * Update configuration for the current user
+   * 
+   * @remarks For now we we're working with the configuration as a string,
+   * to avoid typing the whole configuration object.
    *
    * @param configuration - Configuration
    */
