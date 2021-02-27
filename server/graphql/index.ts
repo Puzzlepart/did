@@ -30,7 +30,7 @@ import {
 const debug = createDebug('graphql')
 
 /**
- * Get schema using type-graphql
+ * Generate GraphQL schema using type-graphql
  *
  * * Setting up the schema to use Dependency injection (https://typegraphql.com/docs/dependency-injection.html)
  * * Turns of validation
@@ -39,7 +39,7 @@ const debug = createDebug('graphql')
  *
  * @see https://typegraphql.com/
  */
-export const getSchema = async () => {
+export const generateGraphQLSchema = async () => {
   const schema = await buildSchema({
     resolvers: [
       ApiTokenResolver,
@@ -78,7 +78,7 @@ export const setupGraphQL = async (
   client: MongoClient
 ): Promise<void> => {
   try {
-    const schema = await getSchema()
+    const schema = await generateGraphQLSchema()
     const server = new ApolloServer({
       schema,
       rootValue: global,

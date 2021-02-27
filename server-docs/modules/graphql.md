@@ -61,16 +61,16 @@
 
 ### Functions
 
-- [getSchema](graphql.md#getschema)
+- [generateGraphQLSchema](graphql.md#generategraphqlschema)
 - [setupGraphQL](graphql.md#setupgraphql)
 
 ## Functions
 
-### getSchema
+### generateGraphQLSchema
 
-▸ `Const`**getSchema**(): *Promise*<GraphQLSchema\>
+▸ `Const`**generateGraphQLSchema**(): *Promise*<GraphQLSchema\>
 
-Get schema using type-graphql
+Generate GraphQL schema using type-graphql
 
 * Setting up the schema to use Dependency injection (https://typegraphql.com/docs/dependency-injection.html)
 * Turns of validation
