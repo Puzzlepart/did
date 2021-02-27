@@ -1,8 +1,12 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, Float, ID, InputType, ObjectType } from 'type-graphql'
 import { Customer, Project, User } from '../types'
 
+/**
+ * @category ObjectType
+ */
 @ObjectType({
   description: 'A type that describes a TimeEntry',
   simpleResolvers: true
@@ -60,6 +64,9 @@ export class TimeEntry {
   resource: User
 }
 
+/**
+ * @category InputType
+ */
 @InputType()
 export class ReportsQuery {
   @Field({ nullable: true })

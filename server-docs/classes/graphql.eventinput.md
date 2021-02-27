@@ -30,7 +30,7 @@
 
 • **id**: *string*
 
-Defined in: [server/graphql/resolvers/timesheet/types/EventInput.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventInput.ts#L9)
+Defined in: [server/graphql/resolvers/timesheet/types/EventInput.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventInput.ts#L13)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • **manualMatch**: *boolean*
 
-Defined in: [server/graphql/resolvers/timesheet/types/EventInput.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventInput.ts#L15)
+Defined in: [server/graphql/resolvers/timesheet/types/EventInput.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventInput.ts#L19)
 
 ___
 
@@ -46,4 +46,4 @@ ___
 
 • **projectId**: *string*
 
-Defined in: [server/graphql/resolvers/timesheet/types/EventInput.ts:12](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventInput.ts#L12)
+Defined in: [server/graphql/resolvers/timesheet/types/EventInput.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventInput.ts#L16)

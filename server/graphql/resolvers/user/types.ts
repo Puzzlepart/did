@@ -1,9 +1,13 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import { Subscription } from '../subscription/types'
 import { Role } from '../types'
 
+/**
+ * @category ObjectType
+ */
 @ObjectType({
   description: 'A type that describes a User',
   simpleResolvers: true
@@ -50,6 +54,9 @@ export class User {
   }
 }
 
+/**
+ * @category InputType
+ */
 @InputType({
   description: 'Input object for Role used in Mutation addOrUpdateUser/addUsers'
 })
@@ -82,12 +89,18 @@ export class UserInput {
   role?: string
 }
 
+/**
+ * @category InputType
+ */
 @InputType({ description: 'Input object for User query options' })
 export class UserQueryOptions {
   @Field({ nullable: true })
   sortBy?: string
 }
 
+/**
+ * @category InputType
+ */
 @InputType({ description: 'Input object for User query' })
 export class UserQuery {
   @Field({ nullable: true })

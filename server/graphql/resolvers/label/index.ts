@@ -1,5 +1,5 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-empty-function */
 import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
@@ -8,6 +8,9 @@ import { IAuthOptions } from '../../authChecker'
 import { BaseResult } from '../types'
 import { LabelInput, LabelObject as Label } from './types'
 
+/**
+ * @category Resolver
+ */
 @Service()
 @Resolver(Label)
 export class LabelResolver {

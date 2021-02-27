@@ -1,7 +1,11 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 
+/**
+ * @category ObjectType
+ */
 @ObjectType({
   description: 'A type that describes Subscription forecast settings'
 })
@@ -13,6 +17,9 @@ export class SubscriptionForecastSettings {
   notifications?: number
 }
 
+/**
+ * @category ObjectType
+ */
 @ObjectType({
   description: 'A type that describes Subscription AD sync settings'
 })
@@ -24,6 +31,9 @@ export class SubscriptionADSyncSettings {
   adUserSyncProperties?: string[]
 }
 
+/**
+ * @category ObjectType
+ */
 @ObjectType({ description: 'A type that describes Subscription settings' })
 export class SubscriptionSettings {
   @Field(() => SubscriptionForecastSettings, { nullable: true })
@@ -33,6 +43,9 @@ export class SubscriptionSettings {
   adsync?: SubscriptionADSyncSettings
 }
 
+/**
+ * @category ObjectType
+ */
 @ObjectType({
   description: 'A type that describes a Subscription',
   simpleResolvers: true
@@ -55,6 +68,9 @@ export class Subscription {
   db?: string
 }
 
+/**
+ * @category InputType
+ */
 @InputType({
   description: 'A input that describes Subscription forecast settings'
 })
@@ -66,6 +82,9 @@ export class SubscriptionForecastSettingsInput {
   notifications?: number
 }
 
+/**
+ * @category InputType
+ */
 @InputType({
   description: 'A input that describes Subscription AD sync settings'
 })
@@ -77,6 +96,9 @@ export class SubscriptionADSyncSettingsInput {
   adUserSyncProperties?: string[]
 }
 
+/**
+ * @category InputType
+ */
 @InputType({ description: 'A type that describes Subscription AD settings' })
 export class SubscriptionSettingsInput {
   @Field(() => SubscriptionForecastSettingsInput, { nullable: true })

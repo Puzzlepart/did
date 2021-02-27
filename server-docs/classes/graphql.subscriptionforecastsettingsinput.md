@@ -29,7 +29,7 @@
 
 • `Optional` **enabled**: *boolean*
 
-Defined in: [server/graphql/resolvers/subscription/types.ts:63](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L63)
+Defined in: [server/graphql/resolvers/subscription/types.ts:79](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L79)
 
 ___
 
@@ -37,4 +37,4 @@ ___
 
 • `Optional` **notifications**: *number*
 
-Defined in: [server/graphql/resolvers/subscription/types.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L66)
+Defined in: [server/graphql/resolvers/subscription/types.ts:82](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L82)

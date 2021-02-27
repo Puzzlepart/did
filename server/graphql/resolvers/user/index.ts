@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
@@ -9,6 +10,9 @@ import { Context } from '../../context'
 import { BaseResult } from '../types'
 import { User, UserInput, UserQuery } from './types'
 
+/**
+ * @category Resolver
+ */
 @Service()
 @Resolver(User)
 export class UserResolver {

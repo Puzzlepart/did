@@ -29,7 +29,7 @@
 
 • `Optional` **adsync**: [*SubscriptionADSyncSettings*](graphql.subscriptionadsyncsettings.md)
 
-Defined in: [server/graphql/resolvers/subscription/types.ts:33](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L33)
+Defined in: [server/graphql/resolvers/subscription/types.ts:43](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L43)
 
 ___
 
@@ -37,4 +37,4 @@ ___
 
 • `Optional` **forecast**: [*SubscriptionForecastSettings*](graphql.subscriptionforecastsettings.md)
 
-Defined in: [server/graphql/resolvers/subscription/types.ts:30](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L30)
+Defined in: [server/graphql/resolvers/subscription/types.ts:40](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L40)

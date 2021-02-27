@@ -1,8 +1,12 @@
+/* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
 import { Field, ID, ObjectType } from 'type-graphql'
 import DateUtils from '../../../../../shared/utils/date'
 import { EventObject } from './EventObject'
 
+/**
+ * @category ObjectType
+ */
 @ObjectType({
   description: 'A type that describes a TimesheetPeriod',
   simpleResolvers: true

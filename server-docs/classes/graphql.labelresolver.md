@@ -32,7 +32,7 @@ Name | Type | Description |
 
 **Returns:** [*LabelResolver*](graphql.labelresolver.md)
 
-Defined in: [server/graphql/resolvers/label/index.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L13)
+Defined in: [server/graphql/resolvers/label/index.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L16)
 
 ## Methods
 
@@ -51,7 +51,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/label/index.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L38)
+Defined in: [server/graphql/resolvers/label/index.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L41)
 
 ___
 
@@ -69,7 +69,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/label/index.ts:55](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L55)
+Defined in: [server/graphql/resolvers/label/index.ts:58](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L58)
 
 ___
 
@@ -81,4 +81,4 @@ Get labels
 
 **Returns:** *Promise*<[*LabelObject*](graphql.labelobject.md)[]\>
 
-Defined in: [server/graphql/resolvers/label/index.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L26)
+Defined in: [server/graphql/resolvers/label/index.ts:29](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L29)

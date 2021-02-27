@@ -30,7 +30,7 @@
 
 • `Optional` **preset**: *string*
 
-Defined in: [server/graphql/resolvers/reports/types.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L66)
+Defined in: [server/graphql/resolvers/reports/types.ts:73](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L73)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • `Optional` **projectId**: *string*
 
-Defined in: [server/graphql/resolvers/reports/types.ts:69](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L69)
+Defined in: [server/graphql/resolvers/reports/types.ts:76](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L76)
 
 ___
 
@@ -46,4 +46,4 @@ ___
 
 • `Optional` **userId**: *string*
 
-Defined in: [server/graphql/resolvers/reports/types.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L72)
+Defined in: [server/graphql/resolvers/reports/types.ts:79](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L79)

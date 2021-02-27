@@ -4,5 +4,7 @@
   "readme": "none",
   "excludeInternal": true,
   "hideGenerator": true,
-  "gitRevision": "dev"
+  "gitRevision": "dev",
+  "categorizeByGroup": true,
+  "categoryOrder": ["Resolver", "*"]
 }

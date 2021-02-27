@@ -28,4 +28,4 @@
 
 • `Optional` **sortBy**: *string*
 
-Defined in: [server/graphql/resolvers/user/types.ts:88](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L88)
+Defined in: [server/graphql/resolvers/user/types.ts:98](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L98)

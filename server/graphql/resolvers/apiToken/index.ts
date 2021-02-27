@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import 'reflect-metadata'
@@ -9,6 +10,9 @@ import { IAuthOptions } from '../../authChecker'
 import { BaseResult } from '../types'
 import { ApiToken, ApiTokenInput } from './types'
 
+/**
+ * @category Resolver
+ */
 @Service()
 @Resolver(ApiToken)
 export class ApiTokenResolver {

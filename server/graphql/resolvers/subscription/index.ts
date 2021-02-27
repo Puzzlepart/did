@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import 'reflect-metadata'
@@ -9,6 +10,9 @@ import { Context } from '../../context'
 import { BaseResult } from '../types'
 import { Subscription, SubscriptionSettingsInput } from './types'
 
+/**
+ * @category Resolver
+ */
 @Service()
 @Resolver(Subscription)
 export class SubscriptionResolver {

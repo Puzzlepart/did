@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import 'reflect-metadata'
@@ -8,6 +9,9 @@ import { IAuthOptions } from '../../authChecker'
 import { BaseResult } from '../types'
 import { Role, RoleInput } from './types'
 
+/**
+ * @category Resolver
+ */
 @Service()
 @Resolver(Role)
 export class RoleResolver {

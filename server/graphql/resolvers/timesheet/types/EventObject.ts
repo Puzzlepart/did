@@ -1,7 +1,11 @@
+/* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
 import { Field, Float, ID, ObjectType } from 'type-graphql'
 import { Customer, EventError, LabelObject, Project } from '../../types'
 
+/**
+ * @category ObjectType
+ */
 @ObjectType({
   description: 'An Object type that describes a Event',
   simpleResolvers: true

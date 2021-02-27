@@ -36,7 +36,7 @@
 
 • **data**: [*OutlookCategory*](graphql.outlookcategory.md)
 
-Defined in: [server/graphql/resolvers/outlookCategory/types.ts:29](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/types.ts#L29)
+Defined in: [server/graphql/resolvers/outlookCategory/types.ts:36](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/types.ts#L36)
 
 ___
 

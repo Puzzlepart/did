@@ -29,7 +29,7 @@
 
 • **endDate**: *string*
 
-Defined in: [server/graphql/resolvers/timesheet/types/TimesheetQuery.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetQuery.ts#L10)
+Defined in: [server/graphql/resolvers/timesheet/types/TimesheetQuery.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetQuery.ts#L14)
 
 ___
 
@@ -37,4 +37,4 @@ ___
 
 • **startDate**: *string*
 
-Defined in: [server/graphql/resolvers/timesheet/types/TimesheetQuery.ts:7](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetQuery.ts#L7)
+Defined in: [server/graphql/resolvers/timesheet/types/TimesheetQuery.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetQuery.ts#L11)

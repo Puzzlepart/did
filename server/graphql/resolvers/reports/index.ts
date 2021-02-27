@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Query, Resolver } from 'type-graphql'
@@ -7,6 +8,9 @@ import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
 import { ReportsQuery, TimeEntry } from './types'
 
+/**
+ * @category Resolver
+ */
 @Service()
 @Resolver(TimeEntry)
 export class ReportsResolver {

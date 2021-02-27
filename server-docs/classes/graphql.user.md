@@ -43,7 +43,7 @@
 
 • `Optional` **\_id**: *string*
 
-Defined in: [server/graphql/resolvers/user/types.ts:12](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L12)
+Defined in: [server/graphql/resolvers/user/types.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L16)
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 • `Optional` **configuration**: *any*
 
-Defined in: [server/graphql/resolvers/user/types.ts:45](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L45)
+Defined in: [server/graphql/resolvers/user/types.ts:49](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L49)
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 • `Optional` **displayName**: *string*
 
-Defined in: [server/graphql/resolvers/user/types.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L18)
+Defined in: [server/graphql/resolvers/user/types.ts:22](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L22)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 • `Optional` **givenName**: *string*
 
-Defined in: [server/graphql/resolvers/user/types.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L21)
+Defined in: [server/graphql/resolvers/user/types.ts:25](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L25)
 
 ___
 
@@ -75,7 +75,7 @@ ___
 
 • `Optional` **id**: *string*
 
-Defined in: [server/graphql/resolvers/user/types.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L15)
+Defined in: [server/graphql/resolvers/user/types.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L19)
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 • `Optional` **jobTitle**: *string*
 
-Defined in: [server/graphql/resolvers/user/types.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L27)
+Defined in: [server/graphql/resolvers/user/types.ts:31](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L31)
 
 ___
 
@@ -91,7 +91,7 @@ ___
 
 • `Optional` **mail**: *string*
 
-Defined in: [server/graphql/resolvers/user/types.ts:33](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L33)
+Defined in: [server/graphql/resolvers/user/types.ts:37](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L37)
 
 ___
 
@@ -99,7 +99,7 @@ ___
 
 • `Optional` **mobilePhone**: *string*
 
-Defined in: [server/graphql/resolvers/user/types.ts:30](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L30)
+Defined in: [server/graphql/resolvers/user/types.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L34)
 
 ___
 
@@ -107,7 +107,7 @@ ___
 
 • `Optional` **preferredLanguage**: *string*
 
-Defined in: [server/graphql/resolvers/user/types.ts:36](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L36)
+Defined in: [server/graphql/resolvers/user/types.ts:40](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L40)
 
 ___
 
@@ -115,7 +115,7 @@ ___
 
 • `Optional` **role**: *string* \| [*Role*](graphql.role.md)
 
-Defined in: [server/graphql/resolvers/user/types.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L39)
+Defined in: [server/graphql/resolvers/user/types.ts:43](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L43)
 
 ___
 
@@ -123,7 +123,7 @@ ___
 
 • `Optional` **subscription**: [*Subscription*](graphql.subscription.md)
 
-Defined in: [server/graphql/resolvers/user/types.ts:42](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L42)
+Defined in: [server/graphql/resolvers/user/types.ts:46](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L46)
 
 ___
 
@@ -131,7 +131,7 @@ ___
 
 • `Optional` **surname**: *string*
 
-Defined in: [server/graphql/resolvers/user/types.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L24)
+Defined in: [server/graphql/resolvers/user/types.ts:28](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L28)
 
 ## Methods
 
@@ -147,4 +147,4 @@ Name | Type |
 
 **Returns:** [*User*](graphql.user.md)
 
-Defined in: [server/graphql/resolvers/user/types.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L47)
+Defined in: [server/graphql/resolvers/user/types.ts:51](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L51)

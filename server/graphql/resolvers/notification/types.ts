@@ -1,7 +1,11 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, ObjectType, InputType, ID } from 'type-graphql'
 
+/**
+ * @category ObjectType
+ */
 @ObjectType({
   description: 'A type that describes a Notification',
   simpleResolvers: true
@@ -23,6 +27,9 @@ export class Notification {
   moreLink: string
 }
 
+/**
+ * @category InputType
+ */
 @InputType({
   description:
     'Input object for Notification template used in Query notifications'
@@ -35,6 +42,9 @@ export class NotificationTemplates {
   forecast: string
 }
 
+/**
+ * @ignore
+ */
 export interface INotificationTemplates {
   unconfirmedPeriods: string
   forecast: string
@@ -42,6 +52,8 @@ export interface INotificationTemplates {
 
 /**
  * Variables for query notifications
+ * 
+ * @ignore
  */
 export interface INotificationsQueryVariables {
   locale: string

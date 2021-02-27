@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable max-classes-per-file */
+/* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
@@ -7,6 +6,9 @@ import { MSGraphService } from '../../../services'
 import { IAuthOptions } from '../../authChecker'
 import { CreateOutlookCategoryResult, OutlookCategory } from './types'
 
+/**
+ * @category Resolver
+ */
 @Service()
 @Resolver(OutlookCategory)
 export class OutlookCategoryResolver {
