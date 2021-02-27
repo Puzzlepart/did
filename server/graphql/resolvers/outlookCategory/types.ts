@@ -21,7 +21,9 @@ export class OutlookCategory {
   color: string
 }
 
-@ObjectType({ description: 'A type that describes a CreateOutlookCategoryResult' })
+@ObjectType({
+  description: 'A type that describes a CreateOutlookCategoryResult'
+})
 export class CreateOutlookCategoryResult extends BaseResult {
   @Field({ nullable: true })
   data: OutlookCategory

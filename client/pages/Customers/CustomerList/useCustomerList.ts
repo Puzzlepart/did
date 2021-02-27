@@ -9,7 +9,10 @@ export const useCustomerList = () => {
   const [showInactive, setShowInactive] = useState(false)
 
   useEffect(
-    () => setItems([...state.customers].filter((p) => (showInactive ? true : !p.inactive))),
+    () =>
+      setItems(
+        [...state.customers].filter((p) => (showInactive ? true : !p.inactive))
+      ),
     [state.customers, showInactive]
   )
   return {
@@ -19,6 +22,7 @@ export const useCustomerList = () => {
     setItems,
     showInactive,
     setShowInactive,
-    setSelectedCustomer: (customer: Customer) => dispatch(SET_SELECTED_CUSTOMER({ customer }))
+    setSelectedCustomer: (customer: Customer) =>
+      dispatch(SET_SELECTED_CUSTOMER({ customer }))
   }
 }

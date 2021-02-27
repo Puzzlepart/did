@@ -71,7 +71,9 @@ export class DateUtils {
   public getDurationString(hours: number, t: TFunction): string {
     const hoursPrecise = parseFloat(parseFloat(hours.toString()).toPrecision(5))
     const minutes = parseInt(((hoursPrecise % 1) * 60).toFixed())
-    const hrsStr = t('common.hoursShortFormat', { hours: Math.floor(hoursPrecise) })
+    const hrsStr = t('common.hoursShortFormat', {
+      hours: Math.floor(hoursPrecise)
+    })
     const minsStr = t('common.minutesShortFormat', { minutes })
     if (minutes === 0) return hrsStr
     if (hoursPrecise === 0) return minsStr
@@ -98,7 +100,10 @@ export class DateUtils {
    * @param {DateObject} date Date
    * @param {boolean} isoWeek Use ISO week
    */
-  public startOfWeek(date?: DateObject, isoWeek: boolean = this.$.isoWeek): DateObject {
+  public startOfWeek(
+    date?: DateObject,
+    isoWeek: boolean = this.$.isoWeek
+  ): DateObject {
     return new DateObject(date.$.startOf(isoWeek ? 'isoWeek' : 'w'))
   }
 
@@ -108,7 +113,10 @@ export class DateUtils {
    * @param {DateObject} date Date
    * @param {boolean} isoWeek Use ISO week
    */
-  public endOfWeek(date?: DateObject, isoWeek: boolean = this.$.isoWeek): DateObject {
+  public endOfWeek(
+    date?: DateObject,
+    isoWeek: boolean = this.$.isoWeek
+  ): DateObject {
     return new DateObject(date.$.endOf(isoWeek ? 'isoWeek' : 'w'))
   }
 
@@ -119,7 +127,11 @@ export class DateUtils {
    * @param {DateInput} end End
    * @param {string} template Date template
    */
-  public getDays(start: DateInput, end: DateInput, template: string = 'dddd DD'): string[] {
+  public getDays(
+    start: DateInput,
+    end: DateInput,
+    template: string = 'dddd DD'
+  ): string[] {
     const days = []
     let s = new DateObject(start)
     const e = new DateObject(end)
@@ -136,7 +148,10 @@ export class DateUtils {
    * @param {number} monthIndex Month index
    * @param {string} template Template
    */
-  public getMonthName(monthIndex?: number, template: string = this.$.monthFormat): string {
+  public getMonthName(
+    monthIndex?: number,
+    template: string = this.$.monthFormat
+  ): string {
     return $dayjs().set('month', monthIndex).format(template)
   }
 
@@ -157,7 +172,10 @@ export class DateUtils {
     const sFormat = ['DD']
     if (!isSameMonth) sFormat.push(monthFormat)
     if (!isSameYear) sFormat.push('YYYY')
-    return [start.format(sFormat.join(' ')), end.format(`DD ${monthFormat} YYYY`)].join(' - ')
+    return [
+      start.format(sFormat.join(' ')),
+      end.format(`DD ${monthFormat} YYYY`)
+    ].join(' - ')
   }
 
   /**
@@ -254,7 +272,10 @@ export class DateUtils {
    * @param {ConfigType} startDateTime Start time
    * @param {ConfigType} endDateTime End time
    */
-  public getDurationHours(startDateTime: ConfigType, endDateTime: ConfigType): number {
+  public getDurationHours(
+    startDateTime: ConfigType,
+    endDateTime: ConfigType
+  ): number {
     return $dayjs(endDateTime).diff(startDateTime, 'minute') / 60
   }
 

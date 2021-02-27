@@ -8,7 +8,9 @@ import { ISettingsSectionProps } from './SettingsSection/types'
  *
  * @param {TFunction} t Translate function
  */
-export const SUBSCRIPTION_SETTINGS = (t: TFunction): ISettingsSectionProps[] => [
+export const SUBSCRIPTION_SETTINGS = (
+  t: TFunction
+): ISettingsSectionProps[] => [
   {
     id: 'adsync',
     name: t('admin.adsync'),

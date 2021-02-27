@@ -1,7 +1,9 @@
 import { searchObject } from 'utils'
 import { IListProps, IListState } from './types'
 
-type Action = { type: 'PROPS_UPDATED'; payload: IListProps } | { type: 'SEARCH'; payload: string }
+type Action =
+  | { type: 'PROPS_UPDATED'; payload: IListProps }
+  | { type: 'SEARCH'; payload: string }
 
 /**
  * Reducer for Timesheet
@@ -22,6 +24,8 @@ export default (state: IListState, action: Action): IListState => {
     default:
       throw new Error()
   }
-  newState.items = newState.origItems.filter((i) => searchObject(i, newState.searchTerm))
+  newState.items = newState.origItems.filter((i) =>
+    searchObject(i, newState.searchTerm)
+  )
   return newState
 }

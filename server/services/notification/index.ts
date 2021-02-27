@@ -40,7 +40,9 @@ export class NotificationService {
     for (let i = 0; i <= count; i++) {
       const startOfWeek = d.startOfWeek.format('YYYY-MM-DD')
       const endOfWeek = d.endOfWeek.format('YYYY-MM-DD')
-      periods.push(...this._timesheet.getPeriods(startOfWeek, endOfWeek, locale))
+      periods.push(
+        ...this._timesheet.getPeriods(startOfWeek, endOfWeek, locale)
+      )
       d = d.add(add)
     }
     return periods
@@ -68,7 +70,9 @@ export class NotificationService {
       return $
     }, [])
 
-    return nperiods.map((period) => new UnconfirmedPeriodNotification(period, template))
+    return nperiods.map(
+      (period) => new UnconfirmedPeriodNotification(period, template)
+    )
   }
 
   /**
@@ -78,10 +82,17 @@ export class NotificationService {
    * @param {string} locale Locale
    */
   private async _forecast(template: string, locale: string) {
-    if (!get(this.context, 'subscription.settings.forecast.enabled', { default: false })) return []
+    if (
+      !get(this.context, 'subscription.settings.forecast.enabled', {
+        default: false
+      })
+    )
+      return []
     const periods = this._getPeriods(
       '1w',
-      get(this.context, 'subscription.settings.forecast.notifications', { default: 2 }) - 1,
+      get(this.context, 'subscription.settings.forecast.notifications', {
+        default: 2
+      }) - 1,
       locale
     )
 
@@ -101,7 +112,10 @@ export class NotificationService {
     return nperiods.map((period) => new ForecastNotification(period, template))
   }
 
-  public async getNotifications(templates: NotificationTemplates, locale: string) {
+  public async getNotifications(
+    templates: NotificationTemplates,
+    locale: string
+  ) {
     const notifications = await Promise.all([
       this._unconfirmedPeriods(templates.unconfirmedPeriods, locale),
       this._forecast(templates.forecast, locale)

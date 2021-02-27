@@ -17,7 +17,9 @@ export const ProjectDetails: FunctionComponent = () => {
       <Header />
       <Pivot
         defaultSelectedKey={state.detailsTab}
-        onLinkClick={({ props }) => dispatch(CHANGE_DETAILS_TAB({ detailsTab: props.itemKey }))}>
+        onLinkClick={({ props }) =>
+          dispatch(CHANGE_DETAILS_TAB({ detailsTab: props.itemKey }))
+        }>
         <PivotItem
           headerText={t('projects.informationHeaderText')}
           itemKey='information'

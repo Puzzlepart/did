@@ -13,7 +13,9 @@ export function useHistoryUpdater(state: IProjectsState) {
 
   useLayoutEffect(() => {
     const paths = [state.view, state.selected?.tag || url.key, state.detailsTab]
-    const path = `/${['projects', ...paths].filter((p) => p).join('/')}`.toLowerCase()
+    const path = `/${['projects', ...paths]
+      .filter((p) => p)
+      .join('/')}`.toLowerCase()
     history.push(path)
   }, [state.view, state.selected, state.detailsTab, history, url.key])
 }

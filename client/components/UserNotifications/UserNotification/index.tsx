@@ -10,7 +10,10 @@ export const UserNotificationActions = ({ model }: IUserNotificationProps) => {
   return <Link href={model.moreLink}>{model.getMoreLinkText(t)}</Link>
 }
 
-export const UserNotification = ({ model, onDismiss }: IUserNotificationProps) => {
+export const UserNotification = ({
+  model,
+  onDismiss
+}: IUserNotificationProps) => {
   return (
     <MessageBar
       {...model.messageProps}

@@ -1,7 +1,14 @@
 import { useMutation } from '@apollo/client'
 import { EntityLabel } from 'components/EntityLabel'
 import { IconPicker } from 'components/IconPicker'
-import { DefaultButton, Label, Panel, PanelType, PrimaryButton, TextField } from 'office-ui-fabric'
+import {
+  DefaultButton,
+  Label,
+  Panel,
+  PanelType,
+  PrimaryButton,
+  TextField
+} from 'office-ui-fabric'
 import React, { useState } from 'react'
 import SketchPicker from 'react-color/lib/components/sketch/Sketch'
 import { useTranslation } from 'react-i18next'
@@ -81,7 +88,9 @@ export const LabelForm = (props: ILabelFormProps) => {
         <Label>{t('common.colorLabel')}</Label>
         <DefaultButton
           text={
-            colorPickerVisible ? t('common.closeColorPickerText') : t('common.openColorPickerText')
+            colorPickerVisible
+              ? t('common.closeColorPickerText')
+              : t('common.openColorPickerText')
           }
           iconProps={{ iconName: colorPickerVisible ? 'ChromeClose' : 'Color' }}
           onClick={() => setColorPickerVisible(!colorPickerVisible)}

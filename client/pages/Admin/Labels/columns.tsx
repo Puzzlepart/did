@@ -17,9 +17,12 @@ export const LabelColumns = (
   onDelete: (label: LabelObject) => void,
   t: TFunction
 ) => [
-  col('name', t('common.nameFieldLabel'), { maxWidth: 180 }, (label: LabelObject) => (
-    <EntityLabel label={label} />
-  )),
+  col(
+    'name',
+    t('common.nameFieldLabel'),
+    { maxWidth: 180 },
+    (label: LabelObject) => <EntityLabel label={label} />
+  ),
   col('description', t('common.descriptionFieldLabel')),
   col(null, null, { minWidth: 180 }, (label: LabelObject) => (
     <>
@@ -28,7 +31,10 @@ export const LabelColumns = (
         text={t('common.editLabel')}
         onClick={() => onEdit(label)}
       />
-      <DefaultButton text={t('common.delete')} onClick={() => onDelete(label)} />
+      <DefaultButton
+        text={t('common.delete')}
+        onClick={() => onDelete(label)}
+      />
     </>
   ))
 ]

@@ -7,4 +7,5 @@ import stringStripHtml from 'string-strip-html'
  *
  * @param {string} str String
  */
-export const stripHtmlString = (str: string): string => stringStripHtml(str).result
+export const stripHtmlString = (str: string): string =>
+  stringStripHtml(str).result

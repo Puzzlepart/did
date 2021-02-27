@@ -1,8 +1,20 @@
 import { useMutation } from '@apollo/client'
 import AppConfig from 'AppConfig'
-import { IconPicker, LabelPicker, SearchCustomer, useMessage, UserMessage } from 'components'
+import {
+  IconPicker,
+  LabelPicker,
+  SearchCustomer,
+  useMessage,
+  UserMessage
+} from 'components'
 import { ConditionalWrapper } from 'components/ConditionalWrapper'
-import { MessageBarType, Panel, PrimaryButton, TextField, Toggle } from 'office-ui-fabric'
+import {
+  MessageBarType,
+  Panel,
+  PrimaryButton,
+  TextField,
+  Toggle
+} from 'office-ui-fabric'
 import React, { FunctionComponent, useContext, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject as Label } from 'types'
@@ -14,12 +26,16 @@ import reducer, { initState } from './reducer'
 import { IProjectFormProps } from './types'
 import { validateForm } from './validateForm'
 
-export const ProjectForm: FunctionComponent<IProjectFormProps> = (props: IProjectFormProps) => {
+export const ProjectForm: FunctionComponent<IProjectFormProps> = (
+  props: IProjectFormProps
+) => {
   const { t } = useTranslation()
   const context = useContext(ProjectsContext)
   const [message, setMessage] = useMessage()
   const [state, dispatch] = useReducer(reducer, initState(props.edit))
-  const [createOrUpdateProject, { loading }] = useMutation($createOrUpdateProject)
+  const [createOrUpdateProject, { loading }] = useMutation(
+    $createOrUpdateProject
+  )
 
   /**
    * On form submit
@@ -51,7 +67,10 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (props: IProjec
         context.refetch()
       }
     } else {
-      setMessage({ text: data?.result.error?.message, type: MessageBarType.error })
+      setMessage({
+        text: data?.result.error?.message,
+        type: MessageBarType.error
+      })
     }
   }
 
@@ -117,7 +136,9 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (props: IProjec
             }
           />
           <span className={styles.inputDescription}>
-            {t('projects.createOutlookCategoryFieldDescription', { id: state.projectId })}
+            {t('projects.createOutlookCategoryFieldDescription', {
+              id: state.projectId
+            })}
           </span>
         </div>
         <TextField
@@ -174,14 +195,18 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (props: IProjec
               })
             }
           />
-          <span className={styles.inputDescription}>{t('projects.inactiveFieldDescription')}</span>
+          <span className={styles.inputDescription}>
+            {t('projects.inactiveFieldDescription')}
+          </span>
         </div>
         <LabelPicker
           className={styles.inputField}
           label={t('admin.labels')}
           placeholder={t('admin.filterLabels')}
           defaultSelectedKeys={
-            state.editMode ? (props.edit.labels as Label[]).map((lbl) => lbl.name) : []
+            state.editMode
+              ? (props.edit.labels as Label[]).map((lbl) => lbl.name)
+              : []
           }
           onChange={(labels) =>
             dispatch({

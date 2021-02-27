@@ -18,7 +18,8 @@ export function useSummary(timeentries: any[]) {
           filter(
             timeentries,
             (entry) =>
-              entry.month === new Date().getMonth() + 1 && entry.year === new Date().getFullYear()
+              entry.month === new Date().getMonth() + 1 &&
+              entry.year === new Date().getFullYear()
           ),
           'duration'
         ),
@@ -32,7 +33,8 @@ export function useSummary(timeentries: any[]) {
           filter(
             timeentries,
             (entry) =>
-              entry.month === new Date().getMonth() && entry.year === new Date().getFullYear()
+              entry.month === new Date().getMonth() &&
+              entry.year === new Date().getFullYear()
           ),
           'duration'
         ),
@@ -43,7 +45,10 @@ export function useSummary(timeentries: any[]) {
       label: t('common.hoursCurrentYear'),
       value: DateUtils.getDurationString(
         getSum(
-          filter(timeentries, (entry) => entry.year === new Date().getFullYear()),
+          filter(
+            timeentries,
+            (entry) => entry.year === new Date().getFullYear()
+          ),
           'duration'
         ),
         t

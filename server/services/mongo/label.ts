@@ -1,4 +1,9 @@
-import { DeleteWriteOpResultObject, FilterQuery, InsertOneWriteOpResult, WithId } from 'mongodb'
+import {
+  DeleteWriteOpResultObject,
+  FilterQuery,
+  InsertOneWriteOpResult,
+  WithId
+} from 'mongodb'
 import { pick } from 'underscore'
 import { Context } from '../../graphql/context'
 import { LabelObject as Label } from '../../graphql/resolvers/types'
@@ -37,7 +42,9 @@ export class LabelService extends MongoDocumentService<Label> {
    *
    * @param {Label} label Label
    */
-  public async addLabel(label: Label): Promise<InsertOneWriteOpResult<WithId<Label>>> {
+  public async addLabel(
+    label: Label
+  ): Promise<InsertOneWriteOpResult<WithId<Label>>> {
     try {
       const result = await this.collection.insertOne({
         _id: this._generateId(label),

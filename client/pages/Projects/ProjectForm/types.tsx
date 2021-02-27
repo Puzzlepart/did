@@ -1,6 +1,11 @@
 import { getIcons } from 'common/icons'
 import { IPanelProps } from 'office-ui-fabric'
-import { IFormValidation, LabelObject as Label, Project, ProjectOptions } from 'types'
+import {
+  IFormValidation,
+  LabelObject as Label,
+  Project,
+  ProjectOptions
+} from 'types'
 import { first } from 'underscore'
 
 export class ProjectModel {
@@ -24,7 +29,9 @@ export class ProjectModel {
     this.description = project?.description || ''
     this.inactive = project?.inactive || false
     this.icon = project?.icon || first(getIcons(1))
-    this.labels = ((project?.labels || []) as Label[]).map((label) => label.name)
+    this.labels = ((project?.labels || []) as Label[]).map(
+      (label) => label.name
+    )
   }
 }
 

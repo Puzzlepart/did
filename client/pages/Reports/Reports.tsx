@@ -6,7 +6,11 @@ import { isEmpty } from 'underscore'
 import getColumns from './columns'
 import commandBar from './commandBar'
 import { ReportsContext } from './context'
-import { CHANGE_QUERY, FILTERS_UPDATED, TOGGLE_FILTER_PANEL } from './reducer/actions'
+import {
+  CHANGE_QUERY,
+  FILTERS_UPDATED,
+  TOGGLE_FILTER_PANEL
+} from './reducer/actions'
 import styles from './Reports.module.scss'
 import { SaveFilterForm } from './SaveFilterForm'
 import { useReports } from './hooks/useReports'
@@ -25,9 +29,15 @@ export const Reports: FunctionComponent = () => {
       <ReportsContext.Provider value={context}>
         <Pivot
           defaultSelectedKey={params.query || 'default'}
-          onLinkClick={(item) => dispatch(CHANGE_QUERY({ key: item.props.itemKey }))}>
+          onLinkClick={(item) =>
+            dispatch(CHANGE_QUERY({ key: item.props.itemKey }))
+          }>
           {queries.map(({ key, text, iconName }) => (
-            <PivotItem key={key} itemKey={key} headerText={text} itemIcon={iconName}>
+            <PivotItem
+              key={key}
+              itemKey={key}
+              headerText={text}
+              itemIcon={iconName}>
               <div className={styles.container}>
                 {state.loading && (
                   <div className={styles.progress}>
@@ -45,7 +55,10 @@ export const Reports: FunctionComponent = () => {
                   groups={{
                     ...state.groupBy,
                     totalFunc: (items) => {
-                      const hrs = items.reduce((sum, item) => sum + item.duration, 0) as number
+                      const hrs = items.reduce(
+                        (sum, item) => sum + item.duration,
+                        0
+                      ) as number
                       return t('common.headerTotalDuration', {
                         duration: DateUtils.getDurationString(hrs, t)
                       })
@@ -55,7 +68,9 @@ export const Reports: FunctionComponent = () => {
                   commandBar={commandBar(context)}
                 />
                 <UserMessage
-                  hidden={!isEmpty(state.timeentries) || state.loading || !state.query}
+                  hidden={
+                    !isEmpty(state.timeentries) || state.loading || !state.query
+                  }
                   text={t('reports.noEntriesText')}
                 />
                 <FilterPanel
@@ -64,7 +79,9 @@ export const Reports: FunctionComponent = () => {
                   filters={filters}
                   items={state.timeentries}
                   onDismiss={() => dispatch(TOGGLE_FILTER_PANEL())}
-                  onFiltersUpdated={(filters) => dispatch(FILTERS_UPDATED({ filters }))}
+                  onFiltersUpdated={(filters) =>
+                    dispatch(FILTERS_UPDATED({ filters }))
+                  }
                   shortListCount={10}>
                   <SaveFilterForm />
                 </FilterPanel>

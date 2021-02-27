@@ -44,7 +44,8 @@ export const commandBar = (context: ISummaryViewContext) => {
             ...type,
             canCheck: true,
             checked: context.type.key === type.key,
-            onClick: () => context.dispatch({ type: 'CHANGE_TYPE', payload: type })
+            onClick: () =>
+              context.dispatch({ type: 'CHANGE_TYPE', payload: type })
           }))
         },
         className: styles.viewTypeSelector
@@ -109,7 +110,10 @@ export const commandBar = (context: ISummaryViewContext) => {
         onClick: () => {
           excelUtils.exportExcel(context.rows, {
             columns: context.columns,
-            fileName: `Summary-${new Date().toDateString().split(' ').join('-')}.xlsx`
+            fileName: `Summary-${new Date()
+              .toDateString()
+              .split(' ')
+              .join('-')}.xlsx`
           })
         }
       }

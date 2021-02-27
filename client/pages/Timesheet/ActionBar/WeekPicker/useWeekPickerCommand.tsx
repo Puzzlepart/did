@@ -15,7 +15,9 @@ export function useWeekPickerCommand() {
         <>
           <WeekPicker />
           {context.periods.length === 1 && !context.loading && (
-            <FadeIn className={styles.weekNumber}>{context.selectedPeriod.getName(t)}</FadeIn>
+            <FadeIn className={styles.weekNumber}>
+              {context.selectedPeriod.getName(t)}
+            </FadeIn>
           )}
         </>
       )

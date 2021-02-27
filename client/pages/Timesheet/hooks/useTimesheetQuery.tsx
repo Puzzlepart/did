@@ -12,7 +12,10 @@ import $timesheet from './timesheet.gql'
  * @param {ITimesheetState} state State
  * @param {Dispatch<AnyAction>} dispatch Dispatch
  */
-export function useTimesheetQuery(state: ITimesheetState, dispatch: Dispatch<AnyAction>) {
+export function useTimesheetQuery(
+  state: ITimesheetState,
+  dispatch: Dispatch<AnyAction>
+) {
   const { user } = useContext(AppContext)
   const query = useQuery($timesheet, {
     skip: !state.scope.query(),

@@ -8,7 +8,9 @@ export const ProjectTooltip: FunctionComponent<IProjectTooltipProps> = (
 ): JSX.Element => {
   return (
     <TooltipHost
-      tooltipProps={{ onRenderContent: () => <ProjectTooltipContent {...props} /> }}
+      tooltipProps={{
+        onRenderContent: () => <ProjectTooltipContent {...props} />
+      }}
       delay={TooltipDelay.long}
       closeDelay={TooltipDelay.long}
       calloutProps={{ gapSpace: 0 }}>

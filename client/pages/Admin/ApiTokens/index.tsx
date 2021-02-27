@@ -31,7 +31,10 @@ export const ApiTokens = () => {
    */
   async function onDeleteApiToken(token: ApiToken) {
     await deleteApiToken({ variables: { name: token.name } })
-    setMessage({ type: MessageBarType.info, text: t('admin.tokenDeletedText', token) })
+    setMessage({
+      type: MessageBarType.info,
+      text: t('admin.tokenDeletedText', token)
+    })
     refetch()
   }
 
@@ -45,7 +48,11 @@ export const ApiTokens = () => {
     if (generatedKey) {
       setMessage({ text: t('admin.tokenGeneratedText') }, 20000)
       setApiKey(generatedKey)
-    } else setMessage({ type: MessageBarType.error, text: t('admin.tokenErrorText') })
+    } else
+      setMessage({
+        type: MessageBarType.error,
+        text: t('admin.tokenErrorText')
+      })
     refetch()
   }
 
@@ -79,7 +86,11 @@ export const ApiTokens = () => {
         }}
       />
       {form.isOpen && (
-        <ApiTokenForm {...form} onAdded={onKeyAdded} onDismiss={() => setForm({ isOpen: false })} />
+        <ApiTokenForm
+          {...form}
+          onAdded={onKeyAdded}
+          onDismiss={() => setForm({ isOpen: false })}
+        />
       )}
     </div>
   )

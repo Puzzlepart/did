@@ -48,7 +48,11 @@ export class TimesheetService {
    */
   public async getTimesheet(params: IGetTimesheetParams): Promise<any[]> {
     try {
-      const periods = this.getPeriods(params.startDate, params.endDate, params.locale)
+      const periods = this.getPeriods(
+        params.startDate,
+        params.endDate,
+        params.locale
+      )
       const data = await this._mongo.project.getProjectsData()
       for (let i = 0; i < periods.length; i++) {
         const { _id } = this._getPeriodData(periods[i].id)
@@ -59,7 +63,9 @@ export class TimesheetService {
         periods[i].isForecasted = !!forecasted
         periods[i].forecastedHours = forecasted?.hours || 0
         if (confirmed) {
-          const entries = await this._time_entries.find({ _periodId: _id }).toArray()
+          const entries = await this._time_entries
+            .find({ _periodId: _id })
+            .toArray()
           periods[i] = {
             ...periods[i],
             isConfirmed: true,
@@ -71,13 +77,21 @@ export class TimesheetService {
           }
         } else {
           const engine = new MatchingEngine(data)
-          const events = await this._msgraph.getEvents(periods[i].startDate, periods[i].endDate, {
-            tzOffset: params.tzOffset,
-            returnIsoDates: false
-          })
+          const events = await this._msgraph.getEvents(
+            periods[i].startDate,
+            periods[i].endDate,
+            {
+              tzOffset: params.tzOffset,
+              returnIsoDates: false
+            }
+          )
           periods[i].events = engine.matchEvents(events).map((e) => ({
             ...e,
-            date: DateUtils.formatDate(e.startDateTime, params.dateFormat, params.locale)
+            date: DateUtils.formatDate(
+              e.startDateTime,
+              params.dateFormat,
+              params.locale
+            )
           }))
         }
       }
@@ -94,10 +108,14 @@ export class TimesheetService {
    */
   public async submitPeriod(params: ISubmitPeriodParams): Promise<void> {
     try {
-      const events = await this._msgraph.getEvents(params.period.startDate, params.period.endDate, {
-        tzOffset: params.tzOffset,
-        returnIsoDates: false
-      })
+      const events = await this._msgraph.getEvents(
+        params.period.startDate,
+        params.period.endDate,
+        {
+          tzOffset: params.tzOffset,
+          returnIsoDates: false
+        }
+      )
       const period = {
         ...this._getPeriodData(params.period.id),
         startDate: new Date(params.period.startDate),
@@ -119,10 +137,16 @@ export class TimesheetService {
         })
         return hours + event.duration
       }, 0)
-      const entry_colletion = params.forecast ? this._forecasted_time_entries : this._time_entries
-      const period_collection = params.forecast ? this._forecasted_periods : this._confirmed_periods
+      const entry_colletion = params.forecast
+        ? this._forecasted_time_entries
+        : this._time_entries
+      const period_collection = params.forecast
+        ? this._forecasted_periods
+        : this._confirmed_periods
       await Promise.all([
-        !isEmpty(entries) ? entry_colletion.insertMany(entries) : Promise.resolve(null),
+        !isEmpty(entries)
+          ? entry_colletion.insertMany(entries)
+          : Promise.resolve(null),
         period_collection.insertOne(period)
       ])
     } catch (error) {
@@ -135,10 +159,17 @@ export class TimesheetService {
    *
    * @param {IUnsubmitPeriodParams} params Unsubmit period params
    */
-  public async unsubmitPeriod({ period, forecast }: IUnsubmitPeriodParams): Promise<void> {
+  public async unsubmitPeriod({
+    period,
+    forecast
+  }: IUnsubmitPeriodParams): Promise<void> {
     try {
-      const entry_colletion = forecast ? this._forecasted_time_entries : this._time_entries
-      const period_collection = forecast ? this._forecasted_periods : this._confirmed_periods
+      const entry_colletion = forecast
+        ? this._forecasted_time_entries
+        : this._time_entries
+      const period_collection = forecast
+        ? this._forecasted_periods
+        : this._confirmed_periods
       const { _id } = this._getPeriodData(period.id)
       await Promise.all([
         entry_colletion.deleteMany({
@@ -187,12 +218,18 @@ export class TimesheetService {
    * @param {string} endDate End date
    * @param {string} locale Locale
    */
-  public getPeriods(startDate: string, endDate: string, locale: string): TimesheetPeriodObject[] {
+  public getPeriods(
+    startDate: string,
+    endDate: string,
+    locale: string
+  ): TimesheetPeriodObject[] {
     const isSplit = !DateUtils.isSameMonth(startDate, endDate)
     const periods: TimesheetPeriodObject[] = [
       new TimesheetPeriodObject(
         startDate,
-        isSplit ? new DateObject(startDate).endOfMonth.format('YYYY-MM-DD') : endDate,
+        isSplit
+          ? new DateObject(startDate).endOfMonth.format('YYYY-MM-DD')
+          : endDate,
         locale
       )
     ]
@@ -214,7 +251,12 @@ export class TimesheetService {
    *
    * @param {IConnectEventsParams} params Connect events params
    */
-  private _connectEvents({ events, projects, dateFormat, locale }: IConnectEventsParams) {
+  private _connectEvents({
+    events,
+    projects,
+    dateFormat,
+    locale
+  }: IConnectEventsParams) {
     return events.map((event) => ({
       id: event._id,
       ...event,

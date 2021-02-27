@@ -12,7 +12,9 @@ export const SelectCallout = (props: ISelectCalloutProps) => {
   function onSearch(value: string) {
     let _labels = [...props.labels]
     if (value.length > 0) {
-      _labels = _labels.filter((lbl) => lbl.name.toLowerCase().indexOf(value.toLowerCase()) !== -1)
+      _labels = _labels.filter(
+        (lbl) => lbl.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
+      )
     }
     setLabels(_labels)
   }
@@ -35,13 +37,18 @@ export const SelectCallout = (props: ISelectCalloutProps) => {
           <li key={lbl.name}>
             <div className={styles.itemContainer}>
               <Checkbox
-                defaultChecked={props.defaultSelectedKeys.indexOf(lbl.name) !== -1}
+                defaultChecked={
+                  props.defaultSelectedKeys.indexOf(lbl.name) !== -1
+                }
                 className={styles.itemCheckbox}
                 onChange={() => props.onToggleLabel(lbl)}
               />
               <div>
                 <div>
-                  <Icon iconName='CircleFill' style={{ color: lbl.color, fontSize: 10 }} />
+                  <Icon
+                    iconName='CircleFill'
+                    style={{ color: lbl.color, fontSize: 10 }}
+                  />
                   <span style={{ paddingLeft: 5 }}>{lbl.name}</span>
                 </div>
                 <div>{lbl.description}</div>

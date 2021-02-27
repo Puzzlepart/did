@@ -6,7 +6,11 @@ import { TimesheetContext } from '..'
 import { EventObject } from '../../../../server/graphql/resolvers/types'
 import { IChartConfig } from './types'
 
-function getDataForChart(events: EventObject[] = [], chart: IChartConfig, width: number) {
+function getDataForChart(
+  events: EventObject[] = [],
+  chart: IChartConfig,
+  width: number
+) {
   if (!width) return []
   const items = events.reduce((_items, entry) => {
     const data = getValue(entry, chart.key, null)
@@ -38,7 +42,11 @@ export function useChartData<T = any>(
   return useMemo(
     () =>
       charts.reduce((_data, chart) => {
-        const d = getDataForChart(selectedPeriod?.getEvents(), chart, container?.clientWidth)
+        const d = getDataForChart(
+          selectedPeriod?.getEvents(),
+          chart,
+          container?.clientWidth
+        )
         return {
           ..._data,
           [chart.key]: [`${chart.key}_${d.length}`, d]

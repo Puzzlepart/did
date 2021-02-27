@@ -1,5 +1,9 @@
 import { IContextualMenuItem } from 'office-ui-fabric'
-import { ISummaryViewRange, ISummaryViewScope, ISummaryViewState } from './types'
+import {
+  ISummaryViewRange,
+  ISummaryViewScope,
+  ISummaryViewState
+} from './types'
 
 export type SummaryViewAction =
   | { type: 'DATA_UPDATED'; payload: { timeentries: any[] } }
@@ -7,7 +11,10 @@ export type SummaryViewAction =
   | { type: 'CHANGE_SCOPE'; payload: ISummaryViewScope }
   | { type: 'SET_RANGE'; payload: ISummaryViewRange }
 
-export const reducer = (state: ISummaryViewState, action: SummaryViewAction): ISummaryViewState => {
+export const reducer = (
+  state: ISummaryViewState,
+  action: SummaryViewAction
+): ISummaryViewState => {
   const newState: ISummaryViewState = { ...state }
   switch (action.type) {
     case 'DATA_UPDATED':

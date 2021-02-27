@@ -1,18 +1,24 @@
 import { EntityLabel } from 'components/EntityLabel'
 import { Icon, Label } from 'office-ui-fabric'
-import React, { FunctionComponent, useRef } from 'react'
+import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './LabelPicker.module.scss'
 import { SelectCallout } from './SelectCallout'
 import { ILabelPickerProps } from './types'
 import { useLabelPicker } from './useLabelPicker'
 
-export const LabelPicker: FunctionComponent<ILabelPickerProps> = (props: ILabelPickerProps) => {
+export const LabelPicker: FunctionComponent<ILabelPickerProps> = (
+  props: ILabelPickerProps
+) => {
   const { t } = useTranslation()
-  const { labels, selectedLabels, showCallout, setShowCallout, onToggleLabel } = useLabelPicker(
-    props
-  )
-  const toggleRef = useRef()
+  const {
+    labels,
+    selectedLabels,
+    showCallout,
+    setShowCallout,
+    onToggleLabel,
+    ref
+  } = useLabelPicker(props)
 
   return (
     <div className={`${styles.root} ${props.className}`}>
@@ -21,7 +27,7 @@ export const LabelPicker: FunctionComponent<ILabelPickerProps> = (props: ILabelP
         <span
           className={styles.toggleIcon}
           onClick={() => setShowCallout(!showCallout)}
-          ref={toggleRef}>
+          ref={ref}>
           <Icon iconName='Settings' />
         </span>
       </Label>
@@ -34,7 +40,7 @@ export const LabelPicker: FunctionComponent<ILabelPickerProps> = (props: ILabelP
         {t('common.noneSelectedMessage')}
       </span>
       <SelectCallout
-        target={toggleRef}
+        target={ref.current}
         hidden={!showCallout}
         labels={labels}
         placeholder={props.placeholder}

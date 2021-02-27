@@ -31,7 +31,10 @@ export const initState = (edit: Customer): ICustomerFormState => ({
  * @param {IProjectFormState} state State
  * @param {CustomerFormAction} action Action
  */
-export default (state: ICustomerFormState, action: CustomerFormAction): ICustomerFormState => {
+export default (
+  state: ICustomerFormState,
+  action: CustomerFormAction
+): ICustomerFormState => {
   const newState: ICustomerFormState = { ...state }
   switch (action.type) {
     case 'UPDATE_MODEL':

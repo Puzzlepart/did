@@ -1,12 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useQuery } from '@apollo/client'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { LabelObject } from 'types'
 import { omit } from 'underscore'
 import $labels from './labels.gql'
 import { ILabelPickerProps } from './types'
 
-export function useLabelPicker({ onChange, defaultSelectedKeys }: ILabelPickerProps) {
+export function useLabelPicker({
+  onChange,
+  defaultSelectedKeys
+}: ILabelPickerProps) {
   const { data } = useQuery($labels, { fetchPolicy: 'cache-first' })
   const [labels, setLabels] = useState<LabelObject[]>([])
   const [selectedLabels, setSelectedLabels] = useState<LabelObject[]>([])
@@ -27,7 +30,9 @@ export function useLabelPicker({ onChange, defaultSelectedKeys }: ILabelPickerPr
 
   useEffect(() => {
     if (data?.labels) {
-      const _labels: LabelObject[] = data.labels.map((lbl: any) => omit(lbl, '__typename'))
+      const _labels: LabelObject[] = data.labels.map((lbl: any) =>
+        omit(lbl, '__typename')
+      )
       setLabels(_labels)
       if (defaultSelectedKeys) {
         const _selectedLabels = _labels.filter(
@@ -38,11 +43,14 @@ export function useLabelPicker({ onChange, defaultSelectedKeys }: ILabelPickerPr
     }
   }, [data])
 
+  const ref = useRef(null)
+
   return {
     onToggleLabel,
     showCallout,
     setShowCallout,
     labels,
-    selectedLabels
+    selectedLabels,
+    ref
   }
 }

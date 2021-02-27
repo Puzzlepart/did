@@ -10,7 +10,9 @@ import { CHANGE_VIEW, DATA_UPDATED, SET_SELECTED_CUSTOMER } from './actions'
  * @param {ICustomersParams} params Params
  */
 export const initState = (params: ICustomersParams): ICustomersState => ({
-  view: (contains(['search', 'new'], params.view) ? params.view : 'search') as CustomersView,
+  view: (contains(['search', 'new'], params.view)
+    ? params.view
+    : 'search') as CustomersView,
   customers: []
 })
 
@@ -24,7 +26,10 @@ interface ICreateReducerParams {
  */
 export default ({ params }: ICreateReducerParams) =>
   createReducer(initState(params), {
-    [DATA_UPDATED.type]: (state, { payload }: ReturnType<typeof DATA_UPDATED>) => {
+    [DATA_UPDATED.type]: (
+      state,
+      { payload }: ReturnType<typeof DATA_UPDATED>
+    ) => {
       state.customers = payload.query.data?.customers || []
       state.selected = find(
         state.customers,
@@ -39,7 +44,10 @@ export default ({ params }: ICreateReducerParams) =>
       state.selected = payload.customer
     },
 
-    [CHANGE_VIEW.type]: (state, { payload }: ReturnType<typeof CHANGE_VIEW>) => {
+    [CHANGE_VIEW.type]: (
+      state,
+      { payload }: ReturnType<typeof CHANGE_VIEW>
+    ) => {
       state.view = payload.view
       state.selected = null
     }

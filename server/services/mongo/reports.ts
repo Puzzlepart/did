@@ -29,7 +29,10 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
    * @param {ReportsQuery} query Query
    * @param {boolean} sortAsc Sort ascending
    */
-  public async getReport(query: ReportsQuery, sortAsc: boolean): Promise<Report> {
+  public async getReport(
+    query: ReportsQuery,
+    sortAsc: boolean
+  ): Promise<Report> {
     try {
       const d = new DateObject()
       let q: FilterQuery<TimeEntry> = {}
@@ -75,7 +78,10 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
           const project = find(projects, ({ _id }) => {
             return _id === entry.projectId
           })
-          const customer = find(customers, (c) => c.key === first(entry.projectId.split(' ')))
+          const customer = find(
+            customers,
+            (c) => c.key === first(entry.projectId.split(' '))
+          )
           if (project && customer && resource) {
             $.push({
               ...entry,

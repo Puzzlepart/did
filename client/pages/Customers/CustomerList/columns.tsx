@@ -19,10 +19,18 @@ export const columns = (t: TFunction): IColumn[] => [
         />
       )
     }
-    return <Icon iconName={customer.icon || 'Page'} styles={{ root: { fontSize: 16 } }} />
+    return (
+      <Icon
+        iconName={customer.icon || 'Page'}
+        styles={{ root: { fontSize: 16 } }}
+      />
+    )
   }),
   col('key', t('common.keyFieldLabel'), { maxWidth: 120 }),
-  col('name', t('common.nameFieldLabel'), { maxWidth: 300 }, (customer: Customer) => (
-    <CustomerLink customer={customer} />
-  ))
+  col(
+    'name',
+    t('common.nameFieldLabel'),
+    { maxWidth: 300 },
+    (customer: Customer) => <CustomerLink customer={customer} />
+  )
 ]

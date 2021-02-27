@@ -17,7 +17,8 @@ export const onRenderListHeader = ({
   props,
   dispatch
 }: RenderListHeaderParams) => {
-  if (!!props.onRenderDetailsHeader) return onRenderListHeader({ headerProps, defaultRender })
+  if (!!props.onRenderDetailsHeader)
+    return onRenderListHeader({ headerProps, defaultRender })
   return (
     <ListHeader
       headerProps={headerProps}

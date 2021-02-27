@@ -47,9 +47,16 @@ export default class MSGraphEvent {
       $dayjs(event.end.dateTime).format('YYYY-MM-DD HH:mm:ss'),
       event.end.timeZone
     )
-    this.startDateTime = returnIsoDates ? startDateTime.toISOString() : startDateTime.toDate()
-    this.endDateTime = returnIsoDates ? endDateTime.toISOString() : endDateTime.toDate()
-    this.duration = DateUtils.getDurationHours(event.start.dateTime, event.end.dateTime)
+    this.startDateTime = returnIsoDates
+      ? startDateTime.toISOString()
+      : startDateTime.toDate()
+    this.endDateTime = returnIsoDates
+      ? endDateTime.toISOString()
+      : endDateTime.toDate()
+    this.duration = DateUtils.getDurationHours(
+      event.start.dateTime,
+      event.end.dateTime
+    )
   }
 }
 

@@ -74,24 +74,32 @@ export const timeColumn = (
   name: string,
   fieldName: string = 'time'
 ): IColumn =>
-  col(fieldName, name, { ...getSizing(props, fieldName, 90, 90) }, (event: TimeEntry) => {
-    const startTime = DateUtils.formatDate(event.startDateTime, props.dateFormat)
-    const endTime = DateUtils.formatDate(event.endDateTime, props.dateFormat)
-    return (
-      <>
-        <span>
-          {startTime} - {endTime}
-        </span>
-        <MobileView renderWithFragment={true}>
-          <DurationDisplay
-            displayFormat='({0})'
-            duration={event.duration}
-            style={{ marginLeft: 4 }}
-          />
-        </MobileView>
-      </>
-    )
-  })
+  col(
+    fieldName,
+    name,
+    { ...getSizing(props, fieldName, 90, 90) },
+    (event: TimeEntry) => {
+      const startTime = DateUtils.formatDate(
+        event.startDateTime,
+        props.dateFormat
+      )
+      const endTime = DateUtils.formatDate(event.endDateTime, props.dateFormat)
+      return (
+        <>
+          <span>
+            {startTime} - {endTime}
+          </span>
+          <MobileView renderWithFragment={true}>
+            <DurationDisplay
+              displayFormat='({0})'
+              duration={event.duration}
+              style={{ marginLeft: 4 }}
+            />
+          </MobileView>
+        </>
+      )
+    }
+  )
 
 /**
  * Duration column
@@ -105,8 +113,13 @@ export const durationColumn = (
   name: string,
   fieldName: string = 'duration'
 ): IColumn =>
-  col(fieldName, name, { ...getSizing(props, fieldName, 75, 75) }, (event: TimeEntry) => (
-    <BrowserView renderWithFragment={true}>
-      <DurationDisplay duration={event.duration} />
-    </BrowserView>
-  ))
+  col(
+    fieldName,
+    name,
+    { ...getSizing(props, fieldName, 75, 75) },
+    (event: TimeEntry) => (
+      <BrowserView renderWithFragment={true}>
+        <DurationDisplay duration={event.duration} />
+      </BrowserView>
+    )
+  )

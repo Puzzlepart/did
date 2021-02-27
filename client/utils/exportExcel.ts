@@ -34,7 +34,10 @@ function stringToArrayBuffer(str: string): ArrayBuffer {
  *
  * @return Returns the generated blob
  */
-export async function exportExcel(items: any[], options: IExcelExportOptions): Promise<Blob> {
+export async function exportExcel(
+  items: any[],
+  options: IExcelExportOptions
+): Promise<Blob> {
   await loadScripts([
     'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.5/xlsx.full.min.js'
@@ -61,7 +64,9 @@ export async function exportExcel(items: any[], options: IExcelExportOptions): P
         ...items.map((item) =>
           options.columns.map((col) => {
             const fieldValue = getValue<string>(item, col.fieldName)
-            switch (getValue<ExcelColumnType>(col, 'data.excelColFormat', null)) {
+            switch (
+              getValue<ExcelColumnType>(col, 'data.excelColFormat', null)
+            ) {
               case 'date':
                 return {
                   v: new DateObject(fieldValue).format('YYYY-MM-DD HH:mm'),
@@ -81,7 +86,9 @@ export async function exportExcel(items: any[], options: IExcelExportOptions): P
     xlsx.utils.book_append_sheet(workBook, sheet, s.name)
   })
   const wbout = xlsx.write(workBook, { type: 'binary', bookType: 'xlsx' })
-  const blob = new Blob([stringToArrayBuffer(wbout)], { type: 'application/octet-stream' })
+  const blob = new Blob([stringToArrayBuffer(wbout)], {
+    type: 'application/octet-stream'
+  })
   ;(window as any).saveAs(blob, options.fileName)
   return blob
 }

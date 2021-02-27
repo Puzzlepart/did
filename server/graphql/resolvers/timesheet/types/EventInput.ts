@@ -1,7 +1,9 @@
 import 'reflect-metadata'
 import { Field, InputType } from 'type-graphql'
 
-@InputType({ description: 'Input object for Event used in Mutation submitPeriod' })
+@InputType({
+  description: 'Input object for Event used in Mutation submitPeriod'
+})
 export class EventInput {
   @Field()
   id: string

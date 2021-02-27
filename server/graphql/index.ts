@@ -1,5 +1,8 @@
 import { ApolloServer } from 'apollo-server-express'
-import { ApolloServerPlugin, GraphQLRequestContext } from 'apollo-server-plugin-base'
+import {
+  ApolloServerPlugin,
+  GraphQLRequestContext
+} from 'apollo-server-plugin-base'
 import createDebug from 'debug'
 import express from 'express'
 import get from 'get-value'
@@ -54,7 +57,10 @@ const getSchema = async () => {
   return schema
 }
 
-export default async (app: express.Application, client: MongoClient): Promise<void> => {
+export default async (
+  app: express.Application,
+  client: MongoClient
+): Promise<void> => {
   try {
     const schema = await getSchema()
     const server = new ApolloServer({
@@ -72,10 +78,13 @@ export default async (app: express.Application, client: MongoClient): Promise<vo
         {
           requestDidStart: () => ({
             willSendResponse(requestContext: GraphQLRequestContext<Context>) {
-              debug(`Resetting container for request ${requestContext.context.requestId}`)
+              debug(
+                `Resetting container for request ${requestContext.context.requestId}`
+              )
               // Remember to dispose the scoped container to prevent memory leaks
               Container.reset(requestContext.context.requestId)
-              const instancesIds = ((Container as any).instances as ContainerInstance[]).map(
+              const instancesIds = ((Container as any)
+                .instances as ContainerInstance[]).map(
                 (instance) => instance.id
               )
               debug('Container instances left in memory: ', instancesIds)

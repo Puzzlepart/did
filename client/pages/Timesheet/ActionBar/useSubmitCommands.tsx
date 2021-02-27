@@ -1,5 +1,9 @@
 import { AppContext } from 'AppContext'
-import { IContextualMenuItem, IContextualMenuProps, PrimaryButton } from 'office-ui-fabric'
+import {
+  IContextualMenuItem,
+  IContextualMenuProps,
+  PrimaryButton
+} from 'office-ui-fabric'
 import React, { useContext } from 'react'
 import { first, omit } from 'underscore'
 import { TimesheetContext } from '../context'
@@ -11,7 +15,10 @@ import styles from './ActionBar.module.scss'
  * @param {string} key Key
  * @param {string} iconName Icon name
  */
-const submitItemBaseProps = (key: string, iconName: string): Partial<IContextualMenuItem> => ({
+const submitItemBaseProps = (
+  key: string,
+  iconName: string
+): Partial<IContextualMenuItem> => ({
   key,
   styles: { root: { height: 44, marginLeft: 4 } },
   iconProps: { iconName },
@@ -28,29 +35,47 @@ export function useSubmitCommands() {
     key: 'SUBMIT_COMMANDS',
     onRender: () => {
       if (!!context.error || !context.selectedPeriod) return null
-      const { isComplete, isForecast, isForecasted, isConfirmed, isPast } = context.selectedPeriod
+      const {
+        isComplete,
+        isForecast,
+        isForecasted,
+        isConfirmed,
+        isPast
+      } = context.selectedPeriod
       const cmd: { [key: string]: IContextualMenuItem } = {
         FORECAST_PERIOD: subscription.settings?.forecast?.enabled && {
-          ...(submitItemBaseProps('FORECAST_PERIOD', 'BufferTimeBefore') as IContextualMenuItem),
+          ...(submitItemBaseProps(
+            'FORECAST_PERIOD',
+            'BufferTimeBefore'
+          ) as IContextualMenuItem),
           onClick: () => context.onSubmitPeriod(true),
           text: context.t('timesheet.forecastHoursText'),
           secondaryText: context.t('timesheet.forecastHoursSecondaryText')
         },
         UNFORECAST_PERIOD: subscription.settings?.forecast?.enabled && {
-          ...(submitItemBaseProps('UNFORECAST_PERIOD', 'Cancel') as IContextualMenuItem),
+          ...(submitItemBaseProps(
+            'UNFORECAST_PERIOD',
+            'Cancel'
+          ) as IContextualMenuItem),
           onClick: () => context.onUnsubmitPeriod(true),
           text: context.t('timesheet.unforecastHoursText'),
           secondaryText: context.t('timesheet.unforecastHoursSecondaryText')
         },
         CONFIRM_PERIOD: {
-          ...(submitItemBaseProps('CONFIRM_PERIOD', 'CheckMark') as IContextualMenuItem),
+          ...(submitItemBaseProps(
+            'CONFIRM_PERIOD',
+            'CheckMark'
+          ) as IContextualMenuItem),
           className: styles.confirmPeriodButton,
           onClick: () => context.onSubmitPeriod(false),
           text: context.t('timesheet.confirmHoursText'),
           secondaryText: context.t('timesheet.confirmHoursSecondaryText')
         },
         UNCONFIRM_PERIOD: {
-          ...(submitItemBaseProps('UNCONFIRM_PERIOD', 'Cancel') as IContextualMenuItem),
+          ...(submitItemBaseProps(
+            'UNCONFIRM_PERIOD',
+            'Cancel'
+          ) as IContextualMenuItem),
           className: styles.unconfirmPeriodButton,
           onClick: () => context.onUnsubmitPeriod(false),
           text: context.t('timesheet.unconfirmHoursText'),
@@ -63,7 +88,9 @@ export function useSubmitCommands() {
       if (isConfirmed) commands.push(cmd.UNCONFIRM_PERIOD)
       else if (isForecast) {
         if (isComplete) commands.push(cmd.CONFIRM_PERIOD)
-        commands.push(isForecasted ? cmd.UNFORECAST_PERIOD : cmd.FORECAST_PERIOD)
+        commands.push(
+          isForecasted ? cmd.UNFORECAST_PERIOD : cmd.FORECAST_PERIOD
+        )
       } else {
         if (isComplete) {
           commands.push(cmd.CONFIRM_PERIOD)
@@ -92,7 +119,13 @@ export function useSubmitCommands() {
         }
       }
 
-      return <PrimaryButton primary={false} {...first(commands)} menuProps={menuProps} />
+      return (
+        <PrimaryButton
+          primary={false}
+          {...first(commands)}
+          menuProps={menuProps}
+        />
+      )
     }
   }
 }

@@ -18,7 +18,9 @@ export const UserMenu = () => {
 
   return (
     <>
-      <a className={styles.root} onClick={(event) => setMenuTarget(event.currentTarget)}>
+      <a
+        className={styles.root}
+        onClick={(event) => setMenuTarget(event.currentTarget)}>
         ‍
         <Icon iconName={'PlayerSettings'} className={styles.icon} />
       </a>
@@ -31,9 +33,12 @@ export const UserMenu = () => {
           gapSpace={-8}>
           <FadeIn className={styles.menu}>
             <div className={`${styles.menuItem} ${styles.userName}`}>
-              {user.displayName} | <span className={styles.role}>{user.role?.name}</span>
+              {user.displayName} |{' '}
+              <span className={styles.role}>{user.role?.name}</span>
             </div>
-            <div className={`${styles.menuItem} ${styles.mail}`}>{user.mail}</div>
+            <div className={`${styles.menuItem} ${styles.mail}`}>
+              {user.mail}
+            </div>
             <Divider />
             <div className={styles.menuItem}>
               <Icon iconName='Home' className={styles.icon} />
@@ -46,7 +51,10 @@ export const UserMenu = () => {
             <Divider />
             <UserSettings className={styles.menuItem} />
             <Divider />
-            <a href='/auth/signout' className={styles.menuItem} style={{ paddingBottom: 25 }}>
+            <a
+              href='/auth/signout'
+              className={styles.menuItem}
+              style={{ paddingBottom: 25 }}>
               <Icon iconName='SignOut' className={styles.icon} />
               <span>{t('common.signOutText')}</span>
               <span className={styles.version}>v{process.env.VERSION}</span>

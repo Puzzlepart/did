@@ -23,7 +23,10 @@ export class SubscriptionResolver {
    * Get current subscription
    */
   @Authorized({ userContext: true })
-  @Query(() => Subscription, { description: 'Get current subscription', nullable: true })
+  @Query(() => Subscription, {
+    description: 'Get current subscription',
+    nullable: true
+  })
   subscription(@Ctx() ctx: Context): Promise<Subscription> {
     return this._mongo.subscription.getById(ctx.subscription.id)
   }
@@ -36,7 +39,8 @@ export class SubscriptionResolver {
   @Authorized<IAuthOptions>({ permission: '67ba6efc' })
   @Mutation(() => BaseResult, { description: 'Update subscription' })
   async updateSubscription(
-    @Arg('settings', () => SubscriptionSettingsInput) settings: SubscriptionSettingsInput
+    @Arg('settings', () => SubscriptionSettingsInput)
+    settings: SubscriptionSettingsInput
   ): Promise<BaseResult> {
     await this._mongo.subscription.updateSubscription(settings)
     return { success: true }

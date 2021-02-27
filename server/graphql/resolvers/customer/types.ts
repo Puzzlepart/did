@@ -38,7 +38,10 @@ export class Customer {
   }
 }
 
-@InputType({ description: 'Input object for Customer used in Mutation createOrUpdateCustomer' })
+@InputType({
+  description:
+    'Input object for Customer used in Mutation createOrUpdateCustomer'
+})
 export class CustomerInput {
   @Field()
   key: string

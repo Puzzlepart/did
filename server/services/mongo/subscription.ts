@@ -1,6 +1,9 @@
 import { omit } from 'underscore'
 import { Context } from '../../graphql/context'
-import { Subscription, SubscriptionSettings } from '../../graphql/resolvers/types'
+import {
+  Subscription,
+  SubscriptionSettings
+} from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 
 export class SubscriptionService extends MongoDocumentService<Subscription> {
@@ -14,7 +17,10 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
    * @param {Subscription} subscription Subscription
    */
   private _replaceId<T>(subscription: Subscription): T {
-    return ({ ...omit(subscription, 'id'), _id: subscription.id } as unknown) as T
+    return ({
+      ...omit(subscription, 'id'),
+      _id: subscription.id
+    } as unknown) as T
   }
 
   /**
@@ -41,7 +47,9 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
    */
   public async addSubscription(subscription: Subscription) {
     try {
-      const result = await this.collection.insertOne(this._replaceId(subscription))
+      const result = await this.collection.insertOne(
+        this._replaceId(subscription)
+      )
       return result
     } catch (err) {
       throw err

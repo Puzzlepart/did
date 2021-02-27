@@ -6,7 +6,9 @@ import { humanize } from 'underscore.string'
 import styles from './IconPicker.module.scss'
 import { IIconPickerProps } from './types'
 
-export const IconPicker: FunctionComponent<IIconPickerProps> = (props: IIconPickerProps) => {
+export const IconPicker: FunctionComponent<IIconPickerProps> = (
+  props: IIconPickerProps
+) => {
   const items = useMemo(
     () =>
       getIcons().map((iconName) => ({

@@ -12,7 +12,9 @@ import { RolePicker } from './RolePicker'
 import { IUserFormProps } from './types'
 import styles from './UserFormModal.module.scss'
 
-export const UserForm: FunctionComponent<IUserFormProps> = (props: IUserFormProps) => {
+export const UserForm: FunctionComponent<IUserFormProps> = (
+  props: IUserFormProps
+) => {
   const { t } = useTranslation()
   const { activeDirectoryUsers, roles } = useContext(UsersContext)
   const [model, setModel] = useState<User>(

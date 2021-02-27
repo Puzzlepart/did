@@ -2,7 +2,12 @@ import { createReducer } from '@reduxjs/toolkit'
 import { TFunction } from 'i18next'
 import { useMemo, useReducer } from 'react'
 import { find, first, isEmpty } from 'underscore'
-import { ITimesheetParams, ITimesheetState, TimesheetPeriod, TimesheetScope } from '../types'
+import {
+  ITimesheetParams,
+  ITimesheetState,
+  TimesheetPeriod,
+  TimesheetScope
+} from '../types'
 import {
   CHANGE_PERIOD,
   CHANGE_VIEW,
@@ -31,7 +36,9 @@ interface ITimesheetReducerParams {
 
 const initState = (url: ITimesheetParams) => ({
   periods: [],
-  scope: isEmpty(Object.keys(url)) ? new TimesheetScope() : new TimesheetScope().fromParams(url),
+  scope: isEmpty(Object.keys(url))
+    ? new TimesheetScope()
+    : new TimesheetScope().fromParams(url),
   selectedView: url.view || 'overview'
 })
 
@@ -40,7 +47,10 @@ const initState = (url: ITimesheetParams) => ({
  */
 const createTimesheetReducer = ({ url, t }: ITimesheetReducerParams) =>
   createReducer<ITimesheetState>(initState(url), {
-    [DATA_UPDATED.type]: (state, { payload }: ReturnType<typeof DATA_UPDATED>) => {
+    [DATA_UPDATED.type]: (
+      state,
+      { payload }: ReturnType<typeof DATA_UPDATED>
+    ) => {
       const { loading, data, error } = payload.query
       state.loading = loading
         ? {
@@ -52,14 +62,20 @@ const createTimesheetReducer = ({ url, t }: ITimesheetReducerParams) =>
       if (data) {
         const selectedPeriodId =
           state.selectedPeriod?.id || [url.week, url.month, url.year].join('_')
-        state.periods = data.timesheet.map((period) => new TimesheetPeriod().initialize(period))
+        state.periods = data.timesheet.map((period) =>
+          new TimesheetPeriod().initialize(period)
+        )
         state.selectedPeriod =
-          find(state.periods, (p) => p.id === selectedPeriodId) || first(state.periods)
+          find(state.periods, (p) => p.id === selectedPeriodId) ||
+          first(state.periods)
       }
       state.error = error
     },
 
-    [SUBMITTING_PERIOD.type]: (state, { payload }: ReturnType<typeof SUBMITTING_PERIOD>) => {
+    [SUBMITTING_PERIOD.type]: (
+      state,
+      { payload }: ReturnType<typeof SUBMITTING_PERIOD>
+    ) => {
       if (payload.forecast) {
         state.loading = {
           label: t('timesheet.forecastingPeriodLabel'),
@@ -75,7 +91,10 @@ const createTimesheetReducer = ({ url, t }: ITimesheetReducerParams) =>
       }
     },
 
-    [UNSUBMITTING_PERIOD.type]: (state, { payload }: ReturnType<typeof UNSUBMITTING_PERIOD>) => {
+    [UNSUBMITTING_PERIOD.type]: (
+      state,
+      { payload }: ReturnType<typeof UNSUBMITTING_PERIOD>
+    ) => {
       if (payload.forecast) {
         state.loading = {
           label: t('timesheet.unforecastingPeriodLabel'),
@@ -95,15 +114,27 @@ const createTimesheetReducer = ({ url, t }: ITimesheetReducerParams) =>
       state.scope = payload.scope
     },
 
-    [CHANGE_PERIOD.type]: (state, { payload }: ReturnType<typeof CHANGE_PERIOD>) => {
-      state.selectedPeriod = find(state.periods, (p: TimesheetPeriod) => p.id === payload.id)
+    [CHANGE_PERIOD.type]: (
+      state,
+      { payload }: ReturnType<typeof CHANGE_PERIOD>
+    ) => {
+      state.selectedPeriod = find(
+        state.periods,
+        (p: TimesheetPeriod) => p.id === payload.id
+      )
     },
 
-    [CHANGE_VIEW.type]: (state, { payload }: ReturnType<typeof CHANGE_VIEW>) => {
+    [CHANGE_VIEW.type]: (
+      state,
+      { payload }: ReturnType<typeof CHANGE_VIEW>
+    ) => {
       state.selectedView = payload.view
     },
 
-    [MANUAL_MATCH.type]: (state, { payload }: ReturnType<typeof MANUAL_MATCH>) => {
+    [MANUAL_MATCH.type]: (
+      state,
+      { payload }: ReturnType<typeof MANUAL_MATCH>
+    ) => {
       const { eventId, project } = payload
       state.selectedPeriod.setManualMatch(eventId, project)
       state.periods = state.periods.map((p) =>
@@ -111,14 +142,20 @@ const createTimesheetReducer = ({ url, t }: ITimesheetReducerParams) =>
       )
     },
 
-    [CLEAR_MANUAL_MATCH.type]: (state, { payload }: ReturnType<typeof CLEAR_MANUAL_MATCH>) => {
+    [CLEAR_MANUAL_MATCH.type]: (
+      state,
+      { payload }: ReturnType<typeof CLEAR_MANUAL_MATCH>
+    ) => {
       state.selectedPeriod.clearManualMatch(payload.id)
       state.periods = state.periods.map((p) =>
         p.id === state.selectedPeriod.id ? state.selectedPeriod : p
       )
     },
 
-    [IGNORE_EVENT.type]: (state, { payload }: ReturnType<typeof IGNORE_EVENT>) => {
+    [IGNORE_EVENT.type]: (
+      state,
+      { payload }: ReturnType<typeof IGNORE_EVENT>
+    ) => {
       state.selectedPeriod.ignoreEvent(payload.id)
       state.periods = state.periods.map((p) =>
         p.id === state.selectedPeriod.id ? state.selectedPeriod : p

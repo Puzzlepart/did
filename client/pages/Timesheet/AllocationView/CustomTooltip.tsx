@@ -14,7 +14,9 @@ export const CustomTooltip: FunctionComponent<ICustomTooltipProps> = ({
     <FadeIn className={styles.tooltip}>
       <div className={styles.text}>{getValue(data, chart.textKey)}</div>
       {chart.subTextKey && (
-        <div className={styles.subText}>{getValue(data, chart.subTextKey, '')}</div>
+        <div className={styles.subText}>
+          {getValue(data, chart.subTextKey, '')}
+        </div>
       )}
       <p className={styles.summary}>{data.description}</p>
       <p className={styles.value}>

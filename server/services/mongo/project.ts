@@ -2,7 +2,11 @@ import { FilterQuery } from 'mongodb'
 import { filter, find, pick } from 'underscore'
 import { CustomerService } from '.'
 import { Context } from '../../graphql/context'
-import { Customer, LabelObject as Label, Project } from '../../graphql/resolvers/types'
+import {
+  Customer,
+  LabelObject as Label,
+  Project
+} from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 import { LabelService } from './label'
 
@@ -60,7 +64,9 @@ export class ProjectService extends MongoDocumentService<Project> {
     try {
       await this.cache.clear({ key: 'getprojectsdata' })
       const filter: FilterQuery<Project> = pick(project, 'key', 'customerKey')
-      const { result } = await this.collection.updateOne(filter, { $set: project })
+      const { result } = await this.collection.updateOne(filter, {
+        $set: project
+      })
       return result.ok === 1
     } catch (err) {
       throw err
@@ -82,12 +88,15 @@ export class ProjectService extends MongoDocumentService<Project> {
         async () => {
           const [projects, customers, labels] = await Promise.all([
             this.find(query, { name: 1 }),
-            this._customer.getCustomers(query?.customerKey && { key: query.customerKey }),
+            this._customer.getCustomers(
+              query?.customerKey && { key: query.customerKey }
+            ),
             this._label.getLabels()
           ])
           const _projects = projects
             .map((p) => {
-              p.customer = find(customers, (c) => c.key === p.customerKey) || null
+              p.customer =
+                find(customers, (c) => c.key === p.customerKey) || null
               p.labels = filter(labels, ({ name }) => {
                 return !!find(p.labels, (l) => name === l)
               })

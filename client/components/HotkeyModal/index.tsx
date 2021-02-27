@@ -9,7 +9,10 @@ export type IHotkeyModal = GlobalHotKeysProps & IModalProps
 export const HotkeyModal = (props: IHotkeyModal) => {
   const { t } = useTranslation()
   return (
-    <Modal isOpen={props.isOpen} onDismiss={props.onDismiss} containerClassName={styles.root}>
+    <Modal
+      isOpen={props.isOpen}
+      onDismiss={props.onDismiss}
+      containerClassName={styles.root}>
       <div className={styles.container}>
         <div className={styles.title}>{t('common.shortcuts')}</div>
         <FadeIn>

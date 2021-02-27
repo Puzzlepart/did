@@ -26,7 +26,9 @@ export class ReportsResolver {
    * @param {Context} ctx GraphQL context
    */
   @Authorized<IAuthOptions>()
-  @Query(() => [TimeEntry], { description: 'Get time entries matching the provided query' })
+  @Query(() => [TimeEntry], {
+    description: 'Get time entries matching the provided query'
+  })
   async timeentries(
     @Arg('query') query: ReportsQuery,
     @Arg('currentUser', { nullable: true }) currentUser: boolean,

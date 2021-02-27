@@ -40,7 +40,10 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
         headerText={t('timesheet.matchEventPanelHeaderText')}
         onDismiss={hidePanel}>
         <div className={styles.subText}>{event.title}</div>
-        <UserMessage iconName='OutlookLogo' text={t('timesheet.matchOutlookInfoText', event)} />
+        <UserMessage
+          iconName='OutlookLogo'
+          text={t('timesheet.matchOutlookInfoText', event)}
+        />
         <UserMessage
           hidden={!event.suggestedProject}
           containerStyle={{ marginTop: 10 }}

@@ -113,7 +113,11 @@ const forecastQuery = (now: DateObject, t: TFunction) => {
  */
 export function getQueries<T = IReportsQuery>(t: TFunction): T[] {
   const now = new DateObject()
-  return [lastMonthQuery, currentMonthQuery, lastYearQuery, currentYearQuery, forecastQuery].map(
-    (q) => (q(now, t) as unknown) as T
-  )
+  return [
+    lastMonthQuery,
+    currentMonthQuery,
+    lastYearQuery,
+    currentYearQuery,
+    forecastQuery
+  ].map((q) => (q(now, t) as unknown) as T)
 }

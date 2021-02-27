@@ -66,16 +66,22 @@ export const createContext = async (
     context.subscription = get(request, 'user.subscription')
     const apiKey = get(request, 'api_key')
     if (apiKey) {
-      const { permissions, subscription } = await handleTokenAuthentication(apiKey, db)
+      const { permissions, subscription } = await handleTokenAuthentication(
+        apiKey,
+        db
+      )
       context.permissions = permissions
       context.subscription = subscription
     } else {
       context.userId = get(request, 'user.id')
       context.permissions = get(request, 'user.role.permissions')
     }
-    if (!context.subscription) throw new AuthenticationError('Failed to authenticate.')
+    if (!context.subscription)
+      throw new AuthenticationError('Failed to authenticate.')
     context.db = context.client.db(context.subscription.db)
-    context.requestId = Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString()
+    context.requestId = Math.floor(
+      Math.random() * Number.MAX_SAFE_INTEGER
+    ).toString()
     context.container = Container.of(context.requestId)
     context.container.set({ id: 'CONTEXT', transient: true, value: context })
     context.container.set({ id: 'REQUEST', transient: true, value: request })
@@ -93,7 +99,10 @@ export const createContext = async (
  * @param {MongoDatabase} db Mongodb database
  */
 const handleTokenAuthentication = async (apiKey: string, db: MongoDatabase) => {
-  const { expires, subscriptionId } = verify(apiKey, env('API_TOKEN_SECRET')) as any
+  const { expires, subscriptionId } = verify(
+    apiKey,
+    env('API_TOKEN_SECRET')
+  ) as any
   const expired = new DateObject(expires).jsDate < new Date()
   if (expired) throw new AuthenticationError('The specified token is expired.')
   const [token, subscription] = await Promise.all([
@@ -108,6 +117,8 @@ const handleTokenAuthentication = async (apiKey: string, db: MongoDatabase) => {
     })
   ])
   if (!token || !subscription)
-    throw new AuthenticationError('Failed to authenticate with the specified token.')
+    throw new AuthenticationError(
+      'Failed to authenticate with the specified token.'
+    )
   return { subscription, permissions: token.permissions }
 }

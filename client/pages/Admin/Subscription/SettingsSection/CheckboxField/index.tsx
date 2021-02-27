@@ -5,7 +5,11 @@ import React, { useContext } from 'react'
 import { SubscriptionContext } from '../../context'
 import { ICheckboxFieldProps } from './types'
 
-export const CheckboxField = ({ settingsKey, props, options }: ICheckboxFieldProps) => {
+export const CheckboxField = ({
+  settingsKey,
+  props,
+  options
+}: ICheckboxFieldProps) => {
   const { onSettingsChanged, settings } = useContext(SubscriptionContext)
   return (
     <div>

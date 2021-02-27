@@ -14,9 +14,15 @@ import { IReportsSavedFilter } from './types'
  * @param {TFunction} t Translate function
  */
 export default (filter: IReportsSavedFilter, t: TFunction): BaseFilter[] => [
-  new ResourceFilter('resource.id', 'resource.displayName', t('common.employeeLabel')).setDefaults(
+  new ResourceFilter(
+    'resource.id',
+    'resource.displayName',
+    t('common.employeeLabel')
+  ).setDefaults(filter?.values),
+  new CustomerFilter('customer.name', t('common.customer')).setDefaults(
     filter?.values
   ),
-  new CustomerFilter('customer.name', t('common.customer')).setDefaults(filter?.values),
-  new ProjectFilter('project.name', t('common.project')).setDefaults(filter?.values)
+  new ProjectFilter('project.name', t('common.project')).setDefaults(
+    filter?.values
+  )
 ]

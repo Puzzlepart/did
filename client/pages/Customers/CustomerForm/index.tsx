@@ -2,7 +2,12 @@ import { useMutation } from '@apollo/client'
 import AppConfig from 'AppConfig'
 import { IconPicker, useMessage, UserMessage } from 'components'
 import { ConditionalWrapper } from 'components/ConditionalWrapper'
-import { MessageBarType, Panel, PrimaryButton, TextField } from 'office-ui-fabric'
+import {
+  MessageBarType,
+  Panel,
+  PrimaryButton,
+  TextField
+} from 'office-ui-fabric'
 import React, { FunctionComponent, useContext, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CustomersContext } from '../context'
@@ -12,12 +17,16 @@ import reducer, { initState } from './reducer'
 import { ICustomerFormProps } from './types'
 import { validateForm } from './validateForm'
 
-export const CustomerForm: FunctionComponent<ICustomerFormProps> = (props: ICustomerFormProps) => {
+export const CustomerForm: FunctionComponent<ICustomerFormProps> = (
+  props: ICustomerFormProps
+) => {
   const { t } = useTranslation()
   const context = useContext(CustomersContext)
   const [message, setMessage] = useMessage()
   const [state, dispatch] = useReducer(reducer, initState(props.edit))
-  const [createOrUpdateCustomer, { loading }] = useMutation($createOrUpdateCustomer)
+  const [createOrUpdateCustomer, { loading }] = useMutation(
+    $createOrUpdateCustomer
+  )
 
   /**
    * On form submit
@@ -45,7 +54,10 @@ export const CustomerForm: FunctionComponent<ICustomerFormProps> = (props: ICust
         context.refetch()
       }
     } else {
-      setMessage({ text: data?.result.error?.message, type: MessageBarType.error })
+      setMessage({
+        text: data?.result.error?.message,
+        type: MessageBarType.error
+      })
     }
   }
 

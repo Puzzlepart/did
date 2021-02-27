@@ -50,7 +50,9 @@ export class CacheService {
     return [
       this.prefix,
       ...key,
-      scope === CacheScope.SUBSCRIPTION ? this.context.subscription.id : this.context.userId
+      scope === CacheScope.SUBSCRIPTION
+        ? this.context.subscription.id
+        : this.context.userId
     ]
       .join(':')
       .replace(/\-/g, '')
@@ -91,16 +93,25 @@ export class CacheService {
   private _set<T = any>({ key, scope, expiry }: CacheOptions, value: T) {
     return new Promise((resolve) => {
       const scopedCacheKey = this._getScopedCacheKey(key, scope)
-      log(`Setting value for key ${scopedCacheKey} with a expiration of ${expiry} seconds...`)
-      Redis.setex(scopedCacheKey, expiry, JSON.stringify(value), (err, reply) => {
-        if (err) {
-          log(`Failed to set value for key ${scopedCacheKey}.`)
-          resolve(err)
-        } else {
-          log(`Value for key ${scopedCacheKey} set with a expiration of ${expiry} seconds.`)
-          resolve(reply)
+      log(
+        `Setting value for key ${scopedCacheKey} with a expiration of ${expiry} seconds...`
+      )
+      Redis.setex(
+        scopedCacheKey,
+        expiry,
+        JSON.stringify(value),
+        (err, reply) => {
+          if (err) {
+            log(`Failed to set value for key ${scopedCacheKey}.`)
+            resolve(err)
+          } else {
+            log(
+              `Value for key ${scopedCacheKey} set with a expiration of ${expiry} seconds.`
+            )
+            resolve(reply)
+          }
         }
-      })
+      )
     })
   }
 

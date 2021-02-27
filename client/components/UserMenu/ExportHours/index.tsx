@@ -1,5 +1,11 @@
 import { useId } from '@uifabric/react-hooks'
-import { ChoiceGroup, DefaultButton, format, Icon, Panel } from 'office-ui-fabric'
+import {
+  ChoiceGroup,
+  DefaultButton,
+  format,
+  Icon,
+  Panel
+} from 'office-ui-fabric'
 import React, { FunctionComponent, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { first } from 'underscore'
@@ -39,14 +45,21 @@ export const ExportHours: FunctionComponent = () => {
     })
     await exportExcel(data.timeentries, {
       columns: columns(t),
-      fileName: format(exportType.exportFileName, new Date().toDateString().split(' ').join('-'))
+      fileName: format(
+        exportType.exportFileName,
+        new Date().toDateString().split(' ').join('-')
+      )
     })
     setPanelOpen(false)
   }
 
   return (
     <>
-      <a href='#' id={toggleId} onClick={togglePanel} className={styles.menuItem}>
+      <a
+        href='#'
+        id={toggleId}
+        onClick={togglePanel}
+        className={styles.menuItem}>
         <Icon iconName='CloudImportExport' className={styles.icon} />
         <span>{t('common.exportMyHours')}</span>
       </a>

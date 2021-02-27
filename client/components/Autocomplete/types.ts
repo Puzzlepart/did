@@ -1,7 +1,9 @@
 import { ISearchBoxProps } from 'office-ui-fabric'
 import { ISuggestionItem } from './SuggestionItem/types'
 
-export type AutocompleteSelectCallback<T = any> = (item: ISuggestionItem<T>) => void
+export type AutocompleteSelectCallback<T = any> = (
+  item: ISuggestionItem<T>
+) => void
 export type AutocompleteItemIcons = {
   style: React.CSSProperties
 }

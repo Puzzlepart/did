@@ -50,7 +50,9 @@ export class User {
   }
 }
 
-@InputType({ description: 'Input object for Role used in Mutation addOrUpdateUser/addUsers' })
+@InputType({
+  description: 'Input object for Role used in Mutation addOrUpdateUser/addUsers'
+})
 export class UserInput {
   @Field()
   id?: string

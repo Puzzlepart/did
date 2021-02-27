@@ -4,7 +4,9 @@ import styles from './Summary.module.scss'
 import { ISummaryProps } from './types'
 import { useSummary } from './useSummary'
 
-export const Summary: FunctionComponent<ISummaryProps> = ({ timeentries }: ISummaryProps) => {
+export const Summary: FunctionComponent<ISummaryProps> = ({
+  timeentries
+}: ISummaryProps) => {
   const items = useSummary(timeentries)
   return (
     <FadeIn className={styles.root}>

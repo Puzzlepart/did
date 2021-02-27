@@ -2,7 +2,10 @@ import { getValue } from 'helpers'
 import { contains, unique } from 'underscore'
 import { BaseFilter, IFilter } from './BaseFilter'
 
-export class YearFilter<ItemType = any, KeyType = any> extends BaseFilter<ItemType> {
+export class YearFilter<
+  ItemType = any,
+  KeyType = any
+> extends BaseFilter<ItemType> {
   private _selectedKeys: KeyType[]
 
   constructor(public fieldName: string, public name: string) {
@@ -15,7 +18,9 @@ export class YearFilter<ItemType = any, KeyType = any> extends BaseFilter<ItemTy
    * @param {ItemType[]} items Items
    */
   public initialize(items: ItemType[]): IFilter {
-    const years = unique(items.map((e) => getValue(e, this.fieldName, null))).sort()
+    const years = unique(
+      items.map((e) => getValue(e, this.fieldName, null))
+    ).sort()
     const _items = years.map((year) => ({
       key: year,
       value: year

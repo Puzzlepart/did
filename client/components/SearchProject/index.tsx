@@ -10,14 +10,16 @@ export const SearchProject = (props: ISearchProjectProps) => {
     fetchPolicy: 'cache-first'
   })
 
-  const items: ISuggestionItem<Project>[] = (data?.projects || []).map((project) => ({
-    key: project.tag,
-    text: project.name,
-    secondaryText: project.tag,
-    searchValue: [project.tag, project.name, project.customer.name].join(' '),
-    data: project,
-    iconName: project.icon
-  }))
+  const items: ISuggestionItem<Project>[] = (data?.projects || []).map(
+    (project) => ({
+      key: project.tag,
+      text: project.name,
+      secondaryText: project.tag,
+      searchValue: [project.tag, project.name, project.customer.name].join(' '),
+      data: project,
+      iconName: project.icon
+    })
+  )
 
   return (
     <Autocomplete<Project>

@@ -8,7 +8,9 @@ import styles from './Home.module.scss'
 export default (): React.ReactElement<HTMLDivElement> => {
   const { subscription } = useContext(AppContext)
   const { t } = useTranslation()
-  const error = JSON.parse(document.getElementById('app').getAttribute('data-error') || null)
+  const error = JSON.parse(
+    document.getElementById('app').getAttribute('data-error') || null
+  )
 
   return (
     <div className={styles.root}>

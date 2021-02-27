@@ -12,10 +12,19 @@ export const SettingsSection: FunctionComponent<ISettingsSectionProps> = (
 ) => {
   const { settings, onSettingsChanged } = useContext(SubscriptionContext)
   return (
-    <ToggleSection className={styles.root} id={props.id} headerText={props.name}>
+    <ToggleSection
+      className={styles.root}
+      id={props.id}
+      headerText={props.name}>
       {props.fields.map((field) => {
-        field.props.set('disabled', field.disabledIf && field.disabledIf(settings || {}))
-        field.props.set('hidden', field.hiddenIf && field.hiddenIf(settings || {}))
+        field.props.set(
+          'disabled',
+          field.disabledIf && field.disabledIf(settings || {})
+        )
+        field.props.set(
+          'hidden',
+          field.hiddenIf && field.hiddenIf(settings || {})
+        )
         const _ = Array.from(field.props).reduce(
           (obj, [key, value]) => ({ ...obj, [key]: value }),
           {} as any
@@ -43,7 +52,9 @@ export const SettingsSection: FunctionComponent<ISettingsSectionProps> = (
             )
             break
           case 'checkbox':
-            fieldElement = <CheckboxField {...field} settingsKey={key} settings={settings} />
+            fieldElement = (
+              <CheckboxField {...field} settingsKey={key} settings={settings} />
+            )
             break
         }
         return (

@@ -14,7 +14,10 @@ export const NavItem = (props: INavItemProps) => {
   if (isMobile) className += ` ${styles.mobile}`
   return (
     <li className={className}>
-      <NavLink to={props.to} className={styles.link} activeClassName={styles.active}>
+      <NavLink
+        to={props.to}
+        className={styles.link}
+        activeClassName={styles.active}>
         <Icon iconName={props.iconName} className={styles.navIcon} />
         <span className={styles.navText}>{props.text}</span>
       </NavLink>

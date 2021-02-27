@@ -14,7 +14,9 @@ export function useHistoryUpdater(state: ICustomersState) {
 
   useLayoutEffect(() => {
     const paths = [state.view, state.selected?.key || url.key]
-    const path = `/${['customers', ...paths].filter((p) => p).join('/')}`.toLowerCase()
+    const path = `/${['customers', ...paths]
+      .filter((p) => p)
+      .join('/')}`.toLowerCase()
     history.push(path)
   }, [state.view, state.selected, url.key])
 }
