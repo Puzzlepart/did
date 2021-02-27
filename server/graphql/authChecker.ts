@@ -16,7 +16,7 @@ export interface IAuthOptions {
 
 /**
  * Checks auth for the context.
- * 
+ *
  * @param param0 - Resolver data
  * @param param1 - Authentication options
  */

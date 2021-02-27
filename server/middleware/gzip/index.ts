@@ -6,7 +6,7 @@ import express from 'express'
  *
  * @param contentType - Content type
  */
-export const serveGzipped = (contentType: string) => (
+export const serveGzippedMiddleware = (contentType: string) => (
   request: express.Request,
   response: express.Response,
   next: express.NextFunction

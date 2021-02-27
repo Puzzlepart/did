@@ -6,7 +6,7 @@ const debug = require('debug')('server')
 
 /**
  * Start server on the specified port
- * 
+ *
  * @param port - Port
  */
 export async function startServer(port: string) {

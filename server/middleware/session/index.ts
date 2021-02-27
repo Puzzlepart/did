@@ -11,7 +11,7 @@ const RedisStore = require('connect-redis')(session)
  * "cookie" is provided by default; you can add it to add additional personalized options
  * The "store" ttl is the expiration time for each Redis session ID, in seconds
  */
-export const redisSession = session({
+export const redisSessionMiddleware = session({
   name: env('SESSION_NAME', 'connect.sid'),
   store: new RedisStore({
     client: RedisClient,

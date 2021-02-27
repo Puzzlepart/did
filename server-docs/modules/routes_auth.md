@@ -14,4 +14,4 @@
 
 • `Const` **default**: *Router*
 
-Defined in: [server/routes/auth.ts:5](https://github.com/Puzzlepart/did/blob/ca0344a0/server/routes/auth.ts#L5)
+Defined in: [server/routes/auth.ts:5](https://github.com/Puzzlepart/did/blob/7f92b547/server/routes/auth.ts#L5)

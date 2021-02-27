@@ -29,4 +29,4 @@ Name | Type |
 
 **Returns:** *boolean* \| *Promise*<boolean\>
 
-Defined in: [server/graphql/authChecker.ts:23](https://github.com/Puzzlepart/did/blob/ca0344a0/server/graphql/authChecker.ts#L23)
+Defined in: [server/graphql/authChecker.ts:23](https://github.com/Puzzlepart/did/blob/7f92b547/server/graphql/authChecker.ts#L23)

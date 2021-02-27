@@ -4,7 +4,7 @@ import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import { filter, isArray } from 'underscore'
 import { Context } from '../graphql/context'
-import {RedisClient} from '../middleware/redis'
+import { RedisClient } from '../middleware/redis'
 const log = require('debug')('server/services/cache')
 
 export enum CacheScope {

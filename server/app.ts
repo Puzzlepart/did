@@ -10,7 +10,12 @@ import logger from 'morgan'
 import path from 'path'
 import { pick } from 'underscore'
 import { setupGraphQL } from './graphql'
-import { redisSession, serveGzipped, setupPassport, helmetConfig } from './middleware'
+import {
+  redisSessionMiddleware,
+  serveGzippedMiddleware,
+  passportMiddleware,
+  helmetMiddleware
+} from './middleware'
 import authRoute from './routes/auth'
 import env from './utils/env'
 
@@ -33,7 +38,7 @@ export class App {
    */
   constructor() {
     this.instance = express()
-    this.instance.use(helmetConfig)
+    this.instance.use(helmetMiddleware)
     this.instance.use(
       favicon(path.join(__dirname, 'public/images/favicon/favicon.ico'))
     )
@@ -46,9 +51,9 @@ export class App {
 
   /**
    * Setup app
-   * 
+   *
    * * Connecting to our Mongo client
-   * * Setting up sessions 
+   * * Setting up sessions
    * * Setting up view engine
    * * Setting up static assets
    * * Setting up authentication
@@ -77,7 +82,7 @@ export class App {
    * Setup sessions using connect-redis
    */
   setupSession() {
-    this.instance.use(redisSession)
+    this.instance.use(redisSessionMiddleware)
   }
 
   /**
@@ -90,24 +95,24 @@ export class App {
 
   /**
    * Setup static assets
-   * 
+   *
    * * Serving *.js gzipped
    * * Serving our public folder
    */
   setupAssets() {
-    this.instance.use('/*.js', serveGzipped('text/javascript'))
+    this.instance.use('/*.js', serveGzippedMiddleware('text/javascript'))
     this.instance.use(express.static(path.join(__dirname, 'public')))
   }
 
   /**
    * Setup authentication
-   * 
+   *
    * * Using passport for user login
    * * Using express-bearer-token package to support external API calls
    * * Setting up auth route at /auth
    */
   setupAuth() {
-    const _passport = setupPassport(this._mongoClient)
+    const _passport = passportMiddleware(this._mongoClient)
     this.instance.use(bearerToken({ reqKey: 'api_key' }))
     this.instance.use(_passport.initialize())
     this.instance.use(_passport.session())
@@ -123,7 +128,7 @@ export class App {
 
   /**
    * Setup routes
-   * 
+   *
    * * Setting up * to use our index route giving the React
    * Router full control of the routing.
    */

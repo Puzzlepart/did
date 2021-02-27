@@ -34,10 +34,7 @@ export class MongoDocumentService<T> {
    * @param query - Query
    * @param sort - Sort options
    */
-  public find<S = any>(
-    query: FilterQuery<T>,
-    sort?: S
-  ) {
+  public find<S = any>(query: FilterQuery<T>, sort?: S) {
     return this.collection.find(query, { sort }).toArray()
   }
 }

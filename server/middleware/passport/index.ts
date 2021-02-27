@@ -3,18 +3,15 @@ import fs from 'fs'
 import { MongoClient } from 'mongodb'
 import passport from 'passport'
 import { IProfile, OIDCStrategy, VerifyCallback } from 'passport-azure-ad'
-import {
-  SubscriptionService,
-  UserService
-} from '../../services/mongo'
+import { SubscriptionService, UserService } from '../../services/mongo'
 import env from '../../utils/env'
 
 /**
  * Setup passport to be used for authentication
- * 
+ *
  * @param mongoClient - Mongo client
  */
-export const setupPassport = (mongoClient: MongoClient) => {
+export const passportMiddleware = (mongoClient: MongoClient) => {
   /**
    * In a typical web application, the credentials used to authenticate
    * a user will only be transmitted during the login request. If
