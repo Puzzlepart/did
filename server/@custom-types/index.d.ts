@@ -1,4 +1,12 @@
+/* eslint-disable tsdoc/syntax */
+/**
+ * @private
+ */
 declare namespace Express {
+
+  /**
+ * @private
+ */
   interface UserSubscription {
     id: string
     connectionString: string
@@ -6,6 +14,9 @@ declare namespace Express {
     settings: any
   }
 
+  /**
+   * @private
+   */
   interface User {
     id?: string
     displayName?: string

@@ -10,18 +10,8 @@
 
 - [constructor](services.timesheetservice.md#constructor)
 
-### Properties
-
-- [\_confirmed\_periods](services.timesheetservice.md#_confirmed_periods)
-- [\_forecasted\_periods](services.timesheetservice.md#_forecasted_periods)
-- [\_forecasted\_time\_entries](services.timesheetservice.md#_forecasted_time_entries)
-- [\_time\_entries](services.timesheetservice.md#_time_entries)
-
 ### Methods
 
-- [\_connectEvents](services.timesheetservice.md#_connectevents)
-- [\_createUniqueEventId](services.timesheetservice.md#_createuniqueeventid)
-- [\_getPeriodData](services.timesheetservice.md#_getperioddata)
 - [getPeriods](services.timesheetservice.md#getperiods)
 - [getTimesheet](services.timesheetservice.md#gettimesheet)
 - [submitPeriod](services.timesheetservice.md#submitperiod)
@@ -45,107 +35,9 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetService*](services.timesheetservice.md)
 
-Defined in: [server/services/timesheet/index.ts:23](https://github.com/Puzzlepart/did/blob/4fa695e4/server/services/timesheet/index.ts#L23)
-
-## Properties
-
-### \_confirmed\_periods
-
-• `Private` **\_confirmed\_periods**: *Collection*<any\>
-
-Defined in: [server/services/timesheet/index.ts:20](https://github.com/Puzzlepart/did/blob/4fa695e4/server/services/timesheet/index.ts#L20)
-
-___
-
-### \_forecasted\_periods
-
-• `Private` **\_forecasted\_periods**: *Collection*<any\>
-
-Defined in: [server/services/timesheet/index.ts:21](https://github.com/Puzzlepart/did/blob/4fa695e4/server/services/timesheet/index.ts#L21)
-
-___
-
-### \_forecasted\_time\_entries
-
-• `Private` **\_forecasted\_time\_entries**: *Collection*<any\>
-
-Defined in: [server/services/timesheet/index.ts:23](https://github.com/Puzzlepart/did/blob/4fa695e4/server/services/timesheet/index.ts#L23)
-
-___
-
-### \_time\_entries
-
-• `Private` **\_time\_entries**: *Collection*<any\>
-
-Defined in: [server/services/timesheet/index.ts:22](https://github.com/Puzzlepart/did/blob/4fa695e4/server/services/timesheet/index.ts#L22)
+Defined in: [server/services/timesheet/index.ts:23](https://github.com/Puzzlepart/did/blob/dea0e5c1/server/services/timesheet/index.ts#L23)
 
 ## Methods
-
-### \_connectEvents
-
-▸ `Private`**_connectEvents**(`__namedParameters`: IConnectEventsParams): *any*[]
-
-Connect events to projects
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`__namedParameters` | IConnectEventsParams |
-
-**Returns:** *any*[]
-
-Defined in: [server/services/timesheet/index.ts:254](https://github.com/Puzzlepart/did/blob/4fa695e4/server/services/timesheet/index.ts#L254)
-
-___
-
-### \_createUniqueEventId
-
-▸ `Private`**_createUniqueEventId**(`eventId`: *string*, `startDateTime`: Date): *string*
-
-Create unique ID consisting of event ID + event start date time
-
-#### Parameters:
-
-Name | Type | Description |
-:------ | :------ | :------ |
-`eventId` | *string* | Event ID   |
-`startDateTime` | Date | Start date time    |
-
-**Returns:** *string*
-
-Defined in: [server/services/timesheet/index.ts:191](https://github.com/Puzzlepart/did/blob/4fa695e4/server/services/timesheet/index.ts#L191)
-
-___
-
-### \_getPeriodData
-
-▸ `Private`**_getPeriodData**(`id`: *string*): *object*
-
-Get period data from id
-
-* Generates an _id for Mongo DB
-* Returns week, month, year and _userId
-
-#### Parameters:
-
-Name | Type | Description |
-:------ | :------ | :------ |
-`id` | *string* | Id    |
-
-**Returns:** *object*
-
-Name | Type |
-:------ | :------ |
-`_id` | *string* |
-`_userId` | *string* |
-`month` | *number* |
-`week` | *number* |
-`year` | *number* |
-
-Defined in: [server/services/timesheet/index.ts:203](https://github.com/Puzzlepart/did/blob/4fa695e4/server/services/timesheet/index.ts#L203)
-
-___
 
 ### getPeriods
 
@@ -163,7 +55,7 @@ Name | Type | Description |
 
 **Returns:** *TimesheetPeriodObject*[]
 
-Defined in: [server/services/timesheet/index.ts:221](https://github.com/Puzzlepart/did/blob/4fa695e4/server/services/timesheet/index.ts#L221)
+Defined in: [server/services/timesheet/index.ts:221](https://github.com/Puzzlepart/did/blob/dea0e5c1/server/services/timesheet/index.ts#L221)
 
 ___
 
@@ -181,7 +73,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/timesheet/index.ts:49](https://github.com/Puzzlepart/did/blob/4fa695e4/server/services/timesheet/index.ts#L49)
+Defined in: [server/services/timesheet/index.ts:49](https://github.com/Puzzlepart/did/blob/dea0e5c1/server/services/timesheet/index.ts#L49)
 
 ___
 
@@ -199,7 +91,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/timesheet/index.ts:109](https://github.com/Puzzlepart/did/blob/4fa695e4/server/services/timesheet/index.ts#L109)
+Defined in: [server/services/timesheet/index.ts:109](https://github.com/Puzzlepart/did/blob/dea0e5c1/server/services/timesheet/index.ts#L109)
 
 ___
 
@@ -217,4 +109,4 @@ Name | Type |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/timesheet/index.ts:162](https://github.com/Puzzlepart/did/blob/4fa695e4/server/services/timesheet/index.ts#L162)
+Defined in: [server/services/timesheet/index.ts:162](https://github.com/Puzzlepart/did/blob/dea0e5c1/server/services/timesheet/index.ts#L162)

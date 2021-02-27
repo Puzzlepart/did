@@ -1,0 +1,6 @@
+{
+  "name": "did-server",
+  "out": "server-docs",
+  "readme": "none",
+  "excludePrivate": true
+}

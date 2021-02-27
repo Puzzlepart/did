@@ -16,7 +16,7 @@
 
 ### createContext
 
-▸ `Const`**createContext**(`request`: [*Request*](../interfaces/_custom_types.express.request.md), `client`: *MongoClient*): *Promise*<[*Context*](../classes/graphql_context.context.md)\>
+▸ `Const`**createContext**(`request`: *Request*, `client`: *MongoClient*): *Promise*<[*Context*](../classes/graphql_context.context.md)\>
 
 Create context
 
@@ -24,9 +24,9 @@ Create context
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`request` | [*Request*](../interfaces/_custom_types.express.request.md) | Express request   |
+`request` | *Request* | Express request   |
 `client` | *MongoClient* | Mongo client    |
 
 **Returns:** *Promise*<[*Context*](../classes/graphql_context.context.md)\>
 
-Defined in: [server/graphql/context.ts:58](https://github.com/Puzzlepart/did/blob/4fa695e4/server/graphql/context.ts#L58)
+Defined in: [server/graphql/context.ts:58](https://github.com/Puzzlepart/did/blob/dea0e5c1/server/graphql/context.ts#L58)
