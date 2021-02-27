@@ -1,4 +1,4 @@
-[did-server](../README.md) / [Modules](../modules.md) / [services/cache](../modules/services_cache.md) / CacheService
+[did-server](../README.md) / [services/cache](../modules/services_cache.md) / CacheService
 
 # Class: CacheService
 
@@ -41,7 +41,7 @@ Name | Type | Description |
 
 **Returns:** [*CacheService*](services_cache.cacheservice.md)
 
-Defined in: [server/services/cache.ts:24](https://github.com/Puzzlepart/did/blob/a33ee165/server/services/cache.ts#L24)
+Defined in: [server/services/cache.ts:24](https://github.com/Puzzlepart/did/blob/4fa695e4/server/services/cache.ts#L24)
 
 ## Properties
 
@@ -77,7 +77,7 @@ Name | Type |
 
 **Returns:** *Promise*<T\>
 
-Defined in: [server/services/cache.ts:69](https://github.com/Puzzlepart/did/blob/a33ee165/server/services/cache.ts#L69)
+Defined in: [server/services/cache.ts:69](https://github.com/Puzzlepart/did/blob/4fa695e4/server/services/cache.ts#L69)
 
 ___
 
@@ -100,7 +100,7 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [server/services/cache.ts:48](https://github.com/Puzzlepart/did/blob/a33ee165/server/services/cache.ts#L48)
+Defined in: [server/services/cache.ts:48](https://github.com/Puzzlepart/did/blob/4fa695e4/server/services/cache.ts#L48)
 
 ___
 
@@ -125,7 +125,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<unknown\>
 
-Defined in: [server/services/cache.ts:93](https://github.com/Puzzlepart/did/blob/a33ee165/server/services/cache.ts#L93)
+Defined in: [server/services/cache.ts:93](https://github.com/Puzzlepart/did/blob/4fa695e4/server/services/cache.ts#L93)
 
 ___
 
@@ -143,7 +143,7 @@ Name | Type |
 
 **Returns:** *Promise*<unknown\>
 
-Defined in: [server/services/cache.ts:123](https://github.com/Puzzlepart/did/blob/a33ee165/server/services/cache.ts#L123)
+Defined in: [server/services/cache.ts:123](https://github.com/Puzzlepart/did/blob/4fa695e4/server/services/cache.ts#L123)
 
 ___
 
@@ -166,4 +166,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<T\>
 
-Defined in: [server/services/cache.ts:139](https://github.com/Puzzlepart/did/blob/a33ee165/server/services/cache.ts#L139)
+Defined in: [server/services/cache.ts:139](https://github.com/Puzzlepart/did/blob/4fa695e4/server/services/cache.ts#L139)

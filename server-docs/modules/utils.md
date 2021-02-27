@@ -1,4 +1,4 @@
-[did-server](../README.md) / [Modules](../modules.md) / utils
+[did-server](../README.md) / utils
 
 # Module: utils
 
@@ -26,4 +26,4 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [server/utils/stripHtmlString.ts:10](https://github.com/Puzzlepart/did/blob/a33ee165/server/utils/stripHtmlString.ts#L10)
+Defined in: [server/utils/stripHtmlString.ts:10](https://github.com/Puzzlepart/did/blob/4fa695e4/server/utils/stripHtmlString.ts#L10)

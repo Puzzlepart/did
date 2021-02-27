@@ -1,4 +1,4 @@
-[did-server](../README.md) / [Modules](../modules.md) / utils/env
+[did-server](../README.md) / utils/env
 
 # Module: utils/env
 
@@ -25,4 +25,4 @@ Name | Type | Default value | Description |
 
 **Returns:** *any*
 
-Defined in: [server/utils/env.ts:11](https://github.com/Puzzlepart/did/blob/a33ee165/server/utils/env.ts#L11)
+Defined in: [server/utils/env.ts:11](https://github.com/Puzzlepart/did/blob/4fa695e4/server/utils/env.ts#L11)

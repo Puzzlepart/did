@@ -1,4 +1,4 @@
-[did-server](../README.md) / [Modules](../modules.md) / [@custom-types](../modules/_custom_types.md) / [Express](../modules/_custom_types.express.md) / Request
+[did-server](../README.md) / [@custom-types](../modules/_custom_types.md) / [Express](../modules/_custom_types.express.md) / Request
 
 # Interface: Request
 

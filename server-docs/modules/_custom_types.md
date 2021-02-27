@@ -1,4 +1,4 @@
-[did-server](../README.md) / [Modules](../modules.md) / @custom-types
+[did-server](../README.md) / @custom-types
 
 # Module: @custom-types
 

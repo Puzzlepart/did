@@ -1,4 +1,4 @@
-[did-server](../README.md) / [Modules](../modules.md) / services/cache
+[did-server](../README.md) / services/cache
 
 # Module: services/cache
 
@@ -22,4 +22,4 @@
 
 Ƭ **CacheKey**: *string* \| *string*[]
 
-Defined in: [server/services/cache.ts:15](https://github.com/Puzzlepart/did/blob/a33ee165/server/services/cache.ts#L15)
+Defined in: [server/services/cache.ts:15](https://github.com/Puzzlepart/did/blob/4fa695e4/server/services/cache.ts#L15)

@@ -1,4 +1,4 @@
-[did-server](../README.md) / [Modules](../modules.md) / services
+[did-server](../README.md) / services
 
 # Module: services
 

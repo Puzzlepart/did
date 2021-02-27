@@ -1,4 +1,4 @@
-[did-server](../README.md) / [Modules](../modules.md) / services/oauth
+[did-server](../README.md) / services/oauth
 
 # Module: services/oauth
 
