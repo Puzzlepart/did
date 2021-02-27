@@ -21,7 +21,7 @@
 
 • **authorizePath**: *string*
 
-Defined in: [server/services/oauth.ts:12](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/oauth.ts#L12)
+Defined in: [server/services/oauth.ts:12](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/oauth.ts#L12)
 
 ___
 
@@ -29,7 +29,7 @@ ___
 
 • **clientId**: *string*
 
-Defined in: [server/services/oauth.ts:9](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/oauth.ts#L9)
+Defined in: [server/services/oauth.ts:9](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/oauth.ts#L9)
 
 ___
 
@@ -37,7 +37,7 @@ ___
 
 • **clientSecret**: *string*
 
-Defined in: [server/services/oauth.ts:10](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/oauth.ts#L10)
+Defined in: [server/services/oauth.ts:10](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/oauth.ts#L10)
 
 ___
 
@@ -45,7 +45,7 @@ ___
 
 • `Optional` **force**: *boolean*
 
-Defined in: [server/services/oauth.ts:14](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/oauth.ts#L14)
+Defined in: [server/services/oauth.ts:14](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/oauth.ts#L14)
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 • **tokenHost**: *string*
 
-Defined in: [server/services/oauth.ts:11](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/oauth.ts#L11)
+Defined in: [server/services/oauth.ts:11](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/oauth.ts#L11)
 
 ___
 
@@ -61,4 +61,4 @@ ___
 
 • **tokenPath**: *string*
 
-Defined in: [server/services/oauth.ts:13](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/oauth.ts#L13)
+Defined in: [server/services/oauth.ts:13](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/oauth.ts#L13)

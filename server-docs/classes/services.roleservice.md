@@ -47,7 +47,7 @@ Name | Type |
 
 **Returns:** [*RoleService*](services.roleservice.md)
 
-Defined in: [server/services/mongo/role.ts:7](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/role.ts#L7)
+Defined in: [server/services/mongo/role.ts:7](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/role.ts#L7)
 
 ## Properties
 
@@ -55,7 +55,7 @@ Defined in: [server/services/mongo/role.ts:7](https://github.com/Puzzlepart/did/
 
 • **cache**: [*CacheService*](services_cache.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/@document.ts#L6)
+Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/@document.ts#L6)
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 • **collection**: *Collection*<Role\>
 
-Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/@document.ts#L7)
+Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/@document.ts#L7)
 
 ___
 
@@ -99,7 +99,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<Role\>\>\>
 
-Defined in: [server/services/mongo/role.ts:45](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/role.ts#L45)
+Defined in: [server/services/mongo/role.ts:45](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/role.ts#L45)
 
 ___
 
@@ -117,28 +117,34 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/role.ts:72](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/role.ts#L72)
+Defined in: [server/services/mongo/role.ts:72](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/role.ts#L72)
 
 ___
 
 ### find
 
-▸ **find**(`query`: *FilterQuery*<Role\>, `sort?`: [*string*, *number*][] \| { [key: string]: V;  } \| { `description?`: *number* \| { `$meta?`: MetaSortOperators  } ; `icon?`: *number* \| { `$meta?`: MetaSortOperators  } ; `name?`: *number* \| { `$meta?`: MetaSortOperators  } ; `permissions?`: *number* \| { `$meta?`: MetaSortOperators  } ; `readOnly?`: *number* \| { `$meta?`: MetaSortOperators  }  }): *Promise*<Role[]\>
+▸ **find**<S\>(`query`: *FilterQuery*<Role\>, `sort?`: S): *Promise*<Role[]\>
 
 Wrapper on find().toArray()
 
 **`see`** — https ://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
+
+#### Type parameters:
+
+Name | Default |
+:------ | :------ |
+`S` | *any* |
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
 `query` | *FilterQuery*<Role\> | Query   |
-`sort?` | [*string*, *number*][] \| { [key: string]: V;  } \| { `description?`: *number* \| { `$meta?`: MetaSortOperators  } ; `icon?`: *number* \| { `$meta?`: MetaSortOperators  } ; `name?`: *number* \| { `$meta?`: MetaSortOperators  } ; `permissions?`: *number* \| { `$meta?`: MetaSortOperators  } ; `readOnly?`: *number* \| { `$meta?`: MetaSortOperators  }  } | Sort options    |
+`sort?` | S | Sort options    |
 
 **Returns:** *Promise*<Role[]\>
 
-Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/@document.ts#L37)
+Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/@document.ts#L37)
 
 ___
 
@@ -156,7 +162,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Role\>
 
-Defined in: [server/services/mongo/role.ts:31](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/role.ts#L31)
+Defined in: [server/services/mongo/role.ts:31](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/role.ts#L31)
 
 ___
 
@@ -174,7 +180,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Role[]\>
 
-Defined in: [server/services/mongo/role.ts:17](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/role.ts#L17)
+Defined in: [server/services/mongo/role.ts:17](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/role.ts#L17)
 
 ___
 
@@ -192,4 +198,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/role.ts:59](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/role.ts#L59)
+Defined in: [server/services/mongo/role.ts:59](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/role.ts#L59)

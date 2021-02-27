@@ -32,7 +32,7 @@ Name | Type | Description |
 
 **Returns:** [*CustomerResolver*](graphql.customerresolver.md)
 
-Defined in: [server/graphql/resolvers/customer/index.ts:12](https://github.com/Puzzlepart/did/blob/f23caba1/server/graphql/resolvers/customer/index.ts#L12)
+Defined in: [server/graphql/resolvers/customer/index.ts:12](https://github.com/Puzzlepart/did/blob/63fb8902/server/graphql/resolvers/customer/index.ts#L12)
 
 ## Methods
 
@@ -51,7 +51,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<{ `error`: *any* = null; `success`: *boolean* = true }\>
 
-Defined in: [server/graphql/resolvers/customer/index.ts:39](https://github.com/Puzzlepart/did/blob/f23caba1/server/graphql/resolvers/customer/index.ts#L39)
+Defined in: [server/graphql/resolvers/customer/index.ts:39](https://github.com/Puzzlepart/did/blob/63fb8902/server/graphql/resolvers/customer/index.ts#L39)
 
 ___
 
@@ -69,7 +69,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Customer[]\>
 
-Defined in: [server/graphql/resolvers/customer/index.ts:27](https://github.com/Puzzlepart/did/blob/f23caba1/server/graphql/resolvers/customer/index.ts#L27)
+Defined in: [server/graphql/resolvers/customer/index.ts:27](https://github.com/Puzzlepart/did/blob/63fb8902/server/graphql/resolvers/customer/index.ts#L27)
 
 ___
 
@@ -87,4 +87,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/graphql/resolvers/customer/index.ts:56](https://github.com/Puzzlepart/did/blob/f23caba1/server/graphql/resolvers/customer/index.ts#L56)
+Defined in: [server/graphql/resolvers/customer/index.ts:56](https://github.com/Puzzlepart/did/blob/63fb8902/server/graphql/resolvers/customer/index.ts#L56)

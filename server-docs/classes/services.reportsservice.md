@@ -47,7 +47,7 @@ Name | Type | Description |
 
 **Returns:** [*ReportsService*](services.reportsservice.md)
 
-Defined in: [server/services/mongo/reports.ts:13](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/reports.ts#L13)
+Defined in: [server/services/mongo/reports.ts:13](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/reports.ts#L13)
 
 ## Properties
 
@@ -55,7 +55,7 @@ Defined in: [server/services/mongo/reports.ts:13](https://github.com/Puzzlepart/
 
 • `Private` **\_project**: [*ProjectService*](services.projectservice.md)
 
-Defined in: [server/services/mongo/reports.ts:12](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/reports.ts#L12)
+Defined in: [server/services/mongo/reports.ts:12](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/reports.ts#L12)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 • `Private` **\_user**: [*UserService*](services.userservice.md)
 
-Defined in: [server/services/mongo/reports.ts:13](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/reports.ts#L13)
+Defined in: [server/services/mongo/reports.ts:13](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/reports.ts#L13)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 • **cache**: [*CacheService*](services_cache.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/@document.ts#L6)
+Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/@document.ts#L6)
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 • **collection**: *Collection*<TimeEntry\>
 
-Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/@document.ts#L7)
+Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/@document.ts#L7)
 
 ___
 
@@ -103,22 +103,28 @@ ___
 
 ### find
 
-▸ **find**(`query`: *FilterQuery*<TimeEntry\>, `sort?`: [*string*, *number*][] \| { [key: string]: V;  } \| { `customer?`: *number* \| { `$meta?`: MetaSortOperators  } ; `description?`: *number* \| { `$meta?`: MetaSortOperators  } ; `duration?`: *number* \| { `$meta?`: MetaSortOperators  } ; `endDateTime?`: *number* \| { `$meta?`: MetaSortOperators  } ; `id?`: *number* \| { `$meta?`: MetaSortOperators  } ; `key?`: *number* \| { `$meta?`: MetaSortOperators  } ; `month?`: *number* \| { `$meta?`: MetaSortOperators  } ; `project?`: *number* \| { `$meta?`: MetaSortOperators  } ; `projectId?`: *number* \| { `$meta?`: MetaSortOperators  } ; `resource?`: *number* \| { `$meta?`: MetaSortOperators  } ; `startDateTime?`: *number* \| { `$meta?`: MetaSortOperators  } ; `title?`: *number* \| { `$meta?`: MetaSortOperators  } ; `userId?`: *number* \| { `$meta?`: MetaSortOperators  } ; `webLink?`: *number* \| { `$meta?`: MetaSortOperators  } ; `webUrl?`: *number* \| { `$meta?`: MetaSortOperators  } ; `week?`: *number* \| { `$meta?`: MetaSortOperators  } ; `year?`: *number* \| { `$meta?`: MetaSortOperators  }  }): *Promise*<TimeEntry[]\>
+▸ **find**<S\>(`query`: *FilterQuery*<TimeEntry\>, `sort?`: S): *Promise*<TimeEntry[]\>
 
 Wrapper on find().toArray()
 
 **`see`** — https ://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
+
+#### Type parameters:
+
+Name | Default |
+:------ | :------ |
+`S` | *any* |
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
 `query` | *FilterQuery*<TimeEntry\> | Query   |
-`sort?` | [*string*, *number*][] \| { [key: string]: V;  } \| { `customer?`: *number* \| { `$meta?`: MetaSortOperators  } ; `description?`: *number* \| { `$meta?`: MetaSortOperators  } ; `duration?`: *number* \| { `$meta?`: MetaSortOperators  } ; `endDateTime?`: *number* \| { `$meta?`: MetaSortOperators  } ; `id?`: *number* \| { `$meta?`: MetaSortOperators  } ; `key?`: *number* \| { `$meta?`: MetaSortOperators  } ; `month?`: *number* \| { `$meta?`: MetaSortOperators  } ; `project?`: *number* \| { `$meta?`: MetaSortOperators  } ; `projectId?`: *number* \| { `$meta?`: MetaSortOperators  } ; `resource?`: *number* \| { `$meta?`: MetaSortOperators  } ; `startDateTime?`: *number* \| { `$meta?`: MetaSortOperators  } ; `title?`: *number* \| { `$meta?`: MetaSortOperators  } ; `userId?`: *number* \| { `$meta?`: MetaSortOperators  } ; `webLink?`: *number* \| { `$meta?`: MetaSortOperators  } ; `webUrl?`: *number* \| { `$meta?`: MetaSortOperators  } ; `week?`: *number* \| { `$meta?`: MetaSortOperators  } ; `year?`: *number* \| { `$meta?`: MetaSortOperators  }  } | Sort options    |
+`sort?` | S | Sort options    |
 
 **Returns:** *Promise*<TimeEntry[]\>
 
-Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/@document.ts#L37)
+Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/@document.ts#L37)
 
 ___
 
@@ -137,4 +143,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/mongo/reports.ts:32](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/reports.ts#L32)
+Defined in: [server/services/mongo/reports.ts:32](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/reports.ts#L32)

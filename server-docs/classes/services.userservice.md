@@ -50,7 +50,7 @@ Name | Type |
 
 **Returns:** [*UserService*](services.userservice.md)
 
-Defined in: [server/services/mongo/user.ts:11](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/user.ts#L11)
+Defined in: [server/services/mongo/user.ts:11](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/user.ts#L11)
 
 ## Properties
 
@@ -58,7 +58,7 @@ Defined in: [server/services/mongo/user.ts:11](https://github.com/Puzzlepart/did
 
 • `Private` **\_role**: [*RoleService*](services.roleservice.md)
 
-Defined in: [server/services/mongo/user.ts:11](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/user.ts#L11)
+Defined in: [server/services/mongo/user.ts:11](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/user.ts#L11)
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 • **cache**: [*CacheService*](services_cache.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/@document.ts#L6)
+Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/@document.ts#L6)
 
 ___
 
@@ -80,7 +80,7 @@ ___
 
 • **collection**: *Collection*<User\>
 
-Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/@document.ts#L7)
+Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/@document.ts#L7)
 
 ___
 
@@ -119,7 +119,7 @@ Name | Type | Description |
 
 **Returns:** T
 
-Defined in: [server/services/mongo/user.ts:26](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/user.ts#L26)
+Defined in: [server/services/mongo/user.ts:26](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/user.ts#L26)
 
 ___
 
@@ -137,7 +137,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<User\>\>\>
 
-Defined in: [server/services/mongo/user.ts:75](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/user.ts#L75)
+Defined in: [server/services/mongo/user.ts:75](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/user.ts#L75)
 
 ___
 
@@ -155,28 +155,34 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertWriteOpResult<WithId<User\>\>\>
 
-Defined in: [server/services/mongo/user.ts:89](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/user.ts#L89)
+Defined in: [server/services/mongo/user.ts:89](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/user.ts#L89)
 
 ___
 
 ### find
 
-▸ **find**(`query`: *FilterQuery*<User\>, `sort?`: [*string*, *number*][] \| { [key: string]: V;  } \| { `_id?`: *number* \| { `$meta?`: MetaSortOperators  } ; `configuration?`: *number* \| { `$meta?`: MetaSortOperators  } ; `displayName?`: *number* \| { `$meta?`: MetaSortOperators  } ; `givenName?`: *number* \| { `$meta?`: MetaSortOperators  } ; `id?`: *number* \| { `$meta?`: MetaSortOperators  } ; `jobTitle?`: *number* \| { `$meta?`: MetaSortOperators  } ; `mail?`: *number* \| { `$meta?`: MetaSortOperators  } ; `mobilePhone?`: *number* \| { `$meta?`: MetaSortOperators  } ; `preferredLanguage?`: *number* \| { `$meta?`: MetaSortOperators  } ; `role?`: *number* \| { `$meta?`: MetaSortOperators  } ; `subscription?`: *number* \| { `$meta?`: MetaSortOperators  } ; `surname?`: *number* \| { `$meta?`: MetaSortOperators  } ; `create?`:   }): *Promise*<User[]\>
+▸ **find**<S\>(`query`: *FilterQuery*<User\>, `sort?`: S): *Promise*<User[]\>
 
 Wrapper on find().toArray()
 
 **`see`** — https ://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
+
+#### Type parameters:
+
+Name | Default |
+:------ | :------ |
+`S` | *any* |
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
 `query` | *FilterQuery*<User\> | Query   |
-`sort?` | [*string*, *number*][] \| { [key: string]: V;  } \| { `_id?`: *number* \| { `$meta?`: MetaSortOperators  } ; `configuration?`: *number* \| { `$meta?`: MetaSortOperators  } ; `displayName?`: *number* \| { `$meta?`: MetaSortOperators  } ; `givenName?`: *number* \| { `$meta?`: MetaSortOperators  } ; `id?`: *number* \| { `$meta?`: MetaSortOperators  } ; `jobTitle?`: *number* \| { `$meta?`: MetaSortOperators  } ; `mail?`: *number* \| { `$meta?`: MetaSortOperators  } ; `mobilePhone?`: *number* \| { `$meta?`: MetaSortOperators  } ; `preferredLanguage?`: *number* \| { `$meta?`: MetaSortOperators  } ; `role?`: *number* \| { `$meta?`: MetaSortOperators  } ; `subscription?`: *number* \| { `$meta?`: MetaSortOperators  } ; `surname?`: *number* \| { `$meta?`: MetaSortOperators  } ; `create?`:   } | Sort options    |
+`sort?` | S | Sort options    |
 
 **Returns:** *Promise*<User[]\>
 
-Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/@document.ts#L37)
+Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/@document.ts#L37)
 
 ___
 
@@ -194,7 +200,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<User\>
 
-Defined in: [server/services/mongo/user.ts:57](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/user.ts#L57)
+Defined in: [server/services/mongo/user.ts:57](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/user.ts#L57)
 
 ___
 
@@ -212,7 +218,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<User[]\>
 
-Defined in: [server/services/mongo/user.ts:35](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/user.ts#L35)
+Defined in: [server/services/mongo/user.ts:35](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/user.ts#L35)
 
 ___
 
@@ -233,7 +239,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/user.ts:121](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/user.ts#L121)
+Defined in: [server/services/mongo/user.ts:121](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/user.ts#L121)
 
 ___
 
@@ -251,4 +257,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/user.ts:105](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/user.ts#L105)
+Defined in: [server/services/mongo/user.ts:105](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/user.ts#L105)

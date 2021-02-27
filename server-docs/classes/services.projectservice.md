@@ -49,7 +49,7 @@ Name | Type | Description |
 
 **Returns:** [*ProjectService*](services.projectservice.md)
 
-Defined in: [server/services/mongo/project.ts:21](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/project.ts#L21)
+Defined in: [server/services/mongo/project.ts:21](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/project.ts#L21)
 
 ## Properties
 
@@ -57,7 +57,7 @@ Defined in: [server/services/mongo/project.ts:21](https://github.com/Puzzlepart/
 
 • `Private` **\_customer**: [*CustomerService*](services.customerservice.md)
 
-Defined in: [server/services/mongo/project.ts:20](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/project.ts#L20)
+Defined in: [server/services/mongo/project.ts:20](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/project.ts#L20)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 • `Private` **\_label**: *LabelService*
 
-Defined in: [server/services/mongo/project.ts:21](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/project.ts#L21)
+Defined in: [server/services/mongo/project.ts:21](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/project.ts#L21)
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 • **cache**: [*CacheService*](services_cache.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/@document.ts#L6)
+Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/@document.ts#L6)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 • **collection**: *Collection*<Project\>
 
-Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/@document.ts#L7)
+Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/@document.ts#L7)
 
 ___
 
@@ -119,28 +119,34 @@ Name | Type | Description |
 
 **Returns:** *Promise*<string\>
 
-Defined in: [server/services/mongo/project.ts:41](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/project.ts#L41)
+Defined in: [server/services/mongo/project.ts:41](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/project.ts#L41)
 
 ___
 
 ### find
 
-▸ **find**(`query`: *FilterQuery*<Project\>, `sort?`: [*string*, *number*][] \| { [key: string]: V;  } \| { `_id?`: *number* \| { `$meta?`: MetaSortOperators  } ; `customer?`: *number* \| { `$meta?`: MetaSortOperators  } ; `customerKey?`: *number* \| { `$meta?`: MetaSortOperators  } ; `description?`: *number* \| { `$meta?`: MetaSortOperators  } ; `externalSystemURL?`: *number* \| { `$meta?`: MetaSortOperators  } ; `icon?`: *number* \| { `$meta?`: MetaSortOperators  } ; `inactive?`: *number* \| { `$meta?`: MetaSortOperators  } ; `key?`: *number* \| { `$meta?`: MetaSortOperators  } ; `labels?`: *number* \| { `$meta?`: MetaSortOperators  } ; `name?`: *number* \| { `$meta?`: MetaSortOperators  } ; `outlookCategory?`: *number* \| { `$meta?`: MetaSortOperators  } ; `tag?`: *number* \| { `$meta?`: MetaSortOperators  } ; `webLink?`: *number* \| { `$meta?`: MetaSortOperators  }  }): *Promise*<Project[]\>
+▸ **find**<S\>(`query`: *FilterQuery*<Project\>, `sort?`: S): *Promise*<Project[]\>
 
 Wrapper on find().toArray()
 
 **`see`** — https ://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
+
+#### Type parameters:
+
+Name | Default |
+:------ | :------ |
+`S` | *any* |
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
 `query` | *FilterQuery*<Project\> | Query   |
-`sort?` | [*string*, *number*][] \| { [key: string]: V;  } \| { `_id?`: *number* \| { `$meta?`: MetaSortOperators  } ; `customer?`: *number* \| { `$meta?`: MetaSortOperators  } ; `customerKey?`: *number* \| { `$meta?`: MetaSortOperators  } ; `description?`: *number* \| { `$meta?`: MetaSortOperators  } ; `externalSystemURL?`: *number* \| { `$meta?`: MetaSortOperators  } ; `icon?`: *number* \| { `$meta?`: MetaSortOperators  } ; `inactive?`: *number* \| { `$meta?`: MetaSortOperators  } ; `key?`: *number* \| { `$meta?`: MetaSortOperators  } ; `labels?`: *number* \| { `$meta?`: MetaSortOperators  } ; `name?`: *number* \| { `$meta?`: MetaSortOperators  } ; `outlookCategory?`: *number* \| { `$meta?`: MetaSortOperators  } ; `tag?`: *number* \| { `$meta?`: MetaSortOperators  } ; `webLink?`: *number* \| { `$meta?`: MetaSortOperators  }  } | Sort options    |
+`sort?` | S | Sort options    |
 
 **Returns:** *Promise*<Project[]\>
 
-Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/@document.ts#L37)
+Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/@document.ts#L37)
 
 ___
 
@@ -162,7 +168,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<ProjectsData\>
 
-Defined in: [server/services/mongo/project.ts:85](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/project.ts#L85)
+Defined in: [server/services/mongo/project.ts:85](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/project.ts#L85)
 
 ___
 
@@ -182,4 +188,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<boolean\>
 
-Defined in: [server/services/mongo/project.ts:63](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/project.ts#L63)
+Defined in: [server/services/mongo/project.ts:63](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/project.ts#L63)

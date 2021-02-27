@@ -46,7 +46,7 @@ Name | Type |
 
 **Returns:** [*SubscriptionService*](services.subscriptionservice.md)
 
-Defined in: [server/services/mongo/subscription.ts:9](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/subscription.ts#L9)
+Defined in: [server/services/mongo/subscription.ts:9](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/subscription.ts#L9)
 
 ## Properties
 
@@ -54,7 +54,7 @@ Defined in: [server/services/mongo/subscription.ts:9](https://github.com/Puzzlep
 
 • **cache**: [*CacheService*](services_cache.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/@document.ts#L6)
+Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/@document.ts#L6)
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 • **collection**: *Collection*<Subscription\>
 
-Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/@document.ts#L7)
+Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/@document.ts#L7)
 
 ___
 
@@ -104,7 +104,7 @@ Name | Type | Description |
 
 **Returns:** T
 
-Defined in: [server/services/mongo/subscription.ts:19](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/subscription.ts#L19)
+Defined in: [server/services/mongo/subscription.ts:19](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/subscription.ts#L19)
 
 ___
 
@@ -122,28 +122,34 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<Subscription\>\>\>
 
-Defined in: [server/services/mongo/subscription.ts:48](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/subscription.ts#L48)
+Defined in: [server/services/mongo/subscription.ts:48](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/subscription.ts#L48)
 
 ___
 
 ### find
 
-▸ **find**(`query`: *FilterQuery*<Subscription\>, `sort?`: [*string*, *number*][] \| { [key: string]: V;  } \| { `_id?`: *number* \| { `$meta?`: MetaSortOperators  } ; `db?`: *number* \| { `$meta?`: MetaSortOperators  } ; `id?`: *number* \| { `$meta?`: MetaSortOperators  } ; `name?`: *number* \| { `$meta?`: MetaSortOperators  } ; `settings?`: *number* \| { `$meta?`: MetaSortOperators  }  }): *Promise*<Subscription[]\>
+▸ **find**<S\>(`query`: *FilterQuery*<Subscription\>, `sort?`: S): *Promise*<Subscription[]\>
 
 Wrapper on find().toArray()
 
 **`see`** — https ://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
+
+#### Type parameters:
+
+Name | Default |
+:------ | :------ |
+`S` | *any* |
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
 `query` | *FilterQuery*<Subscription\> | Query   |
-`sort?` | [*string*, *number*][] \| { [key: string]: V;  } \| { `_id?`: *number* \| { `$meta?`: MetaSortOperators  } ; `db?`: *number* \| { `$meta?`: MetaSortOperators  } ; `id?`: *number* \| { `$meta?`: MetaSortOperators  } ; `name?`: *number* \| { `$meta?`: MetaSortOperators  } ; `settings?`: *number* \| { `$meta?`: MetaSortOperators  }  } | Sort options    |
+`sort?` | S | Sort options    |
 
 **Returns:** *Promise*<Subscription[]\>
 
-Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/@document.ts#L37)
+Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/@document.ts#L37)
 
 ___
 
@@ -161,7 +167,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Subscription\>
 
-Defined in: [server/services/mongo/subscription.ts:31](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/subscription.ts#L31)
+Defined in: [server/services/mongo/subscription.ts:31](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/subscription.ts#L31)
 
 ___
 
@@ -179,4 +185,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
 
-Defined in: [server/services/mongo/subscription.ts:64](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/subscription.ts#L64)
+Defined in: [server/services/mongo/subscription.ts:64](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/subscription.ts#L64)

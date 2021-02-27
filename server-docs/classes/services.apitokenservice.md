@@ -45,7 +45,7 @@ Name | Type |
 
 **Returns:** [*ApiTokenService*](services.apitokenservice.md)
 
-Defined in: [server/services/mongo/apitoken.ts:9](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/apitoken.ts#L9)
+Defined in: [server/services/mongo/apitoken.ts:9](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/apitoken.ts#L9)
 
 ## Properties
 
@@ -53,7 +53,7 @@ Defined in: [server/services/mongo/apitoken.ts:9](https://github.com/Puzzlepart/
 
 • **cache**: [*CacheService*](services_cache.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/@document.ts#L6)
+Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/@document.ts#L6)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 • **collection**: *Collection*<ApiToken\>
 
-Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/@document.ts#L7)
+Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/@document.ts#L7)
 
 ___
 
@@ -98,7 +98,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<string\>
 
-Defined in: [server/services/mongo/apitoken.ts:34](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/apitoken.ts#L34)
+Defined in: [server/services/mongo/apitoken.ts:34](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/apitoken.ts#L34)
 
 ___
 
@@ -117,28 +117,34 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/apitoken.ts:58](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/apitoken.ts#L58)
+Defined in: [server/services/mongo/apitoken.ts:58](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/apitoken.ts#L58)
 
 ___
 
 ### find
 
-▸ **find**(`query`: *FilterQuery*<ApiToken\>, `sort?`: [*string*, *number*][] \| { [key: string]: V;  } \| { `apiKey?`: *number* \| { `$meta?`: MetaSortOperators  } ; `created?`: *number* \| { `$meta?`: MetaSortOperators  } ; `expires?`: *number* \| { `$meta?`: MetaSortOperators  } ; `name?`: *number* \| { `$meta?`: MetaSortOperators  } ; `permissions?`: *number* \| { `$meta?`: MetaSortOperators  } ; `subscriptionId?`: *number* \| { `$meta?`: MetaSortOperators  }  }): *Promise*<ApiToken[]\>
+▸ **find**<S\>(`query`: *FilterQuery*<ApiToken\>, `sort?`: S): *Promise*<ApiToken[]\>
 
 Wrapper on find().toArray()
 
 **`see`** — https ://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
+
+#### Type parameters:
+
+Name | Default |
+:------ | :------ |
+`S` | *any* |
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
 `query` | *FilterQuery*<ApiToken\> | Query   |
-`sort?` | [*string*, *number*][] \| { [key: string]: V;  } \| { `apiKey?`: *number* \| { `$meta?`: MetaSortOperators  } ; `created?`: *number* \| { `$meta?`: MetaSortOperators  } ; `expires?`: *number* \| { `$meta?`: MetaSortOperators  } ; `name?`: *number* \| { `$meta?`: MetaSortOperators  } ; `permissions?`: *number* \| { `$meta?`: MetaSortOperators  } ; `subscriptionId?`: *number* \| { `$meta?`: MetaSortOperators  }  } | Sort options    |
+`sort?` | S | Sort options    |
 
 **Returns:** *Promise*<ApiToken[]\>
 
-Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/@document.ts#L37)
+Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/@document.ts#L37)
 
 ___
 
@@ -156,4 +162,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<ApiToken[]\>
 
-Defined in: [server/services/mongo/apitoken.ts:19](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/apitoken.ts#L19)
+Defined in: [server/services/mongo/apitoken.ts:19](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/apitoken.ts#L19)

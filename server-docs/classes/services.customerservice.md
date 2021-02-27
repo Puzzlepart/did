@@ -46,7 +46,7 @@ Name | Type |
 
 **Returns:** [*CustomerService*](services.customerservice.md)
 
-Defined in: [server/services/mongo/customer.ts:7](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/customer.ts#L7)
+Defined in: [server/services/mongo/customer.ts:7](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/customer.ts#L7)
 
 ## Properties
 
@@ -54,7 +54,7 @@ Defined in: [server/services/mongo/customer.ts:7](https://github.com/Puzzlepart/
 
 • **cache**: [*CacheService*](services_cache.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/@document.ts#L6)
+Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/@document.ts#L6)
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 • **collection**: *Collection*<Customer\>
 
-Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/@document.ts#L7)
+Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/@document.ts#L7)
 
 ___
 
@@ -98,7 +98,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/customer.ts:17](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/customer.ts#L17)
+Defined in: [server/services/mongo/customer.ts:17](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/customer.ts#L17)
 
 ___
 
@@ -116,28 +116,34 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/customer.ts:45](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/customer.ts#L45)
+Defined in: [server/services/mongo/customer.ts:45](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/customer.ts#L45)
 
 ___
 
 ### find
 
-▸ **find**(`query`: *FilterQuery*<Customer\>, `sort?`: [*string*, *number*][] \| { [key: string]: V;  } \| { `description?`: *number* \| { `$meta?`: MetaSortOperators  } ; `externalSystemURL?`: *number* \| { `$meta?`: MetaSortOperators  } ; `icon?`: *number* \| { `$meta?`: MetaSortOperators  } ; `inactive?`: *number* \| { `$meta?`: MetaSortOperators  } ; `key?`: *number* \| { `$meta?`: MetaSortOperators  } ; `name?`: *number* \| { `$meta?`: MetaSortOperators  } ; `webLink?`: *number* \| { `$meta?`: MetaSortOperators  } ; `fromInput?`:   }): *Promise*<Customer[]\>
+▸ **find**<S\>(`query`: *FilterQuery*<Customer\>, `sort?`: S): *Promise*<Customer[]\>
 
 Wrapper on find().toArray()
 
 **`see`** — https ://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
+
+#### Type parameters:
+
+Name | Default |
+:------ | :------ |
+`S` | *any* |
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
 `query` | *FilterQuery*<Customer\> | Query   |
-`sort?` | [*string*, *number*][] \| { [key: string]: V;  } \| { `description?`: *number* \| { `$meta?`: MetaSortOperators  } ; `externalSystemURL?`: *number* \| { `$meta?`: MetaSortOperators  } ; `icon?`: *number* \| { `$meta?`: MetaSortOperators  } ; `inactive?`: *number* \| { `$meta?`: MetaSortOperators  } ; `key?`: *number* \| { `$meta?`: MetaSortOperators  } ; `name?`: *number* \| { `$meta?`: MetaSortOperators  } ; `webLink?`: *number* \| { `$meta?`: MetaSortOperators  } ; `fromInput?`:   } | Sort options    |
+`sort?` | S | Sort options    |
 
 **Returns:** *Promise*<Customer[]\>
 
-Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/@document.ts#L37)
+Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/@document.ts#L37)
 
 ___
 
@@ -155,7 +161,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Customer[]\>
 
-Defined in: [server/services/mongo/customer.ts:59](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/customer.ts#L59)
+Defined in: [server/services/mongo/customer.ts:59](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/customer.ts#L59)
 
 ___
 
@@ -173,4 +179,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/customer.ts:31](https://github.com/Puzzlepart/did/blob/f23caba1/server/services/mongo/customer.ts#L31)
+Defined in: [server/services/mongo/customer.ts:31](https://github.com/Puzzlepart/did/blob/63fb8902/server/services/mongo/customer.ts#L31)

@@ -34,9 +34,9 @@ export class MongoDocumentService<T> {
    * @param query - Query
    * @param sort - Sort options
    */
-  public find(
+  public find<S = any>(
     query: FilterQuery<T>,
-    sort?: Array<[string, number]> | SortOptionObject<T>
+    sort?: S
   ) {
     return this.collection.find(query, { sort }).toArray()
   }
