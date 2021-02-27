@@ -21,8 +21,6 @@ export function useNotificationsQuery(
     },
     fetchPolicy: 'cache-and-network'
   })
-  // eslint-disable-next-line no-console
-  console.log(data)
   return {
     notifications: data?.notifications || [],
     refetch: (delay = 0) => {
