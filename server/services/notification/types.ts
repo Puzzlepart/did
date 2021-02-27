@@ -5,7 +5,7 @@ import format from 'string-format'
 /**
  * Used as a base to create notifications to the user
  */
-class UserNotification {
+export class UserNotification {
   /**
    * Notification ID
    */

@@ -25,6 +25,7 @@
 - [RoleService](../classes/services.roleservice.md)
 - [SubscriptionService](../classes/services.subscriptionservice.md)
 - [TimesheetService](../classes/services.timesheetservice.md)
+- [UserNotification](../classes/services.usernotification.md)
 - [UserService](../classes/services.userservice.md)
 
 ### Type aliases
