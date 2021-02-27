@@ -6,7 +6,7 @@
 
 ## Hierarchy
 
-* *MongoDocumentService*<Role\>
+* *MongoDocumentService*<[*Role*](graphql.role.md)\>
 
   ↳ **RoleService**
 
@@ -47,7 +47,7 @@ Name | Type |
 
 **Returns:** [*RoleService*](services.roleservice.md)
 
-Defined in: [server/services/mongo/role.ts:7](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/role.ts#L7)
+Defined in: [server/services/mongo/role.ts:7](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/role.ts#L7)
 
 ## Properties
 
@@ -55,7 +55,7 @@ Defined in: [server/services/mongo/role.ts:7](https://github.com/Puzzlepart/did/
 
 • **cache**: [*CacheService*](services_cache.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/@document.ts#L6)
+Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/@document.ts#L6)
 
 ___
 
@@ -67,9 +67,9 @@ ___
 
 ### collection
 
-• **collection**: *Collection*<Role\>
+• **collection**: *Collection*<[*Role*](graphql.role.md)\>
 
-Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/@document.ts#L7)
+Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/@document.ts#L7)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 ### addRole
 
-▸ **addRole**(`role`: *Role*): *Promise*<InsertOneWriteOpResult<WithId<Role\>\>\>
+▸ **addRole**(`role`: [*Role*](graphql.role.md)): *Promise*<InsertOneWriteOpResult<WithId<[*Role*](graphql.role.md)\>\>\>
 
 Add role
 
@@ -95,11 +95,11 @@ Add role
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`role` | *Role* | Role    |
+`role` | [*Role*](graphql.role.md) | Role    |
 
-**Returns:** *Promise*<InsertOneWriteOpResult<WithId<Role\>\>\>
+**Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*Role*](graphql.role.md)\>\>\>
 
-Defined in: [server/services/mongo/role.ts:45](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/role.ts#L45)
+Defined in: [server/services/mongo/role.ts:45](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/role.ts#L45)
 
 ___
 
@@ -117,13 +117,13 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/role.ts:72](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/role.ts#L72)
+Defined in: [server/services/mongo/role.ts:72](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/role.ts#L72)
 
 ___
 
 ### find
 
-▸ **find**<S\>(`query`: *FilterQuery*<Role\>, `sort?`: S): *Promise*<Role[]\>
+▸ **find**<S\>(`query`: *FilterQuery*<[*Role*](graphql.role.md)\>, `sort?`: S): *Promise*<[*Role*](graphql.role.md)[]\>
 
 Wrapper on find().toArray()
 
@@ -139,18 +139,18 @@ Name | Default |
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<Role\> | Query   |
+`query` | *FilterQuery*<[*Role*](graphql.role.md)\> | Query   |
 `sort?` | S | Sort options    |
 
-**Returns:** *Promise*<Role[]\>
+**Returns:** *Promise*<[*Role*](graphql.role.md)[]\>
 
-Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/@document.ts#L37)
+Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/@document.ts#L37)
 
 ___
 
 ### getByName
 
-▸ **getByName**(`name`: *string*): *Promise*<Role\>
+▸ **getByName**(`name`: *string*): *Promise*<[*Role*](graphql.role.md)\>
 
 Get Role by name
 
@@ -160,15 +160,15 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `name` | *string* | Role name    |
 
-**Returns:** *Promise*<Role\>
+**Returns:** *Promise*<[*Role*](graphql.role.md)\>
 
-Defined in: [server/services/mongo/role.ts:31](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/role.ts#L31)
+Defined in: [server/services/mongo/role.ts:31](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/role.ts#L31)
 
 ___
 
 ### getRoles
 
-▸ **getRoles**(`query?`: *FilterQuery*<Role\>): *Promise*<Role[]\>
+▸ **getRoles**(`query?`: *FilterQuery*<[*Role*](graphql.role.md)\>): *Promise*<[*Role*](graphql.role.md)[]\>
 
 Get roles
 
@@ -176,17 +176,17 @@ Get roles
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query?` | *FilterQuery*<Role\> | Query    |
+`query?` | *FilterQuery*<[*Role*](graphql.role.md)\> | Query    |
 
-**Returns:** *Promise*<Role[]\>
+**Returns:** *Promise*<[*Role*](graphql.role.md)[]\>
 
-Defined in: [server/services/mongo/role.ts:17](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/role.ts#L17)
+Defined in: [server/services/mongo/role.ts:17](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/role.ts#L17)
 
 ___
 
 ### updateRole
 
-▸ **updateRole**(`role`: *Role*): *Promise*<void\>
+▸ **updateRole**(`role`: [*Role*](graphql.role.md)): *Promise*<void\>
 
 Update role
 
@@ -194,8 +194,8 @@ Update role
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`role` | *Role* | Role    |
+`role` | [*Role*](graphql.role.md) | Role    |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/role.ts:59](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/role.ts#L59)
+Defined in: [server/services/mongo/role.ts:59](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/role.ts#L59)

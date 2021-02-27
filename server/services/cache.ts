@@ -33,7 +33,7 @@ export class CacheService {
     @Inject('CONTEXT') private readonly context: Context,
     public prefix?: string,
     public scope: CacheScope = CacheScope.SUBSCRIPTION
-  ) { }
+  ) {}
 
   /**
    * Get scoped cache key

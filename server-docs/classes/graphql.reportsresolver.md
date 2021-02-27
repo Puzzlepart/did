@@ -30,13 +30,13 @@ Name | Type | Description |
 
 **Returns:** [*ReportsResolver*](graphql.reportsresolver.md)
 
-Defined in: [server/graphql/resolvers/reports/index.ts:12](https://github.com/Puzzlepart/did/blob/7445431d/server/graphql/resolvers/reports/index.ts#L12)
+Defined in: [server/graphql/resolvers/reports/index.ts:12](https://github.com/Puzzlepart/did/blob/4fe732f3/server/graphql/resolvers/reports/index.ts#L12)
 
 ## Methods
 
 ### timeentries
 
-▸ **timeentries**(`query`: *ReportsQuery*, `currentUser`: *boolean*, `sortAsc`: *boolean*, `ctx`: [*Context*](graphql_context.context.md)): *Promise*<Report\>
+▸ **timeentries**(`query`: [*ReportsQuery*](graphql.reportsquery.md), `currentUser`: *boolean*, `sortAsc`: *boolean*, `ctx`: [*Context*](graphql_context.context.md)): *Promise*<Report\>
 
 Get time entries
 
@@ -44,11 +44,11 @@ Get time entries
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *ReportsQuery* | Query   |
+`query` | [*ReportsQuery*](graphql.reportsquery.md) | Query   |
 `currentUser` | *boolean* | Current user   |
 `sortAsc` | *boolean* | Sort ascending   |
 `ctx` | [*Context*](graphql_context.context.md) | GraphQL context    |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/graphql/resolvers/reports/index.ts:32](https://github.com/Puzzlepart/did/blob/7445431d/server/graphql/resolvers/reports/index.ts#L32)
+Defined in: [server/graphql/resolvers/reports/index.ts:32](https://github.com/Puzzlepart/did/blob/4fe732f3/server/graphql/resolvers/reports/index.ts#L32)

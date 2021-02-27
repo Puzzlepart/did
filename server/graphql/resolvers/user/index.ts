@@ -3,8 +3,7 @@ import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { pick } from 'underscore'
-import { MSGraphService } from '../../../services'
-import { MongoService } from '../../../services/mongo'
+import { MongoService, MSGraphService } from '../../../services'
 import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
 import { BaseResult } from '../types'
@@ -30,7 +29,7 @@ export class UserResolver {
    * @param ctx - GraphQL context
    */
   @Query(() => User, { description: 'Get the currently logged in user' })
-  async currentUser(@Ctx() ctx: Context) {
+  async currentUser(@Ctx() ctx: Context): Promise<User> {
     const user = await this._mongo.user.getById(ctx.userId)
     return {
       ...user,
@@ -42,7 +41,7 @@ export class UserResolver {
    * Get Active Directory users
    */
   @Query(() => [User], { description: 'Get all users from Active Directory' })
-  activeDirectoryUsers() {
+  activeDirectoryUsers(): Promise<User[]> {
     return this._msgraph.getUsers()
   }
 
@@ -53,7 +52,9 @@ export class UserResolver {
    */
   @Authorized()
   @Query(() => [User], { description: 'Get users' })
-  users(@Arg('query', () => UserQuery, { nullable: true }) query: UserQuery) {
+  users(
+    @Arg('query', () => UserQuery, { nullable: true }) query: UserQuery
+  ): Promise<User[]> {
     return this._mongo.user.getUsers(query)
   }
 

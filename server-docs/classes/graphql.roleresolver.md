@@ -32,13 +32,13 @@ Name | Type | Description |
 
 **Returns:** [*RoleResolver*](graphql.roleresolver.md)
 
-Defined in: [server/graphql/resolvers/role/index.ts:13](https://github.com/Puzzlepart/did/blob/7445431d/server/graphql/resolvers/role/index.ts#L13)
+Defined in: [server/graphql/resolvers/role/index.ts:13](https://github.com/Puzzlepart/did/blob/4fe732f3/server/graphql/resolvers/role/index.ts#L13)
 
 ## Methods
 
 ### addOrUpdateRole
 
-▸ **addOrUpdateRole**(`role`: *RoleInput*, `update`: *boolean*): *Promise*<{ `error`: *any* = null; `success`: *boolean* = true }\>
+▸ **addOrUpdateRole**(`role`: [*RoleInput*](graphql.roleinput.md), `update`: *boolean*): *Promise*<{ `error`: *any* = null; `success`: *boolean* = true }\>
 
 Add or update role
 
@@ -46,12 +46,12 @@ Add or update role
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`role` | *RoleInput* | Role   |
+`role` | [*RoleInput*](graphql.roleinput.md) | Role   |
 `update` | *boolean* | Update    |
 
 **Returns:** *Promise*<{ `error`: *any* = null; `success`: *boolean* = true }\>
 
-Defined in: [server/graphql/resolvers/role/index.ts:38](https://github.com/Puzzlepart/did/blob/7445431d/server/graphql/resolvers/role/index.ts#L38)
+Defined in: [server/graphql/resolvers/role/index.ts:38](https://github.com/Puzzlepart/did/blob/4fe732f3/server/graphql/resolvers/role/index.ts#L38)
 
 ___
 
@@ -69,16 +69,16 @@ Name | Type | Description |
 
 **Returns:** *Promise*<{ `error`: *any* = null; `success`: *boolean* = true }\>
 
-Defined in: [server/graphql/resolvers/role/index.ts:54](https://github.com/Puzzlepart/did/blob/7445431d/server/graphql/resolvers/role/index.ts#L54)
+Defined in: [server/graphql/resolvers/role/index.ts:54](https://github.com/Puzzlepart/did/blob/4fe732f3/server/graphql/resolvers/role/index.ts#L54)
 
 ___
 
 ### roles
 
-▸ **roles**(): *Promise*<Role[]\>
+▸ **roles**(): *Promise*<[*Role*](graphql.role.md)[]\>
 
 Get roles
 
-**Returns:** *Promise*<Role[]\>
+**Returns:** *Promise*<[*Role*](graphql.role.md)[]\>
 
-Defined in: [server/graphql/resolvers/role/index.ts:26](https://github.com/Puzzlepart/did/blob/7445431d/server/graphql/resolvers/role/index.ts#L26)
+Defined in: [server/graphql/resolvers/role/index.ts:26](https://github.com/Puzzlepart/did/blob/4fe732f3/server/graphql/resolvers/role/index.ts#L26)

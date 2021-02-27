@@ -6,7 +6,7 @@
 
 ## Hierarchy
 
-* *MongoDocumentService*<Customer\>
+* *MongoDocumentService*<[*Customer*](graphql.customer.md)\>
 
   ↳ **CustomerService**
 
@@ -46,7 +46,7 @@ Name | Type |
 
 **Returns:** [*CustomerService*](services.customerservice.md)
 
-Defined in: [server/services/mongo/customer.ts:7](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/customer.ts#L7)
+Defined in: [server/services/mongo/customer.ts:7](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/customer.ts#L7)
 
 ## Properties
 
@@ -54,7 +54,7 @@ Defined in: [server/services/mongo/customer.ts:7](https://github.com/Puzzlepart/
 
 • **cache**: [*CacheService*](services_cache.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/@document.ts#L6)
+Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/@document.ts#L6)
 
 ___
 
@@ -66,9 +66,9 @@ ___
 
 ### collection
 
-• **collection**: *Collection*<Customer\>
+• **collection**: *Collection*<[*Customer*](graphql.customer.md)\>
 
-Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/@document.ts#L7)
+Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/@document.ts#L7)
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 ### addCustomer
 
-▸ **addCustomer**(`customer`: *Customer*): *Promise*<void\>
+▸ **addCustomer**(`customer`: [*Customer*](graphql.customer.md)): *Promise*<void\>
 
 Add customer
 
@@ -94,11 +94,11 @@ Add customer
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`customer` | *Customer* | Customer to add    |
+`customer` | [*Customer*](graphql.customer.md) | Customer to add    |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/customer.ts:17](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/customer.ts#L17)
+Defined in: [server/services/mongo/customer.ts:17](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/customer.ts#L17)
 
 ___
 
@@ -116,13 +116,13 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/customer.ts:45](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/customer.ts#L45)
+Defined in: [server/services/mongo/customer.ts:45](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/customer.ts#L45)
 
 ___
 
 ### find
 
-▸ **find**<S\>(`query`: *FilterQuery*<Customer\>, `sort?`: S): *Promise*<Customer[]\>
+▸ **find**<S\>(`query`: *FilterQuery*<[*Customer*](graphql.customer.md)\>, `sort?`: S): *Promise*<[*Customer*](graphql.customer.md)[]\>
 
 Wrapper on find().toArray()
 
@@ -138,18 +138,18 @@ Name | Default |
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<Customer\> | Query   |
+`query` | *FilterQuery*<[*Customer*](graphql.customer.md)\> | Query   |
 `sort?` | S | Sort options    |
 
-**Returns:** *Promise*<Customer[]\>
+**Returns:** *Promise*<[*Customer*](graphql.customer.md)[]\>
 
-Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/@document.ts#L37)
+Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/@document.ts#L37)
 
 ___
 
 ### getCustomers
 
-▸ **getCustomers**(`query?`: *FilterQuery*<Customer\>): *Promise*<Customer[]\>
+▸ **getCustomers**(`query?`: *FilterQuery*<[*Customer*](graphql.customer.md)\>): *Promise*<[*Customer*](graphql.customer.md)[]\>
 
 Get customers
 
@@ -157,17 +157,17 @@ Get customers
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query?` | *FilterQuery*<Customer\> | Query    |
+`query?` | *FilterQuery*<[*Customer*](graphql.customer.md)\> | Query    |
 
-**Returns:** *Promise*<Customer[]\>
+**Returns:** *Promise*<[*Customer*](graphql.customer.md)[]\>
 
-Defined in: [server/services/mongo/customer.ts:59](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/customer.ts#L59)
+Defined in: [server/services/mongo/customer.ts:59](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/customer.ts#L59)
 
 ___
 
 ### updateCustomer
 
-▸ **updateCustomer**(`customer`: *Customer*): *Promise*<void\>
+▸ **updateCustomer**(`customer`: [*Customer*](graphql.customer.md)): *Promise*<void\>
 
 Update customer
 
@@ -175,8 +175,8 @@ Update customer
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`customer` | *Customer* | Customer to update    |
+`customer` | [*Customer*](graphql.customer.md) | Customer to update    |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/customer.ts:31](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/customer.ts#L31)
+Defined in: [server/services/mongo/customer.ts:31](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/customer.ts#L31)

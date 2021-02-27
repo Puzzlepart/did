@@ -32,13 +32,13 @@ Name | Type | Description |
 
 **Returns:** [*ApiTokenResolver*](graphql.apitokenresolver.md)
 
-Defined in: [server/graphql/resolvers/apiToken/index.ts:14](https://github.com/Puzzlepart/did/blob/7445431d/server/graphql/resolvers/apiToken/index.ts#L14)
+Defined in: [server/graphql/resolvers/apiToken/index.ts:14](https://github.com/Puzzlepart/did/blob/4fe732f3/server/graphql/resolvers/apiToken/index.ts#L14)
 
 ## Methods
 
 ### addApiToken
 
-▸ **addApiToken**(`token`: *ApiTokenInput*, `ctx`: [*Context*](graphql_context.context.md)): *Promise*<string\>
+▸ **addApiToken**(`token`: [*ApiTokenInput*](graphql.apitokeninput.md), `ctx`: [*Context*](graphql_context.context.md)): *Promise*<string\>
 
 Add API token
 
@@ -46,18 +46,18 @@ Add API token
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`token` | *ApiTokenInput* | Token   |
+`token` | [*ApiTokenInput*](graphql.apitokeninput.md) | Token   |
 `ctx` | [*Context*](graphql_context.context.md) | GraphQL context    |
 
 **Returns:** *Promise*<string\>
 
-Defined in: [server/graphql/resolvers/apiToken/index.ts:43](https://github.com/Puzzlepart/did/blob/7445431d/server/graphql/resolvers/apiToken/index.ts#L43)
+Defined in: [server/graphql/resolvers/apiToken/index.ts:43](https://github.com/Puzzlepart/did/blob/4fe732f3/server/graphql/resolvers/apiToken/index.ts#L43)
 
 ___
 
 ### apiTokens
 
-▸ **apiTokens**(`ctx`: [*Context*](graphql_context.context.md)): *Promise*<ApiToken[]\>
+▸ **apiTokens**(`ctx`: [*Context*](graphql_context.context.md)): *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
 
 Get API tokens
 
@@ -67,15 +67,15 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `ctx` | [*Context*](graphql_context.context.md) | GraphQL context    |
 
-**Returns:** *Promise*<ApiToken[]\>
+**Returns:** *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
 
-Defined in: [server/graphql/resolvers/apiToken/index.ts:29](https://github.com/Puzzlepart/did/blob/7445431d/server/graphql/resolvers/apiToken/index.ts#L29)
+Defined in: [server/graphql/resolvers/apiToken/index.ts:29](https://github.com/Puzzlepart/did/blob/4fe732f3/server/graphql/resolvers/apiToken/index.ts#L29)
 
 ___
 
 ### deleteApiToken
 
-▸ **deleteApiToken**(`name`: *string*, `ctx`: [*Context*](graphql_context.context.md)): *Promise*<BaseResult\>
+▸ **deleteApiToken**(`name`: *string*, `ctx`: [*Context*](graphql_context.context.md)): *Promise*<[*BaseResult*](graphql.baseresult.md)\>
 
 Delete API token
 
@@ -86,6 +86,6 @@ Name | Type | Description |
 `name` | *string* | Name   |
 `ctx` | [*Context*](graphql_context.context.md) | GraphQL context    |
 
-**Returns:** *Promise*<BaseResult\>
+**Returns:** *Promise*<[*BaseResult*](graphql.baseresult.md)\>
 
-Defined in: [server/graphql/resolvers/apiToken/index.ts:58](https://github.com/Puzzlepart/did/blob/7445431d/server/graphql/resolvers/apiToken/index.ts#L58)
+Defined in: [server/graphql/resolvers/apiToken/index.ts:58](https://github.com/Puzzlepart/did/blob/4fe732f3/server/graphql/resolvers/apiToken/index.ts#L58)

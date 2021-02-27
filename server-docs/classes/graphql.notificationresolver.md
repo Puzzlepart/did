@@ -30,13 +30,13 @@ Name | Type | Description |
 
 **Returns:** [*NotificationResolver*](graphql.notificationresolver.md)
 
-Defined in: [server/graphql/resolvers/notification/index.ts:10](https://github.com/Puzzlepart/did/blob/7445431d/server/graphql/resolvers/notification/index.ts#L10)
+Defined in: [server/graphql/resolvers/notification/index.ts:10](https://github.com/Puzzlepart/did/blob/4fe732f3/server/graphql/resolvers/notification/index.ts#L10)
 
 ## Methods
 
 ### notifications
 
-▸ **notifications**(`templates`: *NotificationTemplates*, `locale`: *string*): *Promise*<any\>
+▸ **notifications**(`templates`: [*NotificationTemplates*](graphql.notificationtemplates.md), `locale`: *string*): *Promise*<any\>
 
 Get notifications
 
@@ -44,9 +44,9 @@ Get notifications
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`templates` | *NotificationTemplates* | Templates   |
+`templates` | [*NotificationTemplates*](graphql.notificationtemplates.md) | Templates   |
 `locale` | *string* | Locale    |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [server/graphql/resolvers/notification/index.ts:26](https://github.com/Puzzlepart/did/blob/7445431d/server/graphql/resolvers/notification/index.ts#L26)
+Defined in: [server/graphql/resolvers/notification/index.ts:26](https://github.com/Puzzlepart/did/blob/4fe732f3/server/graphql/resolvers/notification/index.ts#L26)

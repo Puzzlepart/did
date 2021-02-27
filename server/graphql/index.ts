@@ -105,6 +105,7 @@ export const setupGraphQL = async (
   }
 }
 
+export * from './resolvers/types'
 export {
   ApiTokenResolver,
   CustomerResolver,

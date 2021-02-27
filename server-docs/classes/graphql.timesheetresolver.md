@@ -32,13 +32,13 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetResolver*](graphql.timesheetresolver.md)
 
-Defined in: [server/graphql/resolvers/timesheet/index.ts:16](https://github.com/Puzzlepart/did/blob/7445431d/server/graphql/resolvers/timesheet/index.ts#L16)
+Defined in: [server/graphql/resolvers/timesheet/index.ts:16](https://github.com/Puzzlepart/did/blob/4fe732f3/server/graphql/resolvers/timesheet/index.ts#L16)
 
 ## Methods
 
 ### submitPeriod
 
-▸ **submitPeriod**(`period`: *TimesheetPeriodInput*, `options`: *TimesheetOptions*): *Promise*<BaseResult\>
+▸ **submitPeriod**(`period`: [*TimesheetPeriodInput*](graphql.timesheetperiodinput.md), `options`: [*TimesheetOptions*](graphql.timesheetoptions.md)): *Promise*<[*BaseResult*](graphql.baseresult.md)\>
 
 Submit period
 
@@ -46,18 +46,18 @@ Submit period
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`period` | *TimesheetPeriodInput* | Period   |
-`options` | *TimesheetOptions* | Timesheet options (forecast, tzoffset etc)    |
+`period` | [*TimesheetPeriodInput*](graphql.timesheetperiodinput.md) | Period   |
+`options` | [*TimesheetOptions*](graphql.timesheetoptions.md) | Timesheet options (forecast, tzoffset etc)    |
 
-**Returns:** *Promise*<BaseResult\>
+**Returns:** *Promise*<[*BaseResult*](graphql.baseresult.md)\>
 
-Defined in: [server/graphql/resolvers/timesheet/index.ts:56](https://github.com/Puzzlepart/did/blob/7445431d/server/graphql/resolvers/timesheet/index.ts#L56)
+Defined in: [server/graphql/resolvers/timesheet/index.ts:56](https://github.com/Puzzlepart/did/blob/4fe732f3/server/graphql/resolvers/timesheet/index.ts#L56)
 
 ___
 
 ### timesheet
 
-▸ **timesheet**(`query`: *TimesheetQuery*, `options`: *TimesheetOptions*): *Promise*<any[]\>
+▸ **timesheet**(`query`: [*TimesheetQuery*](graphql.timesheetquery.md), `options`: [*TimesheetOptions*](graphql.timesheetoptions.md)): *Promise*<any[]\>
 
 Get timesheet
 
@@ -65,18 +65,18 @@ Get timesheet
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *TimesheetQuery* | Query   |
-`options` | *TimesheetOptions* | Options    |
+`query` | [*TimesheetQuery*](graphql.timesheetquery.md) | Query   |
+`options` | [*TimesheetOptions*](graphql.timesheetoptions.md) | Options    |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/graphql/resolvers/timesheet/index.ts:34](https://github.com/Puzzlepart/did/blob/7445431d/server/graphql/resolvers/timesheet/index.ts#L34)
+Defined in: [server/graphql/resolvers/timesheet/index.ts:34](https://github.com/Puzzlepart/did/blob/4fe732f3/server/graphql/resolvers/timesheet/index.ts#L34)
 
 ___
 
 ### unsubmitPeriod
 
-▸ **unsubmitPeriod**(`period`: *TimesheetPeriodInput*, `options`: *TimesheetOptions*): *Promise*<BaseResult\>
+▸ **unsubmitPeriod**(`period`: [*TimesheetPeriodInput*](graphql.timesheetperiodinput.md), `options`: [*TimesheetOptions*](graphql.timesheetoptions.md)): *Promise*<[*BaseResult*](graphql.baseresult.md)\>
 
 Unsubmit period
 
@@ -84,9 +84,9 @@ Unsubmit period
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`period` | *TimesheetPeriodInput* | Period   |
-`options` | *TimesheetOptions* | - |
+`period` | [*TimesheetPeriodInput*](graphql.timesheetperiodinput.md) | Period   |
+`options` | [*TimesheetOptions*](graphql.timesheetoptions.md) | - |
 
-**Returns:** *Promise*<BaseResult\>
+**Returns:** *Promise*<[*BaseResult*](graphql.baseresult.md)\>
 
-Defined in: [server/graphql/resolvers/timesheet/index.ts:85](https://github.com/Puzzlepart/did/blob/7445431d/server/graphql/resolvers/timesheet/index.ts#L85)
+Defined in: [server/graphql/resolvers/timesheet/index.ts:85](https://github.com/Puzzlepart/did/blob/4fe732f3/server/graphql/resolvers/timesheet/index.ts#L85)

@@ -6,7 +6,7 @@
 
 ## Hierarchy
 
-* *MongoDocumentService*<ApiToken\>
+* *MongoDocumentService*<[*ApiToken*](graphql.apitoken.md)\>
 
   ↳ **ApiTokenService**
 
@@ -45,7 +45,7 @@ Name | Type |
 
 **Returns:** [*ApiTokenService*](services.apitokenservice.md)
 
-Defined in: [server/services/mongo/apitoken.ts:9](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/apitoken.ts#L9)
+Defined in: [server/services/mongo/apitoken.ts:9](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/apitoken.ts#L9)
 
 ## Properties
 
@@ -53,7 +53,7 @@ Defined in: [server/services/mongo/apitoken.ts:9](https://github.com/Puzzlepart/
 
 • **cache**: [*CacheService*](services_cache.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/@document.ts#L6)
+Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/@document.ts#L6)
 
 ___
 
@@ -65,9 +65,9 @@ ___
 
 ### collection
 
-• **collection**: *Collection*<ApiToken\>
+• **collection**: *Collection*<[*ApiToken*](graphql.apitoken.md)\>
 
-Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/@document.ts#L7)
+Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/@document.ts#L7)
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 ### addToken
 
-▸ **addToken**(`token`: *ApiToken*, `subscriptionId`: *string*): *Promise*<string\>
+▸ **addToken**(`token`: [*ApiToken*](graphql.apitoken.md), `subscriptionId`: *string*): *Promise*<string\>
 
 Add API token
 
@@ -93,12 +93,12 @@ Add API token
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`token` | *ApiToken* | Token to add   |
+`token` | [*ApiToken*](graphql.apitoken.md) | Token to add   |
 `subscriptionId` | *string* | Subscription id    |
 
 **Returns:** *Promise*<string\>
 
-Defined in: [server/services/mongo/apitoken.ts:34](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/apitoken.ts#L34)
+Defined in: [server/services/mongo/apitoken.ts:34](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/apitoken.ts#L34)
 
 ___
 
@@ -117,13 +117,13 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/apitoken.ts:58](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/apitoken.ts#L58)
+Defined in: [server/services/mongo/apitoken.ts:58](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/apitoken.ts#L58)
 
 ___
 
 ### find
 
-▸ **find**<S\>(`query`: *FilterQuery*<ApiToken\>, `sort?`: S): *Promise*<ApiToken[]\>
+▸ **find**<S\>(`query`: *FilterQuery*<[*ApiToken*](graphql.apitoken.md)\>, `sort?`: S): *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
 
 Wrapper on find().toArray()
 
@@ -139,18 +139,18 @@ Name | Default |
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<ApiToken\> | Query   |
+`query` | *FilterQuery*<[*ApiToken*](graphql.apitoken.md)\> | Query   |
 `sort?` | S | Sort options    |
 
-**Returns:** *Promise*<ApiToken[]\>
+**Returns:** *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
 
-Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/@document.ts#L37)
+Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/@document.ts#L37)
 
 ___
 
 ### getTokens
 
-▸ **getTokens**(`query?`: *FilterQuery*<ApiToken\>): *Promise*<ApiToken[]\>
+▸ **getTokens**(`query?`: *FilterQuery*<[*ApiToken*](graphql.apitoken.md)\>): *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
 
 Get tokens
 
@@ -158,8 +158,8 @@ Get tokens
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query?` | *FilterQuery*<ApiToken\> | Query    |
+`query?` | *FilterQuery*<[*ApiToken*](graphql.apitoken.md)\> | Query    |
 
-**Returns:** *Promise*<ApiToken[]\>
+**Returns:** *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
 
-Defined in: [server/services/mongo/apitoken.ts:19](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/apitoken.ts#L19)
+Defined in: [server/services/mongo/apitoken.ts:19](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/apitoken.ts#L19)

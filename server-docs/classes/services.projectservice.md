@@ -6,7 +6,7 @@
 
 ## Hierarchy
 
-* *MongoDocumentService*<Project\>
+* *MongoDocumentService*<[*Project*](graphql.project.md)\>
 
   ↳ **ProjectService**
 
@@ -49,7 +49,7 @@ Name | Type | Description |
 
 **Returns:** [*ProjectService*](services.projectservice.md)
 
-Defined in: [server/services/mongo/project.ts:21](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/project.ts#L21)
+Defined in: [server/services/mongo/project.ts:21](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/project.ts#L21)
 
 ## Properties
 
@@ -57,7 +57,7 @@ Defined in: [server/services/mongo/project.ts:21](https://github.com/Puzzlepart/
 
 • `Private` **\_customer**: [*CustomerService*](services.customerservice.md)
 
-Defined in: [server/services/mongo/project.ts:20](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/project.ts#L20)
+Defined in: [server/services/mongo/project.ts:20](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/project.ts#L20)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 • `Private` **\_label**: *LabelService*
 
-Defined in: [server/services/mongo/project.ts:21](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/project.ts#L21)
+Defined in: [server/services/mongo/project.ts:21](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/project.ts#L21)
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 • **cache**: [*CacheService*](services_cache.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/@document.ts#L6)
+Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/@document.ts#L6)
 
 ___
 
@@ -85,9 +85,9 @@ ___
 
 ### collection
 
-• **collection**: *Collection*<Project\>
+• **collection**: *Collection*<[*Project*](graphql.project.md)\>
 
-Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/@document.ts#L7)
+Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/@document.ts#L7)
 
 ___
 
@@ -105,7 +105,7 @@ ___
 
 ### addProject
 
-▸ **addProject**(`project`: *Project*): *Promise*<string\>
+▸ **addProject**(`project`: [*Project*](graphql.project.md)): *Promise*<string\>
 
 Add project
 
@@ -115,17 +115,17 @@ Returns the ID of the added project
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`project` | *Project* | Project to add    |
+`project` | [*Project*](graphql.project.md) | Project to add    |
 
 **Returns:** *Promise*<string\>
 
-Defined in: [server/services/mongo/project.ts:41](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/project.ts#L41)
+Defined in: [server/services/mongo/project.ts:41](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/project.ts#L41)
 
 ___
 
 ### find
 
-▸ **find**<S\>(`query`: *FilterQuery*<Project\>, `sort?`: S): *Promise*<Project[]\>
+▸ **find**<S\>(`query`: *FilterQuery*<[*Project*](graphql.project.md)\>, `sort?`: S): *Promise*<[*Project*](graphql.project.md)[]\>
 
 Wrapper on find().toArray()
 
@@ -141,18 +141,18 @@ Name | Default |
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<Project\> | Query   |
+`query` | *FilterQuery*<[*Project*](graphql.project.md)\> | Query   |
 `sort?` | S | Sort options    |
 
-**Returns:** *Promise*<Project[]\>
+**Returns:** *Promise*<[*Project*](graphql.project.md)[]\>
 
-Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/@document.ts#L37)
+Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/@document.ts#L37)
 
 ___
 
 ### getProjectsData
 
-▸ **getProjectsData**(`query?`: *FilterQuery*<Project\>): *Promise*<ProjectsData\>
+▸ **getProjectsData**(`query?`: *FilterQuery*<[*Project*](graphql.project.md)\>): *Promise*<ProjectsData\>
 
 Get projects, customers and labels.
 
@@ -164,17 +164,17 @@ Connects labels and customer to projects
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query?` | *FilterQuery*<Project\> | Query    |
+`query?` | *FilterQuery*<[*Project*](graphql.project.md)\> | Query    |
 
 **Returns:** *Promise*<ProjectsData\>
 
-Defined in: [server/services/mongo/project.ts:85](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/project.ts#L85)
+Defined in: [server/services/mongo/project.ts:85](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/project.ts#L85)
 
 ___
 
 ### updateProject
 
-▸ **updateProject**(`project`: *Project*): *Promise*<boolean\>
+▸ **updateProject**(`project`: [*Project*](graphql.project.md)): *Promise*<boolean\>
 
 Update project
 
@@ -184,8 +184,8 @@ Returns true if the operation was successful
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`project` | *Project* | Project to update    |
+`project` | [*Project*](graphql.project.md) | Project to update    |
 
 **Returns:** *Promise*<boolean\>
 
-Defined in: [server/services/mongo/project.ts:63](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/project.ts#L63)
+Defined in: [server/services/mongo/project.ts:63](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/project.ts#L63)

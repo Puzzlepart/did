@@ -6,7 +6,7 @@
 
 ## Hierarchy
 
-* *MongoDocumentService*<Subscription\>
+* *MongoDocumentService*<[*Subscription*](graphql.subscription.md)\>
 
   ↳ **SubscriptionService**
 
@@ -46,7 +46,7 @@ Name | Type |
 
 **Returns:** [*SubscriptionService*](services.subscriptionservice.md)
 
-Defined in: [server/services/mongo/subscription.ts:9](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/subscription.ts#L9)
+Defined in: [server/services/mongo/subscription.ts:9](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/subscription.ts#L9)
 
 ## Properties
 
@@ -54,7 +54,7 @@ Defined in: [server/services/mongo/subscription.ts:9](https://github.com/Puzzlep
 
 • **cache**: [*CacheService*](services_cache.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/@document.ts#L6)
+Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/@document.ts#L6)
 
 ___
 
@@ -66,9 +66,9 @@ ___
 
 ### collection
 
-• **collection**: *Collection*<Subscription\>
+• **collection**: *Collection*<[*Subscription*](graphql.subscription.md)\>
 
-Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/@document.ts#L7)
+Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/@document.ts#L7)
 
 ___
 
@@ -86,7 +86,7 @@ ___
 
 ### \_replaceId
 
-▸ `Private`**_replaceId**<T\>(`subscription`: *Subscription*): T
+▸ `Private`**_replaceId**<T\>(`subscription`: [*Subscription*](graphql.subscription.md)): T
 
 Replace id with _id
 
@@ -100,17 +100,17 @@ Name |
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`subscription` | *Subscription* | Subscription    |
+`subscription` | [*Subscription*](graphql.subscription.md) | Subscription    |
 
 **Returns:** T
 
-Defined in: [server/services/mongo/subscription.ts:19](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/subscription.ts#L19)
+Defined in: [server/services/mongo/subscription.ts:19](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/subscription.ts#L19)
 
 ___
 
 ### addSubscription
 
-▸ **addSubscription**(`subscription`: *Subscription*): *Promise*<InsertOneWriteOpResult<WithId<Subscription\>\>\>
+▸ **addSubscription**(`subscription`: [*Subscription*](graphql.subscription.md)): *Promise*<InsertOneWriteOpResult<WithId<[*Subscription*](graphql.subscription.md)\>\>\>
 
 Add subscription
 
@@ -118,17 +118,17 @@ Add subscription
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`subscription` | *Subscription* | Subscription    |
+`subscription` | [*Subscription*](graphql.subscription.md) | Subscription    |
 
-**Returns:** *Promise*<InsertOneWriteOpResult<WithId<Subscription\>\>\>
+**Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*Subscription*](graphql.subscription.md)\>\>\>
 
-Defined in: [server/services/mongo/subscription.ts:48](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/subscription.ts#L48)
+Defined in: [server/services/mongo/subscription.ts:48](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/subscription.ts#L48)
 
 ___
 
 ### find
 
-▸ **find**<S\>(`query`: *FilterQuery*<Subscription\>, `sort?`: S): *Promise*<Subscription[]\>
+▸ **find**<S\>(`query`: *FilterQuery*<[*Subscription*](graphql.subscription.md)\>, `sort?`: S): *Promise*<[*Subscription*](graphql.subscription.md)[]\>
 
 Wrapper on find().toArray()
 
@@ -144,18 +144,18 @@ Name | Default |
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<Subscription\> | Query   |
+`query` | *FilterQuery*<[*Subscription*](graphql.subscription.md)\> | Query   |
 `sort?` | S | Sort options    |
 
-**Returns:** *Promise*<Subscription[]\>
+**Returns:** *Promise*<[*Subscription*](graphql.subscription.md)[]\>
 
-Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/@document.ts#L37)
+Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/@document.ts#L37)
 
 ___
 
 ### getById
 
-▸ **getById**(`id`: *string*): *Promise*<Subscription\>
+▸ **getById**(`id`: *string*): *Promise*<[*Subscription*](graphql.subscription.md)\>
 
 Get subscription by ID
 
@@ -165,15 +165,15 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `id` | *string* | Subscription ID    |
 
-**Returns:** *Promise*<Subscription\>
+**Returns:** *Promise*<[*Subscription*](graphql.subscription.md)\>
 
-Defined in: [server/services/mongo/subscription.ts:31](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/subscription.ts#L31)
+Defined in: [server/services/mongo/subscription.ts:31](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/subscription.ts#L31)
 
 ___
 
 ### updateSubscription
 
-▸ **updateSubscription**(`settings`: *SubscriptionSettings*): *Promise*<UpdateWriteOpResult\>
+▸ **updateSubscription**(`settings`: [*SubscriptionSettings*](graphql.subscriptionsettings.md)): *Promise*<UpdateWriteOpResult\>
 
 Update subscription
 
@@ -181,8 +181,8 @@ Update subscription
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`settings` | *SubscriptionSettings* | Subscription settings    |
+`settings` | [*SubscriptionSettings*](graphql.subscriptionsettings.md) | Subscription settings    |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
 
-Defined in: [server/services/mongo/subscription.ts:64](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/subscription.ts#L64)
+Defined in: [server/services/mongo/subscription.ts:64](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/subscription.ts#L64)

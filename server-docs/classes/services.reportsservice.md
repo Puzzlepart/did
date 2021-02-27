@@ -6,7 +6,7 @@
 
 ## Hierarchy
 
-* *MongoDocumentService*<TimeEntry\>
+* *MongoDocumentService*<[*TimeEntry*](graphql.timeentry.md)\>
 
   ↳ **ReportsService**
 
@@ -47,7 +47,7 @@ Name | Type | Description |
 
 **Returns:** [*ReportsService*](services.reportsservice.md)
 
-Defined in: [server/services/mongo/reports.ts:13](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/reports.ts#L13)
+Defined in: [server/services/mongo/reports.ts:13](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/reports.ts#L13)
 
 ## Properties
 
@@ -55,7 +55,7 @@ Defined in: [server/services/mongo/reports.ts:13](https://github.com/Puzzlepart/
 
 • `Private` **\_project**: [*ProjectService*](services.projectservice.md)
 
-Defined in: [server/services/mongo/reports.ts:12](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/reports.ts#L12)
+Defined in: [server/services/mongo/reports.ts:12](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/reports.ts#L12)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 • `Private` **\_user**: [*UserService*](services.userservice.md)
 
-Defined in: [server/services/mongo/reports.ts:13](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/reports.ts#L13)
+Defined in: [server/services/mongo/reports.ts:13](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/reports.ts#L13)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 • **cache**: [*CacheService*](services_cache.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/@document.ts#L6)
+Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/@document.ts#L6)
 
 ___
 
@@ -83,9 +83,9 @@ ___
 
 ### collection
 
-• **collection**: *Collection*<TimeEntry\>
+• **collection**: *Collection*<[*TimeEntry*](graphql.timeentry.md)\>
 
-Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/@document.ts#L7)
+Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/@document.ts#L7)
 
 ___
 
@@ -103,7 +103,7 @@ ___
 
 ### find
 
-▸ **find**<S\>(`query`: *FilterQuery*<TimeEntry\>, `sort?`: S): *Promise*<TimeEntry[]\>
+▸ **find**<S\>(`query`: *FilterQuery*<[*TimeEntry*](graphql.timeentry.md)\>, `sort?`: S): *Promise*<[*TimeEntry*](graphql.timeentry.md)[]\>
 
 Wrapper on find().toArray()
 
@@ -119,18 +119,18 @@ Name | Default |
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<TimeEntry\> | Query   |
+`query` | *FilterQuery*<[*TimeEntry*](graphql.timeentry.md)\> | Query   |
 `sort?` | S | Sort options    |
 
-**Returns:** *Promise*<TimeEntry[]\>
+**Returns:** *Promise*<[*TimeEntry*](graphql.timeentry.md)[]\>
 
-Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/@document.ts#L37)
+Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/@document.ts#L37)
 
 ___
 
 ### getReport
 
-▸ **getReport**(`query`: *ReportsQuery*, `sortAsc`: *boolean*): *Promise*<Report\>
+▸ **getReport**(`query`: [*ReportsQuery*](graphql.reportsquery.md), `sortAsc`: *boolean*): *Promise*<Report\>
 
 Get report
 
@@ -138,9 +138,9 @@ Get report
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *ReportsQuery* | Query   |
+`query` | [*ReportsQuery*](graphql.reportsquery.md) | Query   |
 `sortAsc` | *boolean* | Sort ascending    |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/mongo/reports.ts:32](https://github.com/Puzzlepart/did/blob/7445431d/server/services/mongo/reports.ts#L32)
+Defined in: [server/services/mongo/reports.ts:32](https://github.com/Puzzlepart/did/blob/4fe732f3/server/services/mongo/reports.ts#L32)

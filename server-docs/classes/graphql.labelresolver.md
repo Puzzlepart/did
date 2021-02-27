@@ -32,13 +32,13 @@ Name | Type | Description |
 
 **Returns:** [*LabelResolver*](graphql.labelresolver.md)
 
-Defined in: [server/graphql/resolvers/label/index.ts:13](https://github.com/Puzzlepart/did/blob/7445431d/server/graphql/resolvers/label/index.ts#L13)
+Defined in: [server/graphql/resolvers/label/index.ts:13](https://github.com/Puzzlepart/did/blob/4fe732f3/server/graphql/resolvers/label/index.ts#L13)
 
 ## Methods
 
 ### addOrUpdateLabel
 
-▸ **addOrUpdateLabel**(`label`: *LabelInput*, `update`: *boolean*): *Promise*<BaseResult\>
+▸ **addOrUpdateLabel**(`label`: [*LabelInput*](graphql.labelinput.md), `update`: *boolean*): *Promise*<[*BaseResult*](graphql.baseresult.md)\>
 
 Add or update label
 
@@ -46,18 +46,18 @@ Add or update label
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`label` | *LabelInput* | Label   |
+`label` | [*LabelInput*](graphql.labelinput.md) | Label   |
 `update` | *boolean* | Update    |
 
-**Returns:** *Promise*<BaseResult\>
+**Returns:** *Promise*<[*BaseResult*](graphql.baseresult.md)\>
 
-Defined in: [server/graphql/resolvers/label/index.ts:38](https://github.com/Puzzlepart/did/blob/7445431d/server/graphql/resolvers/label/index.ts#L38)
+Defined in: [server/graphql/resolvers/label/index.ts:38](https://github.com/Puzzlepart/did/blob/4fe732f3/server/graphql/resolvers/label/index.ts#L38)
 
 ___
 
 ### deleteLabel
 
-▸ **deleteLabel**(`name`: *string*): *Promise*<BaseResult\>
+▸ **deleteLabel**(`name`: *string*): *Promise*<[*BaseResult*](graphql.baseresult.md)\>
 
 Delete label by name
 
@@ -67,18 +67,18 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `name` | *string* | Name    |
 
-**Returns:** *Promise*<BaseResult\>
+**Returns:** *Promise*<[*BaseResult*](graphql.baseresult.md)\>
 
-Defined in: [server/graphql/resolvers/label/index.ts:55](https://github.com/Puzzlepart/did/blob/7445431d/server/graphql/resolvers/label/index.ts#L55)
+Defined in: [server/graphql/resolvers/label/index.ts:55](https://github.com/Puzzlepart/did/blob/4fe732f3/server/graphql/resolvers/label/index.ts#L55)
 
 ___
 
 ### labels
 
-▸ **labels**(): *Promise*<LabelObject[]\>
+▸ **labels**(): *Promise*<[*LabelObject*](graphql.labelobject.md)[]\>
 
 Get labels
 
-**Returns:** *Promise*<LabelObject[]\>
+**Returns:** *Promise*<[*LabelObject*](graphql.labelobject.md)[]\>
 
-Defined in: [server/graphql/resolvers/label/index.ts:26](https://github.com/Puzzlepart/did/blob/7445431d/server/graphql/resolvers/label/index.ts#L26)
+Defined in: [server/graphql/resolvers/label/index.ts:26](https://github.com/Puzzlepart/did/blob/4fe732f3/server/graphql/resolvers/label/index.ts#L26)
