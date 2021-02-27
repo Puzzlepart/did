@@ -32,7 +32,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetResolver*](graphql.timesheetresolver.md)
 
-Defined in: [server/graphql/resolvers/timesheet/index.ts:16](https://github.com/Puzzlepart/did/blob/31669ccf/server/graphql/resolvers/timesheet/index.ts#L16)
+Defined in: [server/graphql/resolvers/timesheet/index.ts:16](https://github.com/Puzzlepart/did/blob/ea0aea7b/server/graphql/resolvers/timesheet/index.ts#L16)
 
 ## Methods
 
@@ -51,7 +51,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/timesheet/index.ts:56](https://github.com/Puzzlepart/did/blob/31669ccf/server/graphql/resolvers/timesheet/index.ts#L56)
+Defined in: [server/graphql/resolvers/timesheet/index.ts:56](https://github.com/Puzzlepart/did/blob/ea0aea7b/server/graphql/resolvers/timesheet/index.ts#L56)
 
 ___
 
@@ -70,7 +70,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/graphql/resolvers/timesheet/index.ts:34](https://github.com/Puzzlepart/did/blob/31669ccf/server/graphql/resolvers/timesheet/index.ts#L34)
+Defined in: [server/graphql/resolvers/timesheet/index.ts:34](https://github.com/Puzzlepart/did/blob/ea0aea7b/server/graphql/resolvers/timesheet/index.ts#L34)
 
 ___
 
@@ -89,4 +89,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/timesheet/index.ts:85](https://github.com/Puzzlepart/did/blob/31669ccf/server/graphql/resolvers/timesheet/index.ts#L85)
+Defined in: [server/graphql/resolvers/timesheet/index.ts:85](https://github.com/Puzzlepart/did/blob/ea0aea7b/server/graphql/resolvers/timesheet/index.ts#L85)

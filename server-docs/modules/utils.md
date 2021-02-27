@@ -26,4 +26,4 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [server/utils/stripHtmlString.ts:10](https://github.com/Puzzlepart/did/blob/31669ccf/server/utils/stripHtmlString.ts#L10)
+Defined in: [server/utils/stripHtmlString.ts:10](https://github.com/Puzzlepart/did/blob/ea0aea7b/server/utils/stripHtmlString.ts#L10)

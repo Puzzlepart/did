@@ -12,7 +12,7 @@
 
 ### default
 
-▸ `Const`**default**(`key`: *string*, `fallbackValue?`: *string*): *string*
+▸ **default**(`key`: *string*, `fallbackValue?`: *string*): *string*
 
 Get environment variable by key with optional fallbackvalue
 
@@ -25,4 +25,4 @@ Name | Type | Default value | Description |
 
 **Returns:** *string*
 
-Defined in: [server/utils/env.ts:11](https://github.com/Puzzlepart/did/blob/31669ccf/server/utils/env.ts#L11)
+Defined in: [server/utils/env.ts:11](https://github.com/Puzzlepart/did/blob/ea0aea7b/server/utils/env.ts#L11)
