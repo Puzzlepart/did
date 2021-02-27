@@ -41,7 +41,7 @@ Name | Type | Description |
 
 **Returns:** [*CacheService*](services_cache.cacheservice.md)
 
-Defined in: [server/services/cache.ts:24](https://github.com/Puzzlepart/did/blob/1b47620b/server/services/cache.ts#L24)
+Defined in: [server/services/cache.ts:24](https://github.com/Puzzlepart/did/blob/846b6048/server/services/cache.ts#L24)
 
 ## Properties
 
@@ -77,7 +77,7 @@ Name | Type |
 
 **Returns:** *Promise*<T\>
 
-Defined in: [server/services/cache.ts:67](https://github.com/Puzzlepart/did/blob/1b47620b/server/services/cache.ts#L67)
+Defined in: [server/services/cache.ts:67](https://github.com/Puzzlepart/did/blob/846b6048/server/services/cache.ts#L67)
 
 ___
 
@@ -100,7 +100,7 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [server/services/cache.ts:48](https://github.com/Puzzlepart/did/blob/1b47620b/server/services/cache.ts#L48)
+Defined in: [server/services/cache.ts:48](https://github.com/Puzzlepart/did/blob/846b6048/server/services/cache.ts#L48)
 
 ___
 
@@ -125,7 +125,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<unknown\>
 
-Defined in: [server/services/cache.ts:89](https://github.com/Puzzlepart/did/blob/1b47620b/server/services/cache.ts#L89)
+Defined in: [server/services/cache.ts:89](https://github.com/Puzzlepart/did/blob/846b6048/server/services/cache.ts#L89)
 
 ___
 
@@ -143,7 +143,7 @@ Name | Type |
 
 **Returns:** *Promise*<unknown\>
 
-Defined in: [server/services/cache.ts:119](https://github.com/Puzzlepart/did/blob/1b47620b/server/services/cache.ts#L119)
+Defined in: [server/services/cache.ts:119](https://github.com/Puzzlepart/did/blob/846b6048/server/services/cache.ts#L119)
 
 ___
 
@@ -168,4 +168,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<T\>
 
-Defined in: [server/services/cache.ts:136](https://github.com/Puzzlepart/did/blob/1b47620b/server/services/cache.ts#L136)
+Defined in: [server/services/cache.ts:136](https://github.com/Puzzlepart/did/blob/846b6048/server/services/cache.ts#L136)

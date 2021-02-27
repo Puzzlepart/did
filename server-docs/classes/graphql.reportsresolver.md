@@ -30,7 +30,7 @@ Name | Type | Description |
 
 **Returns:** [*ReportsResolver*](graphql.reportsresolver.md)
 
-Defined in: [server/graphql/resolvers/reports/index.ts:12](https://github.com/Puzzlepart/did/blob/1b47620b/server/graphql/resolvers/reports/index.ts#L12)
+Defined in: [server/graphql/resolvers/reports/index.ts:12](https://github.com/Puzzlepart/did/blob/846b6048/server/graphql/resolvers/reports/index.ts#L12)
 
 ## Methods
 
@@ -51,4 +51,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/graphql/resolvers/reports/index.ts:32](https://github.com/Puzzlepart/did/blob/1b47620b/server/graphql/resolvers/reports/index.ts#L32)
+Defined in: [server/graphql/resolvers/reports/index.ts:32](https://github.com/Puzzlepart/did/blob/846b6048/server/graphql/resolvers/reports/index.ts#L32)

@@ -37,7 +37,7 @@ Name | Type | Description |
 
 **Returns:** [*MongoService*](services.mongoservice.md)
 
-Defined in: [server/services/mongo/index.ts:15](https://github.com/Puzzlepart/did/blob/1b47620b/server/services/mongo/index.ts#L15)
+Defined in: [server/services/mongo/index.ts:15](https://github.com/Puzzlepart/did/blob/846b6048/server/services/mongo/index.ts#L15)
 
 ## Accessors
 
@@ -47,7 +47,7 @@ Defined in: [server/services/mongo/index.ts:15](https://github.com/Puzzlepart/di
 
 **Returns:** [*ApiTokenService*](services.apitokenservice.md)
 
-Defined in: [server/services/mongo/index.ts:51](https://github.com/Puzzlepart/did/blob/1b47620b/server/services/mongo/index.ts#L51)
+Defined in: [server/services/mongo/index.ts:51](https://github.com/Puzzlepart/did/blob/846b6048/server/services/mongo/index.ts#L51)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 **Returns:** [*CustomerService*](services.customerservice.md)
 
-Defined in: [server/services/mongo/index.ts:39](https://github.com/Puzzlepart/did/blob/1b47620b/server/services/mongo/index.ts#L39)
+Defined in: [server/services/mongo/index.ts:39](https://github.com/Puzzlepart/did/blob/846b6048/server/services/mongo/index.ts#L39)
 
 ___
 
@@ -67,7 +67,7 @@ ___
 
 **Returns:** *LabelService*
 
-Defined in: [server/services/mongo/index.ts:43](https://github.com/Puzzlepart/did/blob/1b47620b/server/services/mongo/index.ts#L43)
+Defined in: [server/services/mongo/index.ts:43](https://github.com/Puzzlepart/did/blob/846b6048/server/services/mongo/index.ts#L43)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 **Returns:** [*ProjectService*](services.projectservice.md)
 
-Defined in: [server/services/mongo/index.ts:35](https://github.com/Puzzlepart/did/blob/1b47620b/server/services/mongo/index.ts#L35)
+Defined in: [server/services/mongo/index.ts:35](https://github.com/Puzzlepart/did/blob/846b6048/server/services/mongo/index.ts#L35)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 **Returns:** [*ReportsService*](services.reportsservice.md)
 
-Defined in: [server/services/mongo/index.ts:47](https://github.com/Puzzlepart/did/blob/1b47620b/server/services/mongo/index.ts#L47)
+Defined in: [server/services/mongo/index.ts:47](https://github.com/Puzzlepart/did/blob/846b6048/server/services/mongo/index.ts#L47)
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 **Returns:** [*RoleService*](services.roleservice.md)
 
-Defined in: [server/services/mongo/index.ts:27](https://github.com/Puzzlepart/did/blob/1b47620b/server/services/mongo/index.ts#L27)
+Defined in: [server/services/mongo/index.ts:27](https://github.com/Puzzlepart/did/blob/846b6048/server/services/mongo/index.ts#L27)
 
 ___
 
@@ -107,7 +107,7 @@ ___
 
 **Returns:** [*SubscriptionService*](services.subscriptionservice.md)
 
-Defined in: [server/services/mongo/index.ts:31](https://github.com/Puzzlepart/did/blob/1b47620b/server/services/mongo/index.ts#L31)
+Defined in: [server/services/mongo/index.ts:31](https://github.com/Puzzlepart/did/blob/846b6048/server/services/mongo/index.ts#L31)
 
 ___
 
@@ -117,4 +117,4 @@ ___
 
 **Returns:** [*UserService*](services.userservice.md)
 
-Defined in: [server/services/mongo/index.ts:23](https://github.com/Puzzlepart/did/blob/1b47620b/server/services/mongo/index.ts#L23)
+Defined in: [server/services/mongo/index.ts:23](https://github.com/Puzzlepart/did/blob/846b6048/server/services/mongo/index.ts#L23)

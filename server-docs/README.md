@@ -12,6 +12,7 @@ did-server
 - [graphql/authChecker](modules/graphql_authchecker.md)
 - [graphql/context](modules/graphql_context.md)
 - [index](modules/index.md)
+- [middleware](modules/middleware.md)
 - [routes/auth](modules/routes_auth.md)
 - [services](modules/services.md)
 - [services/cache](modules/services_cache.md)
