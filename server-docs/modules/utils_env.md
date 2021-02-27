@@ -25,4 +25,4 @@ Name | Type | Default value | Description |
 
 **Returns:** *string*
 
-Defined in: [server/utils/env.ts:11](https://github.com/Puzzlepart/did/blob/846b6048/server/utils/env.ts#L11)
+Defined in: [server/utils/env.ts:11](https://github.com/Puzzlepart/did/blob/ca0344a0/server/utils/env.ts#L11)

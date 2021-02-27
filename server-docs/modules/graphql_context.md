@@ -29,4 +29,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Context*](../classes/graphql_context.context.md)\>
 
-Defined in: [server/graphql/context.ts:58](https://github.com/Puzzlepart/did/blob/846b6048/server/graphql/context.ts#L58)
+Defined in: [server/graphql/context.ts:58](https://github.com/Puzzlepart/did/blob/ca0344a0/server/graphql/context.ts#L58)

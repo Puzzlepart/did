@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import session from 'express-session'
 import env from '../../utils/env'
-import redisClient from '../redis'
+import { RedisClient } from '../redis'
 const RedisStore = require('connect-redis')(session)
 
 /**
@@ -14,7 +14,7 @@ const RedisStore = require('connect-redis')(session)
 export const redisSession = () => session({
   name: env('SESSION_NAME', 'connect.sid'),
   store: new RedisStore({
-    client: redisClient,
+    client: RedisClient,
     ttl: 1209600
   }),
   cookie: { secure: false },

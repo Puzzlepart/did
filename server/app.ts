@@ -10,9 +10,7 @@ import logger from 'morgan'
 import path from 'path'
 import { pick } from 'underscore'
 import { setupGraphQL } from './graphql'
-import serveGzipped from './middleware/gzip'
-import passport from './middleware/passport'
-import { redisSession } from './middleware/session'
+import { redisSession, serveGzipped, setupPassport } from './middleware'
 import authRoute from './routes/auth'
 import env from './utils/env'
 
@@ -109,7 +107,7 @@ export class App {
    * * Setting up auth route at /auth
    */
   setupAuth() {
-    const _passport = passport(this._mongoClient)
+    const _passport = setupPassport(this._mongoClient)
     this.instance.use(bearerToken({ reqKey: 'api_key' }))
     this.instance.use(_passport.initialize())
     this.instance.use(_passport.session())
