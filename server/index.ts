@@ -1,10 +1,15 @@
-import app from './app'
+/* eslint-disable @typescript-eslint/no-var-requires */
 import * as http from 'http'
+import app from './app'
 import env from './utils/env'
-import createDebug from 'debug'
-const debug = createDebug('server')
+const debug = require('debug')('server')
 
-async function startServer(port: string) {
+/**
+ * Start server on the specified port
+ * 
+ * @param port - Port
+ */
+export async function startServer(port: string) {
   await app.setup()
   app.instance.set('port', port)
 
@@ -40,6 +45,6 @@ async function startServer(port: string) {
   server.on('listening', onListening)
 }
 
-export { app }
+export * from './app'
 
 startServer(env('PORT', '8080'))

@@ -16,7 +16,7 @@ import session from './middleware/session'
 import authRoute from './routes/auth'
 import env from './utils/env'
 
-class App {
+export class App {
   public instance: express.Application
   private _client: MongoClient
 

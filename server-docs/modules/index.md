@@ -4,12 +4,28 @@
 
 ## Table of contents
 
-### References
+### Classes
 
-- [app](index.md#app)
+- [App](../classes/index.app.md)
 
-## References
+### Functions
 
-### app
+- [startServer](index.md#startserver)
 
-Renames and exports: [default](app.md#default)
+## Functions
+
+### startServer
+
+▸ **startServer**(`port`: *string*): *Promise*<void\>
+
+Start server on the specified port
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`port` | *string* | Port    |
+
+**Returns:** *Promise*<void\>
+
+Defined in: [server/index.ts:12](https://github.com/Puzzlepart/did/blob/c2c7c3a8/server/index.ts#L12)

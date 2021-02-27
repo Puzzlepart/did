@@ -4,6 +4,10 @@
 
 ## Table of contents
 
+### Classes
+
+- [App](../classes/app.app-1.md)
+
 ### Properties
 
 - [default](app.md#default)
@@ -12,4 +16,4 @@
 
 ### default
 
-• **default**: *App*
+• **default**: [*App*](../classes/app.app-1.md)

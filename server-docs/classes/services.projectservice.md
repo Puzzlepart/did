@@ -49,7 +49,7 @@ Name | Type | Description |
 
 **Returns:** [*ProjectService*](services.projectservice.md)
 
-Defined in: [server/services/mongo/project.ts:21](https://github.com/Puzzlepart/did/blob/4b4bc3ec/server/services/mongo/project.ts#L21)
+Defined in: [server/services/mongo/project.ts:21](https://github.com/Puzzlepart/did/blob/c2c7c3a8/server/services/mongo/project.ts#L21)
 
 ## Properties
 
@@ -57,7 +57,7 @@ Defined in: [server/services/mongo/project.ts:21](https://github.com/Puzzlepart/
 
 • `Private` **\_customer**: [*CustomerService*](services.customerservice.md)
 
-Defined in: [server/services/mongo/project.ts:20](https://github.com/Puzzlepart/did/blob/4b4bc3ec/server/services/mongo/project.ts#L20)
+Defined in: [server/services/mongo/project.ts:20](https://github.com/Puzzlepart/did/blob/c2c7c3a8/server/services/mongo/project.ts#L20)
 
 ___
 
@@ -65,7 +65,7 @@ ___
 
 • `Private` **\_label**: *LabelService*
 
-Defined in: [server/services/mongo/project.ts:21](https://github.com/Puzzlepart/did/blob/4b4bc3ec/server/services/mongo/project.ts#L21)
+Defined in: [server/services/mongo/project.ts:21](https://github.com/Puzzlepart/did/blob/c2c7c3a8/server/services/mongo/project.ts#L21)
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 • **cache**: [*CacheService*](services_cache.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/4b4bc3ec/server/services/mongo/@document.ts#L6)
+Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/c2c7c3a8/server/services/mongo/@document.ts#L6)
 
 ___
 
@@ -87,7 +87,7 @@ ___
 
 • **collection**: *Collection*<Project\>
 
-Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/4b4bc3ec/server/services/mongo/@document.ts#L7)
+Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/c2c7c3a8/server/services/mongo/@document.ts#L7)
 
 ___
 
@@ -119,7 +119,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<string\>
 
-Defined in: [server/services/mongo/project.ts:41](https://github.com/Puzzlepart/did/blob/4b4bc3ec/server/services/mongo/project.ts#L41)
+Defined in: [server/services/mongo/project.ts:41](https://github.com/Puzzlepart/did/blob/c2c7c3a8/server/services/mongo/project.ts#L41)
 
 ___
 
@@ -146,7 +146,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Project[]\>
 
-Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/4b4bc3ec/server/services/mongo/@document.ts#L37)
+Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/c2c7c3a8/server/services/mongo/@document.ts#L37)
 
 ___
 
@@ -168,7 +168,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<ProjectsData\>
 
-Defined in: [server/services/mongo/project.ts:85](https://github.com/Puzzlepart/did/blob/4b4bc3ec/server/services/mongo/project.ts#L85)
+Defined in: [server/services/mongo/project.ts:85](https://github.com/Puzzlepart/did/blob/c2c7c3a8/server/services/mongo/project.ts#L85)
 
 ___
 
@@ -188,4 +188,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<boolean\>
 
-Defined in: [server/services/mongo/project.ts:63](https://github.com/Puzzlepart/did/blob/4b4bc3ec/server/services/mongo/project.ts#L63)
+Defined in: [server/services/mongo/project.ts:63](https://github.com/Puzzlepart/did/blob/c2c7c3a8/server/services/mongo/project.ts#L63)

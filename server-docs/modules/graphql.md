@@ -39,4 +39,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/graphql/index.ts:66](https://github.com/Puzzlepart/did/blob/4b4bc3ec/server/graphql/index.ts#L66)
+Defined in: [server/graphql/index.ts:66](https://github.com/Puzzlepart/did/blob/c2c7c3a8/server/graphql/index.ts#L66)
