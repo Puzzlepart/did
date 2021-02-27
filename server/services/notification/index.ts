@@ -8,11 +8,11 @@ import { Context } from '../../graphql/context'
 import { NotificationTemplates } from '../../graphql/resolvers/types'
 import { TimesheetService } from '../timesheet'
 import { ForecastNotification, UnconfirmedPeriodNotification } from './types'
-
 @Service({ global: false })
 export class NotificationService {
   private _confirmed_periods: Collection
   private _forecasted_periods: Collection
+
   /**
    * Constructor
    *
@@ -32,7 +32,7 @@ export class NotificationService {
    *
    * @param add - Add
    * @param count - Count
-   * @param locale - Locale
+   * @param locale - User locale
    */
   private _getPeriods(add: string, count: number, locale: string) {
     const periods = []
@@ -41,7 +41,12 @@ export class NotificationService {
       const startOfWeek = d.startOfWeek.format('YYYY-MM-DD')
       const endOfWeek = d.endOfWeek.format('YYYY-MM-DD')
       periods.push(
-        ...this._timesheet.getPeriods(startOfWeek, endOfWeek, locale)
+        ...this._timesheet.getPeriods(
+          startOfWeek,
+          endOfWeek,
+          locale,
+          this.context.userId
+        )
       )
       d = d.add(add)
     }
@@ -59,14 +64,13 @@ export class NotificationService {
 
     const confirmedPeriods = await this._confirmed_periods
       .find({
-        userId: this.context.userId
+        _userId: this.context.userId
       })
       .toArray()
 
     const nperiods: any[] = periods.reduce(($, period) => {
-      if (!any(confirmedPeriods, ({ id }) => id === period.id)) {
-        $.push(period)
-      }
+      const isConfirmed = any(confirmedPeriods, ({ _id }) => _id === period._id)
+      if (!isConfirmed) $.push(period)
       return $
     }, [])
 
@@ -98,20 +102,28 @@ export class NotificationService {
 
     const forecastedPeriods = await this._forecasted_periods
       .find({
-        userId: this.context.userId
+        _userId: this.context.userId
       })
       .toArray()
 
     const nperiods: any[] = periods.reduce(($, period) => {
-      if (!any(forecastedPeriods, ({ id }) => id === period.id)) {
-        $.push(period)
-      }
+      const isForecasted = any(
+        forecastedPeriods,
+        ({ _id }) => _id === period._id
+      )
+      if (!isForecasted) $.push(period)
       return $
     }, [])
 
     return nperiods.map((period) => new ForecastNotification(period, template))
   }
 
+  /**
+   * Get notifications
+   *
+   * @param templates - Templats
+   * @param locale - User locale
+   */
   public async getNotifications(
     templates: NotificationTemplates,
     locale: string

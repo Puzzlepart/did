@@ -48,7 +48,9 @@ export function useSubmitCommands() {
             'FORECAST_PERIOD',
             'BufferTimeBefore'
           ) as IContextualMenuItem),
-          onClick: () => context.onSubmitPeriod(true),
+          onClick: () => {
+            context.onSubmitPeriod(true)
+          },
           text: context.t('timesheet.forecastHoursText'),
           secondaryText: context.t('timesheet.forecastHoursSecondaryText')
         },
@@ -57,7 +59,9 @@ export function useSubmitCommands() {
             'UNFORECAST_PERIOD',
             'Cancel'
           ) as IContextualMenuItem),
-          onClick: () => context.onUnsubmitPeriod(true),
+          onClick: () => {
+            context.onUnsubmitPeriod(true)
+          },
           text: context.t('timesheet.unforecastHoursText'),
           secondaryText: context.t('timesheet.unforecastHoursSecondaryText')
         },
@@ -67,7 +71,9 @@ export function useSubmitCommands() {
             'CheckMark'
           ) as IContextualMenuItem),
           className: styles.confirmPeriodButton,
-          onClick: () => context.onSubmitPeriod(false),
+          onClick: () => {
+            context.onSubmitPeriod(false)
+          },
           text: context.t('timesheet.confirmHoursText'),
           secondaryText: context.t('timesheet.confirmHoursSecondaryText')
         },
@@ -77,13 +83,15 @@ export function useSubmitCommands() {
             'Cancel'
           ) as IContextualMenuItem),
           className: styles.unconfirmPeriodButton,
-          onClick: () => context.onUnsubmitPeriod(false),
+          onClick: () => {
+            context.onUnsubmitPeriod(false)
+          },
           text: context.t('timesheet.unconfirmHoursText'),
           secondaryText: context.t('timesheet.unconfirmHoursSecondaryText')
         }
       }
 
-      let commands: any[] = []
+      let commands: IContextualMenuItem[] = []
 
       if (isConfirmed) commands.push(cmd.UNCONFIRM_PERIOD)
       else if (isForecast) {
@@ -107,7 +115,12 @@ export function useSubmitCommands() {
         }
       }
 
-      commands = commands.filter((c) => c)
+      commands = commands
+        .filter((c) => c)
+        .map((c) => ({
+          disabled: !!context.loading,
+          ...c
+        }))
 
       let menuProps: IContextualMenuProps = null
       if (commands.length > 1) {
@@ -122,7 +135,7 @@ export function useSubmitCommands() {
       return (
         <PrimaryButton
           primary={false}
-          {...first(commands)}
+          {...(first(commands) as any)}
           menuProps={menuProps}
         />
       )

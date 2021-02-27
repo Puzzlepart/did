@@ -1,31 +1,42 @@
 import { UserMessage } from 'components/UserMessage'
-import { Panel } from 'office-ui-fabric'
-import * as React from 'react'
+import { Link, Panel } from 'office-ui-fabric'
+import React, { FunctionComponent, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { UserNotification } from '../UserNotification'
-import { INotificationsPanelProps } from './types'
+import { isEmpty } from 'underscore'
+import { UserNotificationsContext } from '../context'
+import { UserNotification } from './UserNotification'
 import styles from './UserNotificationsPanel.module.scss'
 
-export const NotificationsPanel = (props: INotificationsPanelProps) => {
+export const NotificationsPanel: FunctionComponent = () => {
   const { t } = useTranslation()
+  const {
+    notifications,
+    panelOpen,
+    dismissPanel,
+    dismissedCount,
+    clearDismissed
+  } = useContext(UserNotificationsContext)
   return (
     <Panel
-      isOpen={props.isOpen}
+      isOpen={panelOpen}
       className={styles.root}
       headerText={t('notifications.headerText')}
-      onDismiss={props.onDismiss}
+      onDismiss={dismissPanel}
       isLightDismiss={true}>
       <div className={styles.body}>
-        <div hidden={props.notifications.size > 0}>
-          <UserMessage text={t('notifications.emptyText')} />
+        <div hidden={!isEmpty(notifications)}>
+          <UserMessage
+            text={t('notifications.emptyText', { dismissedCount })}
+            actions={
+              <Link onClick={clearDismissed}>
+                {t('notifications.clearDismissedText')}
+              </Link>
+            }
+          />
         </div>
-        <div hidden={props.notifications.size === 0}>
-          {[...props.notifications].map((n, idx) => (
-            <UserNotification
-              key={idx}
-              model={n}
-              onDismiss={props.onDismissNotification}
-            />
+        <div>
+          {...notifications.map((n, idx) => (
+            <UserNotification key={idx} model={n} />
           ))}
         </div>
       </div>

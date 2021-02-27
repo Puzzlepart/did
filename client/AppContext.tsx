@@ -4,6 +4,7 @@ import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from 'i18n'
 import { createContext } from 'react'
 import { Role, Subscription, User } from 'types'
 import { contains } from 'underscore'
+import { useNotificationsQuery } from './hooks'
 
 export class ContextUser {
   public id: string
@@ -62,6 +63,11 @@ export interface IAppContext {
    * Subscription
    */
   subscription?: Subscription
+
+  /**
+   * Notifications query
+   */
+  notificationsQuery?: ReturnType<typeof useNotificationsQuery>
 }
 
 export const AppContext = createContext<IAppContext>(null)

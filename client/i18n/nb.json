@@ -344,10 +344,11 @@
     "moreLinkText": "Les mer her",
     "goToPeriodText": "Gå til periode",
     "headerText": "Varsler",
-    "emptyText": "Du har ingen aktive varsler for øyeblikket.",
+    "emptyText": "Du har ingen aktive varsler for øyeblikket. \nDu har gjemt {{dismissedCount}} aktive varsler.",
     "templates": {
       "unconfirmedPeriods": "Uke {0} ({1}) mangler bekreftelse.",
       "forecast": "Uke {0} ({1}) mangler prognose."
-    }
+    },
+    "clearDismissedText": "Klikk for å vise gjemte varsler."
   }
 }
