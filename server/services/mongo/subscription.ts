@@ -1,10 +1,26 @@
+import { omit } from 'underscore'
 import { Context } from '../../graphql/context'
-import { Subscription } from '../../graphql/resolvers/types'
+import {
+  Subscription,
+  SubscriptionSettings
+} from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 
 export class SubscriptionService extends MongoDocumentService<Subscription> {
   constructor(context: Context) {
     super(context, 'subscriptions')
+  }
+
+  /**
+   * Replace id with _id
+   *
+   * @param {Subscription} subscription Subscription
+   */
+  private _replaceId<T>(subscription: Subscription): T {
+    return ({
+      ...omit(subscription, 'id'),
+      _id: subscription.id
+    } as unknown) as T
   }
 
   /**
@@ -14,8 +30,11 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
    */
   public async getById(id: string): Promise<Subscription> {
     try {
-      const result = await this.collection.findOne({ id })
-      return result
+      const subscription = await this.collection.findOne({ _id: id })
+      return {
+        ...subscription,
+        id: subscription._id
+      }
     } catch (err) {
       throw err
     }
@@ -28,7 +47,26 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
    */
   public async addSubscription(subscription: Subscription) {
     try {
-      const result = await this.collection.insertOne(subscription)
+      const result = await this.collection.insertOne(
+        this._replaceId(subscription)
+      )
+      return result
+    } catch (err) {
+      throw err
+    }
+  }
+
+  /**
+   * Update subscription
+   *
+   * @param {SubscriptionSettings} settings Subscription settings
+   */
+  public async updateSubscription(settings: SubscriptionSettings) {
+    try {
+      const result = await this.collection.updateOne(
+        { _id: this.context.subscription.id },
+        { $set: { settings } }
+      )
       return result
     } catch (err) {
       throw err

@@ -46,14 +46,14 @@ export class TimesheetScope {
   }
 
   /**
-   * Sets the scope
+   * Sets the scope and returns a cloned version of the TimesheetScope
    *
    * @param {string} add Add
    */
   public set(add: string): TimesheetScope {
     this.startDate = this.startDate.add(add)
     this.endDate = this.startDate.endOfWeek
-    return this
+    return Object.assign(Object.create(Object.getPrototypeOf(this)), this)
   }
 
   /**

@@ -17,7 +17,10 @@ export function SuggestionItem(props: ISuggestionItemProps) {
       className={classNames.join(' ')}
       data-is-focusable={true}>
       <div className={styles.container}>
-        <div className={styles.icon} style={props.itemIcons?.style} hidden={!props.itemIcons}>
+        <div
+          className={styles.icon}
+          style={props.itemIcons?.style}
+          hidden={!props.itemIcons}>
           <Icon iconName={props.item.iconName || 'Page'} />
         </div>
         <div className={styles.content}>

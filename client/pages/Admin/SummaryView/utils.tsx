@@ -14,12 +14,20 @@ import { ISummaryViewRow, ISummaryViewState } from './types'
  * @param {ISummaryViewState} state State of SummaryView component
  * @param {TFunction} t Translate function
  */
-export function createColumns(state: ISummaryViewState, t: TFunction): IColumn[] {
+export function createColumns(
+  state: ISummaryViewState,
+  t: TFunction
+): IColumn[] {
   let uniqueColumnValues: any[] = unique(
-    state.timeentries.map((e) => ({ year: e.year, value: getValue(e, state.scope.fieldName) })),
+    state.timeentries.map((e) => ({
+      year: e.year,
+      value: getValue(e, state.scope.fieldName)
+    })),
     ({ year, value }) => year && value
   )
-  uniqueColumnValues = uniqueColumnValues.sort((a, b) => a.year - b.year || a.value - b.value)
+  uniqueColumnValues = uniqueColumnValues.sort(
+    (a, b) => a.year - b.year || a.value - b.value
+  )
 
   const onRender = (row: any, _index: number, col: IColumn) => (
     <DurationColumn row={row} column={col} />

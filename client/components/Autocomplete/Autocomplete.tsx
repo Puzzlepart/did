@@ -1,4 +1,11 @@
-import { Callout, FocusZone, FocusZoneDirection, Label, List, SearchBox } from 'office-ui-fabric'
+import {
+  Callout,
+  FocusZone,
+  FocusZoneDirection,
+  Label,
+  List,
+  SearchBox
+} from 'office-ui-fabric'
 import React, { useLayoutEffect, useMemo, useReducer, useRef } from 'react'
 import { isEmpty } from 'underscore'
 import { IAutocompleteProps } from '.'
@@ -15,7 +22,10 @@ import { SuggestionItem } from './SuggestionItem'
 
 export function Autocomplete<T = any>(props: IAutocompleteProps<T>) {
   const reducer = useMemo(() => createReducer(), [])
-  const [state, dispatch] = useReducer(reducer, { selectedIndex: -1, suggestions: [] })
+  const [state, dispatch] = useReducer(reducer, {
+    selectedIndex: -1,
+    suggestions: []
+  })
   const field = useRef<HTMLDivElement>()
 
   useLayoutEffect(() => dispatch(INIT({ props })), [props])
@@ -95,7 +105,9 @@ export function Autocomplete<T = any>(props: IAutocompleteProps<T>) {
                     dispatch(DISMISS_CALLOUT({ item }))
                     props.onSelected(item)
                   }}
-                  onMouseOver={() => dispatch(SET_SELECTED_INDEX({ index: idx }))}
+                  onMouseOver={() =>
+                    dispatch(SET_SELECTED_INDEX({ index: idx }))
+                  }
                 />
               )}
             />

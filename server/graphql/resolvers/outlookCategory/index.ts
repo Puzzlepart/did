@@ -33,7 +33,9 @@ export class OutlookCategoryResolver {
    * @param {string} category Category
    */
   @Authorized<IAuthOptions>({ userContext: true })
-  @Mutation(() => CreateOutlookCategoryResult, { description: 'Create Outlook category' })
+  @Mutation(() => CreateOutlookCategoryResult, {
+    description: 'Create Outlook category'
+  })
   async createOutlookCategory(
     @Arg('category') category: string
   ): Promise<CreateOutlookCategoryResult> {

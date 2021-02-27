@@ -27,20 +27,25 @@ export const ApiTokensColumns = (
     name: t('common.createdLabel'),
     minWidth: 100,
     maxWidth: 180,
-    onRender: (token: ApiToken) => new DateObject(token.created).format('MMMM D, YYYY	')
+    onRender: (token: ApiToken) =>
+      new DateObject(token.created).format('MMMM D, YYYY	')
   },
   {
     key: 'expires',
     name: t('common.expiresLabel'),
     minWidth: 100,
-    onRender: (token: ApiToken) => new DateObject(token.expires).format('MMMM D, YYYY')
+    onRender: (token: ApiToken) =>
+      new DateObject(token.expires).format('MMMM D, YYYY')
   },
   {
     key: 'actions',
     name: '',
     minWidth: 150,
     onRender: (token: ApiToken) => (
-      <DefaultButton text={t('common.delete')} onClick={() => onDeleteApiToken(token)} />
+      <DefaultButton
+        text={t('common.delete')}
+        onClick={() => onDeleteApiToken(token)}
+      />
     )
   }
 ]

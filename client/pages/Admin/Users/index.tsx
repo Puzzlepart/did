@@ -15,9 +15,13 @@ import $users from './users.gql'
 export const Users = () => {
   const { t } = useTranslation()
   const [userForm, setUserForm] = useState<IUserFormProps>(null)
-  const [addMultiplePanel, setAddMultiplePanel] = useState<IAddMultiplePanel>(null)
+  const [addMultiplePanel, setAddMultiplePanel] = useState<IAddMultiplePanel>(
+    null
+  )
   const [progressProps, setProgressProps] = useState<ISpinnerProps>(null)
-  const { data, refetch, loading } = useQuery($users, { fetchPolicy: 'cache-and-network' })
+  const { data, refetch, loading } = useQuery($users, {
+    fetchPolicy: 'cache-and-network'
+  })
   const [addUsers] = useMutation($addUsers)
   const ctxValue: IUsersContext = useMemo(
     () => ({
@@ -54,7 +58,9 @@ export const Users = () => {
       label: t('admin.bulkImportingUsersLabel', { count: users.length }),
       labelPosition: 'right'
     })
-    await addUsers({ variables: { users: users.map((u) => omit(u, '__typename')) } })
+    await addUsers({
+      variables: { users: users.map((u) => omit(u, '__typename')) }
+    })
     setProgressProps(null)
     refetch()
   }
@@ -86,7 +92,10 @@ export const Users = () => {
               name: '',
               onRender: () =>
                 progressProps && (
-                  <Spinner styles={{ root: { marginLeft: 15 } }} {...progressProps} />
+                  <Spinner
+                    styles={{ root: { marginLeft: 15 } }}
+                    {...progressProps}
+                  />
                 )
             }
           ],

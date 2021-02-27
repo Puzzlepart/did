@@ -8,7 +8,7 @@ export class MongoDocumentService<T> {
 
   /**
    * Constructs a new Mongo Document Service
-   * 
+   *
    * Specify cachePrefix to use an underlying CacheService
    *
    * @param {Context} context Context
@@ -16,7 +16,7 @@ export class MongoDocumentService<T> {
    * @param {string} cachePrefix Cache prefix
    */
   constructor(
-    private readonly context: Context,
+    public readonly context: Context,
     public collectionName: string,
     public cachePrefix?: string
   ) {
@@ -34,7 +34,10 @@ export class MongoDocumentService<T> {
    * @param {FilterQuery<T>} query Query
    * @param {Array<[string, number]> | SortOptionObject<T>} sort Sort
    */
-  public find(query: FilterQuery<T>, sort?: Array<[string, number]> | SortOptionObject<T>) {
+  public find(
+    query: FilterQuery<T>,
+    sort?: Array<[string, number]> | SortOptionObject<T>
+  ) {
     return this.collection.find(query, { sort }).toArray()
   }
 }

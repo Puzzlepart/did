@@ -5,9 +5,24 @@ import {
   ResourceFilter
 } from 'components/FilterPanel/Filters'
 import { TFunction } from 'i18next'
+import { IReportsSavedFilter } from './types'
 
-export const filters = (t: TFunction): BaseFilter[] => [
-  new ResourceFilter('resource.displayName', t('common.employeeLabel')),
-  new CustomerFilter('customer.name', t('common.customer')),
-  new ProjectFilter('project.name', t('common.project'))
+/**
+ * Returns filter config for Reports
+ *
+ * @param {IReportsSavedFilter} filter The active filter
+ * @param {TFunction} t Translate function
+ */
+export default (filter: IReportsSavedFilter, t: TFunction): BaseFilter[] => [
+  new ResourceFilter(
+    'resource.id',
+    'resource.displayName',
+    t('common.employeeLabel')
+  ).setDefaults(filter?.values),
+  new CustomerFilter('customer.name', t('common.customer')).setDefaults(
+    filter?.values
+  ),
+  new ProjectFilter('project.name', t('common.project')).setDefaults(
+    filter?.values
+  )
 ]

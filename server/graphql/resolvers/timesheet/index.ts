@@ -1,9 +1,6 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { pick } from 'underscore'
 import { TimesheetService } from '../../../services'
 import { IAuthOptions } from '../../authChecker'
 import { BaseResult } from '../types'
@@ -33,8 +30,13 @@ export class TimesheetResolver {
    * @param {TimesheetOptions} options Options
    */
   @Authorized<IAuthOptions>({ userContext: true })
-  @Query(() => [TimesheetPeriodObject], { description: 'Get timesheet for startDate - endDate' })
-  async timesheet(@Arg('query') query: TimesheetQuery, @Arg('options') options: TimesheetOptions) {
+  @Query(() => [TimesheetPeriodObject], {
+    description: 'Get timesheet for startDate - endDate'
+  })
+  async timesheet(
+    @Arg('query') query: TimesheetQuery,
+    @Arg('options') options: TimesheetOptions
+  ) {
     try {
       return await this._timesheet.getTimesheet({ ...query, ...options })
     } catch (error) {
@@ -66,7 +68,7 @@ export class TimesheetResolver {
     } catch (error) {
       return {
         success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode')
+        error
       }
     }
   }
@@ -89,13 +91,13 @@ export class TimesheetResolver {
     try {
       await this._timesheet.unsubmitPeriod({ ...options, period })
       return {
-        success: false,
+        success: true,
         error: null
       }
     } catch (error) {
       return {
         success: false,
-        error: pick(error, 'name', 'message', 'code', 'statusCode')
+        error
       }
     }
   }

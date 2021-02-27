@@ -1,29 +1,39 @@
-import { getValue } from 'helpers'
-import { unique, contains, indexOf } from 'underscore'
 import DateUtils from 'DateUtils'
+import { getValue } from 'helpers'
+import { contains, indexOf, unique } from 'underscore'
 import { BaseFilter, IFilter } from './BaseFilter'
 
-export class MonthFilter extends BaseFilter {
+export class MonthFilter<
+  ItemType = any,
+  KeyType = any
+> extends BaseFilter<ItemType> {
+  private _selectedKeys: KeyType[]
+
   constructor(fieldName: string, public name: string) {
-    super(fieldName)
+    super(fieldName, name)
   }
 
   /**
    * Intialize the MonthFilter
    *
-   * @param {any[]} entries Entries
+   * @param {ItemType[]} items Items
    */
-  public initialize(entries: any[]): IFilter {
-    const values = unique(entries.map((e) => getValue(e, this.fieldName, null)))
+  public initialize(items: ItemType[]): IFilter {
+    const values = unique(items.map((e) => getValue(e, this.fieldName, null)))
     const monthNames = DateUtils.getMonthNames()
-    const items = monthNames
+    const _items = monthNames
       .filter((_, idx) => contains(values, idx + 1))
       .map((value) => ({ key: indexOf(monthNames, value) + 1, value }))
     return {
       key: this.fieldName,
       name: this.name,
-      items,
-      selected: []
+      items: _items,
+      selected: _items.filter((i) => contains(this._selectedKeys, i.key))
     }
+  }
+
+  public setDefaults(values: { [key: string]: KeyType[] }) {
+    this._selectedKeys = getValue(values, this.fieldName) ?? []
+    return this
   }
 }

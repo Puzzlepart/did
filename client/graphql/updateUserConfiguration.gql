@@ -1,0 +1,5 @@
+mutation($configuration: String!) {
+  result: updateUserConfiguration(configuration: $configuration) {
+    success
+  }
+}

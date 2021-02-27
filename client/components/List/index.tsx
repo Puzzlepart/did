@@ -27,7 +27,10 @@ const List: FunctionComponent<IListProps> = (props: IListProps) => {
     searchTerm: null
   })
 
-  useEffect(() => dispatch({ type: 'PROPS_UPDATED', payload: props }), [props.items])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => dispatch({ type: 'PROPS_UPDATED', payload: props }), [
+    props.items
+  ])
 
   const selection = useMemo(() => {
     if (!props.selection) return null
@@ -65,10 +68,15 @@ const List: FunctionComponent<IListProps> = (props: IListProps) => {
             columns={filter(props.columns, (col) => !col.data?.hidden)}
             items={items}
             groups={groups}
-            selectionMode={props.selection ? props.selection.mode : SelectionMode.none}
+            selectionMode={
+              props.selection ? props.selection.mode : SelectionMode.none
+            }
             constrainMode={ConstrainMode.horizontalConstrained}
             layoutMode={DetailsListLayoutMode.justified}
-            groupProps={{ ...props.groupProps, onRenderHeader: ListGroupHeader }}
+            groupProps={{
+              ...props.groupProps,
+              onRenderHeader: ListGroupHeader
+            }}
             onRenderItemColumn={(item, index, column) => {
               if (!!column.onRender) return column.onRender(item, index, column)
               return getValue(item, column.fieldName)
@@ -82,7 +90,9 @@ const List: FunctionComponent<IListProps> = (props: IListProps) => {
                 dispatch
               })
             }
-            checkboxVisibility={props.checkboxVisibility ?? CheckboxVisibility.hidden}
+            checkboxVisibility={
+              props.checkboxVisibility || CheckboxVisibility.hidden
+            }
           />
         </ScrollablePaneWrapper>
       </FadeIn>

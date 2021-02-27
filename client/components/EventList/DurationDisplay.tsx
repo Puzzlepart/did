@@ -13,6 +13,7 @@ export const DurationDisplay: FunctionComponent<IDurationDisplayProps> = (
 ): JSX.Element => {
   const { t } = useTranslation()
   let displayValue = DateUtils.getDurationString(props.duration, t)
-  if (props.displayFormat) displayValue = format(props.displayFormat, displayValue)
+  if (props.displayFormat)
+    displayValue = format(props.displayFormat, displayValue)
   return <span style={props.style}>{displayValue}</span>
 }

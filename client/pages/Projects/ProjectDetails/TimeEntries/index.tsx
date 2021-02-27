@@ -1,7 +1,11 @@
 import { useQuery } from '@apollo/client'
 import EventList from 'components/EventList'
 import { UserMessage } from 'components/UserMessage'
-import { ActionButton, MessageBarType, ProgressIndicator } from 'office-ui-fabric'
+import {
+  ActionButton,
+  MessageBarType,
+  ProgressIndicator
+} from 'office-ui-fabric'
 import React, { FunctionComponent, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
@@ -33,10 +37,17 @@ export const TimeEntries: FunctionComponent = () => {
         />
       </div>
       {error && (
-        <UserMessage type={MessageBarType.error} text={t('projects.timeEntriesErrorText')} />
+        <UserMessage
+          type={MessageBarType.error}
+          text={t('projects.timeEntriesErrorText')}
+        />
       )}
-      {empty && !loading && <UserMessage text={t('projects.noTimeEntriesText')} />}
-      {loading && <ProgressIndicator label={t('projects.timeEntriesLoadingLabel')} />}
+      {empty && !loading && (
+        <UserMessage text={t('projects.noTimeEntriesText')} />
+      )}
+      {loading && (
+        <ProgressIndicator label={t('projects.timeEntriesLoadingLabel')} />
+      )}
       {!empty && (
         <EventList
           events={timeentries}

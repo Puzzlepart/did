@@ -17,12 +17,16 @@ export default class {
    */
   private _findProjectSuggestion(customer: Customer, projectKey: string) {
     try {
-      const customerProjects = this._data.projects.filter((p) => p.customerKey === customer.key)
+      const customerProjects = this._data.projects.filter(
+        (p) => p.customerKey === customer.key
+      )
       const projectKeys = customerProjects.map((p) => p.key)
       const { bestMatch } = findBestMatch(projectKey, projectKeys)
       if (!bestMatch || bestMatch.rating <= 0) return null
       const { target } = bestMatch
-      const suggestion = first(customerProjects.filter((p) => p.key === target.toUpperCase()))
+      const suggestion = first(
+        customerProjects.filter((p) => p.key === target.toUpperCase())
+      )
       return suggestion
     } catch (error) {
       return null
@@ -40,9 +44,13 @@ export default class {
    * @param {EventObject} event
    */
   private _findIgnore(event: EventObject) {
-    const ignoreCategory = find(event.categories, (c) => c.toLowerCase() === 'ignore')
+    const ignoreCategory = find(
+      event.categories,
+      (c) => c.toLowerCase() === 'ignore'
+    )
     if (!!ignoreCategory) return 'category'
-    if ((event.body || '').match(/[(\[\{]IGNORE[)\]\}]/gi) !== null) return 'body'
+    if ((event.body || '').match(/[(\[\{]IGNORE[)\]\}]/gi) !== null)
+      return 'body'
     return null
   }
 
@@ -54,7 +62,10 @@ export default class {
    *
    * @returns an array of matches found in the inputStr
    */
-  private _searchString(inputStr: string, strictMode: boolean = true): ProjectMatch[] {
+  private _searchString(
+    inputStr: string,
+    strictMode: boolean = true
+  ): ProjectMatch[] {
     let regex = /((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<key>[\wæøåÆØÅ]{2,}))/gim
     if (strictMode)
       regex = /[\(\{\[]((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<key>[\wæøåÆØÅ]{2,}?))[\)\]\}]/gim
@@ -76,7 +87,10 @@ export default class {
    * @param {string} inputStr The String object or string literal on which to perform the search.
    * @param {string} categoriesStr Categories string
    */
-  private _findProjectMatches(inputStr: string, categoriesStr: string): ProjectMatch[] {
+  private _findProjectMatches(
+    inputStr: string,
+    categoriesStr: string
+  ): ProjectMatch[] {
     const matches = this._searchString(categoriesStr, false)
     return matches || this._searchString(inputStr)
   }
@@ -104,7 +118,9 @@ export default class {
       return { ...event, isSystemIgnored: true }
     }
     const categoriesStr = event.categories.join('|').toUpperCase()
-    const srchStr = [event.title, event.body, categoriesStr].join('|').toUpperCase()
+    const srchStr = [event.title, event.body, categoriesStr]
+      .join('|')
+      .toUpperCase()
     const matches = this._findProjectMatches(srchStr, categoriesStr)
     let projectKey: string
 
@@ -114,9 +130,15 @@ export default class {
     if (!isEmpty(matches)) {
       for (let i = 0; i < matches.length; i++) {
         const match = matches[i]
-        event.customer = find(this._data.customers, (c) => match.customerKey === c.key)
+        event.customer = find(
+          this._data.customers,
+          (c) => match.customerKey === c.key
+        )
         if (event.customer) {
-          event.project = find(this._data.projects, ({ _id }) => _id === match.id)
+          event.project = find(
+            this._data.projects,
+            ({ _id }) => _id === match.id
+          )
           projectKey = match.key
         }
         if (event.project) break
@@ -135,12 +157,18 @@ export default class {
         this._data.projects,
         ({ _id }) => !!find(softMatches, (m) => m.id === _id)
       )
-      event.customer = find(this._data.customers, ({ key }) => key === event.project?.customerKey)
+      event.customer = find(
+        this._data.customers,
+        ({ key }) => key === event.project?.customerKey
+      )
     }
 
     // We look for project suggestions in case of e.g. typo
     if (event.customer && !event.project) {
-      event.suggestedProject = this._findProjectSuggestion(event.customer, projectKey)
+      event.suggestedProject = this._findProjectSuggestion(
+        event.customer,
+        projectKey
+      )
     }
 
     event.labels = this._findLabels(event.categories)

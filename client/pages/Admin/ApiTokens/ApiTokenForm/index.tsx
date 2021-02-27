@@ -15,7 +15,11 @@ import $addApiToken from './addApiToken.gql'
 import styles from './ApiTokenForm.module.scss'
 import { IApiTokenFormProps } from './types'
 
-export const ApiTokenForm = ({ isOpen, onAdded, onDismiss }: IApiTokenFormProps) => {
+export const ApiTokenForm = ({
+  isOpen,
+  onAdded,
+  onDismiss
+}: IApiTokenFormProps) => {
   const { t } = useTranslation()
   const [addApiToken] = useMutation($addApiToken)
   const [token, setToken] = useState<ApiTokenInput>({
@@ -23,7 +27,10 @@ export const ApiTokenForm = ({ isOpen, onAdded, onDismiss }: IApiTokenFormProps)
     expires: null,
     permissions: []
   })
-  const permissions = useMemo(() => security.permissions(t).filter((p) => p.api), [])
+  const permissions = useMemo(
+    () => security.permissions(t).filter((p) => p.api),
+    [t]
+  )
 
   async function onAddApiToken() {
     const { data } = await addApiToken({ variables: { token } })
@@ -76,7 +83,9 @@ export const ApiTokenForm = ({ isOpen, onAdded, onDismiss }: IApiTokenFormProps)
           }))}
         />
       </div>
-      <div className={styles.sectionTitle}>{t('admin.apiTokens.permissionsTitle')}</div>
+      <div className={styles.sectionTitle}>
+        {t('admin.apiTokens.permissionsTitle')}
+      </div>
       <div className={styles.permissions}>
         {permissions.map(({ id, name, description }) => (
           <div key={id} className={styles.permissionItem}>
@@ -97,7 +106,9 @@ export const ApiTokenForm = ({ isOpen, onAdded, onDismiss }: IApiTokenFormProps)
       <DefaultButton
         text={t('common.save')}
         onClick={onAddApiToken}
-        disabled={isBlank(token.name) || !token.expires || isEmpty(token.permissions)}
+        disabled={
+          isBlank(token.name) || !token.expires || isEmpty(token.permissions)
+        }
       />
     </Panel>
   )

@@ -5,7 +5,9 @@ import AppConfig from 'AppConfig'
 export class BrowserStorage<T = any> {
   private _key: string
   private _store: IPnPClientStore
-  private _defaultExpire = new DateObject().add(AppConfig.BROWSER_STORAGE_DEFAULT_EXPIRE).jsDate
+  private _defaultExpire = new DateObject().add(
+    AppConfig.BROWSER_STORAGE_DEFAULT_EXPIRE
+  ).jsDate
 
   constructor(key: string, store: 'local' | 'session') {
     this._key = `${AppConfig.BROWSER_STORAGE_KEY_PREFIX}_${key}`
@@ -37,6 +39,10 @@ export class BrowserStorage<T = any> {
    */
   public merge(value: T): void {
     const currentValue = this.get()
-    this._store.put(this._key, { ...currentValue, ...value }, this._defaultExpire)
+    this._store.put(
+      this._key,
+      { ...currentValue, ...value },
+      this._defaultExpire
+    )
   }
 }

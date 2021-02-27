@@ -21,7 +21,10 @@ export const RoleColumns = (onEdit: (role: Role) => void, t: TFunction) => [
       </div>
     )
   }),
-  col('description', t('common.descriptionLabel'), { maxWidth: 240, isMultiline: true }),
+  col('description', t('common.descriptionLabel'), {
+    maxWidth: 240,
+    isMultiline: true
+  }),
   col(
     'permissions',
     t('admin.permissonsLabel'),

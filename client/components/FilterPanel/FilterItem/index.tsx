@@ -13,9 +13,11 @@ export const FilterItem = (props: IFilterItemProps) => {
 
   const items = useMemo(() => {
     return props.filter.items.filter((item) =>
-      isBlank(searchTerm) ? true : contains(item.value.toLowerCase(), searchTerm.toLowerCase())
+      isBlank(searchTerm)
+        ? true
+        : contains(item.value.toLowerCase(), searchTerm.toLowerCase())
     )
-  }, [searchTerm])
+  }, [searchTerm, props.filter.items])
 
   return (
     <div className={styles.root}>
@@ -31,7 +33,9 @@ export const FilterItem = (props: IFilterItemProps) => {
           <Checkbox
             label={item.value}
             checked={selectedKeys.indexOf(item.key) !== -1}
-            onChange={(_, checked) => props.onFilterUpdated(props.filter, item, checked)}
+            onChange={(_, checked) =>
+              props.onFilterUpdated(props.filter, item, checked)
+            }
           />
         </div>
       ))}

@@ -3,7 +3,11 @@ import fs from 'fs'
 import { MongoClient } from 'mongodb'
 import passport from 'passport'
 import { IProfile, OIDCStrategy, VerifyCallback } from 'passport-azure-ad'
-import { MongoService, SubscriptionService, UserService } from '../../services/mongo'
+import {
+  MongoService,
+  SubscriptionService,
+  UserService
+} from '../../services/mongo'
 import env from '../../utils/env'
 
 export default (client: MongoClient) => {

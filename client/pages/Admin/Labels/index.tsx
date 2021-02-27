@@ -10,7 +10,9 @@ import $labels from './labels.gql'
 
 export const Labels = () => {
   const { t } = useTranslation()
-  const { data, refetch } = useQuery($labels, { fetchPolicy: 'cache-and-network' })
+  const { data, refetch } = useQuery($labels, {
+    fetchPolicy: 'cache-and-network'
+  })
   const [deleteLabel] = useMutation($deleteLabel)
   const [form, setForm] = useState<ILabelFormProps>(null)
 
@@ -20,7 +22,7 @@ export const Labels = () => {
 
   useEffect(() => {
     refetch()
-  }, [form])
+  }, [refetch, form])
 
   return (
     <>

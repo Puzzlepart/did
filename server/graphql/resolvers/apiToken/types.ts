@@ -23,7 +23,9 @@ export class ApiToken {
   subscriptionId?: string
 }
 
-@InputType({ description: 'Input object for ApiToken used in mutation addApiToken' })
+@InputType({
+  description: 'Input object for ApiToken used in mutation addApiToken'
+})
 export class ApiTokenInput {
   @Field(() => ID)
   name: string

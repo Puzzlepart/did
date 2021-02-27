@@ -1,10 +1,10 @@
 {
   "timesheet": {
-    "loadingEventsLabel": "Laster hendelser",
-    "loadingEventsDescription": "Vent et lite øyeblikk...",
+    "loadingTimesheetLabel": "Laster hendelser",
+    "loadingTimesheetDescription": "Vent et lite øyeblikk...",
     "confirmingPeriodLabel": "Bekrefter timene dine",
     "confirmingPeriodDescription": "Vent et lite øyeblikk...",
-    "unconfirmingPeriodLabel": "Vi nullstiller timene dine",
+    "unconfirmingPeriodLabel": "Vi nullstiller timene dine for perioden",
     "unconfirmingPeriodDescription": "Vent et lite øyeblikk...",
     "overviewHeaderText": "Oversikt",
     "summaryHeaderText": "Sammendrag",
@@ -38,7 +38,7 @@
     "customerInactiveError": "Kunden er ikke lenger aktiv. Løs hendelsen i Outlook.",
     "projectInactiveError": "Prosjektet er ikke lenger aktivt. Løs hendelsen i Outlook.",
     "unforecastingPeriodDescription": "Vent et lite øyeblikk...",
-    "unforecastingPeriodLabel": "Fjerner prognose",
+    "unforecastingPeriodLabel": "Fjerner prognosen for perioden",
     "forecastingPeriodLabel": "Lagrer prognose",
     "forecastingPeriodDescription": "Vent et lite øyeblikk...",
     "errorMessageText": "Det oppsto et problem med å hente ut timelisten din. \nPrøv igjen senere...",
@@ -151,12 +151,18 @@
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport",
+    "generatingReportDescription": "For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene ...",
     "noEntriesText": "Det er ingen tidsoppføringer for dette tidspunktet.",
     "selectReportText": "Velg en rapport over. \nVær oppmerksom på at noen rapporter kan ta flere minutter å laste inn.",
     "selectReportLabel": "Velg rapport",
     "forecast": "Prognose",
     "exportToExcel": "Eksporter til Excel",
-    "generatingReportDescription": "For å gi deg de ferskeste resultatene, genererer vi en rapport fra de nyeste dataene ..."
+    "savedFilters": "Lagrede filtre",
+    "saveFilterText": "Lagre filter",
+    "filterNamePlaceholder": "Skriv inn filternavnet ...",
+    "cancelSaveFilterText": "Avbryt",
+    "removeSelectedFilterText": "Fjern valgt filter",
+    "filterPanelHeaderText": "Filtre"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",

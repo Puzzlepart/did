@@ -1,10 +1,10 @@
 {
   "timesheet": {
-    "loadingEventsLabel": "Loading events",
-    "loadingEventsDescription": "Please wait...",
+    "loadingTimesheetLabel": "Loading your timesheet",
+    "loadingTimesheetDescription": "Please wait while we fetch your latest data...",
     "confirmingPeriodLabel": "Confirming period",
     "confirmingPeriodDescription": "Hang on a minute...",
-    "unconfirmingPeriodLabel": "Unconfirming period",
+    "unconfirmingPeriodLabel": "Unconfirming the period",
     "unconfirmingPeriodDescription": "Hang on a minute...",
     "overviewHeaderText": "Overview",
     "summaryHeaderText": "Summary",
@@ -38,7 +38,7 @@
     "periodForecastedText": "The period is forecasted with {{hours}}.",
     "matchEventPanelHeaderText": "Resolve event",
     "unforecastingPeriodDescription": "Hang on a minute...",
-    "unforecastingPeriodLabel": "Removing forecast",
+    "unforecastingPeriodLabel": "Removing forecast for the period",
     "forecastingPeriodLabel": "Forecasting period",
     "forecastingPeriodDescription": "Hang on a minute...",
     "errorMessageText": "There was a problem fetching your timesheet. Please try again later...",
@@ -152,12 +152,18 @@
   },
   "reports": {
     "generatingReportLabel": "Generating report",
+    "generatingReportDescription": "To give you the freshest results, we're generating a report from the latest data...",
     "noEntriesText": "There's no time entries at this time.",
     "selectReportText": "Select a report above. Be aware that some reports can take several minutes to load.",
     "selectReportLabel": "Select report",
     "forecast": "Forecast",
     "exportToExcel": "Export to Excel",
-    "generatingReportDescription": "To give you the freshest results, we're generating a report from the latest data..."
+    "savedFilters": "Saved filters",
+    "saveFilterText": "Save filter",
+    "filterNamePlaceholder": "Enter filter name...",
+    "cancelSaveFilterText": "Cancel",
+    "removeSelectedFilterText": "Remove selected filter",
+    "filterPanelHeaderText": "Filters"
   },
   "common": {
     "headerTotalDuration": " ({{duration}})",

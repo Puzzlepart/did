@@ -41,7 +41,7 @@ export const SummaryView = (): JSX.Element => {
     dispatch({ type: 'DATA_UPDATED', payload: data })
   }, [data])
 
-  const columns = useMemo(() => createColumns(state, t), [state])
+  const columns = useMemo(() => createColumns(state, t), [state, t])
   const ctxValue: ISummaryViewContext = useMemo(
     () => ({
       ...state,
@@ -53,7 +53,7 @@ export const SummaryView = (): JSX.Element => {
       columns,
       rows: createRows(state, columns, t)
     }),
-    [state, loading]
+    [state, loading, columns, scopes, types, t]
   )
 
   return (
@@ -61,7 +61,10 @@ export const SummaryView = (): JSX.Element => {
       <SummaryViewContext.Provider value={ctxValue}>
         <Pivot
           onLinkClick={(item) =>
-            dispatch({ type: 'CHANGE_SCOPE', payload: item.props as ISummaryViewScope })
+            dispatch({
+              type: 'CHANGE_SCOPE',
+              payload: item.props as ISummaryViewScope
+            })
           }>
           {ctxValue.scopes.map((scope) => (
             <PivotItem key={scope.itemKey} {...scope}>

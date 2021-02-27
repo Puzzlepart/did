@@ -19,7 +19,10 @@ export class UserResolver {
    * @param {MSGraphService} _msgraph MS Graph service
    * @param {MongoService} _mongo Mongo service
    */
-  constructor(private readonly _msgraph: MSGraphService, private readonly _mongo: MongoService) {}
+  constructor(
+    private readonly _msgraph: MSGraphService,
+    private readonly _mongo: MongoService
+  ) {}
 
   /**
    * Get current user
@@ -78,13 +81,29 @@ export class UserResolver {
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Add users' })
-  async addUsers(@Arg('users', () => [UserInput]) users: UserInput[]): Promise<BaseResult> {
+  async addUsers(
+    @Arg('users', () => [UserInput]) users: UserInput[]
+  ): Promise<BaseResult> {
     users = users.map((user) => ({
       ...user,
       role: 'User'
     }))
     await this._mongo.user.addUsers(users)
     return { success: true, error: null }
+  }
+
+  /**
+   * Update user configuration
+   *
+   * @param {string} configuration Configuration
+   */
+  @Authorized<IAuthOptions>({ userContext: true })
+  @Mutation(() => BaseResult, { description: 'Update user configuration' })
+  async updateUserConfiguration(
+    @Arg('configuration') configuration: string
+  ): Promise<BaseResult> {
+    await this._mongo.user.updateCurrentUserConfiguration(configuration)
+    return { success: true }
   }
 }
 

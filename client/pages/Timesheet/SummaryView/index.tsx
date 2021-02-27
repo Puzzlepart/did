@@ -80,12 +80,16 @@ function generateRows(events: EventObject[], columns: IColumn[]) {
     (p: Project) => p.tag
   )
   return projects.map((project) => {
-    const projectEvents = events.filter((event) => event.project.tag === project.tag)
+    const projectEvents = events.filter(
+      (event) => event.project.tag === project.tag
+    )
     return [...columns].splice(1, columns.length - 2).reduce(
       (obj, col) => {
         const sum = [...projectEvents]
           .filter(
-            (event) => DateUtils.formatDate(event.startDateTime, 'YYYY-MM-DD') === col.fieldName
+            (event) =>
+              DateUtils.formatDate(event.startDateTime, 'YYYY-MM-DD') ===
+              col.fieldName
           )
           .reduce((sum, event) => (sum += event.duration), 0)
         obj[col.fieldName] = sum
@@ -113,7 +117,9 @@ function generateTotalRow(events: any[], columns: IColumn[], label: string) {
     (obj, col) => {
       const sum = [...events]
         .filter(
-          (event) => DateUtils.formatDate(event.startDateTime, 'YYYY-MM-DD') === col.fieldName
+          (event) =>
+            DateUtils.formatDate(event.startDateTime, 'YYYY-MM-DD') ===
+            col.fieldName
         )
         .reduce((sum, event) => (sum += event.duration), 0)
       obj[col.fieldName] = sum
@@ -126,6 +132,7 @@ function generateTotalRow(events: any[], columns: IColumn[], label: string) {
 
 export const SummaryView = () => {
   const { t } = useTranslation()
+  const context = useContext(TimesheetContext)
   if (isMobile) {
     return (
       <MessageBar styles={{ root: { marginTop: 8 } }}>
@@ -133,7 +140,6 @@ export const SummaryView = () => {
       </MessageBar>
     )
   } else {
-    const context = useContext(TimesheetContext)
     const columns = createColumns(context.scope)
     const events = context.selectedPeriod?.getEvents(false) || []
     const items = [
@@ -142,8 +148,14 @@ export const SummaryView = () => {
     ]
 
     return (
-      <div key={`summary_${context.selectedPeriod?.id}`} className={styles.root}>
-        <List items={items} columns={columns} enableShimmer={!!context?.loading} />
+      <div
+        key={`summary_${context.selectedPeriod?.id}`}
+        className={styles.root}>
+        <List
+          items={items}
+          columns={columns}
+          enableShimmer={!!context?.loading}
+        />
       </div>
     )
   }

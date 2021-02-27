@@ -4,10 +4,10 @@
       title
       duration
       week
+      month
+      year
       startDateTime
       endDateTime
-      monthNumber
-      year
       resource {
         givenName
         surname

@@ -34,8 +34,14 @@ export class TimesheetPeriod {
    */
   initialize(period: TimesheetPeriodObject) {
     Object.assign(this, period)
-    this._uiMatchedEventsStorage = new BrowserStorage(`ui_matched_events_${this.id}`, 'local')
-    this._uiIgnoredEventsStorage = new BrowserStorage(`ui_ignored_events_${this.id}`, 'local')
+    this._uiMatchedEventsStorage = new BrowserStorage(
+      `ui_matched_events_${this.id}`,
+      'local'
+    )
+    this._uiIgnoredEventsStorage = new BrowserStorage(
+      `ui_ignored_events_${this.id}`,
+      'local'
+    )
     this._uiMatchedEvents = this._uiMatchedEventsStorage.get({})
     this._uiIgnoredEvents = this._uiIgnoredEventsStorage.get([])
     return this
@@ -98,7 +104,11 @@ export class TimesheetPeriod {
       .filter((event) => {
         const isUiIgnored = this._uiIgnoredEvents.indexOf(event.id) !== -1
         const isMatched = !!event.project
-        return !event.isSystemIgnored && !isUiIgnored && (!includeUnmatched ? isMatched : true)
+        return (
+          !event.isSystemIgnored &&
+          !isUiIgnored &&
+          (!includeUnmatched ? isMatched : true)
+        )
       })
       .map((event) => this._checkUiManualMatch(event))
   }
@@ -115,7 +125,9 @@ export class TimesheetPeriod {
    */
   public get errors(): any[] {
     if (!this.getEvents) return []
-    return filter(this.getEvents(), (event) => !!event.error).map((event) => event.error)
+    return filter(this.getEvents(), (event) => !!event.error).map(
+      (event) => event.error
+    )
   }
 
   /**
@@ -186,7 +198,10 @@ export class TimesheetPeriod {
    * Get matched events with properties
    */
   private get matchedEvents(): EventInput[] {
-    const events = filter([...this.getEvents()], (event) => !!event.project).map(
+    const events = filter(
+      [...this.getEvents()],
+      (event) => !!event.project
+    ).map(
       (event) =>
         ({
           id: event.id,

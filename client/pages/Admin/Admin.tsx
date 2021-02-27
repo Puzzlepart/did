@@ -8,7 +8,6 @@ import styles from './Admin.module.scss'
 import { ApiTokens } from './ApiTokens'
 import { Labels } from './Labels'
 import { Roles } from './Roles'
-import { SubscriptionSettings } from './Subscription'
 import { SummaryView } from './SummaryView'
 import { Users } from './Users'
 
@@ -18,7 +17,8 @@ export const Admin = () => {
   const { view } = useParams<{ view: string }>()
   const history = useHistory()
 
-  const onPivotClick = ({ props }: PivotItem) => history.push(`/admin/${props.itemKey}`)
+  const onPivotClick = ({ props }: PivotItem) =>
+    history.push(`/admin/${props.itemKey}`)
 
   return (
     <div className={styles.root}>
@@ -53,15 +53,6 @@ export const Admin = () => {
             headerText={t('admin.rolesPermissions')}
             itemIcon='SecurityGroup'>
             <Roles />
-          </PivotItem>
-        )}
-        {user.hasPermission(PERMISSION.MANAGE_SUBSCRIPTION) && (
-          <PivotItem
-            className={styles.tab}
-            itemKey='subscription'
-            headerText={t('admin.subscriptionSettings')}
-            itemIcon='Subscribe'>
-            <SubscriptionSettings />
           </PivotItem>
         )}
         <PivotItem

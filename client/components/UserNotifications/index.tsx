@@ -17,7 +17,9 @@ export const UserNotifications = () => {
   const { t } = useTranslation()
   const { user } = useContext(AppContext)
   const [showPanel, setShowPanel] = useState(false)
-  const [notifications, setNotifications] = useState<Set<NotificationModel>>(new Set())
+  const [notifications, setNotifications] = useState<Set<NotificationModel>>(
+    new Set()
+  )
   const { loading, data } = useQuery(notificationsQuery, {
     variables: {
       templates: t('notifications.templates', { returnObjects: true }),
@@ -35,24 +37,37 @@ export const UserNotifications = () => {
   const onDismissNotification = (notification: NotificationModel) => {
     const _notifications = new Set(notifications)
     _notifications.delete(notification)
-    const _dismissedIds = new Set<string>(BROWSER_STORAGE.get(STORAGE_KEY) || [])
+    const _dismissedIds = new Set<string>(
+      BROWSER_STORAGE.get(STORAGE_KEY) || []
+    )
     _dismissedIds.add(notification.id)
-    BROWSER_STORAGE.put(STORAGE_KEY, [..._dismissedIds], dateAdd(new Date(), 'year', 1))
+    BROWSER_STORAGE.put(
+      STORAGE_KEY,
+      [..._dismissedIds],
+      dateAdd(new Date(), 'year', 1)
+    )
     setNotifications(_notifications)
   }
 
   useEffect(() => {
-    const _dismissedIds = new Set<string>(BROWSER_STORAGE.get(STORAGE_KEY) || [])
-    let _notifications = getValue(data, 'notifications', []).map((n) => new NotificationModel(n))
+    const _dismissedIds = new Set<string>(
+      BROWSER_STORAGE.get(STORAGE_KEY) || []
+    )
+    let _notifications = getValue(data, 'notifications', []).map(
+      (n) => new NotificationModel(n)
+    )
     _notifications = _notifications.filter((n) => !_dismissedIds.has(n.id))
     if (_notifications.length > 0) {
       setNotifications(new Set(_notifications))
     }
-  }, [loading])
+  }, [loading, data])
 
   return (
     <>
-      <a hidden={loading} className={styles.root} onClick={() => setShowPanel(!showPanel)}>
+      <a
+        hidden={loading}
+        className={styles.root}
+        onClick={() => setShowPanel(!showPanel)}>
         <div className={styles.icon}>
           <Icon iconName='Ringer' />
         </div>
