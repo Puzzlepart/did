@@ -24,7 +24,7 @@ export function useSubmitActions({ state, dispatch, refetch }) {
     }
     await submitPeriod({ variables })
     refetch()
-    app.notifications.refetch()
+    app.notificationsQuery.refetch(1000)
   }
 
   const onUnsubmitPeriod = async (forecast: boolean) => {

@@ -8,7 +8,7 @@ export const useUserNotifications = ([state, dispatch]: [
   React.Dispatch<React.SetStateAction<IUserNotificationsState>>
 ]) => {
   const app = useContext(AppContext)
-  const notifications = app.notifications[0].map(
+  const notifications = app.notificationsQuery.notifications.map(
     (n) => new NotificationModel(n)
   )
 
