@@ -1,15 +1,12 @@
-import React, { useContext } from 'react'
-import { useTranslation } from 'react-i18next'
-import { IIgnoreEventButtonProps } from './types'
-import { TimesheetContext } from '../../../types'
 import { Icon, MessageBarButton } from 'office-ui-fabric'
-import { MobileView, BrowserView } from 'react-device-detect'
-import styles from './IgnoreEventButton.module.scss'
 import { IGNORE_EVENT } from 'pages/Timesheet/reducer/actions'
+import React, { useContext } from 'react'
+import { BrowserView, MobileView } from 'react-device-detect'
+import { useTranslation } from 'react-i18next'
+import { TimesheetContext } from '../../../types'
+import styles from './IgnoreEventButton.module.scss'
+import { IIgnoreEventButtonProps } from './types'
 
-/**
- * @category Timesheet
- */
 export const IgnoreEventButton = ({
   event
 }: IIgnoreEventButtonProps): JSX.Element => {

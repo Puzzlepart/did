@@ -26,7 +26,7 @@ export const SaveFilterForm = (props: ISaveFilterFormProps) => {
   /**
    * On save filter
    *
-   * @note Stringifies the saved filters (including the new one) and sends it to the
+   * @remarks Stringifies the saved filters (including the new one) and sends it to the
    * mutation updateUserConfiguration.
    *
    * @returns Promise<void>

@@ -16,7 +16,7 @@ export const Roles = () => {
   /**
    * On edit role
    *
-   * @param {Role} role Role to edit
+   * @param role - Role to edit
    */
   const onEdit = (role: Role) =>
     setPanel({

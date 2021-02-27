@@ -14,7 +14,7 @@ export class LabelResolver {
   /**
    * Constructor for LabelResolver
    *
-   * @param _mongo Mongo service
+   * @param _mongo - Mongo service
    */
   constructor(private readonly _mongo: MongoService) {}
 
@@ -30,8 +30,8 @@ export class LabelResolver {
   /**
    * Add or update label
    *
-   * @param {LabelInput} label Label
-   * @param {boolean} update Update
+   * @param label - Label
+   * @param update - Update
    */
   // @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Add or update label' })
@@ -46,9 +46,9 @@ export class LabelResolver {
   }
 
   /**
-   * Delete label
+   * Delete label by name
    *
-   * @param name Name
+   * @param name - Name
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Delete label' })

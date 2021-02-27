@@ -11,9 +11,9 @@ export class MongoDocumentService<T> {
    *
    * Specify cachePrefix to use an underlying CacheService
    *
-   * @param context Context
-   * @param collectionName Colletion name
-   * @param cachePrefix Cache prefix
+   * @param context - Context
+   * @param collectionName - Colletion name
+   * @param cachePrefix - Cache prefix
    */
   constructor(
     public readonly context: Context,
@@ -31,8 +31,8 @@ export class MongoDocumentService<T> {
    *
    * @see — https ://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
    *
-   * @param {FilterQuery<T>} query Query
-   * @param {Array<[string, number]> | SortOptionObject<T>} sort Sort
+   * @param query - Query
+   * @param sort - Sort options
    */
   public find(
     query: FilterQuery<T>,

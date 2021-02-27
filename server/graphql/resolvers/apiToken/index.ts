@@ -15,14 +15,14 @@ export class ApiTokenResolver {
   /**
    * Constructor for ApiTokenResolver
    *
-   * @param _mongo Mongo service
+   * @param _mongo - Mongo service
    */
   constructor(private readonly _mongo: MongoService) {}
 
   /**
    * Get API tokens
    *
-   * @param {Context} ctx GraphQL context
+   * @param ctx - GraphQL context
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [ApiToken], { description: 'Get API tokens' })
@@ -35,8 +35,8 @@ export class ApiTokenResolver {
   /**
    * Add API token
    *
-   * @param {ApiTokenInput} token Token
-   * @param {Context} ctx GraphQL context
+   * @param token - Token
+   * @param ctx - GraphQL context
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => String, { description: 'Add API token' })
@@ -50,8 +50,8 @@ export class ApiTokenResolver {
   /**
    * Delete API token
    *
-   * @param name Name
-   * @param {Context} ctx GraphQL context
+   * @param name - Name
+   * @param ctx - GraphQL context
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Delete API tokens' })

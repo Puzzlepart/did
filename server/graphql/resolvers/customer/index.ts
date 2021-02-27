@@ -13,14 +13,14 @@ export class CustomerResolver {
   /**
    * Constructor for CustomerResolver
    *
-   * @param _mongo Mongo service
+   * @param _mongo - Mongo service
    */
   constructor(private readonly _mongo: MongoService) {}
 
   /**
    * Get customers
    *
-   * @param sortBy Sort by
+   * @param sortBy - Sort by
    **/
   @Authorized()
   @Query(() => [Customer], { description: 'Get customers' })
@@ -31,8 +31,8 @@ export class CustomerResolver {
   /**
    * Create or update customer
    *
-   * @param {CustomerInput} customer Customer
-   * @param {boolean} update Update
+   * @param customer - Customer
+   * @param update - Update
    */
   @Authorized<IAuthOptions>({ permission: '09909241' })
   @Mutation(() => BaseResult, { description: 'Create or update customer' })
@@ -49,7 +49,7 @@ export class CustomerResolver {
   /**
    * Delete customer
    *
-   * @param key Key
+   * @param key - Key
    */
   @Authorized({ permission: '8b39db3d' })
   @Mutation(() => BaseResult, { description: 'Delete customer' })

@@ -18,7 +18,7 @@ import {
 import { IReportsReducerParams } from './types'
 
 /**
- * Creating reducer for Reports using @reduxjs/toolkit
+ * Creating reducer for Reports using reduxjs/toolkit
  */
 export default ({ app, url, queries }: IReportsReducerParams) =>
   createReducer<IReportsState>(

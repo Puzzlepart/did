@@ -25,7 +25,7 @@ export class TimesheetService {
   /**
    * Constructor
    *
-   * @param context - Context
+   * @param context - Injected context through typedi
    * @param _msgraph - MSGraphService
    * @param _mongo - MongoService
    */
@@ -157,7 +157,7 @@ export class TimesheetService {
   /**
    * Unsubmit period
    *
-   * @param params - Unsubmit period params
+   * @param period - Unsubmit period params
    */
   public async unsubmitPeriod({
     period,

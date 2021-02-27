@@ -5,7 +5,7 @@ import hotkeys from './hotkeys'
 /**
  * Hook for hotkeys
  *
- * @param {ITimesheetContext} context Context
+ * @param context - Context
  */
 export function useHotkeys(context: ITimesheetContext) {
   // eslint-disable-next-line react-hooks/exhaustive-deps

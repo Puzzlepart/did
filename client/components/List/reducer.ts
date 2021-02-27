@@ -8,8 +8,8 @@ type Action =
 /**
  * Reducer for Timesheet
  *
- * @param {ITimesheetState} state State
- * @param {IAction} action Action
+ * @param state - State
+ * @param action - Action
  */
 export default (state: IListState, action: Action): IListState => {
   const newState: IListState = { ...state }

@@ -1,11 +1,11 @@
+/* eslint-disable quotes */
 global['fetch'] = require('node-fetch')
 import { Client as MSGraphClient } from '@microsoft/microsoft-graph-client'
-import * as appInsights from 'applicationinsights'
 import createDebug from 'debug'
-import { performance, PerformanceObserver } from 'perf_hooks'
+import { PerformanceObserver } from 'perf_hooks'
 import 'reflect-metadata'
 import { Service } from 'typedi'
-import { first, sortBy } from 'underscore'
+import { sortBy } from 'underscore'
 import DateUtils from '../../../shared/utils/date'
 import env from '../../utils/env'
 import OAuthService, { AccessTokenOptions } from '../oauth'
@@ -29,47 +29,13 @@ class MSGraphService {
   /**
    * Constructs a new MSGraphService
    *
-   * @param {OAuthService} _oauthService OAuth service
-   * @param access_token Access token
+   * @param _oauthService - OAuth service
+   * @param access_token - Access token
    */
   constructor(
     private _oauthService: OAuthService,
     private _access_token?: string
-  ) {
-    if (!env('APPINSIGHTS_INSTRUMENTATIONKEY')) return
-    appInsights.setup(env('APPINSIGHTS_INSTRUMENTATIONKEY'))
-    this._perf = new PerformanceObserver((list) => {
-      const { name, duration } = first(list.getEntries())
-      appInsights.defaultClient.trackMetric({
-        name,
-        value: duration
-      })
-    })
-    this._perf.observe({ entryTypes: ['measure'], buffered: true })
-  }
-
-  /**
-   * Starts a performance mark
-   *
-   * @param measure
-   */
-  startMark(measure: string): void {
-    performance.mark(`${measure}-init`)
-  }
-
-  /**
-   * Ends a performance mark
-   *
-   * @param measure
-   */
-  endMark(measure: string): void {
-    performance.mark(`${measure}-end`)
-    performance.measure(
-      `GraphService.${measure}`,
-      `${measure}-init`,
-      `${measure}-end`
-    )
-  }
+  ) {}
 
   /**
    * Gets a Microsoft Graph Client using the auth token from the class
@@ -89,18 +55,16 @@ class MSGraphService {
   /**
    * Get current user properties
    *
-   * @param {string[]} properties Properties to retrieve
+   * @param properties - Properties to retrieve
    */
   async getCurrentUser(properties: string[]): Promise<any> {
     try {
-      this.startMark('getCurrentUser')
       debug('Querying Graph /me: %s', JSON.stringify({ select: properties }))
       const client = await this._getClient()
       const value = await client
         .api('/me')
         .select(['id', ...properties])
         .get()
-      this.endMark('getCurrentUser')
       return value
     } catch (error) {
       throw new Error(`MSGraphService.getCurrentUser: ${error.message}`)
@@ -112,7 +76,6 @@ class MSGraphService {
    */
   async getUsers(): Promise<any> {
     try {
-      this.startMark('getUsers')
       const client = await this._getClient()
       const { value: users } = await client
         .api('/users')
@@ -130,7 +93,6 @@ class MSGraphService {
         ])
         .top(999)
         .get()
-      this.endMark('getUsers')
       return sortBy(users, 'displayName')
     } catch (error) {
       throw new Error(`MSGraphService.getUsers: ${error.message}`)
@@ -140,13 +102,12 @@ class MSGraphService {
   /**
    * Create Outlook category
    *
-   * @param category Category
+   * @param category - Category
    */
   async createOutlookCategory(
     category: string
   ): Promise<MSGraphOutlookCategory> {
     try {
-      this.startMark('createOutlookCategory')
       const colorIdx =
         category
           .split('')
@@ -160,7 +121,6 @@ class MSGraphService {
       const result = await client
         .api('/me/outlook/masterCategories')
         .post(content)
-      this.endMark('createOutlookCategory')
       return result
     } catch (error) {
       throw new Error(`MSGraphService.createOutlookCategory: ${error.message}`)
@@ -172,11 +132,9 @@ class MSGraphService {
    */
   async getOutlookCategories(): Promise<any[]> {
     try {
-      this.startMark('getOutlookCategories')
       debug('Querying Graph /me/outlook/masterCategories')
       const client = await this._getClient()
       const { value } = await client.api('/me/outlook/masterCategories').get()
-      this.endMark('getOutlookCategories')
       return value
     } catch (error) {
       throw new Error(`MSGraphService.getOutlookCategories: ${error.message}`)
@@ -186,9 +144,9 @@ class MSGraphService {
   /**
    * Get events for the specified period using Microsoft Graph endpoint /me/calendar/calendarView
    *
-   * @param startDate Start date (YYYY-MM-DD)
-   * @param endDate End date (YYYY-MM-DD)
-   * @param {MSGraphEventOptions} options Options
+   * @param startDate - Start date (YYYY-MM-DD)
+   * @param endDate - End date (YYYY-MM-DD)
+   * @param options - Options
    */
   async getEvents(
     startDate: string,
@@ -196,7 +154,6 @@ class MSGraphService {
     options: MSGraphEventOptions
   ): Promise<MSGraphEvent[]> {
     try {
-      this.startMark('getEvents')
       const query = {
         startDateTime: DateUtils.toISOString(
           `${startDate}:00:00:00.000`,
@@ -225,7 +182,6 @@ class MSGraphService {
           'webLink',
           'isOrganizer'
         ])
-        // eslint-disable-next-line quotes
         .filter(
           "sensitivity ne 'private' and isallday eq false and iscancelled eq false"
         )
@@ -236,7 +192,6 @@ class MSGraphService {
         .filter((event) => !!event.subject)
         .map((event) => new MSGraphEvent(event, options))
         .filter((event: MSGraphEvent) => event.duration <= 24)
-      this.endMark('getEvents')
       return events
     } catch (error) {
       throw new Error(`MSGraphService.getEvents: ${error.message}`)

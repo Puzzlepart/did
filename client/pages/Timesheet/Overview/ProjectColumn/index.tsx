@@ -16,8 +16,8 @@ import { IProjectColumnProps } from './types'
 /**
  * Get error message
  *
- * @param code Error code
- * @param {TFunction} t Translate function
+ * @param code - Error code
+ * @param t - Translate function
  */
 function getErrorMessage(code: string, t: TFunction): [string, MessageBarType] {
   switch (code) {

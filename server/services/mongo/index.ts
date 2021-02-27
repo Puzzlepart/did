@@ -16,7 +16,7 @@ export class MongoService {
   /**
    * Constructor
    *
-   * @param context Context
+   * @param context - Injected context through typedi
    */
   constructor(@Inject('CONTEXT') private readonly context: Context) {}
 

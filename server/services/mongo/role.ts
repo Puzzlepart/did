@@ -12,7 +12,7 @@ export class RoleService extends MongoDocumentService<Role> {
   /**
    * Get roles
    *
-   * @param {FilterQuery<Role>} query Query
+   * @param query - Query
    */
   public async getRoles(query?: FilterQuery<Role>): Promise<Role[]> {
     try {
@@ -26,7 +26,7 @@ export class RoleService extends MongoDocumentService<Role> {
   /**
    * Get Role by name
    *
-   * @param name Role name
+   * @param name - Role name
    */
   public async getByName(name: string): Promise<Role> {
     try {
@@ -40,7 +40,7 @@ export class RoleService extends MongoDocumentService<Role> {
   /**
    * Add role
    *
-   * @param {Role} role Role
+   * @param role - Role
    */
   public async addRole(role: Role) {
     try {
@@ -54,7 +54,7 @@ export class RoleService extends MongoDocumentService<Role> {
   /**
    * Update role
    *
-   * @param {Role} role Role
+   * @param role - Role
    */
   public async updateRole(role: Role): Promise<void> {
     try {
@@ -67,7 +67,7 @@ export class RoleService extends MongoDocumentService<Role> {
   /**
    * Delete role
    *
-   * @param name Role name
+   * @param name - Role name
    */
   public async deleteRole(name: string): Promise<void> {
     try {

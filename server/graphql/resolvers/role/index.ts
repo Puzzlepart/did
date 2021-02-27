@@ -14,7 +14,7 @@ export class RoleResolver {
   /**
    * Constructor for RoleResolver
    *
-   * @param _mongo Mongo service
+   * @param _mongo - Mongo service
    */
   constructor(private readonly _mongo: MongoService) {}
 
@@ -30,10 +30,8 @@ export class RoleResolver {
   /**
    * Add or update role
    *
-   * @permission MANAGE_ROLESPERMISSIONS (cd52a735)
-   *
-   * @param {RoleInput} role Role
-   * @param {boolean} update Update
+   * @param role - Role
+   * @param update - Update
    */
   @Authorized<IAuthOptions>({ permission: 'cd52a735' })
   @Mutation(() => BaseResult, { description: 'Add or update role' })
@@ -49,7 +47,7 @@ export class RoleResolver {
   /**
    * Delete role
    *
-   * @param name Name
+   * @param name - Name
    */
   @Authorized<IAuthOptions>({ permission: 'cd52a735' })
   @Mutation(() => BaseResult, { description: 'Delete role' })

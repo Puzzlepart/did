@@ -23,7 +23,7 @@ export class ProjectService extends MongoDocumentService<Project> {
   /**
    * Constructor for MongoDatabase
    *
-   * @param context Context
+   * @param context - Context
    */
   constructor(context: Context) {
     super(context, 'projects', ProjectService.name)
@@ -36,7 +36,7 @@ export class ProjectService extends MongoDocumentService<Project> {
    *
    * Returns the ID of the added project
    *
-   * @param {Project} project Project to add
+   * @param project - Project to add
    */
   public async addProject(project: Project): Promise<string> {
     try {
@@ -58,7 +58,7 @@ export class ProjectService extends MongoDocumentService<Project> {
    *
    * Returns true if the operation was successful
    *
-   * @param {Project} project Project to update
+   * @param project - Project to update
    */
   public async updateProject(project: Project): Promise<boolean> {
     try {
@@ -80,7 +80,7 @@ export class ProjectService extends MongoDocumentService<Project> {
    *
    * Connects labels and customer to projects
    *
-   * @param {FilterQuery<Project>} query Query
+   * @param query - Query
    */
   public getProjectsData(query?: FilterQuery<Project>): Promise<ProjectsData> {
     try {

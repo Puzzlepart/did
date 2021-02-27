@@ -6,9 +6,9 @@ import { Project } from 'types'
 /**
  * On export to Excel
  *
- * @param {Project} project Project
- * @param {any[]} timeentries Time entries
- * @param {TFunction} t Translate function
+ * @param project - Project
+ * @param timeentries - Time entries
+ * @param t - Translate function
  */
 export async function onExportExcel(
   project: Project,

@@ -29,7 +29,7 @@ const datePickerProps = (t: TFunction): IDatePickerProps => ({
 /**
  * Command bar items
  *
- * @param {ISummaryViewContext} context Summary view context
+ * @param context - Summary view context
  */
 export const commandBar = (context: ISummaryViewContext) => {
   return {

@@ -19,7 +19,7 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
   /**
    * On manual match. Dispatches action type MANUAL_MATCH
    *
-   * @param {Project} project Project to match the event to
+   * @param project - Project to match the event to
    */
   const onManualMatch = (project: Project) => {
     hidePanel()

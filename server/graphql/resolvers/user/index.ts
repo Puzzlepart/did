@@ -16,8 +16,8 @@ export class UserResolver {
   /**
    * Constructor for UserResolver
    *
-   * @param _msgraph MS Graph service
-   * @param _mongo Mongo service
+   * @param _msgraph - MS Graph service
+   * @param _mongo - Mongo service
    */
   constructor(
     private readonly _msgraph: MSGraphService,
@@ -27,7 +27,7 @@ export class UserResolver {
   /**
    * Get current user
    *
-   * @param {Context} ctx GraphQL context
+   * @param ctx - GraphQL context
    */
   @Query(() => User, { description: 'Get the currently logged in user' })
   async currentUser(@Ctx() ctx: Context) {
@@ -49,7 +49,7 @@ export class UserResolver {
   /**
    * Get users
    *
-   * @param {UserQuery} query Query
+   * @param query - Query
    */
   @Authorized()
   @Query(() => [User], { description: 'Get users' })
@@ -60,8 +60,8 @@ export class UserResolver {
   /**
    * Add or update user
    *
-   * @param {UserInput} user User
-   * @param {boolean} update Update
+   * @param user - User
+   * @param update - Update
    */
   @Authorized()
   @Mutation(() => BaseResult, { description: 'Add or update user' })
@@ -77,7 +77,7 @@ export class UserResolver {
   /**
    * Add users
    *
-   * @param {UserInput[]} users Users
+   * @param users - Users
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Add users' })
@@ -95,7 +95,7 @@ export class UserResolver {
   /**
    * Update user configuration
    *
-   * @param configuration Configuration
+   * @param configuration - Configuration
    */
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Update user configuration' })

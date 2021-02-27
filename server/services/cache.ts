@@ -25,9 +25,9 @@ export class CacheService {
   /**
    * Constructor
    *
-   * @param context - Context
+   * @param context - Injected context through typedi
    * @param prefix - Prefix
-   * @param scope - Scope (defaults to CacheScope.SUBSCRIPTION)
+   * @param context - Scope (defaults to CacheScope.SUBSCRIPTION)
    */
   constructor(
     @Inject('CONTEXT') private readonly context: Context,
@@ -81,7 +81,7 @@ export class CacheService {
   }
 
   /**
-   * Get from cache by key
+   * Set value in cache
    *
    * @param options - Cache options
    * @param value - Cache value
@@ -128,6 +128,7 @@ export class CacheService {
   }
 
   /**
+   * Using cache
    *
    * @param func - Promise function
    * @param options - Cache options

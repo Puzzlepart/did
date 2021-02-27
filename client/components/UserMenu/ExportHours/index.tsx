@@ -26,7 +26,7 @@ export const ExportHours: FunctionComponent = () => {
   /**
    * Toggle panel
    *
-   * @param {React.MouseEvent} event Event
+   * @param event - Mouse event
    */
   const togglePanel = (event: React.MouseEvent<any>) => {
     switch (event.currentTarget.id) {

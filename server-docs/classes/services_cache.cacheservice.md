@@ -32,13 +32,13 @@ Constructor
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | [*Context*](graphql_context.context.md) | Context   |
+`context` | [*Context*](graphql_context.context.md) | Scope (defaults to CacheScope.SUBSCRIPTION)    |
 `prefix?` | *string* | Prefix   |
-`scope` | [*CacheScope*](../enums/services_cache.cachescope.md) | Scope (defaults to CacheScope.SUBSCRIPTION)    |
+`scope` | [*CacheScope*](../enums/services_cache.cachescope.md) | - |
 
 **Returns:** [*CacheService*](services_cache.cacheservice.md)
 
-Defined in: [server/services/cache.ts:24](https://github.com/Puzzlepart/did/blob/ee943744/server/services/cache.ts#L24)
+Defined in: [server/services/cache.ts:24](https://github.com/Puzzlepart/did/blob/b3b3393e/server/services/cache.ts#L24)
 
 ## Properties
 
@@ -68,13 +68,15 @@ Name | Type |
 
 **Returns:** *Promise*<unknown\>
 
-Defined in: [server/services/cache.ts:123](https://github.com/Puzzlepart/did/blob/ee943744/server/services/cache.ts#L123)
+Defined in: [server/services/cache.ts:119](https://github.com/Puzzlepart/did/blob/b3b3393e/server/services/cache.ts#L119)
 
 ___
 
 ### usingCache
 
 ▸ **usingCache**<T\>(`func`: () => *Promise*<T\>, `__namedParameters`: CacheOptions): *Promise*<T\>
+
+Using cache
 
 #### Type parameters:
 
@@ -91,4 +93,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<T\>
 
-Defined in: [server/services/cache.ts:139](https://github.com/Puzzlepart/did/blob/ee943744/server/services/cache.ts#L139)
+Defined in: [server/services/cache.ts:136](https://github.com/Puzzlepart/did/blob/b3b3393e/server/services/cache.ts#L136)

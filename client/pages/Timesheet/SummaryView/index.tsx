@@ -17,7 +17,7 @@ import styles from './SummaryView.module.scss'
 /**
  * Creates columns from scope
  *
- * @param {TimesheetScope} scope Timesheet scope
+ * @param scope - Timesheet scope
  */
 function createColumns(scope: TimesheetScope): IColumn[] {
   const onRender = (row: any, _index: number, col: IColumn) => (
@@ -71,8 +71,8 @@ function createColumns(scope: TimesheetScope): IColumn[] {
 /**
  * Generate rows from events and columns
  *
- * @param {EventObject[]} events Events
- * @param {IColumn[]} columns Columns
+ * @param events - Events
+ * @param columns - Columns
  */
 function generateRows(events: EventObject[], columns: IColumn[]) {
   const projects = unique(
@@ -108,9 +108,9 @@ function generateRows(events: EventObject[], columns: IColumn[]) {
 /**
  * Generate total row
  *
- * @param {any[]} events Events
- * @param {IColumn[]} columns Columns
- * @param label Label
+ * @param events - Events
+ * @param columns - Columns
+ * @param label - Label
  */
 function generateTotalRow(events: any[], columns: IColumn[], label: string) {
   return [...columns].splice(1, columns.length - 2).reduce(

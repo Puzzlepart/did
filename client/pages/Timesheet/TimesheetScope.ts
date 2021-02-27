@@ -4,8 +4,6 @@ import { ITimesheetParams } from './types'
 
 /**
  * Handles a scope, the period of time between a startDateTime and endDateTime
- *
- * @category Timesheet
  */
 export class TimesheetScope {
   public startDate?: DateObject
@@ -14,7 +12,7 @@ export class TimesheetScope {
   /**
    * Constructs a new TimesheetScope
    *
-   * @param {DateInput} startDate Optional start date
+   * @param startDate - Optional start date
    */
   constructor(startDate?: DateInput) {
     this.startDate = new DateObject(startDate).startOfWeek
@@ -24,7 +22,7 @@ export class TimesheetScope {
   /**
    * Sets startDate/endDate from params
    *
-   * @param {ITimesheetParams} params Params
+   * @param params - Params
    */
   fromParams(params: ITimesheetParams): TimesheetScope {
     this.startDate = new DateObject().fromObject(params)
@@ -35,7 +33,7 @@ export class TimesheetScope {
   /**
    * Get TimesheetQuery for the scope
    *
-   * @param template Template
+   * @param template - Template
    */
   public query(template: string = 'YYYY-MM-DD'): TimesheetQuery {
     if (!this.startDate) return null
@@ -48,7 +46,7 @@ export class TimesheetScope {
   /**
    * Sets the scope and returns a cloned version of the TimesheetScope
    *
-   * @param add Add
+   * @param add - Add
    */
   public set(add: string): TimesheetScope {
     this.startDate = this.startDate.add(add)
@@ -59,7 +57,7 @@ export class TimesheetScope {
   /**
    * Get a day in the scope by index
    *
-   * @param {number} index Index
+   * @param index - Index
    */
   public getDay(index: number): DateObject {
     return this.startDate.add(`${index}d`)
@@ -75,7 +73,7 @@ export class TimesheetScope {
   /**
    * Get timespan string for the scope
    *
-   * Used in @WeekPicker
+   * @remarks Used in WeekPicker
    */
   public get timespan(): string {
     return DateUtils.getTimespanString(this.startDate, this.endDate)

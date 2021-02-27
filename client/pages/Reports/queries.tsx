@@ -6,8 +6,8 @@ import { IReportsQuery } from './types'
 /**
  * Get last month query
  *
- * @param {DateObject} now Current date and time
- * @param {TFunction} t Translate function
+ * @param now - Current date and time
+ * @param t - Translate function
  */
 const lastMonthQuery = (now: DateObject, t: TFunction) => {
   const obj = now.add('-1month').toObject()
@@ -23,8 +23,8 @@ const lastMonthQuery = (now: DateObject, t: TFunction) => {
 /**
  * Get current month query
  *
- * @param {DateObject} now Current date and time
- * @param {TFunction} t Translate function
+ * @param now - Current date and time
+ * @param t - Translate function
  */
 const currentMonthQuery = (now: DateObject, t: TFunction) => {
   const obj = now.toObject()
@@ -44,8 +44,8 @@ const currentMonthQuery = (now: DateObject, t: TFunction) => {
 /**
  * Get last year query
  *
- * @param {DateObject} now Current date and time
- * @param {TFunction} t Translate function
+ * @param now - Current date and time
+ * @param t - Translate function
  */
 const lastYearQuery = (now: DateObject, t: TFunction) => {
   const { year } = now.toObject('year')
@@ -66,8 +66,8 @@ const lastYearQuery = (now: DateObject, t: TFunction) => {
 /**
  * Get current year query
  *
- * @param {DateObject} now Current date and time
- * @param {TFunction} t Translate function
+ * @param now - Current date and time
+ * @param t - Translate function
  */
 const currentYearQuery = (now: DateObject, t: TFunction) => {
   const obj = now.toObject('year')
@@ -87,8 +87,8 @@ const currentYearQuery = (now: DateObject, t: TFunction) => {
 /**
  * Get forecast query
  *
- * @param {DateObject} now Current date and time
- * @param {TFunction} t Translate function
+ * @param now - Current date and time
+ * @param t - Translate function
  */
 const forecastQuery = (now: DateObject, t: TFunction) => {
   return {
@@ -109,7 +109,7 @@ const forecastQuery = (now: DateObject, t: TFunction) => {
 /**
  * Get queries
  *
- * @param {TFunction} t Translate function
+ * @param t - Translate function
  */
 export function getQueries<T = IReportsQuery>(t: TFunction): T[] {
   const now = new DateObject()

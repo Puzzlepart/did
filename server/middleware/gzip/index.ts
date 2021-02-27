@@ -4,7 +4,7 @@ import express from 'express'
 /**
  * Serve gzipped
  *
- * @param contentType Content type
+ * @param contentType - Content type
  */
 const serveGzipped = (contentType: string) => (
   request: express.Request,

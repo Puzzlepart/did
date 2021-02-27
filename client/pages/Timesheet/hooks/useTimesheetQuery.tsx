@@ -9,8 +9,8 @@ import $timesheet from './timesheet.gql'
 /**
  * Use Timesheet query
  *
- * @param {ITimesheetState} state State
- * @param {Dispatch<AnyAction>} dispatch Dispatch
+ * @param state - State
+ * @param dispatch - Dispatch
  */
 export function useTimesheetQuery(
   state: ITimesheetState,

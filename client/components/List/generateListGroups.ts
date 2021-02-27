@@ -7,8 +7,8 @@ import { IListGroups } from './types'
 /**
  * Create groups
  *
- * @param {any[]} items Items
- * @param {IListGroups} props Props
+ * @param items - Items
+ * @param props - Props
  */
 export function generateListGroups(
   items: any[],

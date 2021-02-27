@@ -20,7 +20,7 @@ export const UserSettings = (props: React.HTMLProps<HTMLDivElement>) => {
   /**
    * Toggle panel
    *
-   * @param {React.MouseEvent} event Event
+   * @param event - Event
    */
   const togglePanel = (event: React.MouseEvent<any>) => {
     switch (event.currentTarget.id) {
@@ -35,8 +35,8 @@ export const UserSettings = (props: React.HTMLProps<HTMLDivElement>) => {
   /**
    * On update user settings
    *
-   * @param key Key
-   * @param value Value
+   * @param key - Key
+   * @param value - Value
    */
   const onUpdateUserSettings = async (key: string, value: string | boolean) => {
     await addOrUpdateUser({

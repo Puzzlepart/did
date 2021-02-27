@@ -18,17 +18,17 @@
 
 ### constructor
 
-\+ **new default**(`_request`: *Request*): [*default*](services_oauth.default.md)
+\+ **new default**(`_request`: [*Request*](../interfaces/_custom_types.express.request.md)): [*default*](services_oauth.default.md)
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`_request` | *Request* |
+`_request` | [*Request*](../interfaces/_custom_types.express.request.md) |
 
 **Returns:** [*default*](services_oauth.default.md)
 
-Defined in: [server/services/oauth.ts:18](https://github.com/Puzzlepart/did/blob/ee943744/server/services/oauth.ts#L18)
+Defined in: [server/services/oauth.ts:18](https://github.com/Puzzlepart/did/blob/b3b3393e/server/services/oauth.ts#L18)
 
 ## Methods
 
@@ -46,4 +46,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Token\>
 
-Defined in: [server/services/oauth.ts:47](https://github.com/Puzzlepart/did/blob/ee943744/server/services/oauth.ts#L47)
+Defined in: [server/services/oauth.ts:47](https://github.com/Puzzlepart/did/blob/b3b3393e/server/services/oauth.ts#L47)

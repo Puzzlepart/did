@@ -18,7 +18,7 @@ export class UserService extends MongoDocumentService<User> {
   /**
    * Replace id with _id
    *
-   * @param {User} user User
+   * @param user - User
    */
   private _replaceId<T>(user: User): T {
     return ({ ...omit(user, 'id'), _id: user.id } as unknown) as T
@@ -27,7 +27,7 @@ export class UserService extends MongoDocumentService<User> {
   /**
    * Get users
    *
-   * @param {FilterQuery<User>} query Query
+   * @param query - Query
    */
   public async getUsers(query?: FilterQuery<User>): Promise<User[]> {
     try {
@@ -49,7 +49,7 @@ export class UserService extends MongoDocumentService<User> {
   /**
    * Get user by ID
    *
-   * @param id User ID
+   * @param id - User ID
    */
   public async getById(id: string) {
     try {
@@ -67,7 +67,7 @@ export class UserService extends MongoDocumentService<User> {
   /**
    * Add user
    *
-   * @param {User} user User
+   * @param user - User
    */
   public async addUser(user: User) {
     try {
@@ -81,7 +81,7 @@ export class UserService extends MongoDocumentService<User> {
   /**
    * Add users
    *
-   * @param {User[]} users Users
+   * @param users - Users
    */
   public async addUsers(users: User[]) {
     try {
@@ -97,7 +97,7 @@ export class UserService extends MongoDocumentService<User> {
   /**
    * Update customer
    *
-   * @param {User} user User to update
+   * @param user - User to update
    */
   public async updateUser(user: User): Promise<void> {
     try {
@@ -110,7 +110,7 @@ export class UserService extends MongoDocumentService<User> {
   /**
    * Update current user configuration
    *
-   * @param configuration Configuration
+   * @param configuration - Configuration
    */
   public async updateCurrentUserConfiguration(configuration: string) {
     try {

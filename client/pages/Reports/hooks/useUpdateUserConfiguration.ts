@@ -6,7 +6,7 @@ import $updateUserConfiguration from '../../../graphql/updateUserConfiguration.g
 /**
  * Use update user configuration
  *
- * @param {T} config Configuration
+ * @param config - Configuration
  */
 export function useUpdateUserConfiguration<T = any>(config: T) {
   const [updateUserConfiguration] = useMutation($updateUserConfiguration)

@@ -30,7 +30,7 @@ export class TimesheetPeriod {
   /**
    * Initializes a new period instance
    *
-   * @param {TimesheetPeriodObject} period Period
+   * @param period - Period
    */
   initialize(period: TimesheetPeriodObject) {
     Object.assign(this, period)
@@ -50,8 +50,8 @@ export class TimesheetPeriod {
   /**
    * Get name of period
    *
-   * @param {TFunction} t Translate function
-   * @param {boolean} includeMonth Include month
+   * @param t - Translate function
+   * @param includeMonth - Include month
    */
   public getName(t: TFunction, includeMonth?: boolean) {
     let name = `${t('common.weekLabel')} ${this.week}`
@@ -68,7 +68,7 @@ export class TimesheetPeriod {
    * If the event has manualMatch set, but it cannot be found in localStorage
    * project/customer is set to null for the event
    *
-   * @param {EventObject} event Event object
+   * @param event - Event object
    *
    * @returns an extended event object
    */
@@ -97,7 +97,7 @@ export class TimesheetPeriod {
   /**
    * Get events
    *
-   * @param {boolean} includeUnmatched Include unmatched events
+   * @param includeUnmatched - Include unmatched events
    */
   public getEvents(includeUnmatched: boolean = true): EventObject[] {
     return [...(this.events || [])]
@@ -157,8 +157,8 @@ export class TimesheetPeriod {
   /**
    * Save manual match in browser storage
    *
-   * @param eventId Event id
-   * @param {Project} project Project
+   * @param eventId - Event id
+   * @param project - Project
    */
   public setManualMatch(eventId: string, project: Project) {
     const matches = this._uiMatchedEvents
@@ -169,7 +169,7 @@ export class TimesheetPeriod {
   /**
    * Clear manual match from local storage
    *
-   * @param eventId Event id
+   * @param eventId - Event id
    */
   public clearManualMatch(eventId: string) {
     this._uiMatchedEvents = omit(this._uiMatchedEvents, eventId)
@@ -179,7 +179,7 @@ export class TimesheetPeriod {
   /**
    * Store ignored event in browser storage
    *
-   * @param eventId Event id
+   * @param eventId - Event id
    */
   public ignoreEvent(eventId: string) {
     this._uiIgnoredEvents = [...this._uiIgnoredEvents, eventId]
@@ -215,7 +215,7 @@ export class TimesheetPeriod {
   /**
    * Get data for the period
    *
-   * @returns {TimesheetPeriodInput} Data for the period
+   * @returns Data for the period
    */
   public get data(): TimesheetPeriodInput {
     return {
@@ -230,7 +230,7 @@ export class TimesheetPeriod {
   /**
    * Get weekdays in the specified format
    *
-   * @param dayFormat Day format
+   * @param dayFormat - Day format
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public weekdays(dayFormat: string = 'dddd DD'): string[] {

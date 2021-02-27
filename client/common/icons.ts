@@ -1714,11 +1714,11 @@ const ICONS = [
 ]
 
 /**
- * Get n icons from a collection of Office UI Fabric Icons
+ * Get count icons from a collection of Office UI Fabric Icons
  *
- * @param {number} n Number of icons
+ * @param count - Number of icons
  */
-export function getIcons(n?: number) {
-  if (n) return ICONS.sort(() => 0.5 - Math.random()).slice(0, n)
+export function getIcons(count?: number) {
+  if (count) return ICONS.sort(() => 0.5 - Math.random()).slice(0, count)
   return ICONS.sort()
 }

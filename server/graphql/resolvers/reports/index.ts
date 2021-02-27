@@ -13,17 +13,17 @@ export class ReportsResolver {
   /**
    * Constructor for ReportsResolver
    *
-   * @param _mongo Mongo service
+   * @param _mongo - Mongo service
    */
   constructor(private readonly _mongo: MongoService) {}
 
   /**
    * Get time entries
    *
-   * @param {ReportsQuery} query Query
-   * @param {boolean} currentUser Current user
-   * @param {boolean} sortAsc Sort ascending
-   * @param {Context} ctx GraphQL context
+   * @param query - Query
+   * @param currentUser - Current user
+   * @param sortAsc - Sort ascending
+   * @param ctx - GraphQL context
    */
   @Authorized<IAuthOptions>()
   @Query(() => [TimeEntry], {

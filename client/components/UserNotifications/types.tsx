@@ -32,7 +32,7 @@ export class NotificationModel {
   /**
    * Constructs a new instance of UserNotificationMessageModel
    *
-   * @param {INotification} msg The message
+   * @param msg - The message
    */
   constructor(msg: INotification) {
     this.id = msg.id
@@ -89,7 +89,7 @@ export class NotificationModel {
   /**
    * Get text for more link
    *
-   * @param {TFunction} t Translate function
+   * @param t - Translate function
    */
   public getMoreLinkText(t: TFunction): string {
     switch (this.type) {

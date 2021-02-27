@@ -13,12 +13,10 @@
 ### Methods
 
 - [createOutlookCategory](services.msgraphservice.md#createoutlookcategory)
-- [endMark](services.msgraphservice.md#endmark)
 - [getCurrentUser](services.msgraphservice.md#getcurrentuser)
 - [getEvents](services.msgraphservice.md#getevents)
 - [getOutlookCategories](services.msgraphservice.md#getoutlookcategories)
 - [getUsers](services.msgraphservice.md#getusers)
-- [startMark](services.msgraphservice.md#startmark)
 
 ## Constructors
 
@@ -37,7 +35,7 @@ Name | Type | Description |
 
 **Returns:** [*MSGraphService*](services.msgraphservice.md)
 
-Defined in: [server/services/msgraph/index.ts:27](https://github.com/Puzzlepart/did/blob/ee943744/server/services/msgraph/index.ts#L27)
+Defined in: [server/services/msgraph/index.ts:27](https://github.com/Puzzlepart/did/blob/b3b3393e/server/services/msgraph/index.ts#L27)
 
 ## Methods
 
@@ -55,25 +53,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<MSGraphOutlookCategory\>
 
-Defined in: [server/services/msgraph/index.ts:145](https://github.com/Puzzlepart/did/blob/ee943744/server/services/msgraph/index.ts#L145)
-
-___
-
-### endMark
-
-▸ **endMark**(`measure`: *string*): *void*
-
-Ends a performance mark
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`measure` | *string* |
-
-**Returns:** *void*
-
-Defined in: [server/services/msgraph/index.ts:65](https://github.com/Puzzlepart/did/blob/ee943744/server/services/msgraph/index.ts#L65)
+Defined in: [server/services/msgraph/index.ts:107](https://github.com/Puzzlepart/did/blob/b3b3393e/server/services/msgraph/index.ts#L107)
 
 ___
 
@@ -91,7 +71,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [server/services/msgraph/index.ts:94](https://github.com/Puzzlepart/did/blob/ee943744/server/services/msgraph/index.ts#L94)
+Defined in: [server/services/msgraph/index.ts:60](https://github.com/Puzzlepart/did/blob/b3b3393e/server/services/msgraph/index.ts#L60)
 
 ___
 
@@ -111,7 +91,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<default[]\>
 
-Defined in: [server/services/msgraph/index.ts:193](https://github.com/Puzzlepart/did/blob/ee943744/server/services/msgraph/index.ts#L193)
+Defined in: [server/services/msgraph/index.ts:151](https://github.com/Puzzlepart/did/blob/b3b3393e/server/services/msgraph/index.ts#L151)
 
 ___
 
@@ -123,7 +103,7 @@ Get Outlook categories
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/msgraph/index.ts:173](https://github.com/Puzzlepart/did/blob/ee943744/server/services/msgraph/index.ts#L173)
+Defined in: [server/services/msgraph/index.ts:133](https://github.com/Puzzlepart/did/blob/b3b3393e/server/services/msgraph/index.ts#L133)
 
 ___
 
@@ -135,22 +115,4 @@ Get Azure Active Directory users
 
 **Returns:** *Promise*<any\>
 
-Defined in: [server/services/msgraph/index.ts:113](https://github.com/Puzzlepart/did/blob/ee943744/server/services/msgraph/index.ts#L113)
-
-___
-
-### startMark
-
-▸ **startMark**(`measure`: *string*): *void*
-
-Starts a performance mark
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`measure` | *string* |
-
-**Returns:** *void*
-
-Defined in: [server/services/msgraph/index.ts:56](https://github.com/Puzzlepart/did/blob/ee943744/server/services/msgraph/index.ts#L56)
+Defined in: [server/services/msgraph/index.ts:77](https://github.com/Puzzlepart/did/blob/b3b3393e/server/services/msgraph/index.ts#L77)
