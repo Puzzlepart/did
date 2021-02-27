@@ -12,8 +12,8 @@ export default class {
   /**
    * Find project suggestions using findBestMatch from string-similarity
    *
-   * @param {Customer} customer Customer
-   * @param {string} projectKey Project key
+   * @param customer - Customer
+   * @param projectKey - Project key
    */
   private _findProjectSuggestion(customer: Customer, projectKey: string) {
     try {
@@ -41,7 +41,7 @@ export default class {
    * * Returns 'body' if ignore tag is found in body
    * * Otherwise returns nulll
    *
-   * @param {EventObject} event
+   * @param event - Event to check for ignore
    */
   private _findIgnore(event: EventObject) {
     const ignoreCategory = find(
@@ -57,8 +57,8 @@ export default class {
   /**
    * Find project match in title/subject/categories
    *
-   * @param {string} inputStr The String object or string literal on which to perform the search.
-   * @param {boolean} strictMode Strict mode - require token
+   * @param inputStr - The String object or string literal on which to perform the search.
+   * @param strictMode - Strict mode - require token
    *
    * @returns an array of matches found in the inputStr
    */
@@ -84,8 +84,8 @@ export default class {
   /**
    * Find project match in title/body/categories
    *
-   * @param {string} inputStr The String object or string literal on which to perform the search.
-   * @param {string} categoriesStr Categories string
+   * @param inputStr - The String object or string literal on which to perform the search.
+   * @param categoriesStr - Categories string
    */
   private _findProjectMatches(
     inputStr: string,
@@ -98,7 +98,7 @@ export default class {
   /**
    * Find label matches in categories
    *
-   * @param {string[]} categories
+   * @param categories - Categories
    */
   private _findLabels(categories: string[]) {
     return filter(this._data.labels, (lbl) => contains(categories, lbl.name))
@@ -110,7 +110,7 @@ export default class {
    * 1. Checks category/title/description for tokens
    * 2. Checks title/description for key without any brackets/parantheses
    *
-   * @param {EventObject} event Event
+   * @param event - Event
    */
   private _matchEvent(event: EventObject) {
     const ignore = this._findIgnore(event)
@@ -179,7 +179,7 @@ export default class {
   /**
    * Check if project or customer is marked as inactive
    *
-   * @param {EventObject} event
+   * @param event - Event to check
    */
   private _checkInactive(event: EventObject) {
     const inactiveProject = event?.project?.inactive
@@ -196,7 +196,7 @@ export default class {
   /**
    * Match events
    *
-   * @param {MSGraphEvent[]} events
+   * @param events - Events to match
    */
   public matchEvents(events: MSGraphEvent[]): EventObject[] {
     return events.map(this._matchEvent.bind(this))

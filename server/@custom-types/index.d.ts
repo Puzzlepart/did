@@ -3,10 +3,9 @@
  * @private
  */
 declare namespace Express {
-
   /**
- * @private
- */
+   * @private
+   */
   interface UserSubscription {
     id: string
     connectionString: string

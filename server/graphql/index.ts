@@ -59,7 +59,7 @@ const getSchema = async () => {
 
 /**
  * Set up GraphQL for the Express Application
- * 
+ *
  * @param app - Express application
  * @param client - Mongo client
  */
@@ -91,8 +91,8 @@ export const setupGraphQL = async (
               Container.reset(requestContext.context.requestId)
               const instancesIds = ((Container as any)
                 .instances as ContainerInstance[]).map(
-                  (instance) => instance.id
-                )
+                (instance) => instance.id
+              )
               debug('Container instances left in memory: ', instancesIds)
             }
           })
