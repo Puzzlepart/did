@@ -29,7 +29,7 @@ export class UserNotification {
 
   /**
    * Generate notification id
-   * 
+   *
    * @param id - Id
    */
   private _generateId(id: string) {
@@ -38,16 +38,11 @@ export class UserNotification {
 
   /**
    * More link
-   * 
+   *
    * @remarks This could be handled on the client in the future
    */
   public get moreLink() {
-    return [
-      '',
-      'timesheet/overview',
-      ...this._period.id.split('_')].join(
-        '/'
-      )
+    return ['', 'timesheet/overview', ...this._period.id.split('_')].join('/')
   }
 }
 

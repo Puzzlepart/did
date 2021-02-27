@@ -14,12 +14,12 @@ export const useUserNotifications = () => {
   const showPanel = () => dispatch({ ...state, showPanel: true })
   const dismissPanel = () => dispatch({ ...state, showPanel: false })
 
-  const [dismissedIds, dismissNotification, clearDismissed] = useBrowserStorage<string[]>(
-    {
-      key: 'did_dismissed_notifications',
-      initialValue: []
-    }
-  )
+  const [dismissedIds, dismissNotification, clearDismissed] = useBrowserStorage<
+    string[]
+  >({
+    key: 'did_dismissed_notifications',
+    initialValue: []
+  })
 
   useDebugValue({ dismissedIds })
 
