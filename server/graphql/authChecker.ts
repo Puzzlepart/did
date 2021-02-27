@@ -14,6 +14,12 @@ export interface IAuthOptions {
   permission?: string
 }
 
+/**
+ * Checks auth for the context.
+ * 
+ * @param param0 - Resolver data
+ * @param param1 - Authentication options
+ */
 export const authChecker: AuthChecker<Context, IAuthOptions> = (
   { context }: ResolverData<Context>,
   [authOptions]

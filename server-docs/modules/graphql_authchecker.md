@@ -18,6 +18,8 @@
 
 ▸ `Const`**authChecker**(`resolverData`: *ResolverData*<[*Context*](../classes/graphql_context.context.md)\>, `roles`: [*IAuthOptions*](../interfaces/graphql_authchecker.iauthoptions.md)[]): *boolean* \| *Promise*<boolean\>
 
+Checks auth for the context.
+
 #### Parameters:
 
 Name | Type |
@@ -27,4 +29,4 @@ Name | Type |
 
 **Returns:** *boolean* \| *Promise*<boolean\>
 
-Defined in: [server/graphql/authChecker.ts:17](https://github.com/Puzzlepart/did/blob/63fb8902/server/graphql/authChecker.ts#L17)
+Defined in: [server/graphql/authChecker.ts:23](https://github.com/Puzzlepart/did/blob/0f327877/server/graphql/authChecker.ts#L23)
