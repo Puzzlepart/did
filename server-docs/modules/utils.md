@@ -4,9 +4,19 @@
 
 ## Table of contents
 
+### References
+
+- [getEnvironmentVariable](utils.md#getenvironmentvariable)
+
 ### Functions
 
 - [stripHtmlString](utils.md#striphtmlstring)
+
+## References
+
+### getEnvironmentVariable
+
+Renames and exports: [default](utils_env.md#default)
 
 ## Functions
 
@@ -26,4 +36,4 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [server/utils/stripHtmlString.ts:10](https://github.com/Puzzlepart/did/blob/ea0aea7b/server/utils/stripHtmlString.ts#L10)
+Defined in: [server/utils/stripHtmlString.ts:10](https://github.com/Puzzlepart/did/blob/0a374766/server/utils/stripHtmlString.ts#L10)

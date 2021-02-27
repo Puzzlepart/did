@@ -28,7 +28,7 @@ Name | Type |
 
 **Returns:** [*default*](services_oauth.default.md)
 
-Defined in: [server/services/oauth.ts:18](https://github.com/Puzzlepart/did/blob/ea0aea7b/server/services/oauth.ts#L18)
+Defined in: [server/services/oauth.ts:18](https://github.com/Puzzlepart/did/blob/0a374766/server/services/oauth.ts#L18)
 
 ## Methods
 
@@ -46,4 +46,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Token\>
 
-Defined in: [server/services/oauth.ts:47](https://github.com/Puzzlepart/did/blob/ea0aea7b/server/services/oauth.ts#L47)
+Defined in: [server/services/oauth.ts:47](https://github.com/Puzzlepart/did/blob/0a374766/server/services/oauth.ts#L47)
