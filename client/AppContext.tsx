@@ -2,8 +2,9 @@ import AppConfig from 'AppConfig'
 import { PERMISSION } from 'config/security/permissions'
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from 'i18n'
 import { createContext } from 'react'
-import { Notification, Role, Subscription, User } from 'types'
+import { Role, Subscription, User } from 'types'
 import { contains } from 'underscore'
+import { useNotificationsQuery } from './hooks'
 
 export class ContextUser {
   public id: string
@@ -64,9 +65,9 @@ export interface IAppContext {
   subscription?: Subscription
 
   /**
-   * Notifications
+   * Notifications query
    */
-  notifications?: [Notification[], () => Promise<any>]
+  notificationsQuery?: ReturnType<typeof useNotificationsQuery>
 }
 
 export const AppContext = createContext<IAppContext>(null)

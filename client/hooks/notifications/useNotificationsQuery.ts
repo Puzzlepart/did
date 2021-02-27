@@ -5,13 +5,13 @@ import { Notification } from 'types'
 import notificationsQuery from './notifications.gql'
 
 /**
- * Notificatins hook
+ * Notificatins query hook
  *
  * @param user - Context user
  */
-export function useNotifications(
+export function useNotificationsQuery(
   user: ContextUser
-): { items: Notification[], refetch: () => Promise<any> } {
+): { notifications: Notification[], refetch: (delay?: number) => void } {
   const { t } = useTranslation()
   const { data, refetch } = useQuery(notificationsQuery, {
     skip: !user.displayName,
@@ -23,5 +23,10 @@ export function useNotifications(
   })
   // eslint-disable-next-line no-console
   console.log(data)
-  return { items: data?.notifications || [], refetch }
+  return {
+    notifications: data?.notifications || [],
+    refetch: (delay = 0) => {
+      window.setTimeout(refetch, delay)
+    }
+  }
 }
