@@ -40,4 +40,6 @@ async function startServer(port: string) {
   server.on('listening', onListening)
 }
 
+export { app }
+
 startServer(env('PORT', '8080'))

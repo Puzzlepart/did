@@ -19,7 +19,7 @@
 
 Permission required for the resolver
 
-Defined in: [server/graphql/authChecker.ts:14](https://github.com/Puzzlepart/did/blob/0f327877/server/graphql/authChecker.ts#L14)
+Defined in: [server/graphql/authChecker.ts:14](https://github.com/Puzzlepart/did/blob/3f22c56c/server/graphql/authChecker.ts#L14)
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 Requires user context and can cannot be called with an API token
 
-Defined in: [server/graphql/authChecker.ts:9](https://github.com/Puzzlepart/did/blob/0f327877/server/graphql/authChecker.ts#L9)
+Defined in: [server/graphql/authChecker.ts:9](https://github.com/Puzzlepart/did/blob/3f22c56c/server/graphql/authChecker.ts#L9)
