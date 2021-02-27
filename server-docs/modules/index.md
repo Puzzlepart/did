@@ -1,4 +1,4 @@
-[did-server](../README.md) / index
+[did-server - v0.10.0](../README.md) / index
 
 # Module: index
 

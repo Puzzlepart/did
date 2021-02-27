@@ -1,4 +1,4 @@
-[did-server](../README.md) / graphql/authChecker
+[did-server - v0.10.0](../README.md) / graphql/authChecker
 
 # Module: graphql/authChecker
 

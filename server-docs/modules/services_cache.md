@@ -1,4 +1,4 @@
-[did-server](../README.md) / services/cache
+[did-server - v0.10.0](../README.md) / services/cache
 
 # Module: services/cache
 

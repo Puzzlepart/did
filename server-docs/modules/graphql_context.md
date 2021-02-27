@@ -1,4 +1,4 @@
-[did-server](../README.md) / graphql/context
+[did-server - v0.10.0](../README.md) / graphql/context
 
 # Module: graphql/context
 

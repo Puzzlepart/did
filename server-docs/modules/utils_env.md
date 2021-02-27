@@ -1,4 +1,4 @@
-[did-server](../README.md) / utils/env
+[did-server - v0.10.0](../README.md) / utils/env
 
 # Module: utils/env
 

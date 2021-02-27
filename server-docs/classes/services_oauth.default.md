@@ -1,4 +1,4 @@
-[did-server](../README.md) / [services/oauth](../modules/services_oauth.md) / default
+[did-server - v0.10.0](../README.md) / [services/oauth](../modules/services_oauth.md) / default
 
 # Class: default
 

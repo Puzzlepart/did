@@ -1,4 +1,4 @@
-[did-server](../README.md) / [graphql](../modules/graphql.md) / TimesheetResolver
+[did-server - v0.10.0](../README.md) / [graphql](../modules/graphql.md) / TimesheetResolver
 
 # Class: TimesheetResolver
 

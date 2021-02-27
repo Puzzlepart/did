@@ -1,4 +1,4 @@
-[did-server](../README.md) / [services](../modules/services.md) / MSGraphService
+[did-server - v0.10.0](../README.md) / [services](../modules/services.md) / MSGraphService
 
 # Class: MSGraphService
 

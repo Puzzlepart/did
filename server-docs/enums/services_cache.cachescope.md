@@ -1,4 +1,4 @@
-[did-server](../README.md) / [services/cache](../modules/services_cache.md) / CacheScope
+[did-server - v0.10.0](../README.md) / [services/cache](../modules/services_cache.md) / CacheScope
 
 # Enumeration: CacheScope
 

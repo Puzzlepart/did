@@ -1,4 +1,4 @@
-[did-server](../README.md) / [graphql](../modules/graphql.md) / UserInput
+[did-server - v0.10.0](../README.md) / [graphql](../modules/graphql.md) / UserInput
 
 # Class: UserInput
 

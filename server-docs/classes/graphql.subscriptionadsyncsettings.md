@@ -1,4 +1,4 @@
-[did-server](../README.md) / [graphql](../modules/graphql.md) / SubscriptionADSyncSettings
+[did-server - v0.10.0](../README.md) / [graphql](../modules/graphql.md) / SubscriptionADSyncSettings
 
 # Class: SubscriptionADSyncSettings
 

@@ -1,4 +1,4 @@
-[did-server](../README.md) / [app](../modules/app.md) / App
+[did-server - v0.10.0](../README.md) / [app](../modules/app.md) / App
 
 # Class: App
 

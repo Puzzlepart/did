@@ -1,4 +1,4 @@
-[did-server](../README.md) / routes/auth
+[did-server - v0.10.0](../README.md) / routes/auth
 
 # Module: routes/auth
 
