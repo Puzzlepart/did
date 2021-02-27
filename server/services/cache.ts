@@ -4,7 +4,7 @@ import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import { filter, isArray } from 'underscore'
 import { Context } from '../graphql/context'
-import { RedisClient } from '../middleware/redis'
+import {redisMiddlwaret } from '../middleware/redis'
 const log = require('debug')('server/services/cache')
 
 export enum CacheScope {
@@ -68,7 +68,7 @@ export class CacheService {
     return new Promise((resolve) => {
       const scopedCacheKey = this._getScopedCacheKey(key, scope)
       log(`Retrieving cached value for key ${scopedCacheKey}...`)
-      RedisClient.get(scopedCacheKey, (err, reply) => {
+      redisMiddlware.get(scopedCacheKey, (err, reply) => {
         if (err) {
           log(`Failed to retrieve cachedd value for key ${scopedCacheKey}.`)
           resolve(null)
@@ -92,7 +92,7 @@ export class CacheService {
       log(
         `Setting value for key ${scopedCacheKey} with a expiration of ${expiry} seconds...`
       )
-      RedisClient.setex(
+      redisMiddlware.setex(
         scopedCacheKey,
         expiry,
         JSON.stringify(value),
@@ -119,8 +119,8 @@ export class CacheService {
   public clear({ key, scope }: CacheOptions) {
     const pattern = `${this._getScopedCacheKey(key, scope)}*`
     return new Promise((resolve) => {
-      RedisClient.keys(pattern, (_err, keys) => {
-        RedisClient.del(keys, () => {
+      redisMiddlware.keys(pattern, (_err, keys) => {
+        redisMiddlware.del(keys, () => {
           resolve(null)
         })
       })
