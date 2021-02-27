@@ -2,6 +2,7 @@
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
 import { Field, Float, ID, InputType, ObjectType } from 'type-graphql'
+import { string } from 'underscore'
 import { Customer, Project, User } from '../types'
 
 /**
@@ -65,16 +66,30 @@ export class TimeEntry {
 }
 
 /**
+ * Reports query preset
+ */
+type ReportsQueryPreset = 'LAST_MONTH' | 'CURRENT_MONTH' | 'LAST_YEAR' | 'CURRENT_YEAR' | 'FORECAST'
+
+/**
  * @category InputType
  */
 @InputType()
 export class ReportsQuery {
-  @Field({ nullable: true })
-  preset?: string
+  /**
+   * Reports query preset
+   */
+  @Field(() => String, { nullable: true })
+  preset?: ReportsQueryPreset
 
+  /**
+   * ID of the project to filter on
+   */
   @Field({ nullable: true })
   projectId?: string
 
+  /**
+   * ID of the user to filter on
+   */
   @Field({ nullable: true })
   userId?: string
 }

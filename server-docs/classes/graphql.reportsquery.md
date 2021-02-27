@@ -28,9 +28,11 @@
 
 ### preset
 
-• `Optional` **preset**: *string*
+• `Optional` **preset**: ReportsQueryPreset
 
-Defined in: [server/graphql/resolvers/reports/types.ts:73](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L73)
+Reports query preset
+
+Defined in: [server/graphql/resolvers/reports/types.ts:82](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L82)
 
 ___
 
@@ -38,7 +40,9 @@ ___
 
 • `Optional` **projectId**: *string*
 
-Defined in: [server/graphql/resolvers/reports/types.ts:76](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L76)
+ID of the project to filter on
+
+Defined in: [server/graphql/resolvers/reports/types.ts:88](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L88)
 
 ___
 
@@ -46,4 +50,6 @@ ___
 
 • `Optional` **userId**: *string*
 
-Defined in: [server/graphql/resolvers/reports/types.ts:79](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L79)
+ID of the user to filter on
+
+Defined in: [server/graphql/resolvers/reports/types.ts:94](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L94)
