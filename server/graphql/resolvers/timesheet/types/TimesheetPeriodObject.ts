@@ -12,6 +12,8 @@ import { EventObject } from './EventObject'
   simpleResolvers: true
 })
 export class TimesheetPeriodObject {
+  public _id: string
+
   @Field(() => ID)
   public id: string
 

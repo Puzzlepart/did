@@ -51,11 +51,12 @@ export class TimesheetService {
       const periods = this.getPeriods(
         params.startDate,
         params.endDate,
-        params.locale
+        params.locale,
+        this.context.userId
       )
       const data = await this._mongo.project.getProjectsData()
       for (let i = 0; i < periods.length; i++) {
-        const { _id } = this._getPeriodData(periods[i].id)
+        const { _id } = periods[i]
         const [confirmed, forecasted] = await Promise.all([
           this._confirmed_periods.findOne({ _id }),
           this._forecasted_periods.findOne({ _id })
@@ -117,7 +118,7 @@ export class TimesheetService {
         }
       )
       const period = {
-        ...this._getPeriodData(params.period.id),
+        ...this._getPeriodData(params.period.id, this.context.userId),
         startDate: new Date(params.period.startDate),
         endDate: new Date(params.period.endDate),
         submitted: new Date(),
@@ -170,7 +171,7 @@ export class TimesheetService {
       const period_collection = forecast
         ? this._forecasted_periods
         : this._confirmed_periods
-      const { _id } = this._getPeriodData(period.id)
+      const { _id } = this._getPeriodData(period.id, this.context.userId)
       await Promise.all([
         entry_colletion.deleteMany({
           _periodId: _id
@@ -199,12 +200,13 @@ export class TimesheetService {
    * * Returns week, month, year and _userId
    *
    * @param id - Id
+   * @param userId - User ID
    */
-  private _getPeriodData(id: string) {
+  private _getPeriodData(id: string, userId: string) {
     const [week, month, year] = id.split('_').map((p) => parseInt(p, 10))
     return {
-      _id: `${id}${this.context.userId}`.replace(/[^a-zA-Z0-9]/g, ''),
-      _userId: this.context.userId,
+      _id: `${id}${userId}`.replace(/[^a-zA-Z0-9]/g, ''),
+      _userId: userId,
       week,
       month,
       year
@@ -217,11 +219,13 @@ export class TimesheetService {
    * @param startDate - Start date
    * @param endDate - End date
    * @param locale - Locale
+   * @param _userId - User ID
    */
   public getPeriods(
     startDate: string,
     endDate: string,
-    locale: string
+    locale: string,
+    userId: string
   ): TimesheetPeriodObject[] {
     const isSplit = !DateUtils.isSameMonth(startDate, endDate)
     const periods: TimesheetPeriodObject[] = [
@@ -243,7 +247,9 @@ export class TimesheetService {
       )
     }
 
-    return periods
+    return periods.map(period => {
+      return { ...this._getPeriodData(period.id, userId), ...period }
+    })
   }
 
   /**
