@@ -11,7 +11,7 @@ import notificationsQuery from './notifications.gql'
  */
 export function useNotifications(
   user: ContextUser
-): [Notification[], () => Promise<any>] {
+): { items: Notification[], refetch: () => Promise<any> } {
   const { t } = useTranslation()
   const { data, refetch } = useQuery(notificationsQuery, {
     skip: !user.displayName,
@@ -21,5 +21,7 @@ export function useNotifications(
     },
     fetchPolicy: 'cache-and-network'
   })
-  return [data?.notifications || [], refetch]
+  // eslint-disable-next-line no-console
+  console.log(data)
+  return { items: data?.notifications || [], refetch }
 }
