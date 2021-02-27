@@ -1,3 +1,3 @@
 # did-server
 
-See [documentation](../server-docs/README.md)
+See [generated documentation](../server-docs/README.md)
