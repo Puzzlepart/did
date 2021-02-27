@@ -26,7 +26,7 @@
 
 • `Optional` **displayName**: *string*
 
-Defined in: [server/@custom-types/index.d.ts:21](https://github.com/Puzzlepart/did/blob/049fedc8/server/@custom-types/index.d.ts#L21)
+Defined in: [server/@custom-types/index.d.ts:21](https://github.com/Puzzlepart/did/blob/2ac6d98a/server/@custom-types/index.d.ts#L21)
 
 ___
 
@@ -34,7 +34,7 @@ ___
 
 • `Optional` **givenName**: *string*
 
-Defined in: [server/@custom-types/index.d.ts:22](https://github.com/Puzzlepart/did/blob/049fedc8/server/@custom-types/index.d.ts#L22)
+Defined in: [server/@custom-types/index.d.ts:22](https://github.com/Puzzlepart/did/blob/2ac6d98a/server/@custom-types/index.d.ts#L22)
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 • `Optional` **id**: *string*
 
-Defined in: [server/@custom-types/index.d.ts:20](https://github.com/Puzzlepart/did/blob/049fedc8/server/@custom-types/index.d.ts#L20)
+Defined in: [server/@custom-types/index.d.ts:20](https://github.com/Puzzlepart/did/blob/2ac6d98a/server/@custom-types/index.d.ts#L20)
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 • `Optional` **jobTitle**: *string*
 
-Defined in: [server/@custom-types/index.d.ts:23](https://github.com/Puzzlepart/did/blob/049fedc8/server/@custom-types/index.d.ts#L23)
+Defined in: [server/@custom-types/index.d.ts:23](https://github.com/Puzzlepart/did/blob/2ac6d98a/server/@custom-types/index.d.ts#L23)
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 • `Optional` **mail**: *string*
 
-Defined in: [server/@custom-types/index.d.ts:24](https://github.com/Puzzlepart/did/blob/049fedc8/server/@custom-types/index.d.ts#L24)
+Defined in: [server/@custom-types/index.d.ts:24](https://github.com/Puzzlepart/did/blob/2ac6d98a/server/@custom-types/index.d.ts#L24)
 
 ___
 
@@ -66,7 +66,7 @@ ___
 
 • `Optional` **mobilePhone**: *string*
 
-Defined in: [server/@custom-types/index.d.ts:25](https://github.com/Puzzlepart/did/blob/049fedc8/server/@custom-types/index.d.ts#L25)
+Defined in: [server/@custom-types/index.d.ts:25](https://github.com/Puzzlepart/did/blob/2ac6d98a/server/@custom-types/index.d.ts#L25)
 
 ___
 
@@ -74,7 +74,7 @@ ___
 
 • `Optional` **preferredLanguage**: *string*
 
-Defined in: [server/@custom-types/index.d.ts:26](https://github.com/Puzzlepart/did/blob/049fedc8/server/@custom-types/index.d.ts#L26)
+Defined in: [server/@custom-types/index.d.ts:26](https://github.com/Puzzlepart/did/blob/2ac6d98a/server/@custom-types/index.d.ts#L26)
 
 ___
 
@@ -82,7 +82,7 @@ ___
 
 • `Optional` **role**: *any*
 
-Defined in: [server/@custom-types/index.d.ts:27](https://github.com/Puzzlepart/did/blob/049fedc8/server/@custom-types/index.d.ts#L27)
+Defined in: [server/@custom-types/index.d.ts:27](https://github.com/Puzzlepart/did/blob/2ac6d98a/server/@custom-types/index.d.ts#L27)
 
 ___
 
@@ -90,7 +90,7 @@ ___
 
 • `Optional` **subscription**: [*UserSubscription*](_custom_types.express.usersubscription.md)
 
-Defined in: [server/@custom-types/index.d.ts:29](https://github.com/Puzzlepart/did/blob/049fedc8/server/@custom-types/index.d.ts#L29)
+Defined in: [server/@custom-types/index.d.ts:29](https://github.com/Puzzlepart/did/blob/2ac6d98a/server/@custom-types/index.d.ts#L29)
 
 ___
 
@@ -98,7 +98,7 @@ ___
 
 • `Optional` **surname**: *string*
 
-Defined in: [server/@custom-types/index.d.ts:28](https://github.com/Puzzlepart/did/blob/049fedc8/server/@custom-types/index.d.ts#L28)
+Defined in: [server/@custom-types/index.d.ts:28](https://github.com/Puzzlepart/did/blob/2ac6d98a/server/@custom-types/index.d.ts#L28)
 
 ___
 
@@ -106,4 +106,4 @@ ___
 
 • `Optional` **tokenParams**: *any*
 
-Defined in: [server/@custom-types/index.d.ts:30](https://github.com/Puzzlepart/did/blob/049fedc8/server/@custom-types/index.d.ts#L30)
+Defined in: [server/@custom-types/index.d.ts:30](https://github.com/Puzzlepart/did/blob/2ac6d98a/server/@custom-types/index.d.ts#L30)
