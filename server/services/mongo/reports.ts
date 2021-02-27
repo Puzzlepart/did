@@ -18,7 +18,7 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
    * @param {Context} context Context
    */
   constructor(context: Context) {
-    super(context, 'time_entries', ReportsService.name)
+    super(context, 'time_entries')
     this._project = new ProjectService(context)
     this._user = new UserService(context)
   }
@@ -31,9 +31,6 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
    */
   public async getReport(query: ReportsQuery, sortAsc: boolean): Promise<Report> {
     try {
-      const cacheKeys = ['getreport', query.preset, query?.userId, query?.projectId]
-      const cacheValue = await this.cache.get<Report>(cacheKeys)
-      if (cacheValue) return cacheValue
       const d = new DateObject()
       let q: FilterQuery<TimeEntry> = {}
       switch (query.preset) {
@@ -89,7 +86,6 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
           }
           return $
         }, [])
-      await this.cache.set(cacheKeys, report, 900)
       return report
     } catch (err) {
       throw err

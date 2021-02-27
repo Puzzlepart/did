@@ -3,7 +3,6 @@ import { filter, find, pick } from 'underscore'
 import { CustomerService } from '.'
 import { Context } from '../../graphql/context'
 import { Customer, LabelObject as Label, Project } from '../../graphql/resolvers/types'
-import { CacheKey } from '../cache'
 import { MongoDocumentService } from './@document'
 import { LabelService } from './label'
 
@@ -37,7 +36,7 @@ export class ProjectService extends MongoDocumentService<Project> {
    */
   public async addProject(project: Project): Promise<string> {
     try {
-      await this.cache.clear('getprojectsdata')
+      await this.cache.clear({ key: 'getprojectsdata' })
       const tag = [project.customerKey, project.key].join(' ')
       const { insertedId } = await this.collection.insertOne({
         _id: tag,
@@ -59,7 +58,7 @@ export class ProjectService extends MongoDocumentService<Project> {
    */
   public async updateProject(project: Project): Promise<boolean> {
     try {
-      await this.cache.clear('getprojectsdata')
+      await this.cache.clear({ key: 'getprojectsdata' })
       const filter: FilterQuery<Project> = pick(project, 'key', 'customerKey')
       const { result } = await this.collection.updateOne(filter, { $set: project })
       return result.ok === 1
@@ -77,28 +76,26 @@ export class ProjectService extends MongoDocumentService<Project> {
    *
    * @param {FilterQuery<Project>} query Query
    */
-  public async getProjectsData(query?: FilterQuery<Project>): Promise<ProjectsData> {
+  public getProjectsData(query?: FilterQuery<Project>): Promise<ProjectsData> {
     try {
-      const cacheKey: CacheKey = ['getprojectsdata', query?.customerKey.toString()]
-      const cacheValue = await this.cache.get<ProjectsData>(cacheKey)
-      if (cacheValue) return cacheValue
-      const [projects, customers, labels] = await Promise.all([
-        this.find(query, { name: 1 }),
-        this._customer.getCustomers(query?.customerKey && { key: query.customerKey }),
-        this._label.getLabels()
-      ])
-      const _projects = projects
-        .map((p) => {
-          p.customer = find(customers, (c) => c.key === p.customerKey) || null
-          p.labels = filter(labels, ({ name }) => {
-            return !!find(p.labels, (l) => name === l)
+      return this.cache.usingCache<ProjectsData>(async () => {
+        const [projects, customers, labels] = await Promise.all([
+          this.find(query, { name: 1 }),
+          this._customer.getCustomers(query?.customerKey && { key: query.customerKey }),
+          this._label.getLabels()
+        ])
+        const _projects = projects
+          .map((p) => {
+            p.customer = find(customers, (c) => c.key === p.customerKey) || null
+            p.labels = filter(labels, ({ name }) => {
+              return !!find(p.labels, (l) => name === l)
+            })
+            return p
           })
-          return p
-        })
-        .filter((p) => p.customer !== null)
-      const data = { projects: _projects, customers, labels }
-      await this.cache.set(cacheKey, data, 120)
-      return data
+          .filter((p) => p.customer !== null)
+        const data = { projects: _projects, customers, labels }
+        return data
+      }, { key: ['getprojectsdata', query?.customerKey.toString()] })
     } catch (err) {
       throw err
     }
