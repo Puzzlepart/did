@@ -4,7 +4,7 @@ import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import { filter, isArray } from 'underscore'
 import { Context } from '../graphql/context'
-import {redisMiddlwaret } from '../middleware/redis'
+import { redisMiddlware } from '../middleware/redis'
 const log = require('debug')('server/services/cache')
 
 export enum CacheScope {
@@ -33,7 +33,7 @@ export class CacheService {
     @Inject('CONTEXT') private readonly context: Context,
     public prefix?: string,
     public scope: CacheScope = CacheScope.SUBSCRIPTION
-  ) {}
+  ) { }
 
   /**
    * Get scoped cache key

@@ -6,8 +6,8 @@
 
 ### Variables
 
-- [RedisClient](middleware.md#redisclient)
 - [helmetMiddleware](middleware.md#helmetmiddleware)
+- [redisMiddlware](middleware.md#redismiddlware)
 
 ### Functions
 
@@ -17,23 +17,30 @@
 
 ## Variables
 
-### RedisClient
-
-• `Const` **RedisClient**: *RedisClient*
-
-Redis client
-
-Defined in: [server/middleware/redis/index.ts:7](https://github.com/Puzzlepart/did/blob/7f92b547/server/middleware/redis/index.ts#L7)
-
-___
-
 ### helmetMiddleware
 
 • `Const` **helmetMiddleware**: *any*
 
 Helmet configuration
 
-Defined in: [server/middleware/helmet/index.ts:6](https://github.com/Puzzlepart/did/blob/7f92b547/server/middleware/helmet/index.ts#L6)
+Defined in: [server/middleware/helmet/index.ts:6](https://github.com/Puzzlepart/did/blob/7445431d/server/middleware/helmet/index.ts#L6)
+
+___
+
+### redisMiddlware
+
+• `Const` **redisMiddlware**: *RedisClient*
+
+Redis client
+
+- Using hosname from env REDIS_CACHE_HOSTNAME
+- Using auth_pass from env REDIS_CACHE_KEY
+- Using tls.servername from env REDIS_CACHE_HOSTNAME
+- Using socket_keepalive to true
+
+**`see`** https://github.com/Puzzlepart/did/issues/812
+
+Defined in: [server/middleware/redis/index.ts:14](https://github.com/Puzzlepart/did/blob/7445431d/server/middleware/redis/index.ts#L14)
 
 ## Functions
 
@@ -51,7 +58,7 @@ Name | Type | Description |
 
 **Returns:** *PassportStatic*
 
-Defined in: [server/middleware/passport/index.ts:17](https://github.com/Puzzlepart/did/blob/7f92b547/server/middleware/passport/index.ts#L17)
+Defined in: [server/middleware/passport/index.ts:14](https://github.com/Puzzlepart/did/blob/7445431d/server/middleware/passport/index.ts#L14)
 
 ___
 
@@ -75,7 +82,7 @@ Name | Type |
 
 **Returns:** *any*
 
-Defined in: [server/middleware/session/index.ts:14](https://github.com/Puzzlepart/did/blob/7f92b547/server/middleware/session/index.ts#L14)
+Defined in: [server/middleware/session/index.ts:14](https://github.com/Puzzlepart/did/blob/7445431d/server/middleware/session/index.ts#L14)
 
 ___
 
@@ -93,4 +100,4 @@ Name | Type | Description |
 
 **Returns:** *function*
 
-Defined in: [server/middleware/gzip/index.ts:9](https://github.com/Puzzlepart/did/blob/7f92b547/server/middleware/gzip/index.ts#L9)
+Defined in: [server/middleware/gzip/index.ts:9](https://github.com/Puzzlepart/did/blob/7445431d/server/middleware/gzip/index.ts#L9)
