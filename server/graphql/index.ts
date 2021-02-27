@@ -85,8 +85,8 @@ export default async (
               Container.reset(requestContext.context.requestId)
               const instancesIds = ((Container as any)
                 .instances as ContainerInstance[]).map(
-                (instance) => instance.id
-              )
+                  (instance) => instance.id
+                )
               debug('Container instances left in memory: ', instancesIds)
             }
           })
@@ -97,4 +97,18 @@ export default async (
   } catch (error) {
     debug(error)
   }
+}
+
+export {
+  ApiTokenResolver,
+  CustomerResolver,
+  LabelResolver,
+  NotificationResolver,
+  OutlookCategoryResolver,
+  ProjectResolver,
+  ReportsResolver,
+  RoleResolver,
+  SubscriptionResolver,
+  TimesheetResolver,
+  UserResolver
 }
