@@ -33,7 +33,11 @@ export function useTimesheet() {
     )
   }, [state.selectedView, state.selectedPeriod])
 
-  const { onSubmitPeriod, onUnsubmitPeriod } = useSubmitActions({ state, dispatch, refetch })
+  const { onSubmitPeriod, onUnsubmitPeriod } = useSubmitActions({
+    state,
+    dispatch,
+    refetch
+  })
 
   const context = useMemo<ITimesheetContext>(
     () => ({

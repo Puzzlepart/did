@@ -11,7 +11,7 @@ import notificationsQuery from './notifications.gql'
  */
 export function useNotificationsQuery(
   user: ContextUser
-): { notifications: Notification[], refetch: (delay?: number) => void } {
+): { notifications: Notification[]; refetch: (delay?: number) => void } {
   const { t } = useTranslation()
   const { data, refetch } = useQuery(notificationsQuery, {
     skip: !user.displayName,

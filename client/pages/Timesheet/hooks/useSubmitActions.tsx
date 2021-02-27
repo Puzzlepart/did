@@ -16,7 +16,7 @@ export function useSubmitActions({ state, dispatch, refetch }) {
     useMutation($unsubmitPeriod)
   ]
 
-  const onSubmitPeriod = async (forecast: boolean) => {
+  const onSubmitPeriod = async (forecast: boolean): Promise<void> => {
     dispatch(SUBMITTING_PERIOD({ forecast }))
     const variables = {
       period: state.selectedPeriod.data,
@@ -24,10 +24,10 @@ export function useSubmitActions({ state, dispatch, refetch }) {
     }
     await submitPeriod({ variables })
     refetch()
-    app.notificationsQuery.refetch(1000)
+    app.notificationsQuery.refetch(250)
   }
 
-  const onUnsubmitPeriod = async (forecast: boolean) => {
+  const onUnsubmitPeriod = async (forecast: boolean): Promise<void> => {
     dispatch(UNSUBMITTING_PERIOD({ forecast }))
     const variables = {
       period: state.selectedPeriod.data,
@@ -35,10 +35,11 @@ export function useSubmitActions({ state, dispatch, refetch }) {
     }
     await unsubmitPeriod({ variables })
     refetch()
+    app.notificationsQuery.refetch(250)
   }
 
   return {
     onSubmitPeriod,
-    onUnsubmitPeriod,
+    onUnsubmitPeriod
   }
 }

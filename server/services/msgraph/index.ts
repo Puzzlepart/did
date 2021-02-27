@@ -35,7 +35,7 @@ class MSGraphService {
   constructor(
     private _oauthService: OAuthService,
     private _access_token?: string,
-    @Inject('CONTEXT') readonly context?: Context,
+    @Inject('CONTEXT') readonly context?: Context
   ) {
     this._cache = new CacheService(context, MSGraphService.name)
   }

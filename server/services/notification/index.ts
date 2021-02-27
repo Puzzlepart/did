@@ -2,17 +2,17 @@ import get from 'get-value'
 import { Collection } from 'mongodb'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
-import { any, first } from 'underscore'
+import { any } from 'underscore'
 import { DateObject } from '../../../shared/utils/date'
 import { Context } from '../../graphql/context'
 import { NotificationTemplates } from '../../graphql/resolvers/types'
 import { TimesheetService } from '../timesheet'
 import { ForecastNotification, UnconfirmedPeriodNotification } from './types'
-
 @Service({ global: false })
 export class NotificationService {
   private _confirmed_periods: Collection
   private _forecasted_periods: Collection
+
   /**
    * Constructor
    *
@@ -41,7 +41,12 @@ export class NotificationService {
       const startOfWeek = d.startOfWeek.format('YYYY-MM-DD')
       const endOfWeek = d.endOfWeek.format('YYYY-MM-DD')
       periods.push(
-        ...this._timesheet.getPeriods(startOfWeek, endOfWeek, locale, this.context.userId)
+        ...this._timesheet.getPeriods(
+          startOfWeek,
+          endOfWeek,
+          locale,
+          this.context.userId
+        )
       )
       d = d.add(add)
     }
@@ -92,7 +97,7 @@ export class NotificationService {
       get(this.context, 'subscription.settings.forecast.notifications', {
         default: 2
       }) - 1,
-      locale,
+      locale
     )
 
     const forecastedPeriods = await this._forecasted_periods
@@ -102,7 +107,10 @@ export class NotificationService {
       .toArray()
 
     const nperiods: any[] = periods.reduce(($, period) => {
-      const isForecasted = any(forecastedPeriods, ({ _id }) => _id === period._id)
+      const isForecasted = any(
+        forecastedPeriods,
+        ({ _id }) => _id === period._id
+      )
       if (!isForecasted) $.push(period)
       return $
     }, [])
@@ -112,7 +120,7 @@ export class NotificationService {
 
   /**
    * Get notifications
-   * 
+   *
    * @param templates - Templats
    * @param locale - User locale
    */

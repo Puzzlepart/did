@@ -247,7 +247,7 @@ export class TimesheetService {
       )
     }
 
-    return periods.map(period => {
+    return periods.map((period) => {
       return { ...this._getPeriodData(period.id, userId), ...period }
     })
   }
