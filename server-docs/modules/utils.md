@@ -12,7 +12,7 @@
 
 ### stripHtmlString
 
-▸ `Const`**stripHtmlString**(`str`: *string*): *string*
+▸ **stripHtmlString**(`str`: *string*): *string*
 
 Strip html from string using string-strip-html
 Used when fetching events from ms graph
@@ -26,4 +26,4 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [server/utils/stripHtmlString.ts:10](https://github.com/Puzzlepart/did/blob/b3b3393e/server/utils/stripHtmlString.ts#L10)
+Defined in: [server/utils/stripHtmlString.ts:10](https://github.com/Puzzlepart/did/blob/31669ccf/server/utils/stripHtmlString.ts#L10)

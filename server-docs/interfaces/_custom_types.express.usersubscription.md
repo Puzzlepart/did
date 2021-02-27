@@ -19,7 +19,7 @@
 
 • **connectionString**: *string*
 
-Defined in: [server/@custom-types/index.d.ts:11](https://github.com/Puzzlepart/did/blob/b3b3393e/server/@custom-types/index.d.ts#L11)
+Defined in: [server/@custom-types/index.d.ts:11](https://github.com/Puzzlepart/did/blob/31669ccf/server/@custom-types/index.d.ts#L11)
 
 ___
 
@@ -27,7 +27,7 @@ ___
 
 • **id**: *string*
 
-Defined in: [server/@custom-types/index.d.ts:10](https://github.com/Puzzlepart/did/blob/b3b3393e/server/@custom-types/index.d.ts#L10)
+Defined in: [server/@custom-types/index.d.ts:10](https://github.com/Puzzlepart/did/blob/31669ccf/server/@custom-types/index.d.ts#L10)
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 • **name**: *string*
 
-Defined in: [server/@custom-types/index.d.ts:12](https://github.com/Puzzlepart/did/blob/b3b3393e/server/@custom-types/index.d.ts#L12)
+Defined in: [server/@custom-types/index.d.ts:12](https://github.com/Puzzlepart/did/blob/31669ccf/server/@custom-types/index.d.ts#L12)
 
 ___
 
@@ -43,4 +43,4 @@ ___
 
 • **settings**: *any*
 
-Defined in: [server/@custom-types/index.d.ts:13](https://github.com/Puzzlepart/did/blob/b3b3393e/server/@custom-types/index.d.ts#L13)
+Defined in: [server/@custom-types/index.d.ts:13](https://github.com/Puzzlepart/did/blob/31669ccf/server/@custom-types/index.d.ts#L13)
