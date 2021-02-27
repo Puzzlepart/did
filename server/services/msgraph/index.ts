@@ -2,9 +2,10 @@
 global['fetch'] = require('node-fetch')
 import { Client as MSGraphClient } from '@microsoft/microsoft-graph-client'
 import 'reflect-metadata'
-import { Service } from 'typedi'
+import { Inject, Service } from 'typedi'
 import { sortBy } from 'underscore'
 import DateUtils from '../../../shared/utils/date'
+import { Context } from '../../graphql/context'
 import env from '../../utils/env'
 import { CacheScope, CacheService } from '../cache'
 import OAuthService, { AccessTokenOptions } from '../oauth'
@@ -29,11 +30,15 @@ class MSGraphService {
    *
    * @param _oauthService - OAuth service
    * @param access_token - Access token
+   * @param context - Injected GraphQL context through typedi
    */
   constructor(
     private _oauthService: OAuthService,
-    private _access_token?: string
-  ) {}
+    private _access_token?: string,
+    @Inject('CONTEXT') readonly context?: Context,
+  ) {
+    this._cache = new CacheService(context, MSGraphService.name)
+  }
 
   /**
    * Gets a Microsoft Graph Client using the auth token from the class
