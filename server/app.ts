@@ -10,7 +10,7 @@ import logger from 'morgan'
 import path from 'path'
 import { pick } from 'underscore'
 import { setupGraphQL } from './graphql'
-import { redisSession, serveGzipped, setupPassport } from './middleware'
+import { redisSession, serveGzipped, setupPassport, helmetConfig } from './middleware'
 import authRoute from './routes/auth'
 import env from './utils/env'
 
@@ -33,7 +33,7 @@ export class App {
    */
   constructor() {
     this.instance = express()
-    this.instance.use(require('./middleware/helmet').default)
+    this.instance.use(helmetConfig)
     this.instance.use(
       favicon(path.join(__dirname, 'public/images/favicon/favicon.ico'))
     )
