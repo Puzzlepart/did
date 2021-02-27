@@ -8,6 +8,7 @@ import { Context } from '../../graphql/context'
 import { NotificationTemplates } from '../../graphql/resolvers/types'
 import { TimesheetService } from '../timesheet'
 import { ForecastNotification, UnconfirmedPeriodNotification } from './types'
+
 @Service({ global: false })
 export class NotificationService {
   private _confirmed_periods: Collection
@@ -136,3 +137,5 @@ export class NotificationService {
     return [].concat.apply([], notifications)
   }
 }
+
+export * from './types'
