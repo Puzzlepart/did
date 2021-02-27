@@ -1,12 +1,10 @@
-import { useMutation } from '@apollo/client'
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useLayoutEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { useTimesheetReducer } from '../reducer'
-import { SUBMITTING_PERIOD, UNSUBMITTING_PERIOD } from '../reducer/actions'
 import { ITimesheetContext, ITimesheetParams } from '../types'
-import $submitPeriod from './submitPeriod.gql'
-import $unsubmitPeriod from './unsubmitPeriod.gql'
+import { useSubmitActions } from './useSubmitActions'
 import { useTimesheetQuery } from './useTimesheetQuery'
 
 /**
@@ -33,35 +31,11 @@ export function useTimesheet() {
     history.push(
       ['/timesheet', state.selectedView, state.selectedPeriod.path].join('/')
     )
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.selectedView, state.selectedPeriod])
 
-  const [[submitPeriod], [unsubmitPeriod]] = [
-    useMutation($submitPeriod),
-    useMutation($unsubmitPeriod)
-  ]
+  const { onSubmitPeriod, onUnsubmitPeriod } = useSubmitActions({ state, dispatch, refetch })
 
-  const onSubmitPeriod = async (forecast: boolean) => {
-    dispatch(SUBMITTING_PERIOD({ forecast }))
-    const variables = {
-      period: state.selectedPeriod.data,
-      options: { forecast, tzOffset: new Date().getTimezoneOffset() }
-    }
-    await submitPeriod({ variables })
-    refetch()
-  }
-
-  const onUnsubmitPeriod = async (forecast: boolean) => {
-    dispatch(UNSUBMITTING_PERIOD({ forecast }))
-    const variables = {
-      period: state.selectedPeriod.data,
-      options: { forecast }
-    }
-    await unsubmitPeriod({ variables })
-    refetch()
-  }
-
-  const context: ITimesheetContext = useMemo(
+  const context = useMemo<ITimesheetContext>(
     () => ({
       ...state,
       refetch,
