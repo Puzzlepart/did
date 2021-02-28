@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv').config()
 const tryRequire = require('try-require')
-const { resolve } = require('path')
+const path = require('path')
 const { name, version } = require('./package.json')
 const CompressionPlugin = require('compression-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -13,8 +13,8 @@ const MODE = process.env.NODE_ENV === 'development' ? 'development' : 'productio
 const IS_DEVELOPMENT = MODE === 'development'
 const SERVER_DIST = IS_DEVELOPMENT ? 'server' : 'dist/server'
 const BUNDLE_FILE_NAME = `[name].${version}.[hash].js`
-const HTML_PLUGIN_FILE_NAME = IS_DEVELOPMENT ? resolve(__dirname, 'server/views/@template_dev.hbs') : resolve(__dirname, 'server/views/@template.hbs')
-const SRC_PATH = resolve(__dirname, 'client/')
+const HTML_PLUGIN_FILE_NAME = IS_DEVELOPMENT ? path.resolve(__dirname, 'server/views/@template_dev.hbs') : resolve(__dirname, 'server/views/@template.hbs')
+const SRC_PATH = path.resolve(__dirname, 'client/')
 
 /** PRINTING HEADER */
 debug('Compiling Did bundle')
