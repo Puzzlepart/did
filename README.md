@@ -32,4 +32,4 @@ _**Next release is [Fluor](https://github.com/Puzzlepart/did365/milestone/9) and
  ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ 
  &nbsp;&nbsp;[Carl Joachim Damsleth](https://github.com/damsleth) | [Ole Martin Pettersen](https://github.com/olemp)             | [Ole Kristian Mørch-Storstein](https://github.com/okms)      
 
-**Want to contribute? ❤️  Take a look [*here*](./CONTRIBUTING.md) and create a PR!**_
+_**Want to contribute? ❤️  Take a look [*here*](./CONTRIBUTING.md) and create a PR!**_
