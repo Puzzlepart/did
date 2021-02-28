@@ -1,17 +1,17 @@
-[did-client - v0.10.0](../README.md) / [Pages](../modules/pages.md) / ITimesheetParams
+[did-client - v0.10.0](../README.md) / [Pages](../modules/pages.md) / ITimesheetParameters
 
-# Interface: ITimesheetParams
+# Interface: ITimesheetParameters
 
-[Pages](../modules/pages.md).ITimesheetParams
+[Pages](../modules/pages.md).ITimesheetParameters
 
 ## Table of contents
 
 ### Properties
 
-- [month](pages.itimesheetparams.md#month)
-- [view](pages.itimesheetparams.md#view)
-- [week](pages.itimesheetparams.md#week)
-- [year](pages.itimesheetparams.md#year)
+- [month](pages.itimesheetparameters.md#month)
+- [view](pages.itimesheetparameters.md#view)
+- [week](pages.itimesheetparameters.md#week)
+- [year](pages.itimesheetparameters.md#year)
 
 ## Properties
 

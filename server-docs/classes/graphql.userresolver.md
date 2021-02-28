@@ -85,21 +85,21 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/user/index.ts:89](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L89)
+Defined in: [server/graphql/resolvers/user/index.ts:90](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L90)
 
 ___
 
 ### currentUser
 
-▸ **currentUser**(`ctx`: [*Context*](graphql_context.context.md)): *Promise*<[*User*](graphql.user.md)\>
+▸ **currentUser**(`context`: [*Context*](graphql_context.context.md)): *Promise*<[*User*](graphql.user.md)\>
 
 Get current user
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`ctx` | [*Context*](graphql_context.context.md) | GraphQL context    |
+Name | Type |
+:------ | :------ |
+`context` | [*Context*](graphql_context.context.md) |
 
 **Returns:** *Promise*<[*User*](graphql.user.md)\>
 
@@ -121,7 +121,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/user/index.ts:107](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L107)
+Defined in: [server/graphql/resolvers/user/index.ts:108](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L108)
 
 ___
 

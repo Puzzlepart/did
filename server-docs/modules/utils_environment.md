@@ -1,12 +1,12 @@
-[did-server - v0.10.0](../README.md) / utils/env
+[did-server - v0.10.0](../README.md) / utils/environment
 
-# Module: utils/env
+# Module: utils/environment
 
 ## Table of contents
 
 ### Functions
 
-- [default](utils_env.md#default)
+- [default](utils_environment.md#default)
 
 ## Functions
 
@@ -25,4 +25,4 @@ Name | Type | Default value | Description |
 
 **Returns:** *string*
 
-Defined in: [server/utils/env.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/utils/env.ts#L11)
+Defined in: [server/utils/environment.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/utils/environment.ts#L11)

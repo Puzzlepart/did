@@ -63,15 +63,15 @@ ___
 
 ### loadScripts
 
-▸ **loadScripts**(`scriptSrc`: *string*[]): *Promise*<void\>
+▸ **loadScripts**(`scriptSource`: *string*[]): *Promise*<void\>
 
 Load scripts using document.createElement
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`scriptSrc` | *string*[] | Sources to load    |
+Name | Type |
+:------ | :------ |
+`scriptSource` | *string*[] |
 
 **Returns:** *Promise*<void\>
 
@@ -81,7 +81,7 @@ ___
 
 ### searchObject
 
-▸ **searchObject**<T\>(`item`: T, `searchStr`: *string*): *boolean*
+▸ **searchObject**<T\>(`item`: T, `searchString`: *string*): *boolean*
 
 Search object
 
@@ -96,7 +96,7 @@ Name | Default |
 Name | Type | Description |
 :------ | :------ | :------ |
 `item` | T | Item   |
-`searchStr` | *string* | The string to search for    |
+`searchString` | *string* | - |
 
 **Returns:** *boolean*
 

@@ -58,7 +58,7 @@ Name | Type | Description |
 
 **Returns:** *PassportStatic*
 
-Defined in: [server/middleware/passport/index.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/middleware/passport/index.ts#L14)
+Defined in: [server/middleware/passport/index.ts:28](https://github.com/Puzzlepart/did/blob/dev/server/middleware/passport/index.ts#L28)
 
 ___
 

@@ -117,7 +117,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/apitoken.ts:58](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/apitoken.ts#L58)
+Defined in: [server/services/mongo/apitoken.ts:61](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/apitoken.ts#L61)
 
 ___
 

@@ -16,4 +16,4 @@ The App component
 
 • `Const` **App**: *FunctionComponent*<IAppContext\>
 
-Defined in: [client/App.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/App.tsx#L20)
+Defined in: [client/App.tsx:27](https://github.com/Puzzlepart/did/blob/dev/client/App.tsx#L27)

@@ -12,7 +12,7 @@
 
 ### stripHtmlString
 
-▸ **stripHtmlString**(`str`: *string*): *string*
+▸ **stripHtmlString**(`string`: *string*): *string*
 
 Strip html from string using string-strip-html
 Used when fetching events from ms graph
@@ -20,9 +20,9 @@ Strips the html from event body
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`str` | *string* | String    |
+Name | Type |
+:------ | :------ |
+`string` | *string* |
 
 **Returns:** *string*
 

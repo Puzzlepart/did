@@ -18,5 +18,6 @@ did-server - v0.10.0
 - [services/cache](modules/services_cache.md)
 - [services/oauth](modules/services_oauth.md)
 - [utils](modules/utils.md)
-- [utils/env](modules/utils_env.md)
+- [utils/environment](modules/utils_environment.md)
+- [utils/firstPart](modules/utils_firstpart.md)
 - [utils/stripHtmlString](modules/utils_striphtmlstring.md)

@@ -17,6 +17,7 @@ Reusable React Hooks
 ### React Hook Functions
 
 - [useBrowserStorage](hooks.md#usebrowserstorage)
+- [useExcelExport](hooks.md#useexcelexport)
 - [useNotificationsQuery](hooks.md#usenotificationsquery)
 
 ## Type aliases
@@ -85,6 +86,28 @@ Name | Type |
 **Returns:** [T, (`value`: *any*) => *void*, () => *void*]
 
 Defined in: [client/hooks/browserStorage/useBrowserStorage.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/hooks/browserStorage/useBrowserStorage.ts#L10)
+
+___
+
+### useExcelExport
+
+▸ **useExcelExport**(`__namedParameters`: IUseExcelExportOptions): *object*
+
+Excel export hook
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`__namedParameters` | IUseExcelExportOptions |
+
+**Returns:** *object*
+
+Name | Type |
+:------ | :------ |
+`onExport` | () => *Promise*<void\> |
+
+Defined in: [client/hooks/excel/useExcelExport.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/hooks/excel/useExcelExport.ts#L20)
 
 ___
 

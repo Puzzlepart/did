@@ -1,4 +1,3 @@
-import stringStripHtml from 'string-strip-html'
 import { first } from 'underscore'
 
 /**

@@ -45,7 +45,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetService*](services.timesheetservice.md)
 
-Defined in: [server/services/timesheet/index.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L23)
+Defined in: [server/services/timesheet/index.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L24)
 
 ## Properties
 
@@ -53,7 +53,7 @@ Defined in: [server/services/timesheet/index.ts:23](https://github.com/Puzzlepar
 
 • `Private` **\_confirmed\_periods**: *Collection*<any\>
 
-Defined in: [server/services/timesheet/index.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L20)
+Defined in: [server/services/timesheet/index.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L21)
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 • `Private` **\_forecasted\_periods**: *Collection*<any\>
 
-Defined in: [server/services/timesheet/index.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L21)
+Defined in: [server/services/timesheet/index.ts:22](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L22)
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 • `Private` **\_forecasted\_time\_entries**: *Collection*<any\>
 
-Defined in: [server/services/timesheet/index.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L23)
+Defined in: [server/services/timesheet/index.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L24)
 
 ___
 
@@ -77,25 +77,27 @@ ___
 
 • `Private` **\_time\_entries**: *Collection*<any\>
 
-Defined in: [server/services/timesheet/index.ts:22](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L22)
+Defined in: [server/services/timesheet/index.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L23)
 
 ## Methods
 
 ### \_connectEvents
 
-▸ `Private`**_connectEvents**(`__namedParameters`: IConnectEventsParams): *any*[]
+▸ `Private`**_connectEvents**(`__namedParameters`: IConnectEventsParameters): *any*[]
 
-Connect events to projects
+Connect events to projects and customers
+
+**`see`** https://docs.mongodb.com/manual/reference/database-references/
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`__namedParameters` | IConnectEventsParams |
+`__namedParameters` | IConnectEventsParameters |
 
 **Returns:** *any*[]
 
-Defined in: [server/services/timesheet/index.ts:260](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L260)
+Defined in: [server/services/timesheet/index.ts:267](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L267)
 
 ___
 
@@ -114,7 +116,7 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [server/services/timesheet/index.ts:192](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L192)
+Defined in: [server/services/timesheet/index.ts:197](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L197)
 
 ___
 
@@ -144,7 +146,7 @@ Name | Type |
 `week` | *number* |
 `year` | *number* |
 
-Defined in: [server/services/timesheet/index.ts:205](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L205)
+Defined in: [server/services/timesheet/index.ts:210](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L210)
 
 ___
 
@@ -165,49 +167,49 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]
 
-Defined in: [server/services/timesheet/index.ts:224](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L224)
+Defined in: [server/services/timesheet/index.ts:229](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L229)
 
 ___
 
 ### getTimesheet
 
-▸ **getTimesheet**(`params`: IGetTimesheetParams): *Promise*<any[]\>
+▸ **getTimesheet**(`parameters`: IGetTimesheetParameters): *Promise*<any[]\>
 
 Get timesheet
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`params` | IGetTimesheetParams | Timesheet params    |
+Name | Type |
+:------ | :------ |
+`parameters` | IGetTimesheetParameters |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/timesheet/index.ts:49](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L49)
+Defined in: [server/services/timesheet/index.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L50)
 
 ___
 
 ### submitPeriod
 
-▸ **submitPeriod**(`params`: ISubmitPeriodParams): *Promise*<void\>
+▸ **submitPeriod**(`parameters`: ISubmitPeriodParameters): *Promise*<void\>
 
 Submit period
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`params` | ISubmitPeriodParams | Submit period params    |
+Name | Type |
+:------ | :------ |
+`parameters` | ISubmitPeriodParameters |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/timesheet/index.ts:110](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L110)
+Defined in: [server/services/timesheet/index.ts:113](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L113)
 
 ___
 
 ### unsubmitPeriod
 
-▸ **unsubmitPeriod**(`__namedParameters`: IUnsubmitPeriodParams): *Promise*<void\>
+▸ **unsubmitPeriod**(`__namedParameters`: IUnsubmitPeriodParameters): *Promise*<void\>
 
 Unsubmit period
 
@@ -215,8 +217,8 @@ Unsubmit period
 
 Name | Type |
 :------ | :------ |
-`__namedParameters` | IUnsubmitPeriodParams |
+`__namedParameters` | IUnsubmitPeriodParameters |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/timesheet/index.ts:163](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L163)
+Defined in: [server/services/timesheet/index.ts:168](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L168)

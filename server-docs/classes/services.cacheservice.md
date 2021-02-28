@@ -149,7 +149,7 @@ ___
 
 ### usingCache
 
-▸ **usingCache**<T\>(`func`: () => *Promise*<T\>, `__namedParameters`: CacheOptions): *Promise*<T\>
+▸ **usingCache**<T\>(`function_`: () => *Promise*<T\>, `__namedParameters`: CacheOptions): *Promise*<T\>
 
 Using cache
 
@@ -161,10 +161,10 @@ Name | Default |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`func` | () => *Promise*<T\> | Promise function   |
-`__namedParameters` | CacheOptions | - |
+Name | Type |
+:------ | :------ |
+`function_` | () => *Promise*<T\> |
+`__namedParameters` | CacheOptions |
 
 **Returns:** *Promise*<T\>
 

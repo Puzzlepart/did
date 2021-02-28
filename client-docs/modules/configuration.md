@@ -24,11 +24,15 @@ Configuration
 
 ▸ (`t`: TFunction): IPermission[]
 
+Get permissions
+
+Specifiy translate function for i18n
+
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`t` | TFunction |
+Name | Type | Description |
+:------ | :------ | :------ |
+`t` | TFunction | Translate funcion    |
 
 **Returns:** IPermission[]
 

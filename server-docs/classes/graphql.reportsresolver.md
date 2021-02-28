@@ -36,7 +36,7 @@ Defined in: [server/graphql/resolvers/reports/index.ts:16](https://github.com/Pu
 
 ### timeentries
 
-▸ **timeentries**(`query`: [*ReportsQuery*](graphql.reportsquery.md), `currentUser`: *boolean*, `sortAsc`: *boolean*, `ctx`: [*Context*](graphql_context.context.md)): *Promise*<Report\>
+▸ **timeentries**(`query`: [*ReportsQuery*](graphql.reportsquery.md), `currentUser`: *boolean*, `sortAsc`: *boolean*, `context`: [*Context*](graphql_context.context.md)): *Promise*<Report\>
 
 Get time entries
 
@@ -47,7 +47,7 @@ Name | Type | Description |
 `query` | [*ReportsQuery*](graphql.reportsquery.md) | Query   |
 `currentUser` | *boolean* | Current user   |
 `sortAsc` | *boolean* | Sort ascending   |
-`ctx` | [*Context*](graphql_context.context.md) | GraphQL context    |
+`context` | [*Context*](graphql_context.context.md) | - |
 
 **Returns:** *Promise*<Report\>
 

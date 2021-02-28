@@ -1,16 +1,16 @@
-[did-client - v0.10.0](../README.md) / [Pages](../modules/pages.md) / IProjectsParams
+[did-client - v0.10.0](../README.md) / [Pages](../modules/pages.md) / IProjectsParameters
 
-# Interface: IProjectsParams
+# Interface: IProjectsParameters
 
-[Pages](../modules/pages.md).IProjectsParams
+[Pages](../modules/pages.md).IProjectsParameters
 
 ## Table of contents
 
 ### Properties
 
-- [detailsTab](pages.iprojectsparams.md#detailstab)
-- [key](pages.iprojectsparams.md#key)
-- [view](pages.iprojectsparams.md#view)
+- [detailsTab](pages.iprojectsparameters.md#detailstab)
+- [key](pages.iprojectsparameters.md#key)
+- [view](pages.iprojectsparameters.md#view)
 
 ## Properties
 

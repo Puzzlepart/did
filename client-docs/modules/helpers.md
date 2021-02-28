@@ -16,7 +16,7 @@ Reusable helper functions
 
 ### getValue
 
-▸ **getValue**<T\>(`obj`: *any*, `exp`: *string*, `defaultValue?`: T): T
+▸ **getValue**<T\>(`object`: *any*, `exp`: *string*, `defaultValue?`: T): T
 
 Get value from object using get-value
 
@@ -32,7 +32,7 @@ Name | Default |
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`obj` | *any* | Obj   |
+`object` | *any* | - |
 `exp` | *string* | Expression   |
 `defaultValue?` | T | Default value    |
 
@@ -44,7 +44,7 @@ ___
 
 ### setValue
 
-▸ **setValue**<T\>(`obj`: *any*, `exp`: *string*, `value?`: T): *any*
+▸ **setValue**<T\>(`object`: *any*, `exp`: *string*, `value?`: T): *any*
 
 Set value in object using set-value
 
@@ -60,28 +60,28 @@ Name | Default |
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`obj` | *any* | Obj   |
+`object` | *any* | - |
 `exp` | *string* | Expression   |
 `value?` | T | - |
 
 **Returns:** *any*
 
-Defined in: [client/helpers/index.ts:32](https://github.com/Puzzlepart/did/blob/dev/client/helpers/index.ts#L32)
+Defined in: [client/helpers/index.ts:36](https://github.com/Puzzlepart/did/blob/dev/client/helpers/index.ts#L36)
 
 ___
 
 ### sortAlphabetically
 
-▸ **sortAlphabetically**(`strArray`: *string*[]): *string*[]
+▸ **sortAlphabetically**(`stringArray`: *string*[]): *string*[]
 
 Sort alphabetically
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`strArray` | *string*[] | Array of strings to sort alphabetically    |
+Name | Type |
+:------ | :------ |
+`stringArray` | *string*[] |
 
 **Returns:** *string*[]
 
-Defined in: [client/helpers/index.ts:41](https://github.com/Puzzlepart/did/blob/dev/client/helpers/index.ts#L41)
+Defined in: [client/helpers/index.ts:45](https://github.com/Puzzlepart/did/blob/dev/client/helpers/index.ts#L45)

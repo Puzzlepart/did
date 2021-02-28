@@ -87,4 +87,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/graphql/resolvers/customer/index.ts:60](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/index.ts#L60)
+Defined in: [server/graphql/resolvers/customer/index.ts:61](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/index.ts#L61)

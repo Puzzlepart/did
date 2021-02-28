@@ -14,17 +14,17 @@ Name | Default |
 
 * **BaseFilter**
 
+  ↳ [*CustomerFilter*](components.customerfilter.md)
+
   ↳ [*MonthFilter*](components.monthfilter.md)
 
-  ↳ [*YearFilter*](components.yearfilter.md)
+  ↳ [*ProjectFilter*](components.projectfilter.md)
 
   ↳ [*ResourceFilter*](components.resourcefilter.md)
 
   ↳ [*WeekFilter*](components.weekfilter.md)
 
-  ↳ [*ProjectFilter*](components.projectfilter.md)
-
-  ↳ [*CustomerFilter*](components.customerfilter.md)
+  ↳ [*YearFilter*](components.yearfilter.md)
 
 ## Table of contents
 

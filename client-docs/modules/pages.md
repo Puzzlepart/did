@@ -15,20 +15,20 @@ All are built using React Function components and Hooks.
 
 ### Other Interfaces
 
-- [ITimesheetParams](../interfaces/pages.itimesheetparams.md)
+- [ITimesheetParameters](../interfaces/pages.itimesheetparameters.md)
 - [ITimesheetState](../interfaces/pages.itimesheetstate.md)
 
 ### Projects Interfaces
 
 - [IProjectListProps](../interfaces/pages.iprojectlistprops.md)
 - [IProjectsContext](../interfaces/pages.iprojectscontext.md)
-- [IProjectsParams](../interfaces/pages.iprojectsparams.md)
+- [IProjectsParameters](../interfaces/pages.iprojectsparameters.md)
 - [IProjectsState](../interfaces/pages.iprojectsstate.md)
 
 ### Reports Interfaces
 
 - [IReportsContext](../interfaces/pages.ireportscontext.md)
-- [IReportsParams](../interfaces/pages.ireportsparams.md)
+- [IReportsParameters](../interfaces/pages.ireportsparameters.md)
 - [IReportsQuery](../interfaces/pages.ireportsquery.md)
 - [IReportsSavedFilter](../interfaces/pages.ireportssavedfilter.md)
 - [IReportsState](../interfaces/pages.ireportsstate.md)
@@ -203,7 +203,7 @@ ___
 
 • `Const` **TimeEntries**: FunctionComponent
 
-Defined in: [client/pages/Projects/ProjectDetails/TimeEntries/index.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/TimeEntries/index.tsx#L21)
+Defined in: [client/pages/Projects/ProjectDetails/TimeEntries/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectDetails/TimeEntries/index.tsx#L18)
 
 ___
 
@@ -355,7 +355,7 @@ Name | Type |
 `state` | [*ITimesheetState*](../interfaces/pages.itimesheetstate.md) |
 `t` | TFunction |
 
-Defined in: [client/pages/Timesheet/hooks/useTimesheet.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useTimesheet.tsx#L21)
+Defined in: [client/pages/Timesheet/hooks/useTimesheet.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useTimesheet.tsx#L24)
 
 ___
 
@@ -448,7 +448,7 @@ Name | Type |
 `dispatch` | *Dispatch*<AnyAction\> |
 `filters` | [*BaseFilter*](../classes/components.basefilter.md)<any\>[] |
 `history` | *History*<unknown\> |
-`params` | [*IReportsParams*](../interfaces/pages.ireportsparams.md) |
+`params` | [*IReportsParameters*](../interfaces/pages.ireportsparameters.md) |
 `queries` | [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[] |
 `state` | [*IReportsState*](../interfaces/pages.ireportsstate.md) |
 `t` | TFunction |

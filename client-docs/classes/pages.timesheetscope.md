@@ -93,15 +93,15 @@ Defined in: [client/pages/Timesheet/TimesheetScope.ts:81](https://github.com/Puz
 
 ### fromParams
 
-▸ **fromParams**(`params`: [*ITimesheetParams*](../interfaces/pages.itimesheetparams.md)): [*TimesheetScope*](pages.timesheetscope.md)
+▸ **fromParams**(`parameters`: [*ITimesheetParameters*](../interfaces/pages.itimesheetparameters.md)): [*TimesheetScope*](pages.timesheetscope.md)
 
 Sets startDate/endDate from params
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`params` | [*ITimesheetParams*](../interfaces/pages.itimesheetparams.md) | Params    |
+Name | Type |
+:------ | :------ |
+`parameters` | [*ITimesheetParameters*](../interfaces/pages.itimesheetparameters.md) |
 
 **Returns:** [*TimesheetScope*](pages.timesheetscope.md)
 

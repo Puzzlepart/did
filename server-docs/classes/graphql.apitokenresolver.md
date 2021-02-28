@@ -38,7 +38,7 @@ Defined in: [server/graphql/resolvers/apiToken/index.ts:18](https://github.com/P
 
 ### addApiToken
 
-▸ **addApiToken**(`token`: [*ApiTokenInput*](graphql.apitokeninput.md), `ctx`: [*Context*](graphql_context.context.md)): *Promise*<string\>
+▸ **addApiToken**(`token`: [*ApiTokenInput*](graphql.apitokeninput.md), `context`: [*Context*](graphql_context.context.md)): *Promise*<string\>
 
 Add API token
 
@@ -47,7 +47,7 @@ Add API token
 Name | Type | Description |
 :------ | :------ | :------ |
 `token` | [*ApiTokenInput*](graphql.apitokeninput.md) | Token   |
-`ctx` | [*Context*](graphql_context.context.md) | GraphQL context    |
+`context` | [*Context*](graphql_context.context.md) | - |
 
 **Returns:** *Promise*<string\>
 
@@ -57,15 +57,15 @@ ___
 
 ### apiTokens
 
-▸ **apiTokens**(`ctx`: [*Context*](graphql_context.context.md)): *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
+▸ **apiTokens**(`context`: [*Context*](graphql_context.context.md)): *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
 
 Get API tokens
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`ctx` | [*Context*](graphql_context.context.md) | GraphQL context    |
+Name | Type |
+:------ | :------ |
+`context` | [*Context*](graphql_context.context.md) |
 
 **Returns:** *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
 
@@ -75,7 +75,7 @@ ___
 
 ### deleteApiToken
 
-▸ **deleteApiToken**(`name`: *string*, `ctx`: [*Context*](graphql_context.context.md)): *Promise*<BaseResult\>
+▸ **deleteApiToken**(`name`: *string*, `context`: [*Context*](graphql_context.context.md)): *Promise*<BaseResult\>
 
 Delete API token
 
@@ -84,7 +84,7 @@ Delete API token
 Name | Type | Description |
 :------ | :------ | :------ |
 `name` | *string* | Name   |
-`ctx` | [*Context*](graphql_context.context.md) | GraphQL context    |
+`context` | [*Context*](graphql_context.context.md) | - |
 
 **Returns:** *Promise*<BaseResult\>
 

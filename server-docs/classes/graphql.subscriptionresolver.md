@@ -37,7 +37,7 @@ Defined in: [server/graphql/resolvers/subscription/index.ts:18](https://github.c
 
 ### subscription
 
-▸ **subscription**(`ctx`: [*Context*](graphql_context.context.md)): *Promise*<[*Subscription*](graphql.subscription.md)\>
+▸ **subscription**(`context`: [*Context*](graphql_context.context.md)): *Promise*<[*Subscription*](graphql.subscription.md)\>
 
 Get current subscription
 
@@ -45,7 +45,7 @@ Get current subscription
 
 Name | Type |
 :------ | :------ |
-`ctx` | [*Context*](graphql_context.context.md) |
+`context` | [*Context*](graphql_context.context.md) |
 
 **Returns:** *Promise*<[*Subscription*](graphql.subscription.md)\>
 

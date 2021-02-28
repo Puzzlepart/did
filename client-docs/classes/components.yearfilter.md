@@ -120,4 +120,4 @@ Name | Type |
 
 Overrides: [BaseFilter](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/YearFilter.ts:40](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/YearFilter.ts#L40)
+Defined in: [client/components/FilterPanel/Filters/YearFilter.ts:42](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/YearFilter.ts#L42)

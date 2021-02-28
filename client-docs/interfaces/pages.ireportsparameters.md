@@ -1,14 +1,14 @@
-[did-client - v0.10.0](../README.md) / [Pages](../modules/pages.md) / IReportsParams
+[did-client - v0.10.0](../README.md) / [Pages](../modules/pages.md) / IReportsParameters
 
-# Interface: IReportsParams
+# Interface: IReportsParameters
 
-[Pages](../modules/pages.md).IReportsParams
+[Pages](../modules/pages.md).IReportsParameters
 
 ## Table of contents
 
 ### Properties
 
-- [query](pages.ireportsparams.md#query)
+- [query](pages.ireportsparameters.md#query)
 
 ## Properties
 

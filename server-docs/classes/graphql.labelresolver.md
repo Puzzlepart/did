@@ -69,7 +69,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/label/index.ts:58](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L58)
+Defined in: [server/graphql/resolvers/label/index.ts:59](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L59)
 
 ___
 
