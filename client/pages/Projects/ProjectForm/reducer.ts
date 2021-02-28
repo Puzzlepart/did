@@ -1,23 +1,23 @@
-import { IFormValidation, Project, ProjectOptions } from 'types'
-import { isEmpty } from 'underscore'
-import { IProjectFormState, ProjectModel } from './types'
+import {IFormValidation, Project, ProjectOptions} from 'types';
+import {isEmpty} from 'underscore';
+import {IProjectFormState, ProjectModel} from './types';
 
 export type ProjectFormAction =
-  | {
-      type: 'UPDATE_MODEL'
-      payload: [keyof ProjectModel, any]
-    }
-  | {
-      type: 'UPDATE_OPTIONS'
-      payload: [keyof ProjectOptions, any]
-    }
-  | {
-      type: 'RESET_FORM'
-    }
-  | {
-      type: 'SET_VALIDATION'
-      payload: { validation: IFormValidation }
-    }
+	| {
+		type: 'UPDATE_MODEL';
+		payload: [keyof ProjectModel, any];
+	  }
+	| {
+		type: 'UPDATE_OPTIONS';
+		payload: [keyof ProjectOptions, any];
+	  }
+	| {
+		type: 'RESET_FORM';
+	  }
+	| {
+		type: 'SET_VALIDATION';
+		payload: {validation: IFormValidation};
+	  };
 
 /**
  * Set project id
@@ -25,13 +25,13 @@ export type ProjectFormAction =
  * @param state - State
  */
 const setProjectId = (state: IProjectFormState) => {
-  const { customerKey, key } = state.model
-  if (!isEmpty(customerKey) && !isEmpty(key)) {
-    state.projectId = [customerKey, key].join(' ').toUpperCase()
-  } else {
-    state.projectId = ''
-  }
-}
+	const {customerKey, key} = state.model;
+	if (!isEmpty(customerKey) && !isEmpty(key)) {
+		state.projectId = [customerKey, key].join(' ').toUpperCase();
+	} else {
+		state.projectId = '';
+	}
+};
 
 /**
  * Initialize state
@@ -39,11 +39,11 @@ const setProjectId = (state: IProjectFormState) => {
  * @param project - Project
  */
 export const initState = (edit: Project): IProjectFormState => ({
-  model: new ProjectModel(edit),
-  options: { createOutlookCategory: false },
-  editMode: !!edit,
-  validation: { errors: {}, invalid: true }
-})
+	model: new ProjectModel(edit),
+	options: {createOutlookCategory: false},
+	editMode: Boolean(edit),
+	validation: {errors: {}, invalid: true}
+});
 
 /**
  * Reducer for ProjectForm
@@ -52,42 +52,47 @@ export const initState = (edit: Project): IProjectFormState => ({
  * @param action - Action
  */
 export default (
-  state: IProjectFormState,
-  action: ProjectFormAction
+	state: IProjectFormState,
+	action: ProjectFormAction
 ): IProjectFormState => {
-  const newState: IProjectFormState = { ...state }
-  switch (action.type) {
-    case 'UPDATE_MODEL':
-      {
-        const [key, value] = action.payload
-        newState.model[key as string] = value
-      }
-      break
+	const newState: IProjectFormState = {...state};
+	switch (action.type) {
+		case 'UPDATE_MODEL':
+			{
+				const [key, value] = action.payload;
+				newState.model[key as string] = value;
+			}
 
-    case 'UPDATE_OPTIONS':
-      {
-        const [key, value] = action.payload
-        newState.options[key] = value
-      }
-      break
+			break;
 
-    case 'RESET_FORM':
-      {
-        newState.model = new ProjectModel()
-        newState.model.customerKey = state.model.customerKey
-        newState.validation = { errors: {}, invalid: true }
-      }
-      break
+		case 'UPDATE_OPTIONS':
+			{
+				const [key, value] = action.payload;
+				newState.options[key] = value;
+			}
 
-    case 'SET_VALIDATION':
-      {
-        newState.validation = action.payload.validation
-      }
-      break
+			break;
 
-    default:
-      throw new Error()
-  }
-  setProjectId(newState)
-  return newState
-}
+		case 'RESET_FORM':
+			{
+				newState.model = new ProjectModel();
+				newState.model.customerKey = state.model.customerKey;
+				newState.validation = {errors: {}, invalid: true};
+			}
+
+			break;
+
+		case 'SET_VALIDATION':
+			{
+				newState.validation = action.payload.validation;
+			}
+
+			break;
+
+		default:
+			throw new Error();
+	}
+
+	setProjectId(newState);
+	return newState;
+};

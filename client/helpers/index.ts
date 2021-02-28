@@ -1,11 +1,10 @@
-/* eslint-disable tsdoc/syntax */
 /**
  * Reusable helper functions
  *
  * @module Helpers
  */
-import get from 'get-value'
-import set from 'set-value'
+import get from 'get-value';
+import set from 'set-value';
 
 /**
  * Get value from object using get-value
@@ -16,8 +15,12 @@ import set from 'set-value'
  * @param exp - Expression
  * @param defaultValue - Default value
  */
-export function getValue<T = any>(obj: any, exp: string, defaultValue?: T): T {
-  return get(obj, exp, defaultValue && { default: defaultValue })
+export function getValue<T = any>(
+	object: any,
+	exp: string,
+	defaultValue?: T
+): T {
+	return get(object, exp, defaultValue && {default: defaultValue});
 }
 
 /**
@@ -29,8 +32,8 @@ export function getValue<T = any>(obj: any, exp: string, defaultValue?: T): T {
  * @param exp - Expression
  * @param defaultValue - Default value
  */
-export function setValue<T = any>(obj: any, exp: string, value?: T): any {
-  return set(obj, exp, value)
+export function setValue<T = any>(object: any, exp: string, value?: T): any {
+	set(object, exp, value);
 }
 
 /**
@@ -38,10 +41,16 @@ export function setValue<T = any>(obj: any, exp: string, value?: T): any {
  *
  * @param strArray - Array of strings to sort alphabetically
  */
-export function sortAlphabetically(strArray: string[]): string[] {
-  return strArray.sort((a, b) => {
-    if (a > b) return 1
-    if (a < b) return -1
-    return 0
-  })
+export function sortAlphabetically(stringArray: string[]): string[] {
+	return stringArray.sort((a, b) => {
+		if (a > b) {
+			return 1;
+		}
+
+		if (a < b) {
+			return -1;
+		}
+
+		return 0;
+	});
 }

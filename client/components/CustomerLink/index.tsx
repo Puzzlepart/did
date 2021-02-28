@@ -1,15 +1,14 @@
-/* eslint-disable tsdoc/syntax */
-import React, { FunctionComponent } from 'react'
-import { Link } from 'react-router-dom'
-import { ICustomerLinkProps } from './types'
+import React, {FunctionComponent} from 'react';
+import {Link} from 'react-router-dom';
+import {ICustomerLinkProps} from './types';
 
 /**
  * @category Function Component
  */
 export const CustomerLink: FunctionComponent<ICustomerLinkProps> = ({
-  customer
+	customer
 }: ICustomerLinkProps) => (
-  <Link to={`/customers/search/${customer?.key}`}>{customer?.name}</Link>
-)
+	<Link to={`/customers/search/${customer?.key}`}>{customer?.name}</Link>
+);
 
-export * from './types'
+export * from './types';

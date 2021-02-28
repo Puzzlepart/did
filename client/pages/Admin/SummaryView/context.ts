@@ -1,44 +1,44 @@
-import { TFunction } from 'i18next'
-import { IColumn, IContextualMenuItem } from 'office-ui-fabric-react'
-import { createContext } from 'react'
-import { SummaryViewAction } from './reducer'
-import { ISummaryViewRow, ISummaryViewScope, ISummaryViewState } from './types'
+import {TFunction} from 'i18next';
+import {IColumn, IContextualMenuItem} from 'office-ui-fabric-react';
+import {createContext} from 'react';
+import {SummaryViewAction} from './reducer';
+import {ISummaryViewRow, ISummaryViewScope, ISummaryViewState} from './types';
 
 export interface ISummaryViewContext extends ISummaryViewState {
-  /**
-   * Dispatcher
-   */
-  dispatch?: React.Dispatch<SummaryViewAction>
+	/**
+	 * Dispatcher
+	 */
+	dispatch?: React.Dispatch<SummaryViewAction>;
 
-  /**
-   * View types
-   */
-  types: IContextualMenuItem[]
+	/**
+	 * View types
+	 */
+	types: IContextualMenuItem[];
 
-  /**
-   * Translate function
-   */
-  t: TFunction
+	/**
+	 * Translate function
+	 */
+	t: TFunction;
 
-  /**
-   * Loading data
-   */
-  loading?: boolean
+	/**
+	 * Loading data
+	 */
+	loading?: boolean;
 
-  /**
-   * Scopes
-   */
-  scopes: ISummaryViewScope[]
+	/**
+	 * Scopes
+	 */
+	scopes: ISummaryViewScope[];
 
-  /**
-   * Columns
-   */
-  columns: IColumn[]
+	/**
+	 * Columns
+	 */
+	columns: IColumn[];
 
-  /**
-   * Rows
-   */
-  rows: ISummaryViewRow[]
+	/**
+	 * Rows
+	 */
+	rows: ISummaryViewRow[];
 }
 
-export const SummaryViewContext = createContext<ISummaryViewContext>(null)
+export const SummaryViewContext = createContext<ISummaryViewContext>(null);

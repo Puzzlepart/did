@@ -3,6 +3,6 @@
  *
  * @param n - Seconds to sleep
  */
-export function sleep(n: number) {
-  return new Promise((resolve) => window.setTimeout(resolve, n * 1000))
+export async function sleep(n: number) {
+	return new Promise(resolve => window.setTimeout(resolve, n * 1000));
 }

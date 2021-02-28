@@ -1,89 +1,94 @@
-import { useMutation } from '@apollo/client'
-import { Autocomplete } from 'components'
-import { Panel, PrimaryButton } from 'office-ui-fabric-react'
-import React, { FunctionComponent, useContext, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { Role, User } from 'types'
-import { find, omit, pick } from 'underscore'
-import validator from 'validator'
-import { UsersContext } from '../context'
-import $addOrUpdateUser from './addOrUpdateUser.gql'
-import { RolePicker } from './RolePicker'
-import { IUserFormProps } from './types'
-import styles from './UserFormModal.module.scss'
+import {useMutation} from '@apollo/client';
+import {Autocomplete} from 'components';
+import {Panel, PrimaryButton} from 'office-ui-fabric-react';
+import React, {FunctionComponent, useContext, useState} from 'react';
+import {useTranslation} from 'react-i18next';
+import {Role, User} from 'types';
+import {find, omit, pick} from 'underscore';
+import validator from 'validator';
+import {UsersContext} from '../context';
+import $addOrUpdateUser from './addOrUpdateUser.gql';
+import {RolePicker} from './RolePicker';
+import {IUserFormProps} from './types';
+import styles from './UserFormModal.module.scss';
 
 export const UserForm: FunctionComponent<IUserFormProps> = (
-  props: IUserFormProps
+	props: IUserFormProps
 ) => {
-  const { t } = useTranslation()
-  const { activeDirectoryUsers, roles } = useContext(UsersContext)
-  const [model, setModel] = useState<User>(
-    props.user || { role: find(roles, (r) => r.name === 'User') }
-  )
-  const [addOrUpdateUser] = useMutation($addOrUpdateUser)
+	const {t} = useTranslation();
+	const {activeDirectoryUsers, roles} = useContext(UsersContext);
+	const [model, setModel] = useState<User>(
+		props.user || {role: find(roles, r => r.name === 'User')}
+	);
+	const [addOrUpdateUser] = useMutation($addOrUpdateUser);
 
-  /**
-   * On save user
-   */
-  const onSave = async () => {
-    await addOrUpdateUser({
-      variables: {
-        user: omit({ ...model, role: (model.role as Role).name }, '__typename'),
-        update: !!props.user
-      }
-    })
-    props.onDismiss()
-  }
+	/**
+	 * On save user
+	 */
+	const onSave = async () => {
+		await addOrUpdateUser({
+			variables: {
+				user: omit({...model, role: (model.role as Role).name}, '__typename'),
+				update: Boolean(props.user)
+			}
+		});
+		props.onDismiss();
+	};
 
-  /**
-   * Checks if form is valid
-   */
-  const isFormValid = () =>
-    !validator.isEmpty(model?.id || '') &&
-    validator.isUUID(model?.id || '') &&
-    !validator.isEmpty(model?.displayName || '')
+	/**
+	 * Checks if form is valid
+	 */
+	const isFormValid = () =>
+		!validator.isEmpty(model?.id || '') &&
+		validator.isUUID(model?.id || '') &&
+		!validator.isEmpty(model?.displayName || '');
 
-  return (
-    <Panel
-      {...pick(props, 'onDismiss', 'headerText')}
-      className={styles.root}
-      isOpen={true}
-      isLightDismiss={true}>
-      {!props.user && (
-        <div className={styles.inputContainer}>
-          <Autocomplete
-            label={t('common.searchUserLabel')}
-            placeholder={t('common.searchPlaceholder')}
-            items={activeDirectoryUsers.map((u) => ({
-              key: u.id,
-              text: u.displayName,
-              searchValue: u.displayName,
-              data: u
-            }))}
-            onSelected={(item) =>
-              setModel({
-                ...model,
-                ...item.data
-              })
-            }
-            onClear={() => setModel({ ...model, id: '', displayName: '' })}
-          />
-        </div>
-      )}
-      <RolePicker
-        className={styles.inputContainer}
-        roles={roles}
-        model={model}
-        onChanged={(role) => setModel({ ...model, role })}
-      />
-      <PrimaryButton
-        className={styles.saveBtn}
-        text={t('common.save')}
-        disabled={!isFormValid()}
-        onClick={onSave}
-      />
-    </Panel>
-  )
-}
+	return (
+		<Panel
+			{...pick(props, 'onDismiss', 'headerText')}
+			className={styles.root}
+			isOpen={true}
+			isLightDismiss={true}
+		>
+			{!props.user && (
+				<div className={styles.inputContainer}>
+					<Autocomplete
+						label={t('common.searchUserLabel')}
+						placeholder={t('common.searchPlaceholder')}
+						items={activeDirectoryUsers.map(u => ({
+							key: u.id,
+							text: u.displayName,
+							searchValue: u.displayName,
+							data: u
+						}))}
+						onSelected={item => {
+							setModel({
+								...model,
+								...item.data
+							});
+						}}
+						onClear={() => {
+							setModel({...model, id: '', displayName: ''});
+						}}
+					/>
+				</div>
+			)}
+			<RolePicker
+				className={styles.inputContainer}
+				roles={roles}
+				model={model}
+				onChanged={role => {
+					setModel({...model, role});
+				}}
+			/>
+			<PrimaryButton
+				className={styles.saveBtn}
+				text={t('common.save')}
+				disabled={!isFormValid()}
+				onClick={onSave}
+			/>
+		</Panel>
+	);
+};
 
-export * from './types'
+export * from './types';

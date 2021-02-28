@@ -45,3 +45,4 @@ doc/
 .tests/*.json
 .localtunnel
 schema.gql
+package.json

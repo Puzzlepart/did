@@ -4,7 +4,10 @@
  * @param str - String to truncate
  * @param length - Max length
  */
-export function truncateString(str: string, length: number): string {
-  if (str.length > length) return str.substring(0, length) + '...'
-  return str
+export function truncateString(string: string, length: number): string {
+	if (string.length > length) {
+		return string.slice(0, Math.max(0, length)) + '...';
+	}
+
+	return string;
 }

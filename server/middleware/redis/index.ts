@@ -1,5 +1,5 @@
-import { createClient as createRedisClient } from 'redis'
-import env from '../../utils/env'
+import {createClient as createRedisClient} from 'redis';
+import env from '../../utils/env';
 
 /**
  * Redis client
@@ -12,13 +12,13 @@ import env from '../../utils/env'
  * @see https://github.com/Puzzlepart/did/issues/812
  */
 export const redisMiddlware = createRedisClient(
-  6380,
-  env('REDIS_CACHE_HOSTNAME'),
-  {
-    auth_pass: env('REDIS_CACHE_KEY'),
-    tls: {
-      servername: env('REDIS_CACHE_HOSTNAME')
-    },
-    socket_keepalive: true
-  }
-)
+	6380,
+	env('REDIS_CACHE_HOSTNAME'),
+	{
+		auth_pass: env('REDIS_CACHE_KEY'),
+		tls: {
+			servername: env('REDIS_CACHE_HOSTNAME')
+		},
+		socket_keepalive: true
+	}
+);

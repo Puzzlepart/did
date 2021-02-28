@@ -1,10 +1,10 @@
-import { createContext } from 'react'
-import { useUserNotifications } from './useUserNotifications'
+import {createContext} from 'react';
+import {useUserNotifications} from './useUserNotifications';
 
 export type UserNotificationsContextType = ReturnType<
-  typeof useUserNotifications
->
+	typeof useUserNotifications
+>;
 
 export const UserNotificationsContext = createContext<UserNotificationsContextType>(
-  null
-)
+	null
+);

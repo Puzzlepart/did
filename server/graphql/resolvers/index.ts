@@ -1,11 +1,11 @@
-export { ApiTokenResolver } from './apiToken'
-export { CustomerResolver } from './customer'
-export { LabelResolver } from './label'
-export { NotificationResolver } from './notification'
-export { OutlookCategoryResolver } from './outlookCategory'
-export { ProjectResolver } from './project'
-export { RoleResolver } from './role'
-export { SubscriptionResolver } from './subscription'
-export { ReportsResolver } from './reports'
-export { TimesheetResolver } from './timesheet'
-export { UserResolver } from './user'
+export {ApiTokenResolver} from './apiToken';
+export {CustomerResolver} from './customer';
+export {LabelResolver} from './label';
+export {NotificationResolver} from './notification';
+export {OutlookCategoryResolver} from './outlookCategory';
+export {ProjectResolver} from './project';
+export {RoleResolver} from './role';
+export {SubscriptionResolver} from './subscription';
+export {ReportsResolver} from './reports';
+export {TimesheetResolver} from './timesheet';
+export {UserResolver} from './user';

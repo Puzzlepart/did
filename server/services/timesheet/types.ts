@@ -1,43 +1,43 @@
-import { Project, TimesheetPeriodInput } from '../../graphql/resolvers/types'
+import {Project, TimesheetPeriodInput} from '../../graphql/resolvers/types';
 
-export interface IGetTimesheetParams {
-  startDate: string
-  endDate: string
-  locale: string
-  dateFormat: string
-  tzOffset: number
+export interface IGetTimesheetParameters {
+	startDate: string;
+	endDate: string;
+	locale: string;
+	dateFormat: string;
+	tzOffset: number;
 }
 
-export interface ISubmitPeriodParams {
-  /**
-   * Period to submit
-   */
-  period: TimesheetPeriodInput
+export interface ISubmitPeriodParameters {
+	/**
+	 * Period to submit
+	 */
+	period: TimesheetPeriodInput;
 
-  /**
-   * Timezone offset from client
-   */
-  tzOffset: number
+	/**
+	 * Timezone offset from client
+	 */
+	tzOffset: number;
 
-  /**
-   * Forecast
-   */
-  forecast?: boolean
+	/**
+	 * Forecast
+	 */
+	forecast?: boolean;
 }
 
-export interface IUnsubmitPeriodParams {
-  /**
-   * Period to unsubmit
-   */
-  period: TimesheetPeriodInput
+export interface IUnsubmitPeriodParameters {
+	/**
+	 * Period to unsubmit
+	 */
+	period: TimesheetPeriodInput;
 
-  /**
-   * Forecast
-   */
-  forecast?: boolean
+	/**
+	 * Forecast
+	 */
+	forecast?: boolean;
 }
 
-export interface IConnectEventsParams extends IGetTimesheetParams {
-  projects: Project[]
-  events: any[]
+export interface IConnectEventsParameters extends IGetTimesheetParameters {
+	projects: Project[];
+	events: any[];
 }

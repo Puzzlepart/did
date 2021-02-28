@@ -1,7 +1,7 @@
-import { History } from 'history'
-import { IProjectsParams } from '../types'
+import {History} from 'history';
+import {IProjectsParams} from '../types';
 
-export interface IProjectsReducerParams {
-  url: IProjectsParams
-  history: History
+export interface IProjectsReducerParameters {
+	url: IProjectsParams;
+	history: History;
 }

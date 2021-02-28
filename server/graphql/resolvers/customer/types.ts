@@ -1,76 +1,74 @@
-/* eslint-disable tsdoc/syntax */
-/* eslint-disable max-classes-per-file */
-import 'reflect-metadata'
-import { ObjectType, InputType, Field, ID } from 'type-graphql'
+import 'reflect-metadata';
+import {ObjectType, InputType, Field, ID} from 'type-graphql';
 
 /**
  * @category ObjectType
  */
 @ObjectType({
-  description: 'A type that describes a Customer',
-  simpleResolvers: true
+	description: 'A type that describes a Customer',
+	simpleResolvers: true
 })
 export class Customer {
-  @Field(() => ID)
-  key: string
+	@Field(() => ID)
+	key: string;
 
-  @Field()
-  name: string
+	@Field()
+	name: string;
 
-  @Field({ nullable: true, defaultValue: '' })
-  description: string
+	@Field({nullable: true, defaultValue: ''})
+	description: string;
 
-  @Field({ nullable: true, defaultValue: null })
-  webLink: string
+	@Field({nullable: true, defaultValue: null})
+	webLink: string;
 
-  @Field({ nullable: true, defaultValue: null })
-  externalSystemURL: string
+	@Field({nullable: true, defaultValue: null})
+	externalSystemURL: string;
 
-  @Field({ nullable: true, defaultValue: null })
-  icon: string
+	@Field({nullable: true, defaultValue: null})
+	icon: string;
 
-  @Field({ nullable: true, defaultValue: false })
-  inactive?: boolean
+	@Field({nullable: true, defaultValue: false})
+	inactive?: boolean;
 
-  /**
-   * Creates a Customer object from a CustomerInput object
-   *
-   * @param input - Input object
-   */
-  public fromInput(input: CustomerInput): Customer {
-    Object.assign(this, input)
-    return this
-  }
+	/**
+	 * Creates a Customer object from a CustomerInput object
+	 *
+	 * @param input - Input object
+	 */
+	public fromInput(input: CustomerInput): Customer {
+		Object.assign(this, input);
+		return this;
+	}
 }
 
 /**
  * @category InputType
  */
 @InputType({
-  description:
-    'Input object for Customer used in Mutation createOrUpdateCustomer'
+	description:
+		'Input object for Customer used in Mutation createOrUpdateCustomer'
 })
 export class CustomerInput {
-  @Field()
-  key: string
+	@Field()
+	key: string;
 
-  @Field()
-  name: string
+	@Field()
+	name: string;
 
-  @Field({ nullable: true, defaultValue: '' })
-  description: string
+	@Field({nullable: true, defaultValue: ''})
+	description: string;
 
-  @Field({ nullable: true, defaultValue: null })
-  webLink?: string
+	@Field({nullable: true, defaultValue: null})
+	webLink?: string;
 
-  @Field({ nullable: true, defaultValue: null })
-  externalSystemURL?: string
+	@Field({nullable: true, defaultValue: null})
+	externalSystemURL?: string;
 
-  @Field()
-  icon: string
+	@Field()
+	icon: string;
 
-  @Field({ nullable: true, defaultValue: false })
-  inactive?: boolean
+	@Field({nullable: true, defaultValue: false})
+	inactive?: boolean;
 }
 
 /**
@@ -79,7 +77,7 @@ export class CustomerInput {
  * @ignore
  */
 export interface ICustomersQueryVariables {
-  sortBy: string
+	sortBy: string;
 }
 
 /**
@@ -88,8 +86,8 @@ export interface ICustomersQueryVariables {
  * @ignore
  */
 export interface ICreateOrUpdateCustomerVariables {
-  customer: Customer
-  update: boolean
+	customer: Customer;
+	update: boolean;
 }
 
 /**
@@ -98,5 +96,5 @@ export interface ICreateOrUpdateCustomerVariables {
  * @ignore
  */
 export interface IDeleteCustomerVariables {
-  key: string
+	key: string;
 }

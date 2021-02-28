@@ -1,1 +1,1 @@
-export * from './useNotificationsQuery'
+export * from './useNotificationsQuery';

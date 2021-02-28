@@ -1,9 +1,9 @@
-import { LabelObject } from 'types'
+import {LabelObject} from 'types';
 
 export interface ILabelPickerProps {
-  className?: string
-  label: string
-  placeholder: string
-  defaultSelectedKeys?: string[]
-  onChange: (labels: LabelObject[]) => void
+	className?: string;
+	label: string;
+	placeholder: string;
+	defaultSelectedKeys?: string[];
+	onChange: (labels: LabelObject[]) => void;
 }

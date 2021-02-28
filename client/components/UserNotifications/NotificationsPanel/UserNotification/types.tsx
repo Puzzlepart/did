@@ -1,5 +1,5 @@
-import { NotificationModel } from '../../types'
+import {NotificationModel} from '../../types';
 
 export interface IUserNotificationProps {
-  model: NotificationModel
+	model: NotificationModel;
 }

@@ -1,17 +1,17 @@
-import { AuthChecker, ResolverData } from 'type-graphql'
-import { contains } from 'underscore'
-import { Context } from './context'
+import {AuthChecker, ResolverData} from 'type-graphql';
+import {contains} from 'underscore';
+import {Context} from './context';
 
 export interface IAuthOptions {
-  /**
-   * Requires user context and can cannot be called with an API token
-   */
-  userContext?: boolean
+	/**
+	 * Requires user context and can cannot be called with an API token
+	 */
+	userContext?: boolean;
 
-  /**
-   * Permission required for the resolver
-   */
-  permission?: string
+	/**
+	 * Permission required for the resolver
+	 */
+	permission?: string;
 }
 
 /**
@@ -21,16 +21,18 @@ export interface IAuthOptions {
  * @param param1 - Authentication options
  */
 export const authChecker: AuthChecker<Context, IAuthOptions> = (
-  { context }: ResolverData<Context>,
-  [authOptions]
+	{context}: ResolverData<Context>,
+	[authOptions]
 ) => {
-  if (!authOptions) {
-    return !!context.permissions
-  }
-  if (authOptions.userContext) {
-    return !!context.userId
-  }
-  if (authOptions.permission) {
-    return contains(context.permissions, authOptions.permission)
-  }
-}
+	if (!authOptions) {
+		return Boolean(context.permissions);
+	}
+
+	if (authOptions.userContext) {
+		return Boolean(context.userId);
+	}
+
+	if (authOptions.permission) {
+		return contains(context.permissions, authOptions.permission);
+	}
+};

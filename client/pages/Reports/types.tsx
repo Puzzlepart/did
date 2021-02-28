@@ -1,90 +1,89 @@
-/* eslint-disable tsdoc/syntax */
-import { IListGroups } from 'components/List/types'
-import { TFunction } from 'i18next'
-import { IContextualMenuItem } from 'office-ui-fabric-react'
-import { ReportsQuery } from 'types'
+import {IListGroups} from 'components/List/types';
+import {TFunction} from 'i18next';
+import {IContextualMenuItem} from 'office-ui-fabric-react';
+import {ReportsQuery} from 'types';
 
 /**
  * @category Reports
  */
 export interface IReportsQuery extends IContextualMenuItem {
-  /**
-   * Variables used for graphl query
-   */
-  variables: {
-    query: ReportsQuery
-    forecast?: boolean
-    sortAsc?: boolean
-  }
+	/**
+	 * Variables used for graphl query
+	 */
+	variables: {
+		query: ReportsQuery;
+		forecast?: boolean;
+		sortAsc?: boolean;
+	};
 
-  /**
-   * Export file name
-   */
-  exportFileName: string
+	/**
+	 * Export file name
+	 */
+	exportFileName: string;
 }
 
 /**
  * @ignore
  */
 export interface IGroupByOption extends IContextualMenuItem {
-  props: IListGroups
+	props: IListGroups;
 }
 
 /**
  * @category Reports
  */
 export interface IReportsSavedFilter extends IContextualMenuItem {
-  values: { [key: string]: any }
+	values: Record<string, any>;
 }
 
 /**
  * @category Reports
  */
 export interface IReportsState {
-  /**
-   * Time entries
-   */
-  timeentries?: any[]
+	/**
+	 * Time entries
+	 */
+	timeentries?: any[];
 
-  /**
-   * Filtered subset
-   */
-  subset?: any[]
+	/**
+	 * Filtered subset
+	 */
+	subset?: any[];
 
-  /**
-   * Filter panel open
-   */
-  isFiltersOpen?: boolean
+	/**
+	 * Filter panel open
+	 */
+	isFiltersOpen?: boolean;
 
-  /**
-   * Query
-   */
-  query?: IReportsQuery
+	/**
+	 * Query
+	 */
+	query?: IReportsQuery;
 
-  /**
-   * Group by properties
-   */
-  groupBy?: IListGroups
+	/**
+	 * Group by properties
+	 */
+	groupBy?: IListGroups;
 
-  /**
-   * Loading
-   */
-  loading?: boolean
+	/**
+	 * Loading
+	 */
+	loading?: boolean;
 
-  /**
-   * Is filtered
-   */
-  isFiltered?: boolean
+	/**
+	 * Is filtered
+	 */
+	isFiltered?: boolean;
 
-  /**
-   * Saved filters
-   */
-  savedFilters?: { [key: string]: IReportsSavedFilter }
+	/**
+	 * Saved filters
+	 */
+	savedFilters?: Record<string, IReportsSavedFilter>;
 
-  /**
-   * Active filter
-   */
-  filter?: IReportsSavedFilter
+	/**
+	 * Active filter
+	 */
+	filter?: IReportsSavedFilter;
 }
 
 /**
@@ -95,51 +94,51 @@ export interface IReportsState {
  * @param t - Translate function
  */
 export const getGroupByOptions = (t: TFunction): IGroupByOption[] => [
-  {
-    key: 'none',
-    text: t('common.none'),
-    props: {
-      fieldName: '.',
-      emptyGroupName: t('common.all')
-    }
-  },
-  {
-    key: 'resource.displayName',
-    text: t('common.employeeLabel'),
-    props: {
-      fieldName: 'resource.displayName',
-      emptyGroupName: ''
-    }
-  },
-  {
-    key: 'customer',
-    text: t('common.customer'),
-    props: {
-      fieldName: 'customer.name',
-      emptyGroupName: ''
-    }
-  },
-  {
-    key: 'project',
-    text: t('common.project'),
-    props: {
-      fieldName: 'project.name',
-      emptyGroupName: ''
-    }
-  },
-  {
-    key: 'week',
-    text: t('common.weekNumberLabel'),
-    props: {
-      fieldName: 'week',
-      emptyGroupName: ' '
-    }
-  }
-]
+	{
+		key: 'none',
+		text: t('common.none'),
+		props: {
+			fieldName: '.',
+			emptyGroupName: t('common.all')
+		}
+	},
+	{
+		key: 'resource.displayName',
+		text: t('common.employeeLabel'),
+		props: {
+			fieldName: 'resource.displayName',
+			emptyGroupName: ''
+		}
+	},
+	{
+		key: 'customer',
+		text: t('common.customer'),
+		props: {
+			fieldName: 'customer.name',
+			emptyGroupName: ''
+		}
+	},
+	{
+		key: 'project',
+		text: t('common.project'),
+		props: {
+			fieldName: 'project.name',
+			emptyGroupName: ''
+		}
+	},
+	{
+		key: 'week',
+		text: t('common.weekNumberLabel'),
+		props: {
+			fieldName: 'week',
+			emptyGroupName: ' '
+		}
+	}
+];
 
 /**
  * @category Reports
  */
-export interface IReportsParams {
-  query: string
+export interface IReportsParameters {
+	query: string;
 }

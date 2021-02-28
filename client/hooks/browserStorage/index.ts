@@ -1,1 +1,1 @@
-export * from './useBrowserStorage'
+export * from './useBrowserStorage';

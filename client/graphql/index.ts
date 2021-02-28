@@ -1,5 +1,4 @@
-/* eslint-disable tsdoc/syntax */
-// client/graphql/index.ts
+// Client/graphql/index.ts
 /**
  * GraphQL
  *
@@ -8,26 +7,26 @@
  * @see https://graphql.org/
  */
 
-import { ApolloClient, FetchPolicy } from '@apollo/client'
-import { InMemoryCache } from '@apollo/client/cache'
+import {ApolloClient, FetchPolicy} from '@apollo/client';
+import {InMemoryCache} from '@apollo/client/cache';
 
 /**
  * @ignore
  */
 export interface IError {
-  name: string
-  message: string
-  code: string
-  statusCode: string
+	name: string;
+	message: string;
+	code: string;
+	statusCode: string;
 }
 
 /**
  * @ignore
  */
 export interface IBaseResult {
-  success: boolean
-  error: IError
-  data: string
+	success: boolean;
+	error: IError;
+	data: string;
 }
 
 /**
@@ -38,14 +37,14 @@ export interface IBaseResult {
  * * Using cache-and-network as default fetchPolicy
  */
 export const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  uri: `${document.location.origin}/graphql`,
-  defaultOptions: { watchQuery: { fetchPolicy: 'cache-and-network' } }
-})
+	cache: new InMemoryCache(),
+	uri: `${document.location.origin}/graphql`,
+	defaultOptions: {watchQuery: {fetchPolicy: 'cache-and-network'}}
+});
 
-export { default as $context } from './context.gql'
+export {default as $context} from './context.gql';
 
 /**
  * @ignore
  */
-export { FetchPolicy }
+export {FetchPolicy};

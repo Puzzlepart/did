@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-import * as http from 'http'
-import app from './app'
-import env from './utils/env'
-const debug = require('debug')('server')
+import * as http from 'http';
+import app from './app';
+import env from './utils/env';
+const debug = require('debug')('server');
 
 /**
  * Start server on the specified port
@@ -10,41 +9,41 @@ const debug = require('debug')('server')
  * @param port - Port
  */
 export async function startServer(port: string) {
-  await app.setup()
-  app.instance.set('port', port)
+	await app.setup();
+	app.instance.set('port', port);
 
-  const server = http.createServer(app.instance)
+	const server = http.createServer(app.instance);
 
-  function onError(error: any) {
-    if (error.syscall !== 'listen') {
-      throw error
-    }
+	function onError(error: any) {
+		if (error.syscall !== 'listen') {
+			throw error;
+		}
 
-    const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port
+		const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
 
-    switch (error.code) {
-      case 'EACCES':
-        debug('\x1b[31m', `[${bind} requires elevated privileges]`)
-        process.exit(1)
-        break
-      case 'EADDRINUSE':
-        debug('\x1b[31m', `[${bind} is already in use]`)
-        process.exit(1)
-        break
-      default:
-        throw error
-    }
-  }
+		switch (error.code) {
+			case 'EACCES':
+				debug('\u001B[31m', `[${bind} requires elevated privileges]`);
+				process.exit(1);
+				break;
+			case 'EADDRINUSE':
+				debug('\u001B[31m', `[${bind} is already in use]`);
+				process.exit(1);
+				break;
+			default:
+				throw error;
+		}
+	}
 
-  function onListening() {
-    debug('\x1b[32m', `[Server listening on port ${port}]`)
-  }
+	function onListening() {
+		debug('\u001B[32m', `[Server listening on port ${port}]`);
+	}
 
-  server.listen(port)
-  server.on('error', onError)
-  server.on('listening', onListening)
+	server.listen(port);
+	server.on('error', onError);
+	server.on('listening', onListening);
 }
 
-export * from './app'
+export * from './app';
 
-startServer(env('PORT', '8080'))
+startServer(env('PORT', '8080'));

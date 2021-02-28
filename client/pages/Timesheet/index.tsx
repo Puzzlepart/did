@@ -1,27 +1,26 @@
-/* eslint-disable tsdoc/syntax */
-import * as React from 'react'
-import { Route, Switch, useRouteMatch } from 'react-router-dom'
-import { Timesheet } from './Timesheet'
+import * as React from 'react';
+import {Route, Switch, useRouteMatch} from 'react-router-dom';
+import {Timesheet} from './Timesheet';
 
 /**
  * @ignore
  */
 export const TimesheetPage = () => {
-  const match = useRouteMatch()
-  return (
-    <Switch>
-      <Route path={`${match.path}/:view/:week/:month/:year`}>
-        <Timesheet />
-      </Route>
-      <Route path={match.path}>
-        <Timesheet />
-      </Route>
-    </Switch>
-  )
-}
+	const match = useRouteMatch();
+	return (
+		<Switch>
+			<Route path={`${match.path}/:view/:week/:month/:year`}>
+				<Timesheet />
+			</Route>
+			<Route path={match.path}>
+				<Timesheet />
+			</Route>
+		</Switch>
+	);
+};
 
-export * from './Timesheet'
-export * from './types'
-export * from './hooks'
-export * from './TimesheetPeriod'
-export * from './TimesheetScope'
+export * from './Timesheet';
+export * from './types';
+export * from './hooks';
+export * from './TimesheetPeriod';
+export * from './TimesheetScope';

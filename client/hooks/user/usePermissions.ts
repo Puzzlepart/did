@@ -1,10 +1,10 @@
-import { AppContext } from 'AppContext'
-import getPermissions, { PERMISSION } from 'config/security/permissions'
-import { useContext } from 'react'
-import { useTranslation } from 'react-i18next'
-import { contains } from 'underscore'
+import {AppContext} from 'AppContext';
+import getPermissions, {PERMISSION} from 'config/security/permissions';
+import {useContext} from 'react';
+import {useTranslation} from 'react-i18next';
+import {contains} from 'underscore';
 
-export type UsePermissionsOptions = { permissionIds?: string[] }
+export type UsePermissionsOptions = {permissionIds?: string[]};
 
 /**
  * Permissions hook
@@ -15,18 +15,18 @@ export type UsePermissionsOptions = { permissionIds?: string[] }
  * and a function hasPermission that checks if the currently logged
  * on user has the specified permission.
  */
-export function usePermissions({ permissionIds }: UsePermissionsOptions = {}) {
-  const { t } = useTranslation()
-  const { user } = useContext(AppContext)
+export function usePermissions({permissionIds}: UsePermissionsOptions = {}) {
+	const {t} = useTranslation();
+	const {user} = useContext(AppContext);
 
-  let permissions = getPermissions(t)
+	let permissions = getPermissions(t);
 
-  if (permissionIds) {
-    permissions = permissions.filter((perm) => contains(permissionIds, perm.id))
-  }
+	if (permissionIds) {
+		permissions = permissions.filter(perm => contains(permissionIds, perm.id));
+	}
 
-  return {
-    permissions,
-    hasPermission: (permission: PERMISSION) => user.hasPermission(permission)
-  }
+	return {
+		permissions,
+		hasPermission: (permission: PERMISSION) => user.hasPermission(permission)
+	};
 }

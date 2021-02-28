@@ -1,12 +1,11 @@
-/* eslint-disable tsdoc/syntax */
 import {
-  BaseFilter,
-  CustomerFilter,
-  ProjectFilter,
-  ResourceFilter
-} from 'components/FilterPanel/Filters'
-import { TFunction } from 'i18next'
-import { IReportsSavedFilter } from './types'
+	BaseFilter,
+	CustomerFilter,
+	ProjectFilter,
+	ResourceFilter
+} from 'components/FilterPanel/Filters';
+import {TFunction} from 'i18next';
+import {IReportsSavedFilter} from './types';
 
 /**
  * Returns filter config for Reports
@@ -17,15 +16,15 @@ import { IReportsSavedFilter } from './types'
  * @param t - Translate function
  */
 export default (filter: IReportsSavedFilter, t: TFunction): BaseFilter[] => [
-  new ResourceFilter(
-    'resource.id',
-    'resource.displayName',
-    t('common.employeeLabel')
-  ).setDefaults(filter?.values),
-  new CustomerFilter('customer.name', t('common.customer')).setDefaults(
-    filter?.values
-  ),
-  new ProjectFilter('project.name', t('common.project')).setDefaults(
-    filter?.values
-  )
-]
+	new ResourceFilter(
+		'resource.id',
+		'resource.displayName',
+		t('common.employeeLabel')
+	).setDefaults(filter?.values),
+	new CustomerFilter('customer.name', t('common.customer')).setDefaults(
+		filter?.values
+	),
+	new ProjectFilter('project.name', t('common.project')).setDefaults(
+		filter?.values
+	)
+];

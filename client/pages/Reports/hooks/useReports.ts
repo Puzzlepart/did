@@ -1,14 +1,13 @@
-/* eslint-disable tsdoc/syntax */
-import { useQuery } from '@apollo/client'
-import { useLayoutEffect, useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useHistory, useParams } from 'react-router-dom'
-import initFilters from '../filters'
-import { getQueryPresets } from '../queries'
-import { DATA_UPDATED, INIT } from '../reducer/actions'
-import { IReportsParams } from '../types'
-import $timeentries from './timeentries.gql'
-import { useReportsReducer } from './useReportsReducer'
+import {useQuery} from '@apollo/client';
+import {useLayoutEffect, useMemo} from 'react';
+import {useTranslation} from 'react-i18next';
+import {useHistory, useParams} from 'react-router-dom';
+import initFilters from '../filters';
+import {getQueryPresets} from '../queries';
+import {DATA_UPDATED, INIT} from '../reducer/actions';
+import {IReportsParams} from '../types';
+import $timeentries from './timeentries.gql';
+import {useReportsReducer} from './useReportsReducer';
 
 /**
  * Hook for Reports
@@ -25,30 +24,33 @@ import { useReportsReducer } from './useReportsReducer'
  * @category Reports Hooks
  */
 export function useReports() {
-  const { t } = useTranslation()
-  const params = useParams<IReportsParams>()
-  const history = useHistory()
-  const queries = getQueryPresets(t)
-  const { state, dispatch } = useReportsReducer(queries)
-  const query = useQuery($timeentries, {
-    skip: !state.query,
-    fetchPolicy: 'cache-first',
-    variables: state.query?.variables
-  })
-  useLayoutEffect(() => dispatch(INIT()), [dispatch])
-  useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query, dispatch])
-  useLayoutEffect(() => history.push(`/reports/${state.query?.key || ''}`), [
-    state.query,
-    history
-  ])
-  const filters = useMemo(() => initFilters(state.filter, t), [state.filter, t])
-  return {
-    state,
-    dispatch,
-    params,
-    queries,
-    history,
-    filters,
-    t
-  }
+	const {t} = useTranslation();
+	const parameters = useParams<IReportsParams>();
+	const history = useHistory();
+	const queries = getQueryPresets(t);
+	const {state, dispatch} = useReportsReducer(queries);
+	const query = useQuery($timeentries, {
+		skip: !state.query,
+		fetchPolicy: 'cache-first',
+		variables: state.query?.variables
+	});
+	useLayoutEffect(() => {
+		dispatch(INIT());
+	}, [dispatch]);
+	useLayoutEffect(() => {
+		dispatch(DATA_UPDATED({query}));
+	}, [query, dispatch]);
+	useLayoutEffect(() => {
+		history.push(`/reports/${state.query?.key || ''}`);
+	}, [state.query, history]);
+	const filters = useMemo(() => initFilters(state.filter, t), [state.filter, t]);
+	return {
+		state,
+		dispatch,
+		params: parameters,
+		queries,
+		history,
+		filters,
+		t
+	};
 }
