@@ -1,25 +1,14 @@
 import { useId } from '@uifabric/react-hooks'
-import {
-  ChoiceGroup,
-  DefaultButton,
-  format,
-  Icon,
-  Panel
-} from 'office-ui-fabric-react'
+import { UserMessage } from 'components/UserMessage'
+import { ChoiceGroup, Icon, Link, Panel } from 'office-ui-fabric-react'
 import React, { FunctionComponent, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { first } from 'underscore'
-import { exportExcel } from 'utils/exportExcel'
-import { client } from '../../../graphql'
-import columns from '../columns'
 import styles from '../UserMenu.module.scss'
-import $timeentries from './timeentries.gql'
-import { getExportTypes, IExportType } from './types'
+import { IExportType } from './types'
 
 export const ExportHours: FunctionComponent = () => {
   const { t } = useTranslation()
-  const exportTypes = getExportTypes(t)
-  const [exportType, setExportType] = useState(first(exportTypes))
+  const [exportType, setExportType] = useState(null)
   const [panelOpen, setPanelOpen] = useState(false)
   const toggleId = useId('toggle-panel')
 
@@ -38,21 +27,6 @@ export const ExportHours: FunctionComponent = () => {
     }
   }
 
-  const onExport = async () => {
-    const { data } = await client.query({
-      query: $timeentries,
-      variables: exportType.variables
-    })
-    await exportExcel(data.timeentries, {
-      columns: columns(t),
-      fileName: format(
-        exportType.exportFileName,
-        new Date().toDateString().split(' ').join('-')
-      )
-    })
-    setPanelOpen(false)
-  }
-
   return (
     <>
       <a
@@ -69,15 +43,17 @@ export const ExportHours: FunctionComponent = () => {
         onDismiss={togglePanel}
         isLightDismiss={true}>
         <ChoiceGroup
-          defaultSelectedKey={exportType.key}
+          defaultSelectedKey={exportType?.key}
           onChange={(_eve, option: IExportType) => setExportType(option)}
-          options={getExportTypes(t)}
+          options={[]}
         />
-        <DefaultButton
-          text={t('common.export')}
-          styles={{ root: { marginTop: 20, width: '100%' } }}
-          onClick={onExport}
-        />
+        <UserMessage>
+          Export my hours is currently disabled. See
+          <Link href='https://github.com/Puzzlepart/did/issues/846'>
+            Issue #846 on GitHub
+          </Link>{' '}
+          for more details.
+        </UserMessage>
       </Panel>
     </>
   )

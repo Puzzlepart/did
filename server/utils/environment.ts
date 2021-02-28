@@ -4,7 +4,7 @@ const debug = createDebug('environment')
 
 /**
  * Get environment variable by key with optional fallbackvalue
- * 
+ *
  * Makes it easier to work with process.env.
  *
  * @param key - Key
@@ -13,7 +13,11 @@ const debug = createDebug('environment')
 export function environment(key: string, fallbackValue: string = null) {
   const value = process.env[key]
   if (isBlank(value)) {
-    debug('Missing environment variable %s. Using %s instead.', key, fallbackValue)
+    debug(
+      'Missing environment variable %s. Using %s instead.',
+      key,
+      fallbackValue
+    )
     return fallbackValue || null
   }
   return value

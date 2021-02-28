@@ -113,15 +113,16 @@ ___
 
 ### useNotificationsQuery
 
-▸ **useNotificationsQuery**(`user`: ContextUser): *object*
+▸ **useNotificationsQuery**(`user`: ContextUser, `fetchPolicy?`: FetchPolicy): *object*
 
 Notificatins query hook
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`user` | ContextUser | Context user    |
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`user` | ContextUser | - | Context user    |
+`fetchPolicy` | FetchPolicy | 'cache-first' | - |
 
 **Returns:** *object*
 
@@ -130,4 +131,4 @@ Name | Type |
 `notifications` | Notification[] |
 `refetch` | (`delay?`: *number*) => *void* |
 
-Defined in: [client/hooks/notifications/useNotificationsQuery.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/hooks/notifications/useNotificationsQuery.ts#L15)
+Defined in: [client/hooks/notifications/useNotificationsQuery.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/hooks/notifications/useNotificationsQuery.ts#L16)

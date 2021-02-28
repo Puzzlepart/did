@@ -85,10 +85,11 @@ All are built using React Function components and Hooks.
 ### Reports Functions
 
 - [SaveFilterForm](pages.md#savefilterform)
-- [getQueryPresets](pages.md#getquerypresets)
+- [useQueryPresets](pages.md#usequerypresets)
 
 ### Reports Hooks Functions
 
+- [useReportQuery](pages.md#usereportquery)
 - [useReports](pages.md#usereports)
 - [useReportsReducer](pages.md#usereportsreducer)
 - [useUpdateUserConfiguration](pages.md#useupdateuserconfiguration)
@@ -400,11 +401,11 @@ Defined in: [client/pages/Reports/SaveFilterForm/index.tsx:27](https://github.co
 
 ___
 
-### getQueryPresets
+### useQueryPresets
 
-▸ **getQueryPresets**<T\>(`t`: TFunction): T[]
+▸ **useQueryPresets**<T\>(): T[]
 
-Get query presets
+Use query presets
 
 #### Type parameters:
 
@@ -412,19 +413,31 @@ Name | Default |
 :------ | :------ |
 `T` | [*IReportsQuery*](../interfaces/pages.ireportsquery.md) |
 
-#### Parameters:
-
-Name | Type | Description |
-:------ | :------ | :------ |
-`t` | TFunction | Translate function    |
-
 **Returns:** T[]
 
-Defined in: [client/pages/Reports/queries.tsx:117](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/queries.tsx#L117)
+Defined in: client/pages/Reports/hooks/useQueryPresets.tsx:116
 
 ___
 
 ## Reports Hooks Functions
+
+### useReportQuery
+
+▸ **useReportQuery**(`__namedParameters`: *Object*): *void*
+
+Hook for Reports Query
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`__namedParameters` | *Object* |
+
+**Returns:** *void*
+
+Defined in: client/pages/Reports/hooks/useReportsQuery.ts:13
+
+___
 
 ### useReports
 
@@ -436,7 +449,7 @@ Hook for Reports
 * Get URL params using useParams
 * Get queries using getQueries
 * Using reducer from /reducer
-* Using query with timeentries.gql
+* Using useReportQuery
 * Layout effect for updating URL when changing query
 * Layout effects for initialiing state and updating state
   when the query is reloaded
@@ -453,7 +466,7 @@ Name | Type |
 `state` | [*IReportsState*](../interfaces/pages.ireportsstate.md) |
 `t` | TFunction |
 
-Defined in: [client/pages/Reports/hooks/useReports.ts:27](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReports.ts#L27)
+Defined in: [client/pages/Reports/hooks/useReports.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReports.ts#L25)
 
 ___
 

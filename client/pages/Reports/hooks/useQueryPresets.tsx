@@ -1,8 +1,9 @@
 /* eslint-disable tsdoc/syntax */
 import { DateObject } from 'DateUtils'
 import { TFunction } from 'i18next'
+import { useTranslation } from 'react-i18next'
 import { capitalize } from 'underscore.string'
-import { IReportsQuery } from './types'
+import { IReportsQuery } from '../types'
 
 /**
  * Get last month query
@@ -108,13 +109,12 @@ const forecastQuery = (now: DateObject, t: TFunction) => {
 }
 
 /**
- * Get query presets
+ * Use query presets
  *
  * @category Reports
- *
- * @param t - Translate function
  */
-export function getQueryPresets<T = IReportsQuery>(t: TFunction): T[] {
+export function useQueryPresets<T = IReportsQuery>(): T[] {
+  const { t } = useTranslation()
   const now = new DateObject()
   return [
     lastMonthQuery,
