@@ -109,7 +109,7 @@ const forecastQuery = (now: DateObject, t: TFunction) => {
 
 /**
  * Get query presets
- * 
+ *
  * @category Reports
  *
  * @param t - Translate function

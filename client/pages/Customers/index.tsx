@@ -4,7 +4,7 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { Customers } from './Customers'
 
 /**
- * @ignore 
+ * @ignore
  */
 export const CustomersPage = () => {
   const match = useRouteMatch()
@@ -24,4 +24,3 @@ export const CustomersPage = () => {
 }
 
 export * from './Customers'
-

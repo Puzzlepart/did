@@ -6,7 +6,9 @@ import { ICustomerLinkProps } from './types'
 /**
  * @category Function Component
  */
-export const CustomerLink: FunctionComponent<ICustomerLinkProps> = ({ customer }: ICustomerLinkProps) => (
+export const CustomerLink: FunctionComponent<ICustomerLinkProps> = ({
+  customer
+}: ICustomerLinkProps) => (
   <Link to={`/customers/search/${customer?.key}`}>{customer?.name}</Link>
 )
 

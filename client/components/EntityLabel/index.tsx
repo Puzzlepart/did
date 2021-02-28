@@ -9,7 +9,10 @@ import { IEntityLabelProps } from './types'
 /**
  * @category Function Component
  */
-export const EntityLabel: FunctionComponent<IEntityLabelProps> = ({ size, label }: IEntityLabelProps) => {
+export const EntityLabel: FunctionComponent<IEntityLabelProps> = ({
+  size,
+  label
+}: IEntityLabelProps) => {
   const { t } = useTranslation()
   const className = [styles.root]
   // eslint-disable-next-line default-case

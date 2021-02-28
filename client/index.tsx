@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 /**
  * Main entry point for the App
- * 
+ *
  * @module .
  */
 import { ApolloProvider } from '@apollo/client'
@@ -61,4 +61,3 @@ export const boostrap = async () => {
 boostrap()
 
 export { App }
-

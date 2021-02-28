@@ -21,7 +21,7 @@ import { useReportsReducer } from './useReportsReducer'
  * * Layout effect for updating URL when changing query
  * * Layout effects for initialiing state and updating state
  *   when the query is reloaded
- * 
+ *
  * @category Reports Hooks
  */
 export function useReports() {

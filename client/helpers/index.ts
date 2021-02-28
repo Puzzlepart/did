@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 /**
  * Reusable helper functions
- * 
+ *
  * @module Helpers
  */
 import get from 'get-value'
@@ -9,7 +9,7 @@ import set from 'set-value'
 
 /**
  * Get value from object using get-value
- * 
+ *
  * @see https://www.npmjs.com/package/get-value
  *
  * @param obj - Obj
@@ -22,7 +22,7 @@ export function getValue<T = any>(obj: any, exp: string, defaultValue?: T): T {
 
 /**
  * Set value in object using set-value
- * 
+ *
  * @see https://www.npmjs.com/package/set-value
  *
  * @param obj - Obj

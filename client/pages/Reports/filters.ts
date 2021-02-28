@@ -10,7 +10,7 @@ import { IReportsSavedFilter } from './types'
 
 /**
  * Returns filter config for Reports
- * 
+ *
  * @ignore
  *
  * @param filter - The active filter

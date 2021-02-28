@@ -1,7 +1,7 @@
 import { PERMISSION } from 'config/security'
-import React, { FunctionComponent, useContext } from 'react'
+import React, { FunctionComponent } from 'react'
 import { Redirect, Route, RouteProps } from 'react-router-dom'
-import { AppContext } from './AppContext'
+import { usePermissions } from './hooks'
 
 export interface IProtectedRouteProps extends RouteProps {
   /**
@@ -16,11 +16,10 @@ export const ProtectedRoute: FunctionComponent<IProtectedRouteProps> = ({
   permission,
   children
 }: IProtectedRouteProps) => {
-  const { user } = useContext(AppContext)
-  const redirect = !user.hasPermission(permission)
+  const { hasPermission } = usePermissions()
   return (
     <Route exact={exact} path={path}>
-      {redirect ? <Redirect to='/' /> : children}
+      {!hasPermission(permission) ? <Redirect to='/' /> : children}
     </Route>
   )
 }

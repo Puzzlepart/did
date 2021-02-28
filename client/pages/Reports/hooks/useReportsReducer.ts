@@ -10,7 +10,7 @@ import createReducer from '../reducer'
  * Use Reports reducer
  *
  * @category Reports Hooks
- * 
+ *
  * @param queries - Queries
  */
 export function useReportsReducer(queries: IReportsQuery[]) {

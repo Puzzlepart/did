@@ -3,7 +3,7 @@ import {
   Callout,
   DateRangeType,
   DayOfWeek,
-  DirectionalHint, 
+  DirectionalHint,
   FirstWeekOfYear,
   FocusTrapZone,
   TextField

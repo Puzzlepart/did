@@ -9,7 +9,9 @@ import { IFilterItemProps } from './types'
 /**
  * @category Function Component
  */
-export const FilterItem: FunctionComponent<IFilterItemProps> = (props: IFilterItemProps) => {
+export const FilterItem: FunctionComponent<IFilterItemProps> = (
+  props: IFilterItemProps
+) => {
   const { t } = useTranslation()
   const selectedKeys = props.filter.selected.map((f) => f.key)
   const [searchTerm, onSearch] = useState<string>('')

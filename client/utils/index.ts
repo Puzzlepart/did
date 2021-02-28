@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 /**
  * Reusable utility functions
- * 
+ *
  * @module Utils
  */
 export * from './sleep'

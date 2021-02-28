@@ -212,7 +212,7 @@ ___
 
 • `Const` **PermissionList**: *FunctionComponent*<[*IPermissionListProps*](../interfaces/components.ipermissionlistprops.md)\>
 
-Defined in: [client/components/PermissionList/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/PermissionList/index.tsx#L12)
+Defined in: [client/components/PermissionList/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/PermissionList/index.tsx#L11)
 
 ___
 

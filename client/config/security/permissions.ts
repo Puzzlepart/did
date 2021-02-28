@@ -42,6 +42,13 @@ export interface IPermission {
   disabled?: boolean
 }
 
+/**
+ * Get permissions
+ *
+ * Specifiy translate function for i18n
+ *
+ * @param t - Translate funcion
+ */
 export default (t: TFunction): IPermission[] => [
   {
     id: PERMISSION.ACCESS_TIMESHEET,

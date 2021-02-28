@@ -5,7 +5,7 @@ import { ITimesheetParams } from './types'
 
 /**
  * Handles a scope, the period of time between a startDateTime and endDateTime
- * 
+ *
  * @category Timesheet
  */
 export class TimesheetScope {

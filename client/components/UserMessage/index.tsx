@@ -12,7 +12,7 @@ import styles from './UserMessage.module.scss'
 
 /**
  * A component that supports a MessageBar with markdown using react-markdown
- * 
+ *
  * @category Function Component
  */
 export const UserMessage: FunctionComponent<IUserMessageProps> = (
@@ -55,4 +55,3 @@ export const UserMessage: FunctionComponent<IUserMessageProps> = (
 
 export * from './types'
 export * from './useMessage'
-

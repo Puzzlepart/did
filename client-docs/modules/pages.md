@@ -137,7 +137,7 @@ ___
 
 • `Const` **Projects**: FunctionComponent
 
-Defined in: [client/pages/Projects/Projects.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/Projects.tsx#L17)
+Defined in: [client/pages/Projects/Projects.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/Projects.tsx#L18)
 
 ___
 

@@ -1,5 +1,4 @@
 /* eslint-disable tsdoc/syntax */
-import { AppContext } from 'AppContext'
 import { PERMISSION } from 'config/security/permissions'
 import {
   MessageBar,
@@ -8,21 +7,22 @@ import {
   PivotItem
 } from 'office-ui-fabric-react'
 import { CustomerForm } from 'pages/Customers/CustomerForm'
-import React, { FunctionComponent, useContext } from 'react'
+import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
+import { usePermissions } from '../../hooks'
 import { CustomersContext } from './context'
 import { CustomerDetails } from './CustomerDetails'
 import { CustomerList } from './CustomerList'
+import { useCustomers } from './hooks/useCustomers'
 import { CHANGE_VIEW } from './reducer/actions'
 import { CustomersView } from './types'
-import { useCustomers } from './hooks/useCustomers'
 
 /**
  * @category Function Component
  */
 export const Customers: FunctionComponent = () => {
   const { t } = useTranslation()
-  const { user } = useContext(AppContext)
+  const { hasPermission } = usePermissions()
   const { state, dispatch, context, view } = useCustomers()
 
   return (
@@ -46,7 +46,7 @@ export const Customers: FunctionComponent = () => {
           <CustomerList />
           {state.selected && <CustomerDetails />}
         </PivotItem>
-        {user.hasPermission(PERMISSION.MANAGE_CUSTOMERS) && (
+        {hasPermission(PERMISSION.MANAGE_CUSTOMERS) && (
           <PivotItem
             itemID='new'
             itemKey='new'

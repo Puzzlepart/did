@@ -2,7 +2,7 @@
 // client/components/index.ts
 /**
  * Reusable React Function components.
- * 
+ *
  * @module Components
  */
 export * from './Autocomplete'

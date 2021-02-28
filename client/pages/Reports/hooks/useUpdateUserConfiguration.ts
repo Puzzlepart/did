@@ -6,9 +6,9 @@ import $updateUserConfiguration from '../../../graphql/updateUserConfiguration.g
 
 /**
  * Use update user configuration
- * 
+ *
  * @category Reports Hooks
- * 
+ *
  * @param config - Configuration
  */
 export function useUpdateUserConfiguration<T = any>(config: T) {

@@ -1,10 +1,10 @@
 /* eslint-disable tsdoc/syntax */
-import { AppContext } from 'AppContext'
 import { PERMISSION } from 'config/security/permissions'
 import { Pivot, PivotItem } from 'office-ui-fabric-react'
-import React, { useContext } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
+import { usePermissions } from '../../hooks'
 import styles from './Admin.module.scss'
 import { ApiTokens } from './ApiTokens'
 import { Labels } from './Labels'
@@ -17,7 +17,7 @@ import { Users } from './Users'
  */
 export const Admin = () => {
   const { t } = useTranslation()
-  const { user } = useContext(AppContext)
+  const { hasPermission } = usePermissions()
   const { view } = useParams<{ view: string }>()
   const history = useHistory()
 
@@ -27,7 +27,7 @@ export const Admin = () => {
   return (
     <div className={styles.root}>
       <Pivot selectedKey={view || 'users'} onLinkClick={onPivotClick}>
-        {user.hasPermission(PERMISSION.MANAGE_USERS) && (
+        {hasPermission(PERMISSION.MANAGE_USERS) && (
           <PivotItem
             className={styles.tab}
             itemKey='users'
@@ -50,7 +50,7 @@ export const Admin = () => {
           itemIcon='Label'>
           <Labels />
         </PivotItem>
-        {user.hasPermission(PERMISSION.MANAGE_ROLESPERMISSIONS) && (
+        {hasPermission(PERMISSION.MANAGE_ROLESPERMISSIONS) && (
           <PivotItem
             className={styles.tab}
             itemKey='rolesPermissions'

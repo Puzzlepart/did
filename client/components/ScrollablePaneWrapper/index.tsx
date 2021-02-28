@@ -5,7 +5,11 @@ import React, { FunctionComponent } from 'react'
 /**
  * @category Function Component
  */
-export const ScrollablePaneWrapper:FunctionComponent<any> = ({ children, condition, height }) =>
+export const ScrollablePaneWrapper: FunctionComponent<any> = ({
+  children,
+  condition,
+  height
+}) =>
   condition ? (
     <div style={{ position: 'relative', height }}>
       <ScrollablePane

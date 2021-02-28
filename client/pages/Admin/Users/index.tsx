@@ -15,11 +15,11 @@ import $users from './users.gql'
 
 /**
  * Manage users
- * 
+ *
  * * See active users
  * * Add new users
  * * Edit users
- * 
+ *
  * @category Function Component
  */
 export const Users = () => {

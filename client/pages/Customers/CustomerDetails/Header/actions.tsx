@@ -1,15 +1,19 @@
-import { AppContext } from 'AppContext'
+/* eslint-disable tsdoc/syntax */
 import { PERMISSION } from 'config/security/permissions'
 import { DefaultButton } from 'office-ui-fabric-react'
 import { CustomersContext } from 'pages/Customers/context'
 import React, { FunctionComponent, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { usePermissions } from '../../../../hooks'
 import { CustomerForm } from '../../CustomerForm'
 import styles from './Header.module.scss'
 
-export const Actions: FunctionComponent = () => {
+/**
+ * @category Customers
+ */
+export const CustomerActions: FunctionComponent = () => {
   const { t } = useTranslation()
-  const { user } = useContext(AppContext)
+  const { hasPermission } = usePermissions()
   const { state, loading, refetch } = useContext(CustomersContext)
   const [showEditPanel, setShowEditPanel] = useState(false)
   return (
@@ -34,7 +38,7 @@ export const Actions: FunctionComponent = () => {
       </div>
       <div
         className={styles.actionItem}
-        hidden={!user.hasPermission(PERMISSION.MANAGE_CUSTOMERS)}>
+        hidden={!hasPermission(PERMISSION.MANAGE_CUSTOMERS)}>
         <DefaultButton
           text={t('common.editLabel')}
           iconProps={{ iconName: 'Edit' }}

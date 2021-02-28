@@ -17,7 +17,9 @@ import { useAutocomplete } from './useAutocomplete'
 /**
  * @category Function Component
  */
-export const Autocomplete: FunctionComponent<IAutocompleteProps> =(props: IAutocompleteProps) =>{
+export const Autocomplete: FunctionComponent<IAutocompleteProps> = (
+  props: IAutocompleteProps
+) => {
   const {
     state,
     className,

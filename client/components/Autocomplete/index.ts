@@ -3,4 +3,3 @@ export * from './types'
 export * from './useAutocomplete'
 export * from './useAutocompleteEvents'
 export * from './SuggestionItem'
-

@@ -89,7 +89,7 @@ export interface IReportsState {
 
 /**
  * Get group by options
- * 
+ *
  * @ignore
  *
  * @param t - Translate function

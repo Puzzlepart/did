@@ -14,7 +14,7 @@ export const ProjectList: FunctionComponent<IProjectListProps> = (
   props: IProjectListProps
 ) => {
   const { t } = useTranslation()
-  const [items, setItems] = useState([...props.items || []])
+  const [items, setItems] = useState([...(props.items || [])])
   const [showInactive, setShowInactive] = useState(false)
 
   useEffect(

@@ -1,21 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
-import * as securityConfig from 'config/security'
-import React, { FunctionComponent, useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
-import { contains } from 'underscore'
+import React, { FunctionComponent } from 'react'
+import { usePermissions } from '../../hooks'
 import styles from './PermissionList.module.scss'
 import { IPermissionListProps } from './types'
 
 /**
  * @category Function Component
  */
-export const PermissionList:FunctionComponent<IPermissionListProps> = ({ permissionIds }: IPermissionListProps) => {
-  const { t } = useTranslation()
-  const permissions = useMemo(() => {
-    return securityConfig
-      .permissions(t)
-      .filter((perm) => contains(permissionIds, perm.id))
-  }, [permissionIds, t])
+export const PermissionList: FunctionComponent<IPermissionListProps> = ({
+  permissionIds
+}: IPermissionListProps) => {
+  const { permissions } = usePermissions({ permissionIds })
   return (
     <div className={styles.root}>
       <div className={styles.container}>

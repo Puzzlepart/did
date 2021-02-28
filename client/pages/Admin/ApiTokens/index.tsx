@@ -17,11 +17,11 @@ import $tokens from './tokens.gql'
 
 /**
  * Component for handling API tokens.
- * 
+ *
  * * See created API tokens
  * * Create new API tokens
  * * Delete existing API tokens
- * 
+ *
  * @category Function Component
  */
 export const ApiTokens: FunctionComponent = () => {

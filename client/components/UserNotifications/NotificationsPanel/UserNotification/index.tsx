@@ -10,7 +10,9 @@ import styles from './UserNotificationMessage.module.scss'
 /**
  * @category Function Component
  */
-export const UserNotification: FunctionComponent<IUserNotificationProps> = ({ model }: IUserNotificationProps) => {
+export const UserNotification: FunctionComponent<IUserNotificationProps> = ({
+  model
+}: IUserNotificationProps) => {
   const { t } = useTranslation()
   const { dismissNotification } = React.useContext(UserNotificationsContext)
   return (

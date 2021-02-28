@@ -10,7 +10,9 @@ export type IHotkeyModal = GlobalHotKeysProps & IModalProps
 /**
  * @category Function Component
  */
-export const HotkeyModal: FunctionComponent<IHotkeyModal> = (props: IHotkeyModal) => {
+export const HotkeyModal: FunctionComponent<IHotkeyModal> = (
+  props: IHotkeyModal
+) => {
   const { t } = useTranslation()
   return (
     <Modal

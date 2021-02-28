@@ -7,7 +7,10 @@ import { IDurationColumnProps } from './types'
 /**
  * @category Function Component
  */
-export const DurationColumn: FunctionComponent<IDurationColumnProps> = ({ row, column }: IDurationColumnProps) => {
+export const DurationColumn: FunctionComponent<IDurationColumnProps> = ({
+  row,
+  column
+}: IDurationColumnProps) => {
   const { t } = useTranslation()
   const style = { ...getValue<any>(column, 'data.style', {}) }
 

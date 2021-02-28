@@ -7,7 +7,9 @@ import { IMobileHeaderProps } from './types'
 /**
  * @category Function Component
  */
-export const MobileHeader: FunctionComponent<IMobileHeaderProps> = (props: IMobileHeaderProps) => {
+export const MobileHeader: FunctionComponent<IMobileHeaderProps> = (
+  props: IMobileHeaderProps
+) => {
   return (
     <div className={styles.root}>
       <Icon iconName={props.iconName} className={styles.headerIcon} />

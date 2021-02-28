@@ -2,9 +2,9 @@
 // client/graphql/index.ts
 /**
  * GraphQL
- * 
+ *
  * @module GraphQL
- * 
+ *
  * @see https://graphql.org/
  */
 
@@ -31,8 +31,8 @@ export interface IBaseResult {
 }
 
 /**
- * Initializing our Apollo Client 
- * 
+ * Initializing our Apollo Client
+ *
  * * Using InMemoryCache
  * * Using url /graphql
  * * Using cache-and-network as default fetchPolicy

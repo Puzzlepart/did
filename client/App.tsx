@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 /**
  * The App component
- * 
+ *
  * @module App
  */
 import { MobileHeader } from 'components/MobileHeader'
@@ -14,7 +14,14 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import styles from './App.module.scss'
 import { AppContext, IAppContext } from './AppContext'
 import { useNotificationsQuery } from './hooks'
-import { AdminPage, CustomersPage, Home, ProjectsPage, ReportsPage, TimesheetPage } from './pages'
+import {
+  AdminPage,
+  CustomersPage,
+  Home,
+  ProjectsPage,
+  ReportsPage,
+  TimesheetPage
+} from './pages'
 import { ProtectedRoute as Route } from './ProtectedRoute'
 
 export const App: FunctionComponent<IAppContext> = (context: IAppContext) => {

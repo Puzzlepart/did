@@ -7,7 +7,7 @@ import { useAutocompleteEvents } from './useAutocompleteEvents'
 
 /**
  * Hook for Autocomplete
- * 
+ *
  * @category Autocomplete
  *
  * @param props - Props
