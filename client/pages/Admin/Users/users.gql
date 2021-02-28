@@ -1,4 +1,4 @@
-query Users {
+query UsersAdmin {
   activeDirectoryUsers {
     id
     displayName

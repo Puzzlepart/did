@@ -35,6 +35,10 @@ Folder/File | Description
 
 **NB: Did should be developed with node >=12.18.3**
 
+
+
+### Getting started
+
 1. Check out the dev branch
 2. Run `npm install`
 3. Run `npm run-script create-env` to create your own `.env` file for local testing
@@ -48,6 +52,25 @@ Folder/File | Description
 The following permissions are required by Azure App Registration:
 
 ![image-20201104173614079](@assets/image-20201104173614079.png)
+
+### GraphQL
+
+The extension [Apollo extension for VS Code](https://www.apollographql.com/docs/devtools/editor-plugins/) is recommended for working with GraphQL in vscode.
+
+> The Apollo [VS Code extension](https://marketplace.visualstudio.com/items?itemName=apollographql.vscode-apollo) provides an all-in-one tooling experience for developing apps with Apollo.
+>
+> The extension enables you to:
+>
+> - Add [syntax highlighting](https://www.apollographql.com/docs/devtools/editor-plugins/#syntax-highlighting) for GraphQL files and gql templates inside JavaScript files
+> - Get instant feedback and [intelligent autocomplete](https://www.apollographql.com/docs/devtools/editor-plugins/#intelligent-autocomplete) for fields, arguments, types, and variables as you write queries
+> - Manage client side schema alongside remote schema
+> - See [performance information](https://www.apollographql.com/docs/devtools/editor-plugins/#performance-insights) inline with your query definitions
+> - Validate field and argument usage in operations
+> - [Navigate projects more easily](https://www.apollographql.com/docs/devtools/editor-plugins/#navigating-projects) with jump-to and peek-at definitions
+> - Manage [client-only](https://www.apollographql.com/docs/devtools/editor-plugins/#client-only-schemas) schemas
+> - [Switch graph variants](https://www.apollographql.com/docs/devtools/editor-plugins/#graph-variant-switching) to work with schemas running on different environments
+
+
 
 ## Documentation
 

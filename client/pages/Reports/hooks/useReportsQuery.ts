@@ -7,7 +7,7 @@ import $reports from './reports.gql'
 
 /**
  * Hook for Reports Query.
- * 
+ *
  * Using useQuery with reports.gql query, and dispatches
  * DATA_UPDATED action on query changes.
  *

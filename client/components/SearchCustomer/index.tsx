@@ -3,8 +3,8 @@ import { useQuery } from '@apollo/client'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Customer } from 'types'
+import $customers from '../../pages/Customers/customers.gql'
 import { Autocomplete, ISuggestionItem } from '../Autocomplete'
-import $customers from './customers.gql'
 import { ISearchCustomerProps } from './types'
 
 /**

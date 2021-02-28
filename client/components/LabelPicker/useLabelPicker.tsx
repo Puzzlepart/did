@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client'
 import { useEffect, useRef, useState } from 'react'
 import { LabelObject } from 'types'
 import { omit } from 'underscore'
-import $labels from './labels.gql'
+import $labels from '../../pages/Admin/Labels/labels.gql'
 import { ILabelPickerProps } from './types'
 
 export function useLabelPicker({
