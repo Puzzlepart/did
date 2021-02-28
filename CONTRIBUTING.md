@@ -40,20 +40,20 @@ Folder/File | Description
 3. Run `npm run-script create-env` to create your own `.env` file for local testing
 4. Set neccessary parameters in your new `.env` file (see `Set up .env` below)
 5. Install the [Azure App Service extension for vscode](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice)
-6. Create an Azure app registration, or ask one of the [maintainers](#maintainers) for access to an existing one
-7. Run `npm run-script watch` to watch both `server` and `client` changes concurrently  
+6. Install the [ESLint extension for vscode](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+7. Install the [i18n Ally extension for vscode](https://marketplace.visualstudio.com/items?itemName=Lokalise.i18n-ally)
+8. Create an Azure app registration, or ask one of the [maintainers](#maintainers) for access to an existing one
+9. Run `npm run-script watch` to watch both `server` and `client` changes concurrently  
 
 The following permissions are required by Azure App Registration:
 
 ![image-20201104173614079](@assets/image-20201104173614079.png)
 
-### Resource management with i18n
+## Documentation
 
-* Install vscode extension `antfu.i18n-ally`
+The client is documented [here](./client/docs/README.md) and the server is documented [here](./server/docs/README.md).
 
-## GraphQL Documentation
-
-_We use https://studio.apollographql.com/ for GraphQL documentation._
+_We use https://studio.apollographql.com/ for GraphQL schema documentation._
 
 ## Set up .env ##
 
