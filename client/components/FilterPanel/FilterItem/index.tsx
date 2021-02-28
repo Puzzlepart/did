@@ -13,7 +13,7 @@ export const FilterItem: FunctionComponent<IFilterItemProps> = (
   props: IFilterItemProps
 ) => {
   const { t } = useTranslation()
-  const selectedKeys = props.filter.selected.map((f) => f.key)
+  const selectedKeys = new Set(props.filter.selected.map((f) => f.key))
   const [searchTerm, onSearch] = useState<string>('')
   const [showCount, setShowCount] = useState(props.shortListCount)
 
@@ -38,7 +38,7 @@ export const FilterItem: FunctionComponent<IFilterItemProps> = (
         <div key={item.key} className={styles.item}>
           <Checkbox
             label={item.value}
-            checked={selectedKeys.indexOf(item.key) !== -1}
+            checked={selectedKeys.has(item.key)}
             onChange={(_, checked) =>
               props.onFilterUpdated(props.filter, item, checked)
             }

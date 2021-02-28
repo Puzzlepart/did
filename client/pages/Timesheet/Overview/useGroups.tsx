@@ -19,7 +19,7 @@ export function useGroups() {
         AppConfig.TIMESHEET_OVERVIEW_DAY_FORMAT
       ),
       totalFunc: (events: EventObject[]) => {
-        const duration = events.reduce((sum, i) => sum + i.duration, 0)
+        const duration = events.reduce((sum, index) => sum + index.duration, 0)
         return ` (${DateUtils.getDurationString(duration, t)})`
       }
     }),

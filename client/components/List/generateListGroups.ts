@@ -22,7 +22,7 @@ export function generateListGroups(
   )
   const uniqueGroupNames =
     props.groupNames || unique(groupNames).sort((a, b) => (a > b ? 1 : -1))
-  const groups = uniqueGroupNames.map((name, idx) => {
+  const groups = uniqueGroupNames.map((name, index) => {
     const itemsInGroup = items.filter((item) => {
       const itemValue = `${getValue<string>(
         item,
@@ -33,7 +33,7 @@ export function generateListGroups(
     })
     const total = props.totalFunc ? props.totalFunc(itemsInGroup) : ''
     const group: IGroup = {
-      key: idx.toString(),
+      key: index.toString(),
       name: `${name} ${total}`,
       startIndex: groupNames
         .map((g) => g.toLowerCase())

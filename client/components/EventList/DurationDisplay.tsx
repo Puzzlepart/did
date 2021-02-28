@@ -1,8 +1,8 @@
 /* eslint-disable tsdoc/syntax */
-import React, { HTMLProps, FunctionComponent } from 'react'
-import { useTranslation } from 'react-i18next'
 import DateUtils from 'DateUtils'
 import { format } from 'office-ui-fabric-react'
+import React, { FunctionComponent, HTMLProps } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export interface IDurationDisplayProps extends HTMLProps<HTMLDivElement> {
   displayFormat?: string

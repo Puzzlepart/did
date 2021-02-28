@@ -1,7 +1,7 @@
+import AppConfig from 'AppConfig'
 import { TFunction } from 'i18next'
 import { IFormValidation } from 'types'
 import { CustomerModel } from './types'
-import AppConfig from 'AppConfig'
 
 /**
  * Validate form

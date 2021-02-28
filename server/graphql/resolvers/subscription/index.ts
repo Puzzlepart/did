@@ -31,8 +31,8 @@ export class SubscriptionResolver {
     description: 'Get current subscription',
     nullable: true
   })
-  subscription(@Ctx() ctx: Context): Promise<Subscription> {
-    return this._mongo.subscription.getById(ctx.subscription.id)
+  subscription(@Ctx() context: Context): Promise<Subscription> {
+    return this._mongo.subscription.getById(context.subscription.id)
   }
 
   /**

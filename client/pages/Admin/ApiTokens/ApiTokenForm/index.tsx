@@ -65,14 +65,14 @@ export const ApiTokenForm = ({
         <TextField
           placeholder={t('admin.apiTokens.tokenNamePlaceholder')}
           required={true}
-          onChange={(_e, value) => setToken({ ...token, name: value })}
+          onChange={(_event, value) => setToken({ ...token, name: value })}
         />
       </div>
       <div className={styles.inputContainer}>
         <Dropdown
           placeholder={t('admin.apiTokens.tokenExpiryPlaceholder')}
           required={true}
-          onChange={(_e, { data }) =>
+          onChange={(_event, { data }) =>
             setToken({
               ...token,
               expires: new DateObject().add(data).jsDate

@@ -37,9 +37,9 @@ export class ReportsResolver {
     @Arg('query') query: ReportsQuery,
     @Arg('currentUser', { nullable: true }) currentUser: boolean,
     @Arg('sortAsc', { nullable: true }) sortAsc: boolean,
-    @Ctx() ctx: Context
+    @Ctx() context: Context
   ) {
-    if (currentUser) query.userId = ctx.userId
+    if (currentUser) query.userId = context.userId
     return await this._mongo.reports.getReport(query, sortAsc)
   }
 }

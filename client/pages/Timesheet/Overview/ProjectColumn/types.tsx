@@ -1,4 +1,4 @@
-import { Project, EventObject } from 'types'
+import { EventObject, Project } from 'types'
 
 export interface IClearManualMatchButtonProps
   extends React.HTMLProps<HTMLDivElement> {

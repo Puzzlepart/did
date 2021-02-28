@@ -19,9 +19,9 @@ export function createColumns(
   t: TFunction
 ): IColumn[] {
   let uniqueColumnValues: any[] = unique(
-    state.timeentries.map((e) => ({
-      year: e.year,
-      value: getValue(e, state.scope.fieldName)
+    state.timeentries.map((entry_) => ({
+      year: entry_.year,
+      value: getValue(entry_, state.scope.fieldName)
     })),
     ({ year, value }) => year && value
   )
@@ -83,46 +83,54 @@ export const createRows = (
 ): ISummaryViewRow[] => {
   const rowValues = sortAlphabetically(
     unique(
-      state.timeentries.map((e) => getValue(e, state.type.fieldName, null)),
+      state.timeentries.map((entry_) =>
+        getValue(entry_, state.type.fieldName, null)
+      ),
       (r) => r
     )
   )
   const _columns = [...columns].splice(1, columns.length - 2)
   const rows: ISummaryViewRow[] = rowValues.map((label) => {
     const entries = state.timeentries.filter(
-      (e) => getValue(e, state.type.fieldName, null) === label
+      (entry_) => getValue(entry_, state.type.fieldName, null) === label
     )
     return _columns.reduce(
-      (obj, col) => {
+      (object, col) => {
         const sum = [...entries]
-          .filter((e) => getValue(e, state.scope.fieldName) === col.fieldName)
+          .filter(
+            (entry_) =>
+              getValue(entry_, state.scope.fieldName) === col.fieldName
+          )
           .reduce((sum, { duration }) => sum + duration, 0)
         switch (state.type.key) {
           case 'project':
             {
-              obj.project = first(entries)?.project
-              obj.customer = first(entries)?.customer
+              object.project = first(entries)?.project
+              object.customer = first(entries)?.customer
             }
             break
           default:
-            obj.label = label
+            object.label = label
         }
-        obj[col.fieldName] = sum
-        obj.sum += sum
-        return obj
+        object[col.fieldName] = sum
+        object.sum += sum
+        return object
       },
       { sum: 0 } as ISummaryViewRow
     )
   })
   rows.push(
     _columns.reduce(
-      (obj, col) => {
+      (object, col) => {
         const sum = [...state.timeentries]
-          .filter((e) => getValue(e, state.scope.fieldName) === col.fieldName)
+          .filter(
+            (event_) =>
+              getValue(event_, state.scope.fieldName) === col.fieldName
+          )
           .reduce((sum, { duration }) => sum + duration, 0)
-        obj[col.fieldName] = sum
-        obj.sum += sum
-        return obj
+        object[col.fieldName] = sum
+        object.sum += sum
+        return object
       },
       { label: t('common.sumLabel'), sum: 0 }
     )
@@ -138,8 +146,8 @@ export const createRows = (
  */
 export function createPeriods(range: number = 0): IPivotItemProps[] {
   const periods = []
-  for (let i = range; i >= 0; i--) {
-    const key = (DateUtils.getYear() - i).toString()
+  for (let index = range; index >= 0; index--) {
+    const key = (DateUtils.getYear() - index).toString()
     periods.push({ key, itemKey: key, headerText: key })
   }
   return periods

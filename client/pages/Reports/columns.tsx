@@ -1,9 +1,9 @@
 import { CustomerLink } from 'components/CustomerLink'
 import { ProjectLink } from 'components/ProjectLink'
+import DateUtils from 'DateUtils'
 import { TFunction } from 'i18next'
 import { IColumn } from 'office-ui-fabric-react'
 import React from 'react'
-import DateUtils from 'DateUtils'
 import { ExcelColumnType } from 'utils/exportExcel'
 
 const columns = (defaults: Partial<IColumn>, t: TFunction): IColumn[] =>

@@ -6,7 +6,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import initFilters from '../filters'
 import { getQueryPresets } from '../queries'
 import { DATA_UPDATED, INIT } from '../reducer/actions'
-import { IReportsParams } from '../types'
+import { IReportsParams as IReportsParameters } from '../types'
 import $timeentries from './timeentries.gql'
 import { useReportsReducer } from './useReportsReducer'
 
@@ -26,7 +26,7 @@ import { useReportsReducer } from './useReportsReducer'
  */
 export function useReports() {
   const { t } = useTranslation()
-  const params = useParams<IReportsParams>()
+  const parameters = useParams<IReportsParameters>()
   const history = useHistory()
   const queries = getQueryPresets(t)
   const { state, dispatch } = useReportsReducer(queries)
@@ -45,7 +45,7 @@ export function useReports() {
   return {
     state,
     dispatch,
-    params,
+    params: parameters,
     queries,
     history,
     filters,

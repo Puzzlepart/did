@@ -93,8 +93,8 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
           return $
         }, [])
       return report
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 }

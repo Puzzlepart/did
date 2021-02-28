@@ -33,7 +33,7 @@ export const Users = () => {
     fetchPolicy: 'cache-and-network'
   })
   const [addUsers] = useMutation($addUsers)
-  const ctxValue: IUsersContext = useMemo(
+  const contextValue: IUsersContext = useMemo(
     () => ({
       roles: data?.roles || [],
       users: data?.users || [],
@@ -41,9 +41,9 @@ export const Users = () => {
     }),
     [data]
   )
-  ctxValue.activeDirectoryUsers = filter(
-    ctxValue.activeDirectoryUsers,
-    (x) => !any(ctxValue.users, (y) => y.id === x.id)
+  contextValue.activeDirectoryUsers = filter(
+    contextValue.activeDirectoryUsers,
+    (x) => !any(contextValue.users, (y) => y.id === x.id)
   )
 
   /**
@@ -76,10 +76,10 @@ export const Users = () => {
   }
 
   return (
-    <UsersContext.Provider value={ctxValue}>
+    <UsersContext.Provider value={contextValue}>
       <List
         enableShimmer={loading}
-        items={ctxValue.users}
+        items={contextValue.users}
         columns={columns(onEdit, t)}
         commandBar={{
           items: [
@@ -87,14 +87,14 @@ export const Users = () => {
               key: 'ADD_NEW_USER',
               name: t('admin.addNewUser'),
               iconProps: { iconName: 'AddFriend' },
-              disabled: isEmpty(ctxValue.activeDirectoryUsers),
+              disabled: isEmpty(contextValue.activeDirectoryUsers),
               onClick: () => setUserForm({ headerText: t('admin.addNewUser') })
             },
             {
               key: 'BULK_IMPORT_USERS',
               name: t('admin.bulkImportUsersLabel'),
               iconProps: { iconName: 'CloudImportExport' },
-              disabled: isEmpty(ctxValue.activeDirectoryUsers),
+              disabled: isEmpty(contextValue.activeDirectoryUsers),
               onClick: () => setAddMultiplePanel({ isOpen: true })
             },
             {

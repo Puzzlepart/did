@@ -25,7 +25,7 @@ export const useUserNotifications = () => {
 
   const notifications = notificationsQuery.notifications
     .map((n) => new NotificationModel(n))
-    .filter((n) => dismissedIds.indexOf(n.id) === -1)
+    .filter((n) => !dismissedIds.includes(n.id))
 
   const dismissedCount =
     notificationsQuery.notifications.length - notifications.length

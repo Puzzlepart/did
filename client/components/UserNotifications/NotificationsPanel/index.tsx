@@ -39,8 +39,8 @@ export const NotificationsPanel: FunctionComponent = () => {
           />
         </div>
         <div>
-          {...notifications.map((n, idx) => (
-            <UserNotification key={idx} model={n} />
+          {...notifications.map((n, index) => (
+            <UserNotification key={index} model={n} />
           ))}
         </div>
       </div>

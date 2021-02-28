@@ -56,9 +56,6 @@ export default (
         newState.validation = action.payload.validation
       }
       break
-
-    default:
-      throw new Error()
   }
   return newState
 }

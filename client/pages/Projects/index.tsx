@@ -26,9 +26,9 @@ export const ProjectsPage = () => {
   )
 }
 
-export * from './Projects'
+export * from './context'
 export * from './ProjectDetails'
 export * from './ProjectForm'
 export * from './ProjectList'
+export * from './Projects'
 export * from './types'
-export * from './context'

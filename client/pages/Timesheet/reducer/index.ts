@@ -3,7 +3,7 @@ import { TFunction } from 'i18next'
 import { useMemo, useReducer } from 'react'
 import { find, first, isEmpty } from 'underscore'
 import {
-  ITimesheetParams,
+  ITimesheetParams as ITimesheetParameters,
   ITimesheetState,
   TimesheetPeriod,
   TimesheetScope
@@ -22,11 +22,11 @@ import {
   UNSUBMITTING_PERIOD
 } from './actions'
 
-interface ITimesheetReducerParams {
+interface ITimesheetReducerParameters {
   /**
    * URL parameters
    */
-  url: ITimesheetParams
+  url: ITimesheetParameters
 
   /**
    * Translate function
@@ -34,7 +34,7 @@ interface ITimesheetReducerParams {
   t: TFunction
 }
 
-const initState = (url: ITimesheetParams) => ({
+const initState = (url: ITimesheetParameters) => ({
   periods: [],
   scope: isEmpty(Object.keys(url))
     ? new TimesheetScope()
@@ -45,7 +45,7 @@ const initState = (url: ITimesheetParams) => ({
 /**
  * Creating reducer for Timesheet using reduxjs/toolkit
  */
-const createTimesheetReducer = ({ url, t }: ITimesheetReducerParams) =>
+const createTimesheetReducer = ({ url, t }: ITimesheetReducerParameters) =>
   createReducer<ITimesheetState>(initState(url), {
     [DATA_UPDATED.type]: (
       state,
@@ -179,9 +179,9 @@ const createTimesheetReducer = ({ url, t }: ITimesheetReducerParams) =>
  *
  * @param params - Parameters
  */
-export function useTimesheetReducer(params: ITimesheetReducerParams) {
+export function useTimesheetReducer(parameters: ITimesheetReducerParameters) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const reducer = useMemo(() => createTimesheetReducer(params), [])
-  const [state, dispatch] = useReducer(reducer, initState(params.url))
+  const reducer = useMemo(() => createTimesheetReducer(parameters), [])
+  const [state, dispatch] = useReducer(reducer, initState(parameters.url))
   return { state, dispatch }
 }

@@ -18,7 +18,7 @@ export function useAutocomplete(props: IAutocompleteProps) {
     selectedIndex: -1,
     suggestions: []
   })
-  const ref = useRef<HTMLDivElement>()
+  const reference = useRef<HTMLDivElement>()
 
   useLayoutEffect(() => dispatch(INIT({ props })), [props])
 
@@ -26,9 +26,9 @@ export function useAutocomplete(props: IAutocompleteProps) {
 
   const suggestions = useMemo(
     () =>
-      state.suggestions.map((s, idx) => ({
+      state.suggestions.map((s, index) => ({
         ...s,
-        isSelected: idx === state.selectedIndex
+        isSelected: index === state.selectedIndex
       })),
     [state.suggestions, state.selectedIndex]
   )
@@ -44,7 +44,7 @@ export function useAutocomplete(props: IAutocompleteProps) {
   return {
     state,
     dispatch,
-    ref,
+    ref: reference,
     className: classNames.join(' '),
     suggestions,
     onDismissCallout,

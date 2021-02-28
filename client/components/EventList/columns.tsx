@@ -52,8 +52,8 @@ export const titleColumn = (
         </Link>
         {event.labels && (
           <div className={styles.labels}>
-            {event.labels.map((label, idx) => (
-              <EntityLabel key={idx} label={label} />
+            {event.labels.map((label, index) => (
+              <EntityLabel key={index} label={label} />
             ))}
           </div>
         )}

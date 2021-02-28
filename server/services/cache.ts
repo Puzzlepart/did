@@ -55,7 +55,7 @@ export class CacheService {
         : this.context.userId
     ]
       .join(':')
-      .replace(/\-/g, '')
+      .replace(/-/g, '')
       .toLowerCase()
   }
 
@@ -68,8 +68,8 @@ export class CacheService {
     return new Promise((resolve) => {
       const scopedCacheKey = this._getScopedCacheKey(key, scope)
       log(`Retrieving cached value for key ${scopedCacheKey}...`)
-      redisMiddlware.get(scopedCacheKey, (err, reply) => {
-        if (err) {
+      redisMiddlware.get(scopedCacheKey, (error, reply) => {
+        if (error) {
           log(`Failed to retrieve cachedd value for key ${scopedCacheKey}.`)
           resolve(null)
         } else {
@@ -96,10 +96,10 @@ export class CacheService {
         scopedCacheKey,
         expiry,
         JSON.stringify(value),
-        (err, reply) => {
-          if (err) {
+        (error, reply) => {
+          if (error) {
             log(`Failed to set value for key ${scopedCacheKey}.`)
-            resolve(err)
+            resolve(error)
           } else {
             log(
               `Value for key ${scopedCacheKey} set with a expiration of ${expiry} seconds.`
@@ -119,7 +119,7 @@ export class CacheService {
   public clear({ key, scope }: CacheOptions) {
     const pattern = `${this._getScopedCacheKey(key, scope)}*`
     return new Promise((resolve) => {
-      redisMiddlware.keys(pattern, (_err, keys) => {
+      redisMiddlware.keys(pattern, (_error, keys) => {
         redisMiddlware.del(keys, () => {
           resolve(null)
         })
@@ -134,12 +134,12 @@ export class CacheService {
    * @param options - Cache options
    */
   public async usingCache<T = any>(
-    func: () => Promise<T>,
+    function_: () => Promise<T>,
     { key, expiry = 60, scope }: CacheOptions
   ) {
     const cachedValue: T = await this._get<T>({ key, scope })
     if (cachedValue) return cachedValue
-    const value: T = await func()
+    const value: T = await function_()
     await this._set({ key, scope, expiry }, value)
     return value
   }

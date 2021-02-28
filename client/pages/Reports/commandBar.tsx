@@ -135,7 +135,7 @@ const saveFilterCmd = ({
             onClick: () => dispatch(SET_FILTER({ filter }))
           }
         })
-      ].filter((i) => i)
+      ].filter((index) => index)
     }
   } as IContextualMenuItem)
 
@@ -151,6 +151,6 @@ export default (context: IReportsContext) => ({
           !isEmpty(context.state.savedFilters) && saveFilterCmd(context),
           openFilterPanelCmd(context),
           clearFiltersCmd(context)
-        ].filter((i) => i)
+        ].filter((index) => index)
       : []
 })

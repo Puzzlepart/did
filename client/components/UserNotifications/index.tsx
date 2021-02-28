@@ -30,5 +30,5 @@ export const UserNotifications: FunctionComponent = () => {
   )
 }
 
-export * from './types'
 export * from './NotificationsPanel'
+export * from './types'

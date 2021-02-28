@@ -35,6 +35,7 @@ export class MongoDocumentService<T> {
    * @param sort - Sort options
    */
   public find<S = any>(query: FilterQuery<T>, sort?: S) {
+    // eslint-disable-next-line unicorn/no-array-callback-reference
     return this.collection.find(query, { sort }).toArray()
   }
 }

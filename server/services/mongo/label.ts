@@ -20,7 +20,7 @@ export class LabelService extends MongoDocumentService<Label> {
    * @param label - Label
    */
   private _generateId(label: Label) {
-    return label.name.replace(/[^A-Z0-9]/gi, '').toLowerCase()
+    return label.name.replace(/[^\da-z]/gi, '').toLowerCase()
   }
 
   /**
@@ -32,8 +32,8 @@ export class LabelService extends MongoDocumentService<Label> {
     try {
       const labels = await this.find(query)
       return labels
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
@@ -51,8 +51,8 @@ export class LabelService extends MongoDocumentService<Label> {
         ...label
       })
       return result
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
@@ -64,8 +64,8 @@ export class LabelService extends MongoDocumentService<Label> {
   public async updateLabel(label: Label): Promise<void> {
     try {
       await this.collection.updateOne(pick(label, 'name'), { $set: label })
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
@@ -78,8 +78,8 @@ export class LabelService extends MongoDocumentService<Label> {
     try {
       const result = await this.collection.deleteOne({ name })
       return result
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 }

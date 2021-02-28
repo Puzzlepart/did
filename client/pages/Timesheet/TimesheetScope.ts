@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import DateUtils, { DateInput, DateObject } from 'DateUtils'
 import { TimesheetQuery } from 'types'
-import { ITimesheetParams } from './types'
+import { ITimesheetParams as ITimesheetParameters } from './types'
 
 /**
  * Handles a scope, the period of time between a startDateTime and endDateTime
@@ -27,8 +27,8 @@ export class TimesheetScope {
    *
    * @param params - Params
    */
-  fromParams(params: ITimesheetParams): TimesheetScope {
-    this.startDate = new DateObject().fromObject(params)
+  fromParams(parameters: ITimesheetParameters): TimesheetScope {
+    this.startDate = new DateObject().fromObject(parameters)
     this.endDate = this.startDate.endOfWeek
     return this
   }

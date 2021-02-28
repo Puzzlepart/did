@@ -21,11 +21,12 @@ function getDataForChart(
     else _items.push({ id: data[chart.idKey], chart, data, value })
     return _items
   }, [])
+  // eslint-disable-next-line unicorn/explicit-length-check
   const truncateLength = width / (items.length || 1) / 6
-  return items.map((i) => ({
-    ...i,
-    label: truncateString(i.data[chart.textKey], truncateLength),
-    value: parseFloat(i.value.toFixed(1))
+  return items.map((index) => ({
+    ...index,
+    label: truncateString(index.data[chart.textKey], truncateLength),
+    value: Number.parseFloat(index.value.toFixed(1))
   }))
 }
 

@@ -1,8 +1,8 @@
 /* eslint-disable tsdoc/syntax */
 import { ITypedHash } from '@pnp/common'
 import { IListGroups } from 'components/List/types'
-import { EventObject } from 'types'
 import { IColumn } from 'office-ui-fabric-react'
+import { EventObject } from 'types'
 
 /**
  * @category EventList

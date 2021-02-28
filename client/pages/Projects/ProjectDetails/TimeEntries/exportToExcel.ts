@@ -1,7 +1,7 @@
-import columns from '../columns'
-import { exportExcel } from 'utils/exportExcel'
 import { TFunction } from 'i18next'
 import { Project } from 'types'
+import { exportExcel } from 'utils/exportExcel'
+import columns from '../columns'
 
 /**
  * On export to Excel

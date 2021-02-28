@@ -40,9 +40,6 @@ export const reducer = (
         newState.scope = action.payload
       }
       break
-
-    default:
-      throw new Error()
   }
   return newState
 }

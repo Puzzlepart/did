@@ -11,13 +11,13 @@ import path from 'path'
 import { pick } from 'underscore'
 import { setupGraphQL } from './graphql'
 import {
-  redisSessionMiddleware,
-  serveGzippedMiddleware,
+  helmetMiddleware,
   passportMiddleware,
-  helmetMiddleware
+  redisSessionMiddleware,
+  serveGzippedMiddleware
 } from './middleware'
 import authRoute from './routes/auth'
-import env from './utils/env'
+import environment from './utils/environment'
 
 /**
  * Did Express.js App
@@ -63,7 +63,7 @@ export class App {
    */
   public async setup() {
     this._mongoClient = await MongoClient.connect(
-      env('MONGO_DB_CONNECTION_STRING'),
+      environment('MONGO_DB_CONNECTION_STRING'),
       {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -134,8 +134,8 @@ export class App {
    */
   setupRoutes() {
     const index = express.Router()
-    index.get('/', (_req, res) => {
-      return res.render('index')
+    index.get('/', (_request, response) => {
+      return response.render('index')
     })
     this.instance.use('*', index)
   }
@@ -144,10 +144,10 @@ export class App {
    * Setup error handling using http-errors
    */
   setupErrorHandling() {
-    this.instance.use((_req, _res, next) => next(createError()))
+    this.instance.use((_request, _response, next) => next(createError()))
     this.instance.use(
-      (error: any, _req: express.Request, res: express.Response) => {
-        res.render('index', {
+      (error: any, _request: express.Request, response: express.Response) => {
+        response.render('index', {
           error: JSON.stringify(pick(error, 'name', 'message', 'status'))
         })
       }

@@ -35,8 +35,8 @@ export const Information: FunctionComponent = () => {
         />
       )}
       <div className={styles.labels}>
-        {(state.selected.labels as Label[]).map((label, idx) => (
-          <EntityLabel key={idx} label={label} size='medium' />
+        {(state.selected.labels as Label[]).map((label, index) => (
+          <EntityLabel key={index} label={label} size='medium' />
         ))}
       </div>
       <UserMessage

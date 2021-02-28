@@ -4,23 +4,23 @@ import { getValue } from 'helpers'
 import { filter, find, omit } from 'underscore'
 import { IReportsState } from '../types'
 import {
-  INIT,
   ADD_FILTER,
   CHANGE_QUERY,
   CLEAR_FILTERS,
   DATA_UPDATED,
   FILTERS_UPDATED,
+  INIT,
   REMOVE_SELECTED_FILTER,
   SET_FILTER,
   SET_GROUP_BY,
   TOGGLE_FILTER_PANEL
 } from './actions'
-import { IReportsReducerParams } from './types'
+import { IReportsReducerParams as IReportsReducerParameters } from './types'
 
 /**
  * Creating reducer for Reports using reduxjs/toolkit
  */
-export default ({ app, url, queries }: IReportsReducerParams) =>
+export default ({ app, url, queries }: IReportsReducerParameters) =>
   createReducer<IReportsState>(
     {},
     {
@@ -39,9 +39,8 @@ export default ({ app, url, queries }: IReportsReducerParams) =>
         state.subset = filter(state.timeentries, (entry) => {
           return (
             filter(Object.keys(payload.filter.values), (key) => {
-              return (
-                payload.filter.values[key].indexOf(getValue(entry, key, '')) !==
-                -1
+              return payload.filter.values[key].includes(
+                getValue(entry, key, '')
               )
             }).length === Object.keys(payload.filter.values).length
           )
@@ -91,9 +90,9 @@ export default ({ app, url, queries }: IReportsReducerParams) =>
         state.filter = {
           key: null,
           values: payload.filters.reduce(
-            (obj, f) => ({
-              ...obj,
-              [f.key]: f.selected.map((i) => i.key)
+            (object, f) => ({
+              ...object,
+              [f.key]: f.selected.map((index) => index.key)
             }),
             {}
           )
@@ -102,7 +101,7 @@ export default ({ app, url, queries }: IReportsReducerParams) =>
           return (
             filter(payload.filters, (f) => {
               const selectedKeys = f.selected.map((s) => s.key)
-              return selectedKeys.indexOf(getValue(entry, f.key, '')) !== -1
+              return selectedKeys.includes(getValue(entry, f.key, ''))
             }).length === payload.filters.length
           )
         })

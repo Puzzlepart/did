@@ -2,9 +2,9 @@
 import { Panel } from 'office-ui-fabric-react'
 import React, { useEffect, useState } from 'react'
 import { FilterItem } from './FilterItem'
+import styles from './FilterPanel.module.scss'
 import { IFilter, IFilterItem } from './Filters'
 import { IFilterPanelProps } from './types'
-import styles from './FilterPanel.module.scss'
 
 /**
  * @category Function Component

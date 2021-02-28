@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
-import { IUserMessageProps } from './types'
 import { useState } from 'react'
+import { IUserMessageProps } from './types'
 
 /**
  * Hook used to show a temporarily message
