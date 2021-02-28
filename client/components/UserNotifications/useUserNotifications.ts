@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { AppContext } from 'AppContext'
-import { useContext, useDebugValue, useState } from 'react'
+import { useContext, useState } from 'react'
 import { useBrowserStorage } from './../../hooks'
 import { IUserNotificationsState, NotificationModel } from './types'
 
@@ -20,8 +20,6 @@ export const useUserNotifications = () => {
     key: 'did_dismissed_notifications',
     initialValue: []
   })
-
-  useDebugValue({ dismissedIds })
 
   const notifications = notificationsQuery.notifications
     .map((n) => new NotificationModel(n))

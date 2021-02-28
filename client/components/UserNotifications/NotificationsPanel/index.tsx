@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { UserMessage } from 'components/UserMessage'
 import { Link, Panel } from 'office-ui-fabric-react'
-import React, { FunctionComponent, useContext } from 'react'
+import React, { FunctionComponent, useContext, useDebugValue } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
 import { UserNotificationsContext } from '../context'
@@ -20,6 +20,7 @@ export const NotificationsPanel: FunctionComponent = () => {
     dismissedCount,
     clearDismissed
   } = useContext(UserNotificationsContext)
+  useDebugValue({ dismissedCount })
   return (
     <Panel
       isOpen={panelOpen}
@@ -32,9 +33,11 @@ export const NotificationsPanel: FunctionComponent = () => {
           <UserMessage
             text={t('notifications.emptyText', { dismissedCount })}
             actions={
-              <Link onClick={clearDismissed}>
-                {t('notifications.clearDismissedText')}
-              </Link>
+              <div hidden={dismissedCount === 0}>
+                <Link onClick={clearDismissed}>
+                  {t('notifications.clearDismissedText')}
+                </Link>
+              </div>
             }
           />
         </div>
