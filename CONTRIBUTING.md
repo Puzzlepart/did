@@ -51,7 +51,7 @@ Folder/File | Description
 
 The following permissions are required by Azure App Registration:
 
-![image-20201104173614079](@assets/image-20201104173614079.png)
+![image-20201104173614079](.assets/image-20201104173614079.png)
 
 ### GraphQL
 
