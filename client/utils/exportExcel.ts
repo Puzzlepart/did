@@ -13,17 +13,22 @@ export interface IExcelExportOptions {
 export type ExcelColumnType = 'date' | null
 
 /**
- * Converts string to array buffer
+ * Coverts a Javascript string to a
+ * unsigned 8 byte int ArrayBuffer
+ * 
+ * @see https://gist.github.com/gabemeola/c32b80d9302b30b577118c39f98e00b2
  *
- * @param str - String to convert
+ * @param binaryString - Binary String
  */
-function stringToArrayBuffer(string: string): ArrayBuffer {
-  const buf = new ArrayBuffer(string.length)
-  const view = new Uint8Array(buf)
-  for (let index = 0; index !== string.length; ++index) {
-    view[index] = string.charCodeAt(index) & 0xff
+export default function stringToArrayBuffer(binaryString: string) {
+  const { length } = binaryString
+  const buffer = new Uint8Array(length)
+
+  for (let index = 0; index < length; index++) {
+      buffer[index] = binaryString.charCodeAt(index)
   }
-  return buf
+
+  return buffer
 }
 
 /**
