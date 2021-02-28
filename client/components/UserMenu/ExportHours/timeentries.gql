@@ -1,4 +1,4 @@
-query($query: ReportsQuery!) {
+query UserReports ($query: ReportsQuery!) {
   timeentries(query: $query, currentUser: true) {
     title
     duration

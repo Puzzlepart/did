@@ -1,4 +1,4 @@
-query {
+query Labels {
   labels {
     name
     description

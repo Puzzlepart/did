@@ -1,6 +1,6 @@
 #import "./timesheet.fragments.project.gql"
 
-query($query: TimesheetQuery!, $options: TimesheetOptions!) {
+query Timesheet($query: TimesheetQuery!, $options: TimesheetOptions!) {
   timesheet(query: $query, options: $options) {
     id
     week

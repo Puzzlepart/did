@@ -1,4 +1,4 @@
-query($templates: NotificationTemplates!, $locale: String!) {
+query Notifications ($templates: NotificationTemplates!, $locale: String!) {
   notifications(templates: $templates, locale: $locale) {
     id
     type

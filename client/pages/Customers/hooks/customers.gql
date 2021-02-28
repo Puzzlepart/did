@@ -1,4 +1,4 @@
-query {
+query Customers {
   customers(sortBy: "name") {
     key
     name
