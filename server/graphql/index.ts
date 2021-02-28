@@ -14,6 +14,7 @@ import { MongoClient } from 'mongodb'
 import 'reflect-metadata'
 import { buildSchema, ResolverData } from 'type-graphql'
 import Container, { ContainerInstance } from 'typedi'
+import UAParser from 'ua-parser-js'
 import { authChecker } from './authChecker'
 import { Context, createContext } from './context'
 import {
@@ -67,6 +68,29 @@ export const generateGraphQLSchema = async () => {
 }
 
 /**
+ * Specify this function to provide Apollo Studio with client details
+ * for each processed request. Apollo Studio uses this information to
+ * segment metrics by client. This function is passed a GraphQLRequestContext
+ * object containing all available information about the request. It should
+ * return an object with clientName and clientVersion fields that i
+ * dentify the associated client.
+ *
+ * By default, the plugin attempts to obtain these values from the incoming
+ * request's HTTP headers (specifically, apollographql-client-name and apollographql-client-version).
+ *
+ * @see https://www.apollographql.com/docs/apollo-server/api/plugin/usage-reporting/#generateclientinfo
+ *
+ * @remarks For now we're fetching browser info using ua-parser-js
+ *
+ * @param context - Context
+ */
+export const generateClientInfo = (context: GraphQLRequestContext<Context>) => {
+  const userAgent = context.request.http.headers.get('user-agent')
+  const browser = new UAParser(userAgent).getBrowser()
+  return { clientName: browser.name, clientVersion: browser.version }
+}
+
+/**
  * Set up GraphQL for the Express Application
  *
  * * Sets up reporting to Apollo Studio
@@ -88,7 +112,8 @@ export const setupGraphQL = async (
       plugins: [
         ApolloServerPluginUsageReporting({
           rewriteError: (error) => error,
-          sendVariableValues: { all: true }
+          sendVariableValues: { all: true },
+          generateClientInfo
         }),
         ApolloServerPluginSchemaReporting({
           initialDelayMaxMs: 30 * 1000

@@ -1,0 +1,139 @@
+# did
+
+
+
+
+## Dependencies
+
+- [@apollo/client](https://ghub.io/@apollo/client): A fully-featured caching GraphQL client.
+- [@babel/compat-data](https://ghub.io/@babel/compat-data): 
+- [@babel/core](https://ghub.io/@babel/core): Babel compiler core.
+- [@babel/preset-env](https://ghub.io/@babel/preset-env): A Babel preset for each environment.
+- [@microsoft/microsoft-graph-client](https://ghub.io/@microsoft/microsoft-graph-client): Microsoft Graph Client Library
+- [@pnp/common](https://ghub.io/@pnp/common): pnp - provides shared functionality across all pnp libraries
+- [@reduxjs/toolkit](https://ghub.io/@reduxjs/toolkit): The official, opinionated, batteries-included toolset for efficient Redux development
+- [@types/debug](https://ghub.io/@types/debug): TypeScript definitions for debug
+- [@types/express](https://ghub.io/@types/express): TypeScript definitions for Express
+- [@types/express-session](https://ghub.io/@types/express-session): TypeScript definitions for express-session
+- [@types/get-value](https://ghub.io/@types/get-value): TypeScript definitions for get-value
+- [@types/graphql-iso-date](https://ghub.io/@types/graphql-iso-date): TypeScript definitions for graphql-iso-date
+- [@types/jsonwebtoken](https://ghub.io/@types/jsonwebtoken): TypeScript definitions for jsonwebtoken
+- [@types/mongodb](https://ghub.io/@types/mongodb): TypeScript definitions for MongoDB
+- [@types/morgan](https://ghub.io/@types/morgan): TypeScript definitions for morgan
+- [@types/passport](https://ghub.io/@types/passport): TypeScript definitions for Passport
+- [@types/passport-azure-ad](https://ghub.io/@types/passport-azure-ad): TypeScript definitions for passport-azure-ad
+- [@types/randomcolor](https://ghub.io/@types/randomcolor): TypeScript definitions for randomColor
+- [@types/react](https://ghub.io/@types/react): TypeScript definitions for React
+- [@types/react-dom](https://ghub.io/@types/react-dom): TypeScript definitions for React (react-dom)
+- [@types/react-fade-in](https://ghub.io/@types/react-fade-in): TypeScript definitions for react-fade-in
+- [@types/react-router-dom](https://ghub.io/@types/react-router-dom): TypeScript definitions for React Router
+- [@types/recharts](https://ghub.io/@types/recharts): TypeScript definitions for Recharts
+- [@types/redis](https://ghub.io/@types/redis): TypeScript definitions for redis
+- [@types/scriptjs](https://ghub.io/@types/scriptjs): TypeScript definitions for scriptjs
+- [@types/set-value](https://ghub.io/@types/set-value): TypeScript definitions for set-value
+- [@types/simple-oauth2](https://ghub.io/@types/simple-oauth2): TypeScript definitions for simple-oauth2
+- [@types/string-similarity](https://ghub.io/@types/string-similarity): TypeScript definitions for string-similarity
+- [@types/string-strip-html](https://ghub.io/@types/string-strip-html): TypeScript definitions for string-strip-html
+- [@types/ua-parser-js](https://ghub.io/@types/ua-parser-js): TypeScript definitions for ua-parser-js
+- [@types/underscore](https://ghub.io/@types/underscore): TypeScript definitions for Underscore
+- [@types/underscore.string](https://ghub.io/@types/underscore.string): TypeScript definitions for underscore.string
+- [@types/validator](https://ghub.io/@types/validator): TypeScript definitions for validator.js
+- [@types/webpack-env](https://ghub.io/@types/webpack-env): TypeScript definitions for webpack (module API)
+- [@uifabric/icons](https://ghub.io/@uifabric/icons): Fluent UI React icon set.
+- [@uifabric/react-hooks](https://ghub.io/@uifabric/react-hooks): Fluent UI React hooks.
+- [apollo-server-express](https://ghub.io/apollo-server-express): Production-ready Node.js GraphQL server for Express and Connect
+- [array-sort](https://ghub.io/array-sort): Fast and powerful array sorting. Sort an array of objects by one or more properties. Any number of nested properties or custom comparison functions may be used.
+- [babel-loader](https://ghub.io/babel-loader): babel module loader for webpack
+- [body-parser](https://ghub.io/body-parser): Node.js body parsing middleware
+- [class-validator](https://ghub.io/class-validator): Class-based validation with Typescript / ES6 / ES5 using decorators or validation schemas. Supports both node.js and browser
+- [compression-webpack-plugin](https://ghub.io/compression-webpack-plugin): Prepare compressed versions of assets to serve them with Content-Encoding
+- [concurrently](https://ghub.io/concurrently): Run commands concurrently
+- [connect-redis](https://ghub.io/connect-redis): Redis session store for Connect
+- [copyfiles](https://ghub.io/copyfiles): copy some files
+- [core-js](https://ghub.io/core-js): Standard library
+- [css-loader](https://ghub.io/css-loader): css loader module for webpack
+- [css-modules-typescript-loader](https://ghub.io/css-modules-typescript-loader): Webpack loader to create TypeScript declarations for CSS Modules
+- [dayjs](https://ghub.io/dayjs): 2KB immutable date time library alternative to Moment.js with the same modern API 
+- [debug](https://ghub.io/debug): small debugging utility
+- [dotenv](https://ghub.io/dotenv): Loads environment variables from .env file
+- [express](https://ghub.io/express): Fast, unopinionated, minimalist web framework
+- [express-bearer-token](https://ghub.io/express-bearer-token): Bearer token middleware for express.
+- [express-favicon](https://ghub.io/express-favicon): express favicon middleware
+- [express-session](https://ghub.io/express-session): Simple session middleware for Express
+- [fast-copy](https://ghub.io/fast-copy): A blazing fast deep object copier
+- [get-value](https://ghub.io/get-value): Use property paths like &#39;a.b.c&#39; to get a nested value from an object. Even works when keys have dots in them (no other dot-prop library can do this!).
+- [graphql](https://ghub.io/graphql): A Query Language and Runtime which can target any service.
+- [graphql-iso-date](https://ghub.io/graphql-iso-date): A set of RFC 3339 compliant date/time GraphQL scalar types.
+- [graphql-tag](https://ghub.io/graphql-tag): A JavaScript template literal tag that parses GraphQL queries
+- [hbs](https://ghub.io/hbs): Express.js template engine plugin for Handlebars
+- [helmet](https://ghub.io/helmet): help secure Express/Connect apps with various HTTP headers
+- [html-webpack-plugin](https://ghub.io/html-webpack-plugin): Simplifies creation of HTML files to serve your webpack bundles
+- [http-errors](https://ghub.io/http-errors): Create HTTP error objects
+- [i18next](https://ghub.io/i18next): i18next internationalization framework
+- [jsonwebtoken](https://ghub.io/jsonwebtoken): JSON Web Token implementation (symmetric and asymmetric)
+- [mongodb](https://ghub.io/mongodb): The official MongoDB driver for Node.js
+- [morgan](https://ghub.io/morgan): HTTP request logger middleware for node.js
+- [node-fetch](https://ghub.io/node-fetch): A light-weight module that brings window.fetch to node.js
+- [node-sass](https://ghub.io/node-sass): Wrapper around libsass
+- [nodemon](https://ghub.io/nodemon): Simple monitor script for use during development of a node.js app.
+- [office-ui-fabric-react](https://ghub.io/office-ui-fabric-react): Reusable React components for building experiences for Microsoft 365.
+- [passport](https://ghub.io/passport): Simple, unobtrusive authentication for Node.js.
+- [passport-azure-ad](https://ghub.io/passport-azure-ad): OIDC and Bearer Passport strategies for Azure Active Directory
+- [randomcolor](https://ghub.io/randomcolor): A tiny script for generating attractive random colors
+- [react](https://ghub.io/react): React is a JavaScript library for building user interfaces.
+- [react-color](https://ghub.io/react-color): A Collection of Color Pickers from Sketch, Photoshop, Chrome &amp; more
+- [react-copy-to-clipboard](https://ghub.io/react-copy-to-clipboard): Copy-to-clipboard React component
+- [react-device-detect](https://ghub.io/react-device-detect): Detect device type and render your component according to it
+- [react-dom](https://ghub.io/react-dom): React package for working with the DOM.
+- [react-fade-in](https://ghub.io/react-fade-in): Super-easy fade-in animation for react children
+- [react-hotkeys](https://ghub.io/react-hotkeys): A declarative library for handling hotkeys and focus within a React application
+- [react-i18next](https://ghub.io/react-i18next): Internationalization for react done right. Using the i18next i18n ecosystem.
+- [react-markdown](https://ghub.io/react-markdown): Render Markdown as React components
+- [react-router-dom](https://ghub.io/react-router-dom): DOM bindings for React Router
+- [recharts](https://ghub.io/recharts): React charts
+- [redis](https://ghub.io/redis): A high performance Redis client.
+- [reflect-metadata](https://ghub.io/reflect-metadata): Polyfill for Metadata Reflection API
+- [regenerator-runtime](https://ghub.io/regenerator-runtime): Runtime for Regenerator-compiled generator and async functions.
+- [sass-loader](https://ghub.io/sass-loader): Sass loader for webpack
+- [set-value](https://ghub.io/set-value): Create nested values and any intermediaries using dot notation (`&#39;a.b.c&#39;`) paths.
+- [simple-oauth2](https://ghub.io/simple-oauth2): Node.js client for OAuth2
+- [string-format](https://ghub.io/string-format): String formatting inspired by Python&#39;s str.format()
+- [string-similarity](https://ghub.io/string-similarity): Finds degree of similarity between strings, based on Dice&#39;s Coefficient, which is mostly better than Levenshtein distance.
+- [string-strip-html](https://ghub.io/string-strip-html): Strips HTML tags from strings. No parser, accepts mixed sources.
+- [style-loader](https://ghub.io/style-loader): style loader module for webpack
+- [try-require](https://ghub.io/try-require): Conditional load modules.
+- [ts-loader](https://ghub.io/ts-loader): TypeScript loader for webpack
+- [ts-node](https://ghub.io/ts-node): TypeScript execution environment and REPL for node.js, with source map support
+- [type-graphql](https://ghub.io/type-graphql): Create GraphQL schema and resolvers with TypeScript, using classes and decorators!
+- [typedi](https://ghub.io/typedi): Dependency injection for TypeScript
+- [typescript](https://ghub.io/typescript): TypeScript is a language for application scale JavaScript development
+- [ua-parser-js](https://ghub.io/ua-parser-js): Lightweight JavaScript-based user-agent string parser
+- [underscore](https://ghub.io/underscore): JavaScript&#39;s functional programming helper library.
+- [underscore.string](https://ghub.io/underscore.string): String manipulation extensions for Underscore.js javascript library.
+- [validator](https://ghub.io/validator): String validation and sanitization
+- [webpack](https://ghub.io/webpack): Packs CommonJs/AMD modules for the browser. Allows to split your codebase into multiple bundles, which can be loaded on demand. Support loaders to preprocess files, i.e. json, jsx, es7, css, less, ... and your custom stuff.
+- [webpack-cli](https://ghub.io/webpack-cli): CLI for webpack &amp; friends
+- [with-default-props](https://ghub.io/with-default-props): `with-default-props` lets you write `DefaultProps` for function components in a painless way.
+
+## Dev Dependencies
+
+- [@types/string-format](https://ghub.io/@types/string-format): TypeScript definitions for string-format
+- [@typescript-eslint/eslint-plugin](https://ghub.io/@typescript-eslint/eslint-plugin): TypeScript plugin for ESLint
+- [@typescript-eslint/parser](https://ghub.io/@typescript-eslint/parser): An ESLint custom parser which leverages TypeScript ESTree
+- [eslint](https://ghub.io/eslint): An AST-based pattern checker for JavaScript.
+- [eslint-config-prettier](https://ghub.io/eslint-config-prettier): Turns off all rules that are unnecessary or might conflict with Prettier.
+- [eslint-plugin-prettier](https://ghub.io/eslint-plugin-prettier): Runs prettier as an eslint rule
+- [eslint-plugin-react](https://ghub.io/eslint-plugin-react): React specific linting rules for ESLint
+- [eslint-plugin-react-hooks](https://ghub.io/eslint-plugin-react-hooks): ESLint rules for React Hooks
+- [eslint-plugin-tsdoc](https://ghub.io/eslint-plugin-tsdoc): An ESLint plugin that validates TypeScript doc comments
+- [eslint-plugin-unicorn](https://ghub.io/eslint-plugin-unicorn): Various awesome ESLint rules
+- [localtunnel](https://ghub.io/localtunnel): Expose localhost to the world
+- [open](https://ghub.io/open): Open stuff like URLs, files, executables. Cross-platform.
+- [prettier](https://ghub.io/prettier): Prettier is an opinionated code formatter
+- [prettier-plugin-organize-imports](https://ghub.io/prettier-plugin-organize-imports): Make prettier organize your imports using the TypeScript language service API.
+- [typedoc](https://ghub.io/typedoc): Create api documentation for TypeScript projects.
+- [typedoc-plugin-markdown](https://ghub.io/typedoc-plugin-markdown): A plugin for TypeDoc that enables TypeScript API documentation to be generated in Markdown.
+- [webpack-build-notifier](https://ghub.io/webpack-build-notifier): A Webpack plugin that generates OS notifications for build steps using node-notifier.
+- [webpack-bundle-analyzer](https://ghub.io/webpack-bundle-analyzer): Webpack plugin and CLI utility that represents bundle content as convenient interactive zoomable treemap
+- [webpack-livereload-plugin](https://ghub.io/webpack-livereload-plugin): Livereload for webpack
+
