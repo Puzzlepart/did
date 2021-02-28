@@ -1,5 +1,6 @@
+/* eslint-disable no-console */
 /* eslint-disable tsdoc/syntax */
-import { useQuery } from '@apollo/client'
+import { FetchPolicy, useQuery } from '@apollo/client'
 import { ContextUser } from 'AppContext'
 import { useTranslation } from 'react-i18next'
 import { Notification } from 'types'
@@ -13,16 +14,16 @@ import notificationsQuery from './notifications.gql'
  * @param user - Context user
  */
 export function useNotificationsQuery(
-  user: ContextUser
+  user: ContextUser,
+  fetchPolicy: FetchPolicy = 'cache-first'
 ): { notifications: Notification[]; refetch: (delay?: number) => void } {
   const { t } = useTranslation()
   const { data, refetch } = useQuery(notificationsQuery, {
-    skip: true,
     variables: {
       templates: t('notifications.templates', { returnObjects: true }),
       locale: user?.language
     },
-    fetchPolicy: 'cache-and-network'
+    fetchPolicy
   })
   return {
     notifications: data?.notifications || [],
