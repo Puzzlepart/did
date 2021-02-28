@@ -8,15 +8,15 @@
   },
   "scripts": {
     "watch": "concurrently \"npm run watch:client\" \"npm run watch:server\" \"node .tasks/open.js\" \"node .tasks/localtunnel.js\"",
+    "lint": "eslint --ext .ts,.tsx ./client ./server --color && npm run prettier",
+    "lint:fix": "eslint --ext .ts,.tsx ./client ./server --color --fix && npm run prettier",
+    "prettier": "prettier --config .prettierrc '**/*.ts*' --write --loglevel silent",
     "start": "node ./dist/server/index.js",
     "watch:server": "nodemon",
     "watch:client": "webpack",
     "package:client": "webpack",
     "build:server": "tsc --project tsconfig.json && copyfiles -u 1 \"server/public/**/*\" dist/server",
     "debug:server": "npm run build:server; npx ts-node ./server/index.ts -T --inspect --wait",
-    "lint": "eslint --ext .ts,.tsx ./client ./server --color && npm run prettier",
-    "lint:fix": "eslint --ext .ts,.tsx ./client ./server --color --fix && npm run prettier",
-    "prettier": "prettier --config .prettierrc '**/*.ts*' --write --loglevel silent",
     "create-env": "node .tasks/create-dot-env.js",
     "typedoc": "npm run typedoc:client && npm run typedoc:server",
     "typedoc:server": "typedoc ./server/**/*.ts ./server/*.ts --options ./server/typedoc.json",
@@ -140,12 +140,13 @@
     "@typescript-eslint/eslint-plugin": "4.6.1",
     "@typescript-eslint/parser": "4.6.1",
     "assert": "2.0.0",
-    "eslint": "6.8.0",
+    "eslint": "^6.8.0",
     "eslint-config-prettier": "7.2.0",
     "eslint-plugin-prettier": "3.3.1",
     "eslint-plugin-react": "7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-tsdoc": "0.2.11",
+    "eslint-plugin-unicorn": "^28.0.2",
     "localtunnel": "2.0.1",
     "open": "7.2.1",
     "prettier": "2.2.1",
@@ -158,5 +159,79 @@
   "resolutions": {
     "@babel/preset-env": "7.8.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+      "prettier",
+      "plugin:react/recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:unicorn/recommended"
+    ],
+    "plugins": ["prettier", "react-hooks", "eslint-plugin-tsdoc", "unicorn"],
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "rules": {
+  
+      "@typescript-eslint/interface-name-prefix": 0,
+  
+      "@typescript-eslint/no-explicit-any": 0,
+  
+      "@typescript-eslint/member-delimiter-style": 0,
+  
+      "@typescript-eslint/explicit-function-return-type": 0,
+  
+      "@typescript-eslint/explicit-module-boundary-types": 0,
+  
+      "@typescript-eslint/no-inferrable-types": 0,
+  
+      "react/prop-types": 0,
+  
+      "no-inferrable-types": 0,
+  
+      "react/display-name": 0,
+  
+      "no-compare-neg-zero": 1,
+  
+      "no-console": 2,
+
+      "eqeqeq": 1,
+  
+      "max-classes-per-file": 1,
+  
+      "jsx-quotes": ["error", "prefer-single"],
+  
+      "quotes": ["error", "single"],
+  
+      "yoda": 2,
+  
+      "require-await": 1,
+  
+      "semi": ["error", "never", {}],
+  
+      "default-case": 0,
+  
+      "react-hooks/rules-of-hooks": "error",
+  
+      "react-hooks/exhaustive-deps": "warn",
+  
+      "tsdoc/syntax": "warn",
+
+      "unicorn/filename-case": 0
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    }
+  }
 }
