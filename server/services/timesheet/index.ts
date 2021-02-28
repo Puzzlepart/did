@@ -76,7 +76,7 @@ export class TimesheetService {
             events: this._connectEvents({
               ...parameters,
               ...data,
-              events: entries,
+              events: entries
             })
           }
         } else {
@@ -259,7 +259,7 @@ export class TimesheetService {
 
   /**
    * Connect events to projects and customers
-   * 
+   *
    * @see https://docs.mongodb.com/manual/reference/database-references/
    *
    * @param params - Connect events parameters
@@ -275,7 +275,10 @@ export class TimesheetService {
       id: event._id,
       ...event,
       project: find(projects, ({ _id }) => _id === event.projectId),
-      customer: find(customers, ({ key }) => key === firstPart(event.projectId)),
+      customer: find(
+        customers,
+        ({ key }) => key === firstPart(event.projectId)
+      ),
       date: DateUtils.formatDate(event.startDateTime, dateFormat, locale)
     }))
   }

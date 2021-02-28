@@ -1,10 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useLayoutEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
-import {
-  ICustomersParameters,
-  ICustomersState
-} from '../types'
+import { ICustomersParameters, ICustomersState } from '../types'
 
 /**
  * Update history hook on state change

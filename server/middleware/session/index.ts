@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import session from 'express-session'
-import environment from '../../utils/environment'
+import { environment } from '../../utils'
 import { redisMiddlware } from '../redis'
 const RedisStore = require('connect-redis')(session)
 

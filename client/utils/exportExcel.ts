@@ -15,7 +15,7 @@ export type ExcelColumnType = 'date' | null
 /**
  * Coverts a Javascript string to a
  * unsigned 8 byte int ArrayBuffer
- * 
+ *
  * @see https://gist.github.com/gabemeola/c32b80d9302b30b577118c39f98e00b2
  *
  * @param binaryString - Binary String
@@ -25,7 +25,7 @@ export default function stringToArrayBuffer(binaryString: string) {
   const buffer = new Uint8Array(length)
 
   for (let index = 0; index < length; index++) {
-      buffer[index] = binaryString.charCodeAt(index)
+    buffer[index] = binaryString.charCodeAt(index)
   }
 
   return buffer

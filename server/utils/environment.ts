@@ -8,10 +8,7 @@ const debug = createDebug('env')
  * @param key - Key
  * @param fallbackValue - Fallback vaue if key is not found
  */
-export default function getEnvironmentVariable(
-  key: string,
-  fallbackValue: string = null
-) {
+export function environment(key: string, fallbackValue: string = null) {
   const value = process.env[key]
   if (isBlank(value)) {
     debug('Missing environment variable %s', key)

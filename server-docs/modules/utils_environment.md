@@ -6,13 +6,13 @@
 
 ### Functions
 
-- [default](utils_environment.md#default)
+- [environment](utils_environment.md#environment)
 
 ## Functions
 
-### default
+### environment
 
-▸ **default**(`key`: *string*, `fallbackValue?`: *string*): *string*
+▸ **environment**(`key`: *string*, `fallbackValue?`: *string*): *string*
 
 Get environment variable by key with optional fallbackvalue
 

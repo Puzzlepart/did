@@ -3,7 +3,7 @@ import { FilterQuery } from 'mongodb'
 import { omit } from 'underscore'
 import { Context } from '../../graphql/context'
 import { ApiToken } from '../../graphql/resolvers/types'
-import environment from '../../utils/environment'
+import { environment } from '../../utils'
 import { MongoDocumentService } from './@document'
 
 export class ApiTokenService extends MongoDocumentService<ApiToken> {

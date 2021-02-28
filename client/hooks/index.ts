@@ -5,6 +5,6 @@
  * @module Hooks
  */
 export * from './browserStorage'
+export * from './excel'
 export * from './notifications'
 export * from './user'
-export * from './excel'

@@ -17,7 +17,7 @@ import {
   serveGzippedMiddleware
 } from './middleware'
 import authRoute from './routes/auth'
-import environment from './utils/environment'
+import { environment } from './utils'
 
 /**
  * Did Express.js App

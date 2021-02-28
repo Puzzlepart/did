@@ -6,10 +6,10 @@ import { isArray } from 'underscore'
 import { exportExcel } from 'utils/exportExcel'
 
 interface IUseExcelExportOptions {
-    items: any[]
-    fileName: string
-    columns: IColumn[] | ((t: TFunction) => IColumn[])
-    callback?: (blob: Blob) => void
+  items: any[]
+  fileName: string
+  columns: IColumn[] | ((t: TFunction) => IColumn[])
+  callback?: (blob: Blob) => void
 }
 
 /**
@@ -17,21 +17,23 @@ interface IUseExcelExportOptions {
  *
  * @category React Hook
  */
-export function useExcelExport({ items, fileName, columns, callback }: IUseExcelExportOptions) {
-    const { t } = useTranslation()
+export function useExcelExport({
+  items,
+  fileName,
+  columns,
+  callback
+}: IUseExcelExportOptions) {
+  const { t } = useTranslation()
 
-    const onExport = async () => {
-        const blob = await exportExcel(items, {
-            columns: isArray(columns) ? columns : columns(t),
-            fileName: format(
-                fileName,
-                new Date().toDateString().split(' ').join('-')
-            )
-        })
-        if (callback) {
-            callback(blob)
-        }
+  const onExport = async () => {
+    const blob = await exportExcel(items, {
+      columns: isArray(columns) ? columns : columns(t),
+      fileName: format(fileName, new Date().toDateString().split(' ').join('-'))
+    })
+    if (callback) {
+      callback(blob)
     }
+  }
 
-    return { onExport }
+  return { onExport }
 }

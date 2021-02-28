@@ -1,11 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit'
 import { History } from 'history'
 import { contains, find } from 'underscore'
-import {
-  CustomersView,
-  ICustomersParameters,
-  ICustomersState
-} from '../types'
+import { CustomersView, ICustomersParameters, ICustomersState } from '../types'
 import { CHANGE_VIEW, DATA_UPDATED, SET_SELECTED_CUSTOMER } from './actions'
 
 /**

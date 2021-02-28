@@ -1,8 +1,5 @@
 import { contains } from 'underscore'
-import {
-  IProjectsParameters,
-  IProjectsState
-} from '../types'
+import { IProjectsParameters, IProjectsState } from '../types'
 
 /**
  * Initialize state URL params

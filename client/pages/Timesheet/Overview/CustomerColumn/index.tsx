@@ -3,7 +3,9 @@ import * as React from 'react'
 import styles from './CustomerColumn.module.scss'
 import { ICustomerColumnProps } from './types'
 
-export const CustomerColumn = ({ event }: ICustomerColumnProps): JSX.Element => {
+export const CustomerColumn = ({
+  event
+}: ICustomerColumnProps): JSX.Element => {
   if (!event.project?.customer) return null
   return (
     <div className={styles.root}>

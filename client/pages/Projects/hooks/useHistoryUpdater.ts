@@ -1,9 +1,6 @@
 import { useLayoutEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
-import {
-  IProjectsParameters,
-  IProjectsState
-} from '../types'
+import { IProjectsParameters, IProjectsState } from '../types'
 
 /**
  * Update history hook on state change
