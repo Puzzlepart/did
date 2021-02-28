@@ -18,6 +18,8 @@
 
 Get environment variable by key with optional fallbackvalue
 
+Makes it easier to work with process.env.
+
 #### Parameters:
 
 Name | Type | Default value | Description |
@@ -27,7 +29,7 @@ Name | Type | Default value | Description |
 
 **Returns:** *string*
 
-Defined in: [server/utils/environment.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/utils/environment.ts#L11)
+Defined in: [server/utils/environment.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/utils/environment.ts#L13)
 
 ___
 
