@@ -13,7 +13,7 @@ const MODE = process.env.NODE_ENV === 'development' ? 'development' : 'productio
 const IS_DEVELOPMENT = MODE === 'development'
 const SERVER_DIST = IS_DEVELOPMENT ? 'server' : 'dist/server'
 const BUNDLE_FILE_NAME = `[name].${version}.[hash].js`
-const HTML_PLUGIN_FILE_NAME = IS_DEVELOPMENT ? path.resolve(__dirname, 'server/views/@template_dev.hbs') : resolve(__dirname, 'server/views/@template.hbs')
+const HTML_PLUGIN_FILE_NAME = IS_DEVELOPMENT ? path.resolve(__dirname, 'server/views/@template_dev.hbs') : path.resolve(__dirname, 'server/views/@template.hbs')
 const SRC_PATH = path.resolve(__dirname, 'client/')
 
 /** PRINTING HEADER */
