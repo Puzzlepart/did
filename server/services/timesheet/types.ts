@@ -1,4 +1,4 @@
-import { Project, TimesheetPeriodInput } from '../../graphql/resolvers/types'
+import { Customer, Project, TimesheetPeriodInput } from '../../graphql/resolvers/types'
 
 export interface IGetTimesheetParameters {
   startDate: string
@@ -39,5 +39,6 @@ export interface IUnsubmitPeriodParameters {
 
 export interface IConnectEventsParameters extends IGetTimesheetParameters {
   projects: Project[]
+  customers: Customer[]
   events: any[]
 }

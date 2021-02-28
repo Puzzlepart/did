@@ -6,6 +6,7 @@ import { MSGraphService } from '..'
 import DateUtils, { DateObject } from '../../../shared/utils/date'
 import { Context } from '../../graphql/context'
 import { TimesheetPeriodObject } from '../../graphql/resolvers/types'
+import { firstPart } from '../../utils'
 import { MongoService } from '../mongo'
 import MatchingEngine from './matching'
 import {
@@ -74,8 +75,8 @@ export class TimesheetService {
             isConfirmed: true,
             events: this._connectEvents({
               ...parameters,
+              ...data,
               events: entries,
-              projects: data.projects
             })
           }
         } else {
@@ -257,13 +258,16 @@ export class TimesheetService {
   }
 
   /**
-   * Connect events to projects
+   * Connect events to projects and customers
+   * 
+   * @see https://docs.mongodb.com/manual/reference/database-references/
    *
-   * @param params - Connect events params
+   * @param params - Connect events parameters
    */
   private _connectEvents({
     events,
     projects,
+    customers,
     dateFormat,
     locale
   }: IConnectEventsParameters) {
@@ -271,6 +275,7 @@ export class TimesheetService {
       id: event._id,
       ...event,
       project: find(projects, ({ _id }) => _id === event.projectId),
+      customer: find(customers, ({ key }) => key === firstPart(event.projectId)),
       date: DateUtils.formatDate(event.startDateTime, dateFormat, locale)
     }))
   }
