@@ -69,7 +69,7 @@
 
 ### generateClientInfo
 
-▸ `Const`**generateClientInfo**(`context`: *GraphQLRequestContext*<[*Context*](../classes/graphql_context.context.md)\>): *object*
+▸ **generateClientInfo**(`__namedParameters`: *GraphQLRequestContext*<[*Context*](../classes/graphql_context.context.md)\>): *object*
 
 Specify this function to provide Apollo Studio with client details
 for each processed request. Apollo Studio uses this information to
@@ -83,13 +83,14 @@ request's HTTP headers (specifically, apollographql-client-name and apollographq
 
 **`see`** https://www.apollographql.com/docs/apollo-server/api/plugin/usage-reporting/#generateclientinfo
 
-**`remarks`** For now we're fetching browser info using ua-parser-js
+**`remarks`** For now we're fetching browser info using ua-parser-js, aswell as checking
+for Postman, Azure Logic Apps and Microsoft Flow.
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`context` | *GraphQLRequestContext*<[*Context*](../classes/graphql_context.context.md)\> | Context    |
+Name | Type |
+:------ | :------ |
+`__namedParameters` | *GraphQLRequestContext*<[*Context*](../classes/graphql_context.context.md)\> |
 
 **Returns:** *object*
 
@@ -98,7 +99,7 @@ Name | Type |
 `clientName` | *string* |
 `clientVersion` | *string* |
 
-Defined in: [server/graphql/index.ts:87](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L87)
+Defined in: [server/graphql/index.ts:89](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L89)
 
 ___
 
@@ -117,7 +118,7 @@ Generate GraphQL schema using type-graphql
 
 **Returns:** *Promise*<GraphQLSchema\>
 
-Defined in: [server/graphql/index.ts:45](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L45)
+Defined in: [server/graphql/index.ts:46](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L46)
 
 ___
 
@@ -139,4 +140,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/graphql/index.ts:102](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L102)
+Defined in: [server/graphql/index.ts:120](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L120)

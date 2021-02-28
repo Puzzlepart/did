@@ -15,6 +15,7 @@ import 'reflect-metadata'
 import { buildSchema, ResolverData } from 'type-graphql'
 import Container, { ContainerInstance } from 'typedi'
 import UAParser from 'ua-parser-js'
+import { find, isEmpty } from 'underscore'
 import { authChecker } from './authChecker'
 import { Context, createContext } from './context'
 import {
@@ -80,12 +81,31 @@ export const generateGraphQLSchema = async () => {
  *
  * @see https://www.apollographql.com/docs/apollo-server/api/plugin/usage-reporting/#generateclientinfo
  *
- * @remarks For now we're fetching browser info using ua-parser-js
+ * @remarks For now we're fetching browser info using ua-parser-js, aswell as checking
+ * for Postman, Azure Logic Apps and Microsoft Flow.
  *
  * @param context - Context
  */
-export const generateClientInfo = (context: GraphQLRequestContext<Context>) => {
-  const userAgent = context.request.http.headers.get('user-agent')
+export function generateClientInfo({
+  request
+}: GraphQLRequestContext<Context>) {
+  const userAgent = request.http.headers.get('user-agent') || ''
+  if (isEmpty(userAgent)) return null
+  if (userAgent.indexOf('PostmanRuntime') === 0) {
+    const [, clientVersion] = userAgent.split('/')
+    return { clientName: 'Postman Runtime', clientVersion }
+  }
+  const parts = userAgent.split(' ')
+  if (userAgent.includes('microsoft-flow')) {
+    const part = find(parts, (p) => p.includes('microsoft-flow'))
+    const [, clientVersion] = part.split('/')
+    return { clientName: 'Microsoft Flow', clientVersion }
+  }
+  if (userAgent.includes('azure-logic-apps')) {
+    const part = find(parts, (p) => p.includes('azure-logic-apps'))
+    const [, clientVersion] = part.split('/')
+    return { clientName: 'Azure Logic Apps', clientVersion }
+  }
   const browser = new UAParser(userAgent).getBrowser()
   return { clientName: browser.name, clientVersion: browser.version }
 }

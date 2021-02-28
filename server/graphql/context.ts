@@ -117,7 +117,7 @@ const handleTokenAuthentication = async (
   apiKey: string,
   database: MongoDatabase
 ) => {
-  const { expires, subscriptionId } = verify(
+  const { expires, subscriptionId: _id } = verify(
     apiKey,
     environment('API_TOKEN_SECRET')
   ) as any
@@ -131,7 +131,7 @@ const handleTokenAuthentication = async (
       }
     }),
     database.collection('subscriptions').findOne({
-      id: subscriptionId
+      _id
     })
   ])
   if (!token || !subscription)
