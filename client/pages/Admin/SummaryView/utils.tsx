@@ -19,9 +19,9 @@ export function createColumns(
   t: TFunction
 ): IColumn[] {
   let uniqueColumnValues: any[] = unique(
-    state.timeentries.map((e) => ({
-      year: e.year,
-      value: getValue(e, state.scope.fieldName)
+    state.timeentries.map((entry_) => ({
+      year: entry_.year,
+      value: getValue(entry_, state.scope.fieldName)
     })),
     ({ year, value }) => year && value
   )
@@ -83,19 +83,24 @@ export const createRows = (
 ): ISummaryViewRow[] => {
   const rowValues = sortAlphabetically(
     unique(
-      state.timeentries.map((e) => getValue(e, state.type.fieldName, null)),
+      state.timeentries.map((entry_) =>
+        getValue(entry_, state.type.fieldName, null)
+      ),
       (r) => r
     )
   )
   const _columns = [...columns].splice(1, columns.length - 2)
   const rows: ISummaryViewRow[] = rowValues.map((label) => {
     const entries = state.timeentries.filter(
-      (e) => getValue(e, state.type.fieldName, null) === label
+      (entry_) => getValue(entry_, state.type.fieldName, null) === label
     )
     return _columns.reduce(
       (object, col) => {
         const sum = [...entries]
-          .filter((e) => getValue(e, state.scope.fieldName) === col.fieldName)
+          .filter(
+            (entry_) =>
+              getValue(entry_, state.scope.fieldName) === col.fieldName
+          )
           .reduce((sum, { duration }) => sum + duration, 0)
         switch (state.type.key) {
           case 'project':
@@ -118,7 +123,10 @@ export const createRows = (
     _columns.reduce(
       (object, col) => {
         const sum = [...state.timeentries]
-          .filter((e) => getValue(e, state.scope.fieldName) === col.fieldName)
+          .filter(
+            (event_) =>
+              getValue(event_, state.scope.fieldName) === col.fieldName
+          )
           .reduce((sum, { duration }) => sum + duration, 0)
         object[col.fieldName] = sum
         object.sum += sum

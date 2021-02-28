@@ -49,8 +49,7 @@ export default class {
       (c) => c.toLowerCase() === 'ignore'
     )
     if (!!ignoreCategory) return 'category'
-    if ((event.body || '').match(/[([{]ignore[)\]}]/gi) !== null)
-      return 'body'
+    if ((event.body || '').match(/[([{]ignore[)\]}]/gi) !== null) return 'body'
     return null
   }
 

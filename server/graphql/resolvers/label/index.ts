@@ -43,7 +43,9 @@ export class LabelResolver {
     @Arg('update', { nullable: true }) update: boolean
   ): Promise<BaseResult> {
     const l = new Label(label)
-    await (update ? this._mongo.label.updateLabel(l) : this._mongo.label.addLabel(l))
+    await (update
+      ? this._mongo.label.updateLabel(l)
+      : this._mongo.label.addLabel(l))
     return { success: true, error: null }
   }
 

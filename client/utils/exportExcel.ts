@@ -1,7 +1,7 @@
+import { DateObject } from 'DateUtils'
 import { getValue } from 'helpers'
 import { IColumn } from 'office-ui-fabric-react'
 import { humanize } from 'underscore.string'
-import { DateObject } from 'DateUtils'
 import { loadScripts } from './loadScripts'
 
 export interface IExcelExportOptions {
@@ -21,7 +21,7 @@ function stringToArrayBuffer(string: string): ArrayBuffer {
   const buf = new ArrayBuffer(string.length)
   const view = new Uint8Array(buf)
   for (let index = 0; index !== string.length; ++index) {
-    view[index] = string.charCodeAt(index) & 0xFF
+    view[index] = string.charCodeAt(index) & 0xff
   }
   return buf
 }

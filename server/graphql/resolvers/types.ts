@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
-import { ObjectType, Field } from 'type-graphql'
+import { Field, ObjectType } from 'type-graphql'
 
 /**
  * Ignore from typedoc documentation
@@ -52,10 +52,10 @@ export * from './apiToken'
 export * from './customer'
 export * from './label'
 export * from './notification'
-export * from './reports'
-export * from './timesheet'
-export * from './project'
 export * from './outlookCategory'
-export * from './user'
+export * from './project'
+export * from './reports'
 export * from './role'
 export * from './subscription'
+export * from './timesheet'
+export * from './user'

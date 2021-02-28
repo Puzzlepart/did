@@ -9,9 +9,9 @@ import { isEmpty } from 'underscore'
 export function searchObject<T = any>(item: T, searchString: string) {
   if (isEmpty(searchString)) return true
   try {
-    return (
-      JSON.stringify(item).toLowerCase().includes(searchString.toLowerCase())
-    )
+    return JSON.stringify(item)
+      .toLowerCase()
+      .includes(searchString.toLowerCase())
   } catch {
     return false
   }

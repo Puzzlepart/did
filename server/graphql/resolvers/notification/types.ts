@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
-import { Field, ObjectType, InputType, ID } from 'type-graphql'
+import { Field, ID, InputType, ObjectType } from 'type-graphql'
 
 /**
  * @category ObjectType

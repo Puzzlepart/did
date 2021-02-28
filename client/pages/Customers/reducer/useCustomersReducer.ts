@@ -7,7 +7,10 @@ import createReducer, { initState } from './'
 export function useCustomersReducer() {
   const history = useHistory()
   const parameters = useParams<ICustomersParameters>()
-  const reducer = useMemo(() => createReducer({ params: parameters, history }), [])
+  const reducer = useMemo(
+    () => createReducer({ params: parameters, history }),
+    []
+  )
   const [state, dispatch] = useReducer(reducer, initState(parameters))
   return { state, dispatch }
 }

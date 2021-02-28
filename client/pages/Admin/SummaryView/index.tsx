@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
-import { UserMessage, List } from 'components'
+import { List, UserMessage } from 'components'
 import { DateObject } from 'DateUtils'
 import { Pivot, PivotItem } from 'office-ui-fabric-react'
 import React, { useEffect, useMemo, useReducer } from 'react'

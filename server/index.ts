@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import * as http from 'http'
 import app from './app'
-import environment from './utils/env'
+import environment from './utils/environment'
 const debug = require('debug')('server')
 
 /**

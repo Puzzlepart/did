@@ -23,7 +23,9 @@ export class MonthFilter<
    * @param items - Items
    */
   public initialize(items: ItemType[]): IFilter {
-    const values = unique(items.map((e) => getValue(e, this.fieldName, null)))
+    const values = unique(
+      items.map((item_) => getValue(item_, this.fieldName, null))
+    )
     const monthNames = DateUtils.getMonthNames()
     const _items = monthNames
       .filter((_, index) => contains(values, index + 1))
@@ -32,7 +34,9 @@ export class MonthFilter<
       key: this.fieldName,
       name: this.name,
       items: _items,
-      selected: _items.filter((index) => contains(this._selectedKeys, index.key))
+      selected: _items.filter((index) =>
+        contains(this._selectedKeys, index.key)
+      )
     }
   }
 

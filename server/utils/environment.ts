@@ -1,5 +1,5 @@
-import { isBlank } from 'underscore.string'
 import createDebug from 'debug'
+import { isBlank } from 'underscore.string'
 const debug = createDebug('env')
 
 /**

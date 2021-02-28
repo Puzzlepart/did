@@ -1,5 +1,5 @@
-import { reduce } from 'underscore'
 import { getValue } from 'helpers'
+import { reduce } from 'underscore'
 
 type Item = { [key: string]: any }
 

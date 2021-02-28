@@ -4,8 +4,7 @@ import { MongoClient } from 'mongodb'
 import passport from 'passport'
 import { IProfile, OIDCStrategy, VerifyCallback } from 'passport-azure-ad'
 import { SubscriptionService, UserService } from '../../services/mongo'
-import environment from '../../utils/env'
-
+import environment from '../../utils/environment'
 
 /**
  * Get redirect URL

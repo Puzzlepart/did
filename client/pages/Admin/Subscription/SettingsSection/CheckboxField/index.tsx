@@ -1,7 +1,7 @@
-import { contains } from 'underscore'
 import { getValue } from 'helpers'
 import { Checkbox, Label } from 'office-ui-fabric-react'
 import React, { useContext } from 'react'
+import { contains } from 'underscore'
 import { SubscriptionContext } from '../../context'
 import { ICheckboxFieldProps } from './types'
 
@@ -19,7 +19,7 @@ export const CheckboxField = ({
           key={key}
           defaultChecked={contains(getValue(settings, settingsKey, []), key)}
           label={options[key]}
-          onChange={(_e, checked) => {
+          onChange={(_event, checked) => {
             onSettingsChanged(settingsKey, (value: string[]) => {
               value = value || []
               if (checked) value.push(key)

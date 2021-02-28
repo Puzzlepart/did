@@ -35,8 +35,8 @@ export function useLabelPicker({
       )
       setLabels(_labels)
       if (defaultSelectedKeys) {
-        const _selectedLabels = _labels.filter(
-          (lbl) => defaultSelectedKeys.includes(lbl.name)
+        const _selectedLabels = _labels.filter((lbl) =>
+          defaultSelectedKeys.includes(lbl.name)
         )
         setSelectedLabels(_selectedLabels)
       }

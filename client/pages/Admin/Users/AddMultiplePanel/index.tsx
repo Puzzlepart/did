@@ -1,10 +1,10 @@
 import { List } from 'components'
 import {
   CheckboxVisibility,
-  SelectionMode,
-  PrimaryButton,
   Panel,
-  PanelType
+  PanelType,
+  PrimaryButton,
+  SelectionMode
 } from 'office-ui-fabric-react'
 import React, { useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'

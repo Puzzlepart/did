@@ -11,7 +11,7 @@ import { MongoClient } from 'mongodb'
 import 'reflect-metadata'
 import { buildSchema, ResolverData } from 'type-graphql'
 import Container, { ContainerInstance } from 'typedi'
-import environment from '../utils/env'
+import environment from '../utils/environment'
 import { authChecker } from './authChecker'
 import { Context, createContext } from './context'
 import {

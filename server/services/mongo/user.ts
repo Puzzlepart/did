@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { FilterQuery } from 'mongodb'
+import set from 'set-value'
 import { find, omit } from 'underscore'
 import { RoleService } from '.'
 import { Context } from '../../graphql/context'
 import { User } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
-import set from 'set-value'
 
 export class UserService extends MongoDocumentService<User> {
   private _role: RoleService
@@ -57,7 +57,7 @@ export class UserService extends MongoDocumentService<User> {
   public async getById(id: string) {
     try {
       const user = await this.collection.findOne({ _id: id })
-      if (!user.role) throw new Error()
+      if (!user.role) throw new Error(`The user ${id} has no role set.`)
       user.id = user._id
       user.role = await this._role.getByName(user.role as string)
       user.configuration = JSON.stringify(user.configuration)

@@ -3,7 +3,7 @@ import { FilterQuery } from 'mongodb'
 import { omit } from 'underscore'
 import { Context } from '../../graphql/context'
 import { ApiToken } from '../../graphql/resolvers/types'
-import environment from '../../utils/env'
+import environment from '../../utils/environment'
 import { MongoDocumentService } from './@document'
 
 export class ApiTokenService extends MongoDocumentService<ApiToken> {
@@ -38,7 +38,10 @@ export class ApiTokenService extends MongoDocumentService<ApiToken> {
     try {
       token.subscriptionId = subscriptionId
       token.created = new Date()
-      const apiKey = sign(omit(token, 'created'), environment('API_TOKEN_SECRET'))
+      const apiKey = sign(
+        omit(token, 'created'),
+        environment('API_TOKEN_SECRET')
+      )
       await this.collection.insertOne({
         ...token,
         apiKey

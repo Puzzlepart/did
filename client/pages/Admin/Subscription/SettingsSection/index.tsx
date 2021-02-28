@@ -38,7 +38,7 @@ export const SettingsSection: FunctionComponent<ISettingsSectionProps> = (
               <Toggle
                 {..._}
                 defaultChecked={getValue(settings, key, false)}
-                onChange={(_e, value) => onSettingsChanged(key, value)}
+                onChange={(_event, value) => onSettingsChanged(key, value)}
               />
             )
             break

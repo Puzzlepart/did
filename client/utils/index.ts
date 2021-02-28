@@ -4,9 +4,9 @@
  *
  * @module Utils
  */
-export * from './sleep'
+export * from './browserStorage'
 export * from './generateColumn'
 export * from './getSum'
 export * from './loadScripts'
 export * from './searchObject'
-export * from './browserStorage'
+export * from './sleep'

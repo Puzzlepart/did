@@ -1,5 +1,5 @@
 import { createClient as createRedisClient } from 'redis'
-import environment from '../../utils/env'
+import environment from '../../utils/environment'
 
 /**
  * Redis client

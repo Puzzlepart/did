@@ -21,6 +21,7 @@ function getDataForChart(
     else _items.push({ id: data[chart.idKey], chart, data, value })
     return _items
   }, [])
+  // eslint-disable-next-line unicorn/explicit-length-check
   const truncateLength = width / (items.length || 1) / 6
   return items.map((index) => ({
     ...index,

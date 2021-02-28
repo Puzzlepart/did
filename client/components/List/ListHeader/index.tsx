@@ -1,12 +1,12 @@
 import {
-  Sticky,
-  StickyPositionType,
   CommandBar,
-  SearchBox
+  SearchBox,
+  Sticky,
+  StickyPositionType
 } from 'office-ui-fabric-react'
 import React, { FunctionComponent, useMemo, useRef } from 'react'
-import { IListHeaderProps } from './types'
 import styles from './ListHeader.module.scss'
+import { IListHeaderProps } from './types'
 
 export const ListHeader: FunctionComponent<IListHeaderProps> = (
   props: IListHeaderProps
@@ -39,7 +39,9 @@ export const ListHeader: FunctionComponent<IListHeaderProps> = (
       <div className={styles.root}>
         <CommandBar
           {...props.commandBar}
-          items={[searchBox, ...props.commandBar.items].filter((index) => index)}
+          items={[searchBox, ...props.commandBar.items].filter(
+            (index) => index
+          )}
           hidden={
             props.commandBar.items.length === 0 &&
             props.commandBar.farItems.length === 0

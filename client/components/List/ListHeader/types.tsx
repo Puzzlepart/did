@@ -1,7 +1,7 @@
 import {
-  IRenderFunction,
-  IDetailsHeaderProps,
   ICommandBarProps,
+  IDetailsHeaderProps,
+  IRenderFunction,
   ISearchBoxProps
 } from 'office-ui-fabric-react'
 import { Dispatch } from 'react'

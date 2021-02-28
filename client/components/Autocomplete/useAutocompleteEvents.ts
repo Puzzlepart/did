@@ -25,6 +25,7 @@ export function useAutocompleteEvents({ dispatch, props }) {
       dispatch(RESET())
       props.onClear()
     },
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     onKeyDown: () => (event: React.KeyboardEvent<HTMLDivElement>) =>
       dispatch(
         ON_KEY_DOWN({

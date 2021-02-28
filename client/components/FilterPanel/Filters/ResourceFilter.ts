@@ -34,9 +34,9 @@ export class ResourceFilter<
    */
   public initialize(items: ItemType[]): IFilter {
     const _items = unique(
-      items.map((e) => ({
-        key: getValue(e, this.keyFieldName, null),
-        value: getValue(e, this.valueFieldName, null)
+      items.map((item_) => ({
+        key: getValue(item_, this.keyFieldName, null),
+        value: getValue(item_, this.valueFieldName, null)
       })),
       (item) => item.key
     ).sort((a, b) => {
@@ -48,7 +48,9 @@ export class ResourceFilter<
       key: this.keyFieldName,
       name: this.name,
       items: _items,
-      selected: _items.filter((index) => contains(this._selectedKeys, index.key))
+      selected: _items.filter((index) =>
+        contains(this._selectedKeys, index.key)
+      )
     }
   }
 

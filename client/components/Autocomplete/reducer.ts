@@ -43,7 +43,9 @@ export default () =>
       [ON_SEARCH.type]: (state, { payload }: ReturnType<typeof ON_SEARCH>) => {
         state.selectedIndex = -1
         state.suggestions = state.items.filter((index) =>
-          index.searchValue.toLowerCase().includes(payload.searchTerm.toLowerCase())
+          index.searchValue
+            .toLowerCase()
+            .includes(payload.searchTerm.toLowerCase())
         )
         state.value = payload.searchTerm
       },

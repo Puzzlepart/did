@@ -7,8 +7,8 @@ import {
   DATA_UPDATED,
   SET_SELECTED_PROJECT
 } from './actions'
-import { IProjectsReducerParams as IProjectsReducerParameters } from './types'
 import { initState } from './initState'
+import { IProjectsReducerParams as IProjectsReducerParameters } from './types'
 
 /**
  * Create reducer for Projects
@@ -29,12 +29,8 @@ export default ({ url: parameters }: IProjectsReducerParameters) =>
           )
           return _p
         })
-        state.selected = find(
-          state.projects,
-          (p) =>
-            JSON.stringify(parameters)
-              .toLowerCase()
-              .includes(p.tag.toLowerCase())
+        state.selected = find(state.projects, (p) =>
+          JSON.stringify(parameters).toLowerCase().includes(p.tag.toLowerCase())
         )
       }
       state.error = payload.error

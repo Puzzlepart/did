@@ -1,7 +1,11 @@
 import { createReducer } from '@reduxjs/toolkit'
 import { History } from 'history'
 import { contains, find } from 'underscore'
-import { CustomersView, ICustomersParams as ICustomersParameters, ICustomersState } from '../types'
+import {
+  CustomersView,
+  ICustomersParams as ICustomersParameters,
+  ICustomersState
+} from '../types'
 import { CHANGE_VIEW, DATA_UPDATED, SET_SELECTED_CUSTOMER } from './actions'
 
 /**
@@ -9,7 +13,9 @@ import { CHANGE_VIEW, DATA_UPDATED, SET_SELECTED_CUSTOMER } from './actions'
  *
  * @param params - Params
  */
-export const initState = (parameters: ICustomersParameters): ICustomersState => ({
+export const initState = (
+  parameters: ICustomersParameters
+): ICustomersState => ({
   view: (contains(['search', 'new'], parameters.view)
     ? parameters.view
     : 'search') as CustomersView,
@@ -31,9 +37,8 @@ export default ({ params }: ICreateReducerParameters) =>
       { payload }: ReturnType<typeof DATA_UPDATED>
     ) => {
       state.customers = payload.query.data?.customers || []
-      state.selected = find(
-        state.customers,
-        (c) => [params.key, params.view].includes(c.key.toLowerCase())
+      state.selected = find(state.customers, (c) =>
+        [params.key, params.view].includes(c.key.toLowerCase())
       )
     },
 

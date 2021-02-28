@@ -1,2 +1,2 @@
-export { default as getEnvironmentVariable } from './env'
+export { default as getEnvironmentVariable } from './environment'
 export * from './stripHtmlString'

@@ -21,8 +21,6 @@ export default (state: IListState, action: Action): IListState => {
     case 'SEARCH':
       newState.searchTerm = action.payload
       break
-    default:
-      throw new Error()
   }
   newState.items = newState.origItems.filter((index) =>
     searchObject(index, newState.searchTerm)

@@ -16,7 +16,11 @@ import set from 'set-value'
  * @param exp - Expression
  * @param defaultValue - Default value
  */
-export function getValue<T = any>(object: any, exp: string, defaultValue?: T): T {
+export function getValue<T = any>(
+  object: any,
+  exp: string,
+  defaultValue?: T
+): T {
   return get(object, exp, defaultValue && { default: defaultValue })
 }
 

@@ -11,13 +11,13 @@ import path from 'path'
 import { pick } from 'underscore'
 import { setupGraphQL } from './graphql'
 import {
-  redisSessionMiddleware,
-  serveGzippedMiddleware,
+  helmetMiddleware,
   passportMiddleware,
-  helmetMiddleware
+  redisSessionMiddleware,
+  serveGzippedMiddleware
 } from './middleware'
 import authRoute from './routes/auth'
-import environment from './utils/env'
+import environment from './utils/environment'
 
 /**
  * Did Express.js App
@@ -134,8 +134,8 @@ export class App {
    */
   setupRoutes() {
     const index = express.Router()
-    index.get('/', (_request, res) => {
-      return res.render('index')
+    index.get('/', (_request, response) => {
+      return response.render('index')
     })
     this.instance.use('*', index)
   }
@@ -144,10 +144,10 @@ export class App {
    * Setup error handling using http-errors
    */
   setupErrorHandling() {
-    this.instance.use((_request, _res, next) => next(createError()))
+    this.instance.use((_request, _response, next) => next(createError()))
     this.instance.use(
-      (error: any, _request: express.Request, res: express.Response) => {
-        res.render('index', {
+      (error: any, _request: express.Request, response: express.Response) => {
+        response.render('index', {
           error: JSON.stringify(pick(error, 'name', 'message', 'status'))
         })
       }

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response, Router } from 'express'
 import passport from 'passport'
-import environment from '../utils/env'
 import url from 'url'
+import environment from '../utils/environment'
 const auth = Router()
 
 auth.get(

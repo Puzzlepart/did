@@ -1,10 +1,10 @@
 /* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
-import { Customer } from 'types'
-import $customers from './customers.gql'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Customer } from 'types'
 import { Autocomplete, ISuggestionItem } from '../Autocomplete'
+import $customers from './customers.gql'
 import { ISearchCustomerProps } from './types'
 
 /**

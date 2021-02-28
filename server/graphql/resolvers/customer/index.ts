@@ -45,7 +45,9 @@ export class CustomerResolver {
     @Arg('update', { nullable: true }) update: boolean
   ) {
     const c = new Customer().fromInput(customer)
-    await (update ? this._mongo.customer.updateCustomer(c) : this._mongo.customer.addCustomer(c))
+    await (update
+      ? this._mongo.customer.updateCustomer(c)
+      : this._mongo.customer.addCustomer(c))
     return { success: true, error: null }
   }
 

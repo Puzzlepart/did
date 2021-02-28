@@ -1,8 +1,8 @@
 /* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
-import { NotificationService } from '../../../services/notification'
 import { Arg, Authorized, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
+import { NotificationService } from '../../../services/notification'
 import { IAuthOptions } from '../../authChecker'
 import { Notification, NotificationTemplates } from './types'
 

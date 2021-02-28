@@ -74,7 +74,9 @@ export class UserResolver {
     @Arg('user', () => UserInput) user: UserInput,
     @Arg('update', { nullable: true }) update: boolean
   ): Promise<BaseResult> {
-    await (update ? this._mongo.user.updateUser(user) : this._mongo.user.addUser(user))
+    await (update
+      ? this._mongo.user.updateUser(user)
+      : this._mongo.user.addUser(user))
     return { success: true, error: null }
   }
 

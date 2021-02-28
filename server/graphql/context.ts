@@ -6,7 +6,7 @@ import { Db as MongoDatabase, MongoClient } from 'mongodb'
 import 'reflect-metadata'
 import { Container, ContainerInstance } from 'typedi'
 import { DateObject } from '../../shared/utils/date'
-import environment from '../utils/env'
+import environment from '../utils/environment'
 import { Subscription } from './resolvers/types'
 const debug = createDebug('graphql/context')
 
@@ -113,7 +113,10 @@ export const createContext = async (
  * @param apiKey -Api key
  * @param db - Mongodb database
  */
-const handleTokenAuthentication = async (apiKey: string, database: MongoDatabase) => {
+const handleTokenAuthentication = async (
+  apiKey: string,
+  database: MongoDatabase
+) => {
   const { expires, subscriptionId } = verify(
     apiKey,
     environment('API_TOKEN_SECRET')

@@ -44,7 +44,6 @@ export const client = new ApolloClient({
 })
 
 export { default as $context } from './context.gql'
-
 /**
  * @ignore
  */

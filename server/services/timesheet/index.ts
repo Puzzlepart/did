@@ -46,7 +46,9 @@ export class TimesheetService {
    *
    * @param params - Timesheet params
    */
-  public async getTimesheet(parameters: IGetTimesheetParameters): Promise<any[]> {
+  public async getTimesheet(
+    parameters: IGetTimesheetParameters
+  ): Promise<any[]> {
     try {
       const periods = this.getPeriods(
         parameters.startDate,
@@ -86,10 +88,10 @@ export class TimesheetService {
               returnIsoDates: false
             }
           )
-          periods[index].events = engine.matchEvents(events).map((e) => ({
-            ...e,
+          periods[index].events = engine.matchEvents(events).map((event_) => ({
+            ...event_,
             date: DateUtils.formatDate(
-              e.startDateTime,
+              event_.startDateTime,
               parameters.dateFormat,
               parameters.locale
             )
@@ -107,7 +109,9 @@ export class TimesheetService {
    *
    * @param params - Submit period params
    */
-  public async submitPeriod(parameters: ISubmitPeriodParameters): Promise<void> {
+  public async submitPeriod(
+    parameters: ISubmitPeriodParameters
+  ): Promise<void> {
     try {
       const events = await this._msgraph.getEvents(
         parameters.period.startDate,

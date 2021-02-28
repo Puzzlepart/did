@@ -4,12 +4,12 @@ import { getValue } from 'helpers'
 import { filter, find, omit } from 'underscore'
 import { IReportsState } from '../types'
 import {
-  INIT,
   ADD_FILTER,
   CHANGE_QUERY,
   CLEAR_FILTERS,
   DATA_UPDATED,
   FILTERS_UPDATED,
+  INIT,
   REMOVE_SELECTED_FILTER,
   SET_FILTER,
   SET_GROUP_BY,
@@ -39,8 +39,8 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
         state.subset = filter(state.timeentries, (entry) => {
           return (
             filter(Object.keys(payload.filter.values), (key) => {
-              return (
-                payload.filter.values[key].includes(getValue(entry, key, ''))
+              return payload.filter.values[key].includes(
+                getValue(entry, key, '')
               )
             }).length === Object.keys(payload.filter.values).length
           )

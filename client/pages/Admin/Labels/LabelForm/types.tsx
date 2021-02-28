@@ -1,5 +1,5 @@
-import { LabelInput, LabelObject } from 'types'
 import { IPanelProps } from 'office-ui-fabric-react'
+import { LabelInput, LabelObject } from 'types'
 
 export interface ILabelFormProps extends IPanelProps {
   title?: string

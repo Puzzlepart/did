@@ -1,5 +1,5 @@
-import fs from 'fs'
 import express from 'express'
+import fs from 'fs'
 
 /**
  * Serve gzipped

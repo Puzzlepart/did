@@ -23,7 +23,7 @@ export class YearFilter<
    */
   public initialize(items: ItemType[]): IFilter {
     const years = unique(
-      items.map((e) => getValue(e, this.fieldName, null))
+      items.map((item_) => getValue(item_, this.fieldName, null))
     ).sort()
     const _items = years.map((year) => ({
       key: year,
@@ -33,7 +33,9 @@ export class YearFilter<
       key: this.fieldName,
       name: this.name,
       items: _items,
-      selected: _items.filter((index) => contains(this._selectedKeys, index.key))
+      selected: _items.filter((index) =>
+        contains(this._selectedKeys, index.key)
+      )
     }
   }
 

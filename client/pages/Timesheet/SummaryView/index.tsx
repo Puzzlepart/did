@@ -21,7 +21,7 @@ function createColumns(scope: TimesheetScope): IColumn[] {
   const onRender = (row: any, _index: number, col: IColumn) => (
     <DurationColumn row={row} column={col} />
   )
-  const columns = [...Array.from({length: 7}).keys()].map((index) => {
+  const columns = [...Array.from({ length: 7 }).keys()].map((index) => {
     const day = scope.getDay(index)
     return {
       key: day.format('YYYY-MM-DD'),
@@ -74,7 +74,7 @@ function createColumns(scope: TimesheetScope): IColumn[] {
  */
 function generateRows(events: EventObject[], columns: IColumn[]) {
   const projects = unique(
-    events.map((e) => e.project),
+    events.map((event_) => event_.project),
     (p: Project) => p.tag
   )
   return projects.map((project) => {

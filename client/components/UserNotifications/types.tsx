@@ -44,7 +44,9 @@ export class NotificationModel {
         return MessageBarType.info
 
       case NotificationType.SERVICE_ANNOUNCEMENT: {
-        return this.severity === NotificationSeverity.HIGH ? MessageBarType.severeWarning : MessageBarType.warning
+        return this.severity === NotificationSeverity.HIGH
+          ? MessageBarType.severeWarning
+          : MessageBarType.warning
       }
       default:
         return MessageBarType.info

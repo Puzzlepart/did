@@ -6,7 +6,7 @@ import { Inject, Service } from 'typedi'
 import { sortBy } from 'underscore'
 import DateUtils from '../../../shared/utils/date'
 import { Context } from '../../graphql/context'
-import environment from '../../utils/env'
+import environment from '../../utils/environment'
 import { CacheScope, CacheService } from '../cache'
 import OAuthService, { AccessTokenOptions } from '../oauth'
 import MSGraphEvent, {
