@@ -209,7 +209,7 @@
                 "single"
             ],
             "yoda": 2,
-            "require-await": 1,
+            "require-await": 2,
             "semi": [
                 "error",
                 "never",
