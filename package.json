@@ -230,7 +230,15 @@
 
       "unicorn/no-array-reduce": 0,
 
-      "unicorn/no-null": 0
+      "unicorn/no-null": 0,
+
+      "unicorn/prevent-abbreviations": [
+        2,
+        {
+          "checkDefaultAndNamespaceImports": true,
+          "checkProperties": false
+        }
+      ]
     },
     "settings": {
       "react": {
