@@ -1,6 +1,6 @@
 import { contains } from 'underscore'
 import {
-  IProjectsParams as IProjectsParameters,
+  IProjectsParameters,
   IProjectsState
 } from '../types'
 

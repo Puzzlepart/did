@@ -2,7 +2,7 @@
 import { useLayoutEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import {
-  ICustomersParams as ICustomersParameters,
+  ICustomersParameters,
   ICustomersState
 } from '../types'
 

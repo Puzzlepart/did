@@ -3,7 +3,7 @@ import { AppContext } from 'AppContext'
 import { useContext, useMemo, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import { IReportsParams as IReportsParameters, IReportsQuery } from '..'
+import { IReportsParameters, IReportsQuery } from '..'
 import createReducer from '../reducer'
 
 /**

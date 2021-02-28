@@ -1,6 +1,6 @@
 import { useMemo, useReducer } from 'react'
 import createReducer, { initState } from './'
-import { IProjectsReducerParams as IProjectsReducerParameters } from './types'
+import { IProjectsReducerParameters } from './types'
 
 /**
  * Use Projects reducer

@@ -8,7 +8,7 @@ import {
   SET_SELECTED_PROJECT
 } from './actions'
 import { initState } from './initState'
-import { IProjectsReducerParams as IProjectsReducerParameters } from './types'
+import { IProjectsReducerParameters } from './types'
 
 /**
  * Create reducer for Projects

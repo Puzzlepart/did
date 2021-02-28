@@ -3,7 +3,7 @@ import { TFunction } from 'i18next'
 import { useMemo, useReducer } from 'react'
 import { find, first, isEmpty } from 'underscore'
 import {
-  ITimesheetParams as ITimesheetParameters,
+  ITimesheetParameters,
   ITimesheetState,
   TimesheetPeriod,
   TimesheetScope

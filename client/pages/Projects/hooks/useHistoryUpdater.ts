@@ -1,7 +1,7 @@
 import { useLayoutEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import {
-  IProjectsParams as IProjectsParameters,
+  IProjectsParameters,
   IProjectsState
 } from '../types'
 

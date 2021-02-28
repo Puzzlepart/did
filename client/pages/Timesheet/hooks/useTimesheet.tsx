@@ -5,7 +5,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import { useTimesheetReducer } from '../reducer'
 import {
   ITimesheetContext,
-  ITimesheetParams as ITimesheetParameters
+  ITimesheetParameters
 } from '../types'
 import { useSubmitActions } from './useSubmitActions'
 import { useTimesheetQuery } from './useTimesheetQuery'

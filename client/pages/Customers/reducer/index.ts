@@ -3,7 +3,7 @@ import { History } from 'history'
 import { contains, find } from 'underscore'
 import {
   CustomersView,
-  ICustomersParams as ICustomersParameters,
+  ICustomersParameters,
   ICustomersState
 } from '../types'
 import { CHANGE_VIEW, DATA_UPDATED, SET_SELECTED_CUSTOMER } from './actions'

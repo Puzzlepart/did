@@ -15,7 +15,7 @@ import {
   SET_GROUP_BY,
   TOGGLE_FILTER_PANEL
 } from './actions'
-import { IReportsReducerParams as IReportsReducerParameters } from './types'
+import { IReportsReducerParameters } from './types'
 
 /**
  * Creating reducer for Reports using reduxjs/toolkit

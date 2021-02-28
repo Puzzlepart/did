@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import { ICustomersContext } from '../context'
 import { DATA_UPDATED } from '../reducer/actions'
 import { useCustomersReducer } from '../reducer/useCustomersReducer'
-import { ICustomersParams as ICustomersParameters } from '../types'
+import { ICustomersParameters } from '../types'
 import $customers from './customers.gql'
 import { useHistoryUpdater } from './useHistoryUpdater'
 

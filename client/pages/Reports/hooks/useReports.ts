@@ -6,7 +6,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import initFilters from '../filters'
 import { getQueryPresets } from '../queries'
 import { DATA_UPDATED, INIT } from '../reducer/actions'
-import { IReportsParams as IReportsParameters } from '../types'
+import { IReportsParameters } from '../types'
 import $timeentries from './timeentries.gql'
 import { useReportsReducer } from './useReportsReducer'
 
