@@ -1,4 +1,4 @@
-mutation($configuration: String!) {
+mutation UpdateUserConfiguration ($configuration: String!) {
   result: updateUserConfiguration(configuration: $configuration) {
     success
   }

@@ -1,4 +1,4 @@
-mutation($period: TimesheetPeriodInput!, $options: TimesheetOptions!) {
+mutation SubmitPeriod ($period: TimesheetPeriodInput!, $options: TimesheetOptions!) {
   result: submitPeriod(period: $period, options: $options) {
     success
     error {

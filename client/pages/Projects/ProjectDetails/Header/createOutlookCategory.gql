@@ -1,4 +1,4 @@
-mutation($category: String!) {
+mutation CreateOutlookCategory ($category: String!) {
   result: createOutlookCategory(category: $category) {
     data {
       id
