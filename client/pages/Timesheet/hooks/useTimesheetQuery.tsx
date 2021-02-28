@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
 import { AnyAction } from '@reduxjs/toolkit'
 import { AppContext } from 'AppContext'
@@ -11,6 +12,8 @@ import $timesheet from './timesheet.gql'
  *
  * @param state - State
  * @param dispatch - Dispatch
+ *
+ * @category Timesheet Hooks
  */
 export function useTimesheetQuery(
   state: ITimesheetState,

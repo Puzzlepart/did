@@ -77,7 +77,7 @@ Name | Type |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [client/pages/Timesheet/hooks/useSubmitActions.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L19)
+Defined in: [client/pages/Timesheet/hooks/useSubmitActions.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L22)
 
 ___
 
@@ -97,7 +97,7 @@ Name | Type |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [client/pages/Timesheet/hooks/useSubmitActions.tsx:30](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L30)
+Defined in: [client/pages/Timesheet/hooks/useSubmitActions.tsx:33](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L33)
 
 ___
 

@@ -75,13 +75,6 @@ All are built using React Function components and Hooks.
 - [SummaryView](pages.md#summaryview)
 - [Users](pages.md#users)
 
-### Other Functions
-
-- [useHotkeys](pages.md#usehotkeys)
-- [useSubmitActions](pages.md#usesubmitactions)
-- [useTimesheet](pages.md#usetimesheet)
-- [useTimesheetQuery](pages.md#usetimesheetquery)
-
 ### Reports Functions
 
 - [SaveFilterForm](pages.md#savefilterform)
@@ -93,6 +86,13 @@ All are built using React Function components and Hooks.
 - [useReports](pages.md#usereports)
 - [useReportsReducer](pages.md#usereportsreducer)
 - [useUpdateUserConfiguration](pages.md#useupdateuserconfiguration)
+
+### Timesheet Hooks Functions
+
+- [useHotkeys](pages.md#usehotkeys)
+- [useSubmitActions](pages.md#usesubmitactions)
+- [useTimesheet](pages.md#usetimesheet)
+- [useTimesheetQuery](pages.md#usetimesheetquery)
 
 ## Type aliases
 
@@ -284,105 +284,6 @@ Defined in: [client/pages/Admin/Users/index.tsx:25](https://github.com/Puzzlepar
 
 ___
 
-## Other Functions
-
-### useHotkeys
-
-▸ **useHotkeys**(`context`: [*ITimesheetContext*](../interfaces/pages.itimesheetcontext.md)): *object*
-
-Hook for hotkeys
-
-#### Parameters:
-
-Name | Type | Description |
-:------ | :------ | :------ |
-`context` | [*ITimesheetContext*](../interfaces/pages.itimesheetcontext.md) | Context    |
-
-**Returns:** *object*
-
-Name | Type |
-:------ | :------ |
-`hotkeysProps` | *GlobalHotKeysProps* |
-
-Defined in: [client/pages/Timesheet/hooks/useHotkeys.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useHotkeys.tsx#L10)
-
-___
-
-### useSubmitActions
-
-▸ **useSubmitActions**(`__namedParameters`: *Object*): *object*
-
-Hook for Timesheet submit actions
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`__namedParameters` | *Object* |
-
-**Returns:** *object*
-
-Name | Type |
-:------ | :------ |
-`onSubmitPeriod` | (`forecast`: *boolean*) => *Promise*<void\> |
-`onUnsubmitPeriod` | (`forecast`: *boolean*) => *Promise*<void\> |
-
-Defined in: [client/pages/Timesheet/hooks/useSubmitActions.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L11)
-
-___
-
-### useTimesheet
-
-▸ **useTimesheet**(): *object*
-
-Hook for Timesheet
-
-* Get history using useHistory
-* Get URL params using useParams
-* Using reducer from /reducer
-* Using useTimesheetQuery with timesheet.gql
-* Layout effects for initialiing state and updating state
-  when the query is reloaded
-* Returns TimesheetContextProvider with Timesheet context
-
-**Returns:** *object*
-
-Name | Type |
-:------ | :------ |
-`context` | [*ITimesheetContext*](../interfaces/pages.itimesheetcontext.md) |
-`dispatch` | *Dispatch*<AnyAction\> |
-`onSubmitPeriod` | (`forecast`: *boolean*) => *Promise*<void\> |
-`onUnsubmitPeriod` | (`forecast`: *boolean*) => *Promise*<void\> |
-`state` | [*ITimesheetState*](../interfaces/pages.itimesheetstate.md) |
-`t` | TFunction |
-
-Defined in: [client/pages/Timesheet/hooks/useTimesheet.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useTimesheet.tsx#L21)
-
-___
-
-### useTimesheetQuery
-
-▸ **useTimesheetQuery**(`state`: [*ITimesheetState*](../interfaces/pages.itimesheetstate.md), `dispatch`: *Dispatch*<AnyAction\>): *object*
-
-Use Timesheet query
-
-#### Parameters:
-
-Name | Type | Description |
-:------ | :------ | :------ |
-`state` | [*ITimesheetState*](../interfaces/pages.itimesheetstate.md) | State   |
-`dispatch` | *Dispatch*<AnyAction\> | Dispatch    |
-
-**Returns:** *object*
-
-Name | Type |
-:------ | :------ |
-`refetch` | (`variables?`: *Partial*<{ `options`: { `dateFormat`: *string* = 'dddd DD'; `locale`: *string* ; `tzOffset`: *number*  } ; `query`: *TimesheetQuery*  }\>) => *Promise*<ApolloQueryResult<any\>\> |
-
-Defined in: [client/pages/Timesheet/hooks/useTimesheetQuery.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useTimesheetQuery.tsx#L15)
-
-___
-
 ## Reports Functions
 
 ### SaveFilterForm
@@ -415,7 +316,7 @@ Name | Default |
 
 **Returns:** T[]
 
-Defined in: client/pages/Reports/hooks/useQueryPresets.tsx:116
+Defined in: [client/pages/Reports/hooks/useQueryPresets.tsx:116](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useQueryPresets.tsx#L116)
 
 ___
 
@@ -425,7 +326,10 @@ ___
 
 ▸ **useReportQuery**(`__namedParameters`: *Object*): *void*
 
-Hook for Reports Query
+Hook for Reports Query.
+
+Using useQuery with reports.gql query, and dispatches
+DATA_UPDATED action on query changes.
 
 #### Parameters:
 
@@ -435,7 +339,7 @@ Name | Type |
 
 **Returns:** *void*
 
-Defined in: client/pages/Reports/hooks/useReportsQuery.ts:13
+Defined in: [client/pages/Reports/hooks/useReportsQuery.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQuery.ts#L16)
 
 ___
 
@@ -514,3 +418,102 @@ Name | Type | Description |
 **Returns:** *void*
 
 Defined in: [client/pages/Reports/hooks/useUpdateUserConfiguration.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useUpdateUserConfiguration.ts#L14)
+
+___
+
+## Timesheet Hooks Functions
+
+### useHotkeys
+
+▸ **useHotkeys**(`context`: [*ITimesheetContext*](../interfaces/pages.itimesheetcontext.md)): *object*
+
+Hook for hotkeys
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`context` | [*ITimesheetContext*](../interfaces/pages.itimesheetcontext.md) | Context    |
+
+**Returns:** *object*
+
+Name | Type |
+:------ | :------ |
+`hotkeysProps` | *GlobalHotKeysProps* |
+
+Defined in: [client/pages/Timesheet/hooks/useHotkeys.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useHotkeys.tsx#L13)
+
+___
+
+### useSubmitActions
+
+▸ **useSubmitActions**(`__namedParameters`: *Object*): *object*
+
+Hook for Timesheet submit actions
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`__namedParameters` | *Object* |
+
+**Returns:** *object*
+
+Name | Type |
+:------ | :------ |
+`onSubmitPeriod` | (`forecast`: *boolean*) => *Promise*<void\> |
+`onUnsubmitPeriod` | (`forecast`: *boolean*) => *Promise*<void\> |
+
+Defined in: [client/pages/Timesheet/hooks/useSubmitActions.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useSubmitActions.tsx#L14)
+
+___
+
+### useTimesheet
+
+▸ **useTimesheet**(): *object*
+
+Hook for Timesheet
+
+* Get history using useHistory
+* Get URL params using useParams
+* Using reducer from /reducer
+* Using useTimesheetQuery with timesheet.gql
+* Layout effects for initialiing state and updating state
+  when the query is reloaded
+* Returns TimesheetContextProvider with Timesheet context
+
+**Returns:** *object*
+
+Name | Type |
+:------ | :------ |
+`context` | [*ITimesheetContext*](../interfaces/pages.itimesheetcontext.md) |
+`dispatch` | *Dispatch*<AnyAction\> |
+`onSubmitPeriod` | (`forecast`: *boolean*) => *Promise*<void\> |
+`onUnsubmitPeriod` | (`forecast`: *boolean*) => *Promise*<void\> |
+`state` | [*ITimesheetState*](../interfaces/pages.itimesheetstate.md) |
+`t` | TFunction |
+
+Defined in: [client/pages/Timesheet/hooks/useTimesheet.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useTimesheet.tsx#L24)
+
+___
+
+### useTimesheetQuery
+
+▸ **useTimesheetQuery**(`state`: [*ITimesheetState*](../interfaces/pages.itimesheetstate.md), `dispatch`: *Dispatch*<AnyAction\>): *object*
+
+Use Timesheet query
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`state` | [*ITimesheetState*](../interfaces/pages.itimesheetstate.md) | State   |
+`dispatch` | *Dispatch*<AnyAction\> | Dispatch    |
+
+**Returns:** *object*
+
+Name | Type |
+:------ | :------ |
+`refetch` | (`variables?`: *Partial*<{ `options`: { `dateFormat`: *string* = 'dddd DD'; `locale`: *string* ; `tzOffset`: *number*  } ; `query`: *TimesheetQuery*  }\>) => *Promise*<ApolloQueryResult<any\>\> |
+
+Defined in: [client/pages/Timesheet/hooks/useTimesheetQuery.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useTimesheetQuery.tsx#L18)

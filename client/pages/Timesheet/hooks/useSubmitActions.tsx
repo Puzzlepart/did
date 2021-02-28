@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { useMutation } from '@apollo/client'
 import { AppContext } from 'AppContext'
 import { useContext } from 'react'
@@ -7,6 +8,8 @@ import $unsubmitPeriod from './unsubmitPeriod.gql'
 
 /**
  * Hook for Timesheet submit actions
+ *
+ * @category Timesheet Hooks
  */
 export function useSubmitActions({ state, dispatch, refetch }) {
   const app = useContext(AppContext)

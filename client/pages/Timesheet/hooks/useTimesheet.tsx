@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useLayoutEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -17,6 +18,8 @@ import { useTimesheetQuery } from './useTimesheetQuery'
  * * Layout effects for initialiing state and updating state
  *   when the query is reloaded
  * * Returns TimesheetContextProvider with Timesheet context
+ *
+ * @category Timesheet Hooks
  */
 export function useTimesheet() {
   const { t } = useTranslation()

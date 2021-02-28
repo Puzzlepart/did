@@ -6,7 +6,10 @@ import { DATA_UPDATED, INIT } from '../reducer/actions'
 import $reports from './reports.gql'
 
 /**
- * Hook for Reports Query
+ * Hook for Reports Query.
+ * 
+ * Using useQuery with reports.gql query, and dispatches
+ * DATA_UPDATED action on query changes.
  *
  * @category Reports Hooks
  */
@@ -16,6 +19,6 @@ export function useReportQuery({ state, dispatch }) {
     fetchPolicy: 'cache-first',
     variables: state.query?.variables
   })
-  useLayoutEffect(() => dispatch(INIT()), [dispatch])
+  useLayoutEffect(() => dispatch(INIT()), [])
   useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query])
 }
