@@ -5,9 +5,8 @@ on:
     branches:
       - dev
     paths-ignore:
-      - '.github'
-      - client/docs
-      - server/docs
+      - '**.md'
+      - '**.yml'
 
 jobs:
   build-and-deploy:
