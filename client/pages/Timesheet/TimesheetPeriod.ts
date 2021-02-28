@@ -106,7 +106,7 @@ export class TimesheetPeriod {
   public getEvents(includeUnmatched: boolean = true): EventObject[] {
     return [...(this.events || [])]
       .filter((event) => {
-        const isUiIgnored = this._uiIgnoredEvents.indexOf(event.id) !== -1
+        const isUiIgnored = this._uiIgnoredEvents.includes(event.id)
         const isMatched = !!event.project
         return (
           !event.isSystemIgnored &&

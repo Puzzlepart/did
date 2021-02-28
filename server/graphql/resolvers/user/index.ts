@@ -33,11 +33,11 @@ export class UserResolver {
    * @param ctx - GraphQL context
    */
   @Query(() => User, { description: 'Get the currently logged in user' })
-  async currentUser(@Ctx() ctx: Context): Promise<User> {
-    const user = await this._mongo.user.getById(ctx.userId)
+  async currentUser(@Ctx() context: Context): Promise<User> {
+    const user = await this._mongo.user.getById(context.userId)
     return {
       ...user,
-      subscription: pick(ctx.subscription, 'id', 'name')
+      subscription: pick(context.subscription, 'id', 'name')
     }
   }
 
@@ -74,8 +74,7 @@ export class UserResolver {
     @Arg('user', () => UserInput) user: UserInput,
     @Arg('update', { nullable: true }) update: boolean
   ): Promise<BaseResult> {
-    if (update) await this._mongo.user.updateUser(user)
-    else await this._mongo.user.addUser(user)
+    await (update ? this._mongo.user.updateUser(user) : this._mongo.user.addUser(user))
     return { success: true, error: null }
   }
 

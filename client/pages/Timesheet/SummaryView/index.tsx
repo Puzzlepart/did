@@ -21,8 +21,8 @@ function createColumns(scope: TimesheetScope): IColumn[] {
   const onRender = (row: any, _index: number, col: IColumn) => (
     <DurationColumn row={row} column={col} />
   )
-  const columns = Array.from(Array(7).keys()).map((i) => {
-    const day = scope.getDay(i)
+  const columns = [...Array.from({length: 7}).keys()].map((index) => {
+    const day = scope.getDay(index)
     return {
       key: day.format('YYYY-MM-DD'),
       fieldName: day.format('YYYY-MM-DD'),
@@ -82,7 +82,7 @@ function generateRows(events: EventObject[], columns: IColumn[]) {
       (event) => event.project.tag === project.tag
     )
     return [...columns].splice(1, columns.length - 2).reduce(
-      (obj, col) => {
+      (object, col) => {
         const sum = [...projectEvents]
           .filter(
             (event) =>
@@ -90,9 +90,9 @@ function generateRows(events: EventObject[], columns: IColumn[]) {
               col.fieldName
           )
           .reduce((sum, event) => (sum += event.duration), 0)
-        obj[col.fieldName] = sum
-        obj.sum += sum
-        return obj
+        object[col.fieldName] = sum
+        object.sum += sum
+        return object
       },
       {
         sum: 0,
@@ -112,7 +112,7 @@ function generateRows(events: EventObject[], columns: IColumn[]) {
  */
 function generateTotalRow(events: any[], columns: IColumn[], label: string) {
   return [...columns].splice(1, columns.length - 2).reduce(
-    (obj, col) => {
+    (object, col) => {
       const sum = [...events]
         .filter(
           (event) =>
@@ -120,9 +120,9 @@ function generateTotalRow(events: any[], columns: IColumn[], label: string) {
             col.fieldName
         )
         .reduce((sum, event) => (sum += event.duration), 0)
-      obj[col.fieldName] = sum
-      obj.sum += sum
-      return obj
+      object[col.fieldName] = sum
+      object.sum += sum
+      return object
     },
     { label, sum: 0 }
   )

@@ -33,7 +33,7 @@ export class UserNotification {
    * @param id - Id
    */
   private _generateId(id: string) {
-    return id.replace(/[^a-zA-Z0-9]/g, '')
+    return id.replace(/[^\dA-Za-z]/g, '')
   }
 
   /**

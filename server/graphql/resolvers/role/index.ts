@@ -43,8 +43,7 @@ export class RoleResolver {
     @Arg('role', () => RoleInput) role: RoleInput,
     @Arg('update', { nullable: true }) update: boolean
   ) {
-    if (update) await this._mongo.role.updateRole(role)
-    else await this._mongo.role.addRole(role)
+    await (update ? this._mongo.role.updateRole(role) : this._mongo.role.addRole(role))
     return { success: true, error: null }
   }
 

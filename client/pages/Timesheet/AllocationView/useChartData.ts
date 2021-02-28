@@ -22,10 +22,10 @@ function getDataForChart(
     return _items
   }, [])
   const truncateLength = width / (items.length || 1) / 6
-  return items.map((i) => ({
-    ...i,
-    label: truncateString(i.data[chart.textKey], truncateLength),
-    value: parseFloat(i.value.toFixed(1))
+  return items.map((index) => ({
+    ...index,
+    label: truncateString(index.data[chart.textKey], truncateLength),
+    value: Number.parseFloat(index.value.toFixed(1))
   }))
 }
 

@@ -6,7 +6,7 @@ import { Db as MongoDatabase, MongoClient } from 'mongodb'
 import 'reflect-metadata'
 import { Container, ContainerInstance } from 'typedi'
 import { DateObject } from '../../shared/utils/date'
-import env from '../utils/env'
+import environment from '../utils/env'
 import { Subscription } from './resolvers/types'
 const debug = createDebug('graphql/context')
 
@@ -77,7 +77,7 @@ export const createContext = async (
   mongoClient: MongoClient
 ): Promise<Context> => {
   try {
-    const db = mongoClient.db(env('MONGO_DB_DB_NAME'))
+    const database = mongoClient.db(environment('MONGO_DB_DB_NAME'))
     const context: Context = {}
     context.mongoClient = mongoClient
     context.subscription = get(request, 'user.subscription')
@@ -85,7 +85,7 @@ export const createContext = async (
     if (apiKey) {
       const { permissions, subscription } = await handleTokenAuthentication(
         apiKey,
-        db
+        database
       )
       context.permissions = permissions
       context.subscription = subscription
@@ -113,21 +113,21 @@ export const createContext = async (
  * @param apiKey -Api key
  * @param db - Mongodb database
  */
-const handleTokenAuthentication = async (apiKey: string, db: MongoDatabase) => {
+const handleTokenAuthentication = async (apiKey: string, database: MongoDatabase) => {
   const { expires, subscriptionId } = verify(
     apiKey,
-    env('API_TOKEN_SECRET')
+    environment('API_TOKEN_SECRET')
   ) as any
   const expired = new DateObject(expires).jsDate < new Date()
   if (expired) throw new AuthenticationError('The specified token is expired.')
   const [token, subscription] = await Promise.all([
-    db.collection('api_tokens').findOne({
+    database.collection('api_tokens').findOne({
       apiKey,
       expires: {
         $gte: new Date()
       }
     }),
-    db.collection('subscriptions').findOne({
+    database.collection('subscriptions').findOne({
       id: subscriptionId
     })
   ])

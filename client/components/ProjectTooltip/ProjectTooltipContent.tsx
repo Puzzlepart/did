@@ -32,8 +32,8 @@ export const ProjectTooltipContent: FunctionComponent<IProjectTooltipProps> = ({
       </div>
       {!isEmpty(project.labels) && (
         <div className={styles.labels}>
-          {(project.labels as Label[]).map((label, idx) => (
-            <EntityLabel key={idx} label={label} />
+          {(project.labels as Label[]).map((label, index) => (
+            <EntityLabel key={index} label={label} />
           ))}
         </div>
       )}

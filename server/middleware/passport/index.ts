@@ -4,7 +4,22 @@ import { MongoClient } from 'mongodb'
 import passport from 'passport'
 import { IProfile, OIDCStrategy, VerifyCallback } from 'passport-azure-ad'
 import { SubscriptionService, UserService } from '../../services/mongo'
-import env from '../../utils/env'
+import environment from '../../utils/env'
+
+
+/**
+ * Get redirect URL
+ */
+function getRedirectUrl() {
+  let redirectUrl = environment('OAUTH_REDIRECT_URI')
+  if (environment('LOCALTUNNEL_SUBDOMAIN')) {
+    const _redirectUrl = fs.readFileSync('.localtunnel', 'utf-8')
+    if (_redirectUrl) {
+      redirectUrl = _redirectUrl
+    }
+  }
+  return redirectUrl
+}
 
 /**
  * Setup passport to be used for authentication
@@ -23,20 +38,6 @@ export const passportMiddleware = (mongoClient: MongoClient) => {
    */
   passport.serializeUser((user, done) => done(null, user))
   passport.deserializeUser((user, done) => done(null, user))
-
-  /**
-   * Get redirect URL
-   */
-  function getRedirectUrl() {
-    let redirectUrl = env('OAUTH_REDIRECT_URI')
-    if (env('LOCALTUNNEL_SUBDOMAIN')) {
-      const _redirectUrl = fs.readFileSync('.localtunnel', 'utf-8')
-      if (_redirectUrl) {
-        redirectUrl = _redirectUrl
-      }
-    }
-    return redirectUrl
-  }
 
   /**
    * OIDCStrategy uses OpenID Connect protocol for web application login purposes.
@@ -60,15 +61,15 @@ export const passportMiddleware = (mongoClient: MongoClient) => {
       {
         identityMetadata:
           'https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration',
-        clientID: env('OAUTH_APP_ID'),
+        clientID: environment('OAUTH_APP_ID'),
         responseType: 'code id_token',
         responseMode: 'form_post',
         redirectUrl,
         allowHttpForRedirectUrl: true,
-        clientSecret: env('OAUTH_APP_PASSWORD'),
+        clientSecret: environment('OAUTH_APP_PASSWORD'),
         validateIssuer: false,
         passReqToCallback: false,
-        scope: env('OAUTH_SCOPES').split(' ')
+        scope: environment('OAUTH_SCOPES').split(' ')
       },
       (
         _iss: string,
@@ -76,11 +77,11 @@ export const passportMiddleware = (mongoClient: MongoClient) => {
         { _json }: IProfile,
         _accessToken: string,
         _refreshToken: string,
-        tokenParams: any,
+        tokenParameters: any,
         done: VerifyCallback
       ) => {
         const subscription_service = new SubscriptionService({
-          db: mongoClient.db(env('MONGO_DB_DB_NAME'))
+          db: mongoClient.db(environment('MONGO_DB_DB_NAME'))
         })
         subscription_service
           .getById(_json.tid)
@@ -91,7 +92,7 @@ export const passportMiddleware = (mongoClient: MongoClient) => {
                 return done(null, {
                   ...u,
                   subscription: s,
-                  tokenParams
+                  tokenParams: tokenParameters
                 })
               })
               .catch((error) => {

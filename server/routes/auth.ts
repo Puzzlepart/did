@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from 'express'
 import passport from 'passport'
-import env from '../utils/env'
+import environment from '../utils/env'
 import url from 'url'
 const auth = Router()
 
@@ -8,7 +8,7 @@ auth.get(
   '/signin',
   (request: Request, response: Response, next: NextFunction) => {
     passport.authenticate('azuread-openidconnect', {
-      prompt: env('OAUTH_SIGNIN_PROMPT'),
+      prompt: environment('OAUTH_SIGNIN_PROMPT'),
       failureRedirect: '/'
     })(request, response, next)
   }
@@ -31,9 +31,9 @@ auth.post(
             })
           )
         }
-        request.logIn(user, (err) => {
-          if (err)
-            return response.render('index', { error: JSON.stringify(err) })
+        request.logIn(user, (error_) => {
+          if (error_)
+            return response.render('index', { error: JSON.stringify(error_) })
           return response.redirect('/timesheet')
         })
       }

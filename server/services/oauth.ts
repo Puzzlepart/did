@@ -65,15 +65,15 @@ class OAuthService {
       } else {
         debug(`Token expiring ${accessToken.token.expires_at}.`)
       }
-    } catch (err) {
+    } catch (error) {
       debug(
         `Failed to refresh token using options ${JSON.stringify(options)}: ${
-          err.message
+          error.message
         }`
       )
       throw new Error(
         `Failed to refresh token using options ${JSON.stringify(options)}: ${
-          err.message
+          error.message
         }`
       )
     }

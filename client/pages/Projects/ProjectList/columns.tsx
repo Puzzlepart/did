@@ -52,8 +52,8 @@ export default (props: IProjectListProps, t: TFunction): IColumn[] =>
       }
     ),
     col('labels', '', {}, (project: Project) =>
-      (project.labels as Label[]).map((label, idx) => (
-        <EntityLabel key={idx} label={label} />
+      (project.labels as Label[]).map((label, index) => (
+        <EntityLabel key={index} label={label} />
       ))
     )
-  ].filter((col) => props.hideColumns.indexOf(col.key) === -1)
+  ].filter((col) => !props.hideColumns.includes(col.key))

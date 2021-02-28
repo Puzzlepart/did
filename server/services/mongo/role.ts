@@ -18,8 +18,8 @@ export class RoleService extends MongoDocumentService<Role> {
     try {
       const roles = await this.find(query)
       return roles
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
@@ -32,8 +32,8 @@ export class RoleService extends MongoDocumentService<Role> {
     try {
       const role = await this.collection.findOne({ name })
       return role
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
@@ -46,8 +46,8 @@ export class RoleService extends MongoDocumentService<Role> {
     try {
       const result = await this.collection.insertOne(role)
       return result
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
@@ -59,8 +59,8 @@ export class RoleService extends MongoDocumentService<Role> {
   public async updateRole(role: Role): Promise<void> {
     try {
       await this.collection.updateOne(pick(role, 'name'), { $set: role })
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
@@ -72,8 +72,8 @@ export class RoleService extends MongoDocumentService<Role> {
   public async deleteRole(name: string): Promise<void> {
     try {
       await this.collection.deleteOne({ name })
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 }

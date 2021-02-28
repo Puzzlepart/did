@@ -39,7 +39,7 @@ export const ListHeader: FunctionComponent<IListHeaderProps> = (
       <div className={styles.root}>
         <CommandBar
           {...props.commandBar}
-          items={[searchBox, ...props.commandBar.items].filter((i) => i)}
+          items={[searchBox, ...props.commandBar.items].filter((index) => index)}
           hidden={
             props.commandBar.items.length === 0 &&
             props.commandBar.farItems.length === 0

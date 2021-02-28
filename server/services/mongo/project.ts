@@ -48,8 +48,8 @@ export class ProjectService extends MongoDocumentService<Project> {
         ...project
       })
       return insertedId
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
@@ -68,8 +68,8 @@ export class ProjectService extends MongoDocumentService<Project> {
         $set: project
       })
       return result.ok === 1
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
@@ -108,8 +108,8 @@ export class ProjectService extends MongoDocumentService<Project> {
         },
         { key: ['getprojectsdata', query?.customerKey.toString()] }
       )
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 }

@@ -3,7 +3,7 @@ import { useLayoutEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { useTimesheetReducer } from '../reducer'
-import { ITimesheetContext, ITimesheetParams } from '../types'
+import { ITimesheetContext, ITimesheetParams as ITimesheetParameters } from '../types'
 import { useSubmitActions } from './useSubmitActions'
 import { useTimesheetQuery } from './useTimesheetQuery'
 
@@ -21,7 +21,7 @@ import { useTimesheetQuery } from './useTimesheetQuery'
 export function useTimesheet() {
   const { t } = useTranslation()
   const history = useHistory()
-  const url = useParams<ITimesheetParams>()
+  const url = useParams<ITimesheetParameters>()
   const { state, dispatch } = useTimesheetReducer({ url, t })
 
   const { refetch } = useTimesheetQuery(state, dispatch)

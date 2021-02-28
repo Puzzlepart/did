@@ -11,7 +11,7 @@ import { MongoClient } from 'mongodb'
 import 'reflect-metadata'
 import { buildSchema, ResolverData } from 'type-graphql'
 import Container, { ContainerInstance } from 'typedi'
-import env from '../utils/env'
+import environment from '../utils/env'
 import { authChecker } from './authChecker'
 import { Context, createContext } from './context'
 import {
@@ -84,7 +84,7 @@ export const setupGraphQL = async (
       rootValue: global,
       context: ({ req }) => createContext(req, client),
       engine: {
-        reportSchema: !!env('APOLLO_KEY'),
+        reportSchema: !!environment('APOLLO_KEY'),
         graphVariant: 'current',
         generateClientInfo: ({ context }) => ({
           clientName: get(context, 'subscription.name', { default: '' })

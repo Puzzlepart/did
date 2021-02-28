@@ -15,7 +15,7 @@ export const UserSettingInput = ({ user, setting }: IUserSettingInputProps) => {
         element = (
           <Dropdown
             {...(setting as IUserSettingDropdown)}
-            onChange={(_evt, option) =>
+            onChange={(_event, option) =>
               onUpdateUserSettings(setting.key, option.key.toString())
             }
             defaultSelectedKey={defaultValue}
@@ -29,7 +29,7 @@ export const UserSettingInput = ({ user, setting }: IUserSettingInputProps) => {
           <Toggle
             {...setting}
             defaultValue={defaultValue}
-            onChange={(_evt, bool) => onUpdateUserSettings(setting.key, bool)}
+            onChange={(_event, bool) => onUpdateUserSettings(setting.key, bool)}
           />
         )
       }

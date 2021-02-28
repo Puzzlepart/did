@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import * as http from 'http'
 import app from './app'
-import env from './utils/env'
+import environment from './utils/env'
 const debug = require('debug')('server')
 
 /**
@@ -24,11 +24,11 @@ export async function startServer(port: string) {
 
     switch (error.code) {
       case 'EACCES':
-        debug('\x1b[31m', `[${bind} requires elevated privileges]`)
+        debug('\u001B[31m', `[${bind} requires elevated privileges]`)
         process.exit(1)
         break
       case 'EADDRINUSE':
-        debug('\x1b[31m', `[${bind} is already in use]`)
+        debug('\u001B[31m', `[${bind} is already in use]`)
         process.exit(1)
         break
       default:
@@ -37,7 +37,7 @@ export async function startServer(port: string) {
   }
 
   function onListening() {
-    debug('\x1b[32m', `[Server listening on port ${port}]`)
+    debug('\u001B[32m', `[Server listening on port ${port}]`)
   }
 
   server.listen(port)
@@ -47,4 +47,4 @@ export async function startServer(port: string) {
 
 export * from './app'
 
-startServer(env('PORT', '8080'))
+startServer(environment('PORT', '8080'))

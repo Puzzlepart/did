@@ -26,13 +26,13 @@ export class MonthFilter<
     const values = unique(items.map((e) => getValue(e, this.fieldName, null)))
     const monthNames = DateUtils.getMonthNames()
     const _items = monthNames
-      .filter((_, idx) => contains(values, idx + 1))
+      .filter((_, index) => contains(values, index + 1))
       .map((value) => ({ key: indexOf(monthNames, value) + 1, value }))
     return {
       key: this.fieldName,
       name: this.name,
       items: _items,
-      selected: _items.filter((i) => contains(this._selectedKeys, i.key))
+      selected: _items.filter((index) => contains(this._selectedKeys, index.key))
     }
   }
 

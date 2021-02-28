@@ -25,8 +25,8 @@ export const StatusBar: FunctionComponent = () => {
   return (
     <div className={styles.root}>
       <div className={styles.container}>
-        {messages.map((msg, key) => (
-          <UserMessage key={key} {...defaultMessageProps} {...msg} />
+        {messages.map((message, key) => (
+          <UserMessage key={key} {...defaultMessageProps} {...message} />
         ))}
       </div>
     </div>

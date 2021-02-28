@@ -14,7 +14,7 @@ export interface ITimesheetState {
   showHotkeysModal?: boolean
 }
 
-export interface ITimesheetParams {
+export interface ITimesheetParameters {
   view: TimesheetView
   week: string
   month: string

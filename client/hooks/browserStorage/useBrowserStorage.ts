@@ -16,7 +16,7 @@ export function useBrowserStorage<T = any>({
     try {
       const item = store.getItem(key)
       return item ? JSON.parse(item) : initialValue
-    } catch (error) {
+    } catch {
       return initialValue
     }
   })
@@ -32,7 +32,7 @@ export function useBrowserStorage<T = any>({
       const valueToStore = ([...storedValue, value] as unknown) as T
       setStoredValue(valueToStore)
       store.setItem(key, JSON.stringify(valueToStore))
-    } catch (error) {}
+    } catch {}
   }
 
   /**
@@ -42,7 +42,7 @@ export function useBrowserStorage<T = any>({
     try {
       setStoredValue(initialValue)
       store.setItem(key, initialValue)
-    } catch (error) {}
+    } catch {}
   }
 
   return [storedValue, append, clear]

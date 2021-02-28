@@ -25,8 +25,8 @@ export const SettingsSection: FunctionComponent<ISettingsSectionProps> = (
           'hidden',
           field.hiddenIf && field.hiddenIf(settings || {})
         )
-        const _ = Array.from(field.props).reduce(
-          (obj, [key, value]) => ({ ...obj, [key]: value }),
+        const _ = [...field.props].reduce(
+          (object, [key, value]) => ({ ...object, [key]: value }),
           {} as any
         )
         const key = `${props.id}.${field.id}`

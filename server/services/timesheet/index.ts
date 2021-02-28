@@ -9,10 +9,10 @@ import { TimesheetPeriodObject } from '../../graphql/resolvers/types'
 import { MongoService } from '../mongo'
 import MatchingEngine from './matching'
 import {
-  IConnectEventsParams,
-  IGetTimesheetParams,
-  ISubmitPeriodParams,
-  IUnsubmitPeriodParams
+  IConnectEventsParameters,
+  IGetTimesheetParameters,
+  ISubmitPeriodParameters,
+  IUnsubmitPeriodParameters
 } from './types'
 
 @Service({ global: false })
@@ -46,32 +46,32 @@ export class TimesheetService {
    *
    * @param params - Timesheet params
    */
-  public async getTimesheet(params: IGetTimesheetParams): Promise<any[]> {
+  public async getTimesheet(parameters: IGetTimesheetParameters): Promise<any[]> {
     try {
       const periods = this.getPeriods(
-        params.startDate,
-        params.endDate,
-        params.locale,
+        parameters.startDate,
+        parameters.endDate,
+        parameters.locale,
         this.context.userId
       )
       const data = await this._mongo.project.getProjectsData()
-      for (let i = 0; i < periods.length; i++) {
-        const { _id } = periods[i]
+      for (let index = 0; index < periods.length; index++) {
+        const { _id } = periods[index]
         const [confirmed, forecasted] = await Promise.all([
           this._confirmed_periods.findOne({ _id }),
           this._forecasted_periods.findOne({ _id })
         ])
-        periods[i].isForecasted = !!forecasted
-        periods[i].forecastedHours = forecasted?.hours || 0
+        periods[index].isForecasted = !!forecasted
+        periods[index].forecastedHours = forecasted?.hours || 0
         if (confirmed) {
           const entries = await this._time_entries
             .find({ _periodId: _id })
             .toArray()
-          periods[i] = {
-            ...periods[i],
+          periods[index] = {
+            ...periods[index],
             isConfirmed: true,
             events: this._connectEvents({
-              ...params,
+              ...parameters,
               events: entries,
               projects: data.projects
             })
@@ -79,19 +79,19 @@ export class TimesheetService {
         } else {
           const engine = new MatchingEngine(data)
           const events = await this._msgraph.getEvents(
-            periods[i].startDate,
-            periods[i].endDate,
+            periods[index].startDate,
+            periods[index].endDate,
             {
-              tzOffset: params.tzOffset,
+              tzOffset: parameters.tzOffset,
               returnIsoDates: false
             }
           )
-          periods[i].events = engine.matchEvents(events).map((e) => ({
+          periods[index].events = engine.matchEvents(events).map((e) => ({
             ...e,
             date: DateUtils.formatDate(
               e.startDateTime,
-              params.dateFormat,
-              params.locale
+              parameters.dateFormat,
+              parameters.locale
             )
           }))
         }
@@ -107,26 +107,26 @@ export class TimesheetService {
    *
    * @param params - Submit period params
    */
-  public async submitPeriod(params: ISubmitPeriodParams): Promise<void> {
+  public async submitPeriod(parameters: ISubmitPeriodParameters): Promise<void> {
     try {
       const events = await this._msgraph.getEvents(
-        params.period.startDate,
-        params.period.endDate,
+        parameters.period.startDate,
+        parameters.period.endDate,
         {
-          tzOffset: params.tzOffset,
+          tzOffset: parameters.tzOffset,
           returnIsoDates: false
         }
       )
       const period = {
-        ...this._getPeriodData(params.period.id, this.context.userId),
-        startDate: new Date(params.period.startDate),
-        endDate: new Date(params.period.endDate),
+        ...this._getPeriodData(parameters.period.id, this.context.userId),
+        startDate: new Date(parameters.period.startDate),
+        endDate: new Date(parameters.period.endDate),
         submitted: new Date(),
         hours: 0,
-        forecastedHours: params.period.forecastedHours || 0
+        forecastedHours: parameters.period.forecastedHours || 0
       }
       const entries = []
-      period.hours = params.period.matchedEvents.reduce((hours, m: any) => {
+      period.hours = parameters.period.matchedEvents.reduce((hours, m: any) => {
         const event = find(events, ({ id }) => id === m.id)
         if (!event) return null
         entries.push({
@@ -138,10 +138,10 @@ export class TimesheetService {
         })
         return hours + event.duration
       }, 0)
-      const entry_colletion = params.forecast
+      const entry_colletion = parameters.forecast
         ? this._forecasted_time_entries
         : this._time_entries
-      const period_collection = params.forecast
+      const period_collection = parameters.forecast
         ? this._forecasted_periods
         : this._confirmed_periods
       await Promise.all([
@@ -163,7 +163,7 @@ export class TimesheetService {
   public async unsubmitPeriod({
     period,
     forecast
-  }: IUnsubmitPeriodParams): Promise<void> {
+  }: IUnsubmitPeriodParameters): Promise<void> {
     try {
       const entry_colletion = forecast
         ? this._forecasted_time_entries
@@ -190,7 +190,7 @@ export class TimesheetService {
    * @param startDateTime - Start date time
    */
   private _createUniqueEventId(eventId: string, startDateTime: Date) {
-    return `${eventId}${startDateTime.getTime()}`.replace(/[^a-zA-Z0-9]/g, '')
+    return `${eventId}${startDateTime.getTime()}`.replace(/[^\dA-Za-z]/g, '')
   }
 
   /**
@@ -203,9 +203,9 @@ export class TimesheetService {
    * @param userId - User ID
    */
   private _getPeriodData(id: string, userId: string) {
-    const [week, month, year] = id.split('_').map((p) => parseInt(p, 10))
+    const [week, month, year] = id.split('_').map((p) => Number.parseInt(p, 10))
     return {
-      _id: `${id}${userId}`.replace(/[^a-zA-Z0-9]/g, ''),
+      _id: `${id}${userId}`.replace(/[^\dA-Za-z]/g, ''),
       _userId: userId,
       week,
       month,
@@ -262,7 +262,7 @@ export class TimesheetService {
     projects,
     dateFormat,
     locale
-  }: IConnectEventsParams) {
+  }: IConnectEventsParameters) {
     return events.map((event) => ({
       id: event._id,
       ...event,

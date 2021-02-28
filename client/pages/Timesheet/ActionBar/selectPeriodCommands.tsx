@@ -12,8 +12,8 @@ export function usePeriodCommands() {
   const { t } = useTranslation()
   const context = useContext(TimesheetContext)
   if (context.periods.length === 1) return []
-  return context.periods.map((period, idx) => ({
-    key: `SELECT_PERIOD_COMMANDS_${idx}`,
+  return context.periods.map((period, index) => ({
+    key: `SELECT_PERIOD_COMMANDS_${index}`,
     onRender: () => (
       <DefaultButton
         iconProps={{ iconName: 'DateTime' }}

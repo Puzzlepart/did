@@ -44,8 +44,8 @@ export class UserService extends MongoDocumentService<User> {
         role: find(roles, (role) => role.name === user.role),
         configuration: JSON.stringify(user.configuration)
       }))
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
@@ -62,8 +62,8 @@ export class UserService extends MongoDocumentService<User> {
       user.role = await this._role.getByName(user.role as string)
       user.configuration = JSON.stringify(user.configuration)
       return user
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
@@ -76,8 +76,8 @@ export class UserService extends MongoDocumentService<User> {
     try {
       const result = await this.collection.insertOne(this._replaceId(user))
       return result
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
@@ -92,8 +92,8 @@ export class UserService extends MongoDocumentService<User> {
         users.map((u) => this._replaceId(u))
       )
       return result
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
@@ -105,8 +105,8 @@ export class UserService extends MongoDocumentService<User> {
   public async updateUser(user: User): Promise<void> {
     try {
       await this.collection.updateOne({ _id: user.id }, { $set: user })
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
@@ -124,17 +124,17 @@ export class UserService extends MongoDocumentService<User> {
       const user = await this.collection.findOne(filter)
       const _configuration = JSON.parse(configuration)
       const mergedConfiguration = Object.keys(_configuration).reduce(
-        (obj, key) => {
-          set(obj, key, _configuration[key])
-          return obj
+        (object, key) => {
+          set(object, key, _configuration[key])
+          return object
         },
         user.configuration
       )
       await this.collection.updateOne(filter, {
         $set: { configuration: mergedConfiguration }
       })
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 }

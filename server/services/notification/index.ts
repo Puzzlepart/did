@@ -38,7 +38,7 @@ export class NotificationService {
   private _getPeriods(add: string, count: number, locale: string) {
     const periods = []
     let d = new DateObject().add(add)
-    for (let i = 0; i <= count; i++) {
+    for (let index = 0; index <= count; index++) {
       const startOfWeek = d.startOfWeek.format('YYYY-MM-DD')
       const endOfWeek = d.endOfWeek.format('YYYY-MM-DD')
       periods.push(

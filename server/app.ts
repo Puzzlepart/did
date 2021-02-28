@@ -17,7 +17,7 @@ import {
   helmetMiddleware
 } from './middleware'
 import authRoute from './routes/auth'
-import env from './utils/env'
+import environment from './utils/env'
 
 /**
  * Did Express.js App
@@ -63,7 +63,7 @@ export class App {
    */
   public async setup() {
     this._mongoClient = await MongoClient.connect(
-      env('MONGO_DB_CONNECTION_STRING'),
+      environment('MONGO_DB_CONNECTION_STRING'),
       {
         useNewUrlParser: true,
         useUnifiedTopology: true
@@ -134,7 +134,7 @@ export class App {
    */
   setupRoutes() {
     const index = express.Router()
-    index.get('/', (_req, res) => {
+    index.get('/', (_request, res) => {
       return res.render('index')
     })
     this.instance.use('*', index)
@@ -144,9 +144,9 @@ export class App {
    * Setup error handling using http-errors
    */
   setupErrorHandling() {
-    this.instance.use((_req, _res, next) => next(createError()))
+    this.instance.use((_request, _res, next) => next(createError()))
     this.instance.use(
-      (error: any, _req: express.Request, res: express.Response) => {
+      (error: any, _request: express.Request, res: express.Response) => {
         res.render('index', {
           error: JSON.stringify(pick(error, 'name', 'message', 'status'))
         })

@@ -15,14 +15,14 @@ export const getScopes = (t: TFunction): ISummaryViewScope[] => [
     fieldName: 'weekNumber',
     headerText: t('common.weekLabel'),
     itemIcon: 'CalendarWorkWeek',
-    getColumnHeader: (idx: number) => `${t('common.weekLabel')} ${idx}`
+    getColumnHeader: (index: number) => `${t('common.weekLabel')} ${index}`
   },
   {
     itemKey: 'month',
     fieldName: 'monthNumber',
     headerText: t('common.monthLabel'),
     itemIcon: 'Calendar',
-    getColumnHeader: (idx: number) => DateUtils.getMonthName(idx)
+    getColumnHeader: (index: number) => DateUtils.getMonthName(index)
   }
 ]
 
@@ -58,7 +58,7 @@ export interface ISummaryViewScope extends IPivotItemProps {
   /**
    * Get column header for the specified index
    */
-  getColumnHeader: (idx: number) => string
+  getColumnHeader: (index: number) => string
 }
 
 export interface ISummaryViewRange {

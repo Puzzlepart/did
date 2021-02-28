@@ -17,7 +17,7 @@ export const SelectCallout = (props: ISelectCalloutProps) => {
     let _labels = [...props.labels]
     if (value.length > 0) {
       _labels = _labels.filter(
-        (lbl) => lbl.name.toLowerCase().indexOf(value.toLowerCase()) !== -1
+        (lbl) => lbl.name.toLowerCase().includes(value.toLowerCase())
       )
     }
     setLabels(_labels)
@@ -34,7 +34,7 @@ export const SelectCallout = (props: ISelectCalloutProps) => {
       <SearchBox
         className={styles.searchBox}
         placeholder={props.placeholder}
-        onChange={(_evt, value) => onSearch(value)}
+        onChange={(_event, value) => onSearch(value)}
       />
       <ul>
         {labels.map((lbl) => (
@@ -42,7 +42,7 @@ export const SelectCallout = (props: ISelectCalloutProps) => {
             <div className={styles.itemContainer}>
               <Checkbox
                 defaultChecked={
-                  props.defaultSelectedKeys.indexOf(lbl.name) !== -1
+                  props.defaultSelectedKeys.includes(lbl.name)
                 }
                 className={styles.itemCheckbox}
                 onChange={() => props.onToggleLabel(lbl)}

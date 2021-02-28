@@ -18,8 +18,8 @@ export class CustomerService extends MongoDocumentService<Customer> {
     try {
       await this.cache.clear({ key: 'getcustomers' })
       await this.collection.insertOne(customer)
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
@@ -32,8 +32,8 @@ export class CustomerService extends MongoDocumentService<Customer> {
     try {
       await this.cache.clear({ key: 'getcustomers' })
       await this.collection.updateOne(pick(customer, 'key'), { $set: customer })
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
@@ -46,8 +46,8 @@ export class CustomerService extends MongoDocumentService<Customer> {
     try {
       await this.cache.clear({ key: 'getcustomers' })
       await this.collection.deleteOne({ key })
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
@@ -65,8 +65,8 @@ export class CustomerService extends MongoDocumentService<Customer> {
         },
         { key: 'getcustomers' }
       )
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 }

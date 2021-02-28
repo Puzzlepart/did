@@ -28,7 +28,7 @@ export default class {
         customerProjects.filter((p) => p.key === target.toUpperCase())
       )
       return suggestion
-    } catch (error) {
+    } catch {
       return null
     }
   }
@@ -49,7 +49,7 @@ export default class {
       (c) => c.toLowerCase() === 'ignore'
     )
     if (!!ignoreCategory) return 'category'
-    if ((event.body || '').match(/[(\[\{]IGNORE[)\]\}]/gi) !== null)
+    if ((event.body || '').match(/[([{]ignore[)\]}]/gi) !== null)
       return 'body'
     return null
   }
@@ -63,15 +63,15 @@ export default class {
    * @returns an array of matches found in the inputStr
    */
   private _searchString(
-    inputStr: string,
+    inputString: string,
     strictMode: boolean = true
   ): ProjectMatch[] {
-    let regex = /((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<key>[\wæøåÆØÅ]{2,}))/gim
+    let regex = /((?<customerKey>[\wåæø]{2,}?)\s(?<key>[\wåæø]{2,}))/gim
     if (strictMode)
-      regex = /[\(\{\[]((?<customerKey>[\wæøåÆØÅ]{2,}?)\s(?<key>[\wæøåÆØÅ]{2,}?))[\)\]\}]/gim
+      regex = /[([{]((?<customerKey>[\wåæø]{2,}?)\s(?<key>[\wåæø]{2,}?))[)\]}]/gim
     const matches = []
     let match: RegExpExecArray
-    while ((match = regex.exec(inputStr)) !== null) {
+    while ((match = regex.exec(inputString)) !== null) {
       const { key, customerKey } = match.groups
       matches.push({
         ...match.groups,
@@ -88,11 +88,11 @@ export default class {
    * @param categoriesStr - Categories string
    */
   private _findProjectMatches(
-    inputStr: string,
-    categoriesStr: string
+    inputString: string,
+    categoriesString: string
   ): ProjectMatch[] {
-    const matches = this._searchString(categoriesStr, false)
-    return matches || this._searchString(inputStr)
+    const matches = this._searchString(categoriesString, false)
+    return matches || this._searchString(inputString)
   }
 
   /**
@@ -117,19 +117,18 @@ export default class {
     if (ignore === 'category') {
       return { ...event, isSystemIgnored: true }
     }
-    const categoriesStr = event.categories.join('|').toUpperCase()
-    const srchStr = [event.title, event.body, categoriesStr]
+    const categoriesString = event.categories.join('|').toUpperCase()
+    const srchString = [event.title, event.body, categoriesString]
       .join('|')
       .toUpperCase()
-    const matches = this._findProjectMatches(srchStr, categoriesStr)
+    const matches = this._findProjectMatches(srchString, categoriesString)
     let projectKey: string
 
     // We found token matches in srchStr or categoriesStr
     // We look through the matches and check if they match against
     // a project
     if (!isEmpty(matches)) {
-      for (let i = 0; i < matches.length; i++) {
-        const match = matches[i]
+      for (const match of matches) {
         event.customer = find(
           this._data.customers,
           (c) => match.customerKey === c.key
@@ -152,7 +151,7 @@ export default class {
 
     // We search the whole srchStr for match in non-strict/soft mode
     else {
-      const softMatches = this._searchString(srchStr, false)
+      const softMatches = this._searchString(srchString, false)
       event.project = find(
         this._data.projects,
         ({ _id }) => !!find(softMatches, (m) => m.id === _id)

@@ -17,11 +17,11 @@ export type ExcelColumnType = 'date' | null
  *
  * @param str - String to convert
  */
-function stringToArrayBuffer(str: string): ArrayBuffer {
-  const buf = new ArrayBuffer(str.length)
+function stringToArrayBuffer(string: string): ArrayBuffer {
+  const buf = new ArrayBuffer(string.length)
   const view = new Uint8Array(buf)
-  for (let i = 0; i !== str.length; ++i) {
-    view[i] = str.charCodeAt(i) & 0xff
+  for (let index = 0; index !== string.length; ++index) {
+    view[index] = string.charCodeAt(index) & 0xFF
   }
   return buf
 }
@@ -47,7 +47,7 @@ export async function exportExcel(
 
   if (!options.columns) {
     options.columns = Object.keys(items[0])
-      .filter((f) => (options.skip || []).indexOf(f) === -1)
+      .filter((f) => !(options.skip || []).includes(f))
       .map((fieldName) => ({
         key: fieldName,
         fieldName,
@@ -81,10 +81,10 @@ export async function exportExcel(
     }
   ]
   const workBook = xlsx.utils.book_new()
-  sheets.forEach((s) => {
+  for (const s of sheets) {
     const sheet = xlsx.utils.aoa_to_sheet(s.data)
     xlsx.utils.book_append_sheet(workBook, sheet, s.name)
-  })
+  }
   const wbout = xlsx.write(workBook, { type: 'binary', bookType: 'xlsx' })
   const blob = new Blob([stringToArrayBuffer(wbout)], {
     type: 'application/octet-stream'

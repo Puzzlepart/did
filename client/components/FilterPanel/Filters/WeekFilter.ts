@@ -33,7 +33,7 @@ export class WeekFilter<
       key: this.fieldName,
       name: this.name,
       items: _items,
-      selected: _items.filter((i) => contains(this._selectedKeys, i.key))
+      selected: _items.filter((index) => contains(this._selectedKeys, index.key))
     }
   }
 

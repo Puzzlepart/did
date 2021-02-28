@@ -1,6 +1,6 @@
 import { Project, TimesheetPeriodInput } from '../../graphql/resolvers/types'
 
-export interface IGetTimesheetParams {
+export interface IGetTimesheetParameters {
   startDate: string
   endDate: string
   locale: string
@@ -8,7 +8,7 @@ export interface IGetTimesheetParams {
   tzOffset: number
 }
 
-export interface ISubmitPeriodParams {
+export interface ISubmitPeriodParameters {
   /**
    * Period to submit
    */
@@ -25,7 +25,7 @@ export interface ISubmitPeriodParams {
   forecast?: boolean
 }
 
-export interface IUnsubmitPeriodParams {
+export interface IUnsubmitPeriodParameters {
   /**
    * Period to unsubmit
    */
@@ -37,7 +37,7 @@ export interface IUnsubmitPeriodParams {
   forecast?: boolean
 }
 
-export interface IConnectEventsParams extends IGetTimesheetParams {
+export interface IConnectEventsParameters extends IGetTimesheetParameters {
   projects: Project[]
   events: any[]
 }

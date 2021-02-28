@@ -236,7 +236,11 @@
         2,
         {
           "checkDefaultAndNamespaceImports": true,
-          "checkProperties": false
+          "checkProperties": false,
+          "replacements": {
+            "args": false,
+            "props": false
+          }
         }
       ]
     },

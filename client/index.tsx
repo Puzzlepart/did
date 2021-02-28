@@ -8,7 +8,7 @@ import { ApolloProvider } from '@apollo/client'
 import { initializeIcons } from '@uifabric/icons'
 import 'core-js/stable'
 import DateUtils from 'DateUtils'
-import i18n from 'i18next'
+import index18n from 'i18next'
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
 import 'regenerator-runtime/runtime.js'
@@ -40,7 +40,7 @@ export const boostrap = async () => {
       context.user = new ContextUser(data.user)
       context.subscription = data?.subscription
       return context
-    } catch (error) {
+    } catch {
       // We return an "empty" user with preferred language en-GB (default)
       return { user: new ContextUser() }
     }
@@ -48,13 +48,13 @@ export const boostrap = async () => {
 
   const context = await getContext()
   DateUtils.setup(context.user.language)
-  i18n.changeLanguage(context.user.language)
+  index18n.changeLanguage(context.user.language)
 
   ReactDom.render(
     <ApolloProvider client={client}>
       <App {...context} />
     </ApolloProvider>,
-    document.getElementById('app')
+    document.querySelector('#app')
   )
 }
 

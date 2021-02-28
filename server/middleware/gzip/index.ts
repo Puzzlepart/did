@@ -14,7 +14,7 @@ export const serveGzippedMiddleware = (contentType: string) => (
   // does browser support gzip? does the file exist?
   const acceptedEncodings = request.acceptsEncodings()
   if (
-    acceptedEncodings.indexOf('gzip') === -1 ||
+    !acceptedEncodings.includes('gzip') ||
     !fs.existsSync(`./public/${request.baseUrl}.gz`)
   ) {
     next()

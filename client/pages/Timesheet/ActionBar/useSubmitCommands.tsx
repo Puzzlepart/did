@@ -125,9 +125,9 @@ export function useSubmitCommands() {
       let menuProps: IContextualMenuProps = null
       if (commands.length > 1) {
         menuProps = {
-          items: commands.map((cmd, idx) => ({
+          items: commands.map((cmd, index) => ({
             ...(omit(cmd, 'buttonStyles', 'iconProps') as IContextualMenuItem),
-            isChecked: idx === 0
+            isChecked: index === 0
           }))
         }
       }

@@ -65,8 +65,8 @@ export const UserSettings = (props: React.HTMLProps<HTMLDivElement>) => {
           isOpen={panelOpen}
           onDismiss={togglePanel}
           isLightDismiss={true}>
-          {[...USER_SETTINGS(t)].map((s, idx) => (
-            <UserSettingInput key={idx} user={user} setting={s} />
+          {[...USER_SETTINGS(t)].map((s, index) => (
+            <UserSettingInput key={index} user={user} setting={s} />
           ))}
         </Panel>
       </div>

@@ -48,7 +48,7 @@ export class ResourceFilter<
       key: this.keyFieldName,
       name: this.name,
       items: _items,
-      selected: _items.filter((i) => contains(this._selectedKeys, i.key))
+      selected: _items.filter((index) => contains(this._selectedKeys, index.key))
     }
   }
 

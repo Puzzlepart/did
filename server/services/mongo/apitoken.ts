@@ -3,7 +3,7 @@ import { FilterQuery } from 'mongodb'
 import { omit } from 'underscore'
 import { Context } from '../../graphql/context'
 import { ApiToken } from '../../graphql/resolvers/types'
-import env from '../../utils/env'
+import environment from '../../utils/env'
 import { MongoDocumentService } from './@document'
 
 export class ApiTokenService extends MongoDocumentService<ApiToken> {
@@ -20,8 +20,8 @@ export class ApiTokenService extends MongoDocumentService<ApiToken> {
     try {
       const tokens = await this.find(query)
       return tokens
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
@@ -38,14 +38,14 @@ export class ApiTokenService extends MongoDocumentService<ApiToken> {
     try {
       token.subscriptionId = subscriptionId
       token.created = new Date()
-      const apiKey = sign(omit(token, 'created'), env('API_TOKEN_SECRET'))
+      const apiKey = sign(omit(token, 'created'), environment('API_TOKEN_SECRET'))
       await this.collection.insertOne({
         ...token,
         apiKey
       })
       return apiKey
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
@@ -61,8 +61,8 @@ export class ApiTokenService extends MongoDocumentService<ApiToken> {
   ): Promise<void> {
     try {
       await this.collection.deleteOne({ name, subscriptionId })
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 }

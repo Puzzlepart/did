@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import session from 'express-session'
-import env from '../../utils/env'
+import environment from '../../utils/env'
 import { redisMiddlware } from '../redis'
 const RedisStore = require('connect-redis')(session)
 
@@ -12,13 +12,13 @@ const RedisStore = require('connect-redis')(session)
  * The "store" ttl is the expiration time for each Redis session ID, in seconds
  */
 export const redisSessionMiddleware = session({
-  name: env('SESSION_NAME', 'connect.sid'),
+  name: environment('SESSION_NAME', 'connect.sid'),
   store: new RedisStore({
     client: redisMiddlware,
     ttl: 1209600
   }),
   cookie: { secure: false },
-  secret: env('SESSION_SIGNING_KEY'),
+  secret: environment('SESSION_SIGNING_KEY'),
   resave: false,
   saveUninitialized: false,
   rolling: false

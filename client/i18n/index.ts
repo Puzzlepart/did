@@ -1,4 +1,4 @@
-import i18n from 'i18next'
+import index18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 
 export const DEFAULT_LANGUAGE = 'en-GB'
@@ -8,7 +8,7 @@ const __RESOURCES = {
 }
 export const SUPPORTED_LANGUAGES = Object.keys(__RESOURCES)
 
-i18n.use(initReactI18next).init({
+index18n.use(initReactI18next).init({
   resources: __RESOURCES,
   fallbackLng: DEFAULT_LANGUAGE,
   debug: false,
@@ -20,4 +20,4 @@ i18n.use(initReactI18next).init({
   keySeparator: ':'
 })
 
-export default i18n
+export default index18n

@@ -45,7 +45,7 @@ export const SummaryView = (): JSX.Element => {
   }, [data])
 
   const columns = useMemo(() => createColumns(state, t), [state, t])
-  const ctxValue: ISummaryViewContext = useMemo(
+  const contextValue: ISummaryViewContext = useMemo(
     () => ({
       ...state,
       dispatch,
@@ -61,7 +61,7 @@ export const SummaryView = (): JSX.Element => {
 
   return (
     <div className={styles.root}>
-      <SummaryViewContext.Provider value={ctxValue}>
+      <SummaryViewContext.Provider value={contextValue}>
         <Pivot
           onLinkClick={(item) =>
             dispatch({
@@ -69,18 +69,18 @@ export const SummaryView = (): JSX.Element => {
               payload: item.props as ISummaryViewScope
             })
           }>
-          {ctxValue.scopes.map((scope) => (
+          {contextValue.scopes.map((scope) => (
             <PivotItem key={scope.itemKey} {...scope}>
               <div className={styles.container}>
                 <List
-                  hidden={!loading && isEmpty(ctxValue.rows)}
+                  hidden={!loading && isEmpty(contextValue.rows)}
                   enableShimmer={loading}
                   columns={columns}
-                  items={ctxValue.rows}
-                  commandBar={commandBar(ctxValue)}
+                  items={contextValue.rows}
+                  commandBar={commandBar(contextValue)}
                 />
                 <UserMessage
-                  hidden={!isEmpty(ctxValue.rows) || loading}
+                  hidden={!isEmpty(contextValue.rows) || loading}
                   text={t('admin.noTimeEntriesText')}
                 />
               </div>

@@ -27,12 +27,12 @@ export class NotificationModel {
    *
    * @param msg - The message
    */
-  constructor(msg: Notification) {
-    this.id = msg.id
-    this.type = msg.type
-    this.severity = msg.severity
-    this.text = msg.text
-    this.moreLink = msg.moreLink
+  constructor(message: Notification) {
+    this.id = message.id
+    this.type = message.type
+    this.severity = message.severity
+    this.text = message.text
+    this.moreLink = message.moreLink
   }
 
   private get _messageType(): MessageBarType {
@@ -44,11 +44,7 @@ export class NotificationModel {
         return MessageBarType.info
 
       case NotificationType.SERVICE_ANNOUNCEMENT: {
-        if (this.severity === NotificationSeverity.HIGH) {
-          return MessageBarType.severeWarning
-        } else {
-          return MessageBarType.warning
-        }
+        return this.severity === NotificationSeverity.HIGH ? MessageBarType.severeWarning : MessageBarType.warning
       }
       default:
         return MessageBarType.info
@@ -66,7 +62,7 @@ export class NotificationModel {
       case NotificationType.FEATURE_ANNOUNCEMENT:
         return { iconName: 'BuildQueueNew' }
       default:
-        return undefined
+        return
     }
   }
 

@@ -6,7 +6,7 @@ import { Inject, Service } from 'typedi'
 import { sortBy } from 'underscore'
 import DateUtils from '../../../shared/utils/date'
 import { Context } from '../../graphql/context'
-import env from '../../utils/env'
+import environment from '../../utils/env'
 import { CacheScope, CacheService } from '../cache'
 import OAuthService, { AccessTokenOptions } from '../oauth'
 import MSGraphEvent, {
@@ -18,8 +18,8 @@ import MSGraphEvent, {
 class MSGraphService {
   private _cache: CacheService = null
   private _accessTokenOptions: AccessTokenOptions = {
-    clientId: env('OAUTH_APP_ID'),
-    clientSecret: env('OAUTH_APP_PASSWORD'),
+    clientId: environment('OAUTH_APP_ID'),
+    clientSecret: environment('OAUTH_APP_PASSWORD'),
     tokenHost: 'https://login.microsoftonline.com/common/',
     authorizePath: 'oauth2/v2.0/authorize',
     tokenPath: 'oauth2/v2.0/token'
@@ -41,7 +41,7 @@ class MSGraphService {
       await this._oauthService.getAccessToken(this._accessTokenOptions)
     ).access_token
     const client = MSGraphClient.init({
-      authProvider: (done: (arg0: any, arg1: any) => void) => {
+      authProvider: (done: (argument0: any, argument1: any) => void) => {
         done(null, this._access_token)
       }
     })
@@ -91,14 +91,14 @@ class MSGraphService {
     category: string
   ): Promise<MSGraphOutlookCategory> {
     try {
-      const colorIdx =
+      const colorIndex =
         category
           .split('')
           .map((c) => c.charCodeAt(0))
           .reduce((a, b) => a + b) % 24
       const content = JSON.stringify({
         displayName: category,
-        color: `preset${colorIdx}`
+        color: `preset${colorIndex}`
       })
       const client = await this._getClient()
       const result = await client

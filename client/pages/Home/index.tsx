@@ -13,7 +13,7 @@ export const Home: FunctionComponent = () => {
   const { subscription } = useContext(AppContext)
   const { t } = useTranslation()
   const error = JSON.parse(
-    document.getElementById('app').getAttribute('data-error') || null
+    document.querySelector('#app').getAttribute('data-error') || null
   )
 
   return (

@@ -35,7 +35,7 @@ export const CustomerList = () => {
             onRender: () => (
               <Checkbox
                 styles={{ root: { margin: '6px 0 0 8px' } }}
-                disabled={isEmpty(filter(state.customers, (i) => i.inactive))}
+                disabled={isEmpty(filter(state.customers, (index) => index.inactive))}
                 checked={showInactive}
                 label={t('common.toggleInactiveText')}
                 onChange={(_event, checked) => setShowInactive(checked)}

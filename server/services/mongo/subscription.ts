@@ -35,8 +35,8 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
         ...subscription,
         id: subscription._id
       }
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
@@ -51,8 +51,8 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
         this._replaceId(subscription)
       )
       return result
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 
@@ -68,8 +68,8 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
         { $set: { settings } }
       )
       return result
-    } catch (err) {
-      throw err
+    } catch (error) {
+      throw error
     }
   }
 }
