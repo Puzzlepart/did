@@ -28,7 +28,7 @@ function getErrorMessage(code: string, t: TFunction): [string, MessageBarType] {
   }
 }
 
-const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
+export const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
   const { t } = useTranslation()
   const { dispatch, selectedPeriod } = useContext(TimesheetContext)
   let className = styles.root
@@ -93,5 +93,3 @@ const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
     </ProjectTooltip>
   )
 }
-
-export default ProjectColumn

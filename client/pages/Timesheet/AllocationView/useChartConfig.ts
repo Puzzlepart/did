@@ -21,7 +21,7 @@ export function useChartConfig(): IChartConfig[] {
         subTextKey: 'customer.name'
       },
       {
-        key: 'customer',
+        key: 'project.customer',
         title: t('timesheet.allocation.customerChartTitle'),
         subTitle: t('timesheet.allocation.customerChartDescription'),
         colors: 'light',
