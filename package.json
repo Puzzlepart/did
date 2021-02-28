@@ -8,15 +8,14 @@
   },
   "scripts": {
     "watch": "concurrently \"npm run watch:client\" \"npm run watch:server\" \"node .tasks/open.js\" \"node .tasks/localtunnel.js\"",
+    "xo": "xo",
+    "xo:fix": "xo --fix",
     "start": "node ./dist/server/index.js",
     "watch:server": "nodemon",
     "watch:client": "webpack",
     "package:client": "webpack",
     "build:server": "tsc --project tsconfig.json && copyfiles -u 1 \"server/public/**/*\" dist/server",
     "debug:server": "npm run build:server; npx ts-node ./server/index.ts -T --inspect --wait",
-    "lint": "eslint --ext .ts,.tsx ./client ./server --color && npm run prettier",
-    "lint:fix": "eslint --ext .ts,.tsx ./client ./server --color --fix && npm run prettier",
-    "prettier": "prettier --config .prettierrc '**/*.ts*' --write --loglevel silent",
     "create-env": "node .tasks/create-dot-env.js",
     "typedoc": "npm run typedoc:client && npm run typedoc:server",
     "typedoc:server": "typedoc ./server/**/*.ts ./server/*.ts --options ./server/typedoc.json",
@@ -130,6 +129,7 @@
     "typescript": "4.0.5",
     "underscore": "1.11.0",
     "underscore.string": "3.3.5",
+    "url": "^0.11.0",
     "validator": "13.0.0",
     "webpack": "4.44.1",
     "webpack-cli": "4.1.0",
@@ -137,15 +137,7 @@
   },
   "devDependencies": {
     "@types/string-format": "^2.0.0",
-    "@typescript-eslint/eslint-plugin": "4.6.1",
-    "@typescript-eslint/parser": "4.6.1",
     "assert": "2.0.0",
-    "eslint": "6.8.0",
-    "eslint-config-prettier": "7.2.0",
-    "eslint-plugin-prettier": "3.3.1",
-    "eslint-plugin-react": "7.22.0",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "eslint-plugin-tsdoc": "0.2.11",
     "localtunnel": "2.0.1",
     "open": "7.2.1",
     "prettier": "2.2.1",
@@ -153,10 +145,31 @@
     "typedoc-plugin-markdown": "^3.5.0",
     "webpack-build-notifier": "2.1.0",
     "webpack-bundle-analyzer": "4.1.0",
-    "webpack-livereload-plugin": "2.3.0"
+    "webpack-livereload-plugin": "2.3.0",
+    "xo": "^0.38.2"
   },
   "resolutions": {
     "@babel/preset-env": "7.8.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "xo": {
+    "semicolon": false,
+    "rules": {
+      "unicorn/filename-case": "off",
+      "new-cap": "off",
+      "@typescript-eslint/no-var-require": "off",
+      "import/no-unassigned-import": "off"
+    },
+    "prettier": {
+      "tabWidth": 2,
+      "singleQuote": true,
+      "semi": false,
+      "arrowParens": "always",
+      "printWidth": 80,
+      "trailingComma": "none",
+      "bracketSpacing": true,
+      "jsxBracketSameLine": true,
+      "jsxSingleQuote": true
+    }
+  }
 }
