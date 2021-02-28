@@ -28,7 +28,7 @@ const config = {
   mode: MODE,
   entry: { [name]: './client' },
   output: {
-    path: resolve(__dirname, SERVER_DIST, 'public/js'),
+    path: path.resolve(__dirname, SERVER_DIST, 'public/js'),
     filename: BUNDLE_FILE_NAME,
     publicPath: '/js',
   },
@@ -52,7 +52,7 @@ const config = {
           {
             loader: 'ts-loader',
             options: {
-              configFile: resolve(__dirname, 'client/tsconfig.json')
+              configFile: path.resolve(__dirname, 'client/tsconfig.json')
             }
           },
         ],
@@ -75,17 +75,17 @@ const config = {
   },
   resolve: {
     alias: {
-      common: resolve(SRC_PATH, 'common'),
-      types: resolve(SRC_PATH, 'types'),
-      utils: resolve(SRC_PATH, 'utils'),
-      helpers: resolve(SRC_PATH, 'helpers'),
-      pages: resolve(SRC_PATH, 'pages'),
-      components: resolve(SRC_PATH, 'components'),
-      i18n: resolve(SRC_PATH, 'i18n'),
-      config: resolve(SRC_PATH, 'config'),
-      AppContext: resolve(SRC_PATH, 'AppContext'),
-      AppConfig: resolve(SRC_PATH, 'App.config.json'),
-      DateUtils: resolve(__dirname, 'shared/utils/date'),
+      common: path.resolve(SRC_PATH, 'common'),
+      types: path.resolve(SRC_PATH, 'types'),
+      utils: path.resolve(SRC_PATH, 'utils'),
+      helpers: path.resolve(SRC_PATH, 'helpers'),
+      pages: path.resolve(SRC_PATH, 'pages'),
+      components: path.resolve(SRC_PATH, 'components'),
+      i18n: path.resolve(SRC_PATH, 'i18n'),
+      config: path.resolve(SRC_PATH, 'config'),
+      AppContext: path.resolve(SRC_PATH, 'AppContext'),
+      AppConfig: path.resolve(SRC_PATH, 'App.config.json'),
+      DateUtils: path.resolve(__dirname, 'shared/utils/date'),
     },
     extensions: [
       '.ts',
@@ -99,7 +99,7 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       template: HTML_PLUGIN_FILE_NAME,
-      filename: resolve(__dirname, SERVER_DIST, 'views/index.hbs'),
+      filename: path.resolve(__dirname, SERVER_DIST, 'views/index.hbs'),
       inject: true,
     }),
     new DefinePlugin({
@@ -119,7 +119,7 @@ if (IS_DEVELOPMENT) {
   config.plugins.push(
     new LiveReloadPlugin(),
     new WebpackBuildNotifierPlugin({
-      logo: resolve(__dirname, '/server/public/images/favicon/mstile-150x150.png'),
+      logo: path.resolve(__dirname, '/server/public/images/favicon/mstile-150x150.png'),
       sound: process.env.WEBPACK_NOTIFICATIONS_SOUND,
       suppressSuccess: process.env.WEBPACK_NOTIFICATIONS_SUPPRESSSUCCESS === 'true',
       showDuration: process.env.WEBPACK_NOTIFICATIONS_SHOWDURATION === 'true',
