@@ -1,7 +1,7 @@
 {
   "name": "did-client",
   "includeVersion": true,
-  "out": "client-docs",
+  "out": "client/docs",
   "readme": "none",
   "excludeInternal": true,
   "hideGenerator": true,
