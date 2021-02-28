@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - dev
+    paths-ignore:
+      - .github
+      - client/docs
+      - server/docs
 
 jobs:
   build-and-deploy:
