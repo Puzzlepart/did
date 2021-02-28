@@ -81,7 +81,7 @@ Generate GraphQL schema using type-graphql
 
 **Returns:** *Promise*<GraphQLSchema\>
 
-Defined in: [server/graphql/index.ts:42](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L42)
+Defined in: [server/graphql/index.ts:43](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L43)
 
 ___
 
@@ -103,4 +103,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/graphql/index.ts:76](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L76)
+Defined in: [server/graphql/index.ts:77](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L77)

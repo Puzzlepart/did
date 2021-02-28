@@ -29,7 +29,7 @@
 
 • **forecast**: *string*
 
-Defined in: [server/graphql/resolvers/notification/types.ts:83](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/types.ts#L83)
+Defined in: [server/graphql/resolvers/notification/types.ts:88](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/types.ts#L88)
 
 ___
 
@@ -37,4 +37,4 @@ ___
 
 • **unconfirmedPeriods**: *string*
 
-Defined in: [server/graphql/resolvers/notification/types.ts:80](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/types.ts#L80)
+Defined in: [server/graphql/resolvers/notification/types.ts:85](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/types.ts#L85)

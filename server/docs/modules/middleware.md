@@ -64,7 +64,7 @@ ___
 
 ### redisSessionMiddleware
 
-▸ `Const`**redisSessionMiddleware**(`req`: *Request*<ParamsDictionary, any, any, ParsedQs\>, `res`: *Response*<any, number\>, `next`: NextFunction): *any*
+▸ `Const`**redisSessionMiddleware**(`req`: *Request*<ParamsDictionary, any, any, ParsedQs, Record<string, any\>\>, `res`: *Response*<any, Record<string, any\>, number\>, `next`: NextFunction): *void*
 
 Defines session configuration; we use Redis for the session store.
 "secret" will be used to create the session ID hash (the cookie id and the redis key value)
@@ -76,11 +76,11 @@ The "store" ttl is the expiration time for each Redis session ID, in seconds
 
 Name | Type |
 :------ | :------ |
-`req` | *Request*<ParamsDictionary, any, any, ParsedQs\> |
-`res` | *Response*<any, number\> |
+`req` | *Request*<ParamsDictionary, any, any, ParsedQs, Record<string, any\>\> |
+`res` | *Response*<any, Record<string, any\>, number\> |
 `next` | NextFunction |
 
-**Returns:** *any*
+**Returns:** *void*
 
 Defined in: [server/middleware/session/index.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/middleware/session/index.ts#L14)
 
@@ -88,7 +88,7 @@ ___
 
 ### serveGzippedMiddleware
 
-▸ `Const`**serveGzippedMiddleware**(`contentType`: *string*): (`request`: *Request*<ParamsDictionary, any, any, ParsedQs\>, `response`: *Response*<any\>, `next`: NextFunction) => *void*
+▸ `Const`**serveGzippedMiddleware**(`contentType`: *string*): *function*
 
 Serve gzipped
 
@@ -98,6 +98,6 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `contentType` | *string* | Content type    |
 
-**Returns:** *function*
+**Returns:** (`request`: *Request*<ParamsDictionary, any, any, ParsedQs\>, `response`: *Response*<any\>, `next`: NextFunction) => *void*
 
 Defined in: [server/middleware/gzip/index.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/middleware/gzip/index.ts#L9)

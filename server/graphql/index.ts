@@ -1,3 +1,7 @@
+import {
+  ApolloServerPluginSchemaReporting,
+  ApolloServerPluginUsageReporting
+} from 'apollo-server-core'
 import { ApolloServer } from 'apollo-server-express'
 import {
   ApolloServerPlugin,
@@ -5,13 +9,11 @@ import {
 } from 'apollo-server-plugin-base'
 import createDebug from 'debug'
 import express from 'express'
-import get from 'get-value'
 import { GraphQLDateTime } from 'graphql-iso-date'
 import { MongoClient } from 'mongodb'
 import 'reflect-metadata'
 import { buildSchema, ResolverData } from 'type-graphql'
 import Container, { ContainerInstance } from 'typedi'
-import { environment } from '../utils'
 import { authChecker } from './authChecker'
 import { Context, createContext } from './context'
 import {
@@ -83,14 +85,14 @@ export const setupGraphQL = async (
       schema,
       rootValue: global,
       context: ({ req }) => createContext(req, client),
-      engine: {
-        reportSchema: !!environment('APOLLO_KEY'),
-        graphVariant: 'current',
-        generateClientInfo: ({ context }) => ({
-          clientName: get(context, 'subscription.name', { default: '' })
-        })
-      },
       plugins: [
+        ApolloServerPluginUsageReporting({
+          rewriteError: (error) => error,
+          sendVariableValues: { all: true }
+        }),
+        ApolloServerPluginSchemaReporting({
+          initialDelayMaxMs: 30 * 1000
+        }),
         {
           requestDidStart: () => ({
             willSendResponse(requestContext: GraphQLRequestContext<Context>) {
