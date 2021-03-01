@@ -17,10 +17,10 @@ import query_preset_last_year from './query-preset-last-year.gql'
  *
  * @param t - Translate function
  */
-const lastMonthQueryPreset = (t: TFunction) => {
+export const lastMonthQueryPreset = (t: TFunction) => {
   const object = new DateObject().add('-1month').toObject()
   return {
-    key: 'last_month',
+    key: 'LAST_MONTH_QUERY_PRESET',
     text: t('common.exportTypeLastMonth', object),
     iconName: 'CalendarDay',
     query: query_preset_last_month,
@@ -33,10 +33,10 @@ const lastMonthQueryPreset = (t: TFunction) => {
  *
  * @param t - Translate function
  */
-const currentMonthQueryPreset = (t: TFunction) => {
+export const currentMonthQueryPreset = (t: TFunction) => {
   const object = new DateObject().toObject()
   return {
-    key: 'current_month',
+    key: 'CURRENT_MONTH_QUERY_PRESET',
     text: t('common.exportTypeCurrentMonth', object),
     iconName: 'Calendar',
     query: query_preset_current_month,
@@ -49,11 +49,11 @@ const currentMonthQueryPreset = (t: TFunction) => {
  *
  * @param t - Translate function
  */
-const lastYearQueryPreset = (t: TFunction) => {
+export const lastYearQueryPreset = (t: TFunction) => {
   const { year } = new DateObject().toObject('year')
   const object = { year: year - 1 }
   return {
-    key: 'last_year',
+    key: 'LAST_YEAR_QUERY_PRESET',
     text: t('common.exportTypeLastYear', object),
     iconName: 'Previous',
     query: query_preset_last_year,
@@ -66,10 +66,10 @@ const lastYearQueryPreset = (t: TFunction) => {
  *
  * @param t - Translate function
  */
-const currentYearQueryPreset = (t: TFunction) => {
+export const currentYearQueryPreset = (t: TFunction) => {
   const object = new DateObject().toObject('year')
   return {
-    key: 'current_year',
+    key: 'CURRENT_YEAR_QUERY_PRESET',
     text: t('common.exportTypeCurrentYear', object),
     iconName: 'CalendarReply',
     query: query_preset_current_year,
@@ -84,7 +84,7 @@ const currentYearQueryPreset = (t: TFunction) => {
  */
 export const forecastQueryPreset = (t: TFunction) => {
   return {
-    key: 'forecast',
+    key: 'FORECAST_QUERY_PRESET',
     text: t('reports.forecast'),
     iconName: 'TimeSheet',
     query: query_preset_forecast,

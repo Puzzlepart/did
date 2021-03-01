@@ -47,7 +47,7 @@ Name | Type | Description |
 
 **Returns:** [*ReportsService*](services.reportsservice.md)
 
-Defined in: [server/services/mongo/reports.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/reports.ts#L15)
+Defined in: [server/services/mongo/reports.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/reports.ts#L19)
 
 ## Properties
 
@@ -55,7 +55,7 @@ Defined in: [server/services/mongo/reports.ts:15](https://github.com/Puzzlepart/
 
 • `Private` **\_project**: [*ProjectService*](services.projectservice.md)
 
-Defined in: [server/services/mongo/reports.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/reports.ts#L14)
+Defined in: [server/services/mongo/reports.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/reports.ts#L18)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 • `Private` **\_user**: [*UserService*](services.userservice.md)
 
-Defined in: [server/services/mongo/reports.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/reports.ts#L15)
+Defined in: [server/services/mongo/reports.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/reports.ts#L19)
 
 ___
 
@@ -144,4 +144,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/mongo/reports.ts:35](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/reports.ts#L35)
+Defined in: [server/services/mongo/reports.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/reports.ts#L39)

@@ -88,7 +88,11 @@ All are built using React Function components and Hooks.
 
 ### Other Functions
 
+- [currentMonthQueryPreset](pages.md#currentmonthquerypreset)
+- [currentYearQueryPreset](pages.md#currentyearquerypreset)
 - [forecastQueryPreset](pages.md#forecastquerypreset)
+- [lastMonthQueryPreset](pages.md#lastmonthquerypreset)
+- [lastYearQueryPreset](pages.md#lastyearquerypreset)
 
 ### Reports Functions
 
@@ -353,6 +357,42 @@ ___
 
 ## Other Functions
 
+### currentMonthQueryPreset
+
+▸ `Const`**currentMonthQueryPreset**(`t`: TFunction): [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+
+Current month query preset
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`t` | TFunction | Translate function    |
+
+**Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+
+Defined in: [client/pages/Reports/hooks/useQueryPresets/index.tsx:36](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useQueryPresets/index.tsx#L36)
+
+___
+
+### currentYearQueryPreset
+
+▸ `Const`**currentYearQueryPreset**(`t`: TFunction): [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+
+Current year query preset
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`t` | TFunction | Translate function    |
+
+**Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+
+Defined in: [client/pages/Reports/hooks/useQueryPresets/index.tsx:69](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useQueryPresets/index.tsx#L69)
+
+___
+
 ### forecastQueryPreset
 
 ▸ `Const`**forecastQueryPreset**(`t`: TFunction): [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
@@ -368,6 +408,42 @@ Name | Type | Description |
 **Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
 
 Defined in: [client/pages/Reports/hooks/useQueryPresets/index.tsx:85](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useQueryPresets/index.tsx#L85)
+
+___
+
+### lastMonthQueryPreset
+
+▸ `Const`**lastMonthQueryPreset**(`t`: TFunction): [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+
+Last month query preset
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`t` | TFunction | Translate function    |
+
+**Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+
+Defined in: [client/pages/Reports/hooks/useQueryPresets/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useQueryPresets/index.tsx#L20)
+
+___
+
+### lastYearQueryPreset
+
+▸ `Const`**lastYearQueryPreset**(`t`: TFunction): [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+
+Last year query preset
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`t` | TFunction | Translate function    |
+
+**Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+
+Defined in: [client/pages/Reports/hooks/useQueryPresets/index.tsx:52](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useQueryPresets/index.tsx#L52)
 
 ___
 
@@ -480,7 +556,7 @@ Name | Type |
 `dispatch` | *Dispatch*<AnyAction\> |
 `state` | [*IReportsState*](../interfaces/pages.ireportsstate.md) |
 
-Defined in: client/pages/Reports/reducer/useReportsReducer.ts:16
+Defined in: [client/pages/Reports/reducer/useReportsReducer.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/reducer/useReportsReducer.ts#L16)
 
 ___
 
