@@ -20,7 +20,7 @@
 
 ### constructor
 
-\+ **new ApiTokenResolver**(`_mongo`: [*MongoService*](services.mongoservice.md)): [*ApiTokenResolver*](graphql.apitokenresolver.md)
+\+ **new ApiTokenResolver**(`_apiToken`: [*ApiTokenService*](services.apitokenservice.md)): [*ApiTokenResolver*](graphql.apitokenresolver.md)
 
 Constructor for ApiTokenResolver
 
@@ -28,7 +28,7 @@ Constructor for ApiTokenResolver
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`_mongo` | [*MongoService*](services.mongoservice.md) | Mongo service    |
+`_apiToken` | [*ApiTokenService*](services.apitokenservice.md) | API token service    |
 
 **Returns:** [*ApiTokenResolver*](graphql.apitokenresolver.md)
 

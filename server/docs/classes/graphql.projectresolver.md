@@ -19,7 +19,7 @@
 
 ### constructor
 
-\+ **new ProjectResolver**(`_mongo`: [*MongoService*](services.mongoservice.md), `_msgraph`: [*MSGraphService*](services.msgraphservice.md)): [*ProjectResolver*](graphql.projectresolver.md)
+\+ **new ProjectResolver**(`_project`: [*ProjectService*](services.projectservice.md), `_msgraph`: [*MSGraphService*](services.msgraphservice.md)): [*ProjectResolver*](graphql.projectresolver.md)
 
 Constructor for ProjectResolver
 
@@ -27,7 +27,7 @@ Constructor for ProjectResolver
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`_mongo` | [*MongoService*](services.mongoservice.md) | Mongo service   |
+`_project` | [*ProjectService*](services.projectservice.md) | Project service   |
 `_msgraph` | [*MSGraphService*](services.msgraphservice.md) | MSGraphService    |
 
 **Returns:** [*ProjectResolver*](graphql.projectresolver.md)

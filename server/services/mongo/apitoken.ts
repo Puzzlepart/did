@@ -1,13 +1,15 @@
 import { sign } from 'jsonwebtoken'
 import { FilterQuery } from 'mongodb'
+import { Inject, Service } from 'typedi'
 import { omit } from 'underscore'
 import { Context } from '../../graphql/context'
 import { ApiToken } from '../../graphql/resolvers/types'
 import { environment } from '../../utils'
 import { MongoDocumentService } from './@document'
 
+@Service({ global: false })
 export class ApiTokenService extends MongoDocumentService<ApiToken> {
-  constructor(context: Context) {
+  constructor(@Inject('CONTEXT') readonly context: Context) {
     super(context, 'api_tokens')
   }
 

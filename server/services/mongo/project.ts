@@ -1,4 +1,5 @@
 import { FilterQuery } from 'mongodb'
+import { Inject, Service } from 'typedi'
 import { filter, find, pick } from 'underscore'
 import { CustomerService } from '.'
 import { Context } from '../../graphql/context'
@@ -16,6 +17,7 @@ export type ProjectsData = {
   labels: Label[]
 }
 
+@Service({ global: false })
 export class ProjectService extends MongoDocumentService<Project> {
   private _customer: CustomerService
   private _label: LabelService
@@ -25,7 +27,7 @@ export class ProjectService extends MongoDocumentService<Project> {
    *
    * @param context - Context
    */
-  constructor(context: Context) {
+  constructor(@Inject('CONTEXT') readonly context: Context) {
     super(context, 'projects', ProjectService.name)
     this._customer = new CustomerService(context)
     this._label = new LabelService(context)

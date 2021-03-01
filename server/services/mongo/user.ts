@@ -1,16 +1,18 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { FilterQuery } from 'mongodb'
 import set from 'set-value'
+import { Inject, Service } from 'typedi'
 import { find, omit } from 'underscore'
 import { RoleService } from '.'
 import { Context } from '../../graphql/context'
 import { User } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 
+@Service({ global: false })
 export class UserService extends MongoDocumentService<User> {
   private _role: RoleService
 
-  constructor(context: Context) {
+  constructor(@Inject('CONTEXT') readonly context: Context) {
     super(context, 'users')
     this._role = new RoleService(context)
   }

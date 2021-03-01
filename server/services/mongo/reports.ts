@@ -1,4 +1,5 @@
 import { FilterQuery } from 'mongodb'
+import { Inject, Service } from 'typedi'
 import { find, first, omit } from 'underscore'
 import { ProjectService, UserService } from '.'
 import { DateObject } from '../../../shared/utils/date.dateObject'
@@ -8,6 +9,7 @@ import { MongoDocumentService } from './@document'
 
 type Report = TimeEntry[]
 
+@Service({ global: false })
 export class ReportsService extends MongoDocumentService<TimeEntry> {
   private _project: ProjectService
   private _user: UserService
@@ -17,7 +19,7 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
    *
    * @param context - Context
    */
-  constructor(context: Context) {
+  constructor(@Inject('CONTEXT') readonly context: Context) {
     super(context, 'time_entries')
     this._project = new ProjectService(context)
     this._user = new UserService(context)

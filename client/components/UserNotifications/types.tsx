@@ -27,8 +27,6 @@ export class NotificationModel {
   }
 
   private get _messageType(): MessageBarType {
-    // eslint-disable-next-line no-console
-    console.log(this.type)
     switch (this.type) {
       case 'WEEK_NOT_CONFIRMED':
         return MessageBarType.warning

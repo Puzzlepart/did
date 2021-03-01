@@ -47,7 +47,7 @@ Name | Type |
 
 **Returns:** [*RoleService*](services.roleservice.md)
 
-Defined in: [server/services/mongo/role.ts:7](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L7)
+Defined in: [server/services/mongo/role.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L9)
 
 ## Properties
 
@@ -99,7 +99,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*Role*](graphql.role.md)\>\>\>
 
-Defined in: [server/services/mongo/role.ts:45](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L45)
+Defined in: [server/services/mongo/role.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L47)
 
 ___
 
@@ -117,7 +117,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/role.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L72)
+Defined in: [server/services/mongo/role.ts:74](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L74)
 
 ___
 
@@ -162,7 +162,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Role*](graphql.role.md)\>
 
-Defined in: [server/services/mongo/role.ts:31](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L31)
+Defined in: [server/services/mongo/role.ts:33](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L33)
 
 ___
 
@@ -180,7 +180,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Role*](graphql.role.md)[]\>
 
-Defined in: [server/services/mongo/role.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L17)
+Defined in: [server/services/mongo/role.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L19)
 
 ___
 
@@ -198,4 +198,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/role.ts:59](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L59)
+Defined in: [server/services/mongo/role.ts:61](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L61)

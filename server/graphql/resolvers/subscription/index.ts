@@ -4,7 +4,7 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { MongoService } from '../../../services/mongo'
+import { SubscriptionService } from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
 import { BaseResult } from '../types'
@@ -19,9 +19,9 @@ export class SubscriptionResolver {
   /**
    * Constructor for SubscriptionResolver
    *
-   * @param _mongo - Mongo service
+   * @param _subscription - Subscription service
    */
-  constructor(private readonly _mongo: MongoService) {}
+  constructor(private readonly _subscription: SubscriptionService) {}
 
   /**
    * Get current subscription
@@ -32,7 +32,7 @@ export class SubscriptionResolver {
     nullable: true
   })
   subscription(@Ctx() context: Context): Promise<Subscription> {
-    return this._mongo.subscription.getById(context.subscription.id)
+    return this._subscription.getById(context.subscription.id)
   }
 
   /**
@@ -46,7 +46,7 @@ export class SubscriptionResolver {
     @Arg('settings', () => SubscriptionSettingsInput)
     settings: SubscriptionSettingsInput
   ): Promise<BaseResult> {
-    await this._mongo.subscription.updateSubscription(settings)
+    await this._subscription.updateSubscription(settings)
     return { success: true }
   }
 }

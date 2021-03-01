@@ -1,3 +1,4 @@
+import { Inject, Service } from 'typedi'
 import { omit } from 'underscore'
 import { Context } from '../../graphql/context'
 import {
@@ -6,8 +7,9 @@ import {
 } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 
+@Service({ global: false })
 export class SubscriptionService extends MongoDocumentService<Subscription> {
-  constructor(context: Context) {
+  constructor(@Inject('CONTEXT') readonly context: Context) {
     super(context, 'subscriptions')
   }
 

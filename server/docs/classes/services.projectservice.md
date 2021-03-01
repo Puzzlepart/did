@@ -49,7 +49,7 @@ Name | Type | Description |
 
 **Returns:** [*ProjectService*](services.projectservice.md)
 
-Defined in: [server/services/mongo/project.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L21)
+Defined in: [server/services/mongo/project.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L23)
 
 ## Properties
 
@@ -57,15 +57,15 @@ Defined in: [server/services/mongo/project.ts:21](https://github.com/Puzzlepart/
 
 • `Private` **\_customer**: [*CustomerService*](services.customerservice.md)
 
-Defined in: [server/services/mongo/project.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L20)
+Defined in: [server/services/mongo/project.ts:22](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L22)
 
 ___
 
 ### \_label
 
-• `Private` **\_label**: *LabelService*
+• `Private` **\_label**: [*LabelService*](services.labelservice.md)
 
-Defined in: [server/services/mongo/project.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L21)
+Defined in: [server/services/mongo/project.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L23)
 
 ___
 
@@ -119,7 +119,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<string\>
 
-Defined in: [server/services/mongo/project.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L41)
+Defined in: [server/services/mongo/project.ts:43](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L43)
 
 ___
 
@@ -168,7 +168,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<ProjectsData\>
 
-Defined in: [server/services/mongo/project.ts:85](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L85)
+Defined in: [server/services/mongo/project.ts:87](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L87)
 
 ___
 
@@ -188,4 +188,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<boolean\>
 
-Defined in: [server/services/mongo/project.ts:63](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L63)
+Defined in: [server/services/mongo/project.ts:65](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L65)

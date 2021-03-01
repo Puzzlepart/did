@@ -10,14 +10,14 @@ GraphQL
 
 ### Variables
 
-- [$context](graphql.md#$context)
+- [$usercontext](graphql.md#$usercontext)
 - [client](graphql.md#client)
 
 ## Variables
 
-### $context
+### $usercontext
 
-• `Const` **$context**: DocumentNode
+• `Const` **$usercontext**: DocumentNode
 
 This is a GraphQL query imported from a .gql or .graphql file.
 
