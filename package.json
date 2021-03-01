@@ -1,6 +1,6 @@
 {
   "name": "did",
-  "version": "0.10.1",
+  "version": "0.10.0",
   "private": true,
   "engines": {
     "node": ">=12.18.3",
