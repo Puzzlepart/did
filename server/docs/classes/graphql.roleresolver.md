@@ -76,7 +76,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<{ `error`: *any* = null; `success`: *boolean* = true }\>
 
-Defined in: [server/graphql/resolvers/role/index.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/role/index.ts#L66)
+Defined in: [server/graphql/resolvers/role/index.ts:64](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/role/index.ts#L64)
 
 ___
 

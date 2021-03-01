@@ -99,7 +99,7 @@ Name | Type |
 `clientName` | *string* |
 `clientVersion` | *string* |
 
-Defined in: [server/graphql/index.ts:85](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L85)
+Defined in: [server/graphql/index.ts:89](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L89)
 
 ___
 
@@ -118,7 +118,7 @@ Generate GraphQL schema using type-graphql
 
 **Returns:** *Promise*<GraphQLSchema\>
 
-Defined in: [server/graphql/index.ts:42](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L42)
+Defined in: [server/graphql/index.ts:46](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L46)
 
 ___
 
@@ -140,4 +140,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/graphql/index.ts:118](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L118)
+Defined in: [server/graphql/index.ts:122](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L122)

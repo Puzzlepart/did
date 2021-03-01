@@ -1,3 +1,7 @@
+import {
+  ApolloServerPluginSchemaReporting,
+  ApolloServerPluginUsageReporting
+} from 'apollo-server-core'
 import { ApolloServer } from 'apollo-server-express'
 import {
   ApolloServerPlugin,
@@ -126,6 +130,14 @@ export const setupGraphQL = async (
       rootValue: global,
       context: ({ req }) => createContext(req, client),
       plugins: [
+        ApolloServerPluginUsageReporting({
+          rewriteError: (error) => error,
+          sendVariableValues: { all: true },
+          generateClientInfo
+        }),
+        ApolloServerPluginSchemaReporting({
+          initialDelayMaxMs: 30 * 1000
+        }),
         {
           requestDidStart: () => ({
             willSendResponse(requestContext: GraphQLRequestContext<Context>) {
