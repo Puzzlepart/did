@@ -1,26 +1,7 @@
+#import "../../../../graphql/fragments/timeentry-fragment.gql"
+
 query CurrentMonthReport {
   report(preset: "CURRENT_MONTH") {
-    title
-    duration
-    startDateTime
-    endDateTime
-    week
-    month
-    year
-    customer {
-      key
-      name
-    }
-    project {
-      tag
-      name
-    }
-    resource {
-      id
-      givenName
-      surname
-      mail
-      displayName
-    }
+    ...TimeEntryFragment
   }
 }

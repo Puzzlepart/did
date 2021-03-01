@@ -1,26 +1,7 @@
+#import "../../../../graphql/fragments/timeentry-fragment.gql"
+
 query CurrentYearReport {
   report(preset: "CURRENT_YEAR") {
-    title
-    duration
-    startDateTime
-    endDateTime
-    week
-    month
-    year
-    customer {
-      key
-      name
-    }
-    project {
-      tag
-      name
-    }
-    resource {
-      id
-      givenName
-      surname
-      mail
-      displayName
-    }
+    ...TimeEntryFragment
   }
 }
