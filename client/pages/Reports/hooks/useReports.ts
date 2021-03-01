@@ -6,6 +6,7 @@ import initFilters from '../filters'
 import { useReportsReducer } from '../reducer'
 import { IReportsParameters } from '../types'
 import { useQueryPresets } from './query-presets'
+import { useColumns } from './useColumns'
 import { useReportsQuery } from './useReportsQuery'
 
 /**
@@ -33,6 +34,7 @@ export function useReports() {
       history.push(`/reports/${state.preset?.key || ''}`)
     }
   }, [state.preset, history])
+  const columns = useColumns({ defaults: { isResizable: true } })
   const filters = useMemo(() => initFilters(state.filter, t), [state.filter, t])
   return {
     state,
@@ -40,6 +42,7 @@ export function useReports() {
     params: parameters,
     queries,
     history,
+    columns,
     filters,
     t
   }

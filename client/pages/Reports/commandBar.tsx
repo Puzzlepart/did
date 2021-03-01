@@ -6,7 +6,6 @@ import {
 import React from 'react'
 import { isEmpty, omit, pick } from 'underscore'
 import { exportExcel } from 'utils/exportExcel'
-import getColumns from './columns'
 import { IReportsContext } from './context'
 import {
   CLEAR_FILTERS,
@@ -46,7 +45,7 @@ const selectGroupByCmd = (context: IReportsContext) =>
  *
  * @param context - Context
  */
-const exportToExcelCmd = ({ state, t }: IReportsContext) =>
+const exportToExcelCmd = ({ state, columns, t }: IReportsContext) =>
   ({
     key: 'EXPORT_TO_EXCEL',
     text: t('reports.exportToExcel'),
@@ -56,7 +55,7 @@ const exportToExcelCmd = ({ state, t }: IReportsContext) =>
         new Date().toDateString().split(' ').join('-')
       )
       exportExcel(state.subset, {
-        columns: getColumns({}, t),
+        columns,
         fileName
       })
     },

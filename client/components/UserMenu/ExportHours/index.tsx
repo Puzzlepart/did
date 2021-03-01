@@ -50,7 +50,7 @@ export const ExportHours: FunctionComponent = () => {
         <UserMessage>
           Export my hours is currently disabled. See
           <Link href='https://github.com/Puzzlepart/did/issues/846'>
-            Issue #846 on GitHub
+            issue #846 on GitHub
           </Link>{' '}
           for more details.
         </UserMessage>

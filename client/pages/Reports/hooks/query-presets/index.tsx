@@ -97,7 +97,7 @@ export const forecastQueryPreset = (t: TFunction) => {
  *
  * @category Reports
  */
-export function useQueryPresets<T = IReportsQueryPresetItem>(): T[] {
+export function useQueryPresets(): IReportsQueryPresetItem[] {
   const { t } = useTranslation()
   return useMemo(
     () =>
@@ -106,7 +106,9 @@ export function useQueryPresets<T = IReportsQueryPresetItem>(): T[] {
         currentMonthQueryPreset,
         lastYearQueryPreset,
         currentYearQueryPreset
-      ].map((q) => (q(t) as unknown) as T),
+      ].map((presetFunction) => {
+        return presetFunction(t)
+      }),
     []
   )
 }

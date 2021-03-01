@@ -1,5 +1,5 @@
 query SummaryView ($query: ReportsQuery!) {
-  timeentries(query: $query) {
+  report(query: $query) {
     duration
     week
     month

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
 import { FilterPanel, List, UserMessage } from 'components'
 import DateUtils from 'DateUtils'
@@ -9,7 +10,6 @@ import {
 } from 'office-ui-fabric-react'
 import React, { FunctionComponent, useMemo } from 'react'
 import { isEmpty } from 'underscore'
-import getColumns from './columns'
 import commandBar from './commandBar'
 import { ReportsContext } from './context'
 import { useReports, useUpdateUserConfiguration } from './hooks'
@@ -25,12 +25,10 @@ import { SaveFilterForm } from './SaveFilterForm'
  * @category Function Component
  */
 export const Reports: FunctionComponent = () => {
-  const { state, dispatch, params, queries, filters, t } = useReports()
-  useUpdateUserConfiguration({
-    'reports.filters': state.savedFilters
-  })
+  const { state, dispatch, params, queries, columns, filters, t } = useReports()
+  useUpdateUserConfiguration({ 'reports.filters': state.savedFilters })
 
-  const context = useMemo(() => ({ state, dispatch, t }), [state, dispatch, t])
+  const context = useMemo(() => ({ state, dispatch, columns, t }), [state])
 
   return (
     <div className={styles.root}>
@@ -45,7 +43,8 @@ export const Reports: FunctionComponent = () => {
               key={key}
               itemKey={key}
               headerText={text}
-              itemIcon={iconName}>
+              itemIcon={iconName}
+              headerButtonProps={{ disabled: state.loading }}>
               <div className={styles.container}>
                 {state.loading && (
                   <div className={styles.progress}>
@@ -72,7 +71,7 @@ export const Reports: FunctionComponent = () => {
                       })
                     }
                   }}
-                  columns={getColumns({ isResizable: true }, t)}
+                  columns={columns}
                   commandBar={commandBar(context)}
                 />
                 <UserMessage

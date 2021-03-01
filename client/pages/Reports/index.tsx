@@ -20,11 +20,11 @@ export const ReportsPage = () => {
   )
 }
 
-export * from './columns'
 export * from './commandBar'
 export * from './context'
 export * from './hooks'
 export * from './hooks/query-presets'
+export * from './hooks/useColumns'
 export * from './reducer'
 export * from './SaveFilterForm'
 export * from './types'

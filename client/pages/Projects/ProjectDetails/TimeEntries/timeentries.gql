@@ -1,6 +1,6 @@
 
   query ProjectTimeEntries ($query: ReportsQuery!) {
-    timeentries(query: $query) {
+    report(query: $query) {
       title
       duration
       week

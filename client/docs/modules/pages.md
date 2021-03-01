@@ -93,6 +93,7 @@ All are built using React Function components and Hooks.
 - [forecastQueryPreset](pages.md#forecastquerypreset)
 - [lastMonthQueryPreset](pages.md#lastmonthquerypreset)
 - [lastYearQueryPreset](pages.md#lastyearquerypreset)
+- [useColumns](pages.md#usecolumns)
 
 ### Reports Functions
 
@@ -285,7 +286,7 @@ ___
 
 • `Const` **ReportsContext**: *Context*<[*IReportsContext*](../interfaces/pages.ireportscontext.md)\>
 
-Defined in: [client/pages/Reports/context.ts:30](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/context.ts#L30)
+Defined in: [client/pages/Reports/context.ts:36](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/context.ts#L36)
 
 ___
 
@@ -447,6 +448,22 @@ Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:52](https://gith
 
 ___
 
+### useColumns
+
+▸ **useColumns**(`__namedParameters`: *Object*): *any*[]
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`__namedParameters` | *Object* |
+
+**Returns:** *any*[]
+
+Defined in: client/pages/Reports/hooks/useColumns.tsx:10
+
+___
+
 ## Reports Functions
 
 ### SaveFilterForm
@@ -467,17 +484,11 @@ ___
 
 ### useQueryPresets
 
-▸ **useQueryPresets**<T\>(): T[]
+▸ **useQueryPresets**(): [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)[]
 
 Use query presets
 
-#### Type parameters:
-
-Name | Default |
-:------ | :------ |
-`T` | [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md) |
-
-**Returns:** T[]
+**Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)[]
 
 Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:100](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L100)
 
@@ -503,6 +514,7 @@ Hook for Reports
 
 Name | Type |
 :------ | :------ |
+`columns` | *any*[] |
 `dispatch` | *Dispatch*<AnyAction\> |
 `filters` | [*BaseFilter*](../classes/components.basefilter.md)<any\>[] |
 `history` | *History*<unknown\> |
@@ -511,7 +523,7 @@ Name | Type |
 `state` | [*IReportsState*](../interfaces/pages.ireportsstate.md) |
 `t` | TFunction |
 
-Defined in: [client/pages/Reports/hooks/useReports.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReports.ts#L24)
+Defined in: [client/pages/Reports/hooks/useReports.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReports.ts#L25)
 
 ___
 
