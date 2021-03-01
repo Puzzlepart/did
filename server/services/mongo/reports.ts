@@ -4,7 +4,7 @@ import { find, first, omit } from 'underscore'
 import { ProjectService, UserService } from '.'
 import { DateObject } from '../../../shared/utils/date.dateObject'
 import { Context } from '../../graphql/context'
-import { ReportsQuery, TimeEntry } from '../../graphql/resolvers/types'
+import { ReportsQuery, ReportsQueryPreset, TimeEntry } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 
 type Report = TimeEntry[]
@@ -28,17 +28,19 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
   /**
    * Get report
    *
-   * @param query - Query
+   * @param preset - Query preset
+   * @param query - Custom query
    * @param sortAsc - Sort ascending
    */
   public async getReport(
-    query: ReportsQuery,
-    sortAsc: boolean
+    preset?: ReportsQueryPreset,
+    query: ReportsQuery = {},
+    sortAsc?: boolean
   ): Promise<Report> {
     try {
       const d = new DateObject()
       let q: FilterQuery<TimeEntry> = {}
-      switch (query.preset) {
+      switch (preset) {
         case 'LAST_MONTH':
           {
             q.month = d.add('-1m').toObject().month - 1
