@@ -1,4 +1,4 @@
-[did-client - v0.10.0](../README.md) / [Components](../modules/components.md) / IUserMessageProps
+[did-client - v0.9.7](../README.md) / [Components](../modules/components.md) / IUserMessageProps
 
 # Interface: IUserMessageProps
 

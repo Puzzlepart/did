@@ -1,4 +1,4 @@
-[did-client - v0.10.0](../README.md) / [Pages](../modules/pages.md) / IReportsQueryPresetItem
+[did-client - v0.9.7](../README.md) / [Pages](../modules/pages.md) / IReportsQueryPresetItem
 
 # Interface: IReportsQueryPresetItem
 

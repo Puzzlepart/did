@@ -1,4 +1,4 @@
-[did-client - v0.10.0](../README.md) / Pages
+[did-client - v0.9.7](../README.md) / Pages
 
 # Module: Pages
 
@@ -371,7 +371,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
 
-Defined in: client/pages/Reports/hooks/query-presets/index.tsx:36
+Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:36](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L36)
 
 ___
 
@@ -389,7 +389,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
 
-Defined in: client/pages/Reports/hooks/query-presets/index.tsx:69
+Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:69](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L69)
 
 ___
 
@@ -407,7 +407,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
 
-Defined in: client/pages/Reports/hooks/query-presets/index.tsx:85
+Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:85](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L85)
 
 ___
 
@@ -425,7 +425,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
 
-Defined in: client/pages/Reports/hooks/query-presets/index.tsx:20
+Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L20)
 
 ___
 
@@ -443,7 +443,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
 
-Defined in: client/pages/Reports/hooks/query-presets/index.tsx:52
+Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:52](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L52)
 
 ___
 
@@ -479,7 +479,7 @@ Name | Default |
 
 **Returns:** T[]
 
-Defined in: client/pages/Reports/hooks/query-presets/index.tsx:100
+Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:100](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L100)
 
 ___
 

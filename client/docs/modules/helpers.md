@@ -1,4 +1,4 @@
-[did-client - v0.10.0](../README.md) / Helpers
+[did-client - v0.9.7](../README.md) / Helpers
 
 # Module: Helpers
 

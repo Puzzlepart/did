@@ -1,4 +1,4 @@
-[did-client - v0.10.0](../README.md) / Configuration
+[did-client - v0.9.7](../README.md) / Configuration
 
 # Module: Configuration
 

@@ -1,4 +1,4 @@
-[did-server - v0.10.0](../README.md) / utils
+[did-server - v0.9.7](../README.md) / utils
 
 # Module: utils
 
