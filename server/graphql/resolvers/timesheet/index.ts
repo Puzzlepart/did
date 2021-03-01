@@ -13,6 +13,13 @@ import {
 } from './types'
 
 /**
+ * Resolver for `TimesheetPeriodObject`.
+ *
+ * `TimesheetService` are injected through
+ * _dependendy injection_.
+ *
+ * @see https://typegraphql.com/docs/dependency-injection.html
+ *
  * @category Resolver
  */
 @Service()

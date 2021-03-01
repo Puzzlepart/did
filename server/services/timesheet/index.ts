@@ -7,7 +7,7 @@ import DateUtils, { DateObject } from '../../../shared/utils/date'
 import { Context } from '../../graphql/context'
 import { TimesheetPeriodObject } from '../../graphql/resolvers/types'
 import { firstPart } from '../../utils'
-import {  ProjectService } from '../mongo'
+import { ProjectService } from '../mongo'
 import MatchingEngine from './matching'
 import {
   IConnectEventsParameters,

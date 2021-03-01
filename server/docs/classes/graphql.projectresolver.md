@@ -4,6 +4,13 @@
 
 [graphql](../modules/graphql.md).ProjectResolver
 
+Resolver for `Project`.
+
+`ProjectService` and `MSGraphService` are injected through
+_dependendy injection_.
+
+**`see`** https://typegraphql.com/docs/dependency-injection.html
+
 ## Table of contents
 
 ### Constructors
@@ -28,11 +35,11 @@ Constructor for ProjectResolver
 Name | Type | Description |
 :------ | :------ | :------ |
 `_project` | [*ProjectService*](services.projectservice.md) | Project service   |
-`_msgraph` | [*MSGraphService*](services.msgraphservice.md) | MSGraphService    |
+`_msgraph` | [*MSGraphService*](services.msgraphservice.md) | Microsoft Graph service    |
 
 **Returns:** [*ProjectResolver*](graphql.projectresolver.md)
 
-Defined in: [server/graphql/resolvers/project/index.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/index.ts#L20)
+Defined in: [server/graphql/resolvers/project/index.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/index.ts#L27)
 
 ## Methods
 
@@ -52,7 +59,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*CreateOrUpdateProjectResult*](graphql.createorupdateprojectresult.md)\>
 
-Defined in: [server/graphql/resolvers/project/index.ts:59](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/index.ts#L59)
+Defined in: [server/graphql/resolvers/project/index.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/index.ts#L66)
 
 ___
 
@@ -70,4 +77,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Project*](graphql.project.md)[]\>
 
-Defined in: [server/graphql/resolvers/project/index.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/index.ts#L39)
+Defined in: [server/graphql/resolvers/project/index.ts:46](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/project/index.ts#L46)

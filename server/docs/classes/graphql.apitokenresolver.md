@@ -4,6 +4,13 @@
 
 [graphql](../modules/graphql.md).ApiTokenResolver
 
+Resolver for `ApiToken`.
+
+`ApiTokenService` are injected through
+_dependendy injection_.
+
+**`see`** https://typegraphql.com/docs/dependency-injection.html
+
 ## Table of contents
 
 ### Constructors
@@ -32,7 +39,7 @@ Name | Type | Description |
 
 **Returns:** [*ApiTokenResolver*](graphql.apitokenresolver.md)
 
-Defined in: [server/graphql/resolvers/apiToken/index.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/index.ts#L18)
+Defined in: [server/graphql/resolvers/apiToken/index.ts:25](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/index.ts#L25)
 
 ## Methods
 
@@ -51,7 +58,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<string\>
 
-Defined in: [server/graphql/resolvers/apiToken/index.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/index.ts#L47)
+Defined in: [server/graphql/resolvers/apiToken/index.ts:54](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/index.ts#L54)
 
 ___
 
@@ -69,7 +76,7 @@ Name | Type |
 
 **Returns:** *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
 
-Defined in: [server/graphql/resolvers/apiToken/index.ts:33](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/index.ts#L33)
+Defined in: [server/graphql/resolvers/apiToken/index.ts:40](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/index.ts#L40)
 
 ___
 
@@ -88,4 +95,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/apiToken/index.ts:62](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/index.ts#L62)
+Defined in: [server/graphql/resolvers/apiToken/index.ts:69](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/index.ts#L69)

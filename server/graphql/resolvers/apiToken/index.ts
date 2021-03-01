@@ -11,6 +11,13 @@ import { BaseResult } from '../types'
 import { ApiToken, ApiTokenInput } from './types'
 
 /**
+ * Resolver for `ApiToken`.
+ *
+ * `ApiTokenService` are injected through
+ * _dependendy injection_.
+ *
+ * @see https://typegraphql.com/docs/dependency-injection.html
+ *
  * @category Resolver
  */
 @Service()

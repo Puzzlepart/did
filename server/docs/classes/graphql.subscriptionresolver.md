@@ -4,6 +4,13 @@
 
 [graphql](../modules/graphql.md).SubscriptionResolver
 
+Resolver for `Subscription`.
+
+`SubscriptionService` are injected through
+_dependendy injection_.
+
+**`see`** https://typegraphql.com/docs/dependency-injection.html
+
 ## Table of contents
 
 ### Constructors
@@ -31,7 +38,7 @@ Name | Type | Description |
 
 **Returns:** [*SubscriptionResolver*](graphql.subscriptionresolver.md)
 
-Defined in: [server/graphql/resolvers/subscription/index.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/index.ts#L18)
+Defined in: [server/graphql/resolvers/subscription/index.ts:25](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/index.ts#L25)
 
 ## Methods
 
@@ -49,7 +56,7 @@ Name | Type |
 
 **Returns:** *Promise*<[*Subscription*](graphql.subscription.md)\>
 
-Defined in: [server/graphql/resolvers/subscription/index.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/index.ts#L34)
+Defined in: [server/graphql/resolvers/subscription/index.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/index.ts#L41)
 
 ___
 
@@ -67,4 +74,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/subscription/index.ts:45](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/index.ts#L45)
+Defined in: [server/graphql/resolvers/subscription/index.ts:52](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/index.ts#L52)

@@ -9,6 +9,13 @@ import { Context } from '../../context'
 import { ReportsQuery, TimeEntry } from './types'
 
 /**
+ * Resolver for `TimeEntry`.
+ *
+ * `ReportsService` are injected through
+ * _dependendy injection_.
+ *
+ * @see https://typegraphql.com/docs/dependency-injection.html
+ *
  * @category Resolver
  */
 @Service()

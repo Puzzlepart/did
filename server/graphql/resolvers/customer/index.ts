@@ -9,6 +9,13 @@ import { BaseResult } from '../types'
 import { Customer, CustomerInput } from './types'
 
 /**
+ * Resolver for `Customer`.
+ *
+ * `CustomerService` are injected through
+ * _dependendy injection_.
+ *
+ * @see https://typegraphql.com/docs/dependency-injection.html
+ *
  * @category Resolver
  */
 @Service()

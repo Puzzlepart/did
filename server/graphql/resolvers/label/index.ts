@@ -9,6 +9,13 @@ import { BaseResult } from '../types'
 import { LabelInput, LabelObject as Label } from './types'
 
 /**
+ * Resolver for `Label`.
+ *
+ * `LabelService` are injected through
+ * _dependendy injection_.
+ *
+ * @see https://typegraphql.com/docs/dependency-injection.html
+ *
  * @category Resolver
  */
 @Service()
@@ -43,9 +50,7 @@ export class LabelResolver {
     @Arg('update', { nullable: true }) update: boolean
   ): Promise<BaseResult> {
     const l = new Label(label)
-    await (update
-      ? this._label.updateLabel(l)
-      : this._label.addLabel(l))
+    await (update ? this._label.updateLabel(l) : this._label.addLabel(l))
     return { success: true, error: null }
   }
 

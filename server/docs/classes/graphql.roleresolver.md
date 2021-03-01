@@ -4,6 +4,13 @@
 
 [graphql](../modules/graphql.md).RoleResolver
 
+Resolver for `Role`.
+
+`RoleService` are injected through
+_dependendy injection_.
+
+**`see`** https://typegraphql.com/docs/dependency-injection.html
+
 ## Table of contents
 
 ### Constructors
@@ -32,7 +39,7 @@ Name | Type | Description |
 
 **Returns:** [*RoleResolver*](graphql.roleresolver.md)
 
-Defined in: [server/graphql/resolvers/role/index.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/role/index.ts#L17)
+Defined in: [server/graphql/resolvers/role/index.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/role/index.ts#L24)
 
 ## Methods
 
@@ -51,7 +58,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<{ `error`: *any* = null; `success`: *boolean* = true }\>
 
-Defined in: [server/graphql/resolvers/role/index.ts:42](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/role/index.ts#L42)
+Defined in: [server/graphql/resolvers/role/index.ts:49](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/role/index.ts#L49)
 
 ___
 
@@ -69,7 +76,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<{ `error`: *any* = null; `success`: *boolean* = true }\>
 
-Defined in: [server/graphql/resolvers/role/index.ts:59](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/role/index.ts#L59)
+Defined in: [server/graphql/resolvers/role/index.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/role/index.ts#L66)
 
 ___
 
@@ -81,4 +88,4 @@ Get roles
 
 **Returns:** *Promise*<[*Role*](graphql.role.md)[]\>
 
-Defined in: [server/graphql/resolvers/role/index.ts:30](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/role/index.ts#L30)
+Defined in: [server/graphql/resolvers/role/index.ts:37](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/role/index.ts#L37)

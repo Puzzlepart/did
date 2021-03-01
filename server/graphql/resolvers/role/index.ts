@@ -10,6 +10,13 @@ import { BaseResult } from '../types'
 import { Role, RoleInput } from './types'
 
 /**
+ * Resolver for `Role`.
+ *
+ * `RoleService` are injected through
+ * _dependendy injection_.
+ *
+ * @see https://typegraphql.com/docs/dependency-injection.html
+ *
  * @category Resolver
  */
 @Service()
@@ -43,9 +50,7 @@ export class RoleResolver {
     @Arg('role', () => RoleInput) role: RoleInput,
     @Arg('update', { nullable: true }) update: boolean
   ) {
-    await (update
-      ? this._role.updateRole(role)
-      : this._role.addRole(role))
+    await (update ? this._role.updateRole(role) : this._role.addRole(role))
     return { success: true, error: null }
   }
 

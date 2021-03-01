@@ -4,6 +4,13 @@
 
 [graphql](../modules/graphql.md).CustomerResolver
 
+Resolver for `Customer`.
+
+`CustomerService` are injected through
+_dependendy injection_.
+
+**`see`** https://typegraphql.com/docs/dependency-injection.html
+
 ## Table of contents
 
 ### Constructors
@@ -32,7 +39,7 @@ Name | Type | Description |
 
 **Returns:** [*CustomerResolver*](graphql.customerresolver.md)
 
-Defined in: [server/graphql/resolvers/customer/index.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/index.ts#L16)
+Defined in: [server/graphql/resolvers/customer/index.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/index.ts#L23)
 
 ## Methods
 
@@ -51,7 +58,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<{ `error`: *any* = null; `success`: *boolean* = true }\>
 
-Defined in: [server/graphql/resolvers/customer/index.ts:43](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/index.ts#L43)
+Defined in: [server/graphql/resolvers/customer/index.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/index.ts#L50)
 
 ___
 
@@ -69,7 +76,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Customer*](graphql.customer.md)[]\>
 
-Defined in: [server/graphql/resolvers/customer/index.ts:31](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/index.ts#L31)
+Defined in: [server/graphql/resolvers/customer/index.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/index.ts#L38)
 
 ___
 
@@ -87,4 +94,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/graphql/resolvers/customer/index.ts:61](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/index.ts#L61)
+Defined in: [server/graphql/resolvers/customer/index.ts:68](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/customer/index.ts#L68)

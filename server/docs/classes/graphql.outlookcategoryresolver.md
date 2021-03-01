@@ -4,6 +4,13 @@
 
 [graphql](../modules/graphql.md).OutlookCategoryResolver
 
+Resolver for `OutlookCategory`.
+
+`MSGraphService` are injected through
+_dependendy injection_.
+
+**`see`** https://typegraphql.com/docs/dependency-injection.html
+
 ## Table of contents
 
 ### Constructors
@@ -27,11 +34,11 @@ Constructor for OutlookCategoryResolver
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`_msgraph` | [*MSGraphService*](services.msgraphservice.md) | MSGraphService    |
+`_msgraph` | [*MSGraphService*](services.msgraphservice.md) | Microsoft Graph service    |
 
 **Returns:** [*OutlookCategoryResolver*](graphql.outlookcategoryresolver.md)
 
-Defined in: [server/graphql/resolvers/outlookCategory/index.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/index.ts#L14)
+Defined in: [server/graphql/resolvers/outlookCategory/index.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/index.ts#L21)
 
 ## Methods
 
@@ -49,7 +56,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*CreateOutlookCategoryResult*](graphql.createoutlookcategoryresult.md)\>
 
-Defined in: [server/graphql/resolvers/outlookCategory/index.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/index.ts#L41)
+Defined in: [server/graphql/resolvers/outlookCategory/index.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/index.ts#L48)
 
 ___
 
@@ -61,4 +68,4 @@ Get Outlook categories
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/graphql/resolvers/outlookCategory/index.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/index.ts#L27)
+Defined in: [server/graphql/resolvers/outlookCategory/index.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/index.ts#L34)

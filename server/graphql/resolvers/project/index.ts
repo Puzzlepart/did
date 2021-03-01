@@ -13,6 +13,13 @@ import {
 } from '../types'
 
 /**
+ * Resolver for `Project`.
+ *
+ * `ProjectService` and `MSGraphService` are injected through
+ * _dependendy injection_.
+ *
+ * @see https://typegraphql.com/docs/dependency-injection.html
+ *
  * @category Resolver
  */
 @Service()
@@ -22,7 +29,7 @@ export class ProjectResolver {
    * Constructor for ProjectResolver
    *
    * @param _project - Project service
-   * @param _msgraph - MSGraphService
+   * @param _msgraph - Microsoft Graph service
    */
   constructor(
     private readonly _project: ProjectService,

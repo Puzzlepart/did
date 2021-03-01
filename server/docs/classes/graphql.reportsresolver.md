@@ -4,6 +4,13 @@
 
 [graphql](../modules/graphql.md).ReportsResolver
 
+Resolver for `TimeEntry`.
+
+`ReportsService` are injected through
+_dependendy injection_.
+
+**`see`** https://typegraphql.com/docs/dependency-injection.html
+
 ## Table of contents
 
 ### Constructors
@@ -30,7 +37,7 @@ Name | Type | Description |
 
 **Returns:** [*ReportsResolver*](graphql.reportsresolver.md)
 
-Defined in: [server/graphql/resolvers/reports/index.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L16)
+Defined in: [server/graphql/resolvers/reports/index.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L23)
 
 ## Methods
 
@@ -51,4 +58,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/graphql/resolvers/reports/index.ts:36](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L36)
+Defined in: [server/graphql/resolvers/reports/index.ts:43](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L43)

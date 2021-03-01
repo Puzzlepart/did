@@ -164,4 +164,3 @@ export {
   TimesheetResolver,
   UserResolver
 }
-

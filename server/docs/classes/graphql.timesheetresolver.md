@@ -4,6 +4,13 @@
 
 [graphql](../modules/graphql.md).TimesheetResolver
 
+Resolver for `TimesheetPeriodObject`.
+
+`TimesheetService` are injected through
+_dependendy injection_.
+
+**`see`** https://typegraphql.com/docs/dependency-injection.html
+
 ## Table of contents
 
 ### Constructors
@@ -32,7 +39,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetResolver*](graphql.timesheetresolver.md)
 
-Defined in: [server/graphql/resolvers/timesheet/index.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L20)
+Defined in: [server/graphql/resolvers/timesheet/index.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L27)
 
 ## Methods
 
@@ -51,7 +58,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/timesheet/index.ts:60](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L60)
+Defined in: [server/graphql/resolvers/timesheet/index.ts:67](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L67)
 
 ___
 
@@ -70,7 +77,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/graphql/resolvers/timesheet/index.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L38)
+Defined in: [server/graphql/resolvers/timesheet/index.ts:45](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L45)
 
 ___
 
@@ -89,4 +96,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/timesheet/index.ts:89](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L89)
+Defined in: [server/graphql/resolvers/timesheet/index.ts:96](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/index.ts#L96)

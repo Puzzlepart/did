@@ -4,6 +4,13 @@
 
 [graphql](../modules/graphql.md).LabelResolver
 
+Resolver for `Label`.
+
+`LabelService` are injected through
+_dependendy injection_.
+
+**`see`** https://typegraphql.com/docs/dependency-injection.html
+
 ## Table of contents
 
 ### Constructors
@@ -32,7 +39,7 @@ Name | Type | Description |
 
 **Returns:** [*LabelResolver*](graphql.labelresolver.md)
 
-Defined in: [server/graphql/resolvers/label/index.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L16)
+Defined in: [server/graphql/resolvers/label/index.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L23)
 
 ## Methods
 
@@ -51,7 +58,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/label/index.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L41)
+Defined in: [server/graphql/resolvers/label/index.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L48)
 
 ___
 
@@ -69,7 +76,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/label/index.ts:59](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L59)
+Defined in: [server/graphql/resolvers/label/index.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L66)
 
 ___
 
@@ -81,4 +88,4 @@ Get labels
 
 **Returns:** *Promise*<[*LabelObject*](graphql.labelobject.md)[]\>
 
-Defined in: [server/graphql/resolvers/label/index.ts:29](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L29)
+Defined in: [server/graphql/resolvers/label/index.ts:36](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/label/index.ts#L36)

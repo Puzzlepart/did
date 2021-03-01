@@ -4,13 +4,20 @@ import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { pick } from 'underscore'
-import { UserService, MSGraphService } from '../../../services'
+import { MSGraphService, UserService } from '../../../services'
 import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
 import { BaseResult } from '../types'
 import { User, UserInput, UserQuery } from './types'
 
 /**
+ * Resolver for `User`.
+ *
+ * `MSGraphService` and `UserService` are injected through
+ * _dependendy injection_.
+ *
+ * @see https://typegraphql.com/docs/dependency-injection.html
+ *
  * @category Resolver
  */
 @Service()
@@ -74,9 +81,7 @@ export class UserResolver {
     @Arg('user', () => UserInput) user: UserInput,
     @Arg('update', { nullable: true }) update: boolean
   ): Promise<BaseResult> {
-    await (update
-      ? this._user.updateUser(user)
-      : this._user.addUser(user))
+    await (update ? this._user.updateUser(user) : this._user.addUser(user))
     return { success: true, error: null }
   }
 

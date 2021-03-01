@@ -7,6 +7,13 @@ import { IAuthOptions } from '../../authChecker'
 import { CreateOutlookCategoryResult, OutlookCategory } from './types'
 
 /**
+ * Resolver for `OutlookCategory`.
+ *
+ * `MSGraphService` are injected through
+ * _dependendy injection_.
+ *
+ * @see https://typegraphql.com/docs/dependency-injection.html
+ *
  * @category Resolver
  */
 @Service()
@@ -15,7 +22,7 @@ export class OutlookCategoryResolver {
   /**
    * Constructor for OutlookCategoryResolver
    *
-   * @param _msgraph - MSGraphService
+   * @param _msgraph - Microsoft Graph service
    */
   constructor(private readonly _msgraph: MSGraphService) {}
 
