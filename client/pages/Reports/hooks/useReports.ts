@@ -3,10 +3,10 @@ import { useLayoutEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import initFilters from '../filters'
+import { useReportsReducer } from '../reducer'
 import { IReportsParameters } from '../types'
 import { useQueryPresets } from './useQueryPresets'
-import { useReportQuery } from './useReportsQuery'
-import { useReportsReducer } from './useReportsReducer'
+import { useReportsQuery } from './useReportsQuery'
 
 /**
  * Hook for Reports
@@ -28,9 +28,9 @@ export function useReports() {
   const history = useHistory()
   const queries = useQueryPresets()
   const { state, dispatch } = useReportsReducer(queries)
-  useReportQuery({ state, dispatch })
-  useLayoutEffect(() => history.push(`/reports/${state.query?.key || ''}`), [
-    state.query,
+  useReportsQuery({ state, dispatch })
+  useLayoutEffect(() => history.push(`/reports/${state.preset?.key || ''}`), [
+    state.preset,
     history
   ])
   const filters = useMemo(() => initFilters(state.filter, t), [state.filter, t])
