@@ -4,7 +4,7 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { MongoService } from '../../../services/mongo'
+import { RoleService } from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
 import { BaseResult } from '../types'
 import { Role, RoleInput } from './types'
@@ -18,9 +18,9 @@ export class RoleResolver {
   /**
    * Constructor for RoleResolver
    *
-   * @param _mongo - Mongo service
+   * @param _role - Role service
    */
-  constructor(private readonly _mongo: MongoService) {}
+  constructor(private readonly _role: RoleService) {}
 
   /**
    * Get roles
@@ -28,7 +28,7 @@ export class RoleResolver {
   @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [Role], { description: 'Get roles' })
   roles() {
-    return this._mongo.role.getRoles()
+    return this._role.getRoles()
   }
 
   /**
@@ -44,8 +44,8 @@ export class RoleResolver {
     @Arg('update', { nullable: true }) update: boolean
   ) {
     await (update
-      ? this._mongo.role.updateRole(role)
-      : this._mongo.role.addRole(role))
+      ? this._role.updateRole(role)
+      : this._role.addRole(role))
     return { success: true, error: null }
   }
 
@@ -57,7 +57,7 @@ export class RoleResolver {
   @Authorized<IAuthOptions>({ permission: 'cd52a735' })
   @Mutation(() => BaseResult, { description: 'Delete role' })
   async deleteRole(@Arg('name', () => String) name: string) {
-    await this._mongo.role.deleteRole(name)
+    await this._role.deleteRole(name)
     return { success: true, error: null }
   }
 }

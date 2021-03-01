@@ -1,11 +1,13 @@
 import { FilterQuery } from 'mongodb'
+import { Inject, Service } from 'typedi'
 import { pick } from 'underscore'
 import { Context } from '../../graphql/context'
 import { Customer } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 
+@Service({ global: false })
 export class CustomerService extends MongoDocumentService<Customer> {
-  constructor(context: Context) {
+  constructor(@Inject('CONTEXT') readonly context: Context) {
     super(context, 'customers', CustomerService.name)
   }
 

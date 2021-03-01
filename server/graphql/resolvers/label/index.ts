@@ -3,7 +3,7 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { MongoService } from '../../../services/mongo'
+import { LabelService } from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
 import { BaseResult } from '../types'
 import { LabelInput, LabelObject as Label } from './types'
@@ -17,9 +17,9 @@ export class LabelResolver {
   /**
    * Constructor for LabelResolver
    *
-   * @param _mongo - Mongo service
+   * @param _label - Label service
    */
-  constructor(private readonly _mongo: MongoService) {}
+  constructor(private readonly _label: LabelService) {}
 
   /**
    * Get labels
@@ -27,7 +27,7 @@ export class LabelResolver {
   @Authorized()
   @Query(() => [Label], { description: 'Get labels' })
   labels() {
-    return this._mongo.label.getLabels()
+    return this._label.getLabels()
   }
 
   /**
@@ -44,8 +44,8 @@ export class LabelResolver {
   ): Promise<BaseResult> {
     const l = new Label(label)
     await (update
-      ? this._mongo.label.updateLabel(l)
-      : this._mongo.label.addLabel(l))
+      ? this._label.updateLabel(l)
+      : this._label.addLabel(l))
     return { success: true, error: null }
   }
 
@@ -57,7 +57,7 @@ export class LabelResolver {
   @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Delete label' })
   async deleteLabel(@Arg('name') name: string): Promise<BaseResult> {
-    await this._mongo.label.deleteLabel(name)
+    await this._label.deleteLabel(name)
     return { success: true, error: null }
   }
 }

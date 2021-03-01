@@ -2,7 +2,7 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { MongoService } from '../../../services/mongo'
+import { ProjectService } from '../../../services/mongo'
 import MSGraphService from '../../../services/msgraph'
 import { IAuthOptions } from '../../authChecker'
 import {
@@ -21,11 +21,11 @@ export class ProjectResolver {
   /**
    * Constructor for ProjectResolver
    *
-   * @param _mongo - Mongo service
+   * @param _project - Project service
    * @param _msgraph - MSGraphService
    */
   constructor(
-    private readonly _mongo: MongoService,
+    private readonly _project: ProjectService,
     private readonly _msgraph: MSGraphService
   ) {}
 
@@ -39,7 +39,7 @@ export class ProjectResolver {
   async projects(
     @Arg('customerKey', { nullable: true }) customerKey: string
   ): Promise<Project[]> {
-    const { projects } = await this._mongo.project.getProjectsData(
+    const { projects } = await this._project.getProjectsData(
       customerKey && { customerKey }
     )
     return projects
@@ -63,10 +63,10 @@ export class ProjectResolver {
   ): Promise<CreateOrUpdateProjectResult> {
     const p = new Project(project)
     if (update) {
-      const success = await this._mongo.project.updateProject(p)
+      const success = await this._project.updateProject(p)
       return { success }
     } else {
-      const id = await this._mongo.project.addProject(p)
+      const id = await this._project.addProject(p)
       if (options.createOutlookCategory) {
         await this._msgraph.createOutlookCategory(id)
       }

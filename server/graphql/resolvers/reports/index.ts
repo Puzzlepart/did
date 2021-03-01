@@ -3,7 +3,7 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { MongoService } from '../../../services/mongo'
+import { ReportsService } from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
 import { ReportsQuery, TimeEntry } from './types'
@@ -17,9 +17,9 @@ export class ReportsResolver {
   /**
    * Constructor for ReportsResolver
    *
-   * @param _mongo - Mongo service
+   * @param _reports - Reports service
    */
-  constructor(private readonly _mongo: MongoService) {}
+  constructor(private readonly _reports: ReportsService) {}
 
   /**
    * Get time entries
@@ -40,7 +40,7 @@ export class ReportsResolver {
     @Ctx() context: Context
   ) {
     if (currentUser) query.userId = context.userId
-    return await this._mongo.reports.getReport(query, sortAsc)
+    return await this._reports.getReport(query, sortAsc)
   }
 }
 

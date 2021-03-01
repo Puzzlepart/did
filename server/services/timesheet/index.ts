@@ -7,7 +7,7 @@ import DateUtils, { DateObject } from '../../../shared/utils/date'
 import { Context } from '../../graphql/context'
 import { TimesheetPeriodObject } from '../../graphql/resolvers/types'
 import { firstPart } from '../../utils'
-import { MongoService } from '../mongo'
+import {  ProjectService } from '../mongo'
 import MatchingEngine from './matching'
 import {
   IConnectEventsParameters,
@@ -27,13 +27,13 @@ export class TimesheetService {
    * Constructor
    *
    * @param context - Injected context through typedi
-   * @param _msgraph - MSGraphService
-   * @param _mongo - MongoService
+   * @param _msgraph - MS Graph service
+   * @param _project - Project service
    */
   constructor(
     @Inject('CONTEXT') private readonly context: Context,
     private readonly _msgraph: MSGraphService,
-    private readonly _mongo: MongoService
+    private readonly _project: ProjectService
   ) {
     const { db } = this.context
     this._confirmed_periods = db.collection('confirmed_periods')
@@ -57,7 +57,7 @@ export class TimesheetService {
         parameters.locale,
         this.context.userId
       )
-      const data = await this._mongo.project.getProjectsData()
+      const data = await this._project.getProjectsData()
       for (let index = 0; index < periods.length; index++) {
         const { _id } = periods[index]
         const [confirmed, forecasted] = await Promise.all([

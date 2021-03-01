@@ -4,7 +4,7 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { MongoService } from '../../../services/mongo'
+import { ApiTokenService } from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
 import { BaseResult } from '../types'
@@ -19,9 +19,9 @@ export class ApiTokenResolver {
   /**
    * Constructor for ApiTokenResolver
    *
-   * @param _mongo - Mongo service
+   * @param _apiToken - API token service
    */
-  constructor(private readonly _mongo: MongoService) {}
+  constructor(private readonly _apiToken: ApiTokenService) {}
 
   /**
    * Get API tokens
@@ -31,7 +31,7 @@ export class ApiTokenResolver {
   @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [ApiToken], { description: 'Get API tokens' })
   apiTokens(@Ctx() context: Context): Promise<ApiToken[]> {
-    return this._mongo.apiToken.getTokens({
+    return this._apiToken.getTokens({
       subscriptionId: context.subscription.id
     })
   }
@@ -48,7 +48,7 @@ export class ApiTokenResolver {
     @Arg('token') token: ApiTokenInput,
     @Ctx() context: Context
   ): Promise<string> {
-    return this._mongo.apiToken.addToken(token, context.subscription.id)
+    return this._apiToken.addToken(token, context.subscription.id)
   }
 
   /**
@@ -63,7 +63,7 @@ export class ApiTokenResolver {
     @Arg('name') name: string,
     @Ctx() context: Context
   ): Promise<BaseResult> {
-    await this._mongo.apiToken.deleteToken(name, context.subscription.id)
+    await this._apiToken.deleteToken(name, context.subscription.id)
     return { success: true, error: null }
   }
 }

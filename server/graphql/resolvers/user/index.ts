@@ -4,7 +4,7 @@ import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { pick } from 'underscore'
-import { MongoService, MSGraphService } from '../../../services'
+import { UserService, MSGraphService } from '../../../services'
 import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
 import { BaseResult } from '../types'
@@ -20,12 +20,15 @@ export class UserResolver {
    * Constructor for UserResolver
    *
    * @param _msgraph - MS Graph service
-   * @param _mongo - Mongo service
+   * @param _user - User service
    */
   constructor(
     private readonly _msgraph: MSGraphService,
-    private readonly _mongo: MongoService
-  ) {}
+    private readonly _user: UserService
+  ) {
+    // eslint-disable-next-line no-console
+    console.log(_user)
+  }
 
   /**
    * Get current user
@@ -34,7 +37,7 @@ export class UserResolver {
    */
   @Query(() => User, { description: 'Get the currently logged in user' })
   async currentUser(@Ctx() context: Context): Promise<User> {
-    const user = await this._mongo.user.getById(context.userId)
+    const user = await this._user.getById(context.userId)
     return {
       ...user,
       subscription: pick(context.subscription, 'id', 'name')
@@ -59,7 +62,7 @@ export class UserResolver {
   users(
     @Arg('query', () => UserQuery, { nullable: true }) query: UserQuery
   ): Promise<User[]> {
-    return this._mongo.user.getUsers(query)
+    return this._user.getUsers(query)
   }
 
   /**
@@ -75,8 +78,8 @@ export class UserResolver {
     @Arg('update', { nullable: true }) update: boolean
   ): Promise<BaseResult> {
     await (update
-      ? this._mongo.user.updateUser(user)
-      : this._mongo.user.addUser(user))
+      ? this._user.updateUser(user)
+      : this._user.addUser(user))
     return { success: true, error: null }
   }
 
@@ -94,7 +97,7 @@ export class UserResolver {
       ...user,
       role: 'User'
     }))
-    await this._mongo.user.addUsers(users)
+    await this._user.addUsers(users)
     return { success: true, error: null }
   }
 
@@ -108,7 +111,7 @@ export class UserResolver {
   async updateUserConfiguration(
     @Arg('configuration') configuration: string
   ): Promise<BaseResult> {
-    await this._mongo.user.updateCurrentUserConfiguration(configuration)
+    await this._user.updateCurrentUserConfiguration(configuration)
     return { success: true }
   }
 }

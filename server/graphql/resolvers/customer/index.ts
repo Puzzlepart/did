@@ -3,7 +3,7 @@
 import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
-import { MongoService } from '../../../services/mongo'
+import { CustomerService } from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
 import { BaseResult } from '../types'
 import { Customer, CustomerInput } from './types'
@@ -17,9 +17,9 @@ export class CustomerResolver {
   /**
    * Constructor for CustomerResolver
    *
-   * @param _mongo - Mongo service
+   * @param _customer - Customer service
    */
-  constructor(private readonly _mongo: MongoService) {}
+  constructor(private readonly _customer: CustomerService) {}
 
   /**
    * Get customers
@@ -29,7 +29,7 @@ export class CustomerResolver {
   @Authorized()
   @Query(() => [Customer], { description: 'Get customers' })
   customers(@Arg('sortBy', { nullable: true }) sortBy: string) {
-    return this._mongo.customer.getCustomers()
+    return this._customer.getCustomers()
   }
 
   /**
@@ -46,8 +46,8 @@ export class CustomerResolver {
   ) {
     const c = new Customer().fromInput(customer)
     await (update
-      ? this._mongo.customer.updateCustomer(c)
-      : this._mongo.customer.addCustomer(c))
+      ? this._customer.updateCustomer(c)
+      : this._customer.addCustomer(c))
     return { success: true, error: null }
   }
 
@@ -59,7 +59,7 @@ export class CustomerResolver {
   @Authorized({ permission: '8b39db3d' })
   @Mutation(() => BaseResult, { description: 'Delete customer' })
   deleteCustomer(@Arg('key') key: string) {
-    return this._mongo.customer.deleteCustomer(key)
+    return this._customer.deleteCustomer(key)
   }
 }
 
