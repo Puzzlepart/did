@@ -7,6 +7,9 @@ import { IContextualMenuItem } from 'office-ui-fabric-react'
  * @category Reports
  */
 export interface IReportsQueryPresetItem extends IContextualMenuItem {
+  /**
+   * GraphQL query
+   */
   query: any
 
   /**

@@ -20,7 +20,7 @@ import query_preset_last_year from './query-preset-last-year.gql'
 export const lastMonthQueryPreset = (t: TFunction) => {
   const object = new DateObject().add('-1month').toObject()
   return {
-    key: 'LAST_MONTH_QUERY_PRESET',
+    key: 'last_month',
     text: t('common.exportTypeLastMonth', object),
     iconName: 'CalendarDay',
     query: query_preset_last_month,
@@ -36,7 +36,7 @@ export const lastMonthQueryPreset = (t: TFunction) => {
 export const currentMonthQueryPreset = (t: TFunction) => {
   const object = new DateObject().toObject()
   return {
-    key: 'CURRENT_MONTH_QUERY_PRESET',
+    key: 'current_month',
     text: t('common.exportTypeCurrentMonth', object),
     iconName: 'Calendar',
     query: query_preset_current_month,
@@ -53,7 +53,7 @@ export const lastYearQueryPreset = (t: TFunction) => {
   const { year } = new DateObject().toObject('year')
   const object = { year: year - 1 }
   return {
-    key: 'LAST_YEAR_QUERY_PRESET',
+    key: 'last_year',
     text: t('common.exportTypeLastYear', object),
     iconName: 'Previous',
     query: query_preset_last_year,
@@ -69,7 +69,7 @@ export const lastYearQueryPreset = (t: TFunction) => {
 export const currentYearQueryPreset = (t: TFunction) => {
   const object = new DateObject().toObject('year')
   return {
-    key: 'CURRENT_YEAR_QUERY_PRESET',
+    key: 'current_year',
     text: t('common.exportTypeCurrentYear', object),
     iconName: 'CalendarReply',
     query: query_preset_current_year,
@@ -84,7 +84,7 @@ export const currentYearQueryPreset = (t: TFunction) => {
  */
 export const forecastQueryPreset = (t: TFunction) => {
   return {
-    key: 'FORECAST_QUERY_PRESET',
+    key: 'forecast',
     text: t('reports.forecast'),
     iconName: 'TimeSheet',
     query: query_preset_forecast,

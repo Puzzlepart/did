@@ -541,4 +541,4 @@ ___
 
 #### Type declaration:
 
-Defined in: [client/pages/Reports/types.tsx:29](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L29)
+Defined in: [client/pages/Reports/types.tsx:32](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L32)

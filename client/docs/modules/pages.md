@@ -371,7 +371,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
 
-Defined in: [client/pages/Reports/hooks/useQueryPresets/index.tsx:36](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useQueryPresets/index.tsx#L36)
+Defined in: client/pages/Reports/hooks/query-presets/index.tsx:36
 
 ___
 
@@ -389,7 +389,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
 
-Defined in: [client/pages/Reports/hooks/useQueryPresets/index.tsx:69](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useQueryPresets/index.tsx#L69)
+Defined in: client/pages/Reports/hooks/query-presets/index.tsx:69
 
 ___
 
@@ -407,7 +407,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
 
-Defined in: [client/pages/Reports/hooks/useQueryPresets/index.tsx:85](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useQueryPresets/index.tsx#L85)
+Defined in: client/pages/Reports/hooks/query-presets/index.tsx:85
 
 ___
 
@@ -425,7 +425,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
 
-Defined in: [client/pages/Reports/hooks/useQueryPresets/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useQueryPresets/index.tsx#L20)
+Defined in: client/pages/Reports/hooks/query-presets/index.tsx:20
 
 ___
 
@@ -443,7 +443,7 @@ Name | Type | Description |
 
 **Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
 
-Defined in: [client/pages/Reports/hooks/useQueryPresets/index.tsx:52](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useQueryPresets/index.tsx#L52)
+Defined in: client/pages/Reports/hooks/query-presets/index.tsx:52
 
 ___
 
@@ -479,7 +479,7 @@ Name | Default |
 
 **Returns:** T[]
 
-Defined in: [client/pages/Reports/hooks/useQueryPresets/index.tsx:100](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useQueryPresets/index.tsx#L100)
+Defined in: client/pages/Reports/hooks/query-presets/index.tsx:100
 
 ___
 
@@ -491,13 +491,12 @@ ___
 
 Hook for Reports
 
-* Get history using useHistory
-* Get URL params using useParams
-* Get queries using getQueries
-* Using reducer from /reducer
-* Using useReportQuery
-* Layout effect for updating URL when changing query
-* Layout effects for initialiing state and updating state
+* Get history using `useHistory`
+* Get URL params using `useParams`
+* Get queries using `useQueryPresets`
+* Using reducer `useReportsReducer`
+* Using `useReportQuery`
+* Layout effect (`useLayoutEffect`) for updating URL when changing query
   when the query is reloaded
 
 **Returns:** *object*
@@ -512,7 +511,7 @@ Name | Type |
 `state` | [*IReportsState*](../interfaces/pages.ireportsstate.md) |
 `t` | TFunction |
 
-Defined in: [client/pages/Reports/hooks/useReports.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReports.ts#L25)
+Defined in: [client/pages/Reports/hooks/useReports.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReports.ts#L24)
 
 ___
 

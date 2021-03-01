@@ -3,7 +3,7 @@
 import { useQuery } from '@apollo/client'
 import { useLayoutEffect } from 'react'
 import { DATA_UPDATED, INIT } from '../reducer/actions'
-import { query_preset_last_month } from './useQueryPresets'
+import { query_preset_last_month } from './query-presets'
 /**
  * Hook for Reports Query.
  *

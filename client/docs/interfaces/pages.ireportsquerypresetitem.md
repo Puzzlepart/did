@@ -150,7 +150,7 @@ ___
 
 Export file name
 
-Defined in: [client/pages/Reports/types.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L15)
+Defined in: [client/pages/Reports/types.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L18)
 
 ___
 
@@ -416,7 +416,9 @@ ___
 
 • **query**: *any*
 
-Defined in: [client/pages/Reports/types.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L10)
+GraphQL query
+
+Defined in: [client/pages/Reports/types.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L13)
 
 ___
 
