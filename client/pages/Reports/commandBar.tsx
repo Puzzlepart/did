@@ -52,7 +52,7 @@ const exportToExcelCmd = ({ state, t }: IReportsContext) =>
     text: t('reports.exportToExcel'),
     onClick: () => {
       const fileName = format(
-        state.query.exportFileName,
+        state.preset.exportFileName,
         new Date().toDateString().split(' ').join('-')
       )
       exportExcel(state.subset, {
@@ -141,11 +141,11 @@ const saveFilterCmd = ({
 
 export default (context: IReportsContext) => ({
   items:
-    !!context.state.query && !context.state.loading
+    !!context.state.preset && !context.state.loading
       ? [selectGroupByCmd(context)]
       : [],
   farItems:
-    !!context.state.query && !context.state.loading
+    !!context.state.preset && !context.state.loading
       ? [
           exportToExcelCmd(context),
           !isEmpty(context.state.savedFilters) && saveFilterCmd(context),

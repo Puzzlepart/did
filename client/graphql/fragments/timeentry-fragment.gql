@@ -1,0 +1,24 @@
+fragment TimeEntryFragment on TimeEntry {
+  title
+  duration
+  startDateTime
+  endDateTime
+  week
+  month
+  year
+  customer {
+    key
+    name
+  }
+  project {
+    tag
+    name
+  }
+  resource {
+    id
+    givenName
+    surname
+    mail
+    displayName
+  }
+}

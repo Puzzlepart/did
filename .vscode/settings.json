@@ -20,6 +20,5 @@
   "i18n-ally.sourceLanguage": "en-GB",
   "i18n-ally.displayLanguage": "en-GB",
   "typescript.tsserver.experimental.enableProjectDiagnostics": false,
-  "editor.folding": true,
-  "xo.enable": true
+  "editor.folding": true
 }

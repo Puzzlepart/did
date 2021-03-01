@@ -25,10 +25,19 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
     {},
     {
       [INIT.type]: (state) => {
-        state.query = find(queries, (q) => q.key === url.query) as any
+        state.preset = find(queries, (q) => q.key === url.query) as any
         state.savedFilters = get(app.user.configuration, 'reports.filters', {
           default: {}
         })
+      },
+
+      [DATA_UPDATED.type]: (
+        state,
+        { payload }: ReturnType<typeof DATA_UPDATED>
+      ) => {
+        state.loading = payload.query.loading
+        state.timeentries = payload.query?.data?.report || []
+        state.subset = state.timeentries
       },
 
       [SET_FILTER.type]: (
@@ -74,15 +83,6 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
         state.isFiltersOpen = !state.isFiltersOpen
       },
 
-      [DATA_UPDATED.type]: (
-        state,
-        { payload }: ReturnType<typeof DATA_UPDATED>
-      ) => {
-        state.loading = payload.query.loading
-        state.timeentries = payload.query?.data?.timeentries || []
-        state.subset = state.timeentries
-      },
-
       [FILTERS_UPDATED.type]: (
         state,
         { payload }: ReturnType<typeof FILTERS_UPDATED>
@@ -119,7 +119,7 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
         state,
         { payload }: ReturnType<typeof CHANGE_QUERY>
       ) => {
-        state.query = find(queries, (q) => q.key === payload.key) as any
+        state.preset = find(queries, (q) => q.key === payload.key) as any
         state.subset = null
       },
 
@@ -130,3 +130,5 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
       }
     }
   )
+
+export * from './useReportsReducer'

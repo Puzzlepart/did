@@ -1,4 +1,4 @@
-#import "./timesheet.fragments.project.gql"
+#import "../../../graphql/fragments/project-fragment.gql"
 
 query Timesheet ($query: TimesheetQuery!, $options: TimesheetOptions!) {
   timesheet(query: $query, options: $options) {

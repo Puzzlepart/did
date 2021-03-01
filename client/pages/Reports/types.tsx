@@ -2,20 +2,15 @@
 import { IListGroups } from 'components/List/types'
 import { TFunction } from 'i18next'
 import { IContextualMenuItem } from 'office-ui-fabric-react'
-import { ReportsQuery } from 'types'
 
 /**
  * @category Reports
  */
-export interface IReportsQuery extends IContextualMenuItem {
+export interface IReportsQueryPresetItem extends IContextualMenuItem {
   /**
-   * Variables used for graphl query
+   * GraphQL query
    */
-  variables: {
-    query: ReportsQuery
-    forecast?: boolean
-    sortAsc?: boolean
-  }
+  query: any
 
   /**
    * Export file name
@@ -57,9 +52,9 @@ export interface IReportsState {
   isFiltersOpen?: boolean
 
   /**
-   * Query
+   * Query preset
    */
-  query?: IReportsQuery
+  preset?: IReportsQueryPresetItem
 
   /**
    * Group by properties

@@ -47,7 +47,7 @@ Name | Type | Description |
 
 **Returns:** [*ReportsService*](services.reportsservice.md)
 
-Defined in: [server/services/mongo/reports.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/reports.ts#L15)
+Defined in: [server/services/mongo/reports.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/reports.ts#L19)
 
 ## Properties
 
@@ -55,7 +55,7 @@ Defined in: [server/services/mongo/reports.ts:15](https://github.com/Puzzlepart/
 
 • `Private` **\_project**: [*ProjectService*](services.projectservice.md)
 
-Defined in: [server/services/mongo/reports.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/reports.ts#L14)
+Defined in: [server/services/mongo/reports.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/reports.ts#L18)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 • `Private` **\_user**: [*UserService*](services.userservice.md)
 
-Defined in: [server/services/mongo/reports.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/reports.ts#L15)
+Defined in: [server/services/mongo/reports.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/reports.ts#L19)
 
 ___
 
@@ -130,7 +130,7 @@ ___
 
 ### getReport
 
-▸ **getReport**(`query`: [*ReportsQuery*](graphql.reportsquery.md), `sortAsc`: *boolean*): *Promise*<Report\>
+▸ **getReport**(`preset?`: [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset), `query?`: [*ReportsQuery*](graphql.reportsquery.md), `sortAsc?`: *boolean*): *Promise*<Report\>
 
 Get report
 
@@ -138,9 +138,10 @@ Get report
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | [*ReportsQuery*](graphql.reportsquery.md) | Query   |
-`sortAsc` | *boolean* | Sort ascending    |
+`preset?` | [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset) | Query preset   |
+`query` | [*ReportsQuery*](graphql.reportsquery.md) | Custom query   |
+`sortAsc?` | *boolean* | Sort ascending    |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/mongo/reports.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/reports.ts#L34)
+Defined in: [server/services/mongo/reports.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/reports.ts#L39)

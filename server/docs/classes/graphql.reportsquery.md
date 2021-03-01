@@ -12,7 +12,7 @@
 
 ### Properties
 
-- [preset](graphql.reportsquery.md#preset)
+- [currentUser](graphql.reportsquery.md#currentuser)
 - [projectId](graphql.reportsquery.md#projectid)
 - [userId](graphql.reportsquery.md#userid)
 
@@ -26,13 +26,13 @@
 
 ## Properties
 
-### preset
+### currentUser
 
-• `Optional` **preset**: ReportsQueryPreset
+• `Optional` **currentUser**: *boolean*
 
-Reports query preset
+Filter on  current user
 
-Defined in: [server/graphql/resolvers/reports/types.ts:86](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L86)
+Defined in: [server/graphql/resolvers/reports/types.ts:98](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L98)
 
 ___
 
@@ -42,7 +42,7 @@ ___
 
 ID of the project to filter on
 
-Defined in: [server/graphql/resolvers/reports/types.ts:92](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L92)
+Defined in: [server/graphql/resolvers/reports/types.ts:86](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L86)
 
 ___
 
@@ -52,4 +52,4 @@ ___
 
 ID of the user to filter on
 
-Defined in: [server/graphql/resolvers/reports/types.ts:98](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L98)
+Defined in: [server/graphql/resolvers/reports/types.ts:92](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L92)

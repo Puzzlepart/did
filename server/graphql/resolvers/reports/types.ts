@@ -67,7 +67,7 @@ export class TimeEntry {
 /**
  * Reports query preset
  */
-type ReportsQueryPreset =
+export type ReportsQueryPreset =
   | 'LAST_MONTH'
   | 'CURRENT_MONTH'
   | 'LAST_YEAR'
@@ -80,12 +80,6 @@ type ReportsQueryPreset =
 @InputType()
 export class ReportsQuery {
   /**
-   * Reports query preset
-   */
-  @Field(() => String, { nullable: true })
-  preset?: ReportsQueryPreset
-
-  /**
    * ID of the project to filter on
    */
   @Field({ nullable: true })
@@ -96,4 +90,10 @@ export class ReportsQuery {
    */
   @Field({ nullable: true })
   userId?: string
+
+  /**
+   * Filter on  current user
+   */
+  @Field({ nullable: true })
+  currentUser?: boolean
 }

@@ -8,6 +8,13 @@ All are built using React Function components and Hooks.
 
 ## Table of contents
 
+### References
+
+- [query\_preset\_current\_year](pages.md#query_preset_current_year)
+- [query\_preset\_forecast](pages.md#query_preset_forecast)
+- [query\_preset\_last\_month](pages.md#query_preset_last_month)
+- [query\_preset\_last\_year](pages.md#query_preset_last_year)
+
 ### Timesheet Classes
 
 - [TimesheetPeriod](../classes/pages.timesheetperiod.md)
@@ -29,7 +36,7 @@ All are built using React Function components and Hooks.
 
 - [IReportsContext](../interfaces/pages.ireportscontext.md)
 - [IReportsParameters](../interfaces/pages.ireportsparameters.md)
-- [IReportsQuery](../interfaces/pages.ireportsquery.md)
+- [IReportsQueryPresetItem](../interfaces/pages.ireportsquerypresetitem.md)
 - [IReportsSavedFilter](../interfaces/pages.ireportssavedfilter.md)
 - [IReportsState](../interfaces/pages.ireportsstate.md)
 
@@ -48,6 +55,10 @@ All are built using React Function components and Hooks.
 - [Home](pages.md#home)
 - [Projects](pages.md#projects)
 - [Timesheet](pages.md#timesheet)
+
+### Other Variables
+
+- [query\_preset\_current\_month](pages.md#query_preset_current_month)
 
 ### Projects Variables
 
@@ -75,6 +86,14 @@ All are built using React Function components and Hooks.
 - [SummaryView](pages.md#summaryview)
 - [Users](pages.md#users)
 
+### Other Functions
+
+- [currentMonthQueryPreset](pages.md#currentmonthquerypreset)
+- [currentYearQueryPreset](pages.md#currentyearquerypreset)
+- [forecastQueryPreset](pages.md#forecastquerypreset)
+- [lastMonthQueryPreset](pages.md#lastmonthquerypreset)
+- [lastYearQueryPreset](pages.md#lastyearquerypreset)
+
 ### Reports Functions
 
 - [SaveFilterForm](pages.md#savefilterform)
@@ -82,8 +101,8 @@ All are built using React Function components and Hooks.
 
 ### Reports Hooks Functions
 
-- [useReportQuery](pages.md#usereportquery)
 - [useReports](pages.md#usereports)
+- [useReportsQuery](pages.md#usereportsquery)
 - [useReportsReducer](pages.md#usereportsreducer)
 - [useUpdateUserConfiguration](pages.md#useupdateuserconfiguration)
 
@@ -93,6 +112,30 @@ All are built using React Function components and Hooks.
 - [useSubmitActions](pages.md#usesubmitactions)
 - [useTimesheet](pages.md#usetimesheet)
 - [useTimesheetQuery](pages.md#usetimesheetquery)
+
+## References
+
+### query\_preset\_current\_year
+
+Renames and exports: [query\_preset\_current\_month](pages.md#query_preset_current_month)
+
+___
+
+### query\_preset\_forecast
+
+Renames and exports: [query\_preset\_current\_month](pages.md#query_preset_current_month)
+
+___
+
+### query\_preset\_last\_month
+
+Renames and exports: [query\_preset\_current\_month](pages.md#query_preset_current_month)
+
+___
+
+### query\_preset\_last\_year
+
+Renames and exports: [query\_preset\_current\_month](pages.md#query_preset_current_month)
 
 ## Type aliases
 
@@ -147,6 +190,34 @@ ___
 • `Const` **Timesheet**: FunctionComponent
 
 Defined in: [client/pages/Timesheet/Timesheet.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/Timesheet.tsx#L20)
+
+___
+
+## Other Variables
+
+### query\_preset\_current\_month
+
+• `Const` **query\_preset\_current\_month**: DocumentNode
+
+This is a GraphQL query imported from a .gql or .graphql file.
+
+The Apollo extension for VS Code is recommended when working with
+.gql files.
+
+The extension enables you to:
+
+* Add syntax highlighting for GraphQL files and gql templates inside JavaScript files
+* Get instant feedback and intelligent autocomplete for fields, arguments, types, and variables as you write queries
+* Manage client side schema alongside remote schema
+* See performance information inline with your query definitions
+* Validate field and argument usage in operations
+* Navigate projects more easily with jump-to and peek-at definitions
+* Manage client-only schemas
+* Switch graph variants to work with schemas running on different environments
+
+**`see`** https://www.apollographql.com/docs/devtools/editor-plugins/
+
+Defined in: [client/global.d.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/global.d.ts#L24)
 
 ___
 
@@ -284,6 +355,98 @@ Defined in: [client/pages/Admin/Users/index.tsx:25](https://github.com/Puzzlepar
 
 ___
 
+## Other Functions
+
+### currentMonthQueryPreset
+
+▸ `Const`**currentMonthQueryPreset**(`t`: TFunction): [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+
+Current month query preset
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`t` | TFunction | Translate function    |
+
+**Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+
+Defined in: client/pages/Reports/hooks/query-presets/index.tsx:36
+
+___
+
+### currentYearQueryPreset
+
+▸ `Const`**currentYearQueryPreset**(`t`: TFunction): [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+
+Current year query preset
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`t` | TFunction | Translate function    |
+
+**Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+
+Defined in: client/pages/Reports/hooks/query-presets/index.tsx:69
+
+___
+
+### forecastQueryPreset
+
+▸ `Const`**forecastQueryPreset**(`t`: TFunction): [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+
+Forecast query preset
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`t` | TFunction | Translate function    |
+
+**Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+
+Defined in: client/pages/Reports/hooks/query-presets/index.tsx:85
+
+___
+
+### lastMonthQueryPreset
+
+▸ `Const`**lastMonthQueryPreset**(`t`: TFunction): [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+
+Last month query preset
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`t` | TFunction | Translate function    |
+
+**Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+
+Defined in: client/pages/Reports/hooks/query-presets/index.tsx:20
+
+___
+
+### lastYearQueryPreset
+
+▸ `Const`**lastYearQueryPreset**(`t`: TFunction): [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+
+Last year query preset
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`t` | TFunction | Translate function    |
+
+**Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+
+Defined in: client/pages/Reports/hooks/query-presets/index.tsx:52
+
+___
+
 ## Reports Functions
 
 ### SaveFilterForm
@@ -312,36 +475,15 @@ Use query presets
 
 Name | Default |
 :------ | :------ |
-`T` | [*IReportsQuery*](../interfaces/pages.ireportsquery.md) |
+`T` | [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md) |
 
 **Returns:** T[]
 
-Defined in: [client/pages/Reports/hooks/useQueryPresets.tsx:116](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useQueryPresets.tsx#L116)
+Defined in: client/pages/Reports/hooks/query-presets/index.tsx:100
 
 ___
 
 ## Reports Hooks Functions
-
-### useReportQuery
-
-▸ **useReportQuery**(`__namedParameters`: *Object*): *void*
-
-Hook for Reports Query.
-
-Using useQuery with reports.gql query, and dispatches
-DATA_UPDATED action on query changes.
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`__namedParameters` | *Object* |
-
-**Returns:** *void*
-
-Defined in: [client/pages/Reports/hooks/useReportsQuery.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQuery.ts#L16)
-
-___
 
 ### useReports
 
@@ -349,13 +491,12 @@ ___
 
 Hook for Reports
 
-* Get history using useHistory
-* Get URL params using useParams
-* Get queries using getQueries
-* Using reducer from /reducer
-* Using useReportQuery
-* Layout effect for updating URL when changing query
-* Layout effects for initialiing state and updating state
+* Get history using `useHistory`
+* Get URL params using `useParams`
+* Get queries using `useQueryPresets`
+* Using reducer `useReportsReducer`
+* Using `useReportQuery`
+* Layout effect (`useLayoutEffect`) for updating URL when changing query
   when the query is reloaded
 
 **Returns:** *object*
@@ -366,17 +507,38 @@ Name | Type |
 `filters` | [*BaseFilter*](../classes/components.basefilter.md)<any\>[] |
 `history` | *History*<unknown\> |
 `params` | [*IReportsParameters*](../interfaces/pages.ireportsparameters.md) |
-`queries` | [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[] |
+`queries` | [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)[] |
 `state` | [*IReportsState*](../interfaces/pages.ireportsstate.md) |
 `t` | TFunction |
 
-Defined in: [client/pages/Reports/hooks/useReports.ts:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReports.ts#L25)
+Defined in: [client/pages/Reports/hooks/useReports.ts:24](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReports.ts#L24)
+
+___
+
+### useReportsQuery
+
+▸ **useReportsQuery**(`__namedParameters`: *Object*): *void*
+
+Hook for Reports Query.
+
+Using `useQuery` with and dispatches
+`DATA_UPDATED` action on query changes.
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`__namedParameters` | *Object* |
+
+**Returns:** *void*
+
+Defined in: [client/pages/Reports/hooks/useReportsQuery.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsQuery.ts#L15)
 
 ___
 
 ### useReportsReducer
 
-▸ **useReportsReducer**(`queries`: [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[]): *object*
+▸ **useReportsReducer**(`queries`: [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)[]): *object*
 
 Use Reports reducer
 
@@ -384,7 +546,7 @@ Use Reports reducer
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`queries` | [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[] | Queries    |
+`queries` | [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)[] | Queries    |
 
 **Returns:** *object*
 
@@ -393,7 +555,7 @@ Name | Type |
 `dispatch` | *Dispatch*<AnyAction\> |
 `state` | [*IReportsState*](../interfaces/pages.ireportsstate.md) |
 
-Defined in: [client/pages/Reports/hooks/useReportsReducer.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useReportsReducer.ts#L16)
+Defined in: [client/pages/Reports/reducer/useReportsReducer.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/reducer/useReportsReducer.ts#L16)
 
 ___
 

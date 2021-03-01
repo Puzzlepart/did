@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMutation } from '@apollo/client'
 import { useEffect } from 'react'
-import $updateUserConfiguration from '../../../graphql/updateUserConfiguration.gql'
+import $updateUserConfiguration from '../../../graphql/update-user-configuration.gql'
 
 /**
  * Use update user configuration

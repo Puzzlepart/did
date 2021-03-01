@@ -3,21 +3,20 @@ import { useLayoutEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import initFilters from '../filters'
+import { useReportsReducer } from '../reducer'
 import { IReportsParameters } from '../types'
-import { useQueryPresets } from './useQueryPresets'
-import { useReportQuery } from './useReportsQuery'
-import { useReportsReducer } from './useReportsReducer'
+import { useQueryPresets } from './query-presets'
+import { useReportsQuery } from './useReportsQuery'
 
 /**
  * Hook for Reports
  *
- * * Get history using useHistory
- * * Get URL params using useParams
- * * Get queries using getQueries
- * * Using reducer from /reducer
- * * Using useReportQuery
- * * Layout effect for updating URL when changing query
- * * Layout effects for initialiing state and updating state
+ * * Get history using `useHistory`
+ * * Get URL params using `useParams`
+ * * Get queries using `useQueryPresets`
+ * * Using reducer `useReportsReducer`
+ * * Using `useReportQuery`
+ * * Layout effect (`useLayoutEffect`) for updating URL when changing query
  *   when the query is reloaded
  *
  * @category Reports Hooks
@@ -28,11 +27,12 @@ export function useReports() {
   const history = useHistory()
   const queries = useQueryPresets()
   const { state, dispatch } = useReportsReducer(queries)
-  useReportQuery({ state, dispatch })
-  useLayoutEffect(() => history.push(`/reports/${state.query?.key || ''}`), [
-    state.query,
-    history
-  ])
+  useReportsQuery({ state, dispatch })
+  useLayoutEffect(() => {
+    if (state.preset) {
+      history.push(`/reports/${state.preset?.key || ''}`)
+    }
+  }, [state.preset, history])
   const filters = useMemo(() => initFilters(state.filter, t), [state.filter, t])
   return {
     state,
@@ -44,3 +44,5 @@ export function useReports() {
     t
   }
 }
+
+export { useQueryPresets }

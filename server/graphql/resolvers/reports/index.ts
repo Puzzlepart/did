@@ -6,7 +6,7 @@ import { Service } from 'typedi'
 import { ReportsService } from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
-import { ReportsQuery, TimeEntry } from './types'
+import { ReportsQuery, ReportsQueryPreset, TimeEntry } from './types'
 
 /**
  * Resolver for `TimeEntry`.
@@ -29,7 +29,7 @@ export class ReportsResolver {
   constructor(private readonly _reports: ReportsService) {}
 
   /**
-   * Get time entries
+   * Get report
    *
    * @param query - Query
    * @param currentUser - Current user
@@ -38,16 +38,18 @@ export class ReportsResolver {
    */
   @Authorized<IAuthOptions>()
   @Query(() => [TimeEntry], {
-    description: 'Get time entries matching the provided query'
+    description: 'Get a preset report, or use custom filters.'
   })
-  async timeentries(
-    @Arg('query') query: ReportsQuery,
-    @Arg('currentUser', { nullable: true }) currentUser: boolean,
-    @Arg('sortAsc', { nullable: true }) sortAsc: boolean,
-    @Ctx() context: Context
+  async report(
+    @Arg('preset', { nullable: true }) preset?: ReportsQueryPreset,
+    @Arg('query', { nullable: true }) query?: ReportsQuery,
+    @Arg('sortAsc', { nullable: true }) sortAsc?: boolean,
+    @Ctx() context?: Context
   ) {
-    if (currentUser) query.userId = context.userId
-    return await this._reports.getReport(query, sortAsc)
+    if (query?.currentUser) {
+      query = { userId: context.userId }
+    }
+    return await this._reports.getReport(preset, query, sortAsc)
   }
 }
 
