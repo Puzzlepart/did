@@ -1,6 +1,6 @@
 {
   "name": "did",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "private": true,
   "engines": {
     "node": ">=12.18.3",
@@ -20,7 +20,8 @@
     "create-env": "node .tasks/create-dot-env.js",
     "typedoc": "npm run typedoc:client && npm run typedoc:server",
     "typedoc:server": "typedoc ./server/**/*.ts ./server/*.ts --options ./server/typedoc.json",
-    "typedoc:client": "typedoc -options ./client/typedoc.json"
+    "typedoc:client": "typedoc -options ./client/typedoc.json",
+    "postversion": "npm run typedoc && npm run lint:fix"
   },
   "dependencies": {
     "@apollo/client": "3.2.0",
