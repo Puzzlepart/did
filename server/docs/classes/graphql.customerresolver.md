@@ -20,7 +20,7 @@
 
 ### constructor
 
-\+ **new CustomerResolver**(`_mongo`: [*MongoService*](services.mongoservice.md)): [*CustomerResolver*](graphql.customerresolver.md)
+\+ **new CustomerResolver**(`_customer`: [*CustomerService*](services.customerservice.md)): [*CustomerResolver*](graphql.customerresolver.md)
 
 Constructor for CustomerResolver
 
@@ -28,7 +28,7 @@ Constructor for CustomerResolver
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`_mongo` | [*MongoService*](services.mongoservice.md) | Mongo service    |
+`_customer` | [*CustomerService*](services.customerservice.md) | Customer service    |
 
 **Returns:** [*CustomerResolver*](graphql.customerresolver.md)
 

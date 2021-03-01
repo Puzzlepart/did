@@ -18,7 +18,7 @@
 
 ### constructor
 
-\+ **new ReportsResolver**(`_mongo`: [*MongoService*](services.mongoservice.md)): [*ReportsResolver*](graphql.reportsresolver.md)
+\+ **new ReportsResolver**(`_reports`: [*ReportsService*](services.reportsservice.md)): [*ReportsResolver*](graphql.reportsresolver.md)
 
 Constructor for ReportsResolver
 
@@ -26,7 +26,7 @@ Constructor for ReportsResolver
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`_mongo` | [*MongoService*](services.mongoservice.md) | Mongo service    |
+`_reports` | [*ReportsService*](services.reportsservice.md) | Reports service    |
 
 **Returns:** [*ReportsResolver*](graphql.reportsresolver.md)
 

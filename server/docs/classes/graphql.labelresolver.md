@@ -20,7 +20,7 @@
 
 ### constructor
 
-\+ **new LabelResolver**(`_mongo`: [*MongoService*](services.mongoservice.md)): [*LabelResolver*](graphql.labelresolver.md)
+\+ **new LabelResolver**(`_label`: [*LabelService*](services.labelservice.md)): [*LabelResolver*](graphql.labelresolver.md)
 
 Constructor for LabelResolver
 
@@ -28,7 +28,7 @@ Constructor for LabelResolver
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`_mongo` | [*MongoService*](services.mongoservice.md) | Mongo service    |
+`_label` | [*LabelService*](services.labelservice.md) | Label service    |
 
 **Returns:** [*LabelResolver*](graphql.labelresolver.md)
 

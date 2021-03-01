@@ -31,7 +31,7 @@
 
 ### constructor
 
-\+ **new TimesheetService**(`context`: [*Context*](graphql_context.context.md), `_msgraph`: [*MSGraphService*](services.msgraphservice.md), `_mongo`: [*MongoService*](services.mongoservice.md)): [*TimesheetService*](services.timesheetservice.md)
+\+ **new TimesheetService**(`context`: [*Context*](graphql_context.context.md), `_msgraph`: [*MSGraphService*](services.msgraphservice.md), `_project`: [*ProjectService*](services.projectservice.md)): [*TimesheetService*](services.timesheetservice.md)
 
 Constructor
 
@@ -40,8 +40,8 @@ Constructor
 Name | Type | Description |
 :------ | :------ | :------ |
 `context` | [*Context*](graphql_context.context.md) | Injected context through typedi   |
-`_msgraph` | [*MSGraphService*](services.msgraphservice.md) | MSGraphService   |
-`_mongo` | [*MongoService*](services.mongoservice.md) | MongoService    |
+`_msgraph` | [*MSGraphService*](services.msgraphservice.md) | MS Graph service   |
+`_project` | [*ProjectService*](services.projectservice.md) | Project service    |
 
 **Returns:** [*TimesheetService*](services.timesheetservice.md)
 

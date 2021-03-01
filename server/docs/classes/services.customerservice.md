@@ -46,7 +46,7 @@ Name | Type |
 
 **Returns:** [*CustomerService*](services.customerservice.md)
 
-Defined in: [server/services/mongo/customer.ts:7](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L7)
+Defined in: [server/services/mongo/customer.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L9)
 
 ## Properties
 
@@ -98,7 +98,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/customer.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L17)
+Defined in: [server/services/mongo/customer.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L19)
 
 ___
 
@@ -116,7 +116,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/customer.ts:45](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L45)
+Defined in: [server/services/mongo/customer.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L47)
 
 ___
 
@@ -161,7 +161,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Customer*](graphql.customer.md)[]\>
 
-Defined in: [server/services/mongo/customer.ts:59](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L59)
+Defined in: [server/services/mongo/customer.ts:61](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L61)
 
 ___
 
@@ -179,4 +179,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/customer.ts:31](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L31)
+Defined in: [server/services/mongo/customer.ts:33](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L33)

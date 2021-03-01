@@ -20,7 +20,7 @@
 
 ### constructor
 
-\+ **new RoleResolver**(`_mongo`: [*MongoService*](services.mongoservice.md)): [*RoleResolver*](graphql.roleresolver.md)
+\+ **new RoleResolver**(`_role`: [*RoleService*](services.roleservice.md)): [*RoleResolver*](graphql.roleresolver.md)
 
 Constructor for RoleResolver
 
@@ -28,7 +28,7 @@ Constructor for RoleResolver
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`_mongo` | [*MongoService*](services.mongoservice.md) | Mongo service    |
+`_role` | [*RoleService*](services.roleservice.md) | Role service    |
 
 **Returns:** [*RoleResolver*](graphql.roleresolver.md)
 

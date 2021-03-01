@@ -19,7 +19,7 @@
 
 ### constructor
 
-\+ **new SubscriptionResolver**(`_mongo`: [*MongoService*](services.mongoservice.md)): [*SubscriptionResolver*](graphql.subscriptionresolver.md)
+\+ **new SubscriptionResolver**(`_subscription`: [*SubscriptionService*](services.subscriptionservice.md)): [*SubscriptionResolver*](graphql.subscriptionresolver.md)
 
 Constructor for SubscriptionResolver
 
@@ -27,7 +27,7 @@ Constructor for SubscriptionResolver
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`_mongo` | [*MongoService*](services.mongoservice.md) | Mongo service    |
+`_subscription` | [*SubscriptionService*](services.subscriptionservice.md) | Subscription service    |
 
 **Returns:** [*SubscriptionResolver*](graphql.subscriptionresolver.md)
 
