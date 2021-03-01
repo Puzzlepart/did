@@ -1,5 +1,5 @@
-query Reports ($query: ReportsQuery!, $sortAsc: Boolean) {
-  timeentries(query: $query, sortAsc: $sortAsc) {
+query LastMonthReport {
+  report(preset: "LAST_MONTH") {
     title
     duration
     startDateTime

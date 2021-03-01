@@ -1,0 +1,26 @@
+query ForecastReport {
+  report(preset: "FORECAST") {
+    title
+    duration
+    startDateTime
+    endDateTime
+    week
+    month
+    year
+    customer {
+      key
+      name
+    }
+    project {
+      tag
+      name
+    }
+    resource {
+      id
+      givenName
+      surname
+      mail
+      displayName
+    }
+  }
+}
