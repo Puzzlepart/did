@@ -92,7 +92,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/user/index.ts:97](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L97)
+Defined in: [server/graphql/resolvers/user/index.ts:95](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L95)
 
 ___
 
@@ -128,7 +128,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/user/index.ts:115](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L115)
+Defined in: [server/graphql/resolvers/user/index.ts:113](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/index.ts#L113)
 
 ___
 
