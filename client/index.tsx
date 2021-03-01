@@ -14,7 +14,7 @@ import * as ReactDom from 'react-dom'
 import 'regenerator-runtime/runtime.js'
 import { App } from './App'
 import { ContextUser, IAppContext } from './AppContext'
-import { $context, client } from './graphql'
+import { $usercontext, client } from './graphql'
 import './i18n'
 
 /**
@@ -34,7 +34,7 @@ export const boostrap = async () => {
     const context: IAppContext = {}
     try {
       const { data } = await client.query<Partial<IAppContext>>({
-        query: $context,
+        query: $usercontext,
         fetchPolicy: 'cache-first'
       })
       context.user = new ContextUser(data.user)
