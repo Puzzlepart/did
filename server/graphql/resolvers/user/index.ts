@@ -25,10 +25,7 @@ export class UserResolver {
   constructor(
     private readonly _msgraph: MSGraphService,
     private readonly _user: UserService
-  ) {
-    // eslint-disable-next-line no-console
-    console.log(_user)
-  }
+  ) {}
 
   /**
    * Get current user
