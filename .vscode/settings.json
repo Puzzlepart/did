@@ -10,8 +10,8 @@
     "server/public/js": true,
     "dist": true,
     ".assets": true,
-    "server/docs": true,
-    "client/docs": true
+    "server/.docs": true,
+    "client/.docs": true
   },
   "typescript.autoClosingTags": false,
   "javascript.validate.enable": false,

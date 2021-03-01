@@ -460,7 +460,7 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: client/pages/Reports/hooks/useColumns.tsx:10
+Defined in: [client/pages/Reports/hooks/useColumns.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useColumns.tsx#L10)
 
 ___
 

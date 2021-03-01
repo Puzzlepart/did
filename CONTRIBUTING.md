@@ -74,7 +74,7 @@ The extension [Apollo extension for VS Code](https://www.apollographql.com/docs/
 
 ## Documentation
 
-The client is documented [here](./client/docs/README.md) and the server is documented [here](./server/docs/README.md).
+The client is documented [here](./client/.docs/README.md) and the server is documented [here](./server/.docs/README.md).
 
 _We use https://studio.apollographql.com/ for GraphQL schema documentation._
 

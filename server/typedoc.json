@@ -1,7 +1,7 @@
 {
   "name": "did-server",
   "includeVersion": true,
-  "out": "server/docs",
+  "out": "server/.docs",
   "readme": "none",
   "excludeInternal": true,
   "hideGenerator": true,
