@@ -77,7 +77,9 @@ export const Reports: FunctionComponent = () => {
                 />
                 <UserMessage
                   hidden={
-                    !isEmpty(state.timeentries) || state.loading || !state.query
+                    !isEmpty(state.timeentries) ||
+                    state.loading ||
+                    !state.preset
                   }
                   text={t('reports.noEntriesText')}
                 />

@@ -13,7 +13,7 @@
 - [isFiltered](pages.ireportsstate.md#isfiltered)
 - [isFiltersOpen](pages.ireportsstate.md#isfiltersopen)
 - [loading](pages.ireportsstate.md#loading)
-- [query](pages.ireportsstate.md#query)
+- [preset](pages.ireportsstate.md#preset)
 - [savedFilters](pages.ireportsstate.md#savedfilters)
 - [subset](pages.ireportsstate.md#subset)
 - [timeentries](pages.ireportsstate.md#timeentries)
@@ -26,7 +26,7 @@
 
 Active filter
 
-Defined in: [client/pages/Reports/types.tsx:87](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L87)
+Defined in: [client/pages/Reports/types.tsx:79](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L79)
 
 ___
 
@@ -36,7 +36,7 @@ ___
 
 Group by properties
 
-Defined in: [client/pages/Reports/types.tsx:67](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L67)
+Defined in: [client/pages/Reports/types.tsx:59](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L59)
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 Is filtered
 
-Defined in: [client/pages/Reports/types.tsx:77](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L77)
+Defined in: [client/pages/Reports/types.tsx:69](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L69)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 Filter panel open
 
-Defined in: [client/pages/Reports/types.tsx:57](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L57)
+Defined in: [client/pages/Reports/types.tsx:49](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L49)
 
 ___
 
@@ -66,17 +66,17 @@ ___
 
 Loading
 
-Defined in: [client/pages/Reports/types.tsx:72](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L72)
+Defined in: [client/pages/Reports/types.tsx:64](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L64)
 
 ___
 
-### query
+### preset
 
-• `Optional` **query**: [*IReportsQuery*](pages.ireportsquery.md)
+• `Optional` **preset**: [*IReportsQueryPresetItem*](pages.ireportsquerypresetitem.md)
 
-Query
+Query preset
 
-Defined in: [client/pages/Reports/types.tsx:62](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L62)
+Defined in: [client/pages/Reports/types.tsx:54](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L54)
 
 ___
 
@@ -88,7 +88,7 @@ Saved filters
 
 #### Type declaration:
 
-Defined in: [client/pages/Reports/types.tsx:82](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L82)
+Defined in: [client/pages/Reports/types.tsx:74](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L74)
 
 ___
 
@@ -98,7 +98,7 @@ ___
 
 Filtered subset
 
-Defined in: [client/pages/Reports/types.tsx:52](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L52)
+Defined in: [client/pages/Reports/types.tsx:44](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L44)
 
 ___
 
@@ -108,4 +108,4 @@ ___
 
 Time entries
 
-Defined in: [client/pages/Reports/types.tsx:47](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L47)
+Defined in: [client/pages/Reports/types.tsx:39](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L39)

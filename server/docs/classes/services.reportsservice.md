@@ -130,7 +130,7 @@ ___
 
 ### getReport
 
-▸ **getReport**(`query`: [*ReportsQuery*](graphql.reportsquery.md), `sortAsc`: *boolean*): *Promise*<Report\>
+▸ **getReport**(`preset?`: [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset), `query?`: [*ReportsQuery*](graphql.reportsquery.md), `sortAsc?`: *boolean*): *Promise*<Report\>
 
 Get report
 
@@ -138,9 +138,10 @@ Get report
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | [*ReportsQuery*](graphql.reportsquery.md) | Query   |
-`sortAsc` | *boolean* | Sort ascending    |
+`preset?` | [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset) | Query preset   |
+`query` | [*ReportsQuery*](graphql.reportsquery.md) | Custom query   |
+`sortAsc?` | *boolean* | Sort ascending    |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/mongo/reports.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/reports.ts#L34)
+Defined in: [server/services/mongo/reports.ts:35](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/reports.ts#L35)

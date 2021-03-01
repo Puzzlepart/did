@@ -59,11 +59,25 @@
 - [TimesheetPeriodObject](../classes/graphql.timesheetperiodobject.md)
 - [User](../classes/graphql.user.md)
 
+### Type aliases
+
+- [ReportsQueryPreset](graphql.md#reportsquerypreset)
+
 ### Functions
 
 - [generateClientInfo](graphql.md#generateclientinfo)
 - [generateGraphQLSchema](graphql.md#generategraphqlschema)
 - [setupGraphQL](graphql.md#setupgraphql)
+
+## Type aliases
+
+### ReportsQueryPreset
+
+Ƭ **ReportsQueryPreset**: *LAST_MONTH* \| *CURRENT_MONTH* \| *LAST_YEAR* \| *CURRENT_YEAR* \| *FORECAST*
+
+Reports query preset
+
+Defined in: [server/graphql/resolvers/reports/types.ts:70](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L70)
 
 ## Functions
 

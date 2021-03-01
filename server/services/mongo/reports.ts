@@ -4,7 +4,11 @@ import { find, first, omit } from 'underscore'
 import { ProjectService, UserService } from '.'
 import { DateObject } from '../../../shared/utils/date.dateObject'
 import { Context } from '../../graphql/context'
-import { ReportsQuery, ReportsQueryPreset, TimeEntry } from '../../graphql/resolvers/types'
+import {
+  ReportsQuery,
+  ReportsQueryPreset,
+  TimeEntry
+} from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 
 type Report = TimeEntry[]

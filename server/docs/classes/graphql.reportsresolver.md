@@ -19,7 +19,7 @@ _dependendy injection_.
 
 ### Methods
 
-- [timeentries](graphql.reportsresolver.md#timeentries)
+- [report](graphql.reportsresolver.md#report)
 
 ## Constructors
 
@@ -41,20 +41,20 @@ Defined in: [server/graphql/resolvers/reports/index.ts:23](https://github.com/Pu
 
 ## Methods
 
-### timeentries
+### report
 
-▸ **timeentries**(`query`: [*ReportsQuery*](graphql.reportsquery.md), `currentUser`: *boolean*, `sortAsc`: *boolean*, `context`: [*Context*](graphql_context.context.md)): *Promise*<Report\>
+▸ **report**(`preset?`: [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset), `query?`: [*ReportsQuery*](graphql.reportsquery.md), `sortAsc?`: *boolean*, `context?`: [*Context*](graphql_context.context.md)): *Promise*<Report\>
 
-Get time entries
+Get report
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | [*ReportsQuery*](graphql.reportsquery.md) | Query   |
-`currentUser` | *boolean* | Current user   |
-`sortAsc` | *boolean* | Sort ascending   |
-`context` | [*Context*](graphql_context.context.md) | - |
+`preset?` | [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset) | - |
+`query?` | [*ReportsQuery*](graphql.reportsquery.md) | Query   |
+`sortAsc?` | *boolean* | Sort ascending   |
+`context?` | [*Context*](graphql_context.context.md) | - |
 
 **Returns:** *Promise*<Report\>
 

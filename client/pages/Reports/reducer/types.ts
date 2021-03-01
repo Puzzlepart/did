@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { IAppContext } from 'AppContext'
-import { IReportsParameters, IReportsQuery } from '../types'
+import { IReportsParameters, IReportsQueryPresetItem } from '../types'
 
 /**
  * @category Reports
@@ -14,7 +14,7 @@ export interface IReportsReducerParameters {
   /**
    * Queries
    */
-  queries: IReportsQuery[]
+  queries: IReportsQueryPresetItem[]
 
   /**
    * App context
