@@ -161,7 +161,7 @@ export class DateObject {
   /**
    * Returns an object representation of the DateObject
    *
-   * @param include - include Properties to include
+   * @param include - Properties to include
    */
   toObject(...include: string[]) {
     const dateObject = {
