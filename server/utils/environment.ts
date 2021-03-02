@@ -10,7 +10,7 @@ const debug = createDebug('environment')
  * @param key - Key
  * @param fallbackValue - Fallback vaue if key is not found
  */
-export function environment(key: string, fallbackValue: string = null) {
+export function environment(key: string, fallbackValue?: string) {
   const value = process.env[key]
   if (isBlank(value)) {
     debug(
@@ -18,7 +18,7 @@ export function environment(key: string, fallbackValue: string = null) {
       key,
       fallbackValue
     )
-    return fallbackValue || null
+    return fallbackValue
   }
   return value
 }
