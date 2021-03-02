@@ -2,7 +2,7 @@ import { IPnPClientStore, PnPClientStorage } from '@pnp/common'
 import AppConfig from 'AppConfig'
 import { DateObject } from 'DateUtils'
 
-export class BrowserStorage<T = any> {
+export class BrowserStorage<T = unknown> {
   private _key: string
   private _store: IPnPClientStore
   private _defaultExpire = new DateObject().add(

@@ -21,9 +21,9 @@ import { IListProps } from './types'
 
 /**
  * List component using `ShimmeredDetailsList` from `office-ui-fabric-react`.
- * 
+ *
  * Used by:
- * 
+ *
  * * EventList
  * * Admin/ApiTokens
  * * Admin/Roles
@@ -34,7 +34,7 @@ import { IListProps } from './types'
  * * Projects/ProjectList
  * * Reports
  * * Timesheet/SummaryView
- * 
+ *
  * @category Function Component
  */
 export const List: FunctionComponent<IListProps> = (props: IListProps) => {
