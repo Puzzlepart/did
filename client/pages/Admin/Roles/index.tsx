@@ -39,7 +39,8 @@ export const Roles = () => {
             {
               key: 'ADD_NEW_ROLE',
               name: t('admin.addNewRole'),
-              onClick: () => setPanel({ headerText: t('admin.addNewRole') })
+              onClick: () => setPanel({ headerText: t('admin.addNewRole') }),
+              iconProps: { iconName: 'Permissions' }
             }
           ],
           farItems: []
