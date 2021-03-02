@@ -1,4 +1,4 @@
-import $dayjs, {ConfigType, PluginFunc} from 'dayjs'
+import $dayjs, { ConfigType, PluginFunc } from 'dayjs'
 import 'dayjs/locale/en-gb'
 import 'dayjs/locale/nb'
 import durationPlugin from 'dayjs/plugin/duration'
@@ -10,9 +10,9 @@ import objectSupportPlugin from 'dayjs/plugin/objectSupport'
 import timezonePlugin from 'dayjs/plugin/timezone'
 import utcPlugin from 'dayjs/plugin/utc'
 import weekOfYearPlugin from 'dayjs/plugin/weekOfYear'
-import {TFunction} from 'i18next'
-import {capitalize} from 'underscore.string'
-import {DateObject} from './date.dateObject'
+import { TFunction } from 'i18next'
+import { capitalize } from 'underscore.string'
+import { DateObject } from './date.dateObject'
 
 interface IDateUtils {
   /**
@@ -76,7 +76,7 @@ export class DateUtils {
     const hrsString = t('common.hoursShortFormat', {
       hours: Math.floor(hoursPrecise)
     })
-    const minsString = t('common.minutesShortFormat', {minutes})
+    const minsString = t('common.minutesShortFormat', { minutes })
     if (minutes === 0) return hrsString
     if (hoursPrecise === 0) return minsString
     return [hrsString, minsString].join(' ')
@@ -363,4 +363,4 @@ export default new DateUtils({
   isoWeek: true
 })
 
-export {DateObject, $dayjs}
+export { DateObject, $dayjs }

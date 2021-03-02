@@ -1,11 +1,11 @@
 /* eslint-disable tsdoc/syntax */
-import {getIcons} from 'common/icons'
-import {Autocomplete} from 'components/Autocomplete'
-import React, {FunctionComponent, useMemo} from 'react'
-import {omit} from 'underscore'
-import {humanize} from 'underscore.string'
+import { getIcons } from 'common/icons'
+import { Autocomplete } from 'components/Autocomplete'
+import React, { FunctionComponent, useMemo } from 'react'
+import { omit } from 'underscore'
+import { humanize } from 'underscore.string'
 import styles from './IconPicker.module.scss'
-import {IIconPickerProps} from './types'
+import { IIconPickerProps } from './types'
 
 /**
  * @category Function Component
@@ -32,7 +32,7 @@ export const IconPicker: FunctionComponent<IIconPickerProps> = (
         defaultSelectedKey={props.defaultSelected}
         required={props.required}
         items={items}
-        itemIcons={{style: {}}}
+        itemIcons={{ style: {} }}
         width={props.width}
         placeholder={props.placeholder}
         onClear={() => props.onSelected(null)}

@@ -1,8 +1,8 @@
 /* eslint-disable tsdoc/syntax */
-import {TooltipDelay, TooltipHost} from 'office-ui-fabric-react'
-import React, {FunctionComponent} from 'react'
-import {ProjectTooltipContent} from './ProjectTooltipContent'
-import {IProjectTooltipProps} from './types'
+import { TooltipDelay, TooltipHost } from 'office-ui-fabric-react'
+import React, { FunctionComponent } from 'react'
+import { ProjectTooltipContent } from './ProjectTooltipContent'
+import { IProjectTooltipProps } from './types'
 
 /**
  * @category Function Component
@@ -17,7 +17,7 @@ export const ProjectTooltip: FunctionComponent<IProjectTooltipProps> = (
       }}
       delay={TooltipDelay.long}
       closeDelay={TooltipDelay.long}
-      calloutProps={{gapSpace: 0}}>
+      calloutProps={{ gapSpace: 0 }}>
       {props.children}
     </TooltipHost>
   )

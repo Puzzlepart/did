@@ -1,8 +1,8 @@
-import DateUtils, {DateObject} from 'DateUtils'
-import {TFunction} from 'i18next'
-import {IPivotItemProps} from 'office-ui-fabric-react'
-import {ILabelColumnProps} from 'pages/Admin/SummaryView/LabelColumn/types'
-import {ReportsQuery} from 'types'
+import DateUtils, { DateObject } from 'DateUtils'
+import { TFunction } from 'i18next'
+import { IPivotItemProps } from 'office-ui-fabric-react'
+import { ILabelColumnProps } from 'pages/Admin/SummaryView/LabelColumn/types'
+import { ReportsQuery } from 'types'
 
 /**
  * Get scopes

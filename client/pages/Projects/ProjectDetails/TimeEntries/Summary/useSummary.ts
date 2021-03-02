@@ -1,7 +1,7 @@
 import DateUtils from 'DateUtils'
-import {useTranslation} from 'react-i18next'
-import {filter} from 'underscore'
-import {getSum} from 'utils/getSum'
+import { useTranslation } from 'react-i18next'
+import { filter } from 'underscore'
+import { getSum } from 'utils/getSum'
 
 /**
  * Use summary hook
@@ -9,7 +9,7 @@ import {getSum} from 'utils/getSum'
  * @param timeentries - Time entries
  */
 export function useSummary(timeentries: any[]) {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   return [
     {
       label: t('common.hoursCurrentMonth'),

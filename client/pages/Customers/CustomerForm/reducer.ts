@@ -1,5 +1,5 @@
-import {Customer, IFormValidation} from 'types'
-import {CustomerModel, ICustomerFormState} from './types'
+import { Customer, IFormValidation } from 'types'
+import { CustomerModel, ICustomerFormState } from './types'
 
 export type CustomerFormAction =
   | {
@@ -11,7 +11,7 @@ export type CustomerFormAction =
     }
   | {
       type: 'SET_VALIDATION'
-      payload: {validation: IFormValidation}
+      payload: { validation: IFormValidation }
     }
 
 /**
@@ -22,7 +22,7 @@ export type CustomerFormAction =
 export const initState = (edit: Customer): ICustomerFormState => ({
   model: new CustomerModel(edit),
   editMode: !!edit,
-  validation: {errors: {}, invalid: true}
+  validation: { errors: {}, invalid: true }
 })
 
 /**
@@ -35,7 +35,7 @@ export default (
   state: ICustomerFormState,
   action: CustomerFormAction
 ): ICustomerFormState => {
-  const newState: ICustomerFormState = {...state}
+  const newState: ICustomerFormState = { ...state }
   switch (action.type) {
     case 'UPDATE_MODEL':
       {
@@ -47,7 +47,7 @@ export default (
     case 'RESET_FORM':
       {
         newState.model = new CustomerModel()
-        newState.validation = {errors: {}, invalid: true}
+        newState.validation = { errors: {}, invalid: true }
       }
       break
 

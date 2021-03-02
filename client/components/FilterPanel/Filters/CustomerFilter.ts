@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
-import {getValue} from 'helpers'
-import {contains, unique} from 'underscore'
-import {BaseFilter, IFilter} from './BaseFilter'
+import { getValue } from 'helpers'
+import { contains, unique } from 'underscore'
+import { BaseFilter, IFilter } from './BaseFilter'
 
 /**
  * @category FilterPanel
@@ -39,7 +39,7 @@ export class CustomerFilter<
     }
   }
 
-  public setDefaults(values: {[key: string]: KeyType[]}) {
+  public setDefaults(values: { [key: string]: KeyType[] }) {
     this._selectedKeys = getValue(values, this.fieldName) ?? []
     return this
   }

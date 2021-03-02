@@ -5,8 +5,8 @@ import {
   ProjectFilter,
   ResourceFilter
 } from 'components/FilterPanel/Filters'
-import {TFunction} from 'i18next'
-import {IReportsSavedFilter} from './types'
+import { TFunction } from 'i18next'
+import { IReportsSavedFilter } from './types'
 
 /**
  * Returns filter config for Reports

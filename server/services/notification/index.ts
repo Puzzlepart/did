@@ -1,15 +1,15 @@
 import get from 'get-value'
-import {Collection} from 'mongodb'
+import { Collection } from 'mongodb'
 import 'reflect-metadata'
-import {Inject, Service} from 'typedi'
-import {any} from 'underscore'
-import {DateObject} from '../../../shared/utils/date'
-import {Context} from '../../graphql/context'
-import {NotificationTemplates} from '../../graphql/resolvers/types'
-import {TimesheetService} from '../timesheet'
-import {ForecastNotification, UnconfirmedPeriodNotification} from './types'
+import { Inject, Service } from 'typedi'
+import { any } from 'underscore'
+import { DateObject } from '../../../shared/utils/date'
+import { Context } from '../../graphql/context'
+import { NotificationTemplates } from '../../graphql/resolvers/types'
+import { TimesheetService } from '../timesheet'
+import { ForecastNotification, UnconfirmedPeriodNotification } from './types'
 
-@Service({global: false})
+@Service({ global: false })
 export class NotificationService {
   private _confirmed_periods: Collection
   private _forecasted_periods: Collection
@@ -70,7 +70,7 @@ export class NotificationService {
       .toArray()
 
     const nperiods: any[] = periods.reduce(($, period) => {
-      const isConfirmed = any(confirmedPeriods, ({_id}) => _id === period._id)
+      const isConfirmed = any(confirmedPeriods, ({ _id }) => _id === period._id)
       if (!isConfirmed) $.push(period)
       return $
     }, [])
@@ -108,7 +108,10 @@ export class NotificationService {
       .toArray()
 
     const nperiods: any[] = periods.reduce(($, period) => {
-      const isForecasted = any(forecastedPeriods, ({_id}) => _id === period._id)
+      const isForecasted = any(
+        forecastedPeriods,
+        ({ _id }) => _id === period._id
+      )
       if (!isForecasted) $.push(period)
       return $
     }, [])

@@ -1,6 +1,6 @@
 import AppConfig from 'AppConfig'
-import {TFunction} from 'i18next'
-import {IDropdownOption} from 'office-ui-fabric-react'
+import { TFunction } from 'i18next'
+import { IDropdownOption } from 'office-ui-fabric-react'
 
 export interface IUserSetting {
   key: string

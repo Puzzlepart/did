@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import session from 'express-session'
-import {environment} from '../../utils'
-import {redisMiddlware} from '../redis'
+import { environment } from '../../utils'
+import { redisMiddlware } from '../redis'
 const RedisStore = require('connect-redis')(session)
 
 /**
@@ -17,7 +17,7 @@ export const redisSessionMiddleware = session({
     client: redisMiddlware,
     ttl: 1209600
   }),
-  cookie: {secure: false},
+  cookie: { secure: false },
   secret: environment('SESSION_SIGNING_KEY'),
   resave: false,
   saveUninitialized: false,

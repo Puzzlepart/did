@@ -1,9 +1,9 @@
 /* eslint-disable tsdoc/syntax */
-import {AnyAction} from '@reduxjs/toolkit'
-import {TFunction} from 'i18next'
-import {IColumn} from 'office-ui-fabric-react/lib/DetailsList'
-import {createContext} from 'react'
-import {IReportsState} from './types'
+import { AnyAction } from '@reduxjs/toolkit'
+import { TFunction } from 'i18next'
+import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
+import { createContext } from 'react'
+import { IReportsState } from './types'
 
 /**
  * @category Reports

@@ -7,12 +7,12 @@ import {
   List,
   SearchBox
 } from 'office-ui-fabric-react'
-import React, {FunctionComponent} from 'react'
-import {isEmpty} from 'underscore'
-import {IAutocompleteProps} from '.'
+import React, { FunctionComponent } from 'react'
+import { isEmpty } from 'underscore'
+import { IAutocompleteProps } from '.'
 import styles from './Autocomplete.module.scss'
-import {SuggestionItem} from './SuggestionItem'
-import {useAutocomplete} from './useAutocomplete'
+import { SuggestionItem } from './SuggestionItem'
+import { useAutocomplete } from './useAutocomplete'
 
 /**
  * @category Function Component
@@ -43,7 +43,7 @@ export const Autocomplete: FunctionComponent<IAutocompleteProps> = (
         <SearchBox
           className={styles.field}
           value={state.value}
-          iconProps={{iconName: state.selectedItem?.iconName || 'Search'}}
+          iconProps={{ iconName: state.selectedItem?.iconName || 'Search' }}
           placeholder={props.placeholder}
           disabled={props.disabled}
           autoComplete='off'
@@ -66,7 +66,7 @@ export const Autocomplete: FunctionComponent<IAutocompleteProps> = (
         hidden={isEmpty(state.suggestions)}
         onDismiss={() => onDismissCallout(null)}
         calloutMaxHeight={props.maxHeight || 450}
-        style={{width: ref.current?.clientWidth}}
+        style={{ width: ref.current?.clientWidth }}
         target={ref?.current}
         directionalHint={5}
         isBeakVisible={false}>

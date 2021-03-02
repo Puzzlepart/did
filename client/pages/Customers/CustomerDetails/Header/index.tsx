@@ -1,11 +1,11 @@
-import {Icon} from 'office-ui-fabric-react'
-import {CustomersContext} from 'pages/Customers/context'
-import React, {FunctionComponent, useContext} from 'react'
-import {CustomerActions} from './actions'
+import { Icon } from 'office-ui-fabric-react'
+import { CustomersContext } from 'pages/Customers/context'
+import React, { FunctionComponent, useContext } from 'react'
+import { CustomerActions } from './actions'
 import styles from './Header.module.scss'
 
 export const Header: FunctionComponent = () => {
-  const {state} = useContext(CustomersContext)
+  const { state } = useContext(CustomersContext)
   return (
     <div className={styles.root}>
       <div className={styles.iconContainer}>

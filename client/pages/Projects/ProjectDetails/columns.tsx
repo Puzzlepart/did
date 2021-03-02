@@ -1,6 +1,6 @@
-import {TFunction} from 'i18next'
-import {IColumn} from 'office-ui-fabric-react'
-import {ExcelColumnType} from 'utils/exportExcel'
+import { TFunction } from 'i18next'
+import { IColumn } from 'office-ui-fabric-react'
+import { ExcelColumnType } from 'utils/exportExcel'
 
 const columns = (t: TFunction): IColumn[] => [
   {
@@ -20,14 +20,14 @@ const columns = (t: TFunction): IColumn[] => [
     fieldName: 'startDateTime',
     name: t('common.startTimeLabel'),
     minWidth: 100,
-    data: {excelColFormat: 'date' as ExcelColumnType}
+    data: { excelColFormat: 'date' as ExcelColumnType }
   },
   {
     key: 'endDateTime',
     fieldName: 'endDateTime',
     name: t('common.endTimeLabel'),
     minWidth: 100,
-    data: {excelColFormat: 'date' as ExcelColumnType}
+    data: { excelColFormat: 'date' as ExcelColumnType }
   },
   {
     key: 'weekNumber',

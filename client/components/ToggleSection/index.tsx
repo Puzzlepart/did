@@ -1,8 +1,8 @@
 /* eslint-disable tsdoc/syntax */
-import {Icon} from 'office-ui-fabric-react'
-import React, {FunctionComponent, useEffect, useMemo, useState} from 'react'
+import { Icon } from 'office-ui-fabric-react'
+import React, { FunctionComponent, useEffect, useMemo, useState } from 'react'
 import styles from './ToggleSection.module.scss'
-import {IToggleSectionProps} from './types'
+import { IToggleSectionProps } from './types'
 
 /**
  * @category Function Component

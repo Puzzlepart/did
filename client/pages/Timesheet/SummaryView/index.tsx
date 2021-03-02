@@ -1,15 +1,15 @@
-import {DurationColumn, List, ProjectTooltip} from 'components'
+import { DurationColumn, List, ProjectTooltip } from 'components'
 import DateUtils from 'DateUtils'
-import {IColumn, MessageBar} from 'office-ui-fabric-react'
-import React, {useContext} from 'react'
-import {isMobile} from 'react-device-detect'
-import {useTranslation} from 'react-i18next'
-import {EventObject, Project} from 'types'
-import {unique} from 'underscore'
-import {capitalize} from 'underscore.string'
-import {TimesheetContext} from '../context'
-import {TimesheetScope} from '../TimesheetScope'
-import {ILabelColumnProps, LabelColumn} from './LabelColumn'
+import { IColumn, MessageBar } from 'office-ui-fabric-react'
+import React, { useContext } from 'react'
+import { isMobile } from 'react-device-detect'
+import { useTranslation } from 'react-i18next'
+import { EventObject, Project } from 'types'
+import { unique } from 'underscore'
+import { capitalize } from 'underscore.string'
+import { TimesheetContext } from '../context'
+import { TimesheetScope } from '../TimesheetScope'
+import { ILabelColumnProps, LabelColumn } from './LabelColumn'
 import styles from './SummaryView.module.scss'
 
 /**
@@ -21,7 +21,7 @@ function createColumns(scope: TimesheetScope): IColumn[] {
   const onRender = (row: any, _index: number, col: IColumn) => (
     <DurationColumn row={row} column={col} />
   )
-  const columns = [...Array.from({length: 7}).keys()].map((index) => {
+  const columns = [...Array.from({ length: 7 }).keys()].map((index) => {
     const day = scope.getDay(index)
     return {
       key: day.format('YYYY-MM-DD'),
@@ -60,7 +60,7 @@ function createColumns(scope: TimesheetScope): IColumn[] {
       minWidth: 50,
       maxWidth: 50,
       isResizable: false,
-      data: {style: {fontWeight: 500}},
+      data: { style: { fontWeight: 500 } },
       onRender
     }
   ]
@@ -124,16 +124,16 @@ function generateTotalRow(events: any[], columns: IColumn[], label: string) {
       object.sum += sum
       return object
     },
-    {label, sum: 0}
+    { label, sum: 0 }
   )
 }
 
 export const SummaryView = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const context = useContext(TimesheetContext)
   if (isMobile) {
     return (
-      <MessageBar styles={{root: {marginTop: 8}}}>
+      <MessageBar styles={{ root: { marginTop: 8 } }}>
         {t('common.deviceViewNotSupported')}
       </MessageBar>
     )

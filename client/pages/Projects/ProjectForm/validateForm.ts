@@ -1,6 +1,6 @@
 import AppConfig from 'AppConfig'
-import {TFunction} from 'i18next'
-import {ProjectModel} from './types'
+import { TFunction } from 'i18next'
+import { ProjectModel } from './types'
 
 /**
  * Validate form
@@ -18,7 +18,7 @@ export const validateForm = (model: ProjectModel, t: TFunction) => {
     `(^[A-ZÆØÅ0-9-]{${PROJECT_KEY_MIN_LENGTH},${PROJECT_KEY_MAX_LENGTH}}$)`,
     'gm'
   )
-  const errors: {[key: string]: string} = {}
+  const errors: { [key: string]: string } = {}
   if (!model.customerKey) {
     errors.customerKey = t('projects.customerFormValidationText')
   }
@@ -28,5 +28,5 @@ export const validateForm = (model: ProjectModel, t: TFunction) => {
   if (!PROJECT_KEY_REGEX.test(model.key)) {
     errors.key = t('projects.keyFormValidationText', AppConfig)
   }
-  return {errors, invalid: Object.keys(errors).length > 0}
+  return { errors, invalid: Object.keys(errors).length > 0 }
 }

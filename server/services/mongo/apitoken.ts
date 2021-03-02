@@ -1,13 +1,13 @@
-import {sign} from 'jsonwebtoken'
-import {FilterQuery} from 'mongodb'
-import {Inject, Service} from 'typedi'
-import {omit} from 'underscore'
-import {Context} from '../../graphql/context'
-import {ApiToken} from '../../graphql/resolvers/types'
-import {environment} from '../../utils'
-import {MongoDocumentService} from './@document'
+import { sign } from 'jsonwebtoken'
+import { FilterQuery } from 'mongodb'
+import { Inject, Service } from 'typedi'
+import { omit } from 'underscore'
+import { Context } from '../../graphql/context'
+import { ApiToken } from '../../graphql/resolvers/types'
+import { environment } from '../../utils'
+import { MongoDocumentService } from './@document'
 
-@Service({global: false})
+@Service({ global: false })
 export class ApiTokenService extends MongoDocumentService<ApiToken> {
   constructor(@Inject('CONTEXT') readonly context: Context) {
     super(context, 'api_tokens')
@@ -65,7 +65,7 @@ export class ApiTokenService extends MongoDocumentService<ApiToken> {
     subscriptionId: string
   ): Promise<void> {
     try {
-      await this.collection.deleteOne({name, subscriptionId})
+      await this.collection.deleteOne({ name, subscriptionId })
     } catch (error) {
       throw error
     }

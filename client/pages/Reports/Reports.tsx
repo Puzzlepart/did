@@ -1,27 +1,32 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
-import {FilterPanel, List, UserMessage} from 'components'
+import { FilterPanel, List, UserMessage } from 'components'
 import DateUtils from 'DateUtils'
-import {Icon, Pivot, PivotItem, ProgressIndicator} from 'office-ui-fabric-react'
-import React, {FunctionComponent, useMemo} from 'react'
-import {isEmpty} from 'underscore'
+import {
+  Icon,
+  Pivot,
+  PivotItem,
+  ProgressIndicator
+} from 'office-ui-fabric-react'
+import React, { FunctionComponent, useMemo } from 'react'
+import { isEmpty } from 'underscore'
 import commandBar from './commandBar'
-import {ReportsContext} from './context'
-import {useReports} from './hooks'
+import { ReportsContext } from './context'
+import { useReports } from './hooks'
 import {
   CHANGE_QUERY,
   FILTERS_UPDATED,
   TOGGLE_FILTER_PANEL
 } from './reducer/actions'
 import styles from './Reports.module.scss'
-import {SaveFilterForm} from './SaveFilterForm'
+import { SaveFilterForm } from './SaveFilterForm'
 
 /**
  * @category Function Component
  */
 export const Reports: FunctionComponent = () => {
-  const {state, dispatch, params, queries, columns, filters, t} = useReports()
-  const context = useMemo(() => ({state, dispatch, columns, t}), [state])
+  const { state, dispatch, params, queries, columns, filters, t } = useReports()
+  const context = useMemo(() => ({ state, dispatch, columns, t }), [state])
 
   return (
     <div className={styles.root}>
@@ -29,15 +34,15 @@ export const Reports: FunctionComponent = () => {
         <Pivot
           defaultSelectedKey={params.query || 'default'}
           onLinkClick={(item) =>
-            dispatch(CHANGE_QUERY({key: item.props.itemKey}))
+            dispatch(CHANGE_QUERY({ key: item.props.itemKey }))
           }>
-          {queries.map(({key, text, iconName}) => (
+          {queries.map(({ key, text, iconName }) => (
             <PivotItem
               key={key}
               itemKey={key}
               headerText={text}
               itemIcon={iconName}
-              headerButtonProps={{disabled: state.loading}}>
+              headerButtonProps={{ disabled: state.loading }}>
               <div className={styles.container}>
                 {state.loading && (
                   <div className={styles.progress}>
@@ -82,7 +87,7 @@ export const Reports: FunctionComponent = () => {
                   items={state.timeentries}
                   onDismiss={() => dispatch(TOGGLE_FILTER_PANEL())}
                   onFiltersUpdated={(filters) =>
-                    dispatch(FILTERS_UPDATED({filters}))
+                    dispatch(FILTERS_UPDATED({ filters }))
                   }
                   shortListCount={10}>
                   <SaveFilterForm />
@@ -90,7 +95,7 @@ export const Reports: FunctionComponent = () => {
               </div>
             </PivotItem>
           ))}
-          <PivotItem itemKey='default' headerButtonProps={{disabled: true}}>
+          <PivotItem itemKey='default' headerButtonProps={{ disabled: true }}>
             <UserMessage
               className={styles.container}
               iconName='ReportDocument'

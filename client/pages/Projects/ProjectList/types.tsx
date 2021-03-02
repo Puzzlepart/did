@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
-import {IListProps} from 'components/List/types'
-import {Project} from 'types'
+import { IListProps } from 'components/List/types'
+import { Project } from 'types'
 
 /**
  * @category Projects

@@ -1,8 +1,8 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
-import {Field, ID, InputType, ObjectType} from 'type-graphql'
-import {Customer, LabelObject as Label, OutlookCategory} from '../types'
+import { Field, ID, InputType, ObjectType } from 'type-graphql'
+import { Customer, LabelObject as Label, OutlookCategory } from '../types'
 
 /**
  * @category InputType
@@ -20,22 +20,22 @@ export class ProjectInput {
   @Field()
   name: string
 
-  @Field({nullable: true, defaultValue: ''})
+  @Field({ nullable: true, defaultValue: '' })
   description: string
 
   @Field()
   icon: string
 
-  @Field({nullable: true, defaultValue: null})
+  @Field({ nullable: true, defaultValue: null })
   webLink?: string
 
-  @Field({nullable: true, defaultValue: null})
+  @Field({ nullable: true, defaultValue: null })
   externalSystemURL?: string
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   inactive?: boolean
 
-  @Field(() => [String], {nullable: true})
+  @Field(() => [String], { nullable: true })
   labels?: string[]
 }
 
@@ -62,25 +62,25 @@ export class Project {
   @Field()
   public name: string
 
-  @Field({nullable: true, defaultValue: ''})
+  @Field({ nullable: true, defaultValue: '' })
   public description: string
 
-  @Field({nullable: true, defaultValue: null})
+  @Field({ nullable: true, defaultValue: null })
   public icon: string
 
-  @Field({nullable: true, defaultValue: null})
+  @Field({ nullable: true, defaultValue: null })
   public webLink?: string
 
-  @Field({nullable: true, defaultValue: null})
+  @Field({ nullable: true, defaultValue: null })
   public externalSystemURL?: string
 
   @Field(() => Customer)
   public customer?: Customer
 
-  @Field(() => OutlookCategory, {nullable: true, defaultValue: null})
+  @Field(() => OutlookCategory, { nullable: true, defaultValue: null })
   public outlookCategory?: OutlookCategory
 
-  @Field({nullable: true, defaultValue: false})
+  @Field({ nullable: true, defaultValue: false })
   public inactive?: boolean
 
   @Field(() => [Label])
@@ -104,7 +104,7 @@ export class Project {
     'Input object for ProjectOptions used in Mutation createOrUpdateProject'
 })
 export class ProjectOptions {
-  @Field({nullable: true, defaultValue: false})
+  @Field({ nullable: true, defaultValue: false })
   createOutlookCategory?: boolean
 }
 
@@ -115,9 +115,9 @@ export class ProjectOptions {
   description: 'A type that describes a CreateOrUpdateProjectResult'
 })
 export class CreateOrUpdateProjectResult {
-  @Field({nullable: true})
+  @Field({ nullable: true })
   success: boolean
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   id?: string
 }

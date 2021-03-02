@@ -1,7 +1,7 @@
-import {Dropdown, Icon, IDropdownOption} from 'office-ui-fabric-react'
+import { Dropdown, Icon, IDropdownOption } from 'office-ui-fabric-react'
 import React from 'react'
-import {useTranslation} from 'react-i18next'
-import {Role, User} from 'types'
+import { useTranslation } from 'react-i18next'
+import { Role, User } from 'types'
 
 export interface IRolePickerProps extends React.HTMLProps<HTMLDivElement> {
   roles: Role[]
@@ -10,7 +10,7 @@ export interface IRolePickerProps extends React.HTMLProps<HTMLDivElement> {
 }
 
 export const RolePicker = (props: IRolePickerProps) => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   return (
     <div className={props.className}>
       <Dropdown
@@ -23,12 +23,12 @@ export const RolePicker = (props: IRolePickerProps) => {
         onRenderOption={(option: IDropdownOption) => {
           return (
             <div title={option.data.description}>
-              <Icon style={{marginRight: 8}} iconName={option.data.icon} />
+              <Icon style={{ marginRight: 8 }} iconName={option.data.icon} />
               <span>{option.text}</span>
             </div>
           )
         }}
-        onChange={(_event, {data}) => props.onChanged(data)}
+        onChange={(_event, { data }) => props.onChanged(data)}
         defaultSelectedKey={(props.model.role as Role)?.name || 'User'}
       />
     </div>

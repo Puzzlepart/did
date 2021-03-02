@@ -1,21 +1,21 @@
 /* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
-import {Field, InputType} from 'type-graphql'
+import { Field, InputType } from 'type-graphql'
 
 /**
  * @category InputType
  */
 @InputType()
 export class TimesheetOptions {
-  @Field({nullable: true})
+  @Field({ nullable: true })
   locale: string
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   dateFormat: string
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   tzOffset: number
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   forecast?: boolean
 }

@@ -1,16 +1,16 @@
-import {SearchProject, UserMessage} from 'components'
-import {MessageBarButton, Panel} from 'office-ui-fabric-react'
-import {ITimesheetContext, TimesheetContext} from 'pages/Timesheet/context'
-import {MANUAL_MATCH} from 'pages/Timesheet/reducer/actions'
-import React, {useContext, useState} from 'react'
-import {useTranslation} from 'react-i18next'
-import {Project} from 'types'
+import { SearchProject, UserMessage } from 'components'
+import { MessageBarButton, Panel } from 'office-ui-fabric-react'
+import { ITimesheetContext, TimesheetContext } from 'pages/Timesheet/context'
+import { MANUAL_MATCH } from 'pages/Timesheet/reducer/actions'
+import React, { useContext, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { Project } from 'types'
 import styles from './MatchEventPanel.module.scss'
-import {IMatchEventPanelProps} from './types'
+import { IMatchEventPanelProps } from './types'
 
-export const MatchEventPanel = ({event}: IMatchEventPanelProps) => {
-  const {t} = useTranslation()
-  const {dispatch} = useContext<ITimesheetContext>(TimesheetContext)
+export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
+  const { t } = useTranslation()
+  const { dispatch } = useContext<ITimesheetContext>(TimesheetContext)
   const [isPanelVisible, setPanelVisibility] = useState(false)
 
   const hidePanel = () => setPanelVisibility(false)
@@ -23,7 +23,7 @@ export const MatchEventPanel = ({event}: IMatchEventPanelProps) => {
    */
   const onManualMatch = (project: Project) => {
     hidePanel()
-    dispatch(MANUAL_MATCH({eventId: event.id, project}))
+    dispatch(MANUAL_MATCH({ eventId: event.id, project }))
   }
 
   return (
@@ -31,7 +31,7 @@ export const MatchEventPanel = ({event}: IMatchEventPanelProps) => {
       <MessageBarButton
         text={t('timesheet.resolveProjectButtonLabel')}
         title={t('timesheet.resolveProjectButtonLabel')}
-        iconProps={{iconName: 'ReviewResponseSolid'}}
+        iconProps={{ iconName: 'ReviewResponseSolid' }}
         onClick={showPanel}
       />
       <Panel
@@ -46,7 +46,7 @@ export const MatchEventPanel = ({event}: IMatchEventPanelProps) => {
         />
         <UserMessage
           hidden={!event.suggestedProject}
-          containerStyle={{marginTop: 10}}
+          containerStyle={{ marginTop: 10 }}
           iconName='Lightbulb'>
           <p>
             <span>{t('timesheet.didYouMeanText')}</span>
@@ -58,7 +58,7 @@ export const MatchEventPanel = ({event}: IMatchEventPanelProps) => {
         </UserMessage>
         <UserMessage
           hidden={!event.customer || !!event.suggestedProject}
-          containerStyle={{marginTop: 10}}
+          containerStyle={{ marginTop: 10 }}
           text={t('timesheet.eventNotFullyMatchedText', {
             name: event.customer?.name
           })}

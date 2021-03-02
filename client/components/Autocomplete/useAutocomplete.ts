@@ -1,9 +1,9 @@
 /* eslint-disable tsdoc/syntax */
-import {useLayoutEffect, useMemo, useReducer, useRef} from 'react'
+import { useLayoutEffect, useMemo, useReducer, useRef } from 'react'
 import styles from './Autocomplete.module.scss'
-import createReducer, {INIT} from './reducer'
-import {IAutocompleteProps} from './types'
-import {useAutocompleteEvents} from './useAutocompleteEvents'
+import createReducer, { INIT } from './reducer'
+import { IAutocompleteProps } from './types'
+import { useAutocompleteEvents } from './useAutocompleteEvents'
 
 /**
  * Hook for Autocomplete
@@ -20,7 +20,7 @@ export function useAutocomplete(props: IAutocompleteProps) {
   })
   const reference = useRef<HTMLDivElement>()
 
-  useLayoutEffect(() => dispatch(INIT({props})), [props])
+  useLayoutEffect(() => dispatch(INIT({ props })), [props])
 
   const classNames = [styles.root, props.errorMessage && styles.hasError]
 
@@ -39,7 +39,7 @@ export function useAutocomplete(props: IAutocompleteProps) {
     onSearch,
     onClear,
     onKeyDown
-  } = useAutocompleteEvents({props, dispatch})
+  } = useAutocompleteEvents({ props, dispatch })
 
   return {
     state,

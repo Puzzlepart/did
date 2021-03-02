@@ -1,16 +1,16 @@
 /* eslint-disable tsdoc/syntax */
-import {useMutation, useQuery} from '@apollo/client'
-import {List} from 'components'
-import {ISpinnerProps, Spinner} from 'office-ui-fabric-react'
-import React, {useMemo, useState} from 'react'
-import {useTranslation} from 'react-i18next'
-import {User} from 'types'
-import {any, filter, isEmpty, omit} from 'underscore'
-import {AddMultiplePanel, IAddMultiplePanel} from './AddMultiplePanel'
+import { useMutation, useQuery } from '@apollo/client'
+import { List } from 'components'
+import { ISpinnerProps, Spinner } from 'office-ui-fabric-react'
+import React, { useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { User } from 'types'
+import { any, filter, isEmpty, omit } from 'underscore'
+import { AddMultiplePanel, IAddMultiplePanel } from './AddMultiplePanel'
 import $addUsers from './addUsers.gql'
-import {UserColumns as columns} from './columns'
-import {IUsersContext, UsersContext} from './context'
-import {IUserFormProps, UserForm} from './UserForm'
+import { UserColumns as columns } from './columns'
+import { IUsersContext, UsersContext } from './context'
+import { IUserFormProps, UserForm } from './UserForm'
 import $users from './users.gql'
 
 /**
@@ -23,13 +23,13 @@ import $users from './users.gql'
  * @category Function Component
  */
 export const Users = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const [userForm, setUserForm] = useState<IUserFormProps>(null)
   const [addMultiplePanel, setAddMultiplePanel] = useState<IAddMultiplePanel>(
     null
   )
   const [progressProps, setProgressProps] = useState<ISpinnerProps>(null)
-  const {data, refetch, loading} = useQuery($users, {
+  const { data, refetch, loading } = useQuery($users, {
     fetchPolicy: 'cache-and-network'
   })
   const [addUsers] = useMutation($addUsers)
@@ -65,11 +65,11 @@ export const Users = () => {
   const onAddUsers = async (users: any[]) => {
     setAddMultiplePanel(null)
     setProgressProps({
-      label: t('admin.bulkImportingUsersLabel', {count: users.length}),
+      label: t('admin.bulkImportingUsersLabel', { count: users.length }),
       labelPosition: 'right'
     })
     await addUsers({
-      variables: {users: users.map((u) => omit(u, '__typename'))}
+      variables: { users: users.map((u) => omit(u, '__typename')) }
     })
     setProgressProps(null)
     refetch()
@@ -86,16 +86,16 @@ export const Users = () => {
             {
               key: 'ADD_NEW_USER',
               name: t('admin.addNewUser'),
-              iconProps: {iconName: 'AddFriend'},
+              iconProps: { iconName: 'AddFriend' },
               disabled: isEmpty(contextValue.activeDirectoryUsers),
-              onClick: () => setUserForm({headerText: t('admin.addNewUser')})
+              onClick: () => setUserForm({ headerText: t('admin.addNewUser') })
             },
             {
               key: 'BULK_IMPORT_USERS',
               name: t('admin.bulkImportUsersLabel'),
-              iconProps: {iconName: 'CloudImportExport'},
+              iconProps: { iconName: 'CloudImportExport' },
               disabled: isEmpty(contextValue.activeDirectoryUsers),
-              onClick: () => setAddMultiplePanel({isOpen: true})
+              onClick: () => setAddMultiplePanel({ isOpen: true })
             },
             {
               key: 'SPINNER',
@@ -103,7 +103,7 @@ export const Users = () => {
               onRender: () =>
                 progressProps && (
                   <Spinner
-                    styles={{root: {marginLeft: 15}}}
+                    styles={{ root: { marginLeft: 15 } }}
                     {...progressProps}
                   />
                 )

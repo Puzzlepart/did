@@ -1,13 +1,13 @@
-import {List} from 'components'
-import {Checkbox, SelectionMode} from 'office-ui-fabric-react'
+import { List } from 'components'
+import { Checkbox, SelectionMode } from 'office-ui-fabric-react'
 import React from 'react'
-import {useTranslation} from 'react-i18next'
-import {filter, isEmpty} from 'underscore'
-import {columns} from './columns'
-import {useCustomerList} from './useCustomerList'
+import { useTranslation } from 'react-i18next'
+import { filter, isEmpty } from 'underscore'
+import { columns } from './columns'
+import { useCustomerList } from './useCustomerList'
 
 export const CustomerList = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const {
     state,
     loading,
@@ -19,7 +19,7 @@ export const CustomerList = () => {
 
   return (
     <List
-      searchBox={{placeholder: t('common.searchPlaceholder')}}
+      searchBox={{ placeholder: t('common.searchPlaceholder') }}
       selection={{
         mode: SelectionMode.single,
         onChanged: setSelectedCustomer
@@ -34,7 +34,7 @@ export const CustomerList = () => {
             key: 'TOGGLE_INACTIVE',
             onRender: () => (
               <Checkbox
-                styles={{root: {margin: '6px 0 0 8px'}}}
+                styles={{ root: { margin: '6px 0 0 8px' } }}
                 disabled={isEmpty(
                   filter(state.customers, (index) => index.inactive)
                 )}

@@ -1,6 +1,6 @@
-import {IProgressProps} from 'components/Progress/types'
-import {TimesheetPeriod} from './TimesheetPeriod'
-import {TimesheetScope} from './TimesheetScope'
+import { IProgressProps } from 'components/Progress/types'
+import { TimesheetPeriod } from './TimesheetPeriod'
+import { TimesheetScope } from './TimesheetScope'
 
 export type TimesheetView = 'overview' | 'summary' | 'allocation'
 

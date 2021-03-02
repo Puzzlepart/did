@@ -1,4 +1,4 @@
-import {IColumn} from 'office-ui-fabric-react'
+import { IColumn } from 'office-ui-fabric-react'
 
 /**
  * Generate a IColumn defintion
@@ -23,6 +23,6 @@ export function generateColumn(
     minWidth,
     onRender,
     isResizable: true,
-    ...{data: {}, ...props}
+    ...{ data: {}, ...props }
   } as IColumn
 }

@@ -1,27 +1,27 @@
 /* eslint-disable tsdoc/syntax */
-import {PERMISSION} from 'config/security/permissions'
-import {usePermissions} from 'hooks'
-import {Pivot, PivotItem} from 'office-ui-fabric-react'
+import { PERMISSION } from 'config/security/permissions'
+import { usePermissions } from 'hooks'
+import { Pivot, PivotItem } from 'office-ui-fabric-react'
 import React from 'react'
-import {useTranslation} from 'react-i18next'
-import {useHistory, useParams} from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { useHistory, useParams } from 'react-router-dom'
 import styles from './Admin.module.scss'
-import {ApiTokens} from './ApiTokens'
-import {Labels} from './Labels'
-import {Roles} from './Roles'
-import {SummaryView} from './SummaryView'
-import {Users} from './Users'
+import { ApiTokens } from './ApiTokens'
+import { Labels } from './Labels'
+import { Roles } from './Roles'
+import { SummaryView } from './SummaryView'
+import { Users } from './Users'
 
 /**
  * @category Function Component
  */
 export const Admin = () => {
-  const {t} = useTranslation()
-  const {hasPermission} = usePermissions()
-  const {view} = useParams<{view: string}>()
+  const { t } = useTranslation()
+  const { hasPermission } = usePermissions()
+  const { view } = useParams<{ view: string }>()
   const history = useHistory()
 
-  const onPivotClick = ({props}: PivotItem) =>
+  const onPivotClick = ({ props }: PivotItem) =>
     history.push(`/admin/${props.itemKey}`)
 
   return (

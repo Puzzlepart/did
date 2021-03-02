@@ -1,6 +1,6 @@
-import {useMutation} from '@apollo/client'
-import {EntityLabel} from 'components/EntityLabel'
-import {IconPicker} from 'components/IconPicker'
+import { useMutation } from '@apollo/client'
+import { EntityLabel } from 'components/EntityLabel'
+import { IconPicker } from 'components/IconPicker'
 import {
   DefaultButton,
   Label,
@@ -9,18 +9,18 @@ import {
   PrimaryButton,
   TextField
 } from 'office-ui-fabric-react'
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import SketchPicker from 'react-color/lib/components/sketch/Sketch'
-import {useTranslation} from 'react-i18next'
-import {LabelInput} from 'types'
-import {omit} from 'underscore'
+import { useTranslation } from 'react-i18next'
+import { LabelInput } from 'types'
+import { omit } from 'underscore'
 import validator from 'validator'
 import $addOrUpdateLabel from './addOrUpdateLabel.gql'
 import styles from './LabelForm.module.scss'
-import {ILabelFormProps} from './types'
+import { ILabelFormProps } from './types'
 
 export const LabelForm = (props: ILabelFormProps) => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const [model, setModel] = useState<LabelInput>(
     props.label || {
       name: '',
@@ -66,7 +66,7 @@ export const LabelForm = (props: ILabelFormProps) => {
         value={model.name}
         required={true}
         disabled={!!props.label}
-        onChange={(_, name) => setModel({...model, name})}
+        onChange={(_, name) => setModel({ ...model, name })}
       />
       <TextField
         className={styles.inputField}
@@ -74,7 +74,7 @@ export const LabelForm = (props: ILabelFormProps) => {
         label={t('common.descriptionFieldLabel')}
         value={model.description}
         multiline={true}
-        onChange={(_, description) => setModel({...model, description})}
+        onChange={(_, description) => setModel({ ...model, description })}
       />
       <IconPicker
         className={styles.inputField}
@@ -82,7 +82,7 @@ export const LabelForm = (props: ILabelFormProps) => {
         label={t('common.iconFieldLabel')}
         placeholder={t('common.iconSearchPlaceholder')}
         width={300}
-        onSelected={(icon) => setModel({...model, icon})}
+        onSelected={(icon) => setModel({ ...model, icon })}
       />
       <div className={styles.inputField}>
         <Label>{t('common.colorLabel')}</Label>
@@ -92,13 +92,13 @@ export const LabelForm = (props: ILabelFormProps) => {
               ? t('common.closeColorPickerText')
               : t('common.openColorPickerText')
           }
-          iconProps={{iconName: colorPickerVisible ? 'ChromeClose' : 'Color'}}
+          iconProps={{ iconName: colorPickerVisible ? 'ChromeClose' : 'Color' }}
           onClick={() => setColorPickerVisible(!colorPickerVisible)}
         />
         {colorPickerVisible && (
           <SketchPicker
             color={model.color}
-            onChange={({hex}) => setModel({...model, color: hex})}
+            onChange={({ hex }) => setModel({ ...model, color: hex })}
           />
         )}
       </div>

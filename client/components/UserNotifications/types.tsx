@@ -1,10 +1,10 @@
-import {TFunction} from 'i18next'
+import { TFunction } from 'i18next'
 import {
   IIconProps,
   IMessageBarProps,
   MessageBarType
 } from 'office-ui-fabric-react'
-import {Notification} from 'types'
+import { Notification } from 'types'
 
 export class NotificationModel {
   public id: string
@@ -42,9 +42,9 @@ export class NotificationModel {
   private get _iconProps(): IIconProps {
     switch (this.type) {
       case 'WEEK_NOT_CONFIRMED':
-        return {iconName: 'CalendarWorkWeek'}
+        return { iconName: 'CalendarWorkWeek' }
       case 'MISSING_FORECAST':
-        return {iconName: 'BufferTimeBefore'}
+        return { iconName: 'BufferTimeBefore' }
       default:
         return
     }

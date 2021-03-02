@@ -1,7 +1,7 @@
-import {getValue} from 'helpers'
-import {reduce} from 'underscore'
+import { getValue } from 'helpers'
+import { reduce } from 'underscore'
 
-type Item = {[key: string]: any}
+type Item = { [key: string]: any }
 
 /**
  * Get sum for a property in the array using _.reduce.

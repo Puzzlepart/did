@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
-import {ISearchBoxProps} from 'office-ui-fabric-react'
-import {ISuggestionItem} from './SuggestionItem/types'
+import { ISearchBoxProps } from 'office-ui-fabric-react'
+import { ISuggestionItem } from './SuggestionItem/types'
 
 /**
  * @ignore

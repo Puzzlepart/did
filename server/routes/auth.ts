@@ -1,7 +1,7 @@
-import {NextFunction, Request, Response, Router} from 'express'
+import { NextFunction, Request, Response, Router } from 'express'
 import passport from 'passport'
 import url from 'url'
-import {environment} from '../utils'
+import { environment } from '../utils'
 const auth = Router()
 
 auth.get(
@@ -33,7 +33,7 @@ auth.post(
         }
         request.logIn(user, (error_) => {
           if (error_)
-            return response.render('index', {error: JSON.stringify(error_)})
+            return response.render('index', { error: JSON.stringify(error_) })
           return response.redirect('/timesheet')
         })
       }

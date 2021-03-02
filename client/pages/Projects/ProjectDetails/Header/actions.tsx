@@ -1,14 +1,14 @@
 /* eslint-disable tsdoc/syntax */
-import {useMutation} from '@apollo/client'
-import {PERMISSION} from 'config/security/permissions'
+import { useMutation } from '@apollo/client'
+import { PERMISSION } from 'config/security/permissions'
 import copy from 'fast-copy'
-import {usePermissions} from 'hooks'
-import {DefaultButton} from 'office-ui-fabric-react'
-import React, {FunctionComponent, useContext, useState} from 'react'
-import {useTranslation} from 'react-i18next'
-import {ProjectsContext} from '../../context'
-import {ProjectForm} from '../../ProjectForm'
-import {SET_SELECTED_PROJECT} from '../../reducer/actions'
+import { usePermissions } from 'hooks'
+import { DefaultButton } from 'office-ui-fabric-react'
+import React, { FunctionComponent, useContext, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { ProjectsContext } from '../../context'
+import { ProjectForm } from '../../ProjectForm'
+import { SET_SELECTED_PROJECT } from '../../reducer/actions'
 import $createOutlookCategory from './createOutlookCategory.gql'
 import styles from './Header.module.scss'
 
@@ -16,9 +16,9 @@ import styles from './Header.module.scss'
  * @category Projects
  */
 export const ProjectActions: FunctionComponent = () => {
-  const {refetch, state, dispatch} = useContext(ProjectsContext)
-  const {hasPermission} = usePermissions()
-  const {t} = useTranslation()
+  const { refetch, state, dispatch } = useContext(ProjectsContext)
+  const { hasPermission } = usePermissions()
+  const { t } = useTranslation()
   const [showEditPanel, setShowEditPanel] = useState(false)
   const [createOutlookCategory] = useMutation($createOutlookCategory)
 
@@ -27,14 +27,14 @@ export const ProjectActions: FunctionComponent = () => {
    */
   async function onCreateCategory() {
     const {
-      data: {result}
+      data: { result }
     } = await createOutlookCategory({
-      variables: {category: state.selected.tag}
+      variables: { category: state.selected.tag }
     })
     if (result.success) {
       const project = copy(state.selected)
       project.outlookCategory = result.data
-      dispatch(SET_SELECTED_PROJECT({project}))
+      dispatch(SET_SELECTED_PROJECT({ project }))
     }
   }
 
@@ -44,7 +44,7 @@ export const ProjectActions: FunctionComponent = () => {
         <DefaultButton
           text={t('projects.workspaceLabel')}
           onClick={() => window.location.replace(state.selected.webLink)}
-          iconProps={{iconName: 'Website'}}
+          iconProps={{ iconName: 'Website' }}
         />
       </div>
       <div
@@ -52,7 +52,7 @@ export const ProjectActions: FunctionComponent = () => {
         hidden={!!state.selected.outlookCategory}>
         <DefaultButton
           text={t('projects.createOutlookCategoryLabel')}
-          iconProps={{iconName: 'OutlookLogoInverse'}}
+          iconProps={{ iconName: 'OutlookLogoInverse' }}
           onClick={() => onCreateCategory()}
         />
       </div>
@@ -61,7 +61,7 @@ export const ProjectActions: FunctionComponent = () => {
         hidden={!hasPermission(PERMISSION.MANAGE_PROJECTS)}>
         <DefaultButton
           text={t('common.editLabel')}
-          iconProps={{iconName: 'Edit'}}
+          iconProps={{ iconName: 'Edit' }}
           onClick={() => setShowEditPanel(true)}
         />
         <ProjectForm

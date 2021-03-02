@@ -1,4 +1,4 @@
-import {Customer} from 'types'
+import { Customer } from 'types'
 
 export interface ICustomersParameters {
   key: string

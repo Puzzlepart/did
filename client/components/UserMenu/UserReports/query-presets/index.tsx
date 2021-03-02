@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
-import {IChoiceGroupOption} from 'office-ui-fabric-react'
-import {useMemo} from 'react'
-import {useTranslation} from 'react-i18next'
+import { IChoiceGroupOption } from 'office-ui-fabric-react'
+import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   currentMonthQueryPreset,
   currentYearQueryPreset,
@@ -20,7 +20,7 @@ import user_query_preset_last_year from './user-query-preset-last-year.gql'
  * @category UserReports
  */
 export function useQueryPresets(): IChoiceGroupOption[] {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   return useMemo(
     () => [
       lastMonthQueryPreset(t, user_query_preset_last_month),
@@ -32,4 +32,4 @@ export function useQueryPresets(): IChoiceGroupOption[] {
   )
 }
 
-export {user_query_preset_current_month as default_query_preset}
+export { user_query_preset_current_month as default_query_preset }

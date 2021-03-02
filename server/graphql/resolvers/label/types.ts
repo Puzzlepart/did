@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
-import {Field, ID, InputType, ObjectType} from 'type-graphql'
+import { Field, ID, InputType, ObjectType } from 'type-graphql'
 
 /**
  * @category InputType
@@ -13,13 +13,13 @@ export class LabelInput {
   @Field()
   name: string
 
-  @Field({nullable: true, defaultValue: ''})
+  @Field({ nullable: true, defaultValue: '' })
   description: string
 
   @Field()
   color: string
 
-  @Field({nullable: true, defaultValue: null})
+  @Field({ nullable: true, defaultValue: null })
   icon?: string
 }
 
@@ -36,13 +36,13 @@ export class LabelObject {
   @Field(() => ID)
   name: string
 
-  @Field({nullable: true, defaultValue: ''})
+  @Field({ nullable: true, defaultValue: '' })
   description: string
 
   @Field()
   color: string
 
-  @Field({nullable: true, defaultValue: null})
+  @Field({ nullable: true, defaultValue: null })
   icon?: string
 
   /**

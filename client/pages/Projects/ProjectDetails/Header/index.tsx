@@ -1,15 +1,15 @@
 /* eslint-disable tsdoc/syntax */
-import {Icon} from 'office-ui-fabric-react'
-import React, {FunctionComponent, useContext} from 'react'
-import {ProjectsContext} from '../../context'
-import {ProjectActions} from './actions'
+import { Icon } from 'office-ui-fabric-react'
+import React, { FunctionComponent, useContext } from 'react'
+import { ProjectsContext } from '../../context'
+import { ProjectActions } from './actions'
 import styles from './Header.module.scss'
 
 /**
  * @category Projects
  */
 export const Header: FunctionComponent = () => {
-  const {state} = useContext(ProjectsContext)
+  const { state } = useContext(ProjectsContext)
   return (
     <div className={styles.root}>
       <div className={styles.icon}>

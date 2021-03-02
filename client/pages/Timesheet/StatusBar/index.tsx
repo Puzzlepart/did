@@ -1,15 +1,15 @@
-import {Progress} from 'components/Progress'
-import {IUserMessageProps, UserMessage} from 'components/UserMessage'
-import React, {FunctionComponent, useContext} from 'react'
-import {isMobile} from 'react-device-detect'
+import { Progress } from 'components/Progress'
+import { IUserMessageProps, UserMessage } from 'components/UserMessage'
+import React, { FunctionComponent, useContext } from 'react'
+import { isMobile } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
-import {TimesheetContext} from '../context'
+import { TimesheetContext } from '../context'
 import styles from './StatusBar.module.scss'
-import {useMessages} from './useMessages'
+import { useMessages } from './useMessages'
 
 export const StatusBar: FunctionComponent = () => {
   if (isMobile) styles.root += ` ${styles.mobile}`
-  const {loading} = useContext(TimesheetContext)
+  const { loading } = useContext(TimesheetContext)
 
   const defaultMessageProps: IUserMessageProps = {
     className: styles.message,

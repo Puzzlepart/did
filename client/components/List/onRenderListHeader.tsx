@@ -1,7 +1,7 @@
-import {IDetailsHeaderProps} from 'office-ui-fabric-react'
-import React, {Dispatch} from 'react'
-import {ListHeader} from './ListHeader'
-import {IListProps, IListState} from './types'
+import { IDetailsHeaderProps } from 'office-ui-fabric-react'
+import React, { Dispatch } from 'react'
+import { ListHeader } from './ListHeader'
+import { IListProps, IListState } from './types'
 
 // eslint-disable-next-line unicorn/prevent-abbreviations
 export type RenderListHeaderParams = {
@@ -19,7 +19,7 @@ export const onRenderListHeader = ({
   dispatch
 }: RenderListHeaderParams) => {
   if (!!props.onRenderDetailsHeader)
-    return onRenderListHeader({headerProps, defaultRender})
+    return onRenderListHeader({ headerProps, defaultRender })
   return (
     <ListHeader
       headerProps={headerProps}

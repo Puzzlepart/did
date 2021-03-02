@@ -4,13 +4,13 @@ import {
   InsertOneWriteOpResult,
   WithId
 } from 'mongodb'
-import {Inject, Service} from 'typedi'
-import {pick} from 'underscore'
-import {Context} from '../../graphql/context'
-import {LabelObject as Label} from '../../graphql/resolvers/types'
-import {MongoDocumentService} from './@document'
+import { Inject, Service } from 'typedi'
+import { pick } from 'underscore'
+import { Context } from '../../graphql/context'
+import { LabelObject as Label } from '../../graphql/resolvers/types'
+import { MongoDocumentService } from './@document'
 
-@Service({global: false})
+@Service({ global: false })
 export class LabelService extends MongoDocumentService<Label> {
   constructor(@Inject('CONTEXT') readonly context: Context) {
     super(context, 'labels')
@@ -65,7 +65,7 @@ export class LabelService extends MongoDocumentService<Label> {
    */
   public async updateLabel(label: Label): Promise<void> {
     try {
-      await this.collection.updateOne(pick(label, 'name'), {$set: label})
+      await this.collection.updateOne(pick(label, 'name'), { $set: label })
     } catch (error) {
       throw error
     }
@@ -78,7 +78,7 @@ export class LabelService extends MongoDocumentService<Label> {
    */
   public async deleteLabel(name: string): Promise<DeleteWriteOpResultObject> {
     try {
-      const result = await this.collection.deleteOne({name})
+      const result = await this.collection.deleteOne({ name })
       return result
     } catch (error) {
       throw error

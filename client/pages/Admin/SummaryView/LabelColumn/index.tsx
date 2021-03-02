@@ -1,10 +1,10 @@
-import {EntityLabel} from 'components/EntityLabel'
-import {Icon} from 'office-ui-fabric-react'
+import { EntityLabel } from 'components/EntityLabel'
+import { Icon } from 'office-ui-fabric-react'
 import * as React from 'react'
-import {LabelObject as Label} from 'types'
-import {isEmpty} from 'underscore'
+import { LabelObject as Label } from 'types'
+import { isEmpty } from 'underscore'
 import styles from './LabelColumn.module.scss'
-import {ILabelColumnProps} from './types'
+import { ILabelColumnProps } from './types'
 
 export const LabelColumn = (props: ILabelColumnProps) => {
   if (props.project) {
@@ -13,7 +13,7 @@ export const LabelColumn = (props: ILabelColumnProps) => {
         <div className={styles.iconContainer}>
           <Icon
             iconName={props.project.icon || 'Page'}
-            styles={{root: {fontSize: 18}}}
+            styles={{ root: { fontSize: 18 } }}
           />
         </div>
         <div className={styles.content}>
@@ -30,7 +30,7 @@ export const LabelColumn = (props: ILabelColumnProps) => {
       </div>
     )
   } else if (props.label) {
-    return <div style={{fontWeight: 500}}>{props.label}</div>
+    return <div style={{ fontWeight: 500 }}>{props.label}</div>
   }
   return null
 }

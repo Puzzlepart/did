@@ -1,8 +1,8 @@
-import {UserMessage} from 'components'
-import {getValue} from 'helpers'
+import { UserMessage } from 'components'
+import { getValue } from 'helpers'
 import color from 'randomcolor'
-import React, {FunctionComponent, useContext, useRef} from 'react'
-import {useTranslation} from 'react-i18next'
+import React, { FunctionComponent, useContext, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   Bar,
   BarChart,
@@ -12,15 +12,15 @@ import {
   XAxis,
   YAxis
 } from 'recharts'
-import {TimesheetContext} from '../context'
+import { TimesheetContext } from '../context'
 import styles from './AllocationView.module.scss'
-import {CustomTooltip} from './CustomTooltip'
-import {useChartConfig} from './useChartConfig'
-import {useChartData} from './useChartData'
+import { CustomTooltip } from './CustomTooltip'
+import { useChartConfig } from './useChartConfig'
+import { useChartData } from './useChartData'
 
 export const AllocationView: FunctionComponent = () => {
-  const {t} = useTranslation()
-  const {loading, selectedPeriod} = useContext(TimesheetContext)
+  const { t } = useTranslation()
+  const { loading, selectedPeriod } = useContext(TimesheetContext)
   const container = useRef<HTMLDivElement>(null)
 
   const charts = useChartConfig()
@@ -53,7 +53,7 @@ export const AllocationView: FunctionComponent = () => {
                   }}
                 />
                 <Tooltip
-                  content={({payload}) => (
+                  content={({ payload }) => (
                     <CustomTooltip item={payload} chart={c} />
                   )}
                 />

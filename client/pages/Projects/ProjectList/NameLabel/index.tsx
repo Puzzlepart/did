@@ -1,9 +1,9 @@
-import {ProjectLink} from 'components/ProjectLink'
+import { ProjectLink } from 'components/ProjectLink'
 import React from 'react'
 import styles from './NameLabel.module.scss'
-import {INameLabelProps} from './types'
+import { INameLabelProps } from './types'
 
-export const NameLabel = ({project, renderLink}: INameLabelProps) => {
+export const NameLabel = ({ project, renderLink }: INameLabelProps) => {
   return (
     <div className={styles.root}>
       {renderLink ? (

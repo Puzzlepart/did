@@ -1,8 +1,8 @@
-import {DateObject} from 'DateUtils'
-import {getValue} from 'helpers'
-import {IColumn} from 'office-ui-fabric-react'
-import {humanize} from 'underscore.string'
-import {loadScripts} from './loadScripts'
+import { DateObject } from 'DateUtils'
+import { getValue } from 'helpers'
+import { IColumn } from 'office-ui-fabric-react'
+import { humanize } from 'underscore.string'
+import { loadScripts } from './loadScripts'
 
 export interface IExcelExportOptions {
   fileName: string
@@ -21,7 +21,7 @@ export type ExcelColumnType = 'date' | null
  * @param binaryString - Binary String
  */
 export default function stringToArrayBuffer(binaryString: string) {
-  const {length} = binaryString
+  const { length } = binaryString
   const buffer = new Uint8Array(length)
 
   for (let index = 0; index < length; index++) {
@@ -90,7 +90,7 @@ export async function exportExcel(
     const sheet = xlsx.utils.aoa_to_sheet(s.data)
     xlsx.utils.book_append_sheet(workBook, sheet, s.name)
   }
-  const wbout = xlsx.write(workBook, {type: 'binary', bookType: 'xlsx'})
+  const wbout = xlsx.write(workBook, { type: 'binary', bookType: 'xlsx' })
   const blob = new Blob([stringToArrayBuffer(wbout)], {
     type: 'application/octet-stream'
   })

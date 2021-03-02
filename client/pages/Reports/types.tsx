@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
-import {IListGroups} from 'components/List/types'
-import {TFunction} from 'i18next'
-import {IContextualMenuItem} from 'office-ui-fabric-react'
+import { IListGroups } from 'components/List/types'
+import { TFunction } from 'i18next'
+import { IContextualMenuItem } from 'office-ui-fabric-react'
 
 /**
  * @category Reports
@@ -29,7 +29,7 @@ export interface IGroupByOption extends IContextualMenuItem {
  * @category Reports
  */
 export interface IReportsSavedFilter extends IContextualMenuItem {
-  values: {[key: string]: any}
+  values: { [key: string]: any }
 }
 
 /**
@@ -74,7 +74,7 @@ export interface IReportsState {
   /**
    * Saved filters
    */
-  savedFilters?: {[key: string]: IReportsSavedFilter}
+  savedFilters?: { [key: string]: IReportsSavedFilter }
 
   /**
    * Active filter

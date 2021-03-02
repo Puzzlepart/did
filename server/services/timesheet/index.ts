@@ -1,13 +1,13 @@
-import {Collection} from 'mongodb'
+import { Collection } from 'mongodb'
 import 'reflect-metadata'
-import {Inject, Service} from 'typedi'
-import {find, isEmpty, omit} from 'underscore'
-import {MSGraphService} from '..'
-import DateUtils, {DateObject} from '../../../shared/utils/date'
-import {Context} from '../../graphql/context'
-import {TimesheetPeriodObject} from '../../graphql/resolvers/types'
-import {firstPart} from '../../utils'
-import {ProjectService} from '../mongo'
+import { Inject, Service } from 'typedi'
+import { find, isEmpty, omit } from 'underscore'
+import { MSGraphService } from '..'
+import DateUtils, { DateObject } from '../../../shared/utils/date'
+import { Context } from '../../graphql/context'
+import { TimesheetPeriodObject } from '../../graphql/resolvers/types'
+import { firstPart } from '../../utils'
+import { ProjectService } from '../mongo'
 import MatchingEngine from './matching'
 import {
   IConnectEventsParameters,
@@ -16,7 +16,7 @@ import {
   IUnsubmitPeriodParameters
 } from './types'
 
-@Service({global: false})
+@Service({ global: false })
 export class TimesheetService {
   private _confirmed_periods: Collection
   private _forecasted_periods: Collection
@@ -35,7 +35,7 @@ export class TimesheetService {
     private readonly _msgraph: MSGraphService,
     private readonly _project: ProjectService
   ) {
-    const {db} = this.context
+    const { db } = this.context
     this._confirmed_periods = db.collection('confirmed_periods')
     this._forecasted_periods = db.collection('forecasted_periods')
     this._time_entries = db.collection('time_entries')
@@ -59,16 +59,16 @@ export class TimesheetService {
       )
       const data = await this._project.getProjectsData()
       for (let index = 0; index < periods.length; index++) {
-        const {_id} = periods[index]
+        const { _id } = periods[index]
         const [confirmed, forecasted] = await Promise.all([
-          this._confirmed_periods.findOne({_id}),
-          this._forecasted_periods.findOne({_id})
+          this._confirmed_periods.findOne({ _id }),
+          this._forecasted_periods.findOne({ _id })
         ])
         periods[index].isForecasted = !!forecasted
         periods[index].forecastedHours = forecasted?.hours || 0
         if (confirmed) {
           const entries = await this._time_entries
-            .find({_periodId: _id})
+            .find({ _periodId: _id })
             .toArray()
           periods[index] = {
             ...periods[index],
@@ -132,7 +132,7 @@ export class TimesheetService {
       }
       const entries = []
       period.hours = parameters.period.matchedEvents.reduce((hours, m: any) => {
-        const event = find(events, ({id}) => id === m.id)
+        const event = find(events, ({ id }) => id === m.id)
         if (!event) return null
         entries.push({
           ...m,
@@ -176,12 +176,12 @@ export class TimesheetService {
       const period_collection = forecast
         ? this._forecasted_periods
         : this._confirmed_periods
-      const {_id} = this._getPeriodData(period.id, this.context.userId)
+      const { _id } = this._getPeriodData(period.id, this.context.userId)
       await Promise.all([
         entry_colletion.deleteMany({
           _periodId: _id
         }),
-        period_collection.deleteOne({_id})
+        period_collection.deleteOne({ _id })
       ])
     } catch (error) {
       throw error
@@ -253,7 +253,7 @@ export class TimesheetService {
     }
 
     return periods.map((period) => {
-      return {...this._getPeriodData(period.id, userId), ...period}
+      return { ...this._getPeriodData(period.id, userId), ...period }
     })
   }
 
@@ -274,8 +274,11 @@ export class TimesheetService {
     return events.map((event) => ({
       id: event._id,
       ...event,
-      project: find(projects, ({_id}) => _id === event.projectId),
-      customer: find(customers, ({key}) => key === firstPart(event.projectId)),
+      project: find(projects, ({ _id }) => _id === event.projectId),
+      customer: find(
+        customers,
+        ({ key }) => key === firstPart(event.projectId)
+      ),
       date: DateUtils.formatDate(event.startDateTime, dateFormat, locale)
     }))
   }

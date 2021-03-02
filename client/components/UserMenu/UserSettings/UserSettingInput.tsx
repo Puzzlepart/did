@@ -1,12 +1,12 @@
-import {Dropdown, Toggle} from 'office-ui-fabric-react'
-import React, {useContext} from 'react'
-import {UserSettingsContext} from './context'
-import {IUserSettingInputProps} from './types'
+import { Dropdown, Toggle } from 'office-ui-fabric-react'
+import React, { useContext } from 'react'
+import { UserSettingsContext } from './context'
+import { IUserSettingInputProps } from './types'
 import styles from './UserSettings.module.scss'
-import {IUserSettingDropdown} from './USER_SETTINGS'
+import { IUserSettingDropdown } from './USER_SETTINGS'
 
-export const UserSettingInput = ({user, setting}: IUserSettingInputProps) => {
-  const {onUpdateUserSettings} = useContext(UserSettingsContext)
+export const UserSettingInput = ({ user, setting }: IUserSettingInputProps) => {
+  const { onUpdateUserSettings } = useContext(UserSettingsContext)
   const defaultValue = user[setting.key] || setting.defaultValue
   let element: JSX.Element
   switch (setting.type) {

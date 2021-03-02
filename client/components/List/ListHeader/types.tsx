@@ -4,7 +4,7 @@ import {
   IRenderFunction,
   ISearchBoxProps
 } from 'office-ui-fabric-react'
-import {Dispatch} from 'react'
+import { Dispatch } from 'react'
 
 export interface IListHeaderProps {
   headerProps: IDetailsHeaderProps

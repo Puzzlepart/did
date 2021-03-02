@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import {getValue} from 'helpers'
+import { getValue } from 'helpers'
 import {
   CheckboxVisibility,
   ConstrainMode,
@@ -8,17 +8,17 @@ import {
   SelectionMode,
   ShimmeredDetailsList
 } from 'office-ui-fabric-react'
-import React, {FunctionComponent, useEffect, useMemo, useReducer} from 'react'
+import React, { FunctionComponent, useEffect, useMemo, useReducer } from 'react'
 import FadeIn from 'react-fade-in'
-import {filter, first} from 'underscore'
-import {withDefaultProps} from 'with-default-props'
-import {ScrollablePaneWrapper} from '../ScrollablePaneWrapper'
-import {generateListGroups} from './generateListGroups'
+import { filter, first } from 'underscore'
+import { withDefaultProps } from 'with-default-props'
+import { ScrollablePaneWrapper } from '../ScrollablePaneWrapper'
+import { generateListGroups } from './generateListGroups'
 import styles from './List.module.scss'
-import {ListGroupHeader} from './ListGroupHeader'
-import {onRenderListHeader} from './onRenderListHeader'
+import { ListGroupHeader } from './ListGroupHeader'
+import { onRenderListHeader } from './onRenderListHeader'
 import reducer from './reducer'
-import {IListProps} from './types'
+import { IListProps } from './types'
 
 const _List: FunctionComponent<IListProps> = (props: IListProps) => {
   const [state, dispatch] = useReducer(reducer, {
@@ -28,7 +28,7 @@ const _List: FunctionComponent<IListProps> = (props: IListProps) => {
   })
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => dispatch({type: 'PROPS_UPDATED', payload: props}), [
+  useEffect(() => dispatch({ type: 'PROPS_UPDATED', payload: props }), [
     props.items
   ])
 

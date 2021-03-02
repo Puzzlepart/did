@@ -1,11 +1,11 @@
 import AppConfig from 'AppConfig'
-import {PERMISSION} from 'config/security/permissions'
-import {DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES} from 'i18n'
-import {createContext} from 'react'
-import {Role, Subscription, User} from 'types'
-import {contains} from 'underscore'
-import {tryParseJson} from 'utils'
-import {useNotificationsQuery} from './hooks'
+import { PERMISSION } from 'config/security/permissions'
+import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from 'i18n'
+import { createContext } from 'react'
+import { Role, Subscription, User } from 'types'
+import { contains } from 'underscore'
+import { tryParseJson } from 'utils'
+import { useNotificationsQuery } from './hooks'
 
 export class ContextUser {
   public id: string
@@ -13,7 +13,7 @@ export class ContextUser {
   public role: Role
   public mail: string
   public preferredLanguage: string
-  public configuration: {[key: string]: any}
+  public configuration: { [key: string]: any }
 
   /**
    * Constructor

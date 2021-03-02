@@ -1,8 +1,8 @@
-import {createReducer} from '@reduxjs/toolkit'
-import {History} from 'history'
-import {contains, find} from 'underscore'
-import {CustomersView, ICustomersParameters, ICustomersState} from '../types'
-import {CHANGE_VIEW, DATA_UPDATED, SET_SELECTED_CUSTOMER} from './actions'
+import { createReducer } from '@reduxjs/toolkit'
+import { History } from 'history'
+import { contains, find } from 'underscore'
+import { CustomersView, ICustomersParameters, ICustomersState } from '../types'
+import { CHANGE_VIEW, DATA_UPDATED, SET_SELECTED_CUSTOMER } from './actions'
 
 /**
  * Initialize state
@@ -26,11 +26,11 @@ interface ICreateReducerParameters {
 /**
  * Create reducer for Customers
  */
-export default ({params}: ICreateReducerParameters) =>
+export default ({ params }: ICreateReducerParameters) =>
   createReducer(initState(params), {
     [DATA_UPDATED.type]: (
       state,
-      {payload}: ReturnType<typeof DATA_UPDATED>
+      { payload }: ReturnType<typeof DATA_UPDATED>
     ) => {
       state.customers = payload.query.data?.customers || []
       state.selected = find(state.customers, (c) =>
@@ -40,12 +40,15 @@ export default ({params}: ICreateReducerParameters) =>
 
     [SET_SELECTED_CUSTOMER.type]: (
       state,
-      {payload}: ReturnType<typeof SET_SELECTED_CUSTOMER>
+      { payload }: ReturnType<typeof SET_SELECTED_CUSTOMER>
     ) => {
       state.selected = payload.customer
     },
 
-    [CHANGE_VIEW.type]: (state, {payload}: ReturnType<typeof CHANGE_VIEW>) => {
+    [CHANGE_VIEW.type]: (
+      state,
+      { payload }: ReturnType<typeof CHANGE_VIEW>
+    ) => {
       state.view = payload.view
       state.selected = null
     }

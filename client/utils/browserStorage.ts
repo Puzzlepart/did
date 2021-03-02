@@ -1,6 +1,6 @@
-import {IPnPClientStore, PnPClientStorage} from '@pnp/common'
+import { IPnPClientStore, PnPClientStorage } from '@pnp/common'
 import AppConfig from 'AppConfig'
-import {DateObject} from 'DateUtils'
+import { DateObject } from 'DateUtils'
 
 export class BrowserStorage<T = any> {
   private _key: string
@@ -39,6 +39,10 @@ export class BrowserStorage<T = any> {
    */
   public merge(value: T): void {
     const currentValue = this.get()
-    this._store.put(this._key, {...currentValue, ...value}, this._defaultExpire)
+    this._store.put(
+      this._key,
+      { ...currentValue, ...value },
+      this._defaultExpire
+    )
   }
 }

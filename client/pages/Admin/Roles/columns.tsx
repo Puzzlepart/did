@@ -1,9 +1,9 @@
-import {PermissionList} from 'components/PermissionList'
-import {TFunction} from 'i18next'
-import {DefaultButton, Icon} from 'office-ui-fabric-react'
+import { PermissionList } from 'components/PermissionList'
+import { TFunction } from 'i18next'
+import { DefaultButton, Icon } from 'office-ui-fabric-react'
 import React from 'react'
-import {Role} from 'types'
-import {generateColumn as col} from 'utils/generateColumn'
+import { Role } from 'types'
+import { generateColumn as col } from 'utils/generateColumn'
 import styles from './Roles.module.scss'
 
 /**
@@ -13,7 +13,7 @@ import styles from './Roles.module.scss'
  * @param t - Translate function
  */
 export const RoleColumns = (onEdit: (role: Role) => void, t: TFunction) => [
-  col('name', '', {maxWidth: 100}, (role: Role) => {
+  col('name', '', { maxWidth: 100 }, (role: Role) => {
     return (
       <div className={styles.nameColumn}>
         <Icon className={styles.icon} iconName={role.icon} />
@@ -28,10 +28,10 @@ export const RoleColumns = (onEdit: (role: Role) => void, t: TFunction) => [
   col(
     'permissions',
     t('admin.permissonsLabel'),
-    {minWidth: 200, isMultiline: true},
+    { minWidth: 200, isMultiline: true },
     (role: Role) => <PermissionList permissionIds={role.permissions} />
   ),
-  col('edit', null, {maxWidth: 100}, (role: Role) => (
+  col('edit', null, { maxWidth: 100 }, (role: Role) => (
     <>
       <DefaultButton
         disabled={role.readOnly}

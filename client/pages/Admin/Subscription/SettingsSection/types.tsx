@@ -1,4 +1,4 @@
-import {SubscriptionSettingField} from '../types'
+import { SubscriptionSettingField } from '../types'
 
 export interface ISettingsSectionProps {
   id: string

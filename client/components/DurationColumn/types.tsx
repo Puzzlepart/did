@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import {IColumn} from 'office-ui-fabric-react'
+import { IColumn } from 'office-ui-fabric-react'
 
 /**
  * @category DurationColumn

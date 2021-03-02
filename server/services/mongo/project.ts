@@ -1,15 +1,15 @@
-import {FilterQuery} from 'mongodb'
-import {Inject, Service} from 'typedi'
-import {filter, find, pick} from 'underscore'
-import {CustomerService} from '.'
-import {Context} from '../../graphql/context'
+import { FilterQuery } from 'mongodb'
+import { Inject, Service } from 'typedi'
+import { filter, find, pick } from 'underscore'
+import { CustomerService } from '.'
+import { Context } from '../../graphql/context'
 import {
   Customer,
   LabelObject as Label,
   Project
 } from '../../graphql/resolvers/types'
-import {MongoDocumentService} from './@document'
-import {LabelService} from './label'
+import { MongoDocumentService } from './@document'
+import { LabelService } from './label'
 
 export type ProjectsData = {
   projects: Project[]
@@ -17,7 +17,7 @@ export type ProjectsData = {
   labels: Label[]
 }
 
-@Service({global: false})
+@Service({ global: false })
 export class ProjectService extends MongoDocumentService<Project> {
   private _customer: CustomerService
   private _label: LabelService
@@ -42,9 +42,9 @@ export class ProjectService extends MongoDocumentService<Project> {
    */
   public async addProject(project: Project): Promise<string> {
     try {
-      await this.cache.clear({key: 'getprojectsdata'})
+      await this.cache.clear({ key: 'getprojectsdata' })
       const tag = [project.customerKey, project.key].join(' ')
-      const {insertedId} = await this.collection.insertOne({
+      const { insertedId } = await this.collection.insertOne({
         _id: tag,
         tag,
         ...project
@@ -64,9 +64,9 @@ export class ProjectService extends MongoDocumentService<Project> {
    */
   public async updateProject(project: Project): Promise<boolean> {
     try {
-      await this.cache.clear({key: 'getprojectsdata'})
+      await this.cache.clear({ key: 'getprojectsdata' })
       const filter: FilterQuery<Project> = pick(project, 'key', 'customerKey')
-      const {result} = await this.collection.updateOne(filter, {
+      const { result } = await this.collection.updateOne(filter, {
         $set: project
       })
       return result.ok === 1
@@ -89,9 +89,9 @@ export class ProjectService extends MongoDocumentService<Project> {
       return this.cache.usingCache<ProjectsData>(
         async () => {
           const [projects, customers, labels] = await Promise.all([
-            this.find(query, {name: 1}),
+            this.find(query, { name: 1 }),
             this._customer.getCustomers(
-              query?.customerKey && {key: query.customerKey}
+              query?.customerKey && { key: query.customerKey }
             ),
             this._label.getLabels()
           ])
@@ -99,16 +99,16 @@ export class ProjectService extends MongoDocumentService<Project> {
             .map((p) => {
               p.customer =
                 find(customers, (c) => c.key === p.customerKey) || null
-              p.labels = filter(labels, ({name}) => {
+              p.labels = filter(labels, ({ name }) => {
                 return !!find(p.labels, (l) => name === l)
               })
               return p
             })
             .filter((p) => p.customer !== null)
-          const data = {projects: _projects, customers, labels}
+          const data = { projects: _projects, customers, labels }
           return data
         },
-        {key: ['getprojectsdata', query?.customerKey.toString()]}
+        { key: ['getprojectsdata', query?.customerKey.toString()] }
       )
     } catch (error) {
       throw error

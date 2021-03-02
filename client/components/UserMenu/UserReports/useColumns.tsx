@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {CustomerLink} from 'components/CustomerLink'
-import {ProjectLink} from 'components/ProjectLink'
+import { CustomerLink } from 'components/CustomerLink'
+import { ProjectLink } from 'components/ProjectLink'
 import DateUtils from 'DateUtils'
-import React, {useMemo} from 'react'
-import {useTranslation} from 'react-i18next'
-import {ExcelColumnType} from 'utils/exportExcel'
+import React, { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { ExcelColumnType } from 'utils/exportExcel'
 
 export function useColumns() {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   return useMemo(
     () => [
       {
@@ -21,14 +21,14 @@ export function useColumns() {
         fieldName: 'project.name',
         name: t('common.project'),
         minWidth: 100,
-        onRender: ({project}) => <ProjectLink project={project} />
+        onRender: ({ project }) => <ProjectLink project={project} />
       },
       {
         key: 'customer',
         fieldName: 'customer.name',
         name: t('common.customer'),
         minWidth: 100,
-        onRender: ({customer}) => <CustomerLink customer={customer} />
+        onRender: ({ customer }) => <CustomerLink customer={customer} />
       },
       {
         key: 'duration',
@@ -41,8 +41,8 @@ export function useColumns() {
         fieldName: 'startDateTime',
         name: t('common.startTimeLabel'),
         minWidth: 100,
-        data: {excelColFormat: 'date' as ExcelColumnType},
-        onRender: ({startDateTime}) =>
+        data: { excelColFormat: 'date' as ExcelColumnType },
+        onRender: ({ startDateTime }) =>
           DateUtils.formatDate(startDateTime, 'MMM DD, YYYY kk:mm')
       },
       {
@@ -50,8 +50,8 @@ export function useColumns() {
         fieldName: 'endDateTime',
         name: t('common.endTimeLabel'),
         minWidth: 100,
-        data: {excelColFormat: 'date' as ExcelColumnType},
-        onRender: ({endDateTime}) =>
+        data: { excelColFormat: 'date' as ExcelColumnType },
+        onRender: ({ endDateTime }) =>
           DateUtils.formatDate(endDateTime, 'MMM DD, YYYY kk:mm')
       },
       {
@@ -65,7 +65,7 @@ export function useColumns() {
         fieldName: 'month',
         name: t('common.monthLabel'),
         minWidth: 100,
-        onRender: ({month}) => DateUtils.getMonthNames()[month - 1]
+        onRender: ({ month }) => DateUtils.getMonthNames()[month - 1]
       },
       {
         key: 'year',

@@ -1,11 +1,11 @@
-import {FilterQuery} from 'mongodb'
-import {Inject, Service} from 'typedi'
-import {pick} from 'underscore'
-import {Context} from '../../graphql/context'
-import {Customer} from '../../graphql/resolvers/types'
-import {MongoDocumentService} from './@document'
+import { FilterQuery } from 'mongodb'
+import { Inject, Service } from 'typedi'
+import { pick } from 'underscore'
+import { Context } from '../../graphql/context'
+import { Customer } from '../../graphql/resolvers/types'
+import { MongoDocumentService } from './@document'
 
-@Service({global: false})
+@Service({ global: false })
 export class CustomerService extends MongoDocumentService<Customer> {
   constructor(@Inject('CONTEXT') readonly context: Context) {
     super(context, 'customers', CustomerService.name)
@@ -18,7 +18,7 @@ export class CustomerService extends MongoDocumentService<Customer> {
    */
   public async addCustomer(customer: Customer): Promise<void> {
     try {
-      await this.cache.clear({key: 'getcustomers'})
+      await this.cache.clear({ key: 'getcustomers' })
       await this.collection.insertOne(customer)
     } catch (error) {
       throw error
@@ -32,8 +32,8 @@ export class CustomerService extends MongoDocumentService<Customer> {
    */
   public async updateCustomer(customer: Customer): Promise<void> {
     try {
-      await this.cache.clear({key: 'getcustomers'})
-      await this.collection.updateOne(pick(customer, 'key'), {$set: customer})
+      await this.cache.clear({ key: 'getcustomers' })
+      await this.collection.updateOne(pick(customer, 'key'), { $set: customer })
     } catch (error) {
       throw error
     }
@@ -46,8 +46,8 @@ export class CustomerService extends MongoDocumentService<Customer> {
    */
   public async deleteCustomer(key: string): Promise<void> {
     try {
-      await this.cache.clear({key: 'getcustomers'})
-      await this.collection.deleteOne({key})
+      await this.cache.clear({ key: 'getcustomers' })
+      await this.collection.deleteOne({ key })
     } catch (error) {
       throw error
     }
@@ -65,7 +65,7 @@ export class CustomerService extends MongoDocumentService<Customer> {
           const customers = await this.find(query)
           return customers
         },
-        {key: 'getcustomers'}
+        { key: 'getcustomers' }
       )
     } catch (error) {
       throw error

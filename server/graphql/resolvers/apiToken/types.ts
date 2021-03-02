@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
-import {Field, ID, InputType, ObjectType} from 'type-graphql'
+import { Field, ID, InputType, ObjectType } from 'type-graphql'
 
 /**
  * @category ObjectType
@@ -11,7 +11,7 @@ import {Field, ID, InputType, ObjectType} from 'type-graphql'
   simpleResolvers: true
 })
 export class ApiToken {
-  @Field(() => ID, {nullable: true, defaultValue: null})
+  @Field(() => ID, { nullable: true, defaultValue: null })
   name: string
 
   @Field()
@@ -20,7 +20,7 @@ export class ApiToken {
   @Field()
   expires: Date
 
-  @Field(() => [String], {nullable: true})
+  @Field(() => [String], { nullable: true })
   permissions: string[]
 
   apiKey?: string

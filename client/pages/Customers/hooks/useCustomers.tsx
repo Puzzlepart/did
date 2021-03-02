@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {useQuery} from '@apollo/client'
-import {useEffect, useMemo} from 'react'
-import {useParams} from 'react-router-dom'
-import {ICustomersContext} from '../context'
+import { useQuery } from '@apollo/client'
+import { useEffect, useMemo } from 'react'
+import { useParams } from 'react-router-dom'
+import { ICustomersContext } from '../context'
 import $customers from '../customers.gql'
-import {DATA_UPDATED} from '../reducer/actions'
-import {useCustomersReducer} from '../reducer/useCustomersReducer'
-import {ICustomersParameters} from '../types'
-import {useHistoryUpdater} from './useHistoryUpdater'
+import { DATA_UPDATED } from '../reducer/actions'
+import { useCustomersReducer } from '../reducer/useCustomersReducer'
+import { ICustomersParameters } from '../types'
+import { useHistoryUpdater } from './useHistoryUpdater'
 
 /**
  * Hook for Customers
@@ -19,12 +19,12 @@ import {useHistoryUpdater} from './useHistoryUpdater'
  */
 export function useCustomers() {
   const parameters = useParams<ICustomersParameters>()
-  const {state, dispatch} = useCustomersReducer()
+  const { state, dispatch } = useCustomersReducer()
   const query = useQuery($customers, {
     fetchPolicy: 'cache-first'
   })
 
-  useEffect(() => dispatch(DATA_UPDATED({query})), [query])
+  useEffect(() => dispatch(DATA_UPDATED({ query })), [query])
 
   useHistoryUpdater(state)
 

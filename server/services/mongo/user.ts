@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import {FilterQuery} from 'mongodb'
+import { FilterQuery } from 'mongodb'
 import set from 'set-value'
-import {Inject, Service} from 'typedi'
-import {find, omit} from 'underscore'
-import {RoleService} from '.'
-import {Context} from '../../graphql/context'
-import {User} from '../../graphql/resolvers/types'
-import {MongoDocumentService} from './@document'
+import { Inject, Service } from 'typedi'
+import { find, omit } from 'underscore'
+import { RoleService } from '.'
+import { Context } from '../../graphql/context'
+import { User } from '../../graphql/resolvers/types'
+import { MongoDocumentService } from './@document'
 
-@Service({global: false})
+@Service({ global: false })
 export class UserService extends MongoDocumentService<User> {
   private _role: RoleService
 
@@ -26,7 +26,7 @@ export class UserService extends MongoDocumentService<User> {
    * @param user - User
    */
   private _replaceId<T>(user: User): T {
-    return ({...omit(user, 'id'), _id: user.id} as unknown) as T
+    return ({ ...omit(user, 'id'), _id: user.id } as unknown) as T
   }
 
   /**
@@ -37,7 +37,7 @@ export class UserService extends MongoDocumentService<User> {
   public async getUsers(query?: FilterQuery<User>): Promise<User[]> {
     try {
       const [users, roles] = await Promise.all([
-        this.find(query, {displayName: 1}),
+        this.find(query, { displayName: 1 }),
         this._role.getRoles()
       ])
       return users.map((user) => ({
@@ -58,7 +58,7 @@ export class UserService extends MongoDocumentService<User> {
    */
   public async getById(id: string) {
     try {
-      const user = await this.collection.findOne({_id: id})
+      const user = await this.collection.findOne({ _id: id })
       if (!user.role) throw new Error(`The user ${id} has no role set.`)
       user.id = user._id
       user.role = await this._role.getByName(user.role as string)
@@ -106,7 +106,7 @@ export class UserService extends MongoDocumentService<User> {
    */
   public async updateUser(user: User): Promise<void> {
     try {
-      await this.collection.updateOne({_id: user.id}, {$set: user})
+      await this.collection.updateOne({ _id: user.id }, { $set: user })
     } catch (error) {
       throw error
     }
@@ -122,7 +122,7 @@ export class UserService extends MongoDocumentService<User> {
    */
   public async updateCurrentUserConfiguration(configuration: string) {
     try {
-      const filter = {_id: this.context.userId}
+      const filter = { _id: this.context.userId }
       const user = await this.collection.findOne(filter)
       const _configuration = JSON.parse(configuration)
       const mergedConfiguration = Object.keys(_configuration).reduce(
@@ -133,7 +133,7 @@ export class UserService extends MongoDocumentService<User> {
         user.configuration || {}
       )
       await this.collection.updateOne(filter, {
-        $set: {configuration: mergedConfiguration}
+        $set: { configuration: mergedConfiguration }
       })
     } catch (error) {
       throw error

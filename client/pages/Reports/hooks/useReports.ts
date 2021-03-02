@@ -1,14 +1,14 @@
 /* eslint-disable tsdoc/syntax */
-import {useLayoutEffect, useMemo} from 'react'
-import {useTranslation} from 'react-i18next'
-import {useHistory, useParams} from 'react-router-dom'
-import {useUpdateUserConfiguration} from '../../../hooks/user/useUpdateUserConfiguration'
+import { useLayoutEffect, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useHistory, useParams } from 'react-router-dom'
+import { useUpdateUserConfiguration } from '../../../hooks/user/useUpdateUserConfiguration'
 import initFilters from '../filters'
-import {useReportsReducer} from '../reducer'
-import {IReportsParameters} from '../types'
-import {useQueryPresets} from './query-presets'
-import {useColumns} from './useColumns'
-import {useReportsQuery} from './useReportsQuery'
+import { useReportsReducer } from '../reducer'
+import { IReportsParameters } from '../types'
+import { useQueryPresets } from './query-presets'
+import { useColumns } from './useColumns'
+import { useReportsQuery } from './useReportsQuery'
 
 /**
  * Hook for Reports
@@ -24,19 +24,19 @@ import {useReportsQuery} from './useReportsQuery'
  * @category Reports Hooks
  */
 export function useReports() {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const parameters = useParams<IReportsParameters>()
   const history = useHistory()
   const queries = useQueryPresets()
-  const {state, dispatch} = useReportsReducer(queries)
-  useReportsQuery({state, dispatch})
+  const { state, dispatch } = useReportsReducer(queries)
+  useReportsQuery({ state, dispatch })
   useLayoutEffect(() => {
     if (state.preset) {
       history.push(`/reports/${state.preset?.key || ''}`)
     }
   }, [state.preset, history])
 
-  const columns = useColumns({defaults: {isResizable: true}})
+  const columns = useColumns({ defaults: { isResizable: true } })
   const filters = useMemo(() => initFilters(state.filter, t), [state.filter, t])
 
   useUpdateUserConfiguration(
@@ -58,4 +58,4 @@ export function useReports() {
   }
 }
 
-export {useQueryPresets}
+export { useQueryPresets }

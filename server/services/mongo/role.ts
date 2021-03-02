@@ -1,11 +1,11 @@
-import {FilterQuery} from 'mongodb'
-import {Inject, Service} from 'typedi'
-import {pick} from 'underscore'
-import {Context} from '../../graphql/context'
-import {Role} from '../../graphql/resolvers/types'
-import {MongoDocumentService} from './@document'
+import { FilterQuery } from 'mongodb'
+import { Inject, Service } from 'typedi'
+import { pick } from 'underscore'
+import { Context } from '../../graphql/context'
+import { Role } from '../../graphql/resolvers/types'
+import { MongoDocumentService } from './@document'
 
-@Service({global: false})
+@Service({ global: false })
 export class RoleService extends MongoDocumentService<Role> {
   constructor(@Inject('CONTEXT') readonly context: Context) {
     super(context, 'roles')
@@ -32,7 +32,7 @@ export class RoleService extends MongoDocumentService<Role> {
    */
   public async getByName(name: string): Promise<Role> {
     try {
-      const role = await this.collection.findOne({name})
+      const role = await this.collection.findOne({ name })
       return role
     } catch (error) {
       throw error
@@ -60,7 +60,7 @@ export class RoleService extends MongoDocumentService<Role> {
    */
   public async updateRole(role: Role): Promise<void> {
     try {
-      await this.collection.updateOne(pick(role, 'name'), {$set: role})
+      await this.collection.updateOne(pick(role, 'name'), { $set: role })
     } catch (error) {
       throw error
     }
@@ -73,7 +73,7 @@ export class RoleService extends MongoDocumentService<Role> {
    */
   public async deleteRole(name: string): Promise<void> {
     try {
-      await this.collection.deleteOne({name})
+      await this.collection.deleteOne({ name })
     } catch (error) {
       throw error
     }

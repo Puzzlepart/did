@@ -5,11 +5,11 @@ import express from 'express'
 import bearerToken from 'express-bearer-token'
 import favicon from 'express-favicon'
 import createError from 'http-errors'
-import {MongoClient} from 'mongodb'
+import { MongoClient } from 'mongodb'
 import logger from 'morgan'
 import path from 'path'
-import {pick} from 'underscore'
-import {setupGraphQL} from './graphql'
+import { pick } from 'underscore'
+import { setupGraphQL } from './graphql'
 import {
   helmetMiddleware,
   passportMiddleware,
@@ -17,7 +17,7 @@ import {
   serveGzippedMiddleware
 } from './middleware'
 import authRoute from './routes/auth'
-import {environment} from './utils'
+import { environment } from './utils'
 
 /**
  * Did Express.js App
@@ -44,7 +44,7 @@ export class App {
     )
     this.instance.use(logger('dev'))
     this.instance.use(express.json())
-    this.instance.use(express.urlencoded({extended: false}))
+    this.instance.use(express.urlencoded({ extended: false }))
     this.instance.use(bodyParser.json())
     this.instance.disable('view cache')
   }
@@ -113,7 +113,7 @@ export class App {
    */
   setupAuth() {
     const _passport = passportMiddleware(this._mongoClient)
-    this.instance.use(bearerToken({reqKey: 'api_key'}))
+    this.instance.use(bearerToken({ reqKey: 'api_key' }))
     this.instance.use(_passport.initialize())
     this.instance.use(_passport.session())
     this.instance.use('/auth', authRoute)

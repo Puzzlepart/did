@@ -1,5 +1,5 @@
-import {createContext} from 'react'
-import {SubscriptionSettings} from 'types'
+import { createContext } from 'react'
+import { SubscriptionSettings } from 'types'
 
 export interface ISubscriptionContext {
   settings: SubscriptionSettings

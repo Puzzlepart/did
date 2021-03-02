@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {useQuery} from '@apollo/client'
-import {useEffect, useRef, useState} from 'react'
-import {LabelObject} from 'types'
-import {omit} from 'underscore'
+import { useQuery } from '@apollo/client'
+import { useEffect, useRef, useState } from 'react'
+import { LabelObject } from 'types'
+import { omit } from 'underscore'
 import $labels from '../../pages/Admin/Labels/labels.gql'
-import {ILabelPickerProps} from './types'
+import { ILabelPickerProps } from './types'
 
 export function useLabelPicker({
   onChange,
   defaultSelectedKeys
 }: ILabelPickerProps) {
-  const {data} = useQuery($labels, {fetchPolicy: 'cache-first'})
+  const { data } = useQuery($labels, { fetchPolicy: 'cache-first' })
   const [labels, setLabels] = useState<LabelObject[]>([])
   const [selectedLabels, setSelectedLabels] = useState<LabelObject[]>([])
   const [showCallout, setShowCallout] = useState<boolean>(false)

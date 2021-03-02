@@ -1,11 +1,11 @@
 /* eslint-disable tsdoc/syntax */
-import {List} from 'components'
-import {Checkbox} from 'office-ui-fabric-react'
-import React, {FunctionComponent, useEffect, useState} from 'react'
-import {useTranslation} from 'react-i18next'
-import {contains, filter, isEmpty} from 'underscore'
+import { List } from 'components'
+import { Checkbox } from 'office-ui-fabric-react'
+import React, { FunctionComponent, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { contains, filter, isEmpty } from 'underscore'
 import columns from './columns'
-import {IProjectListProps} from './types'
+import { IProjectListProps } from './types'
 
 /**
  * @category Projects
@@ -13,7 +13,7 @@ import {IProjectListProps} from './types'
 export const ProjectList: FunctionComponent<IProjectListProps> = (
   props: IProjectListProps
 ) => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const [items, setItems] = useState([...(props.items || [])])
   const [showInactive, setShowInactive] = useState(false)
 
@@ -43,7 +43,7 @@ export const ProjectList: FunctionComponent<IProjectListProps> = (
                 disabled={isEmpty(
                   filter(props.items, (index) => index.inactive)
                 )}
-                styles={{root: {margin: '6px 0 0 8px'}}}
+                styles={{ root: { margin: '6px 0 0 8px' } }}
                 checked={showInactive}
                 label={t('common.toggleInactiveText')}
                 onChange={(_event, checked) => setShowInactive(checked)}

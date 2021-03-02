@@ -1,12 +1,12 @@
-import {useMemo} from 'react'
-import {useTranslation} from 'react-i18next'
-import {IChartConfig} from './types'
+import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { IChartConfig } from './types'
 
 /**
  * Hook for chart configuration
  */
 export function useChartConfig(): IChartConfig[] {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   return useMemo(
     () => [
       {

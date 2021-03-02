@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import {FunctionComponent, HTMLProps, ReactNode} from 'react'
+import { FunctionComponent, HTMLProps, ReactNode } from 'react'
 
 /**
  * @ignore

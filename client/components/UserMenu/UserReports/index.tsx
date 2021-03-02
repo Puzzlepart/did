@@ -1,13 +1,13 @@
-import {UserMessage} from 'components/UserMessage'
-import {useExcelExport} from 'hooks'
-import {ChoiceGroup, DefaultButton, Icon, Panel} from 'office-ui-fabric-react'
-import React, {FunctionComponent} from 'react'
-import {useTranslation} from 'react-i18next'
+import { UserMessage } from 'components/UserMessage'
+import { useExcelExport } from 'hooks'
+import { ChoiceGroup, DefaultButton, Icon, Panel } from 'office-ui-fabric-react'
+import React, { FunctionComponent } from 'react'
+import { useTranslation } from 'react-i18next'
 import styles from '../UserMenu.module.scss'
-import {useUserReports} from './useUserReports'
+import { useUserReports } from './useUserReports'
 
 export const UserReports: FunctionComponent = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const {
     queryPreset,
     setQueryPreset,
@@ -18,7 +18,7 @@ export const UserReports: FunctionComponent = () => {
     columns
   } = useUserReports()
 
-  const {onExport} = useExcelExport({
+  const { onExport } = useExcelExport({
     items: query?.data,
     fileName: queryPreset?.exportFileName,
     columns
@@ -42,14 +42,14 @@ export const UserReports: FunctionComponent = () => {
         />
         <UserMessage
           hidden={!queryPreset || query.loading}
-          containerStyle={{marginTop: 15}}
+          containerStyle={{ marginTop: 15 }}
           iconName='ReminderTime'
           text={t('common.userReportSummary', query)}
         />
         <DefaultButton
           text={t('common.exportExcel')}
-          styles={{root: {marginTop: 20, width: '100%'}}}
-          iconProps={{iconName: 'ExcelDocument'}}
+          styles={{ root: { marginTop: 20, width: '100%' } }}
+          iconProps={{ iconName: 'ExcelDocument' }}
           onClick={onExport}
           disabled={!queryPreset || query.loading}
         />

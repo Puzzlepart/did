@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import {useReducer} from 'react'
+import { useReducer } from 'react'
 
 /**
  * Returns the tuple [state, dispatch]

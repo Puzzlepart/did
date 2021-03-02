@@ -1,12 +1,12 @@
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 import FadeIn from 'react-fade-in'
-import {useTranslation} from 'react-i18next'
-import {WeekPicker} from '.'
-import {TimesheetContext} from '../../context'
+import { useTranslation } from 'react-i18next'
+import { WeekPicker } from '.'
+import { TimesheetContext } from '../../context'
 import styles from './WeekPicker.module.scss'
 
 export function useWeekPickerCommand() {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const context = useContext(TimesheetContext)
   return {
     key: 'WEEK_PICKER_COMMAND',

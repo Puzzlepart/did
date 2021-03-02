@@ -1,10 +1,10 @@
 import getValue from 'get-value'
-import {useContext, useMemo} from 'react'
-import {find} from 'underscore'
-import {truncateString} from 'utils/truncateString'
-import {EventObject} from '../../../../server/graphql/resolvers/types'
-import {TimesheetContext} from '../context'
-import {IChartConfig} from './types'
+import { useContext, useMemo } from 'react'
+import { find } from 'underscore'
+import { truncateString } from 'utils/truncateString'
+import { EventObject } from '../../../../server/graphql/resolvers/types'
+import { TimesheetContext } from '../context'
+import { IChartConfig } from './types'
 
 function getDataForChart(
   events: EventObject[] = [],
@@ -15,10 +15,10 @@ function getDataForChart(
   const items = events.reduce((_items, entry) => {
     const data = getValue(entry, chart.key, null)
     if (!data) return _items
-    const item = find(_items, ({id}) => id === data[chart.idKey])
+    const item = find(_items, ({ id }) => id === data[chart.idKey])
     const value = getValue(entry, chart.valueKey)
     if (item) item.value += value
-    else _items.push({id: data[chart.idKey], chart, data, value})
+    else _items.push({ id: data[chart.idKey], chart, data, value })
     return _items
   }, [])
   // eslint-disable-next-line unicorn/explicit-length-check
@@ -30,7 +30,7 @@ function getDataForChart(
   }))
 }
 
-type ChartData<T> = {[key: string]: [string, T[]]}
+type ChartData<T> = { [key: string]: [string, T[]] }
 
 /**
  * Hook for chart data
@@ -39,7 +39,7 @@ export function useChartData<T = any>(
   charts: IChartConfig[],
   container: HTMLDivElement
 ): ChartData<T> {
-  const {selectedPeriod} = useContext(TimesheetContext)
+  const { selectedPeriod } = useContext(TimesheetContext)
   return useMemo(
     () =>
       charts.reduce((_data, chart) => {

@@ -1,4 +1,4 @@
-import {useMutation} from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import AppConfig from 'AppConfig'
 import {
   ConditionalWrapper,
@@ -12,23 +12,23 @@ import {
   PrimaryButton,
   TextField
 } from 'office-ui-fabric-react'
-import React, {FunctionComponent, useContext, useReducer} from 'react'
-import {useTranslation} from 'react-i18next'
-import {CustomersContext} from '../context'
+import React, { FunctionComponent, useContext, useReducer } from 'react'
+import { useTranslation } from 'react-i18next'
+import { CustomersContext } from '../context'
 import $createOrUpdateCustomer from './createOrUpdateCustomer.gql'
 import styles from './CustomerForm.module.scss'
-import reducer, {initState} from './reducer'
-import {ICustomerFormProps} from './types'
-import {validateForm} from './validateForm'
+import reducer, { initState } from './reducer'
+import { ICustomerFormProps } from './types'
+import { validateForm } from './validateForm'
 
 export const CustomerForm: FunctionComponent<ICustomerFormProps> = (
   props: ICustomerFormProps
 ) => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const context = useContext(CustomersContext)
   const [message, setMessage] = useMessage()
   const [state, dispatch] = useReducer(reducer, initState(props.edit))
-  const [createOrUpdateCustomer, {loading}] = useMutation(
+  const [createOrUpdateCustomer, { loading }] = useMutation(
     $createOrUpdateCustomer
   )
 
@@ -38,10 +38,10 @@ export const CustomerForm: FunctionComponent<ICustomerFormProps> = (
   const onFormSubmit = async () => {
     const _validation = validateForm(state.model, t)
     if (_validation.invalid) {
-      dispatch({type: 'SET_VALIDATION', payload: {validation: _validation}})
+      dispatch({ type: 'SET_VALIDATION', payload: { validation: _validation } })
       return
     }
-    const {data} = await createOrUpdateCustomer({
+    const { data } = await createOrUpdateCustomer({
       variables: {
         customer: state.model,
         update: state.editMode
@@ -51,10 +51,10 @@ export const CustomerForm: FunctionComponent<ICustomerFormProps> = (
       if (props.panel) setTimeout(props.panel.onSave, 1000)
       else {
         setMessage({
-          text: t('customers.createSuccess', {name: state.model.name}),
+          text: t('customers.createSuccess', { name: state.model.name }),
           type: MessageBarType.success
         })
-        dispatch({type: 'RESET_FORM'})
+        dispatch({ type: 'RESET_FORM' })
         context.refetch()
       }
     } else {
@@ -72,7 +72,7 @@ export const CustomerForm: FunctionComponent<ICustomerFormProps> = (
       <div className={styles.root}>
         {message && (
           <UserMessage
-            containerStyle={{marginTop: 12, marginBottom: 12, width: 550}}
+            containerStyle={{ marginTop: 12, marginBottom: 12, width: 550 }}
             text={message.text}
             type={message.type}
           />

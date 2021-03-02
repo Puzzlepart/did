@@ -1,21 +1,21 @@
 /* eslint-disable tsdoc/syntax */
-import {AppContext} from 'AppContext'
-import {PERMISSION} from 'config/security/permissions'
-import React, {FunctionComponent, useContext} from 'react'
-import {isMobile} from 'react-device-detect'
-import {useTranslation} from 'react-i18next'
-import {Link} from 'react-router-dom'
-import {UserMenu} from '../UserMenu'
-import {UserNotifications} from '../UserNotifications'
+import { AppContext } from 'AppContext'
+import { PERMISSION } from 'config/security/permissions'
+import React, { FunctionComponent, useContext } from 'react'
+import { isMobile } from 'react-device-detect'
+import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
+import { UserMenu } from '../UserMenu'
+import { UserNotifications } from '../UserNotifications'
 import styles from './Navigation.module.scss'
-import {NavItem} from './NavItem'
+import { NavItem } from './NavItem'
 
 /**
  * @category Function Component
  */
 export const Navigation: FunctionComponent = () => {
-  const {t} = useTranslation()
-  const {user} = useContext(AppContext)
+  const { t } = useTranslation()
+  const { user } = useContext(AppContext)
   let className = styles.root
   if (isMobile) className += ` ${styles.mobile}`
   return (

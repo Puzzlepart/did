@@ -1,9 +1,9 @@
 /* eslint-disable tsdoc/syntax */
-import {AppContext} from 'AppContext'
-import {useContext, useMemo, useReducer} from 'react'
-import {useTranslation} from 'react-i18next'
-import {useParams} from 'react-router-dom'
-import {IReportsParameters, IReportsQueryPresetItem} from '..'
+import { AppContext } from 'AppContext'
+import { useContext, useMemo, useReducer } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useParams } from 'react-router-dom'
+import { IReportsParameters, IReportsQueryPresetItem } from '..'
 import createReducer from '../reducer'
 
 /**
@@ -14,10 +14,10 @@ import createReducer from '../reducer'
  * @param queries - Queries
  */
 export function useReportsReducer(queries: IReportsQueryPresetItem[]) {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const app = useContext(AppContext)
   const url = useParams<IReportsParameters>()
-  const reducer = useMemo(() => createReducer({app, url, queries}), [
+  const reducer = useMemo(() => createReducer({ app, url, queries }), [
     app,
     queries,
     url
@@ -31,5 +31,5 @@ export function useReportsReducer(queries: IReportsQueryPresetItem[]) {
       emptyGroupName: t('common.all')
     }
   })
-  return {state, dispatch}
+  return { state, dispatch }
 }

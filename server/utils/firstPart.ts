@@ -1,4 +1,4 @@
-import {first} from 'underscore'
+import { first } from 'underscore'
 
 /**
  * Get first part in the the string separated by separarator

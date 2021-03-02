@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
-import {useMemo} from 'react'
-import {ITimesheetContext} from '../types'
+import { useMemo } from 'react'
+import { ITimesheetContext } from '../types'
 import hotkeys from './hotkeys'
 
 /**
@@ -13,5 +13,5 @@ import hotkeys from './hotkeys'
 export function useHotkeys(context: ITimesheetContext) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const hotkeysProps = useMemo(() => hotkeys(context), [context.scope])
-  return {hotkeysProps}
+  return { hotkeysProps }
 }

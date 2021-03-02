@@ -1,6 +1,6 @@
-import {Collection, FilterQuery} from 'mongodb'
-import {Context} from '../../graphql/context'
-import {CacheService} from '../cache'
+import { Collection, FilterQuery } from 'mongodb'
+import { Context } from '../../graphql/context'
+import { CacheService } from '../cache'
 
 export class MongoDocumentService<T> {
   public cache: CacheService = null
@@ -36,6 +36,6 @@ export class MongoDocumentService<T> {
    */
   public find<S = any>(query: FilterQuery<T>, sort?: S) {
     // eslint-disable-next-line unicorn/no-array-callback-reference
-    return this.collection.find(query, {sort}).toArray()
+    return this.collection.find(query, { sort }).toArray()
   }
 }

@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import {useMutation} from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import AppConfig from 'AppConfig'
 import {
   ConditionalWrapper,
@@ -16,16 +16,16 @@ import {
   TextField,
   Toggle
 } from 'office-ui-fabric-react'
-import React, {FunctionComponent, useContext, useReducer} from 'react'
-import {useTranslation} from 'react-i18next'
-import {LabelObject as Label} from 'types'
-import {isBlank} from 'underscore.string'
-import {ProjectsContext} from '../context'
+import React, { FunctionComponent, useContext, useReducer } from 'react'
+import { useTranslation } from 'react-i18next'
+import { LabelObject as Label } from 'types'
+import { isBlank } from 'underscore.string'
+import { ProjectsContext } from '../context'
 import $createOrUpdateProject from './createOrUpdateProject.gql'
 import styles from './ProjectForm.module.scss'
-import reducer, {initState} from './reducer'
-import {IProjectFormProps} from './types'
-import {validateForm} from './validateForm'
+import reducer, { initState } from './reducer'
+import { IProjectFormProps } from './types'
+import { validateForm } from './validateForm'
 
 /**
  * @category Projects
@@ -33,11 +33,13 @@ import {validateForm} from './validateForm'
 export const ProjectForm: FunctionComponent<IProjectFormProps> = (
   props: IProjectFormProps
 ) => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const context = useContext(ProjectsContext)
   const [message, setMessage] = useMessage()
   const [state, dispatch] = useReducer(reducer, initState(props.edit))
-  const [createOrUpdateProject, {loading}] = useMutation($createOrUpdateProject)
+  const [createOrUpdateProject, { loading }] = useMutation(
+    $createOrUpdateProject
+  )
 
   /**
    * On form submit
@@ -45,10 +47,10 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (
   const onFormSubmit = async () => {
     const _validation = validateForm(state.model, t)
     if (_validation.invalid) {
-      dispatch({type: 'SET_VALIDATION', payload: {validation: _validation}})
+      dispatch({ type: 'SET_VALIDATION', payload: { validation: _validation } })
       return
     }
-    const {data} = await createOrUpdateProject({
+    const { data } = await createOrUpdateProject({
       variables: {
         project: state.model,
         options: state.options,
@@ -65,7 +67,7 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (
           }),
           type: MessageBarType.success
         })
-        dispatch({type: 'RESET_FORM'})
+        dispatch({ type: 'RESET_FORM' })
         context.refetch()
       }
     } else {
@@ -84,7 +86,7 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (
         {message && (
           <UserMessage
             {...message}
-            containerStyle={{marginTop: 12, marginBottom: 12, width: 550}}
+            containerStyle={{ marginTop: 12, marginBottom: 12, width: 550 }}
           />
         )}
         <SearchCustomer
@@ -123,7 +125,7 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (
           text={
             isBlank(state.projectId)
               ? t('projects.idPreviewBlankText')
-              : t('projects.idPreviewText', {id: state.projectId})
+              : t('projects.idPreviewText', { id: state.projectId })
           }
         />
         <div className={styles.inputField} hidden={state.editMode}>

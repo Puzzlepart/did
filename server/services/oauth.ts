@@ -1,8 +1,8 @@
 import createDebug from 'debug'
 import 'reflect-metadata'
-import {AuthorizationCode, Token} from 'simple-oauth2'
-import {Inject, Service} from 'typedi'
-import {pick} from 'underscore'
+import { AuthorizationCode, Token } from 'simple-oauth2'
+import { Inject, Service } from 'typedi'
+import { pick } from 'underscore'
 const debug = createDebug('services/oauth')
 
 export interface AccessTokenOptions {
@@ -14,7 +14,7 @@ export interface AccessTokenOptions {
   force?: boolean
 }
 
-@Service({global: false})
+@Service({ global: false })
 class OAuthService {
   constructor(@Inject('REQUEST') private readonly _request: Express.Request) {}
 

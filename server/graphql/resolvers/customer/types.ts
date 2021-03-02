@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
-import {Field, ID, InputType, ObjectType} from 'type-graphql'
+import { Field, ID, InputType, ObjectType } from 'type-graphql'
 
 /**
  * @category ObjectType
@@ -17,19 +17,19 @@ export class Customer {
   @Field()
   name: string
 
-  @Field({nullable: true, defaultValue: ''})
+  @Field({ nullable: true, defaultValue: '' })
   description: string
 
-  @Field({nullable: true, defaultValue: null})
+  @Field({ nullable: true, defaultValue: null })
   webLink: string
 
-  @Field({nullable: true, defaultValue: null})
+  @Field({ nullable: true, defaultValue: null })
   externalSystemURL: string
 
-  @Field({nullable: true, defaultValue: null})
+  @Field({ nullable: true, defaultValue: null })
   icon: string
 
-  @Field({nullable: true, defaultValue: false})
+  @Field({ nullable: true, defaultValue: false })
   inactive?: boolean
 
   /**
@@ -57,19 +57,19 @@ export class CustomerInput {
   @Field()
   name: string
 
-  @Field({nullable: true, defaultValue: ''})
+  @Field({ nullable: true, defaultValue: '' })
   description: string
 
-  @Field({nullable: true, defaultValue: null})
+  @Field({ nullable: true, defaultValue: null })
   webLink?: string
 
-  @Field({nullable: true, defaultValue: null})
+  @Field({ nullable: true, defaultValue: null })
   externalSystemURL?: string
 
   @Field()
   icon: string
 
-  @Field({nullable: true, defaultValue: false})
+  @Field({ nullable: true, defaultValue: false })
   inactive?: boolean
 }
 

@@ -1,22 +1,22 @@
-import {stringIsNullOrEmpty} from '@pnp/common'
-import {EntityLabel, ProjectLink} from 'components'
-import {Icon} from 'office-ui-fabric-react'
-import React, {FunctionComponent} from 'react'
-import {useTranslation} from 'react-i18next'
-import {LabelObject as Label} from 'types'
-import {isEmpty} from 'underscore'
+import { stringIsNullOrEmpty } from '@pnp/common'
+import { EntityLabel, ProjectLink } from 'components'
+import { Icon } from 'office-ui-fabric-react'
+import React, { FunctionComponent } from 'react'
+import { useTranslation } from 'react-i18next'
+import { LabelObject as Label } from 'types'
+import { isEmpty } from 'underscore'
 import styles from './ProjectTooltip.module.scss'
-import {IProjectTooltipProps} from './types'
+import { IProjectTooltipProps } from './types'
 
 export const ProjectTooltipContent: FunctionComponent<IProjectTooltipProps> = ({
   project
 }: IProjectTooltipProps) => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   return (
     <div className={styles.root}>
       <div className={styles.header}>
         <div className={styles.iconContainer}>
-          <Icon iconName={project.icon} styles={{root: {fontSize: 24}}} />
+          <Icon iconName={project.icon} styles={{ root: { fontSize: 24 } }} />
         </div>
         <div className={styles.title}>
           <span>{project.name}</span>

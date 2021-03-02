@@ -1,4 +1,4 @@
-import {isEmpty} from 'underscore'
+import { isEmpty } from 'underscore'
 
 /**
  * Search object

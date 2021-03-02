@@ -1,10 +1,10 @@
 /* eslint-disable tsdoc/syntax */
-import {List} from 'components'
-import React, {FunctionComponent} from 'react'
-import {useTranslation} from 'react-i18next'
-import {durationColumn, timeColumn, titleColumn} from './columns'
+import { List } from 'components'
+import React, { FunctionComponent } from 'react'
+import { useTranslation } from 'react-i18next'
+import { durationColumn, timeColumn, titleColumn } from './columns'
 import styles from './EventList.module.scss'
-import {IEventListProps} from './types'
+import { IEventListProps } from './types'
 
 /**
  * @category Function Component
@@ -12,7 +12,7 @@ import {IEventListProps} from './types'
 export const EventList: FunctionComponent<IEventListProps> = (
   props: IEventListProps
 ): JSX.Element => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const columns = [
     titleColumn(props, t('common.titleLabel')),
     timeColumn(props, t('common.timeLabel')),
@@ -30,7 +30,7 @@ export const EventList: FunctionComponent<IEventListProps> = (
         columns={columns}
         items={props.events}
         groups={props.groups}
-        groupProps={{showEmptyGroups: props.showEmptyDays}}
+        groupProps={{ showEmptyGroups: props.showEmptyDays }}
       />
     </div>
   )

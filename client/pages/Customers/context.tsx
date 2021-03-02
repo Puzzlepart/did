@@ -1,7 +1,7 @@
-import {ApolloQueryResult} from '@apollo/client'
-import {AnyAction} from '@reduxjs/toolkit'
-import {createContext} from 'react'
-import {ICustomersState} from './types'
+import { ApolloQueryResult } from '@apollo/client'
+import { AnyAction } from '@reduxjs/toolkit'
+import { createContext } from 'react'
+import { ICustomersState } from './types'
 
 export interface ICustomersContext {
   state: ICustomersState

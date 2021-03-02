@@ -1,18 +1,18 @@
 /* eslint-disable tsdoc/syntax */
-import {UserMessage} from 'components/UserMessage'
-import {Link, Panel} from 'office-ui-fabric-react'
-import React, {FunctionComponent, useContext, useDebugValue} from 'react'
-import {useTranslation} from 'react-i18next'
-import {isEmpty} from 'underscore'
-import {UserNotificationsContext} from '../context'
-import {UserNotification} from './UserNotification'
+import { UserMessage } from 'components/UserMessage'
+import { Link, Panel } from 'office-ui-fabric-react'
+import React, { FunctionComponent, useContext, useDebugValue } from 'react'
+import { useTranslation } from 'react-i18next'
+import { isEmpty } from 'underscore'
+import { UserNotificationsContext } from '../context'
+import { UserNotification } from './UserNotification'
 import styles from './UserNotificationsPanel.module.scss'
 
 /**
  * @category Function Component
  */
 export const NotificationsPanel: FunctionComponent = () => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
   const {
     notifications,
     panelOpen,
@@ -20,7 +20,7 @@ export const NotificationsPanel: FunctionComponent = () => {
     dismissedCount,
     clearDismissed
   } = useContext(UserNotificationsContext)
-  useDebugValue({dismissedCount})
+  useDebugValue({ dismissedCount })
   return (
     <Panel
       isOpen={panelOpen}
@@ -31,7 +31,7 @@ export const NotificationsPanel: FunctionComponent = () => {
       <div className={styles.body}>
         <div hidden={!isEmpty(notifications)}>
           <UserMessage
-            text={t('notifications.emptyText', {dismissedCount})}
+            text={t('notifications.emptyText', { dismissedCount })}
             actions={
               <div hidden={dismissedCount === 0}>
                 <Link onClick={clearDismissed}>

@@ -5,9 +5,9 @@ import {
   IStyleFunctionOrObject,
   MessageBar
 } from 'office-ui-fabric-react'
-import React, {FunctionComponent} from 'react'
+import React, { FunctionComponent } from 'react'
 import ReactMarkdown from 'react-markdown/with-html'
-import {IUserMessageProps} from './types'
+import { IUserMessageProps } from './types'
 import styles from './UserMessage.module.scss'
 
 /**
@@ -43,7 +43,7 @@ export const UserMessage: FunctionComponent<IUserMessageProps> = (
         styles={_styles}
         isMultiline={props.isMultiline}
         messageBarType={props.type}
-        messageBarIconProps={props.iconName && {iconName: props.iconName}}
+        messageBarIconProps={props.iconName && { iconName: props.iconName }}
         onDismiss={props.onDismiss}
         actions={props.actions}>
         {props.text && <ReactMarkdown source={props.text} escapeHtml={false} />}

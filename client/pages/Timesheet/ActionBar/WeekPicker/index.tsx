@@ -8,15 +8,15 @@ import {
   FocusTrapZone,
   TextField
 } from 'office-ui-fabric-react'
-import React, {useContext, useState} from 'react'
-import {useTranslation} from 'react-i18next'
-import {SET_SCOPE} from '../../../Timesheet/reducer/actions'
-import {TimesheetContext, TimesheetScope} from '../../../Timesheet/types'
+import React, { useContext, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { SET_SCOPE } from '../../../Timesheet/reducer/actions'
+import { TimesheetContext, TimesheetScope } from '../../../Timesheet/types'
 import styles from './WeekPicker.module.scss'
 
 export const WeekPicker = () => {
-  const {t} = useTranslation()
-  const {loading, scope, dispatch} = useContext(TimesheetContext)
+  const { t } = useTranslation()
+  const { loading, scope, dispatch } = useContext(TimesheetContext)
   const [calendar, setCalendar] = useState(null)
   return (
     <>
@@ -56,12 +56,12 @@ export const WeekPicker = () => {
           <FocusTrapZone isClickableOutsideFocusTrap={true}>
             <Calendar
               onSelectDate={(date) => {
-                dispatch(SET_SCOPE({scope: new TimesheetScope(date)}))
+                dispatch(SET_SCOPE({ scope: new TimesheetScope(date) }))
                 setCalendar(null)
               }}
               firstDayOfWeek={DayOfWeek.Monday}
               strings={
-                t('common.calendarStrings', {returnObjects: true}) as any
+                t('common.calendarStrings', { returnObjects: true }) as any
               }
               showGoToToday={false}
               showWeekNumbers={true}

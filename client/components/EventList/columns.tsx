@@ -1,14 +1,14 @@
-import {EntityLabel} from 'components/EntityLabel'
+import { EntityLabel } from 'components/EntityLabel'
 import DateUtils from 'DateUtils'
 import * as helpers from 'helpers'
-import {IColumn, Link} from 'office-ui-fabric-react'
+import { IColumn, Link } from 'office-ui-fabric-react'
 import * as React from 'react'
-import {BrowserView, MobileView} from 'react-device-detect'
-import {EventObject, TimeEntry} from 'types'
-import {generateColumn as col} from 'utils/generateColumn'
-import {DurationDisplay} from './DurationDisplay'
+import { BrowserView, MobileView } from 'react-device-detect'
+import { EventObject, TimeEntry } from 'types'
+import { generateColumn as col } from 'utils/generateColumn'
+import { DurationDisplay } from './DurationDisplay'
 import styles from './EventList.module.scss'
-import {IEventListProps} from './types'
+import { IEventListProps } from './types'
 
 /**
  * Get sizing for column
@@ -23,7 +23,7 @@ function getSizing(
   fieldName: string,
   defMinWidth: number,
   defMaxWidth: number
-): {minWidth: number; maxWidth: number} {
+): { minWidth: number; maxWidth: number } {
   return {
     minWidth: helpers.getValue(props, `columnWidths.${fieldName}`, defMinWidth),
     maxWidth: helpers.getValue(props, `columnWidths.${fieldName}`, defMaxWidth)
@@ -44,7 +44,7 @@ export const titleColumn = (
   col(
     fieldName,
     name,
-    {...getSizing(props, fieldName, 320, 400), isMultiline: true},
+    { ...getSizing(props, fieldName, 320, 400), isMultiline: true },
     (event: EventObject) => (
       <div className={styles.titleColumn}>
         <Link href={event.webLink} target='_blank' title={event.title}>
@@ -76,7 +76,7 @@ export const timeColumn = (
   col(
     fieldName,
     name,
-    {...getSizing(props, fieldName, 90, 90)},
+    { ...getSizing(props, fieldName, 90, 90) },
     (event: TimeEntry) => {
       const startTime = DateUtils.formatDate(
         event.startDateTime,
@@ -92,7 +92,7 @@ export const timeColumn = (
             <DurationDisplay
               displayFormat='({0})'
               duration={event.duration}
-              style={{marginLeft: 4}}
+              style={{ marginLeft: 4 }}
             />
           </MobileView>
         </>
@@ -115,7 +115,7 @@ export const durationColumn = (
   col(
     fieldName,
     name,
-    {...getSizing(props, fieldName, 75, 75)},
+    { ...getSizing(props, fieldName, 75, 75) },
     (event: TimeEntry) => (
       <BrowserView renderWithFragment={true}>
         <DurationDisplay duration={event.duration} />

@@ -1,10 +1,10 @@
 /* eslint-disable tsdoc/syntax */
-import {useToggle} from 'hooks'
-import {IChoiceGroupOption} from 'office-ui-fabric-react'
-import {useState} from 'react'
-import {useQueryPresets} from './query-presets'
-import {useColumns} from './useColumns'
-import {useUserReportQuery} from './useUserReportQuery'
+import { useToggle } from 'hooks'
+import { IChoiceGroupOption } from 'office-ui-fabric-react'
+import { useState } from 'react'
+import { useQueryPresets } from './query-presets'
+import { useColumns } from './useColumns'
+import { useUserReportQuery } from './useUserReportQuery'
 
 /**
  * Hook for UserReports

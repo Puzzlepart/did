@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
-import {Field, ID, InputType, ObjectType} from 'type-graphql'
+import { Field, ID, InputType, ObjectType } from 'type-graphql'
 
 /**
  * @category ObjectType
@@ -10,10 +10,10 @@ import {Field, ID, InputType, ObjectType} from 'type-graphql'
   description: 'A type that describes Subscription forecast settings'
 })
 export class SubscriptionForecastSettings {
-  @Field({nullable: true})
+  @Field({ nullable: true })
   enabled?: boolean
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   notifications?: number
 }
 
@@ -24,22 +24,22 @@ export class SubscriptionForecastSettings {
   description: 'A type that describes Subscription AD sync settings'
 })
 export class SubscriptionADSyncSettings {
-  @Field({nullable: true})
+  @Field({ nullable: true })
   adUserSyncEnabled?: boolean
 
-  @Field(() => [String], {nullable: true})
+  @Field(() => [String], { nullable: true })
   adUserSyncProperties?: string[]
 }
 
 /**
  * @category ObjectType
  */
-@ObjectType({description: 'A type that describes Subscription settings'})
+@ObjectType({ description: 'A type that describes Subscription settings' })
 export class SubscriptionSettings {
-  @Field(() => SubscriptionForecastSettings, {nullable: true})
+  @Field(() => SubscriptionForecastSettings, { nullable: true })
   forecast?: SubscriptionForecastSettings
 
-  @Field(() => SubscriptionADSyncSettings, {nullable: true})
+  @Field(() => SubscriptionADSyncSettings, { nullable: true })
   adsync?: SubscriptionADSyncSettings
 }
 
@@ -59,7 +59,7 @@ export class Subscription {
   @Field()
   name: string
 
-  @Field(() => SubscriptionSettings, {nullable: true})
+  @Field(() => SubscriptionSettings, { nullable: true })
   settings?: SubscriptionSettings
 
   /**
@@ -75,10 +75,10 @@ export class Subscription {
   description: 'A input that describes Subscription forecast settings'
 })
 export class SubscriptionForecastSettingsInput {
-  @Field({nullable: true})
+  @Field({ nullable: true })
   enabled?: boolean
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   notifications?: number
 }
 
@@ -89,21 +89,21 @@ export class SubscriptionForecastSettingsInput {
   description: 'A input that describes Subscription AD sync settings'
 })
 export class SubscriptionADSyncSettingsInput {
-  @Field({nullable: true})
+  @Field({ nullable: true })
   adUserSyncEnabled?: boolean
 
-  @Field(() => [String], {nullable: true})
+  @Field(() => [String], { nullable: true })
   adUserSyncProperties?: string[]
 }
 
 /**
  * @category InputType
  */
-@InputType({description: 'A type that describes Subscription AD settings'})
+@InputType({ description: 'A type that describes Subscription AD settings' })
 export class SubscriptionSettingsInput {
-  @Field(() => SubscriptionForecastSettingsInput, {nullable: true})
+  @Field(() => SubscriptionForecastSettingsInput, { nullable: true })
   forecast?: SubscriptionForecastSettingsInput
 
-  @Field(() => SubscriptionADSyncSettingsInput, {nullable: true})
+  @Field(() => SubscriptionADSyncSettingsInput, { nullable: true })
   adsync?: SubscriptionADSyncSettingsInput
 }

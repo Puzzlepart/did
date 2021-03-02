@@ -1,4 +1,4 @@
-import {List} from 'components'
+import { List } from 'components'
 import {
   CheckboxVisibility,
   Panel,
@@ -6,16 +6,16 @@ import {
   PrimaryButton,
   SelectionMode
 } from 'office-ui-fabric-react'
-import React, {useContext, useState} from 'react'
-import {useTranslation} from 'react-i18next'
-import {pick} from 'underscore'
-import {UsersContext} from '../context'
+import React, { useContext, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { pick } from 'underscore'
+import { UsersContext } from '../context'
 import styles from './AddMultiplePanel.module.scss'
-import {IAddMultiplePanel} from './types'
+import { IAddMultiplePanel } from './types'
 
 export const AddMultiplePanel = (props: IAddMultiplePanel) => {
-  const {activeDirectoryUsers} = useContext(UsersContext)
-  const {t} = useTranslation()
+  const { activeDirectoryUsers } = useContext(UsersContext)
+  const { t } = useTranslation()
   const [selectedUsers, setSelectedUsers] = useState([])
 
   return (

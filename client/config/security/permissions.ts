@@ -1,4 +1,4 @@
-import {TFunction} from 'i18next'
+import { TFunction } from 'i18next'
 
 export enum PERMISSION {
   ACCESS_TIMESHEET = 'f5a82c37',

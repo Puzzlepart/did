@@ -1,18 +1,18 @@
-import {IUserMessageProps} from 'components/UserMessage/types'
+import { IUserMessageProps } from 'components/UserMessage/types'
 import DateUtils from 'DateUtils'
-import {MessageBarType} from 'office-ui-fabric-react'
-import {CLEAR_IGNORES} from 'pages/Timesheet/reducer/actions'
-import React, {useContext} from 'react'
-import {useTranslation} from 'react-i18next'
-import {isEmpty} from 'underscore'
-import {TimesheetContext} from '../context'
+import { MessageBarType } from 'office-ui-fabric-react'
+import { CLEAR_IGNORES } from 'pages/Timesheet/reducer/actions'
+import React, { useContext } from 'react'
+import { useTranslation } from 'react-i18next'
+import { isEmpty } from 'underscore'
+import { TimesheetContext } from '../context'
 
 /**
  * Use messages
  */
 export function useMessages() {
-  const {t} = useTranslation()
-  const {selectedPeriod, periods, dispatch} = useContext(TimesheetContext)
+  const { t } = useTranslation()
+  const { selectedPeriod, periods, dispatch } = useContext(TimesheetContext)
 
   const messages: IUserMessageProps[] = []
 

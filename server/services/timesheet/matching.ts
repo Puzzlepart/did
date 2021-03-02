@@ -1,10 +1,10 @@
-import {findBestMatch} from 'string-similarity'
-import {contains, filter, find, first, isEmpty} from 'underscore'
-import {Customer, EventObject} from '../../graphql/resolvers/types'
-import {ProjectsData} from '../mongo/project'
+import { findBestMatch } from 'string-similarity'
+import { contains, filter, find, first, isEmpty } from 'underscore'
+import { Customer, EventObject } from '../../graphql/resolvers/types'
+import { ProjectsData } from '../mongo/project'
 import MSGraphEvent from '../msgraph/types'
 
-type ProjectMatch = {id: string; key: string; customerKey: string}
+type ProjectMatch = { id: string; key: string; customerKey: string }
 
 export default class {
   constructor(private _data: ProjectsData) {}
@@ -21,9 +21,9 @@ export default class {
         (p) => p.customerKey === customer.key
       )
       const projectKeys = customerProjects.map((p) => p.key)
-      const {bestMatch} = findBestMatch(projectKey, projectKeys)
+      const { bestMatch } = findBestMatch(projectKey, projectKeys)
       if (!bestMatch || bestMatch.rating <= 0) return null
-      const {target} = bestMatch
+      const { target } = bestMatch
       const suggestion = first(
         customerProjects.filter((p) => p.key === target.toUpperCase())
       )
@@ -71,7 +71,7 @@ export default class {
     const matches = []
     let match: RegExpExecArray
     while ((match = regex.exec(inputString)) !== null) {
-      const {key, customerKey} = match.groups
+      const { key, customerKey } = match.groups
       matches.push({
         ...match.groups,
         id: [customerKey, key].join(' ')
@@ -114,7 +114,7 @@ export default class {
   private _matchEvent(event: EventObject) {
     const ignore = this._findIgnore(event)
     if (ignore === 'category') {
-      return {...event, isSystemIgnored: true}
+      return { ...event, isSystemIgnored: true }
     }
     const categoriesString = event.categories.join('|').toUpperCase()
     const srchString = [event.title, event.body, categoriesString]
@@ -133,7 +133,10 @@ export default class {
           (c) => match.customerKey === c.key
         )
         if (event.customer) {
-          event.project = find(this._data.projects, ({_id}) => _id === match.id)
+          event.project = find(
+            this._data.projects,
+            ({ _id }) => _id === match.id
+          )
           projectKey = match.key
         }
         if (event.project) break
@@ -142,7 +145,7 @@ export default class {
 
     // We check if we found ignore tag in body
     else if (ignore === 'body') {
-      return {...event, isSystemIgnored: true}
+      return { ...event, isSystemIgnored: true }
     }
 
     // We search the whole srchStr for match in non-strict/soft mode
@@ -150,11 +153,11 @@ export default class {
       const softMatches = this._searchString(srchString, false)
       event.project = find(
         this._data.projects,
-        ({_id}) => !!find(softMatches, (m) => m.id === _id)
+        ({ _id }) => !!find(softMatches, (m) => m.id === _id)
       )
       event.customer = find(
         this._data.customers,
-        ({key}) => key === event.project?.customerKey
+        ({ key }) => key === event.project?.customerKey
       )
     }
 
@@ -180,8 +183,8 @@ export default class {
     const inactiveProject = event?.project?.inactive
     const inactiveCustomer = event?.customer?.inactive
     if (event.project && (inactiveProject || inactiveCustomer)) {
-      if (inactiveProject) event.error = {code: 'PROJECT_INACTIVE'}
-      if (inactiveCustomer) event.error = {code: 'CUSTOMER_INACTIVE'}
+      if (inactiveProject) event.error = { code: 'PROJECT_INACTIVE' }
+      if (inactiveCustomer) event.error = { code: 'CUSTOMER_INACTIVE' }
       event.project = null
       event.customer = null
     }

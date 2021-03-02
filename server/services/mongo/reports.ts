@@ -1,9 +1,9 @@
-import {FilterQuery} from 'mongodb'
-import {Inject, Service} from 'typedi'
-import {find, first, omit} from 'underscore'
-import {ProjectService, UserService} from '.'
-import {DateObject} from '../../../shared/utils/date.dateObject'
-import {Context} from '../../graphql/context'
+import { FilterQuery } from 'mongodb'
+import { Inject, Service } from 'typedi'
+import { find, first, omit } from 'underscore'
+import { ProjectService, UserService } from '.'
+import { DateObject } from '../../../shared/utils/date.dateObject'
+import { Context } from '../../graphql/context'
 import {
   Customer,
   Project,
@@ -12,7 +12,7 @@ import {
   TimeEntry,
   User
 } from '../../graphql/resolvers/types'
-import {MongoDocumentService} from './@document'
+import { MongoDocumentService } from './@document'
 
 type Report = TimeEntry[]
 
@@ -24,7 +24,7 @@ interface IGenerateReportParameters {
   customers: Customer[]
 }
 
-@Service({global: false})
+@Service({ global: false })
 export class ReportsService extends MongoDocumentService<TimeEntry> {
   private _project: ProjectService
   private _user: UserService
@@ -88,7 +88,7 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
     customers
   }: IGenerateReportParameters) {
     return timeEntries
-      .sort(({startDateTime: a}, {startDateTime: b}) => {
+      .sort(({ startDateTime: a }, { startDateTime: b }) => {
         return sortAsc
           ? new Date(a).getTime() - new Date(b).getTime()
           : new Date(b).getTime() - new Date(a).getTime()
@@ -98,7 +98,7 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
         const resource = users
           ? find(users, (user) => user.id === entry.userId)
           : {}
-        const project = find(projects, ({_id}) => {
+        const project = find(projects, ({ _id }) => {
           return _id === entry.projectId
         })
         const customer = find(
@@ -131,8 +131,8 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
   ): Promise<Report> {
     try {
       let q = this._generatePresetQuery(preset)
-      q = omit({...q, ...query}, 'preset')
-      const [timeEntries, {projects, customers}, users] = await Promise.all([
+      q = omit({ ...q, ...query }, 'preset')
+      const [timeEntries, { projects, customers }, users] = await Promise.all([
         this.find(q),
         this._project.getProjectsData(),
         this._user.getUsers()
@@ -167,7 +167,7 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
         _userId,
         ...this._generatePresetQuery(preset)
       }
-      const [timeEntries, {projects, customers}] = await Promise.all([
+      const [timeEntries, { projects, customers }] = await Promise.all([
         this.find(q),
         this._project.getProjectsData()
       ])

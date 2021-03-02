@@ -195,7 +195,6 @@
       "@typescript-eslint/explicit-module-boundary-types": 0,
       "@typescript-eslint/no-inferrable-types": 0,
       "react/prop-types": 0,
-      "object-curly-spacing": 2,
       "no-inferrable-types": 0,
       "react/display-name": 0,
       "no-compare-neg-zero": 1,
@@ -253,7 +252,7 @@
     "arrowParens": "always",
     "printWidth": 80,
     "trailingComma": "none",
-    "bracketSpacing": false,
+    "bracketSpacing": true,
     "jsxBracketSameLine": true,
     "jsxSingleQuote": true
   },

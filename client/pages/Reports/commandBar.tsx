@@ -4,9 +4,9 @@ import {
   IContextualMenuItem
 } from 'office-ui-fabric-react'
 import React from 'react'
-import {isEmpty, omit, pick} from 'underscore'
-import {exportExcel} from 'utils/exportExcel'
-import {IReportsContext} from './context'
+import { isEmpty, omit, pick } from 'underscore'
+import { exportExcel } from 'utils/exportExcel'
+import { IReportsContext } from './context'
 import {
   CLEAR_FILTERS,
   REMOVE_SELECTED_FILTER,
@@ -14,8 +14,8 @@ import {
   SET_GROUP_BY,
   TOGGLE_FILTER_PANEL
 } from './reducer/actions'
-import {SaveFilterForm} from './SaveFilterForm'
-import {getGroupByOptions} from './types'
+import { SaveFilterForm } from './SaveFilterForm'
+import { getGroupByOptions } from './types'
 /**
  * Select group by command
  *
@@ -25,7 +25,7 @@ const selectGroupByCmd = (context: IReportsContext) =>
   ({
     key: 'SELECT_GROUP_BY',
     text: context.t('common.groupBy'),
-    iconProps: {iconName: 'GroupList'},
+    iconProps: { iconName: 'GroupList' },
     subMenuProps: {
       items: getGroupByOptions(context.t).map(
         (opt) =>
@@ -33,7 +33,8 @@ const selectGroupByCmd = (context: IReportsContext) =>
             ...pick(opt, 'key', 'text'),
             canCheck: true,
             checked: context.state.groupBy.fieldName === opt.props.fieldName,
-            onClick: () => context.dispatch(SET_GROUP_BY({groupBy: opt.props}))
+            onClick: () =>
+              context.dispatch(SET_GROUP_BY({ groupBy: opt.props }))
           } as IContextualMenuItem)
       )
     }
@@ -44,7 +45,7 @@ const selectGroupByCmd = (context: IReportsContext) =>
  *
  * @param context - Context
  */
-const exportToExcelCmd = ({state, columns, t}: IReportsContext) =>
+const exportToExcelCmd = ({ state, columns, t }: IReportsContext) =>
   ({
     key: 'EXPORT_TO_EXCEL',
     text: t('reports.exportToExcel'),
@@ -58,7 +59,7 @@ const exportToExcelCmd = ({state, columns, t}: IReportsContext) =>
         fileName
       })
     },
-    iconProps: {iconName: 'ExcelDocument'}
+    iconProps: { iconName: 'ExcelDocument' }
   } as IContextualMenuItem)
 
 /**
@@ -66,10 +67,10 @@ const exportToExcelCmd = ({state, columns, t}: IReportsContext) =>
  *
  * @param context - Context
  */
-const openFilterPanelCmd = ({dispatch}: IReportsContext) =>
+const openFilterPanelCmd = ({ dispatch }: IReportsContext) =>
   ({
     key: 'OPEN_FILTER_PANEL',
-    iconProps: {iconName: 'Filter'},
+    iconProps: { iconName: 'Filter' },
     iconOnly: true,
     onClick: () => dispatch(TOGGLE_FILTER_PANEL())
   } as IContextualMenuItem)
@@ -79,10 +80,10 @@ const openFilterPanelCmd = ({dispatch}: IReportsContext) =>
  *
  * @param context - Context
  */
-const clearFiltersCmd = ({state, dispatch}: IReportsContext) =>
+const clearFiltersCmd = ({ state, dispatch }: IReportsContext) =>
   ({
     key: 'CLEAR_FILTERS',
-    iconProps: {iconName: 'ClearFilter'},
+    iconProps: { iconName: 'ClearFilter' },
     iconOnly: true,
     disabled: !state.isFiltered,
     onClick: () => dispatch(CLEAR_FILTERS())
@@ -101,13 +102,13 @@ const saveFilterCmd = ({
   ({
     key: 'SAVED_FILTERS',
     text: state.filter?.text || t('reports.savedFilters'),
-    iconProps: state.filter?.iconProps || {iconName: 'ChromeRestore'},
+    iconProps: state.filter?.iconProps || { iconName: 'ChromeRestore' },
     subMenuProps: {
       items: [
         {
           key: 'SAVE_FILTER',
           onRender: () => (
-            <SaveFilterForm style={{padding: '12px 12px 6px 32px'}} />
+            <SaveFilterForm style={{ padding: '12px 12px 6px 32px' }} />
           )
         },
         {
@@ -117,7 +118,7 @@ const saveFilterCmd = ({
         state.filter?.text && {
           key: 'REMOVE_SELECTED_FILTER',
           text: t('reports.removeSelectedFilterText'),
-          iconProps: {iconName: 'RemoveFilter'},
+          iconProps: { iconName: 'RemoveFilter' },
           onClick: () => dispatch(REMOVE_SELECTED_FILTER())
         },
         {
@@ -130,7 +131,7 @@ const saveFilterCmd = ({
             ...(omit(filter, 'values') as IContextualMenuItem),
             canCheck: true,
             checked: filter.text === state.filter?.text,
-            onClick: () => dispatch(SET_FILTER({filter}))
+            onClick: () => dispatch(SET_FILTER({ filter }))
           }
         })
       ].filter((index) => index)

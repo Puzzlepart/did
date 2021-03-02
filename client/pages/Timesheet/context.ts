@@ -1,10 +1,10 @@
 /* eslint-disable tsdoc/syntax */
-import {ApolloQueryResult} from '@apollo/client'
-import {AnyAction} from '@reduxjs/toolkit'
-import {TFunction} from 'i18next'
-import {createContext, Dispatch} from 'react'
-import {useSubmitActions} from './hooks/useSubmitActions'
-import {ITimesheetState} from './types'
+import { ApolloQueryResult } from '@apollo/client'
+import { AnyAction } from '@reduxjs/toolkit'
+import { TFunction } from 'i18next'
+import { createContext, Dispatch } from 'react'
+import { useSubmitActions } from './hooks/useSubmitActions'
+import { ITimesheetState } from './types'
 
 /**
  * @category Timesheet

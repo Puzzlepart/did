@@ -1,13 +1,13 @@
 /* eslint-disable tsdoc/syntax */
-import {getIcons} from 'common/icons'
-import {IPanelProps} from 'office-ui-fabric-react'
+import { getIcons } from 'common/icons'
+import { IPanelProps } from 'office-ui-fabric-react'
 import {
   IFormValidation,
   LabelObject as Label,
   Project,
   ProjectOptions
 } from 'types'
-import {first} from 'underscore'
+import { first } from 'underscore'
 
 /**
  * @category Projects

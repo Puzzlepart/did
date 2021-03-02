@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
-import {useState} from 'react'
-import {isArray} from 'underscore'
+import { useState } from 'react'
+import { isArray } from 'underscore'
 
 /**
  * Browser storage hook supporting arrays

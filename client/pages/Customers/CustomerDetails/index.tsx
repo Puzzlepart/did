@@ -1,19 +1,19 @@
-import {useQuery} from '@apollo/client'
-import {UserMessage} from 'components/UserMessage'
-import {MessageBar, MessageBarType} from 'office-ui-fabric-react'
-import {ProjectList} from 'pages/Projects'
-import React, {FunctionComponent, useContext} from 'react'
-import {useTranslation} from 'react-i18next'
+import { useQuery } from '@apollo/client'
+import { UserMessage } from 'components/UserMessage'
+import { MessageBar, MessageBarType } from 'office-ui-fabric-react'
+import { ProjectList } from 'pages/Projects'
+import React, { FunctionComponent, useContext } from 'react'
+import { useTranslation } from 'react-i18next'
 import ReactMarkdown from 'react-markdown/with-html'
-import {CustomersContext} from '../context'
+import { CustomersContext } from '../context'
 import styles from './CustomerDetails.module.scss'
-import {Header} from './Header'
+import { Header } from './Header'
 import $projects from './projects.gql'
 
 export const CustomerDetails: FunctionComponent = () => {
-  const {t} = useTranslation()
-  const {state} = useContext(CustomersContext)
-  const {loading, error, data} = useQuery($projects, {
+  const { t } = useTranslation()
+  const { state } = useContext(CustomersContext)
+  const { loading, error, data } = useQuery($projects, {
     variables: {
       customerKey: state.selected?.key
     }
@@ -47,7 +47,7 @@ export const CustomerDetails: FunctionComponent = () => {
             items={data?.projects || []}
             hideColumns={['customer']}
             enableShimmer={loading}
-            searchBox={{placeholder: t('common.searchPlaceholder')}}
+            searchBox={{ placeholder: t('common.searchPlaceholder') }}
             renderLink={true}
             height={300}
           />

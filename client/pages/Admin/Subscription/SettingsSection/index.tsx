@@ -1,16 +1,16 @@
-import {ToggleSection} from 'components/ToggleSection'
-import {getValue} from 'helpers'
-import {Slider, Toggle} from 'office-ui-fabric-react'
-import React, {FunctionComponent, useContext} from 'react'
-import {SubscriptionContext} from '../context'
-import {CheckboxField} from './CheckboxField'
+import { ToggleSection } from 'components/ToggleSection'
+import { getValue } from 'helpers'
+import { Slider, Toggle } from 'office-ui-fabric-react'
+import React, { FunctionComponent, useContext } from 'react'
+import { SubscriptionContext } from '../context'
+import { CheckboxField } from './CheckboxField'
 import styles from './SettingsSection.module.scss'
-import {ISettingsSectionProps} from './types'
+import { ISettingsSectionProps } from './types'
 
 export const SettingsSection: FunctionComponent<ISettingsSectionProps> = (
   props: ISettingsSectionProps
 ) => {
-  const {settings, onSettingsChanged} = useContext(SubscriptionContext)
+  const { settings, onSettingsChanged } = useContext(SubscriptionContext)
   return (
     <ToggleSection
       className={styles.root}
@@ -26,7 +26,7 @@ export const SettingsSection: FunctionComponent<ISettingsSectionProps> = (
           field.hiddenIf && field.hiddenIf(settings || {})
         )
         const _ = [...field.props].reduce(
-          (object, [key, value]) => ({...object, [key]: value}),
+          (object, [key, value]) => ({ ...object, [key]: value }),
           {} as any
         )
         const key = `${props.id}.${field.id}`

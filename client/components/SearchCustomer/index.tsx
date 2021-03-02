@@ -1,18 +1,18 @@
 /* eslint-disable tsdoc/syntax */
-import {useQuery} from '@apollo/client'
-import React, {useMemo} from 'react'
-import {useTranslation} from 'react-i18next'
-import {Customer} from 'types'
+import { useQuery } from '@apollo/client'
+import React, { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { Customer } from 'types'
 import $customers from '../../pages/Customers/customers.gql'
-import {Autocomplete, ISuggestionItem} from '../Autocomplete'
-import {ISearchCustomerProps} from './types'
+import { Autocomplete, ISuggestionItem } from '../Autocomplete'
+import { ISearchCustomerProps } from './types'
 
 /**
  * @category Function Component
  */
 export const SearchCustomer = (props: ISearchCustomerProps) => {
-  const {t} = useTranslation()
-  const {loading, data} = useQuery<{customers: Customer[]}>($customers, {
+  const { t } = useTranslation()
+  const { loading, data } = useQuery<{ customers: Customer[] }>($customers, {
     fetchPolicy: 'cache-first'
   })
 

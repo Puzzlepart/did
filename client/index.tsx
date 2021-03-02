@@ -4,17 +4,17 @@
  *
  * @module .
  */
-import {ApolloProvider} from '@apollo/client'
-import {initializeIcons} from '@uifabric/icons'
+import { ApolloProvider } from '@apollo/client'
+import { initializeIcons } from '@uifabric/icons'
 import 'core-js/stable'
 import DateUtils from 'DateUtils'
 import index18n from 'i18next'
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
 import 'regenerator-runtime/runtime.js'
-import {App} from './App'
-import {ContextUser, IAppContext} from './AppContext'
-import {$usercontext, client} from './graphql'
+import { App } from './App'
+import { ContextUser, IAppContext } from './AppContext'
+import { $usercontext, client } from './graphql'
 import './i18n'
 
 /**
@@ -33,7 +33,7 @@ export const boostrap = async () => {
   const getContext = async (): Promise<IAppContext> => {
     const context: IAppContext = {}
     try {
-      const {data} = await client.query<Partial<IAppContext>>({
+      const { data } = await client.query<Partial<IAppContext>>({
         query: $usercontext,
         fetchPolicy: 'cache-first'
       })
@@ -42,7 +42,7 @@ export const boostrap = async () => {
       return context
     } catch {
       // We return an "empty" user with preferred language en-GB (default)
-      return {user: new ContextUser()}
+      return { user: new ContextUser() }
     }
   }
 
@@ -60,4 +60,4 @@ export const boostrap = async () => {
 
 boostrap()
 
-export {App}
+export { App }

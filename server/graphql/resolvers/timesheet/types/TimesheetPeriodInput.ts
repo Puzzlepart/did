@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
-import {Field, InputType} from 'type-graphql'
-import {EventInput} from './EventInput'
+import { Field, InputType } from 'type-graphql'
+import { EventInput } from './EventInput'
 
 /**
  * @category InputType
@@ -23,6 +23,6 @@ export class TimesheetPeriodInput {
   @Field(() => [EventInput])
   matchedEvents: EventInput[]
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   forecastedHours: number
 }
