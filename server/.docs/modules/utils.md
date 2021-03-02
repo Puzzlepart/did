@@ -22,10 +22,10 @@ Makes it easier to work with process.env.
 
 #### Parameters:
 
-Name | Type | Default value | Description |
-:------ | :------ | :------ | :------ |
-`key` | *string* | - | Key   |
-`fallbackValue` | *string* | null | Fallback vaue if key is not found    |
+Name | Type | Description |
+:------ | :------ | :------ |
+`key` | *string* | Key   |
+`fallbackValue?` | *string* | Fallback vaue if key is not found    |
 
 **Returns:** *string*
 
