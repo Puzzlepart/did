@@ -53,6 +53,57 @@ The following permissions are required by Azure App Registration:
 
 ![image-20201104173614079](.assets/image-20201104173614079.png)
 
+
+#### Set up .env ##
+
+You've copied `.env.sample` into `.env`, anually or using `npm run-script create-env`.
+
+Now you need to set the required environment variables from this table:
+
+| Key                             | Description                                                  | Required |
+| ------------------------------- | ------------------------------------------------------------ | -------- |
+| OAUTH_APP_ID                    | ID of the AD application registration.                       | **Yes**  |
+| OAUTH_APP_PASSWORD              | Password/key of the AD application registration.             | **Yes**  |
+| AZURE_STORAGE_CONNECTION_STRING | Connection string for the Azure Table Storage                | **Yes**  |
+| SESSION_SIGNING_KEY             | Just a random string to secure the sessions.                 | **Yes**  |
+| BUNDLE_ANALYZER_MODE            | See https://www.npmjs.com/package/webpack-bundle-analyzer. Default is server. | No       |
+| *OPEN_DELA*Y                    | Delay in seconds for opening Did in browser when running `watch`. | No       |
+| DEBUG                           | To debug the Node backend. E.g. `app*` to see all logs from app. See https://www.npmjs.com/package/debug. | No       |
+| NO_BROWSER                      | Set to `1` if you don't want to automatically open Did in the browser when running `watch` task. | No       |
+| OAUTH_SCOPES                    | Scopes for Microsoft Graph queries. See https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent. | No       |
+
+### Commits
+We are using [husky](https://github.com/typicode/husky) hooks to automatically run npm script `lint:fix` before commits. This is to make sure all files are linted and ready to go at all times. This is easy to forget when working on a branch.
+
+You ***can** (but shouldn't) bypass pre-commit and commit-msg hooks using Git `--no-verify` option:
+
+```shell
+git commit -m "yolo!" --no-verify
+```
+
+For Git commands that don't have a `--no-verify` option, you can use HUSKY environment variable:
+
+```shell
+HUSKY=0 git push # yolo!
+```
+
+### Branching / Deploying
+
+The `/main` branch requires pull requests, and is set up with a CI/CD pipeline which deploys to [did365.puzzlepart.com](https://did365.puzzlepart.com)  
+The `/dev` branch also requires pull requests, and is set up with a CI/CD pipeline which deploys to [didapp.azurewebsites.net](https://didapp.azurewebsites.net)  
+`/feature/*`-prefixed branches may or may not be included in future releases.
+
+You are encouraged to branch with either of the following prefixes  
+*  **hotfix/**
+*  **bugfix/**
+*  **feature/**
+
+See also ["A successful Git branching model"](https://nvie.com/posts/a-successful-git-branching-model/)
+
+
+If you want to test with your web app, checkout [Creating your own app registration in the Azure Portal](https://github.com/Puzzlepart/did365/wiki/Creating-your-own-app-registration-in-the-Azure-Portal) in our wiki.
+
+
 ### GraphQL
 
 The extension [Apollo extension for VS Code](https://www.apollographql.com/docs/devtools/editor-plugins/) is recommended for working with GraphQL in vscode.
@@ -77,40 +128,3 @@ The extension [Apollo extension for VS Code](https://www.apollographql.com/docs/
 The client is documented [here](./client/.docs/README.md) and the server is documented [here](./server/.docs/README.md).
 
 _We use https://studio.apollographql.com/ for GraphQL schema documentation._
-
-## Set up .env ##
-
-You've copied `.env.sample` into `.env`, anually or using `npm run-script create-env`.
-
-Now you need to set the required environment variables from this table:
-
-| Key                                   | Description                                                  | Required |
-| ------------------------------------- | ------------------------------------------------------------ | -------- |
-| OAUTH_APP_ID                          | ID of the AD application registration.                       | **Yes**  |
-| OAUTH_APP_PASSWORD                    | Password/key of the AD application registration.             | **Yes**  |
-| AZURE_STORAGE_CONNECTION_STRING       | Connection string for the Azure Table Storage                | **Yes**  |
-| SESSION_SIGNING_KEY                   | Just a random string to secure the sessions.                 | **Yes**  |
-| BUNDLE_ANALYZER_MODE                  | See https://www.npmjs.com/package/webpack-bundle-analyzer. Default is server. | No       |
-| *OPEN_DELA*Y                          | Delay in seconds for opening Did in browser when running `watch`. | No       |
-| DEBUG                                 | To debug the Node backend. E.g. `app*` to see all logs from app. See https://www.npmjs.com/package/debug. | No       |
-| TESTS_AZURE_STORAGE_CONNECTION_STRING | See **Mocha tests**.                                         | No       |
-| NO_BROWSER                            | Set to `1` if you don't want to automatically open Did in the browser when running `watch` task. | No       |
-| OAUTH_SCOPES                          | Scopes for Microsoft Graph queries. See https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent. | No       |
-
-
-
-## Branching / Deploying
-
-The `/main` branch requires pull requests, and is set up with a CI/CD pipeline which deploys to [did365.puzzlepart.com](https://did365.puzzlepart.com)  
-The `/dev` branch also requires pull requests, and is set up with a CI/CD pipeline which deploys to [didapp.azurewebsites.net](https://didapp.azurewebsites.net)  
-`/feature/*`-prefixed branches may or may not be included in future releases.
-
-You are encouraged to branch with either of the following prefixes  
-*  **hotfix/**
-*  **bugfix/**
-*  **feature/**
-
-See also ["A successful Git branching model"](https://nvie.com/posts/a-successful-git-branching-model/)
-
-
-If you want to test with your web app, checkout [Creating your own app registration in the Azure Portal](https://github.com/Puzzlepart/did365/wiki/Creating-your-own-app-registration-in-the-Azure-Portal) in our wiki.
