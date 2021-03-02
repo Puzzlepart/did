@@ -11,7 +11,7 @@ import { ISummaryViewContext, SummaryViewContext } from './context'
 import { reducer } from './reducer'
 import styles from './SummaryView.module.scss'
 import $timeentries from './timeentries.gql'
-import { getScopes, getViewTypes, ISummaryViewScope } from './types'
+import { getScopes, ISummaryViewScope } from './types'
 import { createColumns, createRows } from './utils'
 
 /**
@@ -19,7 +19,6 @@ import { createColumns, createRows } from './utils'
  */
 export const SummaryView = (): JSX.Element => {
   const { t } = useTranslation()
-  const types = getViewTypes(t)
   const scopes = getScopes(t)
   const [state, dispatch] = useReducer(reducer, {
     timeentries: [],
@@ -27,7 +26,6 @@ export const SummaryView = (): JSX.Element => {
       from: new DateObject().add('-8week').startOfWeek,
       to: new DateObject().endOfWeek
     },
-    type: first(types),
     scope: first(scopes)
   })
   const { data, loading } = useQuery($timeentries, {
@@ -45,23 +43,22 @@ export const SummaryView = (): JSX.Element => {
   }, [data])
 
   const columns = useMemo(() => createColumns(state, t), [state, t])
-  const contextValue: ISummaryViewContext = useMemo(
+  const context = useMemo<ISummaryViewContext>(
     () => ({
       ...state,
       dispatch,
-      types,
       loading,
       t,
       scopes,
       columns,
       rows: createRows(state, columns, t)
     }),
-    [state, loading, columns, scopes, types, t]
+    [state, loading, columns, scopes, t]
   )
 
   return (
     <div className={styles.root}>
-      <SummaryViewContext.Provider value={contextValue}>
+      <SummaryViewContext.Provider value={context}>
         <Pivot
           onLinkClick={(item) =>
             dispatch({
@@ -69,18 +66,21 @@ export const SummaryView = (): JSX.Element => {
               payload: item.props as ISummaryViewScope
             })
           }>
-          {contextValue.scopes.map((scope) => (
-            <PivotItem key={scope.itemKey} {...scope}>
+          {context.scopes.map((scope) => (
+            <PivotItem
+              key={scope.itemKey}
+              {...scope}
+              headerButtonProps={{ disabled: true }}>
               <div className={styles.container}>
                 <List
-                  hidden={!loading && isEmpty(contextValue.rows)}
+                  hidden={!loading && isEmpty(context.rows)}
                   enableShimmer={loading}
                   columns={columns}
-                  items={contextValue.rows}
-                  commandBar={commandBar(contextValue)}
+                  items={context.rows}
+                  commandBar={commandBar(context)}
                 />
                 <UserMessage
-                  hidden={!isEmpty(contextValue.rows) || loading}
+                  hidden={!isEmpty(context.rows) || loading}
                   text={t('admin.noTimeEntriesText')}
                 />
               </div>

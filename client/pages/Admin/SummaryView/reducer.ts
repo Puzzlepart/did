@@ -1,4 +1,3 @@
-import { IContextualMenuItem } from 'office-ui-fabric-react'
 import {
   ISummaryViewRange,
   ISummaryViewScope,
@@ -7,7 +6,6 @@ import {
 
 export type SummaryViewAction =
   | { type: 'DATA_UPDATED'; payload: { timeentries: any[] } }
-  | { type: 'CHANGE_TYPE'; payload: IContextualMenuItem }
   | { type: 'CHANGE_SCOPE'; payload: ISummaryViewScope }
   | { type: 'SET_RANGE'; payload: ISummaryViewRange }
 
@@ -20,12 +18,6 @@ export const reducer = (
     case 'DATA_UPDATED':
       {
         if (action.payload) newState.timeentries = action.payload.timeentries
-      }
-      break
-
-    case 'CHANGE_TYPE':
-      {
-        newState.type = action.payload
       }
       break
 

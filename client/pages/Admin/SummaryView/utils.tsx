@@ -4,7 +4,7 @@ import { getValue, sortAlphabetically } from 'helpers'
 import { TFunction } from 'i18next'
 import { IColumn, IPivotItemProps } from 'office-ui-fabric-react'
 import React from 'react'
-import { first, unique } from 'underscore'
+import { unique } from 'underscore'
 import { generateColumn as col } from 'utils/generateColumn'
 import { LabelColumn } from './LabelColumn'
 import { ISummaryViewRow, ISummaryViewState } from './types'
@@ -69,6 +69,13 @@ export function createColumns(
   ]
 }
 
+
+// type: {
+//   key: 'resource',
+//   fieldName: 'resource.displayName',
+//   name: t('common.employeeLabel')
+// },
+
 /**
  * Create rows
  *
@@ -84,7 +91,7 @@ export const createRows = (
   const rowValues = sortAlphabetically(
     unique(
       state.timeentries.map((entry_) =>
-        getValue(entry_, state.type.fieldName, null)
+        getValue(entry_,  'resource.displayName', null)
       ),
       (r) => r
     )
@@ -92,7 +99,7 @@ export const createRows = (
   const _columns = [...columns].splice(1, columns.length - 2)
   const rows: ISummaryViewRow[] = rowValues.map((label) => {
     const entries = state.timeentries.filter(
-      (entry_) => getValue(entry_, state.type.fieldName, null) === label
+      (entry_) => getValue(entry_,  'resource.displayName', null) === label
     )
     return _columns.reduce(
       (object, col) => {
@@ -102,16 +109,7 @@ export const createRows = (
               getValue(entry_, state.scope.fieldName) === col.fieldName
           )
           .reduce((sum, { duration }) => sum + duration, 0)
-        switch (state.type.key) {
-          case 'project':
-            {
-              object.project = first(entries)?.project
-              object.customer = first(entries)?.customer
-            }
-            break
-          default:
-            object.label = label
-        }
+        object.label = label
         object[col.fieldName] = sum
         object.sum += sum
         return object

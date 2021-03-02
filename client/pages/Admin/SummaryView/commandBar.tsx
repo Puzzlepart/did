@@ -11,7 +11,6 @@ import {
 import React from 'react'
 import * as excelUtils from 'utils/exportExcel'
 import { ISummaryViewContext } from './context'
-import styles from './SummaryView.module.scss'
 
 const datePickerProps = (t: TFunction): IDatePickerProps => ({
   borderless: true,
@@ -35,26 +34,10 @@ export const commandBar = (context: ISummaryViewContext) => {
   return {
     items: [
       {
-        ...context.type,
-        key: 'VIEW_TYPE',
-        iconProps: { iconName: 'TimelineMatrixView' },
-        disabled: context.loading,
-        subMenuProps: {
-          items: context.types.map((type) => ({
-            ...type,
-            canCheck: true,
-            checked: context.type.key === type.key,
-            onClick: () =>
-              context.dispatch({ type: 'CHANGE_TYPE', payload: type })
-          }))
-        },
-        className: styles.viewTypeSelector
-      },
-      {
         key: 'DATE_RANGE',
         name: DateUtils.getTimespanString(context.range.from, context.range.to),
         iconProps: { iconName: 'DateTime' },
-        disabled: context.loading,
+        disabled: true,
         subMenuProps: {
           items: [
             {
@@ -106,7 +89,7 @@ export const commandBar = (context: ISummaryViewContext) => {
         key: 'EXPORT_TO_EXCEL',
         text: context.t('common.exportCurrentView'),
         iconProps: { iconName: 'ExcelDocument' },
-        disabled: context.loading,
+        disabled: true,
         onClick: () => {
           excelUtils.exportExcel(context.rows, {
             columns: context.columns,

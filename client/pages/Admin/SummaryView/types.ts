@@ -1,6 +1,6 @@
 import DateUtils, { DateObject } from 'DateUtils'
 import { TFunction } from 'i18next'
-import { IContextualMenuItem, IPivotItemProps } from 'office-ui-fabric-react'
+import { IPivotItemProps } from 'office-ui-fabric-react'
 import { ILabelColumnProps } from 'pages/Admin/SummaryView/LabelColumn/types'
 import { ReportsQuery } from 'types'
 
@@ -23,29 +23,6 @@ export const getScopes = (t: TFunction): ISummaryViewScope[] => [
     headerText: t('common.monthLabel'),
     itemIcon: 'Calendar',
     getColumnHeader: (index: number) => DateUtils.getMonthName(index)
-  }
-]
-
-/**
- * Get view types
- *
- * @param t - Translate function
- */
-export const getViewTypes = (t: TFunction): IContextualMenuItem[] => [
-  {
-    key: 'resource',
-    fieldName: 'resource.displayName',
-    name: t('common.employeeLabel')
-  },
-  {
-    key: 'project',
-    fieldName: 'project.name',
-    name: t('common.project')
-  },
-  {
-    key: 'customer',
-    fieldName: 'customer.name',
-    name: t('common.customer')
   }
 ]
 
@@ -81,11 +58,6 @@ export interface ISummaryViewState {
    * Selected range
    */
   range?: ISummaryViewRange
-
-  /**
-   * Selected view type
-   */
-  type: IContextualMenuItem
 
   /**
    * Variables for timeentries query
