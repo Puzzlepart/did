@@ -25,7 +25,7 @@ export function useReportsReducer(queries: IReportsQueryPresetItem[]) {
   const [state, dispatch] = useReducer(reducer, {
     loading: true,
     timeentries: [],
-    savedFilters: {},
+    savedFilters: null,
     groupBy: {
       fieldName: '.',
       emptyGroupName: t('common.all')

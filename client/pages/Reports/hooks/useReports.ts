@@ -8,6 +8,7 @@ import { IReportsParameters } from '../types'
 import { useQueryPresets } from './query-presets'
 import { useColumns } from './useColumns'
 import { useReportsQuery } from './useReportsQuery'
+import { useUpdateUserConfiguration } from './useUpdateUserConfiguration'
 
 /**
  * Hook for Reports
@@ -34,8 +35,12 @@ export function useReports() {
       history.push(`/reports/${state.preset?.key || ''}`)
     }
   }, [state.preset, history])
+
   const columns = useColumns({ defaults: { isResizable: true } })
   const filters = useMemo(() => initFilters(state.filter, t), [state.filter, t])
+
+  useUpdateUserConfiguration({ 'reports.filters': state.savedFilters })
+
   return {
     state,
     dispatch,

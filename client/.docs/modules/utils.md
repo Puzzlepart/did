@@ -145,4 +145,4 @@ Name | Type | Default value | Description |
 
 **Returns:** T
 
-Defined in: client/utils/tryParseJson.ts:8
+Defined in: [client/utils/tryParseJson.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/utils/tryParseJson.ts#L8)

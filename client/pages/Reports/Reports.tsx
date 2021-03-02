@@ -12,7 +12,7 @@ import React, { FunctionComponent, useMemo } from 'react'
 import { isEmpty } from 'underscore'
 import commandBar from './commandBar'
 import { ReportsContext } from './context'
-import { useReports, useUpdateUserConfiguration } from './hooks'
+import { useReports } from './hooks'
 import {
   CHANGE_QUERY,
   FILTERS_UPDATED,
@@ -26,8 +26,6 @@ import { SaveFilterForm } from './SaveFilterForm'
  */
 export const Reports: FunctionComponent = () => {
   const { state, dispatch, params, queries, columns, filters, t } = useReports()
-  useUpdateUserConfiguration({ 'reports.filters': state.savedFilters })
-
   const context = useMemo(() => ({ state, dispatch, columns, t }), [state])
 
   return (
