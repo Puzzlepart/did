@@ -50,7 +50,6 @@
     "@types/react-router-dom": "5.1.6",
     "@types/recharts": "1.8.10",
     "@types/redis": "2.8.28",
-    "@types/scriptjs": "0.0.2",
     "@types/set-value": "2.0.0",
     "@types/simple-oauth2": "4.1.0",
     "@types/string-similarity": "4.0.0",

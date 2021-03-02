@@ -29,7 +29,6 @@
 - [@types/react-router-dom](https://ghub.io/@types/react-router-dom): TypeScript definitions for React Router
 - [@types/recharts](https://ghub.io/@types/recharts): TypeScript definitions for Recharts
 - [@types/redis](https://ghub.io/@types/redis): TypeScript definitions for redis
-- [@types/scriptjs](https://ghub.io/@types/scriptjs): TypeScript definitions for scriptjs
 - [@types/set-value](https://ghub.io/@types/set-value): TypeScript definitions for set-value
 - [@types/simple-oauth2](https://ghub.io/@types/simple-oauth2): TypeScript definitions for simple-oauth2
 - [@types/string-similarity](https://ghub.io/@types/string-similarity): TypeScript definitions for string-similarity
@@ -127,6 +126,7 @@
 - [eslint-plugin-react-hooks](https://ghub.io/eslint-plugin-react-hooks): ESLint rules for React Hooks
 - [eslint-plugin-tsdoc](https://ghub.io/eslint-plugin-tsdoc): An ESLint plugin that validates TypeScript doc comments
 - [eslint-plugin-unicorn](https://ghub.io/eslint-plugin-unicorn): Various awesome ESLint rules
+- [husky](https://ghub.io/husky): Git hooks made easy
 - [localtunnel](https://ghub.io/localtunnel): Expose localhost to the world
 - [open](https://ghub.io/open): Open stuff like URLs, files, executables. Cross-platform.
 - [prettier](https://ghub.io/prettier): Prettier is an opinionated code formatter
