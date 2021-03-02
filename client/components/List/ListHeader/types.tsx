@@ -11,5 +11,5 @@ export interface IListHeaderProps {
   defaultRender: IRenderFunction<IDetailsHeaderProps>
   commandBar?: ICommandBarProps
   searchBox?: ISearchBoxProps
-  dispatch?: Dispatch<any>
+  dispatch?: Dispatch<unknown>
 }

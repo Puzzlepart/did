@@ -9,7 +9,7 @@ export type RenderListHeaderParams = {
   defaultRender: (props?: IDetailsHeaderProps) => JSX.Element
   props?: IListProps
   state?: IListState
-  dispatch?: Dispatch<any>
+  dispatch?: Dispatch<unknown>
 }
 
 export const onRenderListHeader = ({

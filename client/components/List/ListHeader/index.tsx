@@ -1,5 +1,6 @@
 import {
   CommandBar,
+  ICommandBarProps,
   SearchBox,
   Sticky,
   StickyPositionType
@@ -34,17 +35,21 @@ export const ListHeader: FunctionComponent<IListHeaderProps> = (
     }
   }, [props])
 
+  const commandBarProps: ICommandBarProps = {
+    ...(props.commandBar || {}),
+    items: [],
+    farItems: []
+  }
+
   return (
     <Sticky stickyPosition={StickyPositionType.Header} isScrollSynced={true}>
       <div className={styles.root}>
         <CommandBar
-          {...props.commandBar}
-          items={[searchBox, ...props.commandBar.items].filter(
-            (index) => index
-          )}
+          {...commandBarProps}
+          items={[searchBox, ...commandBarProps.items].filter((index) => index)}
           hidden={
-            props.commandBar.items.length === 0 &&
-            props.commandBar.farItems.length === 0
+            commandBarProps.items.length === 0 &&
+            commandBarProps.farItems.length === 0
           }
           styles={{ root: { margin: 0, padding: 0 } }}
         />

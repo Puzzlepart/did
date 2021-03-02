@@ -11,7 +11,6 @@ import {
 import React, { FunctionComponent, useEffect, useMemo, useReducer } from 'react'
 import FadeIn from 'react-fade-in'
 import { filter, first } from 'underscore'
-import { withDefaultProps } from 'with-default-props'
 import { ScrollablePaneWrapper } from '../ScrollablePaneWrapper'
 import { generateListGroups } from './generateListGroups'
 import styles from './List.module.scss'
@@ -20,7 +19,25 @@ import { onRenderListHeader } from './onRenderListHeader'
 import reducer from './reducer'
 import { IListProps } from './types'
 
-const _List: FunctionComponent<IListProps> = (props: IListProps) => {
+/**
+ * List component using `ShimmeredDetailsList` from `office-ui-fabric-react`.
+ * 
+ * Used by:
+ * 
+ * * EventList
+ * * Admin/ApiTokens
+ * * Admin/Roles
+ * * Admin/SummaryView
+ * * Admin/Users/AddMultiplePanel
+ * * Admin/Users
+ * * Customers/CustomerList
+ * * Projects/ProjectList
+ * * Reports
+ * * Timesheet/SummaryView
+ * 
+ * @category Function Component
+ */
+export const List: FunctionComponent<IListProps> = (props: IListProps) => {
   const [state, dispatch] = useReducer(reducer, {
     origItems: props.items || [],
     items: props.items || [],
@@ -53,7 +70,7 @@ const _List: FunctionComponent<IListProps> = (props: IListProps) => {
   let items = [...state.items]
   if (props.groups) [groups, items] = generateListGroups(items, props.groups)
 
-  const [delay, transitionDuration] = props.fadeIn
+  const [delay, transitionDuration] = props.fadeIn || [0, 0]
 
   return (
     <div className={styles.root} hidden={props.hidden}>
@@ -99,15 +116,3 @@ const _List: FunctionComponent<IListProps> = (props: IListProps) => {
     </div>
   )
 }
-
-/**
- * @category Function Component
- */
-export const List = withDefaultProps(_List, {
-  fadeIn: [0, 0],
-  items: [],
-  commandBar: {
-    items: [],
-    farItems: []
-  }
-} as IListProps)
