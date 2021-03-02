@@ -17,7 +17,7 @@ import $updateUserConfiguration from './update-user-configuration.gql'
  * @param config - Configuration
  * @param update - Update
  *
- * @category Reports Hooks
+ * @category React Hook
  */
 export function useUpdateUserConfiguration<T = any>(config: T, update = true) {
   const [updateUserConfiguration] = useMutation($updateUserConfiguration)

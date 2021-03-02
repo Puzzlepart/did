@@ -9,9 +9,9 @@ import notificationsQuery from './notifications.gql'
 /**
  * Notificatins query hook
  *
- * @category React Hook
- *
  * @param user - Context user
+ *
+ * @category React Hook
  */
 export function useNotificationsQuery(
   user: ContextUser,

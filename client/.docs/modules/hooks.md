@@ -10,18 +10,12 @@ Reusable React Hooks
 
 - [UsePermissionsOptions](hooks.md#usepermissionsoptions)
 
-### Other Functions
-
-- [usePermissions](hooks.md#usepermissions)
-
 ### React Hook Functions
 
 - [useBrowserStorage](hooks.md#usebrowserstorage)
 - [useExcelExport](hooks.md#useexcelexport)
 - [useNotificationsQuery](hooks.md#usenotificationsquery)
-
-### Reports Hooks Functions
-
+- [usePermissions](hooks.md#usepermissions)
 - [useUpdateUserConfiguration](hooks.md#useupdateuserconfiguration)
 
 ## Type aliases
@@ -36,36 +30,7 @@ Name | Type |
 :------ | :------ |
 `permissionIds`? | *string*[] |
 
-Defined in: [client/hooks/user/usePermissions.ts:7](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/usePermissions.ts#L7)
-
-## Other Functions
-
-### usePermissions
-
-▸ **usePermissions**(`__namedParameters?`: [*UsePermissionsOptions*](hooks.md#usepermissionsoptions)): *object*
-
-Permissions hook
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`__namedParameters` | [*UsePermissionsOptions*](hooks.md#usepermissionsoptions) |
-
-**Returns:** *object*
-
-Name | Type |
-:------ | :------ |
-`hasPermission` | (`permission`: [*PERMISSION*](../enums/configuration.permission.md)) => *boolean* |
-`permissions` | IPermission[] |
-
-Permissions available based on specified permissionIds
-and a function hasPermission that checks if the currently logged
-on user has the specified permission.
-
-Defined in: [client/hooks/user/usePermissions.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/usePermissions.ts#L18)
-
-___
+Defined in: [client/hooks/user/usePermissions.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/usePermissions.ts#L8)
 
 ## React Hook Functions
 
@@ -73,7 +38,11 @@ ___
 
 ▸ **useBrowserStorage**<T\>(`__namedParameters`: *Object*): [T, (`value`: *any*) => *void*, () => *void*]
 
-Browser storage hook
+Browser storage hook supporting arrays
+
+**`remarks`** Supports arrays for now, but can
+support objects, string etc in the future
+if needed.
 
 #### Type parameters:
 
@@ -89,7 +58,7 @@ Name | Type |
 
 **Returns:** [T, (`value`: *any*) => *void*, () => *void*]
 
-Defined in: [client/hooks/browserStorage/useBrowserStorage.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/hooks/browserStorage/useBrowserStorage.ts#L10)
+Defined in: [client/hooks/browserStorage/useBrowserStorage.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/hooks/browserStorage/useBrowserStorage.ts#L14)
 
 ___
 
@@ -139,7 +108,32 @@ Defined in: [client/hooks/notifications/useNotificationsQuery.ts:16](https://git
 
 ___
 
-## Reports Hooks Functions
+### usePermissions
+
+▸ **usePermissions**(`__namedParameters?`: [*UsePermissionsOptions*](hooks.md#usepermissionsoptions)): *object*
+
+Permissions hook
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`__namedParameters` | [*UsePermissionsOptions*](hooks.md#usepermissionsoptions) |
+
+**Returns:** *object*
+
+Name | Type |
+:------ | :------ |
+`hasPermission` | (`permission`: [*PERMISSION*](../enums/configuration.permission.md)) => *boolean* |
+`permissions` | IPermission[] |
+
+Permissions available based on specified permissionIds
+and a function hasPermission that checks if the currently logged
+on user has the specified permission.
+
+Defined in: [client/hooks/user/usePermissions.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/usePermissions.ts#L21)
+
+___
 
 ### useUpdateUserConfiguration
 

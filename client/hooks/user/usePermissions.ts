@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { AppContext } from 'AppContext'
 import getPermissions, { PERMISSION } from 'config/security/permissions'
 import { useContext } from 'react'
@@ -14,6 +15,8 @@ export type UsePermissionsOptions = { permissionIds?: string[] }
  * @returns Permissions available based on specified permissionIds
  * and a function hasPermission that checks if the currently logged
  * on user has the specified permission.
+ *
+ * @category React Hook
  */
 export function usePermissions({ permissionIds }: UsePermissionsOptions = {}) {
   const { t } = useTranslation()
