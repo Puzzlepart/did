@@ -45,7 +45,7 @@ export class User {
   @Field(() => Subscription)
   subscription?: Subscription
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   configuration?: any
 
   public create?(user: User): User {

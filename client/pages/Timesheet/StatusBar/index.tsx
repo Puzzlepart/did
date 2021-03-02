@@ -22,17 +22,15 @@ export const StatusBar: FunctionComponent = () => {
   return (
     <FadeIn>
       <div className={styles.root}>
-        {loading
-          ? (
-            <Progress {...loading} />
-          )
-          : (
-            <div className={styles.container}>
-              {messages.map((message, key) => (
-                <UserMessage key={key} {...defaultMessageProps} {...message} />
-              ))}
-            </div>
-          )}
+        {loading ? (
+          <Progress {...loading} />
+        ) : (
+          <div className={styles.container}>
+            {messages.map((message, key) => (
+              <UserMessage key={key} {...defaultMessageProps} {...message} />
+            ))}
+          </div>
+        )}
       </div>
     </FadeIn>
   )

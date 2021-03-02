@@ -17,6 +17,7 @@ Reusable utility functions
 - [loadScripts](utils.md#loadscripts)
 - [searchObject](utils.md#searchobject)
 - [sleep](utils.md#sleep)
+- [tryParseJson](utils.md#tryparsejson)
 
 ## Functions
 
@@ -119,3 +120,29 @@ Name | Type | Description |
 **Returns:** *Promise*<unknown\>
 
 Defined in: [client/utils/sleep.ts:6](https://github.com/Puzzlepart/did/blob/dev/client/utils/sleep.ts#L6)
+
+___
+
+### tryParseJson
+
+▸ **tryParseJson**<T\>(`string_`: *string*, `fallbackValue?`: T): T
+
+Attempts to parse JSON string, and falls back to the specified fallbackValue if
+the parse fails.
+
+#### Type parameters:
+
+Name | Default |
+:------ | :------ |
+`T` | *any* |
+
+#### Parameters:
+
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`string_` | *string* | - | String to parse   |
+`fallbackValue` | T | null | Fallback value    |
+
+**Returns:** T
+
+Defined in: client/utils/tryParseJson.ts:8

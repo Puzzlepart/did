@@ -130,7 +130,7 @@ export class UserService extends MongoDocumentService<User> {
           set(object, key, _configuration[key])
           return object
         },
-        user.configuration
+        user.configuration || {}
       )
       await this.collection.updateOne(filter, {
         $set: { configuration: mergedConfiguration }

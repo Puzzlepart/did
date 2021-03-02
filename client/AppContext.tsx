@@ -4,6 +4,7 @@ import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from 'i18n'
 import { createContext } from 'react'
 import { Role, Subscription, User } from 'types'
 import { contains } from 'underscore'
+import { tryParseJson } from 'utils'
 import { useNotificationsQuery } from './hooks'
 
 export class ContextUser {
@@ -28,7 +29,7 @@ export class ContextUser {
       this.mail = _user.mail
       this.role = _user.role as Role
       this.preferredLanguage = _user.preferredLanguage
-      this.configuration = JSON.parse(_user.configuration)
+      this.configuration = tryParseJson(_user.configuration, {})
     }
   }
 
