@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
-import { IDropdownOption } from 'office-ui-fabric-react'
-import { AutocompleteItemIcons } from '../types'
+import {IDropdownOption} from 'office-ui-fabric-react'
+import {AutocompleteItemIcons} from '../types'
 
 /**
  * @category Autocomplete

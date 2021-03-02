@@ -1,13 +1,13 @@
-import { AuthenticationError } from 'apollo-server-express'
+import {AuthenticationError} from 'apollo-server-express'
 import createDebug from 'debug'
 import get from 'get-value'
-import { verify } from 'jsonwebtoken'
-import { Db as MongoDatabase, MongoClient } from 'mongodb'
+import {verify} from 'jsonwebtoken'
+import {Db as MongoDatabase, MongoClient} from 'mongodb'
 import 'reflect-metadata'
-import { Container, ContainerInstance } from 'typedi'
-import { DateObject } from '../../shared/utils/date'
-import { environment } from '../utils'
-import { Subscription } from './resolvers/types'
+import {Container, ContainerInstance} from 'typedi'
+import {DateObject} from '../../shared/utils/date'
+import {environment} from '../utils'
+import {Subscription} from './resolvers/types'
 const debug = createDebug('graphql/context')
 
 /**
@@ -83,7 +83,7 @@ export const createContext = async (
     context.subscription = get(request, 'user.subscription')
     const apiKey = get(request, 'api_key')
     if (apiKey) {
-      const { permissions, subscription } = await handleTokenAuthentication(
+      const {permissions, subscription} = await handleTokenAuthentication(
         apiKey,
         database
       )
@@ -98,8 +98,8 @@ export const createContext = async (
     context.db = context.mongoClient.db(context.subscription.db)
     context.requestId = generateUniqueRequestId()
     context.container = Container.of(context.requestId)
-    context.container.set({ id: 'CONTEXT', transient: true, value: context })
-    context.container.set({ id: 'REQUEST', transient: true, value: request })
+    context.container.set({id: 'CONTEXT', transient: true, value: context})
+    context.container.set({id: 'REQUEST', transient: true, value: request})
     debug(`Creating context for request ${context.requestId}`)
     return context
   } catch (error) {
@@ -117,7 +117,7 @@ const handleTokenAuthentication = async (
   apiKey: string,
   database: MongoDatabase
 ) => {
-  const { expires, subscriptionId: _id } = verify(
+  const {expires, subscriptionId: _id} = verify(
     apiKey,
     environment('API_TOKEN_SECRET')
   ) as any
@@ -138,5 +138,5 @@ const handleTokenAuthentication = async (
     throw new AuthenticationError(
       'Failed to authenticate with the specified token.'
     )
-  return { subscription, permissions: token.permissions }
+  return {subscription, permissions: token.permissions}
 }

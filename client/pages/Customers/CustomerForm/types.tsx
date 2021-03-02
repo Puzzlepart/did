@@ -1,7 +1,7 @@
-import { getIcons } from 'common/icons'
-import { IPanelProps } from 'office-ui-fabric-react'
-import { Customer, IFormValidation } from 'types'
-import { first } from 'underscore'
+import {getIcons} from 'common/icons'
+import {IPanelProps} from 'office-ui-fabric-react'
+import {Customer, IFormValidation} from 'types'
+import {first} from 'underscore'
 
 export class CustomerModel {
   public key: string

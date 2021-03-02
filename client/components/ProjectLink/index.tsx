@@ -1,9 +1,9 @@
 /* eslint-disable tsdoc/syntax */
-import { Icon } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
-import { Link } from 'react-router-dom'
+import {Icon} from 'office-ui-fabric-react'
+import React, {FunctionComponent} from 'react'
+import {Link} from 'react-router-dom'
 import styles from './ProjectLink.module.scss'
-import { IProjectLinkProps } from './types'
+import {IProjectLinkProps} from './types'
 
 /**
  * @category Function Component

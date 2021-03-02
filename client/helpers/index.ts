@@ -21,7 +21,7 @@ export function getValue<T = any>(
   exp: string,
   defaultValue?: T
 ): T {
-  return get(object, exp, defaultValue && { default: defaultValue })
+  return get(object, exp, defaultValue && {default: defaultValue})
 }
 
 /**

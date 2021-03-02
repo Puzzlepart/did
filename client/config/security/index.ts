@@ -6,4 +6,4 @@
  *
  * @module Configuration
  */
-export { default as permissions, PERMISSION } from './permissions'
+export {default as permissions, PERMISSION} from './permissions'

@@ -2,22 +2,22 @@ import {
   ApolloServerPluginSchemaReporting,
   ApolloServerPluginUsageReporting
 } from 'apollo-server-core'
-import { ApolloServer } from 'apollo-server-express'
+import {ApolloServer} from 'apollo-server-express'
 import {
   ApolloServerPlugin,
   GraphQLRequestContext
 } from 'apollo-server-plugin-base'
 import createDebug from 'debug'
 import express from 'express'
-import { GraphQLDateTime } from 'graphql-iso-date'
-import { MongoClient } from 'mongodb'
+import {GraphQLDateTime} from 'graphql-iso-date'
+import {MongoClient} from 'mongodb'
 import 'reflect-metadata'
-import { buildSchema, ResolverData } from 'type-graphql'
-import Container, { ContainerInstance } from 'typedi'
+import {buildSchema, ResolverData} from 'type-graphql'
+import Container, {ContainerInstance} from 'typedi'
 import UAParser from 'ua-parser-js'
-import { find, isEmpty } from 'underscore'
-import { authChecker } from './authChecker'
-import { Context, createContext } from './context'
+import {find, isEmpty} from 'underscore'
+import {authChecker} from './authChecker'
+import {Context, createContext} from './context'
 import {
   ApiTokenResolver,
   CustomerResolver,
@@ -58,12 +58,12 @@ export const generateGraphQLSchema = async () => {
       RoleResolver,
       SubscriptionResolver
     ],
-    container: ({ context }: ResolverData<Context>) => context.container,
+    container: ({context}: ResolverData<Context>) => context.container,
     emitSchemaFile: true,
     validate: false,
     authChecker,
     dateScalarMode: 'isoDate',
-    scalarsMap: [{ type: Date, scalar: GraphQLDateTime }]
+    scalarsMap: [{type: Date, scalar: GraphQLDateTime}]
   })
   return schema
 }
@@ -86,28 +86,26 @@ export const generateGraphQLSchema = async () => {
  *
  * @param context - Context
  */
-export function generateClientInfo({
-  request
-}: GraphQLRequestContext<Context>) {
+export function generateClientInfo({request}: GraphQLRequestContext<Context>) {
   const userAgent = request.http.headers.get('user-agent') || ''
   if (isEmpty(userAgent)) return null
   if (userAgent.indexOf('PostmanRuntime') === 0) {
     const [, clientVersion] = userAgent.split('/')
-    return { clientName: 'Postman Runtime', clientVersion }
+    return {clientName: 'Postman Runtime', clientVersion}
   }
   const parts = userAgent.split(' ')
   if (userAgent.includes('microsoft-flow')) {
     const part = find(parts, (p) => p.includes('microsoft-flow'))
     const [, clientVersion] = part.split('/')
-    return { clientName: 'Microsoft Flow', clientVersion }
+    return {clientName: 'Microsoft Flow', clientVersion}
   }
   if (userAgent.includes('azure-logic-apps')) {
     const part = find(parts, (p) => p.includes('azure-logic-apps'))
     const [, clientVersion] = part.split('/')
-    return { clientName: 'Azure Logic Apps', clientVersion }
+    return {clientName: 'Azure Logic Apps', clientVersion}
   }
   const browser = new UAParser(userAgent).getBrowser()
-  return { clientName: browser.name, clientVersion: browser.version }
+  return {clientName: browser.name, clientVersion: browser.version}
 }
 
 /**
@@ -128,11 +126,11 @@ export const setupGraphQL = async (
     const server = new ApolloServer({
       schema,
       rootValue: global,
-      context: ({ req }) => createContext(req, client),
+      context: ({req}) => createContext(req, client),
       plugins: [
         ApolloServerPluginUsageReporting({
           rewriteError: (error) => error,
-          sendVariableValues: { all: true },
+          sendVariableValues: {all: true},
           generateClientInfo
         }),
         ApolloServerPluginSchemaReporting({
@@ -156,7 +154,7 @@ export const setupGraphQL = async (
         }
       ] as ApolloServerPlugin[]
     })
-    server.applyMiddleware({ app, path: '/graphql' })
+    server.applyMiddleware({app, path: '/graphql'})
   } catch (error) {
     debug(error)
   }

@@ -1,9 +1,9 @@
-import { EntityLabel } from 'components/EntityLabel'
-import { TFunction } from 'i18next'
-import { DefaultButton } from 'office-ui-fabric-react'
+import {EntityLabel} from 'components/EntityLabel'
+import {TFunction} from 'i18next'
+import {DefaultButton} from 'office-ui-fabric-react'
 import React from 'react'
-import { LabelObject } from 'types'
-import { generateColumn as col } from 'utils/generateColumn'
+import {LabelObject} from 'types'
+import {generateColumn as col} from 'utils/generateColumn'
 
 /**
  * Returns the columns for the Label list
@@ -20,14 +20,14 @@ export const LabelColumns = (
   col(
     'name',
     t('common.nameFieldLabel'),
-    { maxWidth: 180 },
+    {maxWidth: 180},
     (label: LabelObject) => <EntityLabel label={label} />
   ),
   col('description', t('common.descriptionFieldLabel')),
-  col(null, null, { minWidth: 180 }, (label: LabelObject) => (
+  col(null, null, {minWidth: 180}, (label: LabelObject) => (
     <>
       <DefaultButton
-        styles={{ root: { marginRight: 4 } }}
+        styles={{root: {marginRight: 4}}}
         text={t('common.editLabel')}
         onClick={() => onEdit(label)}
       />

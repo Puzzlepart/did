@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
-import { IPanelProps } from 'office-ui-fabric-react'
-import { BaseFilter, IFilter } from './Filters'
+import {IPanelProps} from 'office-ui-fabric-react'
+import {BaseFilter, IFilter} from './Filters'
 
 /**
  * @category FilterPanel

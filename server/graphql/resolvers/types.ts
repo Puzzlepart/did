@@ -1,14 +1,14 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
-import { Field, ObjectType } from 'type-graphql'
+import {Field, ObjectType} from 'type-graphql'
 
 /**
  * Ignore from typedoc documentation
  *
  * @ignore
  */
-@ObjectType({ description: 'A type that describes a Error' })
+@ObjectType({description: 'A type that describes a Error'})
 export class Error {
   @Field()
   name: string
@@ -28,12 +28,12 @@ export class Error {
  *
  * @ignore
  */
-@ObjectType({ description: 'A type that describes a BaseResult' })
+@ObjectType({description: 'A type that describes a BaseResult'})
 export class BaseResult {
-  @Field({ nullable: true, defaultValue: false })
+  @Field({nullable: true, defaultValue: false})
   success: boolean
 
-  @Field(() => Error, { nullable: true })
+  @Field(() => Error, {nullable: true})
   error?: Error
 }
 
@@ -42,7 +42,7 @@ export class BaseResult {
  *
  * @ignore
  */
-@ObjectType({ description: 'A type that describes a EventError' })
+@ObjectType({description: 'A type that describes a EventError'})
 export class EventError {
   @Field()
   code: string

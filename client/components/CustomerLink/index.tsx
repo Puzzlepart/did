@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
-import React, { FunctionComponent } from 'react'
-import { Link } from 'react-router-dom'
-import { ICustomerLinkProps } from './types'
+import React, {FunctionComponent} from 'react'
+import {Link} from 'react-router-dom'
+import {ICustomerLinkProps} from './types'
 
 /**
  * @category Function Component

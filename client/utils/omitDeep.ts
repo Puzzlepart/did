@@ -11,7 +11,7 @@ export default function omitDeep(value: any, key: string) {
   else if (typeof value === 'object' && value !== null) {
     return Object.keys(value).reduce((newObject, k) => {
       if (k === key) return newObject
-      return Object.assign({ [k]: omitDeep(value[k], key) }, newObject)
+      return Object.assign({[k]: omitDeep(value[k], key)}, newObject)
     }, {})
   }
   return value

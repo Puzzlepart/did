@@ -2,13 +2,13 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import 'reflect-metadata'
-import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
-import { Service } from 'typedi'
-import { SubscriptionService } from '../../../services/mongo'
-import { IAuthOptions } from '../../authChecker'
-import { Context } from '../../context'
-import { BaseResult } from '../types'
-import { Subscription, SubscriptionSettingsInput } from './types'
+import {Arg, Authorized, Ctx, Mutation, Query, Resolver} from 'type-graphql'
+import {Service} from 'typedi'
+import {SubscriptionService} from '../../../services/mongo'
+import {IAuthOptions} from '../../authChecker'
+import {Context} from '../../context'
+import {BaseResult} from '../types'
+import {Subscription, SubscriptionSettingsInput} from './types'
 
 /**
  * Resolver for `Subscription`.
@@ -33,7 +33,7 @@ export class SubscriptionResolver {
   /**
    * Get current subscription
    */
-  @Authorized({ userContext: true })
+  @Authorized({userContext: true})
   @Query(() => Subscription, {
     description: 'Get current subscription',
     nullable: true
@@ -47,14 +47,14 @@ export class SubscriptionResolver {
    *
    * @param settings - Settings
    */
-  @Authorized<IAuthOptions>({ permission: '67ba6efc' })
-  @Mutation(() => BaseResult, { description: 'Update subscription' })
+  @Authorized<IAuthOptions>({permission: '67ba6efc'})
+  @Mutation(() => BaseResult, {description: 'Update subscription'})
   async updateSubscription(
     @Arg('settings', () => SubscriptionSettingsInput)
     settings: SubscriptionSettingsInput
   ): Promise<BaseResult> {
     await this._subscription.updateSubscription(settings)
-    return { success: true }
+    return {success: true}
   }
 }
 

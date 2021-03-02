@@ -1,17 +1,17 @@
-import { ProjectLink, ProjectTooltip, UserMessage } from 'components'
-import { TFunction } from 'i18next'
-import { Icon, MessageBarType } from 'office-ui-fabric-react'
-import { CLEAR_MANUAL_MATCH } from 'pages/Timesheet/reducer/actions'
-import React, { useContext } from 'react'
-import { isMobile } from 'react-device-detect'
-import { useTranslation } from 'react-i18next'
-import { isEmpty } from 'underscore'
-import { TimesheetContext } from '../../context'
-import { ClearManualMatchButton } from './ClearManualMatchButton'
-import { IgnoreEventButton } from './IgnoreEventButton'
-import { MatchEventPanel } from './MatchEventPanel'
+import {ProjectLink, ProjectTooltip, UserMessage} from 'components'
+import {TFunction} from 'i18next'
+import {Icon, MessageBarType} from 'office-ui-fabric-react'
+import {CLEAR_MANUAL_MATCH} from 'pages/Timesheet/reducer/actions'
+import React, {useContext} from 'react'
+import {isMobile} from 'react-device-detect'
+import {useTranslation} from 'react-i18next'
+import {isEmpty} from 'underscore'
+import {TimesheetContext} from '../../context'
+import {ClearManualMatchButton} from './ClearManualMatchButton'
+import {IgnoreEventButton} from './IgnoreEventButton'
+import {MatchEventPanel} from './MatchEventPanel'
 import styles from './ProjectColumn.module.scss'
-import { IProjectColumnProps } from './types'
+import {IProjectColumnProps} from './types'
 
 /**
  * Get error message
@@ -28,9 +28,9 @@ function getErrorMessage(code: string, t: TFunction): [string, MessageBarType] {
   }
 }
 
-export const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
-  const { t } = useTranslation()
-  const { dispatch, selectedPeriod } = useContext(TimesheetContext)
+export const ProjectColumn = ({event}: IProjectColumnProps): JSX.Element => {
+  const {t} = useTranslation()
+  const {dispatch, selectedPeriod} = useContext(TimesheetContext)
   let className = styles.root
   if (isMobile) className += ` ${styles.mobile}`
   if (event.isSystemIgnored) {
@@ -42,7 +42,7 @@ export const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
       return (
         <div className={className}>
           <UserMessage
-            containerStyle={{ marginTop: 10 }}
+            containerStyle={{marginTop: 10}}
             isMultiline={false}
             type={type}
             text={text}
@@ -53,7 +53,7 @@ export const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
     return (
       <div className={className}>
         <UserMessage
-          containerStyle={{ marginTop: 10 }}
+          containerStyle={{marginTop: 10}}
           isMultiline={true}
           type={MessageBarType.warning}
           iconName='TagUnknown'
@@ -84,7 +84,7 @@ export const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
           )}
           {event.manualMatch && !selectedPeriod.isConfirmed && (
             <ClearManualMatchButton
-              onClick={() => dispatch(CLEAR_MANUAL_MATCH({ id: event.id }))}
+              onClick={() => dispatch(CLEAR_MANUAL_MATCH({id: event.id}))}
               className={styles.clearButton}
             />
           )}

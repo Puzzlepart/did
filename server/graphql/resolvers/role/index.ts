@@ -2,12 +2,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import 'reflect-metadata'
-import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
-import { Service } from 'typedi'
-import { RoleService } from '../../../services/mongo'
-import { IAuthOptions } from '../../authChecker'
-import { BaseResult } from '../types'
-import { Role, RoleInput } from './types'
+import {Arg, Authorized, Mutation, Query, Resolver} from 'type-graphql'
+import {Service} from 'typedi'
+import {RoleService} from '../../../services/mongo'
+import {IAuthOptions} from '../../authChecker'
+import {BaseResult} from '../types'
+import {Role, RoleInput} from './types'
 
 /**
  * Resolver for `Role`.
@@ -32,8 +32,8 @@ export class RoleResolver {
   /**
    * Get roles
    */
-  @Authorized<IAuthOptions>({ userContext: true })
-  @Query(() => [Role], { description: 'Get roles' })
+  @Authorized<IAuthOptions>({userContext: true})
+  @Query(() => [Role], {description: 'Get roles'})
   roles() {
     return this._role.getRoles()
   }
@@ -44,14 +44,14 @@ export class RoleResolver {
    * @param role - Role
    * @param update - Update
    */
-  @Authorized<IAuthOptions>({ permission: 'cd52a735' })
-  @Mutation(() => BaseResult, { description: 'Add or update role' })
+  @Authorized<IAuthOptions>({permission: 'cd52a735'})
+  @Mutation(() => BaseResult, {description: 'Add or update role'})
   async addOrUpdateRole(
     @Arg('role', () => RoleInput) role: RoleInput,
-    @Arg('update', { nullable: true }) update: boolean
+    @Arg('update', {nullable: true}) update: boolean
   ) {
     await (update ? this._role.updateRole(role) : this._role.addRole(role))
-    return { success: true, error: null }
+    return {success: true, error: null}
   }
 
   /**
@@ -59,11 +59,11 @@ export class RoleResolver {
    *
    * @param name - Name
    */
-  @Authorized<IAuthOptions>({ permission: 'cd52a735' })
-  @Mutation(() => BaseResult, { description: 'Delete role' })
+  @Authorized<IAuthOptions>({permission: 'cd52a735'})
+  @Mutation(() => BaseResult, {description: 'Delete role'})
   async deleteRole(@Arg('name', () => String) name: string) {
     await this._role.deleteRole(name)
-    return { success: true, error: null }
+    return {success: true, error: null}
   }
 }
 

@@ -1,8 +1,8 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
-import { Field, ID, ObjectType } from 'type-graphql'
-import { BaseResult } from '../types'
+import {Field, ID, ObjectType} from 'type-graphql'
+import {BaseResult} from '../types'
 
 /**
  * @category ObjectType
@@ -32,6 +32,6 @@ export class OutlookCategory {
   description: 'A type that describes a CreateOutlookCategoryResult'
 })
 export class CreateOutlookCategoryResult extends BaseResult {
-  @Field({ nullable: true })
+  @Field({nullable: true})
   data: OutlookCategory
 }

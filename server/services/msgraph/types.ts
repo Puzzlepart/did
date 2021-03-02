@@ -1,5 +1,5 @@
-import { $dayjs, default as DateUtils } from '../../../shared/utils/date'
-import { stripHtmlString } from '../../utils'
+import {$dayjs, default as DateUtils} from '../../../shared/utils/date'
+import {stripHtmlString} from '../../utils'
 
 export interface MSGraphEventOptions {
   /**
@@ -32,7 +32,7 @@ export default class MSGraphEvent {
    * @param event - Event data
    * @param options - Options
    */
-  constructor(event: any, { returnIsoDates = true }: MSGraphEventOptions) {
+  constructor(event: any, {returnIsoDates = true}: MSGraphEventOptions) {
     this.id = event.id
     this.title = event.subject
     this.body = stripHtmlString(event.body.content)

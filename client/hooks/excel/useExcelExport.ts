@@ -1,9 +1,9 @@
 /* eslint-disable tsdoc/syntax */
-import { TFunction } from 'i18next'
-import { format, IColumn } from 'office-ui-fabric-react'
-import { useTranslation } from 'react-i18next'
-import { isArray } from 'underscore'
-import { exportExcel } from 'utils/exportExcel'
+import {TFunction} from 'i18next'
+import {format, IColumn} from 'office-ui-fabric-react'
+import {useTranslation} from 'react-i18next'
+import {isArray} from 'underscore'
+import {exportExcel} from 'utils/exportExcel'
 
 interface IUseExcelExportOptions {
   items: any[]
@@ -23,7 +23,7 @@ export function useExcelExport({
   columns,
   callback
 }: IUseExcelExportOptions) {
-  const { t } = useTranslation()
+  const {t} = useTranslation()
 
   const onExport = async () => {
     const blob = await exportExcel(items, {
@@ -35,5 +35,5 @@ export function useExcelExport({
     }
   }
 
-  return { onExport }
+  return {onExport}
 }

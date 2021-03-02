@@ -1,12 +1,12 @@
-import { AppContext } from 'AppContext'
+import {AppContext} from 'AppContext'
 import {
   IContextualMenuItem,
   IContextualMenuProps,
   PrimaryButton
 } from 'office-ui-fabric-react'
-import React, { useContext } from 'react'
-import { first, omit } from 'underscore'
-import { TimesheetContext } from '../context'
+import React, {useContext} from 'react'
+import {first, omit} from 'underscore'
+import {TimesheetContext} from '../context'
 import styles from './ActionBar.module.scss'
 
 /**
@@ -20,8 +20,8 @@ const submitItemBaseProps = (
   iconName: string
 ): Partial<IContextualMenuItem> => ({
   key,
-  styles: { root: { height: 44, marginLeft: 4 } },
-  iconProps: { iconName },
+  styles: {root: {height: 44, marginLeft: 4}},
+  iconProps: {iconName},
   canCheck: true
 })
 
@@ -29,7 +29,7 @@ const submitItemBaseProps = (
  * Use submit commands
  */
 export function useSubmitCommands() {
-  const { subscription } = useContext(AppContext)
+  const {subscription} = useContext(AppContext)
   const context = useContext(TimesheetContext)
   return {
     key: 'SUBMIT_COMMANDS',
@@ -42,7 +42,7 @@ export function useSubmitCommands() {
         isConfirmed,
         isPast
       } = context.selectedPeriod
-      const cmd: { [key: string]: IContextualMenuItem } = {
+      const cmd: {[key: string]: IContextualMenuItem} = {
         FORECAST_PERIOD: subscription.settings?.forecast?.enabled && {
           ...(submitItemBaseProps(
             'FORECAST_PERIOD',
@@ -111,7 +111,7 @@ export function useSubmitCommands() {
             if (isForecasted) commands.push(cmd.UNFORECAST_PERIOD)
             else commands.push(cmd.FORECAST_PERIOD)
           }
-          commands.push({ ...cmd.CONFIRM_PERIOD, disabled: true })
+          commands.push({...cmd.CONFIRM_PERIOD, disabled: true})
         }
       }
 

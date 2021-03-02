@@ -1,4 +1,4 @@
-import { Customer, Project } from 'types'
+import {Customer, Project} from 'types'
 
 export interface ILabelColumnProps {
   label: string

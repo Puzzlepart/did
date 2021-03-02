@@ -1,8 +1,8 @@
-import { createReducer, current } from '@reduxjs/toolkit'
+import {createReducer, current} from '@reduxjs/toolkit'
 import get from 'get-value'
-import { getValue } from 'helpers'
-import { filter, find, omit } from 'underscore'
-import { IReportsState } from '../types'
+import {getValue} from 'helpers'
+import {filter, find, omit} from 'underscore'
+import {IReportsState} from '../types'
 import {
   ADD_FILTER,
   CHANGE_QUERY,
@@ -15,12 +15,12 @@ import {
   SET_GROUP_BY,
   TOGGLE_FILTER_PANEL
 } from './actions'
-import { IReportsReducerParameters } from './types'
+import {IReportsReducerParameters} from './types'
 
 /**
  * Creating reducer for Reports using reduxjs/toolkit
  */
-export default ({ app, url, queries }: IReportsReducerParameters) =>
+export default ({app, url, queries}: IReportsReducerParameters) =>
   createReducer<IReportsState>(
     {},
     {
@@ -33,17 +33,14 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
 
       [DATA_UPDATED.type]: (
         state,
-        { payload }: ReturnType<typeof DATA_UPDATED>
+        {payload}: ReturnType<typeof DATA_UPDATED>
       ) => {
         state.loading = payload.query.loading
         state.timeentries = payload.query?.data?.report || []
         state.subset = state.timeentries
       },
 
-      [SET_FILTER.type]: (
-        state,
-        { payload }: ReturnType<typeof SET_FILTER>
-      ) => {
+      [SET_FILTER.type]: (state, {payload}: ReturnType<typeof SET_FILTER>) => {
         state.filter = payload.filter as any
         state.subset = filter(state.timeentries, (entry) => {
           return (
@@ -57,10 +54,7 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
         state.isFiltered = state.subset.length !== state.timeentries.length
       },
 
-      [ADD_FILTER.type]: (
-        state,
-        { payload }: ReturnType<typeof ADD_FILTER>
-      ) => {
+      [ADD_FILTER.type]: (state, {payload}: ReturnType<typeof ADD_FILTER>) => {
         const newFilter: any = {
           ...current(state).filter,
           ...payload.model
@@ -85,7 +79,7 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
 
       [FILTERS_UPDATED.type]: (
         state,
-        { payload }: ReturnType<typeof FILTERS_UPDATED>
+        {payload}: ReturnType<typeof FILTERS_UPDATED>
       ) => {
         state.filter = {
           key: null,
@@ -110,14 +104,14 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
 
       [SET_GROUP_BY.type]: (
         state,
-        { payload }: ReturnType<typeof SET_GROUP_BY>
+        {payload}: ReturnType<typeof SET_GROUP_BY>
       ) => {
         state.groupBy = payload.groupBy
       },
 
       [CHANGE_QUERY.type]: (
         state,
-        { payload }: ReturnType<typeof CHANGE_QUERY>
+        {payload}: ReturnType<typeof CHANGE_QUERY>
       ) => {
         state.preset = find(queries, (q) => q.key === payload.key) as any
         state.subset = null

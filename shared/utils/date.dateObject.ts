@@ -1,6 +1,6 @@
-import { Dayjs, OpUnitType } from 'dayjs'
-import { isEmpty, pick } from 'underscore'
-import DateUtils, { $dayjs, DateInput } from './date'
+import {Dayjs, OpUnitType} from 'dayjs'
+import {isEmpty, pick} from 'underscore'
+import DateUtils, {$dayjs, DateInput} from './date'
 
 export type ObjectInput = {
   week: number | string

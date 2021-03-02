@@ -1,6 +1,6 @@
-import { AuthChecker, ResolverData } from 'type-graphql'
-import { contains } from 'underscore'
-import { Context } from './context'
+import {AuthChecker, ResolverData} from 'type-graphql'
+import {contains} from 'underscore'
+import {Context} from './context'
 
 export interface IAuthOptions {
   /**
@@ -21,7 +21,7 @@ export interface IAuthOptions {
  * @param param1 - Authentication options
  */
 export const authChecker: AuthChecker<Context, IAuthOptions> = (
-  { context }: ResolverData<Context>,
+  {context}: ResolverData<Context>,
   [authOptions]
 ) => {
   if (!authOptions) {

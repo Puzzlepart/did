@@ -1,6 +1,6 @@
-import { IFormValidation, Project, ProjectOptions } from 'types'
-import { isEmpty } from 'underscore'
-import { IProjectFormState, ProjectModel } from './types'
+import {IFormValidation, Project, ProjectOptions} from 'types'
+import {isEmpty} from 'underscore'
+import {IProjectFormState, ProjectModel} from './types'
 
 export type ProjectFormAction =
   | {
@@ -16,7 +16,7 @@ export type ProjectFormAction =
     }
   | {
       type: 'SET_VALIDATION'
-      payload: { validation: IFormValidation }
+      payload: {validation: IFormValidation}
     }
 
 /**
@@ -25,7 +25,7 @@ export type ProjectFormAction =
  * @param state - State
  */
 const setProjectId = (state: IProjectFormState) => {
-  const { customerKey, key } = state.model
+  const {customerKey, key} = state.model
   if (!isEmpty(customerKey) && !isEmpty(key)) {
     state.projectId = [customerKey, key].join(' ').toUpperCase()
   } else {
@@ -40,9 +40,9 @@ const setProjectId = (state: IProjectFormState) => {
  */
 export const initState = (edit: Project): IProjectFormState => ({
   model: new ProjectModel(edit),
-  options: { createOutlookCategory: false },
+  options: {createOutlookCategory: false},
   editMode: !!edit,
-  validation: { errors: {}, invalid: true }
+  validation: {errors: {}, invalid: true}
 })
 
 /**
@@ -55,7 +55,7 @@ export default (
   state: IProjectFormState,
   action: ProjectFormAction
 ): IProjectFormState => {
-  const newState: IProjectFormState = { ...state }
+  const newState: IProjectFormState = {...state}
   switch (action.type) {
     case 'UPDATE_MODEL':
       {
@@ -75,7 +75,7 @@ export default (
       {
         newState.model = new ProjectModel()
         newState.model.customerKey = state.model.customerKey
-        newState.validation = { errors: {}, invalid: true }
+        newState.validation = {errors: {}, invalid: true}
       }
       break
 

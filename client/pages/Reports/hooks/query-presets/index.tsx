@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
-import { DateObject } from 'DateUtils'
-import { TFunction } from 'i18next'
-import { useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
-import { capitalize } from 'underscore.string'
-import { IReportsQueryPresetItem } from '../../types'
+import {DateObject} from 'DateUtils'
+import {TFunction} from 'i18next'
+import {useMemo} from 'react'
+import {useTranslation} from 'react-i18next'
+import {capitalize} from 'underscore.string'
+import {IReportsQueryPresetItem} from '../../types'
 import query_preset_current_month from './query-preset-current-month.gql'
 import query_preset_current_year from './query-preset-current-year.gql'
 import query_preset_forecast from './query-preset-forecast.gql'
@@ -62,8 +62,8 @@ export const lastYearQueryPreset = (
   t: TFunction,
   query = query_preset_last_year
 ) => {
-  const { year } = new DateObject().toObject('year')
-  const object = { year: year - 1 }
+  const {year} = new DateObject().toObject('year')
+  const object = {year: year - 1}
   return {
     key: 'last_year',
     text: t('common.exportTypeLastYear', object),
@@ -118,7 +118,7 @@ export const forecastQueryPreset = (
  * @category Reports
  */
 export function useQueryPresets(): IReportsQueryPresetItem[] {
-  const { t } = useTranslation()
+  const {t} = useTranslation()
   return useMemo(
     () =>
       [

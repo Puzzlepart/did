@@ -1,13 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
-import {
-  Field,
-  ID,
-  InputType,
-  ObjectType,
-  registerEnumType
-} from 'type-graphql'
+import {Field, ID, InputType, ObjectType, registerEnumType} from 'type-graphql'
 
 enum NotificationSeverity {
   LOW,

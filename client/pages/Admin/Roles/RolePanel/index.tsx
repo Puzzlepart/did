@@ -1,6 +1,6 @@
-import { useMutation, useQuery } from '@apollo/client'
-import { UserMessage } from 'components'
-import { IconPicker } from 'components/IconPicker'
+import {useMutation, useQuery} from '@apollo/client'
+import {UserMessage} from 'components'
+import {IconPicker} from 'components/IconPicker'
 import * as security from 'config/security'
 import {
   DefaultButton,
@@ -9,21 +9,21 @@ import {
   TextField,
   Toggle
 } from 'office-ui-fabric-react'
-import React, { Fragment, FunctionComponent, useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { RoleInput } from 'types'
-import { contains, isEmpty, isEqual, omit } from 'underscore'
+import React, {Fragment, FunctionComponent, useEffect, useState} from 'react'
+import {useTranslation} from 'react-i18next'
+import {RoleInput} from 'types'
+import {contains, isEmpty, isEqual, omit} from 'underscore'
 import $addOrUpdateRole from './addOrUpdateRole.gql'
 import $deleteRole from './deleteRole.gql'
 import styles from './RolePanel.module.scss'
-import { IRolePanelProps } from './types'
+import {IRolePanelProps} from './types'
 import $users from './users.gql'
 
 export const RolePanel: FunctionComponent<IRolePanelProps> = (
   props: IRolePanelProps
 ) => {
-  const { t } = useTranslation()
-  const { data } = useQuery($users, {
+  const {t} = useTranslation()
+  const {data} = useQuery($users, {
     variables: {
       query: {
         role: props.model?.name
@@ -55,7 +55,7 @@ export const RolePanel: FunctionComponent<IRolePanelProps> = (
     const index = rolePermissions.indexOf(permissionId)
     if (checked && index === -1) rolePermissions.push(permissionId)
     else rolePermissions.splice(index, 1)
-    setModel({ ...model, permissions: rolePermissions })
+    setModel({...model, permissions: rolePermissions})
   }
 
   /**
@@ -98,26 +98,26 @@ export const RolePanel: FunctionComponent<IRolePanelProps> = (
           defaultValue={props.model ? props.model.name : ''}
           disabled={!!props.model}
           required={true}
-          onChange={(_event, name) => setModel({ ...model, name })}
+          onChange={(_event, name) => setModel({...model, name})}
         />
         <IconPicker
           label={t('common.iconFieldLabel')}
           required={true}
           placeholder={t('common.iconSearchPlaceholder')}
           defaultSelected={model.icon}
-          onSelected={(icon) => setModel({ ...model, icon })}
+          onSelected={(icon) => setModel({...model, icon})}
           className={styles.inputField}
         />
         <div className={styles.subHeader}>{t('admin.permissonsLabel')}</div>
         <div className={styles.permissions}>
-          {permissions.map(({ id, name, description, disabled }) => (
+          {permissions.map(({id, name, description, disabled}) => (
             <div key={id} className={styles.permissionItem}>
               <Toggle
                 label={name}
                 title={description}
                 inlineLabel={true}
                 disabled={disabled}
-                styles={{ root: { margin: 0 } }}
+                styles={{root: {margin: 0}}}
                 defaultChecked={contains(model.permissions, id)}
                 onChange={(_event, checked) => togglePermission(id, checked)}
               />
@@ -134,7 +134,7 @@ export const RolePanel: FunctionComponent<IRolePanelProps> = (
                 <DefaultButton
                   className={styles.deleteBtn}
                   text={t('common.delete')}
-                  iconProps={{ iconName: 'Delete' }}
+                  iconProps={{iconName: 'Delete'}}
                   onClick={onDelete}
                 />
               ) : (

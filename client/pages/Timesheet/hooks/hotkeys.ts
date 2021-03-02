@@ -1,7 +1,7 @@
-import { GlobalHotKeysProps } from 'react-hotkeys'
-import { ITimesheetContext } from '../context'
-import { SET_SCOPE, TOGGLE_SHORTCUTS } from '../reducer/actions'
-import { TimesheetScope } from '../TimesheetScope'
+import {GlobalHotKeysProps} from 'react-hotkeys'
+import {ITimesheetContext} from '../context'
+import {SET_SCOPE, TOGGLE_SHORTCUTS} from '../reducer/actions'
+import {TimesheetScope} from '../TimesheetScope'
 
 export default ({
   scope,
@@ -32,9 +32,9 @@ export default ({
   },
   handlers: {
     GO_TO_CURRENT_WEEK: () =>
-      dispatch(SET_SCOPE({ scope: new TimesheetScope(new Date()) })),
-    PREV_WEEK: () => dispatch(SET_SCOPE({ scope: scope.set('-1w') })),
-    NEXT_WEEK: () => dispatch(SET_SCOPE({ scope: scope.set('1w') })),
+      dispatch(SET_SCOPE({scope: new TimesheetScope(new Date())})),
+    PREV_WEEK: () => dispatch(SET_SCOPE({scope: scope.set('-1w')})),
+    NEXT_WEEK: () => dispatch(SET_SCOPE({scope: scope.set('1w')})),
     SHOW_SHORTCUTS: () => dispatch(TOGGLE_SHORTCUTS())
   },
   allowChanges: false

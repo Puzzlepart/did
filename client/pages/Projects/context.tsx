@@ -1,8 +1,8 @@
 /* eslint-disable tsdoc/syntax */
-import { ApolloQueryResult } from '@apollo/client'
-import { AnyAction } from '@reduxjs/toolkit'
-import { createContext } from 'react'
-import { IProjectsState } from './types'
+import {ApolloQueryResult} from '@apollo/client'
+import {AnyAction} from '@reduxjs/toolkit'
+import {createContext} from 'react'
+import {IProjectsState} from './types'
 
 /**
  * @category Projects

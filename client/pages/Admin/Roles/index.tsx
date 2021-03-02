@@ -1,11 +1,11 @@
 /* eslint-disable tsdoc/syntax */
-import { useQuery } from '@apollo/client'
-import { List } from 'components'
-import React, { useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { Role } from 'types'
-import { RoleColumns as columns } from './columns'
-import { IRolePanelProps, RolePanel } from './RolePanel'
+import {useQuery} from '@apollo/client'
+import {List} from 'components'
+import React, {useState} from 'react'
+import {useTranslation} from 'react-i18next'
+import {Role} from 'types'
+import {RoleColumns as columns} from './columns'
+import {IRolePanelProps, RolePanel} from './RolePanel'
 import $roles from './roles.gql'
 import styles from './Roles.module.scss'
 
@@ -13,8 +13,8 @@ import styles from './Roles.module.scss'
  * @category Function Component
  */
 export const Roles = () => {
-  const { t } = useTranslation()
-  const { data, loading, refetch } = useQuery($roles)
+  const {t} = useTranslation()
+  const {data, loading, refetch} = useQuery($roles)
   const [panel, setPanel] = useState<IRolePanelProps>(null)
 
   /**
@@ -39,8 +39,8 @@ export const Roles = () => {
             {
               key: 'ADD_NEW_ROLE',
               name: t('admin.addNewRole'),
-              onClick: () => setPanel({ headerText: t('admin.addNewRole') }),
-              iconProps: { iconName: 'Permissions' }
+              onClick: () => setPanel({headerText: t('admin.addNewRole')}),
+              iconProps: {iconName: 'Permissions'}
             }
           ],
           farItems: []

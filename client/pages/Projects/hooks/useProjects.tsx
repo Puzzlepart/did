@@ -1,13 +1,13 @@
-import { AppContext } from 'AppContext'
-import { useContext, useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useHistory, useParams } from 'react-router-dom'
-import { IProjectsContext } from '../context'
-import { useProjectsReducer } from '../reducer'
-import { IProjectsParameters } from '../types'
-import { useHistoryUpdater } from './useHistoryUpdater'
-import { useProjectList } from './useProjectList'
-import { useProjectsQuery } from './useProjectsQuery'
+import {AppContext} from 'AppContext'
+import {useContext, useMemo} from 'react'
+import {useTranslation} from 'react-i18next'
+import {useHistory, useParams} from 'react-router-dom'
+import {IProjectsContext} from '../context'
+import {useProjectsReducer} from '../reducer'
+import {IProjectsParameters} from '../types'
+import {useHistoryUpdater} from './useHistoryUpdater'
+import {useProjectList} from './useProjectList'
+import {useProjectsQuery} from './useProjectsQuery'
 
 /**
  * Hook for Projects
@@ -21,12 +21,12 @@ import { useProjectsQuery } from './useProjectsQuery'
  * * Returns ProjectsContextProvider with Projects context
  */
 export function useProjects() {
-  const { t } = useTranslation()
-  const { user } = useContext(AppContext)
+  const {t} = useTranslation()
+  const {user} = useContext(AppContext)
   const history = useHistory()
   const url = useParams<IProjectsParameters>()
-  const { state, dispatch } = useProjectsReducer({ url, history })
-  const { refetch, loading } = useProjectsQuery(dispatch)
+  const {state, dispatch} = useProjectsReducer({url, history})
+  const {refetch, loading} = useProjectsQuery(dispatch)
 
   useHistoryUpdater(state)
 
@@ -39,7 +39,7 @@ export function useProjects() {
     [state, dispatch, refetch]
   )
 
-  const { listProps } = useProjectList({ state, dispatch, loading, t })
+  const {listProps} = useProjectList({state, dispatch, loading, t})
 
   return {
     state,

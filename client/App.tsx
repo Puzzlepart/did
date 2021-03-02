@@ -4,16 +4,16 @@
  *
  * @module App
  */
-import { MobileHeader } from 'components/MobileHeader'
-import { Navigation } from 'components/Navigation'
-import { PERMISSION } from 'config/security/permissions'
-import React, { FunctionComponent } from 'react'
-import { isMobile } from 'react-device-detect'
-import { useTranslation } from 'react-i18next'
-import { BrowserRouter as Router, Switch } from 'react-router-dom'
+import {MobileHeader} from 'components/MobileHeader'
+import {Navigation} from 'components/Navigation'
+import {PERMISSION} from 'config/security/permissions'
+import React, {FunctionComponent} from 'react'
+import {isMobile} from 'react-device-detect'
+import {useTranslation} from 'react-i18next'
+import {BrowserRouter as Router, Switch} from 'react-router-dom'
 import styles from './App.module.scss'
-import { AppContext, IAppContext } from './AppContext'
-import { useNotificationsQuery } from './hooks'
+import {AppContext, IAppContext} from './AppContext'
+import {useNotificationsQuery} from './hooks'
 import {
   AdminPage,
   CustomersPage,
@@ -22,14 +22,14 @@ import {
   ReportsPage,
   TimesheetPage
 } from './pages'
-import { ProtectedRoute as Route } from './ProtectedRoute'
+import {ProtectedRoute as Route} from './ProtectedRoute'
 
 export const App: FunctionComponent<IAppContext> = (context: IAppContext) => {
-  const { t } = useTranslation()
+  const {t} = useTranslation()
   if (isMobile) styles.root += ` ${styles.mobile}`
   const notificationsQuery = useNotificationsQuery(context.user)
   return (
-    <AppContext.Provider value={{ ...context, notificationsQuery }}>
+    <AppContext.Provider value={{...context, notificationsQuery}}>
       <Router>
         <div className={styles.root}>
           <Navigation />

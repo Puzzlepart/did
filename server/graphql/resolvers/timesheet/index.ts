@@ -1,10 +1,10 @@
 /* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
-import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
-import { Service } from 'typedi'
-import { TimesheetService } from '../../../services'
-import { IAuthOptions } from '../../authChecker'
-import { BaseResult } from '../types'
+import {Arg, Authorized, Mutation, Query, Resolver} from 'type-graphql'
+import {Service} from 'typedi'
+import {TimesheetService} from '../../../services'
+import {IAuthOptions} from '../../authChecker'
+import {BaseResult} from '../types'
 import {
   TimesheetOptions,
   TimesheetPeriodInput,
@@ -38,7 +38,7 @@ export class TimesheetResolver {
    * @param query - Query
    * @param options - Options
    */
-  @Authorized<IAuthOptions>({ userContext: true })
+  @Authorized<IAuthOptions>({userContext: true})
   @Query(() => [TimesheetPeriodObject], {
     description: 'Get timesheet for startDate - endDate'
   })
@@ -47,7 +47,7 @@ export class TimesheetResolver {
     @Arg('options') options: TimesheetOptions
   ) {
     try {
-      return await this._timesheet.getTimesheet({ ...query, ...options })
+      return await this._timesheet.getTimesheet({...query, ...options})
     } catch (error) {
       throw error
     }
@@ -59,7 +59,7 @@ export class TimesheetResolver {
    * @param period - Period
    * @param options - Timesheet options (forecast, tzoffset etc)
    */
-  @Authorized<IAuthOptions>({ userContext: true })
+  @Authorized<IAuthOptions>({userContext: true})
   @Mutation(() => BaseResult, {
     description:
       'Adds matched time entries for the specified period and an entry for the confirmed period'
@@ -69,7 +69,7 @@ export class TimesheetResolver {
     @Arg('options') options: TimesheetOptions
   ): Promise<BaseResult> {
     try {
-      await this._timesheet.submitPeriod({ ...options, period })
+      await this._timesheet.submitPeriod({...options, period})
       return {
         success: false,
         error: null
@@ -88,7 +88,7 @@ export class TimesheetResolver {
    * @param period - Period
    * @param forecast - Forecast
    */
-  @Authorized<IAuthOptions>({ userContext: true })
+  @Authorized<IAuthOptions>({userContext: true})
   @Mutation(() => BaseResult, {
     description:
       'Deletes time entries for the specified period and the entry for the confirmed period'
@@ -98,7 +98,7 @@ export class TimesheetResolver {
     @Arg('options') options: TimesheetOptions
   ): Promise<BaseResult> {
     try {
-      await this._timesheet.unsubmitPeriod({ ...options, period })
+      await this._timesheet.unsubmitPeriod({...options, period})
       return {
         success: true,
         error: null

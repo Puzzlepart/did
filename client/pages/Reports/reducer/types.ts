@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
-import { IAppContext } from 'AppContext'
-import { IReportsParameters, IReportsQueryPresetItem } from '../types'
+import {IAppContext} from 'AppContext'
+import {IReportsParameters, IReportsQueryPresetItem} from '../types'
 
 /**
  * @category Reports

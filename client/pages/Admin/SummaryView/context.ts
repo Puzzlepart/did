@@ -1,8 +1,8 @@
-import { TFunction } from 'i18next'
-import { IColumn } from 'office-ui-fabric-react'
-import { createContext } from 'react'
-import { SummaryViewAction } from './reducer'
-import { ISummaryViewRow, ISummaryViewScope, ISummaryViewState } from './types'
+import {TFunction} from 'i18next'
+import {IColumn} from 'office-ui-fabric-react'
+import {createContext} from 'react'
+import {SummaryViewAction} from './reducer'
+import {ISummaryViewRow, ISummaryViewScope, ISummaryViewState} from './types'
 
 export interface ISummaryViewContext extends ISummaryViewState {
   /**

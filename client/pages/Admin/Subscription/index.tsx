@@ -1,22 +1,18 @@
 /* eslint-disable tsdoc/syntax */
-import { useMutation } from '@apollo/client'
-import { AppContext } from 'AppContext'
-import { useMessage, UserMessage } from 'components'
-import { getValue, setValue } from 'helpers'
-import {
-  MessageBarType,
-  PrimaryButton,
-  TextField
-} from 'office-ui-fabric-react'
-import React, { useContext, useMemo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { Subscription } from 'types'
-import { pick } from 'underscore'
+import {useMutation} from '@apollo/client'
+import {AppContext} from 'AppContext'
+import {useMessage, UserMessage} from 'components'
+import {getValue, setValue} from 'helpers'
+import {MessageBarType, PrimaryButton, TextField} from 'office-ui-fabric-react'
+import React, {useContext, useMemo, useState} from 'react'
+import {useTranslation} from 'react-i18next'
+import {Subscription} from 'types'
+import {pick} from 'underscore'
 import deepCopy from 'utils/deepCopy'
 import omitDeep from 'utils/omitDeep'
-import { SUBSCRIPTION_SETTINGS } from './config'
-import { SubscriptionContext } from './context'
-import { SettingsSection } from './SettingsSection'
+import {SUBSCRIPTION_SETTINGS} from './config'
+import {SubscriptionContext} from './context'
+import {SettingsSection} from './SettingsSection'
 import styles from './SubscriptionSettings.module.scss'
 import $updateSubscription from './updateSubscription.gql'
 
@@ -25,7 +21,7 @@ import $updateSubscription from './updateSubscription.gql'
  */
 export const SubscriptionSettings = () => {
   const context = useContext(AppContext)
-  const { t } = useTranslation()
+  const {t} = useTranslation()
   const [subscription, setSubscription] = useState<Subscription>(
     omitDeep(deepCopy(context.subscription), '__typename')
   )
@@ -63,7 +59,7 @@ export const SubscriptionSettings = () => {
 
   return (
     <SubscriptionContext.Provider
-      value={{ settings: subscription.settings, onSettingsChanged }}>
+      value={{settings: subscription.settings, onSettingsChanged}}>
       <div className={styles.root}>
         {message && (
           <UserMessage

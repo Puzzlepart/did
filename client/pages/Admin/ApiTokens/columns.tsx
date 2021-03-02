@@ -1,8 +1,8 @@
-import { DateObject } from 'DateUtils'
-import { TFunction } from 'i18next'
-import { DefaultButton, IColumn } from 'office-ui-fabric-react'
+import {DateObject} from 'DateUtils'
+import {TFunction} from 'i18next'
+import {DefaultButton, IColumn} from 'office-ui-fabric-react'
 import React from 'react'
-import { ApiToken } from 'types'
+import {ApiToken} from 'types'
 
 /**
  * Returns the columns for the ApiTokens list

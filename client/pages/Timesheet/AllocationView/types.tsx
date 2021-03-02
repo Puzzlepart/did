@@ -1,5 +1,5 @@
-import { TooltipProps } from 'recharts'
-import { EventObject } from 'types'
+import {TooltipProps} from 'recharts'
+import {EventObject} from 'types'
 
 export interface IChartConfig {
   key: string

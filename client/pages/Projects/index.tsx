@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import * as React from 'react'
-import { Route, Switch, useRouteMatch } from 'react-router-dom'
-import { Projects } from './Projects'
+import {Route, Switch, useRouteMatch} from 'react-router-dom'
+import {Projects} from './Projects'
 
 /**
  * @ignore

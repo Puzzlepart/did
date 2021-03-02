@@ -1,5 +1,5 @@
 import index18n from 'i18next'
-import { initReactI18next } from 'react-i18next'
+import {initReactI18next} from 'react-i18next'
 
 export const DEFAULT_LANGUAGE = 'en-GB'
 const __RESOURCES = {

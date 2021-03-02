@@ -1,19 +1,15 @@
-import {
-  ISummaryViewRange,
-  ISummaryViewScope,
-  ISummaryViewState
-} from './types'
+import {ISummaryViewRange, ISummaryViewScope, ISummaryViewState} from './types'
 
 export type SummaryViewAction =
-  | { type: 'DATA_UPDATED'; payload: { timeentries: any[] } }
-  | { type: 'CHANGE_SCOPE'; payload: ISummaryViewScope }
-  | { type: 'SET_RANGE'; payload: ISummaryViewRange }
+  | {type: 'DATA_UPDATED'; payload: {timeentries: any[]}}
+  | {type: 'CHANGE_SCOPE'; payload: ISummaryViewScope}
+  | {type: 'SET_RANGE'; payload: ISummaryViewRange}
 
 export const reducer = (
   state: ISummaryViewState,
   action: SummaryViewAction
 ): ISummaryViewState => {
-  const newState: ISummaryViewState = { ...state }
+  const newState: ISummaryViewState = {...state}
   switch (action.type) {
     case 'DATA_UPDATED':
       {
@@ -23,7 +19,7 @@ export const reducer = (
 
     case 'SET_RANGE':
       {
-        newState.range = { ...newState.range, ...action.payload }
+        newState.range = {...newState.range, ...action.payload}
       }
       break
 

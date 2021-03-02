@@ -1,16 +1,16 @@
-import { getValue } from 'helpers'
-import { Checkbox, Label } from 'office-ui-fabric-react'
-import React, { useContext } from 'react'
-import { contains } from 'underscore'
-import { SubscriptionContext } from '../../context'
-import { ICheckboxFieldProps } from './types'
+import {getValue} from 'helpers'
+import {Checkbox, Label} from 'office-ui-fabric-react'
+import React, {useContext} from 'react'
+import {contains} from 'underscore'
+import {SubscriptionContext} from '../../context'
+import {ICheckboxFieldProps} from './types'
 
 export const CheckboxField = ({
   settingsKey,
   props,
   options
 }: ICheckboxFieldProps) => {
-  const { onSettingsChanged, settings } = useContext(SubscriptionContext)
+  const {onSettingsChanged, settings} = useContext(SubscriptionContext)
   return (
     <div>
       <Label>{props.get('label')}</Label>
@@ -27,7 +27,7 @@ export const CheckboxField = ({
               return value
             })
           }}
-          styles={{ root: { marginBottom: 6 } }}
+          styles={{root: {marginBottom: 6}}}
         />
       ))}
     </div>

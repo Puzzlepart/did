@@ -1,9 +1,9 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
-import { Field, ID, InputType, ObjectType } from 'type-graphql'
-import { Subscription } from '../subscription/types'
-import { Role } from '../types'
+import {Field, ID, InputType, ObjectType} from 'type-graphql'
+import {Subscription} from '../subscription/types'
+import {Role} from '../types'
 
 /**
  * @category ObjectType
@@ -21,22 +21,22 @@ export class User {
   @Field()
   displayName?: string
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   givenName?: string
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   surname?: string
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   jobTitle?: string
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   mobilePhone?: string
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   mail?: string
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   preferredLanguage?: string
 
   @Field(() => Role)
@@ -45,7 +45,7 @@ export class User {
   @Field(() => Subscription)
   subscription?: Subscription
 
-  @Field(() => String, { nullable: true })
+  @Field(() => String, {nullable: true})
   configuration?: any
 
   public create?(user: User): User {
@@ -64,45 +64,45 @@ export class UserInput {
   @Field()
   id?: string
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   displayName?: string
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   givenName?: string
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   surname?: string
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   jobTitle?: string
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   mobilePhone?: string
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   mail?: string
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   preferredLanguage?: string
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   role?: string
 }
 
 /**
  * @category InputType
  */
-@InputType({ description: 'Input object for User query options' })
+@InputType({description: 'Input object for User query options'})
 export class UserQueryOptions {
-  @Field({ nullable: true })
+  @Field({nullable: true})
   sortBy?: string
 }
 
 /**
  * @category InputType
  */
-@InputType({ description: 'Input object for User query' })
+@InputType({description: 'Input object for User query'})
 export class UserQuery {
-  @Field({ nullable: true })
+  @Field({nullable: true})
   role?: string
 }

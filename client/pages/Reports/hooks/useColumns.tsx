@@ -1,20 +1,20 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { CustomerLink } from 'components/CustomerLink'
-import { ProjectLink } from 'components/ProjectLink'
+import {CustomerLink} from 'components/CustomerLink'
+import {ProjectLink} from 'components/ProjectLink'
 import DateUtils from 'DateUtils'
-import { IColumn } from 'office-ui-fabric-react'
-import React, { useMemo } from 'react'
-import { useTranslation } from 'react-i18next'
-import { ExcelColumnType } from 'utils/exportExcel'
+import {IColumn} from 'office-ui-fabric-react'
+import React, {useMemo} from 'react'
+import {useTranslation} from 'react-i18next'
+import {ExcelColumnType} from 'utils/exportExcel'
 
 /**
  * Columns hook
  *
  * @category Reports Hooks
  */
-export function useColumns({ defaults }) {
-  const { t } = useTranslation()
+export function useColumns({defaults}) {
+  const {t} = useTranslation()
   return useMemo(
     () =>
       [
@@ -29,14 +29,14 @@ export function useColumns({ defaults }) {
           fieldName: 'project.name',
           name: t('common.project'),
           minWidth: 100,
-          onRender: ({ project }) => <ProjectLink project={project} />
+          onRender: ({project}) => <ProjectLink project={project} />
         },
         {
           key: 'customer',
           fieldName: 'customer.name',
           name: t('common.customer'),
           minWidth: 100,
-          onRender: ({ customer }) => <CustomerLink customer={customer} />
+          onRender: ({customer}) => <CustomerLink customer={customer} />
         },
         {
           key: 'duration',
@@ -49,8 +49,8 @@ export function useColumns({ defaults }) {
           fieldName: 'startDateTime',
           name: t('common.startTimeLabel'),
           minWidth: 100,
-          data: { excelColFormat: 'date' as ExcelColumnType },
-          onRender: ({ startDateTime }) =>
+          data: {excelColFormat: 'date' as ExcelColumnType},
+          onRender: ({startDateTime}) =>
             DateUtils.formatDate(startDateTime, 'MMM DD, YYYY HH:mm')
         },
         {
@@ -58,8 +58,8 @@ export function useColumns({ defaults }) {
           fieldName: 'endDateTime',
           name: t('common.endTimeLabel'),
           minWidth: 100,
-          data: { excelColFormat: 'date' as ExcelColumnType },
-          onRender: ({ endDateTime }) =>
+          data: {excelColFormat: 'date' as ExcelColumnType},
+          onRender: ({endDateTime}) =>
             DateUtils.formatDate(endDateTime, 'MMM DD, YYYY HH:mm')
         },
         {
@@ -73,7 +73,7 @@ export function useColumns({ defaults }) {
           fieldName: 'month',
           name: t('common.monthLabel'),
           minWidth: 100,
-          onRender: ({ month }) => DateUtils.getMonthNames()[month - 1]
+          onRender: ({month}) => DateUtils.getMonthNames()[month - 1]
         },
         {
           key: 'year',
@@ -92,23 +92,23 @@ export function useColumns({ defaults }) {
           fieldName: 'resource.surname',
           name: t('common.surnameLabel'),
           minWidth: 100,
-          data: { hidden: true }
+          data: {hidden: true}
         },
         {
           key: 'resource.givenName',
           fieldName: 'resource.givenName',
           name: t('common.givenNameLabel'),
           minWidth: 100,
-          data: { hidden: true }
+          data: {hidden: true}
         },
         {
           key: 'resource.mail',
           fieldName: 'resource.mail',
           name: t('common.mailLabel'),
           minWidth: 100,
-          data: { hidden: true }
+          data: {hidden: true}
         }
-      ].map((col: IColumn) => ({ ...col, ...defaults })),
+      ].map((col: IColumn) => ({...col, ...defaults})),
     []
   )
 }

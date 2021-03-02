@@ -1,9 +1,9 @@
 /* eslint-disable tsdoc/syntax */
-import { IModalProps, Modal } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
+import {IModalProps, Modal} from 'office-ui-fabric-react'
+import React, {FunctionComponent} from 'react'
 import FadeIn from 'react-fade-in'
-import { GlobalHotKeysProps } from 'react-hotkeys'
-import { useTranslation } from 'react-i18next'
+import {GlobalHotKeysProps} from 'react-hotkeys'
+import {useTranslation} from 'react-i18next'
 import styles from './HotkeyModal.module.scss'
 export type IHotkeyModal = GlobalHotKeysProps & IModalProps
 
@@ -13,7 +13,7 @@ export type IHotkeyModal = GlobalHotKeysProps & IModalProps
 export const HotkeyModal: FunctionComponent<IHotkeyModal> = (
   props: IHotkeyModal
 ) => {
-  const { t } = useTranslation()
+  const {t} = useTranslation()
   return (
     <Modal
       isOpen={props.isOpen}
@@ -23,7 +23,7 @@ export const HotkeyModal: FunctionComponent<IHotkeyModal> = (
         <div className={styles.title}>{t('common.shortcuts')}</div>
         <FadeIn>
           {Object.keys(props.keyMap).map((key) => {
-            const { name, sequence } = props.keyMap[key] as any
+            const {name, sequence} = props.keyMap[key] as any
             return (
               <div key={key}>
                 <b className={styles.sequence}>{sequence} </b>

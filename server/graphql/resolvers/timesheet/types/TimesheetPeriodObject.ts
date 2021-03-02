@@ -1,8 +1,8 @@
 /* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
-import { Field, ID, ObjectType } from 'type-graphql'
+import {Field, ID, ObjectType} from 'type-graphql'
 import DateUtils from '../../../../../shared/utils/date'
-import { EventObject } from './EventObject'
+import {EventObject} from './EventObject'
 
 /**
  * @category ObjectType
@@ -32,16 +32,16 @@ export class TimesheetPeriodObject {
   @Field(() => [EventObject])
   public events?: EventObject[]
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   public isConfirmed: boolean = false
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   public isForecasted: boolean = false
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   public isForecast: boolean
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   public forecastedHours?: number
 
   constructor(startDate: string, endDate: string, locale: string) {

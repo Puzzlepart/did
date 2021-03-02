@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
-import { Field, ID, InputType, ObjectType } from 'type-graphql'
+import {Field, ID, InputType, ObjectType} from 'type-graphql'
 
 /**
  * @category ObjectType
@@ -14,7 +14,7 @@ export class Role {
   @Field(() => ID)
   name?: string
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   description?: string
 
   @Field()
@@ -23,7 +23,7 @@ export class Role {
   @Field(() => [String])
   permissions?: string[]
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   readOnly?: boolean
 }
 
@@ -37,7 +37,7 @@ export class RoleInput {
   @Field()
   name?: string
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   description?: string
 
   @Field()
@@ -46,6 +46,6 @@ export class RoleInput {
   @Field(() => [String])
   permissions?: string[]
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   readOnly?: boolean
 }

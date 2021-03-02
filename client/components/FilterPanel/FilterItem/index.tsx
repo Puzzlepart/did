@@ -1,10 +1,10 @@
 /* eslint-disable tsdoc/syntax */
-import { Checkbox, SearchBox } from 'office-ui-fabric-react'
-import React, { FunctionComponent, useMemo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { contains, isBlank } from 'underscore.string'
+import {Checkbox, SearchBox} from 'office-ui-fabric-react'
+import React, {FunctionComponent, useMemo, useState} from 'react'
+import {useTranslation} from 'react-i18next'
+import {contains, isBlank} from 'underscore.string'
 import styles from './FilterItem.module.scss'
-import { IFilterItemProps } from './types'
+import {IFilterItemProps} from './types'
 
 /**
  * @category Function Component
@@ -12,7 +12,7 @@ import { IFilterItemProps } from './types'
 export const FilterItem: FunctionComponent<IFilterItemProps> = (
   props: IFilterItemProps
 ) => {
-  const { t } = useTranslation()
+  const {t} = useTranslation()
   const selectedKeys = new Set(props.filter.selected.map((f) => f.key))
   const [searchTerm, onSearch] = useState<string>('')
   const [showCount, setShowCount] = useState(props.shortListCount)
@@ -49,7 +49,7 @@ export const FilterItem: FunctionComponent<IFilterItemProps> = (
         className={styles.showAllLink}
         hidden={items.length < 10 || showCount === props.filter.items.length}
         onClick={() => setShowCount(props.filter.items.length)}>
-        {t('common.showAllFiltersText', { count: props.filter.items.length })}
+        {t('common.showAllFiltersText', {count: props.filter.items.length})}
       </div>
     </div>
   )

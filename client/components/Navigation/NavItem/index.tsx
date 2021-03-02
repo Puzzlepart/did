@@ -1,11 +1,11 @@
 /* eslint-disable tsdoc/syntax */
-import { usePermissions } from 'hooks'
-import { Icon } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
-import { isMobile } from 'react-device-detect'
-import { NavLink } from 'react-router-dom'
+import {usePermissions} from 'hooks'
+import {Icon} from 'office-ui-fabric-react'
+import React, {FunctionComponent} from 'react'
+import {isMobile} from 'react-device-detect'
+import {NavLink} from 'react-router-dom'
 import styles from './NavItem.module.scss'
-import { INavItemProps } from './types'
+import {INavItemProps} from './types'
 
 /**
  * @category Navigation
@@ -13,7 +13,7 @@ import { INavItemProps } from './types'
 export const NavItem: FunctionComponent<INavItemProps> = (
   props: INavItemProps
 ) => {
-  const { hasPermission } = usePermissions()
+  const {hasPermission} = usePermissions()
   if (!hasPermission(props.permission)) return null
   let className = styles.root
   if (isMobile) className += ` ${styles.mobile}`

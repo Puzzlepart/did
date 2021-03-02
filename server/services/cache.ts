@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
-import { Inject, Service } from 'typedi'
-import { filter, isArray } from 'underscore'
-import { Context } from '../graphql/context'
-import { redisMiddlware } from '../middleware/redis'
+import {Inject, Service} from 'typedi'
+import {filter, isArray} from 'underscore'
+import {Context} from '../graphql/context'
+import {redisMiddlware} from '../middleware/redis'
 const log = require('debug')('server/services/cache')
 
 export enum CacheScope {
@@ -20,7 +20,7 @@ type CacheOptions = {
   scope?: CacheScope
 }
 
-@Service({ global: false })
+@Service({global: false})
 export class CacheService {
   /**
    * Constructor
@@ -64,7 +64,7 @@ export class CacheService {
    *
    * @param options - Cache options
    */
-  private _get<T = any>({ key, scope }: CacheOptions): Promise<T> {
+  private _get<T = any>({key, scope}: CacheOptions): Promise<T> {
     return new Promise((resolve) => {
       const scopedCacheKey = this._getScopedCacheKey(key, scope)
       log(`Retrieving cached value for key ${scopedCacheKey}...`)
@@ -86,7 +86,7 @@ export class CacheService {
    * @param options - Cache options
    * @param value - Cache value
    */
-  private _set<T = any>({ key, scope, expiry }: CacheOptions, value: T) {
+  private _set<T = any>({key, scope, expiry}: CacheOptions, value: T) {
     return new Promise((resolve) => {
       const scopedCacheKey = this._getScopedCacheKey(key, scope)
       log(
@@ -116,7 +116,7 @@ export class CacheService {
    *
    * @param options - Cache options
    */
-  public clear({ key, scope }: CacheOptions) {
+  public clear({key, scope}: CacheOptions) {
     const pattern = `${this._getScopedCacheKey(key, scope)}*`
     return new Promise((resolve) => {
       redisMiddlware.keys(pattern, (_error, keys) => {
@@ -135,12 +135,12 @@ export class CacheService {
    */
   public async usingCache<T = any>(
     function_: () => Promise<T>,
-    { key, expiry = 60, scope }: CacheOptions
+    {key, expiry = 60, scope}: CacheOptions
   ) {
-    const cachedValue: T = await this._get<T>({ key, scope })
+    const cachedValue: T = await this._get<T>({key, scope})
     if (cachedValue) return cachedValue
     const value: T = await function_()
-    await this._set({ key, scope, expiry }, value)
+    await this._set({key, scope, expiry}, value)
     return value
   }
 }

@@ -1,13 +1,13 @@
-import { DurationColumn } from 'components/DurationColumn'
+import {DurationColumn} from 'components/DurationColumn'
 import DateUtils from 'DateUtils'
-import { getValue, sortAlphabetically } from 'helpers'
-import { TFunction } from 'i18next'
-import { IColumn, IPivotItemProps } from 'office-ui-fabric-react'
+import {getValue, sortAlphabetically} from 'helpers'
+import {TFunction} from 'i18next'
+import {IColumn, IPivotItemProps} from 'office-ui-fabric-react'
 import React from 'react'
-import { unique } from 'underscore'
-import { generateColumn as col } from 'utils/generateColumn'
-import { LabelColumn } from './LabelColumn'
-import { ISummaryViewRow, ISummaryViewState } from './types'
+import {unique} from 'underscore'
+import {generateColumn as col} from 'utils/generateColumn'
+import {LabelColumn} from './LabelColumn'
+import {ISummaryViewRow, ISummaryViewState} from './types'
 /**
  * Create columns
  *
@@ -23,7 +23,7 @@ export function createColumns(
       year: entry_.year,
       value: getValue(entry_, state.scope.fieldName)
     })),
-    ({ year, value }) => year && value
+    ({year, value}) => year && value
   )
   uniqueColumnValues = uniqueColumnValues.sort(
     (a, b) => a.year - b.year || a.value - b.value
@@ -33,7 +33,7 @@ export function createColumns(
     <DurationColumn row={row} column={col} />
   )
 
-  const columns = uniqueColumnValues.map(({ value }) => ({
+  const columns = uniqueColumnValues.map(({value}) => ({
     key: value,
     fieldName: value,
     name: state.scope.getColumnHeader(value),
@@ -62,7 +62,7 @@ export function createColumns(
         minWidth: 50,
         maxWidth: 50,
         isResizable: false,
-        data: { style: { fontWeight: 500 } }
+        data: {style: {fontWeight: 500}}
       },
       onRender
     )
@@ -107,13 +107,13 @@ export const createRows = (
             (entry_) =>
               getValue(entry_, state.scope.fieldName) === col.fieldName
           )
-          .reduce((sum, { duration }) => sum + duration, 0)
+          .reduce((sum, {duration}) => sum + duration, 0)
         object.label = label
         object[col.fieldName] = sum
         object.sum += sum
         return object
       },
-      { sum: 0 } as ISummaryViewRow
+      {sum: 0} as ISummaryViewRow
     )
   })
   rows.push(
@@ -124,12 +124,12 @@ export const createRows = (
             (event_) =>
               getValue(event_, state.scope.fieldName) === col.fieldName
           )
-          .reduce((sum, { duration }) => sum + duration, 0)
+          .reduce((sum, {duration}) => sum + duration, 0)
         object[col.fieldName] = sum
         object.sum += sum
         return object
       },
-      { label: t('common.sumLabel'), sum: 0 }
+      {label: t('common.sumLabel'), sum: 0}
     )
   )
 
@@ -145,7 +145,7 @@ export function createPeriods(range: number = 0): IPivotItemProps[] {
   const periods = []
   for (let index = range; index >= 0; index--) {
     const key = (DateUtils.getYear() - index).toString()
-    periods.push({ key, itemKey: key, headerText: key })
+    periods.push({key, itemKey: key, headerText: key})
   }
   return periods
 }

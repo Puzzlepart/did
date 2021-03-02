@@ -1,13 +1,10 @@
-import { Inject, Service } from 'typedi'
-import { omit } from 'underscore'
-import { Context } from '../../graphql/context'
-import {
-  Subscription,
-  SubscriptionSettings
-} from '../../graphql/resolvers/types'
-import { MongoDocumentService } from './@document'
+import {Inject, Service} from 'typedi'
+import {omit} from 'underscore'
+import {Context} from '../../graphql/context'
+import {Subscription, SubscriptionSettings} from '../../graphql/resolvers/types'
+import {MongoDocumentService} from './@document'
 
-@Service({ global: false })
+@Service({global: false})
 export class SubscriptionService extends MongoDocumentService<Subscription> {
   constructor(@Inject('CONTEXT') readonly context: Context) {
     super(context, 'subscriptions')
@@ -32,7 +29,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
    */
   public async getById(id: string): Promise<Subscription> {
     try {
-      const subscription = await this.collection.findOne({ _id: id })
+      const subscription = await this.collection.findOne({_id: id})
       return {
         ...subscription,
         id: subscription._id
@@ -66,8 +63,8 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
   public async updateSubscription(settings: SubscriptionSettings) {
     try {
       const result = await this.collection.updateOne(
-        { _id: this.context.subscription.id },
-        { $set: { settings } }
+        {_id: this.context.subscription.id},
+        {$set: {settings}}
       )
       return result
     } catch (error) {

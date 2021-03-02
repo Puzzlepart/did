@@ -1,10 +1,10 @@
 /* eslint-disable tsdoc/syntax */
-import { Panel } from 'office-ui-fabric-react'
-import React, { useEffect, useState } from 'react'
-import { FilterItem } from './FilterItem'
+import {Panel} from 'office-ui-fabric-react'
+import React, {useEffect, useState} from 'react'
+import {FilterItem} from './FilterItem'
 import styles from './FilterPanel.module.scss'
-import { IFilter, IFilterItem } from './Filters'
-import { IFilterPanelProps } from './types'
+import {IFilter, IFilterItem} from './Filters'
+import {IFilterPanelProps} from './types'
 
 /**
  * @category Function Component

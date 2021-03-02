@@ -1,6 +1,6 @@
-import { useMutation } from '@apollo/client'
+import {useMutation} from '@apollo/client'
 import * as security from 'config/security'
-import { DateObject } from 'DateUtils'
+import {DateObject} from 'DateUtils'
 import {
   DefaultButton,
   Dropdown,
@@ -8,21 +8,21 @@ import {
   TextField,
   Toggle
 } from 'office-ui-fabric-react'
-import React, { useMemo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { ApiTokenInput } from 'types'
-import { contains, isEmpty } from 'underscore'
-import { isBlank } from 'underscore.string'
+import React, {useMemo, useState} from 'react'
+import {useTranslation} from 'react-i18next'
+import {ApiTokenInput} from 'types'
+import {contains, isEmpty} from 'underscore'
+import {isBlank} from 'underscore.string'
 import $addApiToken from './addApiToken.gql'
 import styles from './ApiTokenForm.module.scss'
-import { IApiTokenFormProps } from './types'
+import {IApiTokenFormProps} from './types'
 
 export const ApiTokenForm = ({
   isOpen,
   onAdded,
   onDismiss
 }: IApiTokenFormProps) => {
-  const { t } = useTranslation()
+  const {t} = useTranslation()
   const [addApiToken] = useMutation($addApiToken)
   const [token, setToken] = useState<ApiTokenInput>({
     name: '',
@@ -35,7 +35,7 @@ export const ApiTokenForm = ({
   )
 
   async function onAddApiToken() {
-    const { data } = await addApiToken({ variables: { token } })
+    const {data} = await addApiToken({variables: {token}})
     onAdded(data.apiKey)
   }
 
@@ -44,12 +44,12 @@ export const ApiTokenForm = ({
     const index = permissions.indexOf(permissionId)
     if (checked && index === -1) permissions.push(permissionId)
     else permissions.splice(index, 1)
-    setToken({ ...token, permissions })
+    setToken({...token, permissions})
   }
 
   const EXPIRY_OPTIONS = {
     '1month': t('admin.apiTokens.oneMonth'),
-    '3month': t('admin.apiTokens.monthPlural', { months: 3 }),
+    '3month': t('admin.apiTokens.monthPlural', {months: 3}),
     '1year': t('admin.apiTokens.oneYear'),
     '30year': t('admin.apiTokens.neverExpiresText')
   }
@@ -65,14 +65,14 @@ export const ApiTokenForm = ({
         <TextField
           placeholder={t('admin.apiTokens.tokenNamePlaceholder')}
           required={true}
-          onChange={(_event, value) => setToken({ ...token, name: value })}
+          onChange={(_event, value) => setToken({...token, name: value})}
         />
       </div>
       <div className={styles.inputContainer}>
         <Dropdown
           placeholder={t('admin.apiTokens.tokenExpiryPlaceholder')}
           required={true}
-          onChange={(_event, { data }) =>
+          onChange={(_event, {data}) =>
             setToken({
               ...token,
               expires: new DateObject().add(data).jsDate
@@ -89,13 +89,13 @@ export const ApiTokenForm = ({
         {t('admin.apiTokens.permissionsTitle')}
       </div>
       <div className={styles.permissions}>
-        {permissions.map(({ id, name, description }) => (
+        {permissions.map(({id, name, description}) => (
           <div key={id} className={styles.permissionItem}>
             <Toggle
               label={name}
               title={description}
               inlineLabel={true}
-              styles={{ root: { margin: 0 } }}
+              styles={{root: {margin: 0}}}
               defaultChecked={contains(token.permissions, id)}
               onChange={(_event, checked) => togglePermission(id, checked)}
             />

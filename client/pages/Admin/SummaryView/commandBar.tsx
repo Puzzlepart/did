@@ -1,5 +1,5 @@
-import { DateObject, default as DateUtils } from 'DateUtils'
-import { TFunction } from 'i18next'
+import {DateObject, default as DateUtils} from 'DateUtils'
+import {TFunction} from 'i18next'
 import {
   DatePicker,
   DateRangeType,
@@ -10,7 +10,7 @@ import {
 } from 'office-ui-fabric-react'
 import React from 'react'
 import * as excelUtils from 'utils/exportExcel'
-import { ISummaryViewContext } from './context'
+import {ISummaryViewContext} from './context'
 
 const datePickerProps = (t: TFunction): IDatePickerProps => ({
   borderless: true,
@@ -18,9 +18,9 @@ const datePickerProps = (t: TFunction): IDatePickerProps => ({
   showGoToToday: false,
   firstDayOfWeek: DayOfWeek.Monday,
   firstWeekOfYear: FirstWeekOfYear.FirstFourDayWeek,
-  strings: t('common.calendarStrings', { returnObjects: true }) as any,
+  strings: t('common.calendarStrings', {returnObjects: true}) as any,
   calendarProps: {
-    strings: t('common.calendarStrings', { returnObjects: true }) as any,
+    strings: t('common.calendarStrings', {returnObjects: true}) as any,
     dateRangeType: DateRangeType.Week
   }
 })
@@ -36,14 +36,14 @@ export const commandBar = (context: ISummaryViewContext) => {
       {
         key: 'DATE_RANGE',
         name: DateUtils.getTimespanString(context.range.from, context.range.to),
-        iconProps: { iconName: 'DateTime' },
+        iconProps: {iconName: 'DateTime'},
         disabled: true,
         subMenuProps: {
           items: [
             {
               key: 'DATE_RANGE_FROM',
               onRender: () => (
-                <div style={{ padding: 10 }}>
+                <div style={{padding: 10}}>
                   <DatePicker
                     {...datePickerProps(context.t)}
                     label={context.t('common.fromDateLabel')}
@@ -53,7 +53,7 @@ export const commandBar = (context: ISummaryViewContext) => {
                     onSelectDate={(date) =>
                       context.dispatch({
                         type: 'SET_RANGE',
-                        payload: { from: new DateObject(date).startOfWeek }
+                        payload: {from: new DateObject(date).startOfWeek}
                       })
                     }
                   />
@@ -63,7 +63,7 @@ export const commandBar = (context: ISummaryViewContext) => {
             {
               key: 'DATE_RANGE_TO',
               onRender: () => (
-                <div style={{ padding: 10 }}>
+                <div style={{padding: 10}}>
                   <DatePicker
                     {...datePickerProps(context.t)}
                     label={context.t('common.toDateLabel')}
@@ -73,7 +73,7 @@ export const commandBar = (context: ISummaryViewContext) => {
                     onSelectDate={(date) =>
                       context.dispatch({
                         type: 'SET_RANGE',
-                        payload: { to: new DateObject(date).endOfWeek }
+                        payload: {to: new DateObject(date).endOfWeek}
                       })
                     }
                   />
@@ -88,7 +88,7 @@ export const commandBar = (context: ISummaryViewContext) => {
       {
         key: 'EXPORT_TO_EXCEL',
         text: context.t('common.exportCurrentView'),
-        iconProps: { iconName: 'ExcelDocument' },
+        iconProps: {iconName: 'ExcelDocument'},
         disabled: true,
         onClick: () => {
           excelUtils.exportExcel(context.rows, {

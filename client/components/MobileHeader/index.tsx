@@ -1,8 +1,8 @@
 /* eslint-disable tsdoc/syntax */
-import { Icon } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
+import {Icon} from 'office-ui-fabric-react'
+import React, {FunctionComponent} from 'react'
 import styles from './MobileHeader.module.scss'
-import { IMobileHeaderProps } from './types'
+import {IMobileHeaderProps} from './types'
 
 /**
  * @category Function Component

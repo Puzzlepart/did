@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
-import { useQuery } from '@apollo/client'
-import { useMemo } from 'react'
-import { unique } from 'underscore'
-import { getSum } from 'utils/getSum'
-import { default_query_preset } from './query-presets'
+import {useQuery} from '@apollo/client'
+import {useMemo} from 'react'
+import {unique} from 'underscore'
+import {getSum} from 'utils/getSum'
+import {default_query_preset} from './query-presets'
 
 /**
  * Query hook for UserReports
@@ -14,13 +14,10 @@ import { default_query_preset } from './query-presets'
  * @category UserReports Hooks
  */
 export function useUserReportQuery(queryPreset: any) {
-  const { data, loading } = useQuery(
-    queryPreset?.query || default_query_preset,
-    {
-      skip: !queryPreset?.query,
-      fetchPolicy: 'cache-first'
-    }
-  )
+  const {data, loading} = useQuery(queryPreset?.query || default_query_preset, {
+    skip: !queryPreset?.query,
+    fetchPolicy: 'cache-first'
+  })
   const data_ = data?.userReport || []
   return useMemo(
     () => ({

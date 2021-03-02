@@ -1,8 +1,8 @@
 /* eslint-disable tsdoc/syntax */
 import DateUtils from 'DateUtils'
-import { getValue } from 'helpers'
-import { contains, indexOf, unique } from 'underscore'
-import { BaseFilter, IFilter } from './BaseFilter'
+import {getValue} from 'helpers'
+import {contains, indexOf, unique} from 'underscore'
+import {BaseFilter, IFilter} from './BaseFilter'
 
 /**
  * @category FilterPanel
@@ -29,7 +29,7 @@ export class MonthFilter<
     const monthNames = DateUtils.getMonthNames()
     const _items = monthNames
       .filter((_, index) => contains(values, index + 1))
-      .map((value) => ({ key: indexOf(monthNames, value) + 1, value }))
+      .map((value) => ({key: indexOf(monthNames, value) + 1, value}))
     return {
       key: this.fieldName,
       name: this.name,
@@ -40,7 +40,7 @@ export class MonthFilter<
     }
   }
 
-  public setDefaults(values: { [key: string]: KeyType[] }) {
+  public setDefaults(values: {[key: string]: KeyType[]}) {
     this._selectedKeys = getValue(values, this.fieldName) ?? []
     return this
   }

@@ -75,7 +75,7 @@ export interface IListProps<T = any> extends React.HTMLProps<HTMLDivElement> {
   /**
    * Filters
    */
-  filters?: { [key: string]: any }
+  filters?: {[key: string]: any}
 }
 
 export interface IListState<T = any> {

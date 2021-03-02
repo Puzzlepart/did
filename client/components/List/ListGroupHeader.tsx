@@ -1,5 +1,5 @@
-import { GroupHeader, IDetailsGroupDividerProps } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
+import {GroupHeader, IDetailsGroupDividerProps} from 'office-ui-fabric-react'
+import React, {FunctionComponent} from 'react'
 
 export const ListGroupHeader: FunctionComponent<IDetailsGroupDividerProps> = (
   props: IDetailsGroupDividerProps
@@ -8,9 +8,9 @@ export const ListGroupHeader: FunctionComponent<IDetailsGroupDividerProps> = (
     <GroupHeader
       {...props}
       styles={{
-        title: { cursor: 'initial' },
-        expand: { cursor: 'pointer' },
-        headerCount: { display: 'none' }
+        title: {cursor: 'initial'},
+        expand: {cursor: 'pointer'},
+        headerCount: {display: 'none'}
       }}></GroupHeader>
   )
 }

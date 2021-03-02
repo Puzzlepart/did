@@ -1,8 +1,8 @@
 import * as arraySort from 'array-sort'
-import { getValue } from 'helpers'
-import { IGroup } from 'office-ui-fabric-react'
-import { isEmpty, unique } from 'underscore'
-import { IListGroups } from './types'
+import {getValue} from 'helpers'
+import {IGroup} from 'office-ui-fabric-react'
+import {isEmpty, unique} from 'underscore'
+import {IListGroups} from './types'
 
 /**
  * Create groups
@@ -15,7 +15,7 @@ export function generateListGroups(
   props: IListGroups
 ): [IGroup[], any[]] {
   if (isEmpty(items)) return [null, []]
-  const itemsSort = { props: [props.fieldName], opts: { reverse: false } }
+  const itemsSort = {props: [props.fieldName], opts: {reverse: false}}
   items = arraySort([...items], itemsSort.props, itemsSort.opts)
   const groupNames = items.map((g) =>
     getValue<string>(g, props.fieldName, props.emptyGroupName).toString()

@@ -1,20 +1,20 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 global['fetch'] = require('node-fetch')
-import { Client as MSGraphClient } from '@microsoft/microsoft-graph-client'
+import {Client as MSGraphClient} from '@microsoft/microsoft-graph-client'
 import 'reflect-metadata'
-import { Inject, Service } from 'typedi'
-import { sortBy } from 'underscore'
+import {Inject, Service} from 'typedi'
+import {sortBy} from 'underscore'
 import DateUtils from '../../../shared/utils/date'
-import { Context } from '../../graphql/context'
-import { environment } from '../../utils'
-import { CacheScope, CacheService } from '../cache'
-import OAuthService, { AccessTokenOptions } from '../oauth'
+import {Context} from '../../graphql/context'
+import {environment} from '../../utils'
+import {CacheScope, CacheService} from '../cache'
+import OAuthService, {AccessTokenOptions} from '../oauth'
 import MSGraphEvent, {
   MSGraphEventOptions,
   MSGraphOutlookCategory
 } from './types'
 
-@Service({ global: false })
+@Service({global: false})
 class MSGraphService {
   private _cache: CacheService = null
   private _accessTokenOptions: AccessTokenOptions = {
@@ -56,7 +56,7 @@ class MSGraphService {
       return this._cache.usingCache(
         async () => {
           const client = await this._getClient()
-          const { value } = await client
+          const {value} = await client
             .api('/users')
             // eslint-disable-next-line quotes
             .filter("userType eq 'Member'")
@@ -75,7 +75,7 @@ class MSGraphService {
           const users = sortBy(value, 'displayName')
           return users
         },
-        { key: 'getusers' }
+        {key: 'getusers'}
       )
     } catch (error) {
       throw new Error(`MSGraphService.getUsers: ${error.message}`)
@@ -118,12 +118,10 @@ class MSGraphService {
       return this._cache.usingCache(
         async () => {
           const client = await this._getClient()
-          const { value } = await client
-            .api('/me/outlook/masterCategories')
-            .get()
+          const {value} = await client.api('/me/outlook/masterCategories').get()
           return value
         },
-        { key: 'getoutlookcategories', expiry: 1800, scope: CacheScope.USER }
+        {key: 'getoutlookcategories', expiry: 1800, scope: CacheScope.USER}
       )
     } catch (error) {
       throw new Error(`MSGraphService.getOutlookCategories: ${error.message}`)
@@ -159,7 +157,7 @@ class MSGraphService {
           )
         }
         const client = await this._getClient()
-        const { value } = (await client
+        const {value} = (await client
           .api('/me/calendar/calendarView')
           .query(query)
           .select([
@@ -178,7 +176,7 @@ class MSGraphService {
           )
           .orderby('start/dateTime asc')
           .top(500)
-          .get()) as { value: any[] }
+          .get()) as {value: any[]}
         return value.filter((event) => !!event.subject)
       }, cacheOptions)
       return events

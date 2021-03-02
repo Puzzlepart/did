@@ -1,21 +1,21 @@
 /* eslint-disable tsdoc/syntax */
-import { AppContext } from 'AppContext'
-import { Callout, Icon, Target } from 'office-ui-fabric-react'
-import React, { FunctionComponent, useContext, useState } from 'react'
-import { isMobile } from 'react-device-detect'
+import {AppContext} from 'AppContext'
+import {Callout, Icon, Target} from 'office-ui-fabric-react'
+import React, {FunctionComponent, useContext, useState} from 'react'
+import {isMobile} from 'react-device-detect'
 import FadeIn from 'react-fade-in'
-import { useTranslation } from 'react-i18next'
-import { Divider } from './Divider'
+import {useTranslation} from 'react-i18next'
+import {Divider} from './Divider'
 import styles from './UserMenu.module.scss'
-import { UserReports } from './UserReports'
-import { UserSettings } from './UserSettings'
+import {UserReports} from './UserReports'
+import {UserSettings} from './UserSettings'
 
 /**
  * @category Function Component
  */
 export const UserMenu: FunctionComponent = () => {
-  const { t } = useTranslation()
-  const { user, subscription } = useContext(AppContext)
+  const {t} = useTranslation()
+  const {user, subscription} = useContext(AppContext)
   const [menuTarget, setMenuTarget] = useState<Target>(null)
 
   if (!subscription) return null
@@ -57,7 +57,7 @@ export const UserMenu: FunctionComponent = () => {
             <a
               href='/auth/signout'
               className={styles.menuItem}
-              style={{ paddingBottom: 25 }}>
+              style={{paddingBottom: 25}}>
               <Icon iconName='SignOut' className={styles.icon} />
               <span>{t('common.signOutText')}</span>
               <span className={styles.version}>v{process.env.VERSION}</span>

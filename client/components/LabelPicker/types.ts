@@ -1,4 +1,4 @@
-import { LabelObject } from 'types'
+import {LabelObject} from 'types'
 
 export interface ILabelPickerProps {
   className?: string

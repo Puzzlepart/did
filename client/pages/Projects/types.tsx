@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
-import { ApolloError } from '@apollo/client'
-import { OutlookCategory, Project } from 'types'
+import {ApolloError} from '@apollo/client'
+import {OutlookCategory, Project} from 'types'
 
 /**
  * @category Projects

@@ -1,12 +1,12 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import 'reflect-metadata'
-import { Arg, Authorized, Ctx, Query, Resolver } from 'type-graphql'
-import { Service } from 'typedi'
-import { ReportsService } from '../../../services/mongo'
-import { IAuthOptions } from '../../authChecker'
-import { Context } from '../../context'
-import { ReportsQuery, ReportsQueryPreset, TimeEntry } from './types'
+import {Arg, Authorized, Ctx, Query, Resolver} from 'type-graphql'
+import {Service} from 'typedi'
+import {ReportsService} from '../../../services/mongo'
+import {IAuthOptions} from '../../authChecker'
+import {Context} from '../../context'
+import {ReportsQuery, ReportsQueryPreset, TimeEntry} from './types'
 
 /**
  * Resolver for `TimeEntry`.
@@ -41,9 +41,9 @@ export class ReportsResolver {
     description: 'Get a preset report, or use custom filters.'
   })
   async report(
-    @Arg('preset', { nullable: true }) preset?: ReportsQueryPreset,
-    @Arg('query', { nullable: true }) query?: ReportsQuery,
-    @Arg('sortAsc', { nullable: true }) sortAsc?: boolean
+    @Arg('preset', {nullable: true}) preset?: ReportsQueryPreset,
+    @Arg('query', {nullable: true}) query?: ReportsQuery,
+    @Arg('sortAsc', {nullable: true}) sortAsc?: boolean
   ) {
     return await this._reports.getReport(preset, query, sortAsc)
   }
@@ -54,7 +54,7 @@ export class ReportsResolver {
    * @param query - Query
    * @param ctx - GraphQL context
    */
-  @Authorized<IAuthOptions>({ userContext: true })
+  @Authorized<IAuthOptions>({userContext: true})
   @Query(() => [TimeEntry], {
     description: 'Get a user preset report.'
   })

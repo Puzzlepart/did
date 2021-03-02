@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { LabelInput, LabelObject } from 'types'
+import {LabelInput, LabelObject} from 'types'
 
 /**
  * @category EntityLabel

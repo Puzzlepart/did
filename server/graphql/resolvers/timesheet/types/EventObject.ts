@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
-import { Field, Float, ID, ObjectType } from 'type-graphql'
-import { Customer, EventError, LabelObject, Project } from '../../types'
+import {Field, Float, ID, ObjectType} from 'type-graphql'
+import {Customer, EventError, LabelObject, Project} from '../../types'
 
 /**
  * @category ObjectType
@@ -20,10 +20,10 @@ export class EventObject {
   @Field()
   title?: string
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   body?: string
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   isOrganizer?: boolean
 
   @Field()
@@ -38,34 +38,34 @@ export class EventObject {
   @Field(() => Float)
   duration?: number
 
-  @Field(() => Project, { nullable: true })
+  @Field(() => Project, {nullable: true})
   project: Project
 
-  @Field(() => Project, { nullable: true })
+  @Field(() => Project, {nullable: true})
   suggestedProject?: Project
 
-  @Field(() => Customer, { nullable: true })
+  @Field(() => Customer, {nullable: true})
   customer?: Customer
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   projectKey?: string
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   customerKey?: string
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   webLink?: string
 
-  @Field(() => [LabelObject], { nullable: true })
+  @Field(() => [LabelObject], {nullable: true})
   labels?: LabelObject[]
 
-  @Field(() => EventError, { nullable: true })
+  @Field(() => EventError, {nullable: true})
   error?: EventError
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   manualMatch?: boolean
 
-  @Field({ nullable: true })
+  @Field({nullable: true})
   isSystemIgnored?: boolean
 
   categories?: string[]

@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useMutation } from '@apollo/client'
-import { useEffect } from 'react'
+import {useMutation} from '@apollo/client'
+import {useEffect} from 'react'
 import $updateUserConfiguration from './update-user-configuration.gql'
 
 /**
@@ -25,7 +25,7 @@ export function useUpdateUserConfiguration<T = any>(config: T, update = true) {
   useEffect(() => {
     if (update) {
       updateUserConfiguration({
-        variables: { configuration: stringValue }
+        variables: {configuration: stringValue}
       })
     }
   }, [stringValue])

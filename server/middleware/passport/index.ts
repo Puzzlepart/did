@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import fs from 'fs'
-import { MongoClient } from 'mongodb'
+import {MongoClient} from 'mongodb'
 import passport from 'passport'
-import { IProfile, OIDCStrategy, VerifyCallback } from 'passport-azure-ad'
-import { SubscriptionService, UserService } from '../../services/mongo'
-import { environment } from '../../utils'
+import {IProfile, OIDCStrategy, VerifyCallback} from 'passport-azure-ad'
+import {SubscriptionService, UserService} from '../../services/mongo'
+import {environment} from '../../utils'
 
 /**
  * Get redirect URL
@@ -73,7 +73,7 @@ export const passportMiddleware = (mongoClient: MongoClient) => {
       (
         _iss: string,
         _sub: string,
-        { _json }: IProfile,
+        {_json}: IProfile,
         _accessToken: string,
         _refreshToken: string,
         tokenParameters: any,
@@ -85,7 +85,7 @@ export const passportMiddleware = (mongoClient: MongoClient) => {
         subscription_service
           .getById(_json.tid)
           .then((s) => {
-            new UserService({ db: mongoClient.db(s.db) })
+            new UserService({db: mongoClient.db(s.db)})
               .getById(_json.oid)
               .then((u) => {
                 return done(null, {

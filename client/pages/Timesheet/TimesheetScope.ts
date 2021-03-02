@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
-import DateUtils, { DateInput, DateObject } from 'DateUtils'
-import { TimesheetQuery } from 'types'
-import { ITimesheetParameters } from './types'
+import DateUtils, {DateInput, DateObject} from 'DateUtils'
+import {TimesheetQuery} from 'types'
+import {ITimesheetParameters} from './types'
 
 /**
  * Handles a scope, the period of time between a startDateTime and endDateTime

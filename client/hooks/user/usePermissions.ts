@@ -1,9 +1,9 @@
 /* eslint-disable tsdoc/syntax */
-import { AppContext } from 'AppContext'
-import getPermissions, { PERMISSION } from 'config/security/permissions'
-import { useContext } from 'react'
-import { useTranslation } from 'react-i18next'
-import { contains } from 'underscore'
+import {AppContext} from 'AppContext'
+import getPermissions, {PERMISSION} from 'config/security/permissions'
+import {useContext} from 'react'
+import {useTranslation} from 'react-i18next'
+import {contains} from 'underscore'
 
 /**
  * Permissions hook
@@ -17,8 +17,8 @@ import { contains } from 'underscore'
  * @category React Hook
  */
 export function usePermissions(permissionIds?: string[]) {
-  const { t } = useTranslation()
-  const { user } = useContext(AppContext)
+  const {t} = useTranslation()
+  const {user} = useContext(AppContext)
 
   let permissions = getPermissions(t)
 

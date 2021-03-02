@@ -1,10 +1,10 @@
 /* eslint-disable tsdoc/syntax */
-import { Icon } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
-import { useTranslation } from 'react-i18next'
-import { isBlank } from 'underscore.string'
+import {Icon} from 'office-ui-fabric-react'
+import React, {FunctionComponent} from 'react'
+import {useTranslation} from 'react-i18next'
+import {isBlank} from 'underscore.string'
 import styles from './EntityLabel.module.scss'
-import { IEntityLabelProps } from './types'
+import {IEntityLabelProps} from './types'
 
 /**
  * @category Function Component
@@ -13,7 +13,7 @@ export const EntityLabel: FunctionComponent<IEntityLabelProps> = ({
   size,
   label
 }: IEntityLabelProps) => {
-  const { t } = useTranslation()
+  const {t} = useTranslation()
   const className = [styles.root]
   // eslint-disable-next-line default-case
   switch (size) {
@@ -31,7 +31,7 @@ export const EntityLabel: FunctionComponent<IEntityLabelProps> = ({
   return (
     <div
       className={className.join(' ')}
-      style={{ backgroundColor: label.color }}
+      style={{backgroundColor: label.color}}
       title={label.description}>
       {label.icon && <Icon iconName={label.icon} className={styles.icon} />}
       <span className={styles.text}>

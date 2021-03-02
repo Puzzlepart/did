@@ -1,9 +1,9 @@
 /* eslint-disable tsdoc/syntax */
-import { Callout, Checkbox, Icon, SearchBox } from 'office-ui-fabric-react'
-import React, { useEffect, useState } from 'react'
-import { LabelObject } from 'types'
+import {Callout, Checkbox, Icon, SearchBox} from 'office-ui-fabric-react'
+import React, {useEffect, useState} from 'react'
+import {LabelObject} from 'types'
 import styles from './SelectCallout.module.scss'
-import { ISelectCalloutProps } from './types'
+import {ISelectCalloutProps} from './types'
 
 /**
  * @category Function Component
@@ -49,9 +49,9 @@ export const SelectCallout = (props: ISelectCalloutProps) => {
                 <div>
                   <Icon
                     iconName='CircleFill'
-                    style={{ color: lbl.color, fontSize: 10 }}
+                    style={{color: lbl.color, fontSize: 10}}
                   />
-                  <span style={{ paddingLeft: 5 }}>{lbl.name}</span>
+                  <span style={{paddingLeft: 5}}>{lbl.name}</span>
                 </div>
                 <div>{lbl.description}</div>
               </div>

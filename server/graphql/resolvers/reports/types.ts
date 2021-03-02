@@ -1,8 +1,8 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
-import { Field, Float, ID, InputType, ObjectType } from 'type-graphql'
-import { Customer, Project, User } from '../types'
+import {Field, Float, ID, InputType, ObjectType} from 'type-graphql'
+import {Customer, Project, User} from '../types'
 
 /**
  * @category ObjectType
@@ -82,6 +82,6 @@ export class ReportsQuery {
   /**
    * ID of the project to filter on
    */
-  @Field({ nullable: true })
+  @Field({nullable: true})
   projectId?: string
 }

@@ -1,20 +1,20 @@
 /* eslint-disable tsdoc/syntax */
-import { PERMISSION } from 'config/security/permissions'
-import { usePermissions } from 'hooks'
-import { DefaultButton } from 'office-ui-fabric-react'
-import { CustomersContext } from 'pages/Customers/context'
-import React, { FunctionComponent, useContext, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { CustomerForm } from '../../CustomerForm'
+import {PERMISSION} from 'config/security/permissions'
+import {usePermissions} from 'hooks'
+import {DefaultButton} from 'office-ui-fabric-react'
+import {CustomersContext} from 'pages/Customers/context'
+import React, {FunctionComponent, useContext, useState} from 'react'
+import {useTranslation} from 'react-i18next'
+import {CustomerForm} from '../../CustomerForm'
 import styles from './Header.module.scss'
 
 /**
  * @category Customers
  */
 export const CustomerActions: FunctionComponent = () => {
-  const { t } = useTranslation()
-  const { hasPermission } = usePermissions()
-  const { state, loading, refetch } = useContext(CustomersContext)
+  const {t} = useTranslation()
+  const {hasPermission} = usePermissions()
+  const {state, loading, refetch} = useContext(CustomersContext)
   const [showEditPanel, setShowEditPanel] = useState(false)
   return (
     <div className={styles.actions}>
@@ -24,7 +24,7 @@ export const CustomerActions: FunctionComponent = () => {
         <DefaultButton
           text={t('customers.webLinkText')}
           href={state.selected.webLink}
-          iconProps={{ iconName: 'Website' }}
+          iconProps={{iconName: 'Website'}}
         />
       </div>
       <div
@@ -33,7 +33,7 @@ export const CustomerActions: FunctionComponent = () => {
         <DefaultButton
           text={t('customers.externalSystemUrlText')}
           href={state.selected.externalSystemURL}
-          iconProps={{ iconName: 'System' }}
+          iconProps={{iconName: 'System'}}
         />
       </div>
       <div
@@ -41,7 +41,7 @@ export const CustomerActions: FunctionComponent = () => {
         hidden={!hasPermission(PERMISSION.MANAGE_CUSTOMERS)}>
         <DefaultButton
           text={t('common.editLabel')}
-          iconProps={{ iconName: 'Edit' }}
+          iconProps={{iconName: 'Edit'}}
           onClick={() => setShowEditPanel(true)}
         />
         <CustomerForm

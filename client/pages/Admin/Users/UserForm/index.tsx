@@ -1,24 +1,24 @@
-import { useMutation } from '@apollo/client'
-import { Autocomplete } from 'components'
-import { Panel, PrimaryButton } from 'office-ui-fabric-react'
-import React, { FunctionComponent, useContext, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { Role, User } from 'types'
-import { find, omit, pick } from 'underscore'
+import {useMutation} from '@apollo/client'
+import {Autocomplete} from 'components'
+import {Panel, PrimaryButton} from 'office-ui-fabric-react'
+import React, {FunctionComponent, useContext, useState} from 'react'
+import {useTranslation} from 'react-i18next'
+import {Role, User} from 'types'
+import {find, omit, pick} from 'underscore'
 import validator from 'validator'
-import { UsersContext } from '../context'
+import {UsersContext} from '../context'
 import $addOrUpdateUser from './addOrUpdateUser.gql'
-import { RolePicker } from './RolePicker'
-import { IUserFormProps } from './types'
+import {RolePicker} from './RolePicker'
+import {IUserFormProps} from './types'
 import styles from './UserFormModal.module.scss'
 
 export const UserForm: FunctionComponent<IUserFormProps> = (
   props: IUserFormProps
 ) => {
-  const { t } = useTranslation()
-  const { activeDirectoryUsers, roles } = useContext(UsersContext)
+  const {t} = useTranslation()
+  const {activeDirectoryUsers, roles} = useContext(UsersContext)
   const [model, setModel] = useState<User>(
-    props.user || { role: find(roles, (r) => r.name === 'User') }
+    props.user || {role: find(roles, (r) => r.name === 'User')}
   )
   const [addOrUpdateUser] = useMutation($addOrUpdateUser)
 
@@ -28,7 +28,7 @@ export const UserForm: FunctionComponent<IUserFormProps> = (
   const onSave = async () => {
     await addOrUpdateUser({
       variables: {
-        user: omit({ ...model, role: (model.role as Role).name }, '__typename'),
+        user: omit({...model, role: (model.role as Role).name}, '__typename'),
         update: !!props.user
       }
     })
@@ -66,7 +66,7 @@ export const UserForm: FunctionComponent<IUserFormProps> = (
                 ...item.data
               })
             }
-            onClear={() => setModel({ ...model, id: '', displayName: '' })}
+            onClear={() => setModel({...model, id: '', displayName: ''})}
           />
         </div>
       )}
@@ -74,7 +74,7 @@ export const UserForm: FunctionComponent<IUserFormProps> = (
         className={styles.inputContainer}
         roles={roles}
         model={model}
-        onChanged={(role) => setModel({ ...model, role })}
+        onChanged={(role) => setModel({...model, role})}
       />
       <PrimaryButton
         className={styles.saveBtn}

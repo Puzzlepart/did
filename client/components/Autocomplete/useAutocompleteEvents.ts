@@ -12,15 +12,14 @@ import {
  *
  * @category Autocomplete
  */
-export function useAutocompleteEvents({ dispatch, props }) {
+export function useAutocompleteEvents({dispatch, props}) {
   return {
     onDismissCallout: (item: any) => {
-      dispatch(DISMISS_CALLOUT({ item }))
+      dispatch(DISMISS_CALLOUT({item}))
       props.onSelected(item)
     },
-    onSetSelected: (index: number) => dispatch(SET_SELECTED_INDEX({ index })),
-    onSearch: (_: any, searchTerm: string) =>
-      dispatch(ON_SEARCH({ searchTerm })),
+    onSetSelected: (index: number) => dispatch(SET_SELECTED_INDEX({index})),
+    onSearch: (_: any, searchTerm: string) => dispatch(ON_SEARCH({searchTerm})),
     onClear: () => {
       dispatch(RESET())
       props.onClear()

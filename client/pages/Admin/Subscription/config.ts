@@ -1,7 +1,7 @@
-import { getValue } from 'helpers'
-import { TFunction } from 'i18next'
-import { SubscriptionSettings } from 'types'
-import { ISettingsSectionProps } from './SettingsSection/types'
+import {getValue} from 'helpers'
+import {TFunction} from 'i18next'
+import {SubscriptionSettings} from 'types'
+import {ISettingsSectionProps} from './SettingsSection/types'
 
 /**
  * Subscription settings
