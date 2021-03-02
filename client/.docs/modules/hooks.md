@@ -6,10 +6,6 @@ Reusable React Hooks
 
 ## Table of contents
 
-### Type aliases
-
-- [UsePermissionsOptions](hooks.md#usepermissionsoptions)
-
 ### React Hook Functions
 
 - [useBrowserStorage](hooks.md#usebrowserstorage)
@@ -17,20 +13,6 @@ Reusable React Hooks
 - [useNotificationsQuery](hooks.md#usenotificationsquery)
 - [usePermissions](hooks.md#usepermissions)
 - [useUpdateUserConfiguration](hooks.md#useupdateuserconfiguration)
-
-## Type aliases
-
-### UsePermissionsOptions
-
-Ƭ **UsePermissionsOptions**: *object*
-
-#### Type declaration:
-
-Name | Type |
-:------ | :------ |
-`permissionIds`? | *string*[] |
-
-Defined in: [client/hooks/user/usePermissions.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/usePermissions.ts#L8)
 
 ## React Hook Functions
 
@@ -110,15 +92,15 @@ ___
 
 ### usePermissions
 
-▸ **usePermissions**(`__namedParameters?`: [*UsePermissionsOptions*](hooks.md#usepermissionsoptions)): *object*
+▸ **usePermissions**(`permissionIds?`: *string*[]): *object*
 
 Permissions hook
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`__namedParameters` | [*UsePermissionsOptions*](hooks.md#usepermissionsoptions) |
+Name | Type | Description |
+:------ | :------ | :------ |
+`permissionIds?` | *string*[] | Permission IDs    |
 
 **Returns:** *object*
 
@@ -131,7 +113,7 @@ Permissions available based on specified permissionIds
 and a function hasPermission that checks if the currently logged
 on user has the specified permission.
 
-Defined in: [client/hooks/user/usePermissions.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/usePermissions.ts#L21)
+Defined in: [client/hooks/user/usePermissions.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/usePermissions.ts#L19)
 
 ___
 

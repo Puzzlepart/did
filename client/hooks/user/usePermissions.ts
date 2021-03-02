@@ -5,12 +5,10 @@ import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { contains } from 'underscore'
 
-export type UsePermissionsOptions = { permissionIds?: string[] }
-
 /**
  * Permissions hook
  *
- * @param param0 - Options
+ * @param permissionIds - Permission IDs
  *
  * @returns Permissions available based on specified permissionIds
  * and a function hasPermission that checks if the currently logged
@@ -18,7 +16,7 @@ export type UsePermissionsOptions = { permissionIds?: string[] }
  *
  * @category React Hook
  */
-export function usePermissions({ permissionIds }: UsePermissionsOptions = {}) {
+export function usePermissions(permissionIds?: string[]) {
   const { t } = useTranslation()
   const { user } = useContext(AppContext)
 

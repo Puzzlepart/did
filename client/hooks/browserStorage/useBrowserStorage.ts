@@ -4,7 +4,7 @@ import { isArray } from 'underscore'
 
 /**
  * Browser storage hook supporting arrays
- * 
+ *
  * @remarks Supports arrays for now, but can
  * support objects, string etc in the future
  * if needed.
