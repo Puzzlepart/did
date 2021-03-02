@@ -44,7 +44,8 @@ export const UserReports: FunctionComponent = () => {
           hidden={!queryPreset || query.loading}
           containerStyle={{ marginTop: 15 }}
           iconName='ReminderTime'
-          text={t('common.userReportSummary', query)} />
+          text={t('common.userReportSummary', query)}
+        />
         <DefaultButton
           text={t('common.exportExcel')}
           styles={{ root: { marginTop: 20, width: '100%' } }}

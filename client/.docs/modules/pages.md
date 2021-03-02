@@ -380,7 +380,7 @@ Name | Type |
 `query` | *any* |
 `text` | *string* |
 
-Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:38](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L38)
+Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:41](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L41)
 
 ___
 
@@ -407,7 +407,7 @@ Name | Type |
 `query` | *any* |
 `text` | *string* |
 
-Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:73](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L73)
+Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:82](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L82)
 
 ___
 
@@ -434,7 +434,7 @@ Name | Type |
 `query` | *any* |
 `text` | *string* |
 
-Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:90](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L90)
+Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:102](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L102)
 
 ___
 
@@ -488,7 +488,7 @@ Name | Type |
 `query` | *any* |
 `text` | *string* |
 
-Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:55](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L55)
+Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:61](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L61)
 
 ___
 
@@ -518,7 +518,7 @@ Use query presets
 
 **Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)[]
 
-Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:105](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L105)
+Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:120](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L120)
 
 ___
 

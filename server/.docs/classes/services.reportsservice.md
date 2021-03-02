@@ -183,7 +183,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/mongo/reports.ts:119](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/reports.ts#L119)
+Defined in: [server/services/mongo/reports.ts:127](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/reports.ts#L127)
 
 ___
 
@@ -203,4 +203,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/mongo/reports.ts:152](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/reports.ts#L152)
+Defined in: [server/services/mongo/reports.ts:160](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/reports.ts#L160)

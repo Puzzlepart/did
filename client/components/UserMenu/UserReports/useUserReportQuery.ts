@@ -22,11 +22,14 @@ export function useUserReportQuery(queryPreset: any) {
     }
   )
   const data_ = data?.userReport || []
-  return useMemo(() => ({
-    data:data_,
-    loading,
-    preset: (queryPreset?.text || '').toLowerCase(),
-    hours: getSum(data_, 'duration'),
-    projects: unique(data_, (t) => t.project?.name).length
-  }), [data_])
+  return useMemo(
+    () => ({
+      data: data_,
+      loading,
+      preset: (queryPreset?.text || '').toLowerCase(),
+      hours: getSum(data_, 'duration'),
+      projects: unique(data_, (t) => t.project?.name).length
+    }),
+    [data_]
+  )
 }

@@ -69,7 +69,6 @@ export function createColumns(
   ]
 }
 
-
 // type: {
 //   key: 'resource',
 //   fieldName: 'resource.displayName',
@@ -91,7 +90,7 @@ export const createRows = (
   const rowValues = sortAlphabetically(
     unique(
       state.timeentries.map((entry_) =>
-        getValue(entry_,  'resource.displayName', null)
+        getValue(entry_, 'resource.displayName', null)
       ),
       (r) => r
     )
@@ -99,7 +98,7 @@ export const createRows = (
   const _columns = [...columns].splice(1, columns.length - 2)
   const rows: ISummaryViewRow[] = rowValues.map((label) => {
     const entries = state.timeentries.filter(
-      (entry_) => getValue(entry_,  'resource.displayName', null) === label
+      (entry_) => getValue(entry_, 'resource.displayName', null) === label
     )
     return _columns.reduce(
       (object, col) => {

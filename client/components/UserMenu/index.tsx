@@ -6,8 +6,8 @@ import { isMobile } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
 import { Divider } from './Divider'
-import { UserReports } from './UserReports'
 import styles from './UserMenu.module.scss'
+import { UserReports } from './UserReports'
 import { UserSettings } from './UserSettings'
 
 /**
@@ -24,7 +24,7 @@ export const UserMenu: FunctionComponent = () => {
     <>
       <a
         className={styles.root}
-        onClick={(event) => setMenuTarget(event.currentTarget)}>    ‍
+        onClick={(event) => setMenuTarget(event.currentTarget)}>
         <Icon iconName={'PlayerSettings'} className={styles.icon} />
       </a>
 
