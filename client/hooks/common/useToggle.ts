@@ -9,5 +9,5 @@ import { useReducer } from 'react'
  * @category React Hook
  */
 export function useToggle(initialValue = false) {
-    return useReducer((state) => !state, initialValue)
+  return useReducer((state) => !state, initialValue)
 }

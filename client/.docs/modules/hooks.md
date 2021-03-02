@@ -1,4 +1,4 @@
-[did-client - v0.9.7](../README.md) / Hooks
+[did-client - v0.9.8](../README.md) / Hooks
 
 # Module: Hooks
 
@@ -12,6 +12,7 @@ Reusable React Hooks
 - [useExcelExport](hooks.md#useexcelexport)
 - [useNotificationsQuery](hooks.md#usenotificationsquery)
 - [usePermissions](hooks.md#usepermissions)
+- [useToggle](hooks.md#usetoggle)
 - [useUpdateUserConfiguration](hooks.md#useupdateuserconfiguration)
 
 ## React Hook Functions
@@ -114,6 +115,26 @@ and a function hasPermission that checks if the currently logged
 on user has the specified permission.
 
 Defined in: [client/hooks/user/usePermissions.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/usePermissions.ts#L19)
+
+___
+
+### useToggle
+
+▸ **useToggle**(`initialValue?`: *boolean*): [*boolean*, DispatchWithoutAction]
+
+Returns the tuple [state, dispatch]
+Normally with useReducer you pass a value to dispatch to indicate what action to
+take on the state, but in this case there's only one action.
+
+#### Parameters:
+
+Name | Type | Default value |
+:------ | :------ | :------ |
+`initialValue` | *boolean* | false |
+
+**Returns:** [*boolean*, DispatchWithoutAction]
+
+Defined in: [client/hooks/common/useToggle.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/hooks/common/useToggle.ts#L11)
 
 ___
 

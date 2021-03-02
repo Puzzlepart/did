@@ -1,4 +1,4 @@
-[did-server - v0.9.7](../README.md) / [services](../modules/services.md) / TimesheetService
+[did-server - v0.9.8](../README.md) / [services](../modules/services.md) / TimesheetService
 
 # Class: TimesheetService
 

@@ -18,7 +18,10 @@ import query_preset_last_year from './query-preset-last-year.gql'
  * @param t - Translate function
  * @param query - Query
  */
-export const lastMonthQueryPreset = (t: TFunction, query = query_preset_last_month) => {
+export const lastMonthQueryPreset = (
+  t: TFunction,
+  query = query_preset_last_month
+) => {
   const object = new DateObject().add('-1month').toObject()
   return {
     key: 'last_month',
@@ -35,7 +38,10 @@ export const lastMonthQueryPreset = (t: TFunction, query = query_preset_last_mon
  * @param t - Translate function
  * @param query - Query
  */
-export const currentMonthQueryPreset = (t: TFunction, query = query_preset_current_month) => {
+export const currentMonthQueryPreset = (
+  t: TFunction,
+  query = query_preset_current_month
+) => {
   const object = new DateObject().toObject()
   return {
     key: 'current_month',
@@ -52,7 +58,10 @@ export const currentMonthQueryPreset = (t: TFunction, query = query_preset_curre
  * @param t - Translate function
  * @param query - Query
  */
-export const lastYearQueryPreset = (t: TFunction,query = query_preset_last_year) => {
+export const lastYearQueryPreset = (
+  t: TFunction,
+  query = query_preset_last_year
+) => {
   const { year } = new DateObject().toObject('year')
   const object = { year: year - 1 }
   return {
@@ -70,7 +79,10 @@ export const lastYearQueryPreset = (t: TFunction,query = query_preset_last_year)
  * @param t - Translate function
  * @param query - Query
  */
-export const currentYearQueryPreset = (t: TFunction, query = query_preset_current_year) => {
+export const currentYearQueryPreset = (
+  t: TFunction,
+  query = query_preset_current_year
+) => {
   const object = new DateObject().toObject('year')
   return {
     key: 'current_year',
@@ -87,7 +99,10 @@ export const currentYearQueryPreset = (t: TFunction, query = query_preset_curren
  * @param t - Translate function
  * @param query - Query
  */
-export const forecastQueryPreset = (t: TFunction, query = query_preset_forecast) => {
+export const forecastQueryPreset = (
+  t: TFunction,
+  query = query_preset_forecast
+) => {
   return {
     key: 'forecast',
     text: t('reports.forecast'),

@@ -1,4 +1,4 @@
-[did-server - v0.9.7](../README.md) / [graphql](../modules/graphql.md) / ReportsResolver
+[did-server - v0.9.8](../README.md) / [graphql](../modules/graphql.md) / ReportsResolver
 
 # Class: ReportsResolver
 
@@ -20,6 +20,7 @@ _dependendy injection_.
 ### Methods
 
 - [report](graphql.reportsresolver.md#report)
+- [userReport](graphql.reportsresolver.md#userreport)
 
 ## Constructors
 
@@ -43,7 +44,7 @@ Defined in: [server/graphql/resolvers/reports/index.ts:23](https://github.com/Pu
 
 ### report
 
-▸ **report**(`preset?`: [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset), `query?`: [*ReportsQuery*](graphql.reportsquery.md), `sortAsc?`: *boolean*, `context?`: [*Context*](graphql_context.context.md)): *Promise*<Report\>
+▸ **report**(`preset?`: [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset), `query?`: [*ReportsQuery*](graphql.reportsquery.md), `sortAsc?`: *boolean*): *Promise*<Report\>
 
 Get report
 
@@ -51,11 +52,29 @@ Get report
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`preset?` | [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset) | - |
+`preset?` | [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset) | Query   |
 `query?` | [*ReportsQuery*](graphql.reportsquery.md) | Query   |
 `sortAsc?` | *boolean* | Sort ascending   |
-`context?` | [*Context*](graphql_context.context.md) | - |
 
 **Returns:** *Promise*<Report\>
 
 Defined in: [server/graphql/resolvers/reports/index.ts:43](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L43)
+
+___
+
+### userReport
+
+▸ **userReport**(`preset?`: [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset), `context?`: [*Context*](graphql_context.context.md)): *Promise*<Report\>
+
+Get report
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`preset?` | [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset) |
+`context?` | [*Context*](graphql_context.context.md) |
+
+**Returns:** *Promise*<Report\>
+
+Defined in: [server/graphql/resolvers/reports/index.ts:61](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L61)

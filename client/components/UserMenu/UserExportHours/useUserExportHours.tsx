@@ -8,22 +8,20 @@ import { useUserReportQuery } from './useUserReportQuery'
 
 /**
  * Hook for UserExportHours
- * 
+ *
  * @category UserExportHours Hooks
  */
 export function useUserExportHours() {
   const [queryPreset, setQueryPreset] = useState<any>(null)
   const [showPanel, togglePanel] = useToggle()
   const queryPresets = useQueryPresets()
-  const {timeentries, loading} = useUserReportQuery(queryPreset)
+  const { timeentries, loading } = useUserReportQuery(queryPreset)
   const columns = useColumns()
 
   return {
     queryPreset,
-    setQueryPreset: (
-      _event: any,
-      queryPreset_: IChoiceGroupOption
-    ) => setQueryPreset(queryPreset_),
+    setQueryPreset: (_event: any, queryPreset_: IChoiceGroupOption) =>
+      setQueryPreset(queryPreset_),
     queryPresets,
     showPanel,
     togglePanel,

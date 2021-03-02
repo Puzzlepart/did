@@ -1,4 +1,4 @@
-# did [![version](https://img.shields.io/badge/version-0.9.7-green.svg)](https://semver.org)
+# did [![version](https://img.shields.io/badge/version-0.9.8-green.svg)](https://semver.org)
 
 ⏲️&nbsp;&nbsp;_the calendar is your timesheet_ &nbsp;⏲️
 

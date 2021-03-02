@@ -42,7 +42,7 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
 
   /**
    * Generate preset query
-   * 
+   *
    * @param preset - Query preset
    */
   private _generatePresetQuery(preset: ReportsQueryPreset) {
@@ -77,10 +77,16 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
 
   /**
    * Generate report
-   * 
+   *
    * @param param0 - Parameters
    */
-  private _generateReport({ timeEntries, sortAsc, users, projects, customers }: IGenerateReportParameters) {
+  private _generateReport({
+    timeEntries,
+    sortAsc,
+    users,
+    projects,
+    customers
+  }: IGenerateReportParameters) {
     return timeEntries
       .sort(({ startDateTime: a }, { startDateTime: b }) => {
         return sortAsc
@@ -89,7 +95,9 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
       })
       .reduce(($, entry) => {
         if (!entry.projectId) return $
-        const resource = users ? find(users, (user) => user.id === entry.userId) : {}
+        const resource = users
+          ? find(users, (user) => user.id === entry.userId)
+          : {}
         const project = find(projects, ({ _id }) => {
           return _id === entry.projectId
         })
@@ -161,7 +169,7 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
       }
       const [timeEntries, { projects, customers }] = await Promise.all([
         this.find(q),
-        this._project.getProjectsData(),
+        this._project.getProjectsData()
       ])
       const report = this._generateReport({
         timeEntries,

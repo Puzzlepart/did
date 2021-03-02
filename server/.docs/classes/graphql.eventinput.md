@@ -1,4 +1,4 @@
-[did-server - v0.9.7](../README.md) / [graphql](../modules/graphql.md) / EventInput
+[did-server - v0.9.8](../README.md) / [graphql](../modules/graphql.md) / EventInput
 
 # Class: EventInput
 

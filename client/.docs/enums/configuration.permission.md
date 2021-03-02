@@ -1,4 +1,4 @@
-[did-client - v0.9.7](../README.md) / [Configuration](../modules/configuration.md) / PERMISSION
+[did-client - v0.9.8](../README.md) / [Configuration](../modules/configuration.md) / PERMISSION
 
 # Enumeration: PERMISSION
 

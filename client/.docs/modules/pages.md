@@ -1,4 +1,4 @@
-[did-client - v0.9.7](../README.md) / Pages
+[did-client - v0.9.8](../README.md) / Pages
 
 # Module: Pages
 
@@ -359,7 +359,7 @@ ___
 
 ### currentMonthQueryPreset
 
-▸ `Const`**currentMonthQueryPreset**(`t`: TFunction): [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+▸ `Const`**currentMonthQueryPreset**(`t`: TFunction, `query?`: *any*): *object*
 
 Current month query preset
 
@@ -367,17 +367,26 @@ Current month query preset
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`t` | TFunction | Translate function    |
+`t` | TFunction | Translate function   |
+`query` | *any* | Query    |
 
-**Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+**Returns:** *object*
 
-Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:36](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L36)
+Name | Type |
+:------ | :------ |
+`exportFileName` | *string* |
+`iconName` | *string* |
+`key` | *string* |
+`query` | *any* |
+`text` | *string* |
+
+Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:38](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L38)
 
 ___
 
 ### currentYearQueryPreset
 
-▸ `Const`**currentYearQueryPreset**(`t`: TFunction): [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+▸ `Const`**currentYearQueryPreset**(`t`: TFunction, `query?`: *any*): *object*
 
 Current year query preset
 
@@ -385,17 +394,26 @@ Current year query preset
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`t` | TFunction | Translate function    |
+`t` | TFunction | Translate function   |
+`query` | *any* | Query    |
 
-**Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+**Returns:** *object*
 
-Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:69](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L69)
+Name | Type |
+:------ | :------ |
+`exportFileName` | *string* |
+`iconName` | *string* |
+`key` | *string* |
+`query` | *any* |
+`text` | *string* |
+
+Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:73](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L73)
 
 ___
 
 ### forecastQueryPreset
 
-▸ `Const`**forecastQueryPreset**(`t`: TFunction): [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+▸ `Const`**forecastQueryPreset**(`t`: TFunction, `query?`: *any*): *object*
 
 Forecast query preset
 
@@ -403,17 +421,26 @@ Forecast query preset
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`t` | TFunction | Translate function    |
+`t` | TFunction | Translate function   |
+`query` | *any* | Query    |
 
-**Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+**Returns:** *object*
 
-Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:85](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L85)
+Name | Type |
+:------ | :------ |
+`exportFileName` | *string* |
+`iconName` | *string* |
+`key` | *string* |
+`query` | *any* |
+`text` | *string* |
+
+Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:90](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L90)
 
 ___
 
 ### lastMonthQueryPreset
 
-▸ `Const`**lastMonthQueryPreset**(`t`: TFunction): [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+▸ `Const`**lastMonthQueryPreset**(`t`: TFunction, `query?`: *any*): *object*
 
 Last month query preset
 
@@ -421,17 +448,26 @@ Last month query preset
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`t` | TFunction | Translate function    |
+`t` | TFunction | Translate function   |
+`query` | *any* | Query    |
 
-**Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+**Returns:** *object*
 
-Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L20)
+Name | Type |
+:------ | :------ |
+`exportFileName` | *string* |
+`iconName` | *string* |
+`key` | *string* |
+`query` | *any* |
+`text` | *string* |
+
+Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L21)
 
 ___
 
 ### lastYearQueryPreset
 
-▸ `Const`**lastYearQueryPreset**(`t`: TFunction): [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+▸ `Const`**lastYearQueryPreset**(`t`: TFunction, `query?`: *any*): *object*
 
 Last year query preset
 
@@ -439,11 +475,20 @@ Last year query preset
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`t` | TFunction | Translate function    |
+`t` | TFunction | Translate function   |
+`query` | *any* | Query    |
 
-**Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)
+**Returns:** *object*
 
-Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:52](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L52)
+Name | Type |
+:------ | :------ |
+`exportFileName` | *string* |
+`iconName` | *string* |
+`key` | *string* |
+`query` | *any* |
+`text` | *string* |
+
+Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:55](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L55)
 
 ___
 
@@ -473,7 +518,7 @@ Use query presets
 
 **Returns:** [*IReportsQueryPresetItem*](../interfaces/pages.ireportsquerypresetitem.md)[]
 
-Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:100](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L100)
+Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:105](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/query-presets/index.tsx#L105)
 
 ___
 

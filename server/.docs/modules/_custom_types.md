@@ -1,3 +1,3 @@
-[did-server - v0.9.7](../README.md) / @custom-types
+[did-server - v0.9.8](../README.md) / @custom-types
 
 # Module: @custom-types
