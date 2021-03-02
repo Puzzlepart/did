@@ -16,80 +16,100 @@ import query_preset_last_year from './query-preset-last-year.gql'
  * Last month query preset
  *
  * @param t - Translate function
+ * @param query - Query
  */
-export const lastMonthQueryPreset = (t: TFunction) => {
+export const lastMonthQueryPreset = (
+  t: TFunction,
+  query = query_preset_last_month
+) => {
   const object = new DateObject().add('-1month').toObject()
   return {
     key: 'last_month',
     text: t('common.exportTypeLastMonth', object),
     iconName: 'CalendarDay',
-    query: query_preset_last_month,
+    query,
     exportFileName: `TimeEntries-${capitalize(object.monthName)}-{0}.xlsx`
-  } as IReportsQueryPresetItem
+  }
 }
 
 /**
  * Current month query preset
  *
  * @param t - Translate function
+ * @param query - Query
  */
-export const currentMonthQueryPreset = (t: TFunction) => {
+export const currentMonthQueryPreset = (
+  t: TFunction,
+  query = query_preset_current_month
+) => {
   const object = new DateObject().toObject()
   return {
     key: 'current_month',
     text: t('common.exportTypeCurrentMonth', object),
     iconName: 'Calendar',
-    query: query_preset_current_month,
+    query,
     exportFileName: `TimeEntries-${capitalize(object.monthName)}-{0}.xlsx`
-  } as IReportsQueryPresetItem
+  }
 }
 
 /**
  * Last year query preset
  *
  * @param t - Translate function
+ * @param query - Query
  */
-export const lastYearQueryPreset = (t: TFunction) => {
+export const lastYearQueryPreset = (
+  t: TFunction,
+  query = query_preset_last_year
+) => {
   const { year } = new DateObject().toObject('year')
   const object = { year: year - 1 }
   return {
     key: 'last_year',
     text: t('common.exportTypeLastYear', object),
     iconName: 'Previous',
-    query: query_preset_last_year,
+    query,
     exportFileName: `TimeEntries-${object.year}-{0}.xlsx`
-  } as IReportsQueryPresetItem
+  }
 }
 
 /**
  * Current year query preset
  *
  * @param t - Translate function
+ * @param query - Query
  */
-export const currentYearQueryPreset = (t: TFunction) => {
+export const currentYearQueryPreset = (
+  t: TFunction,
+  query = query_preset_current_year
+) => {
   const object = new DateObject().toObject('year')
   return {
     key: 'current_year',
     text: t('common.exportTypeCurrentYear', object),
     iconName: 'CalendarReply',
-    query: query_preset_current_year,
+    query,
     exportFileName: `TimeEntries-${object.year}-{0}.xlsx`
-  } as IReportsQueryPresetItem
+  }
 }
 
 /**
  * Forecast query preset
  *
  * @param t - Translate function
+ * @param query - Query
  */
-export const forecastQueryPreset = (t: TFunction) => {
+export const forecastQueryPreset = (
+  t: TFunction,
+  query = query_preset_forecast
+) => {
   return {
     key: 'forecast',
     text: t('reports.forecast'),
     iconName: 'TimeSheet',
-    query: query_preset_forecast,
+    query,
     exportFileName: 'Forecast-{0}.xlsx'
-  } as IReportsQueryPresetItem
+  }
 }
 
 /**

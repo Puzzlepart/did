@@ -31,8 +31,8 @@ export class ReportsResolver {
   /**
    * Get report
    *
+   * @param preset - Query
    * @param query - Query
-   * @param currentUser - Current user
    * @param sortAsc - Sort ascending
    * @param ctx - GraphQL context
    */
@@ -43,13 +43,26 @@ export class ReportsResolver {
   async report(
     @Arg('preset', { nullable: true }) preset?: ReportsQueryPreset,
     @Arg('query', { nullable: true }) query?: ReportsQuery,
-    @Arg('sortAsc', { nullable: true }) sortAsc?: boolean,
+    @Arg('sortAsc', { nullable: true }) sortAsc?: boolean
+  ) {
+    return await this._reports.getReport(preset, query, sortAsc)
+  }
+
+  /**
+   * Get report
+   *
+   * @param query - Query
+   * @param ctx - GraphQL context
+   */
+  @Authorized<IAuthOptions>({ userContext: true })
+  @Query(() => [TimeEntry], {
+    description: 'Get a user preset report.'
+  })
+  async userReport(
+    @Arg('preset') preset?: ReportsQueryPreset,
     @Ctx() context?: Context
   ) {
-    if (query?.currentUser) {
-      query = { userId: context.userId }
-    }
-    return await this._reports.getReport(preset, query, sortAsc)
+    return await this._reports.getUserReport(preset, context.userId)
   }
 }
 

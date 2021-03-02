@@ -6,7 +6,7 @@ import { isMobile } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
 import { Divider } from './Divider'
-import { ExportHours } from './ExportHours'
+import { UserExportHours } from './UserExportHours'
 import styles from './UserMenu.module.scss'
 import { UserSettings } from './UserSettings'
 
@@ -50,7 +50,7 @@ export const UserMenu: FunctionComponent = () => {
             </div>
             <span hidden={isMobile}>
               <Divider />
-              <ExportHours />
+              <UserExportHours />
             </span>
             <Divider />
             <UserSettings className={styles.menuItem} />

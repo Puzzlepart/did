@@ -1,4 +1,4 @@
-[did-client - v0.9.7](../README.md) / [Pages](../modules/pages.md) / ITimesheetParameters
+[did-client - v0.9.8](../README.md) / [Pages](../modules/pages.md) / ITimesheetParameters
 
 # Interface: ITimesheetParameters
 

@@ -84,16 +84,4 @@ export class ReportsQuery {
    */
   @Field({ nullable: true })
   projectId?: string
-
-  /**
-   * ID of the user to filter on
-   */
-  @Field({ nullable: true })
-  userId?: string
-
-  /**
-   * Filter on  current user
-   */
-  @Field({ nullable: true })
-  currentUser?: boolean
 }

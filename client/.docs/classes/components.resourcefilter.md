@@ -1,4 +1,4 @@
-[did-client - v0.9.7](../README.md) / [Components](../modules/components.md) / ResourceFilter
+[did-client - v0.9.8](../README.md) / [Components](../modules/components.md) / ResourceFilter
 
 # Class: ResourceFilter<ItemType, KeyType\>
 

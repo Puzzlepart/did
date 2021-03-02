@@ -1,4 +1,4 @@
-[did-server - v0.9.7](../README.md) / [graphql](../modules/graphql.md) / ProjectResolver
+[did-server - v0.9.8](../README.md) / [graphql](../modules/graphql.md) / ProjectResolver
 
 # Class: ProjectResolver
 

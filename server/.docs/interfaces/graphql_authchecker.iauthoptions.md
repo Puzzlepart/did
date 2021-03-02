@@ -1,4 +1,4 @@
-[did-server - v0.9.7](../README.md) / [graphql/authChecker](../modules/graphql_authchecker.md) / IAuthOptions
+[did-server - v0.9.8](../README.md) / [graphql/authChecker](../modules/graphql_authchecker.md) / IAuthOptions
 
 # Interface: IAuthOptions
 
