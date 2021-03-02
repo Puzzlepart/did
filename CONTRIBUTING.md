@@ -87,6 +87,8 @@ For Git commands that don't have a `--no-verify` option, you can use HUSKY envir
 HUSKY=0 git push # yolo!
 ```
 
+We are also using the `commit-msg` hook to enforce good commit messages with [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional).
+
 ### Branching / Deploying
 
 The `/main` branch requires pull requests, and is set up with a CI/CD pipeline which deploys to [did365.puzzlepart.com](https://did365.puzzlepart.com)  
