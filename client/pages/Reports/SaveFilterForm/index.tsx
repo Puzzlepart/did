@@ -76,7 +76,7 @@ export const SaveFilterForm = (props: ISaveFilterFormProps) => {
           <DefaultButton
             primary={inputVisible}
             text={t('reports.saveFilterText')}
-            disabled={model.text.length < 4 && inputVisible}
+            disabled={model.text.length < 2 && inputVisible}
             onClick={onSave}
           />
         </div>

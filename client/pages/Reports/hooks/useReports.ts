@@ -2,13 +2,13 @@
 import { useLayoutEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
+import { useUpdateUserConfiguration } from '../../../hooks/user/useUpdateUserConfiguration'
 import initFilters from '../filters'
 import { useReportsReducer } from '../reducer'
 import { IReportsParameters } from '../types'
 import { useQueryPresets } from './query-presets'
 import { useColumns } from './useColumns'
 import { useReportsQuery } from './useReportsQuery'
-import { useUpdateUserConfiguration } from './useUpdateUserConfiguration'
 
 /**
  * Hook for Reports
@@ -39,7 +39,12 @@ export function useReports() {
   const columns = useColumns({ defaults: { isResizable: true } })
   const filters = useMemo(() => initFilters(state.filter, t), [state.filter, t])
 
-  useUpdateUserConfiguration({ 'reports.filters': state.savedFilters })
+  useUpdateUserConfiguration(
+    {
+      'reports.filters': state.savedFilters
+    },
+    !state.loading && !!state.filter?.text
+  )
 
   return {
     state,

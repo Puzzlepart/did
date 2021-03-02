@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { CustomerLink } from 'components/CustomerLink'
 import { ProjectLink } from 'components/ProjectLink'
@@ -7,6 +8,11 @@ import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ExcelColumnType } from 'utils/exportExcel'
 
+/**
+ * Columns hook
+ *
+ * @category Reports Hooks
+ */
 export function useColumns({ defaults }) {
   const { t } = useTranslation()
   return useMemo(
