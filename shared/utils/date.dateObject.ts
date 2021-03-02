@@ -19,7 +19,7 @@ export class DateObject {
    *
    * Sending no value for date will use the current date
    *
-   * @param date Date input
+   * @param date - Date input
    */
   constructor(date?: DateInput) {
     this.$ = $dayjs(date)
@@ -28,16 +28,16 @@ export class DateObject {
   /**
    * Sets the DateObject date from an object consisting of week and year
    *
-   * If @week and @year is not specified, today's date is used
+   * If week and year is not specified, today's date is used
    *
-   * @param input Object input
-   * @param startOf Optional start of (e.g. year or isoWeek)
+   * @param input - Object input
+   * @param startOf - Optional start of (e.g. year or isoWeek)
    */
   public fromObject(input: ObjectInput, startOf: any = 'isoWeek'): DateObject {
     const year =
-      typeof input.year === 'string' ? parseInt(input.year) : input.year
+      typeof input.year === 'string' ? Number.parseInt(input.year) : input.year
     const isoWeek =
-      typeof input.week === 'string' ? parseInt(input.week) : input.week
+      typeof input.week === 'string' ? Number.parseInt(input.week) : input.week
     this.$ = $dayjs().year(year).isoWeek(DateUtils.getIsoWeek(isoWeek, year))
     if (startOf) this.$ = this.$.startOf('isoWeek')
     return this
@@ -90,8 +90,8 @@ export class DateObject {
    *
    * To escape characters, wrap them in square brackets (e.g. [MM]).
    *
-   * @param Template
-   * @param Locale
+   * @param template - Template
+   * @param locale - Locale
    */
   public format(template: string = 'YYYY-MM-DD', locale?: string): string {
     return DateUtils.formatDate(this.$, template, locale)
@@ -100,7 +100,7 @@ export class DateObject {
   /**
    * This indicates whether the DateObject object is the same month the other supplied date-time.
    *
-   * @param date Date
+   * @param date - Date
    */
   isSameMonth(date: DateObject) {
     return this.$.isSame(date.$, 'month')
@@ -109,7 +109,7 @@ export class DateObject {
   /**
    * This indicates whether the DateObject object is the same year the other supplied date-time.
    *
-   * @param date Date
+   * @param date - Date
    */
   isSameYear(date: DateObject) {
     return this.$.isSame(date.$, 'year')
@@ -125,7 +125,7 @@ export class DateObject {
   /**
    * This indicates whether the Day.js object is the same or before as the other supplied date-time.
    *
-   * @param date Date
+   * @param date - Date
    */
   isBeforeOrSame(date: DateObject) {
     return this.$.isBefore(date.$) || this.$.isSame(date.$)
@@ -140,10 +140,10 @@ export class DateObject {
    *
    * E.g. 1d to add day, or 1m to add 1 month
    *
-   * @param Add
+   * @param add - Add
    */
   public add(add: string) {
-    const value = parseInt(add)
+    const value = Number.parseInt(add)
     const [, unit] = add.split(value.toString())
     return new DateObject(this.$.add(value, unit as OpUnitType))
   }
@@ -151,8 +151,8 @@ export class DateObject {
   /**
    * This indicates the difference between two date-time in the specified unit.
    *
-   * @param date Date   *
-   * @param unit Unit
+   * @param date - Date   *
+   * @param unit - Unit
    */
   diff(date: DateObject, unit: OpUnitType) {
     return this.$.diff(date.$, unit)
@@ -161,15 +161,15 @@ export class DateObject {
   /**
    * Returns an object representation of the DateObject
    *
-   * @param[]} include Properties to include
+   * @param include - include Properties to include
    */
   toObject(...include: string[]) {
-    const obj = {
+    const dateObject = {
       week: DateUtils.getWeek(this.$),
       month: DateUtils.getMonthIndex(this.$),
       year: DateUtils.getYear(this.$),
       monthName: this.format('MMMM')
     }
-    return isEmpty(include) ? obj : pick(obj, ...include)
+    return isEmpty(include) ? dateObject : pick(dateObject, ...include)
   }
 }

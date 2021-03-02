@@ -49,9 +49,9 @@ export class DateUtils {
   }
 
   /**
-   * Setup DateUtils class using @dayjs with @plugins
+   * Setup DateUtils class using dayjs with plugins
    *
-   * @param Locale
+   * @param locale - Locale
    */
   public setup(locale: string) {
     $dayjs.locale(locale)
@@ -60,24 +60,26 @@ export class DateUtils {
   /**
    * Get duration string
    *
-   * E.g. 15.75 => 15 hours 45 minutes
+   * E.g. 15.75 = 15 hours 45 minutes
    *
    * Using solution from https://stackoverflow.com/questions/1458633/how-to-deal-with-floating-point-number-precision-in-javascript
    * to handle floating point number precision.
    *
-   * @param hours Duration in hours
+   * @param hours - Duration in hours
    * @param t - Translate function
    */
   public getDurationString(hours: number, t: TFunction): string {
-    const hoursPrecise = parseFloat(parseFloat(hours.toString()).toPrecision(5))
-    const minutes = parseInt(((hoursPrecise % 1) * 60).toFixed())
-    const hrsStr = t('common.hoursShortFormat', {
+    const hoursPrecise = Number.parseFloat(
+      Number.parseFloat(hours.toString()).toPrecision(5)
+    )
+    const minutes = Number.parseInt(((hoursPrecise % 1) * 60).toFixed())
+    const hrsString = t('common.hoursShortFormat', {
       hours: Math.floor(hoursPrecise)
     })
-    const minsStr = t('common.minutesShortFormat', { minutes })
-    if (minutes === 0) return hrsStr
-    if (hoursPrecise === 0) return minsStr
-    return [hrsStr, minsStr].join(' ')
+    const minsString = t('common.minutesShortFormat', { minutes })
+    if (minutes === 0) return hrsString
+    if (hoursPrecise === 0) return minsString
+    return [hrsString, minsString].join(' ')
   }
 
   /**
@@ -85,9 +87,9 @@ export class DateUtils {
    *
    * To escape characters, wrap them in square brackets (e.g. [MM]).
    *
-   * @param dateTime Date
-   * @param Date format
-   * @param Locale
+   * @param dateTime - Date
+   * @param template - Date format
+   * @param locale - Locale
    */
   formatDate(dateTime: ConfigType, template: string, locale?: string): string {
     if (locale) return $dayjs(dateTime).locale(locale).format(template)
@@ -97,8 +99,8 @@ export class DateUtils {
   /**
    * Get start of week
    *
-   * @param date Date
-   * @param isoWeek Use ISO week
+   * @param date - Date
+   * @param isoWeek - Use ISO week
    */
   public startOfWeek(
     date?: DateObject,
@@ -110,8 +112,8 @@ export class DateUtils {
   /**
    * Get end of week
    *
-   * @param date Date
-   * @param isoWeek Use ISO week
+   * @param date - Date
+   * @param isoWeek - Use ISO week
    */
   public endOfWeek(
     date?: DateObject,
@@ -123,9 +125,9 @@ export class DateUtils {
   /**
    * Get days between a start and end time in the specified template
    *
-   * @param start Start
-   * @param end End
-   * @param Date template
+   * @param start - Start
+   * @param end - End
+   * @param template - Date template
    */
   public getDays(
     start: DateInput,
@@ -133,11 +135,11 @@ export class DateUtils {
     template: string = 'dddd DD'
   ): string[] {
     const days = []
-    let s = new DateObject(start)
-    const e = new DateObject(end)
-    while (s.isBeforeOrSame(e)) {
-      days.push(capitalize(s.format(template)))
-      s = s.add('1d')
+    let startDateObject = new DateObject(start)
+    const endDateObject = new DateObject(end)
+    while (startDateObject.isBeforeOrSame(endDateObject)) {
+      days.push(capitalize(startDateObject.format(template)))
+      startDateObject = startDateObject.add('1d')
     }
     return days
   }
@@ -145,8 +147,8 @@ export class DateUtils {
   /**
    * Get month name for the speicifed month index
    *
-   * @param monthIndex Month index
-   * @param Template
+   * @param monthIndex - Month index
+   * @param template -Template
    */
   public getMonthName(
     monthIndex?: number,
@@ -158,9 +160,9 @@ export class DateUtils {
   /**
    * Get timespan string
    *
-   * @param start Start
-   * @param end End
-   * @param Month format
+   * @param start - Start
+   * @param end - End
+   * @param monthFormat - Month format
    */
   public getTimespanString(
     start: DateObject,
@@ -188,9 +190,9 @@ export class DateUtils {
   /**
    * Get week number
    *
-   * If no @date parameter is specified the current week is returned
+   * If no date parameter is specified the current week is returned
    *
-   * @param date Optional date
+   * @param date - Optional date
    */
   public getWeek(date?: DateInput): number {
     return $dayjs(date).isoWeek()
@@ -201,8 +203,8 @@ export class DateUtils {
    * Handles a weakness in dayjs, where week 53 occuring in january of a year
    * e.g. jan 1-3 2021, is returned as january 2022
    *
-   * @param isoWeek Iso week number
-   * @param year Year
+   * @param isoWeek - Iso week number
+   * @param year - Year
    */
   public getIsoWeek(isoWeek: number, year: number) {
     if (
@@ -220,7 +222,7 @@ export class DateUtils {
    *
    * Months are zero indexed, so January is month 0 and December is 11 (obviously).
    *
-   * @param date Optional date
+   * @param date - Optional date
    */
   public getMonthIndex(date?: DateInput): number {
     return $dayjs(date).month() + 1
@@ -229,9 +231,9 @@ export class DateUtils {
   /**
    * Get the year
    *
-   * If no @date parameter is specified the current year is returned
+   * If no date parameter is specified the current year is returned
    *
-   * @param date Optional date
+   * @param date - Optional date
    */
   public getYear(date?: DateInput): number {
     return $dayjs(date).year()
@@ -240,17 +242,17 @@ export class DateUtils {
   /**
    * Is current week
    *
-   * @param date Date
+   * @param date - Date
    */
   public isCurrentWeek(date: DateObject): boolean {
-    return date.$.week() === $dayjs().isoWeek()
+    return date.$.isoWeek() === $dayjs().isoWeek()
   }
 
   /**
    * Is current year
    *
-   * @param date Date
-   * @param year Year
+   * @param date - Date
+   * @param year - Year
    */
   public isCurrentYear(date: DateObject, year?: number) {
     return (year || date.$.year()) === $dayjs().year()
@@ -259,8 +261,8 @@ export class DateUtils {
   /**
    * Is current year
    *
-   * @param a Date a
-   * @param a Date b
+   * @param a - Date a
+   * @param a - Date b
    */
   public isBefore(a: DateInput, b?: DateInput) {
     return $dayjs(a).isBefore(b)
@@ -269,8 +271,8 @@ export class DateUtils {
   /**
    * Get duration between two times in hours
    *
-   * @param startDateTime Start time
-   * @param endDateTime End time
+   * @param startDateTime - Start time
+   * @param endDateTime - End time
    */
   public getDurationHours(
     startDateTime: ConfigType,
@@ -282,8 +284,8 @@ export class DateUtils {
   /**
    * Converts the date time to ISO format using the specified offset
    *
-   * @param dateTime Date
-   * @param tzOffset Offset in minutes
+   * @param dateTime - Date
+   * @param tzOffset - Offset in minutes
    */
   public toISOString(dateTime: ConfigType, tzOffset: number) {
     return $dayjs(`${dateTime} ${this.getTimezone(tzOffset)}`).toISOString()
@@ -294,21 +296,23 @@ export class DateUtils {
    *
    * See https://stackoverflow.com/questions/24500375/get-clients-gmt-offset-in-javascript
    *
-   * @param tzOffset Offset in minutes
+   * @param tzOffset - Offset in minutes
    */
   getTimezone(tzOffset: number) {
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     function z(n: number) {
       return (n < 10 ? '0' : '') + n
     }
     const sign = tzOffset < 0 ? '+' : '-'
     tzOffset = Math.abs(tzOffset)
+    // eslint-disable-next-line unicorn/prefer-math-trunc
     return 'GMT ' + sign + z((tzOffset / 60) | 0) + z(tzOffset % 60)
   }
 
   /**
    * Is after today
    *
-   * @param dateTime Date
+   * @param dateTime - Date time
    */
   public isAfterToday(dateTime: ConfigType) {
     return $dayjs(dateTime).isAfter($dayjs())
@@ -317,7 +321,7 @@ export class DateUtils {
   /**
    * Get period id for the date
    *
-   * @param dateTime Date time
+   * @param dateTime - Date time
    */
   public getPeriod(dateTime: ConfigType): string {
     const date = $dayjs(dateTime)
@@ -327,8 +331,8 @@ export class DateUtils {
   /**
    * Is same month
    *
-   * @param a Date A
-   * @param b Date B
+   * @param a - Date A
+   * @param b - Date B
    */
   public isSameMonth(a: ConfigType, b: ConfigType) {
     return $dayjs(a).isSame($dayjs(b), 'month')
@@ -337,7 +341,7 @@ export class DateUtils {
   /**
    * Get start of month
    *
-   * @param date Date
+   * @param date - Date
    */
   public startOfMonth(date: DateObject): DateObject {
     return new DateObject(date.$.startOf('month'))
@@ -346,7 +350,7 @@ export class DateUtils {
   /**
    * Get end of month
    *
-   * @param date Date
+   * @param date - Date
    */
   public endOfMonth(date: DateObject): DateObject {
     return new DateObject(date.$.endOf('month'))
