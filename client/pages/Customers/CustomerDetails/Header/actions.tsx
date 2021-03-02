@@ -1,10 +1,10 @@
 /* eslint-disable tsdoc/syntax */
 import { PERMISSION } from 'config/security/permissions'
+import { usePermissions } from 'hooks'
 import { DefaultButton } from 'office-ui-fabric-react'
 import { CustomersContext } from 'pages/Customers/context'
 import React, { FunctionComponent, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { usePermissions } from '../../../../hooks'
 import { CustomerForm } from '../../CustomerForm'
 import styles from './Header.module.scss'
 

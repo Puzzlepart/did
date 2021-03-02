@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
+import { usePermissions } from 'hooks'
 import React, { FunctionComponent } from 'react'
-import { usePermissions } from '../../hooks'
 import styles from './PermissionList.module.scss'
 import { IPermissionListProps } from './types'
 

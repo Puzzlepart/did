@@ -1,10 +1,10 @@
 /* eslint-disable tsdoc/syntax */
 import { PERMISSION } from 'config/security/permissions'
+import { usePermissions } from 'hooks'
 import { Pivot, PivotItem } from 'office-ui-fabric-react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
-import { usePermissions } from '../../hooks'
 import styles from './Admin.module.scss'
 import { ApiTokens } from './ApiTokens'
 import { Labels } from './Labels'

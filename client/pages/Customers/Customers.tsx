@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { PERMISSION } from 'config/security/permissions'
+import { usePermissions } from 'hooks'
 import {
   MessageBar,
   MessageBarType,
@@ -9,7 +10,6 @@ import {
 import { CustomerForm } from 'pages/Customers/CustomerForm'
 import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
-import { usePermissions } from '../../hooks'
 import { CustomersContext } from './context'
 import { CustomerDetails } from './CustomerDetails'
 import { CustomerList } from './CustomerList'

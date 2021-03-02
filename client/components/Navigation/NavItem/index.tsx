@@ -1,9 +1,9 @@
 /* eslint-disable tsdoc/syntax */
+import { usePermissions } from 'hooks'
 import { Icon } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
 import { isMobile } from 'react-device-detect'
 import { NavLink } from 'react-router-dom'
-import { usePermissions } from '../../../hooks'
 import styles from './NavItem.module.scss'
 import { INavItemProps } from './types'
 

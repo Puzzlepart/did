@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
+import { useExcelExport } from 'hooks'
 import { useContext } from 'react'
-import { useExcelExport } from '../../../../hooks'
 import { ProjectsContext } from '../../context'
 import columns from '../columns'
 import $timeentries from './timeentries.gql'

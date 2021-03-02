@@ -1,8 +1,8 @@
 import { UserMessage } from 'components/UserMessage'
+import { useExcelExport } from 'hooks'
 import { ChoiceGroup, DefaultButton, Icon, Panel } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useExcelExport } from '../../../hooks'
 import styles from '../UserMenu.module.scss'
 import { useUserReports } from './useUserReports'
 
