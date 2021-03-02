@@ -21,7 +21,8 @@
     "typedoc": "npm run typedoc:client && npm run typedoc:server",
     "typedoc:server": "typedoc ./server/**/*.ts ./server/*.ts --options ./server/typedoc.json",
     "typedoc:client": "typedoc -options ./client/typedoc.json",
-    "postversion": "npm run typedoc && npm run lint:fix"
+    "postversion": "npm run typedoc && npm run lint:fix",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@apollo/client": "3.2.0",
@@ -145,6 +146,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-tsdoc": "0.2.11",
     "eslint-plugin-unicorn": "^28.0.2",
+    "husky": "^5.1.3",
     "localtunnel": "2.0.1",
     "open": "7.2.1",
     "prettier": "2.2.1",
