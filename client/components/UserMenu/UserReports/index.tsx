@@ -1,11 +1,12 @@
+import { UserMessage } from 'components/UserMessage'
 import { ChoiceGroup, DefaultButton, Icon, Panel } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useExcelExport } from '../../../hooks'
 import styles from '../UserMenu.module.scss'
-import { useUserExportHours } from './useUserExportHours'
+import { useUserReports } from './useUserReports'
 
-export const UserExportHours: FunctionComponent = () => {
+export const UserReports: FunctionComponent = () => {
   const { t } = useTranslation()
   const {
     queryPreset,
@@ -13,13 +14,12 @@ export const UserExportHours: FunctionComponent = () => {
     queryPresets,
     showPanel,
     togglePanel,
-    timeentries,
-    loading,
+    query,
     columns
-  } = useUserExportHours()
+  } = useUserReports()
 
   const { onExport } = useExcelExport({
-    items: timeentries,
+    items: query?.data,
     fileName: queryPreset?.exportFileName,
     columns
   })
@@ -27,11 +27,11 @@ export const UserExportHours: FunctionComponent = () => {
   return (
     <>
       <a href='#' onClick={togglePanel} className={styles.menuItem}>
-        <Icon iconName='CloudImportExport' className={styles.icon} />
-        <span>{t('common.exportMyHours')}</span>
+        <Icon iconName='ReportDocument' className={styles.icon} />
+        <span>{t('common.userReports')}</span>
       </a>
       <Panel
-        headerText={t('common.exportMyHours')}
+        headerText={t('common.userReports')}
         isOpen={showPanel}
         onDismiss={togglePanel}
         isLightDismiss={true}>
@@ -40,11 +40,17 @@ export const UserExportHours: FunctionComponent = () => {
           onChange={setQueryPreset}
           options={queryPresets}
         />
+        <UserMessage
+          hidden={!queryPreset || query.loading}
+          containerStyle={{ marginTop: 15 }}
+          iconName='ReminderTime'
+          text={t('common.userReportSummary', query)} />
         <DefaultButton
-          text={t('common.export')}
+          text={t('common.exportExcel')}
           styles={{ root: { marginTop: 20, width: '100%' } }}
+          iconProps={{ iconName: 'ExcelDocument' }}
           onClick={onExport}
-          disabled={!queryPreset || loading}
+          disabled={!queryPreset || query.loading}
         />
       </Panel>
     </>

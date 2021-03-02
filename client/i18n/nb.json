@@ -288,7 +288,7 @@
     },
     "preferredLanguageLabel": "Foretrukket språk",
     "showAllFiltersText": "Vis alle ({{count}})",
-    "exportMyHours": "Eksporter mine timer",
+    "userReports": "Mine rapporter",
     "export": "Eksporter",
     "exportTypeLastMonth": "Forrige måned ({{monthName}})",
     "exportTypeCurrentMonth": "Inneværende måned ({{monthName}})",
@@ -305,7 +305,9 @@
     "fromDateLabel": "Fra:",
     "toDateLabel": "Til:",
     "rangeLabel": "Tidsrom",
-    "totalHours": "Timer totalt"
+    "totalHours": "Timer totalt",
+    "userReportSummary": "Du har jobbet **{{hours}}** timer for **{{projects}} **prosjekter _{{preset}}_. \nKlikk **Eksporter** for å eksportere timene dine til Excel.",
+    "exportExcel": "Eksporter til Excel"
   },
   "navigation": {
     "timesheet": "Timeliste",

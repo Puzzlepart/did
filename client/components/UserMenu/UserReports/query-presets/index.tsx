@@ -17,7 +17,7 @@ import user_query_preset_last_year from './user-query-preset-last-year.gql'
 /**
  * Use user query presets
  *
- * @category UserExportHours
+ * @category UserReports
  */
 export function useQueryPresets(): IChoiceGroupOption[] {
   const { t } = useTranslation()

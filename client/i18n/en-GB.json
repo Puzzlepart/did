@@ -289,7 +289,7 @@
     },
     "preferredLanguageLabel": "Preferred language",
     "showAllFiltersText": "Show all ({{count}})",
-    "exportMyHours": "Export my hours",
+    "userReports": "My reports",
     "export": "Export",
     "exportTypeLastMonth": "Last month ({{monthName}})",
     "exportTypeCurrentMonth": "Current month ({{monthName}})",
@@ -306,7 +306,9 @@
     "fromDateLabel": "From:",
     "toDateLabel": "To:",
     "rangeLabel": "Range",
-    "totalHours": "Hours total"
+    "totalHours": "Hours total",
+    "userReportSummary": "You have worked **{{hours}}** hours for **{{projects}}** projects _{{preset}}_. Click **Export** to export your hours to Excel.",
+    "exportExcel": "Export to Excel"
   },
   "navigation": {
     "timesheet": "Timesheet",
