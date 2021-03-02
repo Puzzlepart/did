@@ -20,6 +20,10 @@ Reusable React Hooks
 - [useExcelExport](hooks.md#useexcelexport)
 - [useNotificationsQuery](hooks.md#usenotificationsquery)
 
+### Reports Hooks Functions
+
+- [useUpdateUserConfiguration](hooks.md#useupdateuserconfiguration)
+
 ## Type aliases
 
 ### UsePermissionsOptions
@@ -132,3 +136,37 @@ Name | Type |
 `refetch` | (`delay?`: *number*) => *void* |
 
 Defined in: [client/hooks/notifications/useNotificationsQuery.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/hooks/notifications/useNotificationsQuery.ts#L16)
+
+___
+
+## Reports Hooks Functions
+
+### useUpdateUserConfiguration
+
+▸ **useUpdateUserConfiguration**<T\>(`config`: T, `update?`: *boolean*): *void*
+
+Update user configuration hook
+
+Retrieves config JSON and update (boolean) and uses useMutation.
+It will only execute the mutation if update is equal to true, and
+the value has changed.
+
+**`remarks`** For now this is how we update user configuration,
+but it might be better ways. For now this should do.
+
+#### Type parameters:
+
+Name | Default |
+:------ | :------ |
+`T` | *any* |
+
+#### Parameters:
+
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`config` | T | - | Configuration   |
+`update` | *boolean* | true | Update    |
+
+**Returns:** *void*
+
+Defined in: [client/hooks/user/useUpdateUserConfiguration.ts:22](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/useUpdateUserConfiguration.ts#L22)

@@ -93,7 +93,6 @@ All are built using React Function components and Hooks.
 - [forecastQueryPreset](pages.md#forecastquerypreset)
 - [lastMonthQueryPreset](pages.md#lastmonthquerypreset)
 - [lastYearQueryPreset](pages.md#lastyearquerypreset)
-- [useColumns](pages.md#usecolumns)
 
 ### Reports Functions
 
@@ -102,10 +101,10 @@ All are built using React Function components and Hooks.
 
 ### Reports Hooks Functions
 
+- [useColumns](pages.md#usecolumns)
 - [useReports](pages.md#usereports)
 - [useReportsQuery](pages.md#usereportsquery)
 - [useReportsReducer](pages.md#usereportsreducer)
-- [useUpdateUserConfiguration](pages.md#useupdateuserconfiguration)
 
 ### Timesheet Hooks Functions
 
@@ -448,22 +447,6 @@ Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:52](https://gith
 
 ___
 
-### useColumns
-
-▸ **useColumns**(`__namedParameters`: *Object*): *any*[]
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`__namedParameters` | *Object* |
-
-**Returns:** *any*[]
-
-Defined in: [client/pages/Reports/hooks/useColumns.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useColumns.tsx#L10)
-
-___
-
 ## Reports Functions
 
 ### SaveFilterForm
@@ -495,6 +478,24 @@ Defined in: [client/pages/Reports/hooks/query-presets/index.tsx:100](https://git
 ___
 
 ## Reports Hooks Functions
+
+### useColumns
+
+▸ **useColumns**(`__namedParameters`: *Object*): *any*[]
+
+Columns hook
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`__namedParameters` | *Object* |
+
+**Returns:** *any*[]
+
+Defined in: [client/pages/Reports/hooks/useColumns.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useColumns.tsx#L16)
+
+___
 
 ### useReports
 
@@ -568,30 +569,6 @@ Name | Type |
 `state` | [*IReportsState*](../interfaces/pages.ireportsstate.md) |
 
 Defined in: [client/pages/Reports/reducer/useReportsReducer.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/reducer/useReportsReducer.ts#L16)
-
-___
-
-### useUpdateUserConfiguration
-
-▸ **useUpdateUserConfiguration**<T\>(`config`: T): *void*
-
-Use update user configuration
-
-#### Type parameters:
-
-Name | Default |
-:------ | :------ |
-`T` | *any* |
-
-#### Parameters:
-
-Name | Type | Description |
-:------ | :------ | :------ |
-`config` | T | Configuration    |
-
-**Returns:** *void*
-
-Defined in: [client/pages/Reports/hooks/useUpdateUserConfiguration.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useUpdateUserConfiguration.ts#L14)
 
 ___
 

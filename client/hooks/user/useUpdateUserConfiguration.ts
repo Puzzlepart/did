@@ -5,7 +5,14 @@ import { useEffect } from 'react'
 import $updateUserConfiguration from './update-user-configuration.gql'
 
 /**
- * Use update user configuration
+ * Update user configuration hook
+ * 
+ * Retrieves config JSON and update (boolean) and uses useMutation.
+ * It will only execute the mutation if update is equal to true, and
+ * the value has changed.
+ * 
+ * @remarks For now this is how we update user configuration,
+ * but it might be better ways. For now this should do. 
  *
  * @param config - Configuration
  * @param update - Update
