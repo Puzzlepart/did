@@ -12,7 +12,6 @@ import { useUserNotifications } from './useUserNotifications'
  */
 export const UserNotifications: FunctionComponent = () => {
   const context = useUserNotifications()
-
   return (
     <UserNotificationsContext.Provider value={context}>
       <div className={styles.root} onClick={context.showPanel}>
@@ -20,7 +19,9 @@ export const UserNotifications: FunctionComponent = () => {
           <div className={styles.icon}>
             <Icon iconName='Ringer' />
           </div>
-          <div hidden={isEmpty(context.notifications)} className={styles.count}>
+          <div
+            style={{ opacity: isEmpty(context.notifications) ? 0 : 1 }}
+            className={styles.count}>
             {context.notifications.length}
           </div>
         </a>
