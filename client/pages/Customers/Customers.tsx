@@ -39,7 +39,7 @@ export const Customers: FunctionComponent = () => {
   return (
     <CustomersContext.Provider value={ctxValue}>
       <Pivot
-        selectedKey={params.view || 'search'}
+        selectedKey={state.view || 'search'}
         onLinkClick={({ props }) => dispatch(CHANGE_VIEW({ view: props.itemKey as CustomersView }))}
         styles={{ itemContainer: { paddingTop: 10 } }}>
         <PivotItem
