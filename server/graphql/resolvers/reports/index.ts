@@ -49,6 +49,21 @@ export class ReportsResolver {
   }
 
   /**
+   * Get forecast report
+   *
+   * @param query - Query
+   */
+  @Authorized<IAuthOptions>()
+  @Query(() => [TimeEntry], {
+    description: 'Get forecast report using custom filters.'
+  })
+  async forecastedReport(
+    @Arg('query', { nullable: true }) query?: ReportsQuery
+  ) {
+    return await this._report.getForecastReport(query)
+  }
+
+  /**
    * Get report
    *
    * @param query - Query

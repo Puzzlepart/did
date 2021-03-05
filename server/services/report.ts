@@ -1,6 +1,7 @@
+/* eslint-disable unicorn/no-array-callback-reference */
 import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
-import { find, first } from 'underscore'
+import { find, first, omit } from 'underscore'
 import { ProjectService, UserService } from '.'
 import { DateObject } from '../../shared/utils/date.dateObject'
 import { Context } from '../graphql/context'
@@ -12,6 +13,7 @@ import {
   TimeEntry,
   User
 } from '../graphql/resolvers/types'
+import { ForecastedTimeEntryService, TimeEntryService } from './mongo'
 
 type Report = TimeEntry[]
 
@@ -33,8 +35,13 @@ export class ReportService {
   constructor(
     @Inject('CONTEXT') readonly context: Context,
     private readonly _project: ProjectService,
-    private readonly _user: UserService
-  ) {}
+    private readonly _user: UserService,
+    private readonly _timeEntry: TimeEntryService,
+    private readonly _forecastedTimeEntry: ForecastedTimeEntryService
+  ) {
+    // eslint-disable-next-line no-console
+    console.log(this._project.collectionName, this._user.collectionName)
+  }
 
   /**
    * Generate preset query
@@ -128,28 +135,25 @@ export class ReportService {
     query: ReportsQuery = {},
     sortAsc?: boolean
   ): Promise<Report> {
-    // try {
-    //   let q = this._generatePresetQuery(preset)
-    //   q = omit({ ...q, ...query }, 'preset')
-    //   const [timeEntries, { projects, customers }, users] = await Promise.all([
-    //     this.find(q),
-    //     this._project.getProjectsData(),
-    //     this._user.getUsers()
-    //   ])
-    //   const report = this._generateReport({
-    //     timeEntries,
-    //     projects,
-    //     customers,
-    //     users,
-    //     sortAsc
-    //   })
-    //   return report
-    // } catch (error) {
-    //   throw error
-    // }
-    // eslint-disable-next-line no-console
-    console.log(query, sortAsc)
-    return await Promise.all([])
+    try {
+      let q = this._generatePresetQuery(preset)
+      q = omit({ ...q, ...query }, 'preset')
+      const [timeEntries, { projects, customers }, users] = await Promise.all([
+        this._timeEntry.find(q),
+        this._project.getProjectsData(),
+        this._user.getUsers()
+      ])
+      const report = this._generateReport({
+        timeEntries,
+        projects,
+        customers,
+        users,
+        sortAsc
+      })
+      return report
+    } catch (error) {
+      throw error
+    }
   }
 
   /**
@@ -162,26 +166,23 @@ export class ReportService {
     query: ReportsQuery = {},
     sortAsc?: boolean
   ): Promise<Report> {
-    // try {
-    //   const [timeEntries, { projects, customers }, users] = await Promise.all([
-    //     this.find(query),
-    //     this._project.getProjectsData(),
-    //     this._user.getUsers()
-    //   ])
-    //   const report = this._generateReport({
-    //     timeEntries,
-    //     projects,
-    //     customers,
-    //     users,
-    //     sortAsc
-    //   })
-    //   return report
-    // } catch (error) {
-    //   throw error
-    // }
-    // eslint-disable-next-line no-console
-    console.log(query, sortAsc)
-    return await Promise.all([])
+    try {
+      const [timeEntries, { projects, customers }, users] = await Promise.all([
+        this._forecastedTimeEntry.find(query),
+        this._project.getProjectsData(),
+        this._user.getUsers()
+      ])
+      const report = this._generateReport({
+        timeEntries,
+        projects,
+        customers,
+        users,
+        sortAsc
+      })
+      return report
+    } catch (error) {
+      throw error
+    }
   }
 
   /**
