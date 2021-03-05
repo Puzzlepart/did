@@ -1,7 +1,7 @@
 #import "../../../../graphql/fragments/timeentry-fragment.gql"
 
 query ForecastReport {
-  report(preset: "FORECAST") {
+  report: forecastedReport {
     ...TimeEntryFragment
   }
 }
