@@ -1,9 +1,9 @@
 import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
-import { find, first, omit } from 'underscore'
+import { find, first } from 'underscore'
 import { ProjectService, UserService } from '.'
-import { DateObject } from '../../../shared/utils/date.dateObject'
-import { Context } from '../../graphql/context'
+import { DateObject } from '../../shared/utils/date.dateObject'
+import { Context } from '../graphql/context'
 import {
   Customer,
   Project,
@@ -11,8 +11,7 @@ import {
   ReportsQueryPreset,
   TimeEntry,
   User
-} from '../../graphql/resolvers/types'
-import { MongoDocumentService } from './@document'
+} from '../graphql/resolvers/types'
 
 type Report = TimeEntry[]
 
@@ -25,20 +24,17 @@ interface IGenerateReportParameters {
 }
 
 @Service({ global: false })
-export class ReportsService extends MongoDocumentService<TimeEntry> {
-  private _project: ProjectService
-  private _user: UserService
-
+export class ReportService {
   /**
    * Constructor for ReportsService
    *
    * @param context - Context
    */
-  constructor(@Inject('CONTEXT') readonly context: Context) {
-    super(context, 'time_entries')
-    this._project = new ProjectService(context)
-    this._user = new UserService(context)
-  }
+  constructor(
+    @Inject('CONTEXT') readonly context: Context,
+    private readonly _project: ProjectService,
+    private readonly _user: UserService
+  ) {}
 
   /**
    * Generate preset query
@@ -132,25 +128,28 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
     query: ReportsQuery = {},
     sortAsc?: boolean
   ): Promise<Report> {
-    try {
-      let q = this._generatePresetQuery(preset)
-      q = omit({ ...q, ...query }, 'preset')
-      const [timeEntries, { projects, customers }, users] = await Promise.all([
-        this.find(q),
-        this._project.getProjectsData(),
-        this._user.getUsers()
-      ])
-      const report = this._generateReport({
-        timeEntries,
-        projects,
-        customers,
-        users,
-        sortAsc
-      })
-      return report
-    } catch (error) {
-      throw error
-    }
+    // try {
+    //   let q = this._generatePresetQuery(preset)
+    //   q = omit({ ...q, ...query }, 'preset')
+    //   const [timeEntries, { projects, customers }, users] = await Promise.all([
+    //     this.find(q),
+    //     this._project.getProjectsData(),
+    //     this._user.getUsers()
+    //   ])
+    //   const report = this._generateReport({
+    //     timeEntries,
+    //     projects,
+    //     customers,
+    //     users,
+    //     sortAsc
+    //   })
+    //   return report
+    // } catch (error) {
+    //   throw error
+    // }
+    // eslint-disable-next-line no-console
+    console.log(query, sortAsc)
+    return await Promise.all([])
   }
 
   /**
@@ -163,23 +162,26 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
     query: ReportsQuery = {},
     sortAsc?: boolean
   ): Promise<Report> {
-    try {
-      const [timeEntries, { projects, customers }, users] = await Promise.all([
-        this.find(query),
-        this._project.getProjectsData(),
-        this._user.getUsers()
-      ])
-      const report = this._generateReport({
-        timeEntries,
-        projects,
-        customers,
-        users,
-        sortAsc
-      })
-      return report
-    } catch (error) {
-      throw error
-    }
+    // try {
+    //   const [timeEntries, { projects, customers }, users] = await Promise.all([
+    //     this.find(query),
+    //     this._project.getProjectsData(),
+    //     this._user.getUsers()
+    //   ])
+    //   const report = this._generateReport({
+    //     timeEntries,
+    //     projects,
+    //     customers,
+    //     users,
+    //     sortAsc
+    //   })
+    //   return report
+    // } catch (error) {
+    //   throw error
+    // }
+    // eslint-disable-next-line no-console
+    console.log(query, sortAsc)
+    return await Promise.all([])
   }
 
   /**
@@ -194,24 +196,27 @@ export class ReportsService extends MongoDocumentService<TimeEntry> {
     _userId: string,
     sortAsc?: boolean
   ): Promise<Report> {
-    try {
-      const q = {
-        _userId,
-        ...this._generatePresetQuery(preset)
-      }
-      const [timeEntries, { projects, customers }] = await Promise.all([
-        this.find(q),
-        this._project.getProjectsData()
-      ])
-      const report = this._generateReport({
-        timeEntries,
-        projects,
-        customers,
-        sortAsc
-      })
-      return report
-    } catch (error) {
-      throw error
-    }
+    // try {
+    //   const q = {
+    //     _userId,
+    //     ...this._generatePresetQuery(preset)
+    //   }
+    //   const [timeEntries, { projects, customers }] = await Promise.all([
+    //     this.find(q),
+    //     this._project.getProjectsData()
+    //   ])
+    //   const report = this._generateReport({
+    //     timeEntries,
+    //     projects,
+    //     customers,
+    //     sortAsc
+    //   })
+    //   return report
+    // } catch (error) {
+    //   throw error
+    // }
+    // eslint-disable-next-line no-console
+    console.log(preset, sortAsc, _userId)
+    return await Promise.all([])
   }
 }
