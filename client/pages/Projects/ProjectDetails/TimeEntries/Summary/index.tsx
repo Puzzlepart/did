@@ -9,13 +9,17 @@ import { useSummary } from './useSummary'
  * @category Projects
  */
 export const Summary: FunctionComponent<ISummaryProps> = ({
-  timeentries
+  timeentries,
+  loading
 }: ISummaryProps) => {
   const items = useSummary(timeentries)
   return (
     <FadeIn className={styles.root}>
       {items.map(({ label, value }, index) => (
-        <div key={index} className={styles.item}>
+        <div
+          key={index}
+          className={styles.item}
+          style={{ opacity: loading ? 0 : 1 }}>
           <div className={styles.value}>{value}</div>
           <div className={styles.label}>{label}</div>
         </div>

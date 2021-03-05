@@ -1,5 +1,5 @@
 
-  query ProjectTimeEntries ($query: ReportsQuery!) {
+  query ProjectReport ($query: ReportsQuery!) {
     report(query: $query) {
       title
       duration

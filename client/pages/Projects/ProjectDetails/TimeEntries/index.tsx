@@ -18,10 +18,11 @@ import { useTimeEntries } from './useTimeEntries'
 export const TimeEntries: FunctionComponent = () => {
   const { t } = useTranslation()
   const { loading, timeentries, onExport, error } = useTimeEntries()
-
   return (
     <div className={styles.root}>
-      <Summary hidden={isEmpty(timeentries)} timeentries={timeentries} />
+      {!isEmpty(timeentries) && !loading && (
+        <Summary loading={loading} timeentries={timeentries} />
+      )}
       <div hidden={isEmpty(timeentries)}>
         <ActionButton
           text={t('projects.exportTimeEntriesLabel')}

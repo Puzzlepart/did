@@ -22,7 +22,7 @@ export function useTimeEntries() {
   )}-{0}.xlsx`
 
   const { onExport } = useExcelExport({
-    items: data?.timeentries,
+    items: data?.report,
     fileName,
     columns
   })
@@ -32,6 +32,6 @@ export function useTimeEntries() {
     error,
     data,
     onExport,
-    timeentries: data?.timeentries || []
+    timeentries: data?.report || []
   }
 }
