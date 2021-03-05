@@ -6,6 +6,7 @@ import {
   StickyPositionType
 } from 'office-ui-fabric-react'
 import React, { FunctionComponent, useMemo, useRef } from 'react'
+import { isEmpty } from 'underscore'
 import styles from './ListHeader.module.scss'
 import { IListHeaderProps } from './types'
 
@@ -37,7 +38,9 @@ export const ListHeader: FunctionComponent<IListHeaderProps> = (
 
   const commandBarProps: ICommandBarProps = {
     ...(props.commandBar || {}),
-    items: [searchBox, ...(props.commandBar.items || [])],
+    items: [searchBox, ...(props.commandBar?.items || [])].filter(
+      (item) => item
+    ),
     farItems: []
   }
 
@@ -47,8 +50,7 @@ export const ListHeader: FunctionComponent<IListHeaderProps> = (
         <CommandBar
           {...commandBarProps}
           hidden={
-            commandBarProps.items.length === 0 &&
-            commandBarProps.farItems.length === 0
+            isEmpty(commandBarProps.items) && isEmpty(commandBarProps.farItems)
           }
           styles={{ root: { margin: 0, padding: 0 } }}
         />

@@ -125,7 +125,8 @@ export function useQueryPresets(): IReportsQueryPresetItem[] {
         lastMonthQueryPreset,
         currentMonthQueryPreset,
         lastYearQueryPreset,
-        currentYearQueryPreset
+        currentYearQueryPreset,
+        forecastQueryPreset
       ].map((presetFunction) => {
         return presetFunction(t)
       }),
