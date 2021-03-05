@@ -43,7 +43,7 @@ export function useColumns() {
         minWidth: 100,
         data: { excelColFormat: 'date' as ExcelColumnType },
         onRender: ({ startDateTime }) =>
-          DateUtils.formatDate(startDateTime, 'MMM DD, YYYY kk:mm')
+          DateUtils.formatDate(startDateTime, 'MMM DD, YYYY HH:mm')
       },
       {
         key: 'endDateTime',
@@ -52,7 +52,7 @@ export function useColumns() {
         minWidth: 100,
         data: { excelColFormat: 'date' as ExcelColumnType },
         onRender: ({ endDateTime }) =>
-          DateUtils.formatDate(endDateTime, 'MMM DD, YYYY kk:mm')
+          DateUtils.formatDate(endDateTime, 'MMM DD, YYYY HH:mm')
       },
       {
         key: 'week',
