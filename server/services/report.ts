@@ -38,10 +38,7 @@ export class ReportService {
     private readonly _user: UserService,
     private readonly _timeEntry: TimeEntryService,
     private readonly _forecastedTimeEntry: ForecastedTimeEntryService
-  ) {
-    // eslint-disable-next-line no-console
-    console.log(this._project.collectionName, this._user.collectionName)
-  }
+  ) {}
 
   /**
    * Generate preset query
@@ -197,27 +194,24 @@ export class ReportService {
     _userId: string,
     sortAsc?: boolean
   ): Promise<Report> {
-    // try {
-    //   const q = {
-    //     _userId,
-    //     ...this._generatePresetQuery(preset)
-    //   }
-    //   const [timeEntries, { projects, customers }] = await Promise.all([
-    //     this.find(q),
-    //     this._project.getProjectsData()
-    //   ])
-    //   const report = this._generateReport({
-    //     timeEntries,
-    //     projects,
-    //     customers,
-    //     sortAsc
-    //   })
-    //   return report
-    // } catch (error) {
-    //   throw error
-    // }
-    // eslint-disable-next-line no-console
-    console.log(preset, sortAsc, _userId)
-    return await Promise.all([])
+    try {
+      const q = {
+        _userId,
+        ...this._generatePresetQuery(preset)
+      }
+      const [timeEntries, { projects, customers }] = await Promise.all([
+        this._timeEntry.find(q),
+        this._project.getProjectsData()
+      ])
+      const report = this._generateReport({
+        timeEntries,
+        projects,
+        customers,
+        sortAsc
+      })
+      return report
+    } catch (error) {
+      throw error
+    }
   }
 }
