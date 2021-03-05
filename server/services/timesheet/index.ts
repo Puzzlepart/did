@@ -68,7 +68,7 @@ export class TimesheetService {
         periods[index].forecastedHours = forecasted?.hours || 0
         if (confirmed) {
           const entries = await this._time_entries
-            .find({ _periodId: _id })
+            .find({ periodId: _id })
             .toArray()
           periods[index] = {
             ...periods[index],
@@ -139,7 +139,7 @@ export class TimesheetService {
           ...event,
           _id: this._createUniqueEventId(event.id, event.startDateTime as Date),
           ...omit(period, '_id'),
-          _periodId: period._id
+          periodId: period._id
         })
         return hours + event.duration
       }, 0)
@@ -179,7 +179,7 @@ export class TimesheetService {
       const { _id } = this._getPeriodData(period.id, this.context.userId)
       await Promise.all([
         entry_colletion.deleteMany({
-          _periodId: _id
+          periodId: _id
         }),
         period_collection.deleteOne({ _id })
       ])
