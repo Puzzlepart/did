@@ -19,6 +19,7 @@ _dependendy injection_.
 
 ### Methods
 
+- [forecastedReport](graphql.reportsresolver.md#forecastedreport)
 - [report](graphql.reportsresolver.md#report)
 - [userReport](graphql.reportsresolver.md#userreport)
 
@@ -26,7 +27,7 @@ _dependendy injection_.
 
 ### constructor
 
-\+ **new ReportsResolver**(`_reports`: [*ReportsService*](services.reportsservice.md)): [*ReportsResolver*](graphql.reportsresolver.md)
+\+ **new ReportsResolver**(`_report`: [*ReportService*](services_report.reportservice.md)): [*ReportsResolver*](graphql.reportsresolver.md)
 
 Constructor for ReportsResolver
 
@@ -34,13 +35,31 @@ Constructor for ReportsResolver
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`_reports` | [*ReportsService*](services.reportsservice.md) | Reports service    |
+`_report` | [*ReportService*](services_report.reportservice.md) | Report service    |
 
 **Returns:** [*ReportsResolver*](graphql.reportsresolver.md)
 
 Defined in: [server/graphql/resolvers/reports/index.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L23)
 
 ## Methods
+
+### forecastedReport
+
+▸ **forecastedReport**(`query?`: [*ReportsQuery*](graphql.reportsquery.md)): *Promise*<Report\>
+
+Get forecast report
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`query?` | [*ReportsQuery*](graphql.reportsquery.md) | Query    |
+
+**Returns:** *Promise*<Report\>
+
+Defined in: [server/graphql/resolvers/reports/index.ts:60](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L60)
+
+___
 
 ### report
 
@@ -77,4 +96,4 @@ Name | Type |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/graphql/resolvers/reports/index.ts:61](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L61)
+Defined in: [server/graphql/resolvers/reports/index.ts:76](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L76)

@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import DateUtils from 'DateUtils'
 import { ActionButton } from 'office-ui-fabric-react'
 import React from 'react'
@@ -24,6 +25,9 @@ export const generateNewIssueUrl = (error: Error) => {
   ].join('')
 }
 
+/**
+ * @category Function Component
+ */
 export const ErrorFallback = ({
   error,
   resetErrorBoundary

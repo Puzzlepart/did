@@ -73,6 +73,7 @@ Reusable React Function components.
 - [HotkeyModal](components.md#hotkeymodal)
 - [IconPicker](components.md#iconpicker)
 - [LabelPicker](components.md#labelpicker)
+- [List](components.md#list)
 - [MobileHeader](components.md#mobileheader)
 - [Navigation](components.md#navigation)
 - [PermissionList](components.md#permissionlist)
@@ -87,8 +88,8 @@ Reusable React Function components.
 
 ### Function Component Functions
 
+- [ErrorFallback](components.md#errorfallback)
 - [FilterPanel](components.md#filterpanel)
-- [List](components.md#list)
 - [SearchCustomer](components.md#searchcustomer)
 - [SearchProject](components.md#searchproject)
 
@@ -97,6 +98,10 @@ Reusable React Function components.
 - [SuggestionItem](components.md#suggestionitem)
 - [useAutocomplete](components.md#useautocomplete)
 - [useAutocompleteEvents](components.md#useautocompleteevents)
+
+### Other Functions
+
+- [generateNewIssueUrl](components.md#generatenewissueurl)
 
 ### UserMessage Functions
 
@@ -192,6 +197,29 @@ Defined in: [client/components/LabelPicker/index.tsx:14](https://github.com/Puzz
 
 ___
 
+### List
+
+• `Const` **List**: *FunctionComponent*<IListProps\>
+
+List component using `ShimmeredDetailsList` from `office-ui-fabric-react`.
+
+Used by:
+
+* EventList
+* Admin/ApiTokens
+* Admin/Roles
+* Admin/SummaryView
+* Admin/Users/AddMultiplePanel
+* Admin/Users
+* Customers/CustomerList
+* Projects/ProjectList
+* Reports
+* Timesheet/SummaryView
+
+Defined in: [client/components/List/index.tsx:40](https://github.com/Puzzlepart/did/blob/dev/client/components/List/index.tsx#L40)
+
+___
+
 ### MobileHeader
 
 • `Const` **MobileHeader**: *FunctionComponent*<[*IMobileHeaderProps*](../interfaces/components.imobileheaderprops.md)\>
@@ -260,6 +288,22 @@ Defined in: [client/components/Navigation/NavItem/index.tsx:13](https://github.c
 
 ## Function Component Functions
 
+### ErrorFallback
+
+▸ `Const`**ErrorFallback**(`__namedParameters`: IErrorFallbackProps): *Element*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`__namedParameters` | IErrorFallbackProps |
+
+**Returns:** *Element*
+
+Defined in: [client/components/ErrorFallback/index.tsx:31](https://github.com/Puzzlepart/did/blob/dev/client/components/ErrorFallback/index.tsx#L31)
+
+___
+
 ### FilterPanel
 
 ▸ `Const`**FilterPanel**(`props`: [*IFilterPanelProps*](../interfaces/components.ifilterpanelprops.md)): *Element*
@@ -273,23 +317,6 @@ Name | Type |
 **Returns:** *Element*
 
 Defined in: [client/components/FilterPanel/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/index.tsx#L12)
-
-___
-
-### List
-
-▸ `Const`**List**(`props`: *WithDefaultProps*<IListProps<any\>, PropsWithChildren<IListProps<any\>\>\>, `ref?`: *any*): *ReactElement*<any, any\>
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`props` | *WithDefaultProps*<IListProps<any\>, PropsWithChildren<IListProps<any\>\>\> |
-`ref?` | *any* |
-
-**Returns:** *ReactElement*<any, any\>
-
-Defined in: [client/components/List/index.tsx:106](https://github.com/Puzzlepart/did/blob/dev/client/components/List/index.tsx#L106)
 
 ___
 
@@ -397,6 +424,26 @@ Name | Type |
 `onSetSelected` | (`index`: *number*) => *any* |
 
 Defined in: [client/components/Autocomplete/useAutocompleteEvents.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/useAutocompleteEvents.ts#L15)
+
+___
+
+## Other Functions
+
+### generateNewIssueUrl
+
+▸ `Const`**generateNewIssueUrl**(`error`: Error): *string*
+
+Generate new issue GitHub URL
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`error` | Error | Error    |
+
+**Returns:** *string*
+
+Defined in: [client/components/ErrorFallback/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/ErrorFallback/index.tsx#L14)
 
 ___
 
