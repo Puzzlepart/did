@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next'
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import styles from './App.module.scss'
 import { AppContext, IAppContext } from './AppContext'
-import { ErrorFallback } from './ErrorFallback'
+import { ErrorFallback } from './components/ErrorFallback'
 import { useNotificationsQuery } from './hooks'
 import {
   AdminPage,
