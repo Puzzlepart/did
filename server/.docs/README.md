@@ -17,6 +17,7 @@ did-server - v0.9.8
 - [services](modules/services.md)
 - [services/cache](modules/services_cache.md)
 - [services/oauth](modules/services_oauth.md)
+- [services/report](modules/services_report.md)
 - [utils](modules/utils.md)
 - [utils/environment](modules/utils_environment.md)
 - [utils/firstPart](modules/utils_firstpart.md)

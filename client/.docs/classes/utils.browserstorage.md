@@ -8,7 +8,7 @@
 
 Name | Default |
 :------ | :------ |
-`T` | *any* |
+`T` | *unknown* |
 
 ## Table of contents
 
@@ -38,7 +38,7 @@ Name | Default |
 
 Name | Default |
 :------ | :------ |
-`T` | *any* |
+`T` | *unknown* |
 
 #### Parameters:
 
