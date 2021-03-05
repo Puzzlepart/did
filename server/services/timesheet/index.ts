@@ -202,7 +202,7 @@ export class TimesheetService {
    * Get period data from id
    *
    * * Generates an _id for Mongo DB
-   * * Returns week, month, year and _userId
+   * * Returns week, month, year and userId
    *
    * @param id - Id
    * @param userId - User ID
@@ -211,7 +211,7 @@ export class TimesheetService {
     const [week, month, year] = id.split('_').map((p) => Number.parseInt(p, 10))
     return {
       _id: `${id}${userId}`.replace(/[^\dA-Za-z]/g, ''),
-      _userId: userId,
+      userId,
       week,
       month,
       year
@@ -224,7 +224,7 @@ export class TimesheetService {
    * @param startDate - Start date
    * @param endDate - End date
    * @param locale - Locale
-   * @param _userId - User ID
+   * @param userId - User ID
    */
   public getPeriods(
     startDate: string,

@@ -189,12 +189,12 @@ export class ReportService {
    */
   public async getUserReport(
     preset: ReportsQueryPreset,
-    _userId: string,
+    userId: string,
     sortAsc?: boolean
   ): Promise<Report> {
     try {
       const q = {
-        _userId,
+        userId,
         ...this._generatePresetQuery(preset)
       }
       const [timeEntries, { projects, customers }] = await Promise.all([

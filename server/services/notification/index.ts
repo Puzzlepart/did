@@ -65,7 +65,7 @@ export class NotificationService {
 
     const confirmedPeriods = await this._confirmed_periods
       .find({
-        _userId: this.context.userId
+        userId: this.context.userId
       })
       .toArray()
 
@@ -103,7 +103,7 @@ export class NotificationService {
 
     const forecastedPeriods = await this._forecasted_periods
       .find({
-        _userId: this.context.userId
+        userId: this.context.userId
       })
       .toArray()
 
