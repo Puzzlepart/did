@@ -38,7 +38,7 @@ export const ListHeader: FunctionComponent<IListHeaderProps> = (
 
   const commandBarProps: ICommandBarProps = {
     ...(props.commandBar || {}),
-    items: [searchBox, ...(props.commandBar.items || [])].filter(
+    items: [searchBox, ...(props.commandBar?.items || [])].filter(
       (item) => item
     ),
     farItems: []
