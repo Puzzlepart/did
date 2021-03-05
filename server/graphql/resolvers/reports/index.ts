@@ -57,10 +57,8 @@ export class ReportsResolver {
   @Query(() => [TimeEntry], {
     description: 'Get forecast report using custom filters.'
   })
-  async forecastedReport(
-    @Arg('query', { nullable: true }) query?: ReportsQuery
-  ) {
-    return await this._report.getForecastReport(query)
+  async forecastedReport() {
+    return await this._report.getForecastReport()
   }
 
   /**

@@ -155,17 +155,15 @@ export class ReportService {
 
   /**
    * Get forecast report
-   *
-   * @param query - Custom query
-   * @param sortAsc - Sort ascending
    */
-  public async getForecastReport(
-    query: ReportsQuery = {},
-    sortAsc?: boolean
-  ): Promise<Report> {
+  public async getForecastReport(): Promise<Report> {
     try {
       const [timeEntries, { projects, customers }, users] = await Promise.all([
-        this._forecastedTimeEntry.find(query),
+        this._forecastedTimeEntry.find({
+          startDateTime: {
+            $gte: new Date()
+          }
+        }),
         this._project.getProjectsData(),
         this._user.getUsers()
       ])
@@ -174,7 +172,7 @@ export class ReportService {
         projects,
         customers,
         users,
-        sortAsc
+        sortAsc: true
       })
       return report
     } catch (error) {
