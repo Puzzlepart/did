@@ -307,7 +307,9 @@
     "rangeLabel": "Tidsrom",
     "totalHours": "Timer totalt",
     "userReportSummary": "Du har jobbet **{{hours}}** timer for **{{projects}} **prosjekter _{{preset}}_. \nKlikk **Eksporter** for å eksportere timene dine til Excel.",
-    "exportExcel": "Eksporter til Excel"
+    "exportExcel": "Eksporter til Excel",
+    "errorFallbackHeader": "Det ser ut som noe gikk galt",
+    "tryAgainText": "Prøv igjen"
   },
   "navigation": {
     "timesheet": "Timeliste",

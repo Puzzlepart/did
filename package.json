@@ -105,6 +105,7 @@
     "react-copy-to-clipboard": "5.0.3",
     "react-device-detect": "1.14.0",
     "react-dom": "16.13.1",
+    "react-error-boundary": "^3.1.1",
     "react-fade-in": "1.1.1",
     "react-hotkeys": "2.0.0",
     "react-i18next": "11.7.3",
