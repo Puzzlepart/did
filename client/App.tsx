@@ -4,8 +4,7 @@
  *
  * @module App
  */
-import { MobileHeader } from 'components/MobileHeader'
-import { Navigation } from 'components/Navigation'
+import { ErrorFallback, MobileHeader, Navigation } from 'components'
 import { PERMISSION } from 'config/security/permissions'
 import React, { FunctionComponent } from 'react'
 import { isMobile } from 'react-device-detect'
@@ -14,7 +13,6 @@ import { useTranslation } from 'react-i18next'
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import styles from './App.module.scss'
 import { AppContext, IAppContext } from './AppContext'
-import { ErrorFallback } from './components/ErrorFallback'
 import { useNotificationsQuery } from './hooks'
 import {
   AdminPage,

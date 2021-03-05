@@ -310,7 +310,8 @@
     "userReportSummary": "You have worked **{{hours}}** hours for **{{projects}}** projects _{{preset}}_. Click **Export** to export your hours to Excel.",
     "exportExcel": "Export to Excel",
     "errorFallbackHeader": "It looks like something went wrong",
-    "tryAgainText": "Try again"
+    "tryAgainText": "Try again, it might work...",
+    "githubIssueReportLinkText": "Report issue on GitHub"
   },
   "navigation": {
     "timesheet": "Timesheet",

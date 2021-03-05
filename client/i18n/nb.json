@@ -309,7 +309,8 @@
     "userReportSummary": "Du har jobbet **{{hours}}** timer for **{{projects}} **prosjekter _{{preset}}_. \nKlikk **Eksporter** for å eksportere timene dine til Excel.",
     "exportExcel": "Eksporter til Excel",
     "errorFallbackHeader": "Det ser ut som noe gikk galt",
-    "tryAgainText": "Prøv igjen"
+    "tryAgainText": "Prøv igjen, det kan fungere ...",
+    "githubIssueReportLinkText": "Rapporter problem på GitHub"
   },
   "navigation": {
     "timesheet": "Timeliste",
