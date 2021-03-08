@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/no-array-reduce */
 /* eslint-disable react-hooks/exhaustive-deps */
 import AppConfig from 'AppConfig'
 import DateUtils from 'DateUtils'

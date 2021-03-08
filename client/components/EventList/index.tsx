@@ -1,8 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 import { List } from 'components'
 import React, { FunctionComponent } from 'react'
-import { useTranslation } from 'react-i18next'
-import { durationColumn, timeColumn, titleColumn } from './columns'
+import { useColumns } from './columns'
 import styles from './EventList.module.scss'
 import { IEventListProps } from './types'
 
@@ -12,17 +11,7 @@ import { IEventListProps } from './types'
 export const EventList: FunctionComponent<IEventListProps> = (
   props: IEventListProps
 ): JSX.Element => {
-  const { t } = useTranslation()
-  const columns = [
-    titleColumn(props, t('common.titleLabel')),
-    timeColumn(props, t('common.timeLabel')),
-    durationColumn(props, t('common.durationLabel')),
-    ...props.additionalColumns
-  ].map((col) => ({
-    ...col,
-    isResizable: props.resizableColumns
-  }))
-
+  const columns = useColumns(props)
   return (
     <div className={styles.root} hidden={props.hidden}>
       <List

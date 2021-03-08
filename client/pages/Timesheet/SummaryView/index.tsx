@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable unicorn/no-array-reduce */
 import { DurationColumn, List, ProjectTooltip } from 'components'
 import DateUtils from 'DateUtils'
 import { IColumn, MessageBar } from 'office-ui-fabric-react'
