@@ -276,7 +276,8 @@
           "revert",
           "style",
           "test",
-          "dev"
+          "dev",
+          "i18n"
         ]
       ]
     }
