@@ -41,7 +41,7 @@ export const ListHeader: FunctionComponent<IListHeaderProps> = (
     items: [searchBox, ...(props.commandBar?.items || [])].filter(
       (item) => item
     ),
-    farItems: []
+    farItems: props.commandBar?.farItems || []
   }
 
   return (
