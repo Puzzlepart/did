@@ -19,18 +19,19 @@ export type ProjectsData = {
 
 @Service({ global: false })
 export class ProjectService extends MongoDocumentService<Project> {
-  private _customer: CustomerService
-  private _label: LabelService
-
   /**
-   * Constructor for MongoDatabase
+   * Constructor for ProjectService
    *
    * @param context - Injected context through typedi
+   * @param _customer - Injected `CustomerService` through typedi
+   * @param _label - Injected `LabelService` through typedi
    */
-  constructor(@Inject('CONTEXT') readonly context: Context) {
+  constructor(
+    @Inject('CONTEXT') readonly context: Context,
+    private readonly _customer: CustomerService,
+    private readonly _label: LabelService
+  ) {
     super(context, 'projects', ProjectService.name)
-    this._customer = new CustomerService(context)
-    this._label = new LabelService(context)
   }
 
   /**

@@ -18,8 +18,6 @@
 
 ### Properties
 
-- [\_customer](services.projectservice.md#_customer)
-- [\_label](services.projectservice.md#_label)
 - [cache](services.projectservice.md#cache)
 - [cachePrefix](services.projectservice.md#cacheprefix)
 - [collection](services.projectservice.md#collection)
@@ -39,37 +37,23 @@
 
 ### constructor
 
-\+ **new ProjectService**(`context`: [*Context*](graphql_context.context.md)): [*ProjectService*](services.projectservice.md)
+\+ **new ProjectService**(`context`: [*Context*](graphql_context.context.md), `_customer`: [*CustomerService*](services.customerservice.md), `_label`: [*LabelService*](services.labelservice.md)): [*ProjectService*](services.projectservice.md)
 
-Constructor for MongoDatabase
+Constructor for ProjectService
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | [*Context*](graphql_context.context.md) | Injected context through typedi    |
+`context` | [*Context*](graphql_context.context.md) | Injected context through typedi   |
+`_customer` | [*CustomerService*](services.customerservice.md) | Injected `CustomerService` through typedi   |
+`_label` | [*LabelService*](services.labelservice.md) | Injected `LabelService` through typedi    |
 
 **Returns:** [*ProjectService*](services.projectservice.md)
 
-Defined in: [server/services/mongo/project.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L23)
+Defined in: [server/services/mongo/project.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L21)
 
 ## Properties
-
-### \_customer
-
-• `Private` **\_customer**: [*CustomerService*](services.customerservice.md)
-
-Defined in: [server/services/mongo/project.ts:22](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L22)
-
-___
-
-### \_label
-
-• `Private` **\_label**: [*LabelService*](services.labelservice.md)
-
-Defined in: [server/services/mongo/project.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L23)
-
-___
 
 ### cache
 
@@ -121,7 +105,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<string\>
 
-Defined in: [server/services/mongo/project.ts:43](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L43)
+Defined in: [server/services/mongo/project.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L44)
 
 ___
 
@@ -170,7 +154,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<ProjectsData\>
 
-Defined in: [server/services/mongo/project.ts:87](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L87)
+Defined in: [server/services/mongo/project.ts:88](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L88)
 
 ___
 
@@ -231,4 +215,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<boolean\>
 
-Defined in: [server/services/mongo/project.ts:65](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L65)
+Defined in: [server/services/mongo/project.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L66)
