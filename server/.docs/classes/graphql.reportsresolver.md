@@ -45,15 +45,9 @@ Defined in: [server/graphql/resolvers/reports/index.ts:23](https://github.com/Pu
 
 ### forecastedReport
 
-▸ **forecastedReport**(`query?`: [*ReportsQuery*](graphql.reportsquery.md)): *Promise*<Report\>
+▸ **forecastedReport**(): *Promise*<Report\>
 
 Get forecast report
-
-#### Parameters:
-
-Name | Type | Description |
-:------ | :------ | :------ |
-`query?` | [*ReportsQuery*](graphql.reportsquery.md) | Query    |
 
 **Returns:** *Promise*<Report\>
 
@@ -96,4 +90,4 @@ Name | Type |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/graphql/resolvers/reports/index.ts:76](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L76)
+Defined in: [server/graphql/resolvers/reports/index.ts:74](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L74)

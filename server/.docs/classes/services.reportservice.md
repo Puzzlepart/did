@@ -90,20 +90,13 @@ ___
 
 ### getForecastReport
 
-▸ **getForecastReport**(`query?`: [*ReportsQuery*](graphql.reportsquery.md), `sortAsc?`: *boolean*): *Promise*<Report\>
+▸ **getForecastReport**(): *Promise*<Report\>
 
 Get forecast report
 
-#### Parameters:
-
-Name | Type | Description |
-:------ | :------ | :------ |
-`query` | [*ReportsQuery*](graphql.reportsquery.md) | Custom query   |
-`sortAsc?` | *boolean* | Sort ascending    |
-
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/report.ts:162](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L162)
+Defined in: [server/services/report.ts:159](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L159)
 
 ___
 
@@ -129,7 +122,7 @@ ___
 
 ### getUserReport
 
-▸ **getUserReport**(`preset`: [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset), `_userId`: *string*, `sortAsc?`: *boolean*): *Promise*<Report\>
+▸ **getUserReport**(`preset`: [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset), `userId`: *string*, `sortAsc?`: *boolean*): *Promise*<Report\>
 
 Get user report using presets
 
@@ -138,9 +131,9 @@ Get user report using presets
 Name | Type | Description |
 :------ | :------ | :------ |
 `preset` | [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset) | Query preset   |
-`_userId` | *string* | - |
+`userId` | *string* | User ID   |
 `sortAsc?` | *boolean* | Sort ascending    |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/report.ts:192](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L192)
+Defined in: [server/services/report.ts:190](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L190)

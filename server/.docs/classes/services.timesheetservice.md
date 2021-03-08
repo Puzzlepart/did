@@ -127,7 +127,7 @@ ___
 Get period data from id
 
 * Generates an _id for Mongo DB
-* Returns week, month, year and _userId
+* Returns week, month, year and userId
 
 #### Parameters:
 
@@ -141,8 +141,8 @@ Name | Type | Description |
 Name | Type |
 :------ | :------ |
 `_id` | *string* |
-`_userId` | *string* |
 `month` | *number* |
+`userId` | *string* |
 `week` | *number* |
 `year` | *number* |
 
@@ -163,7 +163,7 @@ Name | Type | Description |
 `startDate` | *string* | Start date   |
 `endDate` | *string* | End date   |
 `locale` | *string* | Locale   |
-`userId` | *string* | - |
+`userId` | *string* | User ID    |
 
 **Returns:** [*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]
 
