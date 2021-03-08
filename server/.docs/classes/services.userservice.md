@@ -33,6 +33,8 @@
 - [find](services.userservice.md#find)
 - [getById](services.userservice.md#getbyid)
 - [getUsers](services.userservice.md#getusers)
+- [insert](services.userservice.md#insert)
+- [update](services.userservice.md#update)
 - [updateCurrentUserConfiguration](services.userservice.md#updatecurrentuserconfiguration)
 - [updateUser](services.userservice.md#updateuser)
 
@@ -66,7 +68,7 @@ ___
 
 • **cache**: [*CacheService*](services_cache.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:6](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L6)
+Defined in: [server/services/mongo/@document.ts:8](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L8)
 
 ___
 
@@ -80,7 +82,7 @@ ___
 
 • **collection**: *Collection*<[*User*](graphql.user.md)\>
 
-Defined in: [server/services/mongo/@document.ts:7](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L7)
+Defined in: [server/services/mongo/@document.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L9)
 
 ___
 
@@ -165,7 +167,7 @@ ___
 
 Wrapper on find().toArray()
 
-**`see`** — https ://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
+**`see`** — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
 
 #### Type parameters:
 
@@ -182,7 +184,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*User*](graphql.user.md)[]\>
 
-Defined in: [server/services/mongo/@document.ts:37](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L37)
+Defined in: [server/services/mongo/@document.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L39)
 
 ___
 
@@ -219,6 +221,47 @@ Name | Type | Description |
 **Returns:** *Promise*<[*User*](graphql.user.md)[]\>
 
 Defined in: [server/services/mongo/user.ts:37](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L37)
+
+___
+
+### insert
+
+▸ **insert**(`document_`: *any*): *Promise*<InsertOneWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
+
+Wrapper on insertOne() that also updates `updatedAt` and `createdAt` properties
+
+**`see`** — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#insertOne
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`document_` | *any* | Document    |
+
+**Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
+
+Defined in: [server/services/mongo/@document.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L50)
+
+___
+
+### update
+
+▸ **update**(`query`: *FilterQuery*<[*User*](graphql.user.md)\>, `document_`: *any*): *Promise*<UpdateWriteOpResult\>
+
+Wrapper on updateOne() that also updates `updatedAt` property
+
+**`see`** — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#updateOne
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`query` | *FilterQuery*<[*User*](graphql.user.md)\> | Query   |
+`document_` | *any* | Document    |
+
+**Returns:** *Promise*<UpdateWriteOpResult\>
+
+Defined in: [server/services/mongo/@document.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L66)
 
 ___
 
