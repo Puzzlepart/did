@@ -44,7 +44,7 @@ export class ProjectService extends MongoDocumentService<Project> {
     try {
       await this.cache.clear({ key: 'getprojectsdata' })
       const tag = [project.customerKey, project.key].join(' ')
-      const { insertedId } = await this.collection.insertOne({
+      const { insertedId } = await this.insert({
         _id: tag,
         tag,
         ...project
@@ -66,7 +66,7 @@ export class ProjectService extends MongoDocumentService<Project> {
     try {
       await this.cache.clear({ key: 'getprojectsdata' })
       const filter: FilterQuery<Project> = pick(project, 'key', 'customerKey')
-      const { result } = await this.collection.updateOne(filter, {
+      const { result } = await this.update(filter, {
         $set: project
       })
       return result.ok === 1
