@@ -277,7 +277,8 @@
           "style",
           "test",
           "dev",
-          "i18n"
+          "i18n",
+          "github"
         ]
       ]
     }
