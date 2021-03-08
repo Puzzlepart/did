@@ -42,7 +42,7 @@ Constructor for ReportsService
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | [*Context*](graphql_context.context.md) | Context    |
+`context` | [*Context*](graphql_context.context.md) | Injected context through typedi    |
 
 **Returns:** [*TimeEntryService*](services.timeentryservice.md)
 

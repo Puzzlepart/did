@@ -34,11 +34,11 @@ Constructor for ReportsService
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | [*Context*](graphql_context.context.md) | Context    |
-`_project` | [*ProjectService*](services.projectservice.md) | - |
-`_user` | [*UserService*](services.userservice.md) | - |
-`_timeEntry` | [*TimeEntryService*](services.timeentryservice.md) | - |
-`_forecastedTimeEntry` | [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md) | - |
+`context` | [*Context*](graphql_context.context.md) | Injected context through typedi   |
+`_project` | [*ProjectService*](services.projectservice.md) | Injected `ProjectService` through typedi   |
+`_user` | [*UserService*](services.userservice.md) | Injected `UserService` through typedi   |
+`_timeEntry` | [*TimeEntryService*](services.timeentryservice.md) | Injected `TimeEntryService` through typedi   |
+`_forecastedTimeEntry` | [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md) | Injected `ForecastedTimeEntryService` through typedi    |
 
 **Returns:** [*ReportService*](services_report.reportservice.md)
 
@@ -66,7 +66,7 @@ Name | Type | Description |
 
 **Returns:** *FilterQuery*<[*TimeEntry*](graphql.timeentry.md)\>
 
-Defined in: [server/services/report.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L48)
+Defined in: [server/services/report.ts:52](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L52)
 
 ___
 
@@ -84,7 +84,7 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [server/services/report.ts:83](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L83)
+Defined in: [server/services/report.ts:87](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L87)
 
 ___
 
@@ -96,7 +96,7 @@ Get forecast report
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/report.ts:159](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L159)
+Defined in: [server/services/report.ts:163](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L163)
 
 ___
 
@@ -116,7 +116,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/report.ts:130](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L130)
+Defined in: [server/services/report.ts:134](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L134)
 
 ___
 
@@ -136,4 +136,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/report.ts:190](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L190)
+Defined in: [server/services/report.ts:194](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L194)

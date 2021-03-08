@@ -25,7 +25,7 @@ export class ProjectService extends MongoDocumentService<Project> {
   /**
    * Constructor for MongoDatabase
    *
-   * @param context - Context
+   * @param context - Injected context through typedi
    */
   constructor(@Inject('CONTEXT') readonly context: Context) {
     super(context, 'projects', ProjectService.name)

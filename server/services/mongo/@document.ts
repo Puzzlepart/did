@@ -13,7 +13,7 @@ export class MongoDocumentService<T> {
    *
    * Specify cachePrefix to use an underlying CacheService
    *
-   * @param context - Context
+   * @param context - Injected context through typedi
    * @param collectionName - Colletion name
    * @param cachePrefix - Cache prefix
    */

@@ -30,7 +30,11 @@ export class ReportService {
   /**
    * Constructor for ReportsService
    *
-   * @param context - Context
+   * @param context - Injected context through typedi
+   * @param _project - Injected `ProjectService` through typedi
+   * @param _user - Injected `UserService` through typedi
+   * @param _timeEntry - Injected `TimeEntryService` through typedi
+   * @param _forecastedTimeEntry - Injected `ForecastedTimeEntryService` through typedi
    */
   constructor(
     @Inject('CONTEXT') readonly context: Context,
