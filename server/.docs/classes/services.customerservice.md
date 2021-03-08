@@ -31,6 +31,7 @@
 - [find](services.customerservice.md#find)
 - [getCustomers](services.customerservice.md#getcustomers)
 - [insert](services.customerservice.md#insert)
+- [insertMultiple](services.customerservice.md#insertmultiple)
 - [update](services.customerservice.md#update)
 - [updateCustomer](services.customerservice.md#updatecustomer)
 
@@ -171,7 +172,7 @@ ___
 
 ▸ **insert**(`document_`: *any*): *Promise*<InsertOneWriteOpResult<WithId<[*Customer*](graphql.customer.md)\>\>\>
 
-Wrapper on insertOne() that also updates `updatedAt` and `createdAt` properties
+Wrapper on insertOne() that also sets `updatedAt` and `createdAt` properties
 
 **`see`** — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#insertOne
 
@@ -182,6 +183,26 @@ Name | Type | Description |
 `document_` | *any* | Document    |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*Customer*](graphql.customer.md)\>\>\>
+
+Defined in: [server/services/mongo/@document.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L66)
+
+___
+
+### insertMultiple
+
+▸ **insertMultiple**(`documents_`: *any*[]): *Promise*<InsertWriteOpResult<WithId<[*Customer*](graphql.customer.md)\>\>\>
+
+Wrapper on insertMany() that also sets `updatedAt` and `createdAt` properties
+
+**`see`** — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#insertMany
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`documents_` | *any*[] | Documents    |
+
+**Returns:** *Promise*<InsertWriteOpResult<WithId<[*Customer*](graphql.customer.md)\>\>\>
 
 Defined in: [server/services/mongo/@document.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L50)
 
@@ -204,7 +225,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
 
-Defined in: [server/services/mongo/@document.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L66)
+Defined in: [server/services/mongo/@document.ts:82](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L82)
 
 ___
 

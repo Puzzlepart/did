@@ -31,6 +31,7 @@
 - [find](services.subscriptionservice.md#find)
 - [getById](services.subscriptionservice.md#getbyid)
 - [insert](services.subscriptionservice.md#insert)
+- [insertMultiple](services.subscriptionservice.md#insertmultiple)
 - [update](services.subscriptionservice.md#update)
 - [updateSubscription](services.subscriptionservice.md#updatesubscription)
 
@@ -177,7 +178,7 @@ ___
 
 ▸ **insert**(`document_`: *any*): *Promise*<InsertOneWriteOpResult<WithId<[*Subscription*](graphql.subscription.md)\>\>\>
 
-Wrapper on insertOne() that also updates `updatedAt` and `createdAt` properties
+Wrapper on insertOne() that also sets `updatedAt` and `createdAt` properties
 
 **`see`** — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#insertOne
 
@@ -188,6 +189,26 @@ Name | Type | Description |
 `document_` | *any* | Document    |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*Subscription*](graphql.subscription.md)\>\>\>
+
+Defined in: [server/services/mongo/@document.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L66)
+
+___
+
+### insertMultiple
+
+▸ **insertMultiple**(`documents_`: *any*[]): *Promise*<InsertWriteOpResult<WithId<[*Subscription*](graphql.subscription.md)\>\>\>
+
+Wrapper on insertMany() that also sets `updatedAt` and `createdAt` properties
+
+**`see`** — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#insertMany
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`documents_` | *any*[] | Documents    |
+
+**Returns:** *Promise*<InsertWriteOpResult<WithId<[*Subscription*](graphql.subscription.md)\>\>\>
 
 Defined in: [server/services/mongo/@document.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L50)
 
@@ -210,7 +231,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
 
-Defined in: [server/services/mongo/@document.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L66)
+Defined in: [server/services/mongo/@document.ts:82](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L82)
 
 ___
 

@@ -84,16 +84,14 @@ export class UserService extends MongoDocumentService<User> {
   }
 
   /**
-   * Add users
+   * Add multiple users in bulk
    *
-   * @param users - Users
+   * @param users_ - Users
    */
-  public async addUsers(users: User[]) {
+  public async addUsers(users_: User[]) {
     try {
-      const result = await this.collection.insertMany(
-        users.map((u) => this._replaceId(u))
-      )
-      return result
+      const users = users_.map((u) => this._replaceId(u))
+      return await this.insertMultiple(users)
     } catch (error) {
       throw error
     }
@@ -125,6 +123,7 @@ export class UserService extends MongoDocumentService<User> {
       const filter = { _id: this.context.userId }
       const user = await this.collection.findOne(filter)
       const _configuration = JSON.parse(configuration)
+      // eslint-disable-next-line unicorn/no-array-reduce
       const mergedConfiguration = Object.keys(_configuration).reduce(
         (object, key) => {
           set(object, key, _configuration[key])

@@ -41,7 +41,23 @@ export class MongoDocumentService<T> {
   }
 
   /**
-   * Wrapper on insertOne() that also updates `updatedAt` and `createdAt` properties
+   * Wrapper on insertMany() that also sets `updatedAt` and `createdAt` properties
+   *
+   * @see — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#insertMany
+   *
+   * @param documents_ - Documents
+   */
+  public insertMultiple(documents_: OptionalId<any>[]) {
+    const documents = documents_.map((document_) => ({
+      ...document_,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }))
+    return this.collection.insertMany(documents)
+  }
+
+  /**
+   * Wrapper on insertOne() that also sets `updatedAt` and `createdAt` properties
    *
    * @see — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#insertOne
    *

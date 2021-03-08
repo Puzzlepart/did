@@ -34,6 +34,7 @@
 - [getById](services.userservice.md#getbyid)
 - [getUsers](services.userservice.md#getusers)
 - [insert](services.userservice.md#insert)
+- [insertMultiple](services.userservice.md#insertmultiple)
 - [update](services.userservice.md#update)
 - [updateCurrentUserConfiguration](services.userservice.md#updatecurrentuserconfiguration)
 - [updateUser](services.userservice.md#updateuser)
@@ -145,15 +146,15 @@ ___
 
 ### addUsers
 
-▸ **addUsers**(`users`: [*User*](graphql.user.md)[]): *Promise*<InsertWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
+▸ **addUsers**(`users_`: [*User*](graphql.user.md)[]): *Promise*<InsertWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
 
-Add users
+Add multiple users in bulk
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`users` | [*User*](graphql.user.md)[] | Users    |
+`users_` | [*User*](graphql.user.md)[] | Users    |
 
 **Returns:** *Promise*<InsertWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
 
@@ -228,7 +229,7 @@ ___
 
 ▸ **insert**(`document_`: *any*): *Promise*<InsertOneWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
 
-Wrapper on insertOne() that also updates `updatedAt` and `createdAt` properties
+Wrapper on insertOne() that also sets `updatedAt` and `createdAt` properties
 
 **`see`** — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#insertOne
 
@@ -239,6 +240,26 @@ Name | Type | Description |
 `document_` | *any* | Document    |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
+
+Defined in: [server/services/mongo/@document.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L66)
+
+___
+
+### insertMultiple
+
+▸ **insertMultiple**(`documents_`: *any*[]): *Promise*<InsertWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
+
+Wrapper on insertMany() that also sets `updatedAt` and `createdAt` properties
+
+**`see`** — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#insertMany
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`documents_` | *any*[] | Documents    |
+
+**Returns:** *Promise*<InsertWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
 
 Defined in: [server/services/mongo/@document.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L50)
 
@@ -261,7 +282,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
 
-Defined in: [server/services/mongo/@document.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L66)
+Defined in: [server/services/mongo/@document.ts:82](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L82)
 
 ___
 
@@ -282,7 +303,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/user.ts:123](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L123)
+Defined in: [server/services/mongo/user.ts:121](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L121)
 
 ___
 
@@ -300,4 +321,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/user.ts:107](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L107)
+Defined in: [server/services/mongo/user.ts:105](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L105)

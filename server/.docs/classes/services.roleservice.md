@@ -32,6 +32,7 @@
 - [getByName](services.roleservice.md#getbyname)
 - [getRoles](services.roleservice.md#getroles)
 - [insert](services.roleservice.md#insert)
+- [insertMultiple](services.roleservice.md#insertmultiple)
 - [update](services.roleservice.md#update)
 - [updateRole](services.roleservice.md#updaterole)
 
@@ -190,7 +191,7 @@ ___
 
 ▸ **insert**(`document_`: *any*): *Promise*<InsertOneWriteOpResult<WithId<[*Role*](graphql.role.md)\>\>\>
 
-Wrapper on insertOne() that also updates `updatedAt` and `createdAt` properties
+Wrapper on insertOne() that also sets `updatedAt` and `createdAt` properties
 
 **`see`** — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#insertOne
 
@@ -201,6 +202,26 @@ Name | Type | Description |
 `document_` | *any* | Document    |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*Role*](graphql.role.md)\>\>\>
+
+Defined in: [server/services/mongo/@document.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L66)
+
+___
+
+### insertMultiple
+
+▸ **insertMultiple**(`documents_`: *any*[]): *Promise*<InsertWriteOpResult<WithId<[*Role*](graphql.role.md)\>\>\>
+
+Wrapper on insertMany() that also sets `updatedAt` and `createdAt` properties
+
+**`see`** — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#insertMany
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`documents_` | *any*[] | Documents    |
+
+**Returns:** *Promise*<InsertWriteOpResult<WithId<[*Role*](graphql.role.md)\>\>\>
 
 Defined in: [server/services/mongo/@document.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L50)
 
@@ -223,7 +244,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
 
-Defined in: [server/services/mongo/@document.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L66)
+Defined in: [server/services/mongo/@document.ts:82](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L82)
 
 ___
 

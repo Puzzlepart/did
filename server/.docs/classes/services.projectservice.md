@@ -30,6 +30,7 @@
 - [find](services.projectservice.md#find)
 - [getProjectsData](services.projectservice.md#getprojectsdata)
 - [insert](services.projectservice.md#insert)
+- [insertMultiple](services.projectservice.md#insertmultiple)
 - [update](services.projectservice.md#update)
 - [updateProject](services.projectservice.md#updateproject)
 
@@ -162,7 +163,7 @@ ___
 
 ▸ **insert**(`document_`: *any*): *Promise*<InsertOneWriteOpResult<WithId<[*Project*](graphql.project.md)\>\>\>
 
-Wrapper on insertOne() that also updates `updatedAt` and `createdAt` properties
+Wrapper on insertOne() that also sets `updatedAt` and `createdAt` properties
 
 **`see`** — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#insertOne
 
@@ -173,6 +174,26 @@ Name | Type | Description |
 `document_` | *any* | Document    |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*Project*](graphql.project.md)\>\>\>
+
+Defined in: [server/services/mongo/@document.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L66)
+
+___
+
+### insertMultiple
+
+▸ **insertMultiple**(`documents_`: *any*[]): *Promise*<InsertWriteOpResult<WithId<[*Project*](graphql.project.md)\>\>\>
+
+Wrapper on insertMany() that also sets `updatedAt` and `createdAt` properties
+
+**`see`** — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#insertMany
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`documents_` | *any*[] | Documents    |
+
+**Returns:** *Promise*<InsertWriteOpResult<WithId<[*Project*](graphql.project.md)\>\>\>
 
 Defined in: [server/services/mongo/@document.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L50)
 
@@ -195,7 +216,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
 
-Defined in: [server/services/mongo/@document.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L66)
+Defined in: [server/services/mongo/@document.ts:82](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L82)
 
 ___
 
