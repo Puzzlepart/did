@@ -16,7 +16,9 @@
 
 - [ApiTokenService](../classes/services.apitokenservice.md)
 - [CacheService](../classes/services.cacheservice.md)
+- [ConfirmedPeriodsService](../classes/services.confirmedperiodsservice.md)
 - [CustomerService](../classes/services.customerservice.md)
+- [ForecastedPeriodsService](../classes/services.forecastedperiodsservice.md)
 - [ForecastedTimeEntryService](../classes/services.forecastedtimeentryservice.md)
 - [LabelService](../classes/services.labelservice.md)
 - [MSGraphService](../classes/services.msgraphservice.md)

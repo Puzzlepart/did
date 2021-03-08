@@ -38,7 +38,7 @@
 
 ### constructor
 
-\+ **new ProjectService**(`context`: [*Context*](graphql_context.context.md), `_customer`: [*CustomerService*](services.customerservice.md), `_label`: [*LabelService*](services.labelservice.md)): [*ProjectService*](services.projectservice.md)
+\+ **new ProjectService**(`context`: [*Context*](graphql_context.context.md), `_customerSvc`: [*CustomerService*](services.customerservice.md), `_labelSvc`: [*LabelService*](services.labelservice.md)): [*ProjectService*](services.projectservice.md)
 
 Constructor for ProjectService
 
@@ -47,8 +47,8 @@ Constructor for ProjectService
 Name | Type | Description |
 :------ | :------ | :------ |
 `context` | [*Context*](graphql_context.context.md) | Injected context through typedi   |
-`_customer` | [*CustomerService*](services.customerservice.md) | Injected `CustomerService` through typedi   |
-`_label` | [*LabelService*](services.labelservice.md) | Injected `LabelService` through typedi    |
+`_customerSvc` | [*CustomerService*](services.customerservice.md) | Injected `CustomerService` through typedi   |
+`_labelSvc` | [*LabelService*](services.labelservice.md) | Injected `LabelService` through typedi    |
 
 **Returns:** [*ProjectService*](services.projectservice.md)
 

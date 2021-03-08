@@ -23,13 +23,13 @@ export class ProjectService extends MongoDocumentService<Project> {
    * Constructor for ProjectService
    *
    * @param context - Injected context through typedi
-   * @param _customer - Injected `CustomerService` through typedi
-   * @param _label - Injected `LabelService` through typedi
+   * @param _customerSvc - Injected `CustomerService` through typedi
+   * @param _labelSvc - Injected `LabelService` through typedi
    */
   constructor(
     @Inject('CONTEXT') readonly context: Context,
-    private readonly _customer: CustomerService,
-    private readonly _label: LabelService
+    private readonly _customerSvc: CustomerService,
+    private readonly _labelSvc: LabelService
   ) {
     super(context, 'projects', ProjectService.name)
   }
@@ -91,10 +91,10 @@ export class ProjectService extends MongoDocumentService<Project> {
         async () => {
           const [projects, customers, labels] = await Promise.all([
             this.find(query, { name: 1 }),
-            this._customer.getCustomers(
+            this._customerSvc.getCustomers(
               query?.customerKey && { key: query.customerKey }
             ),
-            this._label.getLabels()
+            this._labelSvc.getLabels()
           ])
           const _projects = projects
             .map((p) => {

@@ -1,4 +1,4 @@
-import { Collection } from 'mongodb'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import { find, isEmpty, omit } from 'underscore'
@@ -7,7 +7,13 @@ import DateUtils, { DateObject } from '../../../shared/utils/date'
 import { Context } from '../../graphql/context'
 import { TimesheetPeriodObject } from '../../graphql/resolvers/types'
 import { firstPart } from '../../utils'
-import { ProjectService } from '../mongo'
+import {
+  ConfirmedPeriodsService,
+  ForecastedPeriodsService,
+  ForecastedTimeEntryService,
+  ProjectService,
+  TimeEntryService
+} from '../mongo'
 import MatchingEngine from './matching'
 import {
   IConnectEventsParameters,
@@ -18,29 +24,26 @@ import {
 
 @Service({ global: false })
 export class TimesheetService {
-  private _confirmed_periods: Collection
-  private _forecasted_periods: Collection
-  private _time_entries: Collection
-  private _forecasted_time_entries: Collection
-
   /**
    * Constructor
    *
    * @param context - Injected context through typedi
-   * @param _msgraph - MS Graph service
-   * @param _project - Project service
+   * @param _msgraphSvc - Injected `MSGraphService` through typedi
+   * @param _projectSvc - Injected `ProjectService` through typedi
+   * @param _teSvc - Injected `TimeEntryService` through typedi
+   * @param _fteSvc - Injected `ForecastedTimeEntryService` through typedi
+   * @param _cperiodSvc - Injected `ConfirmedPeriodsService` through typedi
+   * @param _fperiodSvc - Injected `ForecastedPeriodsService` through typedi
    */
   constructor(
     @Inject('CONTEXT') private readonly context: Context,
-    private readonly _msgraph: MSGraphService,
-    private readonly _project: ProjectService
-  ) {
-    const { db } = this.context
-    this._confirmed_periods = db.collection('confirmed_periods')
-    this._forecasted_periods = db.collection('forecasted_periods')
-    this._time_entries = db.collection('time_entries')
-    this._forecasted_time_entries = db.collection('forecasted_time_entries')
-  }
+    private readonly _msgraphSvc: MSGraphService,
+    private readonly _projectSvc: ProjectService,
+    private readonly _teSvc: TimeEntryService,
+    private readonly _fteSvc: ForecastedTimeEntryService,
+    private readonly _cperiodSvc: ConfirmedPeriodsService,
+    private readonly _fperiodSvc: ForecastedPeriodsService
+  ) {}
 
   /**
    * Get timesheet
@@ -57,19 +60,17 @@ export class TimesheetService {
         parameters.locale,
         this.context.userId
       )
-      const data = await this._project.getProjectsData()
+      const data = await this._projectSvc.getProjectsData()
       for (let index = 0; index < periods.length; index++) {
         const { _id } = periods[index]
         const [confirmed, forecasted] = await Promise.all([
-          this._confirmed_periods.findOne({ _id }),
-          this._forecasted_periods.findOne({ _id })
+          this._cperiodSvc.collection.findOne({ _id }),
+          this._fperiodSvc.collection.findOne({ _id })
         ])
         periods[index].isForecasted = !!forecasted
         periods[index].forecastedHours = forecasted?.hours || 0
         if (confirmed) {
-          const entries = await this._time_entries
-            .find({ periodId: _id })
-            .toArray()
+          const entries = await this._teSvc.find({ periodId: _id })
           periods[index] = {
             ...periods[index],
             isConfirmed: true,
@@ -81,7 +82,7 @@ export class TimesheetService {
           }
         } else {
           const engine = new MatchingEngine(data)
-          const events = await this._msgraph.getEvents(
+          const events = await this._msgraphSvc.getEvents(
             periods[index].startDate,
             periods[index].endDate,
             {
@@ -108,13 +109,13 @@ export class TimesheetService {
   /**
    * Submit period
    *
-   * @param params - Submit period params
+   * @param parameters - Submit period params
    */
   public async submitPeriod(
     parameters: ISubmitPeriodParameters
   ): Promise<void> {
     try {
-      const events = await this._msgraph.getEvents(
+      const events = await this._msgraphSvc.getEvents(
         parameters.period.startDate,
         parameters.period.endDate,
         {
@@ -126,11 +127,11 @@ export class TimesheetService {
         ...this._getPeriodData(parameters.period.id, this.context.userId),
         startDate: new Date(parameters.period.startDate),
         endDate: new Date(parameters.period.endDate),
-        submitted: new Date(),
         hours: 0,
         forecastedHours: parameters.period.forecastedHours || 0
       }
       const entries = []
+      // eslint-disable-next-line unicorn/no-array-reduce
       period.hours = parameters.period.matchedEvents.reduce((hours, m: any) => {
         const event = find(events, ({ id }) => id === m.id)
         if (!event) return null
@@ -143,17 +144,15 @@ export class TimesheetService {
         })
         return hours + event.duration
       }, 0)
-      const entry_colletion = parameters.forecast
-        ? this._forecasted_time_entries
-        : this._time_entries
-      const period_collection = parameters.forecast
-        ? this._forecasted_periods
-        : this._confirmed_periods
+      const teSvc = parameters.forecast ? this._fteSvc : this._teSvc
+      const periodSvc = parameters.forecast
+        ? this._fperiodSvc
+        : this._cperiodSvc
       await Promise.all([
         !isEmpty(entries)
-          ? entry_colletion.insertMany(entries)
+          ? teSvc.insertMultiple(entries)
           : Promise.resolve(null),
-        period_collection.insertOne(period)
+        periodSvc.insert(period)
       ])
     } catch (error) {
       throw error
@@ -163,25 +162,23 @@ export class TimesheetService {
   /**
    * Unsubmit period
    *
-   * @param period - Unsubmit period params
+   * @param parameters - Unsubmit period params
    */
-  public async unsubmitPeriod({
-    period,
-    forecast
-  }: IUnsubmitPeriodParameters): Promise<void> {
+  public async unsubmitPeriod(
+    parameters: IUnsubmitPeriodParameters
+  ): Promise<void> {
     try {
-      const entry_colletion = forecast
-        ? this._forecasted_time_entries
-        : this._time_entries
-      const period_collection = forecast
-        ? this._forecasted_periods
-        : this._confirmed_periods
-      const { _id } = this._getPeriodData(period.id, this.context.userId)
+      const teSvc = parameters.forecast ? this._fteSvc : this._teSvc
+      const periodSvc = parameters.forecast
+        ? this._fperiodSvc
+        : this._cperiodSvc
+      const { _id } = this._getPeriodData(
+        parameters.period.id,
+        this.context.userId
+      )
       await Promise.all([
-        entry_colletion.deleteMany({
-          periodId: _id
-        }),
-        period_collection.deleteOne({ _id })
+        teSvc.collection.deleteMany({ periodId: _id }),
+        periodSvc.collection.deleteOne({ _id })
       ])
     } catch (error) {
       throw error

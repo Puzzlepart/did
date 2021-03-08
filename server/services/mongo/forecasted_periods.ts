@@ -1,16 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Inject, Service } from 'typedi'
 import { Context } from '../../graphql/context'
-import { TimeEntry } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 
 @Service({ global: false })
-export class TimeEntryService extends MongoDocumentService<TimeEntry> {
+export class ForecastedPeriodsService extends MongoDocumentService<any> {
   /**
-   * Constructor for TimeEntryService
+   * Constructor for ForecastedPeriodsService
    *
    * @param context - Injected context through typedi
    */
   constructor(@Inject('CONTEXT') readonly context: Context) {
-    super(context, 'time_entries')
+    super(context, 'forecasted_periods')
   }
 }

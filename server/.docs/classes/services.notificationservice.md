@@ -26,7 +26,7 @@
 
 ### constructor
 
-\+ **new NotificationService**(`context`: [*Context*](graphql_context.context.md), `_timesheet`: [*TimesheetService*](services.timesheetservice.md)): [*NotificationService*](services.notificationservice.md)
+\+ **new NotificationService**(`context`: [*Context*](graphql_context.context.md), `_timesheetSvc`: [*TimesheetService*](services.timesheetservice.md)): [*NotificationService*](services.notificationservice.md)
 
 Constructor
 
@@ -35,11 +35,11 @@ Constructor
 Name | Type | Description |
 :------ | :------ | :------ |
 `context` | [*Context*](graphql_context.context.md) | Injected context through typedi   |
-`_timesheet` | [*TimesheetService*](services.timesheetservice.md) | Timesheet service    |
+`_timesheetSvc` | [*TimesheetService*](services.timesheetservice.md) | Timesheet service    |
 
 **Returns:** [*NotificationService*](services.notificationservice.md)
 
-Defined in: [server/services/notification/index.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L15)
+Defined in: [server/services/notification/index.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L17)
 
 ## Properties
 
@@ -47,7 +47,7 @@ Defined in: [server/services/notification/index.ts:15](https://github.com/Puzzle
 
 • `Private` **\_confirmed\_periods**: *Collection*<any\>
 
-Defined in: [server/services/notification/index.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L14)
+Defined in: [server/services/notification/index.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L16)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 • `Private` **\_forecasted\_periods**: *Collection*<any\>
 
-Defined in: [server/services/notification/index.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L15)
+Defined in: [server/services/notification/index.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L17)
 
 ## Methods
 
@@ -74,7 +74,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<ForecastNotification[]\>
 
-Defined in: [server/services/notification/index.ts:89](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L89)
+Defined in: [server/services/notification/index.ts:91](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L91)
 
 ___
 
@@ -94,7 +94,7 @@ Name | Type | Description |
 
 **Returns:** *any*[]
 
-Defined in: [server/services/notification/index.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L38)
+Defined in: [server/services/notification/index.ts:40](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L40)
 
 ___
 
@@ -113,7 +113,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UnconfirmedPeriodNotification[]\>
 
-Defined in: [server/services/notification/index.ts:63](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L63)
+Defined in: [server/services/notification/index.ts:65](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L65)
 
 ___
 
@@ -132,4 +132,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [server/services/notification/index.ts:128](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L128)
+Defined in: [server/services/notification/index.ts:130](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L130)

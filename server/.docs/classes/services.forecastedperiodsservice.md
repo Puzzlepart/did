@@ -1,43 +1,43 @@
-[did-server - v0.9.8](../README.md) / [services](../modules/services.md) / ForecastedTimeEntryService
+[did-server - v0.9.8](../README.md) / [services](../modules/services.md) / ForecastedPeriodsService
 
-# Class: ForecastedTimeEntryService
+# Class: ForecastedPeriodsService
 
-[services](../modules/services.md).ForecastedTimeEntryService
+[services](../modules/services.md).ForecastedPeriodsService
 
 ## Hierarchy
 
-* *MongoDocumentService*<[*TimeEntry*](graphql.timeentry.md)\>
+* *MongoDocumentService*<any\>
 
-  ↳ **ForecastedTimeEntryService**
+  ↳ **ForecastedPeriodsService**
 
 ## Table of contents
 
 ### Constructors
 
-- [constructor](services.forecastedtimeentryservice.md#constructor)
+- [constructor](services.forecastedperiodsservice.md#constructor)
 
 ### Properties
 
-- [cache](services.forecastedtimeentryservice.md#cache)
-- [cachePrefix](services.forecastedtimeentryservice.md#cacheprefix)
-- [collection](services.forecastedtimeentryservice.md#collection)
-- [collectionName](services.forecastedtimeentryservice.md#collectionname)
-- [context](services.forecastedtimeentryservice.md#context)
+- [cache](services.forecastedperiodsservice.md#cache)
+- [cachePrefix](services.forecastedperiodsservice.md#cacheprefix)
+- [collection](services.forecastedperiodsservice.md#collection)
+- [collectionName](services.forecastedperiodsservice.md#collectionname)
+- [context](services.forecastedperiodsservice.md#context)
 
 ### Methods
 
-- [find](services.forecastedtimeentryservice.md#find)
-- [insert](services.forecastedtimeentryservice.md#insert)
-- [insertMultiple](services.forecastedtimeentryservice.md#insertmultiple)
-- [update](services.forecastedtimeentryservice.md#update)
+- [find](services.forecastedperiodsservice.md#find)
+- [insert](services.forecastedperiodsservice.md#insert)
+- [insertMultiple](services.forecastedperiodsservice.md#insertmultiple)
+- [update](services.forecastedperiodsservice.md#update)
 
 ## Constructors
 
 ### constructor
 
-\+ **new ForecastedTimeEntryService**(`context`: [*Context*](graphql_context.context.md)): [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md)
+\+ **new ForecastedPeriodsService**(`context`: [*Context*](graphql_context.context.md)): [*ForecastedPeriodsService*](services.forecastedperiodsservice.md)
 
-Constructor for ForecastedTimeEntryService
+Constructor for ForecastedPeriodsService
 
 #### Parameters:
 
@@ -45,9 +45,9 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `context` | [*Context*](graphql_context.context.md) | Injected context through typedi    |
 
-**Returns:** [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md)
+**Returns:** [*ForecastedPeriodsService*](services.forecastedperiodsservice.md)
 
-Defined in: [server/services/mongo/forecasted_time_entry.ts:7](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/forecasted_time_entry.ts#L7)
+Defined in: [server/services/mongo/forecasted_periods.ts:7](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/forecasted_periods.ts#L7)
 
 ## Properties
 
@@ -67,7 +67,7 @@ ___
 
 ### collection
 
-• **collection**: *Collection*<[*TimeEntry*](graphql.timeentry.md)\>
+• **collection**: *Collection*<any\>
 
 Defined in: [server/services/mongo/@document.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L9)
 
@@ -87,7 +87,7 @@ ___
 
 ### find
 
-▸ **find**<S\>(`query`: *FilterQuery*<[*TimeEntry*](graphql.timeentry.md)\>, `sort?`: S): *Promise*<[*TimeEntry*](graphql.timeentry.md)[]\>
+▸ **find**<S\>(`query`: *FilterQuery*<any\>, `sort?`: S): *Promise*<any[]\>
 
 Wrapper on find().toArray()
 
@@ -103,10 +103,10 @@ Name | Default |
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<[*TimeEntry*](graphql.timeentry.md)\> | Query   |
+`query` | *FilterQuery*<any\> | Query   |
 `sort?` | S | Sort options    |
 
-**Returns:** *Promise*<[*TimeEntry*](graphql.timeentry.md)[]\>
+**Returns:** *Promise*<any[]\>
 
 Defined in: [server/services/mongo/@document.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L39)
 
@@ -114,7 +114,7 @@ ___
 
 ### insert
 
-▸ **insert**(`document_`: *any*): *Promise*<InsertOneWriteOpResult<WithId<[*TimeEntry*](graphql.timeentry.md)\>\>\>
+▸ **insert**(`document_`: *any*): *Promise*<InsertOneWriteOpResult<any\>\>
 
 Wrapper on insertOne() that also sets `updatedAt` and `createdAt` properties
 
@@ -126,7 +126,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `document_` | *any* | Document    |
 
-**Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*TimeEntry*](graphql.timeentry.md)\>\>\>
+**Returns:** *Promise*<InsertOneWriteOpResult<any\>\>
 
 Defined in: [server/services/mongo/@document.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L66)
 
@@ -134,7 +134,7 @@ ___
 
 ### insertMultiple
 
-▸ **insertMultiple**(`documents_`: *any*[]): *Promise*<InsertWriteOpResult<WithId<[*TimeEntry*](graphql.timeentry.md)\>\>\>
+▸ **insertMultiple**(`documents_`: *any*[]): *Promise*<InsertWriteOpResult<any\>\>
 
 Wrapper on insertMany() that also sets `updatedAt` and `createdAt` properties
 
@@ -146,7 +146,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `documents_` | *any*[] | Documents    |
 
-**Returns:** *Promise*<InsertWriteOpResult<WithId<[*TimeEntry*](graphql.timeentry.md)\>\>\>
+**Returns:** *Promise*<InsertWriteOpResult<any\>\>
 
 Defined in: [server/services/mongo/@document.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L50)
 
@@ -154,7 +154,7 @@ ___
 
 ### update
 
-▸ **update**(`query`: *FilterQuery*<[*TimeEntry*](graphql.timeentry.md)\>, `document_`: *any*): *Promise*<UpdateWriteOpResult\>
+▸ **update**(`query`: *FilterQuery*<any\>, `document_`: *any*): *Promise*<UpdateWriteOpResult\>
 
 Wrapper on updateOne() that also updates `updatedAt` property
 
@@ -164,7 +164,7 @@ Wrapper on updateOne() that also updates `updatedAt` property
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<[*TimeEntry*](graphql.timeentry.md)\> | Query   |
+`query` | *FilterQuery*<any\> | Query   |
 `document_` | *any* | Document    |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>

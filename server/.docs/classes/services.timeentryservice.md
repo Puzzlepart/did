@@ -37,7 +37,7 @@
 
 \+ **new TimeEntryService**(`context`: [*Context*](graphql_context.context.md)): [*TimeEntryService*](services.timeentryservice.md)
 
-Constructor for ReportsService
+Constructor for TimeEntryService
 
 #### Parameters:
 

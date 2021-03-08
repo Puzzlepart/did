@@ -6,7 +6,7 @@ import { MongoDocumentService } from './@document'
 @Service({ global: false })
 export class ForecastedTimeEntryService extends MongoDocumentService<TimeEntry> {
   /**
-   * Constructor for ReportsService
+   * Constructor for ForecastedTimeEntryService
    *
    * @param context - Injected context through typedi
    */

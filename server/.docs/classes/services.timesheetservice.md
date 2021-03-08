@@ -10,13 +10,6 @@
 
 - [constructor](services.timesheetservice.md#constructor)
 
-### Properties
-
-- [\_confirmed\_periods](services.timesheetservice.md#_confirmed_periods)
-- [\_forecasted\_periods](services.timesheetservice.md#_forecasted_periods)
-- [\_forecasted\_time\_entries](services.timesheetservice.md#_forecasted_time_entries)
-- [\_time\_entries](services.timesheetservice.md#_time_entries)
-
 ### Methods
 
 - [\_connectEvents](services.timesheetservice.md#_connectevents)
@@ -31,7 +24,7 @@
 
 ### constructor
 
-\+ **new TimesheetService**(`context`: [*Context*](graphql_context.context.md), `_msgraph`: [*MSGraphService*](services.msgraphservice.md), `_project`: [*ProjectService*](services.projectservice.md)): [*TimesheetService*](services.timesheetservice.md)
+\+ **new TimesheetService**(`context`: [*Context*](graphql_context.context.md), `_msgraphSvc`: [*MSGraphService*](services.msgraphservice.md), `_projectSvc`: [*ProjectService*](services.projectservice.md), `_teSvc`: [*TimeEntryService*](services.timeentryservice.md), `_fteSvc`: [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md), `_cperiodSvc`: [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md), `_fperiodSvc`: [*ForecastedPeriodsService*](services.forecastedperiodsservice.md)): [*TimesheetService*](services.timesheetservice.md)
 
 Constructor
 
@@ -40,44 +33,16 @@ Constructor
 Name | Type | Description |
 :------ | :------ | :------ |
 `context` | [*Context*](graphql_context.context.md) | Injected context through typedi   |
-`_msgraph` | [*MSGraphService*](services.msgraphservice.md) | MS Graph service   |
-`_project` | [*ProjectService*](services.projectservice.md) | Project service    |
+`_msgraphSvc` | [*MSGraphService*](services.msgraphservice.md) | Injected `MSGraphService` through typedi   |
+`_projectSvc` | [*ProjectService*](services.projectservice.md) | Injected `ProjectService` through typedi   |
+`_teSvc` | [*TimeEntryService*](services.timeentryservice.md) | Injected `TimeEntryService` through typedi   |
+`_fteSvc` | [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md) | Injected `ForecastedTimeEntryService` through typedi   |
+`_cperiodSvc` | [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md) | Injected `ConfirmedPeriodsService` through typedi   |
+`_fperiodSvc` | [*ForecastedPeriodsService*](services.forecastedperiodsservice.md) | Injected `ForecastedPeriodsService` through typedi    |
 
 **Returns:** [*TimesheetService*](services.timesheetservice.md)
 
-Defined in: [server/services/timesheet/index.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L24)
-
-## Properties
-
-### \_confirmed\_periods
-
-• `Private` **\_confirmed\_periods**: *Collection*<any\>
-
-Defined in: [server/services/timesheet/index.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L21)
-
-___
-
-### \_forecasted\_periods
-
-• `Private` **\_forecasted\_periods**: *Collection*<any\>
-
-Defined in: [server/services/timesheet/index.ts:22](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L22)
-
-___
-
-### \_forecasted\_time\_entries
-
-• `Private` **\_forecasted\_time\_entries**: *Collection*<any\>
-
-Defined in: [server/services/timesheet/index.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L24)
-
-___
-
-### \_time\_entries
-
-• `Private` **\_time\_entries**: *Collection*<any\>
-
-Defined in: [server/services/timesheet/index.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L23)
+Defined in: [server/services/timesheet/index.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L26)
 
 ## Methods
 
@@ -97,7 +62,7 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [server/services/timesheet/index.ts:267](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L267)
+Defined in: [server/services/timesheet/index.ts:264](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L264)
 
 ___
 
@@ -116,7 +81,7 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [server/services/timesheet/index.ts:197](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L197)
+Defined in: [server/services/timesheet/index.ts:194](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L194)
 
 ___
 
@@ -146,7 +111,7 @@ Name | Type |
 `week` | *number* |
 `year` | *number* |
 
-Defined in: [server/services/timesheet/index.ts:210](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L210)
+Defined in: [server/services/timesheet/index.ts:207](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L207)
 
 ___
 
@@ -167,7 +132,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]
 
-Defined in: [server/services/timesheet/index.ts:229](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L229)
+Defined in: [server/services/timesheet/index.ts:226](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L226)
 
 ___
 
@@ -185,7 +150,7 @@ Name | Type |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/timesheet/index.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L50)
+Defined in: [server/services/timesheet/index.ts:53](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L53)
 
 ___
 
@@ -197,28 +162,28 @@ Submit period
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`parameters` | ISubmitPeriodParameters |
+Name | Type | Description |
+:------ | :------ | :------ |
+`parameters` | ISubmitPeriodParameters | Submit period params    |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/timesheet/index.ts:113](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L113)
+Defined in: [server/services/timesheet/index.ts:114](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L114)
 
 ___
 
 ### unsubmitPeriod
 
-▸ **unsubmitPeriod**(`__namedParameters`: IUnsubmitPeriodParameters): *Promise*<void\>
+▸ **unsubmitPeriod**(`parameters`: IUnsubmitPeriodParameters): *Promise*<void\>
 
 Unsubmit period
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`__namedParameters` | IUnsubmitPeriodParameters |
+Name | Type | Description |
+:------ | :------ | :------ |
+`parameters` | IUnsubmitPeriodParameters | Unsubmit period params    |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/timesheet/index.ts:168](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L168)
+Defined in: [server/services/timesheet/index.ts:167](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L167)

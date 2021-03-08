@@ -1,3 +1,5 @@
+/* eslint-disable unicorn/no-array-reduce */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import get from 'get-value'
 import { Collection } from 'mongodb'
 import 'reflect-metadata'
@@ -18,11 +20,11 @@ export class NotificationService {
    * Constructor
    *
    * @param context - Injected context through typedi
-   * @param _timesheet - Timesheet service
+   * @param _timesheetSvc - Timesheet service
    */
   constructor(
     @Inject('CONTEXT') private readonly context: Context,
-    private readonly _timesheet: TimesheetService
+    private readonly _timesheetSvc: TimesheetService
   ) {
     this._confirmed_periods = this.context.db.collection('confirmed_periods')
     this._forecasted_periods = this.context.db.collection('forecasted_periods')
@@ -42,7 +44,7 @@ export class NotificationService {
       const startOfWeek = d.startOfWeek.format('YYYY-MM-DD')
       const endOfWeek = d.endOfWeek.format('YYYY-MM-DD')
       periods.push(
-        ...this._timesheet.getPeriods(
+        ...this._timesheetSvc.getPeriods(
           startOfWeek,
           endOfWeek,
           locale,

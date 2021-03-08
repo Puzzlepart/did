@@ -31,17 +31,17 @@ export class ReportService {
    * Constructor for ReportsService
    *
    * @param context - Injected context through typedi
-   * @param _project - Injected `ProjectService` through typedi
-   * @param _user - Injected `UserService` through typedi
-   * @param _timeEntry - Injected `TimeEntryService` through typedi
-   * @param _forecastedTimeEntry - Injected `ForecastedTimeEntryService` through typedi
+   * @param _projectSvc - Injected `ProjectService` through typedi
+   * @param _userSvc - Injected `UserService` through typedi
+   * @param _teSvc - Injected `TimeEntryService` through typedi
+   * @param _fteSvc - Injected `ForecastedTimeEntryService` through typedi
    */
   constructor(
     @Inject('CONTEXT') readonly context: Context,
-    private readonly _project: ProjectService,
-    private readonly _user: UserService,
-    private readonly _timeEntry: TimeEntryService,
-    private readonly _forecastedTimeEntry: ForecastedTimeEntryService
+    private readonly _projectSvc: ProjectService,
+    private readonly _userSvc: UserService,
+    private readonly _teSvc: TimeEntryService,
+    private readonly _fteSvc: ForecastedTimeEntryService
   ) {}
 
   /**
@@ -140,9 +140,9 @@ export class ReportService {
       let q = this._generatePresetQuery(preset)
       q = omit({ ...q, ...query }, 'preset')
       const [timeEntries, { projects, customers }, users] = await Promise.all([
-        this._timeEntry.find(q),
-        this._project.getProjectsData(),
-        this._user.getUsers()
+        this._teSvc.find(q),
+        this._projectSvc.getProjectsData(),
+        this._userSvc.getUsers()
       ])
       const report = this._generateReport({
         timeEntries,
@@ -163,13 +163,13 @@ export class ReportService {
   public async getForecastReport(): Promise<Report> {
     try {
       const [timeEntries, { projects, customers }, users] = await Promise.all([
-        this._forecastedTimeEntry.find({
+        this._fteSvc.find({
           startDateTime: {
             $gte: new Date()
           }
         }),
-        this._project.getProjectsData(),
-        this._user.getUsers()
+        this._projectSvc.getProjectsData(),
+        this._userSvc.getUsers()
       ])
       const report = this._generateReport({
         timeEntries,
@@ -202,8 +202,8 @@ export class ReportService {
         ...this._generatePresetQuery(preset)
       }
       const [timeEntries, { projects, customers }] = await Promise.all([
-        this._timeEntry.find(q),
-        this._project.getProjectsData()
+        this._teSvc.find(q),
+        this._projectSvc.getProjectsData()
       ])
       const report = this._generateReport({
         timeEntries,

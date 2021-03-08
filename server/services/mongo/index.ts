@@ -1,5 +1,7 @@
 export { ApiTokenService } from './apitoken'
+export { ConfirmedPeriodsService } from './confirmed_periods'
 export { CustomerService } from './customer'
+export { ForecastedPeriodsService } from './forecasted_periods'
 export { ForecastedTimeEntryService } from './forecasted_time_entry'
 export { LabelService } from './label'
 export { ProjectService } from './project'
