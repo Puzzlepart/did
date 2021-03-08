@@ -44,7 +44,7 @@ export class ApiTokenService extends MongoDocumentService<ApiToken> {
         omit(token, 'created'),
         environment('API_TOKEN_SECRET')
       )
-      await this.collection.insertOne({
+      await this.insert({
         ...token,
         apiKey
       })

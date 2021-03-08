@@ -46,7 +46,7 @@ export class RoleService extends MongoDocumentService<Role> {
    */
   public async addRole(role: Role) {
     try {
-      const result = await this.collection.insertOne(role)
+      const result = await this.insert(role)
       return result
     } catch (error) {
       throw error

@@ -65,7 +65,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
    */
   public async updateSubscription(settings: SubscriptionSettings) {
     try {
-      const result = await this.collection.updateOne(
+      const result = await this.update(
         { _id: this.context.subscription.id },
         { $set: { settings } }
       )

@@ -48,7 +48,7 @@ export class LabelService extends MongoDocumentService<Label> {
     label: Label
   ): Promise<InsertOneWriteOpResult<WithId<Label>>> {
     try {
-      const result = await this.collection.insertOne({
+      const result = await this.insert({
         _id: this._generateId(label),
         ...label
       })
@@ -65,7 +65,7 @@ export class LabelService extends MongoDocumentService<Label> {
    */
   public async updateLabel(label: Label): Promise<void> {
     try {
-      await this.collection.updateOne(pick(label, 'name'), { $set: label })
+      await this.update(pick(label, 'name'), { $set: label })
     } catch (error) {
       throw error
     }

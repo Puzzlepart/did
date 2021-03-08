@@ -19,7 +19,7 @@ export class CustomerService extends MongoDocumentService<Customer> {
   public async addCustomer(customer: Customer): Promise<void> {
     try {
       await this.cache.clear({ key: 'getcustomers' })
-      await this.collection.insertOne(customer)
+      await this.insert(customer)
     } catch (error) {
       throw error
     }
@@ -33,7 +33,7 @@ export class CustomerService extends MongoDocumentService<Customer> {
   public async updateCustomer(customer: Customer): Promise<void> {
     try {
       await this.cache.clear({ key: 'getcustomers' })
-      await this.collection.updateOne(pick(customer, 'key'), { $set: customer })
+      await this.update(pick(customer, 'key'), { $set: customer })
     } catch (error) {
       throw error
     }
