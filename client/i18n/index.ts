@@ -1,4 +1,5 @@
-import index18n from 'i18next'
+/* eslint-disable unicorn/prevent-abbreviations */
+import i18next from 'i18next'
 import { initReactI18next } from 'react-i18next'
 
 export const DEFAULT_LANGUAGE = 'en-GB'
@@ -9,7 +10,7 @@ const __RESOURCES = {
 }
 export const SUPPORTED_LANGUAGES = Object.keys(__RESOURCES)
 
-index18n.use(initReactI18next).init({
+i18next.use(initReactI18next).init({
   resources: __RESOURCES,
   fallbackLng: DEFAULT_LANGUAGE,
   debug: false,
@@ -21,4 +22,4 @@ index18n.use(initReactI18next).init({
   keySeparator: ':'
 })
 
-export default index18n
+export default i18next
