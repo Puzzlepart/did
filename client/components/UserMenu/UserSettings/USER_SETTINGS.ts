@@ -28,6 +28,10 @@ export const USER_SETTINGS = (t: TFunction) =>
         {
           key: 'nb',
           text: 'Norsk (bokmål)'
+        },
+        {
+          key: 'nn',
+          text: 'Norsk (nynorsk)'
         }
       ],
       defaultValue: AppConfig.DEFAULT_USER_LANGUAGE
