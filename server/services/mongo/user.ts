@@ -104,7 +104,7 @@ export class UserService extends MongoDocumentService<User> {
    */
   public async updateUser(user: User): Promise<void> {
     try {
-      await this.update({ _id: user.id }, { $set: user })
+      await this.update({ _id: user.id }, user)
     } catch (error) {
       throw error
     }
@@ -132,7 +132,7 @@ export class UserService extends MongoDocumentService<User> {
         user.configuration || {}
       )
       await this.update(filter, {
-        $set: { configuration: mergedConfiguration }
+        configuration: mergedConfiguration
       })
     } catch (error) {
       throw error

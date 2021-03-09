@@ -81,8 +81,10 @@ export class MongoDocumentService<T> {
    */
   public update(query: FilterQuery<T>, document_: OptionalId<any>) {
     return this.collection.updateOne(query, {
-      ...document_,
-      updatedAt: new Date()
+      $set: {
+        ...document_,
+        updatedAt: new Date()
+      }
     })
   }
 }
