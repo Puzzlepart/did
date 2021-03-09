@@ -1,35 +1,35 @@
 # Contributing to Did
 
 
-_Contributios are very velcome! Here's some guidance to get started!_ :heart:
+_Contributions are very velcome! Here's some guidance to get started!_ :heart:
 
-## Structure
+## Code structure
 
-Folder/File | Description
---- | --- 
-`/client` | Client TypeScript source using e.g. [React](https://reactjs.org/) and [Apollo Client](https://www.apollographql.com/docs/react/)`.
-`/client/common` | Common elements like icons etc 
-`/client/components` | React components reusable throughout the solution 
-`/client/config` | Conifguration 
-`/client/graphql` | Graphql implementation for the client using `@apollo/client` 
-`/client/helpers` | Helper functions 
-`/client/pages` | Main pages of the solution 
-`/client/types` | Types, models and interfaces 
-`/client/utils` | Utility functions 
-`/client/index.tsx` | Main entry point for the app 
-`/server/public` | Public assets, static files hosted under "/"
-`/server/public/css` | CSS files
-`/server/public/js` | JS files (hidden from `vscode`, the react bundle ends up here)
-`/server/routes` | [Express](https://expressjs.com/) routes using [HBS](https://handlebarsjs.com/) views
-`/server/graphql` | [GraphQL](https://github.com/graphql/graphql-js/) implementation
-`/server/graphql/resolvers` | GraphQL resolvers, queries and mutations
-`/server/middleware` | Server side Express middleware functions
-`/server/middleware/passport` | [Passport](http://www.passportjs.org/) authentication middleware
-`/server/services` | Services ([MS Graph](https://developer.microsoft.com/en-us/graph) and [Azure Table Storage](https://azure.microsoft.com/en-us/services/storage/tables/))
-`/server/utils` | Utilities
-`/server/views` | Express HBS views
-`/server/app.ts` | Express app
-`/server/index.ts` | [Node.js](http://nodejs.org/) server  
+| Folder/File                   | Description                                                  |
+| ----------------------------- | ------------------------------------------------------------ |
+| `/client`                     | Client TypeScript source using e.g. [React](https://reactjs.org/) and [Apollo Client](https://www.apollographql.com/docs/react/)`. |
+| `/client/common`              | Common elements like icons etc                               |
+| `/client/components`          | React components reusable throughout the solution            |
+| `/client/config`              | Conifguration                                                |
+| `/client/graphql`             | Graphql implementation for the client using `@apollo/client` |
+| `/client/helpers`             | Helper functions                                             |
+| `/client/pages`               | Main pages of the solution                                   |
+| `/client/types`               | Types, models and interfaces                                 |
+| `/client/utils`               | Utility functions                                            |
+| `/client/index.tsx`           | Main entry point for the app                                 |
+| `/server/public`              | Public assets, static files hosted under "/"                 |
+| `/server/public/css`          | CSS files                                                    |
+| `/server/public/js`           | JS files (hidden from `vscode`, the react bundle ends up here) |
+| `/server/routes`              | [Express](https://expressjs.com/) routes using [HBS](https://handlebarsjs.com/) views |
+| `/server/graphql`             | [GraphQL](https://github.com/graphql/graphql-js/) implementation |
+| `/server/graphql/resolvers`   | GraphQL resolvers, queries and mutations                     |
+| `/server/middleware`          | Server side Express middleware functions                     |
+| `/server/middleware/passport` | [Passport](http://www.passportjs.org/) authentication middleware |
+| `/server/services`            | Services ([MS Graph](https://developer.microsoft.com/en-us/graph) and [Azure Table Storage](https://azure.microsoft.com/en-us/services/storage/tables/)) |
+| `/server/utils`               | Utilities                                                    |
+| `/server/views`               | Express HBS views                                            |
+| `/server/app.ts`              | Express app                                                  |
+| `/server/index.ts`            | [Node.js](http://nodejs.org/) server                         |
 
 ## Development
 
@@ -51,7 +51,7 @@ Folder/File | Description
 
 The following permissions are required by Azure App Registration:
 
-![image-20201104173614079](.assets/image-20201104173614079.png)
+![azure-ad-app-registration-permissions](.assets/azure-ad-app-registration-permissions.png)
 
 
 #### Set up .env ##
@@ -67,7 +67,7 @@ Now you need to set the required environment variables from this table:
 | AZURE_STORAGE_CONNECTION_STRING | Connection string for the Azure Table Storage                | **Yes**  |
 | SESSION_SIGNING_KEY             | Just a random string to secure the sessions.                 | **Yes**  |
 | BUNDLE_ANALYZER_MODE            | See https://www.npmjs.com/package/webpack-bundle-analyzer. Default is server. | No       |
-| *OPEN_DELA*Y                    | Delay in seconds for opening Did in browser when running `watch`. | No       |
+| OPEN_DELAY                      | Delay in seconds for opening Did in browser when running `watch`. | No       |
 | DEBUG                           | To debug the Node backend. E.g. `app*` to see all logs from app. See https://www.npmjs.com/package/debug. | No       |
 | NO_BROWSER                      | Set to `1` if you don't want to automatically open Did in the browser when running `watch` task. | No       |
 | OAUTH_SCOPES                    | Scopes for Microsoft Graph queries. See https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent. | No       |
@@ -93,8 +93,8 @@ See `commitlint` in [package.json](./package.json). The commit message needs to 
 
 ### Branching / Deploying
 
-The `/main` branch requires pull requests, and is set up with a CI/CD pipeline which deploys to [did365.puzzlepart.com](https://did365.puzzlepart.com)  
-The `/dev` branch also requires pull requests, and is set up with a CI/CD pipeline which deploys to [didapp.azurewebsites.net](https://didapp.azurewebsites.net)  
+The `/main` branch requires pull requests, and is set up with a CI/CD pipeline which deploys to [did.puzzlepart.com](https://did.puzzlepart.com)  
+The `/dev` branch also requires pull requests, and is set up with a CI/CD pipeline which deploys to [didapp-dev.azurewebsites.net](https://didapp-dev.azurewebsites.net)  
 `/feature/*`-prefixed branches may or may not be included in future releases.
 
 You are encouraged to branch with either of the following prefixes  
@@ -102,7 +102,7 @@ You are encouraged to branch with either of the following prefixes
 *  **bugfix/**
 *  **feature/**
 
-See also ["A successful Git branching model"](https://nvie.com/posts/a-successful-git-branching-model/)
+See also [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/)
 
 
 If you want to test with your web app, checkout [Creating your own app registration in the Azure Portal](https://github.com/Puzzlepart/did365/wiki/Creating-your-own-app-registration-in-the-Azure-Portal) in our wiki.

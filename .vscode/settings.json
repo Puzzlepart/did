@@ -9,7 +9,6 @@
     "server/views/index.hbs": true,
     "server/public/js": true,
     "dist": true,
-    ".assets": true,
     "server/.docs": true,
     "client/.docs": true
   },
