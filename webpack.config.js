@@ -9,7 +9,7 @@ const DefinePlugin = require('webpack').DefinePlugin
 const debug = require('debug')('webpack')
 
 /** CONSTANTS */
-const MODE = process.env.NODE_ENV === 'development' ? 'development' : 'production'
+const MODE = process.env.NODE_ENV === 'production' ? 'production' : 'development'
 const IS_DEVELOPMENT = MODE === 'development'
 const SERVER_DIST = IS_DEVELOPMENT ? 'server' : 'dist/server'
 const BUNDLE_FILE_NAME = `[name].${version}.[hash].js`
@@ -116,7 +116,7 @@ if (IS_DEVELOPMENT) {
   const WebpackBuildNotifierPlugin = tryRequire('webpack-build-notifier')
   config.stats = 'normal'
   config.watch = true
-  config.watchOptions = { aggregateTimeout: 250 }
+  config.watchOptions = { aggregateTimeout: 500 }
   config.plugins.push(
     new LiveReloadPlugin(),
     new WebpackBuildNotifierPlugin({
