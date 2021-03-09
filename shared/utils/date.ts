@@ -1,6 +1,7 @@
 import $dayjs, { ConfigType, PluginFunc } from 'dayjs'
 import 'dayjs/locale/en-gb'
 import 'dayjs/locale/nb'
+import 'dayjs/locale/nn'
 import durationPlugin from 'dayjs/plugin/duration'
 import isLeapYear from 'dayjs/plugin/isLeapYear'
 import isoWeekPlugin from 'dayjs/plugin/isoWeek'

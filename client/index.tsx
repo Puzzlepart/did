@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable tsdoc/syntax */
 /**
  * Main entry point for the App
@@ -8,7 +9,7 @@ import { ApolloProvider } from '@apollo/client'
 import { initializeIcons } from '@uifabric/icons'
 import 'core-js/stable'
 import DateUtils from 'DateUtils'
-import index18n from 'i18next'
+import i18next from 'i18next'
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
 import 'regenerator-runtime/runtime.js'
@@ -48,7 +49,7 @@ export const boostrap = async () => {
 
   const context = await getContext()
   DateUtils.setup(context.user.language)
-  index18n.changeLanguage(context.user.language)
+  i18next.changeLanguage(context.user.language)
 
   ReactDom.render(
     <ApolloProvider client={client}>
