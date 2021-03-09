@@ -3,6 +3,11 @@ const fs = require('fs')
 const localtunnel = require('localtunnel')
 const log = require('debug')('tasks/localtunnel')
 
+/**
+ * Setup local tunnel
+ * 
+ * @param subdomain - Subdomain for local tunnel
+ */
 async function setupLocalTunnel(subdomain) {
     fs.writeFileSync('.localtunnel', '')
     if (!subdomain) return
