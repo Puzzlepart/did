@@ -67,9 +67,7 @@ export class ProjectService extends MongoDocumentService<Project> {
     try {
       await this.cache.clear({ key: 'getprojectsdata' })
       const filter: FilterQuery<Project> = pick(project, 'key', 'customerKey')
-      const { result } = await this.update(filter, {
-        $set: project
-      })
+      const { result } = await this.update(filter, project)
       return result.ok === 1
     } catch (error) {
       throw error
