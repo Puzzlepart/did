@@ -16,15 +16,13 @@ export const TimeColumn: FunctionComponent<ITimeColumnProps> = ({
   index,
   listProps
 }: ITimeColumnProps) => {
-  // eslint-disable-next-line no-console
-  console.log(event.endDateTime, listProps.events[index + 1]?.startDateTime)
   const startTime = DateUtils.formatDate(
     event.startDateTime,
     listProps.dateFormat
   )
   const endTime = DateUtils.formatDate(event.endDateTime, listProps.dateFormat)
   return (
-    <div style={{ position: 'relative' }}>
+    <>
       <span>
         {startTime} - {endTime}
       </span>
@@ -35,7 +33,10 @@ export const TimeColumn: FunctionComponent<ITimeColumnProps> = ({
           style={{ marginLeft: 4 }}
         />
       </MobileView>
-      <VisualGap current={event} next={listProps.events[index + 1]} />
-    </div>
+      <VisualGap
+        from={event.endDateTime}
+        to={listProps.events[index + 1]?.startDateTime}
+      />
+    </>
   )
 }

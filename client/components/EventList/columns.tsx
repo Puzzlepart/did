@@ -69,8 +69,12 @@ const timeColumn = (props: IEventListProps, name: string): IColumn =>
     'time',
     name,
     { ...getSizing(props, 'time', 90, 90) },
-    (event: TimeEntry, index: number) => (
-      <TimeColumn listProps={props} event={event} index={index} />
+    (event: TimeEntry) => (
+      <TimeColumn
+        listProps={props}
+        event={event}
+        index={props.events.indexOf(event)}
+      />
     )
   )
 

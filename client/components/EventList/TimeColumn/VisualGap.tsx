@@ -1,27 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable tsdoc/syntax */
 import React, { FunctionComponent } from 'react'
-import { TimeEntry } from 'types'
+import styles from './VisualGap.module.scss'
 
 /**
  * @category Function Component
  */
 export const VisualGap: FunctionComponent<{
-  current: TimeEntry
-  next: TimeEntry
-}> = ({ current, next }): JSX.Element => {
+  from: Date
+  to: Date
+}> = ({ from, to }): JSX.Element => {
+  if (!from || !to) return null
+  const gap = (new Date(to).getTime() - new Date(from).getTime()) / 1000 / 60
   return (
-    <>
-      <div
-        style={{
-          height: 50,
-          width: 1,
-          borderLeft: '1px dottted #000',
-          position: 'absolute'
-        }}></div>
-      <div style={{ zIndex: 2, background: '#f3f2f1', padding: '1px 10px' }}>
-        30min
-      </div>
-    </>
+    <div className={styles.root}>
+      <div className={styles.line}></div>
+      <div className={styles.gap}>{gap}min</div>
+    </div>
   )
 }

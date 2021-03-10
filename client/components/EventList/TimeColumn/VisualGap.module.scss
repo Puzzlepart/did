@@ -1,0 +1,17 @@
+.root {
+  position: relative;
+
+  .line {
+    top: 10px;
+    height: 50px;
+    width: 1px;
+    border-left: 1px dotted #000;
+    position: absolute;
+  }
+
+  .gap {
+    z-index: 2;
+    background-color: #f3f2f1;
+    padding: 1px 10px;
+  }
+}
