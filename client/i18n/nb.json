@@ -24,7 +24,7 @@
     "splitWeekInfoText": "Valgt uke strekker seg over to måneder. Naviger mellom periodene ved å bruke knappene over.",
     "projectInactiveErrorText": "Prosjektet er ikke lenger aktivt. Rediger hendelsen i Outlook.",
     "customerInactiveErrorText": "Kunden er ikke lenger aktiv. Rediger hendelsen i Outlook.",
-    "noProjectMatchFoundText": "Ingen treff funnet for noe prosjekt.",
+    "noProjectMatchFoundText": "Ingen treff funnet for noe prosjekt. Har du satt en kategori på hendelsen i Outlook?",
     "resolveProjectButtonLabel": "Løs manuelt",
     "ignoreEventButtonLabel": "Ignorer",
     "clearProjectMatchTooltipText": "Fjern match",

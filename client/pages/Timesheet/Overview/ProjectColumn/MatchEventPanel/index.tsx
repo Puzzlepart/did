@@ -31,7 +31,7 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
       <MessageBarButton
         text={t('timesheet.resolveProjectButtonLabel')}
         title={t('timesheet.resolveProjectButtonLabel')}
-        iconProps={{ iconName: 'ReviewResponseSolid' }}
+        iconProps={{ iconName: 'PenWorkspace' }}
         onClick={showPanel}
       />
       <Panel
