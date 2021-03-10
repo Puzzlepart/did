@@ -1,14 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { EntityLabel } from 'components/EntityLabel'
-import DateUtils from 'DateUtils'
 import * as helpers from 'helpers'
 import { IColumn, Link } from 'office-ui-fabric-react'
 import React, { useMemo } from 'react'
-import { BrowserView, MobileView } from 'react-device-detect'
+import { BrowserView } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { EventObject, TimeEntry } from 'types'
 import { generateColumn as col } from 'utils/generateColumn'
-import { DurationDisplay } from './DurationDisplay'
 import styles from './EventList.module.scss'
+import { TimeColumn } from './TimeColumn'
+import { DurationDisplay } from './TimeColumn/DurationDisplay'
 import { IEventListProps } from './types'
 
 /**
@@ -68,27 +69,9 @@ const timeColumn = (props: IEventListProps, name: string): IColumn =>
     'time',
     name,
     { ...getSizing(props, 'time', 90, 90) },
-    (event: TimeEntry) => {
-      const startTime = DateUtils.formatDate(
-        event.startDateTime,
-        props.dateFormat
-      )
-      const endTime = DateUtils.formatDate(event.endDateTime, props.dateFormat)
-      return (
-        <>
-          <span>
-            {startTime} - {endTime}
-          </span>
-          <MobileView renderWithFragment={true}>
-            <DurationDisplay
-              displayFormat='({0})'
-              duration={event.duration}
-              style={{ marginLeft: 4 }}
-            />
-          </MobileView>
-        </>
-      )
-    }
+    (event: TimeEntry, index: number) => (
+      <TimeColumn listProps={props} event={event} index={index} />
+    )
   )
 
 /**
@@ -121,8 +104,7 @@ export function useColumns(props: IEventListProps) {
       ].map((col) => ({
         ...col,
         isResizable: props.resizableColumns
-        // eslint-disable-next-line react-hooks/exhaustive-deps
       })),
-    [props.additionalColumns]
+    [props.events]
   )
 }
