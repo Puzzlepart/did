@@ -10,7 +10,12 @@ import { MongoDocumentService } from './@document'
 @Service({ global: false })
 export class ApiTokenService extends MongoDocumentService<ApiToken> {
   constructor(@Inject('CONTEXT') readonly context: Context) {
-    super(context, 'api_tokens')
+    super(
+      context,
+      'api_tokens',
+      null,
+      context?.mongoClient?.db(environment('MONGO_DB_DB_NAME'))
+    )
   }
 
   /**
