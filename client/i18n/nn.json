@@ -15,7 +15,7 @@
     "goToPrevWeek": "Gå til førre veke",
     "goToNextWeek": "Gå til neste veke",
     "periodHoursSummaryText": "Du har totalt **{{hours}}** denne perioden.",
-    "hoursNotMatchedText": "Du har **{{hours}}** som ikkje er kopla mot eit prosjekt. Alle avtalar må vera matcha før du kan stadfeste timane dine.",
+    "hoursNotMatchedText": "Du har **{{hours}}** som ikkje er kopla mot eit prosjekt. Alle avtalar må stemme overeins før du kan stadfeste timane dine.",
     "allHoursMatchedText": "Alle timane dine er matcha. Er du klar til å stadfeste veka di?",
     "periodConfirmedText": "Perioden er stadfesta med {{hours}}. Klikk **Angre på stadfesting av timar** dersom du treng å justere timeføringa.",
     "ignoredEventsText": "Du har {{ignored_count}} manuelt ignorerte hending(ar).",
