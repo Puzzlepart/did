@@ -278,7 +278,8 @@
           "test",
           "dev",
           "i18n",
-          "github"
+          "github",
+          "readme"
         ]
       ]
     }
