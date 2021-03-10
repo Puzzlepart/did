@@ -28,7 +28,7 @@
     "resolveProjectButtonLabel": "Løs manuelt",
     "ignoreEventButtonLabel": "Ignorer",
     "clearProjectMatchTooltipText": "Fjern match",
-    "matchOutlookInfoText": "**Tips:** Prøv å sørge for at <a href='{{webLink}}' target='_blank'>Outlook-avtalen</a> matches automatisk. I noen tilfeller kan det dog være nødvendig å matche manuelt.",
+    "matchOutlookInfoText": "**Tips:** Prøv å sørge for at<a href='{{webLink}}' target='_blank'>Outlook-hendelsen</a> blir tilkoblet et prosjekt automatisk. I noen tilfeller kan det dog være nødvendig å løse hendelsen manuelt.",
     "didYouMeanText": "Mente du",
     "eventNotFullyMatchedText": "Hendelse kunne ikke matches. Vi fant matchende kunde **{{name}}**, men ikke noe prosjekt med den spesifiserte nøkkelen.",
     "unforecastHoursText": "Fjern prognose",
