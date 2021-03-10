@@ -1,6 +1,6 @@
 ---
 name: Improvement
-about: Suggest improvements to existing functionality 
+about: Improvements with specification. Suggest improvements in the discussions section.
 labels: enhancement
 ---
 - [ ] I have searched for existing issues to avoid creating duplicates

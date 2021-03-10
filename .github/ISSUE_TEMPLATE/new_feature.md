@@ -1,6 +1,6 @@
 ---
-name: Feature request
-about: Suggest new did features
+name: New feature
+about: Feature with specification. Add feature requests under the discussions section.
 labels: new feature
 ---
 - [ ] I have searched for existing issues to avoid creating duplicates
