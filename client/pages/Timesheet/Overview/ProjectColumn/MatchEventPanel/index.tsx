@@ -1,30 +1,16 @@
 import { SearchProject, UserMessage } from 'components'
 import { MessageBarButton, Panel } from 'office-ui-fabric-react'
-import { ITimesheetContext, TimesheetContext } from 'pages/Timesheet/context'
-import { MANUAL_MATCH } from 'pages/Timesheet/reducer/actions'
-import React, { useContext, useState } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Project } from 'types'
 import styles from './MatchEventPanel.module.scss'
 import { IMatchEventPanelProps } from './types'
+import { useMatchEventPanel } from './useMatchEventPanel'
 
 export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
   const { t } = useTranslation()
-  const { dispatch } = useContext<ITimesheetContext>(TimesheetContext)
-  const [isPanelVisible, setPanelVisibility] = useState(false)
-
-  const hidePanel = () => setPanelVisibility(false)
-  const showPanel = () => setPanelVisibility(true)
-
-  /**
-   * On manual match. Dispatches action type MANUAL_MATCH
-   *
-   * @param project - Project to match the event to
-   */
-  const onManualMatch = (project: Project) => {
-    hidePanel()
-    dispatch(MANUAL_MATCH({ eventId: event.id, project }))
-  }
+  const { isPanelOpen, showPanel, hidePanel, onMatch } = useMatchEventPanel(
+    event
+  )
 
   return (
     <span className={styles.root}>
@@ -35,7 +21,7 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
         onClick={showPanel}
       />
       <Panel
-        isOpen={isPanelVisible}
+        isOpen={isPanelOpen}
         isLightDismiss={true}
         headerText={t('timesheet.matchEventPanelHeaderText')}
         onDismiss={hidePanel}>
@@ -50,7 +36,7 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
           iconName='Lightbulb'>
           <p>
             <span>{t('timesheet.didYouMeanText')}</span>
-            <a href='#' onClick={() => onManualMatch(event.suggestedProject)}>
+            <a href='#' onClick={() => onMatch(event.suggestedProject)}>
               {event.suggestedProject?.tag}
             </a>
             ?
@@ -66,7 +52,7 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
         <SearchProject
           width='100%'
           className={styles.searchProject}
-          onSelected={(project) => onManualMatch(project)}
+          onSelected={(project) => onMatch(project)}
           placeholder={t('common.searchPlaceholder')}
         />
       </Panel>
