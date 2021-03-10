@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/no-array-callback-reference */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Collection, FilterQuery, OptionalId } from 'mongodb'
+import { Collection, Db, FilterQuery, OptionalId } from 'mongodb'
 import { Context } from '../../graphql/context'
 import { CacheService } from '../cache'
 
@@ -16,13 +16,15 @@ export class MongoDocumentService<T> {
    * @param context - Injected context through typedi
    * @param collectionName - Colletion name
    * @param cachePrefix - Cache prefix
+   * @param database - Database
    */
   constructor(
     public readonly context: Context,
     public collectionName: string,
-    public cachePrefix?: string
+    public cachePrefix?: string,
+    database?: Db
   ) {
-    this.collection = context.db.collection(collectionName)
+    this.collection = (database || context.db).collection(collectionName)
     if (cachePrefix) {
       this.cache = new CacheService(this.context, cachePrefix)
     }

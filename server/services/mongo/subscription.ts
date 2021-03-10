@@ -5,12 +5,18 @@ import {
   Subscription,
   SubscriptionSettings
 } from '../../graphql/resolvers/types'
+import { environment } from '../../utils'
 import { MongoDocumentService } from './@document'
 
 @Service({ global: false })
 export class SubscriptionService extends MongoDocumentService<Subscription> {
   constructor(@Inject('CONTEXT') readonly context: Context) {
-    super(context, 'subscriptions')
+    super(
+      context,
+      'subscriptions',
+      null,
+      context?.mongoClient?.db(environment('MONGO_DB_DB_NAME'))
+    )
   }
 
   /**
