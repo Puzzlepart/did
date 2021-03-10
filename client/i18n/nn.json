@@ -34,7 +34,7 @@
     "unforecastHoursText": "Fjern prognose",
     "forecastHoursText": "Lagre prognose",
     "periodForecastedText": "Perioden er prognostisert med {{hours}}.",
-    "matchEventPanelHeaderText": "Løys hendinga",
+    "matchEventPanelHeaderText": "Løys hendinga manuelt",
     "customerInactiveError": "Kunden er ikkje lenger aktiv. Løys hendinga i Outlook.",
     "projectInactiveError": "Prosjektet er ikkje lenger aktivt. Løys hendinga i Outlook.",
     "unforecastingPeriodDescription": "Ver vennleg og vent litt...",

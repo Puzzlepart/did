@@ -34,7 +34,7 @@
     "unforecastHoursText": "Fjern prognose",
     "forecastHoursText": "Lagre prognose",
     "periodForecastedText": "Perioden er prognostisert med {{hours}}.",
-    "matchEventPanelHeaderText": "Løs hendelsen",
+    "matchEventPanelHeaderText": "Løs hendelsen manuelt",
     "customerInactiveError": "Kunden er ikke lenger aktiv. Løs hendelsen i Outlook.",
     "projectInactiveError": "Prosjektet er ikke lenger aktivt. Løs hendelsen i Outlook.",
     "unforecastingPeriodDescription": "Vent et lite øyeblikk...",
