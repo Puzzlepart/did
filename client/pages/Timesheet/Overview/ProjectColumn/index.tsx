@@ -53,7 +53,7 @@ export const ProjectColumn = ({ event }: IProjectColumnProps): JSX.Element => {
     return (
       <div className={className}>
         <UserMessage
-          containerStyle={{ marginTop: 10 }}
+          containerStyle={{ marginTop: 10, width: '90%' }}
           isMultiline={true}
           type={MessageBarType.warning}
           iconName='TagUnknown'
