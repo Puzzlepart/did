@@ -53,7 +53,8 @@
       "noDataText": "Ingen data å vise for den valgte perioden.",
       "customerChartDescription": "Viser allokering per kunde for perioden",
       "projectChartDescription": "Viser allokering per prosjekt for perioden"
-    }
+    },
+    "matchEventPanelSearchPlaceholder": "Søk i prosjekter..."
   },
   "projects": {
     "inactiveText": "Dette prosjektet er markert som inaktivt.",

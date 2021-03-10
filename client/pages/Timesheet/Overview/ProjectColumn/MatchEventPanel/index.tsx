@@ -53,7 +53,7 @@ export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
           width='100%'
           className={styles.searchProject}
           onSelected={(project) => onMatch(project)}
-          placeholder={t('common.searchPlaceholder')}
+          placeholder={t('timesheet.matchEventPanelSearchPlaceholder')}
         />
       </Panel>
     </span>

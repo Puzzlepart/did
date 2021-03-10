@@ -53,7 +53,8 @@
       "noDataText": "No data to show for the selected period.",
       "customerChartDescription": "Shows allocation per customer for the period",
       "projectChartDescription": "Shows allocation per project for the period"
-    }
+    },
+    "matchEventPanelSearchPlaceholder": "Search projects..."
   },
   "projects": {
     "inactiveText": "This project has been marked as inactive.",
