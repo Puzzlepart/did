@@ -25,7 +25,7 @@
     "projectInactiveErrorText": "Prosjektet er ikkje lenger aktivt. Rediger hendinga i Outlook.",
     "customerInactiveErrorText": "Kunden er ikkje lenger aktiv. Rediger hendinga i Outlook.",
     "noProjectMatchFoundText": "Fann ikkje noko treff på prosjekt.",
-    "resolveProjectButtonLabel": "Løys",
+    "resolveProjectButtonLabel": "Løys manuelt",
     "ignoreEventButtonLabel": "Ignorer",
     "clearProjectMatchTooltipText": "Fjern match",
     "matchOutlookInfoText": "**Tips:** Prøv å sørge for at <a href='{{webLink}}' target='_blank'>Outlook-avtalen</a> blir matcha automatisk. I nokre tilfelle kan det likevel vere nødvendig å matche manuelt.",
