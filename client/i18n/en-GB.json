@@ -24,7 +24,7 @@
     "splitWeekInfoText": "Selected week spans two months. Navigate between the first and second period using the command bar above.",
     "projectInactiveError": "Project is no longer active. Please resolve the event in Outlook.",
     "customerInactiveError": "Customer is no longer active. Please resolve the event in Outlook.",
-    "noProjectMatchFoundText": "No match found. Click **Resolve** to match the event manually or **Ignore** to ignore it.",
+    "noProjectMatchFoundText": "No match found for any project.",
     "resolveProjectButtonLabel": "Resolve",
     "ignoreEventButtonLabel": "Ignore",
     "clearProjectMatchTooltipText": "Clear match",
