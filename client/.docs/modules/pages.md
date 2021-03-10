@@ -108,7 +108,6 @@ All are built using React Function components and Hooks.
 
 ### Timesheet Hooks Functions
 
-- [useHotkeys](pages.md#usehotkeys)
 - [useSubmitActions](pages.md#usesubmitactions)
 - [useTimesheet](pages.md#usetimesheet)
 - [useTimesheetQuery](pages.md#usetimesheetquery)
@@ -189,7 +188,7 @@ ___
 
 • `Const` **Timesheet**: FunctionComponent
 
-Defined in: [client/pages/Timesheet/Timesheet.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/Timesheet.tsx#L20)
+Defined in: [client/pages/Timesheet/Timesheet.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/Timesheet.tsx#L21)
 
 ___
 
@@ -618,28 +617,6 @@ Defined in: [client/pages/Reports/reducer/useReportsReducer.ts:16](https://githu
 ___
 
 ## Timesheet Hooks Functions
-
-### useHotkeys
-
-▸ **useHotkeys**(`context`: [*ITimesheetContext*](../interfaces/pages.itimesheetcontext.md)): *object*
-
-Hook for hotkeys
-
-#### Parameters:
-
-Name | Type | Description |
-:------ | :------ | :------ |
-`context` | [*ITimesheetContext*](../interfaces/pages.itimesheetcontext.md) | Context    |
-
-**Returns:** *object*
-
-Name | Type |
-:------ | :------ |
-`hotkeysProps` | *GlobalHotKeysProps* |
-
-Defined in: [client/pages/Timesheet/hooks/useHotkeys.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/hooks/useHotkeys.tsx#L13)
-
-___
 
 ### useSubmitActions
 

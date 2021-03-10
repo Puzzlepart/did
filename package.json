@@ -278,9 +278,20 @@
           "test",
           "dev",
           "i18n",
-          "github"
+          "github",
+          "readme"
         ]
       ]
     }
+  },
+  "nodemonConfig": {
+    "watch": [
+      "server",
+      "shared"
+    ],
+    "ext": "ts,json",
+    "exec": "ts-node ./server/index.ts -T",
+    "delay": 2500,
+    "colours": true
   }
 }

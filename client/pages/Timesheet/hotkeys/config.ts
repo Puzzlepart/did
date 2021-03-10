@@ -3,7 +3,7 @@ import { ITimesheetContext } from '../context'
 import { SET_SCOPE, TOGGLE_SHORTCUTS } from '../reducer/actions'
 import { TimesheetScope } from '../TimesheetScope'
 
-export default ({
+export const getHotkeys = ({
   scope,
   dispatch,
   t

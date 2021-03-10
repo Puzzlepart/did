@@ -24,8 +24,8 @@
     "splitWeekInfoText": "Selected week spans two months. Navigate between the first and second period using the command bar above.",
     "projectInactiveError": "Project is no longer active. Please resolve the event in Outlook.",
     "customerInactiveError": "Customer is no longer active. Please resolve the event in Outlook.",
-    "noProjectMatchFoundText": "No match found. Click **Resolve** to match the event manually or **Ignore** to ignore it.",
-    "resolveProjectButtonLabel": "Resolve",
+    "noProjectMatchFoundText": "No match found for any project.",
+    "resolveProjectButtonLabel": "Resolve manually",
     "ignoreEventButtonLabel": "Ignore",
     "clearProjectMatchTooltipText": "Clear match",
     "matchOutlookInfoText": "**Please note:** You should try your best to match<a href='{{webLink}}' target='_blank'>the event in Outlook</a>, but in some cases it might be neccessary to manually match.",
@@ -36,7 +36,7 @@
     "forecastHoursText": "Forecast hours",
     "unforecastHoursText": "Remove forecast",
     "periodForecastedText": "The period is forecasted with {{hours}}.",
-    "matchEventPanelHeaderText": "Resolve event",
+    "matchEventPanelHeaderText": "Resolve event manually",
     "unforecastingPeriodDescription": "Hang on a minute...",
     "unforecastingPeriodLabel": "Removing forecast for the period",
     "forecastingPeriodLabel": "Forecasting period",
@@ -53,7 +53,8 @@
       "noDataText": "No data to show for the selected period.",
       "customerChartDescription": "Shows allocation per customer for the period",
       "projectChartDescription": "Shows allocation per project for the period"
-    }
+    },
+    "matchEventPanelSearchPlaceholder": "Search projects..."
   },
   "projects": {
     "inactiveText": "This project has been marked as inactive.",
