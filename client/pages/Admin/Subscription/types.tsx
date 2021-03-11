@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 interface ISubscriptionSettingBase {
   id: string
-  props: Map<string, any>
   disabledIf?: (settings: any) => boolean
   hiddenIf?: (settings: any) => boolean
+  props: { [key: string]: any }
 }
 
 export interface ISubscriptionSettingBool extends ISubscriptionSettingBase {

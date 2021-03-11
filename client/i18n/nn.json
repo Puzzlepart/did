@@ -311,7 +311,8 @@
     "exportExcel": "Eksporter til Excel",
     "errorFallbackHeader": "Det virkar som noko gjekk gale",
     "tryAgainText": "Prøv igjen, det kan teoretisk sett fungere ...",
-    "githubIssueReportLinkText": "Rapporter problem på GitHub"
+    "githubIssueReportLinkText": "Rapporter problem på GitHub",
+    "ownerLabel": "Eier"
   },
   "navigation": {
     "timesheet": "Timeliste",

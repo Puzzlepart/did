@@ -9,6 +9,7 @@ import styles from './Admin.module.scss'
 import { ApiTokens } from './ApiTokens'
 import { Labels } from './Labels'
 import { Roles } from './Roles'
+import { SubscriptionSettings } from './Subscription'
 import { SummaryView } from './SummaryView'
 import { Users } from './Users'
 
@@ -57,6 +58,15 @@ export const Admin = () => {
             headerText={t('admin.rolesPermissions')}
             itemIcon='SecurityGroup'>
             <Roles />
+          </PivotItem>
+        )}
+        {hasPermission(PERMISSION.MANAGE_SUBSCRIPTION) && (
+          <PivotItem
+            className={styles.tab}
+            itemKey='subscription'
+            headerText={t('admin.subscriptionSettings')}
+            itemIcon='Subscribe'>
+            <SubscriptionSettings />
           </PivotItem>
         )}
         <PivotItem

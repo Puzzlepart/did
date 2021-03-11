@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ToggleSection } from 'components/ToggleSection'
-import { getValue } from 'helpers'
+import { getValue as get } from 'helpers'
 import { Slider, Toggle } from 'office-ui-fabric-react'
 import React, { FunctionComponent, useContext } from 'react'
 import { SubscriptionContext } from '../context'
@@ -10,44 +11,35 @@ import { ISettingsSectionProps } from './types'
 export const SettingsSection: FunctionComponent<ISettingsSectionProps> = (
   props: ISettingsSectionProps
 ) => {
-  const { settings, onSettingsChanged } = useContext(SubscriptionContext)
+  const { settings, onChange } = useContext(SubscriptionContext)
   return (
     <ToggleSection
       className={styles.root}
       id={props.id}
       headerText={props.name}>
       {props.fields.map((field) => {
-        field.props.set(
-          'disabled',
+        const fieldProps = { ...field.props } as any
+        fieldProps.disabled =
           field.disabledIf && field.disabledIf(settings || {})
-        )
-        field.props.set(
-          'hidden',
-          field.hiddenIf && field.hiddenIf(settings || {})
-        )
-        const _ = [...field.props].reduce(
-          (object, [key, value]) => ({ ...object, [key]: value }),
-          {} as any
-        )
+        fieldProps.hidden = field.hiddenIf && field.hiddenIf(settings || {})
         const key = `${props.id}.${field.id}`
         let fieldElement: JSX.Element
-        // eslint-disable-next-line default-case
         switch (field.type) {
           case 'bool':
             fieldElement = (
               <Toggle
-                {..._}
-                defaultChecked={getValue(settings, key, false)}
-                onChange={(_event, value) => onSettingsChanged(key, value)}
+                {...fieldProps}
+                defaultChecked={get(settings, key, false)}
+                onChange={(_event, value) => onChange(key, value)}
               />
             )
             break
           case 'number':
             fieldElement = (
               <Slider
-                {..._}
-                defaultValue={getValue(settings, key, 1)}
-                onChange={(value) => onSettingsChanged(key, value)}
+                {...fieldProps}
+                defaultValue={get(settings, key, 1)}
+                onChange={(value) => onChange(key, value)}
               />
             )
             break
@@ -58,9 +50,14 @@ export const SettingsSection: FunctionComponent<ISettingsSectionProps> = (
             break
         }
         return (
-          <div key={field.id} className={styles.inputField} hidden={_.hidden}>
+          <div
+            key={field.id}
+            className={styles.inputField}
+            hidden={fieldProps.hidden}>
             {fieldElement}
-            <span className={styles.inputDescription}>{_.description}</span>
+            <span className={styles.inputDescription}>
+              {fieldProps.description}
+            </span>
           </div>
         )
       })}

@@ -312,7 +312,8 @@
     "exportExcel": "Export to Excel",
     "errorFallbackHeader": "It looks like something went wrong",
     "tryAgainText": "Try again, it might work...",
-    "githubIssueReportLinkText": "Report issue on GitHub"
+    "githubIssueReportLinkText": "Report issue on GitHub",
+    "ownerLabel": "Owner"
   },
   "navigation": {
     "timesheet": "Timesheet",

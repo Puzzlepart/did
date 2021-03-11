@@ -2,14 +2,15 @@ query UserContext {
   subscription {
     id
     name
+    owner
     settings {
       forecast {
         enabled
         notifications
       }
       adsync {
-        adUserSyncEnabled
-        adUserSyncProperties
+        enabled
+        properties
       }
     }
   }

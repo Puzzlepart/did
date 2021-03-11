@@ -10,26 +10,31 @@ export const CheckboxField = ({
   props,
   options
 }: ICheckboxFieldProps) => {
-  const { onSettingsChanged, settings } = useContext(SubscriptionContext)
+  const { onChange, settings } = useContext(SubscriptionContext)
   return (
     <div>
-      <Label>{props.get('label')}</Label>
-      {Object.keys(options).map((key) => (
-        <Checkbox
-          key={key}
-          defaultChecked={contains(getValue(settings, settingsKey, []), key)}
-          label={options[key]}
-          onChange={(_event, checked) => {
-            onSettingsChanged(settingsKey, (value: string[]) => {
-              value = value || []
-              if (checked) value.push(key)
-              else value = value.splice(value.indexOf(key), 1)
-              return value
-            })
-          }}
-          styles={{ root: { marginBottom: 6 } }}
-        />
-      ))}
+      <Label>{props.label}</Label>
+      {Object.keys(options).map((key) => {
+        const defaultChecked = contains(
+          getValue(settings, settingsKey, []),
+          key
+        )
+        return (
+          <Checkbox
+            key={key}
+            defaultChecked={defaultChecked}
+            label={options[key]}
+            onChange={(_event, checked) => {
+              onChange(settingsKey, (value: string[] = []) => {
+                if (checked) value.push(key)
+                else value.splice(value.indexOf(key), 1)
+                return value
+              })
+            }}
+            styles={{ root: { marginBottom: 6 } }}
+          />
+        )
+      })}
     </div>
   )
 }
