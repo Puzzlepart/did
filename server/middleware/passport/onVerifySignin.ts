@@ -3,6 +3,7 @@ import { MongoClient } from 'mongodb'
 import { IProfile, VerifyCallback } from 'passport-azure-ad'
 import { SubscriptionService, UserService } from '../../services/mongo'
 import { environment } from '../../utils'
+import { NO_OID_FOUND, TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } from './errors'
 
 /**
  * On verify sign in
@@ -29,9 +30,13 @@ export const onVerifySignin = async (
   try {
     const { tid: subId, oid: userId, preferred_username: mail } = profile._json
 
+    if (!userId) {
+      throw NO_OID_FOUND
+    }
+
     const subscription = await subSrv.getById(subId)
     if (!subscription) {
-      throw new Error('[temp error message for subscription not found]')
+      throw TENANT_NOT_ENROLLED
     }
     const isOwner = subscription.owner === mail
 
@@ -42,7 +47,7 @@ export const onVerifySignin = async (
     let user = await userSrv.getById(userId)
 
     if (!user && !isOwner) {
-      throw new Error('[temp error message for user not found]')
+      throw USER_NOT_ENROLLED
     }
 
     if (isOwner) {
