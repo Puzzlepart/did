@@ -59,6 +59,9 @@ export class Subscription {
   @Field()
   name: string
 
+  @Field({ nullable: true })
+  owner: string
+
   @Field(() => SubscriptionSettings, { nullable: true })
   settings?: SubscriptionSettings
 

@@ -291,7 +291,7 @@
     ],
     "ext": "ts,json",
     "exec": "ts-node ./server/index.ts -T",
-    "delay": 2500,
+    "delay": 800,
     "colours": true
   }
 }

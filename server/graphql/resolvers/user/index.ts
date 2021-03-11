@@ -44,7 +44,7 @@ export class UserResolver {
     const user = await this._user.getById(context.userId)
     return {
       ...user,
-      subscription: pick(context.subscription, 'id', 'name')
+      subscription: pick(context.subscription, 'id', 'name', 'owner')
     }
   }
 
