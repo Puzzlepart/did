@@ -2,7 +2,7 @@
 /**
  * Sign in error
  *
- * @ignore
+ * @extends Error
  */
 export class SigninError extends Error {
   constructor(
@@ -35,8 +35,8 @@ export const NO_OID_FOUND = new SigninError(
 
 export const TENANT_NOT_ENROLLED = new SigninError(
   'de72e4da',
-  'I hate to be the one telling you this...',
-  '... but your company is not enrolled in did.<br/><br/> Please contact <a href="mailto:did@puzzlepart.com">did@puzzlepart.com</a> for more information.',
+  'Your company is not enrolled in did',
+  'Please contact<a href="mailto:did@puzzlepart.com">did@puzzlepart.com</a> for more information.',
   'Phone'
 )
 
@@ -50,6 +50,7 @@ export const USER_NOT_ENROLLED = new SigninError(
 
 export const SIGNIN_FAILED = new SigninError(
   'e0666582',
-  'An error occured',
-  'Sorry, we were not able to sign you in right now, and we are not really sure why!<br/><br/> Hope you can forgive us at some point.'
+  'An error occured signing you in',
+  'Sorry, we were not able to sign you in right now, and we are not really sure why!<br/><br/> It can help to clear your browser cache.',
+  'Dislike'
 )

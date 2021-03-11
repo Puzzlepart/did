@@ -125,7 +125,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*Subscription*](graphql.subscription.md)\>\>\>
 
-Defined in: [server/services/mongo/subscription.ts:56](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L56)
+Defined in: [server/services/mongo/subscription.ts:59](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L59)
 
 ___
 
@@ -162,6 +162,8 @@ ___
 
 Get subscription by ID
 
+**`remarks`** Returns null if no subscription is found.
+
 #### Parameters:
 
 Name | Type | Description |
@@ -170,7 +172,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Subscription*](graphql.subscription.md)\>
 
-Defined in: [server/services/mongo/subscription.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L39)
+Defined in: [server/services/mongo/subscription.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L41)
 
 ___
 
@@ -249,4 +251,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
 
-Defined in: [server/services/mongo/subscription.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L72)
+Defined in: [server/services/mongo/subscription.ts:75](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L75)

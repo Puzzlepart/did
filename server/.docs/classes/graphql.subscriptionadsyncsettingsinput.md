@@ -29,7 +29,7 @@
 
 • `Optional` **adUserSyncEnabled**: *boolean*
 
-Defined in: [server/graphql/resolvers/subscription/types.ts:93](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L93)
+Defined in: [server/graphql/resolvers/subscription/types.ts:96](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L96)
 
 ___
 
@@ -37,4 +37,4 @@ ___
 
 • `Optional` **adUserSyncProperties**: *string*[]
 
-Defined in: [server/graphql/resolvers/subscription/types.ts:96](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L96)
+Defined in: [server/graphql/resolvers/subscription/types.ts:99](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L99)

@@ -44,28 +44,28 @@ export const onVerifySignin = async (
       db: mongoClient.db(subscription.db)
     })
 
-    let user = await userSrv.getById(userId)
+    let user_ = await userSrv.getById(userId)
 
-    if (!user && !isOwner) {
+    if (!user_ && !isOwner) {
       throw USER_NOT_ENROLLED
     }
 
     if (isOwner) {
-      user = {
+      user_ = {
         id: userId,
         mail,
         displayName: profile.displayName,
         role: 'Owner',
         preferredLanguage: 'en-GB'
       }
-      await userSrv.addUser(user)
+      await userSrv.addUser(user_)
     }
-
-    return done(null, {
-      ...user,
+    const user = {
+      ...user_,
       subscription,
       tokenParams: tokenParameters
-    })
+    }
+    return done(null, user)
   } catch (error) {
     done(error, null)
   }
