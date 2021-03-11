@@ -23,13 +23,16 @@ export const Home: FunctionComponent = () => {
           type={MessageBarType.error}
           iconName={error.icon}
           text={[`#### ${error.name} ####`, error.message].join('\n\n')}
+          onDismiss={() => {
+            window.location.href = window.location.href.split('?')[0]
+          }}
         />
       )}
       <div hidden={!!subscription || !!error}>
         <DefaultButton
-          className={styles.signinbutton}
-          href='/auth/signin'
-          text={t('common.signInText')}
+          onClick={() => document.location.replace('/auth/signin')}
+          iconProps={{ iconName: 'WindowsLogo' }}
+          text={t('common.ms365signInText')}
         />
       </div>
     </div>

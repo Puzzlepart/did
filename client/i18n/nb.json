@@ -212,7 +212,7 @@
     "employeeLabel": "Ansatt",
     "yearLabel": "År",
     "roleLabel": "Rolle",
-    "signInText": "Logg inn",
+    "ms365signInText": "Logg inn med Microsoft 365",
     "signOutText": "Logg ut",
     "roleUser": "Bruker",
     "roleAdmin": "Administrator",

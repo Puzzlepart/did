@@ -213,7 +213,7 @@
     "employeeLabel": "Employee",
     "yearLabel": "Year",
     "roleLabel": "Role",
-    "signInText": "Log in",
+    "ms365signInText": "Sign in with Microsoft 365",
     "signOutText": "Sign out",
     "roleUser": "User",
     "roleAdmin": "Administrator",
