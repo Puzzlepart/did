@@ -53,6 +53,8 @@ export class UserService extends MongoDocumentService<User> {
 
   /**
    * Get user by ID
+   * 
+   * @remarks Returns null if no user is found.
    *
    * @param id - User ID
    */
