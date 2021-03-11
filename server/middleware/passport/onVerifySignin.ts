@@ -4,6 +4,7 @@ import { IProfile, VerifyCallback } from 'passport-azure-ad'
 import { SubscriptionService, UserService } from '../../services/mongo'
 import { environment } from '../../utils'
 import { NO_OID_FOUND, TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } from './errors'
+import { synchronizeUserProfile } from './synchronizeUserProfile'
 
 /**
  * On verify sign in
@@ -50,7 +51,7 @@ export const onVerifySignin = async (
       throw USER_NOT_ENROLLED
     }
 
-    if (isOwner) {
+    if (!user_ && isOwner) {
       user_ = {
         id: userId,
         mail,
@@ -60,12 +61,18 @@ export const onVerifySignin = async (
       }
       await userSrv.addUser(user_)
     }
-    const user = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const user: any = {
       ...user_,
       subscription,
       tokenParams: tokenParameters
     }
-    return done(null, user)
+
+    if (subscription?.settings?.adsync?.enabled) {
+      await synchronizeUserProfile(user, userSrv)
+    }
+
+    done(null, user)
   } catch (error) {
     done(error, null)
   }

@@ -25,10 +25,10 @@ export class SubscriptionForecastSettings {
 })
 export class SubscriptionADSyncSettings {
   @Field({ nullable: true })
-  adUserSyncEnabled?: boolean
+  enabled?: boolean
 
   @Field(() => [String], { nullable: true })
-  adUserSyncProperties?: string[]
+  properties?: string[]
 }
 
 /**
@@ -93,10 +93,10 @@ export class SubscriptionForecastSettingsInput {
 })
 export class SubscriptionADSyncSettingsInput {
   @Field({ nullable: true })
-  adUserSyncEnabled?: boolean
+  enabled?: boolean
 
   @Field(() => [String], { nullable: true })
-  adUserSyncProperties?: string[]
+  properties?: string[]
 }
 
 /**

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-var-requires */
 global['fetch'] = require('node-fetch')
 import { Client as MSGraphClient } from '@microsoft/microsoft-graph-client'
@@ -41,11 +42,27 @@ class MSGraphService {
       await this._oauthService.getAccessToken(this._accessTokenOptions)
     ).access_token
     const client = MSGraphClient.init({
-      authProvider: (done: (argument0: any, argument1: any) => void) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      authProvider: (done: (error: Error, token: any) => void) => {
         done(null, this._access_token)
       }
     })
     return client
+  }
+
+  /**
+   * Get current user properties
+   *
+   * @param properties - Properties to retrieve
+   */
+  async getCurrentUser(properties: string[]): Promise<any> {
+    try {
+      const client = await this._getClient()
+      const value = await client.api('/me').select(properties).get()
+      return value
+    } catch (error) {
+      throw new Error(`MSGraphService.getCurrentUser: ${error.message}`)
+    }
   }
 
   /**

@@ -16,7 +16,8 @@ export interface AccessTokenOptions {
 
 @Service({ global: false })
 class OAuthService {
-  constructor(@Inject('REQUEST') private readonly _request: Express.Request) {}
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  constructor(@Inject('REQUEST') private readonly _request: any) {}
 
   /**
    * Get client
