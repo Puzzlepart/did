@@ -1,16 +1,19 @@
 import { NextFunction, Request, Response, Router } from 'express'
 import passport from 'passport'
 import url from 'url'
+import { SigninError, SIGNIN_FAILED } from '../middleware/passport/errors'
 import { environment } from '../utils'
 const auth = Router()
 
 auth.get(
   '/signin',
   (request: Request, response: Response, next: NextFunction) => {
-    passport.authenticate('azuread-openidconnect', {
-      prompt: environment('OAUTH_SIGNIN_PROMPT'),
-      failureRedirect: '/'
-    })(request, response, next)
+    request.session.regenerate(() => {
+      passport.authenticate('azuread-openidconnect', {
+        prompt: environment('OAUTH_SIGNIN_PROMPT'),
+        failureRedirect: '/'
+      })(request, response, next)
+    })
   }
 )
 
@@ -21,12 +24,14 @@ auth.post(
       'azuread-openidconnect',
       (error: Error, user: Express.User) => {
         if (error || !user) {
+          const _error = error instanceof SigninError ? error : SIGNIN_FAILED
           return response.redirect(
             url.format({
               pathname: '/',
               query: {
-                name: error?.name,
-                message: error?.message
+                name: _error?.name,
+                message: _error?.message,
+                icon: _error?.icon
               }
             })
           )
