@@ -7,6 +7,11 @@ import { environment } from '../../utils'
 /**
  * On verify sign in
  *
+ * 1. Checks if the tenant has an subscription
+ * 2. Checks if the user is enrolled in the subscription or
+ * the user is the subscription owner.
+ * 3. If the user is an owner, we create the user for them.
+ *
  * @param mongoClient - Mongo client
  * @param profile - User profile object
  * @param tokenParams - Token params
@@ -22,19 +27,19 @@ export const onVerifySignin = async (
     db: mongoClient.db(environment('MONGO_DB_DB_NAME'))
   })
   try {
-    const { tid, oid, preferred_username } = profile._json
+    const { tid: subId, oid: userId, preferred_username: mail } = profile._json
 
-    const subscription = await subSrv.getById(tid)
+    const subscription = await subSrv.getById(subId)
     if (!subscription) {
       throw new Error('[temp error message for subscription not found]')
     }
-    const isOwner = subscription.owner === preferred_username
+    const isOwner = subscription.owner === mail
 
     const userSrv = new UserService({
       db: mongoClient.db(subscription.db)
     })
 
-    let user = await userSrv.getById(oid)
+    let user = await userSrv.getById(userId)
 
     if (!user && !isOwner) {
       throw new Error('[temp error message for user not found]')
@@ -42,8 +47,8 @@ export const onVerifySignin = async (
 
     if (isOwner) {
       user = {
-        id: oid,
-        mail: preferred_username,
+        id: userId,
+        mail,
         displayName: profile.displayName,
         role: 'Owner',
         preferredLanguage: 'en-GB'

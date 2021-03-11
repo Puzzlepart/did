@@ -33,7 +33,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
 
   /**
    * Get subscription by ID
-   * 
+   *
    * @remarks Returns null if no subscription is found.
    *
    * @param id - Subscription ID
