@@ -1,20 +1,17 @@
 /* eslint-disable tsdoc/syntax */
-import { AppContext } from 'AppContext'
 import { UserMessage } from 'components'
 import { DefaultButton, MessageBarType } from 'office-ui-fabric-react'
-import React, { FunctionComponent, useContext } from 'react'
+import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './Home.module.scss'
+import { useHome } from './useHome'
 
 /**
  * @category Function Component
  */
 export const Home: FunctionComponent = () => {
-  const { subscription } = useContext(AppContext)
+  const { error, subscription } = useHome()
   const { t } = useTranslation()
-  const error = JSON.parse(
-    document.querySelector('#app').getAttribute('data-error') || null
-  )
 
   return (
     <div className={styles.root}>
