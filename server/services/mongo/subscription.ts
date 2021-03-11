@@ -39,6 +39,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
   public async getById(id: string): Promise<Subscription> {
     try {
       const subscription = await this.collection.findOne({ _id: id })
+      if(!subscription) return null
       return {
         ...subscription,
         id: subscription._id

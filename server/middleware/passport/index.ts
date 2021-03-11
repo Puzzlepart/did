@@ -3,7 +3,6 @@ import fs from 'fs'
 import { MongoClient } from 'mongodb'
 import passport from 'passport'
 import { IProfile, OIDCStrategy, VerifyCallback } from 'passport-azure-ad'
-import { SubscriptionService, UserService } from '../../services/mongo'
 import { environment } from '../../utils'
 import { onVerifySignin } from './onVerifySignin'
 

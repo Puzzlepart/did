@@ -6,13 +6,18 @@ import { environment } from '../../utils'
 
 /**
  * On verify sign in
- * 
+ *
  * @param mongoClient - Mongo client
  * @param profile - User profile object
  * @param tokenParams - Token params
  * @param done - Done callback
  */
-export const onVerifySignin = async (mongoClient: MongoClient, profile: IProfile, tokenParameters: any, done: VerifyCallback) => {
+export const onVerifySignin = async (
+    mongoClient: MongoClient,
+    profile: IProfile,
+    tokenParameters: any,
+    done: VerifyCallback
+) => {
     const subSrv = new SubscriptionService({
         db: mongoClient.db(environment('MONGO_DB_DB_NAME'))
     })
@@ -20,6 +25,10 @@ export const onVerifySignin = async (mongoClient: MongoClient, profile: IProfile
         const { tid, oid, preferred_username } = profile._json
 
         const subscription = await subSrv.getById(tid)
+        if (!subscription) {
+            throw new Error('[temp error message for subscription not found]')
+        }
+        const isOwner = subscription.owner === preferred_username
 
         const userSrv = new UserService({
             db: mongoClient.db(subscription.db)
@@ -27,11 +36,11 @@ export const onVerifySignin = async (mongoClient: MongoClient, profile: IProfile
 
         let user = await userSrv.getById(oid)
 
-        if (!user) {
-            const isOwner = subscription.owner === preferred_username
-            if (!isOwner) {
-                throw new Error('hello world')
-            }
+        if (!user && !isOwner) {
+            throw new Error('[temp error message for user not found]')
+        }
+
+        if (isOwner) {
             user = {
                 id: oid,
                 mail: preferred_username,
