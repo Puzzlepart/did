@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ToggleSection } from 'components/ToggleSection'
 import { getValue as get } from 'helpers'
@@ -8,6 +9,9 @@ import { CheckboxField } from './CheckboxField'
 import styles from './SettingsSection.module.scss'
 import { ISettingsSectionProps } from './types'
 
+/**
+ * @category SubscriptionSettings
+ */
 export const SettingsSection: FunctionComponent<ISettingsSectionProps> = (
   props: ISettingsSectionProps
 ) => {
