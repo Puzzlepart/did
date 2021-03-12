@@ -1,8 +1,4 @@
-
-import {
-  ISummaryViewScope,
-  ISummaryViewState
-} from './types'
+import { ISummaryViewScope, ISummaryViewState } from './types'
 
 export type SummaryViewAction =
   | { type: 'DATA_UPDATED'; payload: any }

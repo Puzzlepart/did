@@ -1,4 +1,4 @@
 query SummaryView {
-  periods: confirmedPeriods { userId }
+  periods: confirmedPeriods { userId, week, year, hours }
   users: users { id, displayName }
 }

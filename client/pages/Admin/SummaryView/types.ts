@@ -1,5 +1,5 @@
 import { IPivotItemProps } from 'office-ui-fabric-react'
-import { ILabelColumnProps } from 'pages/Admin/SummaryView/LabelColumn/types'
+import { TimesheetPeriodObject, User } from 'types'
 
 export interface ISummaryViewScope extends IPivotItemProps {
   /**
@@ -19,13 +19,13 @@ export interface ISummaryViewState {
    */
   scope: ISummaryViewScope
 
-  users: any[]
-  periods: any[]
-}
-
-export interface ISummaryViewRow extends ILabelColumnProps {
   /**
-   * Sum hours
-   */
-  sum: number
+  * Users
+  */
+  users: User[]
+
+  /**
+  * Periods
+  */
+  periods: TimesheetPeriodObject[]
 }
