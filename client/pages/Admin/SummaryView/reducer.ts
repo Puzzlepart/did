@@ -32,7 +32,7 @@ export function useSummaryViewReducer() {
   const initialState = {
     users: [],
     periods: [],
-    projects: [],
+    projects: []
   }
   const reducer = useMemo(() => createReducer_(initialState), [initialState])
   return useReducer(reducer, initialState)

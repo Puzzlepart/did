@@ -316,7 +316,7 @@
     "ownerLabel": "Eier",
     "weekColumnTooltipTitle": "Uke {{week}}",
     "weekColumnTooltipHoursTotal": "\nTotalt <b>{{hours}} timer</b>.",
-    "weekColumnTooltipHoursCustomer": "<b>{{hours}} timer</b> for {{customer}}."
+    "weekColumnTooltipHoursCustomer": "<b>{{hours}} timer</b> for {{customer}}"
   },
   "navigation": {
     "timesheet": "Timeliste",

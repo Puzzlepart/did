@@ -317,7 +317,7 @@
     "ownerLabel": "Owner",
     "weekColumnTooltipTitle": "Week {{week}}",
     "weekColumnTooltipHoursTotal": "<b>{{hours}} hours</b> total.",
-    "weekColumnTooltipHoursCustomer": "<b>{{hours}} hours</b> for {{customer}}."
+    "weekColumnTooltipHoursCustomer": "<b>{{hours}} hours</b> for {{customer}}"
   },
   "navigation": {
     "timesheet": "Timesheet",
