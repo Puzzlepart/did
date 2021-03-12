@@ -12,21 +12,53 @@ import { EventObject } from './EventObject'
   simpleResolvers: true
 })
 export class TimesheetPeriodObject {
+  /**
+   * Temp ID field.
+   */
   public id: string
 
-  @Field(() => ID)
+  /**
+   * Primary ID field.
+   *
+   * Used as primary key (id) in CosmosDB
+   */
+  @Field(() => ID, { description: 'Primary ID field.' })
   public _id: string
 
-  @Field()
+  /**
+   * The full GUID of the user
+   */
+  @Field({ description: 'The full GUID of the user', nullable: true })
+  public userId: string
+
+  /**
+   * The week number.
+   */
+  @Field({ description: 'The week number.' })
   public week: number
 
-  @Field()
+  /**
+   * Month name
+   */
+  @Field({ description: 'Month name' })
   public month: string
 
-  @Field()
+  /**
+   * Year. Quite obvius.
+   */
+  @Field({ description: 'Year. Quite obvius.' })
+  public year: number
+
+  /**
+   * Start date
+   */
+  @Field({ description: 'Start date.' })
   public startDate: string
 
-  @Field()
+  /**
+   * End date
+   */
+  @Field({ description: 'End date.' })
   public endDate: string
 
   @Field(() => [EventObject])
@@ -42,8 +74,18 @@ export class TimesheetPeriodObject {
   public isForecast: boolean
 
   @Field({ nullable: true })
+  public hours: number
+
+  @Field({ nullable: true })
   public forecastedHours?: number
 
+  /**
+   * Constructs a new instance of TimesheetPeriodObject
+   *
+   * @param startDate - Start date
+   * @param endDate - End date
+   * @param locale - User locale
+   */
   constructor(startDate: string, endDate: string, locale: string) {
     this.id = DateUtils.getPeriod(startDate)
     this.startDate = startDate

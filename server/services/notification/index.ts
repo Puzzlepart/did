@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/no-array-reduce */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import get from 'get-value'
 import { Collection } from 'mongodb'
 import 'reflect-metadata'

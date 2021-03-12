@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import * as arraySort from 'array-sort'
 import { getValue } from 'helpers'
 import { IGroup } from 'office-ui-fabric-react'

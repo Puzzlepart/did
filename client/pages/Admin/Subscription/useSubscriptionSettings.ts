@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 /* eslint-disable tsdoc/syntax */
 import { useMutation } from '@apollo/client'
 import { AppContext } from 'AppContext'

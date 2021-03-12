@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { useTranslation } from 'react-i18next'
 import { SubscriptionSettings } from 'types'
 import { ISettingsSectionProps } from './SettingsSection/types'

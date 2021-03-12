@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/no-array-callback-reference */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { Collection, Db, FilterQuery, OptionalId } from 'mongodb'
 import { Context } from '../../graphql/context'
 import { CacheService } from '../cache'

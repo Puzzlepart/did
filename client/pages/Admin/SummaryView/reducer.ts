@@ -1,13 +1,12 @@
+
 import {
-  ISummaryViewRange,
   ISummaryViewScope,
   ISummaryViewState
 } from './types'
 
 export type SummaryViewAction =
-  | { type: 'DATA_UPDATED'; payload: { timeentries: any[] } }
+  | { type: 'DATA_UPDATED'; payload: any }
   | { type: 'CHANGE_SCOPE'; payload: ISummaryViewScope }
-  | { type: 'SET_RANGE'; payload: ISummaryViewRange }
 
 export const reducer = (
   state: ISummaryViewState,
@@ -17,13 +16,10 @@ export const reducer = (
   switch (action.type) {
     case 'DATA_UPDATED':
       {
-        if (action.payload) newState.timeentries = action.payload.timeentries
-      }
-      break
-
-    case 'SET_RANGE':
-      {
-        newState.range = { ...newState.range, ...action.payload }
+        if (action.payload) {
+          newState.users = action.payload.users
+          newState.periods = action.payload.periods
+        }
       }
       break
 

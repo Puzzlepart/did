@@ -127,7 +127,7 @@
     "editLabel": "Rediger merkelapp",
     "addNewRole": "Legg til ei ny rolle",
     "roleNameLabel": "Rollenamn",
-    "noTimeEntriesText": "Det finnest ikkje stadfesta timar for dei valde månadene i det valde året.",
+    "noTimeEntriesText": "Det finnest ikkje stadfesta timar for dei valde månadene/vekene i det valde året.",
     "editRole": "Rediger rolle",
     "permissonsLabel": "Tilgangar",
     "tokenGeneratedText": "Sørg for å kopiera den nye API-nøkkelen din no. \nDen forsvinn når du navigerer bort!",
