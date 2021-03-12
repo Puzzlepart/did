@@ -1,4 +1,23 @@
 query SummaryView($userQuery: UserQuery) {
-  periods: confirmedPeriods { userId, week, year, hours }
-  users: users(query: $userQuery) { id, displayName }
+  periods: confirmedPeriods {
+    userId
+    week
+    year
+    hours
+    events {
+      title
+      projectId
+    }
+  }
+  users: users(query: $userQuery) {
+    id
+    displayName
+  }
+  projects: projects {
+    _id
+    name
+    customer {
+      name
+    }
+  }
 }
