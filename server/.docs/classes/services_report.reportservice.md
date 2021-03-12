@@ -18,6 +18,7 @@
 
 - [\_generatePresetQuery](services_report.reportservice.md#_generatepresetquery)
 - [\_generateReport](services_report.reportservice.md#_generatereport)
+- [getConfirmedPeriods](services_report.reportservice.md#getconfirmedperiods)
 - [getForecastReport](services_report.reportservice.md#getforecastreport)
 - [getReport](services_report.reportservice.md#getreport)
 - [getUserReport](services_report.reportservice.md#getuserreport)
@@ -26,7 +27,7 @@
 
 ### constructor
 
-\+ **new ReportService**(`context`: [*Context*](graphql_context.context.md), `_projectSvc`: [*ProjectService*](services.projectservice.md), `_userSvc`: [*UserService*](services.userservice.md), `_teSvc`: [*TimeEntryService*](services.timeentryservice.md), `_fteSvc`: [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md)): [*ReportService*](services_report.reportservice.md)
+\+ **new ReportService**(`context`: [*Context*](graphql_context.context.md), `_projectSvc`: [*ProjectService*](services.projectservice.md), `_userSvc`: [*UserService*](services.userservice.md), `_teSvc`: [*TimeEntryService*](services.timeentryservice.md), `_fteSvc`: [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md), `_cperiodSvc`: [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md)): [*ReportService*](services_report.reportservice.md)
 
 Constructor for ReportsService
 
@@ -38,11 +39,12 @@ Name | Type | Description |
 `_projectSvc` | [*ProjectService*](services.projectservice.md) | Injected `ProjectService` through typedi   |
 `_userSvc` | [*UserService*](services.userservice.md) | Injected `UserService` through typedi   |
 `_teSvc` | [*TimeEntryService*](services.timeentryservice.md) | Injected `TimeEntryService` through typedi   |
-`_fteSvc` | [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md) | Injected `ForecastedTimeEntryService` through typedi    |
+`_fteSvc` | [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md) | Injected `ForecastedTimeEntryService` through typedi   |
+`_cperiodSvc` | [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md) | Injected `ConfirmedPeriodsService` through typedi    |
 
 **Returns:** [*ReportService*](services_report.reportservice.md)
 
-Defined in: [server/services/report.ts:29](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L29)
+Defined in: [server/services/report.ts:33](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L33)
 
 ## Properties
 
@@ -66,7 +68,7 @@ Name | Type | Description |
 
 **Returns:** *FilterQuery*<[*TimeEntry*](graphql.timeentry.md)\>
 
-Defined in: [server/services/report.ts:52](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L52)
+Defined in: [server/services/report.ts:58](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L58)
 
 ___
 
@@ -84,7 +86,19 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [server/services/report.ts:87](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L87)
+Defined in: [server/services/report.ts:93](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L93)
+
+___
+
+### getConfirmedPeriods
+
+▸ **getConfirmedPeriods**(): *Promise*<any[]\>
+
+Get confirmed periods
+
+**Returns:** *Promise*<any[]\>
+
+Defined in: [server/services/report.ts:136](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L136)
 
 ___
 
@@ -96,7 +110,7 @@ Get forecast report
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/report.ts:163](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L163)
+Defined in: [server/services/report.ts:176](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L176)
 
 ___
 
@@ -116,7 +130,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/report.ts:134](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L134)
+Defined in: [server/services/report.ts:147](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L147)
 
 ___
 
@@ -136,4 +150,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/report.ts:194](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L194)
+Defined in: [server/services/report.ts:207](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L207)

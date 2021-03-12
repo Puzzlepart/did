@@ -12,6 +12,7 @@
 
 ### Properties
 
+- [hiddenFromReports](graphql.userquery.md#hiddenfromreports)
 - [role](graphql.userquery.md#role)
 
 ## Constructors
@@ -24,8 +25,16 @@
 
 ## Properties
 
+### hiddenFromReports
+
+• `Optional` **hiddenFromReports**: *boolean*
+
+Defined in: [server/graphql/resolvers/user/types.ts:107](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L107)
+
+___
+
 ### role
 
 • `Optional` **role**: *string*
 
-Defined in: [server/graphql/resolvers/user/types.ts:107](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L107)
+Defined in: [server/graphql/resolvers/user/types.ts:104](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L104)

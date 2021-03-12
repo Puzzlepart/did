@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable unicorn/no-array-callback-reference */
 
 import { Collection, Db, FilterQuery, OptionalId } from 'mongodb'
@@ -33,8 +34,16 @@ export class MongoDocumentService<T> {
   /**
    * Extend query to be able to check for false OR null.
    * Ref: https://stackoverflow.com/questions/11634601/mongodb-null-field-or-true-false
+   * 
+   * @example Query 
+   * 
+   * { hiddenFromReports: false }
+   * 
+   * will be converted to
+   * 
+   * { hiddenFromReports: { $in: [false, null] } }
    *
-   * @param query - Query
+   * @param query - Filter query
    */
   private _extendQuery(query: FilterQuery<T>) {
     return Object.keys(query || {}).reduce((q, key) => {
@@ -55,7 +64,7 @@ export class MongoDocumentService<T> {
    *
    * @see — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
    *
-   * @param query - Query
+   * @param query - Filter query
    * @param sort - Sort options
    */
   public find<S = any>(query: FilterQuery<T>, sort?: S) {

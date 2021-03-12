@@ -39,7 +39,7 @@ Name | Type | Default value | Description |
 
 **Returns:** IColumn
 
-Defined in: [client/utils/generateColumn.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/utils/generateColumn.ts#L13)
+Defined in: [client/utils/generateColumn.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/utils/generateColumn.ts#L12)
 
 ___
 

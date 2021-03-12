@@ -42,7 +42,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetService*](services.timesheetservice.md)
 
-Defined in: [server/services/timesheet/index.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L26)
+Defined in: [server/services/timesheet/index.ts:25](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L25)
 
 ## Methods
 
@@ -62,7 +62,7 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [server/services/timesheet/index.ts:264](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L264)
+Defined in: [server/services/timesheet/index.ts:263](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L263)
 
 ___
 
@@ -81,7 +81,7 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [server/services/timesheet/index.ts:194](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L194)
+Defined in: [server/services/timesheet/index.ts:193](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L193)
 
 ___
 
@@ -111,7 +111,7 @@ Name | Type |
 `week` | *number* |
 `year` | *number* |
 
-Defined in: [server/services/timesheet/index.ts:207](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L207)
+Defined in: [server/services/timesheet/index.ts:206](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L206)
 
 ___
 
@@ -132,7 +132,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]
 
-Defined in: [server/services/timesheet/index.ts:226](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L226)
+Defined in: [server/services/timesheet/index.ts:225](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L225)
 
 ___
 
@@ -150,7 +150,7 @@ Name | Type |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/timesheet/index.ts:53](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L53)
+Defined in: [server/services/timesheet/index.ts:52](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L52)
 
 ___
 
@@ -168,7 +168,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/timesheet/index.ts:114](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L114)
+Defined in: [server/services/timesheet/index.ts:113](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L113)
 
 ___
 
@@ -186,4 +186,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/timesheet/index.ts:167](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L167)
+Defined in: [server/services/timesheet/index.ts:166](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L166)

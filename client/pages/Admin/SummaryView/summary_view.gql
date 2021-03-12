@@ -1,4 +1,4 @@
-query SummaryView {
+query SummaryView($userQuery: UserQuery) {
   periods: confirmedPeriods { userId, week, year, hours }
-  users: users { id, displayName }
+  users: users(query: $userQuery) { id, displayName }
 }
