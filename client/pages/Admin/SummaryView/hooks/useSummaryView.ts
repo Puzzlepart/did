@@ -1,25 +1,22 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
 import { useQuery } from '@apollo/client'
-import { useEffect, useReducer } from 'react'
-import { first } from 'underscore'
-import { reducer } from '../reducer'
+import { useEffect } from 'react'
+import { useSummaryViewReducer } from '../reducer'
 import $summary_view from '../summary_view.gql'
 import { useColumns } from './useColumns'
 import { useRows } from './useRows'
 import { useScopes } from './useScopes'
 
 /**
- * @ignore
+ * Hook for SummaryView
+ *
+ * @category SummaryView
  */
 export function useSummaryView({ onColumnRender }) {
   const scopes = useScopes()
-  const [state, dispatch] = useReducer(reducer, {
-    users: [],
-    periods: [],
-    projects: [],
-    scope: first(scopes)
-  })
-  const { data, loading } = useQuery($summary_view, {
+  const [state, dispatch] = useSummaryViewReducer(scopes)
+  const query = useQuery($summary_view, {
     fetchPolicy: 'cache-first',
     variables: {
       userQuery: { hiddenFromReports: false }
@@ -27,8 +24,8 @@ export function useSummaryView({ onColumnRender }) {
   })
 
   useEffect(() => {
-    dispatch({ type: 'DATA_UPDATED', payload: data })
-  }, [data])
+    dispatch({ type: 'DATA_UPDATED', payload: query })
+  }, [query.data])
 
   const columns = useColumns({ onRender: onColumnRender })
   const rows = useRows(state)
@@ -36,7 +33,7 @@ export function useSummaryView({ onColumnRender }) {
   return {
     dispatch,
     state,
-    loading,
+    loading: query.loading,
     scopes,
     rows,
     columns

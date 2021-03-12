@@ -21,7 +21,7 @@ export const WeekColumnTooltip: FunctionComponent<IWeekColumnTooltipProps> = (
         <div className={styles.title}>
           {t('common.weekColumnTooltipTitle', { week })}
         </div>
-        <div className={styles.subTitle}>{props.user}</div>
+        <div className={styles.userInfo}>{props.user}</div>
       </div>
       <div>
         {Object.keys(props.hours.project).map((key) => {

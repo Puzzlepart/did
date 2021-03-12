@@ -12,6 +12,7 @@ query SummaryView($userQuery: UserQuery) {
   users: users(query: $userQuery) {
     id
     displayName
+    mail
   }
   projects: projects {
     _id

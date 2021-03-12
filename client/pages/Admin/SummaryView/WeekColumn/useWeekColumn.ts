@@ -16,6 +16,10 @@ export interface IUseWeekColumnResult {
 /**
  * Hook for WeekColumn
  *
+ * Calculates total hours and hours per project/customer.
+ *
+ * This is displayed in the `<WeekColumnTooltip />` component.
+ *
  * @param props - Component props
  */
 export function useWeekColumn(props: IWeekColumnProps): IUseWeekColumnResult {
