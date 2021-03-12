@@ -1,4 +1,3 @@
-
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import { find, isEmpty, omit } from 'underscore'

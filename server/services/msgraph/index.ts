@@ -1,4 +1,3 @@
-
 /* eslint-disable @typescript-eslint/no-var-requires */
 global['fetch'] = require('node-fetch')
 import { Client as MSGraphClient } from '@microsoft/microsoft-graph-client'

@@ -1,4 +1,3 @@
-
 import {
   ApolloServerPluginSchemaReporting,
   ApolloServerPluginUsageReporting
