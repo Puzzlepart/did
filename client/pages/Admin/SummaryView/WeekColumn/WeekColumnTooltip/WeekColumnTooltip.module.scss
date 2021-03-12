@@ -1,6 +1,9 @@
 .root {
   padding: 20px;
-  min-width: 240px;
+  min-width: 420px;
+  width: 420px;
+  box-sizing: border-box;
+  max-width: none;
 
   .header {
     margin: 0 0 12px 0;
@@ -13,8 +16,8 @@
     }
 
     .userInfo {
-      font-size: 12px;
-      color: rgb(96, 94, 92);
+      margin-left: auto;
+      order: 2;
     }
   }
 }

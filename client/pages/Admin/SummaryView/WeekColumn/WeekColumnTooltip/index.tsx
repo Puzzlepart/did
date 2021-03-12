@@ -1,4 +1,5 @@
 /* eslint-disable tsdoc/syntax */
+import { Persona, PersonaSize } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { first } from 'underscore'
@@ -21,7 +22,12 @@ export const WeekColumnTooltip: FunctionComponent<IWeekColumnTooltipProps> = (
         <div className={styles.title}>
           {t('common.weekColumnTooltipTitle', { week })}
         </div>
-        <div className={styles.userInfo}>{props.user}</div>
+        <Persona
+          className={styles.userInfo}
+          text={props.user.displayName}
+          secondaryText={props.user.mail}
+          size={PersonaSize.size40}
+        />
       </div>
       <div>
         {Object.keys(props.hours.project).map((key) => {

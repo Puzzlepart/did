@@ -1,8 +1,8 @@
-import { Project, TimesheetPeriodObject } from 'types'
+import { Project, TimesheetPeriodObject, User } from 'types'
 import { IUseWeekColumnResult } from './useWeekColumn'
 
 export interface IWeekColumnProps {
-  user: string
+  user: Pick<User, 'displayName' | 'mail'>
   periods: TimesheetPeriodObject[]
   projects: Project[]
 }

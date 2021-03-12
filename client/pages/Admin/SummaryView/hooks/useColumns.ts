@@ -1,5 +1,6 @@
 import { DateObject } from 'DateUtils'
 import { IColumn } from 'office-ui-fabric-react'
+import { User } from 'types'
 
 /**
  * Columns hook for SummaryView
@@ -23,7 +24,9 @@ export function useColumns({ onRender }): IColumn[] {
       key: 'user',
       fieldName: 'user',
       name: null,
-      minWidth: 180
+      minWidth: 180,
+      onRender: ({ user }: { user: Pick<User, 'displayName' | 'mail'> }) =>
+        user.displayName
     },
     ...columns
   ]

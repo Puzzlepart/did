@@ -21,7 +21,10 @@ export const WeekColumn: FunctionComponent<IWeekColumnProps> = (
   }
   return (
     <TooltipHost
-      calloutProps={{ target }}
+      calloutProps={{
+        calloutMaxWidth: 420,
+        target
+      }}
       tooltipProps={{
         onRenderContent: () => <WeekColumnTooltip {...props} hours={hours} />
       }}>

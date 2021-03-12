@@ -7,7 +7,7 @@ export function useRows(state: ISummaryViewState) {
   return state.users.map((user) => {
     const periods = state.periods.filter((period) => period.userId === user.id)
     return {
-      user: user.displayName,
+      user,
       ...periods.reduce((data, period) => {
         const key = `${period.week}_${period.year}`
         return {
