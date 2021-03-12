@@ -279,7 +279,8 @@
           "dev",
           "i18n",
           "github",
-          "readme"
+          "readme",
+          "experimental"
         ]
       ]
     }

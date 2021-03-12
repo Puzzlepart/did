@@ -13,7 +13,6 @@
 ### Methods
 
 - [\_connectEvents](services.timesheetservice.md#_connectevents)
-- [\_createUniqueEventId](services.timesheetservice.md#_createuniqueeventid)
 - [\_getPeriodData](services.timesheetservice.md#_getperioddata)
 - [getPeriods](services.timesheetservice.md#getperiods)
 - [getTimesheet](services.timesheetservice.md#gettimesheet)
@@ -42,7 +41,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetService*](services.timesheetservice.md)
 
-Defined in: [server/services/timesheet/index.ts:25](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L25)
+Defined in: [server/services/timesheet/index.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L27)
 
 ## Methods
 
@@ -62,32 +61,13 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [server/services/timesheet/index.ts:263](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L263)
-
-___
-
-### \_createUniqueEventId
-
-▸ `Private`**_createUniqueEventId**(`eventId`: *string*, `startDateTime`: Date): *string*
-
-Create unique ID consisting of event ID + event start date time
-
-#### Parameters:
-
-Name | Type | Description |
-:------ | :------ | :------ |
-`eventId` | *string* | Event ID   |
-`startDateTime` | Date | Start date time    |
-
-**Returns:** *string*
-
-Defined in: [server/services/timesheet/index.ts:193](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L193)
+Defined in: [server/services/timesheet/index.ts:243](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L243)
 
 ___
 
 ### \_getPeriodData
 
-▸ `Private`**_getPeriodData**(`id`: *string*, `userId`: *string*): *object*
+▸ `Private`**_getPeriodData**(`id`: *string*, `userId`: *string*): ITimesheetPeriodData
 
 Get period data from id
 
@@ -101,17 +81,9 @@ Name | Type | Description |
 `id` | *string* | Id   |
 `userId` | *string* | User ID    |
 
-**Returns:** *object*
+**Returns:** ITimesheetPeriodData
 
-Name | Type |
-:------ | :------ |
-`_id` | *string* |
-`month` | *number* |
-`userId` | *string* |
-`week` | *number* |
-`year` | *number* |
-
-Defined in: [server/services/timesheet/index.ts:206](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L206)
+Defined in: [server/services/timesheet/index.ts:186](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L186)
 
 ___
 
@@ -132,7 +104,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]
 
-Defined in: [server/services/timesheet/index.ts:225](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L225)
+Defined in: [server/services/timesheet/index.ts:205](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L205)
 
 ___
 
@@ -150,7 +122,7 @@ Name | Type |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/timesheet/index.ts:52](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L52)
+Defined in: [server/services/timesheet/index.ts:54](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L54)
 
 ___
 
@@ -168,7 +140,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/timesheet/index.ts:113](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L113)
+Defined in: [server/services/timesheet/index.ts:114](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L114)
 
 ___
 
@@ -186,4 +158,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/timesheet/index.ts:166](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L166)
+Defined in: [server/services/timesheet/index.ts:156](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L156)

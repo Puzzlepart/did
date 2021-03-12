@@ -46,3 +46,17 @@ export interface IConnectEventsParameters extends IGetTimesheetParameters {
   customers: Customer[]
   events: any[]
 }
+
+/**
+ * Timesheet period data
+ */
+export interface ITimesheetPeriodData {
+  _id: string
+  userId: string
+  week: number
+  month: number
+  year: number
+  hours?: number
+  forecastedHours?: number
+  events?: any[]
+}

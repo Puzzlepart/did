@@ -56,7 +56,7 @@ Defined in: [server/services/mongo/api_token.ts:11](https://github.com/Puzzlepar
 
 • **cache**: [*CacheService*](services_cache.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L9)
+Defined in: [server/services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
 
 ___
 
@@ -70,7 +70,7 @@ ___
 
 • **collection**: *Collection*<[*ApiToken*](graphql.apitoken.md)\>
 
-Defined in: [server/services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
+Defined in: [server/services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
 
 ___
 
@@ -147,7 +147,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
 
-Defined in: [server/services/mongo/@document.ts:70](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L70)
+Defined in: [server/services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
 
 ___
 
@@ -185,7 +185,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*ApiToken*](graphql.apitoken.md)\>\>\>
 
-Defined in: [server/services/mongo/@document.ts:97](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L97)
+Defined in: [server/services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
 
 ___
 
@@ -194,6 +194,8 @@ ___
 ▸ **insertMultiple**(`documents_`: *any*[]): *Promise*<InsertWriteOpResult<WithId<[*ApiToken*](graphql.apitoken.md)\>\>\>
 
 Wrapper on insertMany() that also sets `updatedAt` and `createdAt` properties
+
+**`remarks`** Returns void if documents_ is empty
 
 **`see`** — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#insertMany
 
@@ -205,7 +207,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertWriteOpResult<WithId<[*ApiToken*](graphql.apitoken.md)\>\>\>
 
-Defined in: [server/services/mongo/@document.ts:81](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L81)
+Defined in: [server/services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
 
 ___
 
@@ -226,4 +228,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
 
-Defined in: [server/services/mongo/@document.ts:113](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L113)
+Defined in: [server/services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)

@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
-import { find, isEmpty, omit } from 'underscore'
+import { find } from 'underscore'
 import { MSGraphService } from '..'
 import DateUtils, { DateObject } from '../../../shared/utils/date'
 import { Context } from '../../graphql/context'
@@ -18,8 +18,10 @@ import {
   IConnectEventsParameters,
   IGetTimesheetParameters,
   ISubmitPeriodParameters,
+  ITimesheetPeriodData,
   IUnsubmitPeriodParameters
 } from './types'
+import { mapMatchedEvents } from './utils'
 
 @Service({ global: false })
 export class TimesheetService {
@@ -69,14 +71,13 @@ export class TimesheetService {
         periods[index].isForecasted = !!forecasted
         periods[index].forecastedHours = forecasted?.hours || 0
         if (confirmed) {
-          const entries = await this._teSvc.find({ periodId: _id })
           periods[index] = {
             ...periods[index],
             isConfirmed: true,
             events: this._connectEvents({
               ...parameters,
               ...data,
-              events: entries
+              events: confirmed.events
             })
           }
         } else {
@@ -122,35 +123,24 @@ export class TimesheetService {
           returnIsoDates: false
         }
       )
-      const period = {
+      const period: ITimesheetPeriodData = {
         ...this._getPeriodData(parameters.period.id, this.context.userId),
-        startDate: new Date(parameters.period.startDate),
-        endDate: new Date(parameters.period.endDate),
         hours: 0,
         forecastedHours: parameters.period.forecastedHours || 0
       }
-      const entries = []
-      // eslint-disable-next-line unicorn/no-array-reduce
-      period.hours = parameters.period.matchedEvents.reduce((hours, m: any) => {
-        const event = find(events, ({ id }) => id === m.id)
-        if (!event) return null
-        entries.push({
-          ...m,
-          ...event,
-          _id: this._createUniqueEventId(event.id, event.startDateTime as Date),
-          ...omit(period, '_id'),
-          periodId: period._id
-        })
-        return hours + event.duration
-      }, 0)
+      const { getEvents, hours } = mapMatchedEvents(
+        period,
+        parameters.period.matchedEvents,
+        events
+      )
+      period.hours = hours
+      period.events = getEvents(false)
       const teSvc = parameters.forecast ? this._fteSvc : this._teSvc
       const periodSvc = parameters.forecast
         ? this._fperiodSvc
         : this._cperiodSvc
       await Promise.all([
-        !isEmpty(entries)
-          ? teSvc.insertMultiple(entries)
-          : Promise.resolve(null),
+        teSvc.insertMultiple(getEvents(true)),
         periodSvc.insert(period)
       ])
     } catch (error) {
@@ -185,16 +175,6 @@ export class TimesheetService {
   }
 
   /**
-   * Create unique ID consisting of event ID + event start date time
-   *
-   * @param eventId - Event ID
-   * @param startDateTime - Start date time
-   */
-  private _createUniqueEventId(eventId: string, startDateTime: Date) {
-    return `${eventId}${startDateTime.getTime()}`.replace(/[^\dA-Za-z]/g, '')
-  }
-
-  /**
    * Get period data from id
    *
    * * Generates an _id for Mongo DB
@@ -203,7 +183,7 @@ export class TimesheetService {
    * @param id - Id
    * @param userId - User ID
    */
-  private _getPeriodData(id: string, userId: string) {
+  private _getPeriodData(id: string, userId: string): ITimesheetPeriodData {
     const [week, month, year] = id.split('_').map((p) => Number.parseInt(p, 10))
     return {
       _id: `${id}${userId}`.replace(/[^\dA-Za-z]/g, ''),
