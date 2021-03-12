@@ -10,4 +10,3 @@ export interface IWeekColumnProps {
 export interface IWeekColumnTooltipProps extends IWeekColumnProps {
   hours: IUseWeekColumnResult
 }
-

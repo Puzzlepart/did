@@ -15,10 +15,11 @@ export const SummaryView = (): JSX.Element => {
   const { t } = useTranslation()
   const { state, loading, scopes, rows, columns } = useSummaryView({
     onColumnRender: (item: any, _index: number, column: IColumn) => (
-      <WeekColumn 
-      user={item.user} 
-      periods={item[column.fieldName]}
-      projects={state.projects} />
+      <WeekColumn
+        user={item.user}
+        periods={item[column.fieldName]}
+        projects={state.projects}
+      />
     )
   })
 

@@ -4,4 +4,3 @@ import { IUseWeekColumnResult } from '../useWeekColumn'
 export interface IWeekColumnTooltipProps extends IWeekColumnProps {
   hours: IUseWeekColumnResult
 }
-

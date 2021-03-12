@@ -32,5 +32,5 @@ export interface ISummaryViewState {
   /**
    * Projects
    */
-   projects: Project[]
+  projects: Project[]
 }

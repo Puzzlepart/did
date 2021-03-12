@@ -5,13 +5,14 @@ import { useTranslation } from 'react-i18next'
 import { IWeekColumnProps } from './types'
 import { useWeekColumn } from './useWeekColumn'
 import styles from './WeekColumn.module.scss'
-
 import { WeekColumnTooltip } from './WeekColumnTooltip'
 
 /**
  * @category SummaryView
  */
-export const WeekColumn: FunctionComponent<IWeekColumnProps> = (props: IWeekColumnProps) => {
+export const WeekColumn: FunctionComponent<IWeekColumnProps> = (
+  props: IWeekColumnProps
+) => {
   const { t } = useTranslation()
   const target = useRef()
   const hours = useWeekColumn(props)
@@ -21,10 +22,14 @@ export const WeekColumn: FunctionComponent<IWeekColumnProps> = (props: IWeekColu
   return (
     <TooltipHost
       calloutProps={{ target }}
-      tooltipProps={{ onRenderContent: () => <WeekColumnTooltip {...props} hours={hours} /> }}>
+      tooltipProps={{
+        onRenderContent: () => <WeekColumnTooltip {...props} hours={hours} />
+      }}>
       <div className={styles.root}>
         <Icon iconName='CheckboxComposite' className={styles.checkMark} />
-        <span ref={target}>{t('common.hoursShortFormat', { hours: hours.total })}</span>
+        <span ref={target}>
+          {t('common.hoursShortFormat', { hours: hours.total })}
+        </span>
       </div>
     </TooltipHost>
   )
