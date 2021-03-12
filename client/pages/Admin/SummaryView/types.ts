@@ -1,24 +1,6 @@
-import { IPivotItemProps } from 'office-ui-fabric-react'
-import { TimesheetPeriodObject, User } from 'types'
-
-export interface ISummaryViewScope extends IPivotItemProps {
-  /**
-   * Field name
-   */
-  fieldName: string
-
-  /**
-   * Get column header for the specified index
-   */
-  getColumnHeader: (index: number) => string
-}
+import { Project, TimesheetPeriodObject, User } from 'types'
 
 export interface ISummaryViewState {
-  /**
-   * Selected scope
-   */
-  scope: ISummaryViewScope
-
   /**
    * Users
    */
@@ -28,4 +10,9 @@ export interface ISummaryViewState {
    * Periods
    */
   periods: TimesheetPeriodObject[]
+
+  /**
+   * Projects
+   */
+  projects: Project[]
 }

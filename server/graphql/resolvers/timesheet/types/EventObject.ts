@@ -38,6 +38,9 @@ export class EventObject {
   @Field(() => Float)
   duration?: number
 
+  @Field({ nullable: true })
+  projectId?: string
+
   @Field(() => Project, { nullable: true })
   project: Project
 

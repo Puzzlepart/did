@@ -334,7 +334,7 @@ ___
 
 **Returns:** *Element*
 
-Defined in: [client/pages/Admin/SummaryView/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/SummaryView/index.tsx#L15)
+Defined in: [client/pages/Admin/SummaryView/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/SummaryView/index.tsx#L14)
 
 ___
 
