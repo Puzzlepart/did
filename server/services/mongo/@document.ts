@@ -34,13 +34,13 @@ export class MongoDocumentService<T> {
   /**
    * Extend query to be able to check for false OR null.
    * Ref: https://stackoverflow.com/questions/11634601/mongodb-null-field-or-true-false
-   * 
-   * @example Query 
-   * 
+   *
+   * @example Query
+   *
    * { hiddenFromReports: false }
-   * 
+   *
    * will be converted to
-   * 
+   *
    * { hiddenFromReports: { $in: [false, null] } }
    *
    * @param query - Filter query

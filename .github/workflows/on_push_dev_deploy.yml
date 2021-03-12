@@ -42,21 +42,3 @@ jobs:
         slot-name: 'dev'
         publish-profile: ${{ secrets.DIDAPP_DEV_PUBLISH_PROFILE }}
         package: .
-
-    - name: Slack notification
-      uses: 8398a7/action-slack@v3
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-        MATRIX_CONTEXT: ${{ toJson(matrix) }}
-      with:
-        status: custom
-        fields: workflow,job,commit,repo,ref,author,took
-        custom_payload: |
-          {
-            username: 'action-slack',
-            icon_emoji: ':octocat:',
-            attachments: [{
-              color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-              text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@${process.env.AS_REF} by ${process.env.AS_AUTHOR} succeeded in ${process.env.AS_TOOK}. https://didapp-dev.azurewebsites.net is up-to-date with the dev branch.`,
-            }]
-          }

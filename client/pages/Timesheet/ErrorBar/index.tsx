@@ -9,7 +9,7 @@ export const ErrorBar = ({ error }: IErrorBarProps) => {
   const { t } = useTranslation()
   if (!error) return null
   let messageProps: IUserMessageProps
-  const code = error.graphQLErrors[0].extensions.code
+  const code = error.graphQLErrors[0]?.extensions?.code
   switch (code) {
     case 'ResourceNotFound':
       {
