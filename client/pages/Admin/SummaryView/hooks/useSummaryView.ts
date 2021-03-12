@@ -16,6 +16,7 @@ export function useSummaryView({ onColumnRender }) {
   const [state, dispatch] = useReducer(reducer, {
     users: [],
     periods: [],
+    projects: [],
     scope: first(scopes)
   })
   const { data, loading } = useQuery($summary_view, {
@@ -34,6 +35,7 @@ export function useSummaryView({ onColumnRender }) {
 
   return {
     dispatch,
+    state,
     loading,
     scopes,
     rows,
