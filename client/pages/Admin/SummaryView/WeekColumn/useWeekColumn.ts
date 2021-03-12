@@ -26,6 +26,8 @@ export function useWeekColumn(props: IWeekColumnProps): IUseWeekColumnResult {
   if (isEmpty(props.periods)) return { total: null }
   return props.periods.reduce(
     (sum_, period) => {
+      sum_.total = sum_.total + period.hours
+      if (!period.events) return sum_
       for (const event of period.events) {
         const customerKey = firstPart(event.projectId)
         sum_.project[customerKey] = sum_.project[customerKey]
@@ -37,7 +39,6 @@ export function useWeekColumn(props: IWeekColumnProps): IUseWeekColumnResult {
         }
         sum_.project[customerKey].hours += event.duration
       }
-      sum_.total = sum_.total + period.hours
       return sum_
     },
     { total: 0, project: {} }
