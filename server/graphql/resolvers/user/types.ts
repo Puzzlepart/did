@@ -39,6 +39,9 @@ export class User {
   @Field({ nullable: true })
   preferredLanguage?: string
 
+  @Field({ nullable: true })
+  hiddenFromReports?: boolean
+
   @Field(() => Role)
   role?: Role | string
 
@@ -86,16 +89,10 @@ export class UserInput {
   preferredLanguage?: string
 
   @Field({ nullable: true })
-  role?: string
-}
+  hiddenFromReports?: boolean
 
-/**
- * @category InputType
- */
-@InputType({ description: 'Input object for User query options' })
-export class UserQueryOptions {
   @Field({ nullable: true })
-  sortBy?: string
+  role?: string
 }
 
 /**
@@ -105,4 +102,7 @@ export class UserQueryOptions {
 export class UserQuery {
   @Field({ nullable: true })
   role?: string
+
+  @Field({ nullable: true })
+  hiddenFromReports?: boolean
 }

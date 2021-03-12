@@ -31,6 +31,26 @@ export class MongoDocumentService<T> {
   }
 
   /**
+   * Extend query to be able to check for false OR null.
+   * Ref: https://stackoverflow.com/questions/11634601/mongodb-null-field-or-true-false
+   * 
+   * @param query - Query
+   */
+  private _extendQuery(query: FilterQuery<T>) {
+    return Object.keys(query || {}).reduce((q, key) => {
+      const isFalse = query[key] === false
+      if (isFalse) {
+        q[key] = {
+          $in: [false, null]
+        }
+      } else {
+        q[key] = query[key]
+      }
+      return q
+    }, {})
+  }
+
+  /**
    * Wrapper on find().toArray()
    *
    * @see — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
@@ -39,7 +59,7 @@ export class MongoDocumentService<T> {
    * @param sort - Sort options
    */
   public find<S = any>(query: FilterQuery<T>, sort?: S) {
-    return this.collection.find(query, { sort }).toArray()
+    return this.collection.find(this._extendQuery(query), { sort }).toArray()
   }
 
   /**
