@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { List, UserMessage } from 'components'
-import { IColumn, Pivot, PivotItem } from 'office-ui-fabric-react'
+import { IColumn } from 'office-ui-fabric-react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
@@ -13,7 +13,7 @@ import { WeekColumn } from './WeekColumn'
  */
 export const SummaryView = (): JSX.Element => {
   const { t } = useTranslation()
-  const { state, loading, scopes, rows, columns } = useSummaryView({
+  const { state, loading, rows, columns } = useSummaryView({
     onColumnRender: (item: any, _index: number, column: IColumn) => (
       <WeekColumn
         user={item.user}
@@ -25,24 +25,18 @@ export const SummaryView = (): JSX.Element => {
 
   return (
     <div className={styles.root}>
-      <Pivot>
-        {scopes.map((scope) => (
-          <PivotItem key={scope.itemKey} {...scope}>
-            <div className={styles.container}>
-              <List
-                hidden={!loading && isEmpty(rows)}
-                enableShimmer={loading}
-                columns={columns}
-                items={rows}
-              />
-              <UserMessage
-                hidden={!isEmpty(rows) || loading}
-                text={t('admin.noTimeEntriesText')}
-              />
-            </div>
-          </PivotItem>
-        ))}
-      </Pivot>
+      <div className={styles.container}>
+        <List
+          hidden={!loading && isEmpty(rows)}
+          enableShimmer={loading}
+          columns={columns}
+          items={rows}
+        />
+        <UserMessage
+          hidden={!isEmpty(rows) || loading}
+          text={t('admin.noTimeEntriesText')}
+        />
+      </div>
     </div>
   )
 }

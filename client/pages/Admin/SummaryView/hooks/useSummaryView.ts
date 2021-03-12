@@ -6,7 +6,6 @@ import { useSummaryViewReducer } from '../reducer'
 import $summary_view from '../summary_view.gql'
 import { useColumns } from './useColumns'
 import { useRows } from './useRows'
-import { useScopes } from './useScopes'
 
 /**
  * Hook for SummaryView
@@ -14,8 +13,7 @@ import { useScopes } from './useScopes'
  * @category SummaryView
  */
 export function useSummaryView({ onColumnRender }) {
-  const scopes = useScopes()
-  const [state, dispatch] = useSummaryViewReducer(scopes)
+  const [state, dispatch] = useSummaryViewReducer()
   const query = useQuery($summary_view, {
     fetchPolicy: 'cache-first',
     variables: {
@@ -34,7 +32,6 @@ export function useSummaryView({ onColumnRender }) {
     dispatch,
     state,
     loading: query.loading,
-    scopes,
     rows,
     columns
   }
