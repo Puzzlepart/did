@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { Autocomplete } from 'components'
-import { Panel, PrimaryButton } from 'office-ui-fabric-react'
+import { Panel, PrimaryButton, Toggle } from 'office-ui-fabric-react'
 import React, { FunctionComponent, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Role, User } from 'types'
@@ -28,7 +28,13 @@ export const UserForm: FunctionComponent<IUserFormProps> = (
   const onSave = async () => {
     await addOrUpdateUser({
       variables: {
-        user: omit({ ...model, role: (model.role as Role).name }, '__typename'),
+        user: omit(
+          {
+            ...model,
+            role: (model.role as Role).name
+          },
+          '__typename'
+        ),
         update: !!props.user
       }
     })
@@ -75,6 +81,13 @@ export const UserForm: FunctionComponent<IUserFormProps> = (
         roles={roles}
         model={model}
         onChanged={(role) => setModel({ ...model, role })}
+      />
+      <Toggle
+        label={t('admin.userHiddenFromReportsLabel')}
+        defaultChecked={model.hiddenFromReports}
+        onChanged={(hiddenFromReports) =>
+          setModel({ ...model, hiddenFromReports })
+        }
       />
       <PrimaryButton
         className={styles.saveBtn}

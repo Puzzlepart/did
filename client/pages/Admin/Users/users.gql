@@ -16,6 +16,7 @@ query UsersAdmin {
     surname
     jobTitle
     mail
+    hiddenFromReports
     role {
       name
       description

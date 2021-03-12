@@ -6,6 +6,7 @@ import { Service } from 'typedi'
 import { ReportService } from '../../../services'
 import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
+import { TimesheetPeriodObject } from '../timesheet'
 import { ReportsQuery, ReportsQueryPreset, TimeEntry } from './types'
 
 /**
@@ -44,8 +45,19 @@ export class ReportsResolver {
     @Arg('preset', { nullable: true }) preset?: ReportsQueryPreset,
     @Arg('query', { nullable: true }) query?: ReportsQuery,
     @Arg('sortAsc', { nullable: true }) sortAsc?: boolean
-  ) {
+  ): Promise<TimeEntry[]> {
     return await this._report.getReport(preset, query, sortAsc)
+  }
+
+  /**
+   * Get confirmed periods matching the specified query.
+   */
+  @Authorized<IAuthOptions>()
+  @Query(() => [TimesheetPeriodObject], {
+    description: 'Get confirmed periods matching the specified query.'
+  })
+  async confirmedPeriods(): Promise<TimesheetPeriodObject[]> {
+    return await this._report.getConfirmedPeriods()
   }
 
   /**
@@ -57,7 +69,7 @@ export class ReportsResolver {
   @Query(() => [TimeEntry], {
     description: 'Get forecast report using custom filters.'
   })
-  async forecastedReport() {
+  async forecastedReport(): Promise<TimeEntry[]> {
     return await this._report.getForecastReport()
   }
 

@@ -19,6 +19,7 @@ _dependendy injection_.
 
 ### Methods
 
+- [confirmedPeriods](graphql.reportsresolver.md#confirmedperiods)
 - [forecastedReport](graphql.reportsresolver.md#forecastedreport)
 - [report](graphql.reportsresolver.md#report)
 - [userReport](graphql.reportsresolver.md#userreport)
@@ -39,25 +40,37 @@ Name | Type | Description |
 
 **Returns:** [*ReportsResolver*](graphql.reportsresolver.md)
 
-Defined in: [server/graphql/resolvers/reports/index.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L23)
+Defined in: [server/graphql/resolvers/reports/index.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L24)
 
 ## Methods
 
+### confirmedPeriods
+
+▸ **confirmedPeriods**(): *Promise*<[*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]\>
+
+Get confirmed periods matching the specified query.
+
+**Returns:** *Promise*<[*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]\>
+
+Defined in: [server/graphql/resolvers/reports/index.ts:59](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L59)
+
+___
+
 ### forecastedReport
 
-▸ **forecastedReport**(): *Promise*<Report\>
+▸ **forecastedReport**(): *Promise*<[*TimeEntry*](graphql.timeentry.md)[]\>
 
 Get forecast report
 
-**Returns:** *Promise*<Report\>
+**Returns:** *Promise*<[*TimeEntry*](graphql.timeentry.md)[]\>
 
-Defined in: [server/graphql/resolvers/reports/index.ts:60](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L60)
+Defined in: [server/graphql/resolvers/reports/index.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L72)
 
 ___
 
 ### report
 
-▸ **report**(`preset?`: [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset), `query?`: [*ReportsQuery*](graphql.reportsquery.md), `sortAsc?`: *boolean*): *Promise*<Report\>
+▸ **report**(`preset?`: [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset), `query?`: [*ReportsQuery*](graphql.reportsquery.md), `sortAsc?`: *boolean*): *Promise*<[*TimeEntry*](graphql.timeentry.md)[]\>
 
 Get report
 
@@ -69,9 +82,9 @@ Name | Type | Description |
 `query?` | [*ReportsQuery*](graphql.reportsquery.md) | Query   |
 `sortAsc?` | *boolean* | Sort ascending   |
 
-**Returns:** *Promise*<Report\>
+**Returns:** *Promise*<[*TimeEntry*](graphql.timeentry.md)[]\>
 
-Defined in: [server/graphql/resolvers/reports/index.ts:43](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L43)
+Defined in: [server/graphql/resolvers/reports/index.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L44)
 
 ___
 
@@ -90,4 +103,4 @@ Name | Type |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/graphql/resolvers/reports/index.ts:74](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L74)
+Defined in: [server/graphql/resolvers/reports/index.ts:86](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L86)

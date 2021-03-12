@@ -1,0 +1,10 @@
+.root {
+  display: flex;
+  flex-direction: row;
+
+  .checkMark {
+    padding: 2px;
+    margin: 0 4px 0 0;
+    color: green;
+  }
+}

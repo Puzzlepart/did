@@ -41,7 +41,7 @@ Name | Type |
 
 **Returns:** [*MSGraphService*](services.msgraphservice.md)
 
-Defined in: [server/services/msgraph/index.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L27)
+Defined in: [server/services/msgraph/index.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L26)
 
 ## Properties
 
@@ -49,7 +49,7 @@ Defined in: [server/services/msgraph/index.ts:27](https://github.com/Puzzlepart/
 
 • `Private` **\_accessTokenOptions**: [*AccessTokenOptions*](../interfaces/services_oauth.accesstokenoptions.md)
 
-Defined in: [server/services/msgraph/index.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L21)
+Defined in: [server/services/msgraph/index.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L20)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 • `Private` **\_cache**: [*CacheService*](services_cache.cacheservice.md)= null
 
-Defined in: [server/services/msgraph/index.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L20)
+Defined in: [server/services/msgraph/index.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L19)
 
 ___
 
@@ -75,7 +75,7 @@ Gets a Microsoft Graph Client using the auth token from the class
 
 **Returns:** *Promise*<Client\>
 
-Defined in: [server/services/msgraph/index.ts:40](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L40)
+Defined in: [server/services/msgraph/index.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L39)
 
 ___
 
@@ -93,7 +93,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<MSGraphOutlookCategory\>
 
-Defined in: [server/services/msgraph/index.ts:107](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L107)
+Defined in: [server/services/msgraph/index.ts:106](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L106)
 
 ___
 
@@ -111,7 +111,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [server/services/msgraph/index.ts:58](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L58)
+Defined in: [server/services/msgraph/index.ts:57](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L57)
 
 ___
 
@@ -131,7 +131,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<default[]\>
 
-Defined in: [server/services/msgraph/index.ts:157](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L157)
+Defined in: [server/services/msgraph/index.ts:156](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L156)
 
 ___
 
@@ -143,7 +143,7 @@ Get Outlook categories
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/msgraph/index.ts:133](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L133)
+Defined in: [server/services/msgraph/index.ts:132](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L132)
 
 ___
 
@@ -155,4 +155,4 @@ Get Azure Active Directory users
 
 **Returns:** *Promise*<any\>
 
-Defined in: [server/services/msgraph/index.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L71)
+Defined in: [server/services/msgraph/index.ts:70](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L70)

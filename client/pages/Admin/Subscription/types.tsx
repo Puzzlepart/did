@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 interface ISubscriptionSettingBase {
   id: string
   disabledIf?: (settings: any) => boolean

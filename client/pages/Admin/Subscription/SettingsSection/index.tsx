@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { ToggleSection } from 'components/ToggleSection'
 import { getValue as get } from 'helpers'
 import { Slider, Toggle } from 'office-ui-fabric-react'

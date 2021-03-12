@@ -127,7 +127,7 @@
     "editLabel": "Rediger merkelapp",
     "addNewRole": "Legg til ny rolle",
     "roleNameLabel": "Rollenavn",
-    "noTimeEntriesText": "Det er ingen bekreftede timer for de valgte månedene i det valgte året.",
+    "noTimeEntriesText": "Det er ingen bekreftede timer for de valgte månedene/ukene i det valgte året.",
     "editRole": "Rediger rolle",
     "permissonsLabel": "Tilganger",
     "tokenGeneratedText": "Sørg for å kopiere den nye API-nøkkelen din nå. \nDen forsvinner når du navigerer bort!",
@@ -148,7 +148,8 @@
     "adUserSyncEnabledDescription": "Synkroniser automatisk brukeregenskaper fra Azure Active Directory når brukeren logger på.",
     "adUserSyncPropertiesLabel": "Egenskaper som skal synkroniseres",
     "adUserSyncPropertiesDescription": "Velg hvilke egenskaper som skal synkroniseres automatisk fra Azure Active Directory.",
-    "roleInUseMessage": "Denne rollen er tildelt {{count}} brukere og kan ikke slettes."
+    "roleInUseMessage": "Denne rollen er tildelt {{count}} brukere og kan ikke slettes.",
+    "userHiddenFromReportsLabel": "Skjult fra timeoversikt"
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport",
