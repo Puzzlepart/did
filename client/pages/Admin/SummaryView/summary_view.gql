@@ -1,0 +1,4 @@
+query SummaryView {
+  confirmedPeriods { userId }
+  users { id }
+}

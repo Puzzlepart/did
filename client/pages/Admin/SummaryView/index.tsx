@@ -10,7 +10,7 @@ import { commandBar } from './commandBar'
 import { ISummaryViewContext, SummaryViewContext } from './context'
 import { reducer } from './reducer'
 import styles from './SummaryView.module.scss'
-import $timeentries from './timeentries.gql'
+import $summary_view from './summary_view.gql'
 import { getScopes, ISummaryViewScope } from './types'
 import { createColumns, createRows } from './utils'
 
@@ -28,14 +28,8 @@ export const SummaryView = (): JSX.Element => {
     },
     scope: first(scopes)
   })
-  const { data, loading } = useQuery($timeentries, {
-    fetchPolicy: 'cache-first',
-    variables: {
-      query: {
-        startDateTime: state.range.from.format(),
-        endDateTime: state.range.to.format()
-      }
-    }
+  const { data, loading } = useQuery($summary_view, {
+    fetchPolicy: 'cache-first'
   })
 
   useEffect(() => {

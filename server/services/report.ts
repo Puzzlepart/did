@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/no-array-callback-reference */
 import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
-import { find, first, omit, pick } from 'underscore'
+import { find, first, omit } from 'underscore'
 import { ProjectService, UserService } from '.'
 import { DateObject } from '../../shared/utils/date.dateObject'
 import { Context } from '../graphql/context'
@@ -13,7 +13,11 @@ import {
   TimeEntry,
   User
 } from '../graphql/resolvers/types'
-import { ConfirmedPeriodsService, ForecastedTimeEntryService, TimeEntryService } from './mongo'
+import {
+  ConfirmedPeriodsService,
+  ForecastedTimeEntryService,
+  TimeEntryService
+} from './mongo'
 
 type Report = TimeEntry[]
 
@@ -44,7 +48,7 @@ export class ReportService {
     private readonly _teSvc: TimeEntryService,
     private readonly _fteSvc: ForecastedTimeEntryService,
     private readonly _cperiodSvc: ConfirmedPeriodsService
-  ) { }
+  ) {}
 
   /**
    * Generate preset query
