@@ -1,6 +1,5 @@
 /* eslint-disable tsdoc/syntax */
 import DateUtils from 'DateUtils'
-import { IPivotItemProps } from 'office-ui-fabric-react'
 import { useTranslation } from 'react-i18next'
 
 /**
@@ -23,6 +22,6 @@ export function useScopes() {
             itemIcon: 'Calendar',
             getColumnHeader: (index: number) => DateUtils.getMonthName(index),
             headerButtonProps: { disabled: true }
-        } as IPivotItemProps
-    ] as IPivotItemProps[]
+        }
+    ]
 }
