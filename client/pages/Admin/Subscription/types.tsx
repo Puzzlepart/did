@@ -1,4 +1,3 @@
-
 interface ISubscriptionSettingBase {
   id: string
   disabledIf?: (settings: any) => boolean

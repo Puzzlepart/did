@@ -1,4 +1,3 @@
-
 /* eslint-disable tsdoc/syntax */
 import { useMutation } from '@apollo/client'
 import { AppContext } from 'AppContext'

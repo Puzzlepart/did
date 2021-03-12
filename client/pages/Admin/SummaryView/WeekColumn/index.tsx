@@ -1,19 +1,20 @@
 import { Icon } from 'office-ui-fabric-react'
 import React from 'react'
 import { isEmpty } from 'underscore'
-import styles from './WeekColumn.module.scss'
 import { IWeekColumnProps } from './types'
+import styles from './WeekColumn.module.scss'
 
-export const WeekColumn = ({ columnValue }: IWeekColumnProps) => {
-  const periods = columnValue
-
+export const WeekColumn = ({ periods }: IWeekColumnProps) => {
   if (isEmpty(periods)) {
     return null
   }
+
+  const hours = periods.reduce((sum, period) => sum + period.hours, 0)
+
   return (
     <div className={styles.root}>
-      <Icon iconName='CheckboxComposite' style={{ color: 'green' }} />
-      40h
+      <Icon iconName='CheckboxComposite' className={styles.checkMark} />
+      <span>{hours}h</span>
     </div>
   )
 }

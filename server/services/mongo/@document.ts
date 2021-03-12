@@ -33,7 +33,7 @@ export class MongoDocumentService<T> {
   /**
    * Extend query to be able to check for false OR null.
    * Ref: https://stackoverflow.com/questions/11634601/mongodb-null-field-or-true-false
-   * 
+   *
    * @param query - Query
    */
   private _extendQuery(query: FilterQuery<T>) {

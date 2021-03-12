@@ -11,7 +11,7 @@ import { useScopes } from './useScopes'
 /**
  * @ignore
  */
-export function useSummaryView({onColumnRender}) {
+export function useSummaryView({ onColumnRender }) {
   const scopes = useScopes()
   const [state, dispatch] = useReducer(reducer, {
     users: [],
@@ -19,14 +19,17 @@ export function useSummaryView({onColumnRender}) {
     scope: first(scopes)
   })
   const { data, loading } = useQuery($summary_view, {
-    fetchPolicy: 'cache-first'
+    fetchPolicy: 'cache-first',
+    variables: {
+      userQuery: { hiddenFromReports: false }
+    }
   })
 
   useEffect(() => {
     dispatch({ type: 'DATA_UPDATED', payload: data })
   }, [data])
 
-  const columns = useColumns({onRender:onColumnRender})
+  const columns = useColumns({ onRender: onColumnRender })
   const rows = useRows(state)
 
   return {

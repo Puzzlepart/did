@@ -20,12 +20,12 @@ export interface ISummaryViewState {
   scope: ISummaryViewScope
 
   /**
-  * Users
-  */
+   * Users
+   */
   users: User[]
 
   /**
-  * Periods
-  */
+   * Periods
+   */
   periods: TimesheetPeriodObject[]
 }

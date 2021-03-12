@@ -149,7 +149,8 @@
     "adUserSyncEnabledDescription": "Automatically synchronize user properties from Azure Active Directory when the user logs in.",
     "adUserSyncPropertiesLabel": "Properties to synchronize",
     "adUserSyncPropertiesDescription": "Choose which properties that should be automatically synchronized from Azure Active Directory.",
-    "roleInUseMessage": "This role is assigned to {{count}} users and cannot be deleted. "
+    "roleInUseMessage": "This role is assigned to {{count}} users and cannot be deleted. ",
+    "userHiddenFromReportsLabel": "Hidden from reports"
   },
   "reports": {
     "generatingReportLabel": "Generating report",

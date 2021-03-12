@@ -148,7 +148,8 @@
     "adUserSyncEnabledDescription": "Synkroniser automatisk brukeregenskaper fra Azure Active Directory når brukeren logger på.",
     "adUserSyncPropertiesLabel": "Egenskaper som skal synkroniseres",
     "adUserSyncPropertiesDescription": "Velg hvilke egenskaper som skal synkroniseres automatisk fra Azure Active Directory.",
-    "roleInUseMessage": "Denne rollen er tildelt {{count}} brukere og kan ikke slettes."
+    "roleInUseMessage": "Denne rollen er tildelt {{count}} brukere og kan ikke slettes.",
+    "userHiddenFromReportsLabel": "Skjult fra timeoversikt"
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport",

@@ -1,4 +1,3 @@
-
 import { IColumn } from 'office-ui-fabric-react'
 
 /**

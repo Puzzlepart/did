@@ -15,7 +15,9 @@ import { WeekColumn } from './WeekColumn'
 export const SummaryView = (): JSX.Element => {
   const { t } = useTranslation()
   const { dispatch, loading, scopes, rows, columns } = useSummaryView({
-    onColumnRender: (item: any, _index: number, column: IColumn) => <WeekColumn columnValue={item[column.fieldName]} />
+    onColumnRender: (item: any, _index: number, column: IColumn) => (
+      <WeekColumn periods={item[column.fieldName]} />
+    )
   })
 
   return (

@@ -1,3 +1,5 @@
+import { TimesheetPeriodObject } from 'types'
+
 export interface IWeekColumnProps {
-  columnValue: any[]
+  periods: TimesheetPeriodObject[]
 }

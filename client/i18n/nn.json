@@ -148,7 +148,8 @@
     "adUserSyncEnabledDescription": "Synkroniser automatisk brukareigenskapar frå Azure Active Directory når brukaren loggar på.",
     "adUserSyncPropertiesLabel": "Eigenskapar som skal synkroniserast",
     "adUserSyncPropertiesDescription": "Vel kva eigenskapar som skal synkroniserast automatisk frå Azure Active Directory.",
-    "roleInUseMessage": "Denne rolla er tildelt {{count}} brukarar og kan ikkje slettast."
+    "roleInUseMessage": "Denne rolla er tildelt {{count}} brukarar og kan ikkje slettast.",
+    "userHiddenFromReportsLabel": "Skjult fra timeoversikt"
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport",
@@ -216,7 +217,7 @@
     "signOutText": "Logg ut",
     "roleUser": "Brukar",
     "roleAdmin": "Administrator",
-    "save": "Lager",
+    "save": "Lagre",
     "titleLabel": "Tittel",
     "timeLabel": "Tidspunkt",
     "durationLabel": "Varigheit",
