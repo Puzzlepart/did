@@ -140,7 +140,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
 
-Defined in: [server/services/mongo/user.ts:77](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L77)
+Defined in: [server/services/mongo/user.ts:80](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L80)
 
 ___
 
@@ -158,7 +158,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
 
-Defined in: [server/services/mongo/user.ts:91](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L91)
+Defined in: [server/services/mongo/user.ts:94](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L94)
 
 ___
 
@@ -195,6 +195,8 @@ ___
 
 Get user by ID
 
+**`remarks`** Returns null if no user is found.
+
 #### Parameters:
 
 Name | Type | Description |
@@ -203,7 +205,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*User*](graphql.user.md)\>
 
-Defined in: [server/services/mongo/user.ts:59](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L59)
+Defined in: [server/services/mongo/user.ts:61](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L61)
 
 ___
 
@@ -303,7 +305,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/user.ts:121](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L121)
+Defined in: [server/services/mongo/user.ts:124](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L124)
 
 ___
 
@@ -321,4 +323,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/user.ts:105](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L105)
+Defined in: [server/services/mongo/user.ts:108](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L108)

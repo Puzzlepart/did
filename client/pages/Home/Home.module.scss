@@ -46,21 +46,4 @@
       letter-spacing: 1px;
     }
   }
-
-  .signinbutton {
-    font-size: 1rem;
-    text-decoration: none;
-    background-color: #cf5f0022;
-    padding: 8px 10vw 10px 10vw;
-    border-radius: 20px;
-    line-height: 1;
-    color: #cf5f00;
-    border: 1px solid #cf5f0088;
-    transition: all 0.2s;
-
-    &:hover {
-      background-color: #cf5f00;
-      color: #f1f1f1;
-    }
-  }
 }

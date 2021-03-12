@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable tsdoc/syntax */
 /**
  * @internal
@@ -8,7 +9,6 @@ declare namespace Express {
    */
   interface UserSubscription {
     id: string
-    connectionString: string
     name: string
     settings: any
   }

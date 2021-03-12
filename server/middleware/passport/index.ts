@@ -3,8 +3,8 @@ import fs from 'fs'
 import { MongoClient } from 'mongodb'
 import passport from 'passport'
 import { IProfile, OIDCStrategy, VerifyCallback } from 'passport-azure-ad'
-import { SubscriptionService, UserService } from '../../services/mongo'
 import { environment } from '../../utils'
+import { onVerifySignin } from './onVerifySignin'
 
 /**
  * Get redirect URL
@@ -73,35 +73,12 @@ export const passportMiddleware = (mongoClient: MongoClient) => {
       (
         _iss: string,
         _sub: string,
-        { _json }: IProfile,
+        profile: IProfile,
         _accessToken: string,
         _refreshToken: string,
         tokenParameters: any,
         done: VerifyCallback
-      ) => {
-        const subscription_service = new SubscriptionService({
-          db: mongoClient.db(environment('MONGO_DB_DB_NAME'))
-        })
-        subscription_service
-          .getById(_json.tid)
-          .then((s) => {
-            new UserService({ db: mongoClient.db(s.db) })
-              .getById(_json.oid)
-              .then((u) => {
-                return done(null, {
-                  ...u,
-                  subscription: s,
-                  tokenParams: tokenParameters
-                })
-              })
-              .catch((error) => {
-                return done(error, null)
-              })
-          })
-          .catch((error) => {
-            return done(error, null)
-          })
-      }
+      ) => onVerifySignin(mongoClient, profile, tokenParameters, done)
     )
   }
 

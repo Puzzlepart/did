@@ -155,7 +155,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<ProjectsData\>
 
-Defined in: [server/services/mongo/project.ts:88](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L88)
+Defined in: [server/services/mongo/project.ts:86](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L86)
 
 ___
 

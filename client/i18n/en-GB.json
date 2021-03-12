@@ -213,7 +213,7 @@
     "employeeLabel": "Employee",
     "yearLabel": "Year",
     "roleLabel": "Role",
-    "signInText": "Log in",
+    "ms365signInText": "Sign in with Microsoft 365",
     "signOutText": "Sign out",
     "roleUser": "User",
     "roleAdmin": "Administrator",
@@ -312,7 +312,8 @@
     "exportExcel": "Export to Excel",
     "errorFallbackHeader": "It looks like something went wrong",
     "tryAgainText": "Try again, it might work...",
-    "githubIssueReportLinkText": "Report issue on GitHub"
+    "githubIssueReportLinkText": "Report issue on GitHub",
+    "ownerLabel": "Owner"
   },
   "navigation": {
     "timesheet": "Timesheet",

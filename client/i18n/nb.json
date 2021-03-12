@@ -212,7 +212,7 @@
     "employeeLabel": "Ansatt",
     "yearLabel": "År",
     "roleLabel": "Rolle",
-    "signInText": "Logg inn",
+    "ms365signInText": "Logg inn med Microsoft 365",
     "signOutText": "Logg ut",
     "roleUser": "Bruker",
     "roleAdmin": "Administrator",
@@ -311,7 +311,8 @@
     "exportExcel": "Eksporter til Excel",
     "errorFallbackHeader": "Det ser ut som noe gikk galt",
     "tryAgainText": "Prøv igjen, det kan fungere ...",
-    "githubIssueReportLinkText": "Rapporter problem på GitHub"
+    "githubIssueReportLinkText": "Rapporter problem på GitHub",
+    "ownerLabel": "Eier"
   },
   "navigation": {
     "timesheet": "Timeliste",

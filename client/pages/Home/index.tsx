@@ -1,20 +1,17 @@
 /* eslint-disable tsdoc/syntax */
-import { AppContext } from 'AppContext'
 import { UserMessage } from 'components'
 import { DefaultButton, MessageBarType } from 'office-ui-fabric-react'
-import React, { FunctionComponent, useContext } from 'react'
+import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
 import styles from './Home.module.scss'
+import { useHome } from './useHome'
 
 /**
  * @category Function Component
  */
 export const Home: FunctionComponent = () => {
-  const { subscription } = useContext(AppContext)
+  const { error, subscription } = useHome()
   const { t } = useTranslation()
-  const error = JSON.parse(
-    document.querySelector('#app').getAttribute('data-error') || null
-  )
 
   return (
     <div className={styles.root}>
@@ -26,13 +23,16 @@ export const Home: FunctionComponent = () => {
           type={MessageBarType.error}
           iconName={error.icon}
           text={[`#### ${error.name} ####`, error.message].join('\n\n')}
+          onDismiss={() => {
+            window.location.href = window.location.href.split('?')[0]
+          }}
         />
       )}
       <div hidden={!!subscription || !!error}>
         <DefaultButton
-          className={styles.signinbutton}
-          href='/auth/signin'
-          text={t('common.signInText')}
+          onClick={() => document.location.replace('/auth/signin')}
+          iconProps={{ iconName: 'WindowsLogo' }}
+          text={t('common.ms365signInText')}
         />
       </div>
     </div>

@@ -48,7 +48,7 @@ Name | Type |
 
 **Returns:** [*ApiTokenService*](services.apitokenservice.md)
 
-Defined in: [server/services/mongo/apitoken.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/apitoken.ts#L11)
+Defined in: [server/services/mongo/api_token.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L11)
 
 ## Properties
 
@@ -101,7 +101,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<string\>
 
-Defined in: [server/services/mongo/apitoken.ts:36](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/apitoken.ts#L36)
+Defined in: [server/services/mongo/api_token.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L41)
 
 ___
 
@@ -120,7 +120,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/apitoken.ts:63](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/apitoken.ts#L63)
+Defined in: [server/services/mongo/api_token.ts:68](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L68)
 
 ___
 
@@ -165,7 +165,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
 
-Defined in: [server/services/mongo/apitoken.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/apitoken.ts#L21)
+Defined in: [server/services/mongo/api_token.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L26)
 
 ___
 

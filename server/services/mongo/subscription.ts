@@ -34,11 +34,14 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
   /**
    * Get subscription by ID
    *
+   * @remarks Returns null if no subscription is found.
+   *
    * @param id - Subscription ID
    */
   public async getById(id: string): Promise<Subscription> {
     try {
       const subscription = await this.collection.findOne({ _id: id })
+      if (!subscription) return null
       return {
         ...subscription,
         id: subscription._id
@@ -73,7 +76,7 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
     try {
       const result = await this.update(
         { _id: this.context.subscription.id },
-        settings
+        { settings }
       )
       return result
     } catch (error) {

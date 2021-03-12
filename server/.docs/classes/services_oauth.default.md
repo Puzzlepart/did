@@ -19,13 +19,13 @@
 
 ### constructor
 
-\+ **new default**(`_request`: *Request*): [*default*](services_oauth.default.md)
+\+ **new default**(`_request`: *any*): [*default*](services_oauth.default.md)
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`_request` | *Request* |
+`_request` | *any* |
 
 **Returns:** [*default*](services_oauth.default.md)
 
@@ -47,7 +47,7 @@ Name | Type | Description |
 
 **Returns:** *AuthorizationCode*<*client_id*\>
 
-Defined in: [server/services/oauth.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/services/oauth.ts#L26)
+Defined in: [server/services/oauth.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/services/oauth.ts#L27)
 
 ___
 
@@ -65,4 +65,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Token\>
 
-Defined in: [server/services/oauth.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/services/oauth.ts#L47)
+Defined in: [server/services/oauth.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/services/oauth.ts#L48)
