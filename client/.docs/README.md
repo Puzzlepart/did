@@ -1,6 +1,6 @@
-did-client - v0.9.8
+did-client - v0.9.9
 
-# did-client - v0.9.8
+# did-client - v0.9.9
 
 ## Table of contents
 

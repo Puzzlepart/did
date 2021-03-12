@@ -1,4 +1,4 @@
-[did-client - v0.9.8](../README.md) / [Components](../modules/components.md) / YearFilter
+[did-client - v0.9.9](../README.md) / [Components](../modules/components.md) / YearFilter
 
 # Class: YearFilter<ItemType, KeyType\>
 

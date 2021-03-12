@@ -1,4 +1,4 @@
-[did-client - v0.9.8](../README.md) / [Components](../modules/components.md) / ISuggestionItemProps
+[did-client - v0.9.9](../README.md) / [Components](../modules/components.md) / ISuggestionItemProps
 
 # Interface: ISuggestionItemProps
 

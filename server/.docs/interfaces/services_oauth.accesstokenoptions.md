@@ -1,4 +1,4 @@
-[did-server - v0.9.8](../README.md) / [services/oauth](../modules/services_oauth.md) / AccessTokenOptions
+[did-server - v0.9.9](../README.md) / [services/oauth](../modules/services_oauth.md) / AccessTokenOptions
 
 # Interface: AccessTokenOptions
 

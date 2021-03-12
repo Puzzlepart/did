@@ -1,4 +1,4 @@
-[did-client - v0.9.8](../README.md) / App
+[did-client - v0.9.9](../README.md) / App
 
 # Module: App
 
