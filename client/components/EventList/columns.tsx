@@ -121,8 +121,8 @@ export function useColumns(props: IEventListProps) {
       ].map((col) => ({
         ...col,
         isResizable: props.resizableColumns
-        // eslint-disable-next-line react-hooks/exhaustive-deps
       })),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [props.additionalColumns]
   )
 }

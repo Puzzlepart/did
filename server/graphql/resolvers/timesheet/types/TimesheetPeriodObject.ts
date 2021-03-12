@@ -14,7 +14,10 @@ import { EventObject } from './EventObject'
 export class TimesheetPeriodObject {
   /**
    * Temp ID field.
+   *
+   * @remarks Needs to be queryable by GraphQL for now.
    */
+  @Field({ nullable: true })
   public id: string
 
   /**
