@@ -31,7 +31,7 @@ export const WeekColumn: FunctionComponent<IWeekColumnProps> = (
       <div className={styles.root}>
         <Icon iconName='CheckboxComposite' className={styles.checkMark} />
         <span ref={target}>
-          {t('common.hoursShortFormat', { hours: hours.total })}
+          {t('common.hoursShortFormat', { hours: hours.total.toFixed(2) })}
         </span>
       </div>
     </TooltipHost>

@@ -29,7 +29,7 @@ export const WeekColumnTooltip: FunctionComponent<IWeekColumnTooltipProps> = (
           size={PersonaSize.size40}
         />
       </div>
-      <div>
+      <div className={styles.customerTotals}>
         {Object.keys(props.hours.project).map((key) => {
           const { hours, details } = props.hours.project[key]
           if (!details) return null
@@ -37,12 +37,12 @@ export const WeekColumnTooltip: FunctionComponent<IWeekColumnTooltipProps> = (
             <CustomerHours
               key={key}
               customer={details.customer.name}
-              hours={hours}
+              hours={hours.toFixed(0)}
             />
           )
         })}
       </div>
-      <TotalHours hours={props.hours.total} />
+      <TotalHours hours={props.hours.total.toFixed(0)} />
     </div>
   )
 }
