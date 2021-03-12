@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/no-array-callback-reference */
 import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
-import { find, first, omit } from 'underscore'
+import { find, first, omit, pick } from 'underscore'
 import { ProjectService, UserService } from '.'
 import { DateObject } from '../../shared/utils/date.dateObject'
 import { Context } from '../graphql/context'
@@ -13,7 +13,7 @@ import {
   TimeEntry,
   User
 } from '../graphql/resolvers/types'
-import { ForecastedTimeEntryService, TimeEntryService } from './mongo'
+import { ConfirmedPeriodsService, ForecastedTimeEntryService, TimeEntryService } from './mongo'
 
 type Report = TimeEntry[]
 
@@ -35,14 +35,16 @@ export class ReportService {
    * @param _userSvc - Injected `UserService` through typedi
    * @param _teSvc - Injected `TimeEntryService` through typedi
    * @param _fteSvc - Injected `ForecastedTimeEntryService` through typedi
+   * @param _cperiodSvc - Injected `ConfirmedPeriodsService` through typedi
    */
   constructor(
     @Inject('CONTEXT') readonly context: Context,
     private readonly _projectSvc: ProjectService,
     private readonly _userSvc: UserService,
     private readonly _teSvc: TimeEntryService,
-    private readonly _fteSvc: ForecastedTimeEntryService
-  ) {}
+    private readonly _fteSvc: ForecastedTimeEntryService,
+    private readonly _cperiodSvc: ConfirmedPeriodsService
+  ) { }
 
   /**
    * Generate preset query
@@ -122,6 +124,13 @@ export class ReportService {
           return $
         }, [])
     )
+  }
+
+  /**
+   * Get confirmed periods
+   */
+  public async getConfirmedPeriods() {
+    return await this._cperiodSvc.find({ year: 2021 })
   }
 
   /**
