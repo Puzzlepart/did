@@ -15,6 +15,7 @@ export const reducer = (
         if (action.payload) {
           newState.users = action.payload.users
           newState.periods = action.payload.periods
+          newState.projects = action.payload.projects
         }
       }
       break

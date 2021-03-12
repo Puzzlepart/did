@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
 import { useSummaryView } from './hooks/useSummaryView'
 import styles from './SummaryView.module.scss'
-import { ISummaryViewScope } from './types'
 import { WeekColumn } from './WeekColumn'
 
 /**
@@ -14,21 +13,18 @@ import { WeekColumn } from './WeekColumn'
  */
 export const SummaryView = (): JSX.Element => {
   const { t } = useTranslation()
-  const { dispatch, loading, scopes, rows, columns } = useSummaryView({
+  const { state, loading, scopes, rows, columns } = useSummaryView({
     onColumnRender: (item: any, _index: number, column: IColumn) => (
-      <WeekColumn user={item.user} periods={item[column.fieldName]} />
+      <WeekColumn 
+      user={item.user} 
+      periods={item[column.fieldName]}
+      projects={state.projects} />
     )
   })
 
   return (
     <div className={styles.root}>
-      <Pivot
-        onLinkClick={(item) =>
-          dispatch({
-            type: 'CHANGE_SCOPE',
-            payload: item.props as ISummaryViewScope
-          })
-        }>
+      <Pivot>
         {scopes.map((scope) => (
           <PivotItem key={scope.itemKey} {...scope}>
             <div className={styles.container}>

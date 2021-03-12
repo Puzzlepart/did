@@ -5,8 +5,8 @@ query SummaryView($userQuery: UserQuery) {
     year
     hours
     events {
-      title
       projectId
+      duration
     }
   }
   users: users(query: $userQuery) {
@@ -15,7 +15,7 @@ query SummaryView($userQuery: UserQuery) {
   }
   projects: projects {
     _id
-    name
+    customerKey
     customer {
       name
     }

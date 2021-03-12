@@ -1,5 +1,5 @@
 import { IPivotItemProps } from 'office-ui-fabric-react'
-import { TimesheetPeriodObject, User } from 'types'
+import { Project, TimesheetPeriodObject, User } from 'types'
 
 export interface ISummaryViewScope extends IPivotItemProps {
   /**
@@ -28,4 +28,9 @@ export interface ISummaryViewState {
    * Periods
    */
   periods: TimesheetPeriodObject[]
+
+  /**
+   * Projects
+   */
+   projects: Project[]
 }

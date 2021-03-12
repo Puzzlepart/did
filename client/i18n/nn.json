@@ -313,7 +313,10 @@
     "errorFallbackHeader": "Det virkar som noko gjekk gale",
     "tryAgainText": "Prøv igjen, det kan teoretisk sett fungere ...",
     "githubIssueReportLinkText": "Rapporter problem på GitHub",
-    "ownerLabel": "Eier"
+    "ownerLabel": "Eier",
+    "weekColumnTooltipTitle": "Uke {{week}}",
+    "weekColumnTooltipHoursTotal": "\nTotalt <b>{{hours}} timer</b>.",
+    "weekColumnTooltipHoursCustomer": "<b>{{hours}} timer</b> for {{customer}}."
   },
   "navigation": {
     "timesheet": "Timeliste",

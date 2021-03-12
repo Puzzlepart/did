@@ -314,7 +314,10 @@
     "errorFallbackHeader": "It looks like something went wrong",
     "tryAgainText": "Try again, it might work...",
     "githubIssueReportLinkText": "Report issue on GitHub",
-    "ownerLabel": "Owner"
+    "ownerLabel": "Owner",
+    "weekColumnTooltipTitle": "Week {{week}}",
+    "weekColumnTooltipHoursTotal": "<b>{{hours}} hours</b> total.",
+    "weekColumnTooltipHoursCustomer": "<b>{{hours}} hours</b> for {{customer}}."
   },
   "navigation": {
     "timesheet": "Timesheet",
