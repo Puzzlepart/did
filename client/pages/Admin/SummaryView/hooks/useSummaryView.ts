@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client'
 import { useEffect } from 'react'
 import { useSummaryViewReducer } from '../reducer'
 import $summary_view from '../summary_view.gql'
-import { useColumns } from './useColumns'
+import { usePeriods } from './usePeriods'
 import { useRows } from './useRows'
 
 /**
@@ -13,11 +13,13 @@ import { useRows } from './useRows'
  * @category SummaryView
  */
 export function useSummaryView({ onColumnRender }) {
+  const { columns, periods } = usePeriods({ onRender: onColumnRender })
   const [state, dispatch] = useSummaryViewReducer()
   const query = useQuery($summary_view, {
     fetchPolicy: 'cache-first',
     variables: {
-      userQuery: { hiddenFromReports: false }
+      userQuery: { hiddenFromReports: false },
+      queries: periods.map(([week, year]) => ({ week, year }))
     }
   })
 
@@ -25,7 +27,6 @@ export function useSummaryView({ onColumnRender }) {
     dispatch({ type: 'DATA_UPDATED', payload: query })
   }, [query.data])
 
-  const columns = useColumns({ onRender: onColumnRender })
   const rows = useRows(state)
 
   return {

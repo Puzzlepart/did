@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { List, UserMessage } from 'components'
+import { Progress } from 'components/Progress'
 import { IColumn } from 'office-ui-fabric-react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -26,6 +27,7 @@ export const SummaryView = (): JSX.Element => {
   return (
     <div className={styles.root}>
       <div className={styles.container}>
+        {state.progress && <Progress {...state.progress} />}
         <List
           hidden={!loading && isEmpty(rows)}
           enableShimmer={loading}

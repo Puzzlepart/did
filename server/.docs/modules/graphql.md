@@ -21,6 +21,7 @@
 ### InputType Classes
 
 - [ApiTokenInput](../classes/graphql.apitokeninput.md)
+- [ConfirmedPeriodsQuery](../classes/graphql.confirmedperiodsquery.md)
 - [CustomerInput](../classes/graphql.customerinput.md)
 - [EventInput](../classes/graphql.eventinput.md)
 - [LabelInput](../classes/graphql.labelinput.md)

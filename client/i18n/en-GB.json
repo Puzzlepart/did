@@ -150,7 +150,9 @@
     "adUserSyncPropertiesLabel": "Properties to synchronize",
     "adUserSyncPropertiesDescription": "Choose which properties that should be automatically synchronized from Azure Active Directory.",
     "roleInUseMessage": "This role is assigned to {{count}} users and cannot be deleted. ",
-    "userHiddenFromReportsLabel": "Hidden from reports"
+    "userHiddenFromReportsLabel": "Hidden from reports",
+    "summaryViewProgressLabel": "Loading summary",
+    "summaryViewProgressDescription": "To give you the freshest results, we're generating a summary from the latest data..."
   },
   "reports": {
     "generatingReportLabel": "Generating report",

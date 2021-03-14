@@ -8,12 +8,15 @@ import { useTranslation } from 'react-i18next'
  *
  * @category SummaryView
  */
-export const CustomerHours = (props: any) => {
+export const CustomerHours = ({ hours, customer }) => {
   const { t } = useTranslation()
   return (
     <div
       dangerouslySetInnerHTML={{
-        __html: t('common.weekColumnTooltipHoursCustomer', props)
+        __html: t('common.weekColumnTooltipHoursCustomer', {
+          hours: hours.toFixed(0),
+          customer
+        })
       }}></div>
   )
 }

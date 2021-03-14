@@ -7,7 +7,12 @@ import { ReportService } from '../../../services'
 import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
 import { TimesheetPeriodObject } from '../timesheet'
-import { ReportsQuery, ReportsQueryPreset, TimeEntry } from './types'
+import {
+  ConfirmedPeriodsQuery,
+  ReportsQuery,
+  ReportsQueryPreset,
+  TimeEntry
+} from './types'
 
 /**
  * Resolver for `TimeEntry`.
@@ -50,14 +55,17 @@ export class ReportsResolver {
   }
 
   /**
-   * Get confirmed periods matching the specified query.
+   * Get confirmed periods matching the specified queries
    */
   @Authorized<IAuthOptions>()
   @Query(() => [TimesheetPeriodObject], {
-    description: 'Get confirmed periods matching the specified query.'
+    description: 'Get confirmed periods matching the specified queries.'
   })
-  async confirmedPeriods(): Promise<TimesheetPeriodObject[]> {
-    return await this._report.getConfirmedPeriods()
+  async confirmedPeriods(
+    @Arg('queries', () => [ConfirmedPeriodsQuery])
+    queries: ConfirmedPeriodsQuery[]
+  ): Promise<TimesheetPeriodObject[]> {
+    return await this._report.getConfirmedPeriods(queries)
   }
 
   /**

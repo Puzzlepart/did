@@ -40,19 +40,25 @@ Name | Type | Description |
 
 **Returns:** [*ReportsResolver*](graphql.reportsresolver.md)
 
-Defined in: [server/graphql/resolvers/reports/index.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L24)
+Defined in: [server/graphql/resolvers/reports/index.ts:29](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L29)
 
 ## Methods
 
 ### confirmedPeriods
 
-▸ **confirmedPeriods**(): *Promise*<[*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]\>
+▸ **confirmedPeriods**(`queries`: [*ConfirmedPeriodsQuery*](graphql.confirmedperiodsquery.md)[]): *Promise*<[*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]\>
 
-Get confirmed periods matching the specified query.
+Get confirmed periods matching the specified queries
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`queries` | [*ConfirmedPeriodsQuery*](graphql.confirmedperiodsquery.md)[] |
 
 **Returns:** *Promise*<[*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]\>
 
-Defined in: [server/graphql/resolvers/reports/index.ts:59](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L59)
+Defined in: [server/graphql/resolvers/reports/index.ts:64](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L64)
 
 ___
 
@@ -64,7 +70,7 @@ Get forecast report
 
 **Returns:** *Promise*<[*TimeEntry*](graphql.timeentry.md)[]\>
 
-Defined in: [server/graphql/resolvers/reports/index.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L72)
+Defined in: [server/graphql/resolvers/reports/index.ts:80](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L80)
 
 ___
 
@@ -84,7 +90,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*TimeEntry*](graphql.timeentry.md)[]\>
 
-Defined in: [server/graphql/resolvers/reports/index.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L44)
+Defined in: [server/graphql/resolvers/reports/index.ts:49](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L49)
 
 ___
 
@@ -103,4 +109,4 @@ Name | Type |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/graphql/resolvers/reports/index.ts:86](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L86)
+Defined in: [server/graphql/resolvers/reports/index.ts:94](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L94)

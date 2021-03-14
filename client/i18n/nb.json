@@ -149,7 +149,9 @@
     "adUserSyncPropertiesLabel": "Egenskaper som skal synkroniseres",
     "adUserSyncPropertiesDescription": "Velg hvilke egenskaper som skal synkroniseres automatisk fra Azure Active Directory.",
     "roleInUseMessage": "Denne rollen er tildelt {{count}} brukere og kan ikke slettes.",
-    "userHiddenFromReportsLabel": "Skjult fra timeoversikt"
+    "userHiddenFromReportsLabel": "Skjult fra timeoversikt",
+    "summaryViewProgressLabel": "Laster sammendrag",
+    "summaryViewProgressDescription": "For å gi deg de ferskeste resultatene, genererer vi et sammendrag fra de nyeste dataene... "
   },
   "reports": {
     "generatingReportLabel": "Genererer rapport",

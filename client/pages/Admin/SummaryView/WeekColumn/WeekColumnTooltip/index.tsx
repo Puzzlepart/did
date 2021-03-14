@@ -37,12 +37,12 @@ export const WeekColumnTooltip: FunctionComponent<IWeekColumnTooltipProps> = (
             <CustomerHours
               key={key}
               customer={details.customer.name}
-              hours={hours.toFixed(0)}
+              hours={hours}
             />
           )
         })}
       </div>
-      <TotalHours hours={props.hours.total.toFixed(0)} />
+      <TotalHours hours={props.hours.total} />
     </div>
   )
 }

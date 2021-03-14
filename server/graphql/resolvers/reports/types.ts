@@ -85,3 +85,15 @@ export class ReportsQuery {
   @Field({ nullable: true })
   projectId?: string
 }
+
+/**
+ * @category InputType
+ */
+@InputType()
+export class ConfirmedPeriodsQuery {
+  @Field({ nullable: true })
+  week?: number
+
+  @Field({ nullable: true })
+  year?: number
+}

@@ -6,6 +6,7 @@ import { ProjectService, UserService } from '.'
 import { DateObject } from '../../shared/utils/date.dateObject'
 import { Context } from '../graphql/context'
 import {
+  ConfirmedPeriodsQuery,
   Customer,
   Project,
   ReportsQuery,
@@ -132,9 +133,11 @@ export class ReportService {
 
   /**
    * Get confirmed periods
+   *
+   * @param queries - Queries
    */
-  public async getConfirmedPeriods() {
-    return await this._cperiodSvc.find({ year: 2021 })
+  public async getConfirmedPeriods(queries: ConfirmedPeriodsQuery[]) {
+    return await this._cperiodSvc.find({ $or: queries })
   }
 
   /**

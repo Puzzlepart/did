@@ -44,7 +44,7 @@ Name | Type | Description |
 
 **Returns:** [*ReportService*](services_report.reportservice.md)
 
-Defined in: [server/services/report.ts:33](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L33)
+Defined in: [server/services/report.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L34)
 
 ## Properties
 
@@ -68,7 +68,7 @@ Name | Type | Description |
 
 **Returns:** *FilterQuery*<[*TimeEntry*](graphql.timeentry.md)\>
 
-Defined in: [server/services/report.ts:58](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L58)
+Defined in: [server/services/report.ts:59](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L59)
 
 ___
 
@@ -86,19 +86,25 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [server/services/report.ts:93](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L93)
+Defined in: [server/services/report.ts:94](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L94)
 
 ___
 
 ### getConfirmedPeriods
 
-▸ **getConfirmedPeriods**(): *Promise*<any[]\>
+▸ **getConfirmedPeriods**(`queries`: [*ConfirmedPeriodsQuery*](graphql.confirmedperiodsquery.md)[]): *Promise*<any[]\>
 
 Get confirmed periods
 
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`queries` | [*ConfirmedPeriodsQuery*](graphql.confirmedperiodsquery.md)[] | Queries    |
+
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/report.ts:136](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L136)
+Defined in: [server/services/report.ts:139](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L139)
 
 ___
 
@@ -110,7 +116,7 @@ Get forecast report
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/report.ts:176](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L176)
+Defined in: [server/services/report.ts:179](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L179)
 
 ___
 
@@ -130,7 +136,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/report.ts:147](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L147)
+Defined in: [server/services/report.ts:150](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L150)
 
 ___
 
@@ -150,4 +156,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/report.ts:207](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L207)
+Defined in: [server/services/report.ts:210](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L210)
