@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for norsk (nynorsk) #864
 - Support for initial signin with email #884
 - Showing more details in the summary view on hover #886
+- Summary view moved to Reports
 
 ### Fixed
 - Issue where sunday hours would not be displayed in the UI after confirming a week #785
