@@ -87,7 +87,7 @@
     "informationHeaderText": "Informasjon",
     "timeEntriesHeaderText": "Tidsoppføringer",
     "noInformationAvailable": "Ingen informasjon tilgjengelig om dette prosjektet.",
-    "navigateText": "Gå til prosjektet",
+    "navigateText": "Detaljer",
     "iconFieldDescription": "Bruk et ikon for å gjøre prosjektet mer gjenkjennelig i timelisten og på prosjektsiden. \nEt tilfeldig ikon vil bli valgt hvis du ikke velger en selv."
   },
   "customers": {

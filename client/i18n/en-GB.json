@@ -88,7 +88,7 @@
     "informationHeaderText": "Information",
     "timeEntriesHeaderText": "Time entries",
     "noInformationAvailable": "No information available about this project.",
-    "navigateText": "Go to project",
+    "navigateText": "Details",
     "iconFieldDescription": "Use an icon to make the project more recognizable in the Timesheet and Project pages. A random icon will be selected if you dont' pick one yourself."
   },
   "customers": {
