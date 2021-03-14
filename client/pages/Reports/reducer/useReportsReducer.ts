@@ -25,7 +25,7 @@ export function useReportsReducer(queries: IReportsQuery[]) {
   return useReducer(reducer, {
     loading: true,
     data: {
-      time_entries: [],
+      timeEntries: [],
       users: [],
       periods: [],
       projects: []

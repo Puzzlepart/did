@@ -33,12 +33,12 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
         state.loading = payload.query.loading
         if (payload.query?.data) {
           state.data = { ...state.data, ...payload.query.data }
-          state.subset = state.data.time_entries
+          state.subset = state.data.timeEntries
         }
       })
       .addCase(SET_FILTER, (state, { payload }) => {
         state.filter = payload.filter as any
-        state.subset = filter(state.data?.time_entries, (entry) => {
+        state.subset = filter(state.data?.timeEntries, (entry) => {
           return (
             filter(Object.keys(payload.filter.values), (key) => {
               return payload.filter.values[key].includes(
@@ -48,7 +48,7 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
           )
         })
         state.isFiltered =
-          state.subset.length !== state.data?.time_entries?.length
+          state.subset.length !== state.data?.timeEntries?.length
       })
       .addCase(ADD_FILTER, (state, { payload }) => {
         const newFilter: any = {
@@ -64,7 +64,7 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
       .addCase(REMOVE_SELECTED_FILTER, (state) => {
         state.savedFilters = omit(state.savedFilters, state.filter.key)
         state.filter = null
-        state.subset = state.data?.time_entries
+        state.subset = state.data?.timeEntries
         state.isFiltered = false
       })
       .addCase(TOGGLE_FILTER_PANEL, (state) => {
@@ -81,7 +81,7 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
             {}
           )
         }
-        state.subset = filter(state.data?.time_entries, (entry) => {
+        state.subset = filter(state.data?.timeEntries, (entry) => {
           return (
             filter(payload.filters, (f) => {
               const selectedKeys = f.selected.map((s) => s.key)
@@ -90,7 +90,7 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
           )
         })
         state.isFiltered =
-          state.subset.length !== state.data?.time_entries?.length
+          state.subset.length !== state.data?.timeEntries?.length
       })
       .addCase(SET_GROUP_BY, (state, { payload }) => {
         state.groupBy = payload.groupBy
@@ -101,7 +101,7 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
       })
       .addCase(CLEAR_FILTERS, (state) => {
         state.filter = null
-        state.subset = state.data?.time_entries
+        state.subset = state.data?.timeEntries
         state.isFiltered = false
       })
   )

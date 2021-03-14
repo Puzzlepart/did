@@ -106,6 +106,6 @@ ___
 
 • `Optional` **subset**: *any*[]
 
-Filtered subset of data.time_entries
+Filtered subset of data.timeEntries
 
 Defined in: [client/pages/Reports/types.tsx:77](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L77)

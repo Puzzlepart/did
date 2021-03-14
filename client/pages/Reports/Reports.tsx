@@ -76,7 +76,7 @@ export const Reports: FunctionComponent = () => {
                   />
                   <UserMessage
                     hidden={
-                      !isEmpty(state.data.time_entries) ||
+                      !isEmpty(state.data.timeEntries) ||
                       state.loading ||
                       !state.preset
                     }
@@ -86,7 +86,7 @@ export const Reports: FunctionComponent = () => {
                     isOpen={state.isFiltersOpen}
                     headerText={t('reports.filterPanelHeaderText')}
                     filters={filters}
-                    items={state.data.time_entries}
+                    items={state.data.timeEntries}
                     onDismiss={() => dispatch(TOGGLE_FILTER_PANEL())}
                     onFiltersUpdated={(filters) =>
                       dispatch(FILTERS_UPDATED({ filters }))

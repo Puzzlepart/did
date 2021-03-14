@@ -10,7 +10,7 @@
 
 - [periods](pages.ireportsdata.md#periods)
 - [projects](pages.ireportsdata.md#projects)
-- [time\_entries](pages.ireportsdata.md#time_entries)
+- [timeEntries](pages.ireportsdata.md#timeentries)
 - [users](pages.ireportsdata.md#users)
 
 ## Properties
@@ -35,11 +35,11 @@ Defined in: [client/pages/Reports/types.tsx:62](https://github.com/Puzzlepart/di
 
 ___
 
-### time\_entries
+### timeEntries
 
-• **time\_entries**: *any*[]
+• **timeEntries**: *any*[]
 
-Users
+Time entries
 
 Defined in: [client/pages/Reports/types.tsx:47](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L47)
 

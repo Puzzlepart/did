@@ -42,9 +42,9 @@ export interface IReportsSavedFilter extends IContextualMenuItem {
 
 export interface IReportsData {
   /**
-   * Users
+   * Time entries
    */
-  time_entries: any[]
+  timeEntries: any[]
 
   /**
    * Users
@@ -72,7 +72,7 @@ export interface IReportsState {
   data?: IReportsData
 
   /**
-   * Filtered subset of data.time_entries
+   * Filtered subset of data.timeEntries
    */
   subset?: any[]
 
