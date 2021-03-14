@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/no-array-callback-reference */
 import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
-import { find, first, omit } from 'underscore'
+import { find, first, omit, pick } from 'underscore'
 import { ProjectService, UserService } from '.'
 import { DateObject } from '../../shared/utils/date.dateObject'
 import { Context } from '../graphql/context'
@@ -98,37 +98,41 @@ export class ReportService {
     projects,
     customers
   }: IGenerateReportParameters) {
-    return (
-      timeEntries
-        .sort(({ startDateTime: a }, { startDateTime: b }) => {
-          return sortAsc
-            ? new Date(a).getTime() - new Date(b).getTime()
-            : new Date(b).getTime() - new Date(a).getTime()
-        })
-        // eslint-disable-next-line unicorn/no-array-reduce
-        .reduce(($, entry) => {
-          if (!entry.projectId) return $
-          const resource = users
-            ? find(users, (user) => user.id === entry.userId)
-            : {}
-          const project = find(projects, ({ _id }) => {
-            return _id === entry.projectId
-          })
-          const customer = find(
-            customers,
-            (c) => c.key === first(entry.projectId.split(' '))
-          )
-          if (project && customer && resource) {
-            $.push({
-              ...entry,
-              project,
-              customer,
-              resource
-            })
-          }
-          return $
-        }, [])
-    )
+    return timeEntries
+      .sort(({ startDateTime: a }, { startDateTime: b }) => {
+        return sortAsc
+          ? new Date(a).getTime() - new Date(b).getTime()
+          : new Date(b).getTime() - new Date(a).getTime()
+      })
+      .reduce((timeEntries_, entry) => {
+        if (!entry.projectId) return timeEntries_
+        const resource = users
+          ? find(users, (user) => user.id === entry.userId)
+          : {}
+        const project = find(projects, ({ _id }) => _id === entry.projectId)
+        const customer = find(
+          customers,
+          (c) => c.key === first(entry.projectId.split(' '))
+        )
+        if (project && customer && resource) {
+          return [
+            ...timeEntries_,
+            {
+              ...omit(entry, '_id', 'userId', 'periodId', 'projectId', 'body'),
+              project: pick(project, 'name'),
+              customer: pick(customer, 'name'),
+              resource: pick(
+                resource,
+                'givenName',
+                'surname',
+                'mail',
+                'displayName'
+              )
+            }
+          ]
+        }
+        return timeEntries_
+      }, [])
   }
 
   /**

@@ -7,15 +7,12 @@ fragment TimeEntryFragment on TimeEntry {
   month
   year
   customer {
-    key
     name
   }
   project {
-    tag
     name
   }
   resource {
-    id
     givenName
     surname
     mail
