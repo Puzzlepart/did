@@ -61,7 +61,6 @@ export const onVerifySignin = async (
       }
       await userSrv.addUser(user_)
     }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const user: any = {
       ...user_,
       subscription,

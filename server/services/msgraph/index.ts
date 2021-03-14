@@ -41,7 +41,6 @@ class MSGraphService {
       await this._oauthService.getAccessToken(this._accessTokenOptions)
     ).access_token
     const client = MSGraphClient.init({
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       authProvider: (done: (error: Error, token: any) => void) => {
         done(null, this._access_token)
       }
