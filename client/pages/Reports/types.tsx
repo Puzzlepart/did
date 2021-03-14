@@ -40,6 +40,9 @@ export interface IReportsSavedFilter extends IContextualMenuItem {
   values: { [key: string]: any }
 }
 
+/**
+ * @category Reports
+ */
 export interface IReportsData {
   /**
    * Time entries

@@ -14,100 +14,142 @@ import report_last_year from './report-last-year.gql'
 import report_summary from './report-summary.gql'
 
 /**
- * Last month query
+ * Returns query properties for preset
+ * **LAST_MONTH**
+ *
+ * @remarks Made as generic so it can also be used by
+ * `<UserReports />` which are using `IChoiceGroupOption`
  *
  * @param t - Translate function
  * @param query - GraphQL query
+ *
+ * @category Reports
  */
-export const lastMonthQuery = (t: TFunction, query = report_last_month) => {
+export function lastMonthQuery<T = IReportsQuery>(
+  t: TFunction,
+  query = report_last_month
+): T {
   const object = new DateObject().add('-1month').toObject()
-  return {
+  return ({
     key: 'last_month',
     text: t('common.exportTypeLastMonth', object),
     iconName: 'CalendarDay',
     query,
     exportFileName: `TimeEntries-${capitalize(object.monthName)}-{0}.xlsx`
-  }
+  } as unknown) as T
 }
 
 /**
- * Current month query
+ * Returns query properties for preset
+ * **CURRENT_MONTH**
+ *
+ * @remarks Made as generic so it can also be used by
+ * `<UserReports />` which are using `IChoiceGroupOption`
  *
  * @param t - Translate function
  * @param query - GraphQL query
+ *
+ * @category Reports
  */
-export const currentMonthQuery = (
+export function currentMonthQuery<T = IReportsQuery>(
   t: TFunction,
   query = report_current_month
-) => {
+): T {
   const object = new DateObject().toObject()
-  return {
+  return ({
     key: 'current_month',
     text: t('common.exportTypeCurrentMonth', object),
     iconName: 'Calendar',
     query,
     exportFileName: `TimeEntries-${capitalize(object.monthName)}-{0}.xlsx`
-  }
+  } as unknown) as T
 }
 
 /**
- * Last year query preset
+ * Returns query properties for preset
+ * **LAST_YEAR**
+ *
+ * @remarks Made as generic so it can also be used by
+ * `<UserReports />` which are using `IChoiceGroupOption`
  *
  * @param t - Translate
  * @param query - GraphQL query
+ *
+ * @category Reports
  */
-export const lastYearQuery = (t: TFunction, query = report_last_year) => {
+export function lastYearQuery<T = IReportsQuery>(
+  t: TFunction,
+  query = report_last_year
+): T {
   const { year } = new DateObject().toObject('year')
   const object = { year: year - 1 }
-  return {
+  return ({
     key: 'last_year',
     text: t('common.exportTypeLastYear', object),
     iconName: 'Previous',
     query,
     exportFileName: `TimeEntries-${object.year}-{0}.xlsx`
-  }
+  } as unknown) as T
 }
 
 /**
- * Current year query
+ * Returns query properties for preset
+ * **CURRENT_YEAR**
+ *
+ * @remarks Made as generic so it can also be used by
+ * `<UserReports />` which are using `IChoiceGroupOption`
  *
  * @param t - Translate function
  * @param query - GraphQL query
+ *
+ * @category Reports
  */
-export const currentYearQuery = (t: TFunction, query = report_current_year) => {
+export function currentYearQuery<T = IReportsQuery>(
+  t: TFunction,
+  query = report_current_year
+): T {
   const object = new DateObject().toObject('year')
-  return {
+  return ({
     key: 'current_year',
     text: t('common.exportTypeCurrentYear', object),
     iconName: 'CalendarReply',
     query,
     exportFileName: `TimeEntries-${object.year}-{0}.xlsx`
-  }
+  } as unknown) as T
 }
 
 /**
- * Forecast query
+ * Returns query properties for preset
+ * **FORECAST**
+ *
+ * @remarks Made as generic so it can also be used by
+ * `<UserReports />` which are using `IChoiceGroupOption`
  *
  * @param t - Translate function
  * @param query - GraphQL query
+ *
+ * @category Reports
  */
-export const forecastQuery = (t: TFunction, query = report_forecast) => {
-  return {
+export function forecastQuery<T = IReportsQuery>(
+  t: TFunction,
+  query = report_forecast
+): T {
+  return ({
     key: 'forecast',
     text: t('reports.forecast'),
     iconName: 'TimeSheet',
     query,
     exportFileName: 'Forecast-{0}.xlsx'
-  }
+  } as unknown) as T
 }
 
 /**
- * Summary query
+ * Returns query properties for
+ * Summary view
  *
- * @param t - Translate function
- * @param query - GraphQL query
+ * @category Reports
  */
-export const summaryQuery = (_t: TFunction, query = report_summary) => {
+export function summaryQuery<T = IReportsQuery>(): T {
   const periods = []
   let now = new DateObject()
   for (let index = 0; index < 8; index++) {
@@ -115,16 +157,16 @@ export const summaryQuery = (_t: TFunction, query = report_summary) => {
     const { week, year } = now.toObject()
     periods.unshift([week, year])
   }
-  return {
+  return ({
     key: 'summary',
     text: undefined,
     periods,
-    query,
+    query: report_summary,
     variables: {
       userQuery: { hiddenFromReports: false },
       queries: periods.map(([week, year]) => ({ week, year }))
     }
-  }
+  } as unknown) as T
 }
 
 /**

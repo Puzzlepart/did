@@ -11,7 +11,7 @@ export const UserReports: FunctionComponent = () => {
   const {
     queryPreset,
     setQueryPreset,
-    queryPresets,
+    queries,
     showPanel,
     togglePanel,
     query,
@@ -38,7 +38,7 @@ export const UserReports: FunctionComponent = () => {
         <ChoiceGroup
           defaultSelectedKey={queryPreset?.key}
           onChange={setQueryPreset}
-          options={queryPresets}
+          options={queries}
         />
         <UserMessage
           hidden={!queryPreset || query.loading}

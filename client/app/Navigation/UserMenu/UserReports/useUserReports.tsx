@@ -2,7 +2,7 @@
 import { useToggle } from 'hooks'
 import { IChoiceGroupOption } from 'office-ui-fabric-react'
 import { useState } from 'react'
-import { useQueryPresets } from './query-presets'
+import { useQueries } from './queries'
 import { useColumns } from './useColumns'
 import { useUserReportQuery } from './useUserReportQuery'
 
@@ -14,7 +14,7 @@ import { useUserReportQuery } from './useUserReportQuery'
 export function useUserReports() {
   const [queryPreset, setQueryPreset] = useState<any>(null)
   const [showPanel, togglePanel] = useToggle()
-  const queryPresets = useQueryPresets()
+  const queries = useQueries()
   const query = useUserReportQuery(queryPreset)
   const columns = useColumns()
 
@@ -22,7 +22,7 @@ export function useUserReports() {
     queryPreset,
     setQueryPreset: (_event: any, queryPreset_: IChoiceGroupOption) =>
       setQueryPreset(queryPreset_),
-    queryPresets,
+    queries,
     showPanel,
     togglePanel,
     query,
