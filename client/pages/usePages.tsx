@@ -61,8 +61,6 @@ export function usePages() {
         component: <AdminPage />
       },
       {
-        text: null,
-        iconName: null,
         path: '/',
         component: <Home />
       }
@@ -70,8 +68,10 @@ export function usePages() {
     return {
       pages,
       nav: pages
-        .filter((page) => page.text)
+        .filter((page) => !!page.text)
         .map((page) => ({
+          text: undefined,
+          iconName: undefined,
           ...pick(page, 'text', 'iconName', 'hidden', 'sections'),
           to: page.path
         }))

@@ -8,8 +8,8 @@ export interface IPageSectionComponent extends IPivotItemProps {
 }
 
 export interface IPageComponent extends React.HTMLAttributes<HTMLDivElement> {
-  text: string
-  iconName: string
+  text?: string
+  iconName?: string
   path: string
   component: JSX.Element
   permission?: PERMISSION
