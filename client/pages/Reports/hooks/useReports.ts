@@ -15,7 +15,7 @@ import { useReportsQuery } from './useReportsQuery'
  *
  * * Get history using `useHistory`
  * * Get URL params using `useParams`
- * * Get queries using `useQueryPresets`
+ * * Get queries using `useQueries`
  * * Using reducer `useReportsReducer`
  * * Using `useReportQuery`
  * * Layout effect (`useLayoutEffect`) for updating URL when changing query
@@ -58,4 +58,4 @@ export function useReports() {
   }
 }
 
-export { useQueries as useQueryPresets }
+export { useQueries }

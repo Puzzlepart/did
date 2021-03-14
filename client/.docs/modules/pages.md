@@ -14,7 +14,6 @@ All are built using React Function components and Hooks.
 - [report\_forecast](pages.md#report_forecast)
 - [report\_last\_month](pages.md#report_last_month)
 - [report\_last\_year](pages.md#report_last_year)
-- [useQueryPresets](pages.md#usequerypresets)
 
 ### Timesheet Classes
 
@@ -132,12 +131,6 @@ ___
 ### report\_last\_year
 
 Renames and exports: [report\_current\_month](pages.md#report_current_month)
-
-___
-
-### useQueryPresets
-
-Renames and exports: [useQueries](pages.md#usequeries)
 
 ## Timesheet Type aliases
 
@@ -400,7 +393,7 @@ Name | Type | Description |
 
 **Returns:** T
 
-Defined in: [client/pages/Reports/hooks/queries/index.tsx:51](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L51)
+Defined in: [client/pages/Reports/hooks/queries/index.tsx:54](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L54)
 
 ___
 
@@ -429,7 +422,7 @@ Name | Type | Description |
 
 **Returns:** T
 
-Defined in: [client/pages/Reports/hooks/queries/index.tsx:101](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L101)
+Defined in: [client/pages/Reports/hooks/queries/index.tsx:107](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L107)
 
 ___
 
@@ -458,7 +451,7 @@ Name | Type | Description |
 
 **Returns:** T
 
-Defined in: [client/pages/Reports/hooks/queries/index.tsx:124](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L124)
+Defined in: [client/pages/Reports/hooks/queries/index.tsx:133](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L133)
 
 ___
 
@@ -516,7 +509,7 @@ Name | Type | Description |
 
 **Returns:** T
 
-Defined in: [client/pages/Reports/hooks/queries/index.tsx:77](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L77)
+Defined in: [client/pages/Reports/hooks/queries/index.tsx:80](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L80)
 
 ___
 
@@ -535,7 +528,7 @@ Name | Default |
 
 **Returns:** T
 
-Defined in: [client/pages/Reports/hooks/queries/index.tsx:140](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L140)
+Defined in: [client/pages/Reports/hooks/queries/index.tsx:152](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L152)
 
 ___
 
@@ -547,7 +540,7 @@ Use queries
 
 **Returns:** [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[]
 
-Defined in: [client/pages/Reports/hooks/queries/index.tsx:165](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L165)
+Defined in: [client/pages/Reports/hooks/queries/index.tsx:177](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/queries/index.tsx#L177)
 
 ___
 
@@ -579,7 +572,7 @@ Hook for Reports
 
 * Get history using `useHistory`
 * Get URL params using `useParams`
-* Get queries using `useQueryPresets`
+* Get queries using `useQueries`
 * Using reducer `useReportsReducer`
 * Using `useReportQuery`
 * Layout effect (`useLayoutEffect`) for updating URL when changing query
