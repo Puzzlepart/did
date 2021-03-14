@@ -27,9 +27,10 @@ export const Navigation: FunctionComponent = () => {
           did
         </Link>
         <ul className={styles.nav} hidden={!user}>
-          {nav.map((props, index) => (
-            <NavItem key={index} {...props} />
-          ))}
+          {nav.map(
+            (props, index) =>
+              !props.hidden && <NavItem key={index} {...props} />
+          )}
         </ul>
         <ul className={styles.navRight}>
           {!!user.id && <UserNotifications />}
