@@ -6,13 +6,21 @@
   max-width: none;
 
   .header {
-    margin: 0 0 12px 0;
+    margin: 0 0 25px 0;
     display: flex;
     flex-direction: row;
 
     .title {
-      font-size: 18px;
       flex-grow: 1;
+      
+      .text {
+        font-size: 18px;
+      }
+      
+      .subText {
+        font-size: 12px;
+        color: rgb(96, 94, 92);
+      }
     }
 
     .userInfo {
@@ -22,6 +30,6 @@
   }
 
   .customerTotals {
-    margin: 0 0 15px 0;
+    margin: 12px 0 15px 0;
   }
 }

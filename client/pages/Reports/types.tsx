@@ -2,20 +2,28 @@
 import { IListGroups } from 'components/List/types'
 import { TFunction } from 'i18next'
 import { IContextualMenuItem } from 'office-ui-fabric-react'
+import { Project, TimesheetPeriodObject, User } from 'types'
 
 /**
  * @category Reports
  */
-export interface IReportsQueryPresetItem extends IContextualMenuItem {
+export interface IReportsQuery extends IContextualMenuItem {
   /**
    * GraphQL query
    */
   query: any
 
   /**
+   * GraphQL query variables
+   */
+  variables?: any
+
+  /**
    * Export file name
    */
-  exportFileName: string
+  exportFileName?: string
+
+  [key: string]: any
 }
 
 /**
@@ -32,17 +40,39 @@ export interface IReportsSavedFilter extends IContextualMenuItem {
   values: { [key: string]: any }
 }
 
+export interface IReportsData {
+  /**
+   * Users
+   */
+  time_entries: any[]
+
+  /**
+   * Users
+   */
+  users: User[]
+
+  /**
+   * Periods
+   */
+  periods: TimesheetPeriodObject[]
+
+  /**
+   * Projects
+   */
+  projects: Project[]
+}
+
 /**
  * @category Reports
  */
 export interface IReportsState {
   /**
-   * Time entries
+   * Data
    */
-  timeentries?: any[]
+  data?: IReportsData
 
   /**
-   * Filtered subset
+   * Filtered subset of data.time_entries
    */
   subset?: any[]
 
@@ -54,7 +84,7 @@ export interface IReportsState {
   /**
    * Query preset
    */
-  preset?: IReportsQueryPresetItem
+  preset?: IReportsQuery
 
   /**
    * Group by properties

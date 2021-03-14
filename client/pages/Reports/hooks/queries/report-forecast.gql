@@ -1,7 +1,7 @@
 #import "../../../../graphql/fragments/timeentry-fragment.gql"
 
-query CurrentMonthReport {
-  report(preset: "CURRENT_MONTH") {
+query ForecastReport {
+  time_entries: forecastedReport {
     ...TimeEntryFragment
   }
 }

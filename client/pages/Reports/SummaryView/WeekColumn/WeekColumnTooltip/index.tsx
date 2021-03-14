@@ -1,11 +1,10 @@
 /* eslint-disable tsdoc/syntax */
 import { Persona, PersonaSize } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
-import { useTranslation } from 'react-i18next'
-import { first } from 'underscore'
 import { CustomerHours } from './CustomerHours'
 import { TotalHours } from './TotalHours'
 import { IWeekColumnTooltipProps } from './types'
+import { useWeekColumnTooltip } from './useWeekColumnTooltip'
 import styles from './WeekColumnTooltip.module.scss'
 
 /**
@@ -14,13 +13,17 @@ import styles from './WeekColumnTooltip.module.scss'
 export const WeekColumnTooltip: FunctionComponent<IWeekColumnTooltipProps> = (
   props: IWeekColumnTooltipProps
 ) => {
-  const { t } = useTranslation()
-  const week = first(props.periods).week
+  const { week, month, year, customerTotals, t } = useWeekColumnTooltip(props)
   return (
     <div className={styles.root}>
       <div className={styles.header}>
         <div className={styles.title}>
-          {t('common.weekColumnTooltipTitle', { week })}
+          <div className={styles.text}>
+            {t('common.weekColumnTooltipTitle', { week, year })}
+          </div>
+          <div className={styles.subText}>
+            {month} {year}
+          </div>
         </div>
         <Persona
           className={styles.userInfo}
@@ -30,16 +33,9 @@ export const WeekColumnTooltip: FunctionComponent<IWeekColumnTooltipProps> = (
         />
       </div>
       <div className={styles.customerTotals}>
-        {Object.keys(props.hours.project).map((key) => {
-          const { hours, details } = props.hours.project[key]
-          if (!details) return null
-          return (
-            <CustomerHours
-              key={key}
-              customer={details.customer.name}
-              hours={hours}
-            />
-          )
+        {customerTotals.map(({ customer, hours }, index) => {
+          if (!customer) return null
+          return <CustomerHours key={index} customer={customer} hours={hours} />
         })}
       </div>
       <TotalHours hours={props.hours.total} />

@@ -1,4 +1,4 @@
-query SummaryView($userQuery: UserQuery, $queries: [ConfirmedPeriodsQuery!]!) {
+query SummaryReport($userQuery: UserQuery, $queries: [ConfirmedPeriodsQuery!]!) {
   periods: confirmedPeriods(queries:$queries) {
     userId
     week

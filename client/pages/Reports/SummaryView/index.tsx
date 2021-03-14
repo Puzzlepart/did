@@ -1,6 +1,5 @@
 /* eslint-disable tsdoc/syntax */
 import { List, UserMessage } from 'components'
-import { Progress } from 'components/Progress'
 import { IColumn } from 'office-ui-fabric-react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -14,28 +13,23 @@ import { WeekColumn } from './WeekColumn'
  */
 export const SummaryView = (): JSX.Element => {
   const { t } = useTranslation()
-  const { state, loading, rows, columns } = useSummaryView({
+  const { state, rows, columns } = useSummaryView({
     onColumnRender: (item: any, _index: number, column: IColumn) => (
-      <WeekColumn
-        user={item.user}
-        periods={item[column.fieldName]}
-        projects={state.projects}
-      />
+      <WeekColumn user={item.user} periods={item[column.fieldName]} />
     )
   })
 
   return (
     <div className={styles.root}>
       <div className={styles.container}>
-        {state.progress && <Progress {...state.progress} />}
         <List
-          hidden={!loading && isEmpty(rows)}
-          enableShimmer={loading}
+          hidden={!state.loading && isEmpty(rows)}
+          enableShimmer={state.loading}
           columns={columns}
           items={rows}
         />
         <UserMessage
-          hidden={!isEmpty(rows) || loading}
+          hidden={!isEmpty(rows) || state.loading}
           text={t('admin.noTimeEntriesText')}
         />
       </div>

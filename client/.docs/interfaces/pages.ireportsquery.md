@@ -1,56 +1,61 @@
-[did-client - v0.9.9](../README.md) / [Pages](../modules/pages.md) / IReportsQueryPresetItem
+[did-client - v0.9.9](../README.md) / [Pages](../modules/pages.md) / IReportsQuery
 
-# Interface: IReportsQueryPresetItem
+# Interface: IReportsQuery
 
-[Pages](../modules/pages.md).IReportsQueryPresetItem
+[Pages](../modules/pages.md).IReportsQuery
 
 ## Hierarchy
 
 * *IContextualMenuItem*
 
-  ↳ **IReportsQueryPresetItem**
+  ↳ **IReportsQuery**
+
+## Indexable
+
+▪ [key: *string*]: *any*
 
 ## Table of contents
 
 ### Properties
 
-- [ariaLabel](pages.ireportsquerypresetitem.md#arialabel)
-- [canCheck](pages.ireportsquerypresetitem.md#cancheck)
-- [checked](pages.ireportsquerypresetitem.md#checked)
-- [className](pages.ireportsquerypresetitem.md#classname)
-- [componentRef](pages.ireportsquerypresetitem.md#componentref)
-- [customOnRenderListLength](pages.ireportsquerypresetitem.md#customonrenderlistlength)
-- [data](pages.ireportsquerypresetitem.md#data)
-- [disabled](pages.ireportsquerypresetitem.md#disabled)
-- [exportFileName](pages.ireportsquerypresetitem.md#exportfilename)
-- [getItemClassNames](pages.ireportsquerypresetitem.md#getitemclassnames)
-- [getSplitButtonVerticalDividerClassNames](pages.ireportsquerypresetitem.md#getsplitbuttonverticaldividerclassnames)
-- [href](pages.ireportsquerypresetitem.md#href)
-- [iconProps](pages.ireportsquerypresetitem.md#iconprops)
-- [inactive](pages.ireportsquerypresetitem.md#inactive)
-- [itemProps](pages.ireportsquerypresetitem.md#itemprops)
-- [itemType](pages.ireportsquerypresetitem.md#itemtype)
-- [key](pages.ireportsquerypresetitem.md#key)
-- [keytipProps](pages.ireportsquerypresetitem.md#keytipprops)
-- [name](pages.ireportsquerypresetitem.md#name)
-- [onClick](pages.ireportsquerypresetitem.md#onclick)
-- [onMouseDown](pages.ireportsquerypresetitem.md#onmousedown)
-- [onRender](pages.ireportsquerypresetitem.md#onrender)
-- [onRenderIcon](pages.ireportsquerypresetitem.md#onrendericon)
-- [primaryDisabled](pages.ireportsquerypresetitem.md#primarydisabled)
-- [query](pages.ireportsquerypresetitem.md#query)
-- [rel](pages.ireportsquerypresetitem.md#rel)
-- [role](pages.ireportsquerypresetitem.md#role)
-- [secondaryText](pages.ireportsquerypresetitem.md#secondarytext)
-- [sectionProps](pages.ireportsquerypresetitem.md#sectionprops)
-- [shortCut](pages.ireportsquerypresetitem.md#shortcut)
-- [split](pages.ireportsquerypresetitem.md#split)
-- [style](pages.ireportsquerypresetitem.md#style)
-- [subMenuProps](pages.ireportsquerypresetitem.md#submenuprops)
-- [submenuIconProps](pages.ireportsquerypresetitem.md#submenuiconprops)
-- [target](pages.ireportsquerypresetitem.md#target)
-- [text](pages.ireportsquerypresetitem.md#text)
-- [title](pages.ireportsquerypresetitem.md#title)
+- [ariaLabel](pages.ireportsquery.md#arialabel)
+- [canCheck](pages.ireportsquery.md#cancheck)
+- [checked](pages.ireportsquery.md#checked)
+- [className](pages.ireportsquery.md#classname)
+- [componentRef](pages.ireportsquery.md#componentref)
+- [customOnRenderListLength](pages.ireportsquery.md#customonrenderlistlength)
+- [data](pages.ireportsquery.md#data)
+- [disabled](pages.ireportsquery.md#disabled)
+- [exportFileName](pages.ireportsquery.md#exportfilename)
+- [getItemClassNames](pages.ireportsquery.md#getitemclassnames)
+- [getSplitButtonVerticalDividerClassNames](pages.ireportsquery.md#getsplitbuttonverticaldividerclassnames)
+- [href](pages.ireportsquery.md#href)
+- [iconProps](pages.ireportsquery.md#iconprops)
+- [inactive](pages.ireportsquery.md#inactive)
+- [itemProps](pages.ireportsquery.md#itemprops)
+- [itemType](pages.ireportsquery.md#itemtype)
+- [key](pages.ireportsquery.md#key)
+- [keytipProps](pages.ireportsquery.md#keytipprops)
+- [name](pages.ireportsquery.md#name)
+- [onClick](pages.ireportsquery.md#onclick)
+- [onMouseDown](pages.ireportsquery.md#onmousedown)
+- [onRender](pages.ireportsquery.md#onrender)
+- [onRenderIcon](pages.ireportsquery.md#onrendericon)
+- [primaryDisabled](pages.ireportsquery.md#primarydisabled)
+- [query](pages.ireportsquery.md#query)
+- [rel](pages.ireportsquery.md#rel)
+- [role](pages.ireportsquery.md#role)
+- [secondaryText](pages.ireportsquery.md#secondarytext)
+- [sectionProps](pages.ireportsquery.md#sectionprops)
+- [shortCut](pages.ireportsquery.md#shortcut)
+- [split](pages.ireportsquery.md#split)
+- [style](pages.ireportsquery.md#style)
+- [subMenuProps](pages.ireportsquery.md#submenuprops)
+- [submenuIconProps](pages.ireportsquery.md#submenuiconprops)
+- [target](pages.ireportsquery.md#target)
+- [text](pages.ireportsquery.md#text)
+- [title](pages.ireportsquery.md#title)
+- [variables](pages.ireportsquery.md#variables)
 
 ## Properties
 
@@ -146,11 +151,11 @@ ___
 
 ### exportFileName
 
-• **exportFileName**: *string*
+• `Optional` **exportFileName**: *string*
 
 Export file name
 
-Defined in: [client/pages/Reports/types.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L18)
+Defined in: [client/pages/Reports/types.tsx:24](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L24)
 
 ___
 
@@ -418,7 +423,7 @@ ___
 
 GraphQL query
 
-Defined in: [client/pages/Reports/types.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L13)
+Defined in: [client/pages/Reports/types.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L14)
 
 ___
 
@@ -553,3 +558,13 @@ ___
 Optional title for displaying text when hovering over an item.
 
 Defined in: node_modules/office-ui-fabric-react/lib/components/ContextualMenu/ContextualMenu.types.d.ts:380
+
+___
+
+### variables
+
+• `Optional` **variables**: *any*
+
+GraphQL query variables
+
+Defined in: [client/pages/Reports/types.tsx:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/types.tsx#L19)

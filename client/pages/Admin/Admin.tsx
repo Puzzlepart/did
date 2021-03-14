@@ -10,7 +10,6 @@ import { ApiTokens } from './ApiTokens'
 import { Labels } from './Labels'
 import { Roles } from './Roles'
 import { SubscriptionSettings } from './Subscription'
-import { SummaryView } from './SummaryView'
 import { Users } from './Users'
 
 /**
@@ -37,13 +36,6 @@ export const Admin = () => {
             <Users />
           </PivotItem>
         )}
-        <PivotItem
-          className={styles.tab}
-          itemKey='summary'
-          headerText={t('admin.summary')}
-          itemIcon='CalendarWeek'>
-          <SummaryView />
-        </PivotItem>
         <PivotItem
           className={styles.tab}
           itemKey='labels'
@@ -81,8 +73,8 @@ export const Admin = () => {
   )
 }
 
+export * from '../Reports/SummaryView'
 export * from './ApiTokens'
 export * from './Labels'
 export * from './Roles'
-export * from './SummaryView'
 export * from './Users'
