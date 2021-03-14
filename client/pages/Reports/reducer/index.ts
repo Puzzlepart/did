@@ -32,7 +32,7 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
       .addCase(DATA_UPDATED, (state, { payload }) => {
         state.loading = payload.query.loading
         if (payload.query?.data) {
-          state.data = payload.query.data
+          state.data = { ...state.data, ...payload.query.data }
           state.subset = state.data.time_entries
         }
       })
