@@ -5,10 +5,10 @@ import React, { FunctionComponent, useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { UserMenu } from '../UserMenu'
-import { UserNotifications } from '../UserNotifications'
 import styles from './Navigation.module.scss'
 import { NavItem } from './NavItem'
+import { UserMenu } from './UserMenu'
+import { UserNotifications } from './UserNotifications'
 
 /**
  * @category Function Component

@@ -93,7 +93,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<MSGraphOutlookCategory\>
 
-Defined in: [server/services/msgraph/index.ts:106](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L106)
+Defined in: [server/services/msgraph/index.ts:105](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L105)
 
 ___
 
@@ -111,7 +111,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [server/services/msgraph/index.ts:57](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L57)
+Defined in: [server/services/msgraph/index.ts:56](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L56)
 
 ___
 
@@ -131,7 +131,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<default[]\>
 
-Defined in: [server/services/msgraph/index.ts:156](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L156)
+Defined in: [server/services/msgraph/index.ts:155](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L155)
 
 ___
 
@@ -143,7 +143,7 @@ Get Outlook categories
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/msgraph/index.ts:132](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L132)
+Defined in: [server/services/msgraph/index.ts:131](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L131)
 
 ___
 
@@ -155,4 +155,4 @@ Get Azure Active Directory users
 
 **Returns:** *Promise*<any\>
 
-Defined in: [server/services/msgraph/index.ts:70](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L70)
+Defined in: [server/services/msgraph/index.ts:69](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L69)

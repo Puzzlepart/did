@@ -4,16 +4,14 @@
  *
  * @module App
  */
-import { ErrorFallback, MobileHeader, Navigation } from 'components'
 import { PERMISSION } from 'config/security/permissions'
 import React, { FunctionComponent } from 'react'
 import { isMobile } from 'react-device-detect'
 import { ErrorBoundary } from 'react-error-boundary'
 import { useTranslation } from 'react-i18next'
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
-import styles from './App.module.scss'
-import { AppContext, IAppContext } from './AppContext'
-import { useNotificationsQuery } from './hooks'
+import { AppContext, IAppContext } from '../AppContext'
+import { useNotificationsQuery } from '../hooks'
 import {
   AdminPage,
   CustomersPage,
@@ -21,7 +19,11 @@ import {
   ProjectsPage,
   ReportsPage,
   TimesheetPage
-} from './pages'
+} from '../pages'
+import styles from './App.module.scss'
+import { ErrorFallback } from './ErrorFallback'
+import { MobileHeader } from './MobileHeader'
+import { Navigation } from './Navigation'
 import { ProtectedRoute as Route } from './ProtectedRoute'
 
 export const App: FunctionComponent<IAppContext> = (context: IAppContext) => {
@@ -75,3 +77,5 @@ export const App: FunctionComponent<IAppContext> = (context: IAppContext) => {
     </AppContext.Provider>
   )
 }
+
+export { ErrorFallback, MobileHeader, Navigation }

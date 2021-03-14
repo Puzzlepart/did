@@ -6,14 +6,57 @@ The App component
 
 ## Table of contents
 
-### Variables
+### Function Component Variables
+
+- [MobileHeader](app.md#mobileheader)
+- [Navigation](app.md#navigation)
+
+### Other Variables
 
 - [App](app.md#app)
 
-## Variables
+### Function Component Functions
+
+- [ErrorFallback](app.md#errorfallback)
+
+## Function Component Variables
+
+### MobileHeader
+
+• `Const` **MobileHeader**: *FunctionComponent*<IMobileHeaderProps\>
+
+Defined in: [client/app/MobileHeader/index.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/app/MobileHeader/index.tsx#L10)
+
+___
+
+### Navigation
+
+• `Const` **Navigation**: FunctionComponent
+
+Defined in: [client/app/Navigation/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/app/Navigation/index.tsx#L16)
+
+___
+
+## Other Variables
 
 ### App
 
 • `Const` **App**: *FunctionComponent*<IAppContext\>
 
-Defined in: [client/App.tsx:27](https://github.com/Puzzlepart/did/blob/dev/client/App.tsx#L27)
+Defined in: [client/app/index.tsx:29](https://github.com/Puzzlepart/did/blob/dev/client/app/index.tsx#L29)
+
+## Function Component Functions
+
+### ErrorFallback
+
+▸ `Const`**ErrorFallback**(`__namedParameters`: IErrorFallbackProps): *Element*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`__namedParameters` | IErrorFallbackProps |
+
+**Returns:** *Element*
+
+Defined in: [client/app/ErrorFallback/index.tsx:31](https://github.com/Puzzlepart/did/blob/dev/client/app/ErrorFallback/index.tsx#L31)

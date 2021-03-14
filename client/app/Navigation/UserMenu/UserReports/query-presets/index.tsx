@@ -8,7 +8,7 @@ import {
   currentYearQuery,
   lastMonthQuery,
   lastYearQuery
-} from '../../../../pages/Reports/hooks/queries'
+} from '../../../../../pages/Reports/hooks/queries'
 import user_query_preset_current_month from './user-query-preset-current-month.gql'
 import user_query_preset_current_year from './user-query-preset-current-year.gql'
 import user_query_preset_last_month from './user-query-preset-last-month.gql'

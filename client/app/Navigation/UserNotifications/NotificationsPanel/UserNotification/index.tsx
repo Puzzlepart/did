@@ -1,9 +1,9 @@
 /* eslint-disable tsdoc/syntax */
-import { UserNotificationsContext } from 'components/UserNotifications/context'
 import { Link, MessageBar } from 'office-ui-fabric-react'
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useContext } from 'react'
 import FadeIn from 'react-fade-in'
 import { useTranslation } from 'react-i18next'
+import { UserNotificationsContext } from '../../context'
 import { IUserNotificationProps } from './types'
 import styles from './UserNotificationMessage.module.scss'
 
@@ -14,7 +14,7 @@ export const UserNotification: FunctionComponent<IUserNotificationProps> = ({
   model
 }: IUserNotificationProps) => {
   const { t } = useTranslation()
-  const { dismissNotification } = React.useContext(UserNotificationsContext)
+  const { dismissNotification } = useContext(UserNotificationsContext)
   return (
     <FadeIn>
       <MessageBar

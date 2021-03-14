@@ -47,7 +47,7 @@ Name | Type | Description |
 
 **Returns:** *AuthorizationCode*<*client_id*\>
 
-Defined in: [server/services/oauth.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/services/oauth.ts#L27)
+Defined in: [server/services/oauth.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/services/oauth.ts#L26)
 
 ___
 
@@ -65,4 +65,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Token\>
 
-Defined in: [server/services/oauth.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/services/oauth.ts#L48)
+Defined in: [server/services/oauth.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/services/oauth.ts#L47)

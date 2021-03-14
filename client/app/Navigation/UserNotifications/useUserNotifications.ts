@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { AppContext } from 'AppContext'
 import { useContext, useState } from 'react'
-import { useBrowserStorage } from './../../hooks'
+import { useBrowserStorage } from '../../../hooks'
 import { IUserNotificationsState, NotificationModel } from './types'
 
 /**

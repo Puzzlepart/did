@@ -41,14 +41,6 @@ Reusable React Function components.
 - [IFilterItem](../interfaces/components.ifilteritem.md)
 - [IFilterPanelProps](../interfaces/components.ifilterpanelprops.md)
 
-### Navigation Interfaces
-
-- [INavItemProps](../interfaces/components.inavitemprops.md)
-
-### Other Interfaces
-
-- [IMobileHeaderProps](../interfaces/components.imobileheaderprops.md)
-
 ### PermissionList Interfaces
 
 - [IPermissionListProps](../interfaces/components.ipermissionlistprops.md)
@@ -74,21 +66,14 @@ Reusable React Function components.
 - [IconPicker](components.md#iconpicker)
 - [LabelPicker](components.md#labelpicker)
 - [List](components.md#list)
-- [MobileHeader](components.md#mobileheader)
-- [Navigation](components.md#navigation)
 - [PermissionList](components.md#permissionlist)
 - [ProjectLink](components.md#projectlink)
 - [ProjectTooltip](components.md#projecttooltip)
 - [ScrollablePaneWrapper](components.md#scrollablepanewrapper)
 - [UserMessage](components.md#usermessage)
 
-### Navigation Variables
-
-- [NavItem](components.md#navitem)
-
 ### Function Component Functions
 
-- [ErrorFallback](components.md#errorfallback)
 - [FilterPanel](components.md#filterpanel)
 - [SearchCustomer](components.md#searchcustomer)
 - [SearchProject](components.md#searchproject)
@@ -98,10 +83,6 @@ Reusable React Function components.
 - [SuggestionItem](components.md#suggestionitem)
 - [useAutocomplete](components.md#useautocomplete)
 - [useAutocompleteEvents](components.md#useautocompleteevents)
-
-### Other Functions
-
-- [generateNewIssueUrl](components.md#generatenewissueurl)
 
 ### UserMessage Functions
 
@@ -220,22 +201,6 @@ Defined in: [client/components/List/index.tsx:40](https://github.com/Puzzlepart/
 
 ___
 
-### MobileHeader
-
-• `Const` **MobileHeader**: *FunctionComponent*<[*IMobileHeaderProps*](../interfaces/components.imobileheaderprops.md)\>
-
-Defined in: [client/components/MobileHeader/index.tsx:10](https://github.com/Puzzlepart/did/blob/dev/client/components/MobileHeader/index.tsx#L10)
-
-___
-
-### Navigation
-
-• `Const` **Navigation**: FunctionComponent
-
-Defined in: [client/components/Navigation/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/Navigation/index.tsx#L16)
-
-___
-
 ### PermissionList
 
 • `Const` **PermissionList**: *FunctionComponent*<[*IPermissionListProps*](../interfaces/components.ipermissionlistprops.md)\>
@@ -276,33 +241,7 @@ A component that supports a MessageBar with markdown using react-markdown
 
 Defined in: [client/components/UserMessage/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/index.tsx#L18)
 
-___
-
-## Navigation Variables
-
-### NavItem
-
-• `Const` **NavItem**: *FunctionComponent*<[*INavItemProps*](../interfaces/components.inavitemprops.md)\>
-
-Defined in: [client/components/Navigation/NavItem/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/Navigation/NavItem/index.tsx#L13)
-
 ## Function Component Functions
-
-### ErrorFallback
-
-▸ `Const`**ErrorFallback**(`__namedParameters`: IErrorFallbackProps): *Element*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`__namedParameters` | IErrorFallbackProps |
-
-**Returns:** *Element*
-
-Defined in: [client/components/ErrorFallback/index.tsx:31](https://github.com/Puzzlepart/did/blob/dev/client/components/ErrorFallback/index.tsx#L31)
-
-___
 
 ### FilterPanel
 
@@ -424,26 +363,6 @@ Name | Type |
 `onSetSelected` | (`index`: *number*) => *any* |
 
 Defined in: [client/components/Autocomplete/useAutocompleteEvents.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/components/Autocomplete/useAutocompleteEvents.ts#L15)
-
-___
-
-## Other Functions
-
-### generateNewIssueUrl
-
-▸ `Const`**generateNewIssueUrl**(`error`: Error): *string*
-
-Generate new issue GitHub URL
-
-#### Parameters:
-
-Name | Type | Description |
-:------ | :------ | :------ |
-`error` | Error | Error    |
-
-**Returns:** *string*
-
-Defined in: [client/components/ErrorFallback/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/components/ErrorFallback/index.tsx#L14)
 
 ___
 
