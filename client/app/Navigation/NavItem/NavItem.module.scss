@@ -3,6 +3,7 @@
     align-items: center;
     height: 100%;
     margin: 0 8px;
+    position: relative;
 
     .link {
         display: flex;
@@ -22,6 +23,10 @@
         &.active {
             color: #cf5f00;
         }
+    }
+
+    .subMenu {
+        display: block;
     }
 }
 

@@ -18,7 +18,7 @@ import { contains } from 'underscore'
  */
 export function usePermissions(permissionIds?: string[]) {
   const { t } = useTranslation()
-  const { user } = useContext(AppContext)
+  const context = useContext(AppContext)
 
   let permissions = getPermissions(t)
 
@@ -28,6 +28,7 @@ export function usePermissions(permissionIds?: string[]) {
 
   return {
     permissions,
-    hasPermission: (permission: PERMISSION) => user.hasPermission(permission)
+    hasPermission: (permission: PERMISSION) =>
+      context?.user ? context.user.hasPermission(permission) : false
   }
 }

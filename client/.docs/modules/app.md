@@ -33,7 +33,7 @@ ___
 
 • `Const` **Navigation**: FunctionComponent
 
-Defined in: [client/app/Navigation/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/app/Navigation/index.tsx#L16)
+Defined in: [client/app/Navigation/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/app/Navigation/index.tsx#L15)
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 • `Const` **App**: *FunctionComponent*<IAppContext\>
 
-Defined in: [client/app/index.tsx:29](https://github.com/Puzzlepart/did/blob/dev/client/app/index.tsx#L29)
+Defined in: [client/app/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/app/index.tsx#L20)
 
 ## Function Component Functions
 

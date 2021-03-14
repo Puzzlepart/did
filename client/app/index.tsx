@@ -4,22 +4,13 @@
  *
  * @module App
  */
-import { PERMISSION } from 'config/security/permissions'
 import React, { FunctionComponent } from 'react'
 import { isMobile } from 'react-device-detect'
 import { ErrorBoundary } from 'react-error-boundary'
-import { useTranslation } from 'react-i18next'
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import { AppContext, IAppContext } from '../AppContext'
 import { useNotificationsQuery } from '../hooks'
-import {
-  AdminPage,
-  CustomersPage,
-  Home,
-  ProjectsPage,
-  ReportsPage,
-  TimesheetPage
-} from '../pages'
+import { usePages } from '../pages/usePages'
 import styles from './App.module.scss'
 import { ErrorFallback } from './ErrorFallback'
 import { MobileHeader } from './MobileHeader'
@@ -27,7 +18,7 @@ import { Navigation } from './Navigation'
 import { ProtectedRoute as Route } from './ProtectedRoute'
 
 export const App: FunctionComponent<IAppContext> = (context: IAppContext) => {
-  const { t } = useTranslation()
+  const { pages } = usePages()
   if (isMobile) styles.root += ` ${styles.mobile}`
   const notificationsQuery = useNotificationsQuery(context.user)
   return (
@@ -38,37 +29,15 @@ export const App: FunctionComponent<IAppContext> = (context: IAppContext) => {
           <div className={styles.container}>
             <ErrorBoundary FallbackComponent={ErrorFallback}>
               <Switch>
-                <Route
-                  path='/timesheet'
-                  permission={PERMISSION.ACCESS_TIMESHEET}>
-                  {isMobile && (
-                    <MobileHeader text={t('navigation.timesheet')} />
-                  )}
-                  <TimesheetPage />
-                </Route>
-                <Route
-                  path='/customers'
-                  permission={PERMISSION.ACCESS_CUSTOMERS}>
-                  {isMobile && (
-                    <MobileHeader text={t('navigation.customers')} />
-                  )}
-                  <CustomersPage />
-                </Route>
-                <Route path='/projects' permission={PERMISSION.ACCESS_PROJECTS}>
-                  {isMobile && <MobileHeader text={t('navigation.projects')} />}
-                  <ProjectsPage />
-                </Route>
-                <Route path='/reports' permission={PERMISSION.ACCESS_REPORTS}>
-                  {isMobile && <MobileHeader text={t('navigation.reports')} />}
-                  <ReportsPage />
-                </Route>
-                <Route path='/admin' permission={PERMISSION.ACCESS_ADMIN}>
-                  {isMobile && <MobileHeader text={t('navigation.admin')} />}
-                  <AdminPage />
-                </Route>
-                <Route path='/'>
-                  <Home />
-                </Route>
+                {pages.map((page, index) => (
+                  <Route
+                    key={index}
+                    path={page.path}
+                    permission={page.permission}>
+                    {isMobile && <MobileHeader text={page.text} />}
+                    {page.component}
+                  </Route>
+                ))}
               </Switch>
             </ErrorBoundary>
           </div>
