@@ -38,3 +38,15 @@
 | ----------- | ------------------------------------------------------------ | -------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Production  | [https://did.puzzlepart.com/](https://did.puzzlepart.com)    | **main** | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/vstscd) | ![Build and deploy to didapp](https://github.com/Puzzlepart/did/workflows/Build%20and%20deploy%20to%20didapp/badge.svg?branch=main) |
 | Development | [https://didapp-dev.azurewebsites.net](https://didapp-dev.azurewebsites.net) | **dev**  | [Yes](https://portal.azure.com/#@puzzlepart.com/resource/subscriptions/b5e5e285-a57a-4593-a2ef-221dc037ac9f/resourceGroups/pzl-did/providers/Microsoft.Web/sites/didapp/slots/dev/vstscd) | ![Build and deploy to didapp/dev](https://github.com/Puzzlepart/did/workflows/Build%20and%20deploy%20to%20didapp/dev/badge.svg?branch=dev) |
+
+
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#contributors)
+
+## ➤ Contributors
+	
+
+| [<img alt="Carl Joakim Damsleth" src="https://avatars.githubusercontent.com/u/7300548?&size=130" width="100">](undefined) | [<img alt="Ole Martin Pettersen" src="https://avatars.githubusercontent.com/u/7606007?&size=130" width="100">](undefined) | [<img alt="Ole Kristian Mørch-Storstein" src="https://avatars.githubusercontent.com/u/170147?&size=130" width="100">](undefined) |
+|:--------------------------------------------------:|:--------------------------------------------------:|:--------------------------------------------------:|
+| [Carl Joakim Damsleth](undefined)                | [Ole Martin Pettersen](undefined)                | [Ole Kristian Mørch-Storstein](undefined)        |
+| [carl.joakim.damsleth@puzzlepart.com](mailto:carl.joakim.damsleth@puzzlepart.com) | [olemp@puzzlepart.com](mailto:olemp@puzzlepart.com) | [olekms@puzzlepart.com](mailto:olekms@puzzlepart.com) |
