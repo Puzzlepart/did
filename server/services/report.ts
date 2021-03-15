@@ -108,8 +108,8 @@ export class ReportService {
             ...timeEntries_,
             {
               ...omit(entry, '_id', 'userId', 'periodId', 'projectId', 'body'),
-              project: pick(project, 'tag', 'name'),
-              customer: pick(customer, 'key', 'name'),
+              project: pick(project, 'tag', 'name', 'description', 'icon'),
+              customer: pick(customer, 'key', 'name', 'description', 'icon'),
               resource: pick(
                 resource,
                 'givenName',
