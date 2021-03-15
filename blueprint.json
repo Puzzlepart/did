@@ -3,7 +3,7 @@
   "blueprint": "blueprint.md",
   "input": "blueprint.md",
   "output": "README.md",
-  "text": "The calendar is your Timesheet",
+  "text": "Keep your calendar up-to-date with what you work on, and that's it. You're done.",
   "logo": {
     "src": "./server/public/images/favicon/android-chrome-192x192.png",
     "width": 192,
