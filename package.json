@@ -1,8 +1,8 @@
 {
   "name": "did",
+  "description": "The calendar is your Timesheet",
   "version": "0.9.9",
   "private": true,
- 
   "contributors": [
     {
       "name": "Carl Joakim Damsleth",
