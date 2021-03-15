@@ -2,7 +2,7 @@
   <img src="./server/public/images/favicon/android-chrome-192x192.png" alt="Logo" width="192" height="192" />
 </p> <p align="center">
   <b>The calendar is your Timesheet</b></br>
-  <sub>The calendar is your Timesheet 2<sub>
+  <sub>Keep your calendar up-to-date with what you work on, and that's it. You're done.<sub>
 </p>
 
 <br />

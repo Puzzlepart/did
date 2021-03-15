@@ -6,3 +6,5 @@
 [[load:readme/1-roadmap.md]]
 
 [[load:readme/2-environments.md]]
+
+[[ template:contributors ]]
