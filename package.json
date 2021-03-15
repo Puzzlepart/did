@@ -7,23 +7,17 @@
     {
       "name": "Carl Joakim Damsleth",
       "email": "carl.joakim.damsleth@puzzlepart.com",
-      "info": [
-        "🔥"
-      ]
+			"img": "https://avatars.githubusercontent.com/u/7300548?&size=130"
     },
     {
       "name": "Ole Martin Pettersen",
       "email": "olemp@puzzlepart.com",
-      "info": [
-        "🔥"
-      ]
+			"img": "https://avatars.githubusercontent.com/u/7606007?&size=130"
     },
     {
       "name": "Ole Kristian Mørch-Storstein",
       "email": "olekms@puzzlepart.com",
-      "info": [
-        "🔥"
-      ]
+			"img": "https://avatars.githubusercontent.com/u/170147?&size=130"
     }
   ],
   "engines": {

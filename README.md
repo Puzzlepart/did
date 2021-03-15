@@ -1,6 +1,12 @@
 <!-- ⚠️ This README has been generated from the file(s) "blueprint.md" ⚠️--><p align="center">
   <img src="./server/public/images/favicon/android-chrome-192x192.png" alt="Logo" width="192" height="192" />
-</p> [[template:description]]
+</p> <p align="center">
+  <b>The calendar is your Timesheet</b></br>
+  <sub>The calendar is your Timesheet<sub>
+</p>
+
+<br />
+
 
 [![version](https://img.shields.io/badge/version-0.9.9-green.svg)](https://semver.org)
 
