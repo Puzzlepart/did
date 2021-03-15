@@ -1,5 +1,4 @@
 /* eslint-disable unicorn/no-array-callback-reference */
-import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
 import { find, first, omit, pick } from 'underscore'
 import { ProjectService, UserService } from '.'
@@ -58,32 +57,22 @@ export class ReportService {
    */
   private _generatePresetQuery(preset: ReportsQueryPreset) {
     const d = new DateObject()
-    const q: FilterQuery<TimeEntry> = {}
-    switch (preset) {
-      case 'LAST_MONTH':
-        {
-          q.month = d.add('-1m').toObject().month - 1
-          q.year = d.add('-1m').toObject().year
-        }
-        break
-      case 'CURRENT_MONTH':
-        {
-          q.month = d.toObject().month
-          q.year = d.toObject().year
-        }
-        break
-      case 'LAST_YEAR':
-        {
-          q.year = d.toObject().year - 1
-        }
-        break
-      case 'CURRENT_YEAR':
-        {
-          q.year = d.toObject().year
-        }
-        break
-    }
-    return q
+    return {
+      LAST_MONTH: {
+        month: d.add('-1m').toObject().month - 1,
+        year: d.add('-1m').toObject().year
+      },
+      CURRENT_MONTH: {
+        month: d.toObject().month,
+        year: d.toObject().year
+      },
+      LAST_YEAR: {
+        year: d.toObject().year - 1
+      },
+      CURRENT_YEAR: {
+        year: d.toObject().year
+      }
+    }[preset]
   }
 
   /**
@@ -119,8 +108,8 @@ export class ReportService {
             ...timeEntries_,
             {
               ...omit(entry, '_id', 'userId', 'periodId', 'projectId', 'body'),
-              project: pick(project, 'name'),
-              customer: pick(customer, 'name'),
+              project: pick(project, 'tag', 'name'),
+              customer: pick(customer, 'key', 'name'),
               resource: pick(
                 resource,
                 'givenName',
