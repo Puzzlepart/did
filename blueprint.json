@@ -1,0 +1,19 @@
+{
+  "package": "package.json",
+  "blueprint": "blueprint.md",
+  "input": "blueprint.md",
+  "output": "README.md",
+  "text": "The calendar is your Timesheet",
+  "logo": {
+    "src": "./server/public/images/favicon/android-chrome-192x192.png",
+    "width": 192,
+    "height": 192
+  },
+  "placeholder": ["[[", "]]"],
+  "documentationConfig": {
+    "markdown": {
+      "titleLevel": 2
+    }
+  },
+  "line": "rainbow"
+}
