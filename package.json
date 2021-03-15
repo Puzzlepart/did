@@ -2,6 +2,30 @@
   "name": "did",
   "version": "0.9.9",
   "private": true,
+ 
+  "contributors": [
+    {
+      "name": "Carl Joakim Damsleth",
+      "email": "carl.joakim.damsleth@puzzlepart.com",
+      "info": [
+        "🔥"
+      ]
+    },
+    {
+      "name": "Ole Martin Pettersen",
+      "email": "olemp@puzzlepart.com",
+      "info": [
+        "🔥"
+      ]
+    },
+    {
+      "name": "Ole Kristian Mørch-Storstein",
+      "email": "olekms@puzzlepart.com",
+      "info": [
+        "🔥"
+      ]
+    }
+  ],
   "engines": {
     "node": ">=12.18.3",
     "npm": ">=6.5.0"
