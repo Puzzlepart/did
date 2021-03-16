@@ -17,6 +17,7 @@ query UsersAdmin {
     jobTitle
     mail
     hiddenFromReports
+    provider
     role {
       name
       description

@@ -1,10 +1,13 @@
 /* eslint-disable tsdoc/syntax */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import 'reflect-metadata'
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
 import { pick } from 'underscore'
-import { MSGraphService, UserService } from '../../../services'
+import {
+  MSGraphService,
+  SubscriptionService,
+  UserService
+} from '../../../services'
 import { IAuthOptions } from '../../authChecker'
 import { Context } from '../../context'
 import { BaseResult } from '../types'
@@ -13,7 +16,8 @@ import { User, UserInput, UserQuery } from './types'
 /**
  * Resolver for `User`.
  *
- * `MSGraphService` and `UserService` are injected through
+ * `MSGraphService`, `UserService`  and
+ * `SubscriptionService` are injected through
  * _dependendy injection_.
  *
  * @see https://typegraphql.com/docs/dependency-injection.html
@@ -27,11 +31,13 @@ export class UserResolver {
    * Constructor for UserResolver
    *
    * @param _msgraph - MS Graph service
-   * @param _user - User service
+   * @param _userSvc - User service
+   * @param _subSvc - Subscription service
    */
   constructor(
     private readonly _msgraph: MSGraphService,
-    private readonly _user: UserService
+    private readonly _userSvc: UserService,
+    private readonly _subSvc: SubscriptionService
   ) {}
 
   /**
@@ -41,7 +47,7 @@ export class UserResolver {
    */
   @Query(() => User, { description: 'Get the currently logged in user' })
   async currentUser(@Ctx() context: Context): Promise<User> {
-    const user = await this._user.getById(context.userId)
+    const user = await this._userSvc.getById(context.userId)
     return {
       ...user,
       subscription: pick(context.subscription, 'id', 'name', 'owner')
@@ -66,7 +72,7 @@ export class UserResolver {
   users(
     @Arg('query', () => UserQuery, { nullable: true }) query: UserQuery
   ): Promise<User[]> {
-    return this._user.getUsers(query)
+    return this._userSvc.getUsers(query)
   }
 
   /**
@@ -81,7 +87,14 @@ export class UserResolver {
     @Arg('user', () => UserInput) user: UserInput,
     @Arg('update', { nullable: true }) update: boolean
   ): Promise<BaseResult> {
-    await (update ? this._user.updateUser(user) : this._user.addUser(user))
+    if (update) {
+      await this._userSvc.updateUser(user)
+    } else {
+      await this._userSvc.addUser(user)
+      if (user.provider !== 'microsoft') {
+        await this._subSvc.registerExternalUser(user.provider, user.mail)
+      }
+    }
     return { success: true, error: null }
   }
 
@@ -99,7 +112,7 @@ export class UserResolver {
       ...user,
       role: 'User'
     }))
-    await this._user.addUsers(users)
+    await this._userSvc.addUsers(users)
     return { success: true, error: null }
   }
 
@@ -113,7 +126,7 @@ export class UserResolver {
   async updateUserConfiguration(
     @Arg('configuration') configuration: string
   ): Promise<BaseResult> {
-    await this._user.updateCurrentUserConfiguration(configuration)
+    await this._userSvc.updateCurrentUserConfiguration(configuration)
     return { success: true }
   }
 }

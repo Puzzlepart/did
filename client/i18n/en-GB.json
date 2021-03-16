@@ -306,7 +306,7 @@
     "officeLocationLabel": "Office Location",
     "departmentLabel": "Department",
     "mobilePhoneLabel": "Mobile phone",
-    "searchUserLabel": "Search in Azure Active Directory",
+    "searchUserLabel": "Search...",
     "exportTypeLastYear": "Last year ({{year}})",
     "fromDateLabel": "From:",
     "toDateLabel": "To:",
@@ -324,7 +324,9 @@
     "disable": "Disable",
     "startPageLabel": "Start page",
     "preferredLanguageDescription": "Did will display menus and buttons in this language.",
-    "googleSignInText": "Sign in with Google"
+    "googleSignInText": "Sign in with Google",
+    "activeDirectory": "Azure AD",
+    "google": "Google"
   },
   "navigation": {
     "timesheet": "Timesheet",

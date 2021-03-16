@@ -305,7 +305,7 @@
     "officeLocationLabel": "Kontorlokasjon",
     "departmentLabel": "Avdeling",
     "mobilePhoneLabel": "Mobiltelefon",
-    "searchUserLabel": "Søk i Azure Active Directory",
+    "searchUserLabel": "Søk...",
     "exportTypeLastYear": "I fjor ({{year}})",
     "fromDateLabel": "Frå:",
     "toDateLabel": "Til:",
@@ -323,7 +323,9 @@
     "disable": "Deaktiver",
     "startPageLabel": "Startside",
     "preferredLanguageDescription": "Did vil vise menyar og knappar på dette språket.",
-    "googleSignInText": "Logg på med Google"
+    "googleSignInText": "Logg på med Google",
+    "activeDirectory": "Azure AD",
+    "google": "Google"
   },
   "navigation": {
     "timesheet": "Timeliste",

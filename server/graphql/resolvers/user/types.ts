@@ -54,6 +54,9 @@ export class User {
   @Field(() => String, { nullable: true })
   configuration?: any
 
+  @Field({ nullable: true })
+  provider?: string
+
   public create?(user: User): User {
     Object.assign(this, user)
     return this
@@ -99,6 +102,9 @@ export class UserInput {
 
   @Field({ nullable: true })
   role?: string
+
+  @Field({ nullable: true })
+  provider?: string
 }
 
 /**

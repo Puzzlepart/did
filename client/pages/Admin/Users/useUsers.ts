@@ -52,7 +52,12 @@ export function useUsers() {
       labelPosition: 'right'
     })
     await addUsers({
-      variables: { users: users.map((u) => omit(u, '__typename')) }
+      variables: {
+        users: users.map((u) => ({
+          ...omit(u, '__typename'),
+          provider: 'microsoft'
+        }))
+      }
     })
     setProgress(null)
     query.refetch()
