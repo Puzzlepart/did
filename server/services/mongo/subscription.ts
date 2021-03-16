@@ -52,6 +52,29 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
   }
 
   /**
+   * Get subscription by external id or email
+   *
+   * @remarks Returns null if no subscription is found.
+   *
+   * @param id - User ID or email address
+   * @param provider - Provider
+   */
+  public async getByExternalId(id: string, provider: 'google') {
+    try {
+      const subscription = await this.collection.findOne({
+        [`externals.${provider}`]: id
+      })
+      if (!subscription) return null
+      return {
+        ...subscription,
+        id: subscription._id
+      }
+    } catch (error) {
+      throw error
+    }
+  }
+
+  /**
    * Add subscription
    *
    * @param subscription - Subscription

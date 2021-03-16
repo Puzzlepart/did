@@ -28,7 +28,7 @@ export const Home: FunctionComponent = () => {
           }}
         />
       )}
-      {(!subscription || error) && (
+      {!subscription && !error && (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <DefaultButton
             onClick={() => document.location.replace('/auth/signin')}

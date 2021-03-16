@@ -8,7 +8,7 @@ import createError from 'http-errors'
 import { MongoClient } from 'mongodb'
 import logger from 'morgan'
 import path from 'path'
-import { pick } from 'underscore'
+import { isEmpty, pick } from 'underscore'
 import { setupGraphQL } from './graphql'
 import {
   helmetMiddleware,
@@ -135,7 +135,7 @@ export class App {
   setupRoutes() {
     const index = express.Router()
     index.get('/', (request, response) => {
-      if (request.isUnauthenticated() && request.originalUrl !== '/') {
+      if (request.isUnauthenticated() && !isEmpty(request.baseUrl)) {
         return response.redirect(
           `/auth/signin?redirectUrl=${request.originalUrl}`
         )

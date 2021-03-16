@@ -2,12 +2,13 @@
 import { MongoClient } from 'mongodb'
 import { VerifyCallback } from 'passport-azure-ad'
 import { Profile } from 'passport-google-oauth20'
+import { first } from 'underscore'
 import { SubscriptionService, UserService } from '../../../services/mongo'
 import { environment } from '../../../utils'
-import { TENANT_NOT_ENROLLED } from '../errors'
+import { TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } from '../errors'
 
 /**
- * On verify sign
+ * On verify sign for Google accounts
  *
  * @param mcl - Mongo client
  * @param tokenParams - Token parameters
@@ -20,22 +21,29 @@ export const onVerifySignin = async (
   profile: Profile,
   done: VerifyCallback
 ) => {
-  // eslint-disable-next-line no-console
-  console.log({ profile })
-  const subSrv = new SubscriptionService({
-    db: mcl.db(environment('MONGO_DB_DB_NAME'))
-  })
-  const subscription = await subSrv.getById(
-    environment('GOOGLE_TEMP_SUBSCRIPTION_ID')
-  )
-  if (!subscription) throw TENANT_NOT_ENROLLED
+  try {
+    const email = first(profile.emails)
+    const subSrv = new SubscriptionService({
+      db: mcl.db(environment('MONGO_DB_DB_NAME'))
+    })
+    const subscription = await subSrv.getByExternalId(
+      email ? email.value : profile.id,
+      'google'
+    )
+    if (!subscription) throw TENANT_NOT_ENROLLED
 
-  const userSrv = new UserService({
-    db: mcl.db(subscription.db)
-  })
+    const userSrv = new UserService({
+      db: mcl.db(subscription.db)
+    })
 
-  const user: any = await userSrv.getById(profile.id)
-  user.subscription = subscription
-  user.tokenParams = tokenParams
-  done(null, user)
+    const user: any = await userSrv.getById(profile.id)
+
+    if (!user) throw USER_NOT_ENROLLED
+
+    user.subscription = subscription
+    user.tokenParams = tokenParams
+    done(null, user)
+  } catch (error) {
+    done(error, null)
+  }
 }
