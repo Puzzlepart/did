@@ -2,11 +2,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { MongoClient } from 'mongodb'
 import { IProfile, VerifyCallback } from 'passport-azure-ad'
-import { Profile } from 'passport-google-oauth20'
-import { SubscriptionService, UserService } from '../../services/mongo'
-import { environment } from '../../utils'
-import { NO_OID_FOUND, TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } from './errors'
-import { synchronizeUserProfile } from './synchronizeUserProfile'
+import { SubscriptionService, UserService } from '../../../services/mongo'
+import { environment } from '../../../utils'
+import { NO_OID_FOUND, TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } from '../errors'
+import { synchronizeUserProfile } from '../synchronizeUserProfile'
 
 /**
  * On verify sign in Microsoft
@@ -16,19 +15,19 @@ import { synchronizeUserProfile } from './synchronizeUserProfile'
  * the user is the subscription owner.
  * 3. If the user is an owner, we create the user for them.
  *
- * @param mongoClient - Mongo client
+ * @param mcl - Mongo client
  * @param profile - User profile object
  * @param tokenParams - Token params
  * @param done - Done callback
  */
-export const onVerifySigninMicrosoft = async (
-  mongoClient: MongoClient,
+export const onVerifySignin = async (
+  mcl: MongoClient,
   profile: IProfile,
   tokenParameters: unknown,
   done: VerifyCallback
 ) => {
   const subSrv = new SubscriptionService({
-    db: mongoClient.db(environment('MONGO_DB_DB_NAME'))
+    db: mcl.db(environment('MONGO_DB_DB_NAME'))
   })
   try {
     const { tid: subId, oid: userId, preferred_username: mail } = profile._json
@@ -44,7 +43,7 @@ export const onVerifySigninMicrosoft = async (
     const isOwner = subscription.owner === mail
 
     const userSrv = new UserService({
-      db: mongoClient.db(subscription.db)
+      db: mcl.db(subscription.db)
     })
 
     let user_ = await userSrv.getById(userId)
@@ -77,38 +76,4 @@ export const onVerifySigninMicrosoft = async (
   } catch (error) {
     done(error, null)
   }
-}
-
-/**
- * On verify sign in Microsoft
- *
- * @param mongoClient - Mongo client
- * @param tokenParams - Token parameters
- * @param profile - User profile object
- * @param done - Done callback
- */
-export const onVerifySigninGoogle = async (
-  mongoClient: MongoClient,
-  tokenParams: any,
-  profile: Profile,
-  done: VerifyCallback
-) => {
-  // eslint-disable-next-line no-console
-  console.log(profile)
-  const subSrv = new SubscriptionService({
-    db: mongoClient.db(environment('MONGO_DB_DB_NAME'))
-  })
-  const subscription = await subSrv.getById(
-    environment('GOOGLE_TEMP_SUBSCRIPTION_ID')
-  )
-  if (!subscription) throw TENANT_NOT_ENROLLED
-
-  const userSrv = new UserService({
-    db: mongoClient.db(subscription.db)
-  })
-
-  const user: any = await userSrv.getById(profile.id)
-  user.subscription = subscription
-  user.tokenParams = tokenParams
-  done(null, user)
 }

@@ -1,32 +1,14 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import fs from 'fs'
 import { MongoClient } from 'mongodb'
 import passport from 'passport'
-import { IProfile, OIDCStrategy, VerifyCallback } from 'passport-azure-ad'
-import { Strategy as GoogleStrategyOAuth2 } from 'passport-google-oauth20'
-import { environment } from '../../utils'
-import { onVerifySigninGoogle, onVerifySigninMicrosoft } from './onVerifySignin'
-
-/**
- * Get redirect URL
- */
-function getRedirectUrl() {
-  let redirectUrl = environment('OAUTH_REDIRECT_URI')
-  if (environment('LOCALTUNNEL_SUBDOMAIN')) {
-    const _redirectUrl = fs.readFileSync('.localtunnel', 'utf-8')
-    if (_redirectUrl) {
-      redirectUrl = _redirectUrl
-    }
-  }
-  return redirectUrl
-}
+import { googleStrategy } from './google'
+import { azureAdStrategy } from './microsoft'
 
 /**
  * Setup passport to be used for authentication
  *
- * @param mongoClient - Mongo client
+ * @param mcl - Mongo client
  */
-export const passportMiddleware = (mongoClient: MongoClient) => {
+export const passportMiddleware = (mcl: MongoClient) => {
   /**
    * In a typical web application, the credentials used to authenticate
    * a user will only be transmitted during the login request. If
@@ -39,57 +21,8 @@ export const passportMiddleware = (mongoClient: MongoClient) => {
   passport.serializeUser((user, done) => done(null, user))
   passport.deserializeUser((user, done) => done(null, user))
 
-  const azureAdStrategy = () => {
-    const redirectUrl = getRedirectUrl()
-    return new OIDCStrategy(
-      {
-        identityMetadata:
-          'https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration',
-        clientID: environment('OAUTH_APP_ID'),
-        responseType: 'code id_token',
-        responseMode: 'form_post',
-        redirectUrl,
-        allowHttpForRedirectUrl: true,
-        clientSecret: environment('OAUTH_APP_PASSWORD'),
-        validateIssuer: false,
-        passReqToCallback: false,
-        scope: environment('OAUTH_SCOPES').split(' ')
-      },
-      (
-        _iss: string,
-        _sub: string,
-        profile: IProfile,
-        _accessToken: string,
-        _refreshToken: string,
-        tokenParameters: any,
-        done: VerifyCallback
-      ) => onVerifySigninMicrosoft(mongoClient, profile, tokenParameters, done)
-    )
-  }
-
-  const googleStrategy = () => {
-    return new GoogleStrategyOAuth2(
-      {
-        clientID: environment('GOOGLE_CLIENT_ID'),
-        clientSecret: environment('GOOGLE_CLIENT_SECRET'),
-        callbackURL: environment('GOOGLE_REDIRECT_URI'),
-        userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo'
-      },
-      (accessToken, refreshToken, profile, done) =>
-        onVerifySigninGoogle(
-          mongoClient,
-          {
-            access_token: accessToken,
-            refresh_token: refreshToken
-          },
-          profile,
-          done
-        )
-    )
-  }
-
-  passport.use(azureAdStrategy())
-  passport.use(googleStrategy())
+  passport.use(azureAdStrategy(mcl))
+  passport.use(googleStrategy(mcl))
 
   return passport
 }
