@@ -38,6 +38,6 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'didapp'
-        slot-name: 'dev'
+        slot-name: 'google'
         publish-profile: ${{ secrets.DIDAPP_GOOGLE_PUBLISH_PROFILE }}
         package: .
