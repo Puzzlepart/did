@@ -100,6 +100,7 @@
     "express-session": "1.17.0",
     "fast-copy": "2.1.1",
     "get-value": "3.0.1",
+    "googleapis": "39.2.0",
     "graphql": "15.3.0",
     "graphql-iso-date": "3.6.1",
     "graphql-tag": "2.11.0",

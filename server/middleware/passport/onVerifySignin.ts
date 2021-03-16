@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { MongoClient } from 'mongodb'
 import { IProfile, VerifyCallback } from 'passport-azure-ad'
+import { Profile } from 'passport-google-oauth20'
 import { SubscriptionService, UserService } from '../../services/mongo'
 import { environment } from '../../utils'
 import { NO_OID_FOUND, TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } from './errors'
 import { synchronizeUserProfile } from './synchronizeUserProfile'
 
 /**
- * On verify sign in
+ * On verify sign in Microsoft
  *
  * 1. Checks if the tenant has an subscription
  * 2. Checks if the user is enrolled in the subscription or
@@ -19,7 +20,7 @@ import { synchronizeUserProfile } from './synchronizeUserProfile'
  * @param tokenParams - Token params
  * @param done - Done callback
  */
-export const onVerifySignin = async (
+export const onVerifySigninMicrosoft = async (
   mongoClient: MongoClient,
   profile: IProfile,
   tokenParameters: unknown,
@@ -75,4 +76,35 @@ export const onVerifySignin = async (
   } catch (error) {
     done(error, null)
   }
+}
+
+/**
+ * On verify sign in Microsoft
+ *
+ * @param mongoClient - Mongo client
+ * @param accessToken - Access token
+ * @param profile - User profile object
+ * @param done - Done callback
+ */
+export const onVerifySigninGoogle = async (
+  mongoClient: MongoClient,
+  accessToken: string,
+  profile: Profile,
+  done: VerifyCallback
+) => {
+  const subSrv = new SubscriptionService({
+    db: mongoClient.db(environment('MONGO_DB_DB_NAME'))
+  })
+
+  const subscription = await subSrv.getById(environment('GOOGLE_TEMP_SUBSCRIPTION_ID'))
+  if (!subscription) throw TENANT_NOT_ENROLLED
+
+  const userSrv = new UserService({
+    db: mongoClient.db(subscription.db)
+  })
+
+  const user: any = await userSrv.getById(profile.id)
+  user.subscription = subscription
+  user.tokenParams = { accessToken }
+  done(null, user)
 }

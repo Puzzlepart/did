@@ -29,6 +29,27 @@ export const signInHandler = (
 }
 
 /**
+ * Handler for /auth/signin/google
+ *
+ * @param request - Request
+ */
+export const googleSignInHandler = (
+  request: Request,
+  response: Response,
+  next: NextFunction
+) => {
+  request.session.regenerate(() => {
+    request.session[REDIRECT_URL_PROPERTY] = request.query.redirectUrl
+    passport.authenticate('google', {
+      scope: [
+        'profile',
+        'https://www.googleapis.com/auth/calendar.readonly'
+      ]
+    })(request, response, next)
+  })
+}
+
+/**
  * Handler for /auth/callback
  *
  * @param request - Request
@@ -42,6 +63,51 @@ export const authCallbackHandler = (
 ) => {
   passport.authenticate(
     'azuread-openidconnect',
+    (error: Error, user: Express.User) => {
+      if (error || !user) {
+        const _error = error instanceof SigninError ? error : SIGNIN_FAILED
+        return response.redirect(
+          url.format({
+            pathname: '/',
+            query: {
+              name: _error?.name,
+              message: _error?.message,
+              icon: _error?.icon
+            }
+          })
+        )
+      }
+      request.logIn(user, (error_) => {
+        if (error_) {
+          return response.render('index', { error: JSON.stringify(error_) })
+        }
+        const redirectUrl =
+          request.session[REDIRECT_URL_PROPERTY] ||
+          user['startPage'] ||
+          '/timesheet'
+        return response.redirect(redirectUrl)
+      })
+    }
+  )(request, response, next)
+}
+
+/**
+ * Handler for /auth/google/callback
+ *
+ * @param request - Request
+ * @param response - Response
+ * @param next - Next function
+ */
+export const googleAuthCallbackHandler = (
+  request: Request,
+  response: Response,
+  next: NextFunction
+) => {
+  passport.authenticate(
+    'google',
+    {
+      failureRedirect: '/'
+    },
     (error: Error, user: Express.User) => {
       if (error || !user) {
         const _error = error instanceof SigninError ? error : SIGNIN_FAILED
@@ -86,7 +152,11 @@ export const signOutHandler = (request: Request, response: Response) => {
 
 auth.get('/signin', signInHandler)
 
+auth.get('/google/signin', googleSignInHandler)
+
 auth.post('/callback', authCallbackHandler)
+
+auth.get('/google/callback', googleAuthCallbackHandler)
 
 auth.get('/signout', signOutHandler)
 
