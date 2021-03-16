@@ -9,7 +9,7 @@ import styles from './Roles.module.scss'
 
 /**
  * Columns hook for Roles
- * 
+ *
  * @category Roles
  */
 export function useColumns({ setPanel }) {
@@ -38,10 +38,12 @@ export function useColumns({ setPanel }) {
         <DefaultButton
           disabled={role.readOnly}
           text={t('common.editLabel')}
-          onClick={() =>  setPanel({
-            headerText: t('admin.editRole'),
-            model: role
-          })}
+          onClick={() =>
+            setPanel({
+              headerText: t('admin.editRole'),
+              model: role
+            })
+          }
         />
       </>
     ))

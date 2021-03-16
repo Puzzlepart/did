@@ -1,4 +1,4 @@
-<!-- ⚠️ This README has been generated from the file(s) "blueprint.md" ⚠️--><p align="center">
+<!-- ⚠️ This README has been generated from the file(s) "README.blueprint" ⚠️--><p align="center">
   <img src="./server/public/images/favicon/android-chrome-192x192.png" alt="Logo" width="192" height="192" />
 </p> <p align="center">
   <b>The calendar is your Timesheet</b></br>
