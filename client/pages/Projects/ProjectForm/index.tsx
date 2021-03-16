@@ -1,6 +1,5 @@
 /* eslint-disable tsdoc/syntax */
 import { useMutation } from '@apollo/client'
-import AppConfig from 'AppConfig'
 import {
   ConditionalWrapper,
   IconPicker,
@@ -16,6 +15,7 @@ import {
   TextField,
   Toggle
 } from 'office-ui-fabric-react'
+import { config } from 'package'
 import React, { FunctionComponent, useContext, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LabelObject as Label } from 'types'
@@ -107,7 +107,7 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (
           disabled={state.editMode}
           className={styles.inputField}
           label={t('projects.keyFieldLabel')}
-          description={t('projects.keyFieldDescription', AppConfig)}
+          description={t('projects.keyFieldDescription', config.app)}
           required={true}
           errorMessage={state.validation.errors.key}
           onChange={(_event, value) =>
@@ -148,7 +148,7 @@ export const ProjectForm: FunctionComponent<IProjectFormProps> = (
         <TextField
           className={styles.inputField}
           label={t('common.nameFieldLabel')}
-          description={t('projects.nameFieldDescription', AppConfig)}
+          description={t('projects.nameFieldDescription', config.app)}
           required={true}
           errorMessage={state.validation.errors.name}
           onChange={(_event, value) =>

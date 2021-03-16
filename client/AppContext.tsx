@@ -1,6 +1,6 @@
-import AppConfig from 'AppConfig'
 import { PERMISSION } from 'config/security/permissions'
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from 'i18n'
+import { config } from 'package'
 import { createContext } from 'react'
 import { Role, Subscription, User } from 'types'
 import { contains } from 'underscore'
@@ -45,7 +45,7 @@ export class ContextUser {
         if (contains(SUPPORTED_LANGUAGES, this._user?.preferredLanguage)) {
           return this._user.preferredLanguage
         }
-        return AppConfig.DEFAULT_USER_LANGUAGE
+        return config.app.DEFAULT_USER_LANGUAGE
       }
     }
   }

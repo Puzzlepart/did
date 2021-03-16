@@ -1,5 +1,4 @@
 import { useMutation } from '@apollo/client'
-import AppConfig from 'AppConfig'
 import {
   ConditionalWrapper,
   IconPicker,
@@ -12,6 +11,7 @@ import {
   PrimaryButton,
   TextField
 } from 'office-ui-fabric-react'
+import { config } from 'package'
 import React, { FunctionComponent, useContext, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CustomersContext } from '../context'
@@ -81,7 +81,7 @@ export const CustomerForm: FunctionComponent<ICustomerFormProps> = (
           className={styles.inputField}
           disabled={state.editMode}
           label={t('customers.keyFieldLabel')}
-          description={t('customers.keyFieldDescription', AppConfig)}
+          description={t('customers.keyFieldDescription', config.app)}
           required={true}
           errorMessage={state.validation.errors.key}
           onChange={(_event, value) =>
@@ -96,7 +96,7 @@ export const CustomerForm: FunctionComponent<ICustomerFormProps> = (
         <TextField
           className={styles.inputField}
           label={t('common.nameFieldLabel')}
-          description={t('customers.nameFieldDescription', AppConfig)}
+          description={t('customers.nameFieldDescription', config.app)}
           required={true}
           errorMessage={state.validation.errors.name}
           onChange={(_event, value) =>

@@ -75,6 +75,7 @@ const config = {
   },
   resolve: {
     alias: {
+      package: path.resolve(SRC_PATH, '../package.json'),
       common: path.resolve(SRC_PATH, 'common'),
       components: path.resolve(SRC_PATH, 'components'),
       config: path.resolve(SRC_PATH, 'config'),
@@ -85,7 +86,6 @@ const config = {
       types: path.resolve(SRC_PATH, 'types'),
       utils: path.resolve(SRC_PATH, 'utils'),
       AppContext: path.resolve(SRC_PATH, 'AppContext'),
-      AppConfig: path.resolve(SRC_PATH, 'App.config.json'),
       DateUtils: path.resolve(__dirname, 'shared/utils/date'),
     },
     extensions: [
