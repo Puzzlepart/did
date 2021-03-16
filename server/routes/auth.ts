@@ -8,13 +8,13 @@ const auth = Router()
 const REDIRECT_URL_PROPERTY = '__redirectUrl'
 
 /**
- * Handler for /auth/signin
+ * Handler for /auth/ad/signin
  *
  * @param request - Request
  * @param response - Response
  * @param next - Next function
  */
-export const signInHandler = (
+export const adSignInHandler = (
   request: Request,
   response: Response,
   next: NextFunction
@@ -29,7 +29,7 @@ export const signInHandler = (
 }
 
 /**
- * Handler for /auth/signin/google
+ * Handler for /auth/google/signin/
  *
  * @param request - Request
  */
@@ -51,7 +51,7 @@ export const googleSignInHandler = (
 }
 
 /**
- * Handler for /auth/callback and  /auth/google/callback
+ * Handler for /auth/ad/callback and  /auth/google/callback
  *
  * @param request - Request
  * @param response - Response
@@ -101,11 +101,11 @@ export const signOutHandler = (request: Request, response: Response) => {
   })
 }
 
-auth.get('/signin', signInHandler)
+auth.get('/ad/signin', adSignInHandler)
 
 auth.get('/google/signin', googleSignInHandler)
 
-auth.post('/callback', authCallbackHandler('azuread-openidconnect'))
+auth.post('/ad/callback', authCallbackHandler('azuread-openidconnect'))
 
 auth.get('/google/callback', authCallbackHandler('google'))
 
