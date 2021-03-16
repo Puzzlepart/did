@@ -311,7 +311,7 @@
     "toDateLabel": "Til:",
     "rangeLabel": "Tidsrom",
     "totalHours": "Timar totalt",
-    "userReportSummary": "Du har jobba **{{hours}}** timar for *{{projects}}** prosjekt _{{preset}}_. \nKlikk **Eksporter** for å eksportere timane dine til Excel.",
+    "userReportSummary": "Du har jobba **{{hours}}** timar for {{projects}} prosjekt {{preset}}. \nKlikk _Eksporter til Excel_ for å eksportere timane dine til Excel.",
     "exportExcel": "Eksporter til Excel",
     "errorFallbackHeader": "Det virkar som noko gjekk gale",
     "tryAgainText": "Prøv igjen, det kan teoretisk sett fungere ...",

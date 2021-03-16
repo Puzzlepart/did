@@ -312,7 +312,7 @@
     "toDateLabel": "To:",
     "rangeLabel": "Range",
     "totalHours": "Hours total",
-    "userReportSummary": "You have worked **{{hours}}** hours for **{{projects}}** projects _{{preset}}_. Click **Export** to export your hours to Excel.",
+    "userReportSummary": "You have worked **{{hours}}** hours for **{{projects}}** projects _{{preset}}_. Click _Export to Excel_ to export your hours to Excel.",
     "exportExcel": "Export to Excel",
     "errorFallbackHeader": "It looks like something went wrong",
     "tryAgainText": "Try again, it might work...",
