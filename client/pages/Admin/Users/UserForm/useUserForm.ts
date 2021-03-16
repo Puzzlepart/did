@@ -45,7 +45,6 @@ export function useUserForm({ props }) {
    */
   const isFormValid = () =>
     !validator.isEmpty(model?.id || '') &&
-    validator.isUUID(model?.id || '') &&
     !validator.isEmpty(model?.displayName || '')
 
   const adSync = subscription?.settings?.adsync || { properties: [] }
