@@ -74,6 +74,9 @@ Reusable React Function components.
 
 ### Function Component Functions
 
+- [DeleteLink](components.md#deletelink)
+- [DisableLink](components.md#disablelink)
+- [EditLink](components.md#editlink)
 - [FilterPanel](components.md#filterpanel)
 - [SearchCustomer](components.md#searchcustomer)
 - [SearchProject](components.md#searchproject)
@@ -242,6 +245,54 @@ A component that supports a MessageBar with markdown using react-markdown
 Defined in: [client/components/UserMessage/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/index.tsx#L18)
 
 ## Function Component Functions
+
+### DeleteLink
+
+▸ `Const`**DeleteLink**(`__namedParameters`: *IDeleteLinkProps*): *Element*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`__namedParameters` | *IDeleteLinkProps* |
+
+**Returns:** *Element*
+
+Defined in: [client/components/DeleteLink/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/DeleteLink/index.tsx#L11)
+
+___
+
+### DisableLink
+
+▸ `Const`**DisableLink**(`__namedParameters`: *IDisableLinkProps*): *Element*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`__namedParameters` | *IDisableLinkProps* |
+
+**Returns:** *Element*
+
+Defined in: [client/components/DisableLink/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/DisableLink/index.tsx#L11)
+
+___
+
+### EditLink
+
+▸ `Const`**EditLink**(`__namedParameters`: *IEditLinkProps*): *Element*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`__namedParameters` | *IEditLinkProps* |
+
+**Returns:** *Element*
+
+Defined in: [client/components/EditLink/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/EditLink/index.tsx#L11)
+
+___
 
 ### FilterPanel
 

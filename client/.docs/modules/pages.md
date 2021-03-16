@@ -320,7 +320,7 @@ ___
 
 **Returns:** *Element*
 
-Defined in: [client/pages/Admin/Roles/index.tsx:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Roles/index.tsx#L15)
+Defined in: [client/pages/Admin/Roles/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Roles/index.tsx#L14)
 
 ___
 
@@ -346,7 +346,7 @@ Manage users
 
 **Returns:** *Element*
 
-Defined in: [client/pages/Admin/Users/index.tsx:25](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Users/index.tsx#L25)
+Defined in: [client/pages/Admin/Users/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/pages/Admin/Users/index.tsx#L20)
 
 ___
 

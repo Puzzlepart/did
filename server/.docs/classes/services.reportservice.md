@@ -44,7 +44,7 @@ Name | Type | Description |
 
 **Returns:** [*ReportService*](services_report.reportservice.md)
 
-Defined in: [server/services/report.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L34)
+Defined in: [server/services/report.ts:33](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L33)
 
 ## Properties
 
@@ -56,7 +56,7 @@ Defined in: [server/services/report.ts:34](https://github.com/Puzzlepart/did/blo
 
 ### \_generatePresetQuery
 
-▸ `Private`**_generatePresetQuery**(`preset`: [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset)): *FilterQuery*<[*TimeEntry*](graphql.timeentry.md)\>
+▸ `Private`**_generatePresetQuery**(`preset`: [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset)): *any*
 
 Generate preset query
 
@@ -66,9 +66,9 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `preset` | [*ReportsQueryPreset*](../modules/graphql.md#reportsquerypreset) | Query preset    |
 
-**Returns:** *FilterQuery*<[*TimeEntry*](graphql.timeentry.md)\>
+**Returns:** *any*
 
-Defined in: [server/services/report.ts:59](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L59)
+Defined in: [server/services/report.ts:58](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L58)
 
 ___
 
@@ -86,7 +86,7 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [server/services/report.ts:94](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L94)
+Defined in: [server/services/report.ts:83](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L83)
 
 ___
 
@@ -104,7 +104,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/report.ts:143](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L143)
+Defined in: [server/services/report.ts:132](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L132)
 
 ___
 
@@ -116,7 +116,7 @@ Get forecast report
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/report.ts:183](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L183)
+Defined in: [server/services/report.ts:172](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L172)
 
 ___
 
@@ -136,7 +136,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/report.ts:154](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L154)
+Defined in: [server/services/report.ts:143](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L143)
 
 ___
 
@@ -156,4 +156,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/report.ts:214](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L214)
+Defined in: [server/services/report.ts:203](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L203)
