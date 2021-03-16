@@ -21,7 +21,7 @@ export const onVerifySignin = async (
   done: VerifyCallback
 ) => {
   // eslint-disable-next-line no-console
-  console.log(profile)
+  console.log({ profile })
   const subSrv = new SubscriptionService({
     db: mcl.db(environment('MONGO_DB_DB_NAME'))
   })
