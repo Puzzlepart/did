@@ -28,13 +28,21 @@ export const Home: FunctionComponent = () => {
           }}
         />
       )}
-      <div hidden={!!subscription || !!error}>
-        <DefaultButton
-          onClick={() => document.location.replace('/auth/signin')}
-          iconProps={{ iconName: 'WindowsLogo' }}
-          text={t('common.ms365signInText')}
-        />
-      </div>
+      {(!subscription || error) && (
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <DefaultButton
+            onClick={() => document.location.replace('/auth/signin')}
+            iconProps={{ iconName: 'WindowsLogo' }}
+            text={t('common.ms365signInText')}
+          />
+          <DefaultButton
+            onClick={() => document.location.replace('/auth/google/signin')}
+            iconProps={{ iconName: 'Page' }}
+            style={{ marginTop: 10 }}
+            text={t('common.googleSignInText')}
+          />
+        </div>
+      )}
     </div>
   )
 }
