@@ -17,6 +17,7 @@ import MatchingEngine from './matching'
 import {
   IConnectEventsParameters,
   IGetTimesheetParameters,
+  IProviderEventsParameters,
   ISubmitPeriodParameters,
   ITimesheetPeriodData,
   IUnsubmitPeriodParameters
@@ -84,36 +85,12 @@ export class TimesheetService {
           }
         } else {
           const engine = new MatchingEngine(data)
-          let events: any[]
-          switch (this.context.provider) {
-            case 'google':
-              {
-                events = await this._googleCalSvc.getEvents(
-                  periods[index].startDate,
-                  periods[index].endDate,
-                  parameters.tzOffset
-                )
-              }
-              break
-            default: {
-              events = await this._msgraphSvc.getEvents(
-                periods[index].startDate,
-                periods[index].endDate,
-                {
-                  tzOffset: parameters.tzOffset,
-                  returnIsoDates: false
-                }
-              )
-            }
-          }
-          periods[index].events = engine.matchEvents(events).map((event_) => ({
-            ...event_,
-            date: DateUtils.formatDate(
-              event_.startDateTime,
-              parameters.dateFormat,
-              parameters.locale
-            )
-          }))
+          periods[index].events = await this._getEventsFromProvider({
+            ...periods[index],
+            ...parameters,
+            provider: this.context.provider,
+            engine
+          })
         }
       }
       return periods
@@ -131,14 +108,11 @@ export class TimesheetService {
     parameters: ISubmitPeriodParameters
   ): Promise<void> {
     try {
-      const events = await this._msgraphSvc.getEvents(
-        parameters.period.startDate,
-        parameters.period.endDate,
-        {
-          tzOffset: parameters.tzOffset,
-          returnIsoDates: false
-        }
-      )
+      const events = await this._getEventsFromProvider({
+        ...parameters.period,
+        ...parameters,
+        provider: this.context.provider
+      })
       const period: ITimesheetPeriodData = {
         ...this._getPeriodData(parameters.period.id, this.context.userId),
         hours: 0,
@@ -188,6 +162,49 @@ export class TimesheetService {
     } catch (error) {
       throw error
     }
+  }
+
+  /**
+   * Get events from provider
+   *
+   * @param params - Parameters
+   *
+   * @returns Events
+   */
+  private async _getEventsFromProvider({
+    provider,
+    startDate,
+    endDate,
+    tzOffset,
+    dateFormat,
+    locale,
+    engine = null
+  }: IProviderEventsParameters) {
+    let events: any[]
+    switch (provider) {
+      case 'google':
+        {
+          events = await this._googleCalSvc.getEvents(
+            startDate,
+            endDate,
+            tzOffset
+          )
+        }
+        break
+      default: {
+        events = await this._msgraphSvc.getEvents(startDate, endDate, {
+          tzOffset,
+          returnIsoDates: false
+        })
+      }
+    }
+    if (engine) {
+      return engine.matchEvents(events).map((event_) => ({
+        ...event_,
+        date: DateUtils.formatDate(event_.startDateTime, dateFormat, locale)
+      }))
+    }
+    return events
   }
 
   /**

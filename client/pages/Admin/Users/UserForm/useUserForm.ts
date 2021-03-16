@@ -49,6 +49,15 @@ export function useUserForm({ props }) {
 
   const adSync = subscription?.settings?.adsync || { properties: [] }
 
+  const inputProps = ({ key, label }): ITextFieldProps => ({
+    label,
+    disabled: contains(adSync?.properties, key),
+    description:
+      contains(adSync?.properties, key) && t('admin.userFieldAdSync'),
+    value: model[key],
+    onChange: (_event, value) => setModel({ ...model, [key]: value })
+  })
+
   return {
     t,
     adSync,
@@ -58,13 +67,6 @@ export function useUserForm({ props }) {
     setModel,
     onSave,
     isFormValid,
-    inputProps: ({ key, label }): ITextFieldProps => ({
-      label,
-      disabled: contains(adSync?.properties, key),
-      description:
-        contains(adSync?.properties, key) && t('admin.userFieldAdSync'),
-      value: model[key],
-      onChange: (_event, value) => setModel({ ...model, [key]: value })
-    })
+    inputProps
   }
 }

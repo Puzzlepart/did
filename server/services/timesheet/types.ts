@@ -3,13 +3,19 @@ import {
   Project,
   TimesheetPeriodInput
 } from '../../graphql/resolvers/types'
+import MatchingEngine from './matching'
 
 export interface IGetTimesheetParameters {
   startDate: string
   endDate: string
-  locale: string
-  dateFormat: string
   tzOffset: number
+  locale?: string
+  dateFormat?: string
+}
+
+export interface IProviderEventsParameters extends IGetTimesheetParameters {
+  provider: 'google' | 'microsoft'
+  engine?: MatchingEngine
 }
 
 export interface ISubmitPeriodParameters {
