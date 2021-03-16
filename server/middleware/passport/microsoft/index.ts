@@ -39,7 +39,7 @@ export const azureAdStrategy = (mcl: MongoClient) => {
       clientSecret: environment('MICROSOFT_CLIENT_SECRET'),
       validateIssuer: false,
       passReqToCallback: false,
-      scope: environment('MICROSOFT_SCOPES').split(' ')
+      scope: environment('MICROSOFT_SCOPES', undefined, { splitBy: ' ' })
     },
     (
       _iss: string,

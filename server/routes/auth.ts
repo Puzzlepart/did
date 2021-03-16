@@ -8,45 +8,19 @@ const auth = Router()
 const REDIRECT_URL_PROPERTY = '__redirectUrl'
 
 /**
- * Handler for /auth/ad/signin
+ * Handler for /auth/ad/signin and /auth/google/signin
  *
  * @param request - Request
  * @param response - Response
  * @param next - Next function
  */
-export const adSignInHandler = (
-  request: Request,
-  response: Response,
-  next: NextFunction
-) => {
+export const signInHandler = (
+  strategy: 'azuread-openidconnect' | 'google',
+  options: passport.AuthenticateOptions
+) => (request: Request, response: Response, next: NextFunction) => {
   request.session.regenerate(() => {
     request.session[REDIRECT_URL_PROPERTY] = request.query.redirectUrl
-    passport.authenticate('azuread-openidconnect', {
-      prompt: environment('MICROSOFT_SIGNIN_PROMPT'),
-      failureRedirect: '/'
-    })(request, response, next)
-  })
-}
-
-/**
- * Handler for /auth/google/signin/
- *
- * @param request - Request
- */
-export const googleSignInHandler = (
-  request: Request,
-  response: Response,
-  next: NextFunction
-) => {
-  request.session.regenerate(() => {
-    request.session[REDIRECT_URL_PROPERTY] = request.query.redirectUrl
-    passport.authenticate('google', {
-      scope: [
-        'https://www.googleapis.com/auth/userinfo.profile',
-        'https://www.googleapis.com/auth/userinfo.email',
-        'https://www.googleapis.com/auth/calendar.readonly'
-      ]
-    })(request, response, next)
+    passport.authenticate(strategy, options)(request, response, next)
   })
 }
 
@@ -101,9 +75,20 @@ export const signOutHandler = (request: Request, response: Response) => {
   })
 }
 
-auth.get('/ad/signin', adSignInHandler)
+auth.get(
+  '/ad/signin',
+  signInHandler('azuread-openidconnect', {
+    prompt: environment('MICROSOFT_SIGNIN_PROMPT'),
+    failureRedirect: '/'
+  })
+)
 
-auth.get('/google/signin', googleSignInHandler)
+auth.get(
+  '/google/signin',
+  signInHandler('google', {
+    scope: environment('GOOGLE_SCOPES', undefined, { splitBy: ' ' })
+  })
+)
 
 auth.post('/ad/callback', authCallbackHandler('azuread-openidconnect'))
 
