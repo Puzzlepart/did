@@ -76,7 +76,13 @@ export const passportMiddleware = (mongoClient: MongoClient) => {
         userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo'
       },
       (accessToken, refreshToken, profile, done) =>
-        onVerifySigninGoogle(mongoClient, accessToken, refreshToken, profile, done)
+        onVerifySigninGoogle(
+          mongoClient,
+          accessToken,
+          refreshToken,
+          profile,
+          done
+        )
     )
   }
 

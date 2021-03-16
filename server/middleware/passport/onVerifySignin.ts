@@ -96,7 +96,9 @@ export const onVerifySigninGoogle = async (
   const subSrv = new SubscriptionService({
     db: mongoClient.db(environment('MONGO_DB_DB_NAME'))
   })
-  const subscription = await subSrv.getById(environment('GOOGLE_TEMP_SUBSCRIPTION_ID'))
+  const subscription = await subSrv.getById(
+    environment('GOOGLE_TEMP_SUBSCRIPTION_ID')
+  )
   if (!subscription) throw TENANT_NOT_ENROLLED
 
   const userSrv = new UserService({

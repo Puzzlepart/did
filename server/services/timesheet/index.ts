@@ -46,7 +46,7 @@ export class TimesheetService {
     private readonly _fteSvc: ForecastedTimeEntryService,
     private readonly _cperiodSvc: ConfirmedPeriodsService,
     private readonly _fperiodSvc: ForecastedPeriodsService
-  ) { }
+  ) {}
 
   /**
    * Get timesheet
@@ -86,13 +86,14 @@ export class TimesheetService {
           const engine = new MatchingEngine(data)
           let events: any[]
           switch (this.context.provider) {
-            case 'google': {
-              events = await this._googleCalSvc.getEvents(
-                periods[index].startDate,
-                periods[index].endDate,
-                parameters.tzOffset
-              )
-            }
+            case 'google':
+              {
+                events = await this._googleCalSvc.getEvents(
+                  periods[index].startDate,
+                  periods[index].endDate,
+                  parameters.tzOffset
+                )
+              }
               break
             default: {
               events = await this._msgraphSvc.getEvents(

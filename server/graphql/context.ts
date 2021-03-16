@@ -26,10 +26,9 @@ export class Context {
    */
   public userId?: string
 
-
   /**
    * Provider
-   * 
+   *
    * google or microsoft
    */
   provider?: 'google' | 'microsoft'

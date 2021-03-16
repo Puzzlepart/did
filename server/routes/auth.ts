@@ -41,10 +41,7 @@ export const googleSignInHandler = (
   request.session.regenerate(() => {
     request.session[REDIRECT_URL_PROPERTY] = request.query.redirectUrl
     passport.authenticate('google', {
-      scope: [
-        'profile',
-        'https://www.googleapis.com/auth/calendar.readonly'
-      ]
+      scope: ['profile', 'https://www.googleapis.com/auth/calendar.readonly']
     })(request, response, next)
   })
 }
