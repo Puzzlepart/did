@@ -152,7 +152,8 @@
     "roleInUseMessage": "This role is assigned to {{count}} users and cannot be deleted. ",
     "userHiddenFromReportsLabel": "Hidden from reports",
     "summaryViewProgressLabel": "Loading summary",
-    "summaryViewProgressDescription": "To give you the freshest results, we're generating a summary from the latest data..."
+    "summaryViewProgressDescription": "To give you the freshest results, we're generating a summary from the latest data...",
+    "userFieldAdSync": "The field is automatically synchronized from Azure AD when the user logs in, and can not be modified in Did."
   },
   "reports": {
     "generatingReportLabel": "Generating report",
