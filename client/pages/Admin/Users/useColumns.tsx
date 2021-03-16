@@ -1,4 +1,5 @@
 /* eslint-disable tsdoc/syntax */
+import { DeleteLink, DisableLink } from 'components'
 import { IColumn, Icon } from 'office-ui-fabric-react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -30,15 +31,19 @@ export function useColumns({ setUserForm }): IColumn[] {
     col('givenName', t('common.givenNameLabel'), { maxWidth: 160 }),
     col('jobTitle', t('common.jobTitleLabel'), { maxWidth: 140 }),
     col('mail', t('common.mailLabel'), { maxWidth: 180 }),
-    col('editLink', '', {}, (user: User) => (
-      <EditLink
-        onClick={() => {
-          setUserForm({
-            headerText: user.displayName,
-            user
-          })
-        }}
-      />
+    col('actions', '', { maxWidth: 100 }, (user: User) => (
+      <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+        <EditLink
+          onClick={() => {
+            setUserForm({
+              headerText: user.displayName,
+              user
+            })
+          }}
+        />
+        <DisableLink disabled={true} />
+        <DeleteLink disabled={true} />
+      </div>
     ))
   ]
 }
