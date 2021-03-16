@@ -40,7 +40,7 @@ Name | Type | Description |
 
 **Returns:** *void*
 
-Defined in: [server/routes/auth.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L34)
+Defined in: [server/routes/auth.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L38)
 
 ___
 
@@ -79,4 +79,4 @@ Name | Type | Description |
 
 **Returns:** *void*
 
-Defined in: [server/routes/auth.ts:69](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L69)
+Defined in: [server/routes/auth.ts:80](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L80)

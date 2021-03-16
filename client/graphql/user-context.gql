@@ -23,6 +23,7 @@ query UserContext {
       icon
       permissions
     }
+    startPage
     preferredLanguage
     configuration
   }

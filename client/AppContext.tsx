@@ -12,7 +12,7 @@ export class ContextUser {
   public displayName: string
   public role: Role
   public mail: string
-  public preferredLanguage: string
+  public startPage: string
   public configuration: { [key: string]: any }
 
   /**
@@ -20,27 +20,34 @@ export class ContextUser {
    *
    * @param _user - User object
    */
-  constructor(_user?: User) {
-    if (!_user) {
-      this.preferredLanguage = DEFAULT_LANGUAGE
-    } else {
+  constructor(private _user?: User) {
+    if (_user) {
       this.id = _user.id
       this.displayName = _user.displayName
       this.mail = _user.mail
       this.role = _user.role as Role
-      this.preferredLanguage = _user.preferredLanguage
+      this.startPage = _user.startPage
       this.configuration = tryParseJson(_user.configuration, {})
     }
   }
 
   /**
-   * User language
+   * Preferred user language
    */
-  public get language() {
-    if (contains(SUPPORTED_LANGUAGES, this.preferredLanguage)) {
-      return this.preferredLanguage
+  public get preferredLanguage() {
+    if (!this._user) return DEFAULT_LANGUAGE
+    switch (this._user.preferredLanguage.toLowerCase()) {
+      case 'nb-no':
+        return 'nb'
+      case 'nn-no':
+        return 'nn'
+      default: {
+        if (contains(SUPPORTED_LANGUAGES, this._user?.preferredLanguage)) {
+          return this._user.preferredLanguage
+        }
+        return AppConfig.DEFAULT_USER_LANGUAGE
+      }
     }
-    return AppConfig.DEFAULT_USER_LANGUAGE
   }
 
   /**

@@ -320,7 +320,9 @@
     "weekColumnTooltipTitle": "Uke {{week}}",
     "weekColumnTooltipHoursTotal": "\nTotalt <b>{{hours}} timer</b>.",
     "weekColumnTooltipHoursCustomer": "<b>{{hours}} timer</b> for {{customer}}",
-    "disable": "Deaktiver"
+    "disable": "Deaktiver",
+    "startPageLabel": "Startside",
+    "preferredLanguageDescription": "Did vil vise menyer og knapper på dette språket."
   },
   "navigation": {
     "timesheet": "Timeliste",

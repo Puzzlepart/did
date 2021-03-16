@@ -37,6 +37,9 @@ export class User {
   mail?: string
 
   @Field({ nullable: true })
+  startPage?: string
+
+  @Field({ nullable: true })
   preferredLanguage?: string
 
   @Field({ nullable: true })
@@ -84,6 +87,9 @@ export class UserInput {
 
   @Field({ nullable: true })
   mail?: string
+
+  @Field({ nullable: true })
+  startPage?: string
 
   @Field({ nullable: true })
   preferredLanguage?: string

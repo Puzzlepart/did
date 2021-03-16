@@ -1,10 +1,13 @@
+/* eslint-disable tsdoc/syntax */
 import { Dropdown, Toggle } from 'office-ui-fabric-react'
 import React, { useContext } from 'react'
-import { UserSettingsContext } from './context'
-import { IUserSettingInputProps } from './types'
-import styles from './UserSettings.module.scss'
-import { IUserSettingDropdown } from './USER_SETTINGS'
+import { UserSettingsContext } from '../context'
+import { IUserSettingDropdown, IUserSettingInputProps } from '../types'
+import styles from './UserSettingInput.module.scss'
 
+/**
+ * @category UserMenu
+ */
 export const UserSettingInput = ({ user, setting }: IUserSettingInputProps) => {
   const { onUpdateUserSettings } = useContext(UserSettingsContext)
   const defaultValue = user[setting.key] || setting.defaultValue
@@ -16,7 +19,11 @@ export const UserSettingInput = ({ user, setting }: IUserSettingInputProps) => {
           <Dropdown
             {...(setting as IUserSettingDropdown)}
             onChange={(_event, option) =>
-              onUpdateUserSettings(setting.key, option.key.toString())
+              onUpdateUserSettings(
+                setting.key,
+                option.key.toString(),
+                setting.reloadAfterSave
+              )
             }
             defaultSelectedKey={defaultValue}
           />
@@ -29,7 +36,9 @@ export const UserSettingInput = ({ user, setting }: IUserSettingInputProps) => {
           <Toggle
             {...setting}
             defaultValue={defaultValue}
-            onChange={(_event, bool) => onUpdateUserSettings(setting.key, bool)}
+            onChange={(_event, bool) =>
+              onUpdateUserSettings(setting.key, bool, setting.reloadAfterSave)
+            }
           />
         )
       }
@@ -38,5 +47,10 @@ export const UserSettingInput = ({ user, setting }: IUserSettingInputProps) => {
       element = null
   }
 
-  return <div className={styles.inputContainer}>{element}</div>
+  return (
+    <div className={styles.root}>
+      {element}
+      <div className={styles.description}>{setting.description}</div>
+    </div>
+  )
 }

@@ -14,6 +14,7 @@ The App component
 ### Other Variables
 
 - [App](app.md#app)
+- [AppRouter](app.md#approuter)
 
 ### Function Component Functions
 
@@ -43,7 +44,15 @@ ___
 
 • `Const` **App**: *FunctionComponent*<IAppContext\>
 
-Defined in: [client/app/index.tsx:20](https://github.com/Puzzlepart/did/blob/dev/client/app/index.tsx#L20)
+Defined in: [client/app/index.tsx:17](https://github.com/Puzzlepart/did/blob/dev/client/app/index.tsx#L17)
+
+___
+
+### AppRouter
+
+• `Const` **AppRouter**: FunctionComponent
+
+Defined in: client/app/AppRouter.tsx:17
 
 ## Function Component Functions
 

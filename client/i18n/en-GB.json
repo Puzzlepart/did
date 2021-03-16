@@ -321,7 +321,9 @@
     "weekColumnTooltipTitle": "Week {{week}}",
     "weekColumnTooltipHoursTotal": "<b>{{hours}} hours</b> total.",
     "weekColumnTooltipHoursCustomer": "<b>{{hours}} hours</b> for {{customer}}",
-    "disable": "Disable"
+    "disable": "Disable",
+    "startPageLabel": "Start page",
+    "preferredLanguageDescription": "Did will display menus and buttons in this language."
   },
   "navigation": {
     "timesheet": "Timesheet",

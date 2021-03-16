@@ -48,8 +48,8 @@ export const boostrap = async () => {
   }
 
   const context = await getContext()
-  DateUtils.setup(context.user.language)
-  i18next.changeLanguage(context.user.language)
+  DateUtils.setup(context.user.preferredLanguage)
+  i18next.changeLanguage(context.user.preferredLanguage)
 
   ReactDom.render(
     <ApolloProvider client={client}>

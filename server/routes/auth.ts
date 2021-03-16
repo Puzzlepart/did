@@ -61,7 +61,9 @@ export const authCallbackHandler = (
           return response.render('index', { error: JSON.stringify(error_) })
         }
         const redirectUrl =
-          request.session[REDIRECT_URL_PROPERTY] || '/timesheet'
+          request.session[REDIRECT_URL_PROPERTY] ||
+          user['startPage'] ||
+          '/timesheet'
         return response.redirect(redirectUrl)
       })
     }
