@@ -135,13 +135,10 @@ export class App {
   setupRoutes() {
     const index = express.Router()
     index.get('/', (request, response) => {
-      if (request.isUnauthenticated()) {
-        if (request.originalUrl !== '/') {
-          return response.redirect(
-            `/auth/signin?redirectUrl=${request.originalUrl}`
-          )
-        }
-        return response.render('index')
+      if (request.isUnauthenticated() && request.originalUrl !== '/') {
+        return response.redirect(
+          `/auth/signin?redirectUrl=${request.originalUrl}`
+        )
       }
       return response.render('index')
     })
