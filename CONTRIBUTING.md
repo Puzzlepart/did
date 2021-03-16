@@ -62,15 +62,15 @@ Now you need to set the required environment variables from this table:
 
 | Key                             | Description                                                  | Required |
 | ------------------------------- | ------------------------------------------------------------ | -------- |
-| OAUTH_APP_ID                    | ID of the AD application registration.                       | **Yes**  |
-| OAUTH_APP_PASSWORD              | Password/key of the AD application registration.             | **Yes**  |
+| MICROSOFT_CLIENT_ID                    | ID of the AD application registration.                       | **Yes**  |
+| MICROSOFT_CLIENT_SECRET              | Password/key of the AD application registration.             | **Yes**  |
 | AZURE_STORAGE_CONNECTION_STRING | Connection string for the Azure Table Storage                | **Yes**  |
 | SESSION_SIGNING_KEY             | Just a random string to secure the sessions.                 | **Yes**  |
 | BUNDLE_ANALYZER_MODE            | See https://www.npmjs.com/package/webpack-bundle-analyzer. Default is server. | No       |
 | OPEN_DELAY                      | Delay in seconds for opening Did in browser when running `watch`. | No       |
 | DEBUG                           | To debug the Node backend. E.g. `app*` to see all logs from app. See https://www.npmjs.com/package/debug. | No       |
 | NO_BROWSER                      | Set to `1` if you don't want to automatically open Did in the browser when running `watch` task. | No       |
-| OAUTH_SCOPES                    | Scopes for Microsoft Graph queries. See https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent. | No       |
+| MICROSOFT_SCOPES                    | Scopes for Microsoft Graph queries. See https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent. | No       |
 
 ### Commits
 We are using [husky](https://github.com/typicode/husky) hooks to automatically run npm script `lint:fix` before commits. This is to make sure all files are linted and ready to go at all times. This is easy to forget when working on a branch.

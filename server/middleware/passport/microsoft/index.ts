@@ -8,7 +8,7 @@ import { onVerifySignin } from './onVerifySignin'
  * Get redirect URL
  */
 function getRedirectUrl() {
-  let redirectUrl = environment('OAUTH_REDIRECT_URI')
+  let redirectUrl = environment('MICROSOFT_REDIRECT_URI')
   if (environment('LOCALTUNNEL_SUBDOMAIN')) {
     const _redirectUrl = fs.readFileSync('.localtunnel', 'utf-8')
     if (_redirectUrl) {
@@ -31,15 +31,15 @@ export const azureAdStrategy = (mcl: MongoClient) => {
     {
       identityMetadata:
         'https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration',
-      clientID: environment('OAUTH_APP_ID'),
+      clientID: environment('MICROSOFT_CLIENT_ID'),
       responseType: 'code id_token',
       responseMode: 'form_post',
       redirectUrl,
       allowHttpForRedirectUrl: true,
-      clientSecret: environment('OAUTH_APP_PASSWORD'),
+      clientSecret: environment('MICROSOFT_CLIENT_SECRET'),
       validateIssuer: false,
       passReqToCallback: false,
-      scope: environment('OAUTH_SCOPES').split(' ')
+      scope: environment('MICROSOFT_SCOPES').split(' ')
     },
     (
       _iss: string,

@@ -22,7 +22,7 @@ export const signInHandler = (
   request.session.regenerate(() => {
     request.session[REDIRECT_URL_PROPERTY] = request.query.redirectUrl
     passport.authenticate('azuread-openidconnect', {
-      prompt: environment('OAUTH_SIGNIN_PROMPT'),
+      prompt: environment('MICROSOFT_SIGNIN_PROMPT'),
       failureRedirect: '/'
     })(request, response, next)
   })
