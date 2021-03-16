@@ -6,7 +6,6 @@ on:
       - feature/google-auth
     paths-ignore:
       - '**.md'
-      - '**.yml'
 
 jobs:
   build-and-deploy:
