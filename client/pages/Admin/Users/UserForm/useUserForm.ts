@@ -16,7 +16,6 @@ export function useUserForm({ props }) {
   const [model, setModel] = useState<User>({})
   const [addOrUpdateUser] = useMutation($addOrUpdateUser)
 
-
   useEffect(() => {
     setModel(props.user || {})
   }, [props.user])
@@ -63,7 +62,8 @@ export function useUserForm({ props }) {
     inputProps: ({ key, label }): ITextFieldProps => ({
       label,
       disabled: contains(adSync?.properties, key),
-      description: contains(adSync?.properties, key) && t('admin.userFieldAdSync'),
+      description:
+        contains(adSync?.properties, key) && t('admin.userFieldAdSync'),
       value: model[key],
       onChange: (_event, value) => setModel({ ...model, [key]: value })
     })

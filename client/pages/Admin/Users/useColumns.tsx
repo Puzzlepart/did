@@ -7,7 +7,7 @@ import { generateColumn as col } from 'utils/generateColumn'
 
 /**
  * Columns hook
- * 
+ *
  * @category Users
  */
 export function useColumns({ setUserForm }): IColumn[] {
@@ -30,10 +30,15 @@ export function useColumns({ setUserForm }): IColumn[] {
     col('jobTitle', t('common.jobTitleLabel'), { maxWidth: 140 }),
     col('mail', t('common.mailLabel'), { maxWidth: 180 }),
     col('actions', '', {}, (user: User) => (
-      <DefaultButton text={t('common.editLabel')} onClick={() => setUserForm({
-        headerText: user.displayName,
-        user
-      })} />
+      <DefaultButton
+        text={t('common.editLabel')}
+        onClick={() =>
+          setUserForm({
+            headerText: user.displayName,
+            user
+          })
+        }
+      />
     ))
   ]
 }

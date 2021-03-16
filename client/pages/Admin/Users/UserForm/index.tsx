@@ -52,13 +52,19 @@ export const UserForm: FunctionComponent<IUserFormProps> = (
       />
       <TextField
         className={styles.inputContainer}
-        {...inputProps({ key: 'givenName', label: t('common.givenNameLabel') })} />
+        {...inputProps({ key: 'givenName', label: t('common.givenNameLabel') })}
+      />
       <TextField
         className={styles.inputContainer}
-        {...inputProps({ key: 'displayName', label: t('common.displayNameLabel') })} />
+        {...inputProps({
+          key: 'displayName',
+          label: t('common.displayNameLabel')
+        })}
+      />
       <TextField
         className={styles.inputContainer}
-        {...inputProps({ key: 'jobTitle', label: t('common.jobTitleLabel') })} />
+        {...inputProps({ key: 'jobTitle', label: t('common.jobTitleLabel') })}
+      />
       <RolePicker
         className={styles.inputContainer}
         roles={roles}

@@ -13,7 +13,7 @@ import $users from './users.gql'
 
 /**
  * Users hook
- * 
+ *
  * @category Users
  */
 export function useUsers() {
