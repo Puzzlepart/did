@@ -17,7 +17,7 @@ class GoogleCalendarService {
       redirectUri: environment('GOOGLE_REDIRECT_URI')
     })
     client.setCredentials({
-      access_token: this._request.user['tokenParams']['accessToken']
+      access_token: this._request.user['tokenParams']['access_token']
     })
     this._cal = new calendar_v3.Calendar({
       auth: client

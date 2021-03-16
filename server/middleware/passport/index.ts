@@ -78,8 +78,10 @@ export const passportMiddleware = (mongoClient: MongoClient) => {
       (accessToken, refreshToken, profile, done) =>
         onVerifySigninGoogle(
           mongoClient,
-          accessToken,
-          refreshToken,
+          {
+            access_token: accessToken,
+            refresh_token: refreshToken
+          },
           profile,
           done
         )

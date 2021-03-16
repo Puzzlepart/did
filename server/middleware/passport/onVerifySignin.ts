@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { MongoClient } from 'mongodb'
 import { IProfile, VerifyCallback } from 'passport-azure-ad'
@@ -82,17 +83,18 @@ export const onVerifySigninMicrosoft = async (
  * On verify sign in Microsoft
  *
  * @param mongoClient - Mongo client
- * @param accessToken - Access token
+ * @param tokenParams - Token parameters
  * @param profile - User profile object
  * @param done - Done callback
  */
 export const onVerifySigninGoogle = async (
   mongoClient: MongoClient,
-  accessToken: string,
-  refreshToken: string,
+  tokenParams: any,
   profile: Profile,
   done: VerifyCallback
 ) => {
+  // eslint-disable-next-line no-console
+  console.log(profile)
   const subSrv = new SubscriptionService({
     db: mongoClient.db(environment('MONGO_DB_DB_NAME'))
   })
@@ -107,6 +109,6 @@ export const onVerifySigninGoogle = async (
 
   const user: any = await userSrv.getById(profile.id)
   user.subscription = subscription
-  user.tokenParams = { accessToken }
+  user.tokenParams = tokenParams
   done(null, user)
 }
