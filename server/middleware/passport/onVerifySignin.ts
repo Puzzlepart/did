@@ -89,13 +89,13 @@ export const onVerifySigninMicrosoft = async (
 export const onVerifySigninGoogle = async (
   mongoClient: MongoClient,
   accessToken: string,
+  refreshToken: string,
   profile: Profile,
   done: VerifyCallback
 ) => {
   const subSrv = new SubscriptionService({
     db: mongoClient.db(environment('MONGO_DB_DB_NAME'))
   })
-
   const subscription = await subSrv.getById(environment('GOOGLE_TEMP_SUBSCRIPTION_ID'))
   if (!subscription) throw TENANT_NOT_ENROLLED
 

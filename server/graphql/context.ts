@@ -26,6 +26,14 @@ export class Context {
    */
   public userId?: string
 
+
+  /**
+   * Provider
+   * 
+   * google or microsoft
+   */
+  provider?: 'google' | 'microsoft'
+
   /**
    * Subscription
    */
@@ -91,6 +99,7 @@ export const createContext = async (
       context.subscription = subscription
     } else {
       context.userId = get(request, 'user.id')
+      context.provider = get(request, 'user.provider')
       context.permissions = get(request, 'user.role.permissions')
     }
     if (!context.subscription)
