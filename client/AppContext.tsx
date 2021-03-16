@@ -36,11 +36,9 @@ export class ContextUser {
    */
   public get preferredLanguage() {
     if (!this._user) return DEFAULT_LANGUAGE
-    switch (this._user.preferredLanguage.toLowerCase()) {
-      case 'nb-no':
-        return 'nb'
-      case 'nn-no':
-        return 'nn'
+    switch ((this._user.preferredLanguage || '').toLowerCase()) {
+      case 'nb-no': return 'nb'
+      case 'nn-no': return 'nn'
       default: {
         if (contains(SUPPORTED_LANGUAGES, this._user?.preferredLanguage)) {
           return this._user.preferredLanguage
