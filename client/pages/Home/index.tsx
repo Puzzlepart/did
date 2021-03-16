@@ -37,7 +37,7 @@ export const Home: FunctionComponent = () => {
           />
           <DefaultButton
             onClick={() => document.location.replace('/auth/google/signin')}
-            iconProps={{ iconName: 'Page' }}
+            iconProps={{ iconName: 'Mail' }}
             style={{ marginTop: 10 }}
             text={t('common.googleSignInText')}
           />

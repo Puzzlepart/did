@@ -322,7 +322,8 @@
     "weekColumnTooltipHoursCustomer": "<b>{{hours}} timer</b> for {{customer}}",
     "disable": "Deaktiver",
     "startPageLabel": "Startside",
-    "preferredLanguageDescription": "Did vil vise menyar og knappar på dette språket."
+    "preferredLanguageDescription": "Did vil vise menyar og knappar på dette språket.",
+    "googleSignInText": "Logg på med Google"
   },
   "navigation": {
     "timesheet": "Timeliste",

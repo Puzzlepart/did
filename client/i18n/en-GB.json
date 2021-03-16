@@ -323,7 +323,8 @@
     "weekColumnTooltipHoursCustomer": "<b>{{hours}} hours</b> for {{customer}}",
     "disable": "Disable",
     "startPageLabel": "Start page",
-    "preferredLanguageDescription": "Did will display menus and buttons in this language."
+    "preferredLanguageDescription": "Did will display menus and buttons in this language.",
+    "googleSignInText": "Sign in with Google"
   },
   "navigation": {
     "timesheet": "Timesheet",
