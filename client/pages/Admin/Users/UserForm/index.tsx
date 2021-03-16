@@ -119,7 +119,7 @@ export const UserForm: FunctionComponent<IUserFormProps> = (
             className={styles.inputContainer}
             {...inputProps({ key: 'mail', label: t('common.mailLabel') })}
             onChange={(_event, value) => {
-              const id = value.replace(/[^\s\w]/gi, '')
+              const id = `${provider}${value}`.replace(/[^\s\w]/gi, '')
               setModel({ ...model, mail: value, id })
             }}
           />
