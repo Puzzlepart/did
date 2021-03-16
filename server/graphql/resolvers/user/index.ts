@@ -16,13 +16,13 @@ import { User, UserInput, UserQuery } from './types'
 /**
  * Resolver for `User`.
  *
- * `MSGraphService`, `UserService`  and
+ * `MSGraphService`, `UserService` and
  * `SubscriptionService` are injected through
  * _dependendy injection_.
  *
  * @see https://typegraphql.com/docs/dependency-injection.html
  *
- * @category Resolver
+ * @category GraphQL Resolver
  */
 @Service()
 @Resolver(User)

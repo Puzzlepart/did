@@ -122,7 +122,7 @@ Setup error handling using http-errors
 
 **Returns:** *void*
 
-Defined in: [server/app.ts:151](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L151)
+Defined in: [server/app.ts:152](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L152)
 
 ___
 

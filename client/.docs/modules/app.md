@@ -52,7 +52,7 @@ ___
 
 • `Const` **AppRouter**: FunctionComponent
 
-Defined in: client/app/AppRouter.tsx:17
+Defined in: [client/app/AppRouter.tsx:22](https://github.com/Puzzlepart/did/blob/dev/client/app/AppRouter.tsx#L22)
 
 ## Function Component Functions
 

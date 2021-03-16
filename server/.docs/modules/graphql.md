@@ -4,7 +4,7 @@
 
 ## Table of contents
 
-### Resolver Classes
+### GraphQL Resolver Classes
 
 - [ApiTokenResolver](../classes/graphql.apitokenresolver.md)
 - [CustomerResolver](../classes/graphql.customerresolver.md)

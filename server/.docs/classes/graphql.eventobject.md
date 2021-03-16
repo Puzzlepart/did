@@ -38,9 +38,17 @@
 
 ### constructor
 
-\+ **new EventObject**(): [*EventObject*](graphql.eventobject.md)
+\+ **new EventObject**(`data`: [*EventObject*](graphql.eventobject.md)): [*EventObject*](graphql.eventobject.md)
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`data` | [*EventObject*](graphql.eventobject.md) |
 
 **Returns:** [*EventObject*](graphql.eventobject.md)
+
+Defined in: [server/graphql/resolvers/timesheet/types/EventObject.ts:74](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L74)
 
 ## Properties
 
@@ -158,7 +166,7 @@ ___
 
 ### project
 
-• **project**: [*Project*](graphql.project.md)
+• `Optional` **project**: [*Project*](graphql.project.md)
 
 Defined in: [server/graphql/resolvers/timesheet/types/EventObject.ts:45](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/EventObject.ts#L45)
 
