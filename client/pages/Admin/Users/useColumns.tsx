@@ -1,9 +1,10 @@
 /* eslint-disable tsdoc/syntax */
-import { DefaultButton, IColumn, Icon } from 'office-ui-fabric-react'
+import { IColumn, Icon } from 'office-ui-fabric-react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Role, User } from 'types'
 import { generateColumn as col } from 'utils/generateColumn'
+import { EditLink } from '../../../components/EditLink'
 
 /**
  * Columns hook
@@ -29,15 +30,14 @@ export function useColumns({ setUserForm }): IColumn[] {
     col('givenName', t('common.givenNameLabel'), { maxWidth: 160 }),
     col('jobTitle', t('common.jobTitleLabel'), { maxWidth: 140 }),
     col('mail', t('common.mailLabel'), { maxWidth: 180 }),
-    col('actions', '', {}, (user: User) => (
-      <DefaultButton
-        text={t('common.editLabel')}
-        onClick={() =>
+    col('editLink', '', {}, (user: User) => (
+      <EditLink
+        onClick={() => {
           setUserForm({
             headerText: user.displayName,
             user
           })
-        }
+        }}
       />
     ))
   ]

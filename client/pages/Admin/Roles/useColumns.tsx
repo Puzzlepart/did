@@ -1,6 +1,7 @@
 /* eslint-disable tsdoc/syntax */
+import { EditLink } from 'components'
 import { PermissionList } from 'components/PermissionList'
-import { DefaultButton, Icon } from 'office-ui-fabric-react'
+import { Icon } from 'office-ui-fabric-react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Role } from 'types'
@@ -34,18 +35,15 @@ export function useColumns({ setPanel }) {
       (role: Role) => <PermissionList permissionIds={role.permissions} />
     ),
     col('edit', null, { maxWidth: 100 }, (role: Role) => (
-      <>
-        <DefaultButton
-          disabled={role.readOnly}
-          text={t('common.editLabel')}
-          onClick={() =>
-            setPanel({
-              headerText: t('admin.editRole'),
-              model: role
-            })
-          }
-        />
-      </>
+      <EditLink
+        hidden={role.readOnly}
+        onClick={() => {
+          setPanel({
+            headerText: t('admin.editRole'),
+            model: role
+          })
+        }}
+      />
     ))
   ]
 }
