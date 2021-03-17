@@ -7,7 +7,7 @@ import { MongoDocumentService } from './@document'
 /**
  * Forecasted time entries service
  *
- * @category Injectable container service
+ * @category Injectable Container Service
  */
 @Service({ global: false })
 export class ForecastedTimeEntryService extends MongoDocumentService<TimeEntry> {

@@ -12,7 +12,7 @@
 
 - [CacheScope](../enums/services.cachescope.md)
 
-### Injectable container service Classes
+### Injectable Container Service Classes
 
 - [ApiTokenService](../classes/services.apitokenservice.md)
 - [CacheService](../classes/services.cacheservice.md)

@@ -6,7 +6,7 @@ import { MongoDocumentService } from './@document'
 /**
  * Forecasted periods service
  *
- * @category Injectable container service
+ * @category Injectable Container Service
  */
 @Service({ global: false })
 export class ForecastedPeriodsService extends MongoDocumentService<any> {

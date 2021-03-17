@@ -11,7 +11,7 @@ import { MongoDocumentService } from './@document'
 /**
  * API token service
  *
- * @category Injectable container service
+ * @category Injectable Container Service
  */
 @Service({ global: false })
 export class ApiTokenService extends MongoDocumentService<ApiToken> {

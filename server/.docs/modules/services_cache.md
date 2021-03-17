@@ -8,7 +8,7 @@
 
 - [CacheScope](../enums/services_cache.cachescope.md)
 
-### Injectable container service Classes
+### Injectable Container Service Classes
 
 - [CacheService](../classes/services_cache.cacheservice.md)
 

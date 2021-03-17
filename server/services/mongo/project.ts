@@ -21,7 +21,7 @@ export type ProjectsData = {
 /**
  * Project service
  *
- * @category Injectable container service
+ * @category Injectable Container Service
  */
 @Service({ global: false })
 export class ProjectService extends MongoDocumentService<Project> {

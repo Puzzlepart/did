@@ -14,7 +14,7 @@ import { MongoDocumentService } from './@document'
 /**
  * Label service
  *
- * @category Injectable container service
+ * @category Injectable Container Service
  */
 @Service({ global: false })
 export class LabelService extends MongoDocumentService<Label> {

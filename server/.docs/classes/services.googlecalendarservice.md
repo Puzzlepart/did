@@ -69,7 +69,7 @@ ___
 
 ### getEvents
 
-▸ **getEvents**(`startDate`: *string*, `endDate`: *string*, `tzOffset`: *number*): *Promise*<any[]\>
+▸ **getEvents**(`startDateTimeIso`: *string*, `endDateTimeIso`: *string*): *Promise*<any[]\>
 
 Get events for the specified period using Google APIs
 
@@ -77,10 +77,9 @@ Get events for the specified period using Google APIs
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`startDate` | *string* | Start date (YYYY-MM-DD)   |
-`endDate` | *string* | End date (YYYY-MM-DD)   |
-`tzOffset` | *number* | Timezone offset    |
+`startDateTimeIso` | *string* | Start date time in `ISO format`   |
+`endDateTimeIso` | *string* | End date time in `ISO format`    |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/google/index.ts:56](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L56)
+Defined in: [server/services/google/index.ts:55](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L55)

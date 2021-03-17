@@ -43,7 +43,7 @@ Name | Type |
 
 **Returns:** [*MSGraphService*](services.msgraphservice.md)
 
-Defined in: [server/services/msgraph/index.ts:30](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L30)
+Defined in: [server/services/msgraph/index.ts:29](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L29)
 
 ## Properties
 
@@ -51,7 +51,7 @@ Defined in: [server/services/msgraph/index.ts:30](https://github.com/Puzzlepart/
 
 • `Private` **\_accessTokenOptions**: [*AccessTokenOptions*](../interfaces/services_oauth.accesstokenoptions.md)
 
-Defined in: [server/services/msgraph/index.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L24)
+Defined in: [server/services/msgraph/index.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L23)
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 • `Private` **\_cache**: [*CacheService*](services_cache.cacheservice.md)= null
 
-Defined in: [server/services/msgraph/index.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L23)
+Defined in: [server/services/msgraph/index.ts:22](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L22)
 
 ___
 
@@ -77,7 +77,7 @@ Gets a Microsoft Graph Client using the auth token from the class
 
 **Returns:** *Promise*<Client\>
 
-Defined in: [server/services/msgraph/index.ts:43](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L43)
+Defined in: [server/services/msgraph/index.ts:42](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L42)
 
 ___
 
@@ -95,7 +95,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<MSGraphOutlookCategory\>
 
-Defined in: [server/services/msgraph/index.ts:109](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L109)
+Defined in: [server/services/msgraph/index.ts:108](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L108)
 
 ___
 
@@ -113,13 +113,13 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [server/services/msgraph/index.ts:60](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L60)
+Defined in: [server/services/msgraph/index.ts:59](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L59)
 
 ___
 
 ### getEvents
 
-▸ **getEvents**(`startDate`: *string*, `endDate`: *string*, `tzOffset`: *number*): *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
+▸ **getEvents**(`startDateTimeIso`: *string*, `endDateTimeIso`: *string*): *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
 
 Get events for the specified period using Microsoft Graph endpoint /me/calendar/calendarView
 
@@ -127,13 +127,12 @@ Get events for the specified period using Microsoft Graph endpoint /me/calendar/
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`startDate` | *string* | Start date (YYYY-MM-DD)   |
-`endDate` | *string* | End date (YYYY-MM-DD)   |
-`tzOffset` | *number* | Timezone offset    |
+`startDateTimeIso` | *string* | Start date time in `ISO format`   |
+`endDateTimeIso` | *string* | End date time in `ISO format`    |
 
 **Returns:** *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
 
-Defined in: [server/services/msgraph/index.ts:159](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L159)
+Defined in: [server/services/msgraph/index.ts:157](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L157)
 
 ___
 
@@ -145,7 +144,7 @@ Get Outlook categories
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/msgraph/index.ts:135](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L135)
+Defined in: [server/services/msgraph/index.ts:134](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L134)
 
 ___
 
@@ -157,4 +156,4 @@ Get Azure Active Directory users
 
 **Returns:** *Promise*<any\>
 
-Defined in: [server/services/msgraph/index.ts:73](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L73)
+Defined in: [server/services/msgraph/index.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L72)

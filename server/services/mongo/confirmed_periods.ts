@@ -6,7 +6,7 @@ import { MongoDocumentService } from './@document'
 /**
  * Confirmed periods service
  *
- * @category Injectable container service
+ * @category Injectable Container Service
  */
 @Service({ global: false })
 export class ConfirmedPeriodsService extends MongoDocumentService<any> {

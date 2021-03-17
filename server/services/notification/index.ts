@@ -15,7 +15,7 @@ import { ForecastNotification, UnconfirmedPeriodNotification } from './types'
 /**
  * Notification service
  *
- * @category Injectable container service
+ * @category Injectable Container Service
  */
 @Service({ global: false })
 export class NotificationService {

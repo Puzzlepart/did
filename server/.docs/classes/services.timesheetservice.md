@@ -65,7 +65,7 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [server/services/timesheet/index.ts:282](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L282)
+Defined in: [server/services/timesheet/index.ts:292](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L292)
 
 ___
 
@@ -110,7 +110,7 @@ Name | Type | Description |
 
 **Returns:** ITimesheetPeriodData
 
-Defined in: [server/services/timesheet/index.ts:225](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L225)
+Defined in: [server/services/timesheet/index.ts:235](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L235)
 
 ___
 
@@ -131,7 +131,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]
 
-Defined in: [server/services/timesheet/index.ts:244](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L244)
+Defined in: [server/services/timesheet/index.ts:254](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L254)
 
 ___
 

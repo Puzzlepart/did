@@ -15,7 +15,7 @@ import { MSGraphOutlookCategory } from './types'
 /**
  * Microsoft Graph service
  *
- * @category Injectable container service
+ * @category Injectable Container Service
  */
 @Service({ global: false })
 class MSGraphService {

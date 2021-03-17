@@ -9,7 +9,7 @@ import { MongoDocumentService } from './@document'
 /**
  * Role service
  *
- * @category Injectable container service
+ * @category Injectable Container Service
  */
 @Service({ global: false })
 export class RoleService extends MongoDocumentService<Role> {

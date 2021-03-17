@@ -10,7 +10,7 @@ import { environment } from '../../utils/environment'
 /**
  * Google calendar service
  *
- * @category Injectable container service
+ * @category Injectable Container Service
  */
 @Service({ global: false })
 class GoogleCalendarService {

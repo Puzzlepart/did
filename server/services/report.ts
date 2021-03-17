@@ -33,7 +33,7 @@ interface IGenerateReportParameters {
 /**
  * Report service
  *
- * @category Injectable container service
+ * @category Injectable Container Service
  */
 @Service({ global: false })
 export class ReportService {
