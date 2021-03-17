@@ -2,9 +2,16 @@
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+an
+
+![image-20210317094748280](assets/image-20210317094748280.png)
+
+![image-20210317094740668](../../Library/Application Support/typora-user-images/image-20210317094740668.png)
+
+d this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## 0.10.0 - TBA
+
 ### Added
 - Support for split week, split year scenarios #753
 - Last year option added to reports #775

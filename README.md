@@ -25,6 +25,7 @@
 			* [Set up environment](#set-up-environment)
 		* [Code structure](#code-structure)
 		* [Node version](#node-version)
+		* [Authentication](#authentication)
 		* [Commits and `commitlint`](#commits-and-commitlint)
 		* [Branching / Deploying](#branching--deploying)
 			* [Main branch](#main-branch)
@@ -88,7 +89,7 @@ _Contributions are very velcome! Here's some guidance to get started!_ :heart:
 
 The following permissions are required by Azure App Registration:
 
-![azure-ad-app-registration-permissions](.assets/azure-ad-app-registration-permissions.png)
+![azure-ad-app-registration-permissions](assets/azure-ad-app-registration-permissions.png)
 
 
 #### Set up environment
@@ -158,8 +159,18 @@ Now you need to set the required environment variables from this table:
 
 **NB: Did should be developed with node >=12.18.3**
 
+### Authentication
+
+Did supports authentication with both Microsoft (`azuread-openidconnect`) and Google, but `google` support is in _experimental state_ only supporting adding gmail accounts as externals to an existing Microsoft Did subscription.
+
+![image-20210317094519761](assets/image-20210317094519761.png)
+
+The auth providers are set in `process.env.AUTH_PROVIDERS` and sent to the client through GraphQL query `authProviders`.
+
+![image-20210317094748280](assets/image-20210317094748280.png)
 
 ### Commits and `commitlint`
+
 We are using [husky](https://github.com/typicode/husky) hooks to automatically run npm script `lint:fix` before commits. This is to make sure all files are linted and ready to go at all times. This is easy to forget when working on a branch.
 
 You ***can** (but shouldn't) bypass pre-commit and commit-msg hooks using Git `--no-verify` option:
@@ -181,6 +192,7 @@ See `commitlint` in [package.json](./package.json). The commit message needs to 
 ### Branching / Deploying
 
 #### Main branch
+
 The `/main` branch requires pull requests, and is set up with a CI/CD pipeline which deploys to [did.puzzlepart.com](https://did.puzzlepart.com)  
 
 #### Dev branch
@@ -197,7 +209,6 @@ You are encouraged to branch with either of the following prefixes
 See also [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/)
 
 If you want to test with your web app, checkout [Creating your own app registration in the Azure Portal](https://github.com/Puzzlepart/did365/wiki/Creating-your-own-app-registration-in-the-Azure-Portal) in our wiki.
-
 
 ### GraphQL
 
@@ -219,7 +230,7 @@ The extension [Apollo extension for VS Code](https://www.apollographql.com/docs/
 
 
 ### Documentation
- 
+
 The client is documented [here](./client/.docs/README.md) and the server is documented [here](./server/.docs/README.md).
 
 _We use https://studio.apollographql.com/ for GraphQL schema documentation._
