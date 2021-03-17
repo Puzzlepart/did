@@ -18,7 +18,7 @@ import { Subscription, SubscriptionSettingsInput } from './types'
  *
  * @see https://typegraphql.com/docs/dependency-injection.html
  *
- * @category Resolver
+ * @category GraphQL Resolver
  */
 @Service()
 @Resolver(Subscription)
@@ -33,7 +33,6 @@ export class SubscriptionResolver {
   /**
    * Get current subscription
    */
-  @Authorized({ userContext: true })
   @Query(() => Subscription, {
     description: 'Get current subscription',
     nullable: true

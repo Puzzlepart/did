@@ -20,15 +20,16 @@ export const UserForm: FunctionComponent<IUserFormProps> = (
     onSave,
     t
   } = useUserForm({ props })
+
   return (
     <Panel
       {...pick(props, 'onDismiss', 'headerText', 'isOpen')}
       className={styles.root}
+      customWidth='450px'
       isLightDismiss={true}>
       {!props.user && (
         <div className={styles.inputContainer}>
           <Autocomplete
-            label={t('common.searchUserLabel')}
             placeholder={t('common.searchPlaceholder')}
             items={activeDirectoryUsers.map((u) => ({
               key: u.id,
@@ -52,7 +53,10 @@ export const UserForm: FunctionComponent<IUserFormProps> = (
       />
       <TextField
         className={styles.inputContainer}
-        {...inputProps({ key: 'givenName', label: t('common.givenNameLabel') })}
+        {...inputProps({
+          key: 'givenName',
+          label: t('common.givenNameLabel')
+        })}
       />
       <TextField
         className={styles.inputContainer}
@@ -63,7 +67,10 @@ export const UserForm: FunctionComponent<IUserFormProps> = (
       />
       <TextField
         className={styles.inputContainer}
-        {...inputProps({ key: 'jobTitle', label: t('common.jobTitleLabel') })}
+        {...inputProps({
+          key: 'jobTitle',
+          label: t('common.jobTitleLabel')
+        })}
       />
       <RolePicker
         className={styles.inputContainer}
@@ -74,7 +81,7 @@ export const UserForm: FunctionComponent<IUserFormProps> = (
       <Toggle
         label={t('admin.userHiddenFromReportsLabel')}
         defaultChecked={model.hiddenFromReports}
-        onChanged={(hiddenFromReports) =>
+        onChange={(_event, hiddenFromReports) =>
           setModel({ ...model, hiddenFromReports })
         }
       />

@@ -22,6 +22,7 @@
 - [mail](graphql.user.md#mail)
 - [mobilePhone](graphql.user.md#mobilephone)
 - [preferredLanguage](graphql.user.md#preferredlanguage)
+- [provider](graphql.user.md#provider)
 - [role](graphql.user.md#role)
 - [startPage](graphql.user.md#startpage)
 - [subscription](graphql.user.md#subscription)
@@ -121,6 +122,14 @@ Defined in: [server/graphql/resolvers/user/types.ts:43](https://github.com/Puzzl
 
 ___
 
+### provider
+
+• `Optional` **provider**: *string*
+
+Defined in: [server/graphql/resolvers/user/types.ts:58](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L58)
+
+___
+
 ### role
 
 • `Optional` **role**: *string* \| [*Role*](graphql.role.md)
@@ -165,4 +174,4 @@ Name | Type |
 
 **Returns:** [*User*](graphql.user.md)
 
-Defined in: [server/graphql/resolvers/user/types.ts:57](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L57)
+Defined in: [server/graphql/resolvers/user/types.ts:60](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L60)

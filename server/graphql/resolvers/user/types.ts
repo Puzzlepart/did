@@ -15,10 +15,10 @@ import { Role } from '../types'
 export class User {
   _id?: string
 
-  @Field(() => ID)
+  @Field(() => ID, { nullable: true })
   id?: string
 
-  @Field()
+  @Field({ nullable: true })
   displayName?: string
 
   @Field({ nullable: true })
@@ -45,14 +45,17 @@ export class User {
   @Field({ nullable: true })
   hiddenFromReports?: boolean
 
-  @Field(() => Role)
+  @Field(() => Role, { nullable: true })
   role?: Role | string
 
-  @Field(() => Subscription)
+  @Field(() => Subscription, { nullable: true })
   subscription?: Subscription
 
   @Field(() => String, { nullable: true })
   configuration?: any
+
+  @Field({ nullable: true })
+  provider?: string
 
   public create?(user: User): User {
     Object.assign(this, user)
@@ -99,6 +102,9 @@ export class UserInput {
 
   @Field({ nullable: true })
   role?: string
+
+  @Field({ nullable: true })
+  provider?: string
 }
 
 /**

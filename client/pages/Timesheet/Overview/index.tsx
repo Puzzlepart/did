@@ -1,5 +1,5 @@
-import AppConfig from 'AppConfig'
 import { EventList } from 'components'
+import { config } from 'package'
 import React, { FunctionComponent, useContext } from 'react'
 import { isMobile } from 'react-device-detect'
 import { TimesheetContext } from '../context'
@@ -21,7 +21,7 @@ export const Overview: FunctionComponent = () => {
         enableShimmer={!!loading}
         events={selectedPeriod?.getEvents()}
         showEmptyDays={true}
-        dateFormat={AppConfig.TIMESHEET_OVERVIEW_TIME_FORMAT}
+        dateFormat={config.app.TIMESHEET_OVERVIEW_TIME_FORMAT}
         groups={groups}
         additionalColumns={additionalColumns}
       />

@@ -29,7 +29,7 @@ export function useUserForm({ props }) {
         user: omit(
           {
             ...model,
-            role: (model.role as Role).name
+            role: (model?.role as Role)?.name || 'User'
           },
           '__typename'
         ),
@@ -45,10 +45,18 @@ export function useUserForm({ props }) {
    */
   const isFormValid = () =>
     !validator.isEmpty(model?.id || '') &&
-    validator.isUUID(model?.id || '') &&
     !validator.isEmpty(model?.displayName || '')
 
   const adSync = subscription?.settings?.adsync || { properties: [] }
+
+  const inputProps = ({ key, label }): ITextFieldProps => ({
+    label,
+    disabled: contains(adSync?.properties, key),
+    description:
+      contains(adSync?.properties, key) && t('admin.userFieldAdSync'),
+    value: model[key],
+    onChange: (_event, value) => setModel({ ...model, [key]: value })
+  })
 
   return {
     t,
@@ -59,13 +67,6 @@ export function useUserForm({ props }) {
     setModel,
     onSave,
     isFormValid,
-    inputProps: ({ key, label }): ITextFieldProps => ({
-      label,
-      disabled: contains(adSync?.properties, key),
-      description:
-        contains(adSync?.properties, key) && t('admin.userFieldAdSync'),
-      value: model[key],
-      onChange: (_event, value) => setModel({ ...model, [key]: value })
-    })
+    inputProps
   }
 }

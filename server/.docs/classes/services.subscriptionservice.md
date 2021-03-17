@@ -29,9 +29,11 @@
 - [\_replaceId](services.subscriptionservice.md#_replaceid)
 - [addSubscription](services.subscriptionservice.md#addsubscription)
 - [find](services.subscriptionservice.md#find)
+- [getByExternalId](services.subscriptionservice.md#getbyexternalid)
 - [getById](services.subscriptionservice.md#getbyid)
 - [insert](services.subscriptionservice.md#insert)
 - [insertMultiple](services.subscriptionservice.md#insertmultiple)
+- [registerExternalUser](services.subscriptionservice.md#registerexternaluser)
 - [update](services.subscriptionservice.md#update)
 - [updateSubscription](services.subscriptionservice.md#updatesubscription)
 
@@ -125,7 +127,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*Subscription*](graphql.subscription.md)\>\>\>
 
-Defined in: [server/services/mongo/subscription.ts:59](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L59)
+Defined in: [server/services/mongo/subscription.ts:82](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L82)
 
 ___
 
@@ -153,6 +155,27 @@ Name | Type | Description |
 **Returns:** *Promise*<[*Subscription*](graphql.subscription.md)[]\>
 
 Defined in: [server/services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
+
+___
+
+### getByExternalId
+
+▸ **getByExternalId**(`id`: *string*, `provider`: *string*): *Promise*<{ `_id?`: *string* ; `db?`: *string* ; `id`: *string* ; `name`: *string* ; `owner`: *string* ; `settings?`: [*SubscriptionSettings*](graphql.subscriptionsettings.md)  }\>
+
+Get subscription by external id or email
+
+**`remarks`** Returns null if no subscription is found.
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`id` | *string* | User ID or email address   |
+`provider` | *string* | Provider    |
+
+**Returns:** *Promise*<{ `_id?`: *string* ; `db?`: *string* ; `id`: *string* ; `name`: *string* ; `owner`: *string* ; `settings?`: [*SubscriptionSettings*](graphql.subscriptionsettings.md)  }\>
+
+Defined in: [server/services/mongo/subscription.ts:62](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L62)
 
 ___
 
@@ -218,6 +241,25 @@ Defined in: [server/services/mongo/@document.ts:84](https://github.com/Puzzlepar
 
 ___
 
+### registerExternalUser
+
+▸ **registerExternalUser**(`provider`: *string*, `mail`: *string*): *Promise*<UpdateWriteOpResult\>
+
+Register external user
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`provider` | *string* | Provider   |
+`mail` | *string* | Email address    |
+
+**Returns:** *Promise*<UpdateWriteOpResult\>
+
+Defined in: [server/services/mongo/subscription.ts:116](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L116)
+
+___
+
 ### update
 
 ▸ **update**(`query`: *FilterQuery*<[*Subscription*](graphql.subscription.md)\>, `document_`: *any*): *Promise*<UpdateWriteOpResult\>
@@ -253,4 +295,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
 
-Defined in: [server/services/mongo/subscription.ts:75](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L75)
+Defined in: [server/services/mongo/subscription.ts:98](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L98)

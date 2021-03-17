@@ -37,7 +37,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Context*](../classes/graphql_context.context.md)\>
 
-Defined in: [server/graphql/context.ts:75](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L75)
+Defined in: [server/graphql/context.ts:82](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L82)
 
 ___
 
@@ -49,4 +49,4 @@ Generate unique ID for the request
 
 **Returns:** *string*
 
-Defined in: [server/graphql/context.ts:58](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L58)
+Defined in: [server/graphql/context.ts:65](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L65)

@@ -135,9 +135,10 @@ export class App {
   setupRoutes() {
     const index = express.Router()
     index.get('/', (request, response) => {
-      if (request.isUnauthenticated() && request.originalUrl !== '/') {
+      const url = request.originalUrl.split('?')[0]
+      if (request.isUnauthenticated() && url !== '/') {
         return response.redirect(
-          `/auth/signin?redirectUrl=${request.originalUrl}`
+          `/auth/azuread-openidconnect/signin?redirectUrl=${request.originalUrl}`
         )
       }
       return response.render('index')

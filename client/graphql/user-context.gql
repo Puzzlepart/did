@@ -27,4 +27,5 @@ query UserContext {
     preferredLanguage
     configuration
   }
+  authProviders
 }

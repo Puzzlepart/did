@@ -1,32 +1,33 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { MongoClient } from 'mongodb'
 import { IProfile, VerifyCallback } from 'passport-azure-ad'
-import { SubscriptionService, UserService } from '../../services/mongo'
-import { environment } from '../../utils'
-import { NO_OID_FOUND, TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } from './errors'
-import { synchronizeUserProfile } from './synchronizeUserProfile'
+import { SubscriptionService, UserService } from '../../../services/mongo'
+import { environment } from '../../../utils'
+import { NO_OID_FOUND, TENANT_NOT_ENROLLED, USER_NOT_ENROLLED } from '../errors'
+import { synchronizeUserProfile } from '../synchronizeUserProfile'
 
 /**
- * On verify sign in
+ * On verify sign in Microsoft
  *
  * 1. Checks if the tenant has an subscription
  * 2. Checks if the user is enrolled in the subscription or
  * the user is the subscription owner.
  * 3. If the user is an owner, we create the user for them.
  *
- * @param mongoClient - Mongo client
+ * @param mcl - Mongo client
  * @param profile - User profile object
  * @param tokenParams - Token params
  * @param done - Done callback
  */
 export const onVerifySignin = async (
-  mongoClient: MongoClient,
+  mcl: MongoClient,
   profile: IProfile,
   tokenParameters: unknown,
   done: VerifyCallback
 ) => {
   const subSrv = new SubscriptionService({
-    db: mongoClient.db(environment('MONGO_DB_DB_NAME'))
+    db: mcl.db(environment('MONGO_DB_DB_NAME'))
   })
   try {
     const { tid: subId, oid: userId, preferred_username: mail } = profile._json
@@ -42,7 +43,7 @@ export const onVerifySignin = async (
     const isOwner = subscription.owner === mail
 
     const userSrv = new UserService({
-      db: mongoClient.db(subscription.db)
+      db: mcl.db(subscription.db)
     })
 
     let user_ = await userSrv.getById(userId)

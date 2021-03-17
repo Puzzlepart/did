@@ -27,6 +27,13 @@ export class Context {
   public userId?: string
 
   /**
+   * Provider
+   *
+   * google or microsoft
+   */
+  provider?: 'google' | 'azuread-openidconnect'
+
+  /**
    * Subscription
    */
   public subscription?: Subscription
@@ -79,8 +86,10 @@ export const createContext = async (
   try {
     const database = mongoClient.db(environment('MONGO_DB_DB_NAME'))
     const context: Context = {}
+    context.requestId = generateUniqueRequestId()
+    context.container = Container.of(context.requestId)
     context.mongoClient = mongoClient
-    context.subscription = get(request, 'user.subscription')
+    context.subscription = get(request, 'user.subscription', { default: {} })
     const apiKey = get(request, 'api_key')
     if (apiKey) {
       const { permissions, subscription } = await handleTokenAuthentication(
@@ -91,13 +100,10 @@ export const createContext = async (
       context.subscription = subscription
     } else {
       context.userId = get(request, 'user.id')
+      context.provider = get(request, 'user.provider')
       context.permissions = get(request, 'user.role.permissions')
     }
-    if (!context.subscription)
-      throw new AuthenticationError('Failed to authenticate.')
     context.db = context.mongoClient.db(context.subscription.db)
-    context.requestId = generateUniqueRequestId()
-    context.container = Container.of(context.requestId)
     context.container.set({ id: 'CONTEXT', transient: true, value: context })
     context.container.set({ id: 'REQUEST', transient: true, value: request })
     debug(`Creating context for request ${context.requestId}`)

@@ -3,7 +3,9 @@ import { UserMessage } from 'components'
 import { DefaultButton, MessageBarType } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
+import { isEmpty } from 'underscore'
 import styles from './Home.module.scss'
+import { useAuthProviders } from './useAuthProviders'
 import { useHome } from './useHome'
 
 /**
@@ -11,6 +13,7 @@ import { useHome } from './useHome'
  */
 export const Home: FunctionComponent = () => {
   const { error, subscription } = useHome()
+  const providers = useAuthProviders()
   const { t } = useTranslation()
 
   return (
@@ -28,13 +31,25 @@ export const Home: FunctionComponent = () => {
           }}
         />
       )}
-      <div hidden={!!subscription || !!error}>
-        <DefaultButton
-          onClick={() => document.location.replace('/auth/signin')}
-          iconProps={{ iconName: 'WindowsLogo' }}
-          text={t('common.ms365signInText')}
+      {isEmpty(Object.keys(providers)) && (
+        <UserMessage
+          type={MessageBarType.warning}
+          text={t('common.signInDisabledMessage')}
         />
-      </div>
+      )}
+      {!subscription && !error && (
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          {Object.keys(providers).map((key) => (
+            <DefaultButton
+              key={key}
+              onClick={() => document.location.replace(`/auth/${key}/signin`)}
+              iconProps={{ iconName: providers[key].iconName }}
+              style={{ marginTop: 10 }}
+              text={providers[key].text}
+            />
+          ))}
+        </div>
+      )}
     </div>
   )
 }

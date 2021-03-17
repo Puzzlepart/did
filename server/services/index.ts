@@ -1,4 +1,5 @@
 export * from './cache'
+export { default as GoogleCalendarService } from './google'
 export * from './mongo'
 export { default as MSGraphService } from './msgraph'
 export * from './notification'

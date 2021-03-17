@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import { find } from 'underscore'
-import { MSGraphService } from '..'
+import { GoogleCalendarService, MSGraphService } from '..'
 import DateUtils, { DateObject } from '../../../shared/utils/date'
 import { Context } from '../../graphql/context'
 import { TimesheetPeriodObject } from '../../graphql/resolvers/types'
@@ -17,6 +17,7 @@ import MatchingEngine from './matching'
 import {
   IConnectEventsParameters,
   IGetTimesheetParameters,
+  IProviderEventsParameters,
   ISubmitPeriodParameters,
   ITimesheetPeriodData,
   IUnsubmitPeriodParameters
@@ -30,6 +31,7 @@ export class TimesheetService {
    *
    * @param context - Injected context through typedi
    * @param _msgraphSvc - Injected `MSGraphService` through typedi
+   * @param _googleCalSvc - Injected `GoogleCalendarService` through typedi
    * @param _projectSvc - Injected `ProjectService` through typedi
    * @param _teSvc - Injected `TimeEntryService` through typedi
    * @param _fteSvc - Injected `ForecastedTimeEntryService` through typedi
@@ -39,6 +41,7 @@ export class TimesheetService {
   constructor(
     @Inject('CONTEXT') private readonly context: Context,
     private readonly _msgraphSvc: MSGraphService,
+    private readonly _googleCalSvc: GoogleCalendarService,
     private readonly _projectSvc: ProjectService,
     private readonly _teSvc: TimeEntryService,
     private readonly _fteSvc: ForecastedTimeEntryService,
@@ -82,22 +85,12 @@ export class TimesheetService {
           }
         } else {
           const engine = new MatchingEngine(data)
-          const events = await this._msgraphSvc.getEvents(
-            periods[index].startDate,
-            periods[index].endDate,
-            {
-              tzOffset: parameters.tzOffset,
-              returnIsoDates: false
-            }
-          )
-          periods[index].events = engine.matchEvents(events).map((event_) => ({
-            ...event_,
-            date: DateUtils.formatDate(
-              event_.startDateTime,
-              parameters.dateFormat,
-              parameters.locale
-            )
-          }))
+          periods[index].events = await this._getEventsFromProvider({
+            ...periods[index],
+            ...parameters,
+            provider: this.context.provider,
+            engine
+          })
         }
       }
       return periods
@@ -115,14 +108,11 @@ export class TimesheetService {
     parameters: ISubmitPeriodParameters
   ): Promise<void> {
     try {
-      const events = await this._msgraphSvc.getEvents(
-        parameters.period.startDate,
-        parameters.period.endDate,
-        {
-          tzOffset: parameters.tzOffset,
-          returnIsoDates: false
-        }
-      )
+      const events = await this._getEventsFromProvider({
+        ...parameters.period,
+        ...parameters,
+        provider: this.context.provider
+      })
       const period: ITimesheetPeriodData = {
         ...this._getPeriodData(parameters.period.id, this.context.userId),
         hours: 0,
@@ -172,6 +162,49 @@ export class TimesheetService {
     } catch (error) {
       throw error
     }
+  }
+
+  /**
+   * Get events from provider
+   *
+   * @param params - Parameters
+   *
+   * @returns Events
+   */
+  private async _getEventsFromProvider({
+    provider,
+    startDate,
+    endDate,
+    tzOffset,
+    dateFormat,
+    locale,
+    engine = null
+  }: IProviderEventsParameters) {
+    let events: any[]
+    switch (provider) {
+      case 'google':
+        {
+          events = await this._googleCalSvc.getEvents(
+            startDate,
+            endDate,
+            tzOffset
+          )
+        }
+        break
+      default: {
+        events = await this._msgraphSvc.getEvents(startDate, endDate, {
+          tzOffset,
+          returnIsoDates: false
+        })
+      }
+    }
+    if (engine) {
+      return engine.matchEvents(events).map((event_) => ({
+        ...event_,
+        date: DateUtils.formatDate(event_.startDateTime, dateFormat, locale)
+      }))
+    }
+    return events
   }
 
   /**

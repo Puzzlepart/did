@@ -1,4 +1,4 @@
-import AppConfig from 'AppConfig'
+import { config } from 'package'
 import { usePages } from 'pages/usePages'
 import { useTranslation } from 'react-i18next'
 import { IUserSetting, IUserSettingDropdown } from './types'
@@ -39,7 +39,7 @@ export function useSettingsConfiguration() {
         }
       ],
       reloadAfterSave: true,
-      defaultValue: AppConfig.DEFAULT_USER_LANGUAGE
+      defaultValue: config.app.DEFAULT_USER_LANGUAGE
     } as IUserSettingDropdown
   ])
 }

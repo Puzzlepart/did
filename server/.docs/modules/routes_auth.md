@@ -26,39 +26,36 @@ Defined in: [server/routes/auth.ts:6](https://github.com/Puzzlepart/did/blob/dev
 
 ### authCallbackHandler
 
-▸ `Const`**authCallbackHandler**(`request`: *Request*<ParamsDictionary, any, any, ParsedQs\>, `response`: *Response*<any\>, `next`: NextFunction): *void*
+▸ `Const`**authCallbackHandler**(`strategy`: *google* \| *azuread-openidconnect*): *function*
 
-Handler for /auth/callback
+Handler for /auth/ad/callback and  /auth/google/callback
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`request` | *Request*<ParamsDictionary, any, any, ParsedQs\> | Request   |
-`response` | *Response*<any\> | Response   |
-`next` | NextFunction | Next function    |
+Name | Type |
+:------ | :------ |
+`strategy` | *google* \| *azuread-openidconnect* |
 
-**Returns:** *void*
+**Returns:** (`request`: *Request*<ParamsDictionary, any, any, ParsedQs\>, `response`: *Response*<any\>, `next`: NextFunction) => *void*
 
-Defined in: [server/routes/auth.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L38)
+Defined in: [server/routes/auth.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L34)
 
 ___
 
 ### signInHandler
 
-▸ `Const`**signInHandler**(`request`: *Request*<ParamsDictionary, any, any, ParsedQs\>, `response`: *Response*<any\>, `next`: NextFunction): *void*
+▸ `Const`**signInHandler**(`strategy`: *google* \| *azuread-openidconnect*, `options`: AuthenticateOptions): *function*
 
-Handler for /auth/signin
+Handler for /auth/ad/signin and /auth/google/signin
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`request` | *Request*<ParamsDictionary, any, any, ParsedQs\> | Request   |
-`response` | *Response*<any\> | Response   |
-`next` | NextFunction | Next function    |
+Name | Type |
+:------ | :------ |
+`strategy` | *google* \| *azuread-openidconnect* |
+`options` | AuthenticateOptions |
 
-**Returns:** *void*
+**Returns:** (`request`: *Request*<ParamsDictionary, any, any, ParsedQs\>, `response`: *Response*<any\>, `next`: NextFunction) => *void*
 
 Defined in: [server/routes/auth.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L17)
 
@@ -79,4 +76,4 @@ Name | Type | Description |
 
 **Returns:** *void*
 
-Defined in: [server/routes/auth.ts:80](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L80)
+Defined in: [server/routes/auth.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L71)

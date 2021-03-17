@@ -52,6 +52,29 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
   }
 
   /**
+   * Get subscription by external id or email
+   *
+   * @remarks Returns null if no subscription is found.
+   *
+   * @param id - User ID or email address
+   * @param provider - Provider
+   */
+  public async getByExternalId(id: string, provider: string) {
+    try {
+      const subscription = await this.collection.findOne({
+        [`externals.${provider}`]: id
+      })
+      if (!subscription) return null
+      return {
+        ...subscription,
+        id: subscription._id
+      }
+    } catch (error) {
+      throw error
+    }
+  }
+
+  /**
    * Add subscription
    *
    * @param subscription - Subscription
@@ -77,6 +100,24 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
       const result = await this.update(
         { _id: this.context.subscription.id },
         { settings }
+      )
+      return result
+    } catch (error) {
+      throw error
+    }
+  }
+
+  /**
+   * Register external user
+   *
+   * @param provider - Provider
+   * @param mail - Email address
+   */
+  public async registerExternalUser(provider: string, mail: string) {
+    try {
+      const result = await this.collection.updateOne(
+        { _id: this.context.subscription.id },
+        { $push: { [`externals.${provider}`]: mail } }
       )
       return result
     } catch (error) {

@@ -306,13 +306,13 @@
     "officeLocationLabel": "Office Location",
     "departmentLabel": "Department",
     "mobilePhoneLabel": "Mobile phone",
-    "searchUserLabel": "Search in Azure Active Directory",
+    "searchUserLabel": "Search...",
     "exportTypeLastYear": "Last year ({{year}})",
     "fromDateLabel": "From:",
     "toDateLabel": "To:",
     "rangeLabel": "Range",
     "totalHours": "Hours total",
-    "userReportSummary": "You have worked **{{hours}}** hours for **{{projects}}** projects _{{preset}}_. Click **Export** to export your hours to Excel.",
+    "userReportSummary": "You have worked **{{hours}}** hours for **{{projects}}** projects _{{preset}}_. Click _Export to Excel_ to export your hours to Excel.",
     "exportExcel": "Export to Excel",
     "errorFallbackHeader": "It looks like something went wrong",
     "tryAgainText": "Try again, it might work...",
@@ -323,7 +323,11 @@
     "weekColumnTooltipHoursCustomer": "<b>{{hours}} hours</b> for {{customer}}",
     "disable": "Disable",
     "startPageLabel": "Start page",
-    "preferredLanguageDescription": "Did will display menus and buttons in this language."
+    "preferredLanguageDescription": "Did will display menus and buttons in this language.",
+    "googleSignInText": "Sign in with Google",
+    "activeDirectory": "Azure AD",
+    "google": "Google",
+    "signInDisabledMessage": "Sign in is currently disabled. Please hold on."
   },
   "navigation": {
     "timesheet": "Timesheet",

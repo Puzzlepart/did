@@ -34,6 +34,7 @@ export function useColumns({ setUserForm }): IColumn[] {
     col('actions', '', { maxWidth: 100 }, (user: User) => (
       <div style={{ display: 'flex', justifyContent: 'space-around' }}>
         <EditLink
+          hidden={user.provider === 'google'}
           onClick={() => {
             setUserForm({
               headerText: user.displayName,

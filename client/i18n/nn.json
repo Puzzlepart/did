@@ -305,13 +305,13 @@
     "officeLocationLabel": "Kontorlokasjon",
     "departmentLabel": "Avdeling",
     "mobilePhoneLabel": "Mobiltelefon",
-    "searchUserLabel": "Søk i Azure Active Directory",
+    "searchUserLabel": "Søk...",
     "exportTypeLastYear": "I fjor ({{year}})",
     "fromDateLabel": "Frå:",
     "toDateLabel": "Til:",
     "rangeLabel": "Tidsrom",
     "totalHours": "Timar totalt",
-    "userReportSummary": "Du har jobba **{{hours}}** timar for *{{projects}} *prosjekt _{{preset}}_. \nKlikk **Eksporter** for å eksportere timane dine til Excel.",
+    "userReportSummary": "Du har jobba **{{hours}}** timar for {{projects}} prosjekt {{preset}}. \nKlikk _Eksporter til Excel_ for å eksportere timane dine til Excel.",
     "exportExcel": "Eksporter til Excel",
     "errorFallbackHeader": "Det virkar som noko gjekk gale",
     "tryAgainText": "Prøv igjen, det kan teoretisk sett fungere ...",
@@ -322,7 +322,11 @@
     "weekColumnTooltipHoursCustomer": "<b>{{hours}} timer</b> for {{customer}}",
     "disable": "Deaktiver",
     "startPageLabel": "Startside",
-    "preferredLanguageDescription": "Did vil vise menyar og knappar på dette språket."
+    "preferredLanguageDescription": "Did vil vise menyar og knappar på dette språket.",
+    "googleSignInText": "Logg på med Google",
+    "activeDirectory": "Azure AD",
+    "google": "Google",
+    "signInDisabledMessage": "Pålogging er for øyeblikket deaktivert. \nVennligst vent."
   },
   "navigation": {
     "timesheet": "Timeliste",
