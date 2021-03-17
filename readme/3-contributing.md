@@ -37,6 +37,8 @@ _Contributions are very velcome! Here's some guidance to get started!_ :heart:
 
 
 
+## Contribuitng
+
 ### Getting started
 
 1. Check out the dev branch
