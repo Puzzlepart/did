@@ -19,6 +19,7 @@ export function useNotificationsQuery(
 ): { notifications: Notification[]; refetch: (delay?: number) => void } {
   const { t } = useTranslation()
   const { data, refetch } = useQuery(notificationsQuery, {
+    skip: !user.id,
     variables: {
       templates: t('notifications.templates', { returnObjects: true }),
       locale: user?.preferredLanguage

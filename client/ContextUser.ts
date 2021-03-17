@@ -31,6 +31,10 @@ export class ContextUser {
 
   /**
    * Preferred user language
+   *
+   * - `nb-no` are mapped to `nb`
+   * - `nn-no` are mapped to `nn`
+   * - Default is `config.app.DEFAULT_USER_LANGUAGE`
    */
   public get preferredLanguage() {
     if (!this._user) return DEFAULT_LANGUAGE
