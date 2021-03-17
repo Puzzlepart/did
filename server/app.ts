@@ -138,7 +138,7 @@ export class App {
       const url = request.originalUrl.split('?')[0]
       if (request.isUnauthenticated() && url !== '/') {
         return response.redirect(
-          `/auth/ad/signin?redirectUrl=${request.originalUrl}`
+          `/auth/azuread-openidconnect/signin?redirectUrl=${request.originalUrl}`
         )
       }
       return response.render('index')

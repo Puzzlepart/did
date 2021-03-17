@@ -14,7 +14,7 @@ export interface IGetTimesheetParameters {
 }
 
 export interface IProviderEventsParameters extends IGetTimesheetParameters {
-  provider: 'google' | 'microsoft'
+  provider: 'google' | 'azuread-openidconnect'
   engine?: MatchingEngine
 }
 

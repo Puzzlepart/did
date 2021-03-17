@@ -31,7 +31,7 @@ export class Context {
    *
    * google or microsoft
    */
-  provider?: 'google' | 'microsoft'
+  provider?: 'google' | 'azuread-openidconnect'
 
   /**
    * Subscription

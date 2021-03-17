@@ -3,6 +3,7 @@ import { UserMessage } from 'components'
 import { DefaultButton, MessageBarType } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
+import { isEmpty } from 'underscore'
 import styles from './Home.module.scss'
 import { useAuthProviders } from './useAuthProviders'
 import { useHome } from './useHome'
@@ -28,6 +29,12 @@ export const Home: FunctionComponent = () => {
           onDismiss={() => {
             window.location.href = window.location.href.split('?')[0]
           }}
+        />
+      )}
+      {isEmpty(Object.keys(providers)) && (
+        <UserMessage
+          type={MessageBarType.warning}
+          text={t('common.signInDisabledMessage')}
         />
       )}
       {!subscription && !error && (

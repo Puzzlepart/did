@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response, Router } from 'express'
 import passport from 'passport'
+import { contains } from 'underscore'
 import url from 'url'
 import { SigninError, SIGNIN_FAILED } from '../middleware/passport/errors'
 import { environment } from '../utils'
@@ -8,7 +9,7 @@ const auth = Router()
 const REDIRECT_URL_PROPERTY = '__redirectUrl'
 
 /**
- * Handler for /auth/ad/signin and /auth/google/signin
+ * Handler for /auth/azuread-openidconnect/signin and /auth/google/signin
  *
  * @param request - Request
  * @param response - Response
@@ -25,7 +26,7 @@ export const signInHandler = (
 }
 
 /**
- * Handler for /auth/ad/callback and  /auth/google/callback
+ * Handler for /auth/azuread-openidconnect/callback and  /auth/google/callback
  *
  * @param request - Request
  * @param response - Response
@@ -75,24 +76,33 @@ export const signOutHandler = (request: Request, response: Response) => {
   })
 }
 
-auth.get(
-  '/ad/signin',
-  signInHandler('azuread-openidconnect', {
-    prompt: environment('MICROSOFT_SIGNIN_PROMPT'),
-    failureRedirect: '/'
-  })
-)
+const authProviders = environment<string[]>('AUTH_PROVIDERS', [], {
+  splitBy: ' '
+})
 
-auth.get(
-  '/google/signin',
-  signInHandler('google', {
-    scope: environment('GOOGLE_SCOPES', undefined, { splitBy: ' ' })
-  })
-)
+if (contains(authProviders, 'azuread-openidconnect')) {
+  auth.get(
+    '/azuread-openidconnect/signin',
+    signInHandler('azuread-openidconnect', {
+      prompt: environment('MICROSOFT_SIGNIN_PROMPT'),
+      failureRedirect: '/'
+    })
+  )
+  auth.post(
+    '/azuread-openidconnect/callback',
+    authCallbackHandler('azuread-openidconnect')
+  )
+}
 
-auth.post('/ad/callback', authCallbackHandler('azuread-openidconnect'))
-
-auth.get('/google/callback', authCallbackHandler('google'))
+if (contains(authProviders, 'google')) {
+  auth.get(
+    '/google/signin',
+    signInHandler('google', {
+      scope: environment('GOOGLE_SCOPES', undefined, { splitBy: ' ' })
+    })
+  )
+  auth.get('/google/callback', authCallbackHandler('google'))
+}
 
 auth.get('/signout', signOutHandler)
 

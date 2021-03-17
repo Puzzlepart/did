@@ -45,7 +45,7 @@ export class UserResolver {
    */
   @Query(() => [String], { description: 'Get auth providers' })
   authProviders(): string[] {
-    return (process.env.AUTH_PROVIDERS || 'microsoft').split(' ')
+    return (process.env.AUTH_PROVIDERS || '').split(' ')
   }
 
   /**

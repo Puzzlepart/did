@@ -325,7 +325,8 @@
     "preferredLanguageDescription": "Did vil vise menyar og knappar på dette språket.",
     "googleSignInText": "Logg på med Google",
     "activeDirectory": "Azure AD",
-    "google": "Google"
+    "google": "Google",
+    "signInDisabledMessage": "Pålogging er for øyeblikket deaktivert. \nVennligst vent."
   },
   "navigation": {
     "timesheet": "Timeliste",

@@ -7,7 +7,7 @@ export function useAuthProviders() {
   const { t } = useTranslation()
   const context = useContext(AppContext)
   const authProviders = {
-    ad: {
+    'azuread-openidconnect': {
       text: t('common.ms365signInText'),
       iconName: 'WindowsLogo'
     },

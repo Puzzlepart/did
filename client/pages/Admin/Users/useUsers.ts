@@ -55,7 +55,7 @@ export function useUsers() {
       variables: {
         users: users.map((u) => ({
           ...omit(u, '__typename'),
-          provider: 'microsoft'
+          provider: 'azuread-openidconnect'
         }))
       }
     })

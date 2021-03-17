@@ -326,7 +326,8 @@
     "preferredLanguageDescription": "Did will display menus and buttons in this language.",
     "googleSignInText": "Sign in with Google",
     "activeDirectory": "Azure AD",
-    "google": "Google"
+    "google": "Google",
+    "signInDisabledMessage": "Sign in is currently disabled. Please hold on."
   },
   "navigation": {
     "timesheet": "Timesheet",
