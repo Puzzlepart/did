@@ -38,8 +38,11 @@ export class EventObject {
   @Field(() => Float)
   duration?: number
 
+  @Field({ nullable: true })
+  projectId?: string
+
   @Field(() => Project, { nullable: true })
-  project: Project
+  project?: Project
 
   @Field(() => Project, { nullable: true })
   suggestedProject?: Project
@@ -69,4 +72,8 @@ export class EventObject {
   isSystemIgnored?: boolean
 
   categories?: string[]
+
+  constructor(data: EventObject) {
+    Object.assign(this, data)
+  }
 }

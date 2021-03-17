@@ -1,4 +1,4 @@
-export { ApiTokenService } from './apitoken'
+export { ApiTokenService } from './api_token'
 export { ConfirmedPeriodsService } from './confirmed_periods'
 export { CustomerService } from './customer'
 export { ForecastedPeriodsService } from './forecasted_periods'

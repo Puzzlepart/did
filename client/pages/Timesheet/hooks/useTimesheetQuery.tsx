@@ -26,7 +26,7 @@ export function useTimesheetQuery(
       query: state.scope.query(),
       options: {
         dateFormat: 'dddd DD',
-        locale: user.language,
+        locale: user.preferredLanguage,
         tzOffset: new Date().getTimezoneOffset()
       }
     },

@@ -17,7 +17,7 @@
     "client/helpers/index.ts",
     "client/utils/index.ts",
     "client/config/security/index.ts",
-    "client/index.tsx",
-    "client/App.tsx"
+    "client/app/index.tsx",
+    "client/index.tsx"
   ]
 }

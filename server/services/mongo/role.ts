@@ -60,7 +60,7 @@ export class RoleService extends MongoDocumentService<Role> {
    */
   public async updateRole(role: Role): Promise<void> {
     try {
-      await this.collection.updateOne(pick(role, 'name'), { $set: role })
+      await this.collection.updateOne(pick(role, 'name'), role)
     } catch (error) {
       throw error
     }

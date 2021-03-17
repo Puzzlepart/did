@@ -1,7 +1,40 @@
 {
   "name": "did",
-  "version": "0.9.8",
+  "description": "The calendar is your Timesheet",
+  "version": "0.9.9",
   "private": true,
+  "config": {
+    "app": {
+      "PROJECT_KEY_MIN_LENGTH": 2,
+      "PROJECT_KEY_MAX_LENGTH": 12,
+      "PROJECT_NAME_MIN_LENGTH": 2,
+      "CUSTOMER_KEY_MIN_LENGTH": 3,
+      "CUSTOMER_KEY_MAX_LENGTH": 12,
+      "CUSTOMER_NAME_MIN_LENGTH": 2,
+      "BROWSER_STORAGE_KEY_PREFIX": "did",
+      "BROWSER_STORAGE_DEFAULT_EXPIRE": "2month",
+      "DEFAULT_USER_LANGUAGE": "en-GB",
+      "TIMESHEET_OVERVIEW_DAY_FORMAT": "dddd DD",
+      "TIMESHEET_OVERVIEW_TIME_FORMAT": "HH:mm"
+    }
+  },
+  "contributors": [
+    {
+      "name": "Carl Joakim Damsleth",
+      "email": "carl.joakim.damsleth@puzzlepart.com",
+      "img": "https://avatars.githubusercontent.com/u/7300548?&size=130"
+    },
+    {
+      "name": "Ole Martin Pettersen",
+      "email": "olemp@puzzlepart.com",
+      "img": "https://avatars.githubusercontent.com/u/7606007?&size=130"
+    },
+    {
+      "name": "Ole Kristian Mørch-Storstein",
+      "email": "olekms@puzzlepart.com",
+      "img": "https://avatars.githubusercontent.com/u/170147?&size=130"
+    }
+  ],
   "engines": {
     "node": ">=12.18.3",
     "npm": ">=6.5.0"
@@ -82,6 +115,7 @@
     "express-session": "1.17.0",
     "fast-copy": "2.1.1",
     "get-value": "3.0.1",
+    "googleapis": "39.2.0",
     "graphql": "15.3.0",
     "graphql-iso-date": "3.6.1",
     "graphql-tag": "2.11.0",
@@ -99,6 +133,7 @@
     "office-ui-fabric-react": "7.106.3",
     "passport": "0.4.1",
     "passport-azure-ad": "4.2.1",
+    "passport-google-oauth20": "2.0.0",
     "randomcolor": "0.6.2",
     "react": "16.13.1",
     "react-color": "2.19.3",
@@ -137,6 +172,7 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "12.0.1",
+    "@types/passport-google-oauth20": "^2.0.7",
     "@types/string-format": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "4.6.1",
     "@typescript-eslint/parser": "4.6.1",
@@ -189,7 +225,7 @@
       }
     },
     "rules": {
-      "@typescript-eslint/no-explicit-any": 1,
+      "@typescript-eslint/no-explicit-any": 0,
       "@typescript-eslint/member-delimiter-style": 0,
       "@typescript-eslint/explicit-function-return-type": 0,
       "@typescript-eslint/explicit-module-boundary-types": 0,
@@ -279,7 +315,8 @@
           "dev",
           "i18n",
           "github",
-          "readme"
+          "readme",
+          "experimental"
         ]
       ]
     }
@@ -291,7 +328,7 @@
     ],
     "ext": "ts,json",
     "exec": "ts-node ./server/index.ts -T",
-    "delay": 2500,
+    "delay": 800,
     "colours": true
   }
 }

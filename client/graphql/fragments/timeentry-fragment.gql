@@ -15,7 +15,6 @@ fragment TimeEntryFragment on TimeEntry {
     name
   }
   resource {
-    id
     givenName
     surname
     mail

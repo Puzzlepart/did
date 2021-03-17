@@ -1,4 +1,4 @@
-[did-server - v0.9.8](../README.md) / [services](../modules/services.md) / TimesheetService
+[did-server - v0.9.9](../README.md) / [services](../modules/services.md) / TimesheetService
 
 # Class: TimesheetService
 
@@ -13,7 +13,7 @@
 ### Methods
 
 - [\_connectEvents](services.timesheetservice.md#_connectevents)
-- [\_createUniqueEventId](services.timesheetservice.md#_createuniqueeventid)
+- [\_getEventsFromProvider](services.timesheetservice.md#_geteventsfromprovider)
 - [\_getPeriodData](services.timesheetservice.md#_getperioddata)
 - [getPeriods](services.timesheetservice.md#getperiods)
 - [getTimesheet](services.timesheetservice.md#gettimesheet)
@@ -24,7 +24,7 @@
 
 ### constructor
 
-\+ **new TimesheetService**(`context`: [*Context*](graphql_context.context.md), `_msgraphSvc`: [*MSGraphService*](services.msgraphservice.md), `_projectSvc`: [*ProjectService*](services.projectservice.md), `_teSvc`: [*TimeEntryService*](services.timeentryservice.md), `_fteSvc`: [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md), `_cperiodSvc`: [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md), `_fperiodSvc`: [*ForecastedPeriodsService*](services.forecastedperiodsservice.md)): [*TimesheetService*](services.timesheetservice.md)
+\+ **new TimesheetService**(`context`: [*Context*](graphql_context.context.md), `_msgraphSvc`: [*MSGraphService*](services.msgraphservice.md), `_googleCalSvc`: [*GoogleCalendarService*](services.googlecalendarservice.md), `_projectSvc`: [*ProjectService*](services.projectservice.md), `_teSvc`: [*TimeEntryService*](services.timeentryservice.md), `_fteSvc`: [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md), `_cperiodSvc`: [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md), `_fperiodSvc`: [*ForecastedPeriodsService*](services.forecastedperiodsservice.md)): [*TimesheetService*](services.timesheetservice.md)
 
 Constructor
 
@@ -34,6 +34,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `context` | [*Context*](graphql_context.context.md) | Injected context through typedi   |
 `_msgraphSvc` | [*MSGraphService*](services.msgraphservice.md) | Injected `MSGraphService` through typedi   |
+`_googleCalSvc` | [*GoogleCalendarService*](services.googlecalendarservice.md) | Injected `GoogleCalendarService` through typedi   |
 `_projectSvc` | [*ProjectService*](services.projectservice.md) | Injected `ProjectService` through typedi   |
 `_teSvc` | [*TimeEntryService*](services.timeentryservice.md) | Injected `TimeEntryService` through typedi   |
 `_fteSvc` | [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md) | Injected `ForecastedTimeEntryService` through typedi   |
@@ -42,7 +43,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetService*](services.timesheetservice.md)
 
-Defined in: [server/services/timesheet/index.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L26)
+Defined in: [server/services/timesheet/index.ts:28](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L28)
 
 ## Methods
 
@@ -62,32 +63,33 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [server/services/timesheet/index.ts:264](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L264)
+Defined in: [server/services/timesheet/index.ts:276](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L276)
 
 ___
 
-### \_createUniqueEventId
+### \_getEventsFromProvider
 
-▸ `Private`**_createUniqueEventId**(`eventId`: *string*, `startDateTime`: Date): *string*
+▸ `Private`**_getEventsFromProvider**(`__namedParameters`: IProviderEventsParameters): *Promise*<any[]\>
 
-Create unique ID consisting of event ID + event start date time
+Get events from provider
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`eventId` | *string* | Event ID   |
-`startDateTime` | Date | Start date time    |
+Name | Type |
+:------ | :------ |
+`__namedParameters` | IProviderEventsParameters |
 
-**Returns:** *string*
+**Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/timesheet/index.ts:194](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L194)
+Events
+
+Defined in: [server/services/timesheet/index.ts:174](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L174)
 
 ___
 
 ### \_getPeriodData
 
-▸ `Private`**_getPeriodData**(`id`: *string*, `userId`: *string*): *object*
+▸ `Private`**_getPeriodData**(`id`: *string*, `userId`: *string*): ITimesheetPeriodData
 
 Get period data from id
 
@@ -101,17 +103,9 @@ Name | Type | Description |
 `id` | *string* | Id   |
 `userId` | *string* | User ID    |
 
-**Returns:** *object*
+**Returns:** ITimesheetPeriodData
 
-Name | Type |
-:------ | :------ |
-`_id` | *string* |
-`month` | *number* |
-`userId` | *string* |
-`week` | *number* |
-`year` | *number* |
-
-Defined in: [server/services/timesheet/index.ts:207](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L207)
+Defined in: [server/services/timesheet/index.ts:219](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L219)
 
 ___
 
@@ -132,7 +126,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]
 
-Defined in: [server/services/timesheet/index.ts:226](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L226)
+Defined in: [server/services/timesheet/index.ts:238](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L238)
 
 ___
 
@@ -150,7 +144,7 @@ Name | Type |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/timesheet/index.ts:53](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L53)
+Defined in: [server/services/timesheet/index.ts:57](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L57)
 
 ___
 
@@ -168,7 +162,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/timesheet/index.ts:114](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L114)
+Defined in: [server/services/timesheet/index.ts:107](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L107)
 
 ___
 
@@ -186,4 +180,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/timesheet/index.ts:167](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L167)
+Defined in: [server/services/timesheet/index.ts:146](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L146)

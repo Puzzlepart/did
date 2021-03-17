@@ -11,7 +11,9 @@ import { IProjectLinkProps } from './types'
 export const ProjectLink: FunctionComponent<IProjectLinkProps> = (
   props: IProjectLinkProps
 ) => (
-  <Link className={styles.root} to={`/projects/search/${props.project?.tag}`}>
+  <Link
+    className={styles.root}
+    to={`/projects/search/${props.project?.tag}`.toLowerCase()}>
     {props.icon && <Icon className={styles.icon} iconName={props.icon} />}
     <span>{props.text || props.project?.name}</span>
   </Link>

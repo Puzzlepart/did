@@ -2,15 +2,26 @@
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+an
+
+![image-20210317094748280](assets/image-20210317094748280.png)
+
+![image-20210317094740668](../../Library/Application Support/typora-user-images/image-20210317094740668.png)
+
+d this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## 0.10.0 - TBA
+
 ### Added
 - Support for split week, split year scenarios #753
 - Last year option added to reports #775
 - Support for deleting role #692
 - Improved Timesheet statusbar. Now showing on all tabs, and showing either shimmer or progress indicator. Not both. #831
 - Support for norsk (nynorsk) #864
+- Support for initial signin with email #884
+- Showing more details in the summary view on hover #886
+- Summary view moved to Reports
+- Support for start page user setting
 
 ### Fixed
 - Issue where sunday hours would not be displayed in the UI after confirming a week #785
@@ -21,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Issue with rogue customer matches in large event bodies #782
 - Issue with time entry queries in Reports #790
 - Issue with navigating to a customer from e.g. Timesheet #791
+- Issue with navigating directly to a page when not logged in #889
 
 ### Changed
 - Consolidated Server and Client date utils #771

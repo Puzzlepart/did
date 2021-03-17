@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv').config()
 import bodyParser from 'body-parser'
@@ -135,7 +134,13 @@ export class App {
    */
   setupRoutes() {
     const index = express.Router()
-    index.get('/', (_request, response) => {
+    index.get('/', (request, response) => {
+      const url = request.originalUrl.split('?')[0]
+      if (request.isUnauthenticated() && url !== '/') {
+        return response.redirect(
+          `/auth/azuread-openidconnect/signin?redirectUrl=${request.originalUrl}`
+        )
+      }
       return response.render('index')
     })
     this.instance.use('*', index)

@@ -21,7 +21,7 @@ export function useNotificationsQuery(
   const { data, refetch } = useQuery(notificationsQuery, {
     variables: {
       templates: t('notifications.templates', { returnObjects: true }),
-      locale: user?.language
+      locale: user?.preferredLanguage
     },
     fetchPolicy
   })

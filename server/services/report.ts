@@ -1,11 +1,11 @@
 /* eslint-disable unicorn/no-array-callback-reference */
-import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
-import { find, first, omit } from 'underscore'
+import { find, first, omit, pick } from 'underscore'
 import { ProjectService, UserService } from '.'
 import { DateObject } from '../../shared/utils/date.dateObject'
 import { Context } from '../graphql/context'
 import {
+  ConfirmedPeriodsQuery,
   Customer,
   Project,
   ReportsQuery,
@@ -13,7 +13,11 @@ import {
   TimeEntry,
   User
 } from '../graphql/resolvers/types'
-import { ForecastedTimeEntryService, TimeEntryService } from './mongo'
+import {
+  ConfirmedPeriodsService,
+  ForecastedTimeEntryService,
+  TimeEntryService
+} from './mongo'
 
 type Report = TimeEntry[]
 
@@ -35,13 +39,15 @@ export class ReportService {
    * @param _userSvc - Injected `UserService` through typedi
    * @param _teSvc - Injected `TimeEntryService` through typedi
    * @param _fteSvc - Injected `ForecastedTimeEntryService` through typedi
+   * @param _cperiodSvc - Injected `ConfirmedPeriodsService` through typedi
    */
   constructor(
     @Inject('CONTEXT') readonly context: Context,
     private readonly _projectSvc: ProjectService,
     private readonly _userSvc: UserService,
     private readonly _teSvc: TimeEntryService,
-    private readonly _fteSvc: ForecastedTimeEntryService
+    private readonly _fteSvc: ForecastedTimeEntryService,
+    private readonly _cperiodSvc: ConfirmedPeriodsService
   ) {}
 
   /**
@@ -51,32 +57,22 @@ export class ReportService {
    */
   private _generatePresetQuery(preset: ReportsQueryPreset) {
     const d = new DateObject()
-    const q: FilterQuery<TimeEntry> = {}
-    switch (preset) {
-      case 'LAST_MONTH':
-        {
-          q.month = d.add('-1m').toObject().month - 1
-          q.year = d.add('-1m').toObject().year
-        }
-        break
-      case 'CURRENT_MONTH':
-        {
-          q.month = d.toObject().month
-          q.year = d.toObject().year
-        }
-        break
-      case 'LAST_YEAR':
-        {
-          q.year = d.toObject().year - 1
-        }
-        break
-      case 'CURRENT_YEAR':
-        {
-          q.year = d.toObject().year
-        }
-        break
-    }
-    return q
+    return {
+      LAST_MONTH: {
+        month: d.add('-1m').toObject().month - 1,
+        year: d.add('-1m').toObject().year
+      },
+      CURRENT_MONTH: {
+        month: d.toObject().month,
+        year: d.toObject().year
+      },
+      LAST_YEAR: {
+        year: d.toObject().year - 1
+      },
+      CURRENT_YEAR: {
+        year: d.toObject().year
+      }
+    }[preset]
   }
 
   /**
@@ -91,37 +87,50 @@ export class ReportService {
     projects,
     customers
   }: IGenerateReportParameters) {
-    return (
-      timeEntries
-        .sort(({ startDateTime: a }, { startDateTime: b }) => {
-          return sortAsc
-            ? new Date(a).getTime() - new Date(b).getTime()
-            : new Date(b).getTime() - new Date(a).getTime()
-        })
-        // eslint-disable-next-line unicorn/no-array-reduce
-        .reduce(($, entry) => {
-          if (!entry.projectId) return $
-          const resource = users
-            ? find(users, (user) => user.id === entry.userId)
-            : {}
-          const project = find(projects, ({ _id }) => {
-            return _id === entry.projectId
-          })
-          const customer = find(
-            customers,
-            (c) => c.key === first(entry.projectId.split(' '))
-          )
-          if (project && customer && resource) {
-            $.push({
-              ...entry,
-              project,
-              customer,
-              resource
-            })
-          }
-          return $
-        }, [])
-    )
+    return timeEntries
+      .sort(({ startDateTime: a }, { startDateTime: b }) => {
+        return sortAsc
+          ? new Date(a).getTime() - new Date(b).getTime()
+          : new Date(b).getTime() - new Date(a).getTime()
+      })
+      .reduce((timeEntries_, entry) => {
+        if (!entry.projectId) return timeEntries_
+        const resource = users
+          ? find(users, (user) => user.id === entry.userId)
+          : {}
+        const project = find(projects, ({ _id }) => _id === entry.projectId)
+        const customer = find(
+          customers,
+          (c) => c.key === first(entry.projectId.split(' '))
+        )
+        if (project && customer && resource) {
+          return [
+            ...timeEntries_,
+            {
+              ...omit(entry, '_id', 'userId', 'periodId', 'projectId', 'body'),
+              project: pick(project, 'tag', 'name', 'description', 'icon'),
+              customer: pick(customer, 'key', 'name', 'description', 'icon'),
+              resource: pick(
+                resource,
+                'givenName',
+                'surname',
+                'mail',
+                'displayName'
+              )
+            }
+          ]
+        }
+        return timeEntries_
+      }, [])
+  }
+
+  /**
+   * Get confirmed periods
+   *
+   * @param queries - Queries
+   */
+  public async getConfirmedPeriods(queries: ConfirmedPeriodsQuery[]) {
+    return await this._cperiodSvc.find({ $or: queries })
   }
 
   /**

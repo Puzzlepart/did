@@ -1,69 +1,28 @@
 /* eslint-disable tsdoc/syntax */
-import { useMutation } from '@apollo/client'
-import { AppContext } from 'AppContext'
-import { useMessage, UserMessage } from 'components'
-import { getValue, setValue } from 'helpers'
-import {
-  MessageBarType,
-  PrimaryButton,
-  TextField
-} from 'office-ui-fabric-react'
-import React, { useContext, useMemo, useState } from 'react'
+import { UserMessage } from 'components'
+import { PrimaryButton, TextField } from 'office-ui-fabric-react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Subscription } from 'types'
-import { pick } from 'underscore'
-import deepCopy from 'utils/deepCopy'
-import omitDeep from 'utils/omitDeep'
-import { SUBSCRIPTION_SETTINGS } from './config'
 import { SubscriptionContext } from './context'
 import { SettingsSection } from './SettingsSection'
 import styles from './SubscriptionSettings.module.scss'
-import $updateSubscription from './updateSubscription.gql'
+import { useSubscriptionSettings } from './useSubscriptionSettings'
 
 /**
  * @category Function Component
  */
 export const SubscriptionSettings = () => {
-  const context = useContext(AppContext)
   const { t } = useTranslation()
-  const [subscription, setSubscription] = useState<Subscription>(
-    omitDeep(deepCopy(context.subscription), '__typename')
-  )
-  const [updateSubscription] = useMutation($updateSubscription)
-  const [message, setMessage] = useMessage()
-  const sections = useMemo(() => SUBSCRIPTION_SETTINGS(t), [t])
-
-  /**
-   * On settings changed
-   *
-   * @param key - Setting key
-   * @param value - The actual value or a callback function returning the value
-   */
-  const onSettingsChanged = (
-    key: string,
-    value: boolean | string | ((value: any) => any)
-  ) => {
-    const _subscription = deepCopy(subscription)
-    if (typeof value === 'function') {
-      value = value(getValue(_subscription, `settings.${key}`))
-    }
-    setValue(_subscription, `settings.${key}`, value)
-    setSubscription(_subscription)
-  }
-
-  const onSaveSettings = async () => {
-    await updateSubscription({
-      variables: pick(subscription, 'id', 'settings')
-    })
-    setMessage({
-      text: t('admin.subscriptionSettingsUpdateSuccess'),
-      type: MessageBarType.success
-    })
-  }
+  const {
+    subscription,
+    message,
+    context,
+    onSaveSettings,
+    sections
+  } = useSubscriptionSettings()
 
   return (
-    <SubscriptionContext.Provider
-      value={{ settings: subscription.settings, onSettingsChanged }}>
+    <SubscriptionContext.Provider value={context}>
       <div className={styles.root}>
         {message && (
           <UserMessage
@@ -80,6 +39,13 @@ export const SubscriptionSettings = () => {
             disabled
             label={t('common.nameLabel')}
             value={subscription?.name}
+          />
+        </div>
+        <div className={styles.inputField}>
+          <TextField
+            disabled
+            label={t('common.ownerLabel')}
+            value={subscription?.owner}
           />
         </div>
         {subscription?.settings &&

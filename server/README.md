@@ -8,4 +8,4 @@ Our backend serves the client data using our [GraphQL](https://graphql.org/) imp
 We're logging to [Apollo Studio](https://studio.apollographql.com/org/puzzlepart/graphs).
 
 
-See [generated documentation](./docs/README.md)
+See [generated documentation](./.docs/README.md)

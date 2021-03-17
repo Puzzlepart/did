@@ -27,29 +27,20 @@ interface ICreateReducerParameters {
  * Create reducer for Customers
  */
 export default ({ params }: ICreateReducerParameters) =>
-  createReducer(initState(params), {
-    [DATA_UPDATED.type]: (
-      state,
-      { payload }: ReturnType<typeof DATA_UPDATED>
-    ) => {
-      state.customers = payload.query.data?.customers || []
-      state.selected = find(state.customers, (c) =>
-        [params.key, params.view].includes(c.key.toLowerCase())
-      )
-    },
-
-    [SET_SELECTED_CUSTOMER.type]: (
-      state,
-      { payload }: ReturnType<typeof SET_SELECTED_CUSTOMER>
-    ) => {
-      state.selected = payload.customer
-    },
-
-    [CHANGE_VIEW.type]: (
-      state,
-      { payload }: ReturnType<typeof CHANGE_VIEW>
-    ) => {
-      state.view = payload.view
-      state.selected = null
-    }
-  })
+  createReducer(initState(params), (builder) =>
+    builder
+      .addCase(DATA_UPDATED, (state, { payload }) => {
+        state.customers = payload.query.data?.customers || []
+        state.selected = find(
+          state.customers,
+          (c) => params.key?.toLowerCase() === c.key.toLowerCase()
+        )
+      })
+      .addCase(SET_SELECTED_CUSTOMER, (state, { payload }) => {
+        state.selected = payload.customer
+      })
+      .addCase(CHANGE_VIEW, (state, { payload }) => {
+        state.view = payload.view
+        state.selected = null
+      })
+  )

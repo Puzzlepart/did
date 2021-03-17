@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IColumn } from 'office-ui-fabric-react'
 
 /**

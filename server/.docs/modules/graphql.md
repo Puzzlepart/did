@@ -1,10 +1,10 @@
-[did-server - v0.9.8](../README.md) / graphql
+[did-server - v0.9.9](../README.md) / graphql
 
 # Module: graphql
 
 ## Table of contents
 
-### Resolver Classes
+### GraphQL Resolver Classes
 
 - [ApiTokenResolver](../classes/graphql.apitokenresolver.md)
 - [CustomerResolver](../classes/graphql.customerresolver.md)
@@ -21,6 +21,7 @@
 ### InputType Classes
 
 - [ApiTokenInput](../classes/graphql.apitokeninput.md)
+- [ConfirmedPeriodsQuery](../classes/graphql.confirmedperiodsquery.md)
 - [CustomerInput](../classes/graphql.customerinput.md)
 - [EventInput](../classes/graphql.eventinput.md)
 - [LabelInput](../classes/graphql.labelinput.md)
@@ -37,7 +38,6 @@
 - [TimesheetQuery](../classes/graphql.timesheetquery.md)
 - [UserInput](../classes/graphql.userinput.md)
 - [UserQuery](../classes/graphql.userquery.md)
-- [UserQueryOptions](../classes/graphql.userqueryoptions.md)
 
 ### ObjectType Classes
 
@@ -113,7 +113,7 @@ Name | Type |
 `clientName` | *string* |
 `clientVersion` | *string* |
 
-Defined in: [server/graphql/index.ts:90](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L90)
+Defined in: [server/graphql/index.ts:89](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L89)
 
 ___
 
@@ -132,7 +132,7 @@ Generate GraphQL schema using type-graphql
 
 **Returns:** *Promise*<GraphQLSchema\>
 
-Defined in: [server/graphql/index.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L47)
+Defined in: [server/graphql/index.ts:46](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L46)
 
 ___
 
@@ -154,4 +154,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/graphql/index.ts:123](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L123)
+Defined in: [server/graphql/index.ts:122](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L122)

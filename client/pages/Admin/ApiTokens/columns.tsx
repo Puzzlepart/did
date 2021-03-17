@@ -1,6 +1,7 @@
+import { DeleteLink } from 'components'
 import { DateObject } from 'DateUtils'
 import { TFunction } from 'i18next'
-import { DefaultButton, IColumn } from 'office-ui-fabric-react'
+import { IColumn } from 'office-ui-fabric-react'
 import React from 'react'
 import { ApiToken } from 'types'
 
@@ -41,10 +42,7 @@ export const ApiTokensColumns = (
     name: '',
     minWidth: 150,
     onRender: (token: ApiToken) => (
-      <DefaultButton
-        text={t('common.delete')}
-        onClick={() => onDeleteApiToken(token)}
-      />
+      <DeleteLink onClick={() => onDeleteApiToken(token)} />
     )
   }
 ]

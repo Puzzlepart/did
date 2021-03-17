@@ -13,7 +13,7 @@ import i18next from 'i18next'
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
 import 'regenerator-runtime/runtime.js'
-import { App } from './App'
+import { App } from './app'
 import { ContextUser, IAppContext } from './AppContext'
 import { $usercontext, client } from './graphql'
 import './i18n'
@@ -40,16 +40,16 @@ export const boostrap = async () => {
       })
       context.user = new ContextUser(data.user)
       context.subscription = data?.subscription
+      context.authProviders = data?.authProviders
       return context
     } catch {
-      // We return an "empty" user with preferred language en-GB (default)
       return { user: new ContextUser() }
     }
   }
 
   const context = await getContext()
-  DateUtils.setup(context.user.language)
-  i18next.changeLanguage(context.user.language)
+  DateUtils.setup(context.user.preferredLanguage)
+  i18next.changeLanguage(context.user.preferredLanguage)
 
   ReactDom.render(
     <ApolloProvider client={client}>

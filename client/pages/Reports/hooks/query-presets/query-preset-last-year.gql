@@ -1,7 +1,0 @@
-#import "../../../../graphql/fragments/timeentry-fragment.gql"
-
-query LastYearReport {
-  report(preset: "LAST_YEAR") {
-    ...TimeEntryFragment
-  }
-}

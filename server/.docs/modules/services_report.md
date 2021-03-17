@@ -1,4 +1,4 @@
-[did-server - v0.9.8](../README.md) / services/report
+[did-server - v0.9.9](../README.md) / services/report
 
 # Module: services/report
 

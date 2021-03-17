@@ -15,10 +15,10 @@ import { Role } from '../types'
 export class User {
   _id?: string
 
-  @Field(() => ID)
+  @Field(() => ID, { nullable: true })
   id?: string
 
-  @Field()
+  @Field({ nullable: true })
   displayName?: string
 
   @Field({ nullable: true })
@@ -37,16 +37,25 @@ export class User {
   mail?: string
 
   @Field({ nullable: true })
+  startPage?: string
+
+  @Field({ nullable: true })
   preferredLanguage?: string
 
-  @Field(() => Role)
+  @Field({ nullable: true })
+  hiddenFromReports?: boolean
+
+  @Field(() => Role, { nullable: true })
   role?: Role | string
 
-  @Field(() => Subscription)
+  @Field(() => Subscription, { nullable: true })
   subscription?: Subscription
 
   @Field(() => String, { nullable: true })
   configuration?: any
+
+  @Field({ nullable: true })
+  provider?: string
 
   public create?(user: User): User {
     Object.assign(this, user)
@@ -83,19 +92,19 @@ export class UserInput {
   mail?: string
 
   @Field({ nullable: true })
+  startPage?: string
+
+  @Field({ nullable: true })
   preferredLanguage?: string
 
   @Field({ nullable: true })
-  role?: string
-}
+  hiddenFromReports?: boolean
 
-/**
- * @category InputType
- */
-@InputType({ description: 'Input object for User query options' })
-export class UserQueryOptions {
   @Field({ nullable: true })
-  sortBy?: string
+  role?: string
+
+  @Field({ nullable: true })
+  provider?: string
 }
 
 /**
@@ -105,4 +114,7 @@ export class UserQueryOptions {
 export class UserQuery {
   @Field({ nullable: true })
   role?: string
+
+  @Field({ nullable: true })
+  hiddenFromReports?: boolean
 }

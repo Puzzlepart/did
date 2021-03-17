@@ -1,20 +1,20 @@
 /* eslint-disable tsdoc/syntax */
-import { AppContext } from 'AppContext'
 import { UserMessage } from 'components'
 import { DefaultButton, MessageBarType } from 'office-ui-fabric-react'
-import React, { FunctionComponent, useContext } from 'react'
+import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
+import { isEmpty } from 'underscore'
 import styles from './Home.module.scss'
+import { useAuthProviders } from './useAuthProviders'
+import { useHome } from './useHome'
 
 /**
  * @category Function Component
  */
 export const Home: FunctionComponent = () => {
-  const { subscription } = useContext(AppContext)
+  const { error, subscription } = useHome()
+  const providers = useAuthProviders()
   const { t } = useTranslation()
-  const error = JSON.parse(
-    document.querySelector('#app').getAttribute('data-error') || null
-  )
 
   return (
     <div className={styles.root}>
@@ -26,15 +26,30 @@ export const Home: FunctionComponent = () => {
           type={MessageBarType.error}
           iconName={error.icon}
           text={[`#### ${error.name} ####`, error.message].join('\n\n')}
+          onDismiss={() => {
+            window.location.href = window.location.href.split('?')[0]
+          }}
         />
       )}
-      <div hidden={!!subscription || !!error}>
-        <DefaultButton
-          className={styles.signinbutton}
-          href='/auth/signin'
-          text={t('common.signInText')}
+      {isEmpty(Object.keys(providers)) && (
+        <UserMessage
+          type={MessageBarType.warning}
+          text={t('common.signInDisabledMessage')}
         />
-      </div>
+      )}
+      {!subscription && !error && (
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          {Object.keys(providers).map((key) => (
+            <DefaultButton
+              key={key}
+              onClick={() => document.location.replace(`/auth/${key}/signin`)}
+              iconProps={{ iconName: providers[key].iconName }}
+              style={{ marginTop: 10 }}
+              text={providers[key].text}
+            />
+          ))}
+        </div>
+      )}
     </div>
   )
 }

@@ -3,13 +3,19 @@ import {
   Project,
   TimesheetPeriodInput
 } from '../../graphql/resolvers/types'
+import MatchingEngine from './matching'
 
 export interface IGetTimesheetParameters {
   startDate: string
   endDate: string
-  locale: string
-  dateFormat: string
   tzOffset: number
+  locale?: string
+  dateFormat?: string
+}
+
+export interface IProviderEventsParameters extends IGetTimesheetParameters {
+  provider: 'google' | 'azuread-openidconnect'
+  engine?: MatchingEngine
 }
 
 export interface ISubmitPeriodParameters {
@@ -45,4 +51,18 @@ export interface IConnectEventsParameters extends IGetTimesheetParameters {
   projects: Project[]
   customers: Customer[]
   events: any[]
+}
+
+/**
+ * Timesheet period data
+ */
+export interface ITimesheetPeriodData {
+  _id: string
+  userId: string
+  week: number
+  month: number
+  year: number
+  hours?: number
+  forecastedHours?: number
+  events?: any[]
 }

@@ -1,4 +1,4 @@
-[did-server - v0.9.8](../README.md) / middleware
+[did-server - v0.9.9](../README.md) / middleware
 
 # Module: middleware
 
@@ -46,7 +46,7 @@ Defined in: [server/middleware/redis/index.ts:14](https://github.com/Puzzlepart/
 
 ### passportMiddleware
 
-▸ `Const`**passportMiddleware**(`mongoClient`: *MongoClient*): *PassportStatic*
+▸ `Const`**passportMiddleware**(`mcl`: *MongoClient*): *PassportStatic*
 
 Setup passport to be used for authentication
 
@@ -54,11 +54,11 @@ Setup passport to be used for authentication
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`mongoClient` | *MongoClient* | Mongo client    |
+`mcl` | *MongoClient* | Mongo client    |
 
 **Returns:** *PassportStatic*
 
-Defined in: [server/middleware/passport/index.ts:28](https://github.com/Puzzlepart/did/blob/dev/server/middleware/passport/index.ts#L28)
+Defined in: [server/middleware/passport/index.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/middleware/passport/index.ts#L11)
 
 ___
 

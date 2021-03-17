@@ -1,4 +1,4 @@
-[did-server - v0.9.8](../README.md) / [graphql](../modules/graphql.md) / SubscriptionADSyncSettings
+[did-server - v0.9.9](../README.md) / [graphql](../modules/graphql.md) / SubscriptionADSyncSettings
 
 # Class: SubscriptionADSyncSettings
 
@@ -12,8 +12,8 @@
 
 ### Properties
 
-- [adUserSyncEnabled](graphql.subscriptionadsyncsettings.md#adusersyncenabled)
-- [adUserSyncProperties](graphql.subscriptionadsyncsettings.md#adusersyncproperties)
+- [enabled](graphql.subscriptionadsyncsettings.md#enabled)
+- [properties](graphql.subscriptionadsyncsettings.md#properties)
 
 ## Constructors
 
@@ -25,16 +25,16 @@
 
 ## Properties
 
-### adUserSyncEnabled
+### enabled
 
-• `Optional` **adUserSyncEnabled**: *boolean*
+• `Optional` **enabled**: *boolean*
 
 Defined in: [server/graphql/resolvers/subscription/types.ts:28](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L28)
 
 ___
 
-### adUserSyncProperties
+### properties
 
-• `Optional` **adUserSyncProperties**: *string*[]
+• `Optional` **properties**: *string*[]
 
 Defined in: [server/graphql/resolvers/subscription/types.ts:31](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L31)

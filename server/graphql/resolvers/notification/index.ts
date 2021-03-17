@@ -14,7 +14,7 @@ import { Notification, NotificationTemplates } from './types'
  *
  * @see https://typegraphql.com/docs/dependency-injection.html
  *
- * @category Resolver
+ * @category GraphQL Resolver
  */
 @Service()
 @Resolver(Notification)

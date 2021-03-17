@@ -21,31 +21,24 @@ import { IReportsReducerParameters } from './types'
  * Creating reducer for Reports using reduxjs/toolkit
  */
 export default ({ app, url, queries }: IReportsReducerParameters) =>
-  createReducer<IReportsState>(
-    {},
-    {
-      [INIT.type]: (state) => {
+  createReducer<IReportsState>({}, (builder) =>
+    builder
+      .addCase(INIT, (state) => {
         state.preset = find(queries, (q) => q.key === url.query) as any
         state.savedFilters = get(app.user.configuration, 'reports.filters', {
           default: {}
         })
-      },
-
-      [DATA_UPDATED.type]: (
-        state,
-        { payload }: ReturnType<typeof DATA_UPDATED>
-      ) => {
+      })
+      .addCase(DATA_UPDATED, (state, { payload }) => {
         state.loading = payload.query.loading
-        state.timeentries = payload.query?.data?.report || []
-        state.subset = state.timeentries
-      },
-
-      [SET_FILTER.type]: (
-        state,
-        { payload }: ReturnType<typeof SET_FILTER>
-      ) => {
+        if (payload.query?.data) {
+          state.data = { ...state.data, ...payload.query.data }
+          state.subset = state.data.timeEntries
+        }
+      })
+      .addCase(SET_FILTER, (state, { payload }) => {
         state.filter = payload.filter as any
-        state.subset = filter(state.timeentries, (entry) => {
+        state.subset = filter(state.data?.timeEntries, (entry) => {
           return (
             filter(Object.keys(payload.filter.values), (key) => {
               return payload.filter.values[key].includes(
@@ -54,13 +47,10 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
             }).length === Object.keys(payload.filter.values).length
           )
         })
-        state.isFiltered = state.subset.length !== state.timeentries.length
-      },
-
-      [ADD_FILTER.type]: (
-        state,
-        { payload }: ReturnType<typeof ADD_FILTER>
-      ) => {
+        state.isFiltered =
+          state.subset.length !== state.data?.timeEntries?.length
+      })
+      .addCase(ADD_FILTER, (state, { payload }) => {
         const newFilter: any = {
           ...current(state).filter,
           ...payload.model
@@ -70,23 +60,17 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
           [newFilter.key]: newFilter
         }
         state.filter = newFilter
-      },
-
-      [REMOVE_SELECTED_FILTER.type]: (state) => {
+      })
+      .addCase(REMOVE_SELECTED_FILTER, (state) => {
         state.savedFilters = omit(state.savedFilters, state.filter.key)
         state.filter = null
-        state.subset = state.timeentries
+        state.subset = state.data?.timeEntries
         state.isFiltered = false
-      },
-
-      [TOGGLE_FILTER_PANEL.type]: (state) => {
+      })
+      .addCase(TOGGLE_FILTER_PANEL, (state) => {
         state.isFiltersOpen = !state.isFiltersOpen
-      },
-
-      [FILTERS_UPDATED.type]: (
-        state,
-        { payload }: ReturnType<typeof FILTERS_UPDATED>
-      ) => {
+      })
+      .addCase(FILTERS_UPDATED, (state, { payload }) => {
         state.filter = {
           key: null,
           values: payload.filters.reduce(
@@ -97,7 +81,7 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
             {}
           )
         }
-        state.subset = filter(state.timeentries, (entry) => {
+        state.subset = filter(state.data?.timeEntries, (entry) => {
           return (
             filter(payload.filters, (f) => {
               const selectedKeys = f.selected.map((s) => s.key)
@@ -105,30 +89,21 @@ export default ({ app, url, queries }: IReportsReducerParameters) =>
             }).length === payload.filters.length
           )
         })
-        state.isFiltered = state.subset.length !== state.timeentries.length
-      },
-
-      [SET_GROUP_BY.type]: (
-        state,
-        { payload }: ReturnType<typeof SET_GROUP_BY>
-      ) => {
+        state.isFiltered =
+          state.subset.length !== state.data?.timeEntries?.length
+      })
+      .addCase(SET_GROUP_BY, (state, { payload }) => {
         state.groupBy = payload.groupBy
-      },
-
-      [CHANGE_QUERY.type]: (
-        state,
-        { payload }: ReturnType<typeof CHANGE_QUERY>
-      ) => {
+      })
+      .addCase(CHANGE_QUERY, (state, { payload }) => {
         state.preset = find(queries, (q) => q.key === payload.key) as any
         state.subset = null
-      },
-
-      [CLEAR_FILTERS.type]: (state) => {
+      })
+      .addCase(CLEAR_FILTERS, (state) => {
         state.filter = null
-        state.subset = state.timeentries
+        state.subset = state.data?.timeEntries
         state.isFiltered = false
-      }
-    }
+      })
   )
 
 export * from './useReportsReducer'

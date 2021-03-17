@@ -1,4 +1,4 @@
-[did-client - v0.9.8](../README.md) / Hooks
+[did-client - v0.9.9](../README.md) / Hooks
 
 # Module: Hooks
 
@@ -114,7 +114,7 @@ Permissions available based on specified permissionIds
 and a function hasPermission that checks if the currently logged
 on user has the specified permission.
 
-Defined in: [client/hooks/user/usePermissions.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/usePermissions.ts#L19)
+Defined in: [client/hooks/user/usePermissions.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/usePermissions.ts#L20)
 
 ___
 

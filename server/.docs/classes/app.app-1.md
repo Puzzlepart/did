@@ -1,4 +1,4 @@
-[did-server - v0.9.8](../README.md) / [app](../modules/app.md) / App
+[did-server - v0.9.9](../README.md) / [app](../modules/app.md) / App
 
 # Class: App
 
@@ -38,7 +38,7 @@ Bootstrapping the express application
 
 **Returns:** [*App*](app.app-1.md)
 
-Defined in: [server/app.ts:35](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L35)
+Defined in: [server/app.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L34)
 
 ## Properties
 
@@ -48,7 +48,7 @@ Defined in: [server/app.ts:35](https://github.com/Puzzlepart/did/blob/dev/server
 
 Mongo client
 
-Defined in: [server/app.ts:35](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L35)
+Defined in: [server/app.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L34)
 
 ___
 
@@ -58,7 +58,7 @@ ___
 
 The express.Application instance
 
-Defined in: [server/app.ts:30](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L30)
+Defined in: [server/app.ts:29](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L29)
 
 ## Methods
 
@@ -79,7 +79,7 @@ Setup app
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/app.ts:65](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L65)
+Defined in: [server/app.ts:64](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L64)
 
 ___
 
@@ -94,7 +94,7 @@ Setup static assets
 
 **Returns:** *void*
 
-Defined in: [server/app.ts:103](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L103)
+Defined in: [server/app.ts:102](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L102)
 
 ___
 
@@ -110,7 +110,7 @@ Setup authentication
 
 **Returns:** *void*
 
-Defined in: [server/app.ts:115](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L115)
+Defined in: [server/app.ts:114](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L114)
 
 ___
 
@@ -122,7 +122,7 @@ Setup error handling using http-errors
 
 **Returns:** *void*
 
-Defined in: [server/app.ts:147](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L147)
+Defined in: [server/app.ts:152](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L152)
 
 ___
 
@@ -134,7 +134,7 @@ Setup graphql
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/app.ts:126](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L126)
+Defined in: [server/app.ts:125](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L125)
 
 ___
 
@@ -149,7 +149,7 @@ Router full control of the routing.
 
 **Returns:** *void*
 
-Defined in: [server/app.ts:136](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L136)
+Defined in: [server/app.ts:135](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L135)
 
 ___
 
@@ -161,7 +161,7 @@ Setup sessions using connect-redis
 
 **Returns:** *void*
 
-Defined in: [server/app.ts:85](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L85)
+Defined in: [server/app.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L84)
 
 ___
 
@@ -173,4 +173,4 @@ Setup hbs as view engine
 
 **Returns:** *void*
 
-Defined in: [server/app.ts:92](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L92)
+Defined in: [server/app.ts:91](https://github.com/Puzzlepart/did/blob/dev/server/app.ts#L91)

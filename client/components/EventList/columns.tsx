@@ -109,6 +109,7 @@ export function useColumns(props: IEventListProps) {
         ...col,
         isResizable: props.resizableColumns
       })),
-    [props.events]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [props.additionalColumns]
   )
 }

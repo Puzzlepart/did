@@ -1,4 +1,4 @@
-[did-server - v0.9.8](../README.md) / [services/oauth](../modules/services_oauth.md) / default
+[did-server - v0.9.9](../README.md) / [services/oauth](../modules/services_oauth.md) / default
 
 # Class: default
 
@@ -19,13 +19,13 @@
 
 ### constructor
 
-\+ **new default**(`_request`: *Request*): [*default*](services_oauth.default.md)
+\+ **new default**(`_request`: *any*): [*default*](services_oauth.default.md)
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`_request` | *Request* |
+`_request` | *any* |
 
 **Returns:** [*default*](services_oauth.default.md)
 

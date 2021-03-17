@@ -1,4 +1,4 @@
-[did-client - v0.9.8](../README.md) / [Pages](../modules/pages.md) / ITimesheetState
+[did-client - v0.9.9](../README.md) / [Pages](../modules/pages.md) / ITimesheetState
 
 # Interface: ITimesheetState
 
@@ -28,7 +28,7 @@
 
 • `Optional` **error**: *any*
 
-Defined in: [client/pages/Timesheet/types.ts:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L13)
+Defined in: [client/pages/Timesheet/types.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L20)
 
 ___
 
@@ -36,7 +36,7 @@ ___
 
 • `Optional` **loading**: *IProgressProps*
 
-Defined in: [client/pages/Timesheet/types.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L12)
+Defined in: [client/pages/Timesheet/types.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L19)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 • **periods**: [*TimesheetPeriod*](../classes/pages.timesheetperiod.md)[]
 
-Defined in: [client/pages/Timesheet/types.ts:8](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L8)
+Defined in: [client/pages/Timesheet/types.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L15)
 
 ___
 
@@ -52,7 +52,7 @@ ___
 
 • **scope**: [*TimesheetScope*](../classes/pages.timesheetscope.md)
 
-Defined in: [client/pages/Timesheet/types.ts:11](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L11)
+Defined in: [client/pages/Timesheet/types.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L18)
 
 ___
 
@@ -60,7 +60,7 @@ ___
 
 • `Optional` **selectedPeriod**: [*TimesheetPeriod*](../classes/pages.timesheetperiod.md)
 
-Defined in: [client/pages/Timesheet/types.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L9)
+Defined in: [client/pages/Timesheet/types.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L16)
 
 ___
 
@@ -68,7 +68,7 @@ ___
 
 • **selectedView**: [*TimesheetView*](../modules/pages.md#timesheetview)
 
-Defined in: [client/pages/Timesheet/types.ts:10](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L10)
+Defined in: [client/pages/Timesheet/types.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L17)
 
 ___
 
@@ -76,4 +76,4 @@ ___
 
 • `Optional` **showHotkeysModal**: *boolean*
 
-Defined in: [client/pages/Timesheet/types.ts:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L14)
+Defined in: [client/pages/Timesheet/types.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L21)

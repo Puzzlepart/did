@@ -1,4 +1,4 @@
-[did-server - v0.9.8](../README.md) / utils/stripHtmlString
+[did-server - v0.9.9](../README.md) / utils/stripHtmlString
 
 # Module: utils/stripHtmlString
 

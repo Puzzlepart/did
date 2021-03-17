@@ -1,4 +1,4 @@
-[did-server - v0.9.8](../README.md) / [services](../modules/services.md) / MSGraphService
+[did-server - v0.9.9](../README.md) / [services](../modules/services.md) / MSGraphService
 
 # Class: MSGraphService
 
@@ -20,6 +20,7 @@
 
 - [\_getClient](services.msgraphservice.md#_getclient)
 - [createOutlookCategory](services.msgraphservice.md#createoutlookcategory)
+- [getCurrentUser](services.msgraphservice.md#getcurrentuser)
 - [getEvents](services.msgraphservice.md#getevents)
 - [getOutlookCategories](services.msgraphservice.md#getoutlookcategories)
 - [getUsers](services.msgraphservice.md#getusers)
@@ -92,7 +93,25 @@ Name | Type | Description |
 
 **Returns:** *Promise*<MSGraphOutlookCategory\>
 
-Defined in: [server/services/msgraph/index.ts:90](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L90)
+Defined in: [server/services/msgraph/index.ts:105](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L105)
+
+___
+
+### getCurrentUser
+
+▸ **getCurrentUser**(`properties`: *string*[]): *Promise*<any\>
+
+Get current user properties
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`properties` | *string*[] | Properties to retrieve    |
+
+**Returns:** *Promise*<any\>
+
+Defined in: [server/services/msgraph/index.ts:56](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L56)
 
 ___
 
@@ -112,7 +131,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<default[]\>
 
-Defined in: [server/services/msgraph/index.ts:140](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L140)
+Defined in: [server/services/msgraph/index.ts:155](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L155)
 
 ___
 
@@ -124,7 +143,7 @@ Get Outlook categories
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/msgraph/index.ts:116](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L116)
+Defined in: [server/services/msgraph/index.ts:131](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L131)
 
 ___
 
@@ -136,4 +155,4 @@ Get Azure Active Directory users
 
 **Returns:** *Promise*<any\>
 
-Defined in: [server/services/msgraph/index.ts:54](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L54)
+Defined in: [server/services/msgraph/index.ts:69](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L69)

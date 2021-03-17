@@ -1,0 +1,24 @@
+query SummaryReport($userQuery: UserQuery, $queries: [ConfirmedPeriodsQuery!]!) {
+  periods: confirmedPeriods(queries:$queries) {
+    userId
+    week
+    year
+    hours
+    events {
+      projectId
+      duration
+    }
+  }
+  users: users(query: $userQuery) {
+    id
+    displayName
+    mail
+  }
+  projects: projects {
+    _id
+    customerKey
+    customer {
+      name
+    }
+  }
+}

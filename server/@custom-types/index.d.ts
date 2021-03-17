@@ -8,7 +8,6 @@ declare namespace Express {
    */
   interface UserSubscription {
     id: string
-    connectionString: string
     name: string
     settings: any
   }

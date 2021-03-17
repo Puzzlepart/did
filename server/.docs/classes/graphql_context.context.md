@@ -1,4 +1,4 @@
-[did-server - v0.9.8](../README.md) / [graphql/context](../modules/graphql_context.md) / Context
+[did-server - v0.9.9](../README.md) / [graphql/context](../modules/graphql_context.md) / Context
 
 # Class: Context
 
@@ -18,6 +18,7 @@ GraphQL context
 - [db](graphql_context.context.md#db)
 - [mongoClient](graphql_context.context.md#mongoclient)
 - [permissions](graphql_context.context.md#permissions)
+- [provider](graphql_context.context.md#provider)
 - [requestId](graphql_context.context.md#requestid)
 - [subscription](graphql_context.context.md#subscription)
 - [userId](graphql_context.context.md#userid)
@@ -38,7 +39,7 @@ GraphQL context
 
 Container instance
 
-Defined in: [server/graphql/context.ts:37](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L37)
+Defined in: [server/graphql/context.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L44)
 
 ___
 
@@ -48,7 +49,7 @@ ___
 
 Mongo database
 
-Defined in: [server/graphql/context.ts:52](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L52)
+Defined in: [server/graphql/context.ts:59](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L59)
 
 ___
 
@@ -58,7 +59,7 @@ ___
 
 Mongo client
 
-Defined in: [server/graphql/context.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L47)
+Defined in: [server/graphql/context.ts:54](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L54)
 
 ___
 
@@ -68,7 +69,19 @@ ___
 
 Permissions
 
-Defined in: [server/graphql/context.ts:42](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L42)
+Defined in: [server/graphql/context.ts:49](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L49)
+
+___
+
+### provider
+
+• `Optional` **provider**: *google* \| *microsoft*
+
+Provider
+
+google or microsoft
+
+Defined in: [server/graphql/context.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L34)
 
 ___
 
@@ -90,7 +103,7 @@ ___
 
 Subscription
 
-Defined in: [server/graphql/context.ts:32](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L32)
+Defined in: [server/graphql/context.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/graphql/context.ts#L39)
 
 ___
 

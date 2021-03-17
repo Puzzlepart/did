@@ -1,4 +1,4 @@
-[did-server - v0.9.8](../README.md) / [services](../modules/services.md) / UserNotification
+[did-server - v0.9.9](../README.md) / [services](../modules/services.md) / UserNotification
 
 # Class: UserNotification
 

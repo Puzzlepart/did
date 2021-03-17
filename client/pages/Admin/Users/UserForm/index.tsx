@@ -1,58 +1,35 @@
-import { useMutation } from '@apollo/client'
 import { Autocomplete } from 'components'
-import { Panel, PrimaryButton } from 'office-ui-fabric-react'
-import React, { FunctionComponent, useContext, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { Role, User } from 'types'
-import { find, omit, pick } from 'underscore'
-import validator from 'validator'
-import { UsersContext } from '../context'
-import $addOrUpdateUser from './addOrUpdateUser.gql'
+import { Panel, PrimaryButton, TextField, Toggle } from 'office-ui-fabric-react'
+import React, { FunctionComponent } from 'react'
+import { pick } from 'underscore'
 import { RolePicker } from './RolePicker'
 import { IUserFormProps } from './types'
 import styles from './UserFormModal.module.scss'
+import { useUserForm } from './useUserForm'
 
 export const UserForm: FunctionComponent<IUserFormProps> = (
   props: IUserFormProps
 ) => {
-  const { t } = useTranslation()
-  const { activeDirectoryUsers, roles } = useContext(UsersContext)
-  const [model, setModel] = useState<User>(
-    props.user || { role: find(roles, (r) => r.name === 'User') }
-  )
-  const [addOrUpdateUser] = useMutation($addOrUpdateUser)
-
-  /**
-   * On save user
-   */
-  const onSave = async () => {
-    await addOrUpdateUser({
-      variables: {
-        user: omit({ ...model, role: (model.role as Role).name }, '__typename'),
-        update: !!props.user
-      }
-    })
-    props.onDismiss()
-  }
-
-  /**
-   * Checks if form is valid
-   */
-  const isFormValid = () =>
-    !validator.isEmpty(model?.id || '') &&
-    validator.isUUID(model?.id || '') &&
-    !validator.isEmpty(model?.displayName || '')
+  const {
+    inputProps,
+    activeDirectoryUsers,
+    roles,
+    model,
+    setModel,
+    isFormValid,
+    onSave,
+    t
+  } = useUserForm({ props })
 
   return (
     <Panel
-      {...pick(props, 'onDismiss', 'headerText')}
+      {...pick(props, 'onDismiss', 'headerText', 'isOpen')}
       className={styles.root}
-      isOpen={true}
+      customWidth='450px'
       isLightDismiss={true}>
       {!props.user && (
         <div className={styles.inputContainer}>
           <Autocomplete
-            label={t('common.searchUserLabel')}
             placeholder={t('common.searchPlaceholder')}
             items={activeDirectoryUsers.map((u) => ({
               key: u.id,
@@ -70,11 +47,43 @@ export const UserForm: FunctionComponent<IUserFormProps> = (
           />
         </div>
       )}
+      <TextField
+        className={styles.inputContainer}
+        {...inputProps({ key: 'surname', label: t('common.surnameLabel') })}
+      />
+      <TextField
+        className={styles.inputContainer}
+        {...inputProps({
+          key: 'givenName',
+          label: t('common.givenNameLabel')
+        })}
+      />
+      <TextField
+        className={styles.inputContainer}
+        {...inputProps({
+          key: 'displayName',
+          label: t('common.displayNameLabel')
+        })}
+      />
+      <TextField
+        className={styles.inputContainer}
+        {...inputProps({
+          key: 'jobTitle',
+          label: t('common.jobTitleLabel')
+        })}
+      />
       <RolePicker
         className={styles.inputContainer}
         roles={roles}
         model={model}
         onChanged={(role) => setModel({ ...model, role })}
+      />
+      <Toggle
+        label={t('admin.userHiddenFromReportsLabel')}
+        defaultChecked={model.hiddenFromReports}
+        onChange={(_event, hiddenFromReports) =>
+          setModel({ ...model, hiddenFromReports })
+        }
       />
       <PrimaryButton
         className={styles.saveBtn}

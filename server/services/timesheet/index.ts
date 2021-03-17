@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
-import { find, isEmpty, omit } from 'underscore'
-import { MSGraphService } from '..'
+import { find } from 'underscore'
+import { GoogleCalendarService, MSGraphService } from '..'
 import DateUtils, { DateObject } from '../../../shared/utils/date'
 import { Context } from '../../graphql/context'
 import { TimesheetPeriodObject } from '../../graphql/resolvers/types'
@@ -18,9 +17,12 @@ import MatchingEngine from './matching'
 import {
   IConnectEventsParameters,
   IGetTimesheetParameters,
+  IProviderEventsParameters,
   ISubmitPeriodParameters,
+  ITimesheetPeriodData,
   IUnsubmitPeriodParameters
 } from './types'
+import { mapMatchedEvents } from './utils'
 
 @Service({ global: false })
 export class TimesheetService {
@@ -29,6 +31,7 @@ export class TimesheetService {
    *
    * @param context - Injected context through typedi
    * @param _msgraphSvc - Injected `MSGraphService` through typedi
+   * @param _googleCalSvc - Injected `GoogleCalendarService` through typedi
    * @param _projectSvc - Injected `ProjectService` through typedi
    * @param _teSvc - Injected `TimeEntryService` through typedi
    * @param _fteSvc - Injected `ForecastedTimeEntryService` through typedi
@@ -38,6 +41,7 @@ export class TimesheetService {
   constructor(
     @Inject('CONTEXT') private readonly context: Context,
     private readonly _msgraphSvc: MSGraphService,
+    private readonly _googleCalSvc: GoogleCalendarService,
     private readonly _projectSvc: ProjectService,
     private readonly _teSvc: TimeEntryService,
     private readonly _fteSvc: ForecastedTimeEntryService,
@@ -70,34 +74,23 @@ export class TimesheetService {
         periods[index].isForecasted = !!forecasted
         periods[index].forecastedHours = forecasted?.hours || 0
         if (confirmed) {
-          const entries = await this._teSvc.find({ periodId: _id })
           periods[index] = {
             ...periods[index],
             isConfirmed: true,
             events: this._connectEvents({
               ...parameters,
               ...data,
-              events: entries
+              events: confirmed.events
             })
           }
         } else {
           const engine = new MatchingEngine(data)
-          const events = await this._msgraphSvc.getEvents(
-            periods[index].startDate,
-            periods[index].endDate,
-            {
-              tzOffset: parameters.tzOffset,
-              returnIsoDates: false
-            }
-          )
-          periods[index].events = engine.matchEvents(events).map((event_) => ({
-            ...event_,
-            date: DateUtils.formatDate(
-              event_.startDateTime,
-              parameters.dateFormat,
-              parameters.locale
-            )
-          }))
+          periods[index].events = await this._getEventsFromProvider({
+            ...periods[index],
+            ...parameters,
+            provider: this.context.provider,
+            engine
+          })
         }
       }
       return periods
@@ -115,43 +108,29 @@ export class TimesheetService {
     parameters: ISubmitPeriodParameters
   ): Promise<void> {
     try {
-      const events = await this._msgraphSvc.getEvents(
-        parameters.period.startDate,
-        parameters.period.endDate,
-        {
-          tzOffset: parameters.tzOffset,
-          returnIsoDates: false
-        }
-      )
-      const period = {
+      const events = await this._getEventsFromProvider({
+        ...parameters.period,
+        ...parameters,
+        provider: this.context.provider
+      })
+      const period: ITimesheetPeriodData = {
         ...this._getPeriodData(parameters.period.id, this.context.userId),
-        startDate: new Date(parameters.period.startDate),
-        endDate: new Date(parameters.period.endDate),
         hours: 0,
         forecastedHours: parameters.period.forecastedHours || 0
       }
-      const entries = []
-      // eslint-disable-next-line unicorn/no-array-reduce
-      period.hours = parameters.period.matchedEvents.reduce((hours, m: any) => {
-        const event = find(events, ({ id }) => id === m.id)
-        if (!event) return null
-        entries.push({
-          ...m,
-          ...event,
-          _id: this._createUniqueEventId(event.id, event.startDateTime as Date),
-          ...omit(period, '_id'),
-          periodId: period._id
-        })
-        return hours + event.duration
-      }, 0)
+      const { getEvents, hours } = mapMatchedEvents(
+        period,
+        parameters.period.matchedEvents,
+        events
+      )
+      period.hours = hours
+      period.events = getEvents(false)
       const teSvc = parameters.forecast ? this._fteSvc : this._teSvc
       const periodSvc = parameters.forecast
         ? this._fperiodSvc
         : this._cperiodSvc
       await Promise.all([
-        !isEmpty(entries)
-          ? teSvc.insertMultiple(entries)
-          : Promise.resolve(null),
+        teSvc.insertMultiple(getEvents(true)),
         periodSvc.insert(period)
       ])
     } catch (error) {
@@ -186,13 +165,46 @@ export class TimesheetService {
   }
 
   /**
-   * Create unique ID consisting of event ID + event start date time
+   * Get events from provider
    *
-   * @param eventId - Event ID
-   * @param startDateTime - Start date time
+   * @param params - Parameters
+   *
+   * @returns Events
    */
-  private _createUniqueEventId(eventId: string, startDateTime: Date) {
-    return `${eventId}${startDateTime.getTime()}`.replace(/[^\dA-Za-z]/g, '')
+  private async _getEventsFromProvider({
+    provider,
+    startDate,
+    endDate,
+    tzOffset,
+    dateFormat,
+    locale,
+    engine = null
+  }: IProviderEventsParameters) {
+    let events: any[]
+    switch (provider) {
+      case 'google':
+        {
+          events = await this._googleCalSvc.getEvents(
+            startDate,
+            endDate,
+            tzOffset
+          )
+        }
+        break
+      default: {
+        events = await this._msgraphSvc.getEvents(startDate, endDate, {
+          tzOffset,
+          returnIsoDates: false
+        })
+      }
+    }
+    if (engine) {
+      return engine.matchEvents(events).map((event_) => ({
+        ...event_,
+        date: DateUtils.formatDate(event_.startDateTime, dateFormat, locale)
+      }))
+    }
+    return events
   }
 
   /**
@@ -204,7 +216,7 @@ export class TimesheetService {
    * @param id - Id
    * @param userId - User ID
    */
-  private _getPeriodData(id: string, userId: string) {
+  private _getPeriodData(id: string, userId: string): ITimesheetPeriodData {
     const [week, month, year] = id.split('_').map((p) => Number.parseInt(p, 10))
     return {
       _id: `${id}${userId}`.replace(/[^\dA-Za-z]/g, ''),

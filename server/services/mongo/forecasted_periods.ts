@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Inject, Service } from 'typedi'
 import { Context } from '../../graphql/context'
 import { MongoDocumentService } from './@document'

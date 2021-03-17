@@ -3,7 +3,7 @@
 import { useQuery } from '@apollo/client'
 import { useLayoutEffect } from 'react'
 import { DATA_UPDATED, INIT } from '../reducer/actions'
-import { query_preset_last_month } from './query-presets'
+import { report_current_month } from './queries'
 /**
  * Hook for Reports Query.
  *
@@ -12,10 +12,11 @@ import { query_preset_last_month } from './query-presets'
  *
  * @category Reports Hooks
  */
-export function useReportsQuery({ state, dispatch }) {
-  const query = useQuery(state.preset?.query || query_preset_last_month, {
+export function useReportsQuery({ state, dispatch, variables = {} }) {
+  const query = useQuery(state.preset?.query || report_current_month, {
     skip: !state.preset,
-    fetchPolicy: 'cache-first'
+    fetchPolicy: 'cache-first',
+    variables
   })
   useLayoutEffect(() => dispatch(INIT()), [])
   useLayoutEffect(() => dispatch(DATA_UPDATED({ query })), [query])

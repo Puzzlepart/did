@@ -1,4 +1,4 @@
-[did-client - v0.9.8](../README.md) / GraphQL
+[did-client - v0.9.9](../README.md) / GraphQL
 
 # Module: GraphQL
 
@@ -20,7 +20,7 @@ GraphQL
 
 ### $usercontext
 
-Renames and exports: [query\_preset\_current\_month](pages.md#query_preset_current_month)
+Renames and exports: [report\_current\_month](pages.md#report_current_month)
 
 ## Variables
 

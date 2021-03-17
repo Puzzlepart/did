@@ -1,4 +1,4 @@
-[did-server - v0.9.8](../README.md) / services
+[did-server - v0.9.9](../README.md) / services
 
 # Module: services
 
@@ -20,6 +20,7 @@
 - [CustomerService](../classes/services.customerservice.md)
 - [ForecastedPeriodsService](../classes/services.forecastedperiodsservice.md)
 - [ForecastedTimeEntryService](../classes/services.forecastedtimeentryservice.md)
+- [GoogleCalendarService](../classes/services.googlecalendarservice.md)
 - [LabelService](../classes/services.labelservice.md)
 - [MSGraphService](../classes/services.msgraphservice.md)
 - [NotificationService](../classes/services.notificationservice.md)

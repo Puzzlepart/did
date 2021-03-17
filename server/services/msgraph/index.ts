@@ -18,8 +18,8 @@ import MSGraphEvent, {
 class MSGraphService {
   private _cache: CacheService = null
   private _accessTokenOptions: AccessTokenOptions = {
-    clientId: environment('OAUTH_APP_ID'),
-    clientSecret: environment('OAUTH_APP_PASSWORD'),
+    clientId: environment('MICROSOFT_CLIENT_ID'),
+    clientSecret: environment('MICROSOFT_CLIENT_SECRET'),
     tokenHost: 'https://login.microsoftonline.com/common/',
     authorizePath: 'oauth2/v2.0/authorize',
     tokenPath: 'oauth2/v2.0/token'
@@ -41,11 +41,26 @@ class MSGraphService {
       await this._oauthService.getAccessToken(this._accessTokenOptions)
     ).access_token
     const client = MSGraphClient.init({
-      authProvider: (done: (argument0: any, argument1: any) => void) => {
+      authProvider: (done: (error: Error, token: any) => void) => {
         done(null, this._access_token)
       }
     })
     return client
+  }
+
+  /**
+   * Get current user properties
+   *
+   * @param properties - Properties to retrieve
+   */
+  async getCurrentUser(properties: string[]): Promise<any> {
+    try {
+      const client = await this._getClient()
+      const value = await client.api('/me').select(properties).get()
+      return value
+    } catch (error) {
+      throw new Error(`MSGraphService.getCurrentUser: ${error.message}`)
+    }
   }
 
   /**

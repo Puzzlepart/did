@@ -1,16 +1,16 @@
 import { IPnPClientStore, PnPClientStorage } from '@pnp/common'
-import AppConfig from 'AppConfig'
 import { DateObject } from 'DateUtils'
+import { config } from 'package'
 
 export class BrowserStorage<T = unknown> {
   private _key: string
   private _store: IPnPClientStore
   private _defaultExpire = new DateObject().add(
-    AppConfig.BROWSER_STORAGE_DEFAULT_EXPIRE
+    config.app.BROWSER_STORAGE_DEFAULT_EXPIRE
   ).jsDate
 
   constructor(key: string, store: 'local' | 'session') {
-    this._key = `${AppConfig.BROWSER_STORAGE_KEY_PREFIX}_${key}`
+    this._key = `${config.app.BROWSER_STORAGE_KEY_PREFIX}_${key}`
     this._store = new PnPClientStorage()[store]
   }
 

@@ -6,7 +6,7 @@ import { useUpdateUserConfiguration } from '../../../hooks/user/useUpdateUserCon
 import initFilters from '../filters'
 import { useReportsReducer } from '../reducer'
 import { IReportsParameters } from '../types'
-import { useQueryPresets } from './query-presets'
+import { useQueries } from './queries'
 import { useColumns } from './useColumns'
 import { useReportsQuery } from './useReportsQuery'
 
@@ -15,7 +15,7 @@ import { useReportsQuery } from './useReportsQuery'
  *
  * * Get history using `useHistory`
  * * Get URL params using `useParams`
- * * Get queries using `useQueryPresets`
+ * * Get queries using `useQueries`
  * * Using reducer `useReportsReducer`
  * * Using `useReportQuery`
  * * Layout effect (`useLayoutEffect`) for updating URL when changing query
@@ -27,9 +27,9 @@ export function useReports() {
   const { t } = useTranslation()
   const parameters = useParams<IReportsParameters>()
   const history = useHistory()
-  const queries = useQueryPresets()
-  const { state, dispatch } = useReportsReducer(queries)
-  useReportsQuery({ state, dispatch })
+  const queries = useQueries()
+  const [state, dispatch] = useReportsReducer(queries)
+  useReportsQuery({ state, dispatch, variables: state.preset?.variables })
   useLayoutEffect(() => {
     if (state.preset) {
       history.push(`/reports/${state.preset?.key || ''}`)
@@ -58,4 +58,4 @@ export function useReports() {
   }
 }
 
-export { useQueryPresets }
+export { useQueries }

@@ -1,4 +1,4 @@
-[did-server - v0.9.8](../README.md) / [services](../modules/services.md) / ForecastedTimeEntryService
+[did-server - v0.9.9](../README.md) / [services](../modules/services.md) / ForecastedTimeEntryService
 
 # Class: ForecastedTimeEntryService
 
@@ -55,7 +55,7 @@ Defined in: [server/services/mongo/forecasted_time_entry.ts:7](https://github.co
 
 • **cache**: [*CacheService*](services_cache.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:8](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L8)
+Defined in: [server/services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 • **collection**: *Collection*<[*TimeEntry*](graphql.timeentry.md)\>
 
-Defined in: [server/services/mongo/@document.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L9)
+Defined in: [server/services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
 
 ___
 
@@ -103,12 +103,12 @@ Name | Default |
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`query` | *FilterQuery*<[*TimeEntry*](graphql.timeentry.md)\> | Query   |
+`query` | *FilterQuery*<[*TimeEntry*](graphql.timeentry.md)\> | Filter query   |
 `sort?` | S | Sort options    |
 
 **Returns:** *Promise*<[*TimeEntry*](graphql.timeentry.md)[]\>
 
-Defined in: [server/services/mongo/@document.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L39)
+Defined in: [server/services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
 
 ___
 
@@ -128,7 +128,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*TimeEntry*](graphql.timeentry.md)\>\>\>
 
-Defined in: [server/services/mongo/@document.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L66)
+Defined in: [server/services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
 
 ___
 
@@ -137,6 +137,8 @@ ___
 ▸ **insertMultiple**(`documents_`: *any*[]): *Promise*<InsertWriteOpResult<WithId<[*TimeEntry*](graphql.timeentry.md)\>\>\>
 
 Wrapper on insertMany() that also sets `updatedAt` and `createdAt` properties
+
+**`remarks`** Returns void if documents_ is empty
 
 **`see`** — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#insertMany
 
@@ -148,7 +150,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertWriteOpResult<WithId<[*TimeEntry*](graphql.timeentry.md)\>\>\>
 
-Defined in: [server/services/mongo/@document.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L50)
+Defined in: [server/services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
 
 ___
 
@@ -169,4 +171,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
 
-Defined in: [server/services/mongo/@document.ts:82](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L82)
+Defined in: [server/services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)

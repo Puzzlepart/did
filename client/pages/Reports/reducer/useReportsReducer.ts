@@ -3,7 +3,7 @@ import { AppContext } from 'AppContext'
 import { useContext, useMemo, useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
-import { IReportsParameters, IReportsQueryPresetItem } from '..'
+import { IReportsParameters, IReportsQuery } from '..'
 import createReducer from '../reducer'
 
 /**
@@ -13,7 +13,7 @@ import createReducer from '../reducer'
  *
  * @param queries - Queries
  */
-export function useReportsReducer(queries: IReportsQueryPresetItem[]) {
+export function useReportsReducer(queries: IReportsQuery[]) {
   const { t } = useTranslation()
   const app = useContext(AppContext)
   const url = useParams<IReportsParameters>()
@@ -22,14 +22,19 @@ export function useReportsReducer(queries: IReportsQueryPresetItem[]) {
     queries,
     url
   ])
-  const [state, dispatch] = useReducer(reducer, {
+  return useReducer(reducer, {
     loading: true,
-    timeentries: [],
+    data: {
+      timeEntries: [],
+      users: [],
+      periods: [],
+      projects: []
+    },
+    subset: [],
     savedFilters: null,
     groupBy: {
       fieldName: '.',
       emptyGroupName: t('common.all')
     }
   })
-  return { state, dispatch }
 }

@@ -9,7 +9,9 @@ import { ICustomerLinkProps } from './types'
 export const CustomerLink: FunctionComponent<ICustomerLinkProps> = ({
   customer
 }: ICustomerLinkProps) => (
-  <Link to={`/customers/search/${customer?.key}`}>{customer?.name}</Link>
+  <Link to={`/customers/search/${customer?.key}`.toLowerCase()}>
+    {customer?.name}
+  </Link>
 )
 
 export * from './types'

@@ -1,9 +1,12 @@
 .root {
   .nameColumn {
     padding: 15px;
+    display: flex;
+    flex-direction: row;
 
     .icon {
-      font-size: 34px;
+      font-size: 18px;
+      margin: 0 8px 0 0;
     }
   }
 }

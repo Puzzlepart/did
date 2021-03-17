@@ -1,4 +1,4 @@
-[did-server - v0.9.8](../README.md) / [graphql](../modules/graphql.md) / Subscription
+[did-server - v0.9.9](../README.md) / [graphql](../modules/graphql.md) / Subscription
 
 # Class: Subscription
 
@@ -16,6 +16,7 @@
 - [db](graphql.subscription.md#db)
 - [id](graphql.subscription.md#id)
 - [name](graphql.subscription.md#name)
+- [owner](graphql.subscription.md#owner)
 - [settings](graphql.subscription.md#settings)
 
 ## Constructors
@@ -42,7 +43,7 @@ ___
 
 Database name
 
-Defined in: [server/graphql/resolvers/subscription/types.ts:68](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L68)
+Defined in: [server/graphql/resolvers/subscription/types.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L71)
 
 ___
 
@@ -62,8 +63,16 @@ Defined in: [server/graphql/resolvers/subscription/types.ts:60](https://github.c
 
 ___
 
+### owner
+
+• **owner**: *string*
+
+Defined in: [server/graphql/resolvers/subscription/types.ts:63](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L63)
+
+___
+
 ### settings
 
 • `Optional` **settings**: [*SubscriptionSettings*](graphql.subscriptionsettings.md)
 
-Defined in: [server/graphql/resolvers/subscription/types.ts:63](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L63)
+Defined in: [server/graphql/resolvers/subscription/types.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/types.ts#L66)

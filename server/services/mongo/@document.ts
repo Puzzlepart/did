@@ -1,6 +1,8 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable unicorn/no-array-callback-reference */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { Collection, FilterQuery, OptionalId } from 'mongodb'
+
+import { Collection, Db, FilterQuery, OptionalId } from 'mongodb'
+import { isEmpty } from 'underscore'
 import { Context } from '../../graphql/context'
 import { CacheService } from '../cache'
 
@@ -16,16 +18,46 @@ export class MongoDocumentService<T> {
    * @param context - Injected context through typedi
    * @param collectionName - Colletion name
    * @param cachePrefix - Cache prefix
+   * @param database - Database
    */
   constructor(
     public readonly context: Context,
     public collectionName: string,
-    public cachePrefix?: string
+    public cachePrefix?: string,
+    database?: Db
   ) {
-    this.collection = context.db.collection(collectionName)
+    this.collection = (database || context.db).collection(collectionName)
     if (cachePrefix) {
       this.cache = new CacheService(this.context, cachePrefix)
     }
+  }
+
+  /**
+   * Extend query to be able to check for false OR null.
+   * Ref: https://stackoverflow.com/questions/11634601/mongodb-null-field-or-true-false
+   *
+   * @example Query
+   *
+   * { hiddenFromReports: false }
+   *
+   * will be converted to
+   *
+   * { hiddenFromReports: { $in: [false, null] } }
+   *
+   * @param query - Filter query
+   */
+  private _extendQuery(query: FilterQuery<T>) {
+    return Object.keys(query || {}).reduce((q, key) => {
+      const isFalse = query[key] === false
+      if (isFalse) {
+        q[key] = {
+          $in: [false, null]
+        }
+      } else {
+        q[key] = query[key]
+      }
+      return q
+    }, {})
   }
 
   /**
@@ -33,21 +65,24 @@ export class MongoDocumentService<T> {
    *
    * @see — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#find
    *
-   * @param query - Query
+   * @param query - Filter query
    * @param sort - Sort options
    */
   public find<S = any>(query: FilterQuery<T>, sort?: S) {
-    return this.collection.find(query, { sort }).toArray()
+    return this.collection.find(this._extendQuery(query), { sort }).toArray()
   }
 
   /**
    * Wrapper on insertMany() that also sets `updatedAt` and `createdAt` properties
+   *
+   * @remarks Returns void if documents_ is empty
    *
    * @see — https://mongodb.github.io/node-mongodb-native/3.6/api/Collection.html#insertMany
    *
    * @param documents_ - Documents
    */
   public insertMultiple(documents_: OptionalId<any>[]) {
+    if (isEmpty(documents_)) return
     const documents = documents_.map((document_) => ({
       ...document_,
       createdAt: new Date(),

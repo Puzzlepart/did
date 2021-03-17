@@ -61,7 +61,6 @@ export const WeekPicker = () => {
               }}
               firstDayOfWeek={DayOfWeek.Monday}
               strings={
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 t('common.calendarStrings', { returnObjects: true }) as any
               }
               showGoToToday={false}
