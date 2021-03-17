@@ -22,7 +22,7 @@
 	* [➤ Environments](#-environments)
 	* [➤ Contributing](#-contributing)
 		* [Getting started](#getting-started)
-					* [Set up .env ##](#set-up-env-)
+			* [Set up environment](#set-up-environment)
 		* [Code structure](#code-structure)
 		* [Node version](#node-version)
 		* [Commits and `commitlint`](#commits-and-commitlint)
@@ -32,7 +32,7 @@
 			* [Naming conventions](#naming-conventions)
 			* [See also](#see-also)
 		* [GraphQL](#graphql)
-		* [Extensions for `vscode`](#extensions-for-vscode)
+			* [Extensions for `vscode](#extensions-for-vscode)
 		* [Documentation](#documentation)
 	* [➤ Contributors](#-contributors)
 </details>
@@ -91,7 +91,7 @@ The following permissions are required by Azure App Registration:
 ![azure-ad-app-registration-permissions](.assets/azure-ad-app-registration-permissions.png)
 
 
-#### Set up .env ##
+#### Set up environment
 
 You've copied `.env.sample` into `.env`, anually or using `npm run-script create-env`.
 
@@ -201,7 +201,7 @@ If you want to test with your web app, checkout [Creating your own app registrat
 
 ### GraphQL
 
-### Extensions for `vscode`
+#### Extensions for `vscode
 The extension [Apollo extension for VS Code](https://www.apollographql.com/docs/devtools/editor-plugins/) is recommended for working with GraphQL in vscode.
 
 > The Apollo [VS Code extension](https://marketplace.visualstudio.com/items?itemName=apollographql.vscode-apollo) provides an all-in-one tooling experience for developing apps with Apollo.
