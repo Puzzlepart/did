@@ -1,5 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-var-requires */
+import get from 'get-value'
 import { calendar_v3, google } from 'googleapis'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
@@ -24,7 +25,7 @@ class GoogleCalendarService {
         redirectUri: environment('GOOGLE_REDIRECT_URI')
       })
       client.setCredentials({
-        access_token: this._request.user['tokenParams']['access_token']
+        access_token: get(this._request, 'user.tokenParams.access_token')
       })
       this._cal = new calendar_v3.Calendar({
         auth: client
@@ -78,12 +79,12 @@ class GoogleCalendarService {
               return new EventObject(
                 event.id,
                 event.summary,
-                event.description,
+                [event.description, calendar.description].join(' '),
                 event.organizer.self,
                 event.start,
                 event.end,
                 event.htmlLink,
-                [calendar.summary, calendar.description]
+                [calendar.summary]
               )
             })
         )
