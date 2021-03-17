@@ -12,6 +12,6 @@ import { getHotkeys } from './config'
  */
 export function useHotkeys(context: ITimesheetContext) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const hotkeysProps = useMemo(() => getHotkeys(context), [context.scope])
+  const hotkeysProps = useMemo(() => getHotkeys(context), [])
   return { hotkeysProps }
 }

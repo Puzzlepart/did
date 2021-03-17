@@ -56,7 +56,7 @@ export const WeekPicker = () => {
           <FocusTrapZone isClickableOutsideFocusTrap={true}>
             <Calendar
               onSelectDate={(date) => {
-                dispatch(SET_SCOPE({ scope: new TimesheetScope(date) }))
+                dispatch(SET_SCOPE(new TimesheetScope(date)))
                 setCalendar(null)
               }}
               firstDayOfWeek={DayOfWeek.Monday}

@@ -47,11 +47,11 @@ export function useNavigateCommands(): IContextualMenuItem[] {
             },
             onClick: () =>
               context.dispatch(
-                SET_SCOPE({
-                  scope: cmd.add
+                SET_SCOPE(
+                  cmd.add
                     ? context.scope.set(cmd?.add)
                     : new TimesheetScope(cmd.date)
-                })
+                )
               ),
             title: cmd.title(context.t)
           } as IContextualMenuItem)
