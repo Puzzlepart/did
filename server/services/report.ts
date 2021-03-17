@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable unicorn/no-array-callback-reference */
 import { Inject, Service } from 'typedi'
 import { find, first, omit, pick } from 'underscore'
@@ -29,6 +30,11 @@ interface IGenerateReportParameters {
   customers: Customer[]
 }
 
+/**
+ * Report service
+ *
+ * @category Injectable container service
+ */
 @Service({ global: false })
 export class ReportService {
   /**

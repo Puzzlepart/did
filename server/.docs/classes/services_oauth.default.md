@@ -4,6 +4,8 @@
 
 [services/oauth](../modules/services_oauth.md).default
 
+OAuth service
+
 ## Table of contents
 
 ### Constructors
@@ -29,7 +31,7 @@ Name | Type |
 
 **Returns:** [*default*](services_oauth.default.md)
 
-Defined in: [server/services/oauth.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/services/oauth.ts#L18)
+Defined in: [server/services/oauth.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/services/oauth.ts#L24)
 
 ## Methods
 
@@ -47,7 +49,7 @@ Name | Type | Description |
 
 **Returns:** *AuthorizationCode*<*client_id*\>
 
-Defined in: [server/services/oauth.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/services/oauth.ts#L26)
+Defined in: [server/services/oauth.ts:32](https://github.com/Puzzlepart/did/blob/dev/server/services/oauth.ts#L32)
 
 ___
 
@@ -65,4 +67,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Token\>
 
-Defined in: [server/services/oauth.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/services/oauth.ts#L47)
+Defined in: [server/services/oauth.ts:53](https://github.com/Puzzlepart/did/blob/dev/server/services/oauth.ts#L53)

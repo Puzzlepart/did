@@ -8,7 +8,7 @@
 
 - [CacheScope](../enums/services_cache.cachescope.md)
 
-### Classes
+### Injectable container service Classes
 
 - [CacheService](../classes/services_cache.cacheservice.md)
 
@@ -22,4 +22,4 @@
 
 Ƭ **CacheKey**: *string* \| *string*[]
 
-Defined in: [server/services/cache.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L15)
+Defined in: [server/services/cache.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L16)

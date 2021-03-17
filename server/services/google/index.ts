@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { calendar_v3, google } from 'googleapis'
 import 'reflect-metadata'
@@ -6,6 +7,11 @@ import DateUtils from '../../../shared/utils/date'
 import { EventObject } from '../../graphql'
 import { environment } from '../../utils/environment'
 
+/**
+ * Google calendar service
+ *
+ * @category Injectable container service
+ */
 @Service({ global: false })
 class GoogleCalendarService {
   private _cal: calendar_v3.Calendar

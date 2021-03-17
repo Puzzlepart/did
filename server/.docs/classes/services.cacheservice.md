@@ -4,6 +4,8 @@
 
 [services](../modules/services.md).CacheService
 
+Cache service
+
 ## Table of contents
 
 ### Constructors
@@ -41,7 +43,7 @@ Name | Type | Description |
 
 **Returns:** [*CacheService*](services_cache.cacheservice.md)
 
-Defined in: [server/services/cache.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L24)
+Defined in: [server/services/cache.ts:30](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L30)
 
 ## Properties
 
@@ -77,7 +79,7 @@ Name | Type |
 
 **Returns:** *Promise*<T\>
 
-Defined in: [server/services/cache.ts:67](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L67)
+Defined in: [server/services/cache.ts:73](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L73)
 
 ___
 
@@ -100,7 +102,7 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [server/services/cache.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L48)
+Defined in: [server/services/cache.ts:54](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L54)
 
 ___
 
@@ -125,7 +127,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<unknown\>
 
-Defined in: [server/services/cache.ts:89](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L89)
+Defined in: [server/services/cache.ts:95](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L95)
 
 ___
 
@@ -143,7 +145,7 @@ Name | Type |
 
 **Returns:** *Promise*<unknown\>
 
-Defined in: [server/services/cache.ts:119](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L119)
+Defined in: [server/services/cache.ts:125](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L125)
 
 ___
 
@@ -168,4 +170,4 @@ Name | Type |
 
 **Returns:** *Promise*<T\>
 
-Defined in: [server/services/cache.ts:136](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L136)
+Defined in: [server/services/cache.ts:142](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L142)

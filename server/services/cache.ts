@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable max-classes-per-file */
 import 'reflect-metadata'
@@ -20,6 +21,11 @@ type CacheOptions = {
   scope?: CacheScope
 }
 
+/**
+ * Cache service
+ *
+ * @category Injectable container service
+ */
 @Service({ global: false })
 export class CacheService {
   /**

@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import createDebug from 'debug'
 import 'reflect-metadata'
 import { AuthorizationCode, Token } from 'simple-oauth2'
@@ -14,6 +15,11 @@ export interface AccessTokenOptions {
   force?: boolean
 }
 
+/**
+ * OAuth service
+ *
+ * @category Injectable container service
+ */
 @Service({ global: false })
 class OAuthService {
   constructor(@Inject('REQUEST') private readonly _request: any) {}

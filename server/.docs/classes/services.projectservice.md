@@ -4,6 +4,8 @@
 
 [services](../modules/services.md).ProjectService
 
+Project service
+
 ## Hierarchy
 
 * *MongoDocumentService*<[*Project*](graphql.project.md)\>
@@ -52,7 +54,7 @@ Name | Type | Description |
 
 **Returns:** [*ProjectService*](services.projectservice.md)
 
-Defined in: [server/services/mongo/project.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L21)
+Defined in: [server/services/mongo/project.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L27)
 
 ## Properties
 
@@ -106,7 +108,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<string\>
 
-Defined in: [server/services/mongo/project.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L44)
+Defined in: [server/services/mongo/project.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L50)
 
 ___
 
@@ -155,7 +157,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<ProjectsData\>
 
-Defined in: [server/services/mongo/project.ts:86](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L86)
+Defined in: [server/services/mongo/project.ts:92](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L92)
 
 ___
 
@@ -238,4 +240,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<boolean\>
 
-Defined in: [server/services/mongo/project.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L66)
+Defined in: [server/services/mongo/project.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L72)

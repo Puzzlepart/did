@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import { find } from 'underscore'
@@ -24,6 +25,11 @@ import {
 } from './types'
 import { mapMatchedEvents } from './utils'
 
+/**
+ * Timesheet service
+ *
+ * @category Injectable container service
+ */
 @Service({ global: false })
 export class TimesheetService {
   /**

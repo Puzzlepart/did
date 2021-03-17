@@ -4,6 +4,8 @@
 
 [services](../modules/services.md).TimesheetService
 
+Timesheet service
+
 ## Table of contents
 
 ### Constructors
@@ -43,7 +45,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetService*](services.timesheetservice.md)
 
-Defined in: [server/services/timesheet/index.ts:28](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L28)
+Defined in: [server/services/timesheet/index.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L34)
 
 ## Methods
 
@@ -63,7 +65,7 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [server/services/timesheet/index.ts:276](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L276)
+Defined in: [server/services/timesheet/index.ts:282](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L282)
 
 ___
 
@@ -86,7 +88,7 @@ Name | Type |
 
 Events
 
-Defined in: [server/services/timesheet/index.ts:177](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L177)
+Defined in: [server/services/timesheet/index.ts:183](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L183)
 
 ___
 
@@ -108,7 +110,7 @@ Name | Type | Description |
 
 **Returns:** ITimesheetPeriodData
 
-Defined in: [server/services/timesheet/index.ts:219](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L219)
+Defined in: [server/services/timesheet/index.ts:225](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L225)
 
 ___
 
@@ -129,7 +131,7 @@ Name | Type | Description |
 
 **Returns:** [*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]
 
-Defined in: [server/services/timesheet/index.ts:238](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L238)
+Defined in: [server/services/timesheet/index.ts:244](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L244)
 
 ___
 
@@ -147,7 +149,7 @@ Name | Type |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/timesheet/index.ts:57](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L57)
+Defined in: [server/services/timesheet/index.ts:63](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L63)
 
 ___
 
@@ -165,7 +167,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/timesheet/index.ts:107](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L107)
+Defined in: [server/services/timesheet/index.ts:113](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L113)
 
 ___
 
@@ -183,4 +185,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/timesheet/index.ts:146](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L146)
+Defined in: [server/services/timesheet/index.ts:152](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L152)

@@ -4,6 +4,8 @@
 
 [services](../modules/services.md).LabelService
 
+Label service
+
 ## Hierarchy
 
 * *MongoDocumentService*<[*LabelObject*](graphql.labelobject.md)\>
@@ -50,7 +52,7 @@ Name | Type |
 
 **Returns:** [*LabelService*](services.labelservice.md)
 
-Defined in: [server/services/mongo/label.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L14)
+Defined in: [server/services/mongo/label.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L20)
 
 ## Properties
 
@@ -102,7 +104,7 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [server/services/mongo/label.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L24)
+Defined in: [server/services/mongo/label.ts:30](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L30)
 
 ___
 
@@ -120,7 +122,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*LabelObject*](graphql.labelobject.md)\>\>\>
 
-Defined in: [server/services/mongo/label.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L47)
+Defined in: [server/services/mongo/label.ts:53](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L53)
 
 ___
 
@@ -138,7 +140,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<DeleteWriteOpResultObject\>
 
-Defined in: [server/services/mongo/label.ts:79](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L79)
+Defined in: [server/services/mongo/label.ts:85](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L85)
 
 ___
 
@@ -183,7 +185,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*LabelObject*](graphql.labelobject.md)[]\>
 
-Defined in: [server/services/mongo/label.ts:33](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L33)
+Defined in: [server/services/mongo/label.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L39)
 
 ___
 
@@ -264,4 +266,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/label.ts:66](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L66)
+Defined in: [server/services/mongo/label.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/label.ts#L72)

@@ -4,6 +4,6 @@
 
 ## Table of contents
 
-### Classes
+### Injectable container service Classes
 
 - [ReportService](../classes/services_report.reportservice.md)

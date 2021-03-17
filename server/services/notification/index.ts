@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable unicorn/no-array-reduce */
 
 import get from 'get-value'
@@ -11,6 +12,11 @@ import { NotificationTemplates } from '../../graphql/resolvers/types'
 import { TimesheetService } from '../timesheet'
 import { ForecastNotification, UnconfirmedPeriodNotification } from './types'
 
+/**
+ * Notification service
+ *
+ * @category Injectable container service
+ */
 @Service({ global: false })
 export class NotificationService {
   private _confirmed_periods: Collection

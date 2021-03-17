@@ -12,7 +12,7 @@
 
 - [CacheScope](../enums/services.cachescope.md)
 
-### Classes
+### Injectable container service Classes
 
 - [ApiTokenService](../classes/services.apitokenservice.md)
 - [CacheService](../classes/services.cacheservice.md)
@@ -30,8 +30,11 @@
 - [SubscriptionService](../classes/services.subscriptionservice.md)
 - [TimeEntryService](../classes/services.timeentryservice.md)
 - [TimesheetService](../classes/services.timesheetservice.md)
-- [UserNotification](../classes/services.usernotification.md)
 - [UserService](../classes/services.userservice.md)
+
+### Other Classes
+
+- [UserNotification](../classes/services.usernotification.md)
 
 ### Type aliases
 
@@ -49,4 +52,4 @@ Renames and exports: [default](../classes/services_oauth.default.md)
 
 Ƭ **CacheKey**: *string* \| *string*[]
 
-Defined in: [server/services/cache.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L15)
+Defined in: [server/services/cache.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L16)

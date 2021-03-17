@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import {
   DeleteWriteOpResultObject,
   FilterQuery,
@@ -10,6 +11,11 @@ import { Context } from '../../graphql/context'
 import { LabelObject as Label } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 
+/**
+ * Label service
+ *
+ * @category Injectable container service
+ */
 @Service({ global: false })
 export class LabelService extends MongoDocumentService<Label> {
   constructor(@Inject('CONTEXT') readonly context: Context) {

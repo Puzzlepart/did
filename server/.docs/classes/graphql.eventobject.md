@@ -55,7 +55,7 @@ Name | Type | Description |
 `start` | DateWithTimezone | Start date with timezone   |
 `end` | DateWithTimezone | End date with timezone   |
 `webLink` | *string* | Web link   |
-`categories?` | *string*[] | Categories    |
+`categories` | *string*[] | Categories    |
 
 **Returns:** [*EventObject*](graphql.eventobject.md)
 

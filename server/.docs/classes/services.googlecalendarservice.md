@@ -4,6 +4,8 @@
 
 [services](../modules/services.md).GoogleCalendarService
 
+Google calendar service
+
 ## Table of contents
 
 ### Constructors
@@ -16,6 +18,7 @@
 
 ### Methods
 
+- [getCalendars](services.googlecalendarservice.md#getcalendars)
 - [getEvents](services.googlecalendarservice.md#getevents)
 
 ## Constructors
@@ -32,7 +35,7 @@ Name | Type |
 
 **Returns:** [*GoogleCalendarService*](services.googlecalendarservice.md)
 
-Defined in: [server/services/google/index.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L11)
+Defined in: [server/services/google/index.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L17)
 
 ## Properties
 
@@ -40,13 +43,33 @@ Defined in: [server/services/google/index.ts:11](https://github.com/Puzzlepart/d
 
 • `Private` **\_cal**: *Calendar*
 
-Defined in: [server/services/google/index.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L11)
+Defined in: [server/services/google/index.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L17)
 
 ## Methods
 
+### getCalendars
+
+▸ **getCalendars**(`accessRole?`: *string*): *Promise*<Schema$CalendarListEntry[]\>
+
+Get calendars
+
+#### Parameters:
+
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`accessRole` | *string* | 'owner' | Access role   |
+
+**Returns:** *Promise*<Schema$CalendarListEntry[]\>
+
+Calendars with the specified `accessRole`
+
+Defined in: [server/services/google/index.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L41)
+
+___
+
 ### getEvents
 
-▸ **getEvents**(`startDate`: *string*, `endDate`: *string*, `tzOffset`: *number*): *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
+▸ **getEvents**(`startDate`: *string*, `endDate`: *string*, `tzOffset`: *number*): *Promise*<any[]\>
 
 Get events for the specified period using Google APIs
 
@@ -58,6 +81,6 @@ Name | Type | Description |
 `endDate` | *string* | End date (YYYY-MM-DD)   |
 `tzOffset` | *number* | Timezone offset    |
 
-**Returns:** *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
+**Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/google/index.ts:36](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L36)
+Defined in: [server/services/google/index.ts:56](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L56)

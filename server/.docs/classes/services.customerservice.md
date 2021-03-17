@@ -4,6 +4,8 @@
 
 [services](../modules/services.md).CustomerService
 
+Customer service
+
 ## Hierarchy
 
 * *MongoDocumentService*<[*Customer*](graphql.customer.md)\>
@@ -49,7 +51,7 @@ Name | Type |
 
 **Returns:** [*CustomerService*](services.customerservice.md)
 
-Defined in: [server/services/mongo/customer.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L9)
+Defined in: [server/services/mongo/customer.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L15)
 
 ## Properties
 
@@ -101,7 +103,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/customer.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L19)
+Defined in: [server/services/mongo/customer.ts:25](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L25)
 
 ___
 
@@ -119,7 +121,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/customer.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L47)
+Defined in: [server/services/mongo/customer.ts:53](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L53)
 
 ___
 
@@ -164,7 +166,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Customer*](graphql.customer.md)[]\>
 
-Defined in: [server/services/mongo/customer.ts:61](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L61)
+Defined in: [server/services/mongo/customer.ts:67](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L67)
 
 ___
 
@@ -245,4 +247,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/customer.ts:33](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L33)
+Defined in: [server/services/mongo/customer.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L39)

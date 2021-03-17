@@ -4,6 +4,8 @@
 
 [services](../modules/services.md).SubscriptionService
 
+Subscription service
+
 ## Hierarchy
 
 * *MongoDocumentService*<[*Subscription*](graphql.subscription.md)\>
@@ -51,7 +53,7 @@ Name | Type |
 
 **Returns:** [*SubscriptionService*](services.subscriptionservice.md)
 
-Defined in: [server/services/mongo/subscription.ts:12](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L12)
+Defined in: [server/services/mongo/subscription.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L18)
 
 ## Properties
 
@@ -109,7 +111,7 @@ Name | Type | Description |
 
 **Returns:** T
 
-Defined in: [server/services/mongo/subscription.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L27)
+Defined in: [server/services/mongo/subscription.ts:33](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L33)
 
 ___
 
@@ -127,7 +129,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*Subscription*](graphql.subscription.md)\>\>\>
 
-Defined in: [server/services/mongo/subscription.ts:82](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L82)
+Defined in: [server/services/mongo/subscription.ts:88](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L88)
 
 ___
 
@@ -175,7 +177,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<{ `_id?`: *string* ; `db?`: *string* ; `id`: *string* ; `name`: *string* ; `owner`: *string* ; `settings?`: [*SubscriptionSettings*](graphql.subscriptionsettings.md)  }\>
 
-Defined in: [server/services/mongo/subscription.ts:62](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L62)
+Defined in: [server/services/mongo/subscription.ts:68](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L68)
 
 ___
 
@@ -195,7 +197,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Subscription*](graphql.subscription.md)\>
 
-Defined in: [server/services/mongo/subscription.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L41)
+Defined in: [server/services/mongo/subscription.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L47)
 
 ___
 
@@ -256,7 +258,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
 
-Defined in: [server/services/mongo/subscription.ts:116](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L116)
+Defined in: [server/services/mongo/subscription.ts:122](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L122)
 
 ___
 
@@ -295,4 +297,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
 
-Defined in: [server/services/mongo/subscription.ts:98](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L98)
+Defined in: [server/services/mongo/subscription.ts:104](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/subscription.ts#L104)

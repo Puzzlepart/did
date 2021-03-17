@@ -4,6 +4,8 @@
 
 [services](../modules/services.md).ForecastedTimeEntryService
 
+Forecasted time entries service
+
 ## Hierarchy
 
 * *MongoDocumentService*<[*TimeEntry*](graphql.timeentry.md)\>
@@ -47,7 +49,7 @@ Name | Type | Description |
 
 **Returns:** [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md)
 
-Defined in: [server/services/mongo/forecasted_time_entry.ts:7](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/forecasted_time_entry.ts#L7)
+Defined in: [server/services/mongo/forecasted_time_entry.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/forecasted_time_entry.ts#L13)
 
 ## Properties
 

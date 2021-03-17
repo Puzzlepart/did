@@ -4,7 +4,7 @@
 
 ## Table of contents
 
-### Classes
+### Injectable container service Classes
 
 - [default](../classes/services_oauth.default.md)
 

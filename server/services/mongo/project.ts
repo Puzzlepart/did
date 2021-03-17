@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { FilterQuery } from 'mongodb'
 import { Inject, Service } from 'typedi'
 import { filter, find, pick } from 'underscore'
@@ -17,6 +18,11 @@ export type ProjectsData = {
   labels: Label[]
 }
 
+/**
+ * Project service
+ *
+ * @category Injectable container service
+ */
 @Service({ global: false })
 export class ProjectService extends MongoDocumentService<Project> {
   /**

@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { FilterQuery } from 'mongodb'
 import set from 'set-value'
@@ -8,6 +9,11 @@ import { Context } from '../../graphql/context'
 import { User } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 
+/**
+ * User service
+ *
+ * @category Injectable container service
+ */
 @Service({ global: false })
 export class UserService extends MongoDocumentService<User> {
   private _role: RoleService

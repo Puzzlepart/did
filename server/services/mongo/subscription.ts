@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import { Inject, Service } from 'typedi'
 import { omit } from 'underscore'
 import { Context } from '../../graphql/context'
@@ -8,6 +9,11 @@ import {
 import { environment } from '../../utils'
 import { MongoDocumentService } from './@document'
 
+/**
+ * Subscription service
+ *
+ * @category Injectable container service
+ */
 @Service({ global: false })
 export class SubscriptionService extends MongoDocumentService<Subscription> {
   constructor(@Inject('CONTEXT') readonly context: Context) {

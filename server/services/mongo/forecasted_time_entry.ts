@@ -1,8 +1,14 @@
+/* eslint-disable tsdoc/syntax */
 import { Inject, Service } from 'typedi'
 import { Context } from '../../graphql/context'
 import { TimeEntry } from '../../graphql/resolvers/types'
 import { MongoDocumentService } from './@document'
 
+/**
+ * Forecasted time entries service
+ *
+ * @category Injectable container service
+ */
 @Service({ global: false })
 export class ForecastedTimeEntryService extends MongoDocumentService<TimeEntry> {
   /**

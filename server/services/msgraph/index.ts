@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-var-requires */
 global['fetch'] = require('node-fetch')
 import { Client as MSGraphClient } from '@microsoft/microsoft-graph-client'
@@ -12,6 +13,11 @@ import { CacheScope, CacheService } from '../cache'
 import OAuthService, { AccessTokenOptions } from '../oauth'
 import { MSGraphOutlookCategory } from './types'
 
+/**
+ * Microsoft Graph service
+ *
+ * @category Injectable container service
+ */
 @Service({ global: false })
 class MSGraphService {
   private _cache: CacheService = null

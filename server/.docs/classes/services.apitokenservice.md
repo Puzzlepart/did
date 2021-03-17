@@ -4,6 +4,8 @@
 
 [services](../modules/services.md).ApiTokenService
 
+API token service
+
 ## Hierarchy
 
 * *MongoDocumentService*<[*ApiToken*](graphql.apitoken.md)\>
@@ -48,7 +50,7 @@ Name | Type |
 
 **Returns:** [*ApiTokenService*](services.apitokenservice.md)
 
-Defined in: [server/services/mongo/api_token.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L11)
+Defined in: [server/services/mongo/api_token.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L17)
 
 ## Properties
 
@@ -101,7 +103,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<string\>
 
-Defined in: [server/services/mongo/api_token.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L41)
+Defined in: [server/services/mongo/api_token.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L47)
 
 ___
 
@@ -120,7 +122,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/api_token.ts:68](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L68)
+Defined in: [server/services/mongo/api_token.ts:74](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L74)
 
 ___
 
@@ -165,7 +167,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
 
-Defined in: [server/services/mongo/api_token.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L26)
+Defined in: [server/services/mongo/api_token.ts:32](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L32)
 
 ___
 

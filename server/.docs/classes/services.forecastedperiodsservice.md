@@ -4,6 +4,8 @@
 
 [services](../modules/services.md).ForecastedPeriodsService
 
+Forecasted periods service
+
 ## Hierarchy
 
 * *MongoDocumentService*<any\>
@@ -47,7 +49,7 @@ Name | Type | Description |
 
 **Returns:** [*ForecastedPeriodsService*](services.forecastedperiodsservice.md)
 
-Defined in: [server/services/mongo/forecasted_periods.ts:6](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/forecasted_periods.ts#L6)
+Defined in: [server/services/mongo/forecasted_periods.ts:12](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/forecasted_periods.ts#L12)
 
 ## Properties
 
