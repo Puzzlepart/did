@@ -14,7 +14,7 @@
 
 ### environment
 
-▸ **environment**<T\>(`key`: *string*, `fallbackValue?`: *string*, `options?`: EnvironmentParseOptions): T
+▸ **environment**<T\>(`key`: keyof Environment, `fallbackValue?`: T, `options?`: EnvironmentParseOptions): T
 
 Get environment variable by key with optional fallbackvalue
 
@@ -30,13 +30,13 @@ Name | Default |
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`key` | *string* | Key   |
-`fallbackValue?` | *string* | Fallback vaue if key is not found   |
+`key` | keyof Environment | Key   |
+`fallbackValue?` | T | Fallback vaue if key is not found   |
 `options` | EnvironmentParseOptions | options    |
 
 **Returns:** T
 
-Defined in: [server/utils/environment.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/utils/environment.ts#L16)
+Defined in: [server/utils/environment.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/utils/environment.ts#L48)
 
 ___
 

@@ -48,14 +48,16 @@ Defined in: [server/services/google/index.ts:11](https://github.com/Puzzlepart/d
 
 ▸ **getEvents**(`startDate`: *string*, `endDate`: *string*, `tzOffset`: *number*): *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
 
+Get events for the specified period using Google APIs
+
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`startDate` | *string* |
-`endDate` | *string* |
-`tzOffset` | *number* |
+Name | Type | Description |
+:------ | :------ | :------ |
+`startDate` | *string* | Start date (YYYY-MM-DD)   |
+`endDate` | *string* | End date (YYYY-MM-DD)   |
+`tzOffset` | *number* | Timezone offset    |
 
 **Returns:** *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
 
-Defined in: [server/services/google/index.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L27)
+Defined in: [server/services/google/index.ts:36](https://github.com/Puzzlepart/did/blob/dev/server/services/google/index.ts#L36)

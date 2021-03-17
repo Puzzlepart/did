@@ -4,7 +4,7 @@ import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 
 /**
- * @category ObjectType
+ * @category GraphQL ObjectType
  */
 @ObjectType({
   description: 'A type that describes a ApiToken',
@@ -28,7 +28,7 @@ export class ApiToken {
 }
 
 /**
- * @category InputType
+ * @category GraphQL InputType
  */
 @InputType({
   description: 'Input object for ApiToken used in mutation addApiToken'

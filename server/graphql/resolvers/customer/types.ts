@@ -4,7 +4,7 @@ import 'reflect-metadata'
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 
 /**
- * @category ObjectType
+ * @category GraphQL ObjectType
  */
 @ObjectType({
   description: 'A type that describes a Customer',
@@ -44,7 +44,7 @@ export class Customer {
 }
 
 /**
- * @category InputType
+ * @category GraphQL InputType
  */
 @InputType({
   description:

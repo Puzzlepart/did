@@ -160,7 +160,7 @@ ___
 
 ### getByExternalId
 
-▸ **getByExternalId**(`id`: *string*, `provider`: *string*): *Promise*<{ `_id?`: *string* ; `db?`: *string* ; `id`: *string* ; `name`: *string* ; `owner`: *string* ; `settings?`: [*SubscriptionSettings*](graphql.subscriptionsettings.md)  }\>
+▸ **getByExternalId**(`idOrMail`: *string*, `provider`: *string*): *Promise*<{ `_id?`: *string* ; `db?`: *string* ; `id`: *string* ; `name`: *string* ; `owner`: *string* ; `settings?`: [*SubscriptionSettings*](graphql.subscriptionsettings.md)  }\>
 
 Get subscription by external id or email
 
@@ -170,7 +170,7 @@ Get subscription by external id or email
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`id` | *string* | User ID or email address   |
+`idOrMail` | *string* | User ID or mail   |
 `provider` | *string* | Provider    |
 
 **Returns:** *Promise*<{ `_id?`: *string* ; `db?`: *string* ; `id`: *string* ; `name`: *string* ; `owner`: *string* ; `settings?`: [*SubscriptionSettings*](graphql.subscriptionsettings.md)  }\>

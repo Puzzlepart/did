@@ -167,6 +167,9 @@ export class TimesheetService {
   /**
    * Get events from provider
    *
+   * - Provider `google` uses `_googleCalSvc` (`GoogleCalendarService`)
+   * - Default provider uses `_msgraphSvc` (`MSGraphService`)
+   *
    * @param params - Parameters
    *
    * @returns Events
@@ -192,10 +195,7 @@ export class TimesheetService {
         }
         break
       default: {
-        events = await this._msgraphSvc.getEvents(startDate, endDate, {
-          tzOffset,
-          returnIsoDates: false
-        })
+        events = await this._msgraphSvc.getEvents(startDate, endDate, tzOffset)
       }
     }
     if (engine) {

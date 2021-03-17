@@ -5,6 +5,8 @@ import {
 } from '../../graphql/resolvers/types'
 import MatchingEngine from './matching'
 
+export type ProjectMatch = { id: string; key: string; customerKey: string }
+
 export interface IGetTimesheetParameters {
   startDate: string
   endDate: string

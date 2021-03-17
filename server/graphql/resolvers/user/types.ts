@@ -6,7 +6,7 @@ import { Subscription } from '../subscription/types'
 import { Role } from '../types'
 
 /**
- * @category ObjectType
+ * @category GraphQL ObjectType
  */
 @ObjectType({
   description: 'A type that describes a User',
@@ -64,7 +64,7 @@ export class User {
 }
 
 /**
- * @category InputType
+ * @category GraphQL InputType
  */
 @InputType({
   description: 'Input object for Role used in Mutation addOrUpdateUser/addUsers'
@@ -108,7 +108,7 @@ export class UserInput {
 }
 
 /**
- * @category InputType
+ * @category GraphQL InputType
  */
 @InputType({ description: 'Input object for User query' })
 export class UserQuery {

@@ -4,21 +4,7 @@
 
 ## Table of contents
 
-### GraphQL Resolver Classes
-
-- [ApiTokenResolver](../classes/graphql.apitokenresolver.md)
-- [CustomerResolver](../classes/graphql.customerresolver.md)
-- [LabelResolver](../classes/graphql.labelresolver.md)
-- [NotificationResolver](../classes/graphql.notificationresolver.md)
-- [OutlookCategoryResolver](../classes/graphql.outlookcategoryresolver.md)
-- [ProjectResolver](../classes/graphql.projectresolver.md)
-- [ReportsResolver](../classes/graphql.reportsresolver.md)
-- [RoleResolver](../classes/graphql.roleresolver.md)
-- [SubscriptionResolver](../classes/graphql.subscriptionresolver.md)
-- [TimesheetResolver](../classes/graphql.timesheetresolver.md)
-- [UserResolver](../classes/graphql.userresolver.md)
-
-### InputType Classes
+### GraphQL InputType Classes
 
 - [ApiTokenInput](../classes/graphql.apitokeninput.md)
 - [ConfirmedPeriodsQuery](../classes/graphql.confirmedperiodsquery.md)
@@ -39,7 +25,7 @@
 - [UserInput](../classes/graphql.userinput.md)
 - [UserQuery](../classes/graphql.userquery.md)
 
-### ObjectType Classes
+### GraphQL ObjectType Classes
 
 - [ApiToken](../classes/graphql.apitoken.md)
 - [CreateOrUpdateProjectResult](../classes/graphql.createorupdateprojectresult.md)
@@ -58,6 +44,20 @@
 - [TimeEntry](../classes/graphql.timeentry.md)
 - [TimesheetPeriodObject](../classes/graphql.timesheetperiodobject.md)
 - [User](../classes/graphql.user.md)
+
+### GraphQL Resolver Classes
+
+- [ApiTokenResolver](../classes/graphql.apitokenresolver.md)
+- [CustomerResolver](../classes/graphql.customerresolver.md)
+- [LabelResolver](../classes/graphql.labelresolver.md)
+- [NotificationResolver](../classes/graphql.notificationresolver.md)
+- [OutlookCategoryResolver](../classes/graphql.outlookcategoryresolver.md)
+- [ProjectResolver](../classes/graphql.projectresolver.md)
+- [ReportsResolver](../classes/graphql.reportsresolver.md)
+- [RoleResolver](../classes/graphql.roleresolver.md)
+- [SubscriptionResolver](../classes/graphql.subscriptionresolver.md)
+- [TimesheetResolver](../classes/graphql.timesheetresolver.md)
+- [UserResolver](../classes/graphql.userresolver.md)
 
 ### Type aliases
 

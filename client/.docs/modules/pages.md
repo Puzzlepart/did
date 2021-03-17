@@ -168,7 +168,7 @@ ___
 
 • `Const` **Home**: FunctionComponent
 
-Defined in: [client/pages/Home/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Home/index.tsx#L12)
+Defined in: [client/pages/Home/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Home/index.tsx#L14)
 
 ___
 

@@ -2,9 +2,7 @@ import { findBestMatch } from 'string-similarity'
 import { contains, filter, find, first, isEmpty } from 'underscore'
 import { Customer, EventObject } from '../../graphql/resolvers/types'
 import { ProjectsData } from '../mongo/project'
-import MSGraphEvent from '../msgraph/types'
-
-type ProjectMatch = { id: string; key: string; customerKey: string }
+import { ProjectMatch } from './types'
 
 export default class {
   constructor(private _data: ProjectsData) {}
@@ -195,8 +193,10 @@ export default class {
    * Match events
    *
    * @param events - Events to match
+   *
+   * @returns Events matched to projects, customers and labels
    */
-  public matchEvents(events: MSGraphEvent[]): EventObject[] {
+  public matchEvents(events: EventObject[]): EventObject[] {
     return events.map(this._matchEvent.bind(this))
   }
 }

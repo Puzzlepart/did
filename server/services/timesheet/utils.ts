@@ -1,6 +1,5 @@
 import { find, pick } from 'underscore'
-import { EventInput } from '../../graphql'
-import MSGraphEvent from '../msgraph/types'
+import { EventInput, EventObject } from '../../graphql'
 import { ITimesheetPeriodData } from './types'
 
 /**
@@ -27,7 +26,7 @@ function createUniqueEventId(eventId: string, startDateTime: Date) {
 export function mapMatchedEvents(
   period: ITimesheetPeriodData,
   matchedEvents: EventInput[],
-  events: MSGraphEvent[]
+  events: EventObject[]
 ) {
   const events_ = []
   const hours = matchedEvents.reduce((hours, m: any) => {

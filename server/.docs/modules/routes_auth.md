@@ -20,7 +20,7 @@
 
 • `Const` **default**: *Router*
 
-Defined in: [server/routes/auth.ts:6](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L6)
+Defined in: [server/routes/auth.ts:7](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L7)
 
 ## Functions
 
@@ -28,7 +28,7 @@ Defined in: [server/routes/auth.ts:6](https://github.com/Puzzlepart/did/blob/dev
 
 ▸ `Const`**authCallbackHandler**(`strategy`: *google* \| *azuread-openidconnect*): *function*
 
-Handler for /auth/ad/callback and  /auth/google/callback
+Handler for /auth/azuread-openidconnect/callback and  /auth/google/callback
 
 #### Parameters:
 
@@ -38,7 +38,7 @@ Name | Type |
 
 **Returns:** (`request`: *Request*<ParamsDictionary, any, any, ParsedQs\>, `response`: *Response*<any\>, `next`: NextFunction) => *void*
 
-Defined in: [server/routes/auth.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L34)
+Defined in: [server/routes/auth.ts:35](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L35)
 
 ___
 
@@ -46,7 +46,7 @@ ___
 
 ▸ `Const`**signInHandler**(`strategy`: *google* \| *azuread-openidconnect*, `options`: AuthenticateOptions): *function*
 
-Handler for /auth/ad/signin and /auth/google/signin
+Handler for /auth/azuread-openidconnect/signin and /auth/google/signin
 
 #### Parameters:
 
@@ -57,7 +57,7 @@ Name | Type |
 
 **Returns:** (`request`: *Request*<ParamsDictionary, any, any, ParsedQs\>, `response`: *Response*<any\>, `next`: NextFunction) => *void*
 
-Defined in: [server/routes/auth.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L17)
+Defined in: [server/routes/auth.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L18)
 
 ___
 
@@ -76,4 +76,4 @@ Name | Type | Description |
 
 **Returns:** *void*
 
-Defined in: [server/routes/auth.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L71)
+Defined in: [server/routes/auth.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L72)

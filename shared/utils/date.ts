@@ -14,25 +14,7 @@ import weekOfYearPlugin from 'dayjs/plugin/weekOfYear'
 import { TFunction } from 'i18next'
 import { capitalize } from 'underscore.string'
 import { DateObject } from './date.dateObject'
-
-interface IDateUtils {
-  /**
-   * Timezone offset
-   *
-   * Retrieved from Date.getTimezoneOffset()
-   */
-  tzOffset: number
-
-  /**
-   * Default month format
-   */
-  monthFormat: string
-
-  /**
-   * Use ISO week
-   */
-  isoWeek: boolean
-}
+import { DateWithTimezone, IDateUtils } from './types'
 
 export type DateInput = ConfigType
 
@@ -356,6 +338,19 @@ export class DateUtils {
   public endOfMonth(date: DateObject): DateObject {
     return new DateObject(date.$.endOf('month'))
   }
+
+  /**
+   * Parse date with timezone
+   *
+   * @param date - Date with timezone
+   *
+   * @returns The JS date
+   */
+  public parseDateWithTimezone(date: DateWithTimezone): Date {
+    return $dayjs
+      .tz($dayjs(date.dateTime).format('YYYY-MM-DD HH:mm:ss'), date.timeZone)
+      .toDate()
+  }
 }
 
 export default new DateUtils({
@@ -364,4 +359,5 @@ export default new DateUtils({
   isoWeek: true
 })
 
+export * from './types'
 export { DateObject, $dayjs }

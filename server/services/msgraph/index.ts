@@ -5,14 +5,12 @@ import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import { sortBy } from 'underscore'
 import DateUtils from '../../../shared/utils/date'
+import { EventObject } from '../../graphql'
 import { Context } from '../../graphql/context'
 import { environment } from '../../utils'
 import { CacheScope, CacheService } from '../cache'
 import OAuthService, { AccessTokenOptions } from '../oauth'
-import MSGraphEvent, {
-  MSGraphEventOptions,
-  MSGraphOutlookCategory
-} from './types'
+import { MSGraphOutlookCategory } from './types'
 
 @Service({ global: false })
 class MSGraphService {
@@ -150,13 +148,13 @@ class MSGraphService {
    *
    * @param startDate - Start date (YYYY-MM-DD)
    * @param endDate - End date (YYYY-MM-DD)
-   * @param options - Options
+   * @param tzOffset - Timezone offset
    */
   public async getEvents(
     startDate: string,
     endDate: string,
-    options: MSGraphEventOptions
-  ): Promise<MSGraphEvent[]> {
+    tzOffset: number
+  ): Promise<EventObject[]> {
     try {
       const cacheOptions = {
         key: ['events', startDate, endDate],
@@ -166,11 +164,11 @@ class MSGraphService {
         const query = {
           startDateTime: DateUtils.toISOString(
             `${startDate}:00:00:00.000`,
-            options.tzOffset
+            tzOffset
           ),
           endDateTime: DateUtils.toISOString(
             `${endDate}:23:59:59.999`,
-            options.tzOffset
+            tzOffset
           )
         }
         const client = await this._getClient()
@@ -197,8 +195,20 @@ class MSGraphService {
         return value.filter((event) => !!event.subject)
       }, cacheOptions)
       return events
-        .map((event) => new MSGraphEvent(event, options))
-        .filter((event: MSGraphEvent) => event.duration <= 24)
+        .map(
+          (event) =>
+            new EventObject(
+              event.id,
+              event.subject,
+              event.body.content,
+              event.isOrganizer,
+              event.start,
+              event.end,
+              event.webLink,
+              event.categories
+            )
+        )
+        .filter((event: EventObject) => event.duration <= 24)
     } catch (error) {
       throw new Error(`MSGraphService.getEvents: ${error.message}`)
     }

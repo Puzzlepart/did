@@ -5,7 +5,7 @@ import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import { Customer, LabelObject as Label, OutlookCategory } from '../types'
 
 /**
- * @category InputType
+ * @category GraphQL InputType
  */
 @InputType({
   description: 'Input object for Project used in Mutation createOrUpdateProject'
@@ -40,7 +40,7 @@ export class ProjectInput {
 }
 
 /**
- * @category ObjectType
+ * @category GraphQL ObjectType
  */
 @ObjectType({
   description: 'A type that describes a Project',
@@ -97,7 +97,7 @@ export class Project {
 }
 
 /**
- * @category InputType
+ * @category GraphQL InputType
  */
 @InputType({
   description:
@@ -109,7 +109,7 @@ export class ProjectOptions {
 }
 
 /**
- * @category ObjectType
+ * @category GraphQL ObjectType
  */
 @ObjectType({
   description: 'A type that describes a CreateOrUpdateProjectResult'

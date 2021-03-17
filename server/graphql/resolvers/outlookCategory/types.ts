@@ -5,7 +5,7 @@ import { Field, ID, ObjectType } from 'type-graphql'
 import { BaseResult } from '../types'
 
 /**
- * @category ObjectType
+ * @category GraphQL ObjectType
  */
 @ObjectType({
   description: 'A type that describes a OutlookCategory',
@@ -26,7 +26,7 @@ export class OutlookCategory {
 }
 
 /**
- * @category ObjectType
+ * @category GraphQL ObjectType
  */
 @ObjectType({
   description: 'A type that describes a CreateOutlookCategoryResult'

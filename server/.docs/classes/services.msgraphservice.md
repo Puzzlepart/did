@@ -41,7 +41,7 @@ Name | Type |
 
 **Returns:** [*MSGraphService*](services.msgraphservice.md)
 
-Defined in: [server/services/msgraph/index.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L26)
+Defined in: [server/services/msgraph/index.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L24)
 
 ## Properties
 
@@ -49,7 +49,7 @@ Defined in: [server/services/msgraph/index.ts:26](https://github.com/Puzzlepart/
 
 • `Private` **\_accessTokenOptions**: [*AccessTokenOptions*](../interfaces/services_oauth.accesstokenoptions.md)
 
-Defined in: [server/services/msgraph/index.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L20)
+Defined in: [server/services/msgraph/index.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L18)
 
 ___
 
@@ -57,7 +57,7 @@ ___
 
 • `Private` **\_cache**: [*CacheService*](services_cache.cacheservice.md)= null
 
-Defined in: [server/services/msgraph/index.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L19)
+Defined in: [server/services/msgraph/index.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L17)
 
 ___
 
@@ -75,7 +75,7 @@ Gets a Microsoft Graph Client using the auth token from the class
 
 **Returns:** *Promise*<Client\>
 
-Defined in: [server/services/msgraph/index.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L39)
+Defined in: [server/services/msgraph/index.ts:37](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L37)
 
 ___
 
@@ -93,7 +93,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<MSGraphOutlookCategory\>
 
-Defined in: [server/services/msgraph/index.ts:105](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L105)
+Defined in: [server/services/msgraph/index.ts:103](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L103)
 
 ___
 
@@ -111,13 +111,13 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [server/services/msgraph/index.ts:56](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L56)
+Defined in: [server/services/msgraph/index.ts:54](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L54)
 
 ___
 
 ### getEvents
 
-▸ **getEvents**(`startDate`: *string*, `endDate`: *string*, `options`: MSGraphEventOptions): *Promise*<default[]\>
+▸ **getEvents**(`startDate`: *string*, `endDate`: *string*, `tzOffset`: *number*): *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
 
 Get events for the specified period using Microsoft Graph endpoint /me/calendar/calendarView
 
@@ -127,11 +127,11 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `startDate` | *string* | Start date (YYYY-MM-DD)   |
 `endDate` | *string* | End date (YYYY-MM-DD)   |
-`options` | MSGraphEventOptions | Options    |
+`tzOffset` | *number* | Timezone offset    |
 
-**Returns:** *Promise*<default[]\>
+**Returns:** *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
 
-Defined in: [server/services/msgraph/index.ts:155](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L155)
+Defined in: [server/services/msgraph/index.ts:153](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L153)
 
 ___
 
@@ -143,7 +143,7 @@ Get Outlook categories
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/msgraph/index.ts:131](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L131)
+Defined in: [server/services/msgraph/index.ts:129](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L129)
 
 ___
 
@@ -155,4 +155,4 @@ Get Azure Active Directory users
 
 **Returns:** *Promise*<any\>
 
-Defined in: [server/services/msgraph/index.ts:69](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L69)
+Defined in: [server/services/msgraph/index.ts:67](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L67)

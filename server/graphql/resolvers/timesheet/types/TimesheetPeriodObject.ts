@@ -5,7 +5,7 @@ import DateUtils from '../../../../../shared/utils/date'
 import { EventObject } from './EventObject'
 
 /**
- * @category ObjectType
+ * @category GraphQL ObjectType
  */
 @ObjectType({
   description: 'A type that describes a TimesheetPeriod',

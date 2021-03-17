@@ -140,7 +140,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
 
-Defined in: [server/services/mongo/user.ts:80](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L80)
+Defined in: [server/services/mongo/user.ts:82](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L82)
 
 ___
 
@@ -158,7 +158,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
 
-Defined in: [server/services/mongo/user.ts:94](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L94)
+Defined in: [server/services/mongo/user.ts:96](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L96)
 
 ___
 
@@ -191,7 +191,7 @@ ___
 
 ### getById
 
-▸ **getById**(`id`: *string*): *Promise*<[*User*](graphql.user.md)\>
+▸ **getById**(`idOrMail`: *string*): *Promise*<[*User*](graphql.user.md)\>
 
 Get user by ID
 
@@ -201,7 +201,7 @@ Get user by ID
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`id` | *string* | User ID    |
+`idOrMail` | *string* | User ID or mail    |
 
 **Returns:** *Promise*<[*User*](graphql.user.md)\>
 
@@ -307,7 +307,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/user.ts:124](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L124)
+Defined in: [server/services/mongo/user.ts:126](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L126)
 
 ___
 
@@ -325,4 +325,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/user.ts:108](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L108)
+Defined in: [server/services/mongo/user.ts:110](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L110)

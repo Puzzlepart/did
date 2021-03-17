@@ -73,6 +73,9 @@ ___
 
 Get events from provider
 
+- Provider `google` uses `_googleCalSvc` (`GoogleCalendarService`)
+- Default provider uses `_msgraphSvc` (`MSGraphService`)
+
 #### Parameters:
 
 Name | Type |
@@ -83,7 +86,7 @@ Name | Type |
 
 Events
 
-Defined in: [server/services/timesheet/index.ts:174](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L174)
+Defined in: [server/services/timesheet/index.ts:177](https://github.com/Puzzlepart/did/blob/dev/server/services/timesheet/index.ts#L177)
 
 ___
 

@@ -75,7 +75,7 @@ ___
 
 ### provider
 
-• `Optional` **provider**: *google* \| *microsoft*
+• `Optional` **provider**: *google* \| *azuread-openidconnect*
 
 Provider
 

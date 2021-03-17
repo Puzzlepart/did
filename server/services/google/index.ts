@@ -2,7 +2,7 @@
 import { calendar_v3, google } from 'googleapis'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
-import DateUtils, { $dayjs } from '../../../shared/utils/date'
+import DateUtils from '../../../shared/utils/date'
 import { EventObject } from '../../graphql'
 import { environment } from '../../utils/environment'
 
@@ -41,41 +41,20 @@ class GoogleCalendarService {
         calendarId: 'primary'
       }
       const { data } = await this._cal.events.list(query)
-      return data.items.map(
-        ({
-          id,
-          summary: title,
-          description: body,
-          organizer,
-          start,
-          end,
-          htmlLink: webLink
-        }) => {
-          const startDateTime = $dayjs
-            .tz(
-              $dayjs(start.dateTime).format('YYYY-MM-DD HH:mm:ss'),
-              start.timeZone
-            )
-            .toDate()
-          const endDateTime = $dayjs
-            .tz(
-              $dayjs(end.dateTime).format('YYYY-MM-DD HH:mm:ss'),
-              end.timeZone
-            )
-            .toDate()
-          return new EventObject({
-            id,
-            title,
-            body,
-            categories: [],
-            isOrganizer: organizer.self,
-            startDateTime,
-            endDateTime,
-            webLink,
-            duration: DateUtils.getDurationHours(startDateTime, endDateTime)
-          })
-        }
-      )
+      return data.items
+        .filter((event) => event.start && event.end)
+        .map((event) => {
+          return new EventObject(
+            event.id,
+            event.summary,
+            event.description,
+            event.organizer.self,
+            event.start,
+            event.end,
+            event.htmlLink,
+            []
+          )
+        })
     } catch (error) {
       throw error
     }
