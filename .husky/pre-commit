@@ -3,5 +3,3 @@
 
 npm run lint:fix
 npx @appnest/readme generate
-git add README.md
-git commit --amend --no-verify
