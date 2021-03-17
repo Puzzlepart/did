@@ -26,6 +26,7 @@
 	* [Code structure](#code-structure)
 	* [Node version](#node-version)
 	* [Authentication](#authentication)
+		* [Google](#google)
 	* [Commits and `commitlint`](#commits-and-commitlint)
 	* [Branching / Deploying](#branching--deploying)
 		* [Main branch](#main-branch)
@@ -168,6 +169,9 @@ Did supports authentication with both Microsoft (`azuread-openidconnect`) and Go
 The auth providers are set in `process.env.AUTH_PROVIDERS` and sent to the client through GraphQL query `authProviders`.
 
 ![image-20210317094748280](assets/image-20210317094748280.png)
+
+#### Google
+See [wiki][https://github.com/Puzzlepart/did/wiki/Usage-with-Google-calendar] for more details on using Did with Google.
 
 ### Commits and `commitlint`
 

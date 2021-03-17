@@ -97,6 +97,9 @@ The auth providers are set in `process.env.AUTH_PROVIDERS` and sent to the clien
 
 ![image-20210317094748280](assets/image-20210317094748280.png)
 
+#### Google
+See [wiki][https://github.com/Puzzlepart/did/wiki/Usage-with-Google-calendar] for more details on using Did with Google.
+
 ### Commits and `commitlint`
 
 We are using [husky](https://github.com/typicode/husky) hooks to automatically run npm script `lint:fix` before commits. This is to make sure all files are linted and ready to go at all times. This is easy to forget when working on a branch.
