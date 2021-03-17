@@ -41,13 +41,25 @@ export class UserResolver {
   ) {}
 
   /**
+   * Get auth providers
+   */
+  @Query(() => [String], { description: 'Get auth providers' })
+  authProviders(): string[] {
+    return (process.env.AUTH_PROVIDERS || 'microsoft').split(' ')
+  }
+
+  /**
    * Get current user
    *
    * @param ctx - GraphQL context
    */
-  @Query(() => User, { description: 'Get the currently logged in user' })
+  @Query(() => User, {
+    nullable: true,
+    description: 'Get the currently logged in user'
+  })
   async currentUser(@Ctx() context: Context): Promise<User> {
     const user = await this._userSvc.getById(context.userId)
+    if (!user) return null
     return {
       ...user,
       subscription: pick(context.subscription, 'id', 'name', 'owner')

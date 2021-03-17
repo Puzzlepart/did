@@ -33,7 +33,6 @@ export class SubscriptionResolver {
   /**
    * Get current subscription
    */
-  @Authorized({ userContext: true })
   @Query(() => Subscription, {
     description: 'Get current subscription',
     nullable: true

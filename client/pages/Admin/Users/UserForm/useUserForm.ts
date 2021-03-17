@@ -14,7 +14,6 @@ export function useUserForm({ props }) {
   const { subscription } = useContext(AppContext)
   const { activeDirectoryUsers, roles } = useContext(UsersContext)
   const [model, setModel] = useState<User>({})
-  const [provider, setProvider] = useState('microsoft')
   const [addOrUpdateUser] = useMutation($addOrUpdateUser)
 
   useEffect(() => {
@@ -30,8 +29,7 @@ export function useUserForm({ props }) {
         user: omit(
           {
             ...model,
-            role: (model?.role as Role)?.name || 'User',
-            provider
+            role: (model?.role as Role)?.name || 'User'
           },
           '__typename'
         ),
@@ -67,8 +65,6 @@ export function useUserForm({ props }) {
     roles,
     model,
     setModel,
-    provider,
-    setProvider,
     onSave,
     isFormValid,
     inputProps

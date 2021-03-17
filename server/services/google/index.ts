@@ -11,19 +11,28 @@ class GoogleCalendarService {
   private _cal: calendar_v3.Calendar
 
   constructor(@Inject('REQUEST') private readonly _request: any) {
-    const client = new google.auth.OAuth2({
-      clientId: environment('GOOGLE_CLIENT_ID'),
-      clientSecret: environment('GOOGLE_CLIENT_SECRET'),
-      redirectUri: environment('GOOGLE_REDIRECT_URI')
-    })
-    client.setCredentials({
-      access_token: this._request.user['tokenParams']['access_token']
-    })
-    this._cal = new calendar_v3.Calendar({
-      auth: client
-    })
+    if (this._request.user) {
+      const client = new google.auth.OAuth2({
+        clientId: environment('GOOGLE_CLIENT_ID'),
+        clientSecret: environment('GOOGLE_CLIENT_SECRET'),
+        redirectUri: environment('GOOGLE_REDIRECT_URI')
+      })
+      client.setCredentials({
+        access_token: this._request.user['tokenParams']['access_token']
+      })
+      this._cal = new calendar_v3.Calendar({
+        auth: client
+      })
+    }
   }
 
+  /**
+   * Get events for the specified period using Google APIs
+   *
+   * @param startDate - Start date (YYYY-MM-DD)
+   * @param endDate - End date (YYYY-MM-DD)
+   * @param tzOffset - Timezone offset
+   */
   public async getEvents(startDate: string, endDate: string, tzOffset: number) {
     try {
       const query = {

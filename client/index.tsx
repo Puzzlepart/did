@@ -40,9 +40,9 @@ export const boostrap = async () => {
       })
       context.user = new ContextUser(data.user)
       context.subscription = data?.subscription
+      context.authProviders = data?.authProviders
       return context
     } catch {
-      // We return an "empty" user with preferred language en-GB (default)
       return { user: new ContextUser() }
     }
   }
