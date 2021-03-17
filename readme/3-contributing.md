@@ -98,7 +98,7 @@ The auth providers are set in `process.env.AUTH_PROVIDERS` and sent to the clien
 ![image-20210317094748280](assets/image-20210317094748280.png)
 
 #### Google
-See [wiki][https://github.com/Puzzlepart/did/wiki/Usage-with-Google-calendar] for more details on using Did with Google.
+See [wiki](https://github.com/Puzzlepart/did/wiki/Usage-with-Google-calendar) for more details on using Did with Google.
 
 ### Commits and `commitlint`
 
