@@ -33,6 +33,15 @@ class GoogleCalendarService {
   }
 
   /**
+   * Create calendar
+   */
+  public async createCalendar(requestBody: calendar_v3.Schema$Calendar) {
+    return await this._cal.calendars.insert({
+      requestBody
+    })
+  }
+
+  /**
    * Get calendars
    *
    * @param accessRole - Access role

@@ -1,7 +1,8 @@
 /* eslint-disable tsdoc/syntax */
 import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
-import { Service } from 'typedi'
+import { Inject, Service } from 'typedi'
+import { Context } from '../../../graphql/context'
 import { MSGraphService } from '../../../services'
 import { IAuthOptions } from '../../authChecker'
 import { CreateOutlookCategoryResult, OutlookCategory } from './types'
@@ -23,8 +24,12 @@ export class OutlookCategoryResolver {
    * Constructor for OutlookCategoryResolver
    *
    * @param _msgraph - Microsoft Graph service
+   * @param _context - GraphQL context
    */
-  constructor(private readonly _msgraph: MSGraphService) {}
+  constructor(
+    private readonly _msgraph: MSGraphService,
+    @Inject('CONTEXT') private readonly _context: Context
+  ) {}
 
   /**
    * Get Outlook categories
@@ -32,6 +37,7 @@ export class OutlookCategoryResolver {
   @Authorized<IAuthOptions>({ userContext: true })
   @Query(() => [OutlookCategory], { description: 'Get Outlook categories' })
   async outlookCategories() {
+    if (this._context.provider === 'google') return []
     const categories = await this._msgraph.getOutlookCategories()
     return categories.map((c) => ({ ...c, key: c.id }))
   }
