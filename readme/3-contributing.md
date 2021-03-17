@@ -109,23 +109,28 @@ See `commitlint` in [package.json](./package.json). The commit message needs to 
 
 ### Branching / Deploying
 
+#### Main branch
 The `/main` branch requires pull requests, and is set up with a CI/CD pipeline which deploys to [did.puzzlepart.com](https://did.puzzlepart.com)  
+
+#### Dev branch
 The `/dev` branch also requires pull requests, and is set up with a CI/CD pipeline which deploys to [didapp-dev.azurewebsites.net](https://didapp-dev.azurewebsites.net)  
 `/feature/*`-prefixed branches may or may not be included in future releases.
 
+#### Naming conventions
 You are encouraged to branch with either of the following prefixes  
 *  **hotfix/**
 *  **bugfix/**
 *  **feature/**
 
+#### See also
 See also [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/)
-
 
 If you want to test with your web app, checkout [Creating your own app registration in the Azure Portal](https://github.com/Puzzlepart/did365/wiki/Creating-your-own-app-registration-in-the-Azure-Portal) in our wiki.
 
 
 ### GraphQL
 
+### Extensions for `vscode
 The extension [Apollo extension for VS Code](https://www.apollographql.com/docs/devtools/editor-plugins/) is recommended for working with GraphQL in vscode.
 
 > The Apollo [VS Code extension](https://marketplace.visualstudio.com/items?itemName=apollographql.vscode-apollo) provides an all-in-one tooling experience for developing apps with Apollo.
@@ -142,9 +147,8 @@ The extension [Apollo extension for VS Code](https://www.apollographql.com/docs/
 > - [Switch graph variants](https://www.apollographql.com/docs/devtools/editor-plugins/#graph-variant-switching) to work with schemas running on different environments
 
 
-
 ### Documentation
-
+ 
 The client is documented [here](./client/.docs/README.md) and the server is documented [here](./server/.docs/README.md).
 
 _We use https://studio.apollographql.com/ for GraphQL schema documentation._
