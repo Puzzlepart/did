@@ -83,7 +83,7 @@ class GoogleCalendarService {
                 event.start,
                 event.end,
                 event.htmlLink,
-                [calendar.summary]
+                [calendar.summary, calendar.description]
               )
             })
         )
