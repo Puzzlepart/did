@@ -10,6 +10,27 @@
 
 [![version](https://img.shields.io/badge/version-0.9.9-green.svg)](https://semver.org)
 
+<details>
+<summary>📖 Table of Contents</summary>
+<br />
+
+[![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#table-of-contents)
+
+## ➤ Table of Contents
+
+* [➤ Roadmap](#-roadmap)
+	* [➤ Environments](#-environments)
+	* [➤ Contributing](#-contributing)
+		* [Getting started](#getting-started)
+					* [Set up .env ##](#set-up-env-)
+		* [Code structure](#code-structure)
+		* [Node version](#node-version)
+		* [Commits and `commitlint`](#commits-and-commitlint)
+		* [Branching / Deploying](#branching--deploying)
+		* [GraphQL](#graphql)
+		* [Documentation](#documentation)
+	* [➤ Contributors](#-contributors)
+</details>
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#roadmap)
