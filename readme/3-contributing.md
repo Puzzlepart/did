@@ -130,7 +130,7 @@ If you want to test with your web app, checkout [Creating your own app registrat
 
 ### GraphQL
 
-#### Extensions for `vscode
+#### Extensions for VS Code
 The extension [Apollo extension for VS Code](https://www.apollographql.com/docs/devtools/editor-plugins/) is recommended for working with GraphQL in vscode.
 
 > The Apollo [VS Code extension](https://marketplace.visualstudio.com/items?itemName=apollographql.vscode-apollo) provides an all-in-one tooling experience for developing apps with Apollo.
