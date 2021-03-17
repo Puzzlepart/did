@@ -56,13 +56,15 @@ export class UserService extends MongoDocumentService<User> {
    *
    * @remarks Returns null if no user is found.
    *
-   * @param id - User ID
+   * @param idOrMail - User ID or mail
    */
-  public async getById(id: string): Promise<User> {
+  public async getById(idOrMail: string): Promise<User> {
     try {
-      const user = await this.collection.findOne({ _id: id })
+      const user = await this.collection.findOne({
+        $or: [{ _id: idOrMail }, { mail: idOrMail }]
+      })
       if (!user) return null
-      if (!user.role) throw new Error(`The user ${id} has no role set.`)
+      if (!user.role) throw new Error(`The user ${idOrMail} has no role set.`)
       user.id = user._id
       user.role = await this._role.getByName(user.role as string)
       user.configuration = JSON.stringify(user.configuration)

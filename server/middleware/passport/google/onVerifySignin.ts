@@ -22,24 +22,20 @@ export const onVerifySignin = async (
   done: VerifyCallback
 ) => {
   try {
-    const email = first(profile.emails)
+    const mail = first(profile.emails)
+    const id = mail?.value || profile.id
     const subSrv = new SubscriptionService({
       db: mcl.db(environment('MONGO_DB_DB_NAME'))
     })
-    const subscription = await subSrv.getByExternalId(
-      email ? email.value : profile.id,
-      'google'
-    )
+    const subscription = await subSrv.getByExternalId(id, 'google')
     if (!subscription) throw TENANT_NOT_ENROLLED
 
     const userSrv = new UserService({
       db: mcl.db(subscription.db)
     })
 
-    const user: any = await userSrv.getById(profile.id)
-
+    const user: any = await userSrv.getById(id)
     if (!user) throw USER_NOT_ENROLLED
-
     user.subscription = subscription
     user.tokenParams = tokenParams
     done(null, user)

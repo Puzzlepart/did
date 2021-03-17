@@ -56,13 +56,13 @@ export class SubscriptionService extends MongoDocumentService<Subscription> {
    *
    * @remarks Returns null if no subscription is found.
    *
-   * @param id - User ID or email address
+   * @param idOrMail - User ID or mail
    * @param provider - Provider
    */
-  public async getByExternalId(id: string, provider: string) {
+  public async getByExternalId(idOrMail: string, provider: string) {
     try {
       const subscription = await this.collection.findOne({
-        [`externals.${provider}`]: id
+        [`externals.${provider}`]: idOrMail
       })
       if (!subscription) return null
       return {
