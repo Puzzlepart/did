@@ -19,29 +19,29 @@
 ## ➤ Table of Contents
 
 * [➤ Roadmap](#-roadmap)
-	* [➤ Environments](#-environments)
-	* [➤ Contributing](#-contributing)
-		* [Getting started](#getting-started)
-			* [Set up environment](#set-up-environment)
-		* [Code structure](#code-structure)
-		* [Node version](#node-version)
-		* [Authentication](#authentication)
-		* [Commits and `commitlint`](#commits-and-commitlint)
-		* [Branching / Deploying](#branching--deploying)
-			* [Main branch](#main-branch)
-			* [Dev branch](#dev-branch)
-			* [Naming conventions](#naming-conventions)
-			* [See also](#see-also)
-		* [GraphQL](#graphql)
-			* [Extensions for VS Code](#extensions-for-vs-code)
-		* [Documentation](#documentation)
-	* [➤ Contributors](#-contributors)
+* [➤ Environments](#-environments)
+* [➤ Contributing](#-contributing)
+	* [Getting started](#getting-started)
+		* [Set up environment](#set-up-environment)
+	* [Code structure](#code-structure)
+	* [Node version](#node-version)
+	* [Authentication](#authentication)
+	* [Commits and `commitlint`](#commits-and-commitlint)
+	* [Branching / Deploying](#branching--deploying)
+		* [Main branch](#main-branch)
+		* [Dev branch](#dev-branch)
+		* [Naming conventions](#naming-conventions)
+		* [See also](#see-also)
+	* [GraphQL](#graphql)
+		* [Extensions for VS Code](#extensions-for-vs-code)
+	* [Documentation](#documentation)
+* [➤ Contributors](#-contributors)
 </details>
 
 
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#roadmap)
 
-# ➤ Roadmap
+## ➤ Roadmap
 
 | Milestone                                                    | Release date | Version                                                      |
 | ------------------------------------------------------------ | ------------ | ------------------------------------------------------------ |
