@@ -97,7 +97,7 @@ export class EventObject {
     start: DateWithTimezone,
     end: DateWithTimezone,
     webLink: string,
-    categories?: string[]
+    categories: string[] = []
   ) {
     this.id = id
     this.title = title

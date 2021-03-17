@@ -104,8 +104,11 @@ export default class {
   /**
    * Checks for project match in event
    *
-   * 1. Checks category/title/description for tokens
-   * 2. Checks title/description for key without any brackets/parantheses
+   * 1. Checks `category`, `title` and `description` for tokens
+   * 2. Checks `title` and `description` for key without any brackets/parantheses
+   * 3.If we found token matches in `srchStr` or `categoriesStr`
+   * We look through the matches and check if they match against
+   * a project
    *
    * @param event - Event
    */
@@ -121,9 +124,6 @@ export default class {
     const matches = this._findProjectMatches(srchString, categoriesString)
     let projectKey: string
 
-    // We found token matches in srchStr or categoriesStr
-    // We look through the matches and check if they match against
-    // a project
     if (!isEmpty(matches)) {
       for (const match of matches) {
         event.customer = find(

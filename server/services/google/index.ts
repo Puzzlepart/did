@@ -27,6 +27,20 @@ class GoogleCalendarService {
   }
 
   /**
+   * Get calendars
+   *
+   * @param accessRole - Access role
+   * @returns Calendars with the specified `accessRole`
+   */
+  public async getCalendars(accessRole = 'owner') {
+    const calendarList = await this._cal.calendarList.list()
+    const calendars = calendarList.data.items.filter(
+      (cal) => cal.accessRole === accessRole
+    )
+    return calendars
+  }
+
+  /**
    * Get events for the specified period using Google APIs
    *
    * @param startDate - Start date (YYYY-MM-DD)
@@ -37,24 +51,38 @@ class GoogleCalendarService {
     try {
       const query = {
         timeMin: DateUtils.toISOString(`${startDate}:00:00:00.000`, tzOffset),
-        timeMax: DateUtils.toISOString(`${endDate}:23:59:59.999`, tzOffset),
-        calendarId: 'primary'
+        timeMax: DateUtils.toISOString(`${endDate}:23:59:59.999`, tzOffset)
       }
-      const { data } = await this._cal.events.list(query)
-      return data.items
-        .filter((event) => event.start && event.end)
-        .map((event) => {
-          return new EventObject(
-            event.id,
-            event.summary,
-            event.description,
-            event.organizer.self,
-            event.start,
-            event.end,
-            event.htmlLink,
-            []
-          )
-        })
+      const calendars = await this.getCalendars()
+      const data = await Promise.all(
+        calendars.map((cal) =>
+          this._cal.events.list({
+            ...query,
+            calendarId: cal.id
+          })
+        )
+      )
+
+      const events = []
+      for (const [index, calendar] of calendars.entries()) {
+        events.push(
+          ...data[index].data.items
+            .filter((event) => event.start && event.end)
+            .map((event) => {
+              return new EventObject(
+                event.id,
+                event.summary,
+                event.description,
+                event.organizer.self,
+                event.start,
+                event.end,
+                event.htmlLink,
+                [calendar.summary]
+              )
+            })
+        )
+      }
+      return events
     } catch (error) {
       throw error
     }
