@@ -52,7 +52,7 @@ export class TimesheetService {
     private readonly _teSvc: TimeEntryService,
     private readonly _fteSvc: ForecastedTimeEntryService,
     private readonly _cperiodSvc: ConfirmedPeriodsService,
-    private readonly _fperiodSvc: ForecastedPeriodsService
+    private readonly _fperiodSvc: ForecastedPeriodsService // eslint-disable-next-line unicorn/empty-brace-spaces
   ) {}
 
   /**
@@ -189,19 +189,29 @@ export class TimesheetService {
     locale,
     engine = null
   }: IProviderEventsParameters) {
+    const startDateTimeIso = DateUtils.toISOString(
+      `${startDate}:00:00:00.000`,
+      tzOffset
+    )
+    const endDateTimeIso = DateUtils.toISOString(
+      `${endDate}:23:59:59.999`,
+      tzOffset
+    )
     let events: any[]
     switch (provider) {
       case 'google':
         {
           events = await this._googleCalSvc.getEvents(
-            startDate,
-            endDate,
-            tzOffset
+            startDateTimeIso,
+            endDateTimeIso
           )
         }
         break
       default: {
-        events = await this._msgraphSvc.getEvents(startDate, endDate, tzOffset)
+        events = await this._msgraphSvc.getEvents(
+          startDateTimeIso,
+          endDateTimeIso
+        )
       }
     }
     if (engine) {

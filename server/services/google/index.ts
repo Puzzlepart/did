@@ -4,7 +4,6 @@ import get from 'get-value'
 import { calendar_v3, google } from 'googleapis'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
-import DateUtils from '../../../shared/utils/date'
 import { EventObject } from '../../graphql'
 import { environment } from '../../utils/environment'
 
@@ -50,15 +49,14 @@ class GoogleCalendarService {
   /**
    * Get events for the specified period using Google APIs
    *
-   * @param startDate - Start date (YYYY-MM-DD)
-   * @param endDate - End date (YYYY-MM-DD)
-   * @param tzOffset - Timezone offset
+   * @param startDateTimeIso - Start date time in `ISO format`
+   * @param endDateTimeIso - End date time in `ISO format`
    */
-  public async getEvents(startDate: string, endDate: string, tzOffset: number) {
+  public async getEvents(startDateTimeIso: string, endDateTimeIso: string) {
     try {
       const query = {
-        timeMin: DateUtils.toISOString(`${startDate}:00:00:00.000`, tzOffset),
-        timeMax: DateUtils.toISOString(`${endDate}:23:59:59.999`, tzOffset)
+        timeMin: startDateTimeIso,
+        timeMax: endDateTimeIso
       }
       const calendars = await this.getCalendars()
       const data = await Promise.all(

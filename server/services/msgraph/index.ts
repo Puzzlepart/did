@@ -5,7 +5,6 @@ import { Client as MSGraphClient } from '@microsoft/microsoft-graph-client'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import { sortBy } from 'underscore'
-import DateUtils from '../../../shared/utils/date'
 import { EventObject } from '../../graphql'
 import { Context } from '../../graphql/context'
 import { environment } from '../../utils'
@@ -152,30 +151,22 @@ class MSGraphService {
   /**
    * Get events for the specified period using Microsoft Graph endpoint /me/calendar/calendarView
    *
-   * @param startDate - Start date (YYYY-MM-DD)
-   * @param endDate - End date (YYYY-MM-DD)
-   * @param tzOffset - Timezone offset
+   * @param startDateTimeIso - Start date time in `ISO format`
+   * @param endDateTimeIso - End date time in `ISO format`
    */
   public async getEvents(
-    startDate: string,
-    endDate: string,
-    tzOffset: number
+    startDateTimeIso: string,
+    endDateTimeIso: string
   ): Promise<EventObject[]> {
     try {
       const cacheOptions = {
-        key: ['events', startDate, endDate],
+        key: ['events', startDateTimeIso, endDateTimeIso],
         scope: CacheScope.USER
       }
       const events = await this._cache.usingCache(async () => {
         const query = {
-          startDateTime: DateUtils.toISOString(
-            `${startDate}:00:00:00.000`,
-            tzOffset
-          ),
-          endDateTime: DateUtils.toISOString(
-            `${endDate}:23:59:59.999`,
-            tzOffset
-          )
+          startDateTime: startDateTimeIso,
+          endDateTime: endDateTimeIso
         }
         const client = await this._getClient()
         const { value } = (await client
