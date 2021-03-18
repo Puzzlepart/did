@@ -1,4 +1,4 @@
-<!-- ⚠️ This README has been generated from the file(s) "_CHANGELOG" ⚠️-->
+<!-- ⚠️ This README has been generated from the file(s) ".changelog/CHANGELOG" ⚠️-->
 [![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)](#changelog)
 
 # ➤ Changelog
