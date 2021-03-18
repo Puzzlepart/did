@@ -2,7 +2,7 @@ import * as arraySort from 'array-sort'
 import { getValue } from 'helpers'
 import { IGroup } from 'office-ui-fabric-react'
 import { isEmpty, unique } from 'underscore'
-import { IListGroups } from './types'
+import { IListGroupProps } from './types'
 
 /**
  * Create groups
@@ -12,7 +12,7 @@ import { IListGroups } from './types'
  */
 export function generateListGroups(
   items: any[],
-  props: IListGroups
+  props: IListGroupProps
 ): [IGroup[], any[]] {
   if (isEmpty(items)) return [null, []]
   const itemsSort = { props: [props.fieldName], opts: { reverse: false } }

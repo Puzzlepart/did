@@ -50,25 +50,26 @@ export const List: FunctionComponent<IListProps> = (props: IListProps) => {
   ])
 
   const selection = useMemo(() => {
-    if (!props.selection) return null
+    if (!props.selectionProps) return null
     return new Selection({
       onSelectionChanged: () => {
         const _selection = selection.getSelection()
-        switch (props.selection?.mode) {
+        switch (props.selectionProps?.mode) {
           case SelectionMode.single:
-            props.selection.onChanged(first(_selection))
+            props.selectionProps.onChanged(first(_selection))
             break
           case SelectionMode.multiple:
-            props.selection.onChanged(_selection)
+            props.selectionProps.onChanged(_selection)
             break
         }
       }
     })
-  }, [props.selection])
+  }, [props.selectionProps])
 
   let groups = null
   let items = [...state.items]
-  if (props.groups) [groups, items] = generateListGroups(items, props.groups)
+  if (props.groups)
+    [groups, items] = generateListGroups(items, props.listGroupProps)
 
   const [delay, transitionDuration] = props.fadeIn || [0, 0]
 
@@ -86,12 +87,14 @@ export const List: FunctionComponent<IListProps> = (props: IListProps) => {
             items={items}
             groups={groups}
             selectionMode={
-              props.selection ? props.selection.mode : SelectionMode.none
+              props.selectionProps
+                ? props.selectionProps.mode
+                : SelectionMode.none
             }
             constrainMode={ConstrainMode.horizontalConstrained}
             layoutMode={DetailsListLayoutMode.justified}
             groupProps={{
-              ...props.groupProps,
+              ...props.listGroupRenderProps,
               onRenderHeader: ListGroupHeader
             }}
             onRenderItemColumn={(item, index, column) => {

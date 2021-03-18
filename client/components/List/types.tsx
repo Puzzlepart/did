@@ -6,14 +6,15 @@ import {
   IDetailsHeaderProps,
   IRenderFunction,
   ISearchBoxProps,
+  IShimmeredDetailsListProps,
   SelectionMode
 } from 'office-ui-fabric-react'
 
-export interface IListProps<T = any> extends React.HTMLProps<HTMLDivElement> {
+export interface IListProps<T = any> extends IShimmeredDetailsListProps {
   /**
    * Items
    */
-  items?: T[]
+  items: T[]
 
   /**
    * Columns
@@ -38,17 +39,17 @@ export interface IListProps<T = any> extends React.HTMLProps<HTMLDivElement> {
   /**
    * Selection
    */
-  selection?: IListSelection
-
-  /**
-   * Groups
-   */
-  groups?: IListGroups
+  selectionProps?: IListSelectionProps
 
   /**
    * Group props
    */
-  groupProps?: IDetailsGroupRenderProps
+  listGroupProps?: IListGroupProps
+
+  /**
+   * Group render props
+   */
+  listGroupRenderProps?: IDetailsGroupRenderProps
 
   /**
    * On render details header
@@ -76,6 +77,11 @@ export interface IListProps<T = any> extends React.HTMLProps<HTMLDivElement> {
    * Filters
    */
   filters?: { [key: string]: any }
+
+  /**
+   * Hidden
+   */
+  hidden?: boolean
 }
 
 export interface IListState<T = any> {
@@ -95,13 +101,13 @@ export interface IListState<T = any> {
   items?: T[]
 }
 
-export interface IListSelection {
+export interface IListSelectionProps {
   mode: SelectionMode
   defaultSelectedKey?: string
   onChanged: (selected: any) => void
 }
 
-export interface IListGroups {
+export interface IListGroupProps {
   fieldName: string
   groupNames?: string[]
   emptyGroupName?: string

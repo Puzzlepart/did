@@ -20,7 +20,7 @@ export const CustomerList = () => {
   return (
     <List
       searchBox={{ placeholder: t('common.searchPlaceholder') }}
-      selection={{
+      selectionProps={{
         mode: SelectionMode.single,
         onChanged: setSelectedCustomer
       }}
