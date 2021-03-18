@@ -56,17 +56,14 @@ export const RolePanel: FunctionComponent<IRolePanelProps> = (
         />
         <div className={styles.subHeader}>{t('admin.permissonsLabel')}</div>
         <div className={styles.permissions}>
-          {permissions.map((permission, index) => {
-            const checked = contains(model.permissions, permission.id)
-            return (
-              <PermissionCheckbox
-                key={index}
-                checked={checked}
-                permission={permission}
-                onToggle={togglePermission}
-              />
-            )
-          })}
+          {permissions.map((permission, index) => (
+            <PermissionCheckbox
+              key={index}
+              checked={contains(model.permissions, permission.id)}
+              permission={permission}
+              onToggle={togglePermission}
+            />
+          ))}
         </div>
         <div className={styles.actions}>
           {props.model && (
