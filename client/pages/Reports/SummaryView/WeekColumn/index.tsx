@@ -14,9 +14,8 @@ export const WeekColumn: FunctionComponent<IWeekColumnProps> = (
 ) => {
   const target = useRef()
   const hours = useWeekColumn(props)
-  if (hours.total === null) {
-    return null
-  }
+  if (hours.total === null) return null
+
   return (
     <TooltipHost
       calloutProps={{

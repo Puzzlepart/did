@@ -4,13 +4,18 @@ import { useEffect, useMemo, useReducer } from 'react'
 import { first } from 'underscore'
 import { generateListGroups } from './generateListGroups'
 import reducer from './reducer'
+import { IListProps } from './types'
+
+type UseList = {
+  props: IListProps
+}
 
 /**
  * Component logic hook for `<List />`
  *
  * @category List
  */
-export function useList({ props }) {
+export function useList({ props }: UseList) {
   const [state, dispatch] = useReducer(reducer, {
     origItems: props.items || [],
     items: props.items || [],
@@ -41,7 +46,7 @@ export function useList({ props }) {
 
   let groups = null
   let items = [...state.items]
-  if (props.groups)
+  if (props.listGroupProps)
     [groups, items] = generateListGroups(items, props.listGroupProps)
 
   const [delay, transitionDuration] = props.fadeIn || [0, 0]

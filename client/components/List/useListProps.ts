@@ -14,7 +14,7 @@ import React from 'react'
 import { AnyAction } from 'redux'
 import { filter } from 'underscore'
 import { ListGroupHeader } from './ListGroupHeader'
-import { onRenderListHeader } from './onRenderListHeader'
+import { onRenderListHeader } from './ListHeader/onRenderListHeader'
 import { IListProps, IListState } from './types'
 
 type UseListProps = {

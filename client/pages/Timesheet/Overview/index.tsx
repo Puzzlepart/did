@@ -19,10 +19,10 @@ export const Overview: FunctionComponent = () => {
       <EventList
         hidden={!!error}
         enableShimmer={!!loading}
-        events={selectedPeriod?.getEvents()}
+        items={selectedPeriod?.getEvents()}
         showEmptyDays={true}
         dateFormat={config.app.TIMESHEET_OVERVIEW_TIME_FORMAT}
-        groups={groups}
+        listGroupProps={groups}
         additionalColumns={additionalColumns}
       />
     </div>

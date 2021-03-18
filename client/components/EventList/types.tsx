@@ -1,18 +1,12 @@
 /* eslint-disable tsdoc/syntax */
 import { ITypedHash } from '@pnp/common'
-import { IListGroupProps } from 'components/List/types'
+import { IListGroupProps, IListProps } from 'components/List/types'
 import { IColumn } from 'office-ui-fabric-react'
-import { EventObject } from 'types'
 
 /**
  * @category EventList
  */
-export interface IEventListProps extends React.HTMLProps<HTMLDivElement> {
-  /**
-   * List of events
-   */
-  events: EventObject[]
-
+export interface IEventListProps extends IListProps {
   /**
    * Enable shimmer
    */
@@ -31,7 +25,7 @@ export interface IEventListProps extends React.HTMLProps<HTMLDivElement> {
   /**
    * Groups to render
    */
-  groups?: IListGroupProps
+  listGroupProps?: IListGroupProps
 
   /**
    * Show empty days

@@ -1,7 +1,7 @@
 import { IDetailsHeaderProps } from 'office-ui-fabric-react'
 import React, { Dispatch } from 'react'
-import { ListHeader } from './ListHeader'
-import { IListProps, IListState } from './types'
+import { ListHeader } from '.'
+import { IListProps, IListState } from '../types'
 
 // eslint-disable-next-line unicorn/prevent-abbreviations
 export type RenderListHeaderParams = {

@@ -44,7 +44,7 @@ export const TimeEntries: FunctionComponent = () => {
       )}
       {!isEmpty(timeentries) && (
         <EventList
-          events={timeentries}
+          items={timeentries}
           additionalColumns={[
             {
               key: 'resource.displayName',

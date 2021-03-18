@@ -10,15 +10,15 @@ import { IEventListProps } from './types'
  */
 export const EventList: FunctionComponent<IEventListProps> = (
   props: IEventListProps
-): JSX.Element => {
+) => {
   const columns = useColumns(props)
   return (
     <div className={styles.root} hidden={props.hidden}>
       <List
         enableShimmer={props.enableShimmer}
         columns={columns}
-        items={props.events}
-        listGroupProps={props.groups}
+        items={props.items}
+        listGroupProps={props.listGroupProps}
         listGroupRenderProps={{ showEmptyGroups: props.showEmptyDays }}
       />
     </div>
