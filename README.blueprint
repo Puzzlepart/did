@@ -8,10 +8,10 @@
 [[ template:toc ]]
 </details>
 
-[[load:readme/1-roadmap.md]]
+[[load:.readme/1-roadmap.md]]
 
-[[load:readme/2-environments.md]]
+[[load:.readme/2-environments.md]]
 
-[[load:readme/3-contributing.md]]
+[[load:.readme/3-contributing.md]]
 
 [[ template:contributors ]]
