@@ -6,6 +6,7 @@
  * @module Components
  */
 export * from './Autocomplete'
+export * from './ColorPickerField'
 export * from './ConditionalWrapper'
 export * from './CustomerLink'
 export * from './DeleteLink'

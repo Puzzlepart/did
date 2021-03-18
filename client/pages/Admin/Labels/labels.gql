@@ -5,4 +5,15 @@ query Labels {
     color
     icon
   }
+  projects {
+    name
+    description
+    icon
+    labels {
+      name
+      description
+      color
+      icon
+    }
+  }
 }

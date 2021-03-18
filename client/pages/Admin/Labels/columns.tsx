@@ -1,6 +1,6 @@
+import { DeleteLink, EditLink } from 'components'
 import { EntityLabel } from 'components/EntityLabel'
 import { TFunction } from 'i18next'
-import { DefaultButton } from 'office-ui-fabric-react'
 import React from 'react'
 import { LabelObject } from 'types'
 import { generateColumn as col } from 'utils/generateColumn'
@@ -25,16 +25,9 @@ export const LabelColumns = (
   ),
   col('description', t('common.descriptionFieldLabel')),
   col(null, null, { minWidth: 180 }, (label: LabelObject) => (
-    <>
-      <DefaultButton
-        styles={{ root: { marginRight: 4 } }}
-        text={t('common.editLabel')}
-        onClick={() => onEdit(label)}
-      />
-      <DefaultButton
-        text={t('common.delete')}
-        onClick={() => onDelete(label)}
-      />
-    </>
+    <div style={{ display: 'flex' }}>
+      <EditLink style={{ marginRight: 12 }} onClick={() => onEdit(label)} />
+      <DeleteLink onClick={() => onDelete(label)} />
+    </div>
   ))
 ]
