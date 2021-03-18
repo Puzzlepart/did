@@ -352,7 +352,7 @@
     "accessCustomersDescription": "Tilgang til sida kundar, der du kan søka i aktive og inaktive kundar.",
     "accessProjectsDescription": "Tilgang til prosjekt-sida der du kan søka i aktive og inaktive prosjekt.",
     "accessAdminDescription": "Tilgang til prosjekt-sida der du kan søka i aktive og inaktive prosjekt.",
-    "accessReportsDescription": "Tilgang til administratorside der du administrerer brukarar, roller, løyve, API-nøklar og etikettar.",
+    "accessReportsDescription": "Tilgang til alle rapportar. I fjor, i år, denne månaden, førre månad og prognose. Støtter òg uthenting med API-nøkkel",
     "manageProjectsDescription": "Opprett nye og rediger eksisterande prosjekt.",
     "manageCustomersDescription": "Opprett nye og rediger eksisterande kundar.",
     "deleteCustomersDescription": "Sletting av kundar er for tida ikkje støtta.",

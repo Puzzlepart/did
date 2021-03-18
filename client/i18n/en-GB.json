@@ -354,7 +354,7 @@
     "accessProjectsDescription": "Acces to Projects page where you can search in active and inactive projects.",
     "accessAdminDescription": "Acces to Projects page where you can search in active and inactive projects.",
     "manageProjectsDescription": "Create new and edit existing projects.",
-    "accessReportsDescription": "Access to admin page where you administer users, roles, permissions, API tokens and labels.",
+    "accessReportsDescription": "Access to all Reports. Last year, this year, this month, last month and forecast. Also supports calls with API key.",
     "manageCustomersDescription": " Create new and edit existing customers.",
     "deleteCustomersDescription": "Deletion of customers is currently not supported.",
     "manageUsersDescription": "Manage users on the admin page. Add new users, one by one or in bulk, and change role of existing users.",
