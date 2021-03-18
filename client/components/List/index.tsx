@@ -1,7 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import {
-  ShimmeredDetailsList
-} from 'office-ui-fabric-react'
+import { ShimmeredDetailsList } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
 import FadeIn from 'react-fade-in'
 import { ScrollablePaneWrapper } from '../ScrollablePaneWrapper'
@@ -13,7 +11,7 @@ import { useListProps } from './useListProps'
 /**
  * List component using `ShimmeredDetailsList` from `office-ui-fabric-react`.
  *
- * Used by:
+ * Used by the following components:
  *
  * * `<EventList />`
  * * `<Admin />` => `<ApiTokens />`
@@ -42,7 +40,7 @@ export const List: FunctionComponent<IListProps> = (props: IListProps) => {
     <div className={styles.root} hidden={props.hidden}>
       <FadeIn delay={delay} transitionDuration={transitionDuration}>
         <ScrollablePaneWrapper condition={!!props.height} height={props.height}>
-          <ShimmeredDetailsList  {...listProps} />
+          <ShimmeredDetailsList {...listProps} />
         </ScrollablePaneWrapper>
       </FadeIn>
     </div>

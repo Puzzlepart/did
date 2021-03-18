@@ -2,6 +2,7 @@ import {
   CheckboxVisibility,
   IColumn,
   ICommandBarProps,
+  IDetailsColumnRenderTooltipProps,
   IDetailsGroupRenderProps,
   IDetailsHeaderProps,
   IRenderFunction,
@@ -65,6 +66,11 @@ export interface IListProps<T = any> extends IShimmeredDetailsListProps {
    * Check box visibility
    */
   checkboxVisibility?: CheckboxVisibility
+
+  /**
+   * Callback to render the column header
+   */
+  onRenderColumnHeader?: IRenderFunction<IDetailsColumnRenderTooltipProps>
 
   /**
    * Fade in properties used by the FadeIn component (react-fade-in)

@@ -5,17 +5,36 @@ import {
   ConstrainMode,
   DetailsListLayoutMode,
   IColumn,
+  IGroup,
+  IObjectWithKey,
+  Selection,
   SelectionMode
 } from 'office-ui-fabric-react'
+import React from 'react'
+import { AnyAction } from 'redux'
 import { filter } from 'underscore'
 import { ListGroupHeader } from './ListGroupHeader'
 import { onRenderListHeader } from './onRenderListHeader'
-import { IListProps } from './types'
+import { IListProps, IListState } from './types'
+
+type UseListProps = {
+  props: IListProps
+  state: IListState
+  dispatch: React.Dispatch<AnyAction>
+  selection: Selection<IObjectWithKey>
+  groups: IGroup[]
+}
 
 /**
  * List props hook
  */
-export function useListProps({ props, state, dispatch, selection, groups }): IListProps {
+export function useListProps({
+  props,
+  state,
+  dispatch,
+  selection,
+  groups
+}: UseListProps): IListProps {
   return {
     getKey: (_item, index) => `list_item_${index}`,
     setKey: 'list',
@@ -25,11 +44,9 @@ export function useListProps({ props, state, dispatch, selection, groups }): ILi
     columns: filter(props.columns, (col) => !col.data?.hidden),
     items: state.items,
     groups,
-    selectionMode:
-      props.selectionProps
-        ? props.selectionProps.mode
-        : SelectionMode.none
-    ,
+    selectionMode: props.selectionProps
+      ? props.selectionProps.mode
+      : SelectionMode.none,
     constrainMode: ConstrainMode.horizontalConstrained,
     layoutMode: DetailsListLayoutMode.justified,
     groupProps: {
@@ -42,13 +59,15 @@ export function useListProps({ props, state, dispatch, selection, groups }): ILi
     },
     onRenderDetailsHeader: (headerProps, defaultRender) =>
       onRenderListHeader({
-        headerProps,
+        headerProps: {
+          ...headerProps,
+          onRenderColumnHeaderTooltip: props.onRenderColumnHeader
+        },
         defaultRender,
         props,
         state,
         dispatch
       }),
-    checkboxVisibility:
-      props.checkboxVisibility || CheckboxVisibility.hidden
+    checkboxVisibility: props.checkboxVisibility || CheckboxVisibility.hidden
   } as IListProps
 }
