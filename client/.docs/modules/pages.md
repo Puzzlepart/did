@@ -1,4 +1,4 @@
-[did-client - v0.9.9](../README.md) / Pages
+[did-client - v0.9.10](../README.md) / Pages
 
 # Module: Pages
 

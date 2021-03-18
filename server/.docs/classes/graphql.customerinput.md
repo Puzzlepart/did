@@ -1,4 +1,4 @@
-[did-server - v0.9.9](../README.md) / [graphql](../modules/graphql.md) / CustomerInput
+[did-server - v0.9.10](../README.md) / [graphql](../modules/graphql.md) / CustomerInput
 
 # Class: CustomerInput
 

@@ -1,6 +1,6 @@
-did-server - v0.9.9
+did-server - v0.9.10
 
-# did-server - v0.9.9
+# did-server - v0.9.10
 
 ## Table of contents
 

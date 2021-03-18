@@ -1,4 +1,4 @@
-[did-shared - v0.9.9](../README.md) / [DateUtils](../modules/dateutils.md) / DateObject
+[did-shared - v0.9.10](../README.md) / [DateUtils](../modules/dateutils.md) / DateObject
 
 # Class: DateObject
 
@@ -53,7 +53,7 @@ Name | Type | Description |
 
 **Returns:** [*DateObject*](dateutils.dateobject.md)
 
-Defined in: shared/utils/DateObject.ts:15
+Defined in: [shared/utils/DateObject.ts:15](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L15)
 
 ## Properties
 
@@ -64,7 +64,7 @@ Defined in: shared/utils/DateObject.ts:15
 Using $ as we don't really care if it's dayjs, Temporal or luxon. This class should be
 framework-agnostic, or maybe even framework-atheist
 
-Defined in: shared/utils/DateObject.ts:15
+Defined in: [shared/utils/DateObject.ts:15](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L15)
 
 ## Accessors
 
@@ -76,7 +76,7 @@ Get end of month
 
 **Returns:** [*DateObject*](dateutils.dateobject.md)
 
-Defined in: shared/utils/DateObject.ts:70
+Defined in: [shared/utils/DateObject.ts:70](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L70)
 
 ___
 
@@ -88,7 +88,7 @@ Get end of week
 
 **Returns:** [*DateObject*](dateutils.dateobject.md)
 
-Defined in: shared/utils/DateObject.ts:56
+Defined in: [shared/utils/DateObject.ts:56](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L56)
 
 ___
 
@@ -100,7 +100,7 @@ Is current week
 
 **Returns:** *boolean*
 
-Defined in: shared/utils/DateObject.ts:84
+Defined in: [shared/utils/DateObject.ts:84](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L84)
 
 ___
 
@@ -112,7 +112,7 @@ To get a copy of the native Date object parsed from the Day.js object use dayjs#
 
 **Returns:** Date
 
-Defined in: shared/utils/DateObject.ts:49
+Defined in: [shared/utils/DateObject.ts:49](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L49)
 
 ___
 
@@ -124,7 +124,7 @@ Get start of month
 
 **Returns:** [*DateObject*](dateutils.dateobject.md)
 
-Defined in: shared/utils/DateObject.ts:77
+Defined in: [shared/utils/DateObject.ts:77](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L77)
 
 ___
 
@@ -136,7 +136,7 @@ Get start of week
 
 **Returns:** [*DateObject*](dateutils.dateobject.md)
 
-Defined in: shared/utils/DateObject.ts:63
+Defined in: [shared/utils/DateObject.ts:63](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L63)
 
 ## Methods
 
@@ -160,7 +160,7 @@ Name | Type | Description |
 
 **Returns:** [*DateObject*](dateutils.dateobject.md)
 
-Defined in: shared/utils/DateObject.ts:145
+Defined in: [shared/utils/DateObject.ts:145](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L145)
 
 ___
 
@@ -179,7 +179,7 @@ Name | Type | Description |
 
 **Returns:** *number*
 
-Defined in: shared/utils/DateObject.ts:157
+Defined in: [shared/utils/DateObject.ts:157](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L157)
 
 ___
 
@@ -200,7 +200,7 @@ Name | Type | Default value | Description |
 
 **Returns:** *string*
 
-Defined in: shared/utils/DateObject.ts:96
+Defined in: [shared/utils/DateObject.ts:96](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L96)
 
 ___
 
@@ -221,7 +221,7 @@ Name | Type | Default value | Description |
 
 **Returns:** [*DateObject*](dateutils.dateobject.md)
 
-Defined in: shared/utils/DateObject.ts:36
+Defined in: [shared/utils/DateObject.ts:36](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L36)
 
 ___
 
@@ -233,7 +233,7 @@ Is after today
 
 **Returns:** *boolean*
 
-Defined in: shared/utils/DateObject.ts:121
+Defined in: [shared/utils/DateObject.ts:121](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L121)
 
 ___
 
@@ -251,7 +251,7 @@ Name | Type | Description |
 
 **Returns:** *boolean*
 
-Defined in: shared/utils/DateObject.ts:130
+Defined in: [shared/utils/DateObject.ts:130](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L130)
 
 ___
 
@@ -269,7 +269,7 @@ Name | Type | Description |
 
 **Returns:** *boolean*
 
-Defined in: shared/utils/DateObject.ts:105
+Defined in: [shared/utils/DateObject.ts:105](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L105)
 
 ___
 
@@ -287,7 +287,7 @@ Name | Type | Description |
 
 **Returns:** *boolean*
 
-Defined in: shared/utils/DateObject.ts:114
+Defined in: [shared/utils/DateObject.ts:114](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L114)
 
 ___
 
@@ -305,4 +305,4 @@ Name | Type | Description |
 
 **Returns:** *Partial*<{ `month`: *number* ; `monthName`: *string* ; `week`: *number* ; `year`: *number*  }\>
 
-Defined in: shared/utils/DateObject.ts:166
+Defined in: [shared/utils/DateObject.ts:166](https://github.com/Puzzlepart/did/blob/dev/shared/utils/DateObject.ts#L166)

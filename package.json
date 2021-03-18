@@ -1,7 +1,7 @@
 {
   "name": "did",
   "description": "The calendar is your Timesheet",
-  "version": "0.9.9",
+  "version": "0.9.10",
   "private": true,
   "config": {
     "app": {
