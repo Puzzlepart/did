@@ -6,7 +6,6 @@ import { ScrollablePaneWrapper } from '../ScrollablePaneWrapper'
 import styles from './List.module.scss'
 import { IListProps } from './types'
 import { useList } from './useList'
-import { useListProps } from './useListProps'
 
 /**
  * List component using `ShimmeredDetailsList` from `office-ui-fabric-react`.
@@ -27,15 +26,7 @@ import { useListProps } from './useListProps'
  * @category Function Component
  */
 export const List: FunctionComponent<IListProps> = (props: IListProps) => {
-  const {
-    state,
-    dispatch,
-    selection,
-    groups,
-    delay,
-    transitionDuration
-  } = useList({ props })
-  const listProps = useListProps({ props, state, dispatch, groups, selection })
+  const { delay, transitionDuration, listProps } = useList({ props })
   return (
     <div className={styles.root} hidden={props.hidden}>
       <FadeIn delay={delay} transitionDuration={transitionDuration}>

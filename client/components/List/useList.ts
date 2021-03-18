@@ -5,6 +5,7 @@ import { first } from 'underscore'
 import { generateListGroups } from './generateListGroups'
 import reducer from './reducer'
 import { IListProps } from './types'
+import { useListProps } from './useListProps'
 
 type UseList = {
   props: IListProps
@@ -51,12 +52,18 @@ export function useList({ props }: UseList) {
 
   const [delay, transitionDuration] = props.fadeIn || [0, 0]
 
-  return {
+  const listProps = useListProps({
+    props,
     state,
     dispatch,
-    selection,
     groups,
+    items,
+    selection
+  })
+
+  return {
     delay,
-    transitionDuration
+    transitionDuration,
+    listProps
   }
 }

@@ -23,6 +23,7 @@ type UseListProps = {
   dispatch: React.Dispatch<AnyAction>
   selection: Selection<IObjectWithKey>
   groups: IGroup[]
+  items: any[]
 }
 
 /**
@@ -33,7 +34,8 @@ export function useListProps({
   state,
   dispatch,
   selection,
-  groups
+  groups,
+  items
 }: UseListProps): IListProps {
   return {
     getKey: (_item, index) => `list_item_${index}`,
@@ -41,8 +43,12 @@ export function useListProps({
     enableShimmer: props.enableShimmer,
     isPlaceholderData: props.enableShimmer,
     selection,
-    columns: filter(props.columns, (col) => !col.data?.hidden),
-    items: state.items,
+    columns: filter(
+      props.columns,
+      (col) =>
+        !col.data?.hidden && col.fieldName !== props.listGroupProps?.fieldName
+    ),
+    items,
     groups,
     selectionMode: props.selectionProps
       ? props.selectionProps.mode

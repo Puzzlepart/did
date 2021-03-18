@@ -4,6 +4,8 @@ import { IGroup } from 'office-ui-fabric-react'
 import { isEmpty, unique } from 'underscore'
 import { IListGroupProps } from './types'
 
+type GenerateListGroups = [IGroup[], any[]]
+
 /**
  * Create groups
  *
@@ -13,7 +15,7 @@ import { IListGroupProps } from './types'
 export function generateListGroups(
   items: any[],
   props: IListGroupProps
-): [IGroup[], any[]] {
+): GenerateListGroups {
   if (isEmpty(items)) return [null, []]
   const itemsSort = { props: [props.fieldName], opts: { reverse: false } }
   items = arraySort([...items], itemsSort.props, itemsSort.opts)

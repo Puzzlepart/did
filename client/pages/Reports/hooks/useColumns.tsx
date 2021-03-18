@@ -1,12 +1,13 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { CustomerLink } from 'components/CustomerLink'
+import { IListColumn } from 'components/List/types'
 import { ProjectLink } from 'components/ProjectLink'
 import DateUtils from 'DateUtils'
-import { IColumn } from 'office-ui-fabric-react'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ExcelColumnType } from 'utils/exportExcel'
+import { UserColumn } from '../SummaryView/UserColumn'
 
 /**
  * Columns hook
@@ -15,7 +16,7 @@ import { ExcelColumnType } from 'utils/exportExcel'
  */
 export function useColumns({ defaults }) {
   const { t } = useTranslation()
-  return useMemo(
+  return useMemo<IListColumn[]>(
     () =>
       [
         {
@@ -23,27 +24,27 @@ export function useColumns({ defaults }) {
           fieldName: 'title',
           name: t('common.titleLabel'),
           minWidth: 100
-        },
+        } as IListColumn,
         {
           key: 'project',
           fieldName: 'project.name',
           name: t('common.project'),
           minWidth: 100,
           onRender: ({ project }) => <ProjectLink project={project} />
-        },
+        } as IListColumn,
         {
           key: 'customer',
           fieldName: 'customer.name',
           name: t('common.customer'),
           minWidth: 100,
           onRender: ({ customer }) => <CustomerLink customer={customer} />
-        },
+        } as IListColumn,
         {
           key: 'duration',
           fieldName: 'duration',
           name: t('common.durationLabel'),
           minWidth: 100
-        },
+        } as IListColumn,
         {
           key: 'startDateTime',
           fieldName: 'startDateTime',
@@ -52,7 +53,7 @@ export function useColumns({ defaults }) {
           data: { excelColFormat: 'date' as ExcelColumnType },
           onRender: ({ startDateTime }) =>
             DateUtils.formatDate(startDateTime, 'MMM DD, YYYY HH:mm')
-        },
+        } as IListColumn,
         {
           key: 'endDateTime',
           fieldName: 'endDateTime',
@@ -61,54 +62,55 @@ export function useColumns({ defaults }) {
           data: { excelColFormat: 'date' as ExcelColumnType },
           onRender: ({ endDateTime }) =>
             DateUtils.formatDate(endDateTime, 'MMM DD, YYYY HH:mm')
-        },
-        {
-          key: 'week',
-          fieldName: 'week',
-          name: t('common.weekLabel'),
-          minWidth: 100
-        },
-        {
-          key: 'month',
-          fieldName: 'month',
-          name: t('common.monthLabel'),
-          minWidth: 100,
-          onRender: ({ month }) => DateUtils.getMonthNames()[month - 1]
-        },
-        {
-          key: 'year',
-          fieldName: 'year',
-          name: t('common.yearLabel'),
-          minWidth: 100
-        },
+        } as IListColumn,
         {
           key: 'resource.displayName',
           fieldName: 'resource.displayName',
           name: t('common.employeeLabel'),
-          minWidth: 100
-        },
+          minWidth: 160,
+          onRender: ({ resource }) => <UserColumn user={resource} />
+        } as IListColumn,
         {
           key: 'resource.surname',
           fieldName: 'resource.surname',
           name: t('common.surnameLabel'),
           minWidth: 100,
           data: { hidden: true }
-        },
+        } as IListColumn,
         {
           key: 'resource.givenName',
           fieldName: 'resource.givenName',
           name: t('common.givenNameLabel'),
           minWidth: 100,
           data: { hidden: true }
-        },
+        } as IListColumn,
         {
           key: 'resource.mail',
           fieldName: 'resource.mail',
           name: t('common.mailLabel'),
           minWidth: 100,
           data: { hidden: true }
-        }
-      ].map((col: IColumn) => ({ ...col, ...defaults })),
+        } as IListColumn,
+        {
+          key: 'week',
+          fieldName: 'week',
+          name: t('common.weekLabel'),
+          minWidth: 100
+        } as IListColumn,
+        {
+          key: 'month',
+          fieldName: 'month',
+          name: t('common.monthLabel'),
+          minWidth: 100,
+          onRender: ({ month }) => DateUtils.getMonthNames()[month - 1]
+        } as IListColumn,
+        {
+          key: 'year',
+          fieldName: 'year',
+          name: t('common.yearLabel'),
+          minWidth: 100
+        } as IListColumn
+      ].map((col: IListColumn) => ({ ...col, ...defaults })),
     []
   )
 }
