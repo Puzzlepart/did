@@ -17,7 +17,7 @@
     "CHANGELOG.md": true
   },
   "files.associations": {
-    "CHANGELOG": "markdown"
+    "_CHANGELOG": "markdown"
   },
   "typescript.autoClosingTags": false,
   "javascript.validate.enable": false,
