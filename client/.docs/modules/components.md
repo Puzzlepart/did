@@ -41,6 +41,10 @@ Reusable React Function components.
 - [IFilterItem](../interfaces/components.ifilteritem.md)
 - [IFilterPanelProps](../interfaces/components.ifilterpanelprops.md)
 
+### Other Interfaces
+
+- [IUserColumnProps](../interfaces/components.iusercolumnprops.md)
+
 ### PermissionList Interfaces
 
 - [IPermissionListProps](../interfaces/components.ipermissionlistprops.md)
@@ -71,6 +75,10 @@ Reusable React Function components.
 - [ProjectTooltip](components.md#projecttooltip)
 - [ScrollablePaneWrapper](components.md#scrollablepanewrapper)
 - [UserMessage](components.md#usermessage)
+
+### SummaryView Variables
+
+- [UserColumn](components.md#usercolumn)
 
 ### Function Component Functions
 
@@ -187,20 +195,20 @@ ___
 
 List component using `ShimmeredDetailsList` from `office-ui-fabric-react`.
 
-Used by:
+Used by the following components:
 
-* EventList
-* Admin/ApiTokens
-* Admin/Roles
-* Admin/SummaryView
-* Admin/Users/AddMultiplePanel
-* Admin/Users
-* Customers/CustomerList
-* Projects/ProjectList
-* Reports
-* Timesheet/SummaryView
+* `<EventList />`
+* `<Admin />` => `<ApiTokens />`
+* `<Admin />` => `<Roles />`
+* `<Admin />` => `<SummaryView />`
+* `<Admin />` => `<Users />` => `<AddMultiplePanel />`
+* `<Admin />` => `<Users />`
+* `<Customers />` => `<CustomerList />`
+* `<Projects />` => `<ProjectList />`
+* `<Reports />`
+* `<Timesheet />` => `<SummaryView />`
 
-Defined in: [client/components/List/index.tsx:40](https://github.com/Puzzlepart/did/blob/dev/client/components/List/index.tsx#L40)
+Defined in: [client/components/List/index.tsx:28](https://github.com/Puzzlepart/did/blob/dev/client/components/List/index.tsx#L28)
 
 ___
 
@@ -244,6 +252,20 @@ A component that supports a MessageBar with markdown using react-markdown
 
 Defined in: [client/components/UserMessage/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/index.tsx#L18)
 
+___
+
+## SummaryView Variables
+
+### UserColumn
+
+• `Const` **UserColumn**: *FunctionComponent*<[*IUserColumnProps*](../interfaces/components.iusercolumnprops.md)\>
+
+User column
+
+Renders a `<Persona />` component
+
+Defined in: [client/components/UserColumn/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/index.tsx#L13)
+
 ## Function Component Functions
 
 ### DeleteLink
@@ -280,13 +302,13 @@ ___
 
 ### EditLink
 
-▸ `Const`**EditLink**(`__namedParameters`: *IEditLinkProps*): *Element*
+▸ `Const`**EditLink**(`props`: *IEditLinkProps*): *Element*
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`__namedParameters` | *IEditLinkProps* |
+`props` | *IEditLinkProps* |
 
 **Returns:** *Element*
 

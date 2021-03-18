@@ -83,11 +83,9 @@ ___
 
 Get timespan string for the scope
 
-**`remarks`** Used in WeekPicker
-
 **Returns:** *string*
 
-Defined in: [client/pages/Timesheet/TimesheetScope.ts:81](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L81)
+Defined in: [client/pages/Timesheet/TimesheetScope.ts:79](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/TimesheetScope.ts#L79)
 
 ## Methods
 

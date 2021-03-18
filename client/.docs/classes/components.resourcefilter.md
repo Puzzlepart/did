@@ -105,15 +105,15 @@ ___
 
 ### initialize
 
-▸ **initialize**(`items`: ItemType[]): [*IFilter*](../interfaces/components.ifilter.md)
+▸ **initialize**(`items_`: ItemType[]): [*IFilter*](../interfaces/components.ifilter.md)
 
-Intialize the ResourceFilter
+Intialize the `ResourceFilter`
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`items` | ItemType[] | Items    |
+`items_` | ItemType[] | Items    |
 
 **Returns:** [*IFilter*](../interfaces/components.ifilter.md)
 

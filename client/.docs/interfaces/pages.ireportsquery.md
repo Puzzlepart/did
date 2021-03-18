@@ -310,7 +310,7 @@ ___
 
 ### onClick
 
-• `Optional` **onClick**: (`ev?`: *KeyboardEvent*<HTMLElement\> \| *MouseEvent*<HTMLElement, MouseEvent\>, `item?`: IContextualMenuItem) => *boolean* \| *void*
+• `Optional` **onClick**: (`ev?`: *MouseEvent*<HTMLElement, MouseEvent\> \| *KeyboardEvent*<HTMLElement\>, `item?`: IContextualMenuItem) => *boolean* \| *void*
 
 Callback for when the menu item is invoked. If `ev.preventDefault()` is called in `onClick`,
 the click will not close the menu.
@@ -318,13 +318,13 @@ Returning true will dismiss the menu even if `ev.preventDefault()` was called.
 
 #### Type declaration:
 
-▸ (`ev?`: *KeyboardEvent*<HTMLElement\> \| *MouseEvent*<HTMLElement, MouseEvent\>, `item?`: IContextualMenuItem): *boolean* \| *void*
+▸ (`ev?`: *MouseEvent*<HTMLElement, MouseEvent\> \| *KeyboardEvent*<HTMLElement\>, `item?`: IContextualMenuItem): *boolean* \| *void*
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`ev?` | *KeyboardEvent*<HTMLElement\> \| *MouseEvent*<HTMLElement, MouseEvent\> |
+`ev?` | *MouseEvent*<HTMLElement, MouseEvent\> \| *KeyboardEvent*<HTMLElement\> |
 `item?` | IContextualMenuItem |
 
 **Returns:** *boolean* \| *void*

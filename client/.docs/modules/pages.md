@@ -330,7 +330,7 @@ ___
 
 **Returns:** *Element*
 
-Defined in: [client/pages/Reports/SummaryView/index.tsx:14](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/SummaryView/index.tsx#L14)
+Defined in: [client/pages/Reports/SummaryView/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/SummaryView/index.tsx#L12)
 
 ___
 
@@ -548,7 +548,7 @@ ___
 
 ### useColumns
 
-▸ **useColumns**(`__namedParameters`: *Object*): *any*[]
+▸ **useColumns**(`__namedParameters`: *Object*): *IListColumn*<IListColumnData\>[]
 
 Columns hook
 
@@ -558,7 +558,7 @@ Name | Type |
 :------ | :------ |
 `__namedParameters` | *Object* |
 
-**Returns:** *any*[]
+**Returns:** *IListColumn*<IListColumnData\>[]
 
 Defined in: [client/pages/Reports/hooks/useColumns.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Reports/hooks/useColumns.tsx#L16)
 
@@ -582,7 +582,7 @@ Hook for Reports
 
 Name | Type |
 :------ | :------ |
-`columns` | *any*[] |
+`columns` | *IListColumn*<IListColumnData\>[] |
 `dispatch` | *Dispatch*<AnyAction\> |
 `filters` | [*BaseFilter*](../classes/components.basefilter.md)<any\>[] |
 `history` | *History*<unknown\> |

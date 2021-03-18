@@ -14,1085 +14,181 @@
 
 ### Properties
 
-- [about](pages.iprojectlistprops.md#about)
-- [accept](pages.iprojectlistprops.md#accept)
-- [acceptCharset](pages.iprojectlistprops.md#acceptcharset)
-- [accessKey](pages.iprojectlistprops.md#accesskey)
-- [action](pages.iprojectlistprops.md#action)
-- [allowFullScreen](pages.iprojectlistprops.md#allowfullscreen)
-- [allowTransparency](pages.iprojectlistprops.md#allowtransparency)
-- [alt](pages.iprojectlistprops.md#alt)
-- [aria-activedescendant](pages.iprojectlistprops.md#aria-activedescendant)
-- [aria-atomic](pages.iprojectlistprops.md#aria-atomic)
-- [aria-autocomplete](pages.iprojectlistprops.md#aria-autocomplete)
-- [aria-busy](pages.iprojectlistprops.md#aria-busy)
-- [aria-checked](pages.iprojectlistprops.md#aria-checked)
-- [aria-colcount](pages.iprojectlistprops.md#aria-colcount)
-- [aria-colindex](pages.iprojectlistprops.md#aria-colindex)
-- [aria-colspan](pages.iprojectlistprops.md#aria-colspan)
-- [aria-controls](pages.iprojectlistprops.md#aria-controls)
-- [aria-current](pages.iprojectlistprops.md#aria-current)
-- [aria-describedby](pages.iprojectlistprops.md#aria-describedby)
-- [aria-details](pages.iprojectlistprops.md#aria-details)
-- [aria-disabled](pages.iprojectlistprops.md#aria-disabled)
-- [aria-dropeffect](pages.iprojectlistprops.md#aria-dropeffect)
-- [aria-errormessage](pages.iprojectlistprops.md#aria-errormessage)
-- [aria-expanded](pages.iprojectlistprops.md#aria-expanded)
-- [aria-flowto](pages.iprojectlistprops.md#aria-flowto)
-- [aria-grabbed](pages.iprojectlistprops.md#aria-grabbed)
-- [aria-haspopup](pages.iprojectlistprops.md#aria-haspopup)
-- [aria-hidden](pages.iprojectlistprops.md#aria-hidden)
-- [aria-invalid](pages.iprojectlistprops.md#aria-invalid)
-- [aria-keyshortcuts](pages.iprojectlistprops.md#aria-keyshortcuts)
-- [aria-label](pages.iprojectlistprops.md#aria-label)
-- [aria-labelledby](pages.iprojectlistprops.md#aria-labelledby)
-- [aria-level](pages.iprojectlistprops.md#aria-level)
-- [aria-live](pages.iprojectlistprops.md#aria-live)
-- [aria-modal](pages.iprojectlistprops.md#aria-modal)
-- [aria-multiline](pages.iprojectlistprops.md#aria-multiline)
-- [aria-multiselectable](pages.iprojectlistprops.md#aria-multiselectable)
-- [aria-orientation](pages.iprojectlistprops.md#aria-orientation)
-- [aria-owns](pages.iprojectlistprops.md#aria-owns)
-- [aria-placeholder](pages.iprojectlistprops.md#aria-placeholder)
-- [aria-posinset](pages.iprojectlistprops.md#aria-posinset)
-- [aria-pressed](pages.iprojectlistprops.md#aria-pressed)
-- [aria-readonly](pages.iprojectlistprops.md#aria-readonly)
-- [aria-relevant](pages.iprojectlistprops.md#aria-relevant)
-- [aria-required](pages.iprojectlistprops.md#aria-required)
-- [aria-roledescription](pages.iprojectlistprops.md#aria-roledescription)
-- [aria-rowcount](pages.iprojectlistprops.md#aria-rowcount)
-- [aria-rowindex](pages.iprojectlistprops.md#aria-rowindex)
-- [aria-rowspan](pages.iprojectlistprops.md#aria-rowspan)
-- [aria-selected](pages.iprojectlistprops.md#aria-selected)
-- [aria-setsize](pages.iprojectlistprops.md#aria-setsize)
-- [aria-sort](pages.iprojectlistprops.md#aria-sort)
-- [aria-valuemax](pages.iprojectlistprops.md#aria-valuemax)
-- [aria-valuemin](pages.iprojectlistprops.md#aria-valuemin)
-- [aria-valuenow](pages.iprojectlistprops.md#aria-valuenow)
-- [aria-valuetext](pages.iprojectlistprops.md#aria-valuetext)
-- [as](pages.iprojectlistprops.md#as)
-- [async](pages.iprojectlistprops.md#async)
-- [autoCapitalize](pages.iprojectlistprops.md#autocapitalize)
-- [autoComplete](pages.iprojectlistprops.md#autocomplete)
-- [autoCorrect](pages.iprojectlistprops.md#autocorrect)
-- [autoFocus](pages.iprojectlistprops.md#autofocus)
-- [autoPlay](pages.iprojectlistprops.md#autoplay)
-- [autoSave](pages.iprojectlistprops.md#autosave)
-- [capture](pages.iprojectlistprops.md#capture)
-- [cellPadding](pages.iprojectlistprops.md#cellpadding)
-- [cellSpacing](pages.iprojectlistprops.md#cellspacing)
-- [challenge](pages.iprojectlistprops.md#challenge)
-- [charSet](pages.iprojectlistprops.md#charset)
+- [ariaLabel](pages.iprojectlistprops.md#arialabel)
+- [ariaLabelForGrid](pages.iprojectlistprops.md#arialabelforgrid)
+- [ariaLabelForListHeader](pages.iprojectlistprops.md#arialabelforlistheader)
+- [ariaLabelForSelectAllCheckbox](pages.iprojectlistprops.md#arialabelforselectallcheckbox)
+- [ariaLabelForSelectionColumn](pages.iprojectlistprops.md#arialabelforselectioncolumn)
+- [ariaLabelForShimmer](pages.iprojectlistprops.md#arialabelforshimmer)
+- [cellStyleProps](pages.iprojectlistprops.md#cellstyleprops)
+- [checkButtonAriaLabel](pages.iprojectlistprops.md#checkbuttonarialabel)
+- [checkboxCellClassName](pages.iprojectlistprops.md#checkboxcellclassname)
 - [checkboxVisibility](pages.iprojectlistprops.md#checkboxvisibility)
-- [checked](pages.iprojectlistprops.md#checked)
-- [children](pages.iprojectlistprops.md#children)
-- [cite](pages.iprojectlistprops.md#cite)
-- [classID](pages.iprojectlistprops.md#classid)
 - [className](pages.iprojectlistprops.md#classname)
-- [colSpan](pages.iprojectlistprops.md#colspan)
-- [color](pages.iprojectlistprops.md#color)
-- [cols](pages.iprojectlistprops.md#cols)
+- [columnReorderOptions](pages.iprojectlistprops.md#columnreorderoptions)
 - [columns](pages.iprojectlistprops.md#columns)
 - [commandBar](pages.iprojectlistprops.md#commandbar)
-- [content](pages.iprojectlistprops.md#content)
-- [contentEditable](pages.iprojectlistprops.md#contenteditable)
-- [contextMenu](pages.iprojectlistprops.md#contextmenu)
-- [controls](pages.iprojectlistprops.md#controls)
-- [coords](pages.iprojectlistprops.md#coords)
-- [crossOrigin](pages.iprojectlistprops.md#crossorigin)
-- [dangerouslySetInnerHTML](pages.iprojectlistprops.md#dangerouslysetinnerhtml)
-- [data](pages.iprojectlistprops.md#data)
-- [datatype](pages.iprojectlistprops.md#datatype)
-- [dateTime](pages.iprojectlistprops.md#datetime)
-- [default](pages.iprojectlistprops.md#default)
-- [defaultChecked](pages.iprojectlistprops.md#defaultchecked)
-- [defaultValue](pages.iprojectlistprops.md#defaultvalue)
-- [defer](pages.iprojectlistprops.md#defer)
-- [dir](pages.iprojectlistprops.md#dir)
-- [disabled](pages.iprojectlistprops.md#disabled)
-- [download](pages.iprojectlistprops.md#download)
-- [draggable](pages.iprojectlistprops.md#draggable)
+- [compact](pages.iprojectlistprops.md#compact)
+- [componentRef](pages.iprojectlistprops.md#componentref)
+- [constrainMode](pages.iprojectlistprops.md#constrainmode)
+- [detailsListStyles](pages.iprojectlistprops.md#detailsliststyles)
+- [disableSelectionZone](pages.iprojectlistprops.md#disableselectionzone)
+- [dragDropEvents](pages.iprojectlistprops.md#dragdropevents)
 - [enableShimmer](pages.iprojectlistprops.md#enableshimmer)
-- [encType](pages.iprojectlistprops.md#enctype)
+- [enableUpdateAnimations](pages.iprojectlistprops.md#enableupdateanimations)
+- [enterModalSelectionOnTouch](pages.iprojectlistprops.md#entermodalselectionontouch)
 - [fadeIn](pages.iprojectlistprops.md#fadein)
 - [filters](pages.iprojectlistprops.md#filters)
-- [form](pages.iprojectlistprops.md#form)
-- [formAction](pages.iprojectlistprops.md#formaction)
-- [formEncType](pages.iprojectlistprops.md#formenctype)
-- [formMethod](pages.iprojectlistprops.md#formmethod)
-- [formNoValidate](pages.iprojectlistprops.md#formnovalidate)
-- [formTarget](pages.iprojectlistprops.md#formtarget)
-- [frameBorder](pages.iprojectlistprops.md#frameborder)
+- [getCellValueKey](pages.iprojectlistprops.md#getcellvaluekey)
+- [getGroupHeight](pages.iprojectlistprops.md#getgroupheight)
+- [getKey](pages.iprojectlistprops.md#getkey)
+- [getRowAriaDescribedBy](pages.iprojectlistprops.md#getrowariadescribedby)
+- [getRowAriaLabel](pages.iprojectlistprops.md#getrowarialabel)
 - [groupProps](pages.iprojectlistprops.md#groupprops)
 - [groups](pages.iprojectlistprops.md#groups)
-- [headers](pages.iprojectlistprops.md#headers)
+- [headerClassName](pages.iprojectlistprops.md#headerclassname)
 - [height](pages.iprojectlistprops.md#height)
 - [hidden](pages.iprojectlistprops.md#hidden)
 - [hideColumns](pages.iprojectlistprops.md#hidecolumns)
-- [high](pages.iprojectlistprops.md#high)
-- [href](pages.iprojectlistprops.md#href)
-- [hrefLang](pages.iprojectlistprops.md#hreflang)
-- [htmlFor](pages.iprojectlistprops.md#htmlfor)
-- [httpEquiv](pages.iprojectlistprops.md#httpequiv)
-- [id](pages.iprojectlistprops.md#id)
-- [inlist](pages.iprojectlistprops.md#inlist)
-- [inputMode](pages.iprojectlistprops.md#inputmode)
-- [integrity](pages.iprojectlistprops.md#integrity)
-- [is](pages.iprojectlistprops.md#is)
-- [itemID](pages.iprojectlistprops.md#itemid)
-- [itemProp](pages.iprojectlistprops.md#itemprop)
-- [itemRef](pages.iprojectlistprops.md#itemref)
-- [itemScope](pages.iprojectlistprops.md#itemscope)
-- [itemType](pages.iprojectlistprops.md#itemtype)
+- [indentWidth](pages.iprojectlistprops.md#indentwidth)
+- [initialFocusedIndex](pages.iprojectlistprops.md#initialfocusedindex)
+- [isHeaderVisible](pages.iprojectlistprops.md#isheadervisible)
+- [isPlaceholderData](pages.iprojectlistprops.md#isplaceholderdata)
 - [items](pages.iprojectlistprops.md#items)
-- [key](pages.iprojectlistprops.md#key)
-- [keyParams](pages.iprojectlistprops.md#keyparams)
-- [keyType](pages.iprojectlistprops.md#keytype)
-- [kind](pages.iprojectlistprops.md#kind)
-- [label](pages.iprojectlistprops.md#label)
-- [lang](pages.iprojectlistprops.md#lang)
-- [list](pages.iprojectlistprops.md#list)
-- [loop](pages.iprojectlistprops.md#loop)
-- [low](pages.iprojectlistprops.md#low)
-- [manifest](pages.iprojectlistprops.md#manifest)
-- [marginHeight](pages.iprojectlistprops.md#marginheight)
-- [marginWidth](pages.iprojectlistprops.md#marginwidth)
-- [max](pages.iprojectlistprops.md#max)
-- [maxLength](pages.iprojectlistprops.md#maxlength)
-- [media](pages.iprojectlistprops.md#media)
-- [mediaGroup](pages.iprojectlistprops.md#mediagroup)
-- [method](pages.iprojectlistprops.md#method)
-- [min](pages.iprojectlistprops.md#min)
-- [minLength](pages.iprojectlistprops.md#minlength)
-- [multiple](pages.iprojectlistprops.md#multiple)
-- [muted](pages.iprojectlistprops.md#muted)
-- [name](pages.iprojectlistprops.md#name)
-- [noValidate](pages.iprojectlistprops.md#novalidate)
-- [nonce](pages.iprojectlistprops.md#nonce)
-- [onAbort](pages.iprojectlistprops.md#onabort)
-- [onAbortCapture](pages.iprojectlistprops.md#onabortcapture)
-- [onAnimationEnd](pages.iprojectlistprops.md#onanimationend)
-- [onAnimationEndCapture](pages.iprojectlistprops.md#onanimationendcapture)
-- [onAnimationIteration](pages.iprojectlistprops.md#onanimationiteration)
-- [onAnimationIterationCapture](pages.iprojectlistprops.md#onanimationiterationcapture)
-- [onAnimationStart](pages.iprojectlistprops.md#onanimationstart)
-- [onAnimationStartCapture](pages.iprojectlistprops.md#onanimationstartcapture)
-- [onAuxClick](pages.iprojectlistprops.md#onauxclick)
-- [onAuxClickCapture](pages.iprojectlistprops.md#onauxclickcapture)
-- [onBeforeInput](pages.iprojectlistprops.md#onbeforeinput)
-- [onBeforeInputCapture](pages.iprojectlistprops.md#onbeforeinputcapture)
-- [onBlur](pages.iprojectlistprops.md#onblur)
-- [onBlurCapture](pages.iprojectlistprops.md#onblurcapture)
-- [onCanPlay](pages.iprojectlistprops.md#oncanplay)
-- [onCanPlayCapture](pages.iprojectlistprops.md#oncanplaycapture)
-- [onCanPlayThrough](pages.iprojectlistprops.md#oncanplaythrough)
-- [onCanPlayThroughCapture](pages.iprojectlistprops.md#oncanplaythroughcapture)
-- [onChange](pages.iprojectlistprops.md#onchange)
-- [onChangeCapture](pages.iprojectlistprops.md#onchangecapture)
-- [onClick](pages.iprojectlistprops.md#onclick)
-- [onClickCapture](pages.iprojectlistprops.md#onclickcapture)
-- [onCompositionEnd](pages.iprojectlistprops.md#oncompositionend)
-- [onCompositionEndCapture](pages.iprojectlistprops.md#oncompositionendcapture)
-- [onCompositionStart](pages.iprojectlistprops.md#oncompositionstart)
-- [onCompositionStartCapture](pages.iprojectlistprops.md#oncompositionstartcapture)
-- [onCompositionUpdate](pages.iprojectlistprops.md#oncompositionupdate)
-- [onCompositionUpdateCapture](pages.iprojectlistprops.md#oncompositionupdatecapture)
-- [onContextMenu](pages.iprojectlistprops.md#oncontextmenu)
-- [onContextMenuCapture](pages.iprojectlistprops.md#oncontextmenucapture)
-- [onCopy](pages.iprojectlistprops.md#oncopy)
-- [onCopyCapture](pages.iprojectlistprops.md#oncopycapture)
-- [onCut](pages.iprojectlistprops.md#oncut)
-- [onCutCapture](pages.iprojectlistprops.md#oncutcapture)
-- [onDoubleClick](pages.iprojectlistprops.md#ondoubleclick)
-- [onDoubleClickCapture](pages.iprojectlistprops.md#ondoubleclickcapture)
-- [onDrag](pages.iprojectlistprops.md#ondrag)
-- [onDragCapture](pages.iprojectlistprops.md#ondragcapture)
-- [onDragEnd](pages.iprojectlistprops.md#ondragend)
-- [onDragEndCapture](pages.iprojectlistprops.md#ondragendcapture)
-- [onDragEnter](pages.iprojectlistprops.md#ondragenter)
-- [onDragEnterCapture](pages.iprojectlistprops.md#ondragentercapture)
-- [onDragExit](pages.iprojectlistprops.md#ondragexit)
-- [onDragExitCapture](pages.iprojectlistprops.md#ondragexitcapture)
-- [onDragLeave](pages.iprojectlistprops.md#ondragleave)
-- [onDragLeaveCapture](pages.iprojectlistprops.md#ondragleavecapture)
-- [onDragOver](pages.iprojectlistprops.md#ondragover)
-- [onDragOverCapture](pages.iprojectlistprops.md#ondragovercapture)
-- [onDragStart](pages.iprojectlistprops.md#ondragstart)
-- [onDragStartCapture](pages.iprojectlistprops.md#ondragstartcapture)
-- [onDrop](pages.iprojectlistprops.md#ondrop)
-- [onDropCapture](pages.iprojectlistprops.md#ondropcapture)
-- [onDurationChange](pages.iprojectlistprops.md#ondurationchange)
-- [onDurationChangeCapture](pages.iprojectlistprops.md#ondurationchangecapture)
-- [onEmptied](pages.iprojectlistprops.md#onemptied)
-- [onEmptiedCapture](pages.iprojectlistprops.md#onemptiedcapture)
-- [onEncrypted](pages.iprojectlistprops.md#onencrypted)
-- [onEncryptedCapture](pages.iprojectlistprops.md#onencryptedcapture)
-- [onEnded](pages.iprojectlistprops.md#onended)
-- [onEndedCapture](pages.iprojectlistprops.md#onendedcapture)
-- [onError](pages.iprojectlistprops.md#onerror)
-- [onErrorCapture](pages.iprojectlistprops.md#onerrorcapture)
-- [onFocus](pages.iprojectlistprops.md#onfocus)
-- [onFocusCapture](pages.iprojectlistprops.md#onfocuscapture)
-- [onGotPointerCapture](pages.iprojectlistprops.md#ongotpointercapture)
-- [onGotPointerCaptureCapture](pages.iprojectlistprops.md#ongotpointercapturecapture)
-- [onInput](pages.iprojectlistprops.md#oninput)
-- [onInputCapture](pages.iprojectlistprops.md#oninputcapture)
-- [onInvalid](pages.iprojectlistprops.md#oninvalid)
-- [onInvalidCapture](pages.iprojectlistprops.md#oninvalidcapture)
-- [onKeyDown](pages.iprojectlistprops.md#onkeydown)
-- [onKeyDownCapture](pages.iprojectlistprops.md#onkeydowncapture)
-- [onKeyPress](pages.iprojectlistprops.md#onkeypress)
-- [onKeyPressCapture](pages.iprojectlistprops.md#onkeypresscapture)
-- [onKeyUp](pages.iprojectlistprops.md#onkeyup)
-- [onKeyUpCapture](pages.iprojectlistprops.md#onkeyupcapture)
-- [onLoad](pages.iprojectlistprops.md#onload)
-- [onLoadCapture](pages.iprojectlistprops.md#onloadcapture)
-- [onLoadStart](pages.iprojectlistprops.md#onloadstart)
-- [onLoadStartCapture](pages.iprojectlistprops.md#onloadstartcapture)
-- [onLoadedData](pages.iprojectlistprops.md#onloadeddata)
-- [onLoadedDataCapture](pages.iprojectlistprops.md#onloadeddatacapture)
-- [onLoadedMetadata](pages.iprojectlistprops.md#onloadedmetadata)
-- [onLoadedMetadataCapture](pages.iprojectlistprops.md#onloadedmetadatacapture)
-- [onLostPointerCapture](pages.iprojectlistprops.md#onlostpointercapture)
-- [onLostPointerCaptureCapture](pages.iprojectlistprops.md#onlostpointercapturecapture)
-- [onMouseDown](pages.iprojectlistprops.md#onmousedown)
-- [onMouseDownCapture](pages.iprojectlistprops.md#onmousedowncapture)
-- [onMouseEnter](pages.iprojectlistprops.md#onmouseenter)
-- [onMouseLeave](pages.iprojectlistprops.md#onmouseleave)
-- [onMouseMove](pages.iprojectlistprops.md#onmousemove)
-- [onMouseMoveCapture](pages.iprojectlistprops.md#onmousemovecapture)
-- [onMouseOut](pages.iprojectlistprops.md#onmouseout)
-- [onMouseOutCapture](pages.iprojectlistprops.md#onmouseoutcapture)
-- [onMouseOver](pages.iprojectlistprops.md#onmouseover)
-- [onMouseOverCapture](pages.iprojectlistprops.md#onmouseovercapture)
-- [onMouseUp](pages.iprojectlistprops.md#onmouseup)
-- [onMouseUpCapture](pages.iprojectlistprops.md#onmouseupcapture)
-- [onPaste](pages.iprojectlistprops.md#onpaste)
-- [onPasteCapture](pages.iprojectlistprops.md#onpastecapture)
-- [onPause](pages.iprojectlistprops.md#onpause)
-- [onPauseCapture](pages.iprojectlistprops.md#onpausecapture)
-- [onPlay](pages.iprojectlistprops.md#onplay)
-- [onPlayCapture](pages.iprojectlistprops.md#onplaycapture)
-- [onPlaying](pages.iprojectlistprops.md#onplaying)
-- [onPlayingCapture](pages.iprojectlistprops.md#onplayingcapture)
-- [onPointerCancel](pages.iprojectlistprops.md#onpointercancel)
-- [onPointerCancelCapture](pages.iprojectlistprops.md#onpointercancelcapture)
-- [onPointerDown](pages.iprojectlistprops.md#onpointerdown)
-- [onPointerDownCapture](pages.iprojectlistprops.md#onpointerdowncapture)
-- [onPointerEnter](pages.iprojectlistprops.md#onpointerenter)
-- [onPointerEnterCapture](pages.iprojectlistprops.md#onpointerentercapture)
-- [onPointerLeave](pages.iprojectlistprops.md#onpointerleave)
-- [onPointerLeaveCapture](pages.iprojectlistprops.md#onpointerleavecapture)
-- [onPointerMove](pages.iprojectlistprops.md#onpointermove)
-- [onPointerMoveCapture](pages.iprojectlistprops.md#onpointermovecapture)
-- [onPointerOut](pages.iprojectlistprops.md#onpointerout)
-- [onPointerOutCapture](pages.iprojectlistprops.md#onpointeroutcapture)
-- [onPointerOver](pages.iprojectlistprops.md#onpointerover)
-- [onPointerOverCapture](pages.iprojectlistprops.md#onpointerovercapture)
-- [onPointerUp](pages.iprojectlistprops.md#onpointerup)
-- [onPointerUpCapture](pages.iprojectlistprops.md#onpointerupcapture)
-- [onProgress](pages.iprojectlistprops.md#onprogress)
-- [onProgressCapture](pages.iprojectlistprops.md#onprogresscapture)
-- [onRateChange](pages.iprojectlistprops.md#onratechange)
-- [onRateChangeCapture](pages.iprojectlistprops.md#onratechangecapture)
+- [layoutMode](pages.iprojectlistprops.md#layoutmode)
+- [listGroupProps](pages.iprojectlistprops.md#listgroupprops)
+- [listGroupRenderProps](pages.iprojectlistprops.md#listgrouprenderprops)
+- [listProps](pages.iprojectlistprops.md#listprops)
+- [minimumPixelsForDrag](pages.iprojectlistprops.md#minimumpixelsfordrag)
+- [onActiveItemChanged](pages.iprojectlistprops.md#onactiveitemchanged)
+- [onColumnHeaderClick](pages.iprojectlistprops.md#oncolumnheaderclick)
+- [onColumnHeaderContextMenu](pages.iprojectlistprops.md#oncolumnheadercontextmenu)
+- [onColumnResize](pages.iprojectlistprops.md#oncolumnresize)
+- [onDidUpdate](pages.iprojectlistprops.md#ondidupdate)
+- [onItemContextMenu](pages.iprojectlistprops.md#onitemcontextmenu)
+- [onItemInvoked](pages.iprojectlistprops.md#oniteminvoked)
+- [onRenderCheckbox](pages.iprojectlistprops.md#onrendercheckbox)
+- [onRenderColumnHeader](pages.iprojectlistprops.md#onrendercolumnheader)
+- [onRenderCustomPlaceholder](pages.iprojectlistprops.md#onrendercustomplaceholder)
+- [onRenderDetailsFooter](pages.iprojectlistprops.md#onrenderdetailsfooter)
 - [onRenderDetailsHeader](pages.iprojectlistprops.md#onrenderdetailsheader)
-- [onReset](pages.iprojectlistprops.md#onreset)
-- [onResetCapture](pages.iprojectlistprops.md#onresetcapture)
-- [onScroll](pages.iprojectlistprops.md#onscroll)
-- [onScrollCapture](pages.iprojectlistprops.md#onscrollcapture)
-- [onSeeked](pages.iprojectlistprops.md#onseeked)
-- [onSeekedCapture](pages.iprojectlistprops.md#onseekedcapture)
-- [onSeeking](pages.iprojectlistprops.md#onseeking)
-- [onSeekingCapture](pages.iprojectlistprops.md#onseekingcapture)
-- [onSelect](pages.iprojectlistprops.md#onselect)
-- [onSelectCapture](pages.iprojectlistprops.md#onselectcapture)
-- [onStalled](pages.iprojectlistprops.md#onstalled)
-- [onStalledCapture](pages.iprojectlistprops.md#onstalledcapture)
-- [onSubmit](pages.iprojectlistprops.md#onsubmit)
-- [onSubmitCapture](pages.iprojectlistprops.md#onsubmitcapture)
-- [onSuspend](pages.iprojectlistprops.md#onsuspend)
-- [onSuspendCapture](pages.iprojectlistprops.md#onsuspendcapture)
-- [onTimeUpdate](pages.iprojectlistprops.md#ontimeupdate)
-- [onTimeUpdateCapture](pages.iprojectlistprops.md#ontimeupdatecapture)
-- [onTouchCancel](pages.iprojectlistprops.md#ontouchcancel)
-- [onTouchCancelCapture](pages.iprojectlistprops.md#ontouchcancelcapture)
-- [onTouchEnd](pages.iprojectlistprops.md#ontouchend)
-- [onTouchEndCapture](pages.iprojectlistprops.md#ontouchendcapture)
-- [onTouchMove](pages.iprojectlistprops.md#ontouchmove)
-- [onTouchMoveCapture](pages.iprojectlistprops.md#ontouchmovecapture)
-- [onTouchStart](pages.iprojectlistprops.md#ontouchstart)
-- [onTouchStartCapture](pages.iprojectlistprops.md#ontouchstartcapture)
-- [onTransitionEnd](pages.iprojectlistprops.md#ontransitionend)
-- [onTransitionEndCapture](pages.iprojectlistprops.md#ontransitionendcapture)
-- [onVolumeChange](pages.iprojectlistprops.md#onvolumechange)
-- [onVolumeChangeCapture](pages.iprojectlistprops.md#onvolumechangecapture)
-- [onWaiting](pages.iprojectlistprops.md#onwaiting)
-- [onWaitingCapture](pages.iprojectlistprops.md#onwaitingcapture)
-- [onWheel](pages.iprojectlistprops.md#onwheel)
-- [onWheelCapture](pages.iprojectlistprops.md#onwheelcapture)
-- [open](pages.iprojectlistprops.md#open)
-- [optimum](pages.iprojectlistprops.md#optimum)
-- [pattern](pages.iprojectlistprops.md#pattern)
-- [placeholder](pages.iprojectlistprops.md#placeholder)
-- [playsInline](pages.iprojectlistprops.md#playsinline)
-- [poster](pages.iprojectlistprops.md#poster)
-- [prefix](pages.iprojectlistprops.md#prefix)
-- [preload](pages.iprojectlistprops.md#preload)
-- [property](pages.iprojectlistprops.md#property)
-- [radioGroup](pages.iprojectlistprops.md#radiogroup)
-- [readOnly](pages.iprojectlistprops.md#readonly)
-- [ref](pages.iprojectlistprops.md#ref)
-- [rel](pages.iprojectlistprops.md#rel)
+- [onRenderItemColumn](pages.iprojectlistprops.md#onrenderitemcolumn)
+- [onRenderMissingItem](pages.iprojectlistprops.md#onrendermissingitem)
+- [onRenderRow](pages.iprojectlistprops.md#onrenderrow)
+- [onRowDidMount](pages.iprojectlistprops.md#onrowdidmount)
+- [onRowWillUnmount](pages.iprojectlistprops.md#onrowwillunmount)
+- [onShouldVirtualize](pages.iprojectlistprops.md#onshouldvirtualize)
+- [removeFadingOverlay](pages.iprojectlistprops.md#removefadingoverlay)
 - [renderLink](pages.iprojectlistprops.md#renderlink)
-- [required](pages.iprojectlistprops.md#required)
-- [resource](pages.iprojectlistprops.md#resource)
-- [results](pages.iprojectlistprops.md#results)
-- [reversed](pages.iprojectlistprops.md#reversed)
-- [role](pages.iprojectlistprops.md#role)
-- [rowSpan](pages.iprojectlistprops.md#rowspan)
-- [rows](pages.iprojectlistprops.md#rows)
-- [sandbox](pages.iprojectlistprops.md#sandbox)
-- [scope](pages.iprojectlistprops.md#scope)
-- [scoped](pages.iprojectlistprops.md#scoped)
-- [scrolling](pages.iprojectlistprops.md#scrolling)
-- [seamless](pages.iprojectlistprops.md#seamless)
+- [rowElementEventMap](pages.iprojectlistprops.md#rowelementeventmap)
 - [searchBox](pages.iprojectlistprops.md#searchbox)
-- [security](pages.iprojectlistprops.md#security)
-- [selected](pages.iprojectlistprops.md#selected)
 - [selection](pages.iprojectlistprops.md#selection)
-- [shape](pages.iprojectlistprops.md#shape)
-- [size](pages.iprojectlistprops.md#size)
-- [sizes](pages.iprojectlistprops.md#sizes)
-- [slot](pages.iprojectlistprops.md#slot)
-- [span](pages.iprojectlistprops.md#span)
-- [spellCheck](pages.iprojectlistprops.md#spellcheck)
-- [src](pages.iprojectlistprops.md#src)
-- [srcDoc](pages.iprojectlistprops.md#srcdoc)
-- [srcLang](pages.iprojectlistprops.md#srclang)
-- [srcSet](pages.iprojectlistprops.md#srcset)
-- [start](pages.iprojectlistprops.md#start)
-- [step](pages.iprojectlistprops.md#step)
-- [style](pages.iprojectlistprops.md#style)
-- [summary](pages.iprojectlistprops.md#summary)
-- [suppressContentEditableWarning](pages.iprojectlistprops.md#suppresscontenteditablewarning)
-- [suppressHydrationWarning](pages.iprojectlistprops.md#suppresshydrationwarning)
-- [tabIndex](pages.iprojectlistprops.md#tabindex)
-- [target](pages.iprojectlistprops.md#target)
-- [title](pages.iprojectlistprops.md#title)
-- [translate](pages.iprojectlistprops.md#translate)
-- [type](pages.iprojectlistprops.md#type)
-- [typeof](pages.iprojectlistprops.md#typeof)
-- [unselectable](pages.iprojectlistprops.md#unselectable)
-- [useMap](pages.iprojectlistprops.md#usemap)
-- [value](pages.iprojectlistprops.md#value)
-- [vocab](pages.iprojectlistprops.md#vocab)
-- [width](pages.iprojectlistprops.md#width)
-- [wmode](pages.iprojectlistprops.md#wmode)
-- [wrap](pages.iprojectlistprops.md#wrap)
+- [selectionMode](pages.iprojectlistprops.md#selectionmode)
+- [selectionPreservedOnEmptyClick](pages.iprojectlistprops.md#selectionpreservedonemptyclick)
+- [selectionProps](pages.iprojectlistprops.md#selectionprops)
+- [selectionZoneProps](pages.iprojectlistprops.md#selectionzoneprops)
+- [setKey](pages.iprojectlistprops.md#setkey)
+- [shimmerLines](pages.iprojectlistprops.md#shimmerlines)
+- [shimmerOverlayStyles](pages.iprojectlistprops.md#shimmeroverlaystyles)
+- [shouldApplyApplicationRole](pages.iprojectlistprops.md#shouldapplyapplicationrole)
+- [skipViewportMeasures](pages.iprojectlistprops.md#skipviewportmeasures)
+- [styles](pages.iprojectlistprops.md#styles)
+- [theme](pages.iprojectlistprops.md#theme)
+- [useFastIcons](pages.iprojectlistprops.md#usefasticons)
+- [usePageCache](pages.iprojectlistprops.md#usepagecache)
+- [useReducedRowRenderer](pages.iprojectlistprops.md#usereducedrowrenderer)
+- [viewport](pages.iprojectlistprops.md#viewport)
 
 ## Properties
 
-### about
+### ariaLabel
 
-• `Optional` **about**: *string*
+• `Optional` **ariaLabel**: *string*
 
-Defined in: node_modules/@types/react/index.d.ts:1775
+A text summary of the table set via aria-label.
 
-___
-
-### accept
-
-• `Optional` **accept**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1813
-
-___
-
-### acceptCharset
-
-• `Optional` **acceptCharset**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1814
-
-___
-
-### accessKey
-
-• `Optional` **accessKey**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1751
-
-___
-
-### action
-
-• `Optional` **action**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1815
-
-___
-
-### allowFullScreen
-
-• `Optional` **allowFullScreen**: *boolean*
-
-Defined in: node_modules/@types/react/index.d.ts:1816
-
-___
-
-### allowTransparency
-
-• `Optional` **allowTransparency**: *boolean*
-
-Defined in: node_modules/@types/react/index.d.ts:1817
-
-___
-
-### alt
-
-• `Optional` **alt**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1818
-
-___
-
-### aria-activedescendant
-
-• `Optional` **aria-activedescendant**: *string*
-
-Identifies the currently active element when DOM focus is on a composite widget, textbox, group, or application.
-
-Defined in: node_modules/@types/react/index.d.ts:1556
-
-___
-
-### aria-atomic
-
-• `Optional` **aria-atomic**: Booleanish
-
-Indicates whether assistive technologies will present all, or only parts of, the changed region based on the change notifications defined by the aria-relevant attribute.
-
-Defined in: node_modules/@types/react/index.d.ts:1558
-
-___
-
-### aria-autocomplete
-
-• `Optional` **aria-autocomplete**: *none* \| *inline* \| *list* \| *both*
-
-Indicates whether inputting text could trigger display of one or more predictions of the user's intended value for an input and specifies how predictions would be
-presented if they are made.
-
-Defined in: node_modules/@types/react/index.d.ts:1560
-
-___
-
-### aria-busy
-
-• `Optional` **aria-busy**: Booleanish
-
-Indicates an element is being modified and that assistive technologies MAY want to wait until the modifications are complete before exposing them to the user.
-
-Defined in: node_modules/@types/react/index.d.ts:1565
-
-___
-
-### aria-checked
-
-• `Optional` **aria-checked**: *boolean* \| *true* \| *false* \| *mixed*
-
-Indicates the current "checked" state of checkboxes, radio buttons, and other widgets.
-
-**`see`** aria-pressed @see aria-selected.
-
-Defined in: node_modules/@types/react/index.d.ts:1567
-
-___
-
-### aria-colcount
-
-• `Optional` **aria-colcount**: *number*
-
-Defines the total number of columns in a table, grid, or treegrid.
-
-**`see`** aria-colindex.
-
-Defined in: node_modules/@types/react/index.d.ts:1572
-
-___
-
-### aria-colindex
-
-• `Optional` **aria-colindex**: *number*
-
-Defines an element's column index or position with respect to the total number of columns within a table, grid, or treegrid.
-
-**`see`** aria-colcount @see aria-colspan.
-
-Defined in: node_modules/@types/react/index.d.ts:1577
-
-___
-
-### aria-colspan
-
-• `Optional` **aria-colspan**: *number*
-
-Defines the number of columns spanned by a cell or gridcell within a table, grid, or treegrid.
-
-**`see`** aria-colindex @see aria-rowspan.
-
-Defined in: node_modules/@types/react/index.d.ts:1582
-
-___
-
-### aria-controls
-
-• `Optional` **aria-controls**: *string*
-
-Identifies the element (or elements) whose contents or presence are controlled by the current element.
-
-**`see`** aria-owns.
-
-Defined in: node_modules/@types/react/index.d.ts:1587
-
-___
-
-### aria-current
-
-• `Optional` **aria-current**: *boolean* \| *true* \| *false* \| *page* \| *step* \| *location* \| *date* \| *time*
-
-Indicates the element that represents the current item within a container or set of related elements.
-
-Defined in: node_modules/@types/react/index.d.ts:1592
-
-___
-
-### aria-describedby
-
-• `Optional` **aria-describedby**: *string*
-
-Identifies the element (or elements) that describes the object.
-
-**`see`** aria-labelledby
-
-Defined in: node_modules/@types/react/index.d.ts:1594
-
-___
-
-### aria-details
-
-• `Optional` **aria-details**: *string*
-
-Identifies the element that provides a detailed, extended description for the object.
-
-**`see`** aria-describedby.
-
-Defined in: node_modules/@types/react/index.d.ts:1599
-
-___
-
-### aria-disabled
-
-• `Optional` **aria-disabled**: Booleanish
-
-Indicates that the element is perceivable but disabled, so it is not editable or otherwise operable.
-
-**`see`** aria-hidden @see aria-readonly.
-
-Defined in: node_modules/@types/react/index.d.ts:1604
-
-___
-
-### aria-dropeffect
-
-• `Optional` **aria-dropeffect**: *none* \| *copy* \| *execute* \| *link* \| *move* \| *popup*
-
-Indicates what functions can be performed when a dragged object is released on the drop target.
-
-**`deprecated`** in ARIA 1.1
-
-Defined in: node_modules/@types/react/index.d.ts:1609
-
-___
-
-### aria-errormessage
-
-• `Optional` **aria-errormessage**: *string*
-
-Identifies the element that provides an error message for the object.
-
-**`see`** aria-invalid @see aria-describedby.
-
-Defined in: node_modules/@types/react/index.d.ts:1614
-
-___
-
-### aria-expanded
-
-• `Optional` **aria-expanded**: Booleanish
-
-Indicates whether the element, or another grouping element it controls, is currently expanded or collapsed.
-
-Defined in: node_modules/@types/react/index.d.ts:1619
-
-___
-
-### aria-flowto
-
-• `Optional` **aria-flowto**: *string*
-
-Identifies the next element (or elements) in an alternate reading order of content which, at the user's discretion,
-allows assistive technology to override the general default of reading in document source order.
-
-Defined in: node_modules/@types/react/index.d.ts:1621
-
-___
-
-### aria-grabbed
-
-• `Optional` **aria-grabbed**: Booleanish
-
-Indicates an element's "grabbed" state in a drag-and-drop operation.
-
-**`deprecated`** in ARIA 1.1
-
-Defined in: node_modules/@types/react/index.d.ts:1626
-
-___
-
-### aria-haspopup
-
-• `Optional` **aria-haspopup**: *boolean* \| *true* \| *false* \| *menu* \| *listbox* \| *tree* \| *grid* \| *dialog*
-
-Indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element.
-
-Defined in: node_modules/@types/react/index.d.ts:1631
-
-___
-
-### aria-hidden
-
-• `Optional` **aria-hidden**: Booleanish
-
-Indicates whether the element is exposed to an accessibility API.
-
-**`see`** aria-disabled.
-
-Defined in: node_modules/@types/react/index.d.ts:1633
-
-___
-
-### aria-invalid
-
-• `Optional` **aria-invalid**: *boolean* \| *true* \| *false* \| *grammar* \| *spelling*
-
-Indicates the entered value does not conform to the format expected by the application.
-
-**`see`** aria-errormessage.
-
-Defined in: node_modules/@types/react/index.d.ts:1638
-
-___
-
-### aria-keyshortcuts
-
-• `Optional` **aria-keyshortcuts**: *string*
-
-Indicates keyboard shortcuts that an author has implemented to activate or give focus to an element.
-
-Defined in: node_modules/@types/react/index.d.ts:1643
-
-___
-
-### aria-label
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:195
 
-• `Optional` **aria-label**: *string*
-
-Defines a string value that labels the current element.
-
-**`see`** aria-labelledby.
-
-Defined in: node_modules/@types/react/index.d.ts:1645
-
-___
-
-### aria-labelledby
-
-• `Optional` **aria-labelledby**: *string*
-
-Identifies the element (or elements) that labels the current element.
-
-**`see`** aria-describedby.
-
-Defined in: node_modules/@types/react/index.d.ts:1650
-
-___
-
-### aria-level
-
-• `Optional` **aria-level**: *number*
-
-Defines the hierarchical level of an element within a structure.
-
-Defined in: node_modules/@types/react/index.d.ts:1655
-
-___
-
-### aria-live
-
-• `Optional` **aria-live**: *off* \| *assertive* \| *polite*
-
-Indicates that an element will be updated, and describes the types of updates the user agents, assistive technologies, and user can expect from the live region.
-
-Defined in: node_modules/@types/react/index.d.ts:1657
-
-___
-
-### aria-modal
-
-• `Optional` **aria-modal**: Booleanish
-
-Indicates whether an element is modal when displayed.
-
-Defined in: node_modules/@types/react/index.d.ts:1659
-
-___
-
-### aria-multiline
-
-• `Optional` **aria-multiline**: Booleanish
-
-Indicates whether a text box accepts multiple lines of input or only a single line.
-
-Defined in: node_modules/@types/react/index.d.ts:1661
-
-___
-
-### aria-multiselectable
-
-• `Optional` **aria-multiselectable**: Booleanish
-
-Indicates that the user may select more than one item from the current selectable descendants.
-
-Defined in: node_modules/@types/react/index.d.ts:1663
-
-___
-
-### aria-orientation
-
-• `Optional` **aria-orientation**: *horizontal* \| *vertical*
-
-Indicates whether the element's orientation is horizontal, vertical, or unknown/ambiguous.
-
-Defined in: node_modules/@types/react/index.d.ts:1665
-
-___
-
-### aria-owns
-
-• `Optional` **aria-owns**: *string*
-
-Identifies an element (or elements) in order to define a visual, functional, or contextual parent/child relationship
-between DOM elements where the DOM hierarchy cannot be used to represent the relationship.
-
-**`see`** aria-controls.
-
-Defined in: node_modules/@types/react/index.d.ts:1667
-
-___
-
-### aria-placeholder
-
-• `Optional` **aria-placeholder**: *string*
-
-Defines a short hint (a word or short phrase) intended to aid the user with data entry when the control has no value.
-A hint could be a sample value or a brief description of the expected format.
-
-Defined in: node_modules/@types/react/index.d.ts:1673
-
-___
-
-### aria-posinset
-
-• `Optional` **aria-posinset**: *number*
-
-Defines an element's number or position in the current set of listitems or treeitems. Not required if all elements in the set are present in the DOM.
-
-**`see`** aria-setsize.
-
-Defined in: node_modules/@types/react/index.d.ts:1678
-
-___
-
-### aria-pressed
-
-• `Optional` **aria-pressed**: *boolean* \| *true* \| *false* \| *mixed*
-
-Indicates the current "pressed" state of toggle buttons.
-
-**`see`** aria-checked @see aria-selected.
-
-Defined in: node_modules/@types/react/index.d.ts:1683
-
-___
-
-### aria-readonly
-
-• `Optional` **aria-readonly**: Booleanish
-
-Indicates that the element is not editable, but is otherwise operable.
-
-**`see`** aria-disabled.
-
-Defined in: node_modules/@types/react/index.d.ts:1688
-
-___
-
-### aria-relevant
-
-• `Optional` **aria-relevant**: *text* \| *additions* \| *additions text* \| *all* \| *removals*
-
-Indicates what notifications the user agent will trigger when the accessibility tree within a live region is modified.
-
-**`see`** aria-atomic.
-
-Defined in: node_modules/@types/react/index.d.ts:1693
-
-___
-
-### aria-required
-
-• `Optional` **aria-required**: Booleanish
-
-Indicates that user input is required on the element before a form may be submitted.
-
-Defined in: node_modules/@types/react/index.d.ts:1698
-
-___
-
-### aria-roledescription
-
-• `Optional` **aria-roledescription**: *string*
-
-Defines a human-readable, author-localized description for the role of an element.
-
-Defined in: node_modules/@types/react/index.d.ts:1700
-
-___
-
-### aria-rowcount
-
-• `Optional` **aria-rowcount**: *number*
-
-Defines the total number of rows in a table, grid, or treegrid.
-
-**`see`** aria-rowindex.
-
-Defined in: node_modules/@types/react/index.d.ts:1702
-
-___
-
-### aria-rowindex
-
-• `Optional` **aria-rowindex**: *number*
-
-Defines an element's row index or position with respect to the total number of rows within a table, grid, or treegrid.
-
-**`see`** aria-rowcount @see aria-rowspan.
-
-Defined in: node_modules/@types/react/index.d.ts:1707
-
-___
-
-### aria-rowspan
-
-• `Optional` **aria-rowspan**: *number*
-
-Defines the number of rows spanned by a cell or gridcell within a table, grid, or treegrid.
-
-**`see`** aria-rowindex @see aria-colspan.
-
-Defined in: node_modules/@types/react/index.d.ts:1712
-
-___
-
-### aria-selected
-
-• `Optional` **aria-selected**: Booleanish
-
-Indicates the current "selected" state of various widgets.
-
-**`see`** aria-checked @see aria-pressed.
-
-Defined in: node_modules/@types/react/index.d.ts:1717
-
-___
-
-### aria-setsize
-
-• `Optional` **aria-setsize**: *number*
-
-Defines the number of items in the current set of listitems or treeitems. Not required if all elements in the set are present in the DOM.
-
-**`see`** aria-posinset.
-
-Defined in: node_modules/@types/react/index.d.ts:1722
-
-___
-
-### aria-sort
-
-• `Optional` **aria-sort**: *none* \| *ascending* \| *descending* \| *other*
-
-Indicates if items in a table or grid are sorted in ascending or descending order.
-
-Defined in: node_modules/@types/react/index.d.ts:1727
-
-___
-
-### aria-valuemax
-
-• `Optional` **aria-valuemax**: *number*
-
-Defines the maximum allowed value for a range widget.
-
-Defined in: node_modules/@types/react/index.d.ts:1729
-
-___
-
-### aria-valuemin
-
-• `Optional` **aria-valuemin**: *number*
-
-Defines the minimum allowed value for a range widget.
-
-Defined in: node_modules/@types/react/index.d.ts:1731
-
 ___
-
-### aria-valuenow
 
-• `Optional` **aria-valuenow**: *number*
+### ariaLabelForGrid
 
-Defines the current value for a range widget.
+• `Optional` **ariaLabelForGrid**: *string*
 
-**`see`** aria-valuetext.
+Aria label for grid in details list.
 
-Defined in: node_modules/@types/react/index.d.ts:1733
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:199
 
 ___
 
-### aria-valuetext
+### ariaLabelForListHeader
 
-• `Optional` **aria-valuetext**: *string*
+• `Optional` **ariaLabelForListHeader**: *string*
 
-Defines the human readable text alternative of aria-valuenow for a range widget.
+The aria-label attribute to stamp out on the list header
 
-Defined in: node_modules/@types/react/index.d.ts:1738
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:178
 
 ___
-
-### as
-
-• `Optional` **as**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1819
-
-___
-
-### async
 
-• `Optional` **async**: *boolean*
+### ariaLabelForSelectAllCheckbox
 
-Defined in: node_modules/@types/react/index.d.ts:1820
+• `Optional` **ariaLabelForSelectAllCheckbox**: *string*
 
-___
-
-### autoCapitalize
+The aria-label attribute to stamp out on select all checkbox for the list
 
-• `Optional` **autoCapitalize**: *string*
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:180
 
-Defined in: node_modules/@types/react/index.d.ts:1785
-
 ___
-
-### autoComplete
-
-• `Optional` **autoComplete**: *string*
 
-Defined in: node_modules/@types/react/index.d.ts:1821
+### ariaLabelForSelectionColumn
 
-___
+• `Optional` **ariaLabelForSelectionColumn**: *string*
 
-### autoCorrect
+An ARIA label for the name of the selection column, for localization.
 
-• `Optional` **autoCorrect**: *string*
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:184
 
-Defined in: node_modules/@types/react/index.d.ts:1786
-
 ___
-
-### autoFocus
 
-• `Optional` **autoFocus**: *boolean*
-
-Defined in: node_modules/@types/react/index.d.ts:1822
-
-___
+### ariaLabelForShimmer
 
-### autoPlay
+• `Optional` **ariaLabelForShimmer**: *string*
 
-• `Optional` **autoPlay**: *boolean*
+Aria label for shimmer. Set on grid while shimmer is enabled.
 
-Defined in: node_modules/@types/react/index.d.ts:1823
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/ShimmeredDetailsList.types.d.ts:23
 
 ___
 
-### autoSave
+### cellStyleProps
 
-• `Optional` **autoSave**: *string*
+• `Optional` **cellStyleProps**: ICellStyleProps
 
-Defined in: node_modules/@types/react/index.d.ts:1787
+Props impacting the render style of cells. Since these have an impact on calculated column widths, they are
+handled separately from normal theme styling, but they are passed to the styling system.
 
-___
-
-### capture
-
-• `Optional` **capture**: *string* \| *boolean*
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:247
 
-Defined in: node_modules/@types/react/index.d.ts:1824
-
 ___
-
-### cellPadding
-
-• `Optional` **cellPadding**: *string* \| *number*
 
-Defined in: node_modules/@types/react/index.d.ts:1825
+### checkButtonAriaLabel
 
-___
+• `Optional` **checkButtonAriaLabel**: *string*
 
-### cellSpacing
+Check button aria label for details list.
 
-• `Optional` **cellSpacing**: *string* \| *number*
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:197
 
-Defined in: node_modules/@types/react/index.d.ts:1826
-
 ___
-
-### challenge
 
-• `Optional` **challenge**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1828
-
-___
+### checkboxCellClassName
 
-### charSet
+• `Optional` **checkboxCellClassName**: *string*
 
-• `Optional` **charSet**: *string*
+Optional class name to add to the cell of a checkbox
 
-Defined in: node_modules/@types/react/index.d.ts:1827
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:225
 
 ___
 
@@ -1102,39 +198,7 @@ ___
 
 Check box visibility
 
-Defined in: [client/components/List/types.tsx:66](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L66)
-
-___
-
-### checked
-
-• `Optional` **checked**: *boolean*
-
-Defined in: node_modules/@types/react/index.d.ts:1829
-
-___
-
-### children
-
-• `Optional` **children**: ReactNode
-
-Defined in: node_modules/@types/react/index.d.ts:1348
-
-___
-
-### cite
-
-• `Optional` **cite**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1830
-
-___
-
-### classID
-
-• `Optional` **classID**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1831
+Defined in: [client/components/List/types.tsx:100](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L100)
 
 ___
 
@@ -1142,41 +206,29 @@ ___
 
 • `Optional` **className**: *string*
 
-Defined in: node_modules/@types/react/index.d.ts:1752
+Optional class name to add to the root element.
+
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:74
 
 ___
 
-### colSpan
+### columnReorderOptions
 
-• `Optional` **colSpan**: *number*
+• `Optional` **columnReorderOptions**: IColumnReorderOptions
 
-Defined in: node_modules/@types/react/index.d.ts:1833
+Options for column re-order using drag and drop
 
-___
-
-### color
-
-• `Optional` **color**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1788
-
-___
-
-### cols
-
-• `Optional` **cols**: *number*
-
-Defined in: node_modules/@types/react/index.d.ts:1832
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:233
 
 ___
 
 ### columns
 
-• `Optional` **columns**: IColumn[]
+• `Optional` **columns**: *IListColumn*<IListColumnData\>[]
 
 Columns
 
-Defined in: [client/components/List/types.tsx:21](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L21)
+Defined in: [client/components/List/types.tsx:55](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L55)
 
 ___
 
@@ -1186,157 +238,68 @@ ___
 
 Command bar props
 
-Defined in: [client/components/List/types.tsx:61](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L61)
+Defined in: [client/components/List/types.tsx:95](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L95)
 
 ___
 
-### content
+### compact
 
-• `Optional` **content**: *string*
+• `Optional` **compact**: *boolean*
 
-Defined in: node_modules/@types/react/index.d.ts:1834
+Whether the component should render in compact mode. Set to false by default
 
-___
-
-### contentEditable
-
-• `Optional` **contentEditable**: *boolean* \| *true* \| *false* \| *inherit*
-
-Defined in: node_modules/@types/react/index.d.ts:1753
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:208
 
 ___
 
-### contextMenu
+### componentRef
 
-• `Optional` **contextMenu**: *string*
+• `Optional` **componentRef**: *IRefObject*<IDetailsList\>
 
-Defined in: node_modules/@types/react/index.d.ts:1754
+Optional callback to access the IDetailsList interface. Use this instead of ref for accessing
+the public methods and properties of the component.
 
-___
-
-### controls
-
-• `Optional` **controls**: *boolean*
-
-Defined in: node_modules/@types/react/index.d.ts:1835
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:60
 
 ___
 
-### coords
+### constrainMode
 
-• `Optional` **coords**: *string*
+• `Optional` **constrainMode**: ConstrainMode
 
-Defined in: node_modules/@types/react/index.d.ts:1836
+Controls how the list contrains overflow.
 
-___
-
-### crossOrigin
-
-• `Optional` **crossOrigin**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1837
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:110
 
 ___
 
-### dangerouslySetInnerHTML
+### detailsListStyles
 
-• `Optional` **dangerouslySetInnerHTML**: *object*
+• `Optional` **detailsListStyles**: *IStyleFunctionOrObject*<IDetailsListStyleProps, IDetailsListStyles\>
 
-#### Type declaration:
+DetailsList styles to pass through.
 
-Name | Type |
-:------ | :------ |
-`__html` | *string* |
-
-Defined in: node_modules/@types/react/index.d.ts:1349
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/ShimmeredDetailsList.types.d.ts:14
 
 ___
 
-### data
+### disableSelectionZone
 
-• `Optional` **data**: *string*
+• `Optional` **disableSelectionZone**: *boolean*
 
-Defined in: node_modules/@types/react/index.d.ts:1838
+Whether or not to disable the built-in SelectionZone, so the host component can provide its own.
 
-___
-
-### datatype
-
-• `Optional` **datatype**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1776
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:251
 
 ___
 
-### dateTime
+### dragDropEvents
 
-• `Optional` **dateTime**: *string*
+• `Optional` **dragDropEvents**: IDragDropEvents
 
-Defined in: node_modules/@types/react/index.d.ts:1839
+Map of callback functions related to row drag and drop functionality.
 
-___
-
-### default
-
-• `Optional` **default**: *boolean*
-
-Defined in: node_modules/@types/react/index.d.ts:1840
-
-___
-
-### defaultChecked
-
-• `Optional` **defaultChecked**: *boolean*
-
-Defined in: node_modules/@types/react/index.d.ts:1745
-
-___
-
-### defaultValue
-
-• `Optional` **defaultValue**: *string* \| *number* \| *string*[]
-
-Defined in: node_modules/@types/react/index.d.ts:1746
-
-___
-
-### defer
-
-• `Optional` **defer**: *boolean*
-
-Defined in: node_modules/@types/react/index.d.ts:1841
-
-___
-
-### dir
-
-• `Optional` **dir**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1755
-
-___
-
-### disabled
-
-• `Optional` **disabled**: *boolean*
-
-Defined in: node_modules/@types/react/index.d.ts:1842
-
-___
-
-### download
-
-• `Optional` **download**: *any*
-
-Defined in: node_modules/@types/react/index.d.ts:1843
-
-___
-
-### draggable
-
-• `Optional` **draggable**: Booleanish
-
-Defined in: node_modules/@types/react/index.d.ts:1756
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:155
 
 ___
 
@@ -1346,15 +309,27 @@ ___
 
 Enable shimmer (normally while loading)
 
-Defined in: [client/components/List/types.tsx:26](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L26)
+Defined in: [client/components/List/types.tsx:60](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L60)
 
 ___
 
-### encType
+### enableUpdateAnimations
 
-• `Optional` **encType**: *string*
+• `Optional` **enableUpdateAnimations**: *boolean*
 
-Defined in: node_modules/@types/react/index.d.ts:1844
+Whether to animate updates
+
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:255
+
+___
+
+### enterModalSelectionOnTouch
+
+• `Optional` **enterModalSelectionOnTouch**: *boolean*
+
+Whether or not the selection zone should enter modal state on touch.
+
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:229
 
 ___
 
@@ -1366,7 +341,7 @@ Fade in properties used by the FadeIn component (react-fade-in)
 
 [delay, transitionDuration]
 
-Defined in: [client/components/List/types.tsx:73](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L73)
+Defined in: [client/components/List/types.tsx:112](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L112)
 
 ___
 
@@ -1378,63 +353,132 @@ Filters
 
 #### Type declaration:
 
-Defined in: [client/components/List/types.tsx:78](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L78)
+Defined in: [client/components/List/types.tsx:117](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L117)
 
 ___
 
-### form
+### getCellValueKey
 
-• `Optional` **form**: *string*
+• `Optional` **getCellValueKey**: (`item?`: *any*, `index?`: *number*, `column?`: IColumn) => *string*
 
-Defined in: node_modules/@types/react/index.d.ts:1845
+If provided, will be the "default" item column cell value return. column getValueKey can override getCellValue.
 
-___
+#### Type declaration:
 
-### formAction
+▸ (`item?`: *any*, `index?`: *number*, `column?`: IColumn): *string*
 
-• `Optional` **formAction**: *string*
+#### Parameters:
 
-Defined in: node_modules/@types/react/index.d.ts:1846
+Name | Type |
+:------ | :------ |
+`item?` | *any* |
+`index?` | *number* |
+`column?` | IColumn |
 
-___
+**Returns:** *string*
 
-### formEncType
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:153
 
-• `Optional` **formEncType**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1847
-
-___
-
-### formMethod
-
-• `Optional` **formMethod**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1848
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:153
 
 ___
 
-### formNoValidate
+### getGroupHeight
 
-• `Optional` **formNoValidate**: *boolean*
+• `Optional` **getGroupHeight**: (`group`: IGroup, `groupIndex`: *number*) => *number*
 
-Defined in: node_modules/@types/react/index.d.ts:1849
+Optional function to override default group height calculation used by list virtualization.
+
+#### Type declaration:
+
+▸ (`group`: IGroup, `groupIndex`: *number*): *number*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`group` | IGroup |
+`groupIndex` | *number* |
+
+**Returns:** *number*
+
+Defined in: node_modules/office-ui-fabric-react/lib/components/GroupedList/GroupedList.types.d.ts:99
+
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:237
 
 ___
 
-### formTarget
+### getKey
 
-• `Optional` **formTarget**: *string*
+• `Optional` **getKey**: (`item`: *any*, `index?`: *number*) => *string*
 
-Defined in: node_modules/@types/react/index.d.ts:1850
+Callback to get the item key, to be used in the selection and on render.
+Must be provided if sorting or filtering is enabled.
+
+#### Type declaration:
+
+▸ (`item`: *any*, `index?`: *number*): *string*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`item` | *any* |
+`index?` | *number* |
+
+**Returns:** *string*
+
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:193
+
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:193
 
 ___
 
-### frameBorder
+### getRowAriaDescribedBy
 
-• `Optional` **frameBorder**: *string* \| *number*
+• `Optional` **getRowAriaDescribedBy**: (`item`: *any*) => *string*
 
-Defined in: node_modules/@types/react/index.d.ts:1851
+Callback to get the aria-describedby IDs (space separated strings) of the elements that describe the item.
+
+#### Type declaration:
+
+▸ (`item`: *any*): *string*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`item` | *any* |
+
+**Returns:** *string*
+
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:188
+
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:188
+
+___
+
+### getRowAriaLabel
+
+• `Optional` **getRowAriaLabel**: (`item`: *any*) => *string*
+
+Callback to get the aria-label string for a given item.
+
+#### Type declaration:
+
+▸ (`item`: *any*): *string*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`item` | *any* |
+
+**Returns:** *string*
+
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:186
+
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:186
 
 ___
 
@@ -1442,27 +486,29 @@ ___
 
 • `Optional` **groupProps**: IDetailsGroupRenderProps
 
-Group props
+Optional override properties to render groups.
 
-Defined in: [client/components/List/types.tsx:51](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L51)
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:78
 
 ___
 
 ### groups
 
-• `Optional` **groups**: IListGroups
+• `Optional` **groups**: IGroup[]
 
-Groups
+Optional grouping instructions. The definition for IGroup can be found under the GroupedList component.
 
-Defined in: [client/components/List/types.tsx:46](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L46)
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:76
 
 ___
 
-### headers
+### headerClassName
 
-• `Optional` **headers**: *string*
+• `Optional` **headerClassName**: *string*
 
-Defined in: node_modules/@types/react/index.d.ts:1852
+Overriding class name for header
+
+Defined in: [client/components/List/types.tsx:127](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L127)
 
 ___
 
@@ -1472,7 +518,7 @@ ___
 
 Fixed height
 
-Defined in: [client/components/List/types.tsx:31](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L31)
+Defined in: [client/components/List/types.tsx:65](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L65)
 
 ___
 
@@ -1480,7 +526,9 @@ ___
 
 • `Optional` **hidden**: *boolean*
 
-Defined in: node_modules/@types/react/index.d.ts:1757
+Hidden
+
+Defined in: [client/components/List/types.tsx:122](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L122)
 
 ___
 
@@ -1492,3105 +540,346 @@ Defined in: [client/pages/Projects/ProjectList/types.tsx:10](https://github.com/
 
 ___
 
-### high
+### indentWidth
 
-• `Optional` **high**: *number*
+• `Optional` **indentWidth**: *number*
 
-Defined in: node_modules/@types/react/index.d.ts:1854
+Optional override for the indent width used for group nesting.
 
-___
-
-### href
-
-• `Optional` **href**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1855
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:80
 
 ___
 
-### hrefLang
+### initialFocusedIndex
 
-• `Optional` **hrefLang**: *string*
+• `Optional` **initialFocusedIndex**: *number*
 
-Defined in: node_modules/@types/react/index.d.ts:1856
+Optional default focused index to set focus to once the items have rendered and the index exists.
 
-___
-
-### htmlFor
-
-• `Optional` **htmlFor**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1857
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:72
 
 ___
 
-### httpEquiv
+### isHeaderVisible
 
-• `Optional` **httpEquiv**: *string*
+• `Optional` **isHeaderVisible**: *boolean*
 
-Defined in: node_modules/@types/react/index.d.ts:1858
+Controls the visibility of the details header.
 
-___
+**`defaultvalue`** true
 
-### id
-
-• `Optional` **id**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1758
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:106
 
 ___
 
-### inlist
+### isPlaceholderData
 
-• `Optional` **inlist**: *any*
+• `Optional` **isPlaceholderData**: *boolean*
 
-Defined in: node_modules/@types/react/index.d.ts:1777
+Set this to true to indicate that the items being displayed is placeholder data.
 
-___
-
-### inputMode
-
-• `Optional` **inputMode**: *none* \| *text* \| *tel* \| *url* \| *email* \| *numeric* \| *decimal* \| *search*
-
-Hints at the type of data that might be entered by the user while editing the element or its contents
-
-**`see`** https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-inputmode-attribute
-
-Defined in: node_modules/@types/react/index.d.ts:1803
-
-___
-
-### integrity
-
-• `Optional` **integrity**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1859
-
-___
-
-### is
-
-• `Optional` **is**: *string*
-
-Specify that a standard HTML element should behave like a defined custom built-in element
-
-**`see`** https://html.spec.whatwg.org/multipage/custom-elements.html#attr-is
-
-Defined in: node_modules/@types/react/index.d.ts:1808
-
-___
-
-### itemID
-
-• `Optional` **itemID**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1792
-
-___
-
-### itemProp
-
-• `Optional` **itemProp**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1789
-
-___
-
-### itemRef
-
-• `Optional` **itemRef**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1793
-
-___
-
-### itemScope
-
-• `Optional` **itemScope**: *boolean*
-
-Defined in: node_modules/@types/react/index.d.ts:1790
-
-___
-
-### itemType
-
-• `Optional` **itemType**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1791
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:66
 
 ___
 
 ### items
 
-• `Optional` **items**: *Project*[]
+• **items**: *Project*[]
 
 Items
 
-Defined in: [client/components/List/types.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L16)
+Defined in: [client/components/List/types.tsx:50](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L50)
 
 ___
 
-### key
+### layoutMode
 
-• `Optional` **key**: *string* \| *number*
+• `Optional` **layoutMode**: DetailsListLayoutMode
 
-Defined in: node_modules/@types/react/index.d.ts:139
+Controls how the columns are adjusted.
 
-___
-
-### keyParams
-
-• `Optional` **keyParams**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1860
-
-___
-
-### keyType
-
-• `Optional` **keyType**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1861
-
-___
-
-### kind
-
-• `Optional` **kind**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1862
-
-___
-
-### label
-
-• `Optional` **label**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1863
-
-___
-
-### lang
-
-• `Optional` **lang**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1759
-
-___
-
-### list
-
-• `Optional` **list**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1864
-
-___
-
-### loop
-
-• `Optional` **loop**: *boolean*
-
-Defined in: node_modules/@types/react/index.d.ts:1865
-
-___
-
-### low
-
-• `Optional` **low**: *number*
-
-Defined in: node_modules/@types/react/index.d.ts:1866
-
-___
-
-### manifest
-
-• `Optional` **manifest**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1867
-
-___
-
-### marginHeight
-
-• `Optional` **marginHeight**: *number*
-
-Defined in: node_modules/@types/react/index.d.ts:1868
-
-___
-
-### marginWidth
-
-• `Optional` **marginWidth**: *number*
-
-Defined in: node_modules/@types/react/index.d.ts:1869
-
-___
-
-### max
-
-• `Optional` **max**: *string* \| *number*
-
-Defined in: node_modules/@types/react/index.d.ts:1870
-
-___
-
-### maxLength
-
-• `Optional` **maxLength**: *number*
-
-Defined in: node_modules/@types/react/index.d.ts:1871
-
-___
-
-### media
-
-• `Optional` **media**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1872
-
-___
-
-### mediaGroup
-
-• `Optional` **mediaGroup**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1873
-
-___
-
-### method
-
-• `Optional` **method**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1874
-
-___
-
-### min
-
-• `Optional` **min**: *string* \| *number*
-
-Defined in: node_modules/@types/react/index.d.ts:1875
-
-___
-
-### minLength
-
-• `Optional` **minLength**: *number*
-
-Defined in: node_modules/@types/react/index.d.ts:1876
-
-___
-
-### multiple
-
-• `Optional` **multiple**: *boolean*
-
-Defined in: node_modules/@types/react/index.d.ts:1877
-
-___
-
-### muted
-
-• `Optional` **muted**: *boolean*
-
-Defined in: node_modules/@types/react/index.d.ts:1878
-
-___
-
-### name
-
-• `Optional` **name**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1879
-
-___
-
-### noValidate
-
-• `Optional` **noValidate**: *boolean*
-
-Defined in: node_modules/@types/react/index.d.ts:1881
-
-___
-
-### nonce
-
-• `Optional` **nonce**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1880
-
-___
-
-### onAbort
-
-• `Optional` **onAbort**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1404
-
-___
-
-### onAbortCapture
-
-• `Optional` **onAbortCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1405
-
-___
-
-### onAnimationEnd
-
-• `Optional` **onAnimationEnd**: (`event`: *AnimationEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *AnimationEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *AnimationEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1534
-
-___
-
-### onAnimationEndCapture
-
-• `Optional` **onAnimationEndCapture**: (`event`: *AnimationEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *AnimationEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *AnimationEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1535
-
-___
-
-### onAnimationIteration
-
-• `Optional` **onAnimationIteration**: (`event`: *AnimationEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *AnimationEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *AnimationEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1536
-
-___
-
-### onAnimationIterationCapture
-
-• `Optional` **onAnimationIterationCapture**: (`event`: *AnimationEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *AnimationEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *AnimationEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1537
-
-___
-
-### onAnimationStart
-
-• `Optional` **onAnimationStart**: (`event`: *AnimationEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *AnimationEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *AnimationEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1532
-
-___
-
-### onAnimationStartCapture
-
-• `Optional` **onAnimationStartCapture**: (`event`: *AnimationEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *AnimationEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *AnimationEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1533
-
-___
-
-### onAuxClick
-
-• `Optional` **onAuxClick**: (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *MouseEvent*<HTMLDivElement, MouseEvent\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1450
-
-___
-
-### onAuxClickCapture
-
-• `Optional` **onAuxClickCapture**: (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *MouseEvent*<HTMLDivElement, MouseEvent\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1451
-
-___
-
-### onBeforeInput
-
-• `Optional` **onBeforeInput**: (`event`: *FormEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *FormEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *FormEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1378
-
-___
-
-### onBeforeInputCapture
-
-• `Optional` **onBeforeInputCapture**: (`event`: *FormEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *FormEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *FormEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1379
-
-___
-
-### onBlur
-
-• `Optional` **onBlur**: (`event`: *FocusEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *FocusEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *FocusEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1372
-
-___
-
-### onBlurCapture
-
-• `Optional` **onBlurCapture**: (`event`: *FocusEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *FocusEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *FocusEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1373
-
-___
-
-### onCanPlay
-
-• `Optional` **onCanPlay**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1406
-
-___
-
-### onCanPlayCapture
-
-• `Optional` **onCanPlayCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1407
-
-___
-
-### onCanPlayThrough
-
-• `Optional` **onCanPlayThrough**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1408
-
-___
-
-### onCanPlayThroughCapture
-
-• `Optional` **onCanPlayThroughCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1409
-
-___
-
-### onChange
-
-• `Optional` **onChange**: (`event`: *FormEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *FormEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *FormEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1376
-
-___
-
-### onChangeCapture
-
-• `Optional` **onChangeCapture**: (`event`: *FormEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *FormEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *FormEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1377
-
-___
-
-### onClick
-
-• `Optional` **onClick**: (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *MouseEvent*<HTMLDivElement, MouseEvent\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1452
-
-___
-
-### onClickCapture
-
-• `Optional` **onClickCapture**: (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *MouseEvent*<HTMLDivElement, MouseEvent\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1453
-
-___
-
-### onCompositionEnd
-
-• `Optional` **onCompositionEnd**: (`event`: *CompositionEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *CompositionEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *CompositionEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1362
-
-___
-
-### onCompositionEndCapture
-
-• `Optional` **onCompositionEndCapture**: (`event`: *CompositionEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *CompositionEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *CompositionEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1363
-
-___
-
-### onCompositionStart
-
-• `Optional` **onCompositionStart**: (`event`: *CompositionEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *CompositionEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *CompositionEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1364
-
-___
-
-### onCompositionStartCapture
-
-• `Optional` **onCompositionStartCapture**: (`event`: *CompositionEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *CompositionEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *CompositionEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1365
-
-___
-
-### onCompositionUpdate
-
-• `Optional` **onCompositionUpdate**: (`event`: *CompositionEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *CompositionEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *CompositionEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1366
-
-___
-
-### onCompositionUpdateCapture
-
-• `Optional` **onCompositionUpdateCapture**: (`event`: *CompositionEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *CompositionEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *CompositionEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1367
-
-___
-
-### onContextMenu
-
-• `Optional` **onContextMenu**: (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *MouseEvent*<HTMLDivElement, MouseEvent\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1454
-
-___
-
-### onContextMenuCapture
-
-• `Optional` **onContextMenuCapture**: (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *MouseEvent*<HTMLDivElement, MouseEvent\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1455
-
-___
-
-### onCopy
-
-• `Optional` **onCopy**: (`event`: *ClipboardEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *ClipboardEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *ClipboardEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1354
-
-___
-
-### onCopyCapture
-
-• `Optional` **onCopyCapture**: (`event`: *ClipboardEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *ClipboardEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *ClipboardEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1355
-
-___
-
-### onCut
-
-• `Optional` **onCut**: (`event`: *ClipboardEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *ClipboardEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *ClipboardEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1356
-
-___
-
-### onCutCapture
-
-• `Optional` **onCutCapture**: (`event`: *ClipboardEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *ClipboardEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *ClipboardEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1357
-
-___
-
-### onDoubleClick
-
-• `Optional` **onDoubleClick**: (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *MouseEvent*<HTMLDivElement, MouseEvent\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1456
-
-___
-
-### onDoubleClickCapture
-
-• `Optional` **onDoubleClickCapture**: (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *MouseEvent*<HTMLDivElement, MouseEvent\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1457
-
-___
-
-### onDrag
-
-• `Optional` **onDrag**: (`event`: *DragEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *DragEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *DragEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1458
-
-___
-
-### onDragCapture
-
-• `Optional` **onDragCapture**: (`event`: *DragEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *DragEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *DragEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1459
-
-___
-
-### onDragEnd
-
-• `Optional` **onDragEnd**: (`event`: *DragEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *DragEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *DragEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1460
-
-___
-
-### onDragEndCapture
-
-• `Optional` **onDragEndCapture**: (`event`: *DragEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *DragEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *DragEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1461
-
-___
-
-### onDragEnter
-
-• `Optional` **onDragEnter**: (`event`: *DragEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *DragEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *DragEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1462
-
-___
-
-### onDragEnterCapture
-
-• `Optional` **onDragEnterCapture**: (`event`: *DragEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *DragEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *DragEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1463
-
-___
-
-### onDragExit
-
-• `Optional` **onDragExit**: (`event`: *DragEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *DragEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *DragEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1464
-
-___
-
-### onDragExitCapture
-
-• `Optional` **onDragExitCapture**: (`event`: *DragEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *DragEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *DragEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1465
-
-___
-
-### onDragLeave
-
-• `Optional` **onDragLeave**: (`event`: *DragEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *DragEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *DragEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1466
-
-___
-
-### onDragLeaveCapture
-
-• `Optional` **onDragLeaveCapture**: (`event`: *DragEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *DragEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *DragEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1467
-
-___
-
-### onDragOver
-
-• `Optional` **onDragOver**: (`event`: *DragEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *DragEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *DragEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1468
-
-___
-
-### onDragOverCapture
-
-• `Optional` **onDragOverCapture**: (`event`: *DragEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *DragEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *DragEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1469
-
-___
-
-### onDragStart
-
-• `Optional` **onDragStart**: (`event`: *DragEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *DragEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *DragEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1470
-
-___
-
-### onDragStartCapture
-
-• `Optional` **onDragStartCapture**: (`event`: *DragEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *DragEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *DragEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1471
-
-___
-
-### onDrop
-
-• `Optional` **onDrop**: (`event`: *DragEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *DragEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *DragEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1472
-
-___
-
-### onDropCapture
-
-• `Optional` **onDropCapture**: (`event`: *DragEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *DragEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *DragEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1473
-
-___
-
-### onDurationChange
-
-• `Optional` **onDurationChange**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1410
-
-___
-
-### onDurationChangeCapture
-
-• `Optional` **onDurationChangeCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1411
-
-___
-
-### onEmptied
-
-• `Optional` **onEmptied**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1412
-
-___
-
-### onEmptiedCapture
-
-• `Optional` **onEmptiedCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1413
-
-___
-
-### onEncrypted
-
-• `Optional` **onEncrypted**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1414
-
-___
-
-### onEncryptedCapture
-
-• `Optional` **onEncryptedCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1415
-
-___
-
-### onEnded
-
-• `Optional` **onEnded**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1416
-
-___
-
-### onEndedCapture
-
-• `Optional` **onEndedCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1417
-
-___
-
-### onError
-
-• `Optional` **onError**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1392
-
-___
-
-### onErrorCapture
-
-• `Optional` **onErrorCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1393
-
-___
-
-### onFocus
-
-• `Optional` **onFocus**: (`event`: *FocusEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *FocusEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *FocusEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1370
-
-___
-
-### onFocusCapture
-
-• `Optional` **onFocusCapture**: (`event`: *FocusEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *FocusEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *FocusEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1371
-
-___
-
-### onGotPointerCapture
-
-• `Optional` **onGotPointerCapture**: (`event`: *PointerEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *PointerEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *PointerEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1518
-
-___
-
-### onGotPointerCaptureCapture
-
-• `Optional` **onGotPointerCaptureCapture**: (`event`: *PointerEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *PointerEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *PointerEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1519
-
-___
-
-### onInput
-
-• `Optional` **onInput**: (`event`: *FormEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *FormEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *FormEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1380
-
-___
-
-### onInputCapture
-
-• `Optional` **onInputCapture**: (`event`: *FormEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *FormEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *FormEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1381
-
-___
-
-### onInvalid
-
-• `Optional` **onInvalid**: (`event`: *FormEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *FormEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *FormEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1386
-
-___
-
-### onInvalidCapture
-
-• `Optional` **onInvalidCapture**: (`event`: *FormEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *FormEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *FormEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1387
-
-___
-
-### onKeyDown
-
-• `Optional` **onKeyDown**: (`event`: *KeyboardEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *KeyboardEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *KeyboardEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1396
-
-___
-
-### onKeyDownCapture
-
-• `Optional` **onKeyDownCapture**: (`event`: *KeyboardEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *KeyboardEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *KeyboardEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1397
-
-___
-
-### onKeyPress
-
-• `Optional` **onKeyPress**: (`event`: *KeyboardEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *KeyboardEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *KeyboardEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1398
-
-___
-
-### onKeyPressCapture
-
-• `Optional` **onKeyPressCapture**: (`event`: *KeyboardEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *KeyboardEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *KeyboardEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1399
-
-___
-
-### onKeyUp
-
-• `Optional` **onKeyUp**: (`event`: *KeyboardEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *KeyboardEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *KeyboardEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1400
-
-___
-
-### onKeyUpCapture
-
-• `Optional` **onKeyUpCapture**: (`event`: *KeyboardEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *KeyboardEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *KeyboardEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1401
-
-___
-
-### onLoad
-
-• `Optional` **onLoad**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1390
-
-___
-
-### onLoadCapture
-
-• `Optional` **onLoadCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1391
-
-___
-
-### onLoadStart
-
-• `Optional` **onLoadStart**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1422
-
-___
-
-### onLoadStartCapture
-
-• `Optional` **onLoadStartCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1423
-
-___
-
-### onLoadedData
-
-• `Optional` **onLoadedData**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1418
-
-___
-
-### onLoadedDataCapture
-
-• `Optional` **onLoadedDataCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1419
-
-___
-
-### onLoadedMetadata
-
-• `Optional` **onLoadedMetadata**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1420
-
-___
-
-### onLoadedMetadataCapture
-
-• `Optional` **onLoadedMetadataCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1421
-
-___
-
-### onLostPointerCapture
-
-• `Optional` **onLostPointerCapture**: (`event`: *PointerEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *PointerEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *PointerEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1520
-
-___
-
-### onLostPointerCaptureCapture
-
-• `Optional` **onLostPointerCaptureCapture**: (`event`: *PointerEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *PointerEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *PointerEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1521
-
-___
-
-### onMouseDown
-
-• `Optional` **onMouseDown**: (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *MouseEvent*<HTMLDivElement, MouseEvent\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1474
-
-___
-
-### onMouseDownCapture
-
-• `Optional` **onMouseDownCapture**: (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *MouseEvent*<HTMLDivElement, MouseEvent\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1475
-
-___
-
-### onMouseEnter
-
-• `Optional` **onMouseEnter**: (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *MouseEvent*<HTMLDivElement, MouseEvent\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1476
-
-___
-
-### onMouseLeave
-
-• `Optional` **onMouseLeave**: (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *MouseEvent*<HTMLDivElement, MouseEvent\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1477
-
-___
-
-### onMouseMove
-
-• `Optional` **onMouseMove**: (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *MouseEvent*<HTMLDivElement, MouseEvent\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1478
-
-___
-
-### onMouseMoveCapture
-
-• `Optional` **onMouseMoveCapture**: (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *MouseEvent*<HTMLDivElement, MouseEvent\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1479
-
-___
-
-### onMouseOut
-
-• `Optional` **onMouseOut**: (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *MouseEvent*<HTMLDivElement, MouseEvent\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1480
-
-___
-
-### onMouseOutCapture
-
-• `Optional` **onMouseOutCapture**: (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *MouseEvent*<HTMLDivElement, MouseEvent\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1481
-
-___
-
-### onMouseOver
-
-• `Optional` **onMouseOver**: (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *MouseEvent*<HTMLDivElement, MouseEvent\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1482
-
-___
-
-### onMouseOverCapture
-
-• `Optional` **onMouseOverCapture**: (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *MouseEvent*<HTMLDivElement, MouseEvent\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1483
-
-___
-
-### onMouseUp
-
-• `Optional` **onMouseUp**: (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *MouseEvent*<HTMLDivElement, MouseEvent\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1484
-
-___
-
-### onMouseUpCapture
-
-• `Optional` **onMouseUpCapture**: (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *MouseEvent*<HTMLDivElement, MouseEvent\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *MouseEvent*<HTMLDivElement, MouseEvent\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1485
-
-___
-
-### onPaste
-
-• `Optional` **onPaste**: (`event`: *ClipboardEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *ClipboardEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *ClipboardEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:96
 
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1358
-
-___
-
-### onPasteCapture
-
-• `Optional` **onPasteCapture**: (`event`: *ClipboardEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *ClipboardEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *ClipboardEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1359
-
-___
-
-### onPause
-
-• `Optional` **onPause**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1424
-
-___
-
-### onPauseCapture
-
-• `Optional` **onPauseCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1425
-
-___
-
-### onPlay
-
-• `Optional` **onPlay**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1426
-
 ___
-
-### onPlayCapture
-
-• `Optional` **onPlayCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
 
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
+### listGroupProps
 
-**Returns:** *void*
+• `Optional` **listGroupProps**: IListGroupProps
 
-Defined in: node_modules/@types/react/index.d.ts:1296
+Group props
 
-Defined in: node_modules/@types/react/index.d.ts:1427
+Defined in: [client/components/List/types.tsx:80](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L80)
 
 ___
-
-### onPlaying
-
-• `Optional` **onPlaying**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
 
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
+### listGroupRenderProps
 
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
+• `Optional` **listGroupRenderProps**: IDetailsGroupRenderProps
 
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
+Group render props
 
-Defined in: node_modules/@types/react/index.d.ts:1428
+Defined in: [client/components/List/types.tsx:85](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L85)
 
 ___
-
-### onPlayingCapture
-
-• `Optional` **onPlayingCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
 
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
+### listProps
 
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
+• `Optional` **listProps**: *IListProps*<any\>
 
-Defined in: node_modules/@types/react/index.d.ts:1296
+Optional properties to pass through to the list components being rendered.
 
-Defined in: node_modules/@types/react/index.d.ts:1429
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:68
 
 ___
 
-### onPointerCancel
+### minimumPixelsForDrag
 
-• `Optional` **onPointerCancel**: (`event`: *PointerEvent*<HTMLDivElement\>) => *void*
+• `Optional` **minimumPixelsForDrag**: *number*
 
-#### Type declaration:
-
-▸ (`event`: *PointerEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *PointerEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
+The minimum mouse move distance to interpret the action as drag event.
 
-Defined in: node_modules/@types/react/index.d.ts:1296
+**`defaultvalue`** 5
 
-Defined in: node_modules/@types/react/index.d.ts:1508
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:206
 
 ___
-
-### onPointerCancelCapture
-
-• `Optional` **onPointerCancelCapture**: (`event`: *PointerEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *PointerEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
 
-Name | Type |
-:------ | :------ |
-`event` | *PointerEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1509
-
-___
+### onActiveItemChanged
 
-### onPointerDown
+• `Optional` **onActiveItemChanged**: (`item?`: *any*, `index?`: *number*, `ev?`: *FocusEvent*<HTMLElement\>) => *void*
 
-• `Optional` **onPointerDown**: (`event`: *PointerEvent*<HTMLDivElement\>) => *void*
+Callback for when an item in the list becomes active by clicking anywhere inside the row or navigating to it
+with the keyboard.
 
 #### Type declaration:
 
-▸ (`event`: *PointerEvent*<HTMLDivElement\>): *void*
+▸ (`item?`: *any*, `index?`: *number*, `ev?`: *FocusEvent*<HTMLElement\>): *void*
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`event` | *PointerEvent*<HTMLDivElement\> |
+`item?` | *any* |
+`index?` | *number* |
+`ev?` | *FocusEvent*<HTMLElement\> |
 
 **Returns:** *void*
 
-Defined in: node_modules/@types/react/index.d.ts:1296
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:176
 
-Defined in: node_modules/@types/react/index.d.ts:1502
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:176
 
 ___
-
-### onPointerDownCapture
-
-• `Optional` **onPointerDownCapture**: (`event`: *PointerEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *PointerEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *PointerEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
 
-Defined in: node_modules/@types/react/index.d.ts:1296
+### onColumnHeaderClick
 
-Defined in: node_modules/@types/react/index.d.ts:1503
+• `Optional` **onColumnHeaderClick**: (`ev?`: *MouseEvent*<HTMLElement, MouseEvent\>, `column?`: IColumn) => *void*
 
-___
-
-### onPointerEnter
+Callback for when the user clicks on the column header.
 
-• `Optional` **onPointerEnter**: (`event`: *PointerEvent*<HTMLDivElement\>) => *void*
-
 #### Type declaration:
 
-▸ (`event`: *PointerEvent*<HTMLDivElement\>): *void*
+▸ (`ev?`: *MouseEvent*<HTMLElement, MouseEvent\>, `column?`: IColumn): *void*
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`event` | *PointerEvent*<HTMLDivElement\> |
+`ev?` | *MouseEvent*<HTMLElement, MouseEvent\> |
+`column?` | IColumn |
 
 **Returns:** *void*
 
-Defined in: node_modules/@types/react/index.d.ts:1296
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:128
 
-Defined in: node_modules/@types/react/index.d.ts:1510
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:128
 
 ___
-
-### onPointerEnterCapture
-
-• `Optional` **onPointerEnterCapture**: (`event`: *PointerEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *PointerEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *PointerEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
 
-Defined in: node_modules/@types/react/index.d.ts:1511
+### onColumnHeaderContextMenu
 
-___
-
-### onPointerLeave
+• `Optional` **onColumnHeaderContextMenu**: (`column?`: IColumn, `ev?`: *MouseEvent*<HTMLElement, MouseEvent\>) => *void*
 
-• `Optional` **onPointerLeave**: (`event`: *PointerEvent*<HTMLDivElement\>) => *void*
+Callback for when the user asks for a contextual menu (usually via right click) from a column header.
 
 #### Type declaration:
 
-▸ (`event`: *PointerEvent*<HTMLDivElement\>): *void*
+▸ (`column?`: IColumn, `ev?`: *MouseEvent*<HTMLElement, MouseEvent\>): *void*
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`event` | *PointerEvent*<HTMLDivElement\> |
+`column?` | IColumn |
+`ev?` | *MouseEvent*<HTMLElement, MouseEvent\> |
 
 **Returns:** *void*
 
-Defined in: node_modules/@types/react/index.d.ts:1296
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:130
 
-Defined in: node_modules/@types/react/index.d.ts:1512
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:130
 
 ___
-
-### onPointerLeaveCapture
-
-• `Optional` **onPointerLeaveCapture**: (`event`: *PointerEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *PointerEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *PointerEvent*<HTMLDivElement\> |
 
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1513
-
-___
+### onColumnResize
 
-### onPointerMove
+• `Optional` **onColumnResize**: (`column?`: IColumn, `newWidth?`: *number*, `columnIndex?`: *number*) => *void*
 
-• `Optional` **onPointerMove**: (`event`: *PointerEvent*<HTMLDivElement\>) => *void*
+Callback fired on column resize
 
 #### Type declaration:
 
-▸ (`event`: *PointerEvent*<HTMLDivElement\>): *void*
+▸ (`column?`: IColumn, `newWidth?`: *number*, `columnIndex?`: *number*): *void*
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`event` | *PointerEvent*<HTMLDivElement\> |
+`column?` | IColumn |
+`newWidth?` | *number* |
+`columnIndex?` | *number* |
 
 **Returns:** *void*
 
-Defined in: node_modules/@types/react/index.d.ts:1296
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:132
 
-Defined in: node_modules/@types/react/index.d.ts:1504
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:132
 
 ___
-
-### onPointerMoveCapture
-
-• `Optional` **onPointerMoveCapture**: (`event`: *PointerEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *PointerEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *PointerEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
 
-Defined in: node_modules/@types/react/index.d.ts:1505
-
-___
+### onDidUpdate
 
-### onPointerOut
+• `Optional` **onDidUpdate**: (`detailsList?`: *DetailsListBase*) => *void*
 
-• `Optional` **onPointerOut**: (`event`: *PointerEvent*<HTMLDivElement\>) => *void*
+Callback for when the details list has been updated. Useful for telemetry tracking externally.
 
 #### Type declaration:
 
-▸ (`event`: *PointerEvent*<HTMLDivElement\>): *void*
+▸ (`detailsList?`: *DetailsListBase*): *void*
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`event` | *PointerEvent*<HTMLDivElement\> |
+`detailsList?` | *DetailsListBase* |
 
 **Returns:** *void*
 
-Defined in: node_modules/@types/react/index.d.ts:1296
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:117
 
-Defined in: node_modules/@types/react/index.d.ts:1516
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:117
 
 ___
-
-### onPointerOutCapture
-
-• `Optional` **onPointerOutCapture**: (`event`: *PointerEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *PointerEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *PointerEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
 
-Defined in: node_modules/@types/react/index.d.ts:1296
+### onItemContextMenu
 
-Defined in: node_modules/@types/react/index.d.ts:1517
+• `Optional` **onItemContextMenu**: (`item?`: *any*, `index?`: *number*, `ev?`: Event) => *boolean* \| *void*
 
-___
-
-### onPointerOver
+Callback for when the context menu of an item has been accessed.
+If undefined or false are returned, ev.preventDefault() will be called.
 
-• `Optional` **onPointerOver**: (`event`: *PointerEvent*<HTMLDivElement\>) => *void*
-
 #### Type declaration:
 
-▸ (`event`: *PointerEvent*<HTMLDivElement\>): *void*
+▸ (`item?`: *any*, `index?`: *number*, `ev?`: Event): *boolean* \| *void*
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`event` | *PointerEvent*<HTMLDivElement\> |
+`item?` | *any* |
+`index?` | *number* |
+`ev?` | Event |
 
-**Returns:** *void*
+**Returns:** *boolean* \| *void*
 
-Defined in: node_modules/@types/react/index.d.ts:1296
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:139
 
-Defined in: node_modules/@types/react/index.d.ts:1514
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:139
 
 ___
-
-### onPointerOverCapture
-
-• `Optional` **onPointerOverCapture**: (`event`: *PointerEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *PointerEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *PointerEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
 
-Defined in: node_modules/@types/react/index.d.ts:1296
+### onItemInvoked
 
-Defined in: node_modules/@types/react/index.d.ts:1515
+• `Optional` **onItemInvoked**: (`item?`: *any*, `index?`: *number*, `ev?`: Event) => *void*
 
-___
-
-### onPointerUp
+Callback for when a given row has been invoked (by pressing enter while it is selected.)
 
-• `Optional` **onPointerUp**: (`event`: *PointerEvent*<HTMLDivElement\>) => *void*
-
 #### Type declaration:
 
-▸ (`event`: *PointerEvent*<HTMLDivElement\>): *void*
+▸ (`item?`: *any*, `index?`: *number*, `ev?`: Event): *void*
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`event` | *PointerEvent*<HTMLDivElement\> |
+`item?` | *any* |
+`index?` | *number* |
+`ev?` | Event |
 
 **Returns:** *void*
 
-Defined in: node_modules/@types/react/index.d.ts:1296
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:134
 
-Defined in: node_modules/@types/react/index.d.ts:1506
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:134
 
 ___
-
-### onPointerUpCapture
-
-• `Optional` **onPointerUpCapture**: (`event`: *PointerEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *PointerEvent*<HTMLDivElement\>): *void*
 
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *PointerEvent*<HTMLDivElement\> |
+### onRenderCheckbox
 
-**Returns:** *void*
+• `Optional` **onRenderCheckbox**: *IRenderFunction*<IDetailsListCheckboxProps\>
 
-Defined in: node_modules/@types/react/index.d.ts:1296
+If provided, can be used to render a custom checkbox
 
-Defined in: node_modules/@types/react/index.d.ts:1507
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:169
 
 ___
-
-### onProgress
-
-• `Optional` **onProgress**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
 
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
+### onRenderColumnHeader
 
-**Returns:** *void*
+• `Optional` **onRenderColumnHeader**: *IRenderFunction*<IDetailsColumnRenderTooltipProps\>
 
-Defined in: node_modules/@types/react/index.d.ts:1296
+Callback to render the column header
 
-Defined in: node_modules/@types/react/index.d.ts:1430
+Defined in: [client/components/List/types.tsx:105](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L105)
 
 ___
-
-### onProgressCapture
-
-• `Optional` **onProgressCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
 
-Defined in: node_modules/@types/react/index.d.ts:1431
+### onRenderCustomPlaceholder
 
-___
-
-### onRateChange
+• `Optional` **onRenderCustomPlaceholder**: (`rowProps`: *IDetailsRowProps*, `index?`: *number*, `defaultRender?`: (`props`: *IDetailsRowProps*) => ReactNode) => ReactNode
 
-• `Optional` **onRateChange**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
+Custom placeholder renderer to be used when in need to override the default placeholder of a DetailsRow.
+`rowProps` argument is passed to leverage the calculated column measurements done by DetailsList
+or you can use the optional arguments of item `index` and `defaultRender` to execute additional
+logic before rendering the default placeholder.
 
 #### Type declaration:
 
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
+▸ (`rowProps`: *IDetailsRowProps*, `index?`: *number*, `defaultRender?`: (`props`: *IDetailsRowProps*) => ReactNode): ReactNode
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
+`rowProps` | *IDetailsRowProps* |
+`index?` | *number* |
+`defaultRender?` | (`props`: *IDetailsRowProps*) => ReactNode |
 
-**Returns:** *void*
+**Returns:** ReactNode
 
-Defined in: node_modules/@types/react/index.d.ts:1296
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/ShimmeredDetailsList.types.d.ts:35
 
-Defined in: node_modules/@types/react/index.d.ts:1432
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/ShimmeredDetailsList.types.d.ts:35
 
 ___
-
-### onRateChangeCapture
 
-• `Optional` **onRateChangeCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
+### onRenderDetailsFooter
 
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
+• `Optional` **onRenderDetailsFooter**: *IRenderFunction*<IDetailsFooterProps\>
 
-Defined in: node_modules/@types/react/index.d.ts:1296
+An override to render the details footer.
 
-Defined in: node_modules/@types/react/index.d.ts:1433
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:165
 
 ___
 
@@ -4600,859 +889,160 @@ ___
 
 On render details header
 
-Defined in: [client/components/List/types.tsx:56](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L56)
+Defined in: [client/components/List/types.tsx:90](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L90)
 
 ___
 
-### onReset
+### onRenderItemColumn
 
-• `Optional` **onReset**: (`event`: *FormEvent*<HTMLDivElement\>) => *void*
+• `Optional` **onRenderItemColumn**: (`item?`: *any*, `index?`: *number*, `column?`: IColumn) => ReactNode
+
+If provided, will be the "default" item column renderer method.
+This affects cells within the rows, not the rows themselves.
+If a column definition provides its own onRender method, that will be used instead of this.
 
 #### Type declaration:
 
-▸ (`event`: *FormEvent*<HTMLDivElement\>): *void*
+▸ (`item?`: *any*, `index?`: *number*, `column?`: IColumn): ReactNode
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`event` | *FormEvent*<HTMLDivElement\> |
+`item?` | *any* |
+`index?` | *number* |
+`column?` | IColumn |
 
-**Returns:** *void*
+**Returns:** ReactNode
 
-Defined in: node_modules/@types/react/index.d.ts:1296
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:149
 
-Defined in: node_modules/@types/react/index.d.ts:1382
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:149
 
 ___
 
-### onResetCapture
+### onRenderMissingItem
 
-• `Optional` **onResetCapture**: (`event`: *FormEvent*<HTMLDivElement\>) => *void*
+• `Optional` **onRenderMissingItem**: (`index?`: *number*, `rowProps?`: *IDetailsRowProps*) => ReactNode
+
+Callback for what to render when the item is missing.
 
 #### Type declaration:
 
-▸ (`event`: *FormEvent*<HTMLDivElement\>): *void*
+▸ (`index?`: *number*, `rowProps?`: *IDetailsRowProps*): ReactNode
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`event` | *FormEvent*<HTMLDivElement\> |
+`index?` | *number* |
+`rowProps?` | *IDetailsRowProps* |
 
-**Returns:** *void*
+**Returns:** ReactNode
 
-Defined in: node_modules/@types/react/index.d.ts:1296
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:157
 
-Defined in: node_modules/@types/react/index.d.ts:1383
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:157
 
 ___
 
-### onScroll
+### onRenderRow
 
-• `Optional` **onScroll**: (`event`: *UIEvent*<HTMLDivElement, UIEvent\>) => *void*
+• `Optional` **onRenderRow**: *IRenderFunction*<IDetailsRowProps\>
+
+ If provided, will allow the caller to override the default row rendering.
+
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:143
+
+___
+
+### onRowDidMount
+
+• `Optional` **onRowDidMount**: (`item?`: *any*, `index?`: *number*) => *void*
+
+Callback for when a given row has been mounted. Useful for identifying when a row has been rendered on the page.
 
 #### Type declaration:
 
-▸ (`event`: *UIEvent*<HTMLDivElement, UIEvent\>): *void*
+▸ (`item?`: *any*, `index?`: *number*): *void*
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`event` | *UIEvent*<HTMLDivElement, UIEvent\> |
+`item?` | *any* |
+`index?` | *number* |
 
 **Returns:** *void*
 
-Defined in: node_modules/@types/react/index.d.ts:1296
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:121
 
-Defined in: node_modules/@types/react/index.d.ts:1524
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:121
 
 ___
 
-### onScrollCapture
+### onRowWillUnmount
 
-• `Optional` **onScrollCapture**: (`event`: *UIEvent*<HTMLDivElement, UIEvent\>) => *void*
+• `Optional` **onRowWillUnmount**: (`item?`: *any*, `index?`: *number*) => *void*
+
+Callback for when a given row has been unmounted.
+Useful for identifying when a row has been removed from the page.
 
 #### Type declaration:
 
-▸ (`event`: *UIEvent*<HTMLDivElement, UIEvent\>): *void*
+▸ (`item?`: *any*, `index?`: *number*): *void*
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`event` | *UIEvent*<HTMLDivElement, UIEvent\> |
+`item?` | *any* |
+`index?` | *number* |
 
 **Returns:** *void*
 
-Defined in: node_modules/@types/react/index.d.ts:1296
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:126
 
-Defined in: node_modules/@types/react/index.d.ts:1525
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:126
 
 ___
 
-### onSeeked
+### onShouldVirtualize
 
-• `Optional` **onSeeked**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
+• `Optional` **onShouldVirtualize**: (`props`: *IListProps*<any\>) => *boolean*
+
+Optional callback to determine whether the list should be rendered in full, or virtualized.
+Virtualization will add and remove pages of items as the user scrolls them into the visible range.
+This benefits larger list scenarios by reducing the DOM on the screen, but can negatively affect performance
+for smaller lists.
+The default implementation will virtualize when this callback is not provided.
 
 #### Type declaration:
 
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
+▸ (`props`: *IListProps*<any\>): *boolean*
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
+`props` | *IListProps*<any\> |
 
-**Returns:** *void*
+**Returns:** *boolean*
 
-Defined in: node_modules/@types/react/index.d.ts:1296
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:221
 
-Defined in: node_modules/@types/react/index.d.ts:1434
-
-___
-
-### onSeekedCapture
-
-• `Optional` **onSeekedCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1435
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:221
 
 ___
 
-### onSeeking
+### removeFadingOverlay
 
-• `Optional` **onSeeking**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
+• `Optional` **removeFadingOverlay**: *boolean*
 
-#### Type declaration:
+Determines whether to remove a fading out to bottom overlay over the shimmering items
+used to further emphasize the unknown number of items that will be fetched.
 
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1436
-
-___
-
-### onSeekingCapture
-
-• `Optional` **onSeekingCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1437
-
-___
-
-### onSelect
-
-• `Optional` **onSelect**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1488
-
-___
-
-### onSelectCapture
-
-• `Optional` **onSelectCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1489
-
-___
-
-### onStalled
-
-• `Optional` **onStalled**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1438
-
-___
-
-### onStalledCapture
-
-• `Optional` **onStalledCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1439
-
-___
-
-### onSubmit
-
-• `Optional` **onSubmit**: (`event`: *FormEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *FormEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *FormEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1384
-
-___
-
-### onSubmitCapture
-
-• `Optional` **onSubmitCapture**: (`event`: *FormEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *FormEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *FormEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1385
-
-___
-
-### onSuspend
-
-• `Optional` **onSuspend**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1440
-
-___
-
-### onSuspendCapture
-
-• `Optional` **onSuspendCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1441
-
-___
-
-### onTimeUpdate
-
-• `Optional` **onTimeUpdate**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1442
-
-___
-
-### onTimeUpdateCapture
-
-• `Optional` **onTimeUpdateCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1443
-
-___
-
-### onTouchCancel
-
-• `Optional` **onTouchCancel**: (`event`: *TouchEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *TouchEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *TouchEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1492
-
-___
-
-### onTouchCancelCapture
-
-• `Optional` **onTouchCancelCapture**: (`event`: *TouchEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *TouchEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *TouchEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1493
-
-___
-
-### onTouchEnd
-
-• `Optional` **onTouchEnd**: (`event`: *TouchEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *TouchEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *TouchEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1494
-
-___
-
-### onTouchEndCapture
-
-• `Optional` **onTouchEndCapture**: (`event`: *TouchEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *TouchEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *TouchEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1495
-
-___
-
-### onTouchMove
-
-• `Optional` **onTouchMove**: (`event`: *TouchEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *TouchEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *TouchEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1496
-
-___
-
-### onTouchMoveCapture
-
-• `Optional` **onTouchMoveCapture**: (`event`: *TouchEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *TouchEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *TouchEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1497
-
-___
-
-### onTouchStart
-
-• `Optional` **onTouchStart**: (`event`: *TouchEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *TouchEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *TouchEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1498
-
-___
-
-### onTouchStartCapture
-
-• `Optional` **onTouchStartCapture**: (`event`: *TouchEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *TouchEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *TouchEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1499
-
-___
-
-### onTransitionEnd
-
-• `Optional` **onTransitionEnd**: (`event`: *TransitionEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *TransitionEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *TransitionEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1540
-
-___
-
-### onTransitionEndCapture
-
-• `Optional` **onTransitionEndCapture**: (`event`: *TransitionEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *TransitionEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *TransitionEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1541
-
-___
-
-### onVolumeChange
-
-• `Optional` **onVolumeChange**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1444
-
-___
-
-### onVolumeChangeCapture
-
-• `Optional` **onVolumeChangeCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1445
-
-___
-
-### onWaiting
-
-• `Optional` **onWaiting**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1446
-
-___
-
-### onWaitingCapture
-
-• `Optional` **onWaitingCapture**: (`event`: *SyntheticEvent*<HTMLDivElement, Event\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *SyntheticEvent*<HTMLDivElement, Event\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *SyntheticEvent*<HTMLDivElement, Event\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1447
-
-___
-
-### onWheel
-
-• `Optional` **onWheel**: (`event`: *WheelEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *WheelEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *WheelEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1528
-
-___
-
-### onWheelCapture
-
-• `Optional` **onWheelCapture**: (`event`: *WheelEvent*<HTMLDivElement\>) => *void*
-
-#### Type declaration:
-
-▸ (`event`: *WheelEvent*<HTMLDivElement\>): *void*
-
-#### Parameters:
-
-Name | Type |
-:------ | :------ |
-`event` | *WheelEvent*<HTMLDivElement\> |
-
-**Returns:** *void*
-
-Defined in: node_modules/@types/react/index.d.ts:1296
-
-Defined in: node_modules/@types/react/index.d.ts:1529
-
-___
-
-### open
-
-• `Optional` **open**: *boolean*
-
-Defined in: node_modules/@types/react/index.d.ts:1882
-
-___
-
-### optimum
-
-• `Optional` **optimum**: *number*
-
-Defined in: node_modules/@types/react/index.d.ts:1883
-
-___
-
-### pattern
-
-• `Optional` **pattern**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1884
-
-___
-
-### placeholder
-
-• `Optional` **placeholder**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1885
-
-___
-
-### playsInline
-
-• `Optional` **playsInline**: *boolean*
-
-Defined in: node_modules/@types/react/index.d.ts:1886
-
-___
-
-### poster
-
-• `Optional` **poster**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1887
-
-___
-
-### prefix
-
-• `Optional` **prefix**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1778
-
-___
-
-### preload
-
-• `Optional` **preload**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1888
-
-___
-
-### property
-
-• `Optional` **property**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1779
-
-___
-
-### radioGroup
-
-• `Optional` **radioGroup**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1769
-
-___
-
-### readOnly
-
-• `Optional` **readOnly**: *boolean*
-
-Defined in: node_modules/@types/react/index.d.ts:1889
-
-___
-
-### ref
-
-• `Optional` **ref**: *LegacyRef*<HTMLDivElement\>
-
-Defined in: node_modules/@types/react/index.d.ts:145
-
-___
-
-### rel
-
-• `Optional` **rel**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1890
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/ShimmeredDetailsList.types.d.ts:28
 
 ___
 
@@ -5464,99 +1054,13 @@ Defined in: [client/pages/Projects/ProjectList/types.tsx:9](https://github.com/P
 
 ___
 
-### required
+### rowElementEventMap
 
-• `Optional` **required**: *boolean*
+• `Optional` **rowElementEventMap**: { `callback`: (`context`: IDragDropContext, `event?`: *any*) => *void* ; `eventName`: *string*  }[]
 
-Defined in: node_modules/@types/react/index.d.ts:1891
+Event names and corresponding callbacks that will be registered to rendered row elements.
 
-___
-
-### resource
-
-• `Optional` **resource**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1780
-
-___
-
-### results
-
-• `Optional` **results**: *number*
-
-Defined in: node_modules/@types/react/index.d.ts:1794
-
-___
-
-### reversed
-
-• `Optional` **reversed**: *boolean*
-
-Defined in: node_modules/@types/react/index.d.ts:1892
-
-___
-
-### role
-
-• `Optional` **role**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1772
-
-___
-
-### rowSpan
-
-• `Optional` **rowSpan**: *number*
-
-Defined in: node_modules/@types/react/index.d.ts:1894
-
-___
-
-### rows
-
-• `Optional` **rows**: *number*
-
-Defined in: node_modules/@types/react/index.d.ts:1893
-
-___
-
-### sandbox
-
-• `Optional` **sandbox**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1895
-
-___
-
-### scope
-
-• `Optional` **scope**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1896
-
-___
-
-### scoped
-
-• `Optional` **scoped**: *boolean*
-
-Defined in: node_modules/@types/react/index.d.ts:1897
-
-___
-
-### scrolling
-
-• `Optional` **scrolling**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1898
-
-___
-
-### seamless
-
-• `Optional` **seamless**: *boolean*
-
-Defined in: node_modules/@types/react/index.d.ts:1899
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:112
 
 ___
 
@@ -5566,262 +1070,183 @@ ___
 
 Search box props
 
-Defined in: [client/components/List/types.tsx:36](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L36)
-
-___
-
-### security
-
-• `Optional` **security**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1795
-
-___
-
-### selected
-
-• `Optional` **selected**: *boolean*
-
-Defined in: node_modules/@types/react/index.d.ts:1900
+Defined in: [client/components/List/types.tsx:70](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L70)
 
 ___
 
 ### selection
 
-• `Optional` **selection**: IListSelection
+• `Optional` **selection**: *ISelection*<IObjectWithKey\>
+
+Optional selection model to track selection state.
+
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:82
+
+___
+
+### selectionMode
+
+• `Optional` **selectionMode**: SelectionMode
+
+Controls how/if the details list manages selection. Options include none, single, multiple
+
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:84
+
+___
+
+### selectionPreservedOnEmptyClick
+
+• `Optional` **selectionPreservedOnEmptyClick**: *boolean*
+
+By default, selection is cleared when clicking on an empty (non-focusable) section of the screen.
+Setting this value to true overrides that behavior and maintains selection.
+
+**`defaultvalue`** false
+
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:90
+
+___
+
+### selectionProps
+
+• `Optional` **selectionProps**: *IListSelectionProps*<any\>
 
 Selection
 
-Defined in: [client/components/List/types.tsx:41](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L41)
+Defined in: [client/components/List/types.tsx:75](https://github.com/Puzzlepart/did/blob/dev/client/components/List/types.tsx#L75)
 
 ___
 
-### shape
+### selectionZoneProps
 
-• `Optional` **shape**: *string*
+• `Optional` **selectionZoneProps**: *ISelectionZoneProps*
 
-Defined in: node_modules/@types/react/index.d.ts:1901
+Addition props to pass through to the selection zone created by default.
 
-___
-
-### size
-
-• `Optional` **size**: *number*
-
-Defined in: node_modules/@types/react/index.d.ts:1902
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:94
 
 ___
 
-### sizes
+### setKey
 
-• `Optional` **sizes**: *string*
+• `Optional` **setKey**: *string*
 
-Defined in: node_modules/@types/react/index.d.ts:1903
+A key that uniquely identifies the given items. If provided, the selection will be reset when the key changes.
 
-___
-
-### slot
-
-• `Optional` **slot**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1761
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:62
 
 ___
 
-### span
+### shimmerLines
 
-• `Optional` **span**: *number*
+• `Optional` **shimmerLines**: *number*
 
-Defined in: node_modules/@types/react/index.d.ts:1904
+Number of shimmer placeholder lines to render.
 
-___
+**`defaultvalue`** 10
 
-### spellCheck
-
-• `Optional` **spellCheck**: Booleanish
-
-Defined in: node_modules/@types/react/index.d.ts:1762
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/ShimmeredDetailsList.types.d.ts:49
 
 ___
 
-### src
+### shimmerOverlayStyles
 
-• `Optional` **src**: *string*
+• `Optional` **shimmerOverlayStyles**: *IStyleFunctionOrObject*<Required<Pick<IShimmeredDetailsListProps, *theme*\>\>, IShimmeredDetailsListStyles\>
 
-Defined in: node_modules/@types/react/index.d.ts:1905
+Custom styles to override the styles specific to the ShimmeredDetailsList root area.
 
-___
+**`deprecated`** Use `styles` prop instead. Any value provided will be ignored.
 
-### srcDoc
-
-• `Optional` **srcDoc**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1906
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/ShimmeredDetailsList.types.d.ts:40
 
 ___
 
-### srcLang
+### shouldApplyApplicationRole
 
-• `Optional` **srcLang**: *string*
+• `Optional` **shouldApplyApplicationRole**: *boolean*
 
-Defined in: node_modules/@types/react/index.d.ts:1907
+Boolean value to indicate if the role application should be applied on details list. Set to false by default
 
-___
-
-### srcSet
-
-• `Optional` **srcSet**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1908
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:201
 
 ___
 
-### start
+### skipViewportMeasures
 
-• `Optional` **start**: *number*
+• `Optional` **skipViewportMeasures**: *boolean*
 
-Defined in: node_modules/@types/react/index.d.ts:1909
+Whether or not to use ResizeObserver (if available) to detect
+and measure viewport on 'resize' events.
 
-___
+Falls back to window 'resize' event.
 
-### step
+**`defaultvalue`** false
 
-• `Optional` **step**: *string* \| *number*
-
-Defined in: node_modules/@types/react/index.d.ts:1910
-
-___
-
-### style
-
-• `Optional` **style**: *CSSProperties*
-
-Defined in: node_modules/@types/react/index.d.ts:1763
+Defined in: node_modules/office-ui-fabric-react/lib/utilities/decorators/withViewport.d.ts:34
 
 ___
 
-### summary
+### styles
 
-• `Optional` **summary**: *string*
+• `Optional` **styles**: *IStyleFunctionOrObject*<Required<Pick<IShimmeredDetailsListProps, *theme*\>\>, IShimmeredDetailsListStyles\>
 
-Defined in: node_modules/@types/react/index.d.ts:1911
+Custom styles to override the styles specific to the ShimmeredDetailsList root area.
 
-___
-
-### suppressContentEditableWarning
-
-• `Optional` **suppressContentEditableWarning**: *boolean*
-
-Defined in: node_modules/@types/react/index.d.ts:1747
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/ShimmeredDetailsList.types.d.ts:44
 
 ___
 
-### suppressHydrationWarning
+### theme
 
-• `Optional` **suppressHydrationWarning**: *boolean*
+• `Optional` **theme**: ITheme
 
-Defined in: node_modules/@types/react/index.d.ts:1748
+Theme provided by the Higher Order Component
 
-___
-
-### tabIndex
-
-• `Optional` **tabIndex**: *number*
-
-Defined in: node_modules/@types/react/index.d.ts:1764
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:51
 
 ___
 
-### target
+### useFastIcons
 
-• `Optional` **target**: *string*
+• `Optional` **useFastIcons**: *boolean*
 
-Defined in: node_modules/@types/react/index.d.ts:1912
+Whether to use fast icon and check components. The icons can't be targeted by customization
+but are still customizable via class names.
 
-___
+**`defaultvalue`** true
 
-### title
-
-• `Optional` **title**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1765
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:261
 
 ___
 
-### translate
+### usePageCache
 
-• `Optional` **translate**: *yes* \| *no*
+• `Optional` **usePageCache**: *boolean*
 
-Defined in: node_modules/@types/react/index.d.ts:1766
+Whether to enable render page caching. This is an experimental performance optimization that is off by default.
 
-___
+**`defaultvalue`** false
 
-### type
-
-• `Optional` **type**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1913
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:213
 
 ___
 
-### typeof
+### useReducedRowRenderer
 
-• `Optional` **typeof**: *string*
+• `Optional` **useReducedRowRenderer**: *boolean*
 
-Defined in: node_modules/@types/react/index.d.ts:1781
+Rerender DetailsRow only when props changed. Might cause regression when depending on external updates.
 
-___
+**`defaultvalue`** false
 
-### unselectable
-
-• `Optional` **unselectable**: *on* \| *off*
-
-Defined in: node_modules/@types/react/index.d.ts:1796
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:242
 
 ___
 
-### useMap
+### viewport
 
-• `Optional` **useMap**: *string*
+• `Optional` **viewport**: IViewport
 
-Defined in: node_modules/@types/react/index.d.ts:1914
+Viewport, provided by the withViewport decorator.
 
-___
-
-### value
-
-• `Optional` **value**: *string* \| *number* \| *string*[]
-
-Defined in: node_modules/@types/react/index.d.ts:1915
-
-___
-
-### vocab
-
-• `Optional` **vocab**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1782
-
-___
-
-### width
-
-• `Optional` **width**: *string* \| *number*
-
-Defined in: node_modules/@types/react/index.d.ts:1916
-
-___
-
-### wmode
-
-• `Optional` **wmode**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1917
-
-___
-
-### wrap
-
-• `Optional` **wrap**: *string*
-
-Defined in: node_modules/@types/react/index.d.ts:1918
+Defined in: node_modules/office-ui-fabric-react/lib/components/DetailsList/DetailsList.types.d.ts:171

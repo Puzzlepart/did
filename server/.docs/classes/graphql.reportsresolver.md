@@ -58,7 +58,7 @@ Name | Type |
 
 **Returns:** *Promise*<[*TimesheetPeriodObject*](graphql.timesheetperiodobject.md)[]\>
 
-Defined in: [server/graphql/resolvers/reports/index.ts:64](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L64)
+Defined in: [server/graphql/resolvers/reports/index.ts:65](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L65)
 
 ___
 
@@ -70,7 +70,7 @@ Get forecast report
 
 **Returns:** *Promise*<[*TimeEntry*](graphql.timeentry.md)[]\>
 
-Defined in: [server/graphql/resolvers/reports/index.ts:80](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L80)
+Defined in: [server/graphql/resolvers/reports/index.ts:81](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L81)
 
 ___
 
@@ -90,7 +90,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*TimeEntry*](graphql.timeentry.md)[]\>
 
-Defined in: [server/graphql/resolvers/reports/index.ts:49](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L49)
+Defined in: [server/graphql/resolvers/reports/index.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L50)
 
 ___
 
@@ -109,4 +109,4 @@ Name | Type |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/graphql/resolvers/reports/index.ts:94](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L94)
+Defined in: [server/graphql/resolvers/reports/index.ts:95](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/index.ts#L95)

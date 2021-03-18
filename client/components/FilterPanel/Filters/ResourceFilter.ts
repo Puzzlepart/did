@@ -28,13 +28,13 @@ export class ResourceFilter<
   }
 
   /**
-   * Intialize the ResourceFilter
+   * Intialize the `ResourceFilter`
    *
-   * @param items - Items
+   * @param items_ - Items
    */
-  public initialize(items: ItemType[]): IFilter {
-    const _items = unique(
-      items.map((item_) => ({
+  public initialize(items_: ItemType[]): IFilter {
+    const items = unique(
+      items_.map((item_) => ({
         key: getValue(item_, this.keyFieldName, null),
         value: getValue(item_, this.valueFieldName, null)
       })),
@@ -47,10 +47,8 @@ export class ResourceFilter<
     return {
       key: this.keyFieldName,
       name: this.name,
-      items: _items,
-      selected: _items.filter((index) =>
-        contains(this._selectedKeys, index.key)
-      )
+      items,
+      selected: items.filter((index) => contains(this._selectedKeys, index.key))
     }
   }
 

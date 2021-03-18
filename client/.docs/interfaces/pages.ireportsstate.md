@@ -42,7 +42,7 @@ ___
 
 ### groupBy
 
-• `Optional` **groupBy**: IListGroups
+• `Optional` **groupBy**: IListGroupProps
 
 Group by properties
 
