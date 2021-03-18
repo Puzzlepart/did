@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { IListGroups } from 'components/List/types'
+import { IListGroupProps } from 'components/List/types'
 import { TFunction } from 'i18next'
 import { IContextualMenuItem } from 'office-ui-fabric-react'
 import { Project, TimesheetPeriodObject, User } from 'types'
@@ -30,7 +30,7 @@ export interface IReportsQuery extends IContextualMenuItem {
  * @ignore
  */
 export interface IGroupByOption extends IContextualMenuItem {
-  props: IListGroups
+  props: IListGroupProps
 }
 
 /**
@@ -92,7 +92,7 @@ export interface IReportsState {
   /**
    * Group by properties
    */
-  groupBy?: IListGroups
+  groupBy?: IListGroupProps
 
   /**
    * Loading

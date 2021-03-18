@@ -20,8 +20,7 @@ export const SummaryView = (): JSX.Element => {
           hidden={!state.loading && isEmpty(rows)}
           enableShimmer={state.loading}
           columns={columns}
-          items={rows}
-        />
+          items={rows} />
         <UserMessage
           hidden={!isEmpty(rows) || state.loading}
           text={t('admin.noTimeEntriesText')}

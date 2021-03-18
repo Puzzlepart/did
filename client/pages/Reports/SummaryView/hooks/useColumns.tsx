@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import DateUtils from 'DateUtils'
 import { IColumn } from 'office-ui-fabric-react'
 import React, { useContext, useMemo } from 'react'
 import { User } from 'types'
@@ -25,15 +26,22 @@ export function useColumns(): IColumn[] {
       }
     ]
     columns.push(
-      ...periods.map((p) => ({
-        key: p.join('_'),
-        fieldName: p.join('_'),
-        name: p.join('/'),
-        minWidth: 100,
-        onRender: (item: any, _index: number, column: IColumn) => (
-          <WeekColumn user={item.user} periods={item[column.fieldName]} />
-        )
-      }))
+      ...periods.map((p) => {
+        const [week, year] = p
+        return {
+          key: p.join('_'),
+          fieldName: p.join('_'),
+          name: DateUtils.getTimespanString({
+            week,
+            year,
+            monthFormat: 'MMM'
+          }),
+          minWidth: 100,
+          onRender: (item: any, _index: number, column: IColumn) => (
+            <WeekColumn user={item.user} periods={item[column.fieldName]} />
+          )
+        } as IColumn
+      })
     )
     return columns
   }, [periods])
