@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ApiTokenInput } from 'types'
 import $addApiToken from './addApiToken.gql'
+import { useExpiryOptions } from './useExpiryOptions'
 
 /**
  * Component logic hook for `<ApiTokenForm />`
@@ -34,17 +35,12 @@ export function useApiTokenForm({ onAdded }) {
     setToken({ ...token, permissions })
   }
 
-  const EXPIRY_OPTIONS = {
-    '1month': t('admin.apiTokens.oneMonth'),
-    '3month': t('admin.apiTokens.monthPlural', { months: 3 }),
-    '1year': t('admin.apiTokens.oneYear'),
-    '30year': t('admin.apiTokens.neverExpiresText')
-  }
+  const expiryOptions = useExpiryOptions()
 
   return {
     token,
     setToken,
-    EXPIRY_OPTIONS,
+    expiryOptions,
     permissions,
     onAddApiToken,
     togglePermission

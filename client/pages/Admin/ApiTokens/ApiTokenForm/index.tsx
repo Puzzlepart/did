@@ -23,7 +23,7 @@ export const ApiTokenForm = ({
   const {
     token,
     setToken,
-    EXPIRY_OPTIONS,
+    expiryOptions,
     permissions,
     onAddApiToken,
     togglePermission
@@ -53,10 +53,10 @@ export const ApiTokenForm = ({
               expires: new DateObject().add(data).jsDate
             })
           }
-          options={Object.keys(EXPIRY_OPTIONS).map((key) => ({
+          options={Object.keys(expiryOptions).map((key) => ({
             key,
             data: key,
-            text: EXPIRY_OPTIONS[key]
+            text: expiryOptions[key]
           }))}
         />
       </div>
