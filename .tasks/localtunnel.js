@@ -18,5 +18,5 @@ async function setupLocalTunnel(subdomain) {
 setupLocalTunnel(process.env.LOCALTUNNEL_SUBDOMAIN).then(url => {
     if (!url) return
     log('Tunnel active at %s', url)
-    fs.writeFileSync('.localtunnel', `${url}/auth/callback`)
+    fs.writeFileSync('.localtunnel', `${url}/auth/azuread-openidconnect/callback`)
 })
