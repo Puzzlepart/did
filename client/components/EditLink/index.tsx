@@ -8,12 +8,14 @@ import { IEditLinkProps } from './types'
 /**
  * @category Function Component
  */
-export const EditLink = ({ iconName, hidden, onClick }: IEditLinkProps) => {
+export const EditLink = (props: IEditLinkProps) => {
   const { t } = useTranslation()
   return (
-    <div hidden={hidden}>
-      <Link className={styles.root} onClick={onClick}>
-        {iconName && <Icon className={styles.icon} iconName={iconName} />}
+    <div {...props}>
+      <Link className={styles.root} onClick={props.onClick}>
+        {props.iconName && (
+          <Icon className={styles.icon} iconName={props.iconName} />
+        )}
         <span className={styles.text}>{t('common.editLabel')}</span>
       </Link>
     </div>

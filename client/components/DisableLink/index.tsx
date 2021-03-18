@@ -11,12 +11,13 @@ import { IDisableLinkProps } from './types'
 export const DisableLink = ({
   iconName = 'EmojiDisappointed',
   hidden,
+  style,
   disabled,
   onClick
 }: IDisableLinkProps) => {
   const { t } = useTranslation()
   return (
-    <div hidden={hidden} style={{ opacity: disabled ? 0.2 : 1 }}>
+    <div hidden={hidden} style={{ ...style, opacity: disabled ? 0.2 : 1 }}>
       <Link className={styles.root} onClick={onClick} disabled={disabled}>
         {iconName && <Icon className={styles.icon} iconName={iconName} />}
         <span className={styles.text}>{t('common.disable')}</span>
