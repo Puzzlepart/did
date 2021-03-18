@@ -43,7 +43,7 @@ export class LabelResolver {
    * @param label - Label
    * @param update - Update
    */
-  // @Authorized<IAuthOptions>({ userContext: true })
+  @Authorized<IAuthOptions>({ userContext: true })
   @Mutation(() => BaseResult, { description: 'Add or update label' })
   async addOrUpdateLabel(
     @Arg('label', () => LabelInput) label: LabelInput,

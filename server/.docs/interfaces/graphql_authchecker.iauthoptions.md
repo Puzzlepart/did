@@ -8,18 +8,18 @@
 
 ### Properties
 
-- [permission](graphql_authchecker.iauthoptions.md#permission)
+- [scope](graphql_authchecker.iauthoptions.md#scope)
 - [userContext](graphql_authchecker.iauthoptions.md#usercontext)
 
 ## Properties
 
-### permission
+### scope
 
-• `Optional` **permission**: *string*
+• `Optional` **scope**: PermissionScope
 
-Permission required for the resolver
+Permission scope required for the resolver
 
-Defined in: [server/graphql/authChecker.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/graphql/authChecker.ts#L14)
+Defined in: [server/graphql/authChecker.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/graphql/authChecker.ts#L15)
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 Requires user context and can cannot be called with an API token
 
-Defined in: [server/graphql/authChecker.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/graphql/authChecker.ts#L9)
+Defined in: [server/graphql/authChecker.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/graphql/authChecker.ts#L10)

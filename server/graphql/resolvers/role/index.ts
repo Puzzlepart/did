@@ -1,9 +1,8 @@
 /* eslint-disable tsdoc/syntax */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-empty-function */
 import 'reflect-metadata'
 import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { Service } from 'typedi'
+import { PermissionScope } from '../../../../shared/config/security'
 import { RoleService } from '../../../services/mongo'
 import { IAuthOptions } from '../../authChecker'
 import { BaseResult } from '../types'
@@ -44,7 +43,7 @@ export class RoleResolver {
    * @param role - Role
    * @param update - Update
    */
-  @Authorized<IAuthOptions>({ permission: 'cd52a735' })
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_ROLESPERMISSIONS })
   @Mutation(() => BaseResult, { description: 'Add or update role' })
   async addOrUpdateRole(
     @Arg('role', () => RoleInput) role: RoleInput,
@@ -59,7 +58,7 @@ export class RoleResolver {
    *
    * @param name - Name
    */
-  @Authorized<IAuthOptions>({ permission: 'cd52a735' })
+  @Authorized<IAuthOptions>({ scope: PermissionScope.MANAGE_ROLESPERMISSIONS })
   @Mutation(() => BaseResult, { description: 'Delete role' })
   async deleteRole(@Arg('name', () => String) name: string) {
     await this._role.deleteRole(name)

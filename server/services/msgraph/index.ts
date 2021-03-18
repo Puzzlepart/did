@@ -38,6 +38,8 @@ class MSGraphService {
 
   /**
    * Gets a Microsoft Graph Client using the auth token from the class
+   *
+   * @memberof MSGraphService
    */
   private async _getClient(): Promise<MSGraphClient> {
     this._access_token = (
@@ -55,6 +57,8 @@ class MSGraphService {
    * Get current user properties
    *
    * @param properties - Properties to retrieve
+   *
+   * @memberof MSGraphService
    */
   async getCurrentUser(properties: string[]): Promise<any> {
     try {
@@ -68,6 +72,8 @@ class MSGraphService {
 
   /**
    * Get Azure Active Directory users
+   *
+   * @memberof MSGraphService
    */
   public getUsers(): Promise<any> {
     try {
@@ -104,6 +110,8 @@ class MSGraphService {
    * Create Outlook category
    *
    * @param category - Category
+   *
+   * @memberof MSGraphService
    */
   public async createOutlookCategory(
     category: string
@@ -130,6 +138,8 @@ class MSGraphService {
 
   /**
    * Get Outlook categories
+   *
+   * @memberof MSGraphService
    */
   public getOutlookCategories(): Promise<any[]> {
     try {
@@ -153,6 +163,8 @@ class MSGraphService {
    *
    * @param startDateTimeIso - Start date time in `ISO format`
    * @param endDateTimeIso - End date time in `ISO format`
+   *
+   * @memberof MSGraphService
    */
   public async getEvents(
     startDateTimeIso: string,
