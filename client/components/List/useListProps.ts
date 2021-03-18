@@ -37,17 +37,19 @@ export function useListProps({
   groups,
   items
 }: UseListProps): IListProps {
+  const columns = filter(props.columns, (col) => {
+    const groupBy = props.listGroupProps?.fieldName
+    if (col.data?.hidden) return false
+    if (groupBy && col.fieldName === groupBy) return false
+    return true
+  })
   return {
     getKey: (_item, index) => `list_item_${index}`,
     setKey: 'list',
     enableShimmer: props.enableShimmer,
     isPlaceholderData: props.enableShimmer,
     selection,
-    columns: filter(
-      props.columns,
-      (col) =>
-        !col.data?.hidden && col.fieldName !== props.listGroupProps?.fieldName
-    ),
+    columns,
     items,
     groups,
     selectionMode: props.selectionProps
