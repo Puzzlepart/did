@@ -3,3 +3,4 @@
 
 npm run lint:fix
 npx @appnest/readme generate
+npx @appnest/readme generate --config .changelog/blueprint.json
