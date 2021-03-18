@@ -1,7 +1,6 @@
 import { useMutation } from '@apollo/client'
-import * as security from 'config/security'
-import { useMemo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import { usePermissions } from 'hooks'
+import { useState } from 'react'
 import { ApiTokenInput } from 'types'
 import $addApiToken from './addApiToken.gql'
 import { useExpiryOptions } from './useExpiryOptions'
@@ -10,17 +9,13 @@ import { useExpiryOptions } from './useExpiryOptions'
  * Component logic hook for `<ApiTokenForm />`
  */
 export function useApiTokenForm({ onAdded }) {
-  const { t } = useTranslation()
   const [addApiToken] = useMutation($addApiToken)
   const [token, setToken] = useState<ApiTokenInput>({
     name: '',
     expires: null,
     permissions: []
   })
-  const permissions = useMemo(
-    () => security.permissions(t).filter((p) => p.api),
-    [t]
-  )
+  const { permissions } = usePermissions(null, true)
 
   async function onAddApiToken() {
     const { data } = await addApiToken({ variables: { token } })

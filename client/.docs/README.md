@@ -9,7 +9,6 @@ did-client - v0.9.9
 - [.](modules/_.md)
 - [App](modules/app.md)
 - [Components](modules/components.md)
-- [Configuration](modules/configuration.md)
 - [GraphQL](modules/graphql.md)
 - [Helpers](modules/helpers.md)
 - [Hooks](modules/hooks.md)

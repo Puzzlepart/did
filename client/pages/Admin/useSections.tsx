@@ -1,9 +1,9 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { PERMISSION } from 'config/security/permissions'
 import { usePermissions } from 'hooks'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { PermissionScope } from 'security'
 import { IPageSectionComponent } from '../types'
 import { ApiTokens } from './ApiTokens'
 import { Labels } from './Labels'
@@ -23,7 +23,7 @@ export function useSections() {
         itemKey: 'users',
         headerText: t('admin.users'),
         itemIcon: 'FabricUserFolder',
-        hidden: !hasPermission(PERMISSION.MANAGE_USERS),
+        hidden: !hasPermission(PermissionScope.MANAGE_USERS),
         component: <Users />
       },
       {
@@ -36,14 +36,14 @@ export function useSections() {
         itemKey: 'rolesPermissions',
         headerText: t('admin.rolesPermissions'),
         itemIcon: 'SecurityGroup',
-        hidden: !hasPermission(PERMISSION.MANAGE_ROLESPERMISSIONS),
+        hidden: !hasPermission(PermissionScope.MANAGE_ROLESPERMISSIONS),
         component: <Roles />
       },
       {
         itemKey: 'subscription',
         headerText: t('admin.subscriptionSettings'),
         itemIcon: 'Subscribe',
-        hidden: !hasPermission(PERMISSION.MANAGE_SUBSCRIPTION),
+        hidden: !hasPermission(PermissionScope.MANAGE_SUBSCRIPTION),
         component: <SubscriptionSettings />
       },
       {

@@ -1,7 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client'
-import * as security from 'config/security'
+import { usePermissions } from 'hooks'
 import { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { RoleInput } from 'types'
 import { isEmpty, isEqual, omit } from 'underscore'
 import $addOrUpdateRole from './addOrUpdateRole.gql'
@@ -9,7 +8,6 @@ import $deleteRole from './deleteRole.gql'
 import $users from './users.gql'
 
 export function useRolePanel({ props }) {
-  const { t } = useTranslation()
   const { data } = useQuery($users, {
     variables: {
       query: {
@@ -21,7 +19,7 @@ export function useRolePanel({ props }) {
   const [addOrUpdateRole] = useMutation($addOrUpdateRole)
   const [deleteRole] = useMutation($deleteRole)
   const [model, setModel] = useState<RoleInput>({})
-  const permissions = security.permissions(t)
+  const { permissions } = usePermissions()
   const saveDisabled =
     isEmpty(model.name) ||
     isEmpty(model.icon) ||

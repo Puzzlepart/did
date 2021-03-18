@@ -43,6 +43,7 @@ Reusable React Function components.
 
 ### Other Interfaces
 
+- [IColorPickerFieldProps](../interfaces/components.icolorpickerfieldprops.md)
 - [IUserColumnProps](../interfaces/components.iusercolumnprops.md)
 
 ### PermissionList Interfaces
@@ -82,6 +83,7 @@ Reusable React Function components.
 
 ### Function Component Functions
 
+- [ColorPickerField](components.md#colorpickerfield)
 - [DeleteLink](components.md#deletelink)
 - [DisableLink](components.md#disablelink)
 - [EditLink](components.md#editlink)
@@ -216,7 +218,7 @@ ___
 
 • `Const` **PermissionList**: *FunctionComponent*<[*IPermissionListProps*](../interfaces/components.ipermissionlistprops.md)\>
 
-Defined in: [client/components/PermissionList/index.tsx:11](https://github.com/Puzzlepart/did/blob/dev/client/components/PermissionList/index.tsx#L11)
+Defined in: [client/components/PermissionList/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/PermissionList/index.tsx#L12)
 
 ___
 
@@ -267,6 +269,22 @@ Renders a `<Persona />` component
 Defined in: [client/components/UserColumn/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/index.tsx#L13)
 
 ## Function Component Functions
+
+### ColorPickerField
+
+▸ `Const`**ColorPickerField**(`props`: [*IColorPickerFieldProps*](../interfaces/components.icolorpickerfieldprops.md)): *Element*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`props` | [*IColorPickerFieldProps*](../interfaces/components.icolorpickerfieldprops.md) |
+
+**Returns:** *Element*
+
+Defined in: [client/components/ColorPickerField/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/ColorPickerField/index.tsx#L12)
+
+___
 
 ### DeleteLink
 

@@ -1,5 +1,4 @@
 /* eslint-disable tsdoc/syntax */
-import { PERMISSION } from 'config/security/permissions'
 import { usePermissions } from 'hooks'
 import {
   MessageBar,
@@ -10,6 +9,7 @@ import {
 import { CustomerForm } from 'pages/Customers/CustomerForm'
 import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
+import { PermissionScope } from 'security'
 import { CustomersContext } from './context'
 import { CustomerDetails } from './CustomerDetails'
 import { CustomerList } from './CustomerList'
@@ -46,7 +46,7 @@ export const Customers: FunctionComponent = () => {
           <CustomerList />
           {state.selected && <CustomerDetails />}
         </PivotItem>
-        {hasPermission(PERMISSION.MANAGE_CUSTOMERS) && (
+        {hasPermission(PermissionScope.MANAGE_CUSTOMERS) && (
           <PivotItem
             itemID='new'
             itemKey='new'

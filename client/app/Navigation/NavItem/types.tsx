@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
-import { PERMISSION } from 'config/security'
 import { NavLinkProps } from 'react-router-dom'
+import { PermissionScope } from 'security'
 
 /**
  * @category Navigation
@@ -8,5 +8,5 @@ import { NavLinkProps } from 'react-router-dom'
 export interface INavItemProps extends NavLinkProps {
   text: string
   iconName: string
-  permission?: PERMISSION
+  permission?: PermissionScope
 }

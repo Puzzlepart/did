@@ -1,9 +1,9 @@
 /* eslint-disable tsdoc/syntax */
 import { UserMessage } from 'components/UserMessage'
-import { PERMISSION } from 'config/security/permissions'
 import { usePermissions } from 'hooks'
 import { MessageBarType, Pivot, PivotItem } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
+import { PermissionScope } from 'security'
 import { ProjectsContext } from './context'
 import { useProjects } from './hooks/useProjects'
 import { ProjectDetails } from './ProjectDetails'
@@ -61,7 +61,7 @@ export const Projects: FunctionComponent = () => {
           />
           {state.selected && <ProjectDetails />}
         </PivotItem>
-        {hasPermission(PERMISSION.MANAGE_PROJECTS) && (
+        {hasPermission(PermissionScope.MANAGE_PROJECTS) && (
           <PivotItem
             itemID='new'
             itemKey='new'

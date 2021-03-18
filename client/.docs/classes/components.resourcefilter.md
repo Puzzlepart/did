@@ -137,4 +137,4 @@ Name | Type |
 
 Overrides: [BaseFilter](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/ResourceFilter.ts:57](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/ResourceFilter.ts#L57)
+Defined in: [client/components/FilterPanel/Filters/ResourceFilter.ts:55](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/ResourceFilter.ts#L55)

@@ -1,10 +1,10 @@
-import { PERMISSION } from 'config/security'
 import { IPivotItemProps } from 'office-ui-fabric-react'
 import React from 'react'
+import { PermissionScope } from 'security'
 
 export interface IPageSectionComponent extends IPivotItemProps {
   component: JSX.Element
-  permission?: PERMISSION
+  permission?: PermissionScope
 }
 
 export interface IPageComponent extends React.HTMLAttributes<HTMLDivElement> {
@@ -12,5 +12,5 @@ export interface IPageComponent extends React.HTMLAttributes<HTMLDivElement> {
   iconName?: string
   path: string
   component: JSX.Element
-  permission?: PERMISSION
+  permission?: PermissionScope
 }

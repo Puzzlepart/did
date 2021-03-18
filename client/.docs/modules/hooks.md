@@ -93,28 +93,29 @@ ___
 
 ### usePermissions
 
-▸ **usePermissions**(`permissionIds?`: *string*[]): *object*
+▸ **usePermissions**(`scopeIds?`: *string*[], `api?`: *boolean*): *object*
 
 Permissions hook
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`permissionIds?` | *string*[] | Permission IDs    |
+Name | Type | Default value | Description |
+:------ | :------ | :------ | :------ |
+`scopeIds?` | *string*[] | - | Scopes   |
+`api` | *boolean* | false | API    |
 
 **Returns:** *object*
 
 Name | Type |
 :------ | :------ |
-`hasPermission` | (`permission`: [*PERMISSION*](../enums/configuration.permission.md)) => *boolean* |
+`hasPermission` | (`scope`: PermissionScope) => *boolean* |
 `permissions` | IPermission[] |
 
 Permissions available based on specified permissionIds
 and a function hasPermission that checks if the currently logged
 on user has the specified permission.
 
-Defined in: [client/hooks/user/usePermissions.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/usePermissions.ts#L20)
+Defined in: [client/hooks/user/usePermissions.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/hooks/user/usePermissions.ts#L21)
 
 ___
 

@@ -76,6 +76,7 @@ const config = {
   resolve: {
     alias: {
       package: path.resolve(SRC_PATH, '../package.json'),
+      security: path.resolve(__dirname, 'shared/config/security'),
       common: path.resolve(SRC_PATH, 'common'),
       components: path.resolve(SRC_PATH, 'components'),
       config: path.resolve(SRC_PATH, 'config'),
