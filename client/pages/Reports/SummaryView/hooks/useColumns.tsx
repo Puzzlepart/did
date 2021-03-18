@@ -1,9 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import DateUtils from 'DateUtils'
-import { IColumn } from 'office-ui-fabric-react'
+import {
+  IColumn,
+  IDetailsColumnRenderTooltipProps
+} from 'office-ui-fabric-react'
 import React, { useContext, useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { User } from 'types'
 import { ReportsContext } from '../../context'
+import { ColumnHeader } from '../ColumnHeader'
 import { UserColumn } from '../UserColumn'
 import { WeekColumn } from '../WeekColumn'
 
@@ -11,6 +16,7 @@ import { WeekColumn } from '../WeekColumn'
  * Columns hook for SummaryView
  */
 export function useColumns(): IColumn[] {
+  const { t } = useTranslation()
   const { state } = useContext(ReportsContext)
   const periods: any[] = state.preset?.periods || []
   return useMemo(() => {
@@ -31,27 +37,19 @@ export function useColumns(): IColumn[] {
         return {
           key: p.join('_'),
           fieldName: p.join('_'),
-          name: DateUtils.getTimespanString({
-            week,
-            year,
-            monthFormat: 'MMM'
-          }),
+          name: t('common.weekColumnTooltipTitle', { week: p.join('/') }),
           minWidth: 100,
           onRender: (item: any, _index: number, column: IColumn) => (
             <WeekColumn user={item.user} periods={item[column.fieldName]} />
           ),
           data: {
-            onRenderColumnHeader: () => (
-              <div>
-                <div>{p.join('_')}</div>
-                <div>
-                  {DateUtils.getTimespanString({
-                    week,
-                    year,
-                    monthFormat: 'MMM'
-                  })}
-                </div>
-              </div>
+            subText: DateUtils.getTimespanString({
+              week,
+              year,
+              monthFormat: 'MMM'
+            }),
+            onRenderColumnHeader: (props: IDetailsColumnRenderTooltipProps) => (
+              <ColumnHeader {...props} />
             )
           }
         } as IColumn
