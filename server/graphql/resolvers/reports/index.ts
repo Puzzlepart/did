@@ -32,6 +32,7 @@ export class ReportsResolver {
    *
    * @param _report - Report service
    */
+  // eslint-disable-next-line unicorn/empty-brace-spaces
   constructor(private readonly _report: ReportService) {}
 
   /**
@@ -42,7 +43,7 @@ export class ReportsResolver {
    * @param sortAsc - Sort ascending
    * @param ctx - GraphQL context
    */
-  @Authorized<IAuthOptions>()
+  @Authorized<IAuthOptions>([{ permission: 'a031c42f' }])
   @Query(() => [TimeEntry], {
     description: 'Get a preset report, or use custom filters.'
   })
@@ -57,7 +58,7 @@ export class ReportsResolver {
   /**
    * Get confirmed periods matching the specified queries
    */
-  @Authorized<IAuthOptions>()
+  @Authorized<IAuthOptions>([{ permission: 'a031c42f' }])
   @Query(() => [TimesheetPeriodObject], {
     description: 'Get confirmed periods matching the specified queries.'
   })
@@ -73,7 +74,7 @@ export class ReportsResolver {
    *
    * @param query - Query
    */
-  @Authorized<IAuthOptions>()
+  @Authorized<IAuthOptions>([{ permission: 'a031c42f' }])
   @Query(() => [TimeEntry], {
     description: 'Get forecast report using custom filters.'
   })

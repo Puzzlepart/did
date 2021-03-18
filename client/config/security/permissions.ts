@@ -73,7 +73,8 @@ export default (t: TFunction): IPermission[] => [
   {
     id: PERMISSION.ACCESS_REPORTS,
     name: t('permissions.accessReports'),
-    description: t('permissions.accessReportsDescription')
+    description: t('permissions.accessReportsDescription'),
+    api: true
   },
   {
     id: PERMISSION.MANAGE_PROJECTS,
