@@ -6,14 +6,13 @@ import { useColumns } from './useColumns'
 import { useRows } from './useRows'
 
 /**
- * Hook for SummaryView
+ * Component logic hook for SummaryView
  *
  * @category SummaryView
  */
-export function useSummaryView({ onColumnRender }) {
+export function useSummaryView() {
   const { state } = useContext(ReportsContext)
-  const columns = useColumns({ onRender: onColumnRender })
-
+  const columns = useColumns()
   const rows = useRows(state)
 
   return {

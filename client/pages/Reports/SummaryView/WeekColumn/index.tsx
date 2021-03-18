@@ -1,7 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { TooltipHost } from 'office-ui-fabric-react'
 import React, { FunctionComponent, useRef } from 'react'
-import { useTranslation } from 'react-i18next'
 import { IWeekColumnProps } from './types'
 import { useWeekColumn } from './useWeekColumn'
 import styles from './WeekColumn.module.scss'
@@ -13,7 +12,6 @@ import { WeekColumnTooltip } from './WeekColumnTooltip'
 export const WeekColumn: FunctionComponent<IWeekColumnProps> = (
   props: IWeekColumnProps
 ) => {
-  const { t } = useTranslation()
   const target = useRef()
   const hours = useWeekColumn(props)
   if (hours.total === null) {
@@ -30,7 +28,7 @@ export const WeekColumn: FunctionComponent<IWeekColumnProps> = (
       }}>
       <div className={styles.root}>
         <span ref={target}>
-          {t('common.hoursShortFormat', { hours: hours.total.toFixed(0) })}
+          {hours.total.toFixed(0)}
         </span>
       </div>
     </TooltipHost>

@@ -1,23 +1,17 @@
 /* eslint-disable tsdoc/syntax */
 import { List, UserMessage } from 'components'
-import { IColumn } from 'office-ui-fabric-react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from 'underscore'
 import { useSummaryView } from './hooks/useSummaryView'
 import styles from './SummaryView.module.scss'
-import { WeekColumn } from './WeekColumn'
 
 /**
  * @category Function Component
  */
 export const SummaryView = (): JSX.Element => {
   const { t } = useTranslation()
-  const { state, rows, columns } = useSummaryView({
-    onColumnRender: (item: any, _index: number, column: IColumn) => (
-      <WeekColumn user={item.user} periods={item[column.fieldName]} />
-    )
-  })
+  const { state, rows, columns } = useSummaryView()
 
   return (
     <div className={styles.root}>
