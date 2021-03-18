@@ -11,6 +11,32 @@ import {
   SelectionMode
 } from 'office-ui-fabric-react'
 
+export interface IListColumnData {
+  /**
+   * Hidden column
+   */
+  hidden?: boolean
+
+  /**
+   * Optional sub text
+   */
+  subText?: string
+
+  /**
+   * Callback to render a tooltip for the column header
+   */
+  onRenderColumnHeader?: (
+    props: IDetailsColumnRenderTooltipProps
+  ) => JSX.Element
+}
+
+export interface IListColumn<T = IListColumnData> extends IColumn {
+  /**
+   * Data for the column - `IListColumnData`
+   */
+  data?: T
+}
+
 export interface IListProps<T = any> extends IShimmeredDetailsListProps {
   /**
    * Items
@@ -20,7 +46,7 @@ export interface IListProps<T = any> extends IShimmeredDetailsListProps {
   /**
    * Columns
    */
-  columns?: IColumn[]
+  columns?: IListColumn[]
 
   /**
    * Enable shimmer (normally while loading)
@@ -112,10 +138,9 @@ export interface IListState<T = any> {
   items?: T[]
 }
 
-export interface IListSelectionProps {
+export interface IListSelectionProps<T = any> {
   mode: SelectionMode
-  defaultSelectedKey?: string
-  onChanged: (selected: any) => void
+  onChanged: (selected: T) => void
 }
 
 export interface IListGroupProps {
