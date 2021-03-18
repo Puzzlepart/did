@@ -14,6 +14,7 @@ export const IgnoreEventButton = ({
     <MessageBarButton
       text={t('timesheet.ignoreEventButtonLabel')}
       iconProps={{ iconName: 'Blocked2' }}
-      onClick={() => dispatch(IGNORE_EVENT({ id: event.id }))} />
+      onClick={() => dispatch(IGNORE_EVENT({ id: event.id }))}
+    />
   )
 }

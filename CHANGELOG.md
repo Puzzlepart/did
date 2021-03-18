@@ -34,6 +34,7 @@ d this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 - Issue with time entry queries in Reports #790
 - Issue with navigating to a customer from e.g. Timesheet #791
 - Issue with navigating directly to a page when not logged in #889
+- Consistent ignore/match buttons across devices in Timesheet #894
 
 ### Changed
 - Consolidated Server and Client date utils #771

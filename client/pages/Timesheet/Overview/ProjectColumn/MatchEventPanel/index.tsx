@@ -8,18 +8,16 @@ import { useMatchEventPanel } from './useMatchEventPanel'
 
 export const MatchEventPanel = ({ event }: IMatchEventPanelProps) => {
   const { t } = useTranslation()
-  const {
-    isPanelOpen,
-    showPanel,
-    hidePanel,
-    onMatch
-  } = useMatchEventPanel(event)
+  const { isPanelOpen, showPanel, hidePanel, onMatch } = useMatchEventPanel(
+    event
+  )
   return (
     <>
       <MessageBarButton
         text={t('timesheet.resolveProjectButtonLabel')}
         iconProps={{ iconName: 'PenWorkspace' }}
-        onClick={showPanel} />
+        onClick={showPanel}
+      />
       <Panel
         isOpen={isPanelOpen}
         isLightDismiss={true}
