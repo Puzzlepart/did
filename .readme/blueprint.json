@@ -1,7 +1,7 @@
 {
   "package": "package.json",
-  "blueprint": "README.blueprint",
-  "input": "README.blueprint",
+  "blueprint": ".readme/README.md",
+  "input": ".readme/README.md",
   "output": "README.md",
   "text": "Keep your calendar up-to-date with what you work on, and that's it. You're done.",
   "logo": {

@@ -16,9 +16,6 @@
     "README.md": true,
     "CHANGELOG.md": true
   },
-  "files.associations": {
-    "_CHANGELOG": "markdown"
-  },
   "typescript.autoClosingTags": false,
   "javascript.validate.enable": false,
   "i18n-ally.localesPaths": "./client/i18n",

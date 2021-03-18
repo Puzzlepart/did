@@ -1,7 +1,7 @@
 {
   "package": "package.json",
-  "blueprint": "_CHANGELOG",
-  "input": "_CHANGELOG",
+  "blueprint": ".changelog/CHANGELOG.md",
+  "input": ".changelog/CHANGELOG.md",
   "output": "CHANGELOG.md",
   "placeholder": ["[[", "]]"],
   "documentationConfig": {
