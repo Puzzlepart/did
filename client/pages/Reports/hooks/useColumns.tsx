@@ -6,7 +6,6 @@ import { ProjectLink } from 'components/ProjectLink'
 import DateUtils from 'DateUtils'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ExcelColumnType } from 'utils/exportExcel'
 import { UserColumn } from '../SummaryView/UserColumn'
 
 /**
@@ -23,13 +22,15 @@ export function useColumns({ defaults }) {
           key: 'title',
           fieldName: 'title',
           name: t('common.titleLabel'),
-          minWidth: 100
+          minWidth: 100,
+          maxWidth: 150
         } as IListColumn,
         {
           key: 'project',
           fieldName: 'project.name',
           name: t('common.project'),
           minWidth: 100,
+          maxWidth: 140,
           onRender: ({ project }) => <ProjectLink project={project} />
         } as IListColumn,
         {
@@ -37,20 +38,22 @@ export function useColumns({ defaults }) {
           fieldName: 'customer.name',
           name: t('common.customer'),
           minWidth: 100,
+          maxWidth: 140,
           onRender: ({ customer }) => <CustomerLink customer={customer} />
         } as IListColumn,
         {
           key: 'duration',
           fieldName: 'duration',
           name: t('common.durationLabel'),
-          minWidth: 100
+          minWidth: 60,
+          maxWidth: 60
         } as IListColumn,
         {
           key: 'startDateTime',
           fieldName: 'startDateTime',
           name: t('common.startTimeLabel'),
-          minWidth: 100,
-          data: { excelColFormat: 'date' as ExcelColumnType },
+          minWidth: 125,
+          data: { excelColFormat: 'date' },
           onRender: ({ startDateTime }) =>
             DateUtils.formatDate(startDateTime, 'MMM DD, YYYY HH:mm')
         } as IListColumn,
@@ -58,8 +61,8 @@ export function useColumns({ defaults }) {
           key: 'endDateTime',
           fieldName: 'endDateTime',
           name: t('common.endTimeLabel'),
-          minWidth: 100,
-          data: { excelColFormat: 'date' as ExcelColumnType },
+          minWidth: 125,
+          data: { excelColFormat: 'date' },
           onRender: ({ endDateTime }) =>
             DateUtils.formatDate(endDateTime, 'MMM DD, YYYY HH:mm')
         } as IListColumn,
@@ -95,13 +98,15 @@ export function useColumns({ defaults }) {
           key: 'week',
           fieldName: 'week',
           name: t('common.weekLabel'),
-          minWidth: 100
+          minWidth: 40,
+          maxWidth: 40
         } as IListColumn,
         {
           key: 'month',
           fieldName: 'month',
           name: t('common.monthLabel'),
-          minWidth: 100,
+          minWidth: 60,
+          maxWidth: 60,
           onRender: ({ month }) => DateUtils.getMonthNames()[month - 1]
         } as IListColumn,
         {

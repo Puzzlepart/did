@@ -17,13 +17,13 @@ import { ListGroupHeader } from './ListGroupHeader'
 import { onRenderListHeader } from './ListHeader/onRenderListHeader'
 import { IListProps, IListState } from './types'
 
-type UseListProps = {
+type UseListProps<T = any> = {
   props: IListProps
   state: IListState
   dispatch: React.Dispatch<AnyAction>
   selection: Selection<IObjectWithKey>
   groups: IGroup[]
-  items: any[]
+  items: T[]
 }
 
 /**

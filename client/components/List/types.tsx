@@ -10,6 +10,7 @@ import {
   IShimmeredDetailsListProps,
   SelectionMode
 } from 'office-ui-fabric-react'
+import { ExcelColumnType } from 'utils/exportExcel'
 
 export interface IListColumnData {
   /**
@@ -21,6 +22,11 @@ export interface IListColumnData {
    * Optional sub text
    */
   subText?: string
+
+  /**
+   * Excel column format
+   */
+  excelColFormat?: ExcelColumnType
 
   /**
    * Callback to render a tooltip for the column header
