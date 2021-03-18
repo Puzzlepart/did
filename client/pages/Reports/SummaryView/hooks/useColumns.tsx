@@ -39,7 +39,21 @@ export function useColumns(): IColumn[] {
           minWidth: 100,
           onRender: (item: any, _index: number, column: IColumn) => (
             <WeekColumn user={item.user} periods={item[column.fieldName]} />
-          )
+          ),
+          data: {
+            onRenderColumnHeader: () => (
+              <div>
+                <div>{p.join('_')}</div>
+                <div>
+                  {DateUtils.getTimespanString({
+                    week,
+                    year,
+                    monthFormat: 'MMM'
+                  })}
+                </div>
+              </div>
+            )
+          }
         } as IColumn
       })
     )

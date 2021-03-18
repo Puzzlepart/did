@@ -88,6 +88,11 @@ export interface IListProps<T = any> extends IShimmeredDetailsListProps {
    * Hidden
    */
   hidden?: boolean
+
+  /**
+   * Overriding class name for header
+   */
+  headerClassName?: string
 }
 
 export interface IListState<T = any> {

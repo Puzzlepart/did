@@ -61,7 +61,7 @@ export function useListProps({
       onRenderListHeader({
         headerProps: {
           ...headerProps,
-          onRenderColumnHeaderTooltip: props.onRenderColumnHeader
+          className: props.headerClassName
         },
         defaultRender,
         props,
