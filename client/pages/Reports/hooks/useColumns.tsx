@@ -6,7 +6,7 @@ import { ProjectLink } from 'components/ProjectLink'
 import DateUtils from 'DateUtils'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { UserColumn } from '../SummaryView/UserColumn'
+import { UserColumn } from '../../../components/UserColumn'
 
 /**
  * Columns hook

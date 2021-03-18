@@ -118,6 +118,7 @@ export class ReportService {
               customer: pick(customer, 'key', 'name', 'description', 'icon'),
               resource: pick(
                 resource,
+                'id',
                 'givenName',
                 'surname',
                 'mail',

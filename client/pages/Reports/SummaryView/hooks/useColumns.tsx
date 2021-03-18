@@ -8,9 +8,9 @@ import {
 import React, { useContext, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { first } from 'underscore'
+import { useUserListColumn } from '../../../../components/UserColumn/useUserListColumn'
 import { ReportsContext } from '../../context'
 import { ColumnHeader } from '../ColumnHeader'
-import { useUserListColumn } from '../UserColumn/useUserListColumn'
 import { WeekColumn } from '../WeekColumn'
 
 /**

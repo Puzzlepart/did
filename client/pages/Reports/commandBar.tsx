@@ -4,7 +4,7 @@ import {
   IContextualMenuItem
 } from 'office-ui-fabric-react'
 import React from 'react'
-import { isEmpty, omit, pick } from 'underscore'
+import { isEmpty, omit } from 'underscore'
 import { exportExcel } from 'utils/exportExcel'
 import { IReportsContext } from './context'
 import {
@@ -28,13 +28,13 @@ const selectGroupByCmd = (context: IReportsContext) =>
     iconProps: { iconName: 'GroupList' },
     subMenuProps: {
       items: getGroupByOptions(context.t).map(
-        (opt) =>
+        ({ key, text, props: groupBy }) =>
           ({
-            ...pick(opt, 'key', 'text'),
+            key,
+            text,
             canCheck: true,
-            checked: context.state.groupBy.fieldName === opt.props.fieldName,
-            onClick: () =>
-              context.dispatch(SET_GROUP_BY({ groupBy: opt.props }))
+            checked: context.state.groupBy.fieldName === groupBy.fieldName,
+            onClick: () => context.dispatch(SET_GROUP_BY({ groupBy }))
           } as IContextualMenuItem)
       )
     }
