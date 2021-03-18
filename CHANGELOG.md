@@ -39,6 +39,7 @@ d this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 ### Changed
 - Consolidated Server and Client date utils #771
 - Summary view now using datepicker instead of slider #777
+- Visual improvements on the admin sections
 
 ## 0.9.0 - 15.12.2020
 ### Added
