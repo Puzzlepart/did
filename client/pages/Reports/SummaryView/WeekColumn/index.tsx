@@ -27,9 +27,7 @@ export const WeekColumn: FunctionComponent<IWeekColumnProps> = (
         onRenderContent: () => <WeekColumnTooltip {...props} hours={hours} />
       }}>
       <div className={styles.root}>
-        <span ref={target}>
-          {hours.total.toFixed(0)}
-        </span>
+        <span ref={target}>{hours.total.toFixed(0)}</span>
       </div>
     </TooltipHost>
   )

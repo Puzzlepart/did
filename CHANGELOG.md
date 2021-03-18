@@ -22,6 +22,7 @@ d this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 - Showing more details in the summary view on hover #886
 - Summary view moved to Reports
 - Support for start page user setting
+- Differentiating 0-hour weeks from unconfirmed weeks in Summary view #781
 
 ### Fixed
 - Issue where sunday hours would not be displayed in the UI after confirming a week #785

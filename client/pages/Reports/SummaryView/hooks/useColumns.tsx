@@ -19,7 +19,9 @@ export function useColumns(): IColumn[] {
         fieldName: 'user',
         name: null,
         minWidth: 180,
-        onRender: ({ user }: { user: Pick<User, 'displayName' | 'mail'> }) => <UserColumn user={user} />
+        onRender: ({ user }: { user: Pick<User, 'displayName' | 'mail'> }) => (
+          <UserColumn user={user} />
+        )
       }
     ]
     columns.push(
@@ -29,9 +31,7 @@ export function useColumns(): IColumn[] {
         name: p.join('/'),
         minWidth: 100,
         onRender: (item: any, _index: number, column: IColumn) => (
-          <WeekColumn
-            user={item.user}
-            periods={item[column.fieldName]} />
+          <WeekColumn user={item.user} periods={item[column.fieldName]} />
         )
       }))
     )

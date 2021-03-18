@@ -5,20 +5,21 @@ import { IUserColumnProps } from './types'
 
 /**
  * User column
- * 
+ *
  * Renders a `<Persona />` component
- * 
+ *
  * @category SummaryView
  */
-export const UserColumn: FunctionComponent<IUserColumnProps> = (
-  { user }: IUserColumnProps
-) => {
+export const UserColumn: FunctionComponent<IUserColumnProps> = ({
+  user
+}: IUserColumnProps) => {
   return (
     <div>
       <Persona
         text={user.displayName}
         secondaryText={user.mail}
-        size={PersonaSize.size24} />
+        size={PersonaSize.size24}
+      />
     </div>
   )
 }
