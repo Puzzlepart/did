@@ -1,6 +1,11 @@
 import { GlobalHotKeysProps } from 'react-hotkeys'
 import { ITimesheetContext } from '../context'
-import { SET_SCOPE, TOGGLE_SHORTCUTS } from '../reducer/actions'
+import {
+  NEXT_PERIOD,
+  PREVIOUS_PERIOD,
+  SET_SCOPE,
+  TOGGLE_SHORTCUTS
+} from '../reducer/actions'
 import { TimesheetScope } from '../TimesheetScope'
 
 export const getHotkeys = ({
@@ -13,12 +18,12 @@ export const getHotkeys = ({
       sequence: 'SHIFT+DOWN',
       action: 'keydown'
     },
-    PREV_WEEK: {
+    PREVIOUS_PERIOD: {
       name: t('timesheet.goToPrevWeek'),
       sequence: 'SHIFT+LEFT',
       action: 'keydown'
     },
-    NEXT_WEEK: {
+    NEXT_PERIOD: {
       name: t('timesheet.goToNextWeek'),
       sequence: 'SHIFT+RIGHT',
       action: 'keydown'
@@ -32,8 +37,8 @@ export const getHotkeys = ({
   handlers: {
     GO_TO_CURRENT_WEEK: () =>
       dispatch(SET_SCOPE(new TimesheetScope(new Date()))),
-    PREV_WEEK: () => dispatch(SET_SCOPE('-1w')),
-    NEXT_WEEK: () => dispatch(SET_SCOPE('1w')),
+    PREVIOUS_PERIOD: () => dispatch(PREVIOUS_PERIOD()),
+    NEXT_PERIOD: () => dispatch(NEXT_PERIOD()),
     SHOW_SHORTCUTS: () => dispatch(TOGGLE_SHORTCUTS())
   },
   allowChanges: false

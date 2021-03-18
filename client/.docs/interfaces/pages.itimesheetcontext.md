@@ -19,6 +19,7 @@
 - [dispatch](pages.itimesheetcontext.md#dispatch)
 - [error](pages.itimesheetcontext.md#error)
 - [loading](pages.itimesheetcontext.md#loading)
+- [navHistory](pages.itimesheetcontext.md#navhistory)
 - [onSubmitPeriod](pages.itimesheetcontext.md#onsubmitperiod)
 - [onUnsubmitPeriod](pages.itimesheetcontext.md#onunsubmitperiod)
 - [periods](pages.itimesheetcontext.md#periods)
@@ -45,9 +46,11 @@ ___
 
 • `Optional` **error**: *any*
 
+Error
+
 Inherited from: [ITimesheetState](pages.itimesheetstate.md).[error](pages.itimesheetstate.md#error)
 
-Defined in: [client/pages/Timesheet/types.ts:20](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L20)
+Defined in: [client/pages/Timesheet/types.ts:43](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L43)
 
 ___
 
@@ -55,9 +58,23 @@ ___
 
 • `Optional` **loading**: *IProgressProps*
 
+Loading props
+
 Inherited from: [ITimesheetState](pages.itimesheetstate.md).[loading](pages.itimesheetstate.md#loading)
 
-Defined in: [client/pages/Timesheet/types.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L19)
+Defined in: [client/pages/Timesheet/types.ts:38](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L38)
+
+___
+
+### navHistory
+
+• `Optional` **navHistory**: *string*[]
+
+Navigation history
+
+Inherited from: [ITimesheetState](pages.itimesheetstate.md).[navHistory](pages.itimesheetstate.md#navhistory)
+
+Defined in: [client/pages/Timesheet/types.ts:53](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L53)
 
 ___
 
@@ -105,9 +122,11 @@ ___
 
 • **periods**: [*TimesheetPeriod*](../classes/pages.timesheetperiod.md)[]
 
+Periods for the seleted scope
+
 Inherited from: [ITimesheetState](pages.itimesheetstate.md).[periods](pages.itimesheetstate.md#periods)
 
-Defined in: [client/pages/Timesheet/types.ts:15](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L15)
+Defined in: [client/pages/Timesheet/types.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L18)
 
 ___
 
@@ -133,9 +152,11 @@ ___
 
 • **scope**: [*TimesheetScope*](../classes/pages.timesheetscope.md)
 
+The current scope
+
 Inherited from: [ITimesheetState](pages.itimesheetstate.md).[scope](pages.itimesheetstate.md#scope)
 
-Defined in: [client/pages/Timesheet/types.ts:18](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L18)
+Defined in: [client/pages/Timesheet/types.ts:33](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L33)
 
 ___
 
@@ -143,9 +164,11 @@ ___
 
 • `Optional` **selectedPeriod**: [*TimesheetPeriod*](../classes/pages.timesheetperiod.md)
 
+The currently selected period
+
 Inherited from: [ITimesheetState](pages.itimesheetstate.md).[selectedPeriod](pages.itimesheetstate.md#selectedperiod)
 
-Defined in: [client/pages/Timesheet/types.ts:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L16)
+Defined in: [client/pages/Timesheet/types.ts:23](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L23)
 
 ___
 
@@ -153,9 +176,11 @@ ___
 
 • **selectedView**: [*TimesheetView*](../modules/pages.md#timesheetview)
 
+The currently seelcted view
+
 Inherited from: [ITimesheetState](pages.itimesheetstate.md).[selectedView](pages.itimesheetstate.md#selectedview)
 
-Defined in: [client/pages/Timesheet/types.ts:17](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L17)
+Defined in: [client/pages/Timesheet/types.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L28)
 
 ___
 
@@ -163,9 +188,11 @@ ___
 
 • `Optional` **showHotkeysModal**: *boolean*
 
+Show hotkeys modal
+
 Inherited from: [ITimesheetState](pages.itimesheetstate.md).[showHotkeysModal](pages.itimesheetstate.md#showhotkeysmodal)
 
-Defined in: [client/pages/Timesheet/types.ts:21](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L21)
+Defined in: [client/pages/Timesheet/types.ts:48](https://github.com/Puzzlepart/did/blob/dev/client/pages/Timesheet/types.ts#L48)
 
 ___
 

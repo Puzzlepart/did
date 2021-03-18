@@ -23,7 +23,7 @@ export class TimesheetScope {
   }
 
   /**
-   * Sets startDate/endDate from params
+   * Sets `startDate` and `endDate` from `params`
    *
    * @param params - Params
    */

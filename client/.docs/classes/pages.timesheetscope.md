@@ -95,7 +95,7 @@ Defined in: [client/pages/Timesheet/TimesheetScope.ts:81](https://github.com/Puz
 
 ▸ **fromParams**(`parameters`: [*ITimesheetParameters*](../interfaces/pages.itimesheetparameters.md)): [*TimesheetScope*](pages.timesheetscope.md)
 
-Sets startDate/endDate from params
+Sets `startDate` and `endDate` from `params`
 
 #### Parameters:
 

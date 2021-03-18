@@ -12,13 +12,45 @@ export type TimesheetView = 'overview' | 'summary' | 'allocation'
  * @category Timesheet
  */
 export interface ITimesheetState {
+  /**
+   * Periods for the seleted scope
+   */
   periods: TimesheetPeriod[]
+
+  /**
+   * The currently selected period
+   */
   selectedPeriod?: TimesheetPeriod
+
+  /**
+   * The currently seelcted view
+   */
   selectedView: TimesheetView
+
+  /**
+   * The current scope
+   */
   scope: TimesheetScope
+
+  /**
+   * Loading props
+   */
   loading?: IProgressProps
+
+  /**
+   * Error
+   */
   error?: any
+
+  /**
+   * Show hotkeys modal
+   */
   showHotkeysModal?: boolean
+
+  /**
+   * Navigation history
+   */
+  navHistory?: string[]
 }
 
 /**

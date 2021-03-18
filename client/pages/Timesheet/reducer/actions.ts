@@ -48,6 +48,20 @@ export const UNSUBMITTING_PERIOD = createAction<{ forecast: boolean }>(
 export const CHANGE_PERIOD = createAction<{ id: string }>('CHANGE_PERIOD')
 
 /**
+ * Previous period action
+ *
+ * @category Timesheet Actions
+ */
+export const PREVIOUS_PERIOD = createAction('PREVIOUS_PERIOD')
+
+/**
+ * Next period action
+ *
+ * @category Timesheet Actions
+ */
+export const NEXT_PERIOD = createAction('NEXT_PERIOD')
+
+/**
  * Change view action
  *
  * @category Timesheet Actions

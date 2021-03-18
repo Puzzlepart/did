@@ -1,7 +1,8 @@
-import { createReducer } from '@reduxjs/toolkit'
+import { createReducer, current } from '@reduxjs/toolkit'
 import { TFunction } from 'i18next'
 import { useMemo, useReducer } from 'react'
-import { find, first, isEmpty } from 'underscore'
+import { TimesheetPeriodObject } from 'types'
+import { find, first, isEmpty, last } from 'underscore'
 import {
   ITimesheetParameters,
   ITimesheetState,
@@ -16,6 +17,8 @@ import {
   DATA_UPDATED,
   IGNORE_EVENT,
   MANUAL_MATCH,
+  NEXT_PERIOD,
+  PREVIOUS_PERIOD,
   SET_SCOPE,
   SUBMITTING_PERIOD,
   TOGGLE_SHORTCUTS,
@@ -34,12 +37,19 @@ interface ITimesheetReducerParameters {
   t: TFunction
 }
 
-const initState = (url: ITimesheetParameters) => ({
+/**
+ * Initializes state based on url parameters
+ *
+ * @param url - Url parameters
+ * @returns Initial state
+ */
+const initState = (url: ITimesheetParameters): ITimesheetState => ({
   periods: [],
   scope: isEmpty(Object.keys(url))
     ? new TimesheetScope()
     : new TimesheetScope().fromParams(url),
-  selectedView: url.view || 'overview'
+  selectedView: url.view || 'overview',
+  navHistory: []
 })
 
 /**
@@ -49,26 +59,28 @@ const createTimesheetReducer = ({ url, t }: ITimesheetReducerParameters) =>
   createReducer<ITimesheetState>(initState(url), (builder) =>
     builder
       .addCase(DATA_UPDATED, (state, { payload }) => {
-        const { loading, data, error } = payload.query
-        state.loading = loading
+        state.loading = payload.query.loading
           ? {
               label: t('timesheet.loadingTimesheetLabel'),
               description: t('timesheet.loadingTimesheetDescription'),
               iconProps: { iconName: 'RecurringEvent' }
             }
           : null
-        if (data) {
-          const selectedPeriodId =
-            state.selectedPeriod?.id ||
-            [url.week, url.month, url.year].join('_')
-          state.periods = data.timesheet.map((period) =>
-            new TimesheetPeriod().initialize(period)
+        if (payload.query.data) {
+          const urlPeriodId = [url.week, url.month, url.year].join('_')
+          const selectedPeriodId = state.selectedPeriod?.id || urlPeriodId
+          state.periods = payload.query.data.periods.map(
+            (period: TimesheetPeriodObject) =>
+              new TimesheetPeriod().initialize(period)
           )
+          const lastNav = last(state.navHistory)
           state.selectedPeriod =
             find(state.periods, (p) => p.id === selectedPeriodId) ||
-            first(state.periods)
+            (lastNav === 'PREVIOUS_PERIOD'
+              ? last(state.periods)
+              : first(state.periods))
         }
-        state.error = error
+        state.error = payload.query.error
       })
       .addCase(SET_SCOPE, (state, { payload }) => {
         state.scope =
@@ -109,6 +121,32 @@ const createTimesheetReducer = ({ url, t }: ITimesheetReducerParameters) =>
           state.periods,
           (p: TimesheetPeriod) => p.id === payload.id
         )
+      })
+      .addCase(PREVIOUS_PERIOD, (state) => {
+        state.navHistory.push(PREVIOUS_PERIOD.type)
+        const { periods, selectedPeriod } = current(state)
+        const index = periods.indexOf(selectedPeriod)
+        if (state.periods.length === 1 || index === 0) {
+          state.scope = state.scope.set('-1w')
+        } else {
+          state.selectedPeriod = find(
+            periods,
+            (p: TimesheetPeriod) => p.id !== selectedPeriod.id
+          )
+        }
+      })
+      .addCase(NEXT_PERIOD, (state) => {
+        state.navHistory.push(NEXT_PERIOD.type)
+        const { periods, selectedPeriod } = current(state)
+        const index = periods.indexOf(selectedPeriod)
+        if (state.periods.length === 1 || index === 1) {
+          state.scope = state.scope.set('1w')
+        } else {
+          state.selectedPeriod = find(
+            periods,
+            (p: TimesheetPeriod) => p.id !== selectedPeriod.id
+          )
+        }
       })
       .addCase(CHANGE_VIEW, (state, { payload }) => {
         state.selectedView = payload.view
