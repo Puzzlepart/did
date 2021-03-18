@@ -4,75 +4,46 @@ import {
   CheckboxVisibility,
   ConstrainMode,
   DetailsListLayoutMode,
-  Selection,
   SelectionMode,
   ShimmeredDetailsList
 } from 'office-ui-fabric-react'
-import React, { FunctionComponent, useEffect, useMemo, useReducer } from 'react'
+import React, { FunctionComponent } from 'react'
 import FadeIn from 'react-fade-in'
-import { filter, first } from 'underscore'
+import { filter } from 'underscore'
 import { ScrollablePaneWrapper } from '../ScrollablePaneWrapper'
-import { generateListGroups } from './generateListGroups'
 import styles from './List.module.scss'
 import { ListGroupHeader } from './ListGroupHeader'
 import { onRenderListHeader } from './onRenderListHeader'
-import reducer from './reducer'
 import { IListProps } from './types'
+import { useList } from './useList'
 
 /**
  * List component using `ShimmeredDetailsList` from `office-ui-fabric-react`.
  *
  * Used by:
  *
- * * EventList
- * * Admin/ApiTokens
- * * Admin/Roles
- * * Admin/SummaryView
- * * Admin/Users/AddMultiplePanel
- * * Admin/Users
- * * Customers/CustomerList
- * * Projects/ProjectList
- * * Reports
- * * Timesheet/SummaryView
+ * * `<EventList />`
+ * * `<Admin />` => `<ApiTokens />`
+ * * `<Admin />` => `<Roles />`
+ * * `<Admin />` => `<SummaryView />`
+ * * `<Admin />` => `<Users />` => `<AddMultiplePanel />`
+ * * `<Admin />` => `<Users />`
+ * * `<Customers />` => `<CustomerList />`
+ * * `<Projects />` => `<ProjectList />`
+ * * `<Reports />`
+ * * `<Timesheet />` => `<SummaryView />`
  *
  * @category Function Component
  */
 export const List: FunctionComponent<IListProps> = (props: IListProps) => {
-  const [state, dispatch] = useReducer(reducer, {
-    origItems: props.items || [],
-    items: props.items || [],
-    searchTerm: null
-  })
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => dispatch({ type: 'PROPS_UPDATED', payload: props }), [
-    props.items
-  ])
-
-  const selection = useMemo(() => {
-    if (!props.selectionProps) return null
-    return new Selection({
-      onSelectionChanged: () => {
-        const _selection = selection.getSelection()
-        switch (props.selectionProps?.mode) {
-          case SelectionMode.single:
-            props.selectionProps.onChanged(first(_selection))
-            break
-          case SelectionMode.multiple:
-            props.selectionProps.onChanged(_selection)
-            break
-        }
-      }
-    })
-  }, [props.selectionProps])
-
-  let groups = null
-  let items = [...state.items]
-  if (props.groups)
-    [groups, items] = generateListGroups(items, props.listGroupProps)
-
-  const [delay, transitionDuration] = props.fadeIn || [0, 0]
-
+  const {
+    state,
+    dispatch,
+    selection,
+    groups,
+    delay,
+    transitionDuration
+  } = useList({ props })
   return (
     <div className={styles.root} hidden={props.hidden}>
       <FadeIn delay={delay} transitionDuration={transitionDuration}>
@@ -84,7 +55,7 @@ export const List: FunctionComponent<IListProps> = (props: IListProps) => {
             isPlaceholderData={props.enableShimmer}
             selection={selection}
             columns={filter(props.columns, (col) => !col.data?.hidden)}
-            items={items}
+            items={state.items}
             groups={groups}
             selectionMode={
               props.selectionProps
