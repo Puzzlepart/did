@@ -1,72 +1,72 @@
-[did-shared - v0.9.8](../README.md) / [date](../modules/date.md) / [%24dayjs](../modules/date._dayjs.md) / Dayjs
+[did-shared - v0.9.9](../README.md) / [DateUtils](../modules/dateutils.md) / [%24dayjs](../modules/dateutils._dayjs.md) / Dayjs
 
 # Class: Dayjs
 
-[date](../modules/date.md).[$dayjs](../modules/date._dayjs.md).Dayjs
+[DateUtils](../modules/dateutils.md).[$dayjs](../modules/dateutils._dayjs.md).Dayjs
 
 ## Table of contents
 
 ### Constructors
 
-- [constructor](date._dayjs.dayjs.md#constructor)
+- [constructor](dateutils._dayjs.dayjs.md#constructor)
 
 ### Methods
 
-- [add](date._dayjs.dayjs.md#add)
-- [clone](date._dayjs.dayjs.md#clone)
-- [date](date._dayjs.dayjs.md#date)
-- [day](date._dayjs.dayjs.md#day)
-- [daysInMonth](date._dayjs.dayjs.md#daysinmonth)
-- [diff](date._dayjs.dayjs.md#diff)
-- [endOf](date._dayjs.dayjs.md#endof)
-- [format](date._dayjs.dayjs.md#format)
-- [get](date._dayjs.dayjs.md#get)
-- [hour](date._dayjs.dayjs.md#hour)
-- [isAfter](date._dayjs.dayjs.md#isafter)
-- [isBefore](date._dayjs.dayjs.md#isbefore)
-- [isLeapYear](date._dayjs.dayjs.md#isleapyear)
-- [isSame](date._dayjs.dayjs.md#issame)
-- [isUTC](date._dayjs.dayjs.md#isutc)
-- [isValid](date._dayjs.dayjs.md#isvalid)
-- [isoWeek](date._dayjs.dayjs.md#isoweek)
-- [isoWeekYear](date._dayjs.dayjs.md#isoweekyear)
-- [isoWeekday](date._dayjs.dayjs.md#isoweekday)
-- [isoWeeksInYear](date._dayjs.dayjs.md#isoweeksinyear)
-- [local](date._dayjs.dayjs.md#local)
-- [locale](date._dayjs.dayjs.md#locale)
-- [localeData](date._dayjs.dayjs.md#localedata)
-- [millisecond](date._dayjs.dayjs.md#millisecond)
-- [minute](date._dayjs.dayjs.md#minute)
-- [month](date._dayjs.dayjs.md#month)
-- [second](date._dayjs.dayjs.md#second)
-- [set](date._dayjs.dayjs.md#set)
-- [startOf](date._dayjs.dayjs.md#startof)
-- [subtract](date._dayjs.dayjs.md#subtract)
-- [toDate](date._dayjs.dayjs.md#todate)
-- [toISOString](date._dayjs.dayjs.md#toisostring)
-- [toJSON](date._dayjs.dayjs.md#tojson)
-- [toString](date._dayjs.dayjs.md#tostring)
-- [tz](date._dayjs.dayjs.md#tz)
-- [unix](date._dayjs.dayjs.md#unix)
-- [utc](date._dayjs.dayjs.md#utc)
-- [utcOffset](date._dayjs.dayjs.md#utcoffset)
-- [valueOf](date._dayjs.dayjs.md#valueof)
-- [week](date._dayjs.dayjs.md#week)
-- [year](date._dayjs.dayjs.md#year)
+- [add](dateutils._dayjs.dayjs.md#add)
+- [clone](dateutils._dayjs.dayjs.md#clone)
+- [date](dateutils._dayjs.dayjs.md#date)
+- [day](dateutils._dayjs.dayjs.md#day)
+- [daysInMonth](dateutils._dayjs.dayjs.md#daysinmonth)
+- [diff](dateutils._dayjs.dayjs.md#diff)
+- [endOf](dateutils._dayjs.dayjs.md#endof)
+- [format](dateutils._dayjs.dayjs.md#format)
+- [get](dateutils._dayjs.dayjs.md#get)
+- [hour](dateutils._dayjs.dayjs.md#hour)
+- [isAfter](dateutils._dayjs.dayjs.md#isafter)
+- [isBefore](dateutils._dayjs.dayjs.md#isbefore)
+- [isLeapYear](dateutils._dayjs.dayjs.md#isleapyear)
+- [isSame](dateutils._dayjs.dayjs.md#issame)
+- [isUTC](dateutils._dayjs.dayjs.md#isutc)
+- [isValid](dateutils._dayjs.dayjs.md#isvalid)
+- [isoWeek](dateutils._dayjs.dayjs.md#isoweek)
+- [isoWeekYear](dateutils._dayjs.dayjs.md#isoweekyear)
+- [isoWeekday](dateutils._dayjs.dayjs.md#isoweekday)
+- [isoWeeksInYear](dateutils._dayjs.dayjs.md#isoweeksinyear)
+- [local](dateutils._dayjs.dayjs.md#local)
+- [locale](dateutils._dayjs.dayjs.md#locale)
+- [localeData](dateutils._dayjs.dayjs.md#localedata)
+- [millisecond](dateutils._dayjs.dayjs.md#millisecond)
+- [minute](dateutils._dayjs.dayjs.md#minute)
+- [month](dateutils._dayjs.dayjs.md#month)
+- [second](dateutils._dayjs.dayjs.md#second)
+- [set](dateutils._dayjs.dayjs.md#set)
+- [startOf](dateutils._dayjs.dayjs.md#startof)
+- [subtract](dateutils._dayjs.dayjs.md#subtract)
+- [toDate](dateutils._dayjs.dayjs.md#todate)
+- [toISOString](dateutils._dayjs.dayjs.md#toisostring)
+- [toJSON](dateutils._dayjs.dayjs.md#tojson)
+- [toString](dateutils._dayjs.dayjs.md#tostring)
+- [tz](dateutils._dayjs.dayjs.md#tz)
+- [unix](dateutils._dayjs.dayjs.md#unix)
+- [utc](dateutils._dayjs.dayjs.md#utc)
+- [utcOffset](dateutils._dayjs.dayjs.md#utcoffset)
+- [valueOf](dateutils._dayjs.dayjs.md#valueof)
+- [week](dateutils._dayjs.dayjs.md#week)
+- [year](dateutils._dayjs.dayjs.md#year)
 
 ## Constructors
 
 ### constructor
 
-\+ **new Dayjs**(`config?`: [*ConfigType*](../modules/date._dayjs.md#configtype)): [*Dayjs*](date._dayjs.dayjs.md)
+\+ **new Dayjs**(`config?`: [*ConfigType*](../modules/dateutils._dayjs.md#configtype)): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`config?` | [*ConfigType*](../modules/date._dayjs.md#configtype) |
+`config?` | [*ConfigType*](../modules/dateutils._dayjs.md#configtype) |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/index.d.ts:22
 
@@ -74,7 +74,7 @@ Defined in: node_modules/dayjs/index.d.ts:22
 
 ### add
 
-▸ **add**(`value`: *number*, `unit?`: [*OpUnitType*](../modules/date._dayjs.md#opunittype)): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **add**(`value`: *number*, `unit?`: [*OpUnitType*](../modules/dateutils._dayjs.md#opunittype)): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Returns a cloned Day.js object with a specified amount of time added.
 ```
@@ -89,13 +89,13 @@ Docs: https://day.js.org/docs/en/manipulate/add
 Name | Type |
 :------ | :------ |
 `value` | *number* |
-`unit?` | [*OpUnitType*](../modules/date._dayjs.md#opunittype) |
+`unit?` | [*OpUnitType*](../modules/dateutils._dayjs.md#opunittype) |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/index.d.ts:229
 
-▸ **add**(`value`: Duration): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **add**(`value`: Duration): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 #### Parameters:
 
@@ -103,11 +103,11 @@ Name | Type |
 :------ | :------ |
 `value` | Duration |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/plugin/duration.d.ts:60
 
-▸ **add**(`argument`: *object*): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **add**(`argument`: *object*): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 #### Parameters:
 
@@ -115,7 +115,7 @@ Name | Type |
 :------ | :------ |
 `argument` | *object* |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/plugin/objectSupport.d.ts:9
 
@@ -123,7 +123,7 @@ ___
 
 ### clone
 
-▸ **clone**(): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **clone**(): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 All Day.js objects are immutable. Still, `dayjs#clone` can create a clone of the current object if you need one.
 ```
@@ -132,7 +132,7 @@ dayjs(dayjs('2019-01-25')) // passing a Dayjs object to a constructor will also 
 ```
 Docs: https://day.js.org/docs/en/parse/dayjs-clone
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/index.d.ts:32
 
@@ -152,7 +152,7 @@ Docs: https://day.js.org/docs/en/get-set/date
 
 Defined in: node_modules/dayjs/index.d.ts:86
 
-▸ **date**(`value`: *number*): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **date**(`value`: *number*): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Set the date of the month.
 
@@ -168,7 +168,7 @@ Name | Type |
 :------ | :------ |
 `value` | *number* |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/index.d.ts:96
 
@@ -190,7 +190,7 @@ Docs: https://day.js.org/docs/en/get-set/day
 
 Defined in: node_modules/dayjs/index.d.ts:106
 
-▸ **day**(`value`: *number*): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **day**(`value`: *number*): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Set the day of the week.
 
@@ -206,7 +206,7 @@ Name | Type |
 :------ | :------ |
 `value` | *number* |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/index.d.ts:116
 
@@ -230,7 +230,7 @@ ___
 
 ### diff
 
-▸ **diff**(`date`: [*ConfigType*](../modules/date._dayjs.md#configtype), `unit?`: *millisecond* \| *second* \| *minute* \| *hour* \| *day* \| *month* \| *year* \| *date* \| *d* \| *M* \| *y* \| *h* \| *m* \| *s* \| *ms* \| *week* \| *w* \| *quarter* \| *Q*, `float?`: *boolean*): *number*
+▸ **diff**(`date`: [*ConfigType*](../modules/dateutils._dayjs.md#configtype), `unit?`: *millisecond* \| *second* \| *minute* \| *hour* \| *day* \| *month* \| *year* \| *date* \| *d* \| *M* \| *y* \| *h* \| *m* \| *s* \| *ms* \| *week* \| *w* \| *quarter* \| *Q*, `float?`: *boolean*): *number*
 
 This indicates the difference between two date-time in the specified unit.
 
@@ -253,7 +253,7 @@ Docs: https://day.js.org/docs/en/display/difference
 
 Name | Type |
 :------ | :------ |
-`date` | [*ConfigType*](../modules/date._dayjs.md#configtype) |
+`date` | [*ConfigType*](../modules/dateutils._dayjs.md#configtype) |
 `unit?` | *millisecond* \| *second* \| *minute* \| *hour* \| *day* \| *month* \| *year* \| *date* \| *d* \| *M* \| *y* \| *h* \| *m* \| *s* \| *ms* \| *week* \| *w* \| *quarter* \| *Q* |
 `float?` | *boolean* |
 
@@ -265,7 +265,7 @@ ___
 
 ### endOf
 
-▸ **endOf**(`unit`: [*OpUnitType*](../modules/date._dayjs.md#opunittype)): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **endOf**(`unit`: [*OpUnitType*](../modules/dateutils._dayjs.md#opunittype)): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Returns a cloned Day.js object and set it to the end of a unit of time.
 ```
@@ -279,13 +279,13 @@ Docs: https://day.js.org/docs/en/manipulate/end-of
 
 Name | Type |
 :------ | :------ |
-`unit` | [*OpUnitType*](../modules/date._dayjs.md#opunittype) |
+`unit` | [*OpUnitType*](../modules/dateutils._dayjs.md#opunittype) |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/index.d.ts:259
 
-▸ **endOf**(`unit`: ISOUnitType): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **endOf**(`unit`: ISOUnitType): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 #### Parameters:
 
@@ -293,7 +293,7 @@ Name | Type |
 :------ | :------ |
 `unit` | ISOUnitType |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/plugin/isoWeek.d.ts:19
 
@@ -327,7 +327,7 @@ ___
 
 ### get
 
-▸ **get**(`unit`: [*UnitType*](../modules/date._dayjs.md#unittype)): *number*
+▸ **get**(`unit`: [*UnitType*](../modules/dateutils._dayjs.md#unittype)): *number*
 
 String getter, returns the corresponding information getting from Day.js object.
 
@@ -347,7 +347,7 @@ Docs: https://day.js.org/docs/en/get-set/get
 
 Name | Type |
 :------ | :------ |
-`unit` | [*UnitType*](../modules/date._dayjs.md#unittype) |
+`unit` | [*UnitType*](../modules/dateutils._dayjs.md#unittype) |
 
 **Returns:** *number*
 
@@ -369,7 +369,7 @@ Docs: https://day.js.org/docs/en/get-set/hour
 
 Defined in: node_modules/dayjs/index.d.ts:124
 
-▸ **hour**(`value`: *number*): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **hour**(`value`: *number*): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Set the hour.
 
@@ -385,7 +385,7 @@ Name | Type |
 :------ | :------ |
 `value` | *number* |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/index.d.ts:134
 
@@ -393,7 +393,7 @@ ___
 
 ### isAfter
 
-▸ **isAfter**(`date`: [*ConfigType*](../modules/date._dayjs.md#configtype), `unit?`: [*OpUnitType*](../modules/date._dayjs.md#opunittype)): *boolean*
+▸ **isAfter**(`date`: [*ConfigType*](../modules/dateutils._dayjs.md#configtype), `unit?`: [*OpUnitType*](../modules/dateutils._dayjs.md#opunittype)): *boolean*
 
 This indicates whether the Day.js object is after the other supplied date-time.
 ```
@@ -411,20 +411,20 @@ Docs: https://day.js.org/docs/en/query/is-after
 
 Name | Type |
 :------ | :------ |
-`date` | [*ConfigType*](../modules/date._dayjs.md#configtype) |
-`unit?` | [*OpUnitType*](../modules/date._dayjs.md#opunittype) |
+`date` | [*ConfigType*](../modules/dateutils._dayjs.md#configtype) |
+`unit?` | [*OpUnitType*](../modules/dateutils._dayjs.md#opunittype) |
 
 **Returns:** *boolean*
 
 Defined in: node_modules/dayjs/index.d.ts:398
 
-▸ **isAfter**(`date`: [*ConfigType*](../modules/date._dayjs.md#configtype), `unit?`: ISOUnitType): *boolean*
+▸ **isAfter**(`date`: [*ConfigType*](../modules/dateutils._dayjs.md#configtype), `unit?`: ISOUnitType): *boolean*
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`date` | [*ConfigType*](../modules/date._dayjs.md#configtype) |
+`date` | [*ConfigType*](../modules/dateutils._dayjs.md#configtype) |
 `unit?` | ISOUnitType |
 
 **Returns:** *boolean*
@@ -435,7 +435,7 @@ ___
 
 ### isBefore
 
-▸ **isBefore**(`date`: [*ConfigType*](../modules/date._dayjs.md#configtype), `unit?`: [*OpUnitType*](../modules/date._dayjs.md#opunittype)): *boolean*
+▸ **isBefore**(`date`: [*ConfigType*](../modules/dateutils._dayjs.md#configtype), `unit?`: [*OpUnitType*](../modules/dateutils._dayjs.md#opunittype)): *boolean*
 
 This indicates whether the Day.js object is before the other supplied date-time.
 ```
@@ -453,20 +453,20 @@ Docs: https://day.js.org/docs/en/query/is-before
 
 Name | Type |
 :------ | :------ |
-`date` | [*ConfigType*](../modules/date._dayjs.md#configtype) |
-`unit?` | [*OpUnitType*](../modules/date._dayjs.md#opunittype) |
+`date` | [*ConfigType*](../modules/dateutils._dayjs.md#configtype) |
+`unit?` | [*OpUnitType*](../modules/dateutils._dayjs.md#opunittype) |
 
 **Returns:** *boolean*
 
 Defined in: node_modules/dayjs/index.d.ts:372
 
-▸ **isBefore**(`date`: [*ConfigType*](../modules/date._dayjs.md#configtype), `unit?`: ISOUnitType): *boolean*
+▸ **isBefore**(`date`: [*ConfigType*](../modules/dateutils._dayjs.md#configtype), `unit?`: ISOUnitType): *boolean*
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`date` | [*ConfigType*](../modules/date._dayjs.md#configtype) |
+`date` | [*ConfigType*](../modules/dateutils._dayjs.md#configtype) |
 `unit?` | ISOUnitType |
 
 **Returns:** *boolean*
@@ -487,7 +487,7 @@ ___
 
 ### isSame
 
-▸ **isSame**(`date`: [*ConfigType*](../modules/date._dayjs.md#configtype), `unit?`: [*OpUnitType*](../modules/date._dayjs.md#opunittype)): *boolean*
+▸ **isSame**(`date`: [*ConfigType*](../modules/dateutils._dayjs.md#configtype), `unit?`: [*OpUnitType*](../modules/dateutils._dayjs.md#opunittype)): *boolean*
 
 This indicates whether the Day.js object is the same as the other supplied date-time.
 ```
@@ -503,20 +503,20 @@ Docs: https://day.js.org/docs/en/query/is-same
 
 Name | Type |
 :------ | :------ |
-`date` | [*ConfigType*](../modules/date._dayjs.md#configtype) |
-`unit?` | [*OpUnitType*](../modules/date._dayjs.md#opunittype) |
+`date` | [*ConfigType*](../modules/dateutils._dayjs.md#configtype) |
+`unit?` | [*OpUnitType*](../modules/dateutils._dayjs.md#opunittype) |
 
 **Returns:** *boolean*
 
 Defined in: node_modules/dayjs/index.d.ts:384
 
-▸ **isSame**(`date`: [*ConfigType*](../modules/date._dayjs.md#configtype), `unit?`: ISOUnitType): *boolean*
+▸ **isSame**(`date`: [*ConfigType*](../modules/dateutils._dayjs.md#configtype), `unit?`: ISOUnitType): *boolean*
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`date` | [*ConfigType*](../modules/date._dayjs.md#configtype) |
+`date` | [*ConfigType*](../modules/dateutils._dayjs.md#configtype) |
 `unit?` | ISOUnitType |
 
 **Returns:** *boolean*
@@ -559,7 +559,7 @@ ___
 
 Defined in: node_modules/dayjs/plugin/isoWeek.d.ts:11
 
-▸ **isoWeek**(`value`: *number*): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **isoWeek**(`value`: *number*): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 #### Parameters:
 
@@ -567,7 +567,7 @@ Name | Type |
 :------ | :------ |
 `value` | *number* |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/plugin/isoWeek.d.ts:12
 
@@ -591,7 +591,7 @@ ___
 
 Defined in: node_modules/dayjs/plugin/isoWeek.d.ts:14
 
-▸ **isoWeekday**(`value`: *number*): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **isoWeekday**(`value`: *number*): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 #### Parameters:
 
@@ -599,7 +599,7 @@ Name | Type |
 :------ | :------ |
 `value` | *number* |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/plugin/isoWeek.d.ts:15
 
@@ -617,9 +617,9 @@ ___
 
 ### local
 
-▸ **local**(): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **local**(): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/plugin/utc.d.ts:11
 
@@ -633,7 +633,7 @@ ___
 
 Defined in: node_modules/dayjs/index.d.ts:400
 
-▸ **locale**(`preset`: *string* \| ILocale, `object?`: *Partial*<ILocale\>): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **locale**(`preset`: *string* \| ILocale, `object?`: *Partial*<ILocale\>): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 #### Parameters:
 
@@ -642,7 +642,7 @@ Name | Type |
 `preset` | *string* \| ILocale |
 `object?` | *Partial*<ILocale\> |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/index.d.ts:402
 
@@ -650,9 +650,9 @@ ___
 
 ### localeData
 
-▸ **localeData**(): [*InstanceLocaleDataReturn*](../interfaces/date._dayjs.instancelocaledatareturn.md)
+▸ **localeData**(): [*InstanceLocaleDataReturn*](../interfaces/dateutils._dayjs.instancelocaledatareturn.md)
 
-**Returns:** [*InstanceLocaleDataReturn*](../interfaces/date._dayjs.instancelocaledatareturn.md)
+**Returns:** [*InstanceLocaleDataReturn*](../interfaces/dateutils._dayjs.instancelocaledatareturn.md)
 
 Defined in: node_modules/dayjs/plugin/localeData.d.ts:33
 
@@ -672,7 +672,7 @@ Docs: https://day.js.org/docs/en/get-set/millisecond
 
 Defined in: node_modules/dayjs/index.d.ts:177
 
-▸ **millisecond**(`value`: *number*): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **millisecond**(`value`: *number*): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Set the milliseconds.
 
@@ -688,7 +688,7 @@ Name | Type |
 :------ | :------ |
 `value` | *number* |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/index.d.ts:187
 
@@ -708,7 +708,7 @@ Docs: https://day.js.org/docs/en/get-set/minute
 
 Defined in: node_modules/dayjs/index.d.ts:142
 
-▸ **minute**(`value`: *number*): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **minute**(`value`: *number*): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Set the minutes.
 
@@ -724,7 +724,7 @@ Name | Type |
 :------ | :------ |
 `value` | *number* |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/index.d.ts:152
 
@@ -746,7 +746,7 @@ Docs: https://day.js.org/docs/en/get-set/month
 
 Defined in: node_modules/dayjs/index.d.ts:66
 
-▸ **month**(`value`: *number*): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **month**(`value`: *number*): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Set the month.
 
@@ -764,7 +764,7 @@ Name | Type |
 :------ | :------ |
 `value` | *number* |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/index.d.ts:78
 
@@ -784,7 +784,7 @@ Docs: https://day.js.org/docs/en/get-set/second
 
 Defined in: node_modules/dayjs/index.d.ts:160
 
-▸ **second**(`value`: *number*): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **second**(`value`: *number*): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Set the seconds.
 
@@ -799,7 +799,7 @@ Name | Type |
 :------ | :------ |
 `value` | *number* |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/index.d.ts:169
 
@@ -807,7 +807,7 @@ ___
 
 ### set
 
-▸ **set**(`unit`: [*UnitType*](../modules/date._dayjs.md#unittype), `value`: *number*): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **set**(`unit`: [*UnitType*](../modules/dateutils._dayjs.md#unittype), `value`: *number*): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Generic setter, accepting unit as first argument, and value as second, returns a new instance with the applied changes.
 
@@ -827,14 +827,14 @@ Docs: https://day.js.org/docs/en/get-set/set
 
 Name | Type |
 :------ | :------ |
-`unit` | [*UnitType*](../modules/date._dayjs.md#unittype) |
+`unit` | [*UnitType*](../modules/dateutils._dayjs.md#unittype) |
 `value` | *number* |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/index.d.ts:203
 
-▸ **set**(`argument`: *object*): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **set**(`argument`: *object*): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 #### Parameters:
 
@@ -842,7 +842,7 @@ Name | Type |
 :------ | :------ |
 `argument` | *object* |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/plugin/objectSupport.d.ts:8
 
@@ -850,7 +850,7 @@ ___
 
 ### startOf
 
-▸ **startOf**(`unit`: [*OpUnitType*](../modules/date._dayjs.md#opunittype)): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **startOf**(`unit`: [*OpUnitType*](../modules/dateutils._dayjs.md#opunittype)): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Returns a cloned Day.js object and set it to the start of a unit of time.
 ```
@@ -864,13 +864,13 @@ Docs: https://day.js.org/docs/en/manipulate/start-of
 
 Name | Type |
 :------ | :------ |
-`unit` | [*OpUnitType*](../modules/date._dayjs.md#opunittype) |
+`unit` | [*OpUnitType*](../modules/dateutils._dayjs.md#opunittype) |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/index.d.ts:249
 
-▸ **startOf**(`unit`: ISOUnitType): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **startOf**(`unit`: ISOUnitType): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 #### Parameters:
 
@@ -878,7 +878,7 @@ Name | Type |
 :------ | :------ |
 `unit` | ISOUnitType |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/plugin/isoWeek.d.ts:17
 
@@ -886,7 +886,7 @@ ___
 
 ### subtract
 
-▸ **subtract**(`value`: *number*, `unit?`: [*OpUnitType*](../modules/date._dayjs.md#opunittype)): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **subtract**(`value`: *number*, `unit?`: [*OpUnitType*](../modules/dateutils._dayjs.md#opunittype)): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Returns a cloned Day.js object with a specified amount of time subtracted.
 ```
@@ -901,13 +901,13 @@ Docs: https://day.js.org/docs/en/manipulate/subtract
 Name | Type |
 :------ | :------ |
 `value` | *number* |
-`unit?` | [*OpUnitType*](../modules/date._dayjs.md#opunittype) |
+`unit?` | [*OpUnitType*](../modules/dateutils._dayjs.md#opunittype) |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/index.d.ts:239
 
-▸ **subtract**(`value`: Duration): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **subtract**(`value`: Duration): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 #### Parameters:
 
@@ -915,11 +915,11 @@ Name | Type |
 :------ | :------ |
 `value` | Duration |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/plugin/duration.d.ts:61
 
-▸ **subtract**(`argument`: *object*): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **subtract**(`argument`: *object*): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 #### Parameters:
 
@@ -927,7 +927,7 @@ Name | Type |
 :------ | :------ |
 `argument` | *object* |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/plugin/objectSupport.d.ts:10
 
@@ -998,7 +998,7 @@ ___
 
 ### tz
 
-▸ **tz**(`timezone?`: *string*, `keepLocalTime?`: *boolean*): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **tz**(`timezone?`: *string*, `keepLocalTime?`: *boolean*): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 #### Parameters:
 
@@ -1007,7 +1007,7 @@ Name | Type |
 `timezone?` | *string* |
 `keepLocalTime?` | *boolean* |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/plugin/timezone.d.ts:8
 
@@ -1033,7 +1033,7 @@ ___
 
 ### utc
 
-▸ **utc**(`keepLocalTime?`: *boolean*): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **utc**(`keepLocalTime?`: *boolean*): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 #### Parameters:
 
@@ -1041,7 +1041,7 @@ Name | Type |
 :------ | :------ |
 `keepLocalTime?` | *boolean* |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/plugin/utc.d.ts:9
 
@@ -1061,7 +1061,7 @@ Docs: https://day.js.org/docs/en/manipulate/utc-offset
 
 Defined in: node_modules/dayjs/index.d.ts:358
 
-▸ **utcOffset**(`offset`: *number*, `keepLocalTime?`: *boolean*): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **utcOffset**(`offset`: *number*, `keepLocalTime?`: *boolean*): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 #### Parameters:
 
@@ -1070,7 +1070,7 @@ Name | Type |
 `offset` | *number* |
 `keepLocalTime?` | *boolean* |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/plugin/utc.d.ts:15
 
@@ -1103,7 +1103,7 @@ ___
 
 Defined in: node_modules/dayjs/plugin/weekOfYear.d.ts:8
 
-▸ **week**(`value`: *number*): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **week**(`value`: *number*): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 #### Parameters:
 
@@ -1111,7 +1111,7 @@ Name | Type |
 :------ | :------ |
 `value` | *number* |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/plugin/weekOfYear.d.ts:10
 
@@ -1131,7 +1131,7 @@ Docs: https://day.js.org/docs/en/get-set/year
 
 Defined in: node_modules/dayjs/index.d.ts:48
 
-▸ **year**(`value`: *number*): [*Dayjs*](date._dayjs.dayjs.md)
+▸ **year**(`value`: *number*): [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Set the year.
 ```
@@ -1145,6 +1145,6 @@ Name | Type |
 :------ | :------ |
 `value` | *number* |
 
-**Returns:** [*Dayjs*](date._dayjs.dayjs.md)
+**Returns:** [*Dayjs*](dateutils._dayjs.dayjs.md)
 
 Defined in: node_modules/dayjs/index.d.ts:56

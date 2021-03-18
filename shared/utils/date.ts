@@ -1,3 +1,11 @@
+/* eslint-disable tsdoc/syntax */
+// shared/utils/date.ts
+/**
+ * Shared date utilities used by both
+ * the client and the server.
+ *
+ * @module DateUtils
+ */
 import $dayjs, { ConfigType, PluginFunc } from 'dayjs'
 import 'dayjs/locale/en-gb'
 import 'dayjs/locale/nb'
@@ -13,7 +21,7 @@ import utcPlugin from 'dayjs/plugin/utc'
 import weekOfYearPlugin from 'dayjs/plugin/weekOfYear'
 import { TFunction } from 'i18next'
 import { capitalize } from 'underscore.string'
-import { DateObject } from './date.dateObject'
+import { DateObject } from './DateObject'
 import { DateWithTimezone, IDateUtils, TimeSpanStringOptions } from './types'
 
 export type DateInput = ConfigType
@@ -375,4 +383,4 @@ export default new DateUtils({
 })
 
 export * from './types'
-export { DateObject, $dayjs }
+export { $dayjs }

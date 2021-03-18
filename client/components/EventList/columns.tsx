@@ -1,5 +1,5 @@
 import { EntityLabel } from 'components/EntityLabel'
-import DateUtils from 'DateUtils'
+import $date from 'DateUtils'
 import * as helpers from 'helpers'
 import { IColumn, Link } from 'office-ui-fabric-react'
 import React, { useMemo } from 'react'
@@ -69,11 +69,8 @@ const timeColumn = (props: IEventListProps, name: string): IColumn =>
     name,
     { ...getSizing(props, 'time', 90, 90) },
     (event: TimeEntry) => {
-      const startTime = DateUtils.formatDate(
-        event.startDateTime,
-        props.dateFormat
-      )
-      const endTime = DateUtils.formatDate(event.endDateTime, props.dateFormat)
+      const startTime = $date.formatDate(event.startDateTime, props.dateFormat)
+      const endTime = $date.formatDate(event.endDateTime, props.dateFormat)
       return (
         <>
           <span>

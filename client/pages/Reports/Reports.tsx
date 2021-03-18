@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable tsdoc/syntax */
 import { FilterPanel, List, UserMessage } from 'components'
-import DateUtils from 'DateUtils'
+import $date from 'DateUtils'
 import {
   Icon,
   Pivot,
@@ -67,7 +67,7 @@ export const Reports: FunctionComponent = () => {
                           0
                         ) as number
                         return t('common.headerTotalDuration', {
-                          duration: DateUtils.getDurationString(hrs, t)
+                          duration: $date.getDurationString(hrs, t)
                         })
                       }
                     }}

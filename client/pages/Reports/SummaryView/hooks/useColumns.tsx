@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { IListColumn, IListColumnData } from 'components/List/types'
-import DateUtils from 'DateUtils'
+import $date from 'DateUtils'
 import {
   IColumn,
   IDetailsColumnRenderTooltipProps
@@ -29,7 +29,7 @@ export function useColumns(): IListColumn[] {
         const [week, year] = period
         const name = t('common.weekColumnTooltipTitle', { week: first(period) })
         const data: IListColumnData = {}
-        data.subText = DateUtils.getTimespanString({
+        data.subText = $date.getTimespanString({
           week,
           year,
           monthFormat: 'MMM'

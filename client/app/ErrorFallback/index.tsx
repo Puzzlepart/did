@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import DateUtils from 'DateUtils'
+import $date from 'DateUtils'
 import { ActionButton } from 'office-ui-fabric-react'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -36,7 +36,7 @@ export const ErrorFallback = ({
   return (
     <div role='alert' className={styles.root}>
       <div className={styles.header}>{t('common.errorFallbackHeader')}</div>
-      <pre>Time: {DateUtils.formatDate(new Date(), 'MMM DD, YYYY HH:mm')}</pre>
+      <pre>Time: {$date.formatDate(new Date(), 'MMM DD, YYYY HH:mm')}</pre>
       <pre>Error: {error.message}</pre>
       <div>
         <ActionButton

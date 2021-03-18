@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 /* eslint-disable @typescript-eslint/no-inferrable-types */
-import DateUtils from 'DateUtils'
+import $date from 'DateUtils'
 import { TFunction } from 'i18next'
 import {
   EventInput,
@@ -239,7 +239,7 @@ export class TimesheetPeriod {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public weekdays(dayFormat: string = 'dddd DD'): string[] {
     if (!this.startDate) return []
-    return DateUtils.getDays(this.startDate, this.endDate, dayFormat)
+    return $date.getDays(this.startDate, this.endDate, dayFormat)
   }
 
   /**
@@ -265,6 +265,6 @@ export class TimesheetPeriod {
    * Period is in the past
    */
   public get isPast(): boolean {
-    return DateUtils.isBefore(this.endDate)
+    return $date.isBefore(this.endDate)
   }
 }

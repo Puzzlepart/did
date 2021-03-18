@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { CustomerLink } from 'components/CustomerLink'
 import { ProjectLink } from 'components/ProjectLink'
-import DateUtils from 'DateUtils'
+import $date from 'DateUtils'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ExcelColumnType } from 'utils/exportExcel'
@@ -43,7 +43,7 @@ export function useColumns() {
         minWidth: 100,
         data: { excelColFormat: 'date' as ExcelColumnType },
         onRender: ({ startDateTime }) =>
-          DateUtils.formatDate(startDateTime, 'MMM DD, YYYY HH:mm')
+          $date.formatDate(startDateTime, 'MMM DD, YYYY HH:mm')
       },
       {
         key: 'endDateTime',
@@ -52,7 +52,7 @@ export function useColumns() {
         minWidth: 100,
         data: { excelColFormat: 'date' as ExcelColumnType },
         onRender: ({ endDateTime }) =>
-          DateUtils.formatDate(endDateTime, 'MMM DD, YYYY HH:mm')
+          $date.formatDate(endDateTime, 'MMM DD, YYYY HH:mm')
       },
       {
         key: 'week',
@@ -65,7 +65,7 @@ export function useColumns() {
         fieldName: 'month',
         name: t('common.monthLabel'),
         minWidth: 100,
-        onRender: ({ month }) => DateUtils.getMonthNames()[month - 1]
+        onRender: ({ month }) => $date.getMonthNames()[month - 1]
       },
       {
         key: 'year',

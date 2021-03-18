@@ -3,7 +3,7 @@
 import { CustomerLink } from 'components/CustomerLink'
 import { IListColumn } from 'components/List/types'
 import { ProjectLink } from 'components/ProjectLink'
-import DateUtils from 'DateUtils'
+import $date from 'DateUtils'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { UserColumn } from '../../../components/UserColumn'
@@ -55,7 +55,7 @@ export function useColumns({ defaults }) {
           minWidth: 125,
           data: { excelColFormat: 'date' },
           onRender: ({ startDateTime }) =>
-            DateUtils.formatDate(startDateTime, 'MMM DD, YYYY HH:mm')
+            $date.formatDate(startDateTime, 'MMM DD, YYYY HH:mm')
         } as IListColumn,
         {
           key: 'endDateTime',
@@ -64,7 +64,7 @@ export function useColumns({ defaults }) {
           minWidth: 125,
           data: { excelColFormat: 'date' },
           onRender: ({ endDateTime }) =>
-            DateUtils.formatDate(endDateTime, 'MMM DD, YYYY HH:mm')
+            $date.formatDate(endDateTime, 'MMM DD, YYYY HH:mm')
         } as IListColumn,
         {
           key: 'resource.displayName',
@@ -107,7 +107,7 @@ export function useColumns({ defaults }) {
           name: t('common.monthLabel'),
           minWidth: 60,
           maxWidth: 60,
-          onRender: ({ month }) => DateUtils.getMonthNames()[month - 1]
+          onRender: ({ month }) => $date.getMonthNames()[month - 1]
         } as IListColumn,
         {
           key: 'year',

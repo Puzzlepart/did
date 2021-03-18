@@ -8,7 +8,7 @@
 import { ApolloProvider } from '@apollo/client'
 import { initializeIcons } from '@uifabric/icons'
 import 'core-js/stable'
-import DateUtils from 'DateUtils'
+import $date from 'DateUtils'
 import i18next from 'i18next'
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
@@ -48,7 +48,7 @@ export const boostrap = async () => {
   }
 
   const context = await getContext()
-  DateUtils.setup(context.user.preferredLanguage)
+  $date.setup(context.user.preferredLanguage)
   i18next.changeLanguage(context.user.preferredLanguage)
 
   ReactDom.render(

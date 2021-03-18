@@ -1,10 +1,10 @@
-did-shared - v0.9.8
+did-shared - v0.9.9
 
-# did-shared - v0.9.8
+# did-shared - v0.9.9
 
 ## Table of contents
 
 ### Modules
 
-- [date](modules/date.md)
-- [date.dateObject](modules/date_dateobject.md)
+- [DateUtils](modules/dateutils.md)
+- [Security](modules/security.md)

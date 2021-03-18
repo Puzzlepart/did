@@ -1,5 +1,5 @@
 import { IUserMessageProps } from 'components/UserMessage/types'
-import DateUtils from 'DateUtils'
+import $date from 'DateUtils'
 import { MessageBarType } from 'office-ui-fabric-react'
 import { CLEAR_IGNORES } from 'pages/Timesheet/reducer/actions'
 import React, { useContext } from 'react'
@@ -20,7 +20,7 @@ export function useMessages() {
     if (!selectedPeriod.isConfirmed) {
       messages.push({
         text: t('timesheet.periodHoursSummaryText', {
-          hours: DateUtils.getDurationString(selectedPeriod.totalDuration, t)
+          hours: $date.getDurationString(selectedPeriod.totalDuration, t)
         }),
         iconName: 'ReminderTime'
       })
@@ -28,10 +28,7 @@ export function useMessages() {
     if (!selectedPeriod.isComplete && !selectedPeriod.isForecast) {
       messages.push({
         text: t('timesheet.hoursNotMatchedText', {
-          hours: DateUtils.getDurationString(
-            selectedPeriod.unmatchedDuration,
-            t
-          )
+          hours: $date.getDurationString(selectedPeriod.unmatchedDuration, t)
         }),
         type: MessageBarType.warning,
         iconName: 'BufferTimeBoth'
@@ -47,7 +44,7 @@ export function useMessages() {
     if (selectedPeriod.isConfirmed) {
       messages.push({
         text: t('timesheet.periodConfirmedText', {
-          hours: DateUtils.getDurationString(selectedPeriod.matchedDuration, t)
+          hours: $date.getDurationString(selectedPeriod.matchedDuration, t)
         }),
         type: MessageBarType.success,
         iconName: 'CheckMark'
@@ -56,7 +53,7 @@ export function useMessages() {
     if (selectedPeriod.isForecasted && !selectedPeriod.isConfirmed) {
       messages.push({
         text: t('timesheet.periodForecastedText', {
-          hours: DateUtils.getDurationString(selectedPeriod.forecastedHours, t)
+          hours: $date.getDurationString(selectedPeriod.forecastedHours, t)
         }),
         type: MessageBarType.info,
         iconName: 'BufferTimeBoth'

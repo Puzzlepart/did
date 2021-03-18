@@ -75,9 +75,11 @@ ___
 
 Gets a Microsoft Graph Client using the auth token from the class
 
+**`memberof`** MSGraphService
+
 **Returns:** *Promise*<Client\>
 
-Defined in: [server/services/msgraph/index.ts:42](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L42)
+Defined in: [server/services/msgraph/index.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L44)
 
 ___
 
@@ -87,6 +89,8 @@ ___
 
 Create Outlook category
 
+**`memberof`** MSGraphService
+
 #### Parameters:
 
 Name | Type | Description |
@@ -95,7 +99,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<MSGraphOutlookCategory\>
 
-Defined in: [server/services/msgraph/index.ts:108](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L108)
+Defined in: [server/services/msgraph/index.ts:116](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L116)
 
 ___
 
@@ -105,6 +109,8 @@ ___
 
 Get current user properties
 
+**`memberof`** MSGraphService
+
 #### Parameters:
 
 Name | Type | Description |
@@ -113,7 +119,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [server/services/msgraph/index.ts:59](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L59)
+Defined in: [server/services/msgraph/index.ts:63](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L63)
 
 ___
 
@@ -122,6 +128,8 @@ ___
 ▸ **getEvents**(`startDateTimeIso`: *string*, `endDateTimeIso`: *string*): *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
 
 Get events for the specified period using Microsoft Graph endpoint /me/calendar/calendarView
+
+**`memberof`** MSGraphService
 
 #### Parameters:
 
@@ -132,7 +140,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
 
-Defined in: [server/services/msgraph/index.ts:157](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L157)
+Defined in: [server/services/msgraph/index.ts:169](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L169)
 
 ___
 
@@ -142,9 +150,11 @@ ___
 
 Get Outlook categories
 
+**`memberof`** MSGraphService
+
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/msgraph/index.ts:134](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L134)
+Defined in: [server/services/msgraph/index.ts:144](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L144)
 
 ___
 
@@ -154,6 +164,8 @@ ___
 
 Get Azure Active Directory users
 
+**`memberof`** MSGraphService
+
 **Returns:** *Promise*<any\>
 
-Defined in: [server/services/msgraph/index.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L72)
+Defined in: [server/services/msgraph/index.ts:78](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L78)

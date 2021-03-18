@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/no-array-reduce */
 /* eslint-disable react-hooks/exhaustive-deps */
-import DateUtils from 'DateUtils'
+import $date from 'DateUtils'
 import { config } from 'package'
 import { useContext, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -21,7 +21,7 @@ export function useGroups() {
       ),
       totalFunc: (events: EventObject[]) => {
         const duration = events.reduce((sum, index) => sum + index.duration, 0)
-        return ` (${DateUtils.getDurationString(duration, t)})`
+        return ` (${$date.getDurationString(duration, t)})`
       }
     }),
     [selectedPeriod]

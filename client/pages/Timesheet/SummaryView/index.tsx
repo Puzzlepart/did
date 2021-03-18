@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/no-array-reduce */
 import { DurationColumn, List, ProjectTooltip } from 'components'
-import DateUtils from 'DateUtils'
+import $date from 'DateUtils'
 import { IColumn, MessageBar } from 'office-ui-fabric-react'
 import React, { useContext } from 'react'
 import { isMobile } from 'react-device-detect'
@@ -87,7 +87,7 @@ function generateRows(events: EventObject[], columns: IColumn[]) {
         const sum = [...projectEvents]
           .filter(
             (event) =>
-              DateUtils.formatDate(event.startDateTime, 'YYYY-MM-DD') ===
+              $date.formatDate(event.startDateTime, 'YYYY-MM-DD') ===
               col.fieldName
           )
           .reduce((sum, event) => (sum += event.duration), 0)
@@ -117,7 +117,7 @@ function generateTotalRow(events: any[], columns: IColumn[], label: string) {
       const sum = [...events]
         .filter(
           (event) =>
-            DateUtils.formatDate(event.startDateTime, 'YYYY-MM-DD') ===
+            $date.formatDate(event.startDateTime, 'YYYY-MM-DD') ===
             col.fieldName
         )
         .reduce((sum, event) => (sum += event.duration), 0)

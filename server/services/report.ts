@@ -3,7 +3,7 @@
 import { Inject, Service } from 'typedi'
 import { find, first, omit, pick } from 'underscore'
 import { ProjectService, UserService } from '.'
-import { DateObject } from '../../shared/utils/date.dateObject'
+import { DateObject } from '../../shared/utils/DateObject'
 import { Context } from '../graphql/context'
 import {
   ConfirmedPeriodsQuery,

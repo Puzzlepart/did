@@ -1,9 +1,9 @@
 /* eslint-disable tsdoc/syntax */
-/* eslint-disable tsdoc/syntax */
-// client/config/security/index.ts
+// shared/config/security/index.ts
 /**
- * Configuration
+ * Shared security configuration used by
+ * both the client and the server.
  *
- * @module Configuration
+ * @module Security
  */
 export { getPermissions, IPermission, PermissionScope } from './permissions'

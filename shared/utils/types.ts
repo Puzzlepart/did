@@ -1,4 +1,4 @@
-import { DateObject } from './date'
+import { DateObject } from './DateObject'
 
 export interface IDateUtils {
   /**
@@ -37,3 +37,5 @@ export type TimeSpanStringOptions = {
   monthFormat?: string
   yearFormat?: string
 }
+
+export { DateObject }
