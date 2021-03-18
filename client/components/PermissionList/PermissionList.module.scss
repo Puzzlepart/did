@@ -5,9 +5,12 @@
     flex-wrap: wrap;
 
     .item {
-      margin: 0 0 15px 0;
-      width: 185px;
-      height: 50px;
+      width: 225px;
+      height: 30px;
+
+      .icon {
+        margin: 0 4px 0 0;
+      }
 
       &:hover {
         font-weight: 600;

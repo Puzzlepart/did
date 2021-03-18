@@ -32,6 +32,13 @@ export interface IPermission {
   description?: string
 
   /**
+   * Icon that describe the permission
+   *
+   * @see https://developer.microsoft.com/en-us/fluentui#/styles/web/icons
+   */
+  iconName?: string
+
+  /**
    * Callable from external API
    */
   api?: boolean
@@ -53,39 +60,46 @@ export default (t: TFunction): IPermission[] => [
   {
     id: PERMISSION.ACCESS_TIMESHEET,
     name: t('permissions.accessTimesheet'),
-    description: t('permissions.accessTimesheetDescription')
+    description: t('permissions.accessTimesheetDescription'),
+    iconName: 'TimeSheet'
   },
   {
     id: PERMISSION.ACCESS_CUSTOMERS,
     name: t('permissions.accessCustomers'),
-    description: t('permissions.accessCustomersDescription')
+    description: t('permissions.accessCustomersDescription'),
+    iconName: 'People'
   },
   {
     id: PERMISSION.ACCESS_PROJECTS,
     name: t('permissions.accessProjects'),
-    description: t('permissions.accessProjectsDescription')
+    description: t('permissions.accessProjectsDescription'),
+    iconName: 'ProjectCollection'
   },
   {
     id: PERMISSION.ACCESS_ADMIN,
     name: t('permissions.accessAdmin'),
-    description: t('permissions.accessAdminDescription')
+    description: t('permissions.accessAdminDescription'),
+    iconName: 'Settings'
   },
   {
     id: PERMISSION.ACCESS_REPORTS,
     name: t('permissions.accessReports'),
     description: t('permissions.accessReportsDescription'),
+    iconName: 'ReportDocument',
     api: true
   },
   {
     id: PERMISSION.MANAGE_PROJECTS,
     name: t('permissions.manageProjects'),
     description: t('permissions.manageProjectsDescription'),
+    iconName: 'TaskManager',
     api: true
   },
   {
     id: PERMISSION.DELETE_PROJECTS,
     name: t('permissions.deleteProjects'),
     description: t('permissions.deleteProjectsDescription'),
+    iconName: 'DeleteTable',
     disabled: true,
     api: true
   },
@@ -93,6 +107,7 @@ export default (t: TFunction): IPermission[] => [
     id: PERMISSION.MANAGE_CUSTOMERS,
     name: t('permissions.manageCustomers'),
     description: t('permissions.manageCustomersDescription'),
+    iconName: 'PageData',
     api: true
   },
 
@@ -100,6 +115,7 @@ export default (t: TFunction): IPermission[] => [
     id: PERMISSION.DELETE_CUSTOMER,
     name: t('permissions.deleteCustomers'),
     description: t('permissions.deleteCustomersDescription'),
+    iconName: 'PageData',
     disabled: true,
     api: true
   },
@@ -107,18 +123,21 @@ export default (t: TFunction): IPermission[] => [
     id: PERMISSION.MANAGE_USERS,
     name: t('permissions.manageUsers'),
     description: t('permissions.manageUsersDescription'),
+    iconName: 'ManagerSelfService',
     api: true
   },
   {
     id: PERMISSION.MANAGE_ROLESPERMISSIONS,
     name: t('permissions.manageRolesPermissions'),
     description: t('permissions.manageRolesPermissionsDescription'),
+    iconName: 'Permissions',
     api: true
   },
   {
     id: PERMISSION.MANAGE_SUBSCRIPTION,
     name: t('permissions.manageSubscription'),
     description: t('permissions.manageSubscriptionDescription'),
+    iconName: 'SubstitutionsIn',
     api: false,
     disabled: true
   }
