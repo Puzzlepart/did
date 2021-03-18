@@ -9,6 +9,7 @@ import { SET_SELECTED_PROJECT } from '../reducer/actions'
 export function useProjectList({ state, dispatch, loading, t }) {
   const listProps = useMemo<IProjectListProps>(
     () => ({
+      items: null,
       enableShimmer: loading,
       searchBox: {
         placeholder:
@@ -17,7 +18,7 @@ export function useProjectList({ state, dispatch, loading, t }) {
             : t('common.searchPlaceholder'),
         onChange: () => dispatch(SET_SELECTED_PROJECT({ project: null }))
       },
-      selection: {
+      listSelection: {
         mode: SelectionMode.single,
         onChanged: (selected) => {
           dispatch(SET_SELECTED_PROJECT({ project: selected }))

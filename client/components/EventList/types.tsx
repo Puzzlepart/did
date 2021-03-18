@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 import { ITypedHash } from '@pnp/common'
-import { IListGroups } from 'components/List/types'
+import { IListGroupProps } from 'components/List/types'
 import { IColumn } from 'office-ui-fabric-react'
 import { EventObject } from 'types'
 
@@ -31,7 +31,7 @@ export interface IEventListProps extends React.HTMLProps<HTMLDivElement> {
   /**
    * Groups to render
    */
-  groups?: IListGroups
+  groups?: IListGroupProps
 
   /**
    * Show empty days

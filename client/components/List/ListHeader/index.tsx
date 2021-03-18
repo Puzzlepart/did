@@ -44,6 +44,11 @@ export const ListHeader: FunctionComponent<IListHeaderProps> = (
     farItems: props.commandBar?.farItems || []
   }
 
+  props.headerProps.onRenderColumnHeaderTooltip = (props, defaultRender) => {
+    if (!props?.column.data?.onRenderColumnHeader) return defaultRender(props)
+    return props?.column.data?.onRenderColumnHeader(props)
+  }
+
   return (
     <Sticky stickyPosition={StickyPositionType.Header} isScrollSynced={true}>
       <div className={styles.root}>

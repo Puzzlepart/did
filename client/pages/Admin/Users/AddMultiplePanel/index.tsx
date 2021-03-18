@@ -33,7 +33,7 @@ export const AddMultiplePanel = (props: IAddMultiplePanel) => {
         />
         <List
           items={activeDirectoryUsers}
-          selection={{
+          selectionProps={{
             mode: SelectionMode.multiple,
             onChanged: (selected) => setSelectedUsers(selected)
           }}

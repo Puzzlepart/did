@@ -1,39 +1,53 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { IColumn } from 'office-ui-fabric-react'
+import { IListColumn, IListColumnData } from 'components/List/types'
+import DateUtils from 'DateUtils'
+import {
+  IColumn,
+  IDetailsColumnRenderTooltipProps
+} from 'office-ui-fabric-react'
 import React, { useContext, useMemo } from 'react'
-import { User } from 'types'
+import { useTranslation } from 'react-i18next'
+import { first } from 'underscore'
 import { ReportsContext } from '../../context'
-import { UserColumn } from '../UserColumn'
+import { ColumnHeader } from '../ColumnHeader'
+import { useUserListColumn } from '../UserColumn/useUserListColumn'
 import { WeekColumn } from '../WeekColumn'
 
 /**
  * Columns hook for SummaryView
  */
-export function useColumns(): IColumn[] {
+export function useColumns(): IListColumn[] {
+  const { t } = useTranslation()
   const { state } = useContext(ReportsContext)
   const periods: any[] = state.preset?.periods || []
+  const userColumn = useUserListColumn()
   return useMemo(() => {
-    const columns: IColumn[] = [
-      {
-        key: 'user',
-        fieldName: 'user',
-        name: null,
-        minWidth: 180,
-        onRender: ({ user }: { user: Pick<User, 'displayName' | 'mail'> }) => (
-          <UserColumn user={user} />
-        )
-      }
-    ]
+    const columns: IListColumn[] = [userColumn]
     columns.push(
-      ...periods.map((p) => ({
-        key: p.join('_'),
-        fieldName: p.join('_'),
-        name: p.join('/'),
-        minWidth: 100,
-        onRender: (item: any, _index: number, column: IColumn) => (
-          <WeekColumn user={item.user} periods={item[column.fieldName]} />
-        )
-      }))
+      ...periods.map((period) => {
+        const key = period.join('_')
+        const [week, year] = period
+        const name = t('common.weekColumnTooltipTitle', { week: first(period) })
+        const data: IListColumnData = {}
+        data.subText = DateUtils.getTimespanString({
+          week,
+          year,
+          monthFormat: 'MMM'
+        })
+        data.onRenderColumnHeader = (
+          props: IDetailsColumnRenderTooltipProps
+        ) => <ColumnHeader {...props} />
+        return {
+          key,
+          fieldName: key,
+          name,
+          minWidth: 100,
+          data,
+          onRender: (item: any, _index: number, column: IColumn) => (
+            <WeekColumn user={item.user} periods={item[column.fieldName]} />
+          )
+        } as IListColumn
+      })
     )
     return columns
   }, [periods])

@@ -21,6 +21,7 @@ export const SummaryView = (): JSX.Element => {
           enableShimmer={state.loading}
           columns={columns}
           items={rows}
+          headerClassName={styles.columnHeader}
         />
         <UserMessage
           hidden={!isEmpty(rows) || state.loading}

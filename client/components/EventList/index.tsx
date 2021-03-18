@@ -18,8 +18,8 @@ export const EventList: FunctionComponent<IEventListProps> = (
         enableShimmer={props.enableShimmer}
         columns={columns}
         items={props.events}
-        groups={props.groups}
-        groupProps={{ showEmptyGroups: props.showEmptyDays }}
+        listGroupProps={props.groups}
+        listGroupRenderProps={{ showEmptyGroups: props.showEmptyDays }}
       />
     </div>
   )

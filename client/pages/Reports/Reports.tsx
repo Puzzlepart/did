@@ -59,7 +59,7 @@ export const Reports: FunctionComponent = () => {
                   <List
                     enableShimmer={state.loading}
                     items={state.subset}
-                    groups={{
+                    listGroupProps={{
                       ...state.groupBy,
                       totalFunc: (items) => {
                         const hrs = items.reduce(

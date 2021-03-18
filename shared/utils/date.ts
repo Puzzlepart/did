@@ -14,7 +14,7 @@ import weekOfYearPlugin from 'dayjs/plugin/weekOfYear'
 import { TFunction } from 'i18next'
 import { capitalize } from 'underscore.string'
 import { DateObject } from './date.dateObject'
-import { DateWithTimezone, IDateUtils } from './types'
+import { DateWithTimezone, IDateUtils, TimeSpanStringOptions } from './types'
 
 export type DateInput = ConfigType
 
@@ -143,23 +143,37 @@ export class DateUtils {
   /**
    * Get timespan string
    *
-   * @param start - Start
-   * @param end - End
-   * @param monthFormat - Month format
+   * Supports either start and end dates, or week
+   * number and year. `monthFormat` and `yearFormat`
+   * are optional.
+   *
+   * Date formats are based on if the dates are the same
+   * month and year, and if the year is the current year.
+   *
+   * @param options - Timespan options
    */
-  public getTimespanString(
-    start: DateObject,
-    end: DateObject,
-    monthFormat: string = this.$.monthFormat
-  ): string {
-    const isSameMonth = start.isSameMonth(end)
-    const isSameYear = start.isSameYear(end)
-    const sFormat = ['DD']
-    if (!isSameMonth) sFormat.push(monthFormat)
-    if (!isSameYear) sFormat.push('YYYY')
+  public getTimespanString({
+    startDate,
+    endDate,
+    week,
+    year,
+    monthFormat = this.$.monthFormat,
+    yearFormat = this.$.yearFormat
+  }: TimeSpanStringOptions): string {
+    startDate =
+      startDate || new DateObject().fromObject({ week, year }).startOfWeek
+    endDate = endDate || new DateObject().fromObject({ week, year }).endOfWeek
+    const isSameMonth = startDate.isSameMonth(endDate)
+    const isSameYear = startDate.isSameYear(endDate)
+    const isCurrentYear = startDate.isSameYear(new DateObject())
+    const startDateFormat = ['DD']
+    const endDateFormat = ['DD', monthFormat]
+    if (!isSameMonth) startDateFormat.push(monthFormat)
+    if (!isSameYear) startDateFormat.push(yearFormat)
+    if (!isCurrentYear) endDateFormat.push(yearFormat)
     return [
-      start.format(sFormat.join(' ')),
-      end.format(`DD ${monthFormat} YYYY`)
+      startDate.format(startDateFormat.join(' ')),
+      endDate.format(endDateFormat.join(' '))
     ].join(' - ')
   }
 
@@ -356,6 +370,7 @@ export class DateUtils {
 export default new DateUtils({
   tzOffset: new Date().getTimezoneOffset(),
   monthFormat: 'MMMM',
+  yearFormat: 'YYYY',
   isoWeek: true
 })
 
