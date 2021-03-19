@@ -30,7 +30,7 @@ class MSGraphService {
 
   constructor(
     private _msOAuthSvc: MSOAuthService,
-    private _access_token?: string,
+    private _accessToken?: string,
     @Inject('CONTEXT') readonly context?: Context
   ) {
     this._cache = new CacheService(context, MSGraphService.name)
@@ -42,12 +42,12 @@ class MSGraphService {
    * @memberof MSGraphService
    */
   private async _getClient(): Promise<MSGraphClient> {
-    this._access_token = (
+    this._accessToken = (
       await this._msOAuthSvc.getAccessToken(this._accessTokenOptions)
     ).access_token
     const client = MSGraphClient.init({
       authProvider: (done: (error: Error, token: any) => void) => {
-        done(null, this._access_token)
+        done(null, this._accessToken)
       }
     })
     return client
@@ -57,11 +57,8 @@ class MSGraphService {
    * Get user photo in base64 format
    *
    * @param size - Photo size
-   *
    * @public
-   *
    * @memberof MSGraphService
-   *
    * @returns A base64 representation of the user photo
    */
   public async getUserPhoto(size: string): Promise<string> {

@@ -32,14 +32,14 @@ Microsoft Graph service
 
 ### constructor
 
-\+ **new MSGraphService**(`_msOAuthSvc`: [*MSOAuthService*](services.msoauthservice.md), `_access_token?`: *string*, `context?`: *Context*): [*MSGraphService*](services.msgraphservice.md)
+\+ **new MSGraphService**(`_msOAuthSvc`: [*MSOAuthService*](services.msoauthservice.md), `_accessToken?`: *string*, `context?`: *Context*): [*MSGraphService*](services.msgraphservice.md)
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
 `_msOAuthSvc` | [*MSOAuthService*](services.msoauthservice.md) |
-`_access_token?` | *string* |
+`_accessToken?` | *string* |
 `context?` | *Context* |
 
 **Returns:** [*MSGraphService*](services.msgraphservice.md)
