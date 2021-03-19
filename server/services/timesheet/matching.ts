@@ -1,10 +1,21 @@
+/* eslint-disable tsdoc/syntax */
 import { findBestMatch } from 'string-similarity'
 import { contains, filter, find, first, isEmpty } from 'underscore'
 import { Customer, EventObject } from '../../graphql/resolvers/types'
 import { ProjectsData } from '../mongo/project'
 import { ProjectMatch } from './types'
 
-export default class {
+/**
+ * Timesheet matching engine
+ *
+ * @category TimesheetService
+ */
+export default class TimesheetMatchingEngine {
+  /**
+   * Constructor for `TimesheetMatchingEngine`
+   * 
+   * @param _data - Projects data
+   */
   constructor(private _data: ProjectsData) {}
 
   /**

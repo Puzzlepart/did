@@ -3,7 +3,7 @@
 /**
  * Main entry point for the App
  *
- * @module .
+ * @module /
  */
 import { ApolloProvider } from '@apollo/client'
 import { initializeIcons } from '@uifabric/icons'

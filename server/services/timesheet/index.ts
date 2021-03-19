@@ -35,14 +35,14 @@ export class TimesheetService {
   /**
    * Constructor
    *
-   * @param context - Injected context through typedi
-   * @param _msgraphSvc - Injected `MSGraphService` through typedi
-   * @param _googleCalSvc - Injected `GoogleCalendarService` through typedi
-   * @param _projectSvc - Injected `ProjectService` through typedi
-   * @param _teSvc - Injected `TimeEntryService` through typedi
-   * @param _fteSvc - Injected `ForecastedTimeEntryService` through typedi
-   * @param _cperiodSvc - Injected `ConfirmedPeriodsService` through typedi
-   * @param _fperiodSvc - Injected `ForecastedPeriodsService` through typedi
+   * @param context - Injected context through `typedi`
+   * @param _msgraphSvc - Injected `MSGraphService` through `typedi`
+   * @param _googleCalSvc - Injected `GoogleCalendarService` through `typedi`
+   * @param _projectSvc - Injected `ProjectService` through `typedi`
+   * @param _teSvc - Injected `TimeEntryService` through `typedi`
+   * @param _fteSvc - Injected `ForecastedTimeEntryService` through `typedi`
+   * @param _cperiodSvc - Injected `ConfirmedPeriodsService` through `typedi`
+   * @param _fperiodSvc - Injected `ForecastedPeriodsService` through `typedi`
    */
   constructor(
     @Inject('CONTEXT') private readonly context: Context,

@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / UserPhoto
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / UserPhoto
 
 # Class: UserPhoto
 
-[graphql](../modules/graphql.md).UserPhoto
+[GraphQL](../modules/graphql.md).UserPhoto
 
 A type that describes a User photo
 
@@ -30,4 +30,4 @@ A type that describes a User photo
 
 • `Optional` **base64**: *string*
 
-Defined in: [server/graphql/resolvers/user/types.ts:22](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L22)
+Defined in: [graphql/resolvers/user/types.ts:22](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L22)

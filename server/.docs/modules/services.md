@@ -1,12 +1,10 @@
-[did-server - v0.9.11](../README.md) / services
+[did-server - v0.9.11](../README.md) / Services
 
-# Module: services
+# Module: Services
+
+Services used by `GraphQL`
 
 ## Table of contents
-
-### References
-
-- [TokenService](services.md#tokenservice)
 
 ### Enumerations
 
@@ -23,6 +21,7 @@
 - [GoogleCalendarService](../classes/services.googlecalendarservice.md)
 - [LabelService](../classes/services.labelservice.md)
 - [MSGraphService](../classes/services.msgraphservice.md)
+- [MSOAuthService](../classes/services.msoauthservice.md)
 - [NotificationService](../classes/services.notificationservice.md)
 - [ProjectService](../classes/services.projectservice.md)
 - [ReportService](../classes/services.reportservice.md)
@@ -40,16 +39,10 @@
 
 - [CacheKey](services.md#cachekey)
 
-## References
-
-### TokenService
-
-Renames and exports: [default](../classes/services_oauth.default.md)
-
 ## Type aliases
 
 ### CacheKey
 
 Ƭ **CacheKey**: *string* \| *string*[]
 
-Defined in: [server/services/cache.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L16)
+Defined in: [services/cache.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L16)

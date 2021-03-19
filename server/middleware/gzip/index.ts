@@ -1,3 +1,4 @@
+/* eslint-disable tsdoc/syntax */
 import express from 'express'
 import fs from 'fs'
 
@@ -5,6 +6,8 @@ import fs from 'fs'
  * Serve gzipped
  *
  * @param contentType - Content type
+ *
+ * @category Express middleware
  */
 export const serveGzippedMiddleware = (contentType: string) => (
   request: express.Request,

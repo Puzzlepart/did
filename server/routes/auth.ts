@@ -1,3 +1,12 @@
+/* eslint-disable tsdoc/syntax */
+/**
+ * NodeJS `express` auth route
+ *
+ * Handles authentication with providers/strategies
+ * `azuread-openidconnect` and `google`
+ *
+ * @module AuthRoute
+ */
 import { NextFunction, Request, Response, Router } from 'express'
 import passport from 'passport'
 import { contains } from 'underscore'
@@ -7,16 +16,20 @@ import { environment } from '../utils'
 const auth = Router()
 
 const REDIRECT_URL_PROPERTY = '__redirectUrl'
+type AuthProvider = 'azuread-openidconnect' | 'google'
 
 /**
- * Handler for /auth/azuread-openidconnect/signin and /auth/google/signin
+ * Handler for `/auth/azuread-openidconnect/signin` and `/auth/google/signin
+ *
+ * @remarks Regenerates the session before authenticating with the provided
+ * strategy using `request.session.regenerate`.
  *
  * @param request - Request
  * @param response - Response
  * @param next - Next function
  */
 export const signInHandler = (
-  strategy: 'azuread-openidconnect' | 'google',
+  strategy: AuthProvider,
   options: passport.AuthenticateOptions
 ) => (request: Request, response: Response, next: NextFunction) => {
   request.session.regenerate(() => {
@@ -26,15 +39,17 @@ export const signInHandler = (
 }
 
 /**
- * Handler for /auth/azuread-openidconnect/callback and  /auth/google/callback
+ * Handler for `/auth/azuread-openidconnect/callback` and  `/auth/google/callback`
  *
  * @param request - Request
  * @param response - Response
  * @param next - Next function
  */
-export const authCallbackHandler = (
-  strategy: 'azuread-openidconnect' | 'google'
-) => (request: Request, response: Response, next: NextFunction) => {
+export const authCallbackHandler = (strategy: AuthProvider) => (
+  request: Request,
+  response: Response,
+  next: NextFunction
+) => {
   passport.authenticate(strategy, (error: Error, user: Express.User) => {
     if (error || !user) {
       const _error = error instanceof SigninError ? error : SIGNIN_FAILED
@@ -63,7 +78,7 @@ export const authCallbackHandler = (
 }
 
 /**
- * Handler for /auth/signout
+ * Handler for `/auth/signout`
  *
  * @param request - Request
  * @param response - Response

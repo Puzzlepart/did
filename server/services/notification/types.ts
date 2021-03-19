@@ -28,7 +28,7 @@ export class UserNotification {
   }
 
   /**
-   * Generate notification id
+   * Generates a unique notification id
    *
    * @param id - Id
    */

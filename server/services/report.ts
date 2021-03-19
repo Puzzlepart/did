@@ -40,12 +40,12 @@ export class ReportService {
   /**
    * Constructor for ReportsService
    *
-   * @param context - Injected context through typedi
-   * @param _projectSvc - Injected `ProjectService` through typedi
-   * @param _userSvc - Injected `UserService` through typedi
-   * @param _teSvc - Injected `TimeEntryService` through typedi
-   * @param _fteSvc - Injected `ForecastedTimeEntryService` through typedi
-   * @param _cperiodSvc - Injected `ConfirmedPeriodsService` through typedi
+   * @param context - Injected context through `typedi`
+   * @param _projectSvc - Injected `ProjectService` through `typedi`
+   * @param _userSvc - Injected `UserService` through `typedi`
+   * @param _teSvc - Injected `TimeEntryService` through `typedi`
+   * @param _fteSvc - Injected `ForecastedTimeEntryService` through `typedi`
+   * @param _cperiodSvc - Injected `ConfirmedPeriodsService` through `typedi`
    */
   constructor(
     @Inject('CONTEXT') readonly context: Context,

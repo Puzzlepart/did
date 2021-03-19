@@ -1,4 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable tsdoc/syntax */
+/**
+ * NodeJS Express App
+ *
+ * @module App
+ */
 require('dotenv').config()
 import bodyParser from 'body-parser'
 import express from 'express'
@@ -38,7 +44,7 @@ export class App {
    */
   constructor() {
     this.instance = express()
-    this.instance.use(helmetMiddleware)
+    this.instance.use(helmetMiddleware())
     this.instance.use(
       favicon(path.join(__dirname, 'public/images/favicon/favicon.ico'))
     )

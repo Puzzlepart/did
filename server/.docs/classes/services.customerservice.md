@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [services](../modules/services.md) / CustomerService
+[did-server - v0.9.11](../README.md) / [Services](../modules/services.md) / CustomerService
 
 # Class: CustomerService
 
-[services](../modules/services.md).CustomerService
+[Services](../modules/services.md).CustomerService
 
 Customer service
 
@@ -41,25 +41,27 @@ Customer service
 
 ### constructor
 
-\+ **new CustomerService**(`context`: [*Context*](graphql_context.context.md)): [*CustomerService*](services.customerservice.md)
+\+ **new CustomerService**(`context`: *Context*): [*CustomerService*](services.customerservice.md)
+
+Constructor for `CustomerService`
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`context` | [*Context*](graphql_context.context.md) |
+Name | Type | Description |
+:------ | :------ | :------ |
+`context` | *Context* | Injected context through `typedi`    |
 
 **Returns:** [*CustomerService*](services.customerservice.md)
 
-Defined in: [server/services/mongo/customer.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L15)
+Defined in: [services/mongo/customer.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L16)
 
 ## Properties
 
 ### cache
 
-• **cache**: [*CacheService*](services_cache.cacheservice.md)= null
+• **cache**: [*CacheService*](services.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
+Defined in: [services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
 
 ___
 
@@ -73,7 +75,7 @@ ___
 
 • **collection**: *Collection*<[*Customer*](graphql.customer.md)\>
 
-Defined in: [server/services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
+Defined in: [services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
 
 ___
 
@@ -85,7 +87,7 @@ ___
 
 ### context
 
-• `Readonly` **context**: [*Context*](graphql_context.context.md)
+• `Readonly` **context**: *Context*
 
 ## Methods
 
@@ -103,7 +105,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/customer.ts:25](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L25)
+Defined in: [services/mongo/customer.ts:31](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L31)
 
 ___
 
@@ -121,7 +123,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/customer.ts:56](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L56)
+Defined in: [services/mongo/customer.ts:62](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L62)
 
 ___
 
@@ -148,7 +150,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Customer*](graphql.customer.md)[]\>
 
-Defined in: [server/services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
+Defined in: [services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
 
 ___
 
@@ -166,7 +168,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Customer*](graphql.customer.md)[]\>
 
-Defined in: [server/services/mongo/customer.ts:70](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L70)
+Defined in: [services/mongo/customer.ts:76](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L76)
 
 ___
 
@@ -186,7 +188,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*Customer*](graphql.customer.md)\>\>\>
 
-Defined in: [server/services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
+Defined in: [services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
 
 ___
 
@@ -208,7 +210,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertWriteOpResult<WithId<[*Customer*](graphql.customer.md)\>\>\>
 
-Defined in: [server/services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
+Defined in: [services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
 
 ___
 
@@ -229,7 +231,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
 
-Defined in: [server/services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)
+Defined in: [services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)
 
 ___
 
@@ -247,4 +249,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/customer.ts:42](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L42)
+Defined in: [services/mongo/customer.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L48)

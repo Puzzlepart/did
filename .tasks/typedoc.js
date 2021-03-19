@@ -24,6 +24,6 @@ log(white(`
 
 concurrently([
     { command: 'typedoc -options ./shared/typedoc.json ', name: 'typedoc/shared' },
-    { command: 'typedoc ./server/**/*.ts ./server/*.ts --options ./server/typedoc.json', name: 'typedoc/server' },
+    { command: 'typedoc -options ./server/typedoc.json', name: 'typedoc/server' },
     { command: 'typedoc -options ./client/typedoc.json', name: 'typedoc/client' }
 ], {})

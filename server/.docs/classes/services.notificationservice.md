@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [services](../modules/services.md) / NotificationService
+[did-server - v0.9.11](../README.md) / [Services](../modules/services.md) / NotificationService
 
 # Class: NotificationService
 
-[services](../modules/services.md).NotificationService
+[Services](../modules/services.md).NotificationService
 
 Notification service
 
@@ -11,11 +11,6 @@ Notification service
 ### Constructors
 
 - [constructor](services.notificationservice.md#constructor)
-
-### Properties
-
-- [\_confirmed\_periods](services.notificationservice.md#_confirmed_periods)
-- [\_forecasted\_periods](services.notificationservice.md#_forecasted_periods)
 
 ### Methods
 
@@ -28,36 +23,22 @@ Notification service
 
 ### constructor
 
-\+ **new NotificationService**(`context`: [*Context*](graphql_context.context.md), `_timesheetSvc`: [*TimesheetService*](services.timesheetservice.md)): [*NotificationService*](services.notificationservice.md)
+\+ **new NotificationService**(`context`: *Context*, `_timesheetSvc`: [*TimesheetService*](services.timesheetservice.md), `_cperiodSvc`: [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md), `_fperiodSvc`: [*ForecastedPeriodsService*](services.forecastedperiodsservice.md)): [*NotificationService*](services.notificationservice.md)
 
-Constructor
+Constructor for `NotificationService`
 
 #### Parameters:
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | [*Context*](graphql_context.context.md) | Injected context through typedi   |
-`_timesheetSvc` | [*TimesheetService*](services.timesheetservice.md) | Timesheet service    |
+`context` | *Context* | Injected context through `typedi`   |
+`_timesheetSvc` | [*TimesheetService*](services.timesheetservice.md) | Injected `TimesheetService` through `typedi`   |
+`_cperiodSvc` | [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md) | Injected `ConfirmedPeriodsService` through `typedi`   |
+`_fperiodSvc` | [*ForecastedPeriodsService*](services.forecastedperiodsservice.md) | Injected `ForecastedPeriodsService` through `typedi`    |
 
 **Returns:** [*NotificationService*](services.notificationservice.md)
 
-Defined in: [server/services/notification/index.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L23)
-
-## Properties
-
-### \_confirmed\_periods
-
-• `Private` **\_confirmed\_periods**: *Collection*<any\>
-
-Defined in: [server/services/notification/index.ts:22](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L22)
-
-___
-
-### \_forecasted\_periods
-
-• `Private` **\_forecasted\_periods**: *Collection*<any\>
-
-Defined in: [server/services/notification/index.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L23)
+Defined in: [services/notification/index.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L21)
 
 ## Methods
 
@@ -76,7 +57,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<ForecastNotification[]\>
 
-Defined in: [server/services/notification/index.ts:97](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L97)
+Defined in: [services/notification/index.ts:94](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L94)
 
 ___
 
@@ -96,7 +77,7 @@ Name | Type | Description |
 
 **Returns:** *any*[]
 
-Defined in: [server/services/notification/index.ts:46](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L46)
+Defined in: [services/notification/index.ts:45](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L45)
 
 ___
 
@@ -115,7 +96,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UnconfirmedPeriodNotification[]\>
 
-Defined in: [server/services/notification/index.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L71)
+Defined in: [services/notification/index.ts:70](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L70)
 
 ___
 
@@ -134,4 +115,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [server/services/notification/index.ts:136](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L136)
+Defined in: [services/notification/index.ts:131](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L131)

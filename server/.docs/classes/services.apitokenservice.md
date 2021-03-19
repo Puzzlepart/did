@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [services](../modules/services.md) / ApiTokenService
+[did-server - v0.9.11](../README.md) / [Services](../modules/services.md) / ApiTokenService
 
 # Class: ApiTokenService
 
-[services](../modules/services.md).ApiTokenService
+[Services](../modules/services.md).ApiTokenService
 
 API token service
 
@@ -40,25 +40,27 @@ API token service
 
 ### constructor
 
-\+ **new ApiTokenService**(`context`: [*Context*](graphql_context.context.md)): [*ApiTokenService*](services.apitokenservice.md)
+\+ **new ApiTokenService**(`context`: *Context*): [*ApiTokenService*](services.apitokenservice.md)
+
+Constructor for `ApiTokenService`
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`context` | [*Context*](graphql_context.context.md) |
+Name | Type | Description |
+:------ | :------ | :------ |
+`context` | *Context* | Injected context through `typedi`    |
 
 **Returns:** [*ApiTokenService*](services.apitokenservice.md)
 
-Defined in: [server/services/mongo/api_token.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L17)
+Defined in: [services/mongo/api_token.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L18)
 
 ## Properties
 
 ### cache
 
-• **cache**: [*CacheService*](services_cache.cacheservice.md)= null
+• **cache**: [*CacheService*](services.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
+Defined in: [services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
 
 ___
 
@@ -72,7 +74,7 @@ ___
 
 • **collection**: *Collection*<[*ApiToken*](graphql.apitoken.md)\>
 
-Defined in: [server/services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
+Defined in: [services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
 
 ___
 
@@ -84,7 +86,7 @@ ___
 
 ### context
 
-• `Readonly` **context**: [*Context*](graphql_context.context.md)
+• `Readonly` **context**: *Context*
 
 ## Methods
 
@@ -103,7 +105,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<string\>
 
-Defined in: [server/services/mongo/api_token.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L47)
+Defined in: [services/mongo/api_token.ts:53](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L53)
 
 ___
 
@@ -122,7 +124,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/api_token.ts:74](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L74)
+Defined in: [services/mongo/api_token.ts:80](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L80)
 
 ___
 
@@ -149,7 +151,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
 
-Defined in: [server/services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
+Defined in: [services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
 
 ___
 
@@ -167,7 +169,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
 
-Defined in: [server/services/mongo/api_token.ts:32](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L32)
+Defined in: [services/mongo/api_token.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L38)
 
 ___
 
@@ -187,7 +189,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*ApiToken*](graphql.apitoken.md)\>\>\>
 
-Defined in: [server/services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
+Defined in: [services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
 
 ___
 
@@ -209,7 +211,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertWriteOpResult<WithId<[*ApiToken*](graphql.apitoken.md)\>\>\>
 
-Defined in: [server/services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
+Defined in: [services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
 
 ___
 
@@ -230,4 +232,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
 
-Defined in: [server/services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)
+Defined in: [services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)
