@@ -33,7 +33,7 @@ export const ProjectList: FunctionComponent<IProjectListProps> = (
         (col) => !contains(props.hideColumns || [], col.key)
       )}
       groups={props.groups}
-      selection={props.selection}
+      selectionProps={props.selectionProps}
       commandBar={{
         items: [
           {
