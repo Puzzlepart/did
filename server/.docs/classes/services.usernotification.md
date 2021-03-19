@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [services](../modules/services.md) / UserNotification
+[did-server - v0.9.11](../README.md) / [Services](../modules/services.md) / UserNotification
 
 # Class: UserNotification
 
-[services](../modules/services.md).UserNotification
+[Services](../modules/services.md).UserNotification
 
 Used as a base to create notifications to the user
 

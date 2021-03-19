@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [services](../modules/services.md) / TokenService
+[did-server - v0.9.11](../README.md) / [Services](../modules/services.md) / TokenService
 
 # Class: TokenService
 
-[services](../modules/services.md).TokenService
+[Services](../modules/services.md).TokenService
 
 OAuth service
 

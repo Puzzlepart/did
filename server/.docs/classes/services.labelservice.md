@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [services](../modules/services.md) / LabelService
+[did-server - v0.9.11](../README.md) / [Services](../modules/services.md) / LabelService
 
 # Class: LabelService
 
-[services](../modules/services.md).LabelService
+[Services](../modules/services.md).LabelService
 
 Label service
 

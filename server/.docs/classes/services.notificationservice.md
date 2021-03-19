@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [services](../modules/services.md) / NotificationService
+[did-server - v0.9.11](../README.md) / [Services](../modules/services.md) / NotificationService
 
 # Class: NotificationService
 
-[services](../modules/services.md).NotificationService
+[Services](../modules/services.md).NotificationService
 
 Notification service
 

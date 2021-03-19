@@ -1,18 +1,20 @@
-[did-server - v0.9.11](../README.md) / routes/auth
+[did-server - v0.9.11](../README.md) / AuthRoute
 
-# Module: routes/auth
+# Module: AuthRoute
+
+NodeJS Express App auth route
 
 ## Table of contents
 
 ### Variables
 
-- [default](routes_auth.md#default)
+- [default](authroute.md#default)
 
 ### Functions
 
-- [authCallbackHandler](routes_auth.md#authcallbackhandler)
-- [signInHandler](routes_auth.md#signinhandler)
-- [signOutHandler](routes_auth.md#signouthandler)
+- [authCallbackHandler](authroute.md#authcallbackhandler)
+- [signInHandler](authroute.md#signinhandler)
+- [signOutHandler](authroute.md#signouthandler)
 
 ## Variables
 
@@ -20,7 +22,7 @@
 
 • `Const` **default**: *Router*
 
-Defined in: [routes/auth.ts:7](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L7)
+Defined in: [routes/auth.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L13)
 
 ## Functions
 
@@ -38,7 +40,7 @@ Name | Type |
 
 **Returns:** (`request`: *Request*<ParamsDictionary, any, any, ParsedQs\>, `response`: *Response*<any\>, `next`: NextFunction) => *void*
 
-Defined in: [routes/auth.ts:35](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L35)
+Defined in: [routes/auth.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L41)
 
 ___
 
@@ -57,7 +59,7 @@ Name | Type |
 
 **Returns:** (`request`: *Request*<ParamsDictionary, any, any, ParsedQs\>, `response`: *Response*<any\>, `next`: NextFunction) => *void*
 
-Defined in: [routes/auth.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L18)
+Defined in: [routes/auth.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L24)
 
 ___
 
@@ -76,4 +78,4 @@ Name | Type | Description |
 
 **Returns:** *void*
 
-Defined in: [routes/auth.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L72)
+Defined in: [routes/auth.ts:78](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L78)

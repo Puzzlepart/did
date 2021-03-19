@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [services](../modules/services.md) / ForecastedTimeEntryService
+[did-server - v0.9.11](../README.md) / [Services](../modules/services.md) / ForecastedTimeEntryService
 
 # Class: ForecastedTimeEntryService
 
-[services](../modules/services.md).ForecastedTimeEntryService
+[Services](../modules/services.md).ForecastedTimeEntryService
 
 Forecasted time entries service
 

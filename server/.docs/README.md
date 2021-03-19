@@ -8,8 +8,8 @@ did-server - v0.9.11
 
 - [.](modules/_.md)
 - [App](modules/app.md)
+- [AuthRoute](modules/authroute.md)
 - [GraphQL](modules/graphql.md)
 - [Middleware](modules/middleware.md)
-- [routes/auth](modules/routes_auth.md)
-- [services](modules/services.md)
+- [Services](modules/services.md)
 - [utils](modules/utils.md)

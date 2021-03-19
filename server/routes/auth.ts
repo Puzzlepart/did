@@ -1,3 +1,9 @@
+/* eslint-disable tsdoc/syntax */
+/**
+ * NodeJS Express App auth route
+ *
+ * @module AuthRoute
+ */
 import { NextFunction, Request, Response, Router } from 'express'
 import passport from 'passport'
 import { contains } from 'underscore'

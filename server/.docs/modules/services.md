@@ -1,6 +1,8 @@
-[did-server - v0.9.11](../README.md) / services
+[did-server - v0.9.11](../README.md) / Services
 
-# Module: services
+# Module: Services
+
+Services used by `GraphQL`
 
 ## Table of contents
 

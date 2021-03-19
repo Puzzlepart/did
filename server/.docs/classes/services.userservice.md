@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [services](../modules/services.md) / UserService
+[did-server - v0.9.11](../README.md) / [Services](../modules/services.md) / UserService
 
 # Class: UserService
 
-[services](../modules/services.md).UserService
+[Services](../modules/services.md).UserService
 
 User service
 

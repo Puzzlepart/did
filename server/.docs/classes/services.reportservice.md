@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [services](../modules/services.md) / ReportService
+[did-server - v0.9.11](../README.md) / [Services](../modules/services.md) / ReportService
 
 # Class: ReportService
 
-[services](../modules/services.md).ReportService
+[Services](../modules/services.md).ReportService
 
 Report service
 

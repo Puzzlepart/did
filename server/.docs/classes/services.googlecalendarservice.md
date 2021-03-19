@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [services](../modules/services.md) / GoogleCalendarService
+[did-server - v0.9.11](../README.md) / [Services](../modules/services.md) / GoogleCalendarService
 
 # Class: GoogleCalendarService
 
-[services](../modules/services.md).GoogleCalendarService
+[Services](../modules/services.md).GoogleCalendarService
 
 Google calendar service
 
