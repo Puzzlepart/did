@@ -1,6 +1,8 @@
-[did-server - v0.9.11](../README.md) / middleware
+[did-server - v0.9.11](../README.md) / Middleware
 
-# Module: middleware
+# Module: Middleware
+
+NodeJS Express App middleware
 
 ## Table of contents
 
