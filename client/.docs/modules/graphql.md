@@ -12,6 +12,11 @@ GraphQL
 
 - [$usercontext](graphql.md#$usercontext)
 
+### GraphQL Interfaces
+
+- [IBaseResult](../interfaces/graphql.ibaseresult.md)
+- [IError](../interfaces/graphql.ierror.md)
+
 ### Variables
 
 - [client](graphql.md#client)

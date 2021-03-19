@@ -269,7 +269,7 @@ ___
 
 • `Const` **UserMessage**: *FunctionComponent*<[*IUserMessageProps*](../interfaces/components.iusermessageprops.md)\>
 
-A component that supports a MessageBar with markdown using react-markdown
+A component that supports a `<MessageBar />` with markdown using `react-markdown`
 
 Defined in: [client/components/UserMessage/index.tsx:18](https://github.com/Puzzlepart/did/blob/dev/client/components/UserMessage/index.tsx#L18)
 

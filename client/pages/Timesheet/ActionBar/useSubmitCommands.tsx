@@ -125,15 +125,29 @@ export function useSubmitCommands() {
       let menuProps: IContextualMenuProps = null
       if (commands.length > 1) {
         menuProps = {
-          items: commands.map((cmd, index) => ({
-            ...(omit(cmd, 'buttonStyles', 'iconProps') as IContextualMenuItem),
-            isChecked: index === 0
+          calloutProps: {
+            calloutWidth: 280
+          },
+          items: commands.map((command_) => ({
+            ...(omit(command_, 'buttonStyles') as IContextualMenuItem),
+            itemProps: {
+              styles: {
+                secondaryText: {
+                  fontSize: 10,
+                  color: 'rgb(96, 94, 92)'
+                },
+                checkmarkIcon: {
+                  display: 'none'
+                }
+              }
+            }
           }))
         }
       }
 
       return (
         <PrimaryButton
+          style={{ width: 280 }}
           primary={false}
           {...(first(commands) as any)}
           menuProps={menuProps}
