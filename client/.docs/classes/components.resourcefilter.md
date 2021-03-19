@@ -102,7 +102,7 @@ Name | Type | Description |
 
 Overrides: [BaseFilter](components.basefilter.md)
 
-Defined in: [client/components/FilterPanel/Filters/ResourceFilter.ts:32](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/ResourceFilter.ts#L32)
+Defined in: [client/components/FilterPanel/Filters/ResourceFilter.ts:28](https://github.com/Puzzlepart/did/blob/dev/client/components/FilterPanel/Filters/ResourceFilter.ts#L28)
 
 ___
 

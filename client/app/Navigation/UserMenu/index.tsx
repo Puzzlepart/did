@@ -31,6 +31,7 @@ export const UserMenu: FunctionComponent = () => {
           secondaryText={user.mail}
           imageUrl={user.photo?.base64}
           size={PersonaSize.size32}
+          hidePersonaDetails={isMobile}
           onClick={() => setMenuHidden(false)}
         />
         <Icon
