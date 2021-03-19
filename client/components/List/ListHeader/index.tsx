@@ -23,6 +23,7 @@ export const ListHeader: FunctionComponent<IListHeaderProps> = (
       onRender: () => (
         <SearchBox
           {...props.searchBox}
+          value={props.state.searchTerm}
           className={styles.searchBox}
           onChange={(_event, searchTerm) => {
             clearTimeout(timeout.current)

@@ -26,7 +26,7 @@ export function searchObject<T = any>({
   try {
     let item_ = (omit(item, omit_) as unknown) as T
     if (pick_) item_ = (pick(item, pick_) as unknown) as T
-    const _values = JSON.stringify(Object.values(item_))
+    const _values = JSON.stringify(Object.values(item_)).toLowerCase()
     return _values.includes(searchTerm.toLowerCase())
   } catch {
     return false

@@ -16,6 +16,7 @@ export const onRenderListHeader = ({
   headerProps,
   defaultRender,
   props,
+  state,
   dispatch
 }: RenderListHeaderParams) => {
   if (!!props.onRenderDetailsHeader)
@@ -26,6 +27,7 @@ export const onRenderListHeader = ({
       defaultRender={defaultRender}
       searchBox={props.searchBox}
       commandBar={props.commandBar}
+      state={state}
       dispatch={dispatch}
     />
   )
