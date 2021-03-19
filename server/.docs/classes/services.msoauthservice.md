@@ -4,7 +4,9 @@
 
 [Services](../modules/services.md).MSOAuthService
 
-OAuth service
+Microsoft OAuth service
+
+Used for renewing access token using `simple-oauth2`
 
 ## Table of contents
 
@@ -31,7 +33,7 @@ Name | Type |
 
 **Returns:** [*MSOAuthService*](services.msoauthservice.md)
 
-Defined in: services/msoauth.ts:24
+Defined in: [services/msoauth.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/services/msoauth.ts#L26)
 
 ## Methods
 
@@ -49,7 +51,7 @@ Name | Type | Description |
 
 **Returns:** *AuthorizationCode*<*client_id*\>
 
-Defined in: services/msoauth.ts:32
+Defined in: [services/msoauth.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/services/msoauth.ts#L34)
 
 ___
 
@@ -70,4 +72,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Token\>
 
-Defined in: services/msoauth.ts:56
+Defined in: [services/msoauth.ts:58](https://github.com/Puzzlepart/did/blob/dev/server/services/msoauth.ts#L58)

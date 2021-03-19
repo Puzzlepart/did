@@ -16,7 +16,9 @@ export interface MSAccessTokenOptions {
 }
 
 /**
- * OAuth service
+ * Microsoft OAuth service
+ * 
+ * Used for renewing access token using `simple-oauth2`
  *
  * @category Injectable Container Service
  */
