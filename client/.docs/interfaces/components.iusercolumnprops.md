@@ -14,6 +14,6 @@
 
 ### user
 
-• **user**: *Pick*<User, *displayName* \| *mail*\>
+• **user**: *Pick*<User, *displayName* \| *mail* \| *photo*\>
 
 Defined in: [client/components/UserColumn/types.tsx:4](https://github.com/Puzzlepart/did/blob/dev/client/components/UserColumn/types.tsx#L4)

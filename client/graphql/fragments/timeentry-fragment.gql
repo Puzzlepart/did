@@ -20,6 +20,8 @@ fragment TimeEntryFragment on TimeEntry {
     surname
     mail
     displayName
-    photo
+    photo {
+      base64
+    }
   }
 }

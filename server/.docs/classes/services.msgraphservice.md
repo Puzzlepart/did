@@ -25,6 +25,7 @@ Microsoft Graph service
 - [getCurrentUser](services.msgraphservice.md#getcurrentuser)
 - [getEvents](services.msgraphservice.md#getevents)
 - [getOutlookCategories](services.msgraphservice.md#getoutlookcategories)
+- [getUserPhoto](services.msgraphservice.md#getuserphoto)
 - [getUsers](services.msgraphservice.md#getusers)
 
 ## Constructors
@@ -99,7 +100,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<MSGraphOutlookCategory\>
 
-Defined in: [server/services/msgraph/index.ts:116](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L116)
+Defined in: [server/services/msgraph/index.ts:146](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L146)
 
 ___
 
@@ -119,7 +120,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [server/services/msgraph/index.ts:63](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L63)
+Defined in: [server/services/msgraph/index.ts:89](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L89)
 
 ___
 
@@ -140,7 +141,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
 
-Defined in: [server/services/msgraph/index.ts:169](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L169)
+Defined in: [server/services/msgraph/index.ts:203](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L203)
 
 ___
 
@@ -154,7 +155,29 @@ Get Outlook categories
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/msgraph/index.ts:144](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L144)
+Defined in: [server/services/msgraph/index.ts:176](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L176)
+
+___
+
+### getUserPhoto
+
+▸ **getUserPhoto**(`size`: *string*): *Promise*<any\>
+
+Get user photo in base64 format
+
+**`memberof`** MSGraphService
+
+#### Parameters:
+
+Name | Type | Description |
+:------ | :------ | :------ |
+`size` | *string* | Photo size    |
+
+**Returns:** *Promise*<any\>
+
+A base64 representation of the user photo
+
+Defined in: [server/services/msgraph/index.ts:67](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L67)
 
 ___
 
@@ -168,4 +191,4 @@ Get Azure Active Directory users
 
 **Returns:** *Promise*<any\>
 
-Defined in: [server/services/msgraph/index.ts:78](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L78)
+Defined in: [server/services/msgraph/index.ts:106](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L106)

@@ -6,6 +6,25 @@ import { Subscription } from '../subscription/types'
 import { Role } from '../types'
 
 /**
+ * A type that describes a User photo
+ *
+ * @category GraphQL ObjectType
+ */
+@ObjectType({
+  description: 'A type that describes a User photo',
+  simpleResolvers: true
+})
+export class UserPhoto {
+  @Field({
+    description: 'Base64 representation of the User photo',
+    nullable: true
+  })
+  base64?: string
+}
+
+/**
+ * A type that describes a User
+ *
  * @category GraphQL ObjectType
  */
 @ObjectType({
@@ -58,7 +77,7 @@ export class User {
   provider?: string
 
   @Field({ nullable: true })
-  photo?: string
+  photo?: UserPhoto
 
   public create?(user: User): User {
     Object.assign(this, user)

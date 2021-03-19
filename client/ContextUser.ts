@@ -1,7 +1,7 @@
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES } from 'i18n'
 import { config } from 'package'
 import { PermissionScope } from 'security'
-import { Role, User } from 'types'
+import { Role, User, UserPhoto } from 'types'
 import { contains } from 'underscore'
 import { tryParseJson } from 'utils'
 
@@ -12,7 +12,7 @@ export class ContextUser {
   public mail: string
   public startPage: string
   public configuration: Record<string, any>
-  public photo: string
+  public photo: UserPhoto
 
   /**
    * Constructor

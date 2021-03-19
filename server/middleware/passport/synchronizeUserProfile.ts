@@ -33,7 +33,9 @@ export async function synchronizeUserProfile(
       await userSrv.updateUser({
         id: user.id,
         ...pick(data, properties),
-        photo
+        photo: {
+          base64: photo
+        }
       })
       debug('User profile properties synchronized from Azure AD.')
     } else {

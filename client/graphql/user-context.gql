@@ -26,7 +26,9 @@ query UserContext {
     startPage
     preferredLanguage
     configuration
-    photo
+    photo {
+      base64
+    }
   }
   authProviders
 }
