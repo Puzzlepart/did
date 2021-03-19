@@ -34,6 +34,7 @@ export const SettingsSection: FunctionComponent<ISettingsSectionProps> = (
               <Toggle
                 {...fieldProps}
                 defaultChecked={get(settings, key, false)}
+                inlineLabel={true}
                 onChange={(_event, value) => onChange(key, value)}
               />
             )

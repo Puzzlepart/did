@@ -43,6 +43,16 @@ export function useSubscriptionConfig() {
           },
           hiddenIf: (settings: SubscriptionSettings) =>
             !settings?.adsync?.enabled
+        },
+        {
+          id: 'syncUserPhoto',
+          type: 'bool',
+          props: {
+            label: t('admin.adUserSyncUserPhotoLabel'),
+            description: t('admin.adUserSyncUserPhotoDescription')
+          },
+          hiddenIf: (settings: SubscriptionSettings) =>
+            !settings?.adsync?.enabled
         }
       ]
     },
