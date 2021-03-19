@@ -32,7 +32,11 @@ export function useColumns(): IListColumn[] {
         data.subText = $date.getTimespanString({
           week,
           year,
-          monthFormat: 'MMM'
+          monthFormat: 'MMM',
+          includeMonth: {
+            startDate: false,
+            endDate: true
+          }
         })
         data.onRenderColumnHeader = (
           props: IDetailsColumnRenderTooltipProps

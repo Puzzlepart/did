@@ -29,6 +29,11 @@ export interface IListColumnData {
   excelColFormat?: ExcelColumnType
 
   /**
+   * Hidden from Excel exports
+   */
+  hiddenFromExport?: boolean
+
+  /**
    * Callback to render a tooltip for the column header
    */
   onRenderColumnHeader?: (

@@ -17,7 +17,7 @@
 
 ### columns
 
-• **columns**: IColumn[]
+• **columns**: *IListColumn*<IListColumnData\>[]
 
 Columns
 

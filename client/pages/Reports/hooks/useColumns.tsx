@@ -3,7 +3,7 @@
 import { CustomerLink } from 'components/CustomerLink'
 import { IListColumn } from 'components/List/types'
 import { ProjectLink } from 'components/ProjectLink'
-import $date from 'DateUtils'
+import $date, { DateObject } from 'DateUtils'
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { UserColumn } from '../../../components/UserColumn'
@@ -42,6 +42,27 @@ export function useColumns({ defaults }) {
           onRender: ({ customer }) => <CustomerLink customer={customer} />
         } as IListColumn,
         {
+          key: 'startEndDateTime',
+          fieldName: 'startEndDateTime',
+          name: t('common.timeLabel'),
+          minWidth: 125,
+          maxWidth: 170,
+          data: {
+            hiddenFromExport: true
+          },
+          onRender: ({ startDateTime, endDateTime }) =>
+            $date.getTimespanString({
+              startDate: new DateObject(startDateTime),
+              endDate: new DateObject(endDateTime),
+              dayFormat: 'DD.',
+              includeTime: 'HH:mm',
+              includeMonth: {
+                startDate: true,
+                endDate: false
+              }
+            })
+        } as IListColumn,
+        {
           key: 'duration',
           fieldName: 'duration',
           name: t('common.durationLabel'),
@@ -53,7 +74,7 @@ export function useColumns({ defaults }) {
           fieldName: 'startDateTime',
           name: t('common.startTimeLabel'),
           minWidth: 125,
-          data: { excelColFormat: 'date' },
+          data: { excelColFormat: 'date', hidden: true },
           onRender: ({ startDateTime }) =>
             $date.formatDate(startDateTime, 'MMM DD, YYYY HH:mm')
         } as IListColumn,
@@ -62,7 +83,7 @@ export function useColumns({ defaults }) {
           fieldName: 'endDateTime',
           name: t('common.endTimeLabel'),
           minWidth: 125,
-          data: { excelColFormat: 'date' },
+          data: { excelColFormat: 'date', hidden: true },
           onRender: ({ endDateTime }) =>
             $date.formatDate(endDateTime, 'MMM DD, YYYY HH:mm')
         } as IListColumn,
@@ -98,8 +119,8 @@ export function useColumns({ defaults }) {
           key: 'week',
           fieldName: 'week',
           name: t('common.weekLabel'),
-          minWidth: 40,
-          maxWidth: 40
+          minWidth: 50,
+          maxWidth: 50
         } as IListColumn,
         {
           key: 'month',

@@ -79,7 +79,10 @@ export class TimesheetScope {
   public get timespan(): string {
     return DateUtils.getTimespanString({
       startDate: this.startDate,
-      endDate: this.endDate
+      endDate: this.endDate,
+      includeMonth: {
+        endDate: true
+      }
     })
   }
 }
