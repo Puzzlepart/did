@@ -1,6 +1,9 @@
 /* eslint-disable tsdoc/syntax */
 /**
  * NodeJS `express` auth route
+ * 
+ * Handles authentication with providers/strategies
+ * `azuread-openidconnect` and `google`
  *
  * @module AuthRoute
  */
@@ -13,6 +16,7 @@ import { environment } from '../utils'
 const auth = Router()
 
 const REDIRECT_URL_PROPERTY = '__redirectUrl'
+type AuthProvider = 'azuread-openidconnect' | 'google'
 
 /**
  * Handler for /auth/azuread-openidconnect/signin and /auth/google/signin
@@ -22,7 +26,7 @@ const REDIRECT_URL_PROPERTY = '__redirectUrl'
  * @param next - Next function
  */
 export const signInHandler = (
-  strategy: 'azuread-openidconnect' | 'google',
+  strategy: AuthProvider,
   options: passport.AuthenticateOptions
 ) => (request: Request, response: Response, next: NextFunction) => {
   request.session.regenerate(() => {
@@ -39,7 +43,7 @@ export const signInHandler = (
  * @param next - Next function
  */
 export const authCallbackHandler = (
-  strategy: 'azuread-openidconnect' | 'google'
+  strategy: AuthProvider
 ) => (request: Request, response: Response, next: NextFunction) => {
   passport.authenticate(strategy, (error: Error, user: Express.User) => {
     if (error || !user) {

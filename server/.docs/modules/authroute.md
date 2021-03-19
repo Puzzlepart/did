@@ -4,6 +4,9 @@
 
 NodeJS `express` auth route
 
+Handles authentication with providers/strategies
+`azuread-openidconnect` and `google`
+
 ## Table of contents
 
 ### Variables
@@ -22,13 +25,13 @@ NodeJS `express` auth route
 
 • `Const` **default**: *Router*
 
-Defined in: [routes/auth.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L13)
+Defined in: [routes/auth.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L16)
 
 ## Functions
 
 ### authCallbackHandler
 
-▸ `Const`**authCallbackHandler**(`strategy`: *azuread-openidconnect* \| *google*): *function*
+▸ `Const`**authCallbackHandler**(`strategy`: AuthProvider): *function*
 
 Handler for /auth/azuread-openidconnect/callback and  /auth/google/callback
 
@@ -36,17 +39,17 @@ Handler for /auth/azuread-openidconnect/callback and  /auth/google/callback
 
 Name | Type |
 :------ | :------ |
-`strategy` | *azuread-openidconnect* \| *google* |
+`strategy` | AuthProvider |
 
 **Returns:** (`request`: *Request*<ParamsDictionary, any, any, ParsedQs\>, `response`: *Response*<any\>, `next`: NextFunction) => *void*
 
-Defined in: [routes/auth.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L41)
+Defined in: [routes/auth.ts:45](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L45)
 
 ___
 
 ### signInHandler
 
-▸ `Const`**signInHandler**(`strategy`: *azuread-openidconnect* \| *google*, `options`: AuthenticateOptions): *function*
+▸ `Const`**signInHandler**(`strategy`: AuthProvider, `options`: AuthenticateOptions): *function*
 
 Handler for /auth/azuread-openidconnect/signin and /auth/google/signin
 
@@ -54,12 +57,12 @@ Handler for /auth/azuread-openidconnect/signin and /auth/google/signin
 
 Name | Type |
 :------ | :------ |
-`strategy` | *azuread-openidconnect* \| *google* |
+`strategy` | AuthProvider |
 `options` | AuthenticateOptions |
 
 **Returns:** (`request`: *Request*<ParamsDictionary, any, any, ParsedQs\>, `response`: *Response*<any\>, `next`: NextFunction) => *void*
 
-Defined in: [routes/auth.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L24)
+Defined in: [routes/auth.ts:28](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L28)
 
 ___
 
@@ -78,4 +81,4 @@ Name | Type | Description |
 
 **Returns:** *void*
 
-Defined in: [routes/auth.ts:78](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L78)
+Defined in: [routes/auth.ts:82](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L82)
