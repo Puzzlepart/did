@@ -1,13 +1,13 @@
 /* eslint-disable tsdoc/syntax */
-import { useLayoutEffect, useMemo } from 'react'
+import { useLayoutEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { useUpdateUserConfiguration } from '../../../hooks/user/useUpdateUserConfiguration'
-import initFilters from '../filters'
 import { useReportsReducer } from '../reducer'
 import { IReportsParameters } from '../types'
 import { useQueries } from './queries'
 import { useColumns } from './useColumns'
+import { useFilters } from './useFilters'
 import { useReportsQuery } from './useReportsQuery'
 
 /**
@@ -37,7 +37,7 @@ export function useReports() {
   }, [state.preset, history])
 
   const columns = useColumns({ defaults: { isResizable: true } })
-  const filters = useMemo(() => initFilters(state.filter, t), [state.filter, t])
+  const filters = useFilters({ filter: state.filter })
 
   useUpdateUserConfiguration(
     {

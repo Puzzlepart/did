@@ -587,7 +587,7 @@ Name | Type |
 :------ | :------ |
 `columns` | *IListColumn*<IListColumnData\>[] |
 `dispatch` | *Dispatch*<AnyAction\> |
-`filters` | [*BaseFilter*](../classes/components.basefilter.md)<any\>[] |
+`filters` | [*BaseFilter*](../classes/components.basefilter.md)[] |
 `history` | *History*<unknown\> |
 `params` | [*IReportsParameters*](../interfaces/pages.ireportsparameters.md) |
 `queries` | [*IReportsQuery*](../interfaces/pages.ireportsquery.md)[] |

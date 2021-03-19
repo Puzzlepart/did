@@ -1054,7 +1054,7 @@ ___
 
 ### filters
 
-• **filters**: [*BaseFilter*](../classes/components.basefilter.md)<any\>[]
+• **filters**: [*BaseFilter*](../classes/components.basefilter.md)[]
 
 Filters to show
 

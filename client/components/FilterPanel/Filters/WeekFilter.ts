@@ -1,46 +1,37 @@
 /* eslint-disable tsdoc/syntax */
 import { getValue } from 'helpers'
-import { contains, unique } from 'underscore'
-import { BaseFilter, IFilter } from './BaseFilter'
+import { unique } from 'underscore'
+import { BaseFilter } from './BaseFilter'
+import { IFilter } from './types'
 
 /**
+ * @extends BaseFilter
  * @category FilterPanel
  */
-export class WeekFilter<
-  ItemType = any,
-  KeyType = any
-> extends BaseFilter<ItemType> {
-  private _selectedKeys: KeyType[]
-
-  constructor(fieldName: string, public name: string) {
-    super(fieldName, name)
+export class WeekFilter extends BaseFilter {
+  /**
+   * Constructor for `WeekFilter`
+   *
+   * @param name - Name
+   * @param keyFieldName - Field name for the item key
+   */
+  constructor(name: string, keyFieldName: string) {
+    super(name, keyFieldName)
   }
 
   /**
-   * Intialize the WeekFilter
+   * Intialize the `WeekFilter`
    *
    * @param items - Items
    */
-  public initialize(items: ItemType[]): IFilter {
+  public initialize(items: any[]): IFilter {
     const weeks = unique(
-      items.map((item_) => getValue(item_, this.fieldName, null))
+      items.map((item_) => getValue(item_, this.keyFieldName, null))
     ).sort((a, b) => a - b)
     const _items = weeks.map((week) => ({
       key: week,
       value: week
     }))
-    return {
-      key: this.fieldName,
-      name: this.name,
-      items: _items,
-      selected: _items.filter((index) =>
-        contains(this._selectedKeys, index.key)
-      )
-    }
-  }
-
-  public setDefaults(values: { [key: string]: KeyType[] }) {
-    this._selectedKeys = getValue(values, this.fieldName) ?? []
-    return this
+    return super.initialize(_items)
   }
 }
