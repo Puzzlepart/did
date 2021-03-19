@@ -11,10 +11,16 @@ import { MongoDocumentService } from './@document'
 /**
  * API token service
  *
+ * @extends MongoDocumentService
  * @category Injectable Container Service
  */
 @Service({ global: false })
 export class ApiTokenService extends MongoDocumentService<ApiToken> {
+  /**
+   * Constructor for `ApiTokenService`
+   *
+   * @param context - Injected context through typedi
+   */
   constructor(@Inject('CONTEXT') readonly context: Context) {
     super(
       context,

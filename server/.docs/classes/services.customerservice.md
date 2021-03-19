@@ -43,15 +43,17 @@ Customer service
 
 \+ **new CustomerService**(`context`: *Context*): [*CustomerService*](services.customerservice.md)
 
+Constructor for `CustomerService`
+
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`context` | *Context* |
+Name | Type | Description |
+:------ | :------ | :------ |
+`context` | *Context* | Injected context through typedi    |
 
 **Returns:** [*CustomerService*](services.customerservice.md)
 
-Defined in: [services/mongo/customer.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L15)
+Defined in: [services/mongo/customer.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L16)
 
 ## Properties
 
@@ -103,7 +105,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/mongo/customer.ts:25](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L25)
+Defined in: [services/mongo/customer.ts:31](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L31)
 
 ___
 
@@ -121,7 +123,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/mongo/customer.ts:56](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L56)
+Defined in: [services/mongo/customer.ts:62](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L62)
 
 ___
 
@@ -166,7 +168,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Customer*](graphql.customer.md)[]\>
 
-Defined in: [services/mongo/customer.ts:70](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L70)
+Defined in: [services/mongo/customer.ts:76](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L76)
 
 ___
 
@@ -247,4 +249,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/mongo/customer.ts:42](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L42)
+Defined in: [services/mongo/customer.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/customer.ts#L48)

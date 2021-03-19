@@ -42,7 +42,7 @@ Project service
 
 \+ **new ProjectService**(`context`: *Context*, `_customerSvc`: [*CustomerService*](services.customerservice.md), `_labelSvc`: [*LabelService*](services.labelservice.md)): [*ProjectService*](services.projectservice.md)
 
-Constructor for ProjectService
+Constructor for `ProjectService`
 
 #### Parameters:
 
@@ -54,7 +54,7 @@ Name | Type | Description |
 
 **Returns:** [*ProjectService*](services.projectservice.md)
 
-Defined in: [services/mongo/project.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L27)
+Defined in: [services/mongo/project.ts:28](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L28)
 
 ## Properties
 
@@ -108,7 +108,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<string\>
 
-Defined in: [services/mongo/project.ts:50](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L50)
+Defined in: [services/mongo/project.ts:51](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L51)
 
 ___
 
@@ -157,7 +157,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<ProjectsData\>
 
-Defined in: [services/mongo/project.ts:92](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L92)
+Defined in: [services/mongo/project.ts:93](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L93)
 
 ___
 
@@ -240,4 +240,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<boolean\>
 
-Defined in: [services/mongo/project.ts:72](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L72)
+Defined in: [services/mongo/project.ts:73](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/project.ts#L73)

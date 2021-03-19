@@ -9,10 +9,16 @@ import { MongoDocumentService } from './@document'
 /**
  * Role service
  *
+ * @extends MongoDocumentService
  * @category Injectable Container Service
  */
 @Service({ global: false })
 export class RoleService extends MongoDocumentService<Role> {
+  /**
+   * Constructor for `RoleService`
+   *
+   * @param context - Injected context through typedi
+   */
   constructor(@Inject('CONTEXT') readonly context: Context) {
     super(context, 'roles')
   }

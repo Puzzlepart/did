@@ -21,12 +21,13 @@ export type ProjectsData = {
 /**
  * Project service
  *
+ * @extends MongoDocumentService
  * @category Injectable Container Service
  */
 @Service({ global: false })
 export class ProjectService extends MongoDocumentService<Project> {
   /**
-   * Constructor for ProjectService
+   * Constructor for `ProjectService`
    *
    * @param context - Injected context through typedi
    * @param _customerSvc - Injected `CustomerService` through typedi

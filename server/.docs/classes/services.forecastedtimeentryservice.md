@@ -39,7 +39,7 @@ Forecasted time entries service
 
 \+ **new ForecastedTimeEntryService**(`context`: *Context*): [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md)
 
-Constructor for ForecastedTimeEntryService
+Constructor for `ForecastedTimeEntryService`
 
 #### Parameters:
 
@@ -49,7 +49,7 @@ Name | Type | Description |
 
 **Returns:** [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md)
 
-Defined in: [services/mongo/forecasted_time_entry.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/forecasted_time_entry.ts#L13)
+Defined in: [services/mongo/forecasted_time_entry.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/forecasted_time_entry.ts#L14)
 
 ## Properties
 

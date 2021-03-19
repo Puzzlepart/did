@@ -39,7 +39,7 @@ Forecasted periods service
 
 \+ **new ForecastedPeriodsService**(`context`: *Context*): [*ForecastedPeriodsService*](services.forecastedperiodsservice.md)
 
-Constructor for ForecastedPeriodsService
+Constructor for `ForecastedPeriodsService`
 
 #### Parameters:
 
@@ -49,7 +49,7 @@ Name | Type | Description |
 
 **Returns:** [*ForecastedPeriodsService*](services.forecastedperiodsservice.md)
 
-Defined in: [services/mongo/forecasted_periods.ts:12](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/forecasted_periods.ts#L12)
+Defined in: [services/mongo/forecasted_periods.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/forecasted_periods.ts#L13)
 
 ## Properties
 

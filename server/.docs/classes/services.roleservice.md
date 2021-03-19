@@ -44,15 +44,17 @@ Role service
 
 \+ **new RoleService**(`context`: *Context*): [*RoleService*](services.roleservice.md)
 
+Constructor for `RoleService`
+
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`context` | *Context* |
+Name | Type | Description |
+:------ | :------ | :------ |
+`context` | *Context* | Injected context through typedi    |
 
 **Returns:** [*RoleService*](services.roleservice.md)
 
-Defined in: [services/mongo/role.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L15)
+Defined in: [services/mongo/role.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L16)
 
 ## Properties
 
@@ -104,7 +106,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*Role*](graphql.role.md)\>\>\>
 
-Defined in: [services/mongo/role.ts:53](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L53)
+Defined in: [services/mongo/role.ts:59](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L59)
 
 ___
 
@@ -122,7 +124,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/mongo/role.ts:80](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L80)
+Defined in: [services/mongo/role.ts:86](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L86)
 
 ___
 
@@ -167,7 +169,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Role*](graphql.role.md)\>
 
-Defined in: [services/mongo/role.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L39)
+Defined in: [services/mongo/role.ts:45](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L45)
 
 ___
 
@@ -185,7 +187,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*Role*](graphql.role.md)[]\>
 
-Defined in: [services/mongo/role.ts:25](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L25)
+Defined in: [services/mongo/role.ts:31](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L31)
 
 ___
 
@@ -266,4 +268,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/mongo/role.ts:67](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L67)
+Defined in: [services/mongo/role.ts:73](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/role.ts#L73)

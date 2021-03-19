@@ -12,10 +12,16 @@ import { MongoDocumentService } from './@document'
 /**
  * Subscription service
  *
+ * @extends MongoDocumentService
  * @category Injectable Container Service
  */
 @Service({ global: false })
 export class SubscriptionService extends MongoDocumentService<Subscription> {
+  /**
+   * Constructor for `SubscriptionService`
+   *
+   * @param context - Injected context through typedi
+   */
   constructor(@Inject('CONTEXT') readonly context: Context) {
     super(
       context,

@@ -42,15 +42,17 @@ API token service
 
 \+ **new ApiTokenService**(`context`: *Context*): [*ApiTokenService*](services.apitokenservice.md)
 
+Constructor for `ApiTokenService`
+
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`context` | *Context* |
+Name | Type | Description |
+:------ | :------ | :------ |
+`context` | *Context* | Injected context through typedi    |
 
 **Returns:** [*ApiTokenService*](services.apitokenservice.md)
 
-Defined in: [services/mongo/api_token.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L17)
+Defined in: [services/mongo/api_token.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L18)
 
 ## Properties
 
@@ -103,7 +105,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<string\>
 
-Defined in: [services/mongo/api_token.ts:47](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L47)
+Defined in: [services/mongo/api_token.ts:53](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L53)
 
 ___
 
@@ -122,7 +124,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [services/mongo/api_token.ts:74](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L74)
+Defined in: [services/mongo/api_token.ts:80](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L80)
 
 ___
 
@@ -167,7 +169,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*ApiToken*](graphql.apitoken.md)[]\>
 
-Defined in: [services/mongo/api_token.ts:32](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L32)
+Defined in: [services/mongo/api_token.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/api_token.ts#L38)
 
 ___
 

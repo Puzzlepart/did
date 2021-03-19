@@ -7,12 +7,13 @@ import { MongoDocumentService } from './@document'
 /**
  * Forecasted time entries service
  *
+ * @extends MongoDocumentService
  * @category Injectable Container Service
  */
 @Service({ global: false })
 export class ForecastedTimeEntryService extends MongoDocumentService<TimeEntry> {
   /**
-   * Constructor for ForecastedTimeEntryService
+   * Constructor for `ForecastedTimeEntryService`
    *
    * @param context - Injected context through typedi
    */

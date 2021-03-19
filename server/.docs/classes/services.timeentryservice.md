@@ -39,7 +39,7 @@ Time entry service
 
 \+ **new TimeEntryService**(`context`: *Context*): [*TimeEntryService*](services.timeentryservice.md)
 
-Constructor for TimeEntryService
+Constructor for `TimeEntryService`
 
 #### Parameters:
 
@@ -49,7 +49,7 @@ Name | Type | Description |
 
 **Returns:** [*TimeEntryService*](services.timeentryservice.md)
 
-Defined in: [services/mongo/time_entry.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/time_entry.ts#L13)
+Defined in: [services/mongo/time_entry.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/time_entry.ts#L14)
 
 ## Properties
 

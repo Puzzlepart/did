@@ -6,12 +6,13 @@ import { MongoDocumentService } from './@document'
 /**
  * Confirmed periods service
  *
+ * @extends MongoDocumentService
  * @category Injectable Container Service
  */
 @Service({ global: false })
 export class ConfirmedPeriodsService extends MongoDocumentService<any> {
   /**
-   * Constructor for ConfirmedPeriodsService
+   * Constructor for `ConfirmedPeriodsService`
    *
    * @param context - Injected context through typedi
    */

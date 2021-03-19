@@ -39,7 +39,7 @@ Confirmed periods service
 
 \+ **new ConfirmedPeriodsService**(`context`: *Context*): [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md)
 
-Constructor for ConfirmedPeriodsService
+Constructor for `ConfirmedPeriodsService`
 
 #### Parameters:
 
@@ -49,7 +49,7 @@ Name | Type | Description |
 
 **Returns:** [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md)
 
-Defined in: [services/mongo/confirmed_periods.ts:12](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/confirmed_periods.ts#L12)
+Defined in: [services/mongo/confirmed_periods.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/confirmed_periods.ts#L13)
 
 ## Properties
 
