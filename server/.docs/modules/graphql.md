@@ -78,13 +78,13 @@
 
 Reports query preset
 
-Defined in: [server/graphql/resolvers/reports/types.ts:70](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L70)
+Defined in: [graphql/resolvers/reports/types.ts:70](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/reports/types.ts#L70)
 
 ## Functions
 
 ### generateClientInfo
 
-▸ **generateClientInfo**(`__namedParameters`: *GraphQLRequestContext*<[*Context*](../classes/graphql_context.context.md)\>): *object*
+▸ **generateClientInfo**(`__namedParameters`: *GraphQLRequestContext*<Context\>): *object*
 
 Specify this function to provide Apollo Studio with client details
 for each processed request. Apollo Studio uses this information to
@@ -105,7 +105,7 @@ for Postman, Azure Logic Apps and Microsoft Flow.
 
 Name | Type |
 :------ | :------ |
-`__namedParameters` | *GraphQLRequestContext*<[*Context*](../classes/graphql_context.context.md)\> |
+`__namedParameters` | *GraphQLRequestContext*<Context\> |
 
 **Returns:** *object*
 
@@ -114,7 +114,7 @@ Name | Type |
 `clientName` | *string* |
 `clientVersion` | *string* |
 
-Defined in: [server/graphql/index.ts:89](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L89)
+Defined in: [graphql/index.ts:89](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L89)
 
 ___
 
@@ -133,7 +133,7 @@ Generate GraphQL schema using type-graphql
 
 **Returns:** *Promise*<GraphQLSchema\>
 
-Defined in: [server/graphql/index.ts:46](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L46)
+Defined in: [graphql/index.ts:46](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L46)
 
 ___
 
@@ -155,4 +155,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/graphql/index.ts:122](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L122)
+Defined in: [graphql/index.ts:122](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L122)

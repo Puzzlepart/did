@@ -38,13 +38,13 @@ Name | Type | Description |
 
 **Returns:** [*SubscriptionResolver*](graphql.subscriptionresolver.md)
 
-Defined in: [server/graphql/resolvers/subscription/index.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/index.ts#L26)
+Defined in: [graphql/resolvers/subscription/index.ts:26](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/index.ts#L26)
 
 ## Methods
 
 ### subscription
 
-▸ **subscription**(`context`: [*Context*](graphql_context.context.md)): *Promise*<[*Subscription*](graphql.subscription.md)\>
+▸ **subscription**(`context`: *Context*): *Promise*<[*Subscription*](graphql.subscription.md)\>
 
 Get current subscription
 
@@ -52,11 +52,11 @@ Get current subscription
 
 Name | Type |
 :------ | :------ |
-`context` | [*Context*](graphql_context.context.md) |
+`context` | *Context* |
 
 **Returns:** *Promise*<[*Subscription*](graphql.subscription.md)\>
 
-Defined in: [server/graphql/resolvers/subscription/index.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/index.ts#L41)
+Defined in: [graphql/resolvers/subscription/index.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/index.ts#L41)
 
 ___
 
@@ -74,4 +74,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<BaseResult\>
 
-Defined in: [server/graphql/resolvers/subscription/index.ts:52](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/index.ts#L52)
+Defined in: [graphql/resolvers/subscription/index.ts:52](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/subscription/index.ts#L52)

@@ -37,7 +37,7 @@ Name | Type | Description |
 
 **Returns:** [*NotificationResolver*](graphql.notificationresolver.md)
 
-Defined in: [server/graphql/resolvers/notification/index.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/index.ts#L21)
+Defined in: [graphql/resolvers/notification/index.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/index.ts#L21)
 
 ## Methods
 
@@ -56,4 +56,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [server/graphql/resolvers/notification/index.ts:37](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/index.ts#L37)
+Defined in: [graphql/resolvers/notification/index.ts:37](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/notification/index.ts#L37)

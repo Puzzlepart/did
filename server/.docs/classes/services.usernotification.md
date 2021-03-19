@@ -45,7 +45,7 @@ Name | Type |
 
 **Returns:** [*UserNotification*](services.usernotification.md)
 
-Defined in: [server/services/notification/types.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/types.ts#L17)
+Defined in: [services/notification/types.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/types.ts#L17)
 
 ## Properties
 
@@ -55,7 +55,7 @@ Defined in: [server/services/notification/types.ts:17](https://github.com/Puzzle
 
 Notification ID
 
-Defined in: [server/services/notification/types.ts:12](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/types.ts#L12)
+Defined in: [services/notification/types.ts:12](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/types.ts#L12)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 Notification text
 
-Defined in: [server/services/notification/types.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/types.ts#L17)
+Defined in: [services/notification/types.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/types.ts#L17)
 
 ___
 
@@ -91,7 +91,7 @@ More link
 
 **Returns:** *string*
 
-Defined in: [server/services/notification/types.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/types.ts#L44)
+Defined in: [services/notification/types.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/types.ts#L44)
 
 ## Methods
 
@@ -109,4 +109,4 @@ Name | Type | Description |
 
 **Returns:** *string*
 
-Defined in: [server/services/notification/types.ts:35](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/types.ts#L35)
+Defined in: [services/notification/types.ts:35](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/types.ts#L35)

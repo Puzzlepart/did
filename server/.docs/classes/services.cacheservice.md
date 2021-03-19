@@ -29,7 +29,7 @@ Cache service
 
 ### constructor
 
-\+ **new CacheService**(`context`: [*Context*](graphql_context.context.md), `prefix?`: *string*, `scope?`: [*CacheScope*](../enums/services_cache.cachescope.md)): [*CacheService*](services_cache.cacheservice.md)
+\+ **new CacheService**(`context`: *Context*, `prefix?`: *string*, `scope?`: [*CacheScope*](../enums/services.cachescope.md)): [*CacheService*](services.cacheservice.md)
 
 Constructor
 
@@ -37,13 +37,13 @@ Constructor
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | [*Context*](graphql_context.context.md) | Scope (defaults to CacheScope.SUBSCRIPTION)    |
+`context` | *Context* | Scope (defaults to CacheScope.SUBSCRIPTION)    |
 `prefix?` | *string* | Prefix   |
-`scope` | [*CacheScope*](../enums/services_cache.cachescope.md) | - |
+`scope` | [*CacheScope*](../enums/services.cachescope.md) | - |
 
-**Returns:** [*CacheService*](services_cache.cacheservice.md)
+**Returns:** [*CacheService*](services.cacheservice.md)
 
-Defined in: [server/services/cache.ts:30](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L30)
+Defined in: [services/cache.ts:30](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L30)
 
 ## Properties
 
@@ -55,7 +55,7 @@ ___
 
 ### scope
 
-• **scope**: [*CacheScope*](../enums/services_cache.cachescope.md)
+• **scope**: [*CacheScope*](../enums/services.cachescope.md)
 
 ## Methods
 
@@ -79,13 +79,13 @@ Name | Type |
 
 **Returns:** *Promise*<T\>
 
-Defined in: [server/services/cache.ts:73](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L73)
+Defined in: [services/cache.ts:73](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L73)
 
 ___
 
 ### \_getScopedCacheKey
 
-▸ `Private`**_getScopedCacheKey**(`key`: [*CacheKey*](../modules/services_cache.md#cachekey), `scope?`: [*CacheScope*](../enums/services_cache.cachescope.md)): *string*
+▸ `Private`**_getScopedCacheKey**(`key`: *string* \| *string*[], `scope?`: [*CacheScope*](../enums/services.cachescope.md)): *string*
 
 Get scoped cache key
 
@@ -97,12 +97,12 @@ values and joined by :.
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`key` | [*CacheKey*](../modules/services_cache.md#cachekey) | Cache key   |
-`scope` | [*CacheScope*](../enums/services_cache.cachescope.md) | Cache scope    |
+`key` | *string* \| *string*[] | Cache key   |
+`scope` | [*CacheScope*](../enums/services.cachescope.md) | Cache scope    |
 
 **Returns:** *string*
 
-Defined in: [server/services/cache.ts:54](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L54)
+Defined in: [services/cache.ts:54](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L54)
 
 ___
 
@@ -127,7 +127,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<unknown\>
 
-Defined in: [server/services/cache.ts:95](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L95)
+Defined in: [services/cache.ts:95](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L95)
 
 ___
 
@@ -145,7 +145,7 @@ Name | Type |
 
 **Returns:** *Promise*<unknown\>
 
-Defined in: [server/services/cache.ts:125](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L125)
+Defined in: [services/cache.ts:125](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L125)
 
 ___
 
@@ -170,4 +170,4 @@ Name | Type |
 
 **Returns:** *Promise*<T\>
 
-Defined in: [server/services/cache.ts:142](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L142)
+Defined in: [services/cache.ts:142](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L142)

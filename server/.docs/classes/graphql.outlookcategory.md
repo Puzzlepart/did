@@ -31,7 +31,7 @@
 
 • **color**: *string*
 
-Defined in: [server/graphql/resolvers/outlookCategory/types.ts:25](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/types.ts#L25)
+Defined in: [graphql/resolvers/outlookCategory/types.ts:25](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/types.ts#L25)
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 • **displayName**: *string*
 
-Defined in: [server/graphql/resolvers/outlookCategory/types.ts:22](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/types.ts#L22)
+Defined in: [graphql/resolvers/outlookCategory/types.ts:22](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/types.ts#L22)
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 • **id**: *string*
 
-Defined in: [server/graphql/resolvers/outlookCategory/types.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/types.ts#L16)
+Defined in: [graphql/resolvers/outlookCategory/types.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/types.ts#L16)
 
 ___
 
@@ -55,4 +55,4 @@ ___
 
 • `Optional` **key**: *string*
 
-Defined in: [server/graphql/resolvers/outlookCategory/types.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/types.ts#L19)
+Defined in: [graphql/resolvers/outlookCategory/types.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/types.ts#L19)

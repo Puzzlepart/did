@@ -29,7 +29,7 @@ Report service
 
 ### constructor
 
-\+ **new ReportService**(`context`: [*Context*](graphql_context.context.md), `_projectSvc`: [*ProjectService*](services.projectservice.md), `_userSvc`: [*UserService*](services.userservice.md), `_teSvc`: [*TimeEntryService*](services.timeentryservice.md), `_fteSvc`: [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md), `_cperiodSvc`: [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md)): [*ReportService*](services_report.reportservice.md)
+\+ **new ReportService**(`context`: *Context*, `_projectSvc`: [*ProjectService*](services.projectservice.md), `_userSvc`: [*UserService*](services.userservice.md), `_teSvc`: [*TimeEntryService*](services.timeentryservice.md), `_fteSvc`: [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md), `_cperiodSvc`: [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md)): [*ReportService*](services.reportservice.md)
 
 Constructor for ReportsService
 
@@ -37,22 +37,22 @@ Constructor for ReportsService
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | [*Context*](graphql_context.context.md) | Injected context through typedi   |
+`context` | *Context* | Injected context through typedi   |
 `_projectSvc` | [*ProjectService*](services.projectservice.md) | Injected `ProjectService` through typedi   |
 `_userSvc` | [*UserService*](services.userservice.md) | Injected `UserService` through typedi   |
 `_teSvc` | [*TimeEntryService*](services.timeentryservice.md) | Injected `TimeEntryService` through typedi   |
 `_fteSvc` | [*ForecastedTimeEntryService*](services.forecastedtimeentryservice.md) | Injected `ForecastedTimeEntryService` through typedi   |
 `_cperiodSvc` | [*ConfirmedPeriodsService*](services.confirmedperiodsservice.md) | Injected `ConfirmedPeriodsService` through typedi    |
 
-**Returns:** [*ReportService*](services_report.reportservice.md)
+**Returns:** [*ReportService*](services.reportservice.md)
 
-Defined in: [server/services/report.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L39)
+Defined in: [services/report.ts:39](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L39)
 
 ## Properties
 
 ### context
 
-• `Readonly` **context**: [*Context*](graphql_context.context.md)
+• `Readonly` **context**: *Context*
 
 ## Methods
 
@@ -70,7 +70,7 @@ Name | Type | Description |
 
 **Returns:** *any*
 
-Defined in: [server/services/report.ts:64](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L64)
+Defined in: [services/report.ts:64](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L64)
 
 ___
 
@@ -88,7 +88,7 @@ Name | Type |
 
 **Returns:** *any*[]
 
-Defined in: [server/services/report.ts:89](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L89)
+Defined in: [services/report.ts:89](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L89)
 
 ___
 
@@ -106,7 +106,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/report.ts:132](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L132)
+Defined in: [services/report.ts:132](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L132)
 
 ___
 
@@ -118,7 +118,7 @@ Get forecast report
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/report.ts:172](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L172)
+Defined in: [services/report.ts:172](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L172)
 
 ___
 
@@ -138,7 +138,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/report.ts:143](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L143)
+Defined in: [services/report.ts:143](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L143)
 
 ___
 
@@ -158,4 +158,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<Report\>
 
-Defined in: [server/services/report.ts:203](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L203)
+Defined in: [services/report.ts:203](https://github.com/Puzzlepart/did/blob/dev/server/services/report.ts#L203)

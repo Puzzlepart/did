@@ -31,7 +31,7 @@
 
 • **dateFormat**: *string*
 
-Defined in: [server/graphql/resolvers/timesheet/types/TimesheetOptions.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetOptions.ts#L14)
+Defined in: [graphql/resolvers/timesheet/types/TimesheetOptions.ts:14](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetOptions.ts#L14)
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 • `Optional` **forecast**: *boolean*
 
-Defined in: [server/graphql/resolvers/timesheet/types/TimesheetOptions.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetOptions.ts#L20)
+Defined in: [graphql/resolvers/timesheet/types/TimesheetOptions.ts:20](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetOptions.ts#L20)
 
 ___
 
@@ -47,7 +47,7 @@ ___
 
 • **locale**: *string*
 
-Defined in: [server/graphql/resolvers/timesheet/types/TimesheetOptions.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetOptions.ts#L11)
+Defined in: [graphql/resolvers/timesheet/types/TimesheetOptions.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetOptions.ts#L11)
 
 ___
 
@@ -55,4 +55,4 @@ ___
 
 • **tzOffset**: *number*
 
-Defined in: [server/graphql/resolvers/timesheet/types/TimesheetOptions.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetOptions.ts#L17)
+Defined in: [graphql/resolvers/timesheet/types/TimesheetOptions.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetOptions.ts#L17)

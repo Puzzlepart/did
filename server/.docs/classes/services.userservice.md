@@ -45,17 +45,17 @@ User service
 
 ### constructor
 
-\+ **new UserService**(`context`: [*Context*](graphql_context.context.md)): [*UserService*](services.userservice.md)
+\+ **new UserService**(`context`: *Context*): [*UserService*](services.userservice.md)
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`context` | [*Context*](graphql_context.context.md) |
+`context` | *Context* |
 
 **Returns:** [*UserService*](services.userservice.md)
 
-Defined in: [server/services/mongo/user.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L19)
+Defined in: [services/mongo/user.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L19)
 
 ## Properties
 
@@ -63,15 +63,15 @@ Defined in: [server/services/mongo/user.ts:19](https://github.com/Puzzlepart/did
 
 • `Private` **\_role**: [*RoleService*](services.roleservice.md)
 
-Defined in: [server/services/mongo/user.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L19)
+Defined in: [services/mongo/user.ts:19](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L19)
 
 ___
 
 ### cache
 
-• **cache**: [*CacheService*](services_cache.cacheservice.md)= null
+• **cache**: [*CacheService*](services.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
+Defined in: [services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
 
 ___
 
@@ -85,7 +85,7 @@ ___
 
 • **collection**: *Collection*<[*User*](graphql.user.md)\>
 
-Defined in: [server/services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
+Defined in: [services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
 
 ___
 
@@ -97,7 +97,7 @@ ___
 
 ### context
 
-• `Readonly` **context**: [*Context*](graphql_context.context.md)
+• `Readonly` **context**: *Context*
 
 ## Methods
 
@@ -124,7 +124,7 @@ Name | Type | Description |
 
 **Returns:** T
 
-Defined in: [server/services/mongo/user.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L34)
+Defined in: [services/mongo/user.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L34)
 
 ___
 
@@ -142,7 +142,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
 
-Defined in: [server/services/mongo/user.ts:88](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L88)
+Defined in: [services/mongo/user.ts:88](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L88)
 
 ___
 
@@ -160,7 +160,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
 
-Defined in: [server/services/mongo/user.ts:102](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L102)
+Defined in: [services/mongo/user.ts:102](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L102)
 
 ___
 
@@ -187,7 +187,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*User*](graphql.user.md)[]\>
 
-Defined in: [server/services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
+Defined in: [services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
 
 ___
 
@@ -207,7 +207,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*User*](graphql.user.md)\>
 
-Defined in: [server/services/mongo/user.ts:67](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L67)
+Defined in: [services/mongo/user.ts:67](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L67)
 
 ___
 
@@ -225,7 +225,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*User*](graphql.user.md)[]\>
 
-Defined in: [server/services/mongo/user.ts:43](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L43)
+Defined in: [services/mongo/user.ts:43](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L43)
 
 ___
 
@@ -245,7 +245,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
 
-Defined in: [server/services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
+Defined in: [services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
 
 ___
 
@@ -267,7 +267,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertWriteOpResult<WithId<[*User*](graphql.user.md)\>\>\>
 
-Defined in: [server/services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
+Defined in: [services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
 
 ___
 
@@ -288,7 +288,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
 
-Defined in: [server/services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)
+Defined in: [services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)
 
 ___
 
@@ -309,7 +309,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/user.ts:132](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L132)
+Defined in: [services/mongo/user.ts:132](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L132)
 
 ___
 
@@ -327,4 +327,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [server/services/mongo/user.ts:116](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L116)
+Defined in: [services/mongo/user.ts:116](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/user.ts#L116)

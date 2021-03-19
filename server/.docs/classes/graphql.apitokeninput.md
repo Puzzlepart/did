@@ -30,7 +30,7 @@
 
 • **expires**: Date
 
-Defined in: [server/graphql/resolvers/apiToken/types.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L41)
+Defined in: [graphql/resolvers/apiToken/types.ts:41](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L41)
 
 ___
 
@@ -38,7 +38,7 @@ ___
 
 • **name**: *string*
 
-Defined in: [server/graphql/resolvers/apiToken/types.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L38)
+Defined in: [graphql/resolvers/apiToken/types.ts:38](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L38)
 
 ___
 
@@ -46,4 +46,4 @@ ___
 
 • **permissions**: *string*[]
 
-Defined in: [server/graphql/resolvers/apiToken/types.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L44)
+Defined in: [graphql/resolvers/apiToken/types.ts:44](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/apiToken/types.ts#L44)

@@ -37,7 +37,7 @@ Forecasted periods service
 
 ### constructor
 
-\+ **new ForecastedPeriodsService**(`context`: [*Context*](graphql_context.context.md)): [*ForecastedPeriodsService*](services.forecastedperiodsservice.md)
+\+ **new ForecastedPeriodsService**(`context`: *Context*): [*ForecastedPeriodsService*](services.forecastedperiodsservice.md)
 
 Constructor for ForecastedPeriodsService
 
@@ -45,19 +45,19 @@ Constructor for ForecastedPeriodsService
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`context` | [*Context*](graphql_context.context.md) | Injected context through typedi    |
+`context` | *Context* | Injected context through typedi    |
 
 **Returns:** [*ForecastedPeriodsService*](services.forecastedperiodsservice.md)
 
-Defined in: [server/services/mongo/forecasted_periods.ts:12](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/forecasted_periods.ts#L12)
+Defined in: [services/mongo/forecasted_periods.ts:12](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/forecasted_periods.ts#L12)
 
 ## Properties
 
 ### cache
 
-• **cache**: [*CacheService*](services_cache.cacheservice.md)= null
+• **cache**: [*CacheService*](services.cacheservice.md)= null
 
-Defined in: [server/services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
+Defined in: [services/mongo/@document.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L10)
 
 ___
 
@@ -71,7 +71,7 @@ ___
 
 • **collection**: *Collection*<any\>
 
-Defined in: [server/services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
+Defined in: [services/mongo/@document.ts:11](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L11)
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 ### context
 
-• `Readonly` **context**: [*Context*](graphql_context.context.md)
+• `Readonly` **context**: *Context*
 
 ## Methods
 
@@ -110,7 +110,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [server/services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
+Defined in: [services/mongo/@document.ts:71](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L71)
 
 ___
 
@@ -130,7 +130,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertOneWriteOpResult<any\>\>
 
-Defined in: [server/services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
+Defined in: [services/mongo/@document.ts:101](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L101)
 
 ___
 
@@ -152,7 +152,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<InsertWriteOpResult<any\>\>
 
-Defined in: [server/services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
+Defined in: [services/mongo/@document.ts:84](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L84)
 
 ___
 
@@ -173,4 +173,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<UpdateWriteOpResult\>
 
-Defined in: [server/services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)
+Defined in: [services/mongo/@document.ts:117](https://github.com/Puzzlepart/did/blob/dev/server/services/mongo/@document.ts#L117)

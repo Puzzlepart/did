@@ -17,7 +17,7 @@
 
 • **SUBSCRIPTION**: = 1
 
-Defined in: [server/services/cache.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L13)
+Defined in: [services/cache.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L13)
 
 ___
 
@@ -25,4 +25,4 @@ ___
 
 • **USER**: = 0
 
-Defined in: [server/services/cache.ts:12](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L12)
+Defined in: [services/cache.ts:12](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L12)

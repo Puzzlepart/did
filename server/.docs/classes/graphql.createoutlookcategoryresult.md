@@ -36,7 +36,7 @@
 
 • **data**: [*OutlookCategory*](graphql.outlookcategory.md)
 
-Defined in: [server/graphql/resolvers/outlookCategory/types.ts:36](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/types.ts#L36)
+Defined in: [graphql/resolvers/outlookCategory/types.ts:36](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/outlookCategory/types.ts#L36)
 
 ___
 
@@ -44,7 +44,7 @@ ___
 
 • `Optional` **error**: *Error*
 
-Defined in: [server/graphql/resolvers/types.ts:37](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/types.ts#L37)
+Defined in: [graphql/resolvers/types.ts:37](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/types.ts#L37)
 
 ___
 
@@ -52,4 +52,4 @@ ___
 
 • **success**: *boolean*
 
-Defined in: [server/graphql/resolvers/types.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/types.ts#L34)
+Defined in: [graphql/resolvers/types.ts:34](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/types.ts#L34)

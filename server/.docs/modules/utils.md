@@ -36,7 +36,7 @@ Name | Type | Description |
 
 **Returns:** T
 
-Defined in: [server/utils/environment.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/utils/environment.ts#L48)
+Defined in: [utils/environment.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/utils/environment.ts#L48)
 
 ___
 
@@ -55,7 +55,7 @@ Name | Type | Default value | Description |
 
 **Returns:** *string*
 
-Defined in: [server/utils/firstPart.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/utils/firstPart.ts#L9)
+Defined in: [utils/firstPart.ts:9](https://github.com/Puzzlepart/did/blob/dev/server/utils/firstPart.ts#L9)
 
 ___
 
@@ -75,4 +75,4 @@ Name | Type |
 
 **Returns:** *string*
 
-Defined in: [server/utils/stripHtmlString.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/utils/stripHtmlString.ts#L10)
+Defined in: [utils/stripHtmlString.ts:10](https://github.com/Puzzlepart/did/blob/dev/server/utils/stripHtmlString.ts#L10)

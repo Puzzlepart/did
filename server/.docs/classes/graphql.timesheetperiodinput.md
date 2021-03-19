@@ -32,7 +32,7 @@
 
 • **endDate**: *string*
 
-Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts#L21)
+Defined in: [graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts#L21)
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 • **forecastedHours**: *number*
 
-Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts#L27)
+Defined in: [graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts:27](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts#L27)
 
 ___
 
@@ -48,7 +48,7 @@ ___
 
 • **id**: *string*
 
-Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts#L15)
+Defined in: [graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts:15](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts#L15)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 • **matchedEvents**: [*EventInput*](graphql.eventinput.md)[]
 
-Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts#L24)
+Defined in: [graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts:24](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts#L24)
 
 ___
 
@@ -64,4 +64,4 @@ ___
 
 • **startDate**: *string*
 
-Defined in: [server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts#L18)
+Defined in: [graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts:18](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/timesheet/types/TimesheetPeriodInput.ts#L18)

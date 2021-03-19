@@ -4,10 +4,6 @@
 
 ## Table of contents
 
-### References
-
-- [TokenService](services.md#tokenservice)
-
 ### Enumerations
 
 - [CacheScope](../enums/services.cachescope.md)
@@ -30,6 +26,7 @@
 - [SubscriptionService](../classes/services.subscriptionservice.md)
 - [TimeEntryService](../classes/services.timeentryservice.md)
 - [TimesheetService](../classes/services.timesheetservice.md)
+- [TokenService](../classes/services.tokenservice.md)
 - [UserService](../classes/services.userservice.md)
 
 ### Other Classes
@@ -40,16 +37,10 @@
 
 - [CacheKey](services.md#cachekey)
 
-## References
-
-### TokenService
-
-Renames and exports: [default](../classes/services_oauth.default.md)
-
 ## Type aliases
 
 ### CacheKey
 
 Ƭ **CacheKey**: *string* \| *string*[]
 
-Defined in: [server/services/cache.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L16)
+Defined in: [services/cache.ts:16](https://github.com/Puzzlepart/did/blob/dev/server/services/cache.ts#L16)

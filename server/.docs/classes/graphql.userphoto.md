@@ -30,4 +30,4 @@ A type that describes a User photo
 
 • `Optional` **base64**: *string*
 
-Defined in: [server/graphql/resolvers/user/types.ts:22](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L22)
+Defined in: [graphql/resolvers/user/types.ts:22](https://github.com/Puzzlepart/did/blob/dev/server/graphql/resolvers/user/types.ts#L22)
