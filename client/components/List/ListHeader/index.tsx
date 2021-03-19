@@ -29,7 +29,7 @@ export const ListHeader: FunctionComponent<IListHeaderProps> = (
               if (props.searchBox.onChange)
                 props.searchBox.onChange(_event, newValue)
               props.dispatch({ type: 'SEARCH', payload: newValue })
-            }, 750)
+            }, 250)
           }}
         />
       )

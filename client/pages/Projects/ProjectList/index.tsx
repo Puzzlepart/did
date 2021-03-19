@@ -1,29 +1,27 @@
 /* eslint-disable tsdoc/syntax */
 import { List } from 'components'
 import { Checkbox } from 'office-ui-fabric-react'
-import React, { FunctionComponent, useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import React, { FunctionComponent } from 'react'
 import { contains, filter, isEmpty } from 'underscore'
 import columns from './columns'
 import { IProjectListProps } from './types'
+import { useProjectList } from './useProjectList'
 
 /**
+ * Project list component used by `<Projects />`. Renders
+ * projects in a list using our `<List />` component.
+ * 
  * @category Projects
  */
 export const ProjectList: FunctionComponent<IProjectListProps> = (
   props: IProjectListProps
 ) => {
-  const { t } = useTranslation()
-  const [items, setItems] = useState([...(props.items || [])])
-  const [showInactive, setShowInactive] = useState(false)
-
-  useEffect(
-    () =>
-      setItems(
-        [...props.items].filter((p) => (showInactive ? true : !p.inactive))
-      ),
-    [props.items, showInactive]
-  )
+  const {
+    items,
+    showInactive,
+    setShowInactive,
+    t
+  } = useProjectList({ props })
 
   return (
     <List
