@@ -12,4 +12,4 @@ did-server - v0.9.11
 - [GraphQL](modules/graphql.md)
 - [Middleware](modules/middleware.md)
 - [Services](modules/services.md)
-- [utils](modules/utils.md)
+- [Utils](modules/utils.md)

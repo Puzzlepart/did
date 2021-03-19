@@ -1,6 +1,8 @@
-[did-server - v0.9.11](../README.md) / utils
+[did-server - v0.9.11](../README.md) / Utils
 
-# Module: utils
+# Module: Utils
+
+Utility functions
 
 ## Table of contents
 
