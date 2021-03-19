@@ -1,6 +1,7 @@
 /* eslint-disable tsdoc/syntax */
-import { Icon, Panel } from 'office-ui-fabric-react'
+import { Panel } from 'office-ui-fabric-react'
 import React from 'react'
+import { MenuItem } from '../MenuItem'
 import { UserSettingsContext } from './context'
 import { UserSettingInput } from './UserSettingInput'
 import styles from './UserSettings.module.scss'
@@ -9,7 +10,7 @@ import { useUserSettings } from './useUserSettings'
 /**
  * @category UserMenu
  */
-export const UserSettings = (props: React.HTMLProps<HTMLDivElement>) => {
+export const UserSettings = () => {
   const {
     t,
     context,
@@ -23,10 +24,11 @@ export const UserSettings = (props: React.HTMLProps<HTMLDivElement>) => {
   return (
     <UserSettingsContext.Provider value={context}>
       <div className={styles.root}>
-        <a href='#' onClick={openPanel} className={props.className}>
-          <Icon iconName='Settings' className={styles.icon} />
-          <span>{t('common.settings')}</span>
-        </a>
+        <MenuItem
+          iconProps={{ iconName: 'Settings' }}
+          text={t('common.settings')}
+          onClick={openPanel}
+        />
         <Panel
           className={styles.panel}
           headerText={t('common.settings')}
