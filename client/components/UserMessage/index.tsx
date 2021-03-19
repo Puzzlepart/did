@@ -11,7 +11,7 @@ import { IUserMessageProps } from './types'
 import styles from './UserMessage.module.scss'
 
 /**
- * A component that supports a MessageBar with markdown using react-markdown
+ * A component that supports a `<MessageBar />` with markdown using `react-markdown`
  *
  * @category Function Component
  */
@@ -21,7 +21,7 @@ export const UserMessage: FunctionComponent<IUserMessageProps> = (
   const _styles: IStyleFunctionOrObject<
     IMessageBarStyleProps,
     IMessageBarStyles
-  > = props.styles
+  > = props.styles || {}
 
   if (props.fixedCenter) {
     _styles['root'] = {
