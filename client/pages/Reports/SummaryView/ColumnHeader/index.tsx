@@ -11,8 +11,10 @@ export const ColumnHeader = (
 ): JSX.Element => {
   return (
     <div className={styles.root}>
-      <span className={styles.name}>{props.column.name}</span>
-      <span className={styles.subText}>{props.column.data?.subText}</span>
+      <div className={`${styles.container} ${props.hostClassName}`}>
+        <div className={styles.name}>{props.column.name}</div>
+        <div className={styles.subText}>{props.column.data?.subText}</div>
+      </div>
     </div>
   )
 }

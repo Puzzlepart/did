@@ -5,5 +5,9 @@
 
   .columnHeader {
     height: 65px;
+
+    [class*='ms-DetailsHeader-cell'] {
+      height: 65px;
+    }
   }
 }
