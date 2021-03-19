@@ -54,13 +54,39 @@ class MSGraphService {
   }
 
   /**
+   * Get user photo in base64 format
+   *
+   * @param size - Photo size
+   *
+   * @public
+   *
+   * @memberof MSGraphService
+   *
+   * @returns A base64 representation of the user photo
+   */
+  public async getUserPhoto(size: string): Promise<any> {
+    try {
+      const client = await this._getClient()
+      const value = (await client
+        .api(`/me/photos/${size}/$value`)
+        .get()) as Blob
+      const buffer = await value.arrayBuffer()
+      return `data:image/jpeg;base64,${Buffer.from(buffer).toString('base64')}`
+    } catch (error) {
+      throw new Error(`MSGraphService.getUserPhoto: ${error.message}`)
+    }
+  }
+
+  /**
    * Get current user properties
    *
    * @param properties - Properties to retrieve
    *
+   * @public
+   *
    * @memberof MSGraphService
    */
-  async getCurrentUser(properties: string[]): Promise<any> {
+  public async getCurrentUser(properties: string[]): Promise<any> {
     try {
       const client = await this._getClient()
       const value = await client.api('/me').select(properties).get()
@@ -72,6 +98,8 @@ class MSGraphService {
 
   /**
    * Get Azure Active Directory users
+   *
+   * @public
    *
    * @memberof MSGraphService
    */
@@ -111,6 +139,8 @@ class MSGraphService {
    *
    * @param category - Category
    *
+   * @public
+   *
    * @memberof MSGraphService
    */
   public async createOutlookCategory(
@@ -139,6 +169,8 @@ class MSGraphService {
   /**
    * Get Outlook categories
    *
+   * @public
+   *
    * @memberof MSGraphService
    */
   public getOutlookCategories(): Promise<any[]> {
@@ -163,6 +195,8 @@ class MSGraphService {
    *
    * @param startDateTimeIso - Start date time in `ISO format`
    * @param endDateTimeIso - End date time in `ISO format`
+   *
+   * @public
    *
    * @memberof MSGraphService
    */
