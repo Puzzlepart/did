@@ -32,13 +32,13 @@ Microsoft Graph service
 
 ### constructor
 
-\+ **new MSGraphService**(`_oauthService`: [*TokenService*](services.tokenservice.md), `_access_token?`: *string*, `context?`: *Context*): [*MSGraphService*](services.msgraphservice.md)
+\+ **new MSGraphService**(`_msOAuthSvc`: [*MSOAuthService*](services.msoauthservice.md), `_access_token?`: *string*, `context?`: *Context*): [*MSGraphService*](services.msgraphservice.md)
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`_oauthService` | [*TokenService*](services.tokenservice.md) |
+`_msOAuthSvc` | [*MSOAuthService*](services.msoauthservice.md) |
 `_access_token?` | *string* |
 `context?` | *Context* |
 
@@ -50,7 +50,7 @@ Defined in: [services/msgraph/index.ts:29](https://github.com/Puzzlepart/did/blo
 
 ### \_accessTokenOptions
 
-• `Private` **\_accessTokenOptions**: AccessTokenOptions
+• `Private` **\_accessTokenOptions**: MSAccessTokenOptions
 
 Defined in: [services/msgraph/index.ts:23](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L23)
 

@@ -4,11 +4,11 @@
  *
  * @module Services
  */
-export * from './cache'
 export { default as GoogleCalendarService } from './google'
-export * from './mongo'
 export { default as MSGraphService } from './msgraph'
-export * from './notification'
-export { default as TokenService } from './oauth'
+export { default as MSOAuthService } from './msoauth'
+export * from './cache'
+export * from './mongo'
 export * from './report'
+export * from './notification'
 export { TimesheetService } from './timesheet'

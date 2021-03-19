@@ -9,7 +9,7 @@ import { EventObject } from '../../graphql'
 import { Context } from '../../graphql/context'
 import { environment } from '../../utils'
 import { CacheScope, CacheService } from '../cache'
-import OAuthService, { AccessTokenOptions } from '../oauth'
+import MSOAuthService, { MSAccessTokenOptions } from '../msoauth'
 import { MSGraphOutlookCategory } from './types'
 
 /**
@@ -20,7 +20,7 @@ import { MSGraphOutlookCategory } from './types'
 @Service({ global: false })
 class MSGraphService {
   private _cache: CacheService = null
-  private _accessTokenOptions: AccessTokenOptions = {
+  private _accessTokenOptions: MSAccessTokenOptions = {
     clientId: environment('MICROSOFT_CLIENT_ID'),
     clientSecret: environment('MICROSOFT_CLIENT_SECRET'),
     tokenHost: 'https://login.microsoftonline.com/common/',
@@ -29,7 +29,7 @@ class MSGraphService {
   }
 
   constructor(
-    private _oauthService: OAuthService,
+    private _msOAuthSvc: MSOAuthService,
     private _access_token?: string,
     @Inject('CONTEXT') readonly context?: Context
   ) {
@@ -43,7 +43,7 @@ class MSGraphService {
    */
   private async _getClient(): Promise<MSGraphClient> {
     this._access_token = (
-      await this._oauthService.getAccessToken(this._accessTokenOptions)
+      await this._msOAuthSvc.getAccessToken(this._accessTokenOptions)
     ).access_token
     const client = MSGraphClient.init({
       authProvider: (done: (error: Error, token: any) => void) => {

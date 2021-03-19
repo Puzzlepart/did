@@ -2,7 +2,7 @@ import createDebug from 'debug'
 import { isEmpty, isEqual, pick } from 'underscore'
 import { User } from '../../../graphql'
 import { MSGraphService, UserService } from '../../../services'
-import OAuthService from '../../../services/oauth'
+import MSOAuthService from '../../../services/msoauth'
 const debug = createDebug('middleware/passport/synchronizeUserProfile')
 
 /**
@@ -22,7 +22,7 @@ export async function synchronizeUserProfile(
       'User profile synchronization is turned on, but no properties are selected.'
     )
   }
-  const msgraphSrv = new MSGraphService(new OAuthService({ user }))
+  const msgraphSrv = new MSGraphService(new MSOAuthService({ user }))
   const [data, photoBase64] = await Promise.all([
     msgraphSrv.getCurrentUser(properties),
     msgraphSrv.getUserPhoto('48x48')

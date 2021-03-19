@@ -21,6 +21,7 @@ Services used by `GraphQL`
 - [GoogleCalendarService](../classes/services.googlecalendarservice.md)
 - [LabelService](../classes/services.labelservice.md)
 - [MSGraphService](../classes/services.msgraphservice.md)
+- [MSOAuthService](../classes/services.msoauthservice.md)
 - [NotificationService](../classes/services.notificationservice.md)
 - [ProjectService](../classes/services.projectservice.md)
 - [ReportService](../classes/services.reportservice.md)
@@ -28,7 +29,6 @@ Services used by `GraphQL`
 - [SubscriptionService](../classes/services.subscriptionservice.md)
 - [TimeEntryService](../classes/services.timeentryservice.md)
 - [TimesheetService](../classes/services.timesheetservice.md)
-- [TokenService](../classes/services.tokenservice.md)
 - [UserService](../classes/services.userservice.md)
 
 ### Other Classes
