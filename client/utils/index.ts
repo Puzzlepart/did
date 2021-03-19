@@ -6,6 +6,7 @@
  */
 export * from './browserStorage'
 export * from './generateColumn'
+export * from './getContrastColor'
 export * from './getSum'
 export * from './loadScripts'
 export * from './searchObject'

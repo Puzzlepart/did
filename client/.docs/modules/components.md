@@ -6,6 +6,10 @@ Reusable React Function components.
 
 ## Table of contents
 
+### Enumerations
+
+- [LabelSize](../enums/components.labelsize.md)
+
 ### FilterPanel Classes
 
 - [BaseFilter](../classes/components.basefilter.md)
@@ -147,7 +151,7 @@ ___
 
 • `Const` **EntityLabel**: *FunctionComponent*<[*IEntityLabelProps*](../interfaces/components.ientitylabelprops.md)\>
 
-Defined in: [client/components/EntityLabel/index.tsx:12](https://github.com/Puzzlepart/did/blob/dev/client/components/EntityLabel/index.tsx#L12)
+Defined in: [client/components/EntityLabel/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/components/EntityLabel/index.tsx#L13)
 
 ___
 

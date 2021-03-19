@@ -3,8 +3,9 @@ import { Icon } from 'office-ui-fabric-react'
 import React, { FunctionComponent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { isBlank } from 'underscore.string'
+import { getContrastColor } from 'utils'
 import styles from './EntityLabel.module.scss'
-import { IEntityLabelProps } from './types'
+import { IEntityLabelProps, LabelSize } from './types'
 
 /**
  * @category Function Component
@@ -15,16 +16,20 @@ export const EntityLabel: FunctionComponent<IEntityLabelProps> = ({
 }: IEntityLabelProps) => {
   const { t } = useTranslation()
   const className = [styles.root]
-  // eslint-disable-next-line default-case
+  const contrastColor = getContrastColor(label.color)
+  let iconVerticalAlign = 'text-bottom'
+
   switch (size) {
-    case 'xsmall':
+    case LabelSize.xsmall:
       className.push(styles.sizeXSmall)
       break
-    case 'medium':
+    case LabelSize.medium:
       className.push(styles.sizeMedium)
+      iconVerticalAlign = 'baseline'
       break
-    case 'large':
+    case LabelSize.large:
       className.push(styles.sizeLarge)
+      iconVerticalAlign = 'baseline'
       break
   }
 
@@ -33,8 +38,16 @@ export const EntityLabel: FunctionComponent<IEntityLabelProps> = ({
       className={className.join(' ')}
       style={{ backgroundColor: label.color }}
       title={label.description}>
-      {label.icon && <Icon iconName={label.icon} className={styles.icon} />}
-      <span className={styles.text}>
+      {label.icon && (
+        <Icon
+          iconName={label.icon}
+          style={{
+            color: contrastColor,
+            verticalAlign: iconVerticalAlign
+          }}
+        />
+      )}
+      <span className={styles.text} style={{ color: contrastColor }}>
         {isBlank(label.name) ? t('admin.defaultLabelTitle') : label.name}
       </span>
     </div>

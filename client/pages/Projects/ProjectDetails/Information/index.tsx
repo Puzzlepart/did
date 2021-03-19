@@ -1,5 +1,5 @@
 /* eslint-disable tsdoc/syntax */
-import { EntityLabel } from 'components/EntityLabel'
+import { EntityLabel, LabelSize } from 'components/EntityLabel'
 import { UserMessage } from 'components/UserMessage'
 import { MessageBarType } from 'office-ui-fabric-react'
 import React, { FunctionComponent, useContext } from 'react'
@@ -36,7 +36,7 @@ export const Information: FunctionComponent = () => {
       )}
       <div className={styles.labels}>
         {(state.selected.labels as Label[]).map((label, index) => (
-          <EntityLabel key={index} label={label} size='medium' />
+          <EntityLabel key={index} label={label} size={LabelSize.medium} />
         ))}
       </div>
       <UserMessage

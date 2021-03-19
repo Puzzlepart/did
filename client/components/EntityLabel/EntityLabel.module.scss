@@ -3,7 +3,7 @@
   padding: 4px 8px;
   margin: 0 4px 0 0;
   font-size: 0.8em;
-  border-radius: 3px;
+  border-radius: 2em;
   transition: opacity 0.2s linear;
   font-weight: 600;
 
@@ -13,21 +13,14 @@
   }
 
   &.sizeMedium {
-    padding: 6px 10px;
+    padding: 6px 12px;
     font-size: 0.85em;
-    font-weight: normal;
   }
 
   &.sizeLarge {
-    padding: 8px 12px;
+    padding: 8px 14px;
     font-size: 1.0em;
-    font-weight: normal;
   }
-
-  .icon {
-    vertical-align: middle;
-  }
-
   .text {
     vertical-align: unset !important;
     margin: 0 0 0 6px;

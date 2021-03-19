@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { ColorPickerField } from 'components'
-import { EntityLabel } from 'components/EntityLabel'
+import { EntityLabel, LabelSize } from 'components/EntityLabel'
 import { IconPicker } from 'components/IconPicker'
 import {
   Label,
@@ -90,7 +90,7 @@ export const LabelForm = (props: ILabelFormProps) => {
       />
       <div className={styles.inputField}>
         <Label>{t('common.previewText')}</Label>
-        <EntityLabel label={model} size='medium' />
+        <EntityLabel label={model} size={LabelSize.medium} />
       </div>
       <PrimaryButton
         className={styles.saveBtn}

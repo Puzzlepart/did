@@ -13,6 +13,7 @@ Reusable utility functions
 ### Functions
 
 - [generateColumn](utils.md#generatecolumn)
+- [getContrastColor](utils.md#getcontrastcolor)
 - [getSum](utils.md#getsum)
 - [loadScripts](utils.md#loadscripts)
 - [searchObject](utils.md#searchobject)
@@ -40,6 +41,28 @@ Name | Type | Default value | Description |
 **Returns:** IColumn
 
 Defined in: [client/utils/generateColumn.ts:12](https://github.com/Puzzlepart/did/blob/dev/client/utils/generateColumn.ts#L12)
+
+___
+
+### getContrastColor
+
+▸ **getContrastColor**(`hexcolor`: *string*): *black* \| *white*
+
+Get the contrasting color for any hex color
+(c) 2019 Chris Ferdinandi, MIT License, https://gomakethings.com
+Derived from work by Brian Suda, https://24ways.org/2010/calculating-color-contrast/
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`hexcolor` | *string* |
+
+**Returns:** *black* \| *white*
+
+The contrasting color (black or white)
+
+Defined in: client/utils/getContrastColor.ts:10
 
 ___
 
