@@ -13,7 +13,7 @@ import { ProjectMatch } from './types'
 export default class TimesheetMatchingEngine {
   /**
    * Constructor for `TimesheetMatchingEngine`
-   * 
+   *
    * @param _data - Projects data
    */
   constructor(private _data: ProjectsData) {}
