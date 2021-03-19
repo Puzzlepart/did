@@ -99,7 +99,7 @@ Defined in: [services/notification/types.ts:44](https://github.com/Puzzlepart/di
 
 ▸ `Private`**_generateId**(`id`: *string*): *string*
 
-Generate notification id
+Generates a unique notification id
 
 #### Parameters:
 
