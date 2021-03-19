@@ -100,7 +100,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<MSGraphOutlookCategory\>
 
-Defined in: [services/msgraph/index.ts:146](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L146)
+Defined in: [services/msgraph/index.ts:143](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L143)
 
 ___
 
@@ -120,7 +120,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<any\>
 
-Defined in: [services/msgraph/index.ts:89](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L89)
+Defined in: [services/msgraph/index.ts:86](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L86)
 
 ___
 
@@ -141,7 +141,7 @@ Name | Type | Description |
 
 **Returns:** *Promise*<[*EventObject*](graphql.eventobject.md)[]\>
 
-Defined in: [services/msgraph/index.ts:203](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L203)
+Defined in: [services/msgraph/index.ts:200](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L200)
 
 ___
 
@@ -155,7 +155,7 @@ Get Outlook categories
 
 **Returns:** *Promise*<any[]\>
 
-Defined in: [services/msgraph/index.ts:176](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L176)
+Defined in: [services/msgraph/index.ts:173](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L173)
 
 ___
 
@@ -171,13 +171,13 @@ Get user photo in base64 format
 
 Name | Type | Description |
 :------ | :------ | :------ |
-`size` | *string* | Photo size    |
+`size` | *string* | Photo size   |
 
 **Returns:** *Promise*<string\>
 
 A base64 representation of the user photo
 
-Defined in: [services/msgraph/index.ts:67](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L67)
+Defined in: [services/msgraph/index.ts:64](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L64)
 
 ___
 
@@ -191,4 +191,4 @@ Get Azure Active Directory users
 
 **Returns:** *Promise*<any\>
 
-Defined in: [services/msgraph/index.ts:106](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L106)
+Defined in: [services/msgraph/index.ts:103](https://github.com/Puzzlepart/did/blob/dev/server/services/msgraph/index.ts#L103)
