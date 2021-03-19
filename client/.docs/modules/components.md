@@ -75,6 +75,7 @@ Reusable React Function components.
 - [ProjectLink](components.md#projectlink)
 - [ProjectTooltip](components.md#projecttooltip)
 - [ScrollablePaneWrapper](components.md#scrollablepanewrapper)
+- [Toast](components.md#toast)
 - [UserMessage](components.md#usermessage)
 
 ### SummaryView Variables
@@ -248,6 +249,19 @@ ___
 • `Const` **ScrollablePaneWrapper**: *FunctionComponent*<any\>
 
 Defined in: [client/components/ScrollablePaneWrapper/index.tsx:8](https://github.com/Puzzlepart/did/blob/dev/client/components/ScrollablePaneWrapper/index.tsx#L8)
+
+___
+
+### Toast
+
+• `Const` **Toast**: *FunctionComponent*<IToastProps\>
+
+A Toast component that shows a MessageBar with
+markdown using `react-markdown`
+
+**`remarks`** Typically used with the `useToast` hook
+
+Defined in: [client/components/Toast/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/components/Toast/index.tsx#L16)
 
 ___
 

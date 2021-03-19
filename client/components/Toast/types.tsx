@@ -4,6 +4,4 @@ import { IUserMessageProps } from '../UserMessage'
 /**
  * @category Toast
  */
-export interface IToastProps extends IUserMessageProps {
-  temp?: boolean
-}
+export type IToastProps = IUserMessageProps

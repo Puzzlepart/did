@@ -88,7 +88,8 @@
     "timeEntriesHeaderText": "Tidsoppføringar",
     "noInformationAvailable": "Ingen informasjon tilgjengeleg om dette prosjektet.",
     "navigateText": "Detaljer",
-    "iconFieldDescription": "Bruk eit ikon for å gjera prosjektet meir gjenkjenneleg i timelista og på prosjektsida. \nEit tilfeldig ikon vil bli valt viss du ikkje vel eit sjølv."
+    "iconFieldDescription": "Bruk eit ikon for å gjera prosjektet meir gjenkjenneleg i timelista og på prosjektsida. \nEit tilfeldig ikon vil bli valt viss du ikkje vel eit sjølv.",
+    "createError": "Vi kan ikke opprette prosjektet for øyeblikket. \nPrøv igjen senere, eller spør en voksen."
   },
   "customers": {
     "inactiveText": "Denne kunden er markert som inaktiv.",
