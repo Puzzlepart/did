@@ -24,7 +24,13 @@ export const MenuItem: FunctionComponent<IMenuItemProps> = (
 
   return (
     <div className={className.join(' ')} style={props.style} onClick={onClick}>
-      {props.iconProps && <Icon {...props.iconProps} className={styles.icon} />}
+      {props.iconProps && (
+        <Icon
+          {...props.iconProps}
+          style={props.style}
+          className={styles.icon}
+        />
+      )}
       {props.text && <span>{props.text}</span>}
       {props.children}
     </div>
