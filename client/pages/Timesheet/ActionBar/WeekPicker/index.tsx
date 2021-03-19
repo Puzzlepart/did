@@ -31,7 +31,7 @@ export const WeekPicker = () => {
               cursor: !loading && 'pointer'
             },
             root: {
-              width: 280,
+              width: 180,
               marginTop: 6
             }
           }}

@@ -147,7 +147,7 @@ export function useSubmitCommands() {
 
       return (
         <PrimaryButton
-          style={{ width: 280 }}
+          style={{ width: 180 }}
           primary={false}
           {...(first(commands) as any)}
           menuProps={menuProps}
