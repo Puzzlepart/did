@@ -10,7 +10,7 @@ import helmet from 'helmet'
  * 
  * @category Express middleware
  */
-export const helmetMiddleware = helmet({
+export const helmetMiddleware = () => helmet({
   frameguard: {
     action: 'allow-from',
     domain: 'https://teams.microsoft.com'

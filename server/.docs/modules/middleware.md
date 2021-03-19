@@ -8,30 +8,16 @@ NodeJS Express App middleware
 
 ### Express middleware Variables
 
-- [helmetMiddleware](middleware.md#helmetmiddleware)
 - [redisMiddlware](middleware.md#redismiddlware)
 
 ### Express middleware Functions
 
+- [helmetMiddleware](middleware.md#helmetmiddleware)
 - [passportMiddleware](middleware.md#passportmiddleware)
 - [redisSessionMiddleware](middleware.md#redissessionmiddleware)
 - [serveGzippedMiddleware](middleware.md#servegzippedmiddleware)
 
 ## Express middleware Variables
-
-### helmetMiddleware
-
-• `Const` **helmetMiddleware**: *any*
-
-Helmet configuration
-
-We allow framing from `https://teams.microsoft.com`
-
-**`see`** https://github.com/helmetjs/helmet
-
-Defined in: [middleware/helmet/index.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/middleware/helmet/index.ts#L13)
-
-___
 
 ### redisMiddlware
 
@@ -49,6 +35,22 @@ Redis client
 Defined in: [middleware/redis/index.ts:17](https://github.com/Puzzlepart/did/blob/dev/server/middleware/redis/index.ts#L17)
 
 ## Express middleware Functions
+
+### helmetMiddleware
+
+▸ `Const`**helmetMiddleware**(): *any*
+
+Helmet configuration
+
+We allow framing from `https://teams.microsoft.com`
+
+**`see`** https://github.com/helmetjs/helmet
+
+**Returns:** *any*
+
+Defined in: [middleware/helmet/index.ts:13](https://github.com/Puzzlepart/did/blob/dev/server/middleware/helmet/index.ts#L13)
+
+___
 
 ### passportMiddleware
 
