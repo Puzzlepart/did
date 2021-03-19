@@ -19,8 +19,10 @@ export function useMessages() {
   if (selectedPeriod) {
     if (!selectedPeriod.isConfirmed) {
       messages.push({
-        text: t('timesheet.periodHoursSummaryText', {
-          hours: $date.getDurationString(selectedPeriod.totalDuration, t)
+        text: t('timesheet.weekHoursSummaryText', {
+          hours: $date.getDurationString(selectedPeriod.totalDuration, t),
+          splitWeekInfoText:
+            periods.length > 1 ? t('timesheet.splitWeekInfoText') : ''
         }),
         iconName: 'ReminderTime'
       })
@@ -84,12 +86,6 @@ export function useMessages() {
           count: selectedPeriod.errors.length
         }),
         iconName: 'ErrorBadge'
-      })
-    }
-    if (periods.length > 1) {
-      messages.push({
-        text: t('timesheet.splitWeekInfoText'),
-        iconName: 'SplitObject'
       })
     }
   }
