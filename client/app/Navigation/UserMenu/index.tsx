@@ -1,6 +1,12 @@
 /* eslint-disable tsdoc/syntax */
 import { AppContext } from 'AppContext'
-import { Callout, Icon, Target } from 'office-ui-fabric-react'
+import {
+  Callout,
+  Icon,
+  Persona,
+  PersonaSize,
+  Target
+} from 'office-ui-fabric-react'
 import React, { FunctionComponent, useContext, useState } from 'react'
 import { isMobile } from 'react-device-detect'
 import FadeIn from 'react-fade-in'
@@ -35,17 +41,21 @@ export const UserMenu: FunctionComponent = () => {
           onDismiss={() => setMenuTarget(null)}
           gapSpace={-8}>
           <FadeIn className={styles.menu}>
-            <div className={`${styles.menuItem} ${styles.userName}`}>
-              {user.displayName} |{' '}
-              <span className={styles.role}>{user.role?.name}</span>
-            </div>
-            <div className={`${styles.menuItem} ${styles.mail}`}>
-              {user.mail}
+            <div className={styles.menuItem}>
+              <Persona
+                text={user.displayName}
+                secondaryText={user.mail}
+                tertiaryText={user.mail}
+                imageUrl={user.photo?.base64}
+                size={PersonaSize.size40}
+              />
             </div>
             <Divider />
             <div className={styles.menuItem}>
-              <Icon iconName='Home' className={styles.icon} />
-              <span>{subscription.name}</span>
+              <Icon iconName={user.role?.icon} className={styles.icon} />
+              <span>
+                {user.role?.name} ({subscription.name})
+              </span>
             </div>
             <span hidden={isMobile}>
               <Divider />
