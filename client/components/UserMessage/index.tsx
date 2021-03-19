@@ -21,10 +21,11 @@ export const UserMessage: FunctionComponent<IUserMessageProps> = (
   const _styles: IStyleFunctionOrObject<
     IMessageBarStyleProps,
     IMessageBarStyles
-  > = {}
+  > = props.styles
 
   if (props.fixedCenter) {
-    _styles.root = {
+    _styles['root'] = {
+      ..._styles['root'],
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
