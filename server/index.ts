@@ -2,7 +2,7 @@
 /**
  * Main entry point for the http server (using `http`)
  *
- * @module .
+ * @module /
  */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import * as http from 'http'

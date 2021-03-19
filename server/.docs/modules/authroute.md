@@ -2,7 +2,7 @@
 
 # Module: AuthRoute
 
-NodeJS Express App auth route
+NodeJS `express` auth route
 
 ## Table of contents
 

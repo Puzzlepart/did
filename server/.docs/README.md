@@ -6,7 +6,7 @@ did-server - v0.9.11
 
 ### Modules
 
-- [.](modules/_.md)
+- [/](modules/_.md)
 - [App](modules/app.md)
 - [AuthRoute](modules/authroute.md)
 - [GraphQL](modules/graphql.md)

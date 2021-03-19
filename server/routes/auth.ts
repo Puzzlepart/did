@@ -1,6 +1,6 @@
 /* eslint-disable tsdoc/syntax */
 /**
- * NodeJS Express App auth route
+ * NodeJS `express` auth route
  *
  * @module AuthRoute
  */
