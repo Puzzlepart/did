@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / CreateOrUpdateProjectResult
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / CreateOrUpdateProjectResult
 
 # Class: CreateOrUpdateProjectResult
 
-[graphql](../modules/graphql.md).CreateOrUpdateProjectResult
+[GraphQL](../modules/graphql.md).CreateOrUpdateProjectResult
 
 ## Table of contents
 

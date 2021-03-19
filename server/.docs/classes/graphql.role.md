@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / Role
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / Role
 
 # Class: Role
 
-[graphql](../modules/graphql.md).Role
+[GraphQL](../modules/graphql.md).Role
 
 ## Table of contents
 

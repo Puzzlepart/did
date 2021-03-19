@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / TimesheetPeriodInput
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / TimesheetPeriodInput
 
 # Class: TimesheetPeriodInput
 
-[graphql](../modules/graphql.md).TimesheetPeriodInput
+[GraphQL](../modules/graphql.md).TimesheetPeriodInput
 
 ## Table of contents
 

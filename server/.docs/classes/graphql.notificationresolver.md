@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / NotificationResolver
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / NotificationResolver
 
 # Class: NotificationResolver
 
-[graphql](../modules/graphql.md).NotificationResolver
+[GraphQL](../modules/graphql.md).NotificationResolver
 
 Resolver for `Notification`.
 

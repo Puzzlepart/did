@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / TimesheetPeriodObject
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / TimesheetPeriodObject
 
 # Class: TimesheetPeriodObject
 
-[graphql](../modules/graphql.md).TimesheetPeriodObject
+[GraphQL](../modules/graphql.md).TimesheetPeriodObject
 
 ## Table of contents
 

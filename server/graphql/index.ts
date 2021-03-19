@@ -1,3 +1,9 @@
+/* eslint-disable tsdoc/syntax */
+/**
+ * GraphQL Server using `apollo-server-express`
+ *
+ * @module GraphQL
+ */
 import {
   ApolloServerPluginSchemaReporting,
   ApolloServerPluginUsageReporting

@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / SubscriptionADSyncSettingsInput
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / SubscriptionADSyncSettingsInput
 
 # Class: SubscriptionADSyncSettingsInput
 
-[graphql](../modules/graphql.md).SubscriptionADSyncSettingsInput
+[GraphQL](../modules/graphql.md).SubscriptionADSyncSettingsInput
 
 ## Table of contents
 

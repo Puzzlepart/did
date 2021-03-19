@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / UserQuery
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / UserQuery
 
 # Class: UserQuery
 
-[graphql](../modules/graphql.md).UserQuery
+[GraphQL](../modules/graphql.md).UserQuery
 
 ## Table of contents
 

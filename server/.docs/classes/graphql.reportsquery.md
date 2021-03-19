@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / ReportsQuery
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / ReportsQuery
 
 # Class: ReportsQuery
 
-[graphql](../modules/graphql.md).ReportsQuery
+[GraphQL](../modules/graphql.md).ReportsQuery
 
 ## Table of contents
 

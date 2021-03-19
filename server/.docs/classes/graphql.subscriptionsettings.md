@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / SubscriptionSettings
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / SubscriptionSettings
 
 # Class: SubscriptionSettings
 
-[graphql](../modules/graphql.md).SubscriptionSettings
+[GraphQL](../modules/graphql.md).SubscriptionSettings
 
 ## Table of contents
 

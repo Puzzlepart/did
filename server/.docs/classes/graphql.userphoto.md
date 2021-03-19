@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / UserPhoto
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / UserPhoto
 
 # Class: UserPhoto
 
-[graphql](../modules/graphql.md).UserPhoto
+[GraphQL](../modules/graphql.md).UserPhoto
 
 A type that describes a User photo
 

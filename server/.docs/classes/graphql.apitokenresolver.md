@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / ApiTokenResolver
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / ApiTokenResolver
 
 # Class: ApiTokenResolver
 
-[graphql](../modules/graphql.md).ApiTokenResolver
+[GraphQL](../modules/graphql.md).ApiTokenResolver
 
 Resolver for `ApiToken`.
 

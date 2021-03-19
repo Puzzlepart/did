@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / ApiToken
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / ApiToken
 
 # Class: ApiToken
 
-[graphql](../modules/graphql.md).ApiToken
+[GraphQL](../modules/graphql.md).ApiToken
 
 ## Table of contents
 

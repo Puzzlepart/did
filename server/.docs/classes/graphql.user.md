@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / User
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / User
 
 # Class: User
 
-[graphql](../modules/graphql.md).User
+[GraphQL](../modules/graphql.md).User
 
 A type that describes a User
 

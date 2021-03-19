@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / Notification
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / Notification
 
 # Class: Notification
 
-[graphql](../modules/graphql.md).Notification
+[GraphQL](../modules/graphql.md).Notification
 
 ## Table of contents
 

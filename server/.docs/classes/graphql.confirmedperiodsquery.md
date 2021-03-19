@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / ConfirmedPeriodsQuery
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / ConfirmedPeriodsQuery
 
 # Class: ConfirmedPeriodsQuery
 
-[graphql](../modules/graphql.md).ConfirmedPeriodsQuery
+[GraphQL](../modules/graphql.md).ConfirmedPeriodsQuery
 
 ## Table of contents
 

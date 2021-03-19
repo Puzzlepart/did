@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / LabelObject
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / LabelObject
 
 # Class: LabelObject
 
-[graphql](../modules/graphql.md).LabelObject
+[GraphQL](../modules/graphql.md).LabelObject
 
 ## Table of contents
 

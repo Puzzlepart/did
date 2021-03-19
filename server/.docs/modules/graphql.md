@@ -1,6 +1,8 @@
-[did-server - v0.9.11](../README.md) / graphql
+[did-server - v0.9.11](../README.md) / GraphQL
 
-# Module: graphql
+# Module: GraphQL
+
+GraphQL Server using `apollo-server-express`
 
 ## Table of contents
 
@@ -114,7 +116,7 @@ Name | Type |
 `clientName` | *string* |
 `clientVersion` | *string* |
 
-Defined in: [graphql/index.ts:89](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L89)
+Defined in: [graphql/index.ts:95](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L95)
 
 ___
 
@@ -133,7 +135,7 @@ Generate GraphQL schema using type-graphql
 
 **Returns:** *Promise*<GraphQLSchema\>
 
-Defined in: [graphql/index.ts:46](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L46)
+Defined in: [graphql/index.ts:52](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L52)
 
 ___
 
@@ -155,4 +157,4 @@ Name | Type | Description |
 
 **Returns:** *Promise*<void\>
 
-Defined in: [graphql/index.ts:122](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L122)
+Defined in: [graphql/index.ts:128](https://github.com/Puzzlepart/did/blob/dev/server/graphql/index.ts#L128)

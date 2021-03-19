@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / CreateOutlookCategoryResult
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / CreateOutlookCategoryResult
 
 # Class: CreateOutlookCategoryResult
 
-[graphql](../modules/graphql.md).CreateOutlookCategoryResult
+[GraphQL](../modules/graphql.md).CreateOutlookCategoryResult
 
 ## Hierarchy
 

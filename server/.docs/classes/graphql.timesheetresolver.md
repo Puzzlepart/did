@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / TimesheetResolver
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / TimesheetResolver
 
 # Class: TimesheetResolver
 
-[graphql](../modules/graphql.md).TimesheetResolver
+[GraphQL](../modules/graphql.md).TimesheetResolver
 
 Resolver for `TimesheetPeriodObject`.
 

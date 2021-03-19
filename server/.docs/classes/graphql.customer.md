@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / Customer
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / Customer
 
 # Class: Customer
 
-[graphql](../modules/graphql.md).Customer
+[GraphQL](../modules/graphql.md).Customer
 
 ## Table of contents
 

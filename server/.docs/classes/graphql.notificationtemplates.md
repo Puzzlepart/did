@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / NotificationTemplates
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / NotificationTemplates
 
 # Class: NotificationTemplates
 
-[graphql](../modules/graphql.md).NotificationTemplates
+[GraphQL](../modules/graphql.md).NotificationTemplates
 
 ## Table of contents
 

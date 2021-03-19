@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / UserResolver
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / UserResolver
 
 # Class: UserResolver
 
-[graphql](../modules/graphql.md).UserResolver
+[GraphQL](../modules/graphql.md).UserResolver
 
 Resolver for `User`.
 

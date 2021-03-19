@@ -1,6 +1,8 @@
-[did-server - v0.9.11](../README.md) / app
+[did-server - v0.9.11](../README.md) / App
 
-# Module: app
+# Module: App
+
+NodeJS Express App
 
 ## Table of contents
 

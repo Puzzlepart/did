@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / ReportsResolver
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / ReportsResolver
 
 # Class: ReportsResolver
 
-[graphql](../modules/graphql.md).ReportsResolver
+[GraphQL](../modules/graphql.md).ReportsResolver
 
 Resolver for `TimeEntry`.
 

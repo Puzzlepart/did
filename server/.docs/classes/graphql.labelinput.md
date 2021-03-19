@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / LabelInput
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / LabelInput
 
 # Class: LabelInput
 
-[graphql](../modules/graphql.md).LabelInput
+[GraphQL](../modules/graphql.md).LabelInput
 
 ## Table of contents
 

@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / LabelResolver
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / LabelResolver
 
 # Class: LabelResolver
 
-[graphql](../modules/graphql.md).LabelResolver
+[GraphQL](../modules/graphql.md).LabelResolver
 
 Resolver for `Label`.
 

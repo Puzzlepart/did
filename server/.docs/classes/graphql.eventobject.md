@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / EventObject
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / EventObject
 
 # Class: EventObject
 
-[graphql](../modules/graphql.md).EventObject
+[GraphQL](../modules/graphql.md).EventObject
 
 An Object type that describes a Event
 

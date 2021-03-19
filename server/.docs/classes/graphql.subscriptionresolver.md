@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / SubscriptionResolver
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / SubscriptionResolver
 
 # Class: SubscriptionResolver
 
-[graphql](../modules/graphql.md).SubscriptionResolver
+[GraphQL](../modules/graphql.md).SubscriptionResolver
 
 Resolver for `Subscription`.
 

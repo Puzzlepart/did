@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / OutlookCategoryResolver
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / OutlookCategoryResolver
 
 # Class: OutlookCategoryResolver
 
-[graphql](../modules/graphql.md).OutlookCategoryResolver
+[GraphQL](../modules/graphql.md).OutlookCategoryResolver
 
 Resolver for `OutlookCategory`.
 

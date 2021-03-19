@@ -1,8 +1,8 @@
-[did-server - v0.9.11](../README.md) / [graphql](../modules/graphql.md) / CustomerInput
+[did-server - v0.9.11](../README.md) / [GraphQL](../modules/graphql.md) / CustomerInput
 
 # Class: CustomerInput
 
-[graphql](../modules/graphql.md).CustomerInput
+[GraphQL](../modules/graphql.md).CustomerInput
 
 ## Table of contents
 
