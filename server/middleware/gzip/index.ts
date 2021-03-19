@@ -6,7 +6,7 @@ import fs from 'fs'
  * Serve gzipped
  *
  * @param contentType - Content type
- * 
+ *
  * @category Express middleware
  */
 export const serveGzippedMiddleware = (contentType: string) => (

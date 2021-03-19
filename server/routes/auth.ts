@@ -1,7 +1,7 @@
 /* eslint-disable tsdoc/syntax */
 /**
  * NodeJS `express` auth route
- * 
+ *
  * Handles authentication with providers/strategies
  * `azuread-openidconnect` and `google`
  *
@@ -20,7 +20,7 @@ type AuthProvider = 'azuread-openidconnect' | 'google'
 
 /**
  * Handler for `/auth/azuread-openidconnect/signin` and `/auth/google/signin
- * 
+ *
  * @remarks Regenerates the session before authenticating with the provided
  * strategy using `request.session.regenerate`.
  *
@@ -45,9 +45,11 @@ export const signInHandler = (
  * @param response - Response
  * @param next - Next function
  */
-export const authCallbackHandler = (
-  strategy: AuthProvider
-) => (request: Request, response: Response, next: NextFunction) => {
+export const authCallbackHandler = (strategy: AuthProvider) => (
+  request: Request,
+  response: Response,
+  next: NextFunction
+) => {
   passport.authenticate(strategy, (error: Error, user: Express.User) => {
     if (error || !user) {
       const _error = error instanceof SigninError ? error : SIGNIN_FAILED

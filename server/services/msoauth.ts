@@ -17,7 +17,7 @@ export interface MSAccessTokenOptions {
 
 /**
  * Microsoft OAuth service
- * 
+ *
  * Used for renewing access token using `simple-oauth2`
  *
  * @category Injectable Container Service
@@ -49,8 +49,8 @@ class MSOAuthService {
 
   /**
    * Get access token
-   * 
-   * @todo Fix temp hack for `Property 'tokenParams' does 
+   *
+   * @todo Fix temp hack for `Property 'tokenParams' does
    * not exist on type 'User'.`
    *
    * @param options - Options

@@ -84,4 +84,4 @@ Name | Type | Description |
 
 **Returns:** *void*
 
-Defined in: [routes/auth.ts:85](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L85)
+Defined in: [routes/auth.ts:87](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L87)

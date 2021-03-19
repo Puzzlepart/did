@@ -32,8 +32,8 @@ export class NotificationService {
     private readonly _timesheetSvc: TimesheetService,
     private readonly _cperiodSvc: ConfirmedPeriodsService,
     private readonly _fperiodSvc: ForecastedPeriodsService
-  // eslint-disable-next-line unicorn/empty-brace-spaces
-  ) { }
+  ) // eslint-disable-next-line unicorn/empty-brace-spaces
+  {}
 
   /**
    * Get periods

@@ -66,7 +66,7 @@ export class TimeEntry {
 
 /**
  * Reports query preset
- * 
+ *
  * @category GraphQL Type
  */
 export type ReportsQueryPreset =

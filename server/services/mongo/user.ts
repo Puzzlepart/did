@@ -19,7 +19,7 @@ import { MongoDocumentService } from './@document'
 export class UserService extends MongoDocumentService<User> {
   private _role: RoleService
 
-   /**
+  /**
    * Constructor for `UserService`
    *
    * @param context - Injected context through `typedi`
