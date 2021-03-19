@@ -38,7 +38,7 @@ Name | Type | Description |
 
 **Returns:** [*NotificationService*](services.notificationservice.md)
 
-Defined in: [services/notification/index.ts:22](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L22)
+Defined in: [services/notification/index.ts:21](https://github.com/Puzzlepart/did/blob/dev/server/services/notification/index.ts#L21)
 
 ## Methods
 

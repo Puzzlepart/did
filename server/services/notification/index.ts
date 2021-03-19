@@ -2,7 +2,6 @@
 /* eslint-disable unicorn/no-array-reduce */
 
 import get from 'get-value'
-import { Collection } from 'mongodb'
 import 'reflect-metadata'
 import { Inject, Service } from 'typedi'
 import { any } from 'underscore'
@@ -33,6 +32,7 @@ export class NotificationService {
     private readonly _timesheetSvc: TimesheetService,
     private readonly _cperiodSvc: ConfirmedPeriodsService,
     private readonly _fperiodSvc: ForecastedPeriodsService
+  // eslint-disable-next-line unicorn/empty-brace-spaces
   ) { }
 
   /**
