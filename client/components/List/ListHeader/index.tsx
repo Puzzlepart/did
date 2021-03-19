@@ -7,6 +7,7 @@ import {
 } from 'office-ui-fabric-react'
 import React, { FunctionComponent, useMemo, useRef } from 'react'
 import { isEmpty } from 'underscore'
+import { EXECUTE_SEARCH } from '../reducer'
 import styles from './ListHeader.module.scss'
 import { IListHeaderProps } from './types'
 
@@ -23,12 +24,12 @@ export const ListHeader: FunctionComponent<IListHeaderProps> = (
         <SearchBox
           {...props.searchBox}
           className={styles.searchBox}
-          onChange={(_event, newValue) => {
+          onChange={(_event, searchTerm) => {
             clearTimeout(timeout.current)
             timeout.current = setTimeout(() => {
               if (props.searchBox.onChange)
-                props.searchBox.onChange(_event, newValue)
-              props.dispatch({ type: 'SEARCH', payload: newValue })
+                props.searchBox.onChange(_event, searchTerm)
+              props.dispatch(EXECUTE_SEARCH({ searchTerm }))
             }, 250)
           }}
         />

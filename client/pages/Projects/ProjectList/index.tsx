@@ -10,18 +10,13 @@ import { useProjectList } from './useProjectList'
 /**
  * Project list component used by `<Projects />`. Renders
  * projects in a list using our `<List />` component.
- * 
+ *
  * @category Projects
  */
 export const ProjectList: FunctionComponent<IProjectListProps> = (
   props: IProjectListProps
 ) => {
-  const {
-    items,
-    showInactive,
-    setShowInactive,
-    t
-  } = useProjectList({ props })
+  const { items, showInactive, setShowInactive, t } = useProjectList({ props })
 
   return (
     <List

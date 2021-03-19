@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 /**
  * Component logic hook for `<ProjecList />`
- * 
+ *
  * @category Projects
  */
 export function useProjectList({ props }) {

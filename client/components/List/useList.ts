@@ -1,9 +1,9 @@
 /* eslint-disable tsdoc/syntax */
 import { Selection, SelectionMode } from 'office-ui-fabric-react'
-import { useEffect, useMemo, useReducer } from 'react'
+import { useEffect, useMemo } from 'react'
 import { first } from 'underscore'
 import { generateListGroups } from './generateListGroups'
-import reducer from './reducer'
+import useListReducer, { PROPS_UPDATED } from './reducer'
 import { IListProps } from './types'
 import { useListProps } from './useListProps'
 
@@ -17,16 +17,14 @@ type UseList = {
  * @category List
  */
 export function useList({ props }: UseList) {
-  const [state, dispatch] = useReducer(reducer, {
+  const [state, dispatch] = useListReducer({
     origItems: props.items || [],
     items: props.items || [],
     searchTerm: null
   })
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => dispatch({ type: 'PROPS_UPDATED', payload: props }), [
-    props.items
-  ])
+  useEffect(() => dispatch(PROPS_UPDATED(props)), [props.items])
 
   const selection = useMemo(() => {
     if (!props.selectionProps) return null

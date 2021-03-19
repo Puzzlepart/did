@@ -113,9 +113,15 @@ ___
 
 ### searchObject
 
-▸ **searchObject**<T\>(`item`: T, `searchString`: *string*): *boolean*
+▸ **searchObject**<T\>(`__namedParameters`: *SearchObjectOptions*<T\>): *boolean*
 
-Search object
+Searces the object values for a match of `searchString`
+
+Available options (`SearchObjectOptions`)
+- `item` **required** - The item to search
+- `searchTerm` **required** The term to search for
+- `pick_` _optional_ - Properties to search in
+- `omit_` _optional_ - Properties to ignore
 
 #### Type parameters:
 
@@ -125,14 +131,13 @@ Name | Default |
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`item` | T | Item   |
-`searchString` | *string* | - |
+Name | Type |
+:------ | :------ |
+`__namedParameters` | *SearchObjectOptions*<T\> |
 
 **Returns:** *boolean*
 
-Defined in: [client/utils/searchObject.ts:9](https://github.com/Puzzlepart/did/blob/dev/client/utils/searchObject.ts#L9)
+Defined in: [client/utils/searchObject.ts:19](https://github.com/Puzzlepart/did/blob/dev/client/utils/searchObject.ts#L19)
 
 ___
 

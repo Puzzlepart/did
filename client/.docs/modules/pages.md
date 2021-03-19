@@ -254,7 +254,10 @@ ___
 
 • `Const` **ProjectList**: *FunctionComponent*<[*IProjectListProps*](../interfaces/pages.iprojectlistprops.md)\>
 
-Defined in: [client/pages/Projects/ProjectList/index.tsx:13](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/index.tsx#L13)
+Project list component used by `<Projects />`. Renders
+projects in a list using our `<List />` component.
+
+Defined in: [client/pages/Projects/ProjectList/index.tsx:16](https://github.com/Puzzlepart/did/blob/dev/client/pages/Projects/ProjectList/index.tsx#L16)
 
 ___
 
