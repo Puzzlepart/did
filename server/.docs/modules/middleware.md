@@ -25,10 +25,10 @@ NodeJS Express App middleware
 
 Redis client
 
-- Using hosname from env REDIS_CACHE_HOSTNAME
-- Using auth_pass from env REDIS_CACHE_KEY
-- Using tls.servername from env REDIS_CACHE_HOSTNAME
-- Using socket_keepalive to true
+- Using `hosname` from env `REDIS_CACHE_HOSTNAME`
+- Using `auth_pass` from env `REDIS_CACHE_KEY`
+- Using `tls.servername` from env `REDIS_CACHE_HOSTNAME`
+- Using `socket_keepalive` to true
 
 **`see`** https://github.com/Puzzlepart/did/issues/812
 
