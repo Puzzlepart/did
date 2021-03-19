@@ -161,7 +161,7 @@ ___
 
 ### getUserPhoto
 
-▸ **getUserPhoto**(`size`: *string*): *Promise*<any\>
+▸ **getUserPhoto**(`size`: *string*): *Promise*<string\>
 
 Get user photo in base64 format
 
@@ -173,7 +173,7 @@ Name | Type | Description |
 :------ | :------ | :------ |
 `size` | *string* | Photo size    |
 
-**Returns:** *Promise*<any\>
+**Returns:** *Promise*<string\>
 
 A base64 representation of the user photo
 
