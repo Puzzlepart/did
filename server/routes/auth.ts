@@ -19,7 +19,10 @@ const REDIRECT_URL_PROPERTY = '__redirectUrl'
 type AuthProvider = 'azuread-openidconnect' | 'google'
 
 /**
- * Handler for /auth/azuread-openidconnect/signin and /auth/google/signin
+ * Handler for `/auth/azuread-openidconnect/signin` and `/auth/google/signin
+ * 
+ * @remarks Regenerates the session before authenticating with the provided
+ * strategy using `request.session.regenerate`.
  *
  * @param request - Request
  * @param response - Response
@@ -36,7 +39,7 @@ export const signInHandler = (
 }
 
 /**
- * Handler for /auth/azuread-openidconnect/callback and  /auth/google/callback
+ * Handler for `/auth/azuread-openidconnect/callback` and  `/auth/google/callback`
  *
  * @param request - Request
  * @param response - Response
@@ -73,7 +76,7 @@ export const authCallbackHandler = (
 }
 
 /**
- * Handler for /auth/signout
+ * Handler for `/auth/signout`
  *
  * @param request - Request
  * @param response - Response
