@@ -33,7 +33,7 @@ Defined in: [routes/auth.ts:16](https://github.com/Puzzlepart/did/blob/dev/serve
 
 ▸ `Const`**authCallbackHandler**(`strategy`: AuthProvider): *function*
 
-Handler for /auth/azuread-openidconnect/callback and  /auth/google/callback
+Handler for `/auth/azuread-openidconnect/callback` and  `/auth/google/callback`
 
 #### Parameters:
 
@@ -43,7 +43,7 @@ Name | Type |
 
 **Returns:** (`request`: *Request*<ParamsDictionary, any, any, ParsedQs\>, `response`: *Response*<any\>, `next`: NextFunction) => *void*
 
-Defined in: [routes/auth.ts:45](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L45)
+Defined in: [routes/auth.ts:48](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L48)
 
 ___
 
@@ -51,7 +51,10 @@ ___
 
 ▸ `Const`**signInHandler**(`strategy`: AuthProvider, `options`: AuthenticateOptions): *function*
 
-Handler for /auth/azuread-openidconnect/signin and /auth/google/signin
+Handler for `/auth/azuread-openidconnect/signin` and `/auth/google/signin
+
+**`remarks`** Regenerates the session before authenticating with the provided
+strategy using `request.session.regenerate`.
 
 #### Parameters:
 
@@ -62,7 +65,7 @@ Name | Type |
 
 **Returns:** (`request`: *Request*<ParamsDictionary, any, any, ParsedQs\>, `response`: *Response*<any\>, `next`: NextFunction) => *void*
 
-Defined in: [routes/auth.ts:28](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L28)
+Defined in: [routes/auth.ts:31](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L31)
 
 ___
 
@@ -70,7 +73,7 @@ ___
 
 ▸ `Const`**signOutHandler**(`request`: *Request*<ParamsDictionary, any, any, ParsedQs\>, `response`: *Response*<any\>): *void*
 
-Handler for /auth/signout
+Handler for `/auth/signout`
 
 #### Parameters:
 
@@ -81,4 +84,4 @@ Name | Type | Description |
 
 **Returns:** *void*
 
-Defined in: [routes/auth.ts:82](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L82)
+Defined in: [routes/auth.ts:85](https://github.com/Puzzlepart/did/blob/dev/server/routes/auth.ts#L85)
